@@ -1,0 +1,21 @@
+
+# Run this as root o mysql superuser
+
+CREATE DATABASE BOLIVIA;
+GRANT ALL ON BOLIVIA.* to dicore@localhost;
+
+CREATE DATABASE COLOMBIA;
+GRANT ALL ON COLOMBIA.* to dicore@localhost;
+
+CREATE DATABASE ECUADOR;
+GRANT ALL ON ECUADOR.* to dicore@localhost;
+
+CREATE DATABASE PANAMA;
+GRANT ALL ON PANAMA.* to dicore@localhost;
+
+CREATE DATABASE PERU;
+GRANT ALL ON PERU.* to dicore@localhost;
+
+CREATE DATABASE VENEZUELA;
+GRANT ALL ON VENEZUELA.* to dicore@localhost;
+

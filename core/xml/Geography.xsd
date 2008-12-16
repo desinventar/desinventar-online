@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema version="8.0.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:include schemaLocation="BaseTypes.xsd" />
+
+<xs:complexType name="GeographyType">
+	<xs:sequence>
+	<xs:element name="GeographyId"     type="stringtype"/>
+	<xs:element name="GeographyCode"   type="stringtype" />
+	<xs:element name="GeographyName"   type="stringtype" />
+	<xs:element name="GeographyLevel"  type="inttype" />
+	<xs:element name="GeographyActive" type="booleantype" />
+	</xs:sequence>
+</xs:complexType>
+<xs:element name="Geography" type="GeographyType" />
+</xs:schema>
