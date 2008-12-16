@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema version="8.0.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:include schemaLocation="BaseTypes.xsd" />
+
+<xs:complexType name="CauseType">
+	<xs:sequence>
+	<xs:element name="CauseId" type="stringtype"/>
+	<xs:element name="CauseLocalName" type="stringtype" />
+	<xs:element name="CauseLocalDesc" type="stringtype" />
+	<xs:element name="CauseActive"    type="booleantype" />
+	<xs:element name="CausePreDefined" type="booleantype" />
+	<xs:element name="CauseCreationDate" type="datetype" />
+	</xs:sequence>
+</xs:complexType>
+<xs:element name="Cause" type="CauseType" />
+</xs:schema>

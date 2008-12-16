@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:simpleType name="stringtype">
+	<xs:restriction base="xs:string"/>
+</xs:simpleType>
+
+<xs:simpleType name="booleantype">
+	<xs:restriction base="xs:boolean"/>
+</xs:simpleType>
+
+<xs:simpleType name="inttype">
+	<xs:restriction base="xs:integer"/>
+</xs:simpleType>
+
+<xs:simpleType name="EffectType">
+	<xs:restriction base="xs:integer"/>
+</xs:simpleType>
+
+<xs:simpleType name="datetype">
+	<xs:restriction base="xs:date"/>
+</xs:simpleType>
+
+</xs:schema>
