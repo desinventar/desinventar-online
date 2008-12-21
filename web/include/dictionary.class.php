@@ -48,7 +48,7 @@ class Dictionary {
         $this->dbh->exec($sqllabels);
       }
     } catch (PDOException $e) {
-      print "Error : Cannot find dictionary file<br>\n";
+      print "Error : Cannot find dictionary file in $dbpath<br>\n";
       print "Error : " . $e->getMessage() . "<br/>\n";
       die();
     }
