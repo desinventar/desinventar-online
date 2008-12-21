@@ -23,7 +23,7 @@ $post = $_POST;
 $get  = $_GET;
 
 // load basic field of Consolidate
-$d 	 = new Dictionary(VAR_DIR);
+$d 	 = new Dictionary(DICT_DIR);
 // load levels to display in totalizations
 foreach ($q->loadGeoLevels("") as $k=>$i)
   $st["StadistDisasterGeographyId_". $k] = array($i[0], $i[1]);

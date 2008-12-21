@@ -20,7 +20,7 @@ $rinfo = $q->getDBInfo();
 $regname = $rinfo['RegionLabel'];
 $post = $_POST;
 
-$d = new Dictionary(VAR_DIR);
+$d = new Dictionary(DICT_DIR);
 // load levels to display in totalizations
 foreach ($q->loadGeoLevels("") as $k=>$i)
   $st["GraphDisasterGeographyId_". $k] = array($i[0], $i[1]);

@@ -115,7 +115,7 @@ if (isset($_GET['u'])) {
 else {
   $r = new Region($reg);
   $q = new query($reg);
-  $d = new Dictionary(VAR_DIR);
+  $d = new Dictionary(DICT_DIR);
   // Get Geography elements 
   if (isset($_GET['cmd'])) {
     if ($_GET['cmd'] == "list") {

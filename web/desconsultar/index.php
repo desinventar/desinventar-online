@@ -29,7 +29,7 @@ if (isset($_GET['r']) && !empty($_GET['r'])) {
 else
   exit();
 
-$d = new Dictionary(VAR_DIR);
+$d = new Dictionary(DICT_DIR);
 
 // Display Geographic list of childs..
 if (isset($_GET['cmd']) && $_GET['cmd'] == "glist") {

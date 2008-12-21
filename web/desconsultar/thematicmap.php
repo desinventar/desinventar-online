@@ -60,7 +60,7 @@ elseif (isset($get['r']) && !empty($get['r'])) {
 else
   exit();
 
-$d = new Dictionary(VAR_DIR);
+$d = new Dictionary(DICT_DIR);
 $dic = array();
 $dic = array_merge($dic, $d->queryLabelsFromGroup('MapOpt', $lg));
 $dic = array_merge($dic, $d->queryLabelsFromGroup('Effect', $lg));
