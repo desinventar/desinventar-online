@@ -20,7 +20,8 @@ class Graphic
       data[0] == X, data[1] = Y1,  .. */
   public function Graphic ($type, $opc, $data) 
   {
-    $fname = TMP_DIR . "/di8graphic_". $_SESSION['sessionid'] ."_.png";
+    #$fname = TMP_DIR . "/di8graphic_". $_SESSION['sessionid'] ."_.png";
+    $fname = GRAPHS_DIR . "/di8graphic_". $_SESSION['sessionid'] ."_.png";
     if (file_exists($fname))
       unlink($fname);
     // get Labels

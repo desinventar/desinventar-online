@@ -23,9 +23,11 @@ else
 
 define("TEMP", "/tmp");
 define("DESINVENTARDIR", "/usr/share/desinventar");
+define("WWWDIR", "/var/www/desinventar");
 define("SMARTYDIR", "/usr/share/Smarty");
 define("JPGRAPHDIR", "/usr/share/php/jpgraph");
 define("XMLRPCDIR", "/usr/share/php/xmlrpc");
+define("WWWURL", "/desinventar-data");
 
 $lg						= "es";
 $dicore_host 	= "127.0.0.1"; //"66.150.227.232";
@@ -55,7 +57,7 @@ define("CART_DIR", VAR_DIR. '/carto');         // Cartography shapes dir
 define("CACHEDIR", '/var/cache/Smarty/di8');   // /var/cache/Smarty/di8
 define("SMTY_DIR", CACHEDIR . '/templates_c'); // Smarty temp dir
 define("TMPM_DIR", CACHEDIR . '/tempmap');     // Mapserver temp dir
-
+define("GRAPHS_DIR", WWWDIR . '/graphs');
 
 createIfNotExistDirectory(VAR_DIR);
 createIfNotExistDirectory(TMP_DIR);

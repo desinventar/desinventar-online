@@ -86,13 +86,14 @@ if (isset($post['_G+cmd'])) {
     header('Cache-Control: post-check=0, pre-check:0', false);
     header('Pragma: no-cache');
     $g = new Graphic($post['_G+Kind'], $post, $gl);
-    $image = "../tmp/di8graphic_". $_SESSION['sessionid'] ."_.png";
+    #$image = "../tmp/di8graphic_". $_SESSION['sessionid'] ."_.png";
+    $image = WWWURL . "/graphs/di8graphic_". $_SESSION['sessionid'] . "_.png";
     if ($post['_G+cmd'] == "export") {
       readfile($image);
       exit();
     }
     else {
-      $t->assign ("qdet", $q->getQueryDetails($dic, $post));
+      $t->assign ("qdet" , $q->getQueryDetails($dic, $post));
       $t->assign ("image", "$image?". rand(1,3000));
       $t->assign ("ctl_showres", true);
     }
