@@ -48,7 +48,7 @@ require_once(XMLRPCDIR . '/xmlrpc.inc');
 // Test and Create missing directories
 define("VAR_DIR", BASE . '/var');
 define("TMP_DIR", BASE . '/tmp');
-define("DICT_DIR", DESINVENTARDIR);            // Dictionary Files Directory
+define("DICT_DIR", DESINVENTARDIR . '/files');            // Dictionary Files Directory
 define("MAPS_DIR", VAR_DIR. '/maps');          // mapfiles dir
 define("LOGO_DIR", VAR_DIR. '/logo');          // database logos dir
 define("CART_DIR", VAR_DIR. '/carto');         // Cartography shapes dir
