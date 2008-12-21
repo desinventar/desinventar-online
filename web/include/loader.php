@@ -22,6 +22,7 @@ else
 	define("BASE", "/var/www/localhost/htdocs/mayandar/DI8");
 
 define("TEMP", "/tmp");
+define("DESINVENTARDIR", "/usr/share/desinventar");
 define("SMARTYDIR", "/usr/share/Smarty");
 define("JPGRAPHDIR", "/usr/share/php/jpgraph");
 define("XMLRPCDIR", "/usr/share/php/xmlrpc");
@@ -47,6 +48,7 @@ require_once(XMLRPCDIR . '/xmlrpc.inc');
 // Test and Create missing directories
 define("VAR_DIR", BASE . '/var');
 define("TMP_DIR", BASE . '/tmp');
+define("DICT_DIR", DESINVENTARDIR);            // Dictionary Files Directory
 define("MAPS_DIR", VAR_DIR. '/maps');        // mapfiles dir
 define("LOGO_DIR", VAR_DIR. '/logo');        // database logos dir
 define("CART_DIR", VAR_DIR. '/carto');       // Cartography shapes dir

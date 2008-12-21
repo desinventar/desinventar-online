@@ -54,7 +54,7 @@ function showResult($stat, &$tp) {
   }
 }
 
-$d = new Dictionary(VAR_DIR);
+$d = new Dictionary(DICT_DIR);
 $r = new Region($reg);
 $q = new Query($reg);
 $u = new User('', '', '');
