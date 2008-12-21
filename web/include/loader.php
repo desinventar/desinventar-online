@@ -49,10 +49,10 @@ require_once(XMLRPCDIR . '/xmlrpc.inc');
 define("VAR_DIR", BASE . '/var');
 define("TMP_DIR", BASE . '/tmp');
 define("DICT_DIR", DESINVENTARDIR);            // Dictionary Files Directory
-define("MAPS_DIR", VAR_DIR. '/maps');        // mapfiles dir
-define("LOGO_DIR", VAR_DIR. '/logo');        // database logos dir
-define("CART_DIR", VAR_DIR. '/carto');       // Cartography shapes dir
-define("CACHEDIR", TMP_DIR); 								 // /var/cache/Smarty/di8
+define("MAPS_DIR", VAR_DIR. '/maps');          // mapfiles dir
+define("LOGO_DIR", VAR_DIR. '/logo');          // database logos dir
+define("CART_DIR", VAR_DIR. '/carto');         // Cartography shapes dir
+define("CACHEDIR", '/var/cache/Smarty/di8');   // /var/cache/Smarty/di8
 define("SMTY_DIR", CACHEDIR . '/templates_c'); // Smarty temp dir
 define("TMPM_DIR", CACHEDIR . '/tempmap');     // Mapserver temp dir
 
