@@ -1,9 +1,10 @@
 <script language="php">
-/************************************************
- DesInventar8
- http://www.desinventar.org  
- (c) 1999-2007 Corporacion OSSO
- ***********************************************/
+/*
+ ***********************************************
+ DesInventar8 - http://www.desinventar.org
+ (c) 1999-2008 Corporacion OSSO
+ ***********************************************
+*/
 
 require_once('../include/loader.php');
 require_once('../include/dictionary.class.php');
@@ -87,7 +88,8 @@ if (isset($post['_G+cmd'])) {
     header('Pragma: no-cache');
     $g = new Graphic($post['_G+Kind'], $post, $gl);
     #$image = "../tmp/di8graphic_". $_SESSION['sessionid'] ."_.png";
-    $image = WWWURL . "/graphs/di8graphic_". $_SESSION['sessionid'] . "_.png";
+    #$image = WWWURL . "/graphs/di8graphic_". $_SESSION['sessionid'] . "_.png";
+	$image = WWWURL . "/graphs/di8graphic_". session_id() . "_.png";
     if ($post['_G+cmd'] == "export") {
       readfile($image);
       exit();

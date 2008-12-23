@@ -1,9 +1,8 @@
 <script language="php">
-/************************************************
- DesInventar8
- http://www.desinventar.org  
+/*
+ DesInventar8 - http://www.desinventar.org
  (c) 1999-2008 Corporacion OSSO
- ***********************************************/
+*/
 
 /* Main loader..*/
 
@@ -22,23 +21,28 @@ else
 	define("BASE", "/var/www/localhost/htdocs/mayandar/DI8");
 
 define("TEMP", "/tmp");
-define("DESINVENTARDIR", "/usr/share/desinventar");
-define("WWWDIR", "/var/www/desinventar");
 define("SMARTYDIR", "/usr/share/Smarty");
 define("JPGRAPHDIR", "/usr/share/php/jpgraph");
 define("XMLRPCDIR", "/usr/share/php/xmlrpc");
+
+define("DESINVENTARDIR", "/usr/share/desinventar");
+define("WWWDIR", "/var/www/desinventar");
 define("WWWURL", "/desinventar-data");
 
-$lg						= "es";
-$dicore_host 	= "127.0.0.1"; //"66.150.227.232";
-$dicore_port 	= 8081;
+$lg          = "es";
+$dicore_host = "127.0.0.1"; //"66.150.227.232";
+$dicore_port = 8081;
 
-///////////////////////////////////////////
-
-// Start manage of SESSION 
+// Session Management
 session_name("DI8SESSID");
 session_start();
+/* 2008-12-23 (jhcaiced) Try to create an unique sessionid even for anonymous users */
+if (!isset($_SESSION['sessionid'])) {
+	$_SESSION['sessionid'] = session_id();
+}
+
 error_reporting(E_ALL);
+
 header('Content-Type: text/html; charset=UTF-8');
 define("DEFAULT_CHARSET", 'UTF-8');
 
@@ -50,7 +54,7 @@ require_once(XMLRPCDIR . '/xmlrpc.inc');
 // Test and Create missing directories
 define("VAR_DIR", BASE . '/var');
 define("TMP_DIR", BASE . '/tmp');
-define("DICT_DIR", DESINVENTARDIR . '/files');            // Dictionary Files Directory
+define("DICT_DIR", DESINVENTARDIR . '/files'); // Dictionary Files Directory
 define("MAPS_DIR", VAR_DIR. '/maps');          // mapfiles dir
 define("LOGO_DIR", VAR_DIR. '/logo');          // database logos dir
 define("CART_DIR", VAR_DIR. '/carto');         // Cartography shapes dir
@@ -69,35 +73,34 @@ createIfNotExistDirectory(SMTY_DIR);
 createIfNotExistDirectory(TMPM_DIR);
 
 // dicore objects
-define ("DI_EVENT",			1);
-define ("DI_CAUSE",			2);
-define ("DI_GEOLEVEL",	3);
-define ("DI_GEOGRAPHY",	4);
-define ("DI_DISASTER",	5);
-define ("DI_DBINFO",		6);
-define ("DI_DBLOG",			7);
-define ("DI_USER",			8);
-define ("DI_REGION",		9);
-define ("DI_EEFIELD",	 10);
-define ("DI_EEDATA",	 11);
+define ("DI_EVENT",     1);
+define ("DI_CAUSE",     2);
+define ("DI_GEOLEVEL",  3);
+define ("DI_GEOGRAPHY", 4);
+define ("DI_DISASTER",  5);
+define ("DI_DBINFO",    6);
+define ("DI_DBLOG",     7);
+define ("DI_USER",      8);
+define ("DI_REGION",    9);
+define ("DI_EEFIELD",  10);
+define ("DI_EEDATA",   11);
 
 // dicore command
-define ("CMD_NEW",			1);
-define ("CMD_UPDATE",		2);
-define ("CMD_DELETE",		3);
+define ("CMD_NEW",    1);
+define ("CMD_UPDATE", 2);
+define ("CMD_DELETE", 3);
 
 // Error Codes
-define ("ERR_NO_ERROR",					 1);
-define ("ERR_UNKNOWN_ERROR",		-1);
-define ("ERR_INVALID_COMMAND",	-2);
-define ("ERR_OBJECT_EXISTS",		-3);
-define ("ERR_NO_DATABASE",			-4);
-define ("ERR_INVALID_PASSWD",		-5);
-define ("ERR_ACCESS_DENIED",		-6);
-define ("ERR_OBJECT_NOT_FOUND",	-7);
-define ("ERR_CONSTRAINT_FAIL",	-8);
-define ("ERR_NO_CONNECTION",		-99);
-
+define ("ERR_NO_ERROR",          1);
+define ("ERR_UNKNOWN_ERROR",    -1);
+define ("ERR_INVALID_COMMAND",  -2);
+define ("ERR_OBJECT_EXISTS",    -3);
+define ("ERR_NO_DATABASE",      -4);
+define ("ERR_INVALID_PASSWD",   -5);
+define ("ERR_ACCESS_DENIED",    -6);
+define ("ERR_OBJECT_NOT_FOUND", -7);
+define ("ERR_CONSTRAINT_FAIL",  -8);
+define ("ERR_NO_CONNECTION",   -99);
 
 function createIfNotExistDirectory($sMyPath) {
 	if (!file_exists($sMyPath)) {
