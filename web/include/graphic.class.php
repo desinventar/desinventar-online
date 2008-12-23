@@ -1,9 +1,10 @@
 <script language="php">
-/************************************************
- DesInventar8
- http://www.desinventar.org  
- (c) 1999-2007 Corporacion OSSO
- ***********************************************/
+/*
+ ***********************************************
+ DesInventar8 - http://www.desinventar.org
+ (c) 1999-2008 Corporacion OSSO
+ **********************************************
+*/
 
 require_once(JPGRAPHDIR . "/jpgraph.php");
 require_once(JPGRAPHDIR . "/jpgraph_line.php");
@@ -21,7 +22,8 @@ class Graphic
   public function Graphic ($type, $opc, $data) 
   {
     #$fname = TMP_DIR . "/di8graphic_". $_SESSION['sessionid'] ."_.png";
-    $fname = GRAPHS_DIR . "/di8graphic_". $_SESSION['sessionid'] ."_.png";
+    #$fname = GRAPHS_DIR . "/di8graphic_". $_SESSION['sessionid'] ."_.png";
+    $fname = GRAPHS_DIR . "/di8graphic_". session_id() ."_.png";
     if (file_exists($fname))
       unlink($fname);
     // get Labels
