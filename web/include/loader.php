@@ -28,6 +28,7 @@ define("XMLRPCDIR", "/usr/share/php/xmlrpc");
 define("DESINVENTARDIR", "/usr/share/desinventar");
 define("WWWDIR", "/var/www/desinventar");
 define("WWWURL", "/desinventar-data");
+define("DATADIR", "/var/lib/desinventar");
 
 $lg          = "es";
 $dicore_host = "127.0.0.1"; //"66.150.227.232";
@@ -55,7 +56,7 @@ require_once(XMLRPCDIR . '/xmlrpc.inc');
 define("VAR_DIR", BASE . '/var');
 define("TMP_DIR", BASE . '/tmp');
 define("DICT_DIR", DESINVENTARDIR . '/files'); // Dictionary Files Directory
-define("MAPS_DIR", VAR_DIR. '/maps');          // mapfiles dir
+define("MAPS_DIR", DATADIR. '/maps');          // mapfiles dir
 define("LOGO_DIR", VAR_DIR. '/logo');          // database logos dir
 define("CART_DIR", VAR_DIR. '/carto');         // Cartography shapes dir
 define("CACHEDIR", '/var/cache/Smarty/di8');   // /var/cache/Smarty/di8

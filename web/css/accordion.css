@@ -1,7 +1,6 @@
 dl.accordion{margin:0;padding:0;overflow:hidden;}
 dl.accordion dt
 {
-	filter:progid:DXImageTransform.Microsoft.Gradient(  GradientType=1,StartColorStr=#999480, EndColorStr=#DBDBDB);
 	-moz-border-radius-topLeft:6px;
 	_width:100%;/*hack for IE*/
 	cursor:pointer;display:block;cursor:hand;margin:0;padding:0;padding:3px 6px;background:#999480;color:white;
@@ -9,6 +8,7 @@ dl.accordion dt
 	border-top:solid 1px #f0f0f0;
 	border-right:solid 1px #222222;
 	border-bottom:solid 1px #222222;
+	filter:progid:DXImageTransform.Microsoft.Gradient(  GradientType=1,StartColorStr=#999480, EndColorStr=#DBDBDB);
 }
 
 dl.accordion dt.hover
