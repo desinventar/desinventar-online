@@ -189,7 +189,7 @@ elseif (isset($get['cmd']) && $get['cmd'] == "getkml") {
   exit();
 }
 $t->assign ("dic", $dic);
-$t->assign ("basemap", MAPS_DIR ."/WORLD.map");
+$t->assign ("basemap", MAPS_DIR ."WORLD/WORLD.map");
 
 if (LNX) {
   $t->assign ("shw_server", true);

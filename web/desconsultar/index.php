@@ -82,10 +82,12 @@ else {
       $t->assign ("x2", $dinf['GeoLimitMaxX']);
       $t->assign ("y1", $dinf['GeoLimitMinY']);
       $t->assign ("y2", $dinf['GeoLimitMaxY']);
-      if (file_exists(MAPS_DIR ."/". $reg .".map"))
+      print "Reg : " . $reg . "<br>";
+      if (file_exists(MAPS_DIR ."/". $reg . "/" . $reg .".map"))
         $t->assign ("ctl_showmap", true);
       else
         $t->assign ("ctl_showmap", false);
+      //$t->assign ("ctl_showmap", true);
     }
     // get range of dates
     $ydb = $q->getDateRange();
