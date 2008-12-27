@@ -28,22 +28,25 @@
 			//map.addControl(new OpenLayers.Control.OverviewMap({ minRatio: 10, maxRatio: 26 }));
 			//map.addControl(new OpenLayers.Control.ScaleLine());
 			// Effects layer(s)
-{-foreach name=rgl key=k item=i from=$rgl-}
-			var db{-$k-} = new OpenLayers.Layer.WMS("DI8 / {-$i.regname-}", 
-					"/cgi-bin/{-$mps-}?", { map:'{-$i.map-}', layers:'{-$i.ly1-}', 'transparent':true, 'format':'png' },
-					{'isBaseLayer':false});
-			map.addLayer(db{-$k-});
- {-if !$isvreg-}
-			// Admin layers
-  {-foreach name=glev key=ky item=it from=$glev-}
-			var adm{-$smarty.foreach.glev.iteration-} = new OpenLayers.Layer.WMS("{-$it[0]-}", 
-					"/cgi-bin/{-$mps-}?", { map:'{-$i.map-}', layers:'admin0{-$ky-}', 'transparent':true, 'format':'png' },
-					{'isBaseLayer':false});
-			adm{-$smarty.foreach.glev.iteration-}.setVisibility(false);
-			map.addLayer(adm{-$smarty.foreach.glev.iteration-});
-  {-/foreach-}
- {-/if-}
-{-/foreach-}
+			{-foreach name=rgl key=k item=i from=$rgl-}
+				var db{-$k-} = new OpenLayers.Layer.WMS("DI8 / {-$i.regname-}",
+				                     "/cgi-bin/{-$mps-}?", { map:'{-$i.map-}', 
+				                     layers:'{-$i.ly1-}', 'transparent':true, 'format':'png' },
+				                     {'isBaseLayer':false});
+				map.addLayer(db{-$k-});
+				{-if !$isvreg-}
+					// Admin layers
+					{-foreach name=glev key=ky item=it from=$glev-}
+						var adm{-$smarty.foreach.glev.iteration-} = 
+							new OpenLayers.Layer.WMS("{-$it[0]-}", 
+							       "/cgi-bin/{-$mps-}?", { map:'{-$i.map-}', layers:'admin0{-$ky-}', 'transparent':true, 'format':'png' },
+							       {'isBaseLayer':false});
+						adm{-$smarty.foreach.glev.iteration-}.setVisibility(false);
+						map.addLayer(adm{-$smarty.foreach.glev.iteration-});
+					{-/foreach-}
+				{-/if-}
+			{-/foreach-}
+			
 			// WMS Base Maps
 			var base = new OpenLayers.Layer.WMS("** Basemap",
 					"/cgi-bin/{-$mps-}?", { map:'{-$basemap-}', layers:'base', 'transparent':false, 'format':'png' },
@@ -115,6 +118,7 @@
  </head>
  <body>
 	<table class="grid" height="100%">
+		<tr><td>{-$mapfilename-}</td></tr>
 		<tr>
 		 <td valign="top">
 		  <div class="dwin" style="width:200px;">
