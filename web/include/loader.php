@@ -26,9 +26,10 @@ define("JPGRAPHDIR", "/usr/share/php/jpgraph");
 define("XMLRPCDIR", "/usr/share/php/xmlrpc");
 
 define("DESINVENTARDIR", "/usr/share/desinventar");
-define("WWWDIR", "/var/www/desinventar");
-define("WWWURL", "/desinventar-data");
-define("DATADIR", "/var/lib/desinventar");
+define("WWWDIR"        , "/var/www/desinventar");
+define("WWWURL"        , "/desinventar-data");
+define("DATADIR"       , "/var/lib/desinventar");
+define("CACHEDIR"      , "/var/cache/Smarty/di8");
 
 $lg          = "es";
 $dicore_host = "127.0.0.1"; //"66.150.227.232";
@@ -37,7 +38,8 @@ $dicore_port = 8081;
 // Session Management
 session_name("DI8SESSID");
 session_start();
-/* 2008-12-23 (jhcaiced) Try to create an unique sessionid even for anonymous users */
+// 2008-12-23 (jhcaiced) Try to create an unique sessionid even
+// for anonymous users
 if (!isset($_SESSION['sessionid'])) {
 	$_SESSION['sessionid'] = session_id();
 }
@@ -55,23 +57,21 @@ require_once(XMLRPCDIR . '/xmlrpc.inc');
 // Test and Create missing directories
 define("VAR_DIR", BASE . '/var');
 define("TMP_DIR", BASE . '/tmp');
-define("DICT_DIR", DESINVENTARDIR . '/files'); // Dictionary Files Directory
-define("MAPS_DIR", DATADIR. '/maps');          // mapfiles dir
-define("LOGO_DIR", VAR_DIR. '/logo');          // database logos dir
-define("CART_DIR", VAR_DIR. '/carto');         // Cartography shapes dir
-define("CACHEDIR", '/var/cache/Smarty/di8');   // /var/cache/Smarty/di8
-define("SMTY_DIR", CACHEDIR . '/templates_c'); // Smarty temp dir
-define("TMPM_DIR", CACHEDIR . '/tempmap');     // Mapserver temp dir
-define("GRAPHS_DIR", WWWDIR . '/graphs');
+define("DICT_DIR"  , DESINVENTARDIR . '/files'); // Dictionary Files Directory
+define("MAPS_DIR"  , DATADIR  . '/region');       // mapfiles dir
+define("LOGO_DIR"  , DATADIR  . '/region');       // database logos dir
+define("FONT_DIR"  , DATADIR  . '/fonts');        // FontSet Directory
+define("SMTY_DIR"  , CACHEDIR . '/templates_c'); // Smarty temp dir
+define("TMPM_DIR"  , CACHEDIR . '/tempmap');     // Mapserver temp dir
+define("GRAPHS_DIR", WWWDIR   . '/graphs');
 
-createIfNotExistDirectory(VAR_DIR);
-createIfNotExistDirectory(TMP_DIR);
-createIfNotExistDirectory(MAPS_DIR);
-createIfNotExistDirectory(MAPS_DIR ."/templates");
-createIfNotExistDirectory(LOGO_DIR);
-createIfNotExistDirectory(CART_DIR);
-createIfNotExistDirectory(SMTY_DIR);
-createIfNotExistDirectory(TMPM_DIR);
+#createIfNotExistDirectory(VAR_DIR);
+#createIfNotExistDirectory(TMP_DIR);
+#createIfNotExistDirectory(MAPS_DIR);
+#createIfNotExistDirectory(MAPS_DIR ."/templates");
+#createIfNotExistDirectory(LOGO_DIR);
+#createIfNotExistDirectory(SMTY_DIR);
+#createIfNotExistDirectory(TMPM_DIR);
 
 // dicore objects
 define ("DI_EVENT",     1);

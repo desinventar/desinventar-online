@@ -1,7 +1,9 @@
-/*
+<!--
+	/*
 	DesInventar8 - http://www.desinventar.org
 	(c) 1999-2008 Corporacion OSSO
-*/
+	*/
+-->
 <script language="php">
 	require_once('../include/loader.php');
 	require_once('../include/dictionary.class.php');
