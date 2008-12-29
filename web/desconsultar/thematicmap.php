@@ -200,7 +200,7 @@
 		exit();
 	}
 	$t->assign ("dic", $dic);
-	$t->assign ("basemap", MAPS_DIR ."/WORLD/WORLD.map");
+	$t->assign ("basemap", "/usr/share/desinventar/worldmap/worldmap.map");
 
 	if (LNX) {
 		$t->assign ("shw_server", true);
