@@ -25,11 +25,11 @@ define("SMARTYDIR", "/usr/share/Smarty");
 define("JPGRAPHDIR", "/usr/share/php/jpgraph");
 define("XMLRPCDIR", "/usr/share/php/xmlrpc");
 
-define("DESINVENTARDIR", "/usr/share/desinventar");
-define("WWWDIR"        , "/var/www/desinventar");
-define("WWWURL"        , "/desinventar-data");
-define("DATADIR"       , "/var/lib/desinventar");
-define("CACHEDIR"      , "/var/cache/Smarty/di8");
+define("SOFTDIR"  , "/usr/share/desinventar");
+define("WWWDIR"   , "/var/www/desinventar");
+define("WWWURL"   , "/desinventar-data");
+define("DATADIR"  , "/var/lib/desinventar");
+define("CACHEDIR" , "/var/cache/Smarty/di8");
 
 $lg          = "es";
 $dicore_host = "127.0.0.1"; //"66.150.227.232";
@@ -57,10 +57,10 @@ require_once(XMLRPCDIR . '/xmlrpc.inc');
 // Test and Create missing directories
 define("VAR_DIR", BASE . '/var');
 define("TMP_DIR", BASE . '/tmp');
-define("DICT_DIR"  , DESINVENTARDIR . '/files'); // Dictionary Files Directory
-define("MAPS_DIR"  , DATADIR  . '/region');       // mapfiles dir
-define("LOGO_DIR"  , DATADIR  . '/region');       // database logos dir
-define("FONT_DIR"  , DATADIR  . '/fonts');        // FontSet Directory
+define("DICT_DIR"  , SOFTDIR . '/files'); // Dictionary Files Directory
+define("MAPS_DIR"  , DATADIR);       // mapfiles dir
+define("LOGO_DIR"  , DATADIR);       // database logos dir
+define("FONT_DIR"  , "/usr/share/fonts/liberation");        // FontSet Directory
 define("SMTY_DIR"  , CACHEDIR . '/templates_c'); // Smarty temp dir
 define("TMPM_DIR"  , CACHEDIR . '/tempmap');     // Mapserver temp dir
 define("GRAPHS_DIR", WWWDIR   . '/graphs');
