@@ -40,7 +40,6 @@ if (isset($_GET['c']) && (strlen($_GET['c']) > 0)) {
   $dbs = $q->getRegionList($_GET['c'], "ACTIVE");
   $t->assign ("ctl_available", true);
   $t->assign ("dbs", $dbs);
-  #$t->assign ("logourl", "/desinventar-data/images/logos" . "/" . $reg . ".png"); 
 }
 
 // REGIONINFO: Show Information about Region

@@ -34,6 +34,7 @@ if (isset($_FILES['desinv']) && isset($_POST['diobj'])) {
       if ($_FILES['desinv']['type'] == "text/comma-separated-values" ||
           $_FILES['desinv']['type'] == "application/octet-stream" ||
           $_FILES['desinv']['type'] == "text/x-csv" ||
+          $_FILES['desinv']['type'] == "text/csv" ||
           $_FILES['desinv']['type'] == "text/plain") {
         $tmp_name = $_FILES['desinv']['tmp_name'];
         $name = $_FILES['desinv']['name'];

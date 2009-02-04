@@ -1,9 +1,8 @@
 #!/usr/bin/perl
 #
 # Control Script for DICORE Server
-# (c) 2006-2008 Corporacion OSSO 
-#
-# 2008-12-16 Jhon H. Caicedo <jhcaiced@desinventar.org>
+# (c) 2007 Corporacion OSSO 
+# 2007-03-24 Jhon H. Caicedo <jhcaiced@desinventar.org>
 #
 
 use strict;

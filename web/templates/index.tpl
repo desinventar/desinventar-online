@@ -141,7 +141,9 @@
 		<table bgcolor="#CF9D15" border=0 cellpadding=0 cellspacing=0 align="center">
 			<tr><td bgcolor="white">
 				<a href="http://www.siapad.net" target="_blank"><img src="images/logos/banner_SIAPAD.jpg" border="0"></a><br><br>
-				<a href="http://www.redbivapad.org.pe/" target="_blank"><img src="images/logos/banner_BIVAPAD.jpg" border="0"></a></td></tr>
+				<a href="http://www.redbivapad.org.pe/" target="_blank"><img src="images/logos/banner_BIVAPAD.jpg" border="0"></a><br><br>
+				<a href="http://www.desaprender.org/" target="_blank"><img src="images/logos/banner_DESAPRENDER.gif" border="0"></a>
+			</td></tr>
 		</table>
 		<!-- end left-menu -->
 		</td>

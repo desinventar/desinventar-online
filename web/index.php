@@ -12,7 +12,7 @@ require_once('include/user.class.php');
 require_once('include/dictionary.class.php');
 $t->config_dir = 'include';
 
-$d = new Dictionary(DICT_DIR);
+$d = new Dictionary(VAR_DIR);
 
 $t->assign ("DIver", "8.1.9-2");
 

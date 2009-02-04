@@ -1,12 +1,8 @@
 <script language="php">
-/************************************************
- DesInventar8
- http://www.desinventar.org  
- (c) 1999-2007 Corporacion OSSO
- ***********************************************/
-
-/* Construct and Apply queries 
- */ 
+/*
+ DesInventar8 - http://www.desinventar.org
+ (c) 1999-2009 Corporacion OSSO
+*/
 
 class Query extends mysqli
 {
@@ -488,7 +484,6 @@ class Query extends mysqli
   public function genSQLWhereDesconsultar($dat) {
     $sql 	= "WHERE ";
     $e		= array();
-    //print_r($dat);
     $e['Eff'] = "";
     $e['Item'] = "";
     $serial = "";
@@ -637,8 +632,15 @@ class Query extends mysqli
             $per = explode("-", $gp[0]);
             foreach ($per as $period) {
               if (!empty($period)) {
-                $sel[$j] .= "$period(". $gp[1] ."),'-',";
-                $grp[$j] .= "$period(". $gp[1] ."), ";
+              	// 2009-02-02 (jhcaiced) This should add a leading zero
+              	// to month and day names in labels for graphs, so the 
+              	// labels equal length and ordered correctly.
+              	$iLabelLength = 2;
+                if ($period == 'YEAR') { $iLabelLength = 4; }
+                $sPeriod = $period;
+                if ($sPeriod == "WEEK") { $sPeriod = "WEEKOFYEAR"; }
+                $sel[$j] .= "RIGHT(CONCAT('0'," . "$sPeriod(". $gp[1] .")),$iLabelLength),'-',";
+                $grp[$j] .= "$sPeriod(". $gp[1] ."), ";
               }
             }
             $sel[$j] = substr($sel[$j], 0, -5) .") AS ". substr($gp[1],2) ."_$period"; // delete last ,'-',

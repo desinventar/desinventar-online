@@ -34,8 +34,8 @@ class Dictionary {
     }
     try {
       // Open dictionary DB or create since SQL
-      //if (file_exists($dbpath))
-        //chmod($dbpath, 0666);
+      if (file_exists($dbpath))
+        chmod($dbpath, 0666);
       $this->dbh = new PDO("sqlite:" . $dbpath);
       if (filesize($dbpath)==0 && 
           file_exists($this->sql1) && 
@@ -48,8 +48,7 @@ class Dictionary {
         $this->dbh->exec($sqllabels);
       }
     } catch (PDOException $e) {
-      print "Error : Cannot find dictionary file in $dbpath<br>\n";
-      print "Error : " . $e->getMessage() . "<br/>\n";
+      print "Error !: " . $e->getMessage() . "<br/>\n";
       die();
     }
   }
