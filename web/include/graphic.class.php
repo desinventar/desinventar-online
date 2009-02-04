@@ -381,7 +381,7 @@ class Graphic {
 	
 	/* This function creates the Graph in disk using all the curren parameters */
 	public function Stroke($fname) {
-		$fname = WWWDIR . "/di8graphic_". $_SESSION['sessionid'] ."_.png";
+		// Remove Old Graph is Exists
 		if (file_exists($fname)) {
 			unlink($fname);
 		}
