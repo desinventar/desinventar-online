@@ -82,8 +82,13 @@ if (isset($post['_G+cmd'])) {
 
 		// Construct Graphic Object and Show Page
 		$g = new Graphic($post['_G+Kind'], $post, $gl);
-		$sImageURL  = WWWURL . "/di8graphic_". $_SESSION['sessionid'] ."_.png";
-		$sImageFile = WWWDIR . "/di8graphic_". $_SESSION['sessionid'] ."_.png";
+		/*
+		// $_SESSION['sessionid'] sometimes is null, replace with session_id()
+		$sImageURL  = WWWURL . "/graphs/di8graphic_". $_SESSION['sessionid'] ."_.png";
+		$sImageFile = WWWDIR . "/graphs/di8graphic_". $_SESSION['sessionid'] ."_.png";
+		*/
+		$sImageURL  = WWWURL . "/graphs/di8graphic_". session_id() . ".png";
+		$sImageFile = WWWDIR . "/graphs/di8graphic_". session_id() . ".png";
 		$g->Stroke($sImageFile);
 		if ($post['_G+cmd'] == "export") {
 			header("Content-type: Image/png");

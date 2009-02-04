@@ -77,7 +77,7 @@ require_once(SMARTYDIR . '/Smarty.class.php');
 require_once(XMLRPCDIR . '/xmlrpc.inc');
 
 // Test and Create missing directories
-createIfNotExistDirectory(VAR_DIR);
+/*createIfNotExistDirectory(VAR_DIR);
 createIfNotExistDirectory(TMP_DIR);
 createIfNotExistDirectory(MAPS_DIR);
 createIfNotExistDirectory(MAPS_DIR ."/templates");
@@ -85,6 +85,7 @@ createIfNotExistDirectory(LOGO_DIR);
 createIfNotExistDirectory(CART_DIR);
 createIfNotExistDirectory(SMTY_DIR);
 createIfNotExistDirectory(TMPM_DIR);
+*/
 
 // dicore objects
 define ("DI_EVENT",			1);

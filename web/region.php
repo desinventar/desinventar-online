@@ -2,7 +2,7 @@
 /************************************************
  DesInventar8
  http://www.desinventar.org  
- (c) 1999-2007 Corporacion OSSO
+ (c) 1999-2009 Corporacion OSSO
  ***********************************************/
 
 require_once('include/loader.php');
