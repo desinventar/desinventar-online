@@ -710,7 +710,7 @@ public class DIObject {
 		Double iReturn = new Double(0);		
 		if (ht.containsKey(sKey)) {
 			Object oValue;
-			oValue = (Object)ht.get(sKey);
+			oValue = ht.get(sKey);
 			if (oValue instanceof String) {
 				if (((String)oValue).equals("")) {
 					iReturn = new Double(0.0);
@@ -731,7 +731,7 @@ public class DIObject {
 		Integer iReturn = new Integer(0);
 		if (ht.containsKey(sKey)) {
 			Object oValue;
-			oValue = (Object)ht.get(sKey);
+			oValue = ht.get(sKey);
 			if (oValue instanceof String) {
 				if (((String)oValue).equals("")) {
 					iReturn = new Integer(0);

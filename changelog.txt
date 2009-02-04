@@ -1,3 +1,7 @@
+* 2009-02-03 Jhon H. Caicedo <jhcaiced@desivnentar.org>
+- Modified dependencies to install rpm version of
+  desinventar-8.1.9
+
 * 2008-10-16 Jhon H. Caicedo <jhcaiced@desinventar.org>
 - gcj uses jre-1.4.2, so we edited all files to use only
   1.4 sources, this way we can compile with either gcj/classpath
