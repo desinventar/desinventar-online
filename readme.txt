@@ -1,6 +1,6 @@
 
 DesInventar8 - http://www.desinventar.org
-(c) 1999-2008 Corporacion OSSO
+(c) 1999-2009 Corporacion OSSO
 
 Requeriments
 ------------

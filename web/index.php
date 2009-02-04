@@ -14,7 +14,7 @@ $t->config_dir = 'include';
 
 $d = new Dictionary(VAR_DIR);
 
-$t->assign ("DIver", "8.1.9-2");
+$t->assign ("DIver", "8.1.9-3");
 
 // UPDATER: If user keep connect the session will not expire..
 if (isset($_GET['u'])) {

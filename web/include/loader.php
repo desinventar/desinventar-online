@@ -24,10 +24,12 @@ define("XMLRPCDIR", "/usr/share/php/xmlrpc");
 
 if (isset($_SERVER["DI8WEB"])) {
 	define("BASE", $_SERVER["DI8WEB"]);
+	define("SOFTDIR" , "/usr/share/desinventar");
 	define("WWWDIR"  , "/var/www/desinventar");  
 	define("WWWURL"  , "/desinventar-data");     
 	define("DATADIR" , "/var/lib/desinventar");
-	define("CACHEDIR", "/var/cache/Smarty/di8"); 
+	define("CACHEDIR", "/var/cache/Smarty/di8");
+	define("DICT_DIR", SOFTDIR . "/files");
 	define("VAR_DIR" , DATADIR);
 	define("TMP_DIR" , DATADIR);
 	define("MAPS_DIR", VAR_DIR. '/maps');        // mapfiles dir
@@ -41,12 +43,14 @@ if (isset($_SERVER["DI8WEB"])) {
 	} else {
 		define("BASE", "/var/www/html/desinventar");
 	}
+	define("SOFTDIR" , BASE);
 	define("WWWDIR"  , BASE . "/tmp");
 	define("WWWURL"  , "../tmp");
 	define("DATADIR" , BASE . '/var');
 	define("VAR_DIR" , BASE . '/var');
 	define("TMP_DIR" , BASE . '/tmp');
 	define("CACHEDIR", TMP_DIR);   			 // /var/cache/Smarty/di8
+	define("DICT_DIR", VAR_DIR);
 	define("MAPS_DIR", VAR_DIR. '/maps');        // mapfiles dir
 	define("LOGO_DIR", VAR_DIR. '/logo');        // database logos dir
 	define("CART_DIR", VAR_DIR. '/carto');       // Cartography shapes dir
