@@ -1,8 +1,9 @@
 <script language="php">
-/*
- DesInventar8 - http://www.desinventar.org
- (c) 1999-2008 Corporacion OSSO
-*/
+/************************************************
+ DesInventar8
+ http://www.desinventar.org  
+ (c) 1999-2009 Corporacion OSSO
+ ***********************************************/
 
 /* Main loader..*/
 
@@ -15,37 +16,54 @@ define('LNX', true); // false if install on Windows machine..
 define('USR', "di8db");
 define('PSW', "di8db");
 define('DTB', "di8db");
-if (isset($_SERVER["DI8WEB"]))
-	define("BASE", $_SERVER["DI8WEB"]);
-else
-	define("BASE", "/var/www/localhost/htdocs/mayandar/DI8");
 
 define("TEMP", "/tmp");
 define("SMARTYDIR", "/usr/share/Smarty");
 define("JPGRAPHDIR", "/usr/share/php/jpgraph");
 define("XMLRPCDIR", "/usr/share/php/xmlrpc");
 
-define("SOFTDIR"  , "/usr/share/desinventar");
-define("WWWDIR"   , "/var/www/desinventar");
-define("WWWURL"   , "/desinventar-data");
-define("DATADIR"  , "/var/lib/desinventar");
-define("CACHEDIR" , "/var/cache/Smarty/di8");
+if (isset($_SERVER["DI8WEB"])) {
+	define("BASE", $_SERVER["DI8WEB"]);
+	define("WWWDIR"  , "/var/www/desinventar");  
+	define("WWWURL"  , "/desinventar-data");     
+	define("DATADIR" , "/var/lib/desinventar");
+	define("CACHEDIR", "/var/cache/Smarty/di8"); 
+	define("VAR_DIR" , DATADIR);
+	define("TMP_DIR" , DATADIR);
+	define("MAPS_DIR", VAR_DIR. '/maps');        // mapfiles dir
+	define("LOGO_DIR", VAR_DIR. '/logo');        // database logos dir
+	define("CART_DIR", VAR_DIR. '/carto');       // Cartography shapes dir
+	define("SMTY_DIR", CACHEDIR . '/templates_c'); // Smarty temp dir
+	define("TMPM_DIR", CACHEDIR . '/tempmap');     // Mapserver temp dir
+} else {
+	if (isset($_SERVER["DI8WEBLOCAL"])) {
+		define("BASE", $_SERVER["DI8WEBLOCAL"]);
+	} else {
+		define("BASE", "/var/www/html/desinventar");
+	}
+	define("WWWDIR"  , BASE . "/tmp");
+	define("WWWURL"  , "../tmp");
+	define("DATADIR" , BASE . '/var');
+	define("VAR_DIR" , BASE . '/var');
+	define("TMP_DIR" , BASE . '/tmp');
+	define("CACHEDIR", TMP_DIR);   			 // /var/cache/Smarty/di8
+	define("MAPS_DIR", VAR_DIR. '/maps');        // mapfiles dir
+	define("LOGO_DIR", VAR_DIR. '/logo');        // database logos dir
+	define("CART_DIR", VAR_DIR. '/carto');       // Cartography shapes dir
+	define("SMTY_DIR", CACHEDIR . '/templates_c'); // Smarty temp dir
+	define("TMPM_DIR", CACHEDIR . '/tempmap');     // Mapserver temp dir
+}
 
 $lg          = "es";
 $dicore_host = "127.0.0.1"; //"66.150.227.232";
 $dicore_port = 8081;
 
-// Session Management
+///////////////////////////////////////////
+
+// Start manage of SESSION 
 session_name("DI8SESSID");
 session_start();
-// 2008-12-23 (jhcaiced) Try to create an unique sessionid even
-// for anonymous users
-if (!isset($_SESSION['sessionid'])) {
-	$_SESSION['sessionid'] = session_id();
-}
-
 error_reporting(E_ALL);
-
 header('Content-Type: text/html; charset=UTF-8');
 define("DEFAULT_CHARSET", 'UTF-8');
 
@@ -55,53 +73,45 @@ require_once(SMARTYDIR . '/Smarty.class.php');
 require_once(XMLRPCDIR . '/xmlrpc.inc');
 
 // Test and Create missing directories
-define("VAR_DIR", BASE . '/var');
-define("TMP_DIR", BASE . '/tmp');
-define("DICT_DIR"  , SOFTDIR . '/files'); // Dictionary Files Directory
-define("MAPS_DIR"  , DATADIR);       // mapfiles dir
-define("LOGO_DIR"  , DATADIR);       // database logos dir
-define("FONT_DIR"  , "/usr/share/fonts/liberation");        // FontSet Directory
-define("SMTY_DIR"  , CACHEDIR . '/templates_c'); // Smarty temp dir
-define("TMPM_DIR"  , CACHEDIR . '/tempmap');     // Mapserver temp dir
-define("GRAPHS_DIR", WWWDIR   . '/graphs');
-
-#createIfNotExistDirectory(VAR_DIR);
-#createIfNotExistDirectory(TMP_DIR);
-#createIfNotExistDirectory(MAPS_DIR);
-#createIfNotExistDirectory(MAPS_DIR ."/templates");
-#createIfNotExistDirectory(LOGO_DIR);
-#createIfNotExistDirectory(SMTY_DIR);
-#createIfNotExistDirectory(TMPM_DIR);
+createIfNotExistDirectory(VAR_DIR);
+createIfNotExistDirectory(TMP_DIR);
+createIfNotExistDirectory(MAPS_DIR);
+createIfNotExistDirectory(MAPS_DIR ."/templates");
+createIfNotExistDirectory(LOGO_DIR);
+createIfNotExistDirectory(CART_DIR);
+createIfNotExistDirectory(SMTY_DIR);
+createIfNotExistDirectory(TMPM_DIR);
 
 // dicore objects
-define ("DI_EVENT",     1);
-define ("DI_CAUSE",     2);
-define ("DI_GEOLEVEL",  3);
-define ("DI_GEOGRAPHY", 4);
-define ("DI_DISASTER",  5);
-define ("DI_DBINFO",    6);
-define ("DI_DBLOG",     7);
-define ("DI_USER",      8);
-define ("DI_REGION",    9);
-define ("DI_EEFIELD",  10);
-define ("DI_EEDATA",   11);
+define ("DI_EVENT",			1);
+define ("DI_CAUSE",			2);
+define ("DI_GEOLEVEL",	3);
+define ("DI_GEOGRAPHY",	4);
+define ("DI_DISASTER",	5);
+define ("DI_DBINFO",		6);
+define ("DI_DBLOG",			7);
+define ("DI_USER",			8);
+define ("DI_REGION",		9);
+define ("DI_EEFIELD",	 10);
+define ("DI_EEDATA",	 11);
 
 // dicore command
-define ("CMD_NEW",    1);
-define ("CMD_UPDATE", 2);
-define ("CMD_DELETE", 3);
+define ("CMD_NEW",			1);
+define ("CMD_UPDATE",		2);
+define ("CMD_DELETE",		3);
 
 // Error Codes
-define ("ERR_NO_ERROR",          1);
-define ("ERR_UNKNOWN_ERROR",    -1);
-define ("ERR_INVALID_COMMAND",  -2);
-define ("ERR_OBJECT_EXISTS",    -3);
-define ("ERR_NO_DATABASE",      -4);
-define ("ERR_INVALID_PASSWD",   -5);
-define ("ERR_ACCESS_DENIED",    -6);
-define ("ERR_OBJECT_NOT_FOUND", -7);
-define ("ERR_CONSTRAINT_FAIL",  -8);
-define ("ERR_NO_CONNECTION",   -99);
+define ("ERR_NO_ERROR",					 1);
+define ("ERR_UNKNOWN_ERROR",		-1);
+define ("ERR_INVALID_COMMAND",	-2);
+define ("ERR_OBJECT_EXISTS",		-3);
+define ("ERR_NO_DATABASE",			-4);
+define ("ERR_INVALID_PASSWD",		-5);
+define ("ERR_ACCESS_DENIED",		-6);
+define ("ERR_OBJECT_NOT_FOUND",	-7);
+define ("ERR_CONSTRAINT_FAIL",	-8);
+define ("ERR_NO_CONNECTION",		-99);
+
 
 function createIfNotExistDirectory($sMyPath) {
 	if (!file_exists($sMyPath)) {

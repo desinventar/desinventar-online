@@ -42,6 +42,7 @@
         items: [
             {  text: '{-#mgotodoc#-}',    handler: onMenuItem  },
             {  text: '{-#hmoreinfo#-}',		handler: onMenuItem  },
+            {  text: '{-#motherdoc#-}',		handler: onMenuItem  },
             {  text: '{-#mabout#-}',     	handler: onMenuItem } ]
       });
       var tb = new Ext.Toolbar();
@@ -77,6 +78,9 @@
           break;
           case "{-#mgotodoc#-}":
             $('ifr').src = "../region.php?r={-$reg-}&cmd=info{-if $isvreg-}&v=true{-/if-}";
+          break;
+          case "{-#motherdoc#-}":
+            $('ifr').src = "../doc/LoNuevoEnDesInventar.pdf";
           break;
           case "{-#hmoreinfo#-}":
             runWin('../doc/?m=metguide', 'doc');
@@ -791,7 +795,7 @@
                     <option value="D.{-$k-}|>|0">{-$i[0]-}</option>
  {-/foreach-}
  {-foreach name=ef3 key=k item=i from=$sec-}
-                    <option value="D.{-$k-}|=|0">{-#tauxaffect#-} {-$i[0]-}</option>
+                    <option value="D.{-$k-}|=|-1">{-#tauxaffect#-} {-$i[0]-}</option>
  {-/foreach-}
  										<option disabled>---</option>
  {-foreach name=eef key=k item=i from=$exteffel-}

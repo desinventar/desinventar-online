@@ -29,7 +29,7 @@ if (isset($_GET['r']) && !empty($_GET['r'])) {
 else
   exit();
 
-$d = new Dictionary(DICT_DIR);
+$d = new Dictionary(VAR_DIR);
 
 // Display Geographic list of childs..
 if (isset($_GET['cmd']) && $_GET['cmd'] == "glist") {
@@ -82,12 +82,10 @@ else {
       $t->assign ("x2", $dinf['GeoLimitMaxX']);
       $t->assign ("y1", $dinf['GeoLimitMinY']);
       $t->assign ("y2", $dinf['GeoLimitMaxY']);
-      print "Reg : " . $reg . "<br>";
-      if (file_exists(MAPS_DIR ."/". $reg . "/" . $reg .".map"))
+      if (file_exists(MAPS_DIR ."/". $reg .".map"))
         $t->assign ("ctl_showmap", true);
       else
         $t->assign ("ctl_showmap", false);
-      //$t->assign ("ctl_showmap", true);
     }
     // get range of dates
     $ydb = $q->getDateRange();

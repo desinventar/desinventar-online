@@ -2,7 +2,7 @@
   require_once('../include/loader.php');
   require_once('../include/dictionary.class.php');
   require_once('../include/query.class.php');
-  $d = new Dictionary(DICT_DIR);
+  $d = new Dictionary(VAR_DIR);
   if (isset($_GET['m']))
     $mod = $_GET['m'];
   else

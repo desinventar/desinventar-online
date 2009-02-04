@@ -1,7 +1,7 @@
 # ***********************************************
 # DesInventar
 # http://www.desinventar.org
-# (c) 1999-2008 Corporacion OSSO
+# (c) 1999-2007 Corporacion OSSO
 # ***********************************************
 JAVA=java
 JAVAC=javac
@@ -10,6 +10,9 @@ JAVAC_FLAGS=-encoding UTF-8 -source 1.4 -g -Xlint -extdirs /usr/share/java-ext
 JAR=jar
 PROGRAM=dicore
 MAINCLASS=org.desinventar.core.DIServer
+
+JARS= \
+/usr/share/java-ext/backport-util-concurrent.jar
 
 SOURCES= \
 org/desinventar/core/Auth.java \
@@ -77,8 +80,3 @@ server:
 jarserver: jar
 	cd classes ; $(JAVA) -Dfile.encoding=utf-8 -Djava.ext.dirs=/usr/share/java-ext -jar $(PROGRAM).jar; cd ..
 
-install: jar
-	install -m 755 -d $(DESTDIR)/share/desinventar
-	install -m 644 classes/dicore.jar $(DESTDIR)/share/desinventar
-	install -m 755 scripts/dicore-control.pl $(DESTDIR)/share/desinventar
-#

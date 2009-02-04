@@ -16,7 +16,7 @@ if (isset($_GET['r']) && !empty($_GET['r']))
 else
   exit();
 
-$d = new Dictionary(DICT_DIR);
+$d = new Dictionary(VAR_DIR);
 $r = new Region($reg);
 $q = new Query($reg);
 $u = new User('', '', '');

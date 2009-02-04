@@ -41,7 +41,7 @@ $post = $_POST;
 $get  = $_GET;
 
 // load basic field of dictionary
-$d 	 = new Dictionary(DICT_DIR);
+$d 	 = new Dictionary(VAR_DIR);
 $dic = array();
 $dic = array_merge($dic, $d->queryLabelsFromGroup('Disaster', $lg));
 $dic = array_merge($dic, $d->queryLabelsFromGroup('Record|2', $lg));

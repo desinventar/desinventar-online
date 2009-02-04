@@ -24,7 +24,7 @@ function getRAPermList($lst) {
 	return $dat;
 }
 
-$d = new Dictionary(DICT_DIR);
+$d = new Dictionary(VAR_DIR);
 $r = new Region($reg);
 $q = new Query($reg);
 $u = new User('', '', '');
