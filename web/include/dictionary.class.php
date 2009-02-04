@@ -2,7 +2,7 @@
 /************************************************
  DesInventar8
  http://www.desinventar.org  
- (c) 1999-2007 Corporacion OSSO
+ (c) 1999-2009 Corporacion OSSO
  ***********************************************/
 
 /* DesInventar Dictionary Object is a unique Documentation system
@@ -26,32 +26,46 @@ class Dictionary {
    return $str; //utf8_encode($str);
   }
 
-  function Dictionary($path) {
-    $dbpath = $path . '/' . $this->dbdic;
-    if (!extension_loaded('pdo')) {
-      dl( "pdo.so" );
-      dl( "pdo_sqlite.so" );
-    }
-    try {
-      // Open dictionary DB or create since SQL
-      if (file_exists($dbpath))
-        chmod($dbpath, 0666);
-      $this->dbh = new PDO("sqlite:" . $dbpath);
-      if (filesize($dbpath)==0 && 
-          file_exists($this->sql1) && 
-          file_exists($this->sql2)) {
-        // Create database struct. Include Languages setting
-        $sqlstruct = file_get_contents($this->sql1);
-        $this->dbh->exec($sqlstruct);
-        // Insert LabelGroup table to order and Set all labels
-        $sqllabels = file_get_contents($this->sql2);
-        $this->dbh->exec($sqllabels);
-      }
-    } catch (PDOException $e) {
-      print "Error !: " . $e->getMessage() . "<br/>\n";
-      die();
-    }
-  }
+	function Dictionary($path) {
+		if (defined('DICT_DIR')) {
+			$dbpath = DICT_DIR . "/" . $this->dbdic;
+			if (!file_exists($dbpath)) {
+				$dbpath = BASE . "/../files/dictionary/" . $this->dbdic;
+			}
+		} else {
+			$dbpath = $path . '/' . $this->dbdic;
+		}
+		if (!extension_loaded('pdo')) {
+			dl( "pdo.so" );
+			dl( "pdo_sqlite.so" );
+		}
+		
+		try {
+			// Open dictionary DB or create since SQL
+			if (file_exists($dbpath)) {
+				//chmod($dbpath, 0666);
+				$this->dbh = new PDO("sqlite:" . $dbpath);
+			} else {
+				/* Disable Creation of dict because software can be installed
+				   on read-only directory */
+				/*
+				if (filesize($dbpath)==0 && 
+				    file_exists($this->sql1) && 
+				    file_exists($this->sql2)) {
+					// Create database struct. Include Languages setting
+					$sqlstruct = file_get_contents($this->sql1);
+					$this->dbh->exec($sqlstruct);
+					// Insert LabelGroup table to order and Set all labels
+					$sqllabels = file_get_contents($this->sql2);
+					$this->dbh->exec($sqllabels);
+				} // if
+				*/
+			} // else
+		} catch (PDOException $e) {
+			print "Error !: " . $e->getMessage() . "<br/>\n";
+			die();
+		}
+	} // constructor
   
   function existLang($langID) {
     if ($langID == "")
