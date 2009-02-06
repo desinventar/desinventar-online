@@ -339,7 +339,7 @@ class Maps
 		<name>DesInventar '. $regn .'</name>
 		<open>1</open>
 		<Icon>
-			<href>'. $this->url . 'LAYERS=effects&amp;MAP=%2Ftmp%2F'. $fp .'&amp;SERVICE=WMS&amp;SRS=EPSG%3A900913&amp;REQUEST=GetMap&amp;HEIGHT=600&amp;STYLES=default,default&amp;WIDTH=800&amp;VERSION=1.1.1&amp;TRANSPARENT=true&amp;LEGEND=true&amp;FORMAT=image/png</href>
+			<href>'. $this->url . 'LAYERS=effects&amp;MAP=%2Ftmp%2F'. $fp .'&amp;SERVICE=WMS&amp;SRS=EPSG%3A4326&amp;REQUEST=GetMap&amp;HEIGHT=600&amp;STYLES=default,default&amp;WIDTH=800&amp;VERSION=1.1.1&amp;TRANSPARENT=true&amp;LEGEND=true&amp;FORMAT=image/png</href>
 			<viewRefreshMode>onStop</viewRefreshMode>
 			<viewRefreshTime>1</viewRefreshTime>
 			<viewBoundScale>1</viewBoundScale>

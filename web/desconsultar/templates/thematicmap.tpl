@@ -80,11 +80,15 @@
 			*/
 			met1.setVisibility(false);
 			map.addLayer(met1);
+			/*
+			// 2009-02-06 (jhcaiced) Metacarta Satellite doesn't work with Spherical Mercator, this needs to be fixed !!
 			var met2 = new OpenLayers.Layer.WMS("** Metacarta Satellite",
 					"http://labs.metacarta.com/wms-c/Basic.py", {layers:'satellite', 'transparent':true, 'format':'png' },
 					{'isBaseLayer':true });
 			met2.setVisibility(false);
 			map.addLayer(met2);
+			*/
+			
 /*		maps.google.com
 			var goog1 = new OpenLayers.Layer.Google("** Google Basic",
 					{type: G_NORMAL_MAP, 'sphericalMercator': false});
@@ -113,6 +117,7 @@
 			map.addControl(WMSToolbar);
 			//parent.document.getElementById('frmwait').innerHTML='';
 */
+			// Do a translation of map center coordinates to Spherical Mercator
 			var proj = new OpenLayers.Projection("EPSG:4326");
 			var point = new OpenLayers.LonLat(lon, lat);
 			point.transform(proj, map.getProjectionObject());
