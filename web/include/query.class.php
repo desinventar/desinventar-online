@@ -8,20 +8,28 @@ class Query extends mysqli
 {
   public $regid = "";
 
-  function __construct($region) {
-    @parent::__construct('localhost', USR, PSW, DTB);
-    if (mysqli_connect_errno())
-      die(sprintf("Can't connect to database. Error: %s", mysqli_connect_error()));
-    else {
-      $this->set_charset("utf8");
-      $this->regid = $region;
-    }
-  }
+	function __construct() {
+		@parent::__construct('localhost', USR, PSW, DTB);
+		if (mysqli_connect_errno()) {
+			die(sprintf("Can't connect to database. Error: %s", mysqli_connect_error()));
+		} else {
+			$this->set_charset("utf8");
+			$num_args = func_num_args();
+			switch($num_args) {
+			case 0:
+				$this->sSessionId = uuid();
+				break;
+			case 1:
+				$this->regid = func_get_arg(0);
+				break;
+			} //switch
+		}
+	} // __construct()
   
-  public function __destruct() {
-    if (!mysqli_connect_errno())
-      $this->close();
-  }
+	public function __destruct() {
+		//if (!mysqli_connect_errno())
+		//	$this->close();
+	}
 
   public function getassoc($query) {
     if (!empty($query)) {

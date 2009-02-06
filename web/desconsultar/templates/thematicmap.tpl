@@ -9,15 +9,26 @@
 {-if $shw_server-}
 <!--	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAfQolBKtJvhOLwVfLoxEfMBQ77LACC71meKxbfZwyDLYGQlGiIRTFJ_UlTeqhUqMf6iE54G8kcN3sJQ"></script>-->
 {-/if-}
+	<script src='http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.1'></script>
+	<script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid=euzuro-openlayers"></script>
 	<script src="/openlayers/lib/OpenLayers.js"></script>
-  <script type="text/javascript">
+	<script type="text/javascript">
 		var lon = {-if $lon != ''-}{-$lon-}{-else-}0{-/if-};
 		var lat = {-if $lon != ''-}{-$lat-}{-else-}0{-/if-};
 		var zoom = parseInt('{-$zoom-}');//{-if $isvreg-}4{-else-}6{-/if-};
 		var map;
 		
 		function init() {
-			map = new OpenLayers.Map( 'map', { controls: [] });
+			var options = {
+				projection    : new OpenLayers.Projection("EPSG:900913"),
+				minResolution : "auto",
+				minExtent     : new OpenLayers.Bounds(-1, -1, 1, 1),
+				units         : "m",
+				maxResolution : 156543.0339,
+				maxExtent     : new OpenLayers.Bounds(-20037508.34, -20037508.34,
+				                                       20037508.34,  20037508.34),
+				controls: []};
+			map = new OpenLayers.Map('map', options);
 			map.addControl(new OpenLayers.Control.PanZoomBar());
 			map.addControl(new OpenLayers.Control.LayerSwitcher({'ascending':false}));
 			map.addControl(new OpenLayers.Control.KeyboardDefaults());
@@ -49,9 +60,24 @@
 					"/cgi-bin/{-$mps-}?", { map:'{-$basemap-}', layers:'base', 'transparent':false, 'format':'png' },
 					{'isBaseLayer':true });
 			map.addLayer(base);
+			
+			// Microsoft Virtual Earth Base Layer
+			var virtualearth = new OpenLayers.Layer.VirtualEarth("Microsoft Virtual Earth", { 'sphericalMercator': true });
+			map.addLayer(virtualearth);
+			
+			// Yahoo Maps Base Layer
+			var yahoo = new OpenLayers.Layer.Yahoo( "Yahoo Maps", { sphericalMercator: true });
+			map.addLayer(yahoo);
+			
+			var met1 = new OpenLayers.Layer.WMS("Metacarta Basic",
+				"http://labs.metacarta.com/wms/vmap0",
+				{'layers': 'basic', 'transparent': true},
+				{'isBaseLayer':true});
+			/*
 			var met1 = new OpenLayers.Layer.WMS("** Metacarta Basic",
 					"http://labs.metacarta.com/wms-c/Basic.py", {layers:'basic', 'transparent':true, 'format':'png' },
 					{'isBaseLayer':true });
+			*/
 			met1.setVisibility(false);
 			map.addLayer(met1);
 			var met2 = new OpenLayers.Layer.WMS("** Metacarta Satellite",
@@ -87,7 +113,10 @@
 			map.addControl(WMSToolbar);
 			//parent.document.getElementById('frmwait').innerHTML='';
 */
-			map.setCenter(new OpenLayers.LonLat(lon, lat), zoom);
+			var proj = new OpenLayers.Projection("EPSG:4326");
+			var point = new OpenLayers.LonLat(lon, lat);
+			point.transform(proj, map.getProjectionObject());
+			map.setCenter(point, zoom);
 		}
 		window.onload = function() {
 			var qrydet = parent.document.getElementById('querydetails');
@@ -115,7 +144,8 @@
  </head>
  <body>
 	<table class="grid" height="100%">
-		<tr>
+		 <tr><td>{-$mapfilename-}</td></tr>
+		 <tr>
 		 <td valign="top">
 		  <div class="dwin" style="width:200px;">
 				<p align="right">{-#trepnum#-}: {-$tot-}</p>

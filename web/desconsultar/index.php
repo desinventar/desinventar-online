@@ -1,33 +1,31 @@
 <script language="php">
-/************************************************
- DesInventar8
- http://www.desinventar.org  
- (c) 1999-2007 Corporacion OSSO
- ***********************************************/
+/*
+ DesInventar8 - http://www.desinventar.org
+ (c) 1999-2009 Corporacion OSSO
+*/
 
 //ob_start( 'ob_gzhandler' );
 require_once('../include/loader.php');
 require_once('../include/dictionary.class.php');
 require_once('../include/query.class.php');
-require_once('../include/user.class.php');
+require_once('../include/usersession.class.php');
 
 // Direct access to module
 if (isset($_GET['r']) && !empty($_GET['r'])) {
-  if (checkUserSess())
-    $u = new User('', '', '');
-  else
-    $u = new User('init', '', '');
-  $reg = $_GET['r'];
-  if (isset($_GET['v']) && $_GET['v'] == "true")
-    $db = "";
-  else
-    $db = $reg;
-  $q = new Query($db);
-  if (isset($_GET['lang']) && !empty($_GET['lang']))
-    $_SESSION['lang'] = $_GET['lang'];
+	$reg = $_GET['r'];
+	if (isset($_GET['v']) && $_GET['v'] == "true") {
+		$db = "";
+	} else {
+		$db = $reg;
+	}
+	$q = new Query($db);
+	if (isset($_GET['lang']) && !empty($_GET['lang'])) {
+		$_SESSION['lang'] = $_GET['lang'];
+	}
+} else {
+	// Direct Acccess Not allowed, do not show anything...
+	exit();
 }
-else
-  exit();
 
 $d = new Dictionary(VAR_DIR);
 
@@ -67,13 +65,12 @@ else {
     $t->assign ("cauuserl", $q->loadCauses("USER", "active", $lg));
     $t->assign ("exteffel", $q->getEEFieldList("True"));
     // Get UserRole
-    if (checkUserSess()) {
-      $role = $u->getUserRole($reg);
-      if (!is_array($role) && strlen($role) > 0)
-        $t->assign ("ctl_user", true);
-      else
-        $t->assign ("ctl_user", false);
-    }
+	$role = $us->getUserRole($reg);
+	if (strlen($role) > 0) {
+		$t->assign ("ctl_user", true);
+	} else {
+		$t->assign ("ctl_user", false);
+	}
     // Set selection map
     $dinf = $q->getDBInfo();
     if (($dinf['GeoLimitMinX'] != "") && ($dinf['GeoLimitMinY'] != "") &&

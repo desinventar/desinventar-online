@@ -1,3 +1,8 @@
+* 2009-02-06 Jhon H. Caicedo <jhcaiced@desinventar.org>
+- Starting to remove dependences on 'dicore' package
+  replacing them for PHP classes, this changes will simplify
+  the deployment of the package in Windows enviroments.
+
 * 2009-02-05 Jhon H. Caicedo <jhcaiced@desivnentar.org>
 - Started development of desinventar-8.2.0
 - Completed desinventar-8.1.9, installed in hal/nozomi
