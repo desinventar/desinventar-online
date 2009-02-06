@@ -1,6 +1,11 @@
+* 2009-02-05 Jhon H. Caicedo <jhcaiced@desivnentar.org>
+- Started development of desinventar-8.2.0
+- Completed desinventar-8.1.9, installed in hal/nozomi
+  for production. (subversion repository revision 542 (trunk))
+
 * 2009-02-03 Jhon H. Caicedo <jhcaiced@desivnentar.org>
 - Modified dependencies to install rpm version of
-  desinventar-8.1.9
+  desinventar-8.1.9 (CentOS-5/CentOS-4)
 
 * 2008-10-16 Jhon H. Caicedo <jhcaiced@desinventar.org>
 - gcj uses jre-1.4.2, so we edited all files to use only
