@@ -32,7 +32,7 @@ class Maps
       $map .= $this->setLayerAdm($q, $reg, $type);
       // mapfile and html template to interactive selection
       if ($type == "SELECT")
-        $fp = MAPS_DIR ."/". $reg .".map";
+        $fp = DATADIR ."/". $reg . "/region.map";
       // generate effects maps: type=filename | thematic=sessid
       else {
         $fp = TEMP ."/di8ms_";
@@ -71,7 +71,7 @@ class Maps
 		EXTENT			-180 -90 180 90
 		SIZE				'. $x .' '. $y .'
 		SHAPEPATH		"'. CART_DIR . '/' . $reg .'"
-		FONTSET			"'. CART_DIR . '/' . 'fonts.txt"
+		FONTSET			"'. FONTDIR . '"
 		IMAGECOLOR	255 255 255
 		PROJECTION	"proj=latlong" "ellps=WGS84" "datum=WGS84" END
 		WEB';
@@ -88,7 +88,7 @@ class Maps
     else
       exit();
     $map .= '
-			IMAGEPATH		"'. TMPM_DIR .'"
+			#IMAGEPATH		"'. TMPM_DIR .'"
 			METADATA
 			  WMS_TITLE	"DesInventar Map of '. $inf['TITLE'] .'"
 			  WMS_ABSTRACT	"Level: '. $inf['LEVEL'] .'"
@@ -191,7 +191,7 @@ class Maps
     href="javascript:selectArea(\'['. $code .']\',\'['. $name .']\')" 
     alt="['. $name .']">
 ';
-    $this->makefile(MAPS_DIR . '/' . $tm, $data);
+    $this->makefile(DATADIR . "/" . $reg . "/" . $tm, $data);
 	}
 	
 	// Generate standar layer with query results
