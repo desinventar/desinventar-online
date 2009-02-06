@@ -29,12 +29,13 @@ if (isset($_SERVER["DI8WEB"])) {
 	define("WWWURL"  , "/desinventar-data");     
 	define("DATADIR" , "/var/lib/desinventar");
 	define("CACHEDIR", "/var/cache/Smarty/di8");
+	define("FONTDIR" , "/usr/share/fonts/liberation/fonts.txt");	
 	define("DICT_DIR", SOFTDIR . "/files");
 	define("VAR_DIR" , DATADIR);
 	define("TMP_DIR" , DATADIR);
-	define("MAPS_DIR", DATADIR. '/maps');        // mapfiles dir
+	define("MAPS_DIR", DATADIR);        // mapfiles dir
 	define("LOGO_DIR", VAR_DIR. '/logo');        // database logos dir
-	define("CART_DIR", DATADIR. '/carto');       // Cartography shapes dir
+	define("CART_DIR", DATADIR);       // Cartography shapes dir
 	define("SMTY_DIR", CACHEDIR . '/templates_c'); // Smarty temp dir
 	define("TMPM_DIR", CACHEDIR . '/tempmap');     // Mapserver temp dir
 } else {

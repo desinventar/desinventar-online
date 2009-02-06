@@ -82,7 +82,7 @@ else {
       $t->assign ("x2", $dinf['GeoLimitMaxX']);
       $t->assign ("y1", $dinf['GeoLimitMinY']);
       $t->assign ("y2", $dinf['GeoLimitMaxY']);
-      if (file_exists(MAPS_DIR ."/". $reg .".map"))
+      if (file_exists(DATADIR . "/". $reg . "/region.map"))
         $t->assign ("ctl_showmap", true);
       else
         $t->assign ("ctl_showmap", false);
