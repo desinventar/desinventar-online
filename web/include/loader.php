@@ -1,9 +1,8 @@
 <script language="php">
-/************************************************
- DesInventar8
- http://www.desinventar.org  
+/*
+ DesInventar8 - http://www.desinventar.org
  (c) 1999-2009 Corporacion OSSO
- ***********************************************/
+*/
 
 /* Main loader..*/
 
@@ -63,11 +62,24 @@ $lg          = "es";
 $dicore_host = "127.0.0.1"; //"66.150.227.232";
 $dicore_port = 8081;
 
-///////////////////////////////////////////
+require_once(BASE . "/include/usersession.class.php");
+require_once(BASE . "/include/query.class.php");
 
-// Start manage of SESSION 
+// Session Management
 session_name("DI8SESSID");
 session_start();
+
+// 2009-01-15 (jhcaiced) Start by create/recover the session 
+// information, even for anonymous users
+if (!isset($_SESSION['sessioninfo'])) { 
+	$us = new UserSession(session_id());
+	$_SESSION['sessioninfo'] = $us;
+} else {
+	$us = $_SESSION['sessioninfo'];
+	$us->load($us->sSessionId);
+}
+$us->awake();
+
 error_reporting(E_ALL);
 header('Content-Type: text/html; charset=UTF-8');
 define("DEFAULT_CHARSET", 'UTF-8');

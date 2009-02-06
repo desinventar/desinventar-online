@@ -1,35 +1,24 @@
 <script language="php">
-/************************************************
- DesInventar8
- http://www.desinventar.org  
- (c) 1999-2007 Corporacion OSSO
- ***********************************************/
+/*
+ DesInventar8 - http://www.desinventar.org
+ (c) 1999-2009 Corporacion OSSO
+*/
 
 // Load required Functions
 require_once('include/loader.php');
 require_once('include/query.class.php');
-require_once('include/user.class.php');
+require_once('include/usersession.class.php');
 require_once('include/dictionary.class.php');
 $t->config_dir = 'include';
 
 $d = new Dictionary(VAR_DIR);
 
 $t->assign ("DIver", "8.2.0-1");
+// 2009-01-20 (jhcaiced) At this point, loader.php should have
+// created or loaded the UserSession in the $us variable
+$us->awake();
+$t->assign("stat", "on");
 
-// UPDATER: If user keep connect the session will not expire..
-if (isset($_GET['u'])) {
-  $u = new User('', '', '');
-  $t->assign ("ctl_updater", true);
-//  if (checkUserSess()) {
-  $res = $u->awakeUserSession();
-  if (!iserror($res) || (checkAnonSess() && $res == ERR_ACCESS_DENIED))
-    $status = "on";
-  else
-    $status = "off";
-  $t->assign ("stat", $status);
-//  }
-//    $t->assign ("stat", $_GET['u'] . " min");
-}
 // PAGES: Show Information for selected Page from top menu
 else if (isset($_GET['p'])) {
   $t->assign ("ctl_pages", true);
@@ -56,6 +45,9 @@ if (LNX)
   $t->assign ("shw_vreg", true);
 else
   $t->assign ("shw_vreg", false);
+
+// 2009-01-19 (jhcaiced) This should keep the UserSession info between pages
+$_SESSION['sessioninfo'] = $us;
     
 $t->display ("index.tpl");
 

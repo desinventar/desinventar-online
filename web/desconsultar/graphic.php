@@ -89,6 +89,7 @@ if (isset($post['_G+cmd'])) {
 		*/
 		$sImageURL  = WWWURL . "/graphs/di8graphic_". session_id() . ".png";
 		$sImageFile = WWWDIR . "/graphs/di8graphic_". session_id() . ".png";
+		// Wrote graphic to file
 		$g->Stroke($sImageFile);
 		if ($post['_G+cmd'] == "export") {
 			header("Content-type: Image/png");

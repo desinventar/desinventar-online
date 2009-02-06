@@ -1,18 +1,16 @@
 <script language="php">
-/************************************************
- DesInventar8
- http://www.desinventar.org  
+/*
+ **********************************************
+ DesInventar8 - http://www.desinventar.org  
  (c) 1999-2009 Corporacion OSSO
- ***********************************************/
+ **********************************************
+*/
 
 require_once('include/loader.php');
 require_once('include/query.class.php');
 require_once('include/region.class.php');
-require_once('include/user.class.php');
+require_once('include/usersession.class.php');
 $t->config_dir = 'include';
-
-// Connect with exist user..
-$u = new User('', '', '');
 
 function form2region ($val) {
   $dat = array();
@@ -65,7 +63,9 @@ if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
     $t->assign ("period", $q->getDateRange());
     $t->assign ("dtotal", $q->getNumDisasterByStatus("PUBLISHED"));
     $t->assign ("lstupd", $q->getLastUpdate());
-    $role = $u->getUserRole($ruuid);	// Enable access only Valide Role
+    
+	// Enable access only to users with a valid role in this region
+	$role = $us->getUserRole($ruuid);
     if ($role=="OBSERVER" || $role=="USER" || 
         $role=="SUPERVISOR" || $role=="ADMINREGION") {
       $t->assign ("ctl_showdimod", true);
@@ -98,7 +98,7 @@ else if (isset($_GET['cmd'])) {
 	  // ADMINREG: Form to Create and assign regions
 	  case "adminreg":
       $t->assign ("cntl", $q->getCountryList());
-      $t->assign ("usr", $u->getUsername(''));
+      $t->assign ("usr", $us->getUserFullName(''));
       $t->assign ("ctl_adminreg", true);
       $t->assign ("regpa", $q->getRegionAdminList());
       $t->assign ("ctl_reglist", true);
@@ -136,7 +136,7 @@ else if (isset($_GET['cmd'])) {
         $t->assign ("regid", $data['RegionUUID']);
         // Set Role ADMINREGION in RegionAuth: master for this region
         if (!iserror($stat))
-          $rol = $u->setUserRole($_GET['RegionUserAdmin'], $data['RegionUUID'], "ADMINREGION");
+          $rol = $us->setUserRole($_GET['RegionUserAdmin'], $data['RegionUUID'], "ADMINREGION");
         else {
           $t->assign ("cfunct", '');
           $rol = $stat;

@@ -1,9 +1,8 @@
 <script language="php">
-/************************************************
- DesInventar8
- http://www.desinventar.org  
- (c) 1999-2007 Corporacion OSSO
- ***********************************************/
+/*
+ DesInventar8 - http://www.desinventar.org
+ (c) 1999-2009 Corporacion OSSO
+*/
 
 class Maps
 {
@@ -95,7 +94,7 @@ class Maps
         WMS_EXTENT	"'. $inf['EXTENT'] .'"
         WMS_TIMEEXTENT	"'. $inf['BEG'] ."/". $inf['END'] .'/P5M"
         WMS_ONLINERESOURCE	"'. $this->url .'map='. $fm .'"
-        WMS_SRS	"EPSG:4326"
+        WMS_SRS	"EPSG:4326 EPSG:900913"
 		  END
 		END
 		QUERYMAP
@@ -218,7 +217,7 @@ class Maps
 			  WMS_TITLE	"DesInventar Map of '. $inf['TITLE'] .'"
 			  WMS_ABSTRACT	"Level: '. $inf['LEVEL'] .'"
         WMS_EXTENT	"'. $inf['EXTENT'] .'"
-        WMS_SRS	"EPSG:4326"
+        WMS_SRS	"EPSG:4326 EPSG:900913"
 		  END';
 		  // classify elements by ranges
 		  $vl = $this->classify($dl, $range);
@@ -340,7 +339,7 @@ class Maps
 		<name>DesInventar '. $regn .'</name>
 		<open>1</open>
 		<Icon>
-			<href>'. $this->url . 'LAYERS=effects&amp;MAP=%2Ftmp%2F'. $fp .'&amp;SERVICE=WMS&amp;SRS=EPSG%3A4326&amp;REQUEST=GetMap&amp;HEIGHT=600&amp;STYLES=default,default&amp;WIDTH=800&amp;VERSION=1.1.1&amp;TRANSPARENT=true&amp;LEGEND=true&amp;FORMAT=image/png</href>
+			<href>'. $this->url . 'LAYERS=effects&amp;MAP=%2Ftmp%2F'. $fp .'&amp;SERVICE=WMS&amp;SRS=EPSG%3A900913&amp;REQUEST=GetMap&amp;HEIGHT=600&amp;STYLES=default,default&amp;WIDTH=800&amp;VERSION=1.1.1&amp;TRANSPARENT=true&amp;LEGEND=true&amp;FORMAT=image/png</href>
 			<viewRefreshMode>onStop</viewRefreshMode>
 			<viewRefreshTime>1</viewRefreshTime>
 			<viewBoundScale>1</viewBoundScale>
