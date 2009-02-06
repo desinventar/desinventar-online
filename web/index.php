@@ -20,7 +20,7 @@ $us->awake();
 $t->assign("stat", "on");
 
 // PAGES: Show Information for selected Page from top menu
-else if (isset($_GET['p'])) {
+if (isset($_GET['p'])) {
   $t->assign ("ctl_pages", true);
   $t->assign ("menu", $d->queryLabelsFromGroup('MainPage', $lg));
   $t->assign ("page", $_GET['p']);
@@ -28,16 +28,7 @@ else if (isset($_GET['p'])) {
 // Default portal: init session and get country list
 else {
   $t->assign ("menu", $d->queryLabelsFromGroup('MainPage', $lg));
-  // reconnect with exist session.. uhmm
-  if (checkUserSess()) {
-    $u = new User('', '', '');
-    $cmd = "relogin";
-  }
-  // Start anonymous session
-  else {
-    $u = new User('init', '', '');
-    $cmd = "";
-  }
+  $cmd = "";
   $t->assign ("cmd", $cmd);
 }
 
