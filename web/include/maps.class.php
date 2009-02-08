@@ -37,7 +37,7 @@ class Maps
         $fp = TEMP ."/di8ms_";
         $map .= $this->setLayerEff($q, $reg, $lev, $dl, $range, $info, $lbl);
         if ($type == "THEMATIC")
-          $fp .= "$reg-". $_SESSION['sessionid'] ."_.map";
+          $fp .= "$reg-". session_id() .".map";
         elseif (strlen($type) > 0)
           $fp .= "$reg-$type.map";
         else
@@ -81,7 +81,7 @@ class Maps
     }
     $fm = TEMP .'/di8ms_';
 		if ($typ == "THEMATIC")
-		  $fm .= "$reg-". $_SESSION['sessionid'] ."_.map";
+		  $fm .= "$reg-". session_id() .".map";
     elseif (strlen($typ) > 0)
       $fm .= "$reg-$typ.map";
     else
