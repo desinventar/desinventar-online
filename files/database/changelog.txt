@@ -1,0 +1,5 @@
+* 2009-02-05 Mario A. Yandar <mayandar@desinventar.org>
+- Database Structure Updated using changes to include 
+  the concepts of Composite Region and Virtual Region
+- Structure tuned for use with SQLite
+
