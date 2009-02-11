@@ -41,14 +41,15 @@ if (isset($_SERVER["DI8WEB"])) {
 	if (isset($_SERVER["DI8WEBLOCAL"])) {
 		define("BASE", $_SERVER["DI8WEBLOCAL"]);
 	} else {
-		define("BASE", "/var/www/html/desinventar");
+		//define("BASE", "/var/www/html/desinventar");
+		define("BASE", "/home/gentoo/mayandar/devel/desinventar/web");
 	}
 	define("SOFTDIR" , BASE);
 	define("WWWDIR"  , BASE . "/tmp");
 	define("WWWURL"  , "../tmp");
-	define("DATADIR" , BASE . '/var');
-	define("VAR_DIR" , BASE . '/var');
-	define("TMP_DIR" , BASE . '/tmp');
+	define("DATADIR" , "/var/lib/desinventar");
+	define("VAR_DIR" , DATADIR . '/var');
+	define("TMP_DIR" , DATADIR . '/tmp');
 	define("CACHEDIR", TMP_DIR);   			 // /var/cache/Smarty/di8
 	define("DICT_DIR", VAR_DIR);
 	define("MAPS_DIR", VAR_DIR. '/maps');        // mapfiles dir
@@ -90,7 +91,7 @@ require_once(SMARTYDIR . '/Smarty.class.php');
 require_once(XMLRPCDIR . '/xmlrpc.inc');
 
 // Test and Create missing directories
-/*createIfNotExistDirectory(VAR_DIR);
+createIfNotExistDirectory(VAR_DIR);
 createIfNotExistDirectory(TMP_DIR);
 createIfNotExistDirectory(MAPS_DIR);
 createIfNotExistDirectory(MAPS_DIR ."/templates");
@@ -98,7 +99,6 @@ createIfNotExistDirectory(LOGO_DIR);
 createIfNotExistDirectory(CART_DIR);
 createIfNotExistDirectory(SMTY_DIR);
 createIfNotExistDirectory(TMPM_DIR);
-*/
 
 // dicore objects
 define ("DI_EVENT",			1);

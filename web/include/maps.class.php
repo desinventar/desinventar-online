@@ -251,9 +251,9 @@ class Maps
         $shwlab = 'TEXT "0"';
       $map .= '
 		  CLASS
-		    NAME "Sin datos"
+		    NAME "No data"
         EXPRESSION (length("['. $code .']") > 0)
-		    STYLE OUTLINECOLOR 130 130 130 END 
+		    STYLE OUTLINECOLOR 255 255 255 END 
   			'. $shwlab .'
   			LABEL
 		      TYPE TRUETYPE		FONT "arial"		SIZE 8	
