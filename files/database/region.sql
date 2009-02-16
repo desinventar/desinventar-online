@@ -1,5 +1,5 @@
 /* <REGION>.DB - DesInventar8.2
-2009-02-09
+2009-02-16
 */
 
 DROP TABLE IF EXISTS Info;
@@ -159,38 +159,38 @@ PRIMARY KEY('DisasterId')
 );
 
 /* Set initial values */
-INSERT INTO Info VALUES (“DBVersion”, “”. “”);
-INSERT INTO Info VALUES (“RegCountry”, “”. “”);
-INSERT INTO Info VALUES (“I18NFirstLang”, “”. “”);
-INSERT INTO Info VALUES (“I18NSecondLang”, “”. “”);
-INSERT INTO Info VALUES (“I18NThirdLang”, “”. “”);
-INSERT INTO Info VALUES (“SyncMasterURL”, “”. “”);
-INSERT INTO Info VALUES (“SyncLastupdate”, “”. “”);
-INSERT INTO Info VALUES (“PeriodBeginDate”, “”. “”);
-INSERT INTO Info VALUES (“PeriodEndDate”, “”. “”);
-INSERT INTO Info VALUES (“PeriodOutOfRange”, “”. “”);
-INSERT INTO Info VALUES (“InfoAdminURL”, “”. “”);
-INSERT INTO Info VALUES (“InfoCredits”, “”. “”);
-INSERT INTO Info VALUES (“InfoGeneral”, “”. “”);
-INSERT INTO Info VALUES (“InfoSources”, “”. “”);
-INSERT INTO Info VALUES (“InfoSynopsis”, “”. “”);
-INSERT INTO Info VALUES (“InfoObservation”, “”. “”);
-INSERT INTO Info VALUES (“InfoGeography”, “”. “”);
-INSERT INTO Info VALUES (“InfoCartography”, “”. “”);
-INSERT INTO Info VALUES (“InfoImageLogo”, “”. “”);
-INSERT INTO Info VALUES (“InfoImageIcon”, “”. “”);
-INSERT INTO Info VALUES (“GeoLimitMinX”, “”. “”);
-INSERT INTO Info VALUES (“GeoLimitMinY”, “”. “”);
-INSERT INTO Info VALUES (“GeoLimitMaxX”, “”. “”);
-INSERT INTO Info VALUES (“GeoLimitMaxY”, “”. “”);
-INSERT INTO Info VALUES (“CartoLayerFile”, “”. “”);
-INSERT INTO Info VALUES (“CartoLayerName”, “”. “”);
-INSERT INTO Info VALUES (“CartoLayerCode”, “”. “”);
+INSERT INTO Info VALUES ('DBVersion','','');
+INSERT INTO Info VALUES ('RegCountry','','');
+INSERT INTO Info VALUES ('I18NFirstLang', '', '');
+INSERT INTO Info VALUES ('I18NSecondLang', '','');
+INSERT INTO Info VALUES ('I18NThirdLang', '', '');
+INSERT INTO Info VALUES ('SyncMasterURL', '', '');
+INSERT INTO Info VALUES ('SyncLastupdate', '', '');
+INSERT INTO Info VALUES ('PeriodBeginDate', '', '');
+INSERT INTO Info VALUES ('PeriodEndDate', '', '');
+INSERT INTO Info VALUES ('PeriodOutOfRange', '', '');
+INSERT INTO Info VALUES ('InfoAdminURL', '', '');
+INSERT INTO Info VALUES ('InfoCredits', '', '');
+INSERT INTO Info VALUES ('InfoGeneral', '', '');
+INSERT INTO Info VALUES ('InfoSources', '', '');
+INSERT INTO Info VALUES ('InfoSynopsis', '', '');
+INSERT INTO Info VALUES ('InfoObservation', '', '');
+INSERT INTO Info VALUES ('InfoGeography', '', '');
+INSERT INTO Info VALUES ('InfoCartography','','');
+INSERT INTO Info VALUES ('InfoImageLogo', '', '');
+INSERT INTO Info VALUES ('InfoImageIcon', '', '');
+INSERT INTO Info VALUES ('GeoLimitMinX', '', '');
+INSERT INTO Info VALUES ('GeoLimitMinY', '', '');
+INSERT INTO Info VALUES ('GeoLimitMaxX', '', '');
+INSERT INTO Info VALUES ('GeoLimitMaxY', '', '');
+INSERT INTO Info VALUES ('CartoLayerFile', '', '');
+INSERT INTO Info VALUES ('CartoLayerName', '', '');
+INSERT INTO Info VALUES ('CartoLayerCode', '', '');
 
-INSERT INTO Info VALUES (“SyncLastupdate_Event”, “”. “”);
-INSERT INTO Info VALUES (“SyncLastupdate_Cause”, “”. “”);
-INSERT INTO Info VALUES (“SyncLastupdate_GeoLevel”, “”. “”);
-INSERT INTO Info VALUES (“SyncLastupdate_Geography”, “”. “”);
-INSERT INTO Info VALUES (“SyncLastupdate_Disaster”, “”. “”);
-INSERT INTO Info VALUES (“SyncLastupdate_EEField”, “”. “”);
-INSERT INTO Info VALUES (“SyncLastupdate_EEData”, “”. “”);
+INSERT INTO Info VALUES ('Sync_Event', '', '');
+INSERT INTO Info VALUES ('Sync_Cause', '', '');
+INSERT INTO Info VALUES ('Sync_GeoLevel', '', '');
+INSERT INTO Info VALUES ('Sync_Geography', '', '');
+INSERT INTO Info VALUES ('Sync_Disaster', '', '');
+INSERT INTO Info VALUES ('Sync_EEField', '', '');
+INSERT INTO Info VALUES ('Sync_EEData', '', '');
