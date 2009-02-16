@@ -1,5 +1,5 @@
 /* CORE.DB - DesInventar8.2
-2009-02-09
+2009-02-16
 */
 
 DROP TABLE IF EXISTS Region;
@@ -26,12 +26,12 @@ PRIMARY KEY('RegionId','RegionItem')
 
 DROP TABLE IF EXISTS RegionAuth;
 CREATE TABLE 'RegionAuth' ( 
-Username VARCHAR(20) NOT NULL, 
+UserName VARCHAR(20) NOT NULL, 
 RegionId VARCHAR(50), 
 AuthKey VARCHAR(50), 
 AuthValue INTEGER, 
 AuthAuxValue VARCHAR(1024), 
-PRIMARY KEY('Username','RegionId','AuthKey')
+PRIMARY KEY('UserName','RegionId','AuthKey')
 );
 
 DROP TABLE IF EXISTS Queries;
@@ -39,7 +39,7 @@ CREATE TABLE 'Queries' (
 QueryId VARCHAR(50), 
 RegionId VARCHAR(50), 
 QueryStatus VARCHAR(10), 
-Username VARCHAR(20), 
+UserName VARCHAR(20), 
 QueryDate DATETIME, 
 QueryName VARCHAR(100), 
 QueryContent TEXT, 
@@ -48,7 +48,7 @@ PRIMARY KEY('QueryId')
 
 DROP TABLE IF EXISTS User;
 CREATE TABLE 'User' ( 
-Username VARCHAR(20) NOT NULL, 
+UserName VARCHAR(20) NOT NULL, 
 UserEMail VARCHAR(100) NOT NULL, 
 UserPasswd VARCHAR(100) NOT NULL, 
 UserFullName VARCHAR(100) NOT NULL, 
@@ -58,20 +58,20 @@ UserCity VARCHAR(50),
 UserCreationDate  DATETIME, 
 UserNotes TEXT, 
 UserActive BOOLEAN, 
-PRIMARY KEY('Username')
+PRIMARY KEY('UserName')
 );
 
 DROP TABLE IF EXISTS UserOption;
 CREATE TABLE 'UserOption' ( 
-Username VARCHAR(20) NOT NULL, 
+UserName VARCHAR(20) NOT NULL, 
 OptionKey VARCHAR(50), 
 OptionValue VARCHAR(1024), 
 OptionAuxValue VARCHAR(1024), 
-PRIMARY KEY('Username','OptionKey')
+PRIMARY KEY('UserName','OptionKey')
 );
 
 
 /* Set initial values */
-INSERT INTO User VALUES ('root', 'root@localhost', 'root', 'Portal Administrator', '', '', '', '2008-01-01', '', true);
+INSERT INTO User VALUES ('root', 'root@localhost', 'root', 'Portal Administrator', '', '', '', '2008-01-01', '', 1);
 INSERT INTO RegionAuth VALUES ('root', '', 'REGION', 5, '');
 INSERT INTO RegionAuth VALUES ('root', '', 'USER', 5, '');
