@@ -33,7 +33,7 @@ function form2region ($val) {
 // REGIONS: Show databases for selected Country from left menu
 if (isset($_GET['c']) && (strlen($_GET['c']) > 0)) {
   $t->assign ("ctl_regions", true);
-  $q = new Query('');
+  $q = new Query();
   $t->assign ("cnt", $q->getCountryByCode($_GET['c']));
   $dbs = $q->getRegionList($_GET['c'], "ACTIVE");
   $t->assign ("ctl_available", true);
@@ -46,7 +46,7 @@ if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
   $ruuid = $_GET['r'];
   if (isset($_GET['v']) && $_GET['v'] == "true") {
     // Get Information to VRegion
-    $q = new Query('');
+    $q = new Query();
     $vri = $q->getVirtualRegInfo($ruuid);
     $regname = $vri['VirtualRegLabel'];
     $dbdes = nl2br($vri['VirtualRegDesc']);
@@ -93,7 +93,7 @@ if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
   $t->assign ("dbden", str2js($dbden));
 }
 else if (isset($_GET['cmd'])) {
-	$q = new Query('');
+	$q = new Query();
 	switch ($_GET['cmd']) {
 	  // ADMINREG: Form to Create and assign regions
 	  case "adminreg":

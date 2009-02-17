@@ -4,38 +4,49 @@
  (c) 1999-2009 Corporacion OSSO
 */
 
-class Query extends mysqli
+class Query
 {
   public $regid = "";
 
-	function __construct() {
-		@parent::__construct('localhost', USR, PSW, DTB);
-		if (mysqli_connect_errno()) {
-			die(sprintf("Can't connect to database. Error: %s", mysqli_connect_error()));
-		} else {
-			$this->set_charset("utf8");
-			$num_args = func_num_args();
-			switch($num_args) {
-			case 0:
-				$this->sSessionId = uuid();
-				break;
-			case 1:
-				$this->regid = func_get_arg(0);
-				break;
-			} //switch
+	public function Query() {
+		if (!extension_loaded('pdo')) {
+		  dl( "pdo.so" );
+		  dl( "pdo_sqlite.so" );
 		}
-	} // __construct()
-  
-	public function __destruct() {
-		//if (!mysqli_connect_errno())
-		//	$this->close();
+		try {
+		  $num_args = func_num_args();
+		  switch($num_args) {
+		    case 0:
+		      $this->sSessionId = uuid();
+		      // Load base.db - DI's Basic database
+		      $dbb = VAR_DIR ."/base.db";
+		      if (file_exists($dbb))
+		        $this->base = new PDO("sqlite:" . $dbb);
+          // Load core.db - Users, Regions, Auths.. 
+		      $dbc = VAR_DIR ."/core.db";
+		      if (file_exists($dbc))
+		        $this->core = new PDO("sqlite:" . $dbc);
+          else
+            $this->rebuildCore($dbc); // Rebuild data from directory..
+		      break;
+        case 1:
+          $this->regid = func_get_arg(0);
+		      $dbr = VAR_DIR ."/". $this->regid ."/desinventar.db";
+		      if (file_exists($dbr))
+		        $this->dreg = new PDO("sqlite:" . $dbr);
+//          else
+//            exit();
+          break;
+      } //switch
+    } catch (PDOException $e) {
+      print "Error !: " . $e->getMessage() . "<br/>\n";
+      die();
+    }
 	}
-
-  public function getassoc($query) {
-    if (!empty($query)) {
-      $result = parent::query($query);
-      if (mysqli_error($this))
-        throw new Exception("Query exception:\n". mysqli_error($this));
+/*  
+  public function getassoc($qry) {
+    if (!empty($qry)) {
+      $result = $this->base->query($qry);
       $data = array();
       while ($row = $result->fetch_assoc())
         $data[] = $row;
@@ -48,20 +59,14 @@ class Query extends mysqli
     }
   }
 
-  public function getresult($query) {
-    $result = parent::query($query);
-    if (mysqli_error($this))
-      throw new Exception("Query exception:\n". mysqli_error($this));
-    return $result->fetch_assoc();
+  public function getresult($qry) {
+    return $this->base->query($qry);
   }
 
-  public function getnumrows($query) {
-    $result = parent::query($query);
-    if (mysqli_error($this))
-      throw new Exception("Query exception:\n". mysqli_error($this));
-    return $result->num_rows;
+  public function getnumrows($qry) {
+    return $this->base->rowCount($qry);
   }
-
+*/
   // STANDARDS FUNCTION TO GET GENERAL EVENTS, CAUSES LISTS
   function loadEvents($type, $status, $lang) {
     $data = array();
@@ -89,25 +94,25 @@ class Query extends mysqli
   }
 
   public function getBasicEventList($lg) {
-    $sql = "SELECT EventId, EventLocalName, EventLocalDesc FROM DIEvent ".
-            "WHERE EventId!='UNKNOWN' AND EventLangCode='$lg' ORDER BY EventLocalName";
+    $sql = "SELECT EventId, EventLocalName, EventLocalDesc FROM DI_Event ".
+            "WHERE EventLangCode='$lg' ORDER BY EventLocalName";
     $data = array();
-    $res = $this->getassoc($sql);
+    $res = $this->base->query($sql);
     foreach($res as $row)
       $data[$row['EventId']] = array($row['EventLocalName'], $row['EventLocalDesc']);
     return $data;
   }
   
   public function getBasicCauseList($lg) {
-    $sql = "SELECT CauseId, CauseLocalName, CauseLocalDesc FROM DICause ".
+    $sql = "SELECT CauseId, CauseLocalName, CauseLocalDesc FROM DI_Cause ".
             "WHERE CauseLangCode='$lg' ORDER BY CauseLocalName";
     $data = array();
-    $res = $this->getassoc($sql);
+    $res = $this->base->query($sql);
     foreach($res as $row)
       $data[$row['CauseId']] = array($row['CauseLocalName'], $row['CauseLocalDesc']);
     return $data;
   }
-
+  // DI82
   public function getRegionEventList($type, $status, $lang) {
     if ($type == "PREDEF")
       $sqlt = "EventPreDefined = TRUE";
@@ -119,15 +124,15 @@ class Query extends mysqli
       $sqls = "EventActive=TRUE";
     else
       $sqls = "'1=1'"; // all
-    $sql = "SELECT * FROM ". $this->regid ."_Event WHERE ". $sqls ." AND ". 
+    $sql = "SELECT * FROM Event WHERE ". $sqls ." AND ". 
         $sqlt ." ORDER BY EventLocalName";
     $data = array();
-    $res = $this->getassoc($sql);
+    $res = $this->dreg->query($sql);
     foreach($res as $row)
       $data[$row['EventId']] = array($row['EventLocalName'], str2js($row['EventLocalDesc']), $row['EventActive']);
     return $data;
   }
-
+  // DI82
   public function getRegionCauseList($type, $status, $lang) {
     if ($type == "PREDEF")
       $sqlt = "CausePreDefined = TRUE";
@@ -139,15 +144,15 @@ class Query extends mysqli
       $sqls = "CauseActive=TRUE";
     else
       $sqls = "'1=1'"; // all
-    $sql = "SELECT * FROM ". $this->regid ."_Cause WHERE ". $sqls ." AND ". 
+    $sql = "SELECT * FROM Cause WHERE ". $sqls ." AND ". 
         $sqlt ." ORDER BY CauseLocalName";
     $data = array();
-    $res = $this->getassoc($sql);
+    $res = $this->dreg->query($sql);
     foreach($res as $row)
       $data[$row['CauseId']] = array($row['CauseLocalName'], str2js($row['CauseLocalDesc']), $row['CauseActive']);
     return $data;
   }
-
+  // DI82
   /***** READ OBJECTS :: EVENT, CAUSE, GEOGRAPHY, GEOLEVEL READ *****/
   public function isvalidObjectToInactivate($id, $obj) {
     switch ($obj) {
@@ -155,15 +160,14 @@ class Query extends mysqli
       case DI_CAUSE:			$whr = "CauseId='$id'";		break;
       case DI_GEOGRAPHY:	$whr = "DisasterGeographyId like '$id%'";		break;
     }
-    $sql = "SELECT COUNT(DisasterId) AS counter FROM ". $this->regid .
-            "_Disaster WHERE $whr ";
-    $res = $this->getresult($sql);
+    $sql = "SELECT COUNT(DisasterId) AS counter FROM Disaster WHERE $whr ";
+    $res = $this->dreg->query($sql);
     if ($res['counter'] > 0)
       return false;
     else
       return true;
   }
-
+  // DI82
   public function isvalidObjectName($id, $sugname, $obj) {
     $table = $this->regid;
     switch ($obj) {
@@ -206,7 +210,7 @@ class Query extends mysqli
     else
       return null;
   }
-
+  //DI82
 /*** GEOGRAPHY & GEO-LEVELS QUERIES  ***/
   function buildGeographyId($fid, $lev) {
     $sql = "SELECT MAX(GeographyId) AS max FROM ". $this->regid . "_Geography WHERE GeographyId ".
@@ -218,7 +222,7 @@ class Query extends mysqli
     $newid = $fid . sprintf("%05s", $myid);
     return $newid;
   }
-
+  //DI82
   function getGeoNameById($geoid) {
     if ($geoid == "")
       return null;
@@ -235,7 +239,7 @@ class Query extends mysqli
       $data .= $row['GeographyName'] . "/";
     return $data;
   }
-
+  //DI82
   /*** GEOGRAPHY ***/
   function loadGeography($level) {
     if (!is_numeric($level) && $level >= 0)
@@ -248,7 +252,7 @@ class Query extends mysqli
       $data[$row['GeographyId']] = array($row['GeographyCode'], str2js($row['GeographyName']), $row['GeographyActive']);
     return $data;
   }
-
+  //DI82
   function loadGeoChilds($geoid) {
     $level = $this->getNextLev($geoid);
     $sql = "SELECT * FROM ". $this->regid . "_Geography WHERE GeographyId LIKE '". $geoid .
@@ -263,7 +267,7 @@ class Query extends mysqli
   function getNextLev($geoid) {
     return (strlen($geoid) / 5);
   }
-
+  // DI82
   function loadGeoLevels($mapping) {
     $opc = "";
     if ($mapping == "map")
@@ -276,7 +280,7 @@ class Query extends mysqli
                   $row['GeoLevelLayerFile'], $row['GeoLevelLayerCode'], $row['GeoLevelLayerName']);
     return $data;
   }
-
+  // DI82
   function getMaxGeoLev() {
     $sql = "SELECT MAX(GeoLevelId) AS max FROM ". $this->regid . "_GeoLevel";
     $res = $this->getresult($sql);
@@ -284,8 +288,7 @@ class Query extends mysqli
       return $res['max'];
     return -1;
   }
-
-// uhmm check
+  // DI82
   function loadGeoLevById($geolevid) {
     if (!is_numeric($geolevid))
       return null;
@@ -296,7 +299,7 @@ class Query extends mysqli
       $data = array(str2js($row['GeoLevelName']), str2js($row['GeoLevelDesc']));
     return $data;
   }
-
+  // DI82
   function getEEFieldList($act) {
     $sql = "SELECT * FROM ". $this->regid . "_EEField";
     if ($act != "")
@@ -308,7 +311,7 @@ class Query extends mysqli
           $row['EEFieldType'], $row['EEFieldSize'], $row['EEFieldActive'], $row['EEFieldPublic']);
     return $data;
   }
-  
+  // DI82
   function getEEFieldSeries() {
     $sql = "SELECT COUNT(EEFieldId) as count FROM ". $this->regid . "_EEField";
     $res = $this->getresult($sql);
@@ -319,18 +322,19 @@ class Query extends mysqli
 
   /* GET DISASTERS INFO: DATES, DATACARDS NUMBER, ETC */
   function getDBInfo() {
-    $sql = "SELECT * FROM Region WHERE RegionUUID='". $this->regid ."'";
-    $res = $this->getresult($sql);
+    $sql = "SELECT * FROM Region WHERE RegionId='". $this->regid ."'";
+    $res = $this->dreg->query($sql);
     return $res;
   }
-
+  // DI82
   public function getDateRange() {
-    $sql = "SELECT MIN(DisasterBeginTime) AS datemin, MAX(DisasterBeginTime) AS datemax FROM ". 
-            $this->regid ."_Disaster WHERE RecordStatus='PUBLISHED'";
-    $res = $this->getresult($sql);
-    return array($res['datemin'], $res['datemax']);
+    $sql = "SELECT MIN(DisasterBeginTime) AS datemin, MAX(DisasterBeginTime)".
+          " AS datemax FROM Disaster WHERE RecordStatus='PUBLISHED'";
+    $res = $this->dreg->query($sql);
+    $dat = $res->fetch(PDO::FETCH_ASSOC);
+    return array($dat['datemin'], $dat['datemax']);
   }
-
+  // DI82
   public function getDisasterFld() {
     $sql = "DESCRIBE ". $this->regid ."_Disaster";
     $res = $this->getassoc($sql);
@@ -338,134 +342,134 @@ class Query extends mysqli
       $fld[] = $it['Field'];
     return $fld;
   }
-  
+  // DI82
   public function getDisasterBySerial($diser) {
-    $sql = "SELECT * FROM ". $this->regid ."_Disaster WHERE DisasterSerial='$diser'";
-    $res = $this->getassoc($sql);
+    $sql = "SELECT * FROM Disaster WHERE DisasterSerial='$diser'";
+    $res = $this->dreg->query($sql);
     return $res;
   }
 
   public function getDisasterById($diid) {
-    $sql = "SELECT * FROM ". $this->regid ."_Disaster WHERE DisasterId='$diid'";
-    $res = $this->getassoc($sql);
+    $sql = "SELECT * FROM Disaster WHERE DisasterId='$diid'";
+    $res = $this->dreg->query($sql);
     return $res;
   }
 
   // Get number of datacards by status: PUBLISHED, DRAFT, ..
   public function getNumDisasterByStatus($status) {
-    $sql = "SELECT COUNT(DisasterId) AS counter FROM ".
-             $this->regid ."_Disaster WHERE RecordStatus='$status'";
-    $res = $this->getresult($sql);
+    $sql = "SELECT COUNT(DisasterId) AS counter FROM Disaster WHERE RecordStatus='$status'";
+    $res = $this->dreg->query($sql);
     return $res['counter'];
   }
   
   public function getLastUpdate() {
-    $sql = "SELECT MAX(RecordLastUpdate) AS lastupdate FROM ". 
-            $this->regid ."_Disaster";
-    $res = $this->getresult($sql);
+    $sql = "SELECT MAX(RecordLastUpdate) AS lastupdate FROM Disaster";
+    $res = $this->dreg->query($sql);
     return substr($res['lastupdate'],0,10);
   }
 
   public function getFirstDisasterid() {
-    $sql = "SELECT MIN(DisasterId) AS first FROM ". $this->regid ."_Disaster";
-    $res = $this->getresult($sql);
+    $sql = "SELECT MIN(DisasterId) AS first FROM Disaster";
+    $res = $this->dreg->query($sql);
     return $res['first'];
   }
   
   public function getPrevDisasterId($id) {
-    $sql = "SELECT DisasterId AS prev FROM ". $this->regid .
-        "_Disaster WHERE DisasterId < '$id' ORDER BY RecordLastUpdate,DisasterId DESC LIMIT 1;";
-    $res = $this->getresult($sql);
+    $sql = "SELECT DisasterId AS prev FROM Disaster WHERE ".
+      "DisasterId < '$id' ORDER BY RecordLastUpdate,DisasterId DESC LIMIT 1";
+    $res = $this->dreg->query($sql);
     return $res['prev'];
   }
   
   public function getNextDisasterId($id) {
-    $sql = "SELECT DisasterId AS next FROM ". $this->regid .
-        "_Disaster WHERE DisasterId > '$id' ORDER BY RecordLastUpdate,DisasterId ASC LIMIT 1;";
-    $res = $this->getresult($sql);
+    $sql = "SELECT DisasterId AS next FROM Disaster WHERE ".
+      "DisasterId > '$id' ORDER BY RecordLastUpdate,DisasterId ASC LIMIT 1";
+    $res = $this->dreg->query($sql);
     return $res['next'];
   }
 
   public function getLastDisasterId() {
-    $sql = "SELECT MAX(DisasterId) AS last FROM ". $this->regid ."_Disaster";
-    $res = $this->getresult($sql);
+    $sql = "SELECT MAX(DisasterId) AS last FROM Disaster";
+    $res = $this->dreg->query($sql);
     return $res['last'];
   }
   
   public function getRegLogList() {
-    $sql = "SELECT DBLogDate, DBLogType, DBLogNotes FROM ". $this->regid ."_DatabaseLog ORDER BY DBLogDate DESC";
+    $sql = "SELECT DBLogDate, DBLogType, DBLogNotes FROM DatabaseLog ORDER BY DBLogDate DESC";
     $data = array();
-    $res = $this->getassoc($sql);
+    $res = $this->dreg->query($sql);
     foreach($res as $row)
       $data[$row['DBLogDate']] = array($row['DBLogType'], str2js($row['DBLogNotes'])); 
     return $data;
   }
 
-  /* GENERAL COUNTRIES, REGIONS AND VIRTUAL REGIONS FUNCTIONS */
+  /* BASE.DB & CORE.DB -> COUNTRIES, REGIONS AND VIRTUAL REGIONS FUNCTIONS */
   function getCountryByCode($idcnt) {
-    $sql = "SELECT CountryName FROM Country WHERE CountryIsoCode = '$idcnt'";
-    $res = $this->getresult($sql);
-    return $res['CountryName'];
+    $sql = "SELECT CountryName FROM Country WHERE CountryIso = '$idcnt'";
+    $res = $this->base->query($sql);
+    $dat = $res->fetch(PDO::FETCH_ASSOC);
+    return $dat['CountryName'];
   }
 
   function getCountryList() {
-    $sql = "SELECT CountryIsoCode, CountryName FROM Country ORDER BY CountryIsoName";
+    $sql = "SELECT CountryIso, CountryName FROM Country ORDER BY CountryName";
     $data = array();
-    $res = $this->getassoc($sql);
+    $res = $this->base->query($sql);
     foreach ($res as $row)
-      $data[$row['CountryIsoCode']] = $row['CountryName'];
+      $data[$row['CountryIso']] = $row['CountryName'];
     return $data;
   }
 
   function getRegionFieldByID($ruuid, $field) {
-    $sql = "SELECT RegionUUID, $field FROM Region WHERE RegionUUID = '$ruuid'";
-    $res = $this->getresult($sql);
-    $data[$res['RegionUUID']] = $res[$field];
+    $sql = "SELECT RegionId, $field FROM Region WHERE RegionId = '$ruuid'";
+    $res = $this->core->query($sql);
+    $dat = $res->fetch(PDO::FETCH_ASSOC);
+    $data[$dat['RegionId']] = $dat[$field];
     return $data;
   }
 
   public function getRegionList($cnt, $status) {
     if (!empty($cnt))
-      $opt = " CountryIsoCode='$cnt'";
+      $opt = " CountryIso='$cnt'";
     else
       $opt = " 1=1";
     if ($status == "ACTIVE")
-      $opt .= " AND RegionActive = True";
-    $sql = "SELECT RegionUUID, RegionLabel FROM Region WHERE $opt ORDER BY RegionLabel";
+      $opt .= " AND RegionStatus = 1";
+    $sql = "SELECT RegionId, RegionLabel FROM Region WHERE $opt ORDER BY RegionLabel";
+    $res = $this->core->query($sql);
     $data = array();
-    $res = $this->getassoc($sql);
     foreach ($res as $row)
-      $data[$row['RegionUUID']] = $row['RegionLabel'];
+      $data[$row['RegionId']] = $row['RegionLabel'];
     return $data;
   }
 
   public function getRegionAdminList() {
-    $sql = "SELECT R.RegionUUID AS RegionUUID, R.CountryIsoCode AS CountryIsoCode, R.RegionLabel AS RegionLabel, ".
+    $sql = "SELECT R.RegionId AS RegionId, R.CountryIso AS CountryIso, R.RegionLabel AS RegionLabel, ".
         "RA.UserName AS UserName, R.RegionActive AS RegionActive, R.RegionPublic AS RegionPublic ".
         "FROM Region AS R, RegionAuth AS RA WHERE R.RegionUUID=RA.RegionUUID AND RA.AuthAuxValue='ADMINREGION' ".
         "ORDER BY RegionLabel";
     $data = array();
-    $res = $this->getassoc($sql);
+    $res = $this->core->query($sql);
     foreach ($res as $row)
-      $data[$row['RegionUUID']] = array($row['CountryIsoCode'], $row['RegionLabel'], 
-                    $row['UserName'], $row['RegionActive'], $row['RegionPublic']);
+      $data[$row['RegionId']] = array($row['CountryIso'], $row['RegionLabel'], 
+            $row['UserName'], $row['RegionActive'], $row['RegionPublic']);
     return $data;
   }
-
+  // DI82
   public function getVirtualRegInfo($vreg) {
-    $sql = "SELECT * FROM VirtualRegion WHERE VirtualRegUUID='".
+    $sql = "SELECT * FROM VirtualRegion WHERE VirtualRegId='".
            $vreg ."'";
-    $res = $this->getresult($sql);
+    $res = $this->core->query($sql);
     return $res;
   }
-  
+  // DI82
   public function getVirtualRegItems($vreg) {
-    $sql = "SELECT RegionUUID FROM VirtualRegionItem WHERE VirtualRegUUID='".
-           $vreg ."' ORDER BY RegionUUID";
+    $sql = "SELECT RegionId FROM VirtualRegionItem WHERE VirtualRegId='".
+           $vreg ."' ORDER BY RegionId";
     $data = array();
-    $res = $this->getassoc($sql);
+    $res = $this->core->query($sql);
     foreach ($res as $row)
-      $data[] = $row['RegionUUID'];
+      $data[] = $row['RegionId'];
     return $data;
   }
 
@@ -600,7 +604,7 @@ class Query extends mysqli
 
   /* Counter results */
   public function genSQLSelectCount($whr) {
-    $sql = "SELECT COUNT(D.DisasterId) as counter FROM ". $this->regid ."_Disaster AS D, ". $this->regid ."_EEData AS E ";
+    $sql = "SELECT COUNT(D.DisasterId) as counter FROM Disaster AS D, EEData AS E ";
     if ($this->chkSQLWhere($whr))
       return ($sql . $whr);
     return false;
@@ -609,7 +613,7 @@ class Query extends mysqli
   /* Generate SQL to data lists */
   public function genSQLSelectData ($dat, $fld, $order) {
     /* Process fields to show */
-    $sql = "SELECT ". $fld ." FROM ". $this->regid ."_Disaster AS D, ". $this->regid ."_EEData AS E ";
+    $sql = "SELECT ". $fld ." FROM Disaster AS D, EEData AS E ";
     if ($this->chkSQLWhere($dat)) {
       $sql .= $dat;
       if (!empty($order))
@@ -818,7 +822,6 @@ class Query extends mysqli
     }
     return $js;
   }
-
   
   /*** SET SQL TO TOTALIZATION RESULTS ***/
   function totalize($sql) {
@@ -890,6 +893,140 @@ class Query extends mysqli
     return $info;
   }
   
+  // DICTIONARY FUNCTIONS
+  function existLang($langID) {
+    if ($langID == "")
+      return false;
+    $sql = "select LangIsoCode from Language where LangIsoCode='". $langID ."'";
+    foreach ($this->base->query($sql) as $row) {
+      if (count($row) > 0) {
+        return true;
+      }
+    }
+    return false;
+  }
+  
+  function queryLabel($labgrp, $labname, $langID) {
+  	$data = '';
+    $sql = "select d.DictTranslation as DTr, d.DictTechHelp as DTe, ".
+            "d.DictBasDesc as DBa, d.DictFullDesc as DFu from Dictionary d,".
+            " LabelGroup g where (g.LGName like '" . $labgrp . "%') ".
+            "and (d.LangIsoCode='" . $langID . "') and (g.LabelName= '".
+            $labname ."') and (d.DictLabelID = g.DictLabelID) ".
+            "order by g.LGorder";
+    foreach ($this->base->query($sql) as $row) {
+      $data = array('DictTranslation'=>$row['DTr'],//utf8_encode($row['DTr']),
+                    'DictTechHelp'=>$row['DTe'],//utf8_encode($row['DTe']),
+                    'DictBasDesc'=>$row['DBa'],//utf8_encode($row['DBa']),
+                    'DictFullDesc'=>$row['DFu']);//utf8_encode($row['DFu']));
+    }
+    return $data;
+  }
+  function queryLabelsFromGroup($labgrp, $langID) {
+  	$dictio = '';
+    $sql = "select g.LGName as lgn, g.LabelName as lbn, DictTranslation, ".
+            "DictTechHelp, DictBasDesc, DictFullDesc from Dictionary d,".
+            " LabelGroup g where (g.LGName like '". $labgrp ."%') and ".
+            "(d.LangIsoCode='". $langID ."') and (d.DictLabelID = g.DictLabelID) ".
+            "order by g.LGorder";
+    foreach ($this->base->query($sql) as $row) {
+      $grp = explode("|", $row['lgn']);
+      $dictio[$grp[0].$row['lbn']] = array(
+          $row['DictTranslation'],//utf8_encode($row['DicTranslation']), 
+          $row['DictTechHelp'],//utf8_encode($row['DicTechHelp']),
+          str2js($row['DictBasDesc']), $row['DictFullDesc']);
+    }
+    return $dictio;
+  }
+
+  function querySecLabelFromGroup($labgrp, $langID) {
+    $sql = "select g.LGName as lgn, g.LabelName as lbn, DictTranslation, ".
+            "DictTechHelp, DictBasDesc, DictFullDesc from Dictionary d,".
+            " LabelGroup g where (g.LGName like '". $labgrp ."%') and ".
+            "(d.LangIsoCode='". $langID ."') and (d.DictLabelID = g.DictLabelID) ".
+            "order by g.LGorder";
+    foreach ($this->base->query($sql) as $row) {
+      $grp = explode("|", $row['lgn']);
+      $dictio[$grp[0].$row['lbn']] = $grp[2];
+    }
+    return $dictio;
+  }
+
+  function loadAllGroups($langID) {
+    $sql = "select g.LGName as lgn, g.LabelName as lbn, DictTranslation, ".
+            "DictTechHelp, DictBasDesc, DictFullDesc from Dictionary d,".
+            " LabelGroup g where (d.LangIsoCode='" . $langID . "') and ".
+            "(d.DictLabelID = g.DictLabelID) order by g.LGorder";
+    foreach ($this->base->query($sql) as $row) {
+      $grp = explode("|", $row['lgn']);
+      $dictio[$grp[0].$row['lbn']] = array($row['DictTranslation'], 
+          $row['DictTechHelp'], $row['DictBasDesc'], $row['DictFullDesc']);
+    }
+    return $dictio;
+  }
+
+  function loadAllLabels() {
+    $sql = "select DictLabelID, LGName, LabelName from LabelGroup order by LGName";
+    $diction = array();
+    foreach ($this->base->query($sql) as $row) {
+      $dictio[$row['DictLabelID']] = $row['LGName'] .'|'. $row['LabelName'];
+    }
+    return $dictio;
+  }
+
+  function loadAllLang() {
+    $sql = "select LangIsoCode, LangIsoName, LangLocalName, LangStatus from Language";
+    foreach ($this->base->query($sql) as $row) {
+      $lang[$row['LangIsoCode']] = array($row['LangLocalName'],
+        $row['LangIsoName'], $row['LangStatus']);
+    }
+    return $lang;
+  }
+  
+  function findDicLabelID($labgrp, $labname) {
+    $sql = "select DictLabelID from LabelGroup where LGName like '". $labgrp .
+            "%' and LabelName='". $labname ."';";
+    foreach ($this->base->query($sql) as $row) {
+      $diclabelID = $row['DictLabelID'];
+    }
+    return $diclabelID;
+  }
+  
+  function existLabel($diclabelID) {
+    $sql = "select DictLabelID from Dictionary where DictLabelID='". 
+            $diclabelID . "';";
+    foreach ($this->base->query($sql) as $row) {
+      $diclabelID = $row['DictLabelID'];
+      if ($diclabelID != null)
+        return true;
+    }
+    return false;
+  }
+  // Check!!
+  function updateDicLabel($labgrp, $labname, $translation, $techhelp, $basdesc, $fulldesc, $langID) {
+    if (!$this->existLang($langID))
+      return false;
+    else {
+      $diclabID = $this->findDicLabelID($labgrp, $labname);
+      if (!$this->existLabel($diclabID))
+        $sql = "insert into Dictionary values ('". $diclabID ."','". $langID .
+              "','". $translation ."','". $techhelp ."','". $basdesc ."','".
+              $fulldesc ."');";
+      else
+        $sql = "update Dictionary set LangID='". $langID ."', DicTranslation='".
+              $translation ."', DicTechHelp='". $techhelp ."', DicBasDesc='".
+              $basdesc ."', DicFullDesc='".$fulldesc .
+              "' where DicLabelID='". $diclabID ."';";
+      $this->base->exec($sql);
+    }
+    return true;
+  }
+  
+  // Check
+  function rebuildCore($fcore) {
+    return true;
+  }
+
 } // end class
 
 </script>

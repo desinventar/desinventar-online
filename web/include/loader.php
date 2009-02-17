@@ -12,20 +12,20 @@
 // "C:/desinventar8/ms4w/Apache/htdocs/";
 // "/var/www/html/desinventar/test/";
 define('LNX', true); // false if install on Windows machine..
-define('USR', "di8db");
-define('PSW', "di8db");
-define('DTB', "di8db");
+ //define('USR', "di8db");
+ //define('PSW', "di8db");
+ //define('DTB', "di8db");
 
 define("TEMP", "/tmp");
 define("SMARTYDIR", "/usr/share/Smarty");
 define("JPGRAPHDIR", "/usr/share/php/jpgraph");
-define("XMLRPCDIR", "/usr/share/php/xmlrpc");
+ //define("XMLRPCDIR", "/usr/share/php/xmlrpc");
 
 if (isset($_SERVER["DI8WEB"])) {
 	define("BASE", $_SERVER["DI8WEB"]);
 	define("SOFTDIR" , "/usr/share/desinventar");
-	define("WWWDIR"  , "/var/www/desinventar");  
-	define("WWWURL"  , "/desinventar-data");     
+	define("WWWDIR"  , "/var/www/desinventar");
+	define("WWWURL"  , "/desinventar-data");
 	define("DATADIR" , "/var/lib/desinventar");
 	define("CACHEDIR", "/var/cache/Smarty/di8");
 	define("FONTDIR" , "/usr/share/fonts/liberation/fonts.txt");	
@@ -51,15 +51,20 @@ if (isset($_SERVER["DI8WEB"])) {
 	define("VAR_DIR" , DATADIR . '/var');
 	define("TMP_DIR" , DATADIR . '/tmp');
 	define("CACHEDIR", TMP_DIR);   			 // /var/cache/Smarty/di8
-	define("DICT_DIR", VAR_DIR);
-	define("MAPS_DIR", VAR_DIR. '/maps');        // mapfiles dir
-	define("LOGO_DIR", VAR_DIR. '/logo');        // database logos dir
-	define("CART_DIR", VAR_DIR. '/carto');       // Cartography shapes dir
-	define("SMTY_DIR", CACHEDIR . '/templates_c'); // Smarty temp dir
+ //	define("DICT_DIR", VAR_DIR);
+ //	define("MAPS_DIR", VAR_DIR. '/maps');        // mapfiles dir
+ //	define("LOGO_DIR", VAR_DIR. '/logo');        // database logos dir
+ //	define("CART_DIR", VAR_DIR. '/carto');       // Cartography shapes dir
+ 	define("SMTY_DIR", CACHEDIR . '/templates_c'); // Smarty temp dir
 	define("TMPM_DIR", CACHEDIR . '/tempmap');     // Mapserver temp dir
 }
+// Test and Create missing directories
+createIfNotExistDirectory(VAR_DIR);
+createIfNotExistDirectory(TMP_DIR);
+createIfNotExistDirectory(SMTY_DIR);
+createIfNotExistDirectory(TMPM_DIR);
 
-$lg          = "es";
+$lg          = "spa";
 $dicore_host = "127.0.0.1"; //"66.150.227.232";
 $dicore_port = 8081;
 
@@ -88,17 +93,7 @@ define("DEFAULT_CHARSET", 'UTF-8');
 /* Smarty configuration */
 require_once(SMARTYDIR . '/Smarty.class.php');
 /* XMLRPC Library */
-require_once(XMLRPCDIR . '/xmlrpc.inc');
-
-// Test and Create missing directories
-createIfNotExistDirectory(VAR_DIR);
-createIfNotExistDirectory(TMP_DIR);
-createIfNotExistDirectory(MAPS_DIR);
-createIfNotExistDirectory(MAPS_DIR ."/templates");
-createIfNotExistDirectory(LOGO_DIR);
-createIfNotExistDirectory(CART_DIR);
-createIfNotExistDirectory(SMTY_DIR);
-createIfNotExistDirectory(TMPM_DIR);
+ //require_once(XMLRPCDIR . '/xmlrpc.inc');
 
 // dicore objects
 define ("DI_EVENT",			1);
