@@ -14,6 +14,7 @@
     - Methodological Guide
     - MultiLanguage and traduction
 */
+/* 2009-02-16 (mayandar) This class is obsolete.. 
 class Dictionary {
   var $dbh;
   var $dbdic = "di8doc.sq3";
@@ -59,7 +60,6 @@ class Dictionary {
 					$sqllabels = file_get_contents($this->sql2);
 					$this->dbh->exec($sqllabels);
 				} // if
-				*/
 			} // else
 		} catch (PDOException $e) {
 			print "Error !: " . $e->getMessage() . "<br/>\n";
@@ -214,6 +214,7 @@ class Dictionary {
     return true;
   }
   
-}//end Class
+} 
+*/
 
 </script>

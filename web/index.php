@@ -6,14 +6,14 @@
 
 // Load required Functions
 require_once('include/loader.php');
-require_once('include/query.class.php');
-require_once('include/usersession.class.php');
-require_once('include/dictionary.class.php');
+ //require_once('include/query.class.php');
+ //require_once('include/usersession.class.php');
+ //require_once('include/dictionary.class.php');
 $t->config_dir = 'include';
 
-$d = new Dictionary(VAR_DIR);
+$d = new Query();
 
-$t->assign ("DIver", "8.2.0-1");
+$t->assign ("DIver", "8.2.0-2");
 // 2009-01-20 (jhcaiced) At this point, loader.php should have
 // created or loaded the UserSession in the $us variable
 $us->awake();

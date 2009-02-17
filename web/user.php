@@ -137,7 +137,7 @@ if (isset($_GET['cmd'])) {
 			break; // end WELCOME
 		case "adminusr":
 			// Get Regions Information
-			$q = new Query('');
+			$q = new Query();
 			// USERADMIN: Register new user form, only for AdminPortal
 			$t->assign ("cnt", $q->getCountryList());
 			$t->assign ("ctl_adminusr", true);
