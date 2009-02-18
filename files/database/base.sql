@@ -1,5 +1,5 @@
 /* BASIC.DB - DesInventar8.2
-2009-02-16
+2009-02-18
 */
 
 DROP TABLE IF EXISTS Country;
@@ -28,7 +28,7 @@ DROP TABLE IF EXISTS DI_Event;
 CREATE TABLE 'DI_Event' ( 
 EventId VARCHAR(50) NOT NULL, 
 EventLangCode VARCHAR(3) NOT NULL, 
-EvenlName VARCHAR(50), 
+EventName VARCHAR(50), 
 EventDesc TEXT, 
 EventActive BOOLEAN, 
 EventRGBColor VARCHAR(10), 

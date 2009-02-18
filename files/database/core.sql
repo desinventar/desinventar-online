@@ -1,5 +1,5 @@
 /* CORE.DB - DesInventar8.2
-2009-02-16
+2009-02-18
 */
 
 DROP TABLE IF EXISTS Region;
@@ -70,6 +70,24 @@ OptionAuxValue VARCHAR(1024),
 PRIMARY KEY('UserName','OptionKey')
 );
 
+DROP TABLE IF EXISTS UserSession;
+CREATE TABLE 'UserSession' ( 
+SessionId VARCHAR(50), 
+RegionId VARCHAR(50), 
+UserName VARCHAR(50), 
+Valid BOOLEAN, 
+Start DATETIME, 
+LastUpdate DATETIME, 
+PRIMARY KEY('SessionId')
+);
+
+DROP TABLE IF EXISTS UserLockList;
+CREATE TABLE 'UserLockList' ( 
+SessionId VARCHAR(50), 
+TableId VARCHAR(50), 
+RecordId VARCHAR(50), 
+PRIMARY KEY('SessionId')
+);
 
 /* Set initial values */
 INSERT INTO User VALUES ('root', 'root@localhost', 'root', 'Portal Administrator', '', '', '', '2008-01-01', '', 1);
