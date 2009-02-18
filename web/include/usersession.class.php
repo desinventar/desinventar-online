@@ -31,7 +31,7 @@ class UserSession {
 		$iReturn = 0;
 		$sQuery = "SELECT * FROM UserSession WHERE SessionId='" . $prmSessionId . "'";
 		$q = new Query();
-		if ($result = $q->query($sQuery)) {
+		if ($result = $q->core->query($sQuery)) {
 			while ($row = $result->fetch_object()) {
 				$this->sSessionId  = $row->SessionId;
 				$this->sRegionId   = $row->RegionId;
@@ -74,7 +74,7 @@ class UserSession {
 		  "UPDATE UserSession SET UserName='" . $prmUserName . "' " .
 		  "WHERE SessionId='" . $this->sSessionId . "'";
 		$q = new Query();
-		if ($result = $q->query($sQuery)) {
+		if ($result = $q->core->query($sQuery)) {
 			$iReturn = 1;
 			$this->sUserName = $prmUserName;
 		}
@@ -94,7 +94,7 @@ class UserSession {
 				  "'" . $this->dLastUpdate . "'" .
 				  ")";
 		$q = new Query();
-		if ($result = $q->query($sQuery)) {
+		if ($result = $q->core->query($sQuery)) {
 			$iReturn = 1;
 		}
 		return $iReturn;
@@ -113,7 +113,7 @@ class UserSession {
 				  "LastUpdate='" . $this->dLastUpdate . "'" .
 				  "WHERE SessionId ='" . $this->sSessionId . "'";
 		$q = new Query();
-		if ($result = $q->query($sQuery)) {
+		if ($result = $q->core->query($sQuery)) {
 			$iReturn = 1;
 		}
 		return $iReturn;
@@ -125,7 +125,7 @@ class UserSession {
 		$iReturn = 0;
 		$sQuery = "DELETE FROM UserSession WHERE SessionId='" . $this->sSessionId . "'";
 		$q = new Query();
-		if ($result = $q->query($sQuery)) {
+		if ($result = $q->core->query($sQuery)) {
 			$this->sUserName = "";
 			$this->sRegionId = "";
 			$iReturn = 1;
@@ -140,10 +140,10 @@ class UserSession {
 		  "UPDATE UserSession SET RegionId='" . $prmRegionId . "' " . 
 		  "WHERE SessionId='" . $this->sSessionId . "'";
 		$q = new Query();
-		if ($result = $q->query($sQuery)) {
+		if ($result = $q->core->query($sQuery)) {
 			$this->sRegionId = $prmRegionId;
 			$sQuery = "SELECT * FROM Region WHERE RegionUUID='" . $this->sRegionId . "'";
-			if ($result = $q->query($sQuery)) {
+			if ($result = $q->core->query($sQuery)) {
 				while ($row = $result->fetch_object()) {
 					$sRegionLangCode = $row->RegionLangCode;
 				}
@@ -166,7 +166,7 @@ class UserSession {
 			$iReturn = 1;
 		} else {
 			$q = new Query();
-			if ($result = $q->query("SELECT * FROM Users WHERE UserName='" . $prmUserName . "'") ) {
+			if ($result = $q->core->query("SELECT * FROM Users WHERE UserName='" . $prmUserName . "'") ) {
 				while ($row = $result->fetch_object()) {
 					if ($row->UserPasswd == $prmUserPasswd) {
 						$iReturn = 1;
@@ -180,7 +180,7 @@ class UserSession {
 	public function getUserFullName() {
 		$sUserFullName = "";
 		$q = new Query();
-		if ($result = $q->query("SELECT * FROM Users WHERE UserName='" . $this->sUserName . "'") ) {
+		if ($result = $q->core->query("SELECT * FROM Users WHERE UserName='" . $this->sUserName . "'") ) {
 			while ($row = $result->fetch_object()) {
 				$sUserFullName = $row->UserFullName;
 			} // while
@@ -205,7 +205,7 @@ class UserSession {
 		}
 		$sQuery = $sQuery + " ORDER BY AuthKey,AuthValue";
 		$q = new Query();
-		if ($result = $q->query($sQuery) ) {
+		if ($result = $q->core->query($sQuery) ) {
 			$i = 0;
 			while ($row = $result->fetch_object()) {
 			 $sAuthKey = $row->AuthKey;
@@ -225,7 +225,7 @@ class UserSession {
 		  " AND AuthKey='ROLE'" . 
 		  " ORDER BY RegionAuth.RegionUUID";
 		$q = new Query();
-		if ($result = $q->query($sQuery) ) {
+		if ($result = $q->core->query($sQuery) ) {
 			while ($row = $result->fetch_object()) {
 			 $sKey = $row->RegionUUID;
 			 $sValue = $row->AuthAuxValue;
@@ -243,7 +243,7 @@ class UserSession {
 		  " WHERE UserName='" . $this->sUserName . "'" .
 		  " ORDER BY UserFullName";
 		$q = new Query();
-		if ($result = $q->query($sQuery) ) {
+		if ($result = $q->core->query($sQuery) ) {
 			while ($row = $result->fetch_object()) {
 				$myData[0] = $row->UserEMail;
 				$myData[1] = $row->UserPasswd;
@@ -266,7 +266,7 @@ class UserSession {
 		$sQuery = "SELECT * FROM Users " .
 		  " WHERE (UserEMail='" . $prmEMail . "') ";
 		$q = new Query();
-		if ($result = $q->query($sQuery) ) {
+		if ($result = $q->core->query($sQuery) ) {
 			while ($row = $result->fetch_object()) {
 				$myAnswer = $row->UserEMail;
 				mail($myAnswer, 
@@ -292,7 +292,7 @@ class UserSession {
 		  " AND AuthKey='ROLE'" . 
 		  " ORDER BY UserName,RegionUUID";
 		$q = new Query();
-		if ($result = $q->query($sQuery) ) {
+		if ($result = $q->core->query($sQuery) ) {
 			while ($row = $result->fetch_object()) {
 				$myAnswer = $row->AuthAuxValue;
 			} // while
@@ -307,7 +307,7 @@ class UserSession {
 		              "   AND (Authkey='ROLE') ";
 		$sQuery = "SELECT * FROM RegionAuth " . $sWhereQuery;
 		$q = new Query();
-		if ($result = $q->query($sQuery) ) {
+		if ($result = $q->core->query($sQuery) ) {
 			if ($result->num_rows == 0) {
 				$sQuery = "INSERT INTO RegionAuth VALUES (" .
 					"'" . $prmUserName . "', " .
@@ -319,7 +319,7 @@ class UserSession {
 			} else {
 				$sQuery = "UPDATE RegionAuth SET " .
 				  " AuthAuxValue = '" . $prmRole . "' " .  $sWhereQuery;
-				if ($result = $q->query($sQuery) ) {
+				if ($result = $q->core->query($sQuery) ) {
 					$myAnswer = $prmRole;
 				}
 			} // else
@@ -338,7 +338,7 @@ class UserSession {
 		  " WHERE $opt ORDER BY RegionLabel";
 		$myData = array();
 		$q = new Query();
-		if ($result = $q->query($sQuery) ) {
+		if ($result = $q->core->query($sQuery) ) {
 			while ($row = $result->fetch_object()) {
 			 $sKey = $row->RegionUUID;
 			 $sValue = $row->RegionLabel;

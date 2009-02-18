@@ -12,7 +12,7 @@
   <script type="text/javascript" src="../include/prototype.js"></script>
   <script type="text/javascript" src="../include/diadmin.js.php"></script>
   <script type="text/javascript" src="../include/checktree.js"></script>
-	<script type="text/javascript" src="../include/wd.js"></script>
+  <script type="text/javascript" src="../include/wd.js"></script>
   <script type="text/javascript" src="../include/accordion.js"></script>
   <!-- ExtJS 2.0.1 -->
   <link rel="stylesheet" type="text/css" href="/extJS/resources/css/ext-all.css"/>
@@ -427,7 +427,7 @@
       else
         return false;
     }
-    var g{-$reg-} = new CheckTree('g{-$reg-}');
+//-->    var g{-$reg-} = new CheckTree('g{-$reg-}');
   </script>
   <!--
    <link rel="stylesheet" href="../css/tabquery.css" TYPE="text/css">
