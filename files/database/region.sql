@@ -1,11 +1,10 @@
 /* REGION.DB - DesInventar8.2
-2009-02-16
+2009-02-18
 */
 
 DROP TABLE IF EXISTS Info;
 CREATE TABLE 'Info' ( 
 InfoKey VARCHAR(50), 
-SyncTable DATETIME, 
 SyncRecord DATETIME, 
 InfoValue VARCHAR(1024), 
 InfoAuxValue VARCHAR(1024), 
@@ -16,9 +15,8 @@ DROP TABLE IF EXISTS Event;
 CREATE TABLE 'Event' ( 
 EventId VARCHAR(50) NOT NULL, 
 EventLangCode VARCHAR(3) NOT NULL, 
-SyncTable DATETIME, 
 SyncRecord DATETIME, 
-EvenlName VARCHAR(50), 
+EventName VARCHAR(50), 
 EventDesc TEXT, 
 EventActive BOOLEAN NOT NULL DEFAULT TRUE, 
 EventPredefined BOOLEAN NOT NULL DEFAULT False, 
@@ -33,7 +31,6 @@ DROP TABLE IF EXISTS Cause;
 CREATE TABLE 'Cause' ( 
 CauseId VARCHAR(50) NOT NULL, 
 CauseLangCode VARCHAR(3) NOT NULL, 
-SyncTable DATETIME, 
 SyncRecord DATETIME, 
 CauseName VARCHAR(50), 
 CauseDesc TEXT, 
@@ -50,7 +47,6 @@ DROP TABLE IF EXISTS GeoLevel;
 CREATE TABLE 'GeoLevel' ( 
 GeoLevelId INTEGER NOT NULL, 
 GeoLevelLangCode VARCHAR(3) NOT NULL, 
-SyncTable DATETIME, 
 SyncRecord DATETIME, 
 GeoLevelName VARCHAR(50) NOT NULL DEFAULT '---', 
 GeoLevelDesc TEXT NULL, 
@@ -65,7 +61,6 @@ DROP TABLE IF EXISTS Geography;
 CREATE TABLE 'Geography' ( 
 GeographyId VARCHAR(100) NOT NULL, 
 GeographyLangCode VARCHAR(3) NOT NULL, 
-SyncTable DATETIME, 
 SyncRecord DATETIME, 
 GeographyCode VARCHAR(100) NOT NULL DEFAULT '---', 
 GeographyName VARCHAR(200) NOT NULL DEFAULT '---', 
@@ -77,7 +72,6 @@ PRIMARY KEY('GeographyId','GeographyLangCode')
 DROP TABLE IF EXISTS Disaster;
 CREATE TABLE 'Disaster' ( 
 DisasterId VARCHAR(50) NOT NULL, 
-SyncTable DATETIME, 
 SyncRecord DATETIME, 
 DisasterSerial VARCHAR(50) NOT NULL, 
 DisasterBeginTime VARCHAR(30) NOT NULL, 
@@ -140,7 +134,6 @@ PRIMARY KEY('DisasterId')
 DROP TABLE IF EXISTS EEGroup;
 CREATE TABLE 'EEGroup' ( 
 EEGroupId VARCHAR(30), 
-SyncTable DATETIME, 
 SyncRecord DATETIME, 
 EEGroupLabel VARCHAR(50), 
 EEGroupDesc TEXT, 
@@ -151,7 +144,6 @@ PRIMARY KEY('EEGroupId')
 DROP TABLE IF EXISTS EEField;
 CREATE TABLE 'EEField' ( 
 EEFieldId VARCHAR(30) NOT NULL, 
-SyncTable DATETIME, 
 SyncRecord DATETIME, 
 EEGroupId VARCHAR(30), 
 EEFieldLabel VARCHAR(30), 
@@ -166,44 +158,52 @@ PRIMARY KEY('EEFieldId')
 DROP TABLE IF EXISTS EEData;
 CREATE TABLE 'EEData' ( 
 DisasterId VARCHAR(50) NOT NULL, 
-SyncTable DATETIME, 
 SyncRecord DATETIME, 
 PRIMARY KEY('DisasterId')
 );
 
-/* Set initial values */
-INSERT INTO Info VALUES ('DBVersion','','','','');
-INSERT INTO Info VALUES ('RegCountry','','','','');
-INSERT INTO Info VALUES ('I18NFirstLang','','','','');
-INSERT INTO Info VALUES ('I18NSecondLang','','','','');
-INSERT INTO Info VALUES ('I18NThirdLang','','','','');
-INSERT INTO Info VALUES ('SyncMasterURL','','','','');
-INSERT INTO Info VALUES ('SyncLastupdate','','','','');
-INSERT INTO Info VALUES ('PeriodBeginDate','','','','');
-INSERT INTO Info VALUES ('PeriodEndDate','','','','');
-INSERT INTO Info VALUES ('PeriodOutOfRange','','','','');
-INSERT INTO Info VALUES ('InfoAdminURL','','','','');
-INSERT INTO Info VALUES ('InfoCredits','','','','');
-INSERT INTO Info VALUES ('InfoGeneral','','','','');
-INSERT INTO Info VALUES ('InfoSources','','','','');
-INSERT INTO Info VALUES ('InfoSynopsis','','','','');
-INSERT INTO Info VALUES ('InfoObservation','','','','');
-INSERT INTO Info VALUES ('InfoGeography','','','','');
-INSERT INTO Info VALUES ('InfoCartography','','','','');
-INSERT INTO Info VALUES ('InfoImageLogo','','','','');
-INSERT INTO Info VALUES ('InfoImageIcon','','','','');
-INSERT INTO Info VALUES ('GeoLimitMinX','','','','');
-INSERT INTO Info VALUES ('GeoLimitMinY','','','','');
-INSERT INTO Info VALUES ('GeoLimitMaxX','','','','');
-INSERT INTO Info VALUES ('GeoLimitMaxY','','','','');
-INSERT INTO Info VALUES ('CartoLayerFile','','','','');
-INSERT INTO Info VALUES ('CartoLayerName','','','','');
-INSERT INTO Info VALUES ('CartoLayerCode','','','','');
+DROP TABLE IF EXISTS DatabaseLog;
+CREATE TABLE 'DatabaseLog' ( 
+DBLogDate DATETIME, 
+DBLogType VARCHAR(20), 
+DBLogNotes TEXT, 
+DBLogUserName VARCHAR(20)
+);
 
-INSERT INTO Info VALUES ('Sync_Event','','','','');
-INSERT INTO Info VALUES ('Sync_Cause','','','','');
-INSERT INTO Info VALUES ('Sync_GeoLevel','','','','');
-INSERT INTO Info VALUES ('Sync_Geography','','','','');
-INSERT INTO Info VALUES ('Sync_Disaster','','','','');
-INSERT INTO Info VALUES ('Sync_EEField','','','','');
-INSERT INTO Info VALUES ('Sync_EEData','','','','');
+/* Set initial values */
+INSERT INTO Info VALUES ('DBVersion','','','');
+INSERT INTO Info VALUES ('RegCountry','','','');
+INSERT INTO Info VALUES ('I18NFirstLang','','','');
+INSERT INTO Info VALUES ('I18NSecondLang','','','');
+INSERT INTO Info VALUES ('I18NThirdLang','','','');
+INSERT INTO Info VALUES ('SyncMasterURL','','','');
+INSERT INTO Info VALUES ('SyncLastupdate','','','');
+INSERT INTO Info VALUES ('PeriodBeginDate','','','');
+INSERT INTO Info VALUES ('PeriodEndDate','','','');
+INSERT INTO Info VALUES ('PeriodOutOfRange','','','');
+INSERT INTO Info VALUES ('InfoAdminURL','','','');
+INSERT INTO Info VALUES ('InfoCredits','','','');
+INSERT INTO Info VALUES ('InfoGeneral','','','');
+INSERT INTO Info VALUES ('InfoSources','','','');
+INSERT INTO Info VALUES ('InfoSynopsis','','','');
+INSERT INTO Info VALUES ('InfoObservation','','','');
+INSERT INTO Info VALUES ('InfoGeography','','','');
+INSERT INTO Info VALUES ('InfoCartography','','','');
+INSERT INTO Info VALUES ('InfoImageLogo','','','');
+INSERT INTO Info VALUES ('InfoImageIcon','','','');
+INSERT INTO Info VALUES ('GeoLimitMinX','','','');
+INSERT INTO Info VALUES ('GeoLimitMinY','','','');
+INSERT INTO Info VALUES ('GeoLimitMaxX','','','');
+INSERT INTO Info VALUES ('GeoLimitMaxY','','','');
+INSERT INTO Info VALUES ('CartoLayerFile','','','');
+INSERT INTO Info VALUES ('CartoLayerName','','','');
+INSERT INTO Info VALUES ('CartoLayerCode','','','');
+INSERT INTO Info VALUES ('Sync_Info','','','');
+INSERT INTO Info VALUES ('Sync_Event','','','');
+INSERT INTO Info VALUES ('Sync_Cause','','','');
+INSERT INTO Info VALUES ('Sync_GeoLevel','','','');
+INSERT INTO Info VALUES ('Sync_Geography','','','');
+INSERT INTO Info VALUES ('Sync_Disaster','','','');
+INSERT INTO Info VALUES ('Sync_EEField','','','');
+INSERT INTO Info VALUES ('Sync_EEData','','','');
+INSERT INTO Info VALUES ('Sync_EEGroup','','','');

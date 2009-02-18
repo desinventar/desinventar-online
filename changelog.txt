@@ -1,3 +1,6 @@
+* 2009-02-17 Mario A. Yandar <mayandar@desinventar.org>
+- Structure tuned for use with SQLite
+
 * 2009-02-06 Jhon H. Caicedo <jhcaiced@desinventar.org>
 - Added usersession.class.php
 - Updated map generation methods to user SphericalMercator
@@ -6,6 +9,10 @@
 - Starting to remove dependences on 'dicore' package
   replacing them for PHP classes, this changes will simplify
   the deployment of the package in Windows enviroments.
+
+* 2009-02-05 Mario A. Yandar <mayandar@desinventar.org>
+- Database Structure Updated using changes to include 
+  the concepts of Composite Region and Virtual Region
 
 * 2009-02-05 Jhon H. Caicedo <jhcaiced@desivnentar.org>
 - Started development of desinventar-8.2.0
