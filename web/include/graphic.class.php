@@ -306,7 +306,9 @@ class Graphic {
 		$iNumPoints = count($val);		
 		$iInterval = ($iNumPoints * 14)/$wx;
 		if ($iInterval < 1) { $iInterval = 1; }
-		$this->g->xaxis->SetTextLabelInterval($iInterval);
+		if ($type != "PIE") {
+			$this->g->xaxis->SetTextLabelInterval($iInterval);
+		}
 		
 		// Other options graphic
 		$this->g->img->SetMargin(50,$rl,30,$bl);
