@@ -4,30 +4,30 @@
  (c) 1999-2009 Corporacion OSSO
 */
 
-class Query
+class Query extends PDO
 {
   public $regid = "";
 
-	public function Query() {
+	public function __construct() {
 		if (!extension_loaded('pdo')) {
 		  dl( "pdo.so" );
 		  dl( "pdo_sqlite.so" );
 		}
 		try {
 		  $num_args = func_num_args();
+		  // Load base.db - DI's Basic database
+		  $dbb = VAR_DIR ."/base.db";
+		  if (file_exists($dbb))
+		    $this->base = new PDO("sqlite:" . $dbb);
+      // Load core.db - Users, Regions, Auths.. 
+      $dbc = VAR_DIR ."/core.db";
+      if (file_exists($dbc))
+        $this->core = new PDO("sqlite:" . $dbc);
+      else
+        $this->rebuildCore($dbc); // Rebuild data from directory..
 		  switch($num_args) {
 		    case 0:
 		      $this->sSessionId = uuid();
-		      // Load base.db - DI's Basic database
-		      $dbb = VAR_DIR ."/base.db";
-		      if (file_exists($dbb))
-		        $this->base = new PDO("sqlite:" . $dbb);
-          // Load core.db - Users, Regions, Auths.. 
-		      $dbc = VAR_DIR ."/core.db";
-		      if (file_exists($dbc))
-		        $this->core = new PDO("sqlite:" . $dbc);
-          else
-            $this->rebuildCore($dbc); // Rebuild data from directory..
 		      break;
         case 1:
           $this->regid = func_get_arg(0);
@@ -94,8 +94,8 @@ class Query
   }
 
   public function getBasicEventList($lg) {
-    $sql = "SELECT EventId, EventLocalName, EventLocalDesc FROM DI_Event ".
-            "WHERE EventLangCode='$lg' ORDER BY EventLocalName";
+    $sql = "SELECT EventId, EventName, EventDesc FROM DI_Event ".
+            "WHERE EventLangCode='$lg' ORDER BY EventName";
     $data = array();
     $res = $this->base->query($sql);
     foreach($res as $row)
@@ -104,8 +104,8 @@ class Query
   }
   
   public function getBasicCauseList($lg) {
-    $sql = "SELECT CauseId, CauseLocalName, CauseLocalDesc FROM DI_Cause ".
-            "WHERE CauseLangCode='$lg' ORDER BY CauseLocalName";
+    $sql = "SELECT CauseId, CauseName, CauseDesc FROM DI_Cause ".
+            "WHERE CauseLangCode='$lg' ORDER BY CauseName";
     $data = array();
     $res = $this->base->query($sql);
     foreach($res as $row)
@@ -115,17 +115,17 @@ class Query
   // DI82
   public function getRegionEventList($type, $status, $lang) {
     if ($type == "PREDEF")
-      $sqlt = "EventPreDefined = TRUE";
+      $sqlt = "EventPreDefined='True'";
     else if ($type == "USER")
-      $sqlt = "EventPreDefined = FALSE";
+      $sqlt = "EventPreDefined='False'";
     else
       $sqlt = "'1=1'";	// all
     if ($status == "active")
-      $sqls = "EventActive=TRUE";
+      $sqls = "EventActive='True'";
     else
       $sqls = "'1=1'"; // all
     $sql = "SELECT * FROM Event WHERE ". $sqls ." AND ". 
-        $sqlt ." ORDER BY EventLocalName";
+        $sqlt ." ORDER BY EventName";
     $data = array();
     $res = $this->dreg->query($sql);
     foreach($res as $row)
@@ -135,17 +135,17 @@ class Query
   // DI82
   public function getRegionCauseList($type, $status, $lang) {
     if ($type == "PREDEF")
-      $sqlt = "CausePreDefined = TRUE";
+      $sqlt = "CausePreDefined='True'";
     else if ($type == "USER")
-      $sqlt = "CausePreDefined = FALSE";
+      $sqlt = "CausePreDefined='False'";
     else
       $sqlt = "'1=1'";	// all
     if ($status == "active")
-      $sqls = "CauseActive=TRUE";
+      $sqls = "CauseActive='True'";
     else
       $sqls = "'1=1'"; // all
     $sql = "SELECT * FROM Cause WHERE ". $sqls ." AND ". 
-        $sqlt ." ORDER BY CauseLocalName";
+        $sqlt ." ORDER BY CauseName";
     $data = array();
     $res = $this->dreg->query($sql);
     foreach($res as $row)
@@ -169,15 +169,14 @@ class Query
   }
   // DI82
   public function isvalidObjectName($id, $sugname, $obj) {
-    $table = $this->regid;
     switch ($obj) {
-      case DI_EVENT:			$name = "EventLocalName";	$table .= "_Event";			$fld = "EventId";			break;
-      case DI_CAUSE:			$name = "CauseLocalName";	$table .= "_Cause";			$fld = "CauseId";			break;
-      case DI_GEOGRAPHY:	$name = "GeographyCode";	$table .= "_Geography"; $fld = "GeographyId";	break;
-      case DI_GEOLEVEL:		$name = "GeoLevelName";		$table .= "_GeoLevel"; 	$fld = "GeoLevelId";	break;
-      case DI_EEFIELD:		$name = "EEFieldLabel";		$table .= "_EEField"; 	$fld = "EEFieldId";		break;
-      case DI_DISASTER:		$name = "DisasterSerial";	$table .= "_Disaster"; 	$fld = "DisasterId";	break;
-      case DI_REGION:			$name = "RegionUUID";			$table  = "Region"; 		$fld = "RegionUUID";	break;
+      case DI_EVENT:			$name = "EventName";			$table = "Event";			$fld = "EventId";			break;
+      case DI_CAUSE:			$name = "CauseName";			$table = "Cause";			$fld = "CauseId";			break;
+      case DI_GEOGRAPHY:	$name = "GeographyCode";	$table = "Geography"; $fld = "GeographyId";	break;
+      case DI_GEOLEVEL:		$name = "GeoLevelName";		$table = "GeoLevel"; 	$fld = "GeoLevelId";	break;
+      case DI_EEFIELD:		$name = "EEFieldLabel";		$table = "EEField"; 	$fld = "EEFieldId";		break;
+      case DI_DISASTER:		$name = "DisasterSerial";	$table = "Disaster"; 	$fld = "DisasterId";	break;
+      case DI_REGION:			$name = "RegionId";				$table = "Region"; 		$fld = "RegionId";	break;
       default:						return null; 		break;
     }
     if ($sugname == "")
@@ -197,14 +196,14 @@ class Query
   
   public function getObjectNameById($id, $obj) {
     switch ($obj) {
-      case DI_EVENT:			$name = "EventLocalName";	$table = "Event";			$fld = "EventId";		break;
-      case DI_CAUSE:			$name = "CauseLocalName";	$table = "Cause";			$fld = "CauseId";		break;
+      case DI_EVENT:			$name = "EventName";			$table = "Event";			$fld = "EventId";		break;
+      case DI_CAUSE:			$name = "CauseName";			$table = "Cause";			$fld = "CauseId";		break;
       case DI_GEOGRAPHY:	$name = "GeographyCode";	$table = "Geography"; $fld = "GeographyId";	break;
       case DI_GEOLEVEL:		$name = "GeoLevelName";		$table = "GeoLevel"; 	$fld = "GeoLevelId";	break;
       default:						return null; 		break;
     }
-    $sql = "SELECT $name FROM ". $this->regid . "_$table WHERE $fld = '$id'";
-    $res = $this->getresult($sql);
+    $sql = "SELECT $name FROM $table WHERE $fld = '$id'";
+    $res = $this->dreg->query($sql);
     if (isset($res[$name]))
       return $res[$name];
     else
@@ -213,10 +212,10 @@ class Query
   //DI82
 /*** GEOGRAPHY & GEO-LEVELS QUERIES  ***/
   function buildGeographyId($fid, $lev) {
-    $sql = "SELECT MAX(GeographyId) AS max FROM ". $this->regid . "_Geography WHERE GeographyId ".
+    $sql = "SELECT MAX(GeographyId) AS max FROM Geography WHERE GeographyId ".
             "LIKE '$fid%' AND GeographyLevel = $lev ORDER BY GeographyId";
     $data = array();
-    $res = $this->getresult($sql);
+    $res = $this->dreg->query($sql);
     $myid = (int)substr($res['max'], -5);
     $myid += 1;
     $newid = $fid . sprintf("%05s", $myid);
@@ -226,7 +225,7 @@ class Query
   function getGeoNameById($geoid) {
     if ($geoid == "")
       return null;
-    $sql = "SELECT GeographyName FROM ". $this->regid . "_Geography WHERE 1!=1";
+    $sql = "SELECT GeographyName FROM Geography WHERE 1!=1";
     $levn = (strlen($geoid) / 5);
     for ($n = 0; $n < $levn; $n++) {
       $len = 5 * ($n + 1);
@@ -234,7 +233,7 @@ class Query
       $sql .= " OR GeographyId='". $geo ."'";
     }
     $data = "";
-    $res = $this->getassoc($sql);
+    $res = $this->dreg->query($sql);
     foreach($res as $row)
       $data .= $row['GeographyName'] . "/";
     return $data;
@@ -244,10 +243,10 @@ class Query
   function loadGeography($level) {
     if (!is_numeric($level) && $level >= 0)
       return null;
-    $sql = "SELECT * FROM ". $this->regid . "_Geography WHERE GeographyLevel = " . $level . 
+    $sql = "SELECT * FROM Geography WHERE GeographyLevel=" . $level . 
            " AND GeographyId NOT LIKE '%00000' ORDER BY GeographyName";
     $data = array();
-    $res = $this->getassoc($sql);
+    $res = $this->dreg->query($sql);
     foreach($res as $row)
       $data[$row['GeographyId']] = array($row['GeographyCode'], str2js($row['GeographyName']), $row['GeographyActive']);
     return $data;
@@ -255,10 +254,10 @@ class Query
   //DI82
   function loadGeoChilds($geoid) {
     $level = $this->getNextLev($geoid);
-    $sql = "SELECT * FROM ". $this->regid . "_Geography WHERE GeographyId LIKE '". $geoid .
-           "%' AND GeographyLevel = " . $level . " ORDER BY GeographyName";
+    $sql = "SELECT * FROM Geography WHERE GeographyId LIKE '". $geoid .
+           "%' AND GeographyLevel=" . $level . " ORDER BY GeographyName";
     $data = array();
-    $res = $this->getassoc($sql);
+    $res = $this->dreg->query($sql);
     foreach($res as $row)
       $data[$row['GeographyId']] = array($row['GeographyCode'], $row['GeographyName'], $row['GeographyActive']);
     return $data;
@@ -272,18 +271,18 @@ class Query
     $opc = "";
     if ($mapping == "map")
       $opc = "WHERE GeoLevelLayerFile != '' AND GeoLevelLayerCode != '' AND GeoLevelLayerName != ''";
-    $sql = "SELECT * FROM ". $this->regid . "_GeoLevel $opc ORDER BY GeoLevelId";
+    $sql = "SELECT * FROM GeoLevel $opc ORDER BY GeoLevelId";
     $data = array();
-    $res = $this->getassoc($sql);
+    $res = $this->dreg->query($sql);
     foreach($res as $row)
       $data[$row['GeoLevelId']] = array(str2js($row['GeoLevelName']), str2js($row['GeoLevelDesc']), 
-                  $row['GeoLevelLayerFile'], $row['GeoLevelLayerCode'], $row['GeoLevelLayerName']);
+            $row['GeoLevelLayerFile'], $row['GeoLevelLayerCode'], $row['GeoLevelLayerName']);
     return $data;
   }
   // DI82
   function getMaxGeoLev() {
-    $sql = "SELECT MAX(GeoLevelId) AS max FROM ". $this->regid . "_GeoLevel";
-    $res = $this->getresult($sql);
+    $sql = "SELECT MAX(GeoLevelId) AS max FROM GeoLevel";
+    $res = $this->dreg->query($sql);
     if (isset($res['max']))
       return $res['max'];
     return -1;
@@ -292,20 +291,20 @@ class Query
   function loadGeoLevById($geolevid) {
     if (!is_numeric($geolevid))
       return null;
-    $sql = "SELECT * FROM ". $this->regid . "_GeoLevel WHERE GeoLevelId=". $geolevid;
+    $sql = "SELECT * FROM GeoLevel WHERE GeoLevelId=". $geolevid;
     $data = array();
-    $res = $this->getassoc($sql);
+    $res = $this->dreg->query($sql);
     foreach($res as $row)
       $data = array(str2js($row['GeoLevelName']), str2js($row['GeoLevelDesc']));
     return $data;
   }
   // DI82
   function getEEFieldList($act) {
-    $sql = "SELECT * FROM ". $this->regid . "_EEField";
+    $sql = "SELECT * FROM EEField";
     if ($act != "")
-      $sql .= " WHERE EEFieldActive=1";
+      $sql .= " WHERE EEFieldStatus=1";
     $data = array();
-    $res = $this->getassoc($sql);
+    $res = $this->dreg->query($sql);
     foreach($res as $row)
       $data[$row['EEFieldId']] = array($row['EEFieldLabel'], str2js($row['EEFieldDesc']), 
           $row['EEFieldType'], $row['EEFieldSize'], $row['EEFieldActive'], $row['EEFieldPublic']);
@@ -313,8 +312,8 @@ class Query
   }
   // DI82
   function getEEFieldSeries() {
-    $sql = "SELECT COUNT(EEFieldId) as count FROM ". $this->regid . "_EEField";
-    $res = $this->getresult($sql);
+    $sql = "SELECT COUNT(EEFieldId) as count FROM EEField";
+    $res = $this->dreg->query($sql);
     if (isset($res['count']))
       return sprintf("%03d", $res['count']);
     return -1;
@@ -359,39 +358,45 @@ class Query
   public function getNumDisasterByStatus($status) {
     $sql = "SELECT COUNT(DisasterId) AS counter FROM Disaster WHERE RecordStatus='$status'";
     $res = $this->dreg->query($sql);
-    return $res['counter'];
+    $dat = $res->fetch(PDO::FETCH_ASSOC);
+    return $dat['counter'];
   }
   
   public function getLastUpdate() {
     $sql = "SELECT MAX(RecordLastUpdate) AS lastupdate FROM Disaster";
     $res = $this->dreg->query($sql);
-    return substr($res['lastupdate'],0,10);
+    $dat = $res->fetch(PDO::FETCH_ASSOC);
+    return substr($dat['lastupdate'],0,10);
   }
 
   public function getFirstDisasterid() {
     $sql = "SELECT MIN(DisasterId) AS first FROM Disaster";
     $res = $this->dreg->query($sql);
-    return $res['first'];
+    $dat = $res->fetch(PDO::FETCH_ASSOC);
+    return $dat['first'];
   }
   
   public function getPrevDisasterId($id) {
     $sql = "SELECT DisasterId AS prev FROM Disaster WHERE ".
       "DisasterId < '$id' ORDER BY RecordLastUpdate,DisasterId DESC LIMIT 1";
     $res = $this->dreg->query($sql);
-    return $res['prev'];
+    $dat = $res->fetch(PDO::FETCH_ASSOC);
+    return $dat['prev'];
   }
   
   public function getNextDisasterId($id) {
     $sql = "SELECT DisasterId AS next FROM Disaster WHERE ".
       "DisasterId > '$id' ORDER BY RecordLastUpdate,DisasterId ASC LIMIT 1";
     $res = $this->dreg->query($sql);
-    return $res['next'];
+    $dat = $res->fetch(PDO::FETCH_ASSOC);
+    return $dat['next'];
   }
 
   public function getLastDisasterId() {
     $sql = "SELECT MAX(DisasterId) AS last FROM Disaster";
     $res = $this->dreg->query($sql);
-    return $res['last'];
+    $dat = $res->fetch(PDO::FETCH_ASSOC);
+    return $dat['last'];
   }
   
   public function getRegLogList() {
@@ -434,7 +439,7 @@ class Query
     else
       $opt = " 1=1";
     if ($status == "ACTIVE")
-      $opt .= " AND RegionStatus = 1";
+      $opt .= " AND RegionStatus >= 1";
     $sql = "SELECT RegionId, RegionLabel FROM Region WHERE $opt ORDER BY RegionLabel";
     $res = $this->core->query($sql);
     $data = array();

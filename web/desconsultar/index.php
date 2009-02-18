@@ -6,7 +6,7 @@
 
 //ob_start( 'ob_gzhandler' );
 require_once('../include/loader.php');
-require_once('../include/dictionary.class.php');
+ //require_once('../include/dictionary.class.php');
 require_once('../include/query.class.php');
 require_once('../include/usersession.class.php');
 
@@ -27,7 +27,7 @@ if (isset($_GET['r']) && !empty($_GET['r'])) {
 	exit();
 }
 
-$d = new Dictionary(VAR_DIR);
+ //$d = new Dictionary(VAR_DIR);
 
 // Display Geographic list of childs..
 if (isset($_GET['cmd']) && $_GET['cmd'] == "glist") {
@@ -36,11 +36,11 @@ if (isset($_GET['cmd']) && $_GET['cmd'] == "glist") {
   $t->assign ("ctl_glist", true);
 }
 else {
-  $t->assign ("dis", $d->queryLabelsFromGroup('Disaster', $lg));
-  $t->assign ("rc1", $d->queryLabelsFromGroup('Record|1', $lg));
-  $t->assign ("rc2", $d->queryLabelsFromGroup('Record|2', $lg));
-  $t->assign ("eve", $d->queryLabelsFromGroup('Event', $lg));
-  $t->assign ("cau", $d->queryLabelsFromGroup('Cause', $lg));
+  $t->assign ("dis", $q->queryLabelsFromGroup('Disaster', $lg));
+  $t->assign ("rc1", $q->queryLabelsFromGroup('Record|1', $lg));
+  $t->assign ("rc2", $q->queryLabelsFromGroup('Record|2', $lg));
+  $t->assign ("eve", $q->queryLabelsFromGroup('Event', $lg));
+  $t->assign ("cau", $q->queryLabelsFromGroup('Cause', $lg));
   $t->assign ("ctl_glist", true);
   $t->assign ("reg", $reg);
   // Set lists if is VirtualRegion
@@ -95,10 +95,10 @@ else {
   $t->assign ("ctl_show", true);
   // Results dictionary..
   $dic = array();
-  $ef1 = $d->queryLabelsFromGroup('Effect|People', $lg);
-  $ef2 = $d->queryLabelsFromGroup('Effect|Affected', $lg);
-  $ef3 = $d->queryLabelsFromGroup('Effect|Economic', $lg);
-  $sec = $d->queryLabelsFromGroup('Sector', $lg);
+  $ef1 = $q->queryLabelsFromGroup('Effect|People', $lg);
+  $ef2 = $q->queryLabelsFromGroup('Effect|Affected', $lg);
+  $ef3 = $q->queryLabelsFromGroup('Effect|Economic', $lg);
+  $sec = $q->queryLabelsFromGroup('Sector', $lg);
   $sec['SectorTransport'][3] 		= array('EffectRoads' => $ef2['EffectRoads'][0]);
   $sec['SectorCommunications'][3] = null;
   $sec['SectorRelief'][3] 			= null;
@@ -111,8 +111,8 @@ else {
   $sec['SectorIndustry'][3]			= null;
   $sec['SectorHealth'][3]				= array('EffectMedicalCenters' => $ef2['EffectMedicalCenters'][0]);
   $sec['SectorOther'][3]				= null;
-  $dic = array_merge($dic, $d->queryLabelsFromGroup('MapOpt', $lg));
-  $dic = array_merge($dic, $d->queryLabelsFromGroup('Graph', $lg));
+  $dic = array_merge($dic, $q->queryLabelsFromGroup('MapOpt', $lg));
+  $dic = array_merge($dic, $q->queryLabelsFromGroup('Graph', $lg));
   $dic = array_merge($dic, $ef1);
   $dic = array_merge($dic, $ef2);
   $dic = array_merge($dic, $ef3);
@@ -122,15 +122,15 @@ else {
   $t->assign ("ef2", $ef2);
   $t->assign ("ef3", $ef3);
   $t->assign ("sec", $sec);
-  $t->assign ("ef4", $d->queryLabelsFromGroup('Effect|More', $lg));
+  $t->assign ("ef4", $q->queryLabelsFromGroup('Effect|More', $lg));
   // DATA
   $dc2 = array();
-  $dc2 = array_merge($dc2, $d->queryLabelsFromGroup('Disaster', $lg));
-  $dc2 = array_merge($dc2, $d->queryLabelsFromGroup('Record|2', $lg));
-  $dc2 = array_merge($dc2, $d->queryLabelsFromGroup('Event', $lg));
-  $dc2 = array_merge($dc2, $d->queryLabelsFromGroup('Cause', $lg));
-  $dc2 = array_merge($dc2, $d->queryLabelsFromGroup('Effect', $lg));
-  $dc2 = array_merge($dc2, $d->queryLabelsFromGroup('Sector', $lg));
+  $dc2 = array_merge($dc2, $q->queryLabelsFromGroup('Disaster', $lg));
+  $dc2 = array_merge($dc2, $q->queryLabelsFromGroup('Record|2', $lg));
+  $dc2 = array_merge($dc2, $q->queryLabelsFromGroup('Event', $lg));
+  $dc2 = array_merge($dc2, $q->queryLabelsFromGroup('Cause', $lg));
+  $dc2 = array_merge($dc2, $q->queryLabelsFromGroup('Effect', $lg));
+  $dc2 = array_merge($dc2, $q->queryLabelsFromGroup('Sector', $lg));
   $t->assign ("dc2", $dc2);
   $fld = "DisasterSerial,DisasterBeginTime,EventId,DisasterGeographyId,DisasterSiteNotes,".
         "DisasterSource,EffectNotes,EffectPeopleDead,EffectPeopleMissing,EffectPeopleInjured,".
@@ -175,7 +175,7 @@ else {
   foreach ($glev as $k=>$i)
     $st["StadistDisasterGeographyId_". $k] = array($i[0], $i[1]);
   $std = array();
-  $std = array_merge($std, $d->queryLabelsFromGroup('stadist', $lg));
+  $std = array_merge($std, $q->queryLabelsFromGroup('stadist', $lg));
   $std = array_merge($std, $st);
   $t->assign ("std", $std);
 }

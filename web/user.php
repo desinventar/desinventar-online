@@ -7,8 +7,8 @@
 */
 
 require_once('include/loader.php');
-require_once('include/usersession.class.php');
-require_once('include/query.class.php');
+ //require_once('include/usersession.class.php');
+ //require_once('include/query.class.php');
 
 $t->config_dir = 'include';
 
@@ -17,7 +17,6 @@ function form2user($val) {
   if (!isset($val['UserName'])) {
   	$ifo = current($val); 
   }
-  
   $dat['UserName'] 			= isset($val['UserName'])? $val['UserName']: key($val);
   $dat['UserFullName'] 	= isset($val['UserFullName'])? $val['UserFullName']: $ifo[2];
   $dat['UserEMail'] 		= isset($val['UserEMail'])? $val['UserEMail']: $ifo[0];

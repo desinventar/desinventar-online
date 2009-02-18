@@ -7,9 +7,9 @@
 */
 
 require_once('include/loader.php');
-require_once('include/query.class.php');
+ //require_once('include/query.class.php');
 require_once('include/region.class.php');
-require_once('include/usersession.class.php');
+ //require_once('include/usersession.class.php');
 $t->config_dir = 'include';
 
 function form2region ($val) {
@@ -63,18 +63,16 @@ if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
     $t->assign ("period", $q->getDateRange());
     $t->assign ("dtotal", $q->getNumDisasterByStatus("PUBLISHED"));
     $t->assign ("lstupd", $q->getLastUpdate());
-    
-	// Enable access only to users with a valid role in this region
-	$role = $us->getUserRole($ruuid);
+    // Enable access only to users with a valid role in this region
+    $role = $us->getUserRole($ruuid);
     if ($role=="OBSERVER" || $role=="USER" || 
         $role=="SUPERVISOR" || $role=="ADMINREGION") {
       $t->assign ("ctl_showdimod", true);
       $t->assign ("ctl_showdcmod", true);
     }
     // Show active or public regions only
-    $act = $q->getRegionFieldByID($ruuid, "RegionActive");
-    $pub = $q->getRegionFieldByID($ruuid, "RegionPublic");
-    if ($pub[$ruuid])
+    $rf = $q->getRegionFieldByID($ruuid, "RegionStatus");
+    if ($rf[$ruuid] == 2)
       $t->assign ("ctl_showdcmod", true);
     $t->assign ("ctl_showreg", true);
     $reg = $q->getDBInfo();
