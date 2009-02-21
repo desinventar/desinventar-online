@@ -6,7 +6,7 @@
 
 class Query extends PDO
 {
-  public $regid = "";
+	public $regid = "";
 
 	public function __construct() {
 		if (!extension_loaded('pdo')) {
@@ -14,34 +14,34 @@ class Query extends PDO
 		  dl( "pdo_sqlite.so" );
 		}
 		try {
-		  $num_args = func_num_args();
-		  // Load base.db - DI's Basic database
-		  $dbb = VAR_DIR ."/base.db";
-		  if (file_exists($dbb))
-		    $this->base = new PDO("sqlite:" . $dbb);
-      // Load core.db - Users, Regions, Auths.. 
-      $dbc = VAR_DIR ."/core.db";
-      if (file_exists($dbc))
-        $this->core = new PDO("sqlite:" . $dbc);
-      else
-        $this->rebuildCore($dbc); // Rebuild data from directory..
-		  switch($num_args) {
-		    case 0:
-		      $this->sSessionId = uuid();
-		      break;
-        case 1:
-          $this->regid = func_get_arg(0);
-		      $dbr = VAR_DIR ."/". $this->regid ."/desinventar.db";
-		      if (file_exists($dbr))
-		        $this->dreg = new PDO("sqlite:" . $dbr);
-//          else
-//            exit();
-          break;
-      } //switch
-    } catch (PDOException $e) {
-      print "Error !: " . $e->getMessage() . "<br/>\n";
-      die();
-    }
+			$num_args = func_num_args();
+			// Load base.db - DI's Basic database
+			$dbb = VAR_DIR ."/base.db";
+			if (file_exists($dbb))
+				$this->base = new PDO("sqlite:" . $dbb);
+			// Load core.db - Users, Regions, Auths.. 
+			$dbc = VAR_DIR ."/core.db";
+			if (file_exists($dbc))
+				$this->core = new PDO("sqlite:" . $dbc);
+			else
+				$this->rebuildCore($dbc); // Rebuild data from directory..
+			switch($num_args) {
+			case 0:
+				$this->sSessionId = uuid();
+				break;
+			case 1:
+				$this->regid = func_get_arg(0);
+				$dbr = VAR_DIR ."/". $this->regid ."/desinventar.db";
+				if (file_exists($dbr))
+					$this->dreg = new PDO("sqlite:" . $dbr);
+				//          else
+				//            exit();
+				break;
+			} //switch
+		} catch (PDOException $e) {
+			print "Error !: " . $e->getMessage() . "<br/>\n";
+			die();
+		}
 	}
   
   public function getassoc($qry) {
