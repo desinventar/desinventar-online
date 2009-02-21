@@ -310,7 +310,7 @@
         $('_G+Kind').value = "BAR";
         $('_G+Period').disabled = false;
         $('_G+Stat').disabled = false;
-        $('_G+Period').value = "YEAR";
+        $('_G+Period').value = "Y";
         $('_G+Scale').disabled = false;
         var histt = $(fld).value;
         if (histt.substr(17, 1) == "|") {
@@ -726,19 +726,19 @@
                   <select id="_G+Period" name="_G+Period" class="fixw"
                   		onMouseOver="showtip('{-$dic.GraphPeriod[2]-}');">
                     <option value=""></option>
-                    <option value="YEAR" selected>{-#gperannual#-}</option>
-                    <option value="YEAR-MONTH">{-#gpermonth#-}</option>
-                    <option value="YEAR-WEEK">{-#gperweek#-}</option>
-                    <option value="YEAR-MONTH-DAY">{-#gperday#-}</option>
+                    <option value="%Y" selected>{-#gperannual#-}</option>
+                    <option value="%Y-%m">{-#gpermonth#-}</option>
+                    <option value="%W">{-#gperweek#-}</option>
+                    <option value="%Y-%m-%d">{-#gperday#-}</option>
                   </select>
                   <br>
                   <b onMouseOver="showtip('{-$dic.GraphSeaHistogram[2]-}');">{-#GHISTOANNUAL#-}</b><br>
                   <select id="_G+Stat" name="_G+Stat" class="fixw"
                   		onMouseOver="showtip('{-$dic.GraphSeaHistogram[2]-}');">
                   	<option value=""></option>
-                    <option value="DAYOFYEAR">{-#gseaday#-}</option>
-                    <option value="WEEK">{-#gseaweek#-}</option>
-                    <option value="MONTH">{-#gseamonth#-}</option>
+                    <option value="%j">{-#gseaday#-}</option>
+                    <option value="%W">{-#gseaweek#-}</option>
+                    <option value="%m">{-#gseamonth#-}</option>
                   </select>
                  </td>
                  <td style="width:240px">

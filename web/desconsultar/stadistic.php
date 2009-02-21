@@ -5,8 +5,6 @@
 */
 
 require_once('../include/loader.php');
-require_once('../include/dictionary.class.php');
-require_once('../include/query.class.php');
 
 if (isset($_POST['_REG']) && !empty($_POST['_REG']))
   $reg = $_POST['_REG'];
@@ -21,15 +19,13 @@ $regname = $rinfo['RegionLabel'];
 $post = $_POST;
 $get  = $_GET;
 
-// load basic field of Consolidate
-$d 	 = new Dictionary(VAR_DIR);
 // load levels to display in totalizations
 foreach ($q->loadGeoLevels("") as $k=>$i)
   $st["StadistDisasterGeographyId_". $k] = array($i[0], $i[1]);
 $dic = array_merge(array(), $st);
-$dic = array_merge($dic, $d->queryLabelsFromGroup('Stadist', $lg));
-$dic = array_merge($dic, $d->queryLabelsFromGroup('Effect', $lg));
-$dic = array_merge($dic, $d->queryLabelsFromGroup('Sector', $lg));
+$dic = array_merge($dic, $q->queryLabelsFromGroup('Stadist', $lg));
+$dic = array_merge($dic, $q->queryLabelsFromGroup('Effect', $lg));
+$dic = array_merge($dic, $q->queryLabelsFromGroup('Sector', $lg));
 $dic = array_merge($dic, $q->getEEFieldList("True"));
 $t->assign ("dic", $dic);
 $t->assign ("reg", $reg);
