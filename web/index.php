@@ -6,6 +6,7 @@
 
 // Load required Functions
 require_once('include/loader.php');
+
  //require_once('include/query.class.php');
  //require_once('include/usersession.class.php');
  //require_once('include/dictionary.class.php');
@@ -39,7 +40,6 @@ else
 
 // 2009-01-19 (jhcaiced) This should keep the UserSession info between pages
 $_SESSION['sessioninfo'] = $us;
-
 $t->display ("index.tpl");
 
 </script>
