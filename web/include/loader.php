@@ -256,6 +256,11 @@ if (isset($_GET['lang']) && !empty($_GET['lang']))
 elseif (isset($_SESSION['lang']))
 	$lg = $_SESSION['lang'];
 
+// 2009-02-21 (jhcaiced) Fix some languages from two to three character code
+if ($lg == 'es') { $lg = 'spa'; }
+if ($lg == 'en') { $lg = 'eng'; }
+if ($lg == 'pr') { $lg = 'por'; }
+
 $_SESSION['lang'] = $lg;
 
 $t->assign ("lg", $lg);
