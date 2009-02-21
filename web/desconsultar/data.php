@@ -53,14 +53,14 @@ $t->assign ("regname", $regname);
 // Data Options Interface
 if (isset($get['page']) || isset($post['_D+cmd'])) {
 	// Process Desconsultar Query Design Form
-	$tot = 0;
+	$iNumberOfRecords = 0;
 	$pag = 1;
 	$export = false;
 	
 	if (isset($get['page'])) {
 		// Show results by page number
 		$pag = $get['page'];
-		$rxp = $get['rxp'];
+		$iRecordsPerPage = $get['RecordsPerPage'];
 		$fld = $get['fld'];
 		$sql = base64_decode($get['sql']);
 	} else if (isset($post['_D+cmd'])) {
@@ -68,7 +68,7 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 		$qd  = $q->genSQLWhereDesconsultar($post);
 		$sqc = $q->genSQLSelectCount($qd);
 		$c	 = $q->getresult($sqc);
-		$tot = $c['counter'];
+		$iNumberOfRecords = $c['counter'];
 		// Reuse calculate SQL values in all pages; calculate limits in pages
 		$levg = array();
 		if (isset($get['opt']) && $get['opt'] == "singlemode") {
@@ -89,17 +89,18 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 		if ($post['_D+cmd'] == "result") {
 			// show results in window
 			$export = false;
-			$rxp 		= $post['_D+SQL_LIMIT'];
+			$iRecordsPerPage = $post['_D+SQL_LIMIT'];
 			// Set values to paging list
-			$last = (int) (($tot / $rxp) + 1);
+			$iNumberOfPages = (int) (($iNumberOfRecords / $iRecordsPerPage) + 1);
 			// Smarty assign SQL values
 			$t->assign ("sql", base64_encode($sql));
-			if (!(isset($get['opt']) && $get['opt'] == "singlemode"))
-			$t->assign ("qdet", $q->getQueryDetails($dic, $post));
+			if (!(isset($get['opt']) && $get['opt'] == "singlemode")) {
+				$t->assign ("qdet", $q->getQueryDetails($dic, $post));
+			}
 			$t->assign ("fld", $fld);
-			$t->assign ("tot", $tot);
-			$t->assign ("rxp", $rxp);
-			$t->assign ("last",$last);
+			$t->assign ("tot", $iNumberOfRecords);
+			$t->assign ("RecordsPerPage", $iRecordsPerPage);
+			$t->assign ("NumberOfPages" ,$iNumberOfPages);
 			// Show results interface 
 			$t->assign ("ctl_showres", true);
 		} else if ($post['_D+cmd'] == "export") {
@@ -110,8 +111,8 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 			//header("Content-Transfer-Encoding: binary");
 			// Limit 1000 results in export: few memory in PHP
 			$export = true;
-			$rxp 		= 1000;
-			$last = (int) (($tot / $rxp) + 1);
+			$iRecordsPerPage 		= 1000;
+			$iNumberOfPages = (int) (($iNumberOfRecords / $iRecordsPerPage) + 1);
 		}
 	}
 	
@@ -122,14 +123,14 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 			$datpth = TEMP ."/di8data_". $_SESSION['sessionid'] ."_";
 			$fp = fopen("$datpth.csv", 'w');
 			$pin = 0;
-			$pgt = $last;
+			$pgt = $iNumberOfPages;
 		} else {
 			$pin = $pag-1;
 			$pgt = $pag;
 		}
 		
 		for ($i = $pin; $i < $pgt; $i++) {
-			$slim = $sql ." LIMIT " . $i * $rxp .", ". $rxp;
+			$slim = $sql ." LIMIT " . $i * $iRecordsPerPage .", ". $iRecordsPerPage;
 			$res	= $q->dreg->query($slim);
 			$dislist	= $res->fetch(PDO::FETCH_ASSOC);
 			$dl = $q->printResults($dislist, $export);
@@ -166,7 +167,7 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 			readfile("$datpth.csv");
 			exit;
 		} else {
-			$t->assign ("offset", ($pag - 1) * $rxp);
+			$t->assign ("offset", ($pag - 1) * $iRecordsPerPage);
 			if (isset($get['opt']) && $get['opt'] == "singlemode") {
 				$t->assign ("js", $q->hash2json($dislist));
 			}

@@ -37,11 +37,11 @@
 	  	{-#tpage#-} 
 	  	<input type="text" id="pp" size="2" value="1" class="line"
 				onKeyDown="if(event.keyCode==13){ mod='dat'; 
-					updateList('lst_dis', 'data.php', 'r={-$reg-}&page='+ this.value +'&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}');}"
+					updateList('lst_dis', 'data.php', 'r={-$reg-}&page='+ this.value +'&RecordsPerPage={-$RecordsPerPage-}&sql={-$sql-}&fld={-$fld-}');}"
 				onkeypress="return blockChars(event, this.value, 'integer:');">
 			&nbsp; {-#tnumof#-} &nbsp;
 			<a href="javascript:void(null)" 
-				onclick="mod='dat'; updateList('lst_dis', 'data.php', 'r={-$reg-}&page={-$last-}&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}');">{-$last-}</a>
+				onclick="mod='dat'; updateList('lst_dis', 'data.php', 'r={-$reg-}&page={-$NumberOfPages-}&RecordsPerPage={-$RecordsPerPage-}&sql={-$sql-}&fld={-$fld-}');">{-$NumberOfPages-}</a>
 {-/if-}
 		</td>
 		<td align="center">
