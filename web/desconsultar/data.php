@@ -137,7 +137,7 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 			if ($i == $pin && !empty($dl)) {
 				// Translate Header to Current Language
 				$lb = "";
-				$sel = array_keys($dislist);
+				$sel = array_keys($dislist[0]);
 				foreach ($sel as $kk=>$ii) {
 					$i3 = substr($ii, 0, -4);
 					if (isset($dic[$ii][0]))
