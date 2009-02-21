@@ -12,19 +12,42 @@ use DBI;
 use DBD::mysql;
 use DBD::SQLite;
 use POSIX qw(strftime);
+use Data::Dumper;
+use DesInventarDB;
+
 my $data_source = 'DBI:mysql:database=di8db;host=localhost';
 my $username    = 'di8db'; 
 my $passwd      = 'di8db';
 
-use DesInventarDB;
-use Symbol;
+my $bRun    = 0;
+my $bDebug  = 0;
+my $bCore   = 0;
 # Script's output is encoded in UTF-8
 binmode(STDOUT, ':utf8');
 
-my $dbin  = DBI->connect($data_source, $username, $passwd) or die "Can't open MySQL database\n";
-my $dbout = DBI->connect("DBI:SQLite:dbname=" . "core.db","","");
+#print Dumper(keys %{%DesInventarDB::TableDef->{Region}});
+#exit 0;
 
-&convertTable($dbin, $dbout, "Region", "Region", \%DesInventarDB::Region);
+if (!GetOptions('run|r'   => \$bRun,
+                'debug|d' => \$bDebug,
+                'core|c'  => \$bCore
+   )) {
+   	die "Error : Incorrect parameter list\n";
+}
+if ($bCore) {
+	$sDBFile = 'core.db';
+}
+my $dbin  = DBI->connect($data_source, $username, $passwd) or die "Can't open MySQL database\n";
+my $dbout = DBI->connect("DBI:SQLite:dbname=" . $sDBFile,"","");
+
+if ($bCore) {
+	&convertTable($dbin, $dbout, "Region", "Region");
+	&convertTable($dbin, $dbout, "RegionAuth", "RegionAuth");
+	&convertTable($dbin, $dbout, "Users", "User");
+} else {
+	#&convertTable($dbin, $dbout, "COLOMBIA_Event", "Event");
+}
+
 
 $dbin->disconnect();
 $dbout->disconnect();
@@ -35,12 +58,23 @@ sub convertTable() {
 	my $dbout     = $_[1];
 	my $sTableSrc = $_[2];
 	my $sTableDst = $_[3];
-	my %oTableDef = %{$_[4]}; # This HASH comes By Reference...
-	
-	my $sQuery = "SELECT * FROM " . $sTableSrc;
-	$sth = $dbin->prepare($sQuery);
-	$sth->execute();
-	while ($o = $sth->fetchrow_hashref()) {
+	#my %oTableDef = %{$_[4]}; # This HASH comes By Reference...
+	my %oTableDef = %{%DesInventarDB::TableDef->{$sTableDst}};
+	my $sQuery    = "";
+	my $sthin     = null;
+	my $sthout    = null;
+	if ($bRun) {
+		$sQuery = "DELETE FROM " . $sTableDst . ";";
+		$sthout = $dbout->prepare($sQuery);
+		$sthout->execute();
+		$icount = $sthout->rows();
+		$sthout->finish;
+	}
+
+	$sQuery = "SELECT * FROM " . $sTableSrc;
+	$sthin = $dbin->prepare($sQuery);
+	$sthin->execute();
+	while ($o = $sthin->fetchrow_hashref()) {
 		$sFieldList = "(";
 		$sValueList = "(";
 		$iCount = scalar keys(%oTableDef);
@@ -52,8 +86,12 @@ sub convertTable() {
 				$sAppend = "";
 			}
 			($sField,$sFieldType) = split('/',$sFieldDef);
-			$sValue = $oTableDef{$sFieldDef};
-			if (defined $o->{$sValue}) {
+			if (defined $oTableDef{$sFieldDef}) {
+				$sValue = $oTableDef{$sFieldDef};
+			} else {
+				$sValue = $sField;
+			}
+			if (exists $o->{$sValue}) {
 				$sValue = $o->{$sValue};
 			}
 			$sFieldList .= $sField . $sAppend;
@@ -68,7 +106,15 @@ sub convertTable() {
 		$sFieldList .= ")";
 		$sValueList .= ")";
 		$sQuery = "INSERT INTO " . $sTableDst . " " . $sFieldList . " VALUES " . $sValueList . ";";
-		print $sQuery . "\n";
+		if ($bDebug) {
+			print $sQuery . "\n";
+		}
+		if ($bRun) {
+			$sthout = $dbout->prepare($sQuery);
+			$sthout->execute();
+			$icount = $sthout->rows();
+			$sthout->finish;
+		}
 	}
-	$sth->finish;
+	$sthin->finish;
 }
