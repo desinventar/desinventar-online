@@ -759,45 +759,45 @@ class Query extends PDO
     return $res;
   }
   
-  /* Print results like associative array or csv */
-  function printResults ($dl, $exp) {
-    $j = 0;
-    $csv = "";
-    // Get results
-    if (!empty($dl)) {
-      foreach ($dl as $k=>$i) {
-        //$dl[$j]["DATACARD"] = http_build_query($i);
-        if (isset($dl[$j]["EventId"]))
-          $dl[$j]["EventId"] = $this->getObjectNameById($i["EventId"], DI_EVENT);
-        if (isset($dl[$j]["CauseId"]))
-          $dl[$j]["CauseId"] = $this->getObjectNameById($i["CauseId"], DI_CAUSE);
-        if (isset($dl[$j]["DisasterGeographyId"]))
-          $dl[$j]["DisasterGeographyId"] = $this->getGeoNameById($i["DisasterGeographyId"]);
-        // uhmm ugly...
-        if (isset($dl[$j]["DisasterGeographyId_0"]))
-          $dl[$j]["DisasterGeographyId_0"] = $this->getGeoNameById($i["DisasterGeographyId_0"]);
-        if (isset($dl[$j]["DisasterGeographyId_1"]))
-          $dl[$j]["DisasterGeographyId_1"] = $this->getGeoNameById($i["DisasterGeographyId_1"]);
-        if (isset($dl[$j]["DisasterGeographyId_2"]))
-          $dl[$j]["DisasterGeographyId_2"] = $this->getGeoNameById($i["DisasterGeographyId_2"]);
-        if ($exp) {
-          foreach (array_values($dl[$j]) as $vals) {
-            if ($vals == -1)
-              $myv = "YES";
-            else
-              $myv = $vals;
-            $csv .= '"'. $myv .'",';
-          }
-          $csv .= "\n";
-        }
-        $j++;
-      }
-    }
-    if ($exp)
-      return $csv;
-    else
-      return $dl;
-  }
+	/* Print results like associative array or csv */
+	function printResults ($dl, $exp) {
+		$csv = "";
+		// Get results
+		if (!empty($dl)) {
+			$j = 0;
+			foreach ($dl as $k=>$i) {
+				//$dl[$j]["DATACARD"] = http_build_query($i);
+				if (isset($dl[$j]["EventId"]))
+					$dl[$j]["EventId"] = $this->getObjectNameById($i["EventId"], DI_EVENT);
+				if (isset($dl[$j]["CauseId"]))
+					$dl[$j]["CauseId"] = $this->getObjectNameById($i["CauseId"], DI_CAUSE);
+				if (isset($dl[$j]["DisasterGeographyId"]))
+					$dl[$j]["DisasterGeographyId"] = $this->getGeoNameById($i["DisasterGeographyId"]);
+				// uhmm ugly...
+				if (isset($dl[$j]["DisasterGeographyId_0"]))
+					$dl[$j]["DisasterGeographyId_0"] = $this->getGeoNameById($i["DisasterGeographyId_0"]);
+				if (isset($dl[$j]["DisasterGeographyId_1"]))
+					$dl[$j]["DisasterGeographyId_1"] = $this->getGeoNameById($i["DisasterGeographyId_1"]);
+				if (isset($dl[$j]["DisasterGeographyId_2"]))
+					$dl[$j]["DisasterGeographyId_2"] = $this->getGeoNameById($i["DisasterGeographyId_2"]);
+				if ($exp) {
+					foreach (array_values($dl[$j]) as $vals) {
+						if ($vals == -1)
+							$myv = "YES";
+						else
+							$myv = $vals;
+						$csv .= '"'. $myv .'",';
+					} //foreach
+					$csv .= "\n";
+				} //if
+				$j++;
+			} //foreach
+		} //if
+		if ($exp)
+			return $csv;
+		else
+			return $dl;
+	} //function
   
   // Print results like json array to Javascript
   function hash2json($dlist) {
