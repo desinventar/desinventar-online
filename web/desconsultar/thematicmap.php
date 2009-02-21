@@ -5,8 +5,6 @@
 */
 
 require_once('../include/loader.php');
-require_once('../include/dictionary.class.php');
-require_once('../include/query.class.php');
 require_once('../include/maps.class.php');
 
 function hex2dec($col) {
@@ -59,11 +57,10 @@ elseif (isset($get['r']) && !empty($get['r'])) {
 else
   exit();
 
-$d = new Dictionary(VAR_DIR);
 $dic = array();
-$dic = array_merge($dic, $d->queryLabelsFromGroup('MapOpt', $lg));
-$dic = array_merge($dic, $d->queryLabelsFromGroup('Effect', $lg));
-$dic = array_merge($dic, $d->queryLabelsFromGroup('Sector', $lg));
+$dic = array_merge($dic, $q->queryLabelsFromGroup('MapOpt', $lg));
+$dic = array_merge($dic, $q->queryLabelsFromGroup('Effect', $lg));
+$dic = array_merge($dic, $q->queryLabelsFromGroup('Sector', $lg));
 
 if (isset($post['_M+cmd'])) {
   // Process QueryDesign Fields and count results

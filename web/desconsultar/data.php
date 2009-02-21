@@ -6,8 +6,6 @@
  ***********************************************/
 
 require_once('../include/loader.php');
-require_once('../include/dictionary.class.php');
-require_once('../include/query.class.php');
 
 /*function hash2json($rg, $dlist) {
   $js = array();
@@ -41,14 +39,13 @@ $post = $_POST;
 $get  = $_GET;
 
 // load basic field of dictionary
-$d 	 = new Dictionary(VAR_DIR);
 $dic = array();
-$dic = array_merge($dic, $d->queryLabelsFromGroup('Disaster', $lg));
-$dic = array_merge($dic, $d->queryLabelsFromGroup('Record|2', $lg));
-$dic = array_merge($dic, $d->queryLabelsFromGroup('Event', $lg));
-$dic = array_merge($dic, $d->queryLabelsFromGroup('Cause', $lg));
-$dic = array_merge($dic, $d->queryLabelsFromGroup('Effect', $lg));
-$dic = array_merge($dic, $d->queryLabelsFromGroup('Sector', $lg));
+$dic = array_merge($dic, $q->queryLabelsFromGroup('Disaster', $lg));
+$dic = array_merge($dic, $q->queryLabelsFromGroup('Record|2', $lg));
+$dic = array_merge($dic, $q->queryLabelsFromGroup('Event', $lg));
+$dic = array_merge($dic, $q->queryLabelsFromGroup('Cause', $lg));
+$dic = array_merge($dic, $q->queryLabelsFromGroup('Effect', $lg));
+$dic = array_merge($dic, $q->queryLabelsFromGroup('Sector', $lg));
 $dic = array_merge($dic, $q->getEEFieldList("True"));
 $t->assign ("dic", $dic);
 $t->assign ("reg", $reg);
@@ -69,10 +66,10 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
   }
   // Process results with default options
   else if (isset($post['_D+cmd'])) {
-    $qd 	= $q->genSQLWhereDesconsultar($post);
-    $sqc 	= $q->genSQLSelectCount($qd);
-    $c 		= $q->getresult($sqc);
-    $tot 	= $c['counter'];
+    $qd  = $q->genSQLWhereDesconsultar($post);
+    $sqc = $q->genSQLSelectCount($qd);
+    $c	 = $q->getresult($sqc);
+    $tot = $c['counter'];
     // Reuse calculate SQL values in all pages; calculate limits in pages
     $levg = array();
     if (isset($get['opt']) && $get['opt'] == "singlemode") {
@@ -89,7 +86,7 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
     if (isset($post['_D+SQL_ORDER']))
       $ord = $post['_D+SQL_ORDER'];
     $sql = $q->genSQLSelectData($qd, $fld, $ord);
-    $dlt = $q->getresult($sql);
+    $dlt = $q->dreg->query($sqc);
     // show results..
     if ($post['_D+cmd'] == "result") {
       $export = false;
@@ -134,7 +131,8 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
     }
     for ($i = $pin; $i < $pgt; $i++) {
       $slim = $sql ." LIMIT " . $i * $rxp .", ". $rxp;
-      $dislist = $q->getassoc($slim);
+      $res	= $q->dreg->query($slim);
+      $dislist	= $res->fetch(PDO::FETCH_ASSOC);
       $dl = $q->printResults($dislist, $export);
       if ($i == $pin && !empty($dl)) {
         // Set traduction in headers

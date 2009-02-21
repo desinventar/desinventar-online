@@ -43,30 +43,28 @@ class Query extends PDO
       die();
     }
 	}
-/*  
+  
   public function getassoc($qry) {
     if (!empty($qry)) {
-      $result = $this->base->query($qry);
+      $res = $this->dreg->query($qry);
       $data = array();
-      while ($row = $result->fetch_assoc())
+      foreach($res as $row)
         $data[] = $row;
-      $result->close();
       return $data;
     }
-    else {
-      echo "Query Empty";
-      return false;
-    }
+    echo "Query Empty";
+    return false;
   }
 
   public function getresult($qry) {
-    return $this->base->query($qry);
+    $rst = $this->dreg->query($qry);
+    return $rst->fetch(PDO::FETCH_ASSOC);
   }
 
   public function getnumrows($qry) {
     return $this->base->rowCount($qry);
   }
-*/
+
   // STANDARDS FUNCTION TO GET GENERAL EVENTS, CAUSES LISTS
   function loadEvents($type, $status, $lang) {
     $data = array();
@@ -161,7 +159,7 @@ class Query extends PDO
       case DI_GEOGRAPHY:	$whr = "DisasterGeographyId like '$id%'";		break;
     }
     $sql = "SELECT COUNT(DisasterId) AS counter FROM Disaster WHERE $whr ";
-    $res = $this->dreg->query($sql);
+    $res = $this->getresult($sql);
     if ($res['counter'] > 0)
       return false;
     else
@@ -203,7 +201,7 @@ class Query extends PDO
       default:						return null; 		break;
     }
     $sql = "SELECT $name FROM $table WHERE $fld = '$id'";
-    $res = $this->dreg->query($sql);
+    $res = $this->getresult($sql);
     if (isset($res[$name]))
       return $res[$name];
     else
@@ -215,7 +213,7 @@ class Query extends PDO
     $sql = "SELECT MAX(GeographyId) AS max FROM Geography WHERE GeographyId ".
             "LIKE '$fid%' AND GeographyLevel = $lev ORDER BY GeographyId";
     $data = array();
-    $res = $this->dreg->query($sql);
+    $res = $this->getresult($sql);
     $myid = (int)substr($res['max'], -5);
     $myid += 1;
     $newid = $fid . sprintf("%05s", $myid);
@@ -282,7 +280,7 @@ class Query extends PDO
   // DI82
   function getMaxGeoLev() {
     $sql = "SELECT MAX(GeoLevelId) AS max FROM GeoLevel";
-    $res = $this->dreg->query($sql);
+    $res = $this->getresult($sql);
     if (isset($res['max']))
       return $res['max'];
     return -1;
@@ -313,7 +311,7 @@ class Query extends PDO
   // DI82
   function getEEFieldSeries() {
     $sql = "SELECT COUNT(EEFieldId) as count FROM EEField";
-    $res = $this->dreg->query($sql);
+    $res = $this->getresult($sql);
     if (isset($res['count']))
       return sprintf("%03d", $res['count']);
     return -1;
@@ -321,17 +319,16 @@ class Query extends PDO
 
   /* GET DISASTERS INFO: DATES, DATACARDS NUMBER, ETC */
   function getDBInfo() {
-    $sql = "SELECT * FROM Region WHERE RegionId='". $this->regid ."'";
-    $res = $this->dreg->query($sql);
+    $sql = "SELECT * FROM Info";
+    $res = $this->getResult($sql);
     return $res;
   }
   // DI82
   public function getDateRange() {
     $sql = "SELECT MIN(DisasterBeginTime) AS datemin, MAX(DisasterBeginTime)".
           " AS datemax FROM Disaster WHERE RecordStatus='PUBLISHED'";
-    $res = $this->dreg->query($sql);
-    $dat = $res->fetch(PDO::FETCH_ASSOC);
-    return array($dat['datemin'], $dat['datemax']);
+    $res = $this->getresult($sql);
+    return array($res['datemin'], $res['datemax']);
   }
   // DI82
   public function getDisasterFld() {
@@ -357,45 +354,39 @@ class Query extends PDO
   // Get number of datacards by status: PUBLISHED, DRAFT, ..
   public function getNumDisasterByStatus($status) {
     $sql = "SELECT COUNT(DisasterId) AS counter FROM Disaster WHERE RecordStatus='$status'";
-    $res = $this->dreg->query($sql);
-    $dat = $res->fetch(PDO::FETCH_ASSOC);
+    $dat = $this->getresult($sql);
     return $dat['counter'];
   }
   
   public function getLastUpdate() {
     $sql = "SELECT MAX(RecordLastUpdate) AS lastupdate FROM Disaster";
-    $res = $this->dreg->query($sql);
-    $dat = $res->fetch(PDO::FETCH_ASSOC);
+    $dat = $this->getresult($sql);
     return substr($dat['lastupdate'],0,10);
   }
 
   public function getFirstDisasterid() {
     $sql = "SELECT MIN(DisasterId) AS first FROM Disaster";
-    $res = $this->dreg->query($sql);
-    $dat = $res->fetch(PDO::FETCH_ASSOC);
+    $dat = $this->getresult($sql);
     return $dat['first'];
   }
   
   public function getPrevDisasterId($id) {
     $sql = "SELECT DisasterId AS prev FROM Disaster WHERE ".
       "DisasterId < '$id' ORDER BY RecordLastUpdate,DisasterId DESC LIMIT 1";
-    $res = $this->dreg->query($sql);
-    $dat = $res->fetch(PDO::FETCH_ASSOC);
+    $dat = $this->getresult($sql);
     return $dat['prev'];
   }
   
   public function getNextDisasterId($id) {
     $sql = "SELECT DisasterId AS next FROM Disaster WHERE ".
       "DisasterId > '$id' ORDER BY RecordLastUpdate,DisasterId ASC LIMIT 1";
-    $res = $this->dreg->query($sql);
-    $dat = $res->fetch(PDO::FETCH_ASSOC);
+    $dat = $this->getresult($sql);
     return $dat['next'];
   }
 
   public function getLastDisasterId() {
     $sql = "SELECT MAX(DisasterId) AS last FROM Disaster";
-    $res = $this->dreg->query($sql);
-    $dat = $res->fetch(PDO::FETCH_ASSOC);
+    $dat = $this->getresult($sql);
     return $dat['last'];
   }
   
@@ -644,7 +635,7 @@ class Query extends PDO
         case "D.DisasterBeginTime":
           // Check if exist Operator(s): Year, month, week, day
           if (!empty($gp[0])) {
-            $sel[$j] = "CONCAT(";
+            $sel[$j] = "";
             $grp[$j] = "";
             $per = explode("-", $gp[0]);
             foreach ($per as $period) {
@@ -652,16 +643,20 @@ class Query extends PDO
               	// 2009-02-02 (jhcaiced) This should add a leading zero
               	// to month and day names in labels for graphs, so the 
               	// labels equal length and ordered correctly.
-              	$iLabelLength = 2;
-                if ($period == 'YEAR') { $iLabelLength = 4; }
+/*              	$iLabelLength = 2;
+                if ($period == 'YEAR')
+                  $iLabelLength = 4;
                 $sPeriod = $period;
-                if ($sPeriod == "WEEK") { $sPeriod = "WEEKOFYEAR"; }
+                if ($sPeriod == "WEEK")
+                  $sPeriod = "WEEKOFYEAR";
                 $sel[$j] .= "RIGHT(CONCAT('0'," . "$sPeriod(". $gp[1] .")),$iLabelLength),'-',";
-                $grp[$j] .= "$sPeriod(". $gp[1] ."), ";
+                $grp[$j] .= "$sPeriod(". $gp[1] ."), ";*/
+                $sel[$j] .= "STRFTIME('$period',". $gp[1] .") ";
+                $grp[$j] .= "STRFTIME('$period',". $gp[1] .") ";
               }
             }
-            $sel[$j] = substr($sel[$j], 0, -5) .") AS ". substr($gp[1],2) ."_$period"; // delete last ,'-',
-            $grp[$j] = substr($grp[$j], 0, -2); // delete last ", "
+            $sel[$j] .= " AS ". substr($gp[1],2) ."_". substr($period, 1, 1); // delete last ,'-',
+//            $grp[$j] = substr($grp[$j], 0, -2); // delete last ", "
           }
           else {
             $sel[$j] = $gp[1];
