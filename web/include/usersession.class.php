@@ -1,9 +1,7 @@
 <script language="php">
 /*
- ***********************************************
- DesInventar8 - http://www.desinventar.org
+  DesInventar8 - http://www.desinventar.org
  (c) 1999-2009 Corporacion OSSO
- **********************************************
 */
 
 class UserSession {
@@ -31,8 +29,9 @@ class UserSession {
 		$iReturn = 0;
 		$sQuery = "SELECT * FROM UserSession WHERE SessionId='" . $prmSessionId . "'";
 		$q = new Query();
-		if ($result = $q->core->query($sQuery)) {
-			while ($row = $result->fetch_object()) {
+		try {
+		if ($result = $q->core->query($sQuery, PDO::FETCH_CLASS)) {
+			while ($row = $result->fetch()) {
 				$this->sSessionId  = $row->SessionId;
 				$this->sRegionId   = $row->RegionId;
 				$this->sUserName   = $row->UserName;
@@ -40,6 +39,9 @@ class UserSession {
 				$this->dLastUpdate = $row->LastUpdate;
 				$iReturn = 1;
 			}
+		}
+		} catch (PDOException $e) {
+			$e->getMessage() . "<br>\n";
 		}
 		// If session doesn't exist in database, insert record
 		if (! $iReturn) {
