@@ -76,19 +76,16 @@ if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
       $t->assign ("ctl_showdcmod", true);
     $t->assign ("ctl_showreg", true);
     $reg = $q->getDBInfo();
-    $regname = $reg['RegionLabel'];
-    $dbdes = nl2br($reg['RegionDesc']);
-    $dbden = nl2br($reg['RegionDescEN']);
     $t->assign ("log", $q->getRegLogList());
-    $t->assign ("lang", $reg['RegionLangCode']);
-    $t->assign ("dbadm", $reg['OptionAdminURL']);
+    $t->assign ("lang", $reg['I18NFirstLang']);
+    $t->assign ("dbadm", $reg['InfoAdminURL']);
   }
   if (isset($_GET['cmd']) && $_GET['cmd'] == "info")
     $t->assign ("ctl_reginfo", true);
   $t->assign ("reg", $ruuid);
-  $t->assign ("regname", $regname);
-  $t->assign ("dbdes", $dbdes);
-  $t->assign ("dbden", str2js($dbden));
+  $t->assign ("regname", $reg['']);
+  $t->assign ("dbdes", $reg['InfoGeneral']);
+  $t->assign ("dbden", str2js($reg['']));
 }
 else if (isset($_GET['cmd'])) {
 	$q = new Query();

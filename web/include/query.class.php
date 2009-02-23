@@ -319,7 +319,7 @@ class Query extends PDO
 
   /* GET DISASTERS INFO: DATES, DATACARDS NUMBER, ETC */
   function getDBInfo() {
-    $sql = "SELECT * FROM Info";
+    $sql = "SELECT InfoKey, InfoValue, InfoAuxValue FROM Info";
     $res = $this->getResult($sql);
     return $res;
   }

@@ -427,7 +427,7 @@
       else
         return false;
     }
-//-->    var g{-$reg-} = new CheckTree('g{-$reg-}');
+    //var g{-$reg-} = new CheckTree('g{-$reg-}');
   </script>
   <!--
    <link rel="stylesheet" href="../css/tabquery.css" TYPE="text/css">
