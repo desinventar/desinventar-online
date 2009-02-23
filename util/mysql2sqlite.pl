@@ -22,20 +22,24 @@ my $passwd      = 'di8db';
 my $bRun    = 0;
 my $bDebug  = 0;
 my $bCore   = 0;
+my $sRegion = '';
+
 # Script's output is encoded in UTF-8
 binmode(STDOUT, ':utf8');
 
-#print Dumper(keys %{%DesInventarDB::TableDef->{Region}});
-#exit 0;
-
-if (!GetOptions('run|r'   => \$bRun,
-                'debug|d' => \$bDebug,
-                'core|c'  => \$bCore
+if (!GetOptions('run|r'      => \$bRun,
+                'debug|d'    => \$bDebug,
+                'core|c'     => \$bCore,
+                'region|r=s' => \$sRegion
    )) {
    	die "Error : Incorrect parameter list\n";
 }
 if ($bCore) {
 	$sDBFile = 'core.db';
+} else {
+	if ($sRegion eq '') {
+		die "Must specifiy which region to export\n";
+	}
 }
 my $dbin  = DBI->connect($data_source, $username, $passwd) or die "Can't open MySQL database\n";
 my $dbout = DBI->connect("DBI:SQLite:dbname=" . $sDBFile,"","");
@@ -45,7 +49,11 @@ if ($bCore) {
 	&convertTable($dbin, $dbout, "RegionAuth", "RegionAuth");
 	&convertTable($dbin, $dbout, "Users", "User");
 } else {
-	#&convertTable($dbin, $dbout, "COLOMBIA_Event", "Event");
+	#&convertTable($dbin, $dbout, $sRegion . "_Event", "Event");
+	#&convertTable($dbin, $dbout, $sRegion . "_Cause", "Cause");
+	&convertTable($dbin, $dbout, $sRegion . "_GeoLevel", "GeoLevel");
+	#&convertTable($dbin, $dbout, $sRegion . "_Geography", "Geography");
+	#&convertTable($dbin, $dbout, $sRegion . "_Disaster", "Disaster");
 }
 
 
@@ -63,8 +71,11 @@ sub convertTable() {
 	my $sQuery    = "";
 	my $sthin     = null;
 	my $sthout    = null;
+	$sQuery = "DELETE FROM " . $sTableDst . ";";
+	if ($bDebug) {
+		print $sQuery . "\n";
+	}
 	if ($bRun) {
-		$sQuery = "DELETE FROM " . $sTableDst . ";";
 		$sthout = $dbout->prepare($sQuery);
 		$sthout->execute();
 		$icount = $sthout->rows();
@@ -91,9 +102,11 @@ sub convertTable() {
 			} else {
 				$sValue = $sField;
 			}
-			if (exists $o->{$sValue}) {
+			if ($sValue eq 'TIME') {
+				$sValue = time();
+			} elsif (exists $o->{$sValue}) {
 				$sValue = $o->{$sValue};
-			}
+			} 
 			$sFieldList .= $sField . $sAppend;
 			if ( ($sFieldType eq 'STRING') ||
 			     ($sFieldType eq 'DATETIME') ) {

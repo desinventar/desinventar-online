@@ -47,7 +47,31 @@ $VERSION = '1.0';
                  'EventKeyWords/STRING'       => '',
                  'EventCreationDate/DATETIME' => undef,
                  'EventLastUpdate/DATETIME'   => 'EventCreationDate'
-                }
+                },
+            'Cause' =>
+                {'CauseId/STRING'             => undef,
+                 'CauseLangCode/STRING'       => '',
+                 'SyncRecord/TIMESTAMP'       => 'TIME',
+                 'CauseName/STRING'           => 'CauseLocalName',
+                 'CauseDesc/STRING'           => 'CauseLocalDesc',
+                 'CauseActive/BOOLEAN'        => undef,
+                 'CausePreDefined/BOOLEAN'    => undef,
+                 'CauseRGBColor/STRING'       => '',
+                 'CauseKeyWords/STRING'       => '',
+                 'CauseCreationDate/DATETIME' => undef,
+                 'CauseLastUpdate/DATETIME'   => 'CauseCreationDate'
+                },
+            'GeoLevel' =>
+                {'GeoLevelId/STRING'          => undef,
+                 #'GeoLevelLangCode/STRING'    => '',
+                 #'SyncRecord/TIMESTAMP'       => 'TIME',
+                 #'GeoLevelName/STRING'        => undef,
+                 #'GeoLevelDesc/STRING'        => undef,
+                 'GeoLevelActive/INTEGER'      => 1,
+                 #'GeoLevelLayerFile/STRING'   => undef,
+                 #'GeoLevelLayerName/STRING'   => undef,
+                 #'GeoLevelLayerCode/STRING'   => undef
+                }                
             );
 1;
 
