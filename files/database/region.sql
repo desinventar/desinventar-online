@@ -1,5 +1,5 @@
 /* REGION.DB - DesInventar8.2
-2009-02-18
+2009-02-23
 */
 
 DROP TABLE IF EXISTS Info;
@@ -14,59 +14,59 @@ PRIMARY KEY('InfoKey')
 DROP TABLE IF EXISTS Event;
 CREATE TABLE 'Event' ( 
 EventId VARCHAR(50) NOT NULL, 
-EventLangCode VARCHAR(3) NOT NULL, 
+LangIsoCode VARCHAR(3) NOT NULL, 
 SyncRecord DATETIME, 
 EventName VARCHAR(50), 
 EventDesc TEXT, 
-EventActive BOOLEAN NOT NULL DEFAULT TRUE, 
-EventPredefined BOOLEAN NOT NULL DEFAULT False, 
+EventActive INTEGER DEFAULT 1, 
+EventPredefined INTEGER DEFAULT 0, 
 EventRGBColor VARCHAR(10), 
 EventKeyWords TEXT, 
 EventCreationDate DATETIME, 
 EventLastUpdate DATETIME, 
-PRIMARY KEY('EventId','EventLangCode')
+PRIMARY KEY('EventId','LangIsoCode')
 );
 
 DROP TABLE IF EXISTS Cause;
 CREATE TABLE 'Cause' ( 
 CauseId VARCHAR(50) NOT NULL, 
-CauseLangCode VARCHAR(3) NOT NULL, 
+LangIsoCode VARCHAR(3) NOT NULL, 
 SyncRecord DATETIME, 
 CauseName VARCHAR(50), 
 CauseDesc TEXT, 
-CauseActive BOOLEAN NOT NULL DEFAULT TRUE, 
-CausePredefined BOOLEAN NOT NULL DEFAULT False, 
+CauseActive INTEGER DEFAULT 1, 
+CausePredefined INTEGER DEFAULT 0, 
 CauseRGBColor VARCHAR(10), 
 CauseKeyWords TEXT, 
 CauseCreationDate DATETIME, 
 CauseLastUpdate DATETIME, 
-PRIMARY KEY('CauseId','CauseLangCode')
+PRIMARY KEY('CauseId','LangIsoCode')
 );
 
 DROP TABLE IF EXISTS GeoLevel;
 CREATE TABLE 'GeoLevel' ( 
 GeoLevelId INTEGER NOT NULL, 
-GeoLevelLangCode VARCHAR(3) NOT NULL, 
+LangIsoCode VARCHAR(3) NOT NULL, 
 SyncRecord DATETIME, 
 GeoLevelName VARCHAR(50) NOT NULL DEFAULT '---', 
 GeoLevelDesc TEXT NULL, 
-GeoLevelActive BOOLEAN NOT NULL DEFAULT False, 
+GeoLevelActive INTEGER NOT NULL DEFAULT 0, 
 GeoLevelLayerFile VARCHAR(50) NULL, 
 GeoLevelLayerName VARCHAR(50) NULL, 
 GeoLevelLayerCode VARCHAR(50) NULL, 
-PRIMARY KEY('GeoLevelId','GeoLevelLangCode')
+PRIMARY KEY('GeoLevelId','LangIsoCode')
 );
 
 DROP TABLE IF EXISTS Geography;
 CREATE TABLE 'Geography' ( 
 GeographyId VARCHAR(100) NOT NULL, 
-GeographyLangCode VARCHAR(3) NOT NULL, 
+LangIsoCode VARCHAR(3) NOT NULL, 
 SyncRecord DATETIME, 
 GeographyCode VARCHAR(100) NOT NULL DEFAULT '---', 
 GeographyName VARCHAR(200) NOT NULL DEFAULT '---', 
 GeographyLevel INTEGER DEFAULT -1, 
-GeographyActive BOOLEAN NOT NULL DEFAULT TRUE, 
-PRIMARY KEY('GeographyId','GeographyLangCode')
+GeographyActive INTEGER DEFAULT 1, 
+PRIMARY KEY('GeographyId','LangIsoCode')
 );
 
 DROP TABLE IF EXISTS Disaster;
@@ -169,6 +169,7 @@ DBLogType VARCHAR(20),
 DBLogNotes TEXT, 
 DBLogUserName VARCHAR(20)
 );
+
 
 /* Set initial values */
 INSERT INTO Info VALUES ('DBVersion','','','');

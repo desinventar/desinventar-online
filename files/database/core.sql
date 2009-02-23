@@ -1,5 +1,5 @@
 /* CORE.DB - DesInventar8.2
-2009-02-18
+2009-02-23
 */
 
 DROP TABLE IF EXISTS Region;
@@ -11,8 +11,8 @@ CountryIso VARCHAR(3),
 RegionOrder INTEGER, 
 RegionStatus INTEGER, 
 RegionLastUpdate DATETIME, 
-IsCRegion BOOLEAN, 
-IsVRegion BOOLEAN, 
+IsCRegion INTEGER, 
+IsVRegion INTEGER, 
 PRIMARY KEY('RegionId')
 );
 
@@ -57,7 +57,7 @@ CountryIso VARCHAR(3),
 UserCity VARCHAR(50), 
 UserCreationDate  DATETIME, 
 UserNotes TEXT, 
-UserActive BOOLEAN, 
+UserActive INTEGER, 
 PRIMARY KEY('UserName')
 );
 
@@ -75,7 +75,7 @@ CREATE TABLE 'UserSession' (
 SessionId VARCHAR(50), 
 RegionId VARCHAR(50), 
 UserName VARCHAR(50), 
-Valid BOOLEAN, 
+Valid INTEGER, 
 Start DATETIME, 
 LastUpdate DATETIME, 
 PRIMARY KEY('SessionId')
