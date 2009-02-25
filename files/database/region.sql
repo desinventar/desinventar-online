@@ -1,5 +1,5 @@
 /* REGION.DB - DesInventar8.2
-2009-02-23
+2009-02-24
 */
 
 DROP TABLE IF EXISTS Info;
@@ -165,24 +165,24 @@ PRIMARY KEY('DisasterId')
 DROP TABLE IF EXISTS DatabaseLog;
 CREATE TABLE 'DatabaseLog' ( 
 DBLogDate DATETIME, 
+SyncRecord DATETIME, 
 DBLogType VARCHAR(20), 
 DBLogNotes TEXT, 
 DBLogUserName VARCHAR(20)
 );
 
-
 /* Set initial values */
 INSERT INTO Info VALUES ('DBVersion','','','');
-INSERT INTO Info VALUES ('RegCountry','','','');
+INSERT INTO Info VALUES ('RegionId','','','');
+INSERT INTO Info VALUES ('RegionLabel','','','');
+INSERT INTO Info VALUES ('CountryIso','','','');
+INSERT INTO Info VALUES ('RegionLastUpdate','','','');
 INSERT INTO Info VALUES ('I18NFirstLang','','','');
 INSERT INTO Info VALUES ('I18NSecondLang','','','');
 INSERT INTO Info VALUES ('I18NThirdLang','','','');
-INSERT INTO Info VALUES ('SyncMasterURL','','','');
-INSERT INTO Info VALUES ('SyncLastupdate','','','');
 INSERT INTO Info VALUES ('PeriodBeginDate','','','');
 INSERT INTO Info VALUES ('PeriodEndDate','','','');
 INSERT INTO Info VALUES ('PeriodOutOfRange','','','');
-INSERT INTO Info VALUES ('InfoAdminURL','','','');
 INSERT INTO Info VALUES ('InfoCredits','','','');
 INSERT INTO Info VALUES ('InfoGeneral','','','');
 INSERT INTO Info VALUES ('InfoSources','','','');
@@ -190,8 +190,7 @@ INSERT INTO Info VALUES ('InfoSynopsis','','','');
 INSERT INTO Info VALUES ('InfoObservation','','','');
 INSERT INTO Info VALUES ('InfoGeography','','','');
 INSERT INTO Info VALUES ('InfoCartography','','','');
-INSERT INTO Info VALUES ('InfoImageLogo','','','');
-INSERT INTO Info VALUES ('InfoImageIcon','','','');
+INSERT INTO Info VALUES ('InfoAdminURL','','','');
 INSERT INTO Info VALUES ('GeoLimitMinX','','','');
 INSERT INTO Info VALUES ('GeoLimitMinY','','','');
 INSERT INTO Info VALUES ('GeoLimitMaxX','','','');
@@ -208,3 +207,4 @@ INSERT INTO Info VALUES ('Sync_Disaster','','','');
 INSERT INTO Info VALUES ('Sync_EEField','','','');
 INSERT INTO Info VALUES ('Sync_EEData','','','');
 INSERT INTO Info VALUES ('Sync_EEGroup','','','');
+INSERT INTO Info VALUES ('Sync_DatabaseLog','','','');

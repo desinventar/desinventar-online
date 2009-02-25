@@ -127,7 +127,7 @@ class Query extends PDO
     $data = array();
     $res = $this->dreg->query($sql);
     foreach($res as $row)
-      $data[$row['EventId']] = array($row['EventLocalName'], str2js($row['EventLocalDesc']), $row['EventActive']);
+      $data[$row['EventId']] = array($row['EventName'], str2js($row['EventDesc']), $row['EventActive']);
     return $data;
   }
   // DI82
@@ -147,7 +147,7 @@ class Query extends PDO
     $data = array();
     $res = $this->dreg->query($sql);
     foreach($res as $row)
-      $data[$row['CauseId']] = array($row['CauseLocalName'], str2js($row['CauseLocalDesc']), $row['CauseActive']);
+      $data[$row['CauseId']] = array($row['CauseName'], str2js($row['CauseDesc']), $row['CauseActive']);
     return $data;
   }
   // DI82
@@ -305,7 +305,7 @@ class Query extends PDO
     $res = $this->dreg->query($sql);
     foreach($res as $row)
       $data[$row['EEFieldId']] = array($row['EEFieldLabel'], str2js($row['EEFieldDesc']), 
-          $row['EEFieldType'], $row['EEFieldSize'], $row['EEFieldActive'], $row['EEFieldPublic']);
+          $row['EEFieldType'], $row['EEFieldSize'], $row['EEFieldStatus']);
     return $data;
   }
   // DI82
@@ -320,8 +320,11 @@ class Query extends PDO
   /* GET DISASTERS INFO: DATES, DATACARDS NUMBER, ETC */
   function getDBInfo() {
     $sql = "SELECT InfoKey, InfoValue, InfoAuxValue FROM Info";
-    $res = $this->getResult($sql);
-    return $res;
+    //$res = $this->dreg->exec($sql);
+    $res = $this->dreg->query($sql);
+    foreach($res as $row)
+      $data[$row['InfoKey']] = array($row['InfoValue'], $row['InfoAuxValue']);
+    return $data;
   }
   // DI82
   public function getDateRange() {
