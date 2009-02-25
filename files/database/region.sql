@@ -1,5 +1,5 @@
 /* REGION.DB - DesInventar8.2
-2009-02-24
+2009-02-25
 */
 
 DROP TABLE IF EXISTS Info;
@@ -117,17 +117,17 @@ EffectEducationCenters NUMERIC(10),
 EffectMedicalCenters NUMERIC(10), 
 EffectOtherLosses TEXT, 
 EffectNotes TEXT, 
-SectorTransportQ INTEGER, 
-SectorCommunicationsQ INTEGER, 
-SectorReliefQ INTEGER, 
-SectorAgriculturalQ INTEGER, 
-SectorWaterSupplyQ INTEGER, 
-SectorSewerageQ INTEGER, 
-SectorEducationQ INTEGER, 
-SectorPowerQ INTEGER, 
-SectorIndustryQ INTEGER, 
-SectorHealthQ INTEGER, 
-SectorOtherQ INTEGER, 
+SectorTransport INTEGER, 
+SectorCommunications INTEGER, 
+SectorRelief INTEGER, 
+SectorAgricultural INTEGER, 
+SectorWaterSupply INTEGER, 
+SectorSewerage INTEGER, 
+SectorEducation INTEGER, 
+SectorPower INTEGER, 
+SectorIndustry INTEGER, 
+SectorHealth INTEGER, 
+SectorOther INTEGER, 
 PRIMARY KEY('DisasterId')
 );
 

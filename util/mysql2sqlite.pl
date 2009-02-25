@@ -45,13 +45,13 @@ my $dbin  = DBI->connect($data_source, $username, $passwd) or die "Can't open My
 my $dbout = DBI->connect("DBI:SQLite:dbname=" . $sDBFile,"","");
 
 if ($bCore) {
-	&convertTable($dbin, $dbout, "Region", "Region");
-	&convertTable($dbin, $dbout, "RegionAuth", "RegionAuth");
-	&convertTable($dbin, $dbout, "Users", "User");
+	#&convertTable($dbin, $dbout, "Region", "Region");
+	#&convertTable($dbin, $dbout, "RegionAuth", "RegionAuth");
+	#&convertTable($dbin, $dbout, "Users", "User");
 } else {
 	#&convertTable($dbin, $dbout, $sRegion . "_Event", "Event");
 	#&convertTable($dbin, $dbout, $sRegion . "_Cause", "Cause");
-	&convertTable($dbin, $dbout, $sRegion . "_GeoLevel", "GeoLevel");
+	#&convertTable($dbin, $dbout, $sRegion . "_GeoLevel", "GeoLevel");
 	#&convertTable($dbin, $dbout, $sRegion . "_Geography", "Geography");
 	#&convertTable($dbin, $dbout, $sRegion . "_Disaster", "Disaster");
 }
@@ -102,8 +102,9 @@ sub convertTable() {
 			} else {
 				$sValue = $sField;
 			}
-			if ($sValue eq 'TIME') {
-				$sValue = time();
+			if ($sValue eq 'DATETIME') {
+				#$sValue = time(); # TimeStamp
+				$sValue = strftime("%Y-%m-%d %H:%M:%S", gmtime); # ISO8601
 			} elsif (exists $o->{$sValue}) {
 				$sValue = $o->{$sValue};
 			} 
