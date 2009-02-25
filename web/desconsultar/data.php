@@ -131,8 +131,7 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 		
 		for ($i = $pin; $i < $pgt; $i++) {
 			$slim = $sql ." LIMIT " . $i * $iRecordsPerPage .", ". $iRecordsPerPage;
-			$res	= $q->dreg->query($slim);
-			$dislist	= $res->fetch(PDO::FETCH_ASSOC);
+			$dislist = $q->getassoc($slim);
 			$dl = $q->printResults($dislist, $export);
 			if ($i == $pin && !empty($dl)) {
 				// Translate Header to Current Language
