@@ -46,7 +46,8 @@ class Query extends PDO
   
   public function getassoc($qry) {
     if (!empty($qry)) {
-      $res = $this->dreg->query($qry);
+      $rst = $this->dreg->query($qry);
+      $res = $rst->fetch(PDO::FETCH_LAZY);
       $data = array();
       foreach($res as $row)
         $data[] = $row;
