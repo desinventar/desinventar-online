@@ -1,8 +1,6 @@
 <script language="php">
   require_once('../include/loader.php');
-  require_once('../include/dictionary.class.php');
-  require_once('../include/query.class.php');
-  $d = new Dictionary(VAR_DIR);
+  $d = new Query();
   if (isset($_GET['m']))
     $mod = $_GET['m'];
   else
@@ -28,10 +26,10 @@
   else
     $t->assign ("title", true);
   if (is_array($show)) {
-    $t->assign ("pagetitle", $show['DicTranslation']);
-    $t->assign ("pagedesc", $show['DicBasDesc']);
-    $t->assign ("pagefull", $show['DicFullDesc']);
-    $t->assign ("urlinfo", $show['DicTechHelp']);
+    $t->assign ("pagetitle", $show['DictTranslation']);
+    $t->assign ("pagedesc", $show['DictBasDesc']);
+    $t->assign ("pagefull", $show['DictFullDesc']);
+    $t->assign ("urlinfo", $show['DictTechHelp']);
   }
   $t->display ("index.tpl");
 </script>
