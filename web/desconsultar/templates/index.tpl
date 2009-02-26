@@ -310,7 +310,7 @@
         $('_G+Kind').value = "BAR";
         $('_G+Period').disabled = false;
         $('_G+Stat').disabled = false;
-        $('_G+Period').value = "Y";
+        $('_G+Period').value = '%Y';
         $('_G+Scale').disabled = false;
         var histt = $(fld).value;
         if (histt.substr(17, 1) == "|") {
@@ -841,8 +841,8 @@
                     {-assign var="ln" value=StadistDisasterGeographyId_$k-}{-$std.$ln[0]-}</option>
   {-/foreach-}
                     <option value="|D.EventId">{-$std.StadistEventId[0]-}</option>
-                    <option value="YEAR|D.DisasterBeginTime">{-$std.StadistDisasterBeginTime_YEAR[0]-}</option>
-                    <option value="MONTH|D.DisasterBeginTime">{-$std.StadistDisasterBeginTime_MONTH[0]-}</option>
+                    <option value="%Y|D.DisasterBeginTime">{-$std.StadistDisasterBeginTime_YEAR[0]-}</option>
+                    <option value="%m|D.DisasterBeginTime">{-$std.StadistDisasterBeginTime_MONTH[0]-}</option>
                     <option value="|D.CauseId">{-$std.StadistCauseId[0]-}</option>
                    </select>
                   </td>

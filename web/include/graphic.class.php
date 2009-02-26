@@ -25,6 +25,7 @@ class Graphic {
 		$sYAxisLabel = end($oLabels);
 		$val = array();
 		$acol = 1;
+		print_r($opc);
 		
 		// Calculate GraphPeriod of the Graph (YEAR, MONTH, WEEK, DAY)
 		$sGraphPeriod = $this->getGraphPeriod($opc['_G+Period']);
@@ -140,9 +141,9 @@ class Graphic {
 				    // Year Loop (always execute)
 					for ($iYear = substr($dateini,0,4); $iYear <= substr($dateend,0,4); $iYear++) {
 						$sDate = substr("0000" . $iYear, -4);
-						if ($sGraphPeriod == "YEAR") {
+						if ($sGraphPeriod == "%Y") {
 							if (!isset($val[$sDate])) { $val[$sDate] = 0; }
-						} elseif ($sGraphPeriod == "WEEK") {
+						} elseif ($sGraphPeriod == "%W") {
 							// WEEK
 							$iWeekIni =  1;
 							$sDate = substr("0000" . $iYear, -4) . "-12-31";
@@ -169,7 +170,7 @@ class Graphic {
 								$iMonthEnd = substr($dateend,5,2);
 							}
 							for($iMonth = $iMonthIni; $iMonth <= $iMonthEnd; $iMonth++) {
-								if ($sGraphPeriod == "MONTH") {
+								if ($sGraphPeriod == "%m") {
 									$sDate = substr("0000" . $iYear, -4) . "-" . 
 									         substr("00" . $iMonth, -2);
 									if (!isset($val[$sDate])) { $val[$sDate] = 0; }
@@ -204,24 +205,24 @@ class Graphic {
 		// Choose presentation options, borders, intervals
 		if (substr($opc['_G+Type'], 2, 19) == "DisasterBeginTime") {
 			$grp = "SINGLE";
-			if ($opc['_G+Period'] != "YEAR") {
-				$itv = 1;			// Interval 2
+			if ($opc['_G+Period'] != "%Y") {
+				$itv = 1;			// Interval 1
 			} else {
 				$itv = 1;
 			}
 			//if ($opc['_G+Stat'] == "");
 			$rl = 40;			// right limit
 			switch($this->sPeriod) {
-			case "YEAR":
+			case "%Y":
 				$bl = 50;
 				break;
-			case "WEEK":
+			case "%W":
 				$bl = 65;
 				break;
-			case "MONTH":
+			case "%Y-%m":
 				$bl = 65;
 				break;
-			case "DAY":
+			case "%Y-%m-%d":
 				$bl = 85; 
 				break;
 			default:
