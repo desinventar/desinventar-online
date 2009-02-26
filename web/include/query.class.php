@@ -47,7 +47,7 @@ class Query extends PDO
   public function getassoc($qry) {
     if (!empty($qry)) {
       $rst = $this->dreg->query($qry);
-      $res = $rst->fetch(PDO::FETCH_LAZY);
+      $res = $rst->fetchAll(PDO::FETCH_NAMED);
       $data = array();
       foreach($res as $row)
         $data[] = $row;
@@ -63,7 +63,8 @@ class Query extends PDO
   }
 
   public function getnumrows($qry) {
-    return $this->base->rowCount($qry);
+    $rst = $this->dreg->query($qry);
+    return $rst->rowCount();
   }
 
   // STANDARDS FUNCTION TO GET GENERAL EVENTS, CAUSES LISTS
@@ -94,21 +95,21 @@ class Query extends PDO
 
   public function getBasicEventList($lg) {
     $sql = "SELECT EventId, EventName, EventDesc FROM DI_Event ".
-            "WHERE EventLangCode='$lg' ORDER BY EventName";
+            "WHERE LangIsoCode='$lg' ORDER BY EventName";
     $data = array();
     $res = $this->base->query($sql);
     foreach($res as $row)
-      $data[$row['EventId']] = array($row['EventLocalName'], $row['EventLocalDesc']);
+      $data[$row['EventId']] = array($row['EventName'], $row['EventDesc']);
     return $data;
   }
   
   public function getBasicCauseList($lg) {
     $sql = "SELECT CauseId, CauseName, CauseDesc FROM DI_Cause ".
-            "WHERE CauseLangCode='$lg' ORDER BY CauseName";
+            "WHERE LangIsoCode='$lg' ORDER BY CauseName";
     $data = array();
     $res = $this->base->query($sql);
     foreach($res as $row)
-      $data[$row['CauseId']] = array($row['CauseLocalName'], $row['CauseLocalDesc']);
+      $data[$row['CauseId']] = array($row['CauseName'], $row['CauseDesc']);
     return $data;
   }
   // DI82

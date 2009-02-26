@@ -58,7 +58,6 @@ if (isset($post['_G+cmd'])) {
 	$opc['Field'] = $post['_G+Field'];
 	$sql = $q->genSQLProcess($qd, $opc);
 	$dislist = $q->getassoc($sql);
-	print_r($sql);
 	if (!empty($dislist)) {
 		// Process results data
 		$dl = $q->prepareGraphic($dislist);
