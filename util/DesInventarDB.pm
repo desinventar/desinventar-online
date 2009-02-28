@@ -91,17 +91,21 @@ $VERSION = '1.0';
                  'DisasterLatitude/DOUBLE'    => undef,
                  'DisasterLongitude/DOUBLE'   => undef,
                  'DisasterSource/STRING'      => undef,
+                 # Record Data
                  'RecordStatus/STRING'        => undef,
                  'RecordStatus/STRING'        => undef,
                  'RecordAuthor/STRING'        => undef,
                  'RecordCreation/DATETIME'    => undef,
                  'RecordLastUpdate/DATETIME'  => undef,
+                 # Event Fields
                  'EventId/STRING'             => undef,
                  'EventNotes/STRING'          => undef,
                  'EventDuration/INTEGER'      => undef,
                  'EventMagnitude/STRING'      => undef,
+                 # Cause Fields
                  'CauseId/STRING'             => undef,
                  'CauseNotes/STRING'          => undef,
+                 # Numeric Effects
                  'EffectPeopleDead/INTEGER'          => undef,
                  'EffectPeopleMissing/INTEGER'       => undef,
                  'EffectPeopleInjured/INTEGER'       => undef,
@@ -111,6 +115,7 @@ $VERSION = '1.0';
                  'EffectPeopleRelocated/INTEGER'     => undef,
                  'EffectHousesDestroyed/INTEGER'     => undef,
                  'EffectHousesAffected/INTEGER'      => undef,
+                 # Stat Fields
                  'EffectPeopleDeadQ/INTEGER'         => 'EffectPeopleDeadStat',
                  'EffectPeopleMissingQ/INTEGER'      => 'EffectPeopleMissingStat',
                  'EffectPeopleInjuredQ/INTEGER'      => 'EffectPeopleInjuredStat',
@@ -120,6 +125,7 @@ $VERSION = '1.0';
                  'EffectPeopleRelocatedQ/INTEGER'    => 'EffectPeopleRelocatedStat',
                  'EffectHousesDestroyedQ/INTEGER'    => 'EffectHousesDestroyedStat',
                  'EffectHousesAffectedQ/INTEGER'     => 'EffectHousesAffectedStat',
+                 #
                  'EffectLossesValueLocal/DOUBLE'     => undef,
                  'EffectLossesValueUSD/DOUBLE'       => undef,
                  'EffectRoads/DOUBLE'                => undef,
@@ -141,7 +147,32 @@ $VERSION = '1.0';
                  'SectorIndustry/INTEGER'            => undef,
                  'SectorHealth/INTEGER'              => undef,
                  'SectorOther/INTEGER'               => undef
-                 }
+                },
+             'DatabaseLog' => 
+                {'DBLogDate/DATETIME'                => undef,
+                 'SyncRecord/DATETIME'               => 'DATETIME',
+                 'DBLogType/STRING'                  => undef,
+                 'DBLogNotes/STRING'                 => undef,
+                 'DBLogUserName/STRING'              => undef
+                },
+             'EEField' =>
+                {'EEFieldId/STRING'      => undef,
+                 'SyncRecord/DATETIME'   => 'DATETIME',
+                 'EEGroupId/STRING'      => undef,
+                 'EEFieldLabel/STRING'   => undef,
+                 'EEFieldDesc/STRING'    => undef,
+                 'EEFieldType/STRING'    => undef,
+                 'EEFieldSize/INTEGER'   => undef,
+                 'EEFieldOrder/INTEGER'  => undef,
+                 'EEFieldStatus/INTEGER' => 'EEFieldActive'
+                },
+             'EEGroup' =>
+                {'EEGroupId/STRING'      => undef,
+                 'SyncRecord/DATETIME'   => 'DATETIME',
+                 'EEGroupLabel/STRING'   => undef,
+                 'EEGroupDesc/STRING'    => undef,
+                 'EEGroupStatus/INTEGER' => 'EEGroupActive'
+                }
             );
 1;
 

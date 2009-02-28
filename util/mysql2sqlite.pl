@@ -54,6 +54,9 @@ if ($bCore) {
 	#&convertTable($dbin, $dbout, $sRegion . "_GeoLevel", "GeoLevel");
 	#&convertTable($dbin, $dbout, $sRegion . "_Geography", "Geography");
 	#&convertTable($dbin, $dbout, $sRegion . "_Disaster", "Disaster");
+	#&convertTable($dbin, $dbout, $sRegion . "_DatabaseLog", "DatabaseLog");
+	#&convertTable($dbin, $dbout, $sRegion . "_EEField", "EEField");
+	#&convertTable($dbin, $dbout, $sRegion . "_EEGroup", "EEGroup");
 }
 
 
