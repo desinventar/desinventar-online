@@ -23,6 +23,7 @@ my $bRun    = 0;
 my $bDebug  = 0;
 my $bCore   = 0;
 my $sRegion = '';
+my $sTableName = '';
 
 # Script's output is encoded in UTF-8
 binmode(STDOUT, ':utf8');
@@ -30,7 +31,9 @@ binmode(STDOUT, ':utf8');
 if (!GetOptions('run|r'      => \$bRun,
                 'debug|d'    => \$bDebug,
                 'core|c'     => \$bCore,
-                'region|r=s' => \$sRegion
+                'region|r=s' => \$sRegion,
+                'table|t=s'  => \$sTableName,
+                
    )) {
    	die "Error : Incorrect parameter list\n";
 }
@@ -45,10 +48,18 @@ my $dbin  = DBI->connect($data_source, $username, $passwd) or die "Can't open My
 my $dbout = DBI->connect("DBI:SQLite:dbname=" . $sDBFile,"","");
 
 if ($bCore) {
-	#&convertTable($dbin, $dbout, "Region", "Region");
-	#&convertTable($dbin, $dbout, "RegionAuth", "RegionAuth");
-	#&convertTable($dbin, $dbout, "Users", "User");
+	&convertTable($dbin, $dbout, "Region", "Region");
+	&convertTable($dbin, $dbout, "RegionAuth", "RegionAuth");
+	&convertTable($dbin, $dbout, "Users", "User");
 } else {
+	@RegionTables = ('Event','Cause','GeoLevel','Geography','Disaster',
+	                 'DatabaseLog','EEField','EEGroup');
+	if ($sTableName ne '') {
+		@RegionTables = ($sTableName);
+	}
+	foreach (@RegionTables) {
+		&convertTable($dbin, $dbout, $sRegion . "_" . $_, $_);
+	}
 	#&convertTable($dbin, $dbout, $sRegion . "_Event", "Event");
 	#&convertTable($dbin, $dbout, $sRegion . "_Cause", "Cause");
 	#&convertTable($dbin, $dbout, $sRegion . "_GeoLevel", "GeoLevel");
@@ -75,9 +86,7 @@ sub convertTable() {
 	my $sthin     = null;
 	my $sthout    = null;
 	$sQuery = "DELETE FROM " . $sTableDst . ";";
-	if ($bDebug) {
-		print $sQuery . "\n";
-	}
+	print $sQuery . "\n";
 	if ($bRun) {
 		$sthout = $dbout->prepare($sQuery);
 		$sthout->execute();
@@ -123,9 +132,7 @@ sub convertTable() {
 		$sFieldList .= ")";
 		$sValueList .= ")";
 		$sQuery = "INSERT INTO " . $sTableDst . " " . $sFieldList . " VALUES " . $sValueList . ";";
-		if ($bDebug) {
-			print $sQuery . "\n";
-		}
+		print $sQuery . "\n";
 		if ($bRun) {
 			$sthout = $dbout->prepare($sQuery);
 			$sthout->execute();
