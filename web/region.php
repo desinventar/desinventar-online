@@ -78,6 +78,7 @@ if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
     $reg = $q->getDBInfo();
     $t->assign ("log", $q->getRegLogList());
     $t->assign ("lang", $reg['I18NFirstLang'][0]);
+    //$t->assign ("lang", $q->getDBInfoByKey('LangIsoCode')['InfoValue']);
     $t->assign ("dbadm", $reg['InfoAdminURL'][0]);
   }
   if (isset($_GET['cmd']) && $_GET['cmd'] == "info")

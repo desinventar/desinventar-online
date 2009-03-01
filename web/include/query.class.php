@@ -347,6 +347,25 @@ class Query extends PDO
 		return $data;
 	}
 	
+	public function getDBInfoByKey($prmInfoKey) {
+		$oData = array('InfoValue' => '', 
+		               'InfoAuxValue' => '');
+		if ($this->dreg != null) {
+			$sQuery = "SELECT * FROM Info WHERE InfoKey='" . $prmInfoKey . "'";
+			try {
+				$result = $this->dreg->query($sQuery, PDO::FETCH_OBJ);
+				foreach($result as $row) {
+					$oData['InfoValue']    = $row->InfoValue;
+					$oData['InfoAuxValue'] = $row->InfoAuxValue;
+					print $oData['InfoValue'] . "<br>";
+				}
+			} catch (PDOException $e) {
+				print "getDBInfoByKey: " . $prmInfoKey . " => " . $e->getMessage();
+			}
+		} //if
+		return $oData;
+	}
+	
   // DI82
   public function getDateRange() {
     $sql = "SELECT MIN(DisasterBeginTime) AS datemin, MAX(DisasterBeginTime)".
