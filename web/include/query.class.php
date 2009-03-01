@@ -32,8 +32,14 @@ class Query extends PDO
 			case 1:
 				$this->regid = func_get_arg(0);
 				$dbr = VAR_DIR ."/". $this->regid ."/desinventar.db";
-				if (file_exists($dbr))
-					$this->dreg = new PDO("sqlite:" . $dbr);
+				$this->dreg = null;
+				try {
+					if (file_exists($dbr)) {
+						$this->dreg = new PDO("sqlite:" . $dbr);
+					}
+				} catch (PDOException $e) {
+					print $e->getMessage();
+				}
 				//          else
 				//            exit();
 				break;
@@ -57,10 +63,19 @@ class Query extends PDO
     return false;
   }
 
-  public function getresult($qry) {
-    $rst = $this->dreg->query($qry);
-    return $rst->fetch(PDO::FETCH_ASSOC);
-  }
+	public function getresult($qry) {
+		$rst = null;
+		$row = null;
+		try {
+			if ($this->dreg != null) {
+				$rst = $this->dreg->query($qry);
+				$row = $rst->fetch(PDO::FETCH_ASSOC);
+			}
+		} catch (PDOException $e) {
+			print $e->getMessage() . "<br>";
+		}
+		return $row;
+	}
 
   public function getnumrows($qry) {
     $rst = $this->dreg->query($qry);
@@ -319,15 +334,19 @@ class Query extends PDO
     return -1;
   }
 
-  /* GET DISASTERS INFO: DATES, DATACARDS NUMBER, ETC */
-  function getDBInfo() {
-    $sql = "SELECT InfoKey, InfoValue, InfoAuxValue FROM Info";
-    //$res = $this->dreg->exec($sql);
-    $res = $this->dreg->query($sql);
-    foreach($res as $row)
-      $data[$row['InfoKey']] = array($row['InfoValue'], $row['InfoAuxValue']);
-    return $data;
-  }
+	/* GET DISASTERS INFO: DATES, DATACARDS NUMBER, ETC */
+	function getDBInfo() {
+		$data = array();
+		if ($this->dreg != null) {
+			$sql = "SELECT InfoKey, InfoValue, InfoAuxValue FROM Info";
+			//$res = $this->dreg->exec($sql);
+			$res = $this->dreg->query($sql);
+			foreach($res as $row)
+				$data[$row['InfoKey']] = array($row['InfoValue'], $row['InfoAuxValue']);
+		} //if
+		return $data;
+	}
+	
   // DI82
   public function getDateRange() {
     $sql = "SELECT MIN(DisasterBeginTime) AS datemin, MAX(DisasterBeginTime)".
@@ -395,14 +414,17 @@ class Query extends PDO
     return $dat['last'];
   }
   
-  public function getRegLogList() {
-    $sql = "SELECT DBLogDate, DBLogType, DBLogNotes FROM DatabaseLog ORDER BY DBLogDate DESC";
-    $data = array();
-    $res = $this->dreg->query($sql);
-    foreach($res as $row)
-      $data[$row['DBLogDate']] = array($row['DBLogType'], str2js($row['DBLogNotes'])); 
-    return $data;
-  }
+	public function getRegLogList() {
+		$data = array();
+		if ($this->dreg != null) {
+			$sql = "SELECT DBLogDate, DBLogType, DBLogNotes FROM DatabaseLog ORDER BY DBLogDate DESC";
+			$data = array();
+			$res = $this->dreg->query($sql);
+			foreach($res as $row)
+				$data[$row['DBLogDate']] = array($row['DBLogType'], str2js($row['DBLogNotes'])); 
+		}
+		return $data;
+	}
 
   /* BASE.DB & CORE.DB -> COUNTRIES, REGIONS AND VIRTUAL REGIONS FUNCTIONS */
   function getCountryByCode($idcnt) {
