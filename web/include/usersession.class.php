@@ -30,7 +30,7 @@ class UserSession {
 		$sQuery = "SELECT * FROM UserSession WHERE SessionId='" . $prmSessionId . "'";
 		$q = new Query();
 		try {
-		if ($result = $q->core->query($sQuery, PDO::FETCH_CLASS)) {
+		if ($result = $q->core->query($sQuery, PDO::FETCH_OBJ)) {
 			while ($row = $result->fetch()) {
 				$this->sSessionId  = $row->SessionId;
 				$this->sRegionId   = $row->RegionId;
@@ -144,9 +144,9 @@ class UserSession {
 		$q = new Query();
 		if ($result = $q->core->query($sQuery)) {
 			$this->sRegionId = $prmRegionId;
-			$sQuery = "SELECT * FROM Region WHERE RegionUUID='" . $this->sRegionId . "'";
+			$sQuery = "SELECT * FROM Region WHERE RegionId='" . $this->sRegionId . "'";
 			if ($result = $q->core->query($sQuery)) {
-				while ($row = $result->fetch_object()) {
+				while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 					$sRegionLangCode = $row->RegionLangCode;
 				}
 			}
@@ -168,13 +168,17 @@ class UserSession {
 			$iReturn = 1;
 		} else {
 			$q = new Query();
-			if ($result = $q->core->query("SELECT * FROM Users WHERE UserName='" . $prmUserName . "'") ) {
-				while ($row = $result->fetch_object()) {
+			$sQuery = "SELECT * FROM User WHERE UserName='" . $prmUserName . "'";
+			try {
+				$result = $q->core->query($sQuery);
+				while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 					if ($row->UserPasswd == $prmUserPasswd) {
 						$iReturn = 1;
 					}
 				} // while
-			}
+			} catch (PDOException $e) {
+				print $e->getMessage();
+			} // catch
 		}
 		return $iReturn;
 	} // function
@@ -182,8 +186,8 @@ class UserSession {
 	public function getUserFullName() {
 		$sUserFullName = "";
 		$q = new Query();
-		if ($result = $q->core->query("SELECT * FROM Users WHERE UserName='" . $this->sUserName . "'") ) {
-			while ($row = $result->fetch_object()) {
+		if ($result = $q->core->query("SELECT * FROM User WHERE UserName='" . $this->sUserName . "'") ) {
+			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 				$sUserFullName = $row->UserFullName;
 			} // while
 		}
@@ -209,7 +213,7 @@ class UserSession {
 		$q = new Query();
 		if ($result = $q->core->query($sQuery) ) {
 			$i = 0;
-			while ($row = $result->fetch_object()) {
+			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 			 $sAuthKey = $row->AuthKey;
 			 $sAuthValue = $row->AuthValue . "/" . $row->AuthAuxValue;
 			 $myPerms[$sAuthkey] = $sAuthValue;
@@ -222,14 +226,14 @@ class UserSession {
 	function getUserRoleList() {
 		$myData = array();
 		$sQuery = "SELECT RegionAuth.*,Region.RegionLabel FROM RegionAuth,Region WHERE " .
-		  " (RegionAuth.RegionUUID = Region.RegionUUID) " .
+		  " (RegionAuth.RegionId = Region.RegionId) " .
 		  " AND (UserName='" . $this->sUserName . "') " .
 		  " AND AuthKey='ROLE'" . 
-		  " ORDER BY RegionAuth.RegionUUID";
+		  " ORDER BY RegionAuth.RegionId";
 		$q = new Query();
 		if ($result = $q->core->query($sQuery) ) {
-			while ($row = $result->fetch_object()) {
-			 $sKey = $row->RegionUUID;
+			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
+			 $sKey = $row->RegionId;
 			 $sValue = $row->AuthAuxValue;
 			 $myData[$sKey]['Role']        = $row->AuthAuxValue;
 			 $myData[$sKey]['RegionLabel'] = $row->RegionLabel;
@@ -241,12 +245,12 @@ class UserSession {
 	// Get basic user info: user=>[email,pass,name,lang,country,city,creadate,iplist,notes,active]
 	function getUserInfo ($username) {
 		$myData = array();
-		$sQuery = "SELECT * FROM Users " .
+		$sQuery = "SELECT * FROM User " .
 		  " WHERE UserName='" . $this->sUserName . "'" .
 		  " ORDER BY UserFullName";
 		$q = new Query();
 		if ($result = $q->core->query($sQuery) ) {
-			while ($row = $result->fetch_object()) {
+			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 				$myData[0] = $row->UserEMail;
 				$myData[1] = $row->UserPasswd;
 				$myData[2] = $row->UserFullName;
@@ -265,11 +269,11 @@ class UserSession {
 	// Send a Password Reminder to an E-mail
 	function sendPasswdReminder($prmEMail) {
 		$myAnswer = '';
-		$sQuery = "SELECT * FROM Users " .
+		$sQuery = "SELECT * FROM User " .
 		  " WHERE (UserEMail='" . $prmEMail . "') ";
 		$q = new Query();
 		if ($result = $q->core->query($sQuery) ) {
-			while ($row = $result->fetch_object()) {
+			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 				$myAnswer = $row->UserEMail;
 				mail($myAnswer, 
 			     "DesInventar - Password Reminder",
@@ -289,13 +293,13 @@ class UserSession {
 	function getUserRole() {
 		$myAnswer = "";
 		$sQuery = "SELECT * FROM RegionAuth WHERE " .
-		  "     ((RegionUUID='') OR (RegionUUID='" . $this->sRegionId  . "')) " .
+		  "     ((RegionId='') OR (RegionId='" . $this->sRegionId  . "')) " .
 		  " AND (UserName='" . $this->sUserName . "') " .
 		  " AND AuthKey='ROLE'" . 
-		  " ORDER BY UserName,RegionUUID";
+		  " ORDER BY UserName,RegionId";
 		$q = new Query();
 		if ($result = $q->core->query($sQuery) ) {
-			while ($row = $result->fetch_object()) {
+			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 				$myAnswer = $row->AuthAuxValue;
 			} // while
 		}
@@ -304,7 +308,7 @@ class UserSession {
 	
 	public function setUserRole($prmUserName, $prmRegionId, $prmRole) {
 		$myAnswer = '';
-		$sWhereQuery = " WHERE (RegionUUID='" . $prmRegionId . "'" .
+		$sWhereQuery = " WHERE (RegionId='" . $prmRegionId . "'" .
 		              "   AND (UserName='" . $prmUserName . "'" .
 		              "   AND (Authkey='ROLE') ";
 		$sQuery = "SELECT * FROM RegionAuth " . $sWhereQuery;
@@ -336,13 +340,13 @@ class UserSession {
 			$opt = " 1=1";
 		if ($prmStatus == "ACTIVE")
 			$opt .= " AND RegionActive = True";
-		$sQuery = "SELECT RegionUUID, RegionLabel FROM Region " .
+		$sQuery = "SELECT RegionId, RegionLabel FROM Region " .
 		  " WHERE $opt ORDER BY RegionLabel";
 		$myData = array();
 		$q = new Query();
 		if ($result = $q->core->query($sQuery) ) {
-			while ($row = $result->fetch_object()) {
-			 $sKey = $row->RegionUUID;
+			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
+			 $sKey = $row->RegionId;
 			 $sValue = $row->RegionLabel;
 			 $myData[$sKey] = $sValue;
 			} // while

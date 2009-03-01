@@ -27,7 +27,7 @@ if (isset($_SERVER["DI8WEB"])) {
 	define("WWWDIR"  , "/var/www/desinventar");
 	define("WWWURL"  , "/desinventar-data");
 	define("DATADIR" , "/var/lib/desinventar");
-	define("CACHEDIR", "/var/cache/Smarty/di8");
+	define("CACHEDIR", "/var/cache/Smarty");
 	define("FONTDIR" , "/usr/share/fonts/liberation/fonts.txt");	
 	define("DICT_DIR", SOFTDIR . "/files");
 	define("VAR_DIR" , DATADIR);
@@ -35,8 +35,8 @@ if (isset($_SERVER["DI8WEB"])) {
 	define("MAPS_DIR", DATADIR);        // mapfiles dir
 	define("LOGO_DIR", VAR_DIR. '/logo');        // database logos dir
 	define("CART_DIR", DATADIR);       // Cartography shapes dir
-	define("SMTY_DIR", CACHEDIR . '/templates_c'); // Smarty temp dir
-	define("TMPM_DIR", CACHEDIR . '/tempmap');     // Mapserver temp dir
+	define("SMTY_DIR", CACHEDIR); // Smarty temp dir
+	define("TMPM_DIR", CACHEDIR);     // Mapserver temp dir
 } else {
 	if (isset($_SERVER["DI8WEBLOCAL"])) {
 		define("BASE", $_SERVER["DI8WEBLOCAL"]);
