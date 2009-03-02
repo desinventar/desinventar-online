@@ -310,7 +310,7 @@
         $('_G+Kind').value = "BAR";
         $('_G+Period').disabled = false;
         $('_G+Stat').disabled = false;
-        $('_G+Period').value = '%Y';
+        $('_G+Period').value = 'YEAR';
         $('_G+Scale').disabled = false;
         var histt = $(fld).value;
         if (histt.substr(17, 1) == "|") {
@@ -583,10 +583,10 @@
               <br><br>
               <b>{-#dorderby#-}</b><br>
               <select id="_D+SQL_ORDER" name="_D+SQL_ORDER" class="fixw" size="5">
-                <option value="D.DisasterBeginTime, D.EventId, D.DisasterGeographyId" selected>{-#ddeg#-}</option>
-                <option value="D.DisasterBeginTime, D.DisasterGeographyId, D.EventId">{-#ddge#-}</option>
-                <option value="D.DisasterGeographyId, D.EventId, D.DisasterBeginTime">{-#dged#-}</option>
-                <option value="D.EventId, D.DisasterBeginTime, D.DisasterGeographyId">{-#dedg#-}</option>
+                <option value="D.DisasterBeginTime, V.EventName, G.GeographyName" selected>{-#ddeg#-}</option>
+                <option value="D.DisasterBeginTime, D.DisasterGeographyId, V.EventName">{-#ddge#-}</option>
+                <option value="G.GeographyName, V.EventName, D.DisasterBeginTime">{-#dged#-}</option>
+                <option value="V.EventName, D.DisasterBeginTime, G.GeographyName">{-#dedg#-}</option>
                 <option value="D.DisasterSerial">{-#dserial#-}</option>
                 <option value="D.RecordCreation">{-#dcreation#-}</option>
                 <option value="D.RecordLastUpdate">{-#dlastupd#-}</option>
@@ -726,19 +726,19 @@
                   <select id="_G+Period" name="_G+Period" class="fixw"
                   		onMouseOver="showtip('{-$dic.GraphPeriod[2]-}');">
                     <option value=""></option>
-                    <option value="%Y" selected>{-#gperannual#-}</option>
-                    <option value="%Y-%m">{-#gpermonth#-}</option>
-                    <option value="%W">{-#gperweek#-}</option>
-                    <option value="%Y-%m-%d">{-#gperday#-}</option>
+                    <option value="YEAR" selected>{-#gperannual#-}</option>
+                    <option value="YMONTH">{-#gpermonth#-}</option>
+                    <option value="YWEEK">{-#gperweek#-}</option>
+                    <option value="YDAY">{-#gperday#-}</option>
                   </select>
                   <br>
                   <b onMouseOver="showtip('{-$dic.GraphSeaHistogram[2]-}');">{-#GHISTOANNUAL#-}</b><br>
                   <select id="_G+Stat" name="_G+Stat" class="fixw"
                   		onMouseOver="showtip('{-$dic.GraphSeaHistogram[2]-}');">
                   	<option value=""></option>
-                    <option value="%j">{-#gseaday#-}</option>
-                    <option value="%W">{-#gseaweek#-}</option>
-                    <option value="%m">{-#gseamonth#-}</option>
+                    <option value="DAY">{-#gseaday#-}</option>
+                    <option value="WEEK">{-#gseaweek#-}</option>
+                    <option value="MONTH">{-#gseamonth#-}</option>
                   </select>
                  </td>
                  <td style="width:240px">
@@ -841,8 +841,8 @@
                     {-assign var="ln" value=StadistDisasterGeographyId_$k-}{-$std.$ln[0]-}</option>
   {-/foreach-}
                     <option value="|D.EventId">{-$std.StadistEventId[0]-}</option>
-                    <option value="%Y|D.DisasterBeginTime">{-$std.StadistDisasterBeginTime_YEAR[0]-}</option>
-                    <option value="%m|D.DisasterBeginTime">{-$std.StadistDisasterBeginTime_MONTH[0]-}</option>
+                    <option value="YEAR|D.DisasterBeginTime">{-$std.StadistDisasterBeginTime_YEAR[0]-}</option>
+                    <option value="MONTH|D.DisasterBeginTime">{-$std.StadistDisasterBeginTime_MONTH[0]-}</option>
                     <option value="|D.CauseId">{-$std.StadistCauseId[0]-}</option>
                    </select>
                   </td>

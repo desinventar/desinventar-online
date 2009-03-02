@@ -25,25 +25,28 @@ class Query extends PDO
 				$this->core = new PDO("sqlite:" . $dbc);
 			else
 				$this->rebuildCore($dbc); // Rebuild data from directory..
-			switch($num_args) {
-			case 0:
-				$this->sSessionId = uuid();
+			switch ($num_args) {
+			  case 0:
+			    $this->sSessionId = uuid();
 				break;
-			case 1:
-				$this->regid = func_get_arg(0);
-				$dbr = VAR_DIR ."/". $this->regid ."/desinventar.db";
-				$this->dreg = null;
-				try {
-					if (file_exists($dbr)) {
-						$this->dreg = new PDO("sqlite:" . $dbr);
-					}
-				} catch (PDOException $e) {
-					print $e->getMessage();
-				}
-				//          else
-				//            exit();
-				break;
-			} //switch
+				case 1:
+				  $this->regid = func_get_arg(0);
+				  $dbr = VAR_DIR ."/". $this->regid ."/desinventar.db";
+          $this->dreg = null;
+          if (file_exists($dbr)) {
+            try {
+              $this->dreg = new PDO("sqlite:" . $dbr);
+            }
+            catch (PDOException $e) {
+              print $e->getMessage();
+            }
+          }
+          else {
+            echo "Region not exist. Contact Administrator.";
+            exit();
+          }
+        break;
+			}
 		} catch (PDOException $e) {
 			print "Error !: " . $e->getMessage() . "<br/>\n";
 			die();
@@ -78,8 +81,8 @@ class Query extends PDO
 	}
 
   public function getnumrows($qry) {
-    $rst = $this->dreg->query($qry);
-    return $rst->rowCount();
+    $rst = $this->getassoc($qry);
+    return count($rst);
   }
 
   // STANDARDS FUNCTION TO GET GENERAL EVENTS, CAUSES LISTS
@@ -127,16 +130,16 @@ class Query extends PDO
       $data[$row['CauseId']] = array($row['CauseName'], $row['CauseDesc']);
     return $data;
   }
-  // DI82
+
   public function getRegionEventList($type, $status, $lang) {
     if ($type == "PREDEF")
-      $sqlt = "EventPreDefined='True'";
+      $sqlt = "EventPreDefined=1";
     else if ($type == "USER")
-      $sqlt = "EventPreDefined='False'";
+      $sqlt = "EventPreDefined=0";
     else
       $sqlt = "'1=1'";	// all
     if ($status == "active")
-      $sqls = "EventActive='True'";
+      $sqls = "EventActive=1";
     else
       $sqls = "'1=1'"; // all
     $sql = "SELECT * FROM Event WHERE ". $sqls ." AND ". 
@@ -147,16 +150,16 @@ class Query extends PDO
       $data[$row['EventId']] = array($row['EventName'], str2js($row['EventDesc']), $row['EventActive']);
     return $data;
   }
-  // DI82
+
   public function getRegionCauseList($type, $status, $lang) {
     if ($type == "PREDEF")
-      $sqlt = "CausePreDefined='True'";
+      $sqlt = "CausePreDefined=1";
     else if ($type == "USER")
-      $sqlt = "CausePreDefined='False'";
+      $sqlt = "CausePreDefined=0";
     else
       $sqlt = "'1=1'";	// all
     if ($status == "active")
-      $sqls = "CauseActive='True'";
+      $sqls = "CauseActive=1";
     else
       $sqls = "'1=1'"; // all
     $sql = "SELECT * FROM Cause WHERE ". $sqls ." AND ". 
@@ -167,7 +170,7 @@ class Query extends PDO
       $data[$row['CauseId']] = array($row['CauseName'], str2js($row['CauseDesc']), $row['CauseActive']);
     return $data;
   }
-  // DI82
+
   /***** READ OBJECTS :: EVENT, CAUSE, GEOGRAPHY, GEOLEVEL READ *****/
   public function isvalidObjectToInactivate($id, $obj) {
     switch ($obj) {
@@ -182,7 +185,7 @@ class Query extends PDO
     else
       return true;
   }
-  // DI82
+
   public function isvalidObjectName($id, $sugname, $obj) {
     switch ($obj) {
       case DI_EVENT:			$name = "EventName";			$table = "Event";			$fld = "EventId";			break;
@@ -224,7 +227,21 @@ class Query extends PDO
     else
       return null;
   }
-  //DI82
+
+  public function getObjectColor($val, $obj) {
+    switch ($obj) {
+      case DI_EVENT:			$color = "EventRGBColor";			$table = "Event";			$fld = "EventName";		break;
+      case DI_CAUSE:			$color = "CauseRGBColor";			$table = "Cause";			$fld = "CauseName";		break;
+      default:						return null; 		break;
+    }
+    $sql = "SELECT $color FROM $table WHERE $fld = '$val'";
+    $res = $this->getresult($sql);
+    if (isset($res[$color]))
+      return $res[$color];
+    else
+      return null;
+  }
+
 /*** GEOGRAPHY & GEO-LEVELS QUERIES  ***/
   function buildGeographyId($fid, $lev) {
     $sql = "SELECT MAX(GeographyId) AS max FROM Geography WHERE GeographyId ".
@@ -236,7 +253,7 @@ class Query extends PDO
     $newid = $fid . sprintf("%05s", $myid);
     return $newid;
   }
-  //DI82
+
   function getGeoNameById($geoid) {
     if ($geoid == "")
       return null;
@@ -253,7 +270,7 @@ class Query extends PDO
       $data .= $row['GeographyName'] . "/";
     return $data;
   }
-  //DI82
+
   /*** GEOGRAPHY ***/
   function loadGeography($level) {
     if (!is_numeric($level) && $level >= 0)
@@ -266,7 +283,7 @@ class Query extends PDO
       $data[$row['GeographyId']] = array($row['GeographyCode'], str2js($row['GeographyName']), $row['GeographyActive']);
     return $data;
   }
-  //DI82
+
   function loadGeoChilds($geoid) {
     $level = $this->getNextLev($geoid);
     $sql = "SELECT * FROM Geography WHERE GeographyId LIKE '". $geoid .
@@ -281,7 +298,7 @@ class Query extends PDO
   function getNextLev($geoid) {
     return (strlen($geoid) / 5);
   }
-  // DI82
+
   function loadGeoLevels($mapping) {
     $opc = "";
     if ($mapping == "map")
@@ -294,7 +311,7 @@ class Query extends PDO
             $row['GeoLevelLayerFile'], $row['GeoLevelLayerCode'], $row['GeoLevelLayerName']);
     return $data;
   }
-  // DI82
+
   function getMaxGeoLev() {
     $sql = "SELECT MAX(GeoLevelId) AS max FROM GeoLevel";
     $res = $this->getresult($sql);
@@ -302,7 +319,7 @@ class Query extends PDO
       return $res['max'];
     return -1;
   }
-  // DI82
+
   function loadGeoLevById($geolevid) {
     if (!is_numeric($geolevid))
       return null;
@@ -313,7 +330,7 @@ class Query extends PDO
       $data = array(str2js($row['GeoLevelName']), str2js($row['GeoLevelDesc']));
     return $data;
   }
-  // DI82
+
   function getEEFieldList($act) {
     $sql = "SELECT * FROM EEField";
     if ($act != "")
@@ -325,7 +342,7 @@ class Query extends PDO
           $row['EEFieldType'], $row['EEFieldSize'], $row['EEFieldStatus']);
     return $data;
   }
-  // DI82
+
   function getEEFieldSeries() {
     $sql = "SELECT COUNT(EEFieldId) as count FROM EEField";
     $res = $this->getresult($sql);
@@ -347,14 +364,14 @@ class Query extends PDO
 		return $data;
 	}
 	
-  // DI82
+
   public function getDateRange() {
     $sql = "SELECT MIN(DisasterBeginTime) AS datemin, MAX(DisasterBeginTime)".
           " AS datemax FROM Disaster WHERE RecordStatus='PUBLISHED'";
     $res = $this->getresult($sql);
     return array($res['datemin'], $res['datemax']);
   }
-  // DI82
+
   public function getDisasterFld() {
     $sql = "DESCRIBE ". $this->regid ."_Disaster";
     $res = $this->getassoc($sql);
@@ -362,7 +379,7 @@ class Query extends PDO
       $fld[] = $it['Field'];
     return $fld;
   }
-  // DI82
+
   public function getDisasterBySerial($diser) {
     $sql = "SELECT * FROM Disaster WHERE DisasterSerial='$diser'";
     $res = $this->dreg->query($sql);
@@ -617,7 +634,9 @@ class Query extends PDO
       $e['Eff'] = "(". $e['Eff'] ." 1!=1)";
     else
       $e['Eff'] = "(". $e['Eff'] ." 1=1)";
-    $e['Item'] .= "1=1";
+    $lan = "spa"; // select from local languages of database..
+    $e['Item'] .= "D.EventId=V.EventId AND D.CauseId=C.CauseId AND D.DisasterGeographyId=G.GeographyId ".
+                  "AND V.LangIsoCode='$lan' AND C.LangIsoCode='$lan' AND G.LangIsoCode='$lan'";
     foreach ($e as $i)
       $sql .= "$i AND ";
     $sql .= "D.DisasterId = E.DisasterId $serial ";
@@ -627,21 +646,25 @@ class Query extends PDO
 
   /* Counter results */
   public function genSQLSelectCount($whr) {
-    $sql = "SELECT COUNT(D.DisasterId) as counter FROM Disaster AS D, EEData AS E ";
+    $sql = "SELECT COUNT(D.DisasterId) as counter FROM Disaster AS D, EEData AS E, Event AS V, Cause AS C, Geography AS G ";
     if ($this->chkSQLWhere($whr))
       return ($sql . $whr);
     return false;
   }
 
   /* Generate SQL to data lists */
-  public function genSQLSelectData ($dat, $fld, $order) {
-    /* Process fields to show */
-    $sql = "SELECT ". $fld ." FROM Disaster AS D, EEData AS E ";
-    if ($this->chkSQLWhere($dat)) {
-      $sql .= $dat;
+  public function genSQLSelectData ($whr, $fld, $order) {
+    $fld = str_ireplace("D.EventId", "V.EventName", $fld); //Join with Event table
+    $fld = str_ireplace("D.EventName", "V.EventName", $fld); //Join with Event table
+    $fld = str_ireplace("D.CauseId", "C.CauseName", $fld); //Join with Cause table
+    $fld = str_ireplace("D.CauseName", "C.CauseName", $fld); //Join with Cause table
+    $fld = str_ireplace("D.GeographyName", "G.GeographyName", $fld);
+    // Process fields to show
+    $sql = "SELECT ". $fld ." FROM Disaster AS D, EEData AS E, Event AS V, Cause AS C, Geography AS G ";
+    if ($this->chkSQLWhere($whr)) {
+      $sql .= $whr;
       if (!empty($order))
         $sql .= "ORDER BY $order";
-      //echo $sql;
       return ($sql);
     }
     else
@@ -662,28 +685,38 @@ class Query extends PDO
         case "D.DisasterBeginTime":
           // Check if exist Operator(s): Year, month, week, day
           if (!empty($gp[0])) {
-            $sel[$j] = "";
-            $grp[$j] = "";
+            switch ($gp[0]) {
+              case "YEAR":	$period = "%Y"; break;
+              case "YMONTH":$period = "%Y-%m"; break;
+              case "MONTH":	$period = "%m"; break;
+              case "YWEEK":	$period = "%Y-%W"; break;
+              case "WEEK":	$period = "%W"; break;
+              case "YDAY": 	$period = "%Y-%j"; break; 
+              case "DAY": 	$period = "%j"; break; 
+            }
+            $sel[$j] = "STRFTIME('$period',". $gp[1] .") ";
+            $grp[$j] = "STRFTIME('$period',". $gp[1] .") ";
+/*
             $per = explode("-", $gp[0]);
             foreach ($per as $period) {
               if (!empty($period)) {
               	// 2009-02-02 (jhcaiced) This should add a leading zero
               	// to month and day names in labels for graphs, so the 
               	// labels equal length and ordered correctly.
-/*              	$iLabelLength = 2;
+              	$iLabelLength = 2;
                 if ($period == 'YEAR')
                   $iLabelLength = 4;
                 $sPeriod = $period;
                 if ($sPeriod == "WEEK")
                   $sPeriod = "WEEKOFYEAR";
                 $sel[$j] .= "RIGHT(CONCAT('0'," . "$sPeriod(". $gp[1] .")),$iLabelLength),'-',";
-                $grp[$j] .= "$sPeriod(". $gp[1] ."), ";*/
+                $grp[$j] .= "$sPeriod(". $gp[1] ."), ";
                 $sel[$j] .= "STRFTIME('$period',". $gp[1] .") ";
                 $grp[$j] .= "STRFTIME('$period',". $gp[1] .") ";
               }
             }
-            $sel[$j] .= " AS ". substr($gp[1],2) ."_". substr($period, 1, 1); // delete last ,'-',
-//            $grp[$j] = substr($grp[$j], 0, -2); // delete last ", "
+*/
+            $sel[$j] .= " AS ". substr($gp[1],2) ."_". $gp[0] ; // delete last ,'-',
           }
           else {
             $sel[$j] = $gp[1];
@@ -740,7 +773,6 @@ class Query extends PDO
       $group = implode(", ", $grp);
       $sql = $this->genSQLSelectData ($dat, $selec, "");
       $sql .= "$where GROUP BY $group";
-      //echo $sql; 
       return ($sql);
     }
     else
@@ -748,7 +780,7 @@ class Query extends PDO
   }
 
   /* Reformat array setting to arr[X1] = array {a, b, c, d..} */
-  function prepareGraphic ($dl) {
+  function prepareList ($dl, $mode) {
     $res = array();
     $j = 0;
     foreach ($dl as $it) {
@@ -756,19 +788,19 @@ class Query extends PDO
         if ($j == 0)
           $res[$k] = array();
         $val = $i;
-        if (substr($k,0,7) == "EventId")
-          $val =  $this->getObjectNameById($i, DI_EVENT);
-        if (substr($k,0,7) == "CauseId")
-          $val = $this->getObjectNameById($i, DI_CAUSE);
-        if (substr($k,0,19) == "DisasterGeographyId")
-          $val = $this->getGeoNameById($i);
+        if (substr($k,0,19) == "DisasterGeographyId") {
+          if ($mode == "GRAPH")
+            $val = $this->getGeoNameById($i);
+          elseif ($mode == "MAPS")
+            $val = $this->getObjectNameById($i, DI_GEOGRAPHY);
+        }
         array_push($res[$k], $val);
       }
       $j++;
     }
     return $res;
   }
-
+/*
   function prepareMaps ($dl) {
     $res = array();
     $j = 0;
@@ -785,7 +817,7 @@ class Query extends PDO
     }
     return $res;
   }
-  
+  */
 	/* Print results like associative array or csv */
 	function printResults ($dl, $exp) {
 		$csv = "";
@@ -794,19 +826,9 @@ class Query extends PDO
 			$j = 0;
 			foreach ($dl as $k=>$i) {
 				//$dl[$j]["DATACARD"] = http_build_query($i);
-				if (isset($dl[$j]["EventId"]))
-					$dl[$j]["EventId"] = $this->getObjectNameById($i["EventId"], DI_EVENT);
-				if (isset($dl[$j]["CauseId"]))
-					$dl[$j]["CauseId"] = $this->getObjectNameById($i["CauseId"], DI_CAUSE);
-				if (isset($dl[$j]["DisasterGeographyId"]))
-					$dl[$j]["DisasterGeographyId"] = $this->getGeoNameById($i["DisasterGeographyId"]);
-				// uhmm ugly...
-				if (isset($dl[$j]["DisasterGeographyId_0"]))
-					$dl[$j]["DisasterGeographyId_0"] = $this->getGeoNameById($i["DisasterGeographyId_0"]);
-				if (isset($dl[$j]["DisasterGeographyId_1"]))
-					$dl[$j]["DisasterGeographyId_1"] = $this->getGeoNameById($i["DisasterGeographyId_1"]);
-				if (isset($dl[$j]["DisasterGeographyId_2"]))
-					$dl[$j]["DisasterGeographyId_2"] = $this->getGeoNameById($i["DisasterGeographyId_2"]);
+/*        foreach ($i as $idx=>$val)
+          if (substr($idx, 0, 19) == "DisasterGeographyId")
+            $dl[$j][$idx] = $this->getGeoNameById($i[$idx]);*/
 				if ($exp) {
 					foreach (array_values($dl[$j]) as $vals) {
 						if ($vals == -1)

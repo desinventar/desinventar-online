@@ -7,9 +7,7 @@
 */
 
 require_once('include/loader.php');
- //require_once('include/query.class.php');
 require_once('include/region.class.php');
- //require_once('include/usersession.class.php');
 $t->config_dir = 'include';
 
 function form2region ($val) {

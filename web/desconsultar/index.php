@@ -6,7 +6,6 @@
 
 //ob_start( 'ob_gzhandler' );
 require_once('../include/loader.php');
- //require_once('../include/dictionary.class.php');
 require_once('../include/query.class.php');
 require_once('../include/usersession.class.php');
 
@@ -26,8 +25,6 @@ if (isset($_GET['r']) && !empty($_GET['r'])) {
 	// Direct Acccess Not allowed, do not show anything...
 	exit();
 }
-
- //$d = new Dictionary(VAR_DIR);
 
 // Display Geographic list of childs..
 if (isset($_GET['cmd']) && $_GET['cmd'] == "glist") {
@@ -56,7 +53,7 @@ else {
   }
   else {
     $rinf = $q->getDBInfo();
-    $t->assign ("regname", $rinf['RegionLabel']);
+    $t->assign ("regname", $rinf['RegionLabel'][0]);
     $t->assign ("geol", $q->loadGeography(0));
     $glev = $q->loadGeoLevels("");
     $t->assign ("evepredl", $q->loadEvents("PREDEF", "active", $lg));
@@ -65,12 +62,11 @@ else {
     $t->assign ("cauuserl", $q->loadCauses("USER", "active", $lg));
     $t->assign ("exteffel", $q->getEEFieldList("True"));
     // Get UserRole
-	$role = $us->getUserRole($reg);
-	if (strlen($role) > 0) {
-		$t->assign ("ctl_user", true);
-	} else {
-		$t->assign ("ctl_user", false);
-	}
+    $role = $us->getUserRole($reg);
+    if (strlen($role) > 0)
+      $t->assign ("ctl_user", true);
+    else
+      $t->assign ("ctl_user", false);
     // Set selection map
     $dinf = $q->getDBInfo();
     if (($dinf['GeoLimitMinX'] != "") && ($dinf['GeoLimitMinY'] != "") &&
@@ -127,22 +123,23 @@ else {
   $dc2 = array();
   $dc2 = array_merge($dc2, $q->queryLabelsFromGroup('Disaster', $lg));
   $dc2 = array_merge($dc2, $q->queryLabelsFromGroup('Record|2', $lg));
+  $dc2 = array_merge($dc2, $q->queryLabelsFromGroup('Geography', $lg));
   $dc2 = array_merge($dc2, $q->queryLabelsFromGroup('Event', $lg));
   $dc2 = array_merge($dc2, $q->queryLabelsFromGroup('Cause', $lg));
   $dc2 = array_merge($dc2, $q->queryLabelsFromGroup('Effect', $lg));
   $dc2 = array_merge($dc2, $q->queryLabelsFromGroup('Sector', $lg));
   $t->assign ("dc2", $dc2);
-  $fld = "DisasterSerial,DisasterBeginTime,EventId,DisasterGeographyId,DisasterSiteNotes,".
+  $fld = "DisasterSerial,DisasterBeginTime,EventName,GeographyName,DisasterSiteNotes,".
         "DisasterSource,EffectNotes,EffectPeopleDead,EffectPeopleMissing,EffectPeopleInjured,".
         "EffectPeopleHarmed,EffectPeopleAffected,EffectPeopleEvacuated,EffectPeopleRelocated,".
         "EffectHousesDestroyed,EffectHousesAffected,EffectFarmingAndForest,EffectRoads,".
         "EffectEducationCenters,EffectMedicalCenters,EffectLiveStock,EffectLossesValueLocal,".
         "EffectLossesValueUSD,EffectOtherLosses,SectorTransport,SectorCommunications,SectorRelief,".
         "SectorAgricultural,SectorWaterSupply,SectorSewerage,SectorEducation,SectorPower,SectorIndustry,".
-        "SectorHealth,SectorOther,EventDuration,EventMagnitude,CauseId,CauseNotes";
+        "SectorHealth,SectorOther,EventDuration,EventMagnitude,CauseName,CauseNotes";
   $sda = explode(",", $fld);
   $t->assign ("sda", $sda);
-  $sda1 = explode(",", "DisasterLatitude,DisasterLongitude,RecordAuthor,RecordCreation,RecordLastUpdate,EventNotes");
+  $sda1 = explode(",", "DisasterGeographyId,DisasterLatitude,DisasterLongitude,RecordAuthor,RecordCreation,RecordLastUpdate,EventNotes");
   $t->assign ("sda1", $sda1);	// array_diff_key($dc2, array_flip($sda))
   // MAPS
   if (isset($_GET['v']) && $_GET['v'] == "true")
@@ -162,7 +159,6 @@ else {
   foreach ($ef1 as $k=>$i) {
     $sst[$k] = array($k."Stat|>|-1", $i[0]);
     $nst[$k] = $sst[$k];
-//    $nst[$k."_"] = array("$k|=|-1", "Hay ". $i[0]);
   }
   foreach ($ef2 as $k=>$i)
     $nst[$k] = array("$k|>|-1", $i[0]);

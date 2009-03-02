@@ -1,13 +1,12 @@
 <script language="php">
   require_once('../include/loader.php');
-  $d = new Query();
+  $q = new Query();
   if (isset($_GET['m']))
     $mod = $_GET['m'];
   else
     $mod = "DI8Info";
   if (isset($_GET['p'])) {
     $pag = $_GET['p'];
-    $q = new Query("");
     if ($pag == "events")
       $t->assign ("eve", $q->loadEvents("BASE", null, $lg));
     if ($pag == "causes")
@@ -18,9 +17,9 @@
   $t->assign ("ctl_page", $pag);
   $t->assign ("ctl_module", $mod);
   if ($mod == "DI8Info" && $pag == "intro")
-    $show = $d->queryLabel('MainPage', 'DI8', $lg);
+    $show = $q->queryLabel('MainPage', 'DI8', $lg);
   else
-    $show = $d->queryLabel($mod, $pag, $lg);
+    $show = $q->queryLabel($mod, $pag, $lg);
   if (isset($_GET['title']) && $_GET['title'] == "no")
     $t->assign ("title", false);
   else

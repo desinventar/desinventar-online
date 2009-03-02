@@ -6,10 +6,6 @@
 
 // Load required Functions
 require_once('include/loader.php');
-
- //require_once('include/query.class.php');
- //require_once('include/usersession.class.php');
- //require_once('include/dictionary.class.php');
 $t->config_dir = 'include';
 
 $d = new Query();
