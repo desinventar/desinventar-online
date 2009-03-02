@@ -32,9 +32,9 @@ if (isset($_SERVER["DI8WEB"])) {
 	define("DICT_DIR", SOFTDIR . "/files");
 	define("VAR_DIR" , DATADIR);
 	define("TMP_DIR" , DATADIR);
-	define("MAPS_DIR", DATADIR);        // mapfiles dir
-	define("LOGO_DIR", VAR_DIR. '/logo');        // database logos dir
-	define("CART_DIR", DATADIR);       // Cartography shapes dir
+//	define("MAPS_DIR", DATADIR);        // mapfiles dir
+//	define("LOGO_DIR", VAR_DIR. '/logo');        // database logos dir
+//	define("CART_DIR", DATADIR);       // Cartography shapes dir
 	define("SMTY_DIR", CACHEDIR); // Smarty temp dir
 	define("TMPM_DIR", CACHEDIR);     // Mapserver temp dir
 } else {
@@ -51,6 +51,7 @@ if (isset($_SERVER["DI8WEB"])) {
 	define("VAR_DIR" , DATADIR . '/var');
 	define("TMP_DIR" , DATADIR . '/tmp');
 	define("CACHEDIR", TMP_DIR);   			 // /var/cache/Smarty/di8
+	define("FONTDIR" , VAR_DIR . '/fonts.txt');
  //	define("DICT_DIR", VAR_DIR);
  //	define("MAPS_DIR", VAR_DIR. '/maps');        // mapfiles dir
  //	define("LOGO_DIR", VAR_DIR. '/logo');        // database logos dir

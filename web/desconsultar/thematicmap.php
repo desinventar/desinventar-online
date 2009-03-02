@@ -97,7 +97,7 @@ if (isset($post['_M+cmd'])) {
       // if is VirtualRegion apply foreach to database..
       $q3 = new Query($rg);
       $rinf = $q3->getDBInfo();
-      $rgl[$kg]['regname'] = $rinf['RegionLabel'];
+      $rgl[$kg]['regname'] = $rinf['RegionLabel'][0];
       // Data Options Interface
       $opc['Group'] = array($post['_M+Type']);
       $lev = explode("|", $post['_M+Type']);
@@ -122,14 +122,21 @@ if (isset($post['_M+cmd'])) {
         if (strlen($m->filename()) > 0) {
           $lon = 0;
           $lat = 0;
+          $minx = $rinf['GeoLimitMinX'][0];
+          $maxx = $rinf['GeoLimitMaxX'][0];
+          $miny = $rinf['GeoLimitMinY'][0];
+          $maxy = $rinf['GeoLimitMaxY'][0];
           //$dinf = $q->getDBInfo();
           // set center
-          if (!empty($rinf['GeoLimitMinX']) && !empty($rinf['GeoLimitMinY']) &&
-              !empty($rinf['GeoLimitMaxX']) && !empty($rinf['GeoLimitMaxY'])) {
-            $lon = (int) (($rinf['GeoLimitMinX'] + $rinf['GeoLimitMaxX']) / 2);
-            $lat = (int) (($rinf['GeoLimitMinY'] + $rinf['GeoLimitMaxY']) / 2);
-            $aln[] = $rinf['GeoLimitMinX'];	$aln[] = $rinf['GeoLimitMaxX'];
-            $alt[] = $rinf['GeoLimitMinY']; $alt[] = $rinf['GeoLimitMaxY'];
+          if (!empty($minx) && !empty($miny) && !empty($maxx) && !empty($maxy)) {
+            $lon = (int) (($minx + $maxx) / 2);
+            $lat = (int) (($miny + $maxy) / 2);
+            $aln[] = $minx;	$aln[] = $maxx;
+            $alt[] = $miny; $alt[] = $maxy;
+          }
+          else {
+            $aln[] = 0;
+            $alt[] = 0;
           }
           $lnl[] = $lon;
           $ltl[] = $lat;
@@ -144,7 +151,8 @@ if (isset($post['_M+cmd'])) {
       $t->assign ("lat", array_sum($ltl)/count($ltl));
       $zln = abs(max($aln) - min($aln));
       $zlt = abs(max($alt) - min($alt));
-      $zoom = round(log(180/max($zln, $zlt))) + 3;
+      $mx = ($zln == 0 || $zlt == 0) ? 1 : max($zln, $zlt); 
+      $zoom = round(log(180/$mx)) + 3;
       $t->assign ("zoom", $zoom);
     }
     $t->assign ("glev", $glev);
@@ -153,13 +161,12 @@ if (isset($post['_M+cmd'])) {
     $t->assign ("qdet", $q3->getQueryDetails($dic, $post));
     if ($post['_M+cmd'] == "export" && !(isset($post['_VREG']) && $post['_VREG'] == "true")) {
       $dinf = $q->getDBInfo();
-      $regname = $dinf['RegionLabel'];
-      if (!empty($dinf['GeoLimitMinX']) && !empty($dinf['GeoLimitMinY']) &&
-          !empty($dinf['GeoLimitMaxX']) && !empty($dinf['GeoLimitMaxY'])) {
-        $minx = $dinf['GeoLimitMinX'];
-        $maxx = $dinf['GeoLimitMaxX'];
-        $miny = $dinf['GeoLimitMinY'];
-        $maxy = $dinf['GeoLimitMaxY'];
+      $regname = $dinf['RegionLabel'][0];
+      $minx = $dinf['GeoLimitMinX'][0];
+      $maxx = $dinf['GeoLimitMaxX'][0];
+      $miny = $dinf['GeoLimitMinY'][0];
+      $maxy = $dinf['GeoLimitMaxY'][0];
+      if (!empty($minx) && !empty($miny) && !empty($maxx) && !empty($maxy)) {
         $w = (int) ($maxx - $minx) * 50;
         $h = (int) ($maxy - $miny) * 50;
         $url = "/cgi-bin/mapserv?map=". $m->filename() ."&SERVICE=WMS&VERSION=1.1.1".
@@ -185,7 +192,7 @@ elseif (isset($get['cmd']) && $get['cmd'] == "getkml") {
   exit();
 }
 $t->assign ("dic", $dic);
-$t->assign ("basemap", SOFTDIR . "/worldmap/worldmap.map");
+$t->assign ("basemap", VAR_DIR . "/_WORLD/region.map");
 
 if (LNX) {
   $t->assign ("shw_server", true);

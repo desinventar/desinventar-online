@@ -7,10 +7,12 @@
  <head>
 	<meta http-equiv="Pragma" content="text/html; charset=utf-8; no-cache" />
 {-if $shw_server-}
-<!--	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAfQolBKtJvhOLwVfLoxEfMBQ77LACC71meKxbfZwyDLYGQlGiIRTFJ_UlTeqhUqMf6iE54G8kcN3sJQ"></script>-->
-{-/if-}
+<!--
+	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAfQolBKtJvhOLwVfLoxEfMBQ77LACC71meKxbfZwyDLYGQlGiIRTFJ_UlTeqhUqMf6iE54G8kcN3sJQ"></script>
 	<script src='http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.1'></script>
 	<script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid=euzuro-openlayers"></script>
+-->
+{-/if-}
 	<script src="/openlayers/lib/OpenLayers.js"></script>
 	<script type="text/javascript">
 		var lon = {-if $lon != ''-}{-$lon-}{-else-}0{-/if-};
@@ -28,7 +30,7 @@
 				maxExtent     : new OpenLayers.Bounds(-20037508.34, -20037508.34,
 				                                       20037508.34,  20037508.34),
 				controls: []};
-			map = new OpenLayers.Map('map', options);
+			map = new OpenLayers.Map('map'); // options
 			map.addControl(new OpenLayers.Control.PanZoomBar());
 			map.addControl(new OpenLayers.Control.LayerSwitcher({'ascending':false}));
 			map.addControl(new OpenLayers.Control.KeyboardDefaults());
@@ -55,47 +57,44 @@
   {-/foreach-}
  {-/if-}
 {-/foreach-}
-			// WMS Base Maps
-			var base = new OpenLayers.Layer.WMS("** Basemap",
+			// WMS Local Base Map
+			var base = new OpenLayers.Layer.WMS("Local BaseMap",
 					"/cgi-bin/{-$mps-}?", { map:'{-$basemap-}', layers:'base', 'transparent':false, 'format':'png' },
 					{'isBaseLayer':true });
 			map.addLayer(base);
-			
+/*
 			// Microsoft Virtual Earth Base Layer
 			var virtualearth = new OpenLayers.Layer.VirtualEarth("Microsoft Virtual Earth", { 'sphericalMercator': true });
 			map.addLayer(virtualearth);
-			
 			// Yahoo Maps Base Layer
 			var yahoo = new OpenLayers.Layer.Yahoo( "Yahoo Maps", { sphericalMercator: true });
 			map.addLayer(yahoo);
-			
-			var met1 = new OpenLayers.Layer.WMS("Metacarta Basic",
-				"http://labs.metacarta.com/wms/vmap0",
-				{'layers': 'basic', 'transparent': true},
-				{'isBaseLayer':true});
-			/*
-			var met1 = new OpenLayers.Layer.WMS("** Metacarta Basic",
-					"http://labs.metacarta.com/wms-c/Basic.py", {layers:'basic', 'transparent':true, 'format':'png' },
-					{'isBaseLayer':true });
-			*/
-			met1.setVisibility(false);
-			map.addLayer(met1);
-			/*
-			// 2009-02-06 (jhcaiced) Metacarta Satellite doesn't work with Spherical Mercator, this needs to be fixed !!
-			var met2 = new OpenLayers.Layer.WMS("** Metacarta Satellite",
-					"http://labs.metacarta.com/wms-c/Basic.py", {layers:'satellite', 'transparent':true, 'format':'png' },
-					{'isBaseLayer':true });
-			met2.setVisibility(false);
-			map.addLayer(met2);
-			*/
-			
-/*		maps.google.com
+			// maps.google.com
 			var goog1 = new OpenLayers.Layer.Google("** Google Basic",
 					{type: G_NORMAL_MAP, 'sphericalMercator': false});
 			map.addLayer(goog1);
 			var goog2 = new OpenLayers.Layer.Google("** Google Satellite",
 					{type: G_SATELLITE_MAP});
 			map.addLayer(goog2);
+*/
+			var met1 = new OpenLayers.Layer.WMS("Metacarta Basic",
+				"http://labs.metacarta.com/wms/vmap0",
+				{'layers': 'basic', 'transparent': true},
+				{'isBaseLayer':true});
+/*
+			var met1 = new OpenLayers.Layer.WMS("** Metacarta Basic",
+					"http://labs.metacarta.com/wms-c/Basic.py", {layers:'basic', 'transparent':true, 'format':'png' },
+					{'isBaseLayer':true });
+*/
+			met1.setVisibility(false);
+			map.addLayer(met1);
+/*
+			// 2009-02-06 (jhcaiced) Metacarta Satellite doesn't work with Spherical Mercator, this needs to be fixed !!
+			var met2 = new OpenLayers.Layer.WMS("** Metacarta Satellite",
+					"http://labs.metacarta.com/wms-c/Basic.py", {layers:'satellite', 'transparent':true, 'format':'png' },
+					{'isBaseLayer':true });
+			met2.setVisibility(false);
+			map.addLayer(met2);
 			// Change map
 			vlayer = new OpenLayers.Layer.Vector("{-#tdrawpoint#-}");
 			map.addLayer(vlayer);
@@ -118,10 +117,13 @@
 			//parent.document.getElementById('frmwait').innerHTML='';
 */
 			// Do a translation of map center coordinates to Spherical Mercator
-			var proj = new OpenLayers.Projection("EPSG:4326");
+			// 2008-03-02 (mayandar) OpenLayers-2.7 Not found...
+/*			var proj = new OpenLayers.Projection("EPSG:4326");
 			var point = new OpenLayers.LonLat(lon, lat);
 			point.transform(proj, map.getProjectionObject());
-			map.setCenter(point, zoom);
+			map.setCenter(point, zoom); 
+*/
+			map.setCenter(new OpenLayers.LonLat(lon, lat), zoom); 
 		}
 		window.onload = function() {
 			var qrydet = parent.document.getElementById('querydetails');
@@ -156,7 +158,6 @@
 				<p align="right">{-#trepnum#-}: {-$tot-}</p>
 				<hr>
 				<h4>{-#tmapof#-} {-$rgl[0].info.TITLE-}</h4>
-<!--
 				<p align="justify">{-#lev#-}: {-$rgl[0].info.LEVEL-}; 
 {-foreach key=k item=i from=$rgl[0].info-}
  {-if $k == "GEO"-}<i>{-#geo#-}:</i> {-$i-}; {-/if-}
@@ -168,7 +169,6 @@
  {-if $k == "SOU"-}<i>{-#sou#-}:</i> {-$i-}; {-/if-}
  {-if $k == "SER"-}<i>{-#ser#-}:</i> {-$i-}; {-/if-}
 {-/foreach-}
--->
  {-if !$isvreg-}{-$rgl[0].regname-}{-/if-}</p>
 				<hr>
 {-if $isvreg-}
