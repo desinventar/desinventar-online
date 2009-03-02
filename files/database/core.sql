@@ -1,5 +1,5 @@
 /* CORE.DB - DesInventar8.2
-2009-02-24
+2009-03-01
 */
 
 DROP TABLE IF EXISTS Region;
