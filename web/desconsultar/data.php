@@ -6,24 +6,6 @@
 
 require_once('../include/loader.php');
 
-/*function hash2json($rg, $dlist) {
-  $js = array();
-  foreach ($dlist as $ky=>$vl) {
-    $js[$ky] = "{";
-    foreach ($vl as $k=>$v) {
-      if ($k == "DisasterBeginTime") {
-        $dt = explode("-", $v);
-        if (!isset($dt[0])) $dt[0] = 0; if (!isset($dt[1])) $dt[1] = 0; if (!isset($dt[2])) $dt[2] = 0; 
-        $js[$ky] .= "'". $k ."[0]':'". $dt[0] ."', '". $k ."[1]':'". $dt[1] ."', '". $k ."[2]':'". $dt[2] ."', ";
-      }
-      else 
-        $js[$ky] .= "'$k': '$v', ";
-    }
-    $js[$ky] .= "'_REG': '$rg'}";
-  }
-  return $js;
-}*/
-
 if (isset($_POST['_REG']) && !empty($_POST['_REG']))
 	$reg = $_POST['_REG'];
 elseif (isset($_GET['r']) && !empty($_GET['r']))
@@ -41,6 +23,7 @@ $get  = $_GET;
 $dic = array();
 $dic = array_merge($dic, $q->queryLabelsFromGroup('Disaster', $lg));
 $dic = array_merge($dic, $q->queryLabelsFromGroup('Record|2', $lg));
+$dic = array_merge($dic, $q->queryLabelsFromGroup('Geography', $lg));
 $dic = array_merge($dic, $q->queryLabelsFromGroup('Event', $lg));
 $dic = array_merge($dic, $q->queryLabelsFromGroup('Cause', $lg));
 $dic = array_merge($dic, $q->queryLabelsFromGroup('Effect', $lg));
@@ -80,10 +63,11 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 			$t->assign ("ctl_singlemode", true);
 		} else
 			$fld = $post['_D+Field'];
-		$ord = "D.DisasterBeginTime,D.EventId,D.DisasterGeographyId";
+		$ord = "D.DisasterBeginTime,V.EventName,G.GeographyName";
 		if (isset($post['_D+SQL_ORDER']))
 			$ord = $post['_D+SQL_ORDER'];
 		$sql = $q->genSQLSelectData($qd, $fld, $ord);
+		//echo $sql;
 		$dlt = $q->dreg->query($sqc);
 		
 		if ($post['_D+cmd'] == "result") {

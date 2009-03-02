@@ -46,7 +46,7 @@ $get  = $_GET;
 if (isset($post['_REG']) && !empty($post['_REG'])) {
   $reg = $post['_REG'];
   if (isset($post['_VREG']) && $post['_VREG'] == "true")
-    $q = new Query('');
+    $q = new Query();
   else
     $q = new Query($reg);
 }
@@ -113,7 +113,7 @@ if (isset($post['_M+cmd'])) {
       // get query results
       //if (!empty($dislist)) {
       // generate map
-        $dl = $q3->prepareMaps($dislist);
+        $dl = $q3->prepareList($dislist, "MAPS");
         $info = $q3->getQueryDetails($dic, $post);
         // MAPS Object, RegionId, Level, datalist, ranges, dbinfo, label, maptype
         $m = new Maps($q3, $rg, $lev[0], $dl, $range, $info, $post['_M+Label'], "THEMATIC");

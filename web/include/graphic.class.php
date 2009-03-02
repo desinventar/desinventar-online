@@ -25,12 +25,12 @@ class Graphic {
 		$sYAxisLabel = end($oLabels);
 		$val = array();
 		$acol = 1;
-		print_r($opc);
-		
-		// Calculate GraphPeriod of the Graph (YEAR, MONTH, WEEK, DAY)
-		$sGraphPeriod = $this->getGraphPeriod($opc['_G+Period']);
-		$this->sPeriod = $sGraphPeriod;
-		
+
+		$q = new Query($opc['_REG']);
+
+		// Calculate GraphPeriod of the Graph (YEAR, YMONTH, YWEEK, YDAY)
+		$this->sPeriod = $this->getGraphPeriod($opc['_G+Period']);
+    
 		if ($opc['_G+Mode'] == "ACCUMULATE") {
 			// Cummulative Graph : Add Values in Graph
 			$SumValue = 0;
@@ -40,8 +40,10 @@ class Graphic {
 			}
 		} elseif (count($oLabels) == 3) {
 			// Reformat arrays to set a multiple bar
-			if ($type == "BAR")  { $type = "MULTIBAR";  }
-			if ($type == "LINE") { $type = "MULTILINE"; }
+			if ($type == "BAR")
+			  $type = "MULTIBAR";
+			if ($type == "LINE")
+			  $type = "MULTILINE";
 			
 			// Classify Events, Geo, Cause by temporaly
 			$y2lab = $oLabels[1];
@@ -49,9 +51,8 @@ class Graphic {
 			// convert data in matrix [EVENT][YEAR]=>VALUE
 			foreach ($data[$y2lab] as $k=>$i) {
 				foreach ($data[$sXAxisLabel] as $l=>$j) {
-					if ($k == $l) {
+					if ($k == $l)
 						$tvl[$i][$j] = $data[$sYAxisLabel][$k];
-					}
 				}
 			}
 			
@@ -59,7 +60,6 @@ class Graphic {
 			foreach (array_unique($data[$sXAxisLabel]) as $it) {
 				$xvl[$it] = 0;
 			}
-			
 			foreach ($tvl as $k=>$v) {
 				$res = $v;
 				foreach ($xvl as $l=>$w) {
@@ -85,9 +85,7 @@ class Graphic {
 				reset($val);
 			} elseif (substr($opc['_G+Type'],2,17) == "DisasterBeginTime") {
 				// Complete the data series for XAxis (year,month,day)
-
 				// Get range of dates from Database
-				$q = new Query($opc['_REG']);
 				$ydb = $q->getDateRange();
 				$dateini = $ydb[0];
 				$dateend = $ydb[1];
@@ -124,67 +122,61 @@ class Graphic {
 					$dateend = substr("0000" . $iYear ,-4) . "-" .
 					           substr("00"   . $iMonth,-2) . "-" .
 					           substr("00"   . $iDay  ,-2);
-				} else {
+				}
+				else
 					$dateend = end(array_keys($val));
-				}
-
 				// Delete columns with null values (MONTH,DAY=0)
-				if (isset($val[0]) || isset($val[''])) {
+				if (isset($val[0]) || isset($val['']))
 					$val = array_slice($val, 1, count($val), true);
-				}
-				
-				//if (is_int($dateini) && is_int($dateend) 
-				//    && empty($opc['_G+Stat'])) {
+
+				// Generate YEAR, MONTH, WEEK, DAY series..
 				if (empty($opc['_G+Stat'])) {
 					// Fill data series with zero
-					
-				    // Year Loop (always execute)
+					// Year Loop (always execute)
 					for ($iYear = substr($dateini,0,4); $iYear <= substr($dateend,0,4); $iYear++) {
 						$sDate = substr("0000" . $iYear, -4);
-						if ($sGraphPeriod == "%Y") {
-							if (!isset($val[$sDate])) { $val[$sDate] = 0; }
-						} elseif ($sGraphPeriod == "%W") {
+						if ($this->sPeriod == "YEAR") {
+							if (!isset($val[$sDate]))
+							  $val[$sDate] = 0;
+						}
+						elseif ($this->sPeriod == "YWEEK") {
 							// WEEK
 							$iWeekIni =  1;
 							$sDate = substr("0000" . $iYear, -4) . "-12-31";
 							$iWeekEnd = $this->getWeekOfYear($sDate);
-							if ($iYear == substr($dateini,0,4)) {
+							if ($iYear == substr($dateini,0,4))
 								$iWeekIni = $this->getWeekOfYear($dateini);
-							}
-							if ($iYear == substr($dateend,0,4)) { 
+							if ($iYear == substr($dateend,0,4))
 								$iWeekEnd = $this->getWeekOfYear($dateend);
-							}
 							for($iWeek = $iWeekIni; $iWeek <= $iWeekEnd; $iWeek++) {
 								$sDate = substr("0000" . $iYear, -4) . "-" . 
 								         substr("00" . $iWeek, -2);
-								if (!isset($val[$sDate])) { $val[$sDate] = 0; }
+								if (!isset($val[$sDate]))
+								  $val[$sDate] = 0;
 							} // for
 						} else {
 							// MONTH
 							$iMonthIni =  1;
 							$iMonthEnd = 12;
-							if ($iYear == substr($dateini,0,4)) {
+							if ($iYear == substr($dateini,0,4))
 								$iMonthIni = substr($dateini,5,2);
-							}
-							if ($iYear == substr($dateend,0,4)) { 
+							if ($iYear == substr($dateend,0,4))
 								$iMonthEnd = substr($dateend,5,2);
-							}
 							for($iMonth = $iMonthIni; $iMonth <= $iMonthEnd; $iMonth++) {
-								if ($sGraphPeriod == "%m") {
+								if ($this->sPeriod == "YMONTH") {
 									$sDate = substr("0000" . $iYear, -4) . "-" . 
 									         substr("00" . $iMonth, -2);
-									if (!isset($val[$sDate])) { $val[$sDate] = 0; }
+									if (!isset($val[$sDate]))
+									  $val[$sDate] = 0;
 								} else {
 									// DAY....
 									$iDayIni = 1;
 									$iDayEnd = 30;
 									$sDate = substr("0000" . $iYear, -4) . "-" . substr("00" . $iMonth, -2);
-									if ($sDate == substr($dateini,0,7)) {
+									if ($sDate == substr($dateini,0,7))
 										$iDayIni = substr($dateini,8,2);
-									}
-									if ($sDate  == substr($dateend,0,7)) { 
+									if ($sDate  == substr($dateend,0,7))
 										$iDayEnd = substr($dateend,8,2);
-									}
 									for ($iDay = $iDayIni; $iDay <= $iDayEnd; $iDay++) {
 										$sDate = substr("0000" . $iYear , -4) . "-" . 
 										         substr("00"   . $iMonth, -2) . "-" .
@@ -203,26 +195,21 @@ class Graphic {
 		} // if
 		
 		// Choose presentation options, borders, intervals
+		$itv = 1;			// no interval
 		if (substr($opc['_G+Type'], 2, 19) == "DisasterBeginTime") {
 			$grp = "SINGLE";
-			if ($opc['_G+Period'] != "%Y") {
-				$itv = 1;			// Interval 1
-			} else {
-				$itv = 1;
-			}
-			//if ($opc['_G+Stat'] == "");
 			$rl = 40;			// right limit
 			switch($this->sPeriod) {
-			case "%Y":
+			case "YEAR":
 				$bl = 50;
 				break;
-			case "%W":
+			case "YWEEK":
 				$bl = 65;
 				break;
-			case "%Y-%m":
+			case "YMONTH":
 				$bl = 65;
 				break;
-			case "%Y-%m-%d":
+			case "YDAY":
 				$bl = 85; 
 				break;
 			default:
@@ -231,12 +218,10 @@ class Graphic {
 			}
 		} elseif (substr($opc['_G+Type'],2,18) == "DisasterBeginTime|") {
 			$grp = "MULTIPLE";
-			$itv = 1;			// no interval 
 			$rl = 160;		// right limit
 			$bl = 50;			// bottom limit
 		} else {
 			$grp = "COMPARATIVE";
-			$itv = 1;			// no interval
 			$rl = 30;			// right limit
 			$bl = 120;		// bottom limit more space to xlabels
 		}
@@ -271,7 +256,6 @@ class Graphic {
 				$this->g->xaxis->SetTitle($sXAxisLabel, 'middle');
 				$this->g->xaxis->SetTitlemargin($bl - 30);
 				$this->g->xaxis->title->SetFont(FF_ARIAL, FS_NORMAL);
-				
 				if ($type == "MULTIBAR" || $type == "MULTILINE") {
 					foreach (array_unique($data[$sXAxisLabel]) as $el) {
 						$lbl[] = $el;
@@ -280,7 +264,6 @@ class Graphic {
 				} else {
 					$this->g->xaxis->SetTickLabels(array_keys($val));
 				}
-				
 				$this->g->xaxis->SetFont(FF_ARIAL,FS_NORMAL, 8);
 				$this->g->xaxis->SetTextLabelInterval($itv);
 				$this->g->xaxis->SetLabelAngle(90);
@@ -292,15 +275,6 @@ class Graphic {
 				}
 			} // if
 		} // if
-		
-		// get color palette..
-		if ($sXAxisLabel == "Eventos" || (isset($y2lab) && $y2lab == "Eventos")) {
-			$pal = $this->genPalette($acol, "BYEVENT", array_keys($val));
-		} elseif ($grp == "SINGLE") {
-			$pal = "orange"; //$this->genPalette($acol, "DEG");
-		} else {
-			$pal = $this->genPalette($acol, "FIX", null);
-		}
 		
 		// 2009-02-03 (jhcaiced) Try to avoid overlapping labels in XAxis
 		// by calculating the interval of the labels
@@ -322,6 +296,18 @@ class Graphic {
 		$this->g->subtitle->Set($subti);
 		$this->g->title->SetFont(FF_ARIAL,FS_NORMAL, 12);
 		
+		// get color palette..
+		if (substr_count($opc['_G+Type'], "Event") > 0)
+			$pal = $this->genPalette($acol, DI_EVENT, array_keys($val), $q);
+		elseif (substr_count($opc['_G+Type'], "Cause") > 0)
+			$pal = $this->genPalette($acol, DI_CAUSE, array_keys($val), $q);
+		elseif (substr_count($opc['_G+Type'], "DisasterGeography") > 0)
+			$pal = $this->genPalette($acol, DI_GEOGRAPHY, array_keys($val), null);
+		elseif ($grp == "SINGLE")
+			$pal = "orange"; //$this->genPalette($acol, "DEG");
+		else
+			$pal = $this->genPalette($acol, "FIX", null, null);
+
 		// Choose and draw graphic type
 		switch ($type) {
 		case "BAR":
@@ -390,12 +376,16 @@ class Graphic {
 		}
 		$this->g->Stroke($fname);
 	}
-	
+// uhmm	
 	public function getGraphPeriod($prmOption) {
 		$Index = strrpos($prmOption, "-");
-		if ($Index == FALSE) { $Index = 0; } else { $Index += 1; }
+		if ($Index == FALSE)
+		  $Index = 0; 
+    else
+      $Index += 1;
 		$sGraphPeriod = substr($prmOption,$Index);
-		if ($sGraphPeriod == "") { $sGraphPeriod = "YEAR"; }
+		if ($sGraphPeriod == "")
+		  $sGraphPeriod = "YEAR";
 		return $sGraphPeriod;
 	}
 
@@ -494,81 +484,31 @@ class Graphic {
     return $gl;
   }
   
-  function genPalette($cnt, $gen, $evl) {
-    $col = array("#0000ff","#00ff00", "#ff0000", "#ff00ff", "#00ffff", "#ffff00",
-                 "#c7c7ff","#c782c7", "#ff7f7f", "#ffc7ff", "#c7ffff", "#ffffc7",
-                 "#00007f","#007f00", "#7f0000", "#7f007f", "#007f7f", "#827f00");
-    if ($gen == "FIX") {
-      $r = array(0, 0, 200);
-      $g = array(0, 200, 0);
-      $b = array(200, 0, 0);
-      $j = 0;
-      for ($i=0; $i < $cnt; $i++) {
-        if ($j >= count($col))
-          $j = 0;
-        $pal[] = $col[$j];
-        $j++;
+  // Generate colors from database attrib-color or generate fix palette..
+  function genPalette($cnt, $mode, $evl, $qy) {
+    $pal = array();
+    if ($mode == DI_EVENT || $mode == DI_CAUSE) {
+      // Find in database color attribute
+      foreach ($evl as $k) {
+        $col = $qy->getObjectColor($k, $mode);
+        if (trim($col) == "")
+          $col = dechex(rand(0, 255)) . dechex(rand(0, 255)) . dechex(rand(0, 255));
+        $pal[] = "#". $col;
       }
     }
-    elseif ($gen == "BYEVENT") {
-			foreach ($evl as $item) {
-				switch($item) {
-				  case "INUNDACION":
-				    $col[] = "#0000ff";
-				  break;
-				  case "INCENDIO":
-				    $col[] = "#f91717";
-          break;
-          case "FORESTAL":
-            $col[] = "#fd7b3b";
-          break;
-          case "AVENIDA":
-            $col[] = "#3bfdd4";
-          break;
-          case "TEMPESTAD":
-            $col[] = "#bc3bfd";
-          break;
-          case "VENDAVAL":
-            $col[] = "#fd3bed";
-          break;
-          case "LLUVIAS":
-            $col[] = "#8080ef";
-          break;
-          case "DESLIZAMIENTO":
-            $col[] = "#2cdc2c";
-          break;
-          case "EPIDEMIA":
-            $col[] = "#a9aeae";
-          break;
-				  case "ALUVION":
-				    $col[] = "#6d5008";
-          break;
-          case "SEQUIA":
-            $col[] = "#e8cd12";
-          break;
-          case "SISMO":
-            $col[] = "#08740a";
-          break;
-          case "GRANIZADA":
-            $col[] = "#a9dced";
-          break;
-          case "PLAGA":
-            $col[] = "#cccccc";
-          break;
-        }
-      }
-      //echo "<PRE>"; print_r($evl); print_r($col); echo "</PRE>";
-      $j = 0;
-      for ($i=0; $i < $cnt; $i++) {
-        if ($j >= count($col))
-          $j = 0;
-        $pal[] = $col[$j];
-        $j++;
-      }
-    }
-    // generate degradee palette 
     else {
-      $pal = array();
+      $col = array("#0000ff","#00ff00", "#ff0000", "#ff00ff", "#00ffff", "#ffff00",
+                   "#c7c7ff","#c782c7", "#ff7f7f", "#ffc7ff", "#c7ffff", "#ffffc7",
+                   "#00007f","#007f00", "#7f0000", "#7f007f", "#007f7f", "#827f00");
+      $j = 0;
+      for ($i=0; $i < $cnt; $i++) {
+        if ($j >= count($col))
+          $j = 0;
+        $pal[] = $col[$j];
+        $j++;
+      }
+    }
+/*		// Generate a Degradee palette 
       $cl1 = array(20,   20, 200); // blue
       $cl2 = array(200, 130,  20); // orange
       $v1 = (($cl2[0] - $cl1[0]) / $cnt);
@@ -581,8 +521,9 @@ class Graphic {
         $h3 = dechex($cl1[2] + (int)($med[2] * $i));
         $pal[] = "#". $h1 . $h2 . $h3;
       }
-    }
-    //print_r($pal);
+      $r = array(0, 0, 200);
+      $g = array(0, 200, 0);
+      $b = array(200, 0, 0);*/
     return $pal;
   }
 

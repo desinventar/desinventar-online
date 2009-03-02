@@ -33,10 +33,9 @@ $t->assign ("regname", $regname);
 if (isset($post['_G+cmd'])) {
 	// Process QueryDesign Fields and count results
 	$qd  = $q->genSQLWhereDesconsultar($post);
-	$sqc = $q->genSQLSelectCount($qd);
+/*	$sqc = $q->genSQLSelectCount($qd);
 	$c   = $q->getresult($sqc);
-	$cou = $c['counter'];
-	
+	$cou = $c['counter'];*/
 	// Process Configuration options to Graphic
 	$ele = array();
 	// Prepare Group to complete query
@@ -58,9 +57,10 @@ if (isset($post['_G+cmd'])) {
 	$opc['Field'] = $post['_G+Field'];
 	$sql = $q->genSQLProcess($qd, $opc);
 	$dislist = $q->getassoc($sql);
+//	echo $sql;
 	if (!empty($dislist)) {
 		// Process results data
-		$dl = $q->prepareGraphic($dislist);
+		$dl = $q->prepareList($dislist, "GRAPH");
 		$gl = array();
 		// Translate Labels to Selected Language
 		foreach ($dl as $k=>$i) {
@@ -75,15 +75,10 @@ if (isset($post['_G+cmd'])) {
 				$dk = $k;
 			} //if
 			$gl[$dk] = $i;
-		} // foreach
+		}
 
 		// Construct Graphic Object and Show Page
 		$g = new Graphic($post['_G+Kind'], $post, $gl);
-		/*
-		// $_SESSION['sessionid'] sometimes is null, replace with session_id()
-		$sImageURL  = WWWURL . "/graphs/di8graphic_". $_SESSION['sessionid'] ."_.png";
-		$sImageFile = WWWDIR . "/graphs/di8graphic_". $_SESSION['sessionid'] ."_.png";
-		*/
 		$sImageURL  = WWWURL . "/graphs/di8graphic_". session_id() . ".png";
 		$sImageFile = WWWDIR . "/graphs/di8graphic_". session_id() . ".png";
 		// Wrote graphic to file

@@ -68,6 +68,7 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
     $sdl = $q->totalize($sql);
     $dlt = $q->getresult($sdl);
     $fld = "DisasterId_";
+    //echo $sql;
     // organize groups
     $gp = array();
     foreach ($opc['Group'] as $i) {
