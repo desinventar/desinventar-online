@@ -48,9 +48,9 @@ my $dbin  = DBI->connect($data_source, $username, $passwd) or die "Can't open My
 my $dbout = DBI->connect("DBI:SQLite:dbname=" . $sDBFile,"","");
 
 if ($bCore) {
-	&convertTable($dbin, $dbout, "Region", "Region");
-	&convertTable($dbin, $dbout, "RegionAuth", "RegionAuth");
-	&convertTable($dbin, $dbout, "Users", "User");
+	&convertTable($dbin, "Region", "Region");
+	&convertTable($dbin, "RegionAuth", "RegionAuth");
+	&convertTable($dbin, "Users", "User");
 } else {
 	@RegionTables = ('Event','Cause','GeoLevel','Geography','Disaster',
 	                 'DatabaseLog','EEField','EEGroup');
@@ -58,28 +58,68 @@ if ($bCore) {
 		@RegionTables = ($sTableName);
 	}
 	foreach (@RegionTables) {
-		&convertTable($dbin, $dbout, $sRegion . "_" . $_, $_);
+		&convertTable($dbin, $sRegion . "_" . $_, $_);
 	}
-	#&convertTable($dbin, $dbout, $sRegion . "_Event", "Event");
-	#&convertTable($dbin, $dbout, $sRegion . "_Cause", "Cause");
-	#&convertTable($dbin, $dbout, $sRegion . "_GeoLevel", "GeoLevel");
-	#&convertTable($dbin, $dbout, $sRegion . "_Geography", "Geography");
-	#&convertTable($dbin, $dbout, $sRegion . "_Disaster", "Disaster");
-	#&convertTable($dbin, $dbout, $sRegion . "_DatabaseLog", "DatabaseLog");
-	#&convertTable($dbin, $dbout, $sRegion . "_EEField", "EEField");
-	#&convertTable($dbin, $dbout, $sRegion . "_EEGroup", "EEGroup");
+	
+	# Rebuild Info Table
+	#&rebuildInfoTable($dbin, $sRegion);
 }
 
-
 $dbin->disconnect();
-$dbout->disconnect();
 exit 0;
+
+sub rebuildInfoTable() {
+	my $dbin      = $_[0];
+	my $sRegionId = $_[1];
+	
+	$sth = $dbin->prepare("SELECT * FROM Region WHERE RegionUUID='" . $sRegionId . "'");
+	$sth->execute();
+	while ($r = $sth->fetchrow_hashref()) {
+		&saveInfo('RegionId'        , $r->{RegionUUID}, '');
+		&saveInfo('RegionLabel'     , $r->{RegionLabel}, '');
+		&saveInfo('CountryIso'      , $r->{CountryIsoCode}, '');
+		&saveInfo('RegionLastUpdate', $r->{RegionStructLastUpdate}, '');
+		&saveInfo('PeriodBeginDate' , $r->{PeriodBeginDate}, '');
+		&saveInfo('PeriodEndDate'   , $r->{PeriodEndDate}, '');
+		&saveInfo('PeriodOutOfRange', $r->{OptionOutOfPeriod},'');
+		&saveInfo('GeoLimitMinX'    , $r->{GeoLimitMinX}, '');
+		&saveInfo('GeoLimitMinY'    , $r->{GeoLimitMinY}, '');
+		&saveInfo('GeoLimitMaxX'    , $r->{GeoLimitMaxX}, '');
+		&saveInfo('GeoLimitMaxY'    , $r->{GeoLimitMaxY}, '');
+		&saveInfo('CartoLayerFile'  , $r->{RegionLayerFile}, '');
+		&saveInfo('CartoLayerName'  , $r->{RegionLayerName}, '');
+		&saveInfo('CartoLayerCode'  , $r->{RegionLayerCode}, '');
+		&saveInfo('InfoCredits'     , $r->{RegionCredits}, '');
+	}
+	$sth->finish();	
+
+	$sth = $dbin->prepare("SELECT * FROM DatabaseInfo WHERE RegionUUID='" . $sRegionId . "'");
+	$sth->execute();
+	while ($r = $sth->fetchrow_hashref()) {
+		$sLang = $r->{RegionLangCode};
+		if ($sLang eq 'es') { $sLang = 'spa'; }
+		if ($sLang eq 'en') { $sLang = 'eng'; }
+		if ($slang eq 'fr') { $sLang = 'fre'; }
+		if ($sLang eq 'pr') { $sLang = 'por'; }
+		#&saveInfo('I18NFirstLang', $sLang, '');
+		#&saveInfo('InfoAdminURL', $r->{OptionAdminURL}, '');
+	}
+	$sth->finish();
+}
+
+sub saveInfo() {
+	my $sInfoKey      = $_[0];
+	my $sInfoValue    = $_[1];
+	my $sInfoAuxValue = $_[2];
+	print "UPDATE Info SET InfoValue    ='" . $sInfoValue    . "'," .
+	                      "InfoAuxValue ='" , $sInfoAuxValue . "' " .
+	                      "WHERE InfoKey='" . $sInfoKey . "';" . "\n";
+}
 
 sub convertTable() {
 	my $dbin      = $_[0];
-	my $dbout     = $_[1];
-	my $sTableSrc = $_[2];
-	my $sTableDst = $_[3];
+	my $sTableSrc = $_[1];
+	my $sTableDst = $_[2];
 	#my %oTableDef = %{$_[4]}; # This HASH comes By Reference...
 	my %oTableDef = %{%DesInventarDB::TableDef->{$sTableDst}};
 	my $sQuery    = "";
@@ -87,12 +127,6 @@ sub convertTable() {
 	my $sthout    = null;
 	$sQuery = "DELETE FROM " . $sTableDst . ";";
 	print $sQuery . "\n";
-	if ($bRun) {
-		$sthout = $dbout->prepare($sQuery);
-		$sthout->execute();
-		$icount = $sthout->rows();
-		$sthout->finish;
-	}
 
 	$sQuery = "SELECT * FROM " . $sTableSrc;
 	$sthin = $dbin->prepare($sQuery);
@@ -133,12 +167,10 @@ sub convertTable() {
 		$sValueList .= ")";
 		$sQuery = "INSERT INTO " . $sTableDst . " " . $sFieldList . " VALUES " . $sValueList . ";";
 		print $sQuery . "\n";
-		if ($bRun) {
-			$sthout = $dbout->prepare($sQuery);
-			$sthout->execute();
-			$icount = $sthout->rows();
-			$sthout->finish;
-		}
 	}
 	$sthin->finish;
+	
+	# Save Sync Field
+	$sNow = strftime("%Y-%m-%d %H:%M:%S", gmtime); # ISO8601
+	&saveInfo('Sync_' . $sTableDst, $sNow, '');
 }
