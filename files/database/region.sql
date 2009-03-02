@@ -1,5 +1,5 @@
 /* REGION.DB - DesInventar8.2
-2009-02-25
+2009-03-01
 */
 
 DROP TABLE IF EXISTS Info;
@@ -172,12 +172,12 @@ DBLogUserName VARCHAR(20)
 );
 
 /* Set initial values */
-INSERT INTO Info VALUES ('DBVersion','','','');
+INSERT INTO Info VALUES ('DBVersion','','1.0','');
 INSERT INTO Info VALUES ('RegionId','','','');
 INSERT INTO Info VALUES ('RegionLabel','','','');
 INSERT INTO Info VALUES ('CountryIso','','','');
 INSERT INTO Info VALUES ('RegionLastUpdate','','','');
-INSERT INTO Info VALUES ('I18NFirstLang','','','');
+INSERT INTO Info VALUES ('I18NFirstLang','','eng','');
 INSERT INTO Info VALUES ('I18NSecondLang','','','');
 INSERT INTO Info VALUES ('I18NThirdLang','','','');
 INSERT INTO Info VALUES ('PeriodBeginDate','','','');
