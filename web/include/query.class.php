@@ -956,13 +956,17 @@ class Query extends PDO
             " LabelGroup g where (g.LGName like '". $labgrp ."%') and ".
             "(d.LangIsoCode='". $langID ."') and (d.DictLabelID = g.DictLabelID) ".
             "order by g.LGorder";
-    foreach ($this->base->query($sql) as $row) {
-      $grp = explode("|", $row['lgn']);
-      $dictio[$grp[0].$row['lbn']] = array(
-          $row['DictTranslation'],//utf8_encode($row['DicTranslation']), 
-          $row['DictTechHelp'],//utf8_encode($row['DicTechHelp']),
-          str2js($row['DictBasDesc']), $row['DictFullDesc']);
-    }
+	try {
+		foreach ($this->base->query($sql) as $row) {
+			$grp = explode("|", $row['lgn']);
+			$dictio[$grp[0].$row['lbn']] = array(
+			  $row['DictTranslation'],//utf8_encode($row['DicTranslation']), 
+			  $row['DictTechHelp'],//utf8_encode($row['DicTechHelp']),
+			  str2js($row['DictBasDesc']), $row['DictFullDesc']);
+		} // foreach
+	} catch (PDOException $e) {
+		print $e->getMessage();
+	}
     return $dictio;
   }
 

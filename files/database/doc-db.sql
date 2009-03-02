@@ -198,8 +198,8 @@ insert into LabelGroup values ("508","ERR_","CONSTRAINT_FAIL","9");
 insert into LabelGroup values ("509","ERR_","NO_CONNECTION","10");
 insert into LabelGroup values ("510","ERR_","EVENT_EXISTS","1");
 insert into LabelGroup values ("511","ERR_","EVENT_IN_USE","2");
-insert into Dictionary values ("1","en","Information"," ","General information about the database DesInventar with the intention of providing information about the same."," "); /*1-DB-Region*/
-insert into Dictionary values ("2","en","Id database","No duplicates","Identifier of Database"," "); /*2-DB-RegionUUID*/
+insert into Dictionary values ("1","en","Information"," ","General information about the database DesInventar with the intention of providing information about the same."," "); 
+insert into Dictionary values ("2","en","Id database","No duplicates","Identifier of Database"," "); 
 insert into Dictionary values ("3","en","Database","Name of the database","Label or name of the database"," "); /*3-DB-RegionLabel*/
 insert into Dictionary values ("4","en","Description","Text or key words","General information about the database, which should contain: \n-Period\n-Number of reports\n-Sources of information\n-General description of database."," "); /*4-DB-RegionDesc*/
 insert into Dictionary values ("5","en","English description","Text or key words","Translation of the text from “Descripción” to English."," "); /*5-DB-RegionDescEN*/
