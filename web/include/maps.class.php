@@ -11,14 +11,14 @@ class Maps
 	public $kml = "";
 	
 	/* This class generate mapfile's mapserver
-	   r: Region Object
-	   reg: RegionUUID
-	   lev: Level to generate effects
-	   dl: disasters list
+	   q		: Region Object
+	   reg	: RegionUUID
+	   lev	: Level to generate effects
+	   dl		: disasters list
 	   range: limits, legends and color
-	   info: about map (WMS Metadata)
-	   lbl: Label to print name, code or value..
-	   type: filename, THEMATIC, SELECT, KML
+	   info	: about map (WMS Metadata)
+	   lbl	: Label to print name, code or value..
+	   type	: filename, THEMATIC, SELECT, KML
   */
 	function Maps($q, $reg, $lev, $dl, $range, $info, $lbl, $type) {
 	  $this->url = "http://". $_SERVER['HTTP_HOST'] ."/cgi-bin/mapserv?";
@@ -26,15 +26,15 @@ class Maps
 		if ($type == "KML")
 		  $this->kml = $this->generateKML($q, $reg, $info);
     else {
-      $map = "## DesInventar8.1 autogenerate mapfile\n";
+      $map = "## DesInventar8.2 autogenerate mapfile\n";
       $map .= $this->setHeader($q, $reg, $info, $type);
       $map .= $this->setLayerAdm($q, $reg, $type);
       // mapfile and html template to interactive selection
       if ($type == "SELECT")
         $fp = DATADIR ."/". $reg . "/region.map";
-      // generate effects maps: type=filename | thematic=sessid
       else {
-        $fp = TEMP ."/di8ms_";
+      // generate effects maps: type=filename | thematic=sessid
+        $fp = TMPM_DIR ."/di8ms_";
         $map .= $this->setLayerEff($q, $reg, $lev, $dl, $range, $info, $lbl);
         if ($type == "THEMATIC")
           $fp .= "$reg-". session_id() .".map";
@@ -69,7 +69,7 @@ class Maps
     IMAGETYPE		PNG
 		EXTENT			-180 -90 180 90
 		SIZE				'. $x .' '. $y .'
-		SHAPEPATH		"'. CART_DIR . '/' . $reg .'"
+		SHAPEPATH		"'. VAR_DIR . '/' . $reg . '/"
 		FONTSET			"'. FONTDIR . '"
 		IMAGECOLOR	255 255 255
 		PROJECTION	"proj=latlong" "ellps=WGS84" "datum=WGS84" END
@@ -135,7 +135,7 @@ class Maps
 		$type = "POLYGON";
 		$color = "255 255 255";
 		foreach ($gl as $k=>$i) {
-		  $lp = CART_DIR . '/' . $reg ."/". $i[2];
+		  $lp = VAR_DIR . '/' . $reg ."/". $i[2];
 			if ($this->testLayer($lp, $i[3], $i[4])) {
 				$map .= '
     LAYER
@@ -200,7 +200,7 @@ class Maps
 		$code = $gl[$lev][3];
 		$name = $gl[$lev][4];
 		$map = "";
-    $lp = CART_DIR . '/' . $reg ."/". $data;
+    $lp = VAR_DIR . '/' . $reg ."/". $data;
     if ($this->testLayer($lp, $code, $name)) {
 		  $map = '
     LAYER

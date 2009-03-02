@@ -270,6 +270,7 @@ class Graphic {
 				$this->g->yaxis->SetTitle($sYAxisLabel, 'middle');
 				$this->g->yaxis->SetTitlemargin(40);
 				$this->g->yaxis->title->SetFont(FF_ARIAL, FS_NORMAL);
+				$this->g->yaxis->scale->SetGrace(20);
 				if ($opc['_G+Scale'] == "textlog") {
 					$this->g->yaxis->scale->ticks->SetLabelLogType(LOGLABELS_PLAIN);
 				}
