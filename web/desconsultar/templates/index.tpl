@@ -938,7 +938,9 @@
     <dt>{-#mgeosection#-}</dt>
     <dd>
   {-foreach name=glev key=k item=i from=$glev-}
-      <span class="dlgmsg" onMouseOver="showtip('{-$i[1]-}');">{-$i[0]-}</span> |
+      <span class="dlgmsg" onMouseOver="showtip('{-$i[1]-}');">
+      <!-- Select from Map testing ... -->
+      <a href="javascript:void(null)" onClick="$('ifr').src='/cgi-bin/mapserv?map=/var/lib/desinventar/var/COLOMBIA_2008-01-01_103001/region.map&qlayer=admin00&mode=nquery&searchmap=true';">{-$i[0]-}</a></span> |
   {-/foreach-}
       <div style="height: 280px;" class="dwin" ext:qtip="{-#thlpquery#-}">
  {-/if-}

@@ -22,24 +22,27 @@
 		
 		function init() {
 			var options = {
-				projection    : new OpenLayers.Projection("EPSG:900913"),
+/*				projection    : new OpenLayers.Projection("EPSG:900913"),
 				minResolution : "auto",
 				minExtent     : new OpenLayers.Bounds(-1, -1, 1, 1),
 				units         : "m",
 				maxResolution : 156543.0339,
 				maxExtent     : new OpenLayers.Bounds(-20037508.34, -20037508.34,
-				                                       20037508.34,  20037508.34),
-				controls: []};
-			map = new OpenLayers.Map('map'); // options
-			map.addControl(new OpenLayers.Control.PanZoomBar());
-			map.addControl(new OpenLayers.Control.LayerSwitcher({'ascending':false}));
-			map.addControl(new OpenLayers.Control.KeyboardDefaults());
-			map.addControl(new OpenLayers.Control.MousePosition());
-			map.addControl(new OpenLayers.Control.NavToolbar());
-			//map.addControl(new OpenLayers.Control.MouseToolbar());
-			//map.addControl(new OpenLayers.Control.Permalink());
-			//map.addControl(new OpenLayers.Control.OverviewMap({ minRatio: 10, maxRatio: 26 }));
-			//map.addControl(new OpenLayers.Control.ScaleLine());
+				                                       20037508.34,  20037508.34),*/
+				controls: [
+						new OpenLayers.Control.PanZoomBar(),
+						new OpenLayers.Control.MouseToolbar(),
+						new OpenLayers.Control.LayerSwitcher({'ascending':false}),
+						new OpenLayers.Control.Permalink(),
+						new OpenLayers.Control.ScaleLine(),
+						new OpenLayers.Control.Permalink('permalink'),
+						new OpenLayers.Control.MousePosition(),
+						new OpenLayers.Control.OverviewMap(),
+						new OpenLayers.Control.KeyboardDefaults()
+				],
+				numZoomLevels: 15
+			};
+			map = new OpenLayers.Map('map', options);
 			// Effects layer(s)
 {-foreach name=rgl key=k item=i from=$rgl-}
 			var db{-$k-} = new OpenLayers.Layer.WMS("DI8 / {-$i.regname-}", 
@@ -76,16 +79,14 @@
 			var goog2 = new OpenLayers.Layer.Google("** Google Satellite",
 					{type: G_SATELLITE_MAP});
 			map.addLayer(goog2);
+			var met1 = new OpenLayers.Layer.WMS("** Metacarta Basic",
+					"http://labs.metacarta.com/wms-c/Basic.py", {layers:'basic', 'transparent':true, 'format':'png' },
+					{'isBaseLayer':true });
 */
 			var met1 = new OpenLayers.Layer.WMS("Metacarta Basic",
 				"http://labs.metacarta.com/wms/vmap0",
 				{'layers': 'basic', 'transparent': true},
 				{'isBaseLayer':true});
-/*
-			var met1 = new OpenLayers.Layer.WMS("** Metacarta Basic",
-					"http://labs.metacarta.com/wms-c/Basic.py", {layers:'basic', 'transparent':true, 'format':'png' },
-					{'isBaseLayer':true });
-*/
 			met1.setVisibility(false);
 			map.addLayer(met1);
 /*
@@ -124,6 +125,7 @@
 			map.setCenter(point, zoom); 
 */
 			map.setCenter(new OpenLayers.LonLat(lon, lat), zoom); 
+			if (!map.getCenter()) map.zoomToMaxExtent();
 		}
 		window.onload = function() {
 			var qrydet = parent.document.getElementById('querydetails');
