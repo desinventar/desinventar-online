@@ -53,17 +53,22 @@ class Query extends PDO
 		}
 	}
   
-  public function getassoc($qry) {
-    if (!empty($qry)) {
-      $rst = $this->dreg->query($qry);
-      $res = $rst->fetchAll(PDO::FETCH_NAMED);
-      $data = array();
-      foreach($res as $row)
-        $data[] = $row;
-      return $data;
-    }
-    echo "Query Empty";
-    return false;
+	public function getassoc($sQuery) {
+		$data = false;
+		if (!empty($sQuery)) {
+			try {
+				$data = array();
+				$res = $this->dreg->query($sQuery, PDO::FETCH_ASSOC);
+				foreach($res as $row) {
+					$data[] = $row;
+				} //foreach
+			} catch (PDOException $e) {
+				print $e->getMessage();
+			}
+		} else {
+			echo "Empty Query !!";
+		}
+		return $data;
   }
 
 	public function getresult($qry) {
