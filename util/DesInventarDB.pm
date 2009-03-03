@@ -37,7 +37,7 @@ $VERSION = '1.0';
                 },
             'Event' =>
                 {'EventId/STRING'             => undef,
-                 'LangIsoCode/STRING'         => '',
+                 'LangIsoCode/STRING'         => 'spa',
                  'SyncRecord/DATETIME'        => 'DATETIME',
                  'EventName/STRING'           => 'EventLocalName',
                  'EventDesc/STRING'           => 'EventLocalDesc',
@@ -50,7 +50,7 @@ $VERSION = '1.0';
                 },
             'Cause' =>
                 {'CauseId/STRING'             => undef,
-                 'LangIsoCode/STRING'         => '',
+                 'LangIsoCode/STRING'         => 'spa',
                  'SyncRecord/DATETIME'        => 'DATETIME',
                  'CauseName/STRING'           => 'CauseLocalName',
                  'CauseDesc/STRING'           => 'CauseLocalDesc',
@@ -63,7 +63,7 @@ $VERSION = '1.0';
                 },
             'GeoLevel' =>
                 {'GeoLevelId/STRING'          => undef,
-                 'LangIsoCode/STRING'         => '',
+                 'LangIsoCode/STRING'         => 'spa',
                  'SyncRecord/DATETIME'        => 'DATETIME',
                  'GeoLevelName/STRING'        => undef,
                  'GeoLevelDesc/STRING'        => undef,
@@ -74,7 +74,7 @@ $VERSION = '1.0';
                 },
             'Geography' =>
                 {'GeographyId/STRING'         => undef,
-                 'LangIsoCode/STRING'         => '',
+                 'LangIsoCode/STRING'         => 'spa',
                  'SyncRecord/DATETIME'        => 'DATETIME',
                  'GeographyCode/STRING'       => undef,
                  'GeographyName/STRING'       => undef,
