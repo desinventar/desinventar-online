@@ -94,7 +94,7 @@ class Maps
         WMS_EXTENT	"'. $inf['EXTENT'] .'"
         WMS_TIMEEXTENT	"'. $inf['BEG'] ."/". $inf['END'] .'/P5M"
         WMS_ONLINERESOURCE	"'. $this->url .'map='. $fm .'"
-        WMS_SRS	"EPSG:4326 EPSG:900913"
+        WMS_SRS	"EPSG:4326"
 		  END
 		END
 		QUERYMAP
@@ -197,8 +197,8 @@ class Maps
 	function setLayerEff($q, $reg, $lev, $dl, $range, $inf, $lbl) {
 		$gl = $q->loadGeoLevels("");
 		$data = $gl[$lev][2];
-		$code = $gl[$lev][3];
-		$name = $gl[$lev][4];
+		$name = $gl[$lev][3];
+		$code = $gl[$lev][4];
 		$map = "";
     $lp = VAR_DIR . '/' . $reg ."/". $data;
     if ($this->testLayer($lp, $code, $name)) {
