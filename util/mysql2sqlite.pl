@@ -53,7 +53,7 @@ if ($bCore) {
 	&convertTable($dbin, "Users", "User");
 } else {
 	@RegionTables = ('Event','Cause','GeoLevel','Geography','Disaster',
-	                 'DatabaseLog','EEField','EEGroup');
+	                 'DatabaseLog','EEField','EEGroup','EEData');
 	if ($sTableName ne '') {
 		@RegionTables = ($sTableName);
 	}
@@ -154,6 +154,10 @@ sub convertTable() {
 			} elsif (exists $o->{$sValue}) {
 				$sValue = $o->{$sValue};
 			} 
+			# Remove Invalid Chars from Value (i.e. \n)
+			$sValue =~ s/\n//g;
+			$sValue =~ s/\0//g;
+			
 			$sFieldList .= $sField . $sAppend;
 			if ( ($sFieldType eq 'STRING') ||
 			     ($sFieldType eq 'DATETIME') ) {

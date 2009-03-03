@@ -172,6 +172,10 @@ $VERSION = '1.0';
                  'EEGroupLabel/STRING'   => undef,
                  'EEGroupDesc/STRING'    => undef,
                  'EEGroupStatus/INTEGER' => 'EEGroupActive'
+                },
+             'EEData' =>
+                {'DisasterId/STRING'     => undef,
+                 'SyncRecord/DATETIME'   => 'DATETIME'
                 }
             );
 1;
