@@ -2,14 +2,12 @@
 /************************************************
  DesInventar8
  http://www.desinventar.org  
- (c) 1999-2007 Corporacion OSSO
+ (c) 1999-2009 Corporacion OSSO
  ***********************************************/
     
 require_once('../include/loader.php');
-require_once('../include/dictionary.class.php');
 require_once('../include/query.class.php');
 require_once('../include/region.class.php');
-require_once('../include/user.class.php');
 
 /* Convert Post Form to DesInventar Disaster Table struct 
  * Insert		 	(1) create DisasterId. 
@@ -99,13 +97,10 @@ elseif (isset($_GET['r']) && !empty($_GET['r']))
 //else
 //  exit();
 
-/* Check permission of user to manage Disasters */
-$u = new User('', '', '');
-
-// UPDATER: If user keep connect the session will not expire..
+// UPDATER: If user is still connected, awake session so it will not expire
 if (isset($_GET['u'])) {
   $t->assign ("ctl_updater", true);
-  $res = $u->awakeUserSession();
+  $res = $us->awakeUserSession();
   if (!iserror($res))
     $status = "green";
   else
@@ -115,7 +110,6 @@ if (isset($_GET['u'])) {
 else {
   $r = new Region($reg);
   $q = new query($reg);
-  $d = new Dictionary(VAR_DIR);
   // Get Geography elements 
   if (isset($_GET['cmd'])) {
     if ($_GET['cmd'] == "list") {
@@ -215,12 +209,12 @@ else {
     }
     else {
       // Default view of DesInventar
-      $t->assign ("usr", $_SESSION['username']);
+      $t->assign ("usr", $us->sUserName);
       $rinfo = $q->getDBInfo();
       $t->assign ("regname",  $rinfo['RegionLabel']);
-      $role = $u->getUserRole($reg);
+      $role = $us->getUserRole($reg);
       $t->assign ("role", $role);
-      $dic = $d->queryLabelsFromGroup('DB', $lg);
+      $dic = $q->queryLabelsFromGroup('DB', $lg);
       if ($role == "ADMINREGION") {
         $t->assign ("showconfig", true);
         $dicrole = $dic['DBRoleAdmin'][0];
@@ -240,19 +234,19 @@ else {
       
       if ($role=="USER" || $role=="SUPERVISOR" || $role=="ADMINREGION" || $role=="OBSERVER") {
         $t->assign ("ctl_effects", true);
-        $t->assign ("dis", $d->queryLabelsFromGroup('Disaster', $lg));
-        $t->assign ("rc1", $d->queryLabelsFromGroup('Record|1', $lg));
-        $t->assign ("rc2", $d->queryLabelsFromGroup('Record|2', $lg));
-        $t->assign ("eve", $d->queryLabelsFromGroup('Event', $lg));
-        $t->assign ("cau", $d->queryLabelsFromGroup('Cause', $lg));
-        $t->assign ("ef1", $d->queryLabelsFromGroup('Effect|People', $lg));
-        $t->assign ("ef2", $d->queryLabelsFromGroup('Effect|Economic', $lg));
-        $t->assign ("ef3", $d->queryLabelsFromGroup('Effect|Affected', $lg));
-        $t->assign ("sc3", $d->querySecLabelFromGroup('Effect|Affected', $lg));
-        $t->assign ("ef4", $d->queryLabelsFromGroup('Effect|More', $lg));
-        $t->assign ("sec", $d->queryLabelsFromGroup('Sector', $lg));
-  //      $t->assign ("rcsl", $d->queryLabelsFromGroup('RecordStatus', $lg));
-        $t->assign ("dmg", $d->queryLabelsFromGroup('MetGuide', $lg));
+        $t->assign ("dis", $q->queryLabelsFromGroup('Disaster', $lg));
+        $t->assign ("rc1", $q->queryLabelsFromGroup('Record|1', $lg));
+        $t->assign ("rc2", $q->queryLabelsFromGroup('Record|2', $lg));
+        $t->assign ("eve", $q->queryLabelsFromGroup('Event', $lg));
+        $t->assign ("cau", $q->queryLabelsFromGroup('Cause', $lg));
+        $t->assign ("ef1", $q->queryLabelsFromGroup('Effect|People', $lg));
+        $t->assign ("ef2", $q->queryLabelsFromGroup('Effect|Economic', $lg));
+        $t->assign ("ef3", $q->queryLabelsFromGroup('Effect|Affected', $lg));
+        $t->assign ("sc3", $q->querySecLabelFromGroup('Effect|Affected', $lg));
+        $t->assign ("ef4", $q->queryLabelsFromGroup('Effect|More', $lg));
+        $t->assign ("sec", $q->queryLabelsFromGroup('Sector', $lg));
+  //      $t->assign ("rcsl", $q->queryLabelsFromGroup('RecordStatus', $lg));
+        $t->assign ("dmg", $q->queryLabelsFromGroup('MetGuide', $lg));
         $t->assign ("levl", $q->loadGeoLevels(""));
         $lev = 0;
         $t->assign ("lev", $lev);
