@@ -230,6 +230,7 @@ class UserSession {
 		  " AND (UserName='" . $this->sUserName . "') " .
 		  " AND AuthKey='ROLE'" . 
 		  " ORDER BY RegionAuth.RegionId";
+		
 		$q = new Query();
 		if ($result = $q->core->query($sQuery) ) {
 			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
@@ -290,10 +291,10 @@ class UserSession {
 	}
 
 	// Return Role for a Region
-	function getUserRole() {
+	function getUserRole($prmRegionId) {
 		$myAnswer = "";
 		$sQuery = "SELECT * FROM RegionAuth WHERE " .
-		  "     ((RegionId='') OR (RegionId='" . $this->sRegionId  . "')) " .
+		  "     ((RegionId='') OR (RegionId='" . $prmRegionId . "')) " .
 		  " AND (UserName='" . $this->sUserName . "') " .
 		  " AND AuthKey='ROLE'" . 
 		  " ORDER BY UserName,RegionId";
