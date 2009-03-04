@@ -384,13 +384,20 @@ class Query extends PDO
     return array($res['datemin'], $res['datemax']);
   }
 
+	/* This function returns an array with the database fields 
+	   of Disaster */
 	public function getDisasterFld() {
 		$fld = array();
-		$sql = "DESCRIBE ". $this->regid ."_Disaster";
 		$sql = "SELECT * FROM Disaster LIMIT 0,1";
 		$res = $this->getassoc($sql);
 		foreach ($res[0] as $key => $val) {
 			$fld[] = $key;
+		}
+
+		// (jhcaiced) SyncRecord should not appear in data grid
+		$pos = array_search('SyncRecord', $fld);
+		if ($pos) {
+			unset($fld[$pos]);
 		}
 		return $fld;
   }
