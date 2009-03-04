@@ -19,7 +19,7 @@ define('LNX', true); // false if install on Windows machine..
 define("TEMP", "/tmp");
 define("SMARTYDIR", "/usr/share/Smarty");
 define("JPGRAPHDIR", "/usr/share/php/jpgraph");
- //define("XMLRPCDIR", "/usr/share/php/xmlrpc");
+define("XMLRPCDIR", "/usr/share/php/xmlrpc");
 
 if (isset($_SERVER["DI8WEB"])) {
 	define("BASE", $_SERVER["DI8WEB"]);
@@ -95,7 +95,7 @@ define("DEFAULT_CHARSET", 'UTF-8');
 /* Smarty configuration */
 require_once(SMARTYDIR . '/Smarty.class.php');
 /* XMLRPC Library */
- //require_once(XMLRPCDIR . '/xmlrpc.inc');
+require_once(XMLRPCDIR . '/xmlrpc.inc');
 
 // dicore objects
 define ("DI_EVENT",			1);
