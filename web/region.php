@@ -75,15 +75,16 @@ if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
     $t->assign ("ctl_showreg", true);
     $reg = $q->getDBInfo();
     $t->assign ("log", $q->getRegLogList());
-    $t->assign ("lang", $reg['I18NFirstLang'][0]);
-    $t->assign ("dbadm", $reg['InfoAdminURL'][0]);
+    $t->assign ("lang", $reg['I18NFirstLang']);
+    $t->assign ("dbadm", $reg['InfoAdminURL']);
   }
   if (isset($_GET['cmd']) && $_GET['cmd'] == "info")
     $t->assign ("ctl_reginfo", true);
   $t->assign ("reg", $sRegionId);
-  $t->assign ("regname", $reg['RegionLabel'][0]);
-  $t->assign ("dbdes", $reg['InfoGeneral'][0]);
-  $t->assign ("dbden", str2js($reg['InfoGeneral'][1]));
+  $t->assign ("regname", $reg['RegionLabel']);
+  $t->assign ("dbdes", $reg['InfoGeneral']);
+  $t->assign ("dbden", '');
+  //$t->assign ("dbden", str2js($reg['InfoGeneral'][1]));
 }
 else if (isset($_GET['cmd'])) {
 	$q = new Query();
