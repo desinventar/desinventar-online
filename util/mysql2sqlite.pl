@@ -19,10 +19,11 @@ my $data_source = 'DBI:mysql:database=di8db;host=localhost';
 my $username    = 'di8db'; 
 my $passwd      = 'di8db';
 
-my $bRun    = 0;
-my $bDebug  = 0;
-my $bCore   = 0;
-my $sRegion = '';
+my $bRun       = 0;
+my $bDebug     = 0;
+my $bCore      = 0;
+my $bInfo      = 0;
+my $sRegion    = '';
 my $sTableName = '';
 
 # Script's output is encoded in UTF-8
@@ -31,6 +32,7 @@ binmode(STDOUT, ':utf8');
 if (!GetOptions('run|r'      => \$bRun,
                 'debug|d'    => \$bDebug,
                 'core|c'     => \$bCore,
+                'info|i'     => \$bInfo,
                 'region|r=s' => \$sRegion,
                 'table|t=s'  => \$sTableName,
                 
@@ -56,13 +58,23 @@ if ($bCore) {
 	                 'DatabaseLog','EEField','EEGroup','EEData');
 	if ($sTableName ne '') {
 		@RegionTables = ($sTableName);
+		if ($sTableName eq 'INFO') {
+			@RegionTables = ();
+			$bInfo = 1;
+		}
+	} else {
+		if ($bInfo) {
+			@RegionTables = ();
+		}
+		$bInfo = 1;
 	}
 	foreach (@RegionTables) {
 		&convertTable($dbin, $sRegion . "_" . $_, $_);
 	}
-	
-	# Rebuild Info Table
-	#&rebuildInfoTable($dbin, $sRegion);
+	if ($bInfo) {
+		# Rebuild Info Table
+		&rebuildInfoTable($dbin, $sRegion);
+	}
 }
 
 $dbin->disconnect();
