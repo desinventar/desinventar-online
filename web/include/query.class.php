@@ -60,15 +60,13 @@ class Query extends PDO
 			//print "getassoc : " . $sQuery . "<br>";
 			$data = array();
 			try {
-				$stmt = $this->dreg->query($sQuery);
-				if (! empty($stmt) ) {
-					$res = $stmt->fetch(PDO::FETCH_ASSOC);
-					$i = 0;
-					foreach($res as $key=>$val) {
+				$i = 0;
+				foreach($this->dreg->query($sQuery,PDO::FETCH_ASSOC) as $row) {
+					foreach($row as $key=>$val) {
 						$data[$i][$key] = $val;
 					} //foreach
+					$i++;
 				}
-				
 			} catch (Exception $e) {
 				print $e->getMessage();
 			}
