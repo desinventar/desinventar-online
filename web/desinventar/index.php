@@ -100,7 +100,7 @@ elseif (isset($_GET['r']) && !empty($_GET['r']))
 // UPDATER: If user is still connected, awake session so it will not expire
 if (isset($_GET['u'])) {
   $t->assign ("ctl_updater", true);
-  $res = $us->awakeUserSession();
+  $res = $us->awake();
   if (!iserror($res))
     $status = "green";
   else

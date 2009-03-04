@@ -36,8 +36,9 @@ class Query extends PDO
           if (file_exists($dbr)) {
             try {
               $this->dreg = new PDO("sqlite:" . $dbr);
-            }
-            catch (PDOException $e) {
+              /*** set the error reporting attribute ***/
+              $this->dreg->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $e) {
               print $e->getMessage();
             }
           }
@@ -56,20 +57,26 @@ class Query extends PDO
 	public function getassoc($sQuery) {
 		$data = false;
 		if (!empty($sQuery)) {
+			//print "getassoc : " . $sQuery . "<br>";
+			$data = array();
 			try {
-				$data = array();
-				$res = $this->dreg->query($sQuery, PDO::FETCH_ASSOC);
-				foreach($res as $row) {
-					$data[] = $row;
-				} //foreach
-			} catch (PDOException $e) {
+				$stmt = $this->dreg->query($sQuery);
+				if (! empty($stmt) ) {
+					$res = $stmt->fetch(PDO::FETCH_ASSOC);
+					$i = 0;
+					foreach($res as $key=>$val) {
+						$data[$i][$key] = $val;
+					} //foreach
+				}
+				
+			} catch (Exception $e) {
 				print $e->getMessage();
 			}
 		} else {
 			echo "Empty Query !!";
 		}
 		return $data;
-  }
+	}
 
 	public function getresult($qry) {
 		$rst = null;
@@ -377,12 +384,15 @@ class Query extends PDO
     return array($res['datemin'], $res['datemax']);
   }
 
-  public function getDisasterFld() {
-    $sql = "DESCRIBE ". $this->regid ."_Disaster";
-    $res = $this->getassoc($sql);
-    foreach ($res as $it)
-      $fld[] = $it['Field'];
-    return $fld;
+	public function getDisasterFld() {
+		$fld = array();
+		$sql = "DESCRIBE ". $this->regid ."_Disaster";
+		$sql = "SELECT * FROM Disaster LIMIT 0,1";
+		$res = $this->getassoc($sql);
+		foreach ($res[0] as $key => $val) {
+			$fld[] = $key;
+		}
+		return $fld;
   }
 
   public function getDisasterBySerial($diser) {
@@ -571,7 +581,7 @@ class Query extends PDO
           if (strlen($v) > 0) {
             $serial = " $log(";
             foreach (explode(" ", $v) as $i)
-              $serial .= "D.DisasterSerial='$i' OR ";
+              $serial .= "D.DisasterSerial LIKE '$i' OR ";
             $serial .= " 1!=1)";
           }
         }

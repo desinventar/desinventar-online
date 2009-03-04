@@ -55,6 +55,7 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 		// Reuse calculate SQL values in all pages; calculate limits in pages
 		$levg = array();
 		if (isset($get['opt']) && $get['opt'] == "singlemode") {
+			$fl = array();
 			foreach ($q->getDisasterFld() as $i)
 				$fl[] = "D.$i";
 			foreach ($q->getEEFieldList("True") as $k=>$i)
