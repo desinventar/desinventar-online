@@ -124,8 +124,10 @@
 			point.transform(proj, map.getProjectionObject());
 			map.setCenter(point, zoom); 
 */
-			map.setCenter(new OpenLayers.LonLat(lon, lat), zoom); 
-			if (!map.getCenter()) map.zoomToMaxExtent();
+			if (lon == 0 && lat == 0)
+				map.zoomToMaxExtent();
+			else
+				map.setCenter(new OpenLayers.LonLat(lon, lat), zoom); 
 		}
 		window.onload = function() {
 			var qrydet = parent.document.getElementById('querydetails');

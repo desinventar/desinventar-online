@@ -122,10 +122,10 @@ if (isset($post['_M+cmd'])) {
         if (strlen($m->filename()) > 0) {
           $lon = 0;
           $lat = 0;
-          $minx = $rinf['GeoLimitMinX'][0];
-          $maxx = $rinf['GeoLimitMaxX'][0];
-          $miny = $rinf['GeoLimitMinY'][0];
-          $maxy = $rinf['GeoLimitMaxY'][0];
+          $minx = $rinf['GeoLimitMinX'];
+          $maxx = $rinf['GeoLimitMaxX'];
+          $miny = $rinf['GeoLimitMinY'];
+          $maxy = $rinf['GeoLimitMaxY'];
           //$dinf = $q->getDBInfo();
           // set center
           if (!empty($minx) && !empty($miny) && !empty($maxx) && !empty($maxy)) {
