@@ -147,7 +147,7 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
             $dk[$ii] = $dic[$i3][0];
           else
             $dk[$ii] = $ii;		// no traduction..
-          $lb .= '"'. $dk[$ii] .'",';
+          $lb .= '"'. $dk[$ii] .'"'. "\t";
         }
         if ($export)
           fwrite($fp, $lb ."\n");

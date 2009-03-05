@@ -1,10 +1,10 @@
-DesInventar 8
+DesInventar 8.2
 ~~~~~~~~~~~~~
 
 General programs
-- Apache
-- PHP
-- MySQL
+- Apache-2
+- PHP-4
+- SQLite-3.5x
 - Mapserver
 
 PHP Components
@@ -16,8 +16,3 @@ PHP Components
 Javascript Components
 - ExtJS (http://www.extjs.com/)
 - OpenLayers.org (http://www.openlayers.org/)
-
-Java components
-- JRE
-- Others..
-

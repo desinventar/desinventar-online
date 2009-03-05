@@ -857,7 +857,7 @@ class Query extends PDO
 							$myv = "YES";
 						else
 							$myv = $vals;
-						$csv .= '"'. $myv .'",';
+						$csv .= '"'. $myv .'"'. "\t";
 					} //foreach
 					$csv .= "\n";
 				} //if
