@@ -293,7 +293,8 @@
           grp.substr(0,21) == "D.DisasterGeographyId") {
         $('_G+K_line').disabled = true;
         $('_G+K_pie').disabled = false;
-        $('_G+Kind').value = "PIE";
+        $('_G+K_pie').checked = true;
+        $('_G+K_pie').value = "PIE";
         $('_G+Period').value = "";
         $('_G+Stat').value = "";
         $('_G+Period').disabled = true;
@@ -307,7 +308,8 @@
       else {
         $('_G+K_line').disabled = false;
         $('_G+K_pie').disabled = true;
-        $('_G+Kind').value = "BAR";
+        $('_G+K_bar').checked = true;
+        $('_G+K_bar').value = "BAR";
         $('_G+Period').disabled = false;
         $('_G+Stat').disabled = false;
         $('_G+Period').value = 'YEAR';
@@ -693,6 +695,178 @@
           <div class="x-window-header">{-#bgraphic#-}</div>
           <div id="grp-cfg">
             <form id="CG" method="POST">
+            	<table class="conf" cellpadding=0 cellspacing=0>
+            		<tr valign="bottom">
+            			<td colspan=3 align="center">
+            				<table>
+            					<tr>
+            						<td>
+            							<b>{-#gopttitle#-}</b><br>
+            							<input type="text" name="_G+Title" class="line fixw">
+            						</td>
+            						<td>
+            							<b>{-#goptsubtit#-}</b><br>
+            							<input type="text" name="_G+Title2" class="line fixw">
+            						</td>
+            					</tr>
+            				</table>
+            				<hr>
+            			</td>
+            		</tr>
+            		<tr valign="bottom">
+            			<td align="right">
+            				<p align="center"><u>Eje Vertical 1:</u></p>
+            				<b onMouseOver="showtip('{-$dic.GraphField[2]-}');">{-$dic.GraphField[0]-}</b><br>
+            				<select id="_G+Field" name="_G+Field" onMouseOver="showtip('{-$dic.GraphField[2]-}');">
+            					<option value="D.DisasterId||" selected>{-$dic.GraphDisasterId_[0]-}</option>
+ {-foreach name=ef1 key=k item=i from=$ef1-}
+                    	<option value="D.{-$k-}|>|0">{-$i[0]-}</option>
+                    	<option value="D.{-$k-}|=|-1">{-#tauxhave#-} {-$i[0]-}</option>
+ {-/foreach-}
+ {-foreach name=ef2 key=k item=i from=$ef2-}
+                    	<option value="D.{-$k-}|>|0">{-$i[0]-}</option>
+ {-/foreach-}
+ {-foreach name=ef3 key=k item=i from=$ef3-}
+                    	<option value="D.{-$k-}|>|0">{-$i[0]-}</option>
+ {-/foreach-}
+ {-foreach name=ef3 key=k item=i from=$sec-}
+                    	<option value="D.{-$k-}|=|-1">{-#tauxaffect#-} {-$i[0]-}</option>
+ {-/foreach-}
+ 											<option disabled>___</option>
+ {-foreach name=eef key=k item=i from=$exteffel-}
+  {-if $i[2] == "INTEGER" || $i[2] == "DOUBLE"-}
+                    	<option value="E.{-$k-}|>|0">{-$i[0]-}</option>
+  {-/if-}
+ {-/foreach-}
+                  	</select>
+                  	<br>
+                  	<b onMouseOver="showtip('{-$dic.GraphScale[2]-}');">{-$dic.GraphScale[0]-}</b><br>
+                  	<select id="_G+Scale" name="_G+Scale" onMouseOver="showtip('{-$dic.GraphScale[2]-}');">
+                  		<option value="textint" selected>{-#gscalin#-}</option>
+                  		<option value="textlog">{-#gscalog#-}</option>
+                  	</select>
+                  	<br>
+                  	<b onMouseOver="showtip('{-$dic.GraphShow[2]-}');">{-$dic.GraphShow[0]-}</b><br>
+                  	<select id="_G+Data" name="_G+Data" onMouseOver="showtip('{-$dic.GraphShow[2]-}');">
+                  		<option value="VALUE">{-#gshwval#-}</option>
+                  		<option id="_G+D_perc" value="PERCENT" disabled>{-#gshwperce#-}</option>
+                  		<option id="_G+D_none" value="NONE" selected>{-#gshwnone#-}</option>
+                  	</select>
+                  	<br>
+                  	<b onMouseOver="showtip('{-$dic.GraphMode[2]-}');">{-$dic.GraphMode[0]-}</b><br>
+            				<select id="_G+Mode" name="_G+Mode" onMouseOver="showtip('{-$dic.GraphMode[2]-}');">
+                  		<option value="NORMAL" selected>{-#gmodnormal#-}</option>
+                  		<option id="_G+M_accu" value="ACCUMULATE">{-#gmodaccumul#-}</option>
+                  		<option id="_G+M_over" value="OVERCOME" disabled>{-#gmodovercome#-}</option>
+                  	</select>
+                  </td>
+            			<td align="center">
+            				<table border=1 width="120px" height="120px">
+            					<tr><td align="center">
+            					<!--<b onMouseOver="showtip('{-$dic.GraphKind[2]-}');">{-$dic.GraphKind[0]-}</b><br>-->
+            						<input type="radio" id="_G+K_bar" name="_G+Kind" value="BAR" checked>{-#gkndbars#-}<br>
+            						<input type="radio" id="_G+K_line" name="_G+Kind" value="LINE">{-#gkndlines#-}<br>
+            						<input type="radio" id="_G+K_pie" name="_G+Kind" value="PIE">{-#gkndpie#-}
+            						<br><br>
+            					<!--<b onMouseOver="showtip('{-$dic.GraphFeel[2]-}');">{-$dic.GraphFeel[0]-}</b><br>-->
+            						<input type="radio" id="_G+F_2d" name="_G+Feel" value="2D">{-#gfee2d#-}
+            						<input type="radio" id="_G+F_3d" name="_G+Feel" value="3D" checked>{-#gfee3d#-}
+            					</td></tr>
+            				</table>
+            			</td>
+            			<td>
+            				<p align="center"><u>Eje Vertical 2:</u></p>
+            				<b onMouseOver="showtip('{-$dic.GraphField[2]-}');">{-$dic.GraphField[0]-}</b><br>
+            				<select id="_G+Field2" name="_G+Field2" size="1" disabled 
+            						onMouseOver="showtip('{-$dic.GraphField[2]-}');">
+            					<option value="||" selected></option>
+            					<option value="D.DisasterId||">{-$dic.GraphDisasterId_[0]-}</option>
+ {-foreach name=ef1 key=k item=i from=$ef1-}
+                    	<option value="D.{-$k-}|>|0">{-$i[0]-}</option>
+                    	<option value="D.{-$k-}|=|-1">{-#tauxhave#-} {-$i[0]-}</option>
+ {-/foreach-}
+ {-foreach name=ef2 key=k item=i from=$ef2-}
+                    	<option value="D.{-$k-}|>|0">{-$i[0]-}</option>
+ {-/foreach-}
+ {-foreach name=ef3 key=k item=i from=$ef3-}
+                    	<option value="D.{-$k-}|>|0">{-$i[0]-}</option>
+ {-/foreach-}
+ {-foreach name=ef3 key=k item=i from=$sec-}
+                    	<option value="D.{-$k-}|=|-1">{-#tauxaffect#-} {-$i[0]-}</option>
+ {-/foreach-}
+ 											<option disabled>___</option>
+ {-foreach name=eef key=k item=i from=$exteffel-}
+  {-if $i[2] == "INTEGER" || $i[2] == "DOUBLE"-}
+                    	<option value="E.{-$k-}|>|0">{-$i[0]-}</option>
+  {-/if-}
+ {-/foreach-}
+                  	</select>
+                  	<br>
+                  	<b onMouseOver="showtip('{-$dic.GraphScale[2]-}');">{-$dic.GraphScale[0]-}</b><br>
+                  	<select id="_G+Scale2" name="_G+Scale2" disabled onMouseOver="showtip('{-$dic.GraphScale[2]-}');">
+                  		<option value="textint" selected>{-#gscalin#-}</option>
+                  		<option value="textlog">{-#gscalog#-}</option>
+                  	</select>
+                  	<br>
+                  	<b onMouseOver="showtip('{-$dic.GraphShow[2]-}');">{-$dic.GraphShow[0]-}</b><br>
+                  	<select id="_G+Data2" name="_G+Data2" disabled onMouseOver="showtip('{-$dic.GraphShow[2]-}');">
+                  		<option value="VALUE">{-#gshwval#-}</option>
+                  		<option id="_G+D_perc2" value="PERCENT" disabled>{-#gshwperce#-}</option>
+                  		<option id="_G+D_none2" value="NONE" selected>{-#gshwnone#-}</option>
+                  	</select>
+                  	<br>
+                  	<b onMouseOver="showtip('{-$dic.GraphMode[2]-}');">{-$dic.GraphMode[0]-}</b><br>
+            				<select id="_G+Mode2" name="_G+Mode2" disabled onMouseOver="showtip('{-$dic.GraphMode[2]-}');">
+                  		<option value="NORMAL" selected>{-#gmodnormal#-}</option>
+                  		<option id="_G+M_accu2" value="ACCUMULATE">{-#gmodaccumul#-}</option>
+                  		<option id="_G+M_over2" value="OVERCOME" disabled>{-#gmodovercome#-}</option>
+                  	</select>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td colspan=3 align="center">
+            				<p><u>Eje Horizontal:</u></p>
+            				<b onMouseOver="showtip('{-$dic.GraphType[2]-}');">{-$dic.GraphType[0]-}</b><br>
+            				<select id="_G+Type" name="_G+Type" onChange="grpSelectbyType('_G+Type');" 
+            						onMouseOver="showtip('{-$dic.GraphType[2]-}');">
+            					<optgroup label="{-#ghistogram#-}">
+                      <option value="D.DisasterBeginTime" selected>{-$dic.GraphHisTemporal[0]-}</option>
+                      <option value="D.DisasterBeginTime|D.EventId">{-$dic.GraphHisEveTemporal[0]-}</option>
+{-foreach name=glev key=k item=i from=$glev-}
+                      <option value="D.DisasterBeginTime|D.DisasterGeographyId_{-$k-}">{-$i[0]-} {-$dic.GraphHisGeoTemporal[0]-}</option>
+{-/foreach-}
+                      <option value="D.DisasterBeginTime|D.CauseId">{-$dic.GraphHisCauTemporal[0]-}</option>
+                      </optgroup>
+                      <optgroup label="{-#gcomparative#-}">
+                      <option value="D.EventId">{-$dic.GraphComByEvents[0]-}</option>
+                      <option value="D.CauseId">{-$dic.GraphComByCauses[0]-}</option>
+{-foreach name=glev key=k item=i from=$glev-}
+                      <option value="D.DisasterGeographyId_{-$k-}">{-$dic.GraphComByGeography[0]-} {-$i[0]-}</option>
+{-/foreach-}
+                    	</optgroup>
+                    </select>
+                    <br>
+                    <b onMouseOver="showtip('{-$dic.GraphPeriod[2]-}');">{-$dic.GraphPeriod[0]-}</b><br>
+                    <select id="_G+Period" name="_G+Period" onMouseOver="showtip('{-$dic.GraphPeriod[2]-}');">
+                    	<option value=""></option>
+                    	<option value="YEAR" selected>{-#gperannual#-}</option>
+                    	<option value="YMONTH">{-#gpermonth#-}</option>
+                    	<option value="YWEEK">{-#gperweek#-}</option>
+                    	<option value="YDAY">{-#gperday#-}</option>
+                    </select>
+                    <br>
+                    <b onMouseOver="showtip('{-$dic.GraphSeaHistogram[2]-}');">{-#GHISTOANNUAL#-}</b><br>
+                    <select id="_G+Stat" name="_G+Stat" onMouseOver="showtip('{-$dic.GraphSeaHistogram[2]-}');">
+                    	<option value=""></option>
+                    	<option value="DAY">{-#gseaday#-}</option>
+                    	<option value="WEEK">{-#gseaweek#-}</option>
+                    	<option value="MONTH">{-#gseamonth#-}</option>
+                    </select>
+            			</td>
+            		</tr>
+            	</table>
+            	<input type="hidden" id="_G+cmd" name="_G+cmd" value="result">
+<!--
               <table class="conf">
                 <tr valign="top">
                  <td>
@@ -797,7 +971,7 @@
  {-foreach name=ef3 key=k item=i from=$sec-}
                     <option value="D.{-$k-}|=|-1">{-#tauxaffect#-} {-$i[0]-}</option>
  {-/foreach-}
- 										<option disabled>---</option>
+ 										<option disabled>___</option>
  {-foreach name=eef key=k item=i from=$exteffel-}
   {-if $i[2] == "INTEGER" || $i[2] == "DOUBLE"-}
                     <option value="E.{-$k-}|>|0">{-$i[0]-}</option>
@@ -807,6 +981,7 @@
                   <input type="hidden" id="_G+cmd" name="_G+cmd" value="result">
                 </td></tr>
               </table>
+-->
              </form>
           </div>
         </div>

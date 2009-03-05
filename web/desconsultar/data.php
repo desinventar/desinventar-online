@@ -130,7 +130,8 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 						$dk[$ii] = $dic[$i3][0];
 					else
 						$dk[$ii] = $ii; // No translation, use default value
-					$lb .= '"'. $dk[$ii] .'",';
+					//Assign Headers..
+					$lb .= '"'. $dk[$ii] .'"'. "\t";
 				} //foreach
 				if ($export)
 					fwrite($fp, $lb ."\n");

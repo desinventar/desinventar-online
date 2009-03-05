@@ -1,7 +1,6 @@
 <script language="php">
   
 require_once('../include/loader.php');
-require_once('../include/dictionary.php');
 
 //-----
 if (!extension_loaded('json')) {

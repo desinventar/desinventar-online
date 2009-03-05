@@ -78,6 +78,7 @@ if (isset($post['_G+cmd'])) {
 		}
 
 		// Construct Graphic Object and Show Page
+		echo $post['_G+Kind'];
 		$g = new Graphic($post['_G+Kind'], $post, $gl);
 		$sImageURL  = WWWURL . "/graphs/di8graphic_". session_id() . ".png";
 		$sImageFile = WWWDIR . "/graphs/di8graphic_". session_id() . ".png";

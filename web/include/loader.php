@@ -12,9 +12,6 @@
 // "C:/desinventar8/ms4w/Apache/htdocs/";
 // "/var/www/html/desinventar/test/";
 define('LNX', true); // false if install on Windows machine..
- //define('USR', "di8db");
- //define('PSW', "di8db");
- //define('DTB', "di8db");
 
 define("TEMP", "/tmp");
 define("SMARTYDIR", "/usr/share/Smarty");
@@ -32,9 +29,6 @@ if (isset($_SERVER["DI8WEB"])) {
 	define("DICT_DIR", SOFTDIR . "/files");
 	define("VAR_DIR" , DATADIR);
 	define("TMP_DIR" , DATADIR);
-//	define("MAPS_DIR", DATADIR);        // mapfiles dir
-//	define("LOGO_DIR", VAR_DIR. '/logo');        // database logos dir
-//	define("CART_DIR", DATADIR);       // Cartography shapes dir
 	define("SMTY_DIR", CACHEDIR); // Smarty temp dir
 	define("TMPM_DIR", CACHEDIR);     // Mapserver temp dir
 } else {
@@ -52,10 +46,6 @@ if (isset($_SERVER["DI8WEB"])) {
 	define("TMP_DIR" , DATADIR . '/tmp');
 	define("CACHEDIR", TMP_DIR);   			 // /var/cache/Smarty/di8
 	define("FONTDIR" , VAR_DIR . '/fonts.txt');
- //	define("DICT_DIR", VAR_DIR);
- //	define("MAPS_DIR", VAR_DIR. '/maps');        // mapfiles dir
- //	define("LOGO_DIR", VAR_DIR. '/logo');        // database logos dir
- //	define("CART_DIR", VAR_DIR. '/carto');       // Cartography shapes dir
  	define("SMTY_DIR", CACHEDIR . '/templates_c'); // Smarty temp dir
 	define("TMPM_DIR", CACHEDIR . '/tempmap');     // Mapserver temp dir
 }
@@ -96,37 +86,6 @@ define("DEFAULT_CHARSET", 'UTF-8');
 require_once(SMARTYDIR . '/Smarty.class.php');
 /* XMLRPC Library */
 require_once(XMLRPCDIR . '/xmlrpc.inc');
-
-// dicore objects
-define ("DI_EVENT",			1);
-define ("DI_CAUSE",			2);
-define ("DI_GEOLEVEL",	3);
-define ("DI_GEOGRAPHY",	4);
-define ("DI_DISASTER",	5);
-define ("DI_DBINFO",		6);
-define ("DI_DBLOG",			7);
-define ("DI_USER",			8);
-define ("DI_REGION",		9);
-define ("DI_EEFIELD",	 10);
-define ("DI_EEDATA",	 11);
-
-// dicore command
-define ("CMD_NEW",			1);
-define ("CMD_UPDATE",		2);
-define ("CMD_DELETE",		3);
-
-// Error Codes
-define ("ERR_NO_ERROR",					 1);
-define ("ERR_UNKNOWN_ERROR",		-1);
-define ("ERR_INVALID_COMMAND",	-2);
-define ("ERR_OBJECT_EXISTS",		-3);
-define ("ERR_NO_DATABASE",			-4);
-define ("ERR_INVALID_PASSWD",		-5);
-define ("ERR_ACCESS_DENIED",		-6);
-define ("ERR_OBJECT_NOT_FOUND",	-7);
-define ("ERR_CONSTRAINT_FAIL",	-8);
-define ("ERR_NO_CONNECTION",		-99);
-
 
 function createIfNotExistDirectory($sMyPath) {
 	if (!file_exists($sMyPath)) {
@@ -190,7 +149,7 @@ function showerror ($val) {
 	return $res;
 }
 
-// Function to get method of DICORE by XMLRPC 
+/* OBSOLETE: Function to get method of DICORE by XMLRPC 
 function callRpcDICore($rpcmethod, $rpcargs) {
 	global $dicore_host, $dicore_port;
 	$xmlrpcargs = array();
@@ -209,7 +168,7 @@ function callRpcDICore($rpcmethod, $rpcargs) {
 		//echo "Code: (" . htmlspecialchars($r->faultCode()) . ") Reason: '" . htmlspecialchars($r->faultString()) . "'\n";
 		return ERR_NO_CONNECTION;
 	}
-}
+}*/
 
 // To prevent fails in Strings with RETURNS or "s eliminate this.. 
 function str2js($str) {
@@ -228,16 +187,6 @@ function uuid() {
 			mt_rand( 0, 0x0fff ) | 0x4000, mt_rand( 0, 0x3fff ) | 0x8000,
 			mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ) );
 }
-
-/*
-	function sendMessage($to, $submit, $body) {
-		$headers = "From: di8support@desinventar.org \r\n";
-		$headers.= "Content-Type: text/html; charset=UTF-8 ";
-		$headers.= "MIME-Version: 1.0 ";
-		$mail_sent = @mail($to, $submit, $body, $headers);
-		return $mail_sent ? "Mail sent" : "Mail failed";
-	}
-*/
 
 /* SMARTY template */
 $t = new Smarty();
