@@ -293,8 +293,7 @@
           grp.substr(0,21) == "D.DisasterGeographyId") {
         $('_G+K_line').disabled = true;
         $('_G+K_pie').disabled = false;
-        $('_G+K_pie').checked = true;
-        $('_G+K_pie').value = "PIE";
+        $('_G+Kind').value = "PIE";
         $('_G+Period').value = "";
         $('_G+Stat').value = "";
         $('_G+Period').disabled = true;
@@ -308,8 +307,7 @@
       else {
         $('_G+K_line').disabled = false;
         $('_G+K_pie').disabled = true;
-        $('_G+K_bar').checked = true;
-        $('_G+K_bar').value = "BAR";
+        $('_G+Kind').value = "BAR";
         $('_G+Period').disabled = false;
         $('_G+Stat').disabled = false;
         $('_G+Period').value = 'YEAR';
@@ -764,13 +762,17 @@
             				<table border=1 width="120px" height="120px">
             					<tr><td align="center">
             					<!--<b onMouseOver="showtip('{-$dic.GraphKind[2]-}');">{-$dic.GraphKind[0]-}</b><br>-->
-            						<input type="radio" id="_G+K_bar" name="_G+Kind" value="BAR" checked>{-#gkndbars#-}<br>
-            						<input type="radio" id="_G+K_line" name="_G+Kind" value="LINE">{-#gkndlines#-}<br>
-            						<input type="radio" id="_G+K_pie" name="_G+Kind" value="PIE">{-#gkndpie#-}
+            						<select id="_G+Kind" name="_G+Kind" size="3" onMouseOver="showtip('{-$dic.GraphKind[2]-}');">
+            							<option value="BAR" selected>{-#gkndbars#-}</option>
+            							<option id="_G+K_line" value="LINE">{-#gkndlines#-}</option>
+            							<option id="_G+K_pie" value="PIE" disabled>{-#gkndpie#-}</option>
+            						</select>
             						<br><br>
             					<!--<b onMouseOver="showtip('{-$dic.GraphFeel[2]-}');">{-$dic.GraphFeel[0]-}</b><br>-->
-            						<input type="radio" id="_G+F_2d" name="_G+Feel" value="2D">{-#gfee2d#-}
-            						<input type="radio" id="_G+F_3d" name="_G+Feel" value="3D" checked>{-#gfee3d#-}
+            						<select id="_G+Feel" name="_G+Feel" size="2" onMouseOver="showtip('{-$dic.GraphFeel[2]-}');">
+            							<option value="2D">{-#gfee2d#-}</option>
+            							<option value="3D" selected>{-#gfee3d#-}</option>
+            						</select>
             					</td></tr>
             				</table>
             			</td>

@@ -6,7 +6,6 @@
 
 //ob_start( 'ob_gzhandler' );
 require_once('../include/loader.php');
-//require_once('../include/query.class.php');
 require_once('../include/usersession.class.php');
 
 // Direct access to module
@@ -53,7 +52,7 @@ else {
   }
   else {
     $rinf = $q->getDBInfo();
-    $t->assign ("regname", $rinf['RegionLabel'][0]);
+    $t->assign ("regname", $rinf['RegionLabel']);
     $t->assign ("geol", $q->loadGeography(0));
     $glev = $q->loadGeoLevels("");
     $t->assign ("evepredl", $q->loadEvents("PREDEF", "active", $lg));
@@ -69,17 +68,14 @@ else {
       $t->assign ("ctl_user", false);
     // Set selection map
     $dinf = $q->getDBInfo();
-    if (($dinf['GeoLimitMinX'] != "") && ($dinf['GeoLimitMinY'] != "") &&
-        ($dinf['GeoLimitMaxX'] != "") && ($dinf['GeoLimitMaxY'] != "")) {
-      $t->assign ("x1", $dinf['GeoLimitMinX']);
-      $t->assign ("x2", $dinf['GeoLimitMaxX']);
-      $t->assign ("y1", $dinf['GeoLimitMinY']);
-      $t->assign ("y2", $dinf['GeoLimitMaxY']);
-      if (file_exists(VAR_DIR . "/". $reg . "/region.map"))
-        $t->assign ("ctl_showmap", true);
-      else
-        $t->assign ("ctl_showmap", false);
-    }
+    $t->assign ("x1", $dinf['GeoLimitMinX']);
+    $t->assign ("x2", $dinf['GeoLimitMaxX']);
+    $t->assign ("y1", $dinf['GeoLimitMinY']);
+    $t->assign ("y2", $dinf['GeoLimitMaxY']);
+    if (file_exists(VAR_DIR . "/". $reg . "/region.map"))
+      $t->assign ("ctl_showmap", true);
+    else
+      $t->assign ("ctl_showmap", false);
     // get range of dates
     $ydb = $q->getDateRange();
     $t->assign ("yini", substr($ydb[0], 0, 4));
