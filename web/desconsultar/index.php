@@ -153,7 +153,7 @@ else {
   $t->assign ("range", $range);
   // STADISTIC
   foreach ($ef1 as $k=>$i) {
-    $sst[$k] = array($k."Stat|>|-1", $i[0]);
+    $sst[$k] = array($k."Q|>|-1", $i[0]);
     $nst[$k] = $sst[$k];
   }
   foreach ($ef2 as $k=>$i)

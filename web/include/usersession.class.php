@@ -7,7 +7,7 @@
 class UserSession {
 	var $sSessionId      = '';
 	var $sRegionId       = '';
-	var $sRegionLangCode = 'en';
+	var $sRegionLangCode = 'eng';
 	var $sUserName       = '';
 	var $dStart          = '';
 	var $dLastUpdate     = '';
@@ -243,7 +243,7 @@ class UserSession {
 		return $myData;
 	} // function
 
-	// Get basic user info: user=>[email,pass,name,lang,country,city,creadate,iplist,notes,active]
+	// Get basic user info: user=>[email,pass,name,org,country,city,creadate,iplist,notes,active]
 	function getUserInfo ($username) {
 		$myData = array();
 		$sQuery = "SELECT * FROM User " .
@@ -255,13 +255,12 @@ class UserSession {
 				$myData[0] = $row->UserEMail;
 				$myData[1] = $row->UserPasswd;
 				$myData[2] = $row->UserFullName;
-				$myData[3] = $row->UserLangCode;
-				$myData[4] = $row->UserCountry;
+				$myData[3] = $row->Organization;
+				$myData[4] = $row->CountryIso;
 				$myData[5] = $row->UserCity;
 				$myData[6] = $row->UserCreationDate;
-				$myData[7] = $row->UserAllowedIPList;
-				$myData[8] = $row->UserNotes;
-				$myData[9] = $row->UserActive;
+				$myData[7] = $row->UserNotes;
+				$myData[8] = $row->UserActive;
 			} // while
 		}
 		return array($this->sUserName => $myData);
@@ -276,6 +275,7 @@ class UserSession {
 		if ($result = $q->core->query($sQuery) ) {
 			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 				$myAnswer = $row->UserEMail;
+				// uhmm, must revise if send mail-> offline systems ??
 				mail($myAnswer, 
 			     "DesInventar - Password Reminder",
 			     "Dear User\nYour login information for DesInventar is:\n" .

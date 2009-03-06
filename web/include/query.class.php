@@ -103,7 +103,6 @@ class Query extends PDO
     }
     else {
       $data = $this->getRegionEventList($type, $status, $lang);
-      // Set complete event list with DI82 struct, according with language, etc..
     }
     return $data;
   }
@@ -116,7 +115,6 @@ class Query extends PDO
     }
     else {
       $data = $this->getRegionCauseList($type, $status, $lang);
-      // Set complete cause list with DI82 struct, according with language, etc..
     }
     return $data;
   }
@@ -497,7 +495,7 @@ class Query extends PDO
       $opt = " 1=1";
     if ($status == "ACTIVE")
       $opt .= " AND RegionStatus >= 1";
-    $sql = "SELECT RegionId, RegionLabel FROM Region WHERE $opt ORDER BY RegionLabel";
+    $sql = "SELECT RegionId, RegionLabel FROM Region WHERE IsCRegion=0 AND IsVRegion=0 AND $opt ORDER BY RegionLabel";
     $res = $this->core->query($sql);
     $data = array();
     foreach ($res as $row)
@@ -506,32 +504,32 @@ class Query extends PDO
   }
 
   public function getRegionAdminList() {
-    $sql = "SELECT R.RegionId AS RegionId, R.CountryIso AS CountryIso, R.RegionLabel AS RegionLabel, ".
-        "RA.UserName AS UserName, R.RegionActive AS RegionActive, R.RegionPublic AS RegionPublic ".
-        "FROM Region AS R, RegionAuth AS RA WHERE R.RegionUUID=RA.RegionUUID AND RA.AuthAuxValue='ADMINREGION' ".
-        "ORDER BY RegionLabel";
+    $sql = "SELECT R.RegionId AS RegionId, R.CountryIso AS CountryIso, R.RegionLabel ".
+        "AS RegionLabel, RA.UserName AS UserName, R.RegionStatus AS RegionStatus ".
+        "FROM Region AS R, RegionAuth AS RA WHERE R.RegionId=RA.RegionId AND ".
+        "RA.AuthAuxValue='ADMINREGION' ORDER BY RegionLabel";
     $data = array();
     $res = $this->core->query($sql);
     foreach ($res as $row)
       $data[$row['RegionId']] = array($row['CountryIso'], $row['RegionLabel'], 
-            $row['UserName'], $row['RegionActive'], $row['RegionPublic']);
+            $row['UserName'], $row['RegionStatus']);
     return $data;
   }
-  // DI82
+  /* OBSOLETE: USE getDBInfo function 
   public function getVirtualRegInfo($vreg) {
     $sql = "SELECT * FROM VirtualRegion WHERE VirtualRegId='".
            $vreg ."'";
     $res = $this->core->query($sql);
     return $res;
-  }
-  // DI82
-  public function getVirtualRegItems($vreg) {
-    $sql = "SELECT RegionId FROM VirtualRegionItem WHERE VirtualRegId='".
-           $vreg ."' ORDER BY RegionId";
+  }*/
+
+  public function getCVRegItems($cvregid) {
+    $sql = "SELECT RegionItem FROM CVRegionItem WHERE RegionId='".
+           $cvregid ."' ORDER BY RegionItem";
     $data = array();
     $res = $this->core->query($sql);
     foreach ($res as $row)
-      $data[] = $row['RegionId'];
+      $data[] = $row['RegionItem'];
     return $data;
   }
 
