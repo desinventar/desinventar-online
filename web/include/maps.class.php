@@ -197,8 +197,8 @@ class Maps
 	function setLayerEff($q, $reg, $lev, $dl, $range, $inf, $lbl) {
 		$gl = $q->loadGeoLevels("");
 		$data = $gl[$lev][2];
-		$name = $gl[$lev][3];
-		$code = $gl[$lev][4];
+		$code = $gl[$lev][3];
+		$name = $gl[$lev][4];
 		$map = "";
     $lp = VAR_DIR . '/' . $reg ."/". $data;
     if ($this->testLayer($lp, $code, $name)) {

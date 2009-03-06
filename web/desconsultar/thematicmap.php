@@ -97,7 +97,7 @@ if (isset($post['_M+cmd'])) {
       // if is VirtualRegion apply foreach to database..
       $q3 = new Query($rg);
       $rinf = $q3->getDBInfo();
-      $rgl[$kg]['regname'] = $rinf['RegionLabel'][0];
+      $rgl[$kg]['regname'] = $rinf['RegionLabel'];
       // Data Options Interface
       $opc['Group'] = array($post['_M+Type']);
       $lev = explode("|", $post['_M+Type']);

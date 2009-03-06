@@ -1,5 +1,5 @@
 /* CORE.DB - DesInventar8.2
-2009-03-01
+2009-03-05
 */
 
 DROP TABLE IF EXISTS Region;
@@ -89,7 +89,7 @@ RecordId VARCHAR(50),
 PRIMARY KEY('SessionId')
 );
 
-/* Set initial values */
-INSERT INTO User VALUES ('root', 'root@localhost', 'root', 'Portal Administrator', '', '', '', '2008-01-01', '', 1);
+INSERT INTO User VALUES ('root', 'root@localhost', 'di8welcome', 'Portal Administrator', '', '', '', '2008-01-01', '', 1);
 INSERT INTO RegionAuth VALUES ('root', '', 'REGION', 5, '');
 INSERT INTO RegionAuth VALUES ('root', '', 'USER', 5, '');
+INSERT INTO RegionAuth VALUES ('root', '', 'ROLE', 0, 'ADMINPORTAL');

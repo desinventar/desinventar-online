@@ -7,8 +7,6 @@
 */
 
 require_once('include/loader.php');
- //require_once('include/usersession.class.php');
- //require_once('include/query.class.php');
 
 $t->config_dir = 'include';
 
@@ -77,7 +75,7 @@ if (isset($_GET['cmd'])) {
 			// PASSLOST: Allows to recover a user's password by sending 
 			// an e-amil with the login information
 			if (isset($_GET['opt']) && ($_GET['opt']) == "sendnewpass") {
-				if ($us->sendPasswdReminder($_GET['UserNameEMail']) != '') {
+				if ($us->sendPasswdReminder($_GET['UserEMail']) != '') {
 					$t->assign ("ctl_msgsend", true);
 				} else {
 					$t->assign ("ctl_errsend", true);
