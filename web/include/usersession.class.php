@@ -147,7 +147,7 @@ class UserSession {
 			$sQuery = "SELECT * FROM Region WHERE RegionId='" . $this->sRegionId . "'";
 			if ($result = $q->core->query($sQuery)) {
 				while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-					$sRegionLangCode = $row->RegionLangCode;
+					$sRegionLangCode = $row->LangIsoCode;
 				}
 			}
 			$iReturn = 1;
