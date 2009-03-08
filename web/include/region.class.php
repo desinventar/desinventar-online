@@ -1,9 +1,8 @@
 <script language="php">
-/************************************************
- DesInventar8
- http://www.desinventar.org  
- (c) 1999-2007 Corporacion OSSO
- ***********************************************/
+/*
+ DesInventar - http://www.desinventar.org
+ (c) 1999-2009 Corporacion OSSO
+*/
 
 /* Class Region manage local databases in SQLITE / DICORE-XML.
    To operate require: loader.php and some functions query.php
@@ -16,11 +15,11 @@ class Region {
   function Region($region) {
     $this->regid = $region;
     $this->q = new Query($region);
-    if (isset($_SESSION['sessionid']) && !empty($region)) {
-      $rpcarg = array($_SESSION['sessionid'], $region);
-      $or = callRpcDICore('RpcRegionOperations.openRegion', $rpcarg);
-      if (iserror($or))
-        return false;
+    if (!empty($region)) {
+      $rpcarg = array(session_id(), $region);
+      //$or = callRpcDICore('RpcRegionOperations.openRegion', $rpcarg);
+      //if (iserror($or))
+      //  return false;
     }
   }
 

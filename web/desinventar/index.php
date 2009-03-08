@@ -90,10 +90,17 @@ function disaster2form($dicard) {
 }
 */
 
-if (isset($_POST['_REG']) && !empty($_POST['_REG']))
-  $reg = $_POST['_REG'];
-elseif (isset($_GET['r']) && !empty($_GET['r']))
-  $reg = $_GET['r'];
+if (isset($_POST['_REG']) && !empty($_POST['_REG'])) {
+	$sRegionId = $_POST['_REG'];
+	$us->open($sRegionId);
+} elseif (isset($_GET['r']) && !empty($_GET['r'])) {
+	$sRegionId = $_GET['r'];
+	$us->open($sRegionId);
+} else {
+	// Use Regio Information from UserSession...
+	$sRegionId = $us->sRegionId;
+}
+	
 //else
 //  exit();
 
@@ -108,8 +115,8 @@ if (isset($_GET['u'])) {
   $t->assign ("stat", $status);
 }
 else {
-  $r = new Region($reg);
-  $q = new query($reg);
+  $r = new Region($sRegionId);
+  $q = new query($sRegionId);
   // Get Geography elements 
   if (isset($_GET['cmd'])) {
     if ($_GET['cmd'] == "list") {
@@ -212,7 +219,7 @@ else {
       $t->assign ("usr", $us->sUserName);
       $rinfo = $q->getDBInfo();
       $t->assign ("regname",  $rinfo['RegionLabel']);
-      $role = $us->getUserRole($reg);
+      $role = $us->getUserRole($sRegionId);
       $t->assign ("role", $role);
       $dic = $q->queryLabelsFromGroup('DB', $lg);
       if ($role == "ADMINREGION") {
@@ -267,7 +274,7 @@ else {
       }
     }
   }
-  $t->assign ("reg", $reg);
+  $t->assign ("reg", $sRegionId);
 }
 $t->display ("index.tpl");
 

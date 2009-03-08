@@ -67,6 +67,11 @@ require_once(BASE . "/include/constants.php");
 session_name("DI8SESSID");
 session_start();
 
+/*
+print "Script    : " . $_SERVER['SCRIPT_NAME'] . "<br>";
+print "FileName  : " . $_SERVER['SCRIPT_FILENAME'] . "<br>";
+print "SessionId : " . session_id() . "<br>";
+*/
 // 2009-01-15 (jhcaiced) Start by create/recover the session 
 // information, even for anonymous users
 if (!isset($_SESSION['sessioninfo'])) { 
