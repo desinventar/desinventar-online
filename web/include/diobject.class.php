@@ -39,7 +39,7 @@ class DIObject {
 			$this->oFieldType[$sFieldName] = $sFieldType;
 			if ($sFieldType == "STRING")   { $this->$sFieldName = "";        }
 			if ($sFieldType == "TEXT")     { $this->$sFieldName = "";        }
-			if ($sFieldType == "DATETIME") { $this->$sFieldName = date('c'); }
+			if ($sFieldType == "DATETIME") { $this->$sFieldName = gmdate('c'); }
 			if ($sFieldType == "INTEGER")  { $this->$sFieldName = -1;        }
 			if ($sFieldType == "DOUBLE")   { $this->$sFieldName = 0.0;       }
 			if ($sFieldType == "BOOLEAN")  { $this->$sFieldName = true;      }
@@ -49,7 +49,13 @@ class DIObject {
 	public function set($prmKey, $prmValue) {
 		$this->$prmKey = $prmValue;
 	}
-	
+
+	public function setFromArray($prmArray) {
+		foreach($prmArray as $sKey => $sValue) {
+			$this->set($sKey, $sValue);
+		}
+	}
+		
 	public function getTableName() {
 		return $this->sTableName;
 		//return $this->oSession->sRegionId . "_" . $this->sTableName;
@@ -153,7 +159,7 @@ class DIObject {
 	public function exist() {
 		$iReturn = 0;
 		$sQuery = $this->getSelectQuery();
-		if ($result = $this->q->query($sQuery)) {
+		if ($result = $this->q->dreg->query($sQuery)) {
 			if ($result->num_rows() > 0) {
 				$bReturn = 1;
 			}
@@ -180,19 +186,25 @@ class DIObject {
 		return $iReturn;
 	} // function load
 	
-	public function insert() {
+	public function create() {
 		$iReturn = 0;
 		$sQuery = $this->getInsertQuery();
-		if ($result = $this->q->query($sQuery)) {
+		print $sQuery . "<br>";
+		if ($result = $this->q->dreg->query($sQuery)) {
 			$iReturn = 1;		
 		}
 		return $iReturn;
 	} // function
+	
+	public function insert() {
+		$this->insert();
+		$this->update();
+	}
 
 	public function delete() {
 		$iReturn = 0;
 		$sQuery = $this->getDeleteQuery();
-		if ($result = $this->q->query($sQuery)) {
+		if ($result = $this->q->dreg->query($sQuery)) {
 			$iReturn = 1;		
 		}
 		return $iReturn;
@@ -200,9 +212,18 @@ class DIObject {
 
 	public function update() {
 		$iReturn = 0;
+		
+		if (!empty($this->SyncRecord)) {
+			$this->SyncRecord = gmdate('c');
+		}
 		$sQuery = $this->getUpdateQuery();
-		if ($result = $this->q->query($sQuery)) {
-			$iReturn = 1;		
+		print "$sQuery <br>";
+		try {
+			if ($result = $this->q->dreg->query($sQuery)) {
+				$iReturn = 1;		
+			}
+		} catch (PDOException $e) {
+			print "Error " . $e->getMessage() . "<br>";
 		}
 		return $iReturn;
 	} // function

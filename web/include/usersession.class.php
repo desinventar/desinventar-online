@@ -14,7 +14,7 @@ class UserSession {
 	
 	public function __construct() {
 		$this->sSessionId = session_id();
-		$this->dStart = date('c');
+		$this->dStart = gmdate('c');
 		$this->dLastUpdate = $this->dStart;
 		$num_args = func_num_args();
 		if ($num_args > 0) {
@@ -53,7 +53,7 @@ class UserSession {
 	// Set LastUpdate field of Session so it will not expire...
 	public function awake() {
 		$iReturn = 1;
-		$this->dLastUpdate = date('c');
+		$this->dLastUpdate = gmdate('c');
 		$iReturn = $this->update();
 		return $iReturn;
 	}
@@ -106,7 +106,7 @@ class UserSession {
 	public function update() {
 		$iReturn = 0;
 		// Always update this field...
-		$this->dLastUpdate = date('c');
+		$this->dLastUpdate = gmdate('c');
 		$sQuery = "UPDATE UserSession SET " . 
 				  "RegionId ='"  . $this->sRegionId  . "'," .
 				  "UserName='"   . $this->sUserName  . "'," .

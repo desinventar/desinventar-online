@@ -19,16 +19,15 @@ class DIGeoLevel extends DIObject {
 		                      "GeoLevelLayerCode/STRING";
 		parent::__construct($prmSession);
 		$this->set("GeoLevelActive", 1);
+		$this->set("LangIsoCode", $this->q->getDBInfoValue('I18NFirstLang'));
 
 		$num_args = func_num_args();
 		if ($num_args >= 2) {
 			$this->GeoLevelId = func_get_arg(1);
-			$this->LangIsoCode = 'spa';
 			if ($num_args >= 3) {
 				$this->LangIsoCode = func_get_arg(2);
 			}
 			$this->load();
 		}
-	}
-	
-}
+	} //__construct
+} //class
