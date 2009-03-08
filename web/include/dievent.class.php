@@ -29,7 +29,6 @@ class DIEvent extends DIObject {
 				$this->setIdByLocalName($this->EventLocalName);
 			}
 		}
-		//$this->createFields($this->sFieldKeyDef, $this->sFieldDef);
 	}
 	
 	public function setIdByLocalName($prmEventLocalName) {

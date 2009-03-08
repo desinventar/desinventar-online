@@ -1,26 +1,28 @@
 <script language="php">
-/************************************************
- DesInventar8
- http://www.desinventar.org  
- (c) 1999-2007 Corporacion OSSO
- ***********************************************/
+/*
+ DesInventar - http://www.desinventar.org
+ (c) 1999-2009 Corporacion OSSO
+*/
 
 require_once('../include/loader.php');
 require_once('../include/dictionary.class.php');
 require_once('../include/query.class.php');
 require_once('../include/region.class.php');
-require_once('../include/user.class.php');
 require_once('../include/maps.class.php');
 
-if (isset($_GET['r']) && !empty($_GET['r']))
-  $reg = $_GET['r'];
-else
-  exit();
+if (isset($_GET['r']) && !empty($_GET['r'])) {
+	$reg = $_GET['r'];
+	$us->open($reg);
+} else {
+	$reg = $us->sRegionId;
+}
 
-$d = new Dictionary(VAR_DIR);
+if (empty($reg) || ($reg == '')) {
+	exit();
+}
+
 $r = new Region($reg);
 $q = new Query($reg);
-$u = new User('', '', '');
 
 // EDIT REGION: Form to Create and assign regions
 if (isset($_GET['levcmd'])) {
@@ -94,12 +96,12 @@ else {
   $t->assign ("lev", $lev);
 	$t->assign ("levmax", $q->getMaxGeoLev());
 	$t->assign ("levname", $q->loadGeoLevById($lev));
-	$urol = $u->getUserRole($reg);
+	$urol = $us->getUserRole($reg);
 	if ($urol == "OBSERVER")
 		$t->assign ("ro", "disabled");
 }
 $t->assign ("reg", $reg);
-$t->assign ("dic", $d->queryLabelsFromGroup('DB', $lg));
+$t->assign ("dic", $q->queryLabelsFromGroup('DB', $lg));
 $t->display ("geolevel.tpl");
 
 </script>

@@ -1,9 +1,7 @@
 <script language="php">
 /*
- ***********************************************
- DesInventar8 - http://www.desinventar.org
- (c) 1999-2009 Corporacion OSSO
- ***********************************************
+  DesInventar - http://www.desinventar.org
+  (c) 1999-2009 Corporacion OSSO
 */
 
 class DIObject {
@@ -19,7 +17,7 @@ class DIObject {
 	var $q;
 	
 	public function __construct($prmSession) {
-		$this->q = new Query();
+		$this->q = new Query($prmSession->sRegionId);
 		$num_args = func_num_args();
 		if ($num_args >= 1) {
 			$this->oSession = func_get_arg(0);
@@ -166,8 +164,8 @@ class DIObject {
 	public function load() {
 		$iReturn = 0;
 		$sQuery = $this->getSelectQuery();
-		if ($result = $this->q->query($sQuery)) {
-			while ($row = $result->fetch_object()) {
+		if ($result = $this->q->dreg->query($sQuery)) {
+			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 				$sAllFields = $this->sFieldKeyDef . "," . $this->sFieldDef;
 				$sFields = split(',', $sAllFields);
 				foreach ($sFields as $sKey => $sValue) {
