@@ -6,7 +6,7 @@
 
 class Query extends PDO
 {
-	public $regid = "";
+	public $sRegionId = "";
 
 	public function __construct() {
 		if (!extension_loaded('pdo')) {
@@ -26,28 +26,27 @@ class Query extends PDO
 			else
 				$this->rebuildCore($dbc); // Rebuild data from directory..
 			switch ($num_args) {
-			  case 0:
-			    $this->sSessionId = uuid();
+			case 0:
+				$this->sSessionId = session_id();
 				break;
-				case 1:
-				  $this->regid = func_get_arg(0);
-				  $dbr = VAR_DIR ."/". $this->regid ."/desinventar.db";
-          $this->dreg = null;
-          if (file_exists($dbr)) {
-            try {
-              $this->dreg = new PDO("sqlite:" . $dbr);
-              /*** set the error reporting attribute ***/
-              $this->dreg->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            } catch (PDOException $e) {
-              print $e->getMessage();
-            }
-          }
-          else {
-            echo "Region not exist. Contact Administrator.";
-            exit();
-          }
-        break;
-			}
+			case 1:
+				$this->sRegionId = func_get_arg(0);
+				$dbr = VAR_DIR ."/". $this->sRegionId ."/desinventar.db";
+				$this->dreg = null;
+				if (file_exists($dbr)) {
+					try {
+						$this->dreg = new PDO("sqlite:" . $dbr);
+						/*** set the error reporting attribute ***/
+						$this->dreg->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+					} catch (PDOException $e) {
+						print $e->getMessage();
+					}
+				} else {
+					echo "Region doesn't exist. Contact Administrator.";
+					exit();
+				}
+				break;
+			} //switch
 		} catch (PDOException $e) {
 			print "Error !: " . $e->getMessage() . "<br/>\n";
 			die();
@@ -887,7 +886,7 @@ class Query extends PDO
         else 
           $js[$ky] .= "'$k': '$v', ";
       }
-      $js[$ky] .= "'_REG': '". $this->regid ."'}";
+      $js[$ky] .= "'_REG': '". $this->sRegionId ."'}";
     }
     return $js;
   }

@@ -204,7 +204,7 @@ class Region {
     $data['GeoLimitMinY'] = $miny;
     $data['GeoLimitMaxX'] = $maxx;
     $data['GeoLimitMaxY'] = $maxy;
-    $rpcargs = array($_SESSION['sessionid'], DI_DBINFO, CMD_UPDATE, $data);
+    $rpcargs = array(session_id(), DI_DBINFO, CMD_UPDATE, $data);
     $di = callRpcDICore('RpcDIServer.saveDIObject', $rpcargs);
     return $di;
   }
