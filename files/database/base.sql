@@ -1,5 +1,5 @@
 /* BASE.DB - DesInventar8.2
-2009-03-05
+2009-03-08
 */
 
 DROP TABLE IF EXISTS Country;
