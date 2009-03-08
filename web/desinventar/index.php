@@ -97,7 +97,7 @@ if (isset($_POST['_REG']) && !empty($_POST['_REG'])) {
 	$sRegionId = $_GET['r'];
 	$us->open($sRegionId);
 } else {
-	// Use Regio Information from UserSession...
+	// Use Region Information from UserSession...
 	$sRegionId = $us->sRegionId;
 }
 	

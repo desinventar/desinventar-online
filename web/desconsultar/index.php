@@ -16,12 +16,17 @@ if (isset($_GET['r']) && !empty($_GET['r'])) {
 	} else {
 		$db = $reg;
 	}
+	$us->open($reg);
 	$q = new Query($db);
 	if (isset($_GET['lang']) && !empty($_GET['lang'])) {
 		$_SESSION['lang'] = $_GET['lang'];
 	}
 } else {
-	// Direct Acccess Not allowed, do not show anything...
+	$reg = $us->sRegionId;
+}
+
+// Direct Acccess Not allowed, do not show anything...
+if (empty($reg) || ($reg == '')) {
 	exit();
 }
 
