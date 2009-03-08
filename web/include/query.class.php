@@ -373,6 +373,17 @@ class Query extends PDO
 		return $data;
 	}
 	
+	// Read an specific InfoKey value from the table
+	function getDBInfoValue($prmInfoKey) {
+		$sReturn = '';
+		if ($this->dreg != null) {
+			$sql = "SELECT * FROM Info WHERE InfoKey='" . $prmInfoKey . "'";
+			$res = $this->dreg->query($sql,PDO::FETCH_ASSOC);
+			foreach($res as $row)
+				$sReturn = $row['InfoValue'];
+		} //if
+		return $sReturn;
+	}
 
   public function getDateRange() {
     $sql = "SELECT MIN(DisasterBeginTime) AS datemin, MAX(DisasterBeginTime)".

@@ -10,6 +10,8 @@ class Maps
 	public $url = "";
 	public $kml = "";
 	
+	private $reg = '';
+	
 	/* This class generate mapfile's mapserver
 	   q		: Region Object
 	   reg	: RegionUUID
@@ -22,6 +24,7 @@ class Maps
   */
 	function Maps($q, $reg, $lev, $dl, $range, $info, $lbl, $type) {
 	  $this->url = "http://". $_SERVER['HTTP_HOST'] ."/cgi-bin/mapserv?";
+	  $this->reg = $reg;
 		$fp = "";
 		if ($type == "KML")
 		  $this->kml = $this->generateKML($q, $reg, $info);
@@ -184,13 +187,17 @@ class Maps
 	}
 	
 	function makeImagemapTemplate($code, $name, $tm) {
-	  $data = '
+		/*
+		$data = '
   <area shape="poly" coords="[shpxy precision=0 proj=image]"
     onMouseOver="return escape(\'['. $name .']\')" onMouseOut="showText()"
     href="javascript:selectArea(\'['. $code .']\',\'['. $name .']\')" 
     alt="['. $name .']">
 ';
-    $this->makefile(DATADIR . "/" . $reg . "/" . $tm, $data);
+		$fp = DATADIR . "/" . $this->reg . "/" . $tm;
+		$map = $data;
+		$this->makefile($fp, $map);
+		*/
 	}
 	
 	// Generate standar layer with query results
