@@ -31,7 +31,6 @@ $cmd = '';
 if (isset($_GET['levcmd'])) {
 	$cmd = $_GET['levcmd'];
 }
-print "Command " . $cmd . "<br>";
 if (!empty($cmd)) {
 	$mod = "lev";
 	$dat = array();
@@ -44,7 +43,6 @@ if (!empty($cmd)) {
 	
 	switch ($cmd) {
 	case "insert":
-		print "Data : "; print_r($dat); print "<br>";
 		$o = new DIGeoLevel($us);
 		/* Set primary key values */
 		$o->set('GeoLevelId', $dat['GeoLevelId']);
@@ -103,7 +101,6 @@ if (!empty($cmd)) {
 		break;
 	case "chkname":
 		$t->assign ("ctl_chkname", true);
-		print "Id : " . $dat['GeoLevelId'] . "<br>";
 		if ($q->isvalidObjectName($dat['GeoLevelId'], 
 		                          $dat['GeoLevelName'], DI_GEOLEVEL)) {
 			$t->assign ("chkname", true);

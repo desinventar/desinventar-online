@@ -20,7 +20,6 @@ class DIEvent extends DIObject {
 		$this->set("EventPreDefined", 0);
 
 		$num_args = func_num_args();
-		print "num_args : " . $num_args . "<br>";
 		if ($num_args >= 2) {
 			$this->EventId = func_get_arg(1);
 			if ($num_args >= 3) {

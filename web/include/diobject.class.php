@@ -189,7 +189,6 @@ class DIObject {
 	public function create() {
 		$iReturn = 0;
 		$sQuery = $this->getInsertQuery();
-		print $sQuery . "<br>";
 		if ($result = $this->q->dreg->query($sQuery)) {
 			$iReturn = 1;		
 		}
@@ -217,7 +216,6 @@ class DIObject {
 			$this->SyncRecord = gmdate('c');
 		}
 		$sQuery = $this->getUpdateQuery();
-		print "$sQuery <br>";
 		try {
 			if ($result = $this->q->dreg->query($sQuery)) {
 				$iReturn = 1;		
