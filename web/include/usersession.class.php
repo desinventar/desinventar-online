@@ -13,7 +13,7 @@ class UserSession {
 	var $dLastUpdate     = '';
 	
 	public function __construct() {
-		$this->sSessionId = uuid();
+		$this->sSessionId = session_id();
 		$this->dStart = date('c');
 		$this->dLastUpdate = $this->dStart;
 		$num_args = func_num_args();
