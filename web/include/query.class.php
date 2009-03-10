@@ -224,6 +224,7 @@ class Query extends PDO
       case DI_EVENT:			$name = "EventName";			$table = "Event";			$fld = "EventId";		break;
       case DI_CAUSE:			$name = "CauseName";			$table = "Cause";			$fld = "CauseId";		break;
       case DI_GEOGRAPHY:	$name = "GeographyCode";	$table = "Geography"; $fld = "GeographyId";	break;
+      case "GEOCODE":			$name = "GeographyId";		$table = "Geography"; $fld = "GeographyCode";	break;
       case DI_GEOLEVEL:		$name = "GeoLevelName";		$table = "GeoLevel"; 	$fld = "GeoLevelId";	break;
       default:						return null; 		break;
     }

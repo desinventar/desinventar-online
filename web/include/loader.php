@@ -22,11 +22,12 @@ if (isset($_SERVER["DI8WEB"])) {
 	define("BASE", $_SERVER["DI8WEB"]);
 	define("SOFTDIR" , "/usr/share/desinventar");
 	define("WWWDIR"  , "/var/www/desinventar");
-	define("WWWURL"  , "/desinventar-data");
+	define("WWWDATA" , "/desinventar-data");
+	define("WWWURL"  , "/");
 	define("DATADIR" , "/var/lib/desinventar");
 	define("CACHEDIR", "/var/cache/Smarty");
 	define("FONTDIR" , "/usr/share/fonts/liberation/fonts.txt");	
-	define("DICT_DIR", SOFTDIR . "/files");
+//	define("DICT_DIR", SOFTDIR . "/files");
 	define("VAR_DIR" , DATADIR);
 	define("TMP_DIR" , DATADIR);
 	define("SMTY_DIR", CACHEDIR); // Smarty temp dir
@@ -40,7 +41,8 @@ if (isset($_SERVER["DI8WEB"])) {
 	}
 	define("SOFTDIR" , BASE);
 	define("WWWDIR"  , BASE . "/tmp");
-	define("WWWURL"  , "../tmp");
+	define("WWWDATA" , "../tmp");
+	define("WWWURL"  , "/mayandar/desinventar");
 	define("DATADIR" , "/var/lib/desinventar");
 	define("VAR_DIR" , DATADIR . '/var');
 	define("TMP_DIR" , DATADIR . '/tmp');
