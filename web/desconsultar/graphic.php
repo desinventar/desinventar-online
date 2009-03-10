@@ -79,7 +79,7 @@ if (isset($post['_G+cmd'])) {
 
 		// Construct Graphic Object and Show Page
 		$g = new Graphic($post['_G+Kind'], $post, $gl);
-		$sImageURL  = WWWURL . "/graphs/di8graphic_". session_id() . ".png";
+		$sImageURL  = WWWDATA . "/graphs/di8graphic_". session_id() . ".png";
 		$sImageFile = WWWDIR . "/graphs/di8graphic_". session_id() . ".png";
 		// Wrote graphic to file
 		$g->Stroke($sImageFile);

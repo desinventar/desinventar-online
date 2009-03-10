@@ -31,10 +31,17 @@ if (empty($reg) || ($reg == '')) {
 }
 
 // Display Geographic list of childs..
-if (isset($_GET['cmd']) && $_GET['cmd'] == "glist") {
-  $t->assign ("reg", $_GET['GeographyId']);
-  $t->assign ("geol", $q->loadGeoChilds($_GET['GeographyId']));
-  $t->assign ("ctl_glist", true);
+if (isset($_GET['cmd'])) {
+  if ($_GET['cmd'] == "getGeoId") {
+    $code = $q->getObjectNameById($_GET['GeoCode'], "GEOCODE");
+    echo "$code";
+  }
+  // Display Geographic list of childs..
+  if ($_GET['cmd'] == "glist") {
+    $t->assign ("reg", $_GET['GeographyId']);
+    $t->assign ("geol", $q->loadGeoChilds($_GET['GeographyId']));
+    $t->assign ("ctl_glist", true);
+  }
 }
 else {
   $t->assign ("dis", $q->queryLabelsFromGroup('Disaster', $lg));
@@ -44,6 +51,7 @@ else {
   $t->assign ("cau", $q->queryLabelsFromGroup('Cause', $lg));
   $t->assign ("ctl_glist", true);
   $t->assign ("reg", $reg);
+  $t->assign ("path", VAR_DIR);
   // Set lists if is VirtualRegion
   if (isset($_GET['v']) && $_GET['v'] == "true") {
     $t->assign ("isvreg", true);
