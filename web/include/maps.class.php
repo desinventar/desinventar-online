@@ -171,13 +171,8 @@ class Maps
         OUTLINECOLOR 50 50 50';
 			  $map .= '
         LABEL
-			  	TYPE	TRUETYPE
-			  	FONT	"arial"
-			  	SIZE	8
-			  	COLOR	0 0 89
-			  	POSITION	CC
-			  	PARTIALS	FALSE
-			  	BUFFER	4
+			  	TYPE TRUETYPE		FONT "arial"		SIZE 6		COLOR	0 0 89
+			  	POSITION CC			PARTIALS FALSE	BUFFER 4
         END
 			END
 		END';
@@ -248,7 +243,7 @@ class Maps
   			STYLE COLOR '. $i[1] .' OUTLINECOLOR 130 130 130 END
   			'. $shwlab .'
   			LABEL
-		      TYPE TRUETYPE		FONT "arial"		SIZE	8	
+		      TYPE TRUETYPE		FONT "arial"		SIZE	6
 		      COLOR	0 0 89 		POSITION CC 		PARTIALS FALSE	BUFFER 4
         END
       END';
@@ -260,10 +255,10 @@ class Maps
 		  CLASS
 		    NAME "No data"
         EXPRESSION (length("['. $code .']") > 0)
-		    STYLE OUTLINECOLOR 255 255 255 END 
+#		    STYLE OUTLINECOLOR 255 255 255 END 
   			'. $shwlab .'
   			LABEL
-		      TYPE TRUETYPE		FONT "arial"		SIZE 8	
+		      TYPE TRUETYPE		FONT "arial"		SIZE 6	
 		      COLOR	0 0 89 		POSITION CC			PARTIALS FALSE	BUFFER 4
         END
       END';
