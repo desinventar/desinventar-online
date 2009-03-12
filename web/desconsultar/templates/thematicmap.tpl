@@ -33,9 +33,7 @@
 						new OpenLayers.Control.PanZoomBar(),
 						new OpenLayers.Control.MouseToolbar(),
 						new OpenLayers.Control.LayerSwitcher({'ascending':false}),
-						new OpenLayers.Control.Permalink(),
 						new OpenLayers.Control.ScaleLine(),
-						new OpenLayers.Control.Permalink('permalink'),
 						new OpenLayers.Control.MousePosition(),
 						new OpenLayers.Control.OverviewMap(),
 						new OpenLayers.Control.KeyboardDefaults()

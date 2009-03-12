@@ -66,6 +66,9 @@
             if ($('{-$key-}').checked) enadisEff('{-$key-}', false);
 {-/foreach-}
             $('DC').reset();
+{-if $ctl_showmap-}
+						fmp.clearAreas();
+{-/if-}
           break;
           case "{-#mgotoqd#-}":
             if (w.isVisible())
@@ -120,7 +123,7 @@
             margins:'0 2 0 0',
             collapsible: true,
             contentEl: 'west'
-        }]
+          }]
       });
       // ==> Results Configuration Windows
       // Data
@@ -337,6 +340,24 @@
         dc.appendChild(ih);
       }
     }
+    // selection map functions
+    function showMap(lev) {
+    	$('smap').style.visibility = 'visible';
+    }
+    function hideMap() {
+    	$('smap').style.visibility = 'hidden';
+    }
+    function setSelMap(code, gid, opc) {
+{-if $ctl_showmap-}
+			showMap(0);
+    	fmp.selectArea(code, '');
+{-else-}
+    	if (opc)
+    		setgeo(gid);
+    	else
+    		unsetgeo(gid);
+{-/if-}
+    }
     function setgeo(k) {
       // Find and fill childs
       $('itree' + k).style.display = 'block';
@@ -380,6 +401,7 @@
         s.collapse();
         $('DC').action='data.php';
         $('DC').submit();
+        hideMap();
         return true;
       }
       else
@@ -395,6 +417,7 @@
       s.collapse();
       $('DC').action='thematicmap.php';
       $('DC').submit();
+      hideMap();
     }
     function sendGraphic(cmd) {
       $('_G+cmd').value = cmd;
@@ -405,6 +428,7 @@
       s.collapse();
       $('DC').action='graphic.php';
       $('DC').submit();
+      hideMap();
     }
     function sendStadistic(cmd) {
       if ($('_S+Firstlev').value != "" && $('_S+Field[]').length > 0) {
@@ -422,6 +446,7 @@
         s.collapse();
         $('DC').action='stadistic.php';
         $('DC').submit();
+        hideMap();
         return true;
       }
       else
@@ -1095,8 +1120,13 @@
    </table>
 <!--   SHOW RESULTS  -->
   <div id="querydetails" style="height:40px;" class="dwin"></div>
-  <iframe name="ifr" id="ifr" frameborder="0" 
-  	style="height:550px; width:960px;" src="../region.php?r={-$reg-}&cmd=info{-if $isvreg-}&v=true{-/if-}">
+  <div id="smap" style="position:absolute; left:0px; top:15px;">
+  	<iframe name="fmp" id="fmp" frameborder="0" style="height:600px; width:700px;" {-if $ctl_showmap-} 
+  src='/cgi-bin/mapserv?map={-$path-}/{-$reg-}/region.map&qlayer=admin00&mode=nquery&searchmap=true&mapsize=500+500&mapext={-$x1-}+{-$y1-}+{-$x2-}+{-$y2-}'{-/if-}>
+  	</iframe>
+  </div>
+  <iframe name="ifr" id="ifr" frameborder="0" style="height:550px; width:960px;" 
+  		src="../region.php?r={-$reg-}&cmd=info{-if $isvreg-}&v=true{-/if-}">
   </iframe>
  </div>
 
@@ -1112,12 +1142,11 @@
   <dl class="accordion">
  {-if !$isvreg-}
     <!-- BEGIN GEOGRAPHY SECTION -->
-    <dt>{-#mgeosection#-}</dt>
+    <!-- Select from Map testing ... 'selectionmap.php' -->
+    <dt onClick="showMap(0);">{-#mgeosection#-}</dt>
     <dd>
   {-foreach name=glev key=k item=i from=$glev-}
-      <span class="dlgmsg" onMouseOver="showtip('{-$i[1]-}');">
-      <!-- Select from Map testing ... 'selectionmap.php' -->
-      <a href="javascript:void(null)" onClick="$('ifr').src='/cgi-bin/mapserv?map={-$path-}/{-$reg-}/region.map&qlayer=admin00&mode=nquery&searchmap=true';">{-$i[0]-}</a></span> |
+      <span class="dlgmsg" onMouseOver="showtip('{-$i[1]-}');">{-$i[0]-}</span> |
   {-/foreach-}
       <div style="height: 280px;" class="dwin" ext:qtip="{-#thlpquery#-}">
  {-/if-}
@@ -1128,7 +1157,7 @@
  {-foreach name=geol key=key item=item from=$geol-}
           <li id="show-g{-$key-}">
             <input type="checkbox" id="{-$key-}" name="D:DisasterGeographyId[]" value="{-$key-}"
-                onClick="(this.checked) ? setgeo('{-$key-}') : unsetgeo('{-$key-}');">
+                onClick="setSelMap('{-$item[0]-}', '{-$key-}', this.checked);">
             <label for="{-$key-}">{-$item[1]-}</label>
             <span id="itree{-$key-}"></span>
           </li>
@@ -1145,7 +1174,7 @@
     </dd>
  {-/if-}
     <!-- BEGIN EVENT SECTION -->
-    <dt>{-#mevesection#-}</dt>
+    <dt onClick="hideMap();">{-#mevesection#-}</dt>
     <dd>
       <span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br>
       <select name="D:EventId[]" multiple style="width: 250px; height: 200px;">
@@ -1167,7 +1196,7 @@
           onFocus="showtip('{-$eve.EventNotes[2]-}');"></textarea>
     </dd>
     <!-- BEGIN CAUSE SECTION -->
-    <dt>{-#mcausection#-}</dt>
+    <dt onClick="hideMap();">{-#mcausection#-}</dt>
     <dd>
       <span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br>
       <select name="D:CauseId[]" multiple style="width: 250px; height: 280px;">
@@ -1185,7 +1214,7 @@
           onFocus="showtip('{-$cau.CauseNotes[2]-}');"></textarea>
     </dd>
     <!-- BEGIN EFFECTS SECTION -->
-    <dt>{-#meffsection#-}</dt>
+    <dt onClick="hideMap();">{-#meffsection#-}</dt>
     <dd>
       <b>{-#ttitegp#-}</b><br>
       <div style="width: 265px; height: 130px;" class="dwin" ext:qtip="{-#thlpquery#-}">
@@ -1344,7 +1373,7 @@
       </div><br>
     </dd>-->
     <!-- BEGIN DATETIME SECTION -->
-    <dt>{-#mdcsection#-}</dt>
+    <dt onClick="hideMap();">{-#mdcsection#-}</dt>
     <dd class="default">
       <div style="height: 360px;">
         <b onMouseOver="showtip('{-$dis.DisasterBeginTime[2]-}');">{-#tdate#-}</b>
