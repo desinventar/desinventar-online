@@ -29,5 +29,16 @@ class DIGeoLevel extends DIObject {
 			}
 			$this->load();
 		}
-	} //__construct
+	} // __construct
+
+	public function getMaxGeoLevel() {
+		$iMaxVal = 0;
+		$sQuery = "SELECT MAX(GeoLevelId) AS MAXVAL FROM GeoLevel";
+		if ($result = $this->q->dreg->query($sQuery)) {
+			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
+				$iMaxVal = $row->MAXVAL;
+			}
+		}
+		return $iMaxVal;
+	} // function
 } //class

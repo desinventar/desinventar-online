@@ -13,6 +13,7 @@ class DIObject {
 	var $sFieldKeyDef = '';
 	var $sFieldDef = '';
 	
+	var $oField;
 	var $oFieldType;
 	var $q;
 	
@@ -26,6 +27,8 @@ class DIObject {
 				$this->sFieldDef    = func_get_arg(2);
 			}
 		}
+		$this->oField = array();
+		$this->oFieldType=array();
 		$this->createFields($this->sFieldKeyDef, $this->sFieldDef);
 	} // constructor
 	
@@ -37,17 +40,17 @@ class DIObject {
 			$sFieldName = $oItem[0];
 			$sFieldType = $oItem[1];
 			$this->oFieldType[$sFieldName] = $sFieldType;
-			if ($sFieldType == "STRING")   { $this->$sFieldName = "";        }
-			if ($sFieldType == "TEXT")     { $this->$sFieldName = "";        }
-			if ($sFieldType == "DATETIME") { $this->$sFieldName = gmdate('c'); }
-			if ($sFieldType == "INTEGER")  { $this->$sFieldName = -1;        }
-			if ($sFieldType == "DOUBLE")   { $this->$sFieldName = 0.0;       }
-			if ($sFieldType == "BOOLEAN")  { $this->$sFieldName = true;      }
+			if ($sFieldType == "STRING")   { $this->oField[$sFieldName] = "";        }
+			if ($sFieldType == "TEXT")     { $this->oField[$sFieldName] = "";        }
+			if ($sFieldType == "DATETIME") { $this->oField[$sFieldName] = gmdate('c'); }
+			if ($sFieldType == "INTEGER")  { $this->oField[$sFieldName] = -1;        }
+			if ($sFieldType == "DOUBLE")   { $this->oField[$sFieldName] = 0.0;       }
+			if ($sFieldType == "BOOLEAN")  { $this->oField[$sFieldName] = true;      }
 		}
 	} // function
 	
 	public function set($prmKey, $prmValue) {
-		$this->$prmKey = $prmValue;
+		$this->oField[$prmKey] = $prmValue;
 	}
 
 	public function setFromArray($prmArray) {
@@ -58,7 +61,6 @@ class DIObject {
 		
 	public function getTableName() {
 		return $this->sTableName;
-		//return $this->oSession->sRegionId . "_" . $this->sTableName;
 	}
 	
 	public function getWhereSubQuery() {
@@ -73,12 +75,12 @@ class DIObject {
 			if (($sFieldType == "STRING"  ) || 
 			    ($sFieldType == "TEXT"    ) ||
 			    ($sFieldType == "DATETIME") ) {
-			    $sQuery .= "'" . $this->$sFieldName . "'";
+			    $sQuery .= "'" . $this->oField[$sFieldName] . "'";
 			}
 			if (($sFieldType == "INTEGER") ||
 			    ($sFieldType == "DOUBLE" ) ||
 			    ($sFieldType == "BOOLEAN" ) ) {
-			    $sQuery .= $this->$sFieldName;
+			    $sQuery .= $this->oField[$sFieldName];
 			}
 			$i++;
 		}
@@ -114,12 +116,12 @@ class DIObject {
 			if (($sFieldType == "STRING"  ) || 
 			    ($sFieldType == "TEXT"    ) ||
 			    ($sFieldType == "DATETIME") ) {
-			    $sQueryValues .= "'" . $this->$sFieldName . "'";
+			    $sQueryValues .= "'" . $this->oField[$sFieldName] . "'";
 			}
 			if (($sFieldType == "INTEGER") ||
 			    ($sFieldType == "DOUBLE" ) ||
 			    ($sFieldType == "BOOLEAN" ) ) {
-			    $sQueryValues .= $this->$sFieldName;
+			    $sQueryValues .= $this->oField[$sFieldName];
 			}
 			$i++;
 		}
@@ -143,12 +145,12 @@ class DIObject {
 			if (($sFieldType == "STRING"  ) || 
 			    ($sFieldType == "TEXT"    ) ||
 			    ($sFieldType == "DATETIME") ) {
-			    $sQuery .= "'" . $this->$sFieldName . "'";
+			    $sQuery .= "'" . $this->oField[$sFieldName] . "'";
 			}
 			if (($sFieldType == "INTEGER") ||
 			    ($sFieldType == "DOUBLE" ) ||
 			    ($sFieldType == "BOOLEAN" ) ) {
-			    $sQuery .= $this->$sFieldName;
+			    $sQuery .= $this->oField[$sFieldName];
 			}
 			$i++;
 		}
@@ -178,7 +180,7 @@ class DIObject {
 					$oItem = split('/', $sValue);
 					$sFieldName = $oItem[0];
 					$sFieldType = $oItem[1];
-					$this->$sFieldName = $row->$sFieldName;
+					$this->oField[$sFieldName] = $row->$sFieldName;
 				}
 				$iReturn = 1;
 			} // while
@@ -196,7 +198,7 @@ class DIObject {
 	} // function
 	
 	public function insert() {
-		$this->insert();
+		$this->create();
 		$this->update();
 	}
 

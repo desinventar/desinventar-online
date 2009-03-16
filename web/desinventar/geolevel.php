@@ -44,19 +44,12 @@ if (!empty($cmd)) {
 	switch ($cmd) {
 	case "insert":
 		$o = new DIGeoLevel($us);
-		/* Set primary key values */
-		$o->set('GeoLevelId', $dat['GeoLevelId']);
 		// Update with data from FORM
 		$o->setFromArray($dat);
+		// Set primary key values
+		$o->set('GeoLevelId', $o->getMaxGeoLevel()+1);
 		// Save to database
 		$gl = $o->insert();
-		/*		
-		$gl = $r->insertGeoLevel($dat['GeoLevelName'], 
-		                         $dat['GeoLevelDesc'],
-		                         $dat['GeoLevelLayerFile'], 
-		                         $dat['GeoLevelLayerCode'], 
-		                         $dat['GeoLevelLayerName']);
-		*/
 		if (!iserror($gl)) {
 			$t->assign ("ctl_msginslev", true);
 			// Create selection map..
@@ -76,7 +69,7 @@ if (!empty($cmd)) {
 		break;
 	case "update":
 		$o = new DIGeoLevel($us);
-		/* Set primary key values */
+		// Set primary key values
 		$o->set('GeoLevelId', $dat['GeoLevelId']);
 		$o->load();
 		// Update with data from FORM
