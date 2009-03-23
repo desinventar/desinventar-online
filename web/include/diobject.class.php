@@ -49,6 +49,10 @@ class DIObject {
 		}
 	} // function
 	
+	public function get($prmKey) {
+		return $this->oField[$prmKey];
+	}
+	
 	public function set($prmKey, $prmValue) {
 		$this->oField[$prmKey] = $prmValue;
 	}
@@ -141,17 +145,19 @@ class DIObject {
 			if ($i > 0) {
 				$sQuery .= ",";
 			}
-			$sQuery .= $sFieldName . "=";
+			$sQueryItem = $sFieldName . "=";
 			if (($sFieldType == "STRING"  ) || 
 			    ($sFieldType == "TEXT"    ) ||
 			    ($sFieldType == "DATETIME") ) {
-			    $sQuery .= "'" . $this->oField[$sFieldName] . "'";
+			    $sQueryItem .= "'" . $this->oField[$sFieldName] . "'";
+			} elseif (($sFieldType == "INTEGER") ||
+			          ($sFieldType == "DOUBLE" ) ||
+			          ($sFieldType == "BOOLEAN" ) ) {
+			    $sQueryItem .= $this->oField[$sFieldName];
+			} else {
+				print "Unknown EventType : $sFieldType ($sFieldName)<br>";
 			}
-			if (($sFieldType == "INTEGER") ||
-			    ($sFieldType == "DOUBLE" ) ||
-			    ($sFieldType == "BOOLEAN" ) ) {
-			    $sQuery .= $this->oField[$sFieldName];
-			}
+			$sQuery .= $sQueryItem;
 			$i++;
 		}
 		$sQuery .= " WHERE " . $this->getWhereSubQuery();

@@ -21,7 +21,6 @@ if (empty($reg) || ($reg == '')) {
 	exit();
 }
 
-$r = new Region($reg);
 $q = new Query($reg);
 
 $mod = 'lev';

@@ -63,6 +63,7 @@ $dicore_port = 8081;
 
 require_once(BASE . "/include/usersession.class.php");
 require_once(BASE . "/include/query.class.php");
+require_once(BASE . "/include/diobject.class.php");
 require_once(BASE . "/include/constants.php");
 
 // Session Management
