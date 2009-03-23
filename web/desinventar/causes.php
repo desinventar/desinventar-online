@@ -22,12 +22,12 @@ function form2cause ($form) {
     $data['CauseId'] = $form['CauseId'];
   else
     $data['CauseId'] = "";
-  if (isset($form['CauseLocalName']))
-    $data['CauseLocalName'] = $form['CauseLocalName'];
-  if (isset($form['CauseLocalDesc']))
-    $data['CauseLocalDesc'] = $form['CauseLocalDesc'];
-  else if (isset($form['CauseLocalDesc2']))
-    $data['CauseLocalDesc'] = $form['CauseLocalDesc2'];
+  if (isset($form['CauseName']))
+    $data['CauseName'] = $form['CauseName'];
+  if (isset($form['CauseDesc']))
+    $data['CauseDesc'] = $form['CauseDesc'];
+  else if (isset($form['CauseDesc2']))
+    $data['CauseDesc'] = $form['CauseDesc2'];
   if (isset($form['CauseActive']) && $form['CauseActive'] == "on")
     $data['CauseActive'] = true;
   else
@@ -63,13 +63,13 @@ if (isset($_GET['cmd'])) {
 //  print_r($dat);
   switch ($_GET['cmd']) {
     case "insert":
-      $ev = $r->insertCause($dat['CauseId'], $dat['CauseLocalName'],
-              $dat['CauseLocalDesc'], $dat['CauseActive']);
+      $ev = $r->insertCause($dat['CauseId'], $dat['CauseName'],
+              $dat['CauseDesc'], $dat['CauseActive']);
       showResult($ev, $t);
     break;
     case "update":
-      $ev = $r->updateCause($dat['CauseId'], $dat['CauseLocalName'],
-              $dat['CauseLocalDesc'], $dat['CauseActive'], $dat['CausePreDefined']);
+      $ev = $r->updateCause($dat['CauseId'], $dat['CauseName'],
+              $dat['CauseDesc'], $dat['CauseActive'], $dat['CausePreDefined']);
       showResult($ev, $t);
     break;
     // reload list from local SQLITE
@@ -85,7 +85,7 @@ if (isset($_GET['cmd'])) {
     break;
     case "chkname":
       $t->assign ("ctl_chkname", true);
-      if ($q->isvalidObjectName($_GET['CauseId'], $_GET['CauseLocalName'], DI_CAUSE))
+      if ($q->isvalidObjectName($_GET['CauseId'], $_GET['CauseName'], DI_CAUSE))
         $t->assign ("chkname", true);
     break;
     case "chkstatus":

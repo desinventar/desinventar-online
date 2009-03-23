@@ -197,8 +197,13 @@ class DIObject {
 	public function create() {
 		$iReturn = 0;
 		$sQuery = $this->getInsertQuery();
-		if ($result = $this->q->dreg->query($sQuery)) {
-			$iReturn = 1;		
+		print $sQuery . "<br>";
+		try {
+			if ($result = $this->q->dreg->query($sQuery)) {
+				$iReturn = 1;		
+			}
+		} catch (PDOException $e) {
+			print "Error " . $e->getMessage() . "<br>";
 		}
 		return $iReturn;
 	} // function

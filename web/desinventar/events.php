@@ -21,12 +21,12 @@ function form2event ($form) {
 		$data['EventId'] = $form['EventId'];
 	else
 		$data['EventId'] = "";
-	if (isset($form['EventLocalName']))
-		$data['EventLocalName'] = $form['EventLocalName'];
-	if (isset($form['EventLocalDesc']))
-		$data['EventLocalDesc'] = $form['EventLocalDesc'];
-	else if (isset($form['EventLocalDesc2']))
-		$data['EventLocalDesc'] = $form['EventLocalDesc2'];
+	if (isset($form['EvenName']))
+		$data['EventName'] = $form['EventName'];
+	if (isset($form['EventDesc']))
+		$data['EventDesc'] = $form['EventDesc'];
+	else if (isset($form['EventDesc2']))
+		$data['EventDesc'] = $form['EventDesc2'];
 	if (isset($form['EventActive']) && $form['EventActive'] == "on")
 		$data['EventActive'] = true;
 	else
@@ -60,23 +60,28 @@ if (isset($_GET['cmd'])) {
 	$dat = form2event($_GET);
 	switch ($_GET['cmd']) {
 	case "insert":
-		$ev = $r->insertEvent($dat['EventId'], $dat['EventLocalName'],
-		                      $dat['EventLocalDesc'], $dat['EventActive']);
-		showResult($ev, $t);
+		$o = new DIEvent($us);
+		$o->setFromArray($dat);
+		$i = $o->insert();
+		/*
+		$i = $r->insertEvent($dat['EventId'], $dat['EventName'],
+		                      $dat['EventDesc'], $dat['EventActive']);
+		*/
+		showResult($i, $t);
 		break;
 	case "update":
 		$o = new DIEvent($us);
 		$o->set('EventId', $dat['EventId']);
 		$o->load();
-		//$o->setFromArray($dat);
+		$o->setFromArray($dat);
 		$i = 0;
 		if ($o->get("EventPreDefined") == 0) {
 			// Update only non PreDefined Events
 			$i = $o->update();
 		}
 		/*
-		$i = $r->updateEvent($dat['EventId'], $dat['EventLocalName'],
-		                     $dat['EventLocalDesc'], $dat['EventActive'], 
+		$i = $r->updateEvent($dat['EventId'], $dat['EventName'],
+		                     $dat['EventDesc'], $dat['EventActive'], 
 		                     $dat['EventPreDefined']);
 		*/
 		showResult($i, $t);
@@ -93,7 +98,7 @@ if (isset($_GET['cmd'])) {
 		break;
 	case "chkname":
 		$t->assign ("ctl_chkname", true);
-		if ($q->isvalidObjectName($_GET['EventId'], $_GET['EventLocalName'], DI_EVENT))
+		if ($q->isvalidObjectName($_GET['EventId'], $_GET['EventName'], DI_EVENT))
 			$t->assign ("chkname", true);
 		break;
 	case "chkstatus":
