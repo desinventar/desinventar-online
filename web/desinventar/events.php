@@ -6,7 +6,6 @@
 
 require_once('../include/loader.php');
 require_once('../include/query.class.php');
-require_once('../include/region.class.php');
 require_once('../include/usersession.class.php');
 require_once('../include/dievent.class.php');
 
@@ -53,7 +52,6 @@ function showResult($stat, &$tp) {
 	} //else
 } //function
 
-$r = new Region($reg);
 $q = new Query($reg);
 
 if (isset($_GET['cmd'])) {
@@ -61,12 +59,9 @@ if (isset($_GET['cmd'])) {
 	switch ($_GET['cmd']) {
 	case "insert":
 		$o = new DIEvent($us);
-		$o->setFromArray($dat);
+		$o->setFromArray($_dat);
+		$o->set('EventId', $o->get('EventName'));
 		$i = $o->insert();
-		/*
-		$i = $r->insertEvent($dat['EventId'], $dat['EventName'],
-		                      $dat['EventDesc'], $dat['EventActive']);
-		*/
 		showResult($i, $t);
 		break;
 	case "update":
@@ -79,11 +74,6 @@ if (isset($_GET['cmd'])) {
 			// Update only non PreDefined Events
 			$i = $o->update();
 		}
-		/*
-		$i = $r->updateEvent($dat['EventId'], $dat['EventName'],
-		                     $dat['EventDesc'], $dat['EventActive'], 
-		                     $dat['EventPreDefined']);
-		*/
 		showResult($i, $t);
 		break;
 	case "list":
@@ -97,6 +87,7 @@ if (isset($_GET['cmd'])) {
 		}
 		break;
 	case "chkname":
+		print "chkname EventId : " . $_GET['EventId'] . "<br>";
 		$t->assign ("ctl_chkname", true);
 		if ($q->isvalidObjectName($_GET['EventId'], $_GET['EventName'], DI_EVENT))
 			$t->assign ("chkname", true);
