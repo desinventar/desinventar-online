@@ -1,15 +1,13 @@
 <script language="php">
-/************************************************
- DesInventar8
- http://www.desinventar.org  
- (c) 1999-2007 Corporacion OSSO
- ***********************************************/
+/*
+ DesInventar - http://www.desinventar.org
+ (c) 1999-2009 Corporacion OSSO
+*/
 
 require_once('../include/loader.php');
-require_once('../include/dictionary.class.php');
 require_once('../include/query.class.php');
 require_once('../include/region.class.php');
-require_once('../include/user.class.php');
+require_once('../include/usersession.class.php');
 
 if (isset($_GET['r']) && !empty($_GET['r']))
   $reg = $_GET['r'];
@@ -54,10 +52,8 @@ function showResult($stat, &$tp) {
   }
 }
 
-$d = new Dictionary(VAR_DIR);
 $r = new Region($reg);
 $q = new Query($reg);
-$u = new User('', '', '');
 
 if (isset($_GET['cmd'])) {
   $dat = form2event($_GET);
@@ -98,8 +94,8 @@ if (isset($_GET['cmd'])) {
   }
 }
 else {
-	$t->assign ("dic", $d->queryLabelsFromGroup('DB', $lg));
-	$urol = $u->getUserRole($reg);
+	$t->assign ("dic", $q->queryLabelsFromGroup('DB', $lg));
+	$urol = $us->getUserRole($reg);
 	if ($urol == "OBSERVER")
 		$t->assign ("ro", "disabled");
   $t->assign ("ctl_show", true);
