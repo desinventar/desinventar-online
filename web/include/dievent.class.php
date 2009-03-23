@@ -20,7 +20,7 @@ class DIEvent extends DIObject {
 		                      "EventCreationDate/DATETIME," .
 		                      "EventLastUpdate/DATETIME";
 		parent::__construct($prmSession);
-		$this->set("EventPreDefined", 0);
+		$this->set("EventPredefined", 0);
 		$this->set("EventActive", 1);
 		$this->set("LangIsoCode", $this->q->getDBInfoValue('I18NFirstLang'));
 

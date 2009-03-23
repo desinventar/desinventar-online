@@ -56,11 +56,16 @@ class DIObject {
 	public function set($prmKey, $prmValue) {
 		$iReturn = 0;
 		if (isset($this->oField[$prmKey])) {
-			if ($this->oFieldType[$prmKey] == 'BOOLEAN') {
-				if ($prmValue == 'on') { $prmValue = 1; }
-				if ($prmValue == 'off') { $prmValue = 0; }
+			$sValue = $prmValue;
+			$sFieldType = $this->oFieldType[$prmKey];
+			if ($sFieldType == 'STRING') {
+				$sValue = trim($sValue);
 			}
-			$this->oField[$prmKey] = $prmValue;
+			if ($sFieldType == 'BOOLEAN') {
+				if ($sValue . "" == "on")  { $sValue = 1; }
+				if ($sValue . "" == "off") { $sValue = 0; }
+			}
+			$this->oField[$prmKey] = $sValue;
 			$iReturn = 1;
 		}
 		return $iReturn;
@@ -203,18 +208,6 @@ class DIObject {
 		return $iReturn;
 	} // function load
 	
-	public function create() {
-		$iReturn = 0;
-		$sQuery = $this->getInsertQuery();
-		try {
-			if ($result = $this->q->dreg->query($sQuery)) {
-				$iReturn = 1;		
-			}
-		} catch (PDOException $e) {
-			print "Error " . $e->getMessage() . "<br>";
-		}
-		return $iReturn;
-	} // function
 	
 	public function insert() {
 		$this->create();
@@ -230,9 +223,21 @@ class DIObject {
 		return $iReturn;
 	} // function
 
-	public function update() {
+	public function create() {
 		$iReturn = 0;
-		
+		$sQuery = $this->getInsertQuery();
+		try {
+			if ($result = $this->q->dreg->query($sQuery)) {
+				$iReturn = 1;		
+			}
+		} catch (PDOException $e) {
+			print "Error " . $e->getMessage() . "<br>";
+		}
+		return $iReturn;
+	} // function
+
+	public function update() {
+		$iReturn = 0;		
 		if (!empty($this->SyncRecord)) {
 			$this->SyncRecord = gmdate('c');
 		}
