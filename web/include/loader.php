@@ -183,7 +183,7 @@ function callRpcDICore($rpcmethod, $rpcargs) {
 	}
 }*/
 
-// To prevent fails in Strings with RETURNS or "s eliminate this.. 
+// To prevent display errors with strings containing cr,lf,quotes etc. remove them
 function str2js($str) {
 	$str2 = ereg_replace("[\r\n]", " \\n\\\n", $str);
 	$str2 = ereg_replace('"', '-', $str2);

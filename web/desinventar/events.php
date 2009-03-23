@@ -35,14 +35,9 @@ if (isset($_GET['cmd'])) {
 	switch ($_GET['cmd']) {
 	case "insert":
 		$o = new DIEvent($us);
-		//print "Debug : " .  $o->get('EventPredefined') . "<br>";
 		$o->setFromArray($_GET);
-		//print "Debug : " .  $o->get('EventPredefined') . "<br>";
 		$o->set('EventId', $o->get('EventName'));
-		//print_r($o->oField);print "<br>";
 		$o->set('EventPredefined', 0);
-		//print_r($o->oField);print "<br>";
-		//print "Debug : " .  $o->get('EventPredefined') . "<br>";
 		$i = $o->insert();
 		showResult($i, $t);
 		break;
@@ -53,7 +48,6 @@ if (isset($_GET['cmd'])) {
 		$o->setFromArray($_GET);
 		$i = 0;
 		if ($o->get("EventPredefined") == 0) {
-			// Update only non PreDefined Events
 			$i = $o->update();
 		}
 		showResult($i, $t);

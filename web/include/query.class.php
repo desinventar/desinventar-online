@@ -158,25 +158,26 @@ class Query extends PDO
     return $data;
   }
 
-  public function getRegionCauseList($type, $status, $lang) {
-    if ($type == "PREDEF")
-      $sqlt = "CausePreDefined=1";
-    else if ($type == "USER")
-      $sqlt = "CausePreDefined=0";
-    else
-      $sqlt = "'1=1'";	// all
-    if ($status == "active")
-      $sqls = "CauseActive=1";
-    else
-      $sqls = "'1=1'"; // all
-    $sql = "SELECT * FROM Cause WHERE ". $sqls ." AND ". 
-        $sqlt ." ORDER BY CauseName";
-    $data = array();
-    $res = $this->dreg->query($sql);
-    foreach($res as $row)
-      $data[$row['CauseId']] = array($row['CauseName'], str2js($row['CauseDesc']), $row['CauseActive']);
-    return $data;
-  }
+	public function getRegionCauseList($type, $status, $lang) {
+		if ($type == "PREDEF")
+			$sqlt = "CausePredefined=1";
+		else if ($type == "USER")
+			$sqlt = "CausePredefined=0";
+		else
+			$sqlt = "'1=1'";	// all
+		if ($status == "active")
+			$sqls = "CauseActive=1";
+		else
+			$sqls = "'1=1'"; // all
+		$sql = "SELECT * FROM Cause WHERE ". $sqls ." AND ". 
+		$sqlt ." ORDER BY CauseName";
+		$data = array();
+		$res = $this->dreg->query($sql);
+		foreach($res as $row) {
+			$data[$row['CauseId']] = array($row['CauseName'], str2js($row['CauseDesc']), $row['CauseActive']);
+		} //foreach
+		return $data;
+	} //function
 
   /***** READ OBJECTS :: EVENT, CAUSE, GEOGRAPHY, GEOLEVEL READ *****/
   public function isvalidObjectToInactivate($id, $obj) {
