@@ -14,29 +14,6 @@ if (isset($_GET['r']) && !empty($_GET['r']))
 else
 	exit();
 
-function form2event ($form) {
-	$data = array ();
-	if (isset($form['EventId']) && !empty($form['EventId']))
-		$data['EventId'] = $form['EventId'];
-	else
-		$data['EventId'] = "";
-	if (isset($form['EvenName']))
-		$data['EventName'] = $form['EventName'];
-	if (isset($form['EventDesc']))
-		$data['EventDesc'] = $form['EventDesc'];
-	else if (isset($form['EventDesc2']))
-		$data['EventDesc'] = $form['EventDesc2'];
-	if (isset($form['EventActive']) && $form['EventActive'] == "on")
-		$data['EventActive'] = true;
-	else
-		$data['EventActive'] = false;
-	if (isset($form['EventPreDefined']) && $form['EventPreDefined'] == "1")
-		$data['EventPreDefined'] = true;
-	else
-		$data['EventPreDefined'] = false;
-	return $data;
-} //function
-
 function showResult($stat, &$tp) {
 	if (!iserror($stat))
 		$tp->assign ("ctl_msgupdeve", true);
@@ -55,20 +32,19 @@ function showResult($stat, &$tp) {
 $q = new Query($reg);
 
 if (isset($_GET['cmd'])) {
-	$dat = form2event($_GET);
 	switch ($_GET['cmd']) {
 	case "insert":
 		$o = new DIEvent($us);
-		$o->setFromArray($_dat);
+		$o->setFromArray($_GET);
 		$o->set('EventId', $o->get('EventName'));
 		$i = $o->insert();
 		showResult($i, $t);
 		break;
 	case "update":
 		$o = new DIEvent($us);
-		$o->set('EventId', $dat['EventId']);
+		$o->set('EventId', $_GET['EventId']);
 		$o->load();
-		$o->setFromArray($dat);
+		$o->setFromArray($_GET);
 		$i = 0;
 		if ($o->get("EventPreDefined") == 0) {
 			// Update only non PreDefined Events
