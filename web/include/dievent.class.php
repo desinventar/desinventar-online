@@ -21,11 +21,11 @@ class DIEvent extends DIObject {
 
 		$num_args = func_num_args();
 		if ($num_args >= 2) {
-			$this->EventId = func_get_arg(1);
+			$this->set('EventId', func_get_arg(1));
 			if ($num_args >= 3) {
-				$this->EventLocalName = func_get_arg(1);
-				$this->EventLocalDesc = func_get_arg(2);
-				$this->setIdByLocalName($this->EventLocalName);
+				$this->set('EventLocalName', func_get_arg(1));
+				$this->set('EventLocalDesc', func_get_arg(2));
+				$this->setIdByLocalName($this->get('EventLocalName'));
 			}
 		}
 	}
@@ -39,23 +39,23 @@ class DIEvent extends DIObject {
 			if ($result->num_rows>0) {
 				// Local Event Found
 				while ($row = $result->fetch_object()) {
-					$this->EventId           = $row->EventId;
-					$this->EventPreDefined   = $row->EventPreDefined;
-					$this->EventCreationDate = $row->EventCreationDate;
+					$this->set('EventId', $row->EventId);
+					$this->set('EventPreDefined', $row->EventPreDefined);
+					$this->set('EventCreationDate', $row->EventCreationDate);
 				} // while
 			} else {
 				// Search PreDefined Event
 				$sQuery = "SELECT * FROM DIEvent " . 
 				  " WHERE EventLangCode='" . $this->oSession->sRegionLangCode . "'" .
-				  "   AND (EventLocalName='" . $this->EventLocalName . "'" .
-				  "        OR EventDI6Name='" . $this->EventLocalName . "')";
+				  "   AND (EventLocalName='" . $this->get('EventLocalName') . "'" .
+				  "        OR EventDI6Name='" . $this->get('EventLocalName') . "')";
 				if ($result = $q->query($sQuery)) {
 					while ($row = $result->fetch_object()) {
-						$this->EventId           = $row->EventId;
-						$this->EventLocalName    = $row->EventLocalName;
-						$this->EventLocalDesc    = $row->EventLocalDesc;
-						$this->EventPreDefined   = 1;
-						$this->EventCreationDate = $row->EventCreationDate;
+						$this->set('EventId', $row->EventId);
+						$this->set('EventLocalName', $row->EventLocalName);
+						$this->set('EventLocalDesc', $row->EventLocalDesc);
+						$this->set('EventPreDefined', 1);
+						$this->set('EventCreationDate', $row->EventCreationDate);
 					}
 				}
 			}
