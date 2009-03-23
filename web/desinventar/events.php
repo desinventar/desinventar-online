@@ -35,8 +35,14 @@ if (isset($_GET['cmd'])) {
 	switch ($_GET['cmd']) {
 	case "insert":
 		$o = new DIEvent($us);
+		//print "Debug : " .  $o->get('EventPredefined') . "<br>";
 		$o->setFromArray($_GET);
+		//print "Debug : " .  $o->get('EventPredefined') . "<br>";
 		$o->set('EventId', $o->get('EventName'));
+		//print_r($o->oField);print "<br>";
+		$o->set('EventPredefined', 0);
+		//print_r($o->oField);print "<br>";
+		//print "Debug : " .  $o->get('EventPredefined') . "<br>";
 		$i = $o->insert();
 		showResult($i, $t);
 		break;
@@ -46,7 +52,7 @@ if (isset($_GET['cmd'])) {
 		$o->load();
 		$o->setFromArray($_GET);
 		$i = 0;
-		if ($o->get("EventPreDefined") == 0) {
+		if ($o->get("EventPredefined") == 0) {
 			// Update only non PreDefined Events
 			$i = $o->update();
 		}
@@ -63,7 +69,6 @@ if (isset($_GET['cmd'])) {
 		}
 		break;
 	case "chkname":
-		print "chkname EventId : " . $_GET['EventId'] . "<br>";
 		$t->assign ("ctl_chkname", true);
 		if ($q->isvalidObjectName($_GET['EventId'], $_GET['EventName'], DI_EVENT))
 			$t->assign ("chkname", true);
