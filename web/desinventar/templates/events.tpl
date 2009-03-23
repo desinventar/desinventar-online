@@ -79,17 +79,17 @@
 	<div id="eventaddsect" style="display:none">
 		<form id="eventfrm" name="eventfrm" method="GET" 
 			action="javascript:var s=$('eventfrm').serialize(); sendData('{-$reg-}', 'events.php', s, $('aEventPreDefined').value);"
-			onSubmit="javascript: var a=new Array('aEventLocalName','aEventLocalDesc'); return(checkForm(a, '{-#errmsgfrm#-}'));">
+			onSubmit="javascript: var a=new Array('aEventName','aEventDesc'); return(checkForm(a, '{-#errmsgfrm#-}'));">
 			<input id="r" name="r" type="hidden" value="{-$reg-}">
 			{-$dic.DBEvePersonName[0]-}<b style="color:darkred;">*</b><br>
-			<input id="aEventLocalName" name="EventLocalName" type="text" class="line fixw" maxlength="40" {-$ro-}
-					onBlur="updateList('eventstatusmsg', 'events.php', 'r={-$reg-}&cmd=chkname&EventId='+ $('EventId').value +'&EventLocalName='+ $('aEventLocalName').value);"
+			<input id="aEventName" name="EventName" type="text" class="line fixw" maxlength="40" {-$ro-}
+					onBlur="updateList('eventstatusmsg', 'events.php', 'r={-$reg-}&cmd=chkname&EventId='+ $('EventId').value +'&EventName='+ $('aEventName').value);"
 					onFocus="showtip('{-$dic.DBEvePersonName[2]-}');">
 			<br><br>
 			{-$dic.DBEvePersonDef[0]-}<b style="color:darkred;">*</b><br>
-			<textarea id="aEventLocalDesc" name="EventLocalDesc" class="fixw" rows="4"
+			<textarea id="aEventDesc" name="EventDesc" class="fixw" rows="4"
 					onFocus="showtip('{-$dic.DBEvePersonDef[2]-}');" {-$ro-}></textarea>
-			<input id="aEventLocalDesc2" name="EventLocalDesc2" type="hidden">
+			<input id="aEventDesc2" name="EventDesc2" type="hidden">
 			<br><br>
 			{-$dic.DBEveActive[0]-}<b>*</b><br>
 			<input id="aEventActive" name="EventActive" type="checkbox" {-$ro-} 

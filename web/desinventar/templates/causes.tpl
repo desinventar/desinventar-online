@@ -79,17 +79,17 @@
 	<div id="causeaddsect" style="display:none">
 		<form id="causefrm" name="causefrm" method="GET" 
 			action="javascript:var s=$('causefrm').serialize(); sendData('{-$reg-}', 'causes.php', s, $('aCausePreDefined').value);"
-			onSubmit="javascript: var a=new Array('aCauseLocalName','aCauseLocalDesc'); return(checkForm(a, '{-#errmsgfrm#-}'));">
+			onSubmit="javascript: var a=new Array('aCauseName','aCauseDesc'); return(checkForm(a, '{-#errmsgfrm#-}'));">
 			<input id="r" name="r" type="hidden" value="{-$reg-}">
 			{-$dic.DBCauPersonName[0]-}<b style="color:darkred;">*</b><br>
-			<input id="aCauseLocalName" name="CauseLocalName" type="text" maxlength="40" {-$ro-} class="line fixw"
-					onBlur="updateList('causestatusmsg', 'causes.php', 'r={-$reg-}&cmd=chkname&CauseId='+ $('CauseId').value +'&CauseLocalName='+ $('aCauseLocalName').value);"
+			<input id="aCauseName" name="CauseName" type="text" maxlength="40" {-$ro-} class="line fixw"
+					onBlur="updateList('causestatusmsg', 'causes.php', 'r={-$reg-}&cmd=chkname&CauseId='+ $('CauseId').value +'&CauseName='+ $('aCauseName').value);"
 					onFocus="showtip('{-$dic.DBCauPersonName[2]-}');">
 			<br><br>
 			{-$dic.DBCauPersonDef[0]-}<b style="color:darkred;">*</b><br>
-			<textarea id="aCauseLocalDesc" name="CauseLocalDesc" rows="4" class="fixw"
+			<textarea id="aCauseDesc" name="CauseDesc" rows="4" class="fixw"
 					onFocus="showtip('{-$dic.DBCauPersonDef[2]-}');" {-$ro-}></textarea>
-			<input id="aCauseLocalDesc2" name="CauseLocalDesc2" type="hidden">
+			<input id="aCauseDesc2" name="CauseDesc2" type="hidden">
 			<br><br>
 			{-$dic.DBCauActive[0]-} 
 			<input id="aCauseActive" name="CauseActive" type="checkbox" {-$ro-} 

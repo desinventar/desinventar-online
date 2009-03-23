@@ -97,34 +97,34 @@ solo se muestre a los roles correspondientes.. */
 		$(mod + 'addsect').style.display = 'block';
 		uploadMsg('');
 		if (module == "event") {
-			$('aEventLocalName').value = name;
-			$('aEventLocalDesc').value = desc;
+			$('aEventName').value = name;
+			$('aEventDesc').value = desc;
 			if (active == "1")
 				$('aEventActive').checked = true;
 			else
 				$('aEventActive').checked = false;
 			if (is_pred == "1") {
-				$('aEventLocalDesc').disabled = true;
-				$('aEventLocalDesc2').value = desc;
+				$('aEventDesc').disabled = true;
+				$('aEventDesc2').value = desc;
 			}
 			else
-				$('aEventLocalDesc').disabled = false;
+				$('aEventDesc').disabled = false;
 			$('aEventPreDefined').value = is_pred;
 			$('aEventId').value = id;
 		}
 		else if (module == "cause") {
-			$('aCauseLocalName').value = name;
-			$('aCauseLocalDesc').value = desc;
+			$('aCauseName').value = name;
+			$('aCauseDesc').value = desc;
 			if (active == "1")
 				$('aCauseActive').checked = true;
 			else
 				$('aCauseActive').checked = false;
 			if (is_pred == "1") {
-			  $('aCauseLocalDesc').disabled = true;
-			  $('aCauseLocalDesc2').value = desc;
+			  $('aCauseDesc').disabled = true;
+			  $('aCauseDesc2').value = desc;
       }
 			else
-				$('aCauseLocalDesc').disabled = false;
+				$('aCauseDesc').disabled = false;
 			$('aCausePreDefined').value = is_pred;
 			$('aCauseId').value = id;
 		}

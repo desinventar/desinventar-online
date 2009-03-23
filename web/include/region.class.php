@@ -26,12 +26,12 @@ class Region {
 /*** EVENTS FUNCTIONS ***/
   function insertEvent($id, $name, $desc, $active) {
     $data['EventId'] = uuid();
-    $data['EventLocalName'] = $name;
-    $data['EventLocalDesc'] = $desc;
+    $data['EventName'] = $name;
+    $data['EventDesc'] = $desc;
     $data['EventActive'] = $active;
     $data['EventPreDefined'] = false;
     $data['EventCreationDate'] = date("Y-m-d H:i:s");
-    if ($this->q->isvalidObjectName($data['EventId'], $data['EventLocalName'], DI_EVENT)) {
+    if ($this->q->isvalidObjectName($data['EventId'], $data['EventName'], DI_EVENT)) {
       $rpcargs = array($_SESSION['sessionid'], DI_EVENT, CMD_NEW, $data);
       $ev = callRpcDICore('RpcDIServer.saveDIObject', $rpcargs);
     }
@@ -44,8 +44,8 @@ class Region {
    */
   function updateEvent($id, $name, $desc, $active, $predef) {
     $data['EventId'] = $id;
-    $data['EventLocalName'] = $name;
-    $data['EventLocalDesc'] = $desc;
+    $data['EventName'] = $name;
+    $data['EventDesc'] = $desc;
     $data['EventActive'] = $active;
     $data['EventPreDefined'] = $predef;
     $data['EventCreationDate'] = date("Y-m-d H:i:s");
@@ -63,12 +63,12 @@ class Region {
 /*** CAUSES FUNCTIONS ***/
   function insertCause($id, $name, $desc, $active) {
     $data['CauseId'] = uuid();
-    $data['CauseLocalName'] = $name;
-    $data['CauseLocalDesc'] = $desc;
+    $data['CauseName'] = $name;
+    $data['CauseDesc'] = $desc;
     $data['CauseActive'] = $active;
     $data['CausePreDefined'] = false;
     $data['CauseCreationDate'] = date("Y-m-d H:i:s");
-    if ($this->q->isvalidObjectName($data['CauseId'], $data['CauseLocalName'], DI_CAUSE)) {
+    if ($this->q->isvalidObjectName($data['CauseId'], $data['CauseName'], DI_CAUSE)) {
       $rpcargs = array($_SESSION['sessionid'], DI_CAUSE, CMD_NEW, $data);
       $ca = callRpcDICore('RpcDIServer.saveDIObject', $rpcargs);
     }
@@ -81,8 +81,8 @@ class Region {
    */
   function updateCause($id, $name, $desc, $active, $predef) {
     $data['CauseId'] = $id;
-    $data['CauseLocalName'] = $name;
-    $data['CauseLocalDesc'] = $desc;
+    $data['CauseName'] = $name;
+    $data['CauseDesc'] = $desc;
     $data['CauseActive'] = $active;
     $data['CausePreDefined'] = $predef;
     $data['CauseCreationDate'] = date("Y-m-d H:i:s");
