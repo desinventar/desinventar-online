@@ -54,7 +54,16 @@ class DIObject {
 	}
 	
 	public function set($prmKey, $prmValue) {
-		$this->oField[$prmKey] = $prmValue;
+		$iReturn = 0;
+		if (isset($this->oField[$prmKey])) {
+			if ($this->oFieldType[$prmKey] == 'BOOLEAN') {
+				if ($prmValue == 'on') { $prmValue = 1; }
+				if ($prmValue == 'off') { $prmValue = 0; }
+			}
+			$this->oField[$prmKey] = $prmValue;
+			$iReturn = 1;
+		}
+		return $iReturn;
 	}
 
 	public function setFromArray($prmArray) {
@@ -197,7 +206,6 @@ class DIObject {
 	public function create() {
 		$iReturn = 0;
 		$sQuery = $this->getInsertQuery();
-		print $sQuery . "<br>";
 		try {
 			if ($result = $this->q->dreg->query($sQuery)) {
 				$iReturn = 1;		
