@@ -8,7 +8,7 @@ class DIGeography extends DIObject {
 	public function __construct($prmSession) {
 		$this->sTableName   = "Geography";
 		$this->sPermPrefix  = "GEOGRAPHY";
-		$this->sFieldKeyDef = "Geography/STRING," .
+		$this->sFieldKeyDef = "GeographyId/STRING," .
 		                      "LangIsoCode/STRING";
 		$this->sFieldDef    = "SyncRecord/DATETIME," .
 		                      "GeographyCode/STRING," .
