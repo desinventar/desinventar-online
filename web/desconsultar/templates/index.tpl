@@ -738,7 +738,7 @@
             		</tr>
             		<tr valign="bottom">
             			<td align="right">
-            				<p align="center"><u>Eje Vertical 1:</u></p>
+            				<p align="center"><u>{-#gveraxis#-} 1:</u></p>
             				<b onMouseOver="showtip('{-$dic.GraphField[2]-}');">{-$dic.GraphField[0]-}</b><br>
             				<select id="_G+Field" name="_G+Field" onMouseOver="showtip('{-$dic.GraphField[2]-}');">
             					<option value="D.DisasterId||" selected>{-$dic.GraphDisasterId_[0]-}</option>
@@ -802,7 +802,7 @@
             				</table>
             			</td>
             			<td>
-            				<p align="center"><u>Eje Vertical 2:</u></p>
+            				<p align="center"><u>{-#gveraxis#-} 2:</u></p>
             				<b onMouseOver="showtip('{-$dic.GraphField[2]-}');">{-$dic.GraphField[0]-}</b><br>
             				<select id="_G+Field2" name="_G+Field2" size="1" disabled 
             						onMouseOver="showtip('{-$dic.GraphField[2]-}');">
@@ -852,7 +852,7 @@
             		</tr>
             		<tr>
             			<td colspan=3 align="center">
-            				<p><u>Eje Horizontal:</u></p>
+            				<p><u>{-#ghoraxis#-}:</u></p>
             				<b onMouseOver="showtip('{-$dic.GraphType[2]-}');">{-$dic.GraphType[0]-}</b><br>
             				<select id="_G+Type" name="_G+Type" onChange="grpSelectbyType('_G+Type');" 
             						onMouseOver="showtip('{-$dic.GraphType[2]-}');">
