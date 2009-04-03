@@ -138,7 +138,7 @@ else {
   $dc2 = array_merge($dc2, $q->queryLabelsFromGroup('Effect', $lg));
   $dc2 = array_merge($dc2, $q->queryLabelsFromGroup('Sector', $lg));
   $t->assign ("dc2", $dc2);
-  $fld = "DisasterSerial,DisasterBeginTime,EventName,GeographyName,DisasterSiteNotes,".
+  $fld = "DisasterSerial,DisasterBeginTime,EventName,DisasterGeographyId,DisasterSiteNotes,".
         "DisasterSource,EffectNotes,EffectPeopleDead,EffectPeopleMissing,EffectPeopleInjured,".
         "EffectPeopleHarmed,EffectPeopleAffected,EffectPeopleEvacuated,EffectPeopleRelocated,".
         "EffectHousesDestroyed,EffectHousesAffected,EffectFarmingAndForest,EffectRoads,".
@@ -148,7 +148,7 @@ else {
         "SectorHealth,SectorOther,EventDuration,EventMagnitude,CauseName,CauseNotes";
   $sda = explode(",", $fld);
   $t->assign ("sda", $sda);
-  $sda1 = explode(",", "DisasterGeographyId,DisasterLatitude,DisasterLongitude,RecordAuthor,RecordCreation,RecordLastUpdate,EventNotes");
+  $sda1 = explode(",", "GeographyCode,DisasterLatitude,DisasterLongitude,RecordAuthor,RecordCreation,RecordLastUpdate,EventNotes");
   $t->assign ("sda1", $sda1);	// array_diff_key($dc2, array_flip($sda))
   // MAPS
   if (isset($_GET['v']) && $_GET['v'] == "true")

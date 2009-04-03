@@ -92,7 +92,7 @@ class Maps
     $map .= '
 			#IMAGEPATH		"'. TMPM_DIR .'"
 			METADATA
-			  WMS_TITLE	"DesInventar Map of '. $inf['TITLE'] .'"
+			  WMS_TITLE	"DesInventar Map of -'. $inf['TITLE'] .'-"
 			  WMS_ABSTRACT	"Level: '. $inf['LEVEL'] .'"
         WMS_EXTENT	"'. $inf['EXTENT'] .'"
         WMS_TIMEEXTENT	"'. $inf['BEG'] ."/". $inf['END'] .'/P5M"
@@ -251,7 +251,7 @@ class Maps
 		  // Generate null class
       if ($lbl == "VALUE")
         $shwlab = 'TEXT "0"';
-      $map .= '
+/*      $map .= '
 		  CLASS
 		    NAME "No data"
         EXPRESSION (length("['. $code .']") > 0)
@@ -261,7 +261,7 @@ class Maps
 		      TYPE TRUETYPE		FONT "arial"		SIZE 6	
 		      COLOR	0 0 89 		POSITION CC			PARTIALS FALSE	BUFFER 4
         END
-      END';
+      END';*/
 		  $map .= '
 		END # LAYER
 ';
@@ -273,7 +273,7 @@ class Maps
 	function classify($dl, $range) {
 		$vl = array();
 		$ky = array_keys($dl);
-		$li = 1;
+		$li = 0;
 		$h = 0;
 		if (!empty($dl)) {
       foreach ($dl[$ky[0]] as $k=>$i) {

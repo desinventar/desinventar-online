@@ -28,10 +28,6 @@ if (isset($_SERVER["DI8WEB"])) {
 	define("CACHEDIR", "/var/cache/Smarty");
 	define("FONTDIR" , "/usr/share/fonts/liberation/fonts.txt");	
 //	define("DICT_DIR", SOFTDIR . "/files");
-	define("VAR_DIR" , DATADIR);
-	define("TMP_DIR" , DATADIR);
-	define("SMTY_DIR", CACHEDIR); // Smarty temp dir
-	define("TMPM_DIR", CACHEDIR);     // Mapserver temp dir
 } else {
 	if (isset($_SERVER["DI8WEBLOCAL"])) {
 		define("BASE", $_SERVER["DI8WEBLOCAL"]);
@@ -44,13 +40,17 @@ if (isset($_SERVER["DI8WEB"])) {
 	define("WWWDATA" , "../tmp");
 	define("WWWURL"  , "/mayandar/desinventar");
 	define("DATADIR" , "/var/lib/desinventar");
-	define("VAR_DIR" , DATADIR . '/var');
-	define("TMP_DIR" , DATADIR . '/tmp');
-	define("CACHEDIR", TMP_DIR);   			 // /var/cache/Smarty/di8
-	define("FONTDIR" , VAR_DIR . '/fonts.txt');
- 	define("SMTY_DIR", CACHEDIR . '/templates_c'); // Smarty temp dir
-	define("TMPM_DIR", CACHEDIR . '/tempmap');     // Mapserver temp dir
+	define("CACHEDIR", DATADIR . '/tmp');
+	define("FONTDIR" , DATADIR . '/fonts.txt');
+//	define("VAR_DIR" , DATADIR . '/var');
+//	define("TMP_DIR" , DATADIR . '/tmp');
+// 	define("SMTY_DIR", CACHEDIR . '/templates_c');
+//	define("TMPM_DIR", CACHEDIR . '/tempmap');
 }
+define("VAR_DIR" , DATADIR);
+define("TMP_DIR" , DATADIR);
+define("SMTY_DIR", CACHEDIR); // Smarty temp dir
+define("TMPM_DIR", CACHEDIR); // Mapserver temp dir
 // Test and Create missing directories
 createIfNotExistDirectory(VAR_DIR);
 createIfNotExistDirectory(TMP_DIR);
@@ -69,8 +69,6 @@ require_once(BASE . "/include/constants.php");
 // Session Management
 session_name("DI8SESSID");
 session_start();
-
-
 
 // 2009-01-15 (jhcaiced) Start by create/recover the session 
 // information, even for anonymous users
