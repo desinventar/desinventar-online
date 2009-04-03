@@ -690,7 +690,7 @@ class Query extends PDO
     $fld = str_ireplace("D.EventName", "V.EventName", $fld); //Join with Event table
     $fld = str_ireplace("D.CauseId", "C.CauseName", $fld); //Join with Cause table
     $fld = str_ireplace("D.CauseName", "C.CauseName", $fld); //Join with Cause table
-    $fld = str_ireplace("D.GeographyName", "G.GeographyName", $fld);
+    $fld = str_ireplace("D.GeographyCode", "G.GeographyCode", $fld);
     // Process fields to show
     $sql = "SELECT ". $fld ." FROM Disaster AS D, EEData AS E, Event AS V, Cause AS C, Geography AS G ";
     if ($this->chkSQLWhere($whr)) {
@@ -832,35 +832,22 @@ class Query extends PDO
     }
     return $res;
   }
-/*
-  function prepareMaps ($dl) {
-    $res = array();
-    $j = 0;
-    foreach ($dl as $it) {
-      foreach ($it as $k=>$i) {
-        if ($j == 0)
-          $res[$k] = array();
-        $val = $i;
-        if (substr($k,0,19) == "DisasterGeographyId")
-          $val = $this->getObjectNameById($i, DI_GEOGRAPHY);
-        array_push($res[$k], $val);
-      }
-      $j++;
-    }
-    return $res;
-  }
-  */
 	/* Print results like associative array or csv */
-	function printResults ($dl, $exp) {
+	function printResults ($dl, $exp, $mode) {
 		$csv = "";
 		// Get results
 		if (!empty($dl)) {
 			$j = 0;
 			foreach ($dl as $k=>$i) {
-				//$dl[$j]["DATACARD"] = http_build_query($i);
-/*        foreach ($i as $idx=>$val)
-          if (substr($idx, 0, 19) == "DisasterGeographyId")
-            $dl[$j][$idx] = $this->getGeoNameById($i[$idx]);*/
+				foreach (array_keys($i) as $idx) {
+				  if (substr($idx,0,19) == "DisasterGeographyId") {
+				    if ($mode == "STAD")
+				      $dl[$j][$idx] = $this->getObjectNameById($i[$idx], DI_GEOGRAPHY) . " | ";
+            else
+              $dl[$j][$idx] = "";
+            $dl[$j][$idx] .= $this->getGeoNameById($i[$idx]);
+          }
+        }
 				if ($exp) {
 					foreach (array_values($dl[$j]) as $vals) {
 						if ($vals == -1)
@@ -868,17 +855,17 @@ class Query extends PDO
 						else
 							$myv = $vals;
 						$csv .= '"'. $myv .'"'. "\t";
-					} //foreach
+					}
 					$csv .= "\n";
-				} //if
+				} //if exp
 				$j++;
 			} //foreach
-		} //if
+		} //if !empty
 		if ($exp)
 			return $csv;
 		else
 			return $dl;
-	} //function
+	}
   
   // Print results like json array to Javascript
   function hash2json($dlist) {

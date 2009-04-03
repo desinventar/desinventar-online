@@ -70,7 +70,6 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 		$sql = $q->genSQLSelectData($qd, $fld, $ord);
 		//echo $sql;
 		$dlt = $q->dreg->query($sqc);
-		
 		if ($post['_D+cmd'] == "result") {
 			// show results in window
 			$export = false;
@@ -100,7 +99,6 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 			$iNumberOfPages = (int) (($iNumberOfRecords / $iRecordsPerPage) + 1);
 		}
 	}
-	
 	// Complete SQL to Paging, later check and run SQL
 	if ($q->chkSQL($sql)) {
 		if ($export) {
@@ -117,9 +115,9 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 		for ($i = $pin; $i < $pgt; $i++) {
 			$slim = $sql ." LIMIT " . $i * $iRecordsPerPage .", ". $iRecordsPerPage;
 			$dislist = $q->getassoc($slim);
-			$dl = $q->printResults($dislist, $export);
+			$dl = $q->printResults($dislist, $export, "DATA");
 			if ($i == $pin && !empty($dl)) {
-				// Translate Header to Current Language
+				// Traduce Headers to Current Language
 				$lb = "";
 				$sel = array_keys($dislist[0]);
 				foreach ($sel as $kk=>$ii) {

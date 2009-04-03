@@ -133,7 +133,7 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
     for ($i = $pin; $i < $pgt; $i++) {
       $slim = $sql ." LIMIT " . $i * $rxp .", ". $rxp;
       $dislist = $q->getassoc($slim);
-      $dl = $q->printResults($dislist, $export);
+      $dl = $q->printResults($dislist, $export, "STAD");
       if ($i == $pin && !empty($dl)) {
         // Set traduction in headers
         $lb = "";

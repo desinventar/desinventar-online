@@ -23,20 +23,22 @@ function setRanges($opc) {
   $col = $opc['_M+color'];
   $lmx = "10000000";
   $maxr = false;
+  // First range is No data
+  $range[0] = array(1, "= 0", "255 255 255");
   // generate range hash with limit, legend and color
   for ($j = 0; $j < count($lim); $j++) {
     if (isset($lim[$j])) {
       if ($lim[$j] != "")
-        $range[$j] = array($lim[$j], $leg[$j], hex2dec($col[$j]));
+        $range[$j+1] = array($lim[$j], $leg[$j], hex2dec($col[$j]));
       else {
-        $range[$j] = array($lmx, $leg[$j], hex2dec($col[$j]));
+        $range[$j+1] = array($lmx, $leg[$j], hex2dec($col[$j]));
         $maxr = true;
       }
     }
   }
   // if not assigned, set last range between last number and infinit
   if (!$maxr)
-    $range[$j] = array($lmx, (int)$lim[$j-1] + 1 . " -> ", "30 30 30");
+    $range[$j+1] = array($lmx, (int)$lim[$j-1] + 1 . " -> ", "30 30 30");
   return $range;
 }
 

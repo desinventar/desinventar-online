@@ -682,14 +682,14 @@
                   <select id="_M+Field" name="_M+Field" size="8" class="fixw">
                     <option value="D.DisasterId||" selected>{-#trepnum#-}</option>
  {-foreach name=ef1 key=k item=i from=$ef1-}
-                    <option value="D.{-$k-}|>|0">{-$i[0]-}</option>
+                    <option value="D.{-$k-}|>|-1">{-$i[0]-}</option>
                     <option value="D.{-$k-}|=|-1">{-#tauxhave#-} {-$i[0]-}</option>
  {-/foreach-}
  {-foreach name=ef2 key=k item=i from=$ef2-}
-                    <option value="D.{-$k-}|>|0">{-$i[0]-}</option>
+                    <option value="D.{-$k-}|>|-1">{-$i[0]-}</option>
  {-/foreach-}
  {-foreach name=ef3 key=k item=i from=$ef3-}
-                    <option value="D.{-$k-}|>|0">{-$i[0]-}</option>
+                    <option value="D.{-$k-}|>|-1">{-$i[0]-}</option>
  {-/foreach-}
  {-foreach name=ef3 key=k item=i from=$sec-}
                     <option value="D.{-$k-}|=|-1">{-#tauxaffect#-} {-$i[0]-}</option>
@@ -697,7 +697,7 @@
  										<option disabled>---</option>
  {-foreach name=eef key=k item=i from=$exteffel-}
   {-if $i[2] == "INTEGER" || $i[2] == "DOUBLE"-}
-                    <option value="E.{-$k-}|>|0">{-$i[0]-}</option>
+                    <option value="E.{-$k-}|>|-1">{-$i[0]-}</option>
   {-/if-}
  {-/foreach-}
                   </select>
@@ -804,7 +804,7 @@
             			<td>
             				<p align="center"><u>{-#gveraxis#-} 2:</u></p>
             				<b onMouseOver="showtip('{-$dic.GraphField[2]-}');">{-$dic.GraphField[0]-}</b><br>
-            				<select id="_G+Field2" name="_G+Field2" size="1" disabled 
+            				<select id="_G+Field2" name="_G+Field2" size="1"
             						onMouseOver="showtip('{-$dic.GraphField[2]-}');">
             					<option value="||" selected></option>
             					<option value="D.DisasterId||">{-$dic.GraphDisasterId_[0]-}</option>
@@ -830,20 +830,20 @@
                   	</select>
                   	<br>
                   	<b onMouseOver="showtip('{-$dic.GraphScale[2]-}');">{-$dic.GraphScale[0]-}</b><br>
-                  	<select id="_G+Scale2" name="_G+Scale2" disabled onMouseOver="showtip('{-$dic.GraphScale[2]-}');">
+                  	<select id="_G+Scale2" name="_G+Scale2" onMouseOver="showtip('{-$dic.GraphScale[2]-}');">
                   		<option value="textint" selected>{-#gscalin#-}</option>
                   		<option value="textlog">{-#gscalog#-}</option>
                   	</select>
                   	<br>
                   	<b onMouseOver="showtip('{-$dic.GraphShow[2]-}');">{-$dic.GraphShow[0]-}</b><br>
-                  	<select id="_G+Data2" name="_G+Data2" disabled onMouseOver="showtip('{-$dic.GraphShow[2]-}');">
+                  	<select id="_G+Data2" name="_G+Data2" onMouseOver="showtip('{-$dic.GraphShow[2]-}');">
                   		<option value="VALUE">{-#gshwval#-}</option>
                   		<option id="_G+D_perc2" value="PERCENT" disabled>{-#gshwperce#-}</option>
                   		<option id="_G+D_none2" value="NONE" selected>{-#gshwnone#-}</option>
                   	</select>
                   	<br>
                   	<b onMouseOver="showtip('{-$dic.GraphMode[2]-}');">{-$dic.GraphMode[0]-}</b><br>
-            				<select id="_G+Mode2" name="_G+Mode2" disabled onMouseOver="showtip('{-$dic.GraphMode[2]-}');">
+            				<select id="_G+Mode2" name="_G+Mode2" onMouseOver="showtip('{-$dic.GraphMode[2]-}');">
                   		<option value="NORMAL" selected>{-#gmodnormal#-}</option>
                   		<option id="_G+M_accu2" value="ACCUMULATE">{-#gmodaccumul#-}</option>
                   		<option id="_G+M_over2" value="OVERCOME" disabled>{-#gmodovercome#-}</option>
@@ -1023,13 +1023,26 @@
           <div class="x-window-header">{-#bstadistic#-}</div>
           <div id="std-cfg">
             <form id="CS" method="POST">
-              {-#sresxpage#-}
-              <select id="_S+SQL_LIMIT" name="_S+SQL_LIMIT">
-                <option value="20">20</option>
-                <option value="50">50</option>
-                <option value="100" selected>100</option>
-                <option value="200">200</option>
-              </select>
+            	<table border="0" width="100%">
+            		<tr>
+            			<td>
+            				{-#sresxpage#-}
+            				<select id="_S+SQL_LIMIT" name="_S+SQL_LIMIT">
+            				 <option value="20">20</option>
+            				 <option value="50">50</option>
+            				 <option value="100" selected>100</option>
+            				 <option value="200">200</option>
+            				</select>
+            			</td>
+            			<td>
+            				En geografía:
+            				<select id="_S+showgeo" name="_S+showgeo">
+            				 <option value="NAME">Mostrar solo nombres</option>
+            				 <option value="CODE">Mostrar codigos y nombres</option>
+            				</select>
+            			</td>
+            		</tr>
+            	</table>
               <br><br>
               <b>{-#stotallevels#-}</b>
               <br>
