@@ -43,6 +43,7 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
     $rxp = $get['rxp'];
     $fld = $get['fld'];
     $sql = base64_decode($get['sql']);
+    $geo = $get['geo'];
     if (isset($get['ord']))
       $sql .= " ORDER BY ". $get['ord'] ." DESC";
   }
@@ -52,6 +53,7 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
     $sqc 	= $q->genSQLSelectCount($qd);
     $c 		= $q->getresult($sqc);
     $tot 	= $c['counter'];
+    $geo  = $post['_S+showgeo'];
     // Reuse calculate SQL values in all pages; calculate limits in pages
     $levg = array();
     if (isset($post['_S+Firstlev']) && !empty($post['_S+Firstlev']))
@@ -69,7 +71,6 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
     $sdl = $q->totalize($sql);
     $dlt = $q->getresult($sdl);
     $fld = "DisasterId_";
-    //echo $sql;
     // organize groups
     $gp = array();
     foreach ($opc['Group'] as $i) {
@@ -102,6 +103,7 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
       $t->assign ("tot", $tot);
       $t->assign ("rxp", $rxp);
       $t->assign ("last",$last);
+      $t->assign ("geo", $geo);
       // Show results interface 
       $t->assign ("ctl_showres", true);
     }
@@ -109,7 +111,7 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
     else if ($post['_S+cmd'] == "export") {
       //header("Content-type: application/x-zip-compressed");
       header("Content-type: text/x-csv");
-      header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $regname) ."_Consolidate.csv");
+      header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $regname) ."_Consolidate.xls");
       //header("Content-Transfer-Encoding: binary");
       // Limit 5000 results in export: few memory in PHP
       $export = true;
@@ -121,8 +123,8 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
   if ($q->chkSQL($sql)) {
     if ($export) {
       // Save results in CSVfile
-      $stdpth = TEMP ."/di8stadistic_". $_SESSION['sessionid'] ."_";
-      $fp = fopen("$stdpth.csv", 'w');
+      $stdpth = TEMP ."/di8stadistic_". session_id() ."_";
+      $fp = fopen("$stdpth.xls", 'w');
       $pin = 0;
       $pgt = $last;
     }
@@ -133,7 +135,7 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
     for ($i = $pin; $i < $pgt; $i++) {
       $slim = $sql ." LIMIT " . $i * $rxp .", ". $rxp;
       $dislist = $q->getassoc($slim);
-      $dl = $q->printResults($dislist, $export, "STAD");
+      $dl = $q->printResults($dislist, $export, $geo);
       if ($i == $pin && !empty($dl)) {
         // Set traduction in headers
         $lb = "";
@@ -142,8 +144,8 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
           $i3 = substr($ii, 0, -1);
           if (isset($dic['Stadist'. $ii][0]))
             $dk[$ii] = $dic['Stadist'. $ii][0];
-          elseif (isset($dic[$ii][0]))
-            $dk[$ii] = $dic[$ii][0];
+          elseif (isset($dic['Stadist'. $i2][0]))
+            $dk[$ii] = $dic['Stadist'. $i2][0];
           elseif (isset($dic[$i3][0]))
             $dk[$ii] = $dic[$i3][0];
           else
@@ -160,7 +162,7 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
       fclose($fp);
       //$sto = system("zip -q $stdpth.zip $stdpth.csv");
       flush();
-      readfile("$stdpth.csv");
+      readfile("$stdpth.xls");
       exit;
     }
     else {
