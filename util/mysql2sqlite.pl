@@ -27,7 +27,7 @@ my $sRegion    = '';
 my $sTableName = '';
 
 # Script's output is encoded in UTF-8
-binmode(STDOUT, ':utf8');
+#binmode(STDOUT, ':utf8');
 
 if (!GetOptions('run|r'      => \$bRun,
                 'debug|d'    => \$bDebug,

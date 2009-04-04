@@ -141,6 +141,7 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
         $lb = "";
         $sel = array_keys($dislist[0]);
         foreach ($sel as $kk=>$ii) {
+          $i2 = substr($ii, 2);
           $i3 = substr($ii, 0, -1);
           if (isset($dic['Stadist'. $ii][0]))
             $dk[$ii] = $dic['Stadist'. $ii][0];
