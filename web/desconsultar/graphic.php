@@ -65,15 +65,17 @@ if (isset($post['_G+cmd'])) {
 		// Translate Labels to Selected Language
 		foreach ($dl as $k=>$i) {
 			$kk = substr($k, 0, -1); // Select Hay marked like EffectsXX_
-			if (isset($dic['Graph'. $k][0])) {
+			$k2 = substr($k, 2);
+			if (isset($dic['Graph'. $k][0]))
 				$dk = $dic['Graph'. $k][0];
-			} elseif (isset($dic[$k][0])) {
+			elseif (isset($dic['Graph'. $k2][0]))
+				$dk = $dic['Graph'. $k2][0];
+			elseif (isset($dic[$k][0]))
 				$dk = $dic[$k][0];
-			} elseif (isset($dic[$kk][0])) {
+			elseif (isset($dic[$kk][0]))
 				$dk = $dic[$kk][0];
-			} else {
+			else
 				$dk = $k;
-			} //if
 			$gl[$dk] = $i;
 		}
 

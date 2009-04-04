@@ -832,7 +832,7 @@ class Query extends PDO
     }
     return $res;
   }
-	/* Print results like associative array or csv */
+	/* Print results like associative array or fields separate by Tabs */
 	function printResults ($dl, $exp, $mode) {
 		$csv = "";
 		// Get results
@@ -841,11 +841,15 @@ class Query extends PDO
 			foreach ($dl as $k=>$i) {
 				foreach (array_keys($i) as $idx) {
 				  if (substr($idx,0,19) == "DisasterGeographyId") {
-				    if ($mode == "STAD")
-				      $dl[$j][$idx] = $this->getObjectNameById($i[$idx], DI_GEOGRAPHY) . " | ";
-            else
-              $dl[$j][$idx] = "";
-            $dl[$j][$idx] .= $this->getGeoNameById($i[$idx]);
+            switch ($mode) {
+              case "CODE": 
+                $dl[$j][$idx] = $this->getObjectNameById($i[$idx], DI_GEOGRAPHY); break;
+              case "NAME": 
+                $dl[$j][$idx] = $this->getGeoNameById($i[$idx]); break;
+              case "CODENAME": 
+                $dl[$j][$idx] = $this->getObjectNameById($i[$idx], DI_GEOGRAPHY) . " | ". $this->getGeoNameById($i[$idx]); break;
+              default: $dl[$j][$idx] = ""; break;
+            }
           }
         }
 				if ($exp) {

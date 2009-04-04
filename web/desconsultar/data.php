@@ -91,7 +91,7 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 			// show export results
 			//header("Content-type: application/x-zip-compressed");
 			header("Content-type: text/x-csv");
-			header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $regname) ."_Data.csv");
+			header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $regname) ."_Data.xls");
 			//header("Content-Transfer-Encoding: binary");
 			// Limit 1000 results in export: few memory in PHP
 			$export = true;
@@ -104,7 +104,7 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 		if ($export) {
 			// Save results in CSVfile
 			$datpth = TEMP ."/di8data_". $_SESSION['sessionid'] ."_";
-			$fp = fopen("$datpth.csv", 'w');
+			$fp = fopen("$datpth.xls", 'w');
 			$pin = 0;
 			$pgt = $iNumberOfPages;
 		} else {
@@ -115,7 +115,7 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 		for ($i = $pin; $i < $pgt; $i++) {
 			$slim = $sql ." LIMIT " . $i * $iRecordsPerPage .", ". $iRecordsPerPage;
 			$dislist = $q->getassoc($slim);
-			$dl = $q->printResults($dislist, $export, "DATA");
+			$dl = $q->printResults($dislist, $export, "NAME");
 			if ($i == $pin && !empty($dl)) {
 				// Traduce Headers to Current Language
 				$lb = "";
@@ -145,9 +145,9 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 		$t->assign ("sqt", $slim);
 		if ($export) {
 			fclose($fp);
-			//$sto = system("zip -q $datpth.zip $datpth.csv");
+			//$sto = system("zip -q $datpth.zip $datpth.xls");
 			flush();
-			readfile("$datpth.csv");
+			readfile("$datpth.xls");
 			exit;
 		} else {
 			$t->assign ("offset", ($pag - 1) * $iRecordsPerPage);

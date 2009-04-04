@@ -33,11 +33,11 @@
 	  <td>
 	  	{-#tpage#-}
 	  	<input type="text" id="pp" size="2" value="1" class="line"
-				onKeyDown="if(event.keyCode==13){ mod='std'; updateList('lst_dis', 'stadistic.php', 'r={-$reg-}&page='+ this.value +'&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}');}"
+				onKeyDown="if(event.keyCode==13){ mod='std'; updateList('lst_dis', 'stadistic.php', 'r={-$reg-}&page='+ this.value +'&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}&geo={-$geo-}');}"
 				onkeypress="return blockChars(event, this.value, 'integer:');">
 			&nbsp; {-#tnumof#-} &nbsp;
 			<a href="javascript:void(null)" 
-				onclick="mod='std'; updateList('lst_dis', 'stadistic.php', 'r={-$reg-}&page={-$last-}&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}');">{-$last-}</a>
+				onclick="mod='std'; updateList('lst_dis', 'stadistic.php', 'r={-$reg-}&page={-$last-}&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}&geo={-$geo-}');">{-$last-}</a>
 		</td>
 		<td align="center">
 			<span id="stdstatusmsg" class="dlgmsg"></span>
@@ -54,14 +54,11 @@
 	{-foreach name=sel key=key item=item from=$sel-}
  {-strip-}
      <th class="header">
-   {-if $item =="DisasterId_"-}
-   		<a href="javascript:void(null)" onclick="mod='std'; updateList('lst_dis', 'stadistic.php', 
-   				'r={-$reg-}&page='+ $('pp').value +'&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}&ord={-$item-}');">{-#trepnum#-}</a>
-   {-elseif $item != "DisasterId"-}
-      <a href="javascript:void(null)" onclick="mod='std'; updateList('lst_dis', 'stadistic.php', 
-   				'r={-$reg-}&page='+ $('pp').value +'&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}&ord={-$item-}');">{-$dk.$item-}</a>
-   {-/if-}
-      </th>
+     <a href="javascript:void(null)" onclick="mod='std'; updateList('lst_dis', 'stadistic.php', 
+   				'r={-$reg-}&page='+ $('pp').value +'&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}&ord={-$item-}&geo={-$geo-}');">
+{-if $item =="DisasterId_"-} {-#trepnum#-} {-elseif $item != "DisasterId"-} {-$dk.$item-} {-/if-}
+     </a>
+     </th>
  {-/strip-}
 	{-/foreach-}
     </tr>

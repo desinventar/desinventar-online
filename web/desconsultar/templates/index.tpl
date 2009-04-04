@@ -1035,10 +1035,11 @@
             				</select>
             			</td>
             			<td>
-            				En geografía:
+            				Ver geografía:
             				<select id="_S+showgeo" name="_S+showgeo">
-            				 <option value="NAME">Mostrar solo nombres</option>
-            				 <option value="CODE">Mostrar codigos y nombres</option>
+            				 <option value="NAME">Solo Nombre</option>
+            				 <option value="CODE">Solo Código</option>
+            				 <option value="CODENAME">Código | Nombre</option>
             				</select>
             			</td>
             		</tr>
@@ -1055,10 +1056,10 @@
                     <option value="{-$k-}|D.DisasterGeographyId">
                     {-assign var="ln" value=StadistDisasterGeographyId_$k-}{-$std.$ln[0]-}</option>
   {-/foreach-}
-                    <option value="|D.EventId">{-$std.StadistEventId[0]-}</option>
+                    <option value="|D.EventId">{-$std.StadistEventName[0]-}</option>
                     <option value="YEAR|D.DisasterBeginTime">{-$std.StadistDisasterBeginTime_YEAR[0]-}</option>
                     <option value="MONTH|D.DisasterBeginTime">{-$std.StadistDisasterBeginTime_MONTH[0]-}</option>
-                    <option value="|D.CauseId">{-$std.StadistCauseId[0]-}</option>
+                    <option value="|D.CauseId">{-$std.StadistCauseName[0]-}</option>
                    </select>
                   </td>
                   <td><b>{-$std.StadistSeclev[0]-}</b><br>
