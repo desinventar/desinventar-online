@@ -44,8 +44,8 @@ if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
   $sRegionId = $_GET['r'];
   if (isset($_GET['v']) && $_GET['v'] == "true") {
     // Get Information to VRegion
-    $q = new Query();
-    $vri = $q->getVirtualRegInfo($sRegionId);
+    $q = new Query($sRegionId);
+    $vri = $q->getDBInfo();
     $regname = $vri['VirtualRegLabel'];
     $dbdes = nl2br($vri['VirtualRegDesc']);
     $dbden = ""; //nl2br($vri['VirtualRegDescEN']);
