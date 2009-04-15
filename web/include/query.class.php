@@ -723,7 +723,7 @@ class Query extends PDO
               case "MONTH":	$period = "%m"; break;
               case "YWEEK":	$period = "%Y-%W"; break;
               case "WEEK":	$period = "%W"; break;
-              case "YDAY": 	$period = "%Y-%j"; break; 
+              case "YDAY": 	$period = "%Y-%m-%d"; break; 
               case "DAY": 	$period = "%j"; break; 
             }
             $sel[$j] = "STRFTIME('$period',". $gp[1] .") ";

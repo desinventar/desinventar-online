@@ -7,11 +7,10 @@
 require_once('../include/loader.php');
 require_once('../include/graphic.class.php');
 
-if (isset($_POST['_REG']) && !empty($_POST['_REG'])) {
+if (isset($_POST['_REG']) && !empty($_POST['_REG']))
 	$reg = $_POST['_REG'];
-} else {
+else
 	exit();
-}
 
 $q = new Query($reg);
 $rinfo = $q->getDBInfo();
@@ -19,9 +18,8 @@ $regname = $rinfo['RegionLabel'];
 $post = $_POST;
 
 // load levels to display in totalizations
-foreach ($q->loadGeoLevels("") as $k=>$i) {
+foreach ($q->loadGeoLevels("") as $k=>$i)
 	$st["GraphDisasterGeographyId_". $k] = array($i[0], $i[1]);
-}
 $dic = array_merge(array(), $st);
 $dic = array_merge($dic, $q->queryLabelsFromGroup('Graph', $lg));
 $dic = array_merge($dic, $q->queryLabelsFromGroup('Effect', $lg));
@@ -38,7 +36,6 @@ if (isset($post['_G+cmd'])) {
 	$cou = $c['counter'];*/
 	// Process Configuration options to Graphic
 	$ele = array();
-	// Prepare Group to complete query
 	foreach (explode("|", $post['_G+Type']) as $itm) {
 		if ($itm == "D.DisasterBeginTime") {
 			if (isset($post['_G+Stat']) && strlen($post['_G+Stat'])>0) {
@@ -54,9 +51,12 @@ if (isset($post['_G+cmd'])) {
 		}
 	} // foreach
 	$opc['Group'] = $ele;
-	$opc['Field'] = $post['_G+Field'];
+	$opc['Field'] = array($post['_G+Field']);
+	if (isset($post['_G+Field2']) && !empty($post['_G+Field2']))
+		array_push($opc['Field'], $post['_G+Field2']);
 	$sql = $q->genSQLProcess($qd, $opc);
 	$dislist = $q->getassoc($sql);
+//	echo "<pre>"; print_r($opc); echo "</pre>";
 //	echo $sql;
 	if (!empty($dislist)) {
 		// Process results data
@@ -78,9 +78,8 @@ if (isset($post['_G+cmd'])) {
 				$dk = $k;
 			$gl[$dk] = $i;
 		}
-
 		// Construct Graphic Object and Show Page
-		$g = new Graphic($post['_G+Kind'], $post, $gl);
+		$g = new Graphic($post, $gl);
 		$sImageURL  = WWWDATA . "/graphs/di8graphic_". session_id() . ".png";
 		$sImageFile = WWWDIR . "/graphs/di8graphic_". session_id() . ".png";
 		// Wrote graphic to file

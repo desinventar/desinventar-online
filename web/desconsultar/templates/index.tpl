@@ -307,7 +307,8 @@
         $('_G+Kind').value = "PIE";
         $('_G+Period').value = "";
         $('_G+Stat').value = "";
-      	disab($('_G+Field2'));
+        $('_G+Field2').value = "";
+      	disab($('_G+Field2')); disab($('_G+Scale2')); disab($('_G+Data2')); disab($('_G+Mode2'));
         disab($('_G+Stat'));
         disab($('_G+Scale'));
         disab($('_G+M_accu'));
@@ -325,12 +326,13 @@
         enab($('_G+Scale'));
         var histt = $(fld).value;
         if (histt.substr(19, 1) == "|") {
-        	disab($('_G+Field2'));
+        	$('_G+Field2').value = "";
+        	disab($('_G+Field2')); disab($('_G+Scale2')); disab($('_G+Data2')); disab($('_G+Mode2'));
         	disab($('_G+M_accu'));
         	enab($('_G+M_over'));
         }
         else {
-        	enab($('_G+Field2'));
+        	enab($('_G+Field2')); enab($('_G+Scale2')); enab($('_G+Data2')); enab($('_G+Mode2'));
         	enab($('_G+M_accu'));
         	disab($('_G+M_over'));
         }
@@ -343,11 +345,13 @@
       var rf = $(ref).elements;
       var ih = null;
       for (i=0; i < rf.length; i++) {
+      	if (rf[i].disabled == false) {
         ih = document.createElement("input");
         ih.type   = "hidden";
         ih.value  = rf[i].value;
         ih.name   = rf[i].name;
         dc.appendChild(ih);
+       	}
       }
     }
     // selection map functions
@@ -753,14 +757,14 @@
             				<select id="_G+Field" name="_G+Field" onMouseOver="showtip('{-$dic.GraphField[2]-}');">
             					<option value="D.DisasterId||" selected>{-$dic.GraphDisasterId_[0]-}</option>
  {-foreach name=ef1 key=k item=i from=$ef1-}
-                    	<option value="D.{-$k-}|>|0">{-$i[0]-}</option>
+                    	<option value="D.{-$k-}|>|-1">{-$i[0]-}</option>
                     	<option value="D.{-$k-}|=|-1">{-#tauxhave#-} {-$i[0]-}</option>
  {-/foreach-}
  {-foreach name=ef2 key=k item=i from=$ef2-}
-                    	<option value="D.{-$k-}|>|0">{-$i[0]-}</option>
+                    	<option value="D.{-$k-}|>|-1">{-$i[0]-}</option>
  {-/foreach-}
  {-foreach name=ef3 key=k item=i from=$ef3-}
-                    	<option value="D.{-$k-}|>|0">{-$i[0]-}</option>
+                    	<option value="D.{-$k-}|>|-1">{-$i[0]-}</option>
  {-/foreach-}
  {-foreach name=ef3 key=k item=i from=$sec-}
                     	<option value="D.{-$k-}|=|-1">{-#tauxaffect#-} {-$i[0]-}</option>
@@ -814,19 +818,19 @@
             			<td>
             				<p align="center"><u>{-#gveraxis#-} 2:</u></p>
             				<b onMouseOver="showtip('{-$dic.GraphField[2]-}');">{-$dic.GraphField[0]-}</b><br>
-            				<select id="_G+Field2" name="_G+Field2" size="1"
-            						onMouseOver="showtip('{-$dic.GraphField[2]-}');">
-            					<option value="||" selected></option>
+            				<select id="_G+Field2" name="_G+Field2" size="1" onMouseOver="showtip('{-$dic.GraphField[2]-}');"
+            						onChange="enab($('_G+Scale2')); enab($('_G+Data2')); enab($('_G+Mode2'));">
+            					<option value="" selected></option>
             					<option value="D.DisasterId||">{-$dic.GraphDisasterId_[0]-}</option>
  {-foreach name=ef1 key=k item=i from=$ef1-}
-                    	<option value="D.{-$k-}|>|0">{-$i[0]-}</option>
+                    	<option value="D.{-$k-}|>|-1">{-$i[0]-}</option>
                     	<option value="D.{-$k-}|=|-1">{-#tauxhave#-} {-$i[0]-}</option>
  {-/foreach-}
  {-foreach name=ef2 key=k item=i from=$ef2-}
-                    	<option value="D.{-$k-}|>|0">{-$i[0]-}</option>
+                    	<option value="D.{-$k-}|>|-1">{-$i[0]-}</option>
  {-/foreach-}
  {-foreach name=ef3 key=k item=i from=$ef3-}
-                    	<option value="D.{-$k-}|>|0">{-$i[0]-}</option>
+                    	<option value="D.{-$k-}|>|-1">{-$i[0]-}</option>
  {-/foreach-}
  {-foreach name=ef3 key=k item=i from=$sec-}
                     	<option value="D.{-$k-}|=|-1">{-#tauxaffect#-} {-$i[0]-}</option>
@@ -886,7 +890,8 @@
                     <table border=0 cellpadding=0 cellspacing=0 align="center">
                     <tr><td>
                     	<b onMouseOver="showtip('{-$dic.GraphPeriod[2]-}');">{-$dic.GraphPeriod[0]-}</b><br>
-                    	<select id="_G+Period" name="_G+Period" onMouseOver="showtip('{-$dic.GraphPeriod[2]-}');">
+                    	<select id="_G+Period" name="_G+Period" onChange="$('_G+Stat').value = '';"
+                    			onMouseOver="showtip('{-$dic.GraphPeriod[2]-}');">
                     	<option value=""></option>
                     	<option value="YEAR" selected>{-#gperannual#-}</option>
                     	<option value="YMONTH">{-#gpermonth#-}</option>
@@ -895,7 +900,8 @@
                     	</select>
                     </td><td>
                     	<b onMouseOver="showtip('{-$dic.GraphSeaHistogram[2]-}');">{-#GHISTOANNUAL#-}</b><br>
-                    	<select id="_G+Stat" name="_G+Stat" onMouseOver="showtip('{-$dic.GraphSeaHistogram[2]-}');">
+                    	<select id="_G+Stat" name="_G+Stat" onChange="$('_G+Period').value = '';"
+                    			onMouseOver="showtip('{-$dic.GraphSeaHistogram[2]-}');">
                     	<option value=""></option>
                     	<option value="DAY">{-#gseaday#-}</option>
                     	<option value="WEEK">{-#gseaweek#-}</option>
