@@ -16,18 +16,35 @@ require_once('../include/math.class.php');
 class Graphic {
 	var $g;
 	var $sPeriod;
-	/* Type BAR,LINE,PIE; Opc:Title,etc; data:Matrix,
+	var $sStat;
+
+	/* opc [kind:BAR,LINE,PIE Opc:Title,etc] data:Matrix
 	   data[0] == X, data[1] = Y1,  .. */
-	public function Graphic ($type, $opc, $data) {
+	public function Graphic ($opc, $data) {
+		$val = array();
+		$acol = 1;
+		$kind = $opc['_G+Kind'];
+		// Get range of dates from Database
+		$q = new Query($opc['_REG']);
+		$ydb = $q->getDateRange();
 		// Get Label Information
 		$oLabels     = array_keys($data);
 		$sXAxisLabel = current($oLabels);
 		$sYAxisLabel = end($oLabels);
-		$val = array();
-		$acol = 1;
-		$q = new Query($opc['_REG']);
-		// Calculate GraphPeriod of the Graph (YEAR, YMONTH, YWEEK, YDAY)
-		$this->sPeriod = $this->getGraphPeriod($opc['_G+Period']);
+		// Determine graphic type
+		if (substr($opc['_G+Type'],2,18) == "DisasterBeginTime|")
+		  $gType = "XTEMPO";		// One var x Event/Temporal..
+    elseif (substr($opc['_G+Type'],2,17) == "DisasterBeginTime") {
+      $gType = "TEMPO";			// One var x time
+      if (isset($post['_G+Field2']) && !empty($opc['_G+Field2']))
+        $gType = "2TEMPO";	// Two vars x time
+    }
+    else {
+      if (isset($post['_G+Field2']) && !empty($opc['_G+Field2']))
+        $gType = "2COMPAR";	// Two vars x event, cause...
+      else
+        $gType = $kind;			// Comparatives
+    }
 		// Cummulative Graph : Add Values in Graph
 		if ($opc['_G+Mode'] == "ACCUMULATE") {
 			$SumValue = 0;
@@ -35,186 +52,75 @@ class Graphic {
 				$SumValue += $Value;
 				$val[$data[$sXAxisLabel][$Key]] = $SumValue;
 			}
-		} elseif (count($oLabels) == 3) {
-			// Reformat arrays to set a multiple bar o line
-			if ($type == "BAR")
-			  $type = "MULTIBAR";
-			elseif ($type == "LINE")
-			  $type = "MULTILINE";
+		}
+		// get Period and Stationality of the Graph (YEAR, YMONTH, YWEEK, YDAY)
+		if (isset($opc['_G+Period']))
+		  $this->sPeriod = $opc['_G+Period'];//$this->getGraphPeriod($opc['_G+Period']);
+		if (isset($opc['_G+Stat']))
+		  $this->sStat = $opc['_G+Stat'];//$this->getGraphPeriod($opc['_G+Period']);
+
+		// MULTIBAR OR MULTILINE: reformat arrays completing time serie
+		if ($gType == "XTEMPO") {
+			if ($kind == "BAR")
+			  $kind = "MULTIBAR";
+			elseif ($kind == "LINE")
+			  $kind = "MULTILINE";
 			// Classify Events, Geo, Cause by time
 			$y2lab = $oLabels[1];
-			$y = "";
-			// convert data in matrix [EVENT][YEAR]=>VALUE
+			// Convert data in matrix [EVENT][YEAR]=>VALUE
 			foreach ($data[$y2lab] as $k=>$i) {
 				foreach ($data[$sXAxisLabel] as $l=>$j) {
 					if ($k == $l)
 						$tvl[$i][$j] = $data[$sYAxisLabel][$k];
 				}
 			}
-			// create complete matrix NxM, fill with 0's unassigned values..
-			foreach (array_unique($data[$sXAxisLabel]) as $it) {
-				$xvl[$it] = 0;
-			}
-			foreach ($tvl as $k=>$v) {
-				$res = $v;
-				foreach ($xvl as $l=>$w) {
-					if (!isset($res[$l])) {
-						$res[$l] = 0;
-					}
-				}
-				ksort($res, SORT_NUMERIC);
-				reset($res);
-				$val[$k] = $res;
-			} // foreach
+			foreach ($tvl as $kk=>$ii)
+			  $val[$kk] = $this->completeTimeSerie($ydb, $opc, $ii);
+      $lbl = array_keys($val[$kk]);
 			$acol = count(array_unique($data[$y2lab]));
-		} else {
-			// Normal Graph (LINE, PIE)
+		}
+		// Normal Graph (BAR, LINE, PIE)
+		else {
 			// Set Array to [YEAR]=>VALUE
 			foreach ($data[$sYAxisLabel] as $Key=>$Value) {
 				$val[$data[$sXAxisLabel][$Key]] = $Value;
 				$acol++;
 			}
-			if ($type == "PIE") {
-				// In Pie Graphs, order the values
-				arsort($val, SORT_NUMERIC);
-				reset($val);
+			// Complete the data series for XAxis (year,month,day)
+			if ($gType == "TEMPO" || $gType == "2TEMPO")
+				$val = $this->completeTimeSerie($ydb, $opc, $val);
+			elseif ($gType == "PIE") {
+			  // In Pie Graphs must order the values
+			  arsort($val, SORT_NUMERIC);
+			  reset($val);
 			}
-			elseif (substr($opc['_G+Type'],2,17) == "DisasterBeginTime") {
-				// Complete the data series for XAxis (year,month,day)
-				// Get range of dates from Database
-				$ydb = $q->getDateRange();
-				$dateini = $ydb[0];
-				$dateend = $ydb[1];
-				// Calculate Start Date/EndDate, from Database or From Query
-				if (isset($opc['D:DisasterBeginTime'][0])) {
-					// $dateini = (int)(empty($opc['D:DisasterBeginTime'][0]) ? substr($ydb[0], 0, 4) : $opc['D:DisasterBeginTime'][0]);
-					$oTmp = $opc['D:DisasterBeginTime'];
-					$iYear = 1; $iMonth = 1; $iDay = 1;
-					if (!empty($oTmp[0])) { $iYear  = $oTmp[0]; }
-					if (!empty($oTmp[1])) { $iMonth = $oTmp[1]; }
-					if (!empty($oTmp[2])) { $iDay   = $oTmp[2]; }
-					$dateini = substr("0000". $iYear, -4) ."-". substr("00". $iMonth, -2) ."-". substr("00". $iDay, -2);
-				}
-				else {
-					$dateini = current(array_keys($val));
-					if (!is_int($dateini))
-						$dateini = next(array_keys($val));	// ignore first null value
-				}
-				if (!empty($opc['D:DisasterEndTime'][0])) {
-					//$dateend = (int)(empty($opc['D:DisasterEndTime'][0]) ? substr($ydb[1], 0, 4) : $opc['D:DisasterEndTime'][0]);
-					$oTmp = $opc['D:DisasterEndTime'];
-					$iYear = 9999; $iMonth = 12; $iDay = 31;
-					if (!empty($oTmp[0])) { $iYear  = $oTmp[0]; }
-					if (!empty($oTmp[1])) { $iMonth = $oTmp[1]; }
-					if (!empty($oTmp[2])) { $iDay   = $oTmp[2]; }
-					$dateend = substr("0000". $iYear, -4) ."-". substr("00". $iMonth, -2) ."-". substr("00". $iDay, -2);
-				}
-				else
-					$dateend = end(array_keys($val));
-				// Delete initial columns with null values (MONTH,DAY=0)
-				if (isset($val[0]) || isset($val['']))
-					$val = array_slice($val, 1, count($val), true);
-				// Generate YEAR, MONTH, WEEK, DAY series..
-				if (empty($opc['_G+Stat'])) {
-					// Fill data series with zero
-					// Year Loop (always execute)
-					for ($iYear = substr($dateini, 0, 4); $iYear <= substr($dateend, 0, 4); $iYear++) {
-						$sDate = substr("0000". $iYear, -4);
-						if ($this->sPeriod == "YEAR") {
-							if (!isset($val[$sDate]))
-							  $val[$sDate] = 0;
-						}
-						elseif ($this->sPeriod == "YWEEK") {
-							// WEEK
-							$iWeekIni =  1;
-							$sDate = substr("0000". $iYear, -4) . "-12-31";
-							$iWeekEnd = $this->getWeekOfYear($sDate);
-							if ($iYear == substr($dateini,0,4))
-								$iWeekIni = $this->getWeekOfYear($dateini);
-							if ($iYear == substr($dateend,0,4))
-								$iWeekEnd = $this->getWeekOfYear($dateend);
-							for($iWeek = $iWeekIni; $iWeek <= $iWeekEnd; $iWeek++) {
-								$sDate = substr("0000". $iYear, -4) ."-". substr("00". $iWeek, -2);
-								if (!isset($val[$sDate]))
-								  $val[$sDate] = 0;
-							} // for
-						} else {
-							// MONTH
-							$iMonthIni =  1;
-							$iMonthEnd = 12;
-							if ($iYear == substr($dateini,0,4))
-								$iMonthIni = substr($dateini,5,2);
-							if ($iYear == substr($dateend,0,4))
-								$iMonthEnd = substr($dateend,5,2);
-							for($iMonth = $iMonthIni; $iMonth <= $iMonthEnd; $iMonth++) {
-								if ($this->sPeriod == "YMONTH") {
-									$sDate = substr("0000". $iYear, -4) ."-". substr("00". $iMonth, -2);
-									if (!isset($val[$sDate]))
-									  $val[$sDate] = 0;
-								}
-								else {
-									// DAY....
-									$iDayIni = 1;
-									$iDayEnd = 30;
-									$sDate = substr("0000". $iYear, -4) ."-". substr("00". $iMonth, -2);
-									if ($sDate == substr($dateini,0,7))
-										$iDayIni = substr($dateini,8,2);
-									if ($sDate  == substr($dateend,0,7))
-										$iDayEnd = substr($dateend,8,2);
-									for ($iDay = $iDayIni; $iDay <= $iDayEnd; $iDay++) {
-										$sDate = substr("0000" . $iYear , -4) . "-" . 
-										         substr("00"   . $iMonth, -2) . "-" .
-										         substr("00"   . $iDay  , -2);
-										if (!isset($val[$sDate])) { $val[$sDate] = 0; }
-									} // for
-								} // else
-							} // for
-						} // else
-					} // for
-					// Reorder XAxis Labels
-					ksort($val);
-					reset($val);
-				} // if
-			} // if
-		} // if
-		
+			$lbl = array_keys($val);
+		}
 		// Choose presentation options, borders, intervals
 		$itv = 1;			// no interval
-		if (substr($opc['_G+Type'], 2, 19) == "DisasterBeginTime") {
-			$grp = "SINGLE";
+		if ($gType == "TEMPO" || $gType == "2TEMPO") {
 			$rl = 40;			// right limit
 			switch($this->sPeriod) {
-			  case "YEAR":
-			    $bl = 50;
-        break;
-        case "YWEEK":
-          $bl = 65;
-        break;
-        case "YMONTH":
-          $bl = 65;
-				break;
-				case "YDAY":
-				  $bl = 85; 
-				break;
-				default:
-				  $bl = 50;
-				break;
+			  case "YEAR":		$bl = 50;	break;
+        case "YWEEK":		$bl = 65;	break;
+        case "YMONTH":	$bl = 65;	break;
+				case "YDAY":		$bl = 85; break;
+				default:				$bl = 50; break;
 			}
 		}
-		elseif (substr($opc['_G+Type'],2,18) == "DisasterBeginTime|") {
-			$grp = "MULTIPLE";
+		elseif ($gType == "XTEMPO") {
 			$rl = 160;		// right limit
 			$bl = 50;			// bottom limit
 		}
 		else {
-			$grp = "COMPARATIVE";
 			$rl = 30;			// right limit
 			$bl = 120;		// bottom limit more space to xlabels
 		}
 		// calculate graphic size
 		$wx = 760;
 		$hx = 520;
-		if ($type == "PIE") {
+    // 1D Graphic
+		if ($gType == "PIE") {
 			$h = (24 * count($data[$sYAxisLabel]));
 			if ($h > $hx)
 				$hx = $h;
@@ -228,6 +134,7 @@ class Graphic {
 			$t1->SetColor("black");
 			$this->g->AddText($t1);
 		}
+		// 2D, 3D Graphic
 		else {
 			$w = (14 * count($data[$sXAxisLabel]));
 			if ($w > $wx) 
@@ -242,14 +149,7 @@ class Graphic {
 				$this->g->xaxis->SetTitle($sXAxisLabel, 'middle');
 				$this->g->xaxis->SetTitlemargin($bl - 30);
 				$this->g->xaxis->title->SetFont(FF_ARIAL, FS_NORMAL);
-				if ($type == "MULTIBAR" || $type == "MULTILINE") {
-					foreach (array_unique($data[$sXAxisLabel]) as $el)
-						$lbl[] = $el;
-					$this->g->xaxis->SetTickLabels($lbl);
-				}
-				else {
-					$this->g->xaxis->SetTickLabels(array_keys($val));
-				}
+				$this->g->xaxis->SetTickLabels($lbl);
 				$this->g->xaxis->SetFont(FF_ARIAL,FS_NORMAL, 8);
 				$this->g->xaxis->SetTextLabelInterval($itv);
 				$this->g->xaxis->SetLabelAngle(90);
@@ -260,16 +160,15 @@ class Graphic {
 				if ($opc['_G+Scale'] == "textlog") {
 					$this->g->yaxis->scale->ticks->SetLabelLogType(LOGLABELS_PLAIN);
 				}
-			} // if
-		} // if
-		
+			} // if G+Scale
+		}
 		// 2009-02-03 (jhcaiced) Try to avoid overlapping labels in XAxis
 		// by calculating the interval of the labels
 		$iNumPoints = count($val);		
 		$iInterval = ($iNumPoints * 14) / $wx;
 		if ($iInterval < 1)
 		  $iInterval = 1;
-		if ($type != "PIE")
+		if ($gType != "PIE")
 			$this->g->xaxis->SetTextLabelInterval($iInterval);
 		// Other options graphic
 		$this->g->img->SetMargin(50,$rl,30,$bl);
@@ -281,25 +180,25 @@ class Graphic {
 		$this->g->title->Set($title);
 		$this->g->subtitle->Set($subti);
 		$this->g->title->SetFont(FF_ARIAL,FS_NORMAL, 12);
-		// get color palette..
+		// Get color palette..
 		if (substr_count($opc['_G+Type'], "Event") > 0)
 			$pal = $this->genPalette($acol, DI_EVENT, array_keys($val), $q);
 		elseif (substr_count($opc['_G+Type'], "Cause") > 0)
 			$pal = $this->genPalette($acol, DI_CAUSE, array_keys($val), $q);
 		elseif (substr_count($opc['_G+Type'], "DisasterGeography") > 0)
 			$pal = $this->genPalette($acol, DI_GEOGRAPHY, array_keys($val), null);
-		elseif ($grp == "SINGLE")
+		elseif ($gType == "TEMPO")
 			$pal = "orange"; //$this->genPalette($acol, "DEG");
 		else
 			$pal = $this->genPalette($acol, "FIX", null, null);
 		// Choose and draw graphic type
-		switch ($type) {
+		switch ($kind) {
 		  case "BAR":
 		    $m = $this->bar($opc, $val, $pal);
 			break;
       case "LINE":
         $m[] = $this->line($opc, $val, $pal);
-        // add linnear regression 
+        // Add lineal regression 
         $std = new Math();
         $xx = array_fill(0, count($val), 0);
         $rl = $std->linearRegression(array_keys($xx), array_values($val));
@@ -324,16 +223,15 @@ class Graphic {
 			  $m = null;
 			break;
 		} //switch
-		
 		// Extra presentation options
 		if (!empty($m)) {
 			if (isset($opc['_G+Data']) && $opc['_G+Data'] == "VALUE") {
-				if ($type == "PIE") {
+				if ($kind == "PIE") {
 					$m->SetLabelType(PIE_VALUE_ABS);
 					$m->value->SetFormat("%d");
 					$m->value->SetFont(FF_ARIAL, FS_NORMAL, 6);
         }
-        elseif ($type == "BAR" || $type == "LINE") {
+        elseif ($kind == "BAR" || $kind == "LINE") {
 					$m->value->SetFont(FF_ARIAL, FS_NORMAL, 7);
 					$m->value->SetFormat("%d");
 					$m->value->SetAngle(90);
@@ -347,22 +245,21 @@ class Graphic {
 				foreach ($m as $m1)
 					$this->g->Add($m1);
 			}
-			else {
+			else
 				$this->g->Add($m);
-			}
-		} //if
-	} // constructor
-	
-	/* This function creates the Graph in disk using all the curren parameters */
-	public function Stroke($fname) {
-		// Remove Old Graph is Exists
-		if (file_exists($fname)) {
-			unlink($fname);
 		}
+	} // end function Graphic
+	
+	// This function creates the Graph in disk using all the curren parameters
+	public function Stroke ($fname) {
+		// Remove Old Graph is Exists
+		if (file_exists($fname))
+			unlink($fname);
 		$this->g->Stroke($fname);
 	}
-// uhmm	
-	public function getGraphPeriod($prmOption) {
+
+/*
+	public function getGraphPeriod ($prmOption) {
 		$Index = strrpos($prmOption, "-");
 		if ($Index == FALSE)
 		  $Index = 0; 
@@ -372,18 +269,144 @@ class Graphic {
 		if ($sGraphPeriod == "")
 		  $sGraphPeriod = "YEAR";
 		return $sGraphPeriod;
-	}
+	}*/
 
-	function getWeekOfYear($sMyDate) { 
+	function getWeekOfYear ($sMyDate) { 
 		$iWeek = date("W", 
 		  mktime(5, 0, 0, (int)substr($sMyDate,5,2),
 		                  (int)substr($sMyDate,8,2),
 		                  (int)substr($sMyDate,0,4)));
 		return $iWeek;
 	}
+	
+	function completeTimeSerie ($ydb, $opc, $val) {
+	  $dateini = $ydb[0];
+		$dateend = $ydb[1];
+		// Calculate Start Date/EndDate, from Database or From Query
+		if (isset($opc['D:DisasterBeginTime'][0])) {
+		  // $dateini = (int)(empty($opc['D:DisasterBeginTime'][0]) ? substr($ydb[0], 0, 4) : $opc['D:DisasterBeginTime'][0]);
+		  $oTmp = $opc['D:DisasterBeginTime'];
+		  $iYear = 1;		$iMonth = 1; 	$iDay = 1;
+		  if (!empty($oTmp[0])) 	$iYear  = $oTmp[0];
+      if (!empty($oTmp[1])) 	$iMonth = $oTmp[1];
+      if (!empty($oTmp[2]))		$iDay   = $oTmp[2];
+      $dateini = sprintf("%04d-%02d-%02d", $iYear, $iMonth, $iDay);
+    }
+		else {
+		  $dateini = current(array_keys($val));
+		  if (!is_int($dateini))
+		    $dateini = next(array_keys($val));	// ignore first null value
+    }
+    if (!empty($opc['D:DisasterEndTime'][0])) {
+      //$dateend = (int)(empty($opc['D:DisasterEndTime'][0]) ? substr($ydb[1], 0, 4) : $opc['D:DisasterEndTime'][0]);
+      $oTmp = $opc['D:DisasterEndTime'];
+      $iYear = 9999;	$iMonth = 12;		$iDay = 31;
+      if (!empty($oTmp[0])) 	$iYear  = $oTmp[0];
+      if (!empty($oTmp[1])) 	$iMonth = $oTmp[1];
+      if (!empty($oTmp[2])) 	$iDay   = $oTmp[2];
+      $dateend = sprintf("%04d-%02d-%02d", $iYear, $iMonth, $iDay);
+    }
+    else
+      $dateend = end(array_keys($val));
+    // Delete initial columns with null values (MONTH,DAY=0)
+    if (isset($val[0]) || isset($val['']))
+      $val = array_slice($val, 1, count($val), true);
+    // Generate YEAR, MONTH, WEEK, DAY series..
+    if (empty($this->sStat)) {
+      // Fill data series with zero; Year Loop (always execute)
+      for ($iYear = substr($dateini, 0, 4); $iYear <= substr($dateend, 0, 4); $iYear++) {
+        $sDate = sprintf("%04d", $iYear);
+        if ($this->sPeriod == "YEAR") {
+          if (!isset($val[$sDate]))
+            $val[$sDate] = 0;
+        }
+        elseif ($this->sPeriod == "YWEEK")
+          $this->completeWeekSerie ($dateini, $dateend, $iYear, $val);
+        else
+          $this->completeMonthSerie ($dateini, $dateend, $iYear, $val);
+      }
+//    echo "<pre>"; print_r($opc); echo "</pre>";
+    }
+    else {
+      if ($this->sStat == "DAY")
+        $this->completeDaySerie ($dateini, $dateend, "", 0, $val);
+      elseif ($this->sStat == "WEEK")
+        $this->completeWeekSerie ($dateini, $dateend, "", $val);
+      elseif ($this->sStat == "MONTH")
+        $this->completeMonthSerie ($dateini, $dateend, "", $val);
+    }
+    // Reorder XAxis Labels
+    ksort($val);
+    reset($val);
+    return $val;
+  }
+  
+	function completeWeekSerie ($dateini, $dateend, $iYear, &$val) {
+		$iWeekIni =  1;
+		$sDate = sprintf("%04d-12-31", $iYear);
+		$iWeekEnd = $this->getWeekOfYear($sDate);
+		if ($iYear == substr($dateini, 0, 4))
+		  $iWeekIni = $this->getWeekOfYear($dateini);
+    if ($iYear == substr($dateend, 0, 4))
+      $iWeekEnd = $this->getWeekOfYear($dateend);
+    for ($iWeek = $iWeekIni; $iWeek <= $iWeekEnd; $iWeek++) {
+      if ($this->sPeriod == "YWEEK")
+        $sDate = sprintf("%04d-%02d", $iYear, $iWeek);
+      elseif ($this->sStat == "WEEK")
+        $sDate = sprintf("%02d", $iWeek);
+      if (!isset($val[$sDate]))
+        $val[$sDate] = 0;
+    }
+    return;
+  }
+  
+  function completeMonthSerie ($dateini, $dateend, $iYear, &$val) {
+    $iMonthIni =  1;
+    $iMonthEnd = 12;
+    if ($iYear == substr($dateini, 0, 4))
+      $iMonthIni = substr($dateini, 5, 2);
+    if ($iYear == substr($dateend, 0, 4))
+      $iMonthEnd = substr($dateend, 5, 2);
+    for ($iMonth = $iMonthIni; $iMonth <= $iMonthEnd; $iMonth++) {
+      if ($this->sPeriod == "YDAY")
+        $this->completeDaySerie ($dateini, $dateend, $iYear, $iMonth, $val);
+      else {
+        if ($this->sPeriod == "YMONTH")
+          $sDate = sprintf("%04d-%02d", $iYear, $iMonth);
+        elseif ($this->sStat == "MONTH")
+          $sDate = sprintf("%02d", $iMonth);
+        if (!isset($val[$sDate]))
+          $val[$sDate] = 0;
+      }
+    }
+    return;
+  }
+  
+  function completeDaySerie ($dateini, $dateend, $iYear, $iMonth, &$val) {
+    $iDayIni = 1;
+    $iDayEnd = 30;
+    $sDate = sprintf("%04d-%02d", $iYear, $iMonth);
+    if ($sDate == substr($dateini, 0, 7))
+      $iDayIni = substr($dateini, 8, 2);
+    if ($sDate  == substr($dateend, 0, 7))
+      $iDayEnd = substr($dateend, 8, 2);
+    if ($this->sStat == "DAY") {
+      $iDayIni = 1;
+      $iDayEnd = 366;
+    }
+    for ($iDay = $iDayIni; $iDay <= $iDayEnd; $iDay++) {
+      if ($this->sPeriod == "YDAY")
+        $sDate = sprintf("%04d-%02d-%02d", $iYear, $iMonth, $iDay);
+      elseif ($this->sStat == "DAY")
+        $sDate = sprintf("%03d", $iDay);
+      if (!isset($val[$sDate]))
+        $val[$sDate] = 0;
+    }
+    return;
+  }
                                                                                         
   // Setting a PIE graphic
-  function pie($opc, $axi, $pal) {
+  function pie ($opc, $axi, $pal) {
     if ($opc['_G+Feel'] == "3D") {
       $p = new PiePlot3d(array_values($axi));
       $p->SetEdge("navy");
@@ -404,7 +427,8 @@ class Graphic {
     return $p;
   }
   
-  function bar($opc, $axi, $color) {
+  // Setting a Bar Graphic
+  function bar ($opc, $axi, $color) {
     $b = new BarPlot(array_values($axi));
     // normal histogram..
     if (is_array($color)) {
@@ -423,6 +447,7 @@ class Graphic {
     return $b;
   }
 
+  // Setting a Multibar graphic
   function multibar ($opc, $axi, $pal) {
     $i = 0;
     $lab = array_keys($axi);
@@ -432,7 +457,6 @@ class Graphic {
       $b[] = $bar;
       $i++;
     }
-    //print_r($axi);
     if ($opc['_G+Mode'] == "OVERCOME")
       $gb = new AccBarPlot($b);
     else
@@ -441,6 +465,7 @@ class Graphic {
     return $gb;
   }
 
+  // Setting a Line graphic
   function line ($opc, $axi, $col) {
     $l = new LinePlot(array_values($axi));
     if ($col == 'single')
@@ -453,6 +478,7 @@ class Graphic {
     return $l;
   }
 
+  // Setting a Multiline graphic
   function multiline ($opc, $axi, $pal) {
     $i = 0;
     $lab = array_keys($axi);
@@ -470,7 +496,7 @@ class Graphic {
   }
   
   // Generate colors from database attrib-color or generate fix palette..
-  function genPalette($cnt, $mode, $evl, $qy) {
+  function genPalette ($cnt, $mode, $evl, $qy) {
     $pal = array();
     if ($mode == DI_EVENT || $mode == DI_CAUSE) {
       // Find in database color attribute
@@ -512,4 +538,4 @@ class Graphic {
     return $pal;
   }
 
-} // class
+} // end class
