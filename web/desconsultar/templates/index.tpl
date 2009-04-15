@@ -298,23 +298,36 @@
         disab($(id +'[2]'));
       }
     }
+    function disabAxis2() {
+    	$('_G+Field2').value = "";
+    	disab($('_G+Field2'));
+    	disab($('_G+Scale2'));
+    	disab($('_G+Data2'));
+    	disab($('_G+Mode2'));
+    }
+    function enabAxis2() {
+    	enab($('_G+Field2'));
+    	enab($('_G+Scale2'));
+    	enab($('_G+Data2'));
+    	enab($('_G+Mode2'));
+    }
     function grpSelectbyType(fld) {
       var grp = $(fld).value;
+      // Comparatives
       if (grp == "D.EventId" || grp == "D.CauseId" ||
           grp.substr(0,21) == "D.DisasterGeographyId") {
         disab($('_G+K_line'));
+        disabAxis2();
         enab($('_G+K_pie'));
         $('_G+Kind').value = "PIE";
         $('_G+Period').value = "";
+        disab($('_G+Period'));
         $('_G+Stat').value = "";
-        $('_G+Field2').value = "";
-      	disab($('_G+Field2')); disab($('_G+Scale2')); disab($('_G+Data2')); disab($('_G+Mode2'));
         disab($('_G+Stat'));
         disab($('_G+Scale'));
         disab($('_G+M_accu'));
         disab($('_G+M_over'));
         enab($('_G+D_perc'));
-        disab($('_G+Period'));
       }
       else {
       	enab($('_G+K_line'));
@@ -326,13 +339,12 @@
         enab($('_G+Scale'));
         var histt = $(fld).value;
         if (histt.substr(19, 1) == "|") {
-        	$('_G+Field2').value = "";
-        	disab($('_G+Field2')); disab($('_G+Scale2')); disab($('_G+Data2')); disab($('_G+Mode2'));
+        	disabAxis2();
         	disab($('_G+M_accu'));
         	enab($('_G+M_over'));
         }
         else {
-        	enab($('_G+Field2')); enab($('_G+Scale2')); enab($('_G+Data2')); enab($('_G+Mode2'));
+        	enabAxis2();
         	enab($('_G+M_accu'));
         	disab($('_G+M_over'));
         }
@@ -772,7 +784,7 @@
  											<option disabled>___</option>
  {-foreach name=eef key=k item=i from=$exteffel-}
   {-if $i[2] == "INTEGER" || $i[2] == "DOUBLE"-}
-                    	<option value="E.{-$k-}|>|0">{-$i[0]-}</option>
+                    	<option value="E.{-$k-}|>|-1">{-$i[0]-}</option>
   {-/if-}
  {-/foreach-}
                   	</select>
@@ -801,7 +813,8 @@
             				<table border=1 width="120px" height="120px">
             					<tr><td align="center">
             					<!--<b onMouseOver="showtip('{-$dic.GraphKind[2]-}');">{-$dic.GraphKind[0]-}</b><br>-->
-            						<select id="_G+Kind" name="_G+Kind" size="3" onMouseOver="showtip('{-$dic.GraphKind[2]-}');">
+            						<select id="_G+Kind" name="_G+Kind" size="3" 
+            								onMouseOver="showtip('{-$dic.GraphKind[2]-}');">
             							<option value="BAR" selected>{-#gkndbars#-}</option>
             							<option id="_G+K_line" value="LINE">{-#gkndlines#-}</option>
             							<option id="_G+K_pie" value="PIE" disabled>{-#gkndpie#-}</option>
@@ -838,15 +851,15 @@
  											<option disabled>___</option>
  {-foreach name=eef key=k item=i from=$exteffel-}
   {-if $i[2] == "INTEGER" || $i[2] == "DOUBLE"-}
-                    	<option value="E.{-$k-}|>|0">{-$i[0]-}</option>
+                    	<option value="E.{-$k-}|>|-1">{-$i[0]-}</option>
   {-/if-}
  {-/foreach-}
                   	</select>
                   	<br>
                   	<b onMouseOver="showtip('{-$dic.GraphScale[2]-}');">{-$dic.GraphScale[0]-}</b><br>
                   	<select id="_G+Scale2" name="_G+Scale2" disabled class="disabled" onMouseOver="showtip('{-$dic.GraphScale[2]-}');">
-                  		<option value="textint" selected>{-#gscalin#-}</option>
-                  		<option value="textlog">{-#gscalog#-}</option>
+                  		<option value="int" selected>{-#gscalin#-}</option>
+                  		<option value="log">{-#gscalog#-}</option>
                   	</select>
                   	<br>
                   	<b onMouseOver="showtip('{-$dic.GraphShow[2]-}');">{-$dic.GraphShow[0]-}</b><br>
