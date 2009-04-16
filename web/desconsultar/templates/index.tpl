@@ -1214,9 +1214,12 @@
 {-if $ctl_show-}
  {-if !$isvreg-}
       </div>
-      <span id="testid"></span>
-      <b onMouseOver="showtip('{-$dis.DisasterSiteNotes[2]-}');">{-$dis.DisasterSiteNotes[0]-}</b><br>
-      <textarea id="DisasterSiteNotes" name="D:DisasterSiteNotes" style="width:220px; height: 40px;"
+      <b onMouseOver="showtip('{-$dis.DisasterSiteNotes[2]-}');">{-$dis.DisasterSiteNotes[0]-}</b>
+      <select name="D:DisasterSiteNotes[0]" class="small">
+      	<option class="small" value="AND" selected>{-#tand#-}</option>
+      	<option class="small" value="OR">{-#tor#-}</option>
+      </select><br>
+      <textarea id="DisasterSiteNotes" name="D:DisasterSiteNotes[1]" style="width:220px; height: 40px;"
               onFocus="showtip('{-$dis.DisasterSiteNotes[2]-}');"></textarea>
     </dd>
  {-/if-}
@@ -1238,8 +1241,12 @@
       <input id="EventDuration" name="D:EventDuration" type="text" class="line fixw"
           onFocus="showtip('{-$eve.EventDuration[2]-}');">
       <br>
-      <b onMouseOver="showtip('{-$eve.EventNotes[2]-}');">{-$eve.EventNotes[0]-}</b><br>
-      <textarea id="EventNotes" name="D:EventNotes" style="width:250px; height:40px;"
+      <b onMouseOver="showtip('{-$eve.EventNotes[2]-}');">{-$eve.EventNotes[0]-}</b>
+      <select name="D:EventNotes[0]" class="small">
+      	<option class="small" value="AND" selected>{-#tand#-}</option>
+      	<option class="small" value="OR">{-#tor#-}</option>
+      </select><br>
+      <textarea id="EventNotes" name="D:EventNotes[1]" style="width:250px; height:40px;"
           onFocus="showtip('{-$eve.EventNotes[2]-}');"></textarea>
     </dd>
     <!-- BEGIN CAUSE SECTION -->
@@ -1256,8 +1263,12 @@
  {-/foreach-}
       </select>
       <br><br>
-      <b onMouseOver="showtip('{-$cau.CauseNotes[2]-}');">{-$cau.CauseNotes[0]-}</b><br>
-      <textarea name="D:CauseNotes" style="width:250px; height: 40px;"
+      <b onMouseOver="showtip('{-$cau.CauseNotes[2]-}');">{-$cau.CauseNotes[0]-}</b>
+      <select name="D:CauseNotes[0]" class="small">
+      	<option class="small" value="AND" selected>{-#tand#-}</option>
+      	<option class="small" value="OR">{-#tor#-}</option>
+      </select><br>
+      <textarea name="D:CauseNotes[1]" style="width:250px; height: 40px;"
           onFocus="showtip('{-$cau.CauseNotes[2]-}');"></textarea>
     </dd>
     <!-- BEGIN EFFECTS SECTION -->
@@ -1289,7 +1300,7 @@
           {-#tand#-} <input type="text" id="{-$key-}[2]" name="D:{-$key-}[2]" size="3" value="10" class="line">
          </span>
          <select id="{-$key-}[3]" id="{-$key-}[3]" name="D:{-$key-}[3]" class="small">
-          <option class="small" value="AND" checked>{-#tand#-}</option>
+          <option class="small" value="AND" selected>{-#tand#-}</option>
           <option class="small" value="OR">{-#tor#-}</option>
          </select>
         </span>
@@ -1314,7 +1325,7 @@
           <option class="small" value="-2">{-#teffdontknow#-}</option>
          </select>
          <select id="{-$key-}[3]" id="{-$key-}[3]" name="D:{-$key-}[3]" class="small">
-          <option class="small" value="AND" checked>{-#tand#-}</option>
+          <option class="small" value="AND" selected>{-#tand#-}</option>
           <option class="small" value="OR">{-#tor#-}</option>
          </select>
  {-foreach name=sc2 key=k item=i from=$item[3]-}
@@ -1335,7 +1346,7 @@
            {-#tand#-} <input type="text" id="{-$k-}[2]" name="D:{-$k-}[2]" size="3" value="10" class="line">
           </span>
           <select id="{-$k-}[3]" id="{-$k-}[3]" name="D:{-$k-}[3]" class="small">
-           <option class="small" value="AND" checked>{-#tand#-}</option>
+           <option class="small" value="AND" selected>{-#tand#-}</option>
            <option class="small" value="OR">{-#tor#-}</option>
           </select><br>
          </span>
@@ -1365,8 +1376,8 @@
 				<span id="y{-$k-}" style="display:none">
 					{-#tand#-} <input type="text" id="{-$k-}[2]" name="D:{-$k-}[2]" size="5" value="10" class="line">
 				</span>
-				<select id="{-$key-}[3]" id="{-$key-}[3]" name="D:{-$key-}[3]" class="small">
-					<option class="small" value="AND" checked>{-#tand#-}</option>
+				<select id="{-$key-}[3]" name="D:{-$key-}[3]" class="small">
+					<option class="small" value="AND" selected>{-#tand#-}</option>
 					<option class="small" value="OR">{-#tor#-}</option>
 				</select>
 			</span><br>
@@ -1445,8 +1456,12 @@
           </tr>
         </table>
         <br>
-         <b onMouseOver="showtip('{-$dis.DisasterSource[2]-}');">{-$dis.DisasterSource[0]-}</b><br>
-         <textarea id="DisasterSource" name="D:DisasterSource" style="width:220px; height: 40px;"
+         <b onMouseOver="showtip('{-$dis.DisasterSource[2]-}');">{-$dis.DisasterSource[0]-}</b>
+         <select name="D:DisasterSource[0]" class="small">
+           <option class="small" value="AND" selected>{-#tand#-}</option>
+           <option class="small" value="OR">{-#tor#-}</option>
+				 </select><br>
+         <textarea id="DisasterSource" name="D:DisasterSource[1]" style="width:220px; height:40px;"
               onFocus="showtip('{-$dis.DisasterSource[2]-}');"></textarea>
   {-if $ctl_user-}
         <br><br>
