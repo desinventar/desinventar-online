@@ -39,14 +39,14 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 	$iNumberOfRecords = 0;
 	$pag = 1;
 	$export = false;
-	
 	if (isset($get['page'])) {
 		// Show results by page number
 		$pag = $get['page'];
 		$iRecordsPerPage = $get['RecordsPerPage'];
 		$fld = $get['fld'];
 		$sql = base64_decode($get['sql']);
-	} else if (isset($post['_D+cmd'])) {
+	}
+	elseif (isset($post['_D+cmd'])) {
 		// Process results with default options
 		$qd  = $q->genSQLWhereDesconsultar($post);
 		$sqc = $q->genSQLSelectCount($qd);

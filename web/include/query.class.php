@@ -598,7 +598,7 @@ class Query extends PDO
           if (strlen($v) > 0) {
             $serial = " $log(";
             foreach (explode(" ", $v) as $i)
-              $serial .= "D.DisasterSerial LIKE '$i' OR ";
+              $serial .= "D.DisasterSerial = '$i' OR ";
             $serial .= " 1!=1)";
           }
         }
@@ -609,20 +609,20 @@ class Query extends PDO
             $dd = !empty($v[2])? $v[2] : "00";
             $begt = sprintf("%04d-%02d-%02d", $aa, $mm, $dd);
           }
-          else if ($k == "D.DisasterEndTime") {
+          elseif ($k == "D.DisasterEndTime") {
             $aa = !empty($v[0])? $v[0] : "9999"; //substr($datedb[1], 0, 4);
             $mm = !empty($v[1])? $v[1] : "12";
             $dd = !empty($v[2])? $v[2] : "31";
             $endt = sprintf("%04d-%02d-%02d", $aa, $mm, $dd);
           }
-          else if ($k == "D.EventId" || $k == "D.CauseId") {
+          elseif ($k == "D.EventId" || $k == "D.CauseId") {
             $e[$k] = "(";
             foreach ($v as $i) {
               $e[$k] .= "$k = '$i' OR ";
             }
             $e[$k] .= "1!=1)";
           }
-          else if ($k == "D.DisasterGeographyId") {
+          elseif ($k == "D.DisasterGeographyId") {
             $e[$k] = "(";
             foreach ($v as $i) {
               // Restrict to childs elements only
@@ -635,7 +635,7 @@ class Query extends PDO
             }
             $e[$k] .= "1!=1)";
           }
-          else if ((substr($k, 2, 6) == "Effect" || substr($k, 2, 6) == "Sector") && isset($v[0])) {
+          elseif ((substr($k, 2, 6) == "Effect" || substr($k, 2, 6) == "Sector") && isset($v[0])) {
             if (isset($v[3]))
               $op = $v[3];
             else
@@ -649,10 +649,20 @@ class Query extends PDO
             else if ($v[0] == "-3")
               $e['Eff'] .= "($k BETWEEN ". $v[1] ." AND ". $v[2] .") $op ";
           }
+          elseif (substr($k, -5) == "Notes" || $k == "D.DisasterSource") {
+            $e['Item'] .= "(";
+            foreach (explode(" ", $v[1]) as $i)
+              $e['Item'] .= "$k LIKE '%$i%' ". $v[0] ." "; 
+            if ($v[0] == "AND")
+              $e['Item'] .= "1=1) AND ";
+            else
+              $e['Item'] .= "1!=1) AND ";
+          }
         }
         // all minus DC hidden fields _MyField
-        elseif (substr($k, 0, 1) != "_") 
-          $e['Item'] .= "$k LIKE '%$v%' AND ";
+        elseif (substr($k, 0, 1) != "_")  {
+          $e['Item'] .= "$k like '%$v%' AND ";
+        }
       }
     } //foreach
     if (isset($begt) || isset($endt)) {
@@ -947,8 +957,8 @@ class Query extends PDO
         $info['BEG'] = $v[0];
       elseif ($k == "DisasterEndTime")
         $info['END'] = $v[0];
-      elseif ($k == "DisasterSource" && !empty($v))
-        $info['SOU'] = $v;
+      elseif ($k == "DisasterSource" && !empty($v[1]))
+        $info['SOU'] = $v[1];
       elseif ($k == "DisasterSerial" && !empty($v))
         $info['SER'] = $v;
       elseif (substr($k, 0, 6) == "Effect" && isset($v[0]) && isset($dic[$k][0])) {
