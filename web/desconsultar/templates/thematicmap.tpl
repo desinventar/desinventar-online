@@ -27,8 +27,7 @@
 				minExtent     : new OpenLayers.Bounds(-1, -1, 1, 1),
 				units         : "m",
 				maxResolution : 156543.0339,
-				maxExtent     : new OpenLayers.Bounds(-20037508.34, -20037508.34,
-				                                       20037508.34,  20037508.34),*/
+				maxExtent     : new OpenLayers.Bounds(-20037508.34, -20037508.34, 20037508.34,  20037508.34),*/
 				controls: [
 						new OpenLayers.Control.PanZoomBar(),
 						new OpenLayers.Control.MouseToolbar(),
@@ -36,7 +35,8 @@
 						new OpenLayers.Control.ScaleLine(),
 						new OpenLayers.Control.MousePosition(),
 						new OpenLayers.Control.OverviewMap(),
-						new OpenLayers.Control.KeyboardDefaults()
+						new OpenLayers.Control.KeyboardDefaults(),
+						new OpenLayers.Control.Permalink('pl')
 				],
 				numZoomLevels: 15
 			};
@@ -182,6 +182,7 @@
 				<img src="/cgi-bin/{-$mps-}?map={-$rgl[0].map-}&SERVICE=WMS&VERSION=1.1.1&REQUEST=getlegendgraphic&LAYER={-$rgl[0].ly1-}&FORMAT=image/png">
 {-/if-}
 		  </div>
+		  <a href="" id="pl">test</a>
 		 </td>
 		 <td valign="top">
 		  <div id="map" class="dwin" style="width:700px; height:530px"></div>

@@ -35,7 +35,9 @@
         id: 'queryMenu',
         items: [
             {  text: '{-#mgotoqd#-}',    handler: onMenuItem  },
-            {  text: '{-#mnewsearch#-}', handler: onMenuItem } ]
+            {  text: '{-#mnewsearch#-}', handler: onMenuItem  },
+            {  text: 'Guardar', 				 handler: onMenuItem  },
+            {  text: 'Abrir', 				 	 handler: onMenuItem  }]
       });
       var mhelp = new Ext.menu.Menu({
         id: 'helpMenu',
@@ -43,7 +45,7 @@
             {  text: '{-#mgotodoc#-}',    handler: onMenuItem  },
             {  text: '{-#hmoreinfo#-}',		handler: onMenuItem  },
             {  text: '{-#motherdoc#-}',		handler: onMenuItem  },
-            {  text: '{-#mabout#-}',     	handler: onMenuItem } ]
+            {  text: '{-#mabout#-}',     	handler: onMenuItem  }]
       });
       var tb = new Ext.Toolbar();
       tb.render('toolbar');
@@ -69,6 +71,12 @@
 {-if $ctl_showmap-}
 						fmp.clearAreas();
 {-/if-}
+          break;
+          case "Guardar":
+          	saveQuery();
+          break;
+          case "Abrir":
+          	$('openquery').style.visibility = 'visible';
           break;
           case "{-#mgotoqd#-}":
             if (w.isVisible())
@@ -358,11 +366,11 @@
       var ih = null;
       for (i=0; i < rf.length; i++) {
       	if (rf[i].disabled == false) {
-        ih = document.createElement("input");
-        ih.type   = "hidden";
-        ih.value  = rf[i].value;
-        ih.name   = rf[i].name;
-        dc.appendChild(ih);
+      		ih = document.createElement("input");
+      		ih.type   = "hidden";
+      		ih.value  = rf[i].value;
+      		ih.name   = rf[i].name;
+      		dc.appendChild(ih);
        	}
       }
     }
@@ -477,6 +485,17 @@
       }
       else
         return false;
+    }
+    function saveQuery() {
+    	selectall('_D+Field[]');
+    	combineForms('DC', 'CD');
+    	combineForms('DC', 'CM');
+    	combineForms('DC', 'CG');
+    	selectall('_S+Field[]');
+    	combineForms('DC', 'CS');
+    	$('DC').action='index.php';
+    	$('DC').submit();
+    	return true;
     }
     //var g{-$reg-} = new CheckTree('g{-$reg-}');
   </script>
@@ -759,7 +778,6 @@
             						</td>
             					</tr>
             				</table>
-            				<hr>
             			</td>
             		</tr>
             		<tr valign="bottom">
@@ -882,7 +900,7 @@
             				<p><u>{-#ghoraxis#-}:</u></p>
             				<b onMouseOver="showtip('{-$dic.GraphType[2]-}');">{-$dic.GraphType[0]-}</b><br>
             				<select id="_G+Type" name="_G+Type" onChange="grpSelectbyType('_G+Type');" 
-            						onMouseOver="showtip('{-$dic.GraphType[2]-}');" size="4" class="fixw">
+            						onMouseOver="showtip('{-$dic.GraphType[2]-}');" size="2" class="fixw">
             					<optgroup label="{-#ghistogram#-}">
                       <option value="D.DisasterBeginTime" selected>{-$dic.GraphHisTemporal[0]-}</option>
                       <option value="D.DisasterBeginTime|D.EventId">{-$dic.GraphHisEveTemporal[0]-}</option>
@@ -1068,11 +1086,11 @@
             				</select>
             			</td>
             			<td>
-            				Ver geografía:
+            				{-#mgeosection#-}:
             				<select id="_S+showgeo" name="_S+showgeo">
-            				 <option value="NAME">Solo Nombre</option>
-            				 <option value="CODE">Solo Código</option>
-            				 <option value="CODENAME">Código | Nombre</option>
+            				 <option value="NAME">{-#mareashownam#-}</option>
+            				 <option value="CODE">{-#mareashowcod#-}</option>
+            				 <option value="CODENAME">Code | Name</option>
             				</select>
             			</td>
             		</tr>
@@ -1166,8 +1184,13 @@
      </tr>
    </table>
 <!--   SHOW RESULTS  -->
-  <div id="querydetails" style="height:40px;" class="dwin"></div>
-  <div id="smap" style="position:absolute; left:0px; top:15px;">
+  <div id="querydetails" style="height:40px;" class="dwin">
+  <form id="openquery" enctype="multipart/form-data" action="index.php" method="POST" style="visibility:hidden;">
+  	<input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+  	<input type="file" name="qry" onChange="$('openquery').submit();"/>
+  </form>
+  </div>
+  <div id="smap" style="position:absolute; left:0px; top:20px;">
   	<iframe name="fmp" id="fmp" frameborder="0" style="height:600px; width:700px;" {-if $ctl_showmap-} 
   src='/cgi-bin/mapserv?map={-$path-}/{-$reg-}/region.map&qlayer=admin00&mode=nquery&searchmap=true&mapsize=500+500&mapext={-$x1-}+{-$y1-}+{-$x2-}+{-$y2-}'{-/if-}>
   	</iframe>
@@ -1239,7 +1262,7 @@
       <br><br>
       <b onMouseOver="showtip('{-$eve.EventDuration[2]-}');">{-$eve.EventDuration[0]-}</b><br>
       <input id="EventDuration" name="D:EventDuration" type="text" class="line fixw"
-          onFocus="showtip('{-$eve.EventDuration[2]-}');">
+          onFocus="showtip('{-$eve.EventDuration[2]-}');" value="{-$q.D/EventDuration-}">
       <br>
       <b onMouseOver="showtip('{-$eve.EventNotes[2]-}');">{-$eve.EventNotes[0]-}</b>
       <select name="D:EventNotes[0]" class="small">
@@ -1481,6 +1504,7 @@
         <input type="radio" name="D:DisasterSerial_" value="" checked>{-#tinclude#-} &nbsp;&nbsp;&nbsp;
         <input type="radio" name="D:DisasterSerial_" value="NOT">{-#texclude#-}<br>
         <input type="text" name="D:DisasterSerial" class="line fixw">
+        <br><br><a href="javascript:printMap()">Map</a>
       </div>
     </dd>
     <!-- END DATETIME SECTION -->
