@@ -11,24 +11,39 @@ require_once('../include/usersession.class.php');
 // Direct access to module
 if (isset($_GET['r']) && !empty($_GET['r'])) {
 	$reg = $_GET['r'];
-	if (isset($_GET['v']) && $_GET['v'] == "true") {
+	if (isset($_GET['v']) && $_GET['v'] == "true")
 		$db = "";
-	} else {
+	else
 		$db = $reg;
-	}
 	$us->open($reg);
 	$q = new Query($db);
-	if (isset($_GET['lang']) && !empty($_GET['lang'])) {
+	if (isset($_GET['lang']) && !empty($_GET['lang']))
 		$_SESSION['lang'] = $_GET['lang'];
-	}
-} else {
-	$reg = $us->sRegionId;
+}
+else {
+  // Request to save Query Design..
+  if (isset($_POST) && !empty($_POST['_REG'])) {
+    header("Content-type: text/plain");
+    header("Content-Disposition: attachment; filename=Query_". str_replace(" ", "", $_POST['_REG']) .".di8");
+    echo base64_encode(serialize($_POST));
+    exit();
+  }
+  // Open file with saved query
+  elseif (isset($_FILES['qry'])) {
+    $myfile = $_FILES['qry']['tmp_name'];
+    $handle = fopen($myfile, "r");
+    $cq = fread($handle, filesize($myfile));
+    fclose($handle);
+    $sq = unserialize(base64_decode($cq));
+    header('Location: ./?r='. $sq['_REG'].'&q='. $cq);
+  }
+  else
+    $reg = $us->sRegionId;
 }
 
 // Direct Acccess Not allowed, do not show anything...
-if (empty($reg) || ($reg == '')) {
+if (empty($reg) || ($reg == ''))
 	exit();
-}
 
 // Display Geographic list of childs..
 if (isset($_GET['cmd'])) {
@@ -183,6 +198,10 @@ else {
   $std = array_merge($std, $q->queryLabelsFromGroup('stadist', $lg));
   $std = array_merge($std, $st);
   $t->assign ("std", $std);
+  if (isset($_GET['q']) && !empty($_GET['q'])) {
+    $qsaved = unserialize(base64_decode($_GET['q']));
+    $t->assign ("q", $qsaved);
+  }
 }
 $t->display ("index.tpl");
 

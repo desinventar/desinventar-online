@@ -49,6 +49,7 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 	elseif (isset($post['_D+cmd'])) {
 		// Process results with default options
 		$qd  = $q->genSQLWhereDesconsultar($post);
+		//echo "<pre>"; print_r($post); echo "</pre>";
 		$sqc = $q->genSQLSelectCount($qd);
 		$c	 = $q->getresult($sqc);
 		$iNumberOfRecords = $c['counter'];
