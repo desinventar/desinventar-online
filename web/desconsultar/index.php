@@ -42,7 +42,7 @@ else {
 }
 
 // Direct Acccess Not allowed, do not show anything...
-if (empty($reg) || ($reg == ''))
+if (empty($reg))
 	exit();
 
 // Display Geographic list of childs..
@@ -67,26 +67,33 @@ else {
   $t->assign ("ctl_glist", true);
   $t->assign ("reg", $reg);
   $t->assign ("path", VAR_DIR);
+  // Decode and assign saved query..
+  if (isset($_GET['q']) && !empty($_GET['q'])) {
+    $qd = unserialize(base64_decode($_GET['q']));
+    $t->assign ("qd", $qd);
+  }
   // Set lists if is VirtualRegion
   if (isset($_GET['v']) && $_GET['v'] == "true") {
     $t->assign ("isvreg", true);
     $t->assign ("regname", $reg);
     $areg = $q->getVirtualRegItems($reg);
-    $t->assign ("geol", null);
+    $geol = null;
     $glev = array();
-    $t->assign ("evepredl", $q->loadEvents("BASE", null, $lg));
-    $t->assign ("caupredl", $q->loadCauses("BASE", null, $lg));
+    $evepredl = $q->loadEvents("BASE", null, $lg);
+    $eveuserl = null;
+    $caupredl = $q->loadCauses("BASE", null, $lg);
+    $cauuserl = null;
     $t->assign ("ctl_showmap", true);
   }
   else {
     $rinf = $q->getDBInfo();
     $t->assign ("regname", $rinf['RegionLabel']);
-    $t->assign ("geol", $q->loadGeography(0));
+    $geol = $q->loadGeography(0);
     $glev = $q->loadGeoLevels("");
-    $t->assign ("evepredl", $q->loadEvents("PREDEF", "active", $lg));
-    $t->assign ("eveuserl", $q->loadEvents("USER", "active", $lg));
-    $t->assign ("caupredl", $q->loadCauses("PREDEF", "active", $lg));
-    $t->assign ("cauuserl", $q->loadCauses("USER", "active", $lg));
+    $evepredl = $q->loadEvents("PREDEF", "active", $lg);
+    $eveuserl = $q->loadEvents("USER", "active", $lg);
+    $caupredl = $q->loadCauses("PREDEF", "active", $lg);
+    $cauuserl = $q->loadCauses("USER", "active", $lg);
     $t->assign ("exteffel", $q->getEEFieldList("True"));
     // Get UserRole
     $role = $us->getUserRole($reg);
@@ -109,28 +116,49 @@ else {
     $t->assign ("yini", substr($ydb[0], 0, 4));
     $t->assign ("yend", substr($ydb[1], 0, 4));
   }
-  // Geography levels
+  // Saved query set true in Geo, Events, Causes..
+  if (isset($qd["D_DisasterGeographyId"])) {
+    foreach ($qd["D_DisasterGeographyId"] as $ky=>$it)
+      $geol[$it][3] = 1;
+  }
+  if (isset($qd["D_EventId"])) {
+    foreach ($qd["D_EventId"] as $ky=>$it) {
+      $evepredl[$it][3] = 1;
+      $eveuserl[$it][3] = 1;
+    }
+  }
+  if (isset($qd["D_CauseId"])) {
+    foreach ($qd["D_CauseId"] as $ky=>$it) {
+      $caupredl[$it][3] = 1;
+      $cauuserl[$it][3] = 1;
+    }
+  }
+  // List of elements: Geography, GLevels, Events, Causes..
+  $t->assign ("geol", $geol);
   $t->assign ("glev", $glev);
-  // common sentences in virtual and real regions..
+  $t->assign ("evepredl", $evepredl);
+  $t->assign ("eveuserl", $eveuserl);
+  $t->assign ("caupredl", $caupredl);
+  $t->assign ("cauuserl", $cauuserl);
   $t->assign ("ctl_show", true);
-  // Results dictionary..
-  $dic = array();
+  // Query words and phrases in dictionary..
   $ef1 = $q->queryLabelsFromGroup('Effect|People', $lg);
   $ef2 = $q->queryLabelsFromGroup('Effect|Affected', $lg);
   $ef3 = $q->queryLabelsFromGroup('Effect|Economic', $lg);
   $sec = $q->queryLabelsFromGroup('Sector', $lg);
-  $sec['SectorTransport'][3] 		= array('EffectRoads' => $ef2['EffectRoads'][0]);
+  $sec['SectorTransport'][3] 			= array('EffectRoads' => $ef2['EffectRoads'][0]);
   $sec['SectorCommunications'][3] = null;
-  $sec['SectorRelief'][3] 			= null;
-  $sec['SectorAgricultural'][3] = array('EffectFarmingAndForest' => $ef2['EffectFarmingAndForest'][0],
+  $sec['SectorRelief'][3] 				= null;
+  $sec['SectorAgricultural'][3] 	= array('EffectFarmingAndForest' => $ef2['EffectFarmingAndForest'][0],
                                         'EffectLiveStock' => $ef2['EffectLiveStock'][0]);
-  $sec['SectorWaterSupply'][3] 	= null;
-  $sec['SectorSewerage'][3]			= null;
-  $sec['SectorEducation'][3]		= array('EffectEducationCenters' => $ef2['EffectEducationCenters'][0]);
-  $sec['SectorPower'][3]				= null;
-  $sec['SectorIndustry'][3]			= null;
-  $sec['SectorHealth'][3]				= array('EffectMedicalCenters' => $ef2['EffectMedicalCenters'][0]);
-  $sec['SectorOther'][3]				= null;
+  $sec['SectorWaterSupply'][3] 		= null;
+  $sec['SectorSewerage'][3]				= null;
+  $sec['SectorEducation'][3]			= array('EffectEducationCenters' => $ef2['EffectEducationCenters'][0]);
+  $sec['SectorPower'][3]					= null;
+  $sec['SectorIndustry'][3]				= null;
+  $sec['SectorHealth'][3]					= array('EffectMedicalCenters' => $ef2['EffectMedicalCenters'][0]);
+  $sec['SectorOther'][3]					= null;
+  $dic = array();
   $dic = array_merge($dic, $q->queryLabelsFromGroup('MapOpt', $lg));
   $dic = array_merge($dic, $q->queryLabelsFromGroup('Graph', $lg));
   $dic = array_merge($dic, $ef1);
@@ -163,7 +191,8 @@ else {
         "SectorHealth,SectorOther,EventDuration,EventMagnitude,CauseName,CauseNotes";
   $sda = explode(",", $fld);
   $t->assign ("sda", $sda);
-  $sda1 = explode(",", "GeographyCode,DisasterLatitude,DisasterLongitude,RecordAuthor,RecordCreation,RecordLastUpdate,EventNotes");
+  $sda1 = explode(",",
+    "GeographyCode,DisasterLatitude,DisasterLongitude,RecordAuthor,RecordCreation,RecordLastUpdate,EventNotes");
   $t->assign ("sda1", $sda1);	// array_diff_key($dc2, array_flip($sda))
   // MAPS
   if (isset($_GET['v']) && $_GET['v'] == "true")
@@ -171,13 +200,13 @@ else {
   else
     $mgl = $q->loadGeoLevels("map");
   $t->assign ("mgel", $mgl);
-  $range[] = array(10,			"1 - 10", "ffff99");
-  $range[] = array(100,			"11 - 100", "ffff00");
-  $range[] = array(1000,		"101 - 1000", "ffcc00");
-  $range[] = array(10000,		"1001 - 10000", "ff6600");
-  $range[] = array(100000,	"10001 - 100000", "cc0000");
-  $range[] = array(1000000,	"100001 - 1000000", "660000");
-  $range[] = array('',      "1000001 ->",         "000000");
+  $range[] = array(10, "1 - 10", "ffff99");
+  $range[] = array(100, "11 - 100", "ffff00");
+  $range[] = array(1000, "101 - 1000", "ffcc00");
+  $range[] = array(10000, "1001 - 10000", "ff6600");
+  $range[] = array(100000, "10001 - 100000", "cc0000");
+  $range[] = array(1000000, "100001 - 1000000", "660000");
+  $range[] = array('',       "1000001 ->",        "000000");
   $t->assign ("range", $range);
   // STADISTIC
   foreach ($ef1 as $k=>$i) {
@@ -198,10 +227,6 @@ else {
   $std = array_merge($std, $q->queryLabelsFromGroup('stadist', $lg));
   $std = array_merge($std, $st);
   $t->assign ("std", $std);
-  if (isset($_GET['q']) && !empty($_GET['q'])) {
-    $qsaved = unserialize(base64_decode($_GET['q']));
-    $t->assign ("q", $qsaved);
-  }
 }
 $t->display ("index.tpl");
 
