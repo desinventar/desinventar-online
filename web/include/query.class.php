@@ -573,7 +573,9 @@ class Query extends PDO
     $serial = "";
     //$datedb = $this->getDateRange();
     foreach ($dat as $k=>$v) {
-      $k = str_replace(":", ".", $k);
+      // replace D_ by D.
+      if (substr($k, 1, 1) == "_")
+        $k = substr_replace($k, ".", 1, 1);
       if (!empty($v)) {
         if (is_int($v) || is_float($v))
           $e['Item'] .= "$k = $v AND ";
