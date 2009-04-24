@@ -498,11 +498,33 @@
     	return true;
     }
     //var g{-$reg-} = new CheckTree('g{-$reg-}');
+    // Find all Effects fields enable by saved query
     window.onload = function() {
-{-foreach name=ef1 key=key item=item from=$ef1-}
-{-assign var="ff" value=D_$key-}
+{-foreach name=ef1 key=k item=i from=$ef1-}
+{-assign var="ff" value=D_$k-}
 {-if $qd.$ff[0] != ''-}
-    	enadisEff('{-$key-}', true);
+    	enadisEff('{-$k-}', true);
+    	showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
+{-/if-}
+{-/foreach-}
+{-foreach name=sec key=k item=i from=$sec-}
+{-assign var="sc" value=D_$k-}
+{-if $qd.$sc[0] != ''-}
+{-foreach name=sc2 key=k2 item=i2 from=$i[3]-}
+{-assign var="ff" value=D_$k2-}
+{-if $qd.$ff[0] != ''-}
+    	enadisEff('{-$k2-}', true);
+    	showeff('{-$qd.$ff[0]-}', 'x{-$k2-}', 'y{-$k2-}');
+{-/if-}
+{-/foreach-}
+    	enadisEff('{-$k-}', true);
+{-/if-}
+{-/foreach-}
+{-foreach name=ef3 key=k item=i from=$ef3-}
+{-assign var="ff" value=D_$k-}
+{-if $qd.$ff[0] != ''-}
+    	enadisEff('{-$k-}', true);
+    	showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
 {-/if-}
 {-/foreach-}
     }
@@ -1199,9 +1221,11 @@
   </form>
   </div>
   <div id="smap" style="position:absolute; left:0px; top:20px;">
+<!--
   	<iframe name="fmp" id="fmp" frameborder="0" style="height:600px; width:700px;" {-if $ctl_showmap-} 
   src='/cgi-bin/mapserv?map={-$path-}/{-$reg-}/region.map&qlayer=admin00&mode=nquery&searchmap=true&mapsize=500+500&mapext={-$x1-}+{-$y1-}+{-$x2-}+{-$y2-}'{-/if-}>
   	</iframe>
+-->
   </div>
   <iframe name="ifr" id="ifr" frameborder="0" style="height:550px; width:960px;" 
   		src="../region.php?r={-$reg-}&cmd=info{-if $isvreg-}&v=true{-/if-}">
@@ -1235,7 +1259,7 @@
  {-foreach name=geol key=key item=item from=$geol-}
           <li id="show-g{-$key-}">
             <input type="checkbox" id="{-$key-}" name="D_DisasterGeographyId[]" value="{-$key-}"
-                onClick="setSelMap('{-$item[0]-}', '{-$key-}', this.checked);">
+                onClick="setSelMap('{-$item[0]-}', '{-$key-}', this.checked);" {-if $item[3]-}checked{-/if-}>
             <label for="{-$key-}">{-$item[1]-}</label>
             <span id="itree{-$key-}"></span>
           </li>
@@ -1308,7 +1332,7 @@
       <b>{-#ttitegp#-}</b><br>
       <div style="width: 265px; height: 130px;" class="dwin" ext:qtip="{-#thlpquery#-}">
       <table border=0 cellpadding=0 cellspacing=0>
-{-foreach name=ef1 key=key item=item from=$ef1-}
+ {-foreach name=ef1 key=key item=item from=$ef1-}
  {-assign var="ff" value=D_$key-}
 			 <tr><td valign="top">
         <input type="checkbox" onFocus="showtip('{-$item[2]-}');" id="{-$key-}"
@@ -1326,12 +1350,12 @@
           <option class="small" value="-3" {-if $qd.$ff[0] == '-3'-}selected{-/if-}>{-#teffbetween#-}</option>
          </select>
          <span id="x{-$key-}" style="display:none"><br>
-          <input type="text" id="{-$key-}[1]" name="D_{-$key-}[1]" 
-          		value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[1]-}{-else-}1{-/if-}" size="3" class="line">
+          <input type="text" id="{-$key-}[1]" name="D_{-$key-}[1]" size="3" class="line"
+          		value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[1]-}{-else-}1{-/if-}">
          </span>
          <span id="y{-$key-}" style="display:none">{-#tand#-}
-         	<input type="text" id="{-$key-}[2]" name="D_{-$key-}[2]" 
-         			value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}" size="3" class="line">
+         	<input type="text" id="{-$key-}[2]" name="D_{-$key-}[2]" size="3" class="line"
+         			value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}">
          </span>
          <select id="{-$key-}[3]" id="{-$key-}[3]" name="D_{-$key-}[3]" class="small">
           <option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
@@ -1339,95 +1363,104 @@
          </select>
         </span>
        </td></tr>
-{-/foreach-}
+ {-/foreach-}
 			</table>
       </div><br>
       <!-- SECTORS -->
       <b>{-#ttiteis#-}</b><br>
       <div style="width: 265px; height: 50px;" class="dwin">
       <table border=0 cellpadding=0 cellspacing=0>
-{-foreach name=sec key=key item=item from=$sec-}
+ {-foreach name=sec key=key item=item from=$sec-}
+ {-assign var="ff" value=D_$key-}
 			 <tr><td valign="top">
         <input type="checkbox" onFocus="showtip('{-$item[2]-}');" id="{-$key-}"
-        	onclick="{-foreach name=sc2 key=k item=i from=$item[3]-}enadisEff('{-$k-}', this.checked); {-/foreach-}enadisEff('{-$key-}', this.checked);">
+        	onclick="{-foreach name=sc2 key=k item=i from=$item[3]-}enadisEff('{-$k-}', this.checked);{-/foreach-}enadisEff('{-$key-}', this.checked);"
+        	{-if $qd.$ff[0] != ''-}checked{-/if-}>
         <label for="{-$key-}" onMouseOver="showtip('{-$item[2]-}');">{-$item[0]-}</label>
         <span id="o{-$key-}" style="display:none">
          <select id="{-$key-}[0]" name="D_{-$key-}[0]" class="small" disabled>
-          <option class="small" value=""></option>
-          <option class="small" value="-1">{-#teffhav#-}</option>
-          <option class="small" value="0">{-#teffhavnot#-}</option>
-          <option class="small" value="-2">{-#teffdontknow#-}</option>
+          <option class="small" value=" "></option>
+          <option class="small" value="-1" {-if $qd.$ff[0] == '-1'-}selected{-/if-}>{-#teffhav#-}</option>
+          <option class="small" value="0"  {-if $qd.$ff[0] == '0'-}selected{-/if-}>{-#teffhavnot#-}</option>
+          <option class="small" value="-2" {-if $qd.$ff[0] == '-2'-}selected{-/if-}>{-#teffdontknow#-}</option>
          </select>
          <select id="{-$key-}[3]" id="{-$key-}[3]" name="D_{-$key-}[3]" class="small">
-          <option class="small" value="AND" selected>{-#tand#-}</option>
-          <option class="small" value="OR">{-#tor#-}</option>
+          <option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
+          <option class="small" value="OR"  {-if $qd.$ff[3] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
          </select>
  {-foreach name=sc2 key=k item=i from=$item[3]-}
+ {-assign var="ff" value=D_$k-}
          <span id="o{-$k-}" style="display:none">
           <br>{-$i-}
           <select id="{-$k-}[0]" name="D_{-$k-}[0]" onChange="showeff(this.value, 'x{-$k-}', 'y{-$k-}');" 
               class="small" disabled>
-           <option class="small" value=""></option>
-           <option class="small" value=">=">{-#teffmajor#-}</option>
-           <option class="small" value="<=">{-#teffminor#-}</option>
-           <option class="small" value="=">{-#teffequal#-}</option>
-           <option class="small" value="-3">{-#teffbetween#-}</option>
+           <option class="small" value=" "></option>
+           <option class="small" value=">=" {-if $qd.$ff[0] == '>='-}selected{-/if-}>{-#teffmajor#-}</option>
+           <option class="small" value="<=" {-if $qd.$ff[0] == '<='-}selected{-/if-}>{-#teffminor#-}</option>
+           <option class="small" value="="  {-if $qd.$ff[0] == '='-}selected{-/if-}>{-#teffequal#-}</option>
+           <option class="small" value="-3" {-if $qd.$ff[0] == '-3'-}selected{-/if-}>{-#teffbetween#-}</option>
           </select>
           <span id="x{-$k-}" style="display:none">
-           <input type="text" id="{-$k-}[1]" name="D_{-$k-}[1]" size="3" value="1" class="line">
+           <input type="text" id="{-$k-}[1]" name="D_{-$k-}[1]" size="3" class="line"
+           		value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[1]-}{-else-}1{-/if-}">
           </span>
-          <span id="y{-$k-}" style="display:none">
-           {-#tand#-} <input type="text" id="{-$k-}[2]" name="D_{-$k-}[2]" size="3" value="10" class="line">
+          <span id="y{-$k-}" style="display:none">{-#tand#-}
+          	<input type="text" id="{-$k-}[2]" name="D_{-$k-}[2]" size="3" class="line"
+          		value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}">
           </span>
           <select id="{-$k-}[3]" id="{-$k-}[3]" name="D_{-$k-}[3]" class="small">
-           <option class="small" value="AND" selected>{-#tand#-}</option>
-           <option class="small" value="OR">{-#tor#-}</option>
+           <option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
+           <option class="small" value="OR"  {-if $qd.$ff[3] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
           </select><br>
          </span>
  {-/foreach-}
         </span>
        </td></tr>
-{-/foreach-}
+ {-/foreach-}
 			</table>
   		</div><br>
       <b>{-#ttitloss#-}</b><br>
-{-foreach name=ef3 key=k item=i from=$ef3-}
+ {-foreach name=ef3 key=k item=i from=$ef3-}
+ {-assign var="ff" value=D_$k-}
 			<input type="checkbox" onFocus="showtip('{-$i[2]-}');" id="{-$k-}"
-            onclick="enadisEff('{-$k-}', this.checked);">
+            onclick="enadisEff('{-$k-}', this.checked);" {-if $qd.$ff[0] != ''-}checked{-/if-}>
       <label for="{-$k-}" onMouseOver="showtip('{-$i[2]-}');">{-$i[0]-}</label>
       <span id="o{-$k-}" style="display:none">
       	<select id="{-$k-}[0]" name="D_{-$k-}[0]" onChange="showeff(this.value, 'x{-$k-}', 'y{-$k-}');" 
 						class="small" disabled>
-					<option class="small" value=""></option>
-					<option class="small" value=">=">{-#teffmajor#-}</option>
-          <option class="small" value="<=">{-#teffminor#-}</option>
-          <option class="small" value="=">{-#teffequal#-}</option>
-          <option class="small" value="-3">{-#teffbetween#-}</option>
+					<option class="small" value=" "></option>
+					<option class="small" value=">=" {-if $qd.$ff[0] == '>='-}selected{-/if-}>{-#teffmajor#-}</option>
+          <option class="small" value="<=" {-if $qd.$ff[0] == '<='-}selected{-/if-}>{-#teffminor#-}</option>
+          <option class="small" value="="  {-if $qd.$ff[0] == '='-}selected{-/if-}>{-#teffequal#-}</option>
+          <option class="small" value="-3" {-if $qd.$ff[0] == '-3'-}selected{-/if-}>{-#teffbetween#-}</option>
         </select>
         <span id="x{-$k-}" style="display:none"><br>
-					<input type="text" id="{-$k-}[1]" name="D_{-$k-}[1]" size="5" value="1" class="line">
+					<input type="text" id="{-$k-}[1]" name="D_{-$k-}[1]" size="5" class="line"
+							value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[1]-}{-else-}1{-/if-}">
 				</span>
-				<span id="y{-$k-}" style="display:none">
-					{-#tand#-} <input type="text" id="{-$k-}[2]" name="D_{-$k-}[2]" size="5" value="10" class="line">
+				<span id="y{-$k-}" style="display:none">{-#tand#-}
+					<input type="text" id="{-$k-}[2]" name="D_{-$k-}[2]" size="5" class="line" 
+							value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}">
 				</span>
 				<select id="{-$key-}[3]" name="D_{-$key-}[3]" class="small">
-					<option class="small" value="AND" selected>{-#tand#-}</option>
-					<option class="small" value="OR">{-#tor#-}</option>
+					<option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
+					<option class="small" value="OR"  {-if $qd.$ff[3] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
 				</select>
 			</span><br>
-{-/foreach-}
-{-foreach name=ef4 key=k item=i from=$ef4-}
+ {-/foreach-}
+ {-foreach name=ef4 key=k item=i from=$ef4-}
+ {-assign var="ff" value=D_$k-}
       <b onMouseOver="showtip('{-$i[2]-}');">{-$i[0]-}</b><br>
-      <input type="text" id="{-$k-}" name="D_{-$k-}" class="fixw line"
+      <input type="text" id="{-$k-}" name="D_{-$k-}" class="fixw line" value="{-$qd.$ff[1]-}"
           onFocus="showtip('{-$i[2]-}');"><br>
-{-/foreach-}
+ {-/foreach-}
     </dd>
     <!-- BEGIN EXTRAEFFECTS SECTION
     <dt>{-#mextsection#-}</dt>
     <dd>
       <div style="width: 235px; height: 300px;" class="dwin" ext:qtip="{-#thlpquery#-}">
       <table border=0 cellpadding=0 cellspacing=0>
-{-foreach name=eef key=key item=item from=$exteffel-}
+ {-foreach name=eef key=key item=item from=$exteffel-}
 			 <tr><td valign="top">
  {-if $item[2] == "INTEGER" || $item[2] == "DOUBLE"-}
         <input type="checkbox" onFocus="showtip('{-$item[1]-}');" id="{-$key-}"
@@ -1460,7 +1493,7 @@
  						onFocus="showtip('{-$item[1]-}');"></input><br>
  {-/if-}
        </td></tr>
-{-/foreach-}
+ {-/foreach-}
 			</table>
       </div><br>
     </dd>-->
@@ -1473,18 +1506,22 @@
         <table border="0">
           <tr>
             <td><b>{-#ttitsince#-}:</b></td>
-            <td><input type="text" id="iniyear" name="D_DisasterBeginTime[]" size=4 maxlength=4 
-            				class="line" value="{-$yini-}">
-                <input type="text" id="inimonth" name="D_DisasterBeginTime[]" size=2 maxlength=2 class="line">
-                <input type="text" id="iniday" name="D_DisasterBeginTime[]" size=2 maxlength=2 class="line">
+            <td><input type="text" id="iniyear" name="D_DisasterBeginTime[]" size=4 maxlength=4 class="line" 
+            			value="{-if $qd.D_DisasterBeginTime[0] != ''-}{-$qd.D_DisasterBeginTime[0]-}{-else-}{-$yini-}{-/if-}">
+                <input type="text" id="inimonth" name="D_DisasterBeginTime[]" size=2 maxlength=2 class="line"
+                	value="{-$qd.D_DisasterBeginTime[1]-}">
+                <input type="text" id="iniday" name="D_DisasterBeginTime[]" size=2 maxlength=2 class="line"
+                	value="{-$qd.D_DisasterBeginTime[2]-}">
             </td>
           </tr>
           <tr>
             <td><b>{-#ttituntil#-}:</b></td>
-            <td><input type="text" id="endyear" name="D_DisasterEndTime[]" size=4 maxlength=4 
-            				class="line" value="{-$yend-}">
-                <input type="text" id="endmonth" name="D_DisasterEndTime[]" size=2 maxlength=2 class="line">
-                <input type="text" id="endday" name="D_DisasterEndTime[]" size=2 maxlength=2 class="line">
+            <td><input type="text" id="endyear" name="D_DisasterEndTime[]" size=4 maxlength=4 class="line" 
+            			value="{-if $qd.D_DisasterEndTime[0] != ''-}{-$qd.D_DisasterEndTime[0]-}{-else-}{-$yend-}{-/if-}">
+                <input type="text" id="endmonth" name="D_DisasterEndTime[]" size=2 maxlength=2 class="line"
+                	value="{-$qd.D_DisasterEndTime[1]-}">
+                <input type="text" id="endday" name="D_DisasterEndTime[]" size=2 maxlength=2 class="line"
+                	value="{-$qd.D_DisasterEndTime[2]-}">
             </td>
           </tr>
         </table>
@@ -1510,10 +1547,11 @@
   {-/if-}
         <br>
         <b onMouseOver="showtip('{-#tserialmsg#-}');">{-#tserial#-}</b>
-        <input type="radio" name="D_DisasterSerial_" value="" checked>{-#tinclude#-} &nbsp;&nbsp;&nbsp;
-        <input type="radio" name="D_DisasterSerial_" value="NOT">{-#texclude#-}<br>
-        <input type="text" name="D_DisasterSerial" class="line fixw">
-        <br><br><a href="javascript:printMap()">Map</a>
+        <select name="D_DisasterSerial[0]" class="small">
+        	<option class="small" value=""  {-if $qd.D_DisasterSerial[0] == ''-}selected{-/if-}>{-#tinclude#-}</option>
+        	<option class="small" value="NOT" {-if $qd.D_DisasterSerial[0] == 'NOT'-}selected{-/if-}>{-#texclude#-}</option>
+        </select><br>
+        <input type="text" name="D_DisasterSerial[1]" class="line fixw" value="{-$qd.D_DisasterSerial[1]-}">
       </div>
     </dd>
     <!-- END DATETIME SECTION -->
@@ -1521,7 +1559,6 @@
   </form>
  </div> <!-- id = west-->
  <!-- END DI8 QUERY FORM -->
- 
  <!-- BEG HELP SECTION -->
  <div id="south">
   <textarea id="_DIDesc" wrap="hard" class="hlp" readonly style="width:80%; height:30px;">{-#tdescinfo#-}</textarea>
