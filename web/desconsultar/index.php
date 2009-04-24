@@ -11,38 +11,43 @@ require_once('../include/usersession.class.php');
 // Direct access to module
 if (isset($_GET['r']) && !empty($_GET['r'])) {
 	$reg = $_GET['r'];
+	$vreg = false;
 	if (isset($_GET['v']) && $_GET['v'] == "true")
-		$db = "";
-	else
-		$db = $reg;
-	$us->open($reg);
-	$q = new Query($db);
-	if (isset($_GET['lang']) && !empty($_GET['lang']))
-		$_SESSION['lang'] = $_GET['lang'];
+		$vreg = true;
 }
 else {
-  // Request to save Query Design..
+  // Request to save Query Design in File..
   if (isset($_POST) && !empty($_POST['_REG'])) {
     header("Content-type: text/plain");
     header("Content-Disposition: attachment; filename=Query_". str_replace(" ", "", $_POST['_REG']) .".di8");
     echo base64_encode(serialize($_POST));
     exit();
   }
-  // Open file with saved query
+  // Open file, decode and assign saved query..
   elseif (isset($_FILES['qry'])) {
     $myfile = $_FILES['qry']['tmp_name'];
     $handle = fopen($myfile, "r");
     $cq = fread($handle, filesize($myfile));
     fclose($handle);
-    $sq = unserialize(base64_decode($cq));
-    header('Location: ./?r='. $sq['_REG'].'&q='. $cq);
+    if (!empty($cq))
+      $qd = unserialize(base64_decode($cq));
+    else
+      exit();
+    $reg = $qd['_REG'];
+    $t->assign ("qd", $qd);
   }
   else
     $reg = $us->sRegionId;
 }
 
 // Direct Acccess Not allowed, do not show anything...
-if (empty($reg))
+if (!empty($reg)) {
+	$us->open($reg);
+	$q = new Query($reg);
+	if (isset($_GET['lang']) && !empty($_GET['lang']))
+		$_SESSION['lang'] = $_GET['lang'];
+}
+else
 	exit();
 
 // Display Geographic list of childs..
@@ -67,11 +72,6 @@ else {
   $t->assign ("ctl_glist", true);
   $t->assign ("reg", $reg);
   $t->assign ("path", VAR_DIR);
-  // Decode and assign saved query..
-  if (isset($_GET['q']) && !empty($_GET['q'])) {
-    $qd = unserialize(base64_decode($_GET['q']));
-    $t->assign ("qd", $qd);
-  }
   // Set lists if is VirtualRegion
   if (isset($_GET['v']) && $_GET['v'] == "true") {
     $t->assign ("isvreg", true);
@@ -108,7 +108,7 @@ else {
     $t->assign ("y1", $dinf['GeoLimitMinY']);
     $t->assign ("y2", $dinf['GeoLimitMaxY']);
     if (file_exists(VAR_DIR . "/". $reg . "/region.map"))
-      $t->assign ("ctl_showmap", true);
+      $t->assign ("ctl_showmap", false); // true!!
     else
       $t->assign ("ctl_showmap", false);
     // get range of dates
@@ -116,21 +116,27 @@ else {
     $t->assign ("yini", substr($ydb[0], 0, 4));
     $t->assign ("yend", substr($ydb[1], 0, 4));
   }
-  // Saved query set true in Geo, Events, Causes..
+  // In Saved Queries set true in Geo, Events, Causes selecteds..
   if (isset($qd["D_DisasterGeographyId"])) {
-    foreach ($qd["D_DisasterGeographyId"] as $ky=>$it)
-      $geol[$it][3] = 1;
+    foreach ($qd["D_DisasterGeographyId"] as $ky=>$it) {
+      if (isset($geol[$it]))
+        $geol[$it][3] = 1;
+    }
   }
   if (isset($qd["D_EventId"])) {
     foreach ($qd["D_EventId"] as $ky=>$it) {
-      $evepredl[$it][3] = 1;
-      $eveuserl[$it][3] = 1;
+      if (isset($evepredl[$it]))
+        $evepredl[$it][3] = 1;
+      if (isset($eveuserl[$it]))
+        $eveuserl[$it][3] = 1;
     }
   }
   if (isset($qd["D_CauseId"])) {
     foreach ($qd["D_CauseId"] as $ky=>$it) {
-      $caupredl[$it][3] = 1;
-      $cauuserl[$it][3] = 1;
+      if (isset($caupredl[$it]))
+        $caupredl[$it][3] = 1;
+      if (isset($cauuserl[$it]))
+        $cauuserl[$it][3] = 1;
     }
   }
   // List of elements: Geography, GLevels, Events, Causes..

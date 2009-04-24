@@ -10,7 +10,7 @@ $t->config_dir = 'include';
 
 $d = new Query();
 
-$t->assign ("DIver", "8.2.0-16");
+$t->assign ("DIver", "8.2.0-17");
 // 2009-01-20 (jhcaiced) At this point, loader.php should have
 // created or loaded the UserSession in the $us variable
 $us->awake();

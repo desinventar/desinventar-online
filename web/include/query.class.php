@@ -589,21 +589,6 @@ class Query extends PDO
           else
             $e['Item'] .= "$k = '$v' AND ";
         }
-        else if ($k == "D.DisasterSerial_" && $v == "NOT")
-          $qp = $v;
-        else if ($k == "D.DisasterSerial" && strlen($v) > 0) {
-          if (isset($qp) && $qp == "NOT")
-            $log = "AND $qp";
-          else
-            $log = "AND ";
-          // Must to take some serial..
-          if (strlen($v) > 0) {
-            $serial = " $log(";
-            foreach (explode(" ", $v) as $i)
-              $serial .= "D.DisasterSerial = '$i' OR ";
-            $serial .= " 1!=1)";
-          }
-        }
         else if (is_array($v)) {
           if ($k == "D.DisasterBeginTime") {
             $aa = !empty($v[0])? $v[0] : "0000"; //substr($datedb[0], 0, 4);
@@ -637,6 +622,7 @@ class Query extends PDO
             }
             $e[$k] .= "1!=1)";
           }
+          // Process effects and sectors..
           elseif ((substr($k, 2, 6) == "Effect" || substr($k, 2, 6) == "Sector") && isset($v[0])) {
             if (isset($v[3]))
               $op = $v[3];
@@ -651,6 +637,7 @@ class Query extends PDO
             else if ($v[0] == "-3")
               $e['Eff'] .= "($k BETWEEN ". $v[1] ." AND ". $v[2] .") $op ";
           }
+          // Process text fields with separator AND, OR..
           elseif (substr($k, -5) == "Notes" || $k == "D.DisasterSource") {
             $e['Item'] .= "(";
             foreach (explode(" ", $v[1]) as $i)
@@ -659,6 +646,15 @@ class Query extends PDO
               $e['Item'] .= "1=1) AND ";
             else
               $e['Item'] .= "1!=1) AND ";
+          }
+          // Process serials..
+          elseif ($k == "D.DisasterSerial") {
+            if (strlen($v[1]) > 0) {
+              $serial = "AND ". $v[0] ." (";
+              foreach (explode(" ", $v[1]) as $i)
+                $serial .= "$k='$i' OR ";
+              $serial .= "1!=1) ";
+            }
           }
         }
         // all minus DC hidden fields _MyField
@@ -961,8 +957,8 @@ class Query extends PDO
         $info['END'] = $v[0];
       elseif ($k == "DisasterSource" && !empty($v[1]))
         $info['SOU'] = $v[1];
-      elseif ($k == "DisasterSerial" && !empty($v))
-        $info['SER'] = $v;
+      elseif ($k == "DisasterSerial" && !empty($v[1]))
+        $info['SER'] = $v[1];
       elseif (substr($k, 0, 6) == "Effect" && isset($v[0]) && isset($dic[$k][0])) {
         $opt = "";
         if ($v[0] == "=" || $v[0] == ">=" || $v[0] == "<=")
