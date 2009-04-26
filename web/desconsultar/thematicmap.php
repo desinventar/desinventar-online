@@ -163,23 +163,27 @@ if (isset($post['_M+cmd'])) {
     $t->assign ("qdet", $q3->getQueryDetails($dic, $post));
     if ($post['_M+cmd'] == "export" && !(isset($post['_VREG']) && $post['_VREG'] == "true")) {
       $dinf = $q->getDBInfo();
-      $regname = $dinf['RegionLabel'][0];
-      $minx = $dinf['GeoLimitMinX'][0];
-      $maxx = $dinf['GeoLimitMaxX'][0];
-      $miny = $dinf['GeoLimitMinY'][0];
-      $maxy = $dinf['GeoLimitMaxY'][0];
-      if (!empty($minx) && !empty($miny) && !empty($maxx) && !empty($maxy)) {
-        $w = (int) ($maxx - $minx) * 50;
-        $h = (int) ($maxy - $miny) * 50;
-        $url = "/cgi-bin/mapserv?map=". $m->filename() ."&SERVICE=WMS&VERSION=1.1.1".
-            "&layers=effects&REQUEST=getmap&STYLES=&SRS=EPSG:4326".
-            "&BBOX=$minx,$miny,$maxx,$maxy&WIDTH=$w&HEIGHT=$h&FORMAT=image/png";
-        $mf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $url);
-        if ($mf) {
-          header("Content-type: Image/png");
-          header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $regname) ."_ThematicMap.png");
-          echo $mf;
-        }
+      $regname = $dinf['RegionLabel'];
+      $url = "/cgi-bin/mapserv?map=". $m->filename() ."&SERVICE=WMS&VERSION=1.1.1".
+        "&layers=". $post['_M+layers'] ."&REQUEST=getmap&STYLES=&SRS=EPSG:4326".
+        "&BBOX=". $post['_M+extent']."&WIDTH=500&HEIGHT=378&FORMAT=image/png";
+      $mf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $url);
+      if ($mf) {
+        $imap = imagecreatefromstring($mf);
+        // Download and include legend
+        $url2 = "/cgi-bin/mapserv?map=". $m->filename() ."&SERVICE=WMS&VERSION=1.1.1".
+          "&REQUEST=getlegendgraphic&LAYER=effects&FORMAT=image/png";
+        $lf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $url2);
+        $ileg = imagecreatefromstring($lf);
+        $im = imagecreate(imagesx($imap) + imagesx($ileg), imagesy($imap));
+        imagecopy($im, $imap, 0, 0, 0, 0, 500, 378);
+        imagecopy($im, $ileg, 501, 378-imagesy($ileg), 0, 0, imagesx($ileg), imagesy($ileg));
+        header("Content-type: Image/png");
+        header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $regname) ."_ThematicMap.png");
+        imagepng($im);
+        imagedestroy($imap);
+        imagedestroy($ileg);
+        imagedestroy($im);
       }
     }
     else
