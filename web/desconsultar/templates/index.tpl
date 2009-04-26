@@ -77,6 +77,7 @@
           break;
           case "Abrir":
           	$('openquery').style.visibility = 'visible';
+          	$('ofile').click();
           break;
           case "{-#mgotoqd#-}":
             if (w.isVisible())
@@ -375,7 +376,7 @@
       }
     }
     // selection map functions
-    function showMap(lev) {
+    function showMap() {
     	$('smap').style.visibility = 'visible';
     }
     function hideMap() {
@@ -383,7 +384,7 @@
     }
     function setSelMap(code, gid, opc) {
 {-if $ctl_showmap-}
-			showMap(0);
+			showMap();
     	fmp.selectArea(code, '');
 {-else-}
     	if (opc)
@@ -503,8 +504,8 @@
 {-foreach name=ef1 key=k item=i from=$ef1-}
 {-assign var="ff" value=D_$k-}
 {-if $qd.$ff[0] != ''-}
-    	enadisEff('{-$k-}', true);
-    	showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
+      enadisEff('{-$k-}', true);
+      showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
 {-/if-}
 {-/foreach-}
 {-foreach name=sec key=k item=i from=$sec-}
@@ -513,18 +514,23 @@
 {-foreach name=sc2 key=k2 item=i2 from=$i[3]-}
 {-assign var="ff" value=D_$k2-}
 {-if $qd.$ff[0] != ''-}
-    	enadisEff('{-$k2-}', true);
-    	showeff('{-$qd.$ff[0]-}', 'x{-$k2-}', 'y{-$k2-}');
+      enadisEff('{-$k2-}', true);
+      showeff('{-$qd.$ff[0]-}', 'x{-$k2-}', 'y{-$k2-}');
 {-/if-}
 {-/foreach-}
-    	enadisEff('{-$k-}', true);
+      enadisEff('{-$k-}', true);
 {-/if-}
 {-/foreach-}
 {-foreach name=ef3 key=k item=i from=$ef3-}
 {-assign var="ff" value=D_$k-}
 {-if $qd.$ff[0] != ''-}
-    	enadisEff('{-$k-}', true);
-    	showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
+      enadisEff('{-$k-}', true);
+      showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
+{-/if-}
+{-/foreach-}
+{-foreach name=geol key=k item=i from=$geol-}
+{-if $i[3]-}
+      setSelMap('{-$i[0]-}', '{-$k-}', true);
 {-/if-}
 {-/foreach-}
     }
@@ -1217,15 +1223,14 @@
   <div id="querydetails" style="height:40px;" class="dwin">
   <form id="openquery" enctype="multipart/form-data" action="index.php" method="POST" style="visibility:hidden;">
   	<input type="hidden" name="MAX_FILE_SIZE" value="100000" />
-  	<input type="file" name="qry" onChange="$('openquery').submit();"/>
+  	<input type="file" id="ofile" name="qry" onChange="$('openquery').submit();"/>
   </form>
   </div>
-  <div id="smap" style="position:absolute; left:0px; top:20px;">
-<!--
-  	<iframe name="fmp" id="fmp" frameborder="0" style="height:600px; width:700px;" {-if $ctl_showmap-} 
-  src='/cgi-bin/mapserv?map={-$path-}/{-$reg-}/region.map&qlayer=admin00&mode=nquery&searchmap=true&mapsize=500+500&mapext={-$x1-}+{-$y1-}+{-$x2-}+{-$y2-}'{-/if-}>
+  <div id="smap" style="position:absolute; left:0px; top:20px; visibility:hidden;">
+   [<a href="javascript:void(0);" onClick="hideMap();">x</a>]<br>
+  	<iframe name="fmp" id="fmp" frameborder="0" style="height:600px; width:800px;"{-if $ctl_showmap-} 
+  src='/cgi-bin/mapserv?map={-$path-}/{-$reg-}/region.map&qlayer=admin00&mode=nquery&searchmap=true&mapsize=750+750&mapext={-$x1-}+{-$y1-}+{-$x2-}+{-$y2-}'{-/if-}>
   	</iframe>
--->
   </div>
   <iframe name="ifr" id="ifr" frameborder="0" style="height:550px; width:960px;" 
   		src="../region.php?r={-$reg-}&cmd=info{-if $isvreg-}&v=true{-/if-}">
@@ -1245,7 +1250,7 @@
  {-if !$isvreg-}
     <!-- BEGIN GEOGRAPHY SECTION -->
     <!-- Select from Map testing ... 'selectionmap.php' -->
-    <dt onClick="showMap(0);">{-#mgeosection#-}</dt>
+    <dt onClick="showMap();">{-#mgeosection#-}</dt>
     <dd>
   {-foreach name=glev key=k item=i from=$glev-}
       <span class="dlgmsg" onMouseOver="showtip('{-$i[1]-}');">{-$i[0]-}</span> |
@@ -1279,7 +1284,7 @@
     </dd>
  {-/if-}
     <!-- BEGIN EVENT SECTION -->
-    <dt onClick="hideMap();">{-#mevesection#-}</dt>
+    <dt>{-#mevesection#-}</dt>
     <dd>
       <span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br>
       <select name="D_EventId[]" multiple style="width: 250px; height: 200px;">
@@ -1305,7 +1310,7 @@
           onFocus="showtip('{-$eve.EventNotes[2]-}');">{-$qd.D_EventNotes[1]-}</textarea>
     </dd>
     <!-- BEGIN CAUSE SECTION -->
-    <dt onClick="hideMap();">{-#mcausection#-}</dt>
+    <dt>{-#mcausection#-}</dt>
     <dd>
       <span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br>
       <select name="D_CauseId[]" multiple style="width: 250px; height: 280px;">
@@ -1327,7 +1332,7 @@
           onFocus="showtip('{-$cau.CauseNotes[2]-}');">{-$qd.D_CauseNotes[1]-}</textarea>
     </dd>
     <!-- BEGIN EFFECTS SECTION -->
-    <dt onClick="hideMap();">{-#meffsection#-}</dt>
+    <dt>{-#meffsection#-}</dt>
     <dd>
       <b>{-#ttitegp#-}</b><br>
       <div style="width: 265px; height: 130px;" class="dwin" ext:qtip="{-#thlpquery#-}">
@@ -1498,7 +1503,7 @@
       </div><br>
     </dd>-->
     <!-- BEGIN DATETIME SECTION -->
-    <dt onClick="hideMap();">{-#mdcsection#-}</dt>
+    <dt>{-#mdcsection#-}</dt>
     <dd class="default">
       <div style="height: 360px;">
         <b onMouseOver="showtip('{-$dis.DisasterBeginTime[2]-}');">{-#tdate#-}</b>

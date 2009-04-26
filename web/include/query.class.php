@@ -281,6 +281,35 @@ class Query extends PDO
   }
 
   /*** GEOGRAPHY ***/
+  /* uhmm... testing function.. 
+  function loadGeoTree() {
+    $data = array();
+    $sql = "SELECT GeographyId, GeographyCode, GeographyName, GeographyLevel".
+            " FROM Geography WHERE GeographyActive=1 ORDER BY GeographyId";
+    $res = $this->dreg->query($sql);
+    $max = $this->getMaxGeoLev();
+    foreach($res as $row) {
+      $lev = $row['GeographyLevel'];
+      $key = $row['GeographyId'] ."|". str2js($row['GeographyName']);
+      if ($lev == 0) {
+        $par0 = $key;
+        $data[$par0] = array();
+      }
+      elseif ($lev == 1) {
+        $par1 = $key;
+        $ele[$key] = array();
+        $data[$par0] = array_merge($data[$par0], $ele);
+      }
+      elseif ($lev == 2) {
+        $ele[$key] = array();
+        $data[$par0][$par1] = array_merge($data[$par0][$par1], $ele);
+      }
+      $ele = null;
+    }
+    //echo "<pre>"; print_r($data); echo "</pre>";
+    return $data;
+  }*/
+  
   function loadGeography($level) {
     if (!is_numeric($level) && $level >= 0)
       return null;
