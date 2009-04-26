@@ -35,8 +35,7 @@
 						new OpenLayers.Control.ScaleLine(),
 						new OpenLayers.Control.MousePosition(),
 						new OpenLayers.Control.OverviewMap(),
-						new OpenLayers.Control.KeyboardDefaults(),
-						new OpenLayers.Control.Permalink('pl')
+						new OpenLayers.Control.KeyboardDefaults()
 				],
 				numZoomLevels: 15
 			};
@@ -45,17 +44,17 @@
 {-foreach name=rgl key=k item=i from=$rgl-}
 			var db{-$k-} = new OpenLayers.Layer.WMS("DI8 / {-$i.regname-}", 
 					"/cgi-bin/{-$mps-}?", { map:'{-$i.map-}', layers:'{-$i.ly1-}', 'transparent':true, 'format':'png' },
-					{'isBaseLayer':false});
+					{'isBaseLayer':false });
 			map.addLayer(db{-$k-});
  {-if !$isvreg-}
 			// Admin layers
-  {-foreach name=glev key=ky item=it from=$glev-}
+ {-foreach name=glev key=ky item=it from=$glev-}
 			var adm{-$smarty.foreach.glev.iteration-} = new OpenLayers.Layer.WMS("{-$it[0]-}", 
 					"/cgi-bin/{-$mps-}?", { map:'{-$i.map-}', layers:'admin0{-$ky-}', 'transparent':true, 'format':'png' },
 					{'isBaseLayer':false});
 			adm{-$smarty.foreach.glev.iteration-}.setVisibility(false);
 			map.addLayer(adm{-$smarty.foreach.glev.iteration-});
-  {-/foreach-}
+ {-/foreach-}
  {-/if-}
 {-/foreach-}
 			// WMS Local Base Map
@@ -63,6 +62,12 @@
 					"/cgi-bin/{-$mps-}?", { map:'{-$basemap-}', layers:'base', 'transparent':false, 'format':'png' },
 					{'isBaseLayer':true });
 			map.addLayer(base);
+			var met1 = new OpenLayers.Layer.WMS("Metacarta Basic",
+				"http://labs.metacarta.com/wms/vmap0",
+				{'layers': 'basic', 'transparent': true},
+				{'isBaseLayer':true});
+			met1.setVisibility(false);
+			map.addLayer(met1);
 /*
 			// Microsoft Virtual Earth Base Layer
 			var virtualearth = new OpenLayers.Layer.VirtualEarth("Microsoft Virtual Earth", { 'sphericalMercator': true });
@@ -80,14 +85,6 @@
 			var met1 = new OpenLayers.Layer.WMS("** Metacarta Basic",
 					"http://labs.metacarta.com/wms-c/Basic.py", {layers:'basic', 'transparent':true, 'format':'png' },
 					{'isBaseLayer':true });
-*/
-			var met1 = new OpenLayers.Layer.WMS("Metacarta Basic",
-				"http://labs.metacarta.com/wms/vmap0",
-				{'layers': 'basic', 'transparent': true},
-				{'isBaseLayer':true});
-			met1.setVisibility(false);
-			map.addLayer(met1);
-/*
 			// 2009-02-06 (jhcaiced) Metacarta Satellite doesn't work with Spherical Mercator, this needs to be fixed !!
 			var met2 = new OpenLayers.Layer.WMS("** Metacarta Satellite",
 					"http://labs.metacarta.com/wms-c/Basic.py", {layers:'satellite', 'transparent':true, 'format':'png' },
@@ -114,10 +111,9 @@
 			WMSToolbar = new OpenLayers.Control.WMSToolbar({queryTarget: queryTarget});
 			map.addControl(WMSToolbar);
 			//parent.document.getElementById('frmwait').innerHTML='';
-*/
 			// Do a translation of map center coordinates to Spherical Mercator
 			// 2008-03-02 (mayandar) OpenLayers-2.7 Not found...
-/*			var proj = new OpenLayers.Projection("EPSG:4326");
+			var proj = new OpenLayers.Projection("EPSG:4326");
 			var point = new OpenLayers.LonLat(lon, lat);
 			point.transform(proj, map.getProjectionObject());
 			map.setCenter(point, zoom); 
@@ -182,7 +178,6 @@
 				<img src="/cgi-bin/{-$mps-}?map={-$rgl[0].map-}&SERVICE=WMS&VERSION=1.1.1&REQUEST=getlegendgraphic&LAYER={-$rgl[0].ly1-}&FORMAT=image/png">
 {-/if-}
 		  </div>
-		  <a href="" id="pl">test</a>
 		 </td>
 		 <td valign="top">
 		  <div id="map" class="dwin" style="width:700px; height:530px"></div>

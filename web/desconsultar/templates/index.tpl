@@ -445,6 +445,18 @@
     function sendMap(cmd) {
       //$('frmwait').innerHTML = waiting;
       $('_M+cmd').value = cmd;
+      if (cmd == "export") {
+      	var mm = ifr.map;
+      	var extent = mm.getExtent();
+      	var layers = mm.layers;
+      	var activelayers = [];
+      	for (i in layers) {
+      		if (layers[i].getVisibility() && layers[i].calculateInRange() && !layers[i].isBaseLayer)
+      			activelayers[activelayers.length] = layers[i].params['LAYERS'];
+      	}
+      	$('_M+extent').value = [extent.left,extent.bottom,extent.right,extent.top].join(',');
+      	$('_M+layers').value = activelayers;
+      }
       combineForms('DC', 'CM');
       var w = Ext.getCmp('westm');
       w.collapse(); // hide()
@@ -783,6 +795,8 @@
  {-/foreach-}
                   </select>
                   <input type="hidden" id="_M+cmd" name="_M+cmd" value="result">
+                  <input type="hidden" id="_M+extent" name="_M+extent">
+                  <input type="hidden" id="_M+layers" name="_M+layers">
                 </td></tr>
               </table>
             </form>
