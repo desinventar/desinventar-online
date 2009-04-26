@@ -57,7 +57,7 @@ if (isset($_GET['cmd'])) {
     echo "$code";
   }
   // Display Geographic list of childs..
-  if ($_GET['cmd'] == "glist") {
+  elseif ($_GET['cmd'] == "glist") {
     $t->assign ("reg", $_GET['GeographyId']);
     $t->assign ("geol", $q->loadGeoChilds($_GET['GeographyId']));
     $t->assign ("ctl_glist", true);
@@ -108,7 +108,7 @@ else {
     $t->assign ("y1", $dinf['GeoLimitMinY']);
     $t->assign ("y2", $dinf['GeoLimitMaxY']);
     if (file_exists(VAR_DIR . "/". $reg . "/region.map"))
-      $t->assign ("ctl_showmap", false); // true!!
+      $t->assign ("ctl_showmap", true);
     else
       $t->assign ("ctl_showmap", false);
     // get range of dates
