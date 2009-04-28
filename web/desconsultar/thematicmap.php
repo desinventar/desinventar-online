@@ -164,20 +164,30 @@ if (isset($post['_M+cmd'])) {
     if ($post['_M+cmd'] == "export" && !(isset($post['_VREG']) && $post['_VREG'] == "true")) {
       $dinf = $q->getDBInfo();
       $regname = $dinf['RegionLabel'];
-      $url = "/cgi-bin/mapserv?map=". $m->filename() ."&SERVICE=WMS&VERSION=1.1.1".
+      $url0 = "/cgi-bin/mapserv?map=". VAR_DIR ."/_WORLD/region.map&SERVICE=WMS&VERSION=1.1.1".
+        "&layers=base&REQUEST=getmap&STYLES=&SRS=EPSG:4326&BBOX=". $post['_M+extent'].
+        "&WIDTH=500&HEIGHT=378&FORMAT=image/png";
+      $bf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $url0);
+      $url1 = "/cgi-bin/mapserv?map=". $m->filename() ."&SERVICE=WMS&VERSION=1.1.1".
         "&layers=". $post['_M+layers'] ."&REQUEST=getmap&STYLES=&SRS=EPSG:4326".
         "&BBOX=". $post['_M+extent']."&WIDTH=500&HEIGHT=378&FORMAT=image/png";
-      $mf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $url);
+      $mf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $url1);
       if ($mf) {
+        $ibas = imagecreatefromstring($bf);
         $imap = imagecreatefromstring($mf);
         // Download and include legend
         $url2 = "/cgi-bin/mapserv?map=". $m->filename() ."&SERVICE=WMS&VERSION=1.1.1".
           "&REQUEST=getlegendgraphic&LAYER=effects&FORMAT=image/png";
         $lf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $url2);
         $ileg = imagecreatefromstring($lf);
-        $im = imagecreate(imagesx($imap) + imagesx($ileg), imagesy($imap));
+        $wt = imagesx($imap) + imagesx($ileg);
+        $ht = imagesy($imap);
+        $im = imagecreatetruecolor($wt, $ht);
+        imagefilledrectangle($im, 0, 0, $wt - 1, $ht - 1, imagecolorallocate($im, 255, 255, 255));
+        imagecopy($im, $ibas, 0, 0, 0, 0, 500, 378);
         imagecopy($im, $imap, 0, 0, 0, 0, 500, 378);
         imagecopy($im, $ileg, 501, 378-imagesy($ileg), 0, 0, imagesx($ileg), imagesy($ileg));
+        imagestring($im, 3, 2, $ht - 20, 'http://online.desinventar.org/', imagecolorallocate($im, 0, 0, 0));
         header("Content-type: Image/png");
         header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $regname) ."_ThematicMap.png");
         imagepng($im);
