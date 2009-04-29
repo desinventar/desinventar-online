@@ -43,17 +43,17 @@ if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
   // set region
   $sRegionId = $_GET['r'];
   if (isset($_GET['v']) && $_GET['v'] == "true") {
-    // Get Information to VRegion
+    /* Get Information to VRegion
     $q = new Query($sRegionId);
     $vri = $q->getDBInfo();
-    $regname = $vri['VirtualRegLabel'];
-    $dbdes = nl2br($vri['VirtualRegDesc']);
+    $regname = $vri['RegionLabel'];
+    $dbdes = nl2br($vri['RegionDesc']);
     $dbden = ""; //nl2br($vri['VirtualRegDescEN']);
     // Show active or public regions only
     if ($vri['VirtualRegActive'] && $vri['VirtualRegPublic'])
       $t->assign ("ctl_showdcmod", true);
     $t->assign ("isvreg", "true");
-    $t->assign ("ctl_showreg", true);
+    $t->assign ("ctl_showreg", true);*/
   }
   else {
     // Get Information to Region
