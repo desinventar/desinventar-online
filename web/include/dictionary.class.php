@@ -42,7 +42,7 @@ class Dictionary {
 		}
 		
 		try {
-			// Open dictionary DB or create since SQL
+			// Open dictionary DB or create from SQL
 			if (file_exists($dbpath)) {
 				//chmod($dbpath, 0666);
 				$this->dbh = new PDO("sqlite:" . $dbpath);

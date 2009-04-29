@@ -6,6 +6,7 @@
 
 // Load required Functions
 require_once('include/loader.php');
+
 $t->config_dir = 'include';
 
 $d = new Query();
