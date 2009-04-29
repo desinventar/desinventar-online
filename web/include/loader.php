@@ -11,26 +11,61 @@
 /* SETTINGS */
 // "C:/desinventar8/ms4w/Apache/htdocs/";
 // "/var/www/html/desinventar/test/";
-define('LNX', true); // false if install on Windows machine..
 
-define("TEMP", "/tmp");
-define("SMARTYDIR", "/usr/share/Smarty");
-define("JPGRAPHDIR", "/usr/share/php/jpgraph");
-//define("XMLRPCDIR", "/usr/share/php/xmlrpc");
+if (isset($_SERVER["WINDIR"])) {
+	define('LNX', false); // We are running in Windows
+	define("SMARTYDIR", "C:\Archivos de programa\Mapserver4Windows\ms4w\apps\smarty");
+	define("TEMP", "C:\Archivos de programa\Mapserver4Windows\ms4w\tmp");
+	define("JPGRAPHDIR", "C:\Archivos de programa\Mapserver4Windows\ms4w\apps\jpgraph");
+} else {
+	define('LNX', true); // We are running in Linux
+	define("SMARTYDIR", "/usr/share/Smarty");
+	define("TEMP", "/tmp");
+	define("JPGRAPHDIR", "/usr/share/php/jpgraph");
+	//define("XMLRPCDIR", "/usr/share/php/xmlrpc");
+}
 
-if (isset($_SERVER["DI8WEB"])) {
-	define("BASE", $_SERVER["DI8WEB"]);
+/* Configure BASE Directory from HTTPD Config - Linux + WIndows */
+/* Apache MS4W creates enviroment variables as REDIRECT_XXXXX */
+if (isset($_SERVER["REDIRECT_DI8_WEB"])) {
+	$_SERVER["DI8_WEB"] = $_SERVER["REDIRECT_DI8_WEB"];
+}
+
+/* Configure WWWDIR - Linux + Windows */
+if (isset($_SERVER["REDIRECT_DI8_WWWDIR"])) {
+	$_SERVER["DI8_WWWDIR"] = $_SERVER["REDIRECT_DI8_WWWDIR"];
+}
+if (! isset($_SERVER["DI8_WWWDIR"])) {
+	$_SERVER["DI8_WWWDIR"] = "/var/www/desinventar";
+}
+/* Configure DATADIR - Linux + Windows */
+if (isset($_SERVER["REDIRECT_DI8_DATADIR"])) {
+	$_SERVER["DI8_DATADIR"] = $_SERVER["REDIRECT_DI8_DATADIR"];
+}
+if (! isset($_SERVER["DI8_DATADIR"])) {
+	$_SERVER["DI8_DATADIR"] = "/var/lib/desinventar";
+}
+
+/* Configure CACHEDIR - Linux + Windows */
+if (isset($_SERVER["REDIRECT_DI8_CACHEDIR"])) {
+	$_SERVER["DI8_CACHEDIR"] = $_SERVER["REDIRECT_DI8_CACHEDIR"];
+}
+if (! isset($_SERVER["DI8_CACHEDIR"])) {
+	$_SERVER["DI8_CACHEDIR"] = "/var/cache/Smarty";
+}
+
+if (isset($_SERVER["DI8_WEB"])) {
+	define("BASE", $_SERVER["DI8_WEB"]);
 	define("SOFTDIR" , "/usr/share/desinventar");
-	define("WWWDIR"  , "/var/www/desinventar");
+	define("WWWDIR"  , $_SERVER["DI8_WWWDIR"]);
 	define("WWWDATA" , "/desinventar-data");
 	define("WWWURL"  , "/");
-	define("DATADIR" , "/var/lib/desinventar");
-	define("CACHEDIR", "/var/cache/Smarty");
+	define("DATADIR" , $_SERVER["DI8_DATADIR"]);
+	define("CACHEDIR", $_SERVER["DI8_CACHEDIR"]);
 	define("FONTDIR" , "/usr/share/fonts/liberation/fonts.txt");	
-//	define("DICT_DIR", SOFTDIR . "/files");
 } else {
-	if (isset($_SERVER["DI8WEBLOCAL"])) {
-		define("BASE", $_SERVER["DI8WEBLOCAL"]);
+	if (isset($_SERVER["DI8_WEBLOCAL"])) {
+		define("BASE", $_SERVER["DI8_WEBLOCAL"]);
 	} else {
 		//define("BASE", "/var/www/html/desinventar");
 		define("BASE", "/home/gentoo/mayandar/devel/desinventar/web");
@@ -42,10 +77,6 @@ if (isset($_SERVER["DI8WEB"])) {
 	define("DATADIR" , "/var/lib/desinventar");
 	define("CACHEDIR", DATADIR . '/tmp');
 	define("FONTDIR" , DATADIR . '/fonts.txt');
-//	define("VAR_DIR" , DATADIR . '/var');
-//	define("TMP_DIR" , DATADIR . '/tmp');
-// 	define("SMTY_DIR", CACHEDIR . '/templates_c');
-//	define("TMPM_DIR", CACHEDIR . '/tempmap');
 }
 define("VAR_DIR" , DATADIR);
 define("TMP_DIR" , DATADIR);
@@ -79,13 +110,6 @@ if (!isset($_SESSION['sessioninfo'])) {
 	$us = $_SESSION['sessioninfo'];
 	$us->load($us->sSessionId);
 }
-
-/*
-print "Script    : " . $_SERVER['SCRIPT_NAME'] . "<br>";
-print "FileName  : " . $_SERVER['SCRIPT_FILENAME'] . "<br>";
-print "SessionId : " . session_id() . "<br>";
-print "RegionId  : " . $us->sRegionId . "<br>";
-*/
 
 $us->awake();
 
