@@ -1,5 +1,5 @@
 /* REGION.DB - DesInventar8.2
-2009-03-08
+2009-04-28
 */
 
 DROP TABLE IF EXISTS Info;
@@ -51,10 +51,19 @@ SyncRecord DATETIME,
 GeoLevelName VARCHAR(50) NOT NULL DEFAULT '---', 
 GeoLevelDesc TEXT NULL, 
 GeoLevelActive INTEGER NOT NULL DEFAULT 0, 
+PRIMARY KEY('GeoLevelId','LangIsoCode')
+);
+
+DROP TABLE IF EXISTS GeoCarto;
+CREATE TABLE 'GeoCarto' ( 
+GeographyId VARCHAR(100), 
+GeoLevelId INTEGER NOT NULL, 
+SyncRecord DATETIME, 
 GeoLevelLayerFile VARCHAR(50) NULL, 
 GeoLevelLayerName VARCHAR(50) NULL, 
 GeoLevelLayerCode VARCHAR(50) NULL, 
-PRIMARY KEY('GeoLevelId','LangIsoCode')
+PRIMARY KEY('GeographyId','GeoLevelId')
+
 );
 
 DROP TABLE IF EXISTS Geography;
