@@ -6,13 +6,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
 	<meta http-equiv="Pragma" content="text/html; charset=utf-8; no-cache" />
-{-if $shw_server-}
 <!--
 	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAfQolBKtJvhOLwVfLoxEfMBQ77LACC71meKxbfZwyDLYGQlGiIRTFJ_UlTeqhUqMf6iE54G8kcN3sJQ"></script>
 	<script src='http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.1'></script>
 	<script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid=euzuro-openlayers"></script>
 -->
-{-/if-}
 	<script src="/openlayers/lib/OpenLayers.js"></script>
 	<script type="text/javascript">
 		var lon = {-if $lon != ''-}{-$lon-}{-else-}0{-/if-};
@@ -172,10 +170,8 @@
 {-if $isvreg-}
 				<img src="/cgi-bin/{-$mps-}?map={-$rgl[0].map-}&SERVICE=WMS&VERSION=1.1.1&REQUEST=getlegendgraphic&LAYER={-$rgl[1].ly1-}&FORMAT=image/png">
 {-else-}
- {-if $shw_server-}
-			  <image src="../images/ge_icon.png"> <a href="thematicmap.php?r={-$reg-}&cmd=getkml">{-#tgetgearth#-}</a><hr><br>
- {-/if-}
-				<img src="/cgi-bin/{-$mps-}?map={-$rgl[0].map-}&SERVICE=WMS&VERSION=1.1.1&REQUEST=getlegendgraphic&LAYER={-$rgl[0].ly1-}&FORMAT=image/png">
+			<image src="../images/ge_icon.png"> <a href="thematicmap.php?r={-$reg-}&cmd=getkml">{-#tgetgearth#-}</a><hr><br>
+			<img src="/cgi-bin/{-$mps-}?map={-$rgl[0].map-}&SERVICE=WMS&VERSION=1.1.1&REQUEST=getlegendgraphic&LAYER={-$rgl[0].ly1-}&FORMAT=image/png">
 {-/if-}
 		  </div>
 		 </td>

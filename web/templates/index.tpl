@@ -34,10 +34,6 @@
 	<link rel="stylesheet" href="css/portal.css" TYPE="text/css">
 	<script type="text/javascript" src="include/prototype.js"></script>
 	<script type="text/javascript" src="include/diadmin.js.php"></script>
-<!--
-	<script type="text/javascript" src="include/wd.js"></script>
-	<script type="text/javascript" src="include/accordion.js"></script>
--->
 	<script type="text/javascript" src="include/menu.js"></script>
 	<script type="text/javascript" language="javascript">
 	function updateUserBar(url, cmd, user, pass) {
