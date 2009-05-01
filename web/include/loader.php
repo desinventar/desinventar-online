@@ -14,9 +14,14 @@
 
 if (isset($_SERVER["WINDIR"])) {
 	define('LNX', false); // We are running in Windows
-	define("SMARTYDIR", "C:\Archivos de programa\Mapserver4Windows\ms4w\apps\smarty");
-	define("TEMP", "C:\Archivos de programa\Mapserver4Windows\ms4w\tmp");
-	define("JPGRAPHDIR", "C:\Archivos de programa\Mapserver4Windows\ms4w\apps\jpgraph");
+	
+	// 2009-05-01 (jhcaiced) Read Registry to obtain MS4W installation path	
+	$shell = new COM("WScript.Shell") or die("Requires Windows Scripting Host");
+	$ms4wpath=$shell->RegRead("HKEY_LOCAL_MACHINE\\SOFTWARE\\MS4W\\Install_Dir");	
+
+	define("SMARTYDIR", $ms4wpath . "\apps\smarty");
+	define("TEMP", $ms4wpath . "\tmp");
+	define("JPGRAPHDIR", $ms4wpath . "\apps\jpgraph");	
 } else {
 	define('LNX', true); // We are running in Linux
 	define("SMARTYDIR", "/usr/share/Smarty");
