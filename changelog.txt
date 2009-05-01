@@ -1,3 +1,6 @@
+* 2009-05-01 Jhon H. Caicedo <jhcaiced@desinventar.org>
+- Started Modifications for running in Windows.
+
 * 2009-02-17 Mario A. Yandar <mayandar@desinventar.org>
 - Structure tuned for use with SQLite
 
