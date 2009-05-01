@@ -13,12 +13,11 @@
 // "/var/www/html/desinventar/test/";
 
 if (isset($_SERVER["WINDIR"])) {
-	define('LNX', false); // We are running in Windows
-	
+	define('MODE', "offline"); // Mode Offline -> windows server
+	define('MAPSERV', "mapserv.exe");
 	// 2009-05-01 (jhcaiced) Read Registry to obtain MS4W installation path	
 	$shell = new COM("WScript.Shell") or die("Requires Windows Scripting Host");
-	$ms4wpath=$shell->RegRead("HKEY_LOCAL_MACHINE\\SOFTWARE\\MS4W\\Install_Dir");	
-
+	$ms4wpath=$shell->RegRead("HKEY_LOCAL_MACHINE\\SOFTWARE\\MS4W\\Install_Dir");
 	define("SMARTYDIR", $ms4wpath . "\apps\smarty");
 	define("TEMP", $ms4wpath . "\tmp");
 	define("JPGRAPHDIR", $ms4wpath . "\apps\jpgraph");
@@ -26,9 +25,9 @@ if (isset($_SERVER["WINDIR"])) {
 	if (!extension_loaded( 'gd' )) {
 		dl( 'php_gd2.'.PHP_SHLIB_SUFFIX);
 	}
-
 } else {
-	define('LNX', true); // We are running in Linux
+	define('MODE', "online"); // Mode Online -> Linux server
+	define('MAPSERV', "mapserv");
 	define("SMARTYDIR", "/usr/share/Smarty");
 	define("TEMP", "/tmp");
 	define("JPGRAPHDIR", "/usr/share/php/jpgraph");
@@ -77,14 +76,16 @@ if (isset($_SERVER["DI8_WEB"])) {
 	if (isset($_SERVER["DI8_WEBLOCAL"])) {
 		define("BASE", $_SERVER["DI8_WEBLOCAL"]);
 	} else {
-		//define("BASE", "/var/www/html/desinventar");
-		define("BASE", "/home/gentoo/mayandar/devel/desinventar/web");
+		define("BASE", "C:/desinventar/devel/web");
+		//define("BASE", "/home/gentoo/mayandar/devel/desinventar/web");
 	}
+//	define("WWWURL"  , "/mayandar/desinventar");
+//	define("DATADIR" , "/var/lib/desinventar");
 	define("SOFTDIR" , BASE);
 	define("WWWDIR"  , BASE . "/tmp");
 	define("WWWDATA" , "../tmp");
-	define("WWWURL"  , "/mayandar/desinventar");
-	define("DATADIR" , "/var/lib/desinventar");
+	define("WWWURL"  , "/");
+	define("DATADIR" , "C:/desinventar/data");
 	define("CACHEDIR", DATADIR . '/tmp');
 	define("FONTDIR" , DATADIR . '/fonts.txt');
 }

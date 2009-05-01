@@ -164,11 +164,11 @@ if (isset($post['_M+cmd'])) {
     if ($post['_M+cmd'] == "export" && !(isset($post['_VREG']) && $post['_VREG'] == "true")) {
       $dinf = $q->getDBInfo();
       $regname = $dinf['RegionLabel'];
-      $url0 = "/cgi-bin/mapserv?map=". VAR_DIR ."/_WORLD/region.map&SERVICE=WMS&VERSION=1.1.1".
+      $url0 = "/cgi-bin/". MAPSERV ."?map=". VAR_DIR ."/_WORLD/region.map&SERVICE=WMS&VERSION=1.1.1".
         "&layers=base&REQUEST=getmap&STYLES=&SRS=EPSG:4326&BBOX=". $post['_M+extent'].
         "&WIDTH=500&HEIGHT=378&FORMAT=image/png";
       $bf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $url0);
-      $url1 = "/cgi-bin/mapserv?map=". $m->filename() ."&SERVICE=WMS&VERSION=1.1.1".
+      $url1 = "/cgi-bin/". MAPSERV ."?map=". $m->filename() ."&SERVICE=WMS&VERSION=1.1.1".
         "&layers=". $post['_M+layers'] ."&REQUEST=getmap&STYLES=&SRS=EPSG:4326".
         "&BBOX=". $post['_M+extent']."&WIDTH=500&HEIGHT=378&FORMAT=image/png";
       $mf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $url1);
@@ -176,7 +176,7 @@ if (isset($post['_M+cmd'])) {
         $ibas = imagecreatefromstring($bf);
         $imap = imagecreatefromstring($mf);
         // Download and include legend
-        $url2 = "/cgi-bin/mapserv?map=". $m->filename() ."&SERVICE=WMS&VERSION=1.1.1".
+        $url2 = "/cgi-bin/". MAPSERV ."?map=". $m->filename() ."&SERVICE=WMS&VERSION=1.1.1".
           "&REQUEST=getlegendgraphic&LAYER=effects&FORMAT=image/png";
         $lf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $url2);
         $ileg = imagecreatefromstring($lf);
@@ -209,15 +209,7 @@ elseif (isset($get['cmd']) && $get['cmd'] == "getkml") {
 }
 $t->assign ("dic", $dic);
 $t->assign ("basemap", VAR_DIR . "/_WORLD/region.map");
-
-if (LNX) {
-  $t->assign ("shw_server", true);
-  $t->assign ("mps", "mapserv");
-}
-else {
-  $t->assign ("shw_server", false);
-  $t->assign ("mps", "mapserv.exe");
-}
+$t->assign ("mps", MAPSERV);
 
 $t->display ("thematicmap.tpl");
 

@@ -11,7 +11,8 @@ $t->config_dir = 'include';
 
 $d = new Query();
 
-$t->assign ("DIver", "8.2.0-21");
+$t->assign ("DIver", "8.2.0-22");
+$t->assign ("DImode", MODE);
 // 2009-01-20 (jhcaiced) At this point, loader.php should have
 // created or loaded the UserSession in the $us variable
 $us->awake();
@@ -29,11 +30,6 @@ else {
   $cmd = "";
   $t->assign ("cmd", $cmd);
 }
-
-if (LNX)
-  $t->assign ("shw_vreg", true);
-else
-  $t->assign ("shw_vreg", false);
 
 // 2009-01-19 (jhcaiced) This should keep the UserSession info between pages
 $_SESSION['sessioninfo'] = $us;
