@@ -21,7 +21,12 @@ if (isset($_SERVER["WINDIR"])) {
 
 	define("SMARTYDIR", $ms4wpath . "\apps\smarty");
 	define("TEMP", $ms4wpath . "\tmp");
-	define("JPGRAPHDIR", $ms4wpath . "\apps\jpgraph");	
+	define("JPGRAPHDIR", $ms4wpath . "\apps\jpgraph");
+	// MS4W doesn't load the gd extension by default, so we do here now...
+	if (!extension_loaded( 'gd' )) {
+		dl( 'php_gd2.'.PHP_SHLIB_SUFFIX);
+	}
+
 } else {
 	define('LNX', true); // We are running in Linux
 	define("SMARTYDIR", "/usr/share/Smarty");
