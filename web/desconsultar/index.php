@@ -64,6 +64,7 @@ if (isset($_GET['cmd'])) {
   }
 }
 else {
+  $t->assign ("ms", MAPSERV);
   $t->assign ("dis", $q->queryLabelsFromGroup('Disaster', $lg));
   $t->assign ("rc1", $q->queryLabelsFromGroup('Record|1', $lg));
   $t->assign ("rc2", $q->queryLabelsFromGroup('Record|2', $lg));
@@ -73,49 +74,35 @@ else {
   $t->assign ("reg", $reg);
   $t->assign ("path", VAR_DIR);
   // Set lists if is VirtualRegion
-  if (isset($_GET['v']) && $_GET['v'] == "true") {
-    $t->assign ("isvreg", true);
-    $t->assign ("regname", $reg);
-    $areg = $q->getVirtualRegItems($reg);
-    $geol = null;
-    $glev = array();
-    $evepredl = $q->loadEvents("BASE", null, $lg);
-    $eveuserl = null;
-    $caupredl = $q->loadCauses("BASE", null, $lg);
-    $cauuserl = null;
-    $t->assign ("ctl_showmap", true);
-  }
-  else {
-    $rinf = $q->getDBInfo();
-    $t->assign ("regname", $rinf['RegionLabel']);
-    $geol = $q->loadGeography(0);
-    $glev = $q->loadGeoLevels("");
-    $evepredl = $q->loadEvents("PREDEF", "active", $lg);
-    $eveuserl = $q->loadEvents("USER", "active", $lg);
-    $caupredl = $q->loadCauses("PREDEF", "active", $lg);
-    $cauuserl = $q->loadCauses("USER", "active", $lg);
-    $t->assign ("exteffel", $q->getEEFieldList("True"));
-    // Get UserRole
-    $role = $us->getUserRole($reg);
-//    if (strlen($role) > 0)
-      $t->assign ("ctl_user", true);
-//    else
-//      $t->assign ("ctl_user", false);
-    // Set selection map
-    $dinf = $q->getDBInfo();
-    $t->assign ("x1", $dinf['GeoLimitMinX']);
-    $t->assign ("x2", $dinf['GeoLimitMaxX']);
-    $t->assign ("y1", $dinf['GeoLimitMinY']);
-    $t->assign ("y2", $dinf['GeoLimitMaxY']);
-    if (file_exists(VAR_DIR . "/". $reg . "/region.map"))
-      $t->assign ("ctl_showmap", true);
-    else
-      $t->assign ("ctl_showmap", false);
-    // get range of dates
-    $ydb = $q->getDateRange();
-    $t->assign ("yini", substr($ydb[0], 0, 4));
-    $t->assign ("yend", substr($ydb[1], 0, 4));
-  }
+  $rinf = $q->getDBInfo();
+  $t->assign ("regname", $rinf['RegionLabel']);
+  $geol = $q->loadGeography(0);
+  $glev = $q->loadGeoLevels("");
+  $evepredl = $q->loadEvents("PREDEF", "active", $lg);
+  $eveuserl = $q->loadEvents("USER", "active", $lg);
+  $caupredl = $q->loadCauses("PREDEF", "active", $lg);
+  $cauuserl = $q->loadCauses("USER", "active", $lg);
+  $t->assign ("exteffel", $q->getEEFieldList("True"));
+  // Get UserRole
+  $role = $us->getUserRole($reg);
+// if (strlen($role) > 0)
+	$t->assign ("ctl_user", true);
+// else
+//  $t->assign ("ctl_user", false);
+   // Set selection map
+  $dinf = $q->getDBInfo();
+  $t->assign ("x1", $dinf['GeoLimitMinX']);
+  $t->assign ("x2", $dinf['GeoLimitMaxX']);
+  $t->assign ("y1", $dinf['GeoLimitMinY']);
+  $t->assign ("y2", $dinf['GeoLimitMaxY']);
+  if (file_exists(VAR_DIR . "/". $reg . "/region.map"))
+	$t->assign ("ctl_showmap", true);
+  else
+    $t->assign ("ctl_showmap", false);
+  // get range of dates
+  $ydb = $q->getDateRange();
+  $t->assign ("yini", substr($ydb[0], 0, 4));
+  $t->assign ("yend", substr($ydb[1], 0, 4));
   // In Saved Queries set true in Geo, Events, Causes selecteds..
   if (isset($qd["D_DisasterGeographyId"])) {
     foreach ($qd["D_DisasterGeographyId"] as $ky=>$it) {

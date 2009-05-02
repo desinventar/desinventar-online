@@ -89,7 +89,7 @@
             alert("{-#tabout#-}");
           break;
           case "{-#mgotodoc#-}":
-            $('ifr').src = "../region.php?r={-$reg-}&cmd=info{-if $isvreg-}&v=true{-/if-}";
+            $('ifr').src = "../region.php?r={-$reg-}&cmd=info";
           break;
           case "{-#motherdoc#-}":
             $('ifr').src = "../doc/LoNuevoEnDesInventar.pdf";
@@ -645,8 +645,7 @@
         SECTION : DATA CONFIGURATION
         ============================
 -->
-        <input type="button" id="dat-btn" value="{-#bdata#-}" ext:qtip="{-#tdatamsg#-}"
-           class="btn" {-if $isvreg-}style="visibility:hidden;"{-/if-}>
+        <input type="button" id="dat-btn" value="{-#bdata#-}" ext:qtip="{-#tdatamsg#-}" class="btn">
         <div id="dat-win" class="x-hidden">
           <div class="x-window-header">{-#bdata#-}</div>
           <div id="dat-cfg">
@@ -807,8 +806,7 @@
         SECTION : GRAPHIC CONFIGURATION
         ==============================
 -->
-        <input type="button" id="grp-btn" value="{-#bgraphic#-}" ext:qtip="{-#tgraphicmsg#-}"
-           class="btn" {-if $isvreg-}style="visibility:hidden;"{-/if-}>
+        <input type="button" id="grp-btn" value="{-#bgraphic#-}" ext:qtip="{-#tgraphicmsg#-}" class="btn">
         <div id="grp-win" class="x-hidden">
           <div class="x-window-header">{-#bgraphic#-}</div>
           <div id="grp-cfg">
@@ -1118,8 +1116,7 @@
         SECTION : STADISTIC CONFIGURATION
         ==============================
 -->
-        <input type="button" id="std-btn" value="{-#bstadistic#-}" ext:qtip="{-#tstadisticmsg#-}"
-           class="btn" {-if $isvreg-}style="visibility:hidden;"{-/if-}>
+        <input type="button" id="std-btn" value="{-#bstadistic#-}" ext:qtip="{-#tstadisticmsg#-}" class="btn">
         <div id="std-win" class="x-hidden">
           <div class="x-window-header">{-#bstadistic#-}</div>
           <div id="std-cfg">
@@ -1243,11 +1240,11 @@
   <div id="smap" style="position:absolute; left:0px; top:20px; visibility:hidden;">
    [<a href="javascript:void(0);" onClick="hideMap();">x</a>]<br>
   	<iframe name="fmp" id="fmp" frameborder="0" style="height:600px; width:800px;"{-if $ctl_showmap-} 
-  src='/cgi-bin/mapserv?map={-$path-}/{-$reg-}/region.map&qlayer=admin00&mode=nquery&searchmap=true&mapsize=750+750&mapext={-$x1-}+{-$y1-}+{-$x2-}+{-$y2-}'{-/if-}>
+  src='/cgi-bin/{-$ms-}?map={-$path-}/{-$reg-}/region.map&qlayer=admin00&mode=nquery&searchmap=true&mapsize=750+750&mapext={-$x1-}+{-$y1-}+{-$x2-}+{-$y2-}'{-/if-}>
   	</iframe>
   </div>
   <iframe name="ifr" id="ifr" frameborder="0" style="height:550px; width:960px;" 
-  		src="../region.php?r={-$reg-}&cmd=info{-if $isvreg-}&v=true{-/if-}">
+  		src="../region.php?r={-$reg-}&cmd=info">
   </iframe>
  </div>
 
@@ -1259,9 +1256,7 @@
   <!-- BEG DI8 QUERY FORM -->
   <form id="DC" method="POST" target="ifr">
   <input type="hidden" id="_REG" name="_REG" value="{-$reg-}">
- {-if $isvreg-}<input type="hidden" id="_VREG" name="_VREG" value="true">{-/if-}
   <dl class="accordion">
- {-if !$isvreg-}
     <!-- BEGIN GEOGRAPHY SECTION -->
     <!-- Select from Map testing ... 'selectionmap.php' -->
     <dt onClick="showMap();">{-#mgeosection#-}</dt>
@@ -1270,7 +1265,6 @@
       <span class="dlgmsg" onMouseOver="showtip('{-$i[1]-}');">{-$i[0]-}</span> |
   {-/foreach-}
       <div style="height: 280px;" class="dwin" ext:qtip="{-#thlpquery#-}">
- {-/if-}
 {-/if-}
 {-*** Display geography lists.. ***-}
 {-if $ctl_glist-}
@@ -1286,7 +1280,6 @@
         </ul>
 {-/if-}
 {-if $ctl_show-}
- {-if !$isvreg-}
       </div>
       <b onMouseOver="showtip('{-$dis.DisasterSiteNotes[2]-}');">{-$dis.DisasterSiteNotes[0]-}</b>
       <select name="D_DisasterSiteNotes[0]" class="small">
@@ -1296,7 +1289,6 @@
       <textarea id="DisasterSiteNotes" name="D_DisasterSiteNotes[1]" style="width:220px; height: 40px;"
               onFocus="showtip('{-$dis.DisasterSiteNotes[2]-}');">{-$qd.D_DisasterSiteNotes[1]-}</textarea>
     </dd>
- {-/if-}
     <!-- BEGIN EVENT SECTION -->
     <dt>{-#mevesection#-}</dt>
     <dd>

@@ -23,32 +23,32 @@ class Maps
 	   type	: filename, THEMATIC, SELECT, KML
   */
 	function Maps($q, $reg, $lev, $dl, $range, $info, $lbl, $type) {
-	  $this->url = "http://". $_SERVER['HTTP_HOST'] ."/cgi-bin/mapserv?";
+	  $this->url = "http://". $_SERVER['HTTP_HOST'] ."/cgi-bin/". MAPSERV ."?";
 	  $this->reg = $reg;
-		$fp = "";
-		if ($type == "KML")
-		  $this->kml = $this->generateKML($q, $reg, $info);
-    else {
-      $map = "## DesInventar8.2 autogenerate mapfile\n";
-      $map .= $this->setHeader($q, $reg, $info, $type);
-      $map .= $this->setLayerAdm($q, $reg, $type);
-      // mapfile and html template to interactive selection
-      if ($type == "SELECT")
-        $fp = DATADIR ."/". $reg . "/region.map";
-      else {
-      // generate effects maps: type=filename | thematic=sessid
-        $fp = TMPM_DIR ."/di8ms_";
-        $map .= $this->setLayerEff($q, $reg, $lev, $dl, $range, $info, $lbl);
-        if ($type == "THEMATIC")
-          $fp .= "$reg-". session_id() .".map";
-        elseif (strlen($type) > 0)
-          $fp .= "$reg-$type.map";
-        else
-          exit();
-      }
-      $map .= $this->setFooter();
-      $this->makefile($fp, $map);
-    }
+	  $fp = "";
+	  if ($type == "KML")
+		$this->kml = $this->generateKML($q, $reg, $info);
+	  else {
+		$map = "## DesInventar8.2 autogenerate mapfile\n";
+		$map .= $this->setHeader($q, $reg, $info, $type);
+		$map .= $this->setLayerAdm($q, $reg, $type);
+		// mapfile and html template to interactive selection
+		if ($type == "SELECT")
+			$fp = DATADIR ."/". $reg . "/region.map";
+		else {
+			// generate effects maps: type=filename | thematic=sessid
+			$fp = TMPM_DIR ."/di8ms_";
+			$map .= $this->setLayerEff($q, $reg, $lev, $dl, $range, $info, $lbl);
+			if ($type == "THEMATIC")
+				$fp .= "$reg-". session_id() .".map";
+			elseif (strlen($type) > 0)
+				$fp .= "$reg-$type.map";
+			else
+				exit();
+		}
+		$map .= $this->setFooter();
+		$this->makefile($fp, $map);
+	  }
 	}
 	
 	function makefile($fp, $map) {
@@ -96,7 +96,7 @@ class Maps
 			  WMS_ABSTRACT	"Level: '. $inf['LEVEL'] .'"
         WMS_EXTENT	"'. $inf['EXTENT'] .'"
         WMS_TIMEEXTENT	"'. $inf['BEG'] ."/". $inf['END'] .'/P5M"
-        WMS_ONLINERESOURCE	"'. $this->url .'map='. $fm .'"
+        WMS_ONLINERESOURCE	"'. $this->url .'map="
         WMS_SRS	"EPSG:4326"
 		  END
 		END
@@ -174,8 +174,8 @@ class Maps
 			  	TYPE TRUETYPE		FONT "arial"		SIZE 6		COLOR	0 0 89
 			  	POSITION CC			PARTIALS FALSE	BUFFER 4
         END
-			END
-		END';
+	  END
+	END';
 			}
 		}
 		return $map;
@@ -202,55 +202,55 @@ class Maps
 		$code = $gl[$lev][3];
 		$name = $gl[$lev][4];
 		$map = "";
-    $lp = VAR_DIR . '/' . $reg ."/". $data;
-    if ($this->testLayer($lp, $code, $name)) {
-		  $map = '
+		$lp = VAR_DIR . '/' . $reg ."/". $data;
+		if ($this->testLayer($lp, $code, $name)) {
+			$map = '
     LAYER
-		  NAME	effects
-		  DATA	"'. $data .'"
-		  GROUP	'. $reg .'
-		  STATUS	ON
-		  TYPE	POLYGON
-		  PROJECTION	"init=epsg:4326" END
-		  TRANSPARENCY	70
-		  CLASSITEM	"'. $code .'"
-		  LABELITEM	"'. $name .'"
-			METADATA
-			  WMS_TITLE	"DesInventar Map of '. $inf['TITLE'] .'"
-			  WMS_ABSTRACT	"Level: '. $inf['LEVEL'] .'"
-        WMS_EXTENT	"'. $inf['EXTENT'] .'"
-        WMS_SRS	"EPSG:4326 EPSG:900913"
-		  END';
-		  // classify elements by ranges
-		  $vl = $this->classify($dl, $range);
-		  $shwlab = 'TEXT ""';
-		  if ($lbl == "NAME")
-		    $shwlab = '';
-		  // Generate classes with effects..
-		  foreach ($vl as $k=>$i) {
-		    if ($lbl == "CODE")
-		      $shwlab = 'TEXT "'. $k .'"';
-		    elseif ($lbl == "VALUE")
-		      $shwlab = 'TEXT "'. $i[2] .'"';
-  		  $map .= '
-      CLASS ';
-  		  if (!empty($i[0])) {
-  		    $map .= '
+		NAME	effects
+		DATA	"'. $data .'"
+		GROUP	'. $reg .'
+		STATUS	ON
+		TYPE	POLYGON
+		PROJECTION	"init=epsg:4326" END
+		TRANSPARENCY	70
+		CLASSITEM	"'. $code .'"
+		LABELITEM	"'. $name .'"
+		METADATA
+			WMS_TITLE	"DesInventar Map of '. $inf['TITLE'] .'"
+			WMS_ABSTRACT	"Level: '. $inf['LEVEL'] .'"
+			WMS_EXTENT	"'. $inf['EXTENT'] .'"
+			WMS_SRS	"EPSG:4326 EPSG:900913"
+		END';
+			// classify elements by ranges
+			$vl = $this->classify($dl, $range);
+			$shwlab = 'TEXT ""';
+			if ($lbl == "NAME")
+				$shwlab = '';
+			// Generate classes with effects..
+			foreach ($vl as $k=>$i) {
+				if ($lbl == "CODE")
+					$shwlab = 'TEXT "'. $k .'"';
+				elseif ($lbl == "VALUE")
+					$shwlab = 'TEXT "'. $i[2] .'"';
+				$map .= '
+		CLASS ';
+			if (!empty($i[0])) {
+				$map .= '
   		  NAME "'. $i[0] .'"';
-  		  }
-  		  $map .= ' 
+			}
+			$map .= ' 
   		  EXPRESSION "'. $k .'" 
   			STYLE COLOR '. $i[1] .' OUTLINECOLOR 130 130 130 END
   			'. $shwlab .'
   			LABEL
 		      TYPE TRUETYPE		FONT "arial"		SIZE	6
 		      COLOR	0 0 89 		POSITION CC 		PARTIALS FALSE	BUFFER 4
-        END
-      END';
-		  }
-		  // Generate null class
-      if ($lbl == "VALUE")
-        $shwlab = 'TEXT "0"';
+			END
+		END';
+			}
+			// Generate null class
+			if ($lbl == "VALUE")
+				$shwlab = 'TEXT "0"';
 /*      $map .= '
 		  CLASS
 		    NAME "No data"
@@ -263,34 +263,38 @@ class Maps
         END
       END';*/
 		  $map .= '
-		END # LAYER
+	END # LAYER
 ';
-    }
+		}
   	return $map;
 	}
 
 	// Set RGB color array according to user's defined ranges..
 	function classify($dl, $range) {
 		$vl = array();
-		$ky = array_keys($dl);
-		$li = 0;
+		$ky = array_keys($dl); // DisasterGeography, EffectVar
 		$h = 0;
 		if (!empty($dl)) {
-      foreach ($dl[$ky[0]] as $k=>$i) {
-        $assigned = false;
-        $val = $dl[$ky[1]][$h];
-        for ($j=0; $j < count($range) && !$assigned; $j++) {
-          $ls = $range[$j][0];
-          if ($li <= $val && $val <= $ls) {
-            $assigned = true;
-            $vl[$i] = array($range[$j][1], $range[$j][2], $val);
-            $range[$j][1] = "";
-          }
-          else
-            $li = $ls + 1;
-        }
-        $h++;
-      }
+			foreach ($dl[$ky[0]] as $k=>$i) {
+				$li = 0;
+				$assigned = false;
+				$val = $dl[$ky[1]][$h];
+				for ($j=0; $j < count($range) && !$assigned; $j++) {
+					$ls = $range[$j][0];
+					//echo "li: $li < val: $val < ls: $ls = ";
+					if ($li <= $val && $val <= $ls) {
+						$assigned = true;
+						$vl[$i] = array($range[$j][1], $range[$j][2], $val);
+						$range[$j][1] = "";
+						//print_r($vl[$i]);
+					}
+					else
+						$li = $ls + 1;
+					//echo "<br>";
+				}
+				$h++;
+				//echo "<hr>";
+			}
 		}
 		return $vl;
 	}
@@ -310,7 +314,7 @@ class Maps
   }
   
   function generateKML($q, $reg, $info) {
-    $fp = "di8ms_$reg-". $_SESSION['sessionid'] ."_.map";
+    $fp = urlencode(TMPM_DIR ."/di8ms_$reg-". session_id() .".map");
     $dinf = $q->getDBInfo();
     $regn = $dinf['RegionLabel'];
     $desc	= $dinf['RegionDesc'];
@@ -341,7 +345,7 @@ class Maps
 		<name>DesInventar '. $regn .'</name>
 		<open>1</open>
 		<Icon>
-			<href>'. $this->url . 'LAYERS=effects&amp;MAP=%2Ftmp%2F'. $fp .'&amp;SERVICE=WMS&amp;SRS=EPSG%3A4326&amp;REQUEST=GetMap&amp;HEIGHT=600&amp;STYLES=default,default&amp;WIDTH=800&amp;VERSION=1.1.1&amp;TRANSPARENT=true&amp;LEGEND=true&amp;FORMAT=image/png</href>
+			<href>'. $this->url . 'MAP='. $fp .'&amp;LAYERS=effects&amp;SERVICE=WMS&amp;SRS=EPSG%3A4326&amp;REQUEST=GetMap&amp;HEIGHT=600&amp;STYLES=default,default&amp;WIDTH=800&amp;VERSION=1.1.1&amp;TRANSPARENT=true&amp;LEGEND=true&amp;FORMAT=image/png</href>
 			<viewRefreshMode>onStop</viewRefreshMode>
 			<viewRefreshTime>1</viewRefreshTime>
 			<viewBoundScale>1</viewBoundScale>
@@ -357,7 +361,7 @@ class Maps
 	<ScreenOverlay id="NWILEGEND">
 		<name>Leyenda</name>
 		<Icon>
-			<href>'. $this->url .'map=%2Ftmp%2F'. $fp .'&amp;SERVICE=WMS&amp;VERSION=1.1.1&amp;REQUEST=getlegendgraphic&amp;LAYER=effects&amp;FORMAT=image/png</href>
+			<href>'. $this->url .'MAP='. $fp .'&amp;SERVICE=WMS&amp;VERSION=1.1.1&amp;REQUEST=getlegendgraphic&amp;LAYER=effects&amp;FORMAT=image/png</href>
 		</Icon>
 		<overlayXY x="0" y="0" xunits="fraction" yunits="fraction"/>
 		<screenXY x="0.005" y="0.02" xunits="fraction" yunits="fraction"/>
