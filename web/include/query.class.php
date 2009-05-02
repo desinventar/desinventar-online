@@ -61,9 +61,8 @@ class Query extends PDO
 			try {
 				$i = 0;
 				foreach($this->dreg->query($sQuery,PDO::FETCH_ASSOC) as $row) {
-					foreach($row as $key=>$val) {
+					foreach($row as $key=>$val)
 						$data[$i][$key] = $val;
-					} //foreach
 					$i++;
 				}
 			} catch (Exception $e) {
@@ -306,7 +305,6 @@ class Query extends PDO
       }
       $ele = null;
     }
-    //echo "<pre>"; print_r($data); echo "</pre>";
     return $data;
   }*/
   

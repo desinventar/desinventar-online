@@ -24,7 +24,7 @@ function setRanges($opc) {
   $lmx = "10000000";
   $maxr = false;
   // First range is No data
-  $range[0] = array(1, "= 0", "255 255 255");
+  $range[0] = array(0, "= 0", "255 255 255");
   // generate range hash with limit, legend and color
   for ($j = 0; $j < count($lim); $j++) {
     if (isset($lim[$j])) {
@@ -39,7 +39,7 @@ function setRanges($opc) {
   // if not assigned, set last range between last number and infinit
   if (!$maxr)
     $range[$j+1] = array($lmx, (int)$lim[$j-1] + 1 . " -> ", "30 30 30");
-  return $range;
+	return $range;
 }
 
 $post = $_POST;
@@ -111,8 +111,8 @@ if (isset($post['_M+cmd'])) {
       if ($v[0] == "D.DisasterId")
         $v[0] = "D.DisasterId_";
       $sql .= " ORDER BY ". substr($v[0],2);
-      $dislist = $q3->getassoc($sql);
       // get query results
+      $dislist = $q3->getassoc($sql);
       //if (!empty($dislist)) {
       // generate map
         $dl = $q3->prepareList($dislist, "MAPS");
@@ -146,7 +146,7 @@ if (isset($post['_M+cmd'])) {
           $rgl[$kg]['lv'] = $lev[0];
           $rgl[$kg]['map'] = $m->filename();
         }
-      //}
+     //}
     } // foreach
     if (isset($lnl) && isset($ltl)) {
       $t->assign ("lon", array_sum($lnl)/count($lnl));
@@ -210,7 +210,5 @@ elseif (isset($get['cmd']) && $get['cmd'] == "getkml") {
 $t->assign ("dic", $dic);
 $t->assign ("basemap", VAR_DIR . "/_WORLD/region.map");
 $t->assign ("mps", MAPSERV);
-
 $t->display ("thematicmap.tpl");
-
 </script>
