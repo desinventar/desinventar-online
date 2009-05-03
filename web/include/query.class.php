@@ -59,9 +59,7 @@ class Query extends PDO
 			$data = array();
 			try {
 				$i = 0;
-				echo "<pre>";
-				foreach($this->dreg->query($sQuery,PDO::FETCH_ASSOC) as $row) {
-					print_r($row);
+				foreach($this->dreg->query($sQuery, PDO::FETCH_ASSOC) as $row) {
 					foreach($row as $key=>$val)
 						$data[$i][$key] = $val;
 					$i++;
