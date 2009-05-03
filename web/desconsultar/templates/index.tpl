@@ -945,10 +945,10 @@
             		</tr>
             		<tr>
             			<td colspan=3 align="center">
-            				<p><u>{-#ghoraxis#-}:</u></p>
-            				<b onMouseOver="showtip('{-$dic.GraphType[2]-}');">{-$dic.GraphType[0]-}</b><br>
+            				<p><u>{-#ghoraxis#-}:</u>
+            				<b onMouseOver="showtip('{-$dic.GraphType[2]-}');">{-$dic.GraphType[0]-}</b></p>
             				<select id="_G+Type" name="_G+Type" onChange="grpSelectbyType('_G+Type');" 
-            						onMouseOver="showtip('{-$dic.GraphType[2]-}');" size="2" class="fixw">
+            						onMouseOver="showtip('{-$dic.GraphType[2]-}');" size="4" class="fixw">
             					<optgroup label="{-#ghistogram#-}">
                       <option value="D.DisasterBeginTime" selected>{-$dic.GraphHisTemporal[0]-}</option>
                       <option value="D.DisasterBeginTime|D.EventId">{-$dic.GraphHisEveTemporal[0]-}</option>
@@ -1238,8 +1238,8 @@
   </form>
   </div>
   <div id="smap" style="position:absolute; left:0px; top:20px; visibility:hidden;">
-   [<a href="javascript:void(0);" onClick="hideMap();">x</a>]<br>
-  	<iframe name="fmp" id="fmp" frameborder="0" style="height:600px; width:800px;"{-if $ctl_showmap-} 
+   [<a href="javascript:void(0);" onClick="hideMap();">X</a>]<br>
+  	<iframe name="fmp" id="fmp" frameborder="0" style="height:500px; width:500px;"{-if $ctl_showmap-} 
   src='/cgi-bin/{-$ms-}?map={-$path-}/{-$reg-}/region.map&qlayer=admin00&mode=nquery&searchmap=true&mapsize=750+750&mapext={-$x1-}+{-$y1-}+{-$x2-}+{-$y2-}'{-/if-}>
   	</iframe>
   </div>

@@ -46,15 +46,20 @@ body {
 	padding:0; margin:0; 
 /*	background:url(../images/bg.gif) #09A5B9; */
 }
+#mode {
+	font:bold 18px Trebuchet MS, sans-serif; 
+	color:#409FAC; position: relative; left:380px;
+	top:20px; text-align:left; width:70px; 
+}
 #version {
 	font:bold 12px Trebuchet MS, sans-serif; 
 	color:#409FAC; position: relative; left:380px;
-	top:40px; text-align:right; width:53px; 
+	top:15px; text-align:right; width:53px; 
 }
 #slogan {
 	font:bold 11px Trebuchet MS, sans-serif; 
 	color:#949392; position: relative; left:115px;
-	top:45px; text-align:center; width:260px; 
+	top:20px; text-align:center; width:260px; 
 }
 .menu td { 
 	font:10px Trebuchet MS, sans-serif; 

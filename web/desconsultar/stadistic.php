@@ -45,7 +45,7 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
     $sql = base64_decode($get['sql']);
     $geo = $get['geo'];
     if (isset($get['ord']))
-      $sql .= " ORDER BY ". $get['ord'] ." DESC";
+      $sql .= " ORDER BY ". $get['ord'] ." DESC;";
   }
   // Process results with default options
   else if (isset($post['_S+cmd'])) {
@@ -123,7 +123,7 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
   if ($q->chkSQL($sql)) {
     if ($export) {
       // Save results in CSVfile
-      $stdpth = TEMP ."/di8stadistic_". session_id() ."_";
+      $stdpth = TEMP ."/di8stadistic_". session_id();
       $fp = fopen("$stdpth.xls", 'w');
       $pin = 0;
       $pgt = $last;

@@ -7,6 +7,7 @@
 class Query extends PDO
 {
 	public $sRegionId = "";
+	private $dreg = null;
 
 	public function __construct() {
 		if (!extension_loaded('pdo')) {
@@ -32,7 +33,6 @@ class Query extends PDO
 			case 1:
 				$this->sRegionId = func_get_arg(0);
 				$dbr = VAR_DIR ."/". $this->sRegionId ."/desinventar.db";
-				$this->dreg = null;
 				if (file_exists($dbr)) {
 					try {
 						$this->dreg = new PDO("sqlite:" . $dbr);
@@ -56,11 +56,12 @@ class Query extends PDO
 	public function getassoc($sQuery) {
 		$data = false;
 		if (!empty($sQuery)) {
-			//print "getassoc : " . $sQuery . "<br>";
 			$data = array();
 			try {
 				$i = 0;
+				echo "<pre>";
 				foreach($this->dreg->query($sQuery,PDO::FETCH_ASSOC) as $row) {
+					print_r($row);
 					foreach($row as $key=>$val)
 						$data[$i][$key] = $val;
 					$i++;
@@ -272,6 +273,7 @@ class Query extends PDO
       $geo = substr($geoid, 0, $len);
       $sql .= " OR GeographyId='". $geo ."'";
     }
+		$sql .= " ORDER BY GeographyLevel";
     $data = "";
     $res = $this->dreg->query($sql);
     foreach($res as $row)

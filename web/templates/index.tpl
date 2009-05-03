@@ -82,6 +82,7 @@
 	 <tr><td colspan="2"><img src="images/10.gif" width="807" height="15"></td></tr>
 	 <tr valign="top">
 		<td style="background:url(images/dionl.jpg);width:462px;height:92px">
+			<div id="mode">{-$DImode-}</div>
 			<div id="version">{-$DIver-}</div>
 			<div id="slogan">{-#tdititle#-}</div>
 		</td>
