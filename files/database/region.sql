@@ -1,5 +1,5 @@
 /* REGION.DB - DesInventar8.2
-2009-04-28
+2009-04-30
 */
 
 DROP TABLE IF EXISTS Info;
@@ -58,6 +58,7 @@ DROP TABLE IF EXISTS GeoCarto;
 CREATE TABLE 'GeoCarto' ( 
 GeographyId VARCHAR(100), 
 GeoLevelId INTEGER NOT NULL, 
+RegionId VARCHAR(50), 
 SyncRecord DATETIME, 
 GeoLevelLayerFile VARCHAR(50) NULL, 
 GeoLevelLayerName VARCHAR(50) NULL, 

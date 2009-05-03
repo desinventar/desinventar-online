@@ -19,8 +19,8 @@ if (isset($_SERVER["WINDIR"])) {
 	$shell = new COM("WScript.Shell") or die("Requires Windows Scripting Host");
 	$ms4wpath=$shell->RegRead("HKEY_LOCAL_MACHINE\\SOFTWARE\\MS4W\\Install_Dir");
 	define("SMARTYDIR", $ms4wpath . "\apps\smarty");
-	define("TEMP", $ms4wpath . "\tmp");
 	define("JPGRAPHDIR", $ms4wpath . "\apps\jpgraph");
+	define("TEMP", $ms4wpath . "/tmp");
 	// MS4W doesn't load the gd extension by default, so we do here now...
 	if (!extension_loaded( 'gd' )) {
 		dl( 'php_gd2.'.PHP_SHLIB_SUFFIX);

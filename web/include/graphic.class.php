@@ -24,9 +24,6 @@ class Graphic {
 		$val = array();
 		$acol = 1;
 		$kind = $opc['_G+Kind'];
-		// Get range of dates from Database
-		$q = new Query($opc['_REG']);
-		$ydb = $q->getDateRange();
 		// Get Label Information
 		$oLabels     = array_keys($data);
 		$sXAxisLabel = current($oLabels);
@@ -79,8 +76,8 @@ class Graphic {
 				}
 			}
 			foreach ($tvl as $kk=>$ii)
-			  $val[$kk] = $this->completeTimeSerie($ydb, $opc, $ii);
-      $lbl = array_keys($val[$kk]);
+			  $val[$kk] = $this->completeTimeSerie($opc, $ii);
+			$lbl = array_keys($val[$kk]);
 			$acol = count(array_unique($data[$sY2AxisLabel]));
 		}
 		// Normal Graph (BAR, LINE, PIE)
@@ -101,7 +98,7 @@ class Graphic {
       }
 			// Complete the data series for XAxis (year,month,day)
 			if ($gType == "TEMPO" || $gType == "2TEMPO") {
-				$val = $this->completeTimeSerie($ydb, $opc, $val);
+				$val = $this->completeTimeSerie($opc, $val);
       }
 			elseif ($gType == "PIE") {
 			  // In Pie Graphs must order the values
@@ -228,7 +225,6 @@ class Graphic {
       }
       $val = $val1;
     }
-//    echo "<pre>"; print_r($val); echo "</pre>";
 		switch ($kind) {
 		  case "BAR":
 		    if ($gType == "TEMPO" || $gType == "BAR") {
@@ -325,11 +321,25 @@ class Graphic {
 		return $iWeek;
 	}
 	
-	function completeTimeSerie ($ydb, $opc, $val) {
-	  $dateini = $ydb[0];
-		$dateend = $ydb[1];
+	function completeTimeSerie ($opc, $val) {
+	  $dateini = "";
+		$dateend = "";
+		// Get range of dates from Database
+		//print_r($opc);
+		$qini = $opc['D_DisasterBeginTime'];
+		$qend = $opc['D_DisasterEndTime'];
+		$q = new Query($opc['_REG']);
+		$ydb = $q->getDateRange();
+		if (isset($qini[0]))
+			$dateini = sprintf("%04d-%02d-%02d", $qini[0], $qini[1], $qini[2]);
+		else
+			$dateini = $ydb[0];
+		if (isset($qend[0]))
+			$dateend = sprintf("%04d-%02d-%02d", $qend[0], $qend[1], $qend[2]);
+		else
+			$dateend = $ydb[0];
 		// Calculate Start Date/EndDate, from Database or From Query
-		if (isset($opc['D:DisasterBeginTime'][0])) {
+/*		if (isset($opc['D:DisasterBeginTime'][0])) {
 		  // $dateini = (int)(empty($opc['D:DisasterBeginTime'][0]) ? substr($ydb[0], 0, 4) : $opc['D:DisasterBeginTime'][0]);
 		  $oTmp = $opc['D:DisasterBeginTime'];
 		  $iYear = 1;		$iMonth = 1; 	$iDay = 1;
@@ -353,15 +363,15 @@ class Graphic {
       $dateend = sprintf("%04d-%02d-%02d", $iYear, $iMonth, $iDay);
     }
     else
-      $dateend = end(array_keys($val));
+      $dateend = end(array_keys($val));*/
     // Delete initial columns with null values (MONTH,DAY=0)
     if (isset($val[0]) || isset($val['']))
       $val = array_slice($val, 1, count($val), true);
     // Generate YEAR, MONTH, WEEK, DAY series..
     if (empty($this->sStat)) {
-      // Fill data series with zero; Year Loop (always execute)
+			// Fill data series with zero; Year Loop (always execute)
       for ($iYear = substr($dateini, 0, 4); $iYear <= substr($dateend, 0, 4); $iYear++) {
-        $sDate = sprintf("%04d", $iYear);
+				$sDate = sprintf("%04d", $iYear);
         if ($this->sPeriod == "YEAR") {
           if (!isset($val[$sDate]))
             $val[$sDate] = 0;
