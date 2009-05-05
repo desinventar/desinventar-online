@@ -45,19 +45,19 @@ function setRanges($opc) {
 $post = $_POST;
 $get  = $_GET;
 
-if (isset($post['_REG']) && !empty($post['_REG'])) {
+if (isset($post['_REG']) && !empty($post['_REG']))
   $reg = $post['_REG'];
-  if (isset($post['_VREG']) && $post['_VREG'] == "true")
-    $q = new Query();
-  else
-    $q = new Query($reg);
-}
-elseif (isset($get['r']) && !empty($get['r'])) {
+elseif (isset($get['r']) && !empty($get['r']))
   $reg = $get['r'];
-  $q = new Query($reg);
-}
 else
   exit();
+
+$q = new Query($reg);
+
+if (isset($post['_VREG']) && $post['_VREG'] == "true")
+	$q = new Query();
+else
+	$q = new Query($reg);
 
 $dic = array();
 $dic = array_merge($dic, $q->queryLabelsFromGroup('MapOpt', $lg));
@@ -67,87 +67,63 @@ $dic = array_merge($dic, $q->queryLabelsFromGroup('Sector', $lg));
 if (isset($post['_M+cmd'])) {
   // Process QueryDesign Fields and count results
   $qd	= $q->genSQLWhereDesconsultar($post);
-  $cou = 0;
-  if (isset($post['_VREG']) && $post['_VREG'] == "true")
-    $areg = $q->getVirtualRegItems($reg);
-  else {
-    $areg = (array)$reg;
-    $dic = array_merge($dic, $q->getEEFieldList("True"));
-  }
-  // accumulate results of VirtualRegions items
-  foreach ($areg as $rg) {
-    $q2 = new Query($rg);
-    $sqc	= $q2->genSQLSelectCount($qd);
-    $c		= $q2->getresult($sqc);
-    $cou += $c['counter'];
-  }
-  if (isset($post['_VREG']) && $post['_VREG'] == "true") {
-    $areg = $q->getVirtualRegItems($reg);
+	$dic = array_merge($dic, $q->getEEFieldList("True"));
+	$sqc = $q->genSQLSelectCount($qd);
+	$c	 = $q->getresult($sqc);
+	$cou = $c['counter'];
+  $glev = $q->loadGeoLevels("map");
+	if (isset($post['_VREG']) && $post['_VREG'] == "true")
     $t->assign ("isvreg", true);
-    $glev = array();
-  }
-  else {
-    $areg = (array)$reg;
-    $t->assign ("reg", $reg);
-    $glev = $q->loadGeoLevels("map");
-  }
-  //
   if (isset($post['_M+cmd'])) {
     // Assign ranges
     $range = setRanges($post);
-    foreach ($areg as $kg=>$rg) {
-      // if is VirtualRegion apply foreach to database..
-      $q3 = new Query($rg);
-      $rinf = $q3->getDBInfo();
-      $rgl[$kg]['regname'] = $rinf['RegionLabel'];
-      // Data Options Interface
-      $opc['Group'] = array($post['_M+Type']);
-      $lev = explode("|", $post['_M+Type']);
-      $opc['Field'] = $post['_M+Field'];
-      //print_r($opc);
-      $sql = $q3->genSQLProcess($qd, $opc);
-      // Apply Order fields to order legend too
-      $v = explode("|", $opc['Field']);
-      if ($v[0] == "D.DisasterId")
-        $v[0] = "D.DisasterId_";
-      $sql .= " ORDER BY ". substr($v[0],2);
-      // get query results
-      $dislist = $q3->getassoc($sql);
-      //if (!empty($dislist)) {
-      // generate map
-        $dl = $q3->prepareList($dislist, "MAPS");
-        $info = $q3->getQueryDetails($dic, $post);
-        // MAPS Object, RegionId, Level, datalist, ranges, dbinfo, label, maptype
-        $m = new Maps($q3, $rg, $lev[0], $dl, $range, $info, $post['_M+Label'], "THEMATIC");
-        $rgl[$kg]['info'] = $info;
-        // if valid filename then prepare interface to view MAPFILE
-        if (strlen($m->filename()) > 0) {
-          $lon = 0;
-          $lat = 0;
-          $minx = $rinf['GeoLimitMinX'];
-          $maxx = $rinf['GeoLimitMaxX'];
-          $miny = $rinf['GeoLimitMinY'];
-          $maxy = $rinf['GeoLimitMaxY'];
-          //$dinf = $q->getDBInfo();
-          // set center
-          if (!empty($minx) && !empty($miny) && !empty($maxx) && !empty($maxy)) {
-            $lon = (int) (($minx + $maxx) / 2);
-            $lat = (int) (($miny + $maxy) / 2);
-            $aln[] = $minx;	$aln[] = $maxx;
-            $alt[] = $miny; $alt[] = $maxy;
-          }
-          else {
-            $aln[] = 0;
-            $alt[] = 0;
-          }
-          $lnl[] = $lon;
-          $ltl[] = $lat;
-          $rgl[$kg]['ly1'] = "effects";
-          $rgl[$kg]['lv'] = $lev[0];
-          $rgl[$kg]['map'] = $m->filename();
-        }
-     //}
-    } // foreach
+		$rinf = $q->getDBInfo();
+		// Data Options Interface
+    $opc['Group'] = array($post['_M+Type']);
+    $lev = explode("|", $post['_M+Type']);
+    $opc['Field'] = $post['_M+Field'];
+
+		$sql = $q->genSQLProcess($qd, $opc);
+		// Apply Order fields to order legend too
+		$v = explode("|", $opc['Field']);
+		if ($v[0] == "D.DisasterId")
+			$v[0] = "D.DisasterId_";
+		$sql .= " ORDER BY ". substr($v[0],2);
+		// get query results
+		$dislist = $q->getassoc($sql);
+		//echo "<pre>"; print_r($dislist);
+		// generate map
+		$dl = $q->prepareList($dislist, "MAPS");
+    $info = $q->getQueryDetails($dic, $post);
+    // MAPS Object, RegionId, Level, datalist, ranges, dbinfo, label, maptype
+    $m = new Maps($q, $reg, $lev[0], $dl, $range, $info, $post['_M+Label'], "THEMATIC");
+		$rgl[0]['regname'] = $rinf['RegionLabel'];
+    $rgl[0]['info'] = $info;
+    // if valid filename then prepare interface to view MAPFILE
+    if (strlen($m->filename()) > 0) {
+      $lon = 0;
+      $lat = 0;
+      $minx = $rinf['GeoLimitMinX'];
+      $maxx = $rinf['GeoLimitMaxX'];
+      $miny = $rinf['GeoLimitMinY'];
+      $maxy = $rinf['GeoLimitMaxY'];
+      // set center
+      if (!empty($minx) && !empty($miny) && !empty($maxx) && !empty($maxy)) {
+        $lon = (int) (($minx + $maxx) / 2);
+        $lat = (int) (($miny + $maxy) / 2);
+        $aln[] = $minx;	$aln[] = $maxx;
+        $alt[] = $miny; $alt[] = $maxy;
+      }
+      else {
+        $aln[] = 0;
+        $alt[] = 0;
+      }
+      $lnl[] = $lon;
+      $ltl[] = $lat;
+      $rgl[0]['ly1'] = "effects";
+      $rgl[0]['lv'] = $lev[0];
+      $rgl[0]['map'] = $m->filename();
+    }
     if (isset($lnl) && isset($ltl)) {
       $t->assign ("lon", array_sum($lnl)/count($lnl));
       $t->assign ("lat", array_sum($ltl)/count($ltl));
@@ -160,10 +136,8 @@ if (isset($post['_M+cmd'])) {
     $t->assign ("glev", $glev);
     $t->assign ("rgl", $rgl);
     $t->assign ("tot", $cou);
-    $t->assign ("qdet", $q3->getQueryDetails($dic, $post));
-    if ($post['_M+cmd'] == "export" && !(isset($post['_VREG']) && $post['_VREG'] == "true")) {
-      $dinf = $q->getDBInfo();
-      $regname = $dinf['RegionLabel'];
+    $t->assign ("qdet", $q->getQueryDetails($dic, $post));
+    if ($post['_M+cmd'] == "export") {
       $url0 = "/cgi-bin/". MAPSERV ."?map=". VAR_DIR ."/_WORLD/region.map&SERVICE=WMS&VERSION=1.1.1".
         "&layers=base&REQUEST=getmap&STYLES=&SRS=EPSG:4326&BBOX=". $post['_M+extent'].
         "&WIDTH=500&HEIGHT=378&FORMAT=image/png";
@@ -189,7 +163,7 @@ if (isset($post['_M+cmd'])) {
         imagecopy($im, $ileg, 501, 378-imagesy($ileg), 0, 0, imagesx($ileg), imagesy($ileg));
         imagestring($im, 3, 2, $ht - 20, 'http://online.desinventar.org/', imagecolorallocate($im, 0, 0, 0));
         header("Content-type: Image/png");
-        header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $regname) ."_ThematicMap.png");
+        header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $rinf['RegionLabel']) ."_ThematicMap.png");
         imagepng($im);
         imagedestroy($imap);
         imagedestroy($ileg);
@@ -207,6 +181,7 @@ elseif (isset($get['cmd']) && $get['cmd'] == "getkml") {
   echo $m->printKML();
   exit();
 }
+$t->assign ("reg", $reg);
 $t->assign ("dic", $dic);
 $t->assign ("basemap", VAR_DIR . "/_WORLD/region.map");
 $t->assign ("mps", MAPSERV);

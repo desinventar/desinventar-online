@@ -513,6 +513,9 @@
     //var g{-$reg-} = new CheckTree('g{-$reg-}');
     // Find all Effects fields enable by saved query
     window.onload = function() {
+      // select optimal height in results frame
+      //varhgt = screen.height * 360 / 600;
+      //$('ifr').style = "height:"+ hgt + "px;"
 {-foreach name=ef1 key=k item=i from=$ef1-}
 {-assign var="ff" value=D_$k-}
 {-if $qd.$ff[0] != ''-}
@@ -636,11 +639,11 @@
  <div id="container">
    <table border="0" cellpadding="0" cellspacing="0" width="100%">
      <tr bgcolor="#bbbbbb">
-       <td width="260px">
+       <td width="200px">
        	<b>{-#tsubtitle2#-} =></b>
 <!--       	<img src="../images/collapse.png" onClick="var w = Ext.getCmp('westm'); w.show();">-->
        </td>
-       <td>
+       <td align="center">
 <!--
         SECTION : DATA CONFIGURATION
         ============================
@@ -1243,7 +1246,7 @@
   src='/cgi-bin/{-$ms-}?map={-$path-}/{-$reg-}/region.map&qlayer=admin00&mode=nquery&searchmap=true&mapsize=750+750&mapext={-$x1-}+{-$y1-}+{-$x2-}+{-$y2-}'{-/if-}>
   	</iframe>
   </div>
-  <iframe name="ifr" id="ifr" frameborder="0" style="height:550px; width:960px;" 
+  <iframe name="ifr" id="ifr" frameborder="0" height="550px" width="100%" scrolling="auto"
   		src="../region.php?r={-$reg-}&cmd=info">
   </iframe>
  </div>
