@@ -157,7 +157,7 @@ class UserSession {
 	} // function
 
 	public function close($prmRegionId) {
-		return $this->openRegion("");
+		return $this->open("");
 	} // function
 
 	// Validate a user/passwd pair against database

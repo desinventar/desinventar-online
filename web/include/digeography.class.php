@@ -23,9 +23,9 @@ class DIGeography extends DIObject {
 			$this->set('GeographyId', func_get_arg(1));
 			if ($num_args >= 3) {
 				$this->set('LangIsoCode', func_get_arg(2));
-			}
+			} //if
 			$this->load();
-		}
+		} //if
 	} // __construct
 
 	public String buildGeographyId($sMySessionUUID, $sMyCode, 
@@ -33,7 +33,7 @@ class DIGeography extends DIObject {
 		$sQuery = '';
 		$bError = 0;
 	}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           	
+
 	public function padNumber($iNumber, $iLen) {
 		$sNumber = "" . $iNumber;
 		while (strlen($sNumber) < $iLen) {
