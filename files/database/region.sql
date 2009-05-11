@@ -64,7 +64,6 @@ GeoLevelLayerFile VARCHAR(50) NULL,
 GeoLevelLayerName VARCHAR(50) NULL, 
 GeoLevelLayerCode VARCHAR(50) NULL, 
 PRIMARY KEY('GeographyId','GeoLevelId')
-
 );
 
 DROP TABLE IF EXISTS Geography;

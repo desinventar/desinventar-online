@@ -8,9 +8,8 @@ class Maps
 {
 	public $fpath = "";
 	public $url = "";
-	public $kml = "";
-	
-	private $reg = '';
+	public $kml = "";	
+	private $reg = "";
 	
 	/* This class generate mapfile's mapserver
 	   q		: Region Object
@@ -27,27 +26,27 @@ class Maps
 	  $this->reg = $reg;
 	  $fp = "";
 	  if ($type == "KML")
-		$this->kml = $this->generateKML($q, $reg, $info);
+			$this->kml = $this->generateKML($q, $reg, $info);
 	  else {
-		$map = "## DesInventar8.2 autogenerate mapfile\n";
-		$map .= $this->setHeader($q, $reg, $info, $type);
-		$map .= $this->setLayerAdm($q, $reg, $type);
-		// mapfile and html template to interactive selection
-		if ($type == "SELECT")
-			$fp = DATADIR ."/". $reg . "/region.map";
-		else {
-			// generate effects maps: type=filename | thematic=sessid
-			$fp = TMPM_DIR ."/di8ms_";
-			$map .= $this->setLayerEff($q, $reg, $lev, $dl, $range, $info, $lbl);
-			if ($type == "THEMATIC")
-				$fp .= "$reg-". session_id() .".map";
-			elseif (strlen($type) > 0)
-				$fp .= "$reg-$type.map";
-			else
-				exit();
-		}
-		$map .= $this->setFooter();
-		$this->makefile($fp, $map);
+			$map = "## DesInventar8.2 autogenerate mapfile\n";
+			$map .= $this->setHeader($q, $reg, $info, $type);
+			$map .= $this->setLayerAdm($q, $reg, $type);
+			// mapfile and html template to interactive selection
+			if ($type == "SELECT")
+				$fp = DATADIR ."/". $reg . "/region.map";
+			else {
+				// generate effects maps: type=filename | thematic=sessid
+				$fp = TMPM_DIR ."/di8ms_";
+				$map .= $this->setLayerEff($q, $reg, $lev, $dl, $range, $info, $lbl);
+				if ($type == "THEMATIC")
+					$fp .= "$reg-". session_id() .".map";
+				elseif (strlen($type) > 0)
+					$fp .= "$reg-$type.map";
+				else
+					exit();
+			}
+			$map .= $this->setFooter();
+			$this->makefile($fp, $map);
 	  }
 	}
 	
@@ -174,8 +173,8 @@ class Maps
 			  	TYPE TRUETYPE		FONT "arial"		SIZE 6		COLOR	0 0 89
 			  	POSITION CC			PARTIALS FALSE	BUFFER 4
         END
-	  END
-	END';
+	    END
+	  END';
 			}
 		}
 		return $map;
@@ -233,11 +232,11 @@ class Maps
 				elseif ($lbl == "VALUE")
 					$shwlab = 'TEXT "'. $i[2] .'"';
 				$map .= '
-		CLASS ';
-			if (!empty($i[0])) {
-				$map .= '
-  		  NAME "'. $i[0] .'"';
-			}
+		  CLASS ';
+				if (!empty($i[0])) {
+					$map .= '
+				NAME "'. $i[0] .'"';
+				}
 			$map .= ' 
   		  EXPRESSION "'. $k .'" 
   			STYLE COLOR '. $i[1] .' OUTLINECOLOR 130 130 130 END
@@ -245,13 +244,13 @@ class Maps
   			LABEL
 		      TYPE TRUETYPE		FONT "arial"		SIZE	6
 		      COLOR	0 0 89 		POSITION CC 		PARTIALS FALSE	BUFFER 4
-			END
+		  END
 		END';
 			}
-			// Generate null class
+			/* Generate null class
 			if ($lbl == "VALUE")
 				$shwlab = 'TEXT "0"';
-/*      $map .= '
+      $map .= '
 		  CLASS
 		    NAME "No data"
         EXPRESSION (length("['. $code .']") > 0)
@@ -263,7 +262,7 @@ class Maps
         END
       END';*/
 		  $map .= '
-	END # LAYER
+		END # LAYER
 ';
 		}
   	return $map;
