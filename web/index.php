@@ -11,7 +11,7 @@ $t->config_dir = 'include';
 
 $d = new Query();
 
-$t->assign ("DIver", "8.2.0-23");
+$t->assign ("DIver", "8.2.0-24");
 $t->assign ("DImode", MODE);
 // 2009-01-20 (jhcaiced) At this point, loader.php should have
 // created or loaded the UserSession in the $us variable

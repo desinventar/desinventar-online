@@ -28,6 +28,7 @@ class Graphic {
 		$oLabels     = array_keys($data);
 		$sXAxisLabel = current($oLabels);
 		$sYAxisLabel = end($oLabels);
+		$q = new Query($opc['_REG']);
 		// Determine graphic type
 		if (substr($opc['_G+Type'],2,18) == "DisasterBeginTime|") {
 		  $gType = "XTEMPO";		// One var x Event/Temporal..
@@ -76,7 +77,7 @@ class Graphic {
 				}
 			}
 			foreach ($tvl as $kk=>$ii)
-			  $val[$kk] = $this->completeTimeSerie($opc, $ii);
+			  $val[$kk] = $this->completeTimeSerie($opc, $ii, $q);
 			$lbl = array_keys($val[$kk]);
 			$acol = count(array_unique($data[$sY2AxisLabel]));
 		}
@@ -98,7 +99,7 @@ class Graphic {
       }
 			// Complete the data series for XAxis (year,month,day)
 			if ($gType == "TEMPO" || $gType == "2TEMPO") {
-				$val = $this->completeTimeSerie($opc, $val);
+				$val = $this->completeTimeSerie($opc, $val, $q);
       }
 			elseif ($gType == "PIE") {
 			  // In Pie Graphs must order the values
@@ -321,14 +322,13 @@ class Graphic {
 		return $iWeek;
 	}
 	
-	function completeTimeSerie ($opc, $val) {
+	function completeTimeSerie ($opc, $val, $q) {
 	  $dateini = "";
 		$dateend = "";
 		// Get range of dates from Database
 		//print_r($opc);
 		$qini = $opc['D_DisasterBeginTime'];
 		$qend = $opc['D_DisasterEndTime'];
-		$q = new Query($opc['_REG']);
 		$ydb = $q->getDateRange();
 		if (isset($qini[0]))
 			$dateini = sprintf("%04d-%02d-%02d", $qini[0], $qini[1], $qini[2]);

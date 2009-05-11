@@ -336,17 +336,23 @@ class Query extends PDO
   }
 
   function loadGeoLevels($mapping) {
-    $opc = "";
+    $opc = "WHERE L.GeoLevelId = T.GeoLevelId ";
     if ($mapping == "map")
-      $opc = "WHERE GeoLevelLayerFile != '' AND GeoLevelLayerCode != '' AND GeoLevelLayerName != ''";
-    $sql = "SELECT * FROM GeoLevel $opc ORDER BY GeoLevelId";
+      $opc .= "AND T.GeoLevelLayerFile != '' AND T.GeoLevelLayerCode != '' AND T.GeoLevelLayerName != ''";
+    $sql = "SELECT L.GeoLevelId AS LevelId, L.GeoLevelName AS LevelName, L.GeoLevelDesc AS LevelDesc, ".
+				"T.GeoLevelLayerFile AS LayerFile, T.GeoLevelLayerCode AS LayerCode, T.GeoLevelLayerName as LayerName ".
+				"FROM GeoLevel AS L, GeoCarto AS T $opc ORDER BY L.GeoLevelId";
     $data = array();
     $res = $this->dreg->query($sql);
     foreach($res as $row)
-      $data[$row['GeoLevelId']] = array(str2js($row['GeoLevelName']), str2js($row['GeoLevelDesc']), 
-            $row['GeoLevelLayerFile'], $row['GeoLevelLayerCode'], $row['GeoLevelLayerName']);
+      $data[$row['LevelId']] = array(str2js($row['LevelName']), str2js($row['LevelDesc']), 
+            $row['LayerFile'], $row['LayerCode'], $row['LayerName']);
     return $data;
   }
+	
+	function loadGeoCarto($lev) {
+		$sql = "SELECT T.GeographyId AS GeoId, ";
+	}
 
   function getMaxGeoLev() {
     $sql = "SELECT MAX(GeoLevelId) AS max FROM GeoLevel";
