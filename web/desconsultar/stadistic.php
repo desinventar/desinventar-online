@@ -78,6 +78,10 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
       $val = substr($v[1],2);
       if ($val == "DisasterGeographyId" || $val == "DisasterBeginTime")
         $val = $val ."_". $v[0];
+			elseif ($val == "EventId")
+				$val = "V.EventName";
+			elseif ($val == "CauseId")
+				$val = "C.CauseName";
       $gp[] = $val;
       $fld .= ",$val";
     }
