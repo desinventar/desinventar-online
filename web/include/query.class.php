@@ -871,6 +871,11 @@ class Query extends PDO
       }
       $j++;
     }
+		if ($mode == "MAPS") {
+			list($glv, $eff) = array_keys($res);
+			// Sorting list in maps to order legend - ORDER BY not found with GROUP BY in sqlite3
+			array_multisort($res[$eff], $res[$glv]);
+		}
     return $res;
   }
 	/* Print results like associative array or fields separate by Tabs */

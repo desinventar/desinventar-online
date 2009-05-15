@@ -87,15 +87,15 @@ if (isset($post['_M+cmd'])) {
 		$v = explode("|", $opc['Field']);
 		if ($v[0] == "D.DisasterId")
 			$v[0] = "D.DisasterId_";
-		$sql .= " ORDER BY ". substr($v[0],2);
+		$sql .= " ORDER BY ". substr($v[0],2) ." ASC";
     $info = $q->getQueryDetails($dic, $post);
 		// get query results
 		$dislist = $q->getassoc($sql);
-		//echo "<pre>"; print_r($dislist);
 		//$gitem = $q->getGeoCartoItems();
 		//foreach ($dislist as $ky=>$it)
 		// generate map
 		$dl = $q->prepareList($dislist, "MAPS");
+		//echo "<pre>"; print_r($dl);
     // MAPS Object, RegionId, Level, datalist, ranges, dbinfo, label, maptype
     $m = new Maps($q, $reg, $lev[0], $dl, $range, $info, $post['_M+Label'], "THEMATIC");
 		$rgl[0]['regname'] = $rinf['RegionLabel'];
