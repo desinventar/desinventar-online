@@ -15,7 +15,7 @@
 	<script type="text/javascript">
 		var lon = {-if $lon != ''-}{-$lon-}{-else-}0{-/if-};
 		var lat = {-if $lon != ''-}{-$lat-}{-else-}0{-/if-};
-		var zoom = parseInt('{-$zoom-}');//{-if $isvreg-}4{-else-}6{-/if-};
+		var zoom = parseInt('{-$zoom-}');
 		var map;
 		
 		function init() {
@@ -44,7 +44,6 @@
 					"/cgi-bin/{-$mps-}?", { map:'{-$i.map-}', layers:'{-$i.ly1-}', 'transparent':true, 'format':'png' },
 					{'isBaseLayer':false });
 			map.addLayer(db{-$k-});
- {-if !$isvreg-}
 			// Admin layers
  {-foreach name=glev key=ky item=it from=$glev-}
 			var adm{-$smarty.foreach.glev.iteration-} = new OpenLayers.Layer.WMS("{-$it[0]-}", 
@@ -53,7 +52,6 @@
 			adm{-$smarty.foreach.glev.iteration-}.setVisibility(false);
 			map.addLayer(adm{-$smarty.foreach.glev.iteration-});
  {-/foreach-}
- {-/if-}
 {-/foreach-}
 			// WMS Local Base Map
 			var base = new OpenLayers.Layer.WMS("Local BaseMap",
@@ -165,14 +163,10 @@
  {-if $k == "SOU"-}<i>{-#sou#-}:</i> {-$i-}; {-/if-}
  {-if $k == "SER"-}<i>{-#ser#-}:</i> {-$i-}; {-/if-}
 {-/foreach-}
- {-if !$isvreg-}{-$rgl[0].regname-}{-/if-}</p>
+         {-$rgl[0].regname-}</p>
 				<hr>
-{-if $isvreg-}
-				<img src="/cgi-bin/{-$mps-}?map={-$rgl[0].map-}&SERVICE=WMS&VERSION=1.1.1&REQUEST=getlegendgraphic&LAYER={-$rgl[1].ly1-}&FORMAT=image/png">
-{-else-}
-			<image src="../images/ge_icon.png"> <a href="thematicmap.php?r={-$reg-}&cmd=getkml">{-#tgetgearth#-}</a><hr><br>
-			<img src="/cgi-bin/{-$mps-}?map={-$rgl[0].map-}&SERVICE=WMS&VERSION=1.1.1&REQUEST=getlegendgraphic&LAYER={-$rgl[0].ly1-}&FORMAT=image/png">
-{-/if-}
+			  <image src="../images/ge_icon.png"> <a href="thematicmap.php?r={-$reg-}&cmd=getkml">{-#tgetgearth#-}</a><hr><br>
+			  <img src="/cgi-bin/{-$mps-}?map={-$rgl[0].map-}&SERVICE=WMS&VERSION=1.1.1&REQUEST=getlegendgraphic&LAYER={-$rgl[0].ly1-}&FORMAT=image/png">
 		  </div>
 		 </td>
 		 <td valign="top">
