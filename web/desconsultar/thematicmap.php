@@ -8,12 +8,8 @@ require_once('../include/loader.php');
 require_once('../include/maps.class.php');
 
 function hex2dec($col) {
-  $c = substr($col, -6);
-  $h = str_split($c, 2);
-  $v1 = hexdec($h[0]);
-  $v2 = hexdec($h[1]);
-  $v3 = hexdec($h[2]);
-  return $v1 ." ". $v2 . " ". $v3;
+  $h = str_split(substr($col, -6), 2);
+  return hexdec($h[0])." ". hexdec($h[1]) . " ". hexdec($h[2]);
 }
 
 // set hash with limits, legends and colors
@@ -54,11 +50,6 @@ else
 
 $q = new Query($reg);
 
-if (isset($post['_VREG']) && $post['_VREG'] == "true")
-	$q = new Query();
-else
-	$q = new Query($reg);
-
 $dic = array();
 $dic = array_merge($dic, $q->queryLabelsFromGroup('MapOpt', $lg));
 $dic = array_merge($dic, $q->queryLabelsFromGroup('Effect', $lg));
@@ -72,8 +63,6 @@ if (isset($post['_M+cmd'])) {
 	$c	 = $q->getresult($sqc);
 	$cou = $c['counter'];
   $glev = $q->loadGeoLevels("map");
-	if (isset($post['_VREG']) && $post['_VREG'] == "true")
-    $t->assign ("isvreg", true);
   if (isset($post['_M+cmd'])) {
     // Assign ranges
     $range = setRanges($post);
@@ -92,10 +81,10 @@ if (isset($post['_M+cmd'])) {
 		// get query results
 		$dislist = $q->getassoc($sql);
 		//$gitem = $q->getGeoCartoItems();
-		//foreach ($dislist as $ky=>$it)
 		// generate map
 		$dl = $q->prepareList($dislist, "MAPS");
-		//echo "<pre>"; print_r($dl);
+		// foreach regionitems -> create map object
+		//echo "<pre>"; print_r($dislist);
     // MAPS Object, RegionId, Level, datalist, ranges, dbinfo, label, maptype
     $m = new Maps($q, $reg, $lev[0], $dl, $range, $info, $post['_M+Label'], "THEMATIC");
 		$rgl[0]['regname'] = $rinf['RegionLabel'];

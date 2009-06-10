@@ -9,36 +9,30 @@ require_once('../include/loader.php');
 require_once('../include/usersession.class.php');
 
 // Direct access to module
-if (isset($_GET['r']) && !empty($_GET['r'])) {
+if (isset($_GET['r']) && !empty($_GET['r']))
 	$reg = $_GET['r'];
-	$vreg = false;
-	if (isset($_GET['v']) && $_GET['v'] == "true")
-		$vreg = true;
+// Request to save Query Design in File..
+elseif (isset($_POST) && !empty($_POST['_REG'])) {
+	header("Content-type: text/plain");
+	header("Content-Disposition: attachment; filename=Query_". str_replace(" ", "", $_POST['_REG']) .".di8");
+	echo base64_encode(serialize($_POST));
+	exit();
 }
-else {
-  // Request to save Query Design in File..
-  if (isset($_POST) && !empty($_POST['_REG'])) {
-    header("Content-type: text/plain");
-    header("Content-Disposition: attachment; filename=Query_". str_replace(" ", "", $_POST['_REG']) .".di8");
-    echo base64_encode(serialize($_POST));
-    exit();
-  }
-  // Open file, decode and assign saved query..
-  elseif (isset($_FILES['qry'])) {
-    $myfile = $_FILES['qry']['tmp_name'];
-    $handle = fopen($myfile, "r");
-    $cq = fread($handle, filesize($myfile));
-    fclose($handle);
-    if (!empty($cq))
-      $qd = unserialize(base64_decode($cq));
-    else
-      exit();
-    $reg = $qd['_REG'];
-    $t->assign ("qd", $qd);
-  }
-  else
-    $reg = $us->sRegionId;
+// Open file, decode and assign saved query..
+elseif (isset($_FILES['qry'])) {
+	$myfile = $_FILES['qry']['tmp_name'];
+	$handle = fopen($myfile, "r");
+	$cq = fread($handle, filesize($myfile));
+	fclose($handle);
+	if (!empty($cq))
+		$qd = unserialize(base64_decode($cq));
+	else
+		exit();
+	$reg = $qd['_REG'];
+	$t->assign ("qd", $qd);
 }
+else
+	$reg = $us->sRegionId;
 
 // Direct Acccess Not allowed, do not show anything...
 if (!empty($reg)) {
@@ -73,7 +67,6 @@ else {
   $t->assign ("ctl_glist", true);
   $t->assign ("reg", $reg);
   $t->assign ("path", VAR_DIR);
-  // Set lists if is VirtualRegion
   $rinf = $q->getDBInfo();
   $t->assign ("regname", $rinf['RegionLabel']);
   $geol = $q->loadGeography(0);
@@ -103,7 +96,7 @@ else {
   $ydb = $q->getDateRange();
   $t->assign ("yini", substr($ydb[0], 0, 4));
   $t->assign ("yend", substr($ydb[1], 0, 4));
-  // In Saved Queries set true in Geo, Events, Causes selecteds..
+  // In Saved Queries set true in Geo, Events, Causes selected..
   if (isset($qd["D_DisasterGeographyId"])) {
     foreach ($qd["D_DisasterGeographyId"] as $ky=>$it) {
       if (isset($geol[$it]))
@@ -188,10 +181,7 @@ else {
     "GeographyCode,DisasterLatitude,DisasterLongitude,RecordAuthor,RecordCreation,RecordLastUpdate,EventNotes");
   $t->assign ("sda1", $sda1);	// array_diff_key($dc2, array_flip($sda))
   // MAPS
-  if (isset($_GET['v']) && $_GET['v'] == "true")
-    $mgl = array(0=>array("Nivel0",""), 1=>array("Nivel1",""));
-  else
-    $mgl = $q->loadGeoLevels("map");
+	$mgl = $q->loadGeoLevels("map");
   $t->assign ("mgel", $mgl);
   $range[] = array(10, "1 - 10", "ffff99");
   $range[] = array(100, "11 - 100", "ffff00");
