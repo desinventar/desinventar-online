@@ -175,13 +175,15 @@ sub convertTable() {
 				$sValue = $o->{$sValue};
 			} 
 			# Remove Invalid Chars from Value (i.e. \n)
-			$sValue =~ s/\n//g;
-			$sValue =~ s/\0//g;
+			$sValue =~ s/\n//g; # New Line Chars
+			$sValue =~ s/\0//g; # Null Chars
+			$sValue =~ s/\t//g; # Tab Char
+			$sValue =~ s/"//g;  # Double Quotes
 			
 			$sFieldList .= $sField . $sAppend;
 			if ( ($sFieldType eq 'STRING') ||
 			     ($sFieldType eq 'DATETIME') ) {
-				$sValueList .= "'" . $sValue . "'" . $sAppend;
+				$sValueList .= '"' . $sValue . '"' . $sAppend;
 			} else {
 				$sValueList .= $sValue . $sAppend;
 			}
