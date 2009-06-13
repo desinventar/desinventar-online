@@ -57,7 +57,7 @@ if ($bCore) {
 	@RegionTables = ('Event','Cause','GeoLevel','Geography','Disaster',
 	                 'DatabaseLog','EEField','EEGroup','EEData');
 	if ($sTableName ne '') {
-		@RegionTables = ($sTableName);
+		@RegionTables = split(',',$sTableName);
 		if ($sTableName eq 'INFO') {
 			@RegionTables = ();
 			$bInfo = 1;
@@ -67,6 +67,9 @@ if ($bCore) {
 			@RegionTables = ();
 		}
 		$bInfo = 1;
+	}
+	foreach (@RegionTables) {
+		&cleanTable($_);
 	}
 	foreach (@RegionTables) {
 		&convertTable($dbin, $sRegion . "_" . $_, $_);
@@ -127,7 +130,12 @@ sub saveInfo() {
 	                      "InfoAuxValue ='" , $sInfoAuxValue . "' " .
 	                      "WHERE InfoKey='" . $sInfoKey . "';" . "\n";
 }
-
+sub cleanTable() {
+	my $sTableDst = $_[0];
+	my $sQuery    = "";
+	$sQuery = "DELETE FROM " . $sTableDst . ";";
+	print $sQuery . "\n";
+}
 sub convertTable() {
 	my $dbin      = $_[0];
 	my $sTableSrc = $_[1];
@@ -137,7 +145,7 @@ sub convertTable() {
 	my $sQuery    = "";
 	my $sthin     = null;
 	my $sthout    = null;
-	$sQuery = "DELETE FROM " . $sTableDst . ";";
+	$sQuery = "BEGIN TRANSACTION;";
 	print $sQuery . "\n";
 
 	$sQuery = "SELECT * FROM " . $sTableSrc;
@@ -185,6 +193,8 @@ sub convertTable() {
 		print $sQuery . "\n";
 	}
 	$sthin->finish;
+	$sQuery = "COMMIT;";
+	print $sQuery . "\n";
 	
 	# Save Sync Field
 	$sNow = strftime("%Y-%m-%d %H:%M:%S", gmtime); # ISO8601
