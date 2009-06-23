@@ -47,8 +47,9 @@ if ($bCore) {
 	}
 }
 my $dbin  = DBI->connect($data_source, $username, $passwd) or die "Can't open MySQL database\n";
+$dbin->{mysql_enable_utf8} = 1;
 my $dbout = DBI->connect("DBI:SQLite:dbname=" . $sDBFile,"","");
-
+$dbout->{unicode} = 1;
 if ($bCore) {
 	&convertTable($dbin, "Region", "Region");
 	&convertTable($dbin, "RegionAuth", "RegionAuth");
