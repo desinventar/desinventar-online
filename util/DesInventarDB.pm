@@ -1,8 +1,17 @@
+#!/usr/bin/perl
+#
+# DesInventar - http://www.desinventar.org
+# (c) 1999-2009 Corporacion OSSO
+#
+# Database Definition
+#
+# 2009-04-15 Jhon H. Caicedo <jhcaiced@desinventar.org>
+#
 package DesInventarDB;
 
 BEGIN { require 5.005; }
 
-$VERSION = '1.0';
+$VERSION = '1.1';
 
 # 2009-02-21 DesInventar Database Structure
 %TableDef = ('Region' =>
@@ -62,12 +71,18 @@ $VERSION = '1.0';
                  'CauseLastUpdate/DATETIME'   => 'CauseCreationDate'
                 },
             'GeoLevel' =>
-                {'GeoLevelId/STRING'          => undef,
+                {'GeoLevelId/INTEGER'         => undef,
                  'LangIsoCode/STRING'         => 'spa',
                  'SyncRecord/DATETIME'        => 'DATETIME',
                  'GeoLevelName/STRING'        => undef,
                  'GeoLevelDesc/STRING'        => undef,
-                 'GeoLevelActive/INTEGER'     => 1,
+                 'GeoLevelActive/INTEGER'     => 1
+                },
+			'GeoCarto' =>
+				{'GeographyId/STRING'         => undef,
+				 'GeoLevelId/INTEGER'         => undef,
+				 'RegionId/STRING'            => undef,
+				 'SyncRecord/DATETIME'        => 'DATETIME',
                  'GeoLevelLayerFile/STRING'   => undef,
                  'GeoLevelLayerName/STRING'   => undef,
                  'GeoLevelLayerCode/STRING'   => undef
