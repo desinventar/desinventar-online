@@ -55,8 +55,21 @@ if ($bCore) {
 	&convertTable($dbin, "RegionAuth", "RegionAuth");
 	&convertTable($dbin, "Users", "User");
 } else {
-	@RegionTables = ('Event','Cause','GeoLevel','Geography','Disaster',
-	                 'DatabaseLog','EEField','EEGroup','EEData');
+	@RegionTables = ('Event',
+	                 'Cause',
+	                 'GeoLevel',
+	                 ['GeoCarto','GeoLevel', {'GeographyId' => '',
+	                                          'RegionId'    => $sRegion}],
+	                 'Geography',
+	                 'Disaster',
+	                 'DatabaseLog',
+	                 'EEField',
+	                 'EEGroup',
+	                 'EEData');
+	#@RegionTables = ('GeoLevel',
+	#                 ['GeoCarto','GeoLevel', {'GeographyId' => '',
+	#                                          'RegionId'    => $sRegion}]
+	#                );
 	if ($sTableName ne '') {
 		@RegionTables = split(',',$sTableName);
 		if ($sTableName eq 'INFO') {
@@ -66,14 +79,29 @@ if ($bCore) {
 	} else {
 		if ($bInfo) {
 			@RegionTables = ();
+			$bInfo = 1;
 		}
-		$bInfo = 1;
 	}
-	foreach (@RegionTables) {
-		&cleanTable($_);
+	foreach $myTable (@RegionTables) {
+		if (ref($myTable) eq 'ARRAY') {
+			$a = ref($myTable) . "\n";
+			$sDstTable = $myTable->[0];
+		} else {
+			$sDstTable = $myTable;
+		}
+		&cleanTable($sDstTable);
 	}
-	foreach (@RegionTables) {
-		&convertTable($dbin, $sRegion . "_" . $_, $_);
+	foreach $myTable (@RegionTables) {
+		if (ref($myTable) eq 'ARRAY') {
+			$sSrcTable = $sRegion . "_" . $myTable->[1];
+			$sDstTable = $myTable->[0];
+			$oDefValues = $myTable->[2];
+		} else {
+			$sSrcTable = $sRegion . "_" . $myTable;
+			$sDstTable = $myTable;
+			$oDefValues = {};
+		}
+		&convertTable($dbin, $sSrcTable, $sDstTable, $oDefValues);
 	}
 	if ($bInfo) {
 		# Rebuild Info Table
@@ -141,7 +169,7 @@ sub convertTable() {
 	my $dbin      = $_[0];
 	my $sTableSrc = $_[1];
 	my $sTableDst = $_[2];
-	#my %oTableDef = %{$_[4]}; # This HASH comes By Reference...
+	my %oDefValues = $_[3];
 	my %oTableDef = %{%DesInventarDB::TableDef->{$sTableDst}};
 	my $sQuery    = "";
 	my $sthin     = null;
@@ -167,7 +195,11 @@ sub convertTable() {
 			if (defined $oTableDef{$sFieldDef}) {
 				$sValue = $oTableDef{$sFieldDef};
 			} else {
-				$sValue = $sField;
+				if (defined $oDefValues->{$sField}) {
+					$sValue = $oDefValues->{$sField};
+				} else {
+					$sValue = $sField;
+				}
 			}
 			if ($sValue eq 'DATETIME') {
 				#$sValue = time(); # TimeStamp
