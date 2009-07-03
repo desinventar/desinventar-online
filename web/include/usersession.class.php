@@ -30,16 +30,16 @@ class UserSession {
 		$sQuery = "SELECT * FROM UserSession WHERE SessionId='" . $prmSessionId . "'";
 		$q = new Query();
 		try {
-		if ($result = $q->core->query($sQuery, PDO::FETCH_OBJ)) {
-			while ($row = $result->fetch()) {
-				$this->sSessionId  = $row->SessionId;
-				$this->sRegionId   = $row->RegionId;
-				$this->sUserName   = $row->UserName;
-				$this->dStart      = $row->Start;
-				$this->dLastUpdate = $row->LastUpdate;
-				$iReturn = 1;
+			if ($result = $q->core->query($sQuery, PDO::FETCH_OBJ)) {
+				while ($row = $result->fetch()) {
+					$this->sSessionId  = $row->SessionId;
+					$this->sRegionId   = $row->RegionId;
+					$this->sUserName   = $row->UserName;
+					$this->dStart      = $row->Start;
+					$this->dLastUpdate = $row->LastUpdate;
+					$iReturn = 1;
+				}
 			}
-		}
 		} catch (PDOException $e) {
 			$e->getMessage() . "<br>\n";
 		}
@@ -100,7 +100,7 @@ class UserSession {
 			$iReturn = 1;
 		}
 		return $iReturn;
-	} // function
+	} // insert()
 
 	// Update information about this session in database
 	public function update() {
@@ -119,7 +119,7 @@ class UserSession {
 			$iReturn = 1;
 		}
 		return $iReturn;
-	} // function
+	} // update()
 
 	// Close a session, removing the session information from the
 	// database.	
@@ -133,7 +133,7 @@ class UserSession {
 			$iReturn = 1;
 		}
 		return $iReturn;
-	} // function
+	} // delete()
 
 	// Associate a RegionId with the session
 	public function open($prmRegionId) {
@@ -154,11 +154,11 @@ class UserSession {
 		}
 		$this->awake();
 		return $iReturn;
-	} // function
+	} // open()
 
 	public function close($prmRegionId) {
 		return $this->open("");
-	} // function
+	} // close()
 
 	// Validate a user/passwd pair against database
 	public function validateUser($prmUserName, $prmUserPasswd) {
@@ -181,7 +181,7 @@ class UserSession {
 			} // catch
 		}
 		return $iReturn;
-	} // function
+	} // valiteUser
 	
 	public function getUserFullName() {
 		$sUserFullName = "";
@@ -230,7 +230,6 @@ class UserSession {
 		  " AND (UserName='" . $this->sUserName . "') " .
 		  " AND AuthKey='ROLE'" . 
 		  " ORDER BY RegionAuth.RegionId";
-		
 		$q = new Query();
 		if ($result = $q->core->query($sQuery) ) {
 			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
@@ -354,4 +353,16 @@ class UserSession {
 		}
 		return $myData;
 	} // function
+	
+	public function existUser($username) {
+		return true;
+	}
+	
+	public function insertUser($UserName, $UserFullName, $UserEMail, $UserPasswd, $UserCountry, $UserCity, $UserActive) {
+		return true;
+	}
+	
+	public function updateUser($UserName, $UserFullName, $UserEMail, $UserPasswd, $UserCountry, $UserCity, $UserActive) {
+		return true;
+	}
 } //class

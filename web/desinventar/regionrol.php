@@ -9,7 +9,6 @@ require_once('../include/loader.php');
 require_once('../include/query.class.php');
 require_once('../include/region.class.php');
 require_once('../include/user.class.php');
-require_once('../include/dictionary.class.php');
 
 if (isset($_GET['r']) && !empty($_GET['r']))
   $reg = $_GET['r'];
@@ -24,11 +23,11 @@ function getRAPermList($lst) {
 	return $dat;
 }
 
-$d = new Dictionary(VAR_DIR);
-$u = new User('', '', '');
+$d = new Query();
+$u = new UserSession('', '', '');
 $r = new Region($reg);
 
-// EDIT REGION: Form to Create and assign regions
+// EDIT ROLE: Form to Create and assign role
 if (isset($_GET['rolecmd'])) {
 	$mod = "role";
 	$cmd = $_GET['rolecmd'];
