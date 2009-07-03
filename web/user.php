@@ -14,29 +14,29 @@ function form2user($val) {
   $dat = array();
   if (!isset($val['UserName']))
   	$ifo = current($val);
-  $dat['UserName'] 		= isset($val['UserName'])? $val['UserName']: key($val);
-  $dat['UserFullName'] 	= isset($val['UserFullName'])? $val['UserFullName']: $ifo[2];
-  $dat['UserEMail'] 	= isset($val['UserEMail'])? $val['UserEMail']: $ifo[0];
-  $dat['UserCountry'] 	= isset($val['UserCountry'])? $val['UserCountry']: $ifo[4];
-  $dat['UserCity'] 		= isset($val['UserCity'])? $val['UserCity']: $ifo[5];
+  $dat['UserName']				= isset($val['UserName'])? $val['UserName']: key($val);
+  $dat['UserFullName']		= isset($val['UserFullName'])? $val['UserFullName']: $ifo[2];
+  $dat['UserEMail']				= isset($val['UserEMail'])? $val['UserEMail']: $ifo[0];
+  $dat['UserCountry']			= isset($val['UserCountry'])? $val['UserCountry']: $ifo[4];
+  $dat['UserCity']				= isset($val['UserCity'])? $val['UserCity']: $ifo[5];
   if (isset($val['UserActive'])) {
     if (($val['UserActive'] == "on") || $val['UserActive'])
-      $dat['UserActive'] = true;
+      $dat['UserActive']	= true;
     else
-      $dat['UserActive'] = false;
+      $dat['UserActive']	= false;
   }
   else
-    $dat['UserActive'] = 1;
-  $dat['NUserPasswd'] 	= isset($val['NUserPasswd'])? $val['NUserPasswd']: '';
-  $dat['NUserPasswd2'] 	= isset($val['NUserPasswd2'])? $val['NUserPasswd2']: '';
+    $dat['UserActive'] 		= 1;
+  $dat['NUserPasswd']			= isset($val['NUserPasswd'])? $val['NUserPasswd']: '';
+  $dat['NUserPasswd2']		= isset($val['NUserPasswd2'])? $val['NUserPasswd2']: '';
   if (!empty($dat['NUserPasswd']) && ($dat['NUserPasswd'] == $dat['NUserPasswd2'])) 
-    $dat['UserPasswd'] = $dat['NUserPasswd'];
+    $dat['UserPasswd'] 		= $dat['NUserPasswd'];
   else if (isset($val['UserPasswd']) && !empty($val['UserPasswd']))
-    $dat['UserPasswd'] = $val['UserPasswd'];
+    $dat['UserPasswd'] 		= $val['UserPasswd'];
   else if (isset($ifo[1]) && !empty($ifo[1]))
-    $dat['UserPasswd'] = $ifo[1];
+    $dat['UserPasswd'] 		= $ifo[1];
   else
-    $dat['UserPasswd'] = 'di8welcome';
+    $dat['UserPasswd'] 		= 'di8welcome'; // default password
   return $dat;
 }
 
@@ -107,16 +107,17 @@ if (isset($_GET['cmd'])) {
 					$sRole        = $v['Role'];
 					$sRegionLabel = $v['RegionLabel'];
 					$hrole = true;
-					if ($sRole == "ADMINREGION") {
-						$radm[$sRegionId] = $sRegionLabel;
-					} else if ($sRole == "USER") {
-						$rusr[$sRegionId] = $sRegionLabel;
-					} else if ($sRole == "SUPERVISOR") {
-						$rsup[$sRegionId] = $sRegionLabel;
-					} else if ($sRole == "OBSERVER") {
-						$obs[$sRegionId] = $sRegionLabel;
-					} else {
-						$hrole = false;
+					switch ($sRole) {
+						case "ADMINREGION":		$radm[$sRegionId] = $sRegionLabel;
+						break;
+						case "USER":					$rusr[$sRegionId] = $sRegionLabel;
+						break;
+						case "SUPERVISOR":		$rsup[$sRegionId] = $sRegionLabel;
+						break;
+						case "OBSERVER":			$obs[$sRegionId] = $sRegionLabel;
+						break;
+						default:							$hrole = false;
+						break;
 					}
 				} // foreach
 				if ($hrole) {
@@ -152,7 +153,7 @@ if (isset($_GET['cmd'])) {
 		case "chklogin":
 			// USERADMIN: check if username exists...
 			$t->assign ("ctl_chklogin", true);
-			if ($us->chkLogin($_GET['UserName']))
+			if ($us->existUser($_GET['UserName']))
 				$t->assign ("clogin", true);
 			break;
 		case "chkpasswd":
@@ -171,9 +172,9 @@ if (isset($_GET['cmd'])) {
 			$data = form2user($_GET);
 			$t->assign ("ctl_msginsert", true);
 			$t->assign ("username", $data['UserName']);
-			if ($u->chkLogin($data['UserName'])) {
+			if ($us->existUser($data['UserName'])) {
 				// Create user if login not exists
-				$ret = $u->insertUser($data['UserName'], $data['UserFullName'], $data['UserEMail'], 
+				$ret = $us->insertUser($data['UserName'], $data['UserFullName'], $data['UserEMail'], 
 				      $data['UserPasswd'], $data['UserCountry'], $data['UserCity'], $data['UserActive']);
 			} else {
 				$ret = ERR_OBJECT_EXISTS;

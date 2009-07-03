@@ -436,7 +436,6 @@ class Query extends PDO
 		foreach ($res[0] as $key => $val) {
 			$fld[] = $key;
 		}
-
 		// (jhcaiced) SyncRecord should not appear in data grid
 		$pos = array_search('SyncRecord', $fld);
 		if ($pos) {
@@ -878,6 +877,7 @@ class Query extends PDO
 		}
     return $res;
   }
+	
 	/* Print results like associative array or fields separate by Tabs */
 	function printResults ($dl, $exp, $mode) {
 		$csv = "";
