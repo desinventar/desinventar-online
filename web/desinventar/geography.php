@@ -6,6 +6,7 @@
 
 require_once('../include/loader.php');
 require_once('../include/query.class.php');
+require_once('../include/digeography.class.php');
 
 if (isset($_GET['r']) && !empty($_GET['r']))
 	$reg = $_GET['r'];
@@ -34,23 +35,27 @@ if (isset($_GET['geocmd'])) {
 		$dat['GeographyActive'] = false;
 	switch ($cmd) {
 	case "insert":
-		//$gi = $r->insertGeoItem($dat['GeoParentId'], $dat['GeographyCode'],
-		//								$dat['GeographyName'], $dat['GeographyActive']);
-		if (!iserror($gi))
+		$o = new DIGeography($us);
+		$o->setFromArray($_GET);
+		$o->buildGeographyId($_GET['GeoParentId']);
+		$o->insert();
+		if (!iserror($i))
 			$t->assign ("ctl_msginsgeo", true);
 		else {
 			$t->assign ("ctl_errinsgeo", true);
-			$t->assign ("insstatgeo", $gi);
+			$t->assign ("insstatgeo", $i);
 		}
 	break;
 	case "update":
-		//$gi = $r->updateGeoItem($dat['GeographyId'], $dat['GeographyCode'],
-		//								$dat['GeographyName'], $dat['GeographyActive']);
-		if (!iserror($gi))
+		$o = new DIGeography($us, $_GET['GeographyId']);
+		$o->load();
+		$o->setFromArray($_GET);
+		$i = $o->update();
+		if (!iserror($i))
 			$t->assign ("ctl_msgupdgeo", true);
 		else {
 			$t->assign ("ctl_errupdgeo", true);
-			$t->assign ("updstatgeo", $gi);
+			$t->assign ("updstatgeo", $i);
 		}
 	break;
 	case "list":
