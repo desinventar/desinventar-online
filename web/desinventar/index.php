@@ -137,22 +137,35 @@ if (isset($_GET['u'])) {
 			//if ($q->isvalidObjectName($_POST['DisasterId'], $_POST['DisasterSerial'], DI_DISASTER)) {
 			if ($_POST['_CMD'] == "insertDICard") {
 				$data = form2disaster($_POST, CMD_NEW);
+				$o = new DIDisaster($us, $data['DisasterId']);
+				$o->setFromArray($data);
+				$i = $o->insert();
+				
 				echo "<!--"; print_r($data); echo "-->\n";
+				/*
 				$rpcargs = array($_SESSION['sessionid'], DI_DISASTER, CMD_NEW, $data);
 				$dip = callRpcDICore('RpcDIServer.saveDIObject', $rpcargs);
+				*/
 				$t->assign ("statusmsg", "insertok");
 			} elseif ($_POST['_CMD'] == "updateDICard") {
 				// Update DICard in Database through DICORE
 				$data = form2disaster($_POST, CMD_UPDATE);
+				$o = new DIDisaster($us, $data['DisasterId']);
+				$o->load();
+				$o->setFromArray($data);
+				$i = $o->update();
 				echo "<!--"; print_r($data); echo "-->\n";
+				/*
 				if ($data['RecordStatus'] == "DELETED")
 					$rpcargs = array($_SESSION['sessionid'], DI_DISASTER, CMD_DELETE, $data);
 				else
 					$rpcargs = array($_SESSION['sessionid'], DI_DISASTER, CMD_UPDATE, $data);
 				$dip = callRpcDICore('RpcDIServer.saveDIObject', $rpcargs);
+				*/
 				$t->assign ("statusmsg", "updateok");
 			}
 			
+			/*
 			if (!iserror($dip)) {
 				$t->assign ("diserial", $data['DisasterSerial']);
 				// If Datacard is valid, update EEData Table..
@@ -165,6 +178,7 @@ if (isset($_GET['u'])) {
 			} else {
 				$t->assign ("statusmsg", showerror($dip));
 			}
+			*/
 			$t->assign ("dipub", $q->getNumDisasterByStatus("PUBLISHED"));
 			$t->assign ("direa", $q->getNumDisasterByStatus("READY"));
 			$t->assign ("ctl_result", true);
