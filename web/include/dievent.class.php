@@ -36,7 +36,7 @@ class DIEvent extends DIObject {
 				$this->setIdByName($this->get('EventName'));
 			}
 		}
-	}
+	} // __construct
 	
 	public function setIdByName($prmEventName) {
 		$iReturn = 0;
