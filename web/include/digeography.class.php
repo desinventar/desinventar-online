@@ -36,11 +36,16 @@ class DIGeography extends DIObject {
 	public function buildGeographyId($sMyParentId) {
 		$iGeographyLevel = strlen($sMyParentId)/5;
 		$sQuery = "SELECT * FROM Geography WHERE GeographyId LIKE '" . $sMyParentId . "%' AND LENGTH(GeographyId)=" . ($iGeographyLevel + 1) * 5;
+		$TmpStr = '';
 		foreach($this->q->dreg->query($sQuery) as $row) {
 			$TmpStr = substr($row['GeographyId'], $iGeographyLevel * 5, 5);
 		}
-		$TmpStr = $this->padNumber((int)$TmpStr + 1, 5);
-		$sGeographyId = $sMyParentId . $TmpStr;
+		if ($TmpStr == '') {
+			$sGeographyId = '';
+		} else {
+			$TmpStr = $this->padNumber((int)$TmpStr + 1, 5);
+			$sGeographyId = $sMyParentId . $TmpStr;
+		}
 		$this->set('GeographyId', $sGeographyId);
 		$this->setGeographyLevel();
 		return $sGeographyId;
