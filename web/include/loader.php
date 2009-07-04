@@ -125,14 +125,8 @@ session_start();
 
 // 2009-01-15 (jhcaiced) Start by create/recover the session 
 // information, even for anonymous users
-if (!isset($_SESSION['sessioninfo'])) { 
-	$us = new UserSession(session_id());
-	$_SESSION['sessioninfo'] = $us;
-} else {
-	$us = $_SESSION['sessioninfo'];
-	$us->load($us->sSessionId);
-}
-
+$us = new UserSession(session_id());
+$us->load($us->sSessionId);
 $us->awake();
 
 error_reporting(E_ALL);

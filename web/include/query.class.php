@@ -47,7 +47,7 @@ class Query extends PDO
 				}
 				break;
 			} //switch
-		} catch (PDOException $e) {
+		} catch (Exception $e) {
 			print "Error !: " . $e->getMessage() . "<br/>\n";
 			die();
 		}
@@ -81,7 +81,7 @@ class Query extends PDO
 				$rst = $this->dreg->query($qry);
 				$row = $rst->fetch(PDO::FETCH_ASSOC);
 			}
-		} catch (PDOException $e) {
+		} catch (Exception $e) {
 			print $e->getMessage() . "<br>";
 		}
 		return $row;
@@ -1075,7 +1075,7 @@ class Query extends PDO
 			  $row['DictTechHelp'],//utf8_encode($row['DicTechHelp']),
 			  str2js($row['DictBasDesc']), $row['DictFullDesc']);
 		} // foreach
-	} catch (PDOException $e) {
+	} catch (Exception $e) {
 		print $e->getMessage();
 	}
     return $dictio;

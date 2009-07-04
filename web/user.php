@@ -226,9 +226,6 @@ if (isset($_GET['cmd'])) {
 	} // end share session
 }
 
-// 2009-01-19 (jhcaiced) This should keep the UserSession info between pages
-$_SESSION['sessioninfo'] = $us;
-
 $t->display ("user.tpl");
 
 </script>
