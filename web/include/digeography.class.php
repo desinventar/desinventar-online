@@ -3,7 +3,6 @@
  DesInventar - http://www.desinventar.org
  (c) 1999-2009 Corporacion OSSO
 */
-
 class DIGeography extends DIObject {
 	public function __construct($prmSession) {
 		$this->sTableName   = "Geography";
@@ -13,23 +12,25 @@ class DIGeography extends DIObject {
 		$this->sFieldDef    = "SyncRecord/DATETIME," .
 		                      "GeographyCode/STRING," .
 		                      "GeographyName/STRING," .  
-		                      "GeoographyLevel/INTEGER," .
+		                      "GeographyLevel/INTEGER," .
 		                      "GeographyActive/INTEGER";
 		parent::__construct($prmSession);
 		$this->set("LangIsoCode", $this->q->getDBInfoValue('I18NFirstLang'));
 
 		$num_args = func_num_args();
+		
 		if ($num_args >= 2) {
-			$this->set('GeographyId', func_get_arg(1));
+			$prmGeographyId = func_get_arg(1);
+			$this->set('GeographyId', $prmGeographyId);
 			if ($num_args >= 3) {
-				$this->set('LangIsoCode', func_get_arg(2));
+				$prmLangIsoCode = func_get_arg(2);
+				$this->set('LangIsoCode', $prmLangIsoCode);
 			} //if
 			$this->load();
 		} //if
 	} // __construct
 
-	public String buildGeographyId($sMySessionUUID, $sMyCode, 
-	                               $sMyParentCode, $iMyLevel) {
+	public function buildGeographyId($sMySessionUUID, $sMyCode, $sMyParentCode, $iMyLevel) {
 		$sQuery = '';
 		$bError = 0;
 	}
@@ -41,5 +42,4 @@ class DIGeography extends DIObject {
 		}
 		return $sNumber;
 	} // function
-
 } //class
