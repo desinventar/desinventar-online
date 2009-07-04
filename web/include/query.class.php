@@ -1149,13 +1149,6 @@ class Query extends PDO
     return true;
   }
   
-	function dreg_query($query) {
-		return $this->dreg->query($query);
-	}
-
-	function base_query($query) {
-		return $this->base->query($query);
-	}
 } // end class
 
 </script>
