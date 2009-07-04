@@ -140,7 +140,7 @@ if (isset($_GET['u'])) {
 				$o = new DIDisaster($us, $data['DisasterId']);
 				$o->setFromArray($data);
 				$o->set('RecordCreation', date('c'));
-				$o->set('RecordLastUpdate'), date('c'));
+				$o->set('RecordLastUpdate', date('c'));
 				$i = $o->insert();
 				
 				echo "<!--"; print_r($data); echo "-->\n";
@@ -155,7 +155,7 @@ if (isset($_GET['u'])) {
 				$o = new DIDisaster($us, $data['DisasterId']);
 				$o->load();
 				$o->setFromArray($data);
-				$o->set('RecordLastUpdate'), date('c'));
+				$o->set('RecordLastUpdate', date('c'));
 				$i = $o->update();
 				echo "<!--"; print_r($data); echo "-->\n";
 				/*
