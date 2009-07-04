@@ -920,29 +920,30 @@ class Query extends PDO
 			return $dl;
 	}
   
-  // Print results like json array to Javascript
-  function hash2json($dlist) {
-    $js = array();
-    foreach ($dlist as $ky=>$vl) {
-      $js[$ky] = "{";
-      foreach ($vl as $k=>$v) {
-        if ($k == "DisasterBeginTime") {
-          $dt = explode("-", $v);
-          if (!isset($dt[0])) 
-            $dt[0] = 0; 
-          if (!isset($dt[1])) 
-            $dt[1] = 0; 
-          if (!isset($dt[2])) 
-            $dt[2] = 0; 
-          $js[$ky] .= "'". $k ."[0]':'". $dt[0] ."', '". $k ."[1]':'". $dt[1] ."', '". $k ."[2]':'". $dt[2] ."', ";
-        }
-        else 
-          $js[$ky] .= "'$k': '$v', ";
-      }
-      $js[$ky] .= "'_REG': '". $this->sRegionId ."'}";
-    }
-    return $js;
-  }
+	// Print results like json array to Javascript
+	function hash2json($dlist) {
+		$js = array();
+		foreach ($dlist as $ky=>$vl) {
+			$js[$ky] = "{";
+			foreach ($vl as $k=>$v) {
+				if ($k == "DisasterBeginTime") {
+					$dt = explode("-", $v);
+					if (!isset($dt[0])) 
+						$dt[0] = 0; 
+					if (!isset($dt[1])) 
+						$dt[1] = 0; 
+					if (!isset($dt[2])) 
+						$dt[2] = 0; 
+					$js[$ky] .= "'". $k ."[0]':'". $dt[0] ."', '". $k ."[1]':'". $dt[1] ."', '". $k ."[2]':'". $dt[2] ."', ";
+				} else {
+					$js[$ky] .= "'$k': '$v', ";
+				}
+				fb($js[$ky]);
+			} //foreach
+			$js[$ky] .= "'_REG': '". $this->sRegionId ."'}";
+		}
+		return $js;
+	} //function
   
   /*** SET SQL TO TOTALIZATION RESULTS ***/
   function totalize($sql) {

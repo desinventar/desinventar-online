@@ -834,7 +834,7 @@
    <table border="0" class="grid">
 	  <tr id="serial">
 	   <td>{-$dis.DisasterSerial[0]-}</td>
-	   <td><input id="_DisasterSerial" name="D:DisasterSerial" type="text" size="25" tabindex="101" class="line"
+	   <td><input id="_DisasterSerial" name="D_DisasterSerial" type="text" size="25" tabindex="101" class="line"
 	   		maxlength="50" onFocus="showtip('{-$dis.DisasterSerial[2]-}','')"></td>
 	  </tr>
 	  <tr>
