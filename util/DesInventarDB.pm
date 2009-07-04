@@ -3,9 +3,9 @@
 # DesInventar - http://www.desinventar.org
 # (c) 1999-2009 Corporacion OSSO
 #
-# Database Definition
+# DesInventar Database Structure - Perl Interface
 #
-# 2009-04-15 Jhon H. Caicedo <jhcaiced@desinventar.org>
+# 2009-07-04 Jhon H. Caicedo <jhcaiced@desinventar.org>
 #
 package DesInventarDB;
 
@@ -13,7 +13,6 @@ BEGIN { require 5.005; }
 
 $VERSION = '1.1';
 
-# 2009-02-21 DesInventar Database Structure
 %TableDef = ('Region' =>
                 {'RegionId/STRING'           => 'RegionUUID',
                  'RegionLabel/STRING'        => undef,
@@ -81,6 +80,7 @@ $VERSION = '1.1';
 			'GeoCarto' =>
 				{'GeographyId/STRING'         => undef,
 				 'GeoLevelId/INTEGER'         => undef,
+				 'LangIsoCode/STRING'         => 'spa',
 				 'RegionId/STRING'            => undef,
 				 'SyncRecord/DATETIME'        => 'DATETIME',
                  'GeoLevelLayerFile/STRING'   => undef,
