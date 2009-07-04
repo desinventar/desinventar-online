@@ -7,7 +7,7 @@
 class Query extends PDO
 {
 	public $sRegionId = "";
-	public $dreg = null;
+	//public $dreg = null;
 
 	public function __construct() {
 		if (!extension_loaded('pdo')) {
@@ -1148,7 +1148,14 @@ class Query extends PDO
   function rebuildCore($fcore) {
     return true;
   }
+  
+	function dreg_query($query) {
+		return $this->dreg->query($query);
+	}
 
+	function base_query($query) {
+		return $this->base->query($query);
+	}
 } // end class
 
 </script>
