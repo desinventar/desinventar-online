@@ -23,7 +23,7 @@ class DIEvent extends DIObject {
 		$this->set("EventPredefined", 0);
 		$this->set("EventActive", 1);
 		$this->set("LangIsoCode", $this->q->getDBInfoValue('I18NFirstLang'));
-
+		$this->set("EventId", uuid());
 		$num_args = func_num_args();
 		if ($num_args >= 2) {
 			$prmEventId = func_get_arg(1);
