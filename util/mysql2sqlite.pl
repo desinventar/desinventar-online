@@ -51,8 +51,11 @@ $dbin->{mysql_enable_utf8} = 1;
 my $dbout = DBI->connect("DBI:SQLite:dbname=" . $sDBFile,"","");
 $dbout->{unicode} = 1;
 if ($bCore) {
+	&cleanTable('Region');
 	&convertTable($dbin, "Region", "Region");
+	&cleanTable('RegionAuth');
 	&convertTable($dbin, "RegionAuth", "RegionAuth");
+	&cleanTable('User');
 	&convertTable($dbin, "Users", "User");
 } else {
 	@RegionTables = ('Event',

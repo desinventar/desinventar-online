@@ -113,7 +113,7 @@ if (isset($_GET['u'])) {
 		}
 		
 		if ($_GET['cmd'] == "chklocked") {
-			// check if datacard isblocked!
+			// check if datacard is locked by some user
 			$ra_ser = array($_SESSION['sessionid'], $_GET['DisasterId']);
 			$dcl = callRpcDICore('RpcRegionOperations.isDatacardLocked', $ra_ser);
 			if ($dcl == 0) {

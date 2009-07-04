@@ -1,5 +1,5 @@
 /* CORE.DB - DesInventar8.2
-2009-05-05
+2009-07-04
 */
 
 DROP TABLE IF EXISTS Region;
@@ -86,10 +86,13 @@ CREATE TABLE 'UserLockList' (
 SessionId VARCHAR(50), 
 TableId VARCHAR(50), 
 RecordId VARCHAR(50), 
-PRIMARY KEY('SessionId')
+LastUpdate DATETIME, 
+PRIMARY KEY('SessionId','TableId','RecordId')
 );
 
+/* Set initial values */
 INSERT INTO User VALUES ('root', 'root@localhost', 'di8welcome', 'Portal Administrator', '', '', '', '2008-01-01', '', 1);
 INSERT INTO RegionAuth VALUES ('root', '', 'REGION', 5, '');
 INSERT INTO RegionAuth VALUES ('root', '', 'USER', 5, '');
 INSERT INTO RegionAuth VALUES ('root', '', 'ROLE', 0, 'ADMINPORTAL');
+

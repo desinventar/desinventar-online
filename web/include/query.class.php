@@ -946,7 +946,6 @@ class Query extends PDO
 				} else {
 					$js[$ky] .= "'$k': '$v', ";
 				}
-				fb($js[$ky]);
 			} //foreach
 			$js[$ky] .= "'_REG': '". $this->sRegionId ."'}";
 		}
