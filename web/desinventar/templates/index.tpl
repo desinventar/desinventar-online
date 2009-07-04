@@ -444,7 +444,8 @@
 					width: 300,
 					collapsible: true,
 					margins: '0 0 0 5',
-					collapseMode: 'mini'
+					collapseMode: 'mini',
+					autoScroll: true
 				})
 				]
 			});
