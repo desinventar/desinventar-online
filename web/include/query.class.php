@@ -351,7 +351,9 @@ class Query extends PDO
   }
 	
 	function loadGeoCarto($lev) {
-		$sql = "SELECT T.GeographyId AS GeoId, ";
+		$sql = "SELECT * FROM GeoCarto";
+		//$res = $this->dreg->query($sql);
+		print_r($this->getassoc($sql));
 	}
 
   function getMaxGeoLev() {
@@ -853,9 +855,9 @@ class Query extends PDO
 
   /* Reformat array setting to arr[X1] = array {a, b, c, d..} */
   function prepareList ($dl, $mode) {
-    $res = array();
-    $j = 0;
-    foreach ($dl as $it) {
+	$res = array();
+	$j = 0;
+	foreach ($dl as $it) {
       foreach ($it as $k=>$i) {
         if ($j == 0)
           $res[$k] = array();
@@ -870,11 +872,12 @@ class Query extends PDO
       }
       $j++;
     }
-		if ($mode == "MAPS") {
-			list($glv, $eff) = array_keys($res);
-			// Sorting list in maps to order legend - ORDER BY not found with GROUP BY in sqlite3
-			array_multisort($res[$eff], $res[$glv]);
-		}
+	if ($mode == "MAPS") {
+		list($glv, $eff) = array_keys($res);
+		// Sorting list in maps to order legend - ORDER BY not found with GROUP BY in sqlite3
+		array_multisort($res[$eff], $res[$glv]);
+	}
+	//echo "<pre>"; print_r($res);
     return $res;
   }
 	

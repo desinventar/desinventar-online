@@ -91,7 +91,7 @@ else {
   if (file_exists(VAR_DIR . "/". $reg . "/region.map"))
 	$t->assign ("ctl_showmap", true);
   else
-    $t->assign ("ctl_showmap", false);
+    $t->assign ("ctl_showmap", true);
   // get range of dates
   $ydb = $q->getDateRange();
   $t->assign ("yini", substr($ydb[0], 0, 4));

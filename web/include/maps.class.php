@@ -12,31 +12,40 @@ class Maps
 	private $reg = "";
 	
 	/* This class generate mapfile's mapserver
-	   q		: Region Object
+	   q	: Region Object
 	   reg	: RegionUUID
 	   lev	: Level to generate effects
-	   dl		: disasters list
+	   dl	: disasters list
 	   range: limits, legends and color
 	   info	: about map (WMS Metadata)
 	   lbl	: Label to print name, code or value..
 	   type	: filename, THEMATIC, SELECT, KML
   */
 	function Maps($q, $reg, $lev, $dl, $range, $info, $lbl, $type) {
-	  $this->url = "http://". $_SERVER['HTTP_HOST'] ."/cgi-bin/". MAPSERV ."?";
-	  $this->reg = $reg;
-	  $fp = "";
-	  if ($type == "KML")
+		$this->url = "http://". $_SERVER['HTTP_HOST'] ."/cgi-bin/". MAPSERV ."?";
+		$this->reg = $reg;
+		$fp = "";
+		if ($type == "KML")
 			$this->kml = $this->generateKML($q, $reg, $info);
-	  else {
+		else {
 			$map = "## DesInventar8.2 autogenerate mapfile\n";
 			$map .= $this->setHeader($q, $reg, $info, $type);
-			$map .= $this->setLayerAdm($q, $reg, $type);
+			$creg = $q->getRegionFieldByID($reg, 'IsCRegion');
+			if ($creg[$reg]) {
+			//foreach () {
+			//foreach in VRegion with all items..				
+			}
+			else {
+				$gl = $q->loadGeoLevels("");
+				$map .= $this->setLayerAdm($gl, $reg, $type);
+			}
 			// mapfile and html template to interactive selection
 			if ($type == "SELECT")
 				$fp = DATADIR ."/". $reg . "/region.map";
 			else {
 				// generate effects maps: type=filename | thematic=sessid
 				$fp = TMPM_DIR ."/di8ms_";
+				//foreach in VRegion with results items
 				$map .= $this->setLayerEff($q, $reg, $lev, $dl, $range, $info, $lbl);
 				if ($type == "THEMATIC")
 					$fp .= "$reg-". session_id() .".map";
@@ -47,7 +56,7 @@ class Maps
 			}
 			$map .= $this->setFooter();
 			$this->makefile($fp, $map);
-	  }
+		}
 	}
 	
 	function makefile($fp, $map) {
@@ -93,11 +102,11 @@ class Maps
 			METADATA
 			  WMS_TITLE	"DesInventar Map of -'. $inf['TITLE'] .'-"
 			  WMS_ABSTRACT	"Level: '. $inf['LEVEL'] .'"
-        WMS_EXTENT	"'. $inf['EXTENT'] .'"
-        WMS_TIMEEXTENT	"'. $inf['BEG'] ."/". $inf['END'] .'/P5M"
-        WMS_ONLINERESOURCE	"'. $this->url .'map="
-        WMS_SRS	"EPSG:4326"
-		  END
+			  WMS_EXTENT	"'. $inf['EXTENT'] .'"
+			  WMS_TIMEEXTENT	"'. $inf['BEG'] ."/". $inf['END'] .'/P5M"
+			  WMS_ONLINERESOURCE	"'. $this->url .'map="
+			  WMS_SRS	"EPSG:4326"
+			END
 		END
 		QUERYMAP
 		  STYLE	HILITE
@@ -131,8 +140,7 @@ class Maps
 	}
 
 	// Generate all Admin layers 
-	function setLayerAdm($q, $reg, $typ) {
-		$gl = $q->loadGeoLevels("");
+	function setLayerAdm($gl, $reg, $typ) {
 		$map = "";
 		$type = "POLYGON";
 		$color = "255 255 255";
@@ -194,7 +202,7 @@ class Maps
 		*/
 	}
 	
-	// Generate standar layer with query results
+	// Generate standard layer with query results
 	function setLayerEff($q, $reg, $lev, $dl, $range, $inf, $lbl) {
 		$gl = $q->loadGeoLevels("");
 		$data = $gl[$lev][2];
