@@ -435,7 +435,8 @@
 					margins:'0 0 0 0'
 				},{ 
 					region: 'center',
-					contentEl: 'container'
+					contentEl: 'container',
+					autoScroll: true
 				}, new Ext.Panel({
 					region: 'west',
 					id: 'westm',
