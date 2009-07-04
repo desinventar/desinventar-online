@@ -350,10 +350,19 @@ class Query extends PDO
     return $data;
   }
 	
-	function loadGeoCarto($lev) {
-		$sql = "SELECT * FROM GeoCarto";
+	function loadGeoCarto($geo, $lev) {
+		$sql = "SELECT * FROM GeoCarto WHERE ";
+		if (!empty($geo))
+			$sql .= "GeographyId = '$geo'";
+		else
+			$sql .= "1=1";
+		$sql .= " AND ";
+		if ($lev >= 0)
+			$sql .= "GeoLevelId = $lev";
+		else
+			$sql .= "1=1";
 		//$res = $this->dreg->query($sql);
-		print_r($this->getassoc($sql));
+		return $this->getassoc($sql);
 	}
 
   function getMaxGeoLev() {

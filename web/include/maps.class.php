@@ -32,9 +32,22 @@ class Maps
 			$map .= $this->setHeader($q, $reg, $info, $type);
 			$creg = $q->getRegionFieldByID($reg, 'IsCRegion');
 			if ($creg[$reg]) {
-				echo "<pre>"; print_r($dl);
-			//foreach () {
-			//foreach in VRegion with all items..				
+				$gc = $q->loadGeoCarto('', 0); //replace with loadCVitems
+				//repeat in all items of VRegion
+				foreach ($gc as $ele) {
+					$gi = $q->loadGeoCarto($ele['GeographyId'], -1);
+					$gl = array();
+					foreach ($gi as $k=>$i) {
+						if ($i['GeoLevelId'] > 0) {
+							$gl[$k][0] = "Level ". $i['GeoLevelId'];
+							$gl[$k][1] = '';
+							$gl[$k][2] = $i['GeoLevelLayerFile'];
+							$gl[$k][3] = $i['GeoLevelLayerName'];
+							$gl[$k][4] = $i['GeoLevelLayerCode'];
+						}
+					}
+					$map .= $this->setLayerAdm($gl, $reg, $type);
+				}
 			}
 			else {
 				$gl = $q->loadGeoLevels("");
@@ -46,8 +59,15 @@ class Maps
 			else {
 				// generate effects maps: type=filename | thematic=sessid
 				$fp = TMPM_DIR ."/di8ms_";
-				//foreach in VRegion with results items
-				$map .= $this->setLayerEff($q, $reg, $lev, $dl, $range, $info, $lbl);
+				if ($creg[$reg]) {
+					echo "<pre>"; print_r($dl);
+					//repeat in all items of VRegion
+					// change to unique array
+					foreach ($dl['CVReg'] as $ele)
+						$q->loadGeoCarto($ele, -1);
+				}
+				else
+					$map .= $this->setLayerEff($q, $reg, $lev, $dl, $range, $info, $lbl);
 				if ($type == "THEMATIC")
 					$fp .= "$reg-". session_id() .".map";
 				elseif (strlen($type) > 0)
