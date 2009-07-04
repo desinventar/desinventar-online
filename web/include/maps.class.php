@@ -32,6 +32,7 @@ class Maps
 			$map .= $this->setHeader($q, $reg, $info, $type);
 			$creg = $q->getRegionFieldByID($reg, 'IsCRegion');
 			if ($creg[$reg]) {
+				echo "<pre>"; print_r($dl);
 			//foreach () {
 			//foreach in VRegion with all items..				
 			}

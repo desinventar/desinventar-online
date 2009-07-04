@@ -857,6 +857,7 @@ class Query extends PDO
   function prepareList ($dl, $mode) {
 	$res = array();
 	$j = 0;
+	$creg = $this->getRegionFieldByID($this->sRegionId, 'IsCRegion');		
 	foreach ($dl as $it) {
       foreach ($it as $k=>$i) {
         if ($j == 0)
@@ -865,19 +866,26 @@ class Query extends PDO
         if (substr($k,0,19) == "DisasterGeographyId") {
           if ($mode == "GRAPH")
             $val = $this->getGeoNameById($i);
-          elseif ($mode == "MAPS")
+          elseif ($mode == "MAPS") {
             $val = $this->getObjectNameById($i, DI_GEOGRAPHY);
+			// in VirtualRegion set base prefix - 
+			if ($creg[$this->sRegionId]) {
+				if ($j == 0)
+					$res['CVReg'] = array();
+				array_push($res['CVReg'], substr($i, 0, 5));
+			}
+		  }
         }
         array_push($res[$k], $val);
       }
       $j++;
     }
+	//array_push($res["CReg"], $pre);
 	if ($mode == "MAPS") {
 		list($glv, $eff) = array_keys($res);
 		// Sorting list in maps to order legend - ORDER BY not found with GROUP BY in sqlite3
 		array_multisort($res[$eff], $res[$glv]);
 	}
-	//echo "<pre>"; print_r($res);
     return $res;
   }
 	
