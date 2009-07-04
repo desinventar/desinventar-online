@@ -137,10 +137,10 @@ class UserSession {
 
 	// Associate a RegionId with the session
 	public function open($prmRegionId) {
+		$this->clearLocks();
 		$iReturn = 0;
-		$sQuery = 
-		  "UPDATE UserSession SET RegionId='" . $prmRegionId . "' " . 
-		  "WHERE SessionId='" . $this->sSessionId . "'";
+		$sQuery = "UPDATE UserSession SET RegionId='" . $prmRegionId . "' " . 
+		          "WHERE SessionId='" . $this->sSessionId . "'";
 		$q = new Query();
 		if ($result = $q->core->query($sQuery)) {
 			$this->sRegionId = $prmRegionId;
@@ -364,5 +364,34 @@ class UserSession {
 	
 	public function updateUser($UserName, $UserFullName, $UserEMail, $UserPasswd, $UserCountry, $UserCity, $UserActive) {
 		return true;
+	}
+	
+	public function isDatacardLocked($prmDisasterId) {
+		$sReturn = '';
+		$sQuery = "SELECT S.UserName FROM UserLockList U,UserSession S WHERE U.SessionId=S.SessionId AND U.RecordId='" . $prmDisasterId . "'";
+		$q = new Query();
+		foreach ($q->core->query($sQuery) as $row) {
+			$sReturn = $row['UserName'];
+		}
+		return $sReturn;
+	}
+	
+	public function lockDatacard($prmDisasterId) {
+		$now = date('c');
+		$sQuery = "INSERT INTO UserLockList VALUES ('" . $this->sSessionId . "','DISASTER','" . $prmDisasterId . "','" . $now . "')";
+		$q = new Query();
+		$q->core->query($sQuery);
+	}
+	
+	public function releaseDatacard($prmDisasterId) {
+		$sQuery = "DELETE FROM UserLockList WHERE SessionId='" . $this->sSessionId . "' AND RecordId='" . $prmDisasterId . "'";
+		$q = new Query();
+		$q->core->query($sQuery);
+	}
+
+	public function clearLocks() {
+		$sQuery = "DELETE FROM UserLockList WHERE SessionId='" . $this->sSessionId . "'";
+		$q = new Query();
+		$q->core->query($sQuery);
 	}
 } //class

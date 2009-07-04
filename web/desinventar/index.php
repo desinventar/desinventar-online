@@ -114,12 +114,10 @@ if (isset($_GET['u'])) {
 		
 		if ($_GET['cmd'] == "chklocked") {
 			// check if datacard is locked by some user
-			$ra_ser = array($_SESSION['sessionid'], $_GET['DisasterId']);
-			$dcl = callRpcDICore('RpcRegionOperations.isDatacardLocked', $ra_ser);
-			if ($dcl == 0) {
+			$r = $us->isDatacardLocked($_GET['DisasterId']);
+			if ($r == '') {
 				// reserve datacard
-				$ra_ser = array($_SESSION['sessionid'], $_GET['DisasterId']);
-				$dca = callRpcDICore('RpcRegionOperations.acquireDatacardLock', $ra_ser);
+				$us->lockDatacard($_GET['DisasterId']);
 				echo "RESERVED";
 			} else {
 				echo "BLOCKED";
@@ -127,8 +125,7 @@ if (isset($_GET['u'])) {
 		}
 		
 		if ($_GET['cmd'] == "chkrelease") {
-			$ra_ser = array($_SESSION['sessionid'], $_GET['DisasterId']);
-			$dcr = callRpcDICore('RpcRegionOperations.releaseDatacardLock', $ra_ser);
+			$us->releaseDatacard($_GET['DisasterId']);
 		}
 	} else {
 		// Check values of _CMD: search | addDICard | updDICard
