@@ -11,15 +11,19 @@ class UserSession {
 	var $sUserName       = '';
 	var $dStart          = '';
 	var $dLastUpdate     = '';
-	
 	public function __construct() {
 		$this->sSessionId = session_id();
 		$this->dStart = gmdate('c');
 		$this->dLastUpdate = $this->dStart;
+		$this->q = new Query();
 		$num_args = func_num_args();
 		if ($num_args > 0) {
-			if (func_get_arg(0) != "") {  $this->sSessionId = func_get_arg(0); }
-			if ($num_args > 1) { $this->sRegionId = func_get_arg(1); }
+			if (func_get_arg(0) != "") {  
+				$this->sSessionId = func_get_arg(0);
+			}
+			if ($num_args > 1) { 
+				$this->sRegionId = func_get_arg(1);
+			}
 		}
 		$this->load($this->sSessionId);
 	} //constructor
@@ -28,9 +32,8 @@ class UserSession {
 	public function load($prmSessionId) {
 		$iReturn = 0;
 		$sQuery = "SELECT * FROM UserSession WHERE SessionId='" . $prmSessionId . "'";
-		$q = new Query();
 		try {
-			if ($result = $q->core->query($sQuery, PDO::FETCH_OBJ)) {
+			if ($result = $this->q->core->query($sQuery, PDO::FETCH_OBJ)) {
 				while ($row = $result->fetch()) {
 					$this->sSessionId  = $row->SessionId;
 					$this->sRegionId   = $row->RegionId;
@@ -40,7 +43,7 @@ class UserSession {
 					$iReturn = 1;
 				}
 			}
-		} catch (PDOException $e) {
+		} catch (Exception $e) {
 			$e->getMessage() . "<br>\n";
 		}
 		// If session doesn't exist in database, insert record
@@ -75,8 +78,7 @@ class UserSession {
 		$sQuery = 
 		  "UPDATE UserSession SET UserName='" . $prmUserName . "' " .
 		  "WHERE SessionId='" . $this->sSessionId . "'";
-		$q = new Query();
-		if ($result = $q->core->query($sQuery)) {
+		if ($result = $this->q->core->query($sQuery)) {
 			$iReturn = 1;
 			$this->sUserName = $prmUserName;
 		}
@@ -95,8 +97,7 @@ class UserSession {
 				  "'" . $this->dStart     . "'," .
 				  "'" . $this->dLastUpdate . "'" .
 				  ")";
-		$q = new Query();
-		if ($result = $q->core->query($sQuery)) {
+		if ($result = $this->q->core->query($sQuery)) {
 			$iReturn = 1;
 		}
 		return $iReturn;
@@ -114,8 +115,9 @@ class UserSession {
 				  "Start='"      . $this->dStart     . "'," .
 				  "LastUpdate='" . $this->dLastUpdate . "'" .
 				  "WHERE SessionId ='" . $this->sSessionId . "'";
-		$q = new Query();
-		if ($result = $q->core->query($sQuery)) {
+		if ($result = $this->q->core->query($sQuery)) {
+			$sQuery = "UPDATE UserLockList SET LastUpdate='" . $this->dLastUpdate . "' WHERE SessionId='" . $this->sSessionId . "'";
+			$this->q->core->query($sQuery);
 			$iReturn = 1;
 		}
 		return $iReturn;
@@ -126,8 +128,7 @@ class UserSession {
 	public function delete() {
 		$iReturn = 0;
 		$sQuery = "DELETE FROM UserSession WHERE SessionId='" . $this->sSessionId . "'";
-		$q = new Query();
-		if ($result = $q->core->query($sQuery)) {
+		if ($result = $this->q->core->query($sQuery)) {
 			$this->sUserName = "";
 			$this->sRegionId = "";
 			$iReturn = 1;
@@ -141,11 +142,10 @@ class UserSession {
 		$iReturn = 0;
 		$sQuery = "UPDATE UserSession SET RegionId='" . $prmRegionId . "' " . 
 		          "WHERE SessionId='" . $this->sSessionId . "'";
-		$q = new Query();
-		if ($result = $q->core->query($sQuery)) {
+		if ($result = $this->q->core->query($sQuery)) {
 			$this->sRegionId = $prmRegionId;
 			$sQuery = "SELECT * FROM Region WHERE RegionId='" . $this->sRegionId . "'";
-			if ($result = $q->core->query($sQuery)) {
+			if ($result = $this->q->core->query($sQuery)) {
 				while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 					$sRegionLangCode = $row->LangIsoCode;
 				}
@@ -167,16 +167,15 @@ class UserSession {
 			// This is an anonymous session
 			$iReturn = 1;
 		} else {
-			$q = new Query();
 			$sQuery = "SELECT * FROM User WHERE UserName='" . $prmUserName . "'";
 			try {
-				$result = $q->core->query($sQuery);
+				$result = $this->q->core->query($sQuery);
 				while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 					if ($row->UserPasswd == $prmUserPasswd) {
 						$iReturn = 1;
 					}
 				} // while
-			} catch (PDOException $e) {
+			} catch (Exception $e) {
 				print $e->getMessage();
 			} // catch
 		}
@@ -185,8 +184,7 @@ class UserSession {
 	
 	public function getUserFullName() {
 		$sUserFullName = "";
-		$q = new Query();
-		if ($result = $q->core->query("SELECT * FROM User WHERE UserName='" . $this->sUserName . "'") ) {
+		if ($result = $this->q->core->query("SELECT * FROM User WHERE UserName='" . $this->sUserName . "'") ) {
 			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 				$sUserFullName = $row->UserFullName;
 			} // while
@@ -210,8 +208,7 @@ class UserSession {
 			$sQuery .= " AND " . "((RegionId='" . $prmRegionId . "') OR (RegionId='')) ";
 		}
 		$sQuery = $sQuery + " ORDER BY AuthKey,AuthValue";
-		$q = new Query();
-		if ($result = $q->core->query($sQuery) ) {
+		if ($result = $this->q->core->query($sQuery) ) {
 			$i = 0;
 			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 			 $sAuthKey = $row->AuthKey;
@@ -230,8 +227,7 @@ class UserSession {
 		  " AND (UserName='" . $this->sUserName . "') " .
 		  " AND AuthKey='ROLE'" . 
 		  " ORDER BY RegionAuth.RegionId";
-		$q = new Query();
-		if ($result = $q->core->query($sQuery) ) {
+		if ($result = $this->q->core->query($sQuery) ) {
 			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 			 $sKey = $row->RegionId;
 			 $sValue = $row->AuthAuxValue;
@@ -248,8 +244,7 @@ class UserSession {
 		$sQuery = "SELECT * FROM User " .
 		  " WHERE UserName='" . $this->sUserName . "'" .
 		  " ORDER BY UserFullName";
-		$q = new Query();
-		if ($result = $q->core->query($sQuery) ) {
+		if ($result = $this->q->core->query($sQuery) ) {
 			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 				$myData[0] = $row->UserEMail;
 				$myData[1] = $row->UserPasswd;
@@ -270,8 +265,7 @@ class UserSession {
 		$myAnswer = '';
 		$sQuery = "SELECT * FROM User " .
 		  " WHERE (UserEMail='" . $prmEMail . "') ";
-		$q = new Query();
-		if ($result = $q->core->query($sQuery) ) {
+		if ($result = $this->q->core->query($sQuery) ) {
 			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 				$myAnswer = $row->UserEMail;
 				// uhmm, must revise if send mail-> offline systems ??
@@ -297,8 +291,7 @@ class UserSession {
 		  " AND (UserName='" . $this->sUserName . "') " .
 		  " AND AuthKey='ROLE'" . 
 		  " ORDER BY UserName,RegionId";
-		$q = new Query();
-		if ($result = $q->core->query($sQuery) ) {
+		if ($result = $this->q->core->query($sQuery) ) {
 			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 				$myAnswer = $row->AuthAuxValue;
 			} // while
@@ -312,8 +305,7 @@ class UserSession {
 		              "   AND (UserName='" . $prmUserName . "'" .
 		              "   AND (Authkey='ROLE') ";
 		$sQuery = "SELECT * FROM RegionAuth " . $sWhereQuery;
-		$q = new Query();
-		if ($result = $q->core->query($sQuery) ) {
+		if ($result = $this->q->core->query($sQuery) ) {
 			if ($result->num_rows == 0) {
 				$sQuery = "INSERT INTO RegionAuth VALUES (" .
 					"'" . $prmUserName . "', " .
@@ -325,7 +317,7 @@ class UserSession {
 			} else {
 				$sQuery = "UPDATE RegionAuth SET " .
 				  " AuthAuxValue = '" . $prmRole . "' " .  $sWhereQuery;
-				if ($result = $q->core->query($sQuery) ) {
+				if ($result = $this->q->core->query($sQuery) ) {
 					$myAnswer = $prmRole;
 				}
 			} // else
@@ -343,8 +335,7 @@ class UserSession {
 		$sQuery = "SELECT RegionId, RegionLabel FROM Region " .
 		  " WHERE $opt ORDER BY RegionLabel";
 		$myData = array();
-		$q = new Query();
-		if ($result = $q->core->query($sQuery) ) {
+		if ($result = $this->q->core->query($sQuery) ) {
 			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 			 $sKey = $row->RegionId;
 			 $sValue = $row->RegionLabel;
@@ -366,32 +357,38 @@ class UserSession {
 		return true;
 	}
 	
+	public function clearOldLocks() {
+		$deltime = date('c', time() - 300);
+		$sQuery = "DELETE FROM UserLockList WHERE SessionId='" . $this->sSessionId . "' AND LastUpdate<='" . $deltime . "'";
+		$this->q->core->query($sQuery);
+	}
+	
 	public function isDatacardLocked($prmDisasterId) {
+		// First delete old datacard locks...
+		$this->clearOldLocks();
 		$sReturn = '';
 		$sQuery = "SELECT S.UserName FROM UserLockList U,UserSession S WHERE U.SessionId=S.SessionId AND U.RecordId='" . $prmDisasterId . "'";
-		$q = new Query();
-		foreach ($q->core->query($sQuery) as $row) {
+		foreach ($this->q->core->query($sQuery) as $row) {
 			$sReturn = $row['UserName'];
 		}
 		return $sReturn;
 	}
 	
 	public function lockDatacard($prmDisasterId) {
+		// First delete old datacard locks...
+		$this->clearOldLocks();
 		$now = date('c');
 		$sQuery = "INSERT INTO UserLockList VALUES ('" . $this->sSessionId . "','DISASTER','" . $prmDisasterId . "','" . $now . "')";
-		$q = new Query();
-		$q->core->query($sQuery);
+		$this->q->core->query($sQuery);
 	}
 	
 	public function releaseDatacard($prmDisasterId) {
 		$sQuery = "DELETE FROM UserLockList WHERE SessionId='" . $this->sSessionId . "' AND RecordId='" . $prmDisasterId . "'";
-		$q = new Query();
-		$q->core->query($sQuery);
+		$this->q->core->query($sQuery);
 	}
 
 	public function clearLocks() {
 		$sQuery = "DELETE FROM UserLockList WHERE SessionId='" . $this->sSessionId . "'";
-		$q = new Query();
-		$q->core->query($sQuery);
+		$this->q->core->query($sQuery);
 	}
 } //class

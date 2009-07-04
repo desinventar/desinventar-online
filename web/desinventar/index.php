@@ -132,8 +132,7 @@ if (isset($_GET['u'])) {
 		if (isset($_POST['_CMD'])) {
 			// Insert DICard in Database through DICORE
 			// First release datacard
-			$ra_ser = array($_SESSION['sessionid'], $_POST['DisasterId']);
-			$dcr = callRpcDICore('RpcRegionOperations.releaseDatacardLock', $ra_ser);
+			$us->releaseDatacard($_POST['DisasterId']);
 			// Let duplicate serial...
 			//if ($q->isvalidObjectName($_POST['DisasterId'], $_POST['DisasterSerial'], DI_DISASTER)) {
 			if ($_POST['_CMD'] == "insertDICard") {
