@@ -121,7 +121,8 @@
             region: 'center',
             id: 'centerm',
 //            title: '{-#tsubtitle2#-}',
-            contentEl: 'container'
+            contentEl: 'container',
+			autoScroll: true
           }),{
             region: 'west',
             id: 'westm',

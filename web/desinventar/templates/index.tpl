@@ -54,6 +54,8 @@
 			uploadMsg('');
 			if (v[0] == -1) {
 				setLevGeo('','','',1,'','','','geo');
+				if (l == 0)
+					$('aGeoParentId').value = '';
 				$('geocmd').value='insert';
 				$('alev' + l).style.display = "none";
 			}
@@ -473,7 +475,7 @@
 		<div id="toolbar"></div>
 	</div>
 <!-- BEG DI8 FORM CARD -->
-	<div id="container">
+	<div id="container" style="overflow:scroll;">
 		<table width="900px">
 			<tr>
 				<td width="300px">
