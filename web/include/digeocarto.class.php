@@ -4,16 +4,17 @@
  (c) 1999-2009 Corporacion OSSO
 */
 
-class DIGeoLevel extends DIObject {
+class DIGeoCarto extends DIObject {
 	public function __construct($prmSession) {
-		$this->sTableName   = "GeoLevel";
+		$this->sTableName   = "GeoCarto";
 		$this->sPermPrefix  = "GEOLEVEL";
 		$this->sFieldKeyDef = "GeoLevelId/INTEGER," .
-		                      "LangIsoCode/STRING";
+		                      "GeographyId/STRING";
 		$this->sFieldDef    = "SyncRecord/DATETIME," .
-		                      "GeoLevelName/STRING," .
-		                      "GeoLevelDesc/STRING," .  
-		                      "GeoLevelActive/INTEGER";
+		                      "RegionId/STRING," .
+		                      "GeoLevelLayerFile/STRING," .
+		                      "GeoLevelLayerName/STRING," .
+		                      "GeoLevelLayerCode/STRING";
 		parent::__construct($prmSession);
 		$this->set("GeoLevelActive", 1);
 		$this->set("LangIsoCode", $this->q->getDBInfoValue('I18NFirstLang'));
