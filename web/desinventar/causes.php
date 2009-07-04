@@ -60,7 +60,7 @@ if (isset($_GET['cmd'])) {
 	case "insert":
 		$o = new DICause($us);
 		$o->setFromArray($_GET);
-		$o->set('CauseId', $o->get('CauseName'));
+		$o->set('CauseId', $uuid());
 		$o->set('CausePredefined', 0);
 		$i = $o->insert();
 		showResult($i, $t);
@@ -70,10 +70,7 @@ if (isset($_GET['cmd'])) {
 		$o->set('CauseId', $_GET['CauseId']);
 		$o->load();
 		$o->setFromArray($_GET);
-		$i = 0;
-		if ($o->get("CausePredefined") == 0) {
-			$i = $o->update();
-		}
+		$i = $o->update();
 		showResult($i, $t);
 		break;
 	case "list":

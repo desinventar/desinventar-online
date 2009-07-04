@@ -36,7 +36,7 @@ if (isset($_GET['cmd'])) {
 	case "insert":
 		$o = new DIEvent($us);
 		$o->setFromArray($_GET);
-		$o->set('EventId', $o->get('EventName'));
+		$o->set('EventId', uuid());
 		$o->set('EventPredefined', 0);
 		$i = $o->insert();
 		showResult($i, $t);
@@ -46,10 +46,7 @@ if (isset($_GET['cmd'])) {
 		$o->set('EventId', $_GET['EventId']);
 		$o->load();
 		$o->setFromArray($_GET);
-		$i = 0;
-		if ($o->get("EventPredefined") == 0) {
-			$i = $o->update();
-		}
+		$i = $o->update();
 		showResult($i, $t);
 		break;
 	case "list":
