@@ -56,7 +56,7 @@ class DIEvent extends DIObject {
 				  " WHERE EventLangCode='" . $this->oSession->sRegionLangCode . "'" .
 				  "   AND (EventLocalName='" . $this->get('EventName') . "'" .
 				  "        OR EventDI6Name='" . $this->get('EventName') . "')";
-				if ($result = $this->q->base_query($sQuery)) {
+				if ($result = $this->q->base->query($sQuery)) {
 					while ($row = $result->fetch_object()) {
 						$this->set('EventId', $row->EventId);
 						$this->set('EventName', $row->EventName);

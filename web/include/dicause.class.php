@@ -26,10 +26,13 @@ class DICause extends DIObject {
 
 		$num_args = func_num_args();
 		if ($num_args >= 2) {
-			$this->set('CauseId', func_get_arg(1));
+			$prmCauseId = func_get_arg(1);
+			$this->set('CauseId', $prmCauseId);
 			if ($num_args >= 3) {
-				$this->set('CauseName', func_get_arg(1));
-				$this->set('CauseDesc', func_get_arg(2));
+				$prmCauseName = func_get_arg(1);
+				$prmCauseDesc = func_get_arg(2);				
+				$this->set('CauseName', $prmCauseName);
+				$this->set('CauseDesc', $prmCauseDesc);
 				$this->setIdByName($this->get('CauseName'));
 			}
 		}
@@ -39,8 +42,7 @@ class DICause extends DIObject {
 		$iReturn = 0;
 		$sQuery = "SELECT * FROM " . $this->getTableName() .
 		  " WHERE CauseName='" . $prmCauseName . "'";
-		$q = new Query();
-		if ($result = $q->query($sQuery)) {
+		if ($result = $this->q->dreg->query($sQuery)) {
 			if ($result->num_rows>0) {
 				// Local Cause Found
 				while ($row = $result->fetch_object()) {
@@ -50,11 +52,11 @@ class DICause extends DIObject {
 				} // while
 			} else {
 				// Search PreDefined Cause
-				$sQuery = "SELECT * FROM DICause " . 
+				$sQuery = "SELECT * FROM DI_Cause " . 
 				  " WHERE CauseLangCode='" . $this->oSession->sRegionLangCode . "'" .
 				  "   AND (CauseLocalName='" . $this->get('CauseName') . "'" .
 				  "        OR CauseDI6Name='" . $this->get('CauseName') . "')";
-				if ($result = $q->query($sQuery)) {
+				if ($result = $this->q->base->query($sQuery)) {
 					while ($row = $result->fetch_object()) {
 						$this->set('CauseId', $row->CauseId);
 						$this->set('CauseName', $row->CauseName);
