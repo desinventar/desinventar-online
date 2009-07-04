@@ -75,4 +75,12 @@ class DIEvent extends DIObject {
 		  " WHERE " . $this->getWhereSubQuery();
 		return $sQuery;
 	}
+
+	public function validateUpdate() {
+		$iReturn = 1;
+		if (! $this->q->isvalidObjectName($this->get('EventId'), $this->get('EventName'), DI_EVENT)) {
+			$iReturn = -11; // Invalid/Duplicated Event Name
+		}
+		return $iReturn;
+	}
 }

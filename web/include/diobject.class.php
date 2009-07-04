@@ -237,22 +237,27 @@ class DIObject {
 	} // function
 
 	public function update() {
-		$iReturn = 0;		
+		$iReturn = 0;
 		if (!empty($this->SyncRecord)) {
 			$this->SyncRecord = gmdate('c');
 		}
-		$sQuery = $this->getUpdateQuery();
-		try {
-			if ($result = $this->q->dreg->query($sQuery)) {
-				$iReturn = 1;		
+		$iReturn = $this->validateUpdate();
+		if ($iReturn > 0) {
+			$sQuery = $this->getUpdateQuery();
+			try {
+				if ($result = $this->q->dreg->query($sQuery)) {
+					$iReturn = 1;
+				}
+			} catch (PDOException $e) {
+				print "Error " . $e->getMessage() . "<br>";
 			}
-		} catch (PDOException $e) {
-			print "Error " . $e->getMessage() . "<br>";
 		}
 		return $iReturn;
 	} // function
 	
-	
-}
+	public function validateUpdate() {
+		return 1;
+	}
+} // class
 
 </script>
