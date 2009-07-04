@@ -103,6 +103,17 @@ $lg          = "spa";
 $dicore_host = "127.0.0.1"; //"66.150.227.232";
 $dicore_port = 8081;
 
+// 2009-07-04 (jhcaiced) Added FirePHP debug system
+// This lines try to detect if FirePHP Core is installed,
+// if not, create a dummy class/function to avoid errors.
+if (file_exists('/usr/share/pear/FirePHPCore/fb.php')) {
+	require_once('FirePHPCore/fb.php');
+} else {
+	function fb() {
+		// dummy fb() function, doesn't do anything...
+	}
+}
+
 require_once(BASE . "/include/usersession.class.php");
 require_once(BASE . "/include/query.class.php");
 require_once(BASE . "/include/diobject.class.php");
