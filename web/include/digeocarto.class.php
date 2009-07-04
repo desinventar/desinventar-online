@@ -9,7 +9,8 @@ class DIGeoCarto extends DIObject {
 		$this->sTableName   = "GeoCarto";
 		$this->sPermPrefix  = "GEOLEVEL";
 		$this->sFieldKeyDef = "GeoLevelId/INTEGER," .
-		                      "GeographyId/STRING";
+		                      "GeographyId/STRING," .
+		                      "LangIsoCode/STRING";
 		$this->sFieldDef    = "SyncRecord/DATETIME," .
 		                      "RegionId/STRING," .
 		                      "GeoLevelLayerFile/STRING," .
