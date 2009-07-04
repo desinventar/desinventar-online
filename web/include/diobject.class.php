@@ -65,6 +65,10 @@ class DIObject {
 				if ($sValue . "" == "on")  { $sValue = 1; }
 				if ($sValue . "" == "off") { $sValue = 0; }
 			}
+			if (($sFieldType == 'INTEGER') ||
+			    ($sFieldType == 'DOUBLE') ) {
+				if ($sValue == "") { $sValue = 0; }
+			}
 			$this->oField[$prmKey] = $sValue;
 			$iReturn = 1;
 		}
