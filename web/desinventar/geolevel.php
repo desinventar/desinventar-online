@@ -9,6 +9,7 @@ require_once('../include/query.class.php');
 require_once('../include/maps.class.php');
 require_once('../include/diobject.class.php');
 require_once('../include/digeolevel.class.php');
+require_once('../include/digeocarto.class.php');
 
 if (isset($_GET['r']) && !empty($_GET['r'])) {
 	$reg = $_GET['r'];
@@ -40,13 +41,17 @@ if (!empty($cmd)) {
 	
 	switch ($cmd) {
 	case "insert":
+		// Create new GeoLevel and GeoCarto Objects
 		$o = new DIGeoLevel($us);
-		// Update with data from FORM
 		$o->setFromArray($dat);
-		// Set primary key values
 		$o->set('GeoLevelId', $o->getMaxGeoLevel()+1);
+		$c = new DIGeoCarto($us);
+		$c->setFromArray($dat);
+		$c->set('GeoLevelId', $o->get('GeoLevelId'));
+		
 		// Save to database
 		$gl = $o->insert();
+		$gl = $c->insert();
 		if (!iserror($gl)) {
 			$t->assign ("ctl_msginslev", true);
 			// Create selection map..
@@ -66,13 +71,18 @@ if (!empty($cmd)) {
 		break;
 	case "update":
 		$o = new DIGeoLevel($us);
+		$c = new DIGeoCarto($us);
 		// Set primary key values
 		$o->set('GeoLevelId', $dat['GeoLevelId']);
 		$o->load();
+		$c->set('GeoLevelId', $dat['GeoLevelId']);
+		$c->load();
 		// Update with data from FORM
 		$o->setFromArray($dat);
+		$c->setFromArray($dat);
 		// Save to database
 		$gl = $o->update();
+		$gl = $c->update();
 		if (!iserror($gl)) {
 			$t->assign ("ctl_msgupdlev", true);
 			// Create selection map..
