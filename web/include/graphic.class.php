@@ -31,25 +31,25 @@ class Graphic {
 		$q = new Query($opc['_REG']);
 		// Determine graphic type
 		if (substr($opc['_G+Type'],2,18) == "DisasterBeginTime|") {
-		  $gType = "XTEMPO";		// One var x Event/Temporal..
+			$gType = "XTEMPO";		// One var x Event/Temporal..
 			$sY2AxisLabel = $oLabels[1];
-    }
-    elseif (substr($opc['_G+Type'],2,17) == "DisasterBeginTime") {
-      $gType = "TEMPO";			// One var x time
-      // Set 2 axis graph only in Bars..
-      if (isset($opc['_G+Field2']) && !empty($opc['_G+Field2']) && $kind == "BAR")
-        $gType = "2TEMPO";	// Two vars x time
-    }
-    else {
-      if (isset($opc['_G+Field2']) && !empty($opc['_G+Field2']) && $kind == "BAR")
-        $gType = "2COMPAR";	// Two vars x event, cause...
-      else
-        $gType = $kind;			// Comparatives
-    }
-    if ($gType == "2TEMPO" || $gType == "2COMPAR") {
-      $sYAxisLabel = $oLabels[1];
-      $sY2AxisLabel = $oLabels[2];
-    }
+		}
+		elseif (substr($opc['_G+Type'],2,17) == "DisasterBeginTime") {
+			$gType = "TEMPO";			// One var x time
+			// Set 2 axis graph only in Bars..
+			if (isset($opc['_G+Field2']) && !empty($opc['_G+Field2']) && $kind == "BAR")
+				$gType = "2TEMPO";	// Two vars x time
+		}
+		else {
+			if (isset($opc['_G+Field2']) && !empty($opc['_G+Field2']) && $kind == "BAR")
+				$gType = "2COMPAR";	// Two vars x event, cause...
+			else
+				$gType = $kind;			// Comparatives
+		}
+		if ($gType == "2TEMPO" || $gType == "2COMPAR") {
+			$sYAxisLabel = $oLabels[1];
+			$sY2AxisLabel = $oLabels[2];
+		}
 		// Cummulative Graph : Add Values in Graph
 		if ($opc['_G+Mode'] == "ACCUMULATE") {
 			$SumValue = 0;
