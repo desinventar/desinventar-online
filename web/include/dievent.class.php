@@ -26,10 +26,13 @@ class DIEvent extends DIObject {
 
 		$num_args = func_num_args();
 		if ($num_args >= 2) {
-			$this->set('EventId', func_get_arg(1));
+			$prmEventId = func_get_arg(1);
+			$this->set('EventId', $prmEventId);
 			if ($num_args >= 3) {
-				$this->set('EventName', func_get_arg(1));
-				$this->set('EventDesc', func_get_arg(2));
+				$prmEventName = func_get_arg(1);
+				$prmEventDesc = func_get_arg(2);
+				$this->set('EventName', $prmEventName);
+				$this->set('EventDesc', $prmEventDesc);
 				$this->setIdByName($this->get('EventName'));
 			}
 		}
@@ -39,9 +42,8 @@ class DIEvent extends DIObject {
 		$iReturn = 0;
 		$sQuery = "SELECT * FROM " . $this->getTableName() .
 		  " WHERE EventName='" . $prmEventName . "'";
-		$q = new Query();
-		if ($result = $q->query($sQuery)) {
-			if ($result->num_rows>0) {
+		if ($result = $this->q->dreg->query($sQuery)) {
+			if ($result->rowCount()>0) {
 				// Local Event Found
 				while ($row = $result->fetch_object()) {
 					$this->set('EventId', $row->EventId);
@@ -50,11 +52,11 @@ class DIEvent extends DIObject {
 				} // while
 			} else {
 				// Search PreDefined Event
-				$sQuery = "SELECT * FROM DIEvent " . 
+				$sQuery = "SELECT * FROM DI_Event " . 
 				  " WHERE EventLangCode='" . $this->oSession->sRegionLangCode . "'" .
 				  "   AND (EventLocalName='" . $this->get('EventName') . "'" .
 				  "        OR EventDI6Name='" . $this->get('EventName') . "')";
-				if ($result = $q->query($sQuery)) {
+				if ($result = $this->q->base_query($sQuery)) {
 					while ($row = $result->fetch_object()) {
 						$this->set('EventId', $row->EventId);
 						$this->set('EventName', $row->EventName);
