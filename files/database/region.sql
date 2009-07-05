@@ -13,8 +13,8 @@ PRIMARY KEY('InfoKey')
 
 DROP TABLE IF EXISTS Event;
 CREATE TABLE 'Event' ( 
-EventId VARCHAR(50) NOT NULL, 
-LangIsoCode VARCHAR(3) NOT NULL, 
+EventId VARCHAR(50), 
+LangIsoCode VARCHAR(3), 
 SyncRecord DATETIME, 
 EventName VARCHAR(50), 
 EventDesc TEXT, 
@@ -29,8 +29,8 @@ PRIMARY KEY('EventId','LangIsoCode')
 
 DROP TABLE IF EXISTS Cause;
 CREATE TABLE 'Cause' ( 
-CauseId VARCHAR(50) NOT NULL, 
-LangIsoCode VARCHAR(3) NOT NULL, 
+CauseId VARCHAR(50), 
+LangIsoCode VARCHAR(3), 
 SyncRecord DATETIME, 
 CauseName VARCHAR(50), 
 CauseDesc TEXT, 
@@ -45,35 +45,35 @@ PRIMARY KEY('CauseId','LangIsoCode')
 
 DROP TABLE IF EXISTS GeoLevel;
 CREATE TABLE 'GeoLevel' ( 
-GeoLevelId INTEGER NOT NULL, 
-LangIsoCode VARCHAR(3) NOT NULL, 
+GeoLevelId INTEGER, 
+LangIsoCode VARCHAR(3), 
 SyncRecord DATETIME, 
-GeoLevelName VARCHAR(50) NOT NULL DEFAULT '---', 
+GeoLevelName VARCHAR(50) DEFAULT '---', 
 GeoLevelDesc TEXT NULL, 
-GeoLevelActive INTEGER NOT NULL DEFAULT 0, 
+GeoLevelActive INTEGER DEFAULT 0, 
 PRIMARY KEY('GeoLevelId','LangIsoCode')
 );
 
 DROP TABLE IF EXISTS GeoCarto;
 CREATE TABLE 'GeoCarto' ( 
 GeographyId VARCHAR(100), 
-GeoLevelId INTEGER NOT NULL, 
-LangIsoCode VARCHAR(3) NOT NULL, 
+GeoLevelId INTEGER, 
+LangIsoCode VARCHAR(3), 
 RegionId VARCHAR(50), 
 SyncRecord DATETIME, 
-GeoLevelLayerFile VARCHAR(50) NULL, 
-GeoLevelLayerName VARCHAR(50) NULL, 
-GeoLevelLayerCode VARCHAR(50) NULL, 
-PRIMARY KEY('GeographyId','GeoLevelId','LangIsoCode')
+GeoLevelLayerFile VARCHAR(50), 
+GeoLevelLayerName VARCHAR(50), 
+GeoLevelLayerCode VARCHAR(50), 
+PRIMARY KEY('GeographyId','GeoLevelId')
 );
 
 DROP TABLE IF EXISTS Geography;
 CREATE TABLE 'Geography' ( 
-GeographyId VARCHAR(100) NOT NULL, 
-LangIsoCode VARCHAR(3) NOT NULL, 
+GeographyId VARCHAR(100), 
+LangIsoCode VARCHAR(3), 
 SyncRecord DATETIME, 
-GeographyCode VARCHAR(100) NOT NULL DEFAULT '---', 
-GeographyName VARCHAR(200) NOT NULL DEFAULT '---', 
+GeographyCode VARCHAR(100) DEFAULT '---', 
+GeographyName VARCHAR(200) DEFAULT '---', 
 GeographyLevel INTEGER DEFAULT -1, 
 GeographyActive INTEGER DEFAULT 1, 
 PRIMARY KEY('GeographyId','LangIsoCode')
@@ -81,11 +81,11 @@ PRIMARY KEY('GeographyId','LangIsoCode')
 
 DROP TABLE IF EXISTS Disaster;
 CREATE TABLE 'Disaster' ( 
-DisasterId VARCHAR(50) NOT NULL, 
+DisasterId VARCHAR(50), 
 SyncRecord DATETIME, 
-DisasterSerial VARCHAR(50) NOT NULL, 
-DisasterBeginTime VARCHAR(30) NOT NULL, 
-DisasterGeographyId VARCHAR(100) NOT NULL, 
+DisasterSerial VARCHAR(50), 
+DisasterBeginTime VARCHAR(30), 
+DisasterGeographyId VARCHAR(100), 
 DisasterSiteNotes TEXT, 
 DisasterLatitude DOUBLE, 
 DisasterLongitude DOUBLE, 
@@ -153,7 +153,7 @@ PRIMARY KEY('EEGroupId')
 
 DROP TABLE IF EXISTS EEField;
 CREATE TABLE 'EEField' ( 
-EEFieldId VARCHAR(30) NOT NULL, 
+EEFieldId VARCHAR(30), 
 SyncRecord DATETIME, 
 EEGroupId VARCHAR(30), 
 EEFieldLabel VARCHAR(30), 
@@ -167,7 +167,7 @@ PRIMARY KEY('EEFieldId')
 
 DROP TABLE IF EXISTS EEData;
 CREATE TABLE 'EEData' ( 
-DisasterId VARCHAR(50) NOT NULL, 
+DisasterId VARCHAR(50), 
 SyncRecord DATETIME, 
 PRIMARY KEY('DisasterId')
 );
@@ -222,4 +222,3 @@ INSERT INTO Info VALUES ('Sync_EEField','','','');
 INSERT INTO Info VALUES ('Sync_EEData','','','');
 INSERT INTO Info VALUES ('Sync_EEGroup','','','');
 INSERT INTO Info VALUES ('Sync_DatabaseLog','','','');
-

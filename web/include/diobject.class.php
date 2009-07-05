@@ -233,6 +233,7 @@ class DIObject {
 	public function create() {
 		$iReturn = 0;
 		$sQuery = $this->getInsertQuery();
+		fb("diobject::create() : " . $sQuery);
 		try {
 			if ($result = $this->q->dreg->query($sQuery)) {
 				$iReturn = 1;		
@@ -240,6 +241,7 @@ class DIObject {
 		} catch (PDOException $e) {
 			print "Error " . $e->getMessage() . "<br>";
 		}
+		fb("diobject::create() : " . $iReturn);
 		return $iReturn;
 	} // function
 
@@ -251,6 +253,7 @@ class DIObject {
 		$iReturn = $this->validateUpdate();
 		if ($iReturn > 0) {
 			$sQuery = $this->getUpdateQuery();
+			fb("diobject::update() : " . $sQuery);
 			try {
 				if ($result = $this->q->dreg->query($sQuery)) {
 					$iReturn = 1;
@@ -259,6 +262,7 @@ class DIObject {
 				print "Error " . $e->getMessage() . "<br>";
 			}
 		}
+		fb("diobject::update() : " . $iReturn);
 		return $iReturn;
 	} // function
 	
