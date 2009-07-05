@@ -71,8 +71,8 @@ class DIImport {
 		$a = fgetcsv($fh, 1000, ',');
 		// Column Header Line
 		$a = fgetcsv($fh, 1000, ',');
-		print "<pre>";
-		$i = 0;
+		$rowCount = 0;
+		$this->q->dreg->query("BEGIN TRANSACTION");
 		while (! feof($fh) ) {
 			$a = fgetcsv($fh, 1000, ',');
 			if (count($a) > 1) {
@@ -88,7 +88,8 @@ class DIImport {
 				if ($o->get('DisasterSource') == '') {
 					$o->set('RecordStatus', 'DRAFT');
 				}
-				$i++;
+				$rowCount++;
+				
 				$g = new DIGeography($this->us);
 				$o->set('DisasterGeographyId', $g->getIdByCode($o->get('DisasterGeographyId')));
 				
@@ -100,11 +101,11 @@ class DIImport {
 				
 				$bInsert = ($o->validateCreate() > 0);
 				if ($bInsert) {
-					$i = $o->insert();
+					$Result = $o->insert();
 				} else {
-					$i = $o->update();
+					$Result = $o->update();
 				}
-				if ($i>0) {
+				if ($Result>0) {
 					$e = new DIEEData($this->us);
 					$e->set('DisasterId', $o->get('DisasterId'));
 					if ($bInsert) {
@@ -112,15 +113,20 @@ class DIImport {
 					} else {
 						$e->update();
 					}
-				}
-				
-				print $i . " " . count($a) . " " . $o->get('DisasterId') . " " . 
-				    $o->validateCreate() . " " . $o->validateUpdate() . " " . 
-				    $o->get('EventId') . "<br />";
+				} else {
+					// Generate Error Log
+					$sErrorMsg = $rowCount . ',' . $Result . ',';
+					switch($Result) {
+					case -59:
+						$sErrorMsg .= $o->get('DisasterSerial') . ' EventId Not Found ' . $o->get('EventId');
+						break;						
+					} //switch
+					print $sErrorMsg . '<br />';
+				} //else
 			}
-		}
+		} //while
+		$this->q->dreg->query("COMMIT");
 		fclose($fh);
-		print "</pre>";
 	}
 } //class
 
