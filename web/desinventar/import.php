@@ -5,9 +5,15 @@
 */
 
 require_once('../include/loader.php');
-require_once('../include/user.class.php');
+require_once('../include/usersession.class.php');
 require_once('../include/query.class.php');
 require_once('../include/region.class.php');
+require_once('../include/diimport.class.php');
+require_once('../include/didisaster.class.php');
+require_once('../include/digeography.class.php');
+require_once('../include/dievent.class.php');
+require_once('../include/dicause.class.php');
+require_once('../include/dieedata.class.php');
 
 function loadCSV($csv) {
   $handle = fopen($csv, "r");
@@ -26,54 +32,64 @@ else
   exit();
 
 if (isset($_FILES['desinv']) && isset($_POST['diobj'])) {
-  $r = new Region($reg);
-  $iserror = true;
-  if (isset($_POST['cmd']) && $_POST['cmd'] == "upload") {
-    if ($_FILES['desinv']['error'] == UPLOAD_ERR_OK) {
-      if ($_FILES['desinv']['type'] == "text/comma-separated-values" ||
-          $_FILES['desinv']['type'] == "application/octet-stream" ||
-          $_FILES['desinv']['type'] == "text/x-csv" ||
-          $_FILES['desinv']['type'] == "text/csv" ||
-          $_FILES['desinv']['type'] == "text/plain") {
-        $tmp_name = $_FILES['desinv']['tmp_name'];
-        $name = $_FILES['desinv']['name'];
-        move_uploaded_file($tmp_name, TEMP ."/$name");
-        // first validate file to continue with importation
-        $valm = $r->validateImportFromCSV(TEMP ."/$name", $_POST['diobj']);
-        if (is_array($valm)) {
-          $stat = (int) $valm['Status'];
-          if (!iserror($stat))
-            $valm = $r->importFromCSV(TEMP ."/$name", $_POST['diobj']);
-          $t->assign ("msg", $valm);
-          $t->assign ("csv", loadCSV($valm['FileName']));
-          $iserror = false;
-          $t->assign ("ctl_msg", true);
-        }
-        else
-          $error = "SOME HAPPEN WITH THE FILE, TRY AGAIN..";
-      }
-      else
-        $error = "TYPE IS UNKNOWN.. MUST BE TEXT COMMA SEPARATED!";
-    }
-    else
-      $error = "FAIL UPLOAD!";
-  }
-  else
-    $error = "UNKWOWN ERROR ... ";
-  // nothing to upload
-  if ($iserror) {
-    $t->assign ("error", $error);
-    $t->assign ("ctl_error", true);
-  }
+	$r = new Region($reg);
+	$iserror = true;
+	if (isset($_POST['cmd']) && $_POST['cmd'] == "upload") {
+		if ($_FILES['desinv']['error'] == UPLOAD_ERR_OK) {
+			$error = '';
+			if ($_FILES['desinv']['type'] == "text/comma-separated-values" ||
+				$_FILES['desinv']['type'] == "application/octet-stream" ||
+				$_FILES['desinv']['type'] == "text/x-csv" ||
+				$_FILES['desinv']['type'] == "text/csv" ||
+				$_FILES['desinv']['type'] == "text/plain") {
+				$tmp_name = $_FILES['desinv']['tmp_name'];
+				$name = $_FILES['desinv']['name'];
+				if (ARCH == 'LINUX') {
+					// This step executes iconv to convert the uploaded file to UTF-8
+					$Cmd = "/usr/bin/iconv --from-code=ISO-8859-1 --to-code=UTF-8 " . $tmp_name . "> " . TEMP . "/" . $name;
+					system($Cmd);
+				} else {
+					move_uploaded_file($tmp_name, TEMP ."/$name");
+				}
+				$iserror = false;
+				$FileName = TEMP . '/' . $name;
+				// first validate file to continue with importation
+				$i = new DIImport($us);
+				$valm = $i->validateFromCSV($FileName);
+				if (is_array($valm)) {
+					$stat = (int) $valm['Status'];
+					if (!iserror($stat))
+						$valm = $i->importFromCSV($FileName);
+					$t->assign ("msg", $valm);
+					$t->assign ("csv", loadCSV($valm['FileName']));
+					$iserror = false;
+					$t->assign ("ctl_msg", true);
+				} else {
+					$error = "UNKNOWN ERROR WHEN UPLOADING FILE, TRY AGAIN..";
+				}
+			} else {
+				$error = "TYPE IS UNKNOWN.. MUST BE TEXT COMMA SEPARATED!";
+			}
+		} else {
+			$error = "UPLOAD FAILED";
+		}
+	} else {
+		$error = "UNKWOWN ERROR ... ";
+	}
+	
+	// nothing to upload
+	if ($iserror) {
+		$t->assign ("error", $error);
+		$t->assign ("ctl_error", true);
+	}
+} else {
+	// show upload form
+	$urol = $us->getUserRole($reg);
+	if ($urol == "OBSERVER")
+		$t->assign ("ro", "disabled");
+	$t->assign ("ctl_show", true);
 }
-// show upload form
-else {
-  $u = new User('', '', '');
-  $urol = $u->getUserRole($reg);
-  if ($urol == "OBSERVER")
-    $t->assign ("ro", "disabled");
-  $t->assign ("ctl_show", true);
-}
+
 $t->assign ("reg", $reg);
 $t->display ("import.tpl");
 
