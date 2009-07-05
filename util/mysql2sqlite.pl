@@ -22,7 +22,7 @@ my $passwd      = 'di8db';
 my $bRun       = 0;
 my $bDebug     = 0;
 my $bCore      = 0;
-my $bInfo      = 0;
+my $bInfo      = 1;
 my $sRegion    = '';
 my $sTableName = '';
 
@@ -48,16 +48,6 @@ if ($bCore) {
 }
 my $dbin  = DBI->connect($data_source, $username, $passwd) or die "Can't open MySQL database\n";
 $dbin->{mysql_enable_utf8} = 1;
-#my $dbout = DBI->connect("DBI:SQLite:dbname=" . $sDBFile,"","");
-#$dbout->{unicode} = 1;
-#%d = buildEEDataTableDef($dbin, $sRegion);
-#while (($k, $v) = each(%d)) {
-#	print $k . " => " . $v . "\n";
-#}
-#print Dumper(%d);
-#print $d{'DisasterId/STRING'};
-#print "\n";
-#exit 0;
 
 if ($bCore) {
 	&cleanTable('Region');
@@ -82,18 +72,16 @@ if ($bCore) {
 	#                 ['GeoCarto','GeoLevel', {'GeographyId' => '',
 	#                                          'RegionId'    => $sRegion}]
 	#                );
+	
 	if ($sTableName ne '') {
 		@RegionTables = split(',',$sTableName);
+		$bInfo = 0;
 		if ($sTableName eq 'INFO') {
 			@RegionTables = ();
 			$bInfo = 1;
 		}
-	} else {
-		if ($bInfo) {
-			@RegionTables = ();
-			$bInfo = 1;
-		}
 	}
+
 	foreach $myTable (@RegionTables) {
 		if (ref($myTable) eq 'ARRAY') {
 			$a = ref($myTable) . "\n";
@@ -158,7 +146,7 @@ sub rebuildInfoTable() {
 		if ($sLang eq 'en') { $sLang = 'eng'; }
 		if ($slang eq 'fr') { $sLang = 'fre'; }
 		if ($sLang eq 'pr') { $sLang = 'por'; }
-		#&saveInfo('I18NFirstLang', $sLang, '');
+		&saveInfo('I18NFirstLang', $sLang, '');
 		#&saveInfo('InfoAdminURL', $r->{OptionAdminURL}, '');
 	}
 	$sth->finish();
