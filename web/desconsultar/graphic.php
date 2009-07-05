@@ -18,7 +18,7 @@ $regname = $rinfo['RegionLabel'];
 $post = $_POST;
 
 // load levels to display in totalizations
-foreach ($q->loadGeoLevels("") as $k=>$i)
+foreach ($q->loadGeoLevels('', -1, false) as $k=>$i)
 	$st["GraphDisasterGeographyId_". $k] = array($i[0], $i[1]);
 $dic = array_merge(array(), $st);
 $dic = array_merge($dic, $q->queryLabelsFromGroup('Graph', $lg));

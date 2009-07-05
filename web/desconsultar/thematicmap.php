@@ -120,8 +120,7 @@ if (isset($post['_M+cmd'])) {
 			$zoom = round(log(180/$mx)) + 3;
 			$t->assign ("zoom", $zoom);
 		}
-		$glev = $q->loadGeoLevels("map");
-		$t->assign ("glev", $glev);
+		$t->assign ("glev", $q->loadGeoLevels('', -1, true));
 		$t->assign ("rgl", $rgl);
 		$t->assign ("tot", $cou);
 		$t->assign ("qdet", $q->getQueryDetails($dic, $post));

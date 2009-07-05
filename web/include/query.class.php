@@ -351,13 +351,21 @@ class Query extends PDO
 	else
 		$opre = "1=1 ";
 	if ($mapping)
-		$omap = "AND GeoLevelLayerFile != '' AND GeoLevelLayerCode != '' AND GeoLevelLayerName != '' ";
-	$sqcar = "SELECT ....";
+		$omap = "GeoLevelLayerFile != '' AND GeoLevelLayerCode != '' AND GeoLevelLayerName != '' ";
+	else
+		$omap = "1=1 ";
+	$sqcar = "SELECT GeographyId, GeoLevelId, GeoLevelLayerFile, GeoLevelLayerCode, GeoLevelLayerName ".
+				"FROM GeoCarto WHERE $olev AND $opre AND $omap ORDER BY GeoLevelId";
     $data = array();
-    $res = $this->dreg->query($sql);
-    foreach($res as $row)
-      $data[$row['LevelId']] = array(str2js($row['LevelName']), str2js($row['LevelDesc']), 
-            $row['LayerFile'], $row['LayerCode'], $row['LayerName']);
+	$rcar = $this->getassoc($sqcar);
+    $rlev = $this->dreg->query($sqlev);
+    foreach($rlev as $row) {
+		$lay = array();
+		foreach ($rcar as $car)
+			if ($car['GeoLevelId'] == $row['GeoLevelId'])
+				$lay[] = array($car['GeographyId'], $car['GeoLevelLayerFile'], $car['GeoLevelLayerCode'], $car['GeoLevelLayerName']);
+		$data[$row['GeoLevelId']] = array(str2js($row['GeoLevelName']), str2js($row['GeoLevelDesc']), $lay);
+	}
     return $data;
   }
 	/*

@@ -20,7 +20,7 @@ $post = $_POST;
 $get  = $_GET;
 
 // load levels to display in totalizations
-foreach ($q->loadGeoLevels("") as $k=>$i)
+foreach ($q->loadGeoLevels('', -1, false) as $k=>$i)
   $st["StadistDisasterGeographyId_". $k] = array($i[0], $i[1]);
 $dic = array_merge(array(), $st);
 $dic = array_merge($dic, $q->queryLabelsFromGroup('Stadist', $lg));

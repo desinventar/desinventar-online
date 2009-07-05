@@ -32,10 +32,10 @@ class Maps
 			$map .= $this->setHeader($q, $reg, $info, $type);
 			$creg = $q->getRegionFieldByID($reg, 'IsCRegion');
 			if ($creg[$reg]) {
-				$gc = $q->loadGeoCarto('', 0); //replace with loadCVitems
+				$gc = $q->loadGeoLevels('', 0, true); //replace with loadCVitems
 				//repeat in all items of VRegion
 				foreach ($gc as $ele) {
-					$gi = $q->loadGeoCarto($ele['GeographyId'], -1);
+					$gi = $q->loadGeoLevels($ele['GeographyId'], -1, true);
 					$gl = array();
 					foreach ($gi as $k=>$i) {
 						if ($i['GeoLevelId'] > 0) {
@@ -50,7 +50,7 @@ class Maps
 				}
 			}
 			else {
-				$gl = $q->loadGeoLevels("");
+				$gl = $q->loadGeoLevels('', -1, false);
 				$map .= $this->setLayerAdm($gl, $reg, $type);
 			}
 			// mapfile and html template to interactive selection
@@ -225,7 +225,7 @@ class Maps
 	
 	// Generate standard layer with query results
 	function setLayerEff($q, $reg, $lev, $dl, $range, $inf, $lbl) {
-		$gl = $q->loadGeoLevels("");
+		$gl = $q->loadGeoLevels('', -1, true);
 		$data = $gl[$lev][2];
 		$code = $gl[$lev][3];
 		$name = $gl[$lev][4];

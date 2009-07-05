@@ -137,7 +137,7 @@ class Region {
 // obsolete?
   function isMapDefined() {
     $stat = false;
-    $lg = $this->q->loadGeoLevels("");
+    $lg = $this->q->loadGeoLevels('', -1, false);
     foreach ($lg as $k=>$i) {
       if (!empty($i[2]) && !empty($i[3]) && !empty($i[4]))
         $stat = true;
