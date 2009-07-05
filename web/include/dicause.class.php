@@ -76,12 +76,21 @@ class DICause extends DIObject {
 		  " WHERE " . $this->getWhereSubQuery();
 		return $sQuery;
 	}
-	
-	public function validateUpdate() {
+
+	public function validateCreate() {
 		$iReturn = 1;
-		if (! $this->q->isvalidObjectName($this->get('CauseId'), $this->get('CauseName'), DI_CAUSE)) {
-			$iReturn = -21; // Invalid/Duplicated Cause Name
-		}
+		$iReturn = $this->validateNotNull($iReturn, -21, 'CauseId');
+		$iReturn = $this->validateUnique($iReturn,  -22, 'CauseId');
 		return $iReturn;
 	}
+
+	public function validateUpdate() {
+		$iReturn = 1;
+		$iReturn = $this->validateNotNull($iReturn, -23, 'CauseName');
+		$iReturn = $this->validateUnique($iReturn,  -24, 'CauseName');
+		return $iReturn;
+	}
+	
 }
+
+</script>

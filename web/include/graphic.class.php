@@ -594,3 +594,5 @@ class Graphic {
   }
 
 } // end class
+
+</script>

@@ -43,3 +43,5 @@ class Math
   //Example Usage: var_dump( linear_regression(array(1, 2, 3, 4), array(1.5, 1.6, 2.1, 3.0)) );
 
 } //end class
+
+</script>

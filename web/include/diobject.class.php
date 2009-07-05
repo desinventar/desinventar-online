@@ -46,7 +46,7 @@ class DIObject {
 			if ($sFieldType == "STRING")   { $this->oField[$sFieldName] = "";          }
 			if ($sFieldType == "TEXT")     { $this->oField[$sFieldName] = "";          }
 			if ($sFieldType == "DATETIME") { $this->oField[$sFieldName] = gmdate('c'); }
-			if ($sFieldType == "INTEGER")  { $this->oField[$sFieldName] = -1;          }
+			if ($sFieldType == "INTEGER")  { $this->oField[$sFieldName] = 0;           }
 			if ($sFieldType == "DOUBLE")   { $this->oField[$sFieldName] = 0.0;         }
 			if ($sFieldType == "BOOLEAN")  { $this->oField[$sFieldName] = true;        }
 		}
@@ -305,7 +305,8 @@ class DIObject {
 	public function validateNotNull($curReturn, $ErrCode, $FieldName) {
 		$iReturn = $curReturn;
 		if ($iReturn > 0) {
-			if ($this->get($FieldName) == '') {
+			$Value = $this->get($FieldName);
+			if ($Value == '') {
 				$iReturn = $ErrCode;
 			}
 		}
@@ -326,7 +327,22 @@ class DIObject {
 		}
 		return $iReturn;	
 	}
-
+	
+	public function validateRef($curReturn, $ErrCode, $FieldName, $TableName, $FieldDst) {
+		$iReturn = $curReturn;
+		if ($iReturn > 0) {
+			$quote = "'";
+			if ($this->getType($FieldName) == 'INTEGER') {
+				$quote = "";
+			}
+			$sQuery = "SELECT " . $FieldDst . " FROM " . $TableName . " WHERE " . $FieldDst . "=" . $quote . $this->get($FieldName) . $quote;
+			$iReturn = $ErrCode;
+			foreach($this->q->dreg->query($sQuery) as $row) {
+				$iReturn = 1;
+			}
+		}
+		return $iReturn;
+	}
 } // class
 
 </script>

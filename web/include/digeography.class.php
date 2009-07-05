@@ -55,6 +55,7 @@ class DIGeography extends DIObject {
 		$iGeographyLevel = (strlen($this->get('GeographyId'))/5) - 1;
 		$this->set('GeographyLevel', $iGeographyLevel);
 	}
+
 	public function padNumber($iNumber, $iLen) {
 		$sNumber = "" . $iNumber;
 		while (strlen($sNumber) < $iLen) {
@@ -62,4 +63,23 @@ class DIGeography extends DIObject {
 		}
 		return $sNumber;
 	} // function
+	
+	public function validateCreate() {
+		$iReturn = 1;
+		$iReturn = validateNotNull($iReturn, -41, 'GeographyId');
+		$iReturn = validateUnique($iReturn,  -42, 'GeographyId');
+		return $iReturn;
+	}
+	public function validateUpdate() {
+		$iReturn = 1;
+		$iReturn = $this->validateNotNull($iReturn, -43, 'GeographyCode');
+		$iReturn = $this->validateUnique($iReturn,  -44, 'GeographyCode');
+		$iReturn = $this->validateNotNull($iReturn, -45, 'GeographyName');
+		$iReturn = $this->validateUnique($iReturn,  -46, 'GeographyName');
+		$iReturn = $this->validateNotNull($iReturn, -47, 'GeographyLevel');
+		return $iReturn;
+	}
+	
 } //class
+
+</script>

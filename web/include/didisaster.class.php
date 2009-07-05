@@ -76,11 +76,13 @@ class DIDisaster extends DIObject {
 		$this->set("EventPredefined", 0);
 		$this->set("EventActive", 1);
 		$this->set("LangIsoCode", $this->q->getDBInfoValue('I18NFirstLang'));
+		$this->set('DisasterId', uuid());
 
 		$num_args = func_num_args();
 		if ($num_args >= 2) {
 			$prmDisasterId = func_get_arg(1);
 			$this->set('DisasterId', $prmDisasterId);
+			$this->load();
 		}
 	} //__construct
 	
@@ -92,8 +94,23 @@ class DIDisaster extends DIObject {
 	
 	public function validateCreate() {
 		$iReturn = 1;
-		$iReturn = $this->validateNotNull($iReturn, -1, 'DisasterId');
-		$iReturn = $this->validateUniqueS($iReturn, -1, 'DisasterId');
+		$iReturn = $this->validateNotNull($iReturn, -51, 'DisasterId');
+		$iReturn = $this->validateUnique($iReturn,  -52, 'DisasterId');
+		return $iReturn;
+	}
+	
+	public function validateUpdate() {
+		$iReturn = 1;
+		$iReturn = $this->validateNotNull($iReturn, -53, 'DisasterSerial');
+		//$iReturn = $this->validateUnique($iReturn,  -54, 'DisasterSerial');
+		$iReturn = $this->validateNotNull($iReturn, -55, 'DisasterBeginTime');
+		$iReturn = $this->validateNotNull($iReturn, -56, 'DisasterSource');
+		$iReturn = $this->validateNotNull($iReturn, -57, 'RecordStatus');
+		$iReturn = $this->validateRef($iReturn, -58, 'DisasterGeographyId', 'Geography', 'GeographyId');
+		$iReturn = $this->validateRef($iReturn, -59, 'EventId', 'Event', 'EventId');
+		$iReturn = $this->validateRef($iReturn, -60, 'CauseId', 'Cause', 'CauseId');
+		
+		//validateEffects ??
 		return $iReturn;
 	}
 } //class

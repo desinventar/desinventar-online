@@ -76,11 +76,19 @@ class DIEvent extends DIObject {
 		return $sQuery;
 	}
 
+	public function validateCreate() {
+		$iReturn = 1;
+		$iReturn = $this->validateNotNull($iReturn, -11, 'EventId');
+		$iReturn = $this->validateUnique($iReturn, -12, 'EventId');
+		return $iReturn;
+	}
+
 	public function validateUpdate() {
 		$iReturn = 1;
-		if (! $this->q->isvalidObjectName($this->get('EventId'), $this->get('EventName'), DI_EVENT)) {
-			$iReturn = -11; // Invalid/Duplicated Event Name
-		}
+		$iReturn = $this->validateNotNull($iReturn, -13, 'EventName');
+		$iReturn = $this->validateUnique($iReturn, -14, 'EventName');
 		return $iReturn;
 	}
 }
+
+</script>
