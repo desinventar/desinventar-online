@@ -107,7 +107,15 @@ if (isset($post['_M+cmd'])) {
 			}
 			$lnl[] = $lon;
 			$ltl[] = $lat;
-			$rgl[0]['ly1'] = "effects";
+			$myly = "";
+			if (isset($dl['CVReg'])) {
+				foreach (array_unique($dl['CVReg']) as $it)
+					$myly .= $it ."effects,";
+				$myly = substr($myly, 0, -1);
+			}
+			else
+				$myly = "effects";
+			$rgl[0]['ly1'] = $myly;
 			$rgl[0]['lv'] = $lev[0];
 			$rgl[0]['map'] = $m->filename();
 		}
@@ -121,6 +129,7 @@ if (isset($post['_M+cmd'])) {
 			$t->assign ("zoom", $zoom);
 		}
 		$t->assign ("glev", $q->loadGeoLevels('', -1, true));
+		//echo "<pre>"; print_r($rgl);
 		$t->assign ("rgl", $rgl);
 		$t->assign ("tot", $cou);
 		$t->assign ("qdet", $q->getQueryDetails($dic, $post));
@@ -172,5 +181,5 @@ $t->assign ("reg", $reg);
 $t->assign ("dic", $dic);
 $t->assign ("basemap", VAR_DIR . "/_WORLD/region.map");
 $t->assign ("mps", MAPSERV);
-//$t->display ("thematicmap.tpl");
+$t->display ("thematicmap.tpl");
 </script>
