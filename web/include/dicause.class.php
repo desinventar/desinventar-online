@@ -34,41 +34,38 @@ class DICause extends DIObject {
 				$prmCauseDesc = func_get_arg(2);				
 				$this->set('CauseName', $prmCauseName);
 				$this->set('CauseDesc', $prmCauseDesc);
-				$this->setIdByName($this->get('CauseName'));
+				$this->getIdByName($this->get('CauseName'));
 			}
 		}
 	}
 	
-	public function setIdByName($prmCauseName) {
-		$iReturn = 0;
+	public function getIdByName($prmCauseName) {
+		$CauseId = '';
 		$sQuery = "SELECT * FROM " . $this->getTableName() .
-		  " WHERE CauseName='" . $prmCauseName . "'";
-		if ($result = $this->q->dreg->query($sQuery)) {
-			if ($result->num_rows>0) {
-				// Local Cause Found
-				while ($row = $result->fetch_object()) {
-					$this->set('CauseId', $row->CauseId);
-					$this->set('CausePreDefined', $row->CausePreDefined);
-					$this->set('CauseCreationDate', $row->CauseCreationDate);
-				} // while
-			} else {
-				// Search PreDefined Cause
-				$sQuery = "SELECT * FROM DI_Cause " . 
-				  " WHERE CauseLangCode='" . $this->oSession->sRegionLangCode . "'" .
-				  "   AND (CauseLocalName='" . $this->get('CauseName') . "'" .
-				  "        OR CauseDI6Name='" . $this->get('CauseName') . "')";
-				if ($result = $this->q->base->query($sQuery)) {
-					while ($row = $result->fetch_object()) {
-						$this->set('CauseId', $row->CauseId);
-						$this->set('CauseName', $row->CauseName);
-						$this->set('CauseDesc', $row->CauseDesc);
-						$this->set('CausePreDefined', 1);
-						$this->set('CauseCreationDate', $row->CauseCreationDate);
-					}
-				}
-			}
-		}
-		return $iReturn;
+		  " WHERE CauseName LIKE '" . $prmCauseName . "'";
+		foreach($this->q->dreg->query($sQuery) as $row) {
+			// Local Cause Found
+			$CauseId = $row['CauseId'];
+			$this->set('CauseId', $CauseId);
+			$this->set('CausePredefined'  , $row['CausePredefined']);
+			$this->set('CauseCreationDate', $row['CauseCreationDate']);
+		} //foreach
+		
+		if ($CauseId == '') {
+			// Search PreDefined Cause
+			$sQuery = "SELECT * FROM DI_Cause WHERE " . 
+			  "  (CauseName LIKE '%" . $this->get('CauseName') . "%'" .
+			  "   OR CauseKeywords LIKE '%" . $this->get('CauseName') . "%')";
+			foreach($this->q->base->query($sQuery) as $row) {
+				$CauseId = $row['CauseId'];
+				$this->set('CauseId'          , $CauseId);
+				$this->set('CauseName'        , $row['CauseName']);
+				$this->set('CauseDesc'        , $row['CauseDesc']);
+				$this->set('CausePredefined'  , 1);
+				$this->set('CauseCreationDate', $row['CauseCreationDate']);
+			} //foreach
+		} //if
+		return $CauseId;
 	} // function
 	
 	public function getDeleteQuery() {
