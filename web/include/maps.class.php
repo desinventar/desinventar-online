@@ -60,7 +60,7 @@ class Maps
 				// generate effects maps: type=filename | thematic=sessid
 				$fp = TMPM_DIR ."/di8ms_";
 				if ($creg[$reg]) {
-					echo "<pre>"; print_r($dl);
+					//echo "<pre>"; print_r($dl);
 					//repeat in all items of VRegion
 					// change to unique array
 					foreach ($dl['CVReg'] as $ele)

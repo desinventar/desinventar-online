@@ -151,7 +151,7 @@ function testMap($laypath) {
 		return true;
 	return false;
 }
-  
+
 // Check if session is of a user..
 function checkUserSess() {
 	// NOTE: need a function checkSession in dicore
