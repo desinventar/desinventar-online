@@ -200,7 +200,6 @@ class Maps
 	function setLayerEff($q, $reg, $lev, $dl, $range, $inf, $lbl) {
 		$gl = $q->loadGeoLevels('', $lev, true);
 		$map = "";
-		//echo "<pre>"; print_r($dl); print_r($gl);
 		foreach ($gl[$lev][2] as $ly) {
 			$data = $ly[1];
 			$code = $ly[2];
@@ -227,7 +226,7 @@ class Maps
 			WMS_SRS	"EPSG:4326 EPSG:900913"
 		END';
 					// classify elements by ranges
-					$vl = $this->classify($dl, $range);
+					$vl = $this->classify($ly[0], $dl, $range);
 					$shwlab = 'TEXT ""';
 					if ($lbl == "NAME")
 						$shwlab = '';
@@ -277,30 +276,40 @@ class Maps
 	}
 
 	// Set RGB color array according to user's defined ranges..
-	function classify($dl, $range) {
+	function classify($pfx, $dl, $range) {
 		$vl = array();
-		$ky = array_keys($dl); // DisasterGeography, EffectVar
+		$ky = array_keys($dl); // [0]CVReg, [1]DisasterGeography, [2]EffectVar
 		$h = 0;
+		if ($pfx == '') {	// isn't VRegion
+			$geo = 0;
+			$eff = 1;
+		}
+		else {
+			$geo = 1;
+			$eff = 2;
+		}
 		if (!empty($dl)) {
-			foreach ($dl[$ky[0]] as $k=>$i) {
-				$li = 0;
-				$assigned = false;
-				$val = $dl[$ky[1]][$h];
-				for ($j=0; $j < count($range) && !$assigned; $j++) {
-					$ls = $range[$j][0];
-					//echo "li: $li < val: $val < ls: $ls = ";
-					if ($li <= $val && $val <= $ls) {
-						$assigned = true;
-						$vl[$i] = array($range[$j][1], $range[$j][2], $val);
-						$range[$j][1] = "";
-						//print_r($vl[$i]);
+			//echo "<pre>". $pfx; print_r($dl);
+			foreach ($dl[$ky[$geo]] as $k=>$i) {
+				if (!isset($dl['CVReg']) || $dl['CVReg'][$k] == $pfx) {
+					$li = 0;
+					$assigned = false;
+					$val = $dl[$ky[$eff]][$k];
+					for ($j=0; $j < count($range) && !$assigned; $j++) {
+						$ls = $range[$j][0];
+						//echo "$i :: li: $li < val: $val < ls: $ls = ";
+						if ($li <= $val && $val <= $ls) {
+							$assigned = true;
+							$vl[$i] = array($range[$j][1], $range[$j][2], $val);
+							$range[$j][1] = "";
+							//print_r($vl[$i]);
+						}
+						else
+							$li = $ls + 1;
+						//echo "<br>";
 					}
-					else
-						$li = $ls + 1;
-					//echo "<br>";
+					//echo "<hr>";
 				}
-				$h++;
-				//echo "<hr>";
 			}
 		}
 		return $vl;
