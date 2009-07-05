@@ -334,14 +334,25 @@ class Query extends PDO
   function getNextLev($geoid) {
     return (strlen($geoid) / 5);
   }
-
-  function loadGeoLevels($mapping) {
-    $opc = "WHERE L.GeoLevelId = T.GeoLevelId ";
-    if ($mapping == "map")
-      $opc .= "AND T.GeoLevelLayerFile != '' AND T.GeoLevelLayerCode != '' AND T.GeoLevelLayerName != ''";
-    $sql = "SELECT L.GeoLevelId AS LevelId, L.GeoLevelName AS LevelName, L.GeoLevelDesc AS LevelDesc, ".
-				"T.GeoLevelLayerFile AS LayerFile, T.GeoLevelLayerCode AS LayerCode, T.GeoLevelLayerName as LayerName ".
-				"FROM GeoLevel AS L, GeoCarto AS T $opc ORDER BY L.GeoLevelId";
+  
+  /* fill struct looking by: 
+	prefix: string with prefix used in VRegions
+	level: integer of level, return only data of this level. -1 to all
+	mapping: only levels with files assigned in database, shp - dbf..
+  */
+  function loadGeoLevels($prefix, $lev, $mapping) {
+	if ($lev >= 0)
+		$olev = "GeoLevelId = $lev ";
+	else
+		$olev = "1=1 "
+    $sqlev = "SELECT GeoLevelId, GeoLevelName, GeoLevelDesc FROM GeoLevel WHERE $olev ORDER BY GeoLevelId";
+	if (!empty($prefix))
+		$opre = "GeographyId = '$prefix' ";
+	else
+		$opre = "1=1 ";
+	if ($mapping)
+		$omap = "AND GeoLevelLayerFile != '' AND GeoLevelLayerCode != '' AND GeoLevelLayerName != '' ";
+	$sqcar = "SELECT ....";
     $data = array();
     $res = $this->dreg->query($sql);
     foreach($res as $row)
@@ -349,7 +360,7 @@ class Query extends PDO
             $row['LayerFile'], $row['LayerCode'], $row['LayerName']);
     return $data;
   }
-	
+	/*
 	function loadGeoCarto($geo, $lev) {
 		$sql = "SELECT * FROM GeoCarto WHERE ";
 		if (!empty($geo))
@@ -363,7 +374,7 @@ class Query extends PDO
 			$sql .= "1=1";
 		//$res = $this->dreg->query($sql);
 		return $this->getassoc($sql);
-	}
+	}*/
 
   function getMaxGeoLev() {
     $sql = "SELECT MAX(GeoLevelId) AS max FROM GeoLevel";

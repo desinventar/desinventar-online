@@ -62,7 +62,6 @@ if (isset($post['_M+cmd'])) {
 	$sqc = $q->genSQLSelectCount($qd);
 	$c	 = $q->getresult($sqc);
 	$cou = $c['counter'];
-	$glev = $q->loadGeoLevels("map");
 	if (isset($post['_M+cmd'])) {
 		// Assign ranges
 		$range = setRanges($post);
@@ -121,6 +120,7 @@ if (isset($post['_M+cmd'])) {
 			$zoom = round(log(180/$mx)) + 3;
 			$t->assign ("zoom", $zoom);
 		}
+		$glev = $q->loadGeoLevels("map");
 		$t->assign ("glev", $glev);
 		$t->assign ("rgl", $rgl);
 		$t->assign ("tot", $cou);
