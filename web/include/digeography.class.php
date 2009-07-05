@@ -50,6 +50,15 @@ class DIGeography extends DIObject {
 		$this->setGeographyLevel();
 		return $sGeographyId;
 	}
+	
+	public function getIdByCode($prmGeographyCode) {
+		$GeographyId = '';
+		$Query = "SELECT * FROM Geography Where GeographyCode='" . $prmGeographyCode . "'";
+		foreach($this->q->dreg->query($Query) as $row) {
+			$GeographyId = $row['GeographyId'];
+		}
+		return $GeographyId;
+	}
 
 	public function setGeographyLevel() {
 		$iGeographyLevel = (strlen($this->get('GeographyId'))/5) - 1;

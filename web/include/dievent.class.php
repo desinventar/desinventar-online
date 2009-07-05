@@ -33,41 +33,38 @@ class DIEvent extends DIObject {
 				$prmEventDesc = func_get_arg(2);
 				$this->set('EventName', $prmEventName);
 				$this->set('EventDesc', $prmEventDesc);
-				$this->setIdByName($this->get('EventName'));
+				$this->getIdByName($this->get('EventName'));
 			}
 		}
 	} // __construct
 	
-	public function setIdByName($prmEventName) {
-		$iReturn = 0;
+	public function getIdByName($prmEventName) {
+		$EventId = '';
 		$sQuery = "SELECT * FROM " . $this->getTableName() .
-		  " WHERE EventName='" . $prmEventName . "'";
-		if ($result = $this->q->dreg->query($sQuery)) {
-			if ($result->rowCount()>0) {
-				// Local Event Found
-				while ($row = $result->fetch_object()) {
-					$this->set('EventId', $row->EventId);
-					$this->set('EventPreDefined', $row->EventPreDefined);
-					$this->set('EventCreationDate', $row->EventCreationDate);
-				} // while
-			} else {
-				// Search PreDefined Event
-				$sQuery = "SELECT * FROM DI_Event " . 
-				  " WHERE EventLangCode='" . $this->oSession->sRegionLangCode . "'" .
-				  "   AND (EventLocalName='" . $this->get('EventName') . "'" .
-				  "        OR EventDI6Name='" . $this->get('EventName') . "')";
-				if ($result = $this->q->base->query($sQuery)) {
-					while ($row = $result->fetch_object()) {
-						$this->set('EventId', $row->EventId);
-						$this->set('EventName', $row->EventName);
-						$this->set('EventDesc', $row->EventDesc);
-						$this->set('EventPreDefined', 1);
-						$this->set('EventCreationDate', $row->EventCreationDate);
-					}
-				}
-			}
-		}
-		return $iReturn;
+		  " WHERE EventName LIKE '" . $prmEventName . "'";
+		foreach($this->q->dreg->query($sQuery) as $row) {
+			// Local Event Found
+			$EventId = $row['EventId'];
+			$this->set('EventId'          , $EventId);
+			$this->set('EventPredefined'  , $row['EventPredefined']);
+			$this->set('EventCreationDate', $row['EventCreationDate']);
+		} // foreach
+		
+		if ($EventId == '') {
+			// Search Predefined Event
+			$sQuery = "SELECT * FROM DI_Event WHERE " . 
+					  " (EventName LIKE '%" . $prmEventName . "%'" .
+					  "  OR EventKeywords LIKE '%" . $prmEventName . "%')";
+			foreach ($this->q->base->query($sQuery) as $row) {
+				$EventId = $row['EventId'];
+				$this->set('EventId'          , $EventId);
+				$this->set('EventName'        , $row['EventName']);
+				$this->set('EventDesc'        , $row['EventDesc']);
+				$this->set('EventPredefined'  , 1);
+				$this->set('EventCreationDate', $row['EventCreationDate']);
+			} //foreach
+		} //if
+		return $EventId;
 	} // function
 	
 	public function getDeleteQuery() {
