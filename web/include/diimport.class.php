@@ -88,8 +88,6 @@ class DIImport {
 				if ($o->get('DisasterSource') == '') {
 					$o->set('RecordStatus', 'DRAFT');
 				}
-				//print $o->getInsertQuery() . "<br />\n";
-				//print $o->getUpdateQuery() . "<br />\n";
 				$i++;
 				$g = new DIGeography($this->us);
 				$o->set('DisasterGeographyId', $g->getIdByCode($o->get('DisasterGeographyId')));
@@ -99,6 +97,22 @@ class DIImport {
 				
 				$c = new DICause($this->us);
 				$o->set('CauseId', $c->getIdByName($o->get('CauseId')));
+				
+				$bInsert = ($o->validateCreate() > 0);
+				if ($bInsert) {
+					$i = $o->insert();
+				} else {
+					$i = $o->update();
+				}
+				if ($i>0) {
+					$e = new DIEEData($this->us);
+					$e->set('DisasterId', $o->get('DisasterId'));
+					if ($bInsert) {
+						$e->insert();
+					} else {
+						$e->update();
+					}
+				}
 				
 				print $i . " " . count($a) . " " . $o->get('DisasterId') . " " . 
 				    $o->validateCreate() . " " . $o->validateUpdate() . " " . 

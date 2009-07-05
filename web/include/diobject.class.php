@@ -223,9 +223,9 @@ class DIObject {
 		$iReturn = 1;
 		$bValidate = $withValidate;
 		if ($withValidate) {
-			$iReturn = validateCreate();
+			$iReturn = $this->validateCreate();
 			if ($iReturn > 0 ) { 
-				$iReturn = validateUpdate();
+				$iReturn = $this->validateUpdate();
 				$bValidate = false;
 			}
 		}
