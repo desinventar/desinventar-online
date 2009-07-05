@@ -64,6 +64,9 @@ class DIEvent extends DIObject {
 				$this->set('EventCreationDate', $row['EventCreationDate']);
 			} //foreach
 		} //if
+		if ($EventId == '') {
+			$EventId = $prmEventName;
+		}
 		return $EventId;
 	} // function
 	

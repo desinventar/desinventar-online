@@ -65,6 +65,9 @@ class DICause extends DIObject {
 				$this->set('CauseCreationDate', $row['CauseCreationDate']);
 			} //foreach
 		} //if
+		if ($CauseId == '') {
+			$CauseId = $prmCauseId;
+		}
 		return $CauseId;
 	} // function
 	
