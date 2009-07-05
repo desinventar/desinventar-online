@@ -147,7 +147,7 @@ if (isset($post['_M+cmd'])) {
 				$imap = imagecreatefromstring($mf);
 				// Download and include legend
 				$url2 = "/cgi-bin/". MAPSERV ."?map=". $m->filename() ."&SERVICE=WMS&VERSION=1.1.1".
-					"&REQUEST=getlegendgraphic&LAYER=effects&FORMAT=image/png";
+					"&REQUEST=getlegendgraphic&LAYER=". substr($myly, 0, 12) ."&FORMAT=image/png";
 				$lf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $url2);
 				$ileg = imagecreatefromstring($lf);
 				$wt = imagesx($imap) + imagesx($ileg);
