@@ -392,3 +392,5 @@ class UserSession {
 		$this->q->core->query($sQuery);
 	}
 } //class
+
+</script>

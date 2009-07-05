@@ -38,3 +38,5 @@ class DIEEData extends DIObject {
 		return $sFieldDef;
 	} // function
 } //class
+
+</script>
