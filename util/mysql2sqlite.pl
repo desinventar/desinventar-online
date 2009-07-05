@@ -48,15 +48,24 @@ if ($bCore) {
 }
 my $dbin  = DBI->connect($data_source, $username, $passwd) or die "Can't open MySQL database\n";
 $dbin->{mysql_enable_utf8} = 1;
-my $dbout = DBI->connect("DBI:SQLite:dbname=" . $sDBFile,"","");
-$dbout->{unicode} = 1;
+#my $dbout = DBI->connect("DBI:SQLite:dbname=" . $sDBFile,"","");
+#$dbout->{unicode} = 1;
+#%d = buildEEDataTableDef($dbin, $sRegion);
+#while (($k, $v) = each(%d)) {
+#	print $k . " => " . $v . "\n";
+#}
+#print Dumper(%d);
+#print $d{'DisasterId/STRING'};
+#print "\n";
+#exit 0;
+
 if ($bCore) {
 	&cleanTable('Region');
-	&convertTable($dbin, "Region", "Region");
+	&convertTable($dbin, $sRegion, "Region", "Region");
 	&cleanTable('RegionAuth');
-	&convertTable($dbin, "RegionAuth", "RegionAuth");
+	&convertTable($dbin, $sRegion, "RegionAuth", "RegionAuth");
 	&cleanTable('User');
-	&convertTable($dbin, "Users", "User");
+	&convertTable($dbin, $sRegion, "Users", "User");
 } else {
 	@RegionTables = ('Event',
 	                 'Cause',
@@ -104,7 +113,7 @@ if ($bCore) {
 			$sDstTable = $myTable;
 			$oDefValues = {};
 		}
-		&convertTable($dbin, $sSrcTable, $sDstTable, $oDefValues);
+		&convertTable($dbin, $sRegion, $sSrcTable, $sDstTable, $oDefValues);
 	}
 	if ($bInfo) {
 		# Rebuild Info Table
@@ -114,6 +123,7 @@ if ($bCore) {
 
 $dbin->disconnect();
 exit 0;
+
 
 sub rebuildInfoTable() {
 	my $dbin      = $_[0];
@@ -168,12 +178,54 @@ sub cleanTable() {
 	$sQuery = "DELETE FROM " . $sTableDst . ";";
 	print $sQuery . "\n";
 }
+
+sub buildEEDataTableDef() {
+	my $dbin = $_[0];
+	my $sRegion = $_[1];
+	my %def = ();
+	# Mandatory Fields
+	$def{'DisasterId/STRING'} = undef;
+	$def{'SyncRecord/DATETIME'} = 'DATETIME';
+	$sth = $dbin->prepare("SELECT * FROM " . $sRegion . "_EEField");
+	$sth->execute();
+	while ($r = $sth->fetchrow_hashref()) {
+		$sFieldDef = $r->{'EEFieldId'} . '/' . $r->{'EEFieldType'};
+		$def{$sFieldDef} = undef;
+	}
+	$sth->finish();
+	return %def;
+}
+sub buildEEDataStruct() {
+	my %oTableDef = $_[0];
+	foreach $sFieldDef (keys(%oTableDef)) {
+		($sFieldName, $sFieldType) = split('/', $sFieldDef);
+		print $sFieldName . "\n";
+	}
+}
 sub convertTable() {
 	my $dbin      = $_[0];
-	my $sTableSrc = $_[1];
-	my $sTableDst = $_[2];
-	my %oDefValues = $_[3];
+	my $sRegion   = $_[1];
+	my $sTableSrc = $_[2];
+	my $sTableDst = $_[3];
+	my %oDefValues = $_[4];
 	my %oTableDef = %{%DesInventarDB::TableDef->{$sTableDst}};
+	if ($sTableDst eq 'EEData') {
+		%oTableDef = &buildEEDataTableDef($dbin, $sRegion);
+		# Fixed Fields (Ugly !!)
+		print "DROP TABLE 'EEData';\n";
+		print "CREATE TABLE 'EEData' (DisasterId VARCHAR(50) NOT NULL, SyncRecord DATETIME);\n";
+		print "BEGIN TRANSACTION;\n";
+		foreach $sFieldDef (keys(%oTableDef)) {
+			($sFieldName, $sFieldType) = split('/', $sFieldDef);
+			if (substr($sFieldName,0,3) eq 'EEF') {
+				if ($sFieldType eq 'INTEGER') { $sDefaultValue = "DEFAULT 0"; }
+				if ($sFieldType eq 'STRING' ) { $sDefaultValue = "DEFAULT ''"; }
+				print 'ALTER TABLE EEData ADD COLUMN ' . $sFieldName . ' ' . $sFieldType . ' ' . $sDefaultValue . ';' . "\n";
+			}
+		}
+		print "COMMIT;\n";
+		#&buildEEDataStruct(%oTableDef);
+	}
 	my $sQuery    = "";
 	my $sthin     = null;
 	my $sthout    = null;
@@ -215,6 +267,10 @@ sub convertTable() {
 			$sValue =~ s/\0//g; # Null Chars
 			$sValue =~ s/\t//g; # Tab Char
 			$sValue =~ s/"//g;  # Double Quotes
+			
+			if ($sFieldType eq 'INTEGER') {
+				if ($sValue eq '') { $sValue = 0; }
+			}
 			
 			$sFieldList .= $sField . $sAppend;
 			if ( ($sFieldType eq 'STRING') ||

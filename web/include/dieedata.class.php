@@ -9,14 +9,17 @@ class DIEEData extends DIObject {
 		$this->sTableName   = "EEData";
 		$this->sPermPrefix  = "DISASTER";
 		$this->sFieldKeyDef = "DisasterId/STRING";
-		$this->sFieldDef    = "";
+		$this->sFieldDef    = "SyncRecord/DATETIME";
 		parent::__construct($prmSession);
-		$this->sFieldDef = $this->buildFieldDef();
-		$this->createFields($this->sFieldKeyDef, $this->sFieldDef);
+		$sNewFields = $this->buildFieldDef();
+		if ($sNewFields != '') {
+			$this->sFieldDef .= ',' . $sNewFields;
+			$this->createFields($this->sFieldKeyDef, $this->sFieldDef);
+		}
 		$num_args = func_num_args();
 		if ($num_args >= 2) {
 			$prmDisasterId = func_get_arg(1);
-			$this->set('DisasterId', $prmDIsasterId);
+			$this->set('DisasterId', $prmDisasterId);
 			$this->load();
 		}
 	} // __construct
