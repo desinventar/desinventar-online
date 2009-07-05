@@ -364,7 +364,8 @@ class Query extends PDO
 		foreach ($rcar as $car)
 			if ($car['GeoLevelId'] == $row['GeoLevelId'])
 				$lay[] = array($car['GeographyId'], $car['GeoLevelLayerFile'], $car['GeoLevelLayerCode'], $car['GeoLevelLayerName']);
-		$data[$row['GeoLevelId']] = array(str2js($row['GeoLevelName']), str2js($row['GeoLevelDesc']), $lay);
+		if (!empty($lay))
+			$data[$row['GeoLevelId']] = array(str2js($row['GeoLevelName']), str2js($row['GeoLevelDesc']), $lay);
 	}
     return $data;
   }

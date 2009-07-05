@@ -172,5 +172,5 @@ $t->assign ("reg", $reg);
 $t->assign ("dic", $dic);
 $t->assign ("basemap", VAR_DIR . "/_WORLD/region.map");
 $t->assign ("mps", MAPSERV);
-$t->display ("thematicmap.tpl");
+//$t->display ("thematicmap.tpl");
 </script>
