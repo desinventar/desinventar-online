@@ -41,8 +41,8 @@
 			// Effects layer(s)
 {-foreach name=rgl key=k item=i from=$rgl-}
 			var db{-$k-} = new OpenLayers.Layer.WMS("DI8 / {-$i.regname-}", 
-					"/cgi-bin/{-$mps-}?", { map:'{-$i.map-}', layers:'{-$i.ly1-}', 'transparent':true, 'format':'png' },
-					{'isBaseLayer':false });
+					"/cgi-bin/{-$mps-}?", { map:'{-$i.map-}', 'transparent':true, 'format':'png',
+					layers:'{-$i.ly1-}'}, {'isBaseLayer':false });
 			map.addLayer(db{-$k-});
 			// Admin layers
  {-foreach name=glev key=ky item=it from=$glev-}
@@ -167,7 +167,7 @@
          {-$rgl[0].regname-}</p>
 				<hr>
 			  <image src="../images/ge_icon.png"> <a href="thematicmap.php?r={-$reg-}&cmd=getkml">{-#tgetgearth#-}</a><hr><br>
-			  <img src="/cgi-bin/{-$mps-}?map={-$rgl[0].map-}&SERVICE=WMS&VERSION=1.1.1&REQUEST=getlegendgraphic&LAYER={-$rgl[0].ly1-}&FORMAT=image/png">
+			  <img src="/cgi-bin/{-$mps-}?map={-$rgl[0].map-}&SERVICE=WMS&VERSION=1.1.1&REQUEST=getlegendgraphic&LAYER={-$rgl[0].ly1|truncate:12:""-}&FORMAT=image/png">
 		  </div>
 		 </td>
 		 <td valign="top">

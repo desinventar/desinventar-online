@@ -200,14 +200,16 @@ class Maps
 	function setLayerEff($q, $reg, $lev, $dl, $range, $inf, $lbl) {
 		$gl = $q->loadGeoLevels('', $lev, true);
 		$map = "";
-		echo "<pre>"; print_r($dl); print_r($gl);
+		//echo "<pre>"; print_r($dl); print_r($gl);
 		foreach ($gl[$lev][2] as $ly) {
 			$data = $ly[1];
 			$code = $ly[2];
 			$name = $ly[3];
 			$lp = VAR_DIR . '/' . $reg ."/". $data;
 			if ($this->testLayer($lp, $code, $name)) {
-				$map .= '
+				// cvreg isn't set in regular base.. in vregion select region on match
+				if (!isset($dl['CVReg']) ||in_array($ly[0], array_unique($dl['CVReg']))) {
+					$map .= '
     LAYER
 		NAME	'. $ly[0] .'effects
 		DATA	"'. $data .'"
@@ -224,24 +226,24 @@ class Maps
 			WMS_EXTENT	"'. $inf['EXTENT'] .'"
 			WMS_SRS	"EPSG:4326 EPSG:900913"
 		END';
-			// classify elements by ranges
-				$vl = $this->classify($dl, $range);
-				$shwlab = 'TEXT ""';
-				if ($lbl == "NAME")
-					$shwlab = '';
-				// Generate classes with effects..
-				foreach ($vl as $k=>$i) {
-					if ($lbl == "CODE")
-						$shwlab = 'TEXT "'. $k .'"';
-					elseif ($lbl == "VALUE")
-						$shwlab = 'TEXT "'. $i[2] .'"';
-					$map .= '
-		CLASS ';
-					if (!empty($i[0])) {
+					// classify elements by ranges
+					$vl = $this->classify($dl, $range);
+					$shwlab = 'TEXT ""';
+					if ($lbl == "NAME")
+						$shwlab = '';
+					// Generate classes with effects..
+					foreach ($vl as $k=>$i) {
+						if ($lbl == "CODE")
+							$shwlab = 'TEXT "'. $k .'"';
+						elseif ($lbl == "VALUE")
+							$shwlab = 'TEXT "'. $i[2] .'"';
 						$map .= '
+		CLASS ';
+						if (!empty($i[0])) {
+							$map .= '
 				NAME "'. $i[0] .'"';
-					}
-					$map .= ' 
+						}
+						$map .= ' 
 			EXPRESSION "'. $k .'" 
   			STYLE COLOR '. $i[1] .' OUTLINECOLOR 130 130 130 END
   			'. $shwlab .'
@@ -250,11 +252,11 @@ class Maps
 		      COLOR	0 0 89 		POSITION CC 		PARTIALS FALSE	BUFFER 4
 			END
 		END';
-				} // end foreach
-			/* Generate null class
-			if ($lbl == "VALUE")
-				$shwlab = 'TEXT "0"';
-      $map .= '
+					} // foreach $vl
+					/* Generate null class
+					if ($lbl == "VALUE")
+						$shwlab = 'TEXT "0"';
+					$map .= '
 		  CLASS
 		    NAME "No data"
         EXPRESSION (length("['. $code .']") > 0)
@@ -265,10 +267,11 @@ class Maps
 		      COLOR	0 0 89 		POSITION CC			PARTIALS FALSE	BUFFER 4
         END
       END';*/
-				$map .= '
+					$map .= '
 	END # LAYER
 ';
-			}
+				} // if in_array
+			} // if testlayer
 		}
 		return $map;
 	}
