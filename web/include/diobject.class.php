@@ -43,12 +43,12 @@ class DIObject {
 			$sFieldName = $oItem[0];
 			$sFieldType = $oItem[1];
 			$this->oFieldType[$sFieldName] = $sFieldType;
-			if ($sFieldType == "STRING")   { $this->oField[$sFieldName] = "";        }
-			if ($sFieldType == "TEXT")     { $this->oField[$sFieldName] = "";        }
+			if ($sFieldType == "STRING")   { $this->oField[$sFieldName] = "";          }
+			if ($sFieldType == "TEXT")     { $this->oField[$sFieldName] = "";          }
 			if ($sFieldType == "DATETIME") { $this->oField[$sFieldName] = gmdate('c'); }
-			if ($sFieldType == "INTEGER")  { $this->oField[$sFieldName] = -1;        }
-			if ($sFieldType == "DOUBLE")   { $this->oField[$sFieldName] = 0.0;       }
-			if ($sFieldType == "BOOLEAN")  { $this->oField[$sFieldName] = true;      }
+			if ($sFieldType == "INTEGER")  { $this->oField[$sFieldName] = -1;          }
+			if ($sFieldType == "DOUBLE")   { $this->oField[$sFieldName] = 0.0;         }
+			if ($sFieldType == "BOOLEAN")  { $this->oField[$sFieldName] = true;        }
 		}
 	} // function
 	
