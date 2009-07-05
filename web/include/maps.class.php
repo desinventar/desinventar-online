@@ -238,10 +238,11 @@ class Maps
 							$shwlab = 'TEXT "'. $i[2] .'"';
 						$map .= '
 		CLASS ';
-						if (!empty($i[0])) {
+						//Set names only in match elements
+/*						if (!empty($i[0])) {
 							$map .= '
 				NAME "'. $i[0] .'"';
-						}
+						}*/
 						$map .= ' 
 			EXPRESSION "'. $k .'" 
   			STYLE COLOR '. $i[1] .' OUTLINECOLOR 130 130 130 END
@@ -252,6 +253,15 @@ class Maps
 			END
 		END';
 					} // foreach $vl
+					// Generate classes with names and colors of ranges
+					foreach ($range as $rk=>$ri) {
+						// Define a Expression to not show others polygons...
+						$map .= '
+		CLASS
+			NAME "'. $ri[1] .'"
+			STYLE COLOR '. $ri[2]  .' OUTLINECOLOR 130 130 130 END
+		END';
+					}
 					/* Generate null class
 					if ($lbl == "VALUE")
 						$shwlab = 'TEXT "0"';

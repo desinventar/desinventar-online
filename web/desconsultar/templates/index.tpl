@@ -36,8 +36,8 @@
         items: [
             {  text: '{-#mgotoqd#-}',    handler: onMenuItem  },
             {  text: '{-#mnewsearch#-}', handler: onMenuItem  },
-            {  text: 'Guardar', 				 handler: onMenuItem  },
-            {  text: 'Abrir', 				 	 handler: onMenuItem  }]
+            {  text: '{-#msavequery#-}', handler: onMenuItem  },
+            {  text: '{-#mopenquery#-}', handler: onMenuItem  }]
       });
       var mhelp = new Ext.menu.Menu({
         id: 'helpMenu',
@@ -72,12 +72,25 @@
 						fmp.clearAreas();
 {-/if-}
           break;
-          case "Guardar":
+          case "{-#msavequery#-}":
           	saveQuery();
           break;
-          case "Abrir":
-          	$('openquery').style.visibility = 'visible';
-          	$('ofile').click();
+          case "{-#mopenquery#-}":
+			var qryw;
+			if (!qryw) {
+				qryw = new Ext.Window({
+					el:'qry-win',  layout:'fit',  width:300, height:200, 
+					closeAction:'hide', plain: true, animCollapse: false,
+					items: new Ext.Panel({
+						contentEl: 'qry-cfg', autoScroll: true }),
+					buttons: [{
+						text:'{-#tclose#-}',
+						handler: function(){
+							qryw.hide(); }
+					}]
+				});
+			}
+			qryw.show(this);
           break;
           case "{-#mgotoqd#-}":
             if (w.isVisible())
@@ -249,10 +262,13 @@
               },{
                 text:'{-#tsend#-}',
                 handler: function() {
-                		setfocus('_M+limit[0]');
-                    sendMap("result");
-                    $('DCRes').value = "M";
-                    mapw.hide(); 
+					setfocus('_M+limit[0]');
+                    if (sendMap("result")) {
+						$('DCRes').value = "M";
+						mapw.hide(); 
+					}
+					else
+                      alert("{-#serrmsgfrm#-}");
                 }
               },{
                 text:'{-#tclose#-}',
@@ -263,28 +279,6 @@
         }
         mapw.show(this);
       });
-	  // open query file
-	  qryw = new Ext.Window({
-            el:'qry-win',  layout:'fit',  width:200, height:150, 
-            closeAction:'hide', plain: true, animCollapse: false,
-            items: new Ext.Panel({
-                contentEl: 'qry-cfg', autoScroll: true }),
-            buttons: [{
-                text:'{-#tsend#-}',
-                handler: function() {
-                    if (sendList("result")) {
-                      //$('DCRes').value = "D";
-                      qryw.hide();
-                    }
-                    else
-                      alert("{-#derrmsgfrm#-}");
-                }
-              },{
-                text:'{-#tclose#-}',
-                handler: function(){
-                    qryw.hide(); }
-              }]
-          });
       // quicktips
       Ext.apply(Ext.QuickTips.getQuickTip(), {
         maxWidth: 200, minWidth: 100, showDelay: 50, trackMouse: true });
@@ -466,28 +460,34 @@
         return false;
     }
     function sendMap(cmd) {
-      //$('frmwait').innerHTML = waiting;
-      $('_M+cmd').value = cmd;
-      if (cmd == "export") {
-      	var mm = ifr.map;
-      	var extent = mm.getExtent();
-      	var layers = mm.layers;
-      	var activelayers = [];
-      	for (i in layers) {
-      		if (layers[i].getVisibility() && layers[i].calculateInRange() && !layers[i].isBaseLayer)
-      			activelayers[activelayers.length] = layers[i].params['LAYERS'];
-      	}
-      	$('_M+extent').value = [extent.left,extent.bottom,extent.right,extent.top].join(',');
-      	$('_M+layers').value = activelayers;
-      }
-      combineForms('DC', 'CM');
-      var w = Ext.getCmp('westm');
-      w.collapse(); // hide()
-      var s = Ext.getCmp('southm');
-      s.collapse();
-      $('DC').action='thematicmap.php';
-      $('DC').submit();
-      hideMap();
+      if ($('_M+Type').length > 0) {
+		  //$('frmwait').innerHTML = waiting;
+		  $('_M+cmd').value = cmd;
+		  if (cmd == "export") {
+			// to export image save layers and extend..
+			var mm = ifr.map;
+			var extent = mm.getExtent();
+			var layers = mm.layers;
+			var activelayers = [];
+			for (i in layers) {
+				if (layers[i].getVisibility() && layers[i].calculateInRange() && !layers[i].isBaseLayer)
+					activelayers[activelayers.length] = layers[i].params['LAYERS'];
+			}
+			$('_M+extent').value = [extent.left,extent.bottom,extent.right,extent.top].join(',');
+			$('_M+layers').value = activelayers;
+		  }
+		  combineForms('DC', 'CM');
+		  var w = Ext.getCmp('westm');
+		  w.collapse(); // hide()
+		  var s = Ext.getCmp('southm');
+		  s.collapse();
+		  $('DC').action='thematicmap.php';
+		  $('DC').submit();
+		  hideMap();
+		  return true;
+	  }
+	  else
+		return false;
     }
     function sendGraphic(cmd) {
       $('_G+cmd').value = cmd;
@@ -1247,6 +1247,15 @@
 <!--    END STADISTIC SECTION  -->
        </td>
        <td>
+		 <div id="qry-win" class="x-hidden">
+          <div class="x-window-header">{-#mopenquery#-}</div>
+          <div id="qry-cfg" style="text-align:center;">
+		     <form id="openquery" enctype="multipart/form-data" action="index.php" method="POST">
+			  <br><br><input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+			  <input type="file" id="ofile" name="qry" onChange="$('openquery').submit();"/>
+			 </form>
+		  </div>
+        </div>
          <span id="frmwait"></span>
          <input id="DCRes" type="hidden" value="">
          <input type="button" class="line" style="width:20px; height:20px; background-image:url(../images/saveicon.png);"
@@ -1257,12 +1266,7 @@
      </tr>
    </table>
 <!--   SHOW RESULTS  -->
-  <div id="querydetails" style="height:40px;" class="dwin">
-  <form id="openquery" enctype="multipart/form-data" action="index.php" method="POST" style="visibility:hidden;">
-  	<input type="hidden" name="MAX_FILE_SIZE" value="100000" />
-  	<input type="file" id="ofile" name="qry" onChange="$('openquery').submit();"/>
-  </form>
-  </div>
+  <div id="querydetails" style="height:40px;" class="dwin"></div>
   <div id="smap" style="position:absolute; left:0px; top:20px; visibility:hidden;">
    [<a href="javascript:void(0);" onClick="hideMap();">X</a>]<br>
   	<iframe name="fmp" id="fmp" frameborder="0" style="height:500px; width:500px;"{-if $ctl_showmap-} 
