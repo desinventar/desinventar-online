@@ -1596,6 +1596,16 @@
       </div>
     </dd>
     <!-- END DATETIME SECTION -->
+	<!-- BEGIN CUSTOMQUERY SECTION -->
+    <dt>{-#mdcsection#-}</dt>
+    <dd>
+      <div style="height: 360px;">
+        <textarea style="width:250px; height:40px;" onFocus="showtip('');"></textarea>
+		<br>
+		<select class="small" size="10"></select>
+	  </div>
+    </dd>
+    <!-- END CUSTOMQUERY SECTION -->
   </dl>
   </form>
  </div> <!-- id = west-->
