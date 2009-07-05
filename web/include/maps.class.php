@@ -30,44 +30,15 @@ class Maps
 		else {
 			$map = "## DesInventar8.2 autogenerate mapfile\n";
 			$map .= $this->setHeader($q, $reg, $info, $type);
-			$creg = $q->getRegionFieldByID($reg, 'IsCRegion');
-			if ($creg[$reg]) {
-				$gc = $q->loadGeoLevels('', 0, true); //replace with loadCVitems
-				//repeat in all items of VRegion
-				foreach ($gc as $ele) {
-					$gi = $q->loadGeoLevels($ele['GeographyId'], -1, true);
-					$gl = array();
-					foreach ($gi as $k=>$i) {
-						if ($i['GeoLevelId'] > 0) {
-							$gl[$k][0] = "Level ". $i['GeoLevelId'];
-							$gl[$k][1] = '';
-							$gl[$k][2] = $i['GeoLevelLayerFile'];
-							$gl[$k][3] = $i['GeoLevelLayerName'];
-							$gl[$k][4] = $i['GeoLevelLayerCode'];
-						}
-					}
-					$map .= $this->setLayerAdm($gl, $reg, $type);
-				}
-			}
-			else {
-				$gl = $q->loadGeoLevels('', -1, false);
-				$map .= $this->setLayerAdm($gl, $reg, $type);
-			}
+			$gl = $q->loadGeoLevels('', -1, true);
+			$map .= $this->setLayerAdm($gl, $reg, $type);
 			// mapfile and html template to interactive selection
 			if ($type == "SELECT")
 				$fp = DATADIR ."/". $reg . "/region.map";
 			else {
 				// generate effects maps: type=filename | thematic=sessid
 				$fp = TMPM_DIR ."/di8ms_";
-				if ($creg[$reg]) {
-					//echo "<pre>"; print_r($dl);
-					//repeat in all items of VRegion
-					// change to unique array
-					foreach ($dl['CVReg'] as $ele)
-						$q->loadGeoCarto($ele, -1);
-				}
-				else
-					$map .= $this->setLayerEff($q, $reg, $lev, $dl, $range, $info, $lbl);
+				$map .= $this->setLayerEff($q, $reg, $lev, $dl, $range, $info, $lbl);
 				if ($type == "THEMATIC")
 					$fp .= "$reg-". session_id() .".map";
 				elseif (strlen($type) > 0)
@@ -166,22 +137,23 @@ class Maps
 		$type = "POLYGON";
 		$color = "255 255 255";
 		foreach ($gl as $k=>$i) {
-		  $lp = VAR_DIR . '/' . $reg ."/". $i[2];
-			if ($this->testLayer($lp, $i[3], $i[4])) {
-				$map .= '
+			foreach ($i[2] as $ly) {
+				$lp = VAR_DIR . '/' . $reg ."/". $ly[1];
+				if ($this->testLayer($lp, $ly[2], $ly[3])) {
+					$map .= '
     LAYER
-      NAME		admin0'. $k .'
-      DATA		"'. $i[2] .'"
-			GROUP		'. $reg .'
-			STATUS	OFF
-			TYPE		'. $type.'
-			PROJECTION	"init=epsg:4326" END
-			CLASSITEM		"'. $i[3] .'"
-			LABELITEM		"'. $i[4] .'"';
-        // Selection map used in Query Design
-        if ($typ == "SELECT") {
-          $tm = "templates/imagemap_". $reg ."_". $k .".html";
-          $map .= '
+      NAME		'. $ly[0] .'admin0'. $k .'
+      DATA		"'. $ly[1] .'"
+	  GROUP		'. $reg .'
+	  STATUS	OFF
+	  TYPE		'. $type.'
+	  PROJECTION		"init=epsg:4326" END
+	  CLASSITEM		"'. $ly[2] .'"
+	  LABELITEM		"'. $ly[3] .'"';
+					// Selection map used in Query Design
+					if ($typ == "SELECT") {
+						$tm = "templates/imagemap_". $reg ."_". $k .".html";
+						$map .= '
       CLASS
         EXPRESSION ("['. $i[4] .']" in "%ids%")
         STYLE
@@ -190,20 +162,21 @@ class Maps
         END
       END
       TEMPLATE "'. $tm .'"';
-          $this->makeImagemapTemplate($i[3], $i[4], $tm);
-        }
-        $map .= '
+						$this->makeImagemapTemplate($i[3], $i[4], $tm);
+					}
+					$map .= '
       CLASS
         # COLOR	'. $color;
-			  $map .= '
+					$map .= '
         OUTLINECOLOR 50 50 50';
-			  $map .= '
+					$map .= '
         LABEL
 			  	TYPE TRUETYPE		FONT "arial"		SIZE 6		COLOR	0 0 89
 			  	POSITION CC			PARTIALS FALSE	BUFFER 4
         END
-	    END
-	  END';
+	  END
+	END';
+				} //end if
 			}
 		}
 		return $map;
@@ -225,16 +198,18 @@ class Maps
 	
 	// Generate standard layer with query results
 	function setLayerEff($q, $reg, $lev, $dl, $range, $inf, $lbl) {
-		$gl = $q->loadGeoLevels('', -1, true);
-		$data = $gl[$lev][2];
-		$code = $gl[$lev][3];
-		$name = $gl[$lev][4];
+		$gl = $q->loadGeoLevels('', $lev, true);
 		$map = "";
-		$lp = VAR_DIR . '/' . $reg ."/". $data;
-		if ($this->testLayer($lp, $code, $name)) {
-			$map = '
+		echo "<pre>"; print_r($dl); print_r($gl);
+		foreach ($gl[$lev][2] as $ly) {
+			$data = $ly[1];
+			$code = $ly[2];
+			$name = $ly[3];
+			$lp = VAR_DIR . '/' . $reg ."/". $data;
+			if ($this->testLayer($lp, $code, $name)) {
+				$map .= '
     LAYER
-		NAME	effects
+		NAME	'. $ly[0] .'effects
 		DATA	"'. $data .'"
 		GROUP	'. $reg .'
 		STATUS	ON
@@ -250,32 +225,32 @@ class Maps
 			WMS_SRS	"EPSG:4326 EPSG:900913"
 		END';
 			// classify elements by ranges
-			$vl = $this->classify($dl, $range);
-			$shwlab = 'TEXT ""';
-			if ($lbl == "NAME")
-				$shwlab = '';
-			// Generate classes with effects..
-			foreach ($vl as $k=>$i) {
-				if ($lbl == "CODE")
-					$shwlab = 'TEXT "'. $k .'"';
-				elseif ($lbl == "VALUE")
-					$shwlab = 'TEXT "'. $i[2] .'"';
-				$map .= '
-		  CLASS ';
-				if (!empty($i[0])) {
+				$vl = $this->classify($dl, $range);
+				$shwlab = 'TEXT ""';
+				if ($lbl == "NAME")
+					$shwlab = '';
+				// Generate classes with effects..
+				foreach ($vl as $k=>$i) {
+					if ($lbl == "CODE")
+						$shwlab = 'TEXT "'. $k .'"';
+					elseif ($lbl == "VALUE")
+						$shwlab = 'TEXT "'. $i[2] .'"';
 					$map .= '
+		CLASS ';
+					if (!empty($i[0])) {
+						$map .= '
 				NAME "'. $i[0] .'"';
-				}
-			$map .= ' 
-  		  EXPRESSION "'. $k .'" 
+					}
+					$map .= ' 
+			EXPRESSION "'. $k .'" 
   			STYLE COLOR '. $i[1] .' OUTLINECOLOR 130 130 130 END
   			'. $shwlab .'
   			LABEL
 		      TYPE TRUETYPE		FONT "arial"		SIZE	6
 		      COLOR	0 0 89 		POSITION CC 		PARTIALS FALSE	BUFFER 4
-		  END
+			END
 		END';
-			}
+				} // end foreach
 			/* Generate null class
 			if ($lbl == "VALUE")
 				$shwlab = 'TEXT "0"';
@@ -290,11 +265,12 @@ class Maps
 		      COLOR	0 0 89 		POSITION CC			PARTIALS FALSE	BUFFER 4
         END
       END';*/
-		  $map .= '
-		END # LAYER
+				$map .= '
+	END # LAYER
 ';
+			}
 		}
-  	return $map;
+		return $map;
 	}
 
 	// Set RGB color array according to user's defined ranges..
