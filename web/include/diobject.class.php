@@ -56,6 +56,10 @@ class DIObject {
 		return $this->oField[$prmKey];
 	}
 	
+	public function getType($prmKey) {
+		return $this->oFieldType[$prmKey];
+	}
+	
 	public function set($prmKey, $prmValue) {
 		$iReturn = 0;
 		if (isset($this->oField[$prmKey])) {
@@ -215,40 +219,65 @@ class DIObject {
 		return $iReturn;
 	} // function load
 	
-	
-	public function insert() {
-		$this->create();
-		$this->update();
-	}
-
-	public function delete() {
-		$iReturn = 0;
-		$sQuery = $this->getDeleteQuery();
-		if ($result = $this->q->dreg->query($sQuery)) {
-			$iReturn = 1;		
+	public function insert($withValidate = true) {
+		$iReturn = 1;
+		$bValidate = $withValidate;
+		if ($withValidate) {
+			$iReturn = validateCreate();
+			if ($iReturn > 0 ) { 
+				$iReturn = validateUpdate();
+				$bValidate = false;
+			}
+		}
+		if ($iReturn > 0) {
+			$iReturn = $this->create($bValidate);
+			if ($iReturn > 0) {
+				$iReturn = $this->update($bValidate);
+			}
 		}
 		return $iReturn;
-	} // function
+	}
 
-	public function create() {
-		$iReturn = 0;
-		$sQuery = $this->getInsertQuery();
-		try {
+	public function delete($withValidate = true) {
+		$iReturn = 1;
+		if ($withValidate) {
+			$iReturn = validateDelete();
+		}
+		if ($iReturn > 0) {
+			$sQuery = $this->getDeleteQuery();
 			if ($result = $this->q->dreg->query($sQuery)) {
 				$iReturn = 1;		
 			}
-		} catch (PDOException $e) {
-			print "Error " . $e->getMessage() . "<br>";
 		}
 		return $iReturn;
 	} // function
 
-	public function update() {
-		$iReturn = 0;
+	public function create($withValidate = true) {
+		$iReturn = 1;
+		if ($withValidate) {
+			$iReturn = $this->validateCreate();
+		}
+		if ($iReturn > 0) {
+			$sQuery = $this->getInsertQuery();
+			try {
+				if ($result = $this->q->dreg->query($sQuery)) {
+					$iReturn = 1;		
+				}
+			} catch (PDOException $e) {
+				print "Error " . $e->getMessage() . "<br>";
+			}
+		}
+		return $iReturn;
+	} // function
+
+	public function update($withValidate = true) {
+		$iReturn = 1;
 		if (!empty($this->SyncRecord)) {
 			$this->SyncRecord = gmdate('c');
 		}
-		$iReturn = $this->validateUpdate();
+		if ($withValidate) {
+			$iReturn = $this->validateUpdate();
+		}
 		if ($iReturn > 0) {
 			$sQuery = $this->getUpdateQuery();
 			try {
@@ -261,10 +290,43 @@ class DIObject {
 		}
 		return $iReturn;
 	} // function
-	
+
+	public function validateCreate() {
+		return 1;
+	}	
 	public function validateUpdate() {
 		return 1;
 	}
+	
+	public function validateDelete() {
+		return 1;
+	}
+
+	public function validateNotNull($curReturn, $ErrCode, $FieldName) {
+		$iReturn = $curReturn;
+		if ($iReturn > 0) {
+			if ($this->get($FieldName) == '') {
+				$iReturn = $ErrCode;
+			}
+		}
+		return $iReturn;	
+	}
+
+	public function validateUnique($curReturn, $ErrCode, $FieldName) {
+		$iReturn = $curReturn;
+		if ($iReturn > 0) {
+			$quote = "'";
+			if ($this->getType($FieldName) == 'INTEGER') {
+				$quote = "";
+			}
+			$sQuery = "SELECT " . $FieldName . " FROM " . $this->getTableName() . " WHERE " . $FieldName . "=" . $quote . $this->get($FieldName) . $quote;
+			foreach($this->q->dreg->query($sQuery) as $row) {
+				$iReturn = $ErrCode;
+			}
+		}
+		return $iReturn;	
+	}
+
 } // class
 
 </script>
