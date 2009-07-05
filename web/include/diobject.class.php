@@ -33,7 +33,10 @@ class DIObject {
 	} // constructor
 	
 	public function createFields($prmKeyDef, $prmFieldDef) {
-		$sAllFields = $prmKeyDef . "," . $prmFieldDef;
+		$sAllFields = $prmKeyDef;
+		if ($prmFieldDef != '') {
+			$sAllFields .= "," . $prmFieldDef;
+		}
 		$sFields = split(',', $sAllFields);
 		foreach ($sFields as $sKey => $sValue) {
 			$oItem = split('/', $sValue);
