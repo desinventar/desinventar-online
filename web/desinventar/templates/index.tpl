@@ -691,7 +691,7 @@
                         if(parseInt(this.value) > 0) { $('{-$sc3[$key]-}').value='-1';}
                         if(parseInt(this.value) ==0) { $('{-$sc3[$key]-}').value='0';}"
                       onFocus="showtip('{-$item[2]-}', '#f1bd41')" tabindex="{-$tabind-}" class="line"
-                      onkeypress="return blockChars(event, this.value, 'double:10');">
+                      onkeypress="return blockChars(event, this.value, 'double:10');" value="0">
                   </span><br>
 {-/foreach-}
                 </td>
@@ -702,7 +702,7 @@
                   <span ext:qtip="{-$item[1]-}">
                   {-$item[0]-}<br>
                   <input id="{-$key-}" name="{-$key-}" type="text" size="11" tabindex="{-$tabind-}" class="line"
-                      onFocus="showtip('{-$item[2]-}', '#f1bd41');"
+                      onFocus="showtip('{-$item[2]-}', '#f1bd41');" value="0"
                       onkeypress="return blockChars(event, this.value, 'double:');">
                   </span><br>
 {-/foreach-}
@@ -746,11 +746,11 @@
           <td>
             <table class="grid">
               <tr valign="top">
-                <td ext:qtip="{-$eve.EventId[1]-}">
+                <td ext:qtip="{-$eve.EventName[1]-}">
 {-assign var="tabind" value="`$tabind+1`"-}
-                  {-$eve.EventId[0]-}<b style="color:darkred;">*</b><br>
+                  {-$eve.EventName[0]-}<b style="color:darkred;">*</b><br>
                   <select id="EventId" name="EventId" style='width: 180px;' tabindex="{-$tabind-}"
-                      onFocus="showtip('{-$eve.EventId[2]-}', 'lightblue')">
+                      onFocus="showtip('{-$eve.EventName[2]-}', 'lightblue')">
                     <option value=""></option>
 {-foreach name=eln key=key item=item from=$evel-}
                     <option value="{-$key-}" onKeyPress="showtip('{-$item[1]-}', 'lightblue')" 
@@ -791,11 +791,11 @@
           <td>
             <table class="grid">
               <tr>
-                <td ext:qtip="{-$cau.CauseId[1]-}">
+                <td ext:qtip="{-$cau.CauseName[1]-}">
 {-assign var="tabind" value="`$tabind+1`"-}
-                  {-$cau.CauseId[0]-}<b style="color:darkred;">*</b><br>
+                  {-$cau.CauseName[0]-}<b style="color:darkred;">*</b><br>
                   <select id="CauseId" name="CauseId" style='width: 180px;' class="line" 
-                      tabindex="{-$tabind-}" onFocus="showtip('{-$cau.CauseId[2]-}', '#ffffc0')">
+                      tabindex="{-$tabind-}" onFocus="showtip('{-$cau.CauseName[2]-}', '#ffffc0')">
                     <option value=""></option>
 {-foreach name=cln key=key item=item from=$caul-}
                     <option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}', '#ffffc0')">{-$item[0]-}</option>

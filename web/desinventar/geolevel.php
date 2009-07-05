@@ -108,7 +108,7 @@ if (!empty($cmd)) {
 		break;
 	case "list":
 		$t->assign ("ctl_levlist", true);
-		$t->assign ("levl", $q->loadGeoLevels(""));
+		$t->assign ("levl", $q->loadGeoLevels('', -1, false));
 		break;
 	default:
 		break;
@@ -116,7 +116,7 @@ if (!empty($cmd)) {
 } else {
 	$t->assign ("ctl_admingeo", true);
 	$t->assign ("ctl_levlist", true);
-	$t->assign ("levl", $q->loadGeoLevels(""));
+	$t->assign ("levl", $q->loadGeoLevels('', -1, false));
 	$lev = 0;
 	$t->assign ("lev", $lev);
 	$t->assign ("levmax", $q->getMaxGeoLev());

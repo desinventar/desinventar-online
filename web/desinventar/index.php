@@ -222,7 +222,7 @@ if (isset($_GET['u'])) {
 				$t->assign ("sec", $q->queryLabelsFromGroup('Sector', $lg));
 				//      $t->assign ("rcsl", $q->queryLabelsFromGroup('RecordStatus', $lg));
 				$t->assign ("dmg", $q->queryLabelsFromGroup('MetGuide', $lg));
-				$t->assign ("levl", $q->loadGeoLevels(""));
+				$t->assign ("levl", $q->loadGeoLevels('', -1, false));
 				$lev = 0;
 				$t->assign ("lev", $lev);
 				$t->assign ("levmax", $q->getMaxGeoLev());

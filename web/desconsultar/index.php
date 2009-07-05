@@ -70,7 +70,7 @@ else {
   $rinf = $q->getDBInfo();
   $t->assign ("regname", $rinf['RegionLabel']);
   $geol = $q->loadGeography(0);
-  $glev = $q->loadGeoLevels("");
+  $glev = $q->loadGeoLevels('', -1, false);
   $evepredl = $q->loadEvents("PREDEF", "active", $lg);
   $eveuserl = $q->loadEvents("USER", "active", $lg);
   $caupredl = $q->loadCauses("PREDEF", "active", $lg);
@@ -179,7 +179,7 @@ else {
     "GeographyCode,DisasterLatitude,DisasterLongitude,RecordAuthor,RecordCreation,RecordLastUpdate,EventNotes");
   $t->assign ("sda1", $sda1);	// array_diff_key($dc2, array_flip($sda))
   // MAPS
-	$mgl = $q->loadGeoLevels("map");
+	$mgl = $q->loadGeoLevels('', -1, true);
   $t->assign ("mgel", $mgl);
   $range[] = array(10, "1 - 10", "ffff99");
   $range[] = array(100, "11 - 100", "ffff00");
