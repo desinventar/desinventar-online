@@ -9,6 +9,7 @@ require_once('../include/loader.php');
 require_once('../include/query.class.php');
 require_once('../include/region.class.php');
 require_once('../include/didisaster.class.php');
+require_once('../include/dieedata.class.php');
 
 /* Convert Post Form to DesInventar Disaster Table struct 
  * Insert		 	(1) create DisasterId. 
@@ -130,61 +131,62 @@ if (isset($_GET['u'])) {
 	} else {
 		// Check values of _CMD: search | addDICard | updDICard
 		if (isset($_POST['_CMD'])) {
-			// Insert DICard in Database through DICORE
-			// First release datacard
 			$us->releaseDatacard($_POST['DisasterId']);
-			// Let duplicate serial...
-			//if ($q->isvalidObjectName($_POST['DisasterId'], $_POST['DisasterSerial'], DI_DISASTER)) {
 			if ($_POST['_CMD'] == "insertDICard") {
+				// Insert New Datacard
 				$data = form2disaster($_POST, CMD_NEW);
+				echo "<!--"; print_r($data); echo "-->\n";
 				$o = new DIDisaster($us, $data['DisasterId']);
 				$o->setFromArray($data);
 				$o->set('RecordCreation', date('c'));
 				$o->set('RecordLastUpdate', date('c'));
 				$i = $o->insert();
-				
-				echo "<!--"; print_r($data); echo "-->\n";
-				/*
-				$rpcargs = array($_SESSION['sessionid'], DI_DISASTER, CMD_NEW, $data);
-				$dip = callRpcDICore('RpcDIServer.saveDIObject', $rpcargs);
-				*/
+				fb("Insert Disaster: " . $data['DisasterId']);
 				$t->assign ("statusmsg", "insertok");
+				if (!iserror($i)) {
+					// Save EEData ....
+					$t->assign ("diserial", $data['DisasterSerial']);
+					// If Datacard is valid, update EEData Table..
+					$eedat = form2eedata($_POST);
+					$eedat['DisasterId'] = $data['DisasterId'];
+					echo "<!--"; print_r($eedat); echo "-->\n";
+					$o = new DIEEData($us, $eedat['DisasterId']);
+					$o->setFromArray($eedat);
+					$i = $o->insert();
+					fb("Insert EEData : " . $eedat['DisasterId']);
+				} else {
+					$t->assign ("statusmsg", showerror($i));
+				}
 			} elseif ($_POST['_CMD'] == "updateDICard") {
-				// Update DICard in Database through DICORE
+				// Update Existing Datacard
 				$data = form2disaster($_POST, CMD_UPDATE);
+				echo "<!--"; print_r($data); echo "-->\n";
 				$o = new DIDisaster($us, $data['DisasterId']);
 				$o->load();
 				$o->setFromArray($data);
 				$o->set('RecordLastUpdate', date('c'));
 				$i = $o->update();
-				echo "<!--"; print_r($data); echo "-->\n";
-				/*
-				if ($data['RecordStatus'] == "DELETED")
-					$rpcargs = array($_SESSION['sessionid'], DI_DISASTER, CMD_DELETE, $data);
-				else
-					$rpcargs = array($_SESSION['sessionid'], DI_DISASTER, CMD_UPDATE, $data);
-				$dip = callRpcDICore('RpcDIServer.saveDIObject', $rpcargs);
-				*/
 				$t->assign ("statusmsg", "updateok");
+				if (!iserror($i)) {
+					// Save EEData ....
+					$t->assign ("diserial", $data['DisasterSerial']);
+					// If Datacard is valid, update EEData Table..
+					$eedat = form2eedata($_POST);
+					$eedat['DisasterId'] = $data['DisasterId'];
+					echo "<!--"; print_r($eedat); echo "-->\n";
+					$o = new DIEEData($us, $eedat['DisasterId']);
+					$o->setFromArray($eedat);
+					$i = $o->update();
+				} else {
+					$t->assign ("statusmsg", showerror($i));
+				}
 			}
 			
-			/*
-			if (!iserror($dip)) {
-				$t->assign ("diserial", $data['DisasterSerial']);
-				// If Datacard is valid, update EEData Table..
-				$eedat = form2eedata($_POST);
-				// uhmm, dicore will send DisasterId when him create this..
-				$eedat['DisasterId'] = $data['DisasterId'];
-				echo "<!--"; print_r($eedat); echo "-->\n";
-				$rpcarg2 = array($_SESSION['sessionid'], DI_EEDATA, CMD_UPDATE, $eedat);
-				$dee = callRpcDICore('RpcDIServer.saveDIObject', $rpcarg2);
-			} else {
-				$t->assign ("statusmsg", showerror($dip));
-			}
-			*/
 			$t->assign ("dipub", $q->getNumDisasterByStatus("PUBLISHED"));
 			$t->assign ("direa", $q->getNumDisasterByStatus("READY"));
 			$t->assign ("ctl_result", true);
+
+			// End _CMD Block
 		} else {
 			// Default view of DesInventar
 			$t->assign ("usr", $us->sUserName);
