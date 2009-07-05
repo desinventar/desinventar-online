@@ -7,13 +7,16 @@ require_once('query.class.php');
 require_once('didisaster.class.php');
 
 class DIImport {
-	public function __construct($prmSessionId, $prmRegionId) {
-		$this->RegionId = $prmRegionId;
+	public function __construct($prmSessionId) {
 		$this->us = $prmSessionId;
-		$this->q = new Query($prmRegionId);
+		$this->q = new Query($this->us->sRegionId);
 	}
 	
-	public function importFromCSV($FileName) {
+	public function validateFromCSV($FileName) {
+		return $this->importFromCSV($FileName, false);
+	}
+	
+	public function importFromCSV($FileName, $doImport = true) {
 		$DisasterImport = array(0 => 'DisasterId', 
 		                        1 => 'DisasterSerial',
 		                        2 => 'DisasterBeginTime',
@@ -66,13 +69,15 @@ class DIImport {
 			                    44 => 'SectorHealth',
 			                    45 => 'SectorOther'
 						   );
+		$FLogName = '/tmp/di8import_' . $this->us->sSessionId . '.csv';
+		$FLogName = '/tmp/di8import.csv';
+		$flog = fopen($FLogName,'w');
 		$fh = fopen($FileName, 'r');
 		// Version Line
 		$a = fgetcsv($fh, 1000, ',');
 		// Column Header Line
 		$a = fgetcsv($fh, 1000, ',');
-		$rowCount = 0;
-		$this->q->dreg->query("BEGIN TRANSACTION");
+		$rowCount = 2;
 		while (! feof($fh) ) {
 			$a = fgetcsv($fh, 1000, ',');
 			if (count($a) > 1) {
@@ -101,33 +106,42 @@ class DIImport {
 				
 				$bInsert = ($o->validateCreate() > 0);
 				if ($bInsert) {
-					$Result = $o->insert();
+					if ($doImport) { $Result = $o->insert(); }
+					else { $Result = $o->validateCreate(); }
 				} else {
-					$Result = $o->update();
+					if ($doImport) { $Result = $o->update(); }
+					else { $Result = $o->validateUpdate(); }
 				}
-				if ($Result>0) {
+				if ($Result > 0) {
 					$e = new DIEEData($this->us);
 					$e->set('DisasterId', $o->get('DisasterId'));
-					if ($bInsert) {
-						$e->insert();
-					} else {
-						$e->update();
+					if ($doImport) {
+						if ($bInsert) {
+							$e->insert();
+						} else {
+							$e->update();
+						}
 					}
 				} else {
 					// Generate Error Log
 					$sErrorMsg = $rowCount . ',' . $Result . ',';
 					switch($Result) {
 					case -59:
-						$sErrorMsg .= $o->get('DisasterSerial') . ' EventId Not Found ' . $o->get('EventId');
+						$sErrorMsg .= $o->get('DisasterSerial') . ' EventId Not Found ' . $o->get('EventId') . ',,';
 						break;						
+					default:
+						$sErrorMsg .= 'Unknown Error' . ',,';
+						break;
 					} //switch
-					print $sErrorMsg . '<br />';
+					fputs($flog, $sErrorMsg . "\n");
 				} //else
 			}
 		} //while
-		$this->q->dreg->query("COMMIT");
 		fclose($fh);
-	}
+		fclose($flog);
+		return array('Status' => 1,
+		             'FileName' => $FLogName);
+	} //function
 } //class
 
 </script>

@@ -14,6 +14,7 @@
 
 if (isset($_SERVER["WINDIR"])) {
 	define('MODE', "offline"); // Mode Offline -> windows server
+	define('ARCH', 'WINDOWS');
 	define('MAPSERV', "mapserv.exe");
 	// 2009-05-01 (jhcaiced) Read Registry to obtain MS4W installation path	
 	$shell = new COM("WScript.Shell") or die("Requires Windows Scripting Host");
@@ -27,6 +28,7 @@ if (isset($_SERVER["WINDIR"])) {
 	}
 } else {
 	define('MODE', "online"); // Mode Online -> Linux server
+	define('ARCH', "LINUX");
 	define('MAPSERV', "mapserv");
 	define("SMARTYDIR", "/usr/share/Smarty");
 	define("TEMP", "/tmp");
