@@ -141,7 +141,6 @@ if (isset($_GET['u'])) {
 				$o->set('RecordCreation', date('c'));
 				$o->set('RecordLastUpdate', date('c'));
 				$i = $o->insert();
-				fb("Insert Disaster: " . $data['DisasterId']);
 				$t->assign ("statusmsg", "insertok");
 				if (!iserror($i)) {
 					// Save EEData ....
@@ -153,7 +152,6 @@ if (isset($_GET['u'])) {
 					$o = new DIEEData($us, $eedat['DisasterId']);
 					$o->setFromArray($eedat);
 					$i = $o->insert();
-					fb("Insert EEData : " . $eedat['DisasterId']);
 				} else {
 					$t->assign ("statusmsg", showerror($i));
 				}
