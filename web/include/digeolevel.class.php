@@ -40,4 +40,10 @@ class DIGeoLevel extends DIObject {
 		}
 		return $iMaxVal;
 	} // function
+
+	public function validateCreate() {
+		$iReturn = 1;
+		$iReturn = $this->validateUnique($iReturn, -1, 'GeoLevelId');
+		return $iReturn;
+	}
 } //class

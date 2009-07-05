@@ -89,4 +89,13 @@ class DIDisaster extends DIObject {
 		  " WHERE " . $this->getWhereSubQuery();
 		return $sQuery;
 	}
-}
+	
+	public function validateCreate() {
+		$iReturn = 1;
+		$iReturn = $this->validateNotNull($iReturn, -1, 'DisasterId');
+		$iReturn = $this->validateUniqueS($iReturn, -1, 'DisasterId');
+		return $iReturn;
+	}
+} //class
+
+</script>
