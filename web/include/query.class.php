@@ -344,7 +344,7 @@ class Query extends PDO
 	if ($lev >= 0)
 		$olev = "GeoLevelId = $lev ";
 	else
-		$olev = "1=1 "
+		$olev = "1=1 ";
     $sqlev = "SELECT GeoLevelId, GeoLevelName, GeoLevelDesc FROM GeoLevel WHERE $olev ORDER BY GeoLevelId";
 	if (!empty($prefix))
 		$opre = "GeographyId = '$prefix' ";
