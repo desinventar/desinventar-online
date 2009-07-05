@@ -263,6 +263,28 @@
         }
         mapw.show(this);
       });
+	  // open query file
+	  qryw = new Ext.Window({
+            el:'qry-win',  layout:'fit',  width:200, height:150, 
+            closeAction:'hide', plain: true, animCollapse: false,
+            items: new Ext.Panel({
+                contentEl: 'qry-cfg', autoScroll: true }),
+            buttons: [{
+                text:'{-#tsend#-}',
+                handler: function() {
+                    if (sendList("result")) {
+                      //$('DCRes').value = "D";
+                      qryw.hide();
+                    }
+                    else
+                      alert("{-#derrmsgfrm#-}");
+                }
+              },{
+                text:'{-#tclose#-}',
+                handler: function(){
+                    qryw.hide(); }
+              }]
+          });
       // quicktips
       Ext.apply(Ext.QuickTips.getQuickTip(), {
         maxWidth: 200, minWidth: 100, showDelay: 50, trackMouse: true });
