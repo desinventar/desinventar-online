@@ -16,23 +16,22 @@ require_once('../include/dicause.class.php');
 require_once('../include/dieedata.class.php');
 
 function loadCSV($csv) {
-  $handle = fopen($csv, "r");
-  $res = array();
-  while (($data = fgetcsv($handle, 100, ",")) !== FALSE)
-    $res[] = array($data[0], $data[1], $data[2], $data[3], $data[4]);
-  fclose($handle);
-  return $res;
+	$handle = fopen($csv, "r");
+	$res = array();
+	while (($data = fgetcsv($handle, 100, ",")) !== FALSE)
+		$res[] = array($data[0], $data[1], $data[2], $data[3], $data[4]);
+	fclose($handle);
+	return $res;
 }
 
 if (isset($_POST['r']) && !empty($_POST['r']))
-  $reg = $_POST['r'];
+	$reg = $_POST['r'];
 elseif (isset($_GET['r']) && !empty($_GET['r']))
-  $reg = $_GET['r'];
+	$reg = $_GET['r'];
 else
-  exit();
+	exit();
 
 if (isset($_FILES['desinv']) && isset($_POST['diobj'])) {
-	$r = new Region($reg);
 	$iserror = true;
 	if (isset($_POST['cmd']) && $_POST['cmd'] == "upload") {
 		if ($_FILES['desinv']['error'] == UPLOAD_ERR_OK) {
