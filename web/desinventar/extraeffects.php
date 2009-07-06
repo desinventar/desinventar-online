@@ -12,9 +12,10 @@ require_once('../include/user.class.php');
 require_once('../include/dictionary.class.php');
 
 if (isset($_GET['r']) && !empty($_GET['r']))
-  $reg = $_GET['r'];
+	$reg = $_GET['r'];
 else
-  exit();
+	exit();
+
 
 function getRAPermList($lst) {
 	$dat = array();
@@ -23,10 +24,6 @@ function getRAPermList($lst) {
 			$dat[$k] = $v;
 	return $dat;
 }
-
-$d = new Dictionary(VAR_DIR);
-$u = new User('', '', '');
-$q = new Query($reg);
 
 // EDIT REGION: Form to Create and assign regions
 if (isset($_GET['cmd'])) {
@@ -56,16 +53,15 @@ if (isset($_GET['cmd'])) {
 	}
   // reload list from local SQLITE
   else if ($cmd == "list") {
-		$t->assign ("eef", $q->getEEFieldList(""));
+		$t->assign ("eef", $us->q->getEEFieldList(""));
 		$t->assign ("ctl_eeflist", true);
   }
-}
-else {
-	$urol = $u->getUserRole($reg);
+} else {
+	$urol = $us->getUserRole($reg);
 	if ($urol == "OBSERVER")
 		$t->assign ("ro", "disabled");
 	$t->assign ("ctl_admineef", true);
-	$t->assign ("eef", $q->getEEFieldList(""));
+	$t->assign ("eef", $us->q->getEEFieldList(""));
 	$t->assign ("ctl_eeflist", true);
 }
 
