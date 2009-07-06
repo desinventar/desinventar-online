@@ -7,9 +7,8 @@
 
 require_once('../include/loader.php');
 require_once('../include/query.class.php');
-require_once('../include/region.class.php');
-require_once('../include/user.class.php');
-require_once('../include/dictionary.class.php');
+require_once('../include/dieefield.class.php');
+
 
 if (isset($_GET['r']) && !empty($_GET['r']))
 	$reg = $_GET['r'];
@@ -37,13 +36,18 @@ if (isset($_GET['cmd'])) {
 			$public = true;
 		else
 			$public = false;
-		$r = new Region($reg);
+		$data = array('EEFieldId'     => $_GET['EEFieldId'],
+		              'EEFieldLabel'  => $_GET['EEFieldLabel'],
+		              'EEFieldDesc'   => $_GET['EEFieldDesc'], 
+		              'EEFieldType'   => $_GET['EEFieldType'], 
+		              'EEFieldSize'   => $_GET['EEFieldSize'],
+		              'EEFieldStatus' => $active);
+		$o = new DIEEField($us, $_GET['EEFieldId']);
+		$o->setFromArray($data);
 		if ($cmd == "insert")
-			$stat = $r->insertEEField($_GET['EEFieldLabel'], $_GET['EEFieldDesc'], 
-					$_GET['EEFieldType'], $_GET['EEFieldSize'], $active, $public);
+			$stat = $o->insert();
 		else if ($cmd == "update")
-			$stat = $r->updateEEField($_GET['EEFieldId'], $_GET['EEFieldLabel'], $_GET['EEFieldDesc'], 
-					$_GET['EEFieldType'], $_GET['EEFieldSize'], $active, $public);
+			$stat = $o->update();
 		if (!iserror($stat)) 
 			$t->assign ("ctl_msgupdeef", true);
 		else {
@@ -66,7 +70,7 @@ if (isset($_GET['cmd'])) {
 }
 
 $t->assign ("reg", $reg);
-$t->assign ("dic", $d->queryLabelsFromGroup('DB', $lg));
+$t->assign ("dic", $us->q->queryLabelsFromGroup('DB', $lg));
 $t->display ("extraeffects.tpl");
 
 </script>
