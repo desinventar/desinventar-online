@@ -445,7 +445,7 @@
         s.collapse();
         $('DC').action='data.php';
         $('DC').submit();
-        hideMap();
+        //hideMap();
         return true;
       }
       else
@@ -475,7 +475,7 @@
 		  s.collapse();
 		  $('DC').action='thematicmap.php';
 		  $('DC').submit();
-		  hideMap();
+		  //hideMap();
 		  return true;
 	  }
 	  else
@@ -490,7 +490,7 @@
       s.collapse();
       $('DC').action='graphic.php';
       $('DC').submit();
-      hideMap();
+      //hideMap();
     }
     function sendStadistic(cmd) {
       if ($('_S+Firstlev').value != "" && $('_S+Field[]').length > 0) {
@@ -508,7 +508,7 @@
         s.collapse();
         $('DC').action='stadistic.php';
         $('DC').submit();
-        hideMap();
+        //hideMap();
         return true;
       }
       else
