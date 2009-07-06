@@ -19,7 +19,7 @@ else
 $q = new Query($reg);
 $rinfo = $q->getDBInfo();
 $regname = $rinfo['RegionLabel'];
-fixPost(&$post);
+fixPost($post);
 
 // load levels to display in totalizations
 foreach ($q->loadGeoLevels('', -1, false) as $k=>$i)
