@@ -6,25 +6,17 @@
  ***********************************************/
 
 require_once('../include/loader.php');
-require_once('../include/query.class.php');
 require_once('../include/region.class.php');
-//require_once('../include/dictionary.class.php');
 
 $reg = $us->sRegionId;
 if (empty($reg)) {
 	exit();
 }
-/*
-if (isset($_GET['r']) && !empty($_GET['r']))
-  $reg = $_GET['r'];
-else
-  exit();
-*/
 $r = new Region($reg);
-$q = new Query($reg);
 
-if (isset($_GET))
+if (isset($_GET)) {
 	$get = $_GET;
+}
 
 // EDIT REGION: Form to Create and assign regions
 if (isset($get['infocmd'])) {
@@ -43,9 +35,8 @@ if (isset($get['infocmd'])) {
 		$t->assign ("ctl_errupdinfo", true);
 		$t->assign ("updstatinfo", $ifo);
 	}
-}
-else {
-	$info = $q->getDBInfo();
+} else {
+	$info = $us->q->getDBInfo();
 	$inf[0] = $info['RegionDesc'];
 	$inf[1] = $info['RegionDescEN'];
 	$inf[2] = $info['PeriodBeginDate'];
@@ -64,14 +55,16 @@ else {
 	$t->assign ("usr", $us->getUserFullName(''));
 }
 $t->assign ("reg", $reg);
-$t->assign ("dic", $q->queryLabelsFromGroup('DB', $lg));
+$t->assign ("dic", $us->q->queryLabelsFromGroup('DB', $lg));
 $t->display ("regioninfo.tpl");
 
 function getRAPermList($lst) {
 	$dat = array();
-	foreach ($lst as $k=>$v)
-		if ($v=="NONE" || $v=="USER" || $v=="OBSERVER" || $v=="SUPERVISOR")
+	foreach ($lst as $k=>$v) {
+		if ($v=="NONE" || $v=="USER" || $v=="OBSERVER" || $v=="SUPERVISOR") {
 			$dat[$k] = $v;
+		} //if
+	} //foreach
 	return $dat;
 }
 
