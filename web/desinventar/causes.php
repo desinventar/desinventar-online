@@ -16,25 +16,25 @@ else
 
 function form2cause ($form) {
 	$data = array ();
-  if (isset($form['CauseId']) && !empty($form['CauseId']))
-    $data['CauseId'] = $form['CauseId'];
-  else
-    $data['CauseId'] = "";
-  if (isset($form['CauseName']))
-    $data['CauseName'] = $form['CauseName'];
-  if (isset($form['CauseDesc']))
-    $data['CauseDesc'] = $form['CauseDesc'];
-  else if (isset($form['CauseDesc2']))
-    $data['CauseDesc'] = $form['CauseDesc2'];
-  if (isset($form['CauseActive']) && $form['CauseActive'] == "on")
-    $data['CauseActive'] = true;
-  else
-    $data['CauseActive'] = false;
-  if (isset($form['CausePreDefined']) && $form['CausePreDefined'] == "1")
-    $data['CausePreDefined'] = true;
-  else
-    $data['CausePreDefined'] = false;
-  return $data;
+	if (isset($form['CauseId']) && !empty($form['CauseId']))
+		$data['CauseId'] = $form['CauseId'];
+	else
+		$data['CauseId'] = "";
+	if (isset($form['CauseName']))
+		$data['CauseName'] = $form['CauseName'];
+	if (isset($form['CauseDesc']))
+		$data['CauseDesc'] = $form['CauseDesc'];
+	else if (isset($form['CauseDesc2']))
+		$data['CauseDesc'] = $form['CauseDesc2'];
+	if (isset($form['CauseActive']) && $form['CauseActive'] == "on")
+		$data['CauseActive'] = true;
+	else
+		$data['CauseActive'] = false;
+	if (isset($form['CausePreDefined']) && $form['CausePreDefined'] == "1")
+		$data['CausePreDefined'] = true;
+	else
+		$data['CausePreDefined'] = false;
+	return $data;
 }
 
 function showResult($stat, &$tp) {
@@ -50,9 +50,6 @@ function showResult($stat, &$tp) {
 			$tp->assign ("chkstatus", true);
 	}
 }
-
-//$r = new Region($reg);
-//$q = new Query($reg);
 
 if (isset($_GET['cmd'])) {
 	$dat = form2cause($_GET);
