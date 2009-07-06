@@ -49,7 +49,7 @@ class DIGeoLevel extends DIObject {
 
 	public function validateUpdate() {
 		$iReturn = $this->validateNotNull($iReturn, -33, 'GeoLevelName');
-		$iReturn = $this->validateUnique($iReturn,  -34, 'GeoLevelName');
+		$iReturn = $this->validateUnique($iReturn,  -34, 'GeoLevelName', true);
 		return $iReturn;
 	}
 } //class

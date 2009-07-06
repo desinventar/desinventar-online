@@ -50,6 +50,7 @@ class UserSession {
 		if (! $iReturn) {
 			$this->insert();
 		}
+		$this->q = new Query($this->sRegionId);
 		return $iReturn;	
 	} // function
 
@@ -153,6 +154,7 @@ class UserSession {
 			$iReturn = 1;
 		}
 		$this->awake();
+		$this->q = new Query($this->sRegionId);
 		return $iReturn;
 	} // open()
 
