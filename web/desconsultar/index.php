@@ -8,14 +8,19 @@
 require_once('../include/loader.php');
 require_once('../include/usersession.class.php');
 
+$post = $_POST;
+$get  = $_GET;
+
 // Direct access to module
-if (isset($_GET['r']) && !empty($_GET['r']))
-	$reg = $_GET['r'];
+if (isset($get['r']) && !empty($get['r']))
+	$reg = $get['r'];
 // Request to save Query Design in File..
-elseif (isset($_POST) && !empty($_POST['_REG'])) {
-	header("Content-type: text/plain");
-	header("Content-Disposition: attachment; filename=Query_". str_replace(" ", "", $_POST['_REG']) .".di8");
-	echo base64_encode(serialize($_POST));
+elseif (isset($post) && !empty($post['_REG'])) {
+	fixPost(&$post);
+	header("Content-type: text/xml");
+	header("Content-Disposition: attachment; filename=Query_". str_replace(" ", "", $post['_REG']) .".xml");
+	echo '<?xml version="1.0" encoding="UTF-8"?>'. "\n";
+	echo "<DIQuery />". base64_encode(serialize($post));
 	exit();
 }
 // Open file, decode and assign saved query..
@@ -24,8 +29,12 @@ elseif (isset($_FILES['qry'])) {
 	$handle = fopen($myfile, "r");
 	$cq = fread($handle, filesize($myfile));
 	fclose($handle);
-	if (!empty($cq))
-		$qd = unserialize(base64_decode($cq));
+	$xml = '<DIQuery />';
+	$pos = strpos($cq, $xml);
+	if (!empty($cq) &&  $pos != false) {			
+		$qy = substr($cq, $pos + strlen($xml));
+		$qd = unserialize(base64_decode($qy));
+	}
 	else
 		exit();
 	$reg = $qd['_REG'];
@@ -38,22 +47,22 @@ else
 if (!empty($reg)) {
 	$us->open($reg);
 	$q = new Query($reg);
-	if (isset($_GET['lang']) && !empty($_GET['lang']))
-		$_SESSION['lang'] = $_GET['lang'];
+	if (isset($get['lang']) && !empty($get['lang']))
+		$_SESSION['lang'] = $get['lang'];
 }
 else
 	exit();
 
 // Display Geographic list of childs..
-if (isset($_GET['cmd'])) {
-  if ($_GET['cmd'] == "getGeoId") {
-    $code = $q->getObjectNameById($_GET['GeoCode'], "GEOCODE");
+if (isset($get['cmd'])) {
+  if ($get['cmd'] == "getGeoId") {
+    $code = $q->getObjectNameById($get['GeoCode'], "GEOCODE");
     echo "$code";
   }
   // Display Geographic list of childs..
-  elseif ($_GET['cmd'] == "glist") {
-    $t->assign ("reg", $_GET['GeographyId']);
-    $t->assign ("geol", $q->loadGeoChilds($_GET['GeographyId']));
+  elseif ($get['cmd'] == "glist") {
+    $t->assign ("reg", $get['GeographyId']);
+    $t->assign ("geol", $q->loadGeoChilds($get['GeographyId']));
     $t->assign ("ctl_glist", true);
   }
 }
@@ -130,18 +139,18 @@ else {
   $ef2 = $q->queryLabelsFromGroup('Effect|Affected', $lg);
   $ef3 = $q->queryLabelsFromGroup('Effect|Economic', $lg);
   $sec = $q->queryLabelsFromGroup('Sector', $lg);
-  $sec['SectorTransport'][3] 			= array('EffectRoads' => $ef2['EffectRoads'][0]);
+  $sec['SectorTransport'][3] 		= array('EffectRoads' => $ef2['EffectRoads'][0]);
   $sec['SectorCommunications'][3] = null;
-  $sec['SectorRelief'][3] 				= null;
+  $sec['SectorRelief'][3] 			= null;
   $sec['SectorAgricultural'][3] 	= array('EffectFarmingAndForest' => $ef2['EffectFarmingAndForest'][0],
                                         'EffectLiveStock' => $ef2['EffectLiveStock'][0]);
   $sec['SectorWaterSupply'][3] 		= null;
-  $sec['SectorSewerage'][3]				= null;
-  $sec['SectorEducation'][3]			= array('EffectEducationCenters' => $ef2['EffectEducationCenters'][0]);
-  $sec['SectorPower'][3]					= null;
-  $sec['SectorIndustry'][3]				= null;
-  $sec['SectorHealth'][3]					= array('EffectMedicalCenters' => $ef2['EffectMedicalCenters'][0]);
-  $sec['SectorOther'][3]					= null;
+  $sec['SectorSewerage'][3]			= null;
+  $sec['SectorEducation'][3]		= array('EffectEducationCenters' => $ef2['EffectEducationCenters'][0]);
+  $sec['SectorPower'][3]			= null;
+  $sec['SectorIndustry'][3]			= null;
+  $sec['SectorHealth'][3]			= array('EffectMedicalCenters' => $ef2['EffectMedicalCenters'][0]);
+  $sec['SectorOther'][3]			= null;
   $dic = array();
   $dic = array_merge($dic, $q->queryLabelsFromGroup('MapOpt', $lg));
   $dic = array_merge($dic, $q->queryLabelsFromGroup('Graph', $lg));

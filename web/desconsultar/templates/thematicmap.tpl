@@ -65,6 +65,20 @@
 				{'isBaseLayer':true});
 			met1.setVisibility(false);
 			map.addLayer(met1);
+			// Use a Global Risk Data Platform (http://preview.grid.unep.ch/) WMS..
+/*			var bk1 = new OpenLayers.Layer.WMS("Flood Risk..",
+				"http://preview.grid.unep.ch:8080/geoserver/wms",
+				{'layers': 'preview:fl_risk', 'transparent': true},
+				{'isBaseLayer':true});
+			bk1.setVisibility(false);
+			map.addLayer(bk1);*/
+			var bk2 = new OpenLayers.Layer.WMS("GRDP - Population 2007",
+				"http://metafunctions.grid.unep.ch/cgi-bin/mapserv",
+				{ map:'/www/preview/previewims/etc/preview_ims.map', 'transparent':true, 'format':'png', layers:'popdens'},
+				{'isBaseLayer':true});
+			bk2.setVisibility(false);
+			map.addLayer(bk2);
+			// Legend: http://preview.grid.unep.ch/previewims/data/general_data/leg/leg_world07o.png
 /*
 			// Microsoft Virtual Earth Base Layer
 			var virtualearth = new OpenLayers.Layer.VirtualEarth("Microsoft Virtual Earth", { 'sphericalMercator': true });
