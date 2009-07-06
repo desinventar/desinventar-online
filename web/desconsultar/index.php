@@ -16,7 +16,7 @@ if (isset($get['r']) && !empty($get['r']))
 	$reg = $get['r'];
 // Request to save Query Design in File..
 elseif (isset($post) && !empty($post['_REG'])) {
-	fixPost(&$post);
+	fixPost($post);
 	header("Content-type: text/xml");
 	header("Content-Disposition: attachment; filename=Query_". str_replace(" ", "", $post['_REG']) .".xml");
 	echo '<?xml version="1.0" encoding="UTF-8"?>'. "\n";
