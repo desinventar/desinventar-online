@@ -44,7 +44,7 @@ class DIGeoLevel extends DIObject {
 	public function validateCreate() {
 		$iReturn = 1;
 		$iReturn = $this->validateNotNull($iReturn, -31, 'GeoLevelId');
-		$iReturn = $this->validateUnique($iReturn,  -32, 'GeoLevelId');
+		$iReturn = $this->validatePrimaryKey($iReturn,  -32);
 	}
 
 	public function validateUpdate() {

@@ -95,7 +95,7 @@ class DIDisaster extends DIObject {
 	public function validateCreate() {
 		$iReturn = 1;
 		$iReturn = $this->validateNotNull($iReturn, -51, 'DisasterId');
-		$iReturn = $this->validateUnique($iReturn,  -52, 'DisasterId');
+		$iReturn = $this->validatePrimaryKey($iReturn,  -52);
 		return $iReturn;
 	}
 	

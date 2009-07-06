@@ -76,7 +76,7 @@ class DIGeography extends DIObject {
 	public function validateCreate() {
 		$iReturn = 1;
 		$iReturn = validateNotNull($iReturn, -41, 'GeographyId');
-		$iReturn = validateUnique($iReturn,  -42, 'GeographyId');
+		$iReturn = validatePrimaryKey($iReturn,  -42);
 		return $iReturn;
 	}
 	public function validateUpdate() {
