@@ -6,15 +6,11 @@
  ***********************************************/
 
 require_once('../include/loader.php');
-require_once('../include/query.class.php');
-require_once('../include/region.class.php');
-require_once('../include/user.class.php');
-require_once('../include/dictionary.class.php');
 
 if (isset($_GET['r']) && !empty($_GET['r']))
-  $reg = $_GET['r'];
+	$reg = $_GET['r'];
 else
-  exit();
+	exit();
 
 function getRAPermList($lst) {
 	$dat = array();
@@ -24,11 +20,6 @@ function getRAPermList($lst) {
 	return $dat;
 }
 
-$d = new Dictionary(VAR_DIR);
-$u = new User('', '', '');
-$r = new Region($reg);
-$q = new Query($reg);
-
 if (isset($_GET))
 	$get = $_GET;
 
@@ -37,41 +28,42 @@ if (isset($get['logcmd'])) {
 	$mod = "log";
 	$cmd = $get['logcmd']; 
 	if ($cmd == "insert") {
-    $stat = $r->insertRegLog($get['DBLogType'], $get['DBLogNotes']);
-    if (!iserror($stat)) 
+		$stat = 1;
+		//2009-07-06 (jhcaiced) Replace this with another class...
+		//$stat = $r->insertRegLog($get['DBLogType'], $get['DBLogNotes']);
+		if (!iserror($stat)) 
 			$t->assign ("ctl_msginslog", true);
 		else {
 			$t->assign ("ctl_errinslog", true);
 			$t->assign ("insstatlog", $stat);
 		}
-	}
-	else if ($cmd == "update") {
-  	$stat = $r->updateRegLog($get['DBLogDate'], $get['DBLogType'], $get['DBLogNotes']);
-    if (!iserror($stat)) 
+	} elseif ($cmd == "update") {
+		$stat = 1;
+		// 2009-07-06 (jhcaiced) Replace this with another class...
+		//$stat = $r->updateRegLog($get['DBLogDate'], $get['DBLogType'], $get['DBLogNotes']);
+		if (!iserror($stat)) 
 			$t->assign ("ctl_msgupdlog", true);
 		else {
 			$t->assign ("ctl_errupdlog", true);
 			$t->assign ("updstatlog", showerror($stat));
 		}
+	} elseif ($cmd == "list") {
+		// reload list from local SQLITE
+		if ($mod == "log") {
+			$t->assign ("log", $us->q->getRegLogList());
+			$t->assign ("ctl_loglist", true);
+		}
 	}
-  // reload list from local SQLITE
-  else if ($cmd == "list") {
-	  if ($mod == "log") {
-	  	$t->assign ("log", $q->getRegLogList());
-	  	$t->assign ("ctl_loglist", true);
-	  }
-  }
-}
-else {
-	$urol = $u->getUserRole($reg);
+} else {
+	$urol = $us->getUserRole($reg);
 	if ($urol == "OBSERVER")
 		$t->assign ("ro", "disabled");
 	$t->assign ("ctl_adminreg", true);
-	$t->assign ("usr", $u->getUsername(''));
+	$t->assign ("usr", $us->getUsername(''));
 	$t->assign ("ctl_loglist", true);
-	$t->assign ("log", $q->getRegLogList());
+	$t->assign ("log", $us->q->getRegLogList());
 }
 $t->assign ("reg", $reg);
-$t->assign ("dic", $d->queryLabelsFromGroup('DB', $lg));
+$t->assign ("dic", $us->q->queryLabelsFromGroup('DB', $lg));
 $t->display ("regionlog.tpl");
 </script>

@@ -6,14 +6,11 @@
  ***********************************************/
 
 require_once('../include/loader.php');
-require_once('../include/region.class.php');
 
 $reg = $us->sRegionId;
 if (empty($reg)) {
 	exit();
 }
-$r = new Region($reg);
-
 if (isset($_GET)) {
 	$get = $_GET;
 }
@@ -26,9 +23,14 @@ if (isset($get['infocmd'])) {
 		$optout = true;
 	else
 		$optout = false;
+	
+	$ifo = 0;
+	// Replace this call with a new class (2009-07-06) (jhcaiced)
+	/*
 	$ifo = $r->updateDBInfo($reg, $get['RegionLabel'], $get['RegionDesc'], $get['RegionDescEN'], 
 							$get['RegionLangCode'], $get['PeriodBeginDate'], $get['PeriodEndDate'], $optout, 
 							$get['GeoLimitMinX'], $get['GeoLimitMinY'], $get['GeoLimitMaxX'], $get['GeoLimitMaxY']);
+	*/					
 	if (!iserror($ifo)) 
 		$t->assign ("ctl_msgupdinfo", true);
 	else {

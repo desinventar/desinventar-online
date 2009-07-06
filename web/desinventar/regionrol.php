@@ -2,13 +2,10 @@
 /************************************************
  DesInventar8
  http://www.desinventar.org  
- (c) 1999-2007 Corporacion OSSO
+ (c) 1999-2009 Corporacion OSSO
  ***********************************************/
 
 require_once('../include/loader.php');
-require_once('../include/query.class.php');
-require_once('../include/region.class.php');
-require_once('../include/user.class.php');
 
 if (isset($_GET['r']) && !empty($_GET['r']))
   $reg = $_GET['r'];
@@ -23,17 +20,13 @@ function getRAPermList($lst) {
 	return $dat;
 }
 
-$d = new Query();
-$u = new UserSession('', '', '');
-$r = new Region($reg);
-
 // EDIT ROLE: Form to Create and assign role
 if (isset($_GET['rolecmd'])) {
 	$mod = "role";
 	$cmd = $_GET['rolecmd'];
 	if (($cmd == "insert") || ($cmd == "update")) {
 		// Set Role in RegionAuth
-		$rol = $u->setUserRole($_GET['UserName'], $reg, $_GET['AuthAuxValue']);
+		$rol = $us->setUserRole($_GET['UserName'], $reg, $_GET['AuthAuxValue']);
 		if (!iserror($rol)) 
 			$t->assign ("ctl_msgupdrole", true);
 		else {
@@ -43,20 +36,20 @@ if (isset($_GET['rolecmd'])) {
 	}
   // reload list from local SQLITE
   else if ($cmd == "list") {
-  	$t->assign ("rol", getRAPermList($u->getUserRoleByRegion($reg, '')));
+  	$t->assign ("rol", getRAPermList($us->getUserRoleByRegion($reg, '')));
 		$t->assign ("ctl_rollist", true);
   }
 }
 else {
-	$urol = $u->getUserRole($reg);
+	$urol = $us->getUserRole($reg);
 	if ($urol == "OBSERVER")
 		$t->assign ("ro", "disabled");
 	$t->assign ("ctl_adminreg", true);
-	$t->assign ("usr", $u->getUsername(''));
+	$t->assign ("usr", $us->getUsername(''));
 	$t->assign ("ctl_rollist", true);
-	$t->assign ("rol", getRAPermList($u->getUserRoleByRegion($reg, '')));
+	$t->assign ("rol", getRAPermList($us->getUserRoleByRegion($reg, '')));
 }
 $t->assign ("reg", $reg);
-$t->assign ("dic", $d->queryLabelsFromGroup('DB', $lg));
+$t->assign ("dic", $us->q->queryLabelsFromGroup('DB', $lg));
 $t->display ("regionrol.tpl");
 </script>
