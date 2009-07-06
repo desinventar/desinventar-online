@@ -79,7 +79,7 @@ class DIEvent extends DIObject {
 	public function validateCreate() {
 		$iReturn = 1;
 		$iReturn = $this->validateNotNull($iReturn, -11, 'EventId');
-		$iReturn = $this->validateUnique($iReturn, -12, 'EventId');
+		$iReturn = $this->validatePrimaryKey($iReturn,  -12);
 		return $iReturn;
 	}
 
