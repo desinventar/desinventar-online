@@ -3,6 +3,7 @@
  DesInventar - http://www.desinventar.org
  (c) 1999-2009 Corporacion OSSO
 */
+
 class DIGeography extends DIObject {
 	public function __construct($prmSession) {
 		$this->sTableName   = "Geography";
@@ -75,8 +76,8 @@ class DIGeography extends DIObject {
 	
 	public function validateCreate() {
 		$iReturn = 1;
-		$iReturn = validateNotNull($iReturn, -41, 'GeographyId');
-		$iReturn = validatePrimaryKey($iReturn,  -42);
+		$iReturn = $this->validateNotNull($iReturn, -41, 'GeographyId');
+		$iReturn = $this->validatePrimaryKey($iReturn,  -42);
 		return $iReturn;
 	}
 	public function validateUpdate() {
