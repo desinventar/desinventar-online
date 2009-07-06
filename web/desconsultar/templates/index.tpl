@@ -69,7 +69,7 @@
 {-/foreach-}
             $('DC').reset();
 {-if $ctl_showmap-}
-						fmp.clearAreas();
+			fmp.clearAreas();
 {-/if-}
           break;
           case "{-#msavequery#-}":
@@ -1597,12 +1597,52 @@
     </dd>
     <!-- END DATETIME SECTION -->
 	<!-- BEGIN CUSTOMQUERY SECTION -->
-    <dt>{-#mdcsection#-}</dt>
+    <dt>Consulta Personalizada</dt>
     <dd>
       <div style="height: 360px;">
-        <textarea style="width:250px; height:40px;" onFocus="showtip('');"></textarea>
-		<br>
-		<select class="small" size="10"></select>
+       <textarea id="CusQry" name="__CusQry" style="width:250px; height:40px;" 
+		  onFocus="showtip('');">{-$qd.__CusQry-}</textarea>
+	   <br>
+	   <table border="0">
+		<tr>
+         <td>
+          <select class="small" size="10" onChange="$('CusQry').value += this.value;">
+			<option value="DisasterSerial = '' ">{-$dis.DisasterSerial[0]-}</option>
+		    <option value="DisasterBeginTime = '' ">{-$dis.DisasterBeginTime[0]-}</option>
+			<option value="RecordAuthor = '' ">{-$rc2.RecordAuthor[0]-}</option>
+			<option value="RecordCreation = '' ">{-$rc2.RecordCreation[0]-}</option>
+			<option value="RecordLastUpdate = '' ">{-$rc2.RecordLastUpdate[0]-}</option>
+{-foreach name=ef1 key=key item=item from=$ef1-}
+			<option value="{-$key-} = ">{-$item[0]-}</option>
+{-/foreach-}
+{-foreach name=sec key=key item=item from=$sec-}
+			<option value="{-$key-} = ">{-$item[0]-}</option>
+{-/foreach-}
+{-foreach name=ef3 key=k item=i from=$ef3-}
+			<option value="{-$k-} = ">{-$i[0]-}</option>
+{-/foreach-}
+{-foreach name=ef4 key=k item=i from=$ef4-}
+			<option value="{-$k-} = ">{-$i[0]-}</option>
+{-/foreach-}
+{-foreach name=eef key=key item=item from=$exteffel-}
+			<option value="{-$key-} = ">{-$item[0]-}</option>
+{-/foreach-}
+ 		  </select>
+		 </td>
+		 <td align="center" valign="center">
+		  <input type="button" value="< " onClick="$('CusQry').value += this.value;">
+			<input type="button" value="> " onClick="$('CusQry').value += this.value;">
+			<input type="button" value="= " onClick="$('CusQry').value += this.value;"><br>
+			<input type="button" value="<> " onClick="$('CusQry').value += this.value;">
+			<input type="button" value="(" onClick="$('CusQry').value += this.value;">
+			<input type="button" value=") " onClick="$('CusQry').value += this.value;"><br>
+			<input type="button" value="AND " onClick="$('CusQry').value += this.value;">
+			<input type="button" value="OR " onClick="$('CusQry').value += this.value;">
+			<input type="button" value="LIKE '%%'" onClick="$('CusQry').value += this.value;"><br><br>
+			<input type="button" value="{-#tclean#-}" onClick="$('CusQry').value = '';">
+		 </td>
+		</tr>
+	   </table>
 	  </div>
     </dd>
     <!-- END CUSTOMQUERY SECTION -->

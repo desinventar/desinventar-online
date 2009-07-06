@@ -634,7 +634,14 @@ class Query extends PDO
     $e['Eff'] = "";
     $e['Item'] = "";
     $serial = "";
+	$cusqry = "";
     //$datedb = $this->getDateRange();
+	// Add Custom Query..
+	if (isset($dat['__CusQry']) && !empty($dat['__CusQry'])) {
+		$cusqry = str_replace("\'", "'", $dat['__CusQry']);
+		$cusqry = str_replace('\"', '"', $cusqry);
+		$cusqry = "AND (". $cusqry .")";
+	}
     foreach ($dat as $k=>$v) {
       // replace D_ by D.
       if (substr($k, 1, 1) == "_")
@@ -742,8 +749,8 @@ class Query extends PDO
                   "AND V.LangIsoCode='$lan' AND C.LangIsoCode='$lan' AND G.LangIsoCode='$lan'";
     foreach ($e as $i)
       $sql .= "$i AND ";
-    $sql .= "D.DisasterId = E.DisasterId $serial ";
-    //echo $sql;
+    $sql .= "D.DisasterId = E.DisasterId $serial $cusqry";
+	//echo $sql;
     return ($sql);
   }
 
