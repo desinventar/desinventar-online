@@ -268,6 +268,7 @@ class DIObject {
 		if ($iReturn > 0) {
 			$sQuery = $this->getInsertQuery();
 			try {
+				fb($sQuery);
 				if ($result = $this->q->dreg->query($sQuery)) {
 					$iReturn = 1;		
 				}
@@ -289,6 +290,7 @@ class DIObject {
 		if ($iReturn > 0) {
 			$sQuery = $this->getUpdateQuery();
 			try {
+				fb($sQuery);
 				if ($result = $this->q->dreg->query($sQuery)) {
 					$iReturn = 1;
 				}
@@ -413,6 +415,14 @@ class DIObject {
 		}
 		return $iReturn;
 	}
+
+	public function padNumber($iNumber, $iLen) {
+		$sNumber = "" . $iNumber;
+		while (strlen($sNumber) < $iLen) {
+			$sNumber = "0" . $sNumber;
+		}
+		return $sNumber;
+	} // function
 } // class
 
 </script>

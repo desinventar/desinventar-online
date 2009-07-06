@@ -66,14 +66,6 @@ class DIGeography extends DIObject {
 		$this->set('GeographyLevel', $iGeographyLevel);
 	}
 
-	public function padNumber($iNumber, $iLen) {
-		$sNumber = "" . $iNumber;
-		while (strlen($sNumber) < $iLen) {
-			$sNumber = "0" . $sNumber;
-		}
-		return $sNumber;
-	} // function
-	
 	public function validateCreate() {
 		$iReturn = 1;
 		$iReturn = $this->validateNotNull($iReturn, -41, 'GeographyId');
