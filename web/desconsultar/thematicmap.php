@@ -7,6 +7,8 @@
 require_once('../include/loader.php');
 require_once('../include/maps.class.php');
 
+$post = $_POST;
+
 function hex2dec($col) {
   $h = str_split(substr($col, -6), 2);
   return hexdec($h[0])." ". hexdec($h[1]) . " ". hexdec($h[2]);
@@ -38,9 +40,6 @@ function setRanges($opc) {
 	return $range;
 }
 
-$post = $_POST;
-$get  = $_GET;
-
 if (isset($post['_REG']) && !empty($post['_REG']))
   $reg = $post['_REG'];
 elseif (isset($get['r']) && !empty($get['r']))
@@ -49,6 +48,7 @@ else
   exit();
 
 $q = new Query($reg);
+fixPost(&$post);
 
 $dic = array();
 $dic = array_merge($dic, $q->queryLabelsFromGroup('MapOpt', $lg));

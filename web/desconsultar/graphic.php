@@ -7,15 +7,17 @@
 require_once('../include/loader.php');
 require_once('../include/graphic.class.php');
 
-if (isset($_POST['_REG']) && !empty($_POST['_REG']))
-	$reg = $_POST['_REG'];
+$post = $_POST;
+
+if (isset($post['_REG']) && !empty($post['_REG']))
+	$reg = $post['_REG'];
 else
 	exit();
 
 $q = new Query($reg);
 $rinfo = $q->getDBInfo();
 $regname = $rinfo['RegionLabel'];
-$post = $_POST;
+fixPost(&$post);
 
 // load levels to display in totalizations
 foreach ($q->loadGeoLevels('', -1, false) as $k=>$i)

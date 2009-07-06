@@ -3,21 +3,22 @@
  DesInventar - http://www.desinventar.org
  (c) 1999-2009 Corporacion OSSO
 */
-
 require_once('../include/loader.php');
 
-if (isset($_POST['_REG']) && !empty($_POST['_REG']))
-	$reg = $_POST['_REG'];
-elseif (isset($_GET['r']) && !empty($_GET['r']))
-	$reg = $_GET['r'];
+$post = $_POST;
+$get  = $_GET;
+
+if (isset($post['_REG']) && !empty($post['_REG']))
+	$reg = $post['_REG'];
+elseif (isset($get['r']) && !empty($get['r']))
+	$reg = $get['r'];
 else
 	exit();
 
 $q = new Query($reg);
 $rinfo = $q->getDBInfo();
 $regname = $rinfo['RegionLabel'];
-$post = $_POST;
-$get  = $_GET;
+fixPost(&$post);
 
 // load basic field of dictionary
 $dic = array();
@@ -96,7 +97,7 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 			//header("Content-Transfer-Encoding: binary");
 			// Limit 1000 results in export: few memory in PHP
 			$export = true;
-			$iRecordsPerPage 		= 1000;
+			$iRecordsPerPage = 1000;
 			$iNumberOfPages = (int) (($iNumberOfRecords / $iRecordsPerPage) + 1);
 		}
 	}
