@@ -91,22 +91,20 @@ if (isset($_GET['u'])) {
 		$status = "red";
 	$t->assign ("stat", $status);
 } else {
-	$r = new Region($sRegionId);
-	$q = new query($sRegionId);
 	// Get Geography elements 
 	if (isset($_GET['cmd'])) {
 		if ($_GET['cmd'] == "list") {
-			$lev = $q->getNextLev($_GET['GeographyId']);
+			$lev = $us->q->getNextLev($_GET['GeographyId']);
 			$t->assign ("lev", $lev);
-			$t->assign ("levmax", $q->getMaxGeoLev());
-			$t->assign ("levname", $q->loadGeoLevById($lev));
-			$t->assign ("geol", $q->loadGeoChilds($_GET['GeographyId']));
+			$t->assign ("levmax", $us->q->getMaxGeoLev());
+			$t->assign ("levname", $us->q->loadGeoLevById($lev));
+			$t->assign ("geol", $us->q->loadGeoChilds($_GET['GeographyId']));
 			$t->assign ("opc", isset($_GET['opc']) ? $_GET['opc'] : '');
 			$t->assign ("ctl_geolist", true);
 		}
 		
 		if ($_GET['cmd'] == "chkdiserial") {
-			$chk = $q->isvalidObjectName($_GET['DisasterId'], $_GET['DisasterSerial'], DI_DISASTER);
+			$chk = $us->q->isvalidObjectName($_GET['DisasterId'], $_GET['DisasterSerial'], DI_DISASTER);
 			if ($chk && !empty($_GET['DisasterSerial']))
 				echo "FREE";
 			else
@@ -180,19 +178,19 @@ if (isset($_GET['u'])) {
 				}
 			}
 			
-			$t->assign ("dipub", $q->getNumDisasterByStatus("PUBLISHED"));
-			$t->assign ("direa", $q->getNumDisasterByStatus("READY"));
+			$t->assign ("dipub", $us->q->getNumDisasterByStatus("PUBLISHED"));
+			$t->assign ("direa", $us->q->getNumDisasterByStatus("READY"));
 			$t->assign ("ctl_result", true);
 
 			// End _CMD Block
 		} else {
 			// Default view of DesInventar
 			$t->assign ("usr", $us->sUserName);
-			$rinfo = $q->getDBInfo();
+			$rinfo = $us->q->getDBInfo();
 			$t->assign ("regname",  $rinfo['RegionLabel']);
 			$role = $us->getUserRole($sRegionId);
 			$t->assign ("role", $role);
-			$dic = $q->queryLabelsFromGroup('DB', $lg);
+			$dic = $us->q->queryLabelsFromGroup('DB', $lg);
 			if ($role == "ADMINREGION") {
 				$t->assign ("showconfig", true);
 				$dicrole = $dic['DBRoleAdmin'][0];
@@ -209,35 +207,35 @@ if (isset($_GET['u'])) {
 			
 			if ($role=="USER" || $role=="SUPERVISOR" || $role=="ADMINREGION" || $role=="OBSERVER") {
 				$t->assign ("ctl_effects", true);
-				$t->assign ("dis", $q->queryLabelsFromGroup('Disaster', $lg));
-				$t->assign ("rc1", $q->queryLabelsFromGroup('Record|1', $lg));
-				$t->assign ("rc2", $q->queryLabelsFromGroup('Record|2', $lg));
-				$t->assign ("eve", $q->queryLabelsFromGroup('Event', $lg));
-				$t->assign ("cau", $q->queryLabelsFromGroup('Cause', $lg));
-				$t->assign ("ef1", $q->queryLabelsFromGroup('Effect|People', $lg));
-				$t->assign ("ef2", $q->queryLabelsFromGroup('Effect|Economic', $lg));
-				$t->assign ("ef3", $q->queryLabelsFromGroup('Effect|Affected', $lg));
-				$t->assign ("sc3", $q->querySecLabelFromGroup('Effect|Affected', $lg));
-				$t->assign ("ef4", $q->queryLabelsFromGroup('Effect|More', $lg));
-				$t->assign ("sec", $q->queryLabelsFromGroup('Sector', $lg));
-				//      $t->assign ("rcsl", $q->queryLabelsFromGroup('RecordStatus', $lg));
-				$t->assign ("dmg", $q->queryLabelsFromGroup('MetGuide', $lg));
-				$t->assign ("levl", $q->loadGeoLevels('', -1, false));
+				$t->assign ("dis", $us->q->queryLabelsFromGroup('Disaster', $lg));
+				$t->assign ("rc1", $us->q->queryLabelsFromGroup('Record|1', $lg));
+				$t->assign ("rc2", $us->q->queryLabelsFromGroup('Record|2', $lg));
+				$t->assign ("eve", $us->q->queryLabelsFromGroup('Event', $lg));
+				$t->assign ("cau", $us->q->queryLabelsFromGroup('Cause', $lg));
+				$t->assign ("ef1", $us->q->queryLabelsFromGroup('Effect|People', $lg));
+				$t->assign ("ef2", $us->q->queryLabelsFromGroup('Effect|Economic', $lg));
+				$t->assign ("ef3", $us->q->queryLabelsFromGroup('Effect|Affected', $lg));
+				$t->assign ("sc3", $us->q->querySecLabelFromGroup('Effect|Affected', $lg));
+				$t->assign ("ef4", $us->q->queryLabelsFromGroup('Effect|More', $lg));
+				$t->assign ("sec", $us->q->queryLabelsFromGroup('Sector', $lg));
+				//      $t->assign ("rcsl", $us->q->queryLabelsFromGroup('RecordStatus', $lg));
+				$t->assign ("dmg", $us->q->queryLabelsFromGroup('MetGuide', $lg));
+				$t->assign ("levl", $us->q->loadGeoLevels('', -1, false));
 				$lev = 0;
 				$t->assign ("lev", $lev);
-				$t->assign ("levmax", $q->getMaxGeoLev());
-				$t->assign ("levname", $q->loadGeoLevById($lev));
-				$t->assign ("geol", $q->loadGeography($lev));
+				$t->assign ("levmax", $us->q->getMaxGeoLev());
+				$t->assign ("levname", $us->q->loadGeoLevById($lev));
+				$t->assign ("geol", $us->q->loadGeography($lev));
 				$t->assign ("ctl_geolist", true);
-				$t->assign ("evel", $q->loadEvents(null, "active", $lg));
-				$t->assign ("caul", $q->loadCauses(null, "active", $lg));
-				$t->assign ("eefl", $q->getEEFieldList("True"));
+				$t->assign ("evel", $us->q->loadEvents(null, "active", $lg));
+				$t->assign ("caul", $us->q->loadCauses(null, "active", $lg));
+				$t->assign ("eefl", $us->q->getEEFieldList("True"));
 				if ($role=="SUPERVISOR" || $role=="ADMINREGION") {
 					$t->assign ("ctl_rcsl", true);
 				}
 				// get first and last datacard
-				$fst = $q->hash2json($q->getDisasterById($q->getFirstDisasterid()));
-				$lst = $q->hash2json($q->getDisasterById($q->getLastDisasterid()));
+				$fst = $us->q->hash2json($us->q->getDisasterById($us->q->getFirstDisasterid()));
+				$lst = $us->q->hash2json($us->q->getDisasterById($us->q->getLastDisasterid()));
 				if (isset($fst[0])) $t->assign ("fst", $fst[0]);
 				if (isset($lst[0])) $t->assign ("lst", $lst[0]);
 			}
