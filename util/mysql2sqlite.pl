@@ -256,13 +256,15 @@ sub convertTable() {
 			$sValue =~ s/\t//g; # Tab Char
 			$sValue =~ s/"//g;  # Double Quotes
 			
-			if ($sFieldType eq 'INTEGER') {
+			if (($sFieldType eq 'INTEGER') ||
+			    ($sFieldType eq 'DOUBLE' )) {
 				if ($sValue eq '') { $sValue = 0; }
 			}
-			
 			$sFieldList .= $sField . $sAppend;
-			if ( ($sFieldType eq 'STRING') ||
-			     ($sFieldType eq 'DATETIME') ) {
+			# Quote some fields
+			if ( ($sFieldType eq 'STRING'  ) ||
+			     ($sFieldType eq 'DATETIME') ||
+			     ($sFieldType eq 'TEXT'    ) ) {
 				$sValueList .= '"' . $sValue . '"' . $sAppend;
 			} else {
 				$sValueList .= $sValue . $sAppend;
