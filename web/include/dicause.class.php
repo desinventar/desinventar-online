@@ -36,6 +36,7 @@ class DICause extends DIObject {
 				$this->set('CauseDesc', $prmCauseDesc);
 				$this->getIdByName($this->get('CauseName'));
 			}
+			$this->load();
 		}
 	}
 	
@@ -80,14 +81,14 @@ class DICause extends DIObject {
 	public function validateCreate() {
 		$iReturn = 1;
 		$iReturn = $this->validateNotNull($iReturn, -21, 'CauseId');
-		$iReturn = $this->validateUnique($iReturn,  -22, 'CauseId');
+		$iReturn = $this->validatePrimaryKey($iReturn,  -22);
 		return $iReturn;
 	}
 
 	public function validateUpdate() {
 		$iReturn = 1;
 		$iReturn = $this->validateNotNull($iReturn, -23, 'CauseName');
-		$iReturn = $this->validateUnique($iReturn,  -24, 'CauseName');
+		$iReturn = $this->validateUnique($iReturn,  -24, 'CauseName', true);
 		return $iReturn;
 	}
 	

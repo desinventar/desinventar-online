@@ -51,8 +51,8 @@ function showResult($stat, &$tp) {
 	}
 }
 
-$r = new Region($reg);
-$q = new Query($reg);
+//$r = new Region($reg);
+//$q = new Query($reg);
 
 if (isset($_GET['cmd'])) {
 	$dat = form2cause($_GET);
@@ -77,34 +77,34 @@ if (isset($_GET['cmd'])) {
 		// reload list from local SQLITE
 		if ($_GET['predef'] == "1") {
 			$t->assign ("ctl_caupred", true);
-			$t->assign ("caupredl", $q->loadCauses("PREDEF", null, $lg));
+			$t->assign ("caupredl", $us->q->loadCauses("PREDEF", null, $lg));
 		} else {
 			$t->assign ("ctl_caupers", true);
-			$t->assign ("cauuserl", $q->loadCauses("USER", null, $lg));
+			$t->assign ("cauuserl", $us->q->loadCauses("USER", null, $lg));
 		}
 		break;
 	case "chkname":
 		$t->assign ("ctl_chkname", true);
-		if ($q->isvalidObjectName($_GET['CauseId'], $_GET['CauseName'], DI_CAUSE))
+		if ($us->q->isvalidObjectName($_GET['CauseId'], $_GET['CauseName'], DI_CAUSE))
 			$t->assign ("chkname", true);
 		break;
 	case "chkstatus":
 		$t->assign ("ctl_chkstatus", true);
-		if ($q->isvalidObjectToInactivate($_GET['CauseId'], DI_CAUSE))
+		if ($us->q->isvalidObjectToInactivate($_GET['CauseId'], DI_CAUSE))
 			$t->assign ("chkstatus", true);
 		break;
 	default: break;
 	} //switch
 } else {
-	$t->assign ("dic", $q->queryLabelsFromGroup('DB', $lg));
+	$t->assign ("dic", $us->q->queryLabelsFromGroup('DB', $lg));
 	$urol = $us->getUserRole($reg);
 	if ($urol == "OBSERVER")
 		$t->assign ("ro", "disabled");
 	$t->assign ("ctl_show", true);
 	$t->assign ("ctl_caupred", true);
-	$t->assign ("caupredl", $q->loadCauses("PREDEF", "active", $lg));
+	$t->assign ("caupredl", $us->q->loadCauses("PREDEF", "active", $lg));
 	$t->assign ("ctl_caupers", true);
-	$t->assign ("cauuserl", $q->loadCauses("USER", "active", $lg));
+	$t->assign ("cauuserl", $us->q->loadCauses("USER", "active", $lg));
 }
 
 $t->assign ("reg", $reg);

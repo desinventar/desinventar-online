@@ -53,11 +53,19 @@ class DIObject {
 	} // function
 	
 	public function get($prmKey) {
-		return $this->oField[$prmKey];
+		try {
+			return $this->oField[$prmKey];
+		} catch (Exception $e) {
+			print "Error " . $e->getMessage() . "<br />";
+		}		
 	}
 	
 	public function getType($prmKey) {
-		return $this->oFieldType[$prmKey];
+		try {
+			return $this->oFieldType[$prmKey];
+		} catch (Exception $e) {
+			print "Error " . $e->getMessage() . "<br />";
+		}		
 	}
 	
 	public function set($prmKey, $prmValue) {
@@ -313,14 +321,32 @@ class DIObject {
 		return $iReturn;	
 	}
 
-	public function validateUnique($curReturn, $ErrCode, $FieldName) {
+	public function getIdWhereQuery() {
+		$sQuery = '(';
+		$i = 0;
+		$sFields = split(',', $this->sFieldKeyDef);
+		foreach ($sFields as $sKey => $sValue) {
+			$oItem = split('/', $sValue);
+			$sFieldName = $oItem[0];
+			$sFieldType = $oItem[1];
+			$quote2 = "'";
+			if ($sFieldType == 'INTEGER')  { $quote2 = ""; }
+			if ($i > 0) { 
+				$sQuery .= ' AND ';
+			}
+			$sQuery .= $sFieldName . "=" . $quote2 . $this->get($sFieldName) . $quote2;
+			$i++;
+		} // foreach
+		$sQuery .= ')';
+		return $sQuery;
+	}
+
+
+	public function validatePrimaryKey($curReturn, $ErrCode) {
 		$iReturn = $curReturn;
 		if ($iReturn > 0) {
-			$quote = "'";
-			if ($this->getType($FieldName) == 'INTEGER') {
-				$quote = "";
-			}
-			$sQuery = "SELECT " . $FieldName . " FROM " . $this->getTableName() . " WHERE " . $FieldName . "=" . $quote . $this->get($FieldName) . $quote;
+			$quote1 = "'";
+			$sQuery = "SELECT * FROM " . $this->getTableName() . " WHERE " . $this->getIdWhereQuery();
 			foreach($this->q->dreg->query($sQuery) as $row) {
 				$iReturn = $ErrCode;
 			}
@@ -328,14 +354,53 @@ class DIObject {
 		return $iReturn;	
 	}
 	
-	public function validateRef($curReturn, $ErrCode, $FieldName, $TableName, $FieldDst) {
+	public function existField($prmField) {
+		return array_key_exists($prmField, $this->oField);
+	}
+	
+	public function validateUnique($curReturn, $ErrCode, $prmFieldName) {
+		$iReturn = $curReturn;
+		if ($iReturn > 0) {
+			$quote1 = "'";
+			if ($this->getType($prmFieldName) == 'INTEGER') { $quote1 = ""; }
+			$sQuery = "SELECT * FROM " . $this->getTableName() . " WHERE " . 
+				$prmFieldName . "=" . $quote1 . $this->get($prmFieldName) . $quote1;
+			// Validate is LangIsoCode is defined and Modify the query when needed
+			if ($this->existField('LangIsoCode')) {
+				$sQuery .= " AND LangIsoCode='" . $this->get('LangIsoCode') . "'";
+			}
+			foreach($this->q->dreg->query($sQuery) as $row) {
+				// Check if it's me !!
+				$bFound = true;
+				$i = 0;
+				$sFields = split(',', $this->sFieldKeyDef);
+				foreach ($sFields as $sKey => $sValue) {
+					if ($bFound) {
+						$oItem = split('/', $sValue);
+						$sFieldName = $oItem[0];
+						$sFieldType = $oItem[1];
+						$bFound = $row[$sFieldName] == $this->get($sFieldName);
+						$i++;
+					}
+				} // foreach
+				if ($bFound) {
+					$iReturn = 1;
+				} else {
+					$iReturn = $ErrCode;
+				}
+			}
+		}
+		return $iReturn;	
+	}
+	
+	public function validateRef($curReturn, $ErrCode, $prmFieldName, $TableName, $FieldDst) {
 		$iReturn = $curReturn;
 		if ($iReturn > 0) {
 			$quote = "'";
-			if ($this->getType($FieldName) == 'INTEGER') {
+			if ($this->getType($prmFieldName) == 'INTEGER') {
 				$quote = "";
 			}
-			$sQuery = "SELECT " . $FieldDst . " FROM " . $TableName . " WHERE " . $FieldDst . "=" . $quote . $this->get($FieldName) . $quote;
+			$sQuery = "SELECT " . $FieldDst . " FROM " . $TableName . " WHERE " . $FieldDst . "=" . $quote . $this->get($prmFieldName) . $quote;
 			$iReturn = $ErrCode;
 			foreach($this->q->dreg->query($sQuery) as $row) {
 				$iReturn = 1;

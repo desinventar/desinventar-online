@@ -7,7 +7,6 @@
 class Query extends PDO
 {
 	public $sRegionId = "";
-	//public $dreg = null;
 
 	public function __construct() {
 		if (!extension_loaded('pdo')) {
@@ -32,18 +31,20 @@ class Query extends PDO
 				break;
 			case 1:
 				$this->sRegionId = func_get_arg(0);
-				$dbr = VAR_DIR ."/". $this->sRegionId ."/desinventar.db";
-				if (file_exists($dbr)) {
-					try {
-						$this->dreg = new PDO("sqlite:" . $dbr);
-						/*** set the error reporting attribute ***/
-						$this->dreg->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-					} catch (PDOException $e) {
-						print $e->getMessage();
+				if ($this->sRegionId != '') {
+					$dbr = VAR_DIR ."/". $this->sRegionId ."/desinventar.db";
+					if (file_exists($dbr)) {
+						try {
+							$this->dreg = new PDO("sqlite:" . $dbr);
+							/*** set the error reporting attribute ***/
+							$this->dreg->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+						} catch (PDOException $e) {
+							print $e->getMessage();
+						}
+					} else {
+						echo "Region doesn't exist. Contact Administrator.";
+						exit();
 					}
-				} else {
-					echo "Region doesn't exist. Contact Administrator.";
-					exit();
 				}
 				break;
 			} //switch

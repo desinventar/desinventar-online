@@ -86,7 +86,7 @@ class DIEvent extends DIObject {
 	public function validateUpdate() {
 		$iReturn = 1;
 		$iReturn = $this->validateNotNull($iReturn, -13, 'EventName');
-		$iReturn = $this->validateUnique($iReturn, -14, 'EventName');
+		$iReturn = $this->validateUnique($iReturn, -14, 'EventName', true);
 		return $iReturn;
 	}
 }
