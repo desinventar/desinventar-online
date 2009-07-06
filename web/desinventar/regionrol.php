@@ -45,9 +45,10 @@ else {
 	if ($urol == "OBSERVER")
 		$t->assign ("ro", "disabled");
 	$t->assign ("ctl_adminreg", true);
-	$t->assign ("usr", $us->getUsername(''));
+	$t->assign ("usr", $us->getUserFullName(''));
 	$t->assign ("ctl_rollist", true);
-	$t->assign ("rol", getRAPermList($us->getUserRoleByRegion($reg, '')));
+	//$t->assign ("rol", getRAPermList($us->getUserRoleByRegion($reg, '')));
+	$t->assign ("rol", getRAPermList($us->getUserRoleList($reg, '')));
 }
 $t->assign ("reg", $reg);
 $t->assign ("dic", $us->q->queryLabelsFromGroup('DB', $lg));
