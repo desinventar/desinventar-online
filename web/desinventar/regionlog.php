@@ -59,7 +59,7 @@ if (isset($get['logcmd'])) {
 	if ($urol == "OBSERVER")
 		$t->assign ("ro", "disabled");
 	$t->assign ("ctl_adminreg", true);
-	$t->assign ("usr", $us->getUsername(''));
+	$t->assign ("usr", $us->getUserFullName(''));
 	$t->assign ("ctl_loglist", true);
 	$t->assign ("log", $us->q->getRegLogList());
 }
