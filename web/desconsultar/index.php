@@ -87,11 +87,11 @@ else {
   $t->assign ("exteffel", $q->getEEFieldList("True"));
   // Get UserRole
   $role = $us->getUserRole($reg);
-// if (strlen($role) > 0)
-	$t->assign ("ctl_user", true);
-// else
-//  $t->assign ("ctl_user", false);
-   // Set selection map
+  if (strlen($role) > 0)
+    $t->assign ("ctl_user", true);
+  else
+    $t->assign ("ctl_user", false);
+  // Set selection map
   $dinf = $q->getDBInfo();
   $t->assign ("x1", $dinf['GeoLimitMinX']);
   $t->assign ("x2", $dinf['GeoLimitMaxX']);
