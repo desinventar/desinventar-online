@@ -13,11 +13,6 @@ if (isset($_GET['r']) && !empty($_GET['r']))
 else
 	exit();
 
-
-//$d = new Dictionary(VAR_DIR);
-//$r = new Region($reg);
-$q = new Query($reg);
-
 // EDIT REGION: Form to Create and assign regions
 if (isset($_GET['geocmd'])) {
 	$mod = "geo";
@@ -59,21 +54,21 @@ if (isset($_GET['geocmd'])) {
 		}
 	break;
 	case "list":
-		$lev = $q->getNextLev($_GET['GeographyId']);
+		$lev = $us->q->getNextLev($_GET['GeographyId']);
 		$t->assign ("lev", $lev);
-		$t->assign ("levmax", $q->getMaxGeoLev());
-		$t->assign ("levname", $q->loadGeoLevById($lev));
-		$t->assign ("geol", $q->loadGeoChilds($_GET['GeographyId']));
+		$t->assign ("levmax", $us->q->getMaxGeoLev());
+		$t->assign ("levname", $us->q->loadGeoLevById($lev));
+		$t->assign ("geol", $us->q->loadGeoChilds($_GET['GeographyId']));
 		$t->assign ("ctl_geolist", true);
 	break;
 	case "chkcode":
 		$t->assign ("ctl_chkcode", true);
-		if ($q->isvalidObjectName($_GET['GeographyId'], $_GET['GeographyCode'], DI_GEOGRAPHY))
+		if ($us->q->isvalidObjectName($_GET['GeographyId'], $_GET['GeographyCode'], DI_GEOGRAPHY))
 			$t->assign ("chkcode", true);
 	break;
 	case "chkstatus":
 		$t->assign ("ctl_chkstatus", true);
-		if ($q->isvalidObjectToInactivate($_GET['GeographyId'], DI_GEOGRAPHY))
+		if ($us->q->isvalidObjectToInactivate($_GET['GeographyId'], DI_GEOGRAPHY))
 			$t->assign ("chkstatus", true);
 	break;
 	default: 
@@ -83,9 +78,9 @@ if (isset($_GET['geocmd'])) {
 	$t->assign ("ctl_admingeo", true);
 	$lev = 0;
 	$t->assign ("lev", $lev);
-	$t->assign ("levmax", $q->getMaxGeoLev());
-	$t->assign ("levname", $q->loadGeoLevById($lev));
-	$t->assign ("geol", $q->loadGeography($lev));
+	$t->assign ("levmax", $us->q->getMaxGeoLev());
+	$t->assign ("levname", $us->q->loadGeoLevById($lev));
+	$t->assign ("geol", $us->q->loadGeography($lev));
 	$t->assign ("ctl_geolist", true);
 	$urol = $us->getUserRole($reg);
 	if ($urol == "OBSERVER")
@@ -93,7 +88,7 @@ if (isset($_GET['geocmd'])) {
 }
 
 $t->assign ("reg", $reg);
-$t->assign ("dic", $q->queryLabelsFromGroup('DB', $lg));
+$t->assign ("dic", $us->q->queryLabelsFromGroup('DB', $lg));
 $t->display ("geography.tpl");
 
 </script>

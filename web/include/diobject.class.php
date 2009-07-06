@@ -314,8 +314,13 @@ class DIObject {
 		$iReturn = $curReturn;
 		if ($iReturn > 0) {
 			$Value = $this->get($FieldName);
-			if ($Value == '') {
-				$iReturn = $ErrCode;
+			$FieldType = $this->getType($FieldName);
+			if ($FieldType == 'INTEGER') {
+				$Value = (int)$Value;
+			} else {
+				if ($Value == '') {
+					$iReturn = $ErrCode;
+				}
 			}
 		}
 		return $iReturn;	
