@@ -68,9 +68,6 @@
             if ($('{-$key-}').checked) enadisEff('{-$key-}', false);
 {-/foreach-}
             $('DC').reset();
-{-if $ctl_showmap-}
-			fmp.clearAreas();
-{-/if-}
           break;
           case "{-#msavequery#-}":
           	saveQuery();
@@ -392,23 +389,18 @@
        	}
       }
     }
-    // selection map functions
+    /* selection map functions
     function showMap() {
     	$('smap').style.visibility = 'visible';
     }
     function hideMap() {
     	$('smap').style.visibility = 'hidden';
-    }
+    }*/
     function setSelMap(code, gid, opc) {
-{-if $ctl_showmap-}
-			showMap();
-    	fmp.selectArea(code, '');
-{-else-}
     	if (opc)
     		setgeo(gid);
     	else
     		unsetgeo(gid);
-{-/if-}
     }
     function setgeo(k) {
       // Find and fill childs
@@ -1269,9 +1261,6 @@
   <div id="querydetails" style="height:40px;" class="dwin"></div>
   <div id="smap" style="position:absolute; left:0px; top:20px; visibility:hidden;">
    [<a href="javascript:void(0);" onClick="hideMap();">X</a>]<br>
-  	<iframe name="fmp" id="fmp" frameborder="0" style="height:500px; width:500px;"{-if $ctl_showmap-} 
-  src='/cgi-bin/{-$ms-}?map={-$path-}/{-$reg-}/region.map&qlayer=admin00&mode=nquery&searchmap=true&mapsize=750+750&mapext={-$x1-}+{-$y1-}+{-$x2-}+{-$y2-}'{-/if-}>
-  	</iframe>
   </div>
   <iframe name="ifr" id="ifr" frameborder="0" height="550px" width="100%" scrolling="auto"
   		src="../region.php?r={-$reg-}&cmd=info">
@@ -1289,7 +1278,7 @@
   <dl class="accordion">
     <!-- BEGIN GEOGRAPHY SECTION -->
     <!-- Select from Map testing ... 'selectionmap.php' -->
-    <dt onClick="showMap();">{-#mgeosection#-}</dt>
+    <dt>{-#mgeosection#-}</dt>
     <dd>
   {-foreach name=glev key=k item=i from=$glev-}
       <span class="dlgmsg" onMouseOver="showtip('{-$i[1]-}');">{-$i[0]-}</span> |

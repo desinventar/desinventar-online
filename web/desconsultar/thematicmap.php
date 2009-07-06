@@ -48,7 +48,7 @@ else
   exit();
 
 $q = new Query($reg);
-fixPost(&$post);
+fixPost($post);
 
 $dic = array();
 $dic = array_merge($dic, $q->queryLabelsFromGroup('MapOpt', $lg));
