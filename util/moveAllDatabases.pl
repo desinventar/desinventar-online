@@ -29,6 +29,8 @@ while (my ($DBName1, $DBName2) = each(%DBList) ) {
 	system2($cmd);
 	$cmd = "./mysql2sqlite.pl -r $DBName1 | sqlite3 $data_dir/$DBName2/desinventar.db";
 	system2($cmd);
+	$cmd = "cat colores.sql | sqlite3 $data_dir/$DBName2/desinventar.db";
+	system2($cmd);
 	$cmd = "cp $data_dir/carto/$DBName1/* $data_dir/$DBName2";
 	system2($cmd);
 	$q = "UPDATE Region SET RegionId='$DBName2' WHERE RegionId='$DBName1';";
