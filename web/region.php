@@ -32,8 +32,8 @@ function form2region ($val) {
 if (isset($_GET['c']) && (strlen($_GET['c']) > 0)) {
   $t->assign ("ctl_regions", true);
   $q = new Query();
-  $t->assign ("cnt", $q->getCountryByCode($_GET['c']));
-  $dbs = $q->getRegionList($_GET['c'], "ACTIVE");
+  $t->assign ("cnt", $us->q->getCountryByCode($_GET['c']));
+  $dbs = $us->q->getRegionList($_GET['c'], "ACTIVE");
   $t->assign ("ctl_available", true);
   $t->assign ("dbs", $dbs);
 }
@@ -45,7 +45,7 @@ if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
   if (isset($_GET['v']) && $_GET['v'] == "true") {
     /* Get Information to VRegion
     $q = new Query($sRegionId);
-    $vri = $q->getDBInfo();
+    $vri = $us->q->getDBInfo();
     $regname = $vri['RegionLabel'];
     $dbdes = nl2br($vri['RegionDesc']);
     $dbden = ""; //nl2br($vri['VirtualRegDescEN']);
@@ -58,9 +58,9 @@ if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
   else {
     // Get Information to Region
     $q = new Query($sRegionId);
-    $t->assign ("period", $q->getDateRange());
-    $t->assign ("dtotal", $q->getNumDisasterByStatus("PUBLISHED"));
-    $t->assign ("lstupd", $q->getLastUpdate());
+    $t->assign ("period", $us->q->getDateRange());
+    $t->assign ("dtotal", $us->q->getNumDisasterByStatus("PUBLISHED"));
+    $t->assign ("lstupd", $us->q->getLastUpdate());
     // Enable access only to users with a valid role in this region
     $role = $us->getUserRole($sRegionId);
     if ($role=="OBSERVER" || $role=="USER" || 
@@ -69,12 +69,12 @@ if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
       $t->assign ("ctl_showdcmod", true);
     }
     // Show active or public regions only
-    $rf = $q->getRegionFieldByID($sRegionId, "RegionStatus");
+    $rf = $us->q->getRegionFieldByID($sRegionId, "RegionStatus");
     if ($rf[$sRegionId] & CONST_REGIONPUBLIC)
       $t->assign ("ctl_showdcmod", true);
     $t->assign ("ctl_showreg", true);
-    $reg = $q->getDBInfo();
-    $t->assign ("log", $q->getRegLogList());
+    $reg = $us->q->getDBInfo();
+    $t->assign ("log", $us->q->getRegLogList());
     $t->assign ("lang", $reg['I18NFirstLang']);
     $t->assign ("dbadm", $reg['InfoAdminURL']);
   }
@@ -91,15 +91,15 @@ else if (isset($_GET['cmd'])) {
 	switch ($_GET['cmd']) {
 	  // ADMINREG: Form to Create and assign regions
 	  case "adminreg":
-      $t->assign ("cntl", $q->getCountryList());
+      $t->assign ("cntl", $us->q->getCountryList());
       $t->assign ("usr", $us->getUserFullName(''));
       $t->assign ("ctl_adminreg", true);
-      $t->assign ("regpa", $q->getRegionAdminList());
+      $t->assign ("regpa", $us->q->getRegionAdminList());
       $t->assign ("ctl_reglist", true);
 	  break;
     // ADMINREG: check if region ID already exists..
     case "chkruuid":
-      if ($q->isvalidObjectName($_GET['RegionId'], $_GET['RegionId'] ,DI_REGION))
+      if ($us->q->isvalidObjectName($_GET['RegionId'], $_GET['RegionId'] ,DI_REGION))
         $t->assign ("cregion", true);
       else
         $t->assign ("cregion", false);
@@ -107,7 +107,7 @@ else if (isset($_GET['cmd'])) {
     break;
     // ADMINREG: reload list from local SQLITE
     case "list":
-      $t->assign ("regpa", $q->getRegionAdminList());
+      $t->assign ("regpa", $us->q->getRegionAdminList());
       $t->assign ("ctl_reglist", true);
     break;
     default:
