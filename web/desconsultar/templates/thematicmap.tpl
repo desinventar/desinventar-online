@@ -181,7 +181,7 @@
          {-$rgl[0].regname-}</p>
 				<hr>
 			  <image src="../images/ge_icon.png"> <a href="thematicmap.php?r={-$reg-}&cmd=getkml">{-#tgetgearth#-}</a><hr><br>
-			  <img src="/cgi-bin/{-$mps-}?map={-$rgl[0].map-}&SERVICE=WMS&VERSION=1.1.1&REQUEST=getlegendgraphic&LAYER={-$rgl[0].ly1|truncate:12:""-}&FORMAT=image/png">
+			  <img src="{-$legend-}">
 		  </div>
 		 </td>
 		 <td valign="top">
