@@ -6,18 +6,30 @@ use Data::Dumper;
 
 my $data_dir = '/var/lib/desinventar';
 my $sDBFile = $data_dir . '/core.db';
-
 my %DBList = ();
-my $dbh = DBI->connect("DBI:SQLite:dbname=" . $sDBFile,"","");
-$dbh->{unicode} = 1;
-$sth = $dbh->prepare("SELECT * FROM Region ORDER BY RegionId");
+
+my $data_source = 'DBI:mysql:database=di8db;host=localhost';
+my $username    = 'di8db'; 
+my $passwd      = 'di8db';
+my $dbh  = DBI->connect($data_source, $username, $passwd) or die "Can't open MySQL database\n";
+$dbh->{mysql_enable_utf8} = 1;
+#my $dbh = DBI->connect("DBI:SQLite:dbname=" . $sDBFile,"","");
+#$dbh->{unicode} = 1;
+$sth = $dbh->prepare("SELECT * FROM Region ORDER BY RegionUUID");
 $sth->execute();
 while ($r = $sth->fetchrow_hashref()) {
-	$DBName1 = $r->{RegionId};
-	$DBName2 = $r->{CountryIso};
+	$DBName1 = $r->{RegionUUID};
+	$DBName2 = $r->{CountryIsoCode};
 	$DBList{$DBName1} = $DBName2;
 }
-#%DBList = ('ARGENTINA' => 'ARG_2009-07-06');
+%DBList = ('COLOMBIA' => 'COLOMBIA');
+
+$cmd = "/bin/cp ../files/database/core.db $data_dir";
+system2($cmd);
+$cmd = "/bin/cp ../files/database/base.db $data_dir";
+system2($cmd);
+$cmd = "./mysql2sqlite.pl --core | sqlite3 $data_dir/core.db";
+system2($cmd);
 
 while (my ($DBName1, $DBName2) = each(%DBList) ) {
 	print "--------------------------------------------------\n";
