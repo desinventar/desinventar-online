@@ -57,19 +57,19 @@
 				</table>
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect1" style="display:none;">
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=IND_2009-07-06_212617');">India - Orissa</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=IND_2009-07-07_024027');">India - Orissa</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 <!--					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=IND_2009-07-06_211810');">India - Tamil Nadu</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=IND_2009-07-07_023143');">India - Tamil Nadu</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=IRN_2009-07-06_212554');">Iran</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=IRN_2009-07-07_024001');">Iran</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=NPL_2009-07-06_212745');">Nepal</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=NPL_2009-07-07_024205');">Nepal</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>-->
 				</table>
@@ -83,15 +83,15 @@
 				</table>
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect2" style="display:none;">
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=CRI_2009-07-06_212038');">Costa Rica</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=CRI_2009-07-07_023031');">Costa Rica</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=SLV_2009-07-06_211925');">El Salvador</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=SLV_2009-07-07_023254');">El Salvador</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=PAN_2009-07-06_212740');">Panamá</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=PAN_2009-07-07_024159');">Panamá</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
@@ -109,7 +109,7 @@
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=PAR_2009-07-06_211703');">Paraguay</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=PAR_2009-07-07_023030');">Paraguay</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
@@ -123,15 +123,15 @@
 				</table>
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect4" style="display:none;">
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=ARG_2009-07-06_211738');">Argentina</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=ARG_2009-07-07_023107');">Argentina</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=BOL_2009-07-06_212314');">Bolivia</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=BOL_2009-07-07_023659');">Bolivia</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=PAR_2009-07-06_212813');">Paraguay</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=PAR_2009-07-07_024236');">Paraguay</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
@@ -145,7 +145,7 @@
 				</table>
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect5" style="display:none;">
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=MEX_2009-07-06_212055');">México</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=MEX_2009-07-07_023439');">México</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
@@ -157,7 +157,7 @@
 				</table>
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect7" style="display:none;">
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=COL_2009-07-06_211922');">Cali - Colombia</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=COL_2009-07-07_023307');">Cali - Colombia</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>

@@ -133,6 +133,9 @@ if (isset($post['_M+cmd'])) {
 		$t->assign ("rgl", $rgl);
 		$t->assign ("tot", $cou);
 		$t->assign ("qdet", $q->getQueryDetails($dic, $post));
+		$legend = "/cgi-bin/". MAPSERV ."?map=". $m->filename() ."&SERVICE=WMS&VERSION=1.1.1".
+					"&REQUEST=getlegendgraphic&LAYER=". substr($myly, 0, 12) ."&FORMAT=image/png";
+		$t->assign ("legend", $legend);
 		if ($post['_M+cmd'] == "export") {
 			$url0 = "/cgi-bin/". MAPSERV ."?map=". VAR_DIR ."/_WORLD/region.map&SERVICE=WMS&VERSION=1.1.1".
 				"&layers=base&REQUEST=getmap&STYLES=&SRS=EPSG:4326&BBOX=". $post['_M+extent'].
@@ -146,9 +149,7 @@ if (isset($post['_M+cmd'])) {
 				$ibas = imagecreatefromstring($bf);
 				$imap = imagecreatefromstring($mf);
 				// Download and include legend
-				$url2 = "/cgi-bin/". MAPSERV ."?map=". $m->filename() ."&SERVICE=WMS&VERSION=1.1.1".
-					"&REQUEST=getlegendgraphic&LAYER=". substr($myly, 0, 12) ."&FORMAT=image/png";
-				$lf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $url2);
+				$lf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $legend);
 				$ileg = imagecreatefromstring($lf);
 				$wt = imagesx($imap) + imagesx($ileg);
 				$ht = imagesy($imap);
