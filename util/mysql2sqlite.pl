@@ -260,6 +260,15 @@ sub convertTable() {
 			    ($sFieldType eq 'DOUBLE' )) {
 				if ($sValue eq '') { $sValue = 0; }
 			}
+			
+			if ($sTableDst eq 'Region') {
+				if ($sField eq 'RegionStatus') {
+					$sValue = 0;
+					if ($o->{RegionActive}) { $sValue += 1; }
+					if ($o->{RegionPublic}) { $sValue += 2; }
+				}
+			}
+			# Add Field to List
 			$sFieldList .= $sField . $sAppend;
 			# Quote some fields
 			if ( ($sFieldType eq 'STRING'  ) ||
