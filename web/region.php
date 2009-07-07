@@ -30,61 +30,46 @@ function form2region ($val) {
 }
 // REGIONS: Show databases for selected Country from left menu
 if (isset($_GET['c']) && (strlen($_GET['c']) > 0)) {
-  $t->assign ("ctl_regions", true);
-  $q = new Query();
-  $t->assign ("cnt", $us->q->getCountryByCode($_GET['c']));
-  $dbs = $us->q->getRegionList($_GET['c'], "ACTIVE");
-  $t->assign ("ctl_available", true);
-  $t->assign ("dbs", $dbs);
+	$t->assign ("ctl_regions", true);
+	$q = new Query();
+	$t->assign ("cnt", $us->q->getCountryByCode($_GET['c']));
+	$dbs = $us->q->getRegionList($_GET['c'], "ACTIVE");
+	$t->assign ("ctl_available", true);
+	$t->assign ("dbs", $dbs);
 }
 
 // REGIONINFO: Show Information about Region
 if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
-  // set region
-  $sRegionId = $_GET['r'];
-  if (isset($_GET['v']) && $_GET['v'] == "true") {
-    /* Get Information to VRegion
-    $q = new Query($sRegionId);
-    $vri = $us->q->getDBInfo();
-    $regname = $vri['RegionLabel'];
-    $dbdes = nl2br($vri['RegionDesc']);
-    $dbden = ""; //nl2br($vri['VirtualRegDescEN']);
-    // Show active or public regions only
-    if ($vri['VirtualRegActive'] && $vri['VirtualRegPublic'])
-      $t->assign ("ctl_showdcmod", true);
-    $t->assign ("isvreg", "true");
-    $t->assign ("ctl_showreg", true);*/
-  }
-  else {
-    // Get Information to Region
-    $q = new Query($sRegionId);
-    $t->assign ("period", $us->q->getDateRange());
-    $t->assign ("dtotal", $us->q->getNumDisasterByStatus("PUBLISHED"));
-    $t->assign ("lstupd", $us->q->getLastUpdate());
-    // Enable access only to users with a valid role in this region
-    $role = $us->getUserRole($sRegionId);
-    if ($role=="OBSERVER" || $role=="USER" || 
-        $role=="SUPERVISOR" || $role=="ADMINREGION") {
-      $t->assign ("ctl_showdimod", true);
-      $t->assign ("ctl_showdcmod", true);
-    }
-    // Show active or public regions only
-    $rf = $us->q->getRegionFieldByID($sRegionId, "RegionStatus");
-    if ($rf[$sRegionId] & CONST_REGIONPUBLIC)
-      $t->assign ("ctl_showdcmod", true);
-    $t->assign ("ctl_showreg", true);
-    $reg = $us->q->getDBInfo();
-    $t->assign ("log", $us->q->getRegLogList());
-    $t->assign ("lang", $reg['I18NFirstLang']);
-    $t->assign ("dbadm", $reg['InfoAdminURL']);
-  }
-  if (isset($_GET['cmd']) && $_GET['cmd'] == "info")
-    $t->assign ("ctl_reginfo", true);
-  $t->assign ("reg", $sRegionId);
-  $t->assign ("regname", $reg['RegionLabel']);
-  $t->assign ("dbdes", $reg['InfoGeneral']);
-  $t->assign ("dbden", '');
-  //$t->assign ("dbden", str2js($reg['InfoGeneral'][1]));
+	// set region
+	$sRegionId = $_GET['r'];
+	// Get Information to Region
+	$q = new Query($sRegionId);
+	$t->assign ("period", $q->getDateRange());
+	$t->assign ("dtotal", $q->getNumDisasterByStatus("PUBLISHED"));
+	$t->assign ("lstupd", $q->getLastUpdate());
+	// Enable access only to users with a valid role in this region
+	$role = $us->getUserRole($sRegionId);
+	if ($role=="OBSERVER" || $role=="USER" || 
+		$role=="SUPERVISOR" || $role=="ADMINREGION") {
+		$t->assign ("ctl_showdimod", true);
+		$t->assign ("ctl_showdcmod", true);
+	}
+	// Show active or public regions only
+	$rf = $q->getRegionFieldByID($sRegionId, "RegionStatus");
+	if ($rf[$sRegionId] & CONST_REGIONPUBLIC)
+		$t->assign ("ctl_showdcmod", true);
+	$t->assign ("ctl_showreg", true);
+	$reg = $q->getDBInfo();
+	$t->assign ("log", $q->getRegLogList());
+	$t->assign ("lang", $reg['I18NFirstLang']);
+	$t->assign ("dbadm", $reg['InfoAdminURL']);
+	if (isset($_GET['cmd']) && $_GET['cmd'] == "info")
+		$t->assign ("ctl_reginfo", true);
+	$t->assign ("reg", $sRegionId);
+	$t->assign ("regname", $reg['RegionLabel']);
+	$t->assign ("dbdes", $reg['InfoGeneral']);
+	$t->assign ("dbden", '');
+	//$t->assign ("dbden", str2js($reg['InfoGeneral'][1]));
 }
 else if (isset($_GET['cmd'])) {
 	$q = new Query();
