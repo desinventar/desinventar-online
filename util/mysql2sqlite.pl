@@ -122,8 +122,8 @@ sub rebuildInfoTable() {
 	while ($r = $sth->fetchrow_hashref()) {
 		&saveInfo('RegionId'        , $r->{RegionUUID}, '');
 		&saveInfo('RegionLabel'     , $r->{RegionLabel}, '');
-		&saveInfo('RegionDesc'      , $r->{RegionDesc}, '');
-		&saveInfo('RegionDescEN'    , $r->{RegionDescEN}, '');
+		&saveInfo('InfoGeneral'     , $r->{RegionDesc}, '');
+		&saveInfo('InfoGeneralEN'   , $r->{RegionDescEN}, '');
 		&saveInfo('I18NFirstLang'   , $r->{RegionLangCode},'');
 		&saveInfo('CountryIso'      , $r->{CountryIsoCode}, '');
 		&saveInfo('RegionLastUpdate', $r->{RegionStructLastUpdate}, '');
