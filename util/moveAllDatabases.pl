@@ -22,7 +22,7 @@ while ($r = $sth->fetchrow_hashref()) {
 	$DBName2 = $r->{CountryIsoCode};
 	$DBList{$DBName1} = $DBName2;
 }
-%DBList = ('COLOMBIA' => 'COLOMBIA');
+#%DBList = ('COLOMBIA' => 'COLOMBIA');
 
 $cmd = "/bin/cp ../files/database/core.db $data_dir";
 system2($cmd);
@@ -45,14 +45,12 @@ while (my ($DBName1, $DBName2) = each(%DBList) ) {
 	system2($cmd);
 	$cmd = "cp $data_dir/carto/$DBName1/* $data_dir/$DBName2";
 	system2($cmd);
-	$q = "UPDATE Region SET RegionId='$DBName2' WHERE RegionId='$DBName1';";
-	$cmd = "sqlite3 $data_dir/core.db < echo '$q'";
-	$dbh->do($q);
-	#print "$q\n";
-	$q = "UPDATE RegionAuth SET RegionId='$DBName2' WHERE RegionId='$DBName1';";
-	$cmd = "sqlite3 $data_dir/core.db < '$q'";
-	$dbh->do($q);
-	#print "$q\n";
+	$q = "UPDATE Region SET RegionId=\"$DBName2\" WHERE RegionId=\"$DBName1\";";
+	$cmd = "echo '$q' | sqlite3 $data_dir/core.db";
+	system2($cmd);
+	$q = "UPDATE RegionAuth SET RegionId=\"$DBName2\" WHERE RegionId=\"$DBName1\";";
+	$cmd = "echo '$q' | sqlite3 $data_dir/core.db";
+	system2($cmd);
 }
 
 sub system2() {
