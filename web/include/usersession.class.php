@@ -302,30 +302,26 @@ class UserSession {
 	} // function
 	
 	public function setUserRole($prmUserName, $prmRegionId, $prmRole) {
-		$myAnswer = '';
-		$sWhereQuery = " WHERE (RegionId='" . $prmRegionId . "'" .
-		              "   AND (UserName='" . $prmUserName . "'" .
-		              "   AND (Authkey='ROLE') ";
-		$sQuery = "SELECT * FROM RegionAuth " . $sWhereQuery;
-		if ($result = $this->q->core->query($sQuery) ) {
-			if ($result->num_rows == 0) {
-				$sQuery = "INSERT INTO RegionAuth VALUES (" .
-					"'" . $prmUserName . "', " .
-					"'" . $prmRegionId . "', " .
-					"'ROLE', 0, " .
-					"'" . $prmRole . "'" .
-				  ") ";
-				  $myAnswer = $prmRole;
-			} else {
-				$sQuery = "UPDATE RegionAuth SET " .
-				  " AuthAuxValue = '" . $prmRole . "' " .  $sWhereQuery;
-				if ($result = $this->q->core->query($sQuery) ) {
-					$myAnswer = $prmRole;
-				}
-			} // else
+		$iReturn = 1;
+		if ($prmUserName == '') { $iReturn = -1; }
+		if ($prmRegionId == '') { $iReturn = -1; }
+		
+		if ($iReturn > 0) {
+			// Remove All Permissions for This User on This Database
+			$sQuery = "DELETE FROM RegionAuth WHERE " .
+				" UserName='" . $prmUserName . "' AND " . 
+				" RegionId='" . $prmRegionId . "'";
+			$this->q->core->query($sQuery);
+			
+			// Create Role Permission
+			$sQuery = "INSERT INTO RegionAuth (UserName,RegionId,AuthKey,AuthValue,AuthAuxValue) " .
+				" VALUES ('" . $prmUserName . "','" . $prmRegionId . "','ROLE',0,'" . $prmRole . "')";
+			$this->q->core->query($sQuery);
+			
+			// Add permissions according to each role
 		}
-		return $myAnswer;
-	}
+		return $iReturn;
+	} //function
 
 	public function getRegionList($prmCountryIsoCode, $prmStatus) {
 		if (!empty($prmCountryIsoCode))

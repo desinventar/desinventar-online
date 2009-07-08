@@ -109,7 +109,7 @@ if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
 				$r->setFromArray($data);
 				$stat = ERR_NO_DATABASE;
 				$t->assign ("ctl_admregmess", true);
-				$stat = 1;
+				$stat = 0;
 				if ($_GET['cmd'] == "insert") {		
 					$stat = $r->insert();
 					$t->assign ("cfunct", 'insert');
