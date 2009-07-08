@@ -7,6 +7,8 @@
 class Query extends PDO
 {
 	public $sRegionId = "";
+	public $dreg = null;
+	public $core = null;
 
 	public function __construct() {
 		if (!extension_loaded('pdo')) {
