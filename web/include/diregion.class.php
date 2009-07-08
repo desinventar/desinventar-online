@@ -10,8 +10,8 @@ class DIRegion extends DIObject {
 		$this->sPermPrefix  = "INFO";
 		$this->sFieldKeyDef = "RegionId/STRING";
 		$this->sFieldDef    = "RegionLabel/STRING," .
-		                      "RegionLangCode/STRING," . 
-		                      "CountryIsoCode/STRING," .
+		                      "LangIsoCode/STRING," . 
+		                      "CountryIso/STRING," .
 		                      "RegionStatus/INTEGER";
 		$this->sInfoDef     = "RegionDesc/STRING," .
 		                      "RegionDescEN/STRING," .

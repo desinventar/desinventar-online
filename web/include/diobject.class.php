@@ -227,9 +227,7 @@ class DIObject {
 				$oItem = split('/', $sValue);
 				$sFieldName = $oItem[0];
 				$sFieldType = $oItem[1];
-				if ($this->existField($sFieldName)) {
-					$this->oField[$sFieldName] = $row[$sFieldName];
-				}
+				$this->set($sFieldName, $row[$sFieldName]);
 			}
 			$iReturn = 1;
 		} // foreach
@@ -298,7 +296,6 @@ class DIObject {
 		if ($iReturn > 0) {
 			$sQuery = $this->getUpdateQuery();
 			try {
-				fb($sQuery);
 				if ($result = $this->conn->query($sQuery)) {
 					$iReturn = 1;
 				}
