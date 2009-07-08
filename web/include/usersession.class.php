@@ -319,9 +319,59 @@ class UserSession {
 			$this->q->core->query($sQuery);
 			
 			// Add permissions according to each role
+			$permObserver    = array("DISASTER"  => array(1, "STATUS=ACTIVE"),
+			                         "EVENT"     => array(1, "STATUS=ACTIVE"),
+			                         "CAUSE"     => array(1, "STATUS=ACTIVE"),
+			                         "GEOLEVEL"  => array(1, "STATUS=ACTIVE"),
+			                         "GEOGRAPHY" => array(1, "STATUS=ACTIVE"),
+			                         "EEFIELD"   => array(1, "STATUS=ACTIVE"),
+			                         "DBINFO"    => array(1, ""),
+			                         "DBLOG"     => array(1, "")
+			                        );
+			$permUser        = array("DISASTER"  => array(3, "STATUS=DRAFT,STATUS=READY"),
+			                         "EVENT"     => array(1, "STATUS=ACTIVE"),
+			                         "CAUSE"     => array(1, "STATUS=ACTIVE"),
+			                         "GEOLEVEL"  => array(1, "STATUS=ACTIVE"),
+			                         "GEOGRAPHY" => array(1, "STATUS=ACTIVE"),
+			                         "EEFIELD"   => array(1, "STATUS=ACTIVE"),
+			                         "DBINFO"    => array(1, ""),
+			                         "DBLOG"     => array(3, ""),
+			                        );
+			$permSupervisor  = array("DISASTER"  => array(4, "STATUS=DRAFT,STATUS=READY"),
+			                         "EVENT"     => array(1, "STATUS=ACTIVE"),
+			                         "CAUSE"     => array(1, "STATUS=ACTIVE"),
+			                         "GEOLEVEL"  => array(1, "STATUS=ACTIVE"),
+			                         "GEOGRAPHY" => array(1, "STATUS=ACTIVE"),
+			                         "EEFIELD"   => array(1, "STATUS=ACTIVE"),
+			                         "DBINFO"    => array(1, ""),
+			                         "DBLOG"     => array(3, ""),
+			                        );
+			$permAdminRegion = array("DISASTER"  => array(5, ""),
+			                         "EVENT"     => array(5, ""),
+			                         "CAUSE"     => array(5, ""),
+			                         "GEOLEVEL"  => array(5, ""),
+			                         "GEOGRAPHY" => array(5, ""),
+			                         "EEFIELD"   => array(5, ""),
+			                         "DBINFO"    => array(5, ""),
+			                         "DBLOG"     => array(5, ""),
+			                        );
+			$perm = array('OBSERVER'    => $permObserver,
+			              'USER'        => $permUser,
+			              'SUPERVISOR'  => $permSupervisor,
+			              'ADMINREGION' => $permAdminRegion);
+			foreach($perm[$prmRole] as $k => $v) {
+				$this->setPerm($prmUserName, $prmRegionId, $k, $v[0], $v[1]);
+			}
 		}
 		return $iReturn;
 	} //function
+	
+	public function setPerm($prmUserName, $prmRegionId, $prmAuthKey, $prmValue, $prmAuxValue) {
+		$sQuery = "INSERT INTO RegionAuth VALUES (" . 
+			"'" . $prmUserName . "','" . $prmRegionId  . "'," .
+			"'" . $prmAuthKey . "','" . $prmValue . ",'" . $prmAuxValue . "')";
+		$this->q->core->query($sQuery);
+	}
 
 	public function getRegionList($prmCountryIsoCode, $prmStatus) {
 		if (!empty($prmCountryIsoCode))
