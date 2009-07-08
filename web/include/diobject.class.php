@@ -206,7 +206,7 @@ class DIObject {
 	public function exist() {
 		$iReturn = 0;
 		$sQuery = $this->getSelectQuery();
-		if ($result = $this->q->dreg->query($sQuery)) {
+		if ($result = $this->conn->query($sQuery)) {
 			if ($result->num_rows() > 0) {
 				$bReturn = 1;
 			}
@@ -257,7 +257,7 @@ class DIObject {
 		}
 		if ($iReturn > 0) {
 			$sQuery = $this->getDeleteQuery();
-			if ($result = $this->q->dreg->query($sQuery)) {
+			if ($result = $this->conn->query($sQuery)) {
 				$iReturn = 1;		
 			}
 		}
@@ -272,7 +272,7 @@ class DIObject {
 		if ($iReturn > 0) {
 			$sQuery = $this->getInsertQuery();
 			try {
-				if ($result = $this->q->dreg->query($sQuery)) {
+				if ($result = $this->conn->query($sQuery)) {
 					$iReturn = 1;		
 				}
 			} catch (PDOException $e) {
@@ -356,7 +356,7 @@ class DIObject {
 		if ($iReturn > 0) {
 			$quote1 = "'";
 			$sQuery = "SELECT * FROM " . $this->getTableName() . " WHERE " . $this->getIdWhereQuery();
-			foreach($this->q->dreg->query($sQuery) as $row) {
+			foreach($this->conn->query($sQuery) as $row) {
 				$iReturn = $ErrCode;
 			}
 		}
@@ -378,7 +378,7 @@ class DIObject {
 			if ($this->existField('LangIsoCode')) {
 				$sQuery .= " AND LangIsoCode='" . $this->get('LangIsoCode') . "'";
 			}
-			foreach($this->q->dreg->query($sQuery) as $row) {
+			foreach($this->conn->query($sQuery) as $row) {
 				// Check if it's me !!
 				$bFound = true;
 				$i = 0;
@@ -411,7 +411,7 @@ class DIObject {
 			}
 			$sQuery = "SELECT " . $FieldDst . " FROM " . $TableName . " WHERE " . $FieldDst . "=" . $quote . $this->get($prmFieldName) . $quote;
 			$iReturn = $ErrCode;
-			foreach($this->q->dreg->query($sQuery) as $row) {
+			foreach($this->conn->query($sQuery) as $row) {
 				$iReturn = 1;
 			}
 		}
