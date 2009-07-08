@@ -56,6 +56,7 @@ class DIRegion extends DIObject {
 			$prmRegionId = func_get_arg(1);
 			if ($prmRegionId != '') {
 				$this->set('RegionId', $prmRegionId);
+				$this->q->setDBConnection($prmRegionId);
 			}
 			$this->loadInfo();
 			$this->load();
@@ -92,7 +93,7 @@ class DIRegion extends DIObject {
 		if ($iReturn > 0) {
 			$iReturn = $this->saveInfo();
 		}
-		return iReturn;
+		return $iReturn;
 	}
 	
 } //class
