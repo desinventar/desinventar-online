@@ -30,7 +30,8 @@ class DIObject {
 		}
 		$this->oField = array();
 		$this->oFieldType=array();
-		$this->createFields($this->sFieldKeyDef, $this->sFieldDef);		
+		$this->createFields($this->sFieldKeyDef);
+		$this->createFields($this->sFieldDef);
 	} // constructor
 	
 	public function setConnection($prmDB) {
@@ -41,12 +42,8 @@ class DIObject {
 		}
 	}
 	
-	public function createFields($prmKeyDef, $prmFieldDef) {
-		$sAllFields = $prmKeyDef;
-		if ($prmFieldDef != '') {
-			$sAllFields .= "," . $prmFieldDef;
-		}
-		$sFields = split(',', $sAllFields);
+	public function createFields($prmFieldDef) {
+		$sFields = split(',', $prmFieldDef);
 		foreach ($sFields as $sKey => $sValue) {
 			$oItem = split('/', $sValue);
 			$sFieldName = $oItem[0];

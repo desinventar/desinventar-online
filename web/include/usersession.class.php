@@ -406,7 +406,7 @@ class UserSession {
 	}
 	
 	public function clearOldLocks() {
-		$deltime = date('c', time() - 300);
+		$deltime = gmdate('c', time() - 300);
 		$sQuery = "DELETE FROM UserLockList WHERE SessionId='" . $this->sSessionId . "' AND LastUpdate<='" . $deltime . "'";
 		$this->q->core->query($sQuery);
 	}
@@ -425,7 +425,7 @@ class UserSession {
 	public function lockDatacard($prmDisasterId) {
 		// First delete old datacard locks...
 		$this->clearOldLocks();
-		$now = date('c');
+		$now = gmdate('c');
 		$sQuery = "INSERT INTO UserLockList VALUES ('" . $this->sSessionId . "','DISASTER','" . $prmDisasterId . "','" . $now . "')";
 		$this->q->core->query($sQuery);
 	}
