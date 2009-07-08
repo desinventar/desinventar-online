@@ -90,7 +90,7 @@ class DIRegion extends DIObject {
 		$iReturn = 1;
 		$iReturn = parent::update();
 		if ($iReturn > 0) {
-			$iReturn = this->saveInfo();
+			$iReturn = $this->saveInfo();
 		}
 		return iReturn;
 	}
