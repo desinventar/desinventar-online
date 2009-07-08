@@ -86,9 +86,15 @@ class DIRegion extends DIObject {
 		}
 	}
 	
-	//public function update() {
-	//	parent::update();
-	//}
+	public function update() {
+		$iReturn = 1;
+		$iReturn = parent::update();
+		if ($iReturn > 0) {
+			$iReturn = this->saveInfo();
+		}
+		return iReturn;
+	}
+	
 } //class
 
 </script>
