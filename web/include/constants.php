@@ -9,6 +9,14 @@
 define('CONST_REGIONACTIVE', 1);
 define('CONST_REGIONPUBLIC', 2);
 
+// Database File Locations
+// core.db - Users, Regions, Auths.. 
+define('CONST_DBCORE', VAR_DIR ."/core.db");
+// base.db - DI's Basic database, predefined events etc.
+define('CONST_DBBASE', VAR_DIR ."/base.db");
+// region.db - Emtpy database skeleton for Regions
+define('CONST_DBREGION', VAR_DIR . "/desinventar.db");
+
 // dicore objects
 define ("DI_EVENT",			1);
 define ("DI_CAUSE",			2);

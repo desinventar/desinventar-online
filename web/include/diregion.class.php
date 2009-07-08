@@ -56,13 +56,22 @@ class DIRegion extends DIObject {
 			$prmRegionId = func_get_arg(1);
 			if ($prmRegionId != '') {
 				$this->set('RegionId', $prmRegionId);
-				$this->q->setDBConnection($prmRegionId);
 			}
 			$this->loadInfo();
 			$this->load();
 		}
 	} // __construct
 
+	public function set($prmKey, $prmValue) {
+		$iReturn = parent::set($prmKey, $prmValue);
+		if ($iReturn > 0) {
+			if ($prmKey == 'RegionId') {
+				$this->q->setDBConnection($prmValue);
+			}
+		}
+		return $iReturn;
+	}
+	
 	public function loadInfo() {
 		foreach($this->oField as $k => $v) {
 			$sQuery = "SELECT * FROM Info WHERE InfoKey='" . $k . "'";
@@ -88,11 +97,29 @@ class DIRegion extends DIObject {
 	}
 	
 	public function update() {
-		$iReturn = 1;
+		// Call the original update() function, update core.Region table
 		$iReturn = parent::update();
 		if ($iReturn > 0) {
+			// This should update the region.Info table
 			$iReturn = $this->saveInfo();
 		}
+		return $iReturn;
+	}
+	
+	public function createRegionDB($prmRegionId) {
+		$iReturn = 1;
+		// Create Directory for New Region
+		$DBDir = VAR_DIR . '/' . $prmRegionId . '/';
+		try {
+			if (!file_exists($DBDir)) {
+				mkdir($DBDir);
+			}
+			if (file_exists(CONST_DBREGION)) {
+				$iReturn = copy(CONST_DBREGION, $DBDir . '/desinventar.db');
+			}
+		} catch (Exception $e) {
+			print "Error " . $e->getMessage() . "<br />";
+		}		
 		return $iReturn;
 	}
 	

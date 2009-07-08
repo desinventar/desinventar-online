@@ -17,16 +17,19 @@ class Query extends PDO
 		}
 		try {
 			$num_args = func_num_args();
-			// Load base.db - DI's Basic database
-			$dbb = VAR_DIR ."/base.db";
-			if (file_exists($dbb))
-				$this->base = new PDO("sqlite:" . $dbb);
-			// Load core.db - Users, Regions, Auths.. 
-			$dbc = VAR_DIR ."/core.db";
+
+			// Open core.db - Users, Regions, Auths.. 
+			$dbc = CONST_DBCORE;
 			if (file_exists($dbc))
 				$this->core = new PDO("sqlite:" . $dbc);
 			else
 				$this->rebuildCore($dbc); // Rebuild data from directory..
+
+			// Open base.db - DI's Basic database
+			$dbb = CONST_DBBASE;
+			if (file_exists($dbb))
+				$this->base = new PDO("sqlite:" . $dbb);
+
 			switch ($num_args) {
 			case 0:
 				$this->sSessionId = session_id();
