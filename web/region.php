@@ -77,7 +77,7 @@ else if (isset($_GET['cmd'])) {
 	  // ADMINREG: Form to Create and assign regions
 	  case "adminreg":
       $t->assign ("cntl", $us->q->getCountryList());
-      $t->assign ("usr", $us->getUserFullName(''));
+      $t->assign ("usr", $us->getUsersList(''));
       $t->assign ("ctl_adminreg", true);
       $t->assign ("regpa", $us->q->getRegionAdminList());
       $t->assign ("ctl_reglist", true);

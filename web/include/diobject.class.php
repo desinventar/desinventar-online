@@ -268,7 +268,6 @@ class DIObject {
 		if ($iReturn > 0) {
 			$sQuery = $this->getInsertQuery();
 			try {
-				fb($sQuery);
 				if ($result = $this->q->dreg->query($sQuery)) {
 					$iReturn = 1;		
 				}
@@ -290,7 +289,6 @@ class DIObject {
 		if ($iReturn > 0) {
 			$sQuery = $this->getUpdateQuery();
 			try {
-				fb($sQuery);
 				if ($result = $this->q->dreg->query($sQuery)) {
 					$iReturn = 1;
 				}

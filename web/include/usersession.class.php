@@ -393,6 +393,19 @@ class UserSession {
 		$sQuery = "DELETE FROM UserLockList WHERE SessionId='" . $this->sSessionId . "'";
 		$this->q->core->query($sQuery);
 	}
+	
+	public function getUsersList($prmUserName) {
+		$list = array();
+		$sQuery = "SELECT * FROM User WHERE UserActive > 0 ";
+		if ($prmUserName != '') {
+			$sQuery .= " AND UserName='" . $prmUserName . "'";
+		}
+		$sQuery .= " ORDER BY UserFullName";
+		foreach($this->q->core->query($sQuery) as $row) {
+			$list[$row['UserName']]=$row['UserFullName'];
+		}
+		return $list;
+	}
 } //class
 
 </script>
