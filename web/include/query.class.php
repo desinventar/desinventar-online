@@ -34,19 +34,7 @@ class Query extends PDO
 			case 1:
 				$this->sRegionId = func_get_arg(0);
 				if ($this->sRegionId != '') {
-					$dbr = VAR_DIR ."/". $this->sRegionId ."/desinventar.db";
-					if (file_exists($dbr)) {
-						try {
-							$this->dreg = new PDO("sqlite:" . $dbr);
-							/*** set the error reporting attribute ***/
-							$this->dreg->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-						} catch (PDOException $e) {
-							print $e->getMessage();
-						}
-					} else {
-						echo "Region doesn't exist. Contact Administrator.";
-						exit();
-					}
+					$this->setDBConnection($this->sRegionId);
 				}
 				break;
 			} //switch
@@ -54,6 +42,22 @@ class Query extends PDO
 			print "Error !: " . $e->getMessage() . "<br/>\n";
 			die();
 		}
+	}
+	
+	public function setDBConnection($prmRegionId) {
+		$DBFile = VAR_DIR ."/". $prmRegionId ."/desinventar.db";
+		if (file_exists($DBFile)) {
+			try {
+				$this->dreg = new PDO("sqlite:" . $DBFile);
+				/*** set the error reporting attribute ***/
+				$this->dreg->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			} catch (PDOException $e) {
+				print $e->getMessage();
+			}
+		} else {
+			echo "Database for this Region doesn't exist. Contact Administrator.";
+			exit();
+		} //if
 	}
   
 	public function getassoc($sQuery) {
