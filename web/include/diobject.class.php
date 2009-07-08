@@ -15,10 +15,11 @@ class DIObject {
 	
 	var $oField;
 	var $oFieldType;
-	var $q;
+	var $conn = null;
 	
 	public function __construct($prmSession) {
 		$this->q = new Query($prmSession->sRegionId);
+		$this->conn = $this->q->dreg;
 		$num_args = func_num_args();
 		if ($num_args >= 1) {
 			$this->oSession = func_get_arg(0);
@@ -29,8 +30,16 @@ class DIObject {
 		}
 		$this->oField = array();
 		$this->oFieldType=array();
-		$this->createFields($this->sFieldKeyDef, $this->sFieldDef);
+		$this->createFields($this->sFieldKeyDef, $this->sFieldDef);		
 	} // constructor
+	
+	public function setConnection($prmDB) {
+		if ($prmDB == "core") {
+			$this->conn = $this->q->core;
+		} else {
+			$this->conn = $this->q->dreg;
+		}
+	}
 	
 	public function createFields($prmKeyDef, $prmFieldDef) {
 		$sAllFields = $prmKeyDef;
@@ -211,19 +220,19 @@ class DIObject {
 	public function load() {
 		$iReturn = 0;
 		$sQuery = $this->getSelectQuery();
-		if ($result = $this->q->dreg->query($sQuery)) {
-			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-				$sAllFields = $this->sFieldKeyDef . "," . $this->sFieldDef;
-				$sFields = split(',', $sAllFields);
-				foreach ($sFields as $sKey => $sValue) {
-					$oItem = split('/', $sValue);
-					$sFieldName = $oItem[0];
-					$sFieldType = $oItem[1];
-					$this->oField[$sFieldName] = $row->$sFieldName;
+		foreach ($this->conn->query($sQuery) as $row) {
+			$sAllFields = $this->sFieldKeyDef . "," . $this->sFieldDef;
+			$sFields = split(',', $sAllFields);
+			foreach ($sFields as $sKey => $sValue) {
+				$oItem = split('/', $sValue);
+				$sFieldName = $oItem[0];
+				$sFieldType = $oItem[1];
+				if ($this->existField($sFieldName)) {
+					$this->oField[$sFieldName] = $row[$sFieldName];
 				}
-				$iReturn = 1;
-			} // while
-		} // if
+			}
+			$iReturn = 1;
+		} // foreach
 		return $iReturn;
 	} // function load
 	
@@ -289,7 +298,8 @@ class DIObject {
 		if ($iReturn > 0) {
 			$sQuery = $this->getUpdateQuery();
 			try {
-				if ($result = $this->q->dreg->query($sQuery)) {
+				fb($sQuery);
+				if ($result = $this->conn->query($sQuery)) {
 					$iReturn = 1;
 				}
 			} catch (PDOException $e) {

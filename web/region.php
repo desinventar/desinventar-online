@@ -8,26 +8,33 @@
 
 require_once('include/loader.php');
 require_once('include/region.class.php');
+require_once('include/diregion.class.php');
 $t->config_dir = 'include';
 
 function form2region ($val) {
-  $dat = array();
-  if (isset($val['RegionId']))
-    $dat['RegionId'] = $val['RegionId'];
-  else
-    $dat['RegionId'] = isset($val['RegionId2']) ? $val['RegionId2'] : "NOREG";
-  $dat['RegionLabel'] = $val['RegionLabel'];
-  $dat['CountryIsoCode'] = $val['CountryIsoCode'];
-  if (isset($val['RegionActive']) && $val['RegionActive'] == "on")
-    $dat['RegionStatus'] |= CONST_REGIONACTIVE;
-  else
-    $dat['RegionStatus'] &= ~CONST_REGIONACTIVE;
-  if (isset($val['RegionPublic']) && $val['RegionPublic'] == "on")
-    $dat['RegionStatus'] |= CONST_REGIONPUBLIC;
-  else
-    $dat['RegionStatus'] &= ~CONST_REGIONPUBLIC;
-  return $dat;
+	$dat = array();
+	if (isset($val['RegionId']))
+		$dat['RegionId'] = $val['RegionId'];
+	elseif (isset($val['RegionId2'])) 
+		$dat['RegionId'] = $val['RegionId2'];
+	elseif (isset($val['RegionUUID2']))
+		$dat['RegionId'] = $val['RegionUUID2'];
+	
+	$dat['RegionLabel' ] = $val['RegionLabel'];
+	$dat['LangIsoCode' ] = $val['RegionLangCode'];
+	$dat['CountryIso'  ] = $val['CountryIsoCode'];
+	$dat['RegionStatus'] = 0;
+	if (isset($val['RegionActive']) && $val['RegionActive'] == "on")
+		$dat['RegionStatus'] |= CONST_REGIONACTIVE;
+	else
+		$dat['RegionStatus'] &= ~CONST_REGIONACTIVE;
+	if (isset($val['RegionPublic']) && $val['RegionPublic'] == "on")
+		$dat['RegionStatus'] |= CONST_REGIONPUBLIC;
+	else
+		$dat['RegionStatus'] &= ~CONST_REGIONPUBLIC;
+	return $dat;
 }
+
 // REGIONS: Show databases for selected Country from left menu
 if (isset($_GET['c']) && (strlen($_GET['c']) > 0)) {
 	$t->assign ("ctl_regions", true);
@@ -70,66 +77,69 @@ if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
 	$t->assign ("dbdes", $reg['InfoGeneral']);
 	$t->assign ("dbden", '');
 	//$t->assign ("dbden", str2js($reg['InfoGeneral'][1]));
-}
-else if (isset($_GET['cmd'])) {
+} elseif (isset($_GET['cmd'])) {
 	$q = new Query();
 	switch ($_GET['cmd']) {
-	  // ADMINREG: Form to Create and assign regions
-	  case "adminreg":
-      $t->assign ("cntl", $us->q->getCountryList());
-      $t->assign ("usr", $us->getUsersList(''));
-      $t->assign ("ctl_adminreg", true);
-      $t->assign ("regpa", $us->q->getRegionAdminList());
-      $t->assign ("ctl_reglist", true);
-	  break;
-    // ADMINREG: check if region ID already exists..
-    case "chkruuid":
-      if ($us->q->isvalidObjectName($_GET['RegionId'], $_GET['RegionId'] ,DI_REGION))
-        $t->assign ("cregion", true);
-      else
-        $t->assign ("cregion", false);
-      $t->assign ("ctl_chkruuid", true);
-    break;
-    // ADMINREG: reload list from local SQLITE
-    case "list":
-      $t->assign ("regpa", $us->q->getRegionAdminList());
-      $t->assign ("ctl_reglist", true);
-    break;
-    default:
-      // ADMINREG: insert or update region
-      $r = new Region('');
-      if (($_GET['cmd'] == "insert") || ($_GET['cmd'] == "update")) {
-        $data = form2region($_GET);
-        $stat = ERR_NO_DATABASE;
-        $t->assign ("ctl_admregmess", true);
-        if ($_GET['cmd'] == "insert") {
-          $stat = $r->insertRegion($data['RegionId'], $data['RegionLabel'], $data['CountryIsoCode'], 
-                $data['RegionStatus'], $data['RegionStatus']);
-          $t->assign ("cfunct", 'insert');
-        }
-        else if ($_GET['cmd'] == "update") {
-          $stat = $r->updateRegion($data['RegionId'], $data['RegionLabel'], $data['CountryIsoCode'], 
-                $data['RegionStatus'], $data['RegionStatus']);
-          $t->assign ("cfunct", 'update');
-        }
-        $t->assign ("regid", $data['RegionId']);
-        // Set Role ADMINREGION in RegionAuth: master for this region
-        if (!iserror($stat))
-          $rol = $us->setUserRole($_GET['RegionUserAdmin'], $data['RegionId'], "ADMINREGION");
-        else {
-          $t->assign ("cfunct", '');
-          $rol = $stat;
-        }
-        if (!iserror($rol))
-          $t->assign ("csetrole", true);
-        else
-          $t->assign ("errsetrole", $rol);
-      }
-    break;
-  }
+		case "adminreg":
+			// ADMINREG: Form to Create and assign regions
+			$t->assign ("cntl", $us->q->getCountryList());
+			$t->assign ("usr", $us->getUsersList(''));
+			$t->assign ("ctl_adminreg", true);
+			$t->assign ("regpa", $us->q->getRegionAdminList());
+			$t->assign ("ctl_reglist", true);
+			break;
+		case "chkruuid":
+			// ADMINREG: check if region ID already exists..
+			if ($us->q->isvalidObjectName($_GET['RegionId'], $_GET['RegionId'] ,DI_REGION))
+				$t->assign ("cregion", true);
+			else
+				$t->assign ("cregion", false);
+			$t->assign ("ctl_chkruuid", true);
+			break;
+		case "list":
+			// ADMINREG: reload list from local SQLITE
+			$t->assign ("regpa", $us->q->getRegionAdminList());
+			$t->assign ("ctl_reglist", true);
+			break;
+		default:
+			// ADMINREG: insert or update region
+			if (($_GET['cmd'] == "insert") || ($_GET['cmd'] == "update")) {
+				$data = form2region($_GET);
+				
+				$r = new DIRegion($us, $data['RegionId']);
+				$r->setFromArray($data);
+				$stat = ERR_NO_DATABASE;
+				$t->assign ("ctl_admregmess", true);
+				$stat = 1;
+				if ($_GET['cmd'] == "insert") {		
+					//$stat = $r->insertRegion($data['RegionId'], $data['RegionLabel'], $data['CountryIsoCode'], 
+					//      $data['RegionStatus'], $data['RegionStatus']);
+					$t->assign ("cfunct", 'insert');
+				} elseif ($_GET['cmd'] == "update") {
+					$stat = $r->update();
+					//$stat = $r->updateRegion($data['RegionId'], $data['RegionLabel'], $data['CountryIsoCode'], 
+					//      $data['RegionStatus'], $data['RegionStatus']);
+					$t->assign ("cfunct", 'update');
+				}
+				$t->assign ("regid", $data['RegionId']);
+				// Set Role ADMINREGION in RegionAuth: master for this region
+				if (!iserror($stat)) {
+					$rol = $us->setUserRole($_GET['RegionUserAdmin'], $data['RegionId'], "ADMINREGION");
+				} else {
+					$t->assign ("cfunct", '');
+					$rol = $stat;
+				}
+				
+				if (!iserror($rol))
+					$t->assign ("csetrole", true);
+				else
+					$t->assign ("errsetrole", $rol);
+			}
+			break;
+	} //switch
+} else {
+	$t->assign ("regname", "Undefined Region!");
 }
-else
-  $t->assign ("regname", "Undefined Region!");
 
 $t->display ("region.tpl");
 
