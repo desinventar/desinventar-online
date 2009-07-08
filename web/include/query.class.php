@@ -581,18 +581,24 @@ class Query extends PDO
     return $data;
   }
 
-  public function getRegionAdminList() {
-    $sql = "SELECT R.RegionId AS RegionId, R.CountryIso AS CountryIso, R.RegionLabel ".
-        "AS RegionLabel, RA.UserName AS UserName, R.RegionStatus AS RegionStatus ".
-        "FROM Region AS R, RegionAuth AS RA WHERE R.RegionId=RA.RegionId AND ".
-        "RA.AuthAuxValue='ADMINREGION' ORDER BY RegionLabel";
-    $data = array();
-    $res = $this->core->query($sql);
-    foreach ($res as $row)
-      $data[$row['RegionId']] = array($row['CountryIso'], $row['RegionLabel'], 
-            $row['UserName'], $row['RegionStatus']);
-    return $data;
-  }
+	public function getRegionAdminList() {
+		$sql = "SELECT R.RegionId AS RegionId, R.CountryIso AS CountryIso, R.RegionLabel ".
+		       "AS RegionLabel, RA.UserName AS UserName, R.RegionStatus AS RegionStatus ".
+		       "FROM Region AS R, RegionAuth AS RA WHERE R.RegionId=RA.RegionId AND ".
+		       "RA.AuthAuxValue='ADMINREGION' ORDER BY RegionLabel";
+		$data = array();
+		foreach($this->core->query($sql) as $row) {
+			$RegionActive = ($row['RegionStatus'] & 1) > 0;
+			$RegionPublic = ($row['RegionStatus'] & 2) > 0;
+			$data[$row['RegionId']] = array($row['CountryIso'], 
+			                                $row['RegionLabel'],
+			                                $row['UserName'],
+			                                $RegionActive,
+			                                $RegionPublic);
+		}
+		return $data;
+	}
+
   /* OBSOLETE: USE getDBInfo function 
   public function getVirtualRegInfo($vreg) {
     $sql = "SELECT * FROM VirtualRegion WHERE VirtualRegId='".
