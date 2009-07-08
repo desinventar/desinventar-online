@@ -105,20 +105,16 @@ if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
 			// ADMINREG: insert or update region
 			if (($_GET['cmd'] == "insert") || ($_GET['cmd'] == "update")) {
 				$data = form2region($_GET);
-				
 				$r = new DIRegion($us, $data['RegionId']);
 				$r->setFromArray($data);
 				$stat = ERR_NO_DATABASE;
 				$t->assign ("ctl_admregmess", true);
 				$stat = 1;
 				if ($_GET['cmd'] == "insert") {		
-					//$stat = $r->insertRegion($data['RegionId'], $data['RegionLabel'], $data['CountryIsoCode'], 
-					//      $data['RegionStatus'], $data['RegionStatus']);
+					$stat = $r->insert();
 					$t->assign ("cfunct", 'insert');
 				} elseif ($_GET['cmd'] == "update") {
 					$stat = $r->update();
-					//$stat = $r->updateRegion($data['RegionId'], $data['RegionLabel'], $data['CountryIsoCode'], 
-					//      $data['RegionStatus'], $data['RegionStatus']);
 					$t->assign ("cfunct", 'update');
 				}
 				$t->assign ("regid", $data['RegionId']);
