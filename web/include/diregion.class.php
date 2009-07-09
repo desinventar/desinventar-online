@@ -62,16 +62,6 @@ class DIRegion extends DIObject {
 		}
 	} // __construct
 
-	public function set($prmKey, $prmValue) {
-		$iReturn = parent::set($prmKey, $prmValue);
-		if ($iReturn > 0) {
-			if ($prmKey == 'RegionId') {
-				$this->q->setDBConnection($prmValue);
-			}
-		}
-		return $iReturn;
-	}
-	
 	public function loadInfo() {
 		foreach($this->oField as $k => $v) {
 			$sQuery = "SELECT * FROM Info WHERE InfoKey='" . $k . "'";
@@ -87,13 +77,17 @@ class DIRegion extends DIObject {
 	}
 	
 	public function	saveInfo() {
+		$iReturn = 1;
 		$now = gmdate('c');
+		$this->q->setDBConnection($this->get('RegionId'));
 		foreach($this->oField as $k => $v) {
 			$sQuery = "DELETE FROM Info WHERE InfoKey='" . $k . "'";
 			$this->q->dreg->query($sQuery);
 			$sQuery = "INSERT INTO Info VALUES ('" . $k . "','" . $now . "','" . $v . "','')";
 			$this->q->dreg->query($sQuery);
 		}
+		$this->q->setDBConnection('core');
+		return $iReturn;
 	}
 	
 	public function update() {
@@ -119,7 +113,8 @@ class DIRegion extends DIObject {
 			}
 		} catch (Exception $e) {
 			print "Error " . $e->getMessage() . "<br />";
-		}		
+		}
+		$this->set('RegionId', $prmRegionId);
 		return $iReturn;
 	}
 	

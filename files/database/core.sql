@@ -1,11 +1,11 @@
 /* CORE.DB - DesInventar8.2
-2009-07-04
+2009-07-09
 */
 
 DROP TABLE IF EXISTS Region;
 CREATE TABLE 'Region' ( 
 RegionId VARCHAR(50), 
-RegionLabel VARCHAR(200) NOT NULL, 
+RegionLabel VARCHAR(200), 
 LangIsoCode VARCHAR(3), 
 CountryIso VARCHAR(3), 
 RegionOrder INTEGER, 
@@ -26,7 +26,7 @@ PRIMARY KEY('RegionId','RegionItem')
 
 DROP TABLE IF EXISTS RegionAuth;
 CREATE TABLE 'RegionAuth' ( 
-UserName VARCHAR(20) NOT NULL, 
+UserName VARCHAR(20), 
 RegionId VARCHAR(50), 
 AuthKey VARCHAR(50), 
 AuthValue INTEGER, 
@@ -48,10 +48,10 @@ PRIMARY KEY('QueryId')
 
 DROP TABLE IF EXISTS User;
 CREATE TABLE 'User' ( 
-UserName VARCHAR(20) NOT NULL, 
-UserEMail VARCHAR(100) NOT NULL, 
-UserPasswd VARCHAR(100) NOT NULL, 
-UserFullName VARCHAR(100) NOT NULL, 
+UserName VARCHAR(20), 
+UserEMail VARCHAR(100), 
+UserPasswd VARCHAR(100), 
+UserFullName VARCHAR(100), 
 Organization VARCHAR(100), 
 CountryIso VARCHAR(3), 
 UserCity VARCHAR(50), 
@@ -63,7 +63,7 @@ PRIMARY KEY('UserName')
 
 DROP TABLE IF EXISTS UserOption;
 CREATE TABLE 'UserOption' ( 
-UserName VARCHAR(20) NOT NULL, 
+UserName VARCHAR(20), 
 OptionKey VARCHAR(50), 
 OptionValue VARCHAR(1024), 
 OptionAuxValue VARCHAR(1024), 
@@ -86,8 +86,7 @@ CREATE TABLE 'UserLockList' (
 SessionId VARCHAR(50), 
 TableId VARCHAR(50), 
 RecordId VARCHAR(50), 
-LastUpdate DATETIME, 
-PRIMARY KEY('SessionId','TableId','RecordId')
+PRIMARY KEY('SessionId')
 );
 
 /* Set initial values */

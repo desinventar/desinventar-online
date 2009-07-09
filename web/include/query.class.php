@@ -48,7 +48,12 @@ class Query extends PDO
 	}
 	
 	public function setDBConnection($prmRegionId) {
-		$DBFile = VAR_DIR ."/". $prmRegionId ."/desinventar.db";
+		$DBFile = VAR_DIR;
+		if ($prmRegionId == 'core') {
+			$DBFile .= "/core.db";
+		} else {
+			$DBFile .= "/" . $prmRegionId ."/desinventar.db";
+		}
 		if (file_exists($DBFile)) {
 			try {
 				$this->dreg = new PDO("sqlite:" . $DBFile);

@@ -1,5 +1,5 @@
 /* REGION.DB - DesInventar8.2
-2009-07-04
+2009-07-09
 */
 
 DROP TABLE IF EXISTS Info;
