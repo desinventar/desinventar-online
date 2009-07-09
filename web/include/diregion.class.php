@@ -118,6 +118,30 @@ class DIRegion extends DIObject {
 		return $iReturn;
 	}
 	
+	public function addRegionItem($prmRegionItemId) {
+		$iReturn = 1;
+		if ($prmRegionItemId == '') {
+			$iReturn = -1;
+		}
+		if ($iReturn > 0) {
+			$RegionItemDB = VAR_DIR . '/' . $prmRegionItemId . '/desinventar.db';
+			if (!file_exists($RegionItemDB)) {
+				$iReturn = -2;
+			}	
+		}
+		if ($iReturn > 0) {
+			// Add RegionItem record
+			$i = new DIRegionItem($this->session, $this->get('RegionId'), $prmRegionItemId);
+			fb('addRegionItem : ' . $i->getInsertQuery());
+			fb('addRegionItem : ' . $i->getUpdateQuery());
+			//$iReturn = $i->insert();
+		}
+		if ($iReturn > 0) {
+			// Add Geography to Level0
+			$i = new DIGeography($this->session);
+		}
+		return $iReturn;
+	}	
 } //class
 
 </script>

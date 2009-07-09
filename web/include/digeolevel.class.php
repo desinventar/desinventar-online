@@ -26,6 +26,10 @@ class DIGeoLevel extends DIObject {
 				$prmLangIsoCode = func_get_arg(2);
 				$this->set('LangIsoCode', $prmLangIsoCode);
 			}
+			if ($num_args >= 4) {
+				$prmGeoLevelName = func_get_arg(3);
+				$this->set('GeoLevelName', $prmGeoLevelName);
+			}
 			$this->load();
 		}
 	} // __construct
