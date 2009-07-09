@@ -16,8 +16,8 @@ IsVRegion INTEGER,
 PRIMARY KEY('RegionId')
 );
 
-DROP TABLE IF EXISTS CVRegionItem;
-CREATE TABLE 'CVRegionItem' ( 
+DROP TABLE IF EXISTS RegionItem;
+CREATE TABLE 'RegionItem' ( 
 RegionId VARCHAR(50), 
 RegionItem VARCHAR(50), 
 RegionQuery VARCHAR(50), 
@@ -94,4 +94,3 @@ INSERT INTO User VALUES ('root', 'root@localhost', 'di8welcome', 'Portal Adminis
 INSERT INTO RegionAuth VALUES ('root', '', 'REGION', 5, '');
 INSERT INTO RegionAuth VALUES ('root', '', 'USER', 5, '');
 INSERT INTO RegionAuth VALUES ('root', '', 'ROLE', 0, 'ADMINPORTAL');
-
