@@ -1,5 +1,10 @@
 /* BASE.DB - DesInventar8.2
-2009-05-05
+2009-07-09
+
+DROP TABLE IF EXISTS 
+CREATE TABLE 
+PRIMARY KEY
+);
 */
 
 DROP TABLE IF EXISTS Country;
@@ -26,8 +31,8 @@ PRIMARY KEY('LangIsoCode')
 
 DROP TABLE IF EXISTS DI_Event;
 CREATE TABLE 'DI_Event' ( 
-EventId VARCHAR(50) NOT NULL, 
-LangIsoCode VARCHAR(3) NOT NULL, 
+EventId VARCHAR(50), 
+LangIsoCode VARCHAR(3), 
 EventName VARCHAR(50), 
 EventDesc TEXT, 
 EventActive INTEGER, 
@@ -40,8 +45,8 @@ PRIMARY KEY('EventId','LangIsoCode')
 
 DROP TABLE IF EXISTS DI_Cause;
 CREATE TABLE 'DI_Cause' ( 
-CauseId VARCHAR(50) NOT NULL, 
-LangIsoCode VARCHAR(3) NOT NULL, 
+CauseId VARCHAR(50), 
+LangIsoCode VARCHAR(3), 
 CauseName VARCHAR(50), 
 CauseDesc TEXT, 
 CauseActive INTEGER, 
