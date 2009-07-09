@@ -93,7 +93,9 @@ if (isset($_GET['u'])) {
 } else {
 	// Get Geography elements 
 	if (isset($_GET['cmd'])) {
-		if ($_GET['cmd'] == "list") {
+		// Commands in GET mode: lists, checkings..
+		switch ($_GET['cmd']) {
+		case "list":
 			$lev = $us->q->getNextLev($_GET['GeographyId']);
 			$t->assign ("lev", $lev);
 			$t->assign ("levmax", $us->q->getMaxGeoLev());
@@ -101,17 +103,15 @@ if (isset($_GET['u'])) {
 			$t->assign ("geol", $us->q->loadGeoChilds($_GET['GeographyId']));
 			$t->assign ("opc", isset($_GET['opc']) ? $_GET['opc'] : '');
 			$t->assign ("ctl_geolist", true);
-		}
-		
-		if ($_GET['cmd'] == "chkdiserial") {
+		break;
+		case "chkdiserial":
 			$chk = $us->q->isvalidObjectName($_GET['DisasterId'], $_GET['DisasterSerial'], DI_DISASTER);
 			if ($chk && !empty($_GET['DisasterSerial']))
 				echo "FREE";
 			else
 				echo "BUSY";
-		}
-		
-		if ($_GET['cmd'] == "chklocked") {
+		break;
+		case "chklocked":
 			// check if datacard is locked by some user
 			$r = $us->isDatacardLocked($_GET['DisasterId']);
 			if ($r == '') {
@@ -121,124 +121,121 @@ if (isset($_GET['u'])) {
 			} else {
 				echo "BLOCKED";
 			}
-		}
-		
-		if ($_GET['cmd'] == "chkrelease") {
+		break;
+		case "chkrelease":
 			$us->releaseDatacard($_GET['DisasterId']);
+		break;
+		default: break;
 		}
-	} else {
-		// Check values of _CMD: search | addDICard | updDICard
-		if (isset($_POST['_CMD'])) {
-			$us->releaseDatacard($_POST['DisasterId']);
-			if ($_POST['_CMD'] == "insertDICard") {
-				// Insert New Datacard
-				$data = form2disaster($_POST, CMD_NEW);
-				echo "<!--"; print_r($data); echo "-->\n";
-				$o = new DIDisaster($us, $data['DisasterId']);
-				$o->setFromArray($data);
-				$o->set('RecordCreation', gmdate('c'));
-				$o->set('RecordLastUpdate', gmdate('c'));
+	} elseif (isset($_POST['_CMD'])) {
+		// Commands in POST mode: insert, update, search.. datacards.. 
+		$us->releaseDatacard($_POST['DisasterId']);
+		if ($_POST['_CMD'] == "insertDICard") {
+			// Insert New Datacard
+			$data = form2disaster($_POST, CMD_NEW);
+			echo "<!--"; print_r($data); echo "-->\n";
+			$o = new DIDisaster($us, $data['DisasterId']);
+			$o->setFromArray($data);
+			$o->set('RecordCreation', gmdate('c'));
+			$o->set('RecordLastUpdate', gmdate('c'));
+			$i = $o->insert();
+			$t->assign ("statusmsg", "insertok");
+			if (!iserror($i)) {
+				// Save EEData ....
+				$t->assign ("diserial", $data['DisasterSerial']);
+				// If Datacard is valid, update EEData Table..
+				$eedat = form2eedata($_POST);
+				$eedat['DisasterId'] = $data['DisasterId'];
+				echo "<!--"; print_r($eedat); echo "-->\n";
+				$o = new DIEEData($us, $eedat['DisasterId']);
+				$o->setFromArray($eedat);
 				$i = $o->insert();
-				$t->assign ("statusmsg", "insertok");
-				if (!iserror($i)) {
-					// Save EEData ....
-					$t->assign ("diserial", $data['DisasterSerial']);
-					// If Datacard is valid, update EEData Table..
-					$eedat = form2eedata($_POST);
-					$eedat['DisasterId'] = $data['DisasterId'];
-					echo "<!--"; print_r($eedat); echo "-->\n";
-					$o = new DIEEData($us, $eedat['DisasterId']);
-					$o->setFromArray($eedat);
-					$i = $o->insert();
-				} else {
-					$t->assign ("statusmsg", showerror($i));
-				}
-			} elseif ($_POST['_CMD'] == "updateDICard") {
-				// Update Existing Datacard
-				$data = form2disaster($_POST, CMD_UPDATE);
-				echo "<!--"; print_r($data); echo "-->\n";
-				$o = new DIDisaster($us, $data['DisasterId']);
-				$o->load();
-				$o->setFromArray($data);
-				$o->set('RecordLastUpdate', gmdate('c'));
-				$i = $o->update();
-				$t->assign ("statusmsg", "updateok");
-				if (!iserror($i)) {
-					// Save EEData ....
-					$t->assign ("diserial", $data['DisasterSerial']);
-					// If Datacard is valid, update EEData Table..
-					$eedat = form2eedata($_POST);
-					$eedat['DisasterId'] = $data['DisasterId'];
-					echo "<!--"; print_r($eedat); echo "-->\n";
-					$o = new DIEEData($us, $eedat['DisasterId']);
-					$o->setFromArray($eedat);
-					$i = $o->update();
-				} else {
-					$t->assign ("statusmsg", showerror($i));
-				}
-			}
-			
-			$t->assign ("dipub", $us->q->getNumDisasterByStatus("PUBLISHED"));
-			$t->assign ("direa", $us->q->getNumDisasterByStatus("READY"));
-			$t->assign ("ctl_result", true);
-
-			// End _CMD Block
-		} else {
-			// Default view of DesInventar
-			$t->assign ("usr", $us->sUserName);
-			$rinfo = $us->q->getDBInfo();
-			$t->assign ("regname",  $rinfo['RegionLabel']);
-			$role = $us->getUserRole($sRegionId);
-			$t->assign ("role", $role);
-			$dic = $us->q->queryLabelsFromGroup('DB', $lg);
-			if ($role == "ADMINREGION") {
-				$t->assign ("showconfig", true);
-				$dicrole = $dic['DBRoleAdmin'][0];
-			} elseif ($role=="OBSERVER") {
-				$t->assign ("showconfig", true);
-				$t->assign ("ro", "disabled");
-				$dicrole = $dic['DBRoleObserver'][0];
-			} elseif ($role=="SUPERVISOR") {
-				$dicrole = $dic['DBRoleSupervisor'][0];
 			} else {
-				$dicrole = $dic['DBRoleUser'][0];
+				$t->assign ("statusmsg", showerror($i));
 			}
-			$t->assign ("dicrole", $dicrole);
-			
-			if ($role=="USER" || $role=="SUPERVISOR" || $role=="ADMINREGION" || $role=="OBSERVER") {
-				$t->assign ("ctl_effects", true);
-				$t->assign ("dis", $us->q->queryLabelsFromGroup('Disaster', $lg));
-				$t->assign ("rc1", $us->q->queryLabelsFromGroup('Record|1', $lg));
-				$t->assign ("rc2", $us->q->queryLabelsFromGroup('Record|2', $lg));
-				$t->assign ("eve", $us->q->queryLabelsFromGroup('Event', $lg));
-				$t->assign ("cau", $us->q->queryLabelsFromGroup('Cause', $lg));
-				$t->assign ("ef1", $us->q->queryLabelsFromGroup('Effect|People', $lg));
-				$t->assign ("ef2", $us->q->queryLabelsFromGroup('Effect|Economic', $lg));
-				$t->assign ("ef3", $us->q->queryLabelsFromGroup('Effect|Affected', $lg));
-				$t->assign ("sc3", $us->q->querySecLabelFromGroup('Effect|Affected', $lg));
-				$t->assign ("ef4", $us->q->queryLabelsFromGroup('Effect|More', $lg));
-				$t->assign ("sec", $us->q->queryLabelsFromGroup('Sector', $lg));
-				//      $t->assign ("rcsl", $us->q->queryLabelsFromGroup('RecordStatus', $lg));
-				$t->assign ("dmg", $us->q->queryLabelsFromGroup('MetGuide', $lg));
-				$t->assign ("levl", $us->q->loadGeoLevels('', -1, false));
-				$lev = 0;
-				$t->assign ("lev", $lev);
-				$t->assign ("levmax", $us->q->getMaxGeoLev());
-				$t->assign ("levname", $us->q->loadGeoLevById($lev));
-				$t->assign ("geol", $us->q->loadGeography($lev));
-				$t->assign ("ctl_geolist", true);
-				$t->assign ("evel", $us->q->loadEvents(null, "active", $lg));
-				$t->assign ("caul", $us->q->loadCauses(null, "active", $lg));
-				$t->assign ("eefl", $us->q->getEEFieldList("True"));
-				if ($role=="SUPERVISOR" || $role=="ADMINREGION") {
-					$t->assign ("ctl_rcsl", true);
-				}
-				// get first and last datacard
-				$fst = $us->q->hash2json($us->q->getDisasterById($us->q->getFirstDisasterid()));
-				$lst = $us->q->hash2json($us->q->getDisasterById($us->q->getLastDisasterid()));
-				if (isset($fst[0])) $t->assign ("fst", $fst[0]);
-				if (isset($lst[0])) $t->assign ("lst", $lst[0]);
+		} elseif ($_POST['_CMD'] == "updateDICard") {
+			// Update Existing Datacard
+			$data = form2disaster($_POST, CMD_UPDATE);
+			echo "<!--"; print_r($data); echo "-->\n";
+			$o = new DIDisaster($us, $data['DisasterId']);
+			$o->load();
+			$o->setFromArray($data);
+			$o->set('RecordLastUpdate', gmdate('c'));
+			$i = $o->update();
+			$t->assign ("statusmsg", "updateok");
+			if (!iserror($i)) {
+				// Save EEData ....
+				$t->assign ("diserial", $data['DisasterSerial']);
+				// If Datacard is valid, update EEData Table..
+				$eedat = form2eedata($_POST);
+				$eedat['DisasterId'] = $data['DisasterId'];
+				echo "<!--"; print_r($eedat); echo "-->\n";
+				$o = new DIEEData($us, $eedat['DisasterId']);
+				$o->setFromArray($eedat);
+				$i = $o->update();
+			} else {
+				$t->assign ("statusmsg", showerror($i));
 			}
+		}
+		$t->assign ("dipub", $us->q->getNumDisasterByStatus("PUBLISHED"));
+		$t->assign ("direa", $us->q->getNumDisasterByStatus("READY"));
+		$t->assign ("ctl_result", true);
+		// End _CMD Block
+	} else {
+		// Default view of DesInventar
+		$t->assign ("usr", $us->sUserName);
+		$rinfo = $us->q->getDBInfo();
+		$t->assign ("regname",  $rinfo['RegionLabel']);
+		$role = $us->getUserRole($sRegionId);
+		$t->assign ("role", $role);
+		$dic = $us->q->queryLabelsFromGroup('DB', $lg);
+		if ($role == "ADMINREGION") {
+			$t->assign ("showconfig", true);
+			$dicrole = $dic['DBRoleAdmin'][0];
+		} elseif ($role=="OBSERVER") {
+			$t->assign ("showconfig", true);
+			$t->assign ("ro", "disabled");
+			$dicrole = $dic['DBRoleObserver'][0];
+		} elseif ($role=="SUPERVISOR") {
+			$dicrole = $dic['DBRoleSupervisor'][0];
+		} else {
+			$dicrole = $dic['DBRoleUser'][0];
+		}
+		$t->assign ("dicrole", $dicrole);
+		
+		if ($role=="USER" || $role=="SUPERVISOR" || $role=="ADMINREGION" || $role=="OBSERVER") {
+			$t->assign ("ctl_effects", true);
+			$t->assign ("dis", $us->q->queryLabelsFromGroup('Disaster', $lg));
+			$t->assign ("rc1", $us->q->queryLabelsFromGroup('Record|1', $lg));
+			$t->assign ("rc2", $us->q->queryLabelsFromGroup('Record|2', $lg));
+			$t->assign ("eve", $us->q->queryLabelsFromGroup('Event', $lg));
+			$t->assign ("cau", $us->q->queryLabelsFromGroup('Cause', $lg));
+			$t->assign ("ef1", $us->q->queryLabelsFromGroup('Effect|People', $lg));
+			$t->assign ("ef2", $us->q->queryLabelsFromGroup('Effect|Economic', $lg));
+			$t->assign ("ef3", $us->q->queryLabelsFromGroup('Effect|Affected', $lg));
+			$t->assign ("sc3", $us->q->querySecLabelFromGroup('Effect|Affected', $lg));
+			$t->assign ("ef4", $us->q->queryLabelsFromGroup('Effect|More', $lg));
+			$t->assign ("sec", $us->q->queryLabelsFromGroup('Sector', $lg));
+			//$t->assign ("rcsl", $us->q->queryLabelsFromGroup('RecordStatus', $lg));
+			$t->assign ("dmg", $us->q->queryLabelsFromGroup('MetGuide', $lg));
+			$t->assign ("levl", $us->q->loadGeoLevels('', -1, false));
+			$lev = 0;
+			$t->assign ("lev", $lev);
+			$t->assign ("levmax", $us->q->getMaxGeoLev());
+			$t->assign ("levname", $us->q->loadGeoLevById($lev));
+			$t->assign ("geol", $us->q->loadGeography($lev));
+			$t->assign ("ctl_geolist", true);
+			$t->assign ("evel", $us->q->loadEvents(null, "active", $lg));
+			$t->assign ("caul", $us->q->loadCauses(null, "active", $lg));
+			$t->assign ("eefl", $us->q->getEEFieldList("True"));
+			if ($role=="SUPERVISOR" || $role=="ADMINREGION") {
+				$t->assign ("ctl_rcsl", true);
+			}
+			// get first and last datacard
+			$fst = $us->q->hash2json($us->q->getDisasterById($us->q->getFirstDisasterid()));
+			$lst = $us->q->hash2json($us->q->getDisasterById($us->q->getLastDisasterid()));
+			if (isset($fst[0])) $t->assign ("fst", $fst[0]);
+			if (isset($lst[0])) $t->assign ("lst", $lst[0]);
 		}
 	}
 	$t->assign ("reg", $sRegionId);
