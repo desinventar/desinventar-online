@@ -29,27 +29,36 @@ class DIGeography extends DIObject {
 			if ($num_args >= 4) {
 				$prmParentId = func_get_arg(3);
 				$prmGeographyId = $this->buildGeographyId($prmParentId);
-				$this->set('GeographyId', $prmGeographyId);
+				$this->setGeographyId($prmGeographyId);
 			}
 		} //if
 	} // __construct
 
-	public function buildGeographyId($sMyParentId) {
-		$iGeographyLevel = strlen($sMyParentId)/5;
-		$sQuery = "SELECT * FROM Geography WHERE GeographyId LIKE '" . $sMyParentId . "%' AND LENGTH(GeographyId)=" . ($iGeographyLevel + 1) * 5;
+	public function buildGeographyId($prmMyParentId) {
+		$iGeographyLevel = strlen($prmMyParentId)/5;
+		$sQuery = "SELECT * FROM Geography WHERE GeographyId LIKE '" . $prmMyParentId . "%' AND LENGTH(GeographyId)=" . ($iGeographyLevel + 1) * 5;
 		$TmpStr = '';
 		foreach($this->q->dreg->query($sQuery) as $row) {
 			$TmpStr = substr($row['GeographyId'], $iGeographyLevel * 5, 5);
 		}
 		if ($TmpStr == '') {
-			$sGeographyId = '';
+			$GeographyId = '';
 		} else {
 			$TmpStr = $this->padNumber((int)$TmpStr + 1, 5);
-			$sGeographyId = $sMyParentId . $TmpStr;
+			$GeographyId = $prmMyParentId . $TmpStr;
 		}
-		$this->set('GeographyId', $sGeographyId);
-		$this->setGeographyLevel();
-		return $sGeographyId;
+		return $GeographyId;
+	}
+	
+	public function setGeographyId($prmMyParentId) {
+		$iReturn = 1;
+		$GeographyId = $this->buildGeographyId($prmMyParentId);
+		if ($GeographyId == '') { $iReturn = -1; }
+		if ($iReturn > 0) {
+			$this->set('GeographyId', $GeographyId);
+			$this->setGeographyLevel();
+		}
+		return $iReturn;
 	}
 	
 	public function getIdByCode($prmGeographyCode) {

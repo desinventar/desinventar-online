@@ -96,7 +96,8 @@ class DIImport {
 				$rowCount++;
 				
 				$g = new DIGeography($this->us);
-				$o->set('DisasterGeographyId', $g->getIdByCode($o->get('DisasterGeographyId')));
+				$DisasterGeographyCode = $o->get('DisasterGeographyId');
+				$o->set('DisasterGeographyId', $g->getIdByCode($DisasterGeographyCode));
 				
 				$e = new DIEvent($this->us);
 				$o->set('EventId', $e->getIdByName($o->get('EventId')));

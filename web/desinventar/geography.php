@@ -32,7 +32,7 @@ if (isset($_GET['geocmd'])) {
 	case "insert":
 		$o = new DIGeography($us);
 		$o->setFromArray($_GET);
-		$o->buildGeographyId($_GET['GeoParentId']);
+		$o->setGeographyId($_GET['GeoParentId']);
 		$i = $o->insert();
 		if (!iserror($i))
 			$t->assign ("ctl_msginsgeo", true);
