@@ -483,11 +483,11 @@
 				</td>
 				<td>
 					<span class="dlgmsg" id="dostat"></span>
-<!--					<input type="button" class="medium" value="<<" onClick="setCard('{-$reg-}', {-$fst-}, '');">
-					<input type="button" class="medium" value="<" style="backgroundColor:#eee;" disabled>
+					<input type="button" class="medium" value="<<" onClick="setCard('{-$reg-}', {-$fst-}, '');">
+					<!--<input type="button" class="medium" value="<" onClick="setDICard(form, requestCard($('DisasterId').value));">-->
 					&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="button" class="medium" value=">" style="backgroundColor:#eee;" disabled>
-					<input type="button" class="medium" value=">>" onClick="setCard('{-$reg-}', {-$lst-}, '');">-->
+					<!--<input type="button" class="medium" value=">" disabled>-->
+					<input type="button" class="medium" value=">>" onClick="setCard('{-$reg-}', {-$lst-}, '');">
 				</td>
 				<td align="right">
 					<iframe name="ifr" id="ifr" frameborder="0" style="height:40px; width:450px;" src="about:blank"></iframe>

@@ -1172,10 +1172,10 @@
                     <option value="{-$k-}|D.DisasterGeographyId">
                     {-assign var="ln" value=StadistDisasterGeographyId_$k-}{-$std.$ln[0]-}</option>
   {-/foreach-}
-                    <option value="|D.EventId">{-$std.StadistEventName[0]-}</option>
+                    <option value="|D.EventId">{-$std.StadistEventId[0]-}</option>
                     <option value="YEAR|D.DisasterBeginTime">{-$std.StadistDisasterBeginTime_YEAR[0]-}</option>
                     <option value="MONTH|D.DisasterBeginTime">{-$std.StadistDisasterBeginTime_MONTH[0]-}</option>
-                    <option value="|D.CauseId">{-$std.StadistCauseName[0]-}</option>
+                    <option value="|D.CauseId">{-$std.StadistCauseId[0]-}</option>
                    </select>
                   </td>
                   <td><b>{-$std.StadistSeclev[0]-}</b><br>
