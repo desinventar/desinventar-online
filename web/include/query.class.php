@@ -30,17 +30,12 @@ class Query extends PDO
 			if (file_exists($dbb))
 				$this->base = new PDO("sqlite:" . $dbb);
 
-			switch ($num_args) {
-			case 0:
-				$this->sSessionId = session_id();
-				break;
-			case 1:
+			if ($num_args > 0) {
 				$this->sRegionId = func_get_arg(0);
 				if ($this->sRegionId != '') {
 					$this->setDBConnection($this->sRegionId);
 				}
-				break;
-			} //switch
+			} //if
 		} catch (Exception $e) {
 			print "Error !: " . $e->getMessage() . "<br/>\n";
 			die();
