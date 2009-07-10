@@ -171,12 +171,12 @@
 							<td><img src="images/p_paises3.gif" width=25 height=16></td></tr>
 					<tr><td colspan="3"><img src="images/p_ini.gif" width="133" height="5"></td></tr>
 					<tr><td class="pais" colspan="3">
-						<a href="javascript:void(null)" onclick="updateList('pagecontent', 'region.php', 'r=DESINVENTAR')">{-#treg6#-}</a>
+						<a href="javascript:void(null)" onclick="updateList('pagecontent', 'region.php', 'r=CAN_20090708_100000')">{-#treg6#-}</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_fin.gif" width="133" height="5"></td></tr>
 					<tr><td colspan="3"><img src="images/p_ini.gif" width="133" height="5"></td></tr>
 					<tr><td class="pais" colspan="3">
-						<a href="javascript:void(null)" onclick="updateList('pagecontent', 'region.php', 'r=DESINVENTAR')">{-#treg8#-}</a>
+						<a href="javascript:void(null)" onclick="updateList('pagecontent', 'region.php', 'r=CAN_20090708_100000')">{-#treg8#-}</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_fin.gif" width="133" height="5"></td></tr>
 				</table>

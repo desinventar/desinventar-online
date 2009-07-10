@@ -57,15 +57,16 @@ class DIRegion extends DIObject {
 			if ($prmRegionId != '') {
 				$this->set('RegionId', $prmRegionId);
 			}
-			$this->loadInfo();
 			$this->load();
 		}
 	} // __construct
 
 	public function loadInfo() {
+		$iReturn = 1;
+		$this->setConnection($this->get('RegionId'));
 		foreach($this->oField as $k => $v) {
 			$sQuery = "SELECT * FROM Info WHERE InfoKey='" . $k . "'";
-			foreach($this->q->dreg->query($sQuery) as $row) {
+			foreach($this->conn->query($sQuery) as $row) {
 				$Value = $row['InfoValue'];
 				$sFieldType = $this->oFieldType[$k];
 				if ($sFieldType == 'DATETIME') {
@@ -74,19 +75,29 @@ class DIRegion extends DIObject {
 				$this->set($k, $Value);
 			} //foreach row
 		} // foreach field
+		$this->setConnection('core');
+		return $iReturn;
 	}
 	
 	public function	saveInfo() {
 		$iReturn = 1;
 		$now = gmdate('c');
-		$this->q->setDBConnection($this->get('RegionId'));
+		$this->setConnection($this->get('RegionId'));
 		foreach($this->oField as $k => $v) {
 			$sQuery = "DELETE FROM Info WHERE InfoKey='" . $k . "'";
-			$this->q->dreg->query($sQuery);
+			$this->conn->query($sQuery);
 			$sQuery = "INSERT INTO Info VALUES ('" . $k . "','" . $now . "','" . $v . "','')";
-			$this->q->dreg->query($sQuery);
+			$this->conn->query($sQuery);
 		}
-		$this->q->setDBConnection('core');
+		$this->setConnection('core');
+		return $iReturn;
+	}
+
+	public function load() {
+		$iReturn = parent::load();
+		if ($iReturn > 0) {
+			$iReturn = $this->loadInfo();
+		}
 		return $iReturn;
 	}
 	
@@ -119,29 +130,76 @@ class DIRegion extends DIObject {
 	}
 	
 	public function addRegionItem($prmRegionItemId) {
+		$RegionId = $this->get('RegionId');
+		$RegionItemDB = VAR_DIR . '/' . $prmRegionItemId . '/desinventar.db';
 		$iReturn = 1;
 		if ($prmRegionItemId == '') {
 			$iReturn = -1;
 		}
 		if ($iReturn > 0) {
-			$RegionItemDB = VAR_DIR . '/' . $prmRegionItemId . '/desinventar.db';
 			if (!file_exists($RegionItemDB)) {
 				$iReturn = -2;
 			}	
 		}
 		if ($iReturn > 0) {
 			// Add RegionItem record
-			$i = new DIRegionItem($this->session, $this->get('RegionId'), $prmRegionItemId);
-			fb('addRegionItem : ' . $i->getInsertQuery());
-			fb('addRegionItem : ' . $i->getUpdateQuery());
+			$i = new DIRegionItem($this->session, $RegionId, $prmRegionItemId);
 			//$iReturn = $i->insert();
 		}
 		if ($iReturn > 0) {
 			// Add Geography to Level0
-			$i = new DIGeography($this->session);
+			$g = new DIGeography($this->session);
+			$g->setGeographyId('');
+			$GeographyId = $g->get('GeographyId');
+			$g->set('GeographyCode', $prmRegionItemId);
+			$g->set('GeographyName', $prmRegionItemId);
+			$g->insert();
+			//$iReturn = $g->insert();
+			//print $g->getInsertQuery() . "<br />";
+			//print $g->getUpdateQuery() . "<br />";
+		}
+		if ($iReturn > 0) {
+			// Attach Database
+			$Query = "ATTACH DATABASE '" . $RegionItemDB . "' AS RegItem;";
+			$this->q->dreg->query($Query);
+			// Copy Geography Items
+			//$this->copyData('GeoLevel','GeoLevelId', '0', true);
+			$this->copyData('Geography','GeographyId', $GeographyId, false);
+			//$g->insert();
+			$this->copyData('Disaster','DisasterGeographyId', $GeographyId, false);
+			$Query = "DETACH DATABASE RegItem";
+			$this->q->dreg->query($Query);
 		}
 		return $iReturn;
-	}	
+	}
+	
+	public function copyData($prmTable, $prmField, $prmValue, $isNumeric) {
+		// Create Empty Table
+		$Query = "DROP TABLE IF EXISTS TmpTable";
+		$this->q->dreg->query($Query);
+		$Query = "CREATE TABLE TmpTable AS SELECT * FROM " . $prmTable . " LIMIT 0";
+		$this->q->dreg->query($Query);
+		$Query = "INSERT INTO TmpTable SELECT * FROM RegItem." . $prmTable;
+		$this->q->dreg->query($Query);
+		if ($isNumeric) {
+			$Query = "UPDATE TmpTable SET " . $prmField . "=" . $prmField . "+1";
+		} else {
+			$Query = "UPDATE TmpTable SET " . $prmField . "='" . $prmValue . "'||" . $prmField;
+		}
+		$this->q->dreg->query($Query);
+		if ($prmTable == 'Geography') {
+			$Query = "UPDATE TmpTable SET GeographyLevel=GeographyLevel+1";
+			$this->q->dreg->query($Query);
+		}
+		if ($isNumeric) {
+			$Query = "DELETE FROM " . $prmTable . " WHERE " . $prmField . "=" . ((int)$prmValue + 1);
+		} else {
+			$Query = "DELETE FROM " . $prmTable . " WHERE " . $prmField . " LIKE '" . $prmValue . "%'";
+		}
+		//$this->q->dreg->query($Query);
+		$Query = "INSERT INTO " . $prmTable . " SELECT * FROM TmpTable";
+		$this->q->dreg->query($Query);
+	}
 } //class
 
 </script>

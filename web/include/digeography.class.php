@@ -41,12 +41,8 @@ class DIGeography extends DIObject {
 		foreach($this->q->dreg->query($sQuery) as $row) {
 			$TmpStr = substr($row['GeographyId'], $iGeographyLevel * 5, 5);
 		}
-		if ($TmpStr == '') {
-			$GeographyId = '';
-		} else {
-			$TmpStr = $this->padNumber((int)$TmpStr + 1, 5);
-			$GeographyId = $prmMyParentId . $TmpStr;
-		}
+		$TmpStr = $this->padNumber((int)$TmpStr + 1, 5);
+		$GeographyId = $prmMyParentId . $TmpStr;
 		return $GeographyId;
 	}
 	
