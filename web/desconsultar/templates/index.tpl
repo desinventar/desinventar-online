@@ -643,6 +643,37 @@
         }
       }
     }
+	function dechex(dec) {
+		var Char_hexadecimales = "0123456789ABCDEF";
+		var low = dec % 16;
+		var high = (dec - low)/16;
+		hex = "" + Char_hexadecimales.charAt(high) + Char_hexadecimales.charAt(low);
+		return hex;
+	}
+	function hexdec(hex) {
+		return parseInt(hex,16);
+	}
+	function genColors() {
+		var tbl = $('tbl_range');
+		var cnt = tbl.rows.length - 1;
+		var a = $('_M+color[0]').value;
+		var z = $('_M+color['+ cnt +']').value;
+		var a1 = hexdec(a.substring(1,3));	var z1 = hexdec(z.substring(1,3));
+		var a2 = hexdec(a.substring(3,5));	var z2 = hexdec(z.substring(3,5));
+		var a3 = hexdec(a.substring(5,7));	var z3 = hexdec(z.substring(5,7));
+		var m1 = ((z1 - a1) / cnt);
+		var m2 = ((z2 - a2) / cnt);
+		var m3 = ((z3 - a3) / cnt);
+		for (i=1; i <= cnt; i++) {
+			idx = i - 1;
+			h1 = dechex(a1 + (m1 * i));
+			h2 = dechex(a2 + (m2 * i));
+			h3 = dechex(a3 + (m3 * i));
+			val = "#" + h1 + h2 + h3;
+			$('_M+color['+ idx + ']').value = val;
+			$('_M+ic['+ idx + ']').style.backgroundColor = val;
+		}
+	}
   </script>
   <script type="text/javascript" src="../include/listMan.js"></script>
 </head>
@@ -780,6 +811,7 @@
  {-/foreach-}
                    </tbody>
                   </table>
+				  <p align="right"><input type="button" value="Gradiente de Color" onClick="genColors();" class="line"></p>
                 </td><td>
                   <b>{-#mrepreselev#-}</b><br>
                   <select id="_M+Type" name="_M+Type" size="3" class="fixw">
@@ -1586,7 +1618,7 @@
     </dd>
     <!-- END DATETIME SECTION -->
 	<!-- BEGIN CUSTOMQUERY SECTION -->
-    <dt>Consulta Personalizada</dt>
+    <dt>Consulta personalizada</dt>
     <dd>
       <div style="height: 360px;">
        <textarea id="CusQry" name="__CusQry" style="width:250px; height:40px;" 
@@ -1619,16 +1651,16 @@
  		  </select>
 		 </td>
 		 <td align="center" valign="center">
-		  <input type="button" value="< " onClick="$('CusQry').value += this.value;">
-			<input type="button" value="> " onClick="$('CusQry').value += this.value;">
-			<input type="button" value="= " onClick="$('CusQry').value += this.value;"><br>
-			<input type="button" value="<> " onClick="$('CusQry').value += this.value;">
-			<input type="button" value="(" onClick="$('CusQry').value += this.value;">
-			<input type="button" value=") " onClick="$('CusQry').value += this.value;"><br>
-			<input type="button" value="AND " onClick="$('CusQry').value += this.value;">
-			<input type="button" value="OR " onClick="$('CusQry').value += this.value;">
-			<input type="button" value="LIKE '%%'" onClick="$('CusQry').value += this.value;"><br><br>
-			<input type="button" value="{-#tclean#-}" onClick="$('CusQry').value = '';">
+		  <input type="button" value="< " onClick="$('CusQry').value += this.value;" class="line">
+		  <input type="button" value="> " onClick="$('CusQry').value += this.value;" class="line">
+		  <input type="button" value="= " onClick="$('CusQry').value += this.value;" class="line"><br>
+		  <input type="button" value="<> " onClick="$('CusQry').value += this.value;" class="line">
+		  <input type="button" value="(" onClick="$('CusQry').value += this.value;" class="line">
+		  <input type="button" value=") " onClick="$('CusQry').value += this.value;" class="line"><br>
+		  <input type="button" value="AND " onClick="$('CusQry').value += this.value;" class="line">
+		  <input type="button" value="OR " onClick="$('CusQry').value += this.value;" class="line">
+		  <input type="button" value="LIKE '%%'" onClick="$('CusQry').value += this.value;" class="line"><br><br>
+		  <input type="button" value="{-#tclean#-}" onClick="$('CusQry').value = '';" class="line">
 		 </td>
 		</tr>
 	   </table>

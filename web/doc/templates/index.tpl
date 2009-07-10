@@ -51,6 +51,10 @@
 	<p align="justify"><i>{-$pagedesc-}</i></p>
 	<p align="justify">{-$pagefull-}</p>
 	<hr>
+{-foreach name=eff key=key item=item from=$eff-}
+ <b>{-$item[0]-}</b><br>{-$item[2]-}<br><hr>
+{-/foreach-}
+<br>
 {-foreach name=eve key=key item=item from=$eve-}
  <b>{-$item[0]-}</b><br>{-$item[1]-}<br><hr>
 {-/foreach-}
