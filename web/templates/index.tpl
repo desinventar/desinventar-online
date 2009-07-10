@@ -1,9 +1,6 @@
 {-config_load file=`$lg`.conf section="di8_web"-}
-{-**** SHOW UPDATER TO CONNECTION  (TOPMENU) ****-}
-{-if $ctl_updater-}
-{-$stat-}
 {-**** SHOW PAGES (CONTENT) ****-}
-{-elseif $ctl_pages-}
+{-if $ctl_pages-}
  {-if $page == "MainPageDI8" || $page == "MainPagewhatis" || $page == "MainPagecredits" || $page == "MainPagecontactus"-}
  	{-$menu.$page[2]-}
  {-elseif $page == "subregcan"-}

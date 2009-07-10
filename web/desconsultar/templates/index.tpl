@@ -1204,10 +1204,10 @@
                     <option value="{-$k-}|D.DisasterGeographyId">
                     {-assign var="ln" value=StadistDisasterGeographyId_$k-}{-$std.$ln[0]-}</option>
   {-/foreach-}
-                    <option value="|D.EventId">{-$std.StadistEventId[0]-}</option>
+                    <option value="|D.EventId">{-$std.StadistEventName[0]-}</option>
                     <option value="YEAR|D.DisasterBeginTime">{-$std.StadistDisasterBeginTime_YEAR[0]-}</option>
                     <option value="MONTH|D.DisasterBeginTime">{-$std.StadistDisasterBeginTime_MONTH[0]-}</option>
-                    <option value="|D.CauseId">{-$std.StadistCauseId[0]-}</option>
+                    <option value="|D.CauseId">{-$std.StadistCauseName[0]-}</option>
                    </select>
                   </td>
                   <td><b>{-$std.StadistSeclev[0]-}</b><br>
@@ -1651,16 +1651,16 @@
  		  </select>
 		 </td>
 		 <td align="center" valign="center">
-		  <input type="button" value="< " onClick="$('CusQry').value += this.value;" class="line">
-		  <input type="button" value="> " onClick="$('CusQry').value += this.value;" class="line">
-		  <input type="button" value="= " onClick="$('CusQry').value += this.value;" class="line"><br>
-		  <input type="button" value="<> " onClick="$('CusQry').value += this.value;" class="line">
-		  <input type="button" value="(" onClick="$('CusQry').value += this.value;" class="line">
-		  <input type="button" value=") " onClick="$('CusQry').value += this.value;" class="line"><br>
-		  <input type="button" value="AND " onClick="$('CusQry').value += this.value;" class="line">
-		  <input type="button" value="OR " onClick="$('CusQry').value += this.value;" class="line">
-		  <input type="button" value="LIKE '%%'" onClick="$('CusQry').value += this.value;" class="line"><br><br>
-		  <input type="button" value="{-#tclean#-}" onClick="$('CusQry').value = '';" class="line">
+		  <input type="button" value="< " onClick="$('CusQry').value += this.value;" class="medium">
+		  <input type="button" value="> " onClick="$('CusQry').value += this.value;" class="medium">
+		  <input type="button" value="= " onClick="$('CusQry').value += this.value;" class="medium"><br>
+		  <input type="button" value="<> " onClick="$('CusQry').value += this.value;" class="medium">
+		  <input type="button" value="(" onClick="$('CusQry').value += this.value;" class="medium">
+		  <input type="button" value=") " onClick="$('CusQry').value += this.value;" class="medium"><br>
+		  <input type="button" value="AND " onClick="$('CusQry').value += this.value;" class="medium">
+		  <input type="button" value="OR " onClick="$('CusQry').value += this.value;" class="medium">
+		  <input type="button" value="LIKE '%%'" onClick="$('CusQry').value += this.value;" class="medium"><br><br>
+		  <input type="button" value="{-#tclean#-}" onClick="$('CusQry').value = '';" class="medium">
 		 </td>
 		</tr>
 	   </table>

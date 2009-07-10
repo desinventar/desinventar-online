@@ -1118,7 +1118,7 @@ class Query extends PDO
 			$dictio[$grp[0].$row['lbn']] = array(
 			  $row['DictTranslation'],//utf8_encode($row['DicTranslation']), 
 			  $row['DictTechHelp'],//utf8_encode($row['DicTechHelp']),
-			  str2js($row['DictBasDesc']), $row['DictFullDesc']);
+			  $row['DictBasDesc'], $row['DictFullDesc']);
 		} // foreach
 	} catch (Exception $e) {
 		print $e->getMessage();
