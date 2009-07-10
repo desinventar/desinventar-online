@@ -6,11 +6,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
 	<meta http-equiv="Pragma" content="text/html; charset=utf-8; no-cache" />
-<!--
-	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAfQolBKtJvhOLwVfLoxEfMBQ77LACC71meKxbfZwyDLYGQlGiIRTFJ_UlTeqhUqMf6iE54G8kcN3sJQ"></script>
+<!--	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAfQolBKtJvhOLwVfLoxEfMBQ77LACC71meKxbfZwyDLYGQlGiIRTFJ_UlTeqhUqMf6iE54G8kcN3sJQ"></script>
 	<script src='http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.1'></script>
-	<script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid=euzuro-openlayers"></script>
--->
+	<script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid=euzuro-openlayers"></script>-->
 	<script src="/openlayers/lib/OpenLayers.js"></script>
 	<script type="text/javascript">
 		var lon = {-if $lon != ''-}{-$lon-}{-else-}0{-/if-};
@@ -19,6 +17,9 @@
 		var map;
 		
 		function init() {
+			// avoid pink tiles
+			OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
+			OpenLayers.Util.onImageLoadErrorColor = "transparent";
 			var options = {
 /*				projection    : new OpenLayers.Projection("EPSG:900913"),
 				minResolution : "auto",
@@ -79,16 +80,14 @@
 			bk2.setVisibility(false);
 			map.addLayer(bk2);
 			// Legend: http://preview.grid.unep.ch/previewims/data/general_data/leg/leg_world07o.png
-/*
-			// Microsoft Virtual Earth Base Layer
+/*			// Microsoft Virtual Earth Base Layer
 			var virtualearth = new OpenLayers.Layer.VirtualEarth("Microsoft Virtual Earth", { 'sphericalMercator': true });
 			map.addLayer(virtualearth);
 			// Yahoo Maps Base Layer
 			var yahoo = new OpenLayers.Layer.Yahoo( "Yahoo Maps", { sphericalMercator: true });
 			map.addLayer(yahoo);
 			// maps.google.com
-			var goog1 = new OpenLayers.Layer.Google("** Google Basic",
-					{type: G_NORMAL_MAP, 'sphericalMercator': false});
+			var goog1 = new OpenLayers.Layer.Google("** Google Basic", {type: G_NORMAL_MAP, 'sphericalMercator': false});
 			map.addLayer(goog1);
 			var goog2 = new OpenLayers.Layer.Google("** Google Satellite",
 					{type: G_SATELLITE_MAP});
@@ -108,14 +107,12 @@
 			map.addControl(new OpenLayers.Control.EditingToolbar(vlayer));
 			var pegeo = new OpenLayers.Layer.WMS("** Geología Perú",
 					"http://per.geosemantica.net/services/mapserv.exe?MAP=2c1bc078-13e6-4734-863a-5636442a2e30_wms.map", 
-					{'layers':'geoutm_shp', 'transparent':true, 'format':'png' },
-					{'isBaseLayer':false});
+					{'layers':'geoutm_shp', 'transparent':true, 'format':'png' }, {'isBaseLayer':false});
 			pegeo.setVisibility(false);
 			map.addLayer(pegeo);
 			var cosis = new OpenLayers.Layer.WMS("** Amenaza Sísmica Colombia",
 					"http://col.geosemantica.net/services/mapserv.exe?map=8ec9a29a-f170-4023-9fe0-bf3d38c5ee2e.map",
-					{'layers':'aisacel_1_shp', 'transparent':true, 'format':'png' },
-					{'isBaseLayer':false});
+					{'layers':'aisacel_1_shp', 'transparent':true, 'format':'png' }, {'isBaseLayer':false});
 			cosis.setVisibility(false);
 			map.addLayer(cosis);
 			var queryTarget = $('queryOut');
@@ -127,8 +124,7 @@
 			var proj = new OpenLayers.Projection("EPSG:4326");
 			var point = new OpenLayers.LonLat(lon, lat);
 			point.transform(proj, map.getProjectionObject());
-			map.setCenter(point, zoom); 
-*/
+			map.setCenter(point, zoom); */
 			if (lon == 0 && lat == 0)
 				map.zoomToMaxExtent();
 			else
