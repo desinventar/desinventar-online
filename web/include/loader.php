@@ -131,7 +131,7 @@ $us = new UserSession(session_id());
 $us->load($us->sSessionId);
 $us->awake();
 
-error_reporting(E_ALL);
+error_reporting(E_ALL && ~E_NOTICE);
 header('Content-Type: text/html; charset=UTF-8');
 define("DEFAULT_CHARSET", 'UTF-8');
 
