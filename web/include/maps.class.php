@@ -97,7 +97,7 @@ class Maps
 			  WMS_EXTENT	"'. $inf['EXTENT'] .'"
 			  WMS_TIMEEXTENT	"'. $inf['BEG'] ."/". $inf['END'] .'/P5M"
 			  WMS_ONLINERESOURCE	"'. $this->url .'map="
-			  WMS_SRS	"EPSG:4326"
+			  WMS_SRS	"EPSG:4326 EPSG:900913"
 			END
 		END
 		QUERYMAP
