@@ -185,21 +185,9 @@ class DIRegion extends DIObject {
 					fb('Create GeoLevel ' . $iMaxLevel);
 				}			
 			}
+			
+			// Create GeoCarto
 
-			// Copy GeoCarto Items
-			$this->copyData('GeoCarto','GeographyId',$GeographyId, false);
-			// Copy SHP,SHX,DBF files from each RegionItem to Region
-			foreach($this->q->dreg->query('SELECT * FROM RegItem.GeoCarto') as $row) {
-				foreach(array('dbf','shp','shx','prj') as $ext) {
-					$file0 = $row['GeoLevelLayerFile'] . '.' . $ext;
-					$file1 = $RegionItemDir . '/' . $file0;
-					$file2 = $RegionDir . '/' . $file0;
-					//fb('copy' . $file1 . ' => ' . $file2);
-					if (file_exists($file1)) {
-						copy($file1, $file2);
-					}
-				}
-			}
 			
 			$this->copyData('Geography','GeographyId', $GeographyId, false);
 			$this->copyData('Disaster','DisasterGeographyId', $GeographyId, false);
@@ -209,7 +197,43 @@ class DIRegion extends DIObject {
 		return $iReturn;
 	}
 	
-	public function copyData($prmTable, $prmField, $prmValue, $isNumeric) {
+	public function getRegionItemGeographyId($prmRegionItemId) {
+		$RegionItemGeographyId = '';
+		$Query = "SELECT * FROM RegionItem WHERE RegionId='" . $this->get('RegionId') . "'";
+		//$this->q->core->query($Query);
+		return $RegionItemGeographyId;		
+	}
+	
+	public function createCVRegionGeoCarto($prmSession, $prmRegionItemId, $prmRegionItemGeographyId) {
+		$RegionDB = VAR_DIR . '/' . $prmRegionItemId . '/desinventar.db';
+		fb($RegionDB);
+		$q = $prmSession->q->dreg;
+		$q->query("ATTACH DATABASE '" . $RegionDB . "' AS RegItem");
+		$q->query("DELETE FROM GeoCarto WHERE GeographyId='" . $prmRegionItemGeographyId . "'");
+		$g = new DIGeoCarto($prmSession, 0);
+		$g->set('GeographyId', $prmRegionItemGeographyId);
+		$g->set('RegionId', $prmRegionItemId);
+		$g->insert();
+		// Copy GeoCarto Items
+		$this->copyData($q, 'GeoCarto','GeographyId',$prmRegionItemId, $prmRegionItemGeographyId, false);		
+		/*
+		// Copy SHP,SHX,DBF files from each RegionItem to Region
+		foreach($this->q->dreg->query('SELECT * FROM RegItem.GeoCarto') as $row) {
+			foreach(array('dbf','shp','shx','prj') as $ext) {
+				$file0 = $row['GeoLevelLayerFile'] . '.' . $ext;
+				$file1 = $RegionItemDir . '/' . $file0;
+				$file2 = $RegionDir . '/' . $file0;
+				//fb('copy' . $file1 . ' => ' . $file2);
+				if (file_exists($file1)) {
+					copy($file1, $file2);
+				}
+			}
+		}
+		*/
+		$q->query("DETACH DATABASE RegItem");
+	}
+	
+	public function copyData($prmConn, $prmTable, $prmField, $prmRegionItemId, $prmValue, $isNumeric) {
 		$Queries = array();
 		
 		// Create Empty Table
@@ -229,6 +253,13 @@ class DIRegion extends DIObject {
 			$Query = "UPDATE TmpTable SET GeographyLevel=GeographyLevel+1";
 			array_push($Queries, $Query);
 		}
+		if ($prmTable == 'GeoCarto') {
+			$Query = "UPDATE TmpTable SET GeoLevelId=GeoLevelId+1";
+			array_push($Queries, $Query);
+			$Query = "UPDATE TmpTable SET RegionId='" . $prmRegionItemId . "'";
+			array_push($Queries, $Query);
+		}
+		
 		if ($isNumeric) {
 			$Query = "DELETE FROM " . $prmTable . " WHERE " . $prmField . "=" . ((int)$prmValue + 1);
 		} else {
@@ -239,13 +270,17 @@ class DIRegion extends DIObject {
 		array_push($Queries,$Query);
 		foreach ($Queries as $Query) {
 			fb($Query);
-			$this->q->dreg->query($Query);
+			//$this->q->dreg->query($Query);
+			try {
+				$prmConn->query($Query);
+			} catch (Exception $e) {
+				print $e->getMessage() . "<br />";
+			}
 		}
 	}
 	
 	public function copyEvents() {
-		$Queries = array();
-		
+		$Queries = array();		
 		$Query = "ATTACH DATABASE '" . CONST_DBBASE . "' AS base";
 		array_push($Queries, $Query);
 		//Copy PreDefined Event List Into Database
@@ -262,8 +297,7 @@ class DIRegion extends DIObject {
 	}
 
 	public function copyCauses() {
-		$Queries = array();
-		
+		$Queries = array();		
 		$Query = "ATTACH DATABASE '" . CONST_DBBASE . "' AS base";
 		array_push($Queries, $Query);
 		//Copy PreDefined Cause List Into Database
