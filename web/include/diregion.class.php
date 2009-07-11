@@ -204,6 +204,15 @@ class DIRegion extends DIObject {
 		return $RegionItemGeographyId;		
 	}
 	
+	public function createCVRegionEEData($prmSession, $prmRegionItemId) {
+		$RegionDB = VAR_DIR . '/' . $prmRegionItemId . '/desinventar.db';
+		fb($RegionDB);
+		$q = $prmSession->q->dreg;
+		$q->query("ATTACH DATABASE '" . $RegionDB . "' AS RegItem");
+		$q->query("INSERT INTO EEData (DisasterId) SELECT DisasterId FROM RegItem.EEData");
+		$q->query("DETACH DATABASE RegItem");
+	}
+	
 	public function createCVRegionGeoCarto($prmSession, $prmRegionItemId, $prmRegionItemGeographyId) {
 		$RegionDB = VAR_DIR . '/' . $prmRegionItemId . '/desinventar.db';
 		fb($RegionDB);
