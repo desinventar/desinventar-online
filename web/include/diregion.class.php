@@ -182,7 +182,6 @@ class DIRegion extends DIObject {
 					$g = new DIGeoLevel($this->session, $iMaxLevel);
 					$g->set('GeoLevelName', 'Nivel ' . $iMaxLevel);
 					$g->insert();
-					fb('Create GeoLevel ' . $iMaxLevel);
 				}			
 			}
 			
@@ -206,7 +205,6 @@ class DIRegion extends DIObject {
 	
 	public function createCVRegionEEData($prmSession, $prmRegionItemId) {
 		$RegionDB = VAR_DIR . '/' . $prmRegionItemId . '/desinventar.db';
-		fb($RegionDB);
 		$q = $prmSession->q->dreg;
 		$q->query("ATTACH DATABASE '" . $RegionDB . "' AS RegItem");
 		$q->query("INSERT INTO EEData (DisasterId) SELECT DisasterId FROM RegItem.EEData");
@@ -215,7 +213,6 @@ class DIRegion extends DIObject {
 	
 	public function createCVRegionGeoCarto($prmSession, $prmRegionItemId, $prmRegionItemGeographyId) {
 		$RegionDB = VAR_DIR . '/' . $prmRegionItemId . '/desinventar.db';
-		fb($RegionDB);
 		$q = $prmSession->q->dreg;
 		$q->query("ATTACH DATABASE '" . $RegionDB . "' AS RegItem");
 		$q->query("DELETE FROM GeoCarto WHERE GeographyId='" . $prmRegionItemGeographyId . "'");
@@ -232,7 +229,6 @@ class DIRegion extends DIObject {
 				$file0 = $row['GeoLevelLayerFile'] . '.' . $ext;
 				$file1 = $RegionItemDir . '/' . $file0;
 				$file2 = $RegionDir . '/' . $file0;
-				//fb('copy' . $file1 . ' => ' . $file2);
 				if (file_exists($file1)) {
 					copy($file1, $file2);
 				}
@@ -278,7 +274,6 @@ class DIRegion extends DIObject {
 		$Query = "INSERT INTO " . $prmTable . " SELECT * FROM TmpTable";
 		array_push($Queries,$Query);
 		foreach ($Queries as $Query) {
-			fb($Query);
 			//$this->q->dreg->query($Query);
 			try {
 				$prmConn->query($Query);
@@ -300,7 +295,6 @@ class DIRegion extends DIObject {
 		$Query = 'DETACH DATABASE base';
 		array_push($Queries, $Query);
 		foreach($Queries as $Query) {
-			fb($Query);
 			$this->q->dreg->query($Query);
 		}
 	}
@@ -317,7 +311,6 @@ class DIRegion extends DIObject {
 		$Query = 'DETACH DATABASE base';
 		array_push($Queries, $Query);
 		foreach($Queries as $Query) {
-			fb($Query);
 			$this->q->dreg->query($Query);
 		}
 	}
