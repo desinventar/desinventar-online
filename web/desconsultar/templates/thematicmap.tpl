@@ -38,7 +38,7 @@
 						new OpenLayers.Control.OverviewMap(),
 						new OpenLayers.Control.KeyboardDefaults()
 				],
-				numZoomLevels: 15
+				numZoomLevels: 8
 			};
 			map = new OpenLayers.Map('map', options);
 			// Effects layer(s)
@@ -89,13 +89,17 @@
 			map.addLayer(bk1);
 			*/
 
+			/*
+			// 2009-07-11 (jhcaiced) This layer doesn't work with Spherical Mercator projection (????)
 			var bk2 = new OpenLayers.Layer.WMS("GRDP - Population 2007",
 				"http://metafunctions.grid.unep.ch/cgi-bin/mapserv",
-				{ map:'/www/preview/previewims/etc/preview_ims.map', 'transparent':true, 'format':'png', layers:'popdens'},
+				{ map:'/www/preview/previewims/etc/preview_ims.map', 'transparent':true, 'format':'png', 
+					 'sphericalMercator': true, layers:'popdens'},
 				{'isBaseLayer':true});
 			bk2.setVisibility(false);
 			map.addLayer(bk2);
-
+			*/
+			
 			/*
 			// Legend: http://preview.grid.unep.ch/previewims/data/general_data/leg/leg_world07o.png
 			// Microsoft Virtual Earth Base Layer
@@ -155,9 +159,10 @@
 			point.transform(proj, map.getProjectionObject());
 			map.setCenter(point, zoom);
 
-			/*
-			if (lon == 0 && lat == 0)
+			if (lon == 0 && lat == 0) {
 				map.zoomToMaxExtent();
+			}
+			/*
 			else
 				map.setCenter(new OpenLayers.LonLat(lon, lat), zoom); 
 			*/
