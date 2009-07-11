@@ -4,10 +4,16 @@ SQLITE=sqlite3
 all : base.db core.db desinventar.db
 
 # Rebuild base.db database
-base.db : base.sql doc-db.sql eve_cau.sql
+base.db : base.sql doc-db.sql events.csv causes.csv
 	/bin/rm -f base.db; \
 	sqlite3 base.db < base.sql ; \
-	sqlite3 base.db < eve_cau.sql ; \
+	iconv --from-code=UTF-8 --to-code=WINDOWS-1252 events.csv > eve.csv
+	iconv --from-code=UTF-8 --to-code=WINDOWS-1252 causes.csv > cau.csv
+	./insertEveCau.pl --file=eve.csv --table=Event --lang=spa | sqlite3 base.db
+	./insertEveCau.pl --file=eve.csv --table=Event --lang=eng | sqlite3 base.db
+	./insertEveCau.pl --file=cau.csv --table=Cause --lang=spa | sqlite3 base.db
+	./insertEveCau.pl --file=cau.csv --table=Cause --lang=eng | sqlite3 base.db
+	/bin/rm eve.csv cau.csv
 	sqlite3 base.db < doc-db-clean.sql ; \
 	cat doc-db.sql | sed -e 's/\/\*.*\*\///g' | sqlite3 base.db ; \
 	sqlite3 base.db < doc-db-fix.sql
