@@ -1,5 +1,5 @@
 /* BASE.DB - DesInventar8.2
-2009-07-09
+2009-07-10
 
 DROP TABLE IF EXISTS 
 CREATE TABLE 
@@ -29,13 +29,15 @@ LangStatus INTEGER,
 PRIMARY KEY('LangIsoCode')
 );
 
-DROP TABLE IF EXISTS DI_Event;
-CREATE TABLE 'DI_Event' ( 
+DROP TABLE IF EXISTS Event;
+CREATE TABLE 'Event' ( 
 EventId VARCHAR(50), 
 LangIsoCode VARCHAR(3), 
+SyncRecord DATETIME, 
 EventName VARCHAR(50), 
 EventDesc TEXT, 
 EventActive INTEGER, 
+EventPredefined INTEGER, 
 EventRGBColor VARCHAR(10), 
 EventKeyWords TEXT, 
 EventCreationDate DATETIME, 
@@ -43,13 +45,15 @@ EventLastUpdate DATETIME,
 PRIMARY KEY('EventId','LangIsoCode')
 );
 
-DROP TABLE IF EXISTS DI_Cause;
-CREATE TABLE 'DI_Cause' ( 
+DROP TABLE IF EXISTS Cause;
+CREATE TABLE 'Cause' ( 
 CauseId VARCHAR(50), 
 LangIsoCode VARCHAR(3), 
+SyncRecord DATETIME, 
 CauseName VARCHAR(50), 
 CauseDesc TEXT, 
 CauseActive INTEGER, 
+CausePredefined INTEGER, 
 CauseRGBColor VARCHAR(10), 
 CauseKeyWords TEXT, 
 CauseCreationDate DATETIME, 

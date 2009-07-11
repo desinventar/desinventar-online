@@ -129,9 +129,18 @@ class DIRegion extends DIObject {
 		return $iReturn;
 	}
 	
+	public function createCRegion($prmGeoLevelName) {
+		// Create Level0 for this Database
+		$g = new DIGeoLevel($this->session, 0);
+		$g->set('GeoLevelName', $prmGeoLevelName);
+		$g->insert();
+	}
+	
 	public function addRegionItem($prmRegionItemId) {
 		$RegionId = $this->get('RegionId');
-		$RegionItemDB = VAR_DIR . '/' . $prmRegionItemId . '/desinventar.db';
+		$RegionDir = VAR_DIR . '/' . $this->get('RegionId');
+		$RegionItemDir = VAR_DIR . '/' . $prmRegionItemId;
+		$RegionItemDB = $RegionItemDir . '/desinventar.db';
 		$iReturn = 1;
 		if ($prmRegionItemId == '') {
 			$iReturn = -1;
@@ -144,7 +153,7 @@ class DIRegion extends DIObject {
 		if ($iReturn > 0) {
 			// Add RegionItem record
 			$i = new DIRegionItem($this->session, $RegionId, $prmRegionItemId);
-			//$iReturn = $i->insert();
+			$iReturn = $i->insert();
 		}
 		if ($iReturn > 0) {
 			// Add Geography to Level0
@@ -162,10 +171,37 @@ class DIRegion extends DIObject {
 			// Attach Database
 			$Query = "ATTACH DATABASE '" . $RegionItemDB . "' AS RegItem;";
 			$this->q->dreg->query($Query);
-			// Copy Geography Items
-			//$this->copyData('GeoLevel','GeoLevelId', '0', true);
+			// GetCurrentMaxLevel
+			$iMaxLevel = 0;
+			foreach($this->q->dreg->query('SELECT MAX(GeoLevelId) AS MAXVAL FROM GeoLevel') as $row) {
+				$iMaxLevel = $row['MAXVAL'];
+			}
+			foreach($this->q->dreg->query('SELECT * FROM RegItem.GeoLevel') as $row) {
+				if (($row['GeoLevelId'] + 1) > $iMaxLevel) {
+					$iMaxLevel++;
+					$g = new DIGeoLevel($this->session, $iMaxLevel);
+					$g->set('GeoLevelName', 'Nivel ' . $iMaxLevel);
+					$g->insert();
+					fb('Create GeoLevel ' . $iMaxLevel);
+				}			
+			}
+
+			// Copy GeoCarto Items
+			$this->copyData('GeoCarto','GeographyId',$GeographyId, false);
+			// Copy SHP,SHX,DBF files from each RegionItem to Region
+			foreach($this->q->dreg->query('SELECT * FROM RegItem.GeoCarto') as $row) {
+				foreach(array('dbf','shp','shx','prj') as $ext) {
+					$file0 = $row['GeoLevelLayerFile'] . '.' . $ext;
+					$file1 = $RegionItemDir . '/' . $file0;
+					$file2 = $RegionDir . '/' . $file0;
+					//fb('copy' . $file1 . ' => ' . $file2);
+					if (file_exists($file1)) {
+						copy($file1, $file2);
+					}
+				}
+			}
+			
 			$this->copyData('Geography','GeographyId', $GeographyId, false);
-			//$g->insert();
 			$this->copyData('Disaster','DisasterGeographyId', $GeographyId, false);
 			$Query = "DETACH DATABASE RegItem";
 			$this->q->dreg->query($Query);
@@ -174,32 +210,75 @@ class DIRegion extends DIObject {
 	}
 	
 	public function copyData($prmTable, $prmField, $prmValue, $isNumeric) {
+		$Queries = array();
+		
 		// Create Empty Table
 		$Query = "DROP TABLE IF EXISTS TmpTable";
-		$this->q->dreg->query($Query);
+		array_push($Queries, $Query);
 		$Query = "CREATE TABLE TmpTable AS SELECT * FROM " . $prmTable . " LIMIT 0";
-		$this->q->dreg->query($Query);
+		array_push($Queries, $Query);
 		$Query = "INSERT INTO TmpTable SELECT * FROM RegItem." . $prmTable;
-		$this->q->dreg->query($Query);
+		array_push($Queries, $Query);
 		if ($isNumeric) {
 			$Query = "UPDATE TmpTable SET " . $prmField . "=" . $prmField . "+1";
 		} else {
 			$Query = "UPDATE TmpTable SET " . $prmField . "='" . $prmValue . "'||" . $prmField;
 		}
-		$this->q->dreg->query($Query);
+		array_push($Queries, $Query);
 		if ($prmTable == 'Geography') {
 			$Query = "UPDATE TmpTable SET GeographyLevel=GeographyLevel+1";
-			$this->q->dreg->query($Query);
+			array_push($Queries, $Query);
 		}
 		if ($isNumeric) {
 			$Query = "DELETE FROM " . $prmTable . " WHERE " . $prmField . "=" . ((int)$prmValue + 1);
 		} else {
 			$Query = "DELETE FROM " . $prmTable . " WHERE " . $prmField . " LIKE '" . $prmValue . "%'";
 		}
-		//$this->q->dreg->query($Query);
+		//array_push($Queries,$Query);
 		$Query = "INSERT INTO " . $prmTable . " SELECT * FROM TmpTable";
-		$this->q->dreg->query($Query);
+		array_push($Queries,$Query);
+		foreach ($Queries as $Query) {
+			fb($Query);
+			$this->q->dreg->query($Query);
+		}
 	}
+	
+	public function copyEvents() {
+		$Queries = array();
+		
+		$Query = "ATTACH DATABASE '" . CONST_DBBASE . "' AS base";
+		array_push($Queries, $Query);
+		//Copy PreDefined Event List Into Database
+		$Query = 'DELETE FROM Event WHERE EventPredefined=1';
+		array_push($Queries, $Query);
+		$Query = 'INSERT INTO Event SELECT * FROM base.Event';
+		array_push($Queries, $Query);
+		$Query = 'DETACH DATABASE base';
+		array_push($Queries, $Query);
+		foreach($Queries as $Query) {
+			fb($Query);
+			$this->q->dreg->query($Query);
+		}
+	}
+
+	public function copyCauses() {
+		$Queries = array();
+		
+		$Query = "ATTACH DATABASE '" . CONST_DBBASE . "' AS base";
+		array_push($Queries, $Query);
+		//Copy PreDefined Cause List Into Database
+		$Query = 'DELETE FROM Cause WHERE CausePredefined=1';
+		array_push($Queries, $Query);
+		$Query = 'INSERT INTO Cause SELECT * FROM base.Cause';
+		array_push($Queries, $Query);
+		$Query = 'DETACH DATABASE base';
+		array_push($Queries, $Query);
+		foreach($Queries as $Query) {
+			fb($Query);
+			$this->q->dreg->query($Query);
+		}
+	}
+	
 } //class
 
 </script>
