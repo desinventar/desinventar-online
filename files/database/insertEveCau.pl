@@ -32,7 +32,7 @@ $sth->execute();
 while (my $row = $sth->fetchrow_hashref) {
 	$sNow = strftime("%Y-%m-%d %H:%M:%S", gmtime); # ISO8601
 	$Query = sprintf("INSERT INTO %s VALUES " . 
-		"('%s','%s','%s','%s','%s',%d,%d,'%s','%s','%s','%s');",
+		"('%s','%s','%s','%s',\"%s\",%d,%d,'%s','%s','%s','%s');",
 		$sTableName,
 		$row->{$sTableName . 'Id'},
 		$sLangIsoCode,
