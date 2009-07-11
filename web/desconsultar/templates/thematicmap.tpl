@@ -38,7 +38,7 @@
 						new OpenLayers.Control.OverviewMap(),
 						new OpenLayers.Control.KeyboardDefaults()
 				],
-				numZoomLevels: 8
+				numZoomLevels: 15
 			};
 			map = new OpenLayers.Map('map', options);
 			// Effects layer(s)
