@@ -142,7 +142,7 @@ class Maps
 				if ($this->testLayer($lp, $ly[2], $ly[3])) {
 					$map .= '
     LAYER
-      NAME		'. $ly[0] .'admin0'. $k .'
+      NAME		"'. $ly[0] .'admin0'. $k .'"
       DATA		"'. $ly[1] .'"
 	  GROUP		'. $reg .'
 	  STATUS	OFF
@@ -210,7 +210,7 @@ class Maps
 				if (!isset($dl['CVReg']) ||in_array($ly[0], array_unique($dl['CVReg']))) {
 					$map .= '
     LAYER
-		NAME	'. $ly[0] .'effects
+		NAME	"'. $ly[0] .'effects"
 		DATA	"'. $data .'"
 		GROUP	'. $reg .'
 		STATUS	ON
