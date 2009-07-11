@@ -78,7 +78,7 @@ if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
 	$t->assign ("dbden", '');
 	//$t->assign ("dbden", str2js($reg['InfoGeneral'][1]));
 } elseif (isset($_GET['cmd'])) {
-	$q = new Query();
+	//$q = new Query();
 	switch ($_GET['cmd']) {
 		case "adminreg":
 			// ADMINREG: Form to Create and assign regions
