@@ -9,6 +9,7 @@
 <!--
 	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAfQolBKtJvhOLwVfLoxEfMBQ77LACC71meKxbfZwyDLYGQlGiIRTFJ_UlTeqhUqMf6iE54G8kcN3sJQ"></script>
 -->
+	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={-$googlemapkey-}"></script>
 	<script src='http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.1'></script>
 	<script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid=euzuro-openlayers"></script>
 	<script src="/openlayers/lib/OpenLayers.js"></script>
@@ -79,6 +80,10 @@
 			met1.setVisibility(false);
 			map.addLayer(met1);
 
+			// maps.google.com - Base Layer
+			var goog1 = new OpenLayers.Layer.Google("Google Basic", {type: G_NORMAL_MAP, 'sphericalMercator': true});
+			map.addLayer(goog1);
+
 			/*
 			// Use a Global Risk Data Platform (http://preview.grid.unep.ch/) WMS..
 			var bk1 = new OpenLayers.Layer.WMS("Flood Risk..",
@@ -100,28 +105,13 @@
 			map.addLayer(bk2);
 			*/
 			
-			/*
-			// Legend: http://preview.grid.unep.ch/previewims/data/general_data/leg/leg_world07o.png
-			// Microsoft Virtual Earth Base Layer
-			var virtualearth = new OpenLayers.Layer.VirtualEarth("Microsoft Virtual Earth", { 'sphericalMercator': true });
-			map.addLayer(virtualearth);
-			// Yahoo Maps Base Layer
-			var yahoo = new OpenLayers.Layer.Yahoo( "Yahoo Maps", { sphericalMercator: true });
-			map.addLayer(yahoo);
 
 			/*
-			// maps.google.com - Base Layer
-			var goog1 = new OpenLayers.Layer.Google("** Google Basic", {type: G_NORMAL_MAP, 'sphericalMercator': false});
-			map.addLayer(goog1);
 			var goog2 = new OpenLayers.Layer.Google("** Google Satellite", {type: G_SATELLITE_MAP});
 			map.addLayer(goog2);
 			*/
 			
 			/* Metacarta Base Layers			
-			var met1 = new OpenLayers.Layer.WMS("** Metacarta Basic",
-					"http://labs.metacarta.com/wms-c/Basic.py", {layers:'basic', 'transparent':true, 'format':'png' },
-					{'isBaseLayer':true });
-
 			// 2009-02-06 (jhcaiced) Metacarta Satellite doesn't work with Spherical Mercator, this needs to be fixed !!
 			var met2 = new OpenLayers.Layer.WMS("** Metacarta Satellite",
 					"http://labs.metacarta.com/wms-c/Basic.py", {layers:'satellite', 'transparent':true, 'format':'png' },
@@ -162,10 +152,6 @@
 			if (lon == 0 && lat == 0) {
 				map.zoomToMaxExtent();
 			}
-			/*
-			else
-				map.setCenter(new OpenLayers.LonLat(lon, lat), zoom); 
-			*/
 		}
 		window.onload = function() {
 			var qrydet = parent.document.getElementById('querydetails');
