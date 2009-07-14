@@ -47,7 +47,7 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
     $sql = base64_decode($get['sql']);
     $geo = $get['geo'];
     if (isset($get['ord']))
-      $sql .= " ORDER BY ". $get['ord'] ." DESC;";
+      $sql .= " ORDER BY ". $get['ord'] ." DESC ";
   }
   // Process results with default options
   else if (isset($post['_S+cmd'])) {
@@ -55,7 +55,7 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
     $sqc 	= $q->genSQLSelectCount($qd);
     $c 		= $q->getresult($sqc);
     $tot 	= $c['counter'];
-    $geo  = $post['_S+showgeo'];
+    $geo	= $post['_S+showgeo'];
     // Reuse calculate SQL values in all pages; calculate limits in pages
     $levg = array();
     if (isset($post['_S+Firstlev']) && !empty($post['_S+Firstlev']))
