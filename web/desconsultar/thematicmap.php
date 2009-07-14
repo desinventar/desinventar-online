@@ -178,9 +178,32 @@ elseif (isset($get['cmd']) && $get['cmd'] == "getkml") {
 	echo $m->printKML();
 	exit();
 }
+
+// 2009-07-14 (jhcaiced) Configure Google Map Key
+$GoogleMapsKey = "";
+switch($_SERVER["SERVER_NAME"]) {
+	case "devel.desinventar.org":
+		$GoogleMapsKey = "ABQIAAAAv_HCDVf4YK_pJceWBA7XmRQHPIpdtLPiHEY9M3_iWXAS0AXQLhTwoORtm0ZLuqG03CB3sP09KKDtAg";
+		break;
+	case "online.desinventar.org":
+		$GoogleMapsKey = "ABQIAAAAv_HCDVf4YK_pJceWBA7XmRQHPIpdtLPiHEY9M3_iWXAS0AXQLhTwoORtm0ZLuqG03CB3sP09KKDtAg";		
+		break;
+	case "192.168.0.13":
+		$GoogleMapsKey = "ABQIAAAAv_HCDVf4YK_pJceWBA7XmRRT41YKyiJ82KgcK-Dai8T6I93cWxT4pcci6xQX6tWCkefVHbB2AtUGKw";
+		break;
+	case "localhost":
+		$GoogleMapsKey = "ABQIAAAAv_HCDVf4YK_pJceWBA7XmRT2yXp_ZAY8_ufC3CFXhHIE1NvwkxQrE9s8Pd9b8nrmaDwyyilebSXcPw";
+		break;
+	case "127.0.0.1":
+		$GoogleMapsKey = "ABQIAAAAv_HCDVf4YK_pJceWBA7XmRRi_j0U6kJrkFvY4-OX2XYmEAa76BSA4JvNpGUXBDLtWrA-lnRXmTahHg";
+		break;
+}
 $t->assign ("reg", $reg);
 $t->assign ("dic", $dic);
 $t->assign ("basemap", SOFTDIR . "/worldmap/worldmap.map");
 $t->assign ("mps", MAPSERV);
+$t->assign ("googlemapkey", $GoogleMapsKey);
+fb('Server    : ' . $_SERVER["SERVER_NAME"]);
+fb('GoogleKey : ' . $GoogleMapsKey);
 $t->display ("thematicmap.tpl");
 </script>
