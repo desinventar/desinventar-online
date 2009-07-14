@@ -39,7 +39,7 @@
 						new OpenLayers.Control.OverviewMap(),
 						new OpenLayers.Control.KeyboardDefaults()
 				],
-				numZoomLevels: 15
+				numZoomLevels: 25
 			};
 			map = new OpenLayers.Map('map', options);
 			// Effects layer(s)
@@ -81,8 +81,24 @@
 			map.addLayer(met1);
 
 			// maps.google.com - Base Layer
-			var goog1 = new OpenLayers.Layer.Google("Google Basic", {type: G_NORMAL_MAP, 'sphericalMercator': true});
-			map.addLayer(goog1);
+			var google1 = new OpenLayers.Layer.Google("Google Basic", 
+			                                          {type: G_NORMAL_MAP, 
+			                                          'sphericalMercator': true});
+			map.addLayer(google1);
+
+			var google2 = new OpenLayers.Layer.Google("Google Physical", 
+			                                          {type: G_PHYSICAL_MAP,
+			                                          'sphericalMercator': true});
+			map.addLayer(google2);
+			
+			var google3 = new OpenLayers.Layer.Google("Google Hybrid", 
+			                                          {type: G_HYBRID_MAP,
+			                                          'sphericalMercator': true});
+			map.addLayer(google3);
+			var google4 = new OpenLayers.Layer.Google("Google Satellite", 
+			                                          {type: G_SATELLITE_MAP,
+			                                          'sphericalMercator': true});
+			map.addLayer(google4);
 
 			/*
 			// Use a Global Risk Data Platform (http://preview.grid.unep.ch/) WMS..
