@@ -344,8 +344,8 @@ class DIRegion extends DIObject {
 		$g->setGeographyId('');
 		$GeographyId = $g->get('GeographyId');
 		$g->set('LangIsoCode'  , $this->get('LangIsoCode'));
-		$g->set('GeographyCode', $GeographyId);
-		$g->set('GeographyName', 'Item ' . (int)$GeographyId);
+		$g->set('GeographyCode', $prmRegionId);
+		$g->set('GeographyName', 'Region ' . (int)$GeographyId);
 		$iReturn = $g->insert();
 		return $iReturn;
 	}

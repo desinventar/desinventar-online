@@ -28,18 +28,21 @@
 				units         : "m",
 				maxResolution : 156543.0339,
 				maxExtent     : new OpenLayers.Bounds(-20037508.34, -20037508.34, 20037508.34,  20037508.34),
-				controls: [
-						new OpenLayers.Control.PanZoomBar(),
-						new OpenLayers.Control.MouseToolbar(),
-						new OpenLayers.Control.LayerSwitcher({'ascending':false}),
-						new OpenLayers.Control.ScaleLine(),
-						new OpenLayers.Control.MousePosition(),
-						new OpenLayers.Control.OverviewMap(),
-						new OpenLayers.Control.KeyboardDefaults()
-				],
+				controls: [],
 				numZoomLevels: 25
 			};
-			map = new OpenLayers.Map('map', options);
+			var map = new OpenLayers.Map('map', options);
+			map.addControl(new OpenLayers.Control.PanZoomBar());
+			map.addControl(new OpenLayers.Control.LayerSwitcher({'ascending':false}));
+			map.addControl(new OpenLayers.Control.KeyboardDefaults());
+			map.addControl(new OpenLayers.Control.MousePosition());
+			map.addControl(new OpenLayers.Control.ScaleLine());
+
+			//map.addControl(new OpenLayers.Control.NavToolbar());
+			//map.addControl(new OpenLayers.Control.MouseToolbar());
+			//map.addControl(new OpenLayers.Control.Permalink());
+			//map.addControl(new OpenLayers.Control.OverviewMap());
+
 			// Effects layer(s)
 {-foreach name=rgl key=k item=i from=$rgl-}
 			var db{-$k-} = new OpenLayers.Layer.WMS("DI8 / {-$i.regname-}", 
