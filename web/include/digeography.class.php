@@ -29,7 +29,7 @@ class DIGeography extends DIObject {
 			if ($num_args >= 4) {
 				$prmParentId = func_get_arg(3);
 				$prmGeographyId = $this->buildGeographyId($prmParentId);
-				$this->setGeographyId($prmGeographyId);
+				$this->setGeographyId($prmParentId);
 			}
 		} //if
 	} // __construct

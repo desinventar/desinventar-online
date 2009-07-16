@@ -141,13 +141,6 @@ class DIRegion extends DIObject {
 		return $iReturn;
 	}
 	
-	public function createCRegion($prmGeoLevelName) {
-		// Create Level0 for this Database
-		$g = new DIGeoLevel($this->session, 0);
-		$g->set('GeoLevelName', $prmGeoLevelName);
-		$g->insert();
-	}
-	
 	public function addRegionItem($prmRegionItemId) {
 		$RegionId = $this->get('RegionId');
 		$RegionDir = VAR_DIR . '/' . $this->get('RegionId');
@@ -307,7 +300,6 @@ class DIRegion extends DIObject {
 		$Query = 'DETACH DATABASE base';
 		array_push($Queries, $Query);
 		foreach($Queries as $Query) {
-			fb($Query);
 			$this->q->dreg->query($Query);
 		}
 	}
@@ -324,11 +316,39 @@ class DIRegion extends DIObject {
 		$Query = 'DETACH DATABASE base';
 		array_push($Queries, $Query);
 		foreach($Queries as $Query) {
-			fb($Query);
 			$this->q->dreg->query($Query);
 		}
 	}
+
+	public function createCRegion($prmGeoLevelName) {
+		// Set Information about this CRegion, Creates GeoLevel=0
+		$iReturn = ERR_NO_ERROR;
+		$this->set('IsCRegion', 1);
+		$g = new DIGeoLevel($this->session, 0, $this->get('LangIsoCode'), $prmGeoLevelName);
+		// Warning : Delete All GeoLevels with this...
+		$g->conn->query("DELETE FROM GeoLevel");
+		$iReturn = $g->insert();
+		return $iReturn;
+	}
 	
+	public function getGeoLevelCount() {
+		$iReturn = 0;
+		$g = new DIGeoLevel($this->session, 0);
+		$iReturn = $g->getMaxGeoLevel();
+		return $iReturn;
+	}
+	
+	public function addRegionItemGeography($prmRegionId) {
+		$iReturn = ERR_NO_ERROR;
+		$g = new DIGeography($this->session);
+		$g->setGeographyId('');
+		$GeographyId = $g->get('GeographyId');
+		$g->set('LangIsoCode'  , $this->get('LangIsoCode'));
+		$g->set('GeographyCode', $GeographyId);
+		$g->set('GeographyName', 'Item ' . (int)$GeographyId);
+		$iReturn = $g->insert();
+		return $iReturn;
+	}
 } //class
 
 </script>
