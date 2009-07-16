@@ -201,13 +201,6 @@ class DIRegion extends DIObject {
 		return $iReturn;
 	}
 	
-	public function getRegionItemGeographyId($prmRegionItemId) {
-		$RegionItemGeographyId = '';
-		$Query = "SELECT * FROM RegionItem WHERE RegionId='" . $this->get('RegionId') . "'";
-		//$this->q->core->query($Query);
-		return $RegionItemGeographyId;		
-	}
-	
 	public function createCVRegionEEData($prmSession, $prmRegionItemId) {
 		$RegionDB = VAR_DIR . '/' . $prmRegionItemId . '/desinventar.db';
 		$q = $prmSession->q->dreg;
@@ -338,14 +331,20 @@ class DIRegion extends DIObject {
 		return $iReturn;
 	}
 	
-	public function addRegionItemGeography($prmRegionId) {
-		$iReturn = ERR_NO_ERROR;
+	public function getRegionItemGeographyId($prmRegionId) {
+		$GeographyId = '';
 		$g = new DIGeography($this->session);
-		$g->setGeographyId('');
-		$GeographyId = $g->get('GeographyId');
-		$g->set('LangIsoCode'  , $this->get('LangIsoCode'));
+		$GeographyId = $g->buildGeographyId('');
+		return $GeographyId;
+	}
+	
+	public function addRegionItemGeography($prmRegionId, $prmRegionItemGeographyId) {
+		$iReturn = ERR_NO_ERROR;
+		$g = new DIGeography($this->session, 
+		                     $prmRegionItemGeographyId,
+		                     $this->get('LangIsoCode'));
 		$g->set('GeographyCode', $prmRegionId);
-		$g->set('GeographyName', 'Region ' . (int)$GeographyId);
+		$g->set('GeographyName', 'Region ' . (int)$prmRegionItemGeographyId);
 		$iReturn = $g->insert();
 		return $iReturn;
 	}

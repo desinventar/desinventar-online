@@ -21,6 +21,7 @@ class DIGeography extends DIObject {
 		if ($num_args >= 2) {
 			$prmGeographyId = func_get_arg(1);
 			$this->set('GeographyId', $prmGeographyId);
+			$this->setGeographyLevel();
 			if ($num_args >= 3) {
 				$prmLangIsoCode = func_get_arg(2);
 				$this->set('LangIsoCode', $prmLangIsoCode);
