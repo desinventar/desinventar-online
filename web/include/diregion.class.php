@@ -136,8 +136,8 @@ class DIRegion extends DIObject {
 		}
 		$this->set('RegionId', $prmRegionId);
 		// Copy Predefined Event/Cause Lists
-		$this->copyEvents();
-		$this->copyCauses();
+		$this->copyEvents($this->get('LangIsoCode'));
+		$this->copyCauses($this->get('LangIsoCode'));
 		return $iReturn;
 	}
 	
@@ -295,34 +295,36 @@ class DIRegion extends DIObject {
 		}
 	}
 	
-	public function copyEvents() {
+	public function copyEvents($prmLangIsoCode) {
 		$Queries = array();		
 		$Query = "ATTACH DATABASE '" . CONST_DBBASE . "' AS base";
 		array_push($Queries, $Query);
 		//Copy PreDefined Event List Into Database
-		$Query = 'DELETE FROM Event WHERE EventPredefined=1';
+		$Query = "DELETE FROM Event WHERE EventPredefined=1 AND LangIsoCode='" . $prmLangIsoCode . "'";
 		array_push($Queries, $Query);
-		$Query = 'INSERT INTO Event SELECT * FROM base.Event';
+		$Query = "INSERT INTO Event SELECT * FROM base.Event WHERE LangIsoCode='" . $prmLangIsoCode . "'";
 		array_push($Queries, $Query);
 		$Query = 'DETACH DATABASE base';
 		array_push($Queries, $Query);
 		foreach($Queries as $Query) {
+			fb($Query);
 			$this->q->dreg->query($Query);
 		}
 	}
 
-	public function copyCauses() {
+	public function copyCauses($prmLangIsoCode) {
 		$Queries = array();		
 		$Query = "ATTACH DATABASE '" . CONST_DBBASE . "' AS base";
 		array_push($Queries, $Query);
 		//Copy PreDefined Cause List Into Database
-		$Query = 'DELETE FROM Cause WHERE CausePredefined=1';
+		$Query = "DELETE FROM Cause WHERE CausePredefined=1 AND LangIsoCode='" . $prmLangIsoCode . "'";
 		array_push($Queries, $Query);
-		$Query = 'INSERT INTO Cause SELECT * FROM base.Cause';
+		$Query = "INSERT INTO Cause SELECT * FROM base.Cause WHERE LangIsoCode='" . $prmLangIsoCode . "'";
 		array_push($Queries, $Query);
 		$Query = 'DETACH DATABASE base';
 		array_push($Queries, $Query);
 		foreach($Queries as $Query) {
+			fb($Query);
 			$this->q->dreg->query($Query);
 		}
 	}
