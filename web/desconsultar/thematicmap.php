@@ -202,7 +202,5 @@ $t->assign ("dic", $dic);
 $t->assign ("basemap", SOFTDIR . "/worldmap/worldmap.map");
 $t->assign ("mps", MAPSERV);
 $t->assign ("googlemapkey", $GoogleMapsKey);
-fb('Server    : ' . $_SERVER["SERVER_NAME"]);
-fb('GoogleKey : ' . $GoogleMapsKey);
 $t->display ("thematicmap.tpl");
 </script>

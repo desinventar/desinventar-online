@@ -56,6 +56,7 @@ class DIRegion extends DIObject {
 			$prmRegionId = func_get_arg(1);
 			if ($prmRegionId != '') {
 				$this->set('RegionId', $prmRegionId);
+				$this->q->setDBConnection($prmRegionId);
 			}
 			$this->load();
 		}
@@ -63,19 +64,26 @@ class DIRegion extends DIObject {
 
 	public function loadInfo() {
 		$iReturn = 1;
-		$this->setConnection($this->get('RegionId'));
-		foreach($this->oField as $k => $v) {
-			$sQuery = "SELECT * FROM Info WHERE InfoKey='" . $k . "'";
-			foreach($this->conn->query($sQuery) as $row) {
-				$Value = $row['InfoValue'];
-				$sFieldType = $this->oFieldType[$k];
-				if ($sFieldType == 'DATETIME') {
-					if ($Value == '') { $Value = $v; }
-				}
-				$this->set($k, $Value);
-			} //foreach row
-		} // foreach field
-		$this->setConnection('core');
+		$iReturn = $this->q->setDBConnection($this->get('RegionId'));
+		if ($iReturn > 0) {
+			$this->setConnection($this->get('RegionId'));
+			try {
+				foreach($this->oField as $k => $v) {
+					$sQuery = "SELECT * FROM Info WHERE InfoKey='" . $k . "'";
+					foreach($this->conn->query($sQuery) as $row) {
+						$Value = $row['InfoValue'];
+						$sFieldType = $this->oFieldType[$k];
+						if ($sFieldType == 'DATETIME') {
+							if ($Value == '') { $Value = $v; }
+						}
+						$this->set($k, $Value);
+					} //foreach row
+				} // foreach field
+			} catch (Exception $e) {
+				$iReturn = ERR_NO_DATABASE;
+			}
+			$this->setConnection('core');
+		}
 		return $iReturn;
 	}
 	
@@ -121,11 +129,15 @@ class DIRegion extends DIObject {
 			}
 			if (file_exists(CONST_DBREGION)) {
 				$iReturn = copy(CONST_DBREGION, $DBDir . '/desinventar.db');
+				$this->q->setDBConnection($this->get('RegionId'));
 			}
 		} catch (Exception $e) {
 			print "Error " . $e->getMessage() . "<br />";
 		}
 		$this->set('RegionId', $prmRegionId);
+		// Copy Predefined Event/Cause Lists
+		$this->copyEvents();
+		$this->copyCauses();
 		return $iReturn;
 	}
 	
