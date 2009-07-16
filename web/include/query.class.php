@@ -827,38 +827,18 @@ class Query extends PDO
         case "D.DisasterBeginTime":
           // Check if exist Operator(s): Year, month, week, day
           if (!empty($gp[0])) {
+			// Error with strftime when date contain '00' like '1997-06-00'
             switch ($gp[0]) {
-              case "YEAR":	$period = "%Y"; break;
-              case "YMONTH":$period = "%Y-%m"; break;
-              case "MONTH":	$period = "%m"; break;
-              case "YWEEK":	$period = "%Y-%W"; break;
-              case "WEEK":	$period = "%W"; break;
-              case "YDAY": 	$period = "%Y-%m-%d"; break; 
-              case "DAY": 	$period = "%j"; break; 
+              case "YEAR":		$func = "SUBSTR(". $gp[1] .", 1, 4) ";		break; // %Y
+              case "YMONTH":	$func = "SUBSTR(". $gp[1] .", 1, 7) ";		break; //%Y-%m
+              case "MONTH":		$func = "SUBSTR(". $gp[1] .", 6, 2) ";		break; //%m
+              case "YWEEK":		$func = "STRFTIME('%Y-%W', ". $gp[1] .") "; break; //%Y-%W
+              case "WEEK":		$func = "STRFTIME('%W', ". $gp[1] .") ";	break; //%W
+              case "YDAY": 		$func = "SUBSTR(". $gp[1] .", 1, 10) ";		break; //%Y-%m-%d
+              case "DAY": 		$func = "STRFTIME('%j', ". $gp[1] .") ";	break; //%j
             }
-            $sel[$j] = "STRFTIME('$period',". $gp[1] .") ";
-            $grp[$j] = "STRFTIME('$period',". $gp[1] .") ";
-/*
-            $per = explode("-", $gp[0]);
-            foreach ($per as $period) {
-              if (!empty($period)) {
-              	// 2009-02-02 (jhcaiced) This should add a leading zero
-              	// to month and day names in labels for graphs, so the 
-              	// labels equal length and ordered correctly.
-              	$iLabelLength = 2;
-                if ($period == 'YEAR')
-                  $iLabelLength = 4;
-                $sPeriod = $period;
-                if ($sPeriod == "WEEK")
-                  $sPeriod = "WEEKOFYEAR";
-                $sel[$j] .= "RIGHT(CONCAT('0'," . "$sPeriod(". $gp[1] .")),$iLabelLength),'-',";
-                $grp[$j] .= "$sPeriod(". $gp[1] ."), ";
-                $sel[$j] .= "STRFTIME('$period',". $gp[1] .") ";
-                $grp[$j] .= "STRFTIME('$period',". $gp[1] .") ";
-              }
-            }
-*/
-            $sel[$j] .= " AS ". substr($gp[1],2) ."_". $gp[0] ; // delete last ,'-',
+            $sel[$j] = $func ."AS ". substr($gp[1],2) ."_". $gp[0] ; // delete last ,'_',
+            $grp[$j] = $func;
           }
           else {
             $sel[$j] = $gp[1];
