@@ -463,9 +463,27 @@ class Query extends PDO
 	}
 
   public function getDateRange() {
-    $sql = "SELECT MIN(DisasterBeginTime) AS datemin, MAX(DisasterBeginTime)".
-          " AS datemax FROM Disaster WHERE RecordStatus='PUBLISHED'";
-    $res = $this->getresult($sql);
+	$creg = $this->getRegionFieldByID($this->sRegionId, 'IsCRegion');
+	// join dates in CRegion 
+	if ($creg[$this->sRegionId]) {
+		$datemin = array();
+		$datemax = array();
+		$sql = "SELECT MIN(DisasterBeginTime) AS datemin, MAX(DisasterBeginTime) AS datemax FROM Disaster ".
+			"WHERE RecordStatus='PUBLISHED' GROUP BY SUBSTR(DisasterGeographyId, 1, 5)";
+		foreach ($this->getassoc($sql) as $row) {
+			$datemin[] = $row['datemin'];
+			$datemax[] = $row['datemax'];
+		}
+		asort($datemin);
+		asort($datemax);
+		$res['datemin'] = end($datemin);
+		$res['datemax'] = current($datemax);
+	}
+	else {
+		$sql = "SELECT MIN(DisasterBeginTime) AS datemin, MAX(DisasterBeginTime) AS datemax FROM Disaster ".
+			"WHERE RecordStatus='PUBLISHED'";
+		$res = $this->getresult($sql);
+	}
     return array($res['datemin'], $res['datemax']);
   }
 
