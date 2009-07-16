@@ -43,6 +43,7 @@ class Query extends PDO
 	}
 	
 	public function setDBConnection($prmRegionId) {
+		$iReturn = ERR_NO_ERROR;
 		$DBFile = VAR_DIR;
 		if ($prmRegionId == 'core') {
 			$DBFile .= "/core.db";
@@ -58,9 +59,9 @@ class Query extends PDO
 				print $e->getMessage();
 			}
 		} else {
-			echo "Database for this Region doesn't exist. Contact Administrator.";
-			exit();
+			$iReturn = ERR_NO_DATABASE;			
 		} //if
+		return $iReturn;
 	}
   
 	public function getassoc($sQuery) {

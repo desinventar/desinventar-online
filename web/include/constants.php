@@ -36,15 +36,15 @@ define ("CMD_UPDATE",		2);
 define ("CMD_DELETE",		3);
 
 // Error Codes
-define ("ERR_NO_ERROR",					 1);
-define ("ERR_UNKNOWN_ERROR",		-1);
-define ("ERR_INVALID_COMMAND",	-2);
-define ("ERR_OBJECT_EXISTS",		-3);
-define ("ERR_NO_DATABASE",			-4);
-define ("ERR_INVALID_PASSWD",		-5);
-define ("ERR_ACCESS_DENIED",		-6);
-define ("ERR_OBJECT_NOT_FOUND",	-7);
-define ("ERR_CONSTRAINT_FAIL",	-8);
-define ("ERR_NO_CONNECTION",		-99);
+define ("ERR_NO_ERROR",          1);
+define ("ERR_UNKNOWN_ERROR",    -1);
+define ("ERR_INVALID_COMMAND",  -2);
+define ("ERR_OBJECT_EXISTS",    -3);
+define ("ERR_NO_DATABASE",      -4);
+define ("ERR_INVALID_PASSWD",   -5);
+define ("ERR_ACCESS_DENIED",    -6);
+define ("ERR_OBJECT_NOT_FOUND", -7);
+define ("ERR_CONSTRAINT_FAIL",  -8);
+define ("ERR_NO_CONNECTION",    -99);
 
 </script>
