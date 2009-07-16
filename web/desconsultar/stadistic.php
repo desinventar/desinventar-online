@@ -68,11 +68,11 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
     $field = explode(",", $post['_S+Field']);
     $opc['Field'] = $field;
     $sql = $q->genSQLProcess($qd, $opc);
-    //echo $sql;
     $cou = $q->getnumrows($sql);
     $sdl = $q->totalize($sql);
     $dlt = $q->getresult($sdl);
     $fld = "DisasterId_";
+	//echo $sql;
     // organize groups
     $gp = array();
     foreach ($opc['Group'] as $i) {
