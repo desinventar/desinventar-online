@@ -207,7 +207,7 @@ class Maps
 			$lp = VAR_DIR . '/' . $reg ."/". $data;
 			if ($this->testLayer($lp, $code, $name)) {
 				// cvreg isn't set in regular base.. in vregion select region on match
-				if (!isset($dl['CVReg']) ||in_array($ly[0], array_unique($dl['CVReg']))) {
+				if (!isset($dl['CVReg']) || in_array($ly[0], array_unique($dl['CVReg']))) {
 					$map .= '
     LAYER
 		NAME	"'. $ly[0] .'effects"
@@ -238,11 +238,11 @@ class Maps
 							$shwlab = 'TEXT "'. $i[2] .'"';
 						$map .= '
 		CLASS ';
-						//Set names only in match elements
-/*						if (!empty($i[0])) {
+						//Set names only in match elements -> use in normal Region
+						if (!empty($i[0]) && !isset($dl['CVReg'])) {
 							$map .= '
 				NAME "'. $i[0] .'"';
-						}*/
+						}
 						$map .= ' 
 			EXPRESSION "'. $k .'" 
   			STYLE COLOR '. $i[1] .' OUTLINECOLOR 130 130 130 END
@@ -253,14 +253,16 @@ class Maps
 			END
 		END';
 					} // foreach $vl
-					// Generate classes with names and colors of ranges
-					foreach ($range as $rk=>$ri) {
-						// Define a Expression to not show others polygons...
-						$map .= '
+					// Generate classes with names and colors of ranges -> valid to CRegions
+					if (isset($dl['CVReg'])) {
+						foreach ($range as $rk=>$ri) {
+							// Define a Expression to not show others polygons...
+							$map .= '
 		CLASS
 			NAME "'. $ri[1] .'"
 			STYLE COLOR '. $ri[2]  .' OUTLINECOLOR 130 130 130 END
 		END';
+						}
 					}
 					/* Generate null class
 					if ($lbl == "VALUE")

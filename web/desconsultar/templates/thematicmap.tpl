@@ -23,6 +23,7 @@
 			OpenLayers.Util.onImageLoadErrorColor = "transparent";
 			var options = {
 				projection    : new OpenLayers.Projection("EPSG:900913"),
+				displayProjection: new OpenLayers.Projection("EPSG:4326"),
 				minResolution : "auto",
 				minExtent     : new OpenLayers.Bounds(-1, -1, 1, 1),
 				units         : "m",
@@ -31,14 +32,13 @@
 				controls: [],
 				numZoomLevels: 25
 			};
-			var map = new OpenLayers.Map('map', options);
-			map.addControl(new OpenLayers.Control.PanZoomBar());
+			map = new OpenLayers.Map('map', options);
+			map.addControl(new OpenLayers.Control.PanZoom());
 			map.addControl(new OpenLayers.Control.LayerSwitcher({'ascending':false}));
-			map.addControl(new OpenLayers.Control.KeyboardDefaults());
+			//map.addControl(new OpenLayers.Control.KeyboardDefaults());
 			map.addControl(new OpenLayers.Control.MousePosition());
-			map.addControl(new OpenLayers.Control.ScaleLine());
-
-			//map.addControl(new OpenLayers.Control.NavToolbar());
+			//map.addControl(new OpenLayers.Control.ScaleLine());
+			map.addControl(new OpenLayers.Control.NavToolbar());
 			//map.addControl(new OpenLayers.Control.MouseToolbar());
 			//map.addControl(new OpenLayers.Control.Permalink());
 			//map.addControl(new OpenLayers.Control.OverviewMap());
@@ -64,47 +64,35 @@
 					"/cgi-bin/{-$mps-}?", { map:'{-$basemap-}', layers:'base', 'transparent':false, 'format':'png' },
 					{'isBaseLayer':true });
 			map.addLayer(base);
-			/*
-			// maps.google.com - Base Layer
-			var goog1 = new OpenLayers.Layer.Google("** Google Basic", {type: G_NORMAL_MAP, 'sphericalMercator': true});
-			map.addLayer(goog1);
-			var goog2 = new OpenLayers.Layer.Google("** Google Satellite", {type: G_SATELLITE_MAP, 'sphericalMercator': true});
-			map.addLayer(goog2);*/
 			
 			// Microsoft Virtual Earth Base Layer
 			var virtualearth = new OpenLayers.Layer.VirtualEarth("Microsoft Virtual Earth", { 'sphericalMercator': true });
 			map.addLayer(virtualearth);
 			
 			// Yahoo Maps Base Layer
-			var yahoo = new OpenLayers.Layer.Yahoo( "Yahoo Maps", { sphericalMercator: true });
+			var yahoo = new OpenLayers.Layer.Yahoo( "Yahoo Maps", { 'sphericalMercator': true });
 			map.addLayer(yahoo);
 			
 			// Metacarta Basic Base Layer
 			var met1 = new OpenLayers.Layer.WMS("Metacarta Basic",
-				"http://labs.metacarta.com/wms/vmap0",
-				{'layers': 'basic', 'transparent': true},
-				{'isBaseLayer':true});
+				"http://labs.metacarta.com/wms/vmap0", {'layers': 'basic', 'transparent': true}, {'isBaseLayer':true});
 			met1.setVisibility(false);
 			map.addLayer(met1);
 
 			// maps.google.com - Base Layer
 			var google1 = new OpenLayers.Layer.Google("Google Basic", 
-			                                          {type: G_NORMAL_MAP, 
-			                                          'sphericalMercator': true});
+			                                          {type: G_NORMAL_MAP, 'sphericalMercator': true});
 			map.addLayer(google1);
 
 			var google2 = new OpenLayers.Layer.Google("Google Physical", 
-			                                          {type: G_PHYSICAL_MAP,
-			                                          'sphericalMercator': true});
+			                                          {type: G_PHYSICAL_MAP, 'sphericalMercator': true});
 			map.addLayer(google2);
 			
 			var google3 = new OpenLayers.Layer.Google("Google Hybrid", 
-			                                          {type: G_HYBRID_MAP,
-			                                          'sphericalMercator': true});
+			                                          {type: G_HYBRID_MAP, 'sphericalMercator': true});
 			map.addLayer(google3);
 			var google4 = new OpenLayers.Layer.Google("Google Satellite", 
-			                                          {type: G_SATELLITE_MAP,
-			                                          'sphericalMercator': true});
+			                                          {type: G_SATELLITE_MAP, 'sphericalMercator': true});
 			map.addLayer(google4);
 
 			/*
@@ -126,12 +114,6 @@
 				{'isBaseLayer':true});
 			bk2.setVisibility(false);
 			map.addLayer(bk2);
-			*/
-			
-
-			/*
-			var goog2 = new OpenLayers.Layer.Google("** Google Satellite", {type: G_SATELLITE_MAP});
-			map.addLayer(goog2);
 			*/
 			
 			/* Metacarta Base Layers			
@@ -169,7 +151,7 @@
 			// Do a translation of map center coordinates to Spherical Mercator
 			var proj = new OpenLayers.Projection("EPSG:4326");
 			var point = new OpenLayers.LonLat(lon, lat);
-			point.transform(proj, map.getProjectionObject());
+//			point.transform(proj, map.getProjectionObject());
 			map.setCenter(point, zoom);
 
 			if (lon == 0 && lat == 0) {
