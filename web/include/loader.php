@@ -116,6 +116,10 @@ if (file_exists('/usr/share/pear/FirePHPCore/fb.php')) {
 	}
 }
 
+function showErrorMsg($sMsg) {
+	fb($sMsg);
+}
+
 require_once(BASE . "/include/usersession.class.php");
 require_once(BASE . "/include/query.class.php");
 require_once(BASE . "/include/diobject.class.php");
