@@ -138,11 +138,11 @@ if (isset($post['_M+cmd'])) {
 	$t->assign ("legend", $legend);
 	if ($post['_M+cmd'] == "export") {
 		$url0 = "/cgi-bin/". MAPSERV ."?map=". SOFTDIR ."/worldmap/worldmap.map&SERVICE=WMS&VERSION=1.1.1".
-			"&layers=base&REQUEST=getmap&STYLES=&SRS=EPSG:4326&BBOX=". $post['_M+extent'].
+			"&layers=base&REQUEST=getmap&STYLES=&SRS=EPSG:900913&BBOX=". $post['_M+extent'].
 			"&WIDTH=500&HEIGHT=378&FORMAT=image/png";
 		$bf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $url0);
 		$url1 = "/cgi-bin/". MAPSERV ."?map=". $m->filename() ."&SERVICE=WMS&VERSION=1.1.1".
-			"&layers=". $post['_M+layers'] ."&REQUEST=getmap&STYLES=&SRS=EPSG:4326".
+			"&layers=". $post['_M+layers'] ."&REQUEST=getmap&STYLES=&SRS=EPSG:900913".
 			"&BBOX=". $post['_M+extent']."&WIDTH=500&HEIGHT=378&FORMAT=image/png";
 		$mf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $url1);
 		if ($mf) {

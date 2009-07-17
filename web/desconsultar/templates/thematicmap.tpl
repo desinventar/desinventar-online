@@ -16,14 +16,18 @@
 		var lat = {-if $lon != ''-}{-$lat-}{-else-}0{-/if-};
 		var zoom = parseInt('{-$zoom-}');
 		var map;
+		var prj1;
+		var prj2;
 		
 		function init() {
 			// avoid pink tiles
 			OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
 			OpenLayers.Util.onImageLoadErrorColor = "transparent";
+			prj1 = new OpenLayers.Projection("EPSG:4326");
+			prj2 = new OpenLayers.Projection("EPSG:900913");
 			var options = {
-				projection    : new OpenLayers.Projection("EPSG:900913"),
-				displayProjection: new OpenLayers.Projection("EPSG:4326"),
+				projection    : prj2,
+				displayProjection: prj1,
 				minResolution : "auto",
 				minExtent     : new OpenLayers.Bounds(-1, -1, 1, 1),
 				units         : "m",
@@ -149,9 +153,8 @@
 			*/
 
 			// Do a translation of map center coordinates to Spherical Mercator
-			var proj = new OpenLayers.Projection("EPSG:4326");
 			var point = new OpenLayers.LonLat(lon, lat);
-//			point.transform(proj, map.getProjectionObject());
+			point.transform(prj1, map.getProjectionObject());
 			map.setCenter(point, zoom);
 
 			if (lon == 0 && lat == 0) {
