@@ -20,7 +20,7 @@ class DIObject {
 	public function __construct($prmSession) {
 		$this->session = $prmSession;
 		$this->q = new Query($prmSession->sRegionId);
-		$this->conn = $this->q->dreg;
+		$this->setConnection($prmSession->sRegionId);
 		$num_args = func_num_args();
 		if ($num_args >= 1) {
 			$this->oSession = func_get_arg(0);
@@ -33,6 +33,7 @@ class DIObject {
 		$this->oFieldType=array();
 		$this->createFields($this->sFieldKeyDef);
 		$this->createFields($this->sFieldDef);
+		$this->set("LangIsoCode", $this->q->getDBInfoValue('I18NFirstLang'));
 	} // constructor
 	
 	public function setConnection($prmDB) {
