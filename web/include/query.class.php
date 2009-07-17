@@ -37,7 +37,7 @@ class Query extends PDO
 				}
 			} //if
 		} catch (Exception $e) {
-			print "Error !: " . $e->getMessage() . "<br/>\n";
+			showErrorMsg("Error !: " . $e->getMessage());
 			die();
 		}
 	}
@@ -56,7 +56,7 @@ class Query extends PDO
 				/*** set the error reporting attribute ***/
 				$this->dreg->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			} catch (PDOException $e) {
-				print $e->getMessage();
+				showErrorMsg($e->getMessage());
 			}
 		} else {
 			$iReturn = ERR_NO_DATABASE;			
@@ -76,7 +76,7 @@ class Query extends PDO
 					$i++;
 				}
 			} catch (Exception $e) {
-				print $e->getMessage();
+				showErrorMsg($e->getMessage());
 			}
 		} else {
 			echo "Empty Query !!";
@@ -93,7 +93,7 @@ class Query extends PDO
 				$row = $rst->fetch(PDO::FETCH_ASSOC);
 			}
 		} catch (Exception $e) {
-			print $e->getMessage() . "<br>";
+			showErrorMsg($e->getMessage());
 		}
 		return $row;
 	}
@@ -446,7 +446,6 @@ class Query extends PDO
 				//$data[$row['InfoKey']] = array($row['InfoValue'], $row['InfoAuxValue']);
 				$data[$row['InfoKey']] = $row['InfoValue'];
 		} //if
-		//print "Data : "; print_r($data); print "<br>";
 		return $data;
 	}
 	
@@ -1120,7 +1119,7 @@ class Query extends PDO
 			  $row['DictBasDesc'], $row['DictFullDesc']);
 		} // foreach
 	} catch (Exception $e) {
-		print $e->getMessage();
+		showErrorMsg($e->getMessage());
 	}
     return $dictio;
   }

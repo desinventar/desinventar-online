@@ -19,6 +19,7 @@ class DIObject {
 	
 	public function __construct($prmSession) {
 		$this->session = $prmSession;
+		//$this->q = $prmSession->q;
 		$this->q = new Query($prmSession->sRegionId);
 		$this->setConnection($prmSession->sRegionId);
 		$num_args = func_num_args();
@@ -64,7 +65,7 @@ class DIObject {
 		try {
 			return $this->oField[$prmKey];
 		} catch (Exception $e) {
-			print "Error " . $e->getMessage() . "<br />";
+			showErrorMsg("Error " . $e->getMessage());
 		}		
 	}
 	
@@ -72,7 +73,7 @@ class DIObject {
 		try {
 			return $this->oFieldType[$prmKey];
 		} catch (Exception $e) {
-			print "Error " . $e->getMessage() . "<br />";
+			showErrorMsg("Error " . $e->getMessage());
 		}		
 	}
 	
@@ -278,7 +279,7 @@ class DIObject {
 					$iReturn = 1;		
 				}
 			} catch (PDOException $e) {
-				print "Error " . $e->getMessage() . "<br>";
+				showErrorMsg("Error " . $e->getMessage());
 			}
 		}
 		return $iReturn;
@@ -299,7 +300,7 @@ class DIObject {
 					$iReturn = 1;
 				}
 			} catch (PDOException $e) {
-				print "Error " . $e->getMessage() . "<br>";
+				showErrorMsg("Error " . $e->getMessage());
 			}
 		}
 		return $iReturn;

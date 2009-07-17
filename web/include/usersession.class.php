@@ -5,9 +5,10 @@
 */
 
 class UserSession {
+	var $q               = null;
 	var $sSessionId      = '';
 	var $sRegionId       = '';
-	var $sRegionLangCode = 'eng';
+	var $LangIsoCode = 'eng';
 	var $sUserName       = '';
 	var $dStart          = '';
 	var $dLastUpdate     = '';
@@ -44,12 +45,13 @@ class UserSession {
 				}
 			}
 		} catch (Exception $e) {
-			$e->getMessage() . "<br>\n";
+			showErrorMsg($e->getMessage());
 		}
 		// If session doesn't exist in database, insert record
 		if (! $iReturn) {
 			$this->insert();
 		}
+		fb('usersession.load db connect : ' . $this->sRegionId);
 		$this->q = new Query($this->sRegionId);
 		return $iReturn;	
 	} // function
@@ -139,21 +141,15 @@ class UserSession {
 
 	// Associate a RegionId with the session
 	public function open($prmRegionId) {
+		$iReturn = ERR_NO_ERROR;
 		$this->clearLocks();
-		$iReturn = 0;
 		$sQuery = "UPDATE UserSession SET RegionId='" . $prmRegionId . "' " . 
 		          "WHERE SessionId='" . $this->sSessionId . "'";
 		if ($result = $this->q->core->query($sQuery)) {
 			$this->sRegionId = $prmRegionId;
-			$sQuery = "SELECT * FROM Region WHERE RegionId='" . $this->sRegionId . "'";
-			if ($result = $this->q->core->query($sQuery)) {
-				while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-					$sRegionLangCode = $row->LangIsoCode;
-				}
-			}
-			$iReturn = 1;
 		}
 		$this->awake();
+		fb('usersession.open db connect : ' . $this->sRegionId);
 		$this->q = new Query($this->sRegionId);
 		return $iReturn;
 	} // open()
@@ -178,7 +174,7 @@ class UserSession {
 					}
 				} // while
 			} catch (Exception $e) {
-				print $e->getMessage();
+				showErrorMsg($e->getMessage());
 			} // catch
 		}
 		return $iReturn;

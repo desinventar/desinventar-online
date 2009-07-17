@@ -132,7 +132,7 @@ class DIRegion extends DIObject {
 				$this->q->setDBConnection($this->get('RegionId'));
 			}
 		} catch (Exception $e) {
-			print "Error " . $e->getMessage() . "<br />";
+			showErrorMsg("Error " . $e->getMessage());
 		}
 		$this->set('RegionId', $prmRegionId);
 		// Copy Predefined Event/Cause Lists
@@ -159,6 +159,13 @@ class DIRegion extends DIObject {
 	
 	public function addRegionItemGeography($prmRegionItemId, $prmRegionItemGeographyId) {
 		$iReturn = ERR_NO_ERROR;
+		$this->setConnection($this->get('RegionId'));
+		$q = $this->q->dreg;
+		
+		// Delete Existing Elements
+		$Query = "DELETE FROM Geography WHERE GeographyCode='" . $prmRegionItemId . "'";
+		$q->query($Query);
+		
 		$g = new DIGeography($this->session, 
 		                     $prmRegionItemGeographyId,
 		                     $this->get('LangIsoCode'));
@@ -168,16 +175,16 @@ class DIRegion extends DIObject {
 		
 		// Copy Geography From Database
 		if ($iReturn > 0) {
-			$q = $this->q->dreg;
 			$RegionItemDir = VAR_DIR . '/' . $prmRegionItemId;
 			$RegionItemDB = $RegionItemDir . '/desinventar.db';
 			// Attach Database
 			$Query = "ATTACH DATABASE '" . $RegionItemDB . "' AS RegItem;";
 			$q->query($Query);
-			$this->copyData('Geography','GeographyId', $prmRegionItemGeographyId, false);
+			$this->copyData($q, 'Geography','GeographyId', $prmRegionItemId, $prmRegionItemGeographyId, false);
 			$Query = "DETACH DATABASE RegItem";
 			$q->query($Query);
 		}
+		$this->setConnection('core');
 		return $iReturn;
 	}
 		
@@ -251,7 +258,7 @@ class DIRegion extends DIObject {
 		$q = $this->q->dreg;
 		$q->query("ATTACH DATABASE '" . $RegionDB . "' AS RegItem");
 		// Copy Disaster Table, adjust GeographyId Field
-		$this->copyData('Disaster','DisasterGeographyId', $prmRegionItemGeographyId, false);
+		$this->copyData($q, 'Disaster','DisasterGeographyId', $prmRegionItemId, $prmRegionItemGeographyId, false);
 		// Copy DisasterId from EEData, Other Fields are Ignored...
 		$q->query("INSERT INTO EEData (DisasterId) SELECT DisasterId FROM RegItem.EEData");
 		$q->query("DETACH DATABASE RegItem");
@@ -260,7 +267,6 @@ class DIRegion extends DIObject {
 	public function addRegionItemGeoCarto($prmRegionItemId, $prmRegionItemGeographyId) {
 		$iReturn = ERR_NO_ERROR;
 		$RegionDB = VAR_DIR . '/' . $prmRegionItemId . '/desinventar.db';
-		$this->q->setDBConnection($this->get('RegionId'));
 		$q = $this->q->dreg;
 		$q->query("ATTACH DATABASE '" . $RegionDB . "' AS RegItem");
 		$Query = "DELETE FROM GeoCarto WHERE GeographyId='" . $prmRegionItemGeographyId . "'";
@@ -303,6 +309,7 @@ class DIRegion extends DIObject {
 		if ($prmTable == 'Geography') {
 			$Query = "UPDATE TmpTable SET GeographyLevel=GeographyLevel+1";
 			array_push($Queries, $Query);
+			// Rename GeographyCode to avoid duplicates ???
 		}
 		if ($prmTable == 'GeoCarto') {
 			$Query = "UPDATE TmpTable SET GeoLevelId=GeoLevelId+1";
@@ -324,7 +331,7 @@ class DIRegion extends DIObject {
 			try {
 				$prmConn->query($Query);
 			} catch (Exception $e) {
-				print $e->getMessage() . "<br />";
+				showErrorMsg($e->getMessage());
 			}
 		}
 	}
