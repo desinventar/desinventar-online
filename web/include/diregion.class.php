@@ -140,8 +140,35 @@ class DIRegion extends DIObject {
 		$this->copyCauses($this->get('LangIsoCode'));
 		return $iReturn;
 	}
+
+	public function addRegionItemRecord($prmRegionItemId) {
+		$iReturn = ERR_NO_ERROR;
+		$RegionId = $this->get('RegionId');
+		// Add RegionItem record
+		$i = new DIRegionItem($this->session, $RegionId, $prmRegionItemId);
+		//$iReturn = $i->insert();
+		return $iReturn;
+	}
+
+	public function getRegionItemGeographyId($prmRegionId) {
+		$GeographyId = '';
+		$g = new DIGeography($this->session, $prmRegionId);
+		$GeographyId = $g->buildGeographyId('');
+		return $GeographyId;
+	}
 	
-	public function addRegionItem($prmRegionItemId) {
+	public function addRegionItemGeography($prmRegionItemId, $prmRegionItemGeographyId) {
+		$iReturn = ERR_NO_ERROR;
+		$g = new DIGeography($this->session, 
+		                     $prmRegionItemGeographyId,
+		                     $this->get('LangIsoCode'));
+		$g->set('GeographyCode', $prmRegionItemId);
+		$g->set('GeographyName', 'Region ' . (int)$prmRegionItemGeographyId);
+		$iReturn = $g->insert();
+		return $iReturn;
+	}
+		
+	public function addRegionItem($prmRegionItemId, $GeographyId) {
 		$RegionId = $this->get('RegionId');
 		$RegionDir = VAR_DIR . '/' . $this->get('RegionId');
 		$RegionItemDir = VAR_DIR . '/' . $prmRegionItemId;
@@ -157,20 +184,11 @@ class DIRegion extends DIObject {
 		}
 		if ($iReturn > 0) {
 			// Add RegionItem record
-			$i = new DIRegionItem($this->session, $RegionId, $prmRegionItemId);
-			$iReturn = $i->insert();
+			$iReturn = $this->addRegionItemRecord($prmRegionItemId);
 		}
 		if ($iReturn > 0) {
 			// Add Geography to Level0
-			$g = new DIGeography($this->session);
-			$g->setGeographyId('');
-			$GeographyId = $g->get('GeographyId');
-			$g->set('GeographyCode', $prmRegionItemId);
-			$g->set('GeographyName', $prmRegionItemId);
-			$g->insert();
-			//$iReturn = $g->insert();
-			//print $g->getInsertQuery() . "<br />";
-			//print $g->getUpdateQuery() . "<br />";
+			$iReturn = addRegionItemGeography($prmRegionItemId, $prmRegionItemGeographyId);
 		}
 		if ($iReturn > 0) {
 			// Attach Database
@@ -190,9 +208,7 @@ class DIRegion extends DIObject {
 				}			
 			}
 			
-			// Create GeoCarto
-
-			
+			// Create GeoCarto			
 			$this->copyData('Geography','GeographyId', $GeographyId, false);
 			$this->copyData('Disaster','DisasterGeographyId', $GeographyId, false);
 			$Query = "DETACH DATABASE RegItem";
@@ -331,23 +347,6 @@ class DIRegion extends DIObject {
 		return $iReturn;
 	}
 	
-	public function getRegionItemGeographyId($prmRegionId) {
-		$GeographyId = '';
-		$g = new DIGeography($this->session);
-		$GeographyId = $g->buildGeographyId('');
-		return $GeographyId;
-	}
-	
-	public function addRegionItemGeography($prmRegionId, $prmRegionItemGeographyId) {
-		$iReturn = ERR_NO_ERROR;
-		$g = new DIGeography($this->session, 
-		                     $prmRegionItemGeographyId,
-		                     $this->get('LangIsoCode'));
-		$g->set('GeographyCode', $prmRegionId);
-		$g->set('GeographyName', 'Region ' . (int)$prmRegionItemGeographyId);
-		$iReturn = $g->insert();
-		return $iReturn;
-	}
 } //class
 
 </script>
