@@ -12,7 +12,7 @@
   <script type="text/javascript" src="../include/prototype.js"></script>
   <script type="text/javascript" src="../include/diadmin.js.php"></script>
   <script type="text/javascript" src="../include/checktree.js"></script>
-  <script type="text/javascript" src="../include/wd.js"></script>
+<!--  <script type="text/javascript" src="../include/wd.js"></script>-->
   <script type="text/javascript" src="../include/accordion.js"></script>
   <!-- ExtJS 2.0.1 -->
   <link rel="stylesheet" type="text/css" href="/extJS/resources/css/ext-all.css"/>
@@ -459,6 +459,7 @@
 			// to export image save layers and extend..
 			var mm = ifr.map;
 			var extent = mm.getExtent();
+			//extent.transform(mm.prj1, mm.prj2);
 			var layers = mm.layers;
 			var activelayers = [];
 			for (i in layers) {
