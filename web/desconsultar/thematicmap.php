@@ -171,6 +171,7 @@ if (isset($post['_M+cmd'])) {
 		$t->assign ("ctl_showres", true);
 }
 elseif (isset($get['cmd']) && $get['cmd'] == "getkml") {
+	// Send KML file - GoogleEarth
 	header("Content-type: text/kml");
 	header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $reg) ."_ThematicMap.kml");
 	$m = new Maps($q, $reg, null, null, null, null, null, "KML");

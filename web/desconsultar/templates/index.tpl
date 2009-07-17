@@ -811,7 +811,10 @@
  {-/foreach-}
                    </tbody>
                   </table>
-				  <p align="right"><input type="button" value="Gradiente de Color" onClick="genColors();" class="line"></p>
+				  <table border="0"><tr>
+				  <td><!--Transparencia <input type="text" name="_M+Transparency" size="2" maxlength="2" class="line" value="70">%--></td>
+				  <td align="right"><input type="button" value="Gradiente de Color" onClick="genColors();" class="line"></td>
+				  </tr></table>
                 </td><td>
                   <b>{-#mrepreselev#-}</b><br>
                   <select id="_M+Type" name="_M+Type" size="3" class="fixw">
