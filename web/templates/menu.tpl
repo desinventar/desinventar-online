@@ -83,7 +83,7 @@
 				</table>
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect2" style="display:none;">
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=CRI_2009-07-07_023031');">Costa Rica</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=CRI_2009-07-07_023423');">Costa Rica</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
