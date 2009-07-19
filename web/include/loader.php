@@ -62,7 +62,7 @@ if (isset($_SERVER["REDIRECT_DI8_CACHEDIR"])) {
 	$_SERVER["DI8_CACHEDIR"] = $_SERVER["REDIRECT_DI8_CACHEDIR"];
 }
 if (! isset($_SERVER["DI8_CACHEDIR"])) {
-	$_SERVER["DI8_CACHEDIR"] = "/var/cache/Smarty";
+	$_SERVER["DI8_CACHEDIR"] = "/var/cache/Smarty/di8";
 }
 
 if (isset($_SERVER["DI8_WEB"])) {

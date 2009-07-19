@@ -220,7 +220,7 @@ class DIRegion extends DIObject {
 			$iReturn = $this->addRegionItemGeoCarto($prmRegionItemId, $prmRegionItemGeographyId);
 		}
 		if ($iReturn > 0) {
-			$iReturn = $this->addRegionItemDisaster($prmRegionItemId);
+			$iReturn = $this->addRegionItemDisaster($prmRegionItemId,$prmRegionItemGeographyId);
 		}
 		return $iReturn;
 	}
@@ -291,8 +291,7 @@ class DIRegion extends DIObject {
 	}
 	
 	public function copyData($prmConn, $prmTable, $prmField, $prmRegionItemId, $prmValue, $isNumeric) {
-		$Queries = array();
-		
+		$Queries = array();		
 		// Create Empty Table
 		$Query = "DROP TABLE IF EXISTS TmpTable";
 		array_push($Queries, $Query);
