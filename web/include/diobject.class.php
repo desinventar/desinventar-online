@@ -5,7 +5,7 @@
 */
 
 class DIObject {
-	var $oSession   = '';
+	var $session = null;
 	var $sRegionId  = '';
 	// Dynamic Objects Variables
 	var $sTableName = 'MyTable';

@@ -12,7 +12,10 @@ class DIRegion extends DIObject {
 		$this->sFieldDef    = "RegionLabel/STRING," .
 		                      "LangIsoCode/STRING," . 
 		                      "CountryIso/STRING," .
-		                      "RegionStatus/INTEGER";
+		                      "RegionStatus/INTEGER," .
+		                      "RegionLastUpdate/DATETIME," .
+		                      "IsCRegion/INTEGER," .
+		                      "IsVRegion/INTEGER";
 		$this->sInfoDef     = "DBVersion/STRING," .
 		                      "RegionOrder/INTEGER," .
 		                      "RegionLastUpdate/DATETIME," .
@@ -102,7 +105,10 @@ class DIRegion extends DIObject {
 	}
 
 	public function load() {
-		$iReturn = parent::load();
+		$iReturn = ERR_NO_ERROR;
+		if ($iReturn > 0) {
+			$iReturn = parent::load();
+		}
 		if ($iReturn > 0) {
 			$iReturn = $this->loadInfo();
 		}
@@ -383,6 +389,34 @@ class DIRegion extends DIObject {
 		$g = new DIGeoLevel($this->session, 0);
 		$iReturn = $g->getMaxGeoLevel();
 		return $iReturn;
+	}
+	
+	public function getDBInfoValue($prmInfoKey) {
+		return $this->q->getDBInfoValue($prmInfoKey);
+	}
+	
+	public function updateMapArea() {
+		$IsCRegion = $this->get('IsCRegion');
+		if ($IsCRegion > 0) {
+			$MinX = 0; $MaxX = 0;
+			$MinY = 0; $MaxY = 0;
+			// Use information about each RegionItem to Calcule the Map Area
+			$Query = "SELECT * FROM RegionItem WHERE RegionId='" . $this->get('RegionId') . "'";
+			foreach ($this->q->core->query($Query) as $row) {
+				$RegionItemId = $row['RegionItem'];
+				$r = new DIRegion($this->session, $RegionItemId);
+				$ItemMinX = $r->getDBInfoValue('GeoLimitMinX');
+				if ($ItemMinX < $MinX) { $MinX = $ItemMinX; }
+				$ItemMaxX = $r->getDBInfoValue('GeoLimitMaxX');
+				if ($ItemMaxX > $MaxX) { $MaxX = $ItemMaxX; }
+				$ItemMinY = $r->getDBInfoValue('GeoLimitMinY');
+				if ($ItemMinY < $MinY) { $MinY = $ItemMinY; }
+				$ItemMaxY = $r->getDBInfoValue('GeoLimitMaxY');
+				if ($ItemMaxY > $MaxY) { $MaxY = $ItemMaxY; }
+			}
+			$this->q->setDBConnection('core');
+			fb($MinX . ' ' . $MaxX . ' ' . $MinY . ' ' . $MaxY);
+		}
 	}
 	
 } //class
