@@ -19,8 +19,8 @@ class DIObject {
 	
 	public function __construct($prmSession) {
 		$this->session = $prmSession;
-		//$this->q = $prmSession->q;
-		$this->q = new Query($prmSession->sRegionId);
+		$this->q = $prmSession->q;
+		//$this->q = new Query($prmSession->sRegionId);
 		$this->setConnection($prmSession->sRegionId);
 		$num_args = func_num_args();
 		if ($num_args >= 1) {
@@ -218,19 +218,23 @@ class DIObject {
 	} // function
 	
 	public function load() {
-		$iReturn = 0;
+		$iReturn = ERR_OBJECT_NOT_FOUND;
 		$sQuery = $this->getSelectQuery();
-		foreach ($this->conn->query($sQuery) as $row) {
-			$sAllFields = $this->sFieldKeyDef . "," . $this->sFieldDef;
-			$sFields = split(',', $sAllFields);
-			foreach ($sFields as $sKey => $sValue) {
-				$oItem = split('/', $sValue);
-				$sFieldName = $oItem[0];
-				$sFieldType = $oItem[1];
-				$this->set($sFieldName, $row[$sFieldName]);
-			}
-			$iReturn = 1;
-		} // foreach
+		try {
+			foreach ($this->conn->query($sQuery) as $row) {
+				$sAllFields = $this->sFieldKeyDef . "," . $this->sFieldDef;
+				$sFields = split(',', $sAllFields);
+				foreach ($sFields as $sKey => $sValue) {
+					$oItem = split('/', $sValue);
+					$sFieldName = $oItem[0];
+					$sFieldType = $oItem[1];
+					$this->set($sFieldName, $row[$sFieldName]);
+				}
+				$iReturn = 1;
+			} // foreach
+		} catch (Exception $e) {
+			showErrorMsg($e->getMessage);
+		}
 		return $iReturn;
 	} // function load
 	

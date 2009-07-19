@@ -51,7 +51,7 @@ class UserSession {
 		if (! $iReturn) {
 			$this->insert();
 		}
-		$this->q = new Query($this->sRegionId);
+		$this->q->setDBConnection($this->sRegionId);
 		return $iReturn;	
 	} // function
 
@@ -148,7 +148,7 @@ class UserSession {
 			$this->sRegionId = $prmRegionId;
 		}
 		$this->awake();
-		$this->q = new Query($this->sRegionId);
+		$this->q->setDBConnection($this->sRegionId);
 		return $iReturn;
 	} // open()
 

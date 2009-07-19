@@ -176,7 +176,7 @@
 					<tr><td colspan="3"><img src="images/p_fin.gif" width="133" height="5"></td></tr>
 					<tr><td colspan="3"><img src="images/p_ini.gif" width="133" height="5"></td></tr>
 					<tr><td class="pais" colspan="3">
-						<a href="javascript:void(null)" onclick="updateList('pagecontent', 'region.php', 'r=CAN_20090708_100000')">{-#treg8#-}</a>
+						<a href="javascript:void(null)" onclick="updateList('pagecontent', 'region.php', 'r=DESINV_2009-07-15_000000')">{-#treg8#-}</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_fin.gif" width="133" height="5"></td></tr>
 				</table>
