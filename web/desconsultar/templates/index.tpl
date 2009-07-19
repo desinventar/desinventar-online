@@ -39,12 +39,12 @@
             {  text: '{-#msavequery#-}', handler: onMenuItem  },
             {  text: '{-#mopenquery#-}', handler: onMenuItem  }]
       });
+      //{  text: '{-#motherdoc#-}',		handler: onMenuItem  },
       var mhelp = new Ext.menu.Menu({
         id: 'helpMenu',
         items: [
             {  text: '{-#mgotodoc#-}',    handler: onMenuItem  },
             {  text: '{-#hmoreinfo#-}',		handler: onMenuItem  },
-            {  text: '{-#motherdoc#-}',		handler: onMenuItem  },
             {  text: '{-#mabout#-}',     	handler: onMenuItem  }]
       });
       var tb = new Ext.Toolbar();
