@@ -440,10 +440,7 @@ class Query extends PDO
 		$data = array();
 		if ($this->dreg != null) {
 			$sql = "SELECT InfoKey, InfoValue, InfoAuxValue FROM Info";
-			//$res = $this->dreg->exec($sql);
-			$res = $this->dreg->query($sql,PDO::FETCH_ASSOC);
-			foreach($res as $row)
-				//$data[$row['InfoKey']] = array($row['InfoValue'], $row['InfoAuxValue']);
+			foreach($this->dreg->query($sql) as $row)
 				$data[$row['InfoKey']] = $row['InfoValue'];
 		} //if
 		return $data;
@@ -454,9 +451,9 @@ class Query extends PDO
 		$sReturn = '';
 		if ($this->dreg != null) {
 			$sql = "SELECT * FROM Info WHERE InfoKey='" . $prmInfoKey . "'";
-			$res = $this->dreg->query($sql,PDO::FETCH_ASSOC);
-			foreach($res as $row)
+			foreach($this->dreg->query($sql) as $row) {
 				$sReturn = $row['InfoValue'];
+			}
 		} //if
 		return $sReturn;
 	}
