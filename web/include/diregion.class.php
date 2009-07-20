@@ -398,8 +398,8 @@ class DIRegion extends DIObject {
 	public function updateMapArea() {
 		$IsCRegion = $this->get('IsCRegion');
 		if ($IsCRegion > 0) {
-			$MinX = 0; $MaxX = 0;
-			$MinY = 0; $MaxY = 0;
+			$MinX = 180; $MaxX = -180;
+			$MinY =  90; $MaxY = -90;
 			// Use information about each RegionItem to Calcule the Map Area
 			$Query = "SELECT * FROM RegionItem WHERE RegionId='" . $this->get('RegionId') . "'";
 			foreach ($this->q->core->query($Query) as $row) {
@@ -413,9 +413,13 @@ class DIRegion extends DIObject {
 				if ($ItemMinY < $MinY) { $MinY = $ItemMinY; }
 				$ItemMaxY = $r->getDBInfoValue('GeoLimitMaxY');
 				if ($ItemMaxY > $MaxY) { $MaxY = $ItemMaxY; }
-			}
-			$this->q->setDBConnection('core');
-			fb($MinX . ' ' . $MaxX . ' ' . $MinY . ' ' . $MaxY);
+			} //foreach
+			$this->q->setDBConnection($this->get('RegionId'));
+			$this->set('GeoLimitMinX', $MinX);
+			$this->set('GeoLimitMaxX', $MaxX);
+			$this->set('GeoLimitMinY', $MinY);
+			$this->set('GeoLimitMaxY', $MaxY);
+			$this->update();
 		}
 	}
 	
