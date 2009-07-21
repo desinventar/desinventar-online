@@ -429,7 +429,27 @@ class DIRegion extends DIObject {
 				$this->update();
 			}
 		} //if
-	}
+	} //updateMapArea
+	
+	public function buildRegionId() {
+		$RegionId = '';
+		$CountryIso = $this->get('CountryIso');
+		if ($CountryIso == '') {
+			$CountryIso = 'DESINV';
+		}
+		$Timestamp = $this->padNumber(time(),10);
+		$RegionLabel = $this->get('RegionLabel');
+		//$RegionLabel = 'Región de Prueba ññáéíóúÓÚ';
+		$RegionLabel = strtolower($RegionLabel);
+		$RegionLabel = str_replace(' - ','_',$RegionLabel);
+		$RegionLabel = str_replace(' ','_',$RegionLabel);
+		$RegionLabel = str_replace(array('ñ','á','é','í','ó','ú','Á','É','Í','Ó','Ú'),
+		                           array('n','a','e','i','o','u','a','e','i','o','u'),
+		                           $RegionLabel);
+		
+		$RegionId = $CountryIso . '-' . $Timestamp . '-' . $RegionLabel;
+		return $RegionId;
+	} //buildRegionId
 } //class
 
 </script>
