@@ -114,6 +114,8 @@ class DIRegion extends DIObject {
 		if ($iReturn > 0) {
 			$iReturn = $this->loadInfo();
 		}
+		// 2009-07-21 (jhcaiced) Fix LangIsoCode values
+		$this->set('LangIsoCode', $this->get('I18NFirstLang'));
 		return $iReturn;
 	}
 	
