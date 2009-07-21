@@ -116,7 +116,6 @@ exit 0;
 sub rebuildInfoTable() {
 	my $dbin      = $_[0];
 	my $sRegionId = $_[1];
-	
 	$sth = $dbin->prepare("SELECT * FROM Region WHERE RegionUUID='" . $sRegionId . "'");
 	$sth->execute();
 	while ($r = $sth->fetchrow_hashref()) {
@@ -124,7 +123,14 @@ sub rebuildInfoTable() {
 		&saveInfo('RegionLabel'     , $r->{RegionLabel}, '');
 		&saveInfo('InfoGeneral'     , $r->{RegionDesc}, '');
 		&saveInfo('InfoGeneralEN'   , $r->{RegionDescEN}, '');
-		&saveInfo('I18NFirstLang'   , $r->{RegionLangCode},'');
+
+		$sLang = $r->{RegionLangCode};
+		if ($sLang eq 'es') { $sLang = 'spa'; }
+		if ($sLang eq 'en') { $sLang = 'eng'; }
+		if ($slang eq 'fr') { $sLang = 'fre'; }
+		if ($sLang eq 'pr') { $sLang = 'por'; }
+		&saveInfo('I18NFirstLang', $sLang, '');		
+
 		&saveInfo('CountryIso'      , $r->{CountryIsoCode}, '');
 		&saveInfo('RegionLastUpdate', $r->{RegionStructLastUpdate}, '');
 		&saveInfo('PeriodBeginDate' , $r->{PeriodBeginDate}, '');
@@ -140,19 +146,6 @@ sub rebuildInfoTable() {
 		&saveInfo('InfoCredits'     , $r->{RegionCredits}, '');
 	}
 	$sth->finish();	
-
-	$sth = $dbin->prepare("SELECT * FROM DatabaseInfo WHERE RegionUUID='" . $sRegionId . "'");
-	$sth->execute();
-	while ($r = $sth->fetchrow_hashref()) {
-		$sLang = $r->{RegionLangCode};
-		if ($sLang eq 'es') { $sLang = 'spa'; }
-		if ($sLang eq 'en') { $sLang = 'eng'; }
-		if ($slang eq 'fr') { $sLang = 'fre'; }
-		if ($sLang eq 'pr') { $sLang = 'por'; }
-		&saveInfo('I18NFirstLang', $sLang, '');
-		#&saveInfo('InfoAdminURL', $r->{OptionAdminURL}, '');
-	}
-	$sth->finish();
 }
 
 sub saveInfo() {
