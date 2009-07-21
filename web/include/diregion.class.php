@@ -59,9 +59,11 @@ class DIRegion extends DIObject {
 			$prmRegionId = func_get_arg(1);
 			if ($prmRegionId != '') {
 				$this->set('RegionId', $prmRegionId);
-				$this->q->setDBConnection($prmRegionId);
+				$iReturn = $this->q->setDBConnection($prmRegionId);
 			}
-			$this->load();
+			if ($iReturn > 0) {
+				$iReturn = $this->load();
+			}
 		}
 	} // __construct
 
@@ -396,8 +398,10 @@ class DIRegion extends DIObject {
 	}
 	
 	public function updateMapArea() {
+		$iReturn = ERR_NO_ERROR;
 		$IsCRegion = $this->get('IsCRegion');
 		if ($IsCRegion > 0) {
+			$iReturn = ERR_NO_ERROR;
 			$MinX = 180; $MaxX = -180;
 			$MinY =  90; $MaxY = -90;
 			// Use information about each RegionItem to Calcule the Map Area
@@ -415,14 +419,15 @@ class DIRegion extends DIObject {
 				if ($ItemMaxY > $MaxY) { $MaxY = $ItemMaxY; }
 			} //foreach
 			$this->q->setDBConnection($this->get('RegionId'));
-			$this->set('GeoLimitMinX', $MinX);
-			$this->set('GeoLimitMaxX', $MaxX);
-			$this->set('GeoLimitMinY', $MinY);
-			$this->set('GeoLimitMaxY', $MaxY);
-			$this->update();
-		}
+			if ($iReturn > 0) {
+				$this->set('GeoLimitMinX', $MinX);
+				$this->set('GeoLimitMaxX', $MaxX);
+				$this->set('GeoLimitMinY', $MinY);
+				$this->set('GeoLimitMaxY', $MaxY);
+				$this->update();
+			}
+		} //if
 	}
-	
 } //class
 
 </script>
