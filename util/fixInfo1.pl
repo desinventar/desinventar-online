@@ -20,6 +20,10 @@ use Data::Dumper;
 binmode(STDOUT, ':utf8');
 
 my $DataDir = '/var/lib/desinventar';
+
+my $dbhcore = DBI->connect("DBI:SQLite:dbname=" . $DataDir . '/core.db',"","");
+$dbhcore->{unicode} = 1;
+
 my @Dirs = ();
 open(DATA, "find $DataDir -type d | sort |") or die "Can't open file list\n";
 while(<DATA>) {
@@ -39,6 +43,7 @@ foreach(@Dirs) {
 		print $RegionId . "\n";
 		$Query = "UPDATE Info SET InfoValue='" . $RegionId . "' WHERE InfoKey='RegionId';";
 		$dbh->do($Query);
+		
 
 		$Query = "SELECT * FROM Info WHERE InfoKey='I18NFirstLang'";
 		$sth = $dbh->prepare($Query);
@@ -51,8 +56,14 @@ foreach(@Dirs) {
 			if ($sLang eq 'pr') { $sLang = 'por'; }
 			$Query = "UPDATE Info SET InfoValue='" . $sLang . "' WHERE InfoKey='I18NFirstLang';";
 			$dbh->do($Query);
+			
+			# Update core.Region
+			$Query = "UPDATE Region SET LangIsoCode='" . $sLang . "' WHERE RegionId='" . $RegionId . "';";
+			$dbhcore->do($Query);
 		}
 		$sth = undefined;
 		$dbh= undefined;
 	}
-}
+} # foreach
+$dbhcore = undefined;
+
