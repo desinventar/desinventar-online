@@ -40,16 +40,6 @@ class DIDisaster extends DIObject {
 		                      "EffectPeopleRelocated/INTEGER," .		                      
 		                      "EffectHousesDestroyed/INTEGER," .
 		                      "EffectHousesAffected/INTEGER," .
-
-		                      "EffectPeopleDeadQ/INTEGER," .
-		                      "EffectPeopleMissingQ/INTEGER," .
-		                      "EffectPeopleInjuredQ/INTEGER," .
-		                      "EffectPeopleHarmedQ/INTEGER," .
-		                      "EffectPeopleAffectedQ/INTEGER," .
-		                      "EffectPeopleEvacuatedQ/INTEGER," .
-		                      "EffectPeopleRelocatedQ/INTEGER," .		                      
-		                      "EffectHousesDestroyedQ/INTEGER," .
-		                      "EffectHousesAffectedQ/INTEGER," .
 		                      
 		                      "EffectLossesValueLocal/DOUBLE," .
 		                      "EffectLossesValueUSD/DOUBLE," .
@@ -72,6 +62,16 @@ class DIDisaster extends DIObject {
 		                      "SectorIndustry/INTEGER," .
 		                      "SectorHealth/INTEGER," .
 		                      "SectorOther/INTEGER";
+		$this->sFieldQDef =   "EffectPeopleDeadQ/INTEGER," .
+		                      "EffectPeopleMissingQ/INTEGER," .
+		                      "EffectPeopleInjuredQ/INTEGER," .
+		                      "EffectPeopleHarmedQ/INTEGER," .
+		                      "EffectPeopleAffectedQ/INTEGER," .
+		                      "EffectPeopleEvacuatedQ/INTEGER," .
+		                      "EffectPeopleRelocatedQ/INTEGER," .		                      
+		                      "EffectHousesDestroyedQ/INTEGER," .
+		                      "EffectHousesAffectedQ/INTEGER";
+		$this->sFieldDef .= ',' . $this->sFieldQDef;
 		parent::__construct($prmSession);
 		$this->set("EventPredefined", 0);
 		$this->set("EventActive", 1);
@@ -113,6 +113,19 @@ class DIDisaster extends DIObject {
 		//validateEffects ??
 		return $iReturn;
 	}
+	
+	public function update($withValidate = true) {
+		$iReturn = ERR_NO_ERROR;
+		foreach (split(',',$this->sFieldQDef) as $sFieldQ) {
+			$oItem = split('/', $sFieldQ);
+			$sFieldQName = $oItem[0];
+			$sFieldName  = substr($sFieldQName, 0, -1);
+			$sFieldType  = $oItem[1];
+			$this->set($sFieldQName, $this->get($sFieldName));
+			if ($this->get($sFieldQName) < 0) { $this->set($sFieldQName, 0); }
+		}
+		$iReturn = parent::update($withValidate);
+	} //update
 } //class
 
 </script>
