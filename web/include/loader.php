@@ -8,32 +8,57 @@
 
 //ob_start( 'ob_gzhandler' );
 
+// 2009-07-04 (jhcaiced) Added FirePHP debug system
+// This lines try to detect if FirePHP Core is installed,
+// if not, create a dummy class/function to avoid errors.
+if (file_exists('/usr/share/pear/FirePHPCore/fb.php')) {
+	require_once('FirePHPCore/fb.php');
+} else {
+	function fb() {
+		// dummy fb() function, doesn't do anything...
+	}
+}
+
+function showErrorMsg($sMsg) {
+	fb($sMsg);
+}
+
 /* SETTINGS */
 // "C:/desinventar8/ms4w/Apache/htdocs/";
 // "/var/www/html/desinventar/test/";
 
-if (isset($_SERVER["WINDIR"])) {
-	define('MODE', "offline"); // Mode Offline -> windows server
-	define('ARCH', 'WINDOWS');
-	define('MAPSERV', "mapserv.exe");
-	// 2009-05-01 (jhcaiced) Read Registry to obtain MS4W installation path	
-	$shell = new COM("WScript.Shell") or die("Requires Windows Scripting Host");
-	$ms4wpath=$shell->RegRead("HKEY_LOCAL_MACHINE\\SOFTWARE\\MS4W\\Install_Dir");
-	define("SMARTYDIR", $ms4wpath . "\apps\smarty");
-	define("JPGRAPHDIR", $ms4wpath . "\apps\jpgraph");
-	define("TEMP", $ms4wpath . "/tmp");
-	// MS4W doesn't load the gd extension by default, so we do here now...
-	if (!extension_loaded( 'gd' )) {
-		dl( 'php_gd2.'.PHP_SHLIB_SUFFIX);
+// 2009-07-22 (jhcaiced) Adapted Configuration and Startup for 
+// using with PHP Command Line 
+if (isset($_SERVER["HTTP_HOST"])) {
+	// Online Modes (HTTP)
+	if (isset($_SERVER["WINDIR"])) {
+		// Running on a Windows Server
+		define('MODE', "offline");
+		define('ARCH', 'WINDOWS');
+		define('MAPSERV', "mapserv.exe");
+		// 2009-05-01 (jhcaiced) Read Registry to obtain MS4W 
+		//                       installation path	
+		$shell = new COM("WScript.Shell") or die("Requires Windows Scripting Host");
+		$ms4wpath=$shell->RegRead("HKEY_LOCAL_MACHINE\\SOFTWARE\\MS4W\\Install_Dir");
+		define("SMARTYDIR", $ms4wpath . "\apps\smarty");
+		define("JPGRAPHDIR", $ms4wpath . "\apps\jpgraph");
+		define("TEMP", $ms4wpath . "/tmp");
+		// MS4W doesn't load the gd extension by default, so we do here now...
+		if (!extension_loaded( 'gd' )) {
+			dl( 'php_gd2.'.PHP_SHLIB_SUFFIX);
+		}
+	} else {
+		// Running on a Linux Server
+		define('MODE', "online");
+		define('ARCH', "LINUX");
+		define('MAPSERV', "mapserv");
+		define("SMARTYDIR", "/usr/share/Smarty");
+		define("TEMP", "/tmp");
+		define("JPGRAPHDIR", "/usr/share/php/jpgraph");
 	}
 } else {
-	define('MODE', "online"); // Mode Online -> Linux server
-	define('ARCH', "LINUX");
-	define('MAPSERV', "mapserv");
-	define("SMARTYDIR", "/usr/share/Smarty");
-	define("TEMP", "/tmp");
-	define("JPGRAPHDIR", "/usr/share/php/jpgraph");
-	//define("XMLRPCDIR", "/usr/share/php/xmlrpc");
+	// Running a Command Line Script
+	define('MODE', "command");
 }
 
 /* Configure BASE Directory from HTTPD Config - Linux + WIndows */
@@ -65,6 +90,9 @@ if (! isset($_SERVER["DI8_CACHEDIR"])) {
 	$_SERVER["DI8_CACHEDIR"] = "/var/cache/Smarty/di8";
 }
 
+if (isset($_SERVER["SHELL"])) {
+	$_SERVER["DI8_CACHEDIR"] = "/tmp";
+}
 if (isset($_SERVER["DI8_WEB"])) {
 	define("BASE", $_SERVER["DI8_WEB"]);
 	define("SOFTDIR" , "/usr/share/desinventar");
@@ -105,45 +133,62 @@ $lg          = "spa";
 $dicore_host = "127.0.0.1"; //"66.150.227.232";
 $dicore_port = 8081;
 
-// 2009-07-04 (jhcaiced) Added FirePHP debug system
-// This lines try to detect if FirePHP Core is installed,
-// if not, create a dummy class/function to avoid errors.
-if (file_exists('/usr/share/pear/FirePHPCore/fb.php')) {
-	require_once('FirePHPCore/fb.php');
-} else {
-	function fb() {
-		// dummy fb() function, doesn't do anything...
-	}
-}
-
-function showErrorMsg($sMsg) {
-	fb($sMsg);
-}
-
 require_once(BASE . "/include/usersession.class.php");
 require_once(BASE . "/include/query.class.php");
 require_once(BASE . "/include/diobject.class.php");
 require_once(BASE . "/include/constants.php");
 
-// Session Management
-session_name("DI8SESSID");
-session_start();
+$SessionId = uuid();
+if (MODE != "command") {
+	// Session Management
+	session_name("DI8SESSID");
+	session_start();
+	$SessionId = session_id();
+}
 
 // 2009-01-15 (jhcaiced) Start by create/recover the session 
 // information, even for anonymous users
-$us = new UserSession(session_id());
+$us = new UserSession($SessionId);
 $us->load($us->sSessionId);
 $us->awake();
 
-error_reporting(E_ALL && ~E_NOTICE);
-header('Content-Type: text/html; charset=UTF-8');
-define("DEFAULT_CHARSET", 'UTF-8');
+if (MODE != "command") {
+	error_reporting(E_ALL && ~E_NOTICE);
+	header('Content-Type: text/html; charset=UTF-8');
+	define("DEFAULT_CHARSET", 'UTF-8');
 
-/* Smarty configuration */
-require_once(SMARTYDIR . '/Smarty.class.php');
-/* XMLRPC Library */
-//require_once(XMLRPCDIR . '/xmlrpc.inc');
+	/* Smarty configuration */
+	require_once(SMARTYDIR . '/Smarty.class.php');
+	/* SMARTY template */
+	$t = new Smarty();
+	$t->debugging = false;
+	$t->force_compile = true;
+	$t->caching = false;
+	$t->compile_check = true;
+	$t->cache_lifetime = -1;
+	$t->config_dir = '../include';
+	$t->template_dir = 'templates';
+	$t->compile_dir = SMTY_DIR;
+	$t->left_delimiter = '{-';
+	$t->right_delimiter = '-}';
 
+	// Choose Language
+	if (isset($_GET['lang']) && !empty($_GET['lang']))
+		$lg = $_GET['lang'];
+	elseif (isset($_SESSION['lang']))
+		$lg = $_SESSION['lang'];
+
+	// 2009-02-21 (jhcaiced) Fix some languages from two to three character code
+	if ($lg == 'es') { $lg = 'spa'; }
+	if ($lg == 'en') { $lg = 'eng'; }
+	if ($lg == 'pr') { $lg = 'por'; }
+
+	$_SESSION['lang'] = $lg;
+
+	$t->assign ("lg", $lg);
+}
+	
+// Common Functions
 function createIfNotExistDirectory($sMyPath) {
 	if (!file_exists($sMyPath)) {
 		error_reporting(E_ALL & ~E_WARNING);
@@ -206,27 +251,6 @@ function showerror ($val) {
 	return $res;
 }
 
-/* OBSOLETE: Function to get method of DICORE by XMLRPC 
-function callRpcDICore($rpcmethod, $rpcargs) {
-	global $dicore_host, $dicore_port;
-	$xmlrpcargs = array();
-	$c = $f = $r = null;
-	$c = new xmlrpc_client("", $dicore_host, $dicore_port);
-	if (!is_array($rpcargs))
-		return ERR_INVALID_COMMAND;
-	// encode real args
-	foreach ($rpcargs as $val)
-		array_push($xmlrpcargs, php_xmlrpc_encode($val));
-	$f = new xmlrpcmsg($rpcmethod, $xmlrpcargs);
-	$r =& $c->send($f, 3600);
-	if (!$r->faultCode())
-		return php_xmlrpc_decode($r->value());
-	else {
-		//echo "Code: (" . htmlspecialchars($r->faultCode()) . ") Reason: '" . htmlspecialchars($r->faultString()) . "'\n";
-		return ERR_NO_CONNECTION;
-	}
-}*/
-
 // To prevent display errors with strings containing cr,lf,quotes etc. remove them
 function str2js($str) {
 	$str2 = ereg_replace("[\r\n]", " \\n\\\n", $str);
@@ -251,33 +275,5 @@ function fixPost($post) {
 		$post['__CusQry'] = stripslashes($post['__CusQry']);
 	}
 }
-
-/* SMARTY template */
-$t = new Smarty();
-$t->debugging = false;
-$t->force_compile = true;
-$t->caching = false;
-$t->compile_check = true;
-$t->cache_lifetime = -1;
-$t->config_dir = '../include';
-$t->template_dir = 'templates';
-$t->compile_dir = SMTY_DIR;
-$t->left_delimiter = '{-';
-$t->right_delimiter = '-}';
-
-// Choose Language
-if (isset($_GET['lang']) && !empty($_GET['lang']))
-	$lg = $_GET['lang'];
-elseif (isset($_SESSION['lang']))
-	$lg = $_SESSION['lang'];
-
-// 2009-02-21 (jhcaiced) Fix some languages from two to three character code
-if ($lg == 'es') { $lg = 'spa'; }
-if ($lg == 'en') { $lg = 'eng'; }
-if ($lg == 'pr') { $lg = 'por'; }
-
-$_SESSION['lang'] = $lg;
-
-$t->assign ("lg", $lg);
 
 </script>
