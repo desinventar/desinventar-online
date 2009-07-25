@@ -10,8 +10,24 @@
 */
 $_SERVER["DI8_WEB"] = '/home/jhcaiced/devel/di8/web';
 require_once('../web/include/loader.php');
-$now = date('c');
-
-print $now . "\n";
-
+require_once('../web/include/diregion.class.php');
+$pdo = new PDO(
+   'mysql:host=localhost;dbname=di8db',
+   '','',
+   array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
+   );
+$RegionList = array();
+foreach($pdo->query("SELECT * FROM Region") as $row) {
+	$RegionList[] = $row['RegionUUID'];
+}
+foreach ($RegionList as $RegionUUID) {
+	foreach($pdo->query("SELECT * FROM Region WHERE RegionUUID='" . $RegionUUID . "'") as $row) {
+		$r = new DIRegion($us);
+		$r->set('CountryIso', $row['CountryIsoCode']);
+		$r->set('RegionLabel', $row['RegionLabel']);
+		$RegionId = $r->buildRegionId();
+		printf("%20s %30s\n", $row['RegionUUID'], $RegionId);
+	}
+}
+$pdo = null;
 </script>
