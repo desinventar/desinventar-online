@@ -105,6 +105,16 @@ class DIImport {
 				$c = new DICause($this->us);
 				$o->set('CauseId', $c->getIdByName($o->get('CauseId')));
 				
+				//2009-07-25 Save fechapor/fechafec in EffectNotes
+				$o->set('EffectNotes', 
+					$o->get('EffectNotes') . ' ' .
+					'(DI6Author : ' . $this->get('RecordAuthor') . ' ' .
+					'DI6Date : ' . $this->get('RecordCreation') . ')'
+					
+				);
+				$this->set('RecordAuthor'  , $us->sUserName);
+				$this->set('RecordCreation', gmdate('c');
+				
 				$bInsert = ($o->validateCreate() > 0);
 				if ($bInsert) {
 					if ($doImport) { $Result = $o->insert(); }
