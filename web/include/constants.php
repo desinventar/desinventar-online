@@ -46,6 +46,7 @@ define ("ERR_INVALID_PASSWD",   -5);
 define ("ERR_ACCESS_DENIED",    -6);
 define ("ERR_OBJECT_NOT_FOUND", -7);
 define ("ERR_CONSTRAINT_FAIL",  -8);
+define ("ERR_FILE_NOT_FOUND",   -9);
 define ("ERR_NO_CONNECTION",    -99);
 
 </script>

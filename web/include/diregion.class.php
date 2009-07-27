@@ -12,21 +12,18 @@ class DIRegion extends DIObject {
 		$this->sFieldDef    = "RegionLabel/STRING," .
 		                      "LangIsoCode/STRING," . 
 		                      "CountryIso/STRING," .
+		                      "RegionOrder/INTEGER," .
 		                      "RegionStatus/INTEGER," .
 		                      "RegionLastUpdate/DATETIME," .
 		                      "IsCRegion/INTEGER," .
 		                      "IsVRegion/INTEGER";
 		$this->sInfoDef     = "DBVersion/STRING," .
-		                      "RegionOrder/INTEGER," .
-		                      "RegionLastUpdate/DATETIME," .
-		                      "IsCRegion/INTEGER," .
-		                      "IsVRegion/INTEGER," .
 		                      "I18NFirstLang/STRING," .
 		                      "I18NSecondLang/STRING," .
 		                      "I18NThirdLang/STRING," .
 		                      "PeriodBeginDate/DATE," .
 		                      "PeriodEndDate/DATE," .
-		                      "PeriodOutOfRange/INTEGER," .
+		                      "OptionOutOfRange/INTEGER," .
 		                      "InfoCredits/STRING," . 
 		                      "InfoGeneral/STRING," . 
 		                      "InfoSources/STRING," .
@@ -38,18 +35,7 @@ class DIRegion extends DIObject {
 		                      "GeoLimitMinX/DOUBLE," . 
 		                      "GeoLimitMinY/DOUBLE," . 
 		                      "GeoLimitMaxX/DOUBLE," . 
-		                      "GeoLimitMaxY/DOUBLE," . 
-		                      "Sync_Info/DATETIME," . 
-		                      "Sync_Event/DATETIME," . 
-		                      "Sync_Cause/DATETIME," . 
-		                      "Sync_GeoLevel/DATETIME," . 
-		                      "Sync_GeoCarto/DATETIME," . 
-		                      "Sync_Geography/DATETIME," . 
-		                      "Sync_Disaster/DATETIME," .
-		                      "Sync_EEField/DATETIME," . 
-		                      "Sync_EEData/DATETIME," . 
-		                      "Sync_EEGroup/DATETIME," . 
-		                      "Sync_DatabaseLog/DATETIME";
+		                      "GeoLimitMaxY/DOUBLE" . 
 		parent::__construct($prmSession);
 		$num_args = func_num_args();
 		$this->set('LangIsoCode', 'spa');
@@ -68,7 +54,7 @@ class DIRegion extends DIObject {
 	} // __construct
 
 	public function loadInfo() {
-		$iReturn = 1;
+		$iReturn = ERR_NO_ERROR;
 		$iReturn = $this->q->setDBConnection($this->get('RegionId'));
 		if ($iReturn > 0) {
 			$this->setConnection($this->get('RegionId'));
@@ -93,10 +79,11 @@ class DIRegion extends DIObject {
 	}
 	
 	public function	saveInfo() {
-		$iReturn = 1;
+		$iReturn = ERR_NO_ERROR;
 		$now = gmdate('c');
 		$this->setConnection($this->get('RegionId'));
 		foreach($this->oField as $k => $v) {
+			fb($k . ' : ' . $v);
 			$sQuery = "DELETE FROM Info WHERE InfoKey='" . $k . "'";
 			$this->conn->query($sQuery);
 			$sQuery = "INSERT INTO Info VALUES ('" . $k . "','" . $now . "','" . $v . "','')";
@@ -130,7 +117,7 @@ class DIRegion extends DIObject {
 	}
 	
 	public function createRegionDB($prmRegionId) {
-		$iReturn = 1;
+		$iReturn = ERR_NO_ERROR;
 		// Create Directory for New Region
 		$DBDir = VAR_DIR . '/' . $prmRegionId . '/';
 		try {
@@ -203,13 +190,13 @@ class DIRegion extends DIObject {
 		$RegionDir = VAR_DIR . '/' . $this->get('RegionId');
 		$RegionItemDir = VAR_DIR . '/' . $prmRegionItemId;
 		$RegionItemDB = $RegionItemDir . '/desinventar.db';
-		$iReturn = 1;
+		$iReturn = ERR_NO_ERROR;
 		if ($prmRegionItemId == '') {
-			$iReturn = -1;
+			$iReturn = ERR_UNKNOWN_ERROR;
 		}
 		if ($iReturn > 0) {
 			if (!file_exists($RegionItemDB)) {
-				$iReturn = -2;
+				$iReturn = ERR_FILE_NOT_FOUND;
 			}	
 		}
 		if ($iReturn > 0) {
@@ -389,10 +376,10 @@ class DIRegion extends DIObject {
 	}
 	
 	public function getGeoLevelCount() {
-		$iReturn = 0;
+		$iAnswer = 0;
 		$g = new DIGeoLevel($this->session, 0);
-		$iReturn = $g->getMaxGeoLevel();
-		return $iReturn;
+		$iAnswer = $g->getMaxGeoLevel();
+		return $iAnswer;
 	}
 	
 	public function getDBInfoValue($prmInfoKey) {
