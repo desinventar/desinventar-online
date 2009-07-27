@@ -8,20 +8,6 @@
 
 //ob_start( 'ob_gzhandler' );
 
-// 2009-07-04 (jhcaiced) Added FirePHP debug system
-// This lines try to detect if FirePHP Core is installed,
-// if not, create a dummy class/function to avoid errors.
-if (file_exists('/usr/share/pear/FirePHPCore/fb.php')) {
-	require_once('FirePHPCore/fb.php');
-} else {
-	function fb() {
-		// dummy fb() function, doesn't do anything...
-	}
-}
-
-function showErrorMsg($sMsg) {
-	fb($sMsg);
-}
 
 /* SETTINGS */
 // "C:/desinventar8/ms4w/Apache/htdocs/";
@@ -59,6 +45,27 @@ if (isset($_SERVER["HTTP_HOST"])) {
 } else {
 	// Running a Command Line Script
 	define('MODE', "command");
+}
+
+// 2009-07-04 (jhcaiced) Added FirePHP debug system
+// This lines try to detect if FirePHP Core is installed,
+// if not, create a dummy class/function to avoid errors.
+if (MODE != 'command') {
+	if (file_exists('/usr/share/pear/FirePHPCore/fb.php')) {
+		require_once('FirePHPCore/fb.php');
+	} else {
+		function fb() {
+			// dummy fb() function, doesn't do anything...
+		}
+	}
+} else {
+		function fb($Msg) {
+			print "fb: " . $Msg . "\n";
+		}
+}
+
+function showErrorMsg($sMsg) {
+	fb($sMsg);
 }
 
 /* Configure BASE Directory from HTTPD Config - Linux + WIndows */

@@ -113,7 +113,7 @@ class DIImport {
 					
 				);
 				$this->set('RecordAuthor'  , $us->sUserName);
-				$this->set('RecordCreation', gmdate('c');
+				$this->set('RecordCreation', gmdate('c'));
 				
 				$bInsert = ($o->validateCreate() > 0);
 				if ($bInsert) {
@@ -156,4 +156,3 @@ class DIImport {
 } //class
 
 </script>
-

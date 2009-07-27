@@ -31,7 +31,7 @@ class UserSession {
 	
 	// Read Session Information from Database
 	public function load($prmSessionId) {
-		$iReturn = 0;
+		$iReturn = ERR_UNKNOWN_ERROR;
 		$sQuery = "SELECT * FROM UserSession WHERE SessionId='" . $prmSessionId . "'";
 		try {
 			if ($result = $this->q->core->query($sQuery, PDO::FETCH_OBJ)) {
@@ -41,7 +41,7 @@ class UserSession {
 					$this->sUserName   = $row->UserName;
 					$this->dStart      = $row->Start;
 					$this->dLastUpdate = $row->LastUpdate;
-					$iReturn = 1;
+					$iReturn = ERR_NO_ERROR;
 				}
 			}
 		} catch (Exception $e) {
@@ -57,14 +57,14 @@ class UserSession {
 
 	// Set LastUpdate field of Session so it will not expire...
 	public function awake() {
-		$iReturn = 1;
+		$iReturn = ERR_NO_ERROR;
 		$this->dLastUpdate = gmdate('c');
 		$iReturn = $this->update();
 		return $iReturn;
 	}
 
 	public function login($prmUserName, $prmUserPasswd) {
-		$iReturn = 0;
+		$iReturn = ERR_NO_ERROR;
 		if ($this->validateUser($prmUserName, $prmUserPasswd) > 0) {
 			$iReturn = $this->setUser($prmUserName);
 		}
@@ -76,12 +76,11 @@ class UserSession {
 	}
 
 	public function setUser($prmUserName) {
-		$iReturn = 0;
-		$sQuery = 
-		  "UPDATE UserSession SET UserName='" . $prmUserName . "' " .
-		  "WHERE SessionId='" . $this->sSessionId . "'";
+		$iReturn = ERR_DEFAULT_ERROR;
+		$sQuery = "UPDATE UserSession SET UserName='" . $prmUserName . "' " .
+		          "WHERE SessionId='" . $this->sSessionId . "'";
 		if ($result = $this->q->core->query($sQuery)) {
-			$iReturn = 1;
+			$iReturn = ERR_NO_ERROR;
 			$this->sUserName = $prmUserName;
 		}
 		return $iReturn;
@@ -90,7 +89,7 @@ class UserSession {
 	// Start a Session by creating a record in the database
 	// this could be an anonymous or authenticated session
 	public function insert() {
-		$iReturn = 0;
+		$iReturn = ERR_DEFAULT_ERROR;
 		$sQuery = "INSERT INTO UserSession VALUES (" . 
 				  "'" . $this->sSessionId . "'," .
 				  "'" . $this->sRegionId  . "'," .
@@ -100,14 +99,14 @@ class UserSession {
 				  "'" . $this->dLastUpdate . "'" .
 				  ")";
 		if ($result = $this->q->core->query($sQuery)) {
-			$iReturn = 1;
+			$iReturn = ERR_NO_ERROR;
 		}
 		return $iReturn;
 	} // insert()
 
 	// Update information about this session in database
 	public function update() {
-		$iReturn = 0;
+		$iReturn = ERR_DEFAULT_ERROR;
 		// Always update this field...
 		$this->dLastUpdate = gmdate('c');
 		$sQuery = "UPDATE UserSession SET " . 
@@ -120,7 +119,7 @@ class UserSession {
 		if ($result = $this->q->core->query($sQuery)) {
 			$sQuery = "UPDATE UserLockList SET LastUpdate='" . $this->dLastUpdate . "' WHERE SessionId='" . $this->sSessionId . "'";
 			$this->q->core->query($sQuery);
-			$iReturn = 1;
+			$iReturn = ERR_NO_ERROR;
 		}
 		return $iReturn;
 	} // update()
@@ -128,12 +127,12 @@ class UserSession {
 	// Close a session, removing the session information from the
 	// database.	
 	public function delete() {
-		$iReturn = 0;
+		$iReturn = ERR_DEFAULT_ERROR;
 		$sQuery = "DELETE FROM UserSession WHERE SessionId='" . $this->sSessionId . "'";
 		if ($result = $this->q->core->query($sQuery)) {
 			$this->sUserName = "";
 			$this->sRegionId = "";
-			$iReturn = 1;
+			$iReturn = ERR_NO_ERROR;
 		}
 		return $iReturn;
 	} // delete()
@@ -158,17 +157,17 @@ class UserSession {
 
 	// Validate a user/passwd pair against database
 	public function validateUser($prmUserName, $prmUserPasswd) {
-		$iReturn = 0;
+		$iReturn = ERR_DEFAULT_ERROR;
 		if ( ($prmUserName == "") && ($prmUserPasswd == "")) {
 			// This is an anonymous session
-			$iReturn = 1;
+			$iReturn = ERR_NO_ERROR;
 		} else {
 			$sQuery = "SELECT * FROM User WHERE UserName='" . $prmUserName . "'";
 			try {
 				$result = $this->q->core->query($sQuery);
 				while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 					if ($row->UserPasswd == $prmUserPasswd) {
-						$iReturn = 1;
+						$iReturn = ERR_NO_ERROR;
 					}
 				} // while
 			} catch (Exception $e) {
@@ -296,9 +295,9 @@ class UserSession {
 	} // function
 	
 	public function setUserRole($prmUserName, $prmRegionId, $prmRole) {
-		$iReturn = 1;
-		if ($prmUserName == '') { $iReturn = -1; }
-		if ($prmRegionId == '') { $iReturn = -1; }
+		$iReturn = ERR_NO_ERROR;
+		if ($prmUserName == '') { $iReturn = ERR_DEFAULT_ERROR; }
+		if ($prmRegionId == '') { $iReturn = ERR_DEFAULT_ERROR; }
 		
 		if ($iReturn > 0) {
 			// Remove All Permissions for This User on This Database
