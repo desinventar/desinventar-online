@@ -37,6 +37,7 @@ define ("CMD_DELETE",		3);
 
 // Error Codes
 define ("ERR_NO_ERROR",          1);
+define ("ERR_DEFAULT_ERROR",    -1);
 define ("ERR_UNKNOWN_ERROR",    -1);
 define ("ERR_INVALID_COMMAND",  -2);
 define ("ERR_OBJECT_EXISTS",    -3);
