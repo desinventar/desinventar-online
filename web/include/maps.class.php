@@ -135,7 +135,7 @@ class Maps
 	function setLayerAdm($gl, $reg, $typ) {
 		$map = "";
 		$type = "POLYGON";
-		$color = "255 255 255";
+		$col = 50;
 		foreach ($gl as $k=>$i) {
 			foreach ($i[2] as $ly) {
 				$lp = VAR_DIR . '/' . $reg ."/". $ly[1];
@@ -166,9 +166,8 @@ class Maps
 					}
 					$map .= '
       CLASS
-        # COLOR	'. $color;
-					$map .= '
-        OUTLINECOLOR 50 50 50';
+        OUTLINECOLOR '. $col .' '. $col .' '. $col;
+					$col += 50;
 					$map .= '
         LABEL
 			  	TYPE TRUETYPE		FONT "arial"		SIZE 6		COLOR	0 0 89

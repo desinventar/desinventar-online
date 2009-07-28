@@ -678,7 +678,7 @@ class Query extends PDO
     //$datedb = $this->getDateRange();
 	// Add Custom Query..
 	if (isset($dat['__CusQry']) && !empty($dat['__CusQry']))
-		$cusqry = "AND (". $dat['__CusQry'] .")";
+		$cusqry = "AND (". $dat['__CusQry'] .") ";
     foreach ($dat as $k=>$v) {
       // replace D_ by D.
       if (substr($k, 1, 1) == "_")
