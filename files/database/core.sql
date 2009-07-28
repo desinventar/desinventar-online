@@ -1,5 +1,5 @@
 /* CORE.DB - DesInventar8.2
-2009-07-09
+2009-07-28
 */
 
 DROP TABLE IF EXISTS Region;
@@ -94,3 +94,4 @@ INSERT INTO User VALUES ('root', 'root@localhost', 'di8welcome', 'Portal Adminis
 INSERT INTO RegionAuth VALUES ('root', '', 'REGION', 5, '');
 INSERT INTO RegionAuth VALUES ('root', '', 'USER', 5, '');
 INSERT INTO RegionAuth VALUES ('root', '', 'ROLE', 0, 'ADMINPORTAL');
+

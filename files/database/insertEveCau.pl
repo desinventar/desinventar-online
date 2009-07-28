@@ -32,11 +32,10 @@ $sth->execute();
 while (my $row = $sth->fetchrow_hashref) {
 	$sNow = strftime("%Y-%m-%d %H:%M:%S", gmtime); # ISO8601
 	$Query = sprintf("INSERT INTO %s VALUES " . 
-		"('%s','%s','%s','%s',\"%s\",%d,%d,'%s','%s','%s','%s');",
+		"('%s','%s','%s',\"%s\",%d,%d,'%s','%s','%s','%s','%s');",
 		$sTableName,
 		$row->{$sTableName . 'Id'},
 		$sLangIsoCode,
-		$sNow,
 		$row->{$sTableName . 'Name(' . $sLangIsoCode . ')'},
 		$row->{$sTableName . 'Desc(' . $sLangIsoCode . ')'},
 		1, # Active
@@ -44,6 +43,7 @@ while (my $row = $sth->fetchrow_hashref) {
 		$row->{$sTableName . 'RGBColor'},
 		$row->{$sTableName . 'KeyWords'},
 		$row->{$sTableName . 'CreationDate'},
+		$sNow,
 		$row->{$sTableName . 'LastUpdate'}
 	);
 	print $Query . "\n";
