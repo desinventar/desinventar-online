@@ -20,13 +20,38 @@ $RegionList = array();
 foreach($pdo->query("SELECT * FROM Region") as $row) {
 	$RegionList[] = $row['RegionUUID'];
 }
+$RegionList = array('COLOMBIA');
 foreach ($RegionList as $RegionUUID) {
 	foreach($pdo->query("SELECT * FROM Region WHERE RegionUUID='" . $RegionUUID . "'") as $row) {
 		$r = new DIRegion($us);
-		$r->set('CountryIso', $row['CountryIsoCode']);
-		$r->set('RegionLabel', $row['RegionLabel']);
+		$r->set('CountryIso'     , $row['CountryIsoCode']);
+		$r->set('RegionLabel'    , $row['RegionLabel']);
 		$RegionId = $r->buildRegionId();
-		printf("%20s %30s\n", $row['RegionUUID'], $RegionId);
+		$r->set('RegionId'       , $RegionId);
+		$r->set('InfoGeneral'    , $row['RegionDesc']);
+		$r->set('InfoGeneral_eng', $row['RegionDescEN']);
+		$r->setActive($row['RegionActive']);
+		$r->setPublic($row['RegionPublic']);
+		$LangIsoCode = $row['RegionLangCode'];
+		if ($LangIsoCode == 'es') { $LangIsoCode = 'spa'; }
+		if ($LangIsoCode == 'en') { $LangIsoCode = 'eng'; }
+		$r->set('LangIsoCode'      , $LangIsoCode);
+		$r->set('CountryIso'       , $row['CountryIsoCode']);
+		$r->set('PeriodBeginDate'  , $row['PeriodBeginDate']);
+		$r->set('PeriodEndDate'    , $row['PeriodEndDate']);
+		$r->set('OptionAdminURL'   , $row['OptionAdminURL']);
+		$r->set('OptionOutOfPeriod', $row['OptionOutOfPeriod']);
+		$r->set('GeoLimitMinX'     , $row['GeoLimitMinX']);
+		$r->set('GeoLimitMaxX'     , $row['GeoLimitMaxX']);
+		$r->set('GeoLimitMinY'     , $row['GeoLimitMinY']);
+		$r->set('GeoLimitMaxY'     , $row['GeoLimitMaxY']);
+		$r->set('InfoCredits'      , $row['RegionCredits']);
+		print $r->get('RegionId') . "\n";
+		//$r->createRegionDB();
+		//$r->insert();
+		$data_dir = '/var/lib/desinventar';
+		$cmd = "./mysql2sqlite.pl -r " . $row['RegionUUID'] . " | sqlite3 " . $data_dir . "/" . $r->get('RegionId') . "/desinventar.db";
+		print "$cmd\n";
 	}
 }
 $pdo = null;
