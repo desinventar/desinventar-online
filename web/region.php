@@ -68,7 +68,7 @@ if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
 	$t->assign ("ctl_showreg", true);
 	$reg = $q->getDBInfo();
 	$t->assign ("log", $q->getRegLogList());
-	$t->assign ("lang", $reg['I18NFirstLang']);
+	$t->assign ("lang", $reg['LangIsoCode']);
 	$t->assign ("dbadm", $reg['InfoAdminURL']);
 	if (isset($_GET['cmd']) && $_GET['cmd'] == "info")
 		$t->assign ("ctl_reginfo", true);

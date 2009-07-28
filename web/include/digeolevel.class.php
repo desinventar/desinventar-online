@@ -16,7 +16,6 @@ class DIGeoLevel extends DIObject {
 		                      "GeoLevelActive/INTEGER";
 		parent::__construct($prmSession);
 		$this->set("GeoLevelActive", 1);
-		$this->set("LangIsoCode", $this->q->getDBInfoValue('I18NFirstLang'));
 
 		$num_args = func_num_args();
 		if ($num_args >= 2) {

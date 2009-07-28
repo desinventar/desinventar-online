@@ -18,9 +18,6 @@ class DIRegion extends DIObject {
 		                      "IsCRegion/INTEGER," .
 		                      "IsVRegion/INTEGER";
 		$this->sInfoDef     = "DBVersion/STRING," .
-		                      "I18NFirstLang/STRING," .
-		                      "I18NSecondLang/STRING," .
-		                      "I18NThirdLang/STRING," .
 		                      "PeriodBeginDate/DATE," .
 		                      "PeriodEndDate/DATE," .
 		                      "OptionOutOfRange/INTEGER," .
@@ -101,17 +98,10 @@ class DIRegion extends DIObject {
 		if ($iReturn > 0) {
 			$iReturn = $this->loadInfo();
 		}
-		$this->updateFields();
 		return $iReturn;
 	}
 	
-	public function updateFields() {
-		// 2009-07-21 (jhcaiced) Fix LangIsoCode values
-		$this->set('LangIsoCode', $this->get('I18NFirstLang'));
-	}
-	
 	public function update() {
-		$this->updateFields();
 		// Call the original update() function, update core.Region table
 		$iReturn = parent::update();
 		if ($iReturn > 0) {
