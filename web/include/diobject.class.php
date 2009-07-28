@@ -34,7 +34,8 @@ class DIObject {
 		$this->oFieldType=array();
 		$this->createFields($this->sFieldKeyDef);
 		$this->createFields($this->sFieldDef);
-		$this->set("LangIsoCode", $this->q->getDBInfoValue('LangIsoCode'));
+		$this->set('RegionId', $this->session->sRegionId);
+		$this->set('LangIsoCode', $this->q->getDBInfoValue('LangIsoCode'));
 	} // constructor
 	
 	public function setConnection($prmDB) {
