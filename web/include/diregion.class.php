@@ -25,7 +25,8 @@ class DIRegion extends DIObject {
 		                      "PeriodEndDate/DATE," .
 		                      "OptionOutOfRange/INTEGER," .
 		                      "InfoCredits/STRING," . 
-		                      "InfoGeneral/STRING," . 
+		                      "InfoGeneral/STRING," .
+		                      "InfoGeneral_eng/STRING," . 
 		                      "InfoSources/STRING," .
 		                      "InfoSynopsis/STRING," . 
 		                      "InfoObservation/STRING," . 
@@ -83,7 +84,6 @@ class DIRegion extends DIObject {
 		$now = gmdate('c');
 		$this->setConnection($this->get('RegionId'));
 		foreach($this->oField as $k => $v) {
-			fb($k . ' : ' . $v);
 			$sQuery = "DELETE FROM Info WHERE InfoKey='" . $k . "'";
 			$this->conn->query($sQuery);
 			$sQuery = "INSERT INTO Info VALUES ('" . $k . "','" . $now . "','" . $v . "','')";
@@ -101,12 +101,17 @@ class DIRegion extends DIObject {
 		if ($iReturn > 0) {
 			$iReturn = $this->loadInfo();
 		}
-		// 2009-07-21 (jhcaiced) Fix LangIsoCode values
-		$this->set('LangIsoCode', $this->get('I18NFirstLang'));
+		$this->updateFields();
 		return $iReturn;
 	}
 	
+	public function updateFields() {
+		// 2009-07-21 (jhcaiced) Fix LangIsoCode values
+		$this->set('LangIsoCode', $this->get('I18NFirstLang'));
+	}
+	
 	public function update() {
+		$this->updateFields();
 		// Call the original update() function, update core.Region table
 		$iReturn = parent::update();
 		if ($iReturn > 0) {
@@ -116,10 +121,12 @@ class DIRegion extends DIObject {
 		return $iReturn;
 	}
 	
-	public function createRegionDB($prmRegionId) {
+	public function createRegionDB() {
 		$iReturn = ERR_NO_ERROR;
+		$prmRegionId = $this->get('RegionId');
 		// Create Directory for New Region
 		$DBDir = VAR_DIR . '/' . $prmRegionId . '/';
+		fb($DBDir);
 		try {
 			if (!file_exists($DBDir)) {
 				mkdir($DBDir);
@@ -437,6 +444,23 @@ class DIRegion extends DIObject {
 		$RegionId = $CountryIso . '-' . $Timestamp . '-' . $RegionLabel;
 		return $RegionId;
 	} //buildRegionId
+	
+	public function setActive($prmValue) {
+		return $this->setBit($prmValue, CONST_REGIONACTIVE);
+	}
+	public function setPublic($prmValue) {
+		return $this->setBit($prmValue, CONST_REGIONPUBLIC);
+	}
+	public function setBit($prmValue, $prmBit) {
+		$Value = (int)$this->get('RegionStatus');
+		if ($prmValue > 0) {
+			$Value = $Value | $prmBit;
+		} else {
+			$Value = $Value & ~$prmBit;
+		}
+		$this->set('RegionStatus', $Value);
+	}
+	
 } //class
 
 </script>
