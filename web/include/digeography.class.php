@@ -16,7 +16,6 @@ class DIGeography extends DIObject {
 		                      "GeographyLevel/INTEGER," .
 		                      "GeographyActive/BOOLEAN";
 		parent::__construct($prmSession);
-		$this->set("LangIsoCode", $this->q->getDBInfoValue('I18NFirstLang'));
 		$num_args = func_num_args();
 		if ($num_args >= 2) {
 			$prmGeographyId = func_get_arg(1);

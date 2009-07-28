@@ -22,7 +22,6 @@ class DICause extends DIObject {
 		parent::__construct($prmSession);
 		$this->set("CausePredefined", 0);
 		$this->set("CauseActive", 1);
-		$this->set("LangIsoCode", $this->q->getDBInfoValue('I18NFirstLang'));
 		$this->set("CauseId", uuid());
 
 		$num_args = func_num_args();

@@ -75,7 +75,6 @@ class DIDisaster extends DIObject {
 		parent::__construct($prmSession);
 		$this->set("EventPredefined", 0);
 		$this->set("EventActive", 1);
-		$this->set("LangIsoCode", $this->q->getDBInfoValue('I18NFirstLang'));
 		$this->set('DisasterId', uuid());
 
 		$num_args = func_num_args();
