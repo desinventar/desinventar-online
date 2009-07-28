@@ -8,10 +8,11 @@ class UserSession {
 	var $q               = null;
 	var $sSessionId      = '';
 	var $sRegionId       = '';
-	var $LangIsoCode = 'eng';
+	var $LangIsoCode     = 'eng';
 	var $sUserName       = '';
 	var $dStart          = '';
 	var $dLastUpdate     = '';
+
 	public function __construct() {
 		$this->sSessionId = session_id();
 		$this->dStart = gmdate('c');
@@ -26,6 +27,8 @@ class UserSession {
 				$this->sRegionId = func_get_arg(1);
 			}
 		}
+		$this->sUserName = '';
+		$this->LangIsoCode = 'eng';
 		$this->load($this->sSessionId);
 	} //constructor
 	
@@ -34,21 +37,19 @@ class UserSession {
 		$iReturn = ERR_UNKNOWN_ERROR;
 		$sQuery = "SELECT * FROM UserSession WHERE SessionId='" . $prmSessionId . "'";
 		try {
-			if ($result = $this->q->core->query($sQuery, PDO::FETCH_OBJ)) {
-				while ($row = $result->fetch()) {
-					$this->sSessionId  = $row->SessionId;
-					$this->sRegionId   = $row->RegionId;
-					$this->sUserName   = $row->UserName;
-					$this->dStart      = $row->Start;
-					$this->dLastUpdate = $row->LastUpdate;
-					$iReturn = ERR_NO_ERROR;
-				}
-			}
+			foreach($this->q->core->query($sQuery) as $row) {
+				$this->sSessionId  = $row['SessionId'];
+				$this->sRegionId   = $row['RegionId'];
+				$this->sUserName   = $row['UserName'];
+				$this->dStart      = $row['Start'];
+				$this->dLastUpdate = $row['LastUpdate'];
+				$iReturn = ERR_NO_ERROR;
+			} //foreach
 		} catch (Exception $e) {
 			showErrorMsg($e->getMessage());
 		}
 		// If session doesn't exist in database, insert record
-		if (! $iReturn) {
+		if ($iReturn < 0) {
 			$this->insert();
 		}
 		$this->q->setDBConnection($this->sRegionId);
