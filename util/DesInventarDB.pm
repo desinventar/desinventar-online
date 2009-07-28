@@ -46,59 +46,64 @@ $VERSION = '1.1';
             'Event' =>
                 {'EventId/STRING'             => undef,
                  'LangIsoCode/STRING'         => 'spa',
-                 'SyncRecord/DATETIME'        => 'DATETIME',
                  'EventName/STRING'           => 'EventLocalName',
                  'EventDesc/STRING'           => 'EventLocalDesc',
                  'EventActive/INTEGER'        => undef,
                  'EventPreDefined/INTEGER'    => undef,
                  'EventRGBColor/STRING'       => '',
                  'EventKeyWords/STRING'       => '',
-                 'EventCreationDate/DATETIME' => undef,
-                 'EventLastUpdate/DATETIME'   => 'EventCreationDate'
+                 'RecordCreation/DATETIME'    => 'DATETIME',
+                 'RecordSync/DATETIME'        => 'DATETIME',
+                 'RecordUpdate/DATETIME'      => 'DATETIME'
                 },
             'Cause' =>
                 {'CauseId/STRING'             => undef,
                  'LangIsoCode/STRING'         => 'spa',
-                 'SyncRecord/DATETIME'        => 'DATETIME',
                  'CauseName/STRING'           => 'CauseLocalName',
                  'CauseDesc/STRING'           => 'CauseLocalDesc',
                  'CauseActive/INTEGER'        => undef,
                  'CausePreDefined/INTEGER'    => undef,
                  'CauseRGBColor/STRING'       => '',
                  'CauseKeyWords/STRING'       => '',
-                 'CauseCreationDate/DATETIME' => undef,
-                 'CauseLastUpdate/DATETIME'   => 'CauseCreationDate'
+                 'RecordCreation/DATETIME'    => 'DATETIME',
+                 'RecordSync/DATETIME'        => 'DATETIME',
+                 'RecordUpdate/DATETIME'      => 'DATETIME'
                 },
             'GeoLevel' =>
                 {'GeoLevelId/INTEGER'         => undef,
                  'LangIsoCode/STRING'         => 'spa',
-                 'SyncRecord/DATETIME'        => 'DATETIME',
                  'GeoLevelName/STRING'        => undef,
                  'GeoLevelDesc/STRING'        => undef,
-                 'GeoLevelActive/INTEGER'     => 1
+                 'GeoLevelActive/INTEGER'     => 1,
+                 'RecordCreation/DATETIME'    => 'DATETIME',
+                 'RecordSync/DATETIME'        => 'DATETIME',
+                 'RecordUpdate/DATETIME'      => 'DATETIME'
                 },
 			'GeoCarto' =>
 				{'GeographyId/STRING'         => undef,
 				 'GeoLevelId/INTEGER'         => undef,
 				 'LangIsoCode/STRING'         => 'spa',
 				 'RegionId/STRING'            => undef,
-				 'SyncRecord/DATETIME'        => 'DATETIME',
                  'GeoLevelLayerFile/STRING'   => undef,
                  'GeoLevelLayerName/STRING'   => undef,
-                 'GeoLevelLayerCode/STRING'   => undef
+                 'GeoLevelLayerCode/STRING'   => undef,
+                 'RecordCreation/DATETIME'    => 'DATETIME',
+                 'RecordSync/DATETIME'        => 'DATETIME',
+                 'RecordUpdate/DATETIME'      => 'DATETIME'
                 },
             'Geography' =>
                 {'GeographyId/STRING'         => undef,
                  'LangIsoCode/STRING'         => 'spa',
-                 'SyncRecord/DATETIME'        => 'DATETIME',
                  'GeographyCode/STRING'       => undef,
                  'GeographyName/STRING'       => undef,
                  'GeographyLevel/INTEGER'     => undef,
                  'GeographyActive/INTEGER'    => undef,
+                 'RecordCreation/DATETIME'    => 'DATETIME',
+                 'RecordSync/DATETIME'        => 'DATETIME',
+                 'RecordUpdate/DATETIME'      => 'DATETIME'
                 },
             'Disaster' =>
                 {'DisasterId/STRING'          => undef,
-                 'SyncRecord/DATETIME'        => 'DATETIME',
                  'DisasterSerial/STRING'      => undef,
                  'DisasterBeginTime/STRING'   => undef,
                  'DisasterGeographyId/STRING' => undef,
@@ -108,10 +113,7 @@ $VERSION = '1.1';
                  'DisasterSource/STRING'      => undef,
                  # Record Data
                  'RecordStatus/STRING'        => undef,
-                 'RecordStatus/STRING'        => undef,
                  'RecordAuthor/STRING'        => undef,
-                 'RecordCreation/DATETIME'    => undef,
-                 'RecordLastUpdate/DATETIME'  => undef,
                  # Event Fields
                  'EventId/STRING'             => undef,
                  'EventNotes/STRING'          => undef,
@@ -161,36 +163,44 @@ $VERSION = '1.1';
                  'SectorPower/INTEGER'               => undef,
                  'SectorIndustry/INTEGER'            => undef,
                  'SectorHealth/INTEGER'              => undef,
-                 'SectorOther/INTEGER'               => undef
+                 'SectorOther/INTEGER'               => undef,
+                 'RecordCreation/DATETIME'           => 'DATETIME',
+                 'RecordSync/DATETIME'               => 'DATETIME',
+                 'RecordUpdate/DATETIME'             => 'DATETIME'
                 },
              'DatabaseLog' => 
                 {'DBLogDate/DATETIME'                => undef,
-                 'SyncRecord/DATETIME'               => 'DATETIME',
                  'DBLogType/STRING'                  => undef,
                  'DBLogNotes/STRING'                 => undef,
                  'DBLogUserName/STRING'              => undef
                 },
              'EEField' =>
                 {'EEFieldId/STRING'      => undef,
-                 'SyncRecord/DATETIME'   => 'DATETIME',
                  'EEGroupId/STRING'      => undef,
                  'EEFieldLabel/STRING'   => undef,
                  'EEFieldDesc/STRING'    => undef,
                  'EEFieldType/STRING'    => undef,
                  'EEFieldSize/INTEGER'   => undef,
                  'EEFieldOrder/INTEGER'  => undef,
-                 'EEFieldStatus/INTEGER' => 'EEFieldActive'
+                 'EEFieldStatus/INTEGER' => 'EEFieldActive',
+                 'RecordCreation/DATETIME'           => 'DATETIME',
+                 'RecordSync/DATETIME'               => 'DATETIME',
+                 'RecordUpdate/DATETIME'             => 'DATETIME'
                 },
              'EEGroup' =>
                 {'EEGroupId/STRING'      => undef,
-                 'SyncRecord/DATETIME'   => 'DATETIME',
                  'EEGroupLabel/STRING'   => undef,
                  'EEGroupDesc/STRING'    => undef,
-                 'EEGroupStatus/INTEGER' => 'EEGroupActive'
+                 'EEGroupStatus/INTEGER' => 'EEGroupActive',
+                 'RecordCreation/DATETIME'           => 'DATETIME',
+                 'RecordSync/DATETIME'               => 'DATETIME',
+                 'RecordUpdate/DATETIME'             => 'DATETIME'
                 },
              'EEData' =>
                 {'DisasterId/STRING'     => undef,
-                 'SyncRecord/DATETIME'   => 'DATETIME'
+                 'RecordCreation/DATETIME'           => 'DATETIME',
+                 'RecordSync/DATETIME'               => 'DATETIME',
+                 'RecordUpdate/DATETIME'             => 'DATETIME'
                 }
             );
 1;
