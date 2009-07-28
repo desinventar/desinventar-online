@@ -10,15 +10,15 @@ class DIEvent extends DIObject {
 		$this->sPermPrefix  = "EVENT";
 		$this->sFieldKeyDef = "EventId/STRING," .
 		                      "LangIsoCode/STRING";
-		$this->sFieldDef    = "SyncRecord/DATETIME," .
-		                      "EventName/STRING," .
+		$this->sFieldDef    = "EventName/STRING," .
 		                      "EventDesc/STRING," .
 		                      "EventActive/BOOLEAN," .  
 		                      "EventPredefined/BOOLEAN," .
 		                      "EventRGBColor/STRING," .
 		                      "EventKeyWords/STRING," .
-		                      "EventCreationDate/DATETIME," .
-		                      "EventLastUpdate/DATETIME";
+		                      "RecordCreation/DATETIME," .
+		                      "RecordSync/DATETIME," .
+		                      "RecordUpdate/DATETIME";
 		parent::__construct($prmSession);
 		$this->set("EventPredefined", 0);
 		$this->set("EventActive", 1);

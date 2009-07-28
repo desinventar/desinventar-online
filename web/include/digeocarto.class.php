@@ -11,11 +11,13 @@ class DIGeoCarto extends DIObject {
 		$this->sFieldKeyDef = "GeoLevelId/INTEGER," .
 		                      "GeographyId/STRING," .
 		                      "LangIsoCode/STRING";
-		$this->sFieldDef    = "SyncRecord/DATETIME," .
-		                      "RegionId/STRING," .
+		$this->sFieldDef    = "RegionId/STRING," .
 		                      "GeoLevelLayerFile/STRING," .
 		                      "GeoLevelLayerName/STRING," .
-		                      "GeoLevelLayerCode/STRING";
+		                      "GeoLevelLayerCode/STRING," .
+		                      "RecordCreation/DATETIME," .
+		                      "RecordSync/DATETIME," .
+		                      "RecordUpdate/DATETIME";
 		parent::__construct($prmSession);
 
 		$num_args = func_num_args();

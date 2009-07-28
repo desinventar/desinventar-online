@@ -7,18 +7,18 @@
 class DICause extends DIObject {
 	public function __construct($prmSession) {
 		$this->sTableName   = "Cause";
-		$this->sPermPrefix  = "EVENT";
+		$this->sPermPrefix  = "CAUSE";
 		$this->sFieldKeyDef = "CauseId/STRING," .
 		                      "LangIsoCode/STRING";
-		$this->sFieldDef    = "SyncRecord/DATETIME," .
-		                      "CauseName/STRING," .
+		$this->sFieldDef    = "CauseName/STRING," .
 		                      "CauseDesc/STRING," .
 		                      "CauseActive/BOOLEAN," .  
 		                      "CausePredefined/BOOLEAN," .
 		                      "CauseRGBColor/STRING," .
 		                      "CauseKeyWords/STRING," .
-		                      "CauseCreationDate/DATETIME," .
-		                      "CauseLastUpdate/DATETIME";
+		                      "RecordCreation/DATETIME," .
+		                      "RecordSync/DATETIME," .
+		                      "RecordUpdate/DATETIME";
 		parent::__construct($prmSession);
 		$this->set("CausePredefined", 0);
 		$this->set("CauseActive", 1);

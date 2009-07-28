@@ -502,10 +502,19 @@ class Query extends PDO
 			$fld[] = $key;
 		}
 		// (jhcaiced) SyncRecord should not appear in data grid
+		/*
+		foreach (array('RecordSync','RecordUpdate') as $item) {
+			if (array_key_exists($item, $fld)) { 
+				unset $fld[$item]; 
+			}
+		}
+		*/
+		/*
 		$pos = array_search('SyncRecord', $fld);
 		if ($pos) {
 			unset($fld[$pos]);
 		}
+		*/
 		return $fld;
   }
 

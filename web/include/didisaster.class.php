@@ -9,8 +9,7 @@ class DIDisaster extends DIObject {
 		$this->sTableName   = "Disaster";
 		$this->sPermPrefix  = "DISASTER";
 		$this->sFieldKeyDef = "DisasterId/STRING";
-		$this->sFieldDef    = "SyncRecord/DATETIME," .
-		                      "DisasterSerial/STRING," .
+		$this->sFieldDef    = "DisasterSerial/STRING," .
 		                      "DisasterBeginTime/STRING," .
 		                      "DisasterGeographyId/STRING," .
 		                      "DisasterSiteNotes/STRING," .
@@ -21,7 +20,8 @@ class DIDisaster extends DIObject {
 		                      "RecordStatus/STRING," .
 		                      "RecordAuthor/STRING," .
 		                      "RecordCreation/DATETIME," .
-		                      "RecordLastUpdate/DATETIME," .
+		                      "RecordSync/DATETIME," .
+		                      "RecordUpdate/DATETIME," .
 		                      
 		                      "EventId/STRING," .
 		                      "EventNotes/STRING," .

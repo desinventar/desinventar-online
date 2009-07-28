@@ -10,10 +10,12 @@ class DIGeoLevel extends DIObject {
 		$this->sPermPrefix  = "GEOLEVEL";
 		$this->sFieldKeyDef = "GeoLevelId/INTEGER," .
 		                      "LangIsoCode/STRING";
-		$this->sFieldDef    = "SyncRecord/DATETIME," .
-		                      "GeoLevelName/STRING," .
+		$this->sFieldDef    = "GeoLevelName/STRING," .
 		                      "GeoLevelDesc/STRING," .  
-		                      "GeoLevelActive/INTEGER";
+		                      "GeoLevelActive/INTEGER," .
+		                      "RecordCreation/DATETIME," .
+		                      "RecordSync/DATETIME," .
+		                      "RecordUpdate/DATETIME";
 		parent::__construct($prmSession);
 		$this->set("GeoLevelActive", 1);
 

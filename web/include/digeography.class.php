@@ -10,11 +10,13 @@ class DIGeography extends DIObject {
 		$this->sPermPrefix  = "GEOGRAPHY";
 		$this->sFieldKeyDef = "GeographyId/STRING," .
 		                      "LangIsoCode/STRING";
-		$this->sFieldDef    = "SyncRecord/DATETIME," .
-		                      "GeographyCode/STRING," .
+		$this->sFieldDef    = "GeographyCode/STRING," .
 		                      "GeographyName/STRING," .  
 		                      "GeographyLevel/INTEGER," .
-		                      "GeographyActive/BOOLEAN";
+		                      "GeographyActive/BOOLEAN," .
+		                      "RecordCreation/DATETIME," .
+		                      "RecordSync/DATETIME," . 
+		                      "RecordUpdate/DATETIME";
 		parent::__construct($prmSession);
 		$num_args = func_num_args();
 		if ($num_args >= 2) {

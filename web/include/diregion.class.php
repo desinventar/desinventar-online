@@ -99,7 +99,7 @@ class DIRegion extends DIObject {
 			}
 			$sQuery = "DELETE FROM Info WHERE InfoKey='" . $InfoKey . "' AND (LangIsoCode='" . $LangIsoCode . "' OR LangIsoCode='')";
 			$this->conn->query($sQuery);
-			$sQuery = "INSERT INTO Info VALUES ('" . $InfoKey . "','" . $LangIsoCode . "','" . $now . "','" . $InfoValue . "','')";
+			$sQuery = "INSERT INTO Info VALUES ('" . $InfoKey . "','" . $LangIsoCode . "','" . $InfoValue . "','','" . $now . "','" . $now . "','" . $now . "')";
 			$this->conn->query($sQuery);
 		}
 		$this->setConnection('core');

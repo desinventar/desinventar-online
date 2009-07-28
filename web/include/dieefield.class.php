@@ -9,14 +9,16 @@ class DIEEField extends DIObject {
 		$this->sTableName   = "EEField";
 		$this->sPermPrefix  = "EEFIELD";
 		$this->sFieldKeyDef = "EEFieldId/STRING";
-		$this->sFieldDef    = "SyncRecord/DATETIME," .
-		                      "EEGroupId/STRING," .
+		$this->sFieldDef    = "EEGroupId/STRING," .
 		                      "EEFieldLabel/STRING," .
 		                      "EEFieldDesc/STRING," .
 		                      "EEFieldType/STRING," .
 		                      "EEFieldSize/INTEGER," .
 		                      "EEFieldOrder/INTEGER," .
-		                      "EEFieldStatus/INTEGER";
+		                      "EEFieldStatus/INTEGER," .
+		                      "RecordCreation/DATETIME," .
+		                      "RecordSync/DATETIME," .
+		                      "RecordUpdate/DATETIME";
 		parent::__construct($prmSession);
 		$num_args = func_num_args();
 		$this->set('EEFieldId', $this->getNextEEFieldId());
