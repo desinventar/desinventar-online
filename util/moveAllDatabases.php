@@ -79,7 +79,7 @@ foreach ($RegionList as $RegionUUID) {
 		$r->q->core->query("DELETE FROM RegionAuth WHERE RegionId='" . $RegionId . "'");
 		foreach($dbh->query("SELECT * FROM RegionAuth WHERE RegionUUID='" . $RegionUUID . "'") as $row) {
 			$a = new DIRegionAuth($us, $RegionId, $row['UserName'], $row['AuthKey'], $row['AuthValue'], $row['AuthAuxValue']);
-			//$a->insert();
+			$a->insert();
 		} //foreach
 	}
 } //foreach
