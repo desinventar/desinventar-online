@@ -45,22 +45,28 @@ class Query extends PDO
 	public function setDBConnection($prmRegionId) {
 		$iReturn = ERR_NO_ERROR;
 		$DBFile = VAR_DIR;
-		if ($prmRegionId == 'core') {
-			$DBFile .= "/core.db";
-		} else {
-			$DBFile .= "/" . $prmRegionId ."/desinventar.db";
-		}
-		if (file_exists($DBFile)) {
-			try {
-				$this->dreg = new PDO("sqlite:" . $DBFile);
-				/*** set the error reporting attribute ***/
-				$this->dreg->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			} catch (PDOException $e) {
-				showErrorMsg($e->getMessage());
+		if ($prmRegionId != '') {
+			if ($prmRegionId == 'core') {
+				$DBFile .= "/core.db";
+			} else {
+				$DBFile .= "/" . $prmRegionId ."/desinventar.db";
 			}
+			if (file_exists($DBFile)) {
+				try {
+					$this->dreg = new PDO("sqlite:" . $DBFile);
+					/*** set the error reporting attribute ***/
+					$this->dreg->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+					$this->sRegionId = $prmRegionId;
+				} catch (PDOException $e) {
+					showErrorMsg($e->getMessage());
+				}
+			} else {
+				$iReturn = ERR_NO_DATABASE;			
+			} //if
 		} else {
-			$iReturn = ERR_NO_DATABASE;			
-		} //if
+			$this->dreg = null;
+			$this->sRegionId = '';
+		}
 		return $iReturn;
 	}
   
@@ -451,6 +457,9 @@ class Query extends PDO
 		$sReturn = '';
 		if ($this->dreg != null) {
 			$sql = "SELECT * FROM Info WHERE InfoKey='" . $prmInfoKey . "'";
+			if ($prmInfoKey != 'LangIsoCode') {
+				$sql .= " AND LangIsoCOde='" . $this->getDBInfoValue('LangIsoCode') . "'";
+			}
 			foreach($this->dreg->query($sql) as $row) {
 				$sReturn = $row['InfoValue'];
 			}

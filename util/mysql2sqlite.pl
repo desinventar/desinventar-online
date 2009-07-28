@@ -50,10 +50,10 @@ my $dbin  = DBI->connect($data_source, $username, $passwd) or die "Can't open My
 $dbin->{mysql_enable_utf8} = 1;
 
 if ($bCore) {
-	&cleanTable('Region');
-	&convertTable($dbin, $sRegion, "Region", "Region");
-	&cleanTable('RegionAuth');
-	&convertTable($dbin, $sRegion, "RegionAuth", "RegionAuth");
+	#&cleanTable('Region');
+	#&convertTable($dbin, $sRegion, "Region", "Region");
+	#&cleanTable('RegionAuth');
+	#&convertTable($dbin, $sRegion, "RegionAuth", "RegionAuth");
 	&cleanTable('User');
 	&convertTable($dbin, $sRegion, "Users", "User");
 } else {

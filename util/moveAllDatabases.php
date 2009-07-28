@@ -21,7 +21,7 @@ $RegionList = array();
 foreach($dbh->query("SELECT * FROM Region") as $row) {
 	$RegionList[] = $row['RegionUUID'];
 }
-$RegionList = array('COLOMBIA');
+$RegionList = array('BOLIVIA');
 foreach ($RegionList as $RegionUUID) {
 	foreach($dbh->query("SELECT * FROM Region WHERE RegionUUID='" . $RegionUUID . "'") as $row) {
 		$r = new DIRegion($us);
@@ -48,18 +48,18 @@ foreach ($RegionList as $RegionUUID) {
 		$r->set('GeoLimitMaxY'     , $row['GeoLimitMaxY']);
 		$r->set('InfoCredits'      , $row['RegionCredits']);
 	} //foreach
-	$RegionId = 'COL-1248786161-colombia_inventario_historico_de_desastres';
-	print $r->get('RegionId') . "\n";
+	$RegionId = 'BOL-1248793194-bolivia_inventario_historico_de_desastres';
+	$r->set('RegionId', $RegionId);
+	printf("%-20s %40s\n", $RegionUUID, $RegionId);
 	$iReturn = $r->createRegionDB();
 	if ($iReturn > 0) {
 		$r->q->core->query("DELETE FROM Region WHERE RegionId='" . $RegionId . "'");
 		$r->insert();
 	}
-	
+	$us->open($RegionId);
 	$data_dir = '/var/lib/desinventar';
 	$cmd = "./mysql2sqlite.pl -r " . $RegionUUID . " | sqlite3 " . $data_dir . "/" . $r->get('RegionId') . "/desinventar.db";
-	//system($cmd, $iReturn);
-	
+	system($cmd, $iReturn);
 	if ($iReturn >= 0) {	
 		// Copy Cartography
 		$Query = 'SELECT * FROM ' . $RegionUUID . '_GeoLevel';
@@ -75,12 +75,11 @@ foreach ($RegionList as $RegionUUID) {
 			} //foreach
 		} //foreach
 	}
-	
 	if ($iReturn >= 0) {
 		$r->q->core->query("DELETE FROM RegionAuth WHERE RegionId='" . $RegionId . "'");
 		foreach($dbh->query("SELECT * FROM RegionAuth WHERE RegionUUID='" . $RegionUUID . "'") as $row) {
 			$a = new DIRegionAuth($us, $RegionId, $row['UserName'], $row['AuthKey'], $row['AuthValue'], $row['AuthAuxValue']);
-			$a->insert();
+			//$a->insert();
 		} //foreach
 	}
 } //foreach

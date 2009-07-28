@@ -13,7 +13,6 @@ class DIRegionAuth extends DIObject {
 		                      "AuthKey/STRING";
 		$this->sFieldDef    = "AuthValue/STRING," .
 		                      "AuthAuxValue/STRING";
-
 		parent::__construct($prmSession);
 		$num_args = func_num_args();
 		$this->setConnection("core");

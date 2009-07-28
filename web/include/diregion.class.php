@@ -21,7 +21,11 @@ class DIRegion extends DIObject {
 		                      "PeriodBeginDate/DATE," .
 		                      "PeriodEndDate/DATE," .
 		                      "OptionOutOfRange/INTEGER," .
-		                      "InfoCredits/STRING," . 
+		                      "GeoLimitMinX/DOUBLE," . 
+		                      "GeoLimitMinY/DOUBLE," . 
+		                      "GeoLimitMaxX/DOUBLE," . 
+		                      "GeoLimitMaxY/DOUBLE";
+		$this->sInfoTrans   = "InfoCredits/STRING," . 
 		                      "InfoGeneral/STRING," .
 		                      "InfoGeneral_eng/STRING," . 
 		                      "InfoSources/STRING," .
@@ -29,16 +33,14 @@ class DIRegion extends DIObject {
 		                      "InfoObservation/STRING," . 
 		                      "InfoGeography/STRING," . 
 		                      "InfoCartography/STRING," .
-		                      "InfoAdminURL/STRING," . 
-		                      "GeoLimitMinX/DOUBLE," . 
-		                      "GeoLimitMinY/DOUBLE," . 
-		                      "GeoLimitMaxX/DOUBLE," . 
-		                      "GeoLimitMaxY/DOUBLE" . 
+		                      "InfoAdminURL/STRING";
+
 		parent::__construct($prmSession);
 		$num_args = func_num_args();
 		$this->set('LangIsoCode', 'spa');
 		$this->setConnection("core");
 		$this->createFields($this->sInfoDef);
+		$this->createFields($this->sInfoTrans);
 		if ($num_args >= 2) {
 			$prmRegionId = func_get_arg(1);
 			if ($prmRegionId != '') {
@@ -58,7 +60,7 @@ class DIRegion extends DIObject {
 			$this->setConnection($this->get('RegionId'));
 			try {
 				foreach($this->oField as $k => $v) {
-					$sQuery = "SELECT * FROM Info WHERE InfoKey='" . $k . "'";
+					$sQuery = "SELECT * FROM Info WHERE InfoKey='" . $k . "' AND LangIsoCode='" . $LangIsoCode . "' OR LangIsoCode=''";
 					foreach($this->conn->query($sQuery) as $row) {
 						$Value = $row['InfoValue'];
 						$sFieldType = $this->oFieldType[$k];
@@ -80,10 +82,24 @@ class DIRegion extends DIObject {
 		$iReturn = ERR_NO_ERROR;
 		$now = gmdate('c');
 		$this->setConnection($this->get('RegionId'));
-		foreach($this->oField as $k => $v) {
-			$sQuery = "DELETE FROM Info WHERE InfoKey='" . $k . "'";
+		
+		// 2009-07-28 (jhcaiced) Build an array with translatable fields
+		$Translatable = array();
+		foreach (split(',', $this->sInfoTrans) as $sItem) {
+			$oItem = split('/', $sItem);
+			$sFieldName = $oItem[0];
+			$sFieldType = $oItem[1];
+			$Translatable[$sFieldName] = $sFieldType;
+		}
+		foreach($this->oField as $InfoKey => $InfoValue) {
+			if (array_key_exists($InfoKey, $Translatable)) {
+				$LangIsoCode = $this->get('LangIsoCode');
+			} else {
+				$LangIsoCode = '';
+			}
+			$sQuery = "DELETE FROM Info WHERE InfoKey='" . $InfoKey . "' AND (LangIsoCode='" . $LangIsoCode . "' OR LangIsoCode='')";
 			$this->conn->query($sQuery);
-			$sQuery = "INSERT INTO Info VALUES ('" . $k . "','" . $now . "','" . $v . "','')";
+			$sQuery = "INSERT INTO Info VALUES ('" . $InfoKey . "','" . $LangIsoCode . "','" . $now . "','" . $InfoValue . "','')";
 			$this->conn->query($sQuery);
 		}
 		$this->setConnection('core');

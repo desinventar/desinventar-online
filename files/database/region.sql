@@ -9,7 +9,7 @@ LangIsoCode VARCHAR(3),
 SyncRecord DATETIME, 
 InfoValue VARCHAR(1024), 
 InfoAuxValue VARCHAR(1024), 
-PRIMARY KEY('InfoKey')
+PRIMARY KEY('InfoKey','LangIsoCode')
 );
 
 DROP TABLE IF EXISTS Event;
