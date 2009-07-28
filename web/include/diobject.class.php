@@ -36,6 +36,7 @@ class DIObject {
 		$this->createFields($this->sFieldDef);
 		$this->set('RegionId', $this->session->sRegionId);
 		$this->set('LangIsoCode', $this->q->getDBInfoValue('LangIsoCode'));
+		$this->set('RecordUpdate', gmdate('c'));
 	} // constructor
 	
 	public function setConnection($prmDB) {
@@ -293,9 +294,6 @@ class DIObject {
 
 	public function update($withValidate = true) {
 		$iReturn = 1;
-		if (!empty($this->SyncRecord)) {
-			$this->SyncRecord = gmdate('c');
-		}
 		if ($withValidate) {
 			$iReturn = $this->validateUpdate();
 		}
