@@ -126,7 +126,6 @@ class DIRegion extends DIObject {
 		$prmRegionId = $this->get('RegionId');
 		// Create Directory for New Region
 		$DBDir = VAR_DIR . '/' . $prmRegionId . '/';
-		fb($DBDir);
 		try {
 			if (!file_exists($DBDir)) {
 				mkdir($DBDir);
