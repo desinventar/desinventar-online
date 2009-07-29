@@ -34,6 +34,7 @@ class DIEvent extends DIObject {
 				$this->set('EventDesc', $prmEventDesc);
 				$this->getIdByName($this->get('EventName'));
 			}
+			$this->load();
 		}
 	} // __construct
 	
