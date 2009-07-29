@@ -180,6 +180,12 @@ class DIObject {
 
 	public function getUpdateQuery() {
 		$i = 0;
+		
+		//2009-07-29 (jhcaiced) Update value in RecordUpdate
+		if ($this->existField('RecordUpdate')) {
+			$this->set('RecordUpdate', gmdate('c'));
+		}
+		
 		$sQueryFields = "";
 		$sQueryValues = "";
 		$sQuery = "UPDATE " . $this->getTableName() . " SET ";
