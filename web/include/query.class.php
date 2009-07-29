@@ -32,9 +32,12 @@ class Query extends PDO
 
 			if ($num_args > 0) {
 				$this->sRegionId = func_get_arg(0);
-				if ($this->sRegionId != '') {
-					$this->setDBConnection($this->sRegionId);
-				}
+			}
+			
+			if ($this->sRegionId != '') {
+				$this->setDBConnection($this->sRegionId);
+			} else {
+				$this->setDBConnection('core');
 			} //if
 		} catch (Exception $e) {
 			showErrorMsg("Error !: " . $e->getMessage());
