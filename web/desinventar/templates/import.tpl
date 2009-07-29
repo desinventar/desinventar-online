@@ -46,9 +46,9 @@
 	</script>
 </head>
 <body>
-{-** Show select CSV file interface **-}
+{-* Show select CSV file interface *-}
 {-if $ctl_show-}
-	<!--<b onMouseOver="showtip('{-$dic.DBImport[2]-}');">{-$dic.DBImport[0]-}</b>--><br>
+	<br>
 	<p class="fixw"><br>
 		<form method="POST" action="import.php" target="iframe2" enctype="multipart/form-data">
 			<input type="hidden" name="r" value="{-$reg-}">
@@ -62,23 +62,29 @@
 			style="height:400px; width:1280px;"></iframe>
 	</p>
 {-/if-}
-{-** Show import interface to assign specific fields **-}
+{-* Show import interface to assign specific fields *-}
 {-if $ctl_import-}
+<form method="POST" action="import.php">
 <table>
  <tr>
+{-foreach name=fld key=k item=i from=$fld-}
   <td>
    <input type="checkbox" onclick="enadisField('col{-$k-}', 'col{-`$k+1`-}', this.checked);" checked>
-   <select id="col1" name="col1" style="width:180px;" onChange="fillColumn('col{-$k-}', 'col{-`$k+1`-}', true);">
+   <select id="col{-$k-}" name="col{-$k-}" onChange="fillColumn('col{-$k-}', 'col{-`$k+1`-}', true);">
     <option value=""></option>
  {-foreach name=fld2 key=k2 item=i2 from=$fld-}
     <option value="{-$i2-}">{-$i2-}</option>
  {-/foreach-}
 	</select>
   </td>
+{-/foreach-}
   </tr>
 </table>
+<input type="hidden" name="FileName" value="{-$FileName-}">
+<input type="hidden" name="cmd" value="import">
+</form>
 {-/if-}
-{-** Show importation results **-}
+{-* Show importation results *-}
 {-if $ctl_msg-}
  {-if $msg.Status == 1-}
  <b>{-#tsuccess#-}</b>

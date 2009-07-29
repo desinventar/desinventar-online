@@ -5,7 +5,7 @@
 */
 
 require_once('../include/loader.php');
-require_once('../include/usersession.class.php');
+/*require_once('../include/usersession.class.php');
 require_once('../include/query.class.php');
 require_once('../include/region.class.php');
 require_once('../include/diimport.class.php');
@@ -13,7 +13,7 @@ require_once('../include/didisaster.class.php');
 require_once('../include/digeography.class.php');
 require_once('../include/dievent.class.php');
 require_once('../include/dicause.class.php');
-require_once('../include/dieedata.class.php');
+require_once('../include/dieedata.class.php');*/
 
 function loadCSV($csv) {
 	$handle = fopen($csv, "r");
@@ -108,6 +108,7 @@ if (isset($_FILES['desinv']) && isset($post['diobj'])) {
 			                    45 => 'SectorOther'
 						   );
 			$t->assign ("csv", $ocsv);
+			$t->assign ("FileName", $FileName);
 			$t->assign ("fld", $DisasterImport);
 			$t->assign ("ctl_import", true);
 		} else {
@@ -117,11 +118,11 @@ if (isset($_FILES['desinv']) && isset($post['diobj'])) {
 	elseif (isset($post['cmd']) && $post['cmd'] == "import") {
 		// first validate file to continue with importation
 		$i = new DIImport($us);
-		$valm = $i->validateFromCSV($FileName);
+		$valm = $i->validateFromCSV($post['FileName']);
 		if (is_array($valm)) {
 			$stat = (int) $valm['Status'];
 			if (!iserror($stat))
-				$valm = $i->importFromCSV($FileName);
+				$valm = $i->importFromCSV($post['FileName']);
 			$t->assign ("msg", $valm);
 			$t->assign ("res", loadCSV($valm['FileName']));
 			$t->assign ("ctl_msg", true);
