@@ -59,17 +59,19 @@ class DIRegion extends DIObject {
 		if ($iReturn > 0) {
 			$this->setConnection($this->get('RegionId'));
 			try {
-				foreach($this->oField as $k => $v) {
-					$sQuery = "SELECT * FROM Info WHERE InfoKey='" . $k . "' AND LangIsoCode='" . $LangIsoCode . "' OR LangIsoCode=''";
-					foreach($this->conn->query($sQuery) as $row) {
-						$Value = $row['InfoValue'];
-						$sFieldType = $this->oFieldType[$k];
+				$LangIsoCode = $this->q->getDBInfoValue('LangIsoCode');
+				$sQuery = "SELECT * FROM Info WHERE LangIsoCode='" . $LangIsoCode . "' OR LangIsoCode=''";
+				foreach($this->conn->query($sQuery) as $row) {
+					$Value = $row['InfoValue'];
+					$InfoKey = $row['InfoKey'];
+					if (array_key_exists($InfoKey, $this->oField)) {
+						$sFieldType = $this->oFieldType[$InfoKey];
 						if ($sFieldType == 'DATETIME') {
-							if ($Value == '') { $Value = $v; }
+							if ($Value == '') { $Value = $InfoValue; }
 						}
-						$this->set($k, $Value);
-					} //foreach row
-				} // foreach field
+						$this->set($InfoKey, $Value);
+					} //if
+				} // foreach
 			} catch (Exception $e) {
 				$iReturn = ERR_NO_DATABASE;
 			}
