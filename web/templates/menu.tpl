@@ -57,19 +57,19 @@
 				</table>
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect1" style="display:none;">
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=IND_2009-07-07_024027');">India - Orissa</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=IND-1248830486-india_orissa_historic_inventory_of_disasters');">India - Orissa</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 <!--					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=IND_2009-07-07_023143');">India - Tamil Nadu</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=IND-1248830503-india_tamil_nadu_historic_inventory_of_disasters');">India - Tamil Nadu</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=IRN_2009-07-07_024001');">Iran</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=IRN-1248830532-iran_historic_inventory_of_disasters');">Iran</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=NPL_2009-07-07_024205');">Nepal</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=NPL-1248830584-nepal_historic_inventory_of_disasters');">Nepal</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>-->
 				</table>
@@ -83,15 +83,15 @@
 				</table>
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect2" style="display:none;">
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=CRI_2009-07-07_023423');">Costa Rica</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=CRI-1248830438-costa_rica_inventario_historico_de_desastres');">Costa Rica</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=SLV_2009-07-07_023254');">El Salvador</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=SLV-1248830858-el_salvador_inventario_historico_de_desastres');">El Salvador</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=PAN_2009-07-07_024159');">Panamá</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=PAN-1248830629-panama_inventario_de_desastres_sinaproc');">Panamá</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
@@ -109,7 +109,7 @@
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=PAR_2009-07-07_023030');">Paraguay</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=PAR-1248830641-paraguay_inventario_historico_de_desastres');">Paraguay</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
@@ -123,15 +123,15 @@
 				</table>
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect4" style="display:none;">
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=ARG_2009-07-07_023107');">Argentina</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=ARG-1248830121-argentina_inventario_historico_de_desastres');">Argentina</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=BOL_2009-07-07_023659');">Bolivia</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=BOL-1248830153-bolivia_inventario_historico_de_desastres');">Bolivia</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=PAR_2009-07-07_024236');">Paraguay</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=PAR-1248830641-paraguay_inventario_historico_de_desastres');">Paraguay</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
@@ -145,7 +145,7 @@
 				</table>
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect5" style="display:none;">
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=MEX_2009-07-07_023439');">México</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=MEX-1248830550-mexico_inventario_historico_de_desastres');">México</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
@@ -157,7 +157,7 @@
 				</table>
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect7" style="display:none;">
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=COL_2009-07-07_023307');">Cali - Colombia</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=COL-1248830162-colombia_inventario_desastres_cali_zona_urbana');">Cali - Colombia</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
