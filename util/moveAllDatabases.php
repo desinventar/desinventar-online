@@ -21,7 +21,7 @@ $RegionList = array();
 foreach($dbh->query("SELECT * FROM Region") as $row) {
 	$RegionList[] = $row['RegionUUID'];
 }
-$RegionList = array('BOLIVIA');
+//$RegionList = array('BOLIVIA');
 foreach ($RegionList as $RegionUUID) {
 	foreach($dbh->query("SELECT * FROM Region WHERE RegionUUID='" . $RegionUUID . "'") as $row) {
 		$r = new DIRegion($us);
@@ -48,8 +48,8 @@ foreach ($RegionList as $RegionUUID) {
 		$r->set('GeoLimitMaxY'     , $row['GeoLimitMaxY']);
 		$r->set('InfoCredits'      , $row['RegionCredits']);
 	} //foreach
-	$RegionId = 'BOL-1248793194-bolivia_inventario_historico_de_desastres';
-	$r->set('RegionId', $RegionId);
+	//$RegionId = 'BOL-1248793194-bolivia_inventario_historico_de_desastres';
+	//$r->set('RegionId', $RegionId);
 	printf("%-20s %40s\n", $RegionUUID, $RegionId);
 	$iReturn = $r->createRegionDB();
 	if ($iReturn > 0) {
