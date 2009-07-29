@@ -169,7 +169,9 @@ sub buildEEDataTableDef() {
 	my %def = ();
 	# Mandatory Fields
 	$def{'DisasterId/STRING'} = undef;
-	$def{'SyncRecord/DATETIME'} = 'DATETIME';
+	$def{'RecordCreation/DATETIME'} = 'DATETIME';
+	$def{'RecordSync/DATETIME'} = 'DATETIME';
+	$def{'RecordUpdate/DATETIME'} = 'DATETIME';	
 	$sth = $dbin->prepare("SELECT * FROM " . $sRegion . "_EEField");
 	$sth->execute();
 	while ($r = $sth->fetchrow_hashref()) {

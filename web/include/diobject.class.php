@@ -81,7 +81,7 @@ class DIObject {
 	}
 	
 	public function set($prmKey, $prmValue) {
-		$iReturn = 0;
+		$iReturn = ERR_DEFAULT_ERROR;
 		if (isset($this->oField[$prmKey])) {
 			$sValue = $prmValue;
 			$sFieldType = $this->oFieldType[$prmKey];
@@ -97,7 +97,7 @@ class DIObject {
 				if ($sValue == "") { $sValue = 0; }
 			}
 			$this->oField[$prmKey] = $sValue;
-			$iReturn = 1;
+			$iReturn = ERR_NO_ERROR;
 		}
 		return $iReturn;
 	}
@@ -216,11 +216,11 @@ class DIObject {
 	} // function
 	
 	public function exist() {
-		$iReturn = 0;
+		$iReturn = ERR_DEFAULT_ERROR;
 		$sQuery = $this->getSelectQuery();
 		if ($result = $this->conn->query($sQuery)) {
 			if ($result->num_rows() > 0) {
-				$bReturn = 1;
+				$bReturn = ERR_NO_ERROR;
 			}
 		}
 		return $iReturn;
@@ -239,7 +239,7 @@ class DIObject {
 					$sFieldType = $oItem[1];
 					$this->set($sFieldName, $row[$sFieldName]);
 				}
-				$iReturn = 1;
+				$iReturn = ERR_NO_ERROR;
 			} // foreach
 		} catch (Exception $e) {
 			showErrorMsg($e->getMessage);
@@ -248,7 +248,7 @@ class DIObject {
 	} // function load
 	
 	public function insert($withValidate = true) {
-		$iReturn = 1;
+		$iReturn = ERR_NO_ERROR;
 		$bValidate = $withValidate;
 		if ($withValidate) {
 			$iReturn = $this->validateCreate();
@@ -267,21 +267,21 @@ class DIObject {
 	}
 
 	public function delete($withValidate = true) {
-		$iReturn = 1;
+		$iReturn = ERR_NO_ERROR;
 		if ($withValidate) {
 			$iReturn = validateDelete();
 		}
 		if ($iReturn > 0) {
 			$sQuery = $this->getDeleteQuery();
 			if ($result = $this->conn->query($sQuery)) {
-				$iReturn = 1;		
+				$iReturn = ERR_NO_ERROR;
 			}
 		}
 		return $iReturn;
 	} // function
 
 	public function create($withValidate = true) {
-		$iReturn = 1;
+		$iReturn = ERR_NO_ERROR;
 		if ($withValidate) {
 			$iReturn = $this->validateCreate();
 		}
@@ -289,7 +289,7 @@ class DIObject {
 			$sQuery = $this->getInsertQuery();
 			try {
 				if ($result = $this->conn->query($sQuery)) {
-					$iReturn = 1;		
+					$iReturn = ERR_NO_ERROR;
 				}
 			} catch (PDOException $e) {
 				showErrorMsg("Error " . $e->getMessage());
@@ -299,7 +299,7 @@ class DIObject {
 	} // function
 
 	public function update($withValidate = true) {
-		$iReturn = 1;
+		$iReturn = ERR_NO_ERROR;
 		if ($withValidate) {
 			$iReturn = $this->validateUpdate();
 		}
@@ -307,7 +307,7 @@ class DIObject {
 			$sQuery = $this->getUpdateQuery();
 			try {
 				if ($result = $this->conn->query($sQuery)) {
-					$iReturn = 1;
+					$iReturn = ERR_NO_ERROR;
 				}
 			} catch (PDOException $e) {
 				showErrorMsg("Error " . $e->getMessage());
@@ -406,7 +406,7 @@ class DIObject {
 					}
 				} // foreach
 				if ($bFound) {
-					$iReturn = 1;
+					$iReturn = ERR_NO_ERROR;
 				} else {
 					$iReturn = $ErrCode;
 				}
@@ -425,7 +425,7 @@ class DIObject {
 			$sQuery = "SELECT " . $FieldDst . " FROM " . $TableName . " WHERE " . $FieldDst . "=" . $quote . $this->get($prmFieldName) . $quote;
 			$iReturn = $ErrCode;
 			foreach($this->conn->query($sQuery) as $row) {
-				$iReturn = 1;
+				$iReturn = ERR_NO_ERROR;
 			}
 		}
 		return $iReturn;
