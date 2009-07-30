@@ -27,7 +27,6 @@ class DIRegion extends DIObject {
 		                      "GeoLimitMaxY/DOUBLE";
 		$this->sInfoTrans   = "InfoCredits/STRING," . 
 		                      "InfoGeneral/STRING," .
-		                      "InfoGeneral_eng/STRING," . 
 		                      "InfoSources/STRING," .
 		                      "InfoSynopsis/STRING," . 
 		                      "InfoObservation/STRING," . 

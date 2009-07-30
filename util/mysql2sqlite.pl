@@ -159,7 +159,14 @@ sub saveInfo() {
 sub cleanTable() {
 	my $sTableDst = $_[0];
 	my $sQuery    = "";
-	$sQuery = "DELETE FROM " . $sTableDst . ";";
+	$sQuery = "DELETE FROM " . $sTableDst;
+	if ($sTableDst eq 'Event') {
+		$sQuery .= " WHERE EventPredefined=0";
+	}
+	if ($sTableDst eq 'Cause') {
+		$sQuery .= " WHERE CausePredefined=0";
+	}
+	$sQuery .= ';';
 	print $sQuery . "\n";
 }
 
@@ -219,6 +226,15 @@ sub convertTable() {
 	print $sQuery . "\n";
 
 	$sQuery = "SELECT * FROM " . $sTableSrc;
+	
+	# Custom Queries
+	if ($sTableDst eq 'Event') {
+		$sQuery .= " WHERE EventPredefined=0";
+	}
+	if ($sTableDst eq 'Cause') {
+		$sQuery .= " WHERE CausePredefined=0";
+	}
+	
 	$sthin = $dbin->prepare($sQuery);
 	$sthin->execute();
 	while ($o = $sthin->fetchrow_hashref()) {

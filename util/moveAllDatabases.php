@@ -24,6 +24,7 @@ moveUsers($dbh,$us);
 $RegionList = array();
 $RegionList = array('BOLIVIA');
 foreach ($RegionList as $RegionUUID) {
+	$InfoGeneral_eng = '';
 	foreach($dbh->query("SELECT * FROM Region WHERE RegionUUID='" . $RegionUUID . "'") as $row) {
 		$r = new DIRegion($us);
 		$r->set('CountryIso'     , $row['CountryIsoCode']);
@@ -32,12 +33,14 @@ foreach ($RegionList as $RegionUUID) {
 		$RegionId = 'BOL-1248793194-bolivia_inventario_historico_de_desastres';
 		$r->set('RegionId'       , $RegionId);
 		$r->set('InfoGeneral'    , $row['RegionDesc']);
-		$r->set('InfoGeneral_eng', $row['RegionDescEN']);
 		$r->setActive($row['RegionActive']);
 		$r->setPublic($row['RegionPublic']);
 		$LangIsoCode = $row['RegionLangCode'];
 		if ($LangIsoCode == 'es') { $LangIsoCode = 'spa'; }
 		if ($LangIsoCode == 'en') { $LangIsoCode = 'eng'; }
+		if ($LangIsoCode == 'fr') { $LangIsoCode = 'fre'; }
+		if ($LangIsoCode == 'pr') { $LangIsoCode = 'por'; }
+		
 		$r->set('LangIsoCode'      , $LangIsoCode);
 		$r->set('CountryIso'       , $row['CountryIsoCode']);
 		$r->set('PeriodBeginDate'  , $row['PeriodBeginDate']);
@@ -49,12 +52,19 @@ foreach ($RegionList as $RegionUUID) {
 		$r->set('GeoLimitMinY'     , $row['GeoLimitMinY']);
 		$r->set('GeoLimitMaxY'     , $row['GeoLimitMaxY']);
 		$r->set('InfoCredits'      , $row['RegionCredits']);
+		$InfoGeneral_eng = $row['RegionDescEN'];
 	} //foreach
 	printf("%-20s %-40s\n", $RegionUUID, $RegionId);
 	$iReturn = $r->createRegionDB();
 	if ($iReturn > 0) {
 		$r->q->core->query("DELETE FROM Region WHERE RegionId='" . $RegionId . "'");
 		$r->insert();
+		if ($LangIsoCode != 'eng') {
+			// Create a Record for Info in eng language
+			$r->set('LangIsoCode', 'eng');
+			$r->set('InfoGeneral', $InfoGeneral_eng);
+			$r->saveInfo();
+		}
 	}
 	$us->open($RegionId);
 	$data_dir = '/var/lib/desinventar';
