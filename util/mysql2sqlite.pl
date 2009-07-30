@@ -64,7 +64,6 @@ if ($bCore) {
 	                                          'RegionId'    => $sRegion}],
 	                 'Geography',
 	                 'Disaster',
-	                 'DatabaseLog',
 	                 'EEField',
 	                 'EEGroup',
 	                 'EEData');
