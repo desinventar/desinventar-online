@@ -26,7 +26,7 @@ foreach($q->core->query("SELECT * FROM Region") as $row) {
 $RegionList = array('BOL-1248830153-bolivia_inventario_historico_de_desastres');
 foreach ($RegionList as $RegionId) {
 	$us->open($RegionId);
-	fb($RegionId);
+	print $RegionId . "\n";
 	$q->setDBConnection($RegionId);
 	$d = new DIDisaster($us);
 	foreach (split(',', $d->sFieldQDef) as $Field) {

@@ -23,7 +23,7 @@ foreach($q->core->query("SELECT * FROM Region") as $row) {
 //DEBUG
 //$RegionList = array('BOL-1248830153-bolivia_inventario_historico_de_desastres');
 foreach ($RegionList as $RegionId) {
-	fb($RegionId);
+	print $RegionId . "\n";
 	$q->setDBConnection($RegionId);
 	$Query = "UPDATE Info SET InfoValue='" . $RegionId . "' WHERE InfoKey='RegionId';";
 	$q->dreg->query($Query);
