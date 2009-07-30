@@ -22,7 +22,7 @@ foreach($dbh->query("SELECT * FROM Region") as $row) {
 }
 moveUsers($dbh,$us);
 $RegionList = array();
-//$RegionList = array('BOLIVIA');
+$RegionList = array('BOLIVIA');
 foreach ($RegionList as $RegionUUID) {
 	foreach($dbh->query("SELECT * FROM Region WHERE RegionUUID='" . $RegionUUID . "'") as $row) {
 		$r = new DIRegion($us);
@@ -78,7 +78,7 @@ foreach ($RegionList as $RegionUUID) {
 	if ($iReturn >= 0) {
 		$r->q->core->query("DELETE FROM RegionAuth WHERE RegionId='" . $RegionId . "'");
 		foreach($dbh->query("SELECT * FROM RegionAuth WHERE RegionUUID='" . $RegionUUID . "'") as $row) {
-			$a = new DIRegionAuth($us, $RegionId, $row['UserId'], $row['AuthKey'], $row['AuthValue'], $row['AuthAuxValue']);
+			$a = new DIRegionAuth($us, $RegionId, $row['UserName'], $row['AuthKey'], $row['AuthValue'], $row['AuthAuxValue']);
 			$a->insert();
 		} //foreach
 	}
@@ -89,10 +89,11 @@ function moveUsers($dbh, $us) {
 	foreach($dbh->query("SELECT * FROM Users") as $row) {
 		$u = new DIUser($us);
 		$u->setFromArray($row);
+		$UserId = $row['UserEMail'];
+		$u->set('UserNotes', $u->get('UserNotes') . '(' . $row['UserName'] . ')');
+		if ($UserId == '') { $UserId = $row['UserName']; }
+		$u->set('UserId', $UserId);
 		$u->set('CountryIso', $row['UserCountry']);
-		//print $u->getInsertQuery() . "\n";
-		//print $u->getUpdateQuery() . "\n";
-		//printf("%-20s %-40s\n", $u->get('UserId'), $u->get('UserEMail'));
 		$u->insert();
 	}
 }

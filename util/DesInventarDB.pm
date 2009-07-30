@@ -169,8 +169,8 @@ $VERSION = '1.1';
                  'RecordUpdate/DATETIME'             => 'DATETIME'
                 },
              'DatabaseLog' => 
-                {'DBLogDate/DATETIME'                => undef,
-                 'DBLogType/STRING'                  => undef,
+                {'DBLogType/STRING'                  => undef,
+                 'DBLogDate/DATETIME'                => undef,
                  'DBLogNotes/STRING'                 => undef,
                  'DBLogUserId/STRING'                => undef
                 },
