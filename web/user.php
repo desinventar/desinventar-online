@@ -52,7 +52,7 @@ if (isset($_GET['cmd'])) {
 	                                                                
 	// LOGIN: CONTROL USER ACCESS
 	if ($_GET['cmd'] == "login") {
-		if ($us->login($_GET['UserId'], $_GET['password'])) {
+		if ($us->login($_GET['userid'], $_GET['password'])) {
 			$t->assign ("user", $us->UserId);
 			$t->assign ("ctl_logged", true);		// Login Sucess !!
 		} else {
@@ -153,7 +153,7 @@ if (isset($_GET['cmd'])) {
 		case "chklogin":
 			// USERADMIN: check if UserId exists...
 			$t->assign ("ctl_chklogin", true);
-			if ($us->existUser($_GET['UserId']))
+			if ($us->existUser($_GET['userid']))
 				$t->assign ("clogin", true);
 			break;
 		case "chkpasswd":

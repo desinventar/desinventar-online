@@ -65,8 +65,9 @@ class UserSession {
 	}
 
 	public function login($prmUserId, $prmUserPasswd) {
-		$iReturn = ERR_NO_ERROR;
-		if ($this->validateUser($prmUserId, $prmUserPasswd) > 0) {
+		$iReturn = ERR_DEFAULT_ERROR;
+		$iReturn = $this->validateUser($prmUserId, $prmUserPasswd);
+		if ($iReturn > 0) {
 			$iReturn = $this->setUser($prmUserId);
 		}
 		return $iReturn;
@@ -166,8 +167,9 @@ class UserSession {
 			$sQuery = "SELECT * FROM User WHERE UserId='" . $prmUserId . "'";
 			try {
 				$result = $this->q->core->query($sQuery);
-				while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-					if ($row->UserPasswd == $prmUserPasswd) {
+				$iReturn = ERR_DEFAULT_ERROR;
+				while (($iReturn < 0) && ($row = $result->fetch(PDO::FETCH_OBJ))) {
+					if ($row->UserPasswd == md5($prmUserPasswd)) {
 						$iReturn = ERR_NO_ERROR;
 					}
 				} // while
