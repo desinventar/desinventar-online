@@ -21,9 +21,10 @@ $RegionList = array();
 foreach($dbh->query("SELECT * FROM Region") as $row) {
 	$RegionList[] = $row['RegionUUID'];
 }
+
 moveUsers($dbh,$us);
-$RegionList = array();
-$RegionList = array('BOLIVIA');
+//$RegionList = array();
+//$RegionList = array('BOLIVIA');
 foreach ($RegionList as $RegionUUID) {
 	$InfoGeneral_eng = '';
 	foreach($dbh->query("SELECT * FROM Region WHERE RegionUUID='" . $RegionUUID . "'") as $row) {
@@ -31,7 +32,7 @@ foreach ($RegionList as $RegionUUID) {
 		$r->set('CountryIso'     , $row['CountryIsoCode']);
 		$r->set('RegionLabel'    , $row['RegionLabel']);
 		$RegionId = $r->buildRegionId();
-		$RegionId = 'BOL-1248793194-bolivia_inventario_historico_de_desastres';
+		//$RegionId = 'BOL-1248793194-bolivia_inventario_historico_de_desastres';
 		$r->set('RegionId'       , $RegionId);
 		$r->set('InfoGeneral'    , $row['RegionDesc']);
 		$r->setActive($row['RegionActive']);
