@@ -13,6 +13,7 @@ require_once($_SERVER["DI8_WEB"] . '/include/loader.php');
 require_once(BASE . '/include/diregion.class.php');
 require_once(BASE . '/include/diregionauth.class.php');
 require_once(BASE . '/include/diuser.class.php');
+require_once(BASE . '/include/didisaster.class.php');
 
 $dbh = new PDO('mysql:host=localhost;dbname=di8db', '','',
    array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
@@ -69,8 +70,9 @@ foreach ($RegionList as $RegionUUID) {
 	$us->open($RegionId);
 	$data_dir = '/var/lib/desinventar';
 	$cmd = "./mysql2sqlite.pl -r " . $RegionUUID . " | sqlite3 " . $data_dir . "/" . $r->get('RegionId') . "/desinventar.db";
-	system($cmd, $iReturn);
-	if ($iReturn >= 0) {	
+	system($cmd, $iCmdReturn);
+	$iReturn = ! $iCmdReturn;
+	if ($iReturn > 0) {	
 		// Copy Cartography
 		$Query = 'SELECT * FROM ' . $RegionUUID . '_GeoLevel';
 		foreach($dbh->query($Query) as $geolevel) {
@@ -85,13 +87,27 @@ foreach ($RegionList as $RegionUUID) {
 			} //foreach
 		} //foreach
 	}
-	if ($iReturn >= 0) {
+	if ($iReturn > 0) {
 		$r->q->core->query("DELETE FROM RegionAuth WHERE RegionId='" . $RegionId . "'");
 		foreach($dbh->query("SELECT * FROM RegionAuth WHERE RegionUUID='" . $RegionUUID . "'") as $row) {
 			$a = new DIRegionAuth($us, $RegionId, $row['UserName'], $row['AuthKey'], $row['AuthValue'], $row['AuthAuxValue']);
 			$a->insert();
 		} //foreach
 	}
+	
+	if ($iReturn > 0) {
+		$d = new DIDisaster($us);
+		foreach (split(',', $d->sFieldQDef) as $Field) {
+			$oItem = split('/', $Field);
+			$sFieldQName = $oItem[0];
+			$sFieldType = $oItem[1];
+			$sFieldName = substr($sFieldQName, 0, -1);
+			$Query = "UPDATE Disaster SET $sFieldQName=$sFieldName WHERE $sFieldName>0";
+			$us->q->dreg->query($Query);
+			$Query = "UPDATE Disaster SET $sFieldQName=0 WHERE $sFieldName<=0";
+			$us->q->dreg->query($Query);
+		} //foreach
+	} //if
 } //foreach
 $dbh = null;
 
