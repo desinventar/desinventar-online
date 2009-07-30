@@ -151,7 +151,7 @@ solo se muestre a los roles correspondientes.. */
 		mod = module;
 		$(mod + 'addsect').style.display = 'block';
 		if (module == "role") {
-			$('UserName').value = key;
+			$('UserId').value = key;
 			$('AuthAuxValue').value = val;
 		}
 		else if (module == "log") {
@@ -193,7 +193,7 @@ solo se muestre a los roles correspondientes.. */
 	function setUserPA (login, name, email, pass, cnt, city, active) {
 		mod = "userpa";
 		$(mod + 'addsect').style.display = 'block';
-		$('UserName').value = login;
+		$('UserId').value = login;
 		$('UserFullName').value = name;
 		$('UserEMail').value = email;
 		$('UserPasswd').value = pass;

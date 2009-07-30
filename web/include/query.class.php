@@ -626,7 +626,7 @@ class Query extends PDO
 
 	public function getRegionAdminList() {
 		$sql = "SELECT R.RegionId AS RegionId, R.CountryIso AS CountryIso, R.RegionLabel ".
-		       "AS RegionLabel, RA.UserName AS UserName, R.RegionStatus AS RegionStatus ".
+		       "AS RegionLabel, RA.UserId AS UserId, R.RegionStatus AS RegionStatus ".
 		       "FROM Region AS R, RegionAuth AS RA WHERE R.RegionId=RA.RegionId AND ".
 		       "RA.AuthAuxValue='ADMINREGION' ORDER BY RegionLabel";
 		$data = array();
@@ -635,7 +635,7 @@ class Query extends PDO
 			$RegionPublic = ($row['RegionStatus'] & 2) > 0;
 			$data[$row['RegionId']] = array($row['CountryIso'], 
 			                                $row['RegionLabel'],
-			                                $row['UserName'],
+			                                $row['UserId'],
 			                                $RegionActive,
 			                                $RegionPublic);
 		}

@@ -152,9 +152,10 @@ sub saveInfo() {
 	my $sInfoKey      = $_[0];
 	my $sInfoValue    = $_[1];
 	my $sInfoAuxValue = $_[2];
-	print "UPDATE Info SET InfoValue    ='" . $sInfoValue    . "'," .
-	                      "InfoAuxValue ='" , $sInfoAuxValue . "' " .
-	                      "WHERE InfoKey='" . $sInfoKey . "';" . "\n";
+	
+	#print "UPDATE Info SET InfoValue    ='" . $sInfoValue    . "'," .
+	#                      "InfoAuxValue ='" , $sInfoAuxValue . "' " .
+	#                      "WHERE InfoKey='" . $sInfoKey . "';" . "\n";
 }
 sub cleanTable() {
 	my $sTableDst = $_[0];

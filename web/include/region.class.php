@@ -319,7 +319,7 @@ class Region {
     $data['DBLogDate'] = date("Y-m-d H:i:s");
     $data['DBLogType'] = $type;
     $data['DBLogNotes'] = $note;
-    $data['DBLogUserName'] = $_SESSION['username'];
+    $data['DBLogUserId'] = $_SESSION['UserId'];
     $data['DBLogDisasterIdList'] = "";
     $rpcargs = array($_SESSION['sessionid'], DI_DBLOG, CMD_NEW, $data);
     $lo = callRpcDICore('RpcDIServer.saveDIObject', $rpcargs);
@@ -332,7 +332,7 @@ class Region {
     $data['DBLogDate'] = $date;
     $data['DBLogType'] = $type;
     $data['DBLogNotes'] = $note;
-    $data['DBLogUserName'] = $_SESSION['username'];
+    $data['DBLogUserId'] = $_SESSION['UserId'];
     $data['DBLogDisasterIdList'] = "";
     $rpcargs = array($_SESSION['sessionid'], DI_DBLOG, CMD_UPDATE, $data);
     $lo = callRpcDICore('RpcDIServer.saveDIObject', $rpcargs);

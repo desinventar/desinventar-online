@@ -7,8 +7,8 @@
 		<table width="100%" class="grid">
 			<thead>
 				<tr>
-					<td class="header" onMouseOver="showtip('{-$dic.DBUserName[2]-}');">
-						<b>{-$dic.DBUserName[0]-}</b></td>
+					<td class="header" onMouseOver="showtip('{-$dic.DBUserId[2]-}');">
+						<b>{-$dic.DBUserId[0]-}</b></td>
 					<td class="header" onMouseOver="showtip('{-$dic.DBRole[2]-}');">
 						<b>{-$dic.DBRole[0]-}</b></td>
 				</tr>
@@ -45,11 +45,11 @@
   <div id="roleaddsect" style="display:none">
   	<form name="rolefrm" id="rolefrm" method="GET" 
   		action="javascript: var s=$('rolefrm').serialize(); sendData('{-$reg-}', 'regionrol.php', s, '');"
-  		onSubmit="javascript: var a=new Array('UserName','AuthAuxValue'); return(checkForm(a, '{-#errmsgfrmrol#-}'));">
+  		onSubmit="javascript: var a=new Array('UserId','AuthAuxValue'); return(checkForm(a, '{-#errmsgfrmrol#-}'));">
 			<input id="r" name="r" type="hidden" value="{-$reg-}">
-			<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBUserName[2]-}')">
-  					{-$dic.DBUserName[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBUserName[1]-}</span></a><br>
-  		<select id="UserName" name="UserName" {-$ro-} class="line fixw" onFocus="showtip('{-$dic.DBUserName[2]-}');">
+			<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBUserId[2]-}')">
+  					{-$dic.DBUserId[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBUserId[1]-}</span></a><br>
+  		<select id="UserId" name="UserId" {-$ro-} class="line fixw" onFocus="showtip('{-$dic.DBUserId[2]-}');">
 				<option value=""></option>
 {-foreach name=usr key=key item=item from=$usr-}
 {-if $usern != $key-}

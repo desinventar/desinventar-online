@@ -8,7 +8,7 @@ class DIRegionAuth extends DIObject {
 	public function __construct($prmSession) {
 		$this->sTableName   = "RegionAuth";
 		$this->sPermPrefix  = "ADMIN";
-		$this->sFieldKeyDef = "UserName/STRING," . 
+		$this->sFieldKeyDef = "UserId/STRING," . 
 		                      "RegionId/STRING," .
 		                      "AuthKey/STRING";
 		$this->sFieldDef    = "AuthValue/STRING," .
@@ -22,8 +22,8 @@ class DIRegionAuth extends DIObject {
 				$this->set('RegionId', $prmRegionId);
 			}
 			if ($num_args >= 3) {
-				$prmUserName = func_get_arg(2);
-				$this->set('UserName', $prmUserName);
+				$prmUserId = func_get_arg(2);
+				$this->set('UserId', $prmUserId);
 			}
 			if ($num_args >= 6) {
 				$prmAuthKey = func_get_arg(3);
