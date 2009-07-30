@@ -1,5 +1,5 @@
 /* REGION.DB - DesInventar8.2
-2009-07-28
+2009-07-30
 */
 
 DROP TABLE IF EXISTS Info;
@@ -192,7 +192,7 @@ CREATE TABLE 'DatabaseLog' (
 DBLogDate DATETIME, 
 DBLogType VARCHAR(20), 
 DBLogNotes TEXT, 
-DBLogUserName VARCHAR(20)
+DBLogUserId VARCHAR(20)
 );
 
 DROP TABLE IF EXISTS Sync;
@@ -205,3 +205,4 @@ SyncURL VARCHAR(1024),
 SyncSpec VARCHAR(1024), 
 PRIMARY KEY('SyncId')
 );
+

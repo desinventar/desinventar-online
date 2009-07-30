@@ -12,9 +12,9 @@ $t->config_dir = 'include';
 
 function form2user($val) {
   $dat = array();
-  if (!isset($val['UserName']))
+  if (!isset($val['UserId']))
   	$ifo = current($val);
-  $dat['UserName']				= isset($val['UserName'])? $val['UserName']: key($val);
+  $dat['UserId']				= isset($val['UserId'])? $val['UserId']: key($val);
   $dat['UserFullName']		= isset($val['UserFullName'])? $val['UserFullName']: $ifo[2];
   $dat['UserEMail']				= isset($val['UserEMail'])? $val['UserEMail']: $ifo[0];
   $dat['UserCountry']			= isset($val['UserCountry'])? $val['UserCountry']: $ifo[4];
@@ -42,18 +42,18 @@ function form2user($val) {
 
 if (isset($_GET['cmd'])) {
 	if ($_GET['cmd'] == "") {
-		if ($us->sUserName == "") {
+		if ($us->UserId == "") {
 			$t->assign("ctl_login", true);
 		} else {
 			$t->assign("ctl_logged", true);
-			$t->assign("user", $us->sUserName);
+			$t->assign("user", $us->UserId);
 		}
 	} //if
 	                                                                
 	// LOGIN: CONTROL USER ACCESS
 	if ($_GET['cmd'] == "login") {
-		if ($us->login($_GET['username'], $_GET['password'])) {
-			$t->assign ("user", $us->sUserName);
+		if ($us->login($_GET['UserId'], $_GET['password'])) {
+			$t->assign ("user", $us->UserId);
 			$t->assign ("ctl_logged", true);		// Login Sucess !!
 		} else {
 			$t->assign ("ctl_invalid", true);		// Login failed
@@ -61,7 +61,7 @@ if (isset($_GET['cmd'])) {
 		} // if
 	} elseif ($_GET['cmd'] == "relogin") {
 		// RELOGIN: Previous session exists, reconnect to the same session
-		$t->assign ("user", $us->sUserName);
+		$t->assign ("user", $us->UserId);
 		$t->assign ("ctl_logged", true);    // Success: User is logged
 	} elseif ($_GET['cmd'] == "logout") {
 		// LOGOUT : Logut current user and show the login panel again
@@ -86,7 +86,7 @@ if (isset($_GET['cmd'])) {
 		case "welcome":
 			// WELCOME: Shows default window when user's login was sucessfull
 			// Shows the list of databases available for each user.
-			if ($us->sUserName != '') {
+			if ($us->UserId != '') {
 				$t->assign ("ctl_welcome", true);
 				$t->assign ("fullname", $us->getUserFullName());
 				// Enable access only Valid Role
@@ -145,22 +145,22 @@ if (isset($_GET['cmd'])) {
 			// PREFERENCES: View User Account Options
 			//if (checkUserSess()) {
 				$t->assign ("ctl_viewpref", true);
-				$usri = form2user($us->getUserInfo($us->sUserName));
+				$usri = form2user($us->getUserInfo($us->UserId));
 				$t->assign ("usri", $usri);
 			//} else
 			//	$t->assign ("ctl_passlost", true);
 			break;
 		case "chklogin":
-			// USERADMIN: check if username exists...
+			// USERADMIN: check if UserId exists...
 			$t->assign ("ctl_chklogin", true);
-			if ($us->existUser($_GET['UserName']))
+			if ($us->existUser($_GET['UserId']))
 				$t->assign ("clogin", true);
 			break;
 		case "chkpasswd":
 			// Check if password is correct (ask to dicore). if is OK show dialog to change it.
-			if ($us->validateUser($us->sUserName, $_GET['UserPasswd'])) {
+			if ($us->validateUser($us->UserId, $_GET['UserPasswd'])) {
 				$t->assign ("ctl_chkpasswd", true);
-				$usri = form2user($us->getUserInfo($us->sUserName));
+				$usri = form2user($us->getUserInfo($us->UserId));
 				$t->assign ("usri", $usri);
 			} else {
 				$t->assign ("ctl_msgupdate", true);
@@ -171,10 +171,10 @@ if (isset($_GET['cmd'])) {
 			// USERADMIN: insert new user
 			$data = form2user($_GET);
 			$t->assign ("ctl_msginsert", true);
-			$t->assign ("username", $data['UserName']);
-			if ($us->existUser($data['UserName'])) {
+			$t->assign ("UserId", $data['UserId']);
+			if ($us->existUser($data['UserId'])) {
 				// Create user if login not exists
-				$ret = $us->insertUser($data['UserName'], $data['UserFullName'], $data['UserEMail'], 
+				$ret = $us->insertUser($data['UserId'], $data['UserFullName'], $data['UserEMail'], 
 				      $data['UserPasswd'], $data['UserCountry'], $data['UserCity'], $data['UserActive']);
 			} else {
 				$ret = ERR_OBJECT_EXISTS;
@@ -190,13 +190,13 @@ if (isset($_GET['cmd'])) {
 			// USERADIN: update selected user..
 			$data = form2user($_GET);
 			$t->assign ("ctl_msgupdate", true);
-			$t->assign ("username", $data['UserName']);
+			$t->assign ("UserId", $data['UserId']);
 			// check passwd first or adminportal admited
 			$rol1 = $u->getUserRole('');
 			if ((isset($_GET['UserPasswd']) && $u->chkPasswd($_GET['UserPasswd'])) || ($rol1 == "ADMINPORTAL")) {
 				// if password match, please update..
 				if ($data['NUserPasswd'] == $data['NUserPasswd2']) {
-					$ret = $u->updateUser($data['UserName'], $data['UserFullName'], $data['UserEMail'], 
+					$ret = $u->updateUser($data['UserId'], $data['UserFullName'], $data['UserEMail'], 
 					 $data['UserPasswd'], $data['UserCountry'], $data['UserCity'], $data['UserActive']);
 					$t->assign ("updstat", $ret);
 					if (!iserror($ret)) {

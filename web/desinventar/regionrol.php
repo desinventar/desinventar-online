@@ -18,7 +18,7 @@ if (isset($_GET['rolecmd'])) {
 	$cmd = $_GET['rolecmd'];
 	if (($cmd == "insert") || ($cmd == "update")) {
 		// Set Role in RegionAuth
-		$rol = $us->setUserRole($_GET['UserName'], $reg, $_GET['AuthAuxValue']);
+		$rol = $us->setUserRole($_GET['UserId'], $reg, $_GET['AuthAuxValue']);
 		if (!iserror($rol)) 
 			$t->assign ("ctl_msgupdrole", true);
 		else {
@@ -41,7 +41,7 @@ else {
 	$t->assign ("rol", $us->getRegionRoleList($reg));
 	$t->assign ("ctl_rollist", true);
 }
-$t->assign ("usern", $us->sUserName);
+$t->assign ("usern", $us->UserId);
 $t->assign ("reg", $reg);
 $t->assign ("dic", $us->q->queryLabelsFromGroup('DB', $lg));
 $t->display ("regionrol.tpl");

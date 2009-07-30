@@ -9,7 +9,7 @@ class UserSession {
 	var $sSessionId      = '';
 	var $sRegionId       = '';
 	var $LangIsoCode     = 'eng';
-	var $sUserName       = '';
+	var $UserId          = '';
 	var $dStart          = '';
 	var $dLastUpdate     = '';
 
@@ -27,7 +27,7 @@ class UserSession {
 				$this->sRegionId = func_get_arg(1);
 			}
 		}
-		$this->sUserName = '';
+		$this->UserId = '';
 		$this->LangIsoCode = 'eng';
 		$this->load($this->sSessionId);
 	} //constructor
@@ -40,7 +40,7 @@ class UserSession {
 			foreach($this->q->core->query($sQuery) as $row) {
 				$this->sSessionId  = $row['SessionId'];
 				$this->sRegionId   = $row['RegionId'];
-				$this->sUserName   = $row['UserName'];
+				$this->UserId   = $row['UserId'];
 				$this->dStart      = $row['Start'];
 				$this->dLastUpdate = $row['LastUpdate'];
 				$iReturn = ERR_NO_ERROR;
@@ -64,10 +64,10 @@ class UserSession {
 		return $iReturn;
 	}
 
-	public function login($prmUserName, $prmUserPasswd) {
+	public function login($prmUserId, $prmUserPasswd) {
 		$iReturn = ERR_NO_ERROR;
-		if ($this->validateUser($prmUserName, $prmUserPasswd) > 0) {
-			$iReturn = $this->setUser($prmUserName);
+		if ($this->validateUser($prmUserId, $prmUserPasswd) > 0) {
+			$iReturn = $this->setUser($prmUserId);
 		}
 		return $iReturn;
 	}
@@ -76,13 +76,13 @@ class UserSession {
 		return $this->setUser("");
 	}
 
-	public function setUser($prmUserName) {
+	public function setUser($prmUserId) {
 		$iReturn = ERR_DEFAULT_ERROR;
-		$sQuery = "UPDATE UserSession SET UserName='" . $prmUserName . "' " .
+		$sQuery = "UPDATE UserSession SET UserId='" . $prmUserId . "' " .
 		          "WHERE SessionId='" . $this->sSessionId . "'";
 		if ($result = $this->q->core->query($sQuery)) {
 			$iReturn = ERR_NO_ERROR;
-			$this->sUserName = $prmUserName;
+			$this->UserId = $prmUserId;
 		}
 		return $iReturn;
 	}
@@ -94,7 +94,7 @@ class UserSession {
 		$sQuery = "INSERT INTO UserSession VALUES (" . 
 				  "'" . $this->sSessionId . "'," .
 				  "'" . $this->sRegionId  . "'," .
-				  "'" . $this->sUserName  . "'," .
+				  "'" . $this->UserId  . "'," .
 				  "1," .
 				  "'" . $this->dStart     . "'," .
 				  "'" . $this->dLastUpdate . "'" .
@@ -112,7 +112,7 @@ class UserSession {
 		$this->dLastUpdate = gmdate('c');
 		$sQuery = "UPDATE UserSession SET " . 
 				  "RegionId ='"  . $this->sRegionId  . "'," .
-				  "UserName='"   . $this->sUserName  . "'," .
+				  "UserId='"   . $this->UserId  . "'," .
 				  "Valid=1," .
 				  "Start='"      . $this->dStart     . "'," .
 				  "LastUpdate='" . $this->dLastUpdate . "'" .
@@ -131,7 +131,7 @@ class UserSession {
 		$iReturn = ERR_DEFAULT_ERROR;
 		$sQuery = "DELETE FROM UserSession WHERE SessionId='" . $this->sSessionId . "'";
 		if ($result = $this->q->core->query($sQuery)) {
-			$this->sUserName = "";
+			$this->UserId = "";
 			$this->sRegionId = "";
 			$iReturn = ERR_NO_ERROR;
 		}
@@ -157,13 +157,13 @@ class UserSession {
 	} // close()
 
 	// Validate a user/passwd pair against database
-	public function validateUser($prmUserName, $prmUserPasswd) {
+	public function validateUser($prmUserId, $prmUserPasswd) {
 		$iReturn = ERR_DEFAULT_ERROR;
-		if ( ($prmUserName == "") && ($prmUserPasswd == "")) {
+		if ( ($prmUserId == "") && ($prmUserPasswd == "")) {
 			// This is an anonymous session
 			$iReturn = ERR_NO_ERROR;
 		} else {
-			$sQuery = "SELECT * FROM User WHERE UserName='" . $prmUserName . "'";
+			$sQuery = "SELECT * FROM User WHERE UserId='" . $prmUserId . "'";
 			try {
 				$result = $this->q->core->query($sQuery);
 				while ($row = $result->fetch(PDO::FETCH_OBJ)) {
@@ -180,7 +180,7 @@ class UserSession {
 	
 	public function getUserFullName() {
 		$sUserFullName = "";
-		if ($result = $this->q->core->query("SELECT * FROM User WHERE UserName='" . $this->sUserName . "'") ) {
+		if ($result = $this->q->core->query("SELECT * FROM User WHERE UserId='" . $this->UserId . "'") ) {
 			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 				$sUserFullName = $row->UserFullName;
 			} // while
@@ -189,17 +189,17 @@ class UserSession {
 	}
 	
 	public function getAllPermsByUser() {
-		return $this->getAllPermsGeneric($this->sUserName, "");
+		return $this->getAllPermsGeneric($this->UserId, "");
 	}
 	
 	public function getAllPermsByRegion() {
-		return $this->getAllPermsGeneric($this->sUserName, $this->sRegionId);
+		return $this->getAllPermsGeneric($this->UserId, $this->sRegionId);
 	}
 	
-	private function getAllPermsGeneric($prmUserName, $prmRegionId) {
+	private function getAllPermsGeneric($prmUserId, $prmRegionId) {
 		$myPerms = array();
 		$sQuery = "SELECT * FROM RegionAuth WHERE " .
-		  "((UserName='" . $prmUserName . "') OR (UserName='')) ";
+		  "((UserId='" . $prmUserId . "') OR (UserId='')) ";
 		if ($prmRegionId != "") {
 			$sQuery .= " AND " . "((RegionId='" . $prmRegionId . "') OR (RegionId='')) ";
 		}
@@ -220,7 +220,7 @@ class UserSession {
 		$myData = array();
 		$sQuery = "SELECT RegionAuth.*,Region.RegionLabel FROM RegionAuth,Region WHERE " .
 		  " (RegionAuth.RegionId = Region.RegionId) " .
-		  " AND (UserName='" . $this->sUserName . "') " .
+		  " AND (UserId='" . $this->UserId . "') " .
 		  " AND AuthKey='ROLE'" . 
 		  " ORDER BY RegionAuth.RegionId";
 		if ($result = $this->q->core->query($sQuery) ) {
@@ -244,7 +244,7 @@ class UserSession {
 		  " ORDER BY RegionAuth.RegionId";
 		if ($result = $this->q->core->query($sQuery) ) {
 			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-				$sKey = $row->UserName;
+				$sKey = $row->UserId;
 				$sValue = $row->AuthAuxValue;
 				$myData[$sKey] = $sValue;
 			} // while
@@ -253,10 +253,10 @@ class UserSession {
 	} // function
 
 	// Get basic user info: user=>[email,pass,name,org,country,city,creadate,iplist,notes,active]
-	function getUserInfo ($username) {
+	function getUserInfo ($prmUserId) {
 		$myData = array();
 		$sQuery = "SELECT * FROM User " .
-		  " WHERE UserName='" . $this->sUserName . "'" .
+		  " WHERE UserId='" . $this->UserId . "'" .
 		  " ORDER BY UserFullName";
 		if ($result = $this->q->core->query($sQuery) ) {
 			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
@@ -271,7 +271,7 @@ class UserSession {
 				$myData[8] = $row->UserActive;
 			} // while
 		}
-		return array($this->sUserName => $myData);
+		return array($this->UserId => $myData);
 	}
 	
 	// Send a Password Reminder to an E-mail
@@ -286,7 +286,7 @@ class UserSession {
 				mail($myAnswer, 
 			     "DesInventar - Password Reminder",
 			     "Dear User\nYour login information for DesInventar is:\n" .
-			     "  UserName : $row->UserName\n" .
+			     "  UserId : $row->UserId\n" .
 			     "  Login    : $row->UserPasswd\n" . 
 			     "\n\n" .
 			     "Sincerely,\n" .
@@ -302,9 +302,9 @@ class UserSession {
 		$myAnswer = "";
 		$sQuery = "SELECT * FROM RegionAuth WHERE " .
 		  "     ((RegionId='') OR (RegionId='" . $prmRegionId . "')) " .
-		  " AND (UserName='" . $this->sUserName . "') " .
+		  " AND (UserId='" . $this->UserId . "') " .
 		  " AND AuthKey='ROLE'" . 
-		  " ORDER BY UserName,RegionId";
+		  " ORDER BY UserId,RegionId";
 		if ($result = $this->q->core->query($sQuery) ) {
 			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 				$myAnswer = $row->AuthAuxValue;
@@ -313,21 +313,21 @@ class UserSession {
 		return $myAnswer;
 	} // function
 	
-	public function setUserRole($prmUserName, $prmRegionId, $prmRole) {
+	public function setUserRole($prmUserId, $prmRegionId, $prmRole) {
 		$iReturn = ERR_NO_ERROR;
-		if ($prmUserName == '') { $iReturn = ERR_DEFAULT_ERROR; }
+		if ($prmUserId == '') { $iReturn = ERR_DEFAULT_ERROR; }
 		if ($prmRegionId == '') { $iReturn = ERR_DEFAULT_ERROR; }
 		
 		if ($iReturn > 0) {
 			// Remove All Permissions for This User on This Database
 			$sQuery = "DELETE FROM RegionAuth WHERE " .
-				" UserName='" . $prmUserName . "' AND " . 
+				" UserId='" . $prmUserId . "' AND " . 
 				" RegionId='" . $prmRegionId . "'";
 			$this->q->core->query($sQuery);
 			
 			// Create Role Permission
-			$sQuery = "INSERT INTO RegionAuth (UserName,RegionId,AuthKey,AuthValue,AuthAuxValue) " .
-				" VALUES ('" . $prmUserName . "','" . $prmRegionId . "','ROLE',0,'" . $prmRole . "')";
+			$sQuery = "INSERT INTO RegionAuth (UserId,RegionId,AuthKey,AuthValue,AuthAuxValue) " .
+				" VALUES ('" . $prmUserId . "','" . $prmRegionId . "','ROLE',0,'" . $prmRole . "')";
 			$this->q->core->query($sQuery);
 			
 			// Add permissions according to each role
@@ -372,15 +372,15 @@ class UserSession {
 			              'SUPERVISOR'  => $permSupervisor,
 			              'ADMINREGION' => $permAdminRegion);
 			foreach($perm[$prmRole] as $k => $v) {
-				$this->setPerm($prmUserName, $prmRegionId, $k, $v[0], $v[1]);
+				$this->setPerm($prmUserId, $prmRegionId, $k, $v[0], $v[1]);
 			}
 		}
 		return $iReturn;
 	} //function
 	
-	public function setPerm($prmUserName, $prmRegionId, $prmAuthKey, $prmValue, $prmAuxValue) {
+	public function setPerm($prmUserId, $prmRegionId, $prmAuthKey, $prmValue, $prmAuxValue) {
 		$sQuery = "INSERT INTO RegionAuth VALUES (" . 
-			"'" . $prmUserName . "','" . $prmRegionId  . "'," .
+			"'" . $prmUserId . "','" . $prmRegionId  . "'," .
 			"'" . $prmAuthKey . "','" . $prmValue . ",'" . $prmAuxValue . "')";
 		$this->q->core->query($sQuery);
 	}
@@ -405,15 +405,15 @@ class UserSession {
 		return $myData;
 	} // function
 	
-	public function existUser($username) {
+	public function existUser($prmUserId) {
 		return true;
 	}
 	
-	public function insertUser($UserName, $UserFullName, $UserEMail, $UserPasswd, $UserCountry, $UserCity, $UserActive) {
+	public function insertUser($UserId, $UserFullName, $UserEMail, $UserPasswd, $UserCountry, $UserCity, $UserActive) {
 		return true;
 	}
 	
-	public function updateUser($UserName, $UserFullName, $UserEMail, $UserPasswd, $UserCountry, $UserCity, $UserActive) {
+	public function updateUser($UserId, $UserFullName, $UserEMail, $UserPasswd, $UserCountry, $UserCity, $UserActive) {
 		return true;
 	}
 	
@@ -427,9 +427,9 @@ class UserSession {
 		// First delete old datacard locks...
 		$this->clearOldLocks();
 		$sReturn = '';
-		$sQuery = "SELECT S.UserName FROM UserLockList U,UserSession S WHERE U.SessionId=S.SessionId AND U.RecordId='" . $prmDisasterId . "'";
+		$sQuery = "SELECT S.UserId FROM UserLockList U,UserSession S WHERE U.SessionId=S.SessionId AND U.RecordId='" . $prmDisasterId . "'";
 		foreach ($this->q->core->query($sQuery) as $row) {
-			$sReturn = $row['UserName'];
+			$sReturn = $row['UserId'];
 		}
 		return $sReturn;
 	}
@@ -452,15 +452,15 @@ class UserSession {
 		$this->q->core->query($sQuery);
 	}
 	
-	public function getUsersList($prmUserName) {
+	public function getUsersList($prmUserId) {
 		$list = array();
 		$sQuery = "SELECT * FROM User WHERE UserActive > 0 ";
-		if ($prmUserName != '') {
-			$sQuery .= " AND UserName='" . $prmUserName . "'";
+		if ($prmUserId != '') {
+			$sQuery .= " AND UserId='" . $prmUserId . "'";
 		}
 		$sQuery .= " ORDER BY UserFullName";
 		foreach($this->q->core->query($sQuery) as $row) {
-			$list[$row['UserName']]=$row['UserFullName'];
+			$list[$row['UserId']]=$row['UserFullName'];
 		}
 		return $list;
 	}

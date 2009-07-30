@@ -5,12 +5,12 @@
 {-/if-}
 {-*** USER LOGIN WINDOW - USER MENU ***-}
 {-if $ctl_login-}
-<form action="javascript:updateUserBar('user.php', 'login', $('username').value, $('password').value);" 
+<form action="javascript:updateUserBar('user.php', 'login', $('userid').value, $('password').value);" 
 		id="uf" method="get">
 	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center style="margin-top:7px">
 		<tr><td><img src="images/c1.gif" width="133" height="4"></td></tr>
 		<tr><td class="mizq" align="right">{-#tuser#-} <input type="text" 
-				id="username" name="username" value="" size="8" class="f"></td></tr>
+				id="userid" name="userid" value="" size="8" class="f"></td></tr>
 		<tr><td><img src="images/c2.gif" width="133" height="3" alt=""></td></tr>
 		<tr><td class="mizq" align="right">{-#tpassword#-} <input type="password" 
 				name="password" id="password" value="" size="8" class="f"></td></tr>
@@ -188,7 +188,7 @@
   {-/if-}
   <form id="userpafrm" name="userpafrm" method="GET" 
 			action="javascript:var s=$('userpafrm').serialize(); sendData('','user.php', s, '');"
-			onSubmit="javascript:var a=new Array('UserName', 'UserEMail', 'UserFullName'
+			onSubmit="javascript:var a=new Array('UserId', 'UserEMail', 'UserFullName'
 								{-if $ctl_viewpref-}, 'UserPasswd'{-/if-}); return(checkForm(a, '{-#errmsgfrmregist#-}'));">
  {-/if-}
  {-if $ctl_viewpref-}
@@ -199,7 +199,7 @@
   				<input type="button" value="ok" class="line"
   						onClick="updateList('userpaaddsect', 'user.php', 'cmd=chkpasswd&UserPasswd='+ $('UserPasswd').value);
   								$('userpaaddsect').style.display='block';">
-  				<input type="hidden" id="UserName" name="UserName" value="{-$usri.UserName-}">
+  				<input type="hidden" id="UserId" name="UserId" value="{-$usri.UserId-}">
  		 			<input type="hidden" id="UserCountry" name="UserCountry" value="{-$usri.UserCountry-}">
   				<input type="hidden" id="UserActive" name="UserActive" value="{-$usri.UserActive-}">
   		</td>
@@ -211,10 +211,10 @@
  	  <table class="grid">
  		 <tr>
   		<td><b style="color:darkred;">{-#tuser#-}</b></td>
-  		<td><input type="text" id="UserName" name="UserName" size="15" maxlength="15" class="line"
- {-if $ctl_chkpasswd-} value="{-$usri.UserName-}" disabled></td>
+  		<td><input type="text" id="UserId" name="UserId" size="15" maxlength="15" class="line"
+ {-if $ctl_chkpasswd-} value="{-$usri.UserId-}" disabled></td>
  		 </tr>
- {-else-} onBlur="updateList('chklogin', 'user.php', 'cmd=chklogin&UserName='+ $('UserName').value);">
+ {-else-} onBlur="updateList('chklogin', 'user.php', 'cmd=chklogin&UserId='+ $('UserId').value);">
   				<span id="chklogin" style="display:inline"></span>
   		<input type="hidden" id="UserPasswd" name="UserPasswd" value="{-$usri.UserPasswd-}"></td>
   	 </tr>
@@ -289,9 +289,9 @@
  {-/if-}
 {-if $ctl_msginsert-}
  {-if $errinsuser-}
-  {-#terror#-}[{-$insstat-}]: {-#errinsert#-} {-$username-}
+  {-#terror#-}[{-$insstat-}]: {-#errinsert#-} {-$userid-}
  {-elseif $noerrorins-}
-  {-#msginsertsucc#-} {-$username-}
+  {-#msginsertsucc#-} {-$userid-}
  {-/if-}
 {-/if-}
 {-if $ctl_msgupdate-}
@@ -300,9 +300,9 @@
  {-elseif $errbadpass-}
   {-#errbadpasswd#-}
  {-elseif $errupduser-}
-  {-#terror#-}[{-$updstat-}] {-#errupdate#-} {-$username-}
+  {-#terror#-}[{-$updstat-}] {-#errupdate#-} {-$userid-}
  {-elseif $noerrorupd-}
-  {-#msgupdatesucc#-} {-$username-}
+  {-#msgupdatesucc#-} {-$userid-}
  {-/if-}
 {-/if-}
 {-if $ctl_msgsend-}

@@ -183,7 +183,7 @@ if (isset($_GET['u'])) {
 		// End _CMD Block
 	} else {
 		// Default view of DesInventar
-		$t->assign ("usr", $us->sUserName);
+		$t->assign ("usr", $us->UserId);
 		$rinfo = $us->q->getDBInfo();
 		$t->assign ("regname",  $rinfo['RegionLabel']);
 		$role = $us->getUserRole($sRegionId);

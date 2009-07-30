@@ -112,7 +112,7 @@ class DIImport {
 					'DI6Date : ' . $this->get('RecordCreation') . ')'
 					
 				);
-				$this->set('RecordAuthor'  , $us->sUserName);
+				$this->set('RecordAuthor'  , $us->UserId);
 				$this->set('RecordCreation', gmdate('c'));
 				
 				$bInsert = ($o->validateCreate() > 0);

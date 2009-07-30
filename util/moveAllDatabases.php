@@ -9,16 +9,20 @@
  2009-07-30 Jhon H. Caicedo <jhcaiced@desinventar.org>
 */
 $_SERVER["DI8_WEB"] = '../web';
-require_once('../web/include/loader.php');
-require_once('../web/include/diregion.class.php');
-require_once('../web/include/diregionauth.class.php');
+require_once($_SERVER["DI8_WEB"] . '/include/loader.php');
+require_once(BASE . '/include/diregion.class.php');
+require_once(BASE . '/include/diregionauth.class.php');
+require_once(BASE . '/include/diuser.class.php');
+
 $dbh = new PDO('mysql:host=localhost;dbname=di8db', '','',
    array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 $RegionList = array();
 foreach($dbh->query("SELECT * FROM Region") as $row) {
 	$RegionList[] = $row['RegionUUID'];
 }
-$RegionList = array('BOLIVIA');
+moveUsers($dbh,$us);
+$RegionList = array();
+//$RegionList = array('BOLIVIA');
 foreach ($RegionList as $RegionUUID) {
 	foreach($dbh->query("SELECT * FROM Region WHERE RegionUUID='" . $RegionUUID . "'") as $row) {
 		$r = new DIRegion($us);
@@ -74,10 +78,23 @@ foreach ($RegionList as $RegionUUID) {
 	if ($iReturn >= 0) {
 		$r->q->core->query("DELETE FROM RegionAuth WHERE RegionId='" . $RegionId . "'");
 		foreach($dbh->query("SELECT * FROM RegionAuth WHERE RegionUUID='" . $RegionUUID . "'") as $row) {
-			$a = new DIRegionAuth($us, $RegionId, $row['UserName'], $row['AuthKey'], $row['AuthValue'], $row['AuthAuxValue']);
+			$a = new DIRegionAuth($us, $RegionId, $row['UserId'], $row['AuthKey'], $row['AuthValue'], $row['AuthAuxValue']);
 			$a->insert();
 		} //foreach
 	}
 } //foreach
 $dbh = null;
+
+function moveUsers($dbh, $us) {
+	foreach($dbh->query("SELECT * FROM Users") as $row) {
+		$u = new DIUser($us);
+		$u->setFromArray($row);
+		$u->set('CountryIso', $row['UserCountry']);
+		//print $u->getInsertQuery() . "\n";
+		//print $u->getUpdateQuery() . "\n";
+		//printf("%-20s %-40s\n", $u->get('UserId'), $u->get('UserEMail'));
+		$u->insert();
+	}
+}
+
 </script>

@@ -34,7 +34,7 @@
 	<script type="text/javascript" src="include/menu.js"></script>
 	<script type="text/javascript" language="javascript">
 	function updateUserBar(url, cmd, user, pass) {
-		var pars = 'cmd=' + cmd + '&username=' + user + '&password=' + pass;
+		var pars = 'cmd=' + cmd + '&userid=' + user + '&password=' + pass;
 		var upd = true;
 		if (cmd == "logout" && chkWin('desinventar')) {
 			if (confirm("{-#talerdiwin#-}"))

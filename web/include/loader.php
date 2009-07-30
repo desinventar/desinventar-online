@@ -213,18 +213,18 @@ function testMap($laypath) {
 // Check if session is of a user..
 function checkUserSess() {
 	// NOTE: need a function checkSession in dicore
-	if (isset($us->sUserName) && isset($us->sSessionId) &&
+	if (isset($us->UserId) && isset($us->sSessionId) &&
 			strlen($us->sSessionId) > 0)
-		if (strlen($us->sUserName) > 0)
+		if (strlen($us->UserId) > 0)
 			return true;
 	return false;
 }
 
 // Check if session is of anonymous
 function checkAnonSess() {
-	if (isset($us->sUserName) && isset($us->sSessionId) &&
+	if (isset($us->UserId) && isset($us->sSessionId) &&
 			strlen($us->sSessionId) > 0)
-		if (strlen($us->sUserName) == 0)
+		if (strlen($us->UserId) == 0)
 			return true;
 	return false;
 }

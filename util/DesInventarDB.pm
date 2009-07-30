@@ -25,14 +25,14 @@ $VERSION = '1.1';
                  'IsVRegion/INTEGER'         => 0
                 },
             'RegionAuth' =>
-                {'UserName/STRING'     => 'UserName',
+                {'UserId/STRING'       => 'UserName',
                  'RegionId/STRING'     => 'RegionUUID',
                  'Authkey/STRING'      => 'AuthKey',
                  'AuthValue/INTEGER'   => 'AuthValue',
                  'AuthAuxValue/STRING' => 'AuthAuxValue'
                 },
             'User' =>
-                {'UserName/STRING'           => undef,
+                {'UserId/STRING'             => undef,
                  'UserEMail/STRING'          => undef,
                  'UserPasswd/STRING'         => undef,
                  'UserFullName/STRING'       => undef,
@@ -172,7 +172,7 @@ $VERSION = '1.1';
                 {'DBLogDate/DATETIME'                => undef,
                  'DBLogType/STRING'                  => undef,
                  'DBLogNotes/STRING'                 => undef,
-                 'DBLogUserName/STRING'              => undef
+                 'DBLogUserId/STRING'                => undef
                 },
              'EEField' =>
                 {'EEFieldId/STRING'      => undef,
