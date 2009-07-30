@@ -105,7 +105,7 @@ if ($bCore) {
 	}
 	if ($bInfo) {
 		# Rebuild Info Table
-		&rebuildInfoTable($dbin, $sRegion);
+		#&rebuildInfoTable($dbin, $sRegion);
 	}
 }
 
@@ -199,7 +199,7 @@ sub convertTable() {
 		%oTableDef = &buildEEDataTableDef($dbin, $sRegion);
 		# Fixed Fields (Ugly !!)
 		print "DROP TABLE 'EEData';\n";
-		print "CREATE TABLE 'EEData' (DisasterId VARCHAR(50) NOT NULL, SyncRecord DATETIME);\n";
+		print "CREATE TABLE 'EEData' (DisasterId VARCHAR(50) NOT NULL, RecordCreation DATETIME, RecordSync DATETIME, RecordUpdate DATETIME);\n";
 		print "BEGIN TRANSACTION;\n";
 		foreach $sFieldDef (keys(%oTableDef)) {
 			($sFieldName, $sFieldType) = split('/', $sFieldDef);
