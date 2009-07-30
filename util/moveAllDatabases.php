@@ -6,28 +6,26 @@
 
  Utility to export databases from MySQL to SQLite
 
- 2009-07-22 Jhon H. Caicedo <jhcaiced@desinventar.org>
+ 2009-07-30 Jhon H. Caicedo <jhcaiced@desinventar.org>
 */
-$_SERVER["DI8_WEB"] = '/home/jhcaiced/devel/di8/web';
+$_SERVER["DI8_WEB"] = '../web';
 require_once('../web/include/loader.php');
 require_once('../web/include/diregion.class.php');
 require_once('../web/include/diregionauth.class.php');
-$dbh = new PDO(
-   'mysql:host=localhost;dbname=di8db',
-   '','',
-   array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
-   );
+$dbh = new PDO('mysql:host=localhost;dbname=di8db', '','',
+   array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 $RegionList = array();
 foreach($dbh->query("SELECT * FROM Region") as $row) {
 	$RegionList[] = $row['RegionUUID'];
 }
-//$RegionList = array('BOLIVIA');
+$RegionList = array('BOLIVIA');
 foreach ($RegionList as $RegionUUID) {
 	foreach($dbh->query("SELECT * FROM Region WHERE RegionUUID='" . $RegionUUID . "'") as $row) {
 		$r = new DIRegion($us);
 		$r->set('CountryIso'     , $row['CountryIsoCode']);
 		$r->set('RegionLabel'    , $row['RegionLabel']);
 		$RegionId = $r->buildRegionId();
+		$RegionId = 'BOL-1248793194-bolivia_inventario_historico_de_desastres';
 		$r->set('RegionId'       , $RegionId);
 		$r->set('InfoGeneral'    , $row['RegionDesc']);
 		$r->set('InfoGeneral_eng', $row['RegionDescEN']);
@@ -48,9 +46,7 @@ foreach ($RegionList as $RegionUUID) {
 		$r->set('GeoLimitMaxY'     , $row['GeoLimitMaxY']);
 		$r->set('InfoCredits'      , $row['RegionCredits']);
 	} //foreach
-	//$RegionId = 'BOL-1248793194-bolivia_inventario_historico_de_desastres';
-	//$r->set('RegionId', $RegionId);
-	printf("%-20s %40s\n", $RegionUUID, $RegionId);
+	printf("%-20s %-40s\n", $RegionUUID, $RegionId);
 	$iReturn = $r->createRegionDB();
 	if ($iReturn > 0) {
 		$r->q->core->query("DELETE FROM Region WHERE RegionId='" . $RegionId . "'");
