@@ -110,13 +110,13 @@ if (isset($_GET['cmd'])) {
 					switch ($sRole) {
 						case "ADMINREGION":		$radm[$sRegionId] = $sRegionLabel;
 						break;
-						case "USER":					$rusr[$sRegionId] = $sRegionLabel;
+						case "USER":			$rusr[$sRegionId] = $sRegionLabel;
 						break;
 						case "SUPERVISOR":		$rsup[$sRegionId] = $sRegionLabel;
 						break;
-						case "OBSERVER":			$obs[$sRegionId] = $sRegionLabel;
+						case "OBSERVER":		$obs[$sRegionId] = $sRegionLabel;
 						break;
-						default:							$hrole = false;
+						default:				$hrole = false;
 						break;
 					}
 				} // foreach
