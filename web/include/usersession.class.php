@@ -225,10 +225,28 @@ class UserSession {
 		  " ORDER BY RegionAuth.RegionId";
 		if ($result = $this->q->core->query($sQuery) ) {
 			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-			 $sKey = $row->RegionId;
-			 $sValue = $row->AuthAuxValue;
-			 $myData[$sKey]['Role']        = $row->AuthAuxValue;
-			 $myData[$sKey]['RegionLabel'] = $row->RegionLabel;
+				$sKey = $row->RegionId;
+				$sValue = $row->AuthAuxValue;
+				$myData[$sKey]['Role']        = $row->AuthAuxValue;
+				$myData[$sKey]['RegionLabel'] = $row->RegionLabel;
+			} // while
+		}
+		return $myData;
+	} // function
+
+	// Return hash with all  users of a Region with a role
+	function getRegionRoleList($myregion) {
+		$myData = array();
+		$sQuery = "SELECT RegionAuth.*,Region.RegionLabel FROM RegionAuth,Region WHERE " .
+		  " (RegionAuth.RegionId = Region.RegionId) " .
+		  " AND (Region.RegionId='" . $myregion . "') " .
+		  " AND AuthKey='ROLE'" . 
+		  " ORDER BY RegionAuth.RegionId";
+		if ($result = $this->q->core->query($sQuery) ) {
+			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
+				$sKey = $row->UserName;
+				$sValue = $row->AuthAuxValue;
+				$myData[$sKey] = $sValue;
 			} // while
 		}
 		return $myData;

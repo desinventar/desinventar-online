@@ -17,22 +17,20 @@
 {-/if-}
 {-if $ctl_rollist-}
 {-foreach name=rol key=key item=item from=$rol-}
+{-if $usern != $key-}
 				<tr class="{-if ($smarty.foreach.rol.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}"
 						onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
 						onClick="setRolLog('{-$key-}','{-$item-}', 'role'); $('rolecmd').value='update';">
 					<td>{-$key-}</td>
 					<td>
-{-if $item == "NONE"-}
-    {-$dic.DBRoleNone[0]-}
-{-elseif $item == "USER"-}
-    {-$dic.DBRoleUser[0]-}
-{-elseif $item == "OBSERVER"-}
-    {-$dic.DBRoleObserver[0]-}
-{-elseif $item == "SUPERVISOR"-}
-    {-$dic.DBRoleSupervisor[0]-}
+{-if $item == "NONE"-}			{-$dic.DBRoleNone[0]-}
+{-elseif $item == "USER"-}		{-$dic.DBRoleUser[0]-}
+{-elseif $item == "OBSERVER"-}	{-$dic.DBRoleObserver[0]-}
+{-elseif $item == "SUPERVISOR"-}{-$dic.DBRoleSupervisor[0]-}
 {-/if-}
 					</td>
 				</tr>
+{-/if-}
 {-/foreach-}
 {-/if-}
 {-if $ctl_adminreg-}
@@ -54,7 +52,9 @@
   		<select id="UserName" name="UserName" {-$ro-} class="line fixw" onFocus="showtip('{-$dic.DBUserName[2]-}');">
 				<option value=""></option>
 {-foreach name=usr key=key item=item from=$usr-}
+{-if $usern != $key-}
 				<option value="{-$key-}">{-$item-}</option>
+{-/if-}
 {-/foreach-}
 			</select>
 			<br><br>

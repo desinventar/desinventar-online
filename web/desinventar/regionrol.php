@@ -12,14 +12,6 @@ if (isset($_GET['r']) && !empty($_GET['r']))
 else
   exit();
 
-function getRAPermList($lst) {
-	$dat = array();
-	foreach ($lst as $k=>$v)
-		if ($v=="NONE" || $v=="USER" || $v=="OBSERVER" || $v=="SUPERVISOR")
-			$dat[$k] = $v;
-	return $dat;
-}
-
 // EDIT ROLE: Form to Create and assign role
 if (isset($_GET['rolecmd'])) {
 	$mod = "role";
@@ -34,22 +26,22 @@ if (isset($_GET['rolecmd'])) {
 			$t->assign ("updstatrole", showerror($rol));
 		}
 	}
-  // reload list from local SQLITE
-  else if ($cmd == "list") {
-  	$t->assign ("rol", getRAPermList($us->getUserRoleByRegion($reg, '')));
+	// reload list from local SQLITE
+	else if ($cmd == "list") {
+		$t->assign ("rol", $us->getRegionRoleList($reg));
 		$t->assign ("ctl_rollist", true);
-  }
+	}
 }
 else {
 	$urol = $us->getUserRole($reg);
 	if ($urol == "OBSERVER")
 		$t->assign ("ro", "disabled");
 	$t->assign ("ctl_adminreg", true);
-	$t->assign ("usr", $us->getUserFullName(''));
+	$t->assign ("usr", $us->getUsersList(''));
+	$t->assign ("rol", $us->getRegionRoleList($reg));
 	$t->assign ("ctl_rollist", true);
-	//$t->assign ("rol", getRAPermList($us->getUserRoleByRegion($reg, '')));
-	$t->assign ("rol", getRAPermList($us->getUserRoleList($reg, '')));
 }
+$t->assign ("usern", $us->sUserName);
 $t->assign ("reg", $reg);
 $t->assign ("dic", $us->q->queryLabelsFromGroup('DB', $lg));
 $t->display ("regionrol.tpl");
