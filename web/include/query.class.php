@@ -461,7 +461,7 @@ class Query extends PDO
 		if ($this->dreg != null) {
 			$sql = "SELECT * FROM Info WHERE InfoKey='" . $prmInfoKey . "'";
 			if ($prmInfoKey != 'LangIsoCode') {
-				$sql .= " AND LangIsoCOde='" . $this->getDBInfoValue('LangIsoCode') . "'";
+				$sql .= " AND (LangIsoCode='" . $this->getDBInfoValue('LangIsoCode') . "' OR LangIsoCode='')";
 			}
 			foreach($this->dreg->query($sql) as $row) {
 				$sReturn = $row['InfoValue'];

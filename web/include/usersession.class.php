@@ -153,7 +153,7 @@ class UserSession {
 		return $iReturn;
 	} // open()
 
-	public function close($prmRegionId) {
+	public function close($prmRegionId = '') {
 		return $this->open("");
 	} // close()
 
