@@ -79,7 +79,7 @@ class DIRegion extends DIObject {
 		return $iReturn;
 	}
 	
-	public function	saveInfo() {
+	public function	saveInfo($prmSave = true) {
 		$iReturn = ERR_NO_ERROR;
 		$now = gmdate('c');
 		$this->setConnection($this->get('RegionId'));
@@ -129,16 +129,25 @@ class DIRegion extends DIObject {
 	}
 	
 	public function createRegionDB() {
+		// Creates/Initialize the region database
 		$iReturn = ERR_NO_ERROR;
 		$prmRegionId = $this->get('RegionId');
 		// Create Directory for New Region
 		$DBDir = VAR_DIR . '/' . $prmRegionId . '/';
+		$DBFile = $DBDir . '/desinventar.db';
 		try {
 			if (!file_exists($DBDir)) {
 				mkdir($DBDir);
 			}
 			if (file_exists(CONST_DBREGION)) {
-				$iReturn = copy(CONST_DBREGION, $DBDir . '/desinventar.db');
+				if (file_exists($DBFile)) {
+					$DBFile2 = $DBFile . '.bak';
+					if (file_exists($DBFile2)) {
+						unlink($DBFile2);
+					}
+					rename($DBFile, $DBFile2);
+				}
+				$iReturn = copy(CONST_DBREGION, $DBFile);
 				$this->q->setDBConnection($this->get('RegionId'));
 			}
 		} catch (Exception $e) {
@@ -148,6 +157,54 @@ class DIRegion extends DIObject {
 		// Copy Predefined Event/Cause Lists
 		$this->copyEvents($this->get('LangIsoCode'));
 		$this->copyCauses($this->get('LangIsoCode'));
+		
+		$this->insert();
+		
+		// Create Generic GeoLevel 0
+		$g = new DIGeoLevel($this->session, 0);
+		$g->set('GeoLevelName', 'Level 0');
+		$g->insert();
+		return $iReturn;
+	}
+
+	public function addRegionItem($prmRegionItemId, $prmRegionItemGeographyId = '') {
+		$RegionId = $this->get('RegionId');
+		$RegionDir = VAR_DIR . '/' . $this->get('RegionId');
+		$RegionItemDir = VAR_DIR . '/' . $prmRegionItemId;
+		$RegionItemDB = $RegionItemDir . '/desinventar.db';
+		
+		if ($prmRegionItemGeographyId == '') {
+			$prmRegionItemGeographyId = $this->getRegionItemGeographyId($prmRegionItemId);
+		}
+		$iReturn = ERR_NO_ERROR;
+		if ($prmRegionItemId == '') {
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($iReturn > 0) {
+			if (!file_exists($RegionItemDB)) {
+				$iReturn = ERR_FILE_NOT_FOUND;
+			}	
+		}
+		if ($iReturn > 0) {
+			// Add RegionItem record
+			$iReturn = $this->addRegionItemRecord($prmRegionItemId);
+		}
+		if ($iReturn > 0) {
+			// Add Geography to Level0
+			if ($prmRegionItemGeographyId == '') {
+				$prmRegionItemGeographyId = $this->getRegionItemGeographyId($prmRegionItemId);
+			}
+			$iReturn = $this->addRegionItemGeography($prmRegionItemId, $prmRegionItemGeographyId);
+		}
+		if ($iReturn > 0) {
+			$iReturn = $this->addRegionItemGeoLevel($prmRegionItemId);
+		}
+		if ($iReturn > 0) {
+			$iReturn = $this->addRegionItemGeoCarto($prmRegionItemId, $prmRegionItemGeographyId);
+		}
+		if ($iReturn > 0) {
+			$iReturn = $this->addRegionItemDisaster($prmRegionItemId,$prmRegionItemGeographyId);
+		}
 		return $iReturn;
 	}
 
@@ -198,42 +255,6 @@ class DIRegion extends DIObject {
 		return $iReturn;
 	}
 		
-	public function addRegionItem($prmRegionItemId, $prmRegionItemGeographyId) {
-		$RegionId = $this->get('RegionId');
-		$RegionDir = VAR_DIR . '/' . $this->get('RegionId');
-		$RegionItemDir = VAR_DIR . '/' . $prmRegionItemId;
-		$RegionItemDB = $RegionItemDir . '/desinventar.db';
-		$iReturn = ERR_NO_ERROR;
-		if ($prmRegionItemId == '') {
-			$iReturn = ERR_UNKNOWN_ERROR;
-		}
-		if ($iReturn > 0) {
-			if (!file_exists($RegionItemDB)) {
-				$iReturn = ERR_FILE_NOT_FOUND;
-			}	
-		}
-		if ($iReturn > 0) {
-			// Add RegionItem record
-			$iReturn = $this->addRegionItemRecord($prmRegionItemId);
-		}
-		if ($iReturn > 0) {
-			// Add Geography to Level0
-			if ($prmRegionItemGeographyId == '') {
-				$prmRegionItemGeographyId = $this->getRegionItemGeographyId($prmRegionItemId);
-			}
-			$iReturn = $this->addRegionItemGeography($prmRegionItemId, $prmRegionItemGeographyId);
-		}
-		if ($iReturn > 0) {
-			$iReturn = $this->addRegionItemGeoLevel($prmRegionItemId);
-		}
-		if ($iReturn > 0) {
-			$iReturn = $this->addRegionItemGeoCarto($prmRegionItemId, $prmRegionItemGeographyId);
-		}
-		if ($iReturn > 0) {
-			$iReturn = $this->addRegionItemDisaster($prmRegionItemId,$prmRegionItemGeographyId);
-		}
-		return $iReturn;
-	}
 	
 	public function addRegionItemGeoLevel($prmRegionItemId) {
 		$iReturn = ERR_NO_ERROR;
@@ -297,6 +318,10 @@ class DIRegion extends DIObject {
 			}
 		}
 		$q->query("DETACH DATABASE RegItem");
+		$g = new DIGeoCarto($this->session, 0);
+		$g->set('GeographyId', $prmRegionItemGeographyId);
+		$g->set('RegionId', $prmRegionItemId);
+		$g->insert();
 		return $iReturn;
 	}
 	
@@ -419,6 +444,7 @@ class DIRegion extends DIObject {
 				if ($ItemMinY < $MinY) { $MinY = $ItemMinY; }
 				$ItemMaxY = $r->getDBInfoValue('GeoLimitMaxY');
 				if ($ItemMaxY > $MaxY) { $MaxY = $ItemMaxY; }
+				$r = null;
 			} //foreach
 			$this->q->setDBConnection($this->get('RegionId'));
 			if ($iReturn > 0) {
@@ -446,7 +472,7 @@ class DIRegion extends DIObject {
 		$RegionLabel = str_replace(array('ñ','á','é','í','ó','ú','Á','É','Í','Ó','Ú'),
 		                           array('n','a','e','i','o','u','a','e','i','o','u'),
 		                           $RegionLabel);
-		
+		$RegionLabel = substr($RegionLabel, 0, 60);
 		$RegionId = $CountryIso . '-' . $Timestamp . '-' . $RegionLabel;
 		return $RegionId;
 	} //buildRegionId

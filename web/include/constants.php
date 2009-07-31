@@ -8,6 +8,8 @@
 
 define('CONST_REGIONACTIVE', 1);
 define('CONST_REGIONPUBLIC', 2);
+define('FALSE', 0);
+define('TRUE' , 1);
 
 // Database File Locations
 // core.db - Users, Regions, Auths.. 
