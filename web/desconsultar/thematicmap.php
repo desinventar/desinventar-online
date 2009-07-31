@@ -199,7 +199,7 @@ switch($_SERVER["SERVER_NAME"]) {
 		break;
 }
 $t->assign ("reg", $reg);
-$t->assign ("dic", $dic);
+//$t->assign ("dic", $dic);
 $t->assign ("basemap", SOFTDIR . "/worldmap/worldmap.map");
 $t->assign ("mps", MAPSERV);
 $t->assign ("googlemapkey", $GoogleMapsKey);

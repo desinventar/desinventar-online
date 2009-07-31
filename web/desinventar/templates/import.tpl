@@ -55,33 +55,41 @@
 			<input type="hidden" name="cmd" value="upload">
 			<input type="hidden" name="diobj" value="5">
 			<input type="file" id="ieff" name="desinv" class="fixw line" {-$ro-}>
-			<input type="submit" value="{-#tsend#-}" class="line" {-$ro-} onClick="$('iframe2').src='loading.gif';">
+			<input type="submit" value="Enviar" class="line" {-$ro-} onClick="$('iframe2').src='loading.gif';">
 		</form>
 		<br>
 		<iframe name="iframe2" id="iframe2" frameborder="1" src="about:blank"
-			style="height:400px; width:1280px;"></iframe>
+			style="height:400px; width:780px;"></iframe>
 	</p>
 {-/if-}
 {-* Show import interface to assign specific fields *-}
 {-if $ctl_import-}
 <form method="POST" action="import.php">
-<table>
+<input type="submit" value="{-#tsend#-}" class="line">
+<br><br>
+<table border="1">
  <tr>
 {-foreach name=fld key=k item=i from=$fld-}
+{-assign var="nxt" value="`$smarty.foreach.fld.iteration+1`"-}
   <td>
-   <input type="checkbox" onclick="enadisField('col{-$k-}', 'col{-`$k+1`-}', this.checked);" checked>
-   <select id="col{-$k-}" name="col{-$k-}" onChange="fillColumn('col{-$k-}', 'col{-`$k+1`-}', true);">
-    <option value=""></option>
- {-foreach name=fld2 key=k2 item=i2 from=$fld-}
-    <option value="{-$i2-}">{-$i2-}</option>
- {-/foreach-}
-	</select>
+<!--   <input type="checkbox" onclick="enadisField('col{-$smarty.foreach.fld.iteration-}', 'col{-$nxt-}', this.checked);" checked> 
+	onChange="fillColumn('col{-$smarty.foreach.fld.iteration-}', 'col{-$nxt-}', true);"-->
+   <select id="col{-$smarty.foreach.fld.iteration-}" name="col{-$smarty.foreach.fld.iteration-}">
+    <option value="{-$k-}">{-$i-}</option>
+   </select>
   </td>
 {-/foreach-}
-  </tr>
+ </tr>
+{-foreach name=csv key=k item=i from=$csv-}
+ <tr>
+  {-foreach name=cs2 key=ky item=it from=$i-}
+  <td>{-$it-}</td>
+  {-/foreach-}
+ </tr>
+{-/foreach-}
 </table>
-<input type="hidden" name="FileName" value="{-$FileName-}">
 <input type="hidden" name="cmd" value="import">
+<input type="hidden" name="FileName" value="{-$FileName-}">
 </form>
 {-/if-}
 {-* Show importation results *-}
@@ -93,21 +101,21 @@
  {-/if-}
  <br>
  {-#tfound1#-} {-$msg.ErrorCount-} {-#tfound2#-}<br>
-	<table style="font-size:11px;" border="1" width="100%">
-		<tr><td>{-#tfile#-}</td><td>Detalles</td></tr>
+ <table style="font-size:11px;" border="1" width="100%">
+  <tr><td>{-#tfile#-}</td><td>Detalles</td></tr>
  {-foreach name=res key=key item=it from=$res-}
-	{-if $it[0] == "ERROR"-}
-		<tr><td bgcolor="red">{-$it[1]-}</td><td>{-$it[3]-} | {-$it[4]-}</td></tr>
-	{-elseif $it[0] == "WARNING"-}
-		<tr><td bgcolor="yellow">{-$it[1]-}</td><td>{-$it[3]-} | {-$it[4]-}</td></tr>
-	{-else-}
-		<tr><td>{-$it[0]-}</td><td>{-$it[2]-}</td></tr>
-	{-/if-}
+  {-if $it[0] == "ERROR"-}
+  <tr><td bgcolor="red">{-$it[1]-}</td><td>{-$it[3]-} | {-$it[4]-}</td></tr>
+  {-elseif $it[0] == "WARNING"-}
+  <tr><td bgcolor="yellow">{-$it[1]-}</td><td>{-$it[3]-} | {-$it[4]-}</td></tr>
+  {-else-}
+  <tr><td>{-$it[0]-}</td><td>{-$it[2]-}</td></tr>
+  {-/if-}
  {-/foreach-}
-	</table>
+ </table>
 {-/if-}
 {-if $ctl_error-}
-  ** {-#tfound1#-} {-#tfound2#-}:<br>
+ ** {-#tfound1#-} {-#tfound2#-}:<br>
  <b>{-$error-}..</b><br>
 {-/if-}
 </body>

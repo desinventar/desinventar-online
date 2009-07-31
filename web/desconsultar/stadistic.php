@@ -29,7 +29,7 @@ $dic = array_merge($dic, $q->queryLabelsFromGroup('Stadist', $lg));
 $dic = array_merge($dic, $q->queryLabelsFromGroup('Effect', $lg));
 $dic = array_merge($dic, $q->queryLabelsFromGroup('Sector', $lg));
 $dic = array_merge($dic, $q->getEEFieldList("True"));
-$t->assign ("dic", $dic);
+//$t->assign ("dic", $dic);
 $t->assign ("reg", $reg);
 $t->assign ("regname", $regname);
 
