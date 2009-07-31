@@ -5,18 +5,18 @@
 */
 
 require_once('../include/loader.php');
+require_once('../include/diimport.class.php');
 /*require_once('../include/usersession.class.php');
 require_once('../include/query.class.php');
 require_once('../include/region.class.php');
-require_once('../include/diimport.class.php');
 require_once('../include/didisaster.class.php');
 require_once('../include/digeography.class.php');
 require_once('../include/dievent.class.php');
 require_once('../include/dicause.class.php');
 require_once('../include/dieedata.class.php');*/
 
-function loadCSV($csv) {
-	$handle = fopen($csv, "r");
+function loadCSV($ocsv) {
+	$handle = fopen($ocsv, "r");
 	$res = array();
 	while (($data = fgetcsv($handle, 100, ",")) !== FALSE)
 		$res[] = array($data[0], $data[1], $data[2], $data[3], $data[4]);
@@ -54,62 +54,46 @@ if (isset($_FILES['desinv']) && isset($post['diobj'])) {
 			}
 			$iserror = false;
 			$FileName = TEMP . '/' . $name;
-			$ocsv = null;
-			$DisasterImport = array(0 => 'DisasterId', 
-		                        1 => 'DisasterSerial',
-		                        2 => 'DisasterBeginTime',
-		                        3 => 'DisasterGeographyId',
-			                    4 => 'DisasterSiteNotes',
-			                    5 => 'DisasterSource',
-			                    6 => 'DisasterLongitude',
-			                    7 => 'DisasterLatitude',
-			                    8 => 'RecordAuthor',
-			                    9 => 'RecordCreation',
-			                    10 => 'RecordStatus',
-			                    11 => 'EventId',
-			                    12 => 'EventDuration',
-			                    13 => 'EventMagnitude',
-			                    14 => 'EventNotes',
-			                    15 => 'CauseId',
-			                    16 => 'CauseNotes',
-			                    // Effects on People
-			                    17 => 'EffectPeopleDead',
-			                    18 => 'EffectPeopleMissing',
-			                    19 => 'EffectPeopleInjured',
-			                    20 => 'EffectPeopleHarmed',
-			                    21 => 'EffectPeopleAffected',
-			                    22 => 'EffectPeopleEvacuated',
-			                    23 => 'EffectPeopleRelocated',
-			                    // Effects on Houses
-			                    24 => 'EffectHousesDestroyed',
-			                    25 => 'EffectHousesAffected',
-			                    // Effects General
-			                    26 => 'EffectLossesValueLocal',
-			                    27 => 'EffectLossesValueUSD',
-			                    28 => 'EffectRoads',
-			                    29 => 'EffectFarmingAndForest',
-			                    30 => 'EffectLiveStock',
-			                    31 => 'EffectEducationCenters',
-			                    32 => 'EffectMedicalCenters',
-			                    // Other Losses
-			                    33 => 'EffectOtherLosses',
-			                    34 => 'EffectNotes',
-			                    // Sectors Affected
-			                    35 => 'SectorTransport',
-			                    36 => 'SectorCommunications',
-			                    37 => 'SectorRelief',
-			                    38 => 'SectorAgricultural',
-			                    39 => 'SectorWaterSupply',
-			                    40 => 'SectorSewerage',
-			                    41 => 'SectorEducation',
-			                    42 => 'SectorPower',
-			                    43 => 'SectorIndustry',
-			                    44 => 'SectorHealth',
-			                    45 => 'SectorOther'
-						   );
-			$t->assign ("csv", $ocsv);
+			// load basic field of dictionary
+			$q = new Query($reg);
+			$dic = array();
+			$dic = array_merge($dic, $q->queryLabelsFromGroup('Disaster', $lg));
+			$dic = array_merge($dic, $q->queryLabelsFromGroup('Record|2', $lg));
+			$dic = array_merge($dic, $q->queryLabelsFromGroup('Geography', $lg));
+			$dic = array_merge($dic, $q->queryLabelsFromGroup('Event', $lg));
+			$dic = array_merge($dic, $q->queryLabelsFromGroup('Cause', $lg));
+			$dic = array_merge($dic, $q->queryLabelsFromGroup('Effect', $lg));
+			$dic = array_merge($dic, $q->queryLabelsFromGroup('Sector', $lg));
+			$dic = array_merge($dic, $q->getEEFieldList("True"));
+			$DisasterImport = "DisasterId,DisasterSerial,DisasterBeginTime,DisasterGeographyId,".
+				"DisasterSiteNotes,DisasterSource,DisasterLongitude,DisasterLatitude,RecordAuthor,".
+				"RecordCreation,RecordStatus,EventId,EventDuration,EventMagnitude,EventNotes,CauseId,".
+				"CauseNotes,EffectPeopleDead,EffectPeopleMissing,EffectPeopleInjured,EffectPeopleHarmed,".
+				"EffectPeopleAffected,EffectPeopleEvacuated,EffectPeopleRelocated,EffectHousesDestroyed,".
+				"EffectHousesAffected,EffectLossesValueLocal,EffectLossesValueUSD,EffectRoads,EffectFarmingAndForest,".
+				"EffectLiveStock,EffectEducationCenters,EffectMedicalCenters,EffectOtherLosses,EffectNotes,".
+				"SectorTransport,SectorCommunications,SectorRelief,SectorAgricultural,SectorWaterSupply,".
+				"SectorSewerage,SectorEducation,SectorPower,SectorIndustry,SectorHealth,SectorOther";
+			$lst = explode(",", $DisasterImport);
+			foreach ($lst as $v) {
+				if (isset($dic[$v][0]))
+					$fld[$v] = $dic[$v][0];
+				else
+					$fld[$v] = $v;
+			}
+			$handle = fopen($FileName, "r");
+			$res = array();
+			$i = 0;
+			// Get first 10 lines, jump first line
+			while (($data = fgetcsv($handle, 1000, ",")) !== FALSE && $i < 10) {
+				if ($i > 0)
+					$csv[] = $data;
+				$i++;
+			}
+			fclose($handle);
+			$t->assign ("csv", $csv);
 			$t->assign ("FileName", $FileName);
-			$t->assign ("fld", $DisasterImport);
+			$t->assign ("fld", $fld);
 			$t->assign ("ctl_import", true);
 		} else {
 			$error = "FILETYPE IS UNKNOWN.. FORMAT MUST BE TEXT COMMA SEPARATED!";
