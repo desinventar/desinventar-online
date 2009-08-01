@@ -57,7 +57,7 @@ class DIObject {
 			if ($sFieldType == "STRING")   { $this->oField[$sFieldName] = "";          }
 			if ($sFieldType == "TEXT")     { $this->oField[$sFieldName] = "";          }
 			if ($sFieldType == "DATETIME") { $this->oField[$sFieldName] = gmdate('c'); }
-			if ($sFieldType == "DATE")     { $this->oField[$sFieldName] = gmdate('YYYY-mm-dd'); }
+			if ($sFieldType == "DATE")     { $this->oField[$sFieldName] = gmdate('Y-m-d'); }
 			if ($sFieldType == "INTEGER")  { $this->oField[$sFieldName] = 0;           }
 			if ($sFieldType == "DOUBLE")   { $this->oField[$sFieldName] = 0.0;         }
 			if ($sFieldType == "BOOLEAN")  { $this->oField[$sFieldName] = true;        }
@@ -431,7 +431,7 @@ class DIObject {
 		return $iReturn;
 	}
 
-	public function padNumber($iNumber, $iLen) {
+	public static function padNumber($iNumber, $iLen) {
 		$sNumber = "" . $iNumber;
 		while (strlen($sNumber) < $iLen) {
 			$sNumber = "0" . $sNumber;

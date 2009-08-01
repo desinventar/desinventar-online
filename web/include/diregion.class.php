@@ -40,6 +40,8 @@ class DIRegion extends DIObject {
 		$this->setConnection("core");
 		$this->createFields($this->sInfoDef);
 		$this->createFields($this->sInfoTrans);
+		$this->set('PeriodBeginDate', '1900-01-01');
+		$this->set('PeriodEndDate', gmdate('Y-m-d'));
 		if ($num_args >= 2) {
 			$prmRegionId = func_get_arg(1);
 			if ($prmRegionId != '') {
@@ -492,23 +494,21 @@ class DIRegion extends DIObject {
 		} //if
 	} //updateMapArea
 	
-	public function buildRegionId() {
+	public static function buildRegionId($prmCountryIso, $prmRegionLabel) {
 		$RegionId = '';
-		$CountryIso = $this->get('CountryIso');
-		if ($CountryIso == '') {
-			$CountryIso = 'DESINV';
+		if ($prmCountryIso == '') {
+			$prmCountryIso = 'DESINV';
 		}
-		$Timestamp = $this->padNumber(time(),10);
-		$RegionLabel = $this->get('RegionLabel');
-		//$RegionLabel = 'Región de Prueba ññáéíóúÓÚ';
-		$RegionLabel = strtolower($RegionLabel);
-		$RegionLabel = str_replace(' - ','_',$RegionLabel);
-		$RegionLabel = str_replace(' ','_',$RegionLabel);
-		$RegionLabel = str_replace(array('ñ','á','é','í','ó','ú','Á','É','Í','Ó','Ú'),
-		                           array('n','a','e','i','o','u','a','e','i','o','u'),
-		                           $RegionLabel);
-		$RegionLabel = substr($RegionLabel, 0, 60);
-		$RegionId = $CountryIso . '-' . $Timestamp . '-' . $RegionLabel;
+		$Timestamp = DIObject::padNumber(time(),10);
+		//$prmRegionLabel = 'Región de Prueba ññáéíóúÓÚ';
+		$prmRegionLabel = strtolower($prmRegionLabel);
+		$prmRegionLabel = str_replace(' - ','_',$prmRegionLabel);
+		$prmRegionLabel = str_replace(' ','_',$prmRegionLabel);
+		$prmRegionLabel = str_replace(array('ñ','á','é','í','ó','ú','Á','É','Í','Ó','Ú'),
+		                              array('n','a','e','i','o','u','a','e','i','o','u'),
+		                              $prmRegionLabel);
+		$prmRegionLabel = substr($prmRegionLabel, 0, 60);
+		$RegionId = $prmCountryIso . '-' . $Timestamp . '-' . $prmRegionLabel;
 		return $RegionId;
 	} //buildRegionId
 	
