@@ -28,11 +28,11 @@ moveUsers($dbh,$us);
 foreach ($RegionList as $RegionUUID) {
 	$InfoGeneral_eng = '';
 	foreach($dbh->query("SELECT * FROM Region WHERE RegionUUID='" . $RegionUUID . "'") as $row) {
+		$RegionId = DIRegion::buildRegionId($row['CountryIsoCode'],$row['RegionLabel']);
+		//$RegionId = 'BOL-1248793194-bolivia_inventario_historico_de_desastres';
 		$r = new DIRegion($us);
 		$r->set('CountryIso'     , $row['CountryIsoCode']);
 		$r->set('RegionLabel'    , $row['RegionLabel']);
-		$RegionId = $r->buildRegionId();
-		//$RegionId = 'BOL-1248793194-bolivia_inventario_historico_de_desastres';
 		$r->set('RegionId'       , $RegionId);
 		$r->set('InfoGeneral'    , $row['RegionDesc']);
 		$r->setActive($row['RegionActive']);

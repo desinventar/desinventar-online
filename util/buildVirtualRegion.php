@@ -39,16 +39,16 @@
 	$r = ERR_NO_ERROR;
 	$r = $us->login('diadmin','di8');
 	if ($r > 0) {
-		$o = new DIRegion($us);
-		$o->set('RegionLabel', $RegionLabel);
 		if ($RegionId == '') {
-			$RegionId = $o->buildRegionId();
+			$RegionId = DIRegion::buildRegionId('', $RegionLabel);
 		}
+		$o = new DIRegion($us, $RegionId);
+		$o->set('RegionLabel', $RegionLabel);
 		$o->set('RegionId'    , $RegionId);
-		$o->load();
 		$o->set('RegionStatus', CONST_REGIONACTIVE | CONST_REGIONPUBLIC);
 		$o->set('IsCRegion'   , TRUE);
-		$o->update();
+		$o->set('PeriodBeginDate', '1970-01-01');
+		$o->set('PeriodEndDate', '2007-12-31');
 		$iReturn = $o->createRegionDB();
 		$us->open($RegionId);
 		foreach($RegionItems as $RegionItemId) {
