@@ -65,7 +65,7 @@ foreach ($RegionList as $RegionUUID) {
 			// Create a Record for Info in eng language
 			$r->set('LangIsoCode', 'eng');
 			$r->set('InfoGeneral', $InfoGeneral_eng);
-			$r->saveInfo();
+			$r->saveInfoTrans('eng');
 		}
 	}
 	$us->open($RegionId);

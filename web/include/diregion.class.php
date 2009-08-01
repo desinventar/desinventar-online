@@ -52,24 +52,50 @@ class DIRegion extends DIObject {
 		}
 	} // __construct
 
+	public function getTranslatableFields() {
+		// 2009-07-28 (jhcaiced) Build an array with translatable fields
+		$Translatable = array();
+		foreach (split(',', $this->sInfoTrans) as $sItem) {
+			$oItem = split('/', $sItem);
+			$sFieldName = $oItem[0];
+			$sFieldType = $oItem[1];
+			$Translatable[$sFieldName] = $sFieldType;
+		} //foreach
+		return $Translatable;
+	}
+
 	public function loadInfo() {
 		$iReturn = ERR_NO_ERROR;
 		$iReturn = $this->q->setDBConnection($this->get('RegionId'));
 		if ($iReturn > 0) {
 			$this->setConnection($this->get('RegionId'));
 			try {
-				$LangIsoCode = $this->q->getDBInfoValue('LangIsoCode');
-				$sQuery = "SELECT * FROM Info WHERE LangIsoCode='" . $LangIsoCode . "' OR LangIsoCode=''";
+				$sQuery = "SELECT * FROM Info WHERE LangIsoCode=''";
 				foreach($this->conn->query($sQuery) as $row) {
-					$Value = $row['InfoValue'];
-					$InfoKey = $row['InfoKey'];
-					if (array_key_exists($InfoKey, $this->oField)) {
-						$sFieldType = $this->oFieldType[$InfoKey];
-						if ($sFieldType == 'DATETIME') {
-							if ($Value == '') { $Value = $InfoValue; }
-						}
-						$this->set($InfoKey, $Value);
-					} //if
+					$InfoValue = $row['InfoValue'];
+					$InfoKey   = $row['InfoKey'];
+					$this->set($InfoKey, $InfoValue);
+				} // foreach
+			} catch (Exception $e) {
+				$iReturn = ERR_NO_DATABASE;
+			}
+			$this->setConnection('core');
+		}
+		$this->loadInfoTrans($this->get('LangIsoCode'));
+		return $iReturn;
+	}
+
+	public function loadInfoTrans($prmLangIsoCode) {
+		$iReturn = ERR_NO_ERROR;
+		$iReturn = $this->q->setDBConnection($this->get('RegionId'));
+		if ($iReturn > 0) {
+			$this->setConnection($this->get('RegionId'));
+			try {
+				$sQuery = "SELECT * FROM Info WHERE LangIsoCode='" . $prmLangIsoCode . "'";
+				foreach($this->conn->query($sQuery) as $row) {
+					$InfoValue = $row['InfoValue'];
+					$InfoKey   = $row['InfoKey'];
+					$this->set($InfoKey, $InfoValue);
 				} // foreach
 			} catch (Exception $e) {
 				$iReturn = ERR_NO_DATABASE;
@@ -79,30 +105,39 @@ class DIRegion extends DIObject {
 		return $iReturn;
 	}
 	
-	public function	saveInfo($prmSave = true) {
+	public function	saveInfo() {
 		$iReturn = ERR_NO_ERROR;
 		$now = gmdate('c');
 		$this->setConnection($this->get('RegionId'));
-		
-		// 2009-07-28 (jhcaiced) Build an array with translatable fields
-		$Translatable = array();
-		foreach (split(',', $this->sInfoTrans) as $sItem) {
-			$oItem = split('/', $sItem);
-			$sFieldName = $oItem[0];
-			$sFieldType = $oItem[1];
-			$Translatable[$sFieldName] = $sFieldType;
-		}
+		$Translatable = $this->getTranslatableFields();
+		foreach($this->oField as $InfoKey => $InfoValue) {
+			if (! array_key_exists($InfoKey, $Translatable)) {
+				$LangIsoCode = '';
+				$sQuery = "DELETE FROM Info WHERE InfoKey='" . $InfoKey . "'";
+				$this->conn->query($sQuery);
+				$sQuery = "INSERT INTO Info VALUES ('" . $InfoKey . "','" . $LangIsoCode . "','" . $InfoValue . "','','" . $now . "','" . $now . "','" . $now . "')";
+				$this->conn->query($sQuery);
+			} //if
+		} //foreach
+		$this->setConnection('core');
+		$this->saveInfoTrans($this->get('LangIsoCode'));
+		return $iReturn;
+	}
+	
+	public function saveInfoTrans($prmLangIsoCode) {
+		$iReturn = ERR_NO_ERROR;
+		$now = gmdate('c');
+		$this->setConnection($this->get('RegionId'));
+		$Translatable = $this->getTranslatableFields();
 		foreach($this->oField as $InfoKey => $InfoValue) {
 			if (array_key_exists($InfoKey, $Translatable)) {
-				$LangIsoCode = $this->get('LangIsoCode');
-			} else {
-				$LangIsoCode = '';
+				$LangIsoCode = $prmLangIsoCode;
+				$sQuery = "DELETE FROM Info WHERE InfoKey='" . $InfoKey . "' AND LangIsoCode='" . $LangIsoCode . "'";
+				$this->conn->query($sQuery);
+				$sQuery = "INSERT INTO Info VALUES ('" . $InfoKey . "','" . $LangIsoCode . "','" . $InfoValue . "','','" . $now . "','" . $now . "','" . $now . "')";
+				$this->conn->query($sQuery);
 			}
-			$sQuery = "DELETE FROM Info WHERE InfoKey='" . $InfoKey . "' AND (LangIsoCode='" . $LangIsoCode . "' OR LangIsoCode='')";
-			$this->conn->query($sQuery);
-			$sQuery = "INSERT INTO Info VALUES ('" . $InfoKey . "','" . $LangIsoCode . "','" . $InfoValue . "','','" . $now . "','" . $now . "','" . $now . "')";
-			$this->conn->query($sQuery);
-		}
+		} //foreach
 		$this->setConnection('core');
 		return $iReturn;
 	}
