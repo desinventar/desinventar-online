@@ -528,6 +528,22 @@ class DIRegion extends DIObject {
 		$this->set('RegionStatus', $Value);
 	}
 	
+	public function getDateRange() {
+		$res = array();
+		$datemin = $this->q->getDBInfoValue('PeriodBeginDate');
+		$datemax = $this->q->getDBInfoValue('PeriodEndDate');
+		if (($datemin == '') || ($datemax == '')) {
+			$sql = "SELECT MIN(DisasterBeginTime) AS datemin, MAX(DisasterBeginTime) AS datemax FROM Disaster ".
+			"WHERE RecordStatus='PUBLISHED'";
+			$r2 = $this->q->getresult($sql);
+			if ($datemin == '' ) { $datemin = $r2['datemin']; }
+			if ($datemax == '' ) { $datemax = $r2['datemax']; }
+		}
+		$res[0] = $datemin;
+		$res[1] = $datemax;
+		return $res;		
+	}
+	
 } //class
 
 </script>

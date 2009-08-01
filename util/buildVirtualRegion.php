@@ -24,6 +24,8 @@
 		//$RegionItems = array('BOL-1248983699-bolivia_gran_chaco');
 		$RegionId = 'DESINV-1249126759-subregion_gran_chaco';
 		$RegionLabel = 'Subregion Gran Chaco';
+		$PeriodBeginDate = '1970-01-01';
+		$PeriodEndDate   = '2007-12-31';
 	} else {
 		// CAN - SubRegion Andina
 		$RegionItems = array('ARG-1248983179-argentina_inventario_historico_de_desastres',
@@ -34,6 +36,8 @@
 		//$RegionItems = array('BOL-1248983224-bolivia_inventario_historico_de_desastres');
 		$RegionId = 'DESINV-1249040429-can_subregion_andina';
 		$RegionLabel = 'CAN Subregion Andina';
+		$PeriodBeginDate = '1970-01-01';
+		$PeriodEndDate   = '2007-12-31';
 	}
 	// loader.php creates a UserSession when loaded...
 	$r = ERR_NO_ERROR;
@@ -47,8 +51,8 @@
 		$o->set('RegionId'    , $RegionId);
 		$o->set('RegionStatus', CONST_REGIONACTIVE | CONST_REGIONPUBLIC);
 		$o->set('IsCRegion'   , TRUE);
-		$o->set('PeriodBeginDate', '1970-01-01');
-		$o->set('PeriodEndDate', '2007-12-31');
+		$o->set('PeriodBeginDate', $PeriodBeginDate);
+		$o->set('PeriodEndDate'  , $PeriodEndDate);
 		$iReturn = $o->createRegionDB();
 		$us->open($RegionId);
 		foreach($RegionItems as $RegionItemId) {
