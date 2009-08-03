@@ -214,7 +214,23 @@ class DIRegion extends DIObject {
 		}
 		return $iReturn;
 	}
+	
+	public static function getRegionTables() {
+		$RegionTables = array('Event','Cause','GeoLevel',
+	                          'GeoCarto','Geography','Disaster',
+	                          'EEData','EEField','EEGroup');
+		return $RegionTables;
+	}
 
+	public function addRegionItemSync($prmRegionItemId) {
+		foreach($this->getRegionTables() as $TableName) {
+			$s = new DISync($this->session);
+			$s->set('SyncTable', $TableName);
+			$s->set('SyncURL', "file:///" . $prmRegionItemId);
+			$s->insert();
+		} //foreach
+	}
+	
 	public function addRegionItem($prmRegionItemId, $prmRegionItemGeographyName, $prmRegionItemGeographyId='') {
 		$RegionId = $this->get('RegionId');
 		$RegionDir = VAR_DIR . '/' . $this->get('RegionId');
@@ -250,9 +266,11 @@ class DIRegion extends DIObject {
 		if ($iReturn > 0) {
 			$iReturn = $this->addRegionItemGeoCarto($prmRegionItemId, $prmRegionItemGeographyId);
 		}
+		/*
 		if ($iReturn > 0) {
 			$iReturn = $this->addRegionItemDisaster($prmRegionItemId,$prmRegionItemGeographyId);
 		}
+		*/
 		if ($iReturn > 0) {
 			if ($prmRegionItemGeographyName != '') {
 				$Query = "UPDATE Geography SET GeographyName='" . $prmRegionItemGeographyName . "' WHERE GeographyLevel=0 AND GeographyCode='" . $prmRegionItemId . "'";
@@ -338,6 +356,12 @@ class DIRegion extends DIObject {
 		return $iReturn;
 	}
 	
+	public function doSync() {
+		foreach($this->getRegionTables() as $TableName) {
+			
+		}
+	}
+
 	public function addRegionItemDisaster($prmRegionItemId,$prmRegionItemGeographyId) {
 		$iReturn = ERR_NO_ERROR;
 		$RegionDB = VAR_DIR . '/' . $prmRegionItemId . '/desinventar.db';
