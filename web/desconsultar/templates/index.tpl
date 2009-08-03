@@ -1573,7 +1573,7 @@
           <tr>
             <td><b>{-#ttitsince#-}:</b></td>
             <td><input type="text" id="iniyear" name="D_DisasterBeginTime[]" size=4 maxlength=4 class="line" 
-            			value="{-if $qd.D_DisasterBeginTime[0] != ''-}{-$qd.D_DisasterBeginTime[0]-}{-else-}{-$yini-}{-/if-}">
+            		value="{-if $qd.D_DisasterBeginTime[0] != ''-}{-$qd.D_DisasterBeginTime[0]-}{-else-}{-$yini-}{-/if-}">
                 <input type="text" id="inimonth" name="D_DisasterBeginTime[]" size=2 maxlength=2 class="line"
                 	value="{-$qd.D_DisasterBeginTime[1]-}">
                 <input type="text" id="iniday" name="D_DisasterBeginTime[]" size=2 maxlength=2 class="line"
@@ -1583,7 +1583,7 @@
           <tr>
             <td><b>{-#ttituntil#-}:</b></td>
             <td><input type="text" id="endyear" name="D_DisasterEndTime[]" size=4 maxlength=4 class="line" 
-            			value="{-if $qd.D_DisasterEndTime[0] != ''-}{-$qd.D_DisasterEndTime[0]-}{-else-}{-$yend-}{-/if-}">
+            		value="{-if $qd.D_DisasterEndTime[0] != ''-}{-$qd.D_DisasterEndTime[0]-}{-else-}{-$yend-}{-/if-}">
                 <input type="text" id="endmonth" name="D_DisasterEndTime[]" size=2 maxlength=2 class="line"
                 	value="{-$qd.D_DisasterEndTime[1]-}">
                 <input type="text" id="endday" name="D_DisasterEndTime[]" size=2 maxlength=2 class="line"

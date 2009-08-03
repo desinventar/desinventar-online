@@ -51,8 +51,7 @@ if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
 	$sRegionId = $_GET['r'];
 	// Get Information to Region
 	$q = new Query($sRegionId);
-	$r = new DIRegion($us, $sRegionId);
-	$t->assign ("period", $r->getDateRange());
+	$t->assign ("period", $q->getDateRange());
 	$t->assign ("dtotal", $q->getNumDisasterByStatus("PUBLISHED"));
 	$t->assign ("lstupd", $q->getLastUpdate());
 	// Enable access only to users with a valid role in this region
