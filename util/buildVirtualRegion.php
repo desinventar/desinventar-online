@@ -55,11 +55,9 @@
 		$o->set('PeriodEndDate'  , $PeriodEndDate);
 		$iReturn = $o->createRegionDB('País');
 		$us->open($RegionId);
-		foreach($RegionItems as $RegionItemId => $GeographyName) {
-			printf("%-60s %-20s\n", $RegionItemId, $GeographyName);
-			$o->addRegionItem($RegionItemId);
-			$Query = "UPDATE Geography SET GeographyName='" . $GeographyName . "' WHERE GeographyLevel=0 AND GeographyCode='" . $RegionItemId . "'";
-			$us->q->dreg->query($Query);
+		foreach($RegionItems as $RegionItemId => $RegionItemGeographyName) {
+			printf("%-60s %-20s\n", $RegionItemId, $RegionItemGeographyName);
+			$o->addRegionItem($RegionItemId,$RegionItemGeographyName);
 		}
 		$o->updateMapArea();
 		$us->close();
