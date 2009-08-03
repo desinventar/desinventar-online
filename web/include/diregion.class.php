@@ -165,7 +165,7 @@ class DIRegion extends DIObject {
 		return $iReturn;
 	}
 	
-	public function createRegionDB() {
+	public function createRegionDB($prmGeoLevelName='') {
 		// Creates/Initialize the region database
 		$iReturn = ERR_NO_ERROR;
 		$prmRegionId = $this->get('RegionId');
@@ -177,6 +177,7 @@ class DIRegion extends DIObject {
 				mkdir($DBDir);
 			}
 			if (file_exists(CONST_DBREGION)) {
+				// Backup previous desinventar.db if exists
 				if (file_exists($DBFile)) {
 					$DBFile2 = $DBFile . '.bak';
 					if (file_exists($DBFile2)) {
@@ -191,16 +192,26 @@ class DIRegion extends DIObject {
 			showErrorMsg("Error " . $e->getMessage());
 		}
 		$this->set('RegionId', $prmRegionId);
-		// Copy Predefined Event/Cause Lists
-		$this->copyEvents($this->get('LangIsoCode'));
-		$this->copyCauses($this->get('LangIsoCode'));
+		if ($iReturn > 0) {
+			// Copy Predefined Event/Cause Lists
+			$this->copyEvents($this->get('LangIsoCode'));
+			$this->copyCauses($this->get('LangIsoCode'));
+		}
 		
-		$this->insert();
+		if ($iReturn > 0) {
+			// Insert Data Into core.Region, create Info Table
+			$this->insert();
+		}
 		
-		// Create Generic GeoLevel 0
-		$g = new DIGeoLevel($this->session, 0);
-		$g->set('GeoLevelName', 'Level 0');
-		$g->insert();
+		if ($iReturn > 0) {
+			// Create Generic GeoLevel 0
+			if ($prmGeoLevelName == '') {
+				$prmGeoLevelName = 'Level 0';
+			}
+			$g = new DIGeoLevel($this->session, 0);
+			$g->set('GeoLevelName', $prmGeoLevelName);
+			$g->insert();
+		}
 		return $iReturn;
 	}
 

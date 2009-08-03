@@ -18,9 +18,9 @@
 	$bOption = 1;
 	if ($bOption) {
 		// Gran Chaco
-		$RegionItems = array('ARG-1248983690-argentina_gran_chaco',
-		                     'BOL-1248983699-bolivia_gran_chaco',
-		                     'PAR-1248983701-paraguay_gran_chaco');
+		$RegionItems = array('ARG-1248983690-argentina_gran_chaco' => 'Argentina',
+		                     'BOL-1248983699-bolivia_gran_chaco'   => 'Bolivia',
+		                     'PAR-1248983701-paraguay_gran_chaco'  => 'Paraguay');
 		//$RegionItems = array('BOL-1248983699-bolivia_gran_chaco');
 		$RegionId = 'DESINV-1249126759-subregion_gran_chaco';
 		$RegionLabel = 'Subregion Gran Chaco';
@@ -28,11 +28,11 @@
 		$PeriodEndDate   = '2007-12-31';
 	} else {
 		// CAN - SubRegion Andina
-		$RegionItems = array('ARG-1248983179-argentina_inventario_historico_de_desastres',
-		    	             'BOL-1248983224-bolivia_inventario_historico_de_desastres',
-	 	      	             'COL-1248983239-colombia_inventario_historico_de_desastres',
-	   	    	             'ECU-1248983677-ecuador_inventario_historico_de_desastres',
-	   	    	             'VEN-1248984232-inventario_de_desastres_de_venezuela');
+		$RegionItems = array('BOL-1248983224-bolivia_inventario_historico_de_desastres'  => 'Bolivia',
+	 	      	             'COL-1248983239-colombia_inventario_historico_de_desastres' => 'Colombia',
+	   	    	             'ECU-1248983677-ecuador_inventario_historico_de_desastres'  => 'Ecuador',
+	   	    	             'PER-1248983875-peru_inventario_historico_de_desastres'     => 'Perú',
+	   	    	             'VEN-1248984232-inventario_de_desastres_de_venezuela'       => 'Venezuela');
 		//$RegionItems = array('BOL-1248983224-bolivia_inventario_historico_de_desastres');
 		$RegionId = 'DESINV-1249040429-can_subregion_andina';
 		$RegionLabel = 'CAN Subregion Andina';
@@ -53,11 +53,13 @@
 		$o->set('IsCRegion'   , TRUE);
 		$o->set('PeriodBeginDate', $PeriodBeginDate);
 		$o->set('PeriodEndDate'  , $PeriodEndDate);
-		$iReturn = $o->createRegionDB();
+		$iReturn = $o->createRegionDB('País');
 		$us->open($RegionId);
-		foreach($RegionItems as $RegionItemId) {
-			print $RegionItemId . "\n";
+		foreach($RegionItems as $RegionItemId => $GeographyName) {
+			printf("%-60s %-20s\n", $RegionItemId, $GeographyName);
 			$o->addRegionItem($RegionItemId);
+			$Query = "UPDATE Geography SET GeographyName='" . $GeographyName . "' WHERE GeographyLevel=0 AND GeographyCode='" . $RegionItemId . "'";
+			$us->q->dreg->query($Query);
 		}
 		$o->updateMapArea();
 		$us->close();
