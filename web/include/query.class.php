@@ -470,31 +470,23 @@ class Query extends PDO
 		return $sReturn;
 	}
 
-  public function getDateRange() {
-	$creg = $this->getRegionFieldByID($this->sRegionId, 'IsCRegion');
-	// join dates in CRegion 
-	if ($creg[$this->sRegionId]) {
-		$datemin = array();
-		$datemax = array();
-		$sql = "SELECT MIN(DisasterBeginTime) AS datemin, MAX(DisasterBeginTime) AS datemax FROM Disaster ".
-			"WHERE RecordStatus='PUBLISHED' GROUP BY SUBSTR(DisasterGeographyId, 1, 5)";
-		foreach ($this->getassoc($sql) as $row) {
-			$datemin[] = $row['datemin'];
-			$datemax[] = $row['datemax'];
-		}
-		asort($datemin);
-		asort($datemax);
-		$res['datemin'] = end($datemin);
-		$res['datemax'] = current($datemax);
-	}
-	else {
-		$sql = "SELECT MIN(DisasterBeginTime) AS datemin, MAX(DisasterBeginTime) AS datemax FROM Disaster ".
+	public function getDateRange() {
+		$res = array();
+		$datemin = $this->getDBInfoValue('PeriodBeginDate');
+		$datemax = $this->getDBInfoValue('PeriodEndDate');
+		
+		if (($datemin == '') || ($datemax == '')) {
+			$sql = "SELECT MIN(DisasterBeginTime) AS datemin, MAX(DisasterBeginTime) AS datemax FROM Disaster ".
 			"WHERE RecordStatus='PUBLISHED'";
-		$res = $this->getresult($sql);
-	}
-    return array($res['datemin'], $res['datemax']);
-  }
-
+			$r2 = $this->getresult($sql);
+			if ($datemin == '' ) { $datemin = $r2['datemin']; }
+			if ($datemax == '' ) { $datemax = $r2['datemax']; }
+		}
+		$res[0] = $datemin;
+		$res[1] = $datemax;
+		return $res;		
+	} //function
+	
 	/* This function returns an array with the database fields 
 	   of Disaster */
 	public function getDisasterFld() {
@@ -504,7 +496,8 @@ class Query extends PDO
 		foreach ($res[0] as $key => $val) {
 			$fld[] = $key;
 		}
-		// (jhcaiced) SyncRecord should not appear in data grid
+
+	// (jhcaiced) SyncRecord should not appear in data grid
 		/*
 		foreach (array('RecordSync','RecordUpdate') as $item) {
 			if (array_key_exists($item, $fld)) { 
