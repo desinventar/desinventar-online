@@ -215,7 +215,7 @@ class DIRegion extends DIObject {
 		return $iReturn;
 	}
 
-	public function addRegionItem($prmRegionItemId, $prmRegionItemGeographyId = '') {
+	public function addRegionItem($prmRegionItemId, $prmRegionItemGeographyName, $prmRegionItemGeographyId='') {
 		$RegionId = $this->get('RegionId');
 		$RegionDir = VAR_DIR . '/' . $this->get('RegionId');
 		$RegionItemDir = VAR_DIR . '/' . $prmRegionItemId;
@@ -252,6 +252,12 @@ class DIRegion extends DIObject {
 		}
 		if ($iReturn > 0) {
 			$iReturn = $this->addRegionItemDisaster($prmRegionItemId,$prmRegionItemGeographyId);
+		}
+		if ($iReturn > 0) {
+			if ($prmRegionItemGeographyName != '') {
+				$Query = "UPDATE Geography SET GeographyName='" . $prmRegionItemGeographyName . "' WHERE GeographyLevel=0 AND GeographyCode='" . $prmRegionItemId . "'";
+				$this->q->dreg->query($Query);
+			}
 		}
 		return $iReturn;
 	}
@@ -333,6 +339,7 @@ class DIRegion extends DIObject {
 	}
 	
 	public function addRegionItemDisaster($prmRegionItemId,$prmRegionItemGeographyId) {
+		$iReturn = ERR_NO_ERROR;
 		$RegionDB = VAR_DIR . '/' . $prmRegionItemId . '/desinventar.db';
 		$q = $this->q->dreg;
 		$q->query("ATTACH DATABASE '" . $RegionDB . "' AS RegItem");
@@ -341,6 +348,7 @@ class DIRegion extends DIObject {
 		// Copy DisasterId from EEData, Other Fields are Ignored...
 		$q->query("INSERT INTO EEData (DisasterId) SELECT DisasterId FROM RegItem.EEData");
 		$q->query("DETACH DATABASE RegItem");
+		return $iReturn;
 	}
 	
 	public function addRegionItemGeoCarto($prmRegionItemId, $prmRegionItemGeographyId) {
