@@ -1,3 +1,8 @@
+* 2009-08-03 Jhon H. Caicedo <jhcaiced@desinventar.org>
+- Started to use URL to specify databases for synchronization:
+  http://en.wikipedia.org/wiki/Uniform_Resource_Locator
+  http://tools.ietf.org/html/rfc3986
+
 * 2009-05-01 Jhon H. Caicedo <jhcaiced@desinventar.org>
 - Started Modifications for running in Windows.
 

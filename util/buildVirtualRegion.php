@@ -13,6 +13,7 @@
 	require_once(BASE . '/include/diregionitem.class.php');
 	require_once(BASE . '/include/digeolevel.class.php');
 	require_once(BASE . '/include/digeocarto.class.php');
+	require_once(BASE . '/include/disync.class.php');
 	
 	$RegionId = '';
 	$bOption = 1;
@@ -24,8 +25,8 @@
 		//$RegionItems = array('BOL-1248983699-bolivia_gran_chaco');
 		$RegionId = 'DESINV-1249126759-subregion_gran_chaco';
 		$RegionLabel = 'Subregion Gran Chaco';
-		$PeriodBeginDate = '1970-01-01';
-		$PeriodEndDate   = '2007-12-31';
+		$PeriodBeginDate = '1997-01-01';
+		$PeriodEndDate   = '2008-12-31';
 	} else {
 		// CAN - SubRegion Andina
 		$RegionItems = array('BOL-1248983224-bolivia_inventario_historico_de_desastres'  => 'Bolivia',
@@ -57,7 +58,8 @@
 		$us->open($RegionId);
 		foreach($RegionItems as $RegionItemId => $RegionItemGeographyName) {
 			printf("%-60s %-20s\n", $RegionItemId, $RegionItemGeographyName);
-			$o->addRegionItem($RegionItemId,$RegionItemGeographyName);
+			$o->addRegionItemSync($RegionItemId);
+			//$o->addRegionItem($RegionItemId,$RegionItemGeographyName);
 		}
 		$o->updateMapArea();
 		$us->close();
