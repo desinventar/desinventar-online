@@ -44,10 +44,13 @@
 	$r = ERR_NO_ERROR;
 	$r = $us->login('diadmin','di8');
 	if ($r > 0) {
+		/*
 		if ($RegionId == '') {
 			$RegionId = DIRegion::buildRegionId('', $RegionLabel);
 		}
+		*/
 		$o = new DIRegion($us, $RegionId);
+		/*
 		$o->set('RegionLabel', $RegionLabel);
 		$o->set('RegionId'    , $RegionId);
 		$o->set('RegionStatus', CONST_REGIONACTIVE | CONST_REGIONPUBLIC);
@@ -55,14 +58,26 @@
 		$o->set('PeriodBeginDate', $PeriodBeginDate);
 		$o->set('PeriodEndDate'  , $PeriodEndDate);
 		$iReturn = $o->createRegionDB('País');
+		*/
 		$us->open($RegionId);
+		$o->clearSyncTable();
 		foreach($RegionItems as $RegionItemId => $RegionItemGeographyName) {
 			printf("%-60s %-20s\n", $RegionItemId, $RegionItemGeographyName);
-			$o->addRegionItemSync($RegionItemId);
-			//$o->addRegionItem($RegionItemId,$RegionItemGeographyName);
+			//$RegionItemGeographyId = $o->getRegionItemGeographyId($RegionItemId);
+			//fb($RegionItemGeographyId);
+			//$o->addRegionItemSync($RegionItemId);
+			$o->addRegionItem($RegionItemId,$RegionItemGeographyName);
 		}
+		/*
 		$o->updateMapArea();
 		$us->close();
+		*/
+		/*
+		$us->open($RegionId);
+		$o = new DIRegion($us, $RegionId);
+		$o->rebuildDataDisaster();
+		$us->close();
+		*/
 	}
 	$us->logout();	
 </script>
