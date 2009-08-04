@@ -17,8 +17,7 @@ else
 
 $q = $us->q;
 //$q = new Query($reg);
-$rinfo = $q->getDBInfo();
-$regname = $rinfo['RegionLabel'];
+$regname = $q->getDBInfoValue('RegionLabel');
 fixPost($post);
 
 // load basic field of dictionary

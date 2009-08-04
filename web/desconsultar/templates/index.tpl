@@ -373,6 +373,11 @@
         }
         disab($('_G+D_perc'));
       }
+	  if (fld == "_G+TypeH")
+		$('_G+TypeC').value = "";
+	  if (fld == "_G+TypeC")
+	    $('_G+TypeH').value = "";
+	  $('_G+Type').value = grp;
     }
     // forms management
     function combineForms(dcf, ref) {
@@ -813,8 +818,20 @@
                    </tbody>
                   </table>
 				  <table border="0"><tr>
-				  <td><!--Transparencia <input type="text" name="_M+Transparency" size="2" maxlength="2" class="line" value="70">%--></td>
-				  <td align="right"><input type="button" value="Gradiente de Color" onClick="genColors();" class="line"></td>
+				  <td>{-#mcoltransp#-} <select name="_M+Transparency" class="line">
+						<option value="10">10</option>
+						<option value="20">20</option>
+						<option value="30">30</option>
+						<option value="40">40</option>
+						<option value="50">50</option>
+						<option value="60">60</option>
+						<option value="70">70</option>
+						<option value="80">80</option>
+						<option value="90">90</option>
+						<option value="100">100</option>
+					   </select>%
+				  </td>
+				  <td align="right"><input type="button" value="{-#mcolorgrad#-}" onClick="genColors();" class="line"></td>
 				  </tr></table>
                 </td><td>
                   <b>{-#mrepreselev#-}</b><br>
@@ -999,49 +1016,49 @@
             		</tr>
             		<tr>
             			<td colspan=3 align="center">
-            				<p><u>{-#ghoraxis#-}:</u>
-            				<b onMouseOver="showtip('{-$dic.GraphType[2]-}');">{-$dic.GraphType[0]-}</b></p>
-            				<select id="_G+Type" name="_G+Type" onChange="grpSelectbyType('_G+Type');" 
-            						onMouseOver="showtip('{-$dic.GraphType[2]-}');" size="4" class="fixw">
-            					<optgroup label="{-#ghistogram#-}">
-                      <option value="D.DisasterBeginTime" selected>{-$dic.GraphHisTemporal[0]-}</option>
-                      <option value="D.DisasterBeginTime|D.EventId">{-$dic.GraphHisEveTemporal[0]-}</option>
+            				<p><u>{-#ghoraxis#-}:</u></p>
+            				<select id="_G+TypeH" onChange="grpSelectbyType('_G+TypeH');" 
+            						onMouseOver="showtip('{-$dic.GraphType[2]-}');" class="fixw">
+								<option value="" disabled>- {-#ghistogram#-} -</option>
+								<option value="D.DisasterBeginTime" selected>{-$dic.GraphHisTemporal[0]-}</option>
+								<option value="D.DisasterBeginTime|D.EventId">{-$dic.GraphHisEveTemporal[0]-}</option>
 {-foreach name=glev key=k item=i from=$glev-}
-                      <option value="D.DisasterBeginTime|D.DisasterGeographyId_{-$k-}">{-$i[0]-} {-$dic.GraphHisGeoTemporal[0]-}</option>
+								<option value="D.DisasterBeginTime|D.DisasterGeographyId_{-$k-}">{-$i[0]-} {-$dic.GraphHisGeoTemporal[0]-}</option>
 {-/foreach-}
-                      <option value="D.DisasterBeginTime|D.CauseId">{-$dic.GraphHisCauTemporal[0]-}</option>
-                      </optgroup>
-                      <optgroup label="{-#gcomparative#-}">
-                      <option value="D.EventId">{-$dic.GraphComByEvents[0]-}</option>
-                      <option value="D.CauseId">{-$dic.GraphComByCauses[0]-}</option>
+								<option value="D.DisasterBeginTime|D.CauseId">{-$dic.GraphHisCauTemporal[0]-}</option>
+							</select>
+		                    <table border=0 cellpadding=0 cellspacing=0 align="center">
+		                    <tr><td>
+		                    	<b onMouseOver="showtip('{-$dic.GraphPeriod[2]-}');">{-$dic.GraphPeriod[0]-}</b><br>
+		                    	<select id="_G+Period" name="_G+Period" onChange="$('_G+Stat').value = '';"
+		                    			onMouseOver="showtip('{-$dic.GraphPeriod[2]-}');">
+		                    	<option value=""></option>
+		                    	<option value="YEAR" selected>{-#gperannual#-}</option>
+		                    	<option value="YMONTH">{-#gpermonth#-}</option>
+		                    	<option value="YWEEK">{-#gperweek#-}</option>
+		                    	<option value="YDAY">{-#gperday#-}</option>
+		                    	</select>
+		                    </td><td>
+		                    	<b onMouseOver="showtip('{-$dic.GraphSeaHistogram[2]-}');">{-#GHISTOANNUAL#-}</b><br>
+		                    	<select id="_G+Stat" name="_G+Stat" onChange="$('_G+Period').value = '';"
+		                    			onMouseOver="showtip('{-$dic.GraphSeaHistogram[2]-}');">
+		                    	<option value=""></option>
+		                    	<option value="DAY">{-#gseaday#-}</option>
+		                    	<option value="WEEK">{-#gseaweek#-}</option>
+		                    	<option value="MONTH">{-#gseamonth#-}</option>
+		                    	</select>
+		                    </td></tr>
+		                    </table><br>
+							<select id="_G+TypeC" onChange="grpSelectbyType('_G+TypeC');" 
+            						onMouseOver="showtip('{-$dic.GraphType[2]-}');" class="fixw">
+								<option value="" disabled selected>- {-#gcomparative#-} -</option>
+								<option value="D.EventId">{-$dic.GraphComByEvents[0]-}</option>
+								<option value="D.CauseId">{-$dic.GraphComByCauses[0]-}</option>
 {-foreach name=glev key=k item=i from=$glev-}
-                      <option value="D.DisasterGeographyId_{-$k-}">{-$dic.GraphComByGeography[0]-} {-$i[0]-}</option>
+								<option value="D.DisasterGeographyId_{-$k-}">{-$dic.GraphComByGeography[0]-} {-$i[0]-}</option>
 {-/foreach-}
-                    	</optgroup>
-                    </select>
-                    <br>
-                    <table border=0 cellpadding=0 cellspacing=0 align="center">
-                    <tr><td>
-                    	<b onMouseOver="showtip('{-$dic.GraphPeriod[2]-}');">{-$dic.GraphPeriod[0]-}</b><br>
-                    	<select id="_G+Period" name="_G+Period" onChange="$('_G+Stat').value = '';"
-                    			onMouseOver="showtip('{-$dic.GraphPeriod[2]-}');">
-                    	<option value=""></option>
-                    	<option value="YEAR" selected>{-#gperannual#-}</option>
-                    	<option value="YMONTH">{-#gpermonth#-}</option>
-                    	<option value="YWEEK">{-#gperweek#-}</option>
-                    	<option value="YDAY">{-#gperday#-}</option>
-                    	</select>
-                    </td><td>
-                    	<b onMouseOver="showtip('{-$dic.GraphSeaHistogram[2]-}');">{-#GHISTOANNUAL#-}</b><br>
-                    	<select id="_G+Stat" name="_G+Stat" onChange="$('_G+Period').value = '';"
-                    			onMouseOver="showtip('{-$dic.GraphSeaHistogram[2]-}');">
-                    	<option value=""></option>
-                    	<option value="DAY">{-#gseaday#-}</option>
-                    	<option value="WEEK">{-#gseaweek#-}</option>
-                    	<option value="MONTH">{-#gseamonth#-}</option>
-                    	</select>
-                    </td></tr>
-                    </table>
+							</select>
+							<input type="hidden" id="_G+Type" name="_G+Type" value="D.DisasterBeginTime">
             			</td>
             		</tr>
             	</table>
@@ -1622,7 +1639,7 @@
     </dd>
     <!-- END DATETIME SECTION -->
 	<!-- BEGIN CUSTOMQUERY SECTION -->
-    <dt>Consulta personalizada</dt>
+    <dt>{-#madvsection#-}</dt>
     <dd>
       <div style="height: 360px;">
        <textarea id="CusQry" name="__CusQry" style="width:250px; height:40px;" 
@@ -1636,7 +1653,7 @@
 		    <option value="DisasterBeginTime = '' ">{-$dis.DisasterBeginTime[0]-}</option>
 			<option value="RecordAuthor = '' ">{-$rc2.RecordAuthor[0]-}</option>
 			<option value="RecordCreation = '' ">{-$rc2.RecordCreation[0]-}</option>
-			<option value="RecordLastUpdate = '' ">{-$rc2.RecordLastUpdate[0]-}</option>
+			<option value="RecordUpdate = '' ">{-$rc2.RecordLastUpdate[0]-}</option>
 {-foreach name=ef1 key=key item=item from=$ef1-}
 			<option value="{-$key-} = ">{-$item[0]-}</option>
 {-/foreach-}

@@ -127,7 +127,7 @@ class UserSession {
 	} // update()
 
 	// Close a session, removing the session information from the
-	// database.	
+	// database.
 	public function delete() {
 		$iReturn = ERR_DEFAULT_ERROR;
 		$sQuery = "DELETE FROM UserSession WHERE SessionId='" . $this->sSessionId . "'";

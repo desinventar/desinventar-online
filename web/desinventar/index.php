@@ -184,8 +184,7 @@ if (isset($_GET['u'])) {
 	} else {
 		// Default view of DesInventar
 		$t->assign ("usr", $us->UserId);
-		$rinfo = $us->q->getDBInfo();
-		$t->assign ("regname",  $rinfo['RegionLabel']);
+		$t->assign ("regname", $us->q->getDBInfoValue('LangIsoCode'));
 		$role = $us->getUserRole($sRegionId);
 		$t->assign ("role", $role);
 		$dic = $us->q->queryLabelsFromGroup('DB', $lg);

@@ -65,8 +65,7 @@ class Maps
 	function setHeader($q, $reg, $inf, $typ) {
 		$x = 400;
 		$y = 550;
-		$rinfo = $q->getDBInfo();
-		$regname = $rinfo['RegionLabel'];
+		$regname = $q->getDBInfoValue('RegionLabel');
 		$map = 
 '	MAP
     IMAGETYPE		PNG
@@ -343,8 +342,8 @@ class Maps
   function generateKML($q, $reg, $info) {
     $fp = urlencode(TMPM_DIR ."/di8ms_$reg-". session_id() .".map");
     $dinf = $q->getDBInfo();
-    $regn = $dinf['RegionLabel'];
-    $desc	= $dinf['RegionDesc'];
+    $regn = $dinf['RegionLabel|'];
+    $desc = $dinf['RegionDesc'];
     $lon = (int) (($dinf['GeoLimitMinX'] + $dinf['GeoLimitMaxX']) / 2);
     $lat = (int) (($dinf['GeoLimitMinY'] + $dinf['GeoLimitMaxY']) / 2);
     // print info in kml
