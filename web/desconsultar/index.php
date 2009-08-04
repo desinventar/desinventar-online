@@ -76,8 +76,6 @@ else {
   $t->assign ("ctl_glist", true);
   $t->assign ("reg", $reg);
   $t->assign ("path", VAR_DIR);
-  $rinf = $q->getDBInfo();
-  $t->assign ("regname", $rinf['RegionLabel']);
   $geol = $q->loadGeography(0);
   $glev = $q->loadGeoLevels('', -1, false);
   $evepredl = $q->loadEvents("PREDEF", "active", $lg);
@@ -93,6 +91,7 @@ else {
     $t->assign ("ctl_user", false);
   // Set selection map
   $dinf = $q->getDBInfo();
+  $t->assign ("regname", $dinf['RegionLabel']);
   $t->assign ("x1", $dinf['GeoLimitMinX']);
   $t->assign ("x2", $dinf['GeoLimitMaxX']);
   $t->assign ("y1", $dinf['GeoLimitMinY']);

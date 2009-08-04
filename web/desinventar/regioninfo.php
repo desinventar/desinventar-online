@@ -39,16 +39,16 @@ if (isset($get['infocmd'])) {
 	}
 } else {
 	$info = $us->q->getDBInfo();
-	$inf[0] = $info['RegionDesc'];
-	$inf[1] = $info['RegionDescEN'];
-	$inf[2] = $info['PeriodBeginDate'];
-	$inf[3] = $info['PeriodEndDate'];
-	$inf[4] = $info['InfoAdminURL'];
-	$inf[5] = $info['RegionLabel'];
-	$inf[6] = $info['GeoLimitMinX'];
-	$inf[7] = $info['GeoLimitMinY'];
-	$inf[8] = $info['GeoLimitMaxX'];
-	$inf[9] = $info['GeoLimitMaxY'];
+	$inf[0] = $info['InfoGeneral|'];
+	$inf[1] = $info['InforGeneral|eng'];
+	$inf[2] = $info['PeriodBeginDate|'];
+	$inf[3] = $info['PeriodEndDate|'];
+	$inf[4] = $info['InfoAdminURL|'];
+	$inf[5] = $info['RegionLabel|'];
+	$inf[6] = $info['GeoLimitMinX|'];
+	$inf[7] = $info['GeoLimitMinY|'];
+	$inf[8] = $info['GeoLimitMaxX|'];
+	$inf[9] = $info['GeoLimitMaxY|'];
 	$t->assign ("info", $inf);
 	$urol = $us->getUserRole($reg);
 	if ($urol == "OBSERVER")

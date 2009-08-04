@@ -65,7 +65,6 @@ if (isset($post['_M+cmd'])) {
 	$cou = $c['counter'];
 	// Assign ranges
 	$range = setRanges($post);
-	$rinf = $q->getDBInfo();
 	// Data Options Interface
 	$opc['Group'] = array($post['_M+Type']);
 	$lev = explode("|", $post['_M+Type']);
@@ -84,16 +83,17 @@ if (isset($post['_M+cmd'])) {
 	$dl = $q->prepareList($dislist, "MAPS");
 	// MAPS Query, RegionId, Level, datalist, ranges, dbinfo, label, maptype
 	$m = new Maps($q, $reg, $lev[0], $dl, $range, $info, $post['_M+Label'], "THEMATIC");
-	$rgl[0]['regname'] = $rinf['RegionLabel'];
+	$rinf = $q->getDBInfo();
+	$rgl[0]['regname'] = $rinf['RegionLabel|'];
 	$rgl[0]['info'] = $info;
 	// if valid filename then prepare interface to view MAPFILE
 	if (strlen($m->filename()) > 0) {
 		$lon = 0;
 		$lat = 0;
-		$minx = $rinf['GeoLimitMinX'];
-		$maxx = $rinf['GeoLimitMaxX'];
-		$miny = $rinf['GeoLimitMinY'];
-		$maxy = $rinf['GeoLimitMaxY'];
+		$minx = $rinf['GeoLimitMinX|'];
+		$maxx = $rinf['GeoLimitMaxX|'];
+		$miny = $rinf['GeoLimitMinY|'];
+		$maxy = $rinf['GeoLimitMaxY|'];
 		// set center
 		if (!empty($minx) && !empty($miny) && !empty($maxx) && !empty($maxy)) {
 			$lon = (int) (($minx + $maxx) / 2);

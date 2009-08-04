@@ -448,9 +448,9 @@ class Query extends PDO
 	function getDBInfo() {
 		$data = array();
 		if ($this->dreg != null) {
-			$sql = "SELECT InfoKey, InfoValue, InfoAuxValue FROM Info";
+			$sql = "SELECT InfoKey, LangIsoCode, InfoValue FROM Info";
 			foreach($this->dreg->query($sql) as $row)
-				$data[$row['InfoKey']] = $row['InfoValue'];
+				$data[$row['InfoKey'] .'|'. $row['LangIsoCode']] = $row['InfoValue'];
 		} //if
 		return $data;
 	}

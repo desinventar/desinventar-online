@@ -31,7 +31,7 @@ if (isset($_SERVER["HTTP_HOST"])) {
 		define("TEMP", $ms4wpath . "/tmp");
 		// MS4W doesn't load the gd extension by default, so we do here now...
 		if (!extension_loaded( 'gd' )) {
-			dl( 'php_gd2.'.PHP_SHLIB_SUFFIX);
+			//dl( 'php_gd2.'.PHP_SHLIB_SUFFIX);
 		}
 	} else {
 		// Running on a Linux Server
@@ -113,7 +113,7 @@ if (isset($_SERVER["DI8_WEB"])) {
 	if (isset($_SERVER["DI8_WEBLOCAL"])) {
 		define("BASE", $_SERVER["DI8_WEBLOCAL"]);
 	} else {
-		define("BASE", "C:/desinventar/devel/web");
+		define("BASE", "D:/desinventar/devel/web");
 		//define("BASE", "/home/gentoo/mayandar/devel/desinventar/web");
 	}
 //	define("WWWURL"  , "/mayandar/desinventar");
@@ -122,7 +122,7 @@ if (isset($_SERVER["DI8_WEB"])) {
 	define("WWWDIR"  , BASE . "/tmp");
 	define("WWWDATA" , "../tmp");
 	define("WWWURL"  , "/");
-	define("DATADIR" , "C:/desinventar/data");
+	define("DATADIR" , "D:/desinventar/data");
 	define("CACHEDIR", DATADIR . '/tmp');
 	define("FONTDIR" , DATADIR . '/fonts.txt');
 }
@@ -249,10 +249,10 @@ function showerror ($val) {
 		case ERR_NO_CONNECTION:		$error = "Sin conexi&oacute;n al Sistema"; break;
 		default: 									$error = "No codificado"; break;
 	}
-	$res = '<span style="color:red"><b>Error:</b> '. $error .'</span> ';
+	$res = "<span style='color:red'><b>Error:$error</b></span>";
 	// Very Serious Errors inmediatly notify to Portal Administrator.. 
 	if ($val == ERR_NO_CONNECTION || $val == ERR_NO_DATABASE) {
-		$res .= '<span style="font-size: x-small"> (Se notificar&aacute; automaticamente al administrador)</span>';
+		$res .= "<span style='font-size: x-small'> (Se notificar&aacute; automaticamente al administrador)</span>";
 		// SendMessage ("root@di..", "Severe DI8 Not connection", "Error: $res");
 	}
 	return $res;
