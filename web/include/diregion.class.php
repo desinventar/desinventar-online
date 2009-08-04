@@ -222,6 +222,10 @@ class DIRegion extends DIObject {
 		return $RegionTables;
 	}
 
+	public function clearSyncTable() {
+		$this->q->dreg->query("DELETE FROM Sync;");
+	}
+	
 	public function addRegionItemSync($prmRegionItemId) {
 		foreach($this->getRegionTables() as $TableName) {
 			$s = new DISync($this->session);
@@ -230,8 +234,35 @@ class DIRegion extends DIObject {
 			$s->insert();
 		} //foreach
 	}
-	
+
 	public function addRegionItem($prmRegionItemId, $prmRegionItemGeographyName, $prmRegionItemGeographyId='') {
+		$iReturn = ERR_NO_ERROR;
+		
+		$RegionId = $this->get('RegionId');
+		$RegionDir = VAR_DIR . '/' . $this->get('RegionId');
+		$RegionItemDir = VAR_DIR . '/' . $prmRegionItemId;
+		$RegionItemDB = $RegionItemDir . '/desinventar.db';
+		
+		if ($prmRegionItemGeographyId == '') {
+			$prmRegionItemGeographyId = $this->getRegionItemGeographyId($prmRegionItemId);
+		}
+		printf("%-20s %-5s %s\n", $prmRegionItemGeographyName, $prmRegionItemGeographyId, $prmRegionItemId); 
+		$this->addRegionItemSync($prmRegionItemId);
+
+		// Create Geography element at GeographyLevel=0 for this RegionItem
+		// Delete Existing Elements
+		$Query = "DELETE FROM Geography WHERE GeographyCode='" . $prmRegionItemId . "'";
+		$this->q->dreg->query($Query);
+		$g = new DIGeography($this->session, 
+		                     $prmRegionItemGeographyId,
+		                     $this->get('LangIsoCode'));
+		$g->set('GeographyCode', $prmRegionItemId);
+		$g->set('GeographyName', $prmRegionItemGeographyName);
+		$iReturn = $g->insert();
+		return $iReturn;
+	}
+	
+	public function addRegionItem2($prmRegionItemId, $prmRegionItemGeographyName, $prmRegionItemGeographyId='') {
 		$RegionId = $this->get('RegionId');
 		$RegionDir = VAR_DIR . '/' . $this->get('RegionId');
 		$RegionItemDir = VAR_DIR . '/' . $prmRegionItemId;
@@ -291,8 +322,11 @@ class DIRegion extends DIObject {
 
 	public function getRegionItemGeographyId($prmRegionId) {
 		$GeographyId = '';
-		$g = new DIGeography($this->session, $prmRegionId);
-		$GeographyId = $g->buildGeographyId('');
+		$g = DIGeography::loadByCode($this->session, $prmRegionId);
+		$GeographyId = $g->get('GeographyId');
+		if ($GeographyId == '') {
+			$GeographyId = $g->buildGeographyId('');
+		}
 		return $GeographyId;
 	}
 	
@@ -301,16 +335,6 @@ class DIRegion extends DIObject {
 		$this->setConnection($this->get('RegionId'));
 		$q = $this->q->dreg;
 		
-		// Delete Existing Elements
-		$Query = "DELETE FROM Geography WHERE GeographyCode='" . $prmRegionItemId . "'";
-		$q->query($Query);
-		
-		$g = new DIGeography($this->session, 
-		                     $prmRegionItemGeographyId,
-		                     $this->get('LangIsoCode'));
-		$g->set('GeographyCode', $prmRegionItemId);
-		$g->set('GeographyName', 'Region ' . (int)$prmRegionItemGeographyId);
-		$iReturn = $g->insert();
 		
 		// Copy Geography From Database
 		if ($iReturn > 0) {
@@ -356,9 +380,22 @@ class DIRegion extends DIObject {
 		return $iReturn;
 	}
 	
-	public function doSync() {
-		foreach($this->getRegionTables() as $TableName) {
-			
+	public function processURL($prmURL) {
+		$url = array();
+		$i = strpos($prmURL, '://');
+		$url['protocol'] = substr($prmURL,0,$i);
+		$j = strpos($prmURL, '/', $i+3);
+		$url['host'] = substr($prmURL,$i+3,$j-$i-3);
+		$url['regionid'] = substr($prmURL, $j+1);
+		return $url;
+	}
+	
+	public function rebuildDataDisaster() {
+		foreach($this->q->dreg->query("SELECT * FROM Sync WHERE SyncTable='Disaster'") as $row) {
+			$url = $this->processURL($row['SyncURL']);
+			$RegionItemId = $url['regionid'];
+			$RegionItemGeographyId = $this->getRegionItemGeographyId($RegionItemId);
+			$this->addRegionItemDisaster($RegionItemId, $RegionItemGeographyId);
 		}
 	}
 

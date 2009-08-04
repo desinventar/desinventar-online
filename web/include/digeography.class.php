@@ -35,6 +35,18 @@ class DIGeography extends DIObject {
 			}
 		} //if
 	} // __construct
+	
+	public static function loadByCode($prmSession, $prmGeographyCode) {
+		$GeographyId = '';
+		$LangIsoCode = $prmSession->q->getDBInfoValue('LangIsoCode');
+		$Query= "SELECT * FROM Geography WHERE GeographyCode='" . $prmGeographyCode . "' " . 
+		        " AND LangIsoCode='" . $LangIsoCode . "'";
+		foreach($prmSession->q->dreg->query($Query) as $row) {
+			$GeographyId = $row['GeographyId'];
+		}
+		$g = new DIGeography($prmSession, $GeographyId);
+		return $g;
+	}
 
 	public function buildGeographyId($prmMyParentId) {
 		$iGeographyLevel = strlen($prmMyParentId)/5;
