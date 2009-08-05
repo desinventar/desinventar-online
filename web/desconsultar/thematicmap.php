@@ -82,7 +82,7 @@ if (isset($post['_M+cmd'])) {
 	// generate map
 	$dl = $q->prepareList($dislist, "MAPS");
 	// MAPS Query, RegionId, Level, datalist, ranges, dbinfo, label, maptype
-	$m = new Maps($q, $reg, $lev[0], $dl, $range, $info, $post['_M+Label'], "THEMATIC");
+	$m = new Maps($q, $reg, $lev[0], $dl, $range, $info, $post['_M+Label'], $post['_M+Transparency'], "THEMATIC");
 	$rinf = $q->getDBInfo();
 	$rgl[0]['regname'] = $rinf['RegionLabel|'];
 	$rgl[0]['info'] = $info;
@@ -174,7 +174,7 @@ elseif (isset($get['cmd']) && $get['cmd'] == "getkml") {
 	// Send KML file - GoogleEarth
 	header("Content-type: text/kml");
 	header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $reg) ."_ThematicMap.kml");
-	$m = new Maps($q, $reg, null, null, null, null, null, "KML");
+	$m = new Maps($q, $reg, null, null, null, null, null, null, "KML");
 	echo $m->printKML();
 	exit();
 }

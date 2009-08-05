@@ -19,9 +19,10 @@ class Maps
 	   range: limits, legends and color
 	   info	: about map (WMS Metadata)
 	   lbl	: Label to print name, code or value..
+	   trans : Transparency %
 	   type	: filename, THEMATIC, SELECT, KML
   */
-	function Maps($q, $reg, $lev, $dl, $range, $info, $lbl, $type) {
+	function Maps($q, $reg, $lev, $dl, $range, $info, $lbl, $trans, $type) {
 		$this->url = "http://". $_SERVER['HTTP_HOST'] ."/cgi-bin/". MAPSERV ."?";
 		$this->reg = $reg;
 		$fp = "";
@@ -38,7 +39,7 @@ class Maps
 			else {
 				// generate effects maps: type=filename | thematic=sessid
 				$fp = TMPM_DIR ."/di8ms_";
-				$map .= $this->setLayerEff($q, $reg, $lev, $dl, $range, $info, $lbl);
+				$map .= $this->setLayerEff($q, $reg, $lev, $dl, $range, $info, $lbl, $trans);
 				if ($type == "THEMATIC")
 					$fp .= "$reg-". session_id() .".map";
 				elseif (strlen($type) > 0)
@@ -195,7 +196,7 @@ class Maps
 	}
 	
 	// Generate standard layer with query results
-	function setLayerEff($q, $reg, $lev, $dl, $range, $inf, $lbl) {
+	function setLayerEff($q, $reg, $lev, $dl, $range, $inf, $lbl, $trans) {
 		$gl = $q->loadGeoLevels('', $lev, true);
 		$map = "";
 		foreach ($gl[$lev][2] as $ly) {
@@ -214,7 +215,7 @@ class Maps
 		STATUS	ON
 		TYPE	POLYGON
 		PROJECTION	"init=epsg:4326" END
-		TRANSPARENCY	70
+		TRANSPARENCY	'. $trans .'
 		CLASSITEM	"'. $code .'"
 		LABELITEM	"'. $name .'"
 		METADATA
