@@ -214,26 +214,6 @@ class DIRegion extends DIObject {
 		}
 		return $iReturn;
 	}
-	
-	public static function getRegionTables() {
-		$RegionTables = array('Event','Cause','GeoLevel',
-	                          'GeoCarto','Geography','Disaster',
-	                          'EEData','EEField','EEGroup');
-		return $RegionTables;
-	}
-
-	public function clearSyncTable() {
-		$this->q->dreg->query("DELETE FROM Sync;");
-	}
-	
-	public function addRegionItemSync($prmRegionItemId) {
-		foreach($this->getRegionTables() as $TableName) {
-			$s = new DISync($this->session);
-			$s->set('SyncTable', $TableName);
-			$s->set('SyncURL', "file:///" . $prmRegionItemId);
-			$s->insert();
-		} //foreach
-	}
 
 	public function addRegionItem($prmRegionItemId, $prmRegionItemGeographyName, $prmRegionItemGeographyId='') {
 		$iReturn = ERR_NO_ERROR;
@@ -310,6 +290,27 @@ class DIRegion extends DIObject {
 		}
 		return $iReturn;
 	}
+	
+	public static function getRegionTables() {
+		$RegionTables = array('Event','Cause','GeoLevel',
+	                          'GeoCarto','Geography','Disaster',
+	                          'EEData','EEField','EEGroup');
+		return $RegionTables;
+	}
+
+	public function clearSyncTable() {
+		$this->q->dreg->query("DELETE FROM Sync;");
+	}
+	
+	public function addRegionItemSync($prmRegionItemId) {
+		foreach($this->getRegionTables() as $TableName) {
+			$s = new DISync($this->session);
+			$s->set('SyncTable', $TableName);
+			$s->set('SyncURL', "file:///" . $prmRegionItemId);
+			$s->insert();
+		} //foreach
+	}
+
 
 	public function addRegionItemRecord($prmRegionItemId) {
 		$iReturn = ERR_NO_ERROR;
@@ -390,12 +391,16 @@ class DIRegion extends DIObject {
 		return $url;
 	}
 	
-	public function rebuildDataDisaster() {
-		foreach($this->q->dreg->query("SELECT * FROM Sync WHERE SyncTable='Disaster'") as $row) {
+	public function rebuildDataDisaster($prmRegionItemId='') {
+		$Query = "SELECT * FROM Sync WHERE SyncTable='Disaster'";
+		if ($prmRegionItemId != '') {
+			$Query .= "AND SyncURL LIKE '%" . $prmRegionItemId . "%'";
+		}
+		foreach($this->q->dreg->query($Query) as $row) {
 			$url = $this->processURL($row['SyncURL']);
 			$RegionItemId = $url['regionid'];
 			$RegionItemGeographyId = $this->getRegionItemGeographyId($RegionItemId);
-			$this->addRegionItemDisaster($RegionItemId, $RegionItemGeographyId);
+			//$this->addRegionItemDisaster($RegionItemId, $RegionItemGeographyId);
 		}
 	}
 
@@ -403,11 +408,12 @@ class DIRegion extends DIObject {
 		$iReturn = ERR_NO_ERROR;
 		$RegionDB = VAR_DIR . '/' . $prmRegionItemId . '/desinventar.db';
 		$q = $this->q->dreg;
+		fb($RegionDB);
 		$q->query("ATTACH DATABASE '" . $RegionDB . "' AS RegItem");
 		// Copy Disaster Table, adjust GeographyId Field
 		$this->copyData($q, 'Disaster','DisasterGeographyId', $prmRegionItemId, $prmRegionItemGeographyId, false);
 		// Copy DisasterId from EEData, Other Fields are Ignored...
-		$q->query("INSERT INTO EEData (DisasterId) SELECT DisasterId FROM RegItem.EEData");
+		//$q->query("INSERT INTO EEData (DisasterId) SELECT DisasterId FROM RegItem.EEData");
 		$q->query("DETACH DATABASE RegItem");
 		return $iReturn;
 	}
@@ -480,6 +486,7 @@ class DIRegion extends DIObject {
 		foreach ($Queries as $Query) {
 			//$this->q->dreg->query($Query);
 			try {
+				fb($Query);
 				$prmConn->query($Query);
 			} catch (Exception $e) {
 				showErrorMsg($e->getMessage());
