@@ -817,22 +817,26 @@
  {-/foreach-}
                    </tbody>
                   </table>
-				  <table border="0"><tr>
-				  <td>{-#mcoltransp#-} <select name="_M+Transparency" class="line">
+				  <table border="0" width="100%">
+				   <tr>
+				    <td>{-#mcoltransp#-} <select name="_M+Transparency" class="line">
 						<option value="10">10</option>
 						<option value="20">20</option>
 						<option value="30">30</option>
 						<option value="40">40</option>
 						<option value="50">50</option>
 						<option value="60">60</option>
-						<option value="70">70</option>
+						<option value="70" selected>70</option>
 						<option value="80">80</option>
 						<option value="90">90</option>
 						<option value="100">100</option>
 					   </select>%
-				  </td>
-				  <td align="right"><input type="button" value="{-#mcolorgrad#-}" onClick="genColors();" class="line"></td>
-				  </tr></table>
+				    </td>
+					<td align="right">
+					   <input type="button" value="{-#mcolorgrad#-}" onClick="genColors();" class="line">
+					</td>
+				   </tr>
+				  </table>
                 </td><td>
                   <b>{-#mrepreselev#-}</b><br>
                   <select id="_M+Type" name="_M+Type" size="3" class="fixw">

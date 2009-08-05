@@ -137,7 +137,7 @@ class Query extends PDO
   }
 
   public function getBasicEventList($lg) {
-    $sql = "SELECT EventId, EventName, EventDesc FROM DI_Event ".
+    $sql = "SELECT EventId, EventName, EventDesc FROM Event ".
             "WHERE LangIsoCode='$lg' ORDER BY EventName";
     $data = array();
     $res = $this->base->query($sql);
@@ -147,7 +147,7 @@ class Query extends PDO
   }
   
   public function getBasicCauseList($lg) {
-    $sql = "SELECT CauseId, CauseName, CauseDesc FROM DI_Cause ".
+    $sql = "SELECT CauseId, CauseName, CauseDesc FROM Cause ".
             "WHERE LangIsoCode='$lg' ORDER BY CauseName";
     $data = array();
     $res = $this->base->query($sql);

@@ -54,12 +54,12 @@ if (!empty($cmd)) {
 		$gl = $c->insert();
 		if (!iserror($gl)) {
 			$t->assign ("ctl_msginslev", true);
-			// Create selection map..
+			/* Create selection map.. -> disabled method
 			if (!empty($dat['GeoLevelLayerFile']) &&
 			    !empty($dat['GeoLevelLayerCode']) &&
 			    !empty($dat['GeoLevelLayerName'])) {
-			    $map = new Maps($q, $reg, 0, null, null, null, "", "SELECT");
-			}
+			    $map = new Maps($q, $reg, 0, null, null, null, "", null, "SELECT");
+			}*/
 		} else {
 			$t->assign ("ctl_errinslev", true);
 			$t->assign ("insstatlev", $gl);
