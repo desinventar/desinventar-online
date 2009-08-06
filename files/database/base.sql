@@ -1,5 +1,5 @@
 /* BASE.DB - DesInventar8.2
-2009-07-30
+2009-08-05
 
 DROP TABLE IF EXISTS 
 CREATE TABLE 
@@ -39,6 +39,7 @@ DROP TABLE IF EXISTS Event;
 CREATE TABLE 'Event' ( 
 EventId VARCHAR(50), 
 LangIsoCode VARCHAR(3), 
+RegionId VARCHAR(50), 
 EventName VARCHAR(50), 
 EventDesc TEXT, 
 EventActive INTEGER, 
@@ -55,6 +56,7 @@ DROP TABLE IF EXISTS Cause;
 CREATE TABLE 'Cause' ( 
 CauseId VARCHAR(50), 
 LangIsoCode VARCHAR(3), 
+RegionId VARCHAR(50), 
 CauseName VARCHAR(50), 
 CauseDesc TEXT, 
 CauseActive INTEGER, 
@@ -107,6 +109,7 @@ PRIMARY KEY('InfoKey')
 DROP TABLE IF EXISTS Sync;
 CREATE TABLE 'Sync' ( 
 SyncId VARCHAR(50), 
+RegionId VARCHAR(50), 
 SyncTable VARCHAR(100), 
 SyncUpload DATETIME, 
 SyncDownload DATETIME, 
@@ -121,4 +124,4 @@ insert into Language values ('eng', 'English', 'English', 1,'','','');
 insert into Language values ('fre', 'French', 'Français', 1,'','','');
 insert into Language values ('por', 'Portuguese', 'Portugais', 1,'','','');
 
-insert into Info values ('DBVersion','1.0','','','','');
+insert into Info values ('DBVersion','40030','','','','');

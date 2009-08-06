@@ -400,20 +400,21 @@ class DIRegion extends DIObject {
 			$url = $this->processURL($row['SyncURL']);
 			$RegionItemId = $url['regionid'];
 			$RegionItemGeographyId = $this->getRegionItemGeographyId($RegionItemId);
-			//$this->addRegionItemDisaster($RegionItemId, $RegionItemGeographyId);
+			$this->addRegionItemDisaster($RegionItemId, $RegionItemGeographyId);
 		}
 	}
 
 	public function addRegionItemDisaster($prmRegionItemId,$prmRegionItemGeographyId) {
 		$iReturn = ERR_NO_ERROR;
 		$RegionDB = VAR_DIR . '/' . $prmRegionItemId . '/desinventar.db';
+		$this->q->setDBConnection($this->get('RegionId'));
 		$q = $this->q->dreg;
 		fb($RegionDB);
 		$q->query("ATTACH DATABASE '" . $RegionDB . "' AS RegItem");
 		// Copy Disaster Table, adjust GeographyId Field
 		$this->copyData($q, 'Disaster','DisasterGeographyId', $prmRegionItemId, $prmRegionItemGeographyId, false);
 		// Copy DisasterId from EEData, Other Fields are Ignored...
-		//$q->query("INSERT INTO EEData (DisasterId) SELECT DisasterId FROM RegItem.EEData");
+		$q->query("INSERT INTO EEData (DisasterId) SELECT DisasterId FROM RegItem.EEData");
 		$q->query("DETACH DATABASE RegItem");
 		return $iReturn;
 	}
