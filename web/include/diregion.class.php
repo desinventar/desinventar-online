@@ -21,6 +21,7 @@ class DIRegion extends DIObject {
 		                      "PeriodBeginDate/DATE," .
 		                      "PeriodEndDate/DATE," .
 		                      "OptionOutOfRange/INTEGER," .
+		                      "OptionLanguageList/STRING," .
 		                      "GeoLimitMinX/DOUBLE," . 
 		                      "GeoLimitMinY/DOUBLE," . 
 		                      "GeoLimitMaxX/DOUBLE," . 
@@ -35,13 +36,15 @@ class DIRegion extends DIObject {
 		                      "InfoAdminURL/STRING";
 
 		parent::__construct($prmSession);
-		$num_args = func_num_args();
-		$this->set('LangIsoCode', 'spa');
+		if ($this->get('OptionLanguageList') == '') {
+			$this->set('OptionLanguageList', $this->get('LangIsoCode'));
+		}
 		$this->setConnection("core");
 		$this->createFields($this->sInfoDef);
 		$this->createFields($this->sInfoTrans);
 		$this->set('PeriodBeginDate', '1900-01-01');
 		$this->set('PeriodEndDate', gmdate('Y-m-d'));
+		$num_args = func_num_args();
 		if ($num_args >= 2) {
 			$prmRegionId = func_get_arg(1);
 			if ($prmRegionId != '') {
