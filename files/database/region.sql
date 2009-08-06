@@ -1,5 +1,5 @@
 /* REGION.DB - DesInventar8.2
-2009-07-30
+2009-08-05
 */
 
 DROP TABLE IF EXISTS Info;
@@ -18,6 +18,7 @@ DROP TABLE IF EXISTS Event;
 CREATE TABLE 'Event' ( 
 EventId VARCHAR(50), 
 LangIsoCode VARCHAR(3), 
+RegionId VARCHAR(50), 
 EventName VARCHAR(50), 
 EventDesc TEXT, 
 EventActive INTEGER DEFAULT 1, 
@@ -34,6 +35,7 @@ DROP TABLE IF EXISTS Cause;
 CREATE TABLE 'Cause' ( 
 CauseId VARCHAR(50), 
 LangIsoCode VARCHAR(3), 
+RegionId VARCHAR(50), 
 CauseName VARCHAR(50), 
 CauseDesc TEXT, 
 CauseActive INTEGER DEFAULT 1, 
@@ -50,6 +52,7 @@ DROP TABLE IF EXISTS GeoLevel;
 CREATE TABLE 'GeoLevel' ( 
 GeoLevelId INTEGER, 
 LangIsoCode VARCHAR(3), 
+RegionId VARCHAR(50), 
 GeoLevelName VARCHAR(50) DEFAULT '---', 
 GeoLevelDesc TEXT NULL, 
 GeoLevelActive INTEGER DEFAULT 0, 
@@ -78,6 +81,7 @@ DROP TABLE IF EXISTS Geography;
 CREATE TABLE 'Geography' ( 
 GeographyId VARCHAR(100), 
 LangIsoCode VARCHAR(3), 
+RegionId VARCHAR(50), 
 GeographyCode VARCHAR(100) DEFAULT '---', 
 GeographyName VARCHAR(200) DEFAULT '---', 
 GeographyLevel INTEGER DEFAULT -1, 
@@ -91,6 +95,7 @@ PRIMARY KEY('GeographyId','LangIsoCode')
 DROP TABLE IF EXISTS Disaster;
 CREATE TABLE 'Disaster' ( 
 DisasterId VARCHAR(50), 
+RegionId VARCHAR(50), 
 DisasterSerial VARCHAR(50), 
 DisasterBeginTime VARCHAR(30), 
 DisasterGeographyId VARCHAR(100), 
@@ -153,6 +158,7 @@ PRIMARY KEY('DisasterId')
 DROP TABLE IF EXISTS EEGroup;
 CREATE TABLE 'EEGroup' ( 
 EEGroupId VARCHAR(30), 
+RegionId VARCHAR(50), 
 EEGroupLabel VARCHAR(50), 
 EEGroupDesc TEXT, 
 EEGroupStatus INTEGER, 
@@ -165,6 +171,7 @@ PRIMARY KEY('EEGroupId')
 DROP TABLE IF EXISTS EEField;
 CREATE TABLE 'EEField' ( 
 EEFieldId VARCHAR(30), 
+RegionId VARCHAR(50), 
 EEGroupId VARCHAR(30), 
 EEFieldLabel VARCHAR(30), 
 EEFieldDesc TEXT, 
@@ -181,6 +188,7 @@ PRIMARY KEY('EEFieldId')
 DROP TABLE IF EXISTS EEData;
 CREATE TABLE 'EEData' ( 
 DisasterId VARCHAR(50), 
+RegionId VARCHAR(50), 
 RecordCreation DATETIME, 
 RecordSync DATETIME, 
 RecordUpdate DATETIME, 
@@ -198,6 +206,7 @@ DBLogUserId VARCHAR(20)
 DROP TABLE IF EXISTS Sync;
 CREATE TABLE 'Sync' ( 
 SyncId VARCHAR(50), 
+RegionId VARCHAR(50), 
 SyncTable VARCHAR(100), 
 SyncUpload DATETIME, 
 SyncDownload DATETIME, 
@@ -205,4 +214,3 @@ SyncURL VARCHAR(1024),
 SyncSpec VARCHAR(1024), 
 PRIMARY KEY('SyncId')
 );
-

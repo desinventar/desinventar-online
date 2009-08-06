@@ -1,5 +1,5 @@
 /* CORE.DB - DesInventar8.2
-2009-07-30
+2009-08-05
 */
 
 DROP TABLE IF EXISTS Region;
@@ -74,7 +74,7 @@ DROP TABLE IF EXISTS UserSession;
 CREATE TABLE 'UserSession' ( 
 SessionId VARCHAR(50), 
 RegionId VARCHAR(50), 
-UserId VARCHAR(50), 
+UserId VARCHAR(20), 
 Valid INTEGER, 
 Start DATETIME, 
 LastUpdate DATETIME, 
