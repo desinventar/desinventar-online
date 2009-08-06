@@ -68,6 +68,10 @@ function showErrorMsg($sMsg) {
 	fb($sMsg);
 }
 
+function showDebugMsg($sMsg) {
+	print $sMsg . "<br />\n";
+}
+
 /* Configure BASE Directory from HTTPD Config - Linux + WIndows */
 /* Apache MS4W creates enviroment variables as REDIRECT_XXXXX */
 if (isset($_SERVER["REDIRECT_DI8_WEB"])) {

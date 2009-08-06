@@ -36,6 +36,9 @@ class DIObject {
 		$this->createFields($this->sFieldDef);
 		$this->set('RegionId', $this->session->sRegionId);
 		$this->set('LangIsoCode', $this->q->getDBInfoValue('LangIsoCode'));
+		if ($this->get('LangIsoCode') == '') { 
+			$this->set('LangIsoCode', 'spa');
+		}
 		$this->set('RecordUpdate', gmdate('c'));
 	} // constructor
 	
@@ -66,7 +69,11 @@ class DIObject {
 	
 	public function get($prmKey) {
 		try {
-			return $this->oField[$prmKey];
+			if ($this->existField($prmKey)) {
+				return $this->oField[$prmKey];
+			} else {
+				return '';
+			}
 		} catch (Exception $e) {
 			showErrorMsg("Error " . $e->getMessage());
 		}		
