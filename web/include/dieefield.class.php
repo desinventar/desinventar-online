@@ -9,7 +9,8 @@ class DIEEField extends DIObject {
 		$this->sTableName   = "EEField";
 		$this->sPermPrefix  = "EEFIELD";
 		$this->sFieldKeyDef = "EEFieldId/STRING";
-		$this->sFieldDef    = "EEGroupId/STRING," .
+		$this->sFieldDef    = "RegionId/STRING," .
+		                      "EEGroupId/STRING," .
 		                      "EEFieldLabel/STRING," .
 		                      "EEFieldDesc/STRING," .
 		                      "EEFieldType/STRING," .

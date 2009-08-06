@@ -9,7 +9,8 @@ class DISync extends DIObject {
 		$this->sTableName   = "Sync";
 		$this->sPermPrefix  = "ADMIN";
 		$this->sFieldKeyDef = "SyncId/STRING";
-		$this->sFieldDef    = "SyncTable/STRING," .
+		$this->sFieldDef    = "RegionId/STRING," .
+		                      "SyncTable/STRING," .
 		                      "SyncUpload/DATETIME," .
 		                      "SyncDownload/DATETIME," .  
 		                      "SyncURL/STRING," .

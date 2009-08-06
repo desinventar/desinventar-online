@@ -9,7 +9,8 @@ class DIDisaster extends DIObject {
 		$this->sTableName   = "Disaster";
 		$this->sPermPrefix  = "DISASTER";
 		$this->sFieldKeyDef = "DisasterId/STRING";
-		$this->sFieldDef    = "DisasterSerial/STRING," .
+		$this->sFieldDef    = "RegionId/STRING," .
+		                      "DisasterSerial/STRING," .
 		                      "DisasterBeginTime/STRING," .
 		                      "DisasterGeographyId/STRING," .
 		                      "DisasterSiteNotes/STRING," .

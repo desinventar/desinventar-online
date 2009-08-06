@@ -10,7 +10,8 @@ class DIGeoLevel extends DIObject {
 		$this->sPermPrefix  = "GEOLEVEL";
 		$this->sFieldKeyDef = "GeoLevelId/INTEGER," .
 		                      "LangIsoCode/STRING";
-		$this->sFieldDef    = "GeoLevelName/STRING," .
+		$this->sFieldDef    = "RegionId/STRING," .
+		                      "GeoLevelName/STRING," .
 		                      "GeoLevelDesc/STRING," .  
 		                      "GeoLevelActive/INTEGER," .
 		                      "RecordCreation/DATETIME," .

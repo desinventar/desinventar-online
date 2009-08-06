@@ -10,7 +10,8 @@ class DIGeography extends DIObject {
 		$this->sPermPrefix  = "GEOGRAPHY";
 		$this->sFieldKeyDef = "GeographyId/STRING," .
 		                      "LangIsoCode/STRING";
-		$this->sFieldDef    = "GeographyCode/STRING," .
+		$this->sFieldDef    = "RegionId/STRING," .
+		                      "GeographyCode/STRING," .
 		                      "GeographyName/STRING," .  
 		                      "GeographyLevel/INTEGER," .
 		                      "GeographyActive/BOOLEAN," .
