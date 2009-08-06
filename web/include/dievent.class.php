@@ -10,7 +10,8 @@ class DIEvent extends DIObject {
 		$this->sPermPrefix  = "EVENT";
 		$this->sFieldKeyDef = "EventId/STRING," .
 		                      "LangIsoCode/STRING";
-		$this->sFieldDef    = "EventName/STRING," .
+		$this->sFieldDef    = "RegionId/STRING," . 
+		                      "EventName/STRING," .
 		                      "EventDesc/STRING," .
 		                      "EventActive/BOOLEAN," .  
 		                      "EventPredefined/BOOLEAN," .

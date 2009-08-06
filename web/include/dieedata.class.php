@@ -9,7 +9,8 @@ class DIEEData extends DIObject {
 		$this->sTableName   = "EEData";
 		$this->sPermPrefix  = "DISASTER";
 		$this->sFieldKeyDef = "DisasterId/STRING";
-		$this->sFieldDef    = "RecordCreation/DATETIME," .
+		$this->sFieldDef    = "RegionId/STRING," . 
+		                      "RecordCreation/DATETIME," .
 		                      "RecordSync/DATETIME," .
 		                      "RecordUpdate/DATETIME";
 		parent::__construct($prmSession);

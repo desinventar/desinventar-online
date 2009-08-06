@@ -10,7 +10,8 @@ class DICause extends DIObject {
 		$this->sPermPrefix  = "CAUSE";
 		$this->sFieldKeyDef = "CauseId/STRING," .
 		                      "LangIsoCode/STRING";
-		$this->sFieldDef    = "CauseName/STRING," .
+		$this->sFieldDef    = "RegionId/STRING," . 
+		                      "CauseName/STRING," .
 		                      "CauseDesc/STRING," .
 		                      "CauseActive/BOOLEAN," .  
 		                      "CausePredefined/BOOLEAN," .
