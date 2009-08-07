@@ -379,6 +379,21 @@
 	    $('_G+TypeH').value = "";
 	  $('_G+Type').value = grp;
     }
+	function grpSelectbyKind() {
+	  comp = $('_G+TypeC').value;
+	  if ((comp == "D.EventId" || comp == "D.CauseId" || comp.substr(0,21) == "D.DisasterGeographyId")
+	       && $('_G+Kind').value == "BAR") {
+	        enabAxis2();
+        	enab($('_G+M_accu'));
+        	disab($('_G+M_over'));
+			enab($('_G+Scale'));
+	  }
+	  else {
+	        disabAxis2();
+        	disab($('_G+M_accu'));
+			disab($('_G+Scale'));
+	  }
+	}
     // forms management
     function combineForms(dcf, ref) {
       var dc = $(dcf);
@@ -671,13 +686,12 @@
 		var m2 = ((z2 - a2) / cnt);
 		var m3 = ((z3 - a3) / cnt);
 		for (i=1; i <= cnt; i++) {
-			idx = i - 1;
 			h1 = dechex(a1 + (m1 * i));
 			h2 = dechex(a2 + (m2 * i));
 			h3 = dechex(a3 + (m3 * i));
 			val = "#" + h1 + h2 + h3;
-			$('_M+color['+ idx + ']').value = val;
-			$('_M+ic['+ idx + ']').style.backgroundColor = val;
+			$('_M+color['+ i + ']').value = val;
+			$('_M+ic['+ i + ']').style.backgroundColor = val;
 		}
 	}
   </script>
@@ -822,11 +836,11 @@
 				    <td>{-#mcoltransp#-} <select name="_M+Transparency" class="line">
 						<option value="10">10</option>
 						<option value="20">20</option>
-						<option value="30">30</option>
+						<option value="30" selected>30</option>
 						<option value="40">40</option>
 						<option value="50">50</option>
 						<option value="60">60</option>
-						<option value="70" selected>70</option>
+						<option value="70">70</option>
 						<option value="80">80</option>
 						<option value="90">90</option>
 						<option value="100">100</option>
@@ -849,7 +863,7 @@
                   <select id="_M+Field" name="_M+Field" size="8" class="fixw">
                     <option value="D.DisasterId||" selected>{-#trepnum#-}</option>
  {-foreach name=ef1 key=k item=i from=$ef1-}
-                    <option value="D.{-$k-}|>|-1">{-$i[0]-}</option>
+                    <option value="D.{-$k-}Q|>|-1">{-$i[0]-}</option>
                     <option value="D.{-$k-}|=|-1">{-#tauxhave#-} {-$i[0]-}</option>
  {-/foreach-}
  {-foreach name=ef2 key=k item=i from=$ef2-}
@@ -889,18 +903,18 @@
             	<table class="conf" cellpadding=0 cellspacing=0>
             		<tr valign="bottom">
             			<td colspan=3 align="center">
-            				<table>
+<!--            				<table>
             					<tr>
-            						<td>
-            							<b>{-#gopttitle#-}</b><br>
+            						<td>-->
+            							<b>{-#gopttitle#-}</b>
             							<input type="text" name="_G+Title" class="line fixw">
-            						</td>
+<!--            						</td>
             						<td>
             							<b>{-#goptsubtit#-}</b><br>
             							<input type="text" name="_G+Title2" class="line fixw">
             						</td>
             					</tr>
-            				</table>
+            				</table>-->
             			</td>
             		</tr>
             		<tr valign="bottom">
@@ -910,7 +924,7 @@
             				<select id="_G+Field" name="_G+Field" onMouseOver="showtip('{-$dic.GraphField[2]-}');">
             					<option value="D.DisasterId||" selected>{-$dic.GraphDisasterId_[0]-}</option>
  {-foreach name=ef1 key=k item=i from=$ef1-}
-                    	<option value="D.{-$k-}|>|-1">{-$i[0]-}</option>
+                    	<option value="D.{-$k-}Q|>|-1">{-$i[0]-}</option>
                     	<option value="D.{-$k-}|=|-1">{-#tauxhave#-} {-$i[0]-}</option>
  {-/foreach-}
  {-foreach name=ef2 key=k item=i from=$ef2-}
@@ -954,7 +968,7 @@
             				<table border=1 width="120px" height="120px">
             					<tr><td align="center">
             					<!--<b onMouseOver="showtip('{-$dic.GraphKind[2]-}');">{-$dic.GraphKind[0]-}</b><br>-->
-            						<select id="_G+Kind" name="_G+Kind" size="3" 
+            						<select id="_G+Kind" name="_G+Kind" size="3" onChange="grpSelectbyKind();"
             								onMouseOver="showtip('{-$dic.GraphKind[2]-}');">
             							<option value="BAR" selected>{-#gkndbars#-}</option>
             							<option id="_G+K_line" value="LINE">{-#gkndlines#-}</option>
@@ -977,7 +991,7 @@
             					<option value="" selected></option>
             					<option value="D.DisasterId||">{-$dic.GraphDisasterId_[0]-}</option>
  {-foreach name=ef1 key=k item=i from=$ef1-}
-                    	<option value="D.{-$k-}|>|-1">{-$i[0]-}</option>
+                    	<option value="D.{-$k-}Q|>|-1">{-$i[0]-}</option>
                     	<option value="D.{-$k-}|=|-1">{-#tauxhave#-} {-$i[0]-}</option>
  {-/foreach-}
  {-foreach name=ef2 key=k item=i from=$ef2-}
@@ -1021,9 +1035,10 @@
             		<tr>
             			<td colspan=3 align="center">
             				<p><u>{-#ghoraxis#-}:</u></p>
+							<b>{-#ghistogram#-}</b>
             				<select id="_G+TypeH" onChange="grpSelectbyType('_G+TypeH');" 
             						onMouseOver="showtip('{-$dic.GraphType[2]-}');" class="fixw">
-								<option value="" disabled>- {-#ghistogram#-} -</option>
+								<option value="" disabled></option>
 								<option value="D.DisasterBeginTime" selected>{-$dic.GraphHisTemporal[0]-}</option>
 								<option value="D.DisasterBeginTime|D.EventId">{-$dic.GraphHisEveTemporal[0]-}</option>
 {-foreach name=glev key=k item=i from=$glev-}
@@ -1053,9 +1068,10 @@
 		                    	</select>
 		                    </td></tr>
 		                    </table><br>
+							<b>{-#gcomparative#-}</b>
 							<select id="_G+TypeC" onChange="grpSelectbyType('_G+TypeC');" 
             						onMouseOver="showtip('{-$dic.GraphType[2]-}');" class="fixw">
-								<option value="" disabled selected>- {-#gcomparative#-} -</option>
+								<option value="" disabled selected></option>
 								<option value="D.EventId">{-$dic.GraphComByEvents[0]-}</option>
 								<option value="D.CauseId">{-$dic.GraphComByCauses[0]-}</option>
 {-foreach name=glev key=k item=i from=$glev-}

@@ -171,18 +171,17 @@ class Graphic {
 				$this->g->yaxis->scale->SetGrace(20);
 				if ($opc['_G+Scale'] == "textlog")
 					$this->g->yaxis->scale->ticks->SetLabelLogType(LOGLABELS_PLAIN);
-        if (isset($opc['_G+Scale2']) && 
-            ($gType == "2TEMPO" || $gType == "2COMPAR")) {
-          $this->g->SetY2Scale($opc['_G+Scale2']);	// int, log
-          $this->g->y2grid->Show(true,true);
-          $this->g->y2axis->SetTitle($sY2AxisLabel, 'middle');
-//          $this->g->y2axis->SetTitlemargin(40);
-          $this->g->y2axis->title->SetFont(FF_ARIAL, FS_NORMAL);
-          $this->g->y2axis->scale->SetGrace(20);
-          $this->g->y2axis->SetColor('darkred');
-          if ($opc['_G+Scale2'] == "log")
-            $this->g->y2axis->scale->ticks->SetLabelLogType(LOGLABELS_PLAIN);
-        }
+		        if (isset($opc['_G+Scale2']) && ($gType == "2TEMPO" || $gType == "2COMPAR")) {
+		          $this->g->SetY2Scale($opc['_G+Scale2']);	// int, log
+		          $this->g->y2grid->Show(true,true);
+		          $this->g->y2axis->SetTitle($sY2AxisLabel, 'middle');
+				  //$this->g->y2axis->SetTitlemargin(40);
+		          $this->g->y2axis->title->SetFont(FF_ARIAL, FS_NORMAL);
+		          $this->g->y2axis->scale->SetGrace(20);
+		          $this->g->y2axis->SetColor('darkred');
+		          if ($opc['_G+Scale2'] == "log")
+		            $this->g->y2axis->scale->ticks->SetLabelLogType(LOGLABELS_PLAIN);
+		        }
 			} // if G+Scale
 		}
 		// 2009-02-03 (jhcaiced) Try to avoid overlapping labels in XAxis
@@ -216,68 +215,68 @@ class Graphic {
 			$pal = $this->genPalette($acol, "FIX", null, null);
 		// Choose and draw graphic type
 		if ($gType == "2TEMPO" || $gType == "2COMPAR") {
-		  $zo = array();
-		  $val1 = array();
-		  $val2 = array();
-		  foreach ($val as $ky=>$vl) {
-		    $zo[$ky] = 0;
-		    $val1[$ky] = $vl[0];
-		    $val2[$ky] = $vl[1];
-      }
-      $val = $val1;
-    }
+			$zo = array();
+			$val1 = array();
+			$val2 = array();
+			foreach ($val as $ky=>$vl) {
+				$zo[$ky] = 0;
+				$val1[$ky] = $vl[0];
+				$val2[$ky] = $vl[1];
+			}
+			$val = $val1;
+		}
 		switch ($kind) {
-		  case "BAR":
-		    if ($gType == "TEMPO" || $gType == "BAR") {
-          $m = $this->bar($opc, $val, $pal);
-          if (isset($opc['_G+Data']) && $opc['_G+Data'] == "VALUE") {
-            $m->value->SetFont(FF_ARIAL, FS_NORMAL, 7);
-            $m->value->SetFormat("%d");
-            $m->value->SetAngle(90);
-            $m->value->SetColor("black","darkred");
-            $m->value->Show();
-          }
-        }
-        elseif ($gType == "2TEMPO" || $gType == "2COMPAR") {
-          $zp = $this->bar($opc, $zo, "");
-          $y1 = $this->bar($opc, $val1, "darkblue");
-          $y2 = $this->bar($opc, $val2, "darkred");
-          $y1p = new GroupBarPlot(array($y1, $zp));
-          $y2p = new GroupBarPlot(array($zp, $y2));
-          $this->g->Add($y1p);
-          $this->g->AddY2($y2p);
-        }
+			case "BAR":
+				if ($gType == "TEMPO" || $gType == "BAR") {
+					$m = $this->bar($opc, $val, $pal);
+					if (isset($opc['_G+Data']) && $opc['_G+Data'] == "VALUE") {
+						$m->value->SetFont(FF_ARIAL, FS_NORMAL, 7);
+						$m->value->SetFormat("%d");
+						$m->value->SetAngle(90);
+						$m->value->SetColor("black","darkred");
+						$m->value->Show();
+					}
+				}
+				elseif ($gType == "2TEMPO" || $gType == "2COMPAR") {
+					$zp = $this->bar($opc, $zo, "");
+					$y1 = $this->bar($opc, $val1, "darkblue");
+					$y2 = $this->bar($opc, $val2, "darkred");
+					$y1p = new GroupBarPlot(array($y1, $zp));
+					$y2p = new GroupBarPlot(array($zp, $y2));
+					$this->g->Add($y1p);
+					$this->g->AddY2($y2p);
+				}
 			break;
-      case "LINE":
-        $m[] = $this->line($opc, $val, $pal);
-        // Add lineal regression 
-        $std = new Math();
-        $xx = array_fill(0, count($val), 0);
-        $rl = $std->linearRegression(array_keys($xx), array_values($val));
-        $n = 0;
-        foreach ($val as $kk=>$ii) {
-          $x = ($rl['m'] * $n) + $rl['b'];
-          $linreg[] = ($x < 0) ? 0 : $x;
-          $n++;
-        }
-        $m[] = $this->line($opc, $linreg, 'single');
+			case "LINE":
+				$m[] = $this->line($opc, $val, $pal);
+				// Add lineal regression 
+				$std = new Math();
+				$xx = array_fill(0, count($val), 0);
+				$rl = $std->linearRegression(array_keys($xx), array_values($val));
+				$n = 0;
+				foreach ($val as $kk=>$ii) {
+					$x = ($rl['m'] * $n) + $rl['b'];
+					$linreg[] = ($x < 0) ? 0 : $x;
+					$n++;
+				}
+				$m[] = $this->line($opc, $linreg, 'single');
 			break;
 			case "MULTIBAR":
-			  $m = $this->multibar($opc, $val, $pal);
+				$m = $this->multibar($opc, $val, $pal);
 			break;
 			case "MULTILINE":
-			  $m = $this->multiline($opc, $val, $pal);
+				$m = $this->multiline($opc, $val, $pal);
 			break;
 			case "PIE":
-			  $m = $this->pie($opc, $val, $pal);
-			  if (isset($opc['_G+Data']) && $opc['_G+Data'] == "VALUE") {
+				$m = $this->pie($opc, $val, $pal);
+				if (isset($opc['_G+Data']) && $opc['_G+Data'] == "VALUE") {
 					$m->SetLabelType(PIE_VALUE_ABS);
 					$m->value->SetFormat("%d");
 					$m->value->SetFont(FF_ARIAL, FS_NORMAL, 6);
-        }
+				}
 			break;
 			default:
-			  $m = null;
+				$m = null;
 			break;
 		} //switch
 		// Extra presentation options
@@ -314,7 +313,7 @@ class Graphic {
 		return $sGraphPeriod;
 	}*/
 
-	function getWeekOfYear ($sMyDate) { 
+	function getWeekOfYear ($sMyDate) {
 		$iWeek = date("W", 
 		  mktime(5, 0, 0, (int)substr($sMyDate,5,2),
 		                  (int)substr($sMyDate,8,2),
@@ -323,7 +322,7 @@ class Graphic {
 	}
 	
 	function completeTimeSerie ($opc, $val, $q) {
-	  $dateini = "";
+		$dateini = "";
 		$dateend = "";
 		// Get range of dates from Database
 		//print_r($opc);
@@ -339,259 +338,234 @@ class Graphic {
 		else
 			$dateend = $ydb[0];
 		// Calculate Start Date/EndDate, from Database or From Query
-/*		if (isset($opc['D:DisasterBeginTime'][0])) {
-		  // $dateini = (int)(empty($opc['D:DisasterBeginTime'][0]) ? substr($ydb[0], 0, 4) : $opc['D:DisasterBeginTime'][0]);
-		  $oTmp = $opc['D:DisasterBeginTime'];
-		  $iYear = 1;		$iMonth = 1; 	$iDay = 1;
-		  if (!empty($oTmp[0])) 	$iYear  = $oTmp[0];
-      if (!empty($oTmp[1])) 	$iMonth = $oTmp[1];
-      if (!empty($oTmp[2]))		$iDay   = $oTmp[2];
-      $dateini = sprintf("%04d-%02d-%02d", $iYear, $iMonth, $iDay);
-    }
-		else {
-		  $dateini = current(array_keys($val));
-		  if (!is_int($dateini))
-		    $dateini = next(array_keys($val));	// ignore first null value
-    }
-    if (!empty($opc['D:DisasterEndTime'][0])) {
-      //$dateend = (int)(empty($opc['D:DisasterEndTime'][0]) ? substr($ydb[1], 0, 4) : $opc['D:DisasterEndTime'][0]);
-      $oTmp = $opc['D:DisasterEndTime'];
-      $iYear = 9999;	$iMonth = 12;		$iDay = 31;
-      if (!empty($oTmp[0])) 	$iYear  = $oTmp[0];
-      if (!empty($oTmp[1])) 	$iMonth = $oTmp[1];
-      if (!empty($oTmp[2])) 	$iDay   = $oTmp[2];
-      $dateend = sprintf("%04d-%02d-%02d", $iYear, $iMonth, $iDay);
-    }
-    else
-      $dateend = end(array_keys($val));*/
-    // Delete initial columns with null values (MONTH,DAY=0)
-    if (isset($val[0]) || isset($val['']))
-      $val = array_slice($val, 1, count($val), true);
-    // Generate YEAR, MONTH, WEEK, DAY series..
-    if (empty($this->sStat)) {
+		// Delete initial columns with null values (MONTH,DAY=0)
+		if (isset($val[0]) || isset($val['']))
+			$val = array_slice($val, 1, count($val), true);
+		// Generate YEAR, MONTH, WEEK, DAY series..
+		if (empty($this->sStat)) {
 			// Fill data series with zero; Year Loop (always execute)
-      for ($iYear = substr($dateini, 0, 4); $iYear <= substr($dateend, 0, 4); $iYear++) {
-				$sDate = sprintf("%04d", $iYear);
-        if ($this->sPeriod == "YEAR") {
-          if (!isset($val[$sDate]))
-            $val[$sDate] = 0;
-        }
-        elseif ($this->sPeriod == "YWEEK")
-          $this->completeWeekSerie ($dateini, $dateend, $iYear, $val);
-        else
-          $this->completeMonthSerie ($dateini, $dateend, $iYear, $val);
-      }
-    }
-    else {
-      if ($this->sStat == "DAY")
-        $this->completeDaySerie ($dateini, $dateend, "", 0, $val);
-      elseif ($this->sStat == "WEEK")
-        $this->completeWeekSerie ($dateini, $dateend, "", $val);
-      elseif ($this->sStat == "MONTH")
-        $this->completeMonthSerie ($dateini, $dateend, "", $val);
-    }
-    // Reorder XAxis Labels
-    ksort($val);
-    reset($val);
-    return $val;
-  }
+			for ($iYear = substr($dateini, 0, 4); $iYear <= substr($dateend, 0, 4); $iYear++) {
+					$sDate = sprintf("%04d", $iYear);
+				if ($this->sPeriod == "YEAR") {
+					if (!isset($val[$sDate]))
+						$val[$sDate] = 0;
+				}
+				elseif ($this->sPeriod == "YWEEK")
+					$this->completeWeekSerie ($dateini, $dateend, $iYear, $val);
+				else
+					$this->completeMonthSerie ($dateini, $dateend, $iYear, $val);
+			}
+		}
+		else {
+			if ($this->sStat == "DAY")
+				$this->completeDaySerie ($dateini, $dateend, "", 0, $val);
+			elseif ($this->sStat == "WEEK")
+				$this->completeWeekSerie ($dateini, $dateend, "", $val);
+			elseif ($this->sStat == "MONTH")
+				$this->completeMonthSerie ($dateini, $dateend, "", $val);
+		}
+		// Reorder XAxis Labels
+		ksort($val);
+		reset($val);
+		return $val;
+	}
   
 	function completeWeekSerie ($dateini, $dateend, $iYear, &$val) {
 		$iWeekIni =  1;
 		$sDate = sprintf("%04d-12-31", $iYear);
 		$iWeekEnd = $this->getWeekOfYear($sDate);
 		if ($iYear == substr($dateini, 0, 4))
-		  $iWeekIni = $this->getWeekOfYear($dateini);
-    if ($iYear == substr($dateend, 0, 4))
-      $iWeekEnd = $this->getWeekOfYear($dateend);
-    for ($iWeek = $iWeekIni; $iWeek <= $iWeekEnd; $iWeek++) {
-      if ($this->sPeriod == "YWEEK")
-        $sDate = sprintf("%04d-%02d", $iYear, $iWeek);
-      elseif ($this->sStat == "WEEK")
-        $sDate = sprintf("%02d", $iWeek);
-      if (!isset($val[$sDate]))
-        $val[$sDate] = 0;
-    }
-    return;
-  }
+			$iWeekIni = $this->getWeekOfYear($dateini);
+		if ($iYear == substr($dateend, 0, 4))
+			$iWeekEnd = $this->getWeekOfYear($dateend);
+		for ($iWeek = $iWeekIni; $iWeek <= $iWeekEnd; $iWeek++) {
+			if ($this->sPeriod == "YWEEK")
+				$sDate = sprintf("%04d-%02d", $iYear, $iWeek);
+			elseif ($this->sStat == "WEEK")
+				$sDate = sprintf("%02d", $iWeek);
+			if (!isset($val[$sDate]))
+				$val[$sDate] = 0;
+		}
+		return;
+	}
   
-  function completeMonthSerie ($dateini, $dateend, $iYear, &$val) {
-    $iMonthIni =  1;
-    $iMonthEnd = 12;
-    if ($iYear == substr($dateini, 0, 4))
-      $iMonthIni = substr($dateini, 5, 2);
-    if ($iYear == substr($dateend, 0, 4))
-      $iMonthEnd = substr($dateend, 5, 2);
-    for ($iMonth = $iMonthIni; $iMonth <= $iMonthEnd; $iMonth++) {
-      if ($this->sPeriod == "YDAY")
-        $this->completeDaySerie ($dateini, $dateend, $iYear, $iMonth, $val);
-      else {
-        if ($this->sPeriod == "YMONTH")
-          $sDate = sprintf("%04d-%02d", $iYear, $iMonth);
-        elseif ($this->sStat == "MONTH")
-          $sDate = sprintf("%02d", $iMonth);
-        if (!isset($val[$sDate]))
-          $val[$sDate] = 0;
-      }
-    }
-    return;
-  }
+	function completeMonthSerie ($dateini, $dateend, $iYear, &$val) {
+		$iMonthIni =  1;
+		$iMonthEnd = 12;
+		if ($iYear == substr($dateini, 0, 4))
+			$iMonthIni = substr($dateini, 5, 2);
+		if ($iYear == substr($dateend, 0, 4))
+			$iMonthEnd = substr($dateend, 5, 2);
+		for ($iMonth = $iMonthIni; $iMonth <= $iMonthEnd; $iMonth++) {
+			if ($this->sPeriod == "YDAY")
+				$this->completeDaySerie ($dateini, $dateend, $iYear, $iMonth, $val);
+			else {
+				if ($this->sPeriod == "YMONTH")
+					$sDate = sprintf("%04d-%02d", $iYear, $iMonth);
+				elseif ($this->sStat == "MONTH")
+					$sDate = sprintf("%02d", $iMonth);
+				if (!isset($val[$sDate]))
+					$val[$sDate] = 0;
+			}
+		}
+		return;
+	}
   
-  function completeDaySerie ($dateini, $dateend, $iYear, $iMonth, &$val) {
-    $iDayIni = 1;
-    $iDayEnd = 30;
-    $sDate = sprintf("%04d-%02d", $iYear, $iMonth);
-    if ($sDate == substr($dateini, 0, 7))
-      $iDayIni = substr($dateini, 8, 2);
-    if ($sDate  == substr($dateend, 0, 7))
-      $iDayEnd = substr($dateend, 8, 2);
-    if ($this->sStat == "DAY") {
-      $iDayIni = 1;
-      $iDayEnd = 366;
-    }
-    for ($iDay = $iDayIni; $iDay <= $iDayEnd; $iDay++) {
-      if ($this->sPeriod == "YDAY")
-        $sDate = sprintf("%04d-%02d-%02d", $iYear, $iMonth, $iDay);
-      elseif ($this->sStat == "DAY")
-        $sDate = sprintf("%03d", $iDay);
-      if (!isset($val[$sDate]))
-        $val[$sDate] = 0;
-    }
-    return;
-  }
+	function completeDaySerie ($dateini, $dateend, $iYear, $iMonth, &$val) {
+		$iDayIni = 1;
+		$iDayEnd = 30;
+		$sDate = sprintf("%04d-%02d", $iYear, $iMonth);
+		if ($sDate == substr($dateini, 0, 7))
+			$iDayIni = substr($dateini, 8, 2);
+		if ($sDate  == substr($dateend, 0, 7))
+			$iDayEnd = substr($dateend, 8, 2);
+		if ($this->sStat == "DAY") {
+			$iDayIni = 1;
+			$iDayEnd = 366;
+		}
+		for ($iDay = $iDayIni; $iDay <= $iDayEnd; $iDay++) {
+			if ($this->sPeriod == "YDAY")
+				$sDate = sprintf("%04d-%02d-%02d", $iYear, $iMonth, $iDay);
+			elseif ($this->sStat == "DAY")
+				$sDate = sprintf("%03d", $iDay);
+			if (!isset($val[$sDate]))
+				$val[$sDate] = 0;
+		}
+		return;
+	}
                                                                                         
-  // Setting a PIE graphic
-  function pie ($opc, $axi, $pal) {
-    if ($opc['_G+Feel'] == "3D") {
-      $p = new PiePlot3d(array_values($axi));
-      $p->SetEdge("navy");
-      $p->SetStartAngle(45);
-      $p->SetAngle(55);
-    }
-    else
-      $p = new PiePlot(array_values($axi));
-    $p->SetSliceColors($pal);
-    $p->SetCenter(0.32, 0.3);
-    $p->SetSize(0.22);
-    $tt = array_sum($axi);
-    foreach ($axi as $k=>$i) {
-      $per = sprintf("%.1f", 100*($i/$tt));
-      $leg[] = "$k : $i ($per%%)";
-    }
-    $p->SetLegends($leg);
-    return $p;
-  }
+	// Setting a PIE graphic
+	function pie ($opc, $axi, $pal) {
+		if ($opc['_G+Feel'] == "3D") {
+			$p = new PiePlot3d(array_values($axi));
+			$p->SetEdge("navy");
+			$p->SetStartAngle(45);
+			$p->SetAngle(55);
+		}
+		else
+			$p = new PiePlot(array_values($axi));
+		$p->SetSliceColors($pal);
+		$p->SetCenter(0.32, 0.3);
+		$p->SetSize(0.22);
+		$tt = array_sum($axi);
+		foreach ($axi as $k=>$i) {
+			$per = sprintf("%.1f", 100*($i/$tt));
+			$leg[] = "$k : $i ($per%%)";
+		}
+		$p->SetLegends($leg);
+		return $p;
+	}
   
-  // Setting a Bar Graphic
-  function bar ($opc, $axi, $color) {
-    $b = new BarPlot(array_values($axi));
-    // normal histogram..
-    if (is_array($color)) {
-      $b->SetFillColor($color);
-      $b->SetWidth(0.8);
-    }
-    else {
-/*      if ($color == "orange")
-        $b->SetFillGradient($color, 'white', GRAD_VER);
-      else*/
-        $b->SetFillColor($color);
-      $b->SetWidth(1.0);
-    }
-    if ($opc['_G+Feel'] == "3D")
-      $b->SetShadow("steelblue",2,2);
-    return $b;
-  }
+	// Setting a Bar Graphic
+	function bar ($opc, $axi, $color) {
+		$b = new BarPlot(array_values($axi));
+		// normal histogram..
+		if (is_array($color)) {
+			$b->SetFillColor($color);
+			$b->SetWidth(0.8);
+		}
+		else {
+		/*      if ($color == "orange")
+			$b->SetFillGradient($color, 'white', GRAD_VER);
+		  else*/
+			$b->SetFillColor($color);
+			$b->SetWidth(1.0);
+		}
+		if ($opc['_G+Feel'] == "3D")
+			$b->SetShadow("steelblue",2,2);
+		return $b;
+	}
 
-  // Setting a Multibar graphic
-  function multibar ($opc, $axi, $pal) {
-    $i = 0;
-    $lab = array_keys($axi);
-    foreach ($axi as $k=>$ele) {
-      $bar = $this->bar($opc, $ele, $pal[$i]);
-      $bar->SetLegend($lab[$i]);
-      $b[] = $bar;
-      $i++;
-    }
-    if ($opc['_G+Mode'] == "OVERCOME")
-      $gb = new AccBarPlot($b);
-    else
-      $gb = new GroupBarPlot($b);
-    $gb->SetWidth(0.98);
-    return $gb;
-  }
+	// Setting a Multibar graphic
+	function multibar ($opc, $axi, $pal) {
+		$i = 0;
+		$lab = array_keys($axi);
+		foreach ($axi as $k=>$ele) {
+		  $bar = $this->bar($opc, $ele, $pal[$i]);
+		  $bar->SetLegend($lab[$i]);
+		  $b[] = $bar;
+		  $i++;
+		}
+		if ($opc['_G+Mode'] == "OVERCOME")
+		  $gb = new AccBarPlot($b);
+		else
+		  $gb = new GroupBarPlot($b);
+		$gb->SetWidth(0.98);
+		return $gb;
+	}
 
-  // Setting a Line graphic
-  function line ($opc, $axi, $col) {
-    $l = new LinePlot(array_values($axi));
-    if ($col == 'single')
-      $l->SetColor('blue');
-    else
-      $l->SetFillGradient($col,'white');
-      //$l->SetColor($col);
-      //$l->mark->SetFillColor("red");
-      //$l->mark->SetWidth(2);
-    return $l;
-  }
+	// Setting a Line graphic
+	function line ($opc, $axi, $col) {
+		$l = new LinePlot(array_values($axi));
+		if ($col == 'single')
+			$l->SetColor('blue');
+		else
+			$l->SetFillGradient($col,'white');
+			//$l->SetColor($col);
+			//$l->mark->SetFillColor("red");
+			//$l->mark->SetWidth(2);
+		return $l;
+	}
 
-  // Setting a Multiline graphic
-  function multiline ($opc, $axi, $pal) {
-    $i = 0;
-    $lab = array_keys($axi);
-    foreach ($axi as $k=>$ele) {
-      $line = $this->line($opc, $ele, $pal[$i]);
-      $line->SetLegend($lab[$i]);
-      $l[] = $line;
-      $i++;
-    }
-    if ($opc['_G+Mode'] == "OVERCOME")
-      $gl = new AccLinePlot($l);
-    else
-      $gl = $l;
-    return $gl;
-  }
-  
-  // Generate colors from database attrib-color or generate fix palette..
-  function genPalette ($cnt, $mode, $evl, $qy) {
-    $pal = array();
-    if ($mode == DI_EVENT || $mode == DI_CAUSE) {
-      // Find in database color attribute
-      foreach ($evl as $k) {
-        $col = $qy->getObjectColor($k, $mode);
-        if (trim($col) == "")
-          $col = dechex(rand(0, 255)) . dechex(rand(0, 255)) . dechex(rand(0, 255));
-        $pal[] = "#". $col;
-      }
-    }
-    else {
-      $col = array("#0000ff","#00ff00", "#ff0000", "#ff00ff", "#00ffff", "#ffff00",
-                   "#c7c7ff","#c782c7", "#ff7f7f", "#ffc7ff", "#c7ffff", "#ffffc7",
-                   "#00007f","#007f00", "#7f0000", "#7f007f", "#007f7f", "#827f00");
-      $j = 0;
-      for ($i=0; $i < $cnt; $i++) {
-        if ($j >= count($col))
-          $j = 0;
-        $pal[] = $col[$j];
-        $j++;
-      }
-    }
-/*		// Generate a Degradee palette 
-      $cl1 = array(20,   20, 200); // blue
-      $cl2 = array(200, 130,  20); // orange
-      $v1 = (($cl2[0] - $cl1[0]) / $cnt);
-      $v2 = (($cl2[1] - $cl1[1]) / $cnt);
-      $v3 = (($cl2[2] - $cl1[2]) / $cnt);
-      $med = array($v1, $v2, $v3);
-      for ($i=1; $i <= $cnt; $i++) {
-        $h1 = dechex($cl1[0] + (int)($med[0] * $i));
-        $h2 = dechex($cl1[1] + (int)($med[1] * $i));
-        $h3 = dechex($cl1[2] + (int)($med[2] * $i));
-        $pal[] = "#". $h1 . $h2 . $h3;
-      }
-      $r = array(0, 0, 200);
-      $g = array(0, 200, 0);
-      $b = array(200, 0, 0);*/
-    return $pal;
-  }
+	// Setting a Multiline graphic
+	function multiline ($opc, $axi, $pal) {
+		$i = 0;
+		$lab = array_keys($axi);
+		foreach ($axi as $k=>$ele) {
+			$line = $this->line($opc, $ele, $pal[$i]);
+			$line->SetLegend($lab[$i]);
+			$l[] = $line;
+			$i++;
+		}
+		if ($opc['_G+Mode'] == "OVERCOME")
+			$gl = new AccLinePlot($l);
+		else
+			$gl = $l;
+		return $gl;
+	}
+
+	// Generate colors from database attrib-color or generate fix palette..
+	function genPalette ($cnt, $mode, $evl, $qy) {
+		$pal = array();
+		if ($mode == DI_EVENT || $mode == DI_CAUSE) {
+			// Find in database color attribute
+			foreach ($evl as $k) {
+				$col = $qy->getObjectColor($k, $mode);
+				if (trim($col) == "")
+				  $col = dechex(rand(0, 255)) . dechex(rand(0, 255)) . dechex(rand(0, 255));
+				$pal[] = "#". $col;
+			}
+		}
+		else {
+			$col = array("#0000ff","#00ff00", "#ff0000", "#ff00ff", "#00ffff", "#ffff00",
+					   "#c7c7ff","#c782c7", "#ff7f7f", "#ffc7ff", "#c7ffff", "#ffffc7",
+					   "#00007f","#007f00", "#7f0000", "#7f007f", "#007f7f", "#827f00");
+			$j = 0;
+			for ($i=0; $i < $cnt; $i++) {
+				if ($j >= count($col))
+					$j = 0;
+				$pal[] = $col[$j];
+				$j++;
+			}
+		}
+		/*		// Generate a Degradee palette 
+		  $cl1 = array(20,   20, 200); // blue
+		  $cl2 = array(200, 130,  20); // orange
+		  $v1 = (($cl2[0] - $cl1[0]) / $cnt);
+		  $v2 = (($cl2[1] - $cl1[1]) / $cnt);
+		  $v3 = (($cl2[2] - $cl1[2]) / $cnt);
+		  $med = array($v1, $v2, $v3);
+		  for ($i=1; $i <= $cnt; $i++) {
+			$h1 = dechex($cl1[0] + (int)($med[0] * $i));
+			$h2 = dechex($cl1[1] + (int)($med[1] * $i));
+			$h3 = dechex($cl1[2] + (int)($med[2] * $i));
+			$pal[] = "#". $h1 . $h2 . $h3;
+		  }
+		  $r = array(0, 0, 200);
+		  $g = array(0, 200, 0);
+		  $b = array(200, 0, 0);*/
+		return $pal;
+	}
 
 } // end class
 
