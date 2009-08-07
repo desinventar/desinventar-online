@@ -27,6 +27,10 @@
 		$RegionLabel = 'Subregion Gran Chaco';
 		$PeriodBeginDate = '1997-01-01';
 		$PeriodEndDate   = '2008-12-31';
+		$GeoLimitMinX    = -70;
+		$GeoLimitMaxX    = -54;
+		$GeoLimitMinY    = -35;
+		$GeoLimitMaxY    = -11;
 	} else {
 		// CAN - SubRegion Andina
 		$RegionItems = array('BOL-1248983224-bolivia_inventario_historico_de_desastres'  => 'Bolivia',
@@ -39,26 +43,31 @@
 		$RegionLabel = 'CAN Subregion Andina';
 		$PeriodBeginDate = '1970-01-01';
 		$PeriodEndDate   = '2007-12-31';
+		$GeoLimitMinX    = -86;
+		$GeoLimitMaxX    = -53;
+		$GeoLimitMinY    = -25;
+		$GeoLimitMaxY    =  13;
 	}
 	// loader.php creates a UserSession when loaded...
 	$r = ERR_NO_ERROR;
 	$r = $us->login('diadmin','di8');
 	if ($r > 0) {
-		/*
 		if ($RegionId == '') {
 			$RegionId = DIRegion::buildRegionId('', $RegionLabel);
 		}
-		*/
 		$o = new DIRegion($us, $RegionId);
-		/*
 		$o->set('RegionLabel', $RegionLabel);
 		$o->set('RegionId'    , $RegionId);
 		$o->set('RegionStatus', CONST_REGIONACTIVE | CONST_REGIONPUBLIC);
 		$o->set('IsCRegion'   , TRUE);
 		$o->set('PeriodBeginDate', $PeriodBeginDate);
 		$o->set('PeriodEndDate'  , $PeriodEndDate);
+		$o->set('GeoLimitMinX', $GeoLimitMinX);
+		$o->set('GeoLimitMaxX', $GeoLimitMaxX);
+		$o->set('GeoLimitMinY', $GeoLimitMinY);
+		$o->set('GeoLimitMaxY', $GeoLimitMaxY);
 		$iReturn = $o->createRegionDB('País');
-		*/
+
 		$us->open($RegionId);
 		$o->clearSyncTable();
 		foreach($RegionItems as $RegionItemId => $RegionItemGeographyName) {
@@ -68,10 +77,6 @@
 			//$o->addRegionItemSync($RegionItemId);
 			$o->addRegionItem($RegionItemId,$RegionItemGeographyName);
 		}
-		/*
-		$o->updateMapArea();
-		$us->close();
-		*/
 		/*
 		$us->open($RegionId);
 		$o = new DIRegion($us, $RegionId);

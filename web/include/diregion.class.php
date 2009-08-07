@@ -244,6 +244,34 @@ class DIRegion extends DIObject {
 		$iReturn = $g->insert();
 		return $iReturn;
 	}
+
+	public function addPredefinedItemSync() {
+		// Sync record for Predefined Events
+		$s = new DISync($this->session);
+		$s->set('SyncTable', 'Event');
+		$s->set('RegionId' , $this->get('RegionId'));
+		$s->set('SyncURL'  , 'file:///base');
+		$s->set('SyncSpec' , '');
+		$s->insert();
+
+		// Sync record for Predefined Cause
+		$s = new DISync($this->session);
+		$s->set('SyncTable', 'Cause');
+		$s->set('RegionId' , $this->get('RegionId'));
+		$s->set('SyncURL'  , 'file:///base');
+		$s->set('SyncSpec' , '');
+		$s->insert();
+	}
+	
+	public function addRegionItemSync($prmRegionItemId, $prmTable) {
+		foreach($this->getRegionTables() as $TableName) {
+			$s = new DISync($this->session);
+			$s->set('SyncTable', $TableName);
+			$s->set('RegionId', $prmRegionItemId);
+			$s->set('SyncURL', "file:///" . $prmRegionItemId);
+			$s->insert();
+		} //foreach
+	}
 	
 	public function addRegionItem2($prmRegionItemId, $prmRegionItemGeographyName, $prmRegionItemGeographyId='') {
 		$RegionId = $this->get('RegionId');
@@ -305,14 +333,6 @@ class DIRegion extends DIObject {
 		$this->q->dreg->query("DELETE FROM Sync;");
 	}
 	
-	public function addRegionItemSync($prmRegionItemId) {
-		foreach($this->getRegionTables() as $TableName) {
-			$s = new DISync($this->session);
-			$s->set('SyncTable', $TableName);
-			$s->set('SyncURL', "file:///" . $prmRegionItemId);
-			$s->insert();
-		} //foreach
-	}
 
 
 	public function addRegionItemRecord($prmRegionItemId) {
@@ -497,13 +517,15 @@ class DIRegion extends DIObject {
 	}
 	
 	public function copyEvents($prmLangIsoCode) {
+		$e = new DIEvent($this->session);
+		$FieldList = $e->getFieldList();
 		$Queries = array();		
 		$Query = "ATTACH DATABASE '" . CONST_DBBASE . "' AS base";
 		array_push($Queries, $Query);
 		//Copy PreDefined Event List Into Database
 		$Query = "DELETE FROM Event WHERE EventPredefined=1 AND LangIsoCode='" . $prmLangIsoCode . "'";
 		array_push($Queries, $Query);
-		$Query = "INSERT INTO Event SELECT * FROM base.Event WHERE LangIsoCode='" . $prmLangIsoCode . "'";
+		$Query = "INSERT INTO Event(" . $FieldList . ") SELECT " . $FieldList . " FROM base.Event WHERE LangIsoCode='" . $prmLangIsoCode . "'";
 		array_push($Queries, $Query);
 		$Query = 'DETACH DATABASE base';
 		array_push($Queries, $Query);
@@ -513,13 +535,15 @@ class DIRegion extends DIObject {
 	}
 
 	public function copyCauses($prmLangIsoCode) {
+		$c = new DICause($this->session);
+		$FieldList = $c->getFieldList();
 		$Queries = array();		
 		$Query = "ATTACH DATABASE '" . CONST_DBBASE . "' AS base";
 		array_push($Queries, $Query);
 		//Copy PreDefined Cause List Into Database
 		$Query = "DELETE FROM Cause WHERE CausePredefined=1 AND LangIsoCode='" . $prmLangIsoCode . "'";
 		array_push($Queries, $Query);
-		$Query = "INSERT INTO Cause SELECT * FROM base.Cause WHERE LangIsoCode='" . $prmLangIsoCode . "'";
+		$Query = "INSERT INTO Cause (" . $FieldList . ") SELECT " . $FieldList . " FROM base.Cause WHERE LangIsoCode='" . $prmLangIsoCode . "'";
 		array_push($Queries, $Query);
 		$Query = 'DETACH DATABASE base';
 		array_push($Queries, $Query);

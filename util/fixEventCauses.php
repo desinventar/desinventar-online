@@ -13,6 +13,8 @@
 $_SERVER["DI8_WEB"] = '../web';
 require_once($_SERVER["DI8_WEB"] . '/include/loader.php');
 require_once(BASE . '/include/diregion.class.php');
+require_once(BASE . '/include/dievent.class.php');
+require_once(BASE . '/include/dicause.class.php');
 $q = new Query();
 $RegionList = array();
 foreach($q->core->query("SELECT * FROM Region") as $row) {

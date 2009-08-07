@@ -445,6 +445,17 @@ class DIObject {
 		}
 		return $sNumber;
 	} // function
+	
+	public function getFieldList() {
+		$i = 0;
+		$Value = '';
+		foreach(array_keys($this->oField) as $Field) {
+			if ($i>0) { $Value .= ','; }
+			$Value .= $Field;
+			$i++;
+		}
+		return $Value;
+	}
 } // class
 
 </script>
