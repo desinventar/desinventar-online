@@ -44,6 +44,18 @@ class Query extends PDO
 			die();
 		}
 	}
+
+	public function getDBFile($prmRegionId) {
+		$DBFile = VAR_DIR;
+		if ($prmRegionId != '') {
+			if ($prmRegionId == 'core') {
+				$DBFile .= "/core.db";
+			} else {
+				$DBFile .= "/" . $prmRegionId ."/desinventar.db";
+			}
+		}
+		return $DBFile;
+	}
 	
 	public function setDBConnection($prmRegionId) {
 		$iReturn = ERR_NO_ERROR;

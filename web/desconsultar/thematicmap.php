@@ -94,6 +94,10 @@ if (isset($post['_M+cmd'])) {
 		$maxx = $rinf['GeoLimitMaxX|'];
 		$miny = $rinf['GeoLimitMinY|'];
 		$maxy = $rinf['GeoLimitMaxY|'];
+		$t->assign('minx', $minx);
+		$t->assign('maxx', $maxx);
+		$t->assign('miny', $miny);
+		$t->assign('maxy', $maxy);
 		// set center
 		if (!empty($minx) && !empty($miny) && !empty($maxx) && !empty($maxy)) {
 			$lon = (int) (($minx + $maxx) / 2);
@@ -128,6 +132,7 @@ if (isset($post['_M+cmd'])) {
 		$zoom = round(log(180/$mx)) + 3;
 		$t->assign ("zoom", $zoom);
 	}
+	
 	$t->assign ("glev", $q->loadGeoLevels('', -1, true));
 	//echo "<pre>"; print_r($rgl);
 	$t->assign ("rgl", $rgl);

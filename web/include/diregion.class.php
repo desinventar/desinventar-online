@@ -412,7 +412,6 @@ class DIRegion extends DIObject {
 		$RegionDB = VAR_DIR . '/' . $prmRegionItemId . '/desinventar.db';
 		$this->q->setDBConnection($this->get('RegionId'));
 		$q = $this->q->dreg;
-		fb($RegionDB);
 		$q->query("ATTACH DATABASE '" . $RegionDB . "' AS RegItem");
 		// Copy Disaster Table, adjust GeographyId Field
 		$this->copyData($q, 'Disaster','DisasterGeographyId', $prmRegionItemId, $prmRegionItemGeographyId, false);
@@ -490,7 +489,6 @@ class DIRegion extends DIObject {
 		foreach ($Queries as $Query) {
 			//$this->q->dreg->query($Query);
 			try {
-				fb($Query);
 				$prmConn->query($Query);
 			} catch (Exception $e) {
 				showErrorMsg($e->getMessage());
