@@ -41,7 +41,7 @@
 				numZoomLevels: 25
 			};
 			map = new OpenLayers.Map('map', options);
-			map.addControl(new OpenLayers.Control.PanZoom());
+			map.addControl(new OpenLayers.Control.PanZoomBar({zoomStopHeight:3,zoomWorldIcon:true}));
 			map.addControl(new OpenLayers.Control.LayerSwitcher({'ascending':false}));
 			//map.addControl(new OpenLayers.Control.KeyboardDefaults());
 			map.addControl(new OpenLayers.Control.MousePosition());
