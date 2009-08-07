@@ -15,6 +15,10 @@
 		var lon = {-if $lon != ''-}{-$lon-}{-else-}0{-/if-};
 		var lat = {-if $lon != ''-}{-$lat-}{-else-}0{-/if-};
 		var zoom = parseInt('{-$zoom-}');
+		var minx = parseInt('{-$minx-}');
+		var maxx = parseInt('{-$maxx-}');
+		var miny = parseInt('{-$miny-}');
+		var maxy = parseInt('{-$maxy-}');
 		var map;
 		var prj1;
 		var prj2;
@@ -152,10 +156,23 @@
 			
 			*/
 
+			// 2009-08-07 (jhcaiced) Calculate Zoom of Area an Show Map Centered
+			var pt1 = new OpenLayers.LonLat(minx, miny);
+			var pt2 = new OpenLayers.LonLat(maxx, maxy);
+			var bounds = new OpenLayers.Bounds();
+			pt1.transform(prj1, map.getProjectionObject());
+			pt2.transform(prj1, map.getProjectionObject());
+			bounds.extend(pt1);
+			bounds.extend(pt2);
+			zoom = base.getZoomForExtent(bounds);
+			map.setCenter(bounds.getCenterLonLat(), zoom);
+
+			/*
 			// Do a translation of map center coordinates to Spherical Mercator
 			var point = new OpenLayers.LonLat(lon, lat);
 			point.transform(prj1, map.getProjectionObject());
 			map.setCenter(point, zoom);
+			*/
 			if (lon == 0 && lat == 0) {
 				map.zoomToMaxExtent();
 			}
