@@ -70,6 +70,11 @@ function form2eedata($form) {
 	return $eedat;
 }
 
+// 2009-08-07 (jhcaiced) Validate If User is logged in first...
+if ($us->UserId == '') {
+	print "<h3>Error: You must log in to use DesInventar module</h3><br />";
+	exit();
+}
 if (isset($_POST['_REG']) && !empty($_POST['_REG'])) {
 	$sRegionId = $_POST['_REG'];
 	$us->open($sRegionId);
@@ -79,6 +84,18 @@ if (isset($_POST['_REG']) && !empty($_POST['_REG'])) {
 } else {
 	// Use Region Information from UserSession...
 	$sRegionId = $us->sRegionId;
+}
+
+// 2009-08-07 (jhcaiced) Validate if Database Exists...
+if (! file_exists($us->q->getDBFile($sRegionId))) {
+	print "<h3>Requested Region doesn't exist</h3><br />";
+	exit();
+}
+
+// Validate if user has permission to access database
+if ($us->getUserRole($sRegionId == '')) {
+	print "<h3>You are not allowed to access this database</h3><br>";
+	exit();
 }
 
 // UPDATER: If user is still connected, awake session so it will not expire

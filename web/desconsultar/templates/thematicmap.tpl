@@ -156,7 +156,6 @@
 			var point = new OpenLayers.LonLat(lon, lat);
 			point.transform(prj1, map.getProjectionObject());
 			map.setCenter(point, zoom);
-
 			if (lon == 0 && lat == 0) {
 				map.zoomToMaxExtent();
 			}
