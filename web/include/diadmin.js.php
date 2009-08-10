@@ -267,7 +267,7 @@ solo se muestre a los roles correspondientes.. */
 			  if (!dcwin.closed && dcwin.location) {
 				  endWin("data");
 				  endWin("thematicmap");
-				  endWin("stadistic");
+				  endWin("statistic");
 				  endWin("graphic");
 				  dcwin.close();
         }

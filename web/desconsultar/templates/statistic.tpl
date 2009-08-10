@@ -1,4 +1,4 @@
-{-config_load file=`$lg`.conf section="dc_stadistic"-}
+{-config_load file=`$lg`.conf section="dc_statistic"-}
 {-if $ctl_showres-}
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -33,11 +33,11 @@
 	  <td>
 	  	{-#tpage#-}
 	  	<input type="text" id="pp" size="2" value="1" class="line"
-				onKeyDown="if(event.keyCode==13){ mod='std'; updateList('lst_dis', 'stadistic.php', 'r={-$reg-}&page='+ this.value +'&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}&geo={-$geo-}');}"
+				onKeyDown="if(event.keyCode==13){ mod='std'; updateList('lst_dis', 'statistic.php', 'r={-$reg-}&page='+ this.value +'&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}&geo={-$geo-}');}"
 				onkeypress="return blockChars(event, this.value, 'integer:');">
 			&nbsp; {-#tnumof#-} &nbsp;
 			<a href="javascript:void(null)" 
-				onclick="mod='std'; updateList('lst_dis', 'stadistic.php', 'r={-$reg-}&page={-$last-}&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}&geo={-$geo-}');">{-$last-}</a>
+				onclick="mod='std'; updateList('lst_dis', 'statistic.php', 'r={-$reg-}&page={-$last-}&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}&geo={-$geo-}');">{-$last-}</a>
 		</td>
 		<td align="center">
 			<span id="stdstatusmsg" class="dlgmsg"></span>
@@ -54,7 +54,7 @@
 	{-foreach name=sel key=key item=item from=$sel-}
  {-strip-}
      <th class="header">
-     <a href="javascript:void(null)" onclick="mod='std'; updateList('lst_dis', 'stadistic.php', 
+     <a href="javascript:void(null)" onclick="mod='std'; updateList('lst_dis', 'statistic.php', 
    				'r={-$reg-}&page='+ $('pp').value +'&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}&ord={-$item-}&geo={-$geo-}');">
 {-if $item =="DisasterId_"-} {-#trepnum#-} {-elseif $item != "DisasterId"-} {-$dk.$item-} {-/if-}
      </a>

@@ -22,9 +22,9 @@ fixPost($post);
 
 // load levels to display in totalizations
 foreach ($q->loadGeoLevels('', -1, false) as $k=>$i)
-  $st["StadistDisasterGeographyId_". $k] = array($i[0], $i[1]);
+  $st["StatisticDisasterGeographyId_". $k] = array($i[0], $i[1]);
 $dic = array_merge(array(), $st);
-$dic = array_merge($dic, $q->queryLabelsFromGroup('Stadist', $lg));
+$dic = array_merge($dic, $q->queryLabelsFromGroup('Statistic', $lg));
 $dic = array_merge($dic, $q->queryLabelsFromGroup('Effect', $lg));
 $dic = array_merge($dic, $q->queryLabelsFromGroup('Sector', $lg));
 $dic = array_merge($dic, $q->getEEFieldList("True"));
@@ -128,7 +128,7 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
   if ($q->chkSQL($sql)) {
     if ($export) {
       // Save results in CSVfile
-      $stdpth = TEMP ."/di8stadistic_". session_id();
+      $stdpth = TEMP ."/di8statistic_". session_id();
       $fp = fopen("$stdpth.xls", 'w');
       $pin = 0;
       $pgt = $last;
@@ -148,10 +148,10 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
         foreach ($sel as $kk=>$ii) {
           $i2 = substr($ii, 2);
           $i3 = substr($ii, 0, -1);
-          if (isset($dic['Stadist'. $ii][0]))
-            $dk[$ii] = $dic['Stadist'. $ii][0];
-          elseif (isset($dic['Stadist'. $i2][0]))
-            $dk[$ii] = $dic['Stadist'. $i2][0];
+          if (isset($dic['Statistic'. $ii][0]))
+            $dk[$ii] = $dic['Statistic'. $ii][0];
+          elseif (isset($dic['Statistic'. $i2][0]))
+            $dk[$ii] = $dic['Statistic'. $i2][0];
           elseif (isset($dic[$i3][0]))
             $dk[$ii] = $dic[$i3][0];
           else
@@ -180,6 +180,6 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
     }
   }
 }
-$t->display ("stadistic.tpl");
+$t->display ("statistic.tpl");
 
 </script>

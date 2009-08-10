@@ -180,7 +180,7 @@
         }
         datw.show(this);
       });
-      // Stadistic
+      // Statistics
       var stdw;
       var stdb = Ext.get('std-btn');
       stdb.on('click', function() {
@@ -197,7 +197,7 @@
               },{
                 text:'{-#tsend#-}',
                 handler: function() {
-                    if (sendStadistic("result")) {
+                    if (sendStatistic("result")) {
                       $('DCRes').value = "S";
                       stdw.hide();
                     }
@@ -444,7 +444,7 @@
           sendGraphic(cmd);
         break;
         case 'S':
-          sendStadistic(cmd);
+          sendStatistic(cmd);
         break;
       }
     }
@@ -513,7 +513,7 @@
       $('DC').submit();
       //hideMap();
     }
-    function sendStadistic(cmd) {
+    function sendStatistic(cmd) {
       if ($('_S+Firstlev').value != "" && $('_S+Field[]').length > 0) {
         $('_S+cmd').value = cmd;
         selectall('_S+Field[]');
@@ -527,7 +527,7 @@
         w.collapse();//hide()
         var s = Ext.getCmp('southm');
         s.collapse();
-        $('DC').action='stadistic.php';
+        $('DC').action='statistic.php';
         $('DC').submit();
         //hideMap();
         return true;
@@ -1204,12 +1204,12 @@
         </div>
 <!--    END GRAPHIC SECTION  -->
 <!--
-        SECTION : STADISTIC CONFIGURATION
+        SECTION : STATISTIC CONFIGURATION
         ==============================
 -->
-        <input type="button" id="std-btn" value="{-#bstadistic#-}" ext:qtip="{-#tstadisticmsg#-}" class="btn">
+        <input type="button" id="std-btn" value="{-#bstatistic#-}" ext:qtip="{-#tstatisticmsg#-}" class="btn">
         <div id="std-win" class="x-hidden">
-          <div class="x-window-header">{-#bstadistic#-}</div>
+          <div class="x-window-header">{-#bstatistic#-}</div>
           <div id="std-cfg">
             <form id="CS" method="POST">
             	<table border="0" width="100%">
@@ -1238,25 +1238,25 @@
               <br>
               <table>
                 <tr valign="top">
-                  <td><b>{-$std.StadistFirstlev[0]-}</b><br>
+                  <td><b>{-$std.StatisticFirstlev[0]-}</b><br>
                    <select id="_S+Firstlev" name="_S+Firstlev" size="8" style="width:180px;"
                        onChange="setTotalize('_S+Firstlev', '_S+Secondlev'); setTotalize('_S+Secondlev', '_S+Thirdlev');">
   {-foreach name=glev key=k item=i from=$glev-}
                     <option value="{-$k-}|D.DisasterGeographyId">
-                    {-assign var="ln" value=StadistDisasterGeographyId_$k-}{-$std.$ln[0]-}</option>
+                    {-assign var="ln" value=StatisticDisasterGeographyId_$k-}{-$std.$ln[0]-}</option>
   {-/foreach-}
-                    <option value="|D.EventId">{-$std.StadistEventName[0]-}</option>
-                    <option value="YEAR|D.DisasterBeginTime">{-$std.StadistDisasterBeginTime_YEAR[0]-}</option>
-                    <option value="MONTH|D.DisasterBeginTime">{-$std.StadistDisasterBeginTime_MONTH[0]-}</option>
-                    <option value="|D.CauseId">{-$std.StadistCauseName[0]-}</option>
+                    <option value="|D.EventId">{-$std.StatisticEventName[0]-}</option>
+                    <option value="YEAR|D.DisasterBeginTime">{-$std.StatisticDisasterBeginTime_YEAR[0]-}</option>
+                    <option value="MONTH|D.DisasterBeginTime">{-$std.StatisticDisasterBeginTime_MONTH[0]-}</option>
+                    <option value="|D.CauseId">{-$std.StatisticCauseName[0]-}</option>
                    </select>
                   </td>
-                  <td><b>{-$std.StadistSeclev[0]-}</b><br>
+                  <td><b>{-$std.StatisticSecondlev[0]-}</b><br>
                    <select id="_S+Secondlev" name="_S+Secondlev" size="8" 
                        onChange="setTotalize('_S+Secondlev', '_S+Thirdlev');" style="width:180px;">
                    </select>
                   </td>
-                  <td><b>{-$std.StadistThirlev[0]-}</b><br>
+                  <td><b>{-$std.StatisticThirdlev[0]-}</b><br>
                    <select id="_S+Thirdlev" name="_S+Thirdlev" size="8" style="width:180px;">
                    </select>
                   </td>
@@ -1309,7 +1309,7 @@
             </form>
           </div>
         </div>
-<!--    END STADISTIC SECTION  -->
+<!--    END STATISTIC SECTION  -->
        </td>
        <td>
 		 <div id="qry-win" class="x-hidden">

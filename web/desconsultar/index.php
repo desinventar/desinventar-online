@@ -203,25 +203,29 @@ else {
   $range[] = array(1000000, "100001 - 1000000", "660000");
   $range[] = array('',       "1000001 ->",        "000000");
   $t->assign ("range", $range);
-  // STADISTIC
-  foreach ($ef1 as $k=>$i) {
-    $sst[$k] = array($k."Q|>|-1", $i[0]);
-    $nst[$k] = $sst[$k];
-  }
-  foreach ($ef2 as $k=>$i)
-    $nst[$k] = array("$k|>|-1", $i[0]);
-  foreach ($ef3 as $k=>$i)
-    $nst[$k] = array("$k|>|-1", $i[0]);
-  $sst1 = array_diff_key($nst, array_flip(array_keys($sst)));
-  $t->assign ("sst1", $sst1);
-  $t->assign ("sst", $sst);
-  $st = array();
-  foreach ($glev as $k=>$i)
-    $st["StadistDisasterGeographyId_". $k] = array($i[0], $i[1]);
-  $std = array();
-  $std = array_merge($std, $q->queryLabelsFromGroup('stadist', $lg));
-  $std = array_merge($std, $st);
-  $t->assign ("std", $std);
+
+	// Load Statistic Values
+	foreach ($ef1 as $k=>$i) {
+		$sst[$k] = array($k."Q|>|-1", $i[0]);
+		$nst[$k] = $sst[$k];
+	}
+	foreach ($ef2 as $k=>$i)
+		$nst[$k] = array("$k|>|-1", $i[0]);
+	foreach ($ef3 as $k=>$i)
+		$nst[$k] = array("$k|>|-1", $i[0]);
+	$sst1 = array_diff_key($nst, array_flip(array_keys($sst)));
+	$t->assign ("sst1", $sst1);
+	$t->assign ("sst", $sst);
+	$st = array();
+	
+	foreach ($glev as $k=>$i) {
+		$st["StatisticDisasterGeographyId_". $k] = array($i[0], $i[1]);
+	}
+	
+	$std = array();
+	$std = array_merge($std, $q->queryLabelsFromGroup('Statistic', $lg));
+	$std = array_merge($std, $st);
+	$t->assign ("std", $std);
 }
 $t->display ("index.tpl");
 
