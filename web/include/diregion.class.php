@@ -617,6 +617,7 @@ class DIRegion extends DIObject {
 		$prmRegionLabel = strtolower($prmRegionLabel);
 		$prmRegionLabel = str_replace(' - ','_',$prmRegionLabel);
 		$prmRegionLabel = str_replace(' ','_',$prmRegionLabel);
+		$prmRegionLabel = str_replace(' ','',$prmRegionLabel);
 		$prmRegionLabel = str_replace(array('ñ','á','é','í','ó','ú','Á','É','Í','Ó','Ú'),
 		                              array('n','a','e','i','o','u','a','e','i','o','u'),
 		                              $prmRegionLabel);
