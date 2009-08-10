@@ -70,27 +70,34 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
     $cou = $q->getnumrows($sql);
     $sdl = $q->totalize($sql);
     $dlt = $q->getresult($sdl);
+    
+    // 2009-08-10 (jhcaiced) In Consolidates by Event/Cause, fix
+    // the value
+    $dlt['EventName'] = '';
+    $dlt['CauseName'] = '';
+    
     $fld = "DisasterId_";
 	//echo $sqc ."<br>". $sql;
     // organize groups
     $gp = array();
-    foreach ($opc['Group'] as $i) {
-      $v = explode("|", $i);
-      $val = substr($v[1],2);
-      if ($val == "DisasterGeographyId" || $val == "DisasterBeginTime")
-        $val = $val ."_". $v[0];
-			elseif ($val == "EventId")
-				$val = "V.EventName";
-			elseif ($val == "CauseId")
-				$val = "C.CauseName";
-      $gp[] = $val;
-      $fld .= ",$val";
-    }
-    foreach ($field as $i) {
-      $v = explode("|", $i);
-      if ($v[0] != "DisasterId")
-        $fld .= ",". $v[0];
-    }
+	foreach ($opc['Group'] as $i) {
+		$v = explode("|", $i);
+		$val = substr($v[1],2);
+		if ($val == "DisasterGeographyId" || $val == "DisasterBeginTime")
+			$val = $val ."_". $v[0];
+		elseif ($val == "EventId")
+			$val = "V.EventName";
+		elseif ($val == "CauseId")
+			$val = "C.CauseName";
+		$gp[] = $val;
+		$fld .= ",$val";
+	} //foreach
+	
+	foreach ($field as $i) {
+		$v = explode("|", $i);
+		if ($v[0] != "DisasterId")
+			$fld .= ",". $v[0];
+	} //foreach
     // Show results..
     if ($post['_S+cmd'] == "result") {
       $export = false;
