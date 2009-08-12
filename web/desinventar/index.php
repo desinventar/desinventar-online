@@ -188,10 +188,11 @@ if (isset($_GET['u'])) {
 		$t->assign ("ctl_result", true);
 		// End _CMD Block
 	} else {
-		if (isset($_GET['did']) && !empty($_GET['did'])) {
-			$dcard = $us->q->hash2json($us->q->getDisasterById($_GET['did']));
+		if (isset($_GET['DisasterId']) && !empty($_GET['DisasterId'])) {
+			$dcard = $us->q->hash2json($us->q->getDisasterById($_GET['DisasterId']));
 			if (isset($dcard[0]))
-				$t->assign ("dcard", $dcard[0]);
+				echo $dcard[0];
+			exit();
 		}
 		if ($us->UserId == '' || $us->getUserRole($sRegionId == '')) {
 			

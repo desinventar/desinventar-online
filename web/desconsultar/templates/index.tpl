@@ -12,7 +12,7 @@
   <script type="text/javascript" src="../include/prototype.js"></script>
   <script type="text/javascript" src="../include/diadmin.js.php"></script>
   <script type="text/javascript" src="../include/checktree.js"></script>
-  <script type="text/javascript" src="../include/wd.js"></script>
+<!--  <script type="text/javascript" src="../include/wd.js"></script>-->
   <script type="text/javascript" src="../include/accordion.js"></script>
   <!-- ExtJS 2.0.1 -->
   <link rel="stylesheet" type="text/css" href="/extJS/resources/css/ext-all.css"/>
@@ -22,6 +22,7 @@
   <script type="text/javascript">
 	var w = null;
 	var e = null;
+	var s = null;
     // DI8 - Layout, buttons and internal windows - UI DesConsultar module
     Ext.onReady(function()
     {
@@ -56,7 +57,6 @@
       tb.add('-', {text:  '{-#mhelp#-}',    menu: mhelp });
       //
       function onMenuItem(item){
-        w = Ext.getCmp('westm');
         switch (item.text) {
           case "{-#mprint#-}":
             window.print();
@@ -149,16 +149,17 @@
             region: 'east',
 			id: 'eastm',
 			split: true,
-			width: 960,
-			collapsible: true,
-			margins: '0 0 0 5',
+			width: 760,
 			collapseMode: 'mini',
 			autoScroll: true,
-			split: true,
+			margins: '0 0 0 5',
+			collapsible: true,
             contentEl: 'east'
 		  }]
       });
+	  w = Ext.getCmp('westm');
 	  e = Ext.getCmp('eastm');
+	  s = Ext.getCmp('southm');
 	  e.collapse();
       // ==> Results Configuration Windows
       // Data
@@ -474,9 +475,8 @@
         mystr += "D.DisasterId";
         $('_D+FieldH').value = mystr;
         combineForms('DC', 'CD');
-        w = Ext.getCmp('westm');
         w.collapse(); //hide()
-        var s = Ext.getCmp('southm');
+		e.collapse();
         s.collapse();
         $('DC').action='data.php';
         $('DC').submit();
@@ -505,9 +505,8 @@
 			$('_M+layers').value = activelayers;
 		  }
 		  combineForms('DC', 'CM');
-		  w = Ext.getCmp('westm');
 		  w.collapse(); // hide()
-		  var s = Ext.getCmp('southm');
+		  e.collapse();
 		  s.collapse();
 		  $('DC').action='thematicmap.php';
 		  $('DC').submit();
@@ -520,9 +519,8 @@
     function sendGraphic(cmd) {
       $('_G+cmd').value = cmd;
       combineForms('DC', 'CG');
-      w = Ext.getCmp('westm');
       w.collapse(); //hide()
-      var s = Ext.getCmp('southm');
+	  e.collapse();
       s.collapse();
       $('DC').action='graphic.php';
       $('DC').submit();
@@ -538,9 +536,8 @@
           mystr += "," + ob[i].value;
         $('_S+FieldH').value = mystr;
         combineForms('DC', 'CS');
-        w = Ext.getCmp('westm');
         w.collapse();//hide()
-        var s = Ext.getCmp('southm');
+		e.collapse();
         s.collapse();
         $('DC').action='statistic.php';
         $('DC').submit();
@@ -1347,19 +1344,17 @@
    </table>
 <!--   SHOW RESULTS  -->
   <div id="querydetails" style="height:40px;" class="dwin"></div>
-<!--  <div id="smap" style="position:absolute; left:0px; top:20px; visibility:hidden;">
-   [<a href="javascript:void(0);" onClick="hideMap();">X</a>]<br>
-  </div>-->
-  <iframe name="dcr" id="dcr" frameborder="0" scrolling="auto" height="610px" width="100%" src="../region.php?r={-$reg-}&cmd=info"></iframe>
+<!--  <div id="smap" style="position:absolute; left:0px; top:20px; visibility:hidden;">[<a href="javascript:void(0);" onClick="hideMap();">X</a>]<br></div>-->
+  <iframe name="dcr" id="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="../region.php?r={-$reg-}&cmd=info"></iframe>
+ </div>
+ <div id="east">
+  <iframe name="dcf" id="dcf" frameborder="0" scrolling="auto" height="610px" width="100%" src="../desinventar/?r={-$reg-}"></iframe>
  </div>
 
 <!--
         SECTION : QUERY DESIGN 
         ======================
 -->
- <div id="east">
-  <iframe name="dcf" id="dcf" frameborder="0" scrolling="auto" height="610px" width="100%"></iframe>
- </div>
  <div id="west">
   <!-- BEG DI8 QUERY FORM -->
   <form id="DC" method="POST" target="dcr">

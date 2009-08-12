@@ -8,7 +8,6 @@ require_once('../include/loader.php');
 $post = $_POST;
 $get  = $_GET;
 
-//echo "<pre>"; print_r($post);
 if (isset($post['_REG']) && !empty($post['_REG']))
 	$reg = $post['_REG'];
 elseif (isset($get['r']) && !empty($get['r']))

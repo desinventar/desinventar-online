@@ -50,6 +50,45 @@
 				$(lev).innerHTML = '';
 			}
 		}
+		/*
+		 * Submits the form below through AJAX and then calls the ajax_response function)
+		  * @param   object  disasid   Disaster ID
+		  *
+		function findByDIId(data) {
+				var qres = $('qresults');
+				qres.cursor = "wait";
+				var submitTo = '../desinventar/?data=' + data + '&action=findDIId';
+				http('POST', submitTo, setDICard, document.DICard);
+//		$('_UpdBut').className = "btn";
+{-if $ro == ""-}
+//		$('_UpdBut').disabled = false;
+{-/if-}
+//		uploadMsg("{-#tmsgeditcard#-}");
+				qres.cursor = "default";
+		}
+		 *	Called when ajax data has been retrieved
+			* @param   object  data   Javascript (JSON) data object received
+			*                         through ajax call
+			*
+		function setDICard(data) {
+			var elems = parent.document.DICard.elements;
+			for  (var i=0; i < elems.length; i++) {
+				myname = elems[i].name + "";
+				if (myname.substring(0,1) != "_") {
+					if (data != null) {
+						eval("value = data." + elems[i].name + ";");
+						if (myname.substring(0,19) == "DisasterGeographyId") {
+							var nextlv = parseInt(myname.substring(19,20)) + 1;
+//						getGeoItems(value, nextlv, false);
+//						alert("Val: " + value + " lev: " + nextlv + " elem: " + elems[i].value);
+						}
+						setElementValue(elems[i], value);
+					}
+					else
+						setElementValue(elems[i], '');
+				}
+			}
+		}*/
 		function setadmingeo(k, l) {
 			var v = k.split("|");
 			mod = 'geo';
@@ -77,7 +116,7 @@
 			if (disab)
 				col = "#eee";
 			else
-				col = "#fff"
+				col = "#fff";
 			for (i=0; i < objElems.length; i++) {
 				myname = objElems[i].name + "";
 				if (myname.substring(0,1) != "_") {
@@ -107,7 +146,6 @@
 			DisableEnableForm($('DICard'), true);
 			uploadMsg("{-#tmsgnewcard#-}");
 			var pe = new PeriodicalExecuter(setActive, 60);
-			setCard('{-$reg-}', {-$dcard-}, '');
 		}
 /*		window.onunload = function() {
 			updateList('distatusmsg', '', 'r={-$reg-}&cmd=chkrelease&DisasterId='+ $('DisasterId').value);
@@ -162,8 +200,8 @@
 							onComplete: function(request) {
 								uploadMsg('');
 								var res = request.responseText;
-// disabled check serial exists
-//									if (res.substr(0,4) == "FREE") {
+								// disabled check serial exists
+								//if (res.substr(0,4) == "FREE") {
 									$('DICard').submit();
 									DisableEnableForm($('DICard'), true);
 									$('cardnew').enable();
@@ -172,9 +210,9 @@
 									$('cardcln').disable();
 									$('cardcan').disable();
 									$('cardfnd').enable();
-//									}
-//									else
-//										alert("{-#tdisererr#-}");
+//								}
+//								else
+//									alert("{-#tdisererr#-}");
 							}
 						} );
 					}
@@ -226,11 +264,11 @@
 					<input type="button" id="cardcan" value="{-#bcancel#-}" onClick="onSubmitBtn(this.value);" {-$ro-}>
 					<input type="button" id="cardfnd" value="{-#bexpsearch#-}" onClick="onSubmitBtn(this.value);" {-$ro-}>
 					&nbsp;&nbsp;|&nbsp;&nbsp;
-					<input type="button" value="<<" onClick="setCard('{-$reg-}', {-$fst-}, '');" {-$ro-}>
-					<input type="button" value="<" onClick="setCard('{-$reg-}', null, '');" {-$ro-}>
+					<input type="button" value="<<" onClick="setDICard('{-$reg-}', {-$fst-}, '');" {-$ro-}>
+					<input type="button" value="<" disabled {-$ro-}>
 					<span class="dlgmsg" id="dostat"></span>
 					<input type="button" value=">" disabled {-$ro-}>
-					<input type="button" value=">>" onClick="setCard('{-$reg-}', {-$lst-}, '');" {-$ro-}>
+					<input type="button" value=">>" onClick="setDICard('{-$reg-}', {-$lst-}, '');" {-$ro-}>
 					<br><span class="dlgmsg" id="distatusmsg"></span>
 				</td>
 				<td align="right">
@@ -321,8 +359,8 @@
  {-if $lev <= $levmax-}
 										{-$lev-}- {-$levname[0]-}:
 										<select onChange="setgeo(this.options[this.selectedIndex].value, {-$lev-},'{-$levname[1]-}','{-$opc-}');" 
-												autoComplete="true" style="width: 180px;" tabindex="7" id="geolev{-$lev-}"
-												onFocus="showtip('{-$dis.DisasterGeographyId[2]-}', '#d4baf6')">
+												autoComplete="true" style="width:180px; background-Color:#eee;" tabindex="7" id="geolev{-$lev-}"
+												onFocus="showtip('{-$dis.DisasterGeographyId[2]-}', '#d4baf6')" disabled>
 											<option value="" style="text-align:center;">--</option>
  {-foreach name=geol key=key item=item from=$geol-}
   {-if $item[2]-}
@@ -558,7 +596,7 @@
           </td>
         </tr>
       </table>
-		</form>
+	 </form>
 	</div>
 <!-- END DI8 FORM CARD -->
 
