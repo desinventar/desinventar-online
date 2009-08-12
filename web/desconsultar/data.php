@@ -8,6 +8,7 @@ require_once('../include/loader.php');
 $post = $_POST;
 $get  = $_GET;
 
+//echo "<pre>"; print_r($post);
 if (isset($post['_REG']) && !empty($post['_REG']))
 	$reg = $post['_REG'];
 elseif (isset($get['r']) && !empty($get['r']))
@@ -160,6 +161,8 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 		} //else
 	} //if
 } //if
+$time_end = microtime_float();
+$t-> assign ("time", $time_end - $time_start);
 $t->display ("data.tpl");
 
 </script>

@@ -12,6 +12,8 @@
 	<script type="text/javascript" src="../include/prototype.js"></script>
 	<script type="text/javascript" src="../include/combo-box.js"></script>
 	<script type="text/javascript" src="../include/diadmin.js.php"></script>
+	<!--	<link rel="stylesheet" href="../css/tabeffect.css" type="text/css">
+	<script type="text/javascript" src="../include/tabber.js"></script> -->
 	<script type="text/javascript" language="javascript">
 		var mod = "di";
 		function hidediv(myDiv) {
@@ -105,359 +107,101 @@
 			DisableEnableForm($('DICard'), true);
 			uploadMsg("{-#tmsgnewcard#-}");
 			var pe = new PeriodicalExecuter(setActive, 60);
+			setCard('{-$reg-}', {-$dcard-}, '');
 		}
 /*		window.onunload = function() {
 			updateList('distatusmsg', '', 'r={-$reg-}&cmd=chkrelease&DisasterId='+ $('DisasterId').value);
 		}
 		document.write('<style type="text/css">.tabber{display:none;}<\/style>');*/
-	</script>
-<!--	<link rel="stylesheet" href="../css/tabeffect.css" type="text/css">
-	<script type="text/javascript" src="../include/tabber.js"></script> -->
-  <!-- ExtJS 2.0.1 -->
-  <link rel="stylesheet" type="text/css" href="/extJS/resources/css/ext-all.css"/>
-  <link rel="stylesheet" type="text/css" href="/extJS/resources/css/xtheme-gray.css"/>
-  <script type="text/javascript" src="/extJS/adapter/ext/ext-base.js"></script>
-  <script type="text/javascript" src="/extJS/ext-all.js"></script>
-  <script type="text/javascript">
-		Ext.onReady(function()
-		{
-			Ext.QuickTips.init();
-			var mfile = new Ext.menu.Menu({
-				id: "fileMenu",
-				items: [
-					{	text: "{-#mprint#-}", handler: onMenuItem },
-					{	text: "{-#mquit#-}", handler: onMenuItem } 
-				]
-			});
-			var mconfig = new Ext.menu.Menu({
-				id: "configMenu",
-				items: [
-					{	text: "{-#mreginfo#-}", handler: onConfigItem },
-					{	text: "{-#mgeolevel#-}", handler: onConfigItem },
-					{	text: "{-#mgeography#-}", handler: onConfigItem },
-					{	text: "{-#mevents#-}", handler: onConfigItem },
-					{	text: "{-#mcauses#-}", handler: onConfigItem },
-					{	text: "{-#mregrol#-}", handler: onConfigItem },
-					{	text: "{-#mreglog#-}", handler: onConfigItem },
-					{	text: "{-#meeffects#-}", handler: onConfigItem },
-					{	text: "{-#mimport#-}", handler: onConfigItem }
-				]
-			});
-			var tb = new Ext.Toolbar();
-			tb.render("toolbar");
-			tb.add({ text: "{-#mfile#-}", menu: mfile });
-{-if $showconfig-}
-			tb.add("-", { text:	"{-#mconfig#-}", menu: mconfig });
-{-/if-}
-			// New button
-			tb.add(
-				new Ext.Toolbar.Button({
-					id: 			"cardnew",
-					text: 		"{-#bnew#-}",
-					handler: 	onSubmitBtn, 
-					tooltip: 	{ text:"{-#tnewdesc#-}", title:"{-#tnewtitle#-}", autoHide:true },
-					//style:		"background-color:#bbb;",
-{-if $ro == "disabled"-}
-					disabled:	true, {-/if-}
-					iconCls: 	"bnew"
-				}), "-");
-			// Update button
-			tb.add(
-				new Ext.Toolbar.Button({
-					id:				"cardupd",
-					text: 		"{-#bupdate#-}",
-					handler: 	onSubmitBtn, 
-					tooltip: 	{ text:"{-#tupddesc#-}", title:"{-#tupdtitle#-}", autoHide:true },
-					//style:		"background-color:#bbb;",
-					iconCls: 	"bupd",
-					disabled:	true
-				}), "-");
-			// Save button
-			tb.add(
-				new Ext.Toolbar.Button({
-					id:				"cardsav",
-					text: 		"{-#bsave#-}",
-					handler: 	onSubmitBtn, 
-					tooltip: 	{ text:"{-#tsavdesc#-}", title:"{-#tsavtitle#-}", autoHide:true },
-					//style:		"background-color:#bbb;",
-					iconCls: 	"bsave",
-					disabled:	true
-				}), "-");
-			// Clean button
-			tb.add(
-				new Ext.Toolbar.Button({
-					id:				"cardcln",
-					text: 		"{-#bclean#-}",
-					handler: 	onSubmitBtn, 
-					tooltip: 	{ text:"{-#tclndesc#-}", title:"{-#tclntitle#-}", autoHide:true },
-					//style:		"background-color:#bbb;",
-					disabled:	true
-				}), "-");
-			// Cancel button
-			tb.add(
-				new Ext.Toolbar.Button({
-					id:				"cardcan",
-					text: 		"{-#bcancel#-}",
-					handler: 	onSubmitBtn, 
-					tooltip: 	{ text:"{-#tcandesc#-}", title:"{-#tcantitle#-}", autoHide:true },
-					//style:		"background-color:#bbb;",
-					iconCls: 	"bcancel",
-					disabled:	true
-				}), "-");
-			// Quick Query
-/*			tb.addField(
-				new Ext.form.TextField({
-					id:					"quickf",
-					name: 			"DCQuery",
-					emptyText:	"{-#bsearchcard#-}...",
-					width: 			200,
-					iconCls: 	  "bfind",
-					disabled: 	false
-				}) );*/
-			// Find button
-			tb.add(
-				new Ext.Toolbar.Button({
-					id:				"cardfnd",
-					text: 		"{-#bexpsearch#-}",
-					handler: 	onSubmitBtn, 
-					tooltip: 	{ text:"{-#texpdesc#-}", title:"{-#texptitle#-}", autoHide:true },
-					//style:		"background-color:#bbb;",
-					iconCls: 	"bfind",
-					disabled:	false
-				}), "-");
-			// functions to display feedback
-			var qryw;
-			var resw;
-			function onSubmitBtn(btn) {
-				mod = "di";
-				$('ifr').src="about:blank";
-				switch (btn.text) {
-					case "{-#bnew#-}":
-						DisableEnableForm($('DICard'), false);
-						setfocus('DisasterBeginTime[0]');
-						$('DisasterId').value='';
-						$('DICard').reset();
-						$('_CMD').value = 'insertDICard';
-						uploadMsg("{-#tmsgnewcardfill#-}");
-						tb.items.get('cardnew').disable();
-						tb.items.get('cardsav').enable();
-						tb.items.get('cardupd').disable();
-						tb.items.get('cardcln').enable();
-						tb.items.get('cardcan').enable();
-						tb.items.get('cardfnd').disable();
-						var qw = Ext.getCmp('qryw');
-						var rw = Ext.getCmp('resw');
-						try {
-							qw.hide();
-							rw.hide();
-						}
-						catch(ex) {}
-					break;
-					case "{-#bupdate#-}":
-						// check if DC is onused
-						var lsAjax = new Ajax.Updater('distatusmsg', '', {
-							method: 'get', parameters: 'r={-$reg-}&cmd=chklocked&DisasterId='+ $('DisasterId').value,
-							onComplete: function(request) {
-								var res = request.responseText;
-								if (res.substr(0,8) == "RESERVED") {
-									DisableEnableForm($('DICard'), false);
-									setfocus('DisasterBeginTime[0]');
-									$('_CMD').value = 'updateDICard';
-									uploadMsg("{-#tmsgeditcardfill#-}");
-									tb.items.get('cardnew').disable();
-									tb.items.get('cardsav').enable();
-									tb.items.get('cardupd').disable();
-									tb.items.get('cardcan').enable();
-									tb.items.get('cardfnd').disable();
-									var qw = Ext.getCmp('qryw');
-									var rw = Ext.getCmp('resw');
-									qw.hide();
-									rw.hide();
-								}
-								else 
-									uploadMsg("{-#tdconuse#-}");
+		function onSubmitBtn(btn) {
+			$('dic').src="about:blank";
+			switch (btn) {
+				case "{-#bnew#-}":
+					DisableEnableForm($('DICard'), false);
+					setfocus('DisasterBeginTime[0]');
+					$('DisasterId').value='';
+					$('DICard').reset();
+					$('_CMD').value = 'insertDICard';
+					uploadMsg("{-#tmsgnewcardfill#-}");
+					$('cardnew').disable();
+					$('cardsav').enable();
+					$('cardupd').disable();
+					$('cardcln').enable();
+					$('cardcan').enable();
+					$('cardfnd').disable();
+				break;
+				case "{-#bupdate#-}":
+					// check if DC is onused
+					var lsAjax = new Ajax.Updater('distatusmsg', '', {
+						method: 'get', parameters: 'r={-$reg-}&cmd=chklocked&DisasterId='+ $('DisasterId').value,
+						onComplete: function(request) {
+							var res = request.responseText;
+							if (res.substr(0,8) == "RESERVED") {
+								DisableEnableForm($('DICard'), false);
+								setfocus('DisasterBeginTime[0]');
+								$('_CMD').value = 'updateDICard';
+								uploadMsg("{-#tmsgeditcardfill#-}");
+								$('cardnew').disable();
+								$('cardsav').enable();
+								$('cardupd').disable();
+								$('cardcan').enable();
+								$('cardfnd').disable();
 							}
-						} );
-					break;
-					case "{-#bsave#-}":
-						var fl = new Array('DisasterSerial', 'DisasterBeginTime[0]', 'DisasterSource', 
-													'geolev0', 'EventId', 'CauseId', 'RecordStatus');
-						if (checkForm(fl, "{-#errmsgfrm#-}")) {
-							var lsAjax = new Ajax.Updater('distatusmsg', '', {
-								method: 'get', parameters: 'r={-$reg-}&cmd=chkdiserial&DisasterSerial='+ 
-									$('DisasterSerial').value + '&DisasterId='+ $('DisasterId').value,
-								onComplete: function(request) {
-									uploadMsg('');
-									var res = request.responseText;
+							else 
+								uploadMsg("{-#tdconuse#-}");
+						}
+					} );
+				break;
+				case "{-#bsave#-}":
+					var fl = new Array('DisasterSerial', 'DisasterBeginTime[0]', 'DisasterSource', 
+												'geolev0', 'EventId', 'CauseId', 'RecordStatus');
+					if (checkForm(fl, "{-#errmsgfrm#-}")) {
+						var lsAjax = new Ajax.Updater('distatusmsg', '', {
+							method: 'get', parameters: 'r={-$reg-}&cmd=chkdiserial&DisasterSerial='+ 
+								$('DisasterSerial').value + '&DisasterId='+ $('DisasterId').value,
+							onComplete: function(request) {
+								uploadMsg('');
+								var res = request.responseText;
 // disabled check serial exists
 //									if (res.substr(0,4) == "FREE") {
-										$('DICard').submit();
-										DisableEnableForm($('DICard'), true);
-										tb.items.get('cardnew').enable();
-										tb.items.get('cardsav').disable();
-										tb.items.get('cardupd').disable();
-										tb.items.get('cardcln').disable();
-										tb.items.get('cardcan').disable();
-										tb.items.get('cardfnd').enable();
+									$('DICard').submit();
+									DisableEnableForm($('DICard'), true);
+									$('cardnew').enable();
+									$('cardsav').disable();
+									$('cardupd').disable();
+									$('cardcln').disable();
+									$('cardcan').disable();
+									$('cardfnd').enable();
 //									}
 //									else
 //										alert("{-#tdisererr#-}");
-								}
-							} );
-						}
-					break;
-					case "{-#bclean#-}":
-						$('DICard').reset();
-						$('lev0').innerHTML='';
-						uploadMsg('');
-						setfocus('DisasterBeginTime[0]');
-					break;
-					case "{-#bcancel#-}":
-						updateList('distatusmsg', '', 'r={-$reg-}&cmd=chkrelease&DisasterId='+ $('DisasterId').value);
-						$('DICard').reset();
-						DisableEnableForm($('DICard'), true);
-						$('lev0').innerHTML='';
-						tb.items.get('cardsav').disable();
-						tb.items.get('cardcln').disable();
-						tb.items.get('cardcan').disable();
-						tb.items.get('cardnew').enable();
-						tb.items.get('cardfnd').enable();
-						uploadMsg("{-#tmsgnewcard#-}");
-					break;
-					case "{-#bexpsearch#-}":
-						if(!qryw) {
-              qryw = new Ext.Window({id:'qryw',
-                el:'qry-win',  layout:'fit',  width:300, height:270, 
-                closeAction:'hide', plain: true, animCollapse: false,
-                items: new Ext.Panel({
-                    contentEl: 'qry-cfg', autoScroll: true }),
-                buttons: [{
-                    text:'{-#tclean#-}',
-                    handler: function() {
-                        $('_lev0').innerHTML='';
-                        $('_DisasterGeographyId').value='';
-                        $('DIFind').reset();
-                    }
-                  },{
-                    text:'{-#tsend#-}',
-                    handler: function() {
-                        if(!resw) {
-                          resw = new Ext.Window({ id:'resw',
-                            el:'res-win',  layout:'fit',  width:950, height:380, 
-                            closeAction:'hide', plain: true, animCollapse: false,
-                            items: new Ext.Panel({ contentEl: 'res-cfg', autoScroll: true })
-                            //,buttons: [{ text:"{-#tclose#-}", handler: function() { resw.hide(); } }]
-                          });
-                          resw.setPosition(10, 300);
-                          qryw.hide();
-                        }
-                    		resw.show(this);
-                        $('DIFind').submit();
-{-if $ro != "disabled"-}
-												tb.items.get('cardupd').enable(); {-/if-}
-                    }
-                  },{
-                    text:"{-#tclose#-}",
-                    handler: function() {
-                    		qryw.hide(); 
-                    }
-                  }]
-              });
-              qryw.setPosition(650, 30);
-						}
-						qryw.show(this);
-						//uploadMsg("{-#tmsgsearchcards#-}");
-					break;
-				}
-				return true;
+							}
+						} );
+					}
+				break;
+				case "{-#bclean#-}":
+					$('DICard').reset();
+					$('lev0').innerHTML='';
+					uploadMsg('');
+					setfocus('DisasterBeginTime[0]');
+				break;
+				case "{-#bcancel#-}":
+					updateList('distatusmsg', '', 'r={-$reg-}&cmd=chkrelease&DisasterId='+ $('DisasterId').value);
+					$('DICard').reset();
+					DisableEnableForm($('DICard'), true);
+					$('lev0').innerHTML='';
+					$('cardsav').disable();
+					$('cardcln').disable();
+					$('cardcan').disable();
+					$('cardnew').enable();
+					$('cardfnd').enable();
+					uploadMsg("{-#tmsgnewcard#-}");
+				break;
+				case "{-#bexpsearch#-}":
+				break;
 			}
-			function onMenuItem(item) {
-				switch (item.text) {
-					case "{-#mprint#-}":
-						window.print();
-					break;
-					case "{-#mquit#-}":
-						self.close();
-					break;
-				}
-			}
-			function onConfigItem(item) {
-				var w = Ext.getCmp('westm');
-				w.expand();
-				var myurl = null;
-				switch (item.text) {
-					case "{-#mreginfo#-}":
-						myurl = "regioninfo.php?r={-$reg-}";
-					break;
-					case "{-#mreglog#-}":
-						myurl = "regionlog.php?r={-$reg-}";
-					break;
-					case "{-#mregrol#-}":
-						myurl = "regionrol.php?r={-$reg-}";
-					break;
-					case "{-#mgeolevel#-}":
-						myurl = "geolevel.php?r={-$reg-}";
-					break;
-					case "{-#mgeography#-}":
-						myurl = "geography.php?r={-$reg-}";
-					break;
-					case "{-#mevents#-}":
-						myurl = "events.php?r={-$reg-}";
-					break;
-					case "{-#mcauses#-}":
-						myurl = "causes.php?r={-$reg-}";
-					break;
-					case "{-#meeffects#-}":
-						myurl = "extraeffects.php?r={-$reg-}";
-					break;
-					case "{-#mimport#-}":
-						myurl = "import.php?r={-$reg-}";
-					break;
-				}
-				w.load({
-					url: myurl,
-					text: "{-#mloading#-}"
-				});
-			}
-			var viewport = new Ext.Viewport( {
-				layout:'border',
-				items:[ {
-					region:'north',
-					contentEl: 'north',
-					height: 30
-				},{
-					region:'south',
-					contentEl: 'south',
-					split:false,
-					height: 80,
-					minSize: 100,
-					maxSize: 200,
-					collapsible: true,
-					title:"{-#thelp#-}",
-					margins:'0 0 0 0'
-				},{ 
-					region: 'center',
-					contentEl: 'container',
-					autoScroll: true
-				}, new Ext.Panel({
-					region: 'west',
-					id: 'westm',
-					title: "{-#mconfig#-}",
-					split: false,
-					width: 300,
-					collapsible: true,
-					margins: '0 0 0 5',
-					collapseMode: 'mini',
-					autoScroll: true
-				})
-				]
-			});
-			var w = Ext.getCmp('westm');
-			w.collapse();
-			// quicktips
-			Ext.apply(Ext.QuickTips.getQuickTip(), {
-				maxWidth: 200, minWidth: 100, showDelay: 50, trackMouse: true });
-		});
+			return true;
+		}
 	</script>
 	<style type="text/css">
 		.bnew { background-image: url(../images/newicon.png) !important; }
@@ -470,31 +214,31 @@
 </head>
 
 <body>
-<!-- HEAD SECTION  onBeforeUnload="return '{-#tcheckquit#-}'"-->
-	<div id="north">
-		<div id="toolbar"></div>
-	</div>
 <!-- BEG DI8 FORM CARD -->
 	<div id="container" style="overflow:scroll;">
 		<table width="900px">
 			<tr>
-				<td width="300px">
-					<span class="dlgmsg" id="distatusmsg"></span>
-				</td>
 				<td>
+					<input type="button" id="cardnew" value="{-#bnew#-}" onClick="onSubmitBtn(this.value);" {-$ro-}>
+					<input type="button" id="cardupd" value="{-#bupdate#-}" onClick="onSubmitBtn(this.value);" {-$ro-}>
+					<input type="button" id="cardsav" value="{-#bsave#-}" onClick="onSubmitBtn(this.value);" {-$ro-}>
+					<input type="button" id="cardcln" value="{-#bclean#-}" onClick="onSubmitBtn(this.value);" {-$ro-}>
+					<input type="button" id="cardcan" value="{-#bcancel#-}" onClick="onSubmitBtn(this.value);" {-$ro-}>
+					<input type="button" id="cardfnd" value="{-#bexpsearch#-}" onClick="onSubmitBtn(this.value);" {-$ro-}>
+					&nbsp;&nbsp;|&nbsp;&nbsp;
+					<input type="button" value="<<" onClick="setCard('{-$reg-}', {-$fst-}, '');" {-$ro-}>
+					<input type="button" value="<" onClick="setCard('{-$reg-}', null, '');" {-$ro-}>
 					<span class="dlgmsg" id="dostat"></span>
-					<input type="button" class="medium" value="<<" onClick="setCard('{-$reg-}', {-$fst-}, '');">
-					<!--<input type="button" class="medium" value="<" onClick="setDICard(form, requestCard($('DisasterId').value));">-->
-					&nbsp;&nbsp;&nbsp;&nbsp;
-					<!--<input type="button" class="medium" value=">" disabled>-->
-					<input type="button" class="medium" value=">>" onClick="setCard('{-$reg-}', {-$lst-}, '');">
+					<input type="button" value=">" disabled {-$ro-}>
+					<input type="button" value=">>" onClick="setCard('{-$reg-}', {-$lst-}, '');" {-$ro-}>
+					<br><span class="dlgmsg" id="distatusmsg"></span>
 				</td>
 				<td align="right">
-					<iframe name="ifr" id="ifr" frameborder="0" style="height:40px; width:450px;" src="about:blank"></iframe>
+					<iframe name="dic" id="dic" frameborder="1" style="height:30px; width:220px;" src="about:blank"></iframe>
 				</td>
 			</tr>
 		</table>
-		<form id="DICard" action="index.php" method="POST" target="ifr">
+		<form id="DICard" action="index.php" method="POST" target="dic">
 			<input type="hidden" name="_REG" id="_REG" value="{-$reg-}">
 			<input type="hidden" name="DisasterId" id="DisasterId" value="">
 			<input type="hidden" name="RecordAuthor" id="RecordAuthor" value="{-$usr-}">
@@ -653,9 +397,9 @@
                         <select id="{-$key-}" name="{-$key-}" style="width:120px;" tabindex="{-$tabind-}"
                             onKeyPress="edit(event);" onFocus="showtip('{-$item[2]-}', '#f1bd41');" 
                             onBlur="this.editing=false; if(parseInt(this.value) == 0) { this.value = '0'; }">
-													<option class="small" value="-1">{-#teffhav#-}</option>
-													<option class="small" value="0" selected>{-#teffhavnot#-}</option>
-													<option class="small" value="-2">{-#teffdontknow#-}</option>
+							<option class="small" value="-1">{-#teffhav#-}</option>
+							<option class="small" value="0" selected>{-#teffhavnot#-}</option>
+							<option class="small" value="-2">{-#teffdontknow#-}</option>
                         </select>
                       </td>
                     </tr>
@@ -672,9 +416,9 @@
                       <td>
                         <select id="{-$key-}" name="{-$key-}" style="width:120px;" tabindex="{-$tabind-}" 
                             onFocus="showtip('{-$item[2]-}', '#f1bd41')">
-													<option class="small" value="-1">{-#teffhav#-}</option>
-													<option class="small" value="0" selected>{-#teffhavnot#-}</option>
-													<option class="small" value="-2">{-#teffdontknow#-}</option>
+							<option class="small" value="-1">{-#teffhav#-}</option>
+							<option class="small" value="0" selected>{-#teffhavnot#-}</option>
+							<option class="small" value="-2">{-#teffdontknow#-}</option>
                         </select>
                       </td>
                     </tr>
@@ -826,85 +570,6 @@
  </div>
 <!-- END HELP SECTION -->
 
-<!-- BEG QUERY OPTIONS -->
-<div id="qry-win" class="x-hidden">
-	<div class="x-window-header">{-#texptitle#-}</div>
-	<div id="qry-cfg">
-	<form method="POST" target="iframe" id="DIFind" action="../desconsultar/data.php?r={-$reg-}&opt=singlemode">
-   <table border="0" class="grid">
-	  <tr id="serial">
-	   <td>{-$dis.DisasterSerial[0]-}</td>
-	   <td><input id="_DisasterSerial" name="D_DisasterSerial" type="text" size="25" tabindex="101" class="line"
-	   		maxlength="50" onFocus="showtip('{-$dis.DisasterSerial[2]-}','')"></td>
-	  </tr>
-	  <tr>
-	   <td>
-	   	{-#tsince#-}<br>{-#tuntil#-}
-	   </td>
-	   <td>
-	   	<input type="text" id="DisasterBeginTime[0]" name="D:DisasterBeginTime[0]" size=4 maxlength=4 class="line">
-		  <input type="text" id="DisasterBeginTime[1]" name="D:DisasterBeginTime[1]" size=2 maxlength=2 class="line">
-		  <input type="text" id="DisasterBeginTime[2]" name="D:DisasterBeginTime[2]" size=2 maxlength=2 class="line">
-	   	<br>
-	   	<input type="text" id="DisasterEndTime[0]" name="D:DisasterEndTime[0]" size=4 maxlength=4 class="line">
-		  <input type="text" id="DisasterEndTime[1]" name="D:DisasterEndTime[1]" size=2 maxlength=2 class="line">
-		  <input type="text" id="DisasterEndTime[2]" name="D:DisasterEndTime[2]" size=2 maxlength=2 class="line">
-	   </td>
-    </tr>
-	  <tr valign="top">
-	   <td colspan=2>{-$dis.DisasterGeographyId[0]-}<br>
-	   	 <input id="_DisasterGeographyId" name="D:DisasterGeographyId[]" type="hidden">
-	   	 <div class="geodiv" style="height:60px;">
-{-if $lev <= $levmax-}
- 				{-$lev-}- {-$levname[0]-}:
- 				<select onChange="setgeo(this.options[this.selectedIndex].value,{-$lev-},'','search');"
- 						style="width: 120px;" id="_geolev{-$lev-}">
-					<option value="" style="text-align:center;">--</option>
- {-foreach name=geol key=key item=item from=$geol-}
-  {-if $item[2]-}
-  				 <option value="{-$key-}">{-$item[1]-}</option>
-  {-/if-}
- {-/foreach-}
-  			</select><br>
-  			<span id="_lev{-$lev-}"></span>
-{-/if-}
-			 </div>
-	   </td>
-	  </tr>
-	  <tr>
-	   <td>{-$eve.EventId[0]-}</td>
-	   <td><select id="_EventId" name="D:EventId" style='width: 120px;' tabindex="110">
-	   		<option value=""></option>
-{-foreach name=eln key=key item=item from=$evel-}
-		  	<option value="{-$key-}">{-$item[0]-}</option>
-{-/foreach-}
-		  </select>
-	   </td>
-	  </tr>
-	  <tr valign="top">
-	   <td>{-#tstatus#-}</td>
-	   <td>
-			<select name="D:RecordStatus[]" tabindex="{-$tabind-}" multiple style="height:40px;">
-				<option value="PUBLISHED">{-#tstatpublished#-}</option>
-				<option value="READY">{-#tstatready#-}</option>
-				<option value="DRAFT">{-#tstatdraft#-}</option>
-				<option value="TRASH">{-#tstatrash#-}</option>
-			</select>
-	   </td>
-	  </tr>
-   </table>
-   <input type="hidden" name="_D+cmd" value="result">
-   <input type="hidden" name="_D+SQL_LIMIT" value="100">
-  </form>
-	</div>
-</div>
-<div id="res-win" class="x-hidden">
-	<div class="x-window-header">{-#tqueryresults#-}</div>
-	<div id="res-cfg" align="center">
-		<iframe name="iframe" id="iframe" frameborder="0" style="height:330px; width:910px;"></iframe>
-	</div>
-</div>
-<!-- END QUERY OPTIONS -->
  </body>
 </html>
 {-/if-}
@@ -912,27 +577,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
-	<style type="text/css">
-		.msg1 {
-			font-family:arial,tahoma,helvetica,cursive; font-size:11px; color:#dbab28; }
-		.msg2 {
-			font-family:arial,tahoma,helvetica,cursive; font-size:10px; color:#000000; }
-	</style>
-</head>
 <body>
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
+ <table border="0" cellpadding="0" cellspacing="0" width="100%">
 	<tr>
-		<td class="msg1">
+		<td style="font-family:arial,tahoma,helvetica,cursive; font-size:11px; color:#dbab28;">
 		 {-if $statusmsg == 'duplicate'-}<b>{-#tdcerror#-}:</b> {-#tdisererr#-}
 		 {-elseif $statusmsg == 'insertok'-} {-#tdccreated#-} (Serial={-$diserial-})
 		 {-elseif $statusmsg == 'updateok'-} {-#tdcupdated#-} (Serial={-$diserial-})
 		 {-else-}{-$statusmsg-}{-/if-}
 		</td>
-		<td class="msg2">{-#tstatpublished#-} {-$dipub-}, {-#tstatready#-} {-$direa-}</td>
+		<td style="font-family:arial,tahoma,helvetica,cursive; font-size:10px; color:#000000;">
+		 {-#tstatpublished#-} {-$dipub-}, {-#tstatready#-} {-$direa-}</td>
 	</tr>
-</table>
+ </table>
 </body>
 </html>
 {-/if-}

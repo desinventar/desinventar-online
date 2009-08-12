@@ -9,7 +9,12 @@
 	<link rel="stylesheet" href="../css/desinventar.css" type="text/css"/>
 	<script type="text/javascript" src="../include/prototype.js"></script>
 	<script type="text/javascript" src="../include/diadmin.js.php"></script>
-  <script type="text/javascript">
+    <script type="text/javascript">
+	function getDICard(did) {
+		var dcf = parent.document.getElementById('dcf');
+		dcf.src='../desinventar/?r={-$reg-}&did=' + did;
+		parent.e.expand();
+	}
 {-if !$ctl_singlemode-}
 	window.onload = function() {
 		var qrydet = parent.document.getElementById('querydetails');
@@ -27,73 +32,74 @@
 		qrydet.innerHTML = qdet;
 	}
 {-/if-}
-  </script>
+    </script>
  </head>
  <body>
-	<table width="920px" class="grid">
-	 <tr>
-	  <td>
+  <table width="920px" class="grid">
+   <tr>
+	<td>
 {-if !$ctl_singlemode-}
-	  	{-#tpage#-} 
-	  	<input type="text" id="pp" size="2" value="1" class="line"
+	 {-#tpage#-} 
+	  <input type="text" id="pp" size="2" value="1" class="line"
 				onKeyDown="if(event.keyCode==13){ mod='dat'; 
 					updateList('lst_dis', 'data.php', 'r={-$reg-}&page='+ this.value +'&RecordsPerPage={-$RecordsPerPage-}&sql={-$sql-}&fld={-$fld-}');}"
 				onkeypress="return blockChars(event, this.value, 'integer:');">
-			&nbsp; {-#tnumof#-} &nbsp;
-			<a href="javascript:void(null)" 
+	  &nbsp; {-#tnumof#-} &nbsp;
+	  <a href="javascript:void(null)" 
 				onclick="mod='dat'; updateList('lst_dis', 'data.php', 'r={-$reg-}&page={-$NumberOfPages-}&RecordsPerPage={-$RecordsPerPage-}&sql={-$sql-}&fld={-$fld-}');">{-$NumberOfPages-}</a>
 {-/if-}
-		</td>
-		<td align="center">
-			<span id="datstatusmsg" class="dlgmsg"></span>
-		</td>
-		<td align="right">
-			{-#trepnum#-}: {-$tot-}
-		</td>
-	 </tr>
-	</table>
+	</td>
+	<td align="center">
+	  <span id="datstatusmsg" class="dlgmsg"></span><!--{-$time-}s-->
+	</td>
+	<td align="right">
+	  {-#trepnum#-}: {-$tot-}
+	</td>
+   </tr>
+  </table>
   <table width="930px" class="col">
-	 <thead>
-	  <tr>
-	 	 <th class="header">{-#trow#-}</th>
+   <thead>
+	<tr>
+	 <th class="header">{-#trow#-}</th>
 	{-foreach name=sel key=key item=item from=$sel-}
 {-strip-}
-  {-if $item != "DisasterId"-}
-		 <th class="header">{-$dk.$item-}</th>
-  {-/if-}
+{-if $item != "DisasterId"-}
+	 <th class="header">{-$dk.$item-}</th>
+{-/if-}
 {-/strip-}
 	{-/foreach-}
     </tr>
-	 </thead>
-	 <tbody id="lst_dis">
+   </thead>
+   <tbody id="lst_dis">
 {-/if-}
 {-*** SHOW RESULT LIST: PAGING ***-}
 {-if $ctl_dislist-}
 {-foreach name=dl key=key item=item from=$dislist-}
     <tr 
-			class="{-if ($smarty.foreach.dl.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}" 
+	  class="{-if ($smarty.foreach.dl.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}" 
  {-if $ctl_singlemode-}
-			onClick="setCard('{-$reg-}', {-$js.$key-}, 'R');"
-			onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');">
+	  onClick="setCard('{-$reg-}', {-$js.$key-}, 'R');"
+	  onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');">
  {-else-}
       onClick="Element.addClassName(this, 'highlight');" ondblClick="Element.removeClassName(this, 'highlight');">
  {-/if-}
-     <td>{-$offset+$smarty.foreach.dl.iteration-}</td>
+     <td><a href="javascript:void(null);" onClick="getDICard('{-$item.DisasterId-}');">{-$offset+$smarty.foreach.dl.iteration-}</a></td>
  {-foreach name=sel key=k item=i from=$sel-}
-     {-strip-}
+ {-strip-}
  {-if $i != "DisasterId"-}
-		 <td>
+	 <td>
   {-if $i=="EffectNotes" || $i=="EffectOtherLosses" || $i=="EventNotes" || $i=="CauseNotes"-}
-		 	<div class="dwin" style="width:200px; height: 40px;">{-$item[$i]-}</div>
+	  <div class="dwin" style="width:200px; height: 40px;">{-$item[$i]-}</div>
   {-elseif $i=="DisasterSource" || $i=="DisasterSiteNotes"-}
-		 	<div class="dwin" style="width:150px; height: 40px;">{-$item[$i]-}</div>
-	{-elseif $item[$i] == -1-}
-			<input type="checkbox" checked disabled>
-	{-elseif $item[$i] == -2-}?
-	{-else-}{-$item[$i]-}{-/if-}
-		 </td>
+	  <div class="dwin" style="width:150px; height: 40px;">{-$item[$i]-}</div>
+  {-elseif $item[$i] == -1-}
+	  <input type="checkbox" checked disabled>
+  {-elseif $item[$i] == -2-}?
+  {-else-}{-$item[$i]-}
+  {-/if-}
+	 </td>
  {-/if-}
-     {-/strip-}
+ {-/strip-}
  {-/foreach-}
     </tr>
 {-/foreach-}

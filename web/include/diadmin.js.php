@@ -16,20 +16,20 @@ solo se muestre a los roles correspondientes.. */
 	}
 	
 	function updateList(div, url, pars) {
-    var lsAjax = new Ajax.Updater( div, url, {
+		var lsAjax = new Ajax.Updater( div, url, {
     			method: 'get', parameters: pars,
     			onLoading: function(request) { 
    			    //$(div).style.cursor = "wait";
    			    if (mod == "")	$(div).innerHTML = waiting;
-   			    //else						uploadMsg(waiting);
-          },
+   			    //else  uploadMsg(waiting);
+			},
     			onComplete: function(request)	{ 
-    			  //$(div).style.cursor = "";
-            if (mod == "")  $('div').innerHTML = "";
-            //else 						uploadMsg('');
-          }
-    	 } );
-  }
+    			   //$(div).style.cursor = "";
+		             if (mod == "")  $('div').innerHTML = "";
+			   //else  uploadMsg('');
+			}
+		} );
+	}
 	function sendData (r, url, pars, val) {
 	  reg = r;
 		opt = val;

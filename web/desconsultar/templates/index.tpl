@@ -20,6 +20,8 @@
   <script type="text/javascript" src="/extJS/adapter/ext/ext-base.js"></script>
   <script type="text/javascript" src="/extJS/ext-all.js"></script>
   <script type="text/javascript">
+	var w = null;
+	var e = null;
     // DI8 - Layout, buttons and internal windows - UI DesConsultar module
     Ext.onReady(function()
     {
@@ -27,7 +29,7 @@
       var mfile = new Ext.menu.Menu({
         id: 'fileMenu',
         items: [
-//            {  text: '{-#mlang#-}',      handler: onMenuItem  },
+            {  text: '{-#mlang#-}',      handler: onMenuItem  },
             {  text: '{-#mprint#-}',     handler: onMenuItem  },
             {  text: '{-#mquit#-}',      handler: onMenuItem  }]
       });
@@ -54,7 +56,7 @@
       tb.add('-', {text:  '{-#mhelp#-}',    menu: mhelp });
       //
       function onMenuItem(item){
-        var w = Ext.getCmp('westm');
+        w = Ext.getCmp('westm');
         switch (item.text) {
           case "{-#mprint#-}":
             window.print();
@@ -99,10 +101,10 @@
             alert("{-#tabout#-}");
           break;
           case "{-#mgotodoc#-}":
-            $('ifr').src = "../region.php?r={-$reg-}&cmd=info";
+            $('dcr').src = "../region.php?r={-$reg-}&cmd=info";
           break;
           case "{-#motherdoc#-}":
-            $('ifr').src = "../doc/LoNuevoEnDesInventar.pdf";
+            $('dcr').src = "../doc/LoNuevoEnDesInventar.pdf";
           break;
           case "{-#hmoreinfo#-}":
             runWin('../doc/?m=metguide', 'doc');
@@ -143,8 +145,21 @@
             margins:'0 2 0 0',
             collapsible: true,
             contentEl: 'west'
-          }]
+          },{
+            region: 'east',
+			id: 'eastm',
+			split: true,
+			width: 960,
+			collapsible: true,
+			margins: '0 0 0 5',
+			collapseMode: 'mini',
+			autoScroll: true,
+			split: true,
+            contentEl: 'east'
+		  }]
       });
+	  e = Ext.getCmp('eastm');
+	  e.collapse();
       // ==> Results Configuration Windows
       // Data
       var datw;
@@ -459,7 +474,7 @@
         mystr += "D.DisasterId";
         $('_D+FieldH').value = mystr;
         combineForms('DC', 'CD');
-        var w = Ext.getCmp('westm');
+        w = Ext.getCmp('westm');
         w.collapse(); //hide()
         var s = Ext.getCmp('southm');
         s.collapse();
@@ -477,7 +492,7 @@
 		  $('_M+cmd').value = cmd;
 		  if (cmd == "export") {
 			// to export image save layers and extend..
-			var mm = ifr.map;
+			var mm = dcr.map;
 			var extent = mm.getExtent();
 			//extent.transform(mm.prj1, mm.prj2);
 			var layers = mm.layers;
@@ -490,7 +505,7 @@
 			$('_M+layers').value = activelayers;
 		  }
 		  combineForms('DC', 'CM');
-		  var w = Ext.getCmp('westm');
+		  w = Ext.getCmp('westm');
 		  w.collapse(); // hide()
 		  var s = Ext.getCmp('southm');
 		  s.collapse();
@@ -505,7 +520,7 @@
     function sendGraphic(cmd) {
       $('_G+cmd').value = cmd;
       combineForms('DC', 'CG');
-      var w = Ext.getCmp('westm');
+      w = Ext.getCmp('westm');
       w.collapse(); //hide()
       var s = Ext.getCmp('southm');
       s.collapse();
@@ -523,7 +538,7 @@
           mystr += "," + ob[i].value;
         $('_S+FieldH').value = mystr;
         combineForms('DC', 'CS');
-        var w = Ext.getCmp('westm');
+        w = Ext.getCmp('westm');
         w.collapse();//hide()
         var s = Ext.getCmp('southm');
         s.collapse();
@@ -551,7 +566,7 @@
     window.onload = function() {
       // select optimal height in results frame
       //varhgt = screen.height * 360 / 600;
-      //$('ifr').style = "height:"+ hgt + "px;"
+      //$('dcr').style = "height:"+ hgt + "px;"
 {-foreach name=ef1 key=k item=i from=$ef1-}
 {-assign var="ff" value=D_$k-}
 {-if $qd.$ff[0] != ''-}
@@ -743,9 +758,9 @@
                    <input type="button" value="{-#bnone#-}" onclick="selectnone('_D+sel1[]');" class="line">
                   </td>
                   <td align="center" valign="middle" style="width:20px;">
-                   <input type="button" value="--&gt;" onclick="moveOptions($('_D+sel1[]'), $('_D+Field[]'));" class="line">
+                   <input type="button" value="&rarr;" onclick="moveOptions($('_D+sel1[]'), $('_D+Field[]'));" class="line">
                    <br><br><br>
-                   <input type="button" value="&lt;--" onclick="moveOptions($('_D+Field[]'), $('_D+sel1[]'));" class="line">
+                   <input type="button" value="&larr;" onclick="moveOptions($('_D+Field[]'), $('_D+sel1[]'));" class="line">
                   </td>
                   <td><b>{-#sviewfields#-}</b><br>
                    <select id="_D+Field[]" size="8" style="width:220px;" multiple>
@@ -1233,7 +1248,7 @@
             			</td>
             		</tr>
             	</table>
-              <br><br>
+              <br>
               <b>{-#stotallevels#-}</b>
               <br>
               <table>
@@ -1283,9 +1298,9 @@
                    <input type="button" value="{-#bnone#-}" onclick="selectnone('_S+sel1[]');" class="line">
                   </td>
                   <td align="center" valign="middle" style="width:20px;">
-                   <input type="button" value="--&gt;" onclick="moveOptions($('_S+sel1[]'), $('_S+Field[]'));" class="line">
+                   <input type="button" value="&rarr;" onclick="moveOptions($('_S+sel1[]'), $('_S+Field[]'));" class="line">
                    <br><br><br>
-                   <input type="button" value="&lt;--" onclick="moveOptions($('_S+Field[]'), $('_S+sel1[]'));" class="line">
+                   <input type="button" value="&larr;" onclick="moveOptions($('_S+Field[]'), $('_S+sel1[]'));" class="line">
                   </td>
                   <td><b>{-#sviewfields#-}</b><br>
                    <select id="_S+Field[]" size="6" style="width:220px;" multiple>
@@ -1326,27 +1341,28 @@
          <input type="button" class="line" style="width:20px; height:20px; background-image:url(../images/saveicon.png);"
              onClick="if($('DCRes').value != '') saveRes('export');" ext:qtip="{-#bsavemsg#-}">&nbsp;&nbsp;
          <input type="button" class="line" style="width:20px; height:20px; background-image:url(../images/printicon.png);"
-             onClick="frames['ifr'].focus(); frames['ifr'].print();" ext:qtip="{-#bprintmsg#-}">&nbsp;&nbsp;
+             onClick="frames['dcr'].focus(); frames['dcr'].print();" ext:qtip="{-#bprintmsg#-}">&nbsp;&nbsp;
        </td>
      </tr>
    </table>
 <!--   SHOW RESULTS  -->
   <div id="querydetails" style="height:40px;" class="dwin"></div>
-  <div id="smap" style="position:absolute; left:0px; top:20px; visibility:hidden;">
+<!--  <div id="smap" style="position:absolute; left:0px; top:20px; visibility:hidden;">
    [<a href="javascript:void(0);" onClick="hideMap();">X</a>]<br>
-  </div>
-  <iframe name="ifr" id="ifr" frameborder="0" height="550px" width="100%" scrolling="auto"
-  		src="../region.php?r={-$reg-}&cmd=info">
-  </iframe>
+  </div>-->
+  <iframe name="dcr" id="dcr" frameborder="0" scrolling="auto" height="610px" width="100%" src="../region.php?r={-$reg-}&cmd=info"></iframe>
  </div>
 
 <!--
         SECTION : QUERY DESIGN 
         ======================
 -->
+ <div id="east">
+  <iframe name="dcf" id="dcf" frameborder="0" scrolling="auto" height="610px" width="100%"></iframe>
+ </div>
  <div id="west">
   <!-- BEG DI8 QUERY FORM -->
-  <form id="DC" method="POST" target="ifr">
+  <form id="DC" method="POST" target="dcr">
   <input type="hidden" id="_REG" name="_REG" value="{-$reg-}">
   <dl class="accordion">
     <!-- BEGIN GEOGRAPHY SECTION -->
