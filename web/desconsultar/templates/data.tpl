@@ -10,10 +10,10 @@
 	<script type="text/javascript" src="../include/prototype.js"></script>
 	<script type="text/javascript" src="../include/diadmin.js.php"></script>
     <script type="text/javascript">
-	function getDICard(did) {
-		var dcf = parent.document.getElementById('dcf');
-		dcf.src='../desinventar/?r={-$reg-}&did=' + did;
+	function setDIForm(did) {
+		//var dcf = parent.document.getElementById('dcf');
 		parent.e.expand();
+		setDICardfromId('{-$reg-}', did, 'DATA');
 	}
 {-if !$ctl_singlemode-}
 	window.onload = function() {
@@ -77,13 +77,8 @@
 {-foreach name=dl key=key item=item from=$dislist-}
     <tr 
 	  class="{-if ($smarty.foreach.dl.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}" 
- {-if $ctl_singlemode-}
-	  onClick="setCard('{-$reg-}', {-$js.$key-}, 'R');"
-	  onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');">
- {-else-}
       onClick="Element.addClassName(this, 'highlight');" ondblClick="Element.removeClassName(this, 'highlight');">
- {-/if-}
-     <td><a href="javascript:void(null);" onClick="getDICard('{-$item.DisasterId-}');">{-$offset+$smarty.foreach.dl.iteration-}</a></td>
+     <td><a href="javascript:void(null);" onClick="setDIForm('{-$item.DisasterId-}');">{-$offset+$smarty.foreach.dl.iteration-}</a></td>
  {-foreach name=sel key=k item=i from=$sel-}
  {-strip-}
  {-if $i != "DisasterId"-}
