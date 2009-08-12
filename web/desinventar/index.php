@@ -70,11 +70,6 @@ function form2eedata($form) {
 	return $eedat;
 }
 
-// 2009-08-07 (jhcaiced) Validate If User is logged in first...
-if ($us->UserId == '') {
-	print "<h3>Error: You must log in to use DesInventar module</h3><br />";
-	exit();
-}
 if (isset($_POST['_REG']) && !empty($_POST['_REG'])) {
 	$sRegionId = $_POST['_REG'];
 	$us->open($sRegionId);
@@ -88,13 +83,7 @@ if (isset($_POST['_REG']) && !empty($_POST['_REG'])) {
 
 // 2009-08-07 (jhcaiced) Validate if Database Exists...
 if (! file_exists($us->q->getDBFile($sRegionId))) {
-	print "<h3>Requested Region doesn't exist</h3><br />";
-	exit();
-}
-
-// Validate if user has permission to access database
-if ($us->getUserRole($sRegionId == '')) {
-	print "<h3>You are not allowed to access this database</h3><br>";
+	print "<h3>Requested Region doesn't exist<br>";
 	exit();
 }
 
@@ -199,60 +188,75 @@ if (isset($_GET['u'])) {
 		$t->assign ("ctl_result", true);
 		// End _CMD Block
 	} else {
+		if (isset($_GET['did']) && !empty($_GET['did'])) {
+			$dcard = $us->q->hash2json($us->q->getDisasterById($_GET['did']));
+			if (isset($dcard[0]))
+				$t->assign ("dcard", $dcard[0]);
+		}
+		if ($us->UserId == '' || $us->getUserRole($sRegionId == '')) {
+			
+		}
 		// Default view of DesInventar
 		$t->assign ("usr", $us->UserId);
-		$t->assign ("regname", $us->q->getDBInfoValue('LangIsoCode'));
+		$t->assign ("regname", $us->q->getDBInfoValue('RegionLabel'));
 		$role = $us->getUserRole($sRegionId);
 		$t->assign ("role", $role);
+		// Validate if user has permission to access database
 		$dic = $us->q->queryLabelsFromGroup('DB', $lg);
-		if ($role == "ADMINREGION") {
-			$t->assign ("showconfig", true);
-			$dicrole = $dic['DBRoleAdmin'][0];
-		} elseif ($role=="OBSERVER") {
-			$t->assign ("showconfig", true);
-			$t->assign ("ro", "disabled");
-			$dicrole = $dic['DBRoleObserver'][0];
-		} elseif ($role=="SUPERVISOR") {
-			$dicrole = $dic['DBRoleSupervisor'][0];
-		} else {
-			$dicrole = $dic['DBRoleUser'][0];
+		switch ($role) {
+			case "ADMINREGION":
+				$t->assign ("showconfig", true);
+				$dicrole = $dic['DBRoleAdmin'][0];
+			break;
+			case "OBSERVER":
+				$t->assign ("showconfig", true);
+				$t->assign ("ro", "disabled");
+				$dicrole = $dic['DBRoleObserver'][0];
+			break;
+			case "SUPERVISOR":
+				$dicrole = $dic['DBRoleSupervisor'][0];
+			break;
+			default:
+				$dicrole = $dic['DBRoleUser'][0];
+			break;
 		}
 		$t->assign ("dicrole", $dicrole);
-		
-		if ($role=="USER" || $role=="SUPERVISOR" || $role=="ADMINREGION" || $role=="OBSERVER") {
-			$t->assign ("ctl_effects", true);
-			$t->assign ("dis", $us->q->queryLabelsFromGroup('Disaster', $lg));
-			$t->assign ("rc1", $us->q->queryLabelsFromGroup('Record|1', $lg));
-			$t->assign ("rc2", $us->q->queryLabelsFromGroup('Record|2', $lg));
-			$t->assign ("eve", $us->q->queryLabelsFromGroup('Event', $lg));
-			$t->assign ("cau", $us->q->queryLabelsFromGroup('Cause', $lg));
-			$t->assign ("ef1", $us->q->queryLabelsFromGroup('Effect|People', $lg));
-			$t->assign ("ef2", $us->q->queryLabelsFromGroup('Effect|Economic', $lg));
-			$t->assign ("ef3", $us->q->queryLabelsFromGroup('Effect|Affected', $lg));
-			$t->assign ("sc3", $us->q->querySecLabelFromGroup('Effect|Affected', $lg));
-			$t->assign ("ef4", $us->q->queryLabelsFromGroup('Effect|More', $lg));
-			$t->assign ("sec", $us->q->queryLabelsFromGroup('Sector', $lg));
-			//$t->assign ("rcsl", $us->q->queryLabelsFromGroup('RecordStatus', $lg));
-			$t->assign ("dmg", $us->q->queryLabelsFromGroup('MetGuide', $lg));
-			$t->assign ("levl", $us->q->loadGeoLevels('', -1, false));
-			$lev = 0;
-			$t->assign ("lev", $lev);
-			$t->assign ("levmax", $us->q->getMaxGeoLev());
-			$t->assign ("levname", $us->q->loadGeoLevById($lev));
-			$t->assign ("geol", $us->q->loadGeography($lev));
-			$t->assign ("ctl_geolist", true);
-			$t->assign ("evel", $us->q->loadEvents(null, "active", $lg));
-			$t->assign ("caul", $us->q->loadCauses(null, "active", $lg));
-			$t->assign ("eefl", $us->q->getEEFieldList("True"));
-			if ($role=="SUPERVISOR" || $role=="ADMINREGION") {
-				$t->assign ("ctl_rcsl", true);
-			}
-			// get first and last datacard
-			$fst = $us->q->hash2json($us->q->getDisasterById($us->q->getFirstDisasterid()));
-			$lst = $us->q->hash2json($us->q->getDisasterById($us->q->getLastDisasterid()));
-			if (isset($fst[0])) $t->assign ("fst", $fst[0]);
-			if (isset($lst[0])) $t->assign ("lst", $lst[0]);
+		$t->assign ("ctl_effects", true);
+		$t->assign ("dis", $us->q->queryLabelsFromGroup('Disaster', $lg));
+		$t->assign ("rc1", $us->q->queryLabelsFromGroup('Record|1', $lg));
+		$t->assign ("rc2", $us->q->queryLabelsFromGroup('Record|2', $lg));
+		$t->assign ("eve", $us->q->queryLabelsFromGroup('Event', $lg));
+		$t->assign ("cau", $us->q->queryLabelsFromGroup('Cause', $lg));
+		$t->assign ("ef1", $us->q->queryLabelsFromGroup('Effect|People', $lg));
+		$t->assign ("ef2", $us->q->queryLabelsFromGroup('Effect|Economic', $lg));
+		$t->assign ("ef3", $us->q->queryLabelsFromGroup('Effect|Affected', $lg));
+		$t->assign ("sc3", $us->q->querySecLabelFromGroup('Effect|Affected', $lg));
+		$t->assign ("ef4", $us->q->queryLabelsFromGroup('Effect|More', $lg));
+		$t->assign ("sec", $us->q->queryLabelsFromGroup('Sector', $lg));
+		//$t->assign ("rcsl", $us->q->queryLabelsFromGroup('RecordStatus', $lg));
+		$t->assign ("dmg", $us->q->queryLabelsFromGroup('MetGuide', $lg));
+		$t->assign ("levl", $us->q->loadGeoLevels('', -1, false));
+		$lev = 0;
+		$t->assign ("lev", $lev);
+		$t->assign ("levmax", $us->q->getMaxGeoLev());
+		$t->assign ("levname", $us->q->loadGeoLevById($lev));
+		$t->assign ("geol", $us->q->loadGeography($lev));
+		$t->assign ("ctl_geolist", true);
+		$t->assign ("evel", $us->q->loadEvents(null, "active", $lg));
+		$t->assign ("caul", $us->q->loadCauses(null, "active", $lg));
+		$t->assign ("eefl", $us->q->getEEFieldList("True"));
+		if ($role=="SUPERVISOR" || $role=="ADMINREGION") {
+			$t->assign ("ctl_rcsl", true);
 		}
+		// get first and last datacard
+		$fst = $us->q->hash2json($us->q->getDisasterById($us->q->getFirstDisasterid()));
+		$lst = $us->q->hash2json($us->q->getDisasterById($us->q->getLastDisasterid()));
+		if (isset($fst[0]))
+			$t->assign ("fst", $fst[0]);
+		if (isset($lst[0]))
+			$t->assign ("lst", $lst[0]);
+		if ($role != "USER" && $role != "SUPERVISOR" && $role != "ADMINREGION")
+			$t->assign ("ro", "disabled");
 	}
 	$t->assign ("reg", $sRegionId);
 }

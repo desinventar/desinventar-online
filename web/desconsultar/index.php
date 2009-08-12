@@ -55,7 +55,7 @@ else
 
 // 2009-08-07 (jhcaiced) Validate if Database Exists...
 if (! file_exists($us->q->getDBFile($reg))) {
-	print "<h3>Requested Region doesn't exist</h3><br />";
+	print "<h3>Requested Region doesn't exist<br />";
 	exit();
 }
 
