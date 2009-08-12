@@ -1,5 +1,5 @@
 /* CORE.DB - DesInventar8.2
-2009-08-05
+2009-08-12
 */
 
 DROP TABLE IF EXISTS Region;
@@ -38,8 +38,9 @@ DROP TABLE IF EXISTS Queries;
 CREATE TABLE 'Queries' ( 
 QueryId VARCHAR(50), 
 RegionId VARCHAR(50), 
-QueryStatus VARCHAR(10), 
+SessionId VARCHAR(50), 
 UserId VARCHAR(20), 
+QueryStatus VARCHAR(20), 
 QueryDate DATETIME, 
 QueryName VARCHAR(100), 
 QueryContent TEXT, 
