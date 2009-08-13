@@ -61,7 +61,7 @@
 {-if $radm == false-}
  {-#tnorol#-}
 {-else-}
-	<select onChange="updateList('shwadm', 'region.php', 'r='+ this.value)" size=5 style="width: 500px;">
+	<select onChange="updateList('shwadm', 'region.php', 'r='+ this.value)" size=4 style="width: 500px;">
 {-foreach name=radm key=key item=item from=$radm-}
   	<option value="{-$key-}" class="regl">{-$item-}</option>
 {-/foreach-}
@@ -82,7 +82,7 @@
 {-if $robs == false-}
  {-#tnorol#-}
 {-else-}
-	<select onChange="updateList('shwobs', 'region.php', 'r='+ this.value)">
+	<select onChange="updateList('shwobs', 'region.php', 'r='+ this.value)" size=4 style="width: 500px;">
 		<option value=""></option>
 {-foreach name=robs key=key item=item from=$robs-}
   	<option value="{-$key-}">{-$item-}</option>
@@ -96,7 +96,7 @@
 {-if $rsup == false-}
  {-#tnorol#-}
 {-else-}
-	<select onChange="updateList('shwsup', 'region.php', 'r='+ this.value)">
+	<select onChange="updateList('shwsup', 'region.php', 'r='+ this.value)" size=4 style="width: 500px;">
 		<option value=""></option>
 {-foreach name=rsup key=key item=item from=$rsup-}
   	<option value="{-$key-}">{-$item-}</option>
@@ -110,7 +110,7 @@
 {-if $rusr == false-}
  {-#tnorol#-}
 {-else-}
-	<select onChange="updateList('shwusr', 'region.php', 'r='+ this.value)">
+	<select onChange="updateList('shwusr', 'region.php', 'r='+ this.value)" size=4 style="width: 500px;">
 		<option value=""></option>
 {-foreach name=rusr key=key item=item from=$rusr-}
   	<option value="{-$key-}">{-$item-}</option>
