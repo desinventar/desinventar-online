@@ -252,6 +252,35 @@ if (MODE != "command") {
 	$SessionId = session_id();
 }
 
+	function getBrowserClientLanguage() {
+		// 2009-08-13 (jhcaiced) Try to detect the interface language 
+		// for the user based on the information sent by the browser...
+		$LangStr = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+		$IsoLang = '';
+		foreach(split(',',$LangStr) as $LangItem) {
+			if ($IsoLang == '') {
+				$Index = strpos($LangItem, ';'); 
+				if ($Index == '') { $Index = strlen($LangItem); }
+				$LangItem = substr($LangItem, 0, $Index);
+				$Index = strpos($LangItem, '-'); 
+				if ($Index == '') { $Index = strlen($LangItem); }
+				$LangItem = substr($LangItem, 0, $Index);
+				switch($LangItem) {
+				case 'en':
+					$IsoLang = 'eng';
+					break;
+				case 'es':
+					$IsoLang = 'spa';
+					break;
+				} //switch
+			} //if
+		} //foreach
+		
+		// Default Case
+		if ($IsoLang == '') { $IsoLang = 'eng'; }
+		return $IsoLang;
+	} // function
+
 // 2009-01-15 (jhcaiced) Start by create/recover the session 
 // information, even for anonymous users
 $us = new UserSession($SessionId);
@@ -283,6 +312,8 @@ if (MODE != "command") {
 		$lg = $_GET['lang'];
 	elseif (isset($_SESSION['lang']))
 		$lg = $_SESSION['lang'];
+	else
+		$lg = getBrowserClientLanguage();
 
 	// 2009-02-21 (jhcaiced) Fix some languages from two to three character code
 	if ($lg == 'es') { $lg = 'spa'; }
