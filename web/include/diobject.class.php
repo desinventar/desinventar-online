@@ -12,7 +12,8 @@ class DIObject {
 	var $sPermPrefix = 'OBJECT';
 	var $sFieldKeyDef = '';
 	var $sFieldDef = '';
-	
+
+	var $oOldField;	
 	var $oField;
 	var $oFieldType;
 	var $conn = null;
@@ -244,13 +245,18 @@ class DIObject {
 					$oItem = split('/', $sValue);
 					$sFieldName = $oItem[0];
 					$sFieldType = $oItem[1];
-					$this->set($sFieldName, $row[$sFieldName]);
+					if (array_key_exists($sFieldName, $row)) {
+						$this->set($sFieldName, $row[$sFieldName]);
+					} else {
+						$this->set($sFieldName, '');
+					}
 				}
 				$iReturn = ERR_NO_ERROR;
 			} // foreach
 		} catch (Exception $e) {
 			showErrorMsg($e->getMessage);
 		}
+		$this->oOldField = $this->oField;
 		return $iReturn;
 	} // function load
 	
@@ -319,6 +325,9 @@ class DIObject {
 			} catch (PDOException $e) {
 				showErrorMsg("Error " . $e->getMessage());
 			}
+		}
+		if ($iReturn > 0) {
+			$this->oOldField = $this->oField;
 		}
 		return $iReturn;
 	} // function
