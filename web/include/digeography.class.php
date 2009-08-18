@@ -12,7 +12,8 @@ class DIGeography extends DIObject {
 		                      "LangIsoCode/STRING";
 		$this->sFieldDef    = "RegionId/STRING," .
 		                      "GeographyCode/STRING," .
-		                      "GeographyName/STRING," .  
+		                      "GeographyName/STRING," .
+		                      "GeographyFQName/STRING," . 
 		                      "GeographyLevel/INTEGER," .
 		                      "GeographyActive/BOOLEAN," .
 		                      "RecordCreation/DATETIME," .
@@ -102,6 +103,39 @@ class DIGeography extends DIObject {
 		return $iReturn;
 	}
 	
+	public function buildGeographyFQName() {
+		$FQName = $this->get('GeographyName');
+		$GeographyLevel = $this->get('GeographyLevel');
+		if ($GeographyLevel > 0) {
+			$ParentId = substr($this->get('GeographyId'), 0, $GeographyLevel*5);
+			$g = new DIGeography($this->session, $ParentId);
+			$FQName = $g->get('GeographyFQName') . '/' . $FQName;
+		}
+		return $FQName;
+	}
+	
+	public function saveGeographyFQName() {
+		$this->set('GeographyFQName', $this->buildGeographyFQName());
+		$query = "UPDATE Geography SET GeographyFQName=" . '"' . $this->get('GeographyFQName') . '"' . " WHERE GeographyId='" . $this->get('GeographyId') . "'";
+		$this->q->dreg->query($query);
+		$query = "SELECT * FROM Geography WHERE GeographyId LIKE '" . $this->get('GeographyId') . "%' AND GeographyLevel =" . ((int)$this->get('GeographyLevel') + 1) . " ORDER BY GeographyLevel,GeographyId;";
+		foreach($this->q->dreg->query($query) as $row) {
+			$g = new DIGeography($this->session, $row['GeographyId']);
+			$g->saveGeographyFQName();
+		} //foreach
+	} //function
+
+	public function update($withValidate = true) {
+		$iReturn = ERR_NO_ERROR;
+		if ($iReturn > 0) {
+			// Update goegraphy children data if needed...
+			if ($this->oOldField['GeographyName'] != $this->oField['GeographyName']) {
+				$this->saveGeographyFQName();
+			} //if
+		} //if
+		$iReturn = parent::update($withValidate);
+		return $iReturn;
+	}
 } //class
 
 </script>
