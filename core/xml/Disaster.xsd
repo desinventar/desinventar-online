@@ -18,7 +18,7 @@
 	<xs:element name="RecordStatus"         type="stringtype"  />
 	<xs:element name="RecordAuthor"         type="stringtype"  />
 	<xs:element name="RecordCreation"       type="datetype"    />
-	<xs:element name="RecordLastUpdate"     type="datetype"    />
+	<xs:element name="RecordUpdate"         type="datetype"    />
 	
 	<xs:element name="EventId"              type="stringtype"  />
 	<xs:element name="EventNotes"           type="stringtype"  />

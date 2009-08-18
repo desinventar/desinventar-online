@@ -43,7 +43,7 @@ function form2disaster($form, $icmd) {
 		$data['RecordCreation'] = $form['RecordCreation'];
 	}
 	$data['RecordAuthor'] = $form['RecordAuthor'];
-	$data['RecordLastUpdate'] = date("Y-m-d H:i:s");
+	$data['RecordUpdate'] = gmdate('c');
 	$c = "";
 	// Disaster date
 	$aaaa = $form[$c .'DisasterBeginTime'][0];
@@ -143,7 +143,7 @@ if (isset($_GET['u'])) {
 			$o = new DIDisaster($us, $data['DisasterId']);
 			$o->setFromArray($data);
 			$o->set('RecordCreation', gmdate('c'));
-			$o->set('RecordLastUpdate', gmdate('c'));
+			$o->set('RecordUpdate', gmdate('c'));
 			$i = $o->insert();
 			$t->assign ("statusmsg", "insertok");
 			if (!iserror($i)) {
@@ -166,7 +166,7 @@ if (isset($_GET['u'])) {
 			$o = new DIDisaster($us, $data['DisasterId']);
 			$o->load();
 			$o->setFromArray($data);
-			$o->set('RecordLastUpdate', gmdate('c'));
+			$o->set('RecordUpdate', gmdate('c'));
 			$i = $o->update();
 			$t->assign ("statusmsg", "updateok");
 			if (!iserror($i)) {

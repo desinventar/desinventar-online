@@ -787,7 +787,7 @@
                 <option value="V.EventName, D.DisasterBeginTime, G.GeographyName">{-#dedg#-}</option>
                 <option value="D.DisasterSerial">{-#dserial#-}</option>
                 <option value="D.RecordCreation">{-#dcreation#-}</option>
-                <option value="D.RecordLastUpdate">{-#dlastupd#-}</option>
+                <option value="D.RecordUpdate">{-#dlastupd#-}</option>
               </select>
               <input type="hidden" id="_D+FieldH" name="_D+Field" value="">
               <input type="hidden" id="_D+cmd" name="_D+cmd" value="result">
@@ -1684,7 +1684,7 @@
 		    <option value="DisasterBeginTime = '' ">{-$dis.DisasterBeginTime[0]-}</option>
 			<option value="RecordAuthor = '' ">{-$rc2.RecordAuthor[0]-}</option>
 			<option value="RecordCreation = '' ">{-$rc2.RecordCreation[0]-}</option>
-			<option value="RecordUpdate = '' ">{-$rc2.RecordLastUpdate[0]-}</option>
+			<option value="RecordUpdate = '' ">{-$rc2.RecordUpdate[0]-}</option>
 {-foreach name=ef1 key=key item=item from=$ef1-}
 			<option value="{-$key-} = ">{-$item[0]-}</option>
 {-/foreach-}

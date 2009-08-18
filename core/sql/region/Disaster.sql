@@ -23,7 +23,7 @@ CREATE TABLE empty_Disaster (
 	RecordStatus            VARCHAR(20),
 	RecordAuthor            VARCHAR(50),
 	RecordCreation          DATETIME,
-	RecordLastUpdate        DATETIME,
+	RecordUpdate            DATETIME,
 
 	# Event Related Fields
 	EventId                 VARCHAR(50),
