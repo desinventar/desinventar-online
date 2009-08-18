@@ -32,7 +32,6 @@ function form2disaster($form, $icmd) {
 			}
 		} //if
 	} //foreach
-	
 	if ($icmd == CMD_NEW) {
 		// New Disaster
 		$data['DisasterId'] = uuid();
@@ -101,38 +100,39 @@ if (isset($_GET['u'])) {
 	if (isset($_GET['cmd'])) {
 		// Commands in GET mode: lists, checkings..
 		switch ($_GET['cmd']) {
-		case "list":
-			$lev = $us->q->getNextLev($_GET['GeographyId']);
-			$t->assign ("lev", $lev);
-			$t->assign ("levmax", $us->q->getMaxGeoLev());
-			$t->assign ("levname", $us->q->loadGeoLevById($lev));
-			$t->assign ("geol", $us->q->loadGeoChilds($_GET['GeographyId']));
-			$t->assign ("opc", isset($_GET['opc']) ? $_GET['opc'] : '');
-			$t->assign ("ctl_geolist", true);
-		break;
-		case "chkdiserial":
-			$chk = $us->q->isvalidObjectName($_GET['DisasterId'], $_GET['DisasterSerial'], DI_DISASTER);
-			if ($chk && !empty($_GET['DisasterSerial']))
-				echo "FREE";
-			else
-				echo "BUSY";
-		break;
-		case "chklocked":
-			// check if datacard is locked by some user
-			$r = $us->isDatacardLocked($_GET['DisasterId']);
-			if ($r == '') {
-				// reserve datacard
-				$us->lockDatacard($_GET['DisasterId']);
-				echo "RESERVED";
-			} else {
-				echo "BLOCKED";
-			}
-		break;
-		case "chkrelease":
-			$us->releaseDatacard($_GET['DisasterId']);
-		break;
-		default: break;
+			case "list":
+				$lev = $us->q->getNextLev($_GET['GeographyId']);
+				$t->assign ("lev", $lev);
+				$t->assign ("levmax", $us->q->getMaxGeoLev());
+				$t->assign ("levname", $us->q->loadGeoLevById($lev));
+				$t->assign ("geol", $us->q->loadGeoChilds($_GET['GeographyId']));
+				$t->assign ("opc", isset($_GET['opc']) ? $_GET['opc'] : '');
+				$t->assign ("ctl_geolist", true);
+			break;
+			case "getNextSerial":
+				$ser = $us->q->getNextDisasterSerial($_GET['exp']);
+				echo $ser;
+			break;
+			case "chklocked":
+				// check if datacard is locked by some user
+				$r = $us->isDatacardLocked($_GET['DisasterId']);
+				if ($r == '') {
+					// reserve datacard
+					$us->lockDatacard($_GET['DisasterId']);
+					echo "RESERVED";
+				} else {
+					echo "BLOCKED";
+				}
+			break;
+			case "chkrelease":
+				$us->releaseDatacard($_GET['DisasterId']);
+			break;
+			default: break;
 		}
+	} elseif (isset($_GET['DisasterId']) && !empty($_GET['DisasterId'])) {
+		$dcard = $us->q->hash2json($us->q->getDisasterById($_GET['DisasterId']));
+		if (isset($dcard[0]))
+			echo $dcard[0];
 	} elseif (isset($_POST['_CMD'])) {
 		// Commands in POST mode: insert, update, search.. datacards.. 
 		$us->releaseDatacard($_POST['DisasterId']);
@@ -188,15 +188,7 @@ if (isset($_GET['u'])) {
 		$t->assign ("ctl_result", true);
 		// End _CMD Block
 	} else {
-		if (isset($_GET['DisasterId']) && !empty($_GET['DisasterId'])) {
-			$dcard = $us->q->hash2json($us->q->getDisasterById($_GET['DisasterId']));
-			if (isset($dcard[0]))
-				echo $dcard[0];
-			exit();
-		}
-		if ($us->UserId == '' || $us->getUserRole($sRegionId == '')) {
-			
-		}
+		//if ($us->UserId == '' || $us->getUserRole($sRegionId == '')) {}
 		// Default view of DesInventar
 		$t->assign ("usr", $us->UserId);
 		$t->assign ("regname", $us->q->getDBInfoValue('RegionLabel'));

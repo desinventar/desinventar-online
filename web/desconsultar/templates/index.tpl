@@ -5,14 +5,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
-  <title>{-#ttitle#-} -{-$regname-}-</title>
+  <title>{-#ttitle#-} {-$regname-}</title>
   <link rel="stylesheet" href="../css/desinventar.css" type="text/css">
   <link rel="stylesheet" href="../css/checktree.css" type="text/css">
   <link rel="stylesheet" href="../css/accordion.css" TYPE="text/css">
   <script type="text/javascript" src="../include/prototype.js"></script>
-  <script type="text/javascript" src="../include/diadmin.js.php"></script>
+  <script type="text/javascript" src="../include/diadmin.js"></script>
   <script type="text/javascript" src="../include/checktree.js"></script>
-<!--  <script type="text/javascript" src="../include/wd.js"></script>-->
+  <script type="text/javascript" src="../include/wd.js"></script>
   <script type="text/javascript" src="../include/accordion.js"></script>
   <!-- ExtJS 2.0.1 -->
   <link rel="stylesheet" type="text/css" href="/extJS/resources/css/ext-all.css"/>
@@ -30,7 +30,15 @@
       var mfile = new Ext.menu.Menu({
         id: 'fileMenu',
         items: [
-            {  text: '{-#mlang#-}',      handler: onMenuItem  },
+            {  text: '{-#mlang#-}', 
+               menu: {
+			     id: 'langSubMenu'/*,
+				 items: [
+				   {text: 'Español', handler: onMenuItem},
+				   {text: 'English', handler: onMenuItem},
+				   {text: 'Portuguese', handler: onMenuItem}]*/
+				}
+			}, '-',
             {  text: '{-#mprint#-}',     handler: onMenuItem  },
             {  text: '{-#mquit#-}',      handler: onMenuItem  }]
       });
@@ -132,7 +140,7 @@
           }, new Ext.Panel({
             region: 'center',
             id: 'centerm',
-//            title: '{-#tsubtitle2#-}',
+			//title: '{-#tsubtitle2#-}',
             contentEl: 'container',
 			autoScroll: true
           }),{
@@ -149,7 +157,8 @@
             region: 'east',
 			id: 'eastm',
 			split: true,
-			width: 760,
+			width: 700,
+            //title: '[<a href="javascript:void(0);" onClick="e=Ext.getCmp(\'eastm\'); e.collapse();">X</a>]',
 			collapseMode: 'mini',
 			autoScroll: true,
 			margins: '0 0 0 5',
@@ -166,7 +175,7 @@
       var datw;
       var datb = Ext.get('dat-btn');
       datb.on('click', function(){
-        if(!datw){  
+        if(!datw){
           datw = new Ext.Window({
             el:'dat-win',  layout:'fit',  width:600, height:400, 
             closeAction:'hide', plain: true, animCollapse: false,
@@ -425,13 +434,6 @@
        	}
       }
     }
-    /* selection map functions
-    function showMap() {
-    	$('smap').style.visibility = 'visible';
-    }
-    function hideMap() {
-    	$('smap').style.visibility = 'hidden';
-    }*/
     function setSelMap(code, gid, opc) {
     	if (opc)
     		setgeo(gid);
@@ -558,17 +560,25 @@
     	$('DC').submit();
     	return true;
     }
-    //var g{-$reg-} = new CheckTree('g{-$reg-}');
-    // Find all Effects fields enable by saved query
-    window.onload = function() {
-      // select optimal height in results frame
-      //varhgt = screen.height * 360 / 600;
-      //$('dcr').style = "height:"+ hgt + "px;"
+	/* selection map functions
+	function showMap() {
+		$('smap').style.visibility = 'visible';
+	}
+	function hideMap() {
+		$('smap').style.visibility = 'hidden';
+	}
+	var g{-$reg-} = new CheckTree('g{-$reg-}');*/
+	// Find all Effects fields enable by saved query
+	window.onload = function() {
+		$('dcf').src="../desinventar/?r={-$reg-}";
+		// select optimal height in results frame
+		//varhgt = screen.height * 360 / 600;
+		//$('dcr').style = "height:"+ hgt + "px;"
 {-foreach name=ef1 key=k item=i from=$ef1-}
 {-assign var="ff" value=D_$k-}
 {-if $qd.$ff[0] != ''-}
-      enadisEff('{-$k-}', true);
-      showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
+		enadisEff('{-$k-}', true);
+		showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
 {-/if-}
 {-/foreach-}
 {-foreach name=sec key=k item=i from=$sec-}
@@ -577,26 +587,26 @@
 {-foreach name=sc2 key=k2 item=i2 from=$i[3]-}
 {-assign var="ff" value=D_$k2-}
 {-if $qd.$ff[0] != ''-}
-      enadisEff('{-$k2-}', true);
-      showeff('{-$qd.$ff[0]-}', 'x{-$k2-}', 'y{-$k2-}');
+		enadisEff('{-$k2-}', true);
+		showeff('{-$qd.$ff[0]-}', 'x{-$k2-}', 'y{-$k2-}');
 {-/if-}
 {-/foreach-}
-      enadisEff('{-$k-}', true);
+		enadisEff('{-$k-}', true);
 {-/if-}
 {-/foreach-}
 {-foreach name=ef3 key=k item=i from=$ef3-}
 {-assign var="ff" value=D_$k-}
 {-if $qd.$ff[0] != ''-}
-      enadisEff('{-$k-}', true);
-      showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
+		enadisEff('{-$k-}', true);
+		showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
 {-/if-}
 {-/foreach-}
 {-foreach name=geol key=k item=i from=$geol-}
 {-if $i[3]-}
-      setSelMap('{-$i[0]-}', '{-$k-}', true);
+		setSelMap('{-$i[0]-}', '{-$k-}', true);
 {-/if-}
 {-/foreach-}
-    }
+	}
   </script>
   <!--
    <link rel="stylesheet" href="../css/tabquery.css" TYPE="text/css">
@@ -605,57 +615,58 @@
   <!-- MAP extra -->
   <script type="text/javascript" src="../include/palette.js"></script>
   <script type="text/javascript">
-    function addRowToTable() {
-      var tbl = $('tbl_range');
-      var lastRow = tbl.rows.length;
-      // if there's no header row in the table, then iteration = lastRow + 1
-      var iteration = lastRow;
-      var row = tbl.insertRow(lastRow);
-      var cellBeg = row.insertCell(0);
-      var textNode = document.createTextNode(iteration + 1);
-      cellBeg.appendChild(textNode);
-      // left cell
-      var cellLeft = row.insertCell(1);
-      var lim = document.createElement("input");
-      lim.setAttribute('type', 'text');
-      lim.setAttribute('size', '5');
-      lim.setAttribute('class', 'line');
-      lim.setAttribute('name', '_M+limit['+ iteration +']');
-      lim.setAttribute('id', '_M+limit['+ iteration +']');
-      lim.setAttribute('onBlur', "miv=parseInt($('_M+limit["+ iteration -1+"]').value)+1; $('_M+legend["+ iteration +"]').value='{-#mbetween#-} '+ miv +' - '+ this.value;");
-      cellLeft.appendChild(lim);
-      // center cell
-      var cellCenter = row.insertCell(2);
-      var leg = document.createElement('input');
-      leg.setAttribute('type', 'text');
-      leg.setAttribute('size', '20');
-      leg.setAttribute('class', 'line');
-      leg.setAttribute('name', '_M+legend['+ iteration +']');
-      leg.setAttribute('id', '_M+legend['+ iteration +']');
-      cellCenter.appendChild(leg);
-      // right cell
-      var cellRight = row.insertCell(3);
-      var ic = document.createElement('input');
-      ic.setAttribute('type', 'text');
-      ic.setAttribute('size', '3');
-      ic.setAttribute('class', 'line');
-      ic.setAttribute('id', '_M+ic['+ iteration +']');
-      ic.setAttribute('style', 'background:#00ff00;');
-      ic.setAttribute('onClick', "showColorGrid2('_M+color["+ iteration +"]','_M+ic["+ iteration +"]');");
-      cellRight.appendChild(ic);
-      var col = document.createElement('input');
-      col.setAttribute('type', 'hidden');
-      col.setAttribute('name', '_M+color['+ iteration +']');
-      col.setAttribute('id', '_M+color['+ iteration +']');
-      col.setAttribute('value', '00ff00;');
-      cellRight.appendChild(col);
-    }
-    // remove from table
-    function removeRowFromTable() {
-      var tbl = $('tbl_range');
-      var lastRow = tbl.rows.length;
-      if (lastRow > 2) tbl.deleteRow(lastRow - 1);
-    }
+	function addRowToTable() {
+		var tbl = $('tbl_range');
+		var lastRow = tbl.rows.length;
+		// if there's no header row in the table, then iteration = lastRow + 1
+		var iteration = lastRow;
+		var row = tbl.insertRow(lastRow);
+		var cellBeg = row.insertCell(0);
+		var textNode = document.createTextNode(iteration + 1);
+		cellBeg.appendChild(textNode);
+		// left cell
+		var cellLeft = row.insertCell(1);
+		var lim = document.createElement("input");
+		lim.setAttribute('type', 'text');
+		lim.setAttribute('size', '5');
+		lim.setAttribute('class', 'line');
+		lim.setAttribute('name', '_M+limit['+ iteration +']');
+		lim.setAttribute('id', '_M+limit['+ iteration +']');
+		lim.setAttribute('onBlur', "miv=parseInt($('_M+limit["+ iteration -1+"]').value)+1; $('_M+legend["+ iteration +"]').value='{-#mbetween#-} '+ miv +' - '+ this.value;");
+		cellLeft.appendChild(lim);
+		// center cell
+		var cellCenter = row.insertCell(2);
+		var leg = document.createElement('input');
+		leg.setAttribute('type', 'text');
+		leg.setAttribute('size', '20');
+		leg.setAttribute('class', 'line');
+		leg.setAttribute('name', '_M+legend['+ iteration +']');
+		leg.setAttribute('id', '_M+legend['+ iteration +']');
+		cellCenter.appendChild(leg);
+		// right cell
+		var cellRight = row.insertCell(3);
+		var ic = document.createElement('input');
+		ic.setAttribute('type', 'text');
+		ic.setAttribute('size', '3');
+		ic.setAttribute('class', 'line');
+		ic.setAttribute('id', '_M+ic['+ iteration +']');
+		ic.setAttribute('style', 'background:#00ff00;');
+		ic.setAttribute('onClick', "showColorGrid2('_M+color["+ iteration +"]','_M+ic["+ iteration +"]');");
+		cellRight.appendChild(ic);
+		var col = document.createElement('input');
+		col.setAttribute('type', 'hidden');
+		col.setAttribute('name', '_M+color['+ iteration +']');
+		col.setAttribute('id', '_M+color['+ iteration +']');
+		col.setAttribute('value', '00ff00;');
+		cellRight.appendChild(col);
+	}
+	// remove from table
+	function removeRowFromTable() {
+		var tbl = $('tbl_range');
+		var lastRow = tbl.rows.length;
+		if (lastRow > 2)
+			tbl.deleteRow(lastRow - 1);
+	}
     function setTotalize(lnow, lnext) {
       var sour = $(lnow);
       var dest = $(lnext);
@@ -1250,25 +1261,25 @@
               <br>
               <table>
                 <tr valign="top">
-                  <td><b>{-$std.StatisticFirstlev[0]-}</b><br>
+                  <td><b>{-$std.StadisticFirstlev[0]-}</b><br>
                    <select id="_S+Firstlev" name="_S+Firstlev" size="8" style="width:180px;"
                        onChange="setTotalize('_S+Firstlev', '_S+Secondlev'); setTotalize('_S+Secondlev', '_S+Thirdlev');">
-  {-foreach name=glev key=k item=i from=$glev-}
+{-foreach name=glev key=k item=i from=$glev-}
                     <option value="{-$k-}|D.DisasterGeographyId">
-                    {-assign var="ln" value=StatisticDisasterGeographyId_$k-}{-$std.$ln[0]-}</option>
-  {-/foreach-}
-                    <option value="|D.EventId">{-$std.StatisticEventName[0]-}</option>
-                    <option value="YEAR|D.DisasterBeginTime">{-$std.StatisticDisasterBeginTime_YEAR[0]-}</option>
-                    <option value="MONTH|D.DisasterBeginTime">{-$std.StatisticDisasterBeginTime_MONTH[0]-}</option>
-                    <option value="|D.CauseId">{-$std.StatisticCauseName[0]-}</option>
+                    {-assign var="ln" value=StadisticDisasterGeographyId_$k-}{-$std.$ln[0]-}</option>
+{-/foreach-}
+                    <option value="|D.EventId">{-$std.StadisticEventName[0]-}</option>
+                    <option value="YEAR|D.DisasterBeginTime">{-$std.StadisticDisasterBeginTime_YEAR[0]-}</option>
+                    <option value="MONTH|D.DisasterBeginTime">{-$std.StadisticDisasterBeginTime_MONTH[0]-}</option>
+                    <option value="|D.CauseId">{-$std.StadisticCauseName[0]-}</option>
                    </select>
                   </td>
-                  <td><b>{-$std.StatisticSecondlev[0]-}</b><br>
+                  <td><b>{-$std.StadisticSecondlev[0]-}</b><br>
                    <select id="_S+Secondlev" name="_S+Secondlev" size="8" 
                        onChange="setTotalize('_S+Secondlev', '_S+Thirdlev');" style="width:180px;">
                    </select>
                   </td>
-                  <td><b>{-$std.StatisticThirdlev[0]-}</b><br>
+                  <td><b>{-$std.StadisticThirdlev[0]-}</b><br>
                    <select id="_S+Thirdlev" name="_S+Thirdlev" size="8" style="width:180px;">
                    </select>
                   </td>
@@ -1280,15 +1291,15 @@
                   <td><b>{-#savailfields#-}</b><br>
                    <select id="_S+sel1[]" size="6" style="width:220px;" multiple>
 <!--                    <option value="D.{-$key-}|=|-1">{-#tauxhave#-} {-$item[1]-}</option>-->
-  {-foreach name=sst1 key=key item=item from=$sst1-}
+{-foreach name=sst1 key=key item=item from=$sst1-}
                     <option value="D.{-$item[0]-}">{-$item[1]-}</option>
-  {-/foreach-}
+{-/foreach-}
  										<option disabled>---</option>
- {-foreach name=eef key=key item=item from=$exteffel-}
-  {-if $item[2] == "INTEGER" || $item[2] == "DOUBLE"-}
+{-foreach name=eef key=key item=item from=$exteffel-}
+ {-if $item[2] == "INTEGER" || $item[2] == "DOUBLE"-}
                     <option value="E.{-$key-}|>|-1">{-$item[0]-}</option>
-  {-/if-}
- {-/foreach-}
+ {-/if-}
+{-/foreach-}
                    </select>
                    <br>
                    <input type="button" value="{-#balls#-}" onclick="selectall('_S+sel1[]');" class="line">
@@ -1324,7 +1335,7 @@
 <!--    END STATISTIC SECTION  -->
        </td>
        <td>
-		 <div id="qry-win" class="x-hidden">
+		<div id="qry-win" class="x-hidden">
           <div class="x-window-header">{-#mopenquery#-}</div>
           <div id="qry-cfg" style="text-align:center;">
 		     <form id="openquery" enctype="multipart/form-data" action="index.php" method="POST">
@@ -1333,12 +1344,12 @@
 			 </form>
 		  </div>
         </div>
-         <span id="frmwait"></span>
-         <input id="DCRes" type="hidden" value="">
-         <input type="button" class="line" style="width:20px; height:20px; background-image:url(../images/saveicon.png);"
-             onClick="if($('DCRes').value != '') saveRes('export');" ext:qtip="{-#bsavemsg#-}">&nbsp;&nbsp;
-         <input type="button" class="line" style="width:20px; height:20px; background-image:url(../images/printicon.png);"
-             onClick="frames['dcr'].focus(); frames['dcr'].print();" ext:qtip="{-#bprintmsg#-}">&nbsp;&nbsp;
+        <span id="frmwait"></span>
+        <input id="DCRes" type="hidden" value="">
+        <input type="button" class="line" style="width:20px; height:20px; background-image:url(../images/saveicon.png);"
+            onClick="if($('DCRes').value != '') saveRes('export');" ext:qtip="{-#bsavemsg#-}">&nbsp;&nbsp;
+        <input type="button" class="line" style="width:20px; height:20px; background-image:url(../images/printicon.png);"
+            onClick="frames['dcr'].focus(); frames['dcr'].print();" ext:qtip="{-#bprintmsg#-}">&nbsp;&nbsp;
        </td>
      </tr>
    </table>
@@ -1348,7 +1359,7 @@
   <iframe name="dcr" id="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="../region.php?r={-$reg-}&cmd=info"></iframe>
  </div>
  <div id="east">
-  <iframe name="dcf" id="dcf" frameborder="0" scrolling="auto" height="610px" width="100%" src="../desinventar/?r={-$reg-}"></iframe>
+  <iframe name="dcf" id="dcf" frameborder="0" scrolling="auto" height="610px" width="100%"></iframe>
  </div>
 
 <!--

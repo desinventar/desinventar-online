@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="../css/desinput.css" type="text/css"/>
 	<script type="text/javascript" src="../include/prototype.js"></script>
 	<script type="text/javascript" src="../include/combo-box.js"></script>
-	<script type="text/javascript" src="../include/diadmin.js.php"></script>
+	<script type="text/javascript" src="../include/diadmin.js"></script>
 	<!--	<link rel="stylesheet" href="../css/tabeffect.css" type="text/css">
 	<script type="text/javascript" src="../include/tabber.js"></script> -->
 	<script type="text/javascript" language="javascript">
@@ -26,6 +26,15 @@
 			var d = $('_DIDesc');
 			d.style.backgroundColor = clr;
 			d.value = tip;
+		}
+		function setNextSerial(year) {
+			var lsAjax = new Ajax.Request('index.php', {
+				method: 'get', parameters: 'r={-$reg-}&cmd=getNextSerial&exp='+ year,
+				onSuccess: function(request) {
+					var res = request.responseText;
+					$('DisasterSerial').value = year +'-'+ res;
+				}
+			} );
 		}
 		// Display Geography in form and search; k=geoid, l=0, desc='', opc=''
 		function setgeo(k, l, desc, opc) {
@@ -50,45 +59,6 @@
 				$(lev).innerHTML = '';
 			}
 		}
-		/*
-		 * Submits the form below through AJAX and then calls the ajax_response function)
-		  * @param   object  disasid   Disaster ID
-		  *
-		function findByDIId(data) {
-				var qres = $('qresults');
-				qres.cursor = "wait";
-				var submitTo = '../desinventar/?data=' + data + '&action=findDIId';
-				http('POST', submitTo, setDICard, document.DICard);
-//		$('_UpdBut').className = "btn";
-{-if $ro == ""-}
-//		$('_UpdBut').disabled = false;
-{-/if-}
-//		uploadMsg("{-#tmsgeditcard#-}");
-				qres.cursor = "default";
-		}
-		 *	Called when ajax data has been retrieved
-			* @param   object  data   Javascript (JSON) data object received
-			*                         through ajax call
-			*
-		function setDICard(data) {
-			var elems = parent.document.DICard.elements;
-			for  (var i=0; i < elems.length; i++) {
-				myname = elems[i].name + "";
-				if (myname.substring(0,1) != "_") {
-					if (data != null) {
-						eval("value = data." + elems[i].name + ";");
-						if (myname.substring(0,19) == "DisasterGeographyId") {
-							var nextlv = parseInt(myname.substring(19,20)) + 1;
-//						getGeoItems(value, nextlv, false);
-//						alert("Val: " + value + " lev: " + nextlv + " elem: " + elems[i].value);
-						}
-						setElementValue(elems[i], value);
-					}
-					else
-						setElementValue(elems[i], '');
-				}
-			}
-		}*/
 		function setadmingeo(k, l) {
 			var v = k.split("|");
 			mod = 'geo';
@@ -192,29 +162,17 @@
 				break;
 				case "{-#bsave#-}":
 					var fl = new Array('DisasterSerial', 'DisasterBeginTime[0]', 'DisasterSource', 
-												'geolev0', 'EventId', 'CauseId', 'RecordStatus');
+										'geolev0', 'EventId', 'CauseId', 'RecordStatus');
 					if (checkForm(fl, "{-#errmsgfrm#-}")) {
-						var lsAjax = new Ajax.Updater('distatusmsg', '', {
-							method: 'get', parameters: 'r={-$reg-}&cmd=chkdiserial&DisasterSerial='+ 
-								$('DisasterSerial').value + '&DisasterId='+ $('DisasterId').value,
-							onComplete: function(request) {
-								uploadMsg('');
-								var res = request.responseText;
-								// disabled check serial exists
-								//if (res.substr(0,4) == "FREE") {
-									$('DICard').submit();
-									DisableEnableForm($('DICard'), true);
-									$('cardnew').enable();
-									$('cardsav').disable();
-									$('cardupd').disable();
-									$('cardcln').disable();
-									$('cardcan').disable();
-									$('cardfnd').enable();
-//								}
-//								else
-//									alert("{-#tdisererr#-}");
-							}
-						} );
+						uploadMsg('');
+						$('DICard').submit();
+						DisableEnableForm($('DICard'), true);
+						$('cardnew').enable();
+						$('cardsav').disable();
+						$('cardupd').disable();
+						$('cardcln').disable();
+						$('cardcan').disable();
+						$('cardfnd').enable();
 					}
 				break;
 				case "{-#bclean#-}":
@@ -296,17 +254,17 @@
 									<input id="DisasterBeginTime[0]" name="DisasterBeginTime[0]" style="width:36px;" class="line"
 										tabindex="1" type="text" maxlength="4" onFocus="showtip('{-$dis.DisasterBeginTime[2]-}', '#d4baf6')"
 										onkeypress="return blockChars(event, this.value, 'integer:4');" 
-										onBlur="if($('DisasterSerial').value == '') $('DisasterSerial').value = this.value + '-';">
+										onBlur="setNextSerial(this.value);">
 									<input id="DisasterBeginTime[1]" name="DisasterBeginTime[1]" style="width:18px;" class="line"
 										tabindex="2" type="text" maxlength="2" onFocus="showtip('{-$dis.DisasterBeginTime[2]-}', '#d4baf6')"
 										onkeypress="return blockChars(event, this.value, 'integer:2');" 
 										onBlur="if (parseInt($('DisasterBeginTime[1]').value,10) < 1 || 
-																parseInt($('DisasterBeginTime[1]').value,10) > 12 ) $('DisasterBeginTime[1]').value = '';">
+													parseInt($('DisasterBeginTime[1]').value,10) > 12 ) $('DisasterBeginTime[1]').value = '';">
 									<input id="DisasterBeginTime[2]" name="DisasterBeginTime[2]" style="width:18px;" class="line"
 										tabindex="3" type="text" maxlength="2" onFocus="showtip('{-$dis.DisasterBeginTime[2]-}', '#d4baf6')"
 										onkeypress="return blockChars(event, this.value, 'integer:2');"
 										onBlur="if (parseInt($('DisasterBeginTime[2]').value,10) < 1 || 
-																parseInt($('DisasterBeginTime[2]').value,10) > 31 ) $('DisasterBeginTime[2]').value = '';">
+													parseInt($('DisasterBeginTime[2]').value,10) > 31 ) $('DisasterBeginTime[2]').value = '';">
 								</td>
 								<td ext:qtip="{-$dis.DisasterSource[1]-}">
 									{-$dis.DisasterSource[0]-}<b style="color:darkred;">*</b><br>

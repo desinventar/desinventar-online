@@ -96,12 +96,8 @@ else {
   else
     $t->assign ("ctl_user", false);
   // Set selection map
-  $dinf = $q->getDBInfo();
-  $t->assign ("regname", $dinf['RegionLabel']);
-  $t->assign ("x1", $dinf['GeoLimitMinX']);
-  $t->assign ("x2", $dinf['GeoLimitMaxX']);
-  $t->assign ("y1", $dinf['GeoLimitMinY']);
-  $t->assign ("y2", $dinf['GeoLimitMaxY']);
+  $regname = $q->getDBInfoValue('RegionLabel');
+  $t->assign ("regname", $regname);
 //  if (testMap(VAR_DIR . "/". $reg . "/". $data))
 	$t->assign ("ctl_showmap", true);
   // get range of dates
@@ -217,13 +213,11 @@ else {
 	$t->assign ("sst1", $sst1);
 	$t->assign ("sst", $sst);
 	$st = array();
-	
 	foreach ($glev as $k=>$i) {
-		$st["StatisticDisasterGeographyId_". $k] = array($i[0], $i[1]);
+		$st["StadisticDisasterGeographyId_". $k] = array($i[0], $i[1]);
 	}
-	
 	$std = array();
-	$std = array_merge($std, $q->queryLabelsFromGroup('Statistic', $lg));
+	$std = array_merge($std, $q->queryLabelsFromGroup('Stadistic', $lg));
 	$std = array_merge($std, $st);
 	$t->assign ("std", $std);
 }

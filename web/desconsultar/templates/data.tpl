@@ -8,10 +8,9 @@
 	<title>{-#ttitle#-} -{-$regname-}-</title>
 	<link rel="stylesheet" href="../css/desinventar.css" type="text/css"/>
 	<script type="text/javascript" src="../include/prototype.js"></script>
-	<script type="text/javascript" src="../include/diadmin.js.php"></script>
+	<script type="text/javascript" src="../include/diadmin.js"></script>
     <script type="text/javascript">
 	function setDIForm(did) {
-		//var dcf = parent.document.getElementById('dcf');
 		parent.e.expand();
 		setDICardfromId('{-$reg-}', did, 'DATA');
 	}

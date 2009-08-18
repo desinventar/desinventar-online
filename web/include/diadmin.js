@@ -1,8 +1,3 @@
-<script language="php">
-/* Adicionar autenticacion en el codigo javascript para que 
-solo se muestre a los roles correspondientes.. */
-</script>
-<!--
 	var mod = "";
 	var opt = "";
 	var reg = "";
@@ -17,16 +12,16 @@ solo se muestre a los roles correspondientes.. */
 	
 	function updateList(div, url, pars) {
 		var lsAjax = new Ajax.Updater( div, url, {
-    			method: 'get', parameters: pars,
-    			onLoading: function(request) { 
-   			    //$(div).style.cursor = "wait";
-   			    if (mod == "")	$(div).innerHTML = waiting;
-   			    //else  uploadMsg(waiting);
+			method: 'get', parameters: pars,
+			onLoading: function(request) {
+				//$(div).style.cursor = "wait";
+				if (mod == "")	$(div).innerHTML = waiting;
+				//else  uploadMsg(waiting);
 			},
-    			onComplete: function(request)	{ 
-    			   //$(div).style.cursor = "";
-		             if (mod == "")  $('div').innerHTML = "";
-			   //else  uploadMsg('');
+			onComplete: function(request)	{
+				//$(div).style.cursor = "";
+				if (mod == "")  $('div').innerHTML = "";
+				//else  uploadMsg('');
 			}
 		} );
 	}
@@ -120,9 +115,9 @@ solo se muestre a los roles correspondientes.. */
 			else
 				$('aCauseActive').checked = false;
 			if (is_pred == "1") {
-			  $('aCauseDesc').disabled = true;
-			  $('aCauseDesc2').value = desc;
-      }
+				$('aCauseDesc').disabled = true;
+				$('aCauseDesc2').value = desc;
+			}
 			else
 				$('aCauseDesc').disabled = false;
 			$('aCausePreDefined').value = is_pred;
@@ -224,7 +219,6 @@ solo se muestre a los roles correspondientes.. */
 	}
 
 	/*** MANAGE MODULES WINDOWS  ***/
-
 	var diwin = '';
 	var dcwin = '';
 	var docw = '';
@@ -260,21 +254,21 @@ solo se muestre a los roles correspondientes.. */
 	function endWin(name) {
 		switch (name) {
 			case 'desinventar':
-				  if (!diwin.closed && diwin.location)
-					  diwin.close();
+				if (!diwin.closed && diwin.location)
+					diwin.close();
 			break;
 			case 'desconsultar':
 				if (!dcwin.closed && dcwin.location) {
-					  endWin("data");
-					  endWin("thematicmap");
-					  endWin("statistic");
-					  endWin("graphic");
-					  dcwin.close();
+					/*endWin("data");
+					endWin("thematicmap");
+					endWin("statistic");
+					endWin("graphic");*/
+					dcwin.close();
 				}
 			break;
 			case 'doc':
-				  if (!docw.closed && docw.location)
-					  docw.close();
+				if (!docw.closed && docw.location)
+					docw.close();
 			break;
 			default: break;
 		}
@@ -295,7 +289,6 @@ solo se muestre a los roles correspondientes.. */
 	}
 
 	/******* MANAGE FORMS ********/
-
 	function setfocus(a_field_id) {
 		$(a_field_id).focus();
 	}
@@ -329,33 +322,7 @@ solo se muestre a los roles correspondientes.. */
 		return status;
 	}
 
-	function setElementValue(formElement, value) {
-		switch(formElement.type) {
-			case 'undefined': return;
-			case 'radio': formElement.checked = value; break;
-			case 'checkbox': formElement.checked = value; break;
-			case 'select-one': 
-				var unk = true;
-				for (var w=0; w < formElement.length; w++) {
-					if (formElement.options[w].value == value) {
-						formElement.selectedIndex = w ;
-						unk = false;
-					}
-				}
-				if (unk)
-					formElement[3]=new Option(value, value, false, true);
-			break;
-			case 'select-multiple':
-				for(var x=0; x < formElement.length; x++) 
-				formElement[x].selected = value[x];
-			break;
-			default: 
-				formElement.value = value; 
-			break;
-		}
-	}
-
-	function getForm(fobj) { 
+	function getForm(fobj) {
 		var str = '';
 		var ft = ''; 
 		var fv = ''; 
@@ -432,7 +399,6 @@ solo se muestre a los roles correspondientes.. */
 	  return (val && ((chk && len) || spckey));
 	}
 
-
 	function onlyText(e) {
 		var keynum;
 		var keychar;
@@ -463,6 +429,32 @@ solo se muestre a los roles correspondientes.. */
 	}
 
 	/**** SET DATACARD FORM  *****/
+	function setElementValue(formElement, value) {
+		switch(formElement.type) {
+			case 'undefined': return;
+			case 'radio': formElement.checked = value; break;
+			case 'checkbox': formElement.checked = value; break;
+			case 'select-one': 
+				var unk = true;
+				for (var w=0; w < formElement.length; w++) {
+					if (formElement.options[w].value == value) {
+						formElement.selectedIndex = w ;
+						unk = false;
+					}
+				}
+				if (unk)
+					formElement[3]=new Option(value, value, false, true);
+			break;
+			case 'select-multiple':
+				for(var x=0; x < formElement.length; x++)
+					formElement[x].selected = value[x];
+			break;
+			default: 
+				formElement.value = value; 
+			break;
+		}
+	}
+
 	function setDICardfromId(reg, did, src) {
 		var lsAjax = new Ajax.Request('../desinventar/index.php', {
 			method: 'get', parameters: 'r='+ reg +'&DisasterId='+ did,
@@ -475,11 +467,12 @@ solo se muestre a los roles correspondientes.. */
 	}
 	
 	function setDICard(reg, arr, src) {
+		var diform = null;
 		if (src == "DATA") {
-			var diform = top.dcf.document.getElementById('DICard');
+			diform = window.parent.frames['dcf'].document.getElementById('DICard');
 		}
 		else {
-			var diform = $('DICard');
+			diform = $('DICard');
 		}
 		var objElems = diform.elements; // DICard is DesInventar form..
 		for (i=0; i < objElems.length; i++) {
@@ -495,8 +488,8 @@ solo se muestre a los roles correspondientes.. */
 	
 	function getGeoItems(reg, geoid, l, lev, src) {
 		if (src == "DATA") {
-			div = top.dcf.document.getElementById('lev'+ l);
-			ele = top.dcf.document.getElementById('geolev'+ l);
+			div = window.parent.frames['dcf'].document.getElementById('lev'+ l);
+			ele = window.parent.frames['dcf'].document.getElementById('geolev'+ l);
 		}
 		else {
 			div = $('lev'+ l);
@@ -517,5 +510,3 @@ solo se muestre a los roles correspondientes.. */
 			} );
 		}
 	}
-
--->
