@@ -50,18 +50,18 @@
   <table width="930px" height="95%" class="col">
 	 <thead>
 	  <tr>
-	 	 <th class="header">{-#trow#-}</th>
+		 <th class="header">{-#trow#-}</th>
 	{-foreach name=sel key=key item=item from=$sel-}
  {-strip-}
-     <th class="header">
-     <a href="javascript:void(null)" onclick="mod='std'; updateList('lst_dis', 'statistic.php', 
+		 <th class="header">
+		  <a href="javascript:void(null)" onclick="mod='std'; updateList('lst_dis', 'statistic.php', 
    				'r={-$reg-}&page='+ $('pp').value +'&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}&ord={-$item-}&geo={-$geo-}');">
 {-if $item =="DisasterId_"-} {-#trepnum#-} {-elseif $item != "DisasterId"-} {-$dk.$item-} {-/if-}
-     </a>
-     </th>
+		  </a>
+		 </th>
  {-/strip-}
 	{-/foreach-}
-    </tr>
+      </tr>
     <tr>
      <th style="border: thin solid;">{-#ttotals#-}</th>
 	{-foreach name=sel key=key item=item from=$sel-}

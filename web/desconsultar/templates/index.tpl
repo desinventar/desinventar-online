@@ -1261,25 +1261,25 @@
               <br>
               <table>
                 <tr valign="top">
-                  <td><b>{-$std.StadisticFirstlev[0]-}</b><br>
+                  <td><b>{-$std.StatisticFirstlev[0]-}</b><br>
                    <select id="_S+Firstlev" name="_S+Firstlev" size="8" style="width:180px;"
                        onChange="setTotalize('_S+Firstlev', '_S+Secondlev'); setTotalize('_S+Secondlev', '_S+Thirdlev');">
 {-foreach name=glev key=k item=i from=$glev-}
                     <option value="{-$k-}|D.DisasterGeographyId">
-                    {-assign var="ln" value=StadisticDisasterGeographyId_$k-}{-$std.$ln[0]-}</option>
+                    {-assign var="ln" value=StatisticDisasterGeographyId_$k-}{-$std.$ln[0]-}</option>
 {-/foreach-}
-                    <option value="|D.EventId">{-$std.StadisticEventName[0]-}</option>
-                    <option value="YEAR|D.DisasterBeginTime">{-$std.StadisticDisasterBeginTime_YEAR[0]-}</option>
-                    <option value="MONTH|D.DisasterBeginTime">{-$std.StadisticDisasterBeginTime_MONTH[0]-}</option>
-                    <option value="|D.CauseId">{-$std.StadisticCauseName[0]-}</option>
+                    <option value="|D.EventId">{-$std.StatisticEventName[0]-}</option>
+                    <option value="YEAR|D.DisasterBeginTime">{-$std.StatisticDisasterBeginTime_YEAR[0]-}</option>
+                    <option value="MONTH|D.DisasterBeginTime">{-$std.StatisticDisasterBeginTime_MONTH[0]-}</option>
+                    <option value="|D.CauseId">{-$std.StatisticCauseName[0]-}</option>
                    </select>
                   </td>
-                  <td><b>{-$std.StadisticSecondlev[0]-}</b><br>
+                  <td><b>{-$std.StatisticSecondlev[0]-}</b><br>
                    <select id="_S+Secondlev" name="_S+Secondlev" size="8" 
                        onChange="setTotalize('_S+Secondlev', '_S+Thirdlev');" style="width:180px;">
                    </select>
                   </td>
-                  <td><b>{-$std.StadisticThirdlev[0]-}</b><br>
+                  <td><b>{-$std.StatisticThirdlev[0]-}</b><br>
                    <select id="_S+Thirdlev" name="_S+Thirdlev" size="8" style="width:180px;">
                    </select>
                   </td>

@@ -214,10 +214,10 @@ else {
 	$t->assign ("sst", $sst);
 	$st = array();
 	foreach ($glev as $k=>$i) {
-		$st["StadisticDisasterGeographyId_". $k] = array($i[0], $i[1]);
+		$st["StatisticDisasterGeographyId_". $k] = array($i[0], $i[1]);
 	}
 	$std = array();
-	$std = array_merge($std, $q->queryLabelsFromGroup('Stadistic', $lg));
+	$std = array_merge($std, $q->queryLabelsFromGroup('Statistic', $lg));
 	$std = array_merge($std, $st);
 	$t->assign ("std", $std);
 }
