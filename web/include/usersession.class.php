@@ -164,7 +164,7 @@ class UserSession {
 			// This is an anonymous session
 			$iReturn = ERR_NO_ERROR;
 		} else {
-			$sQuery = "SELECT * FROM User WHERE UserId='" . $prmUserId . "'";
+			$sQuery = "SELECT * FROM User WHERE UserId='" . $prmUserId . "' OR UserNotes LIKE '%(UserName=" . $prmUserId . ")'" ;
 			try {
 				$result = $this->q->core->query($sQuery);
 				$iReturn = ERR_DEFAULT_ERROR;
