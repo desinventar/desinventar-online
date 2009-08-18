@@ -69,7 +69,7 @@ class DIImport {
 			                    44 => 'SectorHealth',
 			                    45 => 'SectorOther'
 						   );
-		$FLogName = '/tmp/di8import_' . $this->us->sSessionId . '.csv';
+		$FLogName = '/tmp/di8import_' . $this->us->SessionId . '.csv';
 		$FLogName = '/tmp/di8import.csv';
 		$flog = fopen($FLogName,'w');
 		$fh = fopen($FileName, 'r');

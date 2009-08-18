@@ -53,6 +53,8 @@ if (isset($_GET['cmd'])) {
 	// LOGIN: CONTROL USER ACCESS
 	if ($_GET['cmd'] == "login") {
 		if ($us->login($_GET['userid'], $_GET['password'])) {
+			$u = new DIUser($us, $us->UserId);
+			$us->setUser($u->get('UserId'));
 			$t->assign ("user", $us->UserId);
 			$t->assign ("ctl_logged", true);		// Login Sucess !!
 		} else {

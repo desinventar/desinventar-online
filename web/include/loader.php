@@ -240,8 +240,9 @@ $dicore_host = "127.0.0.1"; //"66.150.227.232";
 $dicore_port = 8081;
 
 require_once(BASE . "/include/usersession.class.php");
-require_once(BASE . "/include/query.class.php");
 require_once(BASE . "/include/diobject.class.php");
+require_once(BASE . '/include/diuser.class.php');
+require_once(BASE . "/include/query.class.php");
 require_once(BASE . "/include/constants.php");
 
 $SessionId = uuid();
