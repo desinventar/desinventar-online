@@ -190,7 +190,7 @@ else {
   $sda = explode(",", $fld);
   $t->assign ("sda", $sda);
   $sda1 = explode(",",
-    "GeographyCode,DisasterLatitude,DisasterLongitude,RecordAuthor,RecordCreation,RecordLastUpdate,EventNotes");
+    "GeographyCode,DisasterLatitude,DisasterLongitude,RecordAuthor,RecordCreation,RecordUpdate,EventNotes");
   $t->assign ("sda1", $sda1);	// array_diff_key($dc2, array_flip($sda))
   // MAPS
 	$mgl = $q->loadGeoLevels('', -1, true);
