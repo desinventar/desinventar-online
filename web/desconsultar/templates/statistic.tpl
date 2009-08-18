@@ -8,7 +8,7 @@
 	<title>{-#ttitle#-} -{-$regname-}-</title>
 	<link rel="stylesheet" href="../css/desinventar.css" type="text/css"/>
 	<script type="text/javascript" src="../include/prototype.js"></script>
-	<script type="text/javascript" src="../include/diadmin.js.php"></script>
+	<script type="text/javascript" src="../include/diadmin.js"></script>
 	<script type="text/javascript">
 	window.onload = function() {
 		var qrydet = parent.document.getElementById('querydetails');

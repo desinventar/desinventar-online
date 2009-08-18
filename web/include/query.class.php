@@ -486,7 +486,6 @@ class Query extends PDO
 		$res = array();
 		$datemin = $this->getDBInfoValue('PeriodBeginDate');
 		$datemax = $this->getDBInfoValue('PeriodEndDate');
-		
 		if (($datemin == '') || ($datemax == '')) {
 			$sql = "SELECT MIN(DisasterBeginTime) AS datemin, MAX(DisasterBeginTime) AS datemax FROM Disaster ".
 			"WHERE RecordStatus='PUBLISHED'";
@@ -508,7 +507,6 @@ class Query extends PDO
 		foreach ($res[0] as $key => $val) {
 			$fld[] = $key;
 		}
-
 	// (jhcaiced) SyncRecord should not appear in data grid
 		/*
 		foreach (array('RecordSync','RecordUpdate') as $item) {
@@ -524,6 +522,12 @@ class Query extends PDO
 		}
 		*/
 		return $fld;
+  }
+  
+  public function getNextDisasterSerial($year) {
+	$sql = "SELECT COUNT(DisasterId) AS num FROM Disaster WHERE DisasterBeginTime LIKE '". $year ."%'";
+	$res = $this->getresult($sql);
+	return sprintf("%05d", $res['num'] + 1);
   }
 
   public function getDisasterBySerial($diser) {
