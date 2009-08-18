@@ -14,6 +14,9 @@ require_once(BASE . '/include/diregion.class.php');
 require_once(BASE . '/include/diregionauth.class.php');
 require_once(BASE . '/include/diuser.class.php');
 require_once(BASE . '/include/didisaster.class.php');
+require_once(BASE . '/include/dievent.class.php');
+require_once(BASE . '/include/dicause.class.php');
+require_once(BASE . '/include/digeolevel.class.php');
 
 $dbh = new PDO('mysql:host=localhost;dbname=di8db', '','',
    array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
@@ -21,15 +24,12 @@ $RegionList = array();
 foreach($dbh->query("SELECT * FROM Region") as $row) {
 	$RegionList[] = $row['RegionUUID'];
 }
-
-moveUsers($dbh,$us);
-//$RegionList = array();
-//$RegionList = array('BOLIVIA');
+$RegionList = array('BOLIVIA');
 foreach ($RegionList as $RegionUUID) {
 	$InfoGeneral_eng = '';
 	foreach($dbh->query("SELECT * FROM Region WHERE RegionUUID='" . $RegionUUID . "'") as $row) {
 		$RegionId = DIRegion::buildRegionId($row['CountryIsoCode'],$row['RegionLabel']);
-		//$RegionId = 'BOL-1248793194-bolivia_inventario_historico_de_desastres';
+		$RegionId = 'BOL-1248983224-bolivia_inventario_historico_de_desastres';
 		$r = new DIRegion($us);
 		$r->set('CountryIso'     , $row['CountryIsoCode']);
 		$r->set('RegionLabel'    , $row['RegionLabel']);
@@ -91,7 +91,8 @@ foreach ($RegionList as $RegionUUID) {
 	if ($iReturn > 0) {
 		$r->q->core->query("DELETE FROM RegionAuth WHERE RegionId='" . $RegionId . "'");
 		foreach($dbh->query("SELECT * FROM RegionAuth WHERE RegionUUID='" . $RegionUUID . "'") as $row) {
-			$a = new DIRegionAuth($us, $RegionId, $row['UserName'], $row['AuthKey'], $row['AuthValue'], $row['AuthAuxValue']);
+			$u = new DIUser($us, $row['UserName']);
+			$a = new DIRegionAuth($us, $RegionId, $u->get('UserId'), $row['AuthKey'], $row['AuthValue'], $row['AuthAuxValue']);
 			$a->insert();
 		} //foreach
 	}
@@ -111,18 +112,5 @@ foreach ($RegionList as $RegionUUID) {
 	} //if
 } //foreach
 $dbh = null;
-
-function moveUsers($dbh, $us) {
-	foreach($dbh->query("SELECT * FROM Users") as $row) {
-		$u = new DIUser($us);
-		$u->setFromArray($row);
-		$UserId = $row['UserEMail'];
-		$u->set('UserNotes', $u->get('UserNotes') . '(' . $row['UserName'] . ')');
-		if ($UserId == '') { $UserId = $row['UserName']; }
-		$u->set('UserId', $UserId);
-		$u->set('CountryIso', $row['UserCountry']);
-		$u->insert();
-	}
-}
 
 </script>
