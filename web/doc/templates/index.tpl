@@ -45,21 +45,24 @@
 	</frameset>
 </html>
 {-else-}
-{-if $title-}
+ {-if $title-}
 	<h4>{-$pagetitle-}</h4>
-{-/if-}
+ {-/if-}
 	<p align="justify"><i>{-$pagedesc-}</i></p>
 	<p align="justify">{-$pagefull-}</p>
 	<hr>
-{-foreach name=eff key=key item=item from=$eff-}
+ {-foreach name=eff key=key item=item from=$eff-}
  <b>{-$item[0]-}</b><br>{-$item[2]-}<br><hr>
-{-/foreach-}
-<br>
-{-foreach name=eve key=key item=item from=$eve-}
+ {-/foreach-}
+ {-foreach name=sec key=key item=item from=$sec-}
+ <b>{-$item[0]-}</b><br>{-$item[2]-}<br><hr>
+ {-/foreach-}
+ <br>
+ {-foreach name=eve key=key item=item from=$eve-}
  <b>{-$item[0]-}</b><br>{-$item[1]-}<br><hr>
-{-/foreach-}
-<br>
-{-foreach name=eve key=key item=item from=$cau-}
+ {-/foreach-}
+ <br>
+ {-foreach name=eve key=key item=item from=$cau-}
  <b>{-$item[0]-}</b><br>{-$item[1]-}<br><hr>
-{-/foreach-}
+ {-/foreach-}
 {-/if-}

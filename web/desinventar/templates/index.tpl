@@ -124,7 +124,7 @@
 		function onSubmitBtn(btn) {
 			$('dic').src="about:blank";
 			switch (btn) {
-				case "{-#bnew#-}":
+				case "cardnew":
 					DisableEnableForm($('DICard'), false);
 					setfocus('DisasterBeginTime[0]');
 					$('DisasterId').value='';
@@ -136,9 +136,9 @@
 					$('cardupd').disable();
 					$('cardcln').enable();
 					$('cardcan').enable();
-					$('cardfnd').disable();
+					//$('cardfnd').disable();
 				break;
-				case "{-#bupdate#-}":
+				case "cardupd":
 					// check if DC is onused
 					var lsAjax = new Ajax.Updater('distatusmsg', '', {
 						method: 'get', parameters: 'r={-$reg-}&cmd=chklocked&DisasterId='+ $('DisasterId').value,
@@ -153,14 +153,14 @@
 								$('cardsav').enable();
 								$('cardupd').disable();
 								$('cardcan').enable();
-								$('cardfnd').disable();
+								//$('cardfnd').disable();
 							}
 							else 
 								uploadMsg("{-#tdconuse#-}");
 						}
 					} );
 				break;
-				case "{-#bsave#-}":
+				case "cardsav":
 					var fl = new Array('DisasterSerial', 'DisasterBeginTime[0]', 'DisasterSource', 
 										'geolev0', 'EventId', 'CauseId', 'RecordStatus');
 					if (checkForm(fl, "{-#errmsgfrm#-}")) {
@@ -172,28 +172,27 @@
 						$('cardupd').disable();
 						$('cardcln').disable();
 						$('cardcan').disable();
-						$('cardfnd').enable();
+						//$('cardfnd').enable();
 					}
 				break;
-				case "{-#bclean#-}":
+				case "cardcln":
 					$('DICard').reset();
 					$('lev0').innerHTML='';
 					uploadMsg('');
 					setfocus('DisasterBeginTime[0]');
 				break;
-				case "{-#bcancel#-}":
+				case "cardcan":
 					updateList('distatusmsg', '', 'r={-$reg-}&cmd=chkrelease&DisasterId='+ $('DisasterId').value);
-					$('DICard').reset();
 					DisableEnableForm($('DICard'), true);
-					$('lev0').innerHTML='';
+					$('cardupd').enable();
 					$('cardsav').disable();
 					$('cardcln').disable();
 					$('cardcan').disable();
 					$('cardnew').enable();
-					$('cardfnd').enable();
+					//$('cardfnd').enable();
 					uploadMsg("{-#tmsgnewcard#-}");
 				break;
-				case "{-#bexpsearch#-}":
+				case "cardfnd":
 				break;
 			}
 			return true;
@@ -215,12 +214,12 @@
 		<table width="900px">
 			<tr>
 				<td>
-					<input type="button" id="cardnew" value="{-#bnew#-}" onClick="onSubmitBtn(this.value);" {-$ro-}>
-					<input type="button" id="cardupd" value="{-#bupdate#-}" onClick="onSubmitBtn(this.value);" {-$ro-}>
-					<input type="button" id="cardsav" value="{-#bsave#-}" onClick="onSubmitBtn(this.value);" {-$ro-}>
-					<input type="button" id="cardcln" value="{-#bclean#-}" onClick="onSubmitBtn(this.value);" {-$ro-}>
-					<input type="button" id="cardcan" value="{-#bcancel#-}" onClick="onSubmitBtn(this.value);" {-$ro-}>
-					<input type="button" id="cardfnd" value="{-#bexpsearch#-}" onClick="onSubmitBtn(this.value);" {-$ro-}>
+					<input type="button" id="cardnew" value="{-#bnew#-}" onClick="onSubmitBtn('cardnew');" {-$ro-}>
+					<input type="button" id="cardupd" value="{-#bupdate#-}" onClick="onSubmitBtn('cardupd');" disabled {-$ro-}>
+					<input type="button" id="cardsav" value="{-#bsave#-}" onClick="onSubmitBtn('cardsav');" disabled {-$ro-}>
+					<input type="button" id="cardcln" value="{-#bclean#-}" onClick="onSubmitBtn('cardcln');" disabled {-$ro-}>
+					<input type="button" id="cardcan" value="{-#bcancel#-}" onClick="onSubmitBtn('cardcan');" disabled {-$ro-}>
+					<!--<input type="button" id="cardfnd" value="{-#bexpsearch#-}" onClick="onSubmitBtn('cardfnd');" {-$ro-}>-->
 					&nbsp;&nbsp;|&nbsp;&nbsp;
 					<input type="button" value="<<" onClick="setDICard('{-$reg-}', {-$fst-}, '');" {-$ro-}>
 					<input type="button" value="<" disabled {-$ro-}>
@@ -230,7 +229,7 @@
 					<br><span class="dlgmsg" id="distatusmsg"></span>
 				</td>
 				<td align="right">
-					<iframe name="dic" id="dic" frameborder="1" style="height:30px; width:220px;" src="about:blank"></iframe>
+					<iframe name="dic" id="dic" frameborder="1" style="height:30px; width:300px;" src="about:blank"></iframe>
 				</td>
 			</tr>
 		</table>
