@@ -20,12 +20,13 @@ class DIRegion extends DIObject {
 		$this->sInfoDef     = "DBVersion/STRING," .
 		                      "PeriodBeginDate/DATE," .
 		                      "PeriodEndDate/DATE," .
-		                      "OptionOutOfRange/INTEGER," .
-		                      "OptionLanguageList/STRING," .
 		                      "GeoLimitMinX/DOUBLE," . 
 		                      "GeoLimitMinY/DOUBLE," . 
 		                      "GeoLimitMaxX/DOUBLE," . 
-		                      "GeoLimitMaxY/DOUBLE";
+		                      "GeoLimitMaxY/DOUBLE," .
+		                      "OptionOutOfRange/INTEGER," .
+		                      "OptionLanguageList/STRING," .
+		                      "OptionOldName/STRING";
 		$this->sInfoTrans   = "InfoCredits/STRING," . 
 		                      "InfoGeneral/STRING," .
 		                      "InfoSources/STRING," .
@@ -434,7 +435,7 @@ class DIRegion extends DIObject {
 		$q = $this->q->dreg;
 		$q->query("ATTACH DATABASE '" . $RegionDB . "' AS RegItem");
 		// Copy Disaster Table, adjust GeographyId Field
-		$this->copyData($q, 'Disaster','DisasterGeographyId', $prmRegionItemId, $prmRegionItemGeographyId, false);
+		$this->copyData($q, 'Disaster','GeographyId', $prmRegionItemId, $prmRegionItemGeographyId, false);
 		// Copy DisasterId from EEData, Other Fields are Ignored...
 		$q->query("INSERT INTO EEData (DisasterId) SELECT DisasterId FROM RegItem.EEData");
 		$q->query("DETACH DATABASE RegItem");

@@ -387,7 +387,7 @@
       var grp = $(fld).value;
       // Comparatives
       if (grp == "D.EventId" || grp == "D.CauseId" ||
-          grp.substr(0,21) == "D.DisasterGeographyId") {
+          grp.substr(0,21) == "D.GeographyId") {
         disab($('_G+K_line'));
         disabAxis2();
         enab($('_G+K_pie'));
@@ -430,7 +430,7 @@
     }
 	function grpSelectbyKind() {
 	  comp = $('_G+TypeC').value;
-	  if ((comp == "D.EventId" || comp == "D.CauseId" || comp.substr(0,21) == "D.DisasterGeographyId")
+	  if ((comp == "D.EventId" || comp == "D.CauseId" || comp.substr(0,21) == "D.GeographyId")
 	       && $('_G+Kind').value == "BAR") {
 	        enabAxis2();
         	enab($('_G+M_accu'));
@@ -816,7 +816,7 @@
               <b>{-#dorderby#-}</b><br>
               <select id="_D+SQL_ORDER" name="_D+SQL_ORDER" class="fixw" size="5">
                 <option value="D.DisasterBeginTime, V.EventName, G.GeographyFQName" selected>{-#ddeg#-}</option>
-                <option value="D.DisasterBeginTime, D.DisasterGeographyId, V.EventName">{-#ddge#-}</option>
+                <option value="D.DisasterBeginTime, D.GeographyId, V.EventName">{-#ddge#-}</option>
                 <option value="G.GeographyFQName, V.EventName, D.DisasterBeginTime">{-#dged#-}</option>
                 <option value="V.EventName, D.DisasterBeginTime, G.GeographyFQName">{-#dedg#-}</option>
                 <option value="D.DisasterSerial">{-#dserial#-}</option>
@@ -901,7 +901,7 @@
                   <b>{-#mrepreselev#-}</b><br>
                   <select id="_M+Type" name="_M+Type" size="3" class="fixw">
  {-foreach name=mgel key=k item=i from=$mgel-}
-                    <option value="{-$k-}|D.DisasterGeographyId|" {-if $smarty.foreach.mgel.iteration==1-}selected{-/if-}>{-$i[0]-}</option>
+                    <option value="{-$k-}|D.GeographyId|" {-if $smarty.foreach.mgel.iteration==1-}selected{-/if-}>{-$i[0]-}</option>
  {-/foreach-}
                   </select>
                   <br><br>
@@ -1088,7 +1088,7 @@
 								<option value="D.DisasterBeginTime" selected>{-$dic.GraphHisTemporal[0]-}</option>
 								<option value="D.DisasterBeginTime|D.EventId">{-$dic.GraphHisEveTemporal[0]-}</option>
 {-foreach name=glev key=k item=i from=$glev-}
-								<option value="D.DisasterBeginTime|D.DisasterGeographyId_{-$k-}">{-$i[0]-} {-$dic.GraphHisGeoTemporal[0]-}</option>
+								<option value="D.DisasterBeginTime|D.GeographyId_{-$k-}">{-$i[0]-} {-$dic.GraphHisGeoTemporal[0]-}</option>
 {-/foreach-}
 								<option value="D.DisasterBeginTime|D.CauseId">{-$dic.GraphHisCauTemporal[0]-}</option>
 							</select>
@@ -1121,7 +1121,7 @@
 								<option value="D.EventId">{-$dic.GraphComByEvents[0]-}</option>
 								<option value="D.CauseId">{-$dic.GraphComByCauses[0]-}</option>
 {-foreach name=glev key=k item=i from=$glev-}
-								<option value="D.DisasterGeographyId_{-$k-}">{-$dic.GraphComByGeography[0]-} {-$i[0]-}</option>
+								<option value="D.GeographyId_{-$k-}">{-$dic.GraphComByGeography[0]-} {-$i[0]-}</option>
 {-/foreach-}
 							</select>
 							<input type="hidden" id="_G+Type" name="_G+Type" value="D.DisasterBeginTime">
@@ -1146,7 +1146,7 @@
                       <option value="D.DisasterBeginTime" selected>{-$dic.GraphHisTemporal[0]-}</option>
                       <option value="D.DisasterBeginTime|D.EventId">{-$dic.GraphHisEveTemporal[0]-}</option>
 {-foreach name=glev key=k item=i from=$glev-}
-                      <option value="D.DisasterBeginTime|D.DisasterGeographyId_{-$k-}">{-$i[0]-} {-$dic.GraphHisGeoTemporal[0]-}</option>
+                      <option value="D.DisasterBeginTime|D.GeographyId_{-$k-}">{-$i[0]-} {-$dic.GraphHisGeoTemporal[0]-}</option>
 {-/foreach-}
                       <option value="D.DisasterBeginTime|D.CauseId">{-$dic.GraphHisCauTemporal[0]-}</option>
                     </optgroup>
@@ -1154,7 +1154,7 @@
                       <option value="D.EventId">{-$dic.GraphComByEvents[0]-}</option>
                       <option value="D.CauseId">{-$dic.GraphComByCauses[0]-}</option>
 {-foreach name=glev key=k item=i from=$glev-}
-                      <option value="D.DisasterGeographyId_{-$k-}">{-$dic.GraphComByGeography[0]-} {-$i[0]-}</option>
+                      <option value="D.GeographyId_{-$k-}">{-$dic.GraphComByGeography[0]-} {-$i[0]-}</option>
 {-/foreach-}
                     </optgroup>
                   </select>
@@ -1288,8 +1288,8 @@
                    <select id="_S+Firstlev" name="_S+Firstlev" size="8" style="width:180px;"
                        onChange="setTotalize('_S+Firstlev', '_S+Secondlev'); setTotalize('_S+Secondlev', '_S+Thirdlev');">
 {-foreach name=glev key=k item=i from=$glev-}
-                    <option value="{-$k-}|D.DisasterGeographyId">
-                    {-assign var="ln" value=StatisticDisasterGeographyId_$k-}{-$std.$ln[0]-}</option>
+                    <option value="{-$k-}|D.GeographyId">
+                    {-assign var="ln" value=StatisticGeographyId_$k-}{-$std.$ln[0]-}</option>
 {-/foreach-}
                     <option value="|D.EventId">{-$std.StatisticEventName[0]-}</option>
                     <option value="YEAR|D.DisasterBeginTime">{-$std.StatisticDisasterBeginTime_YEAR[0]-}</option>
@@ -1415,7 +1415,7 @@
         <ul id="tree-g{-$reg-}" class="checktree">
  {-foreach name=geol key=key item=item from=$geol-}
           <li id="show-g{-$key-}">
-            <input type="checkbox" id="{-$key-}" name="D_DisasterGeographyId[]" value="{-$key-}"
+            <input type="checkbox" id="{-$key-}" name="D_GeographyId[]" value="{-$key-}"
                 onClick="setSelMap('{-$item[0]-}', '{-$key-}', this.checked);" {-if $item[3]-}checked{-/if-}>
             <label for="{-$key-}">{-$item[1]-}</label>
             <span id="itree{-$key-}"></span>

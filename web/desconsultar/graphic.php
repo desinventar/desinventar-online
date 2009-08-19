@@ -20,7 +20,7 @@ fixPost($post);
 
 // load levels to display in totalizations
 foreach ($q->loadGeoLevels('', -1, false) as $k=>$i)
-	$st["GraphDisasterGeographyId_". $k] = array($i[0], $i[1]);
+	$st["GraphGeographyId_". $k] = array($i[0], $i[1]);
 $dic = array_merge(array(), $st);
 $dic = array_merge($dic, $q->queryLabelsFromGroup('Graph', $lg));
 $dic = array_merge($dic, $q->queryLabelsFromGroup('Effect', $lg));
@@ -44,7 +44,7 @@ if (isset($post['_G+cmd'])) {
 			} else {
 				$ele[] = $post['_G+Period'] ."|". $itm;
 			}
-		} elseif (substr($itm, 2, 19) == "DisasterGeographyId") {
+		} elseif (substr($itm, 2, 19) == "GeographyId") {
 			$gl = explode("_", $itm);
 			$ele[] = $gl[1] ."|". $gl[0];// "0|$itm"; 
 		} else {

@@ -105,8 +105,8 @@ else {
   $t->assign ("yini", substr($ydb[0], 0, 4));
   $t->assign ("yend", substr($ydb[1], 0, 4));
   // In Saved Queries set true in Geo, Events, Causes selected..
-  if (isset($qd["D_DisasterGeographyId"])) {
-    foreach ($qd["D_DisasterGeographyId"] as $ky=>$it) {
+  if (isset($qd["D_GeographyId"])) {
+    foreach ($qd["D_GeographyId"] as $ky=>$it) {
       if (isset($geol[$it]))
         $geol[$it][3] = 1;
     }
@@ -214,7 +214,7 @@ else {
 	$t->assign ("sst", $sst);
 	$st = array();
 	foreach ($glev as $k=>$i) {
-		$st["StatisticDisasterGeographyId_". $k] = array($i[0], $i[1]);
+		$st["StatisticGeographyId_". $k] = array($i[0], $i[1]);
 	}
 	$std = array();
 	$std = array_merge($std, $q->queryLabelsFromGroup('Statistic', $lg));

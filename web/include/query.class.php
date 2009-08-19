@@ -214,7 +214,7 @@ class Query extends PDO
     switch ($obj) {
       case DI_EVENT:			$whr = "EventId='$id'";		break;
       case DI_CAUSE:			$whr = "CauseId='$id'";		break;
-      case DI_GEOGRAPHY:	$whr = "DisasterGeographyId like '$id%'";		break;
+      case DI_GEOGRAPHY:	$whr = "GeographyId like '$id%'";		break;
     }
     $sql = "SELECT COUNT(DisasterId) AS counter FROM Disaster WHERE $whr ";
     $res = $this->getresult($sql);
@@ -737,7 +737,7 @@ class Query extends PDO
             }
             $e[$k] .= "1!=1)";
           }
-          elseif ($k == "D.DisasterGeographyId") {
+          elseif ($k == "D.GeographyId") {
             $e[$k] = "(";
             foreach ($v as $i) {
               // Restrict to childs elements only
@@ -803,7 +803,7 @@ class Query extends PDO
     else
       $e['Eff'] = "(". $e['Eff'] ." 1=1)";
     $lan = "spa"; // select from local languages of database..
-    $e['Item'] .= "D.EventId=V.EventId AND D.CauseId=C.CauseId AND D.DisasterGeographyId=G.GeographyId ".
+    $e['Item'] .= "D.EventId=V.EventId AND D.CauseId=C.CauseId AND D.GeographyId=G.GeographyId ".
                   "AND V.LangIsoCode='$lan' AND C.LangIsoCode='$lan' AND G.LangIsoCode='$lan'";
     foreach ($e as $i)
       $sql .= "$i AND ";
@@ -874,7 +874,7 @@ class Query extends PDO
           // 100, 10, 5, 1 years, month
           // $sta = explode("|", $opc['Stat']);
         break;
-        case "D.DisasterGeographyId":
+        case "D.GeographyId":
           // Lev is 0, 1, .. N 
           $lev = isset($gp[0]) ? $gp[0]: 0;
           $off = ($lev * 5) + 5;
@@ -936,7 +936,7 @@ class Query extends PDO
 	foreach ($dl as $it) {	
 		foreach ($it as $k=>$i) {
 			$val = $i;
-			if (substr($k,0,19) == "DisasterGeographyId") {
+			if (substr($k,0,19) == "GeographyId") {
 			  if ($mode == "GRAPH")
 				$val = $this->getGeoNameById($i);
 			  elseif ($mode == "MAPS") {
@@ -977,7 +977,7 @@ class Query extends PDO
 			$j = 0;
 			foreach ($dl as $k=>$i) {
 				foreach (array_keys($i) as $idx) {
-					if (substr($idx,0,19) == "DisasterGeographyId") {
+					if (substr($idx,0,19) == "GeographyId") {
 			            switch ($mode) {
 			              case "CODE": 
 			                $dl[$j][$idx] = $this->getObjectNameById($i[$idx], DI_GEOGRAPHY); break;
@@ -1065,7 +1065,7 @@ class Query extends PDO
     //Process post
     foreach ($post as $k=>$v) {
       $k = substr($k,2);
-      if ($k == "DisasterGeographyId") {
+      if ($k == "GeographyId") {
         foreach($v as $itm)
           $lsg[] = $this->getGeoNameById($itm);
         $info['GEO'] = implode(", ", $lsg);

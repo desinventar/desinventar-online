@@ -20,7 +20,7 @@ class DIImport {
 		$DisasterImport = array(0 => 'DisasterId', 
 		                        1 => 'DisasterSerial',
 		                        2 => 'DisasterBeginTime',
-		                        3 => 'DisasterGeographyId',
+		                        3 => 'GeographyId',
 			                    4 => 'DisasterSiteNotes',
 			                    5 => 'DisasterSource',
 			                    6 => 'DisasterLongitude',
@@ -96,8 +96,8 @@ class DIImport {
 				$rowCount++;
 				
 				$g = new DIGeography($this->us);
-				$DisasterGeographyCode = $o->get('DisasterGeographyId');
-				$o->set('DisasterGeographyId', $g->getIdByCode($DisasterGeographyCode));
+				$DisasterGeographyCode = $o->get('GeographyId');
+				$o->set('GeographyId', $g->getIdByCode($DisasterGeographyCode));
 				
 				$e = new DIEvent($this->us);
 				$o->set('EventId', $e->getIdByName($o->get('EventId')));

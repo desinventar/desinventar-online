@@ -22,7 +22,7 @@ fixPost($post);
 
 // load levels to display in totalizations
 foreach ($q->loadGeoLevels('', -1, false) as $k=>$i)
-	$st["StatisticDisasterGeographyId_". $k] = array($i[0], $i[1]);
+	$st["StatisticGeographyId_". $k] = array($i[0], $i[1]);
 $dic = array_merge(array(), $st);
 $dic = array_merge($dic, $q->queryLabelsFromGroup('Statistic', $lg));
 $dic = array_merge($dic, $q->queryLabelsFromGroup('Effect', $lg));
@@ -82,7 +82,7 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
 		foreach ($opc['Group'] as $i) {
 			$v = explode("|", $i);
 			$val = substr($v[1],2);
-			if ($val == "DisasterGeographyId" || $val == "DisasterBeginTime")
+			if ($val == "GeographyId" || $val == "DisasterBeginTime")
 				$val = $val ."_". $v[0];
 			elseif ($val == "EventId")
 				$val = "V.EventName";

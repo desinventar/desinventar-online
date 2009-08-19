@@ -21,15 +21,21 @@ require_once(BASE . '/include/digeolevel.class.php');
 $dbh = new PDO('mysql:host=localhost;dbname=di8db', '','',
    array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 $RegionList = array();
-foreach($dbh->query("SELECT * FROM Region") as $row) {
+foreach($dbh->query("SELECT * FROM Region ORDER BY CountryIsoCode,RegionUUID") as $row) {
 	$RegionList[] = $row['RegionUUID'];
 }
-$RegionList = array('BOLIVIA');
+$RegionList = array('PERUINDECI');
 foreach ($RegionList as $RegionUUID) {
 	$InfoGeneral_eng = '';
 	foreach($dbh->query("SELECT * FROM Region WHERE RegionUUID='" . $RegionUUID . "'") as $row) {
-		$RegionId = DIRegion::buildRegionId($row['CountryIsoCode'],$row['RegionLabel']);
-		$RegionId = 'BOL-1248983224-bolivia_inventario_historico_de_desastres';
+		$RegionNames['BOLIVIA']    = 'BOL-1248983224-bolivia_inventario_historico_de_desastres';
+		$RegionNames['PANAMA' ]    = 'PAN-1250695231-panama_inventario_de_desastres_sinaproc';
+		$RegionNames['PERUINDECI'] = 'PER-1250695309-peru_inventarios_de_desastres_indeci';
+		if (array_key_exists($RegionUUID, $RegionNames)) {
+			$RegionId = $RegionNames[$RegionUUID];
+		} else {
+			$RegionId = DIRegion::buildRegionId($row['CountryIsoCode'],$row['RegionLabel']);
+		}
 		$r = new DIRegion($us);
 		$r->set('CountryIso'     , $row['CountryIsoCode']);
 		$r->set('RegionLabel'    , $row['RegionLabel']);
@@ -45,10 +51,17 @@ foreach ($RegionList as $RegionUUID) {
 		
 		$r->set('LangIsoCode'      , $LangIsoCode);
 		$r->set('CountryIso'       , $row['CountryIsoCode']);
-		$r->set('PeriodBeginDate'  , $row['PeriodBeginDate']);
-		$r->set('PeriodEndDate'    , $row['PeriodEndDate']);
+		// 2009-08-19 Fix Period when moving databases
+		$BeginDate = $row['PeriodBeginDate'];
+		$EndDate   = $row['PeriodEndDate'];
+		if (substr($BeginDate,0,4) == '0001') { $BeginDate = ''; }
+		if (substr($EndDate,0,4) == '9999') { $EndDate = ''; }
+		
+		$r->set('PeriodBeginDate'  , $BeginDate);
+		$r->set('PeriodEndDate'    , $EndDate);
 		$r->set('OptionAdminURL'   , $row['OptionAdminURL']);
 		$r->set('OptionOutOfPeriod', $row['OptionOutOfPeriod']);
+		$r->set('OptionOldName'    , $row['RegionUUID']);
 		$r->set('GeoLimitMinX'     , $row['GeoLimitMinX']);
 		$r->set('GeoLimitMaxX'     , $row['GeoLimitMaxX']);
 		$r->set('GeoLimitMinY'     , $row['GeoLimitMinY']);

@@ -22,11 +22,11 @@ function form2disaster($form, $icmd) {
 		if (($icmd == CMD_NEW) || ($icmd == CMD_UPDATE)) {
 			if ((substr($k, 0, 1)  != '_') &&
 			    (substr($k, 0, 12) != 'RecordAuthor') &&
-			    (substr($k, 0, 19) != 'DisasterGeographyId') &&
+			    (substr($k, 0, 19) != 'GeographyId') &&
 			    (substr($k, 0, 3)  != 'EEF'))
 			    $data[$k] = $i;
 			else {
-				if (substr($k, 0, 19) == 'DisasterGeographyId') {
+				if (substr($k, 0, 19) == 'GeographyId') {
 					$geogid = $i;
 				}
 			}
@@ -56,7 +56,7 @@ function form2disaster($form, $icmd) {
 		$dd = "00";
 	$data['DisasterBeginTime'] = sprintf("%04d-%02d-%02d", $aaaa, $mm, $dd);
 	// Disaster Geography
-	$data['DisasterGeographyId'] = $geogid;
+	$data['GeographyId'] = $geogid;
 	return $data;
 } // function
 
@@ -262,7 +262,7 @@ function disaster2form($dicard) {
   $data = array ();
   foreach ($dicard as $k=>$i) {
     if ((substr($k, 0, 17) != 'DisasterBeginTime') &&
-        (substr($k, 0, 19) != 'DisasterGeographyId'))
+        (substr($k, 0, 19) != 'GeographyId'))
       $data[$k] = $i;
     else if (substr($k, 0, 17) == 'DisasterBeginTime') {
       $date = explode('-', $i);
@@ -270,11 +270,11 @@ function disaster2form($dicard) {
       $data['DisasterBeginTime'] = isset($date[1]) ? $date[1] : "";
       $data['DisasterBeginTime'] = isset($date[2]) ? $date[2] : "";
     }
-    else if (substr($k, 0, 19) == 'DisasterGeographyId') {
+    else if (substr($k, 0, 19) == 'GeographyId') {
       $levn = (strlen($i) / 5);
       for ($n = 0; $n < $levn; $n++) {
         $len = 5 * ($n + 1);
-        $data['DisasterGeographyId'. $n] = substr($i, 0, $len);
+        $data['GeographyId'. $n] = substr($i, 0, $len);
       }
     }
   }
