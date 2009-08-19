@@ -132,24 +132,19 @@
 {-if $ctl_showreg || $ctl_reginfo-}
  <table border=0 style="width:550px; font-family:Lucida Grande, Verdana; font-size:10px;">
   <tr>
- 	 <td valign="top"><!--<img src="/desinventar-data/logo/{-$reg-}.png">--></td>
- 	 <td valign="top">
+	<td valign="top"><img src="region.php?r={-$reg-}&view=logo"></td>
+	<td valign="top">
  	  <h2>{-$regname-}</h2>
  {-if !$isvreg-}
-   {-foreach name=log key=key item=item from=$log-}
-    {-if $item[0] == "CREDIT"-}
-      <b>{-$item[1]|nl2br-}</b><br><br>
-    {-/if-}
-   {-/foreach-}
      {-#tperiod#-}: {-$period[0]-} - {-$period[1]-}<br>
      {-#trepnum#-}: {-$dtotal-}<br>
      {-#tlastupd#-}: {-$lstupd-}<br>
  {-/if-}
- 	 </td>
- 	</tr>
+	</td>
+  </tr>
  {-if !$ctl_reginfo-}
- 	<tr>
- 	 <td colspan=2 align=center>
+  <tr>
+	<td colspan=2 align="center">
   {-if $ctl_showdimod-}
 	  &nbsp;&nbsp;
 	  <img id="dimod" src="images/b_desinventar1.jpg" border="0" style="cursor: pointer;"
@@ -171,22 +166,23 @@
   {-if $ctl_inactivereg-}
 	  <b>{-#tinactive#-}</b><br>
   {-/if-}
-    <div id="modinfo" class="dlgmsg" style="text-align:center;"></div><br>
+      <div id="modinfo" class="dlgmsg" style="text-align:center;"></div><br>
    </td>
   </tr>
  {-/if-}
   <tr>
-   <td><b>{-#tdescription#-}</b></td>
-   <td align="right">
-    [<a href="javascript:void(null);" onClick="document.getElementById('description').innerHTML='{-$dbden-}';">english</a>]</td>
-  </tr>
-  <tr>
-   <td colspan=2>
-    <div id="description" style="height:200px; width:540px; overflow: auto; 
-    							border: 1px #bbb solid; padding-left: 3px; padding-right: 3px;"
-  		align="justify">
-     {-$dbdes-}
-    </div>
+   <td colspan="2">
+ {-if $lang != 'eng'-}
+    <p align="right">{-$lang-} | <a href="javascript:void(null);" 
+	onClick="{-foreach name=info2 key=k item=i from=$info2-}document.getElementById('{-$k-}').innerHTML='{-$i-}';{-/foreach-}">eng</a></p>
+ {-/if-}
+ {-foreach name=info1 key=k item=i from=$info1-}
+	<fieldset>
+	 <legend><b>{-$k-}</b></legend>
+	 <div id="{-$k-}" style="height:70px; width:540px; overflow: auto;
+		padding-left: 3px; padding-right: 3px;" align="justify">{-$i-}</div>
+	</fieldset>
+ {-/foreach-}
    </td>
   </tr>
  </table>

@@ -73,7 +73,7 @@ insert into LabelGroup values ("107","Disaster","Longitude","8","2009-07-28 16:2
 insert into LabelGroup values ("108","Record|1","Status","1","2009-07-28 16:28:00","2009-07-28 16:28:00","2009-07-28 16:28:00");
 insert into LabelGroup values ("109","Record|2","Author","1","2009-07-28 16:28:00","2009-07-28 16:28:00","2009-07-28 16:28:00");
 insert into LabelGroup values ("110","Record|2","Creation","2","2009-07-28 16:28:00","2009-07-28 16:28:00","2009-07-28 16:28:00");
-insert into LabelGroup values ("111","Record|2","LastUpdate","3","2009-07-28 16:28:00","2009-07-28 16:28:00","2009-07-28 16:28:00");
+insert into LabelGroup values ("111","Record|2","Update","3","2009-07-28 16:28:00","2009-07-28 16:28:00","2009-07-28 16:28:00");
 insert into LabelGroup values ("112","Event","Name","1","2009-07-28 16:28:00","2009-07-28 16:28:00","2009-07-28 16:28:00");
 insert into LabelGroup values ("113","Event","Duration","2","2009-07-28 16:28:00","2009-07-28 16:28:00","2009-07-28 16:28:00");
 insert into LabelGroup values ("114","Event","Magnitude","3","2009-07-28 16:28:00","2009-07-28 16:28:00","2009-07-28 16:28:00");
