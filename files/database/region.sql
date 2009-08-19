@@ -1,5 +1,5 @@
 /* REGION.DB - DesInventar8.2
-2009-08-18
+2009-08-19
 */
 
 DROP TABLE IF EXISTS Info;
@@ -99,7 +99,7 @@ DisasterId VARCHAR(50),
 RegionId VARCHAR(50), 
 DisasterSerial VARCHAR(50), 
 DisasterBeginTime VARCHAR(30), 
-DisasterGeographyId VARCHAR(100), 
+GeographyId VARCHAR(100), 
 DisasterSiteNotes TEXT, 
 DisasterLatitude DOUBLE, 
 DisasterLongitude DOUBLE, 

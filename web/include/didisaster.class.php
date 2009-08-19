@@ -12,7 +12,7 @@ class DIDisaster extends DIObject {
 		$this->sFieldDef    = "RegionId/STRING," .
 		                      "DisasterSerial/STRING," .
 		                      "DisasterBeginTime/STRING," .
-		                      "DisasterGeographyId/STRING," .
+		                      "GeographyId/STRING," .
 		                      "DisasterSiteNotes/STRING," .
 		                      "DisasterLatitude/DOUBLE," .
 		                      "DisasterLongitude/DOUBLE," .
@@ -106,7 +106,7 @@ class DIDisaster extends DIObject {
 		$iReturn = $this->validateNotNull($iReturn, -55, 'DisasterBeginTime');
 		$iReturn = $this->validateNotNull($iReturn, -56, 'DisasterSource');
 		$iReturn = $this->validateNotNull($iReturn, -57, 'RecordStatus');
-		$iReturn = $this->validateRef($iReturn, -58, 'DisasterGeographyId', 'Geography', 'GeographyId');
+		$iReturn = $this->validateRef($iReturn, -58, 'GeographyId', 'Geography', 'GeographyId');
 		$iReturn = $this->validateRef($iReturn, -59, 'EventId', 'Event', 'EventId');
 		$iReturn = $this->validateRef($iReturn, -60, 'CauseId', 'Cause', 'CauseId');
 		

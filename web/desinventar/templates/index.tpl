@@ -39,12 +39,12 @@
 		// Display Geography in form and search; k=geoid, l=0, desc='', opc=''
 		function setgeo(k, l, desc, opc) {
 			if (opc == "search") {
-				var fld = '_DisasterGeographyId';
+				var fld = '_GeographyId';
 				var lev = '_lev'+ l;
 				var op = '&opc='+ opc;
 			}
 			else {
-				var fld = 'DisasterGeographyId';
+				var fld = 'GeographyId';
 				var lev = 'lev'+ l;
 				var op = '';
 			}
@@ -306,9 +306,9 @@
 					<td>
 						<table class="grid">
 							<tr valign="top">
-								<td ext:qtip="{-$dis.DisasterGeographyId[1]-}">
-									{-$dis.DisasterGeographyId[0]-}<b style="color:darkred;">*</b><br>
-									<input id="DisasterGeographyId" name="DisasterGeographyId" type="hidden">
+								<td ext:qtip="{-$dis.GeographyId[1]-}">
+									{-$dis.GeographyId[0]-}<b style="color:darkred;">*</b><br>
+									<input id="GeographyId" name="GeographyId" type="hidden">
 									<span id="lst_geo" class="geodiv" style="width: 180px; height: 30px;">
 {-/if-}
 {-*** PRINT LEVEL ITEMS ACCORDING WITH SELECTION - USED TO SELECTION AND SEARCH ***-}
@@ -317,7 +317,7 @@
 										{-$lev-}- {-$levname[0]-}:
 										<select onChange="setgeo(this.options[this.selectedIndex].value, {-$lev-},'{-$levname[1]-}','{-$opc-}');" 
 												autoComplete="true" style="width:180px; background-Color:#eee;" tabindex="7" id="geolev{-$lev-}"
-												onFocus="showtip('{-$dis.DisasterGeographyId[2]-}', '#d4baf6')" disabled>
+												onFocus="showtip('{-$dis.GeographyId[2]-}', '#d4baf6')" disabled>
 											<option value="" style="text-align:center;">--</option>
  {-foreach name=geol key=key item=item from=$geol-}
   {-if $item[2]-}

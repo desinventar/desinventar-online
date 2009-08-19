@@ -65,7 +65,7 @@ if (isset($_FILES['desinv']) && isset($post['diobj'])) {
 			$dic = array_merge($dic, $q->queryLabelsFromGroup('Effect', $lg));
 			$dic = array_merge($dic, $q->queryLabelsFromGroup('Sector', $lg));
 			$dic = array_merge($dic, $q->getEEFieldList("True"));
-			$DisasterImport = "DisasterId,DisasterSerial,DisasterBeginTime,DisasterGeographyId,".
+			$DisasterImport = "DisasterId,DisasterSerial,DisasterBeginTime,GeographyId,".
 				"DisasterSiteNotes,DisasterSource,DisasterLongitude,DisasterLatitude,RecordAuthor,".
 				"RecordCreation,RecordStatus,EventId,EventDuration,EventMagnitude,EventNotes,CauseId,".
 				"CauseNotes,EffectPeopleDead,EffectPeopleMissing,EffectPeopleInjured,EffectPeopleHarmed,".

@@ -480,8 +480,8 @@
 				setElementValue(objElems[i], arr[objElems[i].id]);
 			}
 			else {
-				geo = arr['DisasterGeographyId'];
-				getGeoItems(reg, arr['DisasterGeographyId'], 0, geo.length / 5, src);
+				geo = arr['GeographyId'];
+				getGeoItems(reg, arr['GeographyId'], 0, geo.length / 5, src);
 			}
 		}
 	}
