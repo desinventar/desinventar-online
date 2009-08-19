@@ -84,7 +84,7 @@ LangIsoCode VARCHAR(3),
 RegionId VARCHAR(50), 
 GeographyCode VARCHAR(100) DEFAULT '---', 
 GeographyName VARCHAR(200) DEFAULT '---', 
-GeographyFQName VARCHAR(500) DEFAULT '---', 
+GeographyFQName VARCHAR(250) DEFAULT '---', 
 GeographyLevel INTEGER DEFAULT -1, 
 GeographyActive INTEGER DEFAULT 1, 
 RecordCreation DATETIME, 
@@ -215,3 +215,4 @@ SyncURL VARCHAR(1024),
 SyncSpec VARCHAR(1024), 
 PRIMARY KEY('SyncId')
 );
+

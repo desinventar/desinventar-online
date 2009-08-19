@@ -16,7 +16,6 @@ else
 	exit();
 
 $q = $us->q;
-//$q = new Query($reg);
 $regname = $q->getDBInfoValue('RegionLabel');
 fixPost($post);
 
@@ -65,10 +64,11 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 			$t->assign ("ctl_singlemode", true);
 		} else
 			$fld = $post['_D+Field'];
-		$ord = "D.DisasterBeginTime,V.EventName,G.GeographyName";
+		$ord = "D.DisasterBeginTime,V.EventName,G.GeographyFQName";
 		if (isset($post['_D+SQL_ORDER']))
 			$ord = $post['_D+SQL_ORDER'];
 		$sql = $q->genSQLSelectData($qd, $fld, $ord);
+		fb($sql);
 		//echo $sql;
 		$dlt = $q->dreg->query($sqc);
 		if ($post['_D+cmd'] == "result") {
@@ -161,7 +161,7 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 	} //if
 } //if
 $time_end = microtime_float();
-$t-> assign ("time", $time_end - $time_start);
+$t->assign ("time", $time_end - $time_start);
 $t->display ("data.tpl");
 
 </script>
