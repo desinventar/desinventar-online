@@ -299,11 +299,11 @@ class Query extends PDO
     $sql = "SELECT GeographyName FROM Geography WHERE 1!=1";
     $levn = (strlen($geoid) / 5);
     for ($n = 0; $n < $levn; $n++) {
-      $len = 5 * ($n + 1);
-      $geo = substr($geoid, 0, $len);
-      $sql .= " OR GeographyId='". $geo ."'";
+		$len = 5 * ($n + 1);
+		$geo = substr($geoid, 0, $len);
+		$sql .= " OR GeographyId='". $geo ."'";
     }
-		$sql .= " ORDER BY GeographyLevel";
+	$sql .= " ORDER BY GeographyLevel";
     $data = "";
     $res = $this->dreg->query($sql);
     foreach($res as $row)
@@ -493,8 +493,8 @@ class Query extends PDO
 			if ($datemin == '' ) { $datemin = $r2['datemin']; }
 			if ($datemax == '' ) { $datemax = $r2['datemax']; }
 		}
-		$res[0] = $datemin;
-		$res[1] = $datemax;
+		$res[0] = substr($datemin, 0, 10);
+		$res[1] = substr($datemax, 0, 10);
 		return $res;		
 	} //function
 	
@@ -977,18 +977,18 @@ class Query extends PDO
 			$j = 0;
 			foreach ($dl as $k=>$i) {
 				foreach (array_keys($i) as $idx) {
-				  if (substr($idx,0,19) == "DisasterGeographyId") {
-            switch ($mode) {
-              case "CODE": 
-                $dl[$j][$idx] = $this->getObjectNameById($i[$idx], DI_GEOGRAPHY); break;
-              case "NAME": 
-                $dl[$j][$idx] = $this->getGeoNameById($i[$idx]); break;
-              case "CODENAME": 
-                $dl[$j][$idx] = $this->getObjectNameById($i[$idx], DI_GEOGRAPHY) . " | ". $this->getGeoNameById($i[$idx]); break;
-              default: $dl[$j][$idx] = ""; break;
-            }
-          }
-        }
+					if (substr($idx,0,19) == "DisasterGeographyId") {
+			            switch ($mode) {
+			              case "CODE": 
+			                $dl[$j][$idx] = $this->getObjectNameById($i[$idx], DI_GEOGRAPHY); break;
+			              case "NAME": 
+			                $dl[$j][$idx] = $this->getGeoNameById($i[$idx]); break;
+			              case "CODENAME": 
+			                $dl[$j][$idx] = $this->getObjectNameById($i[$idx], DI_GEOGRAPHY) . " | ". $this->getGeoNameById($i[$idx]); break;
+			              default: $dl[$j][$idx] = ""; break;
+			            }
+					}
+				}
 				if ($exp) {
 					foreach (array_values($dl[$j]) as $vals) {
 						if ($vals == -1)

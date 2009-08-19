@@ -109,7 +109,7 @@
             alert("{-#tabout#-}");
           break;
           case "{-#mgotodoc#-}":
-            $('dcr').src = "../region.php?r={-$reg-}&cmd=info";
+            $('dcr').src = "../region.php?r={-$reg-}&view=info";
           break;
           case "{-#motherdoc#-}":
             $('dcr').src = "../doc/LoNuevoEnDesInventar.pdf";
@@ -157,11 +157,11 @@
             region: 'east',
 			id: 'eastm',
 			split: true,
-			width: 700,
+			width: 760,
             //title: '[<a href="javascript:void(0);" onClick="e=Ext.getCmp(\'eastm\'); e.collapse();">X</a>]',
 			collapseMode: 'mini',
 			autoScroll: true,
-			margins: '0 0 0 5',
+			margins: '0 0 0 2',
 			collapsible: true,
             contentEl: 'east'
 		  }]
@@ -570,7 +570,6 @@
 	var g{-$reg-} = new CheckTree('g{-$reg-}');*/
 	// Find all Effects fields enable by saved query
 	window.onload = function() {
-		$('dcf').src="../desinventar/?r={-$reg-}";
 		// select optimal height in results frame
 		//varhgt = screen.height * 360 / 600;
 		//$('dcr').style = "height:"+ hgt + "px;"
@@ -1349,17 +1348,18 @@
         <input type="button" class="line" style="width:20px; height:20px; background-image:url(../images/saveicon.png);"
             onClick="if($('DCRes').value != '') saveRes('export');" ext:qtip="{-#bsavemsg#-}">&nbsp;&nbsp;
         <input type="button" class="line" style="width:20px; height:20px; background-image:url(../images/printicon.png);"
-            onClick="frames['dcr'].focus(); frames['dcr'].print();" ext:qtip="{-#bprintmsg#-}">&nbsp;&nbsp;
+            onClick="$('dcr').focus(); $('dcr').print();" ext:qtip="{-#bprintmsg#-}">&nbsp;&nbsp;
        </td>
      </tr>
    </table>
 <!--   SHOW RESULTS  -->
   <div id="querydetails" style="height:40px;" class="dwin"></div>
 <!--  <div id="smap" style="position:absolute; left:0px; top:20px; visibility:hidden;">[<a href="javascript:void(0);" onClick="hideMap();">X</a>]<br></div>-->
-  <iframe name="dcr" id="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="../region.php?r={-$reg-}&cmd=info"></iframe>
+  <iframe name="dcr" id="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="../region.php?r={-$reg-}&view=info"></iframe>
  </div>
+ <!-- Show DesInventar (input data) Form -->
  <div id="east">
-  <iframe name="dcf" id="dcf" frameborder="0" scrolling="auto" height="610px" width="100%"></iframe>
+  <iframe name="dcf" id="dcf" frameborder="0" scrolling="auto" height="610px" width="100%" src="../desinventar/?r={-$reg-}"></iframe>
  </div>
 
 <!--

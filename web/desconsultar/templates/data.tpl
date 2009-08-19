@@ -11,6 +11,7 @@
 	<script type="text/javascript" src="../include/diadmin.js"></script>
     <script type="text/javascript">
 	function setDIForm(did) {
+		parent.w.collapse();
 		parent.e.expand();
 		setDICardfromId('{-$reg-}', did, 'DATA');
 	}

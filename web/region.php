@@ -44,11 +44,19 @@ if (isset($_GET['c']) && (strlen($_GET['c']) > 0)) {
 	$t->assign ("ctl_available", true);
 	$t->assign ("dbs", $dbs);
 }
-
 // REGIONINFO: Show Information about Region
-if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
+elseif (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
 	// set region
 	$sRegionId = $_GET['r'];
+	if (isset($_GET['view'])) {
+		if ($_GET['view'] == "info")
+			$t->assign ("ctl_reginfo", true);
+		elseif ($_GET['view'] == "logo") {
+			header("Content-type: Image/png");
+			readfile(VAR_DIR . "/". $sRegionId . "/logo.png");
+			exit();
+		}
+	}
 	// Get Information to Region
 	$q = new Query($sRegionId);
 	$t->assign ("period", $q->getDateRange());
@@ -56,8 +64,7 @@ if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
 	$t->assign ("lstupd", $q->getLastUpdate());
 	// Enable access only to users with a valid role in this region
 	$role = $us->getUserRole($sRegionId);
-	if ($role=="OBSERVER" || $role=="USER" || 
-		$role=="SUPERVISOR" || $role=="ADMINREGION") {
+	if ($role=="OBSERVER" || $role=="USER" || $role=="SUPERVISOR" || $role=="ADMINREGION") {
 		$t->assign ("ctl_showdimod", true);
 		$t->assign ("ctl_showdcmod", true);
 	}
@@ -67,15 +74,21 @@ if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
 		$t->assign ("ctl_showdcmod", true);
 	$t->assign ("ctl_showreg", true);
 	$reg = $q->getDBInfo();
-	$t->assign ("log", $q->getRegLogList());
-	$t->assign ("lang", $reg['LangIsoCode|']);
-	$t->assign ("dbadm", $reg['InfoAdminURL|']);
-	if (isset($_GET['cmd']) && $_GET['cmd'] == "info")
-		$t->assign ("ctl_reginfo", true);
-	$t->assign ("reg", $sRegionId);
 	$t->assign ("regname", $reg['RegionLabel|']);
-	$t->assign ("dbdes", $reg['InfoGeneral|spa']);
-	$t->assign ("dbden", $reg['InfoGeneral|eng']);
+	//$t->assign ("log", $q->getRegLogList());
+	$lang = $reg['LangIsoCode|'];
+	$t->assign ("lang", $lang);
+	$t->assign ("reg", $sRegionId);
+	$info1['InfoSynopsis'] = $reg['InfoSynopsis|'. $lang];
+	$info1['InfoCredits'] = $reg['InfoCredits|'. $lang];
+	$info1['InfoGeneral'] = $reg['InfoGeneral|'. $lang];
+	$info1['InfoSources'] = $reg['InfoSources|'. $lang];
+	$info2['InfoSynopsis'] = $reg['InfoSynopsis|eng'];
+	$info2['InfoCredits'] = $reg['InfoCredits|eng'];
+	$info2['InfoGeneral'] = $reg['InfoGeneral|eng'];
+	$info2['InfoSources'] = $reg['InfoSources|eng'];
+	$t->assign ("info1", $info1);
+	$t->assign ("info2", $info2);
 	//$t->assign ("dbden", str2js($reg['InfoGeneral'][1]));
 } elseif (isset($_GET['cmd'])) {
 	//$q = new Query();
@@ -87,7 +100,7 @@ if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
 			$t->assign ("ctl_adminreg", true);
 			$t->assign ("regpa", $us->q->getRegionAdminList());
 			$t->assign ("ctl_reglist", true);
-			break;
+		break;
 		case "chkruuid":
 			// ADMINREG: check if region ID already exists..
 			if ($us->q->isvalidObjectName($_GET['RegionId'], $_GET['RegionId'] ,DI_REGION))
@@ -95,12 +108,12 @@ if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
 			else
 				$t->assign ("cregion", false);
 			$t->assign ("ctl_chkruuid", true);
-			break;
+		break;
 		case "list":
 			// ADMINREG: reload list from local SQLITE
 			$t->assign ("regpa", $us->q->getRegionAdminList());
 			$t->assign ("ctl_reglist", true);
-			break;
+		break;
 		default:
 			// ADMINREG: insert or update region
 			if (($_GET['cmd'] == "insert") || ($_GET['cmd'] == "update")) {
@@ -110,7 +123,7 @@ if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
 				$stat = ERR_NO_DATABASE;
 				$t->assign ("ctl_admregmess", true);
 				$stat = 0;
-				if ($_GET['cmd'] == "insert") {		
+				if ($_GET['cmd'] == "insert") {
 					$stat = $r->insert();
 					$t->assign ("cfunct", 'insert');
 				} elseif ($_GET['cmd'] == "update") {
@@ -125,13 +138,12 @@ if (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
 					$t->assign ("cfunct", '');
 					$rol = $stat;
 				}
-				
 				if (!iserror($rol))
 					$t->assign ("csetrole", true);
 				else
 					$t->assign ("errsetrole", $rol);
 			}
-			break;
+		break;
 	} //switch
 } else {
 	$t->assign ("regname", "Undefined Region!");

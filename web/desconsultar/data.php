@@ -112,7 +112,6 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 			$pin = $pag-1;
 			$pgt = $pag;
 		}
-		
 		for ($i = $pin; $i < $pgt; $i++) {
 			$slim = $sql ." LIMIT " . $i * $iRecordsPerPage .", ". $iRecordsPerPage;
 			$dislist = $q->getassoc($slim);
