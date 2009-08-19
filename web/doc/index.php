@@ -7,8 +7,10 @@
     $mod = "DI8Info";
   if (isset($_GET['p'])) {
     $pag = $_GET['p'];
-	if ($pag == "datacards")
+	if ($pag == "datacards") {
 		$t->assign ("eff", $q->queryLabelsFromGroup('Effect', $lg));
+		$t->assign ("sec", $q->queryLabelsFromGroup('Sector', $lg));
+	}
     if ($pag == "events")
 		$t->assign ("eve", $q->loadEvents("BASE", null, $lg));
     if ($pag == "causes")

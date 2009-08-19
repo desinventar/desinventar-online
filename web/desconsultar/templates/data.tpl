@@ -12,7 +12,8 @@
     <script type="text/javascript">
 	function setDIForm(did) {
 		parent.w.collapse();
-		parent.e.expand();
+		parent.difw.show();
+		parent.frames['dcf'].document.getElementById('cardupd').enable();
 		setDICardfromId('{-$reg-}', did, 'DATA');
 	}
 {-if !$ctl_singlemode-}

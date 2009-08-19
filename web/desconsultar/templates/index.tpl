@@ -21,8 +21,9 @@
   <script type="text/javascript" src="/extJS/ext-all.js"></script>
   <script type="text/javascript">
 	var w = null;
-	var e = null;
+	//var e = null;
 	var s = null;
+	var difw = null;
     // DI8 - Layout, buttons and internal windows - UI DesConsultar module
     Ext.onReady(function()
     {
@@ -32,31 +33,32 @@
         items: [
             {  text: '{-#mlang#-}', 
                menu: {
-			     id: 'langSubMenu'/*,
+			     id: 'langSubMenu',
 				 items: [
 				   {text: 'Español', handler: onMenuItem},
 				   {text: 'English', handler: onMenuItem},
-				   {text: 'Portuguese', handler: onMenuItem}]*/
+				   {text: 'Portuguese', handler: onMenuItem}]
 				}
 			}, '-',
-            {  text: '{-#mprint#-}',     handler: onMenuItem  },
-            {  text: '{-#mquit#-}',      handler: onMenuItem  }]
+			{  text: 'Fichas',			handler: onMenuItem }, '-',
+            {  text: '{-#mprint#-}',	handler: onMenuItem  },
+            {  text: '{-#mquit#-}',		handler: onMenuItem  }]
       });
       var mquery = new Ext.menu.Menu({
         id: 'queryMenu',
         items: [
-            {  text: '{-#mgotoqd#-}',    handler: onMenuItem  },
-            {  text: '{-#mnewsearch#-}', handler: onMenuItem  },
-            {  text: '{-#msavequery#-}', handler: onMenuItem  },
-            {  text: '{-#mopenquery#-}', handler: onMenuItem  }]
+            {  text: '{-#mgotoqd#-}',	handler: onMenuItem  },
+            {  text: '{-#mnewsearch#-}',handler: onMenuItem  },
+            {  text: '{-#msavequery#-}',handler: onMenuItem  },
+            {  text: '{-#mopenquery#-}',handler: onMenuItem  }]
       });
       //{  text: '{-#motherdoc#-}',		handler: onMenuItem  },
       var mhelp = new Ext.menu.Menu({
         id: 'helpMenu',
         items: [
-            {  text: '{-#mgotodoc#-}',    handler: onMenuItem  },
-            {  text: '{-#hmoreinfo#-}',		handler: onMenuItem  },
-            {  text: '{-#mabout#-}',     	handler: onMenuItem  }]
+            {  text: '{-#mgotodoc#-}',	handler: onMenuItem  },
+            {  text: '{-#hmoreinfo#-}',	handler: onMenuItem  },
+            {  text: '{-#mabout#-}',	handler: onMenuItem  }]
       });
       var tb = new Ext.Toolbar();
       tb.render('toolbar');
@@ -66,6 +68,18 @@
       //
       function onMenuItem(item){
         switch (item.text) {
+		  case "Español":
+			window.location = "index.php?lang=spa";
+		  break;
+		  case "English":
+			window.location = "index.php?lang=eng";
+		  break;
+		  case "Portuguese":
+			window.location = "index.php?lang=por";
+		  break;
+		  case "Fichas":
+			difw.show();
+		  break;
           case "{-#mprint#-}":
             window.print();
           break;
@@ -153,23 +167,22 @@
             margins:'0 2 0 0',
             collapsible: true,
             contentEl: 'west'
-          },{
-            region: 'east',
+          }/*,{
+			region: 'east',
 			id: 'eastm',
 			split: true,
 			width: 760,
-            //title: '[<a href="javascript:void(0);" onClick="e=Ext.getCmp(\'eastm\'); e.collapse();">X</a>]',
+			//title: '[<a href="javascript:void(0);" onClick="e=Ext.getCmp(\'eastm\'); e.collapse();">X</a>]',
 			collapseMode: 'mini',
 			autoScroll: true,
 			margins: '0 0 0 2',
 			collapsible: true,
-            contentEl: 'east'
-		  }]
+			contentEl: 'east'
+		  }*/]
       });
 	  w = Ext.getCmp('westm');
-	  e = Ext.getCmp('eastm');
+	  //e = Ext.getCmp('eastm'); e.hide();
 	  s = Ext.getCmp('southm');
-	  e.collapse();
       // ==> Results Configuration Windows
       // Data
       var datw;
@@ -301,6 +314,17 @@
         }
         mapw.show(this);
       });
+	  // DesInventar form
+	  if (!difw) {
+		difw = new Ext.Window({
+			el:'dif-win',  layout:'fit',  
+			x: 65, y: 10, width:900, height:670, 
+			closeAction:'hide', plain: true, animCollapse: false,
+			items: new Ext.Panel({
+				contentEl: 'dif-cfg', 
+				autoScroll: true })
+		});
+	  }
       // quicktips
       Ext.apply(Ext.QuickTips.getQuickTip(), {
         maxWidth: 200, minWidth: 100, showDelay: 50, trackMouse: true });
@@ -478,7 +502,7 @@
         $('_D+FieldH').value = mystr;
         combineForms('DC', 'CD');
         w.collapse(); //hide()
-		e.collapse();
+		//e.collapse();
         s.collapse();
         $('DC').action='data.php';
         $('DC').submit();
@@ -508,7 +532,7 @@
 		  }
 		  combineForms('DC', 'CM');
 		  w.collapse(); // hide()
-		  e.collapse();
+		  //e.collapse();
 		  s.collapse();
 		  $('DC').action='thematicmap.php';
 		  $('DC').submit();
@@ -522,7 +546,7 @@
       $('_G+cmd').value = cmd;
       combineForms('DC', 'CG');
       w.collapse(); //hide()
-	  e.collapse();
+	  //e.collapse();
       s.collapse();
       $('DC').action='graphic.php';
       $('DC').submit();
@@ -539,7 +563,7 @@
         $('_S+FieldH').value = mystr;
         combineForms('DC', 'CS');
         w.collapse();//hide()
-		e.collapse();
+		//e.collapse();
         s.collapse();
         $('DC').action='statistic.php';
         $('DC').submit();
@@ -1349,6 +1373,13 @@
             onClick="if($('DCRes').value != '') saveRes('export');" ext:qtip="{-#bsavemsg#-}">&nbsp;&nbsp;
         <input type="button" class="line" style="width:20px; height:20px; background-image:url(../images/printicon.png);"
             onClick="$('dcr').focus(); $('dcr').print();" ext:qtip="{-#bprintmsg#-}">&nbsp;&nbsp;
+		 <!-- Show DesInventar (input data) Form -->
+		<div id="dif-win" class="x-hidden">
+		  <div class="x-window-header">Ficha DesInventar</div>
+		  <div id="dif-cfg" style="text-align:center;">
+		   <iframe name="dcf" id="dcf" frameborder="0" scrolling="auto" height="600px;" width="100%" src="../desinventar/?r={-$reg-}"></iframe>
+		  </div>
+		</div>
        </td>
      </tr>
    </table>
@@ -1357,11 +1388,10 @@
 <!--  <div id="smap" style="position:absolute; left:0px; top:20px; visibility:hidden;">[<a href="javascript:void(0);" onClick="hideMap();">X</a>]<br></div>-->
   <iframe name="dcr" id="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="../region.php?r={-$reg-}&view=info"></iframe>
  </div>
- <!-- Show DesInventar (input data) Form -->
- <div id="east">
-  <iframe name="dcf" id="dcf" frameborder="0" scrolling="auto" height="610px" width="100%" src="../desinventar/?r={-$reg-}"></iframe>
+<!--
+ <div id="east">  
  </div>
-
+-->
 <!--
         SECTION : QUERY DESIGN 
         ======================
