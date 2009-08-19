@@ -4,7 +4,7 @@ SQLITE=sqlite3
 all : base.db core.db desinventar.db
 
 # Rebuild base.db database
-base.db : base.sql doc-db.sql events.csv causes.csv
+base.db : base.sql doc-db.csv events.csv causes.csv
 	/bin/rm -f base.db; \
 	sqlite3 base.db < base.sql ; \
 	iconv --from-code=UTF-8 --to-code=WINDOWS-1252 events.csv > eve.csv
@@ -14,9 +14,7 @@ base.db : base.sql doc-db.sql events.csv causes.csv
 	./insertEveCau.pl --file=cau.csv --table=Cause --lang=spa | sqlite3 base.db
 	./insertEveCau.pl --file=cau.csv --table=Cause --lang=eng | sqlite3 base.db
 	/bin/rm eve.csv cau.csv
-	sqlite3 base.db < doc-db-clean.sql ; \
-	cat doc-db.sql | sed -e 's/\/\*.*\*\///g' | sqlite3 base.db ; \
-	sqlite3 base.db < doc-db-fix.sql
+	./createDictionary.php | sqlite3 base.db
 	./iso3166tosql.pl | sqlite3 base.db
 	./square2sql.pl | sqlite3 base.db
 
