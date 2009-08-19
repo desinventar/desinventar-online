@@ -827,6 +827,7 @@ class Query extends PDO
     $fld = str_ireplace("D.CauseId", "C.CauseName", $fld); //Join with Cause table
     $fld = str_ireplace("D.CauseName", "C.CauseName", $fld); //Join with Cause table
     $fld = str_ireplace("D.GeographyCode", "G.GeographyCode", $fld);
+    $fld = str_ireplace("D.GeographyFQName", "G.GeographyFQName", $fld);
     // Process fields to show
     $sql = "SELECT ". $fld ." FROM Disaster AS D, EEData AS E, Event AS V, Cause AS C, Geography AS G ";
     if ($this->chkSQLWhere($whr)) {

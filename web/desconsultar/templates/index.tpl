@@ -792,10 +792,10 @@
               <br><br>
               <b>{-#dorderby#-}</b><br>
               <select id="_D+SQL_ORDER" name="_D+SQL_ORDER" class="fixw" size="5">
-                <option value="D.DisasterBeginTime, V.EventName, G.GeographyName" selected>{-#ddeg#-}</option>
+                <option value="D.DisasterBeginTime, V.EventName, G.GeographyFQName" selected>{-#ddeg#-}</option>
                 <option value="D.DisasterBeginTime, D.DisasterGeographyId, V.EventName">{-#ddge#-}</option>
-                <option value="G.GeographyName, V.EventName, D.DisasterBeginTime">{-#dged#-}</option>
-                <option value="V.EventName, D.DisasterBeginTime, G.GeographyName">{-#dedg#-}</option>
+                <option value="G.GeographyFQName, V.EventName, D.DisasterBeginTime">{-#dged#-}</option>
+                <option value="V.EventName, D.DisasterBeginTime, G.GeographyFQName">{-#dedg#-}</option>
                 <option value="D.DisasterSerial">{-#dserial#-}</option>
                 <option value="D.RecordCreation">{-#dcreation#-}</option>
                 <option value="D.RecordUpdate">{-#dlastupd#-}</option>

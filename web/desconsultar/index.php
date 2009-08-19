@@ -175,7 +175,7 @@ else {
   $dc2 = array_merge($dc2, $q->queryLabelsFromGroup('Effect', $lg));
   $dc2 = array_merge($dc2, $q->queryLabelsFromGroup('Sector', $lg));
   $t->assign ("dc2", $dc2);
-  $fld = "DisasterSerial,DisasterBeginTime,EventName,DisasterGeographyId,DisasterSiteNotes,".
+  $fld = "DisasterSerial,DisasterBeginTime,EventName,GeographyFQName,DisasterSiteNotes,".
         "DisasterSource,EffectNotes,EffectPeopleDead,EffectPeopleMissing,EffectPeopleInjured,".
         "EffectPeopleHarmed,EffectPeopleAffected,EffectPeopleEvacuated,EffectPeopleRelocated,".
         "EffectHousesDestroyed,EffectHousesAffected,EffectFarmingAndForest,EffectRoads,".
