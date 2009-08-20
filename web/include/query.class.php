@@ -930,46 +930,46 @@ class Query extends PDO
       return false;
   }
 
-  /* Reformat array setting to arr[X1] = array {a, b, c, d..} */
-  function prepareList ($dl, $mode) {
-	$res = array();
-	$j = 0;
-	$creg = $this->getRegionFieldByID($this->sRegionId, 'IsCRegion');
-	foreach ($dl as $it) {	
-		foreach ($it as $k=>$i) {
-			$val = $i;
-			if (substr($k,0,11) == "GeographyId") {
-			  if ($mode == "GRAPH")
-				$val = $this->getGeoNameById($i);
-			  elseif ($mode == "MAPS") {
-				$val = $this->getObjectNameById($i, DI_GEOGRAPHY);
-				// in VirtualRegion set base prefix - 
-				if ($creg[$this->sRegionId]) {
+	/* Reformat array setting to arr[X1] = array {a, b, c, d..} */
+	function prepareList ($dl, $mode) {
+		$res = array();
+		$j = 0;
+		$creg = $this->getRegionFieldByID($this->sRegionId, 'IsCRegion');
+		foreach ($dl as $it) {	
+			foreach ($it as $k=>$i) {
+				$val = $i;
+				if (substr($k,0,11) == "GeographyId") {
+				  if ($mode == "GRAPH")
+					$val = $this->getGeoNameById($i);
+				  elseif ($mode == "MAPS") {
+					$val = $this->getObjectNameById($i, DI_GEOGRAPHY);
+					// in VirtualRegion set base prefix - 
+					if ($creg[$this->sRegionId]) {
+						if ($j == 0)
+							$res['CVReg'] = array();
+						array_push($res['CVReg'], substr($i, 0, 5));
+					}
 					if ($j == 0)
-						$res['CVReg'] = array();
-					array_push($res['CVReg'], substr($i, 0, 5));
+						$glv = $k; // save key of GeographyId
+				  }
 				}
+				elseif ($j == 0)
+					$eff = $k; // save key of Effectvar
 				if ($j == 0)
-					$glv = $k; // save key of GeographyId
-			  }
+					$res[$k] = array();
+				array_push($res[$k], $val);
 			}
-			elseif ($j == 0)
-				$eff = $k; // save key of Effectvar
-			if ($j == 0)
-			  $res[$k] = array();
-			array_push($res[$k], $val);
+			$j++;
 		}
-		$j++;
-    }
-	// Sorting list in maps to order legend - ORDER BY not found with GROUP BY in sqlite3
-	if ($mode == "MAPS") {
-		if ($creg[$this->sRegionId])
-			array_multisort($res[$eff], $res[$glv], $res['CVReg']);
-		else
-			array_multisort($res[$eff], $res[$glv]);	
+		// Sorting list in maps to order legend - ORDER BY not found with GROUP BY in sqlite3 ??
+		if ($mode == "MAPS") {
+			if ($creg[$this->sRegionId])
+				array_multisort($res[$eff], $res[$glv], $res['CVReg']);
+			else
+				array_multisort($res[$eff], $res[$glv]);	
+		}
+		return $res;
 	}
-    return $res;
-  }
 	
 	/* Print results like associative array or fields separate by Tabs */
 	function printResults ($dl, $exp, $mode) {
@@ -979,7 +979,7 @@ class Query extends PDO
 			$j = 0;
 			foreach ($dl as $k=>$i) {
 				foreach (array_keys($i) as $idx) {
-					if (substr($idx,0,19) == "GeographyId") {
+					if (substr($idx,0,11) == "GeographyId") {
 			            switch ($mode) {
 			              case "CODE": 
 			                $dl[$j][$idx] = $this->getObjectNameById($i[$idx], DI_GEOGRAPHY); break;

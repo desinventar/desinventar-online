@@ -51,7 +51,7 @@
 	 <thead>
 	  <tr>
 		 <th class="header">{-#trow#-}</th>
-	{-foreach name=sel key=key item=item from=$sel-}
+{-foreach name=sel key=key item=item from=$sel-}
  {-strip-}
 		 <th class="header">
 		  <a href="javascript:void(null)" onclick="mod='std'; updateList('lst_dis', 'statistic.php', 
@@ -60,11 +60,11 @@
 		  </a>
 		 </th>
  {-/strip-}
-	{-/foreach-}
+{-/foreach-}
       </tr>
-    <tr>
-     <th style="border: thin solid;">{-#ttotals#-}</th>
-	{-foreach name=sel key=key item=item from=$sel-}
+      <tr>
+       <th style="border: thin solid;">{-#ttotals#-}</th>
+{-foreach name=sel key=key item=item from=$sel-}
  {-strip-}
   {-if $item != "DisasterId"-}
 	   <th style="border: thin solid;">
@@ -73,8 +73,8 @@
    {-/if-}</th>
   {-/if-}
  {-/strip-}
-	{-/foreach-}
-    </tr>
+{-/foreach-}
+      </tr>
 	 </thead>
 	 <tbody id="lst_dis">
 {-/if-}

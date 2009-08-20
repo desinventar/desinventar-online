@@ -100,7 +100,7 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
 		// Show results..
 		if ($post['_S+cmd'] == "result") {
 			$export = false;
-			$rxp 		= $post['_S+SQL_LIMIT'];
+			$rxp 	= $post['_S+SQL_LIMIT'];
 			// Set values to paging list
 			$last = (int) (($cou / $rxp) + 1);
 			// Smarty assign SQL values
