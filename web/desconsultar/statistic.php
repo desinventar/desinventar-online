@@ -148,7 +148,7 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
 			$dislist = $q->getassoc($slim);
 			$dl = $q->printResults($dislist, $export, $geo);
 			if ($i == $pin && !empty($dl)) {
-				// Set traduction in headers
+				// Set translation in headers
 				$lb = "";
 				$sel = array_keys($dislist[0]);
 				foreach ($sel as $kk=>$ii) {
