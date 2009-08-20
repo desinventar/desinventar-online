@@ -101,10 +101,9 @@
 {-/foreach-}
 				<td><a href="javascript:void(null);" onMouseover="dropdownmenu(this, event, 'idioma')">{-#tlang#-}</a>
 					<div id="idioma" class="submenu">
-						<a href="?lang=eng">English</a>
-						<a href="?lang=spa">Español</a>
-						<a href="?lang=por">Português</a>
-<!--				<a href="?lang=fre">Français*</a> -->
+{-foreach name=lglst key=key item=item from=$lglst-}
+						<a href="?lang={-$key-}">{-$item[0]-}</a>
+{-/foreach-}
 					</div>
 				</td>
 			 </tr>

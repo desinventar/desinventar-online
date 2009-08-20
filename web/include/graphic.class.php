@@ -207,7 +207,7 @@ class Graphic {
 			$pal = $this->genPalette($acol, DI_EVENT, array_keys($val), $q);
 		elseif (substr_count($opc['_G+Type'], "Cause") > 0)
 			$pal = $this->genPalette($acol, DI_CAUSE, array_keys($val), $q);
-		elseif (substr_count($opc['_G+Type'], "DisasterGeography") > 0)
+		elseif (substr_count($opc['_G+Type'], "Geography") > 0)
 			$pal = $this->genPalette($acol, DI_GEOGRAPHY, array_keys($val), null);
 		elseif ($gType == "TEMPO")
 		  $pal = "darkorange";
