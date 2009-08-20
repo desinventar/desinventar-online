@@ -9,6 +9,8 @@
 	$_SERVER["DI8_WEB"] = '../web';
 	require_once($_SERVER["DI8_WEB"] . '/include/loader.php');
 	require_once(BASE . '/include/diregion.class.php');
+	require_once(BASE . '/include/dievent.class.php');
+	require_once(BASE . '/include/dicause.class.php');
 	require_once(BASE . '/include/digeography.class.php');
 	require_once(BASE . '/include/diregionitem.class.php');
 	require_once(BASE . '/include/digeolevel.class.php');
@@ -19,10 +21,10 @@
 	$bOption = 1;
 	if ($bOption) {
 		// Gran Chaco
-		$RegionItems = array('ARG-1248983690-argentina_gran_chaco' => 'Argentina',
-		                     'BOL-1248983699-bolivia_gran_chaco'   => 'Bolivia',
-		                     'PAR-1248983701-paraguay_gran_chaco'  => 'Paraguay');
-		//$RegionItems = array('BOL-1248983699-bolivia_gran_chaco');
+		$RegionItems = array('ARG-1250695025-argentina_gran_chaco' => 'Argentina',
+		                     'BOL-1250695036-bolivia_gran_chaco'   => 'Bolivia',
+		                     'PAR-1250695038-paraguay_gran_chaco'  => 'Paraguay');
+		$RegionItems = array('BOL-1250695036-bolivia_gran_chaco');
 		$RegionId = 'DESINV-1249126759-subregion_gran_chaco';
 		$RegionLabel = 'Subregion Gran Chaco';
 		$PeriodBeginDate = '1997-01-01';
@@ -33,11 +35,11 @@
 		$GeoLimitMaxY    = -11;
 	} else {
 		// CAN - SubRegion Andina
-		$RegionItems = array('BOL-1248983224-bolivia_inventario_historico_de_desastres'  => 'Bolivia',
-	 	      	             'COL-1248983239-colombia_inventario_historico_de_desastres' => 'Colombia',
-	   	    	             'ECU-1248983677-ecuador_inventario_historico_de_desastres'  => 'Ecuador',
-	   	    	             'PER-1248983875-peru_inventario_historico_de_desastres'     => 'Perú',
-	   	    	             'VEN-1248984232-inventario_de_desastres_de_venezuela'       => 'Venezuela');
+		$RegionItems = array('BOL-1248983224-bolivia_inventario_historico_de_desastres'   => 'Bolivia',
+	 	      	             'COL-1250694506-colombia_inventario_historico_de_desastres'  => 'Colombia',
+	   	    	             'ECU-1250695011-ecuador_inventario_historico_de_desastres'   => 'Ecuador',
+	   	    	             'PER-1250695241-peru_inventario_historico_de_desastres'      => 'Perú',
+	   	    	             'VEN-1250695640-venezuela_inventario_historico_de_desastres' => 'Venezuela');
 		//$RegionItems = array('BOL-1248983224-bolivia_inventario_historico_de_desastres');
 		$RegionId = 'DESINV-1249040429-can_subregion_andina';
 		$RegionLabel = 'CAN Subregion Andina';
