@@ -117,7 +117,7 @@
 <p align="justify">
 {-#tviewdbase#-}<br>
 {-if $ctl_available-}
-	<select onChange="updateList('shwreg', 'region.php', 'r='+ this.value)" size=3 style="width: 500px;">
+	<select onChange="updateList('shwreg', 'region.php', 'r='+ this.value)" size=13 style="width: 500px;">
 {-foreach name=dbs key=key item=item from=$dbs-}
   	<option value="{-$key-}" class="regl">{-$item-}</option>
 {-/foreach-}
