@@ -212,8 +212,8 @@ class Query extends PDO
   /***** READ OBJECTS :: EVENT, CAUSE, GEOGRAPHY, GEOLEVEL READ *****/
   public function isvalidObjectToInactivate($id, $obj) {
     switch ($obj) {
-      case DI_EVENT:			$whr = "EventId='$id'";		break;
-      case DI_CAUSE:			$whr = "CauseId='$id'";		break;
+      case DI_EVENT:		$whr = "EventId='$id'";		break;
+      case DI_CAUSE:		$whr = "CauseId='$id'";		break;
       case DI_GEOGRAPHY:	$whr = "GeographyId like '$id%'";		break;
     }
     $sql = "SELECT COUNT(DisasterId) AS counter FROM Disaster WHERE $whr ";
@@ -252,12 +252,12 @@ class Query extends PDO
   
   public function getObjectNameById($id, $obj) {
     switch ($obj) {
-      case DI_EVENT:			$name = "EventName";			$table = "Event";			$fld = "EventId";		break;
-      case DI_CAUSE:			$name = "CauseName";			$table = "Cause";			$fld = "CauseId";		break;
-      case DI_GEOGRAPHY:	$name = "GeographyCode";	$table = "Geography"; $fld = "GeographyId";	break;
-      case "GEOCODE":			$name = "GeographyId";		$table = "Geography"; $fld = "GeographyCode";	break;
+      case DI_EVENT:		$name = "EventName";		$table = "Event";		$fld = "EventId";		break;
+      case DI_CAUSE:		$name = "CauseName";		$table = "Cause";		$fld = "CauseId";		break;
+      case DI_GEOGRAPHY:	$name = "GeographyCode";	$table = "Geography"; 	$fld = "GeographyId";	break;
+      case "GEOCODE":		$name = "GeographyId";		$table = "Geography"; 	$fld = "GeographyCode";	break;
       case DI_GEOLEVEL:		$name = "GeoLevelName";		$table = "GeoLevel"; 	$fld = "GeoLevelId";	break;
-      default:						return null; 		break;
+      default:				return null; 		break;
     }
     $sql = "SELECT $name FROM $table WHERE $fld = '$id'";
     $res = $this->getresult($sql);
@@ -294,21 +294,23 @@ class Query extends PDO
   }
 
   function getGeoNameById($geoid) {
-    if ($geoid == "")
-      return null;
-    $sql = "SELECT GeographyName FROM Geography WHERE 1!=1";
-    $levn = (strlen($geoid) / 5);
-    for ($n = 0; $n < $levn; $n++) {
+	if ($geoid == "")
+	  return null;
+	$sql = "SELECT GeographyName FROM Geography WHERE 1!=1";
+	$levn = (strlen($geoid) / 5);
+	for ($n = 0; $n < $levn; $n++) {
 		$len = 5 * ($n + 1);
 		$geo = substr($geoid, 0, $len);
 		$sql .= " OR GeographyId='". $geo ."'";
-    }
+	}
 	$sql .= " ORDER BY GeographyLevel";
-    $data = "";
-    $res = $this->dreg->query($sql);
-    foreach($res as $row)
-      $data .= $row['GeographyName'] . "/";
-    return $data;
+	$data = "";
+	$res = $this->dreg->query($sql);
+	foreach($res as $row)
+	  $data .= $row['GeographyName'] . "/";
+//	$sql = "SELECT GeographyFQName FROM Geography WHERE GeographyId='". $geoid ."'";
+//	$data = $this->dreg->query($sql);
+	return $data;
   }
 
   /*** GEOGRAPHY ***/
@@ -936,7 +938,7 @@ class Query extends PDO
 	foreach ($dl as $it) {	
 		foreach ($it as $k=>$i) {
 			$val = $i;
-			if (substr($k,0,19) == "GeographyId") {
+			if (substr($k,0,11) == "GeographyId") {
 			  if ($mode == "GRAPH")
 				$val = $this->getGeoNameById($i);
 			  elseif ($mode == "MAPS") {
@@ -1188,11 +1190,12 @@ class Query extends PDO
     return $dictio;
   }
 
-  function loadAllLang() {
-    $sql = "select LangIsoCode, LangIsoName, LangLocalName, LangStatus from Language";
+  function loadLanguages($status) {
+    $sql = "select LangIsoCode, LangIsoName, LangLocalName from Language";
+	if ($status != null)
+		$sql .= " where LangStatus=". $status;
     foreach ($this->base->query($sql) as $row) {
-      $lang[$row['LangIsoCode']] = array($row['LangLocalName'],
-        $row['LangIsoName'], $row['LangStatus']);
+      $lang[$row['LangIsoCode']] = array($row['LangLocalName'], $row['LangIsoName']);
     }
     return $lang;
   }

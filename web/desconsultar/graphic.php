@@ -44,7 +44,7 @@ if (isset($post['_G+cmd'])) {
 			} else {
 				$ele[] = $post['_G+Period'] ."|". $itm;
 			}
-		} elseif (substr($itm, 2, 19) == "GeographyId") {
+		} elseif (substr($itm, 2, 11) == "GeographyId") {
 			$gl = explode("_", $itm);
 			$ele[] = $gl[1] ."|". $gl[0];// "0|$itm"; 
 		} else {
@@ -56,6 +56,7 @@ if (isset($post['_G+cmd'])) {
 	if (isset($post['_G+Field2']) && !empty($post['_G+Field2']))
 		array_push($opc['Field'], $post['_G+Field2']);
 	$sql = $q->genSQLProcess($qd, $opc);
+	//echo $sql;
 	$dislist = $q->getassoc($sql);
 	if (!empty($dislist)) {
 		// Process results data
