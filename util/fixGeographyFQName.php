@@ -14,7 +14,7 @@ require_once($_SERVER["DI8_WEB"] . '/include/loader.php');
 require_once(BASE . '/include/digeography.class.php');
 $q = new Query();
 $RegionList = array();
-foreach($q->core->query("SELECT * FROM Region") as $row) {
+foreach($q->core->query("SELECT * FROM Region ORDER BY RegionId") as $row) {
 	$RegionList[] = $row['RegionId'];
 }
 //DEBUG
@@ -23,8 +23,8 @@ unset($RegionList['DEMO']);
 foreach ($RegionList as $RegionId) {
 	print $RegionId . "\n";
 	$us->q->setDBConnection($RegionId);
-	$query = "ALTER TABLE Geography ADD COLUMN GeographyFQName VARCHAR(500);";
-	$us->q->dreg->query($query);
+	//$query = "ALTER TABLE Geography ADD COLUMN GeographyFQName VARCHAR(500);";
+	//$us->q->dreg->query($query);
 	$query = "SELECT * FROM Geography WHERE GeographyLevel=0 ORDER BY GeographyId";
 	foreach($us->q->dreg->query($query) as $row) {
 		$g = new DIGeography($us, $row['GeographyId']);

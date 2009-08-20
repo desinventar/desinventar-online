@@ -160,6 +160,8 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
 						$dk[$ii] = $dic['Statistic'. $i2][0];
 					elseif (isset($dic[$i3][0]))
 						$dk[$ii] = $dic[$i3][0];
+					elseif (isset($dic[$ii][0]))
+						$dk[$ii] = $dic[$ii][0];
 					else
 						$dk[$ii] = $ii;		// no traduction..
 					$lb .= '"'. $dk[$ii] .'"'. "\t";

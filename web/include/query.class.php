@@ -1141,7 +1141,8 @@ class Query extends PDO
 	try {
 		foreach ($this->base->query($sql) as $row) {
 			$grp = explode("|", $row['lgn']);
-			$dictio[$grp[0].$row['lbn']] = array(
+			$dictlabel = $grp[0] . $row['lbn'];
+			$dictio[$dictlabel] = array(
 			  $row['DictTranslation'],//utf8_encode($row['DicTranslation']), 
 			  $row['DictTechHelp'],//utf8_encode($row['DicTechHelp']),
 			  $row['DictBasDesc'], $row['DictFullDesc']);

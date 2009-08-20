@@ -68,8 +68,6 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 		if (isset($post['_D+SQL_ORDER']))
 			$ord = $post['_D+SQL_ORDER'];
 		$sql = $q->genSQLSelectData($qd, $fld, $ord);
-		fb($sql);
-		//echo $sql;
 		$dlt = $q->dreg->query($sqc);
 		if ($post['_D+cmd'] == "result") {
 			// show results in window
