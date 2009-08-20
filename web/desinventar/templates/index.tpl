@@ -306,8 +306,8 @@
 					<td>
 						<table class="grid">
 							<tr valign="top">
-								<td ext:qtip="{-$dis.GeographyId[1]-}">
-									{-$dis.GeographyId[0]-}<b style="color:darkred;">*</b><br>
+								<td ext:qtip="{-$dis.GeographyFQName[1]-}">
+									{-$dis.GeographyFQName[0]-}<b style="color:darkred;">*</b><br>
 									<input id="GeographyId" name="GeographyId" type="hidden">
 									<span id="lst_geo" class="geodiv" style="width: 180px; height: 30px;">
 {-/if-}
@@ -317,7 +317,7 @@
 										{-$lev-}- {-$levname[0]-}:
 										<select onChange="setgeo(this.options[this.selectedIndex].value, {-$lev-},'{-$levname[1]-}','{-$opc-}');" 
 												autoComplete="true" style="width:180px; background-Color:#eee;" tabindex="7" id="geolev{-$lev-}"
-												onFocus="showtip('{-$dis.GeographyId[2]-}', '#d4baf6')" disabled>
+												onFocus="showtip('{-$dis.GeographyId[2]-}', '#d4baf6')">
 											<option value="" style="text-align:center;">--</option>
  {-foreach name=geol key=key item=item from=$geol-}
   {-if $item[2]-}

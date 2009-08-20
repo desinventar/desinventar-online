@@ -27,8 +27,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>DesInventar {-$DIver-}</title>
 	<link rel="stylesheet" href="css/desinventar.css" TYPE="text/css">
 	<link rel="stylesheet" href="css/portal.css" TYPE="text/css">
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
 	<script type="text/javascript" src="include/prototype.js"></script>
 	<script type="text/javascript" src="include/diadmin.js"></script>
 	<script type="text/javascript" src="include/menu.js"></script>
@@ -67,7 +69,6 @@
 		//updateContentBar('user.php', 'end', '', '');
 	}
 	</script>
-	<title>DesInventar {-#tdiversion#-}</title>
 </head>
 
 <body>

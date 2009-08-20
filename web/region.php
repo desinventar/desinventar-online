@@ -53,7 +53,10 @@ elseif (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
 			$t->assign ("ctl_reginfo", true);
 		elseif ($_GET['view'] == "logo") {
 			header("Content-type: Image/png");
-			readfile(VAR_DIR . "/". $sRegionId . "/logo.png");
+			$murl = VAR_DIR . "/". $sRegionId . "/logo.png";
+			if (!file_exists($murl))
+				$murl = "images/di_logo.png";
+			readfile($murl);
 			exit();
 		}
 	}

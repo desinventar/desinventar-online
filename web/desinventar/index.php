@@ -215,7 +215,9 @@ if (isset($_GET['u'])) {
 		}
 		$t->assign ("dicrole", $dicrole);
 		$t->assign ("ctl_effects", true);
-		$t->assign ("dis", $us->q->queryLabelsFromGroup('Disaster', $lg));
+		$dis = $us->q->queryLabelsFromGroup('Disaster', $lg);
+		$dis = array_merge($dis, $us->q->queryLabelsFromGroup('Geography', $lg));
+		$t->assign ("dis", $dis);
 		$t->assign ("rc1", $us->q->queryLabelsFromGroup('Record|1', $lg));
 		$t->assign ("rc2", $us->q->queryLabelsFromGroup('Record|2', $lg));
 		$t->assign ("eve", $us->q->queryLabelsFromGroup('Event', $lg));

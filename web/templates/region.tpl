@@ -132,7 +132,7 @@
 {-if $ctl_showreg || $ctl_reginfo-}
  <table border=0 style="width:550px; font-family:Lucida Grande, Verdana; font-size:10px;">
   <tr>
-	<td valign="top"><img src="region.php?r={-$reg-}&view=logo"></td>
+	<td valign="center"><img src="region.php?r={-$reg-}&view=logo"></td>
 	<td valign="top">
  	  <h2>{-$regname-}</h2>
  {-if !$isvreg-}
