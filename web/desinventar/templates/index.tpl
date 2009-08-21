@@ -35,10 +35,12 @@
 				},
 				onSuccess: function(request) {
 					var res = request.responseText;
-					if (cmd == "getNextSerial")
-						$('DisasterSerial').value = value +'-'+ res;
-					if (cmd == "getPrevDId" || cmd == "getNextDId")
-						setDICardfromId('{-$reg-}', res, '');
+					if (res != "") {
+						if (cmd == "getNextSerial")
+							$('DisasterSerial').value = value +'-'+ res;
+						if (cmd == "getPrevDId" || cmd == "getNextDId")
+							setDICardfromId('{-$reg-}', res, '');
+					}
 					$('dostat').innerHTML = "";
 				}
 			} );
