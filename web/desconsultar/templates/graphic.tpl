@@ -8,10 +8,10 @@
 	<META HTTP-EQUIV="expires" CONTENT="Wed, 09 Aug 2000 08:21:57 GMT">
 	<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
-  <script type="text/javascript">
+	<script type="text/javascript">
 	window.onload = function() {
 		var qrydet = parent.document.getElementById('querydetails');
-		var qdet = "=> ";
+		var qdet = "";
 {-foreach key=k item=i from=$qdet-}
  {-if $k == "GEO"-}qdet += "<b>{-#geo#-}:</b> {-$i-}";{-/if-}
  {-if $k == "EVE"-}qdet += "<b>{-#eve#-}:</b> {-$i-}";{-/if-}
@@ -25,8 +25,10 @@
 		qrydet.innerHTML = qdet;
 	}
 	</script>
+	<link rel="stylesheet" href="../css/desinventar.css" type="text/css"/>
  </head>
  <body>
+  <p align="right">{-#trepnum#-}: {-$tot-}</p>
   <img src="{-$image-}">
  </body>
 </html>

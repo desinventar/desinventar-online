@@ -558,27 +558,25 @@ class Query extends PDO
   }
 
   public function getFirstDisasterid() {
-    $sql = "SELECT MIN(DisasterId) AS first FROM Disaster";
+    $sql = "SELECT MIN(DisasterId) as first FROM Disaster";
     $dat = $this->getresult($sql);
     return $dat['first'];
   }
   
   public function getPrevDisasterId($id) {
-    $sql = "SELECT DisasterId AS prev FROM Disaster WHERE ".
-      "DisasterId < '$id' ORDER BY RecordUpdate,DisasterId DESC LIMIT 1";
+    $sql = "SELECT DisasterId FROM Disaster WHERE DisasterId < '$id' LIMIT 1";
     $dat = $this->getresult($sql);
-    return $dat['prev'];
+    return $dat['DisasterId'];
   }
   
   public function getNextDisasterId($id) {
-    $sql = "SELECT DisasterId AS next FROM Disaster WHERE ".
-      "DisasterId > '$id' ORDER BY RecordUpdate,DisasterId ASC LIMIT 1";
+    $sql = "SELECT DisasterId FROM Disaster WHERE DisasterId > '$id' LIMIT 1";
     $dat = $this->getresult($sql);
-    return $dat['next'];
+    return $dat['DisasterId'];
   }
 
   public function getLastDisasterId() {
-    $sql = "SELECT MAX(DisasterId) AS last FROM Disaster";
+    $sql = "SELECT MAX(DisasterId) as last FROM Disaster";
     $dat = $this->getresult($sql);
     return $dat['last'];
   }

@@ -62,9 +62,9 @@
       });
       var tb = new Ext.Toolbar();
       tb.render('toolbar');
-      tb.add(     {text:  '{-#mfile#-}',   menu:  mfile  });
-      tb.add('-', {text:  '{-#msearch#-}',  menu: mquery });
-      tb.add('-', {text:  '{-#mhelp#-}',    menu: mhelp });
+      tb.add(     {text:  '{-#mfile#-}',   menu: mfile  });
+      tb.add('-', {text:  '{-#msearch#-}', menu: mquery });
+      tb.add('-', {text:  '{-#mhelp#-}',   menu: mhelp  });
       //
       function onMenuItem(item){
         switch (item.text) {
@@ -313,8 +313,8 @@
 	  // DesInventar form
 	  if (!difw) {
 		difw = new Ext.Window({
-			el:'dif-win',  layout:'fit',  
-			x: 65, y: 10, width:900, height:670, 
+			el:'dif-win', layout:'fit', 
+			x: 65, y: 0, width:920, height:670, 
 			closeAction:'hide', plain: true, animCollapse: false,
 			items: new Ext.Panel({
 				contentEl: 'dif-cfg', 
@@ -1255,9 +1255,9 @@
             onClick="$('dcr').focus(); $('dcr').print();" ext:qtip="{-#bprintmsg#-}">&nbsp;&nbsp;
 		 <!-- Show DesInventar (input data) Form -->
 		<div id="dif-win" class="x-hidden">
-		  <div class="x-window-header">Ficha DesInventar</div>
+		  <div class="x-window-header">{-#mdcsection#-} | {-$userid-} - {-$role-}</div>
 		  <div id="dif-cfg" style="text-align:center;">
-		   <iframe name="dcf" id="dcf" frameborder="0" scrolling="auto" height="600px;" width="100%" src="../desinventar/?r={-$reg-}"></iframe>
+		   <iframe name="dif" id="dif" frameborder="0" scrolling="auto" height="625px;" width="100%" src="../desinventar/?r={-$reg-}"></iframe>
 		  </div>
 		</div>
        </td>
@@ -1268,10 +1268,6 @@
 <!--  <div id="smap" style="position:absolute; left:0px; top:20px; visibility:hidden;">[<a href="javascript:void(0);" onClick="hideMap();">X</a>]<br></div>-->
   <iframe name="dcr" id="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="../region.php?r={-$reg-}&view=info"></iframe>
  </div>
-<!--
- <div id="east">  
- </div>
--->
 <!--
         SECTION : QUERY DESIGN 
         ======================

@@ -458,6 +458,13 @@
 	function setDICardfromId(reg, did, src) {
 		var lsAjax = new Ajax.Request('../desinventar/index.php', {
 			method: 'get', parameters: 'r='+ reg +'&DisasterId='+ did,
+			onLoading: function(request) {
+				if (src == "DATA")
+					dostat = window.parent.frames['dif'].document.getElementById('dostat');
+				else
+					dostat = $('dostat');
+				dostat.innerHTML = waiting;
+			},
 			onSuccess: function(request) {
 				var res = request.responseText;
 				var json = eval('(' + res + ')');
@@ -468,12 +475,10 @@
 	
 	function setDICard(reg, arr, src) {
 		var diform = null;
-		if (src == "DATA") {
-			diform = window.parent.frames['dcf'].document.getElementById('DICard');
-		}
-		else {
+		if (src == "DATA")
+			diform = window.parent.frames['dif'].document.getElementById('DICard');
+		else
 			diform = $('DICard');
-		}
 		var objElems = diform.elements; // DICard is DesInventar form..
 		for (i=0; i < objElems.length; i++) {
 			if (objElems[i].id != "geolev0") {
@@ -488,8 +493,8 @@
 	
 	function getGeoItems(reg, geoid, l, lev, src) {
 		if (src == "DATA") {
-			div = window.parent.frames['dcf'].document.getElementById('lev'+ l);
-			ele = window.parent.frames['dcf'].document.getElementById('geolev'+ l);
+			div = window.parent.frames['dif'].document.getElementById('lev'+ l);
+			ele = window.parent.frames['dif'].document.getElementById('geolev'+ l);
 		}
 		else {
 			div = $('lev'+ l);

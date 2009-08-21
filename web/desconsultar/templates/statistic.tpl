@@ -12,7 +12,7 @@
 	<script type="text/javascript">
 	window.onload = function() {
 		var qrydet = parent.document.getElementById('querydetails');
-			var qdet = "=> ";
+			var qdet = "";
 {-foreach key=k item=i from=$qdet-}
  {-if $k == "GEO"-}qdet += "<b>{-#geo#-}:</b> {-$i-}";{-/if-}
  {-if $k == "EVE"-}qdet += "<b>{-#eve#-}:</b> {-$i-}";{-/if-}
