@@ -6,14 +6,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
-	<title>{-#ttitle#-} -{-$regname-}- {-$usr-} | {-$dicrole-}</title>
+	<title>{-#ttitle#-} [{-$regname-}] | {-$usr-} - {-$dicrole-}</title>
 	<link rel="stylesheet" href="../css/desinventar.css" type="text/css"/>
 	<link rel="stylesheet" href="../css/desinput.css" type="text/css"/>
 	<script type="text/javascript" src="../include/prototype.js"></script>
 	<script type="text/javascript" src="../include/combo-box.js"></script>
 	<script type="text/javascript" src="../include/diadmin.js"></script>
-	<!--	<link rel="stylesheet" href="../css/tabeffect.css" type="text/css">
-	<script type="text/javascript" src="../include/tabber.js"></script> -->
+	<!--	<link rel="stylesheet" href="../css/tabeffect.css" type="text/css"> <script type="text/javascript" src="../include/tabber.js"></script> -->
 	<script type="text/javascript" language="javascript">
 		var mod = "di";
 		function hidediv(myDiv) {
@@ -31,15 +30,19 @@
 			var lsAjax = new Ajax.Request('index.php', {
 				method: 'get', parameters: 'r={-$reg-}&cmd='+ cmd +'&value='+ value,
 				onLoading: function(request) {
-					$('dostat').innerHTML = "<img src='loading.gif'>";
+					$('dostat').innerHTML = waiting;
 				},
 				onSuccess: function(request) {
 					var res = request.responseText;
 					if (res != "") {
 						if (cmd == "getNextSerial")
 							$('DisasterSerial').value = value +'-'+ res;
-						if (cmd == "getPrevDId" || cmd == "getNextDId")
-							setDICardfromId('{-$reg-}', res, '');
+						if (cmd == "getPrevDId" || cmd == "getNextDId") {
+							val = setDICardfromId('{-$reg-}', res, '');
+{-if $ctl_validrole-}
+							if (val)
+								changeOptions('cardfill');{-/if-}
+						}
 					}
 					$('dostat').innerHTML = "";
 				}
@@ -84,6 +87,70 @@
 				}
 			}
 		}
+		function disenabutton(butid, disab) {
+			if (disab) {
+				butid.disable();
+				Element.removeClassName(butid, 'bb');
+				Element.addClassName(butid, 'disabled');
+			} else {
+				butid.enable();
+				Element.addClassName(butid, 'bb');
+				Element.removeClassName(butid, 'disabled');
+			}
+		}
+		function changeOptions(but) {
+{-if $ctl_validrole-}
+			switch (but) {
+				case "cardnew":
+					disenabutton($('cardnew'), true);
+					disenabutton($('cardsav'), false);
+					disenabutton($('cardupd'), true);
+					disenabutton($('cardcln'), false);
+					disenabutton($('cardcan'), false);
+					//$('cardfnd').disable();
+				break;
+				case "cardupd":
+					disenabutton($('cardnew'), true);
+					disenabutton($('cardsav'), false);
+					disenabutton($('cardupd'), true);
+					disenabutton($('cardcan'), false);
+					//$('cardfnd').disable();
+				break;
+				case "cardsav":
+					disenabutton($('cardnew'), false);
+					disenabutton($('cardsav'), true);
+					disenabutton($('cardupd'), true);
+					disenabutton($('cardcln'), true);
+					disenabutton($('cardcan'), true);
+					//$('cardfnd').enable();
+				break;
+				case "cardcan":
+					disenabutton($('cardupd'), false);
+					disenabutton($('cardsav'), true);
+					disenabutton($('cardcln'), true);
+					disenabutton($('cardcan'), true);
+					disenabutton($('cardnew'), false);
+					//$('cardfnd').enable();
+				break;
+				case "cardfill":
+					disenabutton($('cardupd'), false);
+				break;
+				default:
+					disenabutton($('cardnew'), false);
+					disenabutton($('cardsav'), true);
+					disenabutton($('cardupd'), true);
+					disenabutton($('cardcln'), true);
+					disenabutton($('cardcan'), true);
+				break;
+			}
+{-else-}
+			disenabutton($('cardnew'), true);
+			disenabutton($('cardsav'), true);
+			disenabutton($('cardupd'), true);
+			disenabutton($('cardcln'), true);
+			disenabutton($('cardcan'), true);
+{-/if-}
+		}
 		function switchEff(section) {
 			if (section == 'effext') {
 				$('eeimg').src="../images/di_efftag.png";
@@ -111,12 +178,7 @@
 					$('DICard').reset();
 					$('_CMD').value = 'insertDICard';
 					uploadMsg("{-#tmsgnewcardfill#-}");
-					$('cardnew').disable();
-					$('cardsav').enable();
-					$('cardupd').disable();
-					$('cardcln').enable();
-					$('cardcan').enable();
-					//$('cardfnd').disable();
+					changeOptions(btn);
 				break;
 				case "cardupd":
 					// check if DC is onused
@@ -129,11 +191,7 @@
 								setfocus('DisasterBeginTime[0]');
 								$('_CMD').value = 'updateDICard';
 								uploadMsg("{-#tmsgeditcardfill#-}");
-								$('cardnew').disable();
-								$('cardsav').enable();
-								$('cardupd').disable();
-								$('cardcan').enable();
-								//$('cardfnd').disable();
+								changeOptions(btn);
 							}
 							else 
 								uploadMsg("{-#tdconuse#-}");
@@ -147,12 +205,7 @@
 						uploadMsg('');
 						$('DICard').submit();
 						DisableEnableForm($('DICard'), true);
-						$('cardnew').enable();
-						$('cardsav').disable();
-						$('cardupd').disable();
-						$('cardcln').disable();
-						$('cardcan').disable();
-						//$('cardfnd').enable();
+						changeOptions(btn);
 					}
 				break;
 				case "cardcln":
@@ -164,13 +217,8 @@
 				case "cardcan":
 					updateList('distatusmsg', '', 'r={-$reg-}&cmd=chkrelease&DisasterId='+ $('DisasterId').value);
 					DisableEnableForm($('DICard'), true);
-					$('cardupd').enable();
-					$('cardsav').disable();
-					$('cardcln').disable();
-					$('cardcan').disable();
-					$('cardnew').enable();
-					//$('cardfnd').enable();
 					uploadMsg("{-#tmsgnewcard#-}");
+					changeOptions(btn);
 				break;
 				case "cardfnd":
 				break;
@@ -179,6 +227,7 @@
 		}
 		window.onload = function() {
 			DisableEnableForm($('DICard'), true);
+			changeOptions();
 			uploadMsg("{-#tmsgnewcard#-}");
 			var pe = new PeriodicalExecuter(setActive, 60);
 		}
@@ -218,19 +267,19 @@
 		<table width="900px">
 			<tr>
 				<td>
-					<input type="button" id="cardnew" class="bb bnew" alt="{-#bnew#-}" onClick="onSubmitBtn('cardnew');" {-$ro-}>
-					<input type="button" id="cardupd" class="bb bupd" alt="{-#bupdate#-}" onClick="onSubmitBtn('cardupd');" disabled {-$ro-}>
-					<input type="button" id="cardsav" class="bb bsave" alt="{-#bsave#-}" onClick="onSubmitBtn('cardsav');" disabled {-$ro-}>
-					<input type="button" id="cardcln" class="bb bnew" alt="{-#bclean#-}" onClick="onSubmitBtn('cardcln');" disabled {-$ro-}>
-					<input type="button" id="cardcan" class="bb bcancel" alt="{-#bcancel#-}" onClick="onSubmitBtn('cardcan');" disabled {-$ro-}>
+					<input type="button" id="cardnew" class="bb bnew" alt="{-#bnew#-}" onClick="onSubmitBtn('cardnew');">
+					<input type="button" id="cardupd" class="bb bupd" alt="{-#bupdate#-}" onClick="onSubmitBtn('cardupd');">
+					<input type="button" id="cardsav" class="bb bsave" alt="{-#bsave#-}" onClick="onSubmitBtn('cardsav');">
+					<input type="button" id="cardcln" class="bb bnew" alt="{-#bclean#-}" onClick="onSubmitBtn('cardcln');">
+					<input type="button" id="cardcan" class="bb bcancel" alt="{-#bcancel#-}" onClick="onSubmitBtn('cardcan');">
 					<input type="button" id="cardprn" class="bb bprint" alt="{-#bprint#-}" onClick="window.print();">
 					<!--<input type="button" id="cardfnd" alt="{-#bexpsearch#-}" onClick="onSubmitBtn('cardfnd');" {-$ro-}>-->
 					&nbsp;&nbsp;|&nbsp;&nbsp;
-					<input type="button" value="<<" class="line" onClick="setDICard('{-$reg-}', {-$fst-}, '');" {-$ro-}>
-					<input type="button" value="<" class="line" onClick="requestDCard('getPrevDId', $('DisasterId').value);" {-$ro-} >
+					<input type="button" value="<<" class="bb line" onClick="setDICard('{-$reg-}', {-$fst-}, '');">
+					<input type="button" value="<" class="bb line" onClick="requestDCard('getPrevDId', $('DisasterId').value);">
 					<span class="dlgmsg" id="dostat"></span>
-					<input type="button" value=">" class="line" onClick="requestDCard('getNextDId', $('DisasterId').value);" {-$ro-}>
-					<input type="button" value=">>" class="line" onClick="setDICard('{-$reg-}', {-$lst-}, '');" {-$ro-}>
+					<input type="button" value=">" class="bb line" onClick="requestDCard('getNextDId', $('DisasterId').value);">
+					<input type="button" value=">>" class="bb line" onClick="setDICard('{-$reg-}', {-$lst-}, '');">
 					<br>
 					<span class="dlgmsg" id="distatusmsg"></span>
 				</td>
@@ -282,13 +331,13 @@
 									<select name="RecordStatus" id="RecordStatus" tabindex="5" class="line"
 											onFocus="showtip('{-$rc1.RecordStatus[1]-}', '')">
 										<option value=""></option>
-{-if $ctl_rcsl-}
+{-if $role == "SUPERVISOR" || $role == "ADMINREGION"-}
 										<option value="PUBLISHED">{-#tstatpublished#-}</option>
 {-/if-}
 										<option value="READY">{-#tstatready#-}</option>
 										<option value="DRAFT">{-#tstatdraft#-}</option>
 										<option value="TRASH">{-#tstatrash#-}</option>
-{-if $ctl_rcsl-}
+{-if $role == "SUPERVISOR" || $role == "ADMINREGION"-}
 										<option value="DELETED">{-#tstatdeleted#-}</option>
 {-/if-}
 									</select>
@@ -298,8 +347,6 @@
 									<input id="DisasterSerial" name="DisasterSerial" type="text" size="15" class="line"
 										tabindex="6" maxlength="50" onFocus="showtip('{-$dis.DisasterSerial[2]-}', '#d4baf6')"
 										onkeypress="return blockChars(event, this.value, 'alphanumber:');">
-<!--									  onBlur="updateList('distatusmsg', '', 'r={-$reg-}&cmd=chkdiserial&DisasterSerial='+ 
-													$('DisasterSerial').value + '&DisasterId='+ $('DisasterId').value);">-->
 								</td>
 							</tr>
 						</table>
@@ -578,7 +625,6 @@
       	class="dlgmsg" style="font-size: 8pt;">{-#hmoreinfo#-}</a>
  </div>
 <!-- END HELP SECTION -->
-
  </body>
 </html>
 {-/if-}
