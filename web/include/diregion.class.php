@@ -191,11 +191,13 @@ class DIRegion extends DIObject {
 				}
 				$iReturn = copy(CONST_DBREGION, $DBFile);
 				$this->q->setDBConnection($this->get('RegionId'));
+				$this->session->open($prmRegionId);
 			}
 		} catch (Exception $e) {
 			showErrorMsg("Error " . $e->getMessage());
 		}
 		$this->set('RegionId', $prmRegionId);
+		
 		if ($iReturn > 0) {
 			// Copy Predefined Event/Cause Lists
 			$this->copyEvents($this->get('LangIsoCode'));
@@ -214,7 +216,11 @@ class DIRegion extends DIObject {
 			}
 			$g = new DIGeoLevel($this->session, 0);
 			$g->set('GeoLevelName', $prmGeoLevelName);
-			$g->insert();
+			if ($g->exist() > 0) {
+				$g->update();
+			} else {
+				$g->insert();
+			}
 		}
 		return $iReturn;
 	}
@@ -264,7 +270,7 @@ class DIRegion extends DIObject {
 		$s->insert();
 	}
 	
-	public function addRegionItemSync($prmRegionItemId, $prmTable) {
+	public function addRegionItemSync($prmRegionItemId) {
 		foreach($this->getRegionTables() as $TableName) {
 			$s = new DISync($this->session);
 			$s->set('SyncTable', $TableName);
