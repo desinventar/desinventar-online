@@ -110,8 +110,16 @@ if (isset($_GET['u'])) {
 				$t->assign ("ctl_geolist", true);
 			break;
 			case "getNextSerial":
-				$ser = $us->q->getNextDisasterSerial($_GET['exp']);
+				$ser = $us->q->getNextDisasterSerial($_GET['value']);
 				echo $ser;
+			break;
+			case "getPrevDId":
+				$prv = $us->q->getPrevDisasterId($_GET['value']);
+				echo $prv;
+			break;
+			case "getNextDId":
+				$nxt = $us->q->getNextDisasterId($_GET['value']);
+				echo $nxt;
 			break;
 			case "chklocked":
 				// check if datacard is locked by some user
@@ -139,7 +147,7 @@ if (isset($_GET['u'])) {
 		if ($_POST['_CMD'] == "insertDICard") {
 			// Insert New Datacard
 			$data = form2disaster($_POST, CMD_NEW);
-			echo "<!--"; print_r($data); echo "-->\n";
+			//echo "<!--"; print_r($data); echo "-->\n";
 			$o = new DIDisaster($us, $data['DisasterId']);
 			$o->setFromArray($data);
 			$o->set('RecordCreation', gmdate('c'));
@@ -152,7 +160,7 @@ if (isset($_GET['u'])) {
 				// If Datacard is valid, update EEData Table..
 				$eedat = form2eedata($_POST);
 				$eedat['DisasterId'] = $data['DisasterId'];
-				echo "<!--"; print_r($eedat); echo "-->\n";
+				//echo "<!--"; print_r($eedat); echo "-->\n";
 				$o = new DIEEData($us, $eedat['DisasterId']);
 				$o->setFromArray($eedat);
 				$i = $o->insert();
@@ -162,7 +170,7 @@ if (isset($_GET['u'])) {
 		} elseif ($_POST['_CMD'] == "updateDICard") {
 			// Update Existing Datacard
 			$data = form2disaster($_POST, CMD_UPDATE);
-			echo "<!--"; print_r($data); echo "-->\n";
+			//echo "<!--"; print_r($data); echo "-->\n";
 			$o = new DIDisaster($us, $data['DisasterId']);
 			$o->load();
 			$o->setFromArray($data);
@@ -175,7 +183,7 @@ if (isset($_GET['u'])) {
 				// If Datacard is valid, update EEData Table..
 				$eedat = form2eedata($_POST);
 				$eedat['DisasterId'] = $data['DisasterId'];
-				echo "<!--"; print_r($eedat); echo "-->\n";
+				//echo "<!--"; print_r($eedat); echo "-->\n";
 				$o = new DIEEData($us, $eedat['DisasterId']);
 				$o->setFromArray($eedat);
 				$i = $o->update();
@@ -209,8 +217,11 @@ if (isset($_GET['u'])) {
 			case "SUPERVISOR":
 				$dicrole = $dic['DBRoleSupervisor'][0];
 			break;
-			default:
+			case "USER":
 				$dicrole = $dic['DBRoleUser'][0];
+			break;
+			default:
+				$dicrole = null;
 			break;
 		}
 		$t->assign ("dicrole", $dicrole);
@@ -257,31 +268,5 @@ if (isset($_GET['u'])) {
 }
 
 $t->display ("index.tpl");
-
-/* Convert DesInventar Disaster Table struct to Post Form. 
- * Only for DICard in JSON Search..
-function disaster2form($dicard) {
-  $data = array ();
-  foreach ($dicard as $k=>$i) {
-    if ((substr($k, 0, 17) != 'DisasterBeginTime') &&
-        (substr($k, 0, 19) != 'GeographyId'))
-      $data[$k] = $i;
-    else if (substr($k, 0, 17) == 'DisasterBeginTime') {
-      $date = explode('-', $i);
-      $data['DisasterBeginTime'] = isset($date[0]) ? $date[0] : "";
-      $data['DisasterBeginTime'] = isset($date[1]) ? $date[1] : "";
-      $data['DisasterBeginTime'] = isset($date[2]) ? $date[2] : "";
-    }
-    else if (substr($k, 0, 19) == 'GeographyId') {
-      $levn = (strlen($i) / 5);
-      for ($n = 0; $n < $levn; $n++) {
-        $len = 5 * ($n + 1);
-        $data['GeographyId'. $n] = substr($i, 0, $len);
-      }
-    }
-  }
-  return $data;
-}
-*/
 
 </script>

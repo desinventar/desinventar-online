@@ -32,9 +32,10 @@ $t->assign ("regname", $regname);
 if (isset($post['_G+cmd'])) {
 	// Process QueryDesign Fields and count results
 	$qd  = $q->genSQLWhereDesconsultar($post);
-/*	$sqc = $q->genSQLSelectCount($qd);
+	$sqc = $q->genSQLSelectCount($qd);
 	$c   = $q->getresult($sqc);
-	$cou = $c['counter'];*/
+	$cou = $c['counter'];
+	$t->assign ("tot", $cou);
 	// Process Configuration options to Graphic
 	$ele = array();
 	foreach (explode("|", $post['_G+Type']) as $itm) {

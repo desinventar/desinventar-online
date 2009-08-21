@@ -92,6 +92,9 @@ else {
 	$t->assign ("exteffel", $q->getEEFieldList("True"));
 	// Get UserRole
 	$role = $us->getUserRole($reg);
+	$t->assign ("userid", $us->UserId);
+	$t->assign ("role", $role);
+	//echo "<pre>". $us->UserId ; print_r($role);
 	if (strlen($role) > 0)
 		$t->assign ("ctl_user", true);
 	else
@@ -200,8 +203,7 @@ else {
 	$range[] = array(1000000, "100001 - 1000000", "660000");
 	$range[] = array('',       "1000001 ->",        "000000");
 	$t->assign ("range", $range);
-
-	// Load Statistic Values
+	// STATISTIC
 	foreach ($ef1 as $k=>$i) {
 		$sst[$k] = array($k."Q|>|-1", $i[0]);
 		$nst[$k] = $sst[$k];

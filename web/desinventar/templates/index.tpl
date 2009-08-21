@@ -27,12 +27,19 @@
 			d.style.backgroundColor = clr;
 			d.value = tip;
 		}
-		function setNextSerial(year) {
+		function requestDCard(cmd, value) {
 			var lsAjax = new Ajax.Request('index.php', {
-				method: 'get', parameters: 'r={-$reg-}&cmd=getNextSerial&exp='+ year,
+				method: 'get', parameters: 'r={-$reg-}&cmd='+ cmd +'&value='+ value,
+				onLoading: function(request) {
+					$('dostat').innerHTML = "<img src='loading.gif'>";
+				},
 				onSuccess: function(request) {
 					var res = request.responseText;
-					$('DisasterSerial').value = year +'-'+ res;
+					if (cmd == "getNextSerial")
+						$('DisasterSerial').value = value +'-'+ res;
+					if (cmd == "getPrevDId" || cmd == "getNextDId")
+						setDICardfromId('{-$reg-}', res, '');
+					$('dostat').innerHTML = "";
 				}
 			} );
 		}
@@ -59,27 +66,7 @@
 				$(lev).innerHTML = '';
 			}
 		}
-		function setadmingeo(k, l) {
-			var v = k.split("|");
-			mod = 'geo';
-			uploadMsg('');
-			if (v[0] == -1) {
-				setLevGeo('','','',1,'','','','geo');
-				if (l == 0)
-					$('aGeoParentId').value = '';
-				$('geocmd').value='insert';
-				$('alev' + l).style.display = "none";
-			}
-			else if (v[0] == -2) 
-				$('geoaddsect').style.display = 'none';
-			else {
-				setLevGeo(v[0],v[1],v[2],v[3],'','','','geo');
-				$('aGeoParentId').value = v[0];
-				$('geocmd').value='update';
-				updateList('alev' + l, 'geography.php', 'r={-$reg-}&geocmd=list&GeographyId=' + v[0]);
-			}
-		}
-		function DisableEnableForm (xForm, disab) {
+		function DisableEnableForm(xForm, disab) {
 			objElems = xForm.elements;
 			var myname = "";
 			var mysty = "";
@@ -109,18 +96,9 @@
 				$('effext').style.display='none';
 			}
 		}
-		function setActive () {
+		function setActive() {
 			updateList('dostat', '', 'u=1');
 		}
-		window.onload = function() {
-			DisableEnableForm($('DICard'), true);
-			uploadMsg("{-#tmsgnewcard#-}");
-			var pe = new PeriodicalExecuter(setActive, 60);
-		}
-/*		window.onunload = function() {
-			updateList('distatusmsg', '', 'r={-$reg-}&cmd=chkrelease&DisasterId='+ $('DisasterId').value);
-		}
-		document.write('<style type="text/css">.tabber{display:none;}<\/style>');*/
 		function onSubmitBtn(btn) {
 			$('dic').src="about:blank";
 			switch (btn) {
@@ -197,39 +175,47 @@
 			}
 			return true;
 		}
+		window.onload = function() {
+			DisableEnableForm($('DICard'), true);
+			uploadMsg("{-#tmsgnewcard#-}");
+			var pe = new PeriodicalExecuter(setActive, 60);
+		}
 	</script>
 	<style type="text/css">
-		.bnew { background-image: url(../images/newicon.png) !important; }
-		.bupd { background-image: url(../images/updateicon.png) !important; }
-		.bsave { background-image: url(../images/saveicon.png) !important; }
-		.bprint { background-image: url(../images/printicon.png) !important; }
-		.bcancel { background-image: url(../images/cancelicon.png) !important; }
-		.bfind { background-image: url(../images/findicon.png) !important; }
+	.bnew { background-image: url(../images/newicon.png) !important; background-repeat: no-repeat; background-position: top center; width: 30px;}
+	.bupd { background-image: url(../images/updateicon.png) !important; background-repeat: no-repeat; background-position: top center; width: 30px;}
+	.bsave { background-image: url(../images/saveicon.png) !important; background-repeat: no-repeat; background-position: top center; width: 30px;}
+	.bprint { background-image: url(../images/printicon.png) !important; background-repeat: no-repeat; background-position: top center; width: 30px;}
+	.bcancel { background-image: url(../images/cancelicon.png) !important; background-repeat: no-repeat; background-position: top center; width: 30px;}
+	.bfind { background-image: url(../images/findicon.png) !important; background-repeat: no-repeat; background-position: top center; width: 30px;}
 	</style>
 </head>
 
 <body>
+	<script type="text/javascript" src="../include/wz_tooltip.js"></script>
 <!-- BEG DI8 FORM CARD -->
 	<div id="container" style="overflow:scroll;">
 		<table width="900px">
 			<tr>
 				<td>
-					<input type="button" id="cardnew" value="{-#bnew#-}" onClick="onSubmitBtn('cardnew');" {-$ro-}>
-					<input type="button" id="cardupd" value="{-#bupdate#-}" onClick="onSubmitBtn('cardupd');" disabled {-$ro-}>
-					<input type="button" id="cardsav" value="{-#bsave#-}" onClick="onSubmitBtn('cardsav');" disabled {-$ro-}>
-					<input type="button" id="cardcln" value="{-#bclean#-}" onClick="onSubmitBtn('cardcln');" disabled {-$ro-}>
-					<input type="button" id="cardcan" value="{-#bcancel#-}" onClick="onSubmitBtn('cardcan');" disabled {-$ro-}>
-					<!--<input type="button" id="cardfnd" value="{-#bexpsearch#-}" onClick="onSubmitBtn('cardfnd');" {-$ro-}>-->
+					<input type="button" id="cardnew" class="bnew" alt="{-#bnew#-}" onClick="onSubmitBtn('cardnew');" {-$ro-}>
+					<input type="button" id="cardupd" class="bupd" alt="{-#bupdate#-}" onClick="onSubmitBtn('cardupd');" disabled {-$ro-}>
+					<input type="button" id="cardsav" class="bsave" alt="{-#bsave#-}" onClick="onSubmitBtn('cardsav');" disabled {-$ro-}>
+					<input type="button" id="cardcln" class="bnew" alt="{-#bclean#-}" onClick="onSubmitBtn('cardcln');" disabled {-$ro-}>
+					<input type="button" id="cardcan" class="bcancel" alt="{-#bcancel#-}" onClick="onSubmitBtn('cardcan');" disabled {-$ro-}>
+					<input type="button" id="cardprn" class="bprint" alt="{-#bprint#-}" onClick="window.print();">
+					<!--<input type="button" id="cardfnd" alt="{-#bexpsearch#-}" onClick="onSubmitBtn('cardfnd');" {-$ro-}>-->
 					&nbsp;&nbsp;|&nbsp;&nbsp;
-					<input type="button" value="<<" onClick="setDICard('{-$reg-}', {-$fst-}, '');" {-$ro-}>
-					<input type="button" value="<" disabled {-$ro-}>
+					<input type="button" value="<<" class="line" onClick="setDICard('{-$reg-}', {-$fst-}, '');" {-$ro-}>
+					<input type="button" value="<" class="line" onClick="requestDCard('getPrevDId', $('DisasterId').value);" {-$ro-} >
 					<span class="dlgmsg" id="dostat"></span>
-					<input type="button" value=">" disabled {-$ro-}>
-					<input type="button" value=">>" onClick="setDICard('{-$reg-}', {-$lst-}, '');" {-$ro-}>
-					<br><span class="dlgmsg" id="distatusmsg"></span>
+					<input type="button" value=">" class="line" onClick="requestDCard('getNextDId', $('DisasterId').value);" {-$ro-}>
+					<input type="button" value=">>" class="line" onClick="setDICard('{-$reg-}', {-$lst-}, '');" {-$ro-}>
+					<br>
+					<span class="dlgmsg" id="distatusmsg"></span>
 				</td>
 				<td align="right">
-					<iframe name="dic" id="dic" frameborder="1" style="height:30px; width:300px;" src="about:blank"></iframe>
+					<iframe name="dic" id="dic" frameborder="1" style="height:30px; width:400px;" src="about:blank"></iframe>
 				</td>
 			</tr>
 		</table>
@@ -248,12 +234,12 @@
 					<td style="border-color:#000000;">
 						<table class="grid">
 							<tr valign="top">
-								<td ext:qtip="{-$dis.DisasterBeginTime[1]-}">
+								<td onmouseover="Tip('{-$dis.DisasterBeginTime[1]-}')" onmouseout="UnTip()">
 									{-$dis.DisasterBeginTime[0]-}<b style="color:darkred;">*</b><br>
 									<input id="DisasterBeginTime[0]" name="DisasterBeginTime[0]" style="width:36px;" class="line"
 										tabindex="1" type="text" maxlength="4" onFocus="showtip('{-$dis.DisasterBeginTime[2]-}', '#d4baf6')"
 										onkeypress="return blockChars(event, this.value, 'integer:4');" 
-										onBlur="setNextSerial(this.value);">
+										onBlur="requestDCard('getNextSerial', this.value);">
 									<input id="DisasterBeginTime[1]" name="DisasterBeginTime[1]" style="width:18px;" class="line"
 										tabindex="2" type="text" maxlength="2" onFocus="showtip('{-$dis.DisasterBeginTime[2]-}', '#d4baf6')"
 										onkeypress="return blockChars(event, this.value, 'integer:2');" 
@@ -265,7 +251,7 @@
 										onBlur="if (parseInt($('DisasterBeginTime[2]').value,10) < 1 || 
 													parseInt($('DisasterBeginTime[2]').value,10) > 31 ) $('DisasterBeginTime[2]').value = '';">
 								</td>
-								<td ext:qtip="{-$dis.DisasterSource[1]-}">
+								<td onmouseover="Tip('{-$dis.DisasterSource[1]-}')" onmouseout="UnTip()">
 									{-$dis.DisasterSource[0]-}<b style="color:darkred;">*</b><br>
 									<input id="DisasterSource" name="DisasterSource" size="50" class="line" type="text" 
 										onkeypress="return blockChars(event, this.value, 'text:');"
@@ -287,7 +273,7 @@
 {-/if-}
 									</select>
 								</td>
-								<td ext:qtip="{-$dis.DisasterSerial[1]-}">
+								<td onmouseover="Tip('{-$dis.DisasterSerial[1]-}')" onmouseout="UnTip()">
 									{-$dis.DisasterSerial[0]-}<b style="color:darkred;">*</b><br>
 									<input id="DisasterSerial" name="DisasterSerial" type="text" size="15" class="line"
 										tabindex="6" maxlength="50" onFocus="showtip('{-$dis.DisasterSerial[2]-}', '#d4baf6')"
@@ -301,13 +287,15 @@
 				</tr>
 				<tr>
 					<td width="30px" style="border:0px;" valign="top">
-						<img src="../images/di_geotag.png" ext:qtip="<b>{-#mgeography#-}</b><br>{-$dmg.MetGuidegeography[2]-}">
+						<img src="../images/di_geotag.png" 
+							onmouseover="Tip('<b>{-#mgeography#-}</b><br>{-$dmg.MetGuidegeography[2]-}', BGCOLOR, '#d4baf6', SHADOW, true, WIDTH, 400)" 
+							onmouseout="UnTip()">
 					</td>
 					<td>
 						<table class="grid">
 							<tr valign="top">
-								<td ext:qtip="{-$dis.GeographyFQName[1]-}">
-									{-$dis.GeographyFQName[0]-}<b style="color:darkred;">*</b><br>
+								<td onmouseover="Tip('{-$dis.DisasterGeographyId[1]-}')" onmouseout="UnTip()">
+									{-$dis.DisasterGeographyId[0]-}<b style="color:darkred;">*</b><br>
 									<input id="GeographyId" name="GeographyId" type="hidden">
 									<span id="lst_geo" class="geodiv" style="width: 180px; height: 30px;">
 {-/if-}
@@ -365,11 +353,13 @@
 					<td width="30px" valign="top" style="border:0px;">
 						<a href="javascript:void(null)" onClick="switchEff('effbas')">
 						 <img id="efimg" src="../images/di_efftag.png" border=0
-						 			ext:qtip="<b>{-#tbaseffects#-}</b><br>{-$dmg.MetGuidedatacards[2]-}"></a>
+							onmouseover="Tip('<b>{-#tbaseffects#-}</b><br>{-$dmg.MetGuidedatacards[2]-}', BGCOLOR, '#f1bd41', SHADOW, true, WIDTH, 400)"
+							onmouseout="UnTip()"></a>
 						<br><br>
 						<a href="javascript:void(null)" onClick="switchEff('effext')">
 						 <img id="eeimg" src="../images/di_eeftag.png" border=0 
-						 			ext:qtip="<b>{-#textraeffect#-}</b><br>{-$dmg.MetGuideextraeffects[2]-}"></a>
+						 	onmouseover="Tip('<b>{-#textraeffect#-}</b><br>{-$dmg.MetGuideextraeffects[2]-}', BGCOLOR, '#f1bd41', SHADOW, true, WIDTH, 400)" 
+							onmouseout="UnTip()"></a>
 						<!-- usemap="#efx"
 						<map id="efx" name="efx">
 						 <area shape="rect" coords="4,4,20,115" href="javascript:void(null)" onClick="switchEff('effbas')">
@@ -480,7 +470,9 @@
         <!-- BEG EVENT SECTION -->
         <tr style="border:1px solid #ff0;">
           <td width="30px" valign="top" style="border:0px;">
-          	<img src="../images/di_evetag.png" ext:qtip="<b>{-#mevents#-}</b><br>{-$dmg.MetGuideevents[2]-}">
+          	<img src="../images/di_evetag.png" 
+				onmouseover="Tip('<b>{-#mevents#-}</b><br>{-$dmg.MetGuideevents[2]-}', BGCOLOR, 'lightblue', SHADOW, true, WIDTH, 400)" 
+				onmouseout="UnTip()">
           </td>
           <td>
             <table class="grid">
@@ -525,7 +517,9 @@
         <!-- BEG CAUSE SECTION -->
         <tr style="border:1px solid #ffffc0;">
           <td width="30px" valign="top" style="border:0px;">
-          	<img src="../images/di_cautag.png" ext:qtip="<b>{-#mcauses#-}</b><br>{-$dmg.MetGuidecauses[2]-}">
+          	<img src="../images/di_cautag.png" 
+				onmouseover="Tip('<b>{-#mcauses#-}</b><br>{-$dmg.MetGuidecauses[2]-}', BGCOLOR, '#ffffc0', SHADOW, true, WIDTH, 400)" 
+				onmouseout="UnTip()">
           </td>
           <td>
             <table class="grid">
@@ -559,7 +553,7 @@
 
 <!-- BEG HELP SECTION -->
  <div id="south">
-     <textarea id="_DIDesc" wrap="hard" class="hlp" readonly style="width:80%; height:30px;"></textarea>
+     <textarea id="_DIDesc" wrap="hard" class="hlp" readonly style="width:85%; height:15px;"></textarea>
       <a href="javascript:void(null)" onClick="runWin('../doc/?m=metguide', 'doc');"
       	class="dlgmsg" style="font-size: 8pt;">{-#hmoreinfo#-}</a>
  </div>
