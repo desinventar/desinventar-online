@@ -201,7 +201,6 @@ if (isset($_GET['u'])) {
 		$t->assign ("usr", $us->UserId);
 		$t->assign ("regname", $us->q->getDBInfoValue('RegionLabel'));
 		$role = $us->getUserRole($sRegionId);
-		$t->assign ("role", $role);
 		// Validate if user has permission to access database
 		$dic = $us->q->queryLabelsFromGroup('DB', $lg);
 		switch ($role) {
@@ -251,9 +250,9 @@ if (isset($_GET['u'])) {
 		$t->assign ("evel", $us->q->loadEvents(null, "active", $lg));
 		$t->assign ("caul", $us->q->loadCauses(null, "active", $lg));
 		$t->assign ("eefl", $us->q->getEEFieldList("True"));
-		if ($role=="SUPERVISOR" || $role=="ADMINREGION") {
-			$t->assign ("ctl_rcsl", true);
-		}
+		$t->assign ("role", $role);
+		if ($role == "USER" || $role == "SUPERVISOR" || $role == "ADMINREGION")
+			$t->assign ("ctl_validrole", true);
 		// get first and last datacard
 		$fst = $us->q->hash2json($us->q->getDisasterById($us->q->getFirstDisasterid()));
 		$lst = $us->q->hash2json($us->q->getDisasterById($us->q->getLastDisasterid()));
@@ -261,8 +260,6 @@ if (isset($_GET['u'])) {
 			$t->assign ("fst", $fst[0]);
 		if (isset($lst[0]))
 			$t->assign ("lst", $lst[0]);
-		if ($role != "USER" && $role != "SUPERVISOR" && $role != "ADMINREGION")
-			$t->assign ("ro", "disabled");
 	}
 	$t->assign ("reg", $sRegionId);
 }

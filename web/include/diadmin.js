@@ -470,8 +470,10 @@
 				var json = eval('(' + res + ')');
 				setDICard(reg, json, src);
 				dostat.innerHTML = "";
+				return true;
 			}
 		} );
+		return false;
 	}
 	
 	function setDICard(reg, arr, src) {
