@@ -469,6 +469,7 @@
 				var res = request.responseText;
 				var json = eval('(' + res + ')');
 				setDICard(reg, json, src);
+				dostat.innerHTML = "";
 			}
 		} );
 	}

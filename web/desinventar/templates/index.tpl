@@ -182,12 +182,30 @@
 		}
 	</script>
 	<style type="text/css">
-	.bnew { background-image: url(../images/newicon.png) !important; background-repeat: no-repeat; background-position: top center; width: 30px;}
-	.bupd { background-image: url(../images/updateicon.png) !important; background-repeat: no-repeat; background-position: top center; width: 30px;}
-	.bsave { background-image: url(../images/saveicon.png) !important; background-repeat: no-repeat; background-position: top center; width: 30px;}
-	.bprint { background-image: url(../images/printicon.png) !important; background-repeat: no-repeat; background-position: top center; width: 30px;}
-	.bcancel { background-image: url(../images/cancelicon.png) !important; background-repeat: no-repeat; background-position: top center; width: 30px;}
-	.bfind { background-image: url(../images/findicon.png) !important; background-repeat: no-repeat; background-position: top center; width: 30px;}
+		.bnew {
+			background-image: url(../images/newicon.png) !important;
+			background-repeat: no-repeat; background-position: top center; width: 22px;
+		}
+		.bupd {
+			background-image: url(../images/updateicon.png) !important;
+			background-repeat: no-repeat; background-position: top center; width: 22px;
+		}
+		.bcancel {
+			background-image: url(../images/cancelicon.png) !important; 
+			background-repeat: no-repeat; background-position: top center; width: 22px;
+		}
+		.bfind {
+			background-image: url(../images/findicon.png) !important;
+			background-repeat: no-repeat; background-position: top center; width: 22px;
+		}
+		.bsave {
+			background-image: url(../images/saveicon.png) !important;
+			background-repeat: no-repeat; background-position: top center; width: 22px;
+		}
+		.bprint {
+			background-image: url(../images/printicon.png) !important;
+			background-repeat: no-repeat; background-position: top center; width: 22px;
+		}
 	</style>
 </head>
 
@@ -198,12 +216,12 @@
 		<table width="900px">
 			<tr>
 				<td>
-					<input type="button" id="cardnew" class="bnew" alt="{-#bnew#-}" onClick="onSubmitBtn('cardnew');" {-$ro-}>
-					<input type="button" id="cardupd" class="bupd" alt="{-#bupdate#-}" onClick="onSubmitBtn('cardupd');" disabled {-$ro-}>
-					<input type="button" id="cardsav" class="bsave" alt="{-#bsave#-}" onClick="onSubmitBtn('cardsav');" disabled {-$ro-}>
-					<input type="button" id="cardcln" class="bnew" alt="{-#bclean#-}" onClick="onSubmitBtn('cardcln');" disabled {-$ro-}>
-					<input type="button" id="cardcan" class="bcancel" alt="{-#bcancel#-}" onClick="onSubmitBtn('cardcan');" disabled {-$ro-}>
-					<input type="button" id="cardprn" class="bprint" alt="{-#bprint#-}" onClick="window.print();">
+					<input type="button" id="cardnew" class="bb bnew" alt="{-#bnew#-}" onClick="onSubmitBtn('cardnew');" {-$ro-}>
+					<input type="button" id="cardupd" class="bb bupd" alt="{-#bupdate#-}" onClick="onSubmitBtn('cardupd');" disabled {-$ro-}>
+					<input type="button" id="cardsav" class="bb bsave" alt="{-#bsave#-}" onClick="onSubmitBtn('cardsav');" disabled {-$ro-}>
+					<input type="button" id="cardcln" class="bb bnew" alt="{-#bclean#-}" onClick="onSubmitBtn('cardcln');" disabled {-$ro-}>
+					<input type="button" id="cardcan" class="bb bcancel" alt="{-#bcancel#-}" onClick="onSubmitBtn('cardcan');" disabled {-$ro-}>
+					<input type="button" id="cardprn" class="bb bprint" alt="{-#bprint#-}" onClick="window.print();">
 					<!--<input type="button" id="cardfnd" alt="{-#bexpsearch#-}" onClick="onSubmitBtn('cardfnd');" {-$ro-}>-->
 					&nbsp;&nbsp;|&nbsp;&nbsp;
 					<input type="button" value="<<" class="line" onClick="setDICard('{-$reg-}', {-$fst-}, '');" {-$ro-}>
