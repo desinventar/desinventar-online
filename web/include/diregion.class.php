@@ -191,7 +191,6 @@ class DIRegion extends DIObject {
 				}
 				$iReturn = copy(CONST_DBREGION, $DBFile);
 				$this->q->setDBConnection($this->get('RegionId'));
-				$this->session->open($prmRegionId);
 			}
 		} catch (Exception $e) {
 			showErrorMsg("Error " . $e->getMessage());
@@ -216,6 +215,7 @@ class DIRegion extends DIObject {
 			}
 			$g = new DIGeoLevel($this->session, 0);
 			$g->set('GeoLevelName', $prmGeoLevelName);
+			$g->set('RegionId', $this->get('RegionId'));
 			if ($g->exist() > 0) {
 				$g->update();
 			} else {
@@ -236,7 +236,6 @@ class DIRegion extends DIObject {
 		if ($prmRegionItemGeographyId == '') {
 			$prmRegionItemGeographyId = $this->getRegionItemGeographyId($prmRegionItemId);
 		}
-		printf("%-20s %-5s %s\n", $prmRegionItemGeographyName, $prmRegionItemGeographyId, $prmRegionItemId); 
 		$this->addRegionItemSync($prmRegionItemId);
 
 		// Create Geography element at GeographyLevel=0 for this RegionItem
@@ -274,7 +273,7 @@ class DIRegion extends DIObject {
 		foreach($this->getRegionTables() as $TableName) {
 			$s = new DISync($this->session);
 			$s->set('SyncTable', $TableName);
-			$s->set('RegionId', $prmRegionItemId);
+			$s->set('RegionId', $this->get('RegionId'));
 			$s->set('SyncURL', "file:///" . $prmRegionItemId);
 			$s->insert();
 		} //foreach
@@ -361,27 +360,33 @@ class DIRegion extends DIObject {
 		return $GeographyId;
 	}
 	
+	public function attachQuery($prmRegionId, $prmName) {
+		$RegionItemDir = VAR_DIR . '/' . $prmRegionId;
+		$RegionItemDB = $RegionItemDir . '/desinventar.db';
+		$query = "ATTACH DATABASE '" . $RegionItemDB . "' AS " . $prmName;
+		return $query;
+	}
+	public function detachQuery($prmName) {
+		$query = "DETACH DATABASE " . $prmName;
+		return $query;
+	}
 	public function addRegionItemGeography($prmRegionItemId, $prmRegionItemGeographyId) {
 		$iReturn = ERR_NO_ERROR;
 		$this->setConnection($this->get('RegionId'));
 		$q = $this->q->dreg;
-		
 		
 		// Copy Geography From Database
 		if ($iReturn > 0) {
 			$RegionItemDir = VAR_DIR . '/' . $prmRegionItemId;
 			$RegionItemDB = $RegionItemDir . '/desinventar.db';
 			// Attach Database
-			$Query = "ATTACH DATABASE '" . $RegionItemDB . "' AS RegItem;";
-			$q->query($Query);
+			$q->query($this->attachQuery($prmRegionItemId,'RegItem'));
 			$this->copyData($q, 'Geography','GeographyId', $prmRegionItemId, $prmRegionItemGeographyId, false);
-			$Query = "DETACH DATABASE RegItem";
-			$q->query($Query);
+			$q->query($this->detachQuery());
 		}
 		$this->setConnection('core');
 		return $iReturn;
 	}
-		
 	
 	public function addRegionItemGeoLevel($prmRegionItemId) {
 		$iReturn = ERR_NO_ERROR;
@@ -419,6 +424,40 @@ class DIRegion extends DIObject {
 		$url['host'] = substr($prmURL,$i+3,$j-$i-3);
 		$url['regionid'] = substr($prmURL, $j+1);
 		return $url;
+	}
+	
+	public function rebuildEventData() {
+		$this->copyEvents($this->get('LangIsoCode'));
+		$this->q->dreg->query("DELETE FROM Event WHERE EventPredefined=0");
+		$o = new DIEvent($this->session);
+		$query = "SELECT * FROM Sync WHERE SyncTable='Event'";
+		foreach($this->q->dreg->query($query) as $row) {
+			$url = $this->processURL($row['SyncURL']);
+			$RegionItemId = $url['regionid'];
+			$this->q->dreg->query($this->attachQuery($RegionItemId,'RegItem'));
+			foreach($this->q->dreg->query("SELECT * FROM RegItem.Event WHERE EventPredefined=0") as $row) {
+				$o->setFromArray($row);
+				$o->insert();
+			}
+			$this->q->dreg->query($this->detachQuery('RegItem'));
+		}
+	}
+
+	public function rebuildCauseData() {
+		$this->copyCauses($this->get('LangIsoCode'));
+		$this->q->dreg->query("DELETE FROM Cause WHERE CausePredefined=0");
+		$o = new DICause($this->session);
+		$query = "SELECT * FROM Sync WHERE SyncTable='Cause'";
+		foreach($this->q->dreg->query($query) as $row) {
+			$url = $this->processURL($row['SyncURL']);
+			$RegionItemId = $url['regionid'];
+			$this->q->dreg->query($this->attachQuery($RegionItemId,'RegItem'));
+			foreach($this->q->dreg->query("SELECT * FROM RegItem.Cause WHERE CausePredefined=0") as $row) {
+				$o->setFromArray($row);
+				$o->insert();
+			}
+			$this->q->dreg->query($this->detachQuery('RegItem'));
+		}
 	}
 	
 	public function rebuildDataDisaster($prmRegionItemId='') {
