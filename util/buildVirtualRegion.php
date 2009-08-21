@@ -24,7 +24,7 @@
 		$RegionItems = array('ARG-1250695025-argentina_gran_chaco' => 'Argentina',
 		                     'BOL-1250695036-bolivia_gran_chaco'   => 'Bolivia',
 		                     'PAR-1250695038-paraguay_gran_chaco'  => 'Paraguay');
-		$RegionItems = array('BOL-1250695036-bolivia_gran_chaco' => 'Bolivia');
+		//$RegionItems = array('BOL-1250695036-bolivia_gran_chaco' => 'Bolivia');
 		$RegionId = 'DESINV-1249126759-subregion_gran_chaco';
 		$RegionLabel = 'Subregion Gran Chaco';
 		$PeriodBeginDate = '1997-01-01';
@@ -84,10 +84,7 @@
 		$o->clearSyncTable();
 		foreach($RegionItems as $RegionItemId => $RegionItemGeographyName) {
 			printf("%-60s %-20s\n", $RegionItemId, $RegionItemGeographyName);
-			//$RegionItemGeographyId = $o->getRegionItemGeographyId($RegionItemId);
-			//fb($RegionItemGeographyId);
 			$o->addRegionItemSync($RegionItemId);
-			//$o->addRegionItem($RegionItemId,$RegionItemGeographyName);
 		}
 		$us->close();
 	}

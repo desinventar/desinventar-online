@@ -309,7 +309,7 @@ class DIObject {
 		return $iReturn;
 	} // function
 
-	public function update($withValidate = true) {
+	public function update($withValidate = true, $withInsert = false) {
 		$iReturn = ERR_NO_ERROR;
 		if ($withValidate) {
 			$iReturn = $this->validateUpdate();
@@ -317,6 +317,11 @@ class DIObject {
 		if ($iReturn > 0) {
 			$sQuery = $this->getUpdateQuery();
 			try {
+				if ($withInsert == true) {
+					if ($this->exists() < 0) {
+						$iReturn = $this->create($withValidate);
+					}
+				}
 				if ($result = $this->conn->query($sQuery)) {
 					$iReturn = ERR_NO_ERROR;
 				}
