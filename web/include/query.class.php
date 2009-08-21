@@ -121,74 +121,69 @@ class Query extends PDO
 		return $row;
 	}
 
-  public function getnumrows($qry) {
-    $rst = $this->getassoc($qry);
-    return count($rst);
-  }
+	public function getnumrows($qry) {
+		$rst = $this->getassoc($qry);
+		return count($rst);
+	}
 
-  // STANDARDS FUNCTION TO GET GENERAL EVENTS, CAUSES LISTS
-  function loadEvents($type, $status, $lang) {
-    $data = array();
-    if ($type == "BASE") {
-      $data = $this->getBasicEventList($lang);
-    }
-    else {
-      $data = $this->getRegionEventList($type, $status, $lang);
-    }
-    return $data;
-  }
+	// STANDARDS FUNCTION TO GET GENERAL EVENTS, CAUSES LISTS
+	function loadEvents($type, $status, $lang) {
+		$data = array();
+		if ($type == "BASE")
+			$data = $this->getBasicEventList($lang);
+		else
+			$data = $this->getRegionEventList($type, $status, $lang);
+		return $data;
+	}
 
-  // active : active, inactive  | types : predef, user | empty == all
-  function loadCauses($type, $status, $lang) {
-    $data = array();
-    if ($type == "BASE") {
-      $data = $this->getBasicCauseList($lang);
-    }
-    else {
-      $data = $this->getRegionCauseList($type, $status, $lang);
-    }
-    return $data;
-  }
+	// active : active, inactive  | types : predef, user | empty == all
+	function loadCauses($type, $status, $lang) {
+		$data = array();
+		if ($type == "BASE")
+			$data = $this->getBasicCauseList($lang);
+		else
+			$data = $this->getRegionCauseList($type, $status, $lang);
+		return $data;
+	}
 
-  public function getBasicEventList($lg) {
-    $sql = "SELECT EventId, EventName, EventDesc FROM Event ".
-            "WHERE LangIsoCode='$lg' ORDER BY EventName";
-    $data = array();
-    $res = $this->base->query($sql);
-    foreach($res as $row)
-      $data[$row['EventId']] = array($row['EventName'], $row['EventDesc']);
-    return $data;
-  }
-  
-  public function getBasicCauseList($lg) {
-    $sql = "SELECT CauseId, CauseName, CauseDesc FROM Cause ".
-            "WHERE LangIsoCode='$lg' ORDER BY CauseName";
-    $data = array();
-    $res = $this->base->query($sql);
-    foreach($res as $row)
-      $data[$row['CauseId']] = array($row['CauseName'], $row['CauseDesc']);
-    return $data;
-  }
+	public function getBasicEventList($lg) {
+		$sql = "SELECT EventId, EventName, EventDesc FROM Event ".
+				"WHERE LangIsoCode='$lg' ORDER BY EventName";
+		$data = array();
+		$res = $this->base->query($sql);
+		foreach($res as $row)
+			$data[$row['EventId']] = array($row['EventName'], $row['EventDesc']);
+		return $data;
+	}
 
-  public function getRegionEventList($type, $status, $lang) {
-    if ($type == "PREDEF")
-      $sqlt = "EventPreDefined=1";
-    else if ($type == "USER")
-      $sqlt = "EventPreDefined=0";
-    else
-      $sqlt = "'1=1'";	// all
-    if ($status == "active")
-      $sqls = "EventActive=1";
-    else
-      $sqls = "'1=1'"; // all
-    $sql = "SELECT * FROM Event WHERE ". $sqls ." AND ". 
-        $sqlt ." ORDER BY EventName";
-    $data = array();
-    $res = $this->dreg->query($sql);
-    foreach($res as $row)
-      $data[$row['EventId']] = array($row['EventName'], str2js($row['EventDesc']), $row['EventActive']);
-    return $data;
-  }
+	public function getBasicCauseList($lg) {
+		$sql = "SELECT CauseId, CauseName, CauseDesc FROM Cause ".
+				"WHERE LangIsoCode='$lg' ORDER BY CauseName";
+		$data = array();
+		$res = $this->base->query($sql);
+		foreach($res as $row)
+			$data[$row['CauseId']] = array($row['CauseName'], $row['CauseDesc']);
+		return $data;
+	}
+
+	public function getRegionEventList($type, $status, $lang) {
+		if ($type == "PREDEF")
+			$sqlt = "EventPreDefined=1";
+		else if ($type == "USER")
+			$sqlt = "EventPreDefined=0";
+		else
+			$sqlt = "'1=1'";	// all
+		if ($status == "active")
+			$sqls = "EventActive=1";
+		else
+			$sqls = "'1=1'"; // all
+		$sql = "SELECT * FROM Event WHERE ". $sqls ." AND ". $sqlt ." ORDER BY EventName";
+		$data = array();
+		$res = $this->dreg->query($sql);
+		foreach($res as $row)
+			$data[$row['EventId']] = array($row['EventName'], str2js($row['EventDesc']), $row['EventActive']);
+		return $data;
+	}
 
 	public function getRegionCauseList($type, $status, $lang) {
 		if ($type == "PREDEF")
@@ -526,62 +521,66 @@ class Query extends PDO
 		}
 		*/
 		return $fld;
-  }
-  
-  public function getNextDisasterSerial($year) {
-	$sql = "SELECT COUNT(DisasterId) AS num FROM Disaster WHERE DisasterBeginTime LIKE '". $year ."%'";
-	$res = $this->getresult($sql);
-	return sprintf("%05d", $res['num'] + 1);
-  }
+	}
 
-  public function getDisasterBySerial($diser) {
-    $sql = "SELECT * FROM Disaster WHERE DisasterSerial='$diser'";
-    $res = $this->dreg->query($sql);
-    return $res;
-  }
+	public function getNextDisasterSerial($year) {
+		$sql = "SELECT COUNT(DisasterId) AS num FROM Disaster WHERE DisasterBeginTime LIKE '". $year ."%'";
+		$res = $this->getresult($sql);
+		return sprintf("%05d", $res['num'] + 1);
+	}
 
-  public function getDisasterById($diid) {
-    $sql = "SELECT * FROM Disaster WHERE DisasterId='$diid'";
-    $res = $this->dreg->query($sql);
-    return $res;
-  }
+	public function getDisasterBySerial($diser) {
+		$sql = "SELECT * FROM Disaster WHERE DisasterSerial='$diser'";
+		$res = $this->dreg->query($sql);
+		return $res;
+	}
 
-  // Get number of datacards by status: PUBLISHED, DRAFT, ..
-  public function getNumDisasterByStatus($status) {
-    $sql = "SELECT COUNT(DisasterId) AS counter FROM Disaster WHERE RecordStatus='$status'";
-    $dat = $this->getresult($sql);
-    return $dat['counter'];
-  }
-  
-  public function getLastUpdate() {
-    $sql = "SELECT MAX(RecordUpdate) AS lastupdate FROM Disaster";
-    $dat = $this->getresult($sql);
-    return substr($dat['lastupdate'],0,10);
-  }
+	public function getDisasterById($diid) {
+		$sql = "SELECT * FROM Disaster WHERE DisasterId='$diid'";
+		$res = $this->dreg->query($sql);
+		return $res;
+	}
 
-  public function getFirstDisasterid() {
-    $sql = "SELECT MIN(DisasterId) as first FROM Disaster";
-    $dat = $this->getresult($sql);
-    return $dat['first'];
-  }
-  
-  public function getPrevDisasterId($id) {
-    $sql = "SELECT DisasterId FROM Disaster WHERE DisasterId < '$id' LIMIT 1";
-    $dat = $this->getresult($sql);
-    return $dat['DisasterId'];
-  }
-  
-  public function getNextDisasterId($id) {
-    $sql = "SELECT DisasterId FROM Disaster WHERE DisasterId > '$id' LIMIT 1";
-    $dat = $this->getresult($sql);
-    return $dat['DisasterId'];
-  }
+	// Get number of datacards by status: PUBLISHED, DRAFT, ..
+	public function getNumDisasterByStatus($status) {
+		$sql = "SELECT COUNT(DisasterId) AS counter FROM Disaster WHERE RecordStatus='$status'";
+		$dat = $this->getresult($sql);
+		return $dat['counter'];
+	}
 
-  public function getLastDisasterId() {
-    $sql = "SELECT MAX(DisasterId) as last FROM Disaster";
-    $dat = $this->getresult($sql);
-    return $dat['last'];
-  }
+	public function getLastUpdate() {
+		$sql = "SELECT MAX(RecordUpdate) AS lastupdate FROM Disaster";
+		$dat = $this->getresult($sql);
+		return substr($dat['lastupdate'],0,10);
+	}
+
+	public function getFirstDisasterid() {
+		$sql = "SELECT DisasterId as first FROM Disaster ORDER BY DisasterBeginTime, DisasterId LIMIT 1";
+		$dat = $this->getresult($sql);
+		return $dat['first'];
+	}
+
+	public function getPrevDisasterId($id) {
+		$dcd = $this->getassoc("SELECT * FROM Disaster WHERE DisasterId='$id'");
+		$sql = "SELECT DisasterId FROM Disaster WHERE DisasterId < '$id' AND DisasterBeginTime < '".
+			$dcd[0]['DisasterBeginTime'] ."' ORDER BY DisasterBeginTime DESC, DisasterId DESC LIMIT 1";
+		$dat = $this->getresult($sql);
+		return $dat['DisasterId'];
+	}
+
+	public function getNextDisasterId($id) {
+		$dcd = $this->getassoc("SELECT * FROM Disaster WHERE DisasterId='$id'");
+		$sql = "SELECT DisasterId FROM Disaster WHERE DisasterId > '$id' AND DisasterBeginTime > '".
+			$dcd[0]['DisasterBeginTime'] ."' ORDER BY DisasterBeginTime, DisasterId LIMIT 1";
+		$dat = $this->getresult($sql);
+		return $dat['DisasterId'];
+	}
+
+	public function getLastDisasterId() {
+		$sql = "SELECT DisasterId as last FROM Disaster ORDER BY DisasterBeginTime DESC, DisasterId DESC LIMIT 1";
+		$dat = $this->getresult($sql);
+		return $dat['last'];
+	}
   
 	public function getRegLogList() {
 		$data = array();
@@ -595,71 +594,60 @@ class Query extends PDO
 		return $data;
 	}
 
-  /* BASE.DB & CORE.DB -> COUNTRIES, REGIONS AND VIRTUAL REGIONS FUNCTIONS */
-  function getCountryByCode($idcnt) {
-    $sql = "SELECT CountryName FROM Country WHERE CountryIso = '$idcnt'";
-    $res = $this->base->query($sql);
-    $dat = $res->fetch(PDO::FETCH_ASSOC);
-    return $dat['CountryName'];
-  }
+	/* BASE.DB & CORE.DB -> COUNTRIES, REGIONS AND VIRTUAL REGIONS FUNCTIONS */
+	function getCountryByCode($idcnt) {
+		$sql = "SELECT CountryName FROM Country WHERE CountryIso = '$idcnt'";
+		$res = $this->base->query($sql);
+		$dat = $res->fetch(PDO::FETCH_ASSOC);
+		return $dat['CountryName'];
+	}
 
-  function getCountryList() {
-    $sql = "SELECT CountryIso, CountryName FROM Country ORDER BY CountryName";
-    $data = array();
-    $res = $this->base->query($sql);
-    foreach ($res as $row)
-      $data[$row['CountryIso']] = $row['CountryName'];
-    return $data;
-  }
+	function getCountryList() {
+		$sql = "SELECT CountryIso, CountryName FROM Country ORDER BY CountryName";
+		$data = array();
+		$res = $this->base->query($sql);
+		foreach ($res as $row)
+		  $data[$row['CountryIso']] = $row['CountryName'];
+		return $data;
+	}
 
-  function getRegionFieldByID($ruuid, $field) {
-    $sql = "SELECT RegionId, $field FROM Region WHERE RegionId = '$ruuid'";
-    $res = $this->core->query($sql);
-    $dat = $res->fetch(PDO::FETCH_ASSOC);
-    $data[$dat['RegionId']] = $dat[$field];
-    return $data;
-  }
+	function getRegionFieldByID($ruuid, $field) {
+		$sql = "SELECT RegionId, $field FROM Region WHERE RegionId = '$ruuid'";
+		$res = $this->core->query($sql);
+		$dat = $res->fetch(PDO::FETCH_ASSOC);
+		$data[$dat['RegionId']] = $dat[$field];
+		return $data;
+	}
 
-  public function getRegionList($cnt, $status) {
-    if (!empty($cnt))
-      $opt = " CountryIso='$cnt'";
-    else
-      $opt = " 1=1";
-    if ($status == "ACTIVE")
-      $opt .= " AND RegionStatus >= 1";
-    $sql = "SELECT RegionId, RegionLabel FROM Region WHERE IsCRegion=0 AND IsVRegion=0 AND $opt ORDER BY RegionLabel";
-    $res = $this->core->query($sql);
-    $data = array();
-    foreach ($res as $row)
-      $data[$row['RegionId']] = $row['RegionLabel'];
-    return $data;
-  }
+	public function getRegionList($cnt, $status) {
+		if (!empty($cnt))
+			$opt = " CountryIso='$cnt'";
+		else
+			$opt = " 1=1";
+		if ($status == "ACTIVE")
+			$opt .= " AND RegionStatus >= 1";
+		$sql = "SELECT RegionId, RegionLabel FROM Region WHERE IsCRegion=0 AND IsVRegion=0 AND $opt ORDER BY RegionLabel";
+		$res = $this->core->query($sql);
+		$data = array();
+		foreach ($res as $row)
+			$data[$row['RegionId']] = $row['RegionLabel'];
+		return $data;
+	}
 
 	public function getRegionAdminList() {
 		$sql = "SELECT R.RegionId AS RegionId, R.CountryIso AS CountryIso, R.RegionLabel ".
-		       "AS RegionLabel, RA.UserId AS UserId, R.RegionStatus AS RegionStatus ".
-		       "FROM Region AS R, RegionAuth AS RA WHERE R.RegionId=RA.RegionId AND ".
-		       "RA.AuthAuxValue='ADMINREGION' ORDER BY RegionLabel";
+				"AS RegionLabel, RA.UserId AS UserId, R.RegionStatus AS RegionStatus ".
+				"FROM Region AS R, RegionAuth AS RA WHERE R.RegionId=RA.RegionId AND ".
+				"RA.AuthAuxValue='ADMINREGION' ORDER BY RegionLabel";
 		$data = array();
 		foreach($this->core->query($sql) as $row) {
 			$RegionActive = ($row['RegionStatus'] & 1) > 0;
 			$RegionPublic = ($row['RegionStatus'] & 2) > 0;
 			$data[$row['RegionId']] = array($row['CountryIso'], 
-			                                $row['RegionLabel'],
-			                                $row['UserId'],
-			                                $RegionActive,
-			                                $RegionPublic);
+				$row['RegionLabel'], $row['UserId'], $RegionActive, $RegionPublic);
 		}
 		return $data;
 	}
-
-  /* OBSOLETE: USE getDBInfo function 
-  public function getVirtualRegInfo($vreg) {
-    $sql = "SELECT * FROM VirtualRegion WHERE VirtualRegId='".
-           $vreg ."'";
-    $res = $this->core->query($sql);
-    return $res;
-  }*/
 
   public function getCVRegItems($cvregid) {
     $sql = "SELECT RegionItem FROM CVRegionItem WHERE RegionId='".
