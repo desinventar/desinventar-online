@@ -738,6 +738,16 @@
 	}
   </script>
   <script type="text/javascript" src="../include/listMan.js"></script>
+	<style type="text/css">
+		.bsave {
+			background-image: url(../images/saveicon.png) !important;
+			background-repeat: no-repeat; background-position: top center; width: 22px;
+		}
+		.bprint {
+			background-image: url(../images/printicon.png) !important;
+			background-repeat: no-repeat; background-position: top center; width: 22px;
+		}
+	</style>
 </head>
 
 <body>
@@ -756,7 +766,7 @@
         SECTION : DATA CONFIGURATION
         ============================
 -->
-        <input type="button" id="dat-btn" value="{-#bdata#-}" ext:qtip="{-#tdatamsg#-}" class="btn">
+        <input type="button" id="dat-btn" value="{-#bdata#-}" ext:qtip="{-#tdatamsg#-}" class="bb btn">
         <div id="dat-win" class="x-hidden">
           <div class="x-window-header">{-#bdata#-}</div>
           <div id="dat-cfg">
@@ -829,7 +839,7 @@
         ====================================
 -->
         <input type="button" id="map-btn" ext:qtip="{-#tthematicmsg#-}"
-           value="{-#bthematic#-}" class="btn"{-if !$ctl_showmap-} style="display:none;"{-/if-}>
+           value="{-#bthematic#-}" {-if !$ctl_showmap-}style="display:none;"{-/if-} class="bb btn">
         <div id="map-win" class="x-hidden">
           <div class="x-window-header">{-#bthematic#-}</div>
           <div id="map-cfg">
@@ -937,7 +947,7 @@
         SECTION : GRAPHIC CONFIGURATION
         ==============================
 -->
-        <input type="button" id="grp-btn" value="{-#bgraphic#-}" ext:qtip="{-#tgraphicmsg#-}" class="btn">
+        <input type="button" id="grp-btn" value="{-#bgraphic#-}" ext:qtip="{-#tgraphicmsg#-}" class="bb btn">
         <div id="grp-win" class="x-hidden">
           <div class="x-window-header">{-#bgraphic#-}</div>
           <div id="grp-cfg">
@@ -1133,7 +1143,7 @@
         SECTION : STATISTIC CONFIGURATION
         ==============================
 -->
-        <input type="button" id="std-btn" value="{-#bstatistic#-}" ext:qtip="{-#tstatisticmsg#-}" class="btn">
+        <input type="button" id="std-btn" value="{-#bstatistic#-}" ext:qtip="{-#tstatisticmsg#-}" class="bb btn">
         <div id="std-win" class="x-hidden">
           <div class="x-window-header">{-#bstatistic#-}</div>
           <div id="std-cfg">
@@ -1249,10 +1259,10 @@
         </div>
         <span id="frmwait"></span>
         <input id="DCRes" type="hidden" value="">
-        <input type="button" class="line" style="width:20px; height:20px; background-image:url(../images/saveicon.png);"
-            onClick="if($('DCRes').value != '') saveRes('export');" ext:qtip="{-#bsavemsg#-}">&nbsp;&nbsp;
-        <input type="button" class="line" style="width:20px; height:20px; background-image:url(../images/printicon.png);"
-            onClick="$('dcr').focus(); $('dcr').print();" ext:qtip="{-#bprintmsg#-}">&nbsp;&nbsp;
+        <input type="button" class="bb bsave" onClick="if($('DCRes').value != '') saveRes('export');" ext:qtip="{-#bsavemsg#-}">
+		&nbsp;&nbsp;
+        <input type="button" class="bb bprint" onClick="$('dcr').focus(); $('dcr').print();" ext:qtip="{-#bprintmsg#-}">
+		&nbsp;&nbsp;
 		 <!-- Show DesInventar (input data) Form -->
 		<div id="dif-win" class="x-hidden">
 		  <div class="x-window-header">{-#mdcsection#-} | {-$userid-} - {-$role-}</div>
