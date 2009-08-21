@@ -225,12 +225,10 @@ class DIObject {
 	
 	public function exist() {
 		$iReturn = ERR_DEFAULT_ERROR;
-		$sQuery = $this->getSelectQuery();
-		if ($result = $this->conn->query($sQuery)) {
-			if ($result->num_rows() > 0) {
-				$bReturn = ERR_NO_ERROR;
-			}
-		}
+		$query = $this->getSelectQuery();
+		foreach($this->conn->query($query) as $row) {
+			$iReturn = ERR_NO_ERROR;
+		} //foreach
 		return $iReturn;
 	} // function
 	

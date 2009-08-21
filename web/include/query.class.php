@@ -9,6 +9,7 @@ class Query extends PDO
 	public $sRegionId = "";
 	public $dreg = null;
 	public $core = null;
+	public $dbfile = '';
 
 	public function __construct() {
 		if (!extension_loaded('pdo')) {
@@ -72,6 +73,7 @@ class Query extends PDO
 					/*** set the error reporting attribute ***/
 					$this->dreg->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					$this->sRegionId = $prmRegionId;
+					$this->dbfile = $DBFile;
 				} catch (PDOException $e) {
 					showErrorMsg($e->getMessage());
 				}
