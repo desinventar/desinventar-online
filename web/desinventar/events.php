@@ -9,10 +9,11 @@ require_once('../include/query.class.php');
 require_once('../include/usersession.class.php');
 require_once('../include/dievent.class.php');
 
-if (isset($_GET['r']) && !empty($_GET['r']))
-	$reg = $_GET['r'];
-else
+$reg = $us->sRegionId;
+if (empty($reg)) {
 	exit();
+}
+$get = $_GET;
 
 function showResult($stat, &$tp) {
 	if (!iserror($stat))

@@ -27,12 +27,10 @@ function loadCSV($ocsv) {
 $post = $_POST;
 $get = $_GET;
 
-if (isset($post['r']) && !empty($post['r']))
-	$reg = $post['r'];
-elseif (isset($get['r']) && !empty($get['r']))
-	$reg = $get['r'];
-else
+$reg = $us->sRegionId;
+if (empty($reg)) {
 	exit();
+}
 
 if (isset($_FILES['desinv']) && isset($post['diobj'])) {
 	$iserror = true;

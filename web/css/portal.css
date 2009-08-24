@@ -143,18 +143,6 @@ a:hover	{	color:#00008b; }
 	width:78px; height:18px; bgcolor:white; 
 	border-width:0px; vertical-align:top;
 }
-.submenu { 
-	position:absolute; visibility: hidden; border:1px solid #777; 
-	border-bottom-width:0; font:11px Trebuchet MS, sans-serif; 
-	line-height: 18px; z-index: 728; background-color: #fff; width: 95px; 
-}
-.submenu a {
-	display:block; border-bottom:1px solid #777; 
-	padding: 1px 0; text-decoration:none; 
-}
-.submenu a:hover { 
-	background-color: #d3d3d3; color: #000;
-}
 .regl {
 	font-family:arial,tahoma,helvetica,cursive; font-size:13px; color:#000;
 }

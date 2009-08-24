@@ -8,31 +8,32 @@ require_once('../include/loader.php');
 require_once('../include/query.class.php');
 require_once('../include/digeography.class.php');
 
-if (isset($_GET['r']) && !empty($_GET['r']))
-	$reg = $_GET['r'];
-else
+$reg = $us->sRegionId;
+if (empty($reg)) {
 	exit();
+}
+$get = $_GET;
 
 // EDIT REGION: Form to Create and assign regions
-if (isset($_GET['geocmd'])) {
+if (isset($get['geocmd'])) {
 	$mod = "geo";
-	$cmd = $_GET['geocmd'];
+	$cmd = $get['geocmd'];
 	// Set Variables to insert or update
 	$dat = array();
-	$dat['GeographyId'] = isset($_GET['GeographyId']) ? $_GET['GeographyId']: "";
-	$dat['GeoParentId'] = isset($_GET['GeoParentId']) ? $_GET['GeoParentId']: "";
-	$dat['GeographyLevel'] = isset($_GET['GeographyLevel']) ? $_GET['GeographyLevel']: "";
-	$dat['GeographyCode'] = isset($_GET['GeographyCode']) ? $_GET['GeographyCode']:"";
-	$dat['GeographyName'] = isset($_GET['GeographyName']) ? $_GET['GeographyName']:"";
-	if (isset($_GET['GeographyActive']) && $_GET['GeographyActive'] == "on")
+	$dat['GeographyId'] = isset($get['GeographyId']) ? $get['GeographyId']: "";
+	$dat['GeoParentId'] = isset($get['GeoParentId']) ? $get['GeoParentId']: "";
+	$dat['GeographyLevel'] = isset($get['GeographyLevel']) ? $get['GeographyLevel']: "";
+	$dat['GeographyCode'] = isset($get['GeographyCode']) ? $get['GeographyCode']:"";
+	$dat['GeographyName'] = isset($get['GeographyName']) ? $get['GeographyName']:"";
+	if (isset($get['GeographyActive']) && $get['GeographyActive'] == "on")
 		$dat['GeographyActive'] = true;
 	else
 		$dat['GeographyActive'] = false;
 	switch ($cmd) {
 	case "insert":
 		$o = new DIGeography($us);
-		$o->setFromArray($_GET);
-		$o->setGeographyId($_GET['GeoParentId']);
+		$o->setFromArray($get);
+		$o->setGeographyId($get['GeoParentId']);
 		$i = $o->insert();
 		if (!iserror($i))
 			$t->assign ("ctl_msginsgeo", true);
@@ -42,9 +43,9 @@ if (isset($_GET['geocmd'])) {
 		}
 	break;
 	case "update":
-		$o = new DIGeography($us, $_GET['GeographyId']);
+		$o = new DIGeography($us, $get['GeographyId']);
 		$o->load();
-		$o->setFromArray($_GET);
+		$o->setFromArray($get);
 		$i = $o->update();
 		if (!iserror($i))
 			$t->assign ("ctl_msgupdgeo", true);
@@ -54,21 +55,21 @@ if (isset($_GET['geocmd'])) {
 		}
 	break;
 	case "list":
-		$lev = $us->q->getNextLev($_GET['GeographyId']);
+		$lev = $us->q->getNextLev($get['GeographyId']);
 		$t->assign ("lev", $lev);
 		$t->assign ("levmax", $us->q->getMaxGeoLev());
 		$t->assign ("levname", $us->q->loadGeoLevById($lev));
-		$t->assign ("geol", $us->q->loadGeoChilds($_GET['GeographyId']));
+		$t->assign ("geol", $us->q->loadGeoChilds($get['GeographyId']));
 		$t->assign ("ctl_geolist", true);
 	break;
 	case "chkcode":
 		$t->assign ("ctl_chkcode", true);
-		if ($us->q->isvalidObjectName($_GET['GeographyId'], $_GET['GeographyCode'], DI_GEOGRAPHY))
+		if ($us->q->isvalidObjectName($get['GeographyId'], $get['GeographyCode'], DI_GEOGRAPHY))
 			$t->assign ("chkcode", true);
 	break;
 	case "chkstatus":
 		$t->assign ("ctl_chkstatus", true);
-		if ($us->q->isvalidObjectToInactivate($_GET['GeographyId'], DI_GEOGRAPHY))
+		if ($us->q->isvalidObjectToInactivate($get['GeographyId'], DI_GEOGRAPHY))
 			$t->assign ("chkstatus", true);
 	break;
 	default: 

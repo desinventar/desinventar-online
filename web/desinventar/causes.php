@@ -9,10 +9,11 @@ require_once('../include/query.class.php');
 require_once('../include/region.class.php');
 require_once('../include/dicause.class.php');
 
-if (isset($_GET['r']) && !empty($_GET['r']))
-	$reg = $_GET['r'];
-else
+$reg = $us->sRegionId;
+if (empty($reg)) {
 	exit();
+}
+$get = $_GET;
 
 function form2cause ($form) {
 	$data = array ();
