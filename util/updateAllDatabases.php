@@ -108,6 +108,9 @@ foreach ($RegionList as $RegionId) {
 				$a->insert();
 			} //foreach
 		}
+		
+		$query = "UPDATE GeoCarto SET RegionId='" . $RegionId . "' WHERE RegionId='" . $RegionUUID . "'";
+		$us->q->dreg->query($query);
 
 		// Recalculate GeographyFQName
 		if ($iReturn > 0) {
