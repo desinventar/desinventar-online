@@ -9,6 +9,7 @@
 	<title>{-#ttitle#-} [{-$regname-}] | {-$usr-} - {-$dicrole-}</title>
 	<link rel="stylesheet" href="../css/desinventar.css" type="text/css"/>
 	<link rel="stylesheet" href="../css/desinput.css" type="text/css"/>
+	<link rel="stylesheet" href="../css/tabber.css" type="text/css">
 	<script type="text/javascript" src="../include/prototype.js"></script>
 	<script type="text/javascript" src="../include/combo-box.js"></script>
 	<script type="text/javascript" src="../include/diadmin.js"></script>
@@ -69,6 +70,26 @@
 				val = $(fld).value;
 				$(fld).value = val.substr(0, val.length - 5);
 				$(lev).innerHTML = '';
+			}
+		}
+		function setadmingeo(k, l) {
+			var v = k.split("|");
+			mod = 'geo';
+			uploadMsg('');
+			if (v[0] == -1) {
+				setLevGeo('','','',1,'','','','geo');
+				if (l == 0)
+					$('aGeoParentId').value = '';
+				$('geocmd').value='insert';
+				$('alev' + l).style.display = "none";
+			}
+			else if (v[0] == -2) 
+				$('geoaddsect').style.display = 'none';
+			else {
+				setLevGeo(v[0],v[1],v[2],v[3],'','','','geo');
+				$('aGeoParentId').value = v[0];
+				$('geocmd').value='update';
+				updateList('alev' + l, 'geography.php', 'r={-$reg-}&geocmd=list&GeographyId=' + v[0]);
 			}
 		}
 		function DisableEnableForm(xForm, disab) {
@@ -231,31 +252,67 @@
 			uploadMsg("{-#tmsgnewcard#-}");
 			var pe = new PeriodicalExecuter(setActive, 60);
 		}
+		document.write('<style type="text/css">.tabber{display:none;}<\/style>');
+		var tabberOptions = {
+			'onClick': function(argsObj) {
+				var t = argsObj.tabber; /* Tabber object */
+				var i = argsObj.index; /* Which tab was clicked (0..n) */
+				var div = this.tabs[i].div; /* The tab content div */
+				/* Display a loading message */
+				div.innerHTML = waiting;
+				switch (i) {
+					case 0 :
+						myAjax = new Ajax.Updater(div, 'region.php', {method:'get', parameters:''});
+					break;
+					case 1 :
+						myAjax = new Ajax.Updater(div, 'geolevel.php', {method:'get', parameters:''});
+					break;
+					case 2 :
+						myAjax = new Ajax.Updater(div, 'geography.php', {method:'get', parameters:''});
+					break;
+					case 3 :
+						myAjax = new Ajax.Updater(div, 'events.php', {method:'get', parameters:''});
+					break;
+					case 4 :
+						myAjax = new Ajax.Updater(div, 'causes.php', {method:'get', parameters:''});
+					break;
+					case 5 :
+						myAjax = new Ajax.Updater(div, 'extraeffects.php', {method:'get', parameters:''});
+					break;
+				}
+			},
+			'onLoad': function(argsObj) {
+				/* Load the first tab */
+				argsObj.index = 0;
+				this.onClick(argsObj);
+			},
+		}
 	</script>
+	<script type="text/javascript" src="../include/tabber.js"></script>
 	<style type="text/css">
 		.bnew {
 			background-image: url(../images/newicon.png) !important;
-			background-repeat: no-repeat; background-position: top center; width: 22px;
+			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
 		}
 		.bupd {
 			background-image: url(../images/updateicon.png) !important;
-			background-repeat: no-repeat; background-position: top center; width: 22px;
+			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
 		}
 		.bcancel {
 			background-image: url(../images/cancelicon.png) !important; 
-			background-repeat: no-repeat; background-position: top center; width: 22px;
+			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
 		}
 		.bfind {
 			background-image: url(../images/findicon.png) !important;
-			background-repeat: no-repeat; background-position: top center; width: 22px;
+			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
 		}
 		.bsave {
 			background-image: url(../images/saveicon.png) !important;
-			background-repeat: no-repeat; background-position: top center; width: 22px;
+			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
 		}
 		.bprint {
 			background-image: url(../images/printicon.png) !important;
-			background-repeat: no-repeat; background-position: top center; width: 22px;
+			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
 		}
 	</style>
 </head>
@@ -280,6 +337,8 @@
 					<span class="dlgmsg" id="dostat"></span>
 					<input type="button" value=">" class="bb line" onClick="requestDCard('getNextDId', $('DisasterId').value);">
 					<input type="button" value=">>" class="bb line" onClick="setDICard('{-$reg-}', {-$lst-}, '');">
+					&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a href="javascript:void(null);" onClick="$('config').style.visibility = 'visible';">{-#mconfig#-}</a>
 					<br>
 					<span class="dlgmsg" id="distatusmsg"></span>
 				</td>
@@ -288,6 +347,36 @@
 				</td>
 			</tr>
 		</table>
+		<div id="config" style="position:absolute; padding:5px; background-color: #fff; visibility:hidden; top: 20px; left: 30px; 
+			z-index:100; overflow: auto; margin: 1px; border: 3px outset gray; width: 800px; height: 550px;">
+			<table border=0 width="100%">
+				<tr>
+					<td align="left">{-#mconfig#-}</td>
+					<td align="right"><a href="javascript:void(null);" onClick="$('config').style.visibility = 'hidden';">X</a></td>
+				</tr>
+			</table>
+			<hr>
+			<div class="tabber">
+			 <div class="tabbertab">
+			  <h2>{-#mreginfo#-}</h2><p></p>
+			 </div>
+			 <div class="tabbertab">
+			  <h2>{-#mgeolevel#-}</h2><p></p>
+			 </div>
+			 <div class="tabbertab">
+			  <h2>{-#mgeography#-}</h2><p></p>
+			 </div>
+			 <div class="tabbertab">
+			  <h2>{-#mevents#-}</h2><p></p>
+			 </div>
+			 <div class="tabbertab">
+			  <h2>{-#mcauses#-}</h2><p></p>
+			 </div>
+			 <div class="tabbertab">
+			  <h2>{-#meeffects#-}</h2><p></p>
+			 </div>
+			</div>
+		</div>
 		<form id="DICard" action="index.php" method="POST" target="dic">
 			<input type="hidden" name="_REG" id="_REG" value="{-$reg-}">
 			<input type="hidden" name="DisasterId" id="DisasterId" value="">
@@ -614,7 +703,7 @@
           </td>
         </tr>
       </table>
-	 </form>
+		</form>
 	</div>
 <!-- END DI8 FORM CARD -->
 

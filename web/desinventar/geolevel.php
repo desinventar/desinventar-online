@@ -11,33 +11,28 @@ require_once('../include/diobject.class.php');
 require_once('../include/digeolevel.class.php');
 require_once('../include/digeocarto.class.php');
 
-if (isset($_GET['r']) && !empty($_GET['r'])) {
-	$reg = $_GET['r'];
-	$us->open($reg);
-} else {
-	$reg = $us->sRegionId;
-}
-
-if (empty($reg) || ($reg == '')) {
+$reg = $us->sRegionId;
+if (empty($reg)) {
 	exit();
 }
+$get = $_GET;
 
 $q = new Query($reg);
 
 $mod = 'lev';
 $cmd = '';
-if (isset($_GET['levcmd'])) {
-	$cmd = $_GET['levcmd'];
+if (isset($get['levcmd'])) {
+	$cmd = $get['levcmd'];
 }
 if (!empty($cmd)) {
 	$mod = "lev";
 	$dat = array();
-	$dat['GeoLevelId'] = isset($_GET['GeoLevelId']) ? $_GET['GeoLevelId'] : -1;
-	$dat['GeoLevelName'] = isset($_GET['GeoLevelName']) ? $_GET['GeoLevelName']: '';
-	$dat['GeoLevelDesc'] = isset($_GET['GeoLevelDesc']) ? $_GET['GeoLevelDesc']: '';
-	$dat['GeoLevelLayerFile'] = isset($_GET['GeoLevelLayerFile']) ? $_GET['GeoLevelLayerFile']: '';
-	$dat['GeoLevelLayerCode'] = isset($_GET['GeoLevelLayerCode']) ? $_GET['GeoLevelLayerCode']: '';
-	$dat['GeoLevelLayerName'] = isset($_GET['GeoLevelLayerName']) ? $_GET['GeoLevelLayerName']: '';
+	$dat['GeoLevelId'] = isset($get['GeoLevelId']) ? $get['GeoLevelId'] : -1;
+	$dat['GeoLevelName'] = isset($get['GeoLevelName']) ? $get['GeoLevelName']: '';
+	$dat['GeoLevelDesc'] = isset($get['GeoLevelDesc']) ? $get['GeoLevelDesc']: '';
+	$dat['GeoLevelLayerFile'] = isset($get['GeoLevelLayerFile']) ? $get['GeoLevelLayerFile']: '';
+	$dat['GeoLevelLayerCode'] = isset($get['GeoLevelLayerCode']) ? $get['GeoLevelLayerCode']: '';
+	$dat['GeoLevelLayerName'] = isset($get['GeoLevelLayerName']) ? $get['GeoLevelLayerName']: '';
 	
 	switch ($cmd) {
 	case "insert":
@@ -101,8 +96,7 @@ if (!empty($cmd)) {
 		break;
 	case "chkname":
 		$t->assign ("ctl_chkname", true);
-		if ($q->isvalidObjectName($dat['GeoLevelId'], 
-		                          $dat['GeoLevelName'], DI_GEOLEVEL)) {
+		if ($q->isvalidObjectName($dat['GeoLevelId'], $dat['GeoLevelName'], DI_GEOLEVEL)) {
 			$t->assign ("chkname", true);
 		}
 		break;

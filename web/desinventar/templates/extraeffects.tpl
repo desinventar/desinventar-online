@@ -3,7 +3,7 @@
 {-if $ctl_admineef-}
 <!-- FIELDS -->
 	<b onMouseOver="showtip('{-$dic.DBExtraEffect[2]-}');">{-$dic.DBExtraEffect[0]-}</b><br>
-	<div class="dwin" style="width:280px; height:120px;">
+	<div class="dwin" style="width:600px; height:120px;">
 		<table width="100%" class="grid">
 			<thead>
 				<tr>
@@ -21,35 +21,35 @@
 						onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
 						onClick="setExtraEff('{-$key-}','{-$item[0]-}', '{-$item[1]-}', '{-$item[2]-}', '{-$item[3]-}', 
    													'{-$item[4]-}', '{-$item[5]-}'); $('cmd').value='update';">
-   				<td>{-$item[0]-}</td>
-   				<td>{-$item[1]-}</td>
-   			</tr>
+					<td>{-$item[0]-}</td>
+					<td>{-$item[1]-}</td>
+				</tr>
  {-/foreach-}
 {-/if-}
 {-if $ctl_admineef-}
 			</tbody>
 		</table>
 	</div>
-  <br><br>
-  <input id="add" type="button" value="{-#baddoption#-}" class="line"
-  		onclick="setExtraEff('','','','','','',''); $('cmd').value='insert';">
-  <span id="extraeffstatusmsg" class="dlgmsg"></span>
-  <br><br>
-	<div id="extraeffaddsect" style="display:none; width:280px;">
+	<br><br>
+	<input id="add" type="button" value="{-#baddoption#-}" class="line"
+		onclick="setExtraEff('','','','','','',''); $('cmd').value='insert';">
+	<span id="extraeffstatusmsg" class="dlgmsg"></span>
+	<br><br>
+	<div id="extraeffaddsect" style="display:none; width:600px;">
 		<form name="eeffrm" id="eeffrm" method="GET" 
 			action="javascript: var s=$('eeffrm').serialize(); sendData('{-$reg-}', 'extraeffects.php', s, '');"
 			onSubmit="javascript: var a=new Array('EEFieldLabel','EEFieldDesc', 'EEFieldType'); return(checkForm(a, '{-#errmsgfrmeef#-}'));">
-				<input id="r" name="r" type="hidden" value="{-$reg-}">
+			<input id="r" name="r" type="hidden" value="{-$reg-}">
     		{-$dic.DBEEFieldLabel[0]-}<b style="color:darkred;">*</b><br>
-    		<input type="text" id="EEFieldLabel" name="EEFieldLabel" {-$ro-} class="line fixw"
+    		<input type="text" id="EEFieldLabel" name="EEFieldLabel" {-$ro-} class="line" style="width:500px;"
     				onFocus="showtip('{-$dic.DBEEFieldLabel[2]-}')">
     		<br><br>
     		{-$dic.DBEEFieldDesc[0]-}<b style="color:darkred;">*</b><br>
-    		<textarea id="EEFieldDesc" name="EEFieldDesc" {-$ro-} class="fixw"
+    		<textarea id="EEFieldDesc" name="EEFieldDesc" {-$ro-} style="width:500px;"
     				onFocus="showtip('{-$dic.DBEEFieldDesc[2]-}')"></textarea>
     		<br><br>
     		{-$dic.DBEEFieldType[0]-}<b style="color:darkred;">*</b><br>
-    		<select id="EEFieldType" name="EEFieldType" {-$ro-} class="line fixw"
+    		<select id="EEFieldType" name="EEFieldType" {-$ro-} class="line" style="width:500px;"
     				onFocus="showtip('{-$dic.DBEEFieldType[2]-}');">
     			<option value=""></option>
     			<option value="INTEGER">{-#typeinteger#-}</option>
@@ -66,7 +66,7 @@
     		<input type="checkbox" id="EEFieldPublic" name="EEFieldPublic" {-$ro-}
     				onFocus="showtip('{-$dic.DBEEFieldPublic[2]-}')">
     		<br><br>
-    		<p align="center" class="fixw">
+    		<p align="center" style="width:500px;">
     			<input id="EEFieldSize" name="EEFieldSize" value="100" type="hidden">
     			<input id="EEFieldId" name="EEFieldId" type="hidden">
     			<input id="cmd" name="cmd" type="hidden">

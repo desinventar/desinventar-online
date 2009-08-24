@@ -3,21 +3,14 @@
 {-if $ctl_show-}
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
-	<link rel="stylesheet" href="../css/desinventar.css" type="text/css"/>
-	<link rel="stylesheet" href="../css/desinput.css" type="text/css"/>
-	<script type="text/javascript" src="../include/prototype.js"></script>
-	<script type="text/javascript" src="../include/combo-box.js"></script>
-	<script type="text/javascript" src="../include/diadmin.js.php"></script>
 </head>
 <body>
 	<b onMouseOver="showtip('{-$dic.DBEvent[2]-}');">{-$dic.DBEvent[0]-}</b>
 	<br>
-	<div class="dwin" style="width:280px; height:100px;">
+	<div class="dwin" style="width:600px; height:100px;">
 		<table class="grid">
 			<thead>
 				<tr>
@@ -34,11 +27,11 @@
 {-if $ctl_evepers-}
    {-foreach name=eve key=key item=item from=$eveuserl-}
 				<tr class="{-if ($smarty.foreach.eve.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}"
-						onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
-						onClick="setEveCau('{-$key-}','{-$item[0]-}','{-$item[1]-}','{-$item[2]-}','0','event'); uploadMsg(''); 
-													$('cmd').value='update';">
+					onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
+					onClick="setEveCau('{-$key-}','{-$item[0]-}','{-$item[1]-}','{-$item[2]-}','0','event'); 
+							uploadMsg(''); $('cmd').value='update';">
    				<td>{-$item[0]-}</td>
-   				<td>{-$item[1]|truncate:15-}</td>
+   				<td>{-$item[1]|truncate:150-}</td>
    				<td><input type="checkbox" {-if ($item[2] == 1) -} checked {-/if-} disabled></td>
    			</tr>
    {-/foreach-}
@@ -48,7 +41,7 @@
 		</table>
 	</div>
 	<br>
-	<div class="dwin" style="width:280px; height:100px;">
+	<div class="dwin" style="width:600px; height:100px;">
 		<table width="100%" class="grid">
 			<thead>
 				<tr>
@@ -69,7 +62,7 @@
 						onClick="setEveCau('{-$key-}','{-$item[0]-}','{-$item[1]-}','{-$item[2]-}','1','event'); uploadMsg('');
 													$('cmd').value='update';">
    				<td>{-$item[0]-}</td>
-   				<td>{-$item[1]|truncate:15-}</td>
+   				<td>{-$item[1]|truncate:150-}</td>
    				<td><input type="checkbox" {-if ($item[2] == 1) -} checked {-/if-} disabled></td>
    			</tr>
    {-/foreach-}
@@ -80,7 +73,7 @@
 	</div>
 	<br>
 	<input id="add" type="button" value="{-#baddelem#-}" class="line"
-			onclick="setEveCau('','','','1','0','event'); uploadMsg(''); $('cmd').value='insert';">
+		onclick="setEveCau('','','','1','0','event'); uploadMsg(''); $('cmd').value='insert';">
 	<span id="eventstatusmsg" class="dlgmsg"></span>
 	<br><br>
 	<div id="eventaddsect" style="display:none">
@@ -89,21 +82,21 @@
 			onSubmit="javascript: var a=new Array('aEventName','aEventDesc'); return(checkForm(a, '{-#errmsgfrm#-}'));">
 			<input id="r" name="r" type="hidden" value="{-$reg-}">
 			{-$dic.DBEvePersonName[0]-}<b style="color:darkred;">*</b><br>
-			<input id="aEventName" name="EventName" type="text" class="line fixw" maxlength="40" {-$ro-}
+			<input id="aEventName" name="EventName" type="text" class="line" maxlength="40" style="width:500px;" {-$ro-}
 					onBlur="updateList('eventstatusmsg', 'events.php', 'r={-$reg-}&cmd=chkname&EventId='+ $('EventId').value +'&EventName='+ $('aEventName').value);"
 					onFocus="showtip('{-$dic.DBEvePersonName[2]-}');">
 			<br><br>
 			{-$dic.DBEvePersonDef[0]-}<b style="color:darkred;">*</b><br>
-			<textarea id="aEventDesc" name="EventDesc" class="fixw" rows="4"
+			<textarea id="aEventDesc" name="EventDesc" class="line" rows="2" style="width:500px;"
 					onFocus="showtip('{-$dic.DBEvePersonDef[2]-}');" {-$ro-}></textarea>
 			<input id="aEventDesc2" name="EventDesc2" type="hidden">
 			<br><br>
-			{-$dic.DBEveActive[0]-}<b>*</b><br>
+			{-$dic.DBEveActive[0]-}
 			<input id="aEventActive" name="EventActive" type="checkbox" {-$ro-} 
 					onFocus="showtip('{-$dic.DBEveActive[2]-}');"
 					onClick="if (!this.checked) updateList('eventstatusmsg', 'events.php', 'r={-$reg-}&cmd=chkstatus&EventId='+ $('EventId').value);">
 			<br><br>
-			<p class="fixw">
+			<p class="line">
 				<input id="aEventId" name="EventId" type="hidden">
 				<input id="aEventPreDefined" name="EventPreDefined" type="hidden">
 				<input id="cmd" name="cmd" type="hidden">

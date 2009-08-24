@@ -9,12 +9,11 @@ require_once('../include/loader.php');
 require_once('../include/query.class.php');
 require_once('../include/dieefield.class.php');
 
-
-if (isset($_GET['r']) && !empty($_GET['r']))
-	$reg = $_GET['r'];
-else
+$reg = $us->sRegionId;
+if (empty($reg)) {
 	exit();
-
+}
+$get = $_GET;
 
 function getRAPermList($lst) {
 	$dat = array();
@@ -25,24 +24,24 @@ function getRAPermList($lst) {
 }
 
 // EDIT REGION: Form to Create and assign regions
-if (isset($_GET['cmd'])) {
-	$cmd = $_GET['cmd'];
+if (isset($get['cmd'])) {
+	$cmd = $get['cmd'];
 	if (($cmd == "insert") || ($cmd == "update")) {
-		if (isset($_GET['EEFieldActive']) && $_GET['EEFieldActive'] == "on")
+		if (isset($get['EEFieldActive']) && $get['EEFieldActive'] == "on")
 			$active = true;
 		else
 			$active = false;
-		if (isset($_GET['EEFieldPublic']) && $_GET['EEFieldPublic'] == "on")
+		if (isset($get['EEFieldPublic']) && $get['EEFieldPublic'] == "on")
 			$public = true;
 		else
 			$public = false;
-		$data = array('EEFieldId'     => $_GET['EEFieldId'],
-		              'EEFieldLabel'  => $_GET['EEFieldLabel'],
-		              'EEFieldDesc'   => $_GET['EEFieldDesc'], 
-		              'EEFieldType'   => $_GET['EEFieldType'], 
-		              'EEFieldSize'   => $_GET['EEFieldSize'],
+		$data = array('EEFieldId'     => $get['EEFieldId'],
+		              'EEFieldLabel'  => $get['EEFieldLabel'],
+		              'EEFieldDesc'   => $get['EEFieldDesc'], 
+		              'EEFieldType'   => $get['EEFieldType'], 
+		              'EEFieldSize'   => $get['EEFieldSize'],
 		              'EEFieldStatus' => $active);
-		$o = new DIEEField($us, $_GET['EEFieldId']);
+		$o = new DIEEField($us, $get['EEFieldId']);
 		$o->setFromArray($data);
 		if ($cmd == "insert")
 			$stat = $o->insert();
@@ -55,11 +54,11 @@ if (isset($_GET['cmd'])) {
 			$t->assign ("updstateef", showerror($stat));
 		}
 	}
-  // reload list from local SQLITE
-  else if ($cmd == "list") {
+	// reload list from local SQLITE
+	else if ($cmd == "list") {
 		$t->assign ("eef", $us->q->getEEFieldList(""));
 		$t->assign ("ctl_eeflist", true);
-  }
+	}
 } else {
 	$urol = $us->getUserRole($reg);
 	if ($urol == "OBSERVER")
