@@ -85,7 +85,8 @@
     	onClick="Element.addClassName(this, 'highlight');" ondblClick="Element.removeClassName(this, 'highlight');">
      <td>{-$offset+$smarty.foreach.dl.iteration-}</td>
  {-strip-}{-foreach name=sel key=k item=i from=$sel-}
-  {-if $i != "DisasterId"-}<td>{-$item[$i]-}</td>{-/if-}
+  {-if $i != "DisasterId"-}
+   <td>{-$item[$i]-}</td>{-/if-}
  {-/foreach-}{-/strip-}
     </tr>
 {-/foreach-}
