@@ -308,12 +308,6 @@ class DIRegion extends DIObject {
 			}
 			$iReturn = $this->addRegionItemGeography($prmRegionItemId, $prmRegionItemGeographyId);
 		}
-		if ($iReturn > 0) {
-			$iReturn = $this->addRegionItemGeoLevel($prmRegionItemId);
-		}
-		if ($iReturn > 0) {
-			$iReturn = $this->addRegionItemGeoCarto($prmRegionItemId, $prmRegionItemGeographyId);
-		}
 		/*
 		if ($iReturn > 0) {
 			$iReturn = $this->addRegionItemDisaster($prmRegionItemId,$prmRegionItemGeographyId);
@@ -388,33 +382,6 @@ class DIRegion extends DIObject {
 		return $iReturn;
 	}
 	
-	public function addRegionItemGeoLevel($prmRegionItemId) {
-		$iReturn = ERR_NO_ERROR;
-		$RegionItemDir = VAR_DIR . '/' . $prmRegionItemId;
-		$RegionItemDB = $RegionItemDir . '/desinventar.db';
-		$q = $this->q->dreg;
-		// Attach Database
-		$Query = "ATTACH DATABASE '" . $RegionItemDB . "' AS RegItem;";
-		$q->query($Query);
-		// GetCurrentMaxLevel
-		$iMaxLevel = 0;
-		foreach($q->query('SELECT MAX(GeoLevelId) AS MAXVAL FROM GeoLevel') as $row) {
-			$iMaxLevel = $row['MAXVAL'];
-		}
-		foreach($q->query('SELECT * FROM RegItem.GeoLevel') as $row) {
-			if ($iReturn > 0) {
-				if (($row['GeoLevelId'] + 1) > $iMaxLevel) {
-					$iMaxLevel++;
-					$g = new DIGeoLevel($this->session, $iMaxLevel);
-					$g->set('GeoLevelName', 'Nivel ' . $iMaxLevel);
-					$iReturn = $g->insert();
-				}
-			}			
-		} //foreach
-		$Query = "DETACH DATABASE RegItem";
-		$q->query($Query);
-		return $iReturn;
-	}
 	
 	public function processURL($prmURL) {
 		$url = array();
@@ -459,6 +426,124 @@ class DIRegion extends DIObject {
 			$this->q->dreg->query($this->detachQuery('RegItem'));
 		}
 	}
+
+	public function rebuildGeographyData() {
+		$iReturn = ERR_NO_ERROR;
+		$query = "SELECT * FROM Sync WHERE SyncTable='Geography'";
+		$list = array();
+		foreach($this->q->dreg->query($query) as $row) {
+			$list[] = $row['SyncURL'];
+		}
+		
+		$i = 1;
+		foreach($list as $SyncURL) {
+			$url = $this->processURL($SyncURL);
+			$RegionItemId = $url['regionid'];
+			$prmRegionItemId = $RegionItemId;
+			$prmRegionItemGeographyId = $this->getRegionItemGeographyId($RegionItemId);
+
+			$query = "DELETE FROM Geography WHERE GeographyId LIKE '" . $prmRegionItemGeographyId . "%'";
+			$this->q->dreg->query($query);
+
+			// Create Geography element at GeographyLevel=0 for this RegionItem
+			// Delete Existing Elements
+			$Query = "DELETE FROM Geography WHERE GeographyCode='" . $prmRegionItemId . "'";
+			$this->q->dreg->query($Query);
+			$g = new DIGeography($this->session, 
+			                     $prmRegionItemGeographyId,
+			                     $this->get('LangIsoCode'));
+			$g->set('GeographyCode', $prmRegionItemId);
+			$prmRegionItemGeographyName = 'Level ' . $i;
+			$i++;
+			$g->set('GeographyName', $prmRegionItemGeographyName);
+			$iReturn = $g->insert();
+			
+			// Attach Database
+			$this->q->dreg->query($this->attachQuery($RegionItemId,'RegItem'));
+
+			// Copy Geography From Database
+			$this->copyData($this->q->dreg, 'Geography','GeographyId', $prmRegionItemId, $prmRegionItemGeographyId, false);
+
+			$this->q->dreg->query($this->detachQuery('RegItem'));
+		}
+		return $iReturn;
+	}
+
+	public function rebuildGeoLevelData() {
+		$iReturn = ERR_NO_ERROR;
+		$this->q->dreg->query("DELETE FROM GeoLevel WHERE GeoLevelId>0");
+		$query = "SELECT * FROM Sync WHERE SyncTable='Cause'";
+		foreach($this->q->dreg->query($query) as $row) {
+			$url = $this->processURL($row['SyncURL']);
+			$RegionItemId = $url['regionid'];
+			$this->q->dreg->query($this->attachQuery($RegionItemId,'RegItem'));
+
+			// GetCurrentMaxLevel
+			$iMaxLevel = 0;
+			foreach($this->q->dreg->query('SELECT MAX(GeoLevelId) AS MAXVAL FROM GeoLevel') as $row) {
+				$iMaxLevel = $row['MAXVAL'];
+			}
+			foreach($this->q->dreg->query('SELECT * FROM RegItem.GeoLevel') as $row) {
+				if ($iReturn > 0) {
+					if (($row['GeoLevelId'] + 1) > $iMaxLevel) {
+						$iMaxLevel++;
+						$g = new DIGeoLevel($this->session, $iMaxLevel);
+						$g->set('GeoLevelName', 'Nivel ' . $iMaxLevel);
+						$iReturn = $g->insert();
+					}
+				}			
+			} //foreach
+			$this->q->dreg->query($this->detachQuery('RegItem'));
+		}
+		return $iReturn;
+	}
+
+	public function rebuildGeoCartoData() {
+		$iReturn = ERR_NO_ERROR;
+		$query = "SELECT * FROM Sync WHERE SyncTable='GeoCarto'";
+		$list = array();
+		foreach($this->q->dreg->query($query) as $row) {
+			$list[] = $row['SyncURL'];
+		}
+		
+		foreach($list as $SyncURL) {
+			$url = $this->processURL($SyncURL);
+			$RegionItemId = $url['regionid'];
+			$prmRegionItemGeographyId = $this->getRegionItemGeographyId($RegionItemId);
+
+			$query = "DELETE FROM GeoCarto WHERE GeographyId='" . $prmRegionItemGeographyId . "'";
+			$this->q->dreg->query($query);
+			
+			// Attach Database
+			$this->q->dreg->query($this->attachQuery($RegionItemId,'RegItem'));
+
+			// Copy GeoCarto Items
+			$this->copyData($this->q->dreg, 'GeoCarto','GeographyId',$RegionItemId, $prmRegionItemGeographyId, false);
+			// Copy SHP,SHX,DBF files from each RegionItem to Region
+			$RegionDir     = VAR_DIR . '/' . $this->get('RegionId');
+			$RegionItemDir = VAR_DIR . '/' . $RegionItemId;
+			foreach($this->q->dreg->query('SELECT * FROM RegItem.GeoCarto') as $row) {
+				foreach(array('dbf','shp','shx','prj') as $ext) {
+					$file0 = $row['GeoLevelLayerFile'] . '.' . $ext;
+					$file1 = $RegionItemDir . '/' . $file0;
+					$file2 = $RegionDir . '/' . $file0;
+					if (file_exists($file1)) {
+						copy($file1, $file2);
+					}
+				} //foreach
+			} //foreach
+			
+			$g = new DIGeoCarto($this->session, 0);
+			$g->set('GeographyId', $prmRegionItemGeographyId);
+			$g->set('RegionId', $RegionItemId);
+			$g->insert();
+
+			$this->q->dreg->query($this->detachQuery('RegItem'));
+		}
+		return $iReturn;
+
+		$q->query("DETACH DATABASE RegItem");
+	}
 	
 	public function rebuildDataDisaster($prmRegionItemId='') {
 		$Query = "SELECT * FROM Sync WHERE SyncTable='Disaster'";
@@ -487,35 +572,6 @@ class DIRegion extends DIObject {
 		return $iReturn;
 	}
 	
-	public function addRegionItemGeoCarto($prmRegionItemId, $prmRegionItemGeographyId) {
-		$iReturn = ERR_NO_ERROR;
-		$RegionDB = VAR_DIR . '/' . $prmRegionItemId . '/desinventar.db';
-		$q = $this->q->dreg;
-		$q->query("ATTACH DATABASE '" . $RegionDB . "' AS RegItem");
-		$Query = "DELETE FROM GeoCarto WHERE GeographyId='" . $prmRegionItemGeographyId . "'";
-		$q->query($Query);
-		// Copy GeoCarto Items
-		$this->copyData($q, 'GeoCarto','GeographyId',$prmRegionItemId, $prmRegionItemGeographyId, false);
-		// Copy SHP,SHX,DBF files from each RegionItem to Region
-		$RegionDir     = VAR_DIR . '/' . $this->get('RegionId');
-		$RegionItemDir = VAR_DIR . '/' . $prmRegionItemId;
-		foreach($this->q->dreg->query('SELECT * FROM RegItem.GeoCarto') as $row) {
-			foreach(array('dbf','shp','shx','prj') as $ext) {
-				$file0 = $row['GeoLevelLayerFile'] . '.' . $ext;
-				$file1 = $RegionItemDir . '/' . $file0;
-				$file2 = $RegionDir . '/' . $file0;
-				if (file_exists($file1)) {
-					copy($file1, $file2);
-				}
-			}
-		}
-		$q->query("DETACH DATABASE RegItem");
-		$g = new DIGeoCarto($this->session, 0);
-		$g->set('GeographyId', $prmRegionItemGeographyId);
-		$g->set('RegionId', $prmRegionItemId);
-		$g->insert();
-		return $iReturn;
-	}
 	
 	public function copyData($prmConn, $prmTable, $prmField, $prmRegionItemId, $prmValue, $isNumeric) {
 		$Queries = array();		
