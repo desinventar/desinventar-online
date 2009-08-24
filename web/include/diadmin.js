@@ -63,10 +63,10 @@
 					updateList('lst_cauuser', 'causes.php', 'r='+ reg +'&cmd=list&predef=0');
 			break;
 			case "role":
-				updateList('lst_role', 'regionrol.php', 'r='+ reg +'&rolecmd=list');
+				updateList('lst_role', 'region.php', 'r='+ reg +'&rolecmd=list');
 			break;
 			case "log":
-				updateList('lst_log', 'regionlog.php', 'r='+ reg +'&logcmd=list');
+				updateList('lst_log', 'region.php', 'r='+ reg +'&logcmd=list');
 			break;
 			case "lev":
 				updateList('lst_lev', 'geolevel.php', 'r='+ reg +'&levcmd=list');

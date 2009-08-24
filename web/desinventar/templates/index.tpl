@@ -338,7 +338,9 @@
 					<input type="button" value=">" class="bb line" onClick="requestDCard('getNextDId', $('DisasterId').value);">
 					<input type="button" value=">>" class="bb line" onClick="setDICard('{-$reg-}', {-$lst-}, '');">
 					&nbsp;&nbsp;|&nbsp;&nbsp;
-					<a href="javascript:void(null);" onClick="$('config').style.visibility = 'visible';">{-#mconfig#-}</a>
+{-if $role == "OBSERVER" || $role == "ADMINREGION"-}
+					<a href="javascript:void(null);" onClick="TagToTip('config', COPYCONTENT, false, PADDING, 0, BORDERWIDTH, 0, EXCLUSIVE, true, TITLE, '{-#mconfig#-}', STICKY, true, CLOSEBTN, true);">{-#mconfig#-}</a>
+{-/if-}
 					<br>
 					<span class="dlgmsg" id="distatusmsg"></span>
 				</td>
@@ -347,34 +349,15 @@
 				</td>
 			</tr>
 		</table>
-		<div id="config" style="position:absolute; padding:5px; background-color: #fff; visibility:hidden; top: 20px; left: 30px; 
-			z-index:100; overflow: auto; margin: 1px; border: 3px outset gray; width: 800px; height: 550px;">
-			<table border=0 width="100%">
-				<tr>
-					<td align="left">{-#mconfig#-}</td>
-					<td align="right"><a href="javascript:void(null);" onClick="$('config').style.visibility = 'hidden';">X</a></td>
-				</tr>
-			</table>
-			<hr>
+		<div id="config" style="position:absolute; padding:5px; background-color: #fff; top: 25px; left: 30px; 
+			z-index:100; overflow: auto; margin: 1px; border: 3px outset gray; width: 800px; height: 520px;">
 			<div class="tabber">
-			 <div class="tabbertab">
-			  <h2>{-#mreginfo#-}</h2><p></p>
-			 </div>
-			 <div class="tabbertab">
-			  <h2>{-#mgeolevel#-}</h2><p></p>
-			 </div>
-			 <div class="tabbertab">
-			  <h2>{-#mgeography#-}</h2><p></p>
-			 </div>
-			 <div class="tabbertab">
-			  <h2>{-#mevents#-}</h2><p></p>
-			 </div>
-			 <div class="tabbertab">
-			  <h2>{-#mcauses#-}</h2><p></p>
-			 </div>
-			 <div class="tabbertab">
-			  <h2>{-#meeffects#-}</h2><p></p>
-			 </div>
+			 <div class="tabbertab"><h2>{-#mreginfo#-}</h2><p></p></div>
+			 <div class="tabbertab"><h2>{-#mgeolevel#-}</h2><p></p></div>
+			 <div class="tabbertab"><h2>{-#mgeography#-}</h2><p></p></div>
+			 <div class="tabbertab"><h2>{-#mevents#-}</h2><p></p></div>
+			 <div class="tabbertab"><h2>{-#mcauses#-}</h2><p></p></div>
+			 <div class="tabbertab"><h2>{-#meeffects#-}</h2><p></p></div>
 			</div>
 		</div>
 		<form id="DICard" action="index.php" method="POST" target="dic">
