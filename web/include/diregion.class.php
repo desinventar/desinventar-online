@@ -440,40 +440,34 @@ class DIRegion extends DIObject {
 
 	public function rebuildGeographyData() {
 		$iReturn = ERR_NO_ERROR;
-		$query = "SELECT * FROM Sync WHERE SyncTable='Geography'";
+		
+		// Delete existing Geography except for Level0 in Virtual Region
+		$query = "DELETE FROM Geography WHERE GeographyLevel>0";
+		$this->q->dreg->query($query);
+		
 		$list = array();
+		$query = "SELECT * FROM Sync WHERE SyncTable='Geography'";
 		foreach($this->q->dreg->query($query) as $row) {
 			$list[] = $row['SyncURL'];
 		}
 		
-		$i = 1;
 		foreach($list as $SyncURL) {
 			$url = $this->processURL($SyncURL);
 			$RegionItemId = $url['regionid'];
 			$prmRegionItemId = $RegionItemId;
 			$prmRegionItemGeographyId = $this->getRegionItemGeographyId($RegionItemId);
 
-			$query = "DELETE FROM Geography WHERE GeographyId LIKE '" . $prmRegionItemGeographyId . "%'";
-			$this->q->dreg->query($query);
-
-			// Create Geography element at GeographyLevel=0 for this RegionItem
-			// Delete Existing Elements
-			$Query = "DELETE FROM Geography WHERE GeographyCode='" . $prmRegionItemId . "'";
-			$this->q->dreg->query($Query);
-			$g = new DIGeography($this->session, 
-			                     $prmRegionItemGeographyId,
-			                     $this->get('LangIsoCode'));
-			$g->set('GeographyCode', $prmRegionItemId);
-			$prmRegionItemGeographyName = 'Level ' . $i;
-			$i++;
-			$g->set('GeographyName', $prmRegionItemGeographyName);
-			$iReturn = $g->insert();
-			
 			// Attach Database
 			$this->q->dreg->query($this->attachQuery($RegionItemId,'RegItem'));
 
 			// Copy Geography From Database
 			$this->copyData($this->q->dreg, 'Geography','GeographyId', $prmRegionItemId, $prmRegionItemGeographyId, false);
+			
+			// Update GeographyFQName in child nodes
+			$g = new DIGeography($this->session, $prmRegionItemGeographyId);
+			$GeographyFQName = $g->get('GeographyFQName');
+			$query = 'UPDATE Geography SET GeographyFQName="' . $GeographyFQName . '/' . '"||GeographyFQName WHERE GeographyLevel>0 AND GeographyId LIKE "' . $prmRegionItemGeographyId . '%"';
+			$this->q->dreg->query($query);
 
 			$this->q->dreg->query($this->detachQuery('RegItem'));
 		}
