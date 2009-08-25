@@ -174,8 +174,9 @@ class DIRegion extends DIObject {
 		$iReturn = ERR_NO_ERROR;
 		$prmRegionId = $this->get('RegionId');
 		// Create Directory for New Region
-		$DBDir = VAR_DIR . '/' . $prmRegionId . '/';
+		$DBDir = VAR_DIR . '/' . $prmRegionId;
 		$DBFile = $DBDir . '/desinventar.db';
+		$this->q->dreg = null;
 		try {
 			if (!file_exists($DBDir)) {
 				mkdir($DBDir);
@@ -190,11 +191,15 @@ class DIRegion extends DIObject {
 					rename($DBFile, $DBFile2);
 				}
 				$iReturn = copy(CONST_DBREGION, $DBFile);
-				$this->q->setDBConnection($this->get('RegionId'));
 			}
 		} catch (Exception $e) {
 			showErrorMsg("Error " . $e->getMessage());
 		}
+		$this->q->setDBConnection($this->get('RegionId'));
+		
+		// Delete all database records
+		$this->clearRegionTables();
+		
 		$this->set('RegionId', $prmRegionId);
 		
 		if ($iReturn > 0) {
@@ -202,6 +207,7 @@ class DIRegion extends DIObject {
 			$this->copyEvents($this->get('LangIsoCode'));
 			$this->copyCauses($this->get('LangIsoCode'));
 		}
+
 		
 		if ($iReturn > 0) {
 			// Insert Data Into core.Region, create Info Table
@@ -209,7 +215,7 @@ class DIRegion extends DIObject {
 		}
 		
 		if ($iReturn > 0) {
-			// Create Generic GeoLevel 0
+			// Calculate Name of GeoLevel 0
 			if ($prmGeoLevelName == '') {
 				$prmGeoLevelName = 'Level 0';
 			}
@@ -229,10 +235,7 @@ class DIRegion extends DIObject {
 		$iReturn = ERR_NO_ERROR;
 		
 		$RegionId = $this->get('RegionId');
-		$RegionDir = VAR_DIR . '/' . $this->get('RegionId');
-		$RegionItemDir = VAR_DIR . '/' . $prmRegionItemId;
-		$RegionItemDB = $RegionItemDir . '/desinventar.db';
-		
+
 		if ($prmRegionItemGeographyId == '') {
 			$prmRegionItemGeographyId = $this->getRegionItemGeographyId($prmRegionItemId);
 		}
@@ -240,8 +243,8 @@ class DIRegion extends DIObject {
 
 		// Create Geography element at GeographyLevel=0 for this RegionItem
 		// Delete Existing Elements
-		$Query = "DELETE FROM Geography WHERE GeographyCode='" . $prmRegionItemId . "'";
-		$this->q->dreg->query($Query);
+		$query = "DELETE FROM Geography WHERE GeographyCode='" . $prmRegionItemId . "'";
+		$this->q->dreg->query($query);
 		$g = new DIGeography($this->session, 
 		                     $prmRegionItemGeographyId,
 		                     $this->get('LangIsoCode'));
@@ -276,6 +279,14 @@ class DIRegion extends DIObject {
 			$s->set('RegionId', $this->get('RegionId'));
 			$s->set('SyncURL', "file:///" . $prmRegionItemId);
 			$s->insert();
+		} //foreach
+	}
+
+	public function clearRegionTables() {
+		// Delete ALL Record from Database - Be Careful...
+		foreach($this->getRegionTables() as $TableName) {
+			$query = "DELETE FROM " . $TableName;
+			$this->q->dreg->query($query);
 		} //foreach
 	}
 	
@@ -672,8 +683,31 @@ class DIRegion extends DIObject {
 		return $iAnswer;
 	}
 	
-	public function getDBInfoValue($prmInfoKey) {
-		return $this->q->getDBInfoValue($prmInfoKey);
+	// Read an specific InfoKey value from the table
+	public function getDBInfoValue($prmInfoKey, $LangIsoCode) {
+		$sReturn = '';
+		if ($this->q->dreg != null) {
+			$query = "SELECT * FROM Info WHERE InfoKey='" . $prmInfoKey . "'";
+			if ($prmInfoKey != 'LangIsoCode') {
+				$query .= " AND LangIsoCode='" . $LangIsoCode . "'";
+			}
+			foreach($this->q->dreg->query($query) as $row) {
+				$sReturn = $row['InfoValue'];
+			}
+		} //if
+		return $sReturn;
+	} //function
+
+	public function saveDBInfoValue($prmInfoKey, $LangIsoCode, $prmInfoValue, $prmInfoAuxValue = '') {
+		$iReturn = ERR_NO_ERROR;
+		$now = gmdate('c');
+		if ($this->q->dreg != null) {
+			$query = "DELETE FROM Info WHERE InfoKey='" . $prmInfoKey . "'" . " AND LangIsoCode='" . $LangIsoCode . "'";
+			$this->q->dreg->query($query);
+			$query = sprintf("INSERT INTO Info (InfoKey,LangIsoCode,InfoValue,InfoAuxValue,RecordCreation,RecordUpdate,RecordSync) VALUES ('%s','%s','%s','%s','%s','%s','%s')",
+			         $prmInfoKey,$LangIsoCode,$prmInfoValue,$prmInfoAuxValue,$now,$now,$now);
+		}
+		return $iReturn;
 	}
 	
 	public function updateMapArea() {

@@ -31,11 +31,9 @@ foreach ($RegionList as $RegionId) {
 		$q->setDBConnection($RegionId);
 		if ($TableName != 'GeoCarto') {
 			$Query = "ALTER TABLE $TableName ADD COLUMN RegionId VARCHAR(50);";
-			//fb($Query);
 			$q->dreg->query($Query);
 		}
 		$Query = "UPDATE $TableName SET RegionId='" . $RegionId . "'";
-		//fb($Query);
 		$q->dreg->query($Query);
 	}
 }
