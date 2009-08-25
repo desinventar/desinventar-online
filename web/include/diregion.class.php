@@ -546,38 +546,54 @@ class DIRegion extends DIObject {
 			$this->q->dreg->query($this->detachQuery('RegItem'));
 		}
 		return $iReturn;
-
-		$q->query("DETACH DATABASE RegItem");
 	}
 	
-	public function rebuildDataDisaster($prmRegionItemId='') {
-		$Query = "SELECT * FROM Sync WHERE SyncTable='Disaster'";
+	public function rebuildDisasterData($prmRegionItemId='') {
+		$iReturn = ERR_NO_ERROR;
+		$query = "SELECT * FROM Sync WHERE SyncTable='Disaster'";
 		if ($prmRegionItemId != '') {
-			$Query .= "AND SyncURL LIKE '%" . $prmRegionItemId . "%'";
+			$query .= "AND SyncURL LIKE '%" . $prmRegionItemId . "%'";
 		}
-		foreach($this->q->dreg->query($Query) as $row) {
-			$url = $this->processURL($row['SyncURL']);
+		$list = array();
+		foreach($this->q->dreg->query($query) as $row) {
+			$list[] = $row['SyncURL'];
+		}
+		
+		$query = "DELETE FROM Disaster";
+		$this->q->dreg->query($query);
+		$query = "DELETE FROM EEData";
+		$this->q->dreg->query($query);
+		
+		foreach($list as $SyncURL) {
+			$url = $this->processURL($SyncURL);
 			$RegionItemId = $url['regionid'];
 			$RegionItemGeographyId = $this->getRegionItemGeographyId($RegionItemId);
-			$this->addRegionItemDisaster($RegionItemId, $RegionItemGeographyId);
+
+			// Attach Database
+			$this->q->dreg->query($this->attachQuery($RegionItemId,'RegItem'));
+
+			// Copy Disaster Table, adjust GeographyId Field
+			$this->copyData($this->q->dreg, 'Disaster','GeographyId', $RegionItemId, $RegionItemGeographyId, false);
+			
+			// Delete Non Published Data cards
+			$this->q->dreg->query("DELETE FROM Disaster WHERE RecordStatus<>'PUBLISHED'");
+			
+			// Copy DisasterId from EEData, Other Fields are Ignored...
+			$this->q->dreg->query("INSERT INTO EEData (DisasterId) SELECT DisasterId FROM Disaster WHERE GeographyId LIKE '" . $RegionItemGeographyId . "%'");
+
+			$this->q->dreg->query($this->detachQuery('RegItem'));
 		}
 	}
-
-	public function addRegionItemDisaster($prmRegionItemId,$prmRegionItemGeographyId) {
-		$iReturn = ERR_NO_ERROR;
-		$RegionDB = VAR_DIR . '/' . $prmRegionItemId . '/desinventar.db';
-		$this->q->setDBConnection($this->get('RegionId'));
-		$q = $this->q->dreg;
-		$q->query("ATTACH DATABASE '" . $RegionDB . "' AS RegItem");
-		// Copy Disaster Table, adjust GeographyId Field
-		$this->copyData($q, 'Disaster','GeographyId', $prmRegionItemId, $prmRegionItemGeographyId, false);
-		// Copy DisasterId from EEData, Other Fields are Ignored...
-		$q->query("INSERT INTO EEData (DisasterId) SELECT DisasterId FROM RegItem.EEData");
-		$q->query("DETACH DATABASE RegItem");
-		return $iReturn;
+	
+	public function rebuildRegionData() {
+		$this->rebuildEventData();
+		$this->rebuildCauseData();
+		$this->rebuildGeoLevelData();
+		$this->rebuildGeographyData();
+		$this->rebuildGeoCartoData();
+		$this->rebuildDisasterData();
 	}
-	
-	
+
 	public function copyData($prmConn, $prmTable, $prmField, $prmRegionItemId, $prmValue, $isNumeric) {
 		$Queries = array();		
 		// Create Empty Table
