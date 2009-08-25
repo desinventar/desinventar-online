@@ -18,7 +18,7 @@
 	require_once(BASE . '/include/disync.class.php');
 	
 	$RegionId = '';
-	$bOption = 1;
+	$bOption = 0;
 	if ($bOption) {
 		// Gran Chaco
 		$RegionItems = array('ARG-1250695025-argentina_gran_chaco' => 'Argentina',
@@ -86,6 +86,7 @@
 			printf("%-60s %-20s\n", $RegionItemId, $RegionItemGeographyName);
 			$o->addRegionItem($RegionItemId, $RegionItemGeographyName);
 		}
+		$o->rebuildRegionData();
 		$us->close();
 	}
 	$us->logout();	
