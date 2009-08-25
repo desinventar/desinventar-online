@@ -60,16 +60,16 @@
 			$RegionId = DIRegion::buildRegionId('', $RegionLabel);
 		}
 		$o = new DIRegion($us, $RegionId);
-		$o->set('RegionLabel', $RegionLabel);
-		$o->set('RegionId'    , $RegionId);
-		$o->set('RegionStatus', CONST_REGIONACTIVE | CONST_REGIONPUBLIC);
+		$o->set('RegionLabel'    , $RegionLabel);
+		$o->set('RegionId'       , $RegionId);
+		$o->set('RegionStatus'   , CONST_REGIONACTIVE | CONST_REGIONPUBLIC);
 		$o->set('PeriodBeginDate', $PeriodBeginDate);
 		$o->set('PeriodEndDate'  , $PeriodEndDate);
-		$o->set('GeoLimitMinX', $GeoLimitMinX);
-		$o->set('GeoLimitMaxX', $GeoLimitMaxX);
-		$o->set('GeoLimitMinY', $GeoLimitMinY);
-		$o->set('GeoLimitMaxY', $GeoLimitMaxY);
-		$o->set('InfoGeneral' , $InfoGeneral);
+		$o->set('GeoLimitMinX'   , $GeoLimitMinX);
+		$o->set('GeoLimitMaxX'   , $GeoLimitMaxX);
+		$o->set('GeoLimitMinY'   , $GeoLimitMinY);
+		$o->set('GeoLimitMaxY'   , $GeoLimitMaxY);
+		$o->set('InfoGeneral'    , $InfoGeneral);
 
 		$iReturn = $o->createRegionDB('País');
 
@@ -84,7 +84,7 @@
 		$o->clearSyncTable();
 		foreach($RegionItems as $RegionItemId => $RegionItemGeographyName) {
 			printf("%-60s %-20s\n", $RegionItemId, $RegionItemGeographyName);
-			$o->addRegionItemSync($RegionItemId);
+			$o->addRegionItem($RegionItemId, $RegionItemGeographyName);
 		}
 		$us->close();
 	}
