@@ -133,7 +133,7 @@ if (isset($_SERVER["HTTP_HOST"])) {
 		define('MODE', "online");
 		define('ARCH', "LINUX");
 		define('MAPSERV', "mapserv");
-		define("SMARTYDIR", "/usr/share/Smarty");
+		define("SMARTYDIR", "/usr/share/php/Smarty");
 		define("TEMP", "/tmp");
 		define("JPGRAPHDIR", "/usr/share/php/jpgraph");
 	}
