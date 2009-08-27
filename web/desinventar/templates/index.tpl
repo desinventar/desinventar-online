@@ -249,6 +249,7 @@
 		window.onload = function() {
 			DisableEnableForm($('DICard'), true);
 			changeOptions();
+			myAjax = new Ajax.Updater($('import'), 'import.php', {method:'get', parameters:''});
 			uploadMsg("{-#tmsgnewcard#-}");
 			var pe = new PeriodicalExecuter(setActive, 60);
 		}
@@ -341,11 +342,13 @@
 {-if $role == "OBSERVER" || $role == "ADMINREGION"-}
 					<a href="javascript:void(null);" onClick="TagToTip('config', COPYCONTENT, false, PADDING, 0, BORDERWIDTH, 0, EXCLUSIVE, true, TITLE, '{-#mconfig#-}', STICKY, true, CLOSEBTN, true);">{-#mconfig#-}</a>
 {-/if-}
+					&nbsp;&nbsp;|&nbsp;&nbsp;
+					<a href="javascript:void(null);" onClick="TagToTip('import', COPYCONTENT, false, PADDING, 0, BORDERWIDTH, 0, EXCLUSIVE, true, TITLE, '{-#mimport#-}', STICKY, true, CLOSEBTN, true);">{-#mimport#-}</a>
 					<br>
 					<span class="dlgmsg" id="distatusmsg"></span>
 				</td>
 				<td align="right">
-					<iframe name="dic" id="dic" frameborder="1" style="height:30px; width:400px;" src="about:blank"></iframe>
+					<iframe name="dic" id="dic" frameborder="1" style="height:30px; width:370px;" src="about:blank"></iframe>
 				</td>
 			</tr>
 		</table>
@@ -360,6 +363,8 @@
 			 <div class="tabbertab"><h2>{-#meeffects#-}</h2><p></p></div>
 			</div>
 		</div>
+		<div id="import" style="position:absolute; padding:5px; background-color: #fff; top: 25px; left: 30px; 
+			z-index:100; overflow: auto; margin: 1px; border: 3px outset gray; width: 850px; height: 500px;"></div>
 		<form id="DICard" action="index.php" method="POST" target="dic">
 			<input type="hidden" name="_REG" id="_REG" value="{-$reg-}">
 			<input type="hidden" name="DisasterId" id="DisasterId" value="">

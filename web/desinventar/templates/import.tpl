@@ -5,10 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
-	<script type="text/javascript" src="../include/prototype.js"></script>
 	<script type="text/javascript">
 	function enadisField(lnow, lnext, val) {
-		var sour = $(lnow);
+		var sour = document.getElementById(lnow);
 		if (val)
 			sour.disabled = false;
 		else {
@@ -20,8 +19,8 @@
 		}
 	}
 	function fillColumn(lnow, lnext, exclude) {
-		var sour = $(lnow);
-		var dest = $(lnext);
+		var sour = document.getElementById(lnow);
+		var dest = document.getElementById(lnext);
 		// clean dest list
 		for (var i = dest.length - 1; i>=0; i--) {
 			dest.remove(i);
@@ -48,26 +47,23 @@
 <body>
 {-* Show select CSV file interface *-}
 {-if $ctl_show-}
-	<br>
-	<p class="fixw"><br>
+	<p class="fixw">
 		<form method="POST" action="import.php" target="iframe2" enctype="multipart/form-data">
 			<input type="hidden" name="r" value="{-$reg-}">
 			<input type="hidden" name="cmd" value="upload">
 			<input type="hidden" name="diobj" value="5">
 			<input type="file" id="ieff" name="desinv" class="fixw line" {-$ro-}>
-			<input type="submit" value="Enviar" class="line" {-$ro-} onClick="$('iframe2').src='loading.gif';">
+			<input type="submit" value="Enviar" class="line" {-$ro-} onClick="if = document.getElementById('iframe2'); if.src='loading.gif';">
 		</form>
 		<br>
-		<iframe name="iframe2" id="iframe2" frameborder="1" src="about:blank"
-			style="height:400px; width:780px;"></iframe>
+		<iframe name="iframe2" id="iframe2" frameborder="1" src="about:blank" style="height:400px; width:830px;"></iframe>
 	</p>
 {-/if-}
 {-* Show import interface to assign specific fields *-}
 {-if $ctl_import-}
 <form method="POST" action="import.php">
-<input type="submit" value="{-#tsend#-}" class="line">
-<br><br>
-<table border="1">
+<input type="submit" value="{-#tsend#-}" class="line"><br>
+<table border="1" style="font-size: 11px;">
  <tr>
 {-foreach name=fld key=k item=i from=$fld-}
 {-assign var="nxt" value="`$smarty.foreach.fld.iteration+1`"-}
