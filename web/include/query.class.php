@@ -974,9 +974,12 @@ class Query extends PDO
 			              case "NAME": 
 			                $dl[$j][$idx] = $this->getGeoNameById($i[$idx]); break;
 			              case "CODENAME": 
-			                $dl[$j][$idx] = $this->getObjectNameById($i[$idx], DI_GEOGRAPHY) . " | ". $this->getGeoNameById($i[$idx]); break;
+			                $dl[$j][$idx] = $this->getObjectNameById($i[$idx], DI_GEOGRAPHY) ." | ". $this->getGeoNameById($i[$idx]); break;
 			              default: $dl[$j][$idx] = ""; break;
 			            }
+					}
+					elseif (is_numeric($dl[$j][$idx])) {
+						$dl[$j][$idx] = number_format($dl[$j][$idx], 0, ',', ' ');
 					}
 				}
 				if ($exp) {
