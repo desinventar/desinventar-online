@@ -61,13 +61,13 @@
    <thead>
 	<tr>
 	 <th class="header">{-#trow#-}</th>
-	{-foreach name=sel key=key item=item from=$sel-}
+{-foreach name=sel key=key item=item from=$sel-}
 {-strip-}
 {-if $item != "DisasterId"-}
 	 <th class="header">{-$dk.$item-}</th>
 {-/if-}
 {-/strip-}
-	{-/foreach-}
+{-/foreach-}
     </tr>
    </thead>
    <tbody id="lst_dis">
@@ -90,7 +90,8 @@
   {-elseif $item[$i] == -1-}
 	  <input type="checkbox" checked disabled>
   {-elseif $item[$i] == -2-}?
-  {-else-}{-$item[$i]-}
+  {-else-}
+	  {-$item[$i]-}
   {-/if-}
 	 </td>
  {-/if-}

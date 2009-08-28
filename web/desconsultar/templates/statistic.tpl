@@ -63,11 +63,11 @@
 {-/foreach-}
       </tr>
       <tr>
-       <th style="border: thin solid;">{-#ttotals#-}</th>
+       <th style="border: thin solid; text-align: right;">{-#ttotals#-}</th>
 {-foreach name=sel key=key item=item from=$sel-}
  {-strip-}
   {-if $item != "DisasterId"-}
-	   <th style="border: thin solid;">
+	   <th style="border: thin solid; text-align: right;">
    {-if $item != $gp[0] && $item != $gp[1] && $item != $gp[2]-}
    	 {-$dlt.$item-}
    {-/if-}</th>

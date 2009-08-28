@@ -41,7 +41,7 @@
 						if (cmd == "getPrevDId" || cmd == "getNextDId") {
 							val = setDICardfromId('{-$reg-}', res, '');
 {-if $ctl_validrole-}
-							if (val)
+							if (val != "")
 								changeOptions('cardfill');{-/if-}
 						}
 					}
@@ -146,7 +146,10 @@
 					//$('cardfnd').enable();
 				break;
 				case "cardcan":
-					disenabutton($('cardupd'), false);
+					if ($('DisasterId').value == "")
+						disenabutton($('cardupd'), true);
+					else
+						disenabutton($('cardupd'), false);
 					disenabutton($('cardsav'), true);
 					disenabutton($('cardcln'), true);
 					disenabutton($('cardcan'), true);
@@ -325,19 +328,19 @@
 		<table width="900px">
 			<tr>
 				<td>
-					<input type="button" id="cardnew" class="bb bnew" alt="{-#bnew#-}" onClick="onSubmitBtn('cardnew');">
-					<input type="button" id="cardupd" class="bb bupd" alt="{-#bupdate#-}" onClick="onSubmitBtn('cardupd');">
-					<input type="button" id="cardsav" class="bb bsave" alt="{-#bsave#-}" onClick="onSubmitBtn('cardsav');">
-					<input type="button" id="cardcln" class="bb bnew" alt="{-#bclean#-}" onClick="onSubmitBtn('cardcln');">
-					<input type="button" id="cardcan" class="bb bcancel" alt="{-#bcancel#-}" onClick="onSubmitBtn('cardcan');">
-					<input type="button" id="cardprn" class="bb bprint" alt="{-#bprint#-}" onClick="window.print();">
+					<input type="button" id="cardnew" class="bb bnew" onmouseover="Tip('{-#bnew#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardnew');">
+					<input type="button" id="cardupd" class="bb bupd" onmouseover="Tip('{-#bupdate#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardupd');">
+					<input type="button" id="cardsav" class="bb bsave" onmouseover="Tip('{-#bsave#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardsav');">
+					<input type="button" id="cardcln" class="bb bnew" onmouseover="Tip('{-#bclean#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardcln');">
+					<input type="button" id="cardcan" class="bb bcancel" onmouseover="Tip('{-#bcancel#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardcan');">
+					<input type="button" id="cardprn" class="bb bprint" onmouseover="Tip('{-#bprint#-}')" onmouseout="UnTip()" onClick="window.print();">
 					<!--<input type="button" id="cardfnd" alt="{-#bexpsearch#-}" onClick="onSubmitBtn('cardfnd');" {-$ro-}>-->
 					&nbsp;&nbsp;|&nbsp;&nbsp;
-					<input type="button" value="<<" class="bb line" onClick="setDICard('{-$reg-}', {-$fst-}, '');">
-					<input type="button" value="<" class="bb line" onClick="requestDCard('getPrevDId', $('DisasterId').value);">
+					<input type="button" value="<<" class="bb line" onmouseover="Tip('Primera')" onmouseout="UnTip()" onClick="setDICard('{-$reg-}', {-$fst-}, '');">
+					<input type="button" value="<" class="bb line" onmouseover="Tip('Anterior')" onmouseout="UnTip()" onClick="requestDCard('getPrevDId', $('DisasterId').value);">
 					<span class="dlgmsg" id="dostat"></span>
-					<input type="button" value=">" class="bb line" onClick="requestDCard('getNextDId', $('DisasterId').value);">
-					<input type="button" value=">>" class="bb line" onClick="setDICard('{-$reg-}', {-$lst-}, '');">
+					<input type="button" value=">" class="bb line" onmouseover="Tip('Siguiente')" onmouseout="UnTip()" onClick="requestDCard('getNextDId', $('DisasterId').value);">
+					<input type="button" value=">>" class="bb line" onmouseover="Tip('Ultima')" onmouseout="UnTip()" onClick="setDICard('{-$reg-}', {-$lst-}, '');">
 					&nbsp;&nbsp;|&nbsp;&nbsp;
 {-if $role == "OBSERVER" || $role == "ADMINREGION"-}
 					<a href="javascript:void(null);" onClick="TagToTip('config', COPYCONTENT, false, PADDING, 0, BORDERWIDTH, 0, EXCLUSIVE, true, TITLE, '{-#mconfig#-}', STICKY, true, CLOSEBTN, true);">{-#mconfig#-}</a>

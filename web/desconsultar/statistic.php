@@ -69,7 +69,10 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
 		$cou = $q->getnumrows($sql);
 		$sdl = $q->totalize($sql);
 		$dlt = $q->getresult($sdl);
-
+		foreach ($dlt as $k=>$i) {
+			if (is_numeric($i))
+				$dlt[$k] = number_format($i, 0, ',', ' ');
+		}
 		// 2009-08-10 (jhcaiced) In Consolidates by Event/Cause, fix
 		// the value
 		$dlt['EventName'] = '';
