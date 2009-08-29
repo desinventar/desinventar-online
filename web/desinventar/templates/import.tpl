@@ -6,6 +6,12 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
 	<script type="text/javascript">
+	function sendForm() {
+		var fr = document.getElementById('iframe2');
+		var im = document.getElementById('import');
+		fr.src='loading.gif';
+		im.submit();
+	}
 	function enadisField(lnow, lnext, val) {
 		var sour = document.getElementById(lnow);
 		if (val)
@@ -48,12 +54,11 @@
 {-* Show select CSV file interface *-}
 {-if $ctl_show-}
 	<p class="fixw">
-		<form method="POST" action="import.php" target="iframe2" enctype="multipart/form-data">
+		<form id="import" method="POST" action="import.php" target="iframe2" enctype="multipart/form-data">
 			<input type="hidden" name="r" value="{-$reg-}">
 			<input type="hidden" name="cmd" value="upload">
 			<input type="hidden" name="diobj" value="5">
-			<input type="file" id="ieff" name="desinv" class="fixw line" {-$ro-}>
-			<input type="submit" value="Enviar" class="line" {-$ro-} onClick="if = document.getElementById('iframe2'); if.src='loading.gif';">
+			<input type="file" id="ieff" name="desinv" class="fixw line" onChange="sendForm()" {-$ro-}>
 		</form>
 		<br>
 		<iframe name="iframe2" id="iframe2" frameborder="1" src="about:blank" style="height:400px; width:830px;"></iframe>

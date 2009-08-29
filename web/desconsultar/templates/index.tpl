@@ -489,6 +489,9 @@
     function sendList(cmd) {
       if ($('_D+Field[]').length > 0) {
         $('_D+cmd').value = cmd;
+		if (cmd == "export")
+			$('saveopt').style.visibility = 'visible';
+		//$('saveopt').style.visibility = 'hidden';
         selectall('_D+Field[]');
         var ob = $('_D+Field[]');
         var mystr = "";
@@ -1257,9 +1260,15 @@
 			 </form>
 		  </div>
         </div>
+		<div id="save" class="submenu">
+			<a href="">xls</a>
+			<a href="">csv</a>
+		</div>
         <span id="frmwait"></span>
         <input id="DCRes" type="hidden" value="">
         <input type="button" class="bb bsave" onClick="if($('DCRes').value != '') saveRes('export');" ext:qtip="{-#bsavemsg#-}">
+		<span id="saveopt" style="position:absolute; visibility: hidden" onmouseout="$('saveopt').style.visibility='hidden';">
+			<a href="">xls</a> | <a href="">csv</a></span>
 		&nbsp;&nbsp;
         <input type="button" class="bb bprint" onClick="$('dcr').focus(); $('dcr').print();" ext:qtip="{-#bprintmsg#-}">
 		&nbsp;&nbsp;
