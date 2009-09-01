@@ -174,7 +174,7 @@ class DIRegion extends DIObject {
 		$iReturn = ERR_NO_ERROR;
 		$prmRegionId = $this->get('RegionId');
 		// Create Directory for New Region
-		$DBDir = VAR_DIR . '/' . $prmRegionId;
+		$DBDir = VAR_DIR . '/database/' . $prmRegionId;
 		$DBFile = $DBDir . '/desinventar.db';
 		$this->q->dreg = null;
 		try {
@@ -292,8 +292,8 @@ class DIRegion extends DIObject {
 	
 	public function addRegionItem2($prmRegionItemId, $prmRegionItemGeographyName, $prmRegionItemGeographyId='') {
 		$RegionId = $this->get('RegionId');
-		$RegionDir = VAR_DIR . '/' . $this->get('RegionId');
-		$RegionItemDir = VAR_DIR . '/' . $prmRegionItemId;
+		$RegionDir = VAR_DIR . '/database/' . $this->get('RegionId');
+		$RegionItemDir = VAR_DIR . '/database/' . $prmRegionItemId;
 		$RegionItemDB = $RegionItemDir . '/desinventar.db';
 		
 		if ($prmRegionItemGeographyId == '') {
@@ -366,7 +366,7 @@ class DIRegion extends DIObject {
 	}
 	
 	public function attachQuery($prmRegionId, $prmName) {
-		$RegionItemDir = VAR_DIR . '/' . $prmRegionId;
+		$RegionItemDir = VAR_DIR . '/database/' . $prmRegionId;
 		$RegionItemDB = $RegionItemDir . '/desinventar.db';
 		$query = "ATTACH DATABASE '" . $RegionItemDB . "' AS " . $prmName;
 		return $query;
@@ -382,7 +382,7 @@ class DIRegion extends DIObject {
 		
 		// Copy Geography From Database
 		if ($iReturn > 0) {
-			$RegionItemDir = VAR_DIR . '/' . $prmRegionItemId;
+			$RegionItemDir = VAR_DIR . '/database/' . $prmRegionItemId;
 			$RegionItemDB = $RegionItemDir . '/desinventar.db';
 			// Attach Database
 			$q->query($this->attachQuery($prmRegionItemId,'RegItem'));
@@ -525,8 +525,8 @@ class DIRegion extends DIObject {
 			// Copy GeoCarto Items
 			$this->copyData($this->q->dreg, 'GeoCarto','GeographyId',$RegionItemId, $prmRegionItemGeographyId, false);
 			// Copy SHP,SHX,DBF files from each RegionItem to Region
-			$RegionDir     = VAR_DIR . '/' . $this->get('RegionId');
-			$RegionItemDir = VAR_DIR . '/' . $RegionItemId;
+			$RegionDir     = VAR_DIR . '/database/' . $this->get('RegionId');
+			$RegionItemDir = VAR_DIR . '/database/' . $RegionItemId;
 			foreach($this->q->dreg->query('SELECT * FROM RegItem.GeoCarto') as $row) {
 				foreach(array('dbf','shp','shx','prj') as $ext) {
 					$file0 = $row['GeoLevelLayerFile'] . '.' . $ext;

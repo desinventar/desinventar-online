@@ -50,9 +50,9 @@ class Query extends PDO
 		$DBFile = VAR_DIR;
 		if ($prmRegionId != '') {
 			if ($prmRegionId == 'core') {
-				$DBFile .= "/core.db";
+				$DBFile .= "/main/core.db";
 			} else {
-				$DBFile .= "/" . $prmRegionId ."/desinventar.db";
+				$DBFile .= "/database/" . $prmRegionId ."/desinventar.db";
 			}
 		}
 		return $DBFile;
@@ -63,9 +63,9 @@ class Query extends PDO
 		$DBFile = VAR_DIR;
 		if ($prmRegionId != '') {
 			if ($prmRegionId == 'core') {
-				$DBFile .= "/core.db";
+				$DBFile .= "/main/core.db";
 			} else {
-				$DBFile .= "/" . $prmRegionId ."/desinventar.db";
+				$DBFile .= "/database/" . $prmRegionId ."/desinventar.db";
 			}
 			if (file_exists($DBFile)) {
 				try {

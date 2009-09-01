@@ -178,14 +178,14 @@ if (isset($_SERVER["REDIRECT_DI8_WWWDIR"])) {
 	$_SERVER["DI8_WWWDIR"] = $_SERVER["REDIRECT_DI8_WWWDIR"];
 }
 if (! isset($_SERVER["DI8_WWWDIR"])) {
-	$_SERVER["DI8_WWWDIR"] = "/var/www/desinventar";
+	$_SERVER["DI8_WWWDIR"] = "/var/www/desinventar-8.2";
 }
 /* Configure DATADIR - Linux + Windows */
 if (isset($_SERVER["REDIRECT_DI8_DATADIR"])) {
 	$_SERVER["DI8_DATADIR"] = $_SERVER["REDIRECT_DI8_DATADIR"];
 }
 if (! isset($_SERVER["DI8_DATADIR"])) {
-	$_SERVER["DI8_DATADIR"] = "/var/lib/desinventar";
+	$_SERVER["DI8_DATADIR"] = "/var/lib/desinventar-8.2";
 }
 
 /* Configure CACHEDIR - Linux + Windows */
@@ -201,9 +201,9 @@ if (isset($_SERVER["SHELL"])) {
 }
 if (isset($_SERVER["DI8_WEB"])) {
 	define("BASE", $_SERVER["DI8_WEB"]);
-	define("SOFTDIR" , "/usr/share/desinventar");
+	define("SOFTDIR" , "/usr/share/desinventar-8.2");
 	define("WWWDIR"  , $_SERVER["DI8_WWWDIR"]);
-	define("WWWDATA" , "/desinventar-data");
+	define("WWWDATA" , "/desinventar-8.2-data");
 	define("WWWURL"  , "/");
 	define("DATADIR" , $_SERVER["DI8_DATADIR"]);
 	define("CACHEDIR", $_SERVER["DI8_CACHEDIR"]);
