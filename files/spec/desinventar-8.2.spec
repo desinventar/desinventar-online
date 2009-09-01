@@ -70,9 +70,12 @@ install -m 755 -d $RPM_BUILD_ROOT/%{FILES_DIR}
 install -m 755 -d $RPM_BUILD_ROOT/%{WWW_DIR}/graphs
 install -m 755 -d $RPM_BUILD_ROOT/%{WWW_DIR}/logo
 install -m 755 -d $RPM_BUILD_ROOT/%{DATA_DIR}
-install -m 755 -d $RPM_BUILD_ROOT/%{DATA_DIR}/carto
-install -m 755 -d $RPM_BUILD_ROOT/%{DATA_DIR}/logo
-install -m 755 -d $RPM_BUILD_ROOT/%{DATA_DIR}/maps
+install -m 755 -d $RPM_BUILD_ROOT/%{DATA_DIR}/main
+cd files/database
+make
+install -m 644 *.db $RPM_BUILD_ROOT/%{DATA_DIR}/main
+cd ../..
+install -m 755 -d $RPM_BUILD_ROOT/%{DATA_DIR}/database
 install -m 755 -d $RPM_BUILD_ROOT/%{CACHE_DIR}/templates_c
 popd
 
