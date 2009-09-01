@@ -1,3 +1,7 @@
+* 2009-09-01 Jhon H. Caicedo <jhcaiced@desinventar.org>
+- Moved databases etc. and use url desinventar-8.2 in 
+  references.
+
 * 2009-08-03 Jhon H. Caicedo <jhcaiced@desinventar.org>
 - Started to use URL to specify databases for synchronization:
   http://en.wikipedia.org/wiki/Uniform_Resource_Locator

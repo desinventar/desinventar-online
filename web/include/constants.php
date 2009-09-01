@@ -13,11 +13,11 @@ define('TRUE' , 1);
 
 // Database File Locations
 // core.db - Users, Regions, Auths.. 
-define('CONST_DBCORE', VAR_DIR ."/core.db");
+define('CONST_DBCORE', VAR_DIR ."/main/core.db");
 // base.db - DI's Basic database, predefined events etc.
-define('CONST_DBBASE', VAR_DIR ."/base.db");
+define('CONST_DBBASE', VAR_DIR ."/main/base.db");
 // region.db - Emtpy database skeleton for Regions
-define('CONST_DBREGION', VAR_DIR . "/desinventar.db");
+define('CONST_DBREGION', VAR_DIR . "/main/desinventar.db");
 
 // dicore objects
 define ("DI_EVENT",			1);

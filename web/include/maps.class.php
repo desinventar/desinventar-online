@@ -72,7 +72,7 @@ class Maps
     IMAGETYPE		PNG
 		EXTENT			-180 -90 180 90
 		SIZE				'. $x .' '. $y .'
-		SHAPEPATH		"'. VAR_DIR . '/' . $reg . '/"
+		SHAPEPATH		"'. VAR_DIR . '/database/' . $reg . '/"
 		FONTSET			"'. FONTDIR . '"
 		IMAGECOLOR	255 255 255
 		PROJECTION	"proj=latlong" "ellps=WGS84" "datum=WGS84" END
@@ -138,7 +138,7 @@ class Maps
 		$col = 50;
 		foreach ($gl as $k=>$i) {
 			foreach ($i[2] as $ly) {
-				$lp = VAR_DIR . '/' . $reg ."/". $ly[1];
+				$lp = VAR_DIR . '/database/' . $reg ."/". $ly[1];
 				if ($this->testLayer($lp, $ly[2], $ly[3])) {
 					$map .= '
     LAYER
@@ -203,7 +203,7 @@ class Maps
 			$data = $ly[1];
 			$code = $ly[2];
 			$name = $ly[3];
-			$lp = VAR_DIR . '/' . $reg ."/". $data;
+			$lp = VAR_DIR . '/database/' . $reg ."/". $data;
 			if ($this->testLayer($lp, $code, $name)) {
 				// cvreg isn't set in regular base.. in vregion select region on match
 				if (!isset($dl['CVReg']) || in_array($ly[0], array_unique($dl['CVReg']))) {
