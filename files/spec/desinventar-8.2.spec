@@ -72,10 +72,10 @@ install -m 755 -d $RPM_BUILD_ROOT/%{WWW_DIR}/logo
 install -m 755 -d $RPM_BUILD_ROOT/%{DATA_DIR}
 install -m 755 -d $RPM_BUILD_ROOT/%{DATA_DIR}/main
 cd files/database
-make
 install -m 644 *.db $RPM_BUILD_ROOT/%{DATA_DIR}/main
 cd ../..
 install -m 755 -d $RPM_BUILD_ROOT/%{DATA_DIR}/database
+install -m 755 -d $RPM_BUILD_ROOT/%{CACHE_DIR}
 install -m 755 -d $RPM_BUILD_ROOT/%{CACHE_DIR}/templates_c
 popd
 
@@ -101,7 +101,9 @@ popd
 %attr(-, root, root) /etc/httpd/conf.d/desinventar-8.2.conf
 %attr(-, apache, root) %{WWW_DIR}
 %attr(-, apache, root) %{DATA_DIR}
+%attr(-, apache, root) %{CACHE_DIR}
 %attr(-, apache, root) %{CACHE_DIR}/*
+%config %{DATA_DIR}/main/core.db
 
 %changelog
 * Tue Sep  1 2009 Jhon H. Caicedo <jhcaiced@desinventar.org> 8.2.0.44
