@@ -173,8 +173,8 @@
 			<img src="images/logos/can.jpg" border=0><br>
 			{-/if-}
 			{-#tcredits#-}<br>
-			<a href="http://www.osso.org.co"><img src="images/logos/corposso.png" border=0></a>
-			<a href="http://www.desenredando.org"><img src="images/logos/lared.png" border=0></a><br>
+			<a href="http://www.osso.org.co" target="_blank"><img src="images/logos/corposso.png" border=0></a>
+			<a href="http://www.desenredando.org" target="_blank"><img src="images/logos/lared.png" border=0></a><br>
 			{-#tcopyright#-}			
 		</div>
 	 </td></tr>
