@@ -319,7 +319,9 @@ if (MODE != "command") {
 	// 2009-02-21 (jhcaiced) Fix some languages from two to three character code
 	if ($lg == 'es') { $lg = 'spa'; }
 	if ($lg == 'en') { $lg = 'eng'; }
+	if ($lg == 'fr') { $lg = 'fre'; }
 	if ($lg == 'pr') { $lg = 'por'; }
+	if ($lg == 'pt') { $lg = 'por'; }
 
 	$_SESSION['lang'] = $lg;
 

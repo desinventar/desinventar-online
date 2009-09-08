@@ -32,7 +32,6 @@ else {
 	$cmd = "";
 	$t->assign ("cmd", $cmd);
 }
-
 $t->display ("index.tpl");
 
 </script>
