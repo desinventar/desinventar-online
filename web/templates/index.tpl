@@ -162,8 +162,8 @@
 		<div align="right" style="margin-right:30px;">
 			<img src="images/logos/can.jpg" border=0><br>
 			{-#tcredits#-}<br>
-			<a href="http://www.osso.org.co"><img src="images/logos/corposso.png" border=0></a>
-			<a href="http://www.desenredando.org"><img src="images/logos/lared.png" border=0></a><br />
+			<a href="http://www.osso.org.co" target="_blank"><img src="images/logos/corposso.png" border=0></a>
+			<a href="http://www.desenredando.org" target="_blank"><img src="images/logos/lared.png" border=0></a><br />
 			{-#tcopyright#-}
 		</div>
 <!--<img src="images/logosinst.png" width=730 height=63 border=0 vspace=15 usemap="#logosinst">
