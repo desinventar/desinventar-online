@@ -164,7 +164,6 @@
 			{-#tcredits#-}<br>
 			<a href="http://www.osso.org.co"><img src="images/logos/corposso.png" border=0></a>
 			<a href="http://www.desenredando.org"><img src="images/logos/lared.png" border=0></a><br />
-			(c) 1998-2009 Corporaci&oacute;n OSSO<br />
 			{-#tcopyright#-}
 		</div>
 <!--<img src="images/logosinst.png" width=730 height=63 border=0 vspace=15 usemap="#logosinst">
