@@ -132,12 +132,23 @@ Section "MS4W - MapServer Installation Core"
 	ZipDLL::extractall "$EXEDIR\${distFile}" '$INSTDIR\ms4w\apps\jquery'
 	!undef distFile
 
+	; Install Smarty file into install directory
+	!define distFile "Smarty-2.6.26.zip"
+	ZipDLL::extractall "$EXEDIR\${distFile}" '$INSTDIR\ms4w\apps\Smarty-2.6.26'
+	!undef distFile
+
+	; Install JPGraph file into install directory
+	!define distFile "jpgraph-3.0.3.zip"
+	ZipDLL::extractall "$EXEDIR\${distFile}" '$INSTDIR\ms4w\apps\jpgraph-3.0.3'
+	!undef distFile
+
 	; Sample for Handling a tar.gz file...
 	;untgz::extract -d '$INSTDIR' "$EXEDIR\${ms4wfile}"
 SectionEnd
 
 Section "Application Install"
 	SectionIn RO
+	SetShellVarContext all
 
 	; Delete Original htdocs files
 	SetOutPath $INSTDIR\ms4w\Apache\htdocs
@@ -147,7 +158,17 @@ Section "Application Install"
 
 	SetOutPath $INSTDIR
 	File Files\license\license.txt
+
+	CreateDirectory $INSTDIR\tmp
+	CreateDirectory $INSTDIR\www
+	CreateDirectory $INSTDIR\data\main
+	CreateDirectory $INSTDIR\data\database
 	
+	SetOutPath $INSTDIR\data\main
+	File Files\database\core.db
+	File Files\database\base.db
+	File Files\database\desinventar.db
+
 	SetOutPath $INSTDIR\ms4w\httpd.d
 	File Files\conf\httpd_extJS.conf
 	File Files\conf\httpd_jquery.conf
@@ -165,6 +186,9 @@ Section "Application Install"
 SectionEnd
 
 Section "Application Local Configuration"
+	SectionIn RO
+	SetShellVarContext all
+
 	; Personalize Configuration Files
 	${WordReplace} $INSTDIR "\" "/" "+*" $INSTDIR_forward
 
@@ -204,7 +228,18 @@ Section "Application Local Configuration"
 	!undef FILE
 SectionEnd
 
+Section "Install Sample Database Data"
+	SetShellVarContext all
+
+	; Install Sample Data files
+	!define distFile "di82SampleDatabases.zip"
+	ZipDLL::extractall "$EXEDIR\${distFile}" '$INSTDIR\data'
+	!undef distFile
+SectionEnd
+
 Section 'Install Apache Service'
+	SectionIn RO
+	SetShellVarContext all
 	; Modify Scripts to Change Service Name
 	!define FILE "$INSTDIR\ms4w\apache-install.bat"
 	${textreplace::ReplaceInFile} "${FILE}" "${FILE}" "MS4W" "${SHORTNAME}" "" $Return
