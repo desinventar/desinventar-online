@@ -114,20 +114,25 @@ if (isset($_SERVER["HTTP_HOST"])) {
 	// Online Modes (HTTP)
 	if (isset($_SERVER["WINDIR"])) {
 		// Running on a Windows Server
-		define('MODE', "offline");
+		define('MODE', "online");
 		define('ARCH', 'WINDOWS');
 		define('MAPSERV', "mapserv.exe");
 		// 2009-05-01 (jhcaiced) Read Registry to obtain MS4W 
 		//                       installation path	
 		$shell = new COM("WScript.Shell") or die("Requires Windows Scripting Host");
+		$Install_Dir = $shell->RegRead("HKEY_LOCAL_MACHINE\\Software\\OSSO\\DesInventar8\Install_Dir");
 		$ms4wpath=$shell->RegRead("HKEY_LOCAL_MACHINE\\SOFTWARE\\MS4W\\Install_Dir");
-		define("SMARTYDIR", $ms4wpath . "\apps\smarty");
-		define("JPGRAPHDIR", $ms4wpath . "\apps\jpgraph");
-		define("TEMP", $ms4wpath . "/tmp");
+		define("SMARTYDIR", $Install_Dir . "\ms4w\apps\Smarty-2.6.26\libs");
+		define("JPGRAPHDIR", $Install_Dir . "\ms4w\apps\jpgraph-3.0.3");
+		define("TEMP", $Install_Dir . "\tmp");
 		// MS4W doesn't load the gd extension by default, so we do here now...
 		if (!extension_loaded( 'gd' )) {
 			//dl( 'php_gd2.'.PHP_SHLIB_SUFFIX);
 		}
+		$_SERVER['DI8_WEB'] = $Install_Dir . '\ms4w\Apache\htdocs';
+		$_SERVER['DI8_WWWDIR'] = $Install_Dir . '\www';
+		$_SERVER['DI8_DATADIR'] = $Install_Dir . '\data';
+		$_SERVER['DI8_CACHEDIR'] = $Install_Dir . '\tmp';
 	} else {
 		// Running on a Linux Server
 		define('MODE', "online");
@@ -229,15 +234,8 @@ define("VAR_DIR" , DATADIR);
 define("TMP_DIR" , DATADIR);
 define("SMTY_DIR", CACHEDIR); // Smarty temp dir
 define("TMPM_DIR", CACHEDIR); // Mapserver temp dir
-// Test and Create missing directories
-createIfNotExistDirectory(VAR_DIR);
-createIfNotExistDirectory(TMP_DIR);
-createIfNotExistDirectory(SMTY_DIR);
-createIfNotExistDirectory(TMPM_DIR);
 
 $lg          = "spa";
-$dicore_host = "127.0.0.1"; //"66.150.227.232";
-$dicore_port = 8081;
 
 require_once(BASE . "/include/usersession.class.php");
 require_once(BASE . "/include/diobject.class.php");
