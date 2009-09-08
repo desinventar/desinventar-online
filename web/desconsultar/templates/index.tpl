@@ -1260,17 +1260,13 @@
 			 </form>
 		  </div>
         </div>
-		<div id="save" class="submenu">
-			<a href="">xls</a>
-			<a href="">csv</a>
-		</div>
         <span id="frmwait"></span>
         <input id="DCRes" type="hidden" value="">
         <input type="button" class="bb bsave" onClick="if($('DCRes').value != '') saveRes('export');" ext:qtip="{-#bsavemsg#-}">
 		<span id="saveopt" style="position:absolute; visibility: hidden" onmouseout="$('saveopt').style.visibility='hidden';">
 			<a href="">xls</a> | <a href="">csv</a></span>
 		&nbsp;&nbsp;
-        <input type="button" class="bb bprint" onClick="$('dcr').focus(); $('dcr').print();" ext:qtip="{-#bprintmsg#-}">
+        <input type="button" class="bb bprint" onClick="$('dcr').print();" ext:qtip="{-#bprintmsg#-}">
 		&nbsp;&nbsp;
 		 <!-- Show DesInventar (input data) Form -->
 		<div id="dif-win" class="x-hidden">

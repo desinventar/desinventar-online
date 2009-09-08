@@ -344,9 +344,11 @@
 					&nbsp;&nbsp;|&nbsp;&nbsp;
 {-if $role == "OBSERVER" || $role == "ADMINREGION"-}
 					<a href="javascript:void(null);" onClick="TagToTip('config', COPYCONTENT, false, PADDING, 0, BORDERWIDTH, 0, EXCLUSIVE, true, TITLE, '{-#mconfig#-}', STICKY, true, CLOSEBTN, true);">{-#mconfig#-}</a>
-{-/if-}
 					&nbsp;&nbsp;|&nbsp;&nbsp;
+{-/if-}
+{-if $role != ""-}
 					<a href="javascript:void(null);" onClick="TagToTip('import', COPYCONTENT, false, PADDING, 0, BORDERWIDTH, 0, EXCLUSIVE, true, TITLE, '{-#mimport#-}', STICKY, true, CLOSEBTN, true);">{-#mimport#-}</a>
+{-/if-}
 					<br>
 					<span class="dlgmsg" id="distatusmsg"></span>
 				</td>
@@ -355,8 +357,8 @@
 				</td>
 			</tr>
 		</table>
-		<div id="config" style="position:absolute; padding:5px; background-color: #fff; top: 25px; left: 30px; 
-			z-index:100; overflow: auto; margin: 1px; border: 3px outset gray; width: 800px; height: 520px;">
+		<div id="config" style="position:absolute; padding:5px; background-color: #fff; top: 25px; left: 30px; z-index:100; 
+		{-if $role == ''-}visibility: hidden;{-/if-} overflow: auto; margin: 1px; border: 3px outset gray; width: 800px; height: 520px;">
 			<div class="tabber">
 			 <div class="tabbertab"><h2>{-#mreginfo#-}</h2><p></p></div>
 			 <div class="tabbertab"><h2>{-#mgeolevel#-}</h2><p></p></div>
@@ -366,8 +368,9 @@
 			 <div class="tabbertab"><h2>{-#meeffects#-}</h2><p></p></div>
 			</div>
 		</div>
-		<div id="import" style="position:absolute; padding:5px; background-color: #fff; top: 25px; left: 30px; 
-			z-index:100; overflow: auto; margin: 1px; border: 3px outset gray; width: 850px; height: 500px;"></div>
+		<div id="import" style="position:absolute; padding:5px; background-color: #fff; top: 25px; left: 30px; z-index:100;
+		{-if $role == ''-}visibility: hidden;{-/if-} overflow: auto; margin: 1px; border: 3px outset gray; width: 850px; height: 500px;">
+		</div>
 		<form id="DICard" action="index.php" method="POST" target="dic">
 			<input type="hidden" name="_REG" id="_REG" value="{-$reg-}">
 			<input type="hidden" name="DisasterId" id="DisasterId" value="">

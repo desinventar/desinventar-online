@@ -113,11 +113,13 @@
 
 {-**** SHOW LIST OF REGIONS BY COUNTRY (CONTENT) ****-}
 {-if $ctl_regions-}
+<script type="text/javascript" src="include/prototype.js"></script>
+<script type="text/javascript" src="include/diadmin.js"></script>
 <h2>{-$cnt-}</h2>
 <p align="justify">
 {-#tviewdbase#-}<br>
 {-if $ctl_available-}
-	<select onChange="updateList('shwreg', 'region.php', 'r='+ this.value)" size=13 style="width: 500px;">
+	<select onChange="updateList('shwreg', 'region.php', 'r='+ this.value)" size=4 style="width: 500px;">
 {-foreach name=dbs key=key item=item from=$dbs-}
   	<option value="{-$key-}" class="regl">{-$item-}</option>
 {-/foreach-}
