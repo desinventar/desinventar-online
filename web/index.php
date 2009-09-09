@@ -20,9 +20,15 @@ $t->assign("stat", "on");
 
 // PAGES: Show Information for selected Page from top menu
 if (isset($_GET['p'])) {
-	$t->assign ("ctl_pages", true);
-	$t->assign ("menu", $d->queryLabelsFromGroup('MainPage', $lg));
-	$t->assign ("page", $_GET['p']);
+	if ($_GET['p'] == 'init') {
+		include('default/index.html');
+		exit();
+	}
+	else {
+		$t->assign ("ctl_pages", true);
+		$t->assign ("menu", $d->queryLabelsFromGroup('MainPage', $lg));
+		$t->assign ("page", $_GET['p']);
+	}
 }
 // Default portal: init session and get country list
 else {

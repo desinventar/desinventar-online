@@ -5,23 +5,31 @@
 {-/if-}
 {-*** USER LOGIN WINDOW - USER MENU ***-}
 {-if $ctl_login-}
-<form action="javascript:updateUserBar('user.php', 'login', $('userid').value, $('password').value);" 
-		id="uf" method="get">
-	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center style="margin-top:7px">
-		<tr><td><img src="images/c1.gif" width="133" height="4"></td></tr>
-		<tr><td class="mizq" align="right">{-#tuser#-} <input type="text" 
-				id="userid" name="userid" value="" size="8" class="f"></td></tr>
-		<tr><td><img src="images/c2.gif" width="133" height="3" alt=""></td></tr>
-		<tr><td class="mizq" align="right">{-#tpassword#-} <input type="password" 
-				name="password" id="password" value="" size="8" class="f"></td></tr>
-		<tr><td><img src="images/c3.gif" width="133" height="4" alt=""></td></tr>
-		<tr><td><div class="olvido" style="float:left"><a href="javascript:void(null)" 
-				onclick="updateList('pagecontent', 'user.php', 'cmd=passlost');">{-#tpasslost#-}</a></div>
-			<div style="float:right">
-    		<img src="images/c_entrar1.jpg" width="11" height="18" border="0"><input type="submit" value="{-#benter#-}" 
-    			class="line usr_inp"><img src="images/c_entrar3.jpg" width="5" height="18" border="0"></div>
-		</td></tr>
+<form action="javascript:updateUserBar('user.php', 'login', $('userid').value, $('password').value);" id="uf" method="get">
+ <table border=0 cellpadding=0 cellspacing=0>
+  <tr>
+   <td>
+	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center style="margin-top:1px">
+	 <tr>
+	  <td><img src="images/c1.gif" width="133" height="4"></td>
+	  <td><img src="images/c1.gif" width="133" height="4"></td>
+	 </tr>
+	 <tr>
+	  <td class="mizq" align="right">{-#tuser#-} <input type="text" id="userid" name="userid" value="" size="8" class="f"></td>
+	  <td class="mizq" align="right">{-#tpassword#-} <input type="password" name="password" id="password" value="" size="8" class="f"></td>
+	 </tr>
+	 <tr>
+	  <td><img src="images/c3.gif" width="133" height="3" alt=""></td>
+	  <td><img src="images/c3.gif" width="133" height="4" alt=""></td>
+	 </tr>
 	</table>
+   </td>
+   <td>
+    <input type="submit" value="{-#benter#-}" class="line usr_inp">&nbsp;&nbsp;
+	<span class="olvido"><a href="javascript:void(null)" onclick="updateList('pagecontent', 'user.php', 'cmd=passlost');">{-#tpasslost#-}</a></span>
+   </td>
+  </tr>
+ </table>
 </form>
 {-/if-}
 {-*** LOGIN SUCESSFULL - USER MENU ***-}
