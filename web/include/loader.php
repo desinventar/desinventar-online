@@ -207,7 +207,6 @@ if (isset($_SERVER["SHELL"])) {
 }
 if (isset($_SERVER["DI8_WEB"])) {
 	define("BASE", $_SERVER["DI8_WEB"]);
-	define("SOFTDIR" , "/usr/share/desinventar-8.2");
 	define("WWWDIR"  , $_SERVER["DI8_WWWDIR"]);
 	define("WWWDATA" , "/desinventar-8.2-data");
 	define("WWWURL"  , "/");
@@ -223,7 +222,6 @@ if (isset($_SERVER["DI8_WEB"])) {
 	}
 //	define("WWWURL"  , "/mayandar/desinventar");
 //	define("DATADIR" , "/var/lib/desinventar");
-	define("SOFTDIR" , BASE);
 	define("WWWDIR"  , BASE . "/tmp");
 	define("WWWDATA" , "../tmp");
 	define("WWWURL"  , "/");
