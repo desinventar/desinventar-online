@@ -118,7 +118,8 @@ Section "MS4W - MapServer Installation Core"
     ExecWait 'apache-uninstall.bat' $0
 
 	; Install ms4w core file into install directory
-	!define distFile "ms4w_2.3.1.zip"
+	;!define distFile "ms4w_2.3.1.zip"
+	!define distFile "ms4w_3.0_beta7.zip"
 	ZipDLL::extractall "$EXEDIR\${distFile}" '$INSTDIR'
 	!undef distFile
 	
