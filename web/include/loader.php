@@ -133,6 +133,7 @@ if (isset($_SERVER["HTTP_HOST"])) {
 		$_SERVER['DI8_WWWDIR'] = $Install_Dir . '\www';
 		$_SERVER['DI8_DATADIR'] = $Install_Dir . '\data';
 		$_SERVER['DI8_CACHEDIR'] = $Install_Dir . '\tmp';
+		$FBCore = $Install_Dir . '\ms4w\apps\FirePHPCore-0.3.1\lib\FirePHPCore\fb.php';
 	} else {
 		// Running on a Linux Server
 		define('MODE', "online");
@@ -141,6 +142,7 @@ if (isset($_SERVER["HTTP_HOST"])) {
 		define("SMARTYDIR", "/usr/share/php/Smarty");
 		define("TEMP", "/tmp");
 		define("JPGRAPHDIR", "/usr/share/php/jpgraph");
+		$FBCore = '/usr/share/pear/FirePHPCore/fb.php';
 	}
 } else {
 	// Running a Command Line Script
@@ -151,8 +153,8 @@ if (isset($_SERVER["HTTP_HOST"])) {
 // This lines try to detect if FirePHP Core is installed,
 // if not, create a dummy class/function to avoid errors.
 if (MODE != 'command') {
-	if (file_exists('/usr/share/pear/FirePHPCore/fb.php')) {
-		require_once('FirePHPCore/fb.php');
+	if (file_exists($FBCore)) {
+		require_once($FBCore);
 	} else {
 		function fb() {
 			// dummy fb() function, doesn't do anything...
