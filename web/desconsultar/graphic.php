@@ -13,11 +13,9 @@ if (isset($post['_REG']) && !empty($post['_REG']))
 	$reg = $post['_REG'];
 else
 	exit();
-
 $q = new Query($reg);
 $regname = $q->getDBInfoValue('RegionLabel');
 fixPost($post);
-
 // load levels to display in totalizations
 foreach ($q->loadGeoLevels('', -1, false) as $k=>$i)
 	$st["GraphGeographyId_". $k] = array($i[0], $i[1]);
@@ -28,7 +26,6 @@ $dic = array_merge($dic, $q->queryLabelsFromGroup('Sector', $lg));
 $dic = array_merge($dic, $q->getEEFieldList("True"));
 //$t->assign ("dic", $dic);
 $t->assign ("regname", $regname);
-
 if (isset($post['_G+cmd'])) {
 	// Process QueryDesign Fields and count results
 	$qd  = $q->genSQLWhereDesconsultar($post);

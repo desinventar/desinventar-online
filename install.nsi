@@ -173,6 +173,7 @@ Section "Application Install"
 	SetOutPath $INSTDIR\ms4w\httpd.d
 	File Files\conf\httpd_extJS.conf
 	File Files\conf\httpd_jquery.conf
+	File Files\conf\httpd_desinventar-8.2-data.conf
 	
 	;MessageBox MB_OK $INSTDIR"\n"$INSTDIR_forward
 	WriteUninstaller "uninstall.exe"
@@ -216,6 +217,10 @@ Section "Application Local Configuration"
 	!undef FILE
 
 	!define FILE "$INSTDIR\ms4w\httpd.d\httpd_jquery.conf"
+	${textreplace::ReplaceInFile} "${FILE}" "${FILE}" "/ms4w" "$INSTDIR_forward/ms4w" "" $Return
+	!undef FILE
+
+	!define FILE "$INSTDIR\ms4w\httpd.d\httpd_desinventar-8.2-data.conf"
 	${textreplace::ReplaceInFile} "${FILE}" "${FILE}" "/ms4w" "$INSTDIR_forward/ms4w" "" $Return
 	!undef FILE
 
