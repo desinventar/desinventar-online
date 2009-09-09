@@ -6,8 +6,6 @@
 
 //ob_start( 'ob_gzhandler' );
 require_once('../include/loader.php');
-require_once('../include/usersession.class.php');
-
 $post = $_POST;
 $get  = $_GET;
 
