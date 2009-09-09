@@ -34,21 +34,12 @@
 {-/if-}
 {-*** LOGIN SUCESSFULL - USER MENU ***-}
 {-if $ctl_logged-}
-  <table width="133" border=0 cellpadding=0 cellspacing=0 align=center style="margin-top:7px">
-    <tr><td style="padding-bottom:3px"><span class="txt"><b>{-#tuser#-}: {-$user-}</b></span></td></tr>
-    <tr><td><img src="images/c1.gif" width="133" height="4"></td></tr>
-    <tr><td class="mizq2"><a href="javascript:void(null)" 
-    	onclick="updateList('pagecontent', 'user.php', 'cmd=welcome');" class="txt">{-#tmyregions#-}</a></td></tr>
-    <tr><td><img src="images/c2.gif" width="133" height="3" alt=""></td></tr>
-    <tr><td class="mizq2"><a href="javascript:void(null)" 
-    	onclick="mod='userpa'; updateList('pagecontent', 'user.php', 'cmd=viewpref');" class="txt">{-#tconfigacc#-}</a></td></tr>
-    <tr><td><img src="images/c3.gif" width="133" height="4" alt=""></td></tr>
-    <tr><td><div style="float:right"><img src="images/c_entrar1.jpg" width="11" height="18" 
-    	border="0"><input type="button" value="{-#tclosesess#-}" class="line usr_out" 
-    	onclick="updateUserBar('user.php', 'logout', '', '');"><img src="images/c_entrar3.jpg" 
-    	width="5" height="18" border="0"></div>
-    </td></tr>
-  </table>
+  <span class="txt"><b>{-#tuser#-}: {-$user-}</b></span>&nbsp;&nbsp;
+  <a href="javascript:void(null)" 
+    	onclick="updateList('pagecontent', 'user.php', 'cmd=welcome');" class="txt">{-#tmyregions#-}</a> |
+  <a href="javascript:void(null)" 
+    	onclick="mod='userpa'; updateList('pagecontent', 'user.php', 'cmd=viewpref');" class="txt">{-#tconfigacc#-}</a> |
+  <input type="button" value="{-#tclosesess#-}" class="line usr_out" onclick="updateUserBar('user.php', 'logout', '', '');">
 {-/if-}
 {-*** WELCOME PAGE TO LOGGED USER WITH ROLES AND OPTIONS - CONTENT ***-}
 {-if $ctl_welcome-}

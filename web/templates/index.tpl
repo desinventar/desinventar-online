@@ -139,11 +139,16 @@
 	 </tr>
 	 <tr>
 	  <td colspan="3">
-		<div align="right" style="margin-right:30px;">
+	   <table border=0 width="100%">
+	    <tr>
+		 <td align="center"><a href="http://www.desinventar.org" target="desinventar">Website DesInventar</a></td>
+		 <td align="right" style="margin-right:50px;">
 			<a href="http://www.osso.org.co" target="_blank"><img src="images/corposso.png" border=0></a>
-			<a href="http://www.desenredando.org" target="_blank"><img src="images/lared.png" border=0></a><br />
-			{-#tcopyright#-}
-		</div>
+			<a href="http://www.desenredando.org" target="_blank"><img src="images/lared.png" border=0></a>
+			<br>{-#tcopyright#-}
+		 </td>
+		</tr>
+	   </table>
 	  </td>
 	 </tr>
 	</table>
