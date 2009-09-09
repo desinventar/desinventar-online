@@ -143,6 +143,11 @@ Section "MS4W - MapServer Installation Core"
 	ZipDLL::extractall "$EXEDIR\${distFile}" '$INSTDIR\ms4w\apps'
 	!undef distFile
 
+	; Extract OpenLayers into install directory
+	!define distFile "OpenLayers-2.8.zip"
+	ZipDLL::extractall "$EXEDIR\${distFile}" '$INSTDIR\ms4w\apps'
+	!undef distFile
+
 	; Sample for Handling a tar.gz file...
 	;untgz::extract -d '$INSTDIR' "$EXEDIR\${ms4wfile}"
 SectionEnd
@@ -173,6 +178,7 @@ Section "Application Install"
 	SetOutPath $INSTDIR\ms4w\httpd.d
 	File Files\conf\httpd_extJS.conf
 	File Files\conf\httpd_jquery.conf
+	File Files\conf\httpd_openlayers.conf
 	File Files\conf\httpd_desinventar-8.2-data.conf
 	
 	;MessageBox MB_OK $INSTDIR"\n"$INSTDIR_forward
@@ -217,6 +223,10 @@ Section "Application Local Configuration"
 	!undef FILE
 
 	!define FILE "$INSTDIR\ms4w\httpd.d\httpd_jquery.conf"
+	${textreplace::ReplaceInFile} "${FILE}" "${FILE}" "/ms4w" "$INSTDIR_forward/ms4w" "" $Return
+	!undef FILE
+
+	!define FILE "$INSTDIR\ms4w\httpd.d\httpd_openlayers.conf"
 	${textreplace::ReplaceInFile} "${FILE}" "${FILE}" "/ms4w" "$INSTDIR_forward/ms4w" "" $Return
 	!undef FILE
 
