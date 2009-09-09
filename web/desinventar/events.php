@@ -6,7 +6,6 @@
 
 require_once('../include/loader.php');
 require_once('../include/query.class.php');
-require_once('../include/usersession.class.php');
 require_once('../include/dievent.class.php');
 
 $reg = $us->sRegionId;

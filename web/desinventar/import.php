@@ -6,14 +6,6 @@
 
 require_once('../include/loader.php');
 require_once('../include/diimport.class.php');
-/*require_once('../include/usersession.class.php');
-require_once('../include/query.class.php');
-require_once('../include/region.class.php');
-require_once('../include/didisaster.class.php');
-require_once('../include/digeography.class.php');
-require_once('../include/dievent.class.php');
-require_once('../include/dicause.class.php');
-require_once('../include/dieedata.class.php');*/
 
 function loadCSV($ocsv) {
 	$handle = fopen($ocsv, "r");
