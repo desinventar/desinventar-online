@@ -3,7 +3,6 @@
  DesInventar8 - http://www.desinventar.org
  (c) 1999-2009 Corporacion OSSO
 */
-
 require_once(JPGRAPHDIR . "/jpgraph.php");
 require_once(JPGRAPHDIR . "/jpgraph_line.php");
 require_once(JPGRAPHDIR . "/jpgraph_log.php");
@@ -12,7 +11,6 @@ require_once(JPGRAPHDIR . "/jpgraph_bar.php");
 require_once(JPGRAPHDIR . "/jpgraph_pie.php");
 require_once(JPGRAPHDIR . "/jpgraph_pie3d.php");
 require_once('../include/math.class.php');
-
 class Graphic {
 	var $g;
 	var $sPeriod;

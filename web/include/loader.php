@@ -123,7 +123,7 @@ if (isset($_SERVER["HTTP_HOST"])) {
 		$Install_Dir = $shell->RegRead("HKEY_LOCAL_MACHINE\\Software\\OSSO\\DesInventar8\Install_Dir");
 		$ms4wpath=$shell->RegRead("HKEY_LOCAL_MACHINE\\SOFTWARE\\MS4W\\Install_Dir");
 		define("SMARTYDIR", $Install_Dir . "\ms4w\apps\Smarty-2.6.26\libs");
-		define("JPGRAPHDIR", $Install_Dir . "\ms4w\apps\jpgraph-3.0.3");
+		define("JPGRAPHDIR", $Install_Dir . "\ms4w\apps\jpgraph-3.0.3\src");
 		define("TEMP", $Install_Dir . "\tmp");
 		// MS4W doesn't load the gd extension by default, so we do here now...
 		if (!extension_loaded( 'gd' )) {
