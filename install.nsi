@@ -137,16 +137,20 @@ Section "MS4W - MapServer Installation Core"
 	!define distFile "Smarty-2.6.26.zip"
 	ZipDLL::extractall "$EXEDIR\${distFile}" '$INSTDIR\ms4w\apps'
 	!undef distFile
+	Rename '$INSTDIR\ms4w\apps\smarty-2.6.26' '$INSTDIR\ms4w\apps\smarty'
+
 
 	; Install JPGraph file into install directory
 	!define distFile "jpgraph-3.0.3.zip"
 	ZipDLL::extractall "$EXEDIR\${distFile}" '$INSTDIR\ms4w\apps'
 	!undef distFile
+	Rename '$INSTDIR\ms4w\apps\jpgraph-3.0.3' '$INSTDIR\ms4w\apps\jpgraph'
 
 	; Extract OpenLayers into install directory
 	!define distFile "OpenLayers-2.8.zip"
 	ZipDLL::extractall "$EXEDIR\${distFile}" '$INSTDIR\ms4w\apps'
 	!undef distFile
+	Rename '$INSTDIR\ms4w\apps\openlayers-2.8' '$INSTDIR\ms4w\apps\openlayers'
 
 	; Sample for Handling a tar.gz file...
 	;untgz::extract -d '$INSTDIR' "$EXEDIR\${ms4wfile}"
