@@ -35,7 +35,7 @@ class Maps
 			$map .= $this->setLayerAdm($gl, $reg, $type);
 			// mapfile and html template to interactive selection
 			if ($type == "SELECT")
-				$fp = DATADIR ."/". $reg . "/region.map";
+				$fp = DATADIR ."/database/". $reg . "/region.map";
 			else {
 				// generate effects maps: type=filename | thematic=sessid
 				$fp = TMPM_DIR ."/di8ms_";
