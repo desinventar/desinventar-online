@@ -142,7 +142,7 @@ if (isset($post['_M+cmd'])) {
 				"&REQUEST=getlegendgraphic&LAYER=". substr($myly, 0, 12) ."&FORMAT=image/png";
 	$t->assign ("legend", $legend);
 	if ($post['_M+cmd'] == "export") {
-		$url0 = "/cgi-bin/". MAPSERV ."?map=". SOFTDIR ."/worldmap/worldmap.map&SERVICE=WMS&VERSION=1.1.1".
+		$url0 = "/cgi-bin/". MAPSERV ."?map=". DATADIR ."/main/worldmap/worldmap.map&SERVICE=WMS&VERSION=1.1.1".
 			"&layers=base&REQUEST=getmap&STYLES=&SRS=EPSG:900913&BBOX=". $post['_M+extent'].
 			"&WIDTH=500&HEIGHT=378&FORMAT=image/png";
 		$bf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $url0);
@@ -205,7 +205,7 @@ switch($_SERVER["SERVER_NAME"]) {
 }
 $t->assign ("reg", $reg);
 //$t->assign ("dic", $dic);
-$t->assign ("basemap", SOFTDIR . "/worldmap/worldmap.map");
+$t->assign ("basemap", DATADIR . "/main/worldmap/worldmap.map");
 $t->assign ("mps", MAPSERV);
 $t->assign ("googlemapkey", $GoogleMapsKey);
 $t->display ("thematicmap.tpl");
