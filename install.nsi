@@ -179,6 +179,12 @@ Section "Application Install"
 	File Files\database\base.db
 	File Files\database\desinventar.db
 
+        ; Install worldmap shape file
+        CreateDirectory $INSTDIR\data\main\worldmap
+	!define distFile "world_adm0.zip"
+	ZipDLL::extractall "$EXEDIR\${distFile}" '$INSTDIR\data\main\worldmap'
+	!undef distFile
+
 	SetOutPath $INSTDIR\ms4w\httpd.d
 	File Files\conf\httpd_extJS.conf
 	File Files\conf\httpd_jquery.conf
