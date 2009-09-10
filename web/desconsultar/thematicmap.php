@@ -141,12 +141,16 @@ if (isset($post['_M+cmd'])) {
 	$legend = "/cgi-bin/". MAPSERV ."?map=". $m->filename() ."&SERVICE=WMS&VERSION=1.1.1".
 				"&REQUEST=getlegendgraphic&LAYER=". substr($myly, 0, 12) ."&FORMAT=image/png";
 	$t->assign ("legend", $legend);
+	
+	// 2009-09-10 (jhcaiced) Replace backslash chars to slash, when passing data to mapserver
+	$worldmap = str_replace('\\','/', DATADIR . "/main/worldmap/world_adm0.map");
 	if ($post['_M+cmd'] == "export") {
-		$url0 = "/cgi-bin/". MAPSERV ."?map=". DATADIR ."/main/worldmap/worldmap.map&SERVICE=WMS&VERSION=1.1.1".
+		$url0 = "/cgi-bin/". MAPSERV ."?map=". $worldmap . "&SERVICE=WMS&VERSION=1.1.1".
 			"&layers=base&REQUEST=getmap&STYLES=&SRS=EPSG:900913&BBOX=". $post['_M+extent'].
 			"&WIDTH=500&HEIGHT=378&FORMAT=image/png";
 		$bf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $url0);
-		$url1 = "/cgi-bin/". MAPSERV ."?map=". $m->filename() ."&SERVICE=WMS&VERSION=1.1.1".
+		$mapfile = str_replace('\\', '/', $m->filename());		
+		$url1 = "/cgi-bin/". MAPSERV ."?map=". $mapfile ."&SERVICE=WMS&VERSION=1.1.1".
 			"&layers=". $post['_M+layers'] ."&REQUEST=getmap&STYLES=&SRS=EPSG:900913".
 			"&BBOX=". $post['_M+extent']."&WIDTH=500&HEIGHT=378&FORMAT=image/png";
 		$mf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $url1);
@@ -205,7 +209,7 @@ switch($_SERVER["SERVER_NAME"]) {
 }
 $t->assign ("reg", $reg);
 //$t->assign ("dic", $dic);
-$t->assign ("basemap", DATADIR . "/main/worldmap/worldmap.map");
+$t->assign ("basemap", $worldmap);
 $t->assign ("mps", MAPSERV);
 $t->assign ("googlemapkey", $GoogleMapsKey);
 $t->display ("thematicmap.tpl");
