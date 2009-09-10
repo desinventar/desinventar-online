@@ -252,6 +252,14 @@ Section "Application Local Configuration"
 	${textreplace::ReplaceInFile} "${FILE}" "${FILE}" "\ms4w" "$INSTDIR\ms4w" "" $Return
 	${textreplace::ReplaceInFile} "${FILE}" "${FILE}" "/ms4w" "$INSTDIR_forward/ms4w" "" $Return
 	!undef FILE
+	
+	; Fix proj/nad/epsg file to add Spherical Mercator Projection
+	FileOpen $4 "$INSTDIR\ms4w\proj\nad\epsg" a
+	FileSeek $4 0 END
+	FileWrite $4 "$\r$\n" ; we write a new line
+	FileWrite $4 "<900913> +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs"
+	FileWrite $4 "$\r$\n" ; we write an extra line
+	FileClose $4 ; and close the file
 SectionEnd
 
 Section "Install Sample Database Data"
