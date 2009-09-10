@@ -82,11 +82,12 @@ if (isset($post['_M+cmd'])) {
 	// generate map
 	$dl = $q->prepareList($dislist, "MAPS");
 	// MAPS Query, RegionId, Level, datalist, ranges, dbinfo, label, maptype
-	$m = new Maps($q, $reg, $lev[0], $dl, $range, $info, $post['_M+Label'], $post['_M+Transparency'], "THEMATIC");
+	$m = new Maps($q, $reg, $lev[0], $dl, $range, $info, $post['_M+Label'], $post['_M+Transparency'], "THEMATIC");	
 	$rinf = $q->getDBInfo();
 	$rgl[0]['regname'] = $rinf['RegionLabel|'];
 	$rgl[0]['info'] = $info;
-	// if valid filename then prepare interface to view MAPFILE
+	// if valid filename then prepare interface to view MAPFILE	
+	
 	if (strlen($m->filename()) > 0) {
 		$lon = 0;
 		$lat = 0;
@@ -121,7 +122,7 @@ if (isset($post['_M+cmd'])) {
 			$myly = "effects";
 		$rgl[0]['ly1'] = $myly;
 		$rgl[0]['lv'] = $lev[0];
-		$rgl[0]['map'] = $m->filename();
+		$rgl[0]['map'] = str_replace('\\','/',$m->filename());
 	}
 	if (isset($lnl) && isset($ltl)) {
 		$t->assign ("lon", array_sum($lnl)/count($lnl));
@@ -134,11 +135,12 @@ if (isset($post['_M+cmd'])) {
 	}
 	
 	$t->assign ("glev", $q->loadGeoLevels('', -1, true));
-	//echo "<pre>"; print_r($rgl);
+	//echo "<pre>"; print_r($rgl); echo "</pre>";
 	$t->assign ("rgl", $rgl);
 	$t->assign ("tot", $cou);
 	$t->assign ("qdet", $q->getQueryDetails($dic, $post));
-	$legend = "/cgi-bin/". MAPSERV ."?map=". $m->filename() ."&SERVICE=WMS&VERSION=1.1.1".
+	$mapfile = str_replace('\\', '/', $m->filename());		
+	$legend = "/cgi-bin/". MAPSERV ."?map=" . $mapfile . "&SERVICE=WMS&VERSION=1.1.1".
 				"&REQUEST=getlegendgraphic&LAYER=". substr($myly, 0, 12) ."&FORMAT=image/png";
 	$t->assign ("legend", $legend);
 	
@@ -207,6 +209,7 @@ switch($_SERVER["SERVER_NAME"]) {
 		$GoogleMapsKey = "ABQIAAAAv_HCDVf4YK_pJceWBA7XmRRi_j0U6kJrkFvY4-OX2XYmEAa76BSA4JvNpGUXBDLtWrA-lnRXmTahHg";
 		break;
 }
+
 $t->assign ("reg", $reg);
 //$t->assign ("dic", $dic);
 $t->assign ("basemap", $worldmap);
