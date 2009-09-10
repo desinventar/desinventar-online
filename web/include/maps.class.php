@@ -72,8 +72,8 @@ class Maps
     IMAGETYPE		PNG
 		EXTENT			-180 -90 180 90
 		SIZE				'. $x .' '. $y .'
-		SHAPEPATH		"'. VAR_DIR . '/database/' . $reg . '/"
-		FONTSET			"'. FONTDIR . '"
+		SHAPEPATH		"' . str_replace('\\','/', VAR_DIR . '/database/' . $reg) . '/"
+		FONTSET			"' . str_replace('\\','/', FONTDIR) . '"
 		IMAGECOLOR	255 255 255
 		PROJECTION	"proj=latlong" "ellps=WGS84" "datum=WGS84" END
 		WEB';
@@ -90,7 +90,7 @@ class Maps
     else
       exit();
     $map .= '
-			#IMAGEPATH		"'. TMPM_DIR .'"
+			#IMAGEPATH		"'. str_replace('\\','/', TMPM_DIR) .'"
 			METADATA
 			  WMS_TITLE	"DesInventar Map of -'. $inf['TITLE'] .'-"
 			  WMS_ABSTRACT	"Level: '. $inf['LEVEL'] .'"
