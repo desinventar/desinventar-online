@@ -9,11 +9,9 @@
 	<title>{-#ttitle#-} [{-$regname-}] | {-$usr-} - {-$dicrole-}</title>
 	<link rel="stylesheet" href="../css/desinventar.css" type="text/css"/>
 	<link rel="stylesheet" href="../css/desinput.css" type="text/css"/>
-	<link rel="stylesheet" href="../css/tabber.css" type="text/css">
 	<script type="text/javascript" src="../include/prototype.js"></script>
 	<script type="text/javascript" src="../include/combo-box.js"></script>
 	<script type="text/javascript" src="../include/diadmin.js"></script>
-	<!--	<link rel="stylesheet" href="../css/tabeffect.css" type="text/css"> <script type="text/javascript" src="../include/tabber.js"></script> -->
 	<script type="text/javascript" language="javascript">
 		var mod = "di";
 		function hidediv(myDiv) {
@@ -252,47 +250,10 @@
 		window.onload = function() {
 			DisableEnableForm($('DICard'), true);
 			changeOptions();
-			myAjax = new Ajax.Updater($('import'), 'import.php', {method:'get', parameters:''});
 			uploadMsg("{-#tmsgnewcard#-}");
 			var pe = new PeriodicalExecuter(setActive, 60);
 		}
-		document.write('<style type="text/css">.tabber{display:none;}<\/style>');
-		var tabberOptions = {
-			'onClick': function(argsObj) {
-				var t = argsObj.tabber; /* Tabber object */
-				var i = argsObj.index; /* Which tab was clicked (0..n) */
-				var div = this.tabs[i].div; /* The tab content div */
-				/* Display a loading message */
-				div.innerHTML = waiting;
-				switch (i) {
-					case 0 :
-						myAjax = new Ajax.Updater(div, 'region.php', {method:'get', parameters:''});
-					break;
-					case 1 :
-						myAjax = new Ajax.Updater(div, 'geolevel.php', {method:'get', parameters:''});
-					break;
-					case 2 :
-						myAjax = new Ajax.Updater(div, 'geography.php', {method:'get', parameters:''});
-					break;
-					case 3 :
-						myAjax = new Ajax.Updater(div, 'events.php', {method:'get', parameters:''});
-					break;
-					case 4 :
-						myAjax = new Ajax.Updater(div, 'causes.php', {method:'get', parameters:''});
-					break;
-					case 5 :
-						myAjax = new Ajax.Updater(div, 'extraeffects.php', {method:'get', parameters:''});
-					break;
-				}
-			},
-			'onLoad': function(argsObj) {
-				/* Load the first tab */
-				argsObj.index = 0;
-				this.onClick(argsObj);
-			},
-		}
 	</script>
-	<script type="text/javascript" src="../include/tabber.js"></script>
 	<style type="text/css">
 		.bnew {
 			background-image: url(../images/newicon.png) !important;
@@ -345,35 +306,14 @@
 					<input type="button" value=">" class="bb line" onmouseover="Tip('Siguiente')" onmouseout="UnTip()" onClick="requestDCard('getNextDId', $('DisasterId').value);">
 					<input type="button" value=">>" class="bb line" onmouseover="Tip('Ultima')" onmouseout="UnTip()" onClick="setDICard('{-$reg-}', {-$lst-}, '');">
 					&nbsp;&nbsp;|&nbsp;&nbsp;
-{-if $role == "OBSERVER" || $role == "ADMINREGION"-}
-					<a href="javascript:void(null);" onClick="TagToTip('config', COPYCONTENT, false, PADDING, 0, BORDERWIDTH, 0, EXCLUSIVE, true, TITLE, '{-#mconfig#-}', STICKY, true, CLOSEBTN, true);">{-#mconfig#-}</a>
-					&nbsp;&nbsp;|&nbsp;&nbsp;
-{-/if-}
-{-if $role != ""-}
-					<a href="javascript:void(null);" onClick="TagToTip('import', COPYCONTENT, false, PADDING, 0, BORDERWIDTH, 0, EXCLUSIVE, true, TITLE, '{-#mimport#-}', STICKY, true, CLOSEBTN, true);">{-#mimport#-}</a>
-{-/if-}
 					<br>
 					<span class="dlgmsg" id="distatusmsg"></span><span class="dlgmsg" id="dostat"></span>
 				</td>
 				<td align="right">
-					<iframe name="dic" id="dic" frameborder="0" style="height:30px; width:370px;" src="about:blank"></iframe>
+					<iframe name="dic" id="dic" frameborder="0" style="height:30px; width:470px;" src="about:blank"></iframe>
 				</td>
 			</tr>
 		</table>
-		<div id="config" style="position:absolute; padding:5px; background-color: #fff; top: 25px; left: 30px; z-index:100; 
-		{-if $role == ''-}visibility: hidden;{-/if-} overflow: auto; margin: 1px; border: 3px outset gray; width: 800px; height: 520px;">
-			<div class="tabber">
-			 <div class="tabbertab"><h2>{-#mreginfo#-}</h2><p></p></div>
-			 <div class="tabbertab"><h2>{-#mgeolevel#-}</h2><p></p></div>
-			 <div class="tabbertab"><h2>{-#mgeography#-}</h2><p></p></div>
-			 <div class="tabbertab"><h2>{-#mevents#-}</h2><p></p></div>
-			 <div class="tabbertab"><h2>{-#mcauses#-}</h2><p></p></div>
-			 <div class="tabbertab"><h2>{-#meeffects#-}</h2><p></p></div>
-			</div>
-		</div>
-		<div id="import" style="position:absolute; padding:5px; background-color: #fff; top: 25px; left: 30px; z-index:100;
-		{-if $role == ''-}visibility: hidden;{-/if-} overflow: auto; margin: 1px; border: 3px outset gray; width: 850px; height: 500px;">
-		</div>
 		<form id="DICard" action="index.php" method="POST" target="dic">
 			<input type="hidden" name="_REG" id="_REG" value="{-$reg-}">
 			<input type="hidden" name="DisasterId" id="DisasterId" value="">
@@ -501,7 +441,7 @@
 						</table>
 					</td>
 				</tr>
-      	<!-- END DATACARD --> 
+				<!-- END DATACARD --> 
 				<tr>
 					<td width="30px" valign="top" style="border:0px;">
 						<a href="javascript:void(null)" onClick="switchEff('effbas')">
@@ -618,16 +558,16 @@
 {-/if-}
 {-/foreach-}
             </table>
-          </td>
-        </tr>
-        <!-- BEG EVENT SECTION -->
-        <tr style="border:1px solid #ff0;">
-          <td width="30px" valign="top" style="border:0px;">
-          	<img src="../images/di_evetag.png" 
-				onmouseover="Tip('<b>{-#mevents#-}</b><br>{-$dmg.MetGuideevents[2]-}', BGCOLOR, 'lightblue', SHADOW, true, WIDTH, 400)" 
-				onmouseout="UnTip()">
-          </td>
-          <td>
+					</td>
+				</tr>
+				<!-- BEG EVENT SECTION -->
+				<tr style="border:1px solid #ff0;">
+					<td width="30px" valign="top" style="border:0px;">
+						<img src="../images/di_evetag.png" 
+						onmouseover="Tip('<b>{-#mevents#-}</b><br>{-$dmg.MetGuideevents[2]-}', BGCOLOR, 'lightblue', SHADOW, true, WIDTH, 400)" 
+						onmouseout="UnTip()">
+					</td>
+					<td>
             <table class="grid">
               <tr valign="top">
                 <td ext:qtip="{-$eve.EventName[1]-}">
@@ -665,51 +605,51 @@
                 </td>
               </tr>
             </table>
-          </td>
-        </tr>
-        <!-- BEG CAUSE SECTION -->
-        <tr style="border:1px solid #ffffc0;">
-          <td width="30px" valign="top" style="border:0px;">
-          	<img src="../images/di_cautag.png" 
-				onmouseover="Tip('<b>{-#mcauses#-}</b><br>{-$dmg.MetGuidecauses[2]-}', BGCOLOR, '#ffffc0', SHADOW, true, WIDTH, 400)" 
-				onmouseout="UnTip()">
-          </td>
-          <td>
-            <table class="grid">
-              <tr>
-                <td ext:qtip="{-$cau.CauseName[1]-}">
+					</td>
+				</tr>
+				<!-- BEG CAUSE SECTION -->
+				<tr style="border:1px solid #ffffc0;">
+					<td width="30px" valign="top" style="border:0px;">
+						<img src="../images/di_cautag.png" 
+						onmouseover="Tip('<b>{-#mcauses#-}</b><br>{-$dmg.MetGuidecauses[2]-}', BGCOLOR, '#ffffc0', SHADOW, true, WIDTH, 400)" 
+						onmouseout="UnTip()">
+					</td>
+					<td>
+					<table class="grid">
+					  <tr>
+						<td ext:qtip="{-$cau.CauseName[1]-}">
 {-assign var="tabind" value="`$tabind+1`"-}
-                  {-$cau.CauseName[0]-}<b style="color:darkred;">*</b><br>
-                  <select id="CauseId" name="CauseId" style='width: 180px;' class="line" 
-                      tabindex="{-$tabind-}" onFocus="showtip('{-$cau.CauseName[2]-}', '#ffffc0')">
-                    <option value=""></option>
+						{-$cau.CauseName[0]-}<b style="color:darkred;">*</b><br>
+						<select id="CauseId" name="CauseId" style='width: 180px;' class="line" 
+						  tabindex="{-$tabind-}" onFocus="showtip('{-$cau.CauseName[2]-}', '#ffffc0')">
+						<option value=""></option>
 {-foreach name=cln key=key item=item from=$caul-}
-                    <option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}', '#ffffc0')">{-$item[0]-}</option>
+						<option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}', '#ffffc0')">{-$item[0]-}</option>
 {-/foreach-}
-                  </select>
-                </td>
-                <td ext:qtip="{-$cau.CauseNotes[1]-}">
+						</select>
+						</td>
+						<td ext:qtip="{-$cau.CauseNotes[1]-}">
 {-assign var="tabind" value="`$tabind+1`"-}
-                  {-$cau.CauseNotes[0]-}<br>
-                  <input type="texto" id="CauseNotes" name="CauseNotes" style="width: 450px;" class="line"
-                  		onkeypress="return blockChars(event, this.value, 'text:');" tabindex="{-$tabind-}" 
-                      onFocus="showtip('{-$cau.CauseNotes[2]-}', '#ffffc0')"></textarea>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-      </table>
+						{-$cau.CauseNotes[0]-}<br>
+						<input type="texto" id="CauseNotes" name="CauseNotes" style="width: 450px;" class="line"
+							onkeypress="return blockChars(event, this.value, 'text:');" tabindex="{-$tabind-}" 
+							onFocus="showtip('{-$cau.CauseNotes[2]-}', '#ffffc0')"></textarea>
+						</td>
+					  </tr>
+					</table>
+					</td>
+				</tr>
+			</table>
 		</form>
 	</div>
 <!-- END DI8 FORM CARD -->
 
 <!-- BEG HELP SECTION -->
- <div id="south">
+	<div id="south">
      <textarea id="_DIDesc" wrap="hard" class="hlp" readonly style="width:85%; height:15px;"></textarea>
       <a href="javascript:void(null)" onClick="runWin('../doc/?m=metguide', 'doc');"
       	class="dlgmsg" style="font-size: 8pt;">{-#hmoreinfo#-}</a>
- </div>
+	</div>
 <!-- END HELP SECTION -->
  </body>
 </html>
