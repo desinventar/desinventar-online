@@ -45,7 +45,7 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
 		$sql = base64_decode($get['sql']);
 		$geo = $get['geo'];
 		if (isset($get['ord']))
-			$sql .= " ORDER BY ". $get['ord'] ." DESC ";
+			$sql .= " ORDER BY ". $get['ord'] ." ". $get['dir'];
 	}
 	// Process results with default options
 	else if (isset($post['_S+cmd'])) {

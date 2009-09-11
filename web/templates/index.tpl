@@ -87,7 +87,14 @@
 				<!--<div align="right"><img src="images/23.jpg" width="305" height="13"></div>-->
 			  </td>
 			  <td align="right" valign="middle" style="background:url(images/23.jpg); background-repeat:no-repeat;" width="305" height="13">
-				<input type="text" disabled><img src="images/findicon.png">
+				<select id="CountryList" onChange="updateList('pagecontent', 'region.php', 'c='+ this.value);"
+					style="border: 1px solid #369; font-size: 1.1em; height: 1.5em; vertical-align: middle;">
+					<option value=""></option>
+{-foreach name=country key=key item=item from=$ctlst-}
+					<option value="{-$item-}">{-$item-}</option>
+{-/foreach-}
+				</select>
+				<!--<img src="images/findicon.png">-->
 			  </td>
 			 </tr>
 			 <tr>
@@ -142,7 +149,7 @@
 	  <td colspan="3">
 	   <table border=0 width="100%">
 	    <tr>
-		 <td align="center"><a href="http://www.desinventar.org" target="desinventar">Website DesInventar</a></td>
+		 <td align="center"><a href="http://www.desinventar.org" target="desinventar">DesInventar.org</a></td>
 		 <td align="right" style="margin-right:50px;">
 			<a href="http://www.osso.org.co" target="_blank"><img src="images/corposso.png" border=0></a>
 			<a href="http://www.desenredando.org" target="_blank"><img src="images/lared.png" border=0></a>

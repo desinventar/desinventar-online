@@ -11,7 +11,7 @@ $t->config_dir = 'include';
 
 $d = new Query();
 
-$t->assign ("DIver", "8.2.0.47");
+$t->assign ("DIver", "8.2.0.49");
 $t->assign ("DImode", MODE);
 // 2009-01-20 (jhcaiced) At this point, loader.php should have
 // created or loaded the UserSession in the $us variable
@@ -21,7 +21,10 @@ $t->assign("stat", "on");
 // PAGES: Show Information for selected Page from top menu
 if (isset($_GET['p'])) {
 	if ($_GET['p'] == 'init') {
-		include('default/index.php');
+		if (file_exists('default/index.php'))
+			header("Location:default/index.php");
+		else
+			header("Location:doc/index.php?m=start&p=index");
 		exit();
 	}
 	else {
@@ -35,8 +38,12 @@ else {
 	$t->assign ("menu", $d->queryLabelsFromGroup('MainPage', $lg));
 	// load languages available list
 	$t->assign ("lglst", $d->loadLanguages(1));
-	$cmd = "";
-	$t->assign ("cmd", $cmd);
+	// load available countries with databases
+	$ctlst = array();
+	$result = $d->core->query("SELECT CountryIso FROM Region WHERE RegionStatus=1 GROUP BY CountryIso");
+	while ($row = $result->fetch(PDO::FETCH_OBJ))
+		$ctlst[] = $row->CountryIso;
+	$t->assign ("ctlst", $ctlst);
 }
 $t->display ("index.tpl");
 

@@ -1,7 +1,12 @@
 {-config_load file=`$lg`.conf section="di_doc"-}
 {-**** INDEX FRAME SECTION ****-}
 {-if $ctl_page == 'index'-}
-	{-if $ctl_module == 'metguide'-}
+ {-if $ctl_module == 'start'-}
+	<h2>Bienvenido a DesInventar8</h2>
+	Acceso a usuarios: <br>
+	Buscar bases de datos: <br>
+	Documentaci&oacute;n<br>
+ {-elseif $ctl_module == 'metguide'-}
 	<h3>{-#ttitle#-}</h3>
 	<li><a href="?m=MetGuide&p=intro" target="Contentframe">{-#tintro#-}</a></li>
 	<li><a href="?m=MetGuide&p=whatis" target="Contentframe">{-#twhatis#-}</a></li>
@@ -13,7 +18,7 @@
 	<li><a href="?m=MetGuide&p=extraeffects" target="Contentframe">{-#textraeff#-}</a></li>
 	<li><a href="?m=MetGuide&p=datacards" target="Contentframe">{-#tdatacards#-}</a></li>
 	<li><a href="?m=MetGuide&p=references" target="Contentframe">{-#treferences#-}</a></li>
-	{-else-}
+ {-else-}
 	<h3>{-#thlptitle#-}</h3>
 	<li><a href="?m=DI8Info&p=intro" target="Contentframe">{-#thlpintro#-}</a></li>
 	<li><a href="?m=DI8Info&p=portal" target="Contentframe">{-#thlpportal#-}</li>
@@ -31,8 +36,7 @@
 	</ul>
 	<br>
 	<li><a href="?m=DI8Info&p=moddc" target="Contentframe">{-#thlpdcmod#-}</li>
-	{-/if-}
-
+ {-/if-}
 {-**** MAIN FRAME SECTION ****-}
 {-elseif $ctl_page == 'main'-}
 <html>

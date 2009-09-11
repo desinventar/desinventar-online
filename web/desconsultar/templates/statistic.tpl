@@ -54,10 +54,17 @@
 {-foreach name=sel key=key item=item from=$sel-}
  {-strip-}
 		 <th class="header">
+		  <table cellpadding=0 cellspacing=0 border=0>
+		  <tr><td>
 		  <a href="javascript:void(null)" onclick="mod='std'; updateList('lst_dis', 'statistic.php', 
-   				'r={-$reg-}&page='+ $('pp').value +'&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}&ord={-$item-}&geo={-$geo-}');">
-{-if $item =="DisasterId_"-} {-#trepnum#-} {-elseif $item != "DisasterId"-} {-$dk.$item-} {-/if-}
-		  </a>
+		  'r={-$reg-}&page='+ $('pp').value +'&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}&ord={-$item-}&geo={-$geo-}&dir=ASC');"><img src="../images/asc.gif" border=0></a>
+		  </td><td>
+{-if $item =="DisasterId_"-}{-#trepnum#-}{-elseif $item != "DisasterId"-}{-$dk.$item-}{-/if-}
+		  </td><td>
+		  <a href="javascript:void(null)" onclick="mod='std'; updateList('lst_dis', 'statistic.php', 
+		  'r={-$reg-}&page='+ $('pp').value +'&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}&ord={-$item-}&geo={-$geo-}&dir=DESC');"><img src="../images/desc.gif" border=0></a>
+		  </td></tr>
+		  </table>
 		 </th>
  {-/strip-}
 {-/foreach-}

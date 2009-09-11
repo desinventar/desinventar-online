@@ -41,58 +41,60 @@ switch ($lg) {
 	break;
 }
 ?>
+<script type="text/javascript" language="javascript">
+// personalization List menu..
+function displayList(elem) {
+	var ele = null;
+	lst = 7;
+	for (i=1; i <= lst; i++) {
+		ele = document.getElementById("sect"+ i);
+		if (i == elem)
+			ele.style.display = 'block';
+		else
+			ele.style.display = 'none';
+	}
+}
+</script>
 <table border=0>
 	<tr valign="top">
 	 <td>
 		<!-- Regions -->
-		<script type="text/javascript" language="javascript">
-		// personalization List menu..
-		function displayList(elem) {
-			lst = 7;
-			for (i=1; i <= lst; i++) {
-				if (i == elem)
-					$("sect"+ i).style.display = 'block';
-				else
-					$("sect"+ i).style.display = 'none';
-			}
-		}
-		</script>
 		<table border=0 cellpadding=0 cellspacing=0>
 			<tr><td>
 				<!-- ANDIAN SUBREGION -->
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
-					<tr><td><img src="../images/p_paises1.gif" width=5 height=16></td>
+					<tr><td><img src="/default/images/p_paises1.gif" width=5 height=16></td>
 							<td width="32px" bgcolor="#fcc700"><?php echo $tcountries; ?></td>
-					<td><img src="../images/p_paises3.gif" width=73 height=16></td></tr>
+					<td><img src="/default/images/p_paises3.gif" width=73 height=16></td></tr>
 					<tr><td colspan="3">
-						<img src="../images/p_ini.gif" width="133" height="5"></td></tr>
+						<img src="/default/images/p_ini.gif" width="133" height="5"></td></tr>
 					<tr><td class="paisel" colspan="3">
 						<a href="javascript:void(null);" 
 								onClick="displayList('6');"><?php echo $treg6; ?></a></td></tr>
 					<tr><td colspan="3">
-						<img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
+						<img src="/default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect6">
 					<tr><td class="pais">&nbsp;&nbsp;&nbsp; >
 						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'c=BOL');">Bolivia</a>
 					</td></tr>
-					<tr><td><img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
+					<tr><td><img src="/default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais">&nbsp;&nbsp;&nbsp; >
 						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'c=COL');">Colombia</a>
 					</td></tr>
-					<tr><td colspan="3"><img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
+					<tr><td colspan="3"><img src="/default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais">&nbsp;&nbsp;&nbsp; >
 						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'c=ECU');">Ecuador</a>
 					</td></tr>
-					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
+					<tr><td colspan="3"><img src="/default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'c=PER');">Perú</a>
 					</td></tr>
-					<tr><td colspan="3"><img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
+					<tr><td colspan="3"><img src="/default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'c=VEN');">Venezuela</a>
 					</td></tr>
-					<tr><td colspan="3"><img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
+					<tr><td colspan="3"><img src="/default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
 				<!-- ASIAN-->
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
@@ -100,25 +102,25 @@ switch ($lg) {
 						<a href="javascript:void(null);" 
 								onClick="displayList(1);"><?php echo $treg1; ?></a></td></tr>
 					<tr><td>
-						<img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
+						<img src="/default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect1" style="display:none;">
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=IND-1250695040-india_orissa_historic_inventory_of_disasters');">India - Orissa</a>
 					</td></tr>
-					<tr><td colspan="3"><img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
+					<tr><td colspan="3"><img src="/default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 <!--					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=IND-1248830503-india_tamil_nadu_historic_inventory_of_disasters');">India - Tamil Nadu</a>
 					</td></tr>
-					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
+					<tr><td colspan="3"><img src="/default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=IRN-1248830532-iran_historic_inventory_of_disasters');">Iran</a>
 					</td></tr>
-					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
+					<tr><td colspan="3"><img src="/default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=NPL-1248830584-nepal_historic_inventory_of_disasters');">Nepal</a>
 					</td></tr>
-					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>-->
+					<tr><td colspan="3"><img src="/default/images/p_sep.gif" width=133 height=6 border=0></td></tr>-->
 				</table>
 				<!-- CENTER AMERICA -->
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
@@ -126,21 +128,21 @@ switch ($lg) {
 						<a href="javascript:void(null);" 
 								onClick="displayList(2);"><?php echo $treg2; ?></a></td></tr>
 					<tr><td>
-						<img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
+						<img src="/default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect2" style="display:none;">
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=CRI-1250694968-costa_rica_inventario_historico_de_desastres');">Costa Rica</a>
 					</td></tr>
-					<tr><td colspan="3"><img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
+					<tr><td colspan="3"><img src="/default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=SLV-1250695592-el_salvador_inventario_historico_de_desastres');">El Salvador</a>
 					</td></tr>
-					<tr><td colspan="3"><img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
+					<tr><td colspan="3"><img src="/default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=PAN-1250695231-panama_inventario_de_desastres_sinaproc');">Panamá</a>
 					</td></tr>
-					<tr><td colspan="3"><img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
+					<tr><td colspan="3"><img src="/default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
 				<!-- SOUTH CONE -->
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
@@ -148,53 +150,53 @@ switch ($lg) {
 						<a href="javascript:void(null);" 
 								onClick="displayList(3);"><?php echo $treg3; ?></a></td></tr>
 					<tr><td>
-						<img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
+						<img src="/default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect3" style="display:none;">
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'c=ARG');">Argentina</a>
 					</td></tr>
-					<tr><td colspan="3"><img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
+					<tr><td colspan="3"><img src="/default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=PAR-1250695238-paraguay_inventario_historico_de_desastres');">Paraguay</a>
 					</td></tr>
-					<tr><td colspan="3"><img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
+					<tr><td colspan="3"><img src="/default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
-				<!-- BIG CHACO -->
+				<!-- BIG CHACO 
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 					<tr><td class="paisel">
 						<a href="javascript:void(null);"
 								onClick="displayList(4);"><?php echo $treg4; ?></a></td></tr>
 					<tr><td>
-						<img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
+						<img src="/default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect4" style="display:none;">
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=ARG-1250695025-argentina_gran_chaco');">Argentina</a>
 					</td></tr>
-					<tr><td colspan="3"><img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
+					<tr><td colspan="3"><img src="/default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=BOL-1250695036-bolivia_gran_chaco');">Bolivia</a>
 					</td></tr>
-					<tr><td colspan="3"><img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
+					<tr><td colspan="3"><img src="/default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=PAR-1250695038-paraguay_gran_chaco');">Paraguay</a>
 					</td></tr>
-					<tr><td colspan="3"><img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
-				</table>
+					<tr><td colspan="3"><img src="/default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
+				</table>-->
 				<!-- NORTH AMERICA -->
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 					<tr><td class="paisel">
 						<a href="javascript:void(null);" 
 								onClick="displayList(5);"><?php echo $treg5; ?></a></td></tr>
 					<tr><td>
-						<img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
+						<img src="/default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect5" style="display:none;">
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=MEX-1250695136-mexico_inventario_historico_de_desastres');">México</a>
 					</td></tr>
-					<tr><td colspan="3"><img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
+					<tr><td colspan="3"><img src="/default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
 				<!-- CITIES -->
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
@@ -206,46 +208,46 @@ switch ($lg) {
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=COL-1250694494-colombia_inventario_desastres_cali_zona_urbana');">Cali - Colombia</a>
 					</td></tr>
-					<tr><td colspan="3"><img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
+					<tr><td colspan="3"><img src="/default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
-					<tr><td colspan="3"><img src="../images/p_fin.gif" width="133" height="5"></td></tr>
+					<tr><td colspan="3"><img src="/default/images/p_fin.gif" width="133" height="5"></td></tr>
 				</table>
 				<br>
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
-					<tr><td><img src="../images/p_paises1.gif" width=5 height=16></td>
+					<tr><td><img src="/default/images/p_paises1.gif" width=5 height=16></td>
 							<td width="103px" bgcolor="#fcc700"><?php echo $tvirtualreg; ?></td>
-							<td><img src="../images/p_paises3.gif" width=25 height=16></td></tr>
-					<tr><td colspan="3"><img src="../images/p_ini.gif" width="133" height="5"></td></tr>
+							<td><img src="/default/images/p_paises3.gif" width=25 height=16></td></tr>
+					<tr><td colspan="3"><img src="/default/images/p_ini.gif" width="133" height="5"></td></tr>
 					<tr><td class="pais" colspan="3">
 						<a href="javascript:void(null)" onclick="updateList('pagecontent', 'region.php', 
 							'r=DESINV-1249040429-can_subregion_andina')"><?php echo $treg6;?></a>
 					</td></tr>
-					<tr><td colspan="3"><img src="../images/p_fin.gif" width="133" height="5"></td></tr>
-					<tr><td colspan="3"><img src="../images/p_ini.gif" width="133" height="5"></td></tr>
+					<tr><td colspan="3"><img src="/default/images/p_fin.gif" width="133" height="5"></td></tr>
+					<tr><td colspan="3"><img src="/default/images/p_ini.gif" width="133" height="5"></td></tr>
 					<tr><td class="pais" colspan="3">
 						<a href="javascript:void(null)" onclick="updateList('pagecontent', 'region.php', 
 							'r=DESINV-1249126759-subregion_gran_chaco')"><?php echo $treg8;?></a>
 					</td></tr>
-					<tr><td colspan="3"><img src="../images/p_fin.gif" width="133" height="5"></td></tr>
+					<tr><td colspan="3"><img src="/default/images/p_fin.gif" width="133" height="5"></td></tr>
 				</table>
 			</td></tr>
-			<tr><td><img src="../images/25.gif" width=150 height=52></td></tr>
+			<tr><td><img src="/default/images/25.gif" width=150 height=52></td></tr>
 		</table>
-
+		<br><br>
 		<!-- References -->
 		<table bgcolor="#CF9D15" border=0 cellpadding=0 cellspacing=0 align="center">
 			<tr><td bgcolor="white">
-				<a href="http://www.siapad.net" target="_blank"><img src="default/banner_SIAPAD.jpg" border="0"></a><br><br>
-				<a href="http://www.redbivapad.org.pe/" target="_blank"><img src="default/banner_BIVAPAD.jpg" border="0"></a><br><br>
-				<a href="http://www.desaprender.org/" target="_blank"><img src="default/banner_DESAPRENDER.gif" border="0"></a>
+				<a href="http://www.siapad.net" target="_blank"><img src="/default/images/banner_SIAPAD.jpg" border="0"></a><br><br>
+				<a href="http://www.redbivapad.org.pe/" target="_blank"><img src="/default/images/banner_BIVAPAD.jpg" border="0"></a><br><br>
+				<a href="http://www.desaprender.org/" target="_blank"><img src="/default/images/banner_DESAPRENDER.gif" border="0"></a>
 			</td></tr>
 		</table>
 	 </td>
 	 <td>
  <!--  <span style="position:relative; top: 253px; left: 180px; width:50px; height:10px;">
   	<img src="images/b_desconsultar1.jpg"></span>-->
-	<img src="default/subreg_can.jpg" alt="" usemap="#srcan" style="border-style:none" />
+	<img src="/default/images/subreg_can.jpg" alt="" usemap="#srcan" style="border-style:none" />
 	<map id="srcan" name="srcan">
 		<area shape="poly" alt="Colombia" coords="173,39,175,41,155,62,155,69,193,105,216,105,215,142,221,152,219,153,214,145,189,145,189,152,193,152,197,156,186,157,186,162,190,167,190,200,180,200,186,192,186,184,161,184,138,161,113,161,98,145,114,129,114,97,105,86,116,74,121,78,137,62,137,55,144,55,145,51,130,36,75,37,75,24,127,25,145,47,162,48" 
 					href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'c=COL')" title="Colombia" />
@@ -260,7 +262,7 @@ switch ($lg) {
 		<area shape="default" nohref="nohref" alt="" />
 	</map>
 	<p align="right">
-	<img src="default/can.jpg" border=0>
+	<img src="/default/images/can.jpg" border=0>
 	</p>
 	 </td>
 	</tr>
