@@ -58,7 +58,7 @@ if (isset($_GET['cmd'])) {
 	case "insert":
 		$o = new DICause($us);
 		$o->setFromArray($_GET);
-		$o->set('CauseId', $uuid());
+		$o->set('CauseId', uuid());
 		$o->set('CausePredefined', 0);
 		$i = $o->insert();
 		showResult($i, $t);
