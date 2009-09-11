@@ -25,7 +25,7 @@ InstProgressFlags smooth
 !insertmacro MUI_LANGUAGE "English";
 !define      NAME    "DesInventar"
 !define      MAJORVER "8"
-!define      MINORVER "2.0"
+!define      MINORVER "2.0.49"
 !define      PUBLISHER "DesInventar Project - Corporación OSSO"
 !define      VERSION "${MAJORVER}.${MINORVER}"
 !define      SHORTNAME "DesInventar${MAJORVER}"
@@ -171,6 +171,7 @@ Section "Application Install"
 
 	CreateDirectory $INSTDIR\tmp
 	CreateDirectory $INSTDIR\www
+	CreateDirectory $INSTDIR\www\graphs
 	CreateDirectory $INSTDIR\data\main
 	CreateDirectory $INSTDIR\data\database
 	
