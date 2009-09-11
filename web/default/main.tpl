@@ -1,4 +1,4 @@
-{-config_load file=`$lg`.conf section="di8_web"-}
+{-config_load file=../include/`$lg`.conf section="di8_web"-}
 {-if     $page == "news"-}			{-if $lg == "es"-} Noticias {-else-} News {-/if-}
 {-elseif $page == "projects"-}	{-if $lg == "es"-} Proyectos {-else-} Projects {-/if-}
 {-elseif $page == "documents"-}	{-if $lg == "es"-} Documentos {-else-} Documents {-/if-}

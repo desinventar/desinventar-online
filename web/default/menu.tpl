@@ -12,7 +12,7 @@
 		</script>
 		<table bgcolor="#CF9D15" border=0 cellpadding=0 cellspacing=0>
 			<tr><td>
-				<!-- ANDIAN SUBREGION -->
+				<!-- ANDEAN SUBREGION -->
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 					<tr><td><img src="images/p_paises1.gif" width=5 height=16></td>
 							<td width="32px" bgcolor="#fcc700">{-#tcountries#-}</td>
@@ -27,15 +27,15 @@
 				</table>
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect6">
 					<tr><td class="pais">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'c=BOL');">Bolivia</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'c=BOL');">{-#tcountryBOL#-}</a>
 					</td></tr>
 					<tr><td><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'c=COL');">Colombia</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'c=COL');">{-#tcountryCOL#-}</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'c=ECU');">Ecuador</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'c=ECU');">{-#tcountryECU#-}</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
@@ -127,7 +127,7 @@
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=BOL-1250695036-bolivia_gran_chaco');">Bolivia</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=BOL-1250695036-bolivia_gran_chaco');">{-#tcountryBOL#-}</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
@@ -157,7 +157,7 @@
 				</table>
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect7" style="display:none;">
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=COL-1250694494-colombia_inventario_desastres_cali_zona_urbana');">Cali - Colombia</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=COL-1250694494-colombia_inventario_desastres_cali_zona_urbana');">Cali - {-#tcountryCOL#-}</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
