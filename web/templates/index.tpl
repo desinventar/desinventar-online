@@ -4,6 +4,20 @@
  {-if $page == "MainPageDI8" || $page == "MainPagewhatis" || $page == "MainPagecredits" || $page == "MainPagecontactus"-}
  	{-$menu.$page[2]-}
  {-/if-}
+{-elseif $ctl_init-}
+	<h2>{-#tdbavail#-}</h2>
+	<table border=0>
+	 <tr valign="top">
+	  <td>
+ {-foreach name=regions key=key item=item from=$reglst-}
+		<li><a href="javascript:void(null);" onclick="updateList('reginfo', 'region.php', 'r={-$key-}');">{-$item-}</a></li>
+ {-/foreach-}
+	  </td>
+	  <td>
+		<div id="reginfo"></div>
+	  </td>
+	 </tr>
+	</table>
 {-**** DEFAULT MAINPAGE (PORTAL) ****-}
 {-else-}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

@@ -23,9 +23,14 @@ if (isset($_GET['p'])) {
 	if ($_GET['p'] == 'init') {
 		if (file_exists('default/index.php'))
 			header("Location:default/index.php");
-		else
-			header("Location:doc/index.php?m=start&p=index");
-		exit();
+		else {
+			$reglst = array();
+			$result = $d->core->query("SELECT RegionId, RegionLabel FROM Region WHERE RegionStatus=3 ORDER BY RegionLabel, RegionOrder");
+			while ($row = $result->fetch(PDO::FETCH_OBJ))
+				$reglst[$row->RegionId] = $row->RegionLabel;
+			$t->assign ("ctl_init", true);
+			$t->assign ("reglst", $reglst);
+		}
 	}
 	else {
 		$t->assign ("ctl_pages", true);
@@ -40,7 +45,7 @@ else {
 	$t->assign ("lglst", $d->loadLanguages(1));
 	// load available countries with databases
 	$ctlst = array();
-	$result = $d->core->query("SELECT CountryIso FROM Region WHERE RegionStatus=1 GROUP BY CountryIso");
+	$result = $d->core->query("SELECT CountryIso FROM Region WHERE RegionStatus=3 GROUP BY CountryIso");
 	while ($row = $result->fetch(PDO::FETCH_OBJ))
 		$ctlst[] = $row->CountryIso;
 	$t->assign ("ctlst", $ctlst);
