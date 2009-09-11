@@ -332,12 +332,12 @@
 		<table width="900px">
 			<tr>
 				<td>
-					<input type="button" id="cardnew" class="bb bnew" onmouseover="Tip('{-#bnew#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardnew');">
+					<input type="button" id="cardnew" class="bb bnew" onmouseover="Tip('{-#tnewtitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardnew');">
 					<input type="button" id="cardupd" class="bb bupd" onmouseover="Tip('{-#tupdtitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardupd');">
-					<input type="button" id="cardsav" class="bb bsave" onmouseover="Tip('{-#bsave#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardsav');">
-					<input type="button" id="cardcln" class="bb bclean" onmouseover="Tip('{-#bclean#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardcln');">
-					<input type="button" id="cardcan" class="bb bcancel" onmouseover="Tip('{-#bcancel#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardcan');">
-					<input type="button" id="cardprn" class="bb bprint" onmouseover="Tip('{-#bprint#-}')" onmouseout="UnTip()" onClick="window.print();">
+					<input type="button" id="cardsav" class="bb bsave" onmouseover="Tip('{-#tsavtitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardsav');">
+					<input type="button" id="cardcln" class="bb bclean" onmouseover="Tip('{-#tclntitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardcln');">
+					<input type="button" id="cardcan" class="bb bcancel" onmouseover="Tip('{-#tcantitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardcan');">
+					<input type="button" id="cardprn" class="bb bprint" onmouseover="Tip(' PRINT ')" onmouseout="UnTip()" onClick="window.print();">
 					<!--<input type="button" id="cardfnd" alt="{-#bexpsearch#-}" onClick="onSubmitBtn('cardfnd');" {-$ro-}>-->
 					&nbsp;&nbsp;|&nbsp;&nbsp;
 					<input type="button" value="<<" class="bb line" onmouseover="Tip('Primera')" onmouseout="UnTip()" onClick="setDICard('{-$reg-}', {-$fst-}, '');">
