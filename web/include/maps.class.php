@@ -73,7 +73,7 @@ class Maps
 		EXTENT			-180 -90 180 90
 		SIZE				'. $x .' '. $y .'
 		SHAPEPATH		"' . str_replace('\\','/', VAR_DIR . '/database/' . $reg) . '/"
-		FONTSET			"' . str_replace('\\','/', FONTDIR) . '"
+		FONTSET			"' . str_replace('\\','/', FONTSET) . '"
 		IMAGECOLOR	255 255 255
 		PROJECTION	"proj=latlong" "ellps=WGS84" "datum=WGS84" END
 		WEB';
