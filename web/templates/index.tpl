@@ -42,7 +42,7 @@
 	}
 	window.onload = function() {
 		updateList('pagecontent', '', 'p=init');
-		updateUserBar('user.php', '{-$cmd-}', '', '');
+		updateUserBar('user.php', '', '', '');
 	}
 	window.onunload = function() {
 		// Close Modules windows
@@ -123,6 +123,7 @@
 		<div id="pagecontent">
 		</div>
 	  </td>
+	  <td class="der"><img src="images/bgder.gif" width=32 height=5></td>
 	 </tr>
 	</table>
  </td>

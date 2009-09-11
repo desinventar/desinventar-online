@@ -11,7 +11,7 @@ $t->config_dir = 'include';
 
 $d = new Query();
 
-$t->assign ("DIver", "8.2.0.45");
+$t->assign ("DIver", "8.2.0.47");
 $t->assign ("DImode", MODE);
 // 2009-01-20 (jhcaiced) At this point, loader.php should have
 // created or loaded the UserSession in the $us variable
@@ -21,7 +21,7 @@ $t->assign("stat", "on");
 // PAGES: Show Information for selected Page from top menu
 if (isset($_GET['p'])) {
 	if ($_GET['p'] == 'init') {
-		include('default/index.html');
+		include('default/index.php');
 		exit();
 	}
 	else {
