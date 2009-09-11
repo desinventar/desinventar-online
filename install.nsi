@@ -179,6 +179,7 @@ Section "Application Install"
 	File Files\database\core.db
 	File Files\database\base.db
 	File Files\database\desinventar.db
+	File Files\fonts\fontswin.txt
 
         ; Install worldmap shape file
         CreateDirectory $INSTDIR\data\main\worldmap
