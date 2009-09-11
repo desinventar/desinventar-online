@@ -306,6 +306,10 @@
 			background-image: url(../images/cancelicon.png) !important; 
 			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
 		}
+		.bclean {
+			background-image: url(../images/cleanicon.png) !important; 
+			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
+		}
 		.bfind {
 			background-image: url(../images/findicon.png) !important;
 			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
@@ -329,16 +333,15 @@
 			<tr>
 				<td>
 					<input type="button" id="cardnew" class="bb bnew" onmouseover="Tip('{-#bnew#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardnew');">
-					<input type="button" id="cardupd" class="bb bupd" onmouseover="Tip('{-#bupdate#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardupd');">
+					<input type="button" id="cardupd" class="bb bupd" onmouseover="Tip('{-#tupdtitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardupd');">
 					<input type="button" id="cardsav" class="bb bsave" onmouseover="Tip('{-#bsave#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardsav');">
-					<input type="button" id="cardcln" class="bb bnew" onmouseover="Tip('{-#bclean#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardcln');">
+					<input type="button" id="cardcln" class="bb bclean" onmouseover="Tip('{-#bclean#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardcln');">
 					<input type="button" id="cardcan" class="bb bcancel" onmouseover="Tip('{-#bcancel#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardcan');">
 					<input type="button" id="cardprn" class="bb bprint" onmouseover="Tip('{-#bprint#-}')" onmouseout="UnTip()" onClick="window.print();">
 					<!--<input type="button" id="cardfnd" alt="{-#bexpsearch#-}" onClick="onSubmitBtn('cardfnd');" {-$ro-}>-->
 					&nbsp;&nbsp;|&nbsp;&nbsp;
 					<input type="button" value="<<" class="bb line" onmouseover="Tip('Primera')" onmouseout="UnTip()" onClick="setDICard('{-$reg-}', {-$fst-}, '');">
 					<input type="button" value="<" class="bb line" onmouseover="Tip('Anterior')" onmouseout="UnTip()" onClick="requestDCard('getPrevDId', $('DisasterId').value);">
-					<span class="dlgmsg" id="dostat"></span>
 					<input type="button" value=">" class="bb line" onmouseover="Tip('Siguiente')" onmouseout="UnTip()" onClick="requestDCard('getNextDId', $('DisasterId').value);">
 					<input type="button" value=">>" class="bb line" onmouseover="Tip('Ultima')" onmouseout="UnTip()" onClick="setDICard('{-$reg-}', {-$lst-}, '');">
 					&nbsp;&nbsp;|&nbsp;&nbsp;
@@ -350,10 +353,10 @@
 					<a href="javascript:void(null);" onClick="TagToTip('import', COPYCONTENT, false, PADDING, 0, BORDERWIDTH, 0, EXCLUSIVE, true, TITLE, '{-#mimport#-}', STICKY, true, CLOSEBTN, true);">{-#mimport#-}</a>
 {-/if-}
 					<br>
-					<span class="dlgmsg" id="distatusmsg"></span>
+					<span class="dlgmsg" id="distatusmsg"></span><span class="dlgmsg" id="dostat"></span>
 				</td>
 				<td align="right">
-					<iframe name="dic" id="dic" frameborder="1" style="height:30px; width:370px;" src="about:blank"></iframe>
+					<iframe name="dic" id="dic" frameborder="0" style="height:30px; width:370px;" src="about:blank"></iframe>
 				</td>
 			</tr>
 		</table>

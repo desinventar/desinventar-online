@@ -51,6 +51,9 @@ elseif (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
 	if (isset($_GET['view'])) {
 		if ($_GET['view'] == "info")
 			$t->assign ("ctl_reginfo", true);
+		elseif ($_GET['view'] == "profile") {
+			include('user.php');
+		}
 		elseif ($_GET['view'] == "logo") {
 			header("Content-type: Image/png");
 			$murl = VAR_DIR . "/database/". $sRegionId . "/logo.png";
@@ -82,16 +85,15 @@ elseif (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
 	$lang = $reg['LangIsoCode|'];
 	$t->assign ("lang", $lang);
 	$t->assign ("reg", $sRegionId);
-	$info1['InfoSynopsis'] = $reg['InfoSynopsis|'. $lang];
-	$info1['InfoCredits'] = $reg['InfoCredits|'. $lang];
-	$info1['InfoGeneral'] = $reg['InfoGeneral|'. $lang];
-	$info1['InfoSources'] = $reg['InfoSources|'. $lang];
-	$info2['InfoSynopsis'] = $reg['InfoSynopsis|eng'];
-	$info2['InfoCredits'] = $reg['InfoCredits|eng'];
-	$info2['InfoGeneral'] = $reg['InfoGeneral|eng'];
-	$info2['InfoSources'] = $reg['InfoSources|eng'];
-	$t->assign ("info1", $info1);
-	$t->assign ("info2", $info2);
+	if ($lang == $_SESSION['lang'])
+		$mylg = $lang;
+	else
+		$mylg = "eng";
+	$info['InfoSynopsis'] = $reg['InfoSynopsis|'. $mylg];
+	$info['InfoCredits'] = $reg['InfoCredits|'. $mylg];
+	$info['InfoGeneral'] = $reg['InfoGeneral|'. $mylg];
+	$info['InfoSources'] = $reg['InfoSources|'. $mylg];
+	$t->assign ("info", $info);
 	//$t->assign ("dbden", str2js($reg['InfoGeneral'][1]));
 } elseif (isset($_GET['cmd'])) {
 	//$q = new Query();

@@ -1,4 +1,6 @@
 {-config_load file=`$lg`.conf section="di8_region"-}
+<script type="text/javascript" src="include/prototype.js"></script>
+<script type="text/javascript" src="include/diadmin.js"></script>
 {-* ADMINREG: Interface to Edit Portal Admin *-}
 {-if $ctl_adminreg-}
 <h2>{-#ttname#-}</h2>
@@ -113,8 +115,6 @@
 
 {-**** SHOW LIST OF REGIONS BY COUNTRY (CONTENT) ****-}
 {-if $ctl_regions-}
-<script type="text/javascript" src="include/prototype.js"></script>
-<script type="text/javascript" src="include/diadmin.js"></script>
 <h2>{-$cnt-}</h2>
 <p align="justify">
 {-#tviewdbase#-}<br>
@@ -137,11 +137,9 @@
 	<td valign="center"><img src="region.php?r={-$reg-}&view=logo"></td>
 	<td valign="top">
  	  <h2>{-$regname-}</h2>
- {-if !$isvreg-}
      {-#tperiod#-}: {-$period[0]-} - {-$period[1]-}<br>
      {-#trepnum#-}: {-$dtotal-}<br>
      {-#tlastupd#-}: {-$lstupd-}<br>
- {-/if-}
 	</td>
   </tr>
  {-if !$ctl_reginfo-}
@@ -174,15 +172,11 @@
  {-/if-}
   <tr>
    <td colspan="2">
- {-if $lang != 'eng'-}
-    <p align="right">{-$lang-} | <a href="javascript:void(null);" 
-	onClick="{-foreach name=info2 key=k item=i from=$info2-}document.getElementById('{-$k-}').innerHTML='{-$i-}';{-/foreach-}">eng</a></p>
- {-/if-}
- {-foreach name=info1 key=k item=i from=$info1-}
+ {-foreach name=info key=k item=i from=$info-}
 	<fieldset>
-	 <legend><b>{-$k-}</b></legend>
+	 <legend><b><a href="javascript:void(null);" onclick="showinfo('{-$k-}')">{-$k-}</a></b></legend>
 	 <div id="{-$k-}" style="height:70px; width:540px; overflow: auto;
-		padding-left: 3px; padding-right: 3px;" align="justify">{-$i-}</div>
+		padding-left: 3px; padding-right: 3px; display: none" align="justify">{-$i-}</div>
 	</fieldset>
  {-/foreach-}
    </td>

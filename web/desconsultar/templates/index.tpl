@@ -52,6 +52,14 @@
             {  text: '{-#msavequery#-}',handler: onMenuItem  },
             {  text: '{-#mopenquery#-}',handler: onMenuItem  }]
       });
+	  var mcards = new Ext.menu.Menu({
+        id: 'cardsMenu',
+        items: [
+            {  text: 'Nueva',	handler: onMenuItem  },
+            {  text: 'Importar',handler: onMenuItem  },
+            {  text: 'Configuracion',handler: onMenuItem  }]
+      });
+
       //{  text: '{-#motherdoc#-}',		handler: onMenuItem  },
       var mhelp = new Ext.menu.Menu({
         id: 'helpMenu',
@@ -119,7 +127,7 @@
             alert("{-#tabout#-}");
           break;
           case "{-#mgotodoc#-}":
-            $('dcr').src = "../region.php?r={-$reg-}&view=info";
+            $('dcr').src = "../region.php?r={-$reg-}&view=profile";
           break;
           case "{-#motherdoc#-}":
             $('dcr').src = "../doc/LoNuevoEnDesInventar.pdf";
@@ -891,9 +899,9 @@
 				    <td>{-#mcoltransp#-} <select name="_M+Transparency" class="line">
 						<option value="10">10</option>
 						<option value="20">20</option>
-						<option value="30" selected>30</option>
+						<option value="30">30</option>
 						<option value="40">40</option>
-						<option value="50">50</option>
+						<option value="50" selected>50</option>
 						<option value="60">60</option>
 						<option value="70">70</option>
 						<option value="80">80</option>
@@ -1425,8 +1433,7 @@
         <label for="{-$key-}" onMouseOver="showtip('{-$item[2]-}');">{-$item[0]-}</label>
         <span id="o{-$key-}" style="display:none">
          <select id="{-$key-}[0]" name="D_{-$key-}[0]" class="small" disabled>
-          <option class="small" value=" "></option>
-          <option class="small" value="-1" {-if $qd.$ff[0] == '-1'-}selected{-/if-}>{-#teffhav#-}</option>
+          <option class="small" value="-1" selected>{-#teffhav#-}</option>
           <option class="small" value="0"  {-if $qd.$ff[0] == '0'-}selected{-/if-}>{-#teffhavnot#-}</option>
           <option class="small" value="-2" {-if $qd.$ff[0] == '-2'-}selected{-/if-}>{-#teffdontknow#-}</option>
          </select>
@@ -1635,7 +1642,7 @@
  		  </select>
 		 </td>
 		 <td align="center" valign="center">
-		  <input type="button" value="< " onClick="$('CusQry').value += this.value;" class="medium">
+		  <input type="button" value="< " onDleClick="$('CusQry').value += this.value;" class="medium">
 		  <input type="button" value="> " onClick="$('CusQry').value += this.value;" class="medium">
 		  <input type="button" value="= " onClick="$('CusQry').value += this.value;" class="medium"><br>
 		  <input type="button" value="<> " onClick="$('CusQry').value += this.value;" class="medium">

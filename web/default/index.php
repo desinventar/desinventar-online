@@ -1,5 +1,48 @@
-	<table border=0>
-	 <tr valign="top">
+<?php 
+switch ($lg) {
+	case 'spa':
+		$tcountries	= "Regiones";
+		$tvirtualreg= "Regiones virtuales";
+		$tcredits	= "En alianza estratégica con";
+		$treg1		= "Asia";
+		$treg2		= "Centro América";
+		$treg3		= "Cono Sur";
+		$treg4		= "Gran Chaco";
+		$treg5		= "Norte América";
+		$treg6		= "SubRegión Andina";
+		$treg7		= "Ciudades";
+		$treg8		= "Gran Chaco Americano";
+	break;
+	case 'por':
+		$tcountries	= "Regiões";
+		$tvirtualreg= "Regiões Virtuais";
+		$tcredits	= "Em convenio estratégico com";
+		$treg1		= "Ásia";
+		$treg2		= "América Central";
+		$treg3		= "Cone Sul";
+		$treg4		= "Grande Chaco Americano";
+		$treg5		= "América do Norte";
+		$treg6		= "Sub Região Andina";
+		$treg7		= "Cidades";
+		$treg8		= "Grande Chaco Americano";
+	break;
+	default:
+		$tcountries	= "Regions";
+		$tvirtualreg= "Virtual regions";
+		$tcredits	= "In strategic alliance with";
+		$treg1		= "Asia";
+		$treg2		= "Central America";
+		$treg3		= "Southern Cone";
+		$treg4		= "Great American Chaco";
+		$treg5		= "North America";
+		$treg6		= "Andean Subregion";
+		$treg7		= "Cities";
+		$treg8		= "Great American Chaco";
+	break;
+}
+?>
+<table border=0>
+	<tr valign="top">
 	 <td>
 		<!-- Regions -->
 		<script type="text/javascript" language="javascript">
@@ -14,18 +57,18 @@
 			}
 		}
 		</script>
-		<table bgcolor="#CF9D15" border=0 cellpadding=0 cellspacing=0>
+		<table border=0 cellpadding=0 cellspacing=0>
 			<tr><td>
 				<!-- ANDIAN SUBREGION -->
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 					<tr><td><img src="../images/p_paises1.gif" width=5 height=16></td>
-							<td width="32px" bgcolor="#fcc700">Paises</td>
+							<td width="32px" bgcolor="#fcc700"><?php echo $tcountries; ?></td>
 					<td><img src="../images/p_paises3.gif" width=73 height=16></td></tr>
 					<tr><td colspan="3">
 						<img src="../images/p_ini.gif" width="133" height="5"></td></tr>
 					<tr><td class="paisel" colspan="3">
 						<a href="javascript:void(null);" 
-								onClick="displayList('6');">{-#treg6#-}</a></td></tr>
+								onClick="displayList('6');"><?php echo $treg6; ?></a></td></tr>
 					<tr><td colspan="3">
 						<img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
@@ -55,7 +98,7 @@
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 					<tr><td class="paisel">
 						<a href="javascript:void(null);" 
-								onClick="displayList(1);">{-#treg1#-}</a></td></tr>
+								onClick="displayList(1);"><?php echo $treg1; ?></a></td></tr>
 					<tr><td>
 						<img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
@@ -81,7 +124,7 @@
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 					<tr><td class="paisel">
 						<a href="javascript:void(null);" 
-								onClick="displayList(2);">{-#treg2#-}</a></td></tr>
+								onClick="displayList(2);"><?php echo $treg2; ?></a></td></tr>
 					<tr><td>
 						<img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
@@ -103,7 +146,7 @@
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 					<tr><td class="paisel">
 						<a href="javascript:void(null);" 
-								onClick="displayList(3);">{-#treg3#-}</a></td></tr>
+								onClick="displayList(3);"><?php echo $treg3; ?></a></td></tr>
 					<tr><td>
 						<img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
@@ -121,7 +164,7 @@
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 					<tr><td class="paisel">
 						<a href="javascript:void(null);"
-								onClick="displayList(4);">{-#treg4#-}</a></td></tr>
+								onClick="displayList(4);"><?php echo $treg4; ?></a></td></tr>
 					<tr><td>
 						<img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
@@ -143,7 +186,7 @@
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 					<tr><td class="paisel">
 						<a href="javascript:void(null);" 
-								onClick="displayList(5);">{-#treg5#-}</a></td></tr>
+								onClick="displayList(5);"><?php echo $treg5; ?></a></td></tr>
 					<tr><td>
 						<img src="../images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
@@ -157,7 +200,7 @@
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 					<tr><td class="paisel">
 						<a href="javascript:void(null);" 
-								onClick="displayList(7);">{-#treg7#-}</a></td></tr>
+								onClick="displayList(7);"><?php echo $treg7; ?></a></td></tr>
 				</table>
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect7" style="display:none;">
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
@@ -171,16 +214,18 @@
 				<br>
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 					<tr><td><img src="../images/p_paises1.gif" width=5 height=16></td>
-							<td width="103px" bgcolor="#fcc700">{-#tvirtualreg#-}</td>
+							<td width="103px" bgcolor="#fcc700"><?php echo $tvirtualreg; ?></td>
 							<td><img src="../images/p_paises3.gif" width=25 height=16></td></tr>
 					<tr><td colspan="3"><img src="../images/p_ini.gif" width="133" height="5"></td></tr>
 					<tr><td class="pais" colspan="3">
-						<a href="javascript:void(null)" onclick="updateList('pagecontent', 'region.php', 'r=DESINV-1249040429-can_subregion_andina')">{-#treg6#-}</a>
+						<a href="javascript:void(null)" onclick="updateList('pagecontent', 'region.php', 
+							'r=DESINV-1249040429-can_subregion_andina')"><?php echo $treg6;?></a>
 					</td></tr>
 					<tr><td colspan="3"><img src="../images/p_fin.gif" width="133" height="5"></td></tr>
 					<tr><td colspan="3"><img src="../images/p_ini.gif" width="133" height="5"></td></tr>
 					<tr><td class="pais" colspan="3">
-						<a href="javascript:void(null)" onclick="updateList('pagecontent', 'region.php', 'r=DESINV-1249126759-subregion_gran_chaco')">{-#treg8#-}</a>
+						<a href="javascript:void(null)" onclick="updateList('pagecontent', 'region.php', 
+							'r=DESINV-1249126759-subregion_gran_chaco')"><?php echo $treg8;?></a>
 					</td></tr>
 					<tr><td colspan="3"><img src="../images/p_fin.gif" width="133" height="5"></td></tr>
 				</table>
@@ -217,6 +262,6 @@
 	<p align="right">
 	<img src="default/can.jpg" border=0>
 	</p>
-	</td>
+	 </td>
 	</tr>
-	</table>
+</table>
