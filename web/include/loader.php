@@ -270,6 +270,9 @@ if (MODE != "command") {
 				case 'es':
 					$IsoLang = 'spa';
 					break;
+				case 'pt':
+					$IsoLang = 'por';
+					break;
 				} //switch
 			} //if
 		} //foreach
