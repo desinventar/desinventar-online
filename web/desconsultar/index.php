@@ -57,18 +57,24 @@ if (! file_exists($us->q->getDBFile($reg))) {
 	exit();
 }
 
-// Display Geographic list of childs..
 if (isset($get['cmd'])) {
-  if ($get['cmd'] == "getGeoId") {
-    $code = $q->getObjectNameById($get['GeoCode'], "GEOCODE");
-    echo "$code";
-  }
-  // Display Geographic list of childs..
-  elseif ($get['cmd'] == "glist") {
-    $t->assign ("reg", $get['GeographyId']);
-    $t->assign ("geol", $q->loadGeoChilds($get['GeographyId']));
-    $t->assign ("ctl_glist", true);
-  }
+	switch ($get['cmd']) {
+		case "getGeoId":
+			$code = $q->getObjectNameById($get['GeoCode'], "GEOCODE");
+			echo "$code";
+		break;
+		case "glist":
+			$t->assign ("reg", $get['GeographyId']);
+			$t->assign ("geol", $q->loadGeoChilds($get['GeographyId']));
+			$t->assign ("ctl_glist", true);
+		break;
+		case "runimport":
+			
+		break;
+		case "runconfig":
+			
+		break;
+	}
 }
 else {
 	$t->assign ("lglst", $q->loadLanguages(1));

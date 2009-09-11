@@ -14,6 +14,7 @@
   <script type="text/javascript" src="../include/checktree.js"></script>
   <script type="text/javascript" src="../include/wd.js"></script>
   <script type="text/javascript" src="../include/accordion.js"></script>
+  <script type="text/javascript" src="../include/palette.js"></script>
   <!-- ExtJS 2.0.1 -->
   <link rel="stylesheet" type="text/css" href="/extJS/resources/css/ext-all.css"/>
   <link rel="stylesheet" type="text/css" href="/extJS/resources/css/xtheme-gray.css"/>
@@ -40,7 +41,6 @@
 				   '-']
 				}
 			}, '-',
-			{  text: '{-#mdcsection#-}',handler: onMenuItem }, '-',
             {  text: '{-#mprint#-}',	handler: onMenuItem  },
             {  text: '{-#mquit#-}',		handler: onMenuItem  }]
       });
@@ -55,11 +55,14 @@
 	  var mcards = new Ext.menu.Menu({
         id: 'cardsMenu',
         items: [
-            {  text: 'Nueva',	handler: onMenuItem  },
-            {  text: 'Importar',handler: onMenuItem  },
-            {  text: 'Configuracion',handler: onMenuItem  }]
-      });
-
+{-if $role != ""-}
+			{  text: '{-#minsert#-}',	handler: onMenuItem  },
+            {  text: '{-#mimport#-}',	handler: onMenuItem  },
+{-/if-}
+{-if $role == "OBSERVER" || $role == "ADMINREGION"-}
+            {  text: '{-#mconfig#-}',	handler: onMenuItem  }]
+{-/if-}
+		});
       //{  text: '{-#motherdoc#-}',		handler: onMenuItem  },
       var mhelp = new Ext.menu.Menu({
         id: 'helpMenu',
@@ -72,8 +75,9 @@
       tb.render('toolbar');
       tb.add(     {text:  '{-#mfile#-}',   menu: mfile  });
       tb.add('-', {text:  '{-#msearch#-}', menu: mquery });
+      tb.add('-', {text:  '{-#mdcsection#-}', 	   menu: mcards });
       tb.add('-', {text:  '{-#mhelp#-}',   menu: mhelp  });
-      //
+	  //tb.add('->', {text: 'OK'});
       function onMenuItem(item){
         switch (item.text) {
 {-foreach name=lglst key=key item=item from=$lglst-}
@@ -81,9 +85,6 @@
 			window.location = "index.php?lang={-$key-}";
 		  break;
 {-/foreach-}
-		  case "{-#mdcsection#-}":
-			difw.show();
-		  break;
           case "{-#mprint#-}":
             window.print();
           break;
@@ -123,6 +124,21 @@
             else
             	w.expand(); //show()
           break;
+		  case "{-#minsert#-}":
+			difw.show();
+		  break;
+		  case "{-#mimport#-}":
+			w = Ext.getCmp('westm');
+			w.hide();
+			// open import
+			//onclose reload w
+		  break;
+		  case "{-#mconfig#-}":
+			w = Ext.getCmp('westm');
+			w.hide();
+			// open config
+			//onclose reload w
+		  break;
           case "{-#mabout#-}":
             alert("{-#tabout#-}");
           break;
@@ -140,12 +156,12 @@
       // layout
       var viewport = new Ext.Viewport({
         layout:'border',
-        items:[ {
-            region:'north',
+        items:[
+		  { region:'north',
             height: 30,
             contentEl: 'north'
-          },{
-            region: 'south',
+          },
+		  { region: 'south',
             id: 'southm',
             split: false,
             title: '{-#tmguidedef#-}',
@@ -155,14 +171,15 @@
             margins: '0 0 0 0',
             contentEl: 'south',
             collapsible: true
-          }, new Ext.Panel({
+          },
+		  new Ext.Panel({
             region: 'center',
             id: 'centerm',
 			//title: '{-#tsubtitle2#-}',
             contentEl: 'container',
 			autoScroll: true
-          }),{
-            region: 'west',
+          }),
+		  { region: 'west',
             id: 'westm',
             split: false,
             width: 300,
@@ -171,7 +188,8 @@
             margins:'0 2 0 0',
             collapsible: true,
             contentEl: 'west'
-          }/*,{
+          }
+		  /*,{
 			region: 'east',
 			id: 'eastm',
 			split: true,
@@ -182,7 +200,8 @@
 			margins: '0 0 0 2',
 			collapsible: true,
 			contentEl: 'east'
-		  }*/]
+		  }*/
+		]
       });
 	  w = Ext.getCmp('westm');
 	  //e = Ext.getCmp('eastm'); e.hide();
@@ -604,6 +623,7 @@
 		// select optimal height in results frame
 		//varhgt = screen.height * 360 / 600;
 		//$('dcr').style = "height:"+ hgt + "px;"
+		//myAjax = new Ajax.Updater($('import'), 'import.php', {method:'get', parameters:''});
 {-foreach name=ef1 key=k item=i from=$ef1-}
 {-assign var="ff" value=D_$k-}
 {-if $qd.$ff[0] != ''-}
@@ -637,14 +657,6 @@
 {-/if-}
 {-/foreach-}
 	}
-  </script>
-  <!--
-   <link rel="stylesheet" href="../css/tabquery.css" TYPE="text/css">
-    //document.write('<style type="text/css">.tabber{display:none;}<\/style>');
-    <script type="text/javascript" src="../include/tabber.js"></script>-->
-  <!-- MAP extra -->
-  <script type="text/javascript" src="../include/palette.js"></script>
-  <script type="text/javascript">
 	function addRowToTable() {
 		var tbl = $('tbl_range');
 		var lastRow = tbl.rows.length;
@@ -747,8 +759,45 @@
 			$('_M+ic['+ i + ']').style.backgroundColor = val;
 		}
 	}
-  </script>
-  <script type="text/javascript" src="../include/listMan.js"></script>
+	document.write('<style type="text/css">.tabber{display:none;}<\/style>');
+	var tabberOptions = {
+		'onClick': function(argsObj) {
+			var t = argsObj.tabber; /* Tabber object */
+			var i = argsObj.index; /* Which tab was clicked (0..n) */
+			var div = this.tabs[i].div; /* The tab content div */
+			/* Display a loading message */
+			div.innerHTML = waiting;
+			switch (i) {
+				case 0 :
+					myAjax = new Ajax.Updater(div, '../desinventar/region.php', {method:'get', parameters:''});
+				break;
+				case 1 :
+					myAjax = new Ajax.Updater(div, '../desinventar/geolevel.php', {method:'get', parameters:''});
+				break;
+				case 2 :
+					myAjax = new Ajax.Updater(div, '../desinventar/geography.php', {method:'get', parameters:''});
+				break;
+				case 3 :
+					myAjax = new Ajax.Updater(div, '../desinventar/events.php', {method:'get', parameters:''});
+				break;
+				case 4 :
+					myAjax = new Ajax.Updater(div, '../desinventar/causes.php', {method:'get', parameters:''});
+				break;
+				case 5 :
+					myAjax = new Ajax.Updater(div, '../desinventar/extraeffects.php', {method:'get', parameters:''});
+				break;
+			}
+		},
+		'onLoad': function(argsObj) {
+			/* Load the first tab */
+			argsObj.index = 0;
+			this.onClick(argsObj);
+		},
+	}
+	</script>
+	<link rel="stylesheet" href="../css/tabquery.css" TYPE="text/css">
+	<script type="text/javascript" src="../include/tabber.js"></script>
+	<script type="text/javascript" src="../include/listMan.js"></script>
 	<style type="text/css">
 		.bsave {
 			background-image: url(../images/saveicon.png) !important;
@@ -766,7 +815,21 @@
     <div id="toolbar"></div>
  </div>
  <div id="container">
-   <table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<!-- -Configuration -->
+	<div id="config" style="visibility: hidden;">
+		<div class="tabber">
+		 <div class="tabbertab"><h2>{-#mreginfo#-}</h2><p></p></div>
+		 <div class="tabbertab"><h2>{-#mgeolevel#-}</h2><p></p></div>
+		 <div class="tabbertab"><h2>{-#mgeography#-}</h2><p></p></div>
+		 <div class="tabbertab"><h2>{-#mevents#-}</h2><p></p></div>
+		 <div class="tabbertab"><h2>{-#mcauses#-}</h2><p></p></div>
+		 <div class="tabbertab"><h2>{-#meeffects#-}</h2><p></p></div>
+		</div>
+	</div>
+	<!-- Importation -->
+	<div id="import" style="visibility: hidden;">
+	</div>
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
      <tr bgcolor="#bbbbbb">
        <td width="200px">
        	<b>{-#tsubtitle2#-} =></b>
