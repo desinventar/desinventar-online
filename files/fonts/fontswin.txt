@@ -1,0 +1,5 @@
+arial                           c:/windows/fonts/arial.ttf
+arial-bold			c:/windows/fonts/arialb.ttf
+arial-italic			c:/windows/fonts/ariali.ttf
+arial-bolditalic		c:/windows/fonts/arialbi.ttf
+

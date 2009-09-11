@@ -121,18 +121,19 @@ if (isset($_SERVER["HTTP_HOST"])) {
 		//                       installation path	
 		$shell = new COM("WScript.Shell") or die("Requires Windows Scripting Host");
 		$Install_Dir = $shell->RegRead("HKEY_LOCAL_MACHINE\\Software\\OSSO\\DesInventar8\Install_Dir");		
-		define("SMARTYDIR", $Install_Dir . "\ms4w\apps\Smarty\libs");
-		define("JPGRAPHDIR", $Install_Dir . "\ms4w\apps\jpgraph\src");
+		define("SMARTYDIR", $Install_Dir . "/ms4w/apps/Smarty/libs");
+		define("JPGRAPHDIR", $Install_Dir . "/ms4w/apps/jpgraph/src");
 		define("TEMP", $Install_Dir . "\tmp");
 		// MS4W doesn't load the gd extension by default, so we do here now...
 		if (!extension_loaded( 'gd' )) {
 			//dl( 'php_gd2.'.PHP_SHLIB_SUFFIX);
 		}
-		$_SERVER['DI8_WEB'] = $Install_Dir . '\ms4w\Apache\htdocs';
-		$_SERVER['DI8_WWWDIR'] = $Install_Dir . '\www';
-		$_SERVER['DI8_DATADIR'] = $Install_Dir . '\data';
-		$_SERVER['DI8_CACHEDIR'] = $Install_Dir . '\tmp';
-		$FBCore = $Install_Dir . '\ms4w\apps\FirePHPCore-0.3.1\lib\FirePHPCore\fb.php';
+		$_SERVER['DI8_WEB'] = $Install_Dir . '/ms4w/Apache/htdocs';
+		$_SERVER['DI8_WWWDIR'] = $Install_Dir . '/www';
+		$_SERVER['DI8_DATADIR'] = $Install_Dir . '/data';
+		$_SERVER['DI8_CACHEDIR'] = $Install_Dir . '/tmp';
+		define("FONTSET" , $Install_Dir . '/data/main/fontswin.txt');	
+		$FBCore = $Install_Dir . '/ms4w/apps/FirePHPCore-0.3.1/lib/FirePHPCore/fb.php';
 	} else {
 		// Running on a Linux Server
 		define('MODE', "online");
@@ -141,6 +142,7 @@ if (isset($_SERVER["HTTP_HOST"])) {
 		define("SMARTYDIR", "/usr/share/php/Smarty");
 		define("TEMP", "/tmp");
 		define("JPGRAPHDIR", "/usr/share/php/jpgraph");
+		define("FONTSET" , "/usr/share/fonts/liberation/fonts.txt");
 		$FBCore = '/usr/share/pear/FirePHPCore/fb.php';
 	}
 } else {
@@ -212,7 +214,6 @@ if (isset($_SERVER["DI8_WEB"])) {
 	define("WWWURL"  , "/");
 	define("DATADIR" , $_SERVER["DI8_DATADIR"]);
 	define("CACHEDIR", $_SERVER["DI8_CACHEDIR"]);
-	define("FONTDIR" , "/usr/share/fonts/liberation/fonts.txt");	
 } else {
 	if (isset($_SERVER["DI8_WEBLOCAL"])) {
 		define("BASE", $_SERVER["DI8_WEBLOCAL"]);
@@ -227,7 +228,7 @@ if (isset($_SERVER["DI8_WEB"])) {
 	define("WWWURL"  , "/");
 	define("DATADIR" , "D:/desinventar/data");
 	define("CACHEDIR", DATADIR . '/tmp');
-	define("FONTDIR" , DATADIR . '/fonts.txt');
+	define("FONTSET" , DATADIR . '/fonts.txt');
 }
 define("VAR_DIR" , DATADIR);
 define("TMP_DIR" , DATADIR);
