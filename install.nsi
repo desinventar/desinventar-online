@@ -57,10 +57,10 @@ Page custom apachePortPage apachePortPageLeave ": Apache Port"
 ;!insertmacro MUI_PAGE_FINISH
 
 ; UnInstall Pages
-!insertmacro MUI_UNPAGE_WELCOME
+;!insertmacro MUI_UNPAGE_WELCOME
 !insertmacro MUI_UNPAGE_CONFIRM
 !insertmacro MUI_UNPAGE_INSTFILES
-!insertmacro MUI_UNPAGE_FINISH
+;!insertmacro MUI_UNPAGE_FINISH
 
 Var INSTDIR_forward
 Var Return
@@ -187,14 +187,15 @@ Section "Application Install"
 	ZipDLL::extractall "$EXEDIR\${distFile}" '$INSTDIR\data\main\worldmap'
 	!undef distFile
 
+	SetOutPath $INSTDIR\ms4w
+	File Files\conf\apache-start.bat
+	File Files\conf\apache-stop.bat
+	
 	SetOutPath $INSTDIR\ms4w\httpd.d
 	File Files\conf\httpd_extJS.conf
 	File Files\conf\httpd_jquery.conf
 	File Files\conf\httpd_openlayers.conf
 	File Files\conf\httpd_desinventar-8.2-data.conf
-	
-	;MessageBox MB_OK $INSTDIR"\n"$INSTDIR_forward
-	WriteUninstaller "uninstall.exe"
 	
 	;Store installation folder in registry
 	WriteRegStr HKLM ${REGBASE} "Install_Dir" "$INSTDIR"
@@ -280,28 +281,80 @@ Section 'Install Apache Service'
 	!define FILE "$INSTDIR\ms4w\apache-install.bat"
 	${textreplace::ReplaceInFile} "${FILE}" "${FILE}" "MS4W" "${SHORTNAME}" "" $Return
 	!undef FILE
+
 	!define FILE "$INSTDIR\ms4w\apache-uninstall.bat"
 	${textreplace::ReplaceInFile} "${FILE}" "${FILE}" "MS4W" "${SHORTNAME}" "" $Return
 	!undef FILE
+
 	!define FILE "$INSTDIR\ms4w\apache-restart.bat"
 	${textreplace::ReplaceInFile} "${FILE}" "${FILE}" "MS4W" "${SHORTNAME}" "" $Return
 	!undef FILE
+
+	!define FILE "$INSTDIR\ms4w\apache-start.bat"
+	${textreplace::ReplaceInFile} "${FILE}" "${FILE}" "MS4W" "${SHORTNAME}" "" $Return
+	!undef FILE
+
+	!define FILE "$INSTDIR\ms4w\apache-stop.bat"
+	${textreplace::ReplaceInFile} "${FILE}" "${FILE}" "MS4W" "${SHORTNAME}" "" $Return
+	!undef FILE
+
 	; Create Apache Service
     SectionIn RO
     SetOutPath '$INSTDIR\ms4w'
     ExecWait 'apache-install.bat' $0
 SectionEnd
 
+!Macro "CreateURL" "URLFile" "URLSite" "URLDesc"
+  WriteINIStr "$EXEDIR\${URLFile}.URL" "InternetShortcut" "URL" "${URLSite}"
+  SetShellVarContext "all"
+  CreateShortCut "$DESKTOP\${URLFile}.lnk" "$EXEDIR\${URLFile}.url" "" \
+                 "$EXEDIR\makeURL.exe" 0 "SW_SHOWNORMAL" "" "${URLDesc}"
+!macroend
+
+Section "Create Shortcuts"
+    SectionIn RO
+	SetShellVarContext all
+	;MessageBox MB_OK $INSTDIR"\n"$INSTDIR_forward
+	SetOutPath '$INSTDIR'
+	WriteUninstaller "uninstall.exe"
+	CreateDirectory "$SMPROGRAMS\${SHORTNAME}"
+	WriteINIStr "$INSTDIR\${SHORTNAME}.url" "InternetShortcut" "URL" "http://127.0.0.1:${HTTPDPORT}"
+	CreateShortCut "$DESKTOP\${SHORTNAME}.lnk" "$INSTDIR\${SHORTNAME}.url" "" \
+                   "$EXEDIR\makeURL.exe" 0 "SW_SHOWNORMAL" "" "${SHORTNAME} Local"
+	CreateShortCut "$SMPROGRAMS\${SHORTNAME}\${SHORTNAME}.lnk" "$INSTDIR\${SHORTNAME}.url" "" \
+                   "$EXEDIR\makeURL.exe" 0 "SW_SHOWNORMAL" "" "${SHORTNAME} Local"
+	CreateShortCut "$SMPROGRAMS\${SHORTNAME}\${SHORTNAME} Apache Restart.lnk" "$INSTDIR\ms4w\apache-restart.bat"
+	CreateShortCut "$SMPROGRAMS\${SHORTNAME}\${SHORTNAME} Apache Start.lnk" "$INSTDIR\ms4w\apache-start.bat"
+	CreateShortCut "$SMPROGRAMS\${SHORTNAME}\${SHORTNAME} Apache Stop.lnk" "$INSTDIR\ms4w\apache-stop.bat"
+	CreateShortCut "$SMPROGRAMS\${SHORTNAME}\UnInstall.lnk" "$INSTDIR\uninstall.exe"
+SectionEnd
+
 Section "Uninstall"
+	SectionIn RO
+	SetShellVarContext all
+	
+	; Always remove uninstaller.exe first
+	Delete $INSTDIR\uninstall.exe
+
 	; Remove Apache Service
 	SetOutPath '$INSTDIR\ms4w'
 	ExecWait 'apache-uninstall.bat' $0
 
 	;Remove All Files
 	RMDir /r $INSTDIR
-	;Remove StartMenu Links
-	;Remove Desktop Shortcuts
 	;Delete Registry Items
 	DeleteRegKey HKLM "${REGBASE}"
 	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${SHORTNAME}"
+	
+	;Remove Desktop Shortcuts
+	Delete "$DESKTOP\${SHORTNAME}.lnk"
+	
+	;Remove StartMenu Links
+	Delete "$SMPROGRAMS\${SHORTNAME}\UnInstall.lnk"
+	Delete "$SMPROGRAMS\${SHORTNAME}\${SHORTNAME}.lnk"
+	Delete "$SMPROGRAMS\${SHORTNAME}\${SHORTNAME} Apache Restart.lnk"
+	Delete "$SMPROGRAMS\${SHORTNAME}\${SHORTNAME} Apache Start.lnk"
+	Delete "$SMPROGRAMS\${SHORTNAME}\${SHORTNAME} Apache Stop.lnk"
+	RMDir  "$SMPROGRAMS\${SHORTNAME}"
+	messageBox MB_OK "UnInstall Complete"
 SectionEnd
