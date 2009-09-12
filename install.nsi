@@ -399,15 +399,16 @@ Section "Create Shortcuts"
 	WriteINIStr "$INSTDIR\${SHORTNAME}.url" "InternetShortcut" "URL" "http://127.0.0.1:${HTTPDPORT}"
 	WriteINIStr "$INSTDIR\${NAME} Website.url" "InternetShortcut" "URL" "http://www.desinventar.org"
 	; "$INSTDIR\${NAME}.ico"
+	; "$EXEDIR\makeURL.exe"
 	SetShellVarContext "all"
 	CreateShortCut "$DESKTOP\${SHORTNAME}.lnk" "$INSTDIR\${SHORTNAME}.url" "" \
-                   "$EXEDIR\makeURL.exe" 0 "SW_SHOWNORMAL" "" "${SHORTNAME} Local"
-	CreateShortCut "$DESKTOP\${SHORTNAME}.lnk" "$INSTDIR\${SHORTNAME}.url" "" \
-                   "$EXEDIR\makeURL.exe" 0 "SW_SHOWNORMAL" "" "${SHORTNAME} Local"
+                   "$INSTDIR\${NAME}.ico" 0 "SW_SHOWNORMAL" "" "${SHORTNAME} Local"
+	;CreateShortCut "$DESKTOP\${SHORTNAME}.lnk" "$INSTDIR\${SHORTNAME}.url" "" \
+    ;               "$EXEDIR\makeURL.exe" 0 "SW_SHOWNORMAL" "" "${SHORTNAME} Local"
 	CreateShortCut "$SMPROGRAMS\${SHORTNAME}\${SHORTNAME}.lnk" "$INSTDIR\${SHORTNAME}.url" "" \
-                   "$EXEDIR\makeURL.exe" 0 "SW_SHOWNORMAL" "" "${SHORTNAME} Local"
+                   "$INSTDIR\${NAME}.ico" 0 "SW_SHOWNORMAL" "" "${SHORTNAME} Local"
 	CreateShortCut "$SMPROGRAMS\${SHORTNAME}\${NAME} Project Website.lnk" "$INSTDIR\${NAME} Website.url" "" \
-                   "$EXEDIR\makeURL.exe" 0 "SW_SHOWNORMAL" "" "${SHORTNAME} Local"
+                   "$INSTDIR\${NAME}.ico" 0 "SW_SHOWNORMAL" "" "${SHORTNAME} Local"
 	CreateShortCut "$SMPROGRAMS\${SHORTNAME}\${SHORTNAME} Apache Restart.lnk" "$INSTDIR\ms4w\apache-restart.bat"
 	CreateShortCut "$SMPROGRAMS\${SHORTNAME}\${SHORTNAME} Apache Start.lnk" "$INSTDIR\ms4w\apache-start.bat"
 	CreateShortCut "$SMPROGRAMS\${SHORTNAME}\${SHORTNAME} Apache Stop.lnk" "$INSTDIR\ms4w\apache-stop.bat"
