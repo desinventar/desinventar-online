@@ -119,10 +119,16 @@
 			qryw.show(this);
           break;
           case "{-#mgotoqd#-}":
-            if (w.isVisible())
-            	w.collapse(); //hide()
-            else
-            	w.expand(); //show()
+			$('config').style.display = 'none';
+			$('import').style.display = 'none';
+			$('qryres').style.display = 'block';
+			$('dcr').style.display = 'block';
+			$('querydetails').style.display = 'block';
+			w.show();
+			if (w.isVisible())
+				w.collapse(); //hide()
+			else
+				w.expand(); //show()
           break;
 		  case "{-#minsert#-}":
 			difw.show();
@@ -130,12 +136,24 @@
 		  case "{-#mimport#-}":
 			w = Ext.getCmp('westm');
 			w.hide();
-			// open import
+			w.collapse();
+			$('config').style.display = 'none';
+			$('import').style.display = 'block';
+			$('qryres').style.display = 'none';
+			$('dcr').style.display = 'none';
+			$('querydetails').style.display = 'none';
+			updateList('import', '../desinventar/import.php', 'r={-$reg-}');
 			//onclose reload w
 		  break;
 		  case "{-#mconfig#-}":
 			w = Ext.getCmp('westm');
 			w.hide();
+			w.collapse();
+			$('config').style.display = 'block';
+			$('import').style.display = 'none';
+			$('qryres').style.display = 'none';
+			$('dcr').style.display = 'none';
+			$('querydetails').style.display = 'none';
 			// open config
 			//onclose reload w
 		  break;
@@ -759,6 +777,12 @@
 			$('_M+ic['+ i + ']').style.backgroundColor = val;
 		}
 	}
+	function fillObj(lst) {
+		updateList(lst, 'index.php', 'cmd='+ lst);
+		w = Ext.getCmp('westm');
+		w.show();
+		w.expand();
+	}
 	document.write('<style type="text/css">.tabber{display:none;}<\/style>');
 	var tabberOptions = {
 		'onClick': function(argsObj) {
@@ -795,7 +819,7 @@
 		},
 	}
 	</script>
-	<link rel="stylesheet" href="../css/tabquery.css" TYPE="text/css">
+	<link rel="stylesheet" href="../css/tabber.css" type="text/css">
 	<script type="text/javascript" src="../include/tabber.js"></script>
 	<script type="text/javascript" src="../include/listMan.js"></script>
 	<style type="text/css">
@@ -815,31 +839,26 @@
     <div id="toolbar"></div>
  </div>
  <div id="container">
-	<!-- -Configuration -->
-	<div id="config" style="visibility: hidden;">
-		<div class="tabber">
-		 <div class="tabbertab"><h2>{-#mreginfo#-}</h2><p></p></div>
-		 <div class="tabbertab"><h2>{-#mgeolevel#-}</h2><p></p></div>
-		 <div class="tabbertab"><h2>{-#mgeography#-}</h2><p></p></div>
-		 <div class="tabbertab"><h2>{-#mevents#-}</h2><p></p></div>
-		 <div class="tabbertab"><h2>{-#mcauses#-}</h2><p></p></div>
-		 <div class="tabbertab"><h2>{-#meeffects#-}</h2><p></p></div>
-		</div>
+	<!-- -Configuration <input type="button" value="Cerrar" onClick="fillObj('evelst');"><br> -->
+	<div id="config" class="tabber" style="display:none;">
+		<div class="tabbertab"><h2>{-#mreginfo#-}</h2><p></p></div>
+		<div class="tabbertab"><h2>{-#mgeolevel#-}</h2><p></p></div>
+		<div class="tabbertab"><h2>{-#mgeography#-}</h2><p></p></div>
+		<div class="tabbertab"><h2>{-#mevents#-}</h2><p></p></div>
+		<div class="tabbertab"><h2>{-#mcauses#-}</h2><p></p></div>
+		<div class="tabbertab"><h2>{-#meeffects#-}</h2><p></p></div>
 	</div>
-	<!-- Importation -->
-	<div id="import" style="visibility: hidden;">
-	</div>
-	<table border="0" cellpadding="0" cellspacing="0" width="100%">
-     <tr bgcolor="#bbbbbb">
+	<div id="import" style="display:none;"></div>
+	<!-- Results of query-->
+	<table id="qryres" border="0" cellpadding="0" cellspacing="0" width="100%">
+	  <tr bgcolor="#bbbbbb">
        <td width="200px">
        	<b>{-#tsubtitle2#-} =></b>
 <!--       	<img src="../images/collapse.png" onClick="var w = Ext.getCmp('westm'); w.show();">-->
        </td>
        <td align="center">
-<!--
-        SECTION : DATA CONFIGURATION
-        ============================
--->
+<!--	SECTION : DATA CONFIGURATION
+	============================ -->
         <input type="button" id="dat-btn" value="{-#bdata#-}" ext:qtip="{-#tdatamsg#-}" class="bb btn">
         <div id="dat-win" class="x-hidden">
           <div class="x-window-header">{-#bdata#-}</div>
@@ -908,10 +927,9 @@
             </form>
           </div>
         </div>
-<!--
-        SECTION : THEMATICMAP CONFIGURATION
-        ====================================
--->
+<!--	END DATA SECTION -->
+<!--	SECTION : THEMATICMAP CONFIGURATION
+	==================================== -->
         <input type="button" id="map-btn" ext:qtip="{-#tthematicmsg#-}"
            value="{-#bthematic#-}" {-if !$ctl_showmap-}style="display:none;"{-/if-} class="bb btn">
         <div id="map-win" class="x-hidden">
@@ -1016,11 +1034,9 @@
             </form>
           </div>
         </div>
-<!--     END MAP SECTION -->
-<!--
-        SECTION : GRAPHIC CONFIGURATION
-        ==============================
--->
+<!--	END MAP SECTION -->
+<!--	SECTION : GRAPHIC CONFIGURATION
+	============================== -->
         <input type="button" id="grp-btn" value="{-#bgraphic#-}" ext:qtip="{-#tgraphicmsg#-}" class="bb btn">
         <div id="grp-win" class="x-hidden">
           <div class="x-window-header">{-#bgraphic#-}</div>
@@ -1212,11 +1228,9 @@
              </form>
           </div>
         </div>
-<!--    END GRAPHIC SECTION  -->
-<!--
-        SECTION : STATISTIC CONFIGURATION
-        ==============================
--->
+<!--	END GRAPHIC SECTION  -->
+<!--	SECTION : STATISTIC CONFIGURATION
+	============================== -->
         <input type="button" id="std-btn" value="{-#bstatistic#-}" ext:qtip="{-#tstatisticmsg#-}" class="bb btn">
         <div id="std-win" class="x-hidden">
           <div class="x-window-header">{-#bstatistic#-}</div>
@@ -1319,7 +1333,7 @@
             </form>
           </div>
         </div>
-<!--    END STATISTIC SECTION  -->
+<!--	END STATISTIC SECTION  -->
        </td>
        <td>
 		<div id="qry-win" class="x-hidden">
@@ -1347,17 +1361,14 @@
 		  </div>
 		</div>
        </td>
-     </tr>
-   </table>
-<!--   SHOW RESULTS  -->
-  <div id="querydetails" style="height:40px;" class="dwin"></div>
-<!--  <div id="smap" style="position:absolute; left:0px; top:20px; visibility:hidden;">[<a href="javascript:void(0);" onClick="hideMap();">X</a>]<br></div>-->
-  <iframe name="dcr" id="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="../region.php?r={-$reg-}&view=info"></iframe>
- </div>
-<!--
-        SECTION : QUERY DESIGN 
-        ======================
--->
+	  </tr>
+	</table>
+	<div id="querydetails" style="height:40px;" class="dwin"></div>
+	<!--  <div id="smap" style="position:absolute; left:0px; top:20px; visibility:hidden;">[<a href="javascript:void(0);" onClick="hideMap();">X</a>]<br></div>-->
+	<iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="../region.php?r={-$reg-}&view=info"></iframe>
+</div>
+<!--	SECTION : QUERY DESIGN 
+	====================== -->
  <div id="west">
   <!-- BEG DI8 QUERY FORM -->
   <form id="DC" method="POST" target="dcr">
@@ -1372,7 +1383,7 @@
   {-/foreach-}
       <div style="height: 280px;" class="dwin" ext:qtip="{-#thlpquery#-}">
 {-/if-}
-{-*** Display geography lists.. ***-}
+{-** END ctl_show **-}
 {-if $ctl_glist-}
         <ul id="tree-g{-$reg-}" class="checktree">
  {-foreach name=geol key=key item=item from=$geol-}
@@ -1385,6 +1396,7 @@
  {-/foreach-}
         </ul>
 {-/if-}
+{-** END ctl_glist **-}
 {-if $ctl_show-}
       </div>
       <b onMouseOver="showtip('{-$dis.DisasterSiteNotes[2]-}');">{-$dis.DisasterSiteNotes[0]-}</b>
@@ -1399,7 +1411,9 @@
     <dt>{-#mevesection#-}</dt>
     <dd>
       <span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br>
-      <select name="D_EventId[]" multiple style="width: 250px; height: 200px;">
+      <select id="evelst" name="D_EventId[]" multiple style="width: 250px; height: 200px;">
+{-/if-}
+{-if $ctl_show || $ctl_evelst-}
  {-foreach name=eve key=key item=item from=$evepredl-}
         <option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
  {-/foreach-}
@@ -1407,6 +1421,9 @@
  {-foreach name=eve key=key item=item from=$eveuserl-}
         <option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
  {-/foreach-}
+{-/if-}
+{-** END ctl_evelst **-}
+{-if $ctl_show-}
       </select>
       <br><br>
       <b onMouseOver="showtip('{-$eve.EventDuration[2]-}');">{-$eve.EventDuration[0]-}</b><br>
@@ -1670,7 +1687,6 @@
         <input type="text" name="D_DisasterSerial[1]" class="line fixw" value="{-$qd.D_DisasterSerial[1]-}">
       </div>
     </dd>
-    <!-- END DATETIME SECTION -->
 	<!-- BEGIN CUSTOMQUERY SECTION -->
     <dt>{-#madvsection#-}</dt>
     <dd>
@@ -1705,7 +1721,7 @@
  		  </select>
 		 </td>
 		 <td align="center" valign="center">
-		  <input type="button" value="< " onDleClick="$('CusQry').value += this.value;" class="medium">
+		  <input type="button" value="< " onClick="$('CusQry').value += this.value;" class="medium">
 		  <input type="button" value="> " onClick="$('CusQry').value += this.value;" class="medium">
 		  <input type="button" value="= " onClick="$('CusQry').value += this.value;" class="medium"><br>
 		  <input type="button" value="<> " onClick="$('CusQry').value += this.value;" class="medium">
@@ -1720,7 +1736,6 @@
 	   </table>
 	  </div>
     </dd>
-    <!-- END CUSTOMQUERY SECTION -->
   </dl>
   </form>
  </div> <!-- id = west-->

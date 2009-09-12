@@ -145,22 +145,20 @@
  {-if !$ctl_reginfo-}
   <tr>
 	<td colspan=2 align="center">
+<!--
   {-if $ctl_showdimod-}
 	  &nbsp;&nbsp;
 	  <img id="dimod" src="images/b_desinventar1.jpg" border="0" style="cursor: pointer;"
 		onClick="$('dimod').src='images/b_desinventar2.jpg'; runWin('desinventar/?r={-$reg-}', 'desinventar');"
 		onMouseOver='$("dimod").src="images/b_desinventar3.jpg"; $("modinfo").innerHTML="{-#tmoddesinv#-}";'
-		onMouseOut="$('dimod').src='images/b_desinventar1.jpg'; $('modinfo').innerHTML='';"></a>
-  {-/if-}
-  {-if $ctl_showdimod || $ctl_showdcmod-}
-	  &nbsp;&nbsp; &nbsp;&nbsp;
+		onMouseOut="$('dimod').src='images/b_desinventar1.jpg'; $('modinfo').innerHTML='';"></a> &nbsp;&nbsp; &nbsp;&nbsp;
+  {-/if-} -->
+  {-if $ctl_showdcmod-}
 	  <img id="dcmod" src="images/b_desconsultar1.jpg" style="cursor: pointer;"
 		onClick="$('dcmod').src='images/b_desconsultar2.jpg'; runWin('desconsultar/?r={-$reg-}{-if $isvreg-}&v=true{-/if-}', 'desconsultar');"
-		onMouseOver='$("dcmod").src="images/b_desconsultar3.jpg"; $("modinfo").innerHTML="{-#tmoddescon#-}";'
+		onMouseOver='$("dcmod").src="images/b_desconsultar3.jpg"; $("modinfo").innerHTML="{-#tmoddescon#-}<br>{-#tmoddesinv#-}";'
 		onMouseOut="$('dcmod').src='images/b_desconsultar1.jpg'; $('modinfo').innerHTML='';">
-	  &nbsp;&nbsp;
-  {-/if-}
-  {-if !$ctl_showdimod && !$ctl_showdcmod-}
+  {-else-}
 	  <b>{-#tnopublic#-}</b><br>
   {-/if-}
   {-if $ctl_inactivereg-}
