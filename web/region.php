@@ -71,7 +71,7 @@ elseif (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
 	// Enable access only to users with a valid role in this region
 	$role = $us->getUserRole($sRegionId);
 	if ($role=="OBSERVER" || $role=="USER" || $role=="SUPERVISOR" || $role=="ADMINREGION") {
-		$t->assign ("ctl_showdimod", true);
+		//$t->assign ("ctl_showdimod", true);
 		$t->assign ("ctl_showdcmod", true);
 	}
 	// Show active or public regions only

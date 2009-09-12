@@ -68,11 +68,26 @@ if (isset($get['cmd'])) {
 			$t->assign ("geol", $q->loadGeoChilds($get['GeographyId']));
 			$t->assign ("ctl_glist", true);
 		break;
-		case "runimport":
-			
+		case "levlst":
+			$t->assign ("glev", $q->loadGeoLevels('', -1, false));
+			$t->assign ("ctl_levlst", true);
 		break;
-		case "runconfig":
-			
+		case "geolst":
+			$t->assign ("geol", $q->loadGeography(0));
+			$t->assign ("ctl_geolst", true);
+		break;
+		case "caulst":
+			$t->assign ("caupredl", $q->loadCauses("PREDEF", "active", $lg));
+			$t->assign ("cauuserl", $q->loadCauses("USER", "active", $lg));
+			$t->assign ("ctl_caulst", true);
+		break;
+		case "evelst":
+			$t->assign ("evepredl", $q->loadEvents("PREDEF", "active", $lg));
+			$t->assign ("eveuserl", $q->loadEvents("USER", "active", $lg));
+			$t->assign ("ctl_evelst", true);
+		break;
+		case "qryres":
+			$t->assign ("ctl_showqryres", true);
 		break;
 	}
 }
@@ -87,12 +102,6 @@ else {
 	$t->assign ("ctl_glist", true);
 	$t->assign ("reg", $reg);
 	$t->assign ("path", VAR_DIR);
-	$geol = $q->loadGeography(0);
-	$glev = $q->loadGeoLevels('', -1, false);
-	$evepredl = $q->loadEvents("PREDEF", "active", $lg);
-	$eveuserl = $q->loadEvents("USER", "active", $lg);
-	$caupredl = $q->loadCauses("PREDEF", "active", $lg);
-	$cauuserl = $q->loadCauses("USER", "active", $lg);
 	$t->assign ("exteffel", $q->getEEFieldList("True"));
 	// Get UserRole
 	$role = $us->getUserRole($reg);
@@ -136,12 +145,12 @@ else {
 		}
 	}
 	// List of elements: Geography, GLevels, Events, Causes..
-	$t->assign ("geol", $geol);
-	$t->assign ("glev", $glev);
-	$t->assign ("evepredl", $evepredl);
-	$t->assign ("eveuserl", $eveuserl);
-	$t->assign ("caupredl", $caupredl);
-	$t->assign ("cauuserl", $cauuserl);
+	$t->assign ("geol", $q->loadGeography(0));
+	$t->assign ("glev", $q->loadGeoLevels('', -1, false));
+	$t->assign ("evepredl", $q->loadEvents("PREDEF", "active", $lg));
+	$t->assign ("eveuserl", $q->loadEvents("USER", "active", $lg));
+	$t->assign ("caupredl", $q->loadCauses("PREDEF", "active", $lg));
+	$t->assign ("cauuserl", $q->loadCauses("USER", "active", $lg));
 	$t->assign ("ctl_show", true);
 	// Query words and phrases in dictionary..
 	$ef1 = $q->queryLabelsFromGroup('Effect|People', $lg);
