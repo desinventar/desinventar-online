@@ -781,12 +781,6 @@
 			$('_M+ic['+ i + ']').style.backgroundColor = val;
 		}
 	}
-	function fillObj(lst) {
-		updateList(lst, 'index.php', 'cmd='+ lst);
-		w = Ext.getCmp('westm');
-		w.show();
-		w.expand();
-	}
 	document.write('<style type="text/css">.tabber{display:none;}<\/style>');
 	var tabberOptions = {
 		'onClick': function(argsObj) {
@@ -843,7 +837,7 @@
     <div id="toolbar"></div>
  </div>
  <div id="container">
-	<!-- -Configuration <input type="button" value="Cerrar" onClick="fillObj('evelst');"><br> -->
+	<!-- -Configuration -->
 	<div id="config" class="tabber" style="display:none;">
 		<div class="tabbertab"><h2>{-#mreginfo#-}</h2><p></p></div>
 		<div class="tabbertab"><h2>{-#mgeolevel#-}</h2><p></p></div>
@@ -1369,7 +1363,7 @@
 	</table>
 	<div id="querydetails" style="height:40px;" class="dwin"></div>
 	<!--  <div id="smap" style="position:absolute; left:0px; top:20px; visibility:hidden;">[<a href="javascript:void(0);" onClick="hideMap();">X</a>]<br></div>-->
-	<iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="../region.php?r={-$reg-}&view=info"></iframe>
+	<iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="../region.php?r={-$reg-}&view=profile"></iframe>
  </div>
 <!--	SECTION : QUERY DESIGN 
 	====================== -->
@@ -1385,7 +1379,7 @@
   {-foreach name=glev key=k item=i from=$glev-}
       <span class="dlgmsg" onMouseOver="showtip('{-$i[1]-}');">{-$i[0]-}</span> |
   {-/foreach-}
-      <div style="height: 280px;" class="dwin" ext:qtip="{-#thlpquery#-}">
+      <div id="qgeolst" style="height: 280px;" class="dwin" ext:qtip="{-#thlpquery#-}">
 {-/if-}
 {-** END ctl_show **-}
 {-if $ctl_glist-}
@@ -1415,7 +1409,7 @@
     <dt>{-#mevesection#-}</dt>
     <dd>
       <span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br>
-      <select id="evelst" name="D_EventId[]" multiple style="width: 250px; height: 200px;">
+      <select id="qevelst" name="D_EventId[]" multiple style="width: 250px; height: 200px;">
 {-/if-}
 {-if $ctl_show || $ctl_evelst-}
  {-foreach name=eve key=key item=item from=$evepredl-}
@@ -1446,7 +1440,9 @@
     <dt>{-#mcausection#-}</dt>
     <dd>
       <span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br>
-      <select name="D_CauseId[]" multiple style="width: 250px; height: 280px;">
+      <select id="qcaulst" name="D_CauseId[]" multiple style="width: 250px; height: 280px;">
+{-/if-}
+{-if $ctl_show || $ctl_caulst-}
  {-foreach name=cau key=key item=item from=$caupredl-}
         <option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
  {-/foreach-}
@@ -1454,6 +1450,9 @@
  {-foreach name=mycau key=key item=item from=$cauuserl-}
         <option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
  {-/foreach-}
+{-/if-}
+{-** END ctl_caulst **-}
+{-if $ctl_show-}
       </select>
       <br><br>
       <b onMouseOver="showtip('{-$cau.CauseNotes[2]-}');">{-$cau.CauseNotes[0]-}</b>

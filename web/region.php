@@ -52,7 +52,7 @@ elseif (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
 		if ($_GET['view'] == "info")
 			$t->assign ("ctl_reginfo", true);
 		elseif ($_GET['view'] == "profile") {
-			include('user.php');
+			$t->assign ("ctl_reginfo", true);
 		}
 		elseif ($_GET['view'] == "logo") {
 			header("Content-type: Image/png");

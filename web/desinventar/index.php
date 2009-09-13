@@ -74,7 +74,7 @@ if (isset($get['cmd'])) {
 		break;
 		case "geolst":
 			$t->assign ("geol", $q->loadGeography(0));
-			$t->assign ("ctl_geolst", true);
+			$t->assign ("ctl_glist", true);
 		break;
 		case "caulst":
 			$t->assign ("caupredl", $q->loadCauses("PREDEF", "active", $lg));
@@ -85,9 +85,6 @@ if (isset($get['cmd'])) {
 			$t->assign ("evepredl", $q->loadEvents("PREDEF", "active", $lg));
 			$t->assign ("eveuserl", $q->loadEvents("USER", "active", $lg));
 			$t->assign ("ctl_evelst", true);
-		break;
-		case "qryres":
-			$t->assign ("ctl_showqryres", true);
 		break;
 	}
 }
