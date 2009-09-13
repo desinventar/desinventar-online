@@ -154,7 +154,7 @@
   {-if $ctl_showdcmod-}
 	  <img id="dcmod" src="images/b_desconsultar1.jpg" style="cursor: pointer;"
 		onClick="$('dcmod').src='images/b_desconsultar2.jpg'; runWin('desinventar/index.php?r={-$reg-}{-if $isvreg-}&v=true{-/if-}', 'desconsultar');"
-		onMouseOver='$("dcmod").src="images/b_desconsultar3.jpg"; $("modinfo").innerHTML="{-#tmoddescon#-";'
+		onMouseOver='$("dcmod").src="images/b_desconsultar3.jpg"; $("modinfo").innerHTML="{-#tmoddescon#-}";'
 		onMouseOut="$('dcmod').src='images/b_desconsultar1.jpg'; $('modinfo').innerHTML='';">
   {-else-}
 	  <b>{-#tnopublic#-}</b><br>

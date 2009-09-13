@@ -55,12 +55,16 @@
 					updateList('lst_evepred', 'events.php', 'r='+ reg +'&cmd=list&predef=1');
 				else
 					updateList('lst_eveuser', 'events.php', 'r='+ reg +'&cmd=list&predef=0');
+				// update elements in interfaces
+				updateList('qevelst', 'index.php', 'cmd=evelst');
 			break;
 			case "cause":
 				if (opt == "1")
 					updateList('lst_caupred', 'causes.php', 'r='+ reg +'&cmd=list&predef=1');
 				else
 					updateList('lst_cauuser', 'causes.php', 'r='+ reg +'&cmd=list&predef=0');
+				// update elements in interfaces
+				updateList('qcaulst', 'index.php', 'cmd=caulst');
 			break;
 			case "role":
 				updateList('lst_role', 'region.php', 'r='+ reg +'&rolecmd=list');
@@ -73,6 +77,8 @@
 			break;
 			case "geo":
 				updateList('lst_ageo', 'geography.php', 'r='+ reg +'&geocmd=list&GeographyId=');
+				// update elements in interfaces
+				updateList('qgeolst', 'index.php', 'cmd=geolst');
 			break;
 			case "extraeff":
 				updateList('lst_eef', 'extraeffects.php', 'r='+ reg +'&cmd=list');
@@ -182,6 +188,27 @@
 				$('aGeographyActive').checked = true;
 			else
 				$('aGeographyActive').checked = false;
+		}
+	}
+
+	function setadmingeo(k, l) {
+		var v = k.split("|");
+		mod = 'geo';
+		uploadMsg('');
+		if (v[0] == -1) {
+			setLevGeo('','','',1,'','','','geo');
+			if (l == 0)
+				$('aGeoParentId').value = '';
+			$('geocmd').value='insert';
+			$('alev' + l).style.display = "none";
+		}
+		else if (v[0] == -2) 
+			$('geoaddsect').style.display = 'none';
+		else {
+			setLevGeo(v[0],v[1],v[2],v[3],'','','','geo');
+			$('aGeoParentId').value = v[0];
+			$('geocmd').value='update';
+			updateList('alev' + l, 'geography.php', 'r={-$reg-}&geocmd=list&GeographyId=' + v[0]);
 		}
 	}
 	
@@ -456,7 +483,7 @@
 	}
 
 	function setDICardfromId(reg, did, src) {
-		var lsAjax = new Ajax.Request('../desinventar/index.php', {
+		var lsAjax = new Ajax.Request('cards.php', {
 			method: 'get', parameters: 'r='+ reg +'&DisasterId='+ did,
 			onLoading: function(request) {
 				if (src == "DATA")
@@ -510,7 +537,7 @@
 		}
 		//alert("GEO: "+ geo +"- L: "+l +"-LEV: "+lev);
 		if (l < lev) {
-			var lsAjax = new Ajax.Updater( div, '../desinventar/index.php', {
+			var lsAjax = new Ajax.Updater( div, 'cards.php', {
 				method: 'get', parameters: 'r='+ reg +'&cmd=list&GeographyId='+ geo,
 				onComplete: function(request)	{
 					getGeoItems(reg, geoid, l+1, lev, src);
