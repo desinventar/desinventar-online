@@ -409,6 +409,7 @@ Section "Create Shortcuts"
                    "$INSTDIR\${NAME}.ico" 0 "SW_SHOWNORMAL" "" "${SHORTNAME} Local"
 	CreateShortCut "$SMPROGRAMS\${SHORTNAME}\${NAME} Project Website.lnk" "$INSTDIR\${NAME} Website.url" "" \
                    "$INSTDIR\${NAME}.ico" 0 "SW_SHOWNORMAL" "" "${SHORTNAME} Local"
+	SetOutPath '$INSTDIR\ms4w'
 	CreateShortCut "$SMPROGRAMS\${SHORTNAME}\${SHORTNAME} Apache Restart.lnk" "$INSTDIR\ms4w\apache-restart.bat"
 	CreateShortCut "$SMPROGRAMS\${SHORTNAME}\${SHORTNAME} Apache Start.lnk" "$INSTDIR\ms4w\apache-start.bat"
 	CreateShortCut "$SMPROGRAMS\${SHORTNAME}\${SHORTNAME} Apache Stop.lnk" "$INSTDIR\ms4w\apache-stop.bat"
