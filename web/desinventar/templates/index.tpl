@@ -8,7 +8,7 @@
   <title>{-#ttitle#-} [{-$regname-}]</title>
   <link rel="stylesheet" href="../css/desinventar.css" type="text/css">
   <link rel="stylesheet" href="../css/checktree.css" type="text/css">
-  <link rel="stylesheet" href="../css/accordion.css" TYPE="text/css">
+  <link rel="stylesheet" href="../css/accordion.css" type="text/css">
   <script type="text/javascript" src="../include/prototype.js"></script>
   <script type="text/javascript" src="../include/diadmin.js"></script>
   <script type="text/javascript" src="../include/checktree.js"></script>
@@ -52,17 +52,19 @@
             {  text: '{-#msavequery#-}',handler: onMenuItem  },
             {  text: '{-#mopenquery#-}',handler: onMenuItem  }]
       });
+{-if $role != ""-}
 	  var mcards = new Ext.menu.Menu({
         id: 'cardsMenu',
         items: [
-{-if $role != ""-}
 			{  text: '{-#minsert#-}',	handler: onMenuItem  },
+{-if $role == "SUPERVISOR" || $role == "ADMINREGION"-}
             {  text: '{-#mimport#-}',	handler: onMenuItem  },
 {-/if-}
 {-if $role == "OBSERVER" || $role == "ADMINREGION"-}
             {  text: '{-#mconfig#-}',	handler: onMenuItem  }]
 {-/if-}
 		});
+{-/if-}
       //{  text: '{-#motherdoc#-}',		handler: onMenuItem  },
       var mhelp = new Ext.menu.Menu({
         id: 'helpMenu',
@@ -75,7 +77,9 @@
       tb.render('toolbar');
       tb.add(     {text:  '{-#mfile#-}',   menu: mfile  });
       tb.add('-', {text:  '{-#msearch#-}', menu: mquery });
-      tb.add('-', {text:  '{-#mdcsection#-}', 	   menu: mcards });
+{-if $role != ""-}
+      tb.add('-', {text:  '{-#mdcsection#-}',menu: mcards });
+{-/if-}
       tb.add('-', {text:  '{-#mhelp#-}',   menu: mhelp  });
 	  //tb.add('->', {text: 'OK'});
       function onMenuItem(item){
@@ -1366,7 +1370,7 @@
 	<div id="querydetails" style="height:40px;" class="dwin"></div>
 	<!--  <div id="smap" style="position:absolute; left:0px; top:20px; visibility:hidden;">[<a href="javascript:void(0);" onClick="hideMap();">X</a>]<br></div>-->
 	<iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="../region.php?r={-$reg-}&view=info"></iframe>
-</div>
+ </div>
 <!--	SECTION : QUERY DESIGN 
 	====================== -->
  <div id="west">

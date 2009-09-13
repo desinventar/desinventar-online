@@ -154,7 +154,7 @@
   {-if $ctl_showdcmod-}
 	  <img id="dcmod" src="images/b_desconsultar1.jpg" style="cursor: pointer;"
 		onClick="$('dcmod').src='images/b_desconsultar2.jpg'; runWin('desinventar/index.php?r={-$reg-}{-if $isvreg-}&v=true{-/if-}', 'desconsultar');"
-		onMouseOver='$("dcmod").src="images/b_desconsultar3.jpg"; $("modinfo").innerHTML="{-#tmoddescon#-}<br>{-#tmoddesinv#-}";'
+		onMouseOver='$("dcmod").src="images/b_desconsultar3.jpg"; $("modinfo").innerHTML="{-#tmoddescon#-";'
 		onMouseOut="$('dcmod').src='images/b_desconsultar1.jpg'; $('modinfo').innerHTML='';">
   {-else-}
 	  <b>{-#tnopublic#-}</b><br>
@@ -169,11 +169,13 @@
   <tr>
    <td colspan="2">
  {-foreach name=info key=k item=i from=$info-}
+  {-if $i != ""-}
 	<fieldset>
 	 <legend><b><a href="javascript:void(null);" onclick="showinfo('{-$k-}')">{-$k-}</a></b></legend>
 	 <div id="{-$k-}" style="height:70px; width:540px; overflow: auto;
 		padding-left: 3px; padding-right: 3px; display: none" align="justify">{-$i-}</div>
 	</fieldset>
+  {-/if-}
  {-/foreach-}
    </td>
   </tr>
