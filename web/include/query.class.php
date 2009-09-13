@@ -1032,67 +1032,66 @@ class Query extends PDO
   }
 
   function getQueryDetails($dic, $post) {
-    $info = $lsf = array();
-    $dinf = $this->getDBInfo();
-    $info['TITLE'] = "";
-    if (isset($post['_M+Field'])) {
-      $fld = explode("|", $post['_M+Field']);
-      $fd0 = substr($fld[0],2);
-      $val = "MapOpt". $fd0 ."_";
-      if (isset($dic[$val][0]))
-        $info['TITLE'] = $dic[$val][0];
-      else {
-        $val = $fd0;
-        if (isset($dic[$val][0]))
-          $info['TITLE'] = $dic[$val][0];
-      }
+	$info = $lsf = array();
+	$dinf = $this->getDBInfo();
+	$info['TITLE'] = "";
+	if (isset($post['_M+Field'])) {
+		$fld = explode("|", $post['_M+Field']);
+		$fd0 = substr($fld[0],2);
+		$fd1 = substr($fd0, 0, -1);
+		if (isset($dic["MapOpt". $fd0 ."_"][0]))
+			$info['TITLE'] = $dic["MapOpt". $fd0 ."_"][0];
+		elseif (isset($dic[$fd0][0]))
+			$info['TITLE'] = $dic[$fd0][0];
+		elseif (isset($dic[$fd1][0]))
+			$info['TITLE'] = $dic[$fd1][0];
     }
-    $info['LEVEL'] = "";
-    if (isset($post['_M+Type']) && !(isset($post['_VREG']) && $post['_VREG'] == "true")) {
-      $fld = explode("|", $post['_M+Type']);
-      $val = $this->loadGeoLevById($fld[0]);
-      $info['LEVEL'] = $val[0];
-    }
-    $info['EXTENT'] = $dinf['GeoLimitMinX'] ." ". $dinf['GeoLimitMaxX'] ." ". $dinf['GeoLimitMinY'] ." ". $dinf['GeoLimitMaxY'];
-    $info['KEYWORDS'] = $dinf['RegionLabel'];
-    //Process post
-    foreach ($post as $k=>$v) {
-      $k = substr($k,2);
-      if ($k == "GeographyId") {
-        foreach($v as $itm)
-          $lsg[] = $this->getGeoNameById($itm);
-        $info['GEO'] = implode(", ", $lsg);
-      }
-      elseif ($k == "EventId") {
-        foreach($v as $itm)
-          $lse[] = $this->getObjectNameById($itm, DI_EVENT);
-        $info['EVE'] = implode(", ", $lse);
-      }
-      elseif ($k == "CauseId") {
-        foreach($v as $itm)
-          $lsc[] = $this->getObjectNameById($itm, DI_CAUSE);
-        $info['CAU'] = implode(", ", $lsc);
-      }
-      elseif ($k == "DisasterBeginTime")
-        $info['BEG'] = $v[0];
-      elseif ($k == "DisasterEndTime")
-        $info['END'] = $v[0];
-      elseif ($k == "DisasterSource" && !empty($v[1]))
-        $info['SOU'] = $v[1];
-      elseif ($k == "DisasterSerial" && !empty($v[1]))
-        $info['SER'] = $v[1];
-      elseif (substr($k, 0, 6) == "Effect" && isset($v[0]) && isset($dic[$k][0])) {
-        $opt = "";
-        if ($v[0] == "=" || $v[0] == ">=" || $v[0] == "<=")
-          $opt = "(". $v[0] . $v[1] .")";
-        elseif ($v[0] == "-3")
-          $opt = "(". $v[1] ."-". $v[2] .")";
-        $lsf[] = $dic[$k][0] . $opt;
-      }
-    }
-    if (!empty($lsf))
-      $info['EFF'] = implode(", ", $lsf);
-    return $info;
+	$info['LEVEL'] = "";
+	if (isset($post['_M+Type']) && !(isset($post['_VREG']) && $post['_VREG'] == "true")) {
+		$fld = explode("|", $post['_M+Type']);
+		$val = $this->loadGeoLevById($fld[0]);
+		$info['LEVEL'] = $val[0];
+	}
+	$info['EXTENT'] = $dinf['GeoLimitMinX'] ." ". $dinf['GeoLimitMaxX'] ." ". $dinf['GeoLimitMinY'] ." ". $dinf['GeoLimitMaxY'];
+	$info['KEYWORDS'] = $dinf['RegionLabel'];
+	//Process post
+	foreach ($post as $k=>$v) {
+	  $k = substr($k,2);
+	  if ($k == "GeographyId") {
+		foreach($v as $itm)
+		  $lsg[] = $this->getGeoNameById($itm);
+		$info['GEO'] = implode(", ", $lsg);
+	  }
+	  elseif ($k == "EventId") {
+		foreach($v as $itm)
+		  $lse[] = $this->getObjectNameById($itm, DI_EVENT);
+		$info['EVE'] = implode(", ", $lse);
+	  }
+	  elseif ($k == "CauseId") {
+		foreach($v as $itm)
+		  $lsc[] = $this->getObjectNameById($itm, DI_CAUSE);
+		$info['CAU'] = implode(", ", $lsc);
+	  }
+	  elseif ($k == "DisasterBeginTime")
+		$info['BEG'] = $v[0];
+	  elseif ($k == "DisasterEndTime")
+		$info['END'] = $v[0];
+	  elseif ($k == "DisasterSource" && !empty($v[1]))
+		$info['SOU'] = $v[1];
+	  elseif ($k == "DisasterSerial" && !empty($v[1]))
+		$info['SER'] = $v[1];
+	  elseif (substr($k, 0, 6) == "Effect" && isset($v[0]) && isset($dic[$k][0])) {
+		$opt = "";
+		if ($v[0] == "=" || $v[0] == ">=" || $v[0] == "<=")
+		  $opt = "(". $v[0] . $v[1] .")";
+		elseif ($v[0] == "-3")
+		  $opt = "(". $v[1] ."-". $v[2] .")";
+		$lsf[] = $dic[$k][0] . $opt;
+	  }
+	}
+	if (!empty($lsf))
+		$info['EFF'] = implode(", ", $lsf);
+	return $info;
   }
   
   // DICTIONARY FUNCTIONS
