@@ -13,7 +13,7 @@
   <script type="text/javascript" src="include/prototype.js"></script>
   <script type="text/javascript" src="include/diadmin.js"></script>
   <script type="text/javascript" src="include/checktree.js"></script>
-  <script type="text/javascript" src="include/wd.js"></script>
+<!--  <script type="text/javascript" src="include/wd.js"></script>-->
   <script type="text/javascript" src="include/accordion.js"></script>
   <script type="text/javascript" src="include/palette.js"></script>
   <!-- ExtJS 2.0.1 -->
@@ -32,8 +32,9 @@
       var mfile = new Ext.menu.Menu({
         id: 'fileMenu',
         items: [
+            {  text: '{-#mstartdb#-}',	handler: onMenuItem  }, '-',
             {  text: '{-#mlang#-}', 
-               menu: {
+                menu: {
 			     id: 'langSubMenu',
 				 items: [
 {-foreach name=lglst key=key item=item from=$lglst-}
@@ -41,8 +42,8 @@
 {-/foreach-}
 				   '-']
 				}
-			}, '-',
-            {  text: '{-#mprint#-}',	handler: onMenuItem  },
+			},
+			{  text: '{-#mprint#-}',	handler: onMenuItem  },
             {  text: '{-#mquit#-}',		handler: onMenuItem  }]
       });
       var mquery = new Ext.menu.Menu({
@@ -53,7 +54,7 @@
             {  text: '{-#msavequery#-}',handler: onMenuItem  },
             {  text: '{-#mopenquery#-}',handler: onMenuItem  }]
       });
-{-if $role != "" || $role == "ADMINPORTAL"-}
+{-if $role != "" || $role != "ADMINPORTAL"-}
 	  var mcards = new Ext.menu.Menu({
         id: 'cardsMenu',
         items: [
@@ -80,10 +81,10 @@
       var mhelp = new Ext.menu.Menu({
         id: 'helpMenu',
         items: [
-            {  text: '{-#mgotodoc#-}',	handler: onMenuItem  },
-            {  text: '{-#hmoreinfo#-}',	handler: onMenuItem  },
+            {  text: '{-#mwebsite#-}',	handler: onMenuItem  },
             {  text: '{-#mabout#-}',	handler: onMenuItem  }]
       });
+	  
       var tb = new Ext.Toolbar();
       tb.render('toolbar');
       tb.add(     {text: '{-#mfile#-}',   menu: mfile  });
@@ -94,12 +95,16 @@
       tb.add('-', {text: 'Bases de datos', menu: mbases });
       tb.add('-', {text: '{-#mhelp#-}',   menu: mhelp  });
 	  tb.add('->',{text: '<img src="images/di_logo4.png">'});
-	  //tb.add('->', {text: 'OK'});
+
       function onMenuItem(item){
         switch (item.text) {
+		  // file menu
+          case "{-#mstartdb#-}":
+            $('dcr').src = "region.php?r={-$reg-}&view=profile";
+          break;
 {-foreach name=lglst key=key item=item from=$lglst-}
 		  case "{-$item[0]-}":
-			window.location = "index.php?lang={-$key-}";
+			window.location = "index.php?r={-$reg-}&lang={-$key-}";
 		  break;
 {-/foreach-}
           case "{-#mprint#-}":
@@ -107,6 +112,19 @@
           break;
           case "{-#mquit#-}":
             self.close();
+          break;
+		  // query menu
+          case "{-#mgotoqd#-}":
+			$('config').style.display = 'none';
+			$('import').style.display = 'none';
+			$('qryres').style.display = 'block';
+			$('dcr').style.display = 'block';
+			$('querydetails').style.display = 'block';
+			w.show();
+			if (w.isVisible())
+				w.collapse(); //hide()
+			else
+				w.expand(); //show()
           break;
           case "{-#mnewsearch#-}":
             w.show();
@@ -135,18 +153,7 @@
 			}
 			qryw.show(this);
           break;
-          case "{-#mgotoqd#-}":
-			$('config').style.display = 'none';
-			$('import').style.display = 'none';
-			$('qryres').style.display = 'block';
-			$('dcr').style.display = 'block';
-			$('querydetails').style.display = 'block';
-			w.show();
-			if (w.isVisible())
-				w.collapse(); //hide()
-			else
-				w.expand(); //show()
-          break;
+		  //cards menu
 		  case "{-#minsert#-}":
 			difw.show();
 		  break;
@@ -160,7 +167,6 @@
 			$('dcr').style.display = 'none';
 			$('querydetails').style.display = 'none';
 			updateList('import', 'import.php', 'r={-$reg-}');
-			//onclose reload w
 		  break;
 		  case "{-#mconfig#-}":
 			w = Ext.getCmp('westm');
@@ -171,17 +177,13 @@
 			$('qryres').style.display = 'none';
 			$('dcr').style.display = 'none';
 			$('querydetails').style.display = 'none';
-			// open config
-			//onclose reload w
 		  break;
+		  // help menu
           case "{-#mabout#-}":
             alert("{-#tabout#-}");
           break;
-          case "{-#mgotodoc#-}":
-            $('dcr').src = "region.php?r={-$reg-}&view=profile";
-          break;
-          case "{-#motherdoc#-}":
-            $('dcr').src = "doc/LoNuevoEnDesInventar.pdf";
+          case "{-#mwebsite#-}":
+            window.open('http://www.desinventar.org', '', '');
           break;
           case "{-#hmoreinfo#-}":
             runWin('doc.php?m=metguide', 'doc');

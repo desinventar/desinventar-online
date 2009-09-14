@@ -136,16 +136,16 @@
  <script language="javascript">
   updateUserBar('user.php', '', '', '');
  </script>
- <div id="rightcontent"></div>
- <div id="pagecontent"></div>
- <br><hr><br>
- Seleccione base de datos <select onChange="parent.window.location = 'index.php?r='+ this.value;">
+  <div id="rightcontent"></div>
+  <div id="pagecontent"></div>
+  <br><hr><br>
+<!-- Seleccione base de datos <select onChange="parent.window.location = 'index.php?r='+ this.value;">
    <option disabled selected></option>
   {-foreach name=regions key=key item=item from=$reglst-}
    <option value="{-$key-}">{-$item-}</option>
   {-/foreach-}
  </select>
- <br><hr><br>
+ <br><hr><br>-->
  {-/if-}
  <table border=0 style="width:550px; font-family:Lucida Grande, Verdana; font-size:10px;">
   <tr>
