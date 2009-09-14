@@ -48,67 +48,35 @@
 {-/if-}
 {-** ADMINREGION ROLE **-}
 {-#tyourrol#-}<br><br>
-<li><b>{-#tadminof#-}</b><br>
-{-if $radm == false-}
- {-#tnorol#-}
-{-else-}
-	<select onChange="updateList('shwadm', 'region.php', 'r='+ this.value)" size=4 style="width: 500px;">
+<table border=0>
+{-if $radm-}
 {-foreach name=radm key=key item=item from=$radm-}
-  	<option value="{-$key-}" class="regl">{-$item-}</option>
+ <tr><td><b>{-#tadminof#-}</b></td>
+ <td><a href="javascript:void(null)" onclick="parent.window.location = 'index.php?r={-$key-}'">{-$item-}</a></td></tr>
 {-/foreach-}
-	</select>
-	<div id="shwadm"></div>
-</li>
-<!--
-	<dl class="accordion">
-  	<dt onclick="updateList('dd{-$key-}', 'region.php', 'r={-$key-}');">{-$item-}</dt>
-  	<dd id="dd{-$key-}">
-  	</dd>
-	</dl>
--->
 {-/if-}
-<br>
 {-** OBSERVER ROLE **-}
-<li><b>{-#tobservof#-}</b></li>
-{-if $robs == false-}
- {-#tnorol#-}
-{-else-}
-	<select onChange="updateList('shwobs', 'region.php', 'r='+ this.value)" size=4 style="width: 500px;">
-		<option value=""></option>
+{-if $robs-}
 {-foreach name=robs key=key item=item from=$robs-}
-  	<option value="{-$key-}">{-$item-}</option>
+ <tr><td><b>{-#tobservof#-}</b></td>
+ <td><a href="javascript:void(null)" onclick="parent.window.location = 'index.php?r={-$key-}'">{-$item-}</a></td></tr>
 {-/foreach-}
-	</select>
-	<div id="shwobs"></div>
 {-/if-}
-<br>
 {-** SUPERVISOR ROLE **-}
-<li><b>{-#tsupervof#-}</b></li>
-{-if $rsup == false-}
- {-#tnorol#-}
-{-else-}
-	<select onChange="updateList('shwsup', 'region.php', 'r='+ this.value)" size=4 style="width: 500px;">
-		<option value=""></option>
+{-if $rsup-}
 {-foreach name=rsup key=key item=item from=$rsup-}
-  	<option value="{-$key-}">{-$item-}</option>
+ <tr><td><b>{-#tsupervof#-}</b></td>
+ <td><a href="javascript:void(null)" onclick="parent.window.location = 'index.php?r={-$key-}'">{-$item-}</a></td></tr>
 {-/foreach-}
-	</select>
-	<div id="shwsup"></div>
 {-/if-}
-<br>
 {-** USER ROLE **-}
-<li><b>{-#tuserof#-}</b></li>
-{-if $rusr == false-}
- {-#tnorol#-}
-{-else-}
-	<select onChange="updateList('shwusr', 'region.php', 'r='+ this.value)" size=4 style="width: 500px;">
-		<option value=""></option>
+{-if $rusr-}
 {-foreach name=rusr key=key item=item from=$rusr-}
-  	<option value="{-$key-}">{-$item-}</option>
+ <tr><td><b>{-#tuserof#-}</b></td>
+ <td><a href="javascript:void(null)" onclick="parent.window.location = 'index.php?r={-$key-}'">{-$item-}</a></td></tr>
 {-/foreach-}
-	</select>
-	<div id="shwusr"></div>
 {-/if-}
+</table>
 <br>
 {-/if-} {-** end ctl_welcome **-}
 {-*** PASSWORD RECOVERY - CONTENT SECTION ***-}
