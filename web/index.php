@@ -22,7 +22,8 @@ $t->assign("stat", "on");
 if (isset($_GET['p'])) {
 	if ($_GET['p'] == 'init') {
 		if (file_exists('default/index.php')) {
-			header("Location:default/index.php");
+			include("default/index.php");
+			exit();
 		} else {
 			$reglst = array();
 			$result = $d->core->query("SELECT RegionId, RegionLabel FROM Region WHERE RegionStatus=3 ORDER BY RegionLabel, RegionOrder");
