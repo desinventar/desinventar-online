@@ -1,4 +1,5 @@
 {-config_load file=`$lg`.conf section="dc_querydesign"-}
+{-config_load file=`$lg`.conf section="dc_querydesign"-}
 {-if $ctl_show-}
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -6,15 +7,15 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
   <title>{-#ttitle#-} [{-$regname-}]</title>
-  <link rel="stylesheet" href="../css/desinventar.css" type="text/css">
-  <link rel="stylesheet" href="../css/checktree.css" type="text/css">
-  <link rel="stylesheet" href="../css/accordion.css" type="text/css">
-  <script type="text/javascript" src="../include/prototype.js"></script>
-  <script type="text/javascript" src="../include/diadmin.js"></script>
-  <script type="text/javascript" src="../include/checktree.js"></script>
-  <script type="text/javascript" src="../include/wd.js"></script>
-  <script type="text/javascript" src="../include/accordion.js"></script>
-  <script type="text/javascript" src="../include/palette.js"></script>
+  <link rel="stylesheet" href="css/desinventar.css" type="text/css">
+  <link rel="stylesheet" href="css/checktree.css" type="text/css">
+  <link rel="stylesheet" href="css/accordion.css" type="text/css">
+  <script type="text/javascript" src="include/prototype.js"></script>
+  <script type="text/javascript" src="include/diadmin.js"></script>
+  <script type="text/javascript" src="include/checktree.js"></script>
+<!--  <script type="text/javascript" src="include/wd.js"></script>-->
+  <script type="text/javascript" src="include/accordion.js"></script>
+  <script type="text/javascript" src="include/palette.js"></script>
   <!-- ExtJS 2.0.1 -->
   <link rel="stylesheet" type="text/css" href="/extJS/resources/css/ext-all.css"/>
   <link rel="stylesheet" type="text/css" href="/extJS/resources/css/xtheme-gray.css"/>
@@ -61,8 +62,9 @@
             {  text: '{-#mimport#-}',	handler: onMenuItem  },
 {-/if-}
 {-if $role == "OBSERVER" || $role == "ADMINREGION"-}
-            {  text: '{-#mconfig#-}',	handler: onMenuItem  }]
+            {  text: '{-#mconfig#-}',	handler: onMenuItem  },
 {-/if-}
+			{  text: '-'}]
 		});
 {-/if-}
       //{  text: '{-#motherdoc#-}',		handler: onMenuItem  },
@@ -81,7 +83,7 @@
       tb.add('-', {text: '{-#mdcsection#-}',menu: mcards });
 {-/if-}
       tb.add('-', {text: '{-#mhelp#-}',   menu: mhelp  });
-	  tb.add('->',{text: '<img src="../images/di_logo4.png">'});
+	  tb.add('->',{text: '<img src="images/di_logo4.png">'});
 	  //tb.add('->', {text: 'OK'});
       function onMenuItem(item){
         switch (item.text) {
@@ -166,13 +168,13 @@
             alert("{-#tabout#-}");
           break;
           case "{-#mgotodoc#-}":
-            $('dcr').src = "../region.php?r={-$reg-}&view=profile";
+            $('dcr').src = "region.php?r={-$reg-}&view=profile";
           break;
           case "{-#motherdoc#-}":
-            $('dcr').src = "../doc/LoNuevoEnDesInventar.pdf";
+            $('dcr').src = "doc/LoNuevoEnDesInventar.pdf";
           break;
           case "{-#hmoreinfo#-}":
-            runWin('../doc/?m=metguide', 'doc');
+            runWin('doc.php?m=metguide', 'doc');
           break;
         }
       }
@@ -792,7 +794,7 @@
 			div.innerHTML = waiting;
 			switch (i) {
 				case 0 :
-					myAjax = new Ajax.Updater(div, 'region.php', {method:'get', parameters:''});
+					myAjax = new Ajax.Updater(div, 'info.php', {method:'get', parameters:''});
 				break;
 				case 1 :
 					myAjax = new Ajax.Updater(div, 'geolevel.php', {method:'get', parameters:''});
@@ -818,16 +820,16 @@
 		},
 	}
 	</script>
-	<link rel="stylesheet" href="../css/tabber.css" type="text/css">
-	<script type="text/javascript" src="../include/tabber.js"></script>
-	<script type="text/javascript" src="../include/listMan.js"></script>
+	<link rel="stylesheet" href="css/tabber.css" type="text/css">
+	<script type="text/javascript" src="include/tabber.js"></script>
+	<script type="text/javascript" src="include/listMan.js"></script>
 	<style type="text/css">
 		.bsave {
-			background-image: url(../images/saveicon.png) !important;
+			background-image: url(images/saveicon.png) !important;
 			background-repeat: no-repeat; background-position: top center; width: 22px;
 		}
 		.bprint {
-			background-image: url(../images/printicon.png) !important;
+			background-image: url(images/printicon.png) !important;
 			background-repeat: no-repeat; background-position: top center; width: 22px;
 		}
 	</style>
@@ -853,7 +855,7 @@
 	  <tr bgcolor="#bbbbbb">
        <td width="200px">
        	<b>{-#tsubtitle2#-} =></b>
-<!--       	<img src="../images/collapse.png" onClick="var w = Ext.getCmp('westm'); w.show();">-->
+<!--       	<img src="images/collapse.png" onClick="var w = Ext.getCmp('westm'); w.show();">-->
        </td>
        <td align="center">
 <!--	SECTION : DATA CONFIGURATION
@@ -1364,7 +1366,7 @@
 	</table>
 	<div id="querydetails" style="height:40px;" class="dwin"></div>
 	<!--  <div id="smap" style="position:absolute; left:0px; top:20px; visibility:hidden;">[<a href="javascript:void(0);" onClick="hideMap();">X</a>]<br></div>-->
-	<iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="../region.php?r={-$reg-}&view=profile"></iframe>
+	<iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="region.php?r={-$reg-}&view=profile"></iframe>
  </div>
 <!--	SECTION : QUERY DESIGN 
 	====================== -->
@@ -1747,7 +1749,7 @@
  <!-- BEG HELP SECTION -->
  <div id="south">
   <textarea id="_DIDesc" wrap="hard" class="hlp" readonly style="width:80%; height:30px;">{-#tdescinfo#-}</textarea>
-  <a href="javascript:void(null)" onClick="runWin('../doc/?m=metguide', 'doc');"
+  <a href="javascript:void(null)" onClick="runWin('doc.php?m=metguide', 'doc');"
   	class="dlgmsg" style="font-size: 8pt;">{-#hmoreinfo#-}</a>
  </div>
  <!-- END HELP SECTION -->

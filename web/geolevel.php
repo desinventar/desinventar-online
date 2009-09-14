@@ -4,12 +4,12 @@
  (c) 1999-2009 Corporacion OSSO
 */
 
-require_once('../include/loader.php');
-require_once('../include/query.class.php');
-require_once('../include/maps.class.php');
-require_once('../include/diobject.class.php');
-require_once('../include/digeolevel.class.php');
-require_once('../include/digeocarto.class.php');
+require_once('include/loader.php');
+require_once('include/query.class.php');
+require_once('include/maps.class.php');
+require_once('include/diobject.class.php');
+require_once('include/digeolevel.class.php');
+require_once('include/digeocarto.class.php');
 
 $reg = $us->sRegionId;
 if (empty($reg)) {

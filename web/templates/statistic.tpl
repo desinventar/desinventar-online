@@ -6,9 +6,9 @@
  <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
 	<title>{-#ttitle#-} -{-$regname-}-</title>
-	<link rel="stylesheet" href="../css/desinventar.css" type="text/css"/>
-	<script type="text/javascript" src="../include/prototype.js"></script>
-	<script type="text/javascript" src="../include/diadmin.js"></script>
+	<link rel="stylesheet" href="css/desinventar.css" type="text/css"/>
+	<script type="text/javascript" src="include/prototype.js"></script>
+	<script type="text/javascript" src="include/diadmin.js"></script>
 	<script type="text/javascript">
 	window.onload = function() {
 		var qrydet = parent.document.getElementById('querydetails');
@@ -57,12 +57,12 @@
 		  <table cellpadding=0 cellspacing=0 border=0>
 		  <tr><td>
 		  <a href="javascript:void(null)" onclick="mod='std'; updateList('lst_dis', 'statistic.php', 
-		  'r={-$reg-}&page='+ $('pp').value +'&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}&ord={-$item-}&geo={-$geo-}&dir=ASC');"><img src="../images/asc.gif" border=0></a>
+		  'r={-$reg-}&page='+ $('pp').value +'&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}&ord={-$item-}&geo={-$geo-}&dir=ASC');"><img src="images/asc.gif" border=0></a>
 		  </td><td>
 {-if $item =="DisasterId_"-}{-#trepnum#-}{-elseif $item != "DisasterId"-}{-$dk.$item-}{-/if-}
 		  </td><td>
 		  <a href="javascript:void(null)" onclick="mod='std'; updateList('lst_dis', 'statistic.php', 
-		  'r={-$reg-}&page='+ $('pp').value +'&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}&ord={-$item-}&geo={-$geo-}&dir=DESC');"><img src="../images/desc.gif" border=0></a>
+		  'r={-$reg-}&page='+ $('pp').value +'&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}&ord={-$item-}&geo={-$geo-}&dir=DESC');"><img src="images/desc.gif" border=0></a>
 		  </td></tr>
 		  </table>
 		 </th>
