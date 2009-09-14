@@ -60,17 +60,17 @@
 {-/foreach-}
 							</select></td>
 					</tr>
-					<tr>
+<!--					<tr>
 						<td>{-#tregionuuid#-}<b style="color:darkred;">*</b></td>
 						<td>
 							<input id="RegionUUID" name="RegionUUID" type="text" maxlength="20" class="line fixw" disabled
 								onBlur="updateList('chkruuid', 'region.php', 'cmd=chkruuid&RegionUUID='+ $('RegionUUID').value);">
 							<input type="hidden" id="RegionUUID2" name="RegionUUID2">
 							<span id="chkruuid"></span></td>
-					</tr>
+					</tr>-->
 					<tr>
 						<td>{-#tregnamlist#-}<b style="color:darkred;">*</b></td>
-						<td><input id="RegionLabel" name="RegionLabel" type="text" maxlength="50" class="line fixw"></td>
+						<td><input id="RegionLabel" name="RegionLabel" type="text" maxlength="200" class="line fixw"></td>
 					</tr>
 					<tr>
 						<td>{-#tregadmlist#-}<b style="color:darkred;">*</b></td>
@@ -84,7 +84,7 @@
 					</tr>
 					<tr>
 						<td><a class="info" href="javascript:void(null)" 
-							onMouseOver="showtip('{-$dic.DBRegionLangCode[2]-}')">{-$dic.DBRegionLangCode[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBRegionLangCode[1]-}</span></a>
+							onMouseOver="showtip('{-$dic.DBRegionLangIsoCode[2]-}')">{-$dic.DBRegionLangIsoCode[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBRegionLangIsoCode[1]-}</span></a>
 						</td>
 						<td><select id="RegionLangCode" name="RegionLangCode" {-$ro-} class="line fixw" 
 										onFocus="showtip('{-$dic.DBRegionLangCode[2]-}')" tabindex="1">
@@ -131,7 +131,22 @@
 </p><br>
 {-/if-}
 {-***** REGINFO: Show Region Info - CONTENT SECTION *****-}
-{-if $ctl_showreg || $ctl_reginfo-}
+{-if $ctl_showreg || $ctl_reginfo || $ctl_regprofile-}
+ {-if $ctl_regprofile-}
+ <script language="javascript">
+  updateUserBar('user.php', '', '', '');
+ </script>
+ <div id="rightcontent"></div>
+ <div id="pagecontent"></div>
+ <br><hr><br>
+ Seleccione base de datos <select onChange="parent.window.location = 'index.php?r='+ this.value;">
+   <option disabled selected></option>
+  {-foreach name=regions key=key item=item from=$reglst-}
+   <option value="{-$key-}">{-$item-}</option>
+  {-/foreach-}
+ </select>
+ <br><hr><br>
+ {-/if-}
  <table border=0 style="width:550px; font-family:Lucida Grande, Verdana; font-size:10px;">
   <tr>
 	<td valign="center"><img src="region.php?r={-$reg-}&view=logo"></td>
@@ -145,6 +160,7 @@
  {-if !$ctl_reginfo-}
   <tr>
 	<td colspan=2 align="center">
+<!--
   {-if $ctl_showdimod-}
 	  <img id="dimod" src="images/b_desinventar1.jpg" border="0" style="cursor: pointer;"
 		onClick="$('dimod').src='images/b_desinventar2.jpg'; runWin('desinventar/cards.php?r={-$reg-}', 'desinventar');"
@@ -159,6 +175,7 @@
   {-else-}
 	  <b>{-#tnopublic#-}</b><br>
   {-/if-}
+-->
   {-if $ctl_inactivereg-}
 	  <b>{-#tinactive#-}</b><br>
   {-/if-}
@@ -170,11 +187,9 @@
    <td colspan="2">
  {-foreach name=info key=k item=i from=$info-}
   {-if $i != ""-}
-	<fieldset>
-	 <legend><b><a href="javascript:void(null);" onclick="showinfo('{-$k-}')">{-$k-}</a></b></legend>
-	 <div id="{-$k-}" style="height:70px; width:540px; overflow: auto;
-		padding-left: 3px; padding-right: 3px; display: none" align="justify">{-$i-}</div>
-	</fieldset>
+	<b>{-$k-}</b>
+	<p align="justify">{-$i-}</p>
+	<br>
   {-/if-}
  {-/foreach-}
    </td>
