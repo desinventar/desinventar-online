@@ -32,31 +32,10 @@
 	<script type="text/javascript" src="include/diadmin.js"></script>
 	<script type="text/javascript" src="include/menu.js"></script>
 	<script type="text/javascript" language="javascript">
-	function updateUserBar(url, cmd, user, pass) {
-		var pars = 'cmd=' + cmd + '&userid=' + user + '&password=' + pass;
-		var upd = true;
-		if (cmd == "logout" && chkWin('desinventar')) {
-			if (confirm("{-#talerdiwin#-}"))
-				endWin('desinventar');
-			else
-				upd = false;
-		}
-		if (upd) {
-			var rbAjax = new Ajax.Updater('rightcontent', url, {
-				method: 'get', parameters: pars,
-				onComplete: function(request) {
-					if (cmd == "login")		updateList('pagecontent', url, 'cmd=welcome');
-					if (cmd == "logout")	updateList('pagecontent', '', 'p=MainPageDI8');
-				},
-				onFailure: 	function(request) {
-					$('rightcontent').innerHTML = "{-#hlostconn#-}";
-				}
-			});
-		}
-	}
+	
 	window.onload = function() {
-		updateList('pagecontent', '', 'p=init');
-		updateUserBar('user.php', '', '', '');
+		//updateList('pagecontent', '', 'p=init');
+		//updateUserBar('user.php', '', '', '');
 	}
 	window.onunload = function() {
 		// Close Modules windows

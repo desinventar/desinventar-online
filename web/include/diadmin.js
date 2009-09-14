@@ -25,6 +25,29 @@
 			}
 		} );
 	}
+
+	function updateUserBar(url, cmd, user, pass) {
+		var pars = 'cmd=' + cmd + '&userid=' + user + '&password=' + pass;
+		var upd = true;
+		if (cmd == "logout" && chkWin('desinventar')) {
+			if (confirm("{-#talerdiwin#-}"))
+				endWin('desinventar');
+			else
+				upd = false;
+		}
+		if (upd) {
+			var rbAjax = new Ajax.Updater('rightcontent', url, {
+				method: 'get', parameters: pars,
+				onComplete: function(request) {
+					if (cmd == "login")		updateList('pagecontent', url, 'cmd=welcome');
+					if (cmd == "logout")	updateList('pagecontent', '', 'p=MainPageDI8');
+				},
+				onFailure: 	function(request) {
+					$('rightcontent').innerHTML = "{-#hlostconn#-}";
+				}
+			});
+		}
+	}
 	function sendData (r, url, pars, val) {
 		reg = r;
 		opt = val;
@@ -272,7 +295,7 @@
 		switch (name) {
 			case 'desinventar':		diwin = win;	break;
 			case 'desconsultar':	dcwin = win;	break;
-			case 'doc':						docw = win;		break;
+			case 'doc':				docw = win;		break;
 			default: break;
 		}
 		return false;
