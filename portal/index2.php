@@ -5,13 +5,13 @@
 */
 
 // Load required Functions
-require_once('include/loader.php');
+require_once('../web/include/loader.php');
 
 $t->config_dir = 'include';
 
 $d = new Query();
 
-$t->assign ("DIver", "8.2.0.49");
+$t->assign ("DIver", "8.2.0.50");
 $t->assign ("DImode", MODE);
 // 2009-01-20 (jhcaiced) At this point, loader.php should have
 // created or loaded the UserSession in the $us variable

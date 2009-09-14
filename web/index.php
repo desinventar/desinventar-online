@@ -237,6 +237,7 @@ if (!empty($reg)) {
 	}
 	//$t->assign('ctl_show', true);
 	$t->assign('ctl_showregionlist', true);
+	$t->assign('request_uri', $_SERVER['REQUEST_URI']);
 	$t->assign('regionlist', $reglst);
 	$t->display('regionlist.tpl');
 }
