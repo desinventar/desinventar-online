@@ -21,9 +21,9 @@ $t->assign("stat", "on");
 // PAGES: Show Information for selected Page from top menu
 if (isset($_GET['p'])) {
 	if ($_GET['p'] == 'init') {
-		if (file_exists('default/index.php'))
+		if (file_exists('default/index.php')) {
 			header("Location:default/index.php");
-		else {
+		} else {
 			$reglst = array();
 			$result = $d->core->query("SELECT RegionId, RegionLabel FROM Region WHERE RegionStatus=3 ORDER BY RegionLabel, RegionOrder");
 			while ($row = $result->fetch(PDO::FETCH_OBJ))
@@ -31,15 +31,13 @@ if (isset($_GET['p'])) {
 			$t->assign ("ctl_init", true);
 			$t->assign ("reglst", $reglst);
 		}
-	}
-	else {
+	} else {
 		$t->assign ("ctl_pages", true);
 		$t->assign ("menu", $d->queryLabelsFromGroup('MainPage', $lg));
 		$t->assign ("page", $_GET['p']);
 	}
-}
-// Default portal: init session and get country list
-else {
+} else {
+	// Default portal: init session and get country list
 	$t->assign ("menu", $d->queryLabelsFromGroup('MainPage', $lg));
 	// load languages available list
 	$t->assign ("lglst", $d->loadLanguages(1));
