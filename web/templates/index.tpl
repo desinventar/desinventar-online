@@ -834,12 +834,16 @@
 		}
 	</style>
 </head>
-
 <body>
- <div id="north">
-    <div id="toolbar"></div>
- </div>
- <div id="container">
+<div id="north">
+	<div id="toolbar"></div>
+</div>
+{-if $ctl_showregionlist-}
+	{-foreach key=key item=item from=$regionlist-}
+		{-$item-}
+	{-/foreach-}
+{-/if-}
+<div id="container">
 	<!-- -Configuration -->
 	<div id="config" class="tabber" style="display:none;">
 		<div class="tabbertab"><h2>{-#mreginfo#-}</h2><p></p></div>

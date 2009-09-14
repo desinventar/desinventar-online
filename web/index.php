@@ -36,8 +36,6 @@ if (isset($get['r']) && !empty($get['r'])) {
 		exit();
 	$reg = $qd['_REG'];
 	$t->assign ("qd", $qd);
-} else {
-	$reg = $us->sRegionId;
 }
 
 if (!empty($reg)) {
@@ -228,17 +226,19 @@ if (!empty($reg)) {
 		$std = array_merge($std, $st);
 		$t->assign ("std", $std);
 	}
+	$t->display ("index.tpl");
 } else {
 	// Direct access returns a list of public regions on this server
 	$d = new Query();
 	$reglst = array();
 	$result = $d->core->query("SELECT RegionId, RegionLabel FROM Region WHERE RegionStatus=3 ORDER BY RegionLabel, RegionOrder");
-	while ($row = $result->fetch(PDO::FETCH_OBJ))
+	while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 		$reglst[$row->RegionId] = $row->RegionLabel;
-	$t->assign ("ctl_init", true);
-	$t->assign ("reglst", $reglst);
+	}
+	//$t->assign('ctl_show', true);
+	$t->assign('ctl_showregionlist', true);
+	$t->assign('regionlist', $reglst);
+	$t->display('regionlist.tpl');
 }
-
-$t->display ("index.tpl");
 
 </script>
