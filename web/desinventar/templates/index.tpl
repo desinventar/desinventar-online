@@ -12,7 +12,7 @@
   <script type="text/javascript" src="../include/prototype.js"></script>
   <script type="text/javascript" src="../include/diadmin.js"></script>
   <script type="text/javascript" src="../include/checktree.js"></script>
-  <script type="text/javascript" src="../include/wd.js"></script>
+<!--  <script type="text/javascript" src="../include/wd.js"></script>-->
   <script type="text/javascript" src="../include/accordion.js"></script>
   <script type="text/javascript" src="../include/palette.js"></script>
   <!-- ExtJS 2.0.1 -->
@@ -75,12 +75,13 @@
       });
       var tb = new Ext.Toolbar();
       tb.render('toolbar');
-      tb.add(     {text:  '{-#mfile#-}',   menu: mfile  });
-      tb.add('-', {text:  '{-#msearch#-}', menu: mquery });
+      tb.add(     {text: '{-#mfile#-}',   menu: mfile  });
+      tb.add('-', {text: '{-#msearch#-}', menu: mquery });
 {-if $role != ""-}
-      tb.add('-', {text:  '{-#mdcsection#-}',menu: mcards });
+      tb.add('-', {text: '{-#mdcsection#-}',menu: mcards });
 {-/if-}
-      tb.add('-', {text:  '{-#mhelp#-}',   menu: mhelp  });
+      tb.add('-', {text: '{-#mhelp#-}',   menu: mhelp  });
+	  tb.add('->',{text: '<img src="../images/di_logo3.png" width="79px" height="16px">'});
 	  //tb.add('->', {text: 'OK'});
       function onMenuItem(item){
         switch (item.text) {

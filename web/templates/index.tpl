@@ -5,7 +5,7 @@
  	{-$menu.$page[2]-}
  {-/if-}
 {-elseif $ctl_init-}
-	<h2>{-#tdbavail#-}</h2>
+	<h4>{-#tdbavail#-}</h4>
 	<table border=0>
 	 <tr valign="top">
 	  <td>
