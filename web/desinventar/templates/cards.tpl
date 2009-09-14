@@ -155,14 +155,14 @@
 		}
 		function switchEff(section) {
 			if (section == 'effext') {
-				$('eeimg').src="../images/di_efftag.png";
-				$('efimg').src="../images/di_eeftag.png";
+				$('eeimg').src="images/di_efftag.png";
+				$('efimg').src="images/di_eeftag.png";
 				$('effbas').style.display='none';
 				$('effext').style.display='block';
 			}
 			if (section == 'effbas') {
-				$('efimg').src="../images/di_efftag.png";
-				$('eeimg').src="../images/di_eeftag.png";
+				$('efimg').src="images/di_efftag.png";
+				$('eeimg').src="images/di_eeftag.png";
 				$('effbas').style.display='block';
 				$('effext').style.display='none';
 			}
@@ -236,31 +236,31 @@
 	</script>
 	<style type="text/css">
 		.bnew {
-			background-image: url(../images/newicon.png) !important;
+			background-image: url(images/newicon.png) !important;
 			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
 		}
 		.bupd {
-			background-image: url(../images/updateicon.png) !important;
+			background-image: url(images/updateicon.png) !important;
 			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
 		}
 		.bcancel {
-			background-image: url(../images/cancelicon.png) !important; 
+			background-image: url(images/cancelicon.png) !important; 
 			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
 		}
 		.bclean {
-			background-image: url(../images/cleanicon.png) !important; 
+			background-image: url(images/cleanicon.png) !important; 
 			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
 		}
 		.bfind {
-			background-image: url(../images/findicon.png) !important;
+			background-image: url(images/findicon.png) !important;
 			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
 		}
 		.bsave {
-			background-image: url(../images/saveicon.png) !important;
+			background-image: url(images/saveicon.png) !important;
 			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
 		}
 		.bprint {
-			background-image: url(../images/printicon.png) !important;
+			background-image: url(images/printicon.png) !important;
 			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
 		}
 	</style>
@@ -360,7 +360,7 @@
 				</tr>
 				<tr>
 					<td width="30px" style="border:0px;" valign="top">
-						<img src="../images/di_geotag.png" 
+						<img src="images/di_geotag.png" 
 							onmouseover="Tip('<b>{-#mgeography#-}</b><br>{-$dmg.MetGuidegeography[2]-}', BGCOLOR, '#d4baf6', SHADOW, true, WIDTH, 400)" 
 							onmouseout="UnTip()">
 					</td>
@@ -425,12 +425,12 @@
 				<tr>
 					<td width="30px" valign="top" style="border:0px;">
 						<a href="javascript:void(null)" onClick="switchEff('effbas')">
-						 <img id="efimg" src="../images/di_efftag.png" border=0
+						 <img id="efimg" src="images/di_efftag.png" border=0
 							onmouseover="Tip('<b>{-#tbaseffects#-}</b><br>{-$dmg.MetGuidedatacards[2]-}', BGCOLOR, '#f1bd41', SHADOW, true, WIDTH, 400)"
 							onmouseout="UnTip()"></a>
 						<br><br>
 						<a href="javascript:void(null)" onClick="switchEff('effext')">
-						 <img id="eeimg" src="../images/di_eeftag.png" border=0 
+						 <img id="eeimg" src="images/di_eeftag.png" border=0 
 						 	onmouseover="Tip('<b>{-#textraeffect#-}</b><br>{-$dmg.MetGuideextraeffects[2]-}', BGCOLOR, '#f1bd41', SHADOW, true, WIDTH, 400)" 
 							onmouseout="UnTip()"></a>
 						<!-- usemap="#efx"
@@ -543,7 +543,7 @@
 				<!-- BEG EVENT SECTION -->
 				<tr style="border:1px solid #ff0;">
 					<td width="30px" valign="top" style="border:0px;">
-						<img src="../images/di_evetag.png" 
+						<img src="images/di_evetag.png" 
 						onmouseover="Tip('<b>{-#mevents#-}</b><br>{-$dmg.MetGuideevents[2]-}', BGCOLOR, 'lightblue', SHADOW, true, WIDTH, 400)" 
 						onmouseout="UnTip()">
 					</td>
@@ -590,7 +590,7 @@
 				<!-- BEG CAUSE SECTION -->
 				<tr style="border:1px solid #ffffc0;">
 					<td width="30px" valign="top" style="border:0px;">
-						<img src="../images/di_cautag.png" 
+						<img src="images/di_cautag.png" 
 						onmouseover="Tip('<b>{-#mcauses#-}</b><br>{-$dmg.MetGuidecauses[2]-}', BGCOLOR, '#ffffc0', SHADOW, true, WIDTH, 400)" 
 						onmouseout="UnTip()">
 					</td>

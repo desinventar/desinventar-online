@@ -81,7 +81,7 @@
       tb.add('-', {text: '{-#mdcsection#-}',menu: mcards });
 {-/if-}
       tb.add('-', {text: '{-#mhelp#-}',   menu: mhelp  });
-	  tb.add('->',{text: '<img src="../images/di_logo4.png">'});
+	  tb.add('->',{text: '<img src="images/di_logo4.png">'});
 	  //tb.add('->', {text: 'OK'});
       function onMenuItem(item){
         switch (item.text) {
@@ -823,11 +823,11 @@
 	<script type="text/javascript" src="../include/listMan.js"></script>
 	<style type="text/css">
 		.bsave {
-			background-image: url(../images/saveicon.png) !important;
+			background-image: url(images/saveicon.png) !important;
 			background-repeat: no-repeat; background-position: top center; width: 22px;
 		}
 		.bprint {
-			background-image: url(../images/printicon.png) !important;
+			background-image: url(images/printicon.png) !important;
 			background-repeat: no-repeat; background-position: top center; width: 22px;
 		}
 	</style>
@@ -853,7 +853,7 @@
 	  <tr bgcolor="#bbbbbb">
        <td width="200px">
        	<b>{-#tsubtitle2#-} =></b>
-<!--       	<img src="../images/collapse.png" onClick="var w = Ext.getCmp('westm'); w.show();">-->
+<!--       	<img src="images/collapse.png" onClick="var w = Ext.getCmp('westm'); w.show();">-->
        </td>
        <td align="center">
 <!--	SECTION : DATA CONFIGURATION

@@ -1,135 +1,159 @@
 <script language="php">
-/************************************************
- DesInventar8
- http://www.desinventar.org  
+/*
+ **********************************************
+ DesInventar8 - http://www.desinventar.org  
  (c) 1999-2009 Corporacion OSSO
- ***********************************************/
+ **********************************************
+*/
 
-require_once('../include/loader.php');
+require_once('include/loader.php');
+require_once('include/region.class.php');
+require_once('include/diregion.class.php');
+$t->config_dir = 'include';
 
-function getRAPermList($lst) {
+function form2region ($val) {
 	$dat = array();
-	foreach ($lst as $k=>$v) {
-		if ($v=="NONE" || $v=="USER" || $v=="OBSERVER" || $v=="SUPERVISOR") {
-			$dat[$k] = $v;
-		}
-	}
+	if (isset($val['RegionId']))
+		$dat['RegionId'] = $val['RegionId'];
+	elseif (isset($val['RegionId2'])) 
+		$dat['RegionId'] = $val['RegionId2'];
+	elseif (isset($val['RegionUUID2']))
+		$dat['RegionId'] = $val['RegionUUID2'];
+	
+	$dat['RegionLabel' ] = $val['RegionLabel'];
+	$dat['LangIsoCode' ] = $val['RegionLangCode'];
+	$dat['CountryIso'  ] = $val['CountryIsoCode'];
+	$dat['RegionStatus'] = 0;
+	if (isset($val['RegionActive']) && $val['RegionActive'] == "on")
+		$dat['RegionStatus'] |= CONST_REGIONACTIVE;
+	else
+		$dat['RegionStatus'] &= ~CONST_REGIONACTIVE;
+	if (isset($val['RegionPublic']) && $val['RegionPublic'] == "on")
+		$dat['RegionStatus'] |= CONST_REGIONPUBLIC;
+	else
+		$dat['RegionStatus'] &= ~CONST_REGIONPUBLIC;
 	return $dat;
 }
 
-$reg = $us->sRegionId;
-if (empty($reg)) {
-	exit();
+// REGIONS: Show databases for selected Country from left menu
+if (isset($_GET['c']) && (strlen($_GET['c']) > 0)) {
+	$t->assign ("ctl_regions", true);
+	$q = new Query();
+	$t->assign ("cnt", $us->q->getCountryByCode($_GET['c']));
+	$dbs = $us->q->getRegionList($_GET['c'], "ACTIVE");
+	$t->assign ("ctl_available", true);
+	$t->assign ("dbs", $dbs);
 }
-$get = $_GET;
-
-// EDIT REGION: Form to Create and assign regions
-if (isset($get['infocmd'])) {
-	$mod = "info";
-	$cmd = $get['infocmd'];
-	if (isset($get['OptionOutOfPeriod']) && $get['OptionOutOfPeriod'] == "on")
-		$optout = true;
+// REGIONINFO: Show Information about Region
+elseif (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
+	// set region
+	$sRegionId = $_GET['r'];
+	if (isset($_GET['view'])) {
+		if ($_GET['view'] == "info")
+			$t->assign ("ctl_reginfo", true);
+		elseif ($_GET['view'] == "profile") {
+			$t->assign ("ctl_reginfo", true);
+		}
+		elseif ($_GET['view'] == "logo") {
+			header("Content-type: Image/png");
+			$murl = VAR_DIR . "/database/". $sRegionId . "/logo.png";
+			if (!file_exists($murl))
+				$murl = "images/di_logo.png";
+			readfile($murl);
+			exit();
+		}
+	}
+	// Get Information to Region
+	$q = new Query($sRegionId);
+	$t->assign ("period", $q->getDateRange());
+	$t->assign ("dtotal", $q->getNumDisasterByStatus("PUBLISHED"));
+	$t->assign ("lstupd", $q->getLastUpdate());
+	// Enable access only to users with a valid role in this region
+	$role = $us->getUserRole($sRegionId);
+	if ($role=="OBSERVER" || $role=="USER" || $role=="SUPERVISOR" || $role=="ADMINREGION") {
+		$t->assign ("ctl_showdimod", true);
+		$t->assign ("ctl_showdcmod", true);
+	}
+	// Show active or public regions only
+	$rf = $q->getRegionFieldByID($sRegionId, "RegionStatus");
+	if ($rf[$sRegionId] & CONST_REGIONPUBLIC)
+		$t->assign ("ctl_showdcmod", true);
+	$t->assign ("ctl_showreg", true);
+	$reg = $q->getDBInfo();
+	$t->assign ("regname", $reg['RegionLabel|']);
+	//$t->assign ("log", $q->getRegLogList());
+	$lang = $reg['LangIsoCode|'];
+	$t->assign ("lang", $lang);
+	$t->assign ("reg", $sRegionId);
+	if ($lang == $_SESSION['lang'])
+		$mylg = $lang;
 	else
-		$optout = false;
-	
-	$ifo = 0;
-	// Replace this call with a new class (2009-07-06) (jhcaiced)
-	/*
-	$ifo = $r->updateDBInfo($reg, $get['RegionLabel'], $get['RegionDesc'], $get['RegionDescEN'], 
-							$get['RegionLangCode'], $get['PeriodBeginDate'], $get['PeriodEndDate'], $optout, 
-							$get['GeoLimitMinX'], $get['GeoLimitMinY'], $get['GeoLimitMaxX'], $get['GeoLimitMaxY']);
-	*/					
-	if (!iserror($ifo)) 
-		$t->assign ("ctl_msgupdinfo", true);
-	else {
-		$t->assign ("ctl_errupdinfo", true);
-		$t->assign ("updstatinfo", $ifo);
-	}
-}
-// EDIT ROLE: Form to Create and assign role
-elseif (isset($get['rolecmd'])) {
-	$mod = "role";
-	$cmd = $get['rolecmd'];
-	if (($cmd == "insert") || ($cmd == "update")) {
-		// Set Role in RegionAuth
-		$rol = $us->setUserRole($get['UserId'], $reg, $get['AuthAuxValue']);
-		if (!iserror($rol)) 
-			$t->assign ("ctl_msgupdrole", true);
-		else {
-			$t->assign ("ctl_errupdrole", true);
-			$t->assign ("updstatrole", showerror($rol));
-		}
-	}
-	// reload list from local SQLITE
-	else if ($cmd == "list") {
-		$t->assign ("rol", $us->getRegionRoleList($reg));
-		$t->assign ("ctl_rollist", true);
-	}
-}
-// EDIT REGION: Form to Create and assign regions
-elseif (isset($get['logcmd'])) {
-	$mod = "log";
-	$cmd = $get['logcmd']; 
-	if ($cmd == "insert") {
-		$stat = 1;
-		//2009-07-06 (jhcaiced) Replace this with another class...
-		//$stat = $r->insertRegLog($get['DBLogType'], $get['DBLogNotes']);
-		if (!iserror($stat)) 
-			$t->assign ("ctl_msginslog", true);
-		else {
-			$t->assign ("ctl_errinslog", true);
-			$t->assign ("insstatlog", $stat);
-		}
-	} elseif ($cmd == "update") {
-		$stat = 1;
-		// 2009-07-06 (jhcaiced) Replace this with another class...
-		//$stat = $r->updateRegLog($get['DBLogDate'], $get['DBLogType'], $get['DBLogNotes']);
-		if (!iserror($stat)) 
-			$t->assign ("ctl_msgupdlog", true);
-		else {
-			$t->assign ("ctl_errupdlog", true);
-			$t->assign ("updstatlog", showerror($stat));
-		}
-	} elseif ($cmd == "list") {
-		// reload list from local SQLITE
-		if ($mod == "log") {
-			$t->assign ("log", $us->q->getRegLogList());
-			$t->assign ("ctl_loglist", true);
-		}
-	}
-}
-else {
-	if ($urol == "OBSERVER")
-		$t->assign ("ro", "disabled");
-	$lang = $_SESSION['lang'];
-	$inf = $us->q->getDBInfo();
-	$info['InfoCredits'] 	= array($inf['InfoCredits|'. $lang], "TEXT");
-	$info['InfoGeneral'] 	= array($inf['InfoGeneral|'. $lang], "TEXT");
-	$info['InfoSources'] 	= array($inf['InfoSources|'. $lang], "TEXT");
-	$info['InfoSynopsis'] 	= array($inf['InfoSynopsis|'. $lang], "TEXT");
-	$info['InfoObservation']= array($inf['InfoObservation|'. $lang], "TEXT");
-	$info['InfoGeography']	= array($inf['InfoGeography|'. $lang], "TEXT");
-	$info['InfoCartography']= array($inf['InfoCartography|'. $lang], "TEXT");
-	$info['InfoAdminURL']	= array($inf['InfoAdminURL|'. $lang], "VARCHAR");
-	$info['GeoLimitMinX']	= array($inf['GeoLimitMinX|'. $lang], "NUMBER");
-	$info['GeoLimitMinY']	= array($inf['GeoLimitMinY|'. $lang], "NUMBER");
-	$info['GeoLimitMaxX']	= array($inf['GeoLimitMaxX|'. $lang], "NUMBER");
-	$info['GeoLimitMaxY']	= array($inf['GeoLimitMaxY|'. $lang], "NUMBER");
-	$info['PeriodBeginDate']= array($inf['PeriodBeginDate|'. $lang], "NUMBER");
-	$info['PeriodEndDate']	= array($inf['PeriodEndDate|'. $lang], "NUMBER");
+		$mylg = "eng";
+	$info['InfoSynopsis'] = $reg['InfoSynopsis|'. $mylg];
+	$info['InfoCredits'] = $reg['InfoCredits|'. $mylg];
+	$info['InfoGeneral'] = $reg['InfoGeneral|'. $mylg];
+	$info['InfoSources'] = $reg['InfoSources|'. $mylg];
 	$t->assign ("info", $info);
-	$urol = $us->getUserRole($reg);
-	$t->assign ("usr", $us->getUserFullName(''));
-	$t->assign ("usr", $us->getUsersList(''));
-	$t->assign ("rol", $us->getRegionRoleList($reg));
-	$t->assign ("log", $us->q->getRegLogList());
-	$t->assign ("ctl_adminreg", true);
-	$t->assign ("ctl_rollist", true);
-	$t->assign ("ctl_loglist", true);
+	//$t->assign ("dbden", str2js($reg['InfoGeneral'][1]));
+} elseif (isset($_GET['cmd'])) {
+	//$q = new Query();
+	switch ($_GET['cmd']) {
+		case "adminreg":
+			// ADMINREG: Form to Create and assign regions
+			$t->assign ("cntl", $us->q->getCountryList());
+			$t->assign ("usr", $us->getUsersList(''));
+			$t->assign ("ctl_adminreg", true);
+			$t->assign ("regpa", $us->q->getRegionAdminList());
+			$t->assign ("ctl_reglist", true);
+		break;
+		case "chkruuid":
+			// ADMINREG: check if region ID already exists..
+			if ($us->q->isvalidObjectName($_GET['RegionId'], $_GET['RegionId'] ,DI_REGION))
+				$t->assign ("cregion", true);
+			else
+				$t->assign ("cregion", false);
+			$t->assign ("ctl_chkruuid", true);
+		break;
+		case "list":
+			// ADMINREG: reload list from local SQLITE
+			$t->assign ("regpa", $us->q->getRegionAdminList());
+			$t->assign ("ctl_reglist", true);
+		break;
+		default:
+			// ADMINREG: insert or update region
+			if (($_GET['cmd'] == "insert") || ($_GET['cmd'] == "update")) {
+				$data = form2region($_GET);
+				$r = new DIRegion($us, $data['RegionId']);
+				$r->setFromArray($data);
+				$stat = ERR_NO_DATABASE;
+				$t->assign ("ctl_admregmess", true);
+				$stat = 0;
+				if ($_GET['cmd'] == "insert") {
+					$stat = $r->insert();
+					$t->assign ("cfunct", 'insert');
+				} elseif ($_GET['cmd'] == "update") {
+					$stat = $r->update();
+					$t->assign ("cfunct", 'update');
+				}
+				$t->assign ("regid", $data['RegionId']);
+				// Set Role ADMINREGION in RegionAuth: master for this region
+				if (!iserror($stat)) {
+					$rol = $us->setUserRole($_GET['RegionUserAdmin'], $data['RegionId'], "ADMINREGION");
+				} else {
+					$t->assign ("cfunct", '');
+					$rol = $stat;
+				}
+				if (!iserror($rol))
+					$t->assign ("csetrole", true);
+				else
+					$t->assign ("errsetrole", $rol);
+			}
+		break;
+	} //switch
+} else {
+	$t->assign ("regname", "Undefined Region!");
 }
-$t->assign ("reg", $reg);
-$t->assign ("dic", $us->q->queryLabelsFromGroup('DB', $lg));
-$t->assign ("usern", $us->UserId);
+
 $t->display ("region.tpl");
 
 </script>
