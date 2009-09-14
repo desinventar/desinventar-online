@@ -9,18 +9,10 @@
  <table border=0 cellpadding=0 cellspacing=0>
   <tr>
    <td>
-	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center style="margin-top:1px">
-	 <tr>
-	  <td><img src="images/c1.gif" width="133" height="4"></td>
-	  <td><img src="images/c1.gif" width="133" height="4"></td>
-	 </tr>
+	<table border=0 cellpadding=0 cellspacing=0 align=center style="margin-top:1px">
 	 <tr>
 	  <td class="mizq" align="right">{-#tuser#-} <input type="text" id="userid" name="userid" value="" size="8" class="f"></td>
 	  <td class="mizq" align="right">{-#tpassword#-} <input type="password" name="password" id="password" value="" size="8" class="f"></td>
-	 </tr>
-	 <tr>
-	  <td><img src="images/c3.gif" width="133" height="3" alt=""></td>
-	  <td><img src="images/c3.gif" width="133" height="4" alt=""></td>
 	 </tr>
 	</table>
    </td>
