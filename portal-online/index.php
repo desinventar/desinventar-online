@@ -88,7 +88,7 @@ function displayList(elem) {
 					</td></tr>
 					<tr><td colspan="3"><img src="default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'c=PER');">Perú</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'c=PER');">Per&uacute;</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
@@ -140,7 +140,7 @@ function displayList(elem) {
 					</td></tr>
 					<tr><td colspan="3"><img src="default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=PAN-1250695231-panama_inventario_de_desastres_sinaproc');">Panamá</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=PAN-1250695231-panama_inventario_de_desastres_sinaproc');">Panam&aacute;</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>
@@ -194,7 +194,7 @@ function displayList(elem) {
 				</table>
 				<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect5" style="display:none;">
 					<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=MEX-1250695136-mexico_inventario_historico_de_desastres');">México</a>
+						<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=MEX-1250695136-mexico_inventario_historico_de_desastres');">M&eacute;xico</a>
 					</td></tr>
 					<tr><td colspan="3"><img src="default/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 				</table>

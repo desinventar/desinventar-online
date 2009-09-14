@@ -1,230 +1,209 @@
-{-config_load file=`$lg`.conf section="di8_reginfo"-}
+{-config_load file=`$lg`.conf section="di8_region"-}
+<script type="text/javascript" src="include/prototype.js"></script>
+<script type="text/javascript" src="include/diadmin.js"></script>
+{-* ADMINREG: Interface to Edit Portal Admin *-}
 {-if $ctl_adminreg-}
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
-  <link rel="stylesheet" href="../css/desinventar.css" type="text/css">
-  <script type="text/javascript" src="../include/prototype.js"></script>
-  <script type="text/javascript" src="../include/diadmin.js"></script>
-</head>
-<body>
- <table border=0>
-  <tr valign="top">
-	<td>
-		<b onMouseOver="showtip('{-$dic.DBRegion[2]-}');">{-$dic.DBRegion[0]-}</b>
-		<br>
-<!-- GENERAL REGION INFO SECTION -->
-		<form name="infofrm" id="infofrm" method="GET"
-			action="javascript: var s=$('infofrm').serialize(); mod='info'; sendData('{-$reg-}', 'region.php', s, '');"
-			onSubmit="javascript: var a=new Array('RegionDesc'); return(checkForm(a, '{-#errmsgfrm#-}'));">
-			<input id="r" name="r" type="hidden" value="{-$reg-}">
-			<input id="infocmd" name="infocmd" value="update" type="hidden">
-			<table border=0 cellspacing=0 cellpadding=0>
-{-foreach name=info key=key item=item from=$info-}
-			 <tr>
-			  <td>
-			   <a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBRegionDesc[2]-}')">
-			   <b style="color:darkred;">{-$key-}</b><span>{-$dic.DBRegionDesc[1]-}</span></a>
-			  </td>
-			  <td>
-{-if $item[1] == "TEXT"-}
-			   <textarea id="{-$key-}" name="{-$key-}" tabindex="1" {-$ro-} style="width:350px; height:40px;"
-				onFocus="showtip('{-$dic.DBRegionDesc[2]-}')">{-$item[0]-}</textarea>
-{-elseif $item[1] == "VARCHAR"-}
-			   <input id="{-$key-}" name="{-$key-}" type="text" class="line" style="width:350px;" value="{-$item[0]-}">
-{-elseif $item[1] == "NUMBER"-}
-			   <input id="{-$key-}" name="{-$key-}" type="text" class="line" style="width:40px;" value="{-$item[0]-}">
+<h2>{-#ttname#-}</h2>
+<br>
+<div class="dwin" style="width:560px; height:250px;">
+ <table class="col">
+	<thead>
+		<tr>
+			<td class="header"><b>{-#tregcntlist#-}</b></td>
+			<td class="header"><b>{-#tregnamlist#-}</b></td>
+			<td class="header"><b>{-#tregadmlist#-}</b></td>
+			<td class="header"><b>{-#tregactlist#-}</b></td>
+			<td class="header"><b>{-#tregpublist#-}</b></td>
+		</tr>
+	</thead>
+	<tbody id="lst_regionpa" style="overflow:auto; height:200px;">
 {-/if-}
-			  </td>
-			 </tr>
+{-** ADMINREG: reload region lists **-}
+{-if $ctl_reglist-}
+{-foreach name=rpa key=key item=item from=$regpa-}
+	<tr class="{-if ($smarty.foreach.rpa.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}"
+   		onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
+   		onClick="uploadMsg(''); setRegionPA('{-$item[0]-}','{-$key-}','{-$item[1]-}','{-$item[2]-}','{-$item[3]-}','{-$item[4]-}'); 
+   					$('RegionUUID2').value='{-$key-}'; $('cmd').value='update';">
+    <td>{-$item[0]-}</td>
+    <td>{-$item[1]-}</td>
+    <td>{-$item[2]-}</td>
+    <td><input type="checkbox" {-if ($item[3] == 1) -} checked {-/if-} disabled></td>
+    <td><input type="checkbox" {-if ($item[4] == 1) -} checked {-/if-} disabled></td>
+	</tr>
 {-/foreach-}
-			</table>
-			<span id="infoaddsect"></span>
-			<input type="submit" value="{-#bsave#-}" {-$ro-} class="line">
-			<input type="reset" value="{-#bcancel#-}" {-$ro-} onclick="mod='info'; uploadMsg('');" class="line">
-			<br>
-			<span id="infostatusmsg" class="dlgmsg"></span>
-		</form>
-	</td>
-	<td>
-<!-- PERMISSIONS -->
-		<b onMouseOver="showtip('{-$dic.DBPermissions[2]-}');">{-$dic.DBPermissions[0]-}</b>
-		<div class="dwin" style="width:280px; height:120px;">
-			<table width="100%" class="grid">
-				<thead>
+{-/if-}
+{-* Continue with adminreg.. *-}
+{-if $ctl_adminreg-}
+  </tbody>
+ </table>
+</div>
+  <br>
+  <input id="add" type="button" value="{-#baddoption#-}" class="line"
+  		onclick="setRegionPA('', '', '', '', '1','0'); $('cmd').value='insert'; $('RegionUUID').disabled=false;">
+  <span id="regionpastatusmsg" class="dlgmsg"></span>
+  <br>
+  <div id="regionpaaddsect" style="display:none">
+   	<form name="regionpafrm" id="regionpafrm" method="GET" 
+   		action="javascript: var s=$('regionpafrm').serialize(); mod='regionpa'; sendData('','region.php', s, '');"
+   		onSubmit="javascript: var a=new Array('CountryIsoCode','RegionUUID','RegionLabel','RegionUserAdmin'); 
+   													return(checkForm(a, '{-#errmsgfrm#-}'));">
+			<table class="grid">
+				<tbody>
 					<tr>
-						<td class="header" onMouseOver="showtip('{-$dic.DBUserId[2]-}');">
-							<b>{-$dic.DBUserId[0]-}</b></td>
-						<td class="header" onMouseOver="showtip('{-$dic.DBRole[2]-}');">
-							<b>{-$dic.DBRole[0]-}</b></td>
-					</tr>
-				</thead>
-				<tbody id="lst_role">
-{-/if-}
-{-if $ctl_rollist-}
-{-foreach name=rol key=key item=item from=$rol-}
- {-if $usern != $key-}
-					<tr class="{-if ($smarty.foreach.rol.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}"
-							onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
-							onClick="setRolLog('{-$key-}','{-$item-}', 'role'); $('rolecmd').value='update';">
-						<td>{-$key-}</td>
+						<td>{-#tregcntlist#-}<b style="color:darkred;">*</b></td>
 						<td>
-  {-if $item == "NONE"-}			{-$dic.DBRoleNone[0]-}
-  {-elseif $item == "USER"-}		{-$dic.DBRoleUser[0]-}
-  {-elseif $item == "OBSERVER"-}	{-$dic.DBRoleObserver[0]-}
-  {-elseif $item == "SUPERVISOR"-}{-$dic.DBRoleSupervisor[0]-}
-  {-/if-}
-						</td>
-					</tr>
- {-/if-}
+							<select id="CountryIsoCode" name="CountryIsoCode" class="fixw">
+								<option value=""></option>
+{-foreach name=cnt key=key item=item from=$cntl-}
+								<option value="{-$key-}">{-$item-}</option>
 {-/foreach-}
-{-/if-}
-{-if $ctl_adminreg-}
-				</tbody>
-			</table>
-		</div>
-		<br>
-		<input id="add" type="button" value="{-#baddoption#-}" class="line"
-			onclick="setRolLog('', '', 'role'); $('rolecmd').value='insert';">
-		<span id="rolestatusmsg" class="dlgmsg"></span>
-		<br>
-		<div id="roleaddsect" style="display:none">
-			<form name="rolefrm" id="rolefrm" method="GET" 
-				action="javascript: var s=$('rolefrm').serialize(); sendData('{-$reg-}', 'region.php', s, '');"
-				onSubmit="javascript: var a=new Array('UserId','AuthAuxValue'); return(checkForm(a, '{-#errmsgfrmrol#-}'));">
-				<input id="r" name="r" type="hidden" value="{-$reg-}">
-				<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBUserId[2]-}')">
-					{-$dic.DBUserId[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBUserId[1]-}</span></a><br>
-				<select id="UserId" name="UserId" {-$ro-} class="line fixw" onFocus="showtip('{-$dic.DBUserId[2]-}');">
-					<option value=""></option>
+							</select></td>
+					</tr>
+					<tr>
+						<td>{-#tregionuuid#-}<b style="color:darkred;">*</b></td>
+						<td>
+							<input id="RegionUUID" name="RegionUUID" type="text" maxlength="20" class="line fixw" disabled
+								onBlur="updateList('chkruuid', 'region.php', 'cmd=chkruuid&RegionUUID='+ $('RegionUUID').value);">
+							<input type="hidden" id="RegionUUID2" name="RegionUUID2">
+							<span id="chkruuid"></span></td>
+					</tr>
+					<tr>
+						<td>{-#tregnamlist#-}<b style="color:darkred;">*</b></td>
+						<td><input id="RegionLabel" name="RegionLabel" type="text" maxlength="50" class="line fixw"></td>
+					</tr>
+					<tr>
+						<td>{-#tregadmlist#-}<b style="color:darkred;">*</b></td>
+						<td>
+							<select id="RegionUserAdmin" name="RegionUserAdmin" class="fixw">
+								<option value=""></option>
 {-foreach name=usr key=key item=item from=$usr-}
-{-if $usern != $key-}
-					<option value="{-$key-}">{-$item-}</option>
-{-/if-}
+								<option value="{-$key-}">{-$item-}</option>
 {-/foreach-}
-				</select>
-				<br><br>
-				<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBRole[2]-}')">
-					{-$dic.DBRole[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBRole[1]-}</span></a><br>
-				<select id="AuthAuxValue" name="AuthAuxValue" {-$ro-} class="fixw line" onFocus="showtip('{-$dic.DBRole[2]-}');">
-					<option value="NONE" onMouseOver="showtip('{-$dic.DBRoleNone[2]-}');">{-$dic.DBRoleNone[0]-}</option>
-					<option value="USER" onMouseOver="showtip('{-$dic.DBRoleUser[2]-}');">{-$dic.DBRoleUser[0]-}</option>
-					<option value="OBSERVER" onMouseOver="showtip('{-$dic.DBRoleObserver[2]-}');">{-$dic.DBRoleObserver[0]-}</option>
-					<option value="SUPERVISOR" onMouseOver="showtip('{-$dic.DBRoleSupervisor[2]-}');">{-$dic.DBRoleSupervisor[0]-}</option>
-				</select>
-				<br><br>
-				<p class="fixw">
-					<input id="rolecmd" name="rolecmd" type="hidden">
-					<input type="submit" value="{-#bsave#-}" {-$ro-} class="line">
-					<input type="reset" value="{-#bcancel#-}" class="line"
-	   	  				onClick="$('roleaddsect').style.display='none'; mod='role'; uploadMsg('');" {-$ro-}>
-				</p>
-			</form>
-		</div>
-		<br><hr>
-<!-- LOG RECORDS -->
-		<b onMouseOver="showtip('{-$dic.DBLog[2]-}');">{-$dic.DBLog[0]-}</b><br>
-		<div class="dwin" style="width:280px; height:120px;">
-			<table width="100%" class="grid">
-				<thead>
+							</select></td>
+					</tr>
 					<tr>
-						<td class="header" onMouseOver="showtip('{-$dic.DBLogType[2]-}');">
-							<b>{-$dic.DBLogType[0]-}</b></td>
-						<td class="header" onMouseOver="showtip('{-$dic.DBLogNote[2]-}');">
-							<b>{-$dic.DBLogNote[0]-}</b></td>
-					</tr>
-				</thead>
-				<tbody id="lst_log">
-{-/if-}
-{-if $ctl_loglist-}
-{-foreach name=log key=key item=item from=$log-}
-					<tr class="{-if ($smarty.foreach.log.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}"
-						onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
-						onClick="setRolLog('{-$item[0]-}','{-$item[1]-}', 'log'); $('DBLogDate').value='{-$key-}'; 
-													$('logcmd').value='update';">
-						<td>
- {-if $item[0] == "CREDIT"-}
-						{-$dic.DBLogCredits[0]-}
- {-elseif $item[0] == "METHODOLOGY"-}
-						{-$dic.DBLogMethodology[0]-}
- {-elseif $item[0] == "MILESTONE"-}
-						{-$dic.DBLogStaff[0]-}
- {-elseif $item[0] == "SUPPORT"-}
-						{-$dic.DBLogSupport[0]-}
- {-elseif $item[0] == "DELETED"-}
-						Borrado
- {-/if-}
+						<td><a class="info" href="javascript:void(null)" 
+							onMouseOver="showtip('{-$dic.DBRegionLangCode[2]-}')">{-$dic.DBRegionLangCode[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBRegionLangCode[1]-}</span></a>
 						</td>
-						<td>{-$item[1]|truncate:20-}</td>
+						<td><select id="RegionLangCode" name="RegionLangCode" {-$ro-} class="line fixw" 
+										onFocus="showtip('{-$dic.DBRegionLangCode[2]-}')" tabindex="1">
+									<option value="es">Espa&ntilde;ol</option>
+								</select>
+						</td>
 					</tr>
-{-/foreach-}
-{-/if-}
-{-if $ctl_adminreg-}
+					<tr>
+						<td>{-#tregactlist#-}<b>*</b></td>
+						<td><input id="RegionActive" name="RegionActive" type="checkbox" checked></td>
+					</tr>
+					<tr>
+						<td>{-#tregpublist#-}<b>*</b></td>
+						<td><input id="RegionPublic" name="RegionPublic" type="checkbox"></td>
+					</tr>
+					<tr>
+						<td colspan=2 align="center">
+							<input id="cmd" name="cmd" type="hidden">
+							<input type="submit" value="{-#bsave#-}" class="line">
+							<input type="reset" value="{-#bcancel#-}" onClick="$('regionpaaddsect').style.display='none'; uploadMsg('');" class="line">
+						</td>
+					</tr>
 				</tbody>
 			</table>
-		</div>
-		<br>
-		<input id="add" type="button" value="{-#baddoption#-}" class="line"
-			onclick="setRolLog('', '', 'log'); $('logcmd').value='insert';">
-		<span id="logstatusmsg" class="dlgmsg"></span>
-		<br>
-		<div id="logaddsect" style="display:none; width:280px;">
-			<form name="logfrm" id="logfrm" method="GET" 
-				action="javascript: var s=$('logfrm').serialize(); sendData('{-$reg-}', 'region.php', s, '');"
-				onSubmit="javascript: var a=new Array('DBLogType','DBLogNotes'); return(checkForm(a, '{-#errmsgfrmlog#-}'));">
-				<input id="r" name="r" type="hidden" value="{-$reg-}">
-				<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLogType[2]-}');">
-				{-$dic.DBLogType[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBLogType[1]-}</span></a><br>
-				<select id="DBLogType" name="DBLogType" {-$ro-} onFocus="showtip('{-$dic.DBLogType[2]-}');" class="line fixw">
-					<option value=""></option>
-					<option value="CREDIT" onMouseOver="showtip('{-$dic.DBLogCredits[2]-}');">{-$dic.DBLogCredits[0]-}</option>
-					<option value="METHODOLOGY" onMouseOver="showtip('{-$dic.DBLogMethodology[2]-}');">{-$dic.DBLogMethodology[0]-}</option>
-					<option value="MILESTONE" onMouseOver="showtip('{-$dic.DBLogStaff[2]-}');">{-$dic.DBLogStaff[0]-}</option>
-					<option value="SUPPORT" onMouseOver="showtip('{-$dic.DBLogSupport[2]-}');">{-$dic.DBLogSupport[0]-}</option>
-					<option value="DELETED">- X -</option>
-				</select>
-				<br><br>
-				<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLogNote[2]-}');">
-				{-$dic.DBLogNote[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBLogNote[1]-}</span></a><br>
-				<textarea id="DBLogNotes" name="DBLogNotes" cols="22" {-$ro-} class="fixw"
-						onFocus="showtip('{-$dic.DBLogNote[2]-}');"></textarea>
-				<br><br>
-				<p align="center" class="fixw">
-					<input id="DBLogDate" name="DBLogDate" type="hidden">
-					<input id="logcmd" name="logcmd" type="hidden">
-					<input type="submit" value="{-#bsave#-}" {-$ro-} class="line">
-					<input type="reset" value="{-#bcancel#-}" class="line"
-							onClick="$('logaddsect').style.display='none'; mod='log'; uploadMsg('');" {-$ro-}>
-				</p>
-			</form>
-		</div>
+		</form>
+	</div>
+{-/if-}
+
+{-**** SHOW LIST OF REGIONS BY COUNTRY (CONTENT) ****-}
+{-if $ctl_regions-}
+<h2>{-$cnt-}</h2>
+<p align="justify">
+{-#tviewdbase#-}<br>
+{-if $ctl_available-}
+	<select onChange="updateList('shwreg', 'region.php', 'r='+ this.value)" size=4 style="width: 500px;">
+{-foreach name=dbs key=key item=item from=$dbs-}
+  	<option value="{-$key-}" class="regl">{-$item-}</option>
+{-/foreach-}
+	</select>
+	<div id="shwreg"></div>
+{-else-}
+ <br>{-#tdbnotavail#-}
+{-/if-}
+</p><br>
+{-/if-}
+{-***** REGINFO: Show Region Info - CONTENT SECTION *****-}
+{-if $ctl_showreg || $ctl_reginfo-}
+ <table border=0 style="width:550px; font-family:Lucida Grande, Verdana; font-size:10px;">
+  <tr>
+	<td valign="center"><img src="region.php?r={-$reg-}&view=logo"></td>
+	<td valign="top">
+ 	  <h2>{-$regname-}</h2>
+     {-#tperiod#-}: {-$period[0]-} - {-$period[1]-}<br>
+     {-#trepnum#-}: {-$dtotal-}<br>
+     {-#tlastupd#-}: {-$lstupd-}<br>
 	</td>
   </tr>
+ {-if !$ctl_reginfo-}
+  <tr>
+	<td colspan=2 align="center">
+  {-if $ctl_showdimod-}
+	  <img id="dimod" src="images/b_desinventar1.jpg" border="0" style="cursor: pointer;"
+		onClick="$('dimod').src='images/b_desinventar2.jpg'; runWin('desinventar/cards.php?r={-$reg-}', 'desinventar');"
+		onMouseOver='$("dimod").src="images/b_desinventar3.jpg"; $("modinfo").innerHTML="{-#tmoddesinv#-}";'
+		onMouseOut="$('dimod').src='images/b_desinventar1.jpg'; $('modinfo').innerHTML='';"></a> &nbsp;&nbsp; &nbsp;&nbsp;
+  {-/if-}
+  {-if $ctl_showdcmod-}
+	  <img id="dcmod" src="images/b_desconsultar1.jpg" style="cursor: pointer;"
+		onClick="$('dcmod').src='images/b_desconsultar2.jpg'; runWin('desinventar/index.php?r={-$reg-}{-if $isvreg-}&v=true{-/if-}', 'desconsultar');"
+		onMouseOver='$("dcmod").src="images/b_desconsultar3.jpg"; $("modinfo").innerHTML="{-#tmoddescon#-}";'
+		onMouseOut="$('dcmod').src='images/b_desconsultar1.jpg'; $('modinfo').innerHTML='';">
+  {-else-}
+	  <b>{-#tnopublic#-}</b><br>
+  {-/if-}
+  {-if $ctl_inactivereg-}
+	  <b>{-#tinactive#-}</b><br>
+  {-/if-}
+      <div id="modinfo" class="dlgmsg" style="text-align:center;"></div><br>
+   </td>
+  </tr>
+ {-/if-}
+  <tr>
+   <td colspan="2">
+ {-foreach name=info key=k item=i from=$info-}
+  {-if $i != ""-}
+	<fieldset>
+	 <legend><b><a href="javascript:void(null);" onclick="showinfo('{-$k-}')">{-$k-}</a></b></legend>
+	 <div id="{-$k-}" style="height:70px; width:540px; overflow: auto;
+		padding-left: 3px; padding-right: 3px; display: none" align="justify">{-$i-}</div>
+	</fieldset>
+  {-/if-}
+ {-/foreach-}
+   </td>
+  </tr>
  </table>
-</body>
-</html>
 {-/if-}
-{-** REGION INFO AND ERRORS MESSAGES **-}
-{-if $ctl_msgupdinfo-}
- {-#msgupdinfo#-}
-{-elseif $ctl_errupdinfo-}
- {-#terror#-}[{-$updstatinfo-}]: {-#errupdinfo#-}
+
+{-*** CHECK Region ID MESSAGES - STATUS SPAN ***-}
+{-if $ctl_chkruuid-}
+ {-if $cregion-}
+ 	{-#tvalregid#-}
+ {-else-}
+ 	{-#tinvregid#-}
+ {-/if-}
 {-/if-}
-{-** ROLE INFO AND ERRORS MESSAGES **-}
-{-if $ctl_msgupdrole-}
- {-#msgupdrole#-} 
-{-elseif $ctl_errupdrole-}
- {-#terror#-}[{-$updstatrole-}]: {-#errupdrole#-}
-{-/if-}
-{-** LOG INFO AND ERRORS MESSAGES **-}
-{-if $ctl_msginslog-}
- {-#msginslog#-}
-{-elseif $ctl_errinslog-}
- {-#terror#-}[{-$insstatlog-}]: {-#errinslog#-}
-{-elseif $ctl_msgupdlog-}
- {-#msgupdlog#-}
-{-elseif $ctl_errupdlog-}
- {-#terror#-}[{-$updstatlog-}]: {-#errupdlog#-}
+
+{-*** INSERT OR UPDATE MESSAGES - STATUS SPAN ***-}
+{-if $ctl_admregmess-}
+ {-if $cfunct == 'insert'-}
+ 	{-#tinsert#-}
+ {-elseif $cfunct == 'update'-}
+  {-#tupdate#-}
+ {-else-}
+  {-#terrinsupd#-}
+ {-/if-}
+ {-if $csetrole-}
+ 	{-#tsetrole#-}
+ {-else-}
+  {-#terrsetrole#-} [{-$errsetrole-}]
+ {-/if-}
+ {-$regid-}
 {-/if-}

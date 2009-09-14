@@ -223,7 +223,7 @@
 {-/foreach-}
          {-$rgl[0].regname-}</p>
 				<hr>
-			  <image src="../images/ge_icon.png"> <a href="thematicmap.php?r={-$reg-}&cmd=getkml">{-#tgetgearth#-}</a><hr><br>
+			  <image src="images/ge_icon.png"> <a href="thematicmap.php?r={-$reg-}&cmd=getkml">{-#tgetgearth#-}</a><hr><br>
 			  <img src="{-$legend-}">
 		  </div>
 		 </td>
