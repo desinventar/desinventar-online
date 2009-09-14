@@ -78,7 +78,6 @@
 					updateList('lst_evepred', 'events.php', 'r='+ reg +'&cmd=list&predef=1');
 				else
 					updateList('lst_eveuser', 'events.php', 'r='+ reg +'&cmd=list&predef=0');
-				// update elements in interfaces
 				updateList('qevelst', 'index.php', 'cmd=evelst');
 			break;
 			case "cause":
@@ -86,21 +85,19 @@
 					updateList('lst_caupred', 'causes.php', 'r='+ reg +'&cmd=list&predef=1');
 				else
 					updateList('lst_cauuser', 'causes.php', 'r='+ reg +'&cmd=list&predef=0');
-				// update elements in interfaces
 				updateList('qcaulst', 'index.php', 'cmd=caulst');
 			break;
 			case "role":
-				updateList('lst_role', 'region.php', 'r='+ reg +'&rolecmd=list');
+				updateList('lst_role', 'info.php', 'r='+ reg +'&rolecmd=list');
 			break;
 			case "log":
-				updateList('lst_log', 'region.php', 'r='+ reg +'&logcmd=list');
+				updateList('lst_log', 'info.php', 'r='+ reg +'&logcmd=list');
 			break;
 			case "lev":
 				updateList('lst_lev', 'geolevel.php', 'r='+ reg +'&levcmd=list');
 			break;
 			case "geo":
 				updateList('lst_ageo', 'geography.php', 'r='+ reg +'&geocmd=list&GeographyId=');
-				// update elements in interfaces
 				updateList('qgeolst', 'index.php', 'cmd=geolst');
 			break;
 			case "extraeff":

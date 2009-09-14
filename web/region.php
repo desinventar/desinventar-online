@@ -52,7 +52,12 @@ elseif (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
 		if ($_GET['view'] == "info")
 			$t->assign ("ctl_reginfo", true);
 		elseif ($_GET['view'] == "profile") {
-			$t->assign ("ctl_reginfo", true);
+			$reglst = array();
+			$result = $us->q->core->query("SELECT RegionId, RegionLabel FROM Region WHERE RegionStatus=3 ORDER BY RegionLabel, RegionOrder");
+			while ($row = $result->fetch(PDO::FETCH_OBJ))
+				$reglst[$row->RegionId] = $row->RegionLabel;
+			$t->assign ("reglst", $reglst);
+			$t->assign ("ctl_regprofile", true);
 		}
 		elseif ($_GET['view'] == "logo") {
 			header("Content-type: Image/png");
@@ -106,6 +111,7 @@ elseif (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
 			$t->assign ("regpa", $us->q->getRegionAdminList());
 			$t->assign ("ctl_reglist", true);
 		break;
+		/* Obsolete cmd 
 		case "chkruuid":
 			// ADMINREG: check if region ID already exists..
 			if ($us->q->isvalidObjectName($_GET['RegionId'], $_GET['RegionId'] ,DI_REGION))
@@ -113,7 +119,7 @@ elseif (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
 			else
 				$t->assign ("cregion", false);
 			$t->assign ("ctl_chkruuid", true);
-		break;
+		break;*/
 		case "list":
 			// ADMINREG: reload list from local SQLITE
 			$t->assign ("regpa", $us->q->getRegionAdminList());

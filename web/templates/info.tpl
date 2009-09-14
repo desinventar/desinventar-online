@@ -17,7 +17,7 @@
 		<br>
 <!-- GENERAL REGION INFO SECTION -->
 		<form name="infofrm" id="infofrm" method="GET"
-			action="javascript: var s=$('infofrm').serialize(); mod='info'; sendData('{-$reg-}', 'region.php', s, '');"
+			action="javascript: var s=$('infofrm').serialize(); mod='info'; sendData('{-$reg-}', 'info.php', s, '');"
 			onSubmit="javascript: var a=new Array('RegionDesc'); return(checkForm(a, '{-#errmsgfrm#-}'));">
 			<input id="r" name="r" type="hidden" value="{-$reg-}">
 			<input id="infocmd" name="infocmd" value="update" type="hidden">
@@ -92,7 +92,7 @@
 		<br>
 		<div id="roleaddsect" style="display:none">
 			<form name="rolefrm" id="rolefrm" method="GET" 
-				action="javascript: var s=$('rolefrm').serialize(); sendData('{-$reg-}', 'region.php', s, '');"
+				action="javascript: var s=$('rolefrm').serialize(); sendData('{-$reg-}', 'info.php', s, '');"
 				onSubmit="javascript: var a=new Array('UserId','AuthAuxValue'); return(checkForm(a, '{-#errmsgfrmrol#-}'));">
 				<input id="r" name="r" type="hidden" value="{-$reg-}">
 				<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBUserId[2]-}')">
@@ -172,7 +172,7 @@
 		<br>
 		<div id="logaddsect" style="display:none; width:280px;">
 			<form name="logfrm" id="logfrm" method="GET" 
-				action="javascript: var s=$('logfrm').serialize(); sendData('{-$reg-}', 'region.php', s, '');"
+				action="javascript: var s=$('logfrm').serialize(); sendData('{-$reg-}', 'info.php', s, '');"
 				onSubmit="javascript: var a=new Array('DBLogType','DBLogNotes'); return(checkForm(a, '{-#errmsgfrmlog#-}'));">
 				<input id="r" name="r" type="hidden" value="{-$reg-}">
 				<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLogType[2]-}');">

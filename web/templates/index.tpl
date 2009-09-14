@@ -53,7 +53,7 @@
             {  text: '{-#msavequery#-}',handler: onMenuItem  },
             {  text: '{-#mopenquery#-}',handler: onMenuItem  }]
       });
-{-if $role != ""-}
+{-if $role != "" || $role == "ADMINPORTAL"-}
 	  var mcards = new Ext.menu.Menu({
         id: 'cardsMenu',
         items: [
@@ -67,6 +67,15 @@
 			'-']
 		});
 {-/if-}
+	  var mbases = new Ext.menu.Menu({
+        id: 'basesMenu',
+        items: [
+			{  text: 'Buscar',	handler: onMenuItem  },
+{-if $role == "ADMINPORTAL"-}
+			{  text: 'Administrar',	handler: onMenuItem  },
+{-/if-}
+			'-']
+		});
       //{  text: '{-#motherdoc#-}',		handler: onMenuItem  },
       var mhelp = new Ext.menu.Menu({
         id: 'helpMenu',
@@ -80,8 +89,9 @@
       tb.add(     {text: '{-#mfile#-}',   menu: mfile  });
       tb.add('-', {text: '{-#msearch#-}', menu: mquery });
 {-if $role != ""-}
-      tb.add('-', {text: '{-#mdcsection#-}',menu: mcards });
+      tb.add('-', {text: '{-#mdcsection#-}', menu: mcards });
 {-/if-}
+      tb.add('-', {text: 'Bases de datos', menu: mbases });
       tb.add('-', {text: '{-#mhelp#-}',   menu: mhelp  });
 	  tb.add('->',{text: '<img src="images/di_logo4.png">'});
 	  //tb.add('->', {text: 'OK'});
