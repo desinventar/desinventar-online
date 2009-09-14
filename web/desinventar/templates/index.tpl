@@ -81,7 +81,7 @@
       tb.add('-', {text: '{-#mdcsection#-}',menu: mcards });
 {-/if-}
       tb.add('-', {text: '{-#mhelp#-}',   menu: mhelp  });
-	  tb.add('->',{text: '<img src="../images/di_logo3.png" width="79px" height="16px">'});
+	  tb.add('->',{text: '<img src="../images/di_logo4.png">'});
 	  //tb.add('->', {text: 'OK'});
       function onMenuItem(item){
         switch (item.text) {
