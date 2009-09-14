@@ -5,9 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
-  <link rel="stylesheet" href="../css/desinventar.css" type="text/css">
-  <script type="text/javascript" src="../include/prototype.js"></script>
-  <script type="text/javascript" src="../include/diadmin.js"></script>
+  <link rel="stylesheet" href="css/desinventar.css" type="text/css">
+  <script type="text/javascript" src="include/prototype.js"></script>
+  <script type="text/javascript" src="include/diadmin.js"></script>
 </head>
 <body>
  <table border=0>

@@ -4,8 +4,8 @@
  (c) 1999-2009 Corporacion OSSO
 */
 
-require_once('../include/loader.php');
-require_once('../include/graphic.class.php');
+require_once('include/loader.php');
+require_once('include/graphic.class.php');
 
 $post = $_POST;
 

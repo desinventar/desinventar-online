@@ -4,9 +4,9 @@
  (c) 1999-2009 Corporacion OSSO
 */
 
-require_once('../include/loader.php');
-require_once('../include/query.class.php');
-require_once('../include/digeography.class.php');
+require_once('include/loader.php');
+require_once('include/query.class.php');
+require_once('include/digeography.class.php');
 
 $reg = $us->sRegionId;
 if (empty($reg)) {

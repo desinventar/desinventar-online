@@ -1,5 +1,5 @@
 <script language="php">
-	require_once('../include/loader.php');
+	require_once('include/loader.php');
 	$q = new Query();
 	if (isset($_GET['m']))
 		$mod = $_GET['m'];
@@ -34,5 +34,5 @@
 		$t->assign ("pagefull", $show['DictFullDesc']);
 		$t->assign ("urlinfo", $show['DictTechHelp']);
 	}
-	$t->display ("index.tpl");
+	$t->display ("doc.tpl");
 </script>

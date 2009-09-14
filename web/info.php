@@ -5,7 +5,7 @@
  (c) 1999-2009 Corporacion OSSO
  ***********************************************/
 
-require_once('../include/loader.php');
+require_once('include/loader.php');
 
 function getRAPermList($lst) {
 	$dat = array();
@@ -130,6 +130,6 @@ else {
 $t->assign ("reg", $reg);
 $t->assign ("dic", $us->q->queryLabelsFromGroup('DB', $lg));
 $t->assign ("usern", $us->UserId);
-$t->display ("region.tpl");
+$t->display ("info.tpl");
 
 </script>

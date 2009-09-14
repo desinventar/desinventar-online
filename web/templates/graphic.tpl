@@ -25,7 +25,7 @@
 		qrydet.innerHTML = qdet;
 	}
 	</script>
-	<link rel="stylesheet" href="../css/desinventar.css" type="text/css"/>
+	<link rel="stylesheet" href="css/desinventar.css" type="text/css"/>
  </head>
  <body>
   <p align="right">{-#trepnum#-}: {-$tot-}</p>

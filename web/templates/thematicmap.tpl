@@ -194,7 +194,7 @@
 			init();
 		}
 	</script>
-	<link rel="stylesheet" href="../css/desinventar.css" type="text/css"/>
+	<link rel="stylesheet" href="css/desinventar.css" type="text/css"/>
 	<style type="text/css">
 		#map {	width: 100%; height: 100%; border: 1px solid black; }
 		#queryOut {	width:800px; height: 200px; border: 1px solid black;
@@ -223,7 +223,7 @@
 {-/foreach-}
          {-$rgl[0].regname-}</p>
 				<hr>
-			  <image src="../images/ge_icon.png"> <a href="thematicmap.php?r={-$reg-}&cmd=getkml">{-#tgetgearth#-}</a><hr><br>
+			  <image src="images/ge_icon.png"> <a href="thematicmap.php?r={-$reg-}&cmd=getkml">{-#tgetgearth#-}</a><hr><br>
 			  <img src="{-$legend-}">
 		  </div>
 		 </td>

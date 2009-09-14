@@ -44,7 +44,7 @@ dl.accordion dd.default_close { display:none; }
 
 body { 
 	padding:0; margin:0; 
-/*	background:url(../images/bg.gif) #09A5B9; */
+/*	background:url(images/bg.gif) #09A5B9; */
 }
 #mode {
 	font:bold 18px Trebuchet MS, sans-serif; 
@@ -79,15 +79,15 @@ body {
 }
 
 .izq { 
-	background:url(../images/bgizq.jpg) #ffffff; 
+	background:url(images/bgizq.jpg) #ffffff; 
 	width:32px; }
 .mizq	{	
 	font:9px Trebuchet MS, sans-serif; padding:0px; color:#606060; 
-	background:url(../images/ct.gif) #DDDDDC repeat-x top left; 
+	background:url(images/ct.gif) #DDDDDC repeat-x top left; 
 	padding:1px 4px; }
 .mizq2	{	
 	font:11px Trebuchet MS, sans-serif; padding:0px; 
-	color:#606060; background:url(../images/ct.gif) #DDDDDC repeat-x top left;
+	color:#606060; background:url(images/ct.gif) #DDDDDC repeat-x top left;
 	padding:1px 6px; }
 .f {	
 	font:10px Trebuchet MS, sans-serif; border:1px solid #D1D1D1; 
@@ -100,13 +100,13 @@ body {
 .olvido a:hover	{ color:#8b4513;	}
 .pais	{	
 	font:bold 11px Trebuchet MS, sans-serif; color:#133A3F; 
-	background:url(../images/p_opc.gif) #208E9E top repeat-x; 
+	background:url(images/p_opc.gif) #208E9E top repeat-x; 
 	padding:0px 5px; }
 .pais a	{	color:#133A3F; text-decoration:none; }
 .pais a:hover	{	color:#fdf5e6; text-decoration:none; }
 .paisel	{	
 	font:bold 11px Trebuchet MS, sans-serif; color:#b0e0e6; 
-	background:url(../images/p_sel.gif) #0D6E81 top repeat-x; 
+	background:url(images/p_sel.gif) #0D6E81 top repeat-x; 
 	padding:0px 5px; }
 .paisel a	{	color:#b0e0e6; text-decoration:none; }
 .paisel a:hover	{	color:#fdf5e6; text-decoration:none; }
@@ -123,7 +123,7 @@ body {
 	color:#459AA7; letter-spacing:-1px; 
 }
 .der { 
-	background:url(../images/bgder.gif) #ffffff; 
+	background:url(images/bgder.gif) #ffffff; 
 	width:32px; }
 .centro	{ 
 	font:11px Trebuchet MS, sans-serif; 

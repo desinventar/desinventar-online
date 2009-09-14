@@ -4,8 +4,8 @@
  (c) 1999-2009 Corporacion OSSO
 */
 
-require_once('../include/loader.php');
-require_once('../include/diimport.class.php');
+require_once('include/loader.php');
+require_once('include/diimport.class.php');
 
 function loadCSV($ocsv) {
 	$handle = fopen($ocsv, "r");

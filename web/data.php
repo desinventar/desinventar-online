@@ -3,7 +3,7 @@
  DesInventar - http://www.desinventar.org
  (c) 1999-2009 Corporacion OSSO
 */
-require_once('../include/loader.php');
+require_once('include/loader.php');
 
 $post = $_POST;
 $get  = $_GET;
