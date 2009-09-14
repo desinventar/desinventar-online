@@ -35,7 +35,7 @@ InstProgressFlags     smooth
 Name    "${NAME} ${MAJORVER}"
 Caption "${NAME} ${VERSION} ${__DATE__}"
 BrandingText "(c) 1998-2009 ${PUBLISHER}"
-OutFile Setup/desinventar-${VERSION}.exe
+OutFile Setup/desinventar-installer-${VERSION}.exe
 InstallDir "$PROGRAMFILES\${Name}${MAJORVER}"
 InstallDirRegKey HKLM ${REGBASE} "Install_Dir"
 
