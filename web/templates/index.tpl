@@ -13,7 +13,7 @@
   <script type="text/javascript" src="include/prototype.js"></script>
   <script type="text/javascript" src="include/diadmin.js"></script>
   <script type="text/javascript" src="include/checktree.js"></script>
-<!--  <script type="text/javascript" src="include/wd.js"></script>-->
+  <script type="text/javascript" src="include/wd.js"></script>
   <script type="text/javascript" src="include/accordion.js"></script>
   <script type="text/javascript" src="include/palette.js"></script>
   <!-- ExtJS 2.0.1 -->
@@ -101,7 +101,9 @@
 		  // file menu
           case "{-#mstartdb#-}":
             $('dcr').src = "region.php?r={-$reg-}&view=profile";
-          break;
+			$('bsave').style.visibility = 'hidden';
+			$('bprint').style.visibility = 'hidden';
+		  break;
 {-foreach name=lglst key=key item=item from=$lglst-}
 		  case "{-$item[0]-}":
 			window.location = "index.php?r={-$reg-}&lang={-$key-}";
@@ -219,7 +221,7 @@
 		  { region: 'west',
             id: 'westm',
             split: false,
-            width: 300,
+            width: 350,
             title: '{-#tsubtitle#-}',
             autoScroll: true,
             margins:'0 2 0 0',
@@ -265,6 +267,8 @@
                     if (sendList("result")) {
                       $('DCRes').value = "D";
                       datw.hide();
+					  $('bsave').style.visibility = 'visible';
+					  $('bprint').style.visibility = 'visible';
                     }
                     else
                       alert("{-#derrmsgfrm#-}");
@@ -298,6 +302,8 @@
                     if (sendStatistic("result")) {
                       $('DCRes').value = "S";
                       stdw.hide();
+					  $('bsave').style.visibility = 'visible';
+					  $('bprint').style.visibility = 'visible';
                     }
                     else
                       alert("{-#serrmsgfrm#-}");
@@ -330,7 +336,10 @@
                 handler: function() {
                     sendGraphic("result");
                     $('DCRes').value = "G";
-                    grpw.hide(); }
+                    grpw.hide();
+					$('bsave').style.visibility = 'visible';
+					$('bprint').style.visibility = 'visible';
+				}
               },{
                 text:'{-#tclose#-}',
                 handler: function(){
@@ -360,7 +369,9 @@
 					setfocus('_M+limit[0]');
                     if (sendMap("result")) {
 						$('DCRes').value = "M";
-						mapw.hide(); 
+						mapw.hide();
+						$('bsave').style.visibility = 'visible';
+						$('bprint').style.visibility = 'visible';
 					}
 					else
                       alert("{-#serrmsgfrm#-}");
@@ -1364,12 +1375,12 @@
         </div>
         <span id="frmwait"></span>
         <input id="DCRes" type="hidden" value="">
-        <input type="button" class="bb bsave" onClick="if($('DCRes').value != '') saveRes('export');" ext:qtip="{-#bsavemsg#-}">
+        <input id="bsave" type="button" class="bb bsave"   style="visibility: hidden;"
+			onClick="if($('DCRes').value != '') saveRes('export');" ext:qtip="{-#bsavemsg#-}">
 		<span id="saveopt" style="position:absolute; visibility: hidden" onmouseout="$('saveopt').style.visibility='hidden';">
-			<a href="">xls</a> | <a href="">csv</a></span>
-		&nbsp;&nbsp;
-        <input type="button" class="bb bprint" onClick="$('dcr').print();" ext:qtip="{-#bprintmsg#-}">
-		&nbsp;&nbsp;
+		<a href="">xls</a> | <a href="">csv</a></span>&nbsp;&nbsp;
+        <input id="bprint" type="button" class="bb bprint" style="visibility: hidden;"
+			onClick="$('dcr').print();" ext:qtip="{-#bprintmsg#-}">&nbsp;&nbsp;
 		 <!-- Show DesInventar (input data) Form -->
 		<div id="dif-win" class="x-hidden">
 		  <div class="x-window-header">{-#mdcsection#-} | {-$userid-} - {-$role-}</div>
@@ -1486,7 +1497,7 @@
     <dt>{-#meffsection#-}</dt>
     <dd>
       <b>{-#ttitegp#-}</b><br>
-      <div style="width: 265px; height: 130px;" class="dwin" ext:qtip="{-#thlpquery#-}">
+      <div style="height: 130px;" class="dwin" ext:qtip="{-#thlpquery#-}">
       <table border=0 cellpadding=0 cellspacing=0>
  {-foreach name=ef1 key=key item=item from=$ef1-}
  {-assign var="ff" value=D_$key-}
@@ -1524,11 +1535,11 @@
       </div><br>
       <!-- SECTORS -->
       <b>{-#ttiteis#-}</b><br>
-      <div style="width: 265px; height: 50px;" class="dwin">
+      <div style="height: 50px;" class="dwin">
       <table border=0 cellpadding=0 cellspacing=0>
  {-foreach name=sec key=key item=item from=$sec-}
  {-assign var="ff" value=D_$key-}
-			 <tr><td valign="top">
+		<tr><td valign="top">
         <input type="checkbox" onFocus="showtip('{-$item[2]-}');" id="{-$key-}"
         	onclick="{-foreach name=sc2 key=k item=i from=$item[3]-}enadisEff('{-$k-}', this.checked);{-/foreach-}enadisEff('{-$key-}', this.checked);"
         	{-if $qd.$ff[0] != ''-}checked{-/if-}>
@@ -1570,38 +1581,38 @@
          </span>
  {-/foreach-}
         </span>
-       </td></tr>
+		</td></tr>
  {-/foreach-}
-			</table>
+		</table>
   		</div><br>
       <b>{-#ttitloss#-}</b><br>
  {-foreach name=ef3 key=k item=i from=$ef3-}
  {-assign var="ff" value=D_$k-}
-			<input type="checkbox" onFocus="showtip('{-$i[2]-}');" id="{-$k-}"
+		<input type="checkbox" onFocus="showtip('{-$i[2]-}');" id="{-$k-}"
             onclick="enadisEff('{-$k-}', this.checked);" {-if $qd.$ff[0] != ''-}checked{-/if-}>
       <label for="{-$k-}" onMouseOver="showtip('{-$i[2]-}');">{-$i[0]-}</label>
       <span id="o{-$k-}" style="display:none">
       	<select id="{-$k-}[0]" name="D_{-$k-}[0]" onChange="showeff(this.value, 'x{-$k-}', 'y{-$k-}');" 
 						class="small" disabled>
-					<option class="small" value=" "></option>
-					<option class="small" value=">=" {-if $qd.$ff[0] == '>='-}selected{-/if-}>{-#teffmajor#-}</option>
-          <option class="small" value="<=" {-if $qd.$ff[0] == '<='-}selected{-/if-}>{-#teffminor#-}</option>
-          <option class="small" value="="  {-if $qd.$ff[0] == '='-}selected{-/if-}>{-#teffequal#-}</option>
-          <option class="small" value="-3" {-if $qd.$ff[0] == '-3'-}selected{-/if-}>{-#teffbetween#-}</option>
+		  <option class="small" value=" "></option>
+		  <option class="small" value=">=" {-if $qd.$ff[0] == '>='-}selected{-/if-}>{-#teffmajor#-}</option>
+		  <option class="small" value="<=" {-if $qd.$ff[0] == '<='-}selected{-/if-}>{-#teffminor#-}</option>
+		  <option class="small" value="="  {-if $qd.$ff[0] == '='-}selected{-/if-}>{-#teffequal#-}</option>
+		  <option class="small" value="-3" {-if $qd.$ff[0] == '-3'-}selected{-/if-}>{-#teffbetween#-}</option>
         </select>
         <span id="x{-$k-}" style="display:none"><br>
-					<input type="text" id="{-$k-}[1]" name="D_{-$k-}[1]" size="5" class="line"
-							value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[1]-}{-else-}1{-/if-}">
-				</span>
-				<span id="y{-$k-}" style="display:none">{-#tand#-}
-					<input type="text" id="{-$k-}[2]" name="D_{-$k-}[2]" size="5" class="line" 
-							value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}">
-				</span>
-				<select id="{-$key-}[3]" name="D_{-$key-}[3]" class="small">
-					<option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-					<option class="small" value="OR"  {-if $qd.$ff[3] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-				</select>
-			</span><br>
+			<input type="text" id="{-$k-}[1]" name="D_{-$k-}[1]" size="5" class="line"
+				value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[1]-}{-else-}1{-/if-}">
+		</span>
+		<span id="y{-$k-}" style="display:none">{-#tand#-}
+			<input type="text" id="{-$k-}[2]" name="D_{-$k-}[2]" size="5" class="line" 
+				value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}">
+		</span>
+		<select id="{-$key-}[3]" name="D_{-$key-}[3]" class="small">
+			<option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
+			<option class="small" value="OR"  {-if $qd.$ff[3] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
+		</select>
+	  </span><br>
  {-/foreach-}
  {-foreach name=ef4 key=k item=i from=$ef4-}
  {-assign var="ff" value=D_$k-}

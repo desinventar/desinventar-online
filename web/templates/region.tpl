@@ -1,4 +1,5 @@
 {-config_load file=`$lg`.conf section="di8_region"-}
+<link rel="stylesheet" href="css/desinventar.css" type="text/css">
 <script type="text/javascript" src="include/prototype.js"></script>
 <script type="text/javascript" src="include/diadmin.js"></script>
 {-* ADMINREG: Interface to Edit Portal Admin *-}
@@ -23,7 +24,7 @@
 {-foreach name=rpa key=key item=item from=$regpa-}
 	<tr class="{-if ($smarty.foreach.rpa.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}"
    		onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
-   		onClick="uploadMsg(''); setRegionPA('{-$item[0]-}','{-$key-}','{-$item[1]-}','{-$item[2]-}','{-$item[3]-}','{-$item[4]-}'); 
+   		onClick="uploadMsg(''); mod='regionpa'; setRegionPA('{-$item[0]-}','{-$key-}','{-$item[1]-}','{-$item[2]-}','{-$item[3]-}','{-$item[4]-}'); 
    					$('RegionUUID2').value='{-$key-}'; $('cmd').value='update';">
     <td>{-$item[0]-}</td>
     <td>{-$item[1]-}</td>
@@ -88,7 +89,9 @@
 						</td>
 						<td><select id="RegionLangCode" name="RegionLangCode" {-$ro-} class="line fixw" 
 										onFocus="showtip('{-$dic.DBRegionLangCode[2]-}')" tabindex="1">
-									<option value="es">Espa&ntilde;ol</option>
+{-foreach name=lglst key=key item=item from=$lglst-}
+								<option value="{-$key-}">{-$item[0]-}</option>
+{-/foreach-}
 								</select>
 						</td>
 					</tr>
