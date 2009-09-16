@@ -478,79 +478,78 @@
         disab($(id +'[2]'));
       }
     }
-    function disabAxis2() {
-    	$('_G+Field2').value = "";
-    	disab($('_G+Field2'));
-    	disab($('_G+Scale2'));
-    	disab($('_G+Data2'));
-    	disab($('_G+Mode2'));
-    }
-    function enabAxis2() {
-    	enab($('_G+Field2'));
-    	enab($('_G+Scale2'));
-    	enab($('_G+Data2'));
-    	enab($('_G+Mode2'));
-    }
-    function grpSelectbyType(fld) {/*
-      var grp = $(fld).value;
-      // Comparatives
-      if (grp == "D.EventId" || grp == "D.CauseId" ||
-          grp.substr(0,13) == "D.GeographyId") {
-        disab($('_G+K_line'));
-        disabAxis2();
-        enab($('_G+K_pie'));
-        $('_G+Kind').value = "PIE";
-        $('_G+Period').value = "";
-        disab($('_G+Period'));
-        $('_G+Stat').value = "";
-        disab($('_G+Stat'));
-        disab($('_G+Scale'));
-        disab($('_G+M_accu'));
-        disab($('_G+M_over'));
-        enab($('_G+D_perc'));
-      }
-      else {
-      	enab($('_G+K_line'));
-      	disab($('_G+K_pie'));
-        $('_G+Kind').value = "BAR";
-        enab($('_G+Period'));
-        enab($('_G+Stat'));
-        $('_G+Period').value = 'YEAR';
-        enab($('_G+Scale'));
-        var histt = $(fld).value;
-        if (histt.substr(19, 1) == "|") {
-        	disabAxis2();
-        	disab($('_G+M_accu'));
-        	enab($('_G+M_over'));
-        }
-        else {
-        	enabAxis2();
-        	enab($('_G+M_accu'));
-        	disab($('_G+M_over'));
-        }
-        disab($('_G+D_perc'));
-      }
-	  if (fld == "_G+TypeH")
-		$('_G+TypeC').value = "";
-	  if (fld == "_G+TypeC")
-	    $('_G+TypeH').value = "";
-	  $('_G+Type').value = grp;*/
-    }
-	function grpSelectbyKind() {/*
-	  comp = $('_G+TypeC').value;
-	  if ((comp == "D.EventId" || comp == "D.CauseId" || comp.substr(0,13) == "D.GeographyId")
-	       && $('_G+Kind').value == "BAR") {
-	        enabAxis2();
-        	enab($('_G+M_accu'));
-        	disab($('_G+M_over'));
-			enab($('_G+Scale'));
-	  }
-	  else {
-	        disabAxis2();
-        	disab($('_G+M_accu'));
+	function disabAxis2() {
+		$('_G+Field2').value = "";
+		disab($('_G+Field2'));
+		disab($('_G+Scale2'));
+		disab($('_G+Data2'));
+		disab($('_G+Mode2'));
+	}
+	function enabAxis2() {
+		enab($('_G+Field2'));
+		enab($('_G+Scale2'));
+		enab($('_G+Data2'));
+		enab($('_G+Mode2'));
+	}
+	function grpSelectbyType(fld) {
+		var grp = $(fld).value;
+		// Comparatives
+		if (grp == "D.EventId" || grp == "D.CauseId" || grp.substr(0,13) == "D.GeographyId") {
+			//disab($('_G+K_line'));
+			disabAxis2();
+			enab($('_G+K_pie'));
+			$('_G+Kind').value = "PIE";
+			$('_G+Period').value = "";
+			disab($('_G+Period'));
+			$('_G+Stat').value = "";
+			disab($('_G+Stat'));
 			disab($('_G+Scale'));
-	  }
-	*/}
+			disab($('_G+M_accu'));
+			disab($('_G+M_over'));
+			enab($('_G+D_perc'));
+		}
+		else {
+			//enab($('_G+K_line'));
+			disab($('_G+K_pie'));
+			$('_G+Kind').value = "BAR";
+			enab($('_G+Period'));
+			enab($('_G+Stat'));
+			$('_G+Period').value = 'YEAR';
+			enab($('_G+Scale'));
+			var histt = $(fld).value;
+			if (histt.substr(19, 1) == "|") {
+				disabAxis2();
+				disab($('_G+M_accu'));
+				enab($('_G+M_over'));
+			}
+			else {
+				enabAxis2();
+				enab($('_G+M_accu'));
+				disab($('_G+M_over'));
+			}
+			disab($('_G+D_perc'));
+		}
+		if (fld == "_G+TypeH")
+			$('_G+TypeC').value = "";
+		if (fld == "_G+TypeC")
+			$('_G+TypeH').value = "";
+		$('_G+Type').value = grp;
+	}
+	function grpSelectbyKind() {
+		comp = $('_G+TypeC').value;
+		if ($('_G+Kind').value == "BAR" || $('_G+Kind').value == "LINE" || ($('_G+Kind').value != "PIE" &&
+			(comp == "D.EventId" || comp == "D.CauseId" || comp.substr(0,13) == "D.GeographyId"))) {
+			enabAxis2();
+			enab($('_G+M_accu'));
+			disab($('_G+M_over'));
+			enab($('_G+Scale'));
+		}
+		else {
+			disabAxis2();
+			disab($('_G+M_accu'));
+			disab($('_G+Scale'));
+		}
+	}
     // forms management
     function combineForms(dcf, ref) {
       var dc = $(dcf);
@@ -1225,20 +1224,20 @@
                   	</select>
                   	<br>
                   	<b onMouseOver="showtip('{-$dic.GraphScale[2]-}');">{-$dic.GraphScale[0]-}</b><br>
-                  	<select id="_G+Scale2" name="_G+Scale2" class="disabled" onMouseOver="showtip('{-$dic.GraphScale[2]-}');">
+                  	<select id="_G+Scale2" name="_G+Scale2" class="disabled" disabled onMouseOver="showtip('{-$dic.GraphScale[2]-}');">
                   		<option value="int" selected>{-#gscalin#-}</option>
                   		<option value="log">{-#gscalog#-}</option>
                   	</select>
                   	<br>
                   	<b onMouseOver="showtip('{-$dic.GraphShow[2]-}');">{-$dic.GraphShow[0]-}</b><br>
-                  	<select id="_G+Data2" name="_G+Data2" class="disabled" onMouseOver="showtip('{-$dic.GraphShow[2]-}');">
+                  	<select id="_G+Data2" name="_G+Data2" class="disabled" disabled onMouseOver="showtip('{-$dic.GraphShow[2]-}');">
                   		<option value="VALUE">{-#gshwval#-}</option>
                   		<option id="_G+D_perc2" value="PERCENT" disabled>{-#gshwperce#-}</option>
                   		<option id="_G+D_none2" value="NONE" selected>{-#gshwnone#-}</option>
                   	</select>
                   	<br>
                   	<b onMouseOver="showtip('{-$dic.GraphMode[2]-}');">{-$dic.GraphMode[0]-}</b><br>
-            				<select id="_G+Mode2" name="_G+Mode2" class="disabled" onMouseOver="showtip('{-$dic.GraphMode[2]-}');">
+            				<select id="_G+Mode2" name="_G+Mode2" class="disabled" disabled onMouseOver="showtip('{-$dic.GraphMode[2]-}');">
                   		<option value="NORMAL" selected>{-#gmodnormal#-}</option>
                   		<option id="_G+M_accu2" value="ACCUMULATE">{-#gmodaccumul#-}</option>
                   		<option id="_G+M_over2" value="OVERCOME" disabled>{-#gmodovercome#-}</option>
@@ -1260,7 +1259,7 @@
 								<option value="D.DisasterBeginTime|D.CauseId">{-$dic.GraphHisCauTemporal[0]-}</option>
 							</select>
 		                    <table border=0 cellpadding=0 cellspacing=0 align="center">
-		                    <tr><td>
+		                    <tr align="center"><td>
 		                    	<b onMouseOver="showtip('{-$dic.GraphPeriod[2]-}');">{-$dic.GraphPeriod[0]-}</b><br>
 		                    	<select id="_G+Period" name="_G+Period" onChange="$('_G+Stat').value = '';"
 		                    			onMouseOver="showtip('{-$dic.GraphPeriod[2]-}');">

@@ -239,7 +239,8 @@ class Graphic {
 			break;
 			case "LINE":
 				if ($gType == "TEMPO" || $gType == "LINE") {
-					$m[] = $this->line($opc, $val, $pal);
+					$y1p = $this->line($opc, $val, $pal);
+					$y1p->SetLegend($sYAxisLabel);
 					// Add lineal regression 
 					$std = new Math();
 					$xx = array_fill(0, count($val), 0);
@@ -250,7 +251,10 @@ class Graphic {
 						$linreg[] = ($x < 0) ? 0 : $x;
 						$n++;
 					}
-					$m[] = $this->line($opc, $linreg, 'dashed');
+					$ylr = $this->line($opc, $linreg, 'dashed');
+					$ylr->SetLegend('Linnear Regression');
+					$m[] = $y1p;
+					$m[] = $ylr;
 				}
 				elseif ($gType == "2TEMPO" || $gType == "2COMPAR") {
 					$y1p = $this->line($opc, $val1, "darkblue");
@@ -483,7 +487,7 @@ class Graphic {
 	function line ($opc, $axi, $col) {
 		$l = new LinePlot(array_values($axi));
 		if ($col == "dashed") {
-			$l->SetColor('red');
+			$l->SetColor('darkred');
 			$l->SetStyle('dashed'); 
 		}
 		else
