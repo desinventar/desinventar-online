@@ -132,29 +132,29 @@
 {-/if-}
 {-** REGION INDEX: show main option according with user and database **-}
 {-if $ctl_index-}
-  <h1>Bienvenido {-if $userid != ""-}{-$userid-}{-else-}a DesInventar8{-/if-},</h1>
+  <p style="font-size:14px;">Bienvenido {-if $userid != ""-}<b>{-$userid-}</b>{-else-}a DesInventar8{-/if-},</p>
   <br>
  {-if $ctl_noregion-}
-  <h2>Seleccione una region de la lista </h2>
+  <b>{-#tviewdbase#-}</b><br>
   {-foreach name=regions key=key item=item from=$reglst-}
-  <a href="javascript:void(null)" onClick="parent.window.location = 'index.php?r={-$key-}'">{-$item-}</a><br>
+  * <a href="javascript:void(null)" onClick="parent.window.location = 'index.php?r={-$key-}'">{-$item-}</a><br>
   {-/foreach-}
  {-/if-}
   <hr>
-  {-if $userid == ""-}
+<!--  {-if $userid == ""-}
   <script language="javascript">updateUserBar('user.php', '', '', '');</script>
   <div id="rightcontent"></div>
   <div id="pagecontent"></div>
   {-else-}
    {-if $role != ""-}
-    <h4>Usuario con rol en base actual:</h4>
+    <b>Usuario con rol en base actual:</b><br>
     * ADMIN,USER,SUPER: Ingresar fichas<br>
     * ADMIN: Configurar base de datos<br>
    {-else-}
     <h4>Usuario sin rol:</h4>
     * Listar bases de usuario.
    {-/if-}
-  {-/if-}
+  {-/if-}-->
 {-/if-}
 {-***** REGINFO: Show Region Info - CONTENT SECTION *****-}
 {-if $ctl_showreg || $ctl_reginfo-}

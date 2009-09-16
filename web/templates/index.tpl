@@ -4,30 +4,40 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
-  <title>{-#ttitle#-} [{-$regname-}]</title>
-  <link rel="stylesheet" href="css/desinventar.css" type="text/css">
-  <link rel="stylesheet" href="css/checktree.css" type="text/css">
-  <link rel="stylesheet" href="css/accordion.css" type="text/css">
-  <script type="text/javascript" src="include/prototype.js"></script>
-  <script type="text/javascript" src="include/diadmin.js"></script>
-  <script type="text/javascript" src="include/checktree.js"></script>
-<!--  <script type="text/javascript" src="include/wd.js"></script>-->
-  <script type="text/javascript" src="include/accordion.js"></script>
-  <script type="text/javascript" src="include/palette.js"></script>
-  <!-- ExtJS 2.0.1 -->
-  <link rel="stylesheet" type="text/css" href="/extJS/resources/css/ext-all.css"/>
-  <link rel="stylesheet" type="text/css" href="/extJS/resources/css/xtheme-gray.css"/>
-  <script type="text/javascript" src="/extJS/adapter/ext/ext-base.js"></script>
-  <script type="text/javascript" src="/extJS/ext-all.js"></script>
-  <script type="text/javascript">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
+	<title>{-#ttitle#-} | {-$regname-}</title>
+	<link rel="stylesheet" href="css/desinventar.css" type="text/css">
+	<link rel="stylesheet" href="css/checktree.css" type="text/css">
+	<link rel="stylesheet" href="css/accordion.css" type="text/css">
+	<script type="text/javascript" src="include/prototype.js"></script>
+	<script type="text/javascript" src="include/diadmin.js"></script>
+	<script type="text/javascript" src="include/checktree.js"></script>
+	<script type="text/javascript" src="include/wd.js"></script>
+	<script type="text/javascript" src="include/accordion.js"></script>
+	<script type="text/javascript" src="include/palette.js"></script>
+	<!-- ExtJS 2.0.1 -->
+	<link rel="stylesheet" type="text/css" href="/extJS/resources/css/ext-all.css"/>
+	<link rel="stylesheet" type="text/css" href="/extJS/resources/css/xtheme-gray.css"/>
+	<script type="text/javascript" src="/extJS/adapter/ext/ext-base.js"></script>
+	<script type="text/javascript" src="/extJS/ext-all.js"></script>
+	<script type="text/javascript">
 	var w = null;
 	var s = null;
-	var difw = null;
+	var difw;
+	var usrw;
     // DI8 - Layout, buttons and internal windows - UI DesConsultar module
     Ext.onReady(function()
     {
       Ext.QuickTips.init();
+	  // User login/logout Window
+	  if (!usrw) {
+		usrw = new Ext.Window({
+			el:'usr-win', layout:'fit', 
+			x: 65, y: 0, width:600, height:450, 
+			closeAction:'hide', plain: true, animCollapse: false,
+			items: new Ext.Panel({ contentEl: 'usr-cfg', autoScroll: true })
+		});
+	  }
       var mfile = new Ext.menu.Menu({
         id: 'fileMenu',
         items: [
@@ -119,15 +129,19 @@
 			break;
 			case "{-#muserlogin#-}":
 				updateUserBar('user.php', '', '', '');
+				usrw.show();
 			break;
 			case "{-#muserlogout#-}":
-				updateUserBar('user.php', '', '', '');
+				updateUserBar('user.php', 'logout', '', '');
 			break;
 			case "{-#muserdb#-}":
-				updateUserBar('user.php', '', '', '');
+				updateList('pagecontent', 'user.php', 'cmd=welcome');
+				usrw.show();
 			break;
 			case "{-#museraccount#-}":
-				updateUserBar('user.php', '', '', '');
+				mod='userpa';
+				updateList('pagecontent', 'user.php', 'cmd=viewpref');
+				usrw.show();
 			break;
 {-foreach name=lglst key=key item=item from=$lglst-}
 			case "{-$item[0]-}":
@@ -208,6 +222,15 @@
 				$('index').style.display = 'none';
 				$('qryres').style.display = 'none';
 			break;
+			// databases menu
+			case "{-#mdbfind#-}":
+				myAjax = new Ajax.Updater($('usr-cfg'), 'region.php', {method:'get', parameters:''});
+				usrw.show();
+			break;
+			case "{-#mdbadmin#-}":
+				updateList('pagecontent', 'region.php', 'cmd=adminreg');
+				usrw.show();
+			break;
 			// help menu
 			case "{-#mabout#-}":
 				alert("{-#tabout#-}");
@@ -245,17 +268,17 @@
 			//title: '{-#tsubtitle2#-}',
             contentEl: 'container',
 			autoScroll: true
-          }),
+          }){-if !$ctl_noregion-},
 		  { region: 'west',
             id: 'westm',
             split: false,
-            width: {-if $ctl_noregion-}0{-else-}350{-/if-},
+            width: 350,
             title: '{-#tsubtitle#-}',
             autoScroll: true,
             margins:'0 2 0 0',
             collapsible: true,
             contentEl: 'west'
-          }
+          }{-/if-}
 		  /*{ region: 'east', id: 'eastm', split: true, width: 760,
 			//title: '[<a href="javascript:void(0);" onClick="e=Ext.getCmp(\'eastm\'); e.collapse();">X</a>]',
 			collapseMode: 'mini', autoScroll: true, margins: '0 0 0 2', collapsible: true, contentEl: 'east' }*/
@@ -401,15 +424,13 @@
         }
         mapw.show(this);
       });
-	  // DesInventar form
+	  // DesInventar (input form) Window
 	  if (!difw) {
 		difw = new Ext.Window({
 			el:'dif-win', layout:'fit', 
 			x: 65, y: 0, width:920, height:670, 
 			closeAction:'hide', plain: true, animCollapse: false,
-			items: new Ext.Panel({
-				contentEl: 'dif-cfg', 
-				autoScroll: true })
+			items: new Ext.Panel({ contentEl: 'dif-cfg', autoScroll: true })
 		});
 	  }
       // quicktips
@@ -788,10 +809,9 @@
 		w = Ext.getCmp('westm');
 		s = Ext.getCmp('southm');
 {-if $ctl_noregion-}
-		w.collapse();
-		w.hide();
+		$('index').style.display='block';
+		myAjax = new Ajax.Updater($('index'), 'region.php', {method:'get', parameters:''});
 {-/if-}
-		myAjax = new Ajax.Updater($('index'), 'region.php', {method:'get', parameters:'r={-$reg-}'});
 		// select optimal height in results frame
 		//varhgt = screen.height * 360 / 600;
 		//$('dcr').style = "height:"+ hgt + "px;"
@@ -895,7 +915,7 @@
 	<!-- Import datacards-->
 	<div id="import" style="display:none;"></div>
 	<!-- Show General index of functions -->
-	<div id="index"  style="display:{-if $ctl_noregion-}block{-else-}none{-/if-}"></div>
+	<div id="index"  style="display:none"></div>
 	<!-- Results of queries -->
 	<div id="qryres" style="display:{-if $ctl_qryres-}block{-else-}none{-/if-}">
 	<table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -1407,14 +1427,22 @@
 		<a href="">xls</a> | <a href="">csv</a></span>&nbsp;&nbsp;
         <input id="bprint" type="button" class="bb bprint" style="visibility: hidden;"
 			onClick="$('dcr').print();" ext:qtip="{-#bprintmsg#-}">&nbsp;&nbsp;
-		 <!-- Show DesInventar (input data) Form -->
+		 <!-- Show DesInventar (input data) window-->
 		<div id="dif-win" class="x-hidden">
 		  <div class="x-window-header">{-#mdcsection#-} | {-$userid-} - {-$role-}</div>
 		  <div id="dif-cfg" style="text-align:center;">
 		   <iframe name="dif" id="dif" frameborder="0" scrolling="auto" height="625px;" width="100%" src="cards.php?r={-$reg-}"></iframe>
 		  </div>
 		</div>
-       </td>
+		 <!-- Show User login/logout window -->
+		<div id="usr-win" class="x-hidden">
+		  <div class="x-window-header">{-$userid-} - {-$role-}</div>
+		  <div id="usr-cfg">
+		   <div id="rightcontent"></div><hr>
+		   <div id="pagecontent"></div>
+		  </div>
+		</div>
+	   </td>
 	  </tr>
 	  <tr>
 	   <td colspan=3>

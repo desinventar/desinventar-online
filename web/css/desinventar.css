@@ -148,3 +148,5 @@ enabled {
 .submenu a:hover { 
 	background-color: #d3d3d3; color: #000;
 }
+a	{	color:#1e90ff; }
+a:hover	{	color:#00008b; }
