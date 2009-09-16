@@ -20,7 +20,7 @@ BuildRoot: %{_tmppath}/%{name}-buildroot
 
 Requires: php >= 5.1.0
 Requires: php-gd php-Smarty
-Requires: extJS jpgraph
+Requires: extJS jpgraph jquery
 Requires: httpd
 Requires: openlayers mapserver
 Requires: liberation-fonts-extras
