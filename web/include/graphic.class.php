@@ -11,11 +11,11 @@ require_once(JPGRAPHDIR . "/jpgraph_bar.php");
 require_once(JPGRAPHDIR . "/jpgraph_pie.php");
 require_once(JPGRAPHDIR . "/jpgraph_pie3d.php");
 require_once('include/math.class.php');
+
 class Graphic {
 	var $g;
 	var $sPeriod;
 	var $sStat;
-
 	/* opc [kind:BAR,LINE,PIE Opc:Title,etc] data:Matrix
 	   data[0] == X, data[1] = Y1,  .. */
 	public function Graphic ($opc, $data) {
@@ -29,20 +29,18 @@ class Graphic {
 		$q = new Query($opc['_REG']);
 		// Determine graphic type
 		if (substr($opc['_G+Type'],2,18) == "DisasterBeginTime|") {
-			$gType = "XTEMPO";		// One var x Event/Temporal..
+			$gType = "XTEMPO";				// One var x Event/Temporal..
 			$sY2AxisLabel = $oLabels[1];
-		}
-		elseif (substr($opc['_G+Type'],2,17) == "DisasterBeginTime") {
-			$gType = "TEMPO";			// One var x time
+		} elseif (substr($opc['_G+Type'],2,17) == "DisasterBeginTime") {
+			$gType = "TEMPO";				// One var x time
 			// Set 2 axis graph only in Bars..
-			if (isset($opc['_G+Field2']) && !empty($opc['_G+Field2']) && $kind == "BAR")
-				$gType = "2TEMPO";	// Two vars x time
-		}
-		else {
-			if (isset($opc['_G+Field2']) && !empty($opc['_G+Field2']) && $kind == "BAR")
-				$gType = "2COMPAR";	// Two vars x event, cause...
+			if (isset($opc['_G+Field2']) && !empty($opc['_G+Field2']) && ($kind == "BAR" || $kind == "LINE"))
+				$gType = "2TEMPO";			// Two vars x time
+		} else {
+			if (isset($opc['_G+Field2']) && !empty($opc['_G+Field2']) && ($kind == "BAR" || $kind == "LINE"))
+				$gType = "2COMPAR";			// Two vars x event, cause...
 			else
-				$gType = $kind;			// Comparatives
+				$gType = $kind;				// Pie Comparatives
 		}
 		if ($gType == "2TEMPO" || $gType == "2COMPAR") {
 			$sYAxisLabel = $oLabels[1];
@@ -58,15 +56,15 @@ class Graphic {
 		}
 		// get Period and Stationality of the Graph (YEAR, YMONTH, YWEEK, YDAY)
 		if (isset($opc['_G+Period']))
-		  $this->sPeriod = $opc['_G+Period'];//$this->getGraphPeriod($opc['_G+Period']);
+			$this->sPeriod = $opc['_G+Period']; //$this->getGraphPeriod($opc['_G+Period']);
 		if (isset($opc['_G+Stat']))
-		  $this->sStat = $opc['_G+Stat'];
+			$this->sStat = $opc['_G+Stat'];
 		// MULTIBAR OR MULTILINE: reformat arrays completing time serie
 		if ($gType == "XTEMPO") {
 			if ($kind == "BAR")
-			  $kind = "MULTIBAR";
+				$kind = "MULTIBAR";
 			elseif ($kind == "LINE")
-			  $kind = "MULTILINE";
+				$kind = "MULTILINE";
 			// Convert data in matrix [EVENT][YEAR]=>VALUE
 			foreach ($data[$sY2AxisLabel] as $k=>$i) {
 				foreach ($data[$sXAxisLabel] as $l=>$j) {
@@ -75,61 +73,52 @@ class Graphic {
 				}
 			}
 			foreach ($tvl as $kk=>$ii)
-			  $val[$kk] = $this->completeTimeSerie($opc, $ii, $q);
+				$val[$kk] = $this->completeTimeSerie($opc, $ii, $q);
 			$lbl = array_keys($val[$kk]);
 			$acol = count(array_unique($data[$sY2AxisLabel]));
-		}
+		} 
 		// Normal Graph (BAR, LINE, PIE)
 		else {
-			if ($gType == "2TEMPO" || $gType == "2COMPAR") {
-			  // Set Array to [YEAR]=> { VALUE1, VALUE2 }
-			  foreach ($data[$sYAxisLabel] as $Key=>$Value) {
-			    $val[$data[$sXAxisLabel][$Key]] = array($Value, $data[$sY2AxisLabel][$Key]);
-			    $acol++;
-        }
+			// Set Array to [YEAR]=> { VALUE1, VALUE2 }  OR Set Array to [YEAR]=>VALUE
+			foreach ($data[$sYAxisLabel] as $Key=>$Value) {
+				if ($gType == "2TEMPO" || $gType == "2COMPAR")
+					$val[$data[$sXAxisLabel][$Key]] = array($Value, $data[$sY2AxisLabel][$Key]);
+				else
+					$val[$data[$sXAxisLabel][$Key]] = $Value;
+				$acol++;
 			}
-			else {
-			  // Set Array to [YEAR]=>VALUE
-			  foreach ($data[$sYAxisLabel] as $Key=>$Value) {
-			    $val[$data[$sXAxisLabel][$Key]] = $Value;
-			    $acol++;
-        }
-      }
 			// Complete the data series for XAxis (year,month,day)
 			if ($gType == "TEMPO" || $gType == "2TEMPO") {
 				$val = $this->completeTimeSerie($opc, $val, $q);
-      }
-			elseif ($gType == "PIE") {
-			  // In Pie Graphs must order the values
-			  arsort($val, SORT_NUMERIC);
-			  reset($val);
+			} elseif ($gType == "PIE") {
+				// In Pie Graphs must order the values
+				arsort($val, SORT_NUMERIC);
+				reset($val);
 			}
 			$lbl = array_keys($val);
 		}
 		// Choose presentation options, borders, intervals
-		$itv = 1;			// no interval
+		$itv = 1;				// no interval
 		if ($gType == "TEMPO" || $gType == "2TEMPO") {
 			$rl = 70;			// right limit
 			switch($this->sPeriod) {
-			  case "YEAR":		$bl = 50;	break;
-        case "YWEEK":		$bl = 65;	break;
-        case "YMONTH":	$bl = 65;	break;
-				case "YDAY":		$bl = 85; break;
-				default:				$bl = 50; break;
+				case "YEAR":		$bl = 50;	break;
+				case "YWEEK":		$bl = 65;	break;
+				case "YMONTH":		$bl = 65;	break;
+				case "YDAY":		$bl = 85;	break;
+				default:			$bl = 50;	break;
 			}
-		}
-		elseif ($gType == "XTEMPO") {
+		} elseif ($gType == "XTEMPO") {
 			$rl = 160;		// right limit
-			$bl = 50;			// bottom limit
-		}
-		else {
-			$rl = 70;			// right limit
+			$bl = 50;		// bottom limit
+		} else {
+			$rl = 70;		// right limit
 			$bl = 120;		// bottom limit more space to xlabels
 		}
 		// calculate graphic size
 		$wx = 760;
 		$hx = 520;
-    // 1D Graphic
+		// 1D Graphic - PIE
 		if ($gType == "PIE") {
 			$h = (24 * count($data[$sYAxisLabel]));
 			if ($h > $hx)
@@ -147,10 +136,10 @@ class Graphic {
 		// 2D, 3D Graphic
 		else {
 			$w = (14 * count($data[$sXAxisLabel]));
-			if ($w > $wx) 
+			if ($w > $wx)
 				$wx = $w;
 			if ($wx > 1024)
-			  $wx = 1024;
+				$wx = 1024;
 			$this->g = new Graph($wx, $hx, "auto");
 			if (isset($opc['_G+Scale'])) {
 				$this->g->SetScale($opc['_G+Scale']); // textint, textlog
@@ -170,15 +159,15 @@ class Graphic {
 				if ($opc['_G+Scale'] == "textlog")
 					$this->g->yaxis->scale->ticks->SetLabelLogType(LOGLABELS_PLAIN);
 		        if (isset($opc['_G+Scale2']) && ($gType == "2TEMPO" || $gType == "2COMPAR")) {
-		          $this->g->SetY2Scale($opc['_G+Scale2']);	// int, log
-		          $this->g->y2grid->Show(true,true);
-		          $this->g->y2axis->SetTitle($sY2AxisLabel, 'middle');
-				  //$this->g->y2axis->SetTitlemargin(40);
-		          $this->g->y2axis->title->SetFont(FF_ARIAL, FS_NORMAL);
-		          $this->g->y2axis->scale->SetGrace(20);
-		          $this->g->y2axis->SetColor('darkred');
-		          if ($opc['_G+Scale2'] == "log")
-		            $this->g->y2axis->scale->ticks->SetLabelLogType(LOGLABELS_PLAIN);
+					$this->g->SetY2Scale($opc['_G+Scale2']);	// int, log
+					$this->g->y2grid->Show(true,true);
+					$this->g->y2axis->SetTitle($sY2AxisLabel, 'middle');
+					//$this->g->y2axis->SetTitlemargin(40);
+					$this->g->y2axis->title->SetFont(FF_ARIAL, FS_NORMAL);
+					$this->g->y2axis->scale->SetGrace(20);
+					$this->g->y2axis->SetColor('darkred');
+					if ($opc['_G+Scale2'] == "log")
+						$this->g->y2axis->scale->ticks->SetLabelLogType(LOGLABELS_PLAIN);
 		        }
 			} // if G+Scale
 		}
@@ -187,7 +176,7 @@ class Graphic {
 		$iNumPoints = count($val);		
 		$iInterval = ($iNumPoints * 14) / $wx;
 		if ($iInterval < 1)
-		  $iInterval = 1;
+			$iInterval = 1;
 		if ($gType != "PIE")
 			$this->g->xaxis->SetTextLabelInterval($iInterval);
 		// Other options graphic
@@ -208,7 +197,7 @@ class Graphic {
 		elseif (substr_count($opc['_G+Type'], "Geography") > 0)
 			$pal = $this->genPalette($acol, DI_GEOGRAPHY, array_keys($val), null);
 		elseif ($gType == "TEMPO")
-		  $pal = "darkorange";
+			$pal = "darkorange";
 		else
 			$pal = $this->genPalette($acol, "FIX", null, null);
 		// Choose and draw graphic type
@@ -228,14 +217,13 @@ class Graphic {
 				if ($gType == "TEMPO" || $gType == "BAR") {
 					$m = $this->bar($opc, $val, $pal);
 					if (isset($opc['_G+Data']) && $opc['_G+Data'] == "VALUE") {
-						$m->value->SetFont(FF_ARIAL, FS_NORMAL, 7);
+						$m->value->SetFont(FF_ARIAL, FS_NORMAL, 8);
 						$m->value->SetFormat("%d");
 						$m->value->SetAngle(90);
 						$m->value->SetColor("black","darkred");
 						$m->value->Show();
 					}
-				}
-				elseif ($gType == "2TEMPO" || $gType == "2COMPAR") {
+				} elseif ($gType == "2TEMPO" || $gType == "2COMPAR") {
 					$zp = $this->bar($opc, $zo, "");
 					$y1 = $this->bar($opc, $val1, "darkblue");
 					$y2 = $this->bar($opc, $val2, "darkred");
@@ -270,7 +258,7 @@ class Graphic {
 				if (isset($opc['_G+Data']) && $opc['_G+Data'] == "VALUE") {
 					$m->SetLabelType(PIE_VALUE_ABS);
 					$m->value->SetFormat("%d");
-					$m->value->SetFont(FF_ARIAL, FS_NORMAL, 6);
+					$m->value->SetFont(FF_ARIAL, FS_NORMAL, 9);
 				}
 			break;
 			default:
@@ -279,7 +267,7 @@ class Graphic {
 		} //switch
 		// Extra presentation options
 		if (!empty($m)) {
-			$this->g->footer->left->Set("DesInventar8 - http://online.desinventar.org");
+			$this->g->footer->left->Set("DesInventar - http://www.desinventar.org");
 			//$this->g->footer->right->Set("Fuentes: __________________________");
 			if (is_array($m)) {
 				foreach ($m as $m1)
@@ -297,19 +285,6 @@ class Graphic {
 			unlink($fname);
 		$this->g->Stroke($fname);
 	}
-
-/*
-	public function getGraphPeriod ($prmOption) {
-		$Index = strrpos($prmOption, "-");
-		if ($Index == FALSE)
-		  $Index = 0; 
-    else
-      $Index += 1;
-		$sGraphPeriod = substr($prmOption,$Index);
-		if ($sGraphPeriod == "")
-		  $sGraphPeriod = "YEAR";
-		return $sGraphPeriod;
-	}*/
 
 	function getWeekOfYear ($sMyDate) {
 		$iWeek = date("W", 
@@ -347,8 +322,7 @@ class Graphic {
 				if ($this->sPeriod == "YEAR") {
 					if (!isset($val[$sDate]))
 						$val[$sDate] = 0;
-				}
-				elseif ($this->sPeriod == "YWEEK")
+				} elseif ($this->sPeriod == "YWEEK")
 					$this->completeWeekSerie ($dateini, $dateend, $iYear, $val);
 				else
 					$this->completeMonthSerie ($dateini, $dateend, $iYear, $val);
@@ -461,12 +435,10 @@ class Graphic {
 		if (is_array($color)) {
 			$b->SetFillColor($color);
 			$b->SetWidth(0.8);
-		}
-		else {
-		/*      if ($color == "orange")
-			$b->SetFillGradient($color, 'white', GRAD_VER);
-		  else*/
-			$b->SetFillColor($color);
+		} else {
+			if ($color == "darkorange")
+				$b->SetFillGradient($color, 'white', GRAD_VER);
+			//$b->SetFillColor($color);
 			$b->SetWidth(1.0);
 		}
 		if ($opc['_G+Feel'] == "3D")
@@ -479,15 +451,15 @@ class Graphic {
 		$i = 0;
 		$lab = array_keys($axi);
 		foreach ($axi as $k=>$ele) {
-		  $bar = $this->bar($opc, $ele, $pal[$i]);
-		  $bar->SetLegend($lab[$i]);
-		  $b[] = $bar;
-		  $i++;
+			$bar = $this->bar($opc, $ele, $pal[$i]);
+			$bar->SetLegend($lab[$i]);
+			$b[] = $bar;
+			$i++;
 		}
 		if ($opc['_G+Mode'] == "OVERCOME")
-		  $gb = new AccBarPlot($b);
+			$gb = new AccBarPlot($b);
 		else
-		  $gb = new GroupBarPlot($b);
+			$gb = new GroupBarPlot($b);
 		$gb->SetWidth(0.98);
 		return $gb;
 	}
@@ -496,9 +468,10 @@ class Graphic {
 	function line ($opc, $axi, $col) {
 		$l = new LinePlot(array_values($axi));
 		if ($col == 'single')
-			$l->SetColor('blue');
+			$l->SetColor('red');
 		else
-			$l->SetFillGradient($col,'white');
+			$l->SetColor($col);
+			//$l->SetFillGradient($col,'white');
 			//$l->SetColor($col);
 			//$l->mark->SetFillColor("red");
 			//$l->mark->SetWidth(2);
@@ -533,8 +506,7 @@ class Graphic {
 				  $col = dechex(rand(0, 255)) . dechex(rand(0, 255)) . dechex(rand(0, 255));
 				$pal[] = "#". $col;
 			}
-		}
-		else {
+		} else {
 			$col = array("#0000ff","#00ff00", "#ff0000", "#ff00ff", "#00ffff", "#ffff00",
 					   "#c7c7ff","#c782c7", "#ff7f7f", "#ffc7ff", "#c7ffff", "#ffffc7",
 					   "#00007f","#007f00", "#7f0000", "#7f007f", "#007f7f", "#827f00");
@@ -564,6 +536,19 @@ class Graphic {
 		  $b = array(200, 0, 0);*/
 		return $pal;
 	}
+
+/*
+	public function getGraphPeriod ($prmOption) {
+		$Index = strrpos($prmOption, "-");
+		if ($Index == FALSE)
+		  $Index = 0; 
+    else
+      $Index += 1;
+		$sGraphPeriod = substr($prmOption,$Index);
+		if ($sGraphPeriod == "")
+		  $sGraphPeriod = "YEAR";
+		return $sGraphPeriod;
+	}*/
 
 } // end class
 
