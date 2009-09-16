@@ -16,23 +16,26 @@ if ($cmd == '') {
 		$cmd = 'listdb';
 	}
 }
+fb('Command : ' . $cmd);
+fb('Region  : ' . $r);
+
+// Default Template Values
+$t->assign('request_uri', $_SERVER['REQUEST_URI']);
+
 switch ($cmd) {
 case 'listdb':
 	// Direct access returns a list of public regions on this server
 	$d = new Query();
 	$reglst = $d->searchDB();
 	$t->assign('ctl_showregionlist', true);
-	$t->assign('request_uri', $_SERVER['REQUEST_URI']);
 	$t->assign('regionlist', $reglst);
 	$t->display('portal.tpl');
 	break;
 case 'searchdb':
-	print "Searchdb<br />";
 	$d = new Query();
 	$searchdbquery = getParameter('searchdbquery', '');
 	$reglst = $d->searchDB($searchdbquery);
 	$t->assign('ctl_showregionlist', true);
-	$t->assign('request_uri', $_SERVER['REQUEST_URI']);
 	$t->assign('regionlist', $reglst);
 	$t->display('regionlist.tpl');
 	break;
@@ -256,5 +259,5 @@ default:
 		$t->display ("index.tpl");
 	}
 	break;
-} //switch
+} //switch($cmd)
 </script>

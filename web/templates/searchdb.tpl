@@ -3,7 +3,7 @@
 		$("#searchdbquery").change(function() {
 			var Value = $(this).val();
 			$("#searchdbresult").load(
-				'/di8-devel/',
+				'{-$request_uri-}',
 				{ cmd: 'searchdb',
 				  searchdbquery: Value }
 			);
