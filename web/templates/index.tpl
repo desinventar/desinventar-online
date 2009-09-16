@@ -1,5 +1,4 @@
 {-config_load file=`$lg`.conf section="dc_querydesign"-}
-{-config_load file=`$lg`.conf section="dc_querydesign"-}
 {-if $ctl_show-}
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -13,7 +12,7 @@
   <script type="text/javascript" src="include/prototype.js"></script>
   <script type="text/javascript" src="include/diadmin.js"></script>
   <script type="text/javascript" src="include/checktree.js"></script>
-  <script type="text/javascript" src="include/wd.js"></script>
+<!--  <script type="text/javascript" src="include/wd.js"></script>-->
   <script type="text/javascript" src="include/accordion.js"></script>
   <script type="text/javascript" src="include/palette.js"></script>
   <!-- ExtJS 2.0.1 -->
@@ -33,6 +32,20 @@
         id: 'fileMenu',
         items: [
             {  text: '{-#mstartdb#-}',	handler: onMenuItem  }, '-',
+			{  text: '{-#muser#-}', 
+                menu: {
+			     id: 'userSubMenu',
+				 items: [
+{-if $userid != ""-}
+				  {text: '{-#muserdb#-}', handler: onMenuItem},
+				  {text: '{-#museraccount#-}', handler: onMenuItem},
+				  {text: '{-#muserlogout#-}', handler: onMenuItem}
+{-else-}
+				  {text: '{-#muserlogin#-}',  handler: onMenuItem}
+{-/if-}
+				 ]
+				}
+			},
             {  text: '{-#mlang#-}', 
                 menu: {
 			     id: 'langSubMenu',
@@ -54,7 +67,6 @@
             {  text: '{-#msavequery#-}',handler: onMenuItem  },
             {  text: '{-#mopenquery#-}',handler: onMenuItem  }]
       });
-{-if $role != "" || $role != "ADMINPORTAL"-}
 	  var mcards = new Ext.menu.Menu({
         id: 'cardsMenu',
         items: [
@@ -67,13 +79,12 @@
 {-/if-}
 			'-']
 		});
-{-/if-}
 	  var mbases = new Ext.menu.Menu({
         id: 'basesMenu',
         items: [
-			{  text: 'Buscar',	handler: onMenuItem  },
+			{  text: '{-#mdbfind#-}',	handler: onMenuItem  },
 {-if $role == "ADMINPORTAL"-}
-			{  text: 'Administrar',	handler: onMenuItem  },
+			{  text: '{-#mdbadmin#-}',	handler: onMenuItem  },
 {-/if-}
 			'-']
 		});
@@ -87,110 +98,127 @@
 	  
       var tb = new Ext.Toolbar();
       tb.render('toolbar');
-      tb.add(     {text: '{-#mfile#-}',   menu: mfile  });
-      tb.add('-', {text: '{-#msearch#-}', menu: mquery });
-{-if $role != ""-}
-      tb.add('-', {text: '{-#mdcsection#-}', menu: mcards });
+      tb.add(     {text: '{-#mfile#-}',			menu: mfile  });
+{-if !$ctl_noregion-}
+      tb.add('-', {text: '{-#msearch#-}',		menu: mquery });
 {-/if-}
-      tb.add('-', {text: 'Bases de datos', menu: mbases });
-      tb.add('-', {text: '{-#mhelp#-}',   menu: mhelp  });
+{-if $role == "USER" || $role == "USER" || $role == "OBSERVER" || $role == "ADMINREGION"-}
+      tb.add('-', {text: '{-#mdcsection#-}',	menu: mcards });
+{-/if-}
+      tb.add('-', {text: '{-#mdatabases#-}',	menu: mbases });
+      tb.add('-', {text: '{-#mhelp#-}',			menu: mhelp  });
 	  tb.add('->',{text: '<img src="images/di_logo4.png">'});
 
-      function onMenuItem(item){
-        switch (item.text) {
-		  // file menu
-          case "{-#mstartdb#-}":
-            $('dcr').src = "region.php?r={-$reg-}&view=profile";
-			$('bsave').style.visibility = 'hidden';
-			$('bprint').style.visibility = 'hidden';
-		  break;
+	  function onMenuItem(item){
+		switch (item.text) {
+			// file menu
+			case "{-#mstartdb#-}":
+				$('dcr').src = "region.php?r={-$reg-}";
+				$('bsave').style.visibility = 'hidden';
+				$('bprint').style.visibility = 'hidden';
+			break;
+			case "{-#muserlogin#-}":
+				updateUserBar('user.php', '', '', '');
+			break;
+			case "{-#muserlogout#-}":
+				updateUserBar('user.php', '', '', '');
+			break;
+			case "{-#muserdb#-}":
+				updateUserBar('user.php', '', '', '');
+			break;
+			case "{-#museraccount#-}":
+				updateUserBar('user.php', '', '', '');
+			break;
 {-foreach name=lglst key=key item=item from=$lglst-}
-		  case "{-$item[0]-}":
-			window.location = "index.php?r={-$reg-}&lang={-$key-}";
-		  break;
+			case "{-$item[0]-}":
+				window.location = "index.php?r={-$reg-}&lang={-$key-}";
+			break;
 {-/foreach-}
-          case "{-#mprint#-}":
-            window.print();
-          break;
-          case "{-#mquit#-}":
-            self.close();
-          break;
-		  // query menu
-          case "{-#mgotoqd#-}":
-			$('config').style.display = 'none';
-			$('import').style.display = 'none';
-			$('qryres').style.display = 'block';
-			$('dcr').style.display = 'block';
-			$('querydetails').style.display = 'block';
-			w.show();
-			if (w.isVisible())
-				w.collapse(); //hide()
-			else
-				w.expand(); //show()
-          break;
-          case "{-#mnewsearch#-}":
-            w.show();
+			case "{-#mprint#-}":
+				window.print();
+			break;
+			case "{-#mquit#-}":
+				self.close();
+			break;
+			// query menu
+			case "{-#mgotoqd#-}":
+				$('config').style.display = 'none';
+				$('import').style.display = 'none';
+{-if $ctl_noregion-}
+				$('qryres').style.display = 'none';
+				$('index').style.display = 'block';
+				w.hide();
+{-else-}
+				$('qryres').style.display = 'block';
+				$('index').style.display = 'none';
+				w.show();
+{-/if-}
+				if (w.isVisible())
+					w.collapse(); //hide()
+				else
+					w.expand(); //show()
+			break;
+			case "{-#mnewsearch#-}":
+				w.show();
 {-foreach name=ef1 key=key item=item from=$ef1-}
-            if ($('{-$key-}').checked) enadisEff('{-$key-}', false);
+				if ($('{-$key-}').checked) enadisEff('{-$key-}', false);
 {-/foreach-}
-            $('DC').reset();
-          break;
-          case "{-#msavequery#-}":
-          	saveQuery();
-          break;
-          case "{-#mopenquery#-}":
-			var qryw;
-			if (!qryw) {
-				qryw = new Ext.Window({
-					el:'qry-win',  layout:'fit',  width:300, height:200, 
-					closeAction:'hide', plain: true, animCollapse: false,
-					items: new Ext.Panel({
-						contentEl: 'qry-cfg', autoScroll: true }),
-					buttons: [{
-						text:'{-#tclose#-}',
-						handler: function(){
-							qryw.hide(); }
-					}]
-				});
-			}
-			qryw.show(this);
-          break;
-		  //cards menu
-		  case "{-#minsert#-}":
-			difw.show();
-		  break;
-		  case "{-#mimport#-}":
-			w = Ext.getCmp('westm');
-			w.hide();
-			w.collapse();
-			$('config').style.display = 'none';
-			$('import').style.display = 'block';
-			$('qryres').style.display = 'none';
-			$('dcr').style.display = 'none';
-			$('querydetails').style.display = 'none';
-			updateList('import', 'import.php', 'r={-$reg-}');
-		  break;
-		  case "{-#mconfig#-}":
-			w = Ext.getCmp('westm');
-			w.hide();
-			w.collapse();
-			$('config').style.display = 'block';
-			$('import').style.display = 'none';
-			$('qryres').style.display = 'none';
-			$('dcr').style.display = 'none';
-			$('querydetails').style.display = 'none';
-		  break;
-		  // help menu
-          case "{-#mabout#-}":
-            alert("{-#tabout#-}");
-          break;
-          case "{-#mwebsite#-}":
-            window.open('http://www.desinventar.org', '', '');
-          break;
-          case "{-#hmoreinfo#-}":
-            runWin('doc.php?m=metguide', 'doc');
-          break;
-        }
+				$('DC').reset();
+			break;
+			case "{-#msavequery#-}":
+				saveQuery();
+			break;
+			case "{-#mopenquery#-}":
+				var qryw;
+				if (!qryw) {
+					qryw = new Ext.Window({
+						el:'qry-win',  layout:'fit',  width:300, height:200, 
+						closeAction:'hide', plain: true, animCollapse: false,
+						items: new Ext.Panel({
+							contentEl: 'qry-cfg', autoScroll: true }),
+						buttons: [{
+							text:'{-#tclose#-}',
+							handler: function(){
+								qryw.hide(); }
+						}]
+					});
+				}
+				qryw.show(this);
+			break;
+		    //cards menu
+			case "{-#minsert#-}":
+				difw.show();
+			break;
+			case "{-#mimport#-}":
+				//w = Ext.getCmp('westm');
+				w.hide();
+				w.collapse();
+				$('config').style.display = 'none';
+				$('import').style.display = 'block';
+				$('index').style.display = 'none';
+				$('qryres').style.display = 'none';
+				updateList('import', 'import.php', 'r={-$reg-}');
+			break;
+			case "{-#mconfig#-}":
+				//w = Ext.getCmp('westm');
+				w.hide();
+				w.collapse();
+				$('config').style.display = 'block';
+				$('import').style.display = 'none';
+				$('index').style.display = 'none';
+				$('qryres').style.display = 'none';
+			break;
+			// help menu
+			case "{-#mabout#-}":
+				alert("{-#tabout#-}");
+			break;
+			case "{-#mwebsite#-}":
+				window.open('http://www.desinventar.org', '', '');
+			break;
+			case "{-#hmoreinfo#-}":
+				runWin('doc.php?m=metguide', 'doc');
+			break;
+		}
       }
       // layout
       var viewport = new Ext.Viewport({
@@ -221,30 +249,18 @@
 		  { region: 'west',
             id: 'westm',
             split: false,
-            width: 350,
+            width: {-if $ctl_noregion-}0{-else-}350{-/if-},
             title: '{-#tsubtitle#-}',
             autoScroll: true,
             margins:'0 2 0 0',
             collapsible: true,
             contentEl: 'west'
           }
-		  /*,{
-			region: 'east',
-			id: 'eastm',
-			split: true,
-			width: 760,
+		  /*{ region: 'east', id: 'eastm', split: true, width: 760,
 			//title: '[<a href="javascript:void(0);" onClick="e=Ext.getCmp(\'eastm\'); e.collapse();">X</a>]',
-			collapseMode: 'mini',
-			autoScroll: true,
-			margins: '0 0 0 2',
-			collapsible: true,
-			contentEl: 'east'
-		  }*/
+			collapseMode: 'mini', autoScroll: true, margins: '0 0 0 2', collapsible: true, contentEl: 'east' }*/
 		]
       });
-	  w = Ext.getCmp('westm');
-	  //e = Ext.getCmp('eastm'); e.hide();
-	  s = Ext.getCmp('southm');
       // ==> Results Configuration Windows
       // Data
       var datw;
@@ -575,8 +591,7 @@
         mystr += "D.DisasterId";
         $('_D+FieldH').value = mystr;
         combineForms('DC', 'CD');
-        w.collapse(); //hide()
-		//e.collapse();
+        w.collapse();
         s.collapse();
         $('DC').action='data.php';
         $('DC').submit();
@@ -666,45 +681,6 @@
 		$('smap').style.visibility = 'hidden';
 	}
 	var g{-$reg-} = new CheckTree('g{-$reg-}');*/
-	// Find all Effects fields enable by saved query
-	window.onload = function() {
-		// select optimal height in results frame
-		//varhgt = screen.height * 360 / 600;
-		//$('dcr').style = "height:"+ hgt + "px;"
-		//myAjax = new Ajax.Updater($('import'), 'import.php', {method:'get', parameters:''});
-{-foreach name=ef1 key=k item=i from=$ef1-}
-{-assign var="ff" value=D_$k-}
-{-if $qd.$ff[0] != ''-}
-		enadisEff('{-$k-}', true);
-		showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
-{-/if-}
-{-/foreach-}
-{-foreach name=sec key=k item=i from=$sec-}
-{-assign var="sc" value=D_$k-}
-{-if $qd.$sc[0] != ''-}
-{-foreach name=sc2 key=k2 item=i2 from=$i[3]-}
-{-assign var="ff" value=D_$k2-}
-{-if $qd.$ff[0] != ''-}
-		enadisEff('{-$k2-}', true);
-		showeff('{-$qd.$ff[0]-}', 'x{-$k2-}', 'y{-$k2-}');
-{-/if-}
-{-/foreach-}
-		enadisEff('{-$k-}', true);
-{-/if-}
-{-/foreach-}
-{-foreach name=ef3 key=k item=i from=$ef3-}
-{-assign var="ff" value=D_$k-}
-{-if $qd.$ff[0] != ''-}
-		enadisEff('{-$k-}', true);
-		showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
-{-/if-}
-{-/foreach-}
-{-foreach name=geol key=k item=i from=$geol-}
-{-if $i[3]-}
-		setSelMap('{-$i[0]-}', '{-$k-}', true);
-{-/if-}
-{-/foreach-}
-	}
 	function addRowToTable() {
 		var tbl = $('tbl_range');
 		var lastRow = tbl.rows.length;
@@ -807,6 +783,51 @@
 			$('_M+ic['+ i + ']').style.backgroundColor = val;
 		}
 	}
+	// Find all Effects fields enable by saved query
+	window.onload = function() {
+		w = Ext.getCmp('westm');
+		s = Ext.getCmp('southm');
+{-if $ctl_noregion-}
+		w.collapse();
+		w.hide();
+{-/if-}
+		myAjax = new Ajax.Updater($('index'), 'region.php', {method:'get', parameters:'r={-$reg-}'});
+		// select optimal height in results frame
+		//varhgt = screen.height * 360 / 600;
+		//$('dcr').style = "height:"+ hgt + "px;"
+{-foreach name=ef1 key=k item=i from=$ef1-}
+{-assign var="ff" value=D_$k-}
+{-if $qd.$ff[0] != ''-}
+		enadisEff('{-$k-}', true);
+		showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
+{-/if-}
+{-/foreach-}
+{-foreach name=sec key=k item=i from=$sec-}
+{-assign var="sc" value=D_$k-}
+{-if $qd.$sc[0] != ''-}
+{-foreach name=sc2 key=k2 item=i2 from=$i[3]-}
+{-assign var="ff" value=D_$k2-}
+{-if $qd.$ff[0] != ''-}
+		enadisEff('{-$k2-}', true);
+		showeff('{-$qd.$ff[0]-}', 'x{-$k2-}', 'y{-$k2-}');
+{-/if-}
+{-/foreach-}
+		enadisEff('{-$k-}', true);
+{-/if-}
+{-/foreach-}
+{-foreach name=ef3 key=k item=i from=$ef3-}
+{-assign var="ff" value=D_$k-}
+{-if $qd.$ff[0] != ''-}
+		enadisEff('{-$k-}', true);
+		showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
+{-/if-}
+{-/foreach-}
+{-foreach name=geol key=k item=i from=$geol-}
+{-if $i[3]-}
+		setSelMap('{-$i[0]-}', '{-$k-}', true);
+{-/if-}
+{-/foreach-}
+	}
 	document.write('<style type="text/css">.tabber{display:none;}<\/style>');
 	var tabberOptions = {
 		'onClick': function(argsObj) {
@@ -858,17 +879,12 @@
 	</style>
 </head>
 <body>
-<div id="north">
+ <div id="north">
 	<div id="toolbar"></div>
-</div>
-{-if $ctl_showregionlist-}
-	{-foreach key=key item=item from=$regionlist-}
-		{-$item-}
-	{-/foreach-}
-{-/if-}
-<div id="container">
+ </div>
+ <div id="container">
 	<!-- -Configuration -->
-	<div id="config" class="tabber" style="display:none;">
+	<div id="config" style="display:none;" class="tabber">
 		<div class="tabbertab"><h2>{-#mreginfo#-}</h2><p></p></div>
 		<div class="tabbertab"><h2>{-#mgeolevel#-}</h2><p></p></div>
 		<div class="tabbertab"><h2>{-#mgeography#-}</h2><p></p></div>
@@ -876,15 +892,22 @@
 		<div class="tabbertab"><h2>{-#mcauses#-}</h2><p></p></div>
 		<div class="tabbertab"><h2>{-#meeffects#-}</h2><p></p></div>
 	</div>
+	<!-- Import datacards-->
 	<div id="import" style="display:none;"></div>
-	<!-- Results of query-->
-	<table id="qryres" border="0" cellpadding="0" cellspacing="0" width="100%">
+	<!-- Show General index of functions -->
+	<div id="index"  style="display:{-if $ctl_noregion-}block{-else-}none{-/if-}"></div>
+	<!-- Results of queries -->
+	<div id="qryres" style="display:{-if $ctl_qryres-}block{-else-}none{-/if-}">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
 	  <tr bgcolor="#bbbbbb">
        <td width="200px">
        	<b>{-#tsubtitle2#-} =></b>
 <!--       	<img src="images/collapse.png" onClick="var w = Ext.getCmp('westm'); w.show();">-->
        </td>
        <td align="center">
+{-/if-}
+{-** END ctl_show **-}
+{-if $ctl_qryres-}
 <!--	SECTION : DATA CONFIGURATION
 	============================ -->
         <input type="button" id="dat-btn" value="{-#bdata#-}" ext:qtip="{-#tdatamsg#-}" class="bb btn">
@@ -1362,6 +1385,9 @@
           </div>
         </div>
 <!--	END STATISTIC SECTION  -->
+{-/if-}
+{-** END ctl_qryres **-}
+{-if $ctl_show-}
        </td>
        <td>
 		<div id="qry-win" class="x-hidden">
@@ -1390,14 +1416,22 @@
 		</div>
        </td>
 	  </tr>
+	  <tr>
+	   <td colspan=3>
+		<div id="querydetails" style="height:40px;" class="dwin"></div>
+		<!--  <div id="smap" style="position:absolute; left:0px; top:20px; visibility:hidden;">[<a href="javascript:void(0);" onClick="hideMap();">X</a>]<br></div>-->
+	   </td>
+	  </tr>
 	</table>
-	<div id="querydetails" style="height:40px;" class="dwin"></div>
-	<!--  <div id="smap" style="position:absolute; left:0px; top:20px; visibility:hidden;">[<a href="javascript:void(0);" onClick="hideMap();">X</a>]<br></div>-->
-	<iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="region.php?r={-$reg-}&view=profile"></iframe>
+	<iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="region.php?r={-$reg-}&view=info"></iframe>
+	</div>
  </div>
 <!--	SECTION : QUERY DESIGN 
 	====================== -->
  <div id="west">
+{-/if-}
+{-** END ctl_show **-}
+{-if $ctl_qrydsg-}
   <!-- BEG DI8 QUERY FORM -->
   <form id="DC" method="POST" target="dcr">
   <input type="hidden" id="_REG" name="_REG" value="{-$reg-}">
@@ -1411,7 +1445,7 @@
   {-/foreach-}
       <div id="qgeolst" style="height: 280px;" class="dwin" ext:qtip="{-#thlpquery#-}">
 {-/if-}
-{-** END ctl_show **-}
+{-** END ctl_qrydsg **-}
 {-if $ctl_glist-}
         <ul id="tree-g{-$reg-}" class="checktree">
  {-foreach name=geol key=key item=item from=$geol-}
@@ -1425,7 +1459,7 @@
         </ul>
 {-/if-}
 {-** END ctl_glist **-}
-{-if $ctl_show-}
+{-if $ctl_qrydsg-}
       </div>
       <b onMouseOver="showtip('{-$dis.DisasterSiteNotes[2]-}');">{-$dis.DisasterSiteNotes[0]-}</b>
       <select name="D_DisasterSiteNotes[0]" class="small">
@@ -1441,7 +1475,7 @@
       <span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br>
       <select id="qevelst" name="D_EventId[]" multiple style="width: 250px; height: 200px;">
 {-/if-}
-{-if $ctl_show || $ctl_evelst-}
+{-if $ctl_qrydsg || $ctl_evelst-}
  {-foreach name=eve key=key item=item from=$evepredl-}
         <option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
  {-/foreach-}
@@ -1451,7 +1485,7 @@
  {-/foreach-}
 {-/if-}
 {-** END ctl_evelst **-}
-{-if $ctl_show-}
+{-if $ctl_qrydsg-}
       </select>
       <br><br>
       <b onMouseOver="showtip('{-$eve.EventDuration[2]-}');">{-$eve.EventDuration[0]-}</b><br>
@@ -1472,7 +1506,7 @@
       <span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br>
       <select id="qcaulst" name="D_CauseId[]" multiple style="width: 250px; height: 280px;">
 {-/if-}
-{-if $ctl_show || $ctl_caulst-}
+{-if $ctl_qrydsg || $ctl_caulst-}
  {-foreach name=cau key=key item=item from=$caupredl-}
         <option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
  {-/foreach-}
@@ -1482,7 +1516,7 @@
  {-/foreach-}
 {-/if-}
 {-** END ctl_caulst **-}
-{-if $ctl_show-}
+{-if $ctl_qrydsg-}
       </select>
       <br><br>
       <b onMouseOver="showtip('{-$cau.CauseNotes[2]-}');">{-$cau.CauseNotes[0]-}</b>
@@ -1771,6 +1805,9 @@
     </dd>
   </dl>
   </form>
+{-/if-}
+{-** END ctl_qrydsg **-}
+{-if $ctl_show-}
  </div> <!-- id = west-->
  <!-- END DI8 QUERY FORM -->
  <!-- BEG HELP SECTION -->
