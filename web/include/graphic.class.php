@@ -231,6 +231,7 @@ class Graphic {
 					$y2p = new GroupBarPlot(array($zp, $y2));
 					$this->g->Add($y1p);
 					$this->g->AddY2($y2p);
+					//$this->g->SetLegend($lab[$i]);
 				}
 			break;
 			case "LINE":
@@ -245,7 +246,7 @@ class Graphic {
 					$linreg[] = ($x < 0) ? 0 : $x;
 					$n++;
 				}
-				$m[] = $this->line($opc, $linreg, 'single');
+				$m[] = $this->line($opc, $linreg, 'dashed');
 			break;
 			case "MULTIBAR":
 				$m = $this->multibar($opc, $val, $pal);
@@ -438,7 +439,8 @@ class Graphic {
 		} else {
 			if ($color == "darkorange")
 				$b->SetFillGradient($color, 'white', GRAD_VER);
-			//$b->SetFillColor($color);
+			else
+				$b->SetFillColor($color);
 			$b->SetWidth(1.0);
 		}
 		if ($opc['_G+Feel'] == "3D")
@@ -467,8 +469,10 @@ class Graphic {
 	// Setting a Line graphic
 	function line ($opc, $axi, $col) {
 		$l = new LinePlot(array_values($axi));
-		if ($col == 'single')
+		if ($col == "dashed") {
 			$l->SetColor('red');
+			$l->SetStyle('dashed'); 
+		}
 		else
 			$l->SetColor($col);
 			//$l->SetFillGradient($col,'white');
