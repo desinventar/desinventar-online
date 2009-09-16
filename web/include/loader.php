@@ -111,6 +111,8 @@ $time_start = microtime_float();
 // 2009-07-22 (jhcaiced) Adapted Configuration and Startup for 
 // using with PHP Command Line 
 if (isset($_SERVER["HTTP_HOST"])) {
+	// 2009-09-16 (jhcaiced) Autoconfigure software directory
+	$_SERVER["DI8_WEB"] = dirname($_SERVER['SCRIPT_FILENAME']);
 	// Online Modes (HTTP)
 	if (isset($_SERVER["WINDIR"])) {
 		// Running on a Windows Server
@@ -128,7 +130,9 @@ if (isset($_SERVER["HTTP_HOST"])) {
 		if (!extension_loaded( 'gd' )) {
 			//dl( 'php_gd2.'.PHP_SHLIB_SUFFIX);
 		}
-		$_SERVER['DI8_WEB'] = $Install_Dir . '/ms4w/Apache/htdocs';
+		if (! isset($_SERVER["DI8_WEB"])) {
+			$_SERVER['DI8_WEB'] = $Install_Dir . '/ms4w/Apache/htdocs';
+		}
 		$_SERVER['DI8_WWWDIR'] = $Install_Dir . '/www';
 		$_SERVER['DI8_DATADIR'] = $Install_Dir . '/data';
 		$_SERVER['DI8_CACHEDIR'] = $Install_Dir . '/tmp';
@@ -143,12 +147,29 @@ if (isset($_SERVER["HTTP_HOST"])) {
 		define("TEMP", "/tmp");
 		define("JPGRAPHDIR", "/usr/share/php/jpgraph");
 		define("FONTSET" , "/usr/share/fonts/liberation/fonts.txt");
+		if (! isset($_SERVER["DI8_WEB"])) {
+			$_SERVER["DI8_WEB"]      = "/usr/share/desinventar-8.2/web";
+		}
+		$_SERVER["DI8_WWWDIR"]   = "/var/www/desinventar-8.2";
+		$_SERVER["DI8_DATADIR"]  = "/var/lib/desinventar-8.2";
+		$_SERVER["DI8_CACHEDIR"] = "/var/cache/Smarty/di8";
 		$FBCore = '/usr/share/pear/FirePHPCore/fb.php';
 	}
 } else {
 	// Running a Command Line Script
 	define('MODE', "command");
 }
+
+define("BASE"    , $_SERVER["DI8_WEB"]);
+define("WWWDIR"  , $_SERVER["DI8_WWWDIR"]);
+define("WWWDATA" , "/desinventar-8.2-data");
+define("WWWURL"  , "/");
+define("DATADIR" , $_SERVER["DI8_DATADIR"]);
+define("CACHEDIR", $_SERVER["DI8_CACHEDIR"]);
+define("VAR_DIR" , DATADIR);
+define("TMP_DIR" , DATADIR);
+define("SMTY_DIR", CACHEDIR); // Smarty temp dir
+define("TMPM_DIR", CACHEDIR); // Mapserver temp dir
 
 // 2009-07-04 (jhcaiced) Added FirePHP debug system
 // This lines try to detect if FirePHP Core is installed,
@@ -175,65 +196,6 @@ function showDebugMsg($sMsg) {
 	print $sMsg . "<br />\n";
 }
 
-/* Configure BASE Directory from HTTPD Config - Linux + WIndows */
-/* Apache MS4W creates enviroment variables as REDIRECT_XXXXX */
-if (isset($_SERVER["REDIRECT_DI8_WEB"])) {
-	$_SERVER["DI8_WEB"] = $_SERVER["REDIRECT_DI8_WEB"];
-}
-
-/* Configure WWWDIR - Linux + Windows */
-if (isset($_SERVER["REDIRECT_DI8_WWWDIR"])) {
-	$_SERVER["DI8_WWWDIR"] = $_SERVER["REDIRECT_DI8_WWWDIR"];
-}
-if (! isset($_SERVER["DI8_WWWDIR"])) {
-	$_SERVER["DI8_WWWDIR"] = "/var/www/desinventar-8.2";
-}
-/* Configure DATADIR - Linux + Windows */
-if (isset($_SERVER["REDIRECT_DI8_DATADIR"])) {
-	$_SERVER["DI8_DATADIR"] = $_SERVER["REDIRECT_DI8_DATADIR"];
-}
-if (! isset($_SERVER["DI8_DATADIR"])) {
-	$_SERVER["DI8_DATADIR"] = "/var/lib/desinventar-8.2";
-}
-
-/* Configure CACHEDIR - Linux + Windows */
-if (isset($_SERVER["REDIRECT_DI8_CACHEDIR"])) {
-	$_SERVER["DI8_CACHEDIR"] = $_SERVER["REDIRECT_DI8_CACHEDIR"];
-}
-if (! isset($_SERVER["DI8_CACHEDIR"])) {
-	$_SERVER["DI8_CACHEDIR"] = "/var/cache/Smarty/di8";
-}
-
-if (isset($_SERVER["SHELL"])) {
-	$_SERVER["DI8_CACHEDIR"] = "/tmp";
-}
-if (isset($_SERVER["DI8_WEB"])) {
-	define("BASE", $_SERVER["DI8_WEB"]);
-	define("WWWDIR"  , $_SERVER["DI8_WWWDIR"]);
-	define("WWWDATA" , "/desinventar-8.2-data");
-	define("WWWURL"  , "/");
-	define("DATADIR" , $_SERVER["DI8_DATADIR"]);
-	define("CACHEDIR", $_SERVER["DI8_CACHEDIR"]);
-} else {
-	if (isset($_SERVER["DI8_WEBLOCAL"])) {
-		define("BASE", $_SERVER["DI8_WEBLOCAL"]);
-	} else {
-		define("BASE", "D:/desinventar/devel/web");
-		//define("BASE", "/home/gentoo/mayandar/devel/desinventar/web");
-	}
-//	define("WWWURL"  , "/mayandar/desinventar");
-//	define("DATADIR" , "/var/lib/desinventar");
-	define("WWWDIR"  , BASE . "/tmp");
-	define("WWWDATA" , "../tmp");
-	define("WWWURL"  , "/");
-	define("DATADIR" , "D:/desinventar/data");
-	define("CACHEDIR", DATADIR . '/tmp');
-	define("FONTSET" , DATADIR . '/fonts.txt');
-}
-define("VAR_DIR" , DATADIR);
-define("TMP_DIR" , DATADIR);
-define("SMTY_DIR", CACHEDIR); // Smarty temp dir
-define("TMPM_DIR", CACHEDIR); // Mapserver temp dir
 
 $lg          = "spa";
 
