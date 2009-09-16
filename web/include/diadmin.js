@@ -39,8 +39,13 @@
 			var rbAjax = new Ajax.Updater('rightcontent', url, {
 				method: 'get', parameters: pars,
 				onComplete: function(request) {
-					if (cmd == "login")		updateList('pagecontent', url, 'cmd=welcome');
-					if (cmd == "logout")	updateList('pagecontent', '', 'p=MainPageDI8');
+					if (cmd == "login") {
+						updateList('pagecontent', url, 'cmd=welcome');
+					}
+					if (cmd == "logout") {
+						updateList('pagecontent', '', 'p=MainPageDI8');
+						window.location.reload(false);
+					}
 				},
 				onFailure: 	function(request) {
 					$('rightcontent').innerHTML = "{-#hlostconn#-}";

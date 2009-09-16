@@ -45,7 +45,7 @@ if (isset($_GET['c']) && (strlen($_GET['c']) > 0)) {
 	$t->assign ("dbs", $dbs);
 }
 // REGIONINFO: Show Information about Region
-elseif (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
+elseif (isset($_GET['r']) && !empty($_GET['r']) && file_exists($us->q->getDBFile($_GET['r']))) {
 	// set region
 	$sRegionId = $_GET['r'];
 	if (isset($_GET['view'])) {
