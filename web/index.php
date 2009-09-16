@@ -9,7 +9,13 @@ require_once('include/loader.php');
 $post = $_POST;
 $get  = $_GET;
 
-$cmd = getParameter('cmd', 'listdb');
+$cmd = getParameter('cmd','');
+$r = getParameter('r','');
+if ($cmd == '') {
+	if ($r == '') {
+		$cmd = 'listdb';
+	}
+}
 switch ($cmd) {
 case 'listdb':
 	// Direct access returns a list of public regions on this server
