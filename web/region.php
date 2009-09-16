@@ -35,7 +35,7 @@ function form2region ($val) {
 	return $dat;
 }
 
-// REGIONS: Show databases for selected Country from left menu
+// REGIONS: Show databases for selected Country 
 if (isset($_GET['c']) && (strlen($_GET['c']) > 0)) {
 	$t->assign ("ctl_regions", true);
 	$q = new Query();
@@ -51,14 +51,6 @@ elseif (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
 	if (isset($_GET['view'])) {
 		if ($_GET['view'] == "info")
 			$t->assign ("ctl_reginfo", true);
-		elseif ($_GET['view'] == "profile") {
-			$reglst = array();
-			$result = $us->q->core->query("SELECT RegionId, RegionLabel FROM Region WHERE RegionStatus=3 ORDER BY RegionLabel, RegionOrder");
-			while ($row = $result->fetch(PDO::FETCH_OBJ))
-				$reglst[$row->RegionId] = $row->RegionLabel;
-			$t->assign ("reglst", $reglst);
-			$t->assign ("ctl_regprofile", true);
-		}
 		elseif ($_GET['view'] == "logo") {
 			header("Content-type: Image/png");
 			$murl = VAR_DIR . "/database/". $sRegionId . "/logo.png";
@@ -158,7 +150,16 @@ elseif (isset($_GET['r']) && (strlen($_GET['r']) > 0)) {
 		break;
 	} //switch
 } else {
-	$t->assign ("regname", "Undefined Region!");
+	$q = new Query();
+	$reglst = array();
+	$result = $q->core->query("SELECT RegionId, RegionLabel FROM Region WHERE RegionStatus=3 ORDER BY RegionLabel, RegionOrder");
+	while ($row = $result->fetch(PDO::FETCH_OBJ)) {
+		$reglst[$row->RegionId] = $row->RegionLabel;
+	}
+	$t->assign ("reglst", $reglst);
+	$t->assign ("ctl_noregion", true);
+	$t->assign ("ctl_index", true);
+	$t->assign ("userid", $us->UserId);
 }
 
 $t->display ("region.tpl");

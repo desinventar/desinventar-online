@@ -10,7 +10,6 @@ $post = $_POST;
 $get  = $_GET;
 
 if (isset($get['r']) && !empty($get['r'])) {
-	// Direct access to module
 	$reg = $get['r'];
 } elseif (isset($post) && !empty($post['_REG'])) {
 	// Request to save Query Design in File..
@@ -37,19 +36,13 @@ if (isset($get['r']) && !empty($get['r'])) {
 	$reg = $qd['_REG'];
 	$t->assign ("qd", $qd);
 }
-
-if (!empty($reg)) {
+// 2009-08-07 (jhcaiced) Validate if Database Exists...
+if (!empty($reg) && file_exists($us->q->getDBFile($reg))) {
 	// Accessing a region with some operation
 	$us->open($reg);
 	$q = new Query($reg);
 	if (isset($get['lang']) && !empty($get['lang']))
 		$_SESSION['lang'] = $get['lang'];
-	// 2009-08-07 (jhcaiced) Validate if Database Exists...
-	if (! file_exists($us->q->getDBFile($reg))) {
-		print "<h3>Requested Region doesn't exist<br />";
-		exit();
-	}
-
 	if (isset($get['cmd'])) {
 		switch ($get['cmd']) {
 			case "getGeoId":
@@ -81,7 +74,6 @@ if (!empty($reg)) {
 			break;
 		}
 	} else {
-		$t->assign ("lglst", $q->loadLanguages(1));
 		$t->assign ("ms", MAPSERV);
 		$t->assign ("dis", $q->queryLabelsFromGroup('Disaster', $lg));
 		$t->assign ("rc1", $q->queryLabelsFromGroup('Record|1', $lg));
@@ -94,7 +86,6 @@ if (!empty($reg)) {
 		$t->assign ("exteffel", $q->getEEFieldList("True"));
 		// Get UserRole
 		$role = $us->getUserRole($reg);
-		$t->assign ("userid", $us->UserId);
 		$t->assign ("role", $role);
 		//echo "<pre>". $us->UserId ; print_r($role);
 		if (strlen($role) > 0)
@@ -140,7 +131,6 @@ if (!empty($reg)) {
 		$t->assign ("eveuserl", $q->loadEvents("USER", "active", $lg));
 		$t->assign ("caupredl", $q->loadCauses("PREDEF", "active", $lg));
 		$t->assign ("cauuserl", $q->loadCauses("USER", "active", $lg));
-		$t->assign ("ctl_show", true);
 		// Query words and phrases in dictionary..
 		$ef1 = $q->queryLabelsFromGroup('Effect|People', $lg);
 		$ef2 = $q->queryLabelsFromGroup('Effect|Affected', $lg);
@@ -225,21 +215,17 @@ if (!empty($reg)) {
 		$std = array_merge($std, $q->queryLabelsFromGroup('Statistic', $lg));
 		$std = array_merge($std, $st);
 		$t->assign ("std", $std);
+		$t->assign ("ctl_show", true);
+		$t->assign ("ctl_qryres", true);
+		$t->assign ("ctl_qrydsg", true);
 	}
-	$t->display ("index.tpl");
 } else {
+	$t->assign ("ctl_show", true);
+	$t->assign ("ctl_noregion", true);
 	// Direct access returns a list of public regions on this server
-	$d = new Query();
-	$reglst = array();
-	$result = $d->core->query("SELECT RegionId, RegionLabel FROM Region WHERE RegionStatus=3 ORDER BY RegionLabel, RegionOrder");
-	while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-		$reglst[$row->RegionId] = $row->RegionLabel;
-	}
-	//$t->assign('ctl_show', true);
-	$t->assign('ctl_showregionlist', true);
-	$t->assign('request_uri', $_SERVER['REQUEST_URI']);
-	$t->assign('regionlist', $reglst);
-	$t->display('regionlist.tpl');
 }
+$t->assign ("lglst", $us->q->loadLanguages(1));
+$t->assign ("userid", $us->UserId);
+$t->display ("index.tpl");
 
 </script>

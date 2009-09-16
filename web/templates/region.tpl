@@ -42,114 +42,122 @@
   <br>
   <input id="add" type="button" value="{-#baddoption#-}" class="line"
   		onclick="setRegionPA('', '', '', '', '1','0'); $('cmd').value='insert'; $('RegionUUID').disabled=false;">
-  <span id="regionpastatusmsg" class="dlgmsg"></span>
-  <br>
-  <div id="regionpaaddsect" style="display:none">
-   	<form name="regionpafrm" id="regionpafrm" method="GET" 
-   		action="javascript: var s=$('regionpafrm').serialize(); mod='regionpa'; sendData('','region.php', s, '');"
-   		onSubmit="javascript: var a=new Array('CountryIsoCode','RegionUUID','RegionLabel','RegionUserAdmin'); 
-   													return(checkForm(a, '{-#errmsgfrm#-}'));">
-			<table class="grid">
-				<tbody>
-					<tr>
-						<td>{-#tregcntlist#-}<b style="color:darkred;">*</b></td>
-						<td>
-							<select id="CountryIsoCode" name="CountryIsoCode" class="fixw">
-								<option value=""></option>
+	<span id="regionpastatusmsg" class="dlgmsg"></span><br>
+	<div id="regionpaaddsect" style="display:none">
+   	<form name="regionpafrm" id="regionpafrm" method="GET" action="javascript: var s=$('regionpafrm').serialize(); 
+		mod='regionpa'; sendData('','region.php', s, '');" onSubmit="javascript: 
+		var a=new Array('CountryIsoCode','RegionUUID','RegionLabel','RegionUserAdmin'); return(checkForm(a, '{-#errmsgfrm#-}'));">
+		<table class="grid">
+			<tbody>
+				<tr>
+					<td>{-#tregcntlist#-}<b style="color:darkred;">*</b></td>
+					<td>
+						<select id="CountryIsoCode" name="CountryIsoCode" class="fixw">
+							<option value=""></option>
 {-foreach name=cnt key=key item=item from=$cntl-}
-								<option value="{-$key-}">{-$item-}</option>
+							<option value="{-$key-}">{-$item-}</option>
 {-/foreach-}
-							</select></td>
-					</tr>
+						</select></td>
+				</tr>
 <!--					<tr>
-						<td>{-#tregionuuid#-}<b style="color:darkred;">*</b></td>
-						<td>
-							<input id="RegionUUID" name="RegionUUID" type="text" maxlength="20" class="line fixw" disabled
-								onBlur="updateList('chkruuid', 'region.php', 'cmd=chkruuid&RegionUUID='+ $('RegionUUID').value);">
-							<input type="hidden" id="RegionUUID2" name="RegionUUID2">
-							<span id="chkruuid"></span></td>
-					</tr>-->
-					<tr>
-						<td>{-#tregnamlist#-}<b style="color:darkred;">*</b></td>
-						<td><input id="RegionLabel" name="RegionLabel" type="text" maxlength="200" class="line fixw"></td>
-					</tr>
-					<tr>
-						<td>{-#tregadmlist#-}<b style="color:darkred;">*</b></td>
-						<td>
-							<select id="RegionUserAdmin" name="RegionUserAdmin" class="fixw">
-								<option value=""></option>
+					<td>{-#tregionuuid#-}<b style="color:darkred;">*</b></td>
+					<td>
+						<input id="RegionUUID" name="RegionUUID" type="text" maxlength="20" class="line fixw" disabled
+							onBlur="updateList('chkruuid', 'region.php', 'cmd=chkruuid&RegionUUID='+ $('RegionUUID').value);">
+						<input type="hidden" id="RegionUUID2" name="RegionUUID2">
+						<span id="chkruuid"></span></td>
+				</tr>-->
+				<tr>
+					<td>{-#tregnamlist#-}<b style="color:darkred;">*</b></td>
+					<td><input id="RegionLabel" name="RegionLabel" type="text" maxlength="200" class="line fixw"></td>
+				</tr>
+				<tr>
+					<td>{-#tregadmlist#-}<b style="color:darkred;">*</b></td>
+					<td>
+						<select id="RegionUserAdmin" name="RegionUserAdmin" class="fixw">
+							<option value=""></option>
 {-foreach name=usr key=key item=item from=$usr-}
-								<option value="{-$key-}">{-$item-}</option>
+							<option value="{-$key-}">{-$item-}</option>
 {-/foreach-}
-							</select></td>
-					</tr>
-					<tr>
-						<td><a class="info" href="javascript:void(null)" 
-							onMouseOver="showtip('{-$dic.DBRegionLangIsoCode[2]-}')">{-$dic.DBRegionLangIsoCode[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBRegionLangIsoCode[1]-}</span></a>
-						</td>
-						<td><select id="RegionLangCode" name="RegionLangCode" {-$ro-} class="line fixw" 
-										onFocus="showtip('{-$dic.DBRegionLangCode[2]-}')" tabindex="1">
+						</select></td>
+				</tr>
+				<tr>
+					<td><a class="info" href="javascript:void(null)" 
+						onMouseOver="showtip('{-$dic.DBRegionLangIsoCode[2]-}')">{-$dic.DBRegionLangIsoCode[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBRegionLangIsoCode[1]-}</span></a>
+					</td>
+					<td><select id="RegionLangCode" name="RegionLangCode" {-$ro-} class="line fixw" 
+									onFocus="showtip('{-$dic.DBRegionLangCode[2]-}')" tabindex="1">
 {-foreach name=lglst key=key item=item from=$lglst-}
-								<option value="{-$key-}">{-$item[0]-}</option>
+							<option value="{-$key-}">{-$item[0]-}</option>
 {-/foreach-}
-								</select>
-						</td>
-					</tr>
-					<tr>
-						<td>{-#tregactlist#-}<b>*</b></td>
-						<td><input id="RegionActive" name="RegionActive" type="checkbox" checked></td>
-					</tr>
-					<tr>
-						<td>{-#tregpublist#-}<b>*</b></td>
-						<td><input id="RegionPublic" name="RegionPublic" type="checkbox"></td>
-					</tr>
-					<tr>
-						<td colspan=2 align="center">
-							<input id="cmd" name="cmd" type="hidden">
-							<input type="submit" value="{-#bsave#-}" class="line">
-							<input type="reset" value="{-#bcancel#-}" onClick="$('regionpaaddsect').style.display='none'; uploadMsg('');" class="line">
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</form>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>{-#tregactlist#-}<b>*</b></td>
+					<td><input id="RegionActive" name="RegionActive" type="checkbox" checked></td>
+				</tr>
+				<tr>
+					<td>{-#tregpublist#-}<b>*</b></td>
+					<td><input id="RegionPublic" name="RegionPublic" type="checkbox"></td>
+				</tr>
+				<tr>
+					<td colspan=2 align="center">
+						<input id="cmd" name="cmd" type="hidden">
+						<input type="submit" value="{-#bsave#-}" class="line">
+						<input type="reset" value="{-#bcancel#-}" onClick="$('regionpaaddsect').style.display='none'; uploadMsg('');" class="line">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
 	</div>
 {-/if-}
-
 {-**** SHOW LIST OF REGIONS BY COUNTRY (CONTENT) ****-}
 {-if $ctl_regions-}
 <h2>{-$cnt-}</h2>
 <p align="justify">
 {-#tviewdbase#-}<br>
 {-if $ctl_available-}
-	<select onChange="updateList('shwreg', 'region.php', 'r='+ this.value)" size=4 style="width: 500px;">
+<select onChange="updateList('shwreg', 'region.php', 'r='+ this.value)" size=4 style="width: 500px;">
 {-foreach name=dbs key=key item=item from=$dbs-}
-  	<option value="{-$key-}" class="regl">{-$item-}</option>
+	<option value="{-$key-}" class="regl">{-$item-}</option>
 {-/foreach-}
-	</select>
-	<div id="shwreg"></div>
+</select>
+<div id="shwreg"></div>
 {-else-}
  <br>{-#tdbnotavail#-}
 {-/if-}
 </p><br>
 {-/if-}
-{-***** REGINFO: Show Region Info - CONTENT SECTION *****-}
-{-if $ctl_showreg || $ctl_reginfo || $ctl_regprofile-}
- {-if $ctl_regprofile-}
- <script language="javascript">
-  updateUserBar('user.php', '', '', '');
- </script>
+{-** REGION INDEX: show main option according with user and database **-}
+{-if $ctl_index-}
+  <h1>Bienvenido {-if $userid != ""-}{-$userid-}{-else-}a DesInventar8{-/if-},</h1>
+  <br>
+ {-if $ctl_noregion-}
+  <h2>Seleccione una region de la lista </h2>
+  {-foreach name=regions key=key item=item from=$reglst-}
+  <a href="javascript:void(null)" onClick="parent.window.location = 'index.php?r={-$key-}'">{-$item-}</a><br>
+  {-/foreach-}
+ {-/if-}
+  <hr>
+  {-if $userid == ""-}
+  <script language="javascript">updateUserBar('user.php', '', '', '');</script>
   <div id="rightcontent"></div>
   <div id="pagecontent"></div>
-  <br><hr><br>
-<!-- Seleccione base de datos <select onChange="parent.window.location = 'index.php?r='+ this.value;">
-   <option disabled selected></option>
-  {-foreach name=regions key=key item=item from=$reglst-}
-   <option value="{-$key-}">{-$item-}</option>
-  {-/foreach-}
- </select>
- <br><hr><br>-->
- {-/if-}
+  {-else-}
+   {-if $role != ""-}
+    <h4>Usuario con rol en base actual:</h4>
+    * ADMIN,USER,SUPER: Ingresar fichas<br>
+    * ADMIN: Configurar base de datos<br>
+   {-else-}
+    <h4>Usuario sin rol:</h4>
+    * Listar bases de usuario.
+   {-/if-}
+  {-/if-}
+{-/if-}
+{-***** REGINFO: Show Region Info - CONTENT SECTION *****-}
+{-if $ctl_showreg || $ctl_reginfo-}
  <table border=0 style="width:550px; font-family:Lucida Grande, Verdana; font-size:10px;">
   <tr>
 	<td valign="center"><img src="region.php?r={-$reg-}&view=logo"></td>
@@ -188,13 +196,14 @@
  {-/if-}
   <tr>
    <td colspan="2">
+	<a href="javascript:void(null)" onClick="$('info').style.display='block';">More info</a>
+	<div id="info" style="display:none" align="justify">
  {-foreach name=info key=k item=i from=$info-}
   {-if $i != ""-}
-	<b>{-$k-}</b>
-	<p align="justify">{-$i-}</p>
-	<br>
+	<b>{-$k-}</b><br>{-$i-}<br>
   {-/if-}
  {-/foreach-}
+	</div>
    </td>
   </tr>
  </table>
