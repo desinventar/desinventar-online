@@ -19,8 +19,6 @@ class Graphic {
 	/* opc [kind:BAR,LINE,PIE Opc:Title,etc] data:Matrix
 	   data[0] == X, data[1] = Y1,  .. */
 	public function Graphic ($opc, $data) {
-		$val = array();
-		$acol = 1;
 		$kind = $opc['_G+Kind'];
 		// Get Label Information
 		$oLabels     = array_keys($data);
@@ -46,6 +44,7 @@ class Graphic {
 			$sYAxisLabel = $oLabels[1];
 			$sY2AxisLabel = $oLabels[2];
 		}
+		$val = array();
 		// Cummulative Graph : Add Values in Graph
 		if ($opc['_G+Mode'] == "ACCUMULATE") {
 			$SumValue = 0;
@@ -79,14 +78,20 @@ class Graphic {
 		} 
 		// Normal Graph (BAR, LINE, PIE)
 		else {
+			$n = 0;
+			$acol = 1;
 			// Set Array to [YEAR]=> { VALUE1, VALUE2 }  OR Set Array to [YEAR]=>VALUE
 			foreach ($data[$sYAxisLabel] as $Key=>$Value) {
-				if ($gType == "2TEMPO" || $gType == "2COMPAR")
-					$val[$data[$sXAxisLabel][$Key]] = array($Value, $data[$sY2AxisLabel][$Key]);
-				else
-					$val[$data[$sXAxisLabel][$Key]] = $Value;
-				$acol++;
+				if ($data[$sXAxisLabel][$n] != "00") {
+					if ($gType == "2TEMPO" || $gType == "2COMPAR")
+						$val[$data[$sXAxisLabel][$Key]] = array($Value, $data[$sY2AxisLabel][$Key]);
+					else
+						$val[$data[$sXAxisLabel][$Key]] = $Value;
+					$acol++;
+				}
+				$n++;
 			}
+			//echo "<pre>"; print_r($data[$sXAxisLabel]);
 			// Complete the data series for XAxis (year,month,day)
 			if ($gType == "TEMPO" || $gType == "2TEMPO") {
 				$val = $this->completeTimeSerie($opc, $val, $q);
