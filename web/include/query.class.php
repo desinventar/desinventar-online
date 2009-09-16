@@ -1229,10 +1229,21 @@ class Query extends PDO
     return true;
   }
   
-  // Check
-  function rebuildCore($fcore) {
-    return true;
-  }
+	public function searchDB($prmQuery) {
+		$RegionList = array();
+		$query = "SELECT RegionId, RegionLabel FROM Region WHERE RegionStatus=3 AND (RegionId LIKE '%" . $prmQuery . "%' OR RegionLabel LIKE '%" . $prmQuery . "%') ORDER BY RegionLabel, RegionOrder";
+		fb($query);
+		$result = $this->core->query($query);
+		while ($row = $result->fetch(PDO::FETCH_OBJ)) {
+			$RegionList[$row->RegionId] = $row->RegionLabel;
+		}
+		return $RegionList;
+	}
+  
+	// Check
+	function rebuildCore($fcore) {
+		return true;
+	}
   
 } // end class
 

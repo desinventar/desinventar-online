@@ -9,6 +9,17 @@ require_once('include/loader.php');
 $post = $_POST;
 $get  = $_GET;
 
+function getParameter($prmName, $prmDefault) {
+	$prmValue = $prmDefault;
+	if (isset($_GET[$prmName])) {
+		$prmValue = $_GET[$prmName];
+	} elseif (isset($_POST[$prmName])) {
+		$prmValue = $_POST[$prmName];
+	}
+	return $prmValue;
+}
+
+
 if (isset($get['r']) && !empty($get['r'])) {
 	$reg = $get['r'];
 } elseif (isset($post) && !empty($post['_REG'])) {
@@ -219,13 +230,38 @@ if (!empty($reg) && file_exists($us->q->getDBFile($reg))) {
 		$t->assign ("ctl_qryres", true);
 		$t->assign ("ctl_qrydsg", true);
 	}
+
+	$t->assign ("lglst", $us->q->loadLanguages(1));
+	$t->assign ("userid", $us->UserId);
+	$t->display ("index.tpl");
 } else {
+	$cmd = getParameter('cmd', 'listdb');
+	switch ($cmd) {
+	case 'listdb':
+		// Direct access returns a list of public regions on this server
+		$d = new Query();
+		$reglst = $d->searchDB();
+		//$t->assign('ctl_show', true);
+		$t->assign('ctl_showregionlist', true);
+		$t->assign('request_uri', $_SERVER['REQUEST_URI']);
+		$t->assign('regionlist', $reglst);
+		$t->display('regionlist.tpl');
+		break;
+	case 'searchdb':
+		$d = new Query();
+		$searchdbquery = getParameter('searchdbquery', '');
+		fb('query : ' . $searchdbquery);
+		$reglst = $d->searchDB($searchdbquery);
+		fb($reglst);
+		fb(count($reglst));
+		$t->assign('ctl_showregionlist', true);
+		$t->assign('request_uri', $_SERVER['REQUEST_URI']);
+		$t->assign('regionlist', $reglst);
+		$t->display('regionlist.tpl');
+		break;
+	} //switch
 	$t->assign ("ctl_show", true);
 	$t->assign ("ctl_noregion", true);
 	// Direct access returns a list of public regions on this server
 }
-$t->assign ("lglst", $us->q->loadLanguages(1));
-$t->assign ("userid", $us->UserId);
-$t->display ("index.tpl");
-
 </script>
