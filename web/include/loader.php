@@ -329,4 +329,14 @@ if (MODE != "command") {
 	$t->assign ("lg", $lg);
 }
 
+function getParameter($prmName, $prmDefault) {
+	$prmValue = $prmDefault;
+	if (isset($_GET[$prmName])) {
+		$prmValue = $_GET[$prmName];
+	} elseif (isset($_POST[$prmName])) {
+		$prmValue = $_POST[$prmName];
+	}
+	return $prmValue;
+}
+
 </script>
