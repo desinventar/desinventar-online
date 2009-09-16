@@ -7,7 +7,7 @@
 				{ cmd: 'searchdb',
 				  searchdbquery: Value }
 			);
-		}).change();
+		});
 	});
 </script>
 <input type="text" id="searchdbquery" size="20">
