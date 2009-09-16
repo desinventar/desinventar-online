@@ -143,28 +143,29 @@ class Graphic {
 			$this->g = new Graph($wx, $hx, "auto");
 			if (isset($opc['_G+Scale'])) {
 				$this->g->SetScale($opc['_G+Scale']); // textint, textlog
-				$this->g->ygrid->Show(true,true);
 				$this->g->xgrid->Show(true,true);
 				$this->g->xaxis->SetTitle($sXAxisLabel, 'middle');
-				$this->g->xaxis->SetTitlemargin($bl - 30);
+				$this->g->xaxis->SetTitlemargin($bl - 20);
 				$this->g->xaxis->title->SetFont(FF_ARIAL, FS_NORMAL);
 				$this->g->xaxis->SetTickLabels($lbl);
 				$this->g->xaxis->SetFont(FF_ARIAL,FS_NORMAL, 8);
 				$this->g->xaxis->SetTextLabelInterval($itv);
 				$this->g->xaxis->SetLabelAngle(90);
+				$this->g->ygrid->Show(true,true);
 				$this->g->yaxis->SetTitle($sYAxisLabel, 'middle');
 				$this->g->yaxis->SetTitlemargin(40);
 				$this->g->yaxis->title->SetFont(FF_ARIAL, FS_NORMAL);
-				$this->g->yaxis->scale->SetGrace(20);
+				$this->g->yaxis->scale->SetGrace(0);
+				$this->g->yaxis->SetColor('darkblue');
 				if ($opc['_G+Scale'] == "textlog")
 					$this->g->yaxis->scale->ticks->SetLabelLogType(LOGLABELS_PLAIN);
 		        if (isset($opc['_G+Scale2']) && ($gType == "2TEMPO" || $gType == "2COMPAR")) {
 					$this->g->SetY2Scale($opc['_G+Scale2']);	// int, log
 					$this->g->y2grid->Show(true,true);
 					$this->g->y2axis->SetTitle($sY2AxisLabel, 'middle');
-					//$this->g->y2axis->SetTitlemargin(40);
+					$this->g->y2axis->SetTitlemargin($rl - 20);
 					$this->g->y2axis->title->SetFont(FF_ARIAL, FS_NORMAL);
-					$this->g->y2axis->scale->SetGrace(20);
+					$this->g->y2axis->scale->SetGrace(0);
 					$this->g->y2axis->SetColor('darkred');
 					if ($opc['_G+Scale2'] == "log")
 						$this->g->y2axis->scale->ticks->SetLabelLogType(LOGLABELS_PLAIN);
@@ -181,7 +182,8 @@ class Graphic {
 			$this->g->xaxis->SetTextLabelInterval($iInterval);
 		// Other options graphic
 		$this->g->img->SetMargin(50,$rl,30,$bl);
-		$this->g->legend->Pos(0.0, 0.1);
+		$this->g->legend->SetAbsPos(5,5,'right','top');
+		//$this->g->legend->Pos(0.0, 0.1);
 		$this->g->legend->SetFont(FF_ARIAL, FS_NORMAL, 10);
 		$this->g->SetFrame(false);
 		$title = wordwrap($opc['_G+Title'], 80);
@@ -227,26 +229,37 @@ class Graphic {
 					$zp = $this->bar($opc, $zo, "");
 					$y1 = $this->bar($opc, $val1, "darkblue");
 					$y2 = $this->bar($opc, $val2, "darkred");
+					$y1->SetLegend($sYAxisLabel);
+					$y2->SetLegend($sY2AxisLabel);
 					$y1p = new GroupBarPlot(array($y1, $zp));
 					$y2p = new GroupBarPlot(array($zp, $y2));
 					$this->g->Add($y1p);
 					$this->g->AddY2($y2p);
-					//$this->g->SetLegend($lab[$i]);
 				}
 			break;
 			case "LINE":
-				$m[] = $this->line($opc, $val, $pal);
-				// Add lineal regression 
-				$std = new Math();
-				$xx = array_fill(0, count($val), 0);
-				$rl = $std->linearRegression(array_keys($xx), array_values($val));
-				$n = 0;
-				foreach ($val as $kk=>$ii) {
-					$x = ($rl['m'] * $n) + $rl['b'];
-					$linreg[] = ($x < 0) ? 0 : $x;
-					$n++;
+				if ($gType == "TEMPO" || $gType == "LINE") {
+					$m[] = $this->line($opc, $val, $pal);
+					// Add lineal regression 
+					$std = new Math();
+					$xx = array_fill(0, count($val), 0);
+					$rl = $std->linearRegression(array_keys($xx), array_values($val));
+					$n = 0;
+					foreach ($val as $kk=>$ii) {
+						$x = ($rl['m'] * $n) + $rl['b'];
+						$linreg[] = ($x < 0) ? 0 : $x;
+						$n++;
+					}
+					$m[] = $this->line($opc, $linreg, 'dashed');
 				}
-				$m[] = $this->line($opc, $linreg, 'dashed');
+				elseif ($gType == "2TEMPO" || $gType == "2COMPAR") {
+					$y1p = $this->line($opc, $val1, "darkblue");
+					$y2p = $this->line($opc, $val2, "darkred");
+					$y1p->SetLegend($sYAxisLabel);
+					$y2p->SetLegend($sY2AxisLabel);
+					$this->g->Add($y1p);
+					$this->g->AddY2($y2p);
+				}
 			break;
 			case "MULTIBAR":
 				$m = $this->multibar($opc, $val, $pal);
