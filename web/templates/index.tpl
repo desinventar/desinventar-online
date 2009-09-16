@@ -160,11 +160,11 @@
 				$('import').style.display = 'none';
 {-if $ctl_noregion-}
 				$('qryres').style.display = 'none';
-				$('index').style.display = 'block';
+				//$('index').style.display = 'block';
 				w.hide();
 {-else-}
 				$('qryres').style.display = 'block';
-				$('index').style.display = 'none';
+				//$('index').style.display = 'none';
 				w.show();
 {-/if-}
 				if (w.isVisible())
@@ -209,7 +209,7 @@
 				w.collapse();
 				$('config').style.display = 'none';
 				$('import').style.display = 'block';
-				$('index').style.display = 'none';
+				//$('index').style.display = 'none';
 				$('qryres').style.display = 'none';
 				updateList('import', 'import.php', 'r={-$reg-}');
 			break;
@@ -219,12 +219,12 @@
 				w.collapse();
 				$('config').style.display = 'block';
 				$('import').style.display = 'none';
-				$('index').style.display = 'none';
+				//$('index').style.display = 'none';
 				$('qryres').style.display = 'none';
 			break;
 			// databases menu
 			case "{-#mdbfind#-}":
-				myAjax = new Ajax.Updater($('usr-cfg'), 'region.php', {method:'get', parameters:''});
+				updateList('pagecontent', 'region.php', '');
 				usrw.show();
 			break;
 			case "{-#mdbadmin#-}":
@@ -491,7 +491,7 @@
     	enab($('_G+Data2'));
     	enab($('_G+Mode2'));
     }
-    function grpSelectbyType(fld) {
+    function grpSelectbyType(fld) {/*
       var grp = $(fld).value;
       // Comparatives
       if (grp == "D.EventId" || grp == "D.CauseId" ||
@@ -534,9 +534,9 @@
 		$('_G+TypeC').value = "";
 	  if (fld == "_G+TypeC")
 	    $('_G+TypeH').value = "";
-	  $('_G+Type').value = grp;
+	  $('_G+Type').value = grp;*/
     }
-	function grpSelectbyKind() {
+	function grpSelectbyKind() {/*
 	  comp = $('_G+TypeC').value;
 	  if ((comp == "D.EventId" || comp == "D.CauseId" || comp.substr(0,13) == "D.GeographyId")
 	       && $('_G+Kind').value == "BAR") {
@@ -550,7 +550,7 @@
         	disab($('_G+M_accu'));
 			disab($('_G+Scale'));
 	  }
-	}
+	*/}
     // forms management
     function combineForms(dcf, ref) {
       var dc = $(dcf);
@@ -694,14 +694,6 @@
     	$('DC').submit();
     	return true;
     }
-	/* selection map functions
-	function showMap() {
-		$('smap').style.visibility = 'visible';
-	}
-	function hideMap() {
-		$('smap').style.visibility = 'hidden';
-	}
-	var g{-$reg-} = new CheckTree('g{-$reg-}');*/
 	function addRowToTable() {
 		var tbl = $('tbl_range');
 		var lastRow = tbl.rows.length;
@@ -809,8 +801,8 @@
 		w = Ext.getCmp('westm');
 		s = Ext.getCmp('southm');
 {-if $ctl_noregion-}
-		$('index').style.display='block';
-		myAjax = new Ajax.Updater($('index'), 'region.php', {method:'get', parameters:''});
+		//$('index').style.display='block';
+		//myAjax = new Ajax.Updater($('index'), 'region.php', {method:'get', parameters:''});
 {-/if-}
 		// select optimal height in results frame
 		//varhgt = screen.height * 360 / 600;
@@ -883,6 +875,14 @@
 			this.onClick(argsObj);
 		},
 	}
+	/* selection map functions
+	function showMap() {
+		$('smap').style.visibility = 'visible';
+	}
+	function hideMap() {
+		$('smap').style.visibility = 'hidden';
+	}
+	var g{-$reg-} = new CheckTree('g{-$reg-}');*/
 	</script>
 	<link rel="stylesheet" href="css/tabber.css" type="text/css">
 	<script type="text/javascript" src="include/tabber.js"></script>
@@ -1225,20 +1225,20 @@
                   	</select>
                   	<br>
                   	<b onMouseOver="showtip('{-$dic.GraphScale[2]-}');">{-$dic.GraphScale[0]-}</b><br>
-                  	<select id="_G+Scale2" name="_G+Scale2" disabled class="disabled" onMouseOver="showtip('{-$dic.GraphScale[2]-}');">
+                  	<select id="_G+Scale2" name="_G+Scale2" class="disabled" onMouseOver="showtip('{-$dic.GraphScale[2]-}');">
                   		<option value="int" selected>{-#gscalin#-}</option>
                   		<option value="log">{-#gscalog#-}</option>
                   	</select>
                   	<br>
                   	<b onMouseOver="showtip('{-$dic.GraphShow[2]-}');">{-$dic.GraphShow[0]-}</b><br>
-                  	<select id="_G+Data2" name="_G+Data2" disabled class="disabled" onMouseOver="showtip('{-$dic.GraphShow[2]-}');">
+                  	<select id="_G+Data2" name="_G+Data2" class="disabled" onMouseOver="showtip('{-$dic.GraphShow[2]-}');">
                   		<option value="VALUE">{-#gshwval#-}</option>
                   		<option id="_G+D_perc2" value="PERCENT" disabled>{-#gshwperce#-}</option>
                   		<option id="_G+D_none2" value="NONE" selected>{-#gshwnone#-}</option>
                   	</select>
                   	<br>
                   	<b onMouseOver="showtip('{-$dic.GraphMode[2]-}');">{-$dic.GraphMode[0]-}</b><br>
-            				<select id="_G+Mode2" name="_G+Mode2" disabled class="disabled" onMouseOver="showtip('{-$dic.GraphMode[2]-}');">
+            				<select id="_G+Mode2" name="_G+Mode2" class="disabled" onMouseOver="showtip('{-$dic.GraphMode[2]-}');">
                   		<option value="NORMAL" selected>{-#gmodnormal#-}</option>
                   		<option id="_G+M_accu2" value="ACCUMULATE">{-#gmodaccumul#-}</option>
                   		<option id="_G+M_over2" value="OVERCOME" disabled>{-#gmodovercome#-}</option>
