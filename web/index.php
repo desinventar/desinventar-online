@@ -104,7 +104,8 @@ default:
 					$t->assign ("ctl_evelst", true);
 				break;
 			}
-		} else {
+		}
+		else {
 			$t->assign ("ms", MAPSERV);
 			$t->assign ("dis", $q->queryLabelsFromGroup('Disaster', $lg));
 			$t->assign ("rc1", $q->queryLabelsFromGroup('Record|1', $lg));
@@ -250,8 +251,7 @@ default:
 			$t->assign ("ctl_qryres", true);
 			$t->assign ("ctl_qrydsg", true);
 		}
-
-		$t->assign ("ctl_show", true);
+		//$t->assign ("ctl_show", true);
 		// Direct access returns a list of public regions on this server
 		$t->assign ("lglst", $us->q->loadLanguages(1));
 		$t->assign ("userid", $us->UserId);
