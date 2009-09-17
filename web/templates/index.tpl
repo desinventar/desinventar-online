@@ -21,8 +21,8 @@
 	<script type="text/javascript" src="/extJS/adapter/ext/ext-base.js"></script>
 	<script type="text/javascript" src="/extJS/ext-all.js"></script>
 	<script type="text/javascript">
-	var w = null;
-	var s = null;
+	var	w = Ext.getCmp('westm');
+	var	s = Ext.getCmp('southm');
 	var difw;
 	var usrw;
     // DI8 - Layout, buttons and internal windows - UI DesConsultar module
@@ -148,6 +148,7 @@
 			break;
 			// query menu
 			case "mqrygoq":
+				w = Ext.getCmp('westm');
 				$('config').style.display = 'none';
 				$('import').style.display = 'none';
 {-if $ctl_noregion-}
@@ -165,6 +166,7 @@
 					w.expand(); //show()
 			break;
 			case "mqrynew":
+				w = Ext.getCmp('westm');
 				w.show();
 {-foreach name=ef1 key=key item=item from=$ef1-}
 				if ($('{-$key-}').checked) enadisEff('{-$key-}', false);
@@ -196,7 +198,7 @@
 				difw.show();
 			break;
 			case "mcrdimp":
-				//w = Ext.getCmp('westm');
+				w = Ext.getCmp('westm');
 				w.hide();
 				w.collapse();
 				$('config').style.display = 'none';
@@ -206,7 +208,7 @@
 				updateList('import', 'import.php', 'r={-$reg-}');
 			break;
 			case "mcrdcfg":
-				//w = Ext.getCmp('westm');
+				w = Ext.getCmp('westm');
 				w.hide();
 				w.collapse();
 				$('config').style.display = 'block';
@@ -591,6 +593,8 @@
     }
     function sendList(cmd) {
       if ($('_D+Field[]').length > 0) {
+		w = Ext.getCmp('westm');
+		s = Ext.getCmp('southm');
         $('_D+cmd').value = cmd;
 		if (cmd == "export")
 			$('saveopt').style.visibility = 'visible';
@@ -615,6 +619,8 @@
     }
     function sendMap(cmd) {
       if ($('_M+Type').length > 0) {
+		  w = Ext.getCmp('westm');
+		  s = Ext.getCmp('southm');
 		  //$('frmwait').innerHTML = waiting;
 		  $('_M+cmd').value = cmd;
 		  if (cmd == "export") {
@@ -644,6 +650,8 @@
 		return false;
     }
     function sendGraphic(cmd) {
+	  w = Ext.getCmp('westm');
+	  s = Ext.getCmp('southm');
       $('_G+cmd').value = cmd;
       combineForms('DC', 'CG');
       w.collapse(); //hide()
@@ -655,6 +663,8 @@
     }
     function sendStatistic(cmd) {
       if ($('_S+Firstlev').value != "" && $('_S+Field[]').length > 0) {
+		w = Ext.getCmp('westm');
+		s = Ext.getCmp('southm');
         $('_S+cmd').value = cmd;
         selectall('_S+Field[]');
         var ob = $('_S+Field[]');
@@ -789,8 +799,6 @@
 	}
 	// Find all Effects fields enable by saved query
 	window.onload = function() {
-		w = Ext.getCmp('westm');
-		s = Ext.getCmp('southm');
 {-if $ctl_noregion-}
 		//$('index').style.display='block';
 		//myAjax = new Ajax.Updater($('index'), 'region.php', {method:'get', parameters:''});
@@ -1417,7 +1425,7 @@
 		<span id="saveopt" style="position:absolute; visibility: hidden" onmouseout="$('saveopt').style.visibility='hidden';">
 		<a href="">xls</a> | <a href="">csv</a></span>&nbsp;&nbsp;
         <input id="bprint" type="button" class="bb bprint" style="visibility: hidden;"
-			onClick="$('dcr').print();" ext:qtip="{-#bprintmsg#-}">&nbsp;&nbsp;
+			onClick="document.dcr.print();" ext:qtip="{-#bprintmsg#-}">&nbsp;&nbsp;
 		 <!-- Show DesInventar (input data) window-->
 		<div id="dif-win" class="x-hidden">
 		  <div class="x-window-header">{-#mdcsection#-} | {-$userid-} - {-$role-}</div>
