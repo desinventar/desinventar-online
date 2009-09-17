@@ -38,124 +38,116 @@
 			items: new Ext.Panel({ contentEl: 'usr-cfg', autoScroll: true })
 		});
 	  }
-      var mfile = new Ext.menu.Menu({
-        id: 'fileMenu',
+	  var muser = new Ext.menu.Menu({
+        id: 'userMenu',
         items: [
-            {  text: '{-#mstartdb#-}',	handler: onMenuItem  }, '-',
-			{  text: '{-#muser#-}', 
-                menu: {
-			     id: 'userSubMenu',
-				 items: [
 {-if $userid != ""-}
-				  {text: '{-#muserdb#-}', handler: onMenuItem},
-				  {text: '{-#museraccount#-}', handler: onMenuItem},
-				  {text: '{-#muserlogout#-}', handler: onMenuItem}
+			{id: 'musrmyb', text: '{-#muserdb#-}', handler: onMenuItem },
+			{id: 'musrmya', text: '{-#museraccount#-}', handler: onMenuItem },
+			{id: 'musrout', text: '{-#muserlogout#-}', handler: onMenuItem }, 
 {-else-}
-				  {text: '{-#muserlogin#-}',  handler: onMenuItem}
+			{id: 'musrlin', text: '{-#muserlogin#-}', handler: onMenuItem }, 
 {-/if-}
-				 ]
-				}
-			},
-            {  text: '{-#mlang#-}', 
-                menu: {
-			     id: 'langSubMenu',
-				 items: [
+			'-',
+            { text: '{-#mlang#-}', 
+				menu: { id: 'langSubMenu',
+						items: [
 {-foreach name=lglst key=key item=item from=$lglst-}
-				   {text: '{-$item[0]-}', handler: onMenuItem},
-{-/foreach-}
-				   '-']
+							{id: '{-$key-}', text: '{-$item[0]-}', handler: onMenuItem},{-/foreach-}
+						'-']
 				}
 			},
-			{  text: '{-#mprint#-}',	handler: onMenuItem  },
-            {  text: '{-#mquit#-}',		handler: onMenuItem  }]
-      });
+			//{id: 'mfilprn', text: '{-#mprint#-}',	handler: onMenuItem  },
+            {id: 'mfilqit',  text: '{-#mquit#-}', handler: onMenuItem  }
+		]});
       var mquery = new Ext.menu.Menu({
         id: 'queryMenu',
         items: [
-            {  text: '{-#mgotoqd#-}',	handler: onMenuItem  },
-            {  text: '{-#mnewsearch#-}',handler: onMenuItem  },
-            {  text: '{-#msavequery#-}',handler: onMenuItem  },
-            {  text: '{-#mopenquery#-}',handler: onMenuItem  }]
+            {id:'mqrygoq', text: '{-#mgotoqd#-}',	handler: onMenuItem  },
+            {id:'mqrynew', text: '{-#mnewsearch#-}',handler: onMenuItem  },
+            {id:'mqrysav', text: '{-#msavequery#-}',handler: onMenuItem  },
+            {id:'mqryopn', text: '{-#mopenquery#-}',handler: onMenuItem  }]
       });
 	  var mcards = new Ext.menu.Menu({
         id: 'cardsMenu',
         items: [
-			{  text: '{-#minsert#-}',	handler: onMenuItem  },
+			{id:'mcrdins', text: '{-#minsert#-}',	handler: onMenuItem  },
 {-if $role == "SUPERVISOR" || $role == "ADMINREGION"-}
-            {  text: '{-#mimport#-}',	handler: onMenuItem  },
+            {id:'mcrdimp', text: '{-#mimport#-}',	handler: onMenuItem  },
 {-/if-}
 {-if $role == "OBSERVER" || $role == "ADMINREGION"-}
-            {  text: '{-#mconfig#-}',	handler: onMenuItem  },
+            {id:'mcrdcfg', text: '{-#mconfig#-}',	handler: onMenuItem  },
 {-/if-}
 			'-']
 		});
 	  var mbases = new Ext.menu.Menu({
         id: 'basesMenu',
         items: [
-			{  text: '{-#mdbfind#-}',	handler: onMenuItem  },
+			{id:'mdbsfnd', text: '{-#mdbfind#-}',	handler: onMenuItem  },
 {-if $role == "ADMINPORTAL"-}
-			{  text: '{-#mdbadmin#-}',	handler: onMenuItem  },
+			{id:'mdbsadm', text: '{-#mdbadmin#-}',	handler: onMenuItem  },
 {-/if-}
 			'-']
 		});
-      //{  text: '{-#motherdoc#-}',		handler: onMenuItem  },
       var mhelp = new Ext.menu.Menu({
         id: 'helpMenu',
         items: [
-            {  text: '{-#mwebsite#-}',	handler: onMenuItem  },
-            {  text: '{-#mabout#-}',	handler: onMenuItem  }]
+            {id:'mwww', text: '{-#mwebsite#-}',	handler: onMenuItem  },
+            {id:'mmtg', text: '{-#hmoreinfo#-}', handler: onMenuItem  },
+            {id:'mabo', text: '{-#mabout#-}', handler: onMenuItem  }]
       });
 	  
       var tb = new Ext.Toolbar();
       tb.render('toolbar');
-      tb.add(     {text: '{-#mfile#-}',			menu: mfile  });
+	  tb.add('-', {id: 'musr', text: '{-#muser#-}{-if $userid != ""-}: <b>{-$userid-}</b>{-/if-}', menu: muser });
 {-if !$ctl_noregion-}
-      tb.add('-', {text: '{-#msearch#-}',		menu: mquery });
+      tb.add('-', {id: 'mqry', text: '{-#msearch#-}',		menu: mquery });
 {-/if-}
 {-if $role == "USER" || $role == "USER" || $role == "OBSERVER" || $role == "ADMINREGION"-}
-      tb.add('-', {text: '{-#mdcsection#-}',	menu: mcards });
+      tb.add('-', {id: 'minp', text: '{-#mdcsection#-}',	menu: mcards });
 {-/if-}
-      tb.add('-', {text: '{-#mdatabases#-}',	menu: mbases });
-      tb.add('-', {text: '{-#mhelp#-}',			menu: mhelp  });
-	  tb.add('->',{text: '<img src="images/di_logo4.png">'});
+      tb.add('-', {id: 'mdbs', text: '{-#mdatabases#-}',	menu: mbases });
+      tb.add('-', {id: 'mhlp', text: '{-#mhelp#-}',			menu: mhelp  });
+	  tb.add('->',{id: 'mreg', text: '[{-$regname-}]', handler: onMenuItem });
+	  tb.add('->',{id: 'mwww', text: '<img src="images/di_logo4.png">', handler: onMenuItem });
 
 	  function onMenuItem(item){
-		switch (item.text) {
+		switch (item.id) {
 			// file menu
-			case "{-#mstartdb#-}":
+			case "mreg":
 				$('dcr').src = "region.php?r={-$reg-}";
 				$('bsave').style.visibility = 'hidden';
 				$('bprint').style.visibility = 'hidden';
 			break;
-			case "{-#muserlogin#-}":
+			case "musrlin":
 				updateUserBar('user.php', '', '', '');
 				usrw.show();
 			break;
-			case "{-#muserlogout#-}":
+			case "musrout":
 				updateUserBar('user.php', 'logout', '', '');
 			break;
-			case "{-#muserdb#-}":
+			case "musrmyb":
 				updateList('pagecontent', 'user.php', 'cmd=welcome');
 				usrw.show();
 			break;
-			case "{-#museraccount#-}":
+			case "musrmya":
 				mod='userpa';
 				updateList('pagecontent', 'user.php', 'cmd=viewpref');
 				usrw.show();
 			break;
 {-foreach name=lglst key=key item=item from=$lglst-}
-			case "{-$item[0]-}":
+			case "{-$key-}":
 				window.location = "index.php?r={-$reg-}&lang={-$key-}";
 			break;
 {-/foreach-}
-			case "{-#mprint#-}":
+			case "mfilprn":
 				window.print();
 			break;
-			case "{-#mquit#-}":
+			case "mfilqit":
 				self.close();
 			break;
 			// query menu
-			case "{-#mgotoqd#-}":
+			case "mqrygoq":
 				$('config').style.display = 'none';
 				$('import').style.display = 'none';
 {-if $ctl_noregion-}
@@ -172,17 +164,17 @@
 				else
 					w.expand(); //show()
 			break;
-			case "{-#mnewsearch#-}":
+			case "mqrynew":
 				w.show();
 {-foreach name=ef1 key=key item=item from=$ef1-}
 				if ($('{-$key-}').checked) enadisEff('{-$key-}', false);
 {-/foreach-}
 				$('DC').reset();
 			break;
-			case "{-#msavequery#-}":
+			case "mqrysav":
 				saveQuery();
 			break;
-			case "{-#mopenquery#-}":
+			case "mqryopn":
 				var qryw;
 				if (!qryw) {
 					qryw = new Ext.Window({
@@ -200,10 +192,10 @@
 				qryw.show(this);
 			break;
 		    //cards menu
-			case "{-#minsert#-}":
+			case "mcrdins":
 				difw.show();
 			break;
-			case "{-#mimport#-}":
+			case "mcrdimp":
 				//w = Ext.getCmp('westm');
 				w.hide();
 				w.collapse();
@@ -213,7 +205,7 @@
 				$('qryres').style.display = 'none';
 				updateList('import', 'import.php', 'r={-$reg-}');
 			break;
-			case "{-#mconfig#-}":
+			case "mcrdcfg":
 				//w = Ext.getCmp('westm');
 				w.hide();
 				w.collapse();
@@ -223,22 +215,22 @@
 				$('qryres').style.display = 'none';
 			break;
 			// databases menu
-			case "{-#mdbfind#-}":
+			case "mdbsfnd":
 				updateList('pagecontent', 'region.php', '');
 				usrw.show();
 			break;
-			case "{-#mdbadmin#-}":
+			case "mdbsadm":
 				updateList('pagecontent', 'region.php', 'cmd=adminreg');
 				usrw.show();
 			break;
 			// help menu
-			case "{-#mabout#-}":
+			case "mabo":
 				alert("{-#tabout#-}");
 			break;
-			case "{-#mwebsite#-}":
+			case "mwww": //{-#mwebsite#-}
 				window.open('http://www.desinventar.org', '', '');
 			break;
-			case "{-#hmoreinfo#-}":
+			case "mmtg":
 				runWin('doc.php?m=metguide', 'doc');
 			break;
 		}
@@ -1789,30 +1781,52 @@
 		  onFocus="showtip('');">{-$qd.__CusQry-}</textarea>
 	   <br>
 	   <table border="0">
-		<tr>
+		<tr valign="top">
          <td>
-          <select class="small" size="10" onChange="$('CusQry').value += this.value;">
-			<option value="DisasterSerial = '' ">{-$dis.DisasterSerial[0]-}</option>
-		    <option value="DisasterBeginTime = '' ">{-$dis.DisasterBeginTime[0]-}</option>
-			<option value="RecordAuthor = '' ">{-$rc2.RecordAuthor[0]-}</option>
-			<option value="RecordCreation = '' ">{-$rc2.RecordCreation[0]-}</option>
-			<option value="RecordUpdate = '' ">{-$rc2.RecordUpdate[0]-}</option>
+		  <div height="100px" class="dwin">
+		  <table border=1 >
+		   <tr ondblClick="Element.addClassName(this, 'highlight'); $('CusQry').value += 'DisasterSerial';">
+		    <td>{-$dis.DisasterSerial[0]-}</td>
+		   </tr>
+		   <tr ondblClick="Element.addClassName(this, 'highlight'); $('CusQry').value += 'DisasterBeginTime';">
+		    <td>{-$dis.DisasterBeginTime[0]-}</td>
+		   </tr>
+		   <tr ondblClick="Element.addClassName(this, 'highlight'); $('CusQry').value += 'RecordAuthor';">
+		    <td>{-$rc2.RecordAuthor[0]-}</td>
+		   </tr>
+		   <tr ondblClick="Element.addClassName(this, 'highlight'); $('CusQry').value += 'RecordCreation';">
+		    <td>{-$rc2.RecordCreation[0]-}</td>
+		   </tr>
+		   <tr ondblClick="Element.addClassName(this, 'highlight'); $('CusQry').value += 'RecordUpdate';">
+		    <td>{-$rc2.RecordUpdate[0]-}</td>
+		   </tr>
 {-foreach name=ef1 key=key item=item from=$ef1-}
-			<option value="{-$key-} = ">{-$item[0]-}</option>
+		   <tr ondblClick="Element.addClassName(this, 'highlight'); $('CusQry').value += '{-$key-}';">
+		    <td>{-$item[0]-}</td>
+		   </tr>
 {-/foreach-}
 {-foreach name=sec key=key item=item from=$sec-}
-			<option value="{-$key-} = ">{-$item[0]-}</option>
+		   <tr ondblClick="Element.addClassName(this, 'highlight'); $('CusQry').value += '{-$key-}';">
+		    <td>{-$item[0]-}</td>
+		   </tr>
 {-/foreach-}
-{-foreach name=ef3 key=k item=i from=$ef3-}
-			<option value="{-$k-} = ">{-$i[0]-}</option>
+{-foreach name=ef3 key=key item=item from=$ef3-}
+		   <tr ondblClick="Element.addClassName(this, 'highlight'); $('CusQry').value += '{-$key-}';">
+		    <td>{-$item[0]-}</td>
+		   </tr>
 {-/foreach-}
-{-foreach name=ef4 key=k item=i from=$ef4-}
-			<option value="{-$k-} = ">{-$i[0]-}</option>
+{-foreach name=ef4 key=key item=item from=$ef4-}
+		   <tr ondblClick="Element.addClassName(this, 'highlight'); $('CusQry').value += '{-$key-}';">
+		    <td>{-$item[0]-}</td>
+		   </tr>
 {-/foreach-}
 {-foreach name=eef key=key item=item from=$exteffel-}
-			<option value="{-$key-} = ">{-$item[0]-}</option>
+		   <tr ondblClick="Element.addClassName(this, 'highlight'); $('CusQry').value += '{-$key-}';">
+		    <td>{-$item[0]-}</td>
+		   </tr>
 {-/foreach-}
- 		  </select>
+		  </table>
+		  </div>
 		 </td>
 		 <td align="center" valign="center">
 		  <input type="button" value="< " onClick="$('CusQry').value += this.value;" class="medium">
