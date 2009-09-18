@@ -227,7 +227,7 @@
 			break;
 			// help menu
 			case "mabo":
-				alert("{-#tabout#-}");
+				alert("DesInventar {-$diversion-}\n{-#tabout#-}");
 			break;
 			case "mwww": //{-#mwebsite#-}
 				window.open('http://www.desinventar.org', '', '');
@@ -804,28 +804,32 @@
 			disab($('>'));
 			enab($('='));  $('=').value = "= ''";
 			enab($('<>')); $('<>').value = "<> ''";
-			enab($('LIKE'));
+			enab($("LIKE '%%'"));
+			disab($('=-1')); disab($('=0')); disab($('=-2'));
 			break;
 			case 'date':
 			enab($('<')); $('<').value = "< ''";
 			enab($('>')); $('>').value = "> ''";
 			enab($('=')); $('=').value = "= ''";
 			enab($('<>')); $('<>').value = "<> ''";
-			enab($('LIKE'));
+			enab($("LIKE '%%'"));
+			disab($('=-1')); disab($('=0')); disab($('=-2'));
 			break;
 			case 'number':
 			enab($('<')); $('<').value = "< ";
 			enab($('>')); $('>').value = "> ";
 			enab($('=')); $('=').value = "= ";
 			enab($('<>'));$('<>').value = "<> ";
-			disab($('LIKE'));
+			disab($("LIKE '%%'"));
+			enab($('=-1')); enab($('=0')); enab($('=-2'));
 			break;
 			case 'boolean':
 			disab($('<'));
 			disab($('>'));
 			disab($('='));
 			disab($('<>'));
-			disab($('LIKE'));
+			disab($("LIKE '%%'"));
+			enab($('=-1')); enab($('=0')); enab($('=-2'));
 			break;
 		}
 	}
@@ -1591,10 +1595,10 @@
     <dd>
       <b>{-#ttitegp#-}</b><br>
       <div style="height: 130px;" class="dwin" ext:qtip="{-#thlpquery#-}">
-      <table border=0 cellpadding=0 cellspacing=0>
+	  <table border=0 cellpadding=0 cellspacing=0>
  {-foreach name=ef1 key=key item=item from=$ef1-}
  {-assign var="ff" value=D_$key-}
-			 <tr><td valign="top">
+		<tr><td valign="top">
         <input type="checkbox" onFocus="showtip('{-$item[2]-}');" id="{-$key-}"
             onclick="enadisEff('{-$key-}', this.checked);" {-if $qd.$ff[0] != ''-}checked{-/if-}>
         <label for="{-$key-}" onMouseOver="showtip('{-$item[2]-}');">{-$item[0]-}</label>
@@ -1816,12 +1820,12 @@
 	<!-- BEGIN CUSTOMQUERY SECTION -->
     <dt>{-#madvsection#-}</dt>
     <dd>
-       <textarea id="CusQry" name="__CusQry" style="width:250px; height:45px;" 
+       <textarea id="CusQry" name="__CusQry" style="width:300px; height:45px;" 
 		  onFocus="showtip('');">{-$qd.__CusQry-}</textarea>
 	   <br>
-	   <span class="dlgmsg">Seleccione un campo seguido de un operador y el valor correspondiente</span>
+	   <span class="dlgmsg">{-#tadvqryhelp#-}</span>
 	   <br>
-	   <table border="0">
+	   <table border="0" width="100%">
 		<tr valign="top">
          <td>
 		  <div style="height:180px" class="dwin">
@@ -1829,6 +1833,14 @@
 			onClick="setAdvQuery('DisasterSerial', 'text')"><br>
 		   <input type="button" class="line" value="{-$dis.DisasterBeginTime[0]-}" 
 			onClick="setAdvQuery('DisasterBeginTime', 'date')"><br>
+		   <input type="button" class="line" value="{-$dis.DisasterSiteNotes[0]-}" 
+			onClick="setAdvQuery('DisasterSiteNotes', 'text')"><br>
+		   <input type="button" class="line" value="{-$eve.EventDuration[0]-}" 
+			onClick="setAdvQuery('EventDuration', 'text')"><br>
+		   <input type="button" class="line" value="{-$eve.EventNotes[0]-}" 
+			onClick="setAdvQuery('EventNotes', 'text')"><br>
+		   <input type="button" class="line" value="{-$cau.CauseNotes[0]-}" 
+			onClick="setAdvQuery('CauseNotes', 'text')"><br>
 		   <input type="button" class="line" value="{-$rc2.RecordAuthor[0]-}"
 			onClick="setAdvQuery('RecordAuthor', 'text')"><br>
 		   <input type="button" class="line" value="{-$rc2.RecordCreation[0]-}"
@@ -1867,7 +1879,10 @@
 		  <input type="button" id=">" value=">" class="disabled" disabled onClick="$('CusQry').value += this.value; $('CusQry').focus();">
 		  <input type="button" id="=" value="=" class="disabled" disabled onClick="$('CusQry').value += this.value; $('CusQry').focus();"><br>
 		  <input type="button" id="<>" value="<>" class="disabled" disabled onClick="$('CusQry').value += this.value; $('CusQry').focus();">
-		  <input type="button" id="LIKE" value=" LIKE '%%' " class="disabled" disabled onClick="$('CusQry').value += this.value; $('CusQry').focus();">
+		  <input type="button" id="LIKE '%%'" value="{-#tlike#-}" class="disabled" disabled onClick="$('CusQry').value += this.id; $('CusQry').focus();">
+		  <input type="button" id="=-1" value="{-#teffhav#-}" class="disabled" disabled onClick="$('CusQry').value += this.id; $('CusQry').focus();">
+		  <input type="button" id="=0" value="{-#teffhavnot#-}" class="disabled" disabled onClick="$('CusQry').value += this.id; $('CusQry').focus();">
+		  <input type="button" id="=-2" value="{-#teffdontknow#-}" class="disabled" disabled onClick="$('CusQry').value += this.id; $('CusQry').focus();">
 		  <br>
 		  <input type="button" value=" (" onClick="$('CusQry').value += this.value;">
 		  <input type="button" value=") " onClick="$('CusQry').value += this.value;">
