@@ -141,20 +141,6 @@
   {-/foreach-}
  {-/if-}
   <hr>
-<!--  {-if $userid == ""-}
-  <script language="javascript">updateUserBar('user.php', '', '', '');</script>
-  <div id="rightcontent"></div>
-  <div id="pagecontent"></div>
-  {-else-}
-   {-if $role != ""-}
-    <b>Usuario con rol en base actual:</b><br>
-    * ADMIN,USER,SUPER: Ingresar fichas<br>
-    * ADMIN: Configurar base de datos<br>
-   {-else-}
-    <h4>Usuario sin rol:</h4>
-    * Listar bases de usuario.
-   {-/if-}
-  {-/if-}-->
 {-/if-}
 {-***** REGINFO: Show Region Info - CONTENT SECTION *****-}
 {-if $ctl_showreg || $ctl_reginfo-}
@@ -169,8 +155,6 @@
 	</td>
   </tr>
  {-if !$ctl_reginfo-}
-  <tr>
-	<td colspan=2 align="center">
 <!--
   {-if $ctl_showdimod-}
 	  <img id="dimod" src="images/b_desinventar1.jpg" border="0" style="cursor: pointer;"
@@ -186,14 +170,27 @@
   {-else-}
 	  <b>{-#tnopublic#-}</b><br>
   {-/if-}
+      <div id="modinfo" class="dlgmsg" style="text-align:center;"></div><br>
 -->
+ {-/if-}
+  <tr>
+	<td colspan=2 align="center">
+  {-if $userid == ""-}
+	* USER LOGIN<br>
+	* FIND DATABASES <br>
+  {-else-}
+	* MY DATABASES<br>
+   {-if $role == "USER" || $role == "SUPERVISOR"-}
+    * INSERT CARDS (ADMIN,USER,SUPER)<br>
+   {-elseif $role == "OBSERVER" || $role == "ADMINREGION"-}
+    * CONFIG DATABASE (ADMIN: Configurar base de datos<br>
+   {-/if-}
+  {-/if-}
   {-if $ctl_inactivereg-}
 	  <b>{-#tinactive#-}</b><br>
   {-/if-}
-      <div id="modinfo" class="dlgmsg" style="text-align:center;"></div><br>
    </td>
   </tr>
- {-/if-}
   <tr>
    <td colspan="2">
 	<a href="javascript:void(null)" onClick="$('info').style.display='block';">More info</a>

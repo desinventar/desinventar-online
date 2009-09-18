@@ -251,7 +251,7 @@ default:
 			$t->assign ("ctl_qryres", true);
 			$t->assign ("ctl_qrydsg", true);
 		}
-		//$t->assign ("ctl_show", true);
+		$t->assign ("diversion", DIVERSION);
 		// Direct access returns a list of public regions on this server
 		$t->assign ("lglst", $us->q->loadLanguages(1));
 		$t->assign ("userid", $us->UserId);
