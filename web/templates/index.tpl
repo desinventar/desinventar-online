@@ -740,7 +740,6 @@
 		col.setAttribute('value', '00ff00;');
 		cellRight.appendChild(col);
 	}
-	// remove from table
 	function removeRowFromTable() {
 		var tbl = $('tbl_range');
 		var lastRow = tbl.rows.length;
@@ -795,6 +794,39 @@
 			val = "#" + h1 + h2 + h3;
 			$('_M+color['+ i + ']').value = val;
 			$('_M+ic['+ i + ']').style.backgroundColor = val;
+		}
+	}
+	function setAdvQuery(value, ope) {
+		$('CusQry').value += value + ' ';
+		switch (ope) {
+			case 'text':
+			disab($('<'));
+			disab($('>'));
+			enab($('='));  $('=').value = "= ''";
+			enab($('<>')); $('<>').value = "<> ''";
+			enab($('LIKE'));
+			break;
+			case 'date':
+			enab($('<')); $('<').value = "< ''";
+			enab($('>')); $('>').value = "> ''";
+			enab($('=')); $('=').value = "= ''";
+			enab($('<>')); $('<>').value = "<> ''";
+			enab($('LIKE'));
+			break;
+			case 'number':
+			enab($('<')); $('<').value = "< ";
+			enab($('>')); $('>').value = "> ";
+			enab($('=')); $('=').value = "= ";
+			enab($('<>'));$('<>').value = "<> ";
+			disab($('LIKE'));
+			break;
+			case 'boolean':
+			disab($('<'));
+			disab($('>'));
+			disab($('='));
+			disab($('<>'));
+			disab($('LIKE'));
+			break;
 		}
 	}
 	// Find all Effects fields enable by saved query
@@ -1592,7 +1624,7 @@
         </span>
        </td></tr>
  {-/foreach-}
-			</table>
+	  </table>
       </div><br>
       <!-- SECTORS -->
       <b>{-#ttiteis#-}</b><br>
@@ -1727,7 +1759,7 @@
     <!-- BEGIN DATETIME SECTION -->
     <dt>{-#mdcsection#-}</dt>
     <dd class="default">
-      <div style="height: 360px;">
+      <div style="height: 250px;">
         <b onMouseOver="showtip('{-$dis.DisasterBeginTime[2]-}');">{-#tdate#-}</b>
         <span class="dlgmsg">{-#tdateformat#-}</span><br>
         <table border="0">
@@ -1761,7 +1793,7 @@
          <textarea id="DisasterSource" name="D_DisasterSource[1]" style="width:220px; height:40px;"
               onFocus="showtip('{-$dis.DisasterSource[2]-}');">{-$qd.D_DisasterSource[1]-}</textarea>
   {-if $ctl_user-}
-        <br><br>
+        <br>
         <b onMouseOver="showtip('');">{-#tdcstatus#-}</b><br>
         <select name="D_RecordStatus[]" multiple class="fixw">
           <option value="PUBLISHED" selected>{-#tdcpublished#-}</option>
@@ -1784,69 +1816,64 @@
 	<!-- BEGIN CUSTOMQUERY SECTION -->
     <dt>{-#madvsection#-}</dt>
     <dd>
-      <div style="height: 360px;">
-       <textarea id="CusQry" name="__CusQry" style="width:250px; height:40px;" 
+       <textarea id="CusQry" name="__CusQry" style="width:250px; height:45px;" 
 		  onFocus="showtip('');">{-$qd.__CusQry-}</textarea>
+	   <br>
+	   <span class="dlgmsg">Seleccione un campo seguido de un operador y el valor correspondiente</span>
 	   <br>
 	   <table border="0">
 		<tr valign="top">
          <td>
-		  <div height="100px" class="dwin">
-		  <table border=1 >
-		   <tr ondblClick="Element.addClassName(this, 'highlight'); $('CusQry').value += 'DisasterSerial';">
-		    <td>{-$dis.DisasterSerial[0]-}</td>
-		   </tr>
-		   <tr ondblClick="Element.addClassName(this, 'highlight'); $('CusQry').value += 'DisasterBeginTime';">
-		    <td>{-$dis.DisasterBeginTime[0]-}</td>
-		   </tr>
-		   <tr ondblClick="Element.addClassName(this, 'highlight'); $('CusQry').value += 'RecordAuthor';">
-		    <td>{-$rc2.RecordAuthor[0]-}</td>
-		   </tr>
-		   <tr ondblClick="Element.addClassName(this, 'highlight'); $('CusQry').value += 'RecordCreation';">
-		    <td>{-$rc2.RecordCreation[0]-}</td>
-		   </tr>
-		   <tr ondblClick="Element.addClassName(this, 'highlight'); $('CusQry').value += 'RecordUpdate';">
-		    <td>{-$rc2.RecordUpdate[0]-}</td>
-		   </tr>
+		  <div style="height:180px" class="dwin">
+		   <input type="button" class="line" value="{-$dis.DisasterSerial[0]-}" 
+			onClick="setAdvQuery('DisasterSerial', 'text')"><br>
+		   <input type="button" class="line" value="{-$dis.DisasterBeginTime[0]-}" 
+			onClick="setAdvQuery('DisasterBeginTime', 'date')"><br>
+		   <input type="button" class="line" value="{-$rc2.RecordAuthor[0]-}"
+			onClick="setAdvQuery('RecordAuthor', 'text')"><br>
+		   <input type="button" class="line" value="{-$rc2.RecordCreation[0]-}"
+			onClick="setAdvQuery('RecordCreation','date')"><br>
+		   <input type="button" class="line" value="{-$rc2.RecordUpdate[0]-}"
+			onClick="setAdvQuery('RecordUpdate','date')"><br>
+		<hr>
 {-foreach name=ef1 key=key item=item from=$ef1-}
-		   <tr ondblClick="Element.addClassName(this, 'highlight'); $('CusQry').value += '{-$key-}';">
-		    <td>{-$item[0]-}</td>
-		   </tr>
+		   <input type="button" class="line" value="{-$item[0]-}"
+			onClick="setAdvQuery('{-$key-}','number')"><br>
 {-/foreach-}
+		<hr>
 {-foreach name=sec key=key item=item from=$sec-}
-		   <tr ondblClick="Element.addClassName(this, 'highlight'); $('CusQry').value += '{-$key-}';">
-		    <td>{-$item[0]-}</td>
-		   </tr>
+		   <input type="button" class="line" value="{-$item[0]-}"
+			onClick="setAdvQuery('{-$key-}','boolean')"><br>
 {-/foreach-}
+		<hr>
 {-foreach name=ef3 key=key item=item from=$ef3-}
-		   <tr ondblClick="Element.addClassName(this, 'highlight'); $('CusQry').value += '{-$key-}';">
-		    <td>{-$item[0]-}</td>
-		   </tr>
+		   <input type="button" class="line" value="{-$item[0]-}"
+			onClick="setAdvQuery('{-$key-}','number')"><br>
 {-/foreach-}
+		<hr>
 {-foreach name=ef4 key=key item=item from=$ef4-}
-		   <tr ondblClick="Element.addClassName(this, 'highlight'); $('CusQry').value += '{-$key-}';">
-		    <td>{-$item[0]-}</td>
-		   </tr>
+		   <input type="button" class="line" value="{-$item[0]-}"
+			onClick="setAdvQuery('{-$key-}','text')"><br>
 {-/foreach-}
+		<hr>
 {-foreach name=eef key=key item=item from=$exteffel-}
-		   <tr ondblClick="Element.addClassName(this, 'highlight'); $('CusQry').value += '{-$key-}';">
-		    <td>{-$item[0]-}</td>
-		   </tr>
+		   <input type="button" class="line" value="{-$item[0]-}"
+			onClick="setAdvQuery('{-$key-}','date')"><br>
 {-/foreach-}
-		  </table>
 		  </div>
 		 </td>
-		 <td align="center" valign="center">
-		  <input type="button" value="< " onClick="$('CusQry').value += this.value;" class="medium">
-		  <input type="button" value="> " onClick="$('CusQry').value += this.value;" class="medium">
-		  <input type="button" value="= " onClick="$('CusQry').value += this.value;" class="medium"><br>
-		  <input type="button" value="<> " onClick="$('CusQry').value += this.value;" class="medium">
-		  <input type="button" value="(" onClick="$('CusQry').value += this.value;" class="medium">
-		  <input type="button" value=") " onClick="$('CusQry').value += this.value;" class="medium"><br>
-		  <input type="button" value="AND " onClick="$('CusQry').value += this.value;" class="medium">
-		  <input type="button" value="OR " onClick="$('CusQry').value += this.value;" class="medium">
-		  <input type="button" value="LIKE '%%'" onClick="$('CusQry').value += this.value;" class="medium"><br><br>
-		  <input type="button" value="{-#tclean#-}" onClick="$('CusQry').value = '';" class="medium">
+		 <td align="center">
+		  <input type="button" id="<" value="<" class="disabled" disabled onClick="$('CusQry').value += this.value; $('CusQry').focus();">
+		  <input type="button" id=">" value=">" class="disabled" disabled onClick="$('CusQry').value += this.value; $('CusQry').focus();">
+		  <input type="button" id="=" value="=" class="disabled" disabled onClick="$('CusQry').value += this.value; $('CusQry').focus();"><br>
+		  <input type="button" id="<>" value="<>" class="disabled" disabled onClick="$('CusQry').value += this.value; $('CusQry').focus();">
+		  <input type="button" id="LIKE" value=" LIKE '%%' " class="disabled" disabled onClick="$('CusQry').value += this.value; $('CusQry').focus();">
+		  <br>
+		  <input type="button" value=" (" onClick="$('CusQry').value += this.value;">
+		  <input type="button" value=") " onClick="$('CusQry').value += this.value;">
+		  <input type="button" value=" AND " onClick="$('CusQry').value += this.value;">
+		  <input type="button" value=" OR " onClick="$('CusQry').value += this.value;"><br><br>
+		  <input type="button" value="{-#tclean#-}" onClick="$('CusQry').value = '';">
 		 </td>
 		</tr>
 	   </table>
