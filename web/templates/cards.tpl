@@ -230,7 +230,8 @@
 		window.onload = function() {
 			DisableEnableForm($('DICard'), true);
 			changeOptions();
-			uploadMsg("{-#tmsgnewcard#-}");
+{-if $ctl_validrole-}
+			uploadMsg("{-#tmsgnewcard#-}");{-/if-}
 			var pe = new PeriodicalExecuter(setActive, 60);
 		}
 	</script>
@@ -273,7 +274,7 @@
 		<table width="900px">
 		 <tr>
 		  <td>
-			<input type="button" id="cardnew" class="bnew" onmouseover="Tip('{-#tnewtitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardnew');">
+			<input type="button" id="cardnew" class="bb bnew" onmouseover="Tip('{-#tnewtitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardnew');">
 			<input type="button" id="cardupd" class="bb bupd" onmouseover="Tip('{-#tupdtitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardupd');">
 			<input type="button" id="cardsav" class="bb bsave" onmouseover="Tip('{-#tsavtitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardsav');">
 			<input type="button" id="cardcln" class="bb bclean" onmouseover="Tip('{-#tclntitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardcln');">
@@ -281,10 +282,14 @@
 			<input type="button" id="cardprn" class="bb bprint" onmouseover="Tip(' PRINT ')" onmouseout="UnTip()" onClick="window.print();">
 			<!--<input type="button" id="cardfnd" alt="{-#bexpsearch#-}" onClick="onSubmitBtn('cardfnd');" {-$ro-}>-->
 			&nbsp;&nbsp;|&nbsp;&nbsp;
-			<input type="button" value="<<" class="bb line" onmouseover="Tip('Primera')" onmouseout="UnTip()" onClick="setDICard('{-$reg-}', {-$fst-}, '');">
-			<input type="button" value="<" class="bb line" onmouseover="Tip('Anterior')" onmouseout="UnTip()" onClick="requestDCard('getPrevDId', $('DisasterId').value);">
-			<input type="button" value=">" class="bb line" onmouseover="Tip('Siguiente')" onmouseout="UnTip()" onClick="requestDCard('getNextDId', $('DisasterId').value);">
-			<input type="button" value=">>" class="bb line" onmouseover="Tip('Ultima')" onmouseout="UnTip()" onClick="setDICard('{-$reg-}', {-$lst-}, '');">
+			<input type="button" value="<<" class="bb line" onmouseover="Tip('Primera')" onmouseout="UnTip()" 
+				onClick="setDICard('{-$reg-}', {-$fst-}, ''); {-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}">
+			<input type="button" value="<" class="bb line" onmouseover="Tip('Anterior')" onmouseout="UnTip()" 
+				onClick="requestDCard('getPrevDId', $('DisasterId').value); {-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}">
+			<input type="button" value=">" class="bb line" onmouseover="Tip('Siguiente')" onmouseout="UnTip()" 
+				onClick="requestDCard('getNextDId', $('DisasterId').value); {-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}">
+			<input type="button" value=">>" class="bb line" onmouseover="Tip('Ultima')" onmouseout="UnTip()" 
+				onClick="setDICard('{-$reg-}', {-$lst-}, ''); {-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}">
 			&nbsp;&nbsp;|&nbsp;&nbsp;
 			<br>
 			<span class="dlgmsg" id="distatusmsg"></span><span class="dlgmsg" id="dostat"></span>
