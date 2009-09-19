@@ -149,7 +149,9 @@
 	<td valign="center"><img src="region.php?r={-$reg-}&view=logo"></td>
 	<td valign="top">
  	  <h2>{-$regname-}</h2>
-     {-#tperiod#-}: {-$period[0]-} - {-$period[1]-}<br>
+{-if $period[0] != "" && $period[1] != ""-}
+	 {-#tperiod#-}: {-$period[0]-} - {-$period[1]-}<br>
+{-/if-}
      {-#trepnum#-}: {-$dtotal-}<br>
      {-#tlastupd#-}: {-$lstupd-}<br>
 	</td>

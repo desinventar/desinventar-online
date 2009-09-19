@@ -12,7 +12,7 @@
 	<script type="text/javascript" src="include/prototype.js"></script>
 	<script type="text/javascript" src="include/diadmin.js"></script>
 	<script type="text/javascript" src="include/checktree.js"></script>
-<!--	<script type="text/javascript" src="include/wd.js"></script>-->
+	<script type="text/javascript" src="include/wd.js"></script>
 	<script type="text/javascript" src="include/accordion.js"></script>
 	<script type="text/javascript" src="include/palette.js"></script>
 	<!-- ExtJS 2.0.1 -->
