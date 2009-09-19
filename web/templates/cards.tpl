@@ -271,28 +271,28 @@
 <!-- BEG DI8 FORM CARD -->
 	<div id="container" style="overflow:scroll;">
 		<table width="900px">
-			<tr>
-				<td>
-					<input type="button" id="cardnew" class="bb bnew" onmouseover="Tip('{-#tnewtitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardnew');">
-					<input type="button" id="cardupd" class="bb bupd" onmouseover="Tip('{-#tupdtitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardupd');">
-					<input type="button" id="cardsav" class="bb bsave" onmouseover="Tip('{-#tsavtitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardsav');">
-					<input type="button" id="cardcln" class="bb bclean" onmouseover="Tip('{-#tclntitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardcln');">
-					<input type="button" id="cardcan" class="bb bcancel" onmouseover="Tip('{-#tcantitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardcan');">
-					<input type="button" id="cardprn" class="bb bprint" onmouseover="Tip(' PRINT ')" onmouseout="UnTip()" onClick="window.print();">
-					<!--<input type="button" id="cardfnd" alt="{-#bexpsearch#-}" onClick="onSubmitBtn('cardfnd');" {-$ro-}>-->
-					&nbsp;&nbsp;|&nbsp;&nbsp;
-					<input type="button" value="<<" class="bb line" onmouseover="Tip('Primera')" onmouseout="UnTip()" onClick="setDICard('{-$reg-}', {-$fst-}, '');">
-					<input type="button" value="<" class="bb line" onmouseover="Tip('Anterior')" onmouseout="UnTip()" onClick="requestDCard('getPrevDId', $('DisasterId').value);">
-					<input type="button" value=">" class="bb line" onmouseover="Tip('Siguiente')" onmouseout="UnTip()" onClick="requestDCard('getNextDId', $('DisasterId').value);">
-					<input type="button" value=">>" class="bb line" onmouseover="Tip('Ultima')" onmouseout="UnTip()" onClick="setDICard('{-$reg-}', {-$lst-}, '');">
-					&nbsp;&nbsp;|&nbsp;&nbsp;
-					<br>
-					<span class="dlgmsg" id="distatusmsg"></span><span class="dlgmsg" id="dostat"></span>
-				</td>
-				<td align="right">
-					<iframe name="dic" id="dic" frameborder="0" style="height:30px; width:470px;" src="about:blank"></iframe>
-				</td>
-			</tr>
+		 <tr>
+		  <td>
+			<input type="button" id="cardnew" class="bb bnew" onmouseover="Tip('{-#tnewtitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardnew');">
+			<input type="button" id="cardupd" class="bb bupd" onmouseover="Tip('{-#tupdtitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardupd');">
+			<input type="button" id="cardsav" class="bb bsave" onmouseover="Tip('{-#tsavtitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardsav');">
+			<input type="button" id="cardcln" class="bb bclean" onmouseover="Tip('{-#tclntitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardcln');">
+			<input type="button" id="cardcan" class="bb bcancel" onmouseover="Tip('{-#tcantitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardcan');">
+			<input type="button" id="cardprn" class="bb bprint" onmouseover="Tip(' PRINT ')" onmouseout="UnTip()" onClick="window.print();">
+			<!--<input type="button" id="cardfnd" alt="{-#bexpsearch#-}" onClick="onSubmitBtn('cardfnd');" {-$ro-}>-->
+			&nbsp;&nbsp;|&nbsp;&nbsp;
+			<input type="button" value="<<" class="bb line" onmouseover="Tip('Primera')" onmouseout="UnTip()" onClick="setDICard('{-$reg-}', {-$fst-}, '');">
+			<input type="button" value="<" class="bb line" onmouseover="Tip('Anterior')" onmouseout="UnTip()" onClick="requestDCard('getPrevDId', $('DisasterId').value);">
+			<input type="button" value=">" class="bb line" onmouseover="Tip('Siguiente')" onmouseout="UnTip()" onClick="requestDCard('getNextDId', $('DisasterId').value);">
+			<input type="button" value=">>" class="bb line" onmouseover="Tip('Ultima')" onmouseout="UnTip()" onClick="setDICard('{-$reg-}', {-$lst-}, '');">
+			&nbsp;&nbsp;|&nbsp;&nbsp;
+			<br>
+			<span class="dlgmsg" id="distatusmsg"></span><span class="dlgmsg" id="dostat"></span>
+		  </td>
+		  <td align="right">
+			<iframe name="dic" id="dic" frameborder="0" style="height:30px; width:470px;" src="about:blank"></iframe>
+		  </td>
+		 </tr>
 		</table>
 		<form id="DICard" action="cards.php" method="POST" target="dic">
 			<input type="hidden" name="_REG" id="_REG" value="{-$reg-}">
@@ -395,7 +395,7 @@
 									<br>
 								</td>
 {-assign var="tabind" value="`$tabind+1`"-}
-								<td ext:qtip="{-$dis.DisasterSiteNotes[1]-}">
+								<td onmouseover="Tip('{-$dis.DisasterSiteNotes[1]-}')" onmouseout="UnTip()">
 									{-$dis.DisasterSiteNotes[0]-}<br>
 									<textarea id="DisasterSiteNotes" name="DisasterSiteNotes" style="height: 40px;" cols="25"
 										onkeypress="return blockChars(event, this.value, 'text:');"
@@ -403,14 +403,14 @@
 								</td>
 								<td>
 {-assign var="tabind" value="`$tabind+1`"-}
-									<span ext:qtip="{-$dis.DisasterLatitude[1]-}">
+									<span onmouseover="Tip('{-$dis.DisasterLatitude[1]-}')" onmouseout="UnTip()">
 									{-$dis.DisasterLatitude[0]-}<br>
 									<input id="DisasterLatitude" name="DisasterLatitude" type="text" size="10" class="line"
 											tabindex="{-$tabind-}" onFocus="showtip('{-$dis.DisasterLatitude[2]-}', '#d4baf6')"
 											onkeypress="return blockChars(event, this.value, 'double:10');">
 									</span><br>
 {-assign var="tabind" value="`$tabind+1`"-}
-									<span ext:qtip="{-$dis.DisasterLongitude[1]-}">
+									<span onmouseover="Tip('{-$dis.DisasterLongitude[1]-}')" onmouseout="UnTip()">
 									{-$dis.DisasterLongitude[0]-}<br>
 									<input id="DisasterLongitude" name="DisasterLongitude" type="text" size="10" class="line"
 											tabindex="{-$tabind-}" onFocus="showtip('{-$dis.DisasterLongitude[2]-}', '#d4baf6')"
@@ -440,104 +440,105 @@
 						</map>-->
 					</td>
 					<td valign="top">
-            <!-- BEG BASIC EFFECTS -->
-            <table class="grid" id="effbas">
-              <tr valign="top">
-                <td>
-                  <b align="left">{-#teffects#-}</b><br>
-                  <table width="100%" class="grid">
-                  	<!-- BEGIN Table Effects over People-->
+					<!-- BEG BASIC EFFECTS -->
+					<table class="grid" id="effbas">
+					  <tr valign="top">
+						<td>
+						  <b align="left">{-#teffects#-}</b><br>
+						  <table width="100%" class="grid">
+							<!-- BEGIN Table Effects over People-->
 {-foreach name=ef1 key=key item=item from=$ef1-}
 {-assign var="tabind" value="`$tabind+1`"-}
-                    <tr>
-                      <td align="right"><span ext:qtip="{-$item[1]-}">{-$item[0]-}</span></td>
-                      <td>
-                        <select id="{-$key-}" name="{-$key-}" style="width:120px;" tabindex="{-$tabind-}"
-                            onKeyPress="edit(event);" onFocus="showtip('{-$item[2]-}', '#f1bd41');" 
-                            onBlur="this.editing=false; if(parseInt(this.value) == 0) { this.value = '0'; }">
-							<option class="small" value="-1">{-#teffhav#-}</option>
-							<option class="small" value="0" selected>{-#teffhavnot#-}</option>
-							<option class="small" value="-2">{-#teffdontknow#-}</option>
-                        </select>
-                      </td>
-                    </tr>
+							<tr>
+							  <td align="right"><span onmouseover="Tip('{-$item[1]-}')" onmouseout="UnTip()">{-$item[0]-}</span></td>
+							  <td>
+								<select id="{-$key-}" name="{-$key-}" style="width:120px;" tabindex="{-$tabind-}"
+									onKeyPress="edit(event);" onFocus="showtip('{-$item[2]-}', '#f1bd41');" 
+									onBlur="this.editing=false; if(parseInt(this.value) == 0) { this.value = '0'; }">
+									<option class="small" value="-1">{-#teffhav#-}</option>
+									<option class="small" value="0" selected>{-#teffhavnot#-}</option>
+									<option class="small" value="-2">{-#teffdontknow#-}</option>
+								</select>
+							  </td>
+							</tr>
 {-/foreach-}
-                  </table> 
-                </td>
-                <td>
-                  <b align="center">{-#tsectors#-}</b><br>
-                  <table width="100%" class="grid"> <!-- BEGIN Table Sectors -->
+						  </table> 
+						</td>
+						<td>
+						  <b align="center">{-#tsectors#-}</b><br>
+						  <table width="100%" class="grid"> <!-- BEGIN Table Sectors -->
 {-foreach name=sec key=key item=item from=$sec-}
 {-assign var="tabind" value="`$tabind+1`"-}
-                    <tr>
-                      <td align="right"><span ext:qtip="{-$item[1]-}">{-$item[0]-}</span></td>
-                      <td>
-                        <select id="{-$key-}" name="{-$key-}" style="width:120px;" tabindex="{-$tabind-}" 
-                            onFocus="showtip('{-$item[2]-}', '#f1bd41')">
-							<option class="small" value="-1">{-#teffhav#-}</option>
-							<option class="small" value="0" selected>{-#teffhavnot#-}</option>
-							<option class="small" value="-2">{-#teffdontknow#-}</option>
-                        </select>
-                      </td>
-                    </tr>
+							<tr>
+							  <td align="right"><span onmouseover="Tip('{-$item[1]-}')" onmouseout="UnTip()">{-$item[0]-}</span></td>
+							  <td>
+								<select id="{-$key-}" name="{-$key-}" style="width:120px;" tabindex="{-$tabind-}" 
+									onFocus="showtip('{-$item[2]-}', '#f1bd41')">
+									<option class="small" value="-1">{-#teffhav#-}</option>
+									<option class="small" value="0" selected>{-#teffhavnot#-}</option>
+									<option class="small" value="-2">{-#teffdontknow#-}</option>
+								</select>
+							  </td>
+							</tr>
 {-/foreach-}
-                  </table>
-                </td>
-                <td>
-                  <br> <!-- BEGIN Table Effects over Affected -->
+						  </table>
+						</td>
+						<td>
+						  <br> <!-- BEGIN Table Effects over Affected -->
 {-foreach name=ef3 key=key item=item from=$ef3-}
 {-assign var="tabind" value="`$tabind+1`"-}
-                  <span ext:qtip="{-$item[1]-}">
-                  {-$item[0]-}<br>
-                  <input id="{-$key-}" name="{-$key-}" type="text" size="7" onBlur="
-                        if(parseInt(this.value) > 0) { $('{-$sc3[$key]-}').value='-1';}
-                        if(parseInt(this.value) ==0) { $('{-$sc3[$key]-}').value='0';}"
-                      onFocus="showtip('{-$item[2]-}', '#f1bd41')" tabindex="{-$tabind-}" class="line"
-                      onkeypress="return blockChars(event, this.value, 'double:10');" value="0">
-                  </span><br>
+						  <span onmouseover="Tip('{-$item[1]-}')" onmouseout="UnTip()">
+						  {-$item[0]-}<br>
+						  <input id="{-$key-}" name="{-$key-}" type="text" size="7" onBlur="
+								if(parseInt(this.value) > 0) { $('{-$sc3[$key]-}').value='-1';}
+								if(parseInt(this.value) ==0) { $('{-$sc3[$key]-}').value='0';}"
+							  onFocus="showtip('{-$item[2]-}', '#f1bd41')" tabindex="{-$tabind-}" class="line"
+							  onkeypress="return blockChars(event, this.value, 'double:10');" value="0">
+						  </span><br>
 {-/foreach-}
-                </td>
-                <td valign="top">
-                  <b align="right">{-#tlosses#-}</b><br> <!-- BEGIN Table Effects over $$ -->
+						</td>
+						<td valign="top">
+						  <b align="right">{-#tlosses#-}</b><br> <!-- BEGIN Table Effects over $$ -->
 {-foreach name=ef2 key=key item=item from=$ef2-}
 {-assign var="tabind" value="`$tabind+1`"-}
-                  <span ext:qtip="{-$item[1]-}">
-                  {-$item[0]-}<br>
-                  <input id="{-$key-}" name="{-$key-}" type="text" size="11" tabindex="{-$tabind-}" class="line"
-                      onFocus="showtip('{-$item[2]-}', '#f1bd41');" value="0"
-                      onkeypress="return blockChars(event, this.value, 'double:');">
-                  </span><br>
+						  <span onmouseover="Tip('{-$item[1]-}')" onmouseout="UnTip()">
+						  {-$item[0]-}<br>
+						  <input id="{-$key-}" name="{-$key-}" type="text" size="11" tabindex="{-$tabind-}" class="line"
+							  onFocus="showtip('{-$item[2]-}', '#f1bd41');" value="0"
+							  onkeypress="return blockChars(event, this.value, 'double:');">
+						  </span><br>
 {-/foreach-}
 {-foreach name=ef4 key=key item=item from=$ef4-}
 {-assign var="tabind" value="`$tabind+1`"-}
-                  <span ext:qtip="{-$item[1]-}">
-                  {-$item[0]-}<br>
-                  <textarea id="{-$key-}" name="{-$key-}" cols="25" style="height: {-if $key=='EffectNotes'-}70{-else-}30{-/if-}px;"
-                      onBlur="if(this.value != '') { $('SectorOther').value='-1'; }" 
-                      onkeypress="return blockChars(event, this.value, 'text:');"
-                      onFocus="showtip('{-$item[2]-}', '#f1bd41')" tabindex="{-$tabind-}"></textarea>
-                  </span><br>
+						  <span onmouseover="Tip('{-$item[1]-}')" onmouseout="UnTip()">
+						  {-$item[0]-}<br>
+						  <textarea id="{-$key-}" name="{-$key-}" cols="25" style="height: {-if $key=='EffectNotes'-}70{-else-}30{-/if-}px;"
+							  onBlur="if(this.value != '') { $('SectorOther').value='-1'; }" 
+							  onkeypress="return blockChars(event, this.value, 'text:');"
+							  onFocus="showtip('{-$item[2]-}', '#f1bd41')" tabindex="{-$tabind-}"></textarea>
+						  </span><br>
 {-/foreach-}
-                </td>
-              </tr>
-            </table>
-            <!-- BEG EXTRA EFFECTS FIELDS -->
-            <table class="grid" id="effext" style="display:none;">
-              <tr><td><br></td></tr>
+						</td>
+					  </tr>
+					</table>
+					<!-- BEG EXTRA EFFECTS FIELDS -->
+					<table class="grid" id="effext" style="display:none;">
+					  <tr><td><br></td></tr>
 {-assign var="tabeef" value="200"-}
 {-foreach name=eefl key=key item=item from=$eefl-}
 {-assign var="tabeef" value="`$tabeef+1`"-}
 {-if ($smarty.foreach.eefl.iteration - 1) % 3 == 0-}
-              <tr>
+					  <tr>
 {-/if-}
-               <td ext:qtip="{-$item[1]-}">{-$item[0]-}<br>
-                <input type="text" id="{-$key-}" name="{-$key-}" size="30" class="line" tabindex="{-$tabeef-}"
-                	onFocus="showtip('{-$item[1]-}', '#f1bd41')" onkeypress="return blockChars(event, this.value, 'text:');"></td>
+					   <td onmouseover="Tip('{-$item[1]-}')" onmouseout="UnTip()">{-$item[0]-}<br>
+						<input type="text" id="{-$key-}" name="{-$key-}" size="30" class="line" tabindex="{-$tabeef-}"
+							onFocus="showtip('{-$item[1]-}', '#f1bd41')" onkeypress="return blockChars(event, this.value, 'text:');">
+					   </td>
 {-if ($smarty.foreach.eefl.iteration ) % 3 == 0-}
-              </tr>
+					  </tr>
 {-/if-}
 {-/foreach-}
-            </table>
+					</table>
 					</td>
 				</tr>
 				<!-- BEG EVENT SECTION -->
@@ -548,43 +549,43 @@
 						onmouseout="UnTip()">
 					</td>
 					<td>
-            <table class="grid">
-              <tr valign="top">
-                <td ext:qtip="{-$eve.EventName[1]-}">
+						<table class="grid">
+						  <tr valign="top">
+							<td onmouseover="Tip('{-$eve.EventName[1]-}')" onmouseout="UnTip()">
 {-assign var="tabind" value="`$tabind+1`"-}
-                  {-$eve.EventName[0]-}<b style="color:darkred;">*</b><br>
-                  <select id="EventId" name="EventId" style='width: 180px;' tabindex="{-$tabind-}"
-                      onFocus="showtip('{-$eve.EventName[2]-}', 'lightblue')">
-                    <option value=""></option>
+							  {-$eve.EventName[0]-}<b style="color:darkred;">*</b><br>
+							  <select id="EventId" name="EventId" style='width: 180px;' tabindex="{-$tabind-}"
+								  onFocus="showtip('{-$eve.EventName[2]-}', 'lightblue')">
+								<option value=""></option>
 {-foreach name=eln key=key item=item from=$evel-}
-                    <option value="{-$key-}" onKeyPress="showtip('{-$item[1]-}', 'lightblue')" 
-                        onMouseOver="showtip('{-$item[1]-}', 'lightblue')">{-$item[0]-}</option>
+								<option value="{-$key-}" onKeyPress="showtip('{-$item[1]-}', 'lightblue')" 
+									onMouseOver="showtip('{-$item[1]-}', 'lightblue')">{-$item[0]-}</option>
 {-/foreach-}
-                  </select>
-                </td>
-                <td ext:qtip="{-$eve.EventMagnitude[1]-}">
+							  </select>
+							</td>
+							<td onmouseover="Tip('{-$eve.EventMagnitude[1]-}')" onmouseout="UnTip()">
 {-assign var="tabind" value="`$tabind+1`"-}
-                  {-$eve.EventMagnitude[0]-}<br>
-                  <input id="EventMagnitude" name="EventMagnitude" type="text" size="5" tabindex="{-$tabind-}" 
-                  		class="line" onFocus="showtip('{-$eve.EventMagnitude[2]-}', 'lightblue')"
-                  		onkeypress="return blockChars(event, this.value, 'text:');">
-                </td>
-                <td ext:qtip="{-$eve.EventDuration[1]-}">
+							  {-$eve.EventMagnitude[0]-}<br>
+							  <input id="EventMagnitude" name="EventMagnitude" type="text" size="5" tabindex="{-$tabind-}" 
+									class="line" onFocus="showtip('{-$eve.EventMagnitude[2]-}', 'lightblue')"
+									onkeypress="return blockChars(event, this.value, 'text:');">
+							</td>
+							<td onmouseover="Tip('{-$eve.EventDuration[1]-}')" onmouseout="UnTip()">
 {-assign var="tabind" value="`$tabind+1`"-}
-                  {-$eve.EventDuration[0]-}<br>
-                  <input id="EventDuration" name="EventDuration" type="text" size="5" tabindex="{-$tabind-}" 
-                  		class="line" onFocus="showtip('{-$eve.EventDuration[2]-}', 'lightblue')"
-                  		onkeypress="return blockChars(event, this.value, 'integer:');">
-                </td>
-                <td ext:qtip="{-$eve.EventNotes[1]-}">
+							  {-$eve.EventDuration[0]-}<br>
+							  <input id="EventDuration" name="EventDuration" type="text" size="5" tabindex="{-$tabind-}" 
+									class="line" onFocus="showtip('{-$eve.EventDuration[2]-}', 'lightblue')"
+									onkeypress="return blockChars(event, this.value, 'integer:');">
+							</td>
+							<td onmouseover="Tip('{-$eve.EventNotes[1]-}')" onmouseout="UnTip()">
 {-assign var="tabind" value="`$tabind+1`"-}
-                  {-$eve.EventNotes[0]-}<br>
-                  <input type="texto" id="EventNotes" name="EventNotes" style="width: 350px;" class="line"
-                  		tabindex="{-$tabind-}" onFocus="showtip('{-$eve.EventNotes[2]-}', 'lightblue')"
-                      onkeypress="return blockChars(event, this.value, 'text:');">
-                </td>
-              </tr>
-            </table>
+							  {-$eve.EventNotes[0]-}<br>
+							  <input type="texto" id="EventNotes" name="EventNotes" style="width: 350px;" class="line"
+									tabindex="{-$tabind-}" onFocus="showtip('{-$eve.EventNotes[2]-}', 'lightblue')"
+								  onkeypress="return blockChars(event, this.value, 'text:');">
+							</td>
+						  </tr>
+						</table>
 					</td>
 				</tr>
 				<!-- BEG CAUSE SECTION -->
@@ -597,7 +598,7 @@
 					<td>
 					<table class="grid">
 					  <tr>
-						<td ext:qtip="{-$cau.CauseName[1]-}">
+						<td onmouseover="Tip('{-$cau.CauseName[1]-}')" onmouseout="UnTip()">
 {-assign var="tabind" value="`$tabind+1`"-}
 						{-$cau.CauseName[0]-}<b style="color:darkred;">*</b><br>
 						<select id="CauseId" name="CauseId" style='width: 180px;' class="line" 
@@ -608,10 +609,10 @@
 {-/foreach-}
 						</select>
 						</td>
-						<td ext:qtip="{-$cau.CauseNotes[1]-}">
+						<td onmouseover="Tip('{-$cau.CauseNotes[1]-}')" onmouseout="UnTip()">
 {-assign var="tabind" value="`$tabind+1`"-}
 						{-$cau.CauseNotes[0]-}<br>
-						<input type="texto" id="CauseNotes" name="CauseNotes" style="width: 450px;" class="line"
+						<input type="text" id="CauseNotes" name="CauseNotes" style="width: 450px;" class="line"
 							onkeypress="return blockChars(event, this.value, 'text:');" tabindex="{-$tabind-}" 
 							onFocus="showtip('{-$cau.CauseNotes[2]-}', '#ffffc0')"></textarea>
 						</td>
