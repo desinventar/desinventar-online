@@ -273,7 +273,7 @@
 		<table width="900px">
 		 <tr>
 		  <td>
-			<input type="button" id="cardnew" class="bb bnew" onmouseover="Tip('{-#tnewtitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardnew');">
+			<input type="button" id="cardnew" class="bnew" onmouseover="Tip('{-#tnewtitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardnew');">
 			<input type="button" id="cardupd" class="bb bupd" onmouseover="Tip('{-#tupdtitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardupd');">
 			<input type="button" id="cardsav" class="bb bsave" onmouseover="Tip('{-#tsavtitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardsav');">
 			<input type="button" id="cardcln" class="bb bclean" onmouseover="Tip('{-#tclntitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardcln');">
@@ -358,6 +358,7 @@
 						</table>
 					</td>
 				</tr>
+				<!-- GEOGRAPHY SECTION -->
 				<tr>
 					<td width="30px" style="border:0px;" valign="top">
 						<img src="images/di_geotag.png" 
@@ -421,7 +422,7 @@
 						</table>
 					</td>
 				</tr>
-				<!-- END DATACARD --> 
+				<!-- EFFECTS SECTION--> 
 				<tr>
 					<td width="30px" valign="top" style="border:0px;">
 						<a href="javascript:void(null)" onClick="switchEff('effbas')">

@@ -15,7 +15,6 @@
 		parent.difw.show();
 		setDICardfromId('{-$reg-}', did, 'DATA');
 	}
-{-if !$ctl_singlemode-}
 	window.onload = function() {
 		var qrydet = parent.document.getElementById('querydetails');
 		var qdet = "";
@@ -31,14 +30,12 @@
 {-/foreach-}
 		qrydet.innerHTML = qdet;
 	}
-{-/if-}
     </script>
  </head>
  <body>
   <table width="920px" class="grid">
    <tr>
 	<td>
-{-if !$ctl_singlemode-}
 	 {-#tpage#-} 
 	  <input type="text" id="pp" size="2" value="1" class="line"
 				onKeyDown="if(event.keyCode==13){ mod='dat'; 
@@ -47,7 +44,6 @@
 	  &nbsp; {-#tnumof#-} &nbsp;
 	  <a href="javascript:void(null)" 
 				onclick="mod='dat'; updateList('lst_dis', 'data.php', 'r={-$reg-}&page={-$NumberOfPages-}&RecordsPerPage={-$RecordsPerPage-}&sql={-$sql-}&fld={-$fld-}');">{-$NumberOfPages-}</a>
-{-/if-}
 	</td>
 	<td align="center">
 	  <span id="datstatusmsg" class="dlgmsg"></span><!--{-$time-}s-->
