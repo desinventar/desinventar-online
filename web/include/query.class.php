@@ -961,7 +961,7 @@ class Query extends PDO
 	
 	/* Print results like associative array or fields separate by Tabs */
 	function printResults ($dl, $exp, $mode) {
-		$csv = "";
+		$txt = "";
 		// Get results
 		if (!empty($dl)) {
 			$j = 0;
@@ -982,21 +982,25 @@ class Query extends PDO
 						$dl[$j][$idx] = number_format($dl[$j][$idx], 0, ',', ' ');
 					}
 				}
-				if ($exp) {
+				if (!empty($exp)) {
 					foreach (array_values($dl[$j]) as $vals) {
 						if ($vals == -1)
 							$myv = "YES";
 						else
 							$myv = $vals;
-						$csv .= '"'. $myv .'"'. "\t";
+						if ($exp == 'csv')
+							$sep = ", ";	// use comma separator to CSV
+						else
+							$sep = "\t";	// use tab separator to XLS (default option)
+						$txt .= '"'. $myv .'"'. $sep;
 					}
-					$csv .= "\n";
+					$txt .= "\n";
 				} //if exp
 				$j++;
 			} //foreach
 		} //if !empty
-		if ($exp)
-			return $csv;
+		if (!empty($exp))
+			return $txt;
 		else
 			return $dl;
 	}

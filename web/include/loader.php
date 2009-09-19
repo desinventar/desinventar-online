@@ -125,7 +125,7 @@ if (isset($_SERVER["HTTP_HOST"])) {
 		$Install_Dir = $shell->RegRead("HKEY_LOCAL_MACHINE\\Software\\OSSO\\DesInventar8\Install_Dir");		
 		define("SMARTYDIR", $Install_Dir . "/ms4w/apps/Smarty/libs");
 		define("JPGRAPHDIR", $Install_Dir . "/ms4w/apps/jpgraph/src");
-		define("TEMP", $Install_Dir . "\tmp");
+		define("TEMP", $Install_Dir . "/tmp");
 		// MS4W doesn't load the gd extension by default, so we do here now...
 		if (!extension_loaded( 'gd' )) {
 			//dl( 'php_gd2.'.PHP_SHLIB_SUFFIX);

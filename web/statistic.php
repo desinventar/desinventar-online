@@ -36,7 +36,7 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
 	// Process Desconsultar Query Design Form
 	$tot = 0;
 	$pag = 1;
-	$export = false;
+	$export = '';
 	// Show results by page number
 	if (isset($get['page'])) {
 		$pag = $get['page'];
@@ -77,7 +77,6 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
 		// the value
 		$dlt['EventName'] = '';
 		$dlt['CauseName'] = '';
-
 		$fld = "DisasterId_";
 		//echo $sqc ."<br>". $sql;
 		// organize groups
@@ -102,7 +101,7 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
 		} //foreach
 		// Show results..
 		if ($post['_S+cmd'] == "result") {
-			$export = false;
+			$export = '';
 			$rxp 	= $post['_S+SQL_LIMIT'];
 			// Set values to paging list
 			$last = (int) (($cou / $rxp) + 1);
@@ -123,22 +122,25 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
 		}
 		// show export results
 		else if ($post['_S+cmd'] == "export") {
+			if ($post['_S+saveopt'] == "csv")
+				$export = 'csv';
+			else
+				$export = 'xls';
 			//header("Content-type: application/x-zip-compressed");
 			header("Content-type: text/x-csv");
-			header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $regname) ."_Consolidate.xls");
+			header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $regname) ."_Consolidate.". $export);
 			//header("Content-Transfer-Encoding: binary");
 			// Limit 5000 results in export: few memory in PHP
-			$export = true;
 			$rxp 		= 5000;
 			$last = (int) (($cou / $rxp) + 1);
 		}
 	}
 	// Complete SQL to Paging, later check and run SQL
 	if ($q->chkSQL($sql)) {
-		if ($export) {
+		if (!empty($export)) {
 			// Save results in CSVfile
-			$stdpth = TEMP ."/di8statistic_". session_id();
-			$fp = fopen("$stdpth.xls", 'w');
+			$stdpth = TEMP ."/di8statistic_". session_id() .".$export";
+			$fp = fopen($stdpth, 'w');
 			$pin = 0;
 			$pgt = $last;
 		}
@@ -169,17 +171,17 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
 						$dk[$ii] = $ii;		// no traduction..
 					$lb .= '"'. $dk[$ii] .'"'. "\t";
 				}
-				if ($export)
+				if (!empty($export))
 					fwrite($fp, $lb ."\n");
 			}
-			if ($export)
+			if (!empty($export))
 				fwrite($fp, $dl);
 		}
-		if ($export) {
+		if (!empty($export)) {
 			fclose($fp);
 			//$sto = system("zip -q $stdpth.zip $stdpth.csv");
 			flush();
-			readfile("$stdpth.xls");
+			readfile($stdpth);
 			exit;
 		}
 		else {

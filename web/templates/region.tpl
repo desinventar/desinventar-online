@@ -174,7 +174,7 @@
 -->
  {-/if-}
   <tr>
-	<td colspan=2 align="center">
+	<td colspan=2 align="center"><!--
   {-if $userid == ""-}
 	* USER LOGIN<br>
 	* FIND DATABASES <br>
@@ -182,10 +182,11 @@
 	* MY DATABASES<br>
    {-if $role == "USER" || $role == "SUPERVISOR"-}
     * INSERT CARDS (ADMIN,USER,SUPER)<br>
-   {-elseif $role == "OBSERVER" || $role == "ADMINREGION"-}
-    * CONFIG DATABASE (ADMIN: Configurar base de datos<br>
+   {-elseif $role == "ADMINREGION"-}
+    * INSERT CARDS (ADMIN,USER,SUPER)<br>
+    * CONFIG DATABASE (ADMIN)<br>
    {-/if-}
-  {-/if-}
+  {-/if-}-->
   {-if $ctl_inactivereg-}
 	  <b>{-#tinactive#-}</b><br>
   {-/if-}
