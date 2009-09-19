@@ -12,7 +12,7 @@
 	<script type="text/javascript" src="include/prototype.js"></script>
 	<script type="text/javascript" src="include/diadmin.js"></script>
 	<script type="text/javascript" src="include/checktree.js"></script>
-	<script type="text/javascript" src="include/wd.js"></script>
+<!--	<script type="text/javascript" src="include/wd.js"></script>-->
 	<script type="text/javascript" src="include/accordion.js"></script>
 	<script type="text/javascript" src="include/palette.js"></script>
 	<!-- ExtJS 2.0.1 -->
@@ -575,30 +575,31 @@
     	$('itree' + k).innerHTML = '';
     	$('itree' + k).style.display = 'none';
     }
-    function saveRes(cmd) {
-      switch ($('DCRes').value) {
-        case 'D':
-          sendList(cmd);
-        break;
-        case 'M':
-          sendMap(cmd);
-        break;
-        case 'G':
-          sendGraphic(cmd);
-        break;
-        case 'S':
-          sendStatistic(cmd);
-        break;
-      }
+    function saveRes(cmd, typ) {
+		if($('DCRes').value != '') {
+		  switch ($('DCRes').value) {
+			case 'D':
+			  $('_D+saveopt').value = typ;
+			  sendList(cmd);
+			break;
+			case 'M':
+			  sendMap(cmd);
+			break;
+			case 'G':
+			  sendGraphic(cmd);
+			break;
+			case 'S':
+			  $('_S+saveopt').value = typ;
+			  sendStatistic(cmd);
+			break;
+		  }
+		}
     }
     function sendList(cmd) {
       if ($('_D+Field[]').length > 0) {
 		w = Ext.getCmp('westm');
 		s = Ext.getCmp('southm');
         $('_D+cmd').value = cmd;
-		if (cmd == "export")
-			$('saveopt').style.visibility = 'visible';
-		//$('saveopt').style.visibility = 'hidden';
         selectall('_D+Field[]');
         var ob = $('_D+Field[]');
         var mystr = "";
@@ -1030,6 +1031,7 @@
               </select>
               <input type="hidden" id="_D+FieldH" name="_D+Field" value="">
               <input type="hidden" id="_D+cmd" name="_D+cmd" value="result">
+			  <input type="hidden" id="_D+saveopt" name="_D+saveopt" value="">
             </form>
           </div>
         </div>
@@ -1426,6 +1428,7 @@
               </table>
               <input type="hidden" id="_S+FieldH" name="_S+Field" value="">
               <input type="hidden" id="_S+cmd" name="_S+cmd" value="result">
+			  <input type="hidden" id="_S+saveopt" name="_S+saveopt" value="">
             </form>
           </div>
         </div>
@@ -1447,9 +1450,13 @@
         <span id="frmwait"></span>
         <input id="DCRes" type="hidden" value="">
         <input id="bsave" type="button" class="bb bsave"   style="visibility: hidden;"
-			onClick="if($('DCRes').value != '') saveRes('export');" ext:qtip="{-#bsavemsg#-}">
-		<span id="saveopt" style="position:absolute; visibility: hidden" onmouseout="$('saveopt').style.visibility='hidden';">
-		<a href="">xls</a> | <a href="">csv</a></span>&nbsp;&nbsp;
+			onMouseOver="if($('DCRes').value == 'D' || $('DCRes').value == 'S') $('saveopt').style.display='block';"
+			onClick="saveRes('export', '');" ext:qtip="{-#bsavemsg#-}">
+		<span id="saveopt" style="position:absolute; display: none" 
+			onMouseOver="$('saveopt').style.display='block';" onMouseOut="setTimeout('$(\'saveopt\').style.display=\'none\';', 2000);">
+			<input type="button" value="xls" class="bb line" onClick="saveRes('export', 'xls')"> | 
+			<input type="button" value="csv" class="bb line" onClick="saveRes('export', 'csv')">
+		</span>&nbsp;&nbsp;
         <input id="bprint" type="button" class="bb bprint" style="visibility: hidden;"
 			onClick="document.dcr.print();" ext:qtip="{-#bprintmsg#-}">&nbsp;&nbsp;
 		 <!-- Show DesInventar (input data) window-->

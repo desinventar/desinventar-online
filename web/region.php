@@ -71,6 +71,8 @@ elseif (isset($_GET['r']) && !empty($_GET['r']) && file_exists($us->q->getDBFile
 		$t->assign ("ctl_showdimod", true);
 		$t->assign ("ctl_showdcmod", true);
 	}
+	$t->assign ("role", $role);
+	$t->assign ("userid", $us->UserId);
 	// Show active or public regions only
 	$rf = $q->getRegionFieldByID($sRegionId, "RegionStatus");
 	if ($rf[$sRegionId] & CONST_REGIONPUBLIC)
@@ -159,7 +161,6 @@ elseif (isset($_GET['r']) && !empty($_GET['r']) && file_exists($us->q->getDBFile
 	$t->assign ("reglst", $reglst);
 	$t->assign ("ctl_noregion", true);
 	$t->assign ("ctl_index", true);
-	$t->assign ("userid", $us->UserId);
 }
 
 $t->display ("region.tpl");

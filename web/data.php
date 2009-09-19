@@ -38,7 +38,7 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 	// Process Desconsultar Query Design Form
 	$iNumberOfRecords = 0;
 	$pag = 1;
-	$export = false;
+	$export = '';
 	if (isset($get['page'])) {
 		// Show results by page number
 		$pag = $get['page'];
@@ -54,16 +54,7 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 		$iNumberOfRecords = $c['counter'];
 		// Reuse calculate SQL values in all pages; calculate limits in pages
 		$levg = array();
-		if (isset($get['opt']) && $get['opt'] == "singlemode") {
-			$fl = array();
-			foreach ($q->getDisasterFld() as $i)
-				$fl[] = "D.$i";
-			foreach ($q->getEEFieldList("True") as $k=>$i)
-				$fl[] = "E.$k";
-			$fld = implode(",", $fl);
-			$t->assign ("ctl_singlemode", true);
-		} else
-			$fld = $post['_D+Field'];
+		$fld = $post['_D+Field'];
 		$ord = "D.DisasterBeginTime,V.EventName,G.GeographyFQName";
 		if (isset($post['_D+SQL_ORDER']))
 			$ord = $post['_D+SQL_ORDER'];
@@ -71,15 +62,12 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 		$dlt = $q->dreg->query($sqc);
 		if ($post['_D+cmd'] == "result") {
 			// show results in window
-			$export = false;
+			$export = '';
 			$iRecordsPerPage = $post['_D+SQL_LIMIT'];
 			// Set values to paging list
 			$iNumberOfPages = (int) (($iNumberOfRecords / $iRecordsPerPage) + 1);
 			// Smarty assign SQL values
 			$t->assign ("sql", base64_encode($sql));
-			if (!(isset($get['opt']) && $get['opt'] == "singlemode")) {
-				$t->assign ("qdet", $q->getQueryDetails($dic, $post));
-			}
 			$t->assign ("fld", $fld);
 			$t->assign ("tot", $iNumberOfRecords);
 			$t->assign ("RecordsPerPage", $iRecordsPerPage);
@@ -88,23 +76,26 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 			$t->assign ("role", $us->getUserRole($reg));
 			$t->assign ("ctl_showres", true);
 		} else if ($post['_D+cmd'] == "export") {
+			if ($post['_D+saveopt'] == "csv")
+				$export = 'csv';
+			else
+				$export = 'xls';
 			// show export results
 			//header("Content-type: application/x-zip-compressed");
 			header("Content-type: text/x-csv");
-			header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $regname) ."_Data.xls");
+			header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $regname) ."_Data.". $export);
 			//header("Content-Transfer-Encoding: binary");
 			// Limit 1000 results in export: few memory in PHP
-			$export = true;
 			$iRecordsPerPage = 1000;
 			$iNumberOfPages = (int) (($iNumberOfRecords / $iRecordsPerPage) + 1);
 		}
 	}
 	// Complete SQL to Paging, later check and run SQL
 	if ($q->chkSQL($sql)) {
-		if ($export) {
+		if (!empty($export)) {
 			// Save results in CSVfile
-			$datpth = TEMP ."/di8data_". $_SESSION['sessionid'] ."_";
-			$fp = fopen("$datpth.xls", 'w');
+			$datpth = TEMP ."/di8data_". session_id() .".$export";
+			$fp = fopen($datpth, 'w');
 			$pin = 0;
 			$pgt = $iNumberOfPages;
 		} else {
@@ -130,29 +121,26 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 					//Assign Headers..
 					$lb .= '"'. $dk[$ii] .'"'. "\t";
 				} //foreach
-				if ($export)
+				if (!empty($export))
 					fwrite($fp, $lb ."\n");
 				else {
 					$t->assign ("dk", $dk);
 					$t->assign ("sel", $sel);
 				}
 			} //if
-			if ($export) {
+			if (!empty($export)) {
 				fwrite($fp, $dl);
 			}
 		} //for
 		$t->assign ("sqt", $slim);
-		if ($export) {
+		if (!empty($export)) {
 			fclose($fp);
 			//$sto = system("zip -q $datpth.zip $datpth.xls");
 			flush();
-			readfile("$datpth.xls");
+			readfile($datpth);
 			exit;
 		} else {
 			$t->assign ("offset", ($pag - 1) * $iRecordsPerPage);
-			if (isset($get['opt']) && $get['opt'] == "singlemode") {
-				$t->assign ("js", $q->hash2json($dislist));
-			}
 			$t->assign ("dislist", $dl);
 			$t->assign ("ctl_dislist", true);
 		} //else
