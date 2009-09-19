@@ -28,7 +28,7 @@ input.btn {
 	font-family:arial,tahoma,helvetica,cursive; 
 	font-size:14px; color:#000000; background-color:#BBBBBB; }
 input.bb:hover { 
-	border-color: #900; background: #fff; color: #600; }
+	border-color: #900; background: #fff; color: #600; border-right:2px solid #900; border-bottom:2px solid #900}
 input.bb:active { 
 	border-color: red; background: #fff; color: red; }
 input.medium {

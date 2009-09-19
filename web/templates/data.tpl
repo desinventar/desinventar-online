@@ -14,6 +14,12 @@
 		parent.w.collapse();
 		parent.difw.show();
 		setDICardfromId('{-$reg-}', did, 'DATA');
+{-if $role == 'USER' || $role == 'SUPERVISOR' || $role == 'ADMINREGION'-}
+		cupd = window.parent.frames['dif'].document.getElementById('cardupd');
+		cupd.enable();
+		Element.addClassName(cupd, 'bb');
+		Element.removeClassName(cupd, 'disabled');
+{-/if-}
 	}
 	window.onload = function() {
 		var qrydet = parent.document.getElementById('querydetails');

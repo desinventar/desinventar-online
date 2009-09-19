@@ -85,6 +85,7 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 			$t->assign ("RecordsPerPage", $iRecordsPerPage);
 			$t->assign ("NumberOfPages" ,$iNumberOfPages);
 			// Show results interface 
+			$t->assign ("role", $us->getUserRole($reg));
 			$t->assign ("ctl_showres", true);
 		} else if ($post['_D+cmd'] == "export") {
 			// show export results
