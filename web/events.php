@@ -8,6 +8,29 @@ require_once('include/loader.php');
 require_once('include/query.class.php');
 require_once('include/dievent.class.php');
 
+function form2event($form) {
+	$data = array ();
+	if (isset($form['EventId']) && !empty($form['EventId']))
+		$data['EventId'] = $form['EventId'];
+	else
+		$data['EventId'] = "";
+	if (isset($form['EventName']))
+		$data['EventName'] = $form['EventName'];
+	if (isset($form['EventDesc']))
+		$data['EventDesc'] = $form['EventDesc'];
+	else if (isset($form['EventDesc2']))
+		$data['EventDesc'] = $form['EventDesc2'];
+	if (isset($form['EventActive']) && $form['EventActive'] == "on")
+		$data['EventActive'] = true;
+	else
+		$data['EventActive'] = false;
+	if (isset($form['EventPreDefined']) && $form['EventPreDefined'] == "1")
+		$data['EventPreDefined'] = true;
+	else
+		$data['EventPreDefined'] = false;
+	return $data;
+}
+
 function showResult($stat, &$tp) {
 	if (!iserror($stat))
 		$tp->assign ("ctl_msgupdeve", true);
@@ -31,10 +54,11 @@ if (isset($get['r']) && !empty($get['r'])) {
 	exit();
 
 if (isset($get['cmd'])) {
+	$dat = form2event($get);
 	switch ($get['cmd']) {
 	case "insert":
 		$o = new DIEvent($us);
-		$o->setFromArray($get);
+		$o->setFromArray($dat);
 		$o->set('EventId', uuid());
 		$o->set('EventPredefined', 0);
 		$i = $o->insert();
@@ -42,9 +66,9 @@ if (isset($get['cmd'])) {
 		break;
 	case "update":
 		$o = new DIEvent($us);
-		$o->set('EventId', $get['EventId']);
+		$o->set('EventId', $dat['EventId']);
 		$o->load();
-		$o->setFromArray($get);
+		$o->setFromArray($dat);
 		$i = $o->update();
 		showResult($i, $t);
 		break;

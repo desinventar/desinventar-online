@@ -7,7 +7,7 @@
 require_once('include/loader.php');
 require_once('include/query.class.php');
 require_once('include/dicause.class.php');
-/*
+
 function form2cause ($form) {
 	$data = array ();
 	if (isset($form['CauseId']) && !empty($form['CauseId']))
@@ -29,7 +29,7 @@ function form2cause ($form) {
 	else
 		$data['CausePreDefined'] = false;
 	return $data;
-}*/
+}
 
 function showResult($stat, &$tp) {
 	if (!iserror($stat))
@@ -52,12 +52,12 @@ if (isset($get['r']) && !empty($get['r'])) {
 } else
 	exit();
 
-if (isset($_GET['cmd'])) {
-	$dat = form2cause($_GET);
-	switch ($_GET['cmd']) {
+if (isset($get['cmd'])) {
+	$dat = form2cause($get);
+	switch ($get['cmd']) {
 	case "insert":
 		$o = new DICause($us);
-		$o->setFromArray($_GET);
+		$o->setFromArray($dat);
 		$o->set('CauseId', uuid());
 		$o->set('CausePredefined', 0);
 		$i = $o->insert();
@@ -65,15 +65,15 @@ if (isset($_GET['cmd'])) {
 		break;
 	case "update";
 		$o = new DICause($us);
-		$o->set('CauseId', $_GET['CauseId']);
+		$o->set('CauseId', $dat['CauseId']);
 		$o->load();
-		$o->setFromArray($_GET);
+		$o->setFromArray($dat);
 		$i = $o->update();
 		showResult($i, $t);
 		break;
 	case "list":
 		// reload list from local SQLITE
-		if ($_GET['predef'] == "1") {
+		if ($get['predef'] == "1") {
 			$t->assign ("ctl_caupred", true);
 			$t->assign ("caupredl", $us->q->loadCauses("PREDEF", null, $lg));
 		} else {
@@ -83,12 +83,12 @@ if (isset($_GET['cmd'])) {
 		break;
 	case "chkname":
 		$t->assign ("ctl_chkname", true);
-		if ($us->q->isvalidObjectName($_GET['CauseId'], $_GET['CauseName'], DI_CAUSE))
+		if ($us->q->isvalidObjectName($get['CauseId'], $get['CauseName'], DI_CAUSE))
 			$t->assign ("chkname", true);
 		break;
 	case "chkstatus":
 		$t->assign ("ctl_chkstatus", true);
-		if ($us->q->isvalidObjectToInactivate($_GET['CauseId'], DI_CAUSE))
+		if ($us->q->isvalidObjectToInactivate($get['CauseId'], DI_CAUSE))
 			$t->assign ("chkstatus", true);
 		break;
 	default: break;

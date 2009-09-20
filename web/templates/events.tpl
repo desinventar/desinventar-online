@@ -94,7 +94,8 @@
 			{-$dic.DBEveActive[0]-}
 			<input id="aEventActive" name="EventActive" type="checkbox" {-$ro-} 
 					onFocus="showtip('{-$dic.DBEveActive[2]-}');"
-					onClick="if (!this.checked) updateList('eventstatusmsg', 'events.php', 'r={-$reg-}&cmd=chkstatus&EventId='+ $('EventId').value);">
+					onClick="if (!this.checked) updateList('eventstatusmsg', 'events.php', 'r={-$reg-}&cmd=chkstatus&EventId='+ 
+												$('aEventId').value);">
 			<br><br>
 			<p class="line">
 				<input id="aEventId" name="EventId" type="hidden">
