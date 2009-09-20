@@ -6,15 +6,8 @@
 
 require_once('include/loader.php');
 require_once('include/query.class.php');
-require_once('include/region.class.php');
 require_once('include/dicause.class.php');
-
-$reg = $us->sRegionId;
-if (empty($reg)) {
-	exit();
-}
-$get = $_GET;
-
+/*
 function form2cause ($form) {
 	$data = array ();
 	if (isset($form['CauseId']) && !empty($form['CauseId']))
@@ -36,7 +29,7 @@ function form2cause ($form) {
 	else
 		$data['CausePreDefined'] = false;
 	return $data;
-}
+}*/
 
 function showResult($stat, &$tp) {
 	if (!iserror($stat))
@@ -51,6 +44,13 @@ function showResult($stat, &$tp) {
 			$tp->assign ("chkstatus", true);
 	}
 }
+
+$get = $_GET;
+if (isset($get['r']) && !empty($get['r'])) {
+	$reg = $get['r'];
+	$q = new Query($reg);
+} else
+	exit();
 
 if (isset($_GET['cmd'])) {
 	$dat = form2cause($_GET);
@@ -93,7 +93,8 @@ if (isset($_GET['cmd'])) {
 		break;
 	default: break;
 	} //switch
-} else {
+}
+else {
 	$t->assign ("dic", $us->q->queryLabelsFromGroup('DB', $lg));
 	$urol = $us->getUserRole($reg);
 	if ($urol == "OBSERVER")

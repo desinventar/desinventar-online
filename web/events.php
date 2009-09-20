@@ -8,12 +8,6 @@ require_once('include/loader.php');
 require_once('include/query.class.php');
 require_once('include/dievent.class.php');
 
-$reg = $us->sRegionId;
-if (empty($reg)) {
-	exit();
-}
-$get = $_GET;
-
 function showResult($stat, &$tp) {
 	if (!iserror($stat))
 		$tp->assign ("ctl_msgupdeve", true);
@@ -29,13 +23,18 @@ function showResult($stat, &$tp) {
 	} //else
 } //function
 
-$q = new Query($reg);
+$get = $_GET;
+if (isset($get['r']) && !empty($get['r'])) {
+	$reg = $get['r'];
+	$q = new Query($reg);
+} else
+	exit();
 
-if (isset($_GET['cmd'])) {
-	switch ($_GET['cmd']) {
+if (isset($get['cmd'])) {
+	switch ($get['cmd']) {
 	case "insert":
 		$o = new DIEvent($us);
-		$o->setFromArray($_GET);
+		$o->setFromArray($get);
 		$o->set('EventId', uuid());
 		$o->set('EventPredefined', 0);
 		$i = $o->insert();
@@ -43,15 +42,15 @@ if (isset($_GET['cmd'])) {
 		break;
 	case "update":
 		$o = new DIEvent($us);
-		$o->set('EventId', $_GET['EventId']);
+		$o->set('EventId', $get['EventId']);
 		$o->load();
-		$o->setFromArray($_GET);
+		$o->setFromArray($get);
 		$i = $o->update();
 		showResult($i, $t);
 		break;
 	case "list":
 		// reload list from local SQLITE
-		if ($_GET['predef'] == "1") {
+		if ($get['predef'] == "1") {
 			$t->assign ("ctl_evepred", true);
 			$t->assign ("evepredl", $q->loadEvents("PREDEF", null, $lg));
 		} else {
@@ -61,17 +60,18 @@ if (isset($_GET['cmd'])) {
 		break;
 	case "chkname":
 		$t->assign ("ctl_chkname", true);
-		if ($q->isvalidObjectName($_GET['EventId'], $_GET['EventName'], DI_EVENT))
+		if ($q->isvalidObjectName($get['EventId'], $get['EventName'], DI_EVENT))
 			$t->assign ("chkname", true);
 		break;
 	case "chkstatus":
 		$t->assign ("ctl_chkstatus", true);
-		if ($q->isvalidObjectToInactivate($_GET['EventId'], DI_EVENT))
+		if ($q->isvalidObjectToInactivate($get['EventId'], DI_EVENT))
 			$t->assign ("chkstatus", true);
 		break;
 	default: break;
 	} // switch
-} else {
+}
+else {
 	$t->assign ("dic", $q->queryLabelsFromGroup('DB', $lg));
 	$urol = $us->getUserRole($reg);
 	if ($urol == "OBSERVER")

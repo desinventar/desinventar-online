@@ -294,6 +294,8 @@
 			<br>
 			<span class="dlgmsg" id="distatusmsg"></span><span class="dlgmsg" id="dostat"></span>
 		  </td>
+		  <td><input type="button" id="cardfnd" class="bb bfind" onmouseover="Tip('{-#bexpsearch#-}')" onmouseout="UnTip()" 
+				onClick="parent.difw.hide(); parent.w.expand();"></td>
 		  <td align="right">
 			<iframe name="dic" id="dic" frameborder="0" style="height:30px; width:470px;" src="about:blank"></iframe>
 		  </td>
