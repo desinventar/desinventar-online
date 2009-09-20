@@ -834,6 +834,15 @@
 			break;
 		}
 	}
+	function printRes() {
+		if (CheckIsIE() == true) {
+			document.dcr.focus();
+			document.dcr.print();
+		} else {
+			window.frames['dcr'].focus();
+			window.frames['dcr'].print();
+		}
+	}
 	// Find all Effects fields enable by saved query
 	window.onload = function() {
 {-if $ctl_noregion-}
@@ -957,7 +966,7 @@
 	<table border="0" cellpadding="0" cellspacing="0" width="100%">
 	  <tr bgcolor="#bbbbbb">
        <td width="200px">
-       	<b>{-#tsubtitle2#-} =></b>
+       	<b>{-#tsubtitle2#-} &rArr;</b>
 <!--       	<img src="images/collapse.png" onClick="var w = Ext.getCmp('westm'); w.show();">-->
        </td>
        <td align="center">
@@ -1458,7 +1467,7 @@
 			<input type="button" value="csv" class="bb line" onClick="saveRes('export', 'csv')">
 		</span>&nbsp;&nbsp;
         <input id="bprint" type="button" class="bb bprint" style="visibility: hidden;"
-			onClick="document.dcr.print();" ext:qtip="{-#bprintmsg#-}">&nbsp;&nbsp;
+			onClick="printRes();" ext:qtip="{-#bprintmsg#-}">&nbsp;&nbsp;
 		 <!-- Show DesInventar (input data) window-->
 		<div id="dif-win" class="x-hidden">
 		  <div class="x-window-header">{-#mdcsection#-} | {-$userid-} - {-$role-}</div>
