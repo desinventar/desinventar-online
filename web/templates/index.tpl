@@ -895,7 +895,7 @@
 					myAjax = new Ajax.Updater(div, 'geography.php', {method:'get', parameters:''});
 				break;
 				case 3 :
-					myAjax = new Ajax.Updater(div, 'events.php', {method:'get', parameters:''});
+					myAjax = new Ajax.Updater(div, 'events.php', {method:'get', parameters:'r={-$reg-}'});
 				break;
 				case 4 :
 					myAjax = new Ajax.Updater(div, 'causes.php', {method:'get', parameters:''});
