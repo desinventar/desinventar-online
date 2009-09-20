@@ -94,8 +94,8 @@
 			{-$dic.DBCauActive[0]-} 
 			<input id="aCauseActive" name="CauseActive" type="checkbox" {-$ro-} 
 					onFocus="showtip('{-$dic.DBCauActive[2]-}');"
-					onClick="javascript:if (!this.checked) updateList('causestatusmsg', 'causes.php', 'r={-$reg-}&cmd=chkstatus&CauseId='+
-										$('aCauseId').value);">
+					onClick="if (!this.checked) updateList('causestatusmsg', 'causes.php', 'r={-$reg-}&cmd=chkstatus&CauseId='+
+												$('aCauseId').value);">
 			<br><br>
 			<p align="center" style="width:500px;">
 				<input id="aCauseId" name="CauseId" type="hidden">

@@ -229,7 +229,7 @@
 			case "mabo":
 				alert("DesInventar {-$diversion-}\n{-#tabout#-}");
 			break;
-			case "mwww": //{-#mwebsite#-}
+			case "mwww":
 				window.open('http://www.desinventar.org', '', '');
 			break;
 			case "mmtg":
@@ -422,7 +422,7 @@
 	  if (!difw) {
 		difw = new Ext.Window({
 			el:'dif-win', layout:'fit', 
-			x: 65, y: 0, width:920, height:670, 
+			x: 65, y: 0, width:960, height:625, 
 			closeAction:'hide', plain: true, animCollapse: false,
 			items: new Ext.Panel({ contentEl: 'dif-cfg', autoScroll: true })
 		});
@@ -879,29 +879,29 @@
 	document.write('<style type="text/css">.tabber{display:none;}<\/style>');
 	var tabberOptions = {
 		'onClick': function(argsObj) {
-			var t = argsObj.tabber; /* Tabber object */
-			var i = argsObj.index; /* Which tab was clicked (0..n) */
+			var t = argsObj.tabber;
+			var i = argsObj.index;
 			var div = this.tabs[i].div; /* The tab content div */
 			/* Display a loading message */
 			div.innerHTML = waiting;
 			switch (i) {
 				case 0 :
-					myAjax = new Ajax.Updater(div, 'info.php', {method:'get', parameters:''});
+					myAjax = new Ajax.Updater(div, 'info.php', {method:'get', parameters:'r={-$reg-}'});
 				break;
 				case 1 :
-					myAjax = new Ajax.Updater(div, 'geolevel.php', {method:'get', parameters:''});
+					myAjax = new Ajax.Updater(div, 'geolevel.php', {method:'get', parameters:'r={-$reg-}'});
 				break;
 				case 2 :
-					myAjax = new Ajax.Updater(div, 'geography.php', {method:'get', parameters:''});
+					myAjax = new Ajax.Updater(div, 'geography.php', {method:'get', parameters:'r={-$reg-}'});
 				break;
 				case 3 :
 					myAjax = new Ajax.Updater(div, 'events.php', {method:'get', parameters:'r={-$reg-}'});
 				break;
 				case 4 :
-					myAjax = new Ajax.Updater(div, 'causes.php', {method:'get', parameters:''});
+					myAjax = new Ajax.Updater(div, 'causes.php', {method:'get', parameters:'r={-$reg-}'});
 				break;
 				case 5 :
-					myAjax = new Ajax.Updater(div, 'extraeffects.php', {method:'get', parameters:''});
+					myAjax = new Ajax.Updater(div, 'extraeffects.php', {method:'get', parameters:'r={-$reg-}'});
 				break;
 			}
 		},
@@ -1564,7 +1564,7 @@
     <dt>{-#mcausection#-}</dt>
     <dd>
       <span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br>
-      <select id="qcaulst" name="D_CauseId[]" multiple style="width: 250px; height: 280px;">
+      <select id="qcaulst" name="D_CauseId[]" multiple style="width: 250px; height: 200px;">
 {-/if-}
 {-if $ctl_qrydsg || $ctl_caulst-}
  {-foreach name=cau key=key item=item from=$caupredl-}
@@ -1591,7 +1591,7 @@
     <dt>{-#meffsection#-}</dt>
     <dd>
       <b>{-#ttitegp#-}</b><br>
-      <div style="height: 130px;" class="dwin" ext:qtip="{-#thlpquery#-}">
+      <div style="height: 100px;" class="dwin" ext:qtip="{-#thlpquery#-}">
 	  <table border=0 cellpadding=0 cellspacing=0>
  {-foreach name=ef1 key=key item=item from=$ef1-}
  {-assign var="ff" value=D_$key-}
@@ -1629,7 +1629,7 @@
       </div><br>
       <!-- SECTORS -->
       <b>{-#ttiteis#-}</b><br>
-      <div style="height: 50px;" class="dwin">
+      <div style="height: 80px;" class="dwin">
       <table border=0 cellpadding=0 cellspacing=0>
  {-foreach name=sec key=key item=item from=$sec-}
  {-assign var="ff" value=D_$key-}

@@ -167,6 +167,19 @@
 				$('effext').style.display='none';
 			}
 		}
+		function gotoQuery() {
+			try {
+				parent.difw.hide();
+				parent.w.expand();
+				parent.w.show();
+				cfg = parent.document.getElementById('config');
+				cfg.style.display = 'none';
+				imp = parent.document.getElementById('import');
+				imp.style.display = 'none';
+				res = parent.document.getElementById('qryres');
+				res.style.display = 'block';
+			} catch(err) { };
+		}
 		function setActive() {
 			updateList('dostat', 'cards.php', 'u=1');
 		}
@@ -270,17 +283,16 @@
 <body>
 	<script type="text/javascript" src="include/wz_tooltip.js"></script>
 <!-- BEG DI8 FORM CARD -->
-	<div id="container" style="overflow:scroll;">
-		<table width="900px">
-		 <tr>
-		  <td>
+	<div id="container" style="height:600px;">
+		<table width="900px" border="0" cellpadding="0" cellspacing="0" >
+		 <tr valign="top">
+		  <td width="360px">
 			<input type="button" id="cardnew" class="bb bnew" onmouseover="Tip('{-#tnewtitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardnew');">
 			<input type="button" id="cardupd" class="bb bupd" onmouseover="Tip('{-#tupdtitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardupd');">
 			<input type="button" id="cardsav" class="bb bsave" onmouseover="Tip('{-#tsavtitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardsav');">
 			<input type="button" id="cardcln" class="bb bclean" onmouseover="Tip('{-#tclntitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardcln');">
 			<input type="button" id="cardcan" class="bb bcancel" onmouseover="Tip('{-#tcantitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardcan');">
 			<input type="button" id="cardprn" class="bb bprint" onmouseover="Tip(' PRINT ')" onmouseout="UnTip()" onClick="window.print();">
-			<!--<input type="button" id="cardfnd" alt="{-#bexpsearch#-}" onClick="onSubmitBtn('cardfnd');" {-$ro-}>-->
 			&nbsp;&nbsp;|&nbsp;&nbsp;
 			<input type="button" value="<<" class="bb line" onmouseover="Tip('Primera')" onmouseout="UnTip()" 
 				onClick="setDICard('{-$reg-}', {-$fst-}, ''); {-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}">
@@ -291,13 +303,16 @@
 			<input type="button" value=">>" class="bb line" onmouseover="Tip('Ultima')" onmouseout="UnTip()" 
 				onClick="setDICard('{-$reg-}', {-$lst-}, ''); {-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}">
 			&nbsp;&nbsp;|&nbsp;&nbsp;
+			<input type="button" id="cardfnd" class="bb bfind" onmouseover="Tip('{-#bexpsearch#-}')" onmouseout="UnTip()" 
+				onClick="gotoQuery();">
 			<br>
 			<span class="dlgmsg" id="distatusmsg"></span><span class="dlgmsg" id="dostat"></span>
 		  </td>
-		  <td><input type="button" id="cardfnd" class="bb bfind" onmouseover="Tip('{-#bexpsearch#-}')" onmouseout="UnTip()" 
-				onClick="parent.difw.hide(); parent.w.expand();"></td>
-		  <td align="right">
-			<iframe name="dic" id="dic" frameborder="0" style="height:30px; width:470px;" src="about:blank"></iframe>
+		  <td align="right" width="270px">
+			<iframe name="dic" id="dic" frameborder="0" style="width:265px; height:30px;" src="about:blank"></iframe>
+		  </td>
+		  <td align="right" width="270px">
+			<textarea id="_DIDesc" style="width:265px; height:30px; font-size: 8pt;"></textarea>
 		  </td>
 		 </tr>
 		</table>
@@ -321,7 +336,7 @@
 									<input id="DisasterBeginTime[0]" name="DisasterBeginTime[0]" style="width:36px;" class="line"
 										tabindex="1" type="text" maxlength="4" onFocus="showtip('{-$dis.DisasterBeginTime[2]-}', '#d4baf6')"
 										onkeypress="return blockChars(event, this.value, 'integer:4');" 
-										onBlur="requestDCard('getNextSerial', this.value);">
+										onBlur="if ($('_CMD').value == 'insertDICard') requestDCard('getNextSerial', this.value);">
 									<input id="DisasterBeginTime[1]" name="DisasterBeginTime[1]" style="width:18px;" class="line"
 										tabindex="2" type="text" maxlength="2" onFocus="showtip('{-$dis.DisasterBeginTime[2]-}', '#d4baf6')"
 										onkeypress="return blockChars(event, this.value, 'integer:2');" 
@@ -632,14 +647,8 @@
 		</form>
 	</div>
 <!-- END DI8 FORM CARD -->
-
-<!-- BEG HELP SECTION -->
-	<div id="south">
-     <textarea id="_DIDesc" wrap="hard" class="hlp" readonly style="width:85%; height:15px;"></textarea>
-      <a href="javascript:void(null)" onClick="runWin('doc/?m=metguide', 'doc');"
-      	class="dlgmsg" style="font-size: 8pt;">{-#hmoreinfo#-}</a>
-	</div>
-<!-- END HELP SECTION -->
+<!-- BEG HELP SECTION 
+<a href="javascript:void(null)" onClick="runWin('doc/?m=metguide', 'doc');" class="dlgmsg" style="font-size: 8pt;">{-#hmoreinfo#-}</a> END HELP SECTION -->
  </body>
 </html>
 {-/if-}
