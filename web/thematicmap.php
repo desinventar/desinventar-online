@@ -135,23 +135,21 @@ if (isset($post['_M+cmd'])) {
 	}
 	
 	$t->assign ("glev", $q->loadGeoLevels('', -1, true));
-	//echo "<pre>"; print_r($rgl); echo "</pre>";
+	//echo "<pre>"; print_r($rgl); 
 	$t->assign ("rgl", $rgl);
 	$t->assign ("tot", $cou);
 	$t->assign ("qdet", $q->getQueryDetails($dic, $post));
-	$mapfile = str_replace('\\', '/', $m->filename());		
+	$mapfile = str_replace('\\', '/', $m->filename());
+	$worldmap = str_replace('\\','/', DATADIR . "/main/worldmap/world_adm0.map");
 	$legend = "/cgi-bin/". MAPSERV ."?map=" . $mapfile . "&SERVICE=WMS&VERSION=1.1.1".
 				"&REQUEST=getlegendgraphic&LAYER=". substr($myly, 0, 12) ."&FORMAT=image/png";
-	$t->assign ("legend", $legend);
-	
+	$t->assign ("legend", $legend);	
 	// 2009-09-10 (jhcaiced) Replace backslash chars to slash, when passing data to mapserver
-	$worldmap = str_replace('\\','/', DATADIR . "/main/worldmap/world_adm0.map");
 	if ($post['_M+cmd'] == "export") {
-		$url0 = "/cgi-bin/". MAPSERV ."?map=". $worldmap . "&SERVICE=WMS&VERSION=1.1.1".
+		$base = "/cgi-bin/". MAPSERV ."?map=". $worldmap . "&SERVICE=WMS&VERSION=1.1.1".
 			"&layers=base&REQUEST=getmap&STYLES=&SRS=EPSG:900913&BBOX=". $post['_M+extent'].
 			"&WIDTH=500&HEIGHT=378&FORMAT=image/png";
-		$bf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $url0);
-		$mapfile = str_replace('\\', '/', $m->filename());		
+		$bf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $base);
 		$url1 = "/cgi-bin/". MAPSERV ."?map=". $mapfile ."&SERVICE=WMS&VERSION=1.1.1".
 			"&layers=". $post['_M+layers'] ."&REQUEST=getmap&STYLES=&SRS=EPSG:900913".
 			"&BBOX=". $post['_M+extent']."&WIDTH=500&HEIGHT=378&FORMAT=image/png";
@@ -169,9 +167,9 @@ if (isset($post['_M+cmd'])) {
 			imagecopy($im, $ibas, 0, 0, 0, 0, 500, 378);
 			imagecopy($im, $imap, 0, 0, 0, 0, 500, 378);
 			imagecopy($im, $ileg, 501, 378-imagesy($ileg), 0, 0, imagesx($ileg), imagesy($ileg));
-			imagestring($im, 3, 2, $ht - 20, 'http://online.desinventar.org/', imagecolorallocate($im, 0, 0, 0));
+			imagestring($im, 3, 2, $ht - 20, 'http://www.desinventar.org/', imagecolorallocate($im, 0, 0, 0));
 			header("Content-type: Image/png");
-			header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $rinf['RegionLabel']) ."_ThematicMap.png");
+			header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $rinf['RegionLabel|']) ."_ThematicMap.png");
 			imagepng($im);
 			imagedestroy($imap);
 			imagedestroy($ileg);

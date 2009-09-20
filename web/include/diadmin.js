@@ -576,3 +576,10 @@
 		else
 			$(mydiv).style.display = 'none';
 	}
+
+	function CheckIsIE() {
+		if (navigator.appName.toUpperCase() == 'MICROSOFT INTERNET EXPLORER')
+			return true;
+		else
+			return false;
+	}

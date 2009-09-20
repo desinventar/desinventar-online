@@ -132,7 +132,7 @@
 {-/if-}
 {-** REGION INDEX: show main option according with user and database **-}
 {-if $ctl_index-}
-  <p style="font-size:14px;">Bienvenido {-if $userid != ""-}<b>{-$userid-}</b>{-else-}a DesInventar8{-/if-},</p>
+  <p style="font-size:14px;">{-#twelcometo#-} <i>DesInventar</i>,</p>
   <br>
  {-if $ctl_noregion-}
   <b>{-#tviewdbase#-}</b><br>
@@ -144,7 +144,7 @@
 {-/if-}
 {-***** REGINFO: Show Region Info - CONTENT SECTION *****-}
 {-if $ctl_showreg || $ctl_reginfo-}
- <table border=0 style="width:550px; font-family:Lucida Grande, Verdana; font-size:10px;">
+ <table border=0 style="width:700px; font-family:Lucida Grande, Verdana; font-size:10px;">
   <tr>
 	<td valign="center"><img src="region.php?r={-$reg-}&view=logo"></td>
 	<td valign="top">
@@ -196,8 +196,8 @@
   </tr>
   <tr>
    <td colspan="2">
-	<a href="javascript:void(null)" onClick="$('info').style.display='block';">More info</a>
-	<div id="info" style="display:none" align="justify">
+<!--	<a href="javascript:void(null)" onClick="$('info').style.display='block';">More info</a>-->
+	<div id="info" style="height:300px" class="dwin" align="justify">
  {-foreach name=info key=k item=i from=$info-}
   {-if $i != ""-}
 	<b>{-$k-}</b><br>{-$i-}<br>
