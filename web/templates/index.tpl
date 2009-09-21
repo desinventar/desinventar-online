@@ -98,6 +98,7 @@
         items: [
             {id:'mwww', text: '{-#mwebsite#-}',	handler: onMenuItem  },
             {id:'mmtg', text: '{-#hmoreinfo#-}', handler: onMenuItem  },
+            {id:'mdoc', text: '{-#hotherdoc#-}', handler: onMenuItem  },
             {id:'mabo', text: '{-#mabout#-}', handler: onMenuItem  }]
       });
 	  
@@ -237,7 +238,11 @@
 				window.open('http://www.desinventar.org', '', '');
 			break;
 			case "mmtg":
-				runWin('doc.php?m=metguide', 'doc');
+				window.open('http://www.desinventar.org/{-if $lg == "spa"-}es{-else-}en{-/if-}/methodology', '', '');
+				//runWin('doc.php?m=metguide', 'doc');
+			break;
+			case "mdoc":
+				window.open('http://www.desinventar.org/{-if $lg == "spa"-}es{-else-}en{-/if-}/software', '', '');
 			break;
 		}
       }
@@ -976,7 +981,7 @@
 </head>
 <body>
  <div id="loading-mask"></div>
- <div id="loading"><div class="loading-indicator">Loading... a moment please</div></div>
+ <div id="loading"><div class="loading-indicator">Loading...</div></div>
  <div id="north">
 	<div id="toolbar"></div>
  </div>
@@ -1914,19 +1919,28 @@
 		  </div>
 		 </td>
 		 <td align="center">
-		  <input type="button" id="<" value="<" class="disabled" disabled onClick="$('CusQry').value += this.value; $('CusQry').focus();">
-		  <input type="button" id=">" value=">" class="disabled" disabled onClick="$('CusQry').value += this.value; $('CusQry').focus();">
-		  <input type="button" id="=" value="=" class="disabled" disabled onClick="$('CusQry').value += this.value; $('CusQry').focus();"><br>
-		  <input type="button" id="<>" value="<>" class="disabled" disabled onClick="$('CusQry').value += this.value; $('CusQry').focus();">
-		  <input type="button" id="LIKE '%%'" value="{-#tlike#-}" class="disabled" disabled onClick="$('CusQry').value += this.id; $('CusQry').focus();">
-		  <input type="button" id="=-1" value="{-#teffhav#-}" class="disabled" disabled onClick="$('CusQry').value += this.id; $('CusQry').focus();">
-		  <input type="button" id="=0" value="{-#teffhavnot#-}" class="disabled" disabled onClick="$('CusQry').value += this.id; $('CusQry').focus();">
-		  <input type="button" id="=-2" value="{-#teffdontknow#-}" class="disabled" disabled onClick="$('CusQry').value += this.id; $('CusQry').focus();">
+		  <input type="button" id="<" value="<" class="disabled" disabled 
+			onClick="$('CusQry').value += this.value; $('CusQry').focus();" onMouseOver="showtip('{-#taqlessthan#-}');">
+		  <input type="button" id=">" value=">" class="disabled" disabled 
+			onClick="$('CusQry').value += this.value; $('CusQry').focus();" onMouseOver="showtip('{-#taqgreathan#-}');">
+		  <input type="button" id="=" value="=" class="disabled" disabled 
+			onClick="$('CusQry').value += this.value; $('CusQry').focus();" onMouseOver="showtip('{-#taqequalto#-}');"><br>
+		  <input type="button" id="<>" value="<>" class="disabled" disabled 
+			onClick="$('CusQry').value += this.value; $('CusQry').focus();" onMouseOver="showtip('{-#taqnoteqto#-}');">
+		  <input type="button" id="LIKE '%%'" value="{-#tlike#-}" class="disabled" disabled 
+			onClick="$('CusQry').value += this.id; $('CusQry').focus();" onMouseOver="showtip('{-#taqlike#-}');">
+		  <input type="button" id="=-1" value="{-#teffhav#-}" class="disabled" disabled 
+			onClick="$('CusQry').value += this.id; $('CusQry').focus();" onMouseOver="showtip('{-#taqwere#-}');">
+		  <input type="button" id="=0" value="{-#teffhavnot#-}" class="disabled" disabled 
+			onClick="$('CusQry').value += this.id; $('CusQry').focus();" onMouseOver="showtip('{-#taqwerent#-}');">
+		  <input type="button" id="=-2" value="{-#teffdontknow#-}" class="disabled" disabled 
+			onClick="$('CusQry').value += this.id; $('CusQry').focus();" onMouseOver="showtip('{-#taqdntknow#-}');">
 		  <br>
 		  <input type="button" value=" (" onClick="$('CusQry').value += this.value;">
 		  <input type="button" value=") " onClick="$('CusQry').value += this.value;">
-		  <input type="button" value=" AND " onClick="$('CusQry').value += this.value;">
-		  <input type="button" value=" OR " onClick="$('CusQry').value += this.value;"><br><br>
+		  <input type="button" value=" AND " onClick="$('CusQry').value += this.value;" onMouseOver="showtip('{-#taqandopt#-}')">
+		  <input type="button" value=" OR " onClick="$('CusQry').value += this.value;" onMouseOver="showtip('{-#taqoropt#-}')">
+		  <br><br>
 		  <input type="button" value="{-#tclean#-}" onClick="$('CusQry').value = '';">
 		 </td>
 		</tr>
