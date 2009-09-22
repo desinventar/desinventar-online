@@ -51,16 +51,16 @@ function iserror ($val) {
 	
 function showerror ($val) {
 	switch ($val) {
-		case ERR_UNKNOWN_ERROR:		$error = "Desconocido"; break;
-		case ERR_INVALID_COMMAND:	$error = "Comando inv&aacute;lido"; break;
-		case ERR_OBJECT_EXISTS:		$error = "Objeto ya existe"; break;
-		case ERR_NO_DATABASE:			$error = "Sin conexi&oacute;n a la BD"; break;
-		case ERR_INVALID_PASSWD: 	$error = "Clave inv&aacute;lida"; break;
-		case ERR_ACCESS_DENIED: 	$error = "Acceso denegado a Usuario"; break;
-		case ERR_OBJECT_NOT_FOUND:$error = "Objeto no funciona"; break;
-		case ERR_CONSTRAINT_FAIL:	$error = "Permisos insuficientes"; break;
-		case ERR_NO_CONNECTION:		$error = "Sin conexi&oacute;n al Sistema"; break;
-		default: 									$error = "No codificado"; break;
+		case ERR_UNKNOWN_ERROR:     $error = "Desconocido"; break;
+		case ERR_INVALID_COMMAND:   $error = "Comando inv&aacute;lido"; break;
+		case ERR_OBJECT_EXISTS:     $error = "Objeto ya existe"; break;
+		case ERR_NO_DATABASE:       $error = "Sin conexi&oacute;n a la BD"; break;
+		case ERR_INVALID_PASSWD:    $error = "Clave inv&aacute;lida"; break;
+		case ERR_ACCESS_DENIED:     $error = "Acceso denegado a Usuario"; break;
+		case ERR_OBJECT_NOT_FOUND:  $error = "Objeto no funciona"; break;
+		case ERR_CONSTRAINT_FAIL:   $error = "Permisos insuficientes"; break;
+		case ERR_NO_CONNECTION:     $error = "Sin conexi&oacute;n al Sistema"; break;
+		default:                    $error = "No codificado"; break;
 	}
 	$res = "Error: $error";
 	// Very Serious Errors inmediatly notify to Portal Administrator.. 
@@ -112,7 +112,7 @@ $time_start = microtime_float();
 // using with PHP Command Line 
 if (isset($_SERVER["HTTP_HOST"])) {
 	// 2009-09-16 (jhcaiced) Autoconfigure software directory
-	$_SERVER["DI8_WEB"] = dirname($_SERVER['SCRIPT_FILENAME']);
+	$_SERVER["DI8_WEB"] = dirname(dirname(__FILE__));
 	// Online Modes (HTTP)
 	if (isset($_SERVER["WINDIR"])) {
 		// Running on a Windows Server
