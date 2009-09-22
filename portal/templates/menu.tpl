@@ -145,19 +145,19 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect4" style="display:none;">
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="showDatabaseInfo('GCARG');">Argentina</a>
+					<a href="javascript:void(null);" onclick="showRegionInfo('GCARG');">Argentina</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="showDatabaseInfo('GCBOL');">{-#tcountryBOL#-}</a>
+					<a href="javascript:void(null);" onclick="showRegionInfo('GCBOL');">{-#tcountryBOL#-}</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="showDatabaseInfo('GCPAR');">Paraguay</a>
+					<a href="javascript:void(null);" onclick="showRegionInfo('GCPAR');">Paraguay</a>
 				</td>
 			</tr>
 			<tr>
@@ -178,7 +178,7 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect5" style="display:none;">
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="showDatabaseInfo('MEXICO');">México</a>
+					<a href="javascript:void(null);" onclick="showRegionInfo('MEXICO');">México</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -195,7 +195,7 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect7" style="display:none;">
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="showDatabaseInfo('COLCALI');">Cali - {-#tcountryCOL#-}</a>
+					<a href="javascript:void(null);" onclick="showRegionInfo('COLCALI');">Cali - {-#tcountryCOL#-}</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -215,14 +215,14 @@
 			<tr><td colspan="3"><img src="images/p_ini.gif" width="133" height="5"></td></tr>
 			<tr>
 				<td class="pais" colspan="3">
-					<a href="javascript:void(null)" onclick="showDatabaseInfo('CAN)">{-#treg6#-}</a>
+					<a href="javascript:void(null)" onclick="showRegionInfo('DESINV-1249040429-can_subregion_andina')">{-#treg6#-}</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_fin.gif" width="133" height="5"></td></tr>
 			<tr><td colspan="3"><img src="images/p_ini.gif" width="133" height="5"></td></tr>
 			<tr>
 				<td class="pais" colspan="3">
-					<a href="javascript:void(null)" onclick="showDatabaseInfo('GRANCHACO')">{-#treg8#-}</a>
+					<a href="javascript:void(null)" onclick="showRegionInfo('DESINV-1249126759-subregion_gran_chaco')">{-#treg8#-}</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_fin.gif" width="133" height="5"></td></tr>

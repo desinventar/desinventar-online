@@ -25,7 +25,10 @@
 			$("#pagecontent").load('{-$di_url-}', { cmd: 'searchdb', searchdbquery: CountryIsoCode, searchbycountry : searchByCountry });
 		};
 		
-		function showDatabaseInfo(RegionId) {
+		function showRegionInfo(RegionId) {
+			$("#pagemap").hide();
+			$("#pagetitle").html('');
+			$("#pagecontent").show().load('{-$di_url-}', { cmd:'getRegionInfo', RegionId : RegionId });
 		};
 		
 		function showMap() {
