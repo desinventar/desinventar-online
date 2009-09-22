@@ -1,12 +1,12 @@
-<script type="text/javascript" language="javascript">
+<script type="text/javascript">
 	// personalization List menu..
 	function displayList(elem) {
 		lst = 7;
 		for (i=1; i <= lst; i++) {
 			if (i == elem)
-				$("sect"+ i).style.display = 'block';
+				$("#sect"+ i).show();
 			else
-				$("sect"+ i).style.display = 'none';
+				$("#sect"+ i).hide();
 		}
 	} //function
 </script>
@@ -18,13 +18,13 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 			<tr>
 				<td><img src="images/p_paises1.gif" width=5 height=16></td>
-				<td width="32px" bgcolor="#fcc700">{-#tcountries#-}</td>
+				<td width="32px" bgcolor="#fcc700">{-#di_databases#-}</td>
 				<td><img src="images/p_paises3.gif" width=73 height=16></td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_ini.gif" width="133" height="5"></td></tr>
 			<tr>
 				<td class="paisel" colspan="3">
-					<a href="javascript:void(null);" onClick="displayList('6');">{-#treg6#-}</a>
+					<a href="javascript:void(null);" onClick="displayList('6');">{-#di_andeansubregion#-}</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -32,31 +32,31 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect6">
 			<tr>
 				<td class="pais">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'c=BOL');">{-#tcountryBOL#-}</a>
+					<a href="javascript:void(null);" onclick="updateDatabaseList('BOL',true);">{-#country_BOL#-}</a>
 				</td>
 			</tr>
 			<tr><td><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 			<tr>
 				<td class="pais">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'c=COL');">{-#tcountryCOL#-}</a>
+					<a href="javascript:void(null);" onclick="updateDatabaseList('COL',true);">{-#tcountryCOL#-}</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 			<tr>
 				<td class="pais">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'c=ECU');">{-#tcountryECU#-}</a>
+					<a href="javascript:void(null);" onclick="updateDatabaseList('ECU',true);">{-#tcountryECU#-}</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'c=PER');">Perú</a>
+					<a href="javascript:void(null);" onclick="updateDatabaseList('PER', true);">Perú</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'c=VEN');">Venezuela</a>
+					<a href="javascript:void(null);" onclick="updateDatabaseList('VEN',true);">Venezuela</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -74,7 +74,7 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect1" style="display:none;">
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=INORISSA');">India - Orissa</a>
+					<a href="javascript:void(null);" onclick="showDatabaseInfo('INORISSA');">India - Orissa</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -91,19 +91,19 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect2" style="display:none;">
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=COSTARICA');">Costa Rica</a>
+					<a href="javascript:void(null);" onclick="showDatabaseInfo('COSTARICA');">Costa Rica</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=SALVADOR');">El Salvador</a>
+					<a href="javascript:void(null);" onclick="showDatabaseInfo('SALVADOR');">El Salvador</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=PANAMA');">Panamá</a>
+					<a href="javascript:void(null);" onclick="showDatabaseInfo('PANAMA');">Panamá</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -121,13 +121,13 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect3" style="display:none;">
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'c=ARG');">Argentina</a>
+					<a href="javascript:void(null);" onclick="updateDatabaseList('ARG',true);">Argentina</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=PARAGUAY');">Paraguay</a>
+					<a href="javascript:void(null);" onclick="showDatabaseInfo('PARAGUAY');">Paraguay</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -145,19 +145,19 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect4" style="display:none;">
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=GCARG');">Argentina</a>
+					<a href="javascript:void(null);" onclick="showDatabaseInfo('GCARG');">Argentina</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=GCBOL');">{-#tcountryBOL#-}</a>
+					<a href="javascript:void(null);" onclick="showDatabaseInfo('GCBOL');">{-#tcountryBOL#-}</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=GCPAR');">Paraguay</a>
+					<a href="javascript:void(null);" onclick="showDatabaseInfo('GCPAR');">Paraguay</a>
 				</td>
 			</tr>
 			<tr>
@@ -178,7 +178,7 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect5" style="display:none;">
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=MEXICO');">México</a>
+					<a href="javascript:void(null);" onclick="showDatabaseInfo('MEXICO');">México</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -195,7 +195,7 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect7" style="display:none;">
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="updateList('pagecontent', 'region.php', 'r=COLCALI');">Cali - {-#tcountryCOL#-}</a>
+					<a href="javascript:void(null);" onclick="showDatabaseInfo('COLCALI');">Cali - {-#tcountryCOL#-}</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -215,14 +215,14 @@
 			<tr><td colspan="3"><img src="images/p_ini.gif" width="133" height="5"></td></tr>
 			<tr>
 				<td class="pais" colspan="3">
-					<a href="javascript:void(null)" onclick="updateList('pagecontent', 'region.php', 'r=CAN&v=true')">{-#treg6#-}</a>
+					<a href="javascript:void(null)" onclick="showDatabaseInfo('CAN)">{-#treg6#-}</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_fin.gif" width="133" height="5"></td></tr>
 			<tr><td colspan="3"><img src="images/p_ini.gif" width="133" height="5"></td></tr>
 			<tr>
 				<td class="pais" colspan="3">
-					<a href="javascript:void(null)" onclick="updateList('pagecontent', 'region.php', 'r=GRANCHACO&v=true')">{-#treg8#-}</a>
+					<a href="javascript:void(null)" onclick="showDatabaseInfo('GRANCHACO')">{-#treg8#-}</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_fin.gif" width="133" height="5"></td></tr>
