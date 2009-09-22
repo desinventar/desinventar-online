@@ -9,6 +9,8 @@ define('VERSION', '8.2.0.51');
 
 //ob_start( 'ob_gzhandler' );
 require_once('include/loader.php');
+require_once('include/diregion.class.php');
+
 $post = $_POST;
 $get  = $_GET;
 
@@ -49,6 +51,14 @@ case 'getCountryName':
 	$CountryIso = getParameter('CountryIso','');
 	$CountryName = $d->getCountryName($CountryIso);
 	print $CountryName;
+	break;
+case 'getRegionInfo':
+	$RegionId = getParameter('RegionId', '');
+	$r = new DIRegion($us, $RegionId);
+	$RegionInfo = array();
+	$RegionInfo['RegionId'] = $RegionId;
+	$t->assign('RegionInfo', $r->oField);
+	$t->display('regioninfo.tpl');
 	break;
 default:
 	if (isset($get['r']) && !empty($get['r'])) {
