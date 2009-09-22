@@ -5,18 +5,29 @@
 */
 
 // Load required Functions
-require_once('../web/include/loader.php');
+	define("SMARTYDIR", "/usr/share/php/Smarty");
+	define("SMTY_DIR", "/var/cache/Smarty"); // Smarty temp dir
+	/* Smarty configuration */
+	require_once(SMARTYDIR . '/Smarty.class.php');
+	/* SMARTY template */
+	$t = new Smarty();
+	$t->debugging = false;
+	$t->force_compile = true;
+	$t->caching = false;
+	$t->compile_check = true;
+	$t->cache_lifetime = -1;
+	$t->config_dir = 'include';
+	$t->template_dir = 'templates';
+	$t->compile_dir = SMTY_DIR;
+	$t->left_delimiter = '{-';
+	$t->right_delimiter = '-}';
 
-$t->config_dir = 'include';
+	$t->config_dir = 'include';
 
-$d = new Query();
-
-$t->assign ("DIver", "8.2.0.50");
-$t->assign ("DImode", MODE);
-// 2009-01-20 (jhcaiced) At this point, loader.php should have
-// created or loaded the UserSession in the $us variable
-$us->awake();
-$t->assign("stat", "on");
+	$t->assign ("DIver", "8.2.0.50");
+	$t->assign ("DImode", "online");
+	
+	$t->assign("stat", "on");
 
 // PAGES: Show Information for selected Page from top menu
 if (isset($_GET['p'])) {
@@ -39,14 +50,16 @@ if (isset($_GET['p'])) {
 	}
 } else {
 	// Default portal: init session and get country list
-	$t->assign ("menu", $d->queryLabelsFromGroup('MainPage', $lg));
+	//$t->assign ("menu", $d->queryLabelsFromGroup('MainPage', $lg));
 	// load languages available list
-	$t->assign ("lglst", $d->loadLanguages(1));
+	//$t->assign ("lglst", $d->loadLanguages(1));
 	// load available countries with databases
 	$ctlst = array();
+	/*
 	$result = $d->core->query("SELECT CountryIso FROM Region WHERE RegionStatus=3 GROUP BY CountryIso");
 	while ($row = $result->fetch(PDO::FETCH_OBJ))
 		$ctlst[] = $row->CountryIso;
+	*/
 	$t->assign ("ctlst", $ctlst);
 }
 $t->display ("index.tpl");

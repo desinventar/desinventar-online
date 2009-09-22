@@ -1,4 +1,3 @@
-{-config_load file=`$lg`.conf section="di8_web"-}
 {-**** SHOW PAGES (CONTENT) ****-}
 {-if $ctl_pages-}
  {-if $page == "MainPageDI8" || $page == "MainPagewhatis" || $page == "MainPagecredits" || $page == "MainPagecontactus"-}
