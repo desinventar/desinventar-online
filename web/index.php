@@ -4,6 +4,9 @@
  (c) 1999-2009 Corporacion OSSO
 */
 
+// This is the version of the software
+define('VERSION', '8.2.0.51');
+
 //ob_start( 'ob_gzhandler' );
 require_once('include/loader.php');
 $post = $_POST;
@@ -16,13 +19,14 @@ if ($cmd == '') {
 		$cmd = 'listdb';
 	}
 }
-fb('Command : ' . $cmd);
-fb('Region  : ' . $r);
 
 // Default Template Values
 $t->assign('request_uri', $_SERVER['REQUEST_URI']);
 
 switch ($cmd) {
+case 'getversion':
+	print VERSION;
+	break;
 case 'listdb':
 	// Direct access returns a list of public regions on this server
 	$d = new Query();
