@@ -277,10 +277,10 @@
 	
 	function runWin(url, name) {
 		var win = '';
-		var w	= 1000;
+		var w	= 1020;
 		var h	= 700;
 		if (name == 'desinventar' || name == 'desconsultar') {
-			w = 1000;
+			w = 1020;
 			h = 700;
 		}
 		if (!win.closed && win.location) {

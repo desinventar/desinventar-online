@@ -977,6 +977,40 @@
 		  text-align: center;
 		  height:     auto;
 		}
+		button {
+			border: 0 none;
+			cursor: pointer;
+			font-family:arial,tahoma,helvetica,cursive; font-size:12px; 
+			padding: 0 15px 0 0;
+			text-align: center;
+			height: 24px;
+			line-height: 24px;
+			width: auto;
+		}
+		button.rounded {
+			background: transparent url( images/bright_off.png ) no-repeat scroll right top;
+			clear: left;
+		}
+		button span {
+			display: block;
+			padding: 0 0 0 15px;
+			position: relative;
+			white-space: nowrap;
+			height: 24px;
+			line-height: 24px;
+		}
+		button.rounded span {
+			background: transparent url( images/bleft_off.png ) no-repeat scroll left top;
+		}
+		button.rounded:hover {
+			background: transparent url( images/bright_on.png ) no-repeat scroll right top;
+		}
+		button.rounded:hover span {
+			background: transparent url( images/bleft_on.png ) no-repeat scroll left top;
+		}
+		button::-moz-focus-inner {
+			border: none;
+		}
 	</style>
 </head>
 <body>
@@ -1013,7 +1047,8 @@
 {-if $ctl_qryres-}
 <!--	SECTION : DATA CONFIGURATION
 	============================ -->
-        <input type="button" id="dat-btn" value="{-#bdata#-}" ext:qtip="{-#tdatamsg#-}" class="bb btn">
+        <!--<input type="button" id="dat-btn" value="{-#bdata#-}" ext:qtip="{-#tdatamsg#-}" class="bb btn">-->
+		<button id="dat-btn" class="rounded" ext:qtip="{-#tdatamsg#-}"><span>{-#bdata#-}</span></button>
         <div id="dat-win" class="x-hidden">
           <div class="x-window-header">{-#bdata#-}</div>
           <div id="dat-cfg">
@@ -1085,8 +1120,8 @@
 <!--	END DATA SECTION -->
 <!--	SECTION : THEMATICMAP CONFIGURATION
 	==================================== -->
-        <input type="button" id="map-btn" ext:qtip="{-#tthematicmsg#-}"
-           value="{-#bthematic#-}" {-if !$ctl_showmap-}style="display:none;"{-/if-} class="bb btn">
+<!--        <input type="button" id="map-btn" ext:qtip="{-#tthematicmsg#-}" value="{-#bthematic#-}" {-if !$ctl_showmap-}style="display:none;"{-/if-} class="bb btn">-->
+		<button id="map-btn" class="rounded" ext:qtip="{-#tthematicmsg#-}"><span>{-#bthematic#-}</span></button>
         <div id="map-win" class="x-hidden">
           <div class="x-window-header">{-#bthematic#-}</div>
           <div id="map-cfg">
@@ -1192,7 +1227,8 @@
 <!--	END MAP SECTION -->
 <!--	SECTION : GRAPHIC CONFIGURATION
 	============================== -->
-		<input type="button" id="grp-btn" value="{-#bgraphic#-}" ext:qtip="{-#tgraphicmsg#-}" class="bb btn">
+<!--		<input type="button" id="grp-btn" value="{-#bgraphic#-}" ext:qtip="{-#tgraphicmsg#-}" class="bb btn">-->
+		<button id="grp-btn" class="rounded" ext:qtip="{-#tgraphicmsg#-}"><span>{-#bgraphic#-}</span></button>
 		<div id="grp-win" class="x-hidden">
 		  <div class="x-window-header">{-#bgraphic#-}</div>
 		  <div id="grp-cfg">
@@ -1376,7 +1412,8 @@
 <!--	END GRAPHIC SECTION  -->
 <!--	SECTION : STATISTIC CONFIGURATION
 	============================== -->
-        <input type="button" id="std-btn" value="{-#bstatistic#-}" ext:qtip="{-#tstatisticmsg#-}" class="bb btn">
+<!--        <input type="button" id="std-btn" value="{-#bstatistic#-}" ext:qtip="{-#tstatisticmsg#-}" class="bb btn">-->
+		<button id="std-btn" class="rounded" ext:qtip="{-#tstatisticmsg#-}"><span>{-#bstatistic#-}</span></button>
         <div id="std-win" class="x-hidden">
           <div class="x-window-header">{-#bstatistic#-}</div>
           <div id="std-cfg">
