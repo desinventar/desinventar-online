@@ -22,20 +22,15 @@
 	$t->left_delimiter = '{-';
 	$t->right_delimiter = '-}';
 
-	$t->assign ("DIver", "8.2.0.50");
-	$t->assign ("DImode", "online");
-	
 	$t->assign("stat", "on");
 
 // PAGES: Show Information for selected Page from top menu
 if (isset($_GET['p'])) {
-	fb('Set ' . $_GET['p']);
 	if ($_GET['p'] == 'init') {
 		if (file_exists('default/index.php')) {
 			include("default/index.php");
 			exit();
 		} else {
-			fb('regionlist');
 			$reglst = array();
 			$result = $d->core->query("SELECT RegionId, RegionLabel FROM Region WHERE RegionStatus=3 ORDER BY RegionLabel, RegionOrder");
 			while ($row = $result->fetch(PDO::FETCH_OBJ))
@@ -44,13 +39,11 @@ if (isset($_GET['p'])) {
 			$t->assign ("reglst", $reglst);
 		}
 	} else {
-		fb('init');
 		$t->assign ("ctl_pages", true);
 		$t->assign ("menu", $d->queryLabelsFromGroup('MainPage', $lg));
 		$t->assign ("page", $_GET['p']);
 	}
 } else {
-	fb('Unset');
 	// Default portal: init session and get country list
 	//$t->assign ("menu", $d->queryLabelsFromGroup('MainPage', $lg));
 	// load languages available list
