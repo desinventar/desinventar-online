@@ -16,13 +16,13 @@
 		function updateDatabaseList(CountryIsoCode,searchByCountry) {
 			$("#pagemap").hide();
 			$("#pagecontent").show();
-			$.get('/di8-devel/', 
+			$.get('{-$di_url-}', 
 				{cmd: 'getCountryName', CountryIso : CountryIsoCode },
 				function(data) { 
 					$("#pagetitle").html('<h3>' + data + '</h3>');
 				}
 			);
-			$("#pagecontent").load('/di8-devel/', { cmd: 'searchdb', searchdbquery: CountryIsoCode, searchbycountry : searchByCountry });
+			$("#pagecontent").load('{-$di_url-}', { cmd: 'searchdb', searchdbquery: CountryIsoCode, searchbycountry : searchByCountry });
 		};
 		
 		function showDatabaseInfo(RegionId) {
@@ -37,7 +37,7 @@
 		// Startup function (on load)
 		$(function() {
 			// Show current software version
-			$("#version").load('/di8-devel/', { cmd: 'getversion' });			
+			$("#version").load('{-$di_url-}', { cmd: 'getversion' });			
 		});
 	</script>
 	<title>DesInventar</title>

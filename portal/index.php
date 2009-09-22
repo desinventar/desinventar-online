@@ -3,18 +3,23 @@
  DesInventar8 - http://www.desinventar.org
  (c) 1999-2009 Corporacion OSSO
 */
-
 	require_once('./include/fb.php');
 	require_once('./include/common.php');
+
+	// Configure DI8 (web) application location
+	if (isset($_SERVER["REDIRECT_DI8_URL"])) {
+		$_SERVER["DI8_URL"] = $_SERVER["REDIRECT_DI8_URL"];
+	}
+	$di_url = $_SERVER["DI8_URL"];
 	
 	// Auto detect language for portal interface
 	$lang = getBrowserClientLanguage();
 	
-	// Load required Functions
+	/* Smarty configuration */
 	define("SMARTYDIR", "/usr/share/php/Smarty");
 	define("SMTY_DIR", "/var/cache/Smarty"); // Smarty temp dir
-	/* Smarty configuration */
 	require_once(SMARTYDIR . '/Smarty.class.php');
+
 	/* SMARTY template */
 	$t = new Smarty();
 	$t->debugging = false;
@@ -28,8 +33,9 @@
 	$t->left_delimiter = '{-';
 	$t->right_delimiter = '-}';
 
-	$t->assign("stat", "on");
-	$t->assign("lang", $lang);
+	$t->assign("stat"  , "on");
+	$t->assign("lang"  , $lang);
+	$t->assign("di_url", $di_url);
 	// Available languages
 
 	$t->display ("index.tpl");
