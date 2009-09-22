@@ -74,7 +74,7 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect1" style="display:none;">
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="showDatabaseInfo('INORISSA');">India - Orissa</a>
+					<a href="javascript:void(null);" onclick="updateDatabaseList('IND');">India - Orissa</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -91,19 +91,19 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect2" style="display:none;">
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="showDatabaseInfo('COSTARICA');">Costa Rica</a>
+					<a href="javascript:void(null);" onclick="updateDatabaseList('CRI');">Costa Rica</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="showDatabaseInfo('SALVADOR');">El Salvador</a>
+					<a href="javascript:void(null);" onclick="updateDatabaseList('SLV');">El Salvador</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="showDatabaseInfo('PANAMA');">Panamá</a>
+					<a href="javascript:void(null);" onclick="updateDatabaseList('PAN');">Panamá</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -127,7 +127,7 @@
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="showDatabaseInfo('PARAGUAY');">Paraguay</a>
+					<a href="javascript:void(null);" onclick="updateDatabaseList('PAR');">Paraguay</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
