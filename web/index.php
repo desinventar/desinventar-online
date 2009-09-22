@@ -57,7 +57,7 @@ case 'getRegionInfo':
 	$r = new DIRegion($us, $RegionId);
 	$RegionInfo = array();
 	$RegionInfo['RegionId'] = $RegionId;
-	$t->assign('RegionInfo', $r->oField);
+	$t->assign('RegionInfo', $r->getDBInfo());
 	$t->display('regioninfo.tpl');
 	break;
 default:
