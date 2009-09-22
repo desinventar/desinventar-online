@@ -54,7 +54,7 @@
 	<tr valign="top">
 		<td style="background:url(images/dionl.jpg);width:462px;height:92px">
 			<div id="version"></div>
-			<div id="slogan">{-#di_slogan#-}<br />{-#di_copyright#-}</div>
+			<div id="slogan">{-#di_slogan#-}</div>
 		</td>
 		<td>
 			<img src="images/11.jpg" width=345 height=92 border=0>

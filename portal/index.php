@@ -3,8 +3,13 @@
  DesInventar8 - http://www.desinventar.org
  (c) 1999-2009 Corporacion OSSO
 */
-	$lang = 'por';
-	require_once('../web/include/fb.php');
+
+	require_once('./include/fb.php');
+	require_once('./include/common.php');
+	
+	// Auto detect language for portal interface
+	$lang = getBrowserClientLanguage();
+	
 	// Load required Functions
 	define("SMARTYDIR", "/usr/share/php/Smarty");
 	define("SMTY_DIR", "/var/cache/Smarty"); // Smarty temp dir
@@ -25,40 +30,8 @@
 
 	$t->assign("stat", "on");
 	$t->assign("lang", $lang);
+	// Available languages
 
-// PAGES: Show Information for selected Page from top menu
-if (isset($_GET['p'])) {
-	if ($_GET['p'] == 'init') {
-		if (file_exists('default/index.php')) {
-			include("default/index.php");
-			exit();
-		} else {
-			$reglst = array();
-			$result = $d->core->query("SELECT RegionId, RegionLabel FROM Region WHERE RegionStatus=3 ORDER BY RegionLabel, RegionOrder");
-			while ($row = $result->fetch(PDO::FETCH_OBJ))
-				$reglst[$row->RegionId] = $row->RegionLabel;
-			$t->assign ("ctl_init", true);
-			$t->assign ("reglst", $reglst);
-		}
-	} else {
-		$t->assign ("ctl_pages", true);
-		$t->assign ("menu", $d->queryLabelsFromGroup('MainPage', $lang));
-		$t->assign ("page", $_GET['p']);
-	}
-} else {
-	// Default portal: init session and get country list
-	//$t->assign ("menu", $d->queryLabelsFromGroup('MainPage', $lang));
-	// load languages available list
-	//$t->assign ("lglst", $d->loadLanguages(1));
-	// load available countries with databases
-	$ctlst = array();
-	/*
-	$result = $d->core->query("SELECT CountryIso FROM Region WHERE RegionStatus=3 GROUP BY CountryIso");
-	while ($row = $result->fetch(PDO::FETCH_OBJ))
-		$ctlst[] = $row->CountryIso;
-	*/
-	$t->assign ("ctlst", $ctlst);
-}
-$t->display ("index.tpl");
+	$t->display ("index.tpl");
 
 </script>
