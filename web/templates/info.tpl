@@ -23,15 +23,16 @@
 			<input id="infocmd" name="infocmd" value="update" type="hidden">
 			<table border=0 cellspacing=0 cellpadding=0>
 {-foreach name=info key=key item=item from=$info-}
+{-assign var="inf" value=DB$key-}
 			 <tr>
 			  <td>
-			   <a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBRegionDesc[2]-}')">
-			   <b style="color:darkred;">{-$key-}</b><span>{-$dic.DBRegionDesc[1]-}</span></a>
+			   <a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.$inf[2]-}')">
+			   <b style="color:darkred;">{-$dic.$inf[0]-}</b><span>{-$dic.$inf[1]-}</span></a>
 			  </td>
 			  <td>
 {-if $item[1] == "TEXT"-}
 			   <textarea id="{-$key-}" name="{-$key-}" tabindex="1" {-$ro-} style="width:350px; height:40px;"
-				onFocus="showtip('{-$dic.DBRegionDesc[2]-}')">{-$item[0]-}</textarea>
+				onFocus="showtip('{-$dic.$inf[2]-}')">{-$item[0]-}</textarea>
 {-elseif $item[1] == "VARCHAR"-}
 			   <input id="{-$key-}" name="{-$key-}" type="text" class="line" style="width:350px;" value="{-$item[0]-}">
 {-elseif $item[1] == "NUMBER"-}
