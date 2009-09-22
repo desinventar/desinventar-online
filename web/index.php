@@ -38,7 +38,8 @@ case 'listdb':
 case 'searchdb':
 	$d = new Query();
 	$searchdbquery = getParameter('searchdbquery', '');
-	$reglst = $d->searchDB($searchdbquery);
+	$searchbycountry = getParameter('searchbycountry', '');
+	$reglst = $d->searchDB($searchdbquery, $searchbycountry);
 	$t->assign('ctl_showregionlist', true);
 	$t->assign('regionlist', $reglst);
 	$t->display('regionlist.tpl');
