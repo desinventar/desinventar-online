@@ -1,3 +1,5 @@
+{-config_load file="eng.conf" section="portal"-}
+{-config_load file=`$lang`.conf section="portal"-}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -11,29 +13,32 @@
 	<!-- <script type="text/javascript" src="include/menu.js"></script> -->
 	{-include file="jquery.tpl" -}
 	<script type="text/javascript" language="javascript">
-	function updateDatabaseList(CountryIsoCode,searchByCountry) {
-		$("#pagemap").hide();
-		$("#pagecontent").show();
-		$.get('/di8-devel/', 
-			{cmd: 'getCountryName', CountryIso : CountryIsoCode },
-			function(data) { 
-				$("#pagetitle").html('<h3>' + data + '</h3>');
-			}
-		);
-		$("#pagecontent").load('/di8-devel/', { cmd: 'searchdb', searchdbquery: CountryIsoCode, searchbycountry : searchByCountry });
-	};
-
-	// Startup function (on load)
-	$(function() {
-		// Show current software version
-		$("#version").load('/di8-devel/', { cmd: 'getversion' });
+		function updateDatabaseList(CountryIsoCode,searchByCountry) {
+			$("#pagemap").hide();
+			$("#pagecontent").show();
+			$.get('/di8-devel/', 
+				{cmd: 'getCountryName', CountryIso : CountryIsoCode },
+				function(data) { 
+					$("#pagetitle").html('<h3>' + data + '</h3>');
+				}
+			);
+			$("#pagecontent").load('/di8-devel/', { cmd: 'searchdb', searchdbquery: CountryIsoCode, searchbycountry : searchByCountry });
+		};
 		
-		$("#mapicon").click(function() {
+		function showDatabaseInfo(RegionId) {
+		};
+		
+		function showMap() {
 			$("#pagemap").show();
 			$("#pagecontent").hide();
 			$("#pagetitle").html('');
+		};
+
+		// Startup function (on load)
+		$(function() {
+			// Show current software version
+			$("#version").load('/di8-devel/', { cmd: 'getversion' });			
 		});
-	});
 	</script>
 	<title>DesInventar</title>
 </head>
@@ -49,7 +54,7 @@
 	<tr valign="top">
 		<td style="background:url(images/dionl.jpg);width:462px;height:92px">
 			<div id="version"></div>
-			<div id="slogan">{-#tdititle#-}</div>
+			<div id="slogan">{-#di_slogan#-}<br />{-#di_copyright#-}</div>
 		</td>
 		<td>
 			<img src="images/11.jpg" width=345 height=92 border=0>
@@ -65,7 +70,7 @@
 			<div align="right"><img src="images/23.jpg" width="305" height="13"></div>
 			<table border=0 cellpadding=0 cellspacing=0 class="menu" style="margin-top:1px">
 			<tr>
-				<td class="sel"><a href="javascript:void(null);" onclick="updateDatabaseList('pagecontent','','p=subregcan')">{-#tstartpage#-}</a></td>
+				<td class="sel"><a href="javascript:void(null);" onclick="showMap()">{-#tstartpage#-}</a></td>
 				{-foreach name=menu key=key item=item from=$menu-}
 					<td class="sel"><a href="javascript:void(null);" onclick="updateDatabaseList('pagecontent','','p={-$key-}')">{-$item[0]-}</a></td>
 				{-/foreach-}
@@ -98,17 +103,8 @@
 		</table>
 		</td>
 		<td class="centro">
-			<table>
-			<tr>
-			<td width=500px>
 			<div id="pagetitle"></div>
-			</td>
-			<td>
-				<img id="mapicon" src="images/subreg_can.jpg" style="border-style:none" width="50" height="50" />
-			</td>
-			</tr>
-			<tr>
-			<td colspan="2">
+			<br />
 			<div id="pagecontent"></div>
 			<div id="pagemap">
 				<img src="images/subreg_can.jpg" alt="" usemap="#srcan" style="border-style:none" />
@@ -126,8 +122,6 @@
 					<area shape="default" nohref="nohref" alt="" />
 				</map>
 			</div>
-			</tr>
-			</table>
 		</td>
 		<td class="der"><img src="images/bgder.gif" width=32 height=5></td>
 	</tr>

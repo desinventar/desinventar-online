@@ -3,6 +3,7 @@
  DesInventar8 - http://www.desinventar.org
  (c) 1999-2009 Corporacion OSSO
 */
+	$lang = 'por';
 	require_once('../web/include/fb.php');
 	// Load required Functions
 	define("SMARTYDIR", "/usr/share/php/Smarty");
@@ -23,6 +24,7 @@
 	$t->right_delimiter = '-}';
 
 	$t->assign("stat", "on");
+	$t->assign("lang", $lang);
 
 // PAGES: Show Information for selected Page from top menu
 if (isset($_GET['p'])) {
@@ -40,12 +42,12 @@ if (isset($_GET['p'])) {
 		}
 	} else {
 		$t->assign ("ctl_pages", true);
-		$t->assign ("menu", $d->queryLabelsFromGroup('MainPage', $lg));
+		$t->assign ("menu", $d->queryLabelsFromGroup('MainPage', $lang));
 		$t->assign ("page", $_GET['p']);
 	}
 } else {
 	// Default portal: init session and get country list
-	//$t->assign ("menu", $d->queryLabelsFromGroup('MainPage', $lg));
+	//$t->assign ("menu", $d->queryLabelsFromGroup('MainPage', $lang));
 	// load languages available list
 	//$t->assign ("lglst", $d->loadLanguages(1));
 	// load available countries with databases
