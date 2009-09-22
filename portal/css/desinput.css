@@ -1,0 +1,106 @@
+	.geo	{ 
+		background: #B7A3DF; margin-top:7px; }
+	.geoend { 
+		background-image:url(../images/geo.gif); 
+		background-repeat: no-repeat; background-position: 100% -28px; 
+		height:7px; font-size:1px; }
+	.geotxt { 
+		font:bold 14px Trebuchet MS, sans-serif; color:#000; 
+		text-align:right; padding:0px 5px; margin:0px; letter-spacing:0px; 
+		line-height:10px }
+	b.geotop, b.geotop b, b.geobot, b.geobot b { 
+		display:block; height:7px; font-size:1px; 
+		background:url(../images/geo.gif) no-repeat; }
+	b.geotop b { 
+		background-position:100% -7px; } 
+	b.geobot { 
+		background-position:0 -14px; } 
+	b.geobot b { 
+		background-position:100% -21px; }
+	.efetxt,.efetxt a { 
+		font:bold 13px Trebuchet MS, sans-serif; 
+		color:#000; text-align:right; padding:0px 5px; 
+		margin:0px; letter-spacing:0px; line-height:12px; text-decoration:none; }
+	.eve	{ 
+		background: #67AECF; margin-top:7px; }
+	.eveend { 
+		background-image:url(../images/eve.gif); background-repeat: no-repeat; 
+		background-position: 100% -28px; height:7px; font-size:1px; }
+	b.evetop, b.evetop b, b.evebot, b.evebot b { 
+		display:block; height:7px; font-size:1px; 
+		background:url(../images/eve.gif) no-repeat; }
+	b.evetop b { 
+		background-position:100% -7px; } 
+	b.evebot { 
+		background-position:0 -14px; } 
+	b.evebot b { 
+		background-position:100% -21px; }
+	.cau	{ 
+		background: #3AB852; margin-top:7px; }
+	.cauend { 
+		background-image:url(../images/cau.gif); 
+		background-repeat: no-repeat; background-position: 100% -28px; 
+		height:7px; font-size:1px; }
+	b.cautop, b.cautop b, b.caubot, b.caubot b { 
+		display:block; height:7px; font-size:1px; 
+		background:url(../images/cau.gif) no-repeat; }
+	b.cautop b { 
+		background-position:100% -7px; } 
+	b.caubot { 
+		background-position:0 -14px; } 
+	b.caubot b { 
+		background-position:100% -21px; }
+	.ama	{ 
+		background: #E4AC00; margin-top:7px; }
+	.amaend { 
+		background-image:url(../images/ama.gif); background-repeat: no-repeat; 
+		background-position: 100% -28px; height:7px; font-size:1px; }
+	b.amatop, b.amatop b, b.amabot, b.amabot b {
+		display:block; height:7px; font-size:1px; 
+		background:url(../images/ama.gif) no-repeat; }
+	b.amatop b { 
+		background-position:100% -7px; } 
+	b.amabot { 
+		background-position:0 -14px; }
+	b.amabot b { 
+		background-position:100% -21px; }
+	.bei	{ 
+		background: #F4DB9D; margin-top:7px; }
+	.beiend { 
+		background-image:url(../images/bei.gif); background-repeat: no-repeat; 
+		background-position: 100% -28px; height:7px; font-size:1px; }
+	b.beitop, b.beitop b, b.beibot, b.beibot b{ 
+		display:block; height:7px; font-size:1px; 
+		background:url(../images/bei.gif) no-repeat; }
+	b.beitop b { 
+		background-position:100% -7px; }
+	b.beibot { 
+		background-position:0 -14px; }
+	b.beibot b {
+		background-position:100% -21px; }
+  .gris {	
+		background: #fff; margin-bottom:7px; } 
+  .gris .g11 { 
+		display:block; height:7px; width:7px; font-size:1px; 
+		background:url(../images/gr.gif) no-repeat; float:left;  }
+  .gris .g12 { display:block; height:7px; width:100%; font-size:1px; background:url(../images/gr.gif) repeat-x 0 -37px;		 }
+  .gris .g13 { display:block; height:7px; width:7px; font-size:1px; background:url(../images/gr.gif) no-repeat 0 -7px;	float:right;  }
+  .gris .g31 { display:block; height:7px; width:7px; font-size:1px; background:url(../images/gr.gif) no-repeat 0 -14px; float:left;  }
+  .gris .g32 { display:block; height:7px; width:100%; font-size:1px; background:url(../images/gr.gif) repeat-x 0 -31px;		 }
+  .gris .g33 { display:block; height:7px; width:7px; font-size:1px; background:url(../images/gr.gif) no-repeat 0 -21px;	float:right;  }
+  .gconte	{	font:11px Trebuchet MS, sans-serif; color:#404040;	border-left:1px solid #c4c4c4; border-right:1px solid #c4c4c4; padding:0px 7px;  }
+
+  .amar {	background: #fff; margin-bottom:7px; } 
+  .amar .a11 { display:block; height:7px; width:7px; font-size:1px; background:url(../images/am.gif) no-repeat; float:left;  }
+  .amar .a12 { display:block; height:7px; width:100%; font-size:1px; background:url(../images/am.gif) repeat-x 0 -37px;		 }
+  .amar .a13 { display:block; height:7px; width:7px; font-size:1px; background:url(../images/am.gif) no-repeat 0 -7px;	float:right;  }
+  .amar .a31 { display:block; height:7px; width:7px; font-size:1px; background:url(../images/am.gif) no-repeat 0 -14px; float:left;  }
+  .amar .a32 { display:block; height:7px; width:100%; font-size:1px; background:url(../images/am.gif) repeat-x 0 -31px;		 }
+  .amar .a33 { display:block; height:7px; width:7px; font-size:1px; background:url(../images/am.gif) no-repeat 0 -21px;	float:right;  }
+  .aconte	{	
+		font:11px Trebuchet MS, sans-serif; color:#404040;	
+		border-left:1px solid #E4AC00; border-right:1px solid #E4AC00; 
+		padding:0px 7px;  }
+  .titular { 
+		font: 17px Trebuchet MS, sans-serif; color:#000; 
+		letter-spacing:0px; text-decoration:none;  }
