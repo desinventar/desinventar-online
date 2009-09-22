@@ -294,7 +294,7 @@
       datb.on('click', function(){
         if(!datw){
           datw = new Ext.Window({
-            el:'dat-win',  layout:'fit',  width:600, height:400, 
+            el:'dat-win',  layout:'fit',  width:650, height:400, 
             closeAction:'hide', plain: true, animCollapse: false,
             items: new Ext.Panel({
                 contentEl: 'dat-cfg', autoScroll: true }),
@@ -330,7 +330,7 @@
       stdb.on('click', function() {
         if(!stdw) {
           stdw = new Ext.Window({
-            el:'std-win',  layout:'fit',  width:600, height:400, 
+            el:'std-win',  layout:'fit',  width:650, height:400, 
             closeAction:'hide', plain: true, animCollapse: false,
             items: new Ext.Panel({
                 contentEl: 'std-cfg', autoScroll: true }),
@@ -365,7 +365,7 @@
       grpb.on('click', function() {
         if(!grpw) {
           grpw = new Ext.Window({
-            el:'grp-win',  layout:'fit',  width:600, height:400, 
+            el:'grp-win',  layout:'fit',  width:650, height:400, 
             closeAction:'hide', plain: true, animCollapse: false,
             items: new Ext.Panel({
                 contentEl: 'grp-cfg', autoScroll: true }),
@@ -397,7 +397,7 @@
       mapb.on('click', function() {
         if(!mapw) {
           mapw = new Ext.Window({
-            el:'map-win',  layout:'fit',  width:600, height:400, 
+            el:'map-win',  layout:'fit',  width:650, height:400, 
             closeAction:'hide', plain: true, animCollapse: false,
             items: new Ext.Panel({
                 contentEl: 'map-cfg', autoScroll: true }),
@@ -1288,7 +1288,7 @@
 							</select>
 						</td>
 						<td align="center">
-							<table border=1 width="120px" height="100%">
+							<table border=1 width="90%" height="100%">
 								<tr><td align="center">
 								<!--<b onMouseOver="showtip('{-$dic.GraphKind[2]-}');">{-$dic.GraphKind[0]-}</b><br>-->
 									<select id="_G+Kind" name="_G+Kind" size="3" onChange="grpSelectbyKind();"
@@ -1356,11 +1356,21 @@
 						</td>
 					</tr>
 					<tr>
-            			<td colspan=3 align="center">
-            				<p><u>{-#ghoraxis#-}:</u></p>
-							<b>{-#ghistogram#-}</b>
+						<td align="right">
+						 <table border=0 height="100%">
+						  <tr><td><p>&nbsp;</p></td></tr>
+						  <tr><td align="right"><b>{-#ghistogram#-}</b></td></tr>
+						  <tr><td align="right"><b onMouseOver="showtip('{-$dic.GraphPeriod[2]-}');">{-$dic.GraphPeriod[0]-}</b></td></tr>
+						  <tr><td align="right"><b onMouseOver="showtip('{-$dic.GraphSeaHistogram[2]-}');">{-#GHISTOANNUAL#-}</b></td></tr>
+						  <tr><td align="right"><b>{-#gcomparative#-}</b></td></tr>
+						 </table>
+						</td>
+            			<td>
+						 <table border=0 height="100%">
+						  <tr><td align="center"><p><u>{-#ghoraxis#-}:</u></p></td></tr>
+						  <tr><td>
             				<select id="_G+TypeH" onChange="grpSelectbyType('_G+TypeH');" 
-            						onMouseOver="showtip('{-$dic.GraphType[2]-}');" class="fixw">
+            						onMouseOver="showtip('{-$dic.GraphType[2]-}');" class="line">
 								<option value="" disabled></option>
 								<option value="D.DisasterBeginTime" selected>{-$dic.GraphHisTemporal[0]-}</option>
 								<option value="D.DisasterBeginTime|D.EventId">{-$dic.GraphHisEveTemporal[0]-}</option>
@@ -1369,31 +1379,29 @@
 {-/foreach-}
 								<option value="D.DisasterBeginTime|D.CauseId">{-$dic.GraphHisCauTemporal[0]-}</option>
 							</select>
-		                    <table border=0 cellpadding=0 cellspacing=0 align="center">
-		                    <tr align="center"><td>
-		                    	<b onMouseOver="showtip('{-$dic.GraphPeriod[2]-}');">{-$dic.GraphPeriod[0]-}</b><br>
-		                    	<select id="_G+Period" name="_G+Period" onChange="$('_G+Stat').value = '';"
-		                    			onMouseOver="showtip('{-$dic.GraphPeriod[2]-}');">
-		                    	<option value=""></option>
-		                    	<option value="YEAR" selected>{-#gperannual#-}</option>
-		                    	<option value="YMONTH">{-#gpermonth#-}</option>
-		                    	<option value="YWEEK">{-#gperweek#-}</option>
-		                    	<option value="YDAY">{-#gperday#-}</option>
-		                    	</select>
-		                    </td><td>
-		                    	<b onMouseOver="showtip('{-$dic.GraphSeaHistogram[2]-}');">{-#GHISTOANNUAL#-}</b><br>
-		                    	<select id="_G+Stat" name="_G+Stat" onChange="$('_G+Period').value = '';"
-		                    			onMouseOver="showtip('{-$dic.GraphSeaHistogram[2]-}');">
-		                    	<option value=""></option>
-		                    	<option value="DAY">{-#gseaday#-}</option>
-		                    	<option value="WEEK">{-#gseaweek#-}</option>
-		                    	<option value="MONTH">{-#gseamonth#-}</option>
-		                    	</select>
-		                    </td></tr>
-		                    </table><br>
-							<b>{-#gcomparative#-}</b>
+						  </td></tr>
+						  <tr><td>
+							<select id="_G+Period" name="_G+Period" onChange="$('_G+Stat').value = '';"
+									onMouseOver="showtip('{-$dic.GraphPeriod[2]-}');">
+								<option value=""></option>
+								<option value="YEAR" selected>{-#gperannual#-}</option>
+								<option value="YMONTH">{-#gpermonth#-}</option>
+								<option value="YWEEK">{-#gperweek#-}</option>
+								<option value="YDAY">{-#gperday#-}</option>
+							</select>
+						  </td></tr>
+						  <tr><td>
+							<select id="_G+Stat" name="_G+Stat" onChange="$('_G+Period').value = '';"
+									onMouseOver="showtip('{-$dic.GraphSeaHistogram[2]-}');">
+								<option value=""></option>
+								<option value="DAY">{-#gseaday#-}</option>
+								<option value="WEEK">{-#gseaweek#-}</option>
+								<option value="MONTH">{-#gseamonth#-}</option>
+							</select>
+						  </td></tr>
+						  <tr><td>
 							<select id="_G+TypeC" onChange="grpSelectbyType('_G+TypeC');" 
-            						onMouseOver="showtip('{-$dic.GraphType[2]-}');" class="fixw">
+            						onMouseOver="showtip('{-$dic.GraphType[2]-}');" class="line">
 								<option value="" disabled selected></option>
 								<option value="D.EventId">{-$dic.GraphComByEvents[0]-}</option>
 								<option value="D.CauseId">{-$dic.GraphComByCauses[0]-}</option>
@@ -1401,8 +1409,11 @@
 								<option value="D.GeographyId_{-$k-}">{-$dic.GraphComByGeography[0]-} {-$i[0]-}</option>
 {-/foreach-}
 							</select>
-							<input type="hidden" id="_G+Type" name="_G+Type" value="D.DisasterBeginTime">
+						  </td></tr>
+						 </table>
+						<input type="hidden" id="_G+Type" name="_G+Type" value="D.DisasterBeginTime">
             			</td>
+						<td></td>
             		</tr>
             	</table>
             	<input type="hidden" id="_G+cmd" name="_G+cmd" value="result">
