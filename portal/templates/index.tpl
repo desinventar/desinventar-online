@@ -15,6 +15,7 @@
 	<script type="text/javascript" language="javascript">
 		function updateDatabaseList(CountryIsoCode,searchByCountry) {
 			$("#pagemap").hide();
+			$("#pageinfo").hide();
 			$("#pagecontent").show();
 			$.get('{-$di_url-}', 
 				{cmd: 'getCountryName', CountryIso : CountryIsoCode },
@@ -26,21 +27,32 @@
 		};
 		
 		function showRegionInfo(RegionId) {
-			$("#pagemap").hide();
-			$("#pagetitle").html('');
-			$("#pagecontent").show().load('{-$di_url-}', { cmd:'getRegionInfo', RegionId : RegionId });
+			$("#pagemap"    ).hide();
+			$("#pagetitle"  ).html('');
+			$("#pagecontent").hide();
+			$("#pageinfo"   ).show();
+			$("#regioninfo" ).load('{-$di_url-}', { cmd:'getRegionInfo', RegionId : RegionId });
+			$("#regionbutton").unbind('click').click(function() {
+				newURL = {-$di_url-} + '/?r=' + RegionId;
+				window.open(newURL);
+			});
+			$("#regionbutton").show();
 		};
 		
 		function showMap() {
 			$("#pagemap").show();
-			$("#pagecontent").hide();
 			$("#pagetitle").html('');
+			$("#pagecontent").hide();
+			$("#pageinfo").hide();
 		};
 
 		// Startup function (on load)
 		$(function() {
 			// Show current software version
-			$("#version").load('{-$di_url-}', { cmd: 'getversion' });			
+			$("#version").load('{-$di_url-}', { cmd: 'getversion' });
+			
+			// At start, display the map 
+			showMap();
 		});
 	</script>
 	<title>DesInventar</title>
@@ -109,6 +121,10 @@
 			<div id="pagetitle"></div>
 			<br />
 			<div id="pagecontent"></div>
+			<div id="pageinfo">
+				<div id="regioninfo"></div>
+				<center><img id="regionbutton" src="images/b_desinventar3.jpg"></center>
+			</div>
 			<div id="pagemap">
 				<img src="images/subreg_can.jpg" alt="" usemap="#srcan" style="border-style:none" />
 				<map id="srcan" name="srcan">

@@ -720,6 +720,17 @@ class DIRegion extends DIObject {
 		return $iReturn;
 	}
 	
+	public function getDBInfo() {
+		$a = array();
+		foreach(array('RegionId','RegionLabel', 'PeriodBeginDate','PeriodEndDate',
+		              'InfoGeneral','InfoCredits','InfoSources','InfoSynopsis',
+		              'RegionLastUpdate') as $Field) {
+			$a[$Field] = $this->get($Field);
+		}
+		$a['RegionLastUpdate'] = substr($a['RegionLastUpdate'],0,10);
+		return $a;
+	}
+	
 	public function updateMapArea() {
 		$iReturn = ERR_NO_ERROR;
 		$IsCRegion = $this->get('IsCRegion');

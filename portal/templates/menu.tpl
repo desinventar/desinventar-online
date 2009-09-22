@@ -74,7 +74,7 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect1" style="display:none;">
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="updateDatabaseList('IND');">India - Orissa</a>
+					<a href="javascript:void(null);" onclick="showRegionInfo('IND-1250695040-india_orissa_historic_inventory_of_disasters');">India - Orissa</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -91,19 +91,19 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect2" style="display:none;">
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="updateDatabaseList('CRI');">Costa Rica</a>
+					<a href="javascript:void(null);" onclick="showRegionInfo('CRI-1250694968-costa_rica_inventario_historico_de_desastres');">Costa Rica</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="updateDatabaseList('SLV');">El Salvador</a>
+					<a href="javascript:void(null);" onclick="showRegionInfo('SLV-1250695592-el_salvador_inventario_historico_de_desastres');">El Salvador</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="updateDatabaseList('PAN');">Panamá</a>
+					<a href="javascript:void(null);" onclick="showRegionInfo('PAN-1250695231-panama_inventario_de_desastres_sinaproc');">Panamá</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -145,19 +145,19 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect4" style="display:none;">
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="showRegionInfo('GCARG');">Argentina</a>
+					<a href="javascript:void(null);" onclick="showRegionInfo('ARG-1250695025-argentina_gran_chaco');">Argentina</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="showRegionInfo('GCBOL');">{-#tcountryBOL#-}</a>
+					<a href="javascript:void(null);" onclick="showRegionInfo('BOL-1250695036-bolivia_gran_chaco');">{-#tcountryBOL#-}</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="showRegionInfo('GCPAR');">Paraguay</a>
+					<a href="javascript:void(null);" onclick="showRegionInfo('PAR-1250695038-paraguay_gran_chaco');">Paraguay</a>
 				</td>
 			</tr>
 			<tr>
@@ -178,7 +178,7 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect5" style="display:none;">
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="showRegionInfo('MEXICO');">México</a>
+					<a href="javascript:void(null);" onclick="showRegionInfo('MEX-1250695136-mexico_inventario_historico_de_desastres');">México</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -195,7 +195,7 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect7" style="display:none;">
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="showRegionInfo('COLCALI');">Cali - {-#tcountryCOL#-}</a>
+					<a href="javascript:void(null);" onclick="showRegionInfo('COL-1250694494-colombia_inventario_desastres_cali_zona_urbana');">Cali - {-#tcountryCOL#-}</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
