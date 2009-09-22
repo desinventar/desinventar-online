@@ -22,8 +22,6 @@
 	$t->left_delimiter = '{-';
 	$t->right_delimiter = '-}';
 
-	$t->config_dir = 'include';
-
 	$t->assign ("DIver", "8.2.0.50");
 	$t->assign ("DImode", "online");
 	

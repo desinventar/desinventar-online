@@ -5,17 +5,16 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" href="css/desinventar.css" TYPE="text/css">
 	<link rel="stylesheet" href="css/portal.css" TYPE="text/css">
-	<script type="text/javascript" src="include/prototype.js"></script>
-<!--
-	<script type="text/javascript" src="include/wd.js"></script>
-	<script type="text/javascript" src="include/accordion.js"></script>
--->
-	<script type="text/javascript" src="include/menu.js"></script>
+	<!-- <script type="text/javascript" src="include/prototype.js"></script> -->
+	<!-- <script type="text/javascript" src="include/wd.js"></script> -->
+	<!-- <script type="text/javascript" src="include/accordion.js"></script> -->
+	<!-- <script type="text/javascript" src="include/menu.js"></script> -->
 	{-include file="jquery.tpl" -}
 	<script type="text/javascript" language="javascript">
-	window.onload = function() {
-		updateList('pagecontent', '', 'p=subregcan');
-	}
+	$(function() {
+		// Show current software version
+		$("#version").load('/di8-devel/', { cmd: 'getversion' });
+	});
 	</script>
 	<title>DesInventar</title>
 </head>
