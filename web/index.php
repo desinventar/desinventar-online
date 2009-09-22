@@ -44,6 +44,12 @@ case 'searchdb':
 	$t->assign('regionlist', $reglst);
 	$t->display('regionlist.tpl');
 	break;
+case 'getCountryName':
+	$d = new Query();
+	$CountryIso = getParameter('CountryIso','');
+	$CountryName = $d->getCountryName($CountryIso);
+	print $CountryName;
+	break;
 default:
 	if (isset($get['r']) && !empty($get['r'])) {
 		$reg = $get['r'];

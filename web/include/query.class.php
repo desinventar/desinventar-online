@@ -1248,6 +1248,14 @@ class Query extends PDO
 		}
 		return $RegionList;
 	}
+	
+	public function getCountryName($prmCountryIso) {
+		$query = "SELECT * FROM Country WHERE CountryIso='" . $prmCountryIso . "'";
+		foreach($this->base->query($query) as $row) {
+			$CountryName = $row['CountryName'];
+		}
+		return $CountryName;
+	}
   
 	// Check
 	function rebuildCore($fcore) {
