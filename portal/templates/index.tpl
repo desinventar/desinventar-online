@@ -23,12 +23,28 @@
 					$("#pagetitle").html('<h3>' + data + '</h3>');
 				}
 			);
-			$("#pagecontent").load('{-$di_url-}', { cmd: 'searchdb', searchdbquery: CountryIsoCode, searchbycountry : searchByCountry });
+			$.getJSON('{-$di_url-}', 
+				{ cmd: 'searchdb', searchdbquery: CountryIsoCode, searchbycountry : searchByCountry },
+				function(data) {
+					var jList = $("#pagecontent");
+					$("#pagecontent").empty();
+					$.each(data, function(key, value) {
+						jList.append($('<li id="' + key + '">' + value + '</li>'));
+						$('#' + key).unbind('click').click(function() {
+							displayRegionInfo(key);
+						}); //bind
+					}); // each
+				}
+			);
 		};
 		
 		function showRegionInfo(RegionId) {
-			$("#pagemap"    ).hide();
 			$("#regionlist" ).hide();
+			displayRegionInfo(RegionId);
+		};
+		
+		function displayRegionInfo(RegionId) {
+			$("#pagemap"    ).hide();
 			$("#pageinfo"   ).show();
 			$("#regionlogo" ).attr('src', '{-$di_url-}' + '?cmd=getRegionLogo&RegionId=' + RegionId);
 			$("#regionbasicinfo" ).load('{-$di_url-}', { cmd:'getRegionBasicInfo', RegionId : RegionId });
@@ -119,7 +135,7 @@
 			<div id="regionlist">
 				<div id="pagetitle"></div>
 				<br />
-				<div id="pagecontent"></div>
+				<ul id="pagecontent"></ul>
 			</div>
 			<div id="pageinfo">
 				<table>
