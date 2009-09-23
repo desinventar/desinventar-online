@@ -36,8 +36,11 @@
 	$t->assign("stat"  , "on");
 	$t->assign("lang"  , $lang);
 	$t->assign("di_url", $di_url);
-	// Available languages
+	
+	// 2009-09-23 (jhcaiced) Choose which ISDR logo to use...
+	$isdrlogo = 'logo-isdr.gif';
+	if ($lang == 'spa') { $isdrlogo = 'logo-eird.gif'; }
+	$t->assign("isdrlogo", $isdrlogo);
 
 	$t->display ("index.tpl");
-
 </script>

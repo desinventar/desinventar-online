@@ -35,6 +35,7 @@
 			$("#regionbutton").unbind('click').click(function() {
 				newURL = {-$di_url-} + '/?r=' + RegionId;
 				window.open(newURL);
+				return false;
 			});
 			$("#regionbutton").show();
 		};
@@ -110,10 +111,12 @@
 		{- include file="menu.tpl" -}
 		<!-- References -->
 		<table bgcolor="#CF9D15" border=0 cellpadding=0 cellspacing=0 align="center">
-			<tr><td bgcolor="white">
-				<a href="http://www.georiesgo.net" target="_blank"><img src="images/logos/banner_SIAPAD.jpg" border="0"></a><br><br>
-				<a href="http://www.redbivapad.org.pe/" target="_blank"><img src="images/logos/banner_BIVAPAD.jpg" border="0"></a><br><br>
+			<tr><td bgcolor="white"><center>
+				<a href="http://www.preventionweb.net/gar09/" target="_blank"><img src="images/logos/{-$isdrlogo-}" border="0" width="140"></a><br /><br />
+				<a href="http://www.georiesgo.net" target="_blank"><img src="images/logos/banner_SIAPAD.jpg" border="0"></a><br /><br />
+				<a href="http://www.redbivapad.org.pe/" target="_blank"><img src="images/logos/banner_BIVAPAD.jpg" border="0"></a><br /><br />
 				<a href="http://www.desaprender.org/" target="_blank"><img src="images/logos/banner_DESAPRENDER.gif" border="0"></a>
+				</center>
 			</td></tr>
 		</table>
 		</td>
