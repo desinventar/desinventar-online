@@ -16,7 +16,7 @@
 		function updateDatabaseList(CountryIsoCode,searchByCountry) {
 			$("#pagemap").hide();
 			$("#pageinfo").hide();
-			$("#pagecontent").show();
+			$("#regionlist").show();
 			$.get('{-$di_url-}', 
 				{cmd: 'getCountryName', CountryIso : CountryIsoCode },
 				function(data) { 
@@ -28,8 +28,7 @@
 		
 		function showRegionInfo(RegionId) {
 			$("#pagemap"    ).hide();
-			$("#pagetitle"  ).html('');
-			$("#pagecontent").hide();
+			$("#regionlist" ).hide();
 			$("#pageinfo"   ).show();
 			$("#regionlogo" ).attr('src', '{-$di_url-}' + '?cmd=getRegionLogo&RegionId=' + RegionId);
 			$("#regionbasicinfo" ).load('{-$di_url-}', { cmd:'getRegionBasicInfo', RegionId : RegionId });
@@ -39,8 +38,7 @@
 		
 		function showMap() {
 			$("#pagemap").show();
-			$("#pagetitle").html('');
-			$("#pagecontent").hide();
+			$("#regionlist").hide();
 			$("#pageinfo").hide();
 		};
 
@@ -118,9 +116,11 @@
 		</table>
 		</td>
 		<td class="centro">
-			<div id="pagetitle"></div>
-			<br />
-			<div id="pagecontent"></div>
+			<div id="regionlist">
+				<div id="pagetitle"></div>
+				<br />
+				<div id="pagecontent"></div>
+			</div>
 			<div id="pageinfo">
 				<table>
 				<tr>
