@@ -14,7 +14,6 @@
 	
 	// Auto detect language for portal interface
 	$lang = getParameter('lang', getBrowserClientLanguage());
-	fb($lang);
 	
 	/* Smarty configuration */
 	define("SMARTYDIR", "/usr/share/php/Smarty");
