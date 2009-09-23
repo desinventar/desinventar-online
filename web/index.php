@@ -5,7 +5,7 @@
 */
 
 // This is the version of the software
-define('VERSION', '8.2.0.51');
+define('VERSION', '8.2.0.52');
 
 //ob_start( 'ob_gzhandler' );
 require_once('include/loader.php');
@@ -52,7 +52,24 @@ case 'getCountryName':
 	$CountryName = $d->getCountryName($CountryIso);
 	print $CountryName;
 	break;
-case 'getRegionInfo':
+case 'getRegionLogo':
+	$RegionId = getParameter('RegionId', '');
+	header("Content-type: Image/png");
+	$murl = VAR_DIR . "/database/". $RegionId . "/logo.png";
+	if (!file_exists($murl))
+		$murl = "images/di_logo.png";
+	readfile($murl);
+	exit();
+	break;
+case 'getRegionBasicInfo':
+	$RegionId = getParameter('RegionId', '');
+	$r = new DIRegion($us, $RegionId);
+	$RegionInfo = array();
+	$RegionInfo['RegionId'] = $RegionId;
+	$t->assign('RegionInfo', $r->getDBInfo());
+	$t->display('regioninfo.tpl');
+	break;
+case 'getRegionTechInfo':
 	$RegionId = getParameter('RegionId', '');
 	$r = new DIRegion($us, $RegionId);
 	$RegionInfo = array();
