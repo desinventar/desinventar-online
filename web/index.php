@@ -66,8 +66,10 @@ case 'getRegionBasicInfo':
 	$r = new DIRegion($us, $RegionId);
 	$RegionInfo = array();
 	$RegionInfo['RegionId'] = $RegionId;
-	$t->assign('RegionInfo', $r->getDBInfo());
-	$t->display('regioninfo.tpl');
+	$a = $r->getDBInfo();
+	$a['NumDatacards'] = $us->q->getNumDisasterByStatus('PUBLISHED');
+	$t->assign('RegionInfo', $a);
+	$t->display('regionbasicinfo.tpl');
 	break;
 case 'getRegionTechInfo':
 	$RegionId = getParameter('RegionId', '');
@@ -75,7 +77,7 @@ case 'getRegionTechInfo':
 	$RegionInfo = array();
 	$RegionInfo['RegionId'] = $RegionId;
 	$t->assign('RegionInfo', $r->getDBInfo());
-	$t->display('regioninfo.tpl');
+	$t->display('regiontechinfo.tpl');
 	break;
 default:
 	if (isset($get['r']) && !empty($get['r'])) {
