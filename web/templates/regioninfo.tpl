@@ -3,7 +3,6 @@
 <!-- Show Region Info -->
 <table border=0 style="width:100%; font-family:Lucida Grande, Verdana; font-size:10px;">
 <tr>
-	<td valign="center"><img src="region.php?r={-$RegionInfo.RegionId-}&view=logo"></td>
 	<td valign="top">
 		<h2>{-$RegionInfo.RegionLabel-}</h2>
 		{-if $RegionInfo.PeriodBeginDate != "" && $RegionInfo.PeriodEndDate != ""-}

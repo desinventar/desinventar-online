@@ -31,13 +31,10 @@
 			$("#pagetitle"  ).html('');
 			$("#pagecontent").hide();
 			$("#pageinfo"   ).show();
-			$("#regioninfo" ).load('{-$di_url-}', { cmd:'getRegionInfo', RegionId : RegionId });
-			$("#regionbutton").unbind('click').click(function() {
-				newURL = {-$di_url-} + '/?r=' + RegionId;
-				window.open(newURL);
-				return false;
-			});
-			$("#regionbutton").show();
+			$("#regionlogo" ).attr('src', '{-$di_url-}' + '?cmd=getRegionLogo&RegionId=' + RegionId);
+			$("#regionbasicinfo" ).load('{-$di_url-}', { cmd:'getRegionBasicInfo', RegionId : RegionId });
+			$("#regiontechinfo"  ).load('{-$di_url-}', { cmd:'getRegionTechInfo', RegionId : RegionId });
+			$("#regionlink").attr('href', '{-$di_url-}' + '?r=' + RegionId);
 		};
 		
 		function showMap() {
@@ -125,8 +122,22 @@
 			<br />
 			<div id="pagecontent"></div>
 			<div id="pageinfo">
-				<div id="regioninfo"></div>
-				<center><img id="regionbutton" src="images/b_desinventar3.jpg"></center>
+				<table>
+				<tr>
+					<td valign="top">
+						<img id="regionlogo" width="80">
+					</td>
+					<td>
+						<div id="regionbasicinfo"></div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<div id="regiontechinfo"></div>
+						<center><a id="regionlink" href="" target="_blank"><img id="regionbutton" src="images/b_desinventar3.jpg" border="0"></a></center>
+					</td>
+				</tr>
+				</table>
 			</div>
 			<div id="pagemap">
 				<img src="images/subreg_can.jpg" alt="" usemap="#srcan" style="border-style:none" />
