@@ -10,7 +10,7 @@
 	<!-- <script type="text/javascript" src="include/prototype.js"></script> -->
 	<!-- <script type="text/javascript" src="include/wd.js"></script> -->
 	<!-- <script type="text/javascript" src="include/accordion.js"></script> -->
-	<!-- <script type="text/javascript" src="include/menu.js"></script> -->
+	<script type="text/javascript" src="{-$di_url-}/include/menu.js"></script>
 	{-include file="jquery.tpl" -}
 	<script type="text/javascript" language="javascript">
 		function updateDatabaseList(CountryIsoCode,searchByCountry) {
@@ -89,9 +89,9 @@
 				{-/foreach-}
 				<td><a href="javascript:void(null);" onMouseover="dropdownmenu(this, event, 'idioma')">{-#tlang#-}</a>
 					<div id="idioma" class="submenu">
-						<a href="?lang=en">English</a>
-						<a href="?lang=es">Español</a>
-						<a href="?lang=pt">Português</a>
+						<a href="?lang=eng">English</a>
+						<a href="?lang=spa">Español</a>
+						<a href="?lang=por">Português</a>
 					</div>
 				</td>
 			</tr>
