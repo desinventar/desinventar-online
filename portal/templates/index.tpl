@@ -127,7 +127,7 @@
 					<td valign="top">
 						<img id="regionlogo" width="80">
 					</td>
-					<td>
+					<td align="left">
 						<div id="regionbasicinfo"></div>
 					</td>
 				</tr>
