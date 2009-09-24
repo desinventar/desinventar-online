@@ -20,6 +20,9 @@ b        {
 li {
 	font-family:arial,tahoma,helvetica,cursive; 
 	font-size:11px; }
+li.regionlistitem {
+	text-decoration: underline;
+	}
 input.line {
 	font-family:arial,tahoma,helvetica,cursive; 
 	font-size:11px; color:#000000; background-color:#FFFFFF; 
