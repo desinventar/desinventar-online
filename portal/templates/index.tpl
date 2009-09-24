@@ -29,8 +29,8 @@
 					var jList = $("#pagecontent");
 					$("#pagecontent").empty();
 					$.each(data, function(key, value) {
-						jList.append($('<li id="' + key + '">' + value + '</li>'));
-						$('#' + key).unbind('click').click(function() {
+						jList.append($('<li id="' + key + '" class="regionlistitem">' + value + '</li>'));
+						$('#' + key).addClass("alt").unbind('click').click(function() {
 							displayRegionInfo(key);
 						}); //bind
 					}); // each
