@@ -21,9 +21,11 @@
 			$(myDiv).style.visibility = 'visible';
 		}
 		function showtip(tip, clr) {
-			var d = $('_DIDesc');
+			try {
+			var d = parent.document.getElementById('_DIDesc');
 			d.style.backgroundColor = clr;
 			d.value = tip;
+			} catch(err) { };
 		}
 		function requestDCard(cmd, value) {
 			var lsAjax = new Ajax.Request('cards.php', {
@@ -106,22 +108,34 @@
 					disenabutton($('cardupd'), true);
 					disenabutton($('cardcln'), false);
 					disenabutton($('cardcan'), false);
-					//$('cardfnd').disable();
+					disenabutton($('first'), true);
+					disenabutton($('prev'), true);
+					disenabutton($('next'), true);
+					disenabutton($('last'), true);
+					disenabutton($('cardfnd'), true);
 				break;
 				case "cardupd":
 					disenabutton($('cardnew'), true);
 					disenabutton($('cardsav'), false);
 					disenabutton($('cardupd'), true);
 					disenabutton($('cardcan'), false);
-					//$('cardfnd').disable();
+					disenabutton($('first'), true);
+					disenabutton($('prev'), true);
+					disenabutton($('next'), true);
+					disenabutton($('last'), true);
+					disenabutton($('cardfnd'), true);
 				break;
 				case "cardsav":
 					disenabutton($('cardnew'), false);
 					disenabutton($('cardsav'), true);
-					disenabutton($('cardupd'), true);
+					disenabutton($('cardupd'), false);
 					disenabutton($('cardcln'), true);
 					disenabutton($('cardcan'), true);
-					//$('cardfnd').enable();
+					disenabutton($('first'), false);
+					disenabutton($('prev'), false);
+					disenabutton($('next'), false);
+					disenabutton($('last'), false);
+					disenabutton($('cardfnd'), false);
 				break;
 				case "cardcan":
 					if ($('DisasterId').value == "")
@@ -132,7 +146,11 @@
 					disenabutton($('cardcln'), true);
 					disenabutton($('cardcan'), true);
 					disenabutton($('cardnew'), false);
-					//$('cardfnd').enable();
+					disenabutton($('first'), false);
+					disenabutton($('prev'), false);
+					disenabutton($('next'), false);
+					disenabutton($('last'), false);
+					disenabutton($('cardfnd'), false);
 				break;
 				case "cardfill":
 					disenabutton($('cardupd'), false);
@@ -179,6 +197,28 @@
 				res = parent.document.getElementById('qryres');
 				res.style.display = 'block';
 			} catch(err) { };
+		}
+		function gotocard(opc) {
+			switch (opc) {
+				case "first":
+					setDICard('{-$reg-}', {-$fst-}, '');
+					{-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}
+					disenabutton($('prev'), true);
+				break;
+				case "prev":
+					requestDCard('getPrevDId', $('DisasterId').value);
+					{-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}
+				break;
+				case "next":
+					requestDCard('getNextDId', $('DisasterId').value);
+					{-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}
+				break;
+				case "last":
+					setDICard('{-$reg-}', {-$lst-}, '');
+					{-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}
+					disenabutton($('next'), true);
+				break;
+			}
 		}
 		function setActive() {
 			updateList('dostat', 'cards.php', 'u=1');
@@ -287,33 +327,39 @@
 		<table width="900px" border="0" cellpadding="0" cellspacing="0" >
 		 <tr valign="top">
 		  <td width="360px">
-			<input type="button" id="cardnew" class="bb bnew" onmouseover="Tip('{-#tnewtitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardnew');">
-			<input type="button" id="cardupd" class="bb bupd" onmouseover="Tip('{-#tupdtitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardupd');">
-			<input type="button" id="cardsav" class="bb bsave" onmouseover="Tip('{-#tsavtitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardsav');">
-			<input type="button" id="cardcln" class="bb bclean" onmouseover="Tip('{-#tclntitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardcln');">
-			<input type="button" id="cardcan" class="bb bcancel" onmouseover="Tip('{-#tcantitle#-}')" onmouseout="UnTip()" onClick="onSubmitBtn('cardcan');">
-			<input type="button" id="cardprn" class="bb bprint" onmouseover="Tip(' PRINT ')" onmouseout="UnTip()" onClick="window.print();">
+			<input type="button" id="cardnew" class="bb bnew" onmouseover="Tip('{-#tnewtitle#-}: {-#tnewdesc#-}')" 
+					onmouseout="UnTip()" onClick="onSubmitBtn('cardnew');">
+			<input type="button" id="cardupd" class="bb bupd" onmouseover="Tip('{-#tupdtitle#-}: {-#tupddesc#-}')" 
+					onmouseout="UnTip()" onClick="onSubmitBtn('cardupd');">
+			<input type="button" id="cardsav" class="bb bsave" onmouseover="Tip('{-#tsavtitle#-}: {-#tsavdesc#-}')" 
+					onmouseout="UnTip()" onClick="onSubmitBtn('cardsav');">
+			<input type="button" id="cardcln" class="bb bclean" onmouseover="Tip('{-#tclntitle#-}: {-#tclndesc#-}')" 
+					onmouseout="UnTip()" onClick="onSubmitBtn('cardcln');">
+			<input type="button" id="cardcan" class="bb bcancel" onmouseover="Tip('{-#tcantitle#-}: {-#tcandesc#-}')" 
+					onmouseout="UnTip()" onClick="onSubmitBtn('cardcan');">
+			<input type="button" id="cardprn" class="bb bprint" onmouseover="Tip('{-#mprint#-}')" 
+					onmouseout="UnTip()" onClick="window.print();">
 			&nbsp;&nbsp;|&nbsp;&nbsp;
-			<input type="button" value="<<" class="bb line" onmouseover="Tip('Primera')" onmouseout="UnTip()" 
-				onClick="setDICard('{-$reg-}', {-$fst-}, ''); {-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}">
-			<input type="button" value="<" class="bb line" onmouseover="Tip('Anterior')" onmouseout="UnTip()" 
-				onClick="requestDCard('getPrevDId', $('DisasterId').value); {-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}">
-			<input type="button" value=">" class="bb line" onmouseover="Tip('Siguiente')" onmouseout="UnTip()" 
-				onClick="requestDCard('getNextDId', $('DisasterId').value); {-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}">
-			<input type="button" value=">>" class="bb line" onmouseover="Tip('Ultima')" onmouseout="UnTip()" 
-				onClick="setDICard('{-$reg-}', {-$lst-}, ''); {-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}">
+			<input type="button" id="first" value="<<" class="bb line" onmouseover="Tip('{-#bfirst#-}')" 
+					onmouseout="UnTip()" onClick="gotocard('first')">
+			<input type="button" id="prev"  value="<" class="bb line" onmouseover="Tip('{-#bprev#-}')" 
+					onmouseout="UnTip()" onClick="gotocard('prev')">
+			<input type="button" id="next"  value=">" class="bb line" onmouseover="Tip('{-#bnext#-}')" 
+					onmouseout="UnTip()" onClick="gotocard('next')">
+			<input type="button" id="last"  value=">>" class="bb line" onmouseover="Tip('{-#blast#-}')" 
+					onmouseout="UnTip()" onClick="gotocard('last')">
 			&nbsp;&nbsp;|&nbsp;&nbsp;
-			<input type="button" id="cardfnd" class="bb bfind" onmouseover="Tip('{-#bexpsearch#-}')" onmouseout="UnTip()" 
-				onClick="gotoQuery();">
+			<input type="button" id="cardfnd" class="bb bfind" onmouseover="Tip('{-#bexpsearch#-}: {-#texptitle#-}')" 
+					onmouseout="UnTip()" onClick="gotoQuery();">
 			<br>
 			<span class="dlgmsg" id="distatusmsg"></span><span class="dlgmsg" id="dostat"></span>
 		  </td>
-		  <td align="right" width="270px">
-			<iframe name="dic" id="dic" frameborder="0" style="width:265px; height:30px;" src="about:blank"></iframe>
+		  <td align="right" width="500px">
+			<iframe name="dic" id="dic" frameborder="0" style="width:100%; height:28px;" src="about:blank"></iframe>
 		  </td>
-		  <td align="right" width="270px">
+<!--		  <td align="right" width="270px">
 			<textarea id="_DIDesc" style="width:265px; height:30px; font-size: 8pt;"></textarea>
-		  </td>
+		  </td>-->
 		 </tr>
 		</table>
 		<form id="DICard" action="cards.php" method="POST" target="dic">
@@ -647,8 +693,6 @@
 		</form>
 	</div>
 <!-- END DI8 FORM CARD -->
-<!-- BEG HELP SECTION 
-<a href="javascript:void(null)" onClick="runWin('doc/?m=metguide', 'doc');" class="dlgmsg" style="font-size: 8pt;">{-#hmoreinfo#-}</a> END HELP SECTION -->
  </body>
 </html>
 {-/if-}
