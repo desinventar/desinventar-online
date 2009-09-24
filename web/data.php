@@ -74,6 +74,7 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 			$t->assign ("NumberOfPages" ,$iNumberOfPages);
 			// Show results interface 
 			$t->assign ("role", $us->getUserRole($reg));
+			$t->assign ("qdet", $q->getQueryDetails($dic, $post));
 			$t->assign ("ctl_showres", true);
 		} else if ($post['_D+cmd'] == "export") {
 			if ($post['_D+saveopt'] == "csv")
