@@ -5,7 +5,7 @@
 */
 
 // This is the version of the software
-define('VERSION', '8.2.0.52');
+define('VERSION', '8.2.0.53');
 
 //ob_start( 'ob_gzhandler' );
 require_once('include/loader.php');
@@ -292,7 +292,7 @@ default:
 			$t->assign ("ctl_qryres", true);
 			$t->assign ("ctl_qrydsg", true);
 		}
-		$t->assign ("diversion", DIVERSION);
+		$t->assign ("version", VERSION);
 		// Direct access returns a list of public regions on this server
 		$t->assign ("lglst", $us->q->loadLanguages(1));
 		$t->assign ("userid", $us->UserId);

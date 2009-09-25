@@ -93,6 +93,7 @@ elseif (isset($_GET['r']) && !empty($_GET['r']) && file_exists($us->q->getDBFile
 	$info['InfoGeneral'] = $reg['InfoGeneral|'. $mylg];
 	$info['InfoSources'] = $reg['InfoSources|'. $mylg];
 	$t->assign ("info", $info);
+	$t->assign ("dic", $q->queryLabelsFromGroup('DB', $lg));
 	//$t->assign ("dbden", str2js($reg['InfoGeneral'][1]));
 } elseif (isset($_GET['cmd'])) {
 	//$q = new Query();

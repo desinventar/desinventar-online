@@ -199,8 +199,9 @@
 <!--	<a href="javascript:void(null)" onClick="$('info').style.display='block';">More info</a>-->
 	<div id="info" style="height:300px" class="dwin" align="justify">
  {-foreach name=info key=k item=i from=$info-}
+ {-assign var="inf" value=DB$k-}
   {-if $i != ""-}
-	<b>{-$k-}</b><br>{-$i-}<br>
+	<b>{-$dic.$inf[0]-}</b><br>{-$i-}<br>
   {-/if-}
  {-/foreach-}
 	</div>

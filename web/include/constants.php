@@ -5,7 +5,6 @@
  (c) 1999-2009 Corporacion OSSO
  **********************************************
 */
-define('DIVERSION', "8.2.0.51");
 define('CONST_REGIONACTIVE', 1);
 define('CONST_REGIONPUBLIC', 2);
 define('FALSE', 0);

@@ -232,7 +232,7 @@
 			break;
 			// help menu
 			case "mabo":
-				alert("DesInventar {-$diversion-}\n{-#tabout#-}");
+				alert("DesInventar {-$version-}\n{-#tabout#-}");
 			break;
 			case "mwww":
 				window.open('http://www.desinventar.org', '', '');
