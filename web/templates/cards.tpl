@@ -327,6 +327,7 @@
 		<table width="900px" border="0" cellpadding="0" cellspacing="0" >
 		 <tr valign="top">
 		  <td width="360px">
+{-if $ctl_validrole-}
 			<input type="button" id="cardnew" class="bb bnew" onmouseover="Tip('{-#tnewtitle#-}: {-#tnewdesc#-}')" 
 					onmouseout="UnTip()" onClick="onSubmitBtn('cardnew');">
 			<input type="button" id="cardupd" class="bb bupd" onmouseover="Tip('{-#tupdtitle#-}: {-#tupddesc#-}')" 
@@ -337,6 +338,7 @@
 					onmouseout="UnTip()" onClick="onSubmitBtn('cardcln');">
 			<input type="button" id="cardcan" class="bb bcancel" onmouseover="Tip('{-#tcantitle#-}: {-#tcandesc#-}')" 
 					onmouseout="UnTip()" onClick="onSubmitBtn('cardcan');">
+{-/if-}
 			<input type="button" id="cardprn" class="bb bprint" onmouseover="Tip('{-#mprint#-}')" 
 					onmouseout="UnTip()" onClick="window.print();">
 			&nbsp;&nbsp;|&nbsp;&nbsp;
@@ -417,10 +419,20 @@
 									</select>
 								</td>
 								<td onmouseover="Tip('{-$dis.DisasterSerial[1]-}')" onmouseout="UnTip()">
-									{-$dis.DisasterSerial[0]-}<b style="color:darkred;">*</b><br>
+								 <table border="0">
+								  <tr>
+								   <td>{-$dis.DisasterSerial[0]-}<b style="color:darkred;">*</b></td>
+								   <td align="right"><a href="javascript:void(0);" 
+										onClick="requestDCard('getNextSerial', $('DisasterBeginTime[0]').value);" style="font-size: 8pt;">Get</a></td>
+								  </tr>
+								  <tr>
+								   <td colspan="2">
 									<input id="DisasterSerial" name="DisasterSerial" type="text" size="15" class="line"
 										tabindex="6" maxlength="50" onFocus="showtip('{-$dis.DisasterSerial[2]-}', '#d4baf6')"
 										onkeypress="return blockChars(event, this.value, 'alphanumber:');">
+								   </td>
+								  </tr>
+								 </table>
 								</td>
 							</tr>
 						</table>
