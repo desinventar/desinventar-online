@@ -160,13 +160,13 @@
 <!--
   {-if $ctl_showdimod-}
 	  <img id="dimod" src="images/b_desinventar1.jpg" border="0" style="cursor: pointer;"
-		onClick="$('dimod').src='images/b_desinventar2.jpg'; runWin('desinventar/cards.php?r={-$reg-}', 'desinventar');"
+		onClick="$('dimod').src='images/b_desinventar2.jpg'; window.open('desinventar/cards.php?r={-$reg-}', 'desinventar', winopt);"
 		onMouseOver='$("dimod").src="images/b_desinventar3.jpg"; $("modinfo").innerHTML="{-#tmoddesinv#-}";'
 		onMouseOut="$('dimod').src='images/b_desinventar1.jpg'; $('modinfo').innerHTML='';"></a> &nbsp;&nbsp; &nbsp;&nbsp;
   {-/if-}
   {-if $ctl_showdcmod-}
 	  <img id="dcmod" src="images/b_desconsultar1.jpg" style="cursor: pointer;"
-		onClick="$('dcmod').src='images/b_desconsultar2.jpg'; runWin('desinventar/index.php?r={-$reg-}{-if $isvreg-}&v=true{-/if-}', 'desconsultar');"
+		onClick="$('dcmod').src='images/b_desconsultar2.jpg'; window.open('desinventar/index.php?r={-$reg-}{-if $isvreg-}&v=true{-/if-}', 'desconsultar', winopt);"
 		onMouseOver='$("dcmod").src="images/b_desconsultar3.jpg"; $("modinfo").innerHTML="{-#tmoddescon#-}";'
 		onMouseOut="$('dcmod').src='images/b_desconsultar1.jpg'; $('modinfo').innerHTML='';">
   {-else-}

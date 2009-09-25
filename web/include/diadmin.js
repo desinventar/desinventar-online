@@ -29,29 +29,18 @@
 	function updateUserBar(url, cmd, user, pass) {
 		var pars = 'cmd=' + cmd + '&userid=' + user + '&password=' + pass;
 		var upd = true;
-		if (cmd == "logout" && chkWin('desinventar')) {
-			if (confirm("{-#talerdiwin#-}"))
-				endWin('desinventar');
-			else
-				upd = false;
-		}
-		if (upd) {
-			var rbAjax = new Ajax.Updater('rightcontent', url, {
-				method: 'get', parameters: pars,
-				onComplete: function(request) {
-					if (cmd == "login") {
-						updateList('pagecontent', url, 'cmd=welcome');
-					}
-					if (cmd == "logout") {
-						updateList('pagecontent', '', 'p=MainPageDI8');
-						window.location.reload(false);
-					}
-				},
-				onFailure: 	function(request) {
-					$('rightcontent').innerHTML = "{-#hlostconn#-}";
-				}
-			});
-		}
+		var rbAjax = new Ajax.Updater('rightcontent', url, {
+			method: 'get', parameters: pars,
+			onComplete: function(request) {
+				if (cmd == "login")
+					updateList('pagecontent', url, 'cmd=welcome');
+				else if (cmd == "logout")
+					window.location.reload(false);
+			},
+			onFailure: 	function(request) {
+				$('rightcontent').innerHTML = "{-#hlostconn#-}";
+			}
+		});
 	}
 	function sendData (r, url, pars, val) {
 		reg = r;
@@ -271,75 +260,43 @@
 	}
 
 	/*** MANAGE MODULES WINDOWS  ***/
-	var diwin = '';
-	var dcwin = '';
-	var docw = '';
-	
+/*	var diwin = null;
+	var docw = null;*/
+	var winopt = 'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no';
+/*
 	function runWin(url, name) {
-		var win = '';
 		var w	= 1020;
 		var h	= 700;
-		if (name == 'desinventar' || name == 'desconsultar') {
-			w = 1020;
-			h = 700;
-		}
-		if (!win.closed && win.location) {
-			win.location.href = url;
-		}
+		if (name == "doc")
+			w = 800;
+		if (win != null && !win.closed && win.location)
+			win.opener = self;
 		else {
-			win = window.open(url,name,
-				'width='+ w +',height='+ h +',left=0,top=0,screenX=0,screenY=0,toolbar=no,status=no,scrollbars=no,resizable=no');
-			if (!win.opener)
-				win.opener = self;
+			if (CheckIsIE())
+				win = window.open(url, name);
+			else
+				win = window.open(url, name, options);
 		}
-		if (window.focus)	
-			win.focus();
-		switch (name) {
-			case 'desinventar':		diwin = win;	break;
-			case 'desconsultar':	dcwin = win;	break;
-			case 'doc':				docw = win;		break;
-			default: break;
-		}
+		if (window.focus) win.focus();
 		return false;
 	}
-	
+
 	function endWin(name) {
-		switch (name) {
-			case 'desinventar':
-				if (!diwin.closed && diwin.location)
-					diwin.close();
-			break;
-			case 'desconsultar':
-				if (!dcwin.closed && dcwin.location) {
-					/*endWin("data");
-					endWin("thematicmap");
-					endWin("statistic");
-					endWin("graphic");*/
-					dcwin.close();
-				}
-			break;
-			case 'doc':
-				if (!docw.closed && docw.location)
-					docw.close();
-			break;
-			default: break;
-		}
+		if (name == 'desinventar' && !diwin.closed && diwin.location)
+			diwin.close();
+		else if (name == 'doc' && !docw.closed && docw.location)
+			docw.close();
 		return false;
 	}
 
 	function chkWin(name) {
-		if (name == 'desinventar')
-			if (!diwin.closed && diwin.location)
-				return true;
-		else if (name == 'desconsultar')
-			if (!dcwin.closed && dcwin.location)
-				return true;
-		else if (name == 'doc')
-			if (!docw.closed && docw.location)
-				return true;
+		if (name == 'desinventar' && !diwin.closed && diwin.location)
+			return true;
+		else if (name == 'doc' && !docw.closed && docw.location)
+			return true;
 		return false;
 	}
-
+*/
 	/******* MANAGE FORMS ********/
 	function setfocus(a_field_id) {
 		$(a_field_id).focus();
