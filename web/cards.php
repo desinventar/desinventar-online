@@ -135,6 +135,10 @@ if (isset($_GET['u'])) {
 			case "chkrelease":
 				$us->releaseDatacard($_GET['DisasterId']);
 			break;
+			case "getIdfromSerial":
+				$did = $us->q->getDisasterIdFromSerial($_GET['value']);
+				echo $did;
+			break;
 			default: break;
 		}
 	} elseif (isset($_GET['DisasterId']) && !empty($_GET['DisasterId'])) {

@@ -523,6 +523,12 @@ class Query extends PDO
 		return $fld;
 	}
 
+	public function getDisasterIdFromSerial($serial) {
+		$sql = "SELECT DisasterId FROM Disaster WHERE DisasterSerial = '". $serial."'";
+		$res = $this->getresult($sql);
+		return $res['DisasterId'];
+	}
+	
 	public function getNextDisasterSerial($year) {
 		$sql = "SELECT COUNT(DisasterId) AS num FROM Disaster WHERE DisasterBeginTime LIKE '". $year ."%'";
 		$res = $this->getresult($sql);

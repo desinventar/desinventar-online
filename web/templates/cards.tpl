@@ -35,15 +35,24 @@
 				},
 				onSuccess: function(request) {
 					var res = request.responseText;
-					if (res != "") {
-						if (cmd == "getNextSerial")
+					// check valid DisasterSerial
+					//alert(">>"+ res.length +"<<");
+					if (res.length >= 5 && cmd == "getNextSerial")
 							$('DisasterSerial').value = value +'-'+ res;
-						if (cmd == "getPrevDId" || cmd == "getNextDId") {
-							val = setDICardfromId('{-$reg-}', res, '');
+					// check valid DisasterId
+					else if (res.length >= 36 && (cmd == "getPrevDId" || cmd == "getNextDId" || cmd == "getIdfromSerial")) {
+							valid = setDICardfromId('{-$reg-}', res, '');
 {-if $ctl_validrole-}
-							if (val != "")
-								changeOptions('cardfill');{-/if-}
-						}
+							if (valid)
+								disenabutton($('cardupd'), false);
+{-/if-}
+							if (cmd == "getIdfromSerial") {
+								disenabutton($('prev'), false);
+								disenabutton($('next'), false);
+							}
+					}
+					else {
+						alert("{-#tcardnot#-}");
 					}
 					$('dostat').innerHTML = "";
 				}
@@ -152,9 +161,6 @@
 					disenabutton($('last'), false);
 					disenabutton($('cardfnd'), false);
 				break;
-				case "cardfill":
-					disenabutton($('cardupd'), false);
-				break;
 				default:
 					disenabutton($('cardnew'), false);
 					disenabutton($('cardsav'), true);
@@ -185,37 +191,28 @@
 				$('effext').style.display='none';
 			}
 		}
-		function gotoQuery() {
-			try {
-				parent.difw.hide();
-				parent.w.expand();
-				parent.w.show();
-				cfg = parent.document.getElementById('config');
-				cfg.style.display = 'none';
-				imp = parent.document.getElementById('import');
-				imp.style.display = 'none';
-				res = parent.document.getElementById('qryres');
-				res.style.display = 'block';
-			} catch(err) { };
-		}
 		function gotocard(opc) {
 			switch (opc) {
 				case "first":
 					setDICard('{-$reg-}', {-$fst-}, '');
 					{-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}
 					disenabutton($('prev'), true);
+					disenabutton($('next'), false);
 				break;
 				case "prev":
 					requestDCard('getPrevDId', $('DisasterId').value);
 					{-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}
+					disenabutton($('next'), false);
 				break;
 				case "next":
 					requestDCard('getNextDId', $('DisasterId').value);
 					{-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}
+					disenabutton($('prev'), false);
 				break;
 				case "last":
 					setDICard('{-$reg-}', {-$lst-}, '');
 					{-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}
+					disenabutton($('prev'), false);
 					disenabutton($('next'), true);
 				break;
 			}
@@ -234,6 +231,7 @@
 					$('_CMD').value = 'insertDICard';
 					uploadMsg("{-#tmsgnewcardfill#-}");
 					changeOptions(btn);
+					parent.s.expand();
 				break;
 				case "cardupd":
 					// check if DC is onused
@@ -247,6 +245,7 @@
 								$('_CMD').value = 'updateDICard';
 								uploadMsg("{-#tmsgeditcardfill#-}");
 								changeOptions(btn);
+								parent.s.expand();
 							}
 							else 
 								uploadMsg("{-#tdconuse#-}");
@@ -326,7 +325,7 @@
 	<div id="container" style="height:600px;">
 		<table width="900px" border="0" cellpadding="0" cellspacing="0" >
 		 <tr valign="top">
-		  <td width="360px">
+		  <td width="450px">
 {-if $ctl_validrole-}
 			<input type="button" id="cardnew" class="bb bnew" onmouseover="Tip('{-#tnewtitle#-}: {-#tnewdesc#-}')" 
 					onmouseout="UnTip()" onClick="onSubmitBtn('cardnew');">
@@ -351,12 +350,13 @@
 			<input type="button" id="last"  value=">>" class="bb line" onmouseover="Tip('{-#blast#-}')" 
 					onmouseout="UnTip()" onClick="gotocard('last')">
 			&nbsp;&nbsp;|&nbsp;&nbsp;
-			<input type="button" id="cardfnd" class="bb bfind" onmouseover="Tip('{-#bexpsearch#-}: {-#texptitle#-}')" 
-					onmouseout="UnTip()" onClick="gotoQuery();">
+			{-$dis.DisasterSerial[0]-} <input type="text" id="fndserial" style="width:50px;" class="line">
+				   <input type="button" id="cardfnd" class="bb bfind" onmouseover="Tip('{-#bexpsearch#-}: {-#texptitle#-}')" 
+						onmouseout="UnTip()" onClick="requestDCard('getIdfromSerial', $('fndserial').value);">
 			<br>
 			<span class="dlgmsg" id="distatusmsg"></span><span class="dlgmsg" id="dostat"></span>
 		  </td>
-		  <td align="right" width="500px">
+		  <td align="right" width="450px">
 			<iframe name="dic" id="dic" frameborder="0" style="width:100%; height:28px;" src="about:blank"></iframe>
 		  </td>
 <!--		  <td align="right" width="270px">
