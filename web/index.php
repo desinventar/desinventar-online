@@ -33,9 +33,11 @@ case 'listdb':
 	// Direct access returns a list of public regions on this server
 	$d = new Query();
 	$reglst = $d->searchDB();
-	$t->assign('ctl_showregionlist', true);
 	$t->assign('regionlist', $reglst);
-	$t->display('portal.tpl');
+	$t->assign('ctl_mainpage', true);
+	$t->display('index.tpl');
+	//$t->assign('ctl_showregionlist', true);
+	//$t->display('portal.tpl');
 	break;
 case 'searchdb':
 	$d = new Query();

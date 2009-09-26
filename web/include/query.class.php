@@ -641,16 +641,16 @@ class Query extends PDO
 	}
 
 	public function getRegionAdminList() {
-		$sql = "SELECT R.RegionId AS RegionId, R.CountryIso AS CountryIso, R.RegionLabel ".
-				"AS RegionLabel, RA.UserId AS UserId, R.RegionStatus AS RegionStatus ".
-				"FROM Region AS R, RegionAuth AS RA WHERE R.RegionId=RA.RegionId AND ".
-				"RA.AuthAuxValue='ADMINREGION' ORDER BY RegionLabel";
+		$sql = "SELECT R.RegionId AS RegionId, R.CountryIso AS CountryIso, R.RegionLabel AS RegionLabel, ".
+				"R.LangIsoCode AS LangIsoCode, RA.UserId AS UserId, R.RegionStatus AS RegionStatus ".
+				"FROM Region AS R, RegionAuth AS RA WHERE R.RegionId=RA.RegionId AND RA.AuthAuxValue='ADMINREGION' ".
+				"ORDER BY R.CountryIso, R.RegionLabel";
 		$data = array();
 		foreach($this->core->query($sql) as $row) {
 			$RegionActive = ($row['RegionStatus'] & 1) > 0;
 			$RegionPublic = ($row['RegionStatus'] & 2) > 0;
-			$data[$row['RegionId']] = array($row['CountryIso'], 
-				$row['RegionLabel'], $row['UserId'], $RegionActive, $RegionPublic);
+			$data[$row['RegionId']] = array($row['CountryIso'], $row['RegionLabel'], $row['LangIsoCode'], 
+											$row['UserId'], $RegionActive, $RegionPublic);
 		}
 		return $data;
 	}

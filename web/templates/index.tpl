@@ -2014,3 +2014,49 @@
 </body>
 </html>
 {-/if-}
+
+{-** MAINPAGE: default page in DesInventar root **-}
+{-if $ctl_mainpage-}
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
+	<title>{-#ttitle#-}</title>
+	<link rel="stylesheet" href="css/desinventar.css" type="text/css">
+	<script type="text/javascript" src="include/prototype.js"></script>
+	<script type="text/javascript" src="include/diadmin.js"></script>
+	<script type="text/javascript">
+	window.onload = function() {
+		updateUserBar('user.php', '', '', '');
+	}
+	</script>
+</head>
+<body>
+ <table border=0 cellpadding="0" cellspacing="0" style="border: thin solid;">
+  <tr style="background:url(images/bgmain.png)">
+   <td width="400px"><img src="images/di_logo1.png" border=0></td>
+   <td>
+	<li>Website DesInventar</li>
+	<li>[English] [Spanish] [Portuguese]</li>
+   </td>
+  </tr>
+  <tr bgcolor="#e2e2e0" valign="top">
+   <td style="border-right: thin solid #ccc;">
+	<div id="rightcontent"></div><hr>
+	<div id="pagecontent"></div>
+   </td>
+   <td>
+    Available databases<br>
+	<ul>
+{-foreach name=rlist key=key item=item from=$regionlist-}
+	<li><a href="javascript:void(null)" onClick="javascript:window.open('{-$request_uri-}?r={-$key-}','DI_{-$smarty.foreach.rlist.iteration-}', 
+		'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');">{-$item-}</a></li>
+{-/foreach-}
+	</ul>
+   </td>
+  </tr>
+ </table>
+</body>
+</html>
+{-/if-}

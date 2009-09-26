@@ -169,12 +169,6 @@
 					disenabutton($('cardcan'), true);
 				break;
 			}
-{-else-}
-			disenabutton($('cardnew'), true);
-			disenabutton($('cardsav'), true);
-			disenabutton($('cardupd'), true);
-			disenabutton($('cardcln'), true);
-			disenabutton($('cardcan'), true);
 {-/if-}
 		}
 		function switchEff(section) {
