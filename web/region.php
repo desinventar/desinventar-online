@@ -13,17 +13,10 @@ $t->config_dir = 'include';
 
 function form2region ($val) {
 	$dat = array();
-	if (isset($val['RegionId']))
-		$dat['RegionId'] = $val['RegionId'];
-	elseif (isset($val['RegionId2'])) 
-		$dat['RegionId'] = $val['RegionId2'];
-	elseif (isset($val['RegionUUID2']))
-		$dat['RegionId'] = $val['RegionUUID2'];
-	
-	$dat['RegionLabel' ] = $val['RegionLabel'];
-	$dat['LangIsoCode' ] = $val['RegionLangCode'];
-	$dat['CountryIso'  ] = $val['CountryIsoCode'];
-	$dat['RegionStatus'] = 0;
+	$dat['RegionId']		= $val['RegionId'];
+	$dat['RegionLabel']		= $val['RegionLabel'];
+	$dat['LangIsoCode']		= $val['LangIsoCode'];
+	$dat['CountryIso'] 		= $val['CountryIso'];
 	if (isset($val['RegionActive']) && $val['RegionActive'] == "on")
 		$dat['RegionStatus'] |= CONST_REGIONACTIVE;
 	else
@@ -95,7 +88,8 @@ elseif (isset($_GET['r']) && !empty($_GET['r']) && file_exists($us->q->getDBFile
 	$t->assign ("info", $info);
 	$t->assign ("dic", $q->queryLabelsFromGroup('DB', $lg));
 	//$t->assign ("dbden", str2js($reg['InfoGeneral'][1]));
-} elseif (isset($_GET['cmd'])) {
+}
+elseif (isset($_GET['cmd'])) {
 	//$q = new Query();
 	switch ($_GET['cmd']) {
 		case "adminreg":
@@ -107,17 +101,35 @@ elseif (isset($_GET['r']) && !empty($_GET['r']) && file_exists($us->q->getDBFile
 			$t->assign ("regpa", $us->q->getRegionAdminList());
 			$t->assign ("ctl_reglist", true);
 		break;
-		/* Obsolete cmd 
-		case "chkruuid":
-			// ADMINREG: check if region ID already exists..
-			if ($us->q->isvalidObjectName($_GET['RegionId'], $_GET['RegionId'] ,DI_REGION))
-				$t->assign ("cregion", true);
-			else
-				$t->assign ("cregion", false);
-			$t->assign ("ctl_chkruuid", true);
-		break;*/
 		case "list":
 			// ADMINREG: reload list from local SQLITE
+			$t->assign ("regpa", $us->q->getRegionAdminList());
+			$t->assign ("ctl_reglist", true);
+		break;
+		case "loadDir":
+			// ADMINREG: Create database list from directory
+			$dbb = dir(VAR_DIR . "/database/");
+			$direg = array();
+			while (false !== ($entry = $dbb->read())) {
+				$difile = VAR_DIR . "/database/" . $entry ."/desinventar.db";
+				if ((strlen($entry) >= 4) && file_exists($difile)) {
+					$didb = new PDO("sqlite:" . $difile);
+					$data['RegionUserAdmin'] = "root";
+					foreach($didb->query("SELECT InfoKey, InfoValue FROM Info", PDO::FETCH_ASSOC) as $row) {
+						if ($row['InfoKey'] == "RegionId" || $row['InfoKey'] == "RegionLabel" || $row['InfoKey'] == "LangIsoCode " || 
+							$row['InfoKey'] == "CountryIso " || $row['InfoKey'] == "RegionOrder" || $row['InfoKey'] == "RegionStatus" || 
+							$row['InfoKey'] == "IsCRegion" || $row['InfoKey'] == "IsVRegion")
+							$data[$row['InfoKey']] = $row['InfoValue'];
+					}
+					// Create database only if RegionId is equal to directory name
+					if ($data['RegionId'] == $entry) {
+						$r = new DIRegion($us, $data['RegionId']);
+						$r->setFromArray($data);
+						$stat = $r->insert();
+					}
+				}
+			}
+			$dbb->close();
 			$t->assign ("regpa", $us->q->getRegionAdminList());
 			$t->assign ("ctl_reglist", true);
 		break;
@@ -133,15 +145,16 @@ elseif (isset($_GET['r']) && !empty($_GET['r']) && file_exists($us->q->getDBFile
 				if ($_GET['cmd'] == "insert") {
 					$stat = $r->insert();
 					$t->assign ("cfunct", 'insert');
-				} elseif ($_GET['cmd'] == "update") {
+				}
+				elseif ($_GET['cmd'] == "update") {
 					$stat = $r->update();
 					$t->assign ("cfunct", 'update');
 				}
 				$t->assign ("regid", $data['RegionId']);
 				// Set Role ADMINREGION in RegionAuth: master for this region
-				if (!iserror($stat)) {
+				if (!iserror($stat))
 					$rol = $us->setUserRole($_GET['RegionUserAdmin'], $data['RegionId'], "ADMINREGION");
-				} else {
+				else {
 					$t->assign ("cfunct", '');
 					$rol = $stat;
 				}
@@ -152,13 +165,13 @@ elseif (isset($_GET['r']) && !empty($_GET['r']) && file_exists($us->q->getDBFile
 			}
 		break;
 	} //switch
-} else {
+}
+else {
 	$q = new Query();
 	$reglst = array();
-	$result = $q->core->query("SELECT RegionId, RegionLabel FROM Region WHERE RegionStatus=3 ORDER BY RegionLabel, RegionOrder");
-	while ($row = $result->fetch(PDO::FETCH_OBJ)) {
+	$result = $q->core->query("SELECT RegionId, RegionLabel FROM Region WHERE RegionStatus=3 ORDER BY CountryIso, RegionLabel");
+	while ($row = $result->fetch(PDO::FETCH_OBJ))
 		$reglst[$row->RegionId] = $row->RegionLabel;
-	}
 	$t->assign ("reglst", $reglst);
 	$t->assign ("ctl_noregion", true);
 	$t->assign ("ctl_index", true);

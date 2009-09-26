@@ -45,12 +45,12 @@
 	function sendData (r, url, pars, val) {
 		reg = r;
 		opt = val;
-//		alert(pars);
+		//alert(pars);
 		if (mod != "")
 			$(mod + 'addsect').style.display = 'none';
 		var myAjax = new Ajax.Request( url, {
 			method: 'get', parameters: pars,
-			onLoading: function(request) { 
+			onLoading: function(request) {
 				$(div).style.cursor = "wait";
 				uploadMsg(waiting);
 			},
@@ -145,12 +145,13 @@
 		}
 	}
 
-	function setRegionPA (cnt, rid, name, admin, active, pub) {
+	function setRegionPA (id, cnt, name, lang, admin, active, pub) {
 		mod = "regionpa";
 		$(mod + 'addsect').style.display = 'block';
-		$('RegionUUID').value = rid;
-		$('CountryIsoCode').value = cnt;
+		$('RegionId').value = id;
+		$('CountryIso').value = cnt;
 		$('RegionLabel').value = name;
+		$('LangIsoCode').value = lang;
 		$('RegionUserAdmin').value = admin;
 		if (active == "1")
 			$('RegionActive').checked = true;
