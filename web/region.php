@@ -66,12 +66,12 @@ elseif (isset($_GET['r']) && !empty($_GET['r']) && file_exists($us->q->getDBFile
 	}
 	$t->assign ("role", $role);
 	$t->assign ("userid", $us->UserId);
+	//$rf = $q->getRegionFieldByID($sRegionId, "RegionStatus");
+	//if ($rf[$sRegionId] & CONST_REGIONPUBLIC)
+	//	$t->assign ("ctl_showdcmod", true);
 	// Show active or public regions only
-	$rf = $q->getRegionFieldByID($sRegionId, "RegionStatus");
-	if ($rf[$sRegionId] & CONST_REGIONPUBLIC)
-		$t->assign ("ctl_showdcmod", true);
-	$t->assign ("ctl_showreg", true);
 	$reg = $q->getDBInfo();
+	$t->assign ("ctl_showreg", true);
 	$t->assign ("regname", $reg['RegionLabel|']);
 	//$t->assign ("log", $q->getRegLogList());
 	$lang = $reg['LangIsoCode|'];
@@ -110,9 +110,11 @@ elseif (isset($_GET['cmd'])) {
 			// ADMINREG: Create database list from directory
 			$dbb = dir(VAR_DIR . "/database/");
 			$direg = array();
+			echo "<pre>";
 			while (false !== ($entry = $dbb->read())) {
 				$difile = VAR_DIR . "/database/" . $entry ."/desinventar.db";
-				if ((strlen($entry) >= 4) && file_exists($difile)) {
+				$rg = $us->q->checkExistsRegion($entry);
+				if ((strlen($entry) >= 4) && file_exists($difile) && empty($rg)) {
 					$didb = new PDO("sqlite:" . $difile);
 					$data['RegionUserAdmin'] = "root";
 					foreach($didb->query("SELECT InfoKey, InfoValue FROM Info", PDO::FETCH_ASSOC) as $row) {

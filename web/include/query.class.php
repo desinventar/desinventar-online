@@ -617,12 +617,13 @@ class Query extends PDO
 		return $data;
 	}
 
-	function getRegionFieldByID($ruuid, $field) {
-		$sql = "SELECT RegionId, $field FROM Region WHERE RegionId = '$ruuid'";
+	function checkExistsRegion($rid) {
+		$sql = "SELECT RegionId FROM Region WHERE RegionId = '$rid'";
 		$res = $this->core->query($sql);
 		$dat = $res->fetch(PDO::FETCH_ASSOC);
-		$data[$dat['RegionId']] = $dat[$field];
-		return $data;
+		if (empty($dat['RegionId']))
+			return false;
+		return true;
 	}
 
 	public function getRegionList($cnt, $status) {
@@ -655,15 +656,15 @@ class Query extends PDO
 		return $data;
 	}
 
-  public function getCVRegItems($cvregid) {
-    $sql = "SELECT RegionItem FROM CVRegionItem WHERE RegionId='".
-           $cvregid ."' ORDER BY RegionItem";
-    $data = array();
-    $res = $this->core->query($sql);
-    foreach ($res as $row)
-      $data[] = $row['RegionItem'];
-    return $data;
-  }
+	public function getCVRegItems($cvregid) {
+		$sql = "SELECT RegionItem FROM CVRegionItem WHERE RegionId='".
+				$cvregid ."' ORDER BY RegionItem";
+		$data = array();
+		$res = $this->core->query($sql);
+		foreach ($res as $row)
+			$data[] = $row['RegionItem'];
+		return $data;
+	}
 
   /**************************
     General SQL test function
@@ -928,7 +929,7 @@ class Query extends PDO
 	function prepareList ($dl, $mode) {
 		$res = array();
 		$j = 0;
-		$creg = $this->getRegionFieldByID($this->sRegionId, 'IsCRegion');
+		$creg = $this->getDBInfoValue('IsCRegion');
 		foreach ($dl as $it) {	
 			foreach ($it as $k=>$i) {
 				$val = $i;
@@ -938,7 +939,7 @@ class Query extends PDO
 				  elseif ($mode == "MAPS") {
 					$val = $this->getObjectNameById($i, DI_GEOGRAPHY);
 					// in VirtualRegion set base prefix - 
-					if ($creg[$this->sRegionId]) {
+					if ($creg) {
 						if ($j == 0)
 							$res['CVReg'] = array();
 						array_push($res['CVReg'], substr($i, 0, 5));
@@ -957,7 +958,7 @@ class Query extends PDO
 		}
 		// Sorting list in maps to order legend - ORDER BY not found with GROUP BY in sqlite3 ??
 		if ($mode == "MAPS") {
-			if ($creg[$this->sRegionId])
+			if ($creg)
 				array_multisort($res[$eff], $res[$glv], $res['CVReg']);
 			else
 				array_multisort($res[$eff], $res[$glv]);	

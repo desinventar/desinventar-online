@@ -2037,8 +2037,8 @@
   <tr style="background:url(images/bgmain.png)">
    <td width="400px"><img src="images/di_logo1.png" border=0></td>
    <td>
-	<li>Website DesInventar</li>
-	<li>[English] [Spanish] [Portuguese]</li>
+	<li><a href="http://www.desinventar.org" target="_blank">DesInventar.org</a></li>
+	<li>{-foreach name=lglst key=key item=item from=$lglst-}[<a href="index.php?lang={-$key-}">{-$item[0]-}</a>] {-/foreach-}</li>
    </td>
   </tr>
   <tr bgcolor="#e2e2e0" valign="top">
@@ -2047,10 +2047,12 @@
 	<div id="pagecontent"></div>
    </td>
    <td>
-    Available databases<br>
+<!--    <div id="regionlist"></div>-->
+	<h4>Bases:</h4>
 	<ul>
 {-foreach name=rlist key=key item=item from=$regionlist-}
-	<li><a href="javascript:void(null)" onClick="javascript:window.open('{-$request_uri-}?r={-$key-}','DI_{-$smarty.foreach.rlist.iteration-}', 
+	<li><!--<img src="region.php?r={-$key-}&view=logo" width="57px" height="24px">-->
+		<a href="javascript:void(null)" onClick="javascript:window.open('?r={-$key-}','DI_{-$smarty.foreach.rlist.iteration-}', 
 		'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');">{-$item-}</a></li>
 {-/foreach-}
 	</ul>
