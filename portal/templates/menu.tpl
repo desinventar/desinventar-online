@@ -134,6 +134,8 @@
 			</table>
 			
 			<!-- GREAT AMERICAN CHACO -->
+			<!-- 2009-09-28 (jhcaiced) Removed Big Chaco databases from menu -->
+			<!--
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 			<tr>
 				<td class="paisel">
@@ -165,7 +167,7 @@
 			</td>
 			</tr>
 			</table>
-			
+			-->
 			<!-- NORTH AMERICA -->
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 			<tr>
