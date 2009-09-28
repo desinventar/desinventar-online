@@ -2033,32 +2033,37 @@
 	</script>
 </head>
 <body>
- <table border=0 cellpadding="0" cellspacing="0" style="border: thin solid;">
-  <tr style="background:url(images/bgmain.png)">
-   <td width="400px"><img src="images/di_logo1.png" border=0></td>
-   <td>
-	<li><a href="http://www.desinventar.org" target="_blank">DesInventar.org</a></li>
-	<li>{-foreach name=lglst key=key item=item from=$lglst-}[<a href="index.php?lang={-$key-}">{-$item[0]-}</a>] {-/foreach-}</li>
-   </td>
-  </tr>
-  <tr bgcolor="#e2e2e0" valign="top">
-   <td style="border-right: thin solid #ccc;">
-	<div id="rightcontent"></div><hr>
-	<div id="pagecontent"></div>
-   </td>
-   <td>
-<!--    <div id="regionlist"></div>-->
-	<h4>Bases:</h4>
-	<ul>
-{-foreach name=rlist key=key item=item from=$regionlist-}
-	<li><!--<img src="region.php?r={-$key-}&view=logo" width="57px" height="24px">-->
-		<a href="javascript:void(null)" onClick="javascript:window.open('?r={-$key-}','DI_{-$smarty.foreach.rlist.iteration-}', 
-		'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');">{-$item-}</a></li>
-{-/foreach-}
-	</ul>
-   </td>
-  </tr>
- </table>
+	<table border="0" cellpadding="0" cellspacing="0" style="border: thin solid;">
+	<tr style="background:url(images/bgmain.png)">
+		<td width="400px">
+			<img src="images/di_logo1.png" border=0><br/>
+		</td>
+		<td>
+			<ul>
+			<li><a href="http://www.desinventar.org" target="_blank">DesInventar.org</a></li>
+			<li>{-foreach name=lglst key=key item=item from=$lglst-}[<a href="index.php?lang={-$key-}">{-$item[0]-}</a>] {-/foreach-}</li>
+			<li>Software Version : {-$version-}<br />
+			</ul>
+		</td>
+	</tr>
+	<tr bgcolor="#e2e2e0" valign="top">
+		<td style="border-right: thin solid #ccc;">
+			<div id="rightcontent"></div><hr>
+			<div id="pagecontent"></div>
+		</td>
+		<td rowspan="2">
+			<!--    <div id="regionlist"></div>-->
+			<h4>Bases:</h4>
+			<ul>
+			{-foreach name=rlist key=key item=item from=$regionlist-}
+				<li><!--<img src="region.php?r={-$key-}&view=logo" width="57px" height="24px">-->
+				<a href="javascript:void(null)" onClick="javascript:window.open('?r={-$key-}','DI_{-$smarty.foreach.rlist.iteration-}', 
+				'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');">{-$item-}</a></li>
+			{-/foreach-}
+			</ul>
+		</td>
+	</tr>
+	</table>
 </body>
 </html>
 {-/if-}
