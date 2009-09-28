@@ -65,9 +65,9 @@ if (isset($get['cmd'])) {
 		showResult($i, $t);
 		break;
 	case "update":
-		$o = new DIEvent($us);
-		$o->set('EventId', $dat['EventId']);
-		$o->load();
+		$o = new DIEvent($us, $dat['EventId']);
+		//$o->set('EventId', $dat['EventId']);
+		//$o->load();
 		$o->setFromArray($dat);
 		$i = $o->update();
 		showResult($i, $t);

@@ -85,10 +85,34 @@ class DICause extends DIObject {
 		return $iReturn;
 	}
 
+	public function validateNoDatacards($curReturn, $ErrCode) {
+		$iReturn = $curReturn;
+		if ($iReturn > 0) {
+			$Count = 0;
+			$Query = "SELECT COUNT(DisasterId) AS COUNT FROM Disaster WHERE CauseId='" . $this->get('CauseId') . "'";
+			foreach($this->q->dreg->query($Query) as $row) {
+				$Count = $row['COUNT'];
+			}
+			if ($Count > 0) {
+				$iReturn = -ErrCode;
+			}
+		}
+		return $iReturn;
+	}
+
 	public function validateUpdate() {
 		$iReturn = 1;
 		$iReturn = $this->validateNotNull($iReturn, -23, 'CauseName');
 		$iReturn = $this->validateUnique($iReturn,  -24, 'CauseName', true);
+		if ($this->get('CauseActive') == 0) {
+			$iReturn = $this->validateNoDatacards($iReturn, -25);
+		}
+		return $iReturn;
+	}
+	
+	public function validateDelete() {
+		$iReturn = ERR_NO_ERROR;
+		$iReturn = $this->validateNoDatacards($iReturn, -25);
 		return $iReturn;
 	}
 	
