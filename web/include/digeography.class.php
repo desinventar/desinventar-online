@@ -137,7 +137,7 @@ class DIGeography extends DIObject {
 				$Count = $row['COUNT'];
 			}
 			if ($Count > 0) {
-				$iReturn = -ErrCode;
+				$iReturn = $ErrCode;
 			}
 		}
 		return $iReturn;
