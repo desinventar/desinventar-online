@@ -90,13 +90,16 @@ class DICause extends DIObject {
 		if ($iReturn > 0) {
 			$Count = 0;
 			$Query = "SELECT COUNT(DisasterId) AS COUNT FROM Disaster WHERE CauseId='" . $this->get('CauseId') . "'";
+			fb($Query);
 			foreach($this->q->dreg->query($Query) as $row) {
 				$Count = $row['COUNT'];
 			}
+			fb('Count : ' . $Count);
 			if ($Count > 0) {
-				$iReturn = -ErrCode;
+				$iReturn = $ErrCode;
 			}
 		}
+		fb($iReturn);
 		return $iReturn;
 	}
 
@@ -104,6 +107,7 @@ class DICause extends DIObject {
 		$iReturn = 1;
 		$iReturn = $this->validateNotNull($iReturn, -23, 'CauseName');
 		$iReturn = $this->validateUnique($iReturn,  -24, 'CauseName', true);
+		fb('X' . $this->get('CauseActive') . 'X');
 		if ($this->get('CauseActive') == 0) {
 			$iReturn = $this->validateNoDatacards($iReturn, -25);
 		}
