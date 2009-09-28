@@ -50,7 +50,11 @@
 			$("#regionlogo" ).attr('src', '{-$di_url-}' + '?cmd=getRegionLogo&RegionId=' + RegionId);
 			$("#regionbasicinfo" ).load('{-$di_url-}', { cmd:'getRegionBasicInfo', RegionId : RegionId });
 			$("#regiontechinfo"  ).load('{-$di_url-}', { cmd:'getRegionTechInfo', RegionId : RegionId });
-			$("#regionlink").attr('href', '{-$di_url-}' + '?r=' + RegionId);
+			//$("#regionlink").attr('href', '{-$di_url-}' + '?r=' + RegionId);
+			$("#regionlink").unbind('click').click(function() {
+				window.open('{-$di_url-}?r=' + RegionId,'DI_' + RegionId, 
+					'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');
+			});
 		};
 		
 		function showMap() {
@@ -150,7 +154,7 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<center><a id="regionlink" href="" target="_blank"><img id="regionbutton" src="images/b_desinventar3.jpg" border="0"></a></center>
+						<center><a id="regionlink" href="javascript:void(null)"><img id="regionbutton" src="images/b_desinventar3.jpg" border="0"></a></center>
 						<div id="regiontechinfo"></div>
 					</td>
 				</tr>
