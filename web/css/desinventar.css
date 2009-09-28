@@ -150,3 +150,7 @@ enabled {
 }
 a	{	color:#1e90ff; }
 a:hover	{	color:#00008b; }
+.rememberpasswordlink {
+	font-family:arial,tahoma,helvetica,cursive;
+	font-size:9px;
+}
