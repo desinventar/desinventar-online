@@ -29,7 +29,8 @@
 					var jList = $("#pagecontent");
 					$("#pagecontent").empty();
 					$.each(data, function(key, value) {
-						jList.append($('<li id="' + key + '" class="regionlistitem">' + value + '</li>'));
+						//jList.append($('<li id="' + key + '" class="regionlistitem">' + value + '</li>'));
+						jList.append($('<a href="javascript:void(null)" id="' + key + '">' + value + '</a><br />'));
 						$('#' + key).addClass("alt").unbind('click').click(function() {
 							displayRegionInfo(key);
 						}); //bind
@@ -149,8 +150,8 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						<div id="regiontechinfo"></div>
 						<center><a id="regionlink" href="" target="_blank"><img id="regionbutton" src="images/b_desinventar3.jpg" border="0"></a></center>
+						<div id="regiontechinfo"></div>
 					</td>
 				</tr>
 				</table>
