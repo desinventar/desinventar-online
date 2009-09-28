@@ -18,7 +18,9 @@
    </td>
    <td>
     <input type="submit" value="{-#benter#-}" class="line usr_inp">&nbsp;&nbsp;
-	<span class="olvido"><a href="javascript:void(null)" onclick="updateList('pagecontent', 'user.php', 'cmd=passlost');">{-#tpasslost#-}</a></span>
+	<span class="rememberpasswordlink">
+		<a href="javascript:void(null)" onclick="updateList('pagecontent', 'user.php', 'cmd=passlost');">{-#tpasslost#-}</a>
+	</span>
    </td>
   </tr>
  </table>
