@@ -100,6 +100,7 @@
             {id:'mwww', text: '{-#mwebsite#-}',	handler: onMenuItem  },
             {id:'mmtg', text: '{-#hmoreinfo#-}', handler: onMenuItem  },
             {id:'mdoc', text: '{-#hotherdoc#-}', handler: onMenuItem  },
+            {id:'mreg', text: '{-#hdbinfo#-}', handler: onMenuItem  },
             {id:'mabo', text: '{-#mabout#-}', handler: onMenuItem  }]
       });
 	  
@@ -114,7 +115,7 @@
 {-/if-}
       tb.add('-', {id: 'mdbs', text: '{-#mdatabases#-}',	menu: mbases });
       tb.add('-', {id: 'mhlp', text: '{-#mhelp#-}',			menu: mhelp  });
-	  tb.add('->',{id: 'mreg', text: '[{-$regname-}]', handler: onMenuItem });
+      tb.add('->',{id: 'mreg', text: '[{-$regname-}]', 		handler: onMenuItem });
 	  tb.add('->',{id: 'mwww', text: '<img src="images/di_logo4.png">', handler: onMenuItem });
 
 	  function onMenuItem(item){
