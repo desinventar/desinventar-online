@@ -1,3 +1,4 @@
+{-config_load file=`$lg`.conf section="di8_web"-}
 {-config_load file=`$lg`.conf section="dc_querydesign"-}
 {-if $ctl_show-}
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -2042,7 +2043,7 @@
 			<ul>
 			<li><a href="http://www.desinventar.org" target="_blank">DesInventar.org</a></li>
 			<li>{-foreach name=lglst key=key item=item from=$lglst-}[<a href="index.php?lang={-$key-}">{-$item[0]-}</a>] {-/foreach-}</li>
-			<li>Software Version : {-$version-}<br />
+			<li>{-#labelsoftwareversion#-} : {-$version-}<br />
 			</ul>
 		</td>
 	</tr>
