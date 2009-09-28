@@ -99,6 +99,7 @@ class DIObject {
 			if ($sFieldType == 'BOOLEAN') {
 				if ($sValue . "" == "on")  { $sValue = 1; }
 				if ($sValue . "" == "off") { $sValue = 0; }
+				if ($sValue . "" == "")    { $sValue = 0; }
 			}
 			if (($sFieldType == 'INTEGER') ||
 			    ($sFieldType == 'DOUBLE') ) {
