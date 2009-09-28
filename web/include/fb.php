@@ -24,6 +24,11 @@ if (isset($_SERVER["HTTP_HOST"])) {
 		print "fb: " . $Msg . "\n";
 	}
 }
+
+function showErrorMsg($sMsg) {
+	fb($sMsg);
+}
+
 </script>
 
 

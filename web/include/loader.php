@@ -169,10 +169,6 @@ define("TMP_DIR" , DATADIR);
 define("SMTY_DIR", CACHEDIR); // Smarty temp dir
 define("TMPM_DIR", CACHEDIR); // Mapserver temp dir
 
-function showErrorMsg($sMsg) {
-	fb($sMsg);
-}
-
 function showDebugMsg($sMsg) {
 	print $sMsg . "<br />\n";
 }
