@@ -137,7 +137,6 @@ if (isset($_SERVER["HTTP_HOST"])) {
 		$_SERVER['DI8_DATADIR'] = $Install_Dir . '/data';
 		$_SERVER['DI8_CACHEDIR'] = $Install_Dir . '/tmp';
 		define("FONTSET" , $Install_Dir . '/data/main/fontswin.txt');	
-		$FBCore = $Install_Dir . '/ms4w/apps/FirePHPCore-0.3.1/lib/FirePHPCore/fb.php';
 	} else {
 		// Running on a Linux Server
 		define('MODE', "online");
@@ -153,7 +152,6 @@ if (isset($_SERVER["HTTP_HOST"])) {
 		$_SERVER["DI8_WWWDIR"]   = "/var/www/desinventar-8.2";
 		$_SERVER["DI8_DATADIR"]  = "/var/lib/desinventar-8.2";
 		$_SERVER["DI8_CACHEDIR"] = "/var/cache/Smarty/di8";
-		$FBCore = '/usr/share/pear/FirePHPCore/fb.php';
 	}
 } else {
 	// Running a Command Line Script
@@ -171,23 +169,6 @@ define("TMP_DIR" , DATADIR);
 define("SMTY_DIR", CACHEDIR); // Smarty temp dir
 define("TMPM_DIR", CACHEDIR); // Mapserver temp dir
 
-// 2009-07-04 (jhcaiced) Added FirePHP debug system
-// This lines try to detect if FirePHP Core is installed,
-// if not, create a dummy class/function to avoid errors.
-if (MODE != 'command') {
-	if (file_exists($FBCore)) {
-		require_once($FBCore);
-	} else {
-		function fb() {
-			// dummy fb() function, doesn't do anything...
-		}
-	}
-} else {
-		function fb($Msg) {
-			print "fb: " . $Msg . "\n";
-		}
-}
-
 function showErrorMsg($sMsg) {
 	fb($sMsg);
 }
@@ -199,6 +180,7 @@ function showDebugMsg($sMsg) {
 
 $lg          = "spa";
 
+require_once(BASE . "/include/fb.php");
 require_once(BASE . "/include/usersession.class.php");
 require_once(BASE . "/include/diobject.class.php");
 require_once(BASE . '/include/diuser.class.php');
