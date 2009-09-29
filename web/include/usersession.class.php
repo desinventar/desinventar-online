@@ -136,7 +136,7 @@ class UserSession {
 	public function open($prmRegionId) {
 		$iReturn = ERR_NO_ERROR;
 		$this->clearLocks();
-
+		
 		$DBDir = VAR_DIR . '/database/' . $prmRegionId;
 		$DBFile = $DBDir . '/desinventar.db';
 		if (! file_exists($DBFile)) {

@@ -474,8 +474,12 @@ class Query extends PDO
 			if ($prmInfoKey != 'LangIsoCode') {
 				$sql .= " AND (LangIsoCode='" . $this->getDBInfoValue('LangIsoCode') . "' OR LangIsoCode='')";
 			}
-			foreach($this->dreg->query($sql) as $row) {
-				$sReturn = $row['InfoValue'];
+			try {
+				foreach($this->dreg->query($sql) as $row) {
+					$sReturn = $row['InfoValue'];
+				}
+			} catch (Exception $e) {
+				showErrorMsg("Error !: " . $e->getMessage());
 			}
 		} //if
 		return $sReturn;
