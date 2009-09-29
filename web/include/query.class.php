@@ -1134,9 +1134,9 @@ class Query extends PDO
     }
     return $data;
   }
-  function queryLabelsFromGroup($labgrp, $langID) {
+  function queryLabelsFromGroup($labgrp, $langID, $withLabelGroupPrefix=true) {
   	$dictio = '';
-    $sql = "select g.LGName as lgn, g.LabelName as lbn, DictTranslation, ".
+    $sql = "SELECT g.LGName as lgn, g.LabelName as lbn, DictTranslation, ".
             "DictTechHelp, DictBasDesc, DictFullDesc from Dictionary d,".
             " LabelGroup g where (g.LGName like '". $labgrp ."%') and ".
             "(d.LangIsoCode='". $langID ."') and (d.DictLabelID = g.DictLabelID) ".
@@ -1144,7 +1144,12 @@ class Query extends PDO
 	try {
 		foreach ($this->base->query($sql) as $row) {
 			$grp = explode("|", $row['lgn']);
-			$dictlabel = $grp[0] . $row['lbn'];
+			if ($withLabelGroupPrefix) {
+				$dictlabel = $grp[0];
+			} else {
+				$dictlabel = '';
+			}
+			$dictlabel .= $row['lbn'];
 			$dictio[$dictlabel] = array(
 			  $row['DictTranslation'],//utf8_encode($row['DicTranslation']), 
 			  $row['DictTechHelp'],//utf8_encode($row['DicTechHelp']),
