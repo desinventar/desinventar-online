@@ -344,8 +344,6 @@ class DIRegion extends DIObject {
 		$this->q->dreg->query("DELETE FROM Sync;");
 	}
 	
-
-
 	public function addRegionItemRecord($prmRegionItemId) {
 		$iReturn = ERR_NO_ERROR;
 		$RegionId = $this->get('RegionId');
@@ -392,7 +390,6 @@ class DIRegion extends DIObject {
 		$this->setConnection('core');
 		return $iReturn;
 	}
-	
 	
 	public function processURL($prmURL) {
 		$url = array();
@@ -786,9 +783,11 @@ class DIRegion extends DIObject {
 	public function setActive($prmValue) {
 		return $this->setBit($prmValue, CONST_REGIONACTIVE);
 	}
+
 	public function setPublic($prmValue) {
 		return $this->setBit($prmValue, CONST_REGIONPUBLIC);
 	}
+
 	public function setBit($prmValue, $prmBit) {
 		$Value = (int)$this->get('RegionStatus');
 		if ($prmValue > 0) {

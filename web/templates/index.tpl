@@ -122,7 +122,7 @@
 		switch (item.id) {
 			// file menu
 			case "mreg":
-				$('dcr').src = "index.php?RegionId={-$reg-}&cmd=getRegionFullInfo";
+				$('dcr').src = "?cmd=getRegionFullInfo&r={-$reg-}";
 				$('bsave').style.visibility = 'hidden';
 				$('bprint').style.visibility = 'hidden';
 			break;
@@ -1579,7 +1579,7 @@
 	  </tr>
 	</table>
 	<iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" 
-		src="index.php?RegionId={-$reg-}&cmd=getRegionFullInfo"></iframe>
+		src="?cmd=getRegionFullInfo&r={-$reg-}"></iframe>
 	</div>
  </div>
 <!--	SECTION : QUERY DESIGN 
