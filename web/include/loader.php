@@ -4,109 +4,6 @@
  (c) 1999-2009 Corporacion OSSO
 */
 
-/* Main loader..*/
-
-//ob_start( 'ob_gzhandler' );
-
-// Common Functions
-function createIfNotExistDirectory($sMyPath) {
-	if (!file_exists($sMyPath)) {
-		error_reporting(E_ALL & ~E_WARNING);
-		mkdir($sMyPath);
-		error_reporting(E_ALL);
-	}
-}
-
-function testMap($laypath) {
-	if (file_exists($laypath .".shp") && file_exists($laypath .".dbf"))
-		return true;
-	return false;
-}
-
-// Check if session is of a user..
-function checkUserSess() {
-	// NOTE: need a function checkSession in dicore
-	if (isset($us->UserId) && isset($us->sSessionId) &&
-			strlen($us->sSessionId) > 0)
-		if (strlen($us->UserId) > 0)
-			return true;
-	return false;
-}
-
-// Check if session is of anonymous
-function checkAnonSess() {
-	if (isset($us->UserId) && isset($us->sSessionId) &&
-			strlen($us->sSessionId) > 0)
-		if (strlen($us->UserId) == 0)
-			return true;
-	return false;
-}
-
-function iserror ($val) {
-	if (is_numeric($val))
-		if ($val < 0)
-			return true;
-	return false;
-}
-	
-function showerror ($val) {
-	switch ($val) {
-		case ERR_UNKNOWN_ERROR:     $error = "Desconocido"; break;
-		case ERR_INVALID_COMMAND:   $error = "Comando inv&aacute;lido"; break;
-		case ERR_OBJECT_EXISTS:     $error = "Objeto ya existe"; break;
-		case ERR_NO_DATABASE:       $error = "Sin conexi&oacute;n a la BD"; break;
-		case ERR_INVALID_PASSWD:    $error = "Clave inv&aacute;lida"; break;
-		case ERR_ACCESS_DENIED:     $error = "Acceso denegado a Usuario"; break;
-		case ERR_OBJECT_NOT_FOUND:  $error = "Objeto no funciona"; break;
-		case ERR_CONSTRAINT_FAIL:   $error = "Permisos insuficientes"; break;
-		case ERR_NO_CONNECTION:     $error = "Sin conexi&oacute;n al Sistema"; break;
-		default:                    $error = "No codificado"; break;
-	}
-	$res = "Error: $error";
-	// Very Serious Errors inmediatly notify to Portal Administrator.. 
-	if ($val == ERR_NO_CONNECTION || $val == ERR_NO_DATABASE) {
-		$res .= " (Automatic notification is required)";
-		// SendMessage ("root@di..", "Severe DI8 Not connection", "Error: $res");
-	}
-	return $res;
-}
-
-// To prevent display errors with strings containing cr,lf,quotes etc. remove them
-function str2js($str) {
-	$str2 = ereg_replace("[\r\n]", " \\n\\\n", $str);
-	$str2 = ereg_replace('"', '-', $str2);
-	$str2 = ereg_replace("'", "-", $str2);
-	return $str2;
-	//return preg_replace('/([^ :!#$%@()*+,-.\x30-\x5b\x5d-\x7e])/e',
-	//	"'\\x'.(ord('\\1')<16? '0': '').dechex(ord('\\1'))",$s);
-}
-
-// Pseudo-random UUID according to RFC 4122 
-function uuid() {
-	return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
-			mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), 
-			mt_rand( 0, 0x0fff ) | 0x4000, mt_rand( 0, 0x3fff ) | 0x8000,
-			mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ) );
-}
-
-// Fix in form _POST var CusQry to let '', ""
-function fixPost($post) {
-	if (isset($post['__CusQry'])) {
-		$post['__CusQry'] = stripslashes($post['__CusQry']);
-	}
-}
-
-function microtime_float() {
-    list($usec, $sec) = explode(" ", microtime());
-    return ((float)$usec + (float)$sec);
-}
-
-
-/* SETTINGS */
-$time_start = microtime_float();
-
-// "C:/desinventar8/ms4w/Apache/htdocs/";
-// "/var/www/html/desinventar/test/";
 
 // 2009-07-22 (jhcaiced) Adapted Configuration and Startup for 
 // using with PHP Command Line 
@@ -156,6 +53,9 @@ if (isset($_SERVER["HTTP_HOST"])) {
 } else {
 	// Running a Command Line Script
 	define('MODE', "command");
+	$_SERVER["DI8_WWWDIR"]   = "/var/www/desinventar-8.2";
+	$_SERVER["DI8_DATADIR"]  = "/var/lib/desinventar-8.2";
+	$_SERVER["DI8_CACHEDIR"] = "/var/cache/Smarty/di8";
 }
 
 define("BASE"    , $_SERVER["DI8_WEB"]);
@@ -169,11 +69,6 @@ define("TMP_DIR" , DATADIR);
 define("SMTY_DIR", CACHEDIR); // Smarty temp dir
 define("TMPM_DIR", CACHEDIR); // Mapserver temp dir
 
-function showDebugMsg($sMsg) {
-	print $sMsg . "<br />\n";
-}
-
-
 $lg          = "spa";
 
 require_once(BASE . "/include/fb.php");
@@ -183,6 +78,9 @@ require_once(BASE . '/include/diuser.class.php');
 require_once(BASE . "/include/query.class.php");
 require_once(BASE . "/include/constants.php");
 require_once(BASE . "/include/common.php");
+
+/* SETTINGS */
+$time_start = microtime_float();
 
 $SessionId = uuid();
 if (MODE != "command") {
@@ -237,5 +135,4 @@ if (MODE != "command") {
 
 	$t->assign ("lg", $lg);
 }
-
 </script>
