@@ -49,9 +49,9 @@
 		if (mod != "")
 			$(mod + 'addsect').style.display = 'none';
 		var myAjax = new Ajax.Request( url, {
-			method: 'get', parameters: pars,
+			method: 'get', parameters: 'r='+ r +'&'+ pars,
 			onLoading: function(request) {
-				$(div).style.cursor = "wait";
+				window.style.cursor = "wait";
 				uploadMsg(waiting);
 			},
 			onComplete: showResponse
