@@ -19,10 +19,15 @@ function loadCSV($ocsv) {
 $post = $_POST;
 $get = $_GET;
 
-$reg = $us->sRegionId;
-if (empty($reg)) {
-	exit();
+if (isset($post['_REG']) && !empty($post['_REG'])) {
+	$reg = $post['_REG'];
+} elseif (isset($get['r']) && !empty($get['r'])) {
+	$reg = $get['r'];
 }
+else
+	exit();
+
+$us->open($reg);
 
 if (isset($_FILES['desinv']) && isset($post['diobj'])) {
 	$iserror = true;
@@ -39,22 +44,21 @@ if (isset($_FILES['desinv']) && isset($post['diobj'])) {
 				// This step executes iconv to convert the uploaded file to UTF-8
 				$Cmd = "/usr/bin/iconv --from-code=ISO-8859-1 --to-code=UTF-8 " . $tmp_name . "> " . TEMP . "/" . $name;
 				system($Cmd);
-			} else {
-				move_uploaded_file($tmp_name, TEMP ."/$name");
 			}
+			else
+				move_uploaded_file($tmp_name, TEMP ."/$name");
 			$iserror = false;
 			$FileName = TEMP . '/' . $name;
 			// load basic field of dictionary
-			$q = new Query($reg);
 			$dic = array();
-			$dic = array_merge($dic, $q->queryLabelsFromGroup('Disaster', $lg));
-			$dic = array_merge($dic, $q->queryLabelsFromGroup('Record|2', $lg));
-			$dic = array_merge($dic, $q->queryLabelsFromGroup('Geography', $lg));
-			$dic = array_merge($dic, $q->queryLabelsFromGroup('Event', $lg));
-			$dic = array_merge($dic, $q->queryLabelsFromGroup('Cause', $lg));
-			$dic = array_merge($dic, $q->queryLabelsFromGroup('Effect', $lg));
-			$dic = array_merge($dic, $q->queryLabelsFromGroup('Sector', $lg));
-			$dic = array_merge($dic, $q->getEEFieldList("True"));
+			$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Disaster', $lg));
+			$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Record|2', $lg));
+			$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Geography', $lg));
+			$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Event', $lg));
+			$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Cause', $lg));
+			$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
+			$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Sector', $lg));
+			$dic = array_merge($dic, $us->q->getEEFieldList("True"));
 			$DisasterImport = "DisasterId,DisasterSerial,DisasterBeginTime,GeographyId,".
 				"DisasterSiteNotes,DisasterSource,DisasterLongitude,DisasterLatitude,RecordAuthor,".
 				"RecordCreation,RecordStatus,EventId,EventDuration,EventMagnitude,EventNotes,CauseId,".
@@ -112,7 +116,8 @@ if (isset($_FILES['desinv']) && isset($post['diobj'])) {
 	} else {
 		$error = "UPLOAD FAILED";
 	}
-} else {
+}
+else {
 	// show upload form
 	$urol = $us->getUserRole($reg);
 	if ($urol == "OBSERVER")

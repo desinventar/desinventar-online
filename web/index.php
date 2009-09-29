@@ -132,51 +132,51 @@ default:
 	if (!empty($RegionId) && file_exists($us->q->getDBFile($RegionId))) {
 		// Accessing a region with some operation
 		$us->open($RegionId);
-		$q = new Query($RegionId);
+		//$q = new Query($RegionId);
 		if (isset($get['lang']) && !empty($get['lang']))
 			$_SESSION['lang'] = $get['lang'];
 		if (isset($get['cmd'])) {
 			switch ($get['cmd']) {
 				case "getGeoId":
-					$code = $q->getObjectNameById($get['GeoCode'], "GEOCODE");
+					$code = $us->q->getObjectNameById($get['GeoCode'], "GEOCODE");
 					echo "$code";
 				break;
 				case "glist":
 					$t->assign ("reg", $get['GeographyId']);
-					$t->assign ("geol", $q->loadGeoChilds($get['GeographyId']));
+					$t->assign ("geol", $us->q->loadGeoChilds($get['GeographyId']));
 					$t->assign ("ctl_glist", true);
 				break;
 				case "levlst":
-					$t->assign ("glev", $q->loadGeoLevels('', -1, false));
+					$t->assign ("glev", $us->q->loadGeoLevels('', -1, false));
 					$t->assign ("ctl_levlst", true);
 				break;
 				case "geolst":
-					$t->assign ("geol", $q->loadGeography(0));
+					$t->assign ("geol", $us->q->loadGeography(0));
 					$t->assign ("ctl_glist", true);
 				break;
 				case "caulst":
-					$t->assign ("caupredl", $q->loadCauses("PREDEF", "active", $lg));
-					$t->assign ("cauuserl", $q->loadCauses("USER", "active", $lg));
+					$t->assign ("caupredl", $us->q->loadCauses("PREDEF", "active", $lg));
+					$t->assign ("cauuserl", $us->q->loadCauses("USER", "active", $lg));
 					$t->assign ("ctl_caulst", true);
 				break;
 				case "evelst":
-					$t->assign ("evepredl", $q->loadEvents("PREDEF", "active", $lg));
-					$t->assign ("eveuserl", $q->loadEvents("USER", "active", $lg));
+					$t->assign ("evepredl", $us->q->loadEvents("PREDEF", "active", $lg));
+					$t->assign ("eveuserl", $us->q->loadEvents("USER", "active", $lg));
 					$t->assign ("ctl_evelst", true);
 				break;
 			}
 		}
 		else {
 			$t->assign ("ms", MAPSERV);
-			$t->assign ("dis", $q->queryLabelsFromGroup('Disaster', $lg));
-			$t->assign ("rc1", $q->queryLabelsFromGroup('Record|1', $lg));
-			$t->assign ("rc2", $q->queryLabelsFromGroup('Record|2', $lg));
-			$t->assign ("eve", $q->queryLabelsFromGroup('Event', $lg));
-			$t->assign ("cau", $q->queryLabelsFromGroup('Cause', $lg));
+			$t->assign ("dis", $us->q->queryLabelsFromGroup('Disaster', $lg));
+			$t->assign ("rc1", $us->q->queryLabelsFromGroup('Record|1', $lg));
+			$t->assign ("rc2", $us->q->queryLabelsFromGroup('Record|2', $lg));
+			$t->assign ("eve", $us->q->queryLabelsFromGroup('Event', $lg));
+			$t->assign ("cau", $us->q->queryLabelsFromGroup('Cause', $lg));
 			$t->assign ("ctl_glist", true);
 			$t->assign ("reg", $RegionId);
 			$t->assign ("path", VAR_DIR);
-			$t->assign ("exteffel", $q->getEEFieldList("True"));
+			$t->assign ("exteffel", $us->q->getEEFieldList("True"));
 			// Get UserRole
 			$role = $us->getUserRole($RegionId);
 			$t->assign ("role", $role);
@@ -186,12 +186,12 @@ default:
 			else
 				$t->assign ("ctl_user", false);
 			// Set selection map
-			$regname = $q->getDBInfoValue('RegionLabel');
+			$regname = $us->q->getDBInfoValue('RegionLabel');
 			$t->assign ("regname", $regname);
 			//  if (testMap(VAR_DIR . "/". $RegionId . "/". $data))
 			$t->assign ("ctl_showmap", true);
 			// get range of dates
-			$ydb = $q->getDateRange();
+			$ydb = $us->q->getDateRange();
 			$t->assign ("yini", substr($ydb[0], 0, 4));
 			$t->assign ("yend", substr($ydb[1], 0, 4));
 			// In Saved Queries set true in Geo, Events, Causes selected..
@@ -218,17 +218,17 @@ default:
 				}
 			}
 			// List of elements: Geography, GLevels, Events, Causes..
-			$t->assign ("geol", $q->loadGeography(0));
-			$t->assign ("glev", $q->loadGeoLevels('', -1, false));
-			$t->assign ("evepredl", $q->loadEvents("PREDEF", "active", $lg));
-			$t->assign ("eveuserl", $q->loadEvents("USER", "active", $lg));
-			$t->assign ("caupredl", $q->loadCauses("PREDEF", "active", $lg));
-			$t->assign ("cauuserl", $q->loadCauses("USER", "active", $lg));
+			$t->assign ("geol", $us->q->loadGeography(0));
+			$t->assign ("glev", $us->q->loadGeoLevels('', -1, false));
+			$t->assign ("evepredl", $us->q->loadEvents("PREDEF", "active", $lg));
+			$t->assign ("eveuserl", $us->q->loadEvents("USER", "active", $lg));
+			$t->assign ("caupredl", $us->q->loadCauses("PREDEF", "active", $lg));
+			$t->assign ("cauuserl", $us->q->loadCauses("USER", "active", $lg));
 			// Query words and phrases in dictionary..
-			$ef1 = $q->queryLabelsFromGroup('Effect|People', $lg);
-			$ef2 = $q->queryLabelsFromGroup('Effect|Affected', $lg);
-			$ef3 = $q->queryLabelsFromGroup('Effect|Economic', $lg);
-			$sec = $q->queryLabelsFromGroup('Sector', $lg);
+			$ef1 = $us->q->queryLabelsFromGroup('Effect|People', $lg);
+			$ef2 = $us->q->queryLabelsFromGroup('Effect|Affected', $lg);
+			$ef3 = $us->q->queryLabelsFromGroup('Effect|Economic', $lg);
+			$sec = $us->q->queryLabelsFromGroup('Sector', $lg);
 			$sec['SectorTransport'][3] 		= array('EffectRoads' => $ef2['EffectRoads'][0]);
 			$sec['SectorCommunications'][3] = null;
 			$sec['SectorRelief'][3] 		= null;
@@ -242,8 +242,8 @@ default:
 			$sec['SectorHealth'][3]			= array('EffectMedicalCenters' => $ef2['EffectMedicalCenters'][0]);
 			$sec['SectorOther'][3]			= null;
 			$dic = array();
-			$dic = array_merge($dic, $q->queryLabelsFromGroup('MapOpt', $lg));
-			$dic = array_merge($dic, $q->queryLabelsFromGroup('Graph', $lg));
+			$dic = array_merge($dic, $us->q->queryLabelsFromGroup('MapOpt', $lg));
+			$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Graph', $lg));
 			$dic = array_merge($dic, $ef1);
 			$dic = array_merge($dic, $ef2);
 			$dic = array_merge($dic, $ef3);
@@ -253,16 +253,16 @@ default:
 			$t->assign ("ef2", $ef2);
 			$t->assign ("ef3", $ef3);
 			$t->assign ("sec", $sec);
-			$t->assign ("ef4", $q->queryLabelsFromGroup('Effect|More', $lg));
+			$t->assign ("ef4", $us->q->queryLabelsFromGroup('Effect|More', $lg));
 			// DATA
 			$dc2 = array();
-			$dc2 = array_merge($dc2, $q->queryLabelsFromGroup('Disaster', $lg));
-			$dc2 = array_merge($dc2, $q->queryLabelsFromGroup('Record|2', $lg));
-			$dc2 = array_merge($dc2, $q->queryLabelsFromGroup('Geography', $lg));
-			$dc2 = array_merge($dc2, $q->queryLabelsFromGroup('Event', $lg));
-			$dc2 = array_merge($dc2, $q->queryLabelsFromGroup('Cause', $lg));
-			$dc2 = array_merge($dc2, $q->queryLabelsFromGroup('Effect', $lg));
-			$dc2 = array_merge($dc2, $q->queryLabelsFromGroup('Sector', $lg));
+			$dc2 = array_merge($dc2, $us->q->queryLabelsFromGroup('Disaster', $lg));
+			$dc2 = array_merge($dc2, $us->q->queryLabelsFromGroup('Record|2', $lg));
+			$dc2 = array_merge($dc2, $us->q->queryLabelsFromGroup('Geography', $lg));
+			$dc2 = array_merge($dc2, $us->q->queryLabelsFromGroup('Event', $lg));
+			$dc2 = array_merge($dc2, $us->q->queryLabelsFromGroup('Cause', $lg));
+			$dc2 = array_merge($dc2, $us->q->queryLabelsFromGroup('Effect', $lg));
+			$dc2 = array_merge($dc2, $us->q->queryLabelsFromGroup('Sector', $lg));
 			$t->assign ("dc2", $dc2);
 			$fld = "DisasterSerial,DisasterBeginTime,EventName,GeographyFQName,DisasterSiteNotes,".
 				"DisasterSource,EffectNotes,EffectPeopleDead,EffectPeopleMissing,EffectPeopleInjured,".
@@ -278,7 +278,7 @@ default:
 			"GeographyCode,DisasterLatitude,DisasterLongitude,RecordAuthor,RecordCreation,RecordUpdate,EventNotes");
 			$t->assign ("sda1", $sda1);	// array_diff_key($dc2, array_flip($sda))
 			// MAPS
-			$mgl = $q->loadGeoLevels('', -1, true);
+			$mgl = $us->q->loadGeoLevels('', -1, true);
 			$t->assign ("mgel", $mgl);
 			$range[] = array(10, "1 - 10", "ffff99");
 			$range[] = array(100, "11 - 100", "ffff00");
@@ -301,10 +301,10 @@ default:
 			$t->assign ("sst1", $sst1);
 			$t->assign ("sst", $sst);
 			$st = array();
-			foreach ($q->loadGeoLevels('', -1, false) as $k=>$i)
+			foreach ($us->q->loadGeoLevels('', -1, false) as $k=>$i)
 				$st["StatisticGeographyId_". $k] = array($i[0], $i[1]);
 			$std = array();
-			$std = array_merge($std, $q->queryLabelsFromGroup('Statistic', $lg));
+			$std = array_merge($std, $us->q->queryLabelsFromGroup('Statistic', $lg));
 			$std = array_merge($std, $st);
 			$t->assign ("std", $std);
 			$t->assign ("ctl_show", true);

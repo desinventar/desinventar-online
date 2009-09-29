@@ -8,11 +8,13 @@ require_once('include/loader.php');
 require_once('include/query.class.php');
 require_once('include/digeography.class.php');
 
-$reg = $us->sRegionId;
-if (empty($reg)) {
-	exit();
-}
 $get = $_GET;
+
+if (isset($get['r']) && !empty($get['r'])) {
+	$reg = $get['r'];
+	$us->open($reg);
+} else
+	exit();
 
 // EDIT REGION: Form to Create and assign regions
 if (isset($get['geocmd'])) {
@@ -75,7 +77,8 @@ if (isset($get['geocmd'])) {
 	default: 
 	break;
 	} // switch
-} else {
+}
+else {
 	$t->assign ("ctl_admingeo", true);
 	$lev = 0;
 	$t->assign ("lev", $lev);

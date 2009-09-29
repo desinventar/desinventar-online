@@ -2051,11 +2051,11 @@
 			<div id="pagecontent">
 				<h4><u>{-#tdbavail#-}</u>:
 				<ul>
-			{-foreach name=rlist key=key item=item from=$regionlist-}
+{-foreach name=rlist key=key item=item from=$regionlist-}
 				<li><a href="javascript:void(null)" onClick="javascript:window.open('?r={-$key-}','DI_{-$smarty.foreach.rlist.iteration-}', 
 				'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');">{-$item-}</a>
 				</li>
-			{-/foreach-}
+{-/foreach-}
 				</ul>
 				</h4>
 			</div>

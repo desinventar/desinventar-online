@@ -16,20 +16,19 @@ else
 	exit();
 
 $us->open($reg);
-$q = $us->q;
-$regname = $q->getDBInfoValue('RegionLabel');
+$regname = $us->q->getDBInfoValue('RegionLabel');
 fixPost($post);
 
 // load basic field of dictionary
 $dic = array();
-$dic = array_merge($dic, $q->queryLabelsFromGroup('Disaster', $lg));
-$dic = array_merge($dic, $q->queryLabelsFromGroup('Record|2', $lg));
-$dic = array_merge($dic, $q->queryLabelsFromGroup('Geography', $lg));
-$dic = array_merge($dic, $q->queryLabelsFromGroup('Event', $lg));
-$dic = array_merge($dic, $q->queryLabelsFromGroup('Cause', $lg));
-$dic = array_merge($dic, $q->queryLabelsFromGroup('Effect', $lg));
-$dic = array_merge($dic, $q->queryLabelsFromGroup('Sector', $lg));
-$dic = array_merge($dic, $q->getEEFieldList("True"));
+$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Disaster', $lg));
+$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Record|2', $lg));
+$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Geography', $lg));
+$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Event', $lg));
+$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Cause', $lg));
+$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
+$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Sector', $lg));
+$dic = array_merge($dic, $us->q->getEEFieldList("True"));
 //$t->assign ("dic", $dic);
 $t->assign ("reg", $reg);
 $t->assign ("regname", $regname);
@@ -49,9 +48,9 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 	}
 	elseif (isset($post['_D+cmd'])) {
 		// Process results with default options
-		$qd  = $q->genSQLWhereDesconsultar($post);
-		$sqc = $q->genSQLSelectCount($qd);
-		$c	 = $q->getresult($sqc);
+		$qd  = $us->q->genSQLWhereDesconsultar($post);
+		$sqc = $us->q->genSQLSelectCount($qd);
+		$c	 = $us->q->getresult($sqc);
 		$iNumberOfRecords = $c['counter'];
 		// Reuse calculate SQL values in all pages; calculate limits in pages
 		$levg = array();
@@ -59,8 +58,8 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 		$ord = "D.DisasterBeginTime,V.EventName,G.GeographyFQName";
 		if (isset($post['_D+SQL_ORDER']))
 			$ord = $post['_D+SQL_ORDER'];
-		$sql = $q->genSQLSelectData($qd, $fld, $ord);
-		//$dlt = $q->dreg->query($sqc);
+		$sql = $us->q->genSQLSelectData($qd, $fld, $ord);
+		//$dlt = $us->q->dreg->query($sqc);
 		if ($post['_D+cmd'] == "result") {
 			// show results in window
 			$export = '';
@@ -75,7 +74,7 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 			$t->assign ("NumberOfPages" ,$iNumberOfPages);
 			// Show results interface 
 			$t->assign ("role", $us->getUserRole($reg));
-			$t->assign ("qdet", $q->getQueryDetails($dic, $post));
+			$t->assign ("qdet", $us->q->getQueryDetails($dic, $post));
 			$t->assign ("ctl_showres", true);
 		} else if ($post['_D+cmd'] == "export") {
 			if ($post['_D+saveopt'] == "csv")
@@ -93,7 +92,7 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 		}
 	}
 	// Complete SQL to Paging, later check and run SQL
-	if ($q->chkSQL($sql)) {
+	if ($us->q->chkSQL($sql)) {
 		if (!empty($export)) {
 			// Save results in CSVfile
 			$datpth = TEMP ."/di8data_". session_id() .".$export";
@@ -106,8 +105,8 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 		}
 		for ($i = $pin; $i < $pgt; $i++) {
 			$slim = $sql ." LIMIT " . $i * $iRecordsPerPage .", ". $iRecordsPerPage;
-			$dislist = $q->getassoc($slim);
-			$dl = $q->printResults($dislist, $export, "NAME");
+			$dislist = $us->q->getassoc($slim);
+			$dl = $us->q->printResults($dislist, $export, "NAME");
 			if ($i == $pin && !empty($dl)) {
 				// Traduce Headers to Current Language
 				$lb = "";

@@ -91,7 +91,6 @@ elseif (isset($_GET['r']) && !empty($_GET['r']) && file_exists($us->q->getDBFile
 }
 else */
 if (isset($_GET['cmd'])) {
-	//$q = new Query();
 	switch ($_GET['cmd']) {
 		case "adminreg":
 			// ADMINREG: Form to Create and assign regions

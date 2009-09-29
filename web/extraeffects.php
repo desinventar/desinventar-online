@@ -9,12 +9,6 @@ require_once('include/loader.php');
 require_once('include/query.class.php');
 require_once('include/dieefield.class.php');
 
-$reg = $us->sRegionId;
-if (empty($reg)) {
-	exit();
-}
-$get = $_GET;
-
 function getRAPermList($lst) {
 	$dat = array();
 	foreach ($lst as $k=>$v)
@@ -22,6 +16,14 @@ function getRAPermList($lst) {
 			$dat[$k] = $v;
 	return $dat;
 }
+
+$get = $_GET;
+
+if (isset($get['r']) && !empty($get['r'])) {
+	$reg = $get['r'];
+	$us->open($reg);
+} else
+	exit();
 
 // EDIT REGION: Form to Create and assign regions
 if (isset($get['cmd'])) {
@@ -59,7 +61,8 @@ if (isset($get['cmd'])) {
 		$t->assign ("eef", $us->q->getEEFieldList(""));
 		$t->assign ("ctl_eeflist", true);
 	}
-} else {
+}
+else {
 	$urol = $us->getUserRole($reg);
 	if ($urol == "OBSERVER")
 		$t->assign ("ro", "disabled");
