@@ -7,7 +7,7 @@
 class UserSession {
 	var $q               = null;
 	var $sSessionId      = '';
-	var $sRegionId       = '';
+	var $sRegionId       = 'core';
 	var $LangIsoCode     = 'eng';
 	var $UserId          = '';
 	var $dStart          = '';
@@ -23,9 +23,6 @@ class UserSession {
 			if (func_get_arg(0) != "") {  
 				$this->sSessionId = func_get_arg(0);
 			}
-			if ($num_args > 1) { 
-				$this->sRegionId = func_get_arg(1);
-			}
 		}
 		$this->UserId = '';
 		$this->LangIsoCode = 'eng';
@@ -39,7 +36,6 @@ class UserSession {
 		try {
 			foreach($this->q->core->query($sQuery) as $row) {
 				$this->sSessionId  = $row['SessionId'];
-				$this->sRegionId   = $row['RegionId'];
 				$this->UserId   = $row['UserId'];
 				$this->dStart      = $row['Start'];
 				$this->dLastUpdate = $row['LastUpdate'];
@@ -52,7 +48,6 @@ class UserSession {
 		if ($iReturn < 0) {
 			$this->insert();
 		}
-		$this->q->setDBConnection($this->sRegionId);
 		return $iReturn;	
 	} // function
 
@@ -94,7 +89,7 @@ class UserSession {
 		$iReturn = ERR_DEFAULT_ERROR;
 		$sQuery = "INSERT INTO UserSession VALUES (" . 
 				  "'" . $this->sSessionId . "'," .
-				  "'" . $this->sRegionId  . "'," .
+				  "''," .
 				  "'" . $this->UserId  . "'," .
 				  "1," .
 				  "'" . $this->dStart     . "'," .
@@ -112,7 +107,6 @@ class UserSession {
 		// Always update this field...
 		$this->dLastUpdate = gmdate('c');
 		$sQuery = "UPDATE UserSession SET " . 
-				  "RegionId ='"  . $this->sRegionId  . "'," .
 				  "UserId='"   . $this->UserId  . "'," .
 				  "Valid=1," .
 				  "Start='"      . $this->dStart     . "'," .
@@ -133,7 +127,6 @@ class UserSession {
 		$sQuery = "DELETE FROM UserSession WHERE SessionId='" . $this->sSessionId . "'";
 		if ($result = $this->q->core->query($sQuery)) {
 			$this->UserId = "";
-			$this->sRegionId = "";
 			$iReturn = ERR_NO_ERROR;
 		}
 		return $iReturn;
@@ -143,13 +136,18 @@ class UserSession {
 	public function open($prmRegionId) {
 		$iReturn = ERR_NO_ERROR;
 		$this->clearLocks();
-		$sQuery = "UPDATE UserSession SET RegionId='" . $prmRegionId . "' " . 
-		          "WHERE SessionId='" . $this->sSessionId . "'";
-		if ($result = $this->q->core->query($sQuery)) {
+
+		$DBDir = VAR_DIR . '/database/' . $prmRegionId;
+		$DBFile = $DBDir . '/desinventar.db';
+		if (! file_exists($DBFile)) {
+			$iReturn = ERR_NO_DATABASE;
+		}
+		
+		if ($iReturn > 0) {
+			$this->awake();
+			$this->q->setDBConnection($prmRegionId);
 			$this->sRegionId = $prmRegionId;
 		}
-		$this->awake();
-		$this->q->setDBConnection($this->sRegionId);
 		return $iReturn;
 	} // open()
 
@@ -193,11 +191,7 @@ class UserSession {
 	public function getAllPermsByUser() {
 		return $this->getAllPermsGeneric($this->UserId, "");
 	}
-	
-	public function getAllPermsByRegion() {
-		return $this->getAllPermsGeneric($this->UserId, $this->sRegionId);
-	}
-	
+
 	private function getAllPermsGeneric($prmUserId, $prmRegionId) {
 		$myPerms = array();
 		$sQuery = "SELECT * FROM RegionAuth WHERE " .

@@ -15,6 +15,7 @@ elseif (isset($get['r']) && !empty($get['r']))
 else
 	exit();
 
+$us->open($reg);
 $q = $us->q;
 $regname = $q->getDBInfoValue('RegionLabel');
 fixPost($post);

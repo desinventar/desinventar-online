@@ -15,9 +15,9 @@ $post = $_POST;
 $get  = $_GET;
 
 $cmd = getParameter('cmd','');
-$r = getParameter('r','');
+$RegionId = getParameter('r', getParameter('RegionId', ''));
 if ($cmd == '') {
-	if ($r == '') {
+	if ($RegionId == '') {
 		$cmd = 'listdb';
 	}
 }
@@ -26,6 +26,9 @@ if ($cmd == '') {
 $t->assign('request_uri', $_SERVER['REQUEST_URI']);
 $t->assign('version', VERSION);
 
+if ($RegionId != '') {
+	$us->open($RegionId);
+}
 switch ($cmd) {
 case 'getversion':
 	print VERSION;
@@ -58,7 +61,6 @@ case 'getCountryName':
 	print $CountryName;
 	break;
 case 'getRegionLogo':
-	$RegionId = getParameter('RegionId', '');
 	header("Content-type: Image/png");
 	$murl = VAR_DIR . "/database/". $RegionId . "/logo.png";
 	if (!file_exists($murl))
@@ -67,7 +69,6 @@ case 'getRegionLogo':
 	exit();
 	break;
 case 'getRegionBasicInfo':
-	$RegionId = getParameter('RegionId', '');
 	$r = new DIRegion($us, $RegionId);
 	$RegionInfo = array();
 	$RegionInfo['RegionId'] = $RegionId;
@@ -77,7 +78,6 @@ case 'getRegionBasicInfo':
 	$t->display('regionbasicinfo.tpl');
 	break;
 case 'getRegionTechInfo':
-	$RegionId = getParameter('RegionId', '');
 	$r = new DIRegion($us, $RegionId);
 	$RegionInfo = array();
 	$RegionInfo['RegionId'] = $RegionId;
@@ -87,11 +87,9 @@ case 'getRegionTechInfo':
 	$t->display('regiontechinfo.tpl');
 	break;
 case 'getRegionFullInfo':
-	$RegionId = getParameter('RegionId', '');
 	$t->assign('reg', $RegionId);
+	$us->open($RegionId);
 	$r = new DIRegion($us, $RegionId);
-	//$RegionInfo = array();
-	//$RegionInfo['RegionId'] = $RegionId;
 	$a = $r->getDBInfo();
 	$a['NumDatacards'] = $us->q->getNumDisasterByStatus('PUBLISHED');
 	$t->assign('RegionInfo', $a);
@@ -101,9 +99,10 @@ case 'getRegionFullInfo':
 	$t->display('index.tpl');
 	break;
 default:
-	if (isset($get['r']) && !empty($get['r']))
-		$reg = $get['r'];
-	elseif (isset($post) && !empty($post['_REG'])) {
+	if (isset($get['r']) && !empty($get['r'])) {
+		$RegionId = $get['r'];
+		$us->open($RegionId);
+	} elseif (isset($post) && !empty($post['_REG'])) {
 		// Request to save Query Design in File..
 		fixPost($post);
 		header("Content-type: text/xml");
@@ -126,14 +125,14 @@ default:
 		}
 		else
 			exit();
-		$reg = $qd['_REG'];
+		$RegionId = $qd['_REG'];
 		$t->assign ("qd", $qd);
 	}
 	// 2009-08-07 (jhcaiced) Validate if Database Exists...
-	if (!empty($reg) && file_exists($us->q->getDBFile($reg))) {
+	if (!empty($RegionId) && file_exists($us->q->getDBFile($RegionId))) {
 		// Accessing a region with some operation
-		$us->open($reg);
-		$q = new Query($reg);
+		$us->open($RegionId);
+		$q = new Query($RegionId);
 		if (isset($get['lang']) && !empty($get['lang']))
 			$_SESSION['lang'] = $get['lang'];
 		if (isset($get['cmd'])) {
@@ -175,11 +174,11 @@ default:
 			$t->assign ("eve", $q->queryLabelsFromGroup('Event', $lg));
 			$t->assign ("cau", $q->queryLabelsFromGroup('Cause', $lg));
 			$t->assign ("ctl_glist", true);
-			$t->assign ("reg", $reg);
+			$t->assign ("reg", $RegionId);
 			$t->assign ("path", VAR_DIR);
 			$t->assign ("exteffel", $q->getEEFieldList("True"));
 			// Get UserRole
-			$role = $us->getUserRole($reg);
+			$role = $us->getUserRole($RegionId);
 			$t->assign ("role", $role);
 			//echo "<pre>". $us->UserId ; print_r($role);
 			if (strlen($role) > 0)
@@ -189,7 +188,7 @@ default:
 			// Set selection map
 			$regname = $q->getDBInfoValue('RegionLabel');
 			$t->assign ("regname", $regname);
-			//  if (testMap(VAR_DIR . "/". $reg . "/". $data))
+			//  if (testMap(VAR_DIR . "/". $RegionId . "/". $data))
 			$t->assign ("ctl_showmap", true);
 			// get range of dates
 			$ydb = $q->getDateRange();
