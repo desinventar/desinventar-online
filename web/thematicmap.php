@@ -87,8 +87,8 @@ if (isset($post['_M+cmd'])) {
 	$rinf = $us->q->getDBInfo();
 	$rgl[0]['regname'] = $rinf['RegionLabel|'];
 	$rgl[0]['info'] = $info;
+	//echo "<pre>"; print_r($rinf);
 	// if valid filename then prepare interface to view MAPFILE	
-	
 	if (strlen($m->filename()) > 0) {
 		$lon = 0;
 		$lat = 0;
