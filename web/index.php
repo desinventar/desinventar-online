@@ -82,6 +82,8 @@ case 'getRegionTechInfo':
 	$RegionInfo = array();
 	$RegionInfo['RegionId'] = $RegionId;
 	$t->assign('RegionInfo', $r->getDBInfo());
+	$labels = $us->q->queryLabelsFromGroup('DB', $lg, false);
+	$t->assign ('Labels', $labels);
 	$t->display('regiontechinfo.tpl');
 	break;
 default:
