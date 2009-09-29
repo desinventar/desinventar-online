@@ -122,7 +122,7 @@
 		switch (item.id) {
 			// file menu
 			case "mreg":
-				$('dcr').src = "index.php?r={-$reg-}&cmd=getRegionInfo";
+				$('dcr').src = "index.php?RegionId={-$reg-}&cmd=getRegionFullInfo";
 				$('bsave').style.visibility = 'hidden';
 				$('bprint').style.visibility = 'hidden';
 			break;
@@ -1578,7 +1578,8 @@
 	   </td>
 	  </tr>
 	</table>
-	<iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="index.php?r={-$reg-}&cmd=getRegionInfo"></iframe>
+	<iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" 
+		src="index.php?RegionId={-$reg-}&cmd=getRegionFullInfo"></iframe>
 	</div>
  </div>
 <!--	SECTION : QUERY DESIGN 
@@ -2066,4 +2067,21 @@
 	</table>
 </body>
 </html>
+{-/if-}
+{-if $ctl_showRegionInfo-}
+	<table border="0">
+	<tr>
+		<td>
+			<img src="index.php?RegionId={-$reg-}&cmd=getRegionLogo">
+		</td>
+		<td>
+{-include file="regionbasicinfo.tpl"-}
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2"><hr>
+{-include file="regiontechinfo.tpl"-}
+		</td>
+	</tr>
+	</table>
 {-/if-}
