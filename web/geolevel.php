@@ -11,21 +11,20 @@ require_once('include/diobject.class.php');
 require_once('include/digeolevel.class.php');
 require_once('include/digeocarto.class.php');
 
-$reg = $us->sRegionId;
-if (empty($reg)) {
-	exit();
-}
 $get = $_GET;
 
-$q = new Query($reg);
+if (isset($get['r']) && !empty($get['r'])) {
+	$reg = $get['r'];
+	$us->open($reg);
+} else
+	exit();
 
-$mod = 'lev';
 $cmd = '';
+
 if (isset($get['levcmd'])) {
 	$cmd = $get['levcmd'];
 }
 if (!empty($cmd)) {
-	$mod = "lev";
 	$dat = array();
 	$dat['GeoLevelId'] = isset($get['GeoLevelId']) ? $get['GeoLevelId'] : -1;
 	$dat['GeoLevelName'] = isset($get['GeoLevelName']) ? $get['GeoLevelName']: '';
@@ -53,7 +52,7 @@ if (!empty($cmd)) {
 			if (!empty($dat['GeoLevelLayerFile']) &&
 			    !empty($dat['GeoLevelLayerCode']) &&
 			    !empty($dat['GeoLevelLayerName'])) {
-			    $map = new Maps($q, $reg, 0, null, null, null, "", null, "SELECT");
+			    $map = new Maps($us->q, $reg, 0, null, null, null, "", null, "SELECT");
 			}*/
 		} else {
 			$t->assign ("ctl_errinslev", true);
@@ -84,7 +83,7 @@ if (!empty($cmd)) {
 			if (!empty($dat['GeoLevelLayerFile']) &&
 			    !empty($dat['GeoLevelLayerCode']) &&
 			    !empty($dat['GeoLevelLayerName']))
-			    	$map = new Maps($q, $reg, 0, null, null, null, "", "SELECT");
+			    	$map = new Maps($us->q, $reg, 0, null, null, null, "", "SELECT");
 		} else {
 			$t->assign ("ctl_errupdlev", true);
 			$t->assign ("updstatlev", $gl);
@@ -96,25 +95,26 @@ if (!empty($cmd)) {
 		break;
 	case "chkname":
 		$t->assign ("ctl_chkname", true);
-		if ($q->isvalidObjectName($dat['GeoLevelId'], $dat['GeoLevelName'], DI_GEOLEVEL)) {
+		if ($us->q->isvalidObjectName($dat['GeoLevelId'], $dat['GeoLevelName'], DI_GEOLEVEL)) {
 			$t->assign ("chkname", true);
 		}
 		break;
 	case "list":
 		$t->assign ("ctl_levlist", true);
-		$t->assign ("levl", $q->loadGeoLevels('', -1, false));
+		$t->assign ("levl", $us->q->loadGeoLevels('', -1, false));
 		break;
 	default:
 		break;
 	} //switch
-} else {
+}
+else {
 	$t->assign ("ctl_admingeo", true);
 	$t->assign ("ctl_levlist", true);
-	$t->assign ("levl", $q->loadGeoLevels('', -1, false));
+	$t->assign ("levl", $us->q->loadGeoLevels('', -1, false));
 	$lev = 0;
 	$t->assign ("lev", $lev);
-	$t->assign ("levmax", $q->getMaxGeoLev());
-	$t->assign ("levname", $q->loadGeoLevById($lev));
+	$t->assign ("levmax", $us->q->getMaxGeoLev());
+	$t->assign ("levname", $us->q->loadGeoLevById($lev));
 	$urol = $us->getUserRole($reg);
 	if ($urol == "OBSERVER") {
 		$t->assign ("ro", "disabled");
@@ -122,7 +122,7 @@ if (!empty($cmd)) {
 }
 
 $t->assign ("reg", $reg);
-$t->assign ("dic", $q->queryLabelsFromGroup('DB', $lg));
+$t->assign ("dic", $us->q->queryLabelsFromGroup('DB', $lg));
 $t->display ("geolevel.tpl");
 
 </script>

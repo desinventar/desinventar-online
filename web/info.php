@@ -17,11 +17,13 @@ function getRAPermList($lst) {
 	return $dat;
 }
 
-$reg = $us->sRegionId;
-if (empty($reg)) {
-	exit();
-}
 $get = $_GET;
+
+if (isset($get['r']) && !empty($get['r'])) {
+	$reg = $get['r'];
+	$us->open($reg);
+} else
+	exit();
 
 // EDIT REGION: Form to Create and assign regions
 if (isset($get['infocmd'])) {

@@ -46,9 +46,10 @@ function showResult($stat, &$tp) {
 }
 
 $get = $_GET;
+
 if (isset($get['r']) && !empty($get['r'])) {
 	$reg = $get['r'];
-	$q = new Query($reg);
+	$us->open($reg);
 } else
 	exit();
 

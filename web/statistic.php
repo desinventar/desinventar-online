@@ -15,19 +15,20 @@ elseif (isset($get['r']) && !empty($get['r']))
 	$reg = $get['r'];
 else
 	exit();
-     
-$q = new Query($reg);
-$regname = $q->getDBInfoValue('RegionLabel');
+
+$us->open($reg);
+
+$regname = $us->q->getDBInfoValue('RegionLabel');
 fixPost($post);
 
 // load levels to display in totalizations
-foreach ($q->loadGeoLevels('', -1, false) as $k=>$i)
+foreach ($us->q->loadGeoLevels('', -1, false) as $k=>$i)
 	$st["StatisticGeographyId_". $k] = array($i[0], $i[1]);
 $dic = array_merge(array(), $st);
-$dic = array_merge($dic, $q->queryLabelsFromGroup('Statistic', $lg));
-$dic = array_merge($dic, $q->queryLabelsFromGroup('Effect', $lg));
-$dic = array_merge($dic, $q->queryLabelsFromGroup('Sector', $lg));
-$dic = array_merge($dic, $q->getEEFieldList("True"));
+$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Statistic', $lg));
+$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
+$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Sector', $lg));
+$dic = array_merge($dic, $us->q->getEEFieldList("True"));
 $t->assign ("reg", $reg);
 $t->assign ("regname", $regname);
 
@@ -49,9 +50,9 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
 	}
 	// Process results with default options
 	else if (isset($post['_S+cmd'])) {
-		$qd 	= $q->genSQLWhereDesconsultar($post);
-		$sqc 	= $q->genSQLSelectCount($qd);
-		$c 		= $q->getresult($sqc);
+		$qd 	= $us->q->genSQLWhereDesconsultar($post);
+		$sqc 	= $us->q->genSQLSelectCount($qd);
+		$c 		= $us->q->getresult($sqc);
 		$tot 	= $c['counter'];
 		$geo	= $post['_S+showgeo'];
 		// Reuse calculate SQL values in all pages; calculate limits in pages
@@ -65,10 +66,10 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
 		$opc['Group'] = $levg;
 		$field = explode(",", $post['_S+Field']);
 		$opc['Field'] = $field;
-		$sql = $q->genSQLProcess($qd, $opc);
-		$cou = $q->getnumrows($sql);
-		$sdl = $q->totalize($sql);
-		$dlt = $q->getresult($sdl);
+		$sql = $us->q->genSQLProcess($qd, $opc);
+		$cou = $us->q->getnumrows($sql);
+		$sdl = $us->q->totalize($sql);
+		$dlt = $us->q->getresult($sdl);
 		foreach ($dlt as $k=>$i) {
 			if (is_numeric($i))
 				$dlt[$k] = number_format($i, 0, ',', ' ');
@@ -110,7 +111,7 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
 			$t->assign ("dlt", $dlt); // List of totals..
 			$t->assign ("sql", base64_encode($sql));
 			$t->assign ("sqt", $sql);
-			$t->assign ("qdet", $q->getQueryDetails($dic, $post));
+			$t->assign ("qdet", $us->q->getQueryDetails($dic, $post));
 			$t->assign ("fld", $fld);
 			$t->assign ("cou", $cou);
 			$t->assign ("tot", $tot);
@@ -136,7 +137,7 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
 		}
 	}
 	// Complete SQL to Paging, later check and run SQL
-	if ($q->chkSQL($sql)) {
+	if ($us->q->chkSQL($sql)) {
 		if (!empty($export)) {
 			// Save results in CSVfile
 			$stdpth = TEMP ."/di8statistic_". session_id() .".$export";
@@ -150,8 +151,8 @@ if (isset($get['page']) || isset($post['_S+cmd'])) {
 		}
 		for ($i = $pin; $i < $pgt; $i++) {
 			$slim = $sql ." LIMIT " . $i * $rxp .", ". $rxp;
-			$dislist = $q->getassoc($slim);
-			$dl = $q->printResults($dislist, $export, $geo);
+			$dislist = $us->q->getassoc($slim);
+			$dl = $us->q->printResults($dislist, $export, $geo);
 			if ($i == $pin && !empty($dl)) {
 				// Set translation in headers
 				$lb = "";

@@ -8,33 +8,33 @@ require_once('include/loader.php');
 require_once('include/maps.class.php');
 
 function hex2dec($col) {
-  $h = str_split(substr($col, -6), 2);
-  return hexdec($h[0])." ". hexdec($h[1]) . " ". hexdec($h[2]);
+	$h = str_split(substr($col, -6), 2);
+	return hexdec($h[0])." ". hexdec($h[1]) . " ". hexdec($h[2]);
 }
 
 // set hash with limits, legends and colors
 function setRanges($opc) {
-  $lim = $opc['_M+limit'];
-  $leg = $opc['_M+legend'];
-  $col = $opc['_M+color'];
-  $lmx = "10000000";
-  $maxr = false;
-  // First range is No data
-  $range[0] = array(0, "= 0", "255 255 255");
-  // generate range hash with limit, legend and color
-  for ($j = 0; $j < count($lim); $j++) {
-    if (isset($lim[$j])) {
-      if ($lim[$j] != "")
-        $range[$j+1] = array($lim[$j], $leg[$j], hex2dec($col[$j]));
-      else {
-        $range[$j+1] = array($lmx, $leg[$j], hex2dec($col[$j]));
-        $maxr = true;
-      }
-    }
-  }
-  // if not assigned, set last range between last number and infinit
-  if (!$maxr)
-    $range[$j+1] = array($lmx, (int)$lim[$j-1] + 1 . " -> ", "30 30 30");
+	$lim = $opc['_M+limit'];
+	$leg = $opc['_M+legend'];
+	$col = $opc['_M+color'];
+	$lmx = "10000000";
+	$maxr = false;
+	// First range is No data
+	$range[0] = array(0, "= 0", "255 255 255");
+	// generate range hash with limit, legend and color
+	for ($j = 0; $j < count($lim); $j++) {
+		if (isset($lim[$j])) {
+			if ($lim[$j] != "")
+				$range[$j+1] = array($lim[$j], $leg[$j], hex2dec($col[$j]));
+			else {
+				$range[$j+1] = array($lmx, $leg[$j], hex2dec($col[$j]));
+				$maxr = true;
+			}
+		}
+	}
+	// if not assigned, set last range between last number and infinit
+	if (!$maxr)
+		$range[$j+1] = array($lmx, (int)$lim[$j-1] + 1 . " -> ", "30 30 30");
 	return $range;
 }
 
@@ -42,26 +42,27 @@ $post = $_POST;
 $get = $_GET;
 
 if (isset($post['_REG']) && !empty($post['_REG']))
-  $reg = $post['_REG'];
+	$reg = $post['_REG'];
 elseif (isset($get['r']) && !empty($get['r']))
-  $reg = $get['r'];
+	$reg = $get['r'];
 else
-  exit();
+	exit();
 
-$q = new Query($reg);
+$us->open($reg);
+
 fixPost($post);
 
 $dic = array();
-$dic = array_merge($dic, $q->queryLabelsFromGroup('MapOpt', $lg));
-$dic = array_merge($dic, $q->queryLabelsFromGroup('Effect', $lg));
-$dic = array_merge($dic, $q->queryLabelsFromGroup('Sector', $lg));
+$dic = array_merge($dic, $us->q->queryLabelsFromGroup('MapOpt', $lg));
+$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
+$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Sector', $lg));
 
 if (isset($post['_M+cmd'])) {
 	// Process QueryDesign Fields and count results
-	$qd	= $q->genSQLWhereDesconsultar($post);
-	$dic = array_merge($dic, $q->getEEFieldList("True"));
-	$sqc = $q->genSQLSelectCount($qd);
-	$c	 = $q->getresult($sqc);
+	$qd	= $us->q->genSQLWhereDesconsultar($post);
+	$dic = array_merge($dic, $us->q->getEEFieldList("True"));
+	$sqc = $us->q->genSQLSelectCount($qd);
+	$c	 = $us->q->getresult($sqc);
 	$cou = $c['counter'];
 	// Assign ranges
 	$range = setRanges($post);
@@ -69,21 +70,21 @@ if (isset($post['_M+cmd'])) {
 	$opc['Group'] = array($post['_M+Type']);
 	$lev = explode("|", $post['_M+Type']);
 	$opc['Field'] = $post['_M+Field'];
-	$sql = $q->genSQLProcess($qd, $opc);
+	$sql = $us->q->genSQLProcess($qd, $opc);
 	// Apply Order fields to order legend too
 	$v = explode("|", $opc['Field']);
 	if ($v[0] == "D.DisasterId")
 		$v[0] = "D.DisasterId_";
 	$sql .= " ORDER BY ". substr($v[0],2) ." ASC";
-	$info = $q->getQueryDetails($dic, $post);
+	$info = $us->q->getQueryDetails($dic, $post);
 	// get query results
-	$dislist = $q->getassoc($sql);
-	//$gitem = $q->getGeoCartoItems();
+	$dislist = $us->q->getassoc($sql);
+	//$gitem = $us->q->getGeoCartoItems();
 	// generate map
-	$dl = $q->prepareList($dislist, "MAPS");
+	$dl = $us->q->prepareList($dislist, "MAPS");
 	// MAPS Query, RegionId, Level, datalist, ranges, dbinfo, label, maptype
-	$m = new Maps($q, $reg, $lev[0], $dl, $range, $info, $post['_M+Label'], $post['_M+Transparency'], "THEMATIC");	
-	$rinf = $q->getDBInfo();
+	$m = new Maps($us->q, $reg, $lev[0], $dl, $range, $info, $post['_M+Label'], $post['_M+Transparency'], "THEMATIC");	
+	$rinf = $us->q->getDBInfo();
 	$rgl[0]['regname'] = $rinf['RegionLabel|'];
 	$rgl[0]['info'] = $info;
 	// if valid filename then prepare interface to view MAPFILE	
@@ -134,11 +135,11 @@ if (isset($post['_M+cmd'])) {
 		$t->assign ("zoom", $zoom);
 	}
 	
-	$t->assign ("glev", $q->loadGeoLevels('', -1, true));
+	$t->assign ("glev", $us->q->loadGeoLevels('', -1, true));
 	//echo "<pre>"; print_r($rgl); 
 	$t->assign ("rgl", $rgl);
 	$t->assign ("tot", $cou);
-	$t->assign ("qdet", $q->getQueryDetails($dic, $post));
+	$t->assign ("qdet", $us->q->getQueryDetails($dic, $post));
 	$mapfile = str_replace('\\', '/', $m->filename());
 	$worldmap = str_replace('\\','/', DATADIR . "/main/worldmap/world_adm0.map");
 	$legend = "/cgi-bin/". MAPSERV ."?map=" . $mapfile . "&SERVICE=WMS&VERSION=1.1.1".
@@ -183,7 +184,7 @@ elseif (isset($get['cmd']) && $get['cmd'] == "getkml") {
 	// Send KML file - GoogleEarth
 	header("Content-type: text/kml");
 	header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $reg) ."_ThematicMap.kml");
-	$m = new Maps($q, $reg, null, null, null, null, null, null, "KML");
+	$m = new Maps($us->q, $reg, null, null, null, null, null, null, "KML");
 	echo $m->printKML();
 	exit();
 }

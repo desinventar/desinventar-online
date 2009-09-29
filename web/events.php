@@ -47,9 +47,10 @@ function showResult($stat, &$tp) {
 } //function
 
 $get = $_GET;
+
 if (isset($get['r']) && !empty($get['r'])) {
 	$reg = $get['r'];
-	$q = new Query($reg);
+	$us->open($reg);
 } else
 	exit();
 
@@ -76,35 +77,35 @@ if (isset($get['cmd'])) {
 		// reload list from local SQLITE
 		if ($get['predef'] == "1") {
 			$t->assign ("ctl_evepred", true);
-			$t->assign ("evepredl", $q->loadEvents("PREDEF", null, $lg));
+			$t->assign ("evepredl", $us->q->loadEvents("PREDEF", null, $lg));
 		} else {
 			$t->assign ("ctl_evepers", true);
-			$t->assign ("eveuserl", $q->loadEvents("USER", null, $lg));
+			$t->assign ("eveuserl", $us->q->loadEvents("USER", null, $lg));
 		}
 		break;
 	case "chkname":
 		$t->assign ("ctl_chkname", true);
-		if ($q->isvalidObjectName($get['EventId'], $get['EventName'], DI_EVENT))
+		if ($us->q->isvalidObjectName($get['EventId'], $get['EventName'], DI_EVENT))
 			$t->assign ("chkname", true);
 		break;
 	case "chkstatus":
 		$t->assign ("ctl_chkstatus", true);
-		if ($q->isvalidObjectToInactivate($get['EventId'], DI_EVENT))
+		if ($us->q->isvalidObjectToInactivate($get['EventId'], DI_EVENT))
 			$t->assign ("chkstatus", true);
 		break;
 	default: break;
 	} // switch
 }
 else {
-	$t->assign ("dic", $q->queryLabelsFromGroup('DB', $lg));
+	$t->assign ("dic", $us->q->queryLabelsFromGroup('DB', $lg));
 	$urol = $us->getUserRole($reg);
 	if ($urol == "OBSERVER")
 		$t->assign ("ro", "disabled");
 	$t->assign ("ctl_show", true);
 	$t->assign ("ctl_evepred", true);
-	$t->assign ("evepredl", $q->loadEvents("PREDEF", null, $lg));
+	$t->assign ("evepredl", $us->q->loadEvents("PREDEF", null, $lg));
 	$t->assign ("ctl_evepers", true);
-	$t->assign ("eveuserl", $q->loadEvents("USER", null, $lg));
+	$t->assign ("eveuserl", $us->q->loadEvents("USER", null, $lg));
 } //else
 
 $t->assign ("reg", $reg);

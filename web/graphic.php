@@ -13,24 +13,26 @@ if (isset($post['_REG']) && !empty($post['_REG']))
 	$reg = $post['_REG'];
 else
 	exit();
-$q = new Query($reg);
-$regname = $q->getDBInfoValue('RegionLabel');
+
+$us->open($reg);
+
+$regname = $us->q->getDBInfoValue('RegionLabel');
 fixPost($post);
 // load levels to display in totalizations
-foreach ($q->loadGeoLevels('', -1, false) as $k=>$i)
+foreach ($us->q->loadGeoLevels('', -1, false) as $k=>$i)
 	$st["GraphGeographyId_". $k] = array($i[0], $i[1]);
 $dic = array_merge(array(), $st);
-$dic = array_merge($dic, $q->queryLabelsFromGroup('Graph', $lg));
-$dic = array_merge($dic, $q->queryLabelsFromGroup('Effect', $lg));
-$dic = array_merge($dic, $q->queryLabelsFromGroup('Sector', $lg));
-$dic = array_merge($dic, $q->getEEFieldList("True"));
+$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Graph', $lg));
+$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
+$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Sector', $lg));
+$dic = array_merge($dic, $us->q->getEEFieldList("True"));
 //$t->assign ("dic", $dic);
 $t->assign ("regname", $regname);
 if (isset($post['_G+cmd'])) {
 	// Process QueryDesign Fields and count results
-	$qd  = $q->genSQLWhereDesconsultar($post);
-	$sqc = $q->genSQLSelectCount($qd);
-	$c   = $q->getresult($sqc);
+	$qd  = $us->q->genSQLWhereDesconsultar($post);
+	$sqc = $us->q->genSQLSelectCount($qd);
+	$c   = $us->q->getresult($sqc);
 	$cou = $c['counter'];
 	$t->assign ("tot", $cou);
 	// Process Configuration options to Graphic
@@ -53,12 +55,12 @@ if (isset($post['_G+cmd'])) {
 	$opc['Field'] = array($post['_G+Field']);
 	if (isset($post['_G+Field2']) && !empty($post['_G+Field2']))
 		array_push($opc['Field'], $post['_G+Field2']);
-	$sql = $q->genSQLProcess($qd, $opc);
+	$sql = $us->q->genSQLProcess($qd, $opc);
 	//echo $sql;
-	$dislist = $q->getassoc($sql);
+	$dislist = $us->q->getassoc($sql);
 	if (!empty($dislist)) {
 		// Process results data
-		$dl = $q->prepareList($dislist, "GRAPH");
+		$dl = $us->q->prepareList($dislist, "GRAPH");
 		$gl = array();
 		// Translate Labels to Selected Language
 		foreach ($dl as $k=>$i) {
@@ -93,7 +95,7 @@ if (isset($post['_G+cmd'])) {
 			readfile($sImageFile);
 			exit();
 		} else {
-			$t->assign ("qdet", $q->getQueryDetails($dic, $post));
+			$t->assign ("qdet", $us->q->getQueryDetails($dic, $post));
 			$t->assign ("image", "$sImageURL?". rand(1,3000));
 			$t->assign ("ctl_showres", true);
 		} //if
