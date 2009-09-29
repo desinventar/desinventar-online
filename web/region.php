@@ -27,7 +27,7 @@ function form2region ($val) {
 		$dat['RegionStatus'] &= ~CONST_REGIONPUBLIC;
 	return $dat;
 }
-
+/*
 // REGIONS: Show databases for selected Country 
 if (isset($_GET['c']) && (strlen($_GET['c']) > 0)) {
 	$t->assign ("ctl_regions", true);
@@ -89,7 +89,8 @@ elseif (isset($_GET['r']) && !empty($_GET['r']) && file_exists($us->q->getDBFile
 	$t->assign ("dic", $q->queryLabelsFromGroup('DB', $lg));
 	//$t->assign ("dbden", str2js($reg['InfoGeneral'][1]));
 }
-elseif (isset($_GET['cmd'])) {
+else */
+if (isset($_GET['cmd'])) {
 	//$q = new Query();
 	switch ($_GET['cmd']) {
 		case "adminreg":
@@ -167,8 +168,9 @@ elseif (isset($_GET['cmd'])) {
 			}
 		break;
 	} //switch
+	$t->display ("region.tpl");
 }
-else {
+/*else {
 	$q = new Query();
 	$reglst = array();
 	$result = $q->core->query("SELECT RegionId, RegionLabel FROM Region WHERE RegionStatus=3 ORDER BY CountryIso, RegionLabel");
@@ -177,8 +179,7 @@ else {
 	$t->assign ("reglst", $reglst);
 	$t->assign ("ctl_noregion", true);
 	$t->assign ("ctl_index", true);
-}
+}*/
 
-$t->display ("region.tpl");
 
 </script>

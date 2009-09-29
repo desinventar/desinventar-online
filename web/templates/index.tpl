@@ -89,7 +89,7 @@
         id: 'basesMenu',
         items: [
 			{id:'mdbsfnd', text: '{-#mdbfind#-}',	handler: onMenuItem  },
-{-if $role == "ADMINPORTAL"-}
+{-if $userid == "root"-}
 			{id:'mdbsadm', text: '{-#mdbadmin#-}',	handler: onMenuItem  },
 {-/if-}
 			'-']
@@ -122,7 +122,7 @@
 		switch (item.id) {
 			// file menu
 			case "mreg":
-				$('dcr').src = "region.php?r={-$reg-}";
+				$('dcr').src = "index.php?r={-$reg-}&cmd=getRegionInfo";
 				$('bsave').style.visibility = 'hidden';
 				$('bprint').style.visibility = 'hidden';
 			break;
@@ -225,7 +225,7 @@
 			break;
 			// databases menu
 			case "mdbsfnd":
-				updateList('pagecontent', 'region.php', '');
+				updateList('pagecontent', 'index.php', 'cmd=searchdb');
 				usrw.show();
 			break;
 			case "mdbsadm":
@@ -856,10 +856,6 @@
 	}
 	// Find all Effects fields enable by saved query
 	window.onload = function() {
-{-if $ctl_noregion-}
-		//$('index').style.display='block';
-		//myAjax = new Ajax.Updater($('index'), 'region.php', {method:'get', parameters:''});
-{-/if-}
 		// select optimal height in results frame
 		//varhgt = screen.height * 360 / 600;
 		//$('dcr').style = "height:"+ hgt + "px;"
@@ -1582,7 +1578,7 @@
 	   </td>
 	  </tr>
 	</table>
-	<iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="region.php?r={-$reg-}&view=info"></iframe>
+	<iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="index.php?r={-$reg-}&cmd=getRegionInfo"></iframe>
 	</div>
  </div>
 <!--	SECTION : QUERY DESIGN 
@@ -2038,32 +2034,34 @@
 	<table border="0" cellpadding="0" cellspacing="0" style="border: thin solid;">
 	<tr style="background:url(images/bgmain.png)">
 		<td width="400px">
-			<img src="images/di_logo1.png" border=0><br/>
+			<a href="index.php"><img src="images/di_logo1.png" border=0></a><br/>
 		</td>
 		<td>
 			<ul>
 			<li><a href="http://www.desinventar.org" target="_blank">DesInventar.org</a></li>
 			<li>{-foreach name=lglst key=key item=item from=$lglst-}[<a href="index.php?lang={-$key-}">{-$item[0]-}</a>] {-/foreach-}</li>
-			<li>{-#labelsoftwareversion#-} : {-$version-}<br />
 			</ul>
+			{-#labelsoftwareversion#-} : {-$version-}
 		</td>
 	</tr>
 	<tr bgcolor="#e2e2e0" valign="top">
-		<td style="border-right: thin solid #ccc;">
+		<td colspan="2">
 			<div id="rightcontent"></div><hr>
-			<div id="pagecontent"></div>
-		</td>
-		<td rowspan="2">
-			<!--    <div id="regionlist"></div>-->
-			<h4>Bases:</h4>
-			<ul>
+			<div id="pagecontent">
+				<h4><u>{-#tdbavail#-}</u>:
+				<ul>
 			{-foreach name=rlist key=key item=item from=$regionlist-}
-				<li><!--<img src="region.php?r={-$key-}&view=logo" width="57px" height="24px">-->
-				<a href="javascript:void(null)" onClick="javascript:window.open('?r={-$key-}','DI_{-$smarty.foreach.rlist.iteration-}', 
-				'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');">{-$item-}</a></li>
+				<li><a href="javascript:void(null)" onClick="javascript:window.open('?r={-$key-}','DI_{-$smarty.foreach.rlist.iteration-}', 
+				'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');">{-$item-}</a>
+				</li>
 			{-/foreach-}
-			</ul>
+				</ul>
+				</h4>
+			</div>
 		</td>
+	</tr>
+	<tr>
+		<td colspan="2" align="right">{-#tcopyright#-}</td>
 	</tr>
 	</table>
 </body>

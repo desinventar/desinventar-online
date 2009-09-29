@@ -1,7 +1,7 @@
 {-config_load file=`$lg`.conf section="di8_region"-}
-<link rel="stylesheet" href="css/desinventar.css" type="text/css">
+<!--<link rel="stylesheet" href="css/desinventar.css" type="text/css">
 <script type="text/javascript" src="include/prototype.js"></script>
-<script type="text/javascript" src="include/diadmin.js"></script>
+<script type="text/javascript" src="include/diadmin.js"></script>-->
 {-* ADMINREG: Interface to Edit Portal Admin *-}
 {-if $ctl_adminreg-}
 	<h2>{-#ttname#-}</h2>
@@ -41,7 +41,7 @@
 	<br>
 	<input id="add" type="button" value="{-#baddoption#-}" class="line"
 		onclick="mod='regionpa'; setRegionPA('','', '', '', '', '1','0'); $('cmd').value='insert';">&nbsp;|&nbsp;
-	<input id="directory" type="button" value="Load directory" class="line"
+	<input id="directory" type="button" value="{-#bloaddir#-}" class="line"
 		onClick="updateList('lst_regionpa', 'region.php', 'cmd=loadDir');">
 	<span id="regionpastatusmsg" class="dlgmsg"></span><br>
 	<div id="regionpaaddsect" style="display:none">
@@ -103,6 +103,7 @@
 	  </form>
 	</div>
 {-/if-}
+<!--
 {-**** SHOW LIST OF REGIONS BY COUNTRY (CONTENT) ****-}
 {-if $ctl_regions-}
 <h2>{-$cnt-}</h2>
@@ -147,7 +148,6 @@
 	</td>
   </tr>
  {-if !$ctl_reginfo-}
-<!--
   {-if $ctl_showdimod-}
 	  <img id="dimod" src="images/b_desinventar1.jpg" border="0" style="cursor: pointer;"
 		onClick="$('dimod').src='images/b_desinventar2.jpg'; window.open('desinventar/cards.php?r={-$reg-}', 'desinventar', winopt);"
@@ -163,10 +163,9 @@
 	  <b>{-#tnopublic#-}</b><br>
   {-/if-}
       <div id="modinfo" class="dlgmsg" style="text-align:center;"></div><br>
--->
  {-/if-}
   <tr>
-	<td colspan=2 align="center"><!--
+	<td colspan=2 align="center">
   {-if $userid == ""-}
 	* USER LOGIN<br>
 	* FIND DATABASES <br>
@@ -178,7 +177,7 @@
     * INSERT CARDS (ADMIN,USER,SUPER)<br>
     * CONFIG DATABASE (ADMIN)<br>
    {-/if-}
-  {-/if-}-->
+  {-/if-}
   {-if $ctl_inactivereg-}
 	  <b>{-#tinactive#-}</b><br>
   {-/if-}
@@ -186,7 +185,7 @@
   </tr>
   <tr>
    <td colspan="2">
-<!--	<a href="javascript:void(null)" onClick="$('info').style.display='block';">More info</a>-->
+	<a href="javascript:void(null)" onClick="$('info').style.display='block';">More info</a>
 	<div id="info" style="height:300px" class="dwin" align="justify">
  {-foreach name=info key=k item=i from=$info-}
  {-assign var="inf" value=DB$k-}
@@ -199,7 +198,7 @@
   </tr>
  </table>
 {-/if-}
-
+-->
 {-*** CHECK Region ID MESSAGES - STATUS SPAN ***-}
 {-if $ctl_chkruuid-}
  {-if $cregion-}

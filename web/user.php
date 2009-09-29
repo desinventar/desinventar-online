@@ -41,61 +41,61 @@ function form2user($val) {
 }
 
 if (isset($_GET['cmd'])) {
-	if ($_GET['cmd'] == "") {
-		if ($us->UserId == "") {
-			$t->assign("ctl_login", true);
-		} else {
-			$t->assign("ctl_logged", true);
-			$t->assign("user", $us->UserId);
-		}
-	} //if
-	                                                                
-	// LOGIN: CONTROL USER ACCESS
-	if ($_GET['cmd'] == "login") {
-		if ($us->login($_GET['userid'], $_GET['password']) > 0) {
-			$u = new DIUser($us, $us->UserId);
-			$us->setUser($u->get('UserId'));
-			$t->assign ("user", $us->UserId);
-			$t->assign ("ctl_logged", true);		// Login Sucess !!
-		} else {
-			$t->assign ("ctl_invalid", true);		// Login failed
-			$t->assign ("ctl_login", true);
-		} // if
-	} elseif ($_GET['cmd'] == "relogin") {
+	switch ($_GET['cmd']) {
+		// ANONYMOUS LOGIN
+		case "":
+			if ($us->UserId == "")
+				$t->assign("ctl_login", true);
+			else {
+				$t->assign("ctl_logged", true);
+				$t->assign("user", $us->UserId);
+			}
+		break;
+		// LOGIN: CONTROL USER ACCESS
+		case "login":
+			if ($us->login($_GET['userid'], $_GET['password']) > 0) {
+				$u = new DIUser($us, $us->UserId);
+				$us->setUser($u->get('UserId'));
+				$t->assign ("user", $us->UserId);
+				$t->assign ("ctl_logged", true);		// Login Sucess !!
+			}
+			else {
+				$t->assign ("ctl_invalid", true);		// Login failed
+				$t->assign ("ctl_login", true);
+			}
+		break;
 		// RELOGIN: Previous session exists, reconnect to the same session
-		$t->assign ("user", $us->UserId);
-		$t->assign ("ctl_logged", true);    // Success: User is logged
-	} elseif ($_GET['cmd'] == "logout") {
+		case "relogin":
+			$t->assign ("user", $us->UserId);
+			$t->assign ("ctl_logged", true);    // Success: User is logged
+		break;
 		// LOGOUT : Logut current user and show the login panel again
-		$us->logout();
-		$t->assign ("ctl_login", true);
-	} else {
-		// Default Case, Show Session Information
-		switch ($_GET['cmd']) {
+		case "logout":
+			$us->logout();
+			$t->assign ("ctl_login", true);
+		break;
+		// PASSLOST: Allows to recover a user's password by sending 
 		case "passlost":
-			// PASSLOST: Allows to recover a user's password by sending 
 			// an e-amil with the login information
 			if (isset($_GET['opt']) && ($_GET['opt']) == "sendnewpass") {
-				if ($us->sendPasswdReminder($_GET['UserEMail']) != '') {
+				if ($us->sendPasswdReminder($_GET['UserEMail']) != '')
 					$t->assign ("ctl_msgsend", true);
-				} else {
+				else
 					$t->assign ("ctl_errsend", true);
-				}
-			} else {
-				$t->assign ("ctl_passlost", true);
 			}
-			break;
+			else
+				$t->assign ("ctl_passlost", true);
+		break;
+		// WELCOME: Shows default window when user's login was sucessfull
 		case "welcome":
-			// WELCOME: Shows default window when user's login was sucessfull
 			// Shows the list of databases available for each user.
 			if ($us->UserId != '') {
 				$t->assign ("ctl_welcome", true);
 				$t->assign ("fullname", $us->getUserFullName());
 				// Enable access only Valid Role
 				$rol1 = $us->getUserRole('');
-				if ($rol1 == "ADMINPORTAL") {
+				if ($rol1 == "ADMINPORTAL")
 					$t->assign ("ctl_portalperms", true);
-				}
 				// Find regions where user has permissions
 				//$role = $us->getUserRole('_ALL_');
 				$role  = $us->getUserRoleList();
@@ -122,18 +122,18 @@ if (isset($_GET['cmd'])) {
 						break;
 					}
 				} // foreach
-				if ($hrole) {
+				if ($hrole)
 					$t->assign ("ctl_showreg", true);
-				}
 				$t->assign ("radm", $radm);//empty($radm) ? false : $radm);
 				$t->assign ("rusr", $rusr);//empty($rusr) ? false : $rusr);
 				$t->assign ("rsup", $rsup);//empty($rsup) ? false : $rsup);
 				$t->assign ("robs", $robs);//empty($robs) ? false : $robs);
-			} else {
+			}
+			else {
 				// Error logging user, send to password lost form
 				$t->assign ("ctl_passlost", true);
 			}
-			break; // end WELCOME
+		break; // end WELCOME
 		case "adminusr":
 			// Get Regions Information
 			$q = new Query();
@@ -142,7 +142,7 @@ if (isset($_GET['cmd'])) {
 			$t->assign ("ctl_adminusr", true);
 			$t->assign ("usrpa", $us->getUserInfo(''));
 			$t->assign ("ctl_usrlist", true);
-			break;
+		break;
 		case "viewpref":
 			// PREFERENCES: View User Account Options
 			//if (checkUserSess()) {
@@ -151,45 +151,45 @@ if (isset($_GET['cmd'])) {
 				$t->assign ("usri", $usri);
 			//} else
 			//	$t->assign ("ctl_passlost", true);
-			break;
+		break;
 		case "chklogin":
 			// USERADMIN: check if UserId exists...
 			$t->assign ("ctl_chklogin", true);
 			if ($us->existUser($_GET['userid']))
 				$t->assign ("clogin", true);
-			break;
+		break;
 		case "chkpasswd":
 			// Check if password is correct (ask to dicore). if is OK show dialog to change it.
 			if ($us->validateUser($us->UserId, $_GET['UserPasswd'])) {
 				$t->assign ("ctl_chkpasswd", true);
 				$usri = form2user($us->getUserInfo($us->UserId));
 				$t->assign ("usri", $usri);
-			} else {
+			}
+			else {
 				$t->assign ("ctl_msgupdate", true);
 				$t->assign ("errbadpass", true);
 			}
-			break;
+		break;
 		case "insert":
 			// USERADMIN: insert new user
 			$data = form2user($_GET);
 			$t->assign ("ctl_msginsert", true);
 			$t->assign ("UserId", $data['UserId']);
+			// Create user if login not exists
 			if ($us->existUser($data['UserId'])) {
-				// Create user if login not exists
 				$ret = $us->insertUser($data['UserId'], $data['UserFullName'], $data['UserEMail'], 
 				      $data['UserPasswd'], $data['UserCountry'], $data['UserCity'], $data['UserActive']);
-			} else {
+			}
+			else
 				$ret = ERR_OBJECT_EXISTS;
-			}
 			$t->assign ("insstat", $ret);
-			if (!iserror($ret)) {
+			if (!iserror($ret))
 				$t->assign ("noerrorins", true);
-			} else {
+			else
 				$t->assign ("errinsuser", true);
-			}
-			break;
+		break;
+		// USERADMIN: update selected user..
 		case "update":
-			// USERADIN: update selected user..
 			$data = form2user($_GET);
 			$t->assign ("ctl_msgupdate", true);
 			$t->assign ("UserId", $data['UserId']);
@@ -201,30 +201,27 @@ if (isset($_GET['cmd'])) {
 					$ret = $u->updateUser($data['UserId'], $data['UserFullName'], $data['UserEMail'], 
 					 $data['UserPasswd'], $data['UserCountry'], $data['UserCity'], $data['UserActive']);
 					$t->assign ("updstat", $ret);
-					if (!iserror($ret)) {
+					if (!iserror($ret))
 						$t->assign ("noerrorupd", true);
-					} else {
+					else
 						$t->assign ("errupduser", true);
-					}
-				} else {
-					$t->assign ("errnomatch", true);
 				}
-			} else {
-				$t->assign ("errbadpass", true);
+				else
+					$t->assign ("errnomatch", true);
 			}
-			break;
+			else
+				$t->assign ("errbadpass", true);
+		break;
 		case "list":
 			// USERADMIN: reload list..
 			$t->assign ("usrpa", $us->getUserInfo(''));
 			$t->assign ("ctl_usrlist", true);
-			break;
+		break;
 		default:
-			// DEFAULT: View login window
-			if (checkAnonSess()) {
+			// View login window
+			if (checkAnonSess())
 				$t->assign ("ctl_login", true);
-			}
-			break;
-		} // switch
+		break;
 	} // end share session
 }
 
