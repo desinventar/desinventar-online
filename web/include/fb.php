@@ -30,5 +30,3 @@ function showErrorMsg($sMsg) {
 }
 
 </script>
-
-
