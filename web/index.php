@@ -86,10 +86,24 @@ case 'getRegionTechInfo':
 	$t->assign ('Labels', $labels);
 	$t->display('regiontechinfo.tpl');
 	break;
+case 'getRegionFullInfo':
+	$RegionId = getParameter('RegionId', '');
+	$t->assign('reg', $RegionId);
+	$r = new DIRegion($us, $RegionId);
+	//$RegionInfo = array();
+	//$RegionInfo['RegionId'] = $RegionId;
+	$a = $r->getDBInfo();
+	$a['NumDatacards'] = $us->q->getNumDisasterByStatus('PUBLISHED');
+	$t->assign('RegionInfo', $a);
+	$labels = $us->q->queryLabelsFromGroup('DB', $lg, false);
+	$t->assign ('Labels', $labels);
+	$t->assign ('ctl_showRegionInfo', true);
+	$t->display('index.tpl');
+	break;
 default:
-	if (isset($get['r']) && !empty($get['r'])) {
+	if (isset($get['r']) && !empty($get['r']))
 		$reg = $get['r'];
-	} elseif (isset($post) && !empty($post['_REG'])) {
+	elseif (isset($post) && !empty($post['_REG'])) {
 		// Request to save Query Design in File..
 		fixPost($post);
 		header("Content-type: text/xml");
@@ -97,7 +111,8 @@ default:
 		echo '<?xml version="1.0" encoding="UTF-8"?>'. "\n";
 		echo "<DIQuery />". base64_encode(serialize($post));
 		exit();
-	} elseif (isset($_FILES['qry'])) {
+	}
+	elseif (isset($_FILES['qry'])) {
 		// Open file, decode and assign saved query..
 		$myfile = $_FILES['qry']['tmp_name'];
 		$handle = fopen($myfile, "r");
@@ -287,9 +302,8 @@ default:
 			$t->assign ("sst1", $sst1);
 			$t->assign ("sst", $sst);
 			$st = array();
-			foreach ($q->loadGeoLevels('', -1, false) as $k=>$i) {
+			foreach ($q->loadGeoLevels('', -1, false) as $k=>$i)
 				$st["StatisticGeographyId_". $k] = array($i[0], $i[1]);
-			}
 			$std = array();
 			$std = array_merge($std, $q->queryLabelsFromGroup('Statistic', $lg));
 			$std = array_merge($std, $st);

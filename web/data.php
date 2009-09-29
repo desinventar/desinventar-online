@@ -59,7 +59,7 @@ if (isset($get['page']) || isset($post['_D+cmd'])) {
 		if (isset($post['_D+SQL_ORDER']))
 			$ord = $post['_D+SQL_ORDER'];
 		$sql = $q->genSQLSelectData($qd, $fld, $ord);
-		$dlt = $q->dreg->query($sqc);
+		//$dlt = $q->dreg->query($sqc);
 		if ($post['_D+cmd'] == "result") {
 			// show results in window
 			$export = '';
