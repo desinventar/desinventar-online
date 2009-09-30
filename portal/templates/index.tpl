@@ -52,7 +52,8 @@
 			$("#regiontechinfo"  ).load('{-$di_url-}', { cmd:'getRegionTechInfo', RegionId : RegionId });
 			//$("#regionlink").attr('href', '{-$di_url-}' + '?r=' + RegionId);
 			$("#regionlink").unbind('click').click(function() {
-				window.open('{-$di_url-}?r=' + RegionId,'DI_' + RegionId, 
+				winid = RegionId.substr(0, 5);
+				window.open('{-$di_url-}?r=' + RegionId,'DI_' + winid, 
 					'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');
 			});
 		};
