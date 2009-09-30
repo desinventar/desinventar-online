@@ -225,7 +225,7 @@
 			break;
 			// databases menu
 			case "mdbsfnd":
-				updateList('pagecontent', 'index.php', 'cmd=searchdb');
+				updateList('pagecontent', 'index.php', 'cmd=listdb');
 				usrw.show();
 			break;
 			case "mdbsadm":
@@ -2013,6 +2013,15 @@
 </body>
 </html>
 {-/if-}
+{-** LISTDB: Show available databases**-}
+{-if $ctl_showlistdb-}
+		<b><u>{-#tdbavail#-}</u>:</b>
+		<ul>
+{-foreach name=rlist key=key item=item from=$regionlist-}
+			<li><a href="?r={-$key-}">{-$item-}</a></li>
+{-/foreach-}
+		</ul>
+{-/if-}
 
 {-** MAINPAGE: default page in DesInventar root **-}
 {-if $ctl_mainpage-}
@@ -2053,7 +2062,7 @@
 				<ul>
 {-foreach name=rlist key=key item=item from=$regionlist-}
 				<li><a href="javascript:void(null)" onClick="javascript:window.open('?r={-$key-}','DI_{-$smarty.foreach.rlist.iteration-}', 
-				'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,status=yes,scrollbars=no,toolbar=no');">{-$item-}</a>
+				'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,status=no,scrollbars=no,toolbar=no');">{-$item-}</a>
 				</li>
 {-/foreach-}
 				</ul>
@@ -2068,6 +2077,8 @@
 </body>
 </html>
 {-/if-}
+
+{-** REGIONINFO: Show Full Region Information **-}
 {-if $ctl_showRegionInfo-}
 	<table border="0">
 	<tr>
