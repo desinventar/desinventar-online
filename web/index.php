@@ -94,7 +94,6 @@ case 'getRegionTechInfo':
 	break;
 case 'getRegionFullInfo':
 	$t->assign('reg', $RegionId);
-	$us->open($RegionId);
 	$r = new DIRegion($us, $RegionId);
 	$a = $r->getDBInfo();
 	$a['NumDatacards'] = $us->q->getNumDisasterByStatus('PUBLISHED');
@@ -103,6 +102,9 @@ case 'getRegionFullInfo':
 	$t->assign ('Labels', $labels);
 	$t->assign ('ctl_showRegionInfo', true);
 	$t->display('index.tpl');
+	break;
+case 'getGraphParameters':
+	$t->display('graphparameters.tpl');
 	break;
 default:
 	if (isset($get['r']) && !empty($get['r'])) {
