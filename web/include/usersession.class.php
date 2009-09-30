@@ -147,6 +147,7 @@ class UserSession {
 			$this->awake();
 			$this->q->setDBConnection($prmRegionId);
 			$this->sRegionId = $prmRegionId;
+			fb('open : set RegionId=' . $prmRegionId);
 		}
 		return $iReturn;
 	} // open()

@@ -194,7 +194,7 @@ class DIRegion extends DIObject {
 		} catch (Exception $e) {
 			showErrorMsg("Error " . $e->getMessage());
 		}
-		$this->q->setDBConnection($this->get('RegionId'));
+		$this->session->q->setDBConnection($this->get('RegionId'));
 		// Delete all database records
 		$this->clearRegionTables();
 		$this->set('RegionId', $prmRegionId);
@@ -208,24 +208,19 @@ class DIRegion extends DIObject {
 			// Insert Data Into core.Region, create Info Table
 			$this->insert();
 		}
-		fb('region 0');		
 		if ($iReturn > 0) {
 			// Calculate Name of GeoLevel 0
 			if ($prmGeoLevelName == '') {
 				$prmGeoLevelName = 'Level 0';
 			}
-			fb('region 1');
 			$g = new DIGeoLevel($this->session, 0);
-			fb('region 2');
 			$g->set('GeoLevelName', $prmGeoLevelName);
 			$g->set('RegionId', $this->get('RegionId'));
-			fb('region 3');
 			if ($g->exist() > 0) {
 				$g->update();
 			} else {
 				$g->insert();
 			}
-			fb('region 4');
 		}
 		return $iReturn;
 	}

@@ -21,6 +21,7 @@ class DIObject {
 	public function __construct($prmSession) {
 		$this->session = $prmSession;
 		$this->q = $prmSession->q;
+		$prmSession->sRegionId = $this->q->sRegionId;
 		//$this->q = new Query($prmSession->sRegionId);
 		$this->setConnection($prmSession->sRegionId);
 		$num_args = func_num_args();
