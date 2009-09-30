@@ -18,7 +18,7 @@ $cmd = getParameter('cmd','');
 $RegionId = getParameter('r', getParameter('RegionId', ''));
 if ($cmd == '') {
 	if ($RegionId == '') {
-		$cmd = 'listdb';
+		$cmd = 'main';
 	}
 }
 
@@ -33,16 +33,22 @@ switch ($cmd) {
 case 'getversion':
 	print VERSION;
 	break;
-case 'listdb':
+case 'main':
 	// Direct access returns a list of public regions on this server
 	$d = new Query();
-	$reglst = $d->searchDB();
-	$t->assign ("lglst", $d->loadLanguages(1));
-	$t->assign('regionlist', $reglst);
+	$t->assign("lglst", $d->loadLanguages(1));
+	$t->assign('regionlist', $d->searchDB());
 	$t->assign('ctl_mainpage', true);
 	$t->display('index.tpl');
 	//$t->assign('ctl_showregionlist', true);
 	//$t->display('portal.tpl');
+	break;
+case 'listdb':
+	// Direct access returns a list of public regions on this server
+	$d = new Query();
+	$t->assign('regionlist', $d->searchDB());
+	$t->assign('ctl_showlistdb', true);
+	$t->display('index.tpl');
 	break;
 case 'searchdb':
 	$d = new Query();
