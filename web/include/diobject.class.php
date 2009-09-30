@@ -36,10 +36,11 @@ class DIObject {
 		$this->createFields($this->sFieldKeyDef);
 		$this->createFields($this->sFieldDef);
 		$this->set('RegionId', $this->session->sRegionId);
-		$this->set('LangIsoCode', $this->q->getDBInfoValue('LangIsoCode'));
-		if ($this->get('LangIsoCode') == '') { 
-			$this->set('LangIsoCode', 'spa');
+		$LangIsoCode = 'eng';
+		if ($this->q->sRegionId != 'core') {
+			$LangIsoCode = $this->q->getDBInfoValue('LangIsoCode');
 		}
+		$this->set('LangIsoCode', $LangIsoCode);
 		$this->set('RecordUpdate', gmdate('c'));
 	} // constructor
 	

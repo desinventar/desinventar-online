@@ -35,7 +35,6 @@ class DIRegion extends DIObject {
 		                      "InfoGeography/STRING," . 
 		                      "InfoCartography/STRING," .
 		                      "InfoAdminURL/STRING";
-
 		parent::__construct($prmSession);
 		if ($this->get('OptionLanguageList') == '') {
 			$this->set('OptionLanguageList', $this->get('LangIsoCode'));
@@ -196,37 +195,37 @@ class DIRegion extends DIObject {
 			showErrorMsg("Error " . $e->getMessage());
 		}
 		$this->q->setDBConnection($this->get('RegionId'));
-		
 		// Delete all database records
 		$this->clearRegionTables();
-		
 		$this->set('RegionId', $prmRegionId);
-		
 		if ($iReturn > 0) {
 			// Copy Predefined Event/Cause Lists
 			$this->copyEvents($this->get('LangIsoCode'));
 			$this->copyCauses($this->get('LangIsoCode'));
 		}
-
 		
 		if ($iReturn > 0) {
 			// Insert Data Into core.Region, create Info Table
 			$this->insert();
 		}
-		
+		fb('region 0');		
 		if ($iReturn > 0) {
 			// Calculate Name of GeoLevel 0
 			if ($prmGeoLevelName == '') {
 				$prmGeoLevelName = 'Level 0';
 			}
+			fb('region 1');
 			$g = new DIGeoLevel($this->session, 0);
+			fb('region 2');
 			$g->set('GeoLevelName', $prmGeoLevelName);
 			$g->set('RegionId', $this->get('RegionId'));
+			fb('region 3');
 			if ($g->exist() > 0) {
 				$g->update();
 			} else {
 				$g->insert();
 			}
+			fb('region 4');
 		}
 		return $iReturn;
 	}
