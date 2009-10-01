@@ -49,7 +49,7 @@
 		if (mod != "")
 			$(mod + 'addsect').style.display = 'none';
 		var myAjax = new Ajax.Request( url, {
-			method: 'get', parameters: 'r='+ r +'&'+ pars,
+			method: 'get', parameters: pars,
 			onLoading: function(request) {
 				window.style.cursor = "wait";
 				uploadMsg(waiting);
@@ -118,10 +118,8 @@
 				$('aEventActive').checked = true;
 			else
 				$('aEventActive').checked = false;
-			if (is_pred == "1") {
+			if (is_pred == "1")
 				$('aEventDesc').disabled = true;
-				$('aEventDesc2').value = desc;
-			}
 			else
 				$('aEventDesc').disabled = false;
 			$('aEventPreDefined').value = is_pred;
@@ -134,10 +132,8 @@
 				$('aCauseActive').checked = true;
 			else
 				$('aCauseActive').checked = false;
-			if (is_pred == "1") {
+			if (is_pred == "1")
 				$('aCauseDesc').disabled = true;
-				$('aCauseDesc2').value = desc;
-			}
 			else
 				$('aCauseDesc').disabled = false;
 			$('aCausePreDefined').value = is_pred;

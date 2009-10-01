@@ -9,17 +9,17 @@
 </head>
 <body>
 	<b onMouseOver="showtip('{-$dic.DBEvent[2]-}');">{-$dic.DBEvent[0]-}</b>
-	<br>
+	<br />
 	<div class="dwin" style="width:600px; height:100px;">
 		<table class="grid">
 			<thead>
 				<tr>
-					<td class="header" onMouseOver="showtip('{-$dic.DBEvePersonName[2]-}');">
-						<b>{-$dic.DBEvePersonName[0]-}</b></td>
-					<td class="header" onMouseOver="showtip('{-$dic.DBEvePersonDef[2]-}');">
-						<b>{-$dic.DBEvePersonDef[0]-}</b></td>
-					<td class="header" onMouseOver="showtip('{-$dic.DBEveActive[2]-}');">
-						<b>{-$dic.DBEveActive[0]-}</b></td>
+				<td class="header" onMouseOver="showtip('{-$dic.DBEvePersonName[2]-}');">
+					<b>{-$dic.DBEvePersonName[0]-}</b></td>
+				<td class="header" onMouseOver="showtip('{-$dic.DBEvePersonDef[2]-}');">
+					<b>{-$dic.DBEvePersonDef[0]-}</b></td>
+				<td class="header" onMouseOver="showtip('{-$dic.DBEveActive[2]-}');">
+					<b>{-$dic.DBEveActive[0]-}</b></td>
 				</tr>
 			</thead>
 			<tbody id="lst_eveuser">
@@ -32,25 +32,25 @@
 							uploadMsg(''); $('cmd').value='update';">
    				<td>{-$item[0]-}</td>
    				<td>{-$item[1]|truncate:150-}</td>
-   				<td><input type="checkbox" {-if ($item[2] == 1) -} checked {-/if-} disabled></td>
-   			</tr>
+   				<td><input type="checkbox" {-if ($item[2] == 1) -} checked {-/if-} disabled /></td>
+				</tr>
    {-/foreach-}
 {-/if-}
 {-if $ctl_show-}
 			</tbody>
 		</table>
 	</div>
-	<br>
+	<br />
 	<div class="dwin" style="width:600px; height:100px;">
 		<table width="100%" class="grid">
 			<thead>
 				<tr>
-					<td class="header" onMouseOver="showtip('{-$dic.DBEvePredefName[2]-}');">
-						<b>{-$dic.DBEvePredefName[0]-}</b></td>
-					<td class="header" onMouseOver="showtip('{-$dic.DBEvePredefDef[2]-}');">
-						<b>{-$dic.DBEvePredefDef[0]-}</b></td>
-					<td class="header" onMouseOver="showtip('{-$dic.DBEveActive[2]-}');">
-						<b>{-$dic.DBEveActive[0]-}</b></td>
+				<td class="header" onMouseOver="showtip('{-$dic.DBEvePredefName[2]-}');">
+					<b>{-$dic.DBEvePredefName[0]-}</b></td>
+				<td class="header" onMouseOver="showtip('{-$dic.DBEvePredefDef[2]-}');">
+					<b>{-$dic.DBEvePredefDef[0]-}</b></td>
+				<td class="header" onMouseOver="showtip('{-$dic.DBEveActive[2]-}');">
+					<b>{-$dic.DBEveActive[0]-}</b></td>
 				</tr>
 			</thead>
 			<tbody id="lst_evepred">
@@ -63,7 +63,7 @@
 													$('cmd').value='update';">
    				<td>{-$item[0]-}</td>
    				<td>{-$item[1]|truncate:150-}</td>
-   				<td><input type="checkbox" {-if ($item[2] == 1) -} checked {-/if-} disabled></td>
+   				<td><input type="checkbox" {-if ($item[2] == 1) -} checked {-/if-} disabled /></td>
    			</tr>
    {-/foreach-}
 {-/if-}
@@ -71,38 +71,35 @@
 			</tbody>
 		</table>
 	</div>
-	<br>
-	<input id="add" type="button" value="{-#baddelem#-}" class="line"
-		onclick="setEveCau('','','','1','0','event'); uploadMsg(''); $('cmd').value='insert';">
+	<br />
+	<input id="add" type="button" value="{-#baddelem#-}" class="line" onclick="setEveCau('','','','1','0','event'); uploadMsg(''); $('cmd').value='insert';" />
 	<span id="eventstatusmsg" class="dlgmsg"></span>
-	<br><br>
+	<br /><br />
 	<div id="eventaddsect" style="display:none">
 		<form id="eventfrm" name="eventfrm" method="GET" 
 			action="javascript:var s=$('eventfrm').serialize(); sendData('{-$reg-}', 'events.php', s, $('aEventPreDefined').value);"
 			onSubmit="javascript: var a=new Array('aEventName','aEventDesc'); return(checkForm(a, '{-#errmsgfrm#-}'));">
-			<input id="r" name="r" type="hidden" value="{-$reg-}">
 			{-$dic.DBEvePersonName[0]-}<b style="color:darkred;">*</b><br>
 			<input id="aEventName" name="EventName" type="text" class="line" maxlength="40" style="width:500px;" {-$ro-}
-					onBlur="updateList('eventstatusmsg', 'events.php', 'r={-$reg-}&cmd=chkname&EventId='+ $('EventId').value +'&EventName='+ $('aEventName').value);"
-					onFocus="showtip('{-$dic.DBEvePersonName[2]-}');">
-			<br><br>
+				onBlur="updateList('eventstatusmsg', 'events.php', 'r={-$reg-}&cmd=chkname&EventId='+ $('EventId').value +'&EventName='+ $('aEventName').value);"
+				onFocus="showtip('{-$dic.DBEvePersonName[2]-}');" />
+			<br /><br />
 			{-$dic.DBEvePersonDef[0]-}<b style="color:darkred;">*</b><br>
 			<textarea id="aEventDesc" name="EventDesc" class="line" rows="2" style="width:500px;"
-					onFocus="showtip('{-$dic.DBEvePersonDef[2]-}');" {-$ro-}></textarea>
-			<input id="aEventDesc2" name="EventDesc2" type="hidden">
-			<br><br>
+				onFocus="showtip('{-$dic.DBEvePersonDef[2]-}');" {-$ro-}></textarea>
+			<br /><br />
 			{-$dic.DBEveActive[0]-}
 			<input id="aEventActive" name="EventActive" type="checkbox" {-$ro-} 
-					onFocus="showtip('{-$dic.DBEveActive[2]-}');"
-					onClick="if (!this.checked) updateList('eventstatusmsg', 'events.php', 'r={-$reg-}&cmd=chkstatus&EventId='+ 
-												$('aEventId').value);">
-			<br><br>
+				onFocus="showtip('{-$dic.DBEveActive[2]-}');"
+				onClick="if (!this.checked) updateList('eventstatusmsg', 'events.php', 'r={-$reg-}&cmd=chkstatus&EventId='+ $('aEventId').value);" />
+			<br /><br />
 			<p class="line">
-				<input id="aEventId" name="EventId" type="hidden">
-				<input id="aEventPreDefined" name="EventPreDefined" type="hidden">
-				<input id="cmd" name="cmd" type="hidden">
-				<input type="submit" value="{-#bsave#-}" {-$ro-} class="line">
-				<input type="reset" value="{-#bcancel#-}" onClick="$('eventaddsect').style.display='none'; uploadMsg('');" {-$ro-} class="line">
+				<input id="r" name="r" type="hidden" value="{-$reg-}" />
+				<input id="aEventId" name="EventId" type="hidden" />
+				<input id="aEventPreDefined" name="EventPreDefined" type="hidden" />
+				<input id="cmd" name="cmd" type="hidden" />
+				<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" />
+				<input type="reset" value="{-#bcancel#-}" onClick="$('eventaddsect').style.display='none'; uploadMsg('');" {-$ro-} class="line" />
 			</p>
 		</form>
 	</div>

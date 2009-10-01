@@ -28,9 +28,9 @@ if (isset($get['geocmd'])) {
 	$dat['GeographyCode'] = isset($get['GeographyCode']) ? $get['GeographyCode']:"";
 	$dat['GeographyName'] = isset($get['GeographyName']) ? $get['GeographyName']:"";
 	if (isset($get['GeographyActive']) && $get['GeographyActive'] == "on")
-		$dat['GeographyActive'] = true;
+		$dat['GeographyActive'] = 1;
 	else
-		$dat['GeographyActive'] = false;
+		$dat['GeographyActive'] = 0;
 	switch ($cmd) {
 	case "insert":
 		$o = new DIGeography($us);

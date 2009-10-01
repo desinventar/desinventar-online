@@ -18,16 +18,14 @@ function form2event($form) {
 		$data['EventName'] = $form['EventName'];
 	if (isset($form['EventDesc']))
 		$data['EventDesc'] = $form['EventDesc'];
-	else if (isset($form['EventDesc2']))
-		$data['EventDesc'] = $form['EventDesc2'];
 	if (isset($form['EventActive']) && $form['EventActive'] == "on")
-		$data['EventActive'] = true;
+		$data['EventActive'] = 1;
 	else
-		$data['EventActive'] = false;
+		$data['EventActive'] = 0;
 	if (isset($form['EventPreDefined']) && $form['EventPreDefined'] == "1")
-		$data['EventPreDefined'] = true;
+		$data['EventPreDefined'] = 1;
 	else
-		$data['EventPreDefined'] = false;
+		$data['EventPreDefined'] = 0;
 	return $data;
 }
 

@@ -38,11 +38,26 @@
 	  </tbody>
 	 </table>
 	</div>
-	<br>
-	<input id="add" type="button" value="{-#baddoption#-}" class="line"
-		onclick="mod='regionpa'; setRegionPA('','', '', '', '', '1','0'); $('cmd').value='insert';">&nbsp;|&nbsp;
-	<input id="directory" type="button" value="{-#bloaddir#-}" class="line"
-		onClick="updateList('lst_regionpa', 'region.php', 'cmd=loadDir');">
+	<br />
+	<table border=0>
+		<tr>
+		<td>
+		<input id="add" type="button" value="{-#baddoption#-}" class="line"
+			onclick="mod='regionpa'; setRegionPA('','', '', '', '', '1','0'); $('cmd').value='insert';" />&nbsp;|&nbsp;
+		</td>
+		<td>
+		<input id="directory" type="button" value="{-#bloaddir#-}" class="line"
+			onClick="updateList('lst_regionpa', 'region.php', 'cmd=loadDir');" />&nbsp;|&nbsp;
+		</td>
+		<td>
+		<form id="putregion" method="POST" action="region.php" target="fresult" enctype="multipart/form-data">
+			<input type="hidden" name="cmd" value="putregion" />
+			<input type="file" name="filereg" onChange="$('putregion').submit();" />
+		</form>
+		</td>
+		</tr>
+	</table>
+	<iframe name="fresult" id="fresult" frameborder="0" src="about:blank" style="height:24px; width:300px;"></iframe>
 	<span id="regionpastatusmsg" class="dlgmsg"></span><br>
 	<div id="regionpaaddsect" style="display:none">
    	  <form name="regionpafrm" id="regionpafrm" method="GET" action="javascript: var s=$('regionpafrm').serialize(); 
@@ -60,7 +75,7 @@
 			</tr>
 			<tr>
 				<td>{-#tregnamlist#-}<b style="color:darkred;">*</b></td>
-				<td><input id="RegionLabel" name="RegionLabel" type="text" maxlength="200" class="line fixw"></td>
+				<td><input id="RegionLabel" name="RegionLabel" type="text" maxlength="200" class="line fixw" /></td>
 			</tr>
 			<tr>
 				<td><a class="info" href="javascript:void(null)" 
@@ -85,18 +100,18 @@
 			</tr>
 			<tr>
 				<td>{-#tregactlist#-}<b>*</b></td>
-				<td><input id="RegionActive" name="RegionActive" type="checkbox" checked></td>
+				<td><input id="RegionActive" name="RegionActive" type="checkbox" checked /></td>
 			</tr>
 			<tr>
 				<td>{-#tregpublist#-}<b>*</b></td>
-				<td><input id="RegionPublic" name="RegionPublic" type="checkbox"></td>
+				<td><input id="RegionPublic" name="RegionPublic" type="checkbox" /></td>
 			</tr>
 			<tr>
 				<td colspan=2 align="center">
-					<input id="cmd" name="cmd" type="hidden">
-					<input id="RegionId" name="RegionId" type="hidden">
-					<input type="submit" value="{-#bsave#-}" class="line">
-					<input type="reset" value="{-#bcancel#-}" onClick="$('regionpaaddsect').style.display='none'; uploadMsg('');" class="line">
+					<input id="cmd" name="cmd" type="hidden" />
+					<input id="RegionId" name="RegionId" type="hidden" />
+					<input type="submit" value="{-#bsave#-}" class="line" />
+					<input type="reset" value="{-#bcancel#-}" onClick="$('regionpaaddsect').style.display='none'; uploadMsg('');" class="line" />
 				</td>
 			</tr>
 		</table>

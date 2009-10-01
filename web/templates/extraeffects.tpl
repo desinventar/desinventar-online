@@ -2,7 +2,7 @@
 {-** EXTRAEFFECTS: Interface to Edit ExtraEffects.. **-}
 {-if $ctl_admineef-}
 <!-- FIELDS -->
-	<b onMouseOver="showtip('{-$dic.DBExtraEffect[2]-}');">{-$dic.DBExtraEffect[0]-}</b><br>
+	<b onMouseOver="showtip('{-$dic.DBExtraEffect[2]-}');">{-$dic.DBExtraEffect[0]-}</b><br />
 	<div class="dwin" style="width:600px; height:120px;">
 		<table width="100%" class="grid">
 			<thead>
@@ -30,24 +30,23 @@
 			</tbody>
 		</table>
 	</div>
-	<br><br>
+	<br /><br />
 	<input id="add" type="button" value="{-#baddoption#-}" class="line"
-		onclick="setExtraEff('','','','','','',''); $('cmd').value='insert';">
+		onclick="setExtraEff('','','','','','',''); $('cmd').value='insert';" />
 	<span id="extraeffstatusmsg" class="dlgmsg"></span>
-	<br><br>
+	<br /><br />
 	<div id="extraeffaddsect" style="display:none; width:600px;">
 		<form name="eeffrm" id="eeffrm" method="GET" 
 			action="javascript: var s=$('eeffrm').serialize(); sendData('{-$reg-}', 'extraeffects.php', s, '');"
 			onSubmit="javascript: var a=new Array('EEFieldLabel','EEFieldDesc', 'EEFieldType'); return(checkForm(a, '{-#errmsgfrmeef#-}'));">
-			<input id="r" name="r" type="hidden" value="{-$reg-}">
-    		{-$dic.DBEEFieldLabel[0]-}<b style="color:darkred;">*</b><br>
+    		{-$dic.DBEEFieldLabel[0]-}<b style="color:darkred;">*</b><br />
     		<input type="text" id="EEFieldLabel" name="EEFieldLabel" {-$ro-} class="line" style="width:500px;"
-    				onFocus="showtip('{-$dic.DBEEFieldLabel[2]-}')">
-    		<br><br>
+    				onFocus="showtip('{-$dic.DBEEFieldLabel[2]-}')" />
+    		<br /><br />
     		{-$dic.DBEEFieldDesc[0]-}<b style="color:darkred;">*</b><br>
     		<textarea id="EEFieldDesc" name="EEFieldDesc" {-$ro-} style="width:500px;"
     				onFocus="showtip('{-$dic.DBEEFieldDesc[2]-}')"></textarea>
-    		<br><br>
+    		<br /><br />
     		{-$dic.DBEEFieldType[0]-}<b style="color:darkred;">*</b><br>
     		<select id="EEFieldType" name="EEFieldType" {-$ro-} class="line" style="width:500px;"
     				onFocus="showtip('{-$dic.DBEEFieldType[2]-}');">
@@ -56,23 +55,24 @@
 					<option value="FLOAT">{-#typefloat#-}</option>
     			<option value="DATE">{-#typedate#-}</option>
 					<option value="TEXT">{-#typetext#-}</option>
-				</select>
-    		<br><br>
+			</select>
+    		<br /><br />
     		{-$dic.DBEEFieldActive[0]-}
     		<input type="checkbox" id="EEFieldActive" name="EEFieldActive" {-$ro-}
-    				onFocus="showtip('{-$dic.DBEEFieldActive[2]-}')">
-    		<br><br>
+    				onFocus="showtip('{-$dic.DBEEFieldActive[2]-}')" />
+    		<br /><br />
     		{-$dic.DBEEFieldPublic[0]-}
     		<input type="checkbox" id="EEFieldPublic" name="EEFieldPublic" {-$ro-}
-    				onFocus="showtip('{-$dic.DBEEFieldPublic[2]-}')">
-    		<br><br>
+    				onFocus="showtip('{-$dic.DBEEFieldPublic[2]-}')" />
+    		<br /> <br />
     		<p align="center" style="width:500px;">
-    			<input id="EEFieldSize" name="EEFieldSize" value="100" type="hidden">
-    			<input id="EEFieldId" name="EEFieldId" type="hidden">
-    			<input id="cmd" name="cmd" type="hidden">
-    			<input type="submit" value="{-#bsave#-}" {-$ro-} class="line">
+				<input id="r" name="r" type="hidden" value="{-$reg-}" />
+    			<input id="EEFieldSize" name="EEFieldSize" value="100" type="hidden" />
+    			<input id="EEFieldId" name="EEFieldId" type="hidden" />
+    			<input id="cmd" name="cmd" type="hidden" />
+    			<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" />
     			<input type="reset" value="{-#bcancel#-}" class="line"
-    					onClick="$('extraeffaddsect').style.display='none'; uploadMsg('');" {-$ro-}>
+    					onClick="$('extraeffaddsect').style.display='none'; uploadMsg('');" {-$ro-} />
     		</p>
     	</form>
     </div>

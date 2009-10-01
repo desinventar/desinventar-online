@@ -9,7 +9,6 @@
 require_once('include/loader.php');
 require_once('include/region.class.php');
 require_once('include/diregion.class.php');
-$t->config_dir = 'include';
 
 function form2region ($val) {
 	$dat = array();
@@ -110,7 +109,6 @@ if (isset($_GET['cmd'])) {
 			// ADMINREG: Create database list from directory
 			$dbb = dir(VAR_DIR . "/database/");
 			$direg = array();
-			echo "<pre>";
 			while (false !== ($entry = $dbb->read())) {
 				$difile = VAR_DIR . "/database/" . $entry ."/desinventar.db";
 				$rg = $us->q->checkExistsRegion($entry);
@@ -134,6 +132,27 @@ if (isset($_GET['cmd'])) {
 			$dbb->close();
 			$t->assign ("regpa", $us->q->getRegionAdminList());
 			$t->assign ("ctl_reglist", true);
+		break;
+		case "putregion":
+			$result = "";
+			if (isset($post['cmd']) && $post['cmd'] == "putregion" && 
+				isset($_FILES['filereg']) && $_FILES['filereg']['error'] == UPLOAD_ERR_OK) {
+					if ($_FILES['filereg']['type'] == "application/octet-stream") {
+						$tmp_name = $_FILES['filereg']['tmp_name'];
+						//$name = $_FILES['filereg']['name'];
+						//$FileName = VAR_DIR . "/database/" . $name;
+						//move_uploaded_file($tmp_name,  $FileName);
+						$handle = fopen($FileName, "r");
+						// unzip file in destination
+						$result = $FileName;
+						fclose($handle);
+					}
+					else
+						$result = "FILETYPE IS UNKNOWN.. FORMAT MUST BE TEXT COMMA SEPARATED!";
+			}
+			else
+				$result = "NO FILE";
+			echo $result;
 		break;
 		default:
 			// ADMINREG: insert or update region
@@ -167,6 +186,8 @@ if (isset($_GET['cmd'])) {
 			}
 		break;
 	} //switch
+	$q = new Query();
+	$t->assign ("dic", $q->queryLabelsFromGroup('DB', $lg));
 	$t->display ("region.tpl");
 }
 /*else {

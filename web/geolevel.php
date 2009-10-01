@@ -42,7 +42,6 @@ if (!empty($cmd)) {
 		$c = new DIGeoCarto($us);
 		$c->setFromArray($dat);
 		$c->set('GeoLevelId', $o->get('GeoLevelId'));
-		
 		// Save to database
 		$gl = $o->insert();
 		$gl = $c->insert();

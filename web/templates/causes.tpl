@@ -9,7 +9,7 @@
 </head>
 <body>
 	<b onMouseOver="showtip('{-$dic.DBCause[2]-}');">{-$dic.DBCause[0]-}</b>
-	<br>
+	<br />
 	<div class="dwin" style="width:600px; height:100px;">
 		<table class="grid">
 			<thead>
@@ -32,7 +32,7 @@
 							uploadMsg(''); $('cmd').value='update';">
    				<td>{-$item[0]-}</td>
    				<td>{-$item[1]|truncate:150-}</td>
-   				<td><input type="checkbox" {-if ($item[2] == 1) -} checked {-/if-} disabled></td>
+   				<td><input type="checkbox" {-if ($item[2] == 1) -} checked {-/if-} disabled /></td>
    			</tr>
    {-/foreach-}
 {-/if-}
@@ -40,7 +40,7 @@
 			</tbody>
 		</table>
 	</div>
-	<br>
+	<br />
 	<div class="dwin" style="width:600px; height:100px;">
 		<table width="100%" class="grid">
 			<thead>
@@ -59,51 +59,47 @@
    {-foreach name=cau key=key item=item from=$caupredl-}
 				<tr class="{-if ($smarty.foreach.cau.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}" 
 					onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
-					onClick="setEveCau('{-$key-}','{-$item[0]-}','{-$item[1]-}','{-$item[2]-}','1','cause'); 
-											uploadMsg(''); $('cmd').value='update';">
+					onClick="setEveCau('{-$key-}','{-$item[0]-}','{-$item[1]-}','{-$item[2]-}','1','cause'); uploadMsg(''); $('cmd').value='update';">
 					<td>{-$item[0]-}</td>
 					<td>{-$item[1]|truncate:150-}</td>
 					<td><input type="checkbox" {-if ($item[2] == 1) -} checked {-/if-} disabled></td>
-   			</tr>
+				</tr>
    {-/foreach-}
 {-/if-}
 {-if $ctl_show-}
 			</tbody>
 		</table>
 	</div>
-	<br><br>
+	<br /><br />
 	<input id="add" type="button" value="{-#baddelem#-}" class="line"
-  		onclick="setEveCau('','','','1','0','cause'); uploadMsg(''); $('cmd').value='insert';">
+		onclick="setEveCau('','','','1','0','cause'); uploadMsg(''); $('cmd').value='insert';" />
 	<span id="causestatusmsg" class="dlgmsg"></span>
-	<br><br>
+	<br /><br />
 	<div id="causeaddsect" style="display:none">
 		<form id="causefrm" name="causefrm" method="GET" 
 			action="javascript:var s=$('causefrm').serialize(); sendData('{-$reg-}', 'causes.php', s, $('aCausePreDefined').value);"
 			onSubmit="javascript: var a=new Array('aCauseName','aCauseDesc'); return(checkForm(a, '{-#errmsgfrm#-}'));">
-			<input id="r" name="r" type="hidden" value="{-$reg-}">
 			{-$dic.DBCauPersonName[0]-}<b style="color:darkred;">*</b><br>
 			<input id="aCauseName" name="CauseName" type="text" maxlength="40" {-$ro-} class="line" style="width:500px;"
 					onBlur="updateList('causestatusmsg', 'causes.php', 'r={-$reg-}&cmd=chkname&CauseId='+ $('CauseId').value +'&CauseName='+ $('aCauseName').value);"
-					onFocus="showtip('{-$dic.DBCauPersonName[2]-}');">
-			<br><br>
+					onFocus="showtip('{-$dic.DBCauPersonName[2]-}');" />
+			<br /><br />
 			{-$dic.DBCauPersonDef[0]-}<b style="color:darkred;">*</b><br>
 			<textarea id="aCauseDesc" name="CauseDesc" rows="2" style="width:500px;"
 					onFocus="showtip('{-$dic.DBCauPersonDef[2]-}');" {-$ro-}></textarea>
-			<input id="aCauseDesc2" name="CauseDesc2" type="hidden">
-			<br><br>
+			<br /><br />
 			{-$dic.DBCauActive[0]-} 
 			<input id="aCauseActive" name="CauseActive" type="checkbox" {-$ro-} 
 					onFocus="showtip('{-$dic.DBCauActive[2]-}');"
-					onClick="if (!this.checked) updateList('causestatusmsg', 'causes.php', 'r={-$reg-}&cmd=chkstatus&CauseId='+
-												$('aCauseId').value);">
-			<br><br>
+					onClick="if (!this.checked) updateList('causestatusmsg', 'causes.php', 'r={-$reg-}&cmd=chkstatus&CauseId='+ $('aCauseId').value);" />
+			<br /><br />
 			<p align="center" style="width:500px;">
-				<input id="aCauseId" name="CauseId" type="hidden">
-				<input id="aCausePreDefined" name="CausePreDefined" type="hidden">
-				<input id="cmd" name="cmd" type="hidden">
-				<input type="submit" id="sendform" name="sendform" value="{-#bsave#-}" {-$ro-} class="line">
-				<input type="reset" value="{-#bcancel#-}" 
-						onClick="uploadMsg(''); $('causeaddsect').style.display='none';" {-$ro-} class="line">
+				<input id="r" name="r" type="hidden" value="{-$reg-}" />
+				<input id="aCauseId" name="CauseId" type="hidden" />
+				<input id="aCausePreDefined" name="CausePreDefined" type="hidden" />
+				<input id="cmd" name="cmd" type="hidden" />
+				<input type="submit" id="sendform" name="sendform" value="{-#bsave#-}" {-$ro-} class="line" />
+				<input type="reset" value="{-#bcancel#-}" onClick="uploadMsg(''); $('causeaddsect').style.display='none';" {-$ro-} class="line" />
 			</p>
 		</form>
 	</div>
