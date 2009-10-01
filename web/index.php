@@ -58,7 +58,6 @@ case 'searchdb':
 	$t->assign('ctl_showregionlist', true);
 	$t->assign('regionlist', $reglst);
 	print json_encode($reglst);
-	//$t->display('regionlist.tpl');
 	break;
 case 'getCountryName':
 	$d = new Query();

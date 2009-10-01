@@ -30,13 +30,13 @@ if (isset($get['cmd'])) {
 	$cmd = $get['cmd'];
 	if (($cmd == "insert") || ($cmd == "update")) {
 		if (isset($get['EEFieldActive']) && $get['EEFieldActive'] == "on")
-			$active = true;
+			$active = 1;
 		else
-			$active = false;
+			$active = 0;
 		if (isset($get['EEFieldPublic']) && $get['EEFieldPublic'] == "on")
-			$public = true;
+			$public = 1;
 		else
-			$public = false;
+			$public = 0;
 		$data = array('EEFieldId'     => $get['EEFieldId'],
 		              'EEFieldLabel'  => $get['EEFieldLabel'],
 		              'EEFieldDesc'   => $get['EEFieldDesc'], 

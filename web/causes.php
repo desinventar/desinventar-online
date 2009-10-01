@@ -18,16 +18,14 @@ function form2cause ($form) {
 		$data['CauseName'] = $form['CauseName'];
 	if (isset($form['CauseDesc']))
 		$data['CauseDesc'] = $form['CauseDesc'];
-	else if (isset($form['CauseDesc2']))
-		$data['CauseDesc'] = $form['CauseDesc2'];
 	if (isset($form['CauseActive']) && $form['CauseActive'] == "on")
-		$data['CauseActive'] = true;
+		$data['CauseActive'] = 1;
 	else
-		$data['CauseActive'] = false;
-	if (isset($form['CausePreDefined']) && $form['CausePreDefined'] == "1")
-		$data['CausePreDefined'] = true;
+		$data['CauseActive'] = 0;
+	if (isset($form['CausePreDefined']) && $form['CausePreDefined'] == "on")
+		$data['CausePreDefined'] = 1;
 	else
-		$data['CausePreDefined'] = false;
+		$data['CausePreDefined'] = 0;
 	return $data;
 }
 
@@ -77,7 +75,8 @@ if (isset($get['cmd'])) {
 		if ($get['predef'] == "1") {
 			$t->assign ("ctl_caupred", true);
 			$t->assign ("caupredl", $us->q->loadCauses("PREDEF", null, $lg));
-		} else {
+		}
+		else {
 			$t->assign ("ctl_caupers", true);
 			$t->assign ("cauuserl", $us->q->loadCauses("USER", null, $lg));
 		}

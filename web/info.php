@@ -10,9 +10,8 @@ require_once('include/loader.php');
 function getRAPermList($lst) {
 	$dat = array();
 	foreach ($lst as $k=>$v) {
-		if ($v=="NONE" || $v=="USER" || $v=="OBSERVER" || $v=="SUPERVISOR") {
+		if ($v=="NONE" || $v=="USER" || $v=="OBSERVER" || $v=="SUPERVISOR")
 			$dat[$k] = $v;
-		}
 	}
 	return $dat;
 }
@@ -22,7 +21,8 @@ $get = $_GET;
 if (isset($get['r']) && !empty($get['r'])) {
 	$reg = $get['r'];
 	$us->open($reg);
-} else
+}
+else
 	exit();
 
 // EDIT REGION: Form to Create and assign regions
@@ -30,10 +30,9 @@ if (isset($get['infocmd'])) {
 	$mod = "info";
 	$cmd = $get['infocmd'];
 	if (isset($get['OptionOutOfPeriod']) && $get['OptionOutOfPeriod'] == "on")
-		$optout = true;
+		$optout = 1;
 	else
-		$optout = false;
-	
+		$optout = 0;
 	$ifo = 0;
 	// Replace this call with a new class (2009-07-06) (jhcaiced)
 	/*
