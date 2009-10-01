@@ -58,13 +58,12 @@
 {-if $ctl_evepred-}
    {-foreach name=eve key=key item=item from=$evepredl-}
 				<tr class="{-if ($smarty.foreach.eve.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}"
-						onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
-						onClick="setEveCau('{-$key-}','{-$item[0]-}','{-$item[1]-}','{-$item[2]-}','1','event'); uploadMsg('');
-													$('cmd').value='update';">
+					onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
+					onClick="setEveCau('{-$key-}','{-$item[0]-}','{-$item[1]-}','{-$item[2]-}','1','event'); uploadMsg(''); $('cmd').value='update';">
    				<td>{-$item[0]-}</td>
    				<td>{-$item[1]|truncate:150-}</td>
    				<td><input type="checkbox" {-if ($item[2] == 1) -} checked {-/if-} disabled /></td>
-   			</tr>
+				</tr>
    {-/foreach-}
 {-/if-}
 {-if $ctl_show-}
@@ -72,7 +71,8 @@
 		</table>
 	</div>
 	<br />
-	<input id="add" type="button" value="{-#baddelem#-}" class="line" onclick="setEveCau('','','','1','0','event'); uploadMsg(''); $('cmd').value='insert';" />
+	<input id="add" type="button" value="{-#baddelem#-}" class="line" 
+		onclick="setEveCau('','','','1','0','event'); uploadMsg(''); $('cmd').value='insert';" />
 	<span id="eventstatusmsg" class="dlgmsg"></span>
 	<br /><br />
 	<div id="eventaddsect" style="display:none">
@@ -93,7 +93,7 @@
 				onFocus="showtip('{-$dic.DBEveActive[2]-}');"
 				onClick="if (!this.checked) updateList('eventstatusmsg', 'events.php', 'r={-$reg-}&cmd=chkstatus&EventId='+ $('aEventId').value);" />
 			<br /><br />
-			<p class="line">
+			<p align="center" style="width:500px;">
 				<input id="r" name="r" type="hidden" value="{-$reg-}" />
 				<input id="aEventId" name="EventId" type="hidden" />
 				<input id="aEventPreDefined" name="EventPreDefined" type="hidden" />

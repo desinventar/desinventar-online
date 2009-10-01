@@ -47,36 +47,56 @@
 			{-$dic.DBLevDesc[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBLevDesc[1]-}</span></a><br />
 			<textarea id="GeoLevelDesc" name="GeoLevelDesc" {-$ro-} tabindex="2" style="width:500px;"
 					onFocus="showtip('{-$dic.DBLevDesc[2]-}')"></textarea>
-			<br /><br />
-			<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevHaveMap[2]-}')">
-			{-$dic.DBLevHaveMap[0]-}<b>*</b><span>{-$dic.DBLevHaveMap[1]-}</span></a>
-			<input type="checkbox" id="chkmap" name="chkmap" tabindex="3" 
-					onClick="$('shwmap').style.display = this.checked ? 'block' : 'none';" />
-			<div id="shwmap" style="display:none;">
-				<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevLayerFile[2]-}')">
-				{-$dic.DBLevLayerFile[0]-}<span>{-$dic.DBLevLayerFile[1]-}</span></a><br />
-				<input id="GeoLevelLayerFile" name="GeoLevelLayerFile" type="text" {-$ro-} class="line" style="width:500px;"
-						tabindex="4" onFocus="showtip('{-$dic.DBLevLayerFile[2]-}')" />
-				<br /><br />
-				<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevLayerCode[2]-}')">
-				{-$dic.DBLevLayerCode[0]-}<span>{-$dic.DBLevLayerCode[1]-}</span></a><br />
-				<input id="GeoLevelLayerCode" name="GeoLevelLayerCode" type="text" {-$ro-} class="line" style="width:500px;"
-   					tabindex="5" onFocus="showtip('{-$dic.DBLevColCode[2]-}')" />
-				<br /><br />
-				<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevLayerName[2]-}')">
-				{-$dic.DBLevLayerName[0]-}<span>{-$dic.DBLevLayerName[1]-}</span></a><br />
-				<input id="GeoLevelLayerName" name="GeoLevelLayerName" type="text" {-$ro-} class="line" style="width:500px;"
-					tabindex="6" onFocus="showtip('{-$dic.DBLevLayerName[2]-}')" />
-				<br /><br />
-			</div>
 			<p align="center">
 				<input id="r" name="r" type="hidden" value="{-$reg-}" />
 				<input id="GeoLevelId" name="GeoLevelId" type="hidden" />
 				<input id="levcmd" name="levcmd" type="hidden" />
 				<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" />
-				<input type="reset" value="{-#bcancel#-}" class="line" onClick="$('levaddsect').style.display='none'; mod='lev'; uploadMsg('');" {-$ro-} />
+				<input type="reset" value="{-#bcancel#-}" class="line" 
+					onClick="$('levaddsect').style.display='none'; mod='lev'; uploadMsg('');" {-$ro-} />
 			</p>
 		</form>
+		<hr />
+		<form id="import" method="POST" action="import.php" target="ifcarto" enctype="multipart/form-data">
+			<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevHaveMap[2]-}')">
+			{-$dic.DBLevHaveMap[0]-}<b>*</b><span>{-$dic.DBLevHaveMap[1]-}</span></a>
+			<input type="checkbox" id="chkmap" name="chkmap" tabindex="3" 
+					onClick="$('shwmap').style.display = this.checked ? 'block' : 'none';" />
+			<div id="shwmap" style="display:none;">
+			<table border="0">
+				<tr>
+				<td>
+				<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevLayerFile[2]-}')">
+				{-$dic.DBLevLayerFile[0]-}<span>{-$dic.DBLevLayerFile[1]-}</span></a><br />
+				SHP File <input name="GeoLevelFileSHP" type="file" {-$ro-} tabindex="4" /><br />
+				SHX File <input name="GeoLevelFileSHX" type="file" {-$ro-} tabindex="5" /><br />
+				DBF File <input name="GeoLevelFileDBF" type="file" {-$ro-} tabindex="6" />
+				</td>
+				<td>
+				<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevLayerCode[2]-}')">
+				{-$dic.DBLevLayerCode[0]-}<span>{-$dic.DBLevLayerCode[1]-}</span></a><br />
+				<input id="GeoLevelLayerCode" name="GeoLevelLayerCode" type="text" {-$ro-} class="line" style="width:150px;"
+   					tabindex="7" onFocus="showtip('{-$dic.DBLevColCode[2]-}')" />
+				<br /><br />
+				<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevLayerName[2]-}')">
+				{-$dic.DBLevLayerName[0]-}<span>{-$dic.DBLevLayerName[1]-}</span></a><br />
+				<input id="GeoLevelLayerName" name="GeoLevelLayerName" type="text" {-$ro-} class="line" style="width:150px;"
+					tabindex="8" onFocus="showtip('{-$dic.DBLevLayerName[2]-}')" />
+				</td>
+				</tr>
+				<tr>
+				<td colspan="2" align="center">
+					<input type="hidden" name="_REG" value="{-$reg-}" />
+					<input type="hidden" name="cmd" value="upload" />
+					<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" />
+					<input type="reset" value="{-#bcancel#-}" class="line" 
+						onClick="$('shwmap').style.display='none'; mod='lev'; uploadMsg('');" {-$ro-} />
+				</td>
+				</tr>
+			</table>
+			</div>
+		</form>
+		<iframe name="ifcarto" id="ifcarto" frameborder="0" src="about:blank" style="height:24px; width:300px;"></iframe>
 	</div>
 {-/if-}
 

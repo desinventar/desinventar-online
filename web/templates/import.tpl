@@ -60,14 +60,17 @@
 			<input type="hidden" name="diobj" value="5">
 			<input type="file" id="ieff" name="desinv" class="fixw" onChange="sendForm()" {-$ro-}>
 		</form>
-		<br>
+		<br />
 		<iframe name="iframe2" id="iframe2" frameborder="1" src="about:blank" style="height:400px; width:830px;"></iframe>
 	</p>
 {-/if-}
 {-* Show import interface to assign specific fields *-}
 {-if $ctl_import-}
 	<form method="POST" action="import.php">
-		<input type="submit" value="{-#tsend#-}" class="line"><br>
+		<input type="hidden" name="cmd" value="import" />
+		<input type="hidden" name="FileName" value="{-$FileName-}" />
+		<input type="submit" value="{-#tsend#-}" class="line" />
+		<br />
 		<table border="1" style="font-size: 11px;">
 		<tr>
 {-foreach name=fld key=k item=i from=$fld-}
@@ -89,8 +92,6 @@
 		</tr>
 {-/foreach-}
 		</table>
-		<input type="hidden" name="cmd" value="import">
-		<input type="hidden" name="FileName" value="{-$FileName-}">
 	</form>
 {-/if-}
 {-* Show importation results *-}
