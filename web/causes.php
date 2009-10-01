@@ -22,7 +22,7 @@ function form2cause ($form) {
 		$data['CauseActive'] = 1;
 	else
 		$data['CauseActive'] = 0;
-	if (isset($form['CausePreDefined']) && $form['CausePreDefined'] == "on")
+	if (isset($form['CausePreDefined']) && $form['CausePreDefined'] == "1")
 		$data['CausePreDefined'] = 1;
 	else
 		$data['CausePreDefined'] = 0;
