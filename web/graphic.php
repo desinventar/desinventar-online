@@ -28,15 +28,21 @@ $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Sector', $lg));
 $dic = array_merge($dic, $us->q->getEEFieldList("True"));
 //$t->assign ("dic", $dic);
 $t->assign ("regname", $regname);
-if (isset($post['_G+cmd'])) {
+$GraphCommand = getParameter('_G+cmd');
+if ($GraphCommand != '') {
 	// Process QueryDesign Fields and count results
 	$qd  = $us->q->genSQLWhereDesconsultar($post);
-	$sqc = $us->q->genSQLSelectCount($qd);
+	$sqc = $us->q->genSQLSelectCount($qd);	
 	$c   = $us->q->getresult($sqc);
-	$cou = $c['counter'];
-	$t->assign ("tot", $cou);
+	$NumRecords = $c['counter'];
+	$t->assign ("NumRecords", $NumRecords);
+	
 	// Process Configuration options to Graphic
 	$ele = array();
+	fb('_G+Type   : ' . $post['_G+Type']);
+	fb('_G+Stat   : ' . $post['_G+Stat']);
+	fb('_G+Period : ' . $post['_G+Period']);
+	fb('_G+Field  : ' . $post['_G+Field']);
 	foreach (explode("|", $post['_G+Type']) as $itm) {
 		if ($itm == "D.DisasterBeginTime") {
 			if (isset($post['_G+Stat']) && strlen($post['_G+Stat'])>0) {
@@ -51,6 +57,7 @@ if (isset($post['_G+cmd'])) {
 			$ele[] = "|". $itm;
 		}
 	} // foreach
+	fb($ele);
 	$opc['Group'] = $ele;
 	$opc['Field'] = array($post['_G+Field']);
 	if (isset($post['_G+Field2']) && !empty($post['_G+Field2']))
@@ -84,7 +91,8 @@ if (isset($post['_G+cmd'])) {
 		$sImageFile = WWWDIR . "/graphs/di8graphic_". session_id() . ".png";
 		// Wrote graphic to file
 		$g->Stroke($sImageFile);
-		if ($post['_G+cmd'] == "export") {
+		if ($GraphCommand == "export") {
+			// Export Graph as a Image
 			header("Content-type: Image/png");
 			header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $regname) ."_Graphic.png");
 			header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
@@ -95,6 +103,7 @@ if (isset($post['_G+cmd'])) {
 			readfile($sImageFile);
 			exit();
 		} else {
+			// Display Graph in Browser
 			$t->assign ("qdet", $us->q->getQueryDetails($dic, $post));
 			$t->assign ("image", "$sImageURL?". rand(1,3000));
 			$t->assign ("ctl_showres", true);
