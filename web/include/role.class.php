@@ -16,7 +16,6 @@ class DIRole {
 
 	public function setPerm($prmAuthKey, $prmAuthValue, $prmAuthAuxValue) {
 		$query = "INSERT INTO RegionAuth VALUES ('" . $this->UserId . "','" . $this->RegionId . "','" . $prmAuthKey . "'," . $prmAuthValue . ",'" . $prmAuthAuxValue . "')";
-		fb($query);
 		$this->q->core->query($query);
 	}
 	
