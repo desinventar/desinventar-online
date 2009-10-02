@@ -841,93 +841,96 @@ class Query extends PDO
       return false;
   }
 
-  /* Generate Special SQL with grouped fields */
-  public function genSQLProcess ($dat, $opc) {
-    $sel = array();
-    $whr = array();
-    $grp = array();
-    // Vars to be agrupated (BeginTime, Geography, Event, Cause)
-    $j = 1;
-    // Group has this struct: FUNC|VAR
-    foreach ($opc['Group'] as $item) {
-      $gp = explode("|", $item);
-      switch ($gp[1]) {
-        case "D.DisasterBeginTime":
-          // Check if exist Operator(s): Year, month, week, day
-          if (!empty($gp[0])) {
-			// Error with strftime when date contain '00' like '1997-06-00'
-            switch ($gp[0]) {
-              case "YEAR":		$func = "SUBSTR(". $gp[1] .", 1, 4) ";		break; // %Y
-              case "YMONTH":	$func = "SUBSTR(". $gp[1] .", 1, 7) ";		break; //%Y-%m
-              case "MONTH":		$func = "SUBSTR(". $gp[1] .", 6, 2) ";		break; //%m
-              case "YWEEK":		$func = "STRFTIME('%Y-%W', ". $gp[1] .") "; break; //%Y-%W
-              case "WEEK":		$func = "STRFTIME('%W', ". $gp[1] .") ";	break; //%W
-              case "YDAY": 		$func = "SUBSTR(". $gp[1] .", 1, 10) ";		break; //%Y-%m-%d
-              case "DAY": 		$func = "STRFTIME('%j', ". $gp[1] .") ";	break; //%j
-            }
-            $sel[$j] = $func ."AS ". substr($gp[1],2) ."_". $gp[0] ; // delete last ,'_',
-            $grp[$j] = $func;
-          }
-          else {
-            $sel[$j] = $gp[1];
-            $grp[$j] = $gp[1];
-          }
-          // 100, 10, 5, 1 years, month
-          // $sta = explode("|", $opc['Stat']);
-        break;
-        case "D.GeographyId":
-          // Lev is 0, 1, .. N 
-          $lev = isset($gp[0]) ? $gp[0]: 0;
-          $off = ($lev * 5) + 5;
-          $sel[$j] = "SUBSTR(". $gp[1] .", 1, $off) AS ". substr($gp[1],2) ."_$lev";
-          $grp[$j] = "SUBSTR(". $gp[1] .", 1, $off)";
-        break;
-        default:
-          if (!empty($gp[1])) {
-            $sel[$j] = $gp[1];
-            $grp[$j] = $gp[1];
-          }
-        break;
-      }
-      $j++;
-    }
-    // Process Field in select and group
-    if (!is_array($opc['Field']))
-      $f[0] = $opc['Field'];
-    else
-      $f = $opc['Field'];
-    foreach ($f as $field) {
-      // Field(s) to show
-      $fl = explode("|", $field);
-      // Code to totalization: SUM, COUNT
-      if ($fl[1] == ">") {
-        $sel[$j] = "SUM(". $fl[0] .") AS ". substr($fl[0],2);
-        $whr[$j] = "OR ". $fl[0] . $fl[1] . $fl[2];
-      }
-      else {
-        // Count Reports
-        $sel[$j] = "COUNT(". $fl[0] .") AS ". substr($fl[0],2) ."_";
-        // Counts Reports with "Hay"
-        if ($fl[1] == "=")
-          $whr[$j] = "OR (". $fl[0] . $fl[1] . $fl[2] .
-                              " OR ". $fl[0] .">0)";
-      }
-      $j++;
-    }
-    // Code Select
-    if ($this->chkSQLWhere($dat)) {
-      $selec = implode(", ", $sel);
-      $where = implode(" ", $whr);
-      if (!empty($whr))
-        $where = "AND (1!=1 $where)";
-      $group = implode(", ", $grp);
-      $sql = $this->genSQLSelectData ($dat, $selec, "");
-      $sql .= "$where GROUP BY $group";
-      return ($sql);
-    }
-    else
-      return false;
-  }
+	/* Generate Special SQL with grouped fields */
+	public function genSQLProcess ($dat, $opc) {
+		$sql = '';
+		
+		$sel = array();
+		$whr = array();
+		$grp = array();
+		
+		// Vars to be agrupated (BeginTime, Geography, Event, Cause)
+		$j = 1;
+		// Group has this struct: FUNC|VAR
+		foreach ($opc['Group'] as $item) {
+			$gp = explode("|", $item);
+			switch ($gp[1]) {
+				case "D.DisasterBeginTime":
+					// Check if exist Operator(s): Year, month, week, day
+					if (!empty($gp[0])) {
+						// Error with strftime when date contain '00' like '1997-06-00'
+						switch ($gp[0]) {
+							case "YEAR":		$func = "SUBSTR(". $gp[1] .", 1, 4) ";		break; // %Y
+							case "YMONTH":	$func = "SUBSTR(". $gp[1] .", 1, 7) ";		break; //%Y-%m
+							case "MONTH":		$func = "SUBSTR(". $gp[1] .", 6, 2) ";		break; //%m
+							case "YWEEK":		$func = "STRFTIME('%Y-%W', ". $gp[1] .") "; break; //%Y-%W
+							case "WEEK":		$func = "STRFTIME('%W', ". $gp[1] .") ";	break; //%W
+							case "YDAY": 		$func = "SUBSTR(". $gp[1] .", 1, 10) ";		break; //%Y-%m-%d
+							case "DAY": 		$func = "STRFTIME('%j', ". $gp[1] .") ";	break; //%j
+						} //switch
+						$sel[$j] = $func ."AS ". substr($gp[1],2) ."_". $gp[0] ; // delete last ,'_',
+						$grp[$j] = $func;
+					} else {
+						$sel[$j] = $gp[1];
+						$grp[$j] = $gp[1];
+					} //if
+					// 100, 10, 5, 1 years, month
+					// $sta = explode("|", $opc['Stat']);
+				break;
+				case "D.GeographyId":
+					// Lev is 0, 1, .. N 
+					$lev = isset($gp[0]) ? $gp[0]: 0;
+					$off = ($lev * 5) + 5;
+					$sel[$j] = "SUBSTR(". $gp[1] .", 1, $off) AS ". substr($gp[1],2) ."_$lev";
+					$grp[$j] = "SUBSTR(". $gp[1] .", 1, $off)";
+				break;
+				default:
+					if (!empty($gp[1])) {
+						$sel[$j] = $gp[1];
+						$grp[$j] = $gp[1];
+					}
+				break;
+			} //switch
+			$j++;
+		} //foreach
+		
+		// Process Field in select and group
+		if (!is_array($opc['Field']))
+			$f[0] = $opc['Field'];
+		else
+			$f = $opc['Field'];
+
+		foreach ($f as $field) {
+			// Field(s) to show
+			$fl = explode("|", $field);
+			// Code to totalization: SUM, COUNT
+			if ($fl[1] == ">") {
+				$sel[$j] = "SUM(". $fl[0] .") AS ". substr($fl[0],2);
+				$whr[$j] = "OR ". $fl[0] . $fl[1] . $fl[2];
+			} else {
+				// Count Reports
+				$sel[$j] = "COUNT(". $fl[0] .") AS ". substr($fl[0],2) ."_";
+				// Counts Reports with "Hay"
+				if ($fl[1] == "=") {
+					$whr[$j] = "OR (". $fl[0] . $fl[1] . $fl[2] .
+						" OR ". $fl[0] .">0)";
+				}
+			} //if
+			$j++;
+		} //foreach
+		
+		// Code Select
+		if ($this->chkSQLWhere($dat)) {
+			$selec = implode(", ", $sel);
+			$where = implode(" ", $whr);
+			if (!empty($whr)) 
+				$where = "AND (1!=1 $where)";
+			$group = implode(", ", $grp);
+			$sql = $this->genSQLSelectData ($dat, $selec, "");
+			$sql .= "$where GROUP BY $group";
+		}
+		return $sql;
+	} //function
 
 	/* Reformat array setting to arr[X1] = array {a, b, c, d..} */
 	function prepareList ($dl, $mode) {
