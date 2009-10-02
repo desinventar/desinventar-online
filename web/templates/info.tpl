@@ -19,6 +19,7 @@
 			<table border=0 cellspacing=0 cellpadding=0>
 {-foreach name=info key=key item=item from=$info-}
 {-assign var="inf" value=DB$key-}
+{-assign var="tabind" value="`$tabind+1`"-}
 			<tr>
 			<td>
 				<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.$inf[2]-}')">
@@ -26,12 +27,12 @@
 			</td>
 			<td>
 {-if $item[1] == "TEXT"-}
-				<textarea id="{-$key-}" name="{-$key-}" {-$ro-} style="width:350px; height:40px;"
+				<textarea id="{-$key-}" name="{-$key-}" {-$ro-} style="width:350px; height:40px;" tabindex="{-$tabind-}"
 					onFocus="showtip('{-$dic.$inf[2]-}')">{-$item[0]-}</textarea>
 {-elseif $item[1] == "VARCHAR"-}
-				<input id="{-$key-}" name="{-$key-}" type="text" class="line" style="width:350px;" value="{-$item[0]-}" />
+				<input id="{-$key-}" name="{-$key-}" type="text" class="line" style="width:350px;" value="{-$item[0]-}" tabindex="{-$tabind-}"/>
 {-elseif $item[1] == "NUMBER"-}
-				<input id="{-$key-}" name="{-$key-}" type="text" class="line" style="width:40px;" value="{-$item[0]-}" />
+				<input id="{-$key-}" name="{-$key-}" type="text" class="line" style="width:40px;" value="{-$item[0]-}" tabindex="{-$tabind-}"/>
 {-/if-}
 			</td>
 			</tr>
@@ -40,12 +41,13 @@
 			<span id="infoaddsect"></span>
 			<input name="r" type="hidden" value="{-$reg-}" />
 			<input id="infocmd" name="infocmd" value="update" type="hidden" />
-			<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" />
+			<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="{-`$tabind+1`-}"/>
 			<input type="reset" value="{-#bcancel#-}" {-$ro-} onclick="mod='info'; uploadMsg('');" class="line" />
 			<br />
 			<span id="infostatusmsg" class="dlgmsg"></span>
 		</form>
 	</td>
+	<td style="border-left: thin solid #000; width: 30px;"></td>
 	<td>
 <!-- PERMISSIONS -->
 		<b onMouseOver="showtip('{-$dic.DBPermissions[2]-}');">{-$dic.DBPermissions[0]-}</b>
@@ -72,7 +74,7 @@
   {-if $item == "NONE"-}			{-$dic.DBRoleNone[0]-}
   {-elseif $item == "USER"-}		{-$dic.DBRoleUser[0]-}
   {-elseif $item == "OBSERVER"-}	{-$dic.DBRoleObserver[0]-}
-  {-elseif $item == "SUPERVISOR"-}{-$dic.DBRoleSupervisor[0]-}
+  {-elseif $item == "SUPERVISOR"-}	{-$dic.DBRoleSupervisor[0]-}
   {-/if-}
 						</td>
 					</tr>
@@ -92,8 +94,8 @@
 				action="javascript: var s=$('rolefrm').serialize(); sendData('{-$reg-}', 'info.php', s, '');"
 				onSubmit="javascript: var a=new Array('UserId','AuthAuxValue'); return(checkForm(a, '{-#errmsgfrmrol#-}'));">
 				<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBUserId[2]-}')">
-					{-$dic.DBUserId[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBUserId[1]-}</span></a><br>
-				<select id="UserId" name="UserId" {-$ro-} class="line fixw" onFocus="showtip('{-$dic.DBUserId[2]-}');">
+					{-$dic.DBUserId[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBUserId[1]-}</span></a><br />
+				<select id="UserId" name="UserId" {-$ro-} class="line fixw" onFocus="showtip('{-$dic.DBUserId[2]-}');" tabindex="1">
 					<option value=""></option>
 {-foreach name=usr key=key item=item from=$usr-}
 {-if $usern != $key-}
@@ -103,8 +105,8 @@
 				</select>
 				<br /><br />
 				<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBRole[2]-}')">
-					{-$dic.DBRole[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBRole[1]-}</span></a><br>
-				<select id="AuthAuxValue" name="AuthAuxValue" {-$ro-} class="fixw line" onFocus="showtip('{-$dic.DBRole[2]-}');">
+					{-$dic.DBRole[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBRole[1]-}</span></a><br />
+				<select id="AuthAuxValue" name="AuthAuxValue" {-$ro-} class="fixw line" onFocus="showtip('{-$dic.DBRole[2]-}');" tabindex="2">
 					<option value="NONE" onMouseOver="showtip('{-$dic.DBRoleNone[2]-}');">{-$dic.DBRoleNone[0]-}</option>
 					<option value="USER" onMouseOver="showtip('{-$dic.DBRoleUser[2]-}');">{-$dic.DBRoleUser[0]-}</option>
 					<option value="OBSERVER" onMouseOver="showtip('{-$dic.DBRoleObserver[2]-}');">{-$dic.DBRoleObserver[0]-}</option>
@@ -114,7 +116,7 @@
 				<p class="fixw">
 					<input name="r" type="hidden" value="{-$reg-}" />
 					<input id="rolecmd" name="rolecmd" type="hidden" />
-					<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" />
+					<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="3"/>
 					<input type="reset" value="{-#bcancel#-}" class="line"
 	   	  				onClick="$('roleaddsect').style.display='none'; mod='role'; uploadMsg('');" {-$ro-} />
 				</p>
@@ -139,19 +141,13 @@
 {-foreach name=log key=key item=item from=$log-}
 					<tr class="{-if ($smarty.foreach.log.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}"
 						onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
-						onClick="setRolLog('{-$item[0]-}','{-$item[1]-}', 'log'); $('DBLogDate').value='{-$key-}'; 
-													$('logcmd').value='update';">
+						onClick="setRolLog('{-$item[0]-}','{-$item[1]-}', 'log'); $('DBLogDate').value='{-$key-}'; $('logcmd').value='update';">
 						<td>
- {-if $item[0] == "CREDIT"-}
-						{-$dic.DBLogCredits[0]-}
- {-elseif $item[0] == "METHODOLOGY"-}
-						{-$dic.DBLogMethodology[0]-}
- {-elseif $item[0] == "MILESTONE"-}
-						{-$dic.DBLogStaff[0]-}
- {-elseif $item[0] == "SUPPORT"-}
-						{-$dic.DBLogSupport[0]-}
- {-elseif $item[0] == "DELETED"-}
-						X
+ {-if $item[0] == "CREDIT"-}			{-$dic.DBLogCredits[0]-}
+ {-elseif $item[0] == "METHODOLOGY"-}	{-$dic.DBLogMethodology[0]-}
+ {-elseif $item[0] == "MILESTONE"-}		{-$dic.DBLogStaff[0]-}
+ {-elseif $item[0] == "SUPPORT"-}		{-$dic.DBLogSupport[0]-}
+ {-elseif $item[0] == "DELETED"-}		X
  {-/if-}
 						</td>
 						<td>{-$item[1]|truncate:20-}</td>
@@ -172,7 +168,7 @@
 				onSubmit="javascript: var a=new Array('DBLogType','DBLogNotes'); return(checkForm(a, '{-#errmsgfrmlog#-}'));">
 				<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLogType[2]-}');">
 				{-$dic.DBLogType[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBLogType[1]-}</span></a><br>
-				<select id="DBLogType" name="DBLogType" {-$ro-} onFocus="showtip('{-$dic.DBLogType[2]-}');" class="line fixw">
+				<select id="DBLogType" name="DBLogType" {-$ro-} onFocus="showtip('{-$dic.DBLogType[2]-}');" class="line fixw" tabindex="1">
 					<option value=""></option>
 					<option value="CREDIT" onMouseOver="showtip('{-$dic.DBLogCredits[2]-}');">{-$dic.DBLogCredits[0]-}</option>
 					<option value="METHODOLOGY" onMouseOver="showtip('{-$dic.DBLogMethodology[2]-}');">{-$dic.DBLogMethodology[0]-}</option>
@@ -183,14 +179,13 @@
 				<br /><br />
 				<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLogNote[2]-}');">
 				{-$dic.DBLogNote[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBLogNote[1]-}</span></a><br />
-				<textarea id="DBLogNotes" name="DBLogNotes" cols="22" {-$ro-} class="fixw"
-						onFocus="showtip('{-$dic.DBLogNote[2]-}');"></textarea>
+				<textarea id="DBLogNotes" name="DBLogNotes" cols="22" {-$ro-} class="fixw" tabindex="2" onFocus="showtip('{-$dic.DBLogNote[2]-}');"></textarea>
 				<br /><br />
 				<p align="center" class="fixw">
 					<input name="r" type="hidden" value="{-$reg-}" />
 					<input id="DBLogDate" name="DBLogDate" type="hidden" />
 					<input id="logcmd" name="logcmd" type="hidden" />
-					<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" />
+					<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="3" />
 					<input type="reset" value="{-#bcancel#-}" class="line"
 							onClick="$('logaddsect').style.display='none'; mod='log'; uploadMsg('');" {-$ro-} />
 				</p>

@@ -56,14 +56,14 @@
 		</form>
 	</div>
 	<hr /><br />
-	<form method="POST" action="import.php" target="iframe2" enctype="multipart/form-data">
+	<form method="POST" action="import.php" target="ifgeo" enctype="multipart/form-data">
 		<input type="hidden" name="r" value="{-$reg-}" />
 		<input type="hidden" name="cmd" value="upload" />
 		<input type="hidden" name="diobj" value="4" />
 		<input type="file" id="igeo" name="desinv" class="line" style="width:500px;" />
 		<input type="submit" value="Importar" class="line" />
 	</form>
-	<iframe name="iframe2" id="iframe2" frameborder="1" style="height:150px; width:600px;"></iframe>
+	<iframe name="ifgeo" id="ifgeo" frameborder="1" style="height:150px; width:600px;"></iframe>
 {-/if-}
 {-** INFO AND ERRORS MESSAGES **-}
 {-if $ctl_msginsgeo-}

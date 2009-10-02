@@ -80,17 +80,17 @@
 			action="javascript:var s=$('eventfrm').serialize(); sendData('{-$reg-}', 'events.php', s, $('aEventPreDefined').value);"
 			onSubmit="javascript: var a=new Array('aEventName','aEventDesc'); return(checkForm(a, '{-#errmsgfrm#-}'));">
 			{-$dic.DBEvePersonName[0]-}<b style="color:darkred;">*</b><br />
-			<input id="aEventName" name="EventName" type="text" class="line" maxlength="40" style="width:500px;" {-$ro-}
+			<input id="aEventName" name="EventName" type="text" class="line" maxlength="40" style="width:500px;" tabindex="1" {-$ro-}
 				onBlur="updateList('eventstatusmsg', 'events.php', 'r={-$reg-}&cmd=chkname&EventId='+ $('EventId').value +'&EventName='+ $('aEventName').value);"
 				onFocus="showtip('{-$dic.DBEvePersonName[2]-}');" />
 			<br /><br />
 			{-$dic.DBEvePersonDef[0]-}<b style="color:darkred;">*</b><br />
-			<textarea id="aEventDesc" name="EventDesc" class="line" rows="2" style="width:500px;"
+			<textarea id="aEventDesc" name="EventDesc" class="line" rows="2" style="width:500px;" tabindex="2" 
 				onFocus="showtip('{-$dic.DBEvePersonDef[2]-}');" {-$ro-}></textarea>
 			<br /><br />
 			{-$dic.DBEveActive[0]-}
 			<input id="aEventActive" name="EventActive" type="checkbox" {-$ro-} 
-				onFocus="showtip('{-$dic.DBEveActive[2]-}');"
+				onFocus="showtip('{-$dic.DBEveActive[2]-}');" tabindex="3" 
 				onClick="if (!this.checked) updateList('eventstatusmsg', 'events.php', 'r={-$reg-}&cmd=chkstatus&EventId='+ $('aEventId').value);" />
 			<br /><br />
 			<p align="center" style="width:500px;">
@@ -98,7 +98,7 @@
 				<input id="aEventId" name="EventId" type="hidden" />
 				<input id="aEventPreDefined" name="EventPreDefined" type="hidden" />
 				<input id="cmd" name="cmd" type="hidden" />
-				<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" />
+				<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="4" />
 				<input type="reset" value="{-#bcancel#-}" onClick="$('eventaddsect').style.display='none'; uploadMsg('');" {-$ro-} class="line" />
 			</p>
 		</form>
