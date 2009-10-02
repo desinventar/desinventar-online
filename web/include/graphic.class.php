@@ -47,14 +47,6 @@ class Graphic {
 			$sY2AxisLabel = $oLabels[2];
 		}
 		$val = array();
-		// Cummulative Graph : Add Values in Graph
-		if ($opc['_G+Mode'] == "ACCUMULATE") {
-			$SumValue = 0;
-			foreach ($data[$sYAxisLabel] as $Key=>$Value) {
-				$SumValue += $Value;
-				$val[$data[$sXAxisLabel][$Key]] = $SumValue;
-			}
-		}
 		// get Period and Stationality of the Graph (YEAR, YMONTH, YWEEK, YDAY)
 		if (isset($opc['_G+Period']))
 			$this->sPeriod = $opc['_G+Period']; //$this->getGraphPeriod($opc['_G+Period']);
@@ -103,6 +95,18 @@ class Graphic {
 			}
 			$lbl = array_keys($val);
 		}
+
+		// Cummulative Graph : Add Values in Graph
+		if ($gType == 'TEMPO') {
+			if ($opc['_G+Mode'] == "ACCUMULATE") {
+				$SumValue = 0;
+				foreach ($val as $Key=>$Value) {
+					$SumValue += $Value;
+					$val[$Key] = $SumValue;
+				}
+			}
+		}
+		
 		// Choose presentation options, borders, intervals
 		$itv = 1;				// no interval
 		if ($gType == "TEMPO" || $gType == "2TEMPO") {
