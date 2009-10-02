@@ -202,7 +202,7 @@
 		}
 	}
 
-	function setadmingeo(k, l) {
+	function setadmingeo(reg, k, l) {
 		var v = k.split("|");
 		mod = 'geo';
 		uploadMsg('');
@@ -219,7 +219,7 @@
 			setLevGeo(v[0],v[1],v[2],v[3],'','','','geo');
 			$('aGeoParentId').value = v[0];
 			$('geocmd').value='update';
-			updateList('alev' + l, 'geography.php', 'r={-$reg-}&geocmd=list&GeographyId=' + v[0]);
+			updateList('alev' + l, 'geography.php', 'r='+ reg +'&geocmd=list&GeographyId=' + v[0]);
 		}
 	}
 	

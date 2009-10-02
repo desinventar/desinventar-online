@@ -18,7 +18,6 @@ if (isset($get['r']) && !empty($get['r'])) {
 
 // EDIT REGION: Form to Create and assign regions
 if (isset($get['geocmd'])) {
-	$mod = "geo";
 	$cmd = $get['geocmd'];
 	// Set Variables to insert or update
 	$dat = array();
@@ -32,50 +31,50 @@ if (isset($get['geocmd'])) {
 	else
 		$dat['GeographyActive'] = 0;
 	switch ($cmd) {
-	case "insert":
-		$o = new DIGeography($us);
-		$o->setFromArray($get);
-		$o->setGeographyId($get['GeoParentId']);
-		$i = $o->insert();
-		if (!iserror($i))
-			$t->assign ("ctl_msginsgeo", true);
-		else {
-			$t->assign ("ctl_errinsgeo", true);
-			$t->assign ("insstatgeo", $i);
-		}
-	break;
-	case "update":
-		$o = new DIGeography($us, $get['GeographyId']);
-		$o->load();
-		$o->setFromArray($get);
-		$i = $o->update();
-		if (!iserror($i))
-			$t->assign ("ctl_msgupdgeo", true);
-		else {
-			$t->assign ("ctl_errupdgeo", true);
-			$t->assign ("updstatgeo", $i);
-		}
-	break;
-	case "list":
-		$lev = $us->q->getNextLev($get['GeographyId']);
-		$t->assign ("lev", $lev);
-		$t->assign ("levmax", $us->q->getMaxGeoLev());
-		$t->assign ("levname", $us->q->loadGeoLevById($lev));
-		$t->assign ("geol", $us->q->loadGeoChilds($get['GeographyId']));
-		$t->assign ("ctl_geolist", true);
-	break;
-	case "chkcode":
-		$t->assign ("ctl_chkcode", true);
-		if ($us->q->isvalidObjectName($get['GeographyId'], $get['GeographyCode'], DI_GEOGRAPHY))
-			$t->assign ("chkcode", true);
-	break;
-	case "chkstatus":
-		$t->assign ("ctl_chkstatus", true);
-		if ($us->q->isvalidObjectToInactivate($get['GeographyId'], DI_GEOGRAPHY))
-			$t->assign ("chkstatus", true);
-	break;
-	default: 
-	break;
+		case "insert":
+			$o = new DIGeography($us);
+			$o->setFromArray($get);
+			$o->setGeographyId($get['GeoParentId']);
+			$i = $o->insert();
+			if (!iserror($i))
+				$t->assign ("ctl_msginsgeo", true);
+			else {
+				$t->assign ("ctl_errinsgeo", true);
+				$t->assign ("insstatgeo", $i);
+			}
+		break;
+		case "update":
+			$o = new DIGeography($us, $get['GeographyId']);
+			$o->load();
+			$o->setFromArray($get);
+			$i = $o->update();
+			if (!iserror($i))
+				$t->assign ("ctl_msgupdgeo", true);
+			else {
+				$t->assign ("ctl_errupdgeo", true);
+				$t->assign ("updstatgeo", $i);
+			}
+		break;
+		case "list":
+			$lev = $us->q->getNextLev($get['GeographyId']);
+			$t->assign ("lev", $lev);
+			$t->assign ("levmax", $us->q->getMaxGeoLev());
+			$t->assign ("levname", $us->q->loadGeoLevById($lev));
+			$t->assign ("geol", $us->q->loadGeoChilds($get['GeographyId']));
+			$t->assign ("ctl_geolist", true);
+		break;
+		case "chkcode":
+			$t->assign ("ctl_chkcode", true);
+			if ($us->q->isvalidObjectName($get['GeographyId'], $get['GeographyCode'], DI_GEOGRAPHY))
+				$t->assign ("chkcode", true);
+		break;
+		case "chkstatus":
+			$t->assign ("ctl_chkstatus", true);
+			if ($us->q->isvalidObjectToInactivate($get['GeographyId'], DI_GEOGRAPHY))
+				$t->assign ("chkstatus", true);
+		break;
+		default: 
+		break;
 	} // switch
 }
 else {

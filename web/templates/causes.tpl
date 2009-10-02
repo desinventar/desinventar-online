@@ -62,7 +62,7 @@
 					onClick="setEveCau('{-$key-}','{-$item[0]-}','{-$item[1]-}','{-$item[2]-}','1','cause'); uploadMsg(''); $('cmd').value='update';">
 				<td>{-$item[0]-}</td>
 				<td>{-$item[1]|truncate:150-}</td>
-				<td><input type="checkbox" {-if ($item[2] == 1) -} checked {-/if-} disabled></td>
+				<td><input type="checkbox" {-if ($item[2] == 1) -} checked {-/if-} disabled /></td>
 				</tr>
    {-/foreach-}
 {-/if-}
@@ -80,12 +80,12 @@
 			action="javascript:var s=$('causefrm').serialize(); sendData('{-$reg-}', 'causes.php', s, $('aCausePreDefined').value);"
 			onSubmit="javascript: var a=new Array('aCauseName','aCauseDesc'); return(checkForm(a, '{-#errmsgfrm#-}'));">
 			{-$dic.DBCauPersonName[0]-}<b style="color:darkred;">*</b><br />
-			<input id="aCauseName" name="CauseName" type="text" maxlength="40" {-$ro-} class="line" style="width:500px;"
+			<input id="aCauseName" name="CauseName" type="text" class="line" maxlength="40" style="width:500px;" {-$ro-} 
 				onBlur="updateList('causestatusmsg', 'causes.php', 'r={-$reg-}&cmd=chkname&CauseId='+ $('CauseId').value +'&CauseName='+ $('aCauseName').value);"
 				onFocus="showtip('{-$dic.DBCauPersonName[2]-}');" />
 			<br /><br />
 			{-$dic.DBCauPersonDef[0]-}<b style="color:darkred;">*</b><br />
-			<textarea id="aCauseDesc" name="CauseDesc" rows="2" style="width:500px;"
+			<textarea id="aCauseDesc" name="CauseDesc" class="line" rows="2" style="width:500px;"
 				onFocus="showtip('{-$dic.DBCauPersonDef[2]-}');" {-$ro-}></textarea>
 			<br /><br />
 			{-$dic.DBCauActive[0]-} 

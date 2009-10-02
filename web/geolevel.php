@@ -32,7 +32,6 @@ if (!empty($cmd)) {
 	$dat['GeoLevelLayerFile'] = isset($get['GeoLevelLayerFile']) ? $get['GeoLevelLayerFile']: '';
 	$dat['GeoLevelLayerCode'] = isset($get['GeoLevelLayerCode']) ? $get['GeoLevelLayerCode']: '';
 	$dat['GeoLevelLayerName'] = isset($get['GeoLevelLayerName']) ? $get['GeoLevelLayerName']: '';
-	
 	switch ($cmd) {
 	case "insert":
 		// Create new GeoLevel and GeoCarto Objects
@@ -53,7 +52,8 @@ if (!empty($cmd)) {
 			    !empty($dat['GeoLevelLayerName'])) {
 			    $map = new Maps($us->q, $reg, 0, null, null, null, "", null, "SELECT");
 			}*/
-		} else {
+		}
+		else {
 			$t->assign ("ctl_errinslev", true);
 			$t->assign ("insstatlev", $gl);
 			if ($gl == ERR_OBJECT_EXISTS) {
@@ -79,11 +79,10 @@ if (!empty($cmd)) {
 		if (!iserror($gl)) {
 			$t->assign ("ctl_msgupdlev", true);
 			// Create selection map..
-			if (!empty($dat['GeoLevelLayerFile']) &&
-			    !empty($dat['GeoLevelLayerCode']) &&
-			    !empty($dat['GeoLevelLayerName']))
-			    	$map = new Maps($us->q, $reg, 0, null, null, null, "", "SELECT");
-		} else {
+			if (!empty($dat['GeoLevelLayerFile']) && !empty($dat['GeoLevelLayerCode']) && !empty($dat['GeoLevelLayerName']))
+				$map = new Maps($us->q, $reg, 0, null, null, null, "", "SELECT");
+		}
+		else {
 			$t->assign ("ctl_errupdlev", true);
 			$t->assign ("updstatlev", $gl);
 			if ($gl == ERR_OBJECT_EXISTS) {

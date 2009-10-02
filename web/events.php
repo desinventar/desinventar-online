@@ -38,11 +38,11 @@ function showResult($stat, &$tp) {
 		$tp->assign ("ctl_chkname", true);
 		$tp->assign ("ctl_chkstatus", true);
 		if ($stat != ERR_OBJECT_EXISTS)
-		$tp->assign ("chkname", true);
+			$tp->assign ("chkname", true);
 		if ($stat != ERR_CONSTRAINT_FAIL)
-		$tp->assign ("chkstatus", true);
-	} //else
-} //function
+			$tp->assign ("chkstatus", true);
+	}
+}
 
 $get = $_GET;
 
@@ -76,7 +76,8 @@ if (isset($get['cmd'])) {
 		if ($get['predef'] == "1") {
 			$t->assign ("ctl_evepred", true);
 			$t->assign ("evepredl", $us->q->loadEvents("PREDEF", null, $lg));
-		} else {
+		}
+		else {
 			$t->assign ("ctl_evepers", true);
 			$t->assign ("eveuserl", $us->q->loadEvents("USER", null, $lg));
 		}
@@ -104,7 +105,7 @@ else {
 	$t->assign ("evepredl", $us->q->loadEvents("PREDEF", null, $lg));
 	$t->assign ("ctl_evepers", true);
 	$t->assign ("eveuserl", $us->q->loadEvents("USER", null, $lg));
-} //else
+}
 
 $t->assign ("reg", $reg);
 $t->display ("events.tpl");
