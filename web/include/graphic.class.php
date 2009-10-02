@@ -29,14 +29,12 @@ class Graphic {
 		if (substr($opc['_G+Type'],2,18) == "DisasterBeginTime|") {
 			$gType = "XTEMPO";				// One var x Event/Temporal..
 			$sY2AxisLabel = $oLabels[1];
-		}
-		elseif (substr($opc['_G+Type'],2,17) == "DisasterBeginTime") {
+		} elseif (substr($opc['_G+Type'],2,17) == "DisasterBeginTime") {
 			$gType = "TEMPO";				// One var x time
 			// Set 2 axis graph only in Bars..
 			if (isset($opc['_G+Field2']) && !empty($opc['_G+Field2']) && ($kind == "BAR" || $kind == "LINE"))
 				$gType = "2TEMPO";			// Two vars x time
-		}
-		else {
+		} else {
 			if (isset($opc['_G+Field2']) && !empty($opc['_G+Field2']) && ($kind == "BAR" || $kind == "LINE"))
 				$gType = "2COMPAR";			// Two vars x event, cause...
 			else
@@ -95,17 +93,35 @@ class Graphic {
 			}
 			$lbl = array_keys($val);
 		}
-
 		// Cummulative Graph : Add Values in Graph
 		if ($gType == 'TEMPO') {
 			if ($opc['_G+Mode'] == "ACCUMULATE") {
 				$SumValue = 0;
-				foreach ($val as $Key=>$Value) {
-					$SumValue += $Value;
-					$val[$Key] = $SumValue;
+				foreach ($val as $key=>$value) {
+					$SumValue += $value;
+					$val[$key] = $SumValue;
+				} //foreach
+			} //if
+		} //if
+		
+		// Cummulative Graph for MultiSeries
+		if ( ($gType == '2TEMPO') || ($gType == '2COMPAR') ) {
+			if ($opc['_G+Mode'] == "ACCUMULATE") {
+				$SumValue = 0;
+				foreach($val as $key => $value) {
+					$SumValue += $value[0];
+					$val[$key][0] = $SumValue;
 				}
 			}
-		}
+			$GraphMode2 = getParameter('_G+Mode2','NORMAL');
+			if ($GraphMode2 == "ACCUMULATE") {
+				$SumValue = 0;
+				foreach($val as $key => $value) {
+					$SumValue += $value[1];
+					$val[$key][1] = $SumValue;
+				}
+			} //if
+		} //if
 		
 		// Choose presentation options, borders, intervals
 		$itv = 1;				// no interval
