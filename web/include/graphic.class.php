@@ -11,7 +11,7 @@ require_once(JPGRAPHDIR . "/jpgraph_bar.php");
 require_once(JPGRAPHDIR . "/jpgraph_pie.php");
 require_once(JPGRAPHDIR . "/jpgraph_pie3d.php");
 require_once('include/math.class.php');
-
+require_once('include/date.class.php');
 class Graphic {
 	var $g;
 	var $sPeriod;
@@ -74,12 +74,11 @@ class Graphic {
 				}
 			}
 			foreach ($tvl as $kk=>$ii)
-				$val[$kk] = $this->completeTimeSerie($opc, $ii, $q);
+				$val[$kk] = $this->completeTimeSeries($opc, $ii, $q);
 			$lbl = array_keys($val[$kk]);
 			$acol = count(array_unique($data[$sY2AxisLabel]));
-		} 
-		// Normal Graph (BAR, LINE, PIE)
-		else {
+		} else {
+			// Normal Graph (BAR, LINE, PIE)
 			$n = 0;
 			$acol = 1;
 			// Set Array to [YEAR]=> { VALUE1, VALUE2 }  OR Set Array to [YEAR]=>VALUE
@@ -96,7 +95,7 @@ class Graphic {
 			//echo "<pre>"; print_r($data[$sXAxisLabel]);
 			// Complete the data series for XAxis (year,month,day)
 			if ($gType == "TEMPO" || $gType == "2TEMPO") {
-				$val = $this->completeTimeSerie($opc, $val, $q);
+				$val = $this->completeTimeSeries($opc, $val, $q);
 			} elseif ($gType == "PIE") {
 				// In Pie Graphs must order the values
 				arsort($val, SORT_NUMERIC);
@@ -139,9 +138,8 @@ class Graphic {
 			$t1->SetBox("white","black","gray");
 			$t1->SetColor("black");
 			$this->g->AddText($t1);
-		}
-		// 2D, 3D Graphic
-		else {
+		} else {
+			// 2D, 3D Graphic
 			$w = (14 * count($data[$sXAxisLabel]));
 			if ($w > $wx)
 				$wx = $w;
@@ -319,7 +317,7 @@ class Graphic {
 		return $iWeek;
 	}
 	
-	function completeTimeSerie ($opc, $val, $q) {
+	function completeTimeSeries($opc, $val, $q) {
 		$dateini = "";
 		$dateend = "";
 		// Get range of dates from Database
@@ -327,14 +325,22 @@ class Graphic {
 		$qini = $opc['D_DisasterBeginTime'];
 		$qend = $opc['D_DisasterEndTime'];
 		$ydb = $q->getDateRange();
-		if (isset($qini[0]))
+		if (isset($qini[0])) {
+			// If no month/day value specified, set default date to YEAR/01/01 or start of month
+			if ($qini[1] == '') { $qini[1] = '1'; }
+			if ($qini[2] == '') { $qini[2] = '1'; }
 			$dateini = sprintf("%04d-%02d-%02d", $qini[0], $qini[1], $qini[2]);
-		else
+		} else {
 			$dateini = $ydb[0];
-		if (isset($qend[0]))
+		}
+		if (isset($qend[0])) {
+			// If no month/day value specified in query, set default to YEAR/12/31 or end of month
+			if ($qend[1] == '') { $qend[1] = '12'; }
+			if ($qend[2] == '') { $qend[2] = DIDate::getLastDayOfMonth($qend[0],$qend[1]); }
 			$dateend = sprintf("%04d-%02d-%02d", $qend[0], $qend[1], $qend[2]);
-		else
+		} else {
 			$dateend = $ydb[0];
+		}
 		// Calculate Start Date/EndDate, from Database or From Query
 		// Delete initial columns with null values (MONTH,DAY=0)
 		if (isset($val[0]) || isset($val['']))
@@ -348,18 +354,18 @@ class Graphic {
 					if (!isset($val[$sDate]))
 						$val[$sDate] = 0;
 				} elseif ($this->sPeriod == "YWEEK")
-					$this->completeWeekSerie ($dateini, $dateend, $iYear, $val);
+					$this->completeWeekSeries($dateini, $dateend, $iYear, $val);
 				else
-					$this->completeMonthSerie ($dateini, $dateend, $iYear, $val);
+					$this->completeMonthSeries($dateini, $dateend, $iYear, $val);
 			}
 		}
 		else {
 			if ($this->sStat == "DAY")
-				$this->completeDaySerie ($dateini, $dateend, "", 0, $val);
+				$this->completeDaySeries($dateini, $dateend, "", 0, $val);
 			elseif ($this->sStat == "WEEK")
-				$this->completeWeekSerie ($dateini, $dateend, "", $val);
+				$this->completeWeekSeries($dateini, $dateend, "", $val);
 			elseif ($this->sStat == "MONTH")
-				$this->completeMonthSerie ($dateini, $dateend, "", $val);
+				$this->completeMonthSeries($dateini, $dateend, "", $val);
 		}
 		// Reorder XAxis Labels
 		ksort($val);
@@ -367,7 +373,7 @@ class Graphic {
 		return $val;
 	}
   
-	function completeWeekSerie ($dateini, $dateend, $iYear, &$val) {
+	function completeWeekSeries($dateini, $dateend, $iYear, &$val) {
 		$iWeekIni =  1;
 		$sDate = sprintf("%04d-12-31", $iYear);
 		$iWeekEnd = $this->getWeekOfYear($sDate);
@@ -386,7 +392,7 @@ class Graphic {
 		return;
 	}
   
-	function completeMonthSerie ($dateini, $dateend, $iYear, &$val) {
+	function completeMonthSeries($dateini, $dateend, $iYear, &$val) {
 		$iMonthIni =  1;
 		$iMonthEnd = 12;
 		if ($iYear == substr($dateini, 0, 4))
@@ -395,7 +401,7 @@ class Graphic {
 			$iMonthEnd = substr($dateend, 5, 2);
 		for ($iMonth = $iMonthIni; $iMonth <= $iMonthEnd; $iMonth++) {
 			if ($this->sPeriod == "YDAY")
-				$this->completeDaySerie ($dateini, $dateend, $iYear, $iMonth, $val);
+				$this->completeDaySeries($dateini, $dateend, $iYear, $iMonth, $val);
 			else {
 				if ($this->sPeriod == "YMONTH")
 					$sDate = sprintf("%04d-%02d", $iYear, $iMonth);
@@ -408,7 +414,7 @@ class Graphic {
 		return;
 	}
   
-	function completeDaySerie ($dateini, $dateend, $iYear, $iMonth, &$val) {
+	function completeDaySeries($dateini, $dateend, $iYear, $iMonth, &$val) {
 		$iDayIni = 1;
 		$iDayEnd = 30;
 		$sDate = sprintf("%04d-%02d", $iYear, $iMonth);
