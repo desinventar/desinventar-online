@@ -39,10 +39,6 @@ if ($GraphCommand != '') {
 	
 	// Process Configuration options to Graphic
 	$ele = array();
-	fb('_G+Type   : ' . $post['_G+Type']);
-	fb('_G+Stat   : ' . $post['_G+Stat']);
-	fb('_G+Period : ' . $post['_G+Period']);
-	fb('_G+Field  : ' . $post['_G+Field']);
 	foreach (explode("|", $post['_G+Type']) as $itm) {
 		if ($itm == "D.DisasterBeginTime") {
 			if (isset($post['_G+Stat']) && strlen($post['_G+Stat'])>0) {
@@ -57,7 +53,6 @@ if ($GraphCommand != '') {
 			$ele[] = "|". $itm;
 		}
 	} // foreach
-	fb($ele);
 	$opc['Group'] = $ele;
 	$opc['Field'] = array($post['_G+Field']);
 	if (isset($post['_G+Field2']) && !empty($post['_G+Field2']))
