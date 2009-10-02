@@ -358,8 +358,8 @@ class Graphic {
 				else
 					$this->completeMonthSeries($dateini, $dateend, $iYear, $val);
 			}
-		}
-		else {
+		} else {
+			// MultiPeriod Graphs
 			if ($this->sStat == "DAY")
 				$this->completeDaySeries($dateini, $dateend, "", 0, $val);
 			elseif ($this->sStat == "WEEK")
@@ -426,7 +426,7 @@ class Graphic {
 			$iDayIni = 1;
 			$iDayEnd = 366;
 		}
-		for ($iDay = $iDayIni; $iDay <= $iDayEnd; $iDay++) {
+		for ($iDay = $iDayIni; $iDay <= $iDayEnd; $iDay = $iDay + 1) {
 			if ($this->sPeriod == "YDAY")
 				$sDate = sprintf("%04d-%02d-%02d", $iYear, $iMonth, $iDay);
 			elseif ($this->sStat == "DAY")
