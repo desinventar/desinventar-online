@@ -28,7 +28,7 @@
 	<link rel="stylesheet" href="css/desinventar.css" type="text/css"/>
  </head>
  <body>
-  <p align="right">{-#trepnum#-}: {-$tot-}</p>
+  <p align="right">{-#trepnum#-}: {-$NumRecords-}</p>
   <img src="{-$image-}">
  </body>
 </html>
