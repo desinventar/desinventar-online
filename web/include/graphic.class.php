@@ -19,6 +19,7 @@ class Graphic {
 	/* opc [kind:BAR,LINE,PIE Opc:Title,etc] data:Matrix
 	   data[0] == X, data[1] = Y1,  .. */
 	public function Graphic ($opc, $data) {
+		fb($opc);
 		$kind = $opc['_G+Kind'];
 		// Get Label Information
 		$oLabels     = array_keys($data);
@@ -113,8 +114,8 @@ class Graphic {
 					$val[$key][0] = $SumValue;
 				}
 			}
-			$GraphMode2 = getParameter('_G+Mode2','NORMAL');
-			if ($GraphMode2 == "ACCUMULATE") {
+			$GraphValueMode2 = $opc['_G+Mode2'];
+			if ($GraphValueMode2 == "ACCUMULATE") {
 				$SumValue = 0;
 				foreach($val as $key => $value) {
 					$SumValue += $value[1];
@@ -265,6 +266,13 @@ class Graphic {
 			case "LINE":
 				if ($gType == "TEMPO" || $gType == "LINE") {
 					$y1p = $this->line($opc, $val, $pal);
+					if (isset($opc['_G+Data']) && $opc['_G+Data'] == "VALUE") {
+						$y1p->value->SetFont(FF_ARIAL, FS_NORMAL, 8);
+						$y1p->value->SetFormat("%d");
+						$y1p->value->SetAngle(90);
+						$y1p->value->SetColor("black","darkred");
+						$y1p->value->Show();
+					}
 					$y1p->SetLegend($sYAxisLabel);
 					// Add lineal regression 
 					$std = new Math();
