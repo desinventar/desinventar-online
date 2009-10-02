@@ -41,6 +41,7 @@ if ($GraphCommand != '') {
 	$ele = array();
 	foreach (explode("|", $post['_G+Type']) as $itm) {
 		if ($itm == "D.DisasterBeginTime") {
+			// Histogram
 			if (isset($post['_G+Stat']) && strlen($post['_G+Stat'])>0) {
 				$ele[] = $post['_G+Stat'] ."|". $itm;
 			} else {

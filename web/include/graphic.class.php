@@ -20,6 +20,7 @@ class Graphic {
 	   data[0] == X, data[1] = Y1,  .. */
 	public function Graphic ($opc, $data) {
 		fb($opc);
+		fb($data);
 		$kind = $opc['_G+Kind'];
 		// Get Label Information
 		$oLabels     = array_keys($data);
@@ -123,7 +124,6 @@ class Graphic {
 				}
 			} //if
 		} //if
-		
 		// Choose presentation options, borders, intervals
 		$itv = 1;				// no interval
 		if ($gType == "TEMPO" || $gType == "2TEMPO") {
@@ -274,7 +274,10 @@ class Graphic {
 						$y1p->value->Show();
 					}
 					$y1p->SetLegend($sYAxisLabel);
-					// Add lineal regression 
+					$m[] = $y1p;
+					
+					// Add linear regression (Test)
+					/*
 					$std = new Math();
 					$xx = array_fill(0, count($val), 0);
 					$rl = $std->linearRegression(array_keys($xx), array_values($val));
@@ -286,10 +289,9 @@ class Graphic {
 					}
 					$ylr = $this->line($opc, $linreg, 'dashed');
 					$ylr->SetLegend('Linnear Regression');
-					$m[] = $y1p;
 					$m[] = $ylr;
-				}
-				elseif ($gType == "2TEMPO" || $gType == "2COMPAR") {
+					*/
+				} elseif ($gType == "2TEMPO" || $gType == "2COMPAR") {
 					$y1p = $this->line($opc, $val1, "darkblue");
 					$y2p = $this->line($opc, $val2, "darkred");
 					$y1p->SetLegend($sYAxisLabel);
