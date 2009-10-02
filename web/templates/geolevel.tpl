@@ -57,7 +57,7 @@
 			</p>
 		</form>
 		<hr />
-		<form id="import" method="POST" action="import.php" target="ifcarto" enctype="multipart/form-data">
+		<form id="geolev" method="POST" action="geolevel.php" target="ifcarto" enctype="multipart/form-data">
 			<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevHaveMap[2]-}')">
 			{-$dic.DBLevHaveMap[0]-}<b>*</b><span>{-$dic.DBLevHaveMap[1]-}</span></a>
 			<input type="checkbox" id="chkmap" name="chkmap" tabindex="3" 

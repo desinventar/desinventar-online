@@ -36,6 +36,7 @@ function showResult($stat, &$tp) {
 		$tp->assign ("ctl_errupdcau", true);
 		$tp->assign ("updstatcau", $stat);
 		$tp->assign ("ctl_chkname", true);
+		$tp->assign ("ctl_chkstatus", true);
 		if ($stat != ERR_OBJECT_EXISTS)
 			$tp->assign ("chkname", true);
 		if ($stat != ERR_CONSTRAINT_FAIL)
@@ -63,9 +64,9 @@ if (isset($get['cmd'])) {
 		showResult($i, $t);
 		break;
 	case "update";
-		$o = new DICause($us);
-		$o->set('CauseId', $dat['CauseId']);
-		$o->load();
+		$o = new DICause($us, $dat['CauseId']);
+		//$o->set('CauseId', $dat['CauseId']);
+		//$o->load();
 		$o->setFromArray($dat);
 		$i = $o->update();
 		showResult($i, $t);
@@ -101,9 +102,9 @@ else {
 		$t->assign ("ro", "disabled");
 	$t->assign ("ctl_show", true);
 	$t->assign ("ctl_caupred", true);
-	$t->assign ("caupredl", $us->q->loadCauses("PREDEF", "active", $lg));
+	$t->assign ("caupredl", $us->q->loadCauses("PREDEF", null, $lg));
 	$t->assign ("ctl_caupers", true);
-	$t->assign ("cauuserl", $us->q->loadCauses("USER", "active", $lg));
+	$t->assign ("cauuserl", $us->q->loadCauses("USER", null, $lg));
 }
 
 $t->assign ("reg", $reg);

@@ -6,7 +6,7 @@
 {-if $ctl_geolist-}
  {-if $lev <= $levmax-}
     {-$lev-}:
-		<select onChange="setadmingeo(this.options[this.selectedIndex].value, {-$lev-});" class="line" style="width:250px;">
+		<select onChange="setadmingeo('{-$reg-}', this.options[this.selectedIndex].value, {-$lev-});" class="line" style="width:250px;">
 			<option value="-2" style="color:blue; text-align:center;">-- {-$levname[0]-} --</option>
 			<option value="-1" style="color:green; text-align:center;">-- {-#baddoption#-} --</option>
  {-foreach name=geol key=key item=item from=$geol-}

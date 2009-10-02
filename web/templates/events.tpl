@@ -79,12 +79,12 @@
 		<form id="eventfrm" name="eventfrm" method="GET" 
 			action="javascript:var s=$('eventfrm').serialize(); sendData('{-$reg-}', 'events.php', s, $('aEventPreDefined').value);"
 			onSubmit="javascript: var a=new Array('aEventName','aEventDesc'); return(checkForm(a, '{-#errmsgfrm#-}'));">
-			{-$dic.DBEvePersonName[0]-}<b style="color:darkred;">*</b><br>
+			{-$dic.DBEvePersonName[0]-}<b style="color:darkred;">*</b><br />
 			<input id="aEventName" name="EventName" type="text" class="line" maxlength="40" style="width:500px;" {-$ro-}
 				onBlur="updateList('eventstatusmsg', 'events.php', 'r={-$reg-}&cmd=chkname&EventId='+ $('EventId').value +'&EventName='+ $('aEventName').value);"
 				onFocus="showtip('{-$dic.DBEvePersonName[2]-}');" />
 			<br /><br />
-			{-$dic.DBEvePersonDef[0]-}<b style="color:darkred;">*</b><br>
+			{-$dic.DBEvePersonDef[0]-}<b style="color:darkred;">*</b><br />
 			<textarea id="aEventDesc" name="EventDesc" class="line" rows="2" style="width:500px;"
 				onFocus="showtip('{-$dic.DBEvePersonDef[2]-}');" {-$ro-}></textarea>
 			<br /><br />
