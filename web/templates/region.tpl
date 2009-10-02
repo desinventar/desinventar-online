@@ -66,7 +66,7 @@
 		<table class="grid">
 			<tr>
 				<td>{-#tregcntlist#-}<b style="color:darkred;">*</b></td>
-				<td><select id="CountryIso" name="CountryIso" class="fixw">
+				<td><select id="CountryIso" name="CountryIso" class="fixw" tabindex="1">
 						<option value=""></option>
 {-foreach name=cnt key=key item=item from=$cntl-}
 						<option value="{-$key-}">{-$item-}</option>
@@ -75,14 +75,14 @@
 			</tr>
 			<tr>
 				<td>{-#tregnamlist#-}<b style="color:darkred;">*</b></td>
-				<td><input id="RegionLabel" name="RegionLabel" type="text" maxlength="200" class="line fixw" /></td>
+				<td><input id="RegionLabel" name="RegionLabel" type="text" maxlength="200" class="line fixw" tabindex="2" /></td>
 			</tr>
 			<tr>
 				<td><a class="info" href="javascript:void(null)" 
 					onMouseOver="showtip('{-$dic.DBLangIsoCode[2]-}')">{-$dic.DBLangIsoCode[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBLangIsoCode[1]-}</span></a>
 				</td>
 				<td><select id="LangIsoCode" name="LangIsoCode" {-$ro-} class="line fixw" 
-								onFocus="showtip('{-$dic.DBLangIsoCode[2]-}')" tabindex="1">
+						onFocus="showtip('{-$dic.DBLangIsoCode[2]-}')" tabindex="3">
 {-foreach name=lglst key=key item=item from=$lglst-}
 							<option value="{-$key-}">{-$item[0]-}</option>
 {-/foreach-}
@@ -91,7 +91,7 @@
 			<tr>
 				<td>{-#tregadmlist#-}<b style="color:darkred;">*</b></td>
 				<td>
-					<select id="RegionUserAdmin" name="RegionUserAdmin" class="fixw">
+					<select id="RegionUserAdmin" name="RegionUserAdmin" class="fixw" tabindex="4">
 						<option value=""></option>
 {-foreach name=usr key=key item=item from=$usr-}
 						<option value="{-$key-}">{-$item-}</option>
@@ -100,17 +100,17 @@
 			</tr>
 			<tr>
 				<td>{-#tregactlist#-}<b>*</b></td>
-				<td><input id="RegionActive" name="RegionActive" type="checkbox" checked /></td>
+				<td><input id="RegionActive" name="RegionActive" type="checkbox" checked tabindex="5" /></td>
 			</tr>
 			<tr>
 				<td>{-#tregpublist#-}<b>*</b></td>
-				<td><input id="RegionPublic" name="RegionPublic" type="checkbox" /></td>
+				<td><input id="RegionPublic" name="RegionPublic" type="checkbox" tabindex="6" /></td>
 			</tr>
 			<tr>
-				<td colspan=2 align="center">
+				<td colspan="2" align="center">
 					<input id="cmd" name="cmd" type="hidden" />
 					<input id="RegionId" name="RegionId" type="hidden" />
-					<input type="submit" value="{-#bsave#-}" class="line" />
+					<input type="submit" value="{-#bsave#-}" class="line" tabindex="7" />
 					<input type="reset" value="{-#bcancel#-}" onClick="$('regionpaaddsect').style.display='none'; uploadMsg('');" class="line" />
 				</td>
 			</tr>

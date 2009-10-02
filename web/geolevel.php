@@ -78,9 +78,9 @@ if (!empty($cmd)) {
 		$gl = $c->update();
 		if (!iserror($gl)) {
 			$t->assign ("ctl_msgupdlev", true);
-			// Create selection map..
+			/* Create selection map..
 			if (!empty($dat['GeoLevelLayerFile']) && !empty($dat['GeoLevelLayerCode']) && !empty($dat['GeoLevelLayerName']))
-				$map = new Maps($us->q, $reg, 0, null, null, null, "", "SELECT");
+				$map = new Maps($us->q, $reg, 0, null, null, null, "", "SELECT");*/
 		}
 		else {
 			$t->assign ("ctl_errupdlev", true);

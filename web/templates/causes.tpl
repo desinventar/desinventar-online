@@ -80,17 +80,17 @@
 			action="javascript:var s=$('causefrm').serialize(); sendData('{-$reg-}', 'causes.php', s, $('aCausePreDefined').value);"
 			onSubmit="javascript: var a=new Array('aCauseName','aCauseDesc'); return(checkForm(a, '{-#errmsgfrm#-}'));">
 			{-$dic.DBCauPersonName[0]-}<b style="color:darkred;">*</b><br />
-			<input id="aCauseName" name="CauseName" type="text" class="line" maxlength="40" style="width:500px;" {-$ro-} 
+			<input id="aCauseName" name="CauseName" type="text" class="line" maxlength="40" style="width:500px;" tabindex="1" {-$ro-} 
 				onBlur="updateList('causestatusmsg', 'causes.php', 'r={-$reg-}&cmd=chkname&CauseId='+ $('CauseId').value +'&CauseName='+ $('aCauseName').value);"
 				onFocus="showtip('{-$dic.DBCauPersonName[2]-}');" />
 			<br /><br />
 			{-$dic.DBCauPersonDef[0]-}<b style="color:darkred;">*</b><br />
-			<textarea id="aCauseDesc" name="CauseDesc" class="line" rows="2" style="width:500px;"
+			<textarea id="aCauseDesc" name="CauseDesc" class="line" rows="2" style="width:500px;" tabindex="2" 
 				onFocus="showtip('{-$dic.DBCauPersonDef[2]-}');" {-$ro-}></textarea>
 			<br /><br />
 			{-$dic.DBCauActive[0]-} 
 			<input id="aCauseActive" name="CauseActive" type="checkbox" {-$ro-} 
-				onFocus="showtip('{-$dic.DBCauActive[2]-}');"
+				onFocus="showtip('{-$dic.DBCauActive[2]-}');" tabindex="3" 
 				onClick="if (!this.checked) updateList('causestatusmsg', 'causes.php', 'r={-$reg-}&cmd=chkstatus&CauseId='+ $('aCauseId').value);" />
 			<br /><br />
 			<p align="center" style="width:500px;">
@@ -98,7 +98,7 @@
 				<input id="aCauseId" name="CauseId" type="hidden" />
 				<input id="aCausePreDefined" name="CausePreDefined" type="hidden" />
 				<input id="cmd" name="cmd" type="hidden" />
-				<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" />
+				<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="4" />
 				<input type="reset" value="{-#bcancel#-}" onClick="$('causeaddsect').style.display='none'; uploadMsg('');" {-$ro-} class="line" />
 			</p>
 		</form>

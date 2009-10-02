@@ -86,9 +86,9 @@
 				</tr>
 				<tr>
 				<td colspan="2" align="center">
-					<input type="hidden" name="_REG" value="{-$reg-}" />
-					<input type="hidden" name="cmd" value="upload" />
-					<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" />
+					<input id="_REG" name="_REG" value="{-$reg-}" type="hidden" />
+					<input id="mapcmd" name="mapcmd" type="hidden" />
+					<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="9" />
 					<input type="reset" value="{-#bcancel#-}" class="line" 
 						onClick="$('shwmap').style.display='none'; mod='lev'; uploadMsg('');" {-$ro-} />
 				</td>
