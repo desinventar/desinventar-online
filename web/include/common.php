@@ -85,7 +85,7 @@ function checkAnonSess() {
 
 function iserror ($val) {
 	if (is_numeric($val))
-		if ($val < 0)
+		if ($val <= 0)
 			return true;
 	return false;
 }
