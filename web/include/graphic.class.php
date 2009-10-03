@@ -308,11 +308,23 @@ class Graphic {
 			break;
 			case "PIE":
 				$m = $this->pie($opc, $val, $pal);
-				if (isset($opc['_G+Data']) && $opc['_G+Data'] == "VALUE") {
+				$ShowData = 'NONE';
+				if (isset($opc['_G+Data'])) {
+					$ShowData = $opc['_G+Data'];
+				}
+				if ($ShowData == 'NONE') {
+					$m->SetLabelType(PIE_VALUE_ABS);
+					// 2009-10-03 (jhcaiced) Use a null SetFormat parameter to hide values...
+					$m->value->SetFormat("");
+				} elseif ($ShowData == 'VALUE') {
 					$m->SetLabelType(PIE_VALUE_ABS);
 					$m->value->SetFormat("%d");
-					$m->value->SetFont(FF_ARIAL, FS_NORMAL, 9);
+				} else {
+					$m->SetLabelType(PIE_VALUE_PERCENTAGE);
+					$m->value->SetFormat("%d%%");
 				}
+				$m->value->SetFont(FF_ARIAL, FS_NORMAL, 8);
+				$m->value->Show();
 			break;
 			default:
 				$m = null;
