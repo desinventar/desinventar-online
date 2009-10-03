@@ -21,6 +21,10 @@ class Graphic {
 	public function Graphic ($opc, $data) {
 		fb($opc);
 		fb($data);
+		$NumSeries = 1;
+		if (isset($opc['_G+Field2']) && ($opc['_G+Field2']!='')) {
+			$NumSeries++;
+		}
 		$kind = $opc['_G+Kind'];
 		// Get Label Information
 		$oLabels     = array_keys($data);
@@ -127,7 +131,10 @@ class Graphic {
 		// Choose presentation options, borders, intervals
 		$itv = 1;				// no interval
 		if ($gType == "TEMPO" || $gType == "2TEMPO") {
-			$rl = 70;			// right limit
+			$rl = 70; // Right limit
+			if ($NumSeries > 1) {
+				$rl = 230;
+			}
 			switch($this->sPeriod) {
 				case "YEAR":		$bl = 50;	break;
 				case "YWEEK":		$bl = 65;	break;
@@ -174,9 +181,10 @@ class Graphic {
 				$this->g->xaxis->SetTitlemargin($bl - 20);
 				$this->g->xaxis->title->SetFont(FF_ARIAL, FS_NORMAL);
 				$this->g->xaxis->SetTickLabels($lbl);
-				$this->g->xaxis->SetFont(FF_ARIAL,FS_NORMAL, 8);
+				$this->g->xaxis->SetFont(FF_COURIER,FS_NORMAL, 8);
 				$this->g->xaxis->SetTextLabelInterval($itv);
 				$this->g->xaxis->SetLabelAngle(90);
+				$this->g->xaxis->SetLabelAlign('center','top');
 				$this->g->ygrid->Show(true,true);
 				$this->g->yaxis->SetTitle($sYAxisLabel, 'middle');
 				$this->g->yaxis->SetTitlemargin(40);
@@ -189,7 +197,7 @@ class Graphic {
 					$this->g->SetY2Scale($opc['_G+Scale2']);	// int, log
 					$this->g->y2grid->Show(true,true);
 					$this->g->y2axis->SetTitle($sY2AxisLabel, 'middle');
-					$this->g->y2axis->SetTitlemargin($rl - 20);
+					$this->g->y2axis->SetTitlemargin(50);
 					$this->g->y2axis->title->SetFont(FF_ARIAL, FS_NORMAL);
 					$this->g->y2axis->scale->SetGrace(0);
 					$this->g->y2axis->SetColor('darkred');
@@ -200,10 +208,12 @@ class Graphic {
 		}
 		// 2009-02-03 (jhcaiced) Try to avoid overlapping labels in XAxis
 		// by calculating the interval of the labels
-		$iNumPoints = count($val);		
-		$iInterval = ($iNumPoints * 14) / $wx;
+		$iNumPoints = count($val);
+		$GraphicDataWidth = $wx - $rl - 50;
+		$iInterval = ($iNumPoints * 9) / ($GraphicDataWidth);
 		if ($iInterval < 1)
 			$iInterval = 1;
+		$iInterval = ceil($iInterval);
 		if ($gType != "PIE")
 			$this->g->xaxis->SetTextLabelInterval($iInterval);
 		// Other options graphic
