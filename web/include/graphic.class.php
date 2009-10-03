@@ -21,6 +21,8 @@ class Graphic {
 	public function Graphic ($opc, $data) {
 		fb($opc);
 		fb($data);
+		
+		// Calculate How many Data Series we have...
 		$NumSeries = 1;
 		if (isset($opc['_G+Field2']) && ($opc['_G+Field2']!='')) {
 			$NumSeries++;
@@ -28,26 +30,31 @@ class Graphic {
 		$kind = $opc['_G+Kind'];
 		// Get Label Information
 		$oLabels     = array_keys($data);
-		$sXAxisLabel = current($oLabels);
-		$sYAxisLabel = end($oLabels);
+		$XAxisTitle = current($oLabels);
+		$YAxisTitle = end($oLabels);
 		$q = new Query($opc['_REG']);
 		// Determine graphic type
 		if (substr($opc['_G+Type'],2,18) == "DisasterBeginTime|") {
 			$gType = "XTEMPO";				// One var x Event/Temporal..
+			$GraphType = 'HISTOGRAM';
 			$sY2AxisLabel = $oLabels[1];
 		} elseif (substr($opc['_G+Type'],2,17) == "DisasterBeginTime") {
 			$gType = "TEMPO";				// One var x time
+			$GraphType = 'HISTOGRAM';
 			// Set 2 axis graph only in Bars..
-			if (isset($opc['_G+Field2']) && !empty($opc['_G+Field2']) && ($kind == "BAR" || $kind == "LINE"))
+			if (isset($opc['_G+Field2']) && !empty($opc['_G+Field2']) && ($kind == "BAR" || $kind == "LINE")) {
 				$gType = "2TEMPO";			// Two vars x time
+			}
 		} else {
-			if (isset($opc['_G+Field2']) && !empty($opc['_G+Field2']) && ($kind == "BAR" || $kind == "LINE"))
+			$GraphType = 'COMPARATIVE';
+			if (isset($opc['_G+Field2']) && !empty($opc['_G+Field2']) && ($kind == "BAR" || $kind == "LINE")) {
 				$gType = "2COMPAR";			// Two vars x event, cause...
-			else
+			} else {
 				$gType = $kind;				// Pie Comparatives
+			}
 		}
 		if ($gType == "2TEMPO" || $gType == "2COMPAR") {
-			$sYAxisLabel = $oLabels[1];
+			$YAxisTitle = $oLabels[1];
 			$sY2AxisLabel = $oLabels[2];
 		}
 		$val = array();
@@ -64,31 +71,31 @@ class Graphic {
 				$kind = "MULTILINE";
 			// Convert data in matrix [EVENT][YEAR]=>VALUE
 			foreach ($data[$sY2AxisLabel] as $k=>$i) {
-				foreach ($data[$sXAxisLabel] as $l=>$j) {
+				foreach ($data[$XAxisTitle] as $l=>$j) {
 					if ($k == $l)
-						$tvl[$i][$j] = $data[$sYAxisLabel][$k];
+						$tvl[$i][$j] = $data[$YAxisTitle][$k];
 				}
 			}
 			foreach ($tvl as $kk=>$ii)
 				$val[$kk] = $this->completeTimeSeries($opc, $ii, $q);
-			$lbl = array_keys($val[$kk]);
+			$XAxisLabels = array_keys($val[$kk]);
 			$acol = count(array_unique($data[$sY2AxisLabel]));
 		} else {
 			// Normal Graph (BAR, LINE, PIE)
 			$n = 0;
 			$acol = 1;
 			// Set Array to [YEAR]=> { VALUE1, VALUE2 }  OR Set Array to [YEAR]=>VALUE
-			foreach ($data[$sYAxisLabel] as $Key=>$Value) {
-				if ($data[$sXAxisLabel][$n] != "00") {
+			foreach ($data[$YAxisTitle] as $Key=>$Value) {
+				if ($data[$XAxisTitle][$n] != "00") {
 					if ($gType == "2TEMPO" || $gType == "2COMPAR")
-						$val[$data[$sXAxisLabel][$Key]] = array($Value, $data[$sY2AxisLabel][$Key]);
+						$val[$data[$XAxisTitle][$Key]] = array($Value, $data[$sY2AxisLabel][$Key]);
 					else
-						$val[$data[$sXAxisLabel][$Key]] = $Value;
+						$val[$data[$XAxisTitle][$Key]] = $Value;
 					$acol++;
 				}
 				$n++;
 			}
-			//echo "<pre>"; print_r($data[$sXAxisLabel]);
+			//echo "<pre>"; print_r($data[$XAxisTitle]);
 			// Complete the data series for XAxis (year,month,day)
 			if ($gType == "TEMPO" || $gType == "2TEMPO") {
 				$val = $this->completeTimeSeries($opc, $val, $q);
@@ -97,7 +104,7 @@ class Graphic {
 				arsort($val, SORT_NUMERIC);
 				reset($val);
 			}
-			$lbl = array_keys($val);
+			$XAxisLabels = array_keys($val);
 		}
 		// Cummulative Graph : Add Values in Graph
 		if ($gType == 'TEMPO') {
@@ -136,30 +143,70 @@ class Graphic {
 				$rl = 230;
 			}
 			switch($this->sPeriod) {
-				case "YEAR":		$bl = 50;	break;
-				case "YWEEK":		$bl = 65;	break;
-				case "YMONTH":		$bl = 65;	break;
-				case "YDAY":		$bl = 85;	break;
-				default:			$bl = 50;	break;
+				case "YEAR":		$YBottomMargin = 50;	break;
+				case "YWEEK":		$YBottomMargin = 65;	break;
+				case "YMONTH":		$YBottomMargin = 65;	break;
+				case "YDAY":		$YBottomMargin = 85;	break;
+				default:			$YBottomMargin = 50;	break;
 			}
 		} elseif ($gType == "XTEMPO") {
 			$rl = 160;		// right limit
-			$bl = 50;		// bottom limit
+			$YBottomMargin = 50;		// bottom limit
 		} else {
 			$rl = 70;		// right limit
-			$bl = 120;		// bottom limit more space to xlabels
+			$YBottomMargin = 120;		// bottom limit more space to xlabels
 		}
+
+		// Normalize XAxisLabels, set them to same length...
+		$XAxisMaxLabelLen = 0;
+		foreach($XAxisLabels as $Index => $Label) {
+			$Label = trim(strtoupper($Label));
+			$XAxisLabels[$Index] = $Label;
+			$LabelLen = strlen($Label);
+			if ($XAxisMaxLabelLen < $LabelLen) {
+				$XAxisMaxLabelLen = $LabelLen;
+			}
+		}
+		foreach($XAxisLabels as $Index => $Label) {
+			// 2009-10-03 (jhcaiced) Remove trailing slash in Comparatives by Geography
+			if (substr($Label,strlen($Label)-1,1) == '/') {
+				$Label = trim(substr($Label,0,-1));
+			}
+			// Pad String to MaxLen
+			while(strlen($Label) < $XAxisMaxLabelLen) {
+				$Label = ' ' . $Label;
+			}
+			// 2009-10-03 (jhcaiced) For some reason in Comparatives, the labels are
+			// not aligned to the XAxis Ticks, this sould fix that error ?
+			if ($GraphType == 'COMPARATIVE') {
+				$Label .= '  ';
+			}
+			$XAxisLabels[$Index] = $Label;
+		}
+
+		// Calculate Bottom Margin using Length of XAxisLabels
+		$XAxisMaxHeight = 0;
+		foreach($XAxisLabels as $Label) {
+			$TextLen = strlen($Label) * 6; // Use Monospace font to make this easier to get..
+			if ($TextLen > $XAxisMaxHeight) {
+				$XAxisMaxHeight = $TextLen;
+			}
+		} //foreach
+		$YBottomMargin = $XAxisMaxHeight;
+		$YBottomMargin = $YBottomMargin + 20; // XAxisTitle Size
+		$YBottomMargin = $YBottomMargin + 20; // Footer Size		
+
 		// calculate graphic size
 		$wx = 760;
 		$hx = 520;
 		// 1D Graphic - PIE
 		if ($gType == "PIE") {
-			$h = (24 * count($data[$sYAxisLabel]));
+			$h = (24 * count($data[$YAxisTitle]));
 			if ($h > $hx)
 				$hx = $h;
 			$this->g = new PieGraph($wx, $hx, "auto");
 			// Set label with variable displayed
-			$t1 = new Text($sYAxisLabel);
+			$t1 = new Text($YAxisTitle);
 			$t1->SetPos(0.30, 0.8);
 			$t1->SetOrientation("h");
 			$t1->SetFont(FF_ARIAL,FS_NORMAL);
@@ -168,7 +215,7 @@ class Graphic {
 			$this->g->AddText($t1);
 		} else {
 			// 2D, 3D Graphic
-			$w = (14 * count($data[$sXAxisLabel]));
+			$w = (10 * count($data[$XAxisTitle]));
 			if ($w > $wx)
 				$wx = $w;
 			if ($wx > 1024)
@@ -177,17 +224,17 @@ class Graphic {
 			if (isset($opc['_G+Scale'])) {
 				$this->g->SetScale($opc['_G+Scale']); // textint, textlog
 				$this->g->xgrid->Show(true,true);
-				$this->g->xaxis->SetTitle($sXAxisLabel, 'middle');
-				$this->g->xaxis->SetTitlemargin($bl - 20);
+				$this->g->xaxis->SetTitle($XAxisTitle, 'middle');
+				$this->g->xaxis->SetTitleMargin($YBottomMargin - 40);
 				$this->g->xaxis->title->SetFont(FF_ARIAL, FS_NORMAL);
-				$this->g->xaxis->SetTickLabels($lbl);
+				$this->g->xaxis->SetTickLabels($XAxisLabels);
 				$this->g->xaxis->SetFont(FF_COURIER,FS_NORMAL, 8);
 				$this->g->xaxis->SetTextLabelInterval($itv);
 				$this->g->xaxis->SetLabelAngle(90);
 				$this->g->xaxis->SetLabelAlign('center','top');
 				$this->g->ygrid->Show(true,true);
-				$this->g->yaxis->SetTitle($sYAxisLabel, 'middle');
-				$this->g->yaxis->SetTitlemargin(40);
+				$this->g->yaxis->SetTitle($YAxisTitle, 'middle');
+				$this->g->yaxis->SetTitleMargin(40);
 				$this->g->yaxis->title->SetFont(FF_ARIAL, FS_NORMAL);
 				$this->g->yaxis->scale->SetGrace(0);
 				$this->g->yaxis->SetColor('darkblue');
@@ -197,7 +244,7 @@ class Graphic {
 					$this->g->SetY2Scale($opc['_G+Scale2']);	// int, log
 					$this->g->y2grid->Show(true,true);
 					$this->g->y2axis->SetTitle($sY2AxisLabel, 'middle');
-					$this->g->y2axis->SetTitlemargin(50);
+					$this->g->y2axis->SetTitleMargin(50);
 					$this->g->y2axis->title->SetFont(FF_ARIAL, FS_NORMAL);
 					$this->g->y2axis->scale->SetGrace(0);
 					$this->g->y2axis->SetColor('darkred');
@@ -217,7 +264,7 @@ class Graphic {
 		if ($gType != "PIE")
 			$this->g->xaxis->SetTextLabelInterval($iInterval);
 		// Other options graphic
-		$this->g->img->SetMargin(50,$rl,30,$bl);
+		$this->g->img->SetMargin(50,$rl,30,$YBottomMargin);
 		$this->g->legend->SetAbsPos(5,5,'right','top');
 		//$this->g->legend->Pos(0.0, 0.1);
 		$this->g->legend->SetFont(FF_ARIAL, FS_NORMAL, 10);
@@ -265,7 +312,7 @@ class Graphic {
 					$zp = $this->bar($opc, $zo, "");
 					$y1 = $this->bar($opc, $val1, "darkblue");
 					$y2 = $this->bar($opc, $val2, "darkred");
-					$y1->SetLegend($sYAxisLabel);
+					$y1->SetLegend($YAxisTitle);
 					$y2->SetLegend($sY2AxisLabel);
 					$y1p = new GroupBarPlot(array($y1, $zp));
 					$y2p = new GroupBarPlot(array($zp, $y2));
@@ -283,7 +330,7 @@ class Graphic {
 						$y1p->value->SetColor("black","darkred");
 						$y1p->value->Show();
 					}
-					$y1p->SetLegend($sYAxisLabel);
+					$y1p->SetLegend($YAxisTitle);
 					$m[] = $y1p;
 					
 					// Add linear regression (Test)
@@ -304,7 +351,7 @@ class Graphic {
 				} elseif ($gType == "2TEMPO" || $gType == "2COMPAR") {
 					$y1p = $this->line($opc, $val1, "darkblue");
 					$y2p = $this->line($opc, $val2, "darkred");
-					$y1p->SetLegend($sYAxisLabel);
+					$y1p->SetLegend($YAxisTitle);
 					$y2p->SetLegend($sY2AxisLabel);
 					$this->g->Add($y1p);
 					$this->g->AddY2($y2p);
