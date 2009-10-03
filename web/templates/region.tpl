@@ -56,8 +56,8 @@
 		</td>
 		</tr>
 	</table>
-	<iframe name="fresult" id="fresult" frameborder="0" src="about:blank" style="height:30px; width:400px;"></iframe>
 	<span id="regionpastatusmsg" class="dlgmsg"></span><br>
+	<iframe name="fresult" id="fresult" frameborder="0" src="about:blank" style="height:30px; width:400px;"></iframe>
 	<div id="regionpaaddsect" style="display:none">
    	  <form name="regionpafrm" id="regionpafrm" method="GET" action="javascript: var s=$('regionpafrm').serialize(); 
 			mod='regionpa'; sendData('','region.php', s, '');" onSubmit="javascript: 

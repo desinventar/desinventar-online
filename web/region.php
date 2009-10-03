@@ -7,15 +7,23 @@
 */
 
 require_once('include/loader.php');
-require_once('include/region.class.php');
+require_once('include/role.class.php');
 require_once('include/diregion.class.php');
+require_once('include/dievent.class.php');
+require_once('include/dicause.class.php');
+require_once('include/digeolevel.class.php');
+require_once('include/digeocarto.class.php');
+require_once('include/digeography.class.php');
 
 function form2region ($val) {
 	$dat = array();
-	$dat['RegionId']		= $val['RegionId'];
 	$dat['RegionLabel']		= $val['RegionLabel'];
 	$dat['LangIsoCode']		= $val['LangIsoCode'];
 	$dat['CountryIso'] 		= $val['CountryIso'];
+	if (empty($val['RegionId']))
+		$dat['RegionId']	= DIRegion::buildRegionId($dat['CountryIso'], $dat['RegionLabel']);
+	else
+		$dat['RegionId']	= $val['RegionId'];
 	if (isset($val['RegionActive']) && $val['RegionActive'] == "on")
 		$dat['RegionStatus'] |= CONST_REGIONACTIVE;
 	else
@@ -170,7 +178,7 @@ elseif (isset($_GET['cmd']) && !empty($_GET['cmd']))
 				$t->assign ("ctl_admregmess", true);
 				$stat = 0;
 				if ($cmd == "insert") {
-					$stat = $r->insert();
+					$stat = $r->createRegionDB();
 					$t->assign ("cfunct", 'insert');
 				}
 				elseif ($cmd == "update") {
