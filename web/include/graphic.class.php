@@ -18,15 +18,26 @@ class Graphic {
 	var $sStat;
 	/* opc [kind:BAR,LINE,PIE Opc:Title,etc] data:Matrix
 	   data[0] == X, data[1] = Y1,  .. */
-	public function Graphic ($opc, $data) {
+	public function Graphic($opc, $data) {
 		fb($opc);
 		fb($data);
 		
+		// 2009-10-03 (jhcaiced) Initialize All Graphic Options from Parameters
 		// Calculate How many Data Series we have...
-		$NumSeries = 1;
+		$GraphNumSeries = 1;
 		if (isset($opc['_G+Field2']) && ($opc['_G+Field2']!='')) {
-			$NumSeries++;
+			$GraphNumSeries++;
 		}
+		$GraphOptions = array();
+		$GraphOptions['NumSeries'] = $GraphNumSeries;
+		for ($i=0;$i<$GraphOptions['NumSeries'];$i++) {
+			$GraphOptions[$i] = array();
+			$GraphOptions[$i]['Values'] = 'NONE';
+		}
+		if (isset($opc['_G+Data'])) {
+			$GraphOptions[0]['Values'] = $opc['_G+Data'];
+		}
+		
 		$kind = $opc['_G+Kind'];
 		// Get Label Information
 		$oLabels     = array_keys($data);
@@ -57,6 +68,8 @@ class Graphic {
 			$YAxisTitle = $oLabels[1];
 			$sY2AxisLabel = $oLabels[2];
 		}
+		
+		$GraphOptions['Type'] = $GraphType;
 		$val = array();
 		// get Period and Stationality of the Graph (YEAR, YMONTH, YWEEK, YDAY)
 		if (isset($opc['_G+Period']))
@@ -139,7 +152,7 @@ class Graphic {
 		$itv = 1;				// no interval
 		if ($gType == "TEMPO" || $gType == "2TEMPO") {
 			$rl = 70; // Right limit
-			if ($NumSeries > 1) {
+			if ($GraphNumSeries > 1) {
 				$rl = 230;
 			}
 			switch($this->sPeriod) {
@@ -178,7 +191,7 @@ class Graphic {
 			}
 			// 2009-10-03 (jhcaiced) For some reason in Comparatives, the labels are
 			// not aligned to the XAxis Ticks, this sould fix that error ?
-			if ($GraphType == 'COMPARATIVE') {
+			if ($GraphOptions['Type'] == 'COMPARATIVE') {
 				$Label .= '  ';
 			}
 			$XAxisLabels[$Index] = $Label;
@@ -299,19 +312,20 @@ class Graphic {
 		}
 		switch ($kind) {
 			case "BAR":
-				if ($gType == "TEMPO" || $gType == "BAR") {
-					$m = $this->bar($opc, $val, $pal);
-					if (isset($opc['_G+Data']) && $opc['_G+Data'] == "VALUE") {
-						$m->value->SetFont(FF_ARIAL, FS_NORMAL, 8);
-						$m->value->SetFormat("%d");
-						$m->value->SetAngle(90);
-						$m->value->SetColor("black","darkred");
-						$m->value->Show();
+				if ($GraphOptions['NumSeries'] == 1) {
+					$plot = $this->addBarPlot($opc, $val, $pal);
+					if ($GraphOptions[0]['Values'] == 'VALUE') {
+						$plot->value->SetFont(FF_ARIAL, FS_NORMAL, 8);
+						$plot->value->SetFormat("%d");
+						$plot->value->SetAngle(90);
+						$plot->value->SetColor("black","darkred");
+						$plot->value->Show();
 					}
+					$m[] = $plot;
 				} elseif ($gType == "2TEMPO" || $gType == "2COMPAR") {
-					$zp = $this->bar($opc, $zo, "");
-					$y1 = $this->bar($opc, $val1, "darkblue");
-					$y2 = $this->bar($opc, $val2, "darkred");
+					$zp = $this->addBarPlot($opc, $zo, "");
+					$y1 = $this->addBarPlot($opc, $val1, "darkblue");
+					$y2 = $this->addBarPlot($opc, $val2, "darkred");
 					$y1->SetLegend($YAxisTitle);
 					$y2->SetLegend($sY2AxisLabel);
 					$y1p = new GroupBarPlot(array($y1, $zp));
@@ -321,17 +335,16 @@ class Graphic {
 				}
 			break;
 			case "LINE":
-				if ($gType == "TEMPO" || $gType == "LINE") {
-					$y1p = $this->line($opc, $val, $pal);
-					if (isset($opc['_G+Data']) && $opc['_G+Data'] == "VALUE") {
-						$y1p->value->SetFont(FF_ARIAL, FS_NORMAL, 8);
-						$y1p->value->SetFormat("%d");
-						$y1p->value->SetAngle(90);
-						$y1p->value->SetColor("black","darkred");
-						$y1p->value->Show();
+				if ($GraphOptions['NumSeries'] == 1) {
+					$plot = $this->addLinePlot($opc, $val, $pal);
+					if ($GraphOptions[0]['Values'] == 'VALUE') {
+						$plot->value->SetFont(FF_ARIAL, FS_NORMAL, 8);
+						$plot->value->SetFormat("%d");
+						$plot->value->SetAngle(90);
+						$plot->value->SetColor("black","darkred");
+						$plot->value->Show();
 					}
-					$y1p->SetLegend($YAxisTitle);
-					$m[] = $y1p;
+					$m[] = $plot;
 					
 					// Add linear regression (Test)
 					/*
@@ -344,13 +357,13 @@ class Graphic {
 						$linreg[] = ($x < 0) ? 0 : $x;
 						$n++;
 					}
-					$ylr = $this->line($opc, $linreg, 'dashed');
+					$ylr = $this->addLinePlot($opc, $linreg, 'dashed');
 					$ylr->SetLegend('Linnear Regression');
 					$m[] = $ylr;
 					*/
 				} elseif ($gType == "2TEMPO" || $gType == "2COMPAR") {
-					$y1p = $this->line($opc, $val1, "darkblue");
-					$y2p = $this->line($opc, $val2, "darkred");
+					$y1p = $this->addLinePlot($opc, $val1, "darkblue");
+					$y2p = $this->addLinePlot($opc, $val2, "darkred");
 					$y1p->SetLegend($YAxisTitle);
 					$y2p->SetLegend($sY2AxisLabel);
 					$this->g->Add($y1p);
@@ -358,17 +371,14 @@ class Graphic {
 				}
 			break;
 			case "MULTIBAR":
-				$m = $this->multibar($opc, $val, $pal);
+				$m = $this->addMultiBarPlot($opc, $val, $pal);
 			break;
 			case "MULTILINE":
-				$m = $this->multiline($opc, $val, $pal);
+				$m = $this->addMultiLinePlot($opc, $val, $pal);
 			break;
 			case "PIE":
 				$m = $this->pie($opc, $val, $pal);
-				$ShowData = 'NONE';
-				if (isset($opc['_G+Data'])) {
-					$ShowData = $opc['_G+Data'];
-				}
+				$ShowData = $GraphOptions[0]['Values'];
 				if ($ShowData == 'NONE') {
 					$m->SetLabelType(PIE_VALUE_ABS);
 					// 2009-10-03 (jhcaiced) Use a null SetFormat parameter to hide values...
@@ -401,14 +411,14 @@ class Graphic {
 	} // end function Graphic
 	
 	// This function creates the Graph in disk using all the curren parameters
-	public function Stroke ($fname) {
+	public function Stroke($fname) {
 		// Remove Old Graph is Exists
 		if (file_exists($fname))
 			unlink($fname);
 		$this->g->Stroke($fname);
 	}
 
-	function getWeekOfYear ($sMyDate) {
+	function getWeekOfYear($sMyDate) {
 		$iWeek = date("W", 
 		  mktime(5, 0, 0, (int)substr($sMyDate,5,2),
 		                  (int)substr($sMyDate,8,2),
@@ -537,7 +547,7 @@ class Graphic {
 	}
                                                                                         
 	// Setting a PIE graphic
-	function pie ($opc, $axi, $pal) {
+	function pie($opc, $axi, $pal) {
 		if ($opc['_G+Feel'] == "3D") {
 			$p = new PiePlot3d(array_values($axi));
 			$p->SetEdge("navy");
@@ -559,7 +569,7 @@ class Graphic {
 	}
   
 	// Setting a Bar Graphic
-	function bar ($opc, $axi, $color) {
+	function addBarPlot($opc, $axi, $color) {
 		$b = new BarPlot(array_values($axi));
 		// normal histogram..
 		if (is_array($color)) {
@@ -578,11 +588,11 @@ class Graphic {
 	}
 
 	// Setting a Multibar graphic
-	function multibar ($opc, $axi, $pal) {
+	function addMultiBarPlot($opc, $axi, $pal) {
 		$i = 0;
 		$lab = array_keys($axi);
 		foreach ($axi as $k=>$ele) {
-			$bar = $this->bar($opc, $ele, $pal[$i]);
+			$bar = $this->addBarPlot($opc, $ele, $pal[$i]);
 			$bar->SetLegend($lab[$i]);
 			$b[] = $bar;
 			$i++;
@@ -596,7 +606,7 @@ class Graphic {
 	}
 
 	// Setting a Line graphic
-	function line ($opc, $axi, $col) {
+	function addLinePlot($opc, $axi, $col) {
 		$l = new LinePlot(array_values($axi));
 		if ($col == "dashed") {
 			$l->SetColor('darkred');
@@ -612,11 +622,11 @@ class Graphic {
 	}
 
 	// Setting a Multiline graphic
-	function multiline ($opc, $axi, $pal) {
+	function addMultiLinePlot($opc, $axi, $pal) {
 		$i = 0;
 		$lab = array_keys($axi);
 		foreach ($axi as $k=>$ele) {
-			$line = $this->line($opc, $ele, $pal[$i]);
+			$line = $this->addLinePlot($opc, $ele, $pal[$i]);
 			$line->SetLegend($lab[$i]);
 			$l[] = $line;
 			$i++;
@@ -629,7 +639,7 @@ class Graphic {
 	}
 
 	// Generate colors from database attrib-color or generate fix palette..
-	function genPalette ($cnt, $mode, $evl, $qy) {
+	function genPalette($cnt, $mode, $evl, $qy) {
 		$pal = array();
 		if ($mode == DI_EVENT || $mode == DI_CAUSE) {
 			// Find in database color attribute
@@ -671,7 +681,7 @@ class Graphic {
 	}
 
 /*
-	public function getGraphPeriod ($prmOption) {
+	public function getGraphPeriod($prmOption) {
 		$Index = strrpos($prmOption, "-");
 		if ($Index == FALSE)
 		  $Index = 0; 
