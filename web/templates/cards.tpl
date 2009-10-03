@@ -187,7 +187,7 @@
 		function gotocard(opc) {
 			switch (opc) {
 				case "first":
-					setDICard('{-$reg-}', {-$fst-}, '');
+					setDICard('{-$reg-}', '{-$fst-}', '');
 					{-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}
 					disenabutton($('prev'), true);
 					disenabutton($('next'), false);
@@ -203,7 +203,7 @@
 					disenabutton($('prev'), false);
 				break;
 				case "last":
-					setDICard('{-$reg-}', {-$lst-}, '');
+					setDICard('{-$reg-}', '{-$lst-}', '');
 					{-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}
 					disenabutton($('prev'), false);
 					disenabutton($('next'), true);
