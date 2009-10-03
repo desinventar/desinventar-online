@@ -13,7 +13,7 @@
 	<script type="text/javascript" src="include/prototype.js"></script>
 	<script type="text/javascript" src="include/diadmin.js"></script>
 	<script type="text/javascript" src="include/checktree.js"></script>
-<!--	<script type="text/javascript" src="include/wd.js"></script>-->
+	<script type="text/javascript" src="include/wd.js"></script>
 	<script type="text/javascript" src="include/accordion.js"></script>
 	<script type="text/javascript" src="include/palette.js"></script>
 	<!-- ExtJS 2.0.1 -->
@@ -26,6 +26,7 @@
 	var	s = Ext.getCmp('southm');
 	var difw;
 	var usrw;
+	var dlgw;
     // DI8 - Layout, buttons and internal windows - UI DesConsultar module
     Ext.onReady(function()
     {
@@ -34,13 +35,22 @@
 			Ext.get('loading-mask').fadeOut({remove:true});
 		}, 250);
       Ext.QuickTips.init();
-	  // User login/logout Window
+	  // User functions Window
 	  if (!usrw) {
 		usrw = new Ext.Window({
 			el:'usr-win', layout:'fit', 
 			x: 65, y: 0, width:600, height:450, 
 			closeAction:'hide', plain: true, animCollapse: false,
 			items: new Ext.Panel({ contentEl: 'usr-cfg', autoScroll: true })
+		});
+	  }
+	  // Dialog window
+	  if (!dlgw) {
+		dlgw = new Ext.Window({
+			el:'dlg-win', layout:'fit', 
+			x: 200, y: 200, width:250, height:150, 
+			closeAction:'hide', plain: true, animCollapse: false,
+			items: new Ext.Panel({ contentEl: 'dlg-cfg', autoScroll: true })
 		});
 	  }
 	  var muser = new Ext.menu.Menu({
@@ -79,6 +89,7 @@
 			{id:'mcrdins', text: '{-#minsert#-}',	handler: onMenuItem  },
 {-if $role == "SUPERVISOR" || $role == "ADMINREGION"-}
             {id:'mcrdimp', text: '{-#mimport#-}',	handler: onMenuItem  },
+			{id:'mcrdbak', text: 'Backup database',	handler: onMenuItem  },
 {-/if-}
 {-if $role == "OBSERVER" || $role == "ADMINREGION"-}
             {id:'mcrdcfg', text: '{-#mconfig#-}',	handler: onMenuItem  },
@@ -213,6 +224,11 @@
 				//$('index').style.display = 'none';
 				$('qryres').style.display = 'none';
 				updateList('import', 'import.php', 'r={-$reg-}');
+			break;
+			case "mcrdbak":
+				window.location = "index.php?r={-$reg-}&cmd=backupDB";
+				//updateList('dlg-cfg', 'index.php', 'r={-$reg-}&cmd=backupDB');
+				//dlgw.show();
 			break;
 			case "mcrdcfg":
 				w = Ext.getCmp('westm');
@@ -1374,6 +1390,11 @@
 		   <div id="pagecontent"></div>
 		  </div>
 		</div>
+		 <!-- Show Dialog window -->
+		<div id="dlg-win" class="x-hidden">
+			<div class="x-window-header"></div>
+			<div id="dlg-cfg"></div>
+		</div>
 	   </td>
 	  </tr>
 	  <tr>
@@ -1821,6 +1842,7 @@
 {-** LISTDB: Show available databases**-}
 {-if $ctl_showlistdb-}
 		<b><u>{-#tdbavail#-}</u>:</b>
+		<br />
 		<ul>
 {-foreach name=rlist key=key item=item from=$regionlist-}
 			<li><a href="?r={-$key-}">{-$item-}</a></li>

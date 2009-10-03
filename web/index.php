@@ -109,7 +109,8 @@ default:
 	if (isset($get['r']) && !empty($get['r'])) {
 		$RegionId = $get['r'];
 		$us->open($RegionId);
-	} elseif (isset($post) && !empty($post['_REG'])) {
+	}
+	elseif (isset($post) && !empty($post['_REG'])) {
 		// Request to save Query Design in File..
 		fixPost($post);
 		header("Content-type: text/xml");
@@ -170,6 +171,34 @@ default:
 					$t->assign ("evepredl", $us->q->loadEvents("PREDEF", "active", $lg));
 					$t->assign ("eveuserl", $us->q->loadEvents("USER", "active", $lg));
 					$t->assign ("ctl_evelst", true);
+				break;
+				case "backupDB":
+					$status = false;
+					$backurl = WWWDATA ."/backups/". $RegionId .".zip";
+					$backfile = WWWDIR ."/backups/". $RegionId .".zip";
+					$zip = new ZipArchive();
+					if ($zip->open($backfile, ZIPARCHIVE::CREATE)!==TRUE) {
+						echo "cannot open <$backfile>\n";
+					}
+					else {
+						$path = VAR_DIR ."/database/". $RegionId ."/";
+						$zip->addEmptyDir($RegionId);
+						$fdb = dir($path);
+						while (false !== ($entry = $fdb->read())) {
+							if (is_file($path . $entry))
+								$zip->addFile($path . $entry, $RegionId ."/". $entry);
+						}
+						$fdb->close();
+						$status = true;
+					}
+					$zip->close();
+					if ($status) {
+						header("Content-type: application/x-zip-compressed");
+						header("Content-Disposition: attachment; filename=". $RegionId .".zip");
+						flush();
+						readfile($backfile);
+						exit;
+					}
 				break;
 			}
 		}

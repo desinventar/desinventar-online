@@ -159,8 +159,6 @@ elseif (isset($_GET['cmd']) && !empty($_GET['cmd']))
 				}
 			}
 			$t->assign ("ctl_manregmess", true);
-			$t->assign ("regpa", $us->q->getRegionAdminList());
-			$t->assign ("ctl_reglist", true);
 		break;
 		default:
 			// ADMINREG: insert or update region
