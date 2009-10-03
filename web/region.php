@@ -26,6 +26,30 @@ function form2region ($val) {
 		$dat['RegionStatus'] &= ~CONST_REGIONPUBLIC;
 	return $dat;
 }
+
+function createRegionFromDir($dir, $u) {
+	$regexist = $u->q->checkExistsRegion($dir);
+	$difile = VAR_DIR . "/database/" . $dir ."/desinventar.db";
+	$stat = 0;
+	if (strlen($dir) >= 4 && file_exists($difile) && !$regexist) {
+		$didb = new PDO("sqlite:" . $difile);
+		$data['RegionUserAdmin'] = "root";
+		foreach($didb->query("SELECT InfoKey, InfoValue FROM Info", PDO::FETCH_ASSOC) as $row) {
+			if ($row['InfoKey'] == "RegionId" || $row['InfoKey'] == "RegionLabel" || $row['InfoKey'] == "LangIsoCode " || 
+				$row['InfoKey'] == "CountryIso " || $row['InfoKey'] == "RegionOrder" || $row['InfoKey'] == "RegionStatus" || 
+				$row['InfoKey'] == "IsCRegion" || $row['InfoKey'] == "IsVRegion")
+					$data[$row['InfoKey']] = $row['InfoValue'];
+		}
+		// Create database only if RegionId is equal to directory name
+		if ($data['RegionId'] == $dir) {
+			$r = new DIRegion($u, $data['RegionId']);
+			$r->setFromArray($data);
+			$stat = $r->insert();
+		}
+	}
+	return $stat;
+}
+
 /*
 // REGIONS: Show databases for selected Country 
 if (isset($_GET['c']) && (strlen($_GET['c']) > 0)) {
@@ -89,8 +113,13 @@ elseif (isset($_GET['r']) && !empty($_GET['r']) && file_exists($us->q->getDBFile
 	//$t->assign ("dbden", str2js($reg['InfoGeneral'][1]));
 }
 else */
-if (isset($_GET['cmd'])) {
-	switch ($_GET['cmd']) {
+
+if (isset($_POST['cmd']) && !empty($_POST['cmd']))
+	$cmd = $_POST['cmd'];
+elseif (isset($_GET['cmd']) && !empty($_GET['cmd']))
+	$cmd = $_GET['cmd'];
+
+	switch ($cmd) {
 		case "adminreg":
 			// ADMINREG: Form to Create and assign regions
 			$t->assign ("cntl", $us->q->getCountryList());
@@ -105,69 +134,48 @@ if (isset($_GET['cmd'])) {
 			$t->assign ("regpa", $us->q->getRegionAdminList());
 			$t->assign ("ctl_reglist", true);
 		break;
-		case "loadDir":
+		case "createRegionsFromDBDir":
 			// ADMINREG: Create database list from directory
 			$dbb = dir(VAR_DIR . "/database/");
-			$direg = array();
 			while (false !== ($entry = $dbb->read())) {
-				$difile = VAR_DIR . "/database/" . $entry ."/desinventar.db";
-				$rg = $us->q->checkExistsRegion($entry);
-				if ((strlen($entry) >= 4) && file_exists($difile) && empty($rg)) {
-					$didb = new PDO("sqlite:" . $difile);
-					$data['RegionUserAdmin'] = "root";
-					foreach($didb->query("SELECT InfoKey, InfoValue FROM Info", PDO::FETCH_ASSOC) as $row) {
-						if ($row['InfoKey'] == "RegionId" || $row['InfoKey'] == "RegionLabel" || $row['InfoKey'] == "LangIsoCode " || 
-							$row['InfoKey'] == "CountryIso " || $row['InfoKey'] == "RegionOrder" || $row['InfoKey'] == "RegionStatus" || 
-							$row['InfoKey'] == "IsCRegion" || $row['InfoKey'] == "IsVRegion")
-							$data[$row['InfoKey']] = $row['InfoValue'];
-					}
-					// Create database only if RegionId is equal to directory name
-					if ($data['RegionId'] == $entry) {
-						$r = new DIRegion($us, $data['RegionId']);
-						$r->setFromArray($data);
-						$stat = $r->insert();
-					}
-				}
+				createRegionFromDir($entry, $us);
 			}
 			$dbb->close();
 			$t->assign ("regpa", $us->q->getRegionAdminList());
 			$t->assign ("ctl_reglist", true);
 		break;
-		case "putregion":
-			$result = "";
-			if (isset($post['cmd']) && $post['cmd'] == "putregion" && 
-				isset($_FILES['filereg']) && $_FILES['filereg']['error'] == UPLOAD_ERR_OK) {
-					if ($_FILES['filereg']['type'] == "application/octet-stream") {
-						$tmp_name = $_FILES['filereg']['tmp_name'];
-						//$name = $_FILES['filereg']['name'];
-						//$FileName = VAR_DIR . "/database/" . $name;
-						//move_uploaded_file($tmp_name,  $FileName);
-						$handle = fopen($FileName, "r");
-						// unzip file in destination
-						$result = $FileName;
-						fclose($handle);
+		case "createRegionFromZip":
+			if (isset($_FILES['filereg']) && $_FILES['filereg']['error'] == UPLOAD_ERR_OK) {
+				$zip = new ZipArchive;
+				if ($zip->open($_FILES['filereg']['tmp_name'])) {
+					$myreg = $zip->statIndex(0);
+					$regid = substr($myreg['name'], 0, -1);
+					if (!empty($regid)) {
+						$zip->extractTo(VAR_DIR . "/database/");
+						$result = createRegionFromDir($regid, $us);
+						$t->assign ("ctl_successfromzip", true);
 					}
-					else
-						$result = "FILETYPE IS UNKNOWN.. FORMAT MUST BE TEXT COMMA SEPARATED!";
+					$zip->close();
+				}
 			}
-			else
-				$result = "NO FILE";
-			echo $result;
+			$t->assign ("ctl_manregmess", true);
+			$t->assign ("regpa", $us->q->getRegionAdminList());
+			$t->assign ("ctl_reglist", true);
 		break;
 		default:
 			// ADMINREG: insert or update region
-			if (($_GET['cmd'] == "insert") || ($_GET['cmd'] == "update")) {
+			if (($cmd == "insert") || ($cmd == "update")) {
 				$data = form2region($_GET);
 				$r = new DIRegion($us, $data['RegionId']);
 				$r->setFromArray($data);
 				$stat = ERR_NO_DATABASE;
 				$t->assign ("ctl_admregmess", true);
 				$stat = 0;
-				if ($_GET['cmd'] == "insert") {
+				if ($cmd == "insert") {
 					$stat = $r->insert();
 					$t->assign ("cfunct", 'insert');
 				}
-				elseif ($_GET['cmd'] == "update") {
+				elseif ($cmd == "update") {
 					$stat = $r->update();
 					$t->assign ("cfunct", 'update');
 				}
@@ -186,10 +194,10 @@ if (isset($_GET['cmd'])) {
 			}
 		break;
 	} //switch
-	$q = new Query();
-	$t->assign ("dic", $q->queryLabelsFromGroup('DB', $lg));
+	//$q = new Query();
+	$t->assign ("dic", $us->q->queryLabelsFromGroup('DB', $lg));
 	$t->display ("region.tpl");
-}
+
 /*else {
 	$q = new Query();
 	$reglst = array();

@@ -5,7 +5,7 @@
 {-* ADMINREG: Interface to Edit Portal Admin *-}
 {-if $ctl_adminreg-}
 	<h2>{-#ttname#-}</h2>
-	<div class="dwin" style="width:400px; height:150px;">
+	<div class="dwin" style="width:500px; height:150px;">
 	 <table class="col">
 	  <thead>
 		<tr>
@@ -39,30 +39,29 @@
 	 </table>
 	</div>
 	<br />
-	<table border=0>
+	<table border="0">
 		<tr>
 		<td>
-		<input id="add" type="button" value="{-#baddoption#-}" class="line"
+		<input id="add" type="button" value="{-#baddoption#-}"
 			onclick="mod='regionpa'; setRegionPA('','', '', '', '', '1','0'); $('cmd').value='insert';" />&nbsp;|&nbsp;
 		</td>
 		<td>
-		<input id="directory" type="button" value="{-#bloaddir#-}" class="line"
-			onClick="updateList('lst_regionpa', 'region.php', 'cmd=loadDir');" />&nbsp;|&nbsp;
-		</td>
-		<td>
+		<input id="directory" type="hidden" value="{-#bloaddir#-}"
+			onClick="updateList('lst_regionpa', 'region.php', 'cmd=createRegionsFromDBDir');" />
 		<form id="putregion" method="POST" action="region.php" target="fresult" enctype="multipart/form-data">
-			<input type="hidden" name="cmd" value="putregion" />
-			<input type="file" name="filereg" onChange="$('putregion').submit();" />
+			<input type="hidden" name="cmd" value="createRegionFromZip" />
+			Upload Database ZIP file <input type="file" name="filereg" />
+			<input type="submit" value="Ok" />
 		</form>
 		</td>
 		</tr>
 	</table>
-	<iframe name="fresult" id="fresult" frameborder="0" src="about:blank" style="height:24px; width:300px;"></iframe>
+	<iframe name="fresult" id="fresult" frameborder="0" src="about:blank" style="height:30px; width:400px;"></iframe>
 	<span id="regionpastatusmsg" class="dlgmsg"></span><br>
 	<div id="regionpaaddsect" style="display:none">
    	  <form name="regionpafrm" id="regionpafrm" method="GET" action="javascript: var s=$('regionpafrm').serialize(); 
-		mod='regionpa'; sendData('','region.php', s, '');" onSubmit="javascript: 
-		var a=new Array('CountryIso','RegionLabel','LangIsoCode','RegionUserAdmin'); return(checkForm(a, '{-#errmsgfrm#-}'));">
+			mod='regionpa'; sendData('','region.php', s, '');" onSubmit="javascript: 
+			var a=new Array('CountryIso','RegionLabel','LangIsoCode','RegionUserAdmin'); return(checkForm(a, '{-#errmsgfrm#-}'));">
 		<table class="grid">
 			<tr>
 				<td>{-#tregcntlist#-}<b style="color:darkred;">*</b></td>
@@ -238,4 +237,13 @@
   {-#terrsetrole#-} [{-$errsetrole-}]
  {-/if-}
  {-$regid-}
+{-/if-}
+
+{-*** SYSTEM ASSOCIATE REGION WITH DIRS OR FILES ***-}
+{-if $ctl_manregmess-}
+ {-if $ctl_successfromzip-}
+  Insert Region from file success
+ {-else-}
+  Error insert Region from Zip
+ {-/if-}
 {-/if-}
