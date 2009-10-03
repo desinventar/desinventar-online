@@ -189,10 +189,12 @@ class Graphic {
 			while(strlen($Label) < $XAxisMaxLabelLen) {
 				$Label = ' ' . $Label;
 			}
+			// Add a space to all Labels to give some separation from the Axis Ticks
+			$Label .= ' ';
 			// 2009-10-03 (jhcaiced) For some reason in Comparatives, the labels are
 			// not aligned to the XAxis Ticks, this sould fix that error ?
 			if ($GraphOptions['Type'] == 'COMPARATIVE') {
-				$Label .= '  ';
+				$Label .= ' ';
 			}
 			$XAxisLabels[$Index] = $Label;
 		}
@@ -310,13 +312,47 @@ class Graphic {
 			}
 			$val = $val1;
 		}
+		
+		// 2009-10-03 (jhcaiced) For BAR/LINE Graphs, in order to show 
+		// Percentages, we have to calculate them...
+		if ($GraphOptions['NumSeries'] == 1) {
+			if ($GraphOptions[0]['Values'] == 'PERCENT') {
+				$DataSeries = $val;
+				// Calculate MaxValue in Data Series
+				$MaxValue = 0;
+				foreach($DataSeries as $index => $value) {
+					$MaxValue += $value;
+				} //foreach
+				if ($MaxValue > 0) {
+					// Update data series, replace each value with its percentage
+					$AccumPercent = 0;
+					$i = 1; // Fake index, we need it to know what is the last value in series
+					foreach($DataSeries as $index => $value) {
+						$Percent = trim(sprintf('%5.2f', ($value/$MaxValue)*100));
+						if ($i == count($DataSeries)) {
+							$Percent = trim(sprintf('%5.2f', 100 - $AccumPercent));
+						}
+						$AccumPercent += $Percent;
+						$DataSeries[$index] = $Percent;
+						$i++;
+					} //foreach
+					$val = $DataSeries;
+				} //if
+			} //if
+		}
+		
 		switch ($kind) {
 			case "BAR":
 				if ($GraphOptions['NumSeries'] == 1) {
 					$plot = $this->addBarPlot($opc, $val, $pal);
-					if ($GraphOptions[0]['Values'] == 'VALUE') {
+					if ($GraphOptions[0]['Values'] != 'NONE') {
 						$plot->value->SetFont(FF_ARIAL, FS_NORMAL, 8);
-						$plot->value->SetFormat("%d");
+						if ($GraphOptions[0]['Values'] == 'PERCENT') {
+							$plot->value->SetFormat("%s%%");
+						}
+						if ($GraphOptions[0]['Values'] == 'VALUE') {
+							$plot->value->SetFormat("%d");
+						}
 						$plot->value->SetAngle(90);
 						$plot->value->SetColor("black","darkred");
 						$plot->value->Show();
@@ -337,9 +373,14 @@ class Graphic {
 			case "LINE":
 				if ($GraphOptions['NumSeries'] == 1) {
 					$plot = $this->addLinePlot($opc, $val, $pal);
-					if ($GraphOptions[0]['Values'] == 'VALUE') {
+					if ($GraphOptions[0]['Values'] != 'NONE') {
 						$plot->value->SetFont(FF_ARIAL, FS_NORMAL, 8);
-						$plot->value->SetFormat("%d");
+						if ($GraphOptions[0]['Values'] == 'PERCENT') {
+							$plot->value->SetFormat("%s%%");
+						}
+						if ($GraphOptions[0]['Values'] == 'VALUE') {
+							$plot->value->SetFormat("%d");
+						}
 						$plot->value->SetAngle(90);
 						$plot->value->SetColor("black","darkred");
 						$plot->value->Show();
