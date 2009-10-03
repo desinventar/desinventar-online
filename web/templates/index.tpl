@@ -719,6 +719,7 @@
     	combineForms('DC', 'CG');
     	selectall('_S+Field[]');
     	combineForms('DC', 'CS');
+		$('_CMD').value='savequery';
     	$('DC').action='index.php';
     	$('DC').submit();
     	return true;
@@ -1416,7 +1417,8 @@
 {-if $ctl_qrydsg-}
   <!-- BEG DI8 QUERY FORM -->
   <form id="DC" method="POST" target="dcr">
-  <input type="hidden" id="_REG" name="_REG" value="{-$reg-}">
+  <input type="hidden" id="_REG" name="_REG" value="{-$reg-}" />
+  <input type="hidden" id="_CMD" name="_CMD" />
   <dl class="accordion">
     <!-- BEGIN GEOGRAPHY SECTION -->
     <!-- Select from Map testing ... 'selectionmap.php' -->
