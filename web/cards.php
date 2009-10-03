@@ -36,7 +36,8 @@ function form2disaster($form, $icmd) {
 		// New Disaster
 		$data['DisasterId'] = uuid();
 		$data['RecordCreation'] = date("Y-m-d H:i:s");
-	} elseif ($icmd == CMD_UPDATE) {
+	}
+	elseif ($icmd == CMD_UPDATE) {
 		// On Update
 		$data['DisasterId'] = $form['DisasterId'];
 		$data['RecordCreation'] = $form['RecordCreation'];
@@ -95,7 +96,8 @@ if (isset($_GET['u'])) {
 	else
 		$status = "red";
 	$t->assign ("stat", $status);
-} else {
+}
+else {
 	// Get Geography elements 
 	if (isset($_GET['cmd'])) {
 		// Commands in GET mode: lists, checkings..
@@ -123,14 +125,14 @@ if (isset($_GET['u'])) {
 			break;
 			case "chklocked":
 				// check if datacard is locked by some user
-				$r = $us->isDatacardLocked($_GET['DisasterId']);
-				if ($r == '') {
+				$reserv = $us->isDatacardLocked($_GET['DisasterId']);
+				if ($reserv == '') {
 					// reserve datacard
 					$us->lockDatacard($_GET['DisasterId']);
 					echo "RESERVED";
-				} else {
-					echo "BLOCKED";
 				}
+				else
+					echo "BLOCKED";
 			break;
 			case "chkrelease":
 				$us->releaseDatacard($_GET['DisasterId']);
@@ -141,11 +143,13 @@ if (isset($_GET['u'])) {
 			break;
 			default: break;
 		}
-	} elseif (isset($_GET['DisasterId']) && !empty($_GET['DisasterId'])) {
+	}
+	elseif (isset($_GET['DisasterId']) && !empty($_GET['DisasterId'])) {
 		$dcard = $us->q->hash2json($us->q->getDisasterById($_GET['DisasterId']));
 		if (isset($dcard[0]))
 			echo $dcard[0];
-	} elseif (isset($_POST['_CMD'])) {
+	}
+	elseif (isset($_POST['_CMD'])) {
 		// Commands in POST mode: insert, update, search.. datacards.. 
 		$us->releaseDatacard($_POST['DisasterId']);
 		if ($_POST['_CMD'] == "insertDICard") {
@@ -168,10 +172,11 @@ if (isset($_GET['u'])) {
 				$o = new DIEEData($us, $eedat['DisasterId']);
 				$o->setFromArray($eedat);
 				$i = $o->insert();
-			} else {
-				$t->assign ("statusmsg", showerror($i));
 			}
-		} elseif ($_POST['_CMD'] == "updateDICard") {
+			else
+				$t->assign ("statusmsg", showerror($i));
+		}
+		elseif ($_POST['_CMD'] == "updateDICard") {
 			// Update Existing Datacard
 			$data = form2disaster($_POST, CMD_UPDATE);
 			//echo "<!--"; print_r($data); echo "-->\n";
@@ -191,15 +196,16 @@ if (isset($_GET['u'])) {
 				$o = new DIEEData($us, $eedat['DisasterId']);
 				$o->setFromArray($eedat);
 				$i = $o->update();
-			} else {
-				$t->assign ("statusmsg", showerror($i));
 			}
+			else
+				$t->assign ("statusmsg", showerror($i));
 		}
 		$t->assign ("dipub", $us->q->getNumDisasterByStatus("PUBLISHED"));
 		$t->assign ("direa", $us->q->getNumDisasterByStatus("READY"));
 		$t->assign ("ctl_result", true);
 		// End _CMD Block
-	} else {
+	}
+	else {
 		//if ($us->UserId == '' || $us->getUserRole($sRegionId == '')) {}
 		// Default view of DesInventar
 		$t->assign ("usr", $us->UserId);

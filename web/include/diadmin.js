@@ -179,6 +179,7 @@
 			$('GeoLevelId').value = key;
 			$('GeoLevelName').value = val;
 			$('GeoLevelDesc').value = val2;
+			/*
 			if ($('GeoLevelLayerFile').length == 0) {
 				$('chkmap').checked = false;
 				$('shwmap').style.display = 'none';
@@ -186,8 +187,8 @@
 			else {
 				$('chkmap').checked = true;
 				$('shwmap').style.display = 'block';
-			}
-			$('GeoLevelLayerFile').value = ly1;
+			}*/
+			//$('GeoLevelLayerFile').value = ly1;
 			$('GeoLevelLayerCode').value = ly2;
 			$('GeoLevelLayerName').value = ly3;
 		}

@@ -7,16 +7,16 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
 </head>
 <body>
-	<table border=0>
+	<table border="0">
 	<tr valign="top">
 	<td>
-		<b onMouseOver="showtip('{-$dic.DBRegion[2]-}');">{-$dic.DBRegion[0]-}</b>
-		<br />
+		<fieldset style="padding:5px 5px 5px 5px;">
+		<legend><b onMouseOver="showtip('{-$dic.DBRegion[2]-}');">{-$dic.DBRegion[0]-}</b></legend>
 <!-- GENERAL REGION INFO SECTION -->
 		<form name="infofrm" id="infofrm" method="GET"
 			action="javascript: var s=$('infofrm').serialize(); mod='info'; sendData('{-$reg-}', 'info.php', s, '');"
 			onSubmit="javascript: var a=new Array('RegionDesc'); return(checkForm(a, '{-#errmsgfrm#-}'));">
-			<table border=0 cellspacing=0 cellpadding=0>
+			<table border="0" cellspacing="0" cellpadding="0">
 {-foreach name=info key=key item=item from=$info-}
 {-assign var="inf" value=DB$key-}
 {-assign var="tabind" value="`$tabind+1`"-}
@@ -37,20 +37,26 @@
 			</td>
 			</tr>
 {-/foreach-}
+			<tr>
+			<td colspan="2" align="center">
+				<span id="infoaddsect"></span>
+				<input name="r" type="hidden" value="{-$reg-}" />
+				<input id="infocmd" name="infocmd" value="update" type="hidden" />
+				<input type="submit" value="{-#bsave#-}" {-$ro-} class="line"/>
+				<input type="reset" value="{-#bcancel#-}" {-$ro-} onclick="mod='info'; uploadMsg('');" class="line" />
+				<br />
+				<span id="infostatusmsg" class="dlgmsg"></span>
+			</td>
+			</tr>
 			</table>
-			<span id="infoaddsect"></span>
-			<input name="r" type="hidden" value="{-$reg-}" />
-			<input id="infocmd" name="infocmd" value="update" type="hidden" />
-			<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="{-`$tabind+1`-}"/>
-			<input type="reset" value="{-#bcancel#-}" {-$ro-} onclick="mod='info'; uploadMsg('');" class="line" />
-			<br />
-			<span id="infostatusmsg" class="dlgmsg"></span>
 		</form>
+		</fieldset>
 	</td>
-	<td style="border-left: thin solid #000; width: 30px;"></td>
+	<td style="width: 30px;"></td>
 	<td>
 <!-- PERMISSIONS -->
-		<b onMouseOver="showtip('{-$dic.DBPermissions[2]-}');">{-$dic.DBPermissions[0]-}</b>
+		<fieldset style="padding:5px 5px 5px 5px;">
+		<legend><b onMouseOver="showtip('{-$dic.DBPermissions[2]-}');">{-$dic.DBPermissions[0]-}</b></legend>
 		<div class="dwin" style="width:280px; height:120px;">
 			<table width="100%" class="grid">
 				<thead>
@@ -113,7 +119,7 @@
 					<option value="SUPERVISOR" onMouseOver="showtip('{-$dic.DBRoleSupervisor[2]-}');">{-$dic.DBRoleSupervisor[0]-}</option>
 				</select>
 				<br /><br />
-				<p class="fixw">
+				<p class="fixw" align="center">
 					<input name="r" type="hidden" value="{-$reg-}" />
 					<input id="rolecmd" name="rolecmd" type="hidden" />
 					<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="3"/>
@@ -122,9 +128,11 @@
 				</p>
 			</form>
 		</div>
-		<br /><hr />
+		</fieldset>
+		<br /><br />
 <!-- LOG RECORDS -->
-		<b onMouseOver="showtip('{-$dic.DBLog[2]-}');">{-$dic.DBLog[0]-}</b><br />
+		<fieldset style="padding:5px 5px 5px 5px;">
+		<legend><b onMouseOver="showtip('{-$dic.DBLog[2]-}');">{-$dic.DBLog[0]-}</b></legend>
 		<div class="dwin" style="width:280px; height:120px;">
 			<table width="100%" class="grid">
 				<thead>
@@ -179,7 +187,8 @@
 				<br /><br />
 				<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLogNote[2]-}');">
 				{-$dic.DBLogNote[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBLogNote[1]-}</span></a><br />
-				<textarea id="DBLogNotes" name="DBLogNotes" cols="22" {-$ro-} class="fixw" tabindex="2" onFocus="showtip('{-$dic.DBLogNote[2]-}');"></textarea>
+				<textarea id="DBLogNotes" name="DBLogNotes" cols="22" {-$ro-} class="fixw" tabindex="2" 
+					onFocus="showtip('{-$dic.DBLogNote[2]-}');"></textarea>
 				<br /><br />
 				<p align="center" class="fixw">
 					<input name="r" type="hidden" value="{-$reg-}" />
@@ -191,6 +200,7 @@
 				</p>
 			</form>
 		</div>
+		</fieldset>
 	</td>
   </tr>
  </table>
