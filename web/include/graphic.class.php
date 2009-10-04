@@ -10,8 +10,8 @@ require_once(JPGRAPHDIR . "/jpgraph_date.php");
 require_once(JPGRAPHDIR . "/jpgraph_bar.php");
 require_once(JPGRAPHDIR . "/jpgraph_pie.php");
 require_once(JPGRAPHDIR . "/jpgraph_pie3d.php");
-require_once('include/math.class.php');
-require_once('include/date.class.php');
+require_once(BASE . '/include/math.class.php');
+require_once(BASE . '/include/date.class.php');
 class Graphic {
 	var $g;
 	var $sPeriod;
@@ -28,6 +28,7 @@ class Graphic {
 		$GraphOptions = array();
 		
 		$GraphOptions['Type']      = 'HISTOGRAM';
+		$GraphOptions['Display']   = 'CARTESIAN';
 		$GraphOptions['Period']    = 'YEAR';
 		// Calculate How many Data Series we have...
 		$GraphOptions['NumSeries'] = 1;
@@ -38,19 +39,31 @@ class Graphic {
 			$GraphOptions[$i] = array();
 			$GraphOptions[$i]['Values'] = 'NONE';
 			$GraphOptions[$i]['Title']  = '';
+			$GraphOptions[$i]['Mode']   = '';
 		}
 		if (isset($opc['_G+Period']))
 			$GraphOptions['Period'] = $opc['_G+Period'];
 		if (isset($opc['_G+Data'])) {
 			$GraphOptions[0]['Values'] = $opc['_G+Data'];
 		}
+		if (isset($opc['_G+Kind'])) {
+			$GraphOptions['Display'] = $opc['_G+Kind'];
+		}
+		if (isset($opc['_G+Mode'])) {
+			$GraphOptions[0]['Mode'] = $opc['_G+Mode'];
+		}
+		if (isset($opc['_G+Mode2'])) {
+			$GraphOptions[1]['Mode'] = $opc['_G+Mode2'];
+		}
 		$kind = $opc['_G+Kind'];
+
 		// Get Label Information
 		$GraphLabels = array_keys($data);
 		$GraphOptions['XAxisTitle']  = current($GraphLabels);
 		for($i=0;$i<$GraphOptions['NumSeries']; $i++) {
 			$GraphOptions[$i]['Title'] = $GraphLabels[$i+1];
 		}
+
 		// Determine graphic type
 		if (substr($opc['_G+Type'],2,18) == "DisasterBeginTime|") {
 			$gType = "XTEMPO";				// One var x Event/Temporal..
@@ -70,12 +83,15 @@ class Graphic {
 				$gType = $kind;				// Pie Comparatives
 			}
 		}
+		
+		// Process Data Series
 		$val = array();
 		// get Period and Stationality of the Graph (YEAR, YMONTH, YWEEK, YDAY)
 		if (isset($opc['_G+Period']))
 			$this->sPeriod = $opc['_G+Period'];
 		if (isset($opc['_G+Stat']))
 			$this->sStat = $opc['_G+Stat'];
+
 		// MULTIBAR OR MULTILINE: reformat arrays completing time serie
 		if ($gType == "XTEMPO") {
 			if ($kind == "BAR")
@@ -151,11 +167,6 @@ class Graphic {
 		
 		fb($GraphOptions);
 
-		// Choose presentation options, borders, intervals
-		$itv = 1;				// no interval
-
-		// Define General Graphic Configuration
-		
 		// Calculate Graphic Size (related to Window.Size)
 		$GraphWidth  = 950;
 		$GraphHeight = 520;
@@ -187,8 +198,6 @@ class Graphic {
 			$MaxLabelLen += 90;
 			$XRightMargin = $MaxLabelLen;
 		}
-		fb($val);
-		fb('RM : ' . $XRightMargin);
 
 		// Normalize XAxisLabels, set them to same length...
 		$XAxisMaxLabelLen = 0;
@@ -231,6 +240,15 @@ class Graphic {
 		$YBottomMargin = $YBottomMargin + 20; // XAxisTitle Size
 		$YBottomMargin = $YBottomMargin + 20; // Footer Size		
 
+		// 2009-02-03 (jhcaiced) Try to avoid overlapping labels in XAxis
+		// by calculating the interval of the labels
+		$iNumPoints = count($val);
+		$GraphicDataWidth = $GraphWidth - $XRightMargin - 50;
+		$iInterval = ($iNumPoints * 9) / ($GraphicDataWidth);
+		if ($iInterval < 1)
+			$iInterval = 1;
+		$iInterval = ceil($iInterval);
+
 		// 1D Graphic - PIE
 		if ($gType == "PIE") {
 			// Pie Graphs
@@ -254,7 +272,7 @@ class Graphic {
 				$this->g->xaxis->title->SetFont(FF_ARIAL, FS_NORMAL);
 				$this->g->xaxis->SetTickLabels($XAxisLabels);
 				$this->g->xaxis->SetFont(FF_COURIER,FS_NORMAL, 8);
-				$this->g->xaxis->SetTextLabelInterval($itv);
+				$this->g->xaxis->SetTextLabelInterval($iInterval);
 				$this->g->xaxis->SetLabelAngle(90);
 				$this->g->xaxis->SetLabelAlign('center','top');
 				$this->g->ygrid->Show(true,true);
@@ -278,16 +296,6 @@ class Graphic {
 		        }
 			} // if G+Scale
 		}
-		// 2009-02-03 (jhcaiced) Try to avoid overlapping labels in XAxis
-		// by calculating the interval of the labels
-		$iNumPoints = count($val);
-		$GraphicDataWidth = $GraphWidth - $XRightMargin - 50;
-		$iInterval = ($iNumPoints * 9) / ($GraphicDataWidth);
-		if ($iInterval < 1)
-			$iInterval = 1;
-		$iInterval = ceil($iInterval);
-		if ($gType != "PIE")
-			$this->g->xaxis->SetTextLabelInterval($iInterval);
 		// Other options graphic
 		$this->g->img->SetMargin(50,$XRightMargin,30,$YBottomMargin);
 		
