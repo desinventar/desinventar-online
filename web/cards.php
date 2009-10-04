@@ -268,8 +268,12 @@ else {
 		$lst = $us->q->hash2json($us->q->getDisasterById($us->q->getLastDisasterid()));
 		if (isset($fst[0]))
 			$t->assign ("fst", $fst[0]);
+		else
+			$t->assign ("fst", '{}');
 		if (isset($lst[0]))
 			$t->assign ("lst", $lst[0]);
+		else
+			$t->assign ("lst", '{}');
 	}
 	$t->assign ("reg", $sRegionId);
 }

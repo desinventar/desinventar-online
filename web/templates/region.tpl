@@ -1,7 +1,4 @@
 {-config_load file=`$lg`.conf section="di8_region"-}
-<!--<link rel="stylesheet" href="css/desinventar.css" type="text/css">
-<script type="text/javascript" src="include/prototype.js"></script>
-<script type="text/javascript" src="include/diadmin.js"></script>-->
 {-* ADMINREG: Interface to Edit Portal Admin *-}
 {-if $ctl_adminreg-}
 	<h2>{-#ttname#-}</h2>
@@ -28,8 +25,8 @@
 			<td>{-$item[0]-}</td>
 			<td>{-$item[1]-}</td>
 			<td>{-$item[3]-}</td>
-			<td><input type="checkbox" {-if ($item[4] == 1) -} checked {-/if-} disabled></td>
-			<td><input type="checkbox" {-if ($item[5] == 1) -} checked {-/if-} disabled></td>
+			<td><input type="checkbox" {-if ($item[4] == 1) -} checked {-/if-} disabled /></td>
+			<td><input type="checkbox" {-if ($item[5] == 1) -} checked {-/if-} disabled /></td>
 		</tr>
 {-/foreach-}
 {-/if-}
@@ -42,8 +39,8 @@
 	<table border="0">
 		<tr>
 		<td>
-		<input id="add" type="button" value="{-#baddoption#-}"
-			onclick="mod='regionpa'; setRegionPA('','', '', '', '', '1','0'); $('cmd').value='insert';" />&nbsp;|&nbsp;
+		<input id="add" type="button" value="{-#baddoption#-}" onclick="mod='regionpa'; setRegionPA('','', '', '', '', '1','0'); 
+			$('cmd').value='insert'; $('fresult').src='about:blank;'" />&nbsp;|&nbsp;
 		</td>
 		<td>
 		<input id="directory" type="hidden" value="{-#bloaddir#-}"
@@ -51,12 +48,12 @@
 		<form id="putregion" method="POST" action="region.php" target="fresult" enctype="multipart/form-data">
 			<input type="hidden" name="cmd" value="createRegionFromZip" />
 			Upload Database ZIP file <input type="file" name="filereg" />
-			<input type="submit" value="Ok" />
+			<input type="submit" value="Ok" onClick="uploadMsg('');" />
 		</form>
 		</td>
 		</tr>
 	</table>
-	<span id="regionpastatusmsg" class="dlgmsg"></span><br>
+	<span id="regionpastatusmsg" class="dlgmsg"></span><br />
 	<iframe name="fresult" id="fresult" frameborder="0" src="about:blank" style="height:30px; width:400px;"></iframe>
 	<div id="regionpaaddsect" style="display:none">
    	  <form name="regionpafrm" id="regionpafrm" method="GET" action="javascript: var s=$('regionpafrm').serialize(); 
@@ -77,13 +74,10 @@
 				<td><input id="RegionLabel" name="RegionLabel" type="text" maxlength="200" class="line fixw" tabindex="2" /></td>
 			</tr>
 			<tr>
-				<td><a class="info" href="javascript:void(null)" 
-					onMouseOver="showtip('{-$dic.DBLangIsoCode[2]-}')">{-$dic.DBLangIsoCode[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBLangIsoCode[1]-}</span></a>
-				</td>
-				<td><select id="LangIsoCode" name="LangIsoCode" {-$ro-} class="line fixw" 
-						onFocus="showtip('{-$dic.DBLangIsoCode[2]-}')" tabindex="3">
+				<td>{-$dic.DBLangIsoCode[0]-}<b style="color:darkred;">*</b></td>
+				<td><select id="LangIsoCode" name="LangIsoCode" {-$ro-} class="line fixw" tabindex="3">
 {-foreach name=lglst key=key item=item from=$lglst-}
-							<option value="{-$key-}">{-$item[0]-}</option>
+						<option value="{-$key-}">{-$item[0]-}</option>
 {-/foreach-}
 					</select></td>
 			</tr>
@@ -242,8 +236,11 @@
 {-*** SYSTEM ASSOCIATE REGION WITH DIRS OR FILES ***-}
 {-if $ctl_manregmess-}
  {-if $ctl_successfromzip-}
-  Insert Region from file success
+	<script type="text/javascript" language="javascript">
+	parent.updateList('lst_regionpa', 'region.php', 'cmd=list');
+	</script>
+	<span style="color:#42929d; font-size:8pt;">Insert Region from ZipFile success</span>
  {-else-}
-  Error insert Region from Zip
+	<span style="color:#42929d; font-size:8pt;">Error insert Region from ZipFile</span>
  {-/if-}
 {-/if-}
