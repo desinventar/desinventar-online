@@ -316,60 +316,58 @@ class UserSession {
 		
 		if ($iReturn > 0) {
 			// Remove All Permissions for This User on This Database
-			$sQuery = "DELETE FROM RegionAuth WHERE " .
-				" UserId='" . $prmUserId . "' AND " . 
-				" RegionId='" . $prmRegionId . "'";
+			$sQuery = "DELETE FROM RegionAuth WHERE UserId='" . $prmUserId . "' AND RegionId='" . $prmRegionId . "'";
 			$this->q->core->query($sQuery);
-			
-			// Create Role Permission
-			$sQuery = "INSERT INTO RegionAuth (UserId,RegionId,AuthKey,AuthValue,AuthAuxValue) " .
-				" VALUES ('" . $prmUserId . "','" . $prmRegionId . "','ROLE',0,'" . $prmRole . "')";
-			$this->q->core->query($sQuery);
-			
-			// Add permissions according to each role
-			$permObserver    = array("DISASTER"  => array(1, "STATUS=ACTIVE"),
-			                         "EVENT"     => array(1, "STATUS=ACTIVE"),
-			                         "CAUSE"     => array(1, "STATUS=ACTIVE"),
-			                         "GEOLEVEL"  => array(1, "STATUS=ACTIVE"),
-			                         "GEOGRAPHY" => array(1, "STATUS=ACTIVE"),
-			                         "EEFIELD"   => array(1, "STATUS=ACTIVE"),
-			                         "DBINFO"    => array(1, ""),
-			                         "DBLOG"     => array(1, "")
-			                        );
-			$permUser        = array("DISASTER"  => array(3, "STATUS=DRAFT,STATUS=READY"),
-			                         "EVENT"     => array(1, "STATUS=ACTIVE"),
-			                         "CAUSE"     => array(1, "STATUS=ACTIVE"),
-			                         "GEOLEVEL"  => array(1, "STATUS=ACTIVE"),
-			                         "GEOGRAPHY" => array(1, "STATUS=ACTIVE"),
-			                         "EEFIELD"   => array(1, "STATUS=ACTIVE"),
-			                         "DBINFO"    => array(1, ""),
-			                         "DBLOG"     => array(3, ""),
-			                        );
-			$permSupervisor  = array("DISASTER"  => array(4, "STATUS=DRAFT,STATUS=READY"),
-			                         "EVENT"     => array(1, "STATUS=ACTIVE"),
-			                         "CAUSE"     => array(1, "STATUS=ACTIVE"),
-			                         "GEOLEVEL"  => array(1, "STATUS=ACTIVE"),
-			                         "GEOGRAPHY" => array(1, "STATUS=ACTIVE"),
-			                         "EEFIELD"   => array(1, "STATUS=ACTIVE"),
-			                         "DBINFO"    => array(1, ""),
-			                         "DBLOG"     => array(3, ""),
-			                        );
-			$permAdminRegion = array("DISASTER"  => array(5, ""),
-			                         "EVENT"     => array(5, ""),
-			                         "CAUSE"     => array(5, ""),
-			                         "GEOLEVEL"  => array(5, ""),
-			                         "GEOGRAPHY" => array(5, ""),
-			                         "EEFIELD"   => array(5, ""),
-			                         "DBINFO"    => array(5, ""),
-			                         "DBLOG"     => array(5, ""),
-			                        );
-			$perm = array('OBSERVER'    => $permObserver,
-			              'USER'        => $permUser,
-			              'SUPERVISOR'  => $permSupervisor,
-			              'ADMINREGION' => $permAdminRegion);
-			foreach($perm[$prmRole] as $k => $v) {
-				$this->setPerm($prmUserId, $prmRegionId, $k, $v[0], $v[1]);
-			}
+			// Insert ROLE Permission First		
+			$this->setPerm($prmUserId, $prmRegionId, 'ROLE', 0, $prmRole);
+			switch($prmRole) {
+				case 'ADMINREGION':
+					$this->setPerm($prmUserId, $prmRegionId, "DISASTER" , 5, "");
+					$this->setPerm($prmUserId, $prmRegionId, "EVENT"    , 5, "");
+					$this->setPerm($prmUserId, $prmRegionId, "CAUSE"    , 5, "");
+					$this->setPerm($prmUserId, $prmRegionId, "GEOGRAPHY", 5, "");
+					$this->setPerm($prmUserId, $prmRegionId, "GEOLEVEL" , 5, "");
+					$this->setPerm($prmUserId, $prmRegionId, "EEFIELD"  , 5, "");
+					$this->setPerm($prmUserId, $prmRegionId, "DBINFO"   , 2, "");
+					$this->setPerm($prmUserId, $prmRegionId, "AUTH"     , 2, "");
+					$this->setPerm($prmUserId, $prmRegionId, "DBPUBLIC" , 2, "");
+					$this->setPerm($prmUserId, $prmRegionId, "DBACTIVE" , 2, "");
+					$this->setPerm($prmUserId, $prmRegionId, "DBLOG"    , 5, "");
+					break;
+				case 'SUPERVISOR':
+					$this->setPerm($prmUserId, $prmRegionId, "DISASTER" , 4, "STATUS=DRAFT,STATUS=READY");
+					$this->setPerm($prmUserId, $prmRegionId, "EVENT"    , 1, "STATUS=ACTIVE");
+					$this->setPerm($prmUserId, $prmRegionId, "CAUSE"    , 1, "STATUS=ACTIVE");
+					$this->setPerm($prmUserId, $prmRegionId, "GEOGRAPHY", 1, "STATUS=ACTIVE");
+					$this->setPerm($prmUserId, $prmRegionId, "GEOLEVEL" , 1, "STATUS=ACTIVE");
+					$this->setPerm($prmUserId, $prmRegionId, "EEFIELD"  , 1, "STATUS=ACTIVE");
+					$this->setPerm($prmUserId, $prmRegionId, "DBINFO"   , 1, "");
+					$this->setPerm($prmUserId, $prmRegionId, "DBLOG"    , 3, "");
+					break;
+				case 'USER':
+					$this->setPerm($prmUserId, $prmRegionId, "DISASTER" , 3, "STATUS=DRAFT,STATUS=READY");
+					$this->setPerm($prmUserId, $prmRegionId, "EVENT"    , 1, "STATUS=ACTIVE");
+					$this->setPerm($prmUserId, $prmRegionId, "CAUSE"    , 1, "STATUS=ACTIVE");
+					$this->setPerm($prmUserId, $prmRegionId, "GEOGRAPHY", 1, "STATUS=ACTIVE");
+					$this->setPerm($prmUserId, $prmRegionId, "GEOLEVEL" , 1, "STATUS=ACTIVE");
+					$this->setPerm($prmUserId, $prmRegionId, "EEFIELD"  , 1, "STATUS=ACTIVE");
+					$this->setPerm($prmUserId, $prmRegionId, "DBINFO"   , 1, "");
+					$this->setPerm($prmUserId, $prmRegionId, "DBLOG"    , 3, "");
+					break;
+				case 'OBSERVER':
+					$this->setPerm($prmUserId, $prmRegionId, "DISASTER" , 1, "STATUS=ACTIVE");
+					$this->setPerm($prmUserId, $prmRegionId, "EVENT"    , 1, "STATUS=ACTIVE");
+					$this->setPerm($prmUserId, $prmRegionId, "CAUSE"    , 1, "STATUS=ACTIVE");
+					$this->setPerm($prmUserId, $prmRegionId, "GEOGRAPHY", 1, "STATUS=ACTIVE");
+					$this->setPerm($prmUserId, $prmRegionId, "GEOLEVEL" , 1, "STATUS=ACTIVE");
+					$this->setPerm($prmUserId, $prmRegionId, "DBINFO"   , 1, "");
+					$this->setPerm($prmUserId, $prmRegionId, "DBLOG"    , 1, "");
+					$this->setPerm($prmUserId, $prmRegionId, "EEFIELD"  , 1, "STATUS=ACTIVE");
+					break;
+				case 'MINIMAL':
+					$this->setPerm($prmUserId, $prmRegionId, "USER"     , 2, "");
+					break;
+			} //switch
 		}
 		return $iReturn;
 	} //function
@@ -377,7 +375,7 @@ class UserSession {
 	public function setPerm($prmUserId, $prmRegionId, $prmAuthKey, $prmValue, $prmAuxValue) {
 		$sQuery = "INSERT INTO RegionAuth VALUES (" . 
 			"'" . $prmUserId . "','" . $prmRegionId  . "'," .
-			"'" . $prmAuthKey . "','" . $prmValue . ",'" . $prmAuxValue . "')";
+			"'" . $prmAuthKey . "','" . $prmValue . "','" . $prmAuxValue . "')";
 		$this->q->core->query($sQuery);
 	}
 

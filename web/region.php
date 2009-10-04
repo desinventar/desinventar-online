@@ -52,6 +52,8 @@ function createRegionFromDir($dir, $u) {
 			$r = new DIRegion($u, $data['RegionId']);
 			$r->setFromArray($data);
 			$stat = $r->insert();
+			if (!iserror($stat))
+				$rol = $u->setUserRole($data['RegionUserAdmin'], $data['RegionId'], "ADMINREGION");
 		}
 	}
 	return $stat;

@@ -8,7 +8,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
 	<title>{-#ttitle#-} [{-$regname-}] | {-$usr-} - {-$dicrole-}</title>
 	<link rel="stylesheet" href="css/desinventar.css" type="text/css"/>
-	<link rel="stylesheet" href="css/desinput.css" type="text/css"/>
 	<script type="text/javascript" src="include/prototype.js"></script>
 	<script type="text/javascript" src="include/combo-box.js"></script>
 	<script type="text/javascript" src="include/diadmin.js"></script>
@@ -187,7 +186,7 @@
 		function gotocard(opc) {
 			switch (opc) {
 				case "first":
-					setDICard('{-$reg-}', '{-$fst-}', '');
+					setDICard('{-$reg-}', {-$fst-}, '');
 					{-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}
 					disenabutton($('prev'), true);
 					disenabutton($('next'), false);
@@ -203,7 +202,7 @@
 					disenabutton($('prev'), false);
 				break;
 				case "last":
-					setDICard('{-$reg-}', '{-$lst-}', '');
+					setDICard('{-$reg-}', {-$lst-}, '');
 					{-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}
 					disenabutton($('prev'), false);
 					disenabutton($('next'), true);
