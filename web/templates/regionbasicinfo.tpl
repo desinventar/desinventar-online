@@ -1,4 +1,4 @@
-{-config_load file=`$lg`.conf section="dc_querydesign"-}
+{-config_load file=`$lg`.conf section="di8_index"-}
 {-config_load file=`$lg`.conf section="di8_region" -}
 
 <h2>{-$RegionInfo.RegionLabel-}</h2>

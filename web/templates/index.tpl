@@ -1,5 +1,4 @@
-{-config_load file=`$lg`.conf section="di8_web"-}
-{-config_load file=`$lg`.conf section="dc_querydesign"-}
+{-config_load file=`$lg`.conf section="di8_index"-}
 {-if $ctl_show-}
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -89,7 +88,7 @@
 			{id:'mcrdins', text: '{-#minsert#-}',	handler: onMenuItem  },
 {-if $role == "SUPERVISOR" || $role == "ADMINREGION"-}
             {id:'mcrdimp', text: '{-#mimport#-}',	handler: onMenuItem  },
-			{id:'mcrdbak', text: 'Backup database',	handler: onMenuItem  },
+			{id:'mcrdbak', text: '{-#mbackdb#-}',	handler: onMenuItem  },
 {-/if-}
 {-if $role == "OBSERVER" || $role == "ADMINREGION"-}
             {id:'mcrdcfg', text: '{-#mconfig#-}',	handler: onMenuItem  },

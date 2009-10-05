@@ -58,7 +58,10 @@ if (!empty($cmd)) {
 			// Create new GeoLevel and GeoCarto Objects
 			$o = new DIGeoLevel($us);
 			$o->setFromArray($data);
-			$o->set('GeoLevelId', $o->getMaxGeoLevel()+1);
+			$levid = $o->getMaxGeoLevel();
+			if ($levid > 0)
+				$levid ++;
+			$o->set('GeoLevelId', $levid);
 			$c = new DIGeoCarto($us);
 			$c->setFromArray($data);
 			$c->set('GeoLevelId', $o->get('GeoLevelId'));

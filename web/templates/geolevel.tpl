@@ -35,7 +35,8 @@
 	<iframe name="ifcarto" id="ifcarto" frameborder="0" src="about:blank" style="height:30px; width:300px;"></iframe>
 	<br /><br />
 	<div id="levaddsect" style="display:none; width:600px;">
-		<form name="levfrm" id="levfrm" method="POST" action="geolevel.php" target="ifcarto" enctype="multipart/form-data">
+		<form name="levfrm" id="levfrm" method="POST" action="geolevel.php" target="ifcarto" enctype="multipart/form-data"
+			onSubmit="javascript: var a=new Array('GeoLevelName','GeoLevelDesc'); return(checkForm(a, '{-#errmsgfrmlev#-}'));">
 			<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevName[2]-}')">
 			{-$dic.DBLevName[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBLevName[1]-}</span></a><br />
 			<input id="GeoLevelName" name="GeoLevelName" type="text" {-$ro-} tabindex="1" class="line" style="width:400px;"
@@ -78,9 +79,7 @@
 					<input id="_REG" name="_REG" value="{-$reg-}" type="hidden" />
 					<input id="GeoLevelId" name="GeoLevelId" type="hidden" />
 					<input id="cmd" name="cmd" type="hidden" /><br />
-					<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="9" 
-						onClick="var a=new Array('GeoLevelName','GeoLevelDesc'); var res = checkForm(a, '{-#errmsgfrmlev#-}');
-								if(res){ updateList('lst_lev', 'geolevel.php', 'r={-$reg-}&cmd=list'); } return (res);"/>
+					<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="9" />
 					<input type="reset" value="{-#bcancel#-}" class="line" 
 						onClick="$('levaddsect').style.display='none'; mod='lev'; uploadMsg('');" {-$ro-} />
 				</td>
@@ -92,13 +91,19 @@
 
 {-** INFO AND ERRORS MESSAGES **-}
 {-if $ctl_msginslev-}
- {-#msginslev#-}
+	<script type="text/javascript" language="javascript">
+	parent.updateList('lst_lev', 'geolevel.php', 'r={-$reg-}&cmd=list');
+	</script>
+	<span style="color:#42929d; font-size:8pt;">{-#msginslev#-}</span>
 {-elseif $ctl_errinslev-}
- {-#terror#-}[{-$insstatlev-}]: {-#errinslev#-}
+	<span style="color:#42929d; font-size:8pt;">{-#terror#-}[{-$insstatlev-}]: {-#errinslev#-}</span>
 {-elseif $ctl_msgupdlev-}
- {-#msgupdlev#-}
+	<script type="text/javascript" language="javascript">
+	parent.updateList('lst_lev', 'geolevel.php', 'r={-$reg-}&cmd=list');
+	</script>
+	<span style="color:#42929d; font-size:8pt;">{-#msgupdlev#-}</span>
 {-elseif $ctl_errupdlev-}
- {-#terror#-}[{-$updstatlev-}]: {-#errupdlev#-}
+	<span style="color:#42929d; font-size:8pt;">{-#terror#-}[{-$updstatlev-}]: {-#errupdlev#-}</span>
 {-/if-}
 {-*** CHECK Level/Geography-Availability MESSAGES - STATUS SPAN ***-}
 {-if $ctl_chkname-}
@@ -111,3 +116,4 @@
  	 - {-#errchkstatus#-}
  {-/if-}
 {-/if-}
+
