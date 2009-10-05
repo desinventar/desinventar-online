@@ -47,7 +47,7 @@
 			onClick="updateList('lst_regionpa', 'region.php', 'cmd=createRegionsFromDBDir');" />
 		<form id="putregion" method="POST" action="region.php" target="fresult" enctype="multipart/form-data">
 			<input type="hidden" name="cmd" value="createRegionFromZip" />
-			Upload Database ZIP file <input type="file" name="filereg" />
+			{-#bupzipfile#-} <input type="file" name="filereg" />
 			<input type="submit" value="Ok" onClick="uploadMsg('');" />
 		</form>
 		</td>
@@ -104,7 +104,8 @@
 					<input id="cmd" name="cmd" type="hidden" />
 					<input id="RegionId" name="RegionId" type="hidden" />
 					<input type="submit" value="{-#bsave#-}" class="line" tabindex="7" />
-					<input type="reset" value="{-#bcancel#-}" onClick="$('regionpaaddsect').style.display='none'; uploadMsg('');" class="line" />
+					<input type="reset" value="{-#bcancel#-}" 
+						onClick="$('regionpaaddsect').style.display='none'; uploadMsg('');" class="line" />
 				</td>
 			</tr>
 		</table>
@@ -218,10 +219,15 @@
 
 {-*** INSERT OR UPDATE MESSAGES - STATUS SPAN ***-}
 {-if $ctl_admregmess-}
+ {-if $ctl_successfromzip-}
+	<script type="text/javascript" language="javascript">
+	parent.updateList('lst_regionpa', 'region.php', 'cmd=list');
+	</script>
+ {-/if-}
  {-if $cfunct == 'insert'-}
- 	{-#tinsert#-}
+ 	<span style="color:#42929d; font-size:8pt;">{-#tinsert#-}</span>
  {-elseif $cfunct == 'update'-}
-  {-#tupdate#-}
+	<span style="color:#42929d; font-size:8pt;">{-#tupdate#-}</span>
  {-else-}
   {-#terrinsupd#-}
  {-/if-}
@@ -231,16 +237,4 @@
   {-#terrsetrole#-} [{-$errsetrole-}]
  {-/if-}
  {-$regid-}
-{-/if-}
-
-{-*** SYSTEM ASSOCIATE REGION WITH DIRS OR FILES ***-}
-{-if $ctl_manregmess-}
- {-if $ctl_successfromzip-}
-	<script type="text/javascript" language="javascript">
-	parent.updateList('lst_regionpa', 'region.php', 'cmd=list');
-	</script>
-	<span style="color:#42929d; font-size:8pt;">Insert Region from ZipFile success</span>
- {-else-}
-	<span style="color:#42929d; font-size:8pt;">Error insert Region from ZipFile</span>
- {-/if-}
 {-/if-}

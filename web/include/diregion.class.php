@@ -216,10 +216,15 @@ class DIRegion extends DIObject {
 			$g = new DIGeoLevel($this->session, 0);
 			$g->set('GeoLevelName', $prmGeoLevelName);
 			$g->set('RegionId', $this->get('RegionId'));
+			$c = new DIGeoCarto($this->session);
+			$c->set('GeoLevelId', 0);
 			if ($g->exist() > 0) {
 				$g->update();
-			} else {
+				$c->update();
+			}
+			else {
 				$g->insert();
+				$c->insert();
 			}
 		}
 		return $iReturn;

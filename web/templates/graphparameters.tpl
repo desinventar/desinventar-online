@@ -1,5 +1,5 @@
 <!-- BEGIN GRAPHIC PARAMETERS -->
-{-config_load file=`$lg`.conf section="dc_querydesign"-}
+{-config_load file=`$lg`.conf section="di8_index"-}
 
 <button id="grp-btn" class="rounded" ext:qtip="{-#tgraphicmsg#-}"><span>{-#bgraphic#-}</span></button>
 <div id="grp-win" class="x-hidden">

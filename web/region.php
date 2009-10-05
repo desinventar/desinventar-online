@@ -167,7 +167,7 @@ elseif (isset($_GET['cmd']) && !empty($_GET['cmd']))
 					$zip->close();
 				}
 			}
-			$t->assign ("ctl_manregmess", true);
+			$t->assign ("ctl_admregmess", true);
 		break;
 		default:
 			// ADMINREG: insert or update region

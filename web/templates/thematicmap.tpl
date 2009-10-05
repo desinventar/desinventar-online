@@ -1,4 +1,5 @@
 {-config_load file=`$lg`.conf section="dc_thematicmap"-}
+{-config_load file=`$lg`.conf section="dc_qdetails"-}
 {-**** SHOW RESULTS ****-}
 {-if $ctl_showres-}
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -206,7 +207,7 @@
 		 <tr><td>{-$mapfilename-}</td></tr>
 		 <tr>
 		 <td valign="top">
-		  <div class="dwin" style="width:200px;">
+		  <div class="dwin" style="width:250px;">
 				<p align="right">{-#trepnum#-}: {-$tot-}</p>
 				<hr>
 				<h4>{-#tmapof#-} {-$rgl[0].info.TITLE-}</h4>
