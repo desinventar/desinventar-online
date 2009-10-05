@@ -21,7 +21,7 @@
 			return $iReturn;
 		} //function
 		
-		public static function getLastDayOfMonth($Year, $Month) {
+		public static function getDaysOfMonth($Year, $Month) {
 			$MDays = array(0,31,28,31,30,31,30,31,31,30,31,30,31);
 			$Day = $MDays[$Month];
 			// On February, check if Year is leap and add one more day
