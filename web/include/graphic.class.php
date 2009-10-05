@@ -87,7 +87,7 @@ class Graphic {
 		if ($GraphOptions['Type'] == 'HISTOGRAM') {
 			$DataSeries = array();
 			for($i=0;$i<$GraphOptions['NumSeries'];$i++) {
-				$DataSeries[$i] = $this->getTimeSeries('1914-05-13','1916-03-10', $GraphOptions['Period']);
+				//$DataSeries[$i] = $this->getTimeSeries('1914-05-13','1916-03-10', $GraphOptions['Period']);
 			}
 		}
 		
@@ -499,47 +499,30 @@ class Graphic {
 
 	function getTimeSeries($prmDateBegin, $prmDateEnd, $prmPeriod) {
 		fb($prmPeriod);
+
+		$iYearBegin = DIDate::getYear($prmDateBegin);
+		$iYearEnd   = DIDate::getYear($prmDateEnd);
+		$iWeekBegin = DIDate::getWeekOfYear($prmDateBegin);
+		$iWeekEnd   = DIDate::getWeekOfYear($prmDateEnd);
+
 		$series = array();
 		switch ($prmPeriod) {
 			case 'YEAR' :
-				$iYearBegin = DIDate::getYear($prmDateBegin);
-				$iYearEnd   = DIDate::getYear($prmDateEnd);
-				fb($iYearBegin);
-				fb($iYearEnd);
 				for($year=$iYearBegin;$year<=$iYearEnd;$year++) {
 					$series[$year] = 0;
 				}
 			break;
 			case 'YMONTH':
-				$iYearBegin = DIDate::getYear($prmDateBegin);
-				$iYearEnd   = DIDate::getYear($prmDateEnd);		
-				$iMonthBegin = DIDate::getMonth($prmDateBegin);
-				$iMonthEnd   = DIDate::getMonth($prmDateEnd);
-				
 				//Months from first Year
-				for($month=$iMonthBegin;$month<=12;$month++) {
-					$key = $iYearBegin . '-' . DIDate::padNumber($month,2);
-					$series[$key] = 0;
-				}
-
+				$series = array_merge($series, $this->addMonthSeries($iYearBegin, $iMonthBegin, 12));
 				// Months from Intermediate Years
 				for($year=$iYearBegin + 1; $year<=$iYearEnd - 1; $year++) {
-					for($month=1;$month<=12;$month++) {
-						$key = $year . '-' . DIDate::padNumber($month,2);
-						$series[$key] = 0;
-					}
+					$series = array_merge($series, $this->addMonthSeries($year, 1, 12));
 				}
 				// Months in last year
-				for($month=1;$month<=$iMonthEnd;$month++) {
-					$key = $iYearEnd . '-' . DIDate::padNumber($month,2);
-					$series[$key] = 0;
-				}
+				$series = array_merge($series, $this->addMonthSeries($iYearEnd, 1, $iMonthEnd));
 			break;
 			case 'YWEEK':
-				$iYearBegin = DIDate::getYear($prmDateBegin);
-				$iYearEnd   = DIDate::getYear($prmDateEnd);
-				$iWeekBegin = DIDate::getWeekOfYear($prmDateBegin);
-				$iWeekEnd   = DIDate::getWeekOfYear($prmDateEnd);
 				//Weeks from first Year
 				for($week=$iWeekBegin;$week<=52;$week++) {
 					$key = $iYearBegin . '-' . DIDate::padNumber($week,2);
@@ -560,11 +543,45 @@ class Graphic {
 				}
 			break;
 			case 'YDAY':
+				$iDayBegin = DIDate::getDay($prmDateBegin);
+				$idayEnd   = DIDate::getDay($prmDateEnd);
+				// Days from Intermediate Years
+				for($year=$iYearBegin + 1; $year<=$iYearEnd - 1; $year++) {
+					for($month=1;$month<=12;$month++) {
+						for($day=1;$day<=DIDate::getDaysOfMonth($year,$month);$day++) {
+							$key = $year . '-' . DIDate::padNumber($month,2) . '-' . DIDate::padNumber($day,2);
+							$series[$key] = 0;
+						}
+					}
+				}
 			break;
 		} //switch
 		fb($series);
 		return $series;
 	} //function
+	
+	function addMonthSeries($iYear, $iMonthBegin, $iMonthEnd) {
+		$series = array();
+		for($month=$iMonthBegin;$month<=$iMonthEnd;$month++) {
+			$key = $iYear . '-' . DIDate::padNumber($month,2);
+			$series[$key] = 0;
+		}
+		return $series;
+	}
+	
+	function addWeekSeries($iYear, $iWeekBegin, $iWeekEnd) {
+		$series = array();
+		for($week=$iWeekBegin;$week<=$iWeekEnd;$week++) {
+			$key = $iYear . '-' . DIDate::padNumber($week,2);
+			$series[$key] = 0;
+		}
+		return $series;
+	}
+	
+	function addDaySeries($iYear, $iMonth, $iDayBegin, $iDayEnd) {
+		$series = array();
+		return $series;
+	}
 	
 	function completeTimeSeries($opc, $val, $q) {
 		$dateini = "";
@@ -585,7 +602,7 @@ class Graphic {
 		if (isset($qend[0])) {
 			// If no month/day value specified in query, set default to YEAR/12/31 or end of month
 			if ($qend[1] == '') { $qend[1] = '12'; }
-			if ($qend[2] == '') { $qend[2] = DIDate::getLastDayOfMonth($qend[0],$qend[1]); }
+			if ($qend[2] == '') { $qend[2] = DIDate::getDaysOfMonth($qend[0],$qend[1]); }
 			$dateend = sprintf("%04d-%02d-%02d", $qend[0], $qend[1], $qend[2]);
 		} else {
 			$dateend = $ydb[0];
