@@ -32,5 +32,34 @@
 			} //if
 			return $Day;
 		} //function
+		
+		public static function getYear($prmDate) {
+			$Year = trim(substr($prmDate,0,4));
+			return $Year;
+		}
+		public static function getMonth($prmDate) {
+			$Month = trim(substr($prmDate, 5, 2));
+			return $Month;
+		}
+		public static function getDay($prmDate) {
+			$Day = trim(substr($prmDate, 8, 2));
+			return $Day;
+		}
+
+		public static function getWeekOfYear($prmDate) {
+			$iWeek = date("W", mktime(5, 0, 0, DIDate::getMonth($prmDate),
+			                                   DIDate::getDay($prmDate),
+			                                   DIDate::getyear($prmDate)
+			    ));
+			return $iWeek;
+		} //function
+		
+		public static function padNumber($prmValue, $prmLength) {
+			$value = $prmValue;
+			while(strlen($value) < $prmLength) {
+				$value = '0' . $value;
+			}
+			return $value;
+		}
 	} //class
 </script>

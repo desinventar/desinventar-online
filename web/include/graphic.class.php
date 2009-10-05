@@ -84,6 +84,13 @@ class Graphic {
 			}
 		}
 		
+		if ($GraphOptions['Type'] == 'HISTOGRAM') {
+			$DataSeries = array();
+			for($i=0;$i<$GraphOptions['NumSeries'];$i++) {
+				$DataSeries[$i] = $this->getTimeSeries('1914-05-13','1916-03-10', $GraphOptions['Period']);
+			}
+		}
+		
 		// Process Data Series
 		$val = array();
 		// get Period and Stationality of the Graph (YEAR, YMONTH, YWEEK, YDAY)
@@ -489,6 +496,75 @@ class Graphic {
 		                  (int)substr($sMyDate,0,4)));
 		return $iWeek;
 	}
+
+	function getTimeSeries($prmDateBegin, $prmDateEnd, $prmPeriod) {
+		fb($prmPeriod);
+		$series = array();
+		switch ($prmPeriod) {
+			case 'YEAR' :
+				$iYearBegin = DIDate::getYear($prmDateBegin);
+				$iYearEnd   = DIDate::getYear($prmDateEnd);
+				fb($iYearBegin);
+				fb($iYearEnd);
+				for($year=$iYearBegin;$year<=$iYearEnd;$year++) {
+					$series[$year] = 0;
+				}
+			break;
+			case 'YMONTH':
+				$iYearBegin = DIDate::getYear($prmDateBegin);
+				$iYearEnd   = DIDate::getYear($prmDateEnd);		
+				$iMonthBegin = DIDate::getMonth($prmDateBegin);
+				$iMonthEnd   = DIDate::getMonth($prmDateEnd);
+				
+				//Months from first Year
+				for($month=$iMonthBegin;$month<=12;$month++) {
+					$key = $iYearBegin . '-' . DIDate::padNumber($month,2);
+					$series[$key] = 0;
+				}
+
+				// Months from Intermediate Years
+				for($year=$iYearBegin + 1; $year<=$iYearEnd - 1; $year++) {
+					for($month=1;$month<=12;$month++) {
+						$key = $year . '-' . DIDate::padNumber($month,2);
+						$series[$key] = 0;
+					}
+				}
+				// Months in last year
+				for($month=1;$month<=$iMonthEnd;$month++) {
+					$key = $iYearEnd . '-' . DIDate::padNumber($month,2);
+					$series[$key] = 0;
+				}
+			break;
+			case 'YWEEK':
+				$iYearBegin = DIDate::getYear($prmDateBegin);
+				$iYearEnd   = DIDate::getYear($prmDateEnd);
+				$iWeekBegin = DIDate::getWeekOfYear($prmDateBegin);
+				$iWeekEnd   = DIDate::getWeekOfYear($prmDateEnd);
+				//Weeks from first Year
+				for($week=$iWeekBegin;$week<=52;$week++) {
+					$key = $iYearBegin . '-' . DIDate::padNumber($week,2);
+					$series[$key] = 0;
+				}
+
+				// Weeks from Intermediate Years
+				for($year=$iYearBegin + 1; $year<=$iYearEnd - 1; $year++) {
+					for($week=1;$week<=52;$week++) {
+						$key = $year . '-' . DIDate::padNumber($week,2);
+						$series[$key] = 0;
+					}
+				}
+				// Weeks in last year
+				for($week=1;$week<=$iWeekEnd;$week++) {
+					$key = $iYearEnd . '-' . DIDate::padNumber($week,2);
+					$series[$key] = 0;
+				}
+			break;
+			case 'YDAY':
+			break;
+		} //switch
+		fb($series);
+		return $series;
+	} //function
 	
 	function completeTimeSeries($opc, $val, $q) {
 		$dateini = "";
