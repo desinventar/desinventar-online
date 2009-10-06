@@ -11,9 +11,6 @@ require_once('include/diobject.class.php');
 require_once('include/digeolevel.class.php');
 require_once('include/digeocarto.class.php');
 
-$post = $_POST;
-$get = $_GET;
-
 function form2data($frm, $RegionId) {
 	$dat = array();
 	$dat['GeoLevelId'] = isset($frm['GeoLevelId']) ? $frm['GeoLevelId'] : -1;
@@ -37,6 +34,9 @@ function form2data($frm, $RegionId) {
 	$dat['GeoLevelLayerName'] = isset($frm['GeoLevelLayerName']) ? $frm['GeoLevelLayerName']: '';
 	return $dat;
 }
+
+$post = $_POST;
+$get = $_GET;
 
 if (isset($post['_REG']) && !empty($post['_REG'])) {
 	$reg = $post['_REG'];
