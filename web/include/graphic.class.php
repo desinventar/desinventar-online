@@ -30,6 +30,8 @@ class Graphic {
 		$GraphOptions['Type']      = 'HISTOGRAM';
 		$GraphOptions['Display']   = 'CARTESIAN';
 		$GraphOptions['Period']    = 'YEAR';
+		$GraphOptions['Title']     = $opc['_G+Title'];
+		$GraphOptions['SubTitle']  = $opc['_G+SubTitle'];
 		// Calculate How many Data Series we have...
 		$GraphOptions['NumSeries'] = 1;
 		if (isset($opc['_G+Field2']) && ($opc['_G+Field2']!='')) {
@@ -38,8 +40,9 @@ class Graphic {
 		for ($i=0;$i<$GraphOptions['NumSeries'];$i++) {
 			$GraphOptions[$i] = array();
 			$GraphOptions[$i]['Values'] = 'NONE';
-			$GraphOptions[$i]['Title']  = '';
+			$GraphOptions[$i]['AxisTitle']  = '';
 			$GraphOptions[$i]['Mode']   = '';
+			$GraphOptions[$i]['Scale']  = 'int';
 		}
 		if (isset($opc['_G+Period']))
 			$GraphOptions['Period'] = $opc['_G+Period'];
@@ -55,22 +58,30 @@ class Graphic {
 		if (isset($opc['_G+Mode2'])) {
 			$GraphOptions[1]['Mode'] = $opc['_G+Mode2'];
 		}
+		if (isset($opc['_G+Scale'])) {
+			$GraphOptions[0]['Scale'] = $opc['_G+Scale'];
+		}
+		if (isset($opc['_G+Scale2'])) {
+			$GraphOptions[1]['Scale'] = $opc['_G+Scale2'];
+		}
 		$kind = $opc['_G+Kind'];
 
 		// Get Label Information
 		$GraphLabels = array_keys($data);
 		$GraphOptions['XAxisTitle']  = current($GraphLabels);
 		for($i=0;$i<$GraphOptions['NumSeries']; $i++) {
-			$GraphOptions[$i]['Title'] = $GraphLabels[$i+1];
+			$GraphOptions[$i]['AxisTitle'] = $GraphLabels[$i+1];
 		}
 
 		// Determine graphic type
 		if (substr($opc['_G+Type'],2,18) == "DisasterBeginTime|") {
 			$gType = "XTEMPO";				// One var x Event/Temporal..
-			$GraphOptions['Type'] = 'HISTOGRAM';
+			$GraphOptions['Type']    = 'HISTOGRAM';
+			$GraphOptions['SubType'] = 'OTHER';
 		} elseif (substr($opc['_G+Type'],2,17) == "DisasterBeginTime") {
 			$gType = "TEMPO";				// One var x time
-			$GraphOptions['Type'] = 'HISTOGRAM';
+			$GraphOptions['Type']    = 'HISTOGRAM';
+			$GraphOptions['SubType'] = 'TEMPORAL';
 			// Set 2 axis graph only in Bars..
 			if (isset($opc['_G+Field2']) && !empty($opc['_G+Field2']) && ($kind == "BAR" || $kind == "LINE")) {
 				$gType = "2TEMPO";			// Two vars x time
@@ -83,11 +94,33 @@ class Graphic {
 				$gType = $kind;				// Pie Comparatives
 			}
 		}
+
+		// Calculate Start and End dates of Temporal Graphics
+		$DateBegin = $opc['D_DisasterBeginTime'];
+		$DateEnd   = $opc['D_DisasterEndTime'];
+		$DBDateRange = $q->getDateRange();
+		if (isset($DateBegin[0])) {
+			// If no month/day value specified, set default date to YEAR/01/01 or start of month
+			if ($DateBegin[1] == '') { $DateBegin[1] = '1'; }
+			if ($DateBegin[2] == '') { $DateBegin[2] = '1'; }
+			$GraphOptions['DateBegin'] = sprintf("%04d-%02d-%02d", $DateBegin[0], $DateBegin[1], $DateBegin[2]);
+		} else {
+			$GraphOptions['DateBegin'] = $DBDateRange[0];
+		}
+		if (isset($DateEnd[0])) {
+			// If no month/day value specified in query, set default to YEAR/12/31 or end of month
+			if ($DateEnd[1] == '') { $DateEnd[1] = '12'; }
+			if ($DateEnd[2] == '') { $DateEnd[2] = DIDate::getDaysOfMonth($DateEnd[0],$DateEnd[1]); }
+			$GraphOptions['DateEnd'] = sprintf("%04d-%02d-%02d", $DateEnd[0], $DateEnd[1], $DateEnd[2]);
+		} else {
+			$GraphOptions['DateEnd'] = $DBDateRange[1];
+		}
 		
 		if ($GraphOptions['Type'] == 'HISTOGRAM') {
 			$DataSeries = array();
-			for($i=0;$i<$GraphOptions['NumSeries'];$i++) {
-				$DataSeries[$i] = $this->getTimeSeries('1914-05-13','1916-03-10', $GraphOptions['Period']);
+			$DataSeries[0] = $this->getTimeSeries($GraphOptions['DateBegin'],$GraphOptions['DateEnd'], $GraphOptions['Period']);
+			for($i=1;$i<$GraphOptions['NumSeries'];$i++) {
+				$DataSeries[$i] = $DataSeries[0];
 			}
 		}
 		
@@ -106,25 +139,25 @@ class Graphic {
 			elseif ($kind == "LINE")
 				$kind = "MULTILINE";
 			// Convert data in matrix [EVENT][YEAR]=>VALUE
-			foreach ($data[$GraphOptions[1]['Title']] as $k=>$i) {
+			foreach ($data[$GraphOptions[1]['AxisTitle']] as $k=>$i) {
 				foreach ($data[$GraphOptions['XAxisTitle']] as $l=>$j) {
 					if ($k == $l)
-						$tvl[$i][$j] = $data[$GraphOptions[0]['Title']][$k];
+						$tvl[$i][$j] = $data[$GraphOptions[0]['AxisTitle']][$k];
 				}
 			}
 			foreach ($tvl as $kk=>$ii)
 				$val[$kk] = $this->completeTimeSeries($opc, $ii, $q);
 			$XAxisLabels = array_keys($val[$kk]);
-			$acol = count(array_unique($data[$GraphOptions[1]['Title']]));
+			$acol = count(array_unique($data[$GraphOptions[1]['AxisTitle']]));
 		} else {
 			// Normal Graph (BAR, LINE, PIE)
 			$n = 0;
 			$acol = 1;
 			// Set Array to [YEAR]=> { VALUE1, VALUE2 }  OR Set Array to [YEAR]=>VALUE
-			foreach ($data[$GraphOptions[0]['Title']] as $Key=>$Value) {
+			foreach ($data[$GraphOptions[0]['AxisTitle']] as $Key=>$Value) {
 				if ($data[$GraphOptions['XAxisTitle']][$n] != "00") {
 					if ($gType == "2TEMPO" || $gType == "2COMPAR")
-						$val[$data[$GraphOptions['XAxisTitle']][$Key]] = array($Value, $data[$GraphOptions[1]['Title']][$Key]);
+						$val[$data[$GraphOptions['XAxisTitle']][$Key]] = array($Value, $data[$GraphOptions[1]['AxisTitle']][$Key]);
 					else
 						$val[$data[$GraphOptions['XAxisTitle']][$Key]] = $Value;
 					$acol++;
@@ -196,7 +229,7 @@ class Graphic {
 			// Calculate Legend Size based on label's length
 			$MaxLabelLen = 0;
 			for($i=0;$i<$GraphOptions['NumSeries'];$i++) {
-				$Label = $GraphOptions[$i]['Title'];
+				$Label = $GraphOptions[$i]['AxisTitle'];
 				$LabelLen = strlen($Label) * 7;
 				if ($LabelLen > $MaxLabelLen) {
 					$MaxLabelLen = $LabelLen;
@@ -261,7 +294,7 @@ class Graphic {
 			// Pie Graphs
 			$this->g = new PieGraph($GraphWidth, $GraphHeight, "auto");
 			// Set label with variable displayed
-			$t1 = new Text($GraphOptions[0]['Title']);
+			$t1 = new Text($GraphOptions[0]['AxisTitle']);
 			$t1->SetPos(0.30, 0.8);
 			$t1->SetOrientation("h");
 			$t1->SetFont(FF_ARIAL,FS_NORMAL);
@@ -269,39 +302,47 @@ class Graphic {
 			$t1->SetColor("black");
 			$this->g->AddText($t1);
 		} else {
-			// Carterisn Graphs (X,Y)
+			// Cartesian Graph (X,Y) BAR/LINE
 			$this->g = new Graph($GraphWidth, $GraphHeight, "auto");
-			if (isset($opc['_G+Scale'])) {
-				$this->g->SetScale($opc['_G+Scale']); // textint, textlog
-				$this->g->xgrid->Show(true,true);
-				$this->g->xaxis->SetTitle($GraphOptions['XAxisTitle'], 'middle');
-				$this->g->xaxis->SetTitleMargin($YBottomMargin - 40);
-				$this->g->xaxis->title->SetFont(FF_ARIAL, FS_NORMAL);
-				$this->g->xaxis->SetTickLabels($XAxisLabels);
-				$this->g->xaxis->SetFont(FF_COURIER,FS_NORMAL, 8);
-				$this->g->xaxis->SetTextLabelInterval($iInterval);
-				$this->g->xaxis->SetLabelAngle(90);
-				$this->g->xaxis->SetLabelAlign('center','top');
-				$this->g->ygrid->Show(true,true);
-				$this->g->yaxis->SetTitle($GraphOptions[0]['Title'], 'middle');
-				$this->g->yaxis->SetTitleMargin(40);
-				$this->g->yaxis->title->SetFont(FF_ARIAL, FS_NORMAL);
-				$this->g->yaxis->scale->SetGrace(0);
-				$this->g->yaxis->SetColor('darkblue');
-				if ($opc['_G+Scale'] == "textlog")
-					$this->g->yaxis->scale->ticks->SetLabelLogType(LOGLABELS_PLAIN);
-		        if (isset($opc['_G+Scale2']) && ($gType == "2TEMPO" || $gType == "2COMPAR")) {
-					$this->g->SetY2Scale($opc['_G+Scale2']);	// int, log
-					$this->g->y2grid->Show(true,true);
-					$this->g->y2axis->SetTitle($GraphOptions[1]['Title'], 'middle');
-					$this->g->y2axis->SetTitleMargin(50);
-					$this->g->y2axis->title->SetFont(FF_ARIAL, FS_NORMAL);
-					$this->g->y2axis->scale->SetGrace(0);
-					$this->g->y2axis->SetColor('darkred');
-					if ($opc['_G+Scale2'] == "log")
-						$this->g->y2axis->scale->ticks->SetLabelLogType(LOGLABELS_PLAIN);
+			$this->g->SetScale($GraphOptions[0]['Scale']); // textint, textlog
+			$this->g->xgrid->Show(true,true);
+
+			// Configure XAxis			
+			$xaxis = $this->g->xaxis;
+			$xaxis->SetTitle($GraphOptions['XAxisTitle'], 'middle');
+			$xaxis->SetTitleMargin($YBottomMargin - 40);
+			$xaxis->title->SetFont(FF_ARIAL, FS_NORMAL);
+			$xaxis->SetTickLabels($XAxisLabels);
+			$xaxis->SetFont(FF_COURIER,FS_NORMAL, 8);
+			$xaxis->SetTextLabelInterval($iInterval);
+			$xaxis->SetLabelAngle(90);
+			$xaxis->SetLabelAlign('center','top');
+					
+			$this->g->ygrid->Show(true,true);
+			
+			$yaxis = $this->g->yaxis;
+			$yaxis->SetTitle($GraphOptions[0]['AxisTitle'], 'middle');
+			$yaxis->SetTitleMargin(40);
+			$yaxis->title->SetFont(FF_ARIAL, FS_NORMAL);
+			$yaxis->scale->SetGrace(0);
+			$yaxis->SetColor('darkblue');
+			if ($GraphOptions[0]['Scale'] == "textlog") {
+				$yaxis->scale->ticks->SetLabelLogType(LOGLABELS_PLAIN);
+			}
+			
+			if ($GraphOptions['NumSeries'] > 1) {
+				$this->g->SetY2Scale($GraphOptions[1]['Scale']);	// int, log
+				$this->g->y2grid->Show(true,true);
+				$y2axis = $this->g->y2axis;
+				$y2axis->SetTitle($GraphOptions[1]['AxisTitle'], 'middle');
+				$y2axis->SetTitleMargin(50);
+				$y2axis->title->SetFont(FF_ARIAL, FS_NORMAL);
+				$y2axis->scale->SetGrace(0);
+				$y2axis->SetColor('darkred');
+				if ($GraphOptions[1]['Scale'] == "log") {
+					$y2axis->scale->ticks->SetLabelLogType(LOGLABELS_PLAIN);
 		        }
-			} // if G+Scale
+			}
 		}
 		// Other options graphic
 		$this->g->img->SetMargin(50,$XRightMargin,30,$YBottomMargin);
@@ -314,8 +355,8 @@ class Graphic {
 		}
 		
 		$this->g->SetFrame(false);
-		$title = wordwrap($opc['_G+Title'], 80);
-		$subti = wordwrap($opc['_G+Title2'], 100);
+		$title = wordwrap($GraphOptions['Title']   , 80);
+		$subti = wordwrap($GraphOptions['SubTitle'], 100);
 		$this->g->title->Set($title);
 		$this->g->subtitle->Set($subti);
 		$this->g->title->SetFont(FF_ARIAL,FS_NORMAL, 12);
@@ -392,8 +433,8 @@ class Graphic {
 					$zp = $this->addBarPlot($opc, $zo, "");
 					$y1 = $this->addBarPlot($opc, $val1, "darkblue");
 					$y2 = $this->addBarPlot($opc, $val2, "darkred");
-					$y1->SetLegend($GraphOptions[0]['Title']);
-					$y2->SetLegend($GraphOptions[1]['Title']);
+					$y1->SetLegend($GraphOptions[0]['AxisTitle']);
+					$y2->SetLegend($GraphOptions[1]['AxisTitle']);
 					$y1p = new GroupBarPlot(array($y1, $zp));
 					$y2p = new GroupBarPlot(array($zp, $y2));
 					$this->g->Add($y1p);
@@ -435,8 +476,8 @@ class Graphic {
 				} elseif ($gType == "2TEMPO" || $gType == "2COMPAR") {
 					$y1p = $this->addLinePlot($opc, $val1, "darkblue");
 					$y2p = $this->addLinePlot($opc, $val2, "darkred");
-					$y1p->SetLegend($GraphOptions[0]['Title']);
-					$y2p->SetLegend($GraphOptions[1]['Title']);
+					$y1p->SetLegend($GraphOptions[0]['AxisTitle']);
+					$y2p->SetLegend($GraphOptions[1]['AxisTitle']);
 					$this->g->Add($y1p);
 					$this->g->AddY2($y2p);
 				}
@@ -617,7 +658,7 @@ class Graphic {
 			if ($qend[2] == '') { $qend[2] = DIDate::getDaysOfMonth($qend[0],$qend[1]); }
 			$dateend = sprintf("%04d-%02d-%02d", $qend[0], $qend[1], $qend[2]);
 		} else {
-			$dateend = $ydb[0];
+			$dateend = $ydb[1];
 		}
 		// Calculate Start Date/EndDate, from Database or From Query
 		// Delete initial columns with null values (MONTH,DAY=0)
