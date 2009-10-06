@@ -6,6 +6,8 @@
  ***********************************************/
 
 require_once('include/loader.php');
+require_once('include/diobject.class.php');
+require_once('include/diregion.class.php');
 
 function getRAPermList($lst) {
 	$dat = array();
@@ -16,30 +18,38 @@ function getRAPermList($lst) {
 	return $dat;
 }
 
+function form2data($form) {
+	$dat = array();
+	foreach ($form as $key=>$value) {
+		$k = split('_', $key);
+		$dat[$k[0]] = $value;
+	}
+	return $dat;
+}
+
+$post = $_POST;
 $get = $_GET;
 
-if (isset($get['r']) && !empty($get['r'])) {
+if (isset($post['_REG']) && !empty($post['_REG'])) {
+	$reg = $post['_REG'];
+	$infocmd = $post['_infocmd'];
+}
+elseif (isset($get['r']) && !empty($get['r'])) {
 	$reg = $get['r'];
-	$us->open($reg);
 }
 else
 	exit();
 
+$us->open($reg);
+
 // EDIT REGION: Form to Create and assign regions
-if (isset($get['infocmd'])) {
-	$mod = "info";
-	$cmd = $get['infocmd'];
-	if (isset($get['OptionOutOfPeriod']) && $get['OptionOutOfPeriod'] == "on")
-		$optout = 1;
-	else
-		$optout = 0;
+if (isset($infocmd)) {
 	$ifo = 0;
-	// Replace this call with a new class (2009-07-06) (jhcaiced)
-	/*
-	$ifo = $r->updateDBInfo($reg, $get['RegionLabel'], $get['RegionDesc'], $get['RegionDescEN'], 
-							$get['RegionLangCode'], $get['PeriodBeginDate'], $get['PeriodEndDate'], $optout, 
-							$get['GeoLimitMinX'], $get['GeoLimitMinY'], $get['GeoLimitMaxX'], $get['GeoLimitMaxY']);
-	*/					
+	$data = form2data($post);
+	print_r($data);
+	$r = new DIRegion($us, $data['RegionId']);
+	$r->setFromArray($data);
+	$ifo = $r->update();
 	if (!iserror($ifo)) 
 		$t->assign ("ctl_msgupdinfo", true);
 	else {
@@ -49,7 +59,6 @@ if (isset($get['infocmd'])) {
 }
 // EDIT ROLE: Form to Create and assign role
 elseif (isset($get['rolecmd'])) {
-	$mod = "role";
 	$cmd = $get['rolecmd'];
 	if (($cmd == "insert") || ($cmd == "update")) {
 		// Set Role in RegionAuth
@@ -69,7 +78,6 @@ elseif (isset($get['rolecmd'])) {
 }
 // EDIT REGION: Form to Create and assign regions
 elseif (isset($get['logcmd'])) {
-	$mod = "log";
 	$cmd = $get['logcmd']; 
 	if ($cmd == "insert") {
 		$stat = 1;
@@ -81,7 +89,8 @@ elseif (isset($get['logcmd'])) {
 			$t->assign ("ctl_errinslog", true);
 			$t->assign ("insstatlog", $stat);
 		}
-	} elseif ($cmd == "update") {
+	}
+	elseif ($cmd == "update") {
 		$stat = 1;
 		// 2009-07-06 (jhcaiced) Replace this with another class...
 		//$stat = $r->updateRegLog($get['DBLogDate'], $get['DBLogType'], $get['DBLogNotes']);
@@ -91,36 +100,39 @@ elseif (isset($get['logcmd'])) {
 			$t->assign ("ctl_errupdlog", true);
 			$t->assign ("updstatlog", showerror($stat));
 		}
-	} elseif ($cmd == "list") {
+	}
+	elseif ($cmd == "list") {
 		// reload list from local SQLITE
-		if ($mod == "log") {
-			$t->assign ("log", $us->q->getRegLogList());
-			$t->assign ("ctl_loglist", true);
-		}
+		$t->assign ("log", $us->q->getRegLogList());
+		$t->assign ("ctl_loglist", true);
 	}
 }
 else {
 	if ($urol == "OBSERVER")
 		$t->assign ("ro", "disabled");
-	$lang = $_SESSION['lang'];
+	$lang[0] = ''; //$_SESSION['lang'];
+	$lang[1] = 'eng';
 	$inf = $us->q->getDBInfo();
-	$info['InfoCredits'] 	= array($inf['InfoCredits|'. $lang], "TEXT");
-	$info['InfoGeneral'] 	= array($inf['InfoGeneral|'. $lang], "TEXT");
-	$info['InfoSources'] 	= array($inf['InfoSources|'. $lang], "TEXT");
-	$info['InfoSynopsis'] 	= array($inf['InfoSynopsis|'. $lang], "TEXT");
-	$info['InfoObservation']= array($inf['InfoObservation|'. $lang], "TEXT");
-	$info['InfoGeography']	= array($inf['InfoGeography|'. $lang], "TEXT");
-	$info['InfoCartography']= array($inf['InfoCartography|'. $lang], "TEXT");
-	$info['InfoAdminURL']	= array($inf['InfoAdminURL|'. $lang], "VARCHAR");
-	$info['GeoLimitMinX']	= array($inf['GeoLimitMinX|'. $lang], "NUMBER");
-	$info['GeoLimitMinY']	= array($inf['GeoLimitMinY|'. $lang], "NUMBER");
-	$info['GeoLimitMaxX']	= array($inf['GeoLimitMaxX|'. $lang], "NUMBER");
-	$info['GeoLimitMaxY']	= array($inf['GeoLimitMaxY|'. $lang], "NUMBER");
-	$info['PeriodBeginDate']= array($inf['PeriodBeginDate|'. $lang], "NUMBER");
-	$info['PeriodEndDate']	= array($inf['PeriodEndDate|'. $lang], "NUMBER");
+	foreach ($lang as $lng) {
+		$info[$lng]['InfoCredits'] 		= array($inf['InfoCredits|'. $lng], "TEXT");
+		$info[$lng]['InfoGeneral'] 		= array($inf['InfoGeneral|'. $lng], "TEXT");
+		$info[$lng]['InfoSources'] 		= array($inf['InfoSources|'. $lng], "TEXT");
+		$info[$lng]['InfoSynopsis'] 	= array($inf['InfoSynopsis|'. $lng], "TEXT");
+		$info[$lng]['InfoObservation']	= array($inf['InfoObservation|'. $lng], "TEXT");
+		$info[$lng]['InfoGeography']	= array($inf['InfoGeography|'. $lng], "TEXT");
+		$info[$lng]['InfoCartography']	= array($inf['InfoCartography|'. $lng], "TEXT");
+		$info[$lng]['InfoAdminURL']		= array($inf['InfoAdminURL|'. $lng], "VARCHAR");
+	}
 	$t->assign ("info", $info);
+	$sett['GeoLimitMinX']	= array($inf['GeoLimitMinX|'], "NUMBER");
+	$sett['GeoLimitMinY']	= array($inf['GeoLimitMinY|'], "NUMBER");
+	$sett['GeoLimitMaxX']	= array($inf['GeoLimitMaxX|'], "NUMBER");
+	$sett['GeoLimitMaxY']	= array($inf['GeoLimitMaxY|'], "NUMBER");
+	$sett['PeriodBeginDate']= array($inf['PeriodBeginDate|'], "DATE");
+	$sett['PeriodEndDate']	= array($inf['PeriodEndDate|'], "DATE");
+	$t->assign ("sett", $sett);
 	$urol = $us->getUserRole($reg);
-	$t->assign ("usr", $us->getUserFullName(''));
+	//$t->assign ("usr", $us->getUserFullName(''));
 	$t->assign ("usr", $us->getUsersList(''));
 	$t->assign ("rol", $us->getRegionRoleList($reg));
 	$t->assign ("log", $us->q->getRegLogList());

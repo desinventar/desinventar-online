@@ -11,26 +11,52 @@
 	<tr valign="top">
 	<td>
 		<fieldset style="padding:5px 5px 5px 5px;">
-		<legend><b onMouseOver="showtip('{-$dic.DBRegion[2]-}');">{-$dic.DBRegion[0]-}</b></legend>
 <!-- GENERAL REGION INFO SECTION -->
-		<form name="infofrm" id="infofrm" method="GET"
-			action="javascript: var s=$('infofrm').serialize(); mod='info'; sendData('{-$reg-}', 'info.php', s, '');"
-			onSubmit="javascript: var a=new Array('RegionDesc'); return(checkForm(a, '{-#errmsgfrm#-}'));">
+		<form name="infofrm" id="infofrm" method="POST" action="info.php" target="ifinfo" enctype="multipart/form-data">
 			<table border="0" cellspacing="0" cellpadding="0">
-{-foreach name=info key=key item=item from=$info-}
+			<tr>
+			<td colspan="2">
+{-foreach name=info key=k item=i from=$info-}
+				<fieldset>
+				<legend><a href="javascript:void(null)" onClick="if($('inf{-$k-}').style.display=='block') 
+					$('inf{-$k-}').style.display='none'; else $('inf{-$k-}').style.display='block';"><b 
+					onMouseOver="showtip('{-$dic.DBRegion[2]-}');">{-$dic.DBRegion[0]-} {-$k-}</b></a></legend>
+				<table id="inf{-$k-}" border="0" style="display:{-if ($smarty.foreach.info.iteration) == 1-}block{-else-}none{-/if-};">
+{-foreach name=iitt key=key item=item from=$i-}
+{-assign var="inf" value=DB$key-}
+{-assign var="tabind" value="`$tabind+1`"-}
+				<tr>
+				<td align="right">
+					<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.$inf[2]-}')">
+					<b style="color:darkred;">{-$dic.$inf[0]-}</b><span>{-$dic.$inf[1]-}</span></a>
+				</td>
+				<td>
+{-if $item[1] == "TEXT"-}
+					<textarea id="{-$key-}_{-$k-}" name="{-$key-}_{-$k-}" {-$ro-} style="width:350px; height:30px;" tabindex="{-$tabind-}"
+						onFocus="showtip('{-$dic.$inf[2]-}')">{-$item[0]-}</textarea>
+{-elseif $item[1] == "VARCHAR"-}
+					<input id="{-$key-}_{-$k-}" name="{-$key-}_{-$k-}" type="text" class="line" style="width:350px;" 
+						value="{-$item[0]-}" tabindex="{-$tabind-}"/>
+{-/if-}
+				</td>
+				</tr>
+{-/foreach-}
+				</table>
+				</fieldset>
+{-/foreach-}
+			</td>
+			</tr>
+{-foreach name=sett key=key item=item from=$sett-}
 {-assign var="inf" value=DB$key-}
 {-assign var="tabind" value="`$tabind+1`"-}
 			<tr>
-			<td>
+			<td align="right">
 				<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.$inf[2]-}')">
 				<b style="color:darkred;">{-$dic.$inf[0]-}</b><span>{-$dic.$inf[1]-}</span></a>
 			</td>
 			<td>
-{-if $item[1] == "TEXT"-}
-				<textarea id="{-$key-}" name="{-$key-}" {-$ro-} style="width:350px; height:40px;" tabindex="{-$tabind-}"
-					onFocus="showtip('{-$dic.$inf[2]-}')">{-$item[0]-}</textarea>
-{-elseif $item[1] == "VARCHAR"-}
-				<input id="{-$key-}" name="{-$key-}" type="text" class="line" style="width:350px;" value="{-$item[0]-}" tabindex="{-$tabind-}"/>
+{-if $item[1] == "DATE"-}
+				<input id="{-$key-}" name="{-$key-}" type="text" class="line" style="width:120px;" value="{-$item[0]-}" tabindex="{-$tabind-}"/>
 {-elseif $item[1] == "NUMBER"-}
 				<input id="{-$key-}" name="{-$key-}" type="text" class="line" style="width:40px;" value="{-$item[0]-}" tabindex="{-$tabind-}"/>
 {-/if-}
@@ -38,14 +64,22 @@
 			</tr>
 {-/foreach-}
 			<tr>
+			<td align="right">
+				<b>Logo imagen</b>
+			</td>
+			<td>
+				<input type="file" name="logofile" />
+			</td>
+			</tr>
+			<tr>
 			<td colspan="2" align="center">
-				<span id="infoaddsect"></span>
-				<input name="r" type="hidden" value="{-$reg-}" />
-				<input id="infocmd" name="infocmd" value="update" type="hidden" />
+				<br />
+				<input name="_REG" type="hidden" value="{-$reg-}" />
+				<input id="_infocmd" name="_infocmd" value="update" type="hidden" />
 				<input type="submit" value="{-#bsave#-}" {-$ro-} class="line"/>
 				<input type="reset" value="{-#bcancel#-}" {-$ro-} onclick="mod='info'; uploadMsg('');" class="line" />
 				<br />
-				<span id="infostatusmsg" class="dlgmsg"></span>
+				<iframe name="ifinfo" id="ifinfo" frameborder="1" src="about:blank" style="height:30px; width:150px;"></iframe>
 			</td>
 			</tr>
 			</table>
@@ -202,8 +236,8 @@
 		</div>
 		</fieldset>
 	</td>
-  </tr>
- </table>
+	</tr>
+	</table>
 </body>
 </html>
 {-/if-}
