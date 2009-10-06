@@ -87,7 +87,7 @@ class Graphic {
 		if ($GraphOptions['Type'] == 'HISTOGRAM') {
 			$DataSeries = array();
 			for($i=0;$i<$GraphOptions['NumSeries'];$i++) {
-				//$DataSeries[$i] = $this->getTimeSeries('1914-05-13','1916-03-10', $GraphOptions['Period']);
+				$DataSeries[$i] = $this->getTimeSeries('1914-05-13','1916-03-10', $GraphOptions['Period']);
 			}
 		}
 		
@@ -498,12 +498,12 @@ class Graphic {
 	}
 
 	function getTimeSeries($prmDateBegin, $prmDateEnd, $prmPeriod) {
-		fb($prmPeriod);
-
-		$iYearBegin = DIDate::getYear($prmDateBegin);
-		$iYearEnd   = DIDate::getYear($prmDateEnd);
-		$iWeekBegin = DIDate::getWeekOfYear($prmDateBegin);
-		$iWeekEnd   = DIDate::getWeekOfYear($prmDateEnd);
+		$iYearBegin  = DIDate::getYear($prmDateBegin);
+		$iYearEnd    = DIDate::getYear($prmDateEnd);
+		$iWeekBegin  = DIDate::getWeekOfYear($prmDateBegin);
+		$iWeekEnd    = DIDate::getWeekOfYear($prmDateEnd);
+		$iMonthBegin = DIDate::getMonth($prmDateBegin);
+		$iMonthEnd   = DIDate::getMonth($prmDateEnd);
 
 		$series = array();
 		switch ($prmPeriod) {
@@ -524,39 +524,37 @@ class Graphic {
 			break;
 			case 'YWEEK':
 				//Weeks from first Year
-				for($week=$iWeekBegin;$week<=52;$week++) {
-					$key = $iYearBegin . '-' . DIDate::padNumber($week,2);
-					$series[$key] = 0;
-				}
-
+				$series = array_merge($series, $this->addWeekSeries($iYearBegin, $iWeekBegin, 53));
 				// Weeks from Intermediate Years
 				for($year=$iYearBegin + 1; $year<=$iYearEnd - 1; $year++) {
-					for($week=1;$week<=52;$week++) {
-						$key = $year . '-' . DIDate::padNumber($week,2);
-						$series[$key] = 0;
-					}
+					$series = array_merge($series, $this->addWeekSeries($year, 1, 53));
 				}
 				// Weeks in last year
-				for($week=1;$week<=$iWeekEnd;$week++) {
-					$key = $iYearEnd . '-' . DIDate::padNumber($week,2);
-					$series[$key] = 0;
-				}
+				$series = array_merge($series, $this->addWeekSeries($iYearEnd, 1, $iWeekEnd));
 			break;
 			case 'YDAY':
 				$iDayBegin = DIDate::getDay($prmDateBegin);
-				$idayEnd   = DIDate::getDay($prmDateEnd);
+				$iDayEnd   = DIDate::getDay($prmDateEnd);
+				// Days from first year/month
+				$series = array_merge($series, $this->addDaySeries($iYearBegin, $iMonthBegin, $iDayBegin, 31));
+				// Days from first year/other months
+				for($month=$iMonthBegin + 1; $month <= 12; $month++) {
+					$series = array_merge($series, $this->addDaySeries($iYearBegin, $month, 1, 31));
+				}
 				// Days from Intermediate Years
 				for($year=$iYearBegin + 1; $year<=$iYearEnd - 1; $year++) {
-					for($month=1;$month<=12;$month++) {
-						for($day=1;$day<=DIDate::getDaysOfMonth($year,$month);$day++) {
-							$key = $year . '-' . DIDate::padNumber($month,2) . '-' . DIDate::padNumber($day,2);
-							$series[$key] = 0;
-						}
+					for($month=1;$month<=12; $month++) {
+						$series = array_merge($series, $this->addDaySeries($year, $month, 1, 31));
 					}
 				}
+				// Days from last year/other months
+				for($month=1; $month <= $iMonthEnd - 1; $month++) {
+					$series = array_merge($series, $this->addDaySeries($iYearEnd, $month, 1, 31));
+				}
+				// Days from last year/last month
+				$series = array_merge($series, $this->addDaySeries($iYearEnd, $iMonthEnd, 1, $iDayEnd));				
 			break;
 		} //switch
-		fb($series);
 		return $series;
 	} //function
 	
@@ -570,6 +568,11 @@ class Graphic {
 	}
 	
 	function addWeekSeries($iYear, $iWeekBegin, $iWeekEnd) {
+		//Fix las week of year if needed
+		$iWeeks = DIDate::getWeeksOfYear($iYear);
+		if ($iWeekEnd > $iWeeks) {
+			$iWeekEnd = $iWeeks;
+		}
 		$series = array();
 		for($week=$iWeekBegin;$week<=$iWeekEnd;$week++) {
 			$key = $iYear . '-' . DIDate::padNumber($week,2);
@@ -579,7 +582,16 @@ class Graphic {
 	}
 	
 	function addDaySeries($iYear, $iMonth, $iDayBegin, $iDayEnd) {
+		// Fix last day of month 
+		$iDays = DIDate::getDaysOfMonth($iYear, $iMonth);
+		if ($iDayEnd > $iDays) {
+			$iDayEnd = $iDays;
+		}
 		$series = array();
+		for($day=$iDayBegin; $day<=$iDayEnd;$day++) {
+			$key = $iYear . '-' . DIDate::padNumber($iMonth,2) . '-' . DIDate::padNumber($day,2);
+			$series[$key] = 0;
+		}
 		return $series;
 	}
 	

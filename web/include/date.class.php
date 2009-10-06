@@ -23,7 +23,7 @@
 		
 		public static function getDaysOfMonth($Year, $Month) {
 			$MDays = array(0,31,28,31,30,31,30,31,31,30,31,30,31);
-			$Day = $MDays[$Month];
+			$Day = $MDays[(int)$Month];
 			// On February, check if Year is leap and add one more day
 			if ($Month == 2) {
 				if (DIDate::isLeapYear($Year)) {
@@ -53,6 +53,14 @@
 			    ));
 			return $iWeek;
 		} //function
+		
+		public static function getWeeksOfYear($Year) {
+			$iWeeks = DIDate::getWeekOfYear($Year . '-12-31');
+			if ($iWeeks < 53) {
+				$iWeeks = 52;
+			}
+			return $iWeeks;
+		}
 		
 		public static function padNumber($prmValue, $prmLength) {
 			$value = $prmValue;
