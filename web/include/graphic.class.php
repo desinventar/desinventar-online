@@ -489,7 +489,7 @@ class Graphic {
 				$m = $this->addMultiLinePlot($opc, $val, $pal);
 			break;
 			case "PIE":
-				$m = $this->pie($opc, $val, $pal);
+				$m = $this->addPiePlot($opc, $val, $pal);
 				$ShowData = $GraphOptions[0]['Values'];
 				if ($ShowData == 'NONE') {
 					$m->SetLabelType(PIE_VALUE_ABS);
@@ -757,7 +757,7 @@ class Graphic {
 	}
                                                                                         
 	// Setting a PIE graphic
-	function pie($opc, $axi, $pal) {
+	function addPiePlot($opc, $axi, $pal) {
 		if ($opc['_G+Feel'] == "3D") {
 			$p = new PiePlot3d(array_values($axi));
 			$p->SetEdge("navy");
