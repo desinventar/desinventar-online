@@ -968,11 +968,11 @@
 	<style type="text/css">
 		.bsave {
 			background-image: url(images/saveicon.png) !important;
-			background-repeat: no-repeat; background-position: top center; width: 22px;
+			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
 		}
 		.bprint {
 			background-image: url(images/printicon.png) !important;
-			background-repeat: no-repeat; background-position: top center; width: 22px;
+			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
 		}
 		#loading-mask {
 		  position: absolute;
@@ -1434,7 +1434,7 @@
 	   </td>
 	  </tr>
 	  <tr>
-	   <td colspan=3>
+	   <td colspan="3">
 		<div id="querydetails" style="height:40px;" class="dwin"></div>
 		<!--  <div id="smap" style="position:absolute; left:0px; top:20px; visibility:hidden;">[<a href="javascript:void(0);" onClick="hideMap();">X</a>]<br></div>-->
 	   </td>
@@ -1481,7 +1481,7 @@
 {-if $ctl_qrydsg-}
       </div>
       <b onMouseOver="showtip('{-$dis.DisasterSiteNotes[2]-}');">{-$dis.DisasterSiteNotes[0]-}</b>
-      <select name="D_DisasterSiteNotes[0]" class="small" class="line">
+      <select name="D_DisasterSiteNotes[0]" class="small line">
       	<option class="small" value="AND" {-if $qd.D_DisasterSiteNotes[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
       	<option class="small" value="OR"  {-if $qd.D_DisasterSiteNotes[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
       </select><br>

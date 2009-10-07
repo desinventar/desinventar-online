@@ -110,14 +110,14 @@
 					</select>
 					<br />
 					<b onMouseOver="showtip('{-$dic.GraphScale[2]-}');">{-$dic.GraphScale[0]-}</b><br />
-					<select id="_G+Scale2" name="_G+Scale2" class="disabled" disabled class="line"
+					<select id="_G+Scale2" name="_G+Scale2" class="disabled line" disabled
 						onMouseOver="showtip('{-$dic.GraphScale[2]-}');">
 						<option value="int" selected>{-#gscalin#-}</option>
 						<option value="log">{-#gscalog#-}</option>
 					</select>
 					<br />
 					<b onMouseOver="showtip('{-$dic.GraphShow[2]-}');">{-$dic.GraphShow[0]-}</b><br />
-					<select id="_G+Data2" name="_G+Data2" class="disabled" disabled class="line"
+					<select id="_G+Data2" name="_G+Data2" class="disabled line" disabled 
 						onMouseOver="showtip('{-$dic.GraphShow[2]-}');">
 						<option value="VALUE">{-#gshwval#-}</option>
 						<option id="_G+D_perc2" value="PERCENT" disabled>{-#gshwperce#-}</option>
@@ -125,7 +125,7 @@
 					</select>
 					<br />
 					<b onMouseOver="showtip('{-$dic.GraphMode[2]-}');">{-$dic.GraphMode[0]-}</b><br />
-					<select id="_G+Mode2" name="_G+Mode2" class="disabled" disabled class="line"
+					<select id="_G+Mode2" name="_G+Mode2" class="disabled line" disabled
 						onMouseOver="showtip('{-$dic.GraphMode[2]-}');">
 						<option value="NORMAL" selected>{-#gmodnormal#-}</option>
 						<option id="_G+M_accu2" value="ACCUMULATE">{-#gmodaccumul#-}</option>
@@ -153,7 +153,7 @@
 								<option value="D.DisasterBeginTime" selected>{-$dic.GraphHisTemporal[0]-}</option>
 								<option value="D.DisasterBeginTime|D.EventId">{-$dic.GraphHisEveTemporal[0]-}</option>
 								{-foreach name=glev key=k item=i from=$glev-}
-									<option value="D.DisasterBeginTime|D.GeographyId_{-$k-}">{-$i[0]-} {-$dic.GraphHisGeoTemporal[0]-}</option>
+								<option value="D.DisasterBeginTime|D.GeographyId_{-$k-}">{-$i[0]-} {-$dic.GraphHisGeoTemporal[0]-}</option>
 								{-/foreach-}
 								<option value="D.DisasterBeginTime|D.CauseId">{-$dic.GraphHisCauTemporal[0]-}</option>
 							</select>
@@ -192,12 +192,12 @@
 						</td>
 						<td>
 							<select id="_G+TypeC" onChange="grpSelectbyType('_G+TypeC');" class="line"
-								onMouseOver="showtip('{-$dic.GraphType[2]-}');" class="line">
+								onMouseOver="showtip('{-$dic.GraphType[2]-}');">
 								<option value="" disabled selected></option>
 								<option value="D.EventId">{-$dic.GraphComByEvents[0]-}</option>
 								<option value="D.CauseId">{-$dic.GraphComByCauses[0]-}</option>
 								{-foreach name=glev key=k item=i from=$glev-}
-									<option value="D.GeographyId_{-$k-}">{-$dic.GraphComByGeography[0]-} {-$i[0]-}</option>
+								<option value="D.GeographyId_{-$k-}">{-$dic.GraphComByGeography[0]-} {-$i[0]-}</option>
 								{-/foreach-}
 							</select>
 						</td>
