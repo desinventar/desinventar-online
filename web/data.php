@@ -6,16 +6,16 @@
 require_once('include/loader.php');
 
 $post = $_POST;
-$get  = $_GET;
 
 if (isset($post['_REG']) && !empty($post['_REG']))
 	$reg = $post['_REG'];
-elseif (isset($get['r']) && !empty($get['r']))
-	$reg = $get['r'];
+elseif (isset($post['r']) && !empty($post['r']))
+	$reg = $post['r'];
 else
 	exit();
 
 $us->open($reg);
+
 $regname = $us->q->getDBInfoValue('RegionLabel');
 fixPost($post);
 
@@ -34,17 +34,17 @@ $t->assign ("reg", $reg);
 $t->assign ("regname", $regname);
 
 // Data Options Interface
-if (isset($get['page']) || isset($post['_D+cmd'])) {
+if (isset($post['page']) || isset($post['_D+cmd'])) {
 	// Process Desconsultar Query Design Form
 	$iNumberOfRecords = 0;
 	$pag = 1;
 	$export = '';
-	if (isset($get['page'])) {
+	if (isset($post['page'])) {
 		// Show results by page number
-		$pag = $get['page'];
-		$iRecordsPerPage = $get['RecordsPerPage'];
-		$fld = $get['fld'];
-		$sql = base64_decode($get['sql']);
+		$pag = $post['page'];
+		$iRecordsPerPage = $post['RecordsPerPage'];
+		$fld = $post['fld'];
+		$sql = base64_decode($post['sql']);
 	}
 	elseif (isset($post['_D+cmd'])) {
 		// Process results with default options
