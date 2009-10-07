@@ -1,4 +1,5 @@
 {-config_load file=`$lg`.conf section="di8_index"-}
+{-config_load file=`$lg`.conf section="di8_user"-}
 {-if $ctl_show-}
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -12,7 +13,7 @@
 	<script type="text/javascript" src="include/prototype.js"></script>
 	<script type="text/javascript" src="include/diadmin.js"></script>
 	<script type="text/javascript" src="include/checktree.js"></script>
-	<script type="text/javascript" src="include/wd.js"></script>
+<!--	<script type="text/javascript" src="include/wd.js"></script>-->
 	<script type="text/javascript" src="include/accordion.js"></script>
 	<script type="text/javascript" src="include/palette.js"></script>
 	<!-- ExtJS 2.0.1 -->
@@ -25,6 +26,7 @@
 	var	s = Ext.getCmp('southm');
 	var difw;
 	var usrw;
+	var dblw;
 	var dlgw;
     // DI8 - Layout, buttons and internal windows - UI DesConsultar module
     Ext.onReady(function()
@@ -37,33 +39,38 @@
 	  // User functions Window
 	  if (!usrw) {
 		usrw = new Ext.Window({
-			el:'usr-win', layout:'fit', 
-			x: 65, y: 0, width:600, height:450, 
+			el:'usr-win', layout:'fit', x:300, y:100, width:500, height:100, 
 			closeAction:'hide', plain: true, animCollapse: false,
-			items: new Ext.Panel({ contentEl: 'usr-cfg', autoScroll: true })
+			items: new Ext.Panel({ contentEl: 'usr', autoScroll: true })
+		});
+	  }
+	  // Find Bases window
+	  if (!dblw) {
+		dblw = new Ext.Window({
+			el:'dbl-win', layout:'fit', x:200, y:100, width:600, height:450, 
+			closeAction:'hide', plain: true, animCollapse: false,
+			items: new Ext.Panel({ contentEl: 'dbl', autoScroll: true })
 		});
 	  }
 	  // Dialog window
 	  if (!dlgw) {
 		dlgw = new Ext.Window({
-			el:'dlg-win', layout:'fit', 
-			x: 200, y: 200, width:250, height:150, 
+			el:'dlg-win', layout:'fit', x:350, y:200, width:300, height:150, 
 			closeAction:'hide', plain: true, animCollapse: false,
-			items: new Ext.Panel({ contentEl: 'dlg-cfg', autoScroll: true })
+			items: new Ext.Panel({ contentEl: 'dlg', autoScroll: true })
 		});
 	  }
 	  var muser = new Ext.menu.Menu({
         id: 'userMenu',
         items: [
 {-if $userid != ""-}
-			{id: 'musrmyb', text: '{-#muserdb#-}', handler: onMenuItem },
-			{id: 'musrmya', text: '{-#museraccount#-}', handler: onMenuItem },
-			{id: 'musrout', text: '{-#muserlogout#-}', handler: onMenuItem }, 
+			{id: 'musrmya', text: '{-#tconfigacc#-}', handler: onMenuItem },
+			{id: 'musrout', text: '{-#tclosesess#-}', handler: onMenuItem }, 
 {-else-}
-			{id: 'musrlin', text: '{-#muserlogin#-}', handler: onMenuItem }, 
+			{id: 'musrlin', text: '{-#benter#-}', handler: onMenuItem }, 
 {-/if-}
 			'-',
-            { text: '{-#mlang#-}', 
+			{ text: '{-#mlang#-}', 
 				menu: { id: 'langSubMenu',
 						items: [
 {-foreach name=lglst key=key item=item from=$lglst-}
@@ -71,7 +78,6 @@
 						'-']
 				}
 			},
-			//{id: 'mfilprn', text: '{-#mprint#-}',	handler: onMenuItem  },
             {id: 'mfilqit',  text: '{-#mquit#-}', handler: onMenuItem  }
 		]});
       var mquery = new Ext.menu.Menu({
@@ -100,7 +106,8 @@
         items: [
 			{id:'mdbsfnd', text: '{-#mdbfind#-}',	handler: onMenuItem  },
 {-if $userid == "root"-}
-			{id:'mdbsadm', text: '{-#mdbadmin#-}',	handler: onMenuItem  },
+			{id:'musradm', text: '{-#tadminusrs#-}',	handler: onMenuItem  },
+			{id:'mdbsadm', text: '{-#tadminregs#-}',	handler: onMenuItem  },
 {-/if-}
 			'-']
 		});
@@ -116,7 +123,7 @@
 	  
       var tb = new Ext.Toolbar();
       tb.render('toolbar');
-	  tb.add('-', {id: 'musr', text: '{-#muser#-}{-if $userid != ""-}: <b>{-$userid-}</b>{-/if-}', menu: muser });
+	  tb.add('-', {id: 'musr', text: '{-#tuser#-}{-if $userid != ""-}: <b>{-$userid-}</b>{-/if-}', menu: muser });
 {-if !$ctl_noregion-}
       tb.add('-', {id: 'mqry', text: '{-#msearch#-}',		menu: mquery });
 {-/if-}
@@ -132,25 +139,20 @@
 		switch (item.id) {
 			// file menu
 			case "mreg":
-				$('dcr').src = "?cmd=getRegionFullInfo&r={-$reg-}";
+				$('dcr').src = "index.php?cmd=getRegionFullInfo&r={-$reg-}";
 				$('bsave').style.visibility = 'hidden';
 				$('bprint').style.visibility = 'hidden';
 			break;
 			case "musrlin":
-				updateUserBar('user.php', '', '', '');
+				//updateUserBar('user.php', '', '', '');
 				usrw.show();
 			break;
 			case "musrout":
-				updateUserBar('user.php', 'logout', '', '');
-			break;
-			case "musrmyb":
-				updateList('pagecontent', 'user.php', 'cmd=welcome');
-				usrw.show();
+				userMan('usr', 'user.php', 'logout', '');
 			break;
 			case "musrmya":
-				mod='userpa';
-				updateList('pagecontent', 'user.php', 'cmd=viewpref');
-				usrw.show();
+				updateList('dbl', 'user.php', 'cmd=viewpref');
+				dblw.show();
 			break;
 {-foreach name=lglst key=key item=item from=$lglst-}
 			case "{-$key-}":
@@ -170,11 +172,9 @@
 				$('import').style.display = 'none';
 {-if $ctl_noregion-}
 				$('qryres').style.display = 'none';
-				//$('index').style.display = 'block';
 				w.hide();
 {-else-}
 				$('qryres').style.display = 'block';
-				//$('index').style.display = 'none';
 				w.show();
 {-/if-}
 				if (w.isVisible())
@@ -220,14 +220,11 @@
 				w.collapse();
 				$('config').style.display = 'none';
 				$('import').style.display = 'block';
-				//$('index').style.display = 'none';
 				$('qryres').style.display = 'none';
 				updateList('import', 'import.php', 'r={-$reg-}');
 			break;
 			case "mcrdbak":
 				window.location = "index.php?r={-$reg-}&cmd=backupDB";
-				//updateList('dlg-cfg', 'index.php', 'r={-$reg-}&cmd=backupDB');
-				//dlgw.show();
 			break;
 			case "mcrdcfg":
 				w = Ext.getCmp('westm');
@@ -235,21 +232,24 @@
 				w.collapse();
 				$('config').style.display = 'block';
 				$('import').style.display = 'none';
-				//$('index').style.display = 'none';
 				$('qryres').style.display = 'none';
 			break;
 			// databases menu
 			case "mdbsfnd":
-				updateList('pagecontent', 'index.php', 'cmd=listdb');
-				usrw.show();
+				updateList('dbl', 'index.php', 'cmd=listdb');
+				dblw.show();
+			break;
+			case "musradm":
+				updateList('dbl', 'user.php', 'cmd=adminusr');
+				dblw.show();
 			break;
 			case "mdbsadm":
-				updateList('pagecontent', 'region.php', 'cmd=adminreg');
-				usrw.show();
+				updateList('dbl', 'region.php', 'cmd=adminreg');
+				dblw.show();
 			break;
 			// help menu
 			case "mabo":
-				alert("DesInventar {-$version-}\n{-#tabout#-}");
+				dlgw.show();
 			break;
 			case "mwww":
 				window.open('http://www.desinventar.org', '', '');
@@ -448,7 +448,7 @@
 	  if (!difw) {
 		difw = new Ext.Window({
 			el:'dif-win', layout:'fit', 
-			x: 65, y: 0, width:960, height:625, 
+			x: 65, y: 0, width:960, height:630, 
 			closeAction:'hide', plain: true, animCollapse: false,
 			items: new Ext.Panel({ contentEl: 'dif-cfg', autoScroll: true })
 		});
@@ -870,6 +870,16 @@
 			window.frames['dcr'].print();
 		}
 	}
+	function userMan(div, url, cmd, opt) {
+		var pars = "cmd=" + cmd;
+		if (opt != "")
+			pars += "&"+ opt;
+		var us = new Ajax.Updater(div, url, { method: 'get', parameters: pars,
+			onComplete: function(request) {
+				window.location.reload(false);
+			}
+		});
+	}
 	// Find all Effects fields enable by saved query
 	window.onload = function() {
 		// select optimal height in results frame
@@ -1045,15 +1055,12 @@
 	</div>
 	<!-- Import datacards-->
 	<div id="import" style="display:none;"></div>
-	<!-- Show General index of functions -->
-	<div id="index"  style="display:none"></div>
 	<!-- Results of queries -->
 	<div id="qryres" style="display:{-if $ctl_qryres-}block{-else-}none{-/if-}">
 	<table border="0" cellpadding="0" cellspacing="0" width="100%">
 	  <tr bgcolor="#bbbbbb">
        <td width="200px">
-       	<b>{-#tsubtitle2#-} &rArr;</b>
-<!--       	<img src="images/collapse.png" onClick="var w = Ext.getCmp('westm'); w.show();">-->
+       	<b>{-#tsubtitle2#-} &rarr;</b><!-- <img src="images/collapse.png" onClick="var w = Ext.getCmp('westm'); w.show();"> -->
        </td>
        <td align="center">
 {-/if-}
@@ -1068,7 +1075,7 @@
           <div id="dat-cfg">
             <form id="CD" method="POST">
               {-#sresxpage#-}
-              <select id="_D+SQL_LIMIT" name="_D+SQL_LIMIT">
+              <select id="_D+SQL_LIMIT" name="_D+SQL_LIMIT" class="line">
                 <option value="20">20</option>
                 <option value="50">50</option>
                 <option value="100" selected>100</option>
@@ -1078,7 +1085,7 @@
               <table>
                 <tr>
                   <td><b>{-#savailfields#-}</b><br>
-                   <select id="_D+sel1[]" size="8" style="width:220px;" multiple>
+                   <select id="_D+sel1[]" size="8" style="width:220px;" multiple class="line">
  {-foreach name=sst1 key=key item=item from=$sda1-}
                     <option value="D.{-$item-}">{-$dc2.$item[0]-}</option>
  {-/foreach-}
@@ -1096,7 +1103,7 @@
                    <input type="button" value="&larr;" onclick="moveOptions($('_D+Field[]'), $('_D+sel1[]'));" class="line">
                   </td>
                   <td><b>{-#sviewfields#-}</b><br>
-                   <select id="_D+Field[]" size="8" style="width:220px;" multiple>
+                   <select id="_D+Field[]" size="8" style="width:220px;" multiple class="line">
  {-foreach name=sst key=key item=item from=$sda-}
   {-if $item != "D.DisasterId"-}
                     <option value="D.{-$item-}">{-$dc2.$item[0]-}</option>
@@ -1116,7 +1123,7 @@
               </table>
               <br><br>
               <b>{-#dorderby#-}</b><br>
-              <select id="_D+SQL_ORDER" name="_D+SQL_ORDER" class="fixw" size="5">
+              <select id="_D+SQL_ORDER" name="_D+SQL_ORDER" class="fixw line" size="5">
                 <option value="D.DisasterBeginTime, V.EventName, G.GeographyFQName" selected>{-#ddeg#-}</option>
                 <option value="D.DisasterBeginTime, D.GeographyId, V.EventName">{-#ddge#-}</option>
                 <option value="G.GeographyFQName, V.EventName, D.DisasterBeginTime">{-#dged#-}</option>
@@ -1145,7 +1152,7 @@
                 <tr valign="top"><td>
                   <b>{-#mareaid#-}</b>
                   <br>
-                  <select name="_M+Label" size="4" class="fixw">
+                  <select name="_M+Label" size="4" class="fixw line">
                     <option value="NAME">{-#mareashownam#-}</option>
                     <option value="CODE">{-#mareashowcod#-}</option>
                     <option value="VALUE">{-#mareashowval#-}</option>
@@ -1201,14 +1208,14 @@
 				  </table>
                 </td><td>
                   <b>{-#mrepreselev#-}</b><br>
-                  <select id="_M+Type" name="_M+Type" size="3" class="fixw">
+                  <select id="_M+Type" name="_M+Type" size="3" class="fixw line">
  {-foreach name=mgel key=k item=i from=$mgel-}
                     <option value="{-$k-}|D.GeographyId|" {-if $smarty.foreach.mgel.iteration==1-}selected{-/if-}>{-$i[0]-}</option>
  {-/foreach-}
                   </select>
                   <br><br>
                   <b>{-#mviewfields#-}</b><br>
-                  <select id="_M+Field" name="_M+Field" size="8" class="fixw">
+                  <select id="_M+Field" name="_M+Field" size="8" class="fixw line">
                     <option value="D.DisasterId||" selected>{-#trepnum#-}</option>
  {-foreach name=ef1 key=k item=i from=$ef1-}
                     <option value="D.{-$k-}Q|>|-1">{-$i[0]-}</option>
@@ -1254,7 +1261,7 @@
             		<tr>
             			<td>
             				{-#sresxpage#-}
-            				<select id="_S+SQL_LIMIT" name="_S+SQL_LIMIT">
+            				<select id="_S+SQL_LIMIT" name="_S+SQL_LIMIT" class="line">
             				 <option value="20">20</option>
             				 <option value="50">50</option>
             				 <option value="100" selected>100</option>
@@ -1263,7 +1270,7 @@
             			</td>
             			<td>
             				{-#mgeosection#-}:
-            				<select id="_S+showgeo" name="_S+showgeo">
+            				<select id="_S+showgeo" name="_S+showgeo" class="line">
             				 <option value="NAME">{-#mareashownam#-}</option>
             				 <option value="CODE">{-#mareashowcod#-}</option>
             				 <option value="CODENAME">Code | Name</option>
@@ -1277,7 +1284,7 @@
               <table>
                 <tr valign="top">
                   <td><b>{-$std.StatisticFirstlev[0]-}</b><br>
-                   <select id="_S+Firstlev" name="_S+Firstlev" size="8" style="width:180px;"
+                   <select id="_S+Firstlev" name="_S+Firstlev" size="8" style="width:180px;" class="line"
                        onChange="setTotalize('_S+Firstlev', '_S+Secondlev'); setTotalize('_S+Secondlev', '_S+Thirdlev');">
 {-foreach name=glev key=k item=i from=$glev-}
                     <option value="{-$k-}|D.GeographyId">
@@ -1290,12 +1297,12 @@
                    </select>
                   </td>
                   <td><b>{-$std.StatisticSecondlev[0]-}</b><br>
-                   <select id="_S+Secondlev" name="_S+Secondlev" size="8" 
-                       onChange="setTotalize('_S+Secondlev', '_S+Thirdlev');" style="width:180px;">
+                   <select id="_S+Secondlev" name="_S+Secondlev" size="8" style="width:180px;" class="line"
+                       onChange="setTotalize('_S+Secondlev', '_S+Thirdlev');">
                    </select>
                   </td>
                   <td><b>{-$std.StatisticThirdlev[0]-}</b><br>
-                   <select id="_S+Thirdlev" name="_S+Thirdlev" size="8" style="width:180px;">
+                   <select id="_S+Thirdlev" name="_S+Thirdlev" size="8" style="width:180px;" class="line">
                    </select>
                   </td>
                 </tr>
@@ -1304,7 +1311,7 @@
               <table>
                 <tr>
                   <td><b>{-#savailfields#-}</b><br>
-                   <select id="_S+sel1[]" size="6" style="width:220px;" multiple>
+                   <select id="_S+sel1[]" size="6" style="width:220px;" multiple class="line">
 <!--                    <option value="D.{-$key-}|=|-1">{-#tauxhave#-} {-$item[1]-}</option>-->
 {-foreach name=sst1 key=key item=item from=$sst1-}
                     <option value="D.{-$item[0]-}">{-$item[1]-}</option>
@@ -1326,7 +1333,7 @@
                    <input type="button" value="&larr;" onclick="moveOptions($('_S+Field[]'), $('_S+sel1[]'));" class="line">
                   </td>
                   <td><b>{-#sviewfields#-}</b><br>
-                   <select id="_S+Field[]" size="6" style="width:220px;" multiple>
+                   <select id="_S+Field[]" size="6" style="width:220px;" multiple class="line">
   {-foreach name=sst key=key item=item from=$sst-}
                     <option value="D.{-$item[0]-}">{-$item[1]-}</option>
   {-/foreach-}
@@ -1379,21 +1386,50 @@
 		<div id="dif-win" class="x-hidden">
 		  <div class="x-window-header">{-#mdcsection#-} | {-$userid-} - {-$role-}</div>
 		  <div id="dif-cfg" style="text-align:center;">
-		   <iframe name="dif" id="dif" frameborder="0" scrolling="auto" height="625px;" width="100%" src="cards.php?r={-$reg-}"></iframe>
+		   <iframe name="dif" id="dif" frameborder="0" height="600px;" width="100%" src="cards.php?r={-$reg-}"></iframe>
 		  </div>
 		</div>
 		 <!-- Show User login/logout window -->
 		<div id="usr-win" class="x-hidden">
 		  <div class="x-window-header">{-$userid-} - {-$role-}</div>
-		  <div id="usr-cfg">
-		   <div id="rightcontent"></div><hr>
-		   <div id="pagecontent"></div>
+		  <div id="usr">
+			<form method="get" action="javascript:
+				userMan('usr', 'user.php', 'login', 'userid=' + $('userid').value + '&password=' + $('password').value);" >
+				<table border="0" align="center" valign="middle" style="margin-top:20px">
+				<tr>
+				<td>
+					{-#tuser#-} <input type="text" id="userid" name="userid" value="" size="16" class="line" />&nbsp;&nbsp;
+					{-#tpassword#-} <input type="password" name="password" id="password" value="" size="8" class="line" />&nbsp;&nbsp;
+					<input type="submit" value="{-#benter#-}" class="line" />&nbsp;&nbsp;
+					<a href="javascript:void(null)" class="rememberpasswordlink" 
+						onclick="updateList('passlost', 'user.php', 'cmd=passlost');">{-#tpasslost#-}</a>
+				</td>
+				</tr>
+				</table>
+			</form>
+			<div id="passlost"></div>
+		  </div>
+		</div>
+		<!-- Show Database functions window -->
+		<div id="dbl-win" class="x-hidden">
+		  <div class="x-window-header">{-$userid-} - {-$role-}</div>
+		  <div id="dbl">
 		  </div>
 		</div>
 		 <!-- Show Dialog window -->
 		<div id="dlg-win" class="x-hidden">
 			<div class="x-window-header"></div>
-			<div id="dlg-cfg"></div>
+			<div id="dlg">
+				<table border="0">
+					<tr>
+						<td><img src="images/di_logo.png"></td>
+						<td><p style="font-size: 16pt;" align="center">DesInventar {-$version-}</p></td>
+					</tr>
+					<tr>
+						<td colspan="2">{-#tabout#-}<hr />{-#tcopyright#-}</td>
+					</tr>
+				</table>
+			</div>
 		</div>
 	   </td>
 	  </tr>
@@ -1445,7 +1481,7 @@
 {-if $ctl_qrydsg-}
       </div>
       <b onMouseOver="showtip('{-$dis.DisasterSiteNotes[2]-}');">{-$dis.DisasterSiteNotes[0]-}</b>
-      <select name="D_DisasterSiteNotes[0]" class="small">
+      <select name="D_DisasterSiteNotes[0]" class="small" class="line">
       	<option class="small" value="AND" {-if $qd.D_DisasterSiteNotes[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
       	<option class="small" value="OR"  {-if $qd.D_DisasterSiteNotes[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
       </select><br>
@@ -1456,7 +1492,7 @@
     <dt>{-#mevesection#-}</dt>
     <dd>
       <span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br>
-      <select id="qevelst" name="D_EventId[]" multiple style="width: 250px; height: 200px;">
+      <select id="qevelst" name="D_EventId[]" multiple style="width: 250px; height: 200px;" class="line">
 {-/if-}
 {-if $ctl_qrydsg || $ctl_evelst-}
  {-foreach name=eve key=key item=item from=$evepredl-}
@@ -1476,7 +1512,7 @@
           onFocus="showtip('{-$eve.EventDuration[2]-}');" value="{-$qd.D_EventDuration-}">
       <br>
       <b onMouseOver="showtip('{-$eve.EventNotes[2]-}');">{-$eve.EventNotes[0]-}</b>
-      <select name="D_EventNotes[0]" class="small">
+      <select name="D_EventNotes[0]" class="small line">
       	<option class="small" value="AND" {-if $qd.D_EventNotes[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
       	<option class="small" value="OR"  {-if $qd.D_EventNotes[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
       </select><br>
@@ -1487,7 +1523,7 @@
     <dt>{-#mcausection#-}</dt>
     <dd>
       <span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br>
-      <select id="qcaulst" name="D_CauseId[]" multiple style="width: 250px; height: 200px;">
+      <select id="qcaulst" name="D_CauseId[]" multiple style="width: 250px; height: 200px;" class="line">
 {-/if-}
 {-if $ctl_qrydsg || $ctl_caulst-}
  {-foreach name=cau key=key item=item from=$caupredl-}
@@ -1503,7 +1539,7 @@
       </select>
       <br><br>
       <b onMouseOver="showtip('{-$cau.CauseNotes[2]-}');">{-$cau.CauseNotes[0]-}</b>
-      <select name="D_CauseNotes[0]" class="small">
+      <select name="D_CauseNotes[0]" class="small line">
       	<option class="small" value="AND" {-if $qd.D_CauseNotes[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
       	<option class="small" value="OR"  {-if $qd.D_CauseNotes[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
       </select><br>
@@ -1523,7 +1559,7 @@
             onclick="enadisEff('{-$key-}', this.checked);" {-if $qd.$ff[0] != ''-}checked{-/if-}>
         <label for="{-$key-}" onMouseOver="showtip('{-$item[2]-}');">{-$item[0]-}</label>
         <span id="o{-$key-}" style="display:none">
-         <select id="{-$key-}[0]" name="D_{-$key-}[0]" class="small" disabled
+         <select id="{-$key-}[0]" name="D_{-$key-}[0]" class="small line" disabled
          			onChange="showeff(this.value, 'x{-$key-}', 'y{-$key-}');">
           <option class="small" value="-1" {-if $qd.$ff[0] == '-1'-}selected{-/if-}>{-#teffhav#-}</option>
           <option class="small" value="0"  {-if $qd.$ff[0] == '0'-}selected{-/if-}>{-#teffhavnot#-}</option>
@@ -1541,7 +1577,7 @@
          	<input type="text" id="{-$key-}[2]" name="D_{-$key-}[2]" size="3" class="line"
          			value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}">
          </span>
-         <select id="{-$key-}[3]" id="{-$key-}[3]" name="D_{-$key-}[3]" class="small">
+         <select id="{-$key-}[3]" id="{-$key-}[3]" name="D_{-$key-}[3]" class="small line">
           <option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
           <option class="small" value="OR"  {-if $qd.$ff[3] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
          </select>
@@ -1562,12 +1598,12 @@
         	{-if $qd.$ff[0] != ''-}checked{-/if-}>
         <label for="{-$key-}" onMouseOver="showtip('{-$item[2]-}');">{-$item[0]-}</label>
         <span id="o{-$key-}" style="display:none">
-         <select id="{-$key-}[0]" name="D_{-$key-}[0]" class="small" disabled>
+         <select id="{-$key-}[0]" name="D_{-$key-}[0]" class="small line" disabled>
           <option class="small" value="-1" selected>{-#teffhav#-}</option>
           <option class="small" value="0"  {-if $qd.$ff[0] == '0'-}selected{-/if-}>{-#teffhavnot#-}</option>
           <option class="small" value="-2" {-if $qd.$ff[0] == '-2'-}selected{-/if-}>{-#teffdontknow#-}</option>
          </select>
-         <select id="{-$key-}[3]" id="{-$key-}[3]" name="D_{-$key-}[3]" class="small">
+         <select id="{-$key-}[3]" id="{-$key-}[3]" name="D_{-$key-}[3]" class="small line">
           <option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
           <option class="small" value="OR"  {-if $qd.$ff[3] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
          </select>
@@ -1576,7 +1612,7 @@
          <span id="o{-$k-}" style="display:none">
           <br>{-$i-}
           <select id="{-$k-}[0]" name="D_{-$k-}[0]" onChange="showeff(this.value, 'x{-$k-}', 'y{-$k-}');" 
-              class="small" disabled>
+              class="small line" disabled>
            <option class="small" value=" "></option>
            <option class="small" value=">=" {-if $qd.$ff[0] == '>='-}selected{-/if-}>{-#teffmajor#-}</option>
            <option class="small" value="<=" {-if $qd.$ff[0] == '<='-}selected{-/if-}>{-#teffminor#-}</option>
@@ -1591,7 +1627,7 @@
           	<input type="text" id="{-$k-}[2]" name="D_{-$k-}[2]" size="3" class="line"
           		value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}">
           </span>
-          <select id="{-$k-}[3]" id="{-$k-}[3]" name="D_{-$k-}[3]" class="small">
+          <select id="{-$k-}[3]" id="{-$k-}[3]" name="D_{-$k-}[3]" class="small line">
            <option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
            <option class="small" value="OR"  {-if $qd.$ff[3] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
           </select><br>
@@ -1609,8 +1645,7 @@
             onclick="enadisEff('{-$k-}', this.checked);" {-if $qd.$ff[0] != ''-}checked{-/if-}>
       <label for="{-$k-}" onMouseOver="showtip('{-$i[2]-}');">{-$i[0]-}</label>
       <span id="o{-$k-}" style="display:none">
-      	<select id="{-$k-}[0]" name="D_{-$k-}[0]" onChange="showeff(this.value, 'x{-$k-}', 'y{-$k-}');" 
-						class="small" disabled>
+      	<select id="{-$k-}[0]" name="D_{-$k-}[0]" onChange="showeff(this.value, 'x{-$k-}', 'y{-$k-}');" class="small line" disabled>
 		  <option class="small" value=" "></option>
 		  <option class="small" value=">=" {-if $qd.$ff[0] == '>='-}selected{-/if-}>{-#teffmajor#-}</option>
 		  <option class="small" value="<=" {-if $qd.$ff[0] == '<='-}selected{-/if-}>{-#teffminor#-}</option>
@@ -1625,7 +1660,7 @@
 			<input type="text" id="{-$k-}[2]" name="D_{-$k-}[2]" size="5" class="line" 
 				value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}">
 		</span>
-		<select id="{-$key-}[3]" name="D_{-$key-}[3]" class="small">
+		<select id="{-$key-}[3]" name="D_{-$key-}[3]" class="small line">
 			<option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
 			<option class="small" value="OR"  {-if $qd.$ff[3] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
 		</select>
@@ -1710,16 +1745,16 @@
         </table>
         <br>
          <b onMouseOver="showtip('{-$dis.DisasterSource[2]-}');">{-$dis.DisasterSource[0]-}</b>
-         <select name="D_DisasterSource[0]" class="small">
+         <select name="D_DisasterSource[0]" class="small line">
            <option class="small" value="AND" {-if $qd.D_DisasterSource[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
            <option class="small" value="OR"  {-if $qd.D_DisasterSource[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-				 </select><br>
+		 </select><br>
          <textarea id="DisasterSource" name="D_DisasterSource[1]" style="width:220px; height:40px;"
               onFocus="showtip('{-$dis.DisasterSource[2]-}');">{-$qd.D_DisasterSource[1]-}</textarea>
   {-if $ctl_user-}
         <br>
         <b onMouseOver="showtip('');">{-#tdcstatus#-}</b><br>
-        <select name="D_RecordStatus[]" multiple class="fixw">
+        <select name="D_RecordStatus[]" multiple class="fixw line">
           <option value="PUBLISHED" selected>{-#tdcpublished#-}</option>
           <option value="READY" selected>{-#tdcready#-}</option>
           <option value="DRAFT">{-#tdcdraft#-}</option>
@@ -1730,7 +1765,7 @@
   {-/if-}
         <br>
         <b onMouseOver="showtip('{-#tserialmsg#-}');">{-#tserial#-}</b>
-        <select name="D_DisasterSerial[0]" class="small">
+        <select name="D_DisasterSerial[0]" class="small line">
         	<option class="small" value=""  {-if $qd.D_DisasterSerial[0] == ''-}selected{-/if-}>{-#tinclude#-}</option>
         	<option class="small" value="NOT" {-if $qd.D_DisasterSerial[0] == 'NOT'-}selected{-/if-}>{-#texclude#-}</option>
         </select><br>
@@ -1832,23 +1867,33 @@
  <!-- END DI8 QUERY FORM -->
  <!-- BEG HELP SECTION -->
  <div id="south">
-  <textarea id="_DIDesc" wrap="hard" class="hlp" readonly style="width:80%; height:30px;">{-#tdescinfo#-}</textarea>
-  <a href="javascript:void(null)" onClick="window.open('doc.php?m=metguide', 'doc', winopt);"
-  	class="dlgmsg" style="font-size: 8pt;">{-#hmoreinfo#-}</a>
+	<textarea id="_DIDesc" wrap="hard" class="hlp" readonly style="width:80%; height:30px;">{-#tdescinfo#-}</textarea>
+	<a href="javascript:void(null)" onClick="window.open('doc.php?m=metguide', 'doc', winopt);"
+		class="dlgmsg" style="font-size: 8pt;">{-#hmoreinfo#-}</a>
  </div>
  <!-- END HELP SECTION -->
 </body>
 </html>
 {-/if-}
+
 {-** LISTDB: Show available databases**-}
 {-if $ctl_showlistdb-}
-		<b><u>{-#tdbavail#-}</u>:</b>
-		<br />
-		<ul>
+	<h4>{-#tdbavail#-}:</h4><br />
+	<table border="0" class="grid">
+		<tr align="center">
+			<td><b>Pais</b></td>
+			<td><b>Region</b></td>
+			<td colspan="2"><b>Atributos</b></td>
+		</tr>
 {-foreach name=rlist key=key item=item from=$regionlist-}
-			<li><a href="?r={-$key-}">{-$item-}</a></li>
+		<tr>
+			<td>{-$item[1]-}</td>
+			<td><a href="index.php?r={-$key-}">{-$item[0]-}</a></td>
+			<td>{-if $item[2] == 3-}PUBLICA{-else-}NO PUBLICA{-/if-}</td>
+			<td>{-$item[3]-}</td>
+		</tr>
 {-/foreach-}
-		</ul>
+	</table>
 {-/if-}
 
 {-** MAINPAGE: default page in DesInventar root **-}
@@ -1890,7 +1935,7 @@
 				<ul>
 {-foreach name=rlist key=key item=item from=$regionlist-}
 				<li><a href="javascript:void(null)" onClick="javascript:window.open('?r={-$key-}','DI_{-$smarty.foreach.rlist.iteration-}', 
-				'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,status=no,scrollbars=no,toolbar=no');">{-$item-}</a>
+				'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,status=yes,scrollbars=no,toolbar=no');">{-$item-}</a>
 				</li>
 {-/foreach-}
 				</ul>

@@ -21,7 +21,7 @@ function getRAPermList($lst) {
 function form2data($form) {
 	$dat = array();
 	foreach ($form as $key=>$value) {
-		$k = split('_', $key);
+		$k = explode('_', $key);
 		$dat[$k[0]] = $value;
 	}
 	return $dat;
