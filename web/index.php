@@ -45,7 +45,7 @@ switch ($cmd) {
 	case 'listdb':
 		// Direct access returns a list of public regions on this server
 		$d = new Query();
-		$t->assign('regionlist', $d->searchDB());
+		$t->assign('regionlist', $d->listDB());
 		$t->assign('ctl_showlistdb', true);
 		$t->display('index.tpl');
 		break;
