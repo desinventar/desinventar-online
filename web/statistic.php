@@ -3,16 +3,14 @@
  DesInventar8 - http://www.desinventar.org
  (c) 1999-2009 Corporacion OSSO
 */
-
 require_once('include/loader.php');
 
 $post = $_POST;
-$get  = $_GET;
 
 if (isset($post['_REG']) && !empty($post['_REG']))
 	$reg = $post['_REG'];
-elseif (isset($get['r']) && !empty($get['r']))
-	$reg = $get['r'];
+elseif (isset($post['r']) && !empty($post['r']))
+	$reg = $post['r'];
 else
 	exit();
 
@@ -33,20 +31,20 @@ $t->assign ("reg", $reg);
 $t->assign ("regname", $regname);
 
 // Data Options Interface
-if (isset($get['page']) || isset($post['_S+cmd'])) {
+if (isset($post['page']) || isset($post['_S+cmd'])) {
 	// Process Desconsultar Query Design Form
 	$tot = 0;
 	$pag = 1;
 	$export = '';
 	// Show results by page number
-	if (isset($get['page'])) {
-		$pag = $get['page'];
-		$rxp = $get['rxp'];
-		$fld = $get['fld'];
-		$sql = base64_decode($get['sql']);
-		$geo = $get['geo'];
-		if (isset($get['ord']))
-			$sql .= " ORDER BY ". $get['ord'] ." ". $get['dir'];
+	if (isset($post['page'])) {
+		$pag = $post['page'];
+		$rxp = $post['rxp'];
+		$fld = $post['fld'];
+		$sql = base64_decode($post['sql']);
+		$geo = $post['geo'];
+		if (isset($post['ord']))
+			$sql .= " ORDER BY ". $post['ord'] ." ". $post['dir'];
 	}
 	// Process results with default options
 	else if (isset($post['_S+cmd'])) {

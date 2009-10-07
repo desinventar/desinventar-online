@@ -342,7 +342,7 @@
 					onmouseout="UnTip()" onClick="gotocard('last')" />
 			&nbsp;&nbsp;|&nbsp;&nbsp;
 			{-$dis.DisasterSerial[0]-}
-			<input type="text" id="fndserial" style="width:50px;" class="line"
+			<input type="text" id="fndserial" style="width:60px;" class="line"
 				onKeyDown="if(event.keyCode==13) requestDCard('getIdfromSerial', $('fndserial').value);" />
 			<input type="button" id="cardfnd" class="bb bfind" onmouseover="Tip('{-#bexpsearch#-}: {-#texptitle#-}')" 
 				onmouseout="UnTip()" onClick="requestDCard('getIdfromSerial', $('fndserial').value);" />
