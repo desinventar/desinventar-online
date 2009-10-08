@@ -448,7 +448,7 @@
 	  if (!difw) {
 		difw = new Ext.Window({
 			el:'dif-win', layout:'fit', 
-			x: 65, y: 0, width:960, height:630, 
+			x: 65, y: 0, width:960, height:638, 
 			closeAction:'hide', plain: true, animCollapse: false,
 			items: new Ext.Panel({ contentEl: 'dif-cfg', autoScroll: true })
 		});
@@ -1316,7 +1316,10 @@
 {-foreach name=sst1 key=key item=item from=$sst1-}
                     <option value="D.{-$item[0]-}">{-$item[1]-}</option>
 {-/foreach-}
- 										<option disabled>---</option>
+{-foreach name=sst2 key=key item=item from=$sst2-}
+                    <option value="D.{-$key-}|=|-1"><i>{-#tauxaffect#-} {-$item[0]-}</i></option>
+{-/foreach-}
+ 					<option disabled>---</option>
 {-foreach name=eef key=key item=item from=$exteffel-}
  {-if $item[2] == "INTEGER" || $item[2] == "DOUBLE"-}
                     <option value="E.{-$key-}|>|-1">{-$item[0]-}</option>

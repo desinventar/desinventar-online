@@ -344,8 +344,9 @@
 		{-$dis.DisasterSerial[0]-}
 		<input type="text" id="fndserial" style="width:60px;" class="line"
 			onKeyDown="if(event.keyCode==13) requestDCard('getIdfromSerial', $('fndserial').value);" />
-		<input type="button" id="cardfnd" class="bb bfind" onmouseover="Tip('{-#bexpsearch#-}: {-#texptitle#-}')" 
-			onmouseout="UnTip()" onClick="requestDCard('getIdfromSerial', $('fndserial').value);" />
+		<input type="button" id="cardfnd" class="bb bfind" onmouseover="Tip('{-#texptitle#-}')" onmouseout="UnTip()" 
+			onClick="if($('fndserial').value !='') requestDCard('getIdfromSerial', $('fndserial').value); 
+					else alert('{-#bexpsearch#-}: {-#texpdesc#-}')" />
 		<br />
 		<span class="dlgmsg" id="distatusmsg"></span><span class="dlgmsg" id="dostat"></span>
 	  </td>
@@ -413,7 +414,7 @@
 								<input id="DisasterSerial" name="DisasterSerial" type="text" size="15" class="line"
 									tabindex="6" maxlength="50" onFocus="showtip('{-$dis.DisasterSerial[2]-}', '#d4baf6')"
 									onkeypress="return blockChars(event, this.value, 'alphanumber:');" />
-								<a href="javascript:void(0);" onClick="requestDCard('getNextSerial', 
+								<a href="javascript:void(0);" onClick="if(!$('DisasterSerial').disabled) requestDCard('getNextSerial', 
 								$('DisasterBeginTime[0]').value);"><img src="images/reload.jpg" border="0" /></a>
 							</td>
 						</tr>
