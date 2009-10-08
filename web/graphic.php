@@ -59,7 +59,6 @@ if ($GraphCommand != '') {
 	if (isset($post['_G+Field2']) && !empty($post['_G+Field2']))
 		array_push($opc['Field'], $post['_G+Field2']);
 	$sql = $us->q->genSQLProcess($qd, $opc);
-	//echo $sql;
 	$dislist = $us->q->getassoc($sql);
 	if (!empty($dislist)) {
 		// Process results data
