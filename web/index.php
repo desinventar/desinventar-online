@@ -331,9 +331,11 @@ switch ($cmd) {
 				foreach ($ef2 as $k=>$i)
 					$nst[$k] = array("$k|>|-1", $i[0]);
 				foreach ($ef3 as $k=>$i)
-					$nst[$k] = array("$k|>|-1", $i[0]);
+					$nst[$k] = array("$k|>|0", $i[0]);
+				//;
 				$sst1 = array_diff_key($nst, array_flip(array_keys($sst)));
 				$t->assign ("sst1", $sst1);
+				$t->assign ("sst2", $us->q->queryLabelsFromGroup('Sector', $lg));
 				$t->assign ("sst", $sst);
 				$st = array();
 				foreach ($us->q->loadGeoLevels('', -1, false) as $k=>$i)

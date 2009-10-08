@@ -7,7 +7,7 @@
 	<div id="grp-cfg">
 		<form id="CG" method="POST">
 			<table class="conf" cellpadding=1 cellspacing=1>
-			<tr valign="top"  style="height:30px;">
+			<tr valign="top">
 				<td colspan=3 align="center">
 					<b>{-#gopttitle#-}</b><input type="text" name="_G+Title" class="line fixw" />
 					<!--<b>{-#goptsubtit#-}</b><br>-->
@@ -29,13 +29,13 @@
 					{-foreach name=ef3 key=k item=i from=$ef3-}
 						<option value="D.{-$k-}|>|-1">{-$i[0]-}</option>
 					{-/foreach-}
-					{-foreach name=ef3 key=k item=i from=$sec-}
+					{-foreach name=sec key=k item=i from=$sec-}
 						<option value="D.{-$k-}|=|-1">{-#tauxaffect#-} {-$i[0]-}</option>
 					{-/foreach-}
 						<option disabled>___</option>
 					{-foreach name=eef key=k item=i from=$exteffel-}
 						{-if $i[2] == "INTEGER" || $i[2] == "DOUBLE"-}
-							<option value="E.{-$k-}|>|-1">{-$i[0]-}</option>
+						<option value="E.{-$k-}|>|-1">{-$i[0]-}</option>
 						{-/if-}
 					{-/foreach-}
 					</select>
@@ -59,10 +59,16 @@
 						<option id="_G+M_accu" value="ACCUMULATE">{-#gmodaccumul#-}</option>
 						<option id="_G+M_over" value="OVERCOME" disabled>{-#gmodovercome#-}</option>
 					</select>
+					<br />
+					<b>Linea de tendencia</b><br/>
+					<select id="_G+TendLine" name="_G+TendLine" class="line">
+						<option value="" selected></option>
+						<option value="LINREG">Regresión Lineal</option>
+					</select>
 				</td>
 				<td align="center">
-					<table border="1" width='90%' height='100%'>
-					<tr>
+					<table border="1" width="90%" height="100%">
+					<tr valign="center">
 						<td align="center">
 							<!--<b onMouseOver="showtip('{-$dic.GraphKind[2]-}');">{-$dic.GraphKind[0]-}</b><br>-->
 							<select id="_G+Kind" name="_G+Kind" size="3" onChange="grpSelectbyKind();"

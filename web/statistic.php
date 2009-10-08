@@ -77,7 +77,7 @@ if (isset($post['page']) || isset($post['_S+cmd'])) {
 		$dlt['EventName'] = '';
 		$dlt['CauseName'] = '';
 		$fld = "DisasterId_";
-		//echo $sqc ."<br>". $sql;
+		//echo $sql;
 		// organize groups
 		$gp = array();
 		foreach ($opc['Group'] as $i) {
