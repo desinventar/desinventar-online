@@ -33,11 +33,12 @@ class Graphic {
 		$GraphOptions['Title']     = $opc['_G+Title'];
 		$GraphOptions['SubTitle']  = $opc['_G+SubTitle'];
 		// Calculate How many Data Series we have...
+		$GraphOptions['NumAxis'] = 1;
 		$GraphOptions['NumSeries'] = 1;
 		if (isset($opc['_G+Field2']) && ($opc['_G+Field2']!='')) {
-			$GraphOptions['NumSeries']++;
+			$GraphOptions['NumAxis']++;
 		}
-		for ($i=0;$i<$GraphOptions['NumSeries'];$i++) {
+		for ($i=0;$i<$GraphOptions['NumAxis'];$i++) {
 			$GraphOptions[$i] = array();
 			$GraphOptions[$i]['Values'] = 'NONE';
 			$GraphOptions[$i]['AxisTitle']  = '';
@@ -69,7 +70,7 @@ class Graphic {
 		// Get Label Information
 		$GraphLabels = array_keys($data);
 		$GraphOptions['XAxisTitle']  = current($GraphLabels);
-		for($i=0;$i<$GraphOptions['NumSeries']; $i++) {
+		for($i=0;$i<$GraphOptions['NumAxis']; $i++) {
 			$GraphOptions[$i]['AxisTitle'] = $GraphLabels[$i+1];
 		}
 
@@ -78,6 +79,7 @@ class Graphic {
 			$gType = "XTEMPO";				// One var x Event/Temporal..
 			$GraphOptions['Type']    = 'HISTOGRAM';
 			$GraphOptions['SubType'] = 'OTHER';
+			$GraphOptions['NumSeries']++;
 		} elseif (substr($opc['_G+Type'],2,17) == "DisasterBeginTime") {
 			$gType = "TEMPO";				// One var x time
 			$GraphOptions['Type']    = 'HISTOGRAM';
@@ -94,6 +96,9 @@ class Graphic {
 				$gType = $kind;				// Pie Comparatives
 			}
 		}
+		fb($GraphOptions);
+		
+		// Process Data Series */
 
 		// Calculate Start and End dates of Temporal Graphics
 		$DateBegin = $opc['D_DisasterBeginTime'];
@@ -118,11 +123,24 @@ class Graphic {
 		
 		if ($GraphOptions['Type'] == 'HISTOGRAM') {
 			$DataSeries = array();
-			$DataSeries[0] = $this->getTimeSeries($GraphOptions['DateBegin'],$GraphOptions['DateEnd'], $GraphOptions['Period']);
-			for($i=1;$i<$GraphOptions['NumSeries'];$i++) {
-				$DataSeries[$i] = $DataSeries[0];
+			$TmpDataSeries = $this->getTimeSeries($GraphOptions['DateBegin'],$GraphOptions['DateEnd'], $GraphOptions['Period']);
+			for($i=0;$i<$GraphOptions['NumAxis'];$i++) {
+				for($j=0;$j<$GraphOptions['NumSeries'];$j++) {
+					$DataSeries[$i][$j] = $TmpDataSeries;
+				}
+			}
+			if ($GraphOptions['SubType'] == 'TEMPORAL') {
+				foreach($data[$GraphOptions['XAxisTitle']] as $key => $value) {
+					for($i=0;$i<$GraphOptions['NumAxis'];$i++) {
+						$DataSeries[$i][0][$value] = $data[$GraphOptions[$i]['AxisTitle']][$key];
+					}					
+				}
+			}
+			if ($GraphOptions['SubType'] == 'OTHER') {
+				fb($DataSeries);
 			}
 		}
+		
 		
 		// Process Data Series
 		$val = array();
@@ -132,6 +150,7 @@ class Graphic {
 		if (isset($opc['_G+Stat']))
 			$this->sStat = $opc['_G+Stat'];
 
+		fb($gType);
 		// MULTIBAR OR MULTILINE: reformat arrays completing time serie
 		if ($gType == "XTEMPO") {
 			if ($kind == "BAR")
@@ -205,8 +224,6 @@ class Graphic {
 			} //if
 		} //if
 		
-		fb($GraphOptions);
-
 		// Calculate Graphic Size (related to Window.Size)
 		$GraphWidth  = 950;
 		$GraphHeight = 520;
@@ -225,10 +242,10 @@ class Graphic {
 			$YBottomMargin = 120;		// bottom limit more space to xlabels
 		}
 
-		if ($GraphOptions['NumSeries'] > 1) {
+		if ($GraphOptions['NumAxis'] > 1) {
 			// Calculate Legend Size based on label's length
 			$MaxLabelLen = 0;
-			for($i=0;$i<$GraphOptions['NumSeries'];$i++) {
+			for($i=0;$i<$GraphOptions['NumAxis'];$i++) {
 				$Label = $GraphOptions[$i]['AxisTitle'];
 				$LabelLen = strlen($Label) * 7;
 				if ($LabelLen > $MaxLabelLen) {
@@ -330,7 +347,7 @@ class Graphic {
 				$yaxis->scale->ticks->SetLabelLogType(LOGLABELS_PLAIN);
 			}
 			
-			if ($GraphOptions['NumSeries'] > 1) {
+			if ($GraphOptions['NumAxis'] > 1) {
 				$this->g->SetY2Scale($GraphOptions[1]['Scale']);	// int, log
 				$this->g->y2grid->Show(true,true);
 				$y2axis = $this->g->y2axis;
@@ -350,7 +367,7 @@ class Graphic {
 		// Configure Legend
 		$this->g->legend->SetAbsPos(5,5,'right','top');
 		$this->g->legend->SetFont(FF_ARIAL, FS_NORMAL, 10);
-		if ($GraphOptions['NumSeries'] < 2) {
+		if ($GraphOptions['NumAxis'] < 2) {
 			$this->g->legend->Hide();
 		}
 		
@@ -386,36 +403,36 @@ class Graphic {
 		
 		// 2009-10-03 (jhcaiced) For BAR/LINE Graphs, in order to show 
 		// Percentages, we have to calculate them...
-		if ($GraphOptions['NumSeries'] == 1) {
+		if ($GraphOptions['NumAxis'] == 1) {
 			if ($GraphOptions[0]['Values'] == 'PERCENT') {
-				$DataSeries = $val;
+				$TmpDataSeries = $val;
 				// Calculate MaxValue in Data Series
 				$MaxValue = 0;
-				foreach($DataSeries as $index => $value) {
+				foreach($TmpDataSeries as $index => $value) {
 					$MaxValue += $value;
 				} //foreach
 				if ($MaxValue > 0) {
 					// Update data series, replace each value with its percentage
 					$AccumPercent = 0;
 					$i = 1; // Fake index, we need it to know what is the last value in series
-					foreach($DataSeries as $index => $value) {
+					foreach($TmpDataSeries as $index => $value) {
 						$Percent = trim(sprintf('%5.2f', ($value/$MaxValue)*100));
-						if ($i == count($DataSeries)) {
+						if ($i == count($TmpDataSeries)) {
 							$Percent = trim(sprintf('%5.2f', 100 - $AccumPercent));
 						}
 						$AccumPercent += $Percent;
-						$DataSeries[$index] = $Percent;
+						$TmpDataSeries[$index] = $Percent;
 						$i++;
 					} //foreach
-					$val = $DataSeries;
+					$val = $TmpDataSeries;
 				} //if
 			} //if
 		}
-		
+		fb($kind);
 		switch ($kind) {
 			case "BAR":
-				if ($GraphOptions['NumSeries'] == 1) {
-					$plot = $this->addBarPlot($opc, $val, $pal);
+				if ($GraphOptions['NumAxis'] == 1) {
+					$plot = $this->addBarPlot($opc, $DataSeries[0][0], $pal);
 					if ($GraphOptions[0]['Values'] != 'NONE') {
 						$plot->value->SetFont(FF_ARIAL, FS_NORMAL, 8);
 						if ($GraphOptions[0]['Values'] == 'PERCENT') {
@@ -429,10 +446,11 @@ class Graphic {
 						$plot->value->Show();
 					}
 					$m[] = $plot;
-				} elseif ($gType == "2TEMPO" || $gType == "2COMPAR") {
+				} else {
+					//if ($gType == "2TEMPO" || $gType == "2COMPAR") {
 					$zp = $this->addBarPlot($opc, $zo, "");
-					$y1 = $this->addBarPlot($opc, $val1, "darkblue");
-					$y2 = $this->addBarPlot($opc, $val2, "darkred");
+					$y1 = $this->addBarPlot($opc, $DataSeries[0][0], "darkblue");
+					$y2 = $this->addBarPlot($opc, $DataSeries[1][0], "darkred");
 					$y1->SetLegend($GraphOptions[0]['AxisTitle']);
 					$y2->SetLegend($GraphOptions[1]['AxisTitle']);
 					$y1p = new GroupBarPlot(array($y1, $zp));
@@ -442,8 +460,8 @@ class Graphic {
 				}
 			break;
 			case "LINE":
-				if ($GraphOptions['NumSeries'] == 1) {
-					$plot = $this->addLinePlot($opc, $val, $pal);
+				if ($GraphOptions['NumAxis'] == 1) {
+					$plot = $this->addLinePlot($opc, $DataSeries[0][0], $pal);
 					if ($GraphOptions[0]['Values'] != 'NONE') {
 						$plot->value->SetFont(FF_ARIAL, FS_NORMAL, 8);
 						if ($GraphOptions[0]['Values'] == 'PERCENT') {
@@ -474,8 +492,8 @@ class Graphic {
 					$m[] = $ylr;
 					*/
 				} elseif ($gType == "2TEMPO" || $gType == "2COMPAR") {
-					$y1p = $this->addLinePlot($opc, $val1, "darkblue");
-					$y2p = $this->addLinePlot($opc, $val2, "darkred");
+					$y1p = $this->addLinePlot($opc, $DataSeries[0][0], "darkblue");
+					$y2p = $this->addLinePlot($opc, $DataSeries[1][0], "darkred");
 					$y1p->SetLegend($GraphOptions[0]['AxisTitle']);
 					$y2p->SetLegend($GraphOptions[1]['AxisTitle']);
 					$this->g->Add($y1p);
@@ -483,7 +501,37 @@ class Graphic {
 				}
 			break;
 			case "MULTIBAR":
-				$m = $this->addMultiBarPlot($opc, $val, $pal);
+				for($i=0;$i<$GraphOptions['NumAxis'];$i++) {
+					fb($GraphOptions[$i]['AxisTitle']);
+					$bar = $this->addBarPlot($opc, $DataSeries[$i][0], $pal[$i]);
+					$bar->SetLegend($GraphOptions[$i]['AxisTitle']);
+					$b[] = $bar;
+					$i++;
+				}
+				if ($opc['_G+Mode'] == "OVERCOME")
+					$gb = new AccBarPlot($b);
+				else
+					$gb = new GroupBarPlot($b);
+				$gb->SetWidth(0.98);
+				$m[] = $gb;
+				/*
+				$i = 0;
+				fb($val);
+				$lab = array_keys($val);
+				foreach ($val as $k=>$ele) {
+					$bar = $this->addBarPlot($opc, $ele, $pal[$i]);
+					$bar->SetLegend($lab[$i]);
+					$b[] = $bar;
+					$i++;
+				}
+				if ($opc['_G+Mode'] == "OVERCOME")
+					$gb = new AccBarPlot($b);
+				else
+					$gb = new GroupBarPlot($b);
+				$gb->SetWidth(0.98);
+				$m[] = $gb;
+				*/
+				//$m = $this->addMultiBarPlot($opc, $val, $pal);
 			break;
 			case "MULTILINE":
 				$m = $this->addMultiLinePlot($opc, $val, $pal);
