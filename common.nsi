@@ -23,22 +23,22 @@ WindowIcon            On
 InstProgressFlags     smooth
 
 !insertmacro MUI_LANGUAGE "English";
-!define      NAME "DesInventar"
+!define      NAME    "DesInventar"
 !define      MAJORVER "8"
-!define      MINORVER "2.0.53"
-!define      PUBLISHER "DesInventar Project http://www.desinventar.org - Corporación OSSO"
+!define      MINORVER "2.0.57"
+!define      PUBLISHER "Corporación OSSO - DesInventar Project http://www.desinventar.org"
 !define      VERSION "${MAJORVER}.${MINORVER}"
 !define      SHORTNAME "${NAME}${MAJORVER}"
 !define      REGBASE "Software\OSSO\${SHORTNAME}"
 !define      HTTPDPORT "8081"
 !ifndef INSTALLMODE
-    !define      INSTALLMODE "devel"
+	!define INSTALLMODE "devel"
 !endif
 
 Name    "${NAME} ${MAJORVER}"
 Caption "${NAME} ${VERSION} ${__DATE__}"
 BrandingText "(c) 1998-2009 ${PUBLISHER}"
-OutFile Setup/desinventar-${VERSION}-${INSTALLMODE}.exe
+OutFile Setup/desinventar-${INSTALLMODE}-${VERSION}.exe
 InstallDir "$PROGRAMFILES\${Name}${MAJORVER}"
 InstallDirRegKey HKLM ${REGBASE} "Install_Dir"
 
@@ -70,15 +70,6 @@ Var Port
 Var Dialog
 Var Label
 Var Text
-
-; Installer's Pages
-;Page components
-;Page directory
-;Page custom apachePortPage apachePortPageLeave ": Apache Port"
-;Page instfiles
-
-;UninstPage uninstConfirm
-;UninstPage instfiles
 
 ; Custom Pages
 Function apachePortPage
