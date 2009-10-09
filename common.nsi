@@ -22,6 +22,11 @@ RequestExecutionLevel admin
 WindowIcon            On
 InstProgressFlags     smooth
 
+; 2009-10-02 (jhcaiced) Choose between install modes
+!ifndef INSTALLMODE
+	!define INSTALLMODE "devel"
+!endif
+
 !insertmacro MUI_LANGUAGE "English";
 !define      NAME    "DesInventar"
 !define      MAJORVER "8"
@@ -31,9 +36,6 @@ InstProgressFlags     smooth
 !define      SHORTNAME "${NAME}${MAJORVER}"
 !define      REGBASE "Software\OSSO\${SHORTNAME}"
 !define      HTTPDPORT "8081"
-!ifndef INSTALLMODE
-	!define INSTALLMODE "devel"
-!endif
 
 Name    "${NAME} ${MAJORVER}"
 Caption "${NAME} ${VERSION} ${__DATE__}"
@@ -54,7 +56,9 @@ InstallDirRegKey HKLM ${REGBASE} "Install_Dir"
 !insertmacro MUI_PAGE_LICENSE "Files\license\license.txt"
 !insertmacro MUI_PAGE_COMPONENTS
 !insertmacro MUI_PAGE_DIRECTORY
+!if ${INSTALLMODE} == 'update'
 Page custom apachePortPage apachePortPageLeave ": Apache Port"
+!endif
 !insertmacro MUI_PAGE_INSTFILES
 ;!insertmacro MUI_PAGE_FINISH
 
@@ -102,7 +106,8 @@ Function .onInit
 FunctionEnd
 
 ; Installer Sections
-Section "MS4W - MapServer Installation Core"
+!if ${INSTALLMODE} == 'install'
+Section "Core Files"
 	SectionIn RO
 	SetShellVarContext all
 
@@ -164,61 +169,9 @@ Section "MS4W - MapServer Installation Core"
 	skip7:
 	!undef distFile
 SectionEnd
+!endif
 
-Section "Application Install"
-	SectionIn RO
-	SetShellVarContext all
-
-	; Delete Original htdocs files
-	SetOutPath $INSTDIR\ms4w\Apache\htdocs
-	Delete *.*
-
-	File /r /x '.svn' Web\*.*
-
-	SetOutPath $INSTDIR
-	File Files\license\license.txt
-	File Files\icon\${NAME}.ico
-
-	CreateDirectory $INSTDIR\tmp
-	CreateDirectory $INSTDIR\www
-	CreateDirectory $INSTDIR\www\graphs
-	CreateDirectory $INSTDIR\data\main
-	CreateDirectory $INSTDIR\data\database
-	
-	SetOutPath $INSTDIR\data\main
-	File Files\database\core.db
-	File Files\database\base.db
-	File Files\database\desinventar.db
-	File Files\fonts\fontswin.txt
-
-    ; Install worldmap shape file
-    CreateDirectory $INSTDIR\data\main\worldmap
-	!define distFile "world_adm0.zip"
-	IfFileExists "$EXEDIR\${distFile}" installmap skipmap
-	installmap:
-		ZipDLL::extractall "$EXEDIR\${distFile}" '$INSTDIR\data\main\worldmap'
-	skipmap:
-	!undef distFile
-
-	SetOutPath $INSTDIR\ms4w
-	File Files\conf\apache-start.bat
-	File Files\conf\apache-stop.bat
-	
-	SetOutPath $INSTDIR\ms4w\httpd.d
-	File Files\conf\httpd_extJS.conf
-	File Files\conf\httpd_jquery.conf
-	File Files\conf\httpd_openlayers.conf
-	File Files\conf\httpd_desinventar-8.2-data.conf
-	
-	;Store installation folder in registry
-	WriteRegStr HKLM ${REGBASE} "Install_Dir" "$INSTDIR"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${SHORTNAME}" "DisplayName" "${NAME} ${MAJORVER}"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${SHORTNAME}" "UninstallString" "$INSTDIR\uninstall.exe"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${SHORTNAME}" "Publisher" "${PUBLISHER}"
-	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${SHORTNAME}" "NoModify" 1
-	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${SHORTNAME}" "NoRepair" 1
-SectionEnd
-
+!if ${INSTALLMODE} == 'install'
 Section "Application Local Configuration"
 	SectionIn RO
 	SetShellVarContext all
@@ -312,7 +265,63 @@ Section "Application Local Configuration"
 	skip11:
 	!undef FILE
 SectionEnd
+!endif
 
+Section "Application Install"
+	SectionIn RO
+	SetShellVarContext all
+
+	; Delete Original htdocs files
+	SetOutPath $INSTDIR\ms4w\Apache\htdocs
+	Delete *.*
+
+	File /r /x '.svn' Web\*.*
+
+	SetOutPath $INSTDIR
+	File Files\license\license.txt
+	File Files\icon\${NAME}.ico
+
+	CreateDirectory $INSTDIR\tmp
+	CreateDirectory $INSTDIR\www
+	CreateDirectory $INSTDIR\www\graphs
+	CreateDirectory $INSTDIR\data\main
+	CreateDirectory $INSTDIR\data\database
+
+	SetOutPath $INSTDIR\data\main
+	File Files\database\core.db
+	File Files\database\base.db
+	File Files\database\desinventar.db
+	File Files\fonts\fontswin.txt
+
+    ; Install worldmap shape file
+    CreateDirectory $INSTDIR\data\main\worldmap
+	!define distFile "world_adm0.zip"
+	IfFileExists "$EXEDIR\${distFile}" installmap skipmap
+	installmap:
+		ZipDLL::extractall "$EXEDIR\${distFile}" '$INSTDIR\data\main\worldmap'
+	skipmap:
+	!undef distFile
+
+	SetOutPath $INSTDIR\ms4w
+	File Files\conf\apache-start.bat
+	File Files\conf\apache-stop.bat
+
+	SetOutPath $INSTDIR\ms4w\httpd.d
+	File Files\conf\httpd_extJS.conf
+	File Files\conf\httpd_jquery.conf
+	File Files\conf\httpd_openlayers.conf
+	File Files\conf\httpd_desinventar-8.2-data.conf
+
+	;Store installation folder in registry
+	WriteRegStr HKLM ${REGBASE} "Install_Dir" "$INSTDIR"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${SHORTNAME}" "DisplayName" "${NAME} ${MAJORVER}"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${SHORTNAME}" "UninstallString" "$INSTDIR\uninstall.exe"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${SHORTNAME}" "Publisher" "${PUBLISHER}"
+	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${SHORTNAME}" "NoModify" 1
+	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${SHORTNAME}" "NoRepair" 1
+SectionEnd
+
+!if ${INSTALLMODE} == 'install'
 Section "Install Sample Database Data"
 	SetShellVarContext all
 
@@ -324,7 +333,9 @@ Section "Install Sample Database Data"
 	skip1:
 	!undef distFile
 SectionEnd
+!endif
 
+!if ${INSTALLMODE} == 'install'
 Section 'Install Apache Service'
 	SectionIn RO
 	SetShellVarContext all
@@ -374,6 +385,7 @@ Section 'Install Apache Service'
 	skip6:
 	!undef FILE
 SectionEnd
+!endif
 
 !Macro "CreateURL" "URLFile" "URLSite" "URLDesc"
   WriteINIStr "$EXEDIR\${URLFile}.URL" "InternetShortcut" "URL" "${URLSite}"
