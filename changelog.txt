@@ -1,3 +1,6 @@
+* 2009-10-09 Jhon H. Caicedo <jhcaiced@desinventar.org>
+- Updated install.nsi for upse with update mode.
+
 * 2009-09-01 Jhon H. Caicedo <jhcaiced@desinventar.org>
 - Moved databases etc. and use url desinventar-8.2 in 
   references.
