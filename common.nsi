@@ -56,7 +56,7 @@ InstallDirRegKey HKLM ${REGBASE} "Install_Dir"
 !insertmacro MUI_PAGE_LICENSE "Files\license\license.txt"
 !insertmacro MUI_PAGE_COMPONENTS
 !insertmacro MUI_PAGE_DIRECTORY
-!if ${INSTALLMODE} == 'update'
+!if ${INSTALLMODE} == 'install'
 Page custom apachePortPage apachePortPageLeave ": Apache Port"
 !endif
 !insertmacro MUI_PAGE_INSTFILES
