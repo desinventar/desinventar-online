@@ -180,7 +180,7 @@ class DIRegion extends DIObject {
 			if (!file_exists($DBDir)) {
 				mkdir($DBDir);
 			}
-			if (file_exists(CONST_DBREGION)) {
+			if (file_exists(CONST_DBNEWREGION)) {
 				// Backup previous desinventar.db if exists
 				if (file_exists($DBFile)) {
 					$DBFile2 = $DBFile . '.bak';
@@ -189,7 +189,7 @@ class DIRegion extends DIObject {
 					}
 					rename($DBFile, $DBFile2);
 				}
-				$iReturn = copy(CONST_DBREGION, $DBFile);
+				$iReturn = copy(CONST_DBNEWREGION, $DBFile);
 			}
 		} catch (Exception $e) {
 			showErrorMsg("Error " . $e->getMessage());
@@ -795,6 +795,48 @@ class DIRegion extends DIObject {
 			$Value = $Value & ~$prmBit;
 		}
 		$this->set('RegionStatus', $Value);
+	}
+	
+	public static function rebuildRegionListFromDirectory($us, $prmDir = '') {
+		if ($prmDir == '') {
+			$prmDir = CONST_DBREGIONDIR;
+		}
+		// ADMINREG: Create database list from directory
+		$dbb = dir($prmDir);
+		while (false !== ($Dir = $dbb->read())) {
+			if (($Dir != '.') && ($Dir != '..')) {
+				fb($Dir);
+				DIRegion::createRegionEntryFromDir($us, $Dir);
+			}
+		}
+		$dbb->close();
+	}
+
+	public static function createRegionEntryFromDir($us, $dir) {
+		$regexist = $us->q->checkExistsRegion($dir);
+		$regexist = 0;
+		$difile = CONST_DBREGIONDIR . '/' . $dir ."/desinventar.db";
+		$stat = 0;
+		if (strlen($dir) >= 4 && file_exists($difile) && !$regexist) {
+			if ($us->q->setDBConnection($dir)) {
+				$data['RegionUserAdmin'] = "root";
+				foreach($us->q->dreg->query("SELECT InfoKey, InfoValue FROM Info", PDO::FETCH_ASSOC) as $row) {
+					if ($row['InfoKey'] == "RegionId" || $row['InfoKey'] == "RegionLabel" || $row['InfoKey'] == "LangIsoCode " || 
+						$row['InfoKey'] == "CountryIso " || $row['InfoKey'] == "RegionOrder" || $row['InfoKey'] == "RegionStatus" || 
+						$row['InfoKey'] == "IsCRegion" || $row['InfoKey'] == "IsVRegion")
+							$data[$row['InfoKey']] = $row['InfoValue'];
+				}
+				// Create database only if RegionId is equal to directory name
+				if ($data['RegionId'] == $dir) {
+					$r = new DIRegion($us, $data['RegionId']);
+					$r->setFromArray($data);
+					$stat = $r->insert();
+					if (!iserror($stat))
+						$rol = $us->setUserRole($data['RegionUserAdmin'], $data['RegionId'], "ADMINREGION");
+				}
+			}
+		}
+		return $stat;
 	}
 	
 } //class

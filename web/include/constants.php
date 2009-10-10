@@ -16,7 +16,10 @@ define('CONST_DBCORE', VAR_DIR ."/main/core.db");
 // base.db - DI's Basic database, predefined events etc.
 define('CONST_DBBASE', VAR_DIR ."/main/base.db");
 // region.db - Emtpy database skeleton for Regions
-define('CONST_DBREGION', VAR_DIR . "/main/desinventar.db");
+define('CONST_DBNEWREGION', VAR_DIR . "/main/desinventar.db");
+
+// database directory
+define('CONST_DBREGIONDIR', VAR_DIR . "/database");
 
 // dicore objects
 define ("DI_EVENT",			1);
