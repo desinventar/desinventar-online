@@ -10,7 +10,7 @@ Requeriments
 
 PHP Components
 - Smarty-2.6.26 (http://smarty.php.net/)
-- Jpgraph-2.3.3 (http://www.aditus.nu/jpgraph/)
+- Jpgraph-3.0.3 (http://www.aditus.nu/jpgraph/)
 - arial.ttf must be installed, more info at:
   http://corefonts.sourceforge.net/
 
