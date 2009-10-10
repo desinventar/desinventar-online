@@ -81,6 +81,7 @@ class Query extends PDO
 				$iReturn = ERR_NO_DATABASE;			
 			} //if
 		} else {
+			$iReturn = ERR_NO_DATABASE;
 			$this->dreg = null;
 			$this->sRegionId = '';
 		}
@@ -652,9 +653,13 @@ class Query extends PDO
 				"ORDER BY R.CountryIso, R.RegionLabel";
 		$data = array();
 		foreach($this->core->query($sql) as $row) {
-			$RegionActive = ($row['RegionStatus'] & 1) > 0;
-			$RegionPublic = ($row['RegionStatus'] & 2) > 0;
-			$data[$row['RegionId']] = array($row['CountryIso'], $row['RegionLabel'], $row['LangIsoCode'], 
+			$RegionActive = ($row['RegionStatus'] & CONST_REGIONACTIVE) > 0;
+			$RegionPublic = ($row['RegionStatus'] & CONST_REGIONPUBLIC) > 0;
+			$RegionLabel  = $row['RegionLabel'];
+			if ($RegionLabel == '') {
+				$RegionLabel = $row['RegionId'];
+			}
+			$data[$row['RegionId']] = array($row['CountryIso'], $RegionLabel, $row['LangIsoCode'], 
 											$row['UserId'], $RegionActive, $RegionPublic);
 		}
 		return $data;

@@ -34,31 +34,6 @@ function form2region ($val) {
 	return $dat;
 }
 
-function createRegionFromDir($dir, $u) {
-	$regexist = $u->q->checkExistsRegion($dir);
-	$difile = VAR_DIR . "/database/" . $dir ."/desinventar.db";
-	$stat = 0;
-	if (strlen($dir) >= 4 && file_exists($difile) && !$regexist) {
-		$didb = new PDO("sqlite:" . $difile);
-		$data['RegionUserAdmin'] = "root";
-		foreach($didb->query("SELECT InfoKey, InfoValue FROM Info", PDO::FETCH_ASSOC) as $row) {
-			if ($row['InfoKey'] == "RegionId" || $row['InfoKey'] == "RegionLabel" || $row['InfoKey'] == "LangIsoCode " || 
-				$row['InfoKey'] == "CountryIso " || $row['InfoKey'] == "RegionOrder" || $row['InfoKey'] == "RegionStatus" || 
-				$row['InfoKey'] == "IsCRegion" || $row['InfoKey'] == "IsVRegion")
-					$data[$row['InfoKey']] = $row['InfoValue'];
-		}
-		// Create database only if RegionId is equal to directory name
-		if ($data['RegionId'] == $dir) {
-			$r = new DIRegion($u, $data['RegionId']);
-			$r->setFromArray($data);
-			$stat = $r->insert();
-			if (!iserror($stat))
-				$rol = $u->setUserRole($data['RegionUserAdmin'], $data['RegionId'], "ADMINREGION");
-		}
-	}
-	return $stat;
-}
-
 /*
 // REGIONS: Show databases for selected Country 
 if (isset($_GET['c']) && (strlen($_GET['c']) > 0)) {
@@ -144,12 +119,7 @@ elseif (isset($_GET['cmd']) && !empty($_GET['cmd']))
 			$t->assign ("ctl_reglist", true);
 		break;
 		case "createRegionsFromDBDir":
-			// ADMINREG: Create database list from directory
-			$dbb = dir(VAR_DIR . "/database/");
-			while (false !== ($entry = $dbb->read())) {
-				createRegionFromDir($entry, $us);
-			}
-			$dbb->close();
+			DIRegion::rebuildRegionListFromDirectory($us);
 			$t->assign ("regpa", $us->q->getRegionAdminList());
 			$t->assign ("ctl_reglist", true);
 		break;
@@ -161,7 +131,7 @@ elseif (isset($_GET['cmd']) && !empty($_GET['cmd']))
 					$regid = substr($myreg['name'], 0, -1);
 					if (!empty($regid)) {
 						$zip->extractTo(VAR_DIR . "/database/");
-						$result = createRegionFromDir($regid, $us);
+						$result = DIRegion::createRegionEntryFromDir($us, $regid);
 						$t->assign ("ctl_successfromzip", true);
 					}
 					$zip->close();
