@@ -805,7 +805,6 @@ class DIRegion extends DIObject {
 		$dbb = dir($prmDir);
 		while (false !== ($Dir = $dbb->read())) {
 			if (($Dir != '.') && ($Dir != '..')) {
-				fb($Dir);
 				DIRegion::createRegionEntryFromDir($us, $Dir);
 			}
 		}
