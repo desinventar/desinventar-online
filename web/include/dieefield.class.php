@@ -23,6 +23,9 @@ class DIEEField extends DIObject {
 		parent::__construct($prmSession);
 		$num_args = func_num_args();
 		$this->set('EEFieldId', $this->getNextEEFieldId());
+		$this->set('EEFieldStatus', 3);
+		$this->set('EEFieldType', 'TEXT');
+		$this->set('EEFieldSize', 50);
 		if ($num_args >= 2) {
 			$prmEEFieldId = func_get_arg(1);
 			if ($prmEEFieldId != '') {

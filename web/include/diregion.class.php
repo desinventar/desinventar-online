@@ -805,6 +805,7 @@ class DIRegion extends DIObject {
 		$dbb = dir($prmDir);
 		while (false !== ($Dir = $dbb->read())) {
 			if (($Dir != '.') && ($Dir != '..')) {
+				fb($Dir);
 				DIRegion::createRegionEntryFromDir($us, $Dir);
 			}
 		}
@@ -818,6 +819,7 @@ class DIRegion extends DIObject {
 		$stat = 0;
 		if (strlen($dir) >= 4 && file_exists($difile) && !$regexist) {
 			if ($us->q->setDBConnection($dir)) {
+				fb('debug 0');
 				$data['RegionUserAdmin'] = "root";
 				foreach($us->q->dreg->query("SELECT InfoKey, InfoValue FROM Info", PDO::FETCH_ASSOC) as $row) {
 					if ($row['InfoKey'] == "RegionId" || $row['InfoKey'] == "RegionLabel" || $row['InfoKey'] == "LangIsoCode " || 
@@ -825,11 +827,13 @@ class DIRegion extends DIObject {
 						$row['InfoKey'] == "IsCRegion" || $row['InfoKey'] == "IsVRegion")
 							$data[$row['InfoKey']] = $row['InfoValue'];
 				}
+				$data['RegionId'] = $dir;
 				// Create database only if RegionId is equal to directory name
 				if ($data['RegionId'] == $dir) {
 					$r = new DIRegion($us, $data['RegionId']);
 					$r->setFromArray($data);
 					$stat = $r->insert();
+					fb($stat);
 					if (!iserror($stat))
 						$rol = $us->setUserRole($data['RegionUserAdmin'], $data['RegionId'], "ADMINREGION");
 				}
