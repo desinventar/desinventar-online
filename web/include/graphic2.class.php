@@ -19,8 +19,6 @@ class Graphic {
 	/* opc [kind:BAR,LINE,PIE Opc:Title,etc] data:Matrix
 	   data[0] == X, data[1] = Y1,  .. */
 	public function Graphic2($opc, $data) {
-		fb($opc);
-		fb($data);
 
 		$q = new Query($opc['_REG']);
 		
@@ -96,7 +94,6 @@ class Graphic {
 				$gType = $kind;				// Pie Comparatives
 			}
 		}
-		fb($GraphOptions);
 		
 		// Process Data Series */
 
@@ -144,7 +141,6 @@ class Graphic {
 				$GraphOptions[0]['SeriesTitle'] = array();
 				$GraphOptions[0]['SeriesTitle'][] = 'Deslizamiento';
 				$GraphOptions[0]['SeriesTitle'][] = 'Granizada';
-				fb($DataSeries);
 			}
 		}
 		
@@ -157,7 +153,6 @@ class Graphic {
 		if (isset($opc['_G+Stat']))
 			$this->sStat = $opc['_G+Stat'];
 
-		fb($gType);
 		// MULTIBAR OR MULTILINE: reformat arrays completing time serie
 		if ($gType == "XTEMPO") {
 			if ($kind == "BAR")
@@ -437,7 +432,6 @@ class Graphic {
 				} //if
 			} //if
 		}
-		fb($kind);
 		switch ($kind) {
 			case "BAR":
 				if ($GraphOptions['NumAxis'] == 1) {
@@ -513,7 +507,6 @@ class Graphic {
 				for($i=0;$i<$GraphOptions['NumAxis'];$i++) {
 					for($j=0;$j<$GraphOptions['NumSeries'];$j++) {
 						$bar = $this->addBarPlot($opc, $DataSeries[$i][$j], $pal[$j]);
-						fb($GraphOptions[$i]['SeriesTitle'][$j]);
 						$bar->SetLegend($GraphOptions[$i]['SeriesTitle'][$j]);
 						$b[] = $bar;
 					}
@@ -526,7 +519,6 @@ class Graphic {
 				$m = $gb;
 				/*
 				$i = 0;
-				fb($val);
 				$lab = array_keys($val);
 				foreach ($val as $k=>$ele) {
 					$bar = $this->addBarPlot($opc, $ele, $pal[$i]);

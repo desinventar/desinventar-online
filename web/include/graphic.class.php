@@ -19,8 +19,6 @@ class Graphic {
 	/* opc [kind:BAR,LINE,PIE Opc:Title,etc] data:Matrix
 	   data[0] == X, data[1] = Y1,  .. */
 	public function Graphic ($opc, $data) {
-		fb($opc);
-		fb($data);
 		$kind = $opc['_G+Kind'];
 		// Get Label Information
 		$oLabels     = array_keys($data);
@@ -510,7 +508,6 @@ class Graphic {
 
 	// Setting a Multibar graphic
 	function multibar($opc, $val, $pal) {
-		fb($val);
 		$i = 0;
 		$lab = array_keys($val);
 		foreach ($val as $k=>$ele) {
