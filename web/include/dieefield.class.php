@@ -51,6 +51,36 @@ class DIEEField extends DIObject {
 		$FieldName = "EEF" . $this->padNumber($v + 1, 3);
 		return $FieldName;
 	}
+	
+	public function insert($withValidate = true) {
+		$iReturn = ERR_NO_ERROR;
+		if ($iReturn > 0) {
+			$iReturn = parent::insert($withValidate);
+		}
+		if ($iReturn > 0) {
+			// Create column in EEData table
+			$EEFieldType = $this->get('EEFieldType');
+			$EEFieldSize = $this->get('EEFieldSize');
+			switch ($EEFieldType) {
+				case 'INT':
+				case 'INTEGER':
+				case 'NUMERIC':
+				case 'BOOLEAN':
+					$EEFieldType = 'NUMERIC';
+				break;
+				case 'FLOAT':
+				case 'DOUBLE':
+					$$EEFieldType = 'REAL';
+				break;
+				default:
+					$EEFieldType = 'TEXT';
+				break;
+			}
+			$Query = "ALTER TABLE EEData ADD COLUMN " . $this->get('EEFieldId') . ' ' . $EEFieldType;
+			$this->q->dreg->query($Query);
+		}
+		return $iReturn;
+	}
 } //class
 
 </script>
