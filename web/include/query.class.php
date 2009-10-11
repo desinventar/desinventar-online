@@ -439,7 +439,7 @@ class Query extends PDO
   function getEEFieldList($act) {
     $sql = "SELECT * FROM EEField";
     if ($act != "")
-      $sql .= " WHERE EEFieldStatus=1";
+      $sql .= " WHERE EEFieldStatus=1 OR EEFieldStatus=3";
     $data = array();
     $res = $this->dreg->query($sql);
     foreach($res as $row)

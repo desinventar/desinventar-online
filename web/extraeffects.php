@@ -30,19 +30,19 @@ if (isset($get['cmd'])) {
 	$cmd = $get['cmd'];
 	if (($cmd == "insert") || ($cmd == "update")) {
 		if (isset($get['EEFieldActive']) && $get['EEFieldActive'] == "on")
-			$active = 1;
+			$status |= CONST_REGIONACTIVE;
 		else
-			$active = 0;
+			$status &= ~CONST_REGIONACTIVE;
 		if (isset($get['EEFieldPublic']) && $get['EEFieldPublic'] == "on")
-			$public = 1;
+			$status |= CONST_REGIONPUBLIC;
 		else
-			$public = 0;
+			$status &= CONST_REGIONPUBLIC;
 		$data = array('EEFieldId'     => $get['EEFieldId'],
 		              'EEFieldLabel'  => $get['EEFieldLabel'],
 		              'EEFieldDesc'   => $get['EEFieldDesc'], 
 		              'EEFieldType'   => $get['EEFieldType'], 
 		              'EEFieldSize'   => $get['EEFieldSize'],
-		              'EEFieldStatus' => $active);
+		              'EEFieldStatus' => $status);
 		$o = new DIEEField($us, $get['EEFieldId']);
 		$o->setFromArray($data);
 		if ($cmd == "insert")
