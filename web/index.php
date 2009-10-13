@@ -177,15 +177,15 @@ switch ($cmd) {
 						$backfile = WWWDIR ."/backups/". $RegionId .".zip";
 						$zip = new ZipArchive();
 						if ($zip->open($backfile, ZIPARCHIVE::CREATE)!==TRUE) {
-							echo "cannot open <$backfile>\n";
+							echo "cannot open $backfile\n";
 						}
 						else {
 							$path = VAR_DIR ."/database/". $RegionId ."/";
-							$zip->addEmptyDir($RegionId);
+							//$zip->addEmptyDir($RegionId);
 							$fdb = dir($path);
 							while (false !== ($entry = $fdb->read())) {
 								if (is_file($path . $entry))
-									$zip->addFile($path . $entry, $RegionId ."/". $entry);
+									$zip->addFile($path . $entry, $entry); //$RegionId ."/". 
 							}
 							$fdb->close();
 							$status = true;
