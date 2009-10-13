@@ -2,6 +2,14 @@
 {-* ADMINREG: Interface to Edit Portal Admin *-}
 {-if $ctl_adminreg-}
 	<h2>{-#ttname#-}</h2>
+	<input id="directory" type="hidden" value="{-#bloaddir#-}"
+		onClick="updateList('lst_regionpa', 'region.php', 'cmd=createRegionsFromDBDir');" />
+	<form id="putregion" method="POST" action="region.php" target="fresult" enctype="multipart/form-data">
+		<input type="hidden" name="cmd" value="createRegionFromZip" />
+		{-#tregnamlist#-} <input type="text" name="RegionLabel" />
+		{-#bupzipfile#-} <input type="file" name="filereg" />
+		<input type="submit" value="Ok" onClick="uploadMsg('');" />
+	</form>
 	<div class="dwin" style="width:500px; height:150px;">
 	 <table class="col">
 	  <thead>
@@ -36,23 +44,8 @@
 	 </table>
 	</div>
 	<br />
-	<table border="0">
-		<tr>
-		<td>
-		<input id="add" type="button" value="{-#baddoption#-}" onclick="mod='regionpa'; setRegionPA('','', '', '', '', '1','0'); 
-			$('cmd').value='insert'; $('fresult').src='about:blank;'" />&nbsp;|&nbsp;
-		</td>
-		<td>
-		<input id="directory" type="hidden" value="{-#bloaddir#-}"
-			onClick="updateList('lst_regionpa', 'region.php', 'cmd=createRegionsFromDBDir');" />
-		<form id="putregion" method="POST" action="region.php" target="fresult" enctype="multipart/form-data">
-			<input type="hidden" name="cmd" value="createRegionFromZip" />
-			{-#bupzipfile#-} <input type="file" name="filereg" />
-			<input type="submit" value="Ok" onClick="uploadMsg('');" />
-		</form>
-		</td>
-		</tr>
-	</table>
+	<input id="add" type="button" value="{-#baddoption#-}" onclick="mod='regionpa'; setRegionPA('','', '', '', '', '1','0'); 
+		$('cmd').value='insert'; $('fresult').src='about:blank;'" />
 	<span id="regionpastatusmsg" class="dlgmsg"></span><br />
 	<iframe name="fresult" id="fresult" frameborder="0" src="about:blank" style="height:30px; width:400px;"></iframe>
 	<div id="regionpaaddsect" style="display:none">

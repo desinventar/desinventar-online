@@ -797,6 +797,10 @@ class DIRegion extends DIObject {
 		$this->set('RegionStatus', $Value);
 	}
 	
+	public static function renameRegion($oldRegionId, $newRegionId) {
+		
+	}
+	
 	public static function rebuildRegionListFromDirectory($us, $prmDir = '') {
 		if ($prmDir == '') {
 			$prmDir = CONST_DBREGIONDIR;
@@ -811,7 +815,7 @@ class DIRegion extends DIObject {
 		$dbb->close();
 	}
 
-	public static function createRegionEntryFromDir($us, $dir) {
+	public static function createRegionEntryFromDir($us, $dir, $reglabel) {
 		$regexist = $us->q->checkExistsRegion($dir);
 		$regexist = 0;
 		$difile = CONST_DBREGIONDIR . '/' . $dir ."/desinventar.db";
@@ -821,19 +825,18 @@ class DIRegion extends DIObject {
 				$data['RegionUserAdmin'] = "root";
 				foreach($us->q->dreg->query("SELECT InfoKey, InfoValue FROM Info", PDO::FETCH_ASSOC) as $row) {
 					if ($row['InfoKey'] == "RegionId" || $row['InfoKey'] == "RegionLabel" || $row['InfoKey'] == "LangIsoCode " || 
-						$row['InfoKey'] == "CountryIso " || $row['InfoKey'] == "RegionOrder" || $row['InfoKey'] == "RegionStatus" || 
+						$row['InfoKey'] == "CountryIso" || $row['InfoKey'] == "RegionOrder" || $row['InfoKey'] == "RegionStatus" || 
 						$row['InfoKey'] == "IsCRegion" || $row['InfoKey'] == "IsVRegion")
 							$data[$row['InfoKey']] = $row['InfoValue'];
 				}
 				$data['RegionId'] = $dir;
-				// Create database only if RegionId is equal to directory name
-				if ($data['RegionId'] == $dir) {
-					$r = new DIRegion($us, $data['RegionId']);
-					$r->setFromArray($data);
-					$stat = $r->insert();
-					if (!iserror($stat))
-						$rol = $us->setUserRole($data['RegionUserAdmin'], $data['RegionId'], "ADMINREGION");
-				}
+				if (!empty($reglabel))
+					$data['RegionLabel'] = $reglabel;
+				$r = new DIRegion($us, $data['RegionId']);
+				$r->setFromArray($data);
+				$stat = $r->insert();
+				if (!iserror($stat))
+					$rol = $us->setUserRole($data['RegionUserAdmin'], $data['RegionId'], "ADMINREGION");
 			}
 		}
 		return $stat;
