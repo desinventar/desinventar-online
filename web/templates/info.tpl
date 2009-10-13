@@ -79,7 +79,7 @@
 				<input type="submit" value="{-#bsave#-}" {-$ro-} class="line"/>
 				<input type="reset" value="{-#bcancel#-}" {-$ro-} onclick="mod='info'; uploadMsg('');" class="line" />
 				<br />
-				<iframe name="ifinfo" id="ifinfo" frameborder="0" src="about:blank" style="height:16px; width:350px;"></iframe>
+				<iframe name="ifinfo" id="ifinfo" frameborder="0" src="about:blank" style="height:30px; width:350px;"></iframe>
 			</td>
 			</tr>
 			</table>
