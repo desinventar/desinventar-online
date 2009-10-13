@@ -22,8 +22,16 @@ function form2data($form) {
 	$dat = array();
 	foreach ($form as $key=>$value) {
 		$k = explode('_', $key);
-		$dat[$k[0]] = $value;
+		if (count($k) == 1)
+			$dat[$key] = $value;
+		elseif (count($k) == 2) {
+			if (empty($k[1]))
+				$dat[$k[0]] = $value;
+			elseif (empty($k[0]))
+				$dat[$k[1]] = $value;
+		}
 	}
+	//print_r($dat);
 	return $dat;
 }
 
@@ -45,13 +53,15 @@ $us->open($reg);
 // EDIT REGION: Form to Create and assign regions
 if (isset($infocmd)) {
 	$ifo = 0;
-	$data = form2data($post);
-	print_r($data);
+	$data = $post; //form2data($post);
 	$r = new DIRegion($us, $data['RegionId']);
 	$r->setFromArray($data);
 	$ifo = $r->update();
-	if (!iserror($ifo)) 
+	if (!iserror($ifo)) {
 		$t->assign ("ctl_msgupdinfo", true);
+		if (isset($_FILES['logofile']) && $_FILES['logofile']['error'] == UPLOAD_ERR_OK)
+			move_uploaded_file($_FILES['logofile']['tmp_name'], VAR_DIR ."/database/". $reg . "/logo.png");
+	}
 	else {
 		$t->assign ("ctl_errupdinfo", true);
 		$t->assign ("updstatinfo", $ifo);
