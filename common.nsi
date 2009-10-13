@@ -152,12 +152,19 @@ Section "Core Files"
 	!undef distFile
 
 	; Install JPGraph file into install directory
-	!define distFile "jpgraph-3.0.3.zip"
+	!define distFile "jpgraph-3.0.6.zip"
 	IfFileExists "$EXEDIR\${distFile}" continue6 skip6
 	continue6:
 	    ZipDLL::extractall "$EXEDIR\${distFile}" '$INSTDIR\ms4w\apps'
-		Rename '$INSTDIR\ms4w\apps\jpgraph-3.0.3' '$INSTDIR\ms4w\apps\jpgraph'
+		Rename '$INSTDIR\ms4w\apps\jpgraph-3.0.6' '$INSTDIR\ms4w\apps\jpgraph'
 	skip6:
+	!undef distFile
+	!define distFile "jpgraph-3.0.3.zip"
+	IfFileExists "$EXEDIR\${distFile}" continue6A skip6A
+	continue6A:
+	    ZipDLL::extractall "$EXEDIR\${distFile}" '$INSTDIR\ms4w\apps'
+		Rename '$INSTDIR\ms4w\apps\jpgraph-3.0.3' '$INSTDIR\ms4w\apps\jpgraph'
+	skip6A:
 	!undef distFile
 
 	; Extract OpenLayers into install directory
@@ -249,6 +256,8 @@ Section "Application Local Configuration"
 	continue10:
 	${textreplace::ReplaceInFile} "${FILE}" "${FILE}" "\ms4w" "$INSTDIR\ms4w" "" $Return
 	${textreplace::ReplaceInFile} "${FILE}" "${FILE}" "/ms4w" "$INSTDIR_forward/ms4w" "" $Return
+	${textreplace::ReplaceInFile} "${FILE}" "${FILE}" "post_max_size = 8M" "post_max_size = 48M" "" $Return
+	${textreplace::ReplaceInFile} "${FILE}" "${FILE}" "upload_max_filesize = 2M" "upload_max_filesize = 48M" "" $Return
 	skip10:
 	!undef FILE
 	
@@ -321,6 +330,7 @@ Section "Application Install"
 	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${SHORTNAME}" "NoRepair" 1
 SectionEnd
 
+/*
 !if ${INSTALLMODE} == 'install'
 Section "Install Sample Database Data"
 	SetShellVarContext all
@@ -334,6 +344,7 @@ Section "Install Sample Database Data"
 	!undef distFile
 SectionEnd
 !endif
+*/
 
 !if ${INSTALLMODE} == 'install'
 Section 'Install Apache Service'
