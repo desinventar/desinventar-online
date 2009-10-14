@@ -224,7 +224,7 @@
 				updateList('import', 'import.php', 'r={-$reg-}');
 			break;
 			case "mcrdbak":
-				window.location = "index.php?r={-$reg-}&cmd=backupDB";
+				window.location = "index.php?cmd=getRegionBackup&r={-$reg-}";
 			break;
 			case "mcrdcfg":
 				w = Ext.getCmp('westm');

@@ -56,6 +56,7 @@ if (isset($_SERVER["HTTP_HOST"])) {
 	$_SERVER["DI8_WWWDIR"]   = "/var/www/desinventar-8.2";
 	$_SERVER["DI8_DATADIR"]  = "/var/lib/desinventar-8.2";
 	$_SERVER["DI8_CACHEDIR"] = "/var/cache/Smarty/di8";
+	define('TEMP', '/tmp');
 }
 
 define("BASE"    , $_SERVER["DI8_WEB"]);
@@ -65,7 +66,7 @@ define("WWWURL"  , "/");
 define("DATADIR" , $_SERVER["DI8_DATADIR"]);
 define("CACHEDIR", $_SERVER["DI8_CACHEDIR"]);
 define("VAR_DIR" , DATADIR);
-define("TMP_DIR" , DATADIR);
+define("TMP_DIR" , TEMP);
 define("SMTY_DIR", CACHEDIR); // Smarty temp dir
 define("TMPM_DIR", CACHEDIR); // Mapserver temp dir
 
