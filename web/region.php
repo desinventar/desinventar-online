@@ -130,11 +130,12 @@ elseif (isset($_GET['cmd']) && !empty($_GET['cmd']))
 					$myreg = $zip->statIndex(0);
 					$regid = substr($myreg['name'], 0, -1);
 					if (!empty($regid)) {
-						if (empty($_POST['RegionLabel']))
+						if (empty($_POST['RegionLabel'])) {
 							$myreg = $regid;
-						else
-							$myreg = DIRegion::buildRegionId('XXX', $_POST['RegionLabel']);
-						mkdir(VAR_DIR . "/database/". $myreg, 0700);
+						} else {
+							$myreg = DIRegion::buildRegionId('', $_POST['RegionLabel']);
+						}
+						mkdir(VAR_DIR . "/database/". $myreg, 0755);
 						$zip->extractTo(VAR_DIR . "/database/". $myreg);
 						$result = DIRegion::createRegionEntryFromDir($us, $myreg, $_POST['RegionLabel']);
 						$t->assign ("ctl_successfromzip", true);
