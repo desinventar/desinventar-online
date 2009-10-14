@@ -127,8 +127,9 @@ elseif (isset($_GET['cmd']) && !empty($_GET['cmd']))
 			if (isset($_FILES['filereg']) && $_FILES['filereg']['error'] == UPLOAD_ERR_OK) {
 				$zip = new ZipArchive;
 				if ($zip->open($_FILES['filereg']['tmp_name'])) {
-					$myreg = $zip->statIndex(0);
-					$regid = substr($myreg['name'], 0, -1);
+					//$myreg = $zip->statIndex(0);
+					$myreg = $_FILES['filereg']['name'];
+					$regid = substr($myreg, 0, -4);
 					if (!empty($regid)) {
 						if (empty($_POST['RegionLabel'])) {
 							$myreg = $regid;
