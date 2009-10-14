@@ -842,6 +842,25 @@ class DIRegion extends DIObject {
 		}
 		return $iReturn;
 	}
+	
+	public static function createRegionBackup($us, $RegionId, $OutFile) {
+		$iReturn = ERR_NO_ERROR;
+		$zip = new ZipArchive();
+		if ($zip->open($OutFile, ZIPARCHIVE::CREATE) != TRUE) {
+			$iReturn = ERR_UNKNOWN_ERROR;
+		} else {
+			$DBDir = VAR_DIR . '/database/' . $RegionId ."/";
+			$fhdir = dir($DBDir);
+			while ($file = $fhdir->read()) {
+				if (is_file($DBDir . $file)) {
+					$zip->addFile($DBDir . $file, $file);
+				}
+			}
+			$fhdir->close();
+		}
+		$zip->close();
+		return $iReturn;
+	}
 } //class
 
 </script>
