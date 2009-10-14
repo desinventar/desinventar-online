@@ -27,7 +27,11 @@ InstProgressFlags     smooth
 	!define INSTALLMODE "devel"
 !endif
 
+; Language Selection, First is default
+!insertmacro MUI_LANGUAGE "Spanish";
 !insertmacro MUI_LANGUAGE "English";
+
+
 !define      NAME    "DesInventar"
 !define      MAJORVER "8"
 !define      MINORVER "2.0.57"
