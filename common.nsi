@@ -262,6 +262,7 @@ Section "Application Local Configuration"
 	${textreplace::ReplaceInFile} "${FILE}" "${FILE}" "/ms4w" "$INSTDIR_forward/ms4w" "" $Return
 	${textreplace::ReplaceInFile} "${FILE}" "${FILE}" "post_max_size = 8M" "post_max_size = 48M" "" $Return
 	${textreplace::ReplaceInFile} "${FILE}" "${FILE}" "upload_max_filesize = 2M" "upload_max_filesize = 48M" "" $Return
+	${textreplace::ReplaceInFile} "${FILE}" "${FILE}" "max_execution_time = 30" "max_execution_time = 180" "" $Return
 	skip10:
 	!undef FILE
 	
