@@ -816,10 +816,10 @@ class DIRegion extends DIObject {
 	}
 
 	public static function createRegionEntryFromDir($us, $dir, $reglabel) {
+		$iReturn = ERR_NO_ERROR;
 		$regexist = $us->q->checkExistsRegion($dir);
 		$regexist = 0;
 		$difile = CONST_DBREGIONDIR . '/' . $dir ."/desinventar.db";
-		$stat = 0;
 		if (strlen($dir) >= 4 && file_exists($difile) && !$regexist) {
 			if ($us->q->setDBConnection($dir)) {
 				$data['RegionUserAdmin'] = "root";
@@ -834,14 +834,14 @@ class DIRegion extends DIObject {
 					$data['RegionLabel'] = $reglabel;
 				$r = new DIRegion($us, $data['RegionId']);
 				$r->setFromArray($data);
-				$stat = $r->insert();
-				if (!iserror($stat))
+				$iReturn = $r->insert();
+				if (!iserror($iReturn)) {
 					$rol = $us->setUserRole($data['RegionUserAdmin'], $data['RegionId'], "ADMINREGION");
+				}
 			}
 		}
-		return $stat;
+		return $iReturn;
 	}
-	
 } //class
 
 </script>
