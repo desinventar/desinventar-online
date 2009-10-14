@@ -1,3 +1,6 @@
+* 2009-10-14 Jhon H. Caicedo <jhcaiced@desinventar.org>
+- Released devel version 8.2.0.57
+
 * 2009-10-09 Jhon H. Caicedo <jhcaiced@desinventar.org>
 - Updated install.nsi for use with update mode.
 
