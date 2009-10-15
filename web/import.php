@@ -19,15 +19,18 @@ function loadCSV($ocsv) {
 $post = $_POST;
 $get = $_GET;
 
-if (isset($post['_REG']) && !empty($post['_REG'])) {
-	$reg = $post['_REG'];
-} elseif (isset($get['r']) && !empty($get['r'])) {
-	$reg = $get['r'];
-}
-else
-	exit();
+$reg = getParameter('_REG', getParameter('r'), '');
+fb($reg);
+fb($_FILES);
+fb($post);
+fb($get);
 
+if ($reg == '') {
+	exit();
+}
 $us->open($reg);
+
+$ImportType = $post['diobj'];
 
 if (isset($_FILES['desinv']) && isset($post['diobj'])) {
 	$iserror = true;
@@ -44,9 +47,9 @@ if (isset($_FILES['desinv']) && isset($post['diobj'])) {
 				// This step executes iconv to convert the uploaded file to UTF-8
 				$Cmd = "/usr/bin/iconv --from-code=ISO-8859-1 --to-code=UTF-8 " . $tmp_name . "> " . TEMP . "/" . $name;
 				system($Cmd);
-			}
-			else
+			} else {
 				move_uploaded_file($tmp_name, TEMP ."/$name");
+			}
 			$iserror = false;
 			$FileName = TEMP . '/' . $name;
 			// load basic field of dictionary
@@ -59,6 +62,7 @@ if (isset($_FILES['desinv']) && isset($post['diobj'])) {
 			$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
 			$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Sector', $lg));
 			$dic = array_merge($dic, $us->q->getEEFieldList("True"));
+			$GeographyImport = "GeographyLevel,GeographyCode,GeographyName,GeographyParentCode";
 			$DisasterImport = "DisasterId,DisasterSerial,DisasterBeginTime,GeographyId,".
 				"DisasterSiteNotes,DisasterSource,DisasterLongitude,DisasterLatitude,RecordAuthor,".
 				"RecordCreation,RecordStatus,EventId,EventDuration,EventMagnitude,EventNotes,CauseId,".
@@ -68,7 +72,17 @@ if (isset($_FILES['desinv']) && isset($post['diobj'])) {
 				"EffectLiveStock,EffectEducationCenters,EffectMedicalCenters,EffectOtherLosses,EffectNotes,".
 				"SectorTransport,SectorCommunications,SectorRelief,SectorAgricultural,SectorWaterSupply,".
 				"SectorSewerage,SectorEducation,SectorPower,SectorIndustry,SectorHealth,SectorOther";
-			$lst = explode(",", $DisasterImport);
+			switch($ImportType) {
+			case 4:
+				$FieldList = $GeographyImport;
+				break;
+			case 5:
+				$FieldList = $DisasterImport;
+				break;
+			default:
+				break;
+			}
+			$lst = explode(",", $FieldList);
 			foreach ($lst as $v) {
 				if (isset($dic[$v][0]))
 					$fld[$v] = $dic[$v][0];
@@ -92,11 +106,13 @@ if (isset($_FILES['desinv']) && isset($post['diobj'])) {
 		} else {
 			$error = "FILETYPE IS UNKNOWN.. FORMAT MUST BE TEXT COMMA SEPARATED!";
 		}
-	}
-	elseif (isset($post['cmd']) && $post['cmd'] == "import") {
+	} elseif (isset($post['cmd']) && $post['cmd'] == "import") {
 		// first validate file to continue with importation
 		$i = new DIImport($us);
-		$valm = $i->validateFromCSV($post['FileName']);
+		//$valm = $i->validateFromCSV($post['FileName']);
+		$valm = 0;
+		fb('import');
+		fb($post['diobj']);
 		if (is_array($valm)) {
 			$stat = (int) $valm['Status'];
 			if (!iserror($stat))
@@ -116,8 +132,7 @@ if (isset($_FILES['desinv']) && isset($post['diobj'])) {
 	} else {
 		$error = "UPLOAD FAILED";
 	}
-}
-else {
+} else {
 	// show upload form
 	$urol = $us->getUserRole($reg);
 	if ($urol == "OBSERVER")
