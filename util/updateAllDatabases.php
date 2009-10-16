@@ -26,7 +26,7 @@ $RegionList = array();
 foreach($q->core->query("SELECT * FROM Region ORDER BY RegionId") as $row) {
 	$RegionList[] = $row['RegionId'];
 }
-$RegionList = array('BOL-1248983224-bolivia_inventario_historico_de_desastres');
+//$RegionList = array('GTM-1255694888-guatemala_inventario_historico_de_desastres');
 foreach ($RegionList as $RegionId) {
 	$r = new DIRegion($us, $RegionId);
 	$RegionUUID = $r->get('OptionOldName');
@@ -79,8 +79,9 @@ foreach ($RegionList as $RegionId) {
 			}
 		} //if
 		$us->open($RegionId);
-		$data_dir = '/var/lib/desinventar';
-		$cmd = "./mysql2sqlite.pl -r " . $RegionUUID . " | sqlite3 " . $data_dir . "/" . $r->get('RegionId') . "/desinventar.db";
+		$data_dir1 = '/var/lib/desinventar-8.1';
+		$data_dir2 = VAR_DIR . '/database';
+		$cmd = "./mysql2sqlite.pl -r " . $RegionUUID . " | sqlite3 " . $data_dir2 . "/" . $r->get('RegionId') . "/desinventar.db";
 		system($cmd, $iCmdReturn);
 		$iReturn = ! $iCmdReturn;
 		if ($iReturn > 0) {	
@@ -88,14 +89,18 @@ foreach ($RegionList as $RegionId) {
 			$Query = 'SELECT * FROM ' . $RegionUUID . '_GeoLevel';
 			foreach($dbh->query($Query) as $geolevel) {
 				$CartoFile = $geolevel['GeoLevelLayerFile'];
-				foreach(array('dbf','shp','shx','prj') as $ext) {
-					$file0 = $CartoFile . '.' . $ext;
-					$file1 = $data_dir . '/carto/' . $RegionUUID . '/' . $file0;
-					$file2 = $data_dir . '/' . $r->get('RegionId') . '/' . $file0;
-					if (file_exists($file1)) {
-						copy($file1, $file2);
-					}
-				} //foreach
+				if ($CartoFile != '') {
+					foreach(array('dbf','shp','shx','prj') as $ext) {
+						$file0 = $CartoFile . '.' . $ext;
+						$file1 = $data_dir1 . '/carto/' . $RegionUUID . '/' . $file0;
+						$file2 = $data_dir2 . '/' . $r->get('RegionId') . '/' . $file0;
+						//fb($file1);
+						//fb($file2);
+						if (file_exists($file1)) {
+							copy($file1, $file2);
+						}
+					} //foreach
+				} //if
 			} //foreach
 		}
 		

@@ -23,7 +23,7 @@ foreach($q->core->query("SELECT * FROM Region") as $row) {
 	$RegionList[] = $row['RegionId'];
 }
 //DEBUG
-$RegionList = array('BOL-1248830153-bolivia_inventario_historico_de_desastres');
+//$RegionList = array('BOL-1248830153-bolivia_inventario_historico_de_desastres');
 foreach ($RegionList as $RegionId) {
 	$us->open($RegionId);
 	print $RegionId . "\n";

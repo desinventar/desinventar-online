@@ -23,11 +23,12 @@ foreach($q->core->query("SELECT * FROM Region") as $row) {
 //DEBUG
 //$RegionList = array('BOL-1248983224-bolivia_inventario_historico_de_desastres');
 foreach ($RegionList as $RegionId) {
-	print $RegionId . "\n";
-	$q->setDBConnection($RegionId);
 	$r = new DIRegion($us, $RegionId);
-	$r->copyEvents($r->get('LangIsoCode'));
-	$r->copyCauses($r->get('LangIsoCode'));
+	$LangIsoCode = $r->get('LangIsoCode');
+	print $RegionId . ' ' . $LangIsoCode . "\n";
+	$q->setDBConnection($RegionId);
+	$r->copyEvents($LangIsoCode);
+	$r->copyCauses($LangIsoCode);
 }
 $q = null;
 </script>
