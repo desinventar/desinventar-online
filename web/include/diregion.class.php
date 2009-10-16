@@ -200,8 +200,9 @@ class DIRegion extends DIObject {
 		$this->set('RegionId', $prmRegionId);
 		if ($iReturn > 0) {
 			// Copy Predefined Event/Cause Lists
-			$this->copyEvents($this->get('LangIsoCode'));
-			$this->copyCauses($this->get('LangIsoCode'));
+			$LangIsoCode = $this->get('LangIsoCode');
+			$this->copyEvents($LangIsoCode);
+			$this->copyCauses($LangIsoCode);
 		}
 		
 		if ($iReturn > 0) {

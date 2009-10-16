@@ -25,7 +25,7 @@ foreach($q->core->query("SELECT * FROM Region") as $row) {
 //$RegionList = array('BOL-1248830153-bolivia_inventario_historico_de_desastres');
 foreach ($RegionList as $RegionId) {
 	$us->open($RegionId);
-	print $RegionId . "\n");
+	print $RegionId . "\n";
 	$q->setDBConnection($RegionId);
 	$q->dreg->query("ATTACH DATABASE '" . CONST_DBBASE . "' AS Base");
 	$Query = " UPDATE Event SET EventRGBColor=(SELECT EventRGBColor from Base.Event E WHERE Event.EventId=E.EventId AND Event.LangIsoCode=E.LangIsoCode) " .
