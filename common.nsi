@@ -302,7 +302,10 @@ Section "Application Install"
 	CreateDirectory $INSTDIR\data\database
 
 	SetOutPath $INSTDIR\data\main
+	
+	!if ${INSTALLMODE} == 'install'
 	File Files\database\core.db
+	!endif
 	File Files\database\base.db
 	File Files\database\desinventar.db
 	File Files\fonts\fontswin.txt
