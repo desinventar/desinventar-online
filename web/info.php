@@ -31,7 +31,6 @@ function form2data($form) {
 				$dat[$k[1]] = $value;
 		}
 	}
-	//print_r($dat);
 	return $dat;
 }
 
@@ -53,7 +52,7 @@ $us->open($reg);
 // EDIT REGION: Form to Create and assign regions
 if (isset($infocmd)) {
 	$ifo = 0;
-	$data = $post; //form2data($post);
+	$data = form2data($post);
 	$r = new DIRegion($us, $data['RegionId']);
 	$r->setFromArray($data);
 	$ifo = $r->update();
