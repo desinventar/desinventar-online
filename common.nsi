@@ -34,7 +34,7 @@ InstProgressFlags     smooth
 
 !define      NAME    "DesInventar"
 !define      MAJORVER "8"
-!define      MINORVER "2.0.57"
+!define      MINORVER "2.0.58"
 !define      PUBLISHER "Corporación OSSO - DesInventar Project http://www.desinventar.org"
 !define      VERSION "${MAJORVER}.${MINORVER}"
 !define      SHORTNAME "${NAME}${MAJORVER}"
@@ -182,6 +182,65 @@ Section "Core Files"
 SectionEnd
 !endif
 
+; Install Files of Main Application
+Section "Application Install"
+	SectionIn RO
+	SetShellVarContext all
+
+	; Delete Original htdocs files
+	SetOutPath $INSTDIR\ms4w\Apache\htdocs
+	Delete *.*
+
+	File /r /x '.svn' Web\*.*
+
+	SetOutPath $INSTDIR
+	File Files\license\license.txt
+	File Files\icon\${NAME}.ico
+
+	CreateDirectory $INSTDIR\tmp
+	CreateDirectory $INSTDIR\www
+	CreateDirectory $INSTDIR\www\graphs
+	CreateDirectory $INSTDIR\data\main
+	CreateDirectory $INSTDIR\data\database
+
+	SetOutPath $INSTDIR\data\main
+
+	!if ${INSTALLMODE} == 'install'
+	File Files\database\core.db
+	!endif
+	File Files\database\base.db
+	File Files\database\desinventar.db
+	File Files\fonts\fontswin.txt
+
+    ; Install worldmap shape file
+    CreateDirectory $INSTDIR\data\main\worldmap
+	!define distFile "world_adm0.zip"
+	IfFileExists "$EXEDIR\${distFile}" installmap skipmap
+	installmap:
+		ZipDLL::extractall "$EXEDIR\${distFile}" '$INSTDIR\data\main\worldmap'
+	skipmap:
+	!undef distFile
+
+	SetOutPath $INSTDIR\ms4w
+	File Files\conf\apache-start.bat
+	File Files\conf\apache-stop.bat
+
+	SetOutPath $INSTDIR\ms4w\httpd.d
+	File Files\conf\httpd_extJS.conf
+	File Files\conf\httpd_jquery.conf
+	File Files\conf\httpd_openlayers.conf
+	File Files\conf\httpd_desinventar-8.2-data.conf
+
+	;Store installation folder in registry
+	WriteRegStr HKLM ${REGBASE} "Install_Dir" "$INSTDIR"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${SHORTNAME}" "DisplayName" "${NAME} ${MAJORVER}"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${SHORTNAME}" "UninstallString" "$INSTDIR\uninstall.exe"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${SHORTNAME}" "Publisher" "${PUBLISHER}"
+	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${SHORTNAME}" "NoModify" 1
+	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${SHORTNAME}" "NoRepair" 1
+SectionEnd
+
+; Local Configuration of Files, edit configuration files, update paths...
 !if ${INSTALLMODE} == 'install'
 Section "Application Local Configuration"
 	SectionIn RO
@@ -189,7 +248,7 @@ Section "Application Local Configuration"
 
 	; Personalize Configuration Files
 	${WordReplace} $INSTDIR "\" "/" "+*" $INSTDIR_forward
-
+	
 	SetOutPath $INSTDIR
 	!define FILE "$INSTDIR\ms4w\Apache\conf\httpd.conf"
 	IfFileExists ${FILE} continue1 skip1
@@ -280,63 +339,6 @@ Section "Application Local Configuration"
 	!undef FILE
 SectionEnd
 !endif
-
-Section "Application Install"
-	SectionIn RO
-	SetShellVarContext all
-
-	; Delete Original htdocs files
-	SetOutPath $INSTDIR\ms4w\Apache\htdocs
-	Delete *.*
-
-	File /r /x '.svn' Web\*.*
-
-	SetOutPath $INSTDIR
-	File Files\license\license.txt
-	File Files\icon\${NAME}.ico
-
-	CreateDirectory $INSTDIR\tmp
-	CreateDirectory $INSTDIR\www
-	CreateDirectory $INSTDIR\www\graphs
-	CreateDirectory $INSTDIR\data\main
-	CreateDirectory $INSTDIR\data\database
-
-	SetOutPath $INSTDIR\data\main
-	
-	!if ${INSTALLMODE} == 'install'
-	File Files\database\core.db
-	!endif
-	File Files\database\base.db
-	File Files\database\desinventar.db
-	File Files\fonts\fontswin.txt
-
-    ; Install worldmap shape file
-    CreateDirectory $INSTDIR\data\main\worldmap
-	!define distFile "world_adm0.zip"
-	IfFileExists "$EXEDIR\${distFile}" installmap skipmap
-	installmap:
-		ZipDLL::extractall "$EXEDIR\${distFile}" '$INSTDIR\data\main\worldmap'
-	skipmap:
-	!undef distFile
-
-	SetOutPath $INSTDIR\ms4w
-	File Files\conf\apache-start.bat
-	File Files\conf\apache-stop.bat
-
-	SetOutPath $INSTDIR\ms4w\httpd.d
-	File Files\conf\httpd_extJS.conf
-	File Files\conf\httpd_jquery.conf
-	File Files\conf\httpd_openlayers.conf
-	File Files\conf\httpd_desinventar-8.2-data.conf
-
-	;Store installation folder in registry
-	WriteRegStr HKLM ${REGBASE} "Install_Dir" "$INSTDIR"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${SHORTNAME}" "DisplayName" "${NAME} ${MAJORVER}"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${SHORTNAME}" "UninstallString" "$INSTDIR\uninstall.exe"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${SHORTNAME}" "Publisher" "${PUBLISHER}"
-	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${SHORTNAME}" "NoModify" 1
-	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${SHORTNAME}" "NoRepair" 1
-SectionEnd
 
 /*
 !if ${INSTALLMODE} == 'install'
