@@ -60,10 +60,10 @@
 						<option id="_G+M_over" value="OVERCOME" disabled>{-#gmodovercome#-}</option>
 					</select>
 					<br />
-					<b>Linea de tendencia</b><br/>
+					<b>{-#gtendline#-}</b><br/>
 					<select id="_G+TendLine" name="_G+TendLine" class="line">
 						<option value="" selected></option>
-						<option value="LINREG">Regresión Lineal</option>
+						<option value="LINREG">{-#glinearreg#-}</option>
 					</select>
 				</td>
 				<td align="center">
