@@ -382,19 +382,6 @@ class Region {
     return $ee;
   }
 
-/**** IMPORT FUNCTIONS ****/
-  function validateImportFromCSV($fname, $type) {
-    $rpcarg = array($_SESSION['sessionid'], $fname, (int)$type);
-    $imp = callRpcDICore('RpcRegionOperations.validateFromCSV', $rpcarg);
-    return $imp;
-  }
-
-  function importFromCSV($fname, $type) {
-    $rpcarg = array($_SESSION['sessionid'], $fname, (int)$type);
-    $imp = callRpcDICore('RpcRegionOperations.importFromCSV', $rpcarg);
-    return $imp;
-  }
-
 }//end Class
 
 </script>

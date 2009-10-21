@@ -116,7 +116,7 @@ if (isset($_FILES['desinv']) && isset($post['diobj'])) {
 		if (is_array($valm)) {
 			$stat = (int) $valm['Status'];
 			if (!iserror($stat))
-				$valm = $i->importFromCSV($post['FileName']);
+				$valm = $i->importFromCSV($post['FileName'], DI_DISASTER);
 			$t->assign ("msg", $valm);
 			$t->assign ("res", loadCSV($valm['FileName']));
 			$t->assign ("ctl_msg", true);
