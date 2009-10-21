@@ -404,11 +404,38 @@ class UserSession {
 	}
 	
 	public function insertUser($UserId, $UserFullName, $UserEMail, $UserPasswd, $UserCountry, $UserCity, $UserActive) {
-		return true;
+		$iReturn = ERR_DEFAULT_ERROR;
+		$sQuery = "INSERT INTO User VALUES (" . 
+				  "'" . $UserId . "'," .
+				  "'" . $UserEMail . "'," .
+				  "'" . $UserPasswd . "'," .
+				  "'" . $UserFullName . "'," .
+				  "''," .
+				  "'" . $UserCountry . "'," .
+				  "'" . $UserCity . "'," .
+				  "'" . gmdate('c') . "'," .
+				  "''," .
+				  $UserActive . ")";
+		if ($result = $this->q->core->query($sQuery))
+			$iReturn = ERR_NO_ERROR;
+		return $iReturn;
 	}
 	
 	public function updateUser($UserId, $UserFullName, $UserEMail, $UserPasswd, $UserCountry, $UserCity, $UserActive) {
-		return true;
+		$iReturn = ERR_DEFAULT_ERROR;
+		$sQuery = "UPDATE User SET (" . 
+				  "UserEMail='" . $UserEMail . "'," .
+				  "UserPasswd='" . $UserPasswd . "'," .
+				  "UserFullName='" . $UserFullName . "'," .
+				  "Organization=''," .
+				  "UserCountry='" . $UserCountry . "'," .
+				  "UserCity='" . $UserCity . "'," .
+				  "UserNotes=''," .
+				  "UserActive=" . $UserActive . ")".
+				  " WHERE UserId='" . $UserId . "'";
+		if ($result = $this->q->core->query($sQuery))
+			$iReturn = ERR_NO_ERROR;
+		return $iReturn;
 	}
 	
 	public function clearOldLocks() {

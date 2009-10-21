@@ -12,13 +12,13 @@
 		<td>
 			<table border=0 align=center style="margin-top:1px">
 				<tr>
-				<td class="mizq" align="right">{-#tuser#-} <input type="text" id="userid" name="userid" value="" size="16" class="f" /></td>
-				<td class="mizq" align="right">{-#tpassword#-} <input type="password" name="password" id="password" value="" size="8" class="f" /></td>
+				<td align="right">{-#tuser#-} <input type="text" id="userid" name="userid" value="" size="16" /></td>
+				<td align="right">{-#tpassword#-} <input type="password" name="password" id="password" value="" size="8" /></td>
 				</tr>
 			</table>
 		</td>
 		<td>
-			<input type="submit" value="{-#benter#-}" class="line usr_inp" />&nbsp;&nbsp;
+			<input type="submit" value="{-#benter#-}" class="line" />&nbsp;&nbsp;
 			<span class="rememberpasswordlink">
 				<a href="javascript:void(null)" onclick="updateList('pagecontent', 'user.php', 'cmd=passlost');">{-#tpasslost#-}</a>
 			</span>
