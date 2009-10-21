@@ -121,12 +121,12 @@
 {-foreach name=upa key=key item=item from=$usrpa-}
 	<tr class="{-if ($smarty.foreach.upa.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}"
 		onMouseOver="this.className='highlight'" onMouseOut="this.className='normal'"
-		onClick="setUserPA('{-$key-}','{-$item[2]-}','{-$item[0]-}','{-$item[1]-}','{-$item[4]-}','{-$item[5]-}','{-$item[9]-}');
+		onClick="setUserPA('{-$key-}','{-$item[2]-}','{-$item[0]-}','{-$item[1]-}','{-$item[4]-}','{-$item[5]-}','{-$item[8]-}');
 				$('cmd').value='update';">
 		<td>{-$key-}</td>
 		<td>{-$item[2]-}</td>
 		<td>{-$item[0]-}</td>
-		<td><input type="checkbox" {-if ($item[9] == 1) -} checked {-/if-} disabled /></td>
+		<td><input type="checkbox" {-if ($item[8] == 1) -} checked{-/if-} disabled /></td>
 	</tr>
 {-/foreach-}
 {-/if-}

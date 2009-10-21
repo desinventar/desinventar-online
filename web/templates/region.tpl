@@ -5,7 +5,7 @@
 	<br />
 	<input id="directory" type="hidden" value="{-#bloaddir#-}"
 		onClick="updateList('lst_regionpa', 'region.php', 'cmd=createRegionsFromDBDir');" />
-	{-#bupzipfile#-} <br />
+	<b>{-#bupzipfile#-}</b> <br />
 	<form id="putregion" method="POST" action="region.php" target="fresult" enctype="multipart/form-data">
 		<input type="hidden" name="cmd" value="createRegionFromZip" />
 		{-#tregnamlist#-} <input type="text" name="RegionLabel" />

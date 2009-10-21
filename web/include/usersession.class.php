@@ -251,23 +251,17 @@ class UserSession {
 	// Get basic user info: user=>[email,pass,name,org,country,city,creadate,iplist,notes,active]
 	function getUserInfo ($prmUserId) {
 		$myData = array();
-		$sQuery = "SELECT * FROM User " .
-		  " WHERE UserId='" . $this->UserId . "'" .
-		  " ORDER BY UserFullName";
+		$sQuery = "SELECT * FROM User";
+		if ($prmUserId != '')
+			$sQuery .= " WHERE UserId='" . $prmUserId . "'";
+		$sQuery .= " ORDER BY UserFullName";
 		if ($result = $this->q->core->query($sQuery) ) {
 			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-				$myData[0] = $row->UserEMail;
-				$myData[1] = $row->UserPasswd;
-				$myData[2] = $row->UserFullName;
-				$myData[3] = $row->Organization;
-				$myData[4] = $row->CountryIso;
-				$myData[5] = $row->UserCity;
-				$myData[6] = $row->UserCreationDate;
-				$myData[7] = $row->UserNotes;
-				$myData[8] = $row->UserActive;
-			} // while
+				$myData[$row->UserId] = array ($row->UserEMail, $row->UserPasswd, $row->UserFullName, $row->Organization, 
+					$row->CountryIso, $row->UserCity, $row->UserCreationDate, $row->UserNotes, $row->UserActive);
+			}
 		}
-		return array($this->UserId => $myData);
+		return $myData;
 	}
 	
 	// Send a Password Reminder to an E-mail
