@@ -12,11 +12,34 @@ class DIImport {
 		$this->q = new Query($this->us->sRegionId);
 	}
 	
-	public function validateFromCSV($FileName) {
-		return $this->importFromCSV($FileName, false);
+	public function validateFromCSV($FileName, $ObjectType) {
+		return $this->importFromCSV($FileName, $ObjectType, false);
 	}
-	
-	public function importFromCSV($FileName, $doImport = true) {
+		
+	public function importFromCSV($FileName, $ObjectType, $doImport = true) {
+		$FLogName = '/tmp/di8import_' . $this->us->sSessionId . '.csv';
+		$FLogName = '/tmp/di8import.csv';
+		$flog = fopen($FLogName,'w');
+		$fh = fopen($FileName, 'r');
+		// Version Line
+		$a = fgetcsv($fh, 1000, ',');
+		// Column Header Line
+		$a = fgetcsv($fh, 1000, ',');
+		$rowCount = 2;
+		while (! feof($fh) ) {
+			$a = fgetcsv($fh, 1000, ',');
+			if (count($a) > 1) {
+				//print count($a) . "\n";
+				//$this->importDisasterRecord($a, $doImport);
+			}
+		} //while
+		fclose($fh);
+		fclose($flog);
+		return array('Status' => 1,
+		             'FileName' => $FLogName);
+	} //function
+
+	public function importDisasterRecord($a, $doImport = true) {
 		$DisasterImport = array(0 => 'DisasterId', 
 		                        1 => 'DisasterSerial',
 		                        2 => 'DisasterBeginTime',
@@ -69,90 +92,72 @@ class DIImport {
 			                    44 => 'SectorHealth',
 			                    45 => 'SectorOther'
 						   );
-		$FLogName = '/tmp/di8import_' . $this->us->SessionId . '.csv';
-		$FLogName = '/tmp/di8import.csv';
-		$flog = fopen($FLogName,'w');
-		$fh = fopen($FileName, 'r');
-		// Version Line
-		$a = fgetcsv($fh, 1000, ',');
-		// Column Header Line
-		$a = fgetcsv($fh, 1000, ',');
-		$rowCount = 2;
-		while (! feof($fh) ) {
-			$a = fgetcsv($fh, 1000, ',');
-			if (count($a) > 1) {
-				$o = new DIDisaster($this->us);
-				$o->set('EventId', 'OTHER');
-				$o->set('CauseId', 'UNKNOWN');
-				foreach($DisasterImport as $Index => $Field) {
-					$o->set($Field, $a[$Index]);
-				}
-				
-				// Validation Settings
-				$o->set('RecordStatus', 'PUBLISHED');
-				if ($o->get('DisasterSource') == '') {
-					$o->set('RecordStatus', 'DRAFT');
-				}
-				$rowCount++;
-				
-				$g = new DIGeography($this->us);
-				$DisasterGeographyCode = $o->get('GeographyId');
-				$o->set('GeographyId', $g->getIdByCode($DisasterGeographyCode));
-				
-				$e = new DIEvent($this->us);
-				$o->set('EventId', $e->getIdByName($o->get('EventId')));
-				
-				$c = new DICause($this->us);
-				$o->set('CauseId', $c->getIdByName($o->get('CauseId')));
-				
-				//2009-07-25 Save fechapor/fechafec in EffectNotes
-				$o->set('EffectNotes', 
-					$o->get('EffectNotes') . ' ' .
-					'(DI6Author : ' . $this->get('RecordAuthor') . ' ' .
-					'DI6Date : ' . $this->get('RecordCreation') . ')'
-					
-				);
-				$this->set('RecordAuthor'  , $us->UserId);
-				$this->set('RecordCreation', gmdate('c'));
-				
-				$bInsert = ($o->validateCreate() > 0);
+		$o = new DIDisaster($this->us);
+		$o->set('EventId', 'OTHER');
+		$o->set('CauseId', 'UNKNOWN');
+		foreach($DisasterImport as $Index => $Field) {
+			$o->set($Field, $a[$Index]);
+		}
+		
+		// Validation Settings
+		$o->set('RecordStatus', 'PUBLISHED');
+		if ($o->get('DisasterSource') == '') {
+			$o->set('RecordStatus', 'DRAFT');
+		}
+		$rowCount++;
+		
+		$g = new DIGeography($this->us);
+		$DisasterGeographyCode = $o->get('GeographyId');
+		$o->set('GeographyId', $g->getIdByCode($DisasterGeographyCode));
+		
+		$e = new DIEvent($this->us);
+		$o->set('EventId', $e->getIdByName($o->get('EventId')));
+		
+		$c = new DICause($this->us);
+		$o->set('CauseId', $c->getIdByName($o->get('CauseId')));
+		
+		//2009-07-25 Save fechapor/fechafec in EffectNotes
+		$o->set('EffectNotes', 
+			$o->get('EffectNotes') . ' ' .
+			'(DI6Author : ' . $this->get('RecordAuthor') . ' ' .
+			'DI6Date : ' . $this->get('RecordCreation') . ')'
+			
+		);
+		$this->set('RecordAuthor'  , $us->UserId);
+		$this->set('RecordCreation', gmdate('c'));
+		
+		$bInsert = ($o->validateCreate() > 0);
+		if ($bInsert) {
+			if ($doImport) { $Result = $o->insert(); }
+			else { $Result = $o->validateCreate(); }
+		} else {
+			if ($doImport) { $Result = $o->update(); }
+			else { $Result = $o->validateUpdate(); }
+		}
+		if ($Result > 0) {
+			$e = new DIEEData($this->us);
+			$e->set('DisasterId', $o->get('DisasterId'));
+			if ($doImport) {
 				if ($bInsert) {
-					if ($doImport) { $Result = $o->insert(); }
-					else { $Result = $o->validateCreate(); }
+					$e->insert();
 				} else {
-					if ($doImport) { $Result = $o->update(); }
-					else { $Result = $o->validateUpdate(); }
+					$e->update();
 				}
-				if ($Result > 0) {
-					$e = new DIEEData($this->us);
-					$e->set('DisasterId', $o->get('DisasterId'));
-					if ($doImport) {
-						if ($bInsert) {
-							$e->insert();
-						} else {
-							$e->update();
-						}
-					}
-				} else {
-					// Generate Error Log
-					$sErrorMsg = $rowCount . ',' . $Result . ',';
-					switch($Result) {
-					case -59:
-						$sErrorMsg .= $o->get('DisasterSerial') . ' EventId Not Found ' . $o->get('EventId') . ',,';
-						break;						
-					default:
-						$sErrorMsg .= 'Unknown Error' . ',,';
-						break;
-					} //switch
-					fputs($flog, $sErrorMsg . "\n");
-				} //else
 			}
-		} //while
-		fclose($fh);
-		fclose($flog);
-		return array('Status' => 1,
-		             'FileName' => $FLogName);
-	} //function
+		} else {
+			// Generate Error Log
+			$sErrorMsg = $rowCount . ',' . $Result . ',';
+			switch($Result) {
+			case -59:
+				$sErrorMsg .= $o->get('DisasterSerial') . ' EventId Not Found ' . $o->get('EventId') . ',,';
+				break;						
+			default:
+				$sErrorMsg .= 'Unknown Error' . ',,';
+				break;
+			} //switch
+			fputs($flog, $sErrorMsg . "\n");
+		}  //if
+	}
 } //class
 
 </script>

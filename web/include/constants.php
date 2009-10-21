@@ -22,17 +22,17 @@ define('CONST_DBNEWREGION', VAR_DIR . "/main/desinventar.db");
 define('CONST_DBREGIONDIR', VAR_DIR . "/database");
 
 // dicore objects
-define ("DI_EVENT",			1);
-define ("DI_CAUSE",			2);
+define ("DI_EVENT",     1);
+define ("DI_CAUSE",     2);
 define ("DI_GEOLEVEL",	3);
 define ("DI_GEOGRAPHY",	4);
 define ("DI_DISASTER",	5);
-define ("DI_DBINFO",		6);
-define ("DI_DBLOG",			7);
-define ("DI_USER",			8);
-define ("DI_REGION",		9);
-define ("DI_EEFIELD",	 10);
-define ("DI_EEDATA",	 11);
+define ("DI_DBINFO",    6);
+define ("DI_DBLOG",     7);
+define ("DI_USER",      8);
+define ("DI_REGION",    9);
+define ("DI_EEFIELD",  10);
+define ("DI_EEDATA",   11);
 
 // dicore command
 define ("CMD_NEW",			1);

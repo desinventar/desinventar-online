@@ -161,6 +161,9 @@ class DIGeography extends DIObject {
 		$iReturn = $this->validateNoDatacards($iReturn, -48);
 		return $iReturn;
 	}
+	
+	public function importFromCSV($line) {
+	}
 } //class
 
 </script>
