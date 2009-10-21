@@ -113,6 +113,7 @@
 		});
       var mhelp = new Ext.menu.Menu({
         id: 'helpMenu',
+		style: { overflow: 'visible' },
         items: [
             {id:'mwww', text: '{-#mwebsite#-}',	handler: onMenuItem  },
             {id:'mmtg', text: '{-#hmoreinfo#-}', handler: onMenuItem  },

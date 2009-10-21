@@ -8,8 +8,6 @@
 
 require_once('include/loader.php');
 
-$t->config_dir = 'include';
-
 function form2user($val) {
 	$dat = array();
 	if (!isset($val['UserId']))
