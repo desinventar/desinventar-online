@@ -19,18 +19,28 @@ class DIImport {
 	public function importFromCSV($FileName, $ObjectType, $doImport = true) {
 		$FLogName = '/tmp/di8import_' . $this->us->sSessionId . '.csv';
 		$FLogName = '/tmp/di8import.csv';
+		$cols = array();
 		$flog = fopen($FLogName,'w');
 		$fh = fopen($FileName, 'r');
 		// Version Line
-		$a = fgetcsv($fh, 1000, ',');
+		$values = fgetcsv($fh, 1000, ',');
 		// Column Header Line
-		$a = fgetcsv($fh, 1000, ',');
+		$values = fgetcsv($fh, 1000, ',');
 		$rowCount = 2;
 		while (! feof($fh) ) {
-			$a = fgetcsv($fh, 1000, ',');
-			if (count($a) > 1) {
-				//print count($a) . "\n";
-				//$this->importDisasterRecord($a, $doImport);
+			$values = fgetcsv($fh, 1000, ',');
+			if (count($values) > 1) {
+				switch($ObjectType) {
+					case DI_GEOGRAPHY:
+						$o = new DIGeography($this->us);
+						$r = $o->importFromCSV($cols, $values);
+						$o->insert();
+					break;
+					case DI_DISASTER:
+					break;				
+				}
+				//print count($values) . "\n";
+				//$this->importDisasterRecord($values, $doImport);
 			}
 		} //while
 		fclose($fh);

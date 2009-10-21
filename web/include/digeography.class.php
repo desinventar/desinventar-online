@@ -46,7 +46,8 @@ class DIGeography extends DIObject {
 		foreach($prmSession->q->dreg->query($Query) as $row) {
 			$GeographyId = $row['GeographyId'];
 		}
-		$g = new DIGeography($prmSession, $GeographyId);
+		//$g = new DIGeography($prmSession, $GeographyId);
+		$g = new self($prmSession, $GeographyId);
 		return $g;
 	}
 
@@ -162,7 +163,34 @@ class DIGeography extends DIObject {
 		return $iReturn;
 	}
 	
-	public function importFromCSV($line) {
+	public function importFromCSV($cols, $values) {
+		$iReturn = ERR_NO_ERROR;
+		$oReturn = array();
+		$oReturn['Status'] = $iReturn;
+		$oReturn['Error'] = array();
+		$oReturn['Warning'] = array();
+		
+		$this->set('GeographyLevel', $values[0]);
+		$this->set('GeographyCode',  $values[1]);
+		$this->set('GeographyName',  $values[2]);
+		$ParentCode = $values[3];
+		$p = self::loadByCode($this->session, $this->get('GeographyCode'));
+		if ($p->get('GeographyId') != '') {
+			// This Geography Code Already Exists, return error
+			$oReturn['Error'][] = -1;
+		} else {
+			// Try to locate a parent for this item
+			$p = self::loadByCode($this->session, $ParentCode);
+			$this->setGeographyId($p->get('GeographyId'));
+			$this->set('GeographyFQName', $this->buildGeographyFQName());
+			print $this->getInsertQuery() . "\n";
+			print $this->getUpdateQuery() . "\n";
+		}
+		if ( (count($oReturn['Error']) > 0) || (count($oReturn['Warning']) > 0) ) {
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		$oReturn['Status'] = $iReturn;
+		return $oReturn;
 	}
 } //class
 
