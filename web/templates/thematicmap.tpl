@@ -7,8 +7,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
 	<meta http-equiv="Pragma" content="text/html; charset=utf-8; no-cache" />
-<!--	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAfQolBKtJvhOLwVfLoxEfMBT2yXp_ZAY8_ufC3CFXhHIE1NvwkxSk5_PAeDPGqlbVTcY_3xTKvHkJag"></script>-->
+	{-if $googlemapkey != '' -}
 	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={-$googlemapkey-}"></script>
+	{-/if-}
 	<script src='http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.1'></script>
 	<script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid=euzuro-openlayers"></script>
 	<script src="/openlayers/lib/OpenLayers.js"></script>
@@ -88,6 +89,7 @@
 			met1.setVisibility(false);
 			map.addLayer(met1);
 
+			{-if $googlemapkey != '' -}
 			// maps.google.com - Base Layer
 			var google1 = new OpenLayers.Layer.Google("Google Basic", 
 			                                          {type: G_NORMAL_MAP, 'sphericalMercator': true});
@@ -103,6 +105,7 @@
 			var google4 = new OpenLayers.Layer.Google("Google Satellite", 
 			                                          {type: G_SATELLITE_MAP, 'sphericalMercator': true});
 			map.addLayer(google4);
+			{-/if-}
 
 			/*
 			// Use a Global Risk Data Platform (http://preview.grid.unep.ch/) WMS..
