@@ -479,6 +479,11 @@ class UserSession {
 		}
 		return $list;
 	}
+	
+	public function chkPasswd ($passwd) {
+		return true;
+	}
+	
 } //class
 
 </script>
