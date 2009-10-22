@@ -53,7 +53,6 @@ if (isset($_GET['cmd'])) {
 		case "login":
 			if ($us->login($_GET['userid'], $_GET['password']) > 0) {
 				$u = new DIUser($us, $us->UserId);
-				$us->setUser($us->get('UserId'));
 				$t->assign ("user", $us->UserId);
 				$t->assign ("ctl_logged", true);		// Login Sucess !!
 			}

@@ -398,15 +398,11 @@
 								<select name="RecordStatus" id="RecordStatus" tabindex="5" class="line"
 										onFocus="showtip('{-$rc1.RecordStatus[1]-}', '')">
 									<option value=""></option>
-{-if $role == "SUPERVISOR" || $role == "ADMINREGION"-}
-									<option value="PUBLISHED">{-#tstatpublished#-}</option>
-{-/if-}
+									<option value="PUBLISHED" {-if $role == "USER"-}disabled{-/if-}>{-#tstatpublished#-}</option>
 									<option value="READY">{-#tstatready#-}</option>
 									<option value="DRAFT">{-#tstatdraft#-}</option>
 									<option value="TRASH">{-#tstatrash#-}</option>
-{-if $role == "SUPERVISOR" || $role == "ADMINREGION"-}
-									<option value="DELETED">{-#tstatdeleted#-}</option>
-{-/if-}
+									<option value="DELETED" {-if $role == "USER"-}disabled{-/if-}>{-#tstatdeleted#-}</option>
 								</select>
 							</td>
 							<td onmouseover="Tip('{-$dis.DisasterSerial[1]-}')" onmouseout="UnTip()">

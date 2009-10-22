@@ -128,7 +128,7 @@
 {-if !$ctl_noregion-}
       tb.add('-', {id: 'mqry', text: '{-#msearch#-}',		menu: mquery });
 {-/if-}
-{-if $role == "USER" || $role == "USER" || $role == "OBSERVER" || $role == "ADMINREGION"-}
+{-if $role == "USER" || $role == "SUPERVISOR" || $role == "OBSERVER" || $role == "ADMINREGION"-}
       tb.add('-', {id: 'minp', text: '{-#mdcsection#-}',	menu: mcards });
 {-/if-}
       tb.add('-', {id: 'mdbs', text: '{-#mdatabases#-}',	menu: mbases });
