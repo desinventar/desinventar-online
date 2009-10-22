@@ -1,3 +1,6 @@
+* 2009-10-22 Jhon H. Caicedo <jhcaiced@desinventar.org>
+- Released devel version 8.2.0.59
+
 * 2009-10-20 Jhon H. Caicedo <jhcaiced@desinventar.org>
 - Released devel version 8.2.0.58
 - Fixed install procedure under Windows platform.

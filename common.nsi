@@ -34,7 +34,7 @@ InstProgressFlags     smooth
 
 !define      NAME    "DesInventar"
 !define      MAJORVER "8"
-!define      MINORVER "2.0.58"
+!define      MINORVER "2.0.59"
 !define      PUBLISHER "Corporación OSSO - DesInventar Project http://www.desinventar.org"
 !define      VERSION "${MAJORVER}.${MINORVER}"
 !define      SHORTNAME "${NAME}${MAJORVER}"
@@ -216,6 +216,16 @@ Section "Core Files"
 			Rename '$INSTDIR\ms4w\apps\openlayers-2.8' '$INSTDIR\ms4w\apps\openlayers'
 		skip7:
 		!undef distFile
+
+		SetOutPath $INSTDIR\ms4w
+		File Files\conf\apache-start.bat
+		File Files\conf\apache-stop.bat
+
+		SetOutPath $INSTDIR\ms4w\httpd.d
+		File Files\conf\httpd_extJS.conf
+		File Files\conf\httpd_jquery.conf
+		File Files\conf\httpd_openlayers.conf
+		File Files\conf\httpd_desinventar-8.2-data.conf
 	${endif}
 SectionEnd
 !endif
@@ -259,16 +269,6 @@ Section "Application Install"
 			ZipDLL::extractall "$EXEDIR\${distFile}" '$INSTDIR\data\main\worldmap'
 		skipmap:
 		!undef distFile
-
-		SetOutPath $INSTDIR\ms4w
-		File Files\conf\apache-start.bat
-		File Files\conf\apache-stop.bat
-
-		SetOutPath $INSTDIR\ms4w\httpd.d
-		File Files\conf\httpd_extJS.conf
-		File Files\conf\httpd_jquery.conf
-		File Files\conf\httpd_openlayers.conf
-		File Files\conf\httpd_desinventar-8.2-data.conf
 
 		;Store installation folder in registry
 		WriteRegStr HKLM ${REGBASE} "Install_Dir" "$INSTDIR"
