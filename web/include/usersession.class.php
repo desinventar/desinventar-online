@@ -402,7 +402,7 @@ class UserSession {
 		$sQuery = "INSERT INTO User VALUES (" . 
 				  "'" . $UserId . "'," .
 				  "'" . $UserEMail . "'," .
-				  "'" . $UserPasswd . "'," .
+				  "'" . md5($UserPasswd) . "'," .
 				  "'" . $UserFullName . "'," .
 				  "''," .
 				  "'" . $UserCountry . "'," .
@@ -417,15 +417,15 @@ class UserSession {
 	
 	public function updateUser($UserId, $UserFullName, $UserEMail, $UserPasswd, $UserCountry, $UserCity, $UserActive) {
 		$iReturn = ERR_DEFAULT_ERROR;
-		$sQuery = "UPDATE User SET (" . 
+		$sQuery = "UPDATE User SET " . 
 				  "UserEMail='" . $UserEMail . "'," .
 				  "UserPasswd='" . $UserPasswd . "'," .
 				  "UserFullName='" . $UserFullName . "'," .
 				  "Organization=''," .
-				  "UserCountry='" . $UserCountry . "'," .
+				  "CountryIso='" . $UserCountry . "'," .
 				  "UserCity='" . $UserCity . "'," .
 				  "UserNotes=''," .
-				  "UserActive=" . $UserActive . ")".
+				  "UserActive=" . $UserActive .
 				  " WHERE UserId='" . $UserId . "'";
 		if ($result = $this->q->core->query($sQuery))
 			$iReturn = ERR_NO_ERROR;
