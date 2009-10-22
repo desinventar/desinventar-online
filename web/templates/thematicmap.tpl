@@ -16,10 +16,10 @@
 		var lon = {-if $lon != ''-}{-$lon-}{-else-}0{-/if-};
 		var lat = {-if $lon != ''-}{-$lat-}{-else-}0{-/if-};
 		var zoom = parseInt('{-$zoom-}');
-		var minx = parseInt('{-$minx-}');
-		var maxx = parseInt('{-$maxx-}');
-		var miny = parseInt('{-$miny-}');
-		var maxy = parseInt('{-$maxy-}');
+		var minx = parseFloat('{-$minx-}');
+		var maxx = parseFloat('{-$maxx-}');
+		var miny = parseFloat('{-$miny-}');
+		var maxy = parseFloat('{-$maxy-}');
 		var map;
 		var prj1;
 		var prj2;
@@ -39,7 +39,7 @@
 				maxResolution : 156543.0339,
 				maxExtent     : new OpenLayers.Bounds(-20037508.34, -20037508.34, 20037508.34,  20037508.34),
 				controls: [],
-				numZoomLevels: 25
+				numZoomLevels: 50
 			};
 			map = new OpenLayers.Map('map', options);
 			map.addControl(new OpenLayers.Control.PanZoomBar({zoomStopHeight:3,zoomWorldIcon:true}));
@@ -167,13 +167,6 @@
 			bounds.extend(pt2);
 			zoom = base.getZoomForExtent(bounds);
 			map.setCenter(bounds.getCenterLonLat(), zoom);
-
-			/*
-			// Do a translation of map center coordinates to Spherical Mercator
-			var point = new OpenLayers.LonLat(lon, lat);
-			point.transform(prj1, map.getProjectionObject());
-			map.setCenter(point, zoom);
-			*/
 			if (lon == 0 && lat == 0) {
 				map.zoomToMaxExtent();
 			}
