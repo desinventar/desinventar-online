@@ -114,13 +114,16 @@ Function checkVC90Redist
 
 	Push $R0
 	ClearErrors
-	; Test for Visual C++ 2008 Redistributable
+	; Visual C++ 2008 Redistributable ENU
+	ReadRegDWord $R0 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{FF66E9F6-83E7-3A3E-AF14-8DE9A809A6A4}" "Version"
+	IfErrors 0 VSRedistInstalled
+	; Visual C++ 2008 Redistributable ESN
 	ReadRegDWord $R0 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{9A25302D-30C0-39D9-BD6F-21E6EC160475}" "Version"
 	IfErrors 0 VSRedistInstalled
-	; Visual C++ 2008 SP1 Redistributable
+	; Visual C++ 2008 SP1 Redistributable ESN
 	ReadRegDWord $R0 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{57660847-B1F7-35BD-9118-F62EB863A598}" "Version"
 	IfErrors 0 VSRedistInstalled
-	; Visual C++ 2008 Redistributable from VS2008 Express Edition
+	; Visual C++ 2008 Redistributable from VS2008 Express Edition ESN
 	ReadRegDWord $R0 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{09C0A8D5-EEC1-369D-8C7A-2E2DD17DCA5E}" "Version"
 	IfErrors 0 VSRedistInstalled
 	; No key found, return -1 for error code
