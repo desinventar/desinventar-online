@@ -53,7 +53,7 @@ if (isset($_GET['cmd'])) {
 		case "login":
 			if ($us->login($_GET['userid'], $_GET['password']) > 0) {
 				$u = new DIUser($us, $us->UserId);
-				$us->setUser($u->get('UserId'));
+				$us->setUser($us->get('UserId'));
 				$t->assign ("user", $us->UserId);
 				$t->assign ("ctl_logged", true);		// Login Sucess !!
 			}
@@ -145,8 +145,7 @@ if (isset($_GET['cmd'])) {
 			// PREFERENCES: View User Account Options
 			//if (checkUserSess()) {
 				$t->assign ("ctl_viewpref", true);
-				$usri = form2user($us->getUserInfo($us->UserId));
-				$t->assign ("usri", $usri);
+				$t->assign ("usri", form2user($us->getUserInfo($us->UserId)));
 			//} else
 			//	$t->assign ("ctl_passlost", true);
 		break;
@@ -160,8 +159,7 @@ if (isset($_GET['cmd'])) {
 			// Check if password is correct (ask to dicore). if is OK show dialog to change it.
 			if ($us->validateUser($us->UserId, $_GET['UserPasswd'])) {
 				$t->assign ("ctl_chkpasswd", true);
-				$usri = form2user($us->getUserInfo($us->UserId));
-				$t->assign ("usri", $usri);
+				$t->assign ("usri", form2user($us->getUserInfo($us->UserId)));
 			}
 			else {
 				$t->assign ("ctl_msgupdate", true);
@@ -192,11 +190,11 @@ if (isset($_GET['cmd'])) {
 			$t->assign ("ctl_msgupdate", true);
 			$t->assign ("UserId", $data['UserId']);
 			// check passwd first or adminportal admited
-			$rol1 = $u->getUserRole('');
-			if ((isset($_GET['UserPasswd']) && $u->chkPasswd($_GET['UserPasswd'])) || ($rol1 == "ADMINPORTAL")) {
+			$rol1 = $us->getUserRole('');
+			if ((isset($_GET['UserPasswd']) && $us->chkPasswd($_GET['UserPasswd'])) || ($rol1 == "ADMINPORTAL")) {
 				// if password match, please update..
 				if ($data['NUserPasswd'] == $data['NUserPasswd2']) {
-					$ret = $u->updateUser($data['UserId'], $data['UserFullName'], $data['UserEMail'], 
+					$ret = $us->updateUser($data['UserId'], $data['UserFullName'], $data['UserEMail'], 
 					 $data['UserPasswd'], $data['UserCountry'], $data['UserCity'], $data['UserActive']);
 					$t->assign ("updstat", $ret);
 					if (!iserror($ret))

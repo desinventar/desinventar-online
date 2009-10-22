@@ -70,7 +70,7 @@ switch ($cmd) {
 					if (empty($_POST['RegionLabel']))
 						$myreg = $regid;
 					else
-						$myreg = DIRegion::buildRegionId('', $_POST['RegionLabel']);
+						$myreg = DIRegion::buildRegionId(substr($regid, 0, 3), $_POST['RegionLabel']);
 					mkdir(VAR_DIR . "/database/". $myreg, 0755);
 					$zip->extractTo(VAR_DIR . "/database/". $myreg);
 					$result = DIRegion::createRegionEntryFromDir($us, $myreg, $_POST['RegionLabel']);
