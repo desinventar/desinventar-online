@@ -54,7 +54,18 @@ class UserSession {
 	// Set LastUpdate field of Session so it will not expire...
 	public function awake() {
 		$iReturn = ERR_NO_ERROR;
-		$this->dLastUpdate = gmdate('c');
+		$PrevTime = $this->dLastUpdate;
+		$CurTime  = gmdate('c');
+		$this->dLastUpdate = $CurTime;
+		
+		// 2009-10-23 (jhcaiced) Logout users when too much time has passed
+		// without using this session (Bug # 277)
+		$Interval = strtotime($CurTime) - strtotime($PrevTime);
+		// 60 * 30 = 1800 (30 minutes)
+		if ($Interval > 1800) {
+			$this->close();
+			$this->logout();
+		}
 		$iReturn = $this->update();
 		return $iReturn;
 	}
