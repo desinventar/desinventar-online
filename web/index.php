@@ -19,7 +19,7 @@ $RegionId = getParameter('r', getParameter('RegionId', ''));
 if (isset($post['_REG']) && !empty($post['_REG']))
 	$RegionId = $post['_REG'];
 elseif ($cmd == '' && $RegionId == '')
-	$cmd = 'main';
+	$cmd = 'start';
 
 // Default Template Values
 $t->assign('request_uri', $_SERVER['REQUEST_URI']);
@@ -32,9 +32,17 @@ switch ($cmd) {
 	case 'getversion':
 		print VERSION;
 		break;
+	case 'start':
+		$d = new Query();
+		$t->assign('lg', $lg);
+		$t->assign("lglst", $d->loadLanguages(1));
+		$t->assign('ctl_start', true);
+		$t->display('index.tpl');
+		break;
 	case 'main':
 		// Direct access returns a list of public regions on this server
 		$d = new Query();
+		$t->assign('lg', $lg);
 		$t->assign("lglst", $d->loadLanguages(1));
 		$t->assign('regionlist', $d->searchDB());
 		$t->assign('ctl_mainpage', true);

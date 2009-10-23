@@ -1921,12 +1921,19 @@
 	<table border="0" cellpadding="0" cellspacing="0" style="border: thin solid;">
 	<tr style="background:url(images/bgmain.png)">
 		<td width="400px">
-			<a href="index.php"><img src="images/di_logo1.png" border=0></a><br/>
+			<a href="index.php?cmd=main"><img src="images/di_logo1.png" border=0></a><br/>
 		</td>
 		<td>
 			<ul>
 			<li><a href="http://www.desinventar.org" target="_blank">DesInventar.org</a></li>
-			<li>{-foreach name=lglst key=key item=item from=$lglst-}[<a href="index.php?lang={-$key-}">{-$item[0]-}</a>] {-/foreach-}</li>
+			<li>
+			{-#mlang#-}:
+			<select onChange="window.location='index.php?cmd=main&lang='+ this.value;">
+{-foreach name=lglst key=key item=item from=$lglst-}
+				<option value="{-$key-}" {-if $lg == $key-}selected{-/if-}>{-$item[0]-}</option>
+{-/foreach-}
+			</select>
+			</li>
 			</ul>
 			{-#labelsoftwareversion#-} : {-$version-}
 		</td>
@@ -1938,8 +1945,8 @@
 				<h4><u>{-#tdbavail#-}</u>:
 				<ul>
 {-foreach name=rlist key=key item=item from=$regionlist-}
-				<li><a href="javascript:void(null)" onClick="javascript:window.open('?r={-$key-}','DI_{-$smarty.foreach.rlist.iteration-}', 
-				'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,status=yes,scrollbars=no,toolbar=no');">{-$item-}</a>
+				<li><a href="?r={-$key-}">{-$item-}</a> | <a href="javascript:void(null)" onClick="javascript:window.open('?r={-$key-}','DI_{-$smarty.foreach.rlist.iteration-}', 
+				'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,status=yes,scrollbars=no,toolbar=no');">[-]</a>
 				</li>
 {-/foreach-}
 				</ul>
@@ -1972,4 +1979,36 @@
 		</td>
 	</tr>
 	</table>
+{-/if-}
+
+{-** START: start page in DesInventar **-}
+{-if $ctl_start-}
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
+	<title>{-#ttitle#-}</title>
+</head>
+<body>
+	<table border="0" cellpadding="0" cellspacing="0" style="border: thin solid;">
+	<tr style="background:url(images/bgmain.png)">
+		<td width="400px">
+			<a href="index.php"><img src="images/di_logo1.png" border=0></a><br/>
+		</td>
+		<td height="100%" align="center">
+			{-#mlang#-}:
+			<select onChange="window.location='index.php?lang='+ this.value;">
+{-foreach name=lglst key=key item=item from=$lglst-}
+				<option value="{-$key-}" {-if $lg == $key-}selected{-/if-}>{-$item[0]-}</option>
+{-/foreach-}
+			</select><br /><br />
+			<input type="button" value="{-#tstartpage#-}" style="font-family:arial,tahoma,helvetica,cursive; font-size:24px; font-weight:bolder;"
+				onClick="javascript:window.open('index.php?cmd=main','DI', 
+				'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,status=yes,scrollbars=no,toolbar=no');" />
+		</td>
+	</tr>
+	</table>
+</body>
+</html>
 {-/if-}
