@@ -183,8 +183,6 @@ class DIGeography extends DIObject {
 			$p = self::loadByCode($this->session, $ParentCode);
 			$this->setGeographyId($p->get('GeographyId'));
 			$this->set('GeographyFQName', $this->buildGeographyFQName());
-			print $this->getInsertQuery() . "\n";
-			print $this->getUpdateQuery() . "\n";
 		}
 		if ( (count($oReturn['Error']) > 0) || (count($oReturn['Warning']) > 0) ) {
 			$iReturn = ERR_UNKNOWN_ERROR;

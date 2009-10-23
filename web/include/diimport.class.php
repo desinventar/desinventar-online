@@ -36,6 +36,10 @@ class DIImport {
 						$r = $o->importFromCSV($cols, $values);
 						$o->insert();
 					break;
+					case DI_EVENT:
+						$o = new DIEvent($this->us);
+						$r = $o->importFromCSV($cols, $values);
+						//$o->insert();
 					case DI_DISASTER:
 					break;				
 				}

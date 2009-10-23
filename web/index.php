@@ -198,7 +198,6 @@ switch ($cmd) {
 				// Get UserRole
 				$role = $us->getUserRole($RegionId);
 				$t->assign ("role", $role);
-				//echo "<pre>". $us->UserId ; print_r($role);
 				if (strlen($role) > 0)
 					$t->assign ("ctl_user", true);
 				else
