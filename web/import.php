@@ -20,10 +20,6 @@ $post = $_POST;
 $get = $_GET;
 
 $reg = getParameter('_REG', getParameter('r'), '');
-fb($reg);
-fb($_FILES);
-fb($post);
-fb($get);
 
 if ($reg == '') {
 	exit();
@@ -111,8 +107,6 @@ if (isset($_FILES['desinv']) && isset($post['diobj'])) {
 		$i = new DIImport($us);
 		//$valm = $i->validateFromCSV($post['FileName']);
 		$valm = 0;
-		fb('import');
-		fb($post['diobj']);
 		if (is_array($valm)) {
 			$stat = (int) $valm['Status'];
 			if (!iserror($stat))
