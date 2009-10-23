@@ -36,7 +36,7 @@ class UserSession {
 		try {
 			foreach($this->q->core->query($sQuery) as $row) {
 				$this->sSessionId  = $row['SessionId'];
-				$this->UserId   = $row['UserId'];
+				$this->UserId      = $row['UserId'];
 				$this->dStart      = $row['Start'];
 				$this->dLastUpdate = $row['LastUpdate'];
 				$iReturn = ERR_NO_ERROR;
