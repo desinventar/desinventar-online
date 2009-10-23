@@ -87,7 +87,6 @@ if (isset($post['_M+cmd'])) {
 	$rinf = $us->q->getDBInfo();
 	$rgl[0]['regname'] = $rinf['RegionLabel|'];
 	$rgl[0]['info'] = $info;
-	//echo "<pre>"; print_r($rinf);
 	// if valid filename then prepare interface to view MAPFILE	
 	if (strlen($m->filename()) > 0) {
 		$lon = 0;
@@ -136,7 +135,6 @@ if (isset($post['_M+cmd'])) {
 	}
 	
 	$t->assign ("glev", $us->q->loadGeoLevels('', -1, true));
-	//echo "<pre>"; print_r($rgl); 
 	$t->assign ("rgl", $rgl);
 	$t->assign ("tot", $cou);
 	$t->assign ("qdet", $us->q->getQueryDetails($dic, $post));

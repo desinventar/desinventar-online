@@ -155,7 +155,6 @@ else {
 		if ($_POST['_CMD'] == "insertDICard") {
 			// Insert New Datacard
 			$data = form2disaster($_POST, CMD_NEW);
-			//echo "<!--"; print_r($data); echo "-->\n";
 			$o = new DIDisaster($us, $data['DisasterId']);
 			$o->setFromArray($data);
 			$o->set('RecordCreation', gmdate('c'));
@@ -168,7 +167,6 @@ else {
 				// If Datacard is valid, update EEData Table..
 				$eedat = form2eedata($_POST);
 				$eedat['DisasterId'] = $data['DisasterId'];
-				//echo "<!--"; print_r($eedat); echo "-->\n";
 				$o = new DIEEData($us, $eedat['DisasterId']);
 				$o->setFromArray($eedat);
 				$i = $o->insert();
@@ -179,7 +177,6 @@ else {
 		elseif ($_POST['_CMD'] == "updateDICard") {
 			// Update Existing Datacard
 			$data = form2disaster($_POST, CMD_UPDATE);
-			//echo "<!--"; print_r($data); echo "-->\n";
 			$o = new DIDisaster($us, $data['DisasterId']);
 			$o->load();
 			$o->setFromArray($data);
@@ -192,7 +189,6 @@ else {
 				// If Datacard is valid, update EEData Table..
 				$eedat = form2eedata($_POST);
 				$eedat['DisasterId'] = $data['DisasterId'];
-				//echo "<!--"; print_r($eedat); echo "-->\n";
 				$o = new DIEEData($us, $eedat['DisasterId']);
 				$o->setFromArray($eedat);
 				$i = $o->update();
