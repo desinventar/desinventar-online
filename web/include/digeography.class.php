@@ -164,11 +164,8 @@ class DIGeography extends DIObject {
 	}
 	
 	public function importFromCSV($cols, $values) {
+		$oReturn = parent::importFromCSV($cols, $values);
 		$iReturn = ERR_NO_ERROR;
-		$oReturn = array();
-		$oReturn['Status'] = $iReturn;
-		$oReturn['Error'] = array();
-		$oReturn['Warning'] = array();
 		
 		$this->set('GeographyLevel', $values[0]);
 		$this->set('GeographyCode',  $values[1]);

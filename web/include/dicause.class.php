@@ -49,25 +49,11 @@ class DICause extends DIObject {
 			$CauseId = $row['CauseId'];
 			$this->set('CauseId', $CauseId);
 			$this->set('CausePredefined'  , $row['CausePredefined']);
-			$this->set('CauseCreationDate', $row['CauseCreationDate']);
+			$this->set('RecordCreation', $row['RecordCreation']);
 		} //foreach
 		
 		if ($CauseId == '') {
-			// Search PreDefined Cause
-			$sQuery = "SELECT * FROM DI_Cause WHERE " . 
-			  "  (CauseName LIKE '%" . $this->get('CauseName') . "%'" .
-			  "   OR CauseKeywords LIKE '%" . $this->get('CauseName') . "%')";
-			foreach($this->q->base->query($sQuery) as $row) {
-				$CauseId = $row['CauseId'];
-				$this->set('CauseId'          , $CauseId);
-				$this->set('CauseName'        , $row['CauseName']);
-				$this->set('CauseDesc'        , $row['CauseDesc']);
-				$this->set('CausePredefined'  , 1);
-				$this->set('CauseCreationDate', $row['CauseCreationDate']);
-			} //foreach
-		} //if
-		if ($CauseId == '') {
-			$CauseId = $prmCauseId;
+			$CauseId = $prmCauseName;
 		}
 		return $CauseId;
 	} // function
@@ -115,6 +101,21 @@ class DICause extends DIObject {
 		$iReturn = $this->validateNoDatacards($iReturn, -25);
 		return $iReturn;
 	}
+
+	public function importFromCSV($cols, $values) {
+		$oReturn = parent::importFromCSV($cols, $values);
+		$iReturn = ERR_NO_ERROR;
+		$this->set('CauseName',  $values[1]);
+		
+		$this->getIdByName($this->get('CauseName'));
+		fb($this->getInsertQuery());
+		fb($this->getUpdateQuery());
+		if ( (count($oReturn['Error']) > 0) || (count($oReturn['Warning']) > 0) ) {
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		$oReturn['Status'] = $iReturn;
+		return $oReturn;
+	} //function
 	
 }
 

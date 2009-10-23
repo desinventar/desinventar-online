@@ -48,23 +48,8 @@ class DIEvent extends DIObject {
 			$EventId = $row['EventId'];
 			$this->set('EventId'          , $EventId);
 			$this->set('EventPredefined'  , $row['EventPredefined']);
-			$this->set('EventCreationDate', $row['EventCreationDate']);
 		} // foreach
 		
-		if ($EventId == '') {
-			// Search Predefined Event
-			$sQuery = "SELECT * FROM DI_Event WHERE " . 
-					  " (EventName LIKE '%" . $prmEventName . "%'" .
-					  "  OR EventKeywords LIKE '%" . $prmEventName . "%')";
-			foreach ($this->q->base->query($sQuery) as $row) {
-				$EventId = $row['EventId'];
-				$this->set('EventId'          , $EventId);
-				$this->set('EventName'        , $row['EventName']);
-				$this->set('EventDesc'        , $row['EventDesc']);
-				$this->set('EventPredefined'  , 1);
-				$this->set('EventCreationDate', $row['EventCreationDate']);
-			} //foreach
-		} //if
 		if ($EventId == '') {
 			$EventId = $prmEventName;
 		}
@@ -114,6 +99,20 @@ class DIEvent extends DIObject {
 		$iReturn = $this->validateNoDatacards($iReturn, -15);
 		return $iReturn;
 	}
+
+	public function importFromCSV($cols, $values) {
+		$oReturn = parent::importFromCSV($cols, $values);
+		$iReturn = ERR_NO_ERROR;
+		$this->set('EventName',  $values[1]);
+		$this->set('EventDesc',  $values[2]);
+		
+		$this->getIdByName($this->get('EventName'));
+		if ( (count($oReturn['Error']) > 0) || (count($oReturn['Warning']) > 0) ) {
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		$oReturn['Status'] = $iReturn;
+		return $oReturn;
+	} //function
 }
 
 </script>
