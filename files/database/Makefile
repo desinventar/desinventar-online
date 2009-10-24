@@ -5,15 +5,12 @@ all : base.db core.db desinventar.db
 
 # Rebuild base.db database
 base.db : base.sql doc-db.csv events.csv causes.csv
-	/bin/rm -f base.db; \
-	sqlite3 base.db < base.sql ; \
-	iconv --from-code=UTF-8 --to-code=WINDOWS-1252 events.csv > eve.csv
-	iconv --from-code=UTF-8 --to-code=WINDOWS-1252 causes.csv > cau.csv
-	./insertEveCau.pl --file=eve.csv --table=Event --lang=spa | sqlite3 base.db
-	./insertEveCau.pl --file=eve.csv --table=Event --lang=eng | sqlite3 base.db
-	./insertEveCau.pl --file=cau.csv --table=Cause --lang=spa | sqlite3 base.db
-	./insertEveCau.pl --file=cau.csv --table=Cause --lang=eng | sqlite3 base.db
-	/bin/rm eve.csv cau.csv
+	/bin/rm -f base.db
+	sqlite3 base.db < base.sql
+	php insertEveCau.php events.csv spa EVENT | sqlite3 base.db
+	php insertEveCau.php events.csv eng EVENT | sqlite3 base.db
+	php insertEveCau.php events.csv spa CAUSE | sqlite3 base.db
+	php insertEveCau.php events.csv eng CAUSE | sqlite3 base.db
 	./createDictionary.php | sqlite3 base.db
 	./iso3166tosql.pl | sqlite3 base.db
 	./square2sql.pl | sqlite3 base.db
