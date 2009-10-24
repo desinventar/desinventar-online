@@ -4,12 +4,14 @@
  (c) 1999-2009 Corporacion OSSO
 */
 
+// 2009-09-16 (jhcaiced) Autoconfigure software directory
+if (! isset($_SERVER["DI8_WEB"])) {
+	$_SERVER["DI8_WEB"] = dirname(dirname(__FILE__));
+}
 
 // 2009-07-22 (jhcaiced) Adapted Configuration and Startup for 
 // using with PHP Command Line 
 if (isset($_SERVER["HTTP_HOST"])) {
-	// 2009-09-16 (jhcaiced) Autoconfigure software directory
-	$_SERVER["DI8_WEB"] = dirname(dirname(__FILE__));
 	// Online Modes (HTTP)
 	if (isset($_SERVER["WINDIR"])) {
 		// Running on a Windows Server
