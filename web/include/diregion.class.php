@@ -36,24 +36,33 @@ class DIRegion extends DIObject {
 		                      "InfoCartography/STRING," .
 		                      "InfoAdminURL/STRING";
 		parent::__construct($prmSession);
-		if ($this->get('OptionLanguageList') == '') {
-			$this->set('OptionLanguageList', $this->get('LangIsoCode'));
-		}
 		$this->setConnection("core");
 		$this->createFields($this->sInfoDef);
 		$this->createFields($this->sInfoTrans);
 		$this->set('PeriodBeginDate', '1900-01-01');
 		$this->set('PeriodEndDate', gmdate('Y-m-d'));
+
+		$prmRegionId = '';
 		$num_args = func_num_args();
 		if ($num_args >= 2) {
+			// Load region if parameter was specified
 			$prmRegionId = func_get_arg(1);
-			if ($prmRegionId != '') {
-				$this->set('RegionId', $prmRegionId);
-				$iReturn = $this->q->setDBConnection($prmRegionId);
+		} else {
+			// Try to load region from Current Session if no parameter was specified
+			if ( ($prmSession->sRegionId != '') && ($prmSession->sRegionId != 'core')) {
+				$prmRegionId = $prmSession->sRegionId;
 			}
-			if ($iReturn > 0) {
-				$iReturn = $this->load();
-			}
+		}
+		
+		if ($prmRegionId != '') {
+			$this->set('RegionId', $prmRegionId);
+			$iReturn = $this->q->setDBConnection($prmRegionId);
+		}
+		if ($iReturn > 0) {
+			$iReturn = $this->load();
+		}
+		if ($this->get('OptionLanguageList') == '') {
+			$this->set('OptionLanguageList', $this->get('LangIsoCode'));
 		}
 	} // __construct
 
@@ -636,7 +645,10 @@ class DIRegion extends DIObject {
 		}
 	}
 	
-	public function copyEvents($prmLangIsoCode) {
+	public function copyEvents($prmLangIsoCode='') {
+		if ($prmLangIsoCode == '') {
+			$prmLangIsoCode = $this->get('LangIsoCode');
+		}
 		$e = new DIEvent($this->session);
 		$FieldList = $e->getFieldList();
 		$Queries = array();		
@@ -654,7 +666,10 @@ class DIRegion extends DIObject {
 		}
 	}
 
-	public function copyCauses($prmLangIsoCode) {
+	public function copyCauses($prmLangIsoCode='') {
+		if ($prmLangIsoCode == '') {
+			$prmLangIsoCode = $this->get('LangIsoCode');
+		}
 		$c = new DICause($this->session);
 		$FieldList = $c->getFieldList();
 		$Queries = array();		
