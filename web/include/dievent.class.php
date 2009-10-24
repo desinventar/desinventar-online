@@ -31,9 +31,9 @@ class DIEvent extends DIObject {
 			if ($num_args >= 3) {
 				$prmEventName = func_get_arg(1);
 				$prmEventDesc = func_get_arg(2);
+				$this->getIdByName($this->get('EventName'));
 				$this->set('EventName', $prmEventName);
 				$this->set('EventDesc', $prmEventDesc);
-				$this->getIdByName($this->get('EventName'));
 			}
 			$this->load();
 		}
@@ -42,15 +42,16 @@ class DIEvent extends DIObject {
 	public function getIdByName($prmEventName) {
 		$EventId = '';
 		$sQuery = "SELECT * FROM " . $this->getTableName() .
-		  " WHERE EventName LIKE '" . $prmEventName . "'";
+		  " WHERE LangIsoCode = '" . $this->get('LangIsoCode') . "'" . 
+		  " AND (EventName LIKE '" . $prmEventName . "'" .
+		  "      OR EventKeyWords LIKE '" . $prmEventName . ";')";
 		foreach($this->q->dreg->query($sQuery) as $row) {
-			// Local Event Found
 			$EventId = $row['EventId'];
 			$this->set('EventId'          , $EventId);
-			$this->set('EventPredefined'  , $row['EventPredefined']);
 		} // foreach
-		
-		if ($EventId == '') {
+		if ($EventId != '') {
+			$this->load();
+		} else {
 			$EventId = $prmEventName;
 		}
 		return $EventId;

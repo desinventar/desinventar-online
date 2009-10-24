@@ -21,6 +21,7 @@
 				$e = new DIEvent($us);
 				$e->set('LangIsoCode', $LangIsoCode);
 				$e->set('RegionId', '');
+				$e->set('EventPredefined', 1);
 				$e->set('EventId', $values[0]);
 				$e->set('EventRGBColor', $values[1]);
 				$keywords = trim($values[2]);
@@ -37,6 +38,7 @@
 				$e = new DICause($us);
 				$e->set('LangIsoCode', $LangIsoCode);
 				$e->set('RegionId', '');
+				$e->set('CausePredefined', 1);
 				$e->set('CauseId', $values[0]);
 				$e->set('CauseRGBColor', $values[1]);
 				$keywords = trim($values[2]);
