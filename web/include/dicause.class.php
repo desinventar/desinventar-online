@@ -43,16 +43,17 @@ class DICause extends DIObject {
 	public function getIdByName($prmCauseName) {
 		$CauseId = '';
 		$sQuery = "SELECT * FROM " . $this->getTableName() .
-		  " WHERE CauseName LIKE '" . $prmCauseName . "'";
+		  " WHERE LangIsoCode='" . $this->get('LangIsoCode') . "'" . 
+		  " AND (CauseName LIKE '" . $prmCauseName . "'" . 
+		  "      OR CauseKeyWords LIKE '" . $prmCauseName . ";')";
 		foreach($this->q->dreg->query($sQuery) as $row) {
-			// Local Cause Found
 			$CauseId = $row['CauseId'];
 			$this->set('CauseId', $CauseId);
-			$this->set('CausePredefined'  , $row['CausePredefined']);
-			$this->set('RecordCreation', $row['RecordCreation']);
 		} //foreach
 		
-		if ($CauseId == '') {
+		if ($CauseId != '') {
+			$this->load();
+		} else {
 			$CauseId = $prmCauseName;
 		}
 		return $CauseId;
