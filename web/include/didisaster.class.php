@@ -126,6 +126,134 @@ class DIDisaster extends DIObject {
 		}
 		$iReturn = parent::update($withValidate);
 	} //update
+
+	public function importFromCSV($cols, $values) {
+		$oReturn = parent::importFromCSV($cols, $values);
+		$iReturn = ERR_NO_ERROR;
+
+		$DisasterImport = array(0 => 'DisasterId', 
+		                        1 => 'DisasterSerial',
+		                        2 => 'DisasterBeginTime',
+		                        3 => 'GeographyId',
+			                    4 => 'DisasterSiteNotes',
+			                    5 => 'DisasterSource',
+			                    6 => 'DisasterLongitude',
+			                    7 => 'DisasterLatitude',
+			                    8 => 'RecordAuthor',
+			                    9 => 'RecordCreation',
+			                    10 => 'RecordStatus',
+			                    11 => 'EventId',
+			                    12 => 'EventDuration',
+			                    13 => 'EventMagnitude',
+			                    14 => 'EventNotes',
+			                    15 => 'CauseId',
+			                    16 => 'CauseNotes',
+			                    // Effects on People
+			                    17 => 'EffectPeopleDead',
+			                    18 => 'EffectPeopleMissing',
+			                    19 => 'EffectPeopleInjured',
+			                    20 => 'EffectPeopleHarmed',
+			                    21 => 'EffectPeopleAffected',
+			                    22 => 'EffectPeopleEvacuated',
+			                    23 => 'EffectPeopleRelocated',
+			                    // Effects on Houses
+			                    24 => 'EffectHousesDestroyed',
+			                    25 => 'EffectHousesAffected',
+			                    // Effects General
+			                    26 => 'EffectLossesValueLocal',
+			                    27 => 'EffectLossesValueUSD',
+			                    28 => 'EffectRoads',
+			                    29 => 'EffectFarmingAndForest',
+			                    30 => 'EffectLiveStock',
+			                    31 => 'EffectEducationCenters',
+			                    32 => 'EffectMedicalCenters',
+			                    // Other Losses
+			                    33 => 'EffectOtherLosses',
+			                    34 => 'EffectNotes',
+			                    // Sectors Affected
+			                    35 => 'SectorTransport',
+			                    36 => 'SectorCommunications',
+			                    37 => 'SectorRelief',
+			                    38 => 'SectorAgricultural',
+			                    39 => 'SectorWaterSupply',
+			                    40 => 'SectorSewerage',
+			                    41 => 'SectorEducation',
+			                    42 => 'SectorPower',
+			                    43 => 'SectorIndustry',
+			                    44 => 'SectorHealth',
+			                    45 => 'SectorOther'
+						   );
+		$this->set('EventId', 'OTHER');
+		$this->set('CauseId', 'UNKNOWN');
+		foreach($DisasterImport as $Index => $Field) {
+			$this->set($Field, $values[$Index]);
+		}
+		
+		// Validation Settings
+		$this->set('RecordStatus', 'PUBLISHED');
+		if ($this->get('DisasterSource') == '') {
+			$this->set('RecordStatus', 'DRAFT');
+		}
+		
+		$g = new DIGeography($this->session);
+		$DisasterGeographyCode = $this->get('GeographyId');
+		$this->set('GeographyId', $g->getIdByCode($DisasterGeographyCode));
+		
+		$e = new DIEvent($this->session);
+		$this->set('EventId', $e->getIdByName($this->get('EventId')));
+		
+		$c = new DICause($this->session);
+		$this->set('CauseId', $c->getIdByName($this->get('CauseId')));
+		
+		//2009-07-25 Save fechapor/fechafec in EffectNotes
+		$this->set('EffectNotes', 
+			$this->get('EffectNotes') . ' ' .
+			'(DI6Author : ' . $this->get('RecordAuthor') . ' ' .
+			'DI6Date : ' . $this->get('RecordCreation') . ')'
+			
+		);
+		$this->set('RecordAuthor'  , $this->session->UserId);
+		$this->set('RecordCreation', gmdate('c'));
+		
+		/*
+		$bInsert = ($this->validateCreate() > 0);
+		if ($bInsert) {
+			if ($doImport) { $Result = $this->insert(); }
+			else { $Result = $this->validateCreate(); }
+		} else {
+			if ($doImport) { $Result = $this->update(); }
+			else { $Result = $this->validateUpdate(); }
+		}
+		if ($Result > 0) {
+			$e = new DIEEData($this->us);
+			$e->set('DisasterId', $this->get('DisasterId'));
+			if ($doImport) {
+				if ($bInsert) {
+					$e->insert();
+				} else {
+					$e->update();
+				}
+			}
+		} else {
+			// Generate Error Log
+			$sErrorMsg = $rowCount . ',' . $Result . ',';
+			switch($Result) {
+			case -59:
+				$sErrorMsg .= $this->get('DisasterSerial') . ' EventId Not Found ' . $this->get('EventId') . ',,';
+				break;						
+			default:
+				$sErrorMsg .= 'Unknown Error' . ',,';
+				break;
+			} //switch
+			fputs($flog, $sErrorMsg . "\n");
+		}  //if
+		*/
+		if ( (count($oReturn['Error']) > 0) || (count($oReturn['Warning']) > 0) ) {
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		$oReturn['Status'] = $iReturn;
+		return $oReturn;
+	} //function
 } //class
 
 </script>
