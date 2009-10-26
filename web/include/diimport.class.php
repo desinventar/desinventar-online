@@ -34,26 +34,55 @@ class DIImport {
 					case DI_EVENT:
 						$o = new DIEvent($this->us);
 						$r = $o->importFromCSV($cols, $values);
-						$o->insert();
+						if ($r['Status'] > 0) {
+							$o->insert();
+						}
 					break;
 					case DI_CAUSE:
 						$o = new DICause($this->us);
 						$r = $o->importFromCSV($cols, $values);
-						$o->insert();
+						if ($r['Status'] > 0) {
+							$o->insert();
+						}
 					break;
 					case DI_GEOGRAPHY:
 						$o = new DIGeography($this->us);
 						$r = $o->importFromCSV($cols, $values);
-						$o->insert();
+						if ($r['Status'] > 0) {
+							$o->insert();
+						}
 					break;
 					case DI_DISASTER:
 						$o = new DIDisaster($this->us);
 						$r = $o->importFromCSV($cols, $values);
-						//$o->insert();
+						print_r($r);
+						$Result = $r['Status'];
+						if ($Result > 0) {
+							if ($doImport) {
+								$Result = $o->insert();
+							} else {
+								$Result = $o->validateCreate();
+							}
+						} else {
+							if ($doImport) {
+								$Result = $o->update();
+							} else {
+								$Result = $o->validateUpdate();
+							}
+						}
+						if ($Result > 0) {
+							$e = new DIEEData($this->us);
+							$e->set('DisasterId', $o->get('DisasterId'));
+							if ($doImport) {
+								if ($Result > 0) {
+									$Result = $e->insert();
+								} else {
+									$Result = $e->update();
+								}
+							}
+						}
 					break;				
 				}
-				//print count($values) . "\n";
-				//$this->importDisasterRecord($values, $doImport);
 			}
 		} //while
 		fclose($fh);

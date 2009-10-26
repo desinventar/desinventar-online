@@ -125,6 +125,7 @@ class DIDisaster extends DIObject {
 			if ($this->get($sFieldQName) < 0) { $this->set($sFieldQName, 0); }
 		}
 		$iReturn = parent::update($withValidate);
+		return $iReturn;
 	} //update
 
 	public function importFromCSV($cols, $values) {
