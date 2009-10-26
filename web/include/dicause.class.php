@@ -109,8 +109,6 @@ class DICause extends DIObject {
 		$this->set('CauseName',  $values[1]);
 		
 		$this->getIdByName($this->get('CauseName'));
-		fb($this->getInsertQuery());
-		fb($this->getUpdateQuery());
 		if ( (count($oReturn['Error']) > 0) || (count($oReturn['Warning']) > 0) ) {
 			$iReturn = ERR_UNKNOWN_ERROR;
 		}
