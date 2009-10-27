@@ -444,18 +444,18 @@ class UserSession {
 	}
 	
 	public function clearOldLocks() {
-		$deltime = gmdate('c', time() - 300);
-		$sQuery = "DELETE FROM UserLockList WHERE SessionId='" . $this->sSessionId . "' AND RecordUpdate<='" . $deltime . "'";
+		$deltime = gmdate('c', time() - 600);
+		$sQuery = "DELETE FROM UserLockList WHERE RecordUpdate<='" . $deltime . "'";
 		$this->q->core->query($sQuery);
 	}
 	
 	public function isDatacardLocked($prmDisasterId) {
 		// First delete old datacard locks...
 		$this->clearOldLocks();
+		$sQuery = "SELECT * FROM UserLockList WHERE RecordId='" . $prmDisasterId . "'";
 		$sReturn = '';
-		$sQuery = "SELECT S.UserId FROM UserLockList U,UserSession S WHERE U.SessionId=S.SessionId AND U.RecordId='" . $prmDisasterId . "'";
 		foreach ($this->q->core->query($sQuery) as $row) {
-			$sReturn = $row['UserId'];
+			$sReturn = $row['SessionId'];
 		}
 		return $sReturn;
 	}
@@ -465,7 +465,6 @@ class UserSession {
 		$this->clearOldLocks();
 		$now = gmdate('c');
 		$sQuery = "INSERT INTO UserLockList VALUES ('" . $this->sSessionId . "','DISASTER','" . $prmDisasterId . "','" . $now . "')";
-		fb($sQuery);
 		$this->q->core->query($sQuery);
 	}
 	
