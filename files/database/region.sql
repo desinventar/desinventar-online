@@ -1,5 +1,6 @@
 /* REGION.DB - DesInventar8.2
 2009-08-19
+Schema Version:1.01
 */
 
 DROP TABLE IF EXISTS Info;
@@ -215,4 +216,3 @@ SyncURL VARCHAR(1024),
 SyncSpec VARCHAR(1024), 
 PRIMARY KEY('SyncId')
 );
-

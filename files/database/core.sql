@@ -1,5 +1,6 @@
 /* CORE.DB - DesInventar8.2
 2009-08-19
+Schema Version:1.01
 */
 
 DROP TABLE IF EXISTS Region;
@@ -87,7 +88,8 @@ CREATE TABLE 'UserLockList' (
 SessionId VARCHAR(50), 
 TableId VARCHAR(50), 
 RecordId VARCHAR(50), 
-PRIMARY KEY('SessionId')
+RecordUpdate DATETIME, 
+PRIMARY KEY('SessionId','RecordId')
 );
 
 /* Set initial values */

@@ -1,5 +1,6 @@
 /* BASE.DB - DesInventar8.2
-2009-08-05
+2009-08-19
+Schema Version:1.01
 
 DROP TABLE IF EXISTS 
 CREATE TABLE 
@@ -123,4 +124,4 @@ insert into Language values ('spa', 'Spanish', 'Español', 1,'','','');
 insert into Language values ('eng', 'English', 'English', 1,'','','');
 insert into Language values ('por', 'Portuguese', 'Portugais', 1,'','','');
 
-insert into Info values ('DBVersion','40030','','','','');
+insert into Info values ('DBVersion','1.01','','','','');
