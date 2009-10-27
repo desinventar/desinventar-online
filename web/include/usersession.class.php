@@ -445,7 +445,7 @@ class UserSession {
 	
 	public function clearOldLocks() {
 		$deltime = gmdate('c', time() - 300);
-		$sQuery = "DELETE FROM UserLockList WHERE SessionId='" . $this->sSessionId . "' AND LastUpdate<='" . $deltime . "'";
+		$sQuery = "DELETE FROM UserLockList WHERE SessionId='" . $this->sSessionId . "' AND RecordUpdate<='" . $deltime . "'";
 		$this->q->core->query($sQuery);
 	}
 	
@@ -465,6 +465,7 @@ class UserSession {
 		$this->clearOldLocks();
 		$now = gmdate('c');
 		$sQuery = "INSERT INTO UserLockList VALUES ('" . $this->sSessionId . "','DISASTER','" . $prmDisasterId . "','" . $now . "')";
+		fb($sQuery);
 		$this->q->core->query($sQuery);
 	}
 	
