@@ -128,7 +128,7 @@
 {-if !$ctl_noregion-}
       tb.add('-', {id: 'mqry', text: '{-#msearch#-}',		menu: mquery });
 {-/if-}
-{-if $role == "USER" || $role == "SUPERVISOR" || $role == "OBSERVER" || $role == "ADMINREGION"-}
+{-if ($role == "USER" || $role == "SUPERVISOR" || $role == "OBSERVER" || $role == "ADMINREGION") && !$ctl_mainpage-}
       tb.add('-', {id: 'minp', text: '{-#mdcsection#-}',	menu: mcards });
 {-/if-}
       tb.add('-', {id: 'mdbs', text: '{-#mdatabases#-}',	menu: mbases });
@@ -1447,7 +1447,45 @@
 	<iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" 
 		src="?cmd=getRegionFullInfo&r={-$reg-}"></iframe>
 	</div>
- </div>
+ {-** MAINPAGE: default page in DesInventar root **-}
+ {-if $ctl_mainpage-}
+	<script type="text/javascript">
+		window.onload = function() {
+			updateUserBar('user.php', '', '', '');
+		}
+	</script>
+	<table border="0" width="100%" cellpadding="0" cellspacing="0" style="border: thin solid;">
+	<tr style="background:url(images/bgmain.png)">
+		<td width="400px">
+			<a href="index.php?cmd=main"><img src="images/di_logo1.png" border=0></a><br/>
+		</td>
+		<td>
+			<ul>
+			<li><a href="http://www.desinventar.org" target="_blank">DesInventar.org</a></li>
+			<li>{-#labelsoftwareversion#-} : {-$version-}</li>
+			</ul>
+		</td>
+	</tr>
+	<tr bgcolor="#e2e2e0" valign="top">
+		<td colspan="2">
+			<div id="rightcontent"></div>
+			<br /><hr /><br />
+			<div id="pagecontent">
+				<h4><u>{-#tdbavail#-}</u>:
+				<ul>
+ {-foreach name=rlist key=key item=item from=$regionlist-}
+				<li><a href="?r={-$key-}">{-$item-}</a> | <a href="javascript:void(null)" onClick="javascript:window.open('?r={-$key-}','DI_{-$smarty.foreach.rlist.iteration-}', 
+				'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,status=yes,scrollbars=no,toolbar=no');">[-]</a>
+				</li>
+ {-/foreach-}
+				</ul>
+				</h4>
+			</div>
+		</td>
+	</tr>
+	</table>
+ {-/if-}
+ </div><!-- end div id=container-->
 <!--	SECTION : QUERY DESIGN 
 	====================== -->
  <div id="west">
@@ -1898,68 +1936,6 @@
 		</tr>
 {-/foreach-}
 	</table>
-{-/if-}
-
-{-** MAINPAGE: default page in DesInventar root **-}
-{-if $ctl_mainpage-}
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
-	<title>{-#ttitle#-}</title>
-	<link rel="stylesheet" href="css/desinventar.css" type="text/css">
-	<script type="text/javascript" src="include/prototype.js"></script>
-	<script type="text/javascript" src="include/diadmin.js"></script>
-	<script type="text/javascript">
-	window.onload = function() {
-		updateUserBar('user.php', '', '', '');
-	}
-	</script>
-</head>
-<body>
-	<table border="0" cellpadding="0" cellspacing="0" style="border: thin solid;">
-	<tr style="background:url(images/bgmain.png)">
-		<td width="400px">
-			<a href="index.php?cmd=main"><img src="images/di_logo1.png" border=0></a><br/>
-		</td>
-		<td>
-			<ul>
-			<li><a href="http://www.desinventar.org" target="_blank">DesInventar.org</a></li>
-			<li>
-			{-#mlang#-}:
-			<select onChange="window.location='index.php?cmd=main&lang='+ this.value;">
-{-foreach name=lglst key=key item=item from=$lglst-}
-				<option value="{-$key-}" {-if $lg == $key-}selected{-/if-}>{-$item[0]-}</option>
-{-/foreach-}
-			</select>
-			</li>
-			</ul>
-			{-#labelsoftwareversion#-} : {-$version-}
-		</td>
-	</tr>
-	<tr bgcolor="#e2e2e0" valign="top">
-		<td colspan="2">
-			<div id="rightcontent"></div><hr>
-			<div id="pagecontent">
-				<h4><u>{-#tdbavail#-}</u>:
-				<ul>
-{-foreach name=rlist key=key item=item from=$regionlist-}
-				<li><a href="?r={-$key-}">{-$item-}</a> | <a href="javascript:void(null)" onClick="javascript:window.open('?r={-$key-}','DI_{-$smarty.foreach.rlist.iteration-}', 
-				'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,status=yes,scrollbars=no,toolbar=no');">[-]</a>
-				</li>
-{-/foreach-}
-				</ul>
-				</h4>
-			</div>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2" align="right">{-#tcopyright#-}</td>
-	</tr>
-	</table>
-</body>
-</html>
 {-/if-}
 
 {-** REGIONINFO: Show Full Region Information **-}
