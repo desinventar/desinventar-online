@@ -10,7 +10,7 @@
 	<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
 		<td>
-			<table border=0 align=center style="margin-top:1px">
+			<table border="0" align="center" style="margin-top:1px">
 				<tr>
 				<td align="right">{-#tuser#-} <input type="text" id="userid" name="userid" value="" size="16" /></td>
 				<td align="right">{-#tpassword#-} <input type="password" name="password" id="password" value="" size="8" /></td>
