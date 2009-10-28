@@ -36,6 +36,13 @@ switch ($cmd) {
 		$d = new Query();
 		$t->assign('lg', $lg);
 		$t->assign("lglst", $d->loadLanguages(1));
+		$listdb = $d->listDB();
+		// unique database, choose than
+		if (count($listdb) == 1) {
+			$t->assign('option', "r=". key($listdb));
+		}
+		else
+			$t->assign('option', "cmd=main");
 		$t->assign('ctl_start', true);
 		$t->display('index.tpl');
 		break;
@@ -44,7 +51,8 @@ switch ($cmd) {
 		$d = new Query();
 		$t->assign('lg', $lg);
 		$t->assign("lglst", $d->loadLanguages(1));
-		$t->assign('regionlist', $d->searchDB());
+		$t->assign('regionlist', $d->listDB());
+		$t->assign("userid", $us->UserId);
 		$t->assign("ctl_show", true);
 		$t->assign("ctl_noregion", true);
 		$t->assign('ctl_mainpage', true);

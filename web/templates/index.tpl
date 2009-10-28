@@ -300,9 +300,6 @@
             collapsible: true,
             contentEl: 'west'
           }{-/if-}
-		  /*{ region: 'east', id: 'eastm', split: true, width: 760,
-			//title: '[<a href="javascript:void(0);" onClick="e=Ext.getCmp(\'eastm\'); e.collapse();">X</a>]',
-			collapseMode: 'mini', autoScroll: true, margins: '0 0 0 2', collapsible: true, contentEl: 'east' }*/
 		]
       });
       // ==> Results Configuration Windows
@@ -1069,7 +1066,6 @@
 {-if $ctl_qryres-}
 <!--	SECTION : DATA CONFIGURATION
 	============================ -->
-        <!--<input type="button" id="dat-btn" value="{-#bdata#-}" ext:qtip="{-#tdatamsg#-}" class="bb btn">-->
 		<button id="dat-btn" class="rounded" ext:qtip="{-#tdatamsg#-}"><span>{-#bdata#-}</span></button>
         <div id="dat-win" class="x-hidden">
           <div class="x-window-header">{-#bdata#-}</div>
@@ -1449,40 +1445,37 @@
 	</div>
  {-** MAINPAGE: default page in DesInventar root **-}
  {-if $ctl_mainpage-}
-	<script type="text/javascript">
-		window.onload = function() {
-			updateUserBar('user.php', '', '', '');
-		}
+	<script type="text/javascript" language="javascript">
+	updateList('dblist', 'index.php', 'cmd=listdb');
 	</script>
-	<table border="0" width="100%" cellpadding="0" cellspacing="0" style="border: thin solid;">
+	<table border="0" cellpadding="0" cellspacing="0" style="border: thin solid;">
 	<tr style="background:url(images/bgmain.png)">
 		<td width="400px">
 			<a href="index.php?cmd=main"><img src="images/di_logo1.png" border=0></a><br/>
 		</td>
-		<td>
-			<ul>
-			<li><a href="http://www.desinventar.org" target="_blank">DesInventar.org</a></li>
-			<li>{-#labelsoftwareversion#-} : {-$version-}</li>
-			</ul>
-		</td>
 	</tr>
 	<tr bgcolor="#e2e2e0" valign="top">
-		<td colspan="2">
-			<div id="rightcontent"></div>
+		<td>
 			<br /><hr /><br />
-			<div id="pagecontent">
-				<h4><u>{-#tdbavail#-}</u>:
-				<ul>
- {-foreach name=rlist key=key item=item from=$regionlist-}
-				<li><a href="?r={-$key-}">{-$item-}</a> | <a href="javascript:void(null)" onClick="javascript:window.open('?r={-$key-}','DI_{-$smarty.foreach.rlist.iteration-}', 
-				'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,status=yes,scrollbars=no,toolbar=no');">[-]</a>
-				</li>
- {-/foreach-}
-				</ul>
-				</h4>
-			</div>
-		</td>
-	</tr>
+				<h2><u>{-#tdbavail#-}</u></h2>
+	<table border="1" class="grid">
+		<tr align="center">
+			<td><b>Pais</b></td>
+			<td><b>Region</b></td>
+			<td colspan="2"><b>Atributos</b></td>
+		</tr>
+{-foreach name=rlist key=key item=item from=$regionlist-}
+		<tr>
+			<td>{-$item[1]-}</td>
+			<td>
+				<a href="index.php?r={-$key-}">{-$item[0]-}</a>
+				<a href="javascript:void(null)" onClick="javascript:window.open('?r={-$key-}','DI_{-$smarty.foreach.rlist.iteration-}', 
+					'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,status=yes,scrollbars=no,toolbar=no');">[-]</a>
+			</td>
+			<td>{-if $item[2] == 3-}PUBLICA{-else-}NO PUBLICA{-/if-}</td>
+			<td>{-$item[3]-}</td>
+		</tr>
+{-/foreach-}
 	</table>
  {-/if-}
  </div><!-- end div id=container-->
@@ -1967,7 +1960,7 @@
 	<title>{-#ttitle#-}</title>
 </head>
 <body>
-	<table border="0" cellpadding="0" cellspacing="0" style="border: thin solid;">
+	<table border="0" cellpadding="0" cellspacing="0" style="border: thin solid;" bgcolor="#e2e2e0" >
 	<tr style="background:url(images/bgmain.png)">
 		<td width="400px">
 			<a href="index.php"><img src="images/di_logo1.png" border=0></a><br/>
@@ -1978,10 +1971,35 @@
 {-foreach name=lglst key=key item=item from=$lglst-}
 				<option value="{-$key-}" {-if $lg == $key-}selected{-/if-}>{-$item[0]-}</option>
 {-/foreach-}
-			</select><br /><br />
-			<input type="button" value="{-#tstartpage#-}" style="font-family:arial,tahoma,helvetica,cursive; font-size:24px; font-weight:bolder;"
-				onClick="javascript:window.open('index.php?cmd=main','DI', 
-				'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,status=yes,scrollbars=no,toolbar=no');" />
+			</select>
+		</td>
+		<td>
+			<input type="button" value="{-#tstartpage#-} >>" style="font-family:arial,tahoma,helvetica,cursive; font-size:24px; font-weight:bolder;"
+				onClick="javascript:myw = window.open('index.php?{-$option-}','DI', 
+				'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,status=yes,scrollbars=no,toolbar=no'); myw.focus();" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<hr />
+			<h1>{-#twelcome#-},</h1>
+			<table border="0">
+				<tr valign="top">
+					<td>
+					<!--<a href="doc/test.htm" target="idoc">Inicio rapido</a> (2minutos)<br />
+					<a href="doc/test2.htm" target="idoc">Creando una base de datos</a> (5minutos)<br />-->
+					<a href="javascript:void(null);" 
+						onClick="window.open('http://www.desinventar.org/es/methodology', '', '');">{-#hmoreinfo#-}</a><br />
+					<a href="javascript:void(null);" 
+						onClick="window.open('http://www.desinventar.org/es/software', '', '');">{-#hotherdoc#-}</a><br />
+					<a href="javascript:void(null);" 
+						onClick="window.open('http://www.desinventar.org', '', '');">{-#mwebsite#-}</a><br />
+					</td>
+					<td>
+					<iframe id="idoc" name="idoc" frameborder="0" height="400px;" width="750px"></iframe>
+					</td>
+				</tr>
+			</table>
 		</td>
 	</tr>
 	</table>
