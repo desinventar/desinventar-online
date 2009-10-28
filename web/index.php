@@ -45,10 +45,10 @@ switch ($cmd) {
 		$t->assign('lg', $lg);
 		$t->assign("lglst", $d->loadLanguages(1));
 		$t->assign('regionlist', $d->searchDB());
+		$t->assign("ctl_show", true);
+		$t->assign("ctl_noregion", true);
 		$t->assign('ctl_mainpage', true);
 		$t->display('index.tpl');
-		//$t->assign('ctl_showregionlist', true);
-		//$t->display('portal.tpl');
 		break;
 	case 'listdb':
 		// Direct access returns a list of public regions on this server
