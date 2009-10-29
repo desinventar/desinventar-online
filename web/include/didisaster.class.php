@@ -30,9 +30,8 @@ class DIDisaster extends DIObject {
 		                      "EventMagnitude/STRING," .
 		                      
 		                      "CauseId/STRING," .
-		                      "CauseNotes/STRING," .
-		                      
-		                      "EffectPeopleDead/INTEGER," .
+		                      "CauseNotes/STRING";
+		$this->sEffectDef    ="EffectPeopleDead/INTEGER," .
 		                      "EffectPeopleMissing/INTEGER," .
 		                      "EffectPeopleInjured/INTEGER," .
 		                      "EffectPeopleHarmed/INTEGER," .
@@ -72,6 +71,7 @@ class DIDisaster extends DIObject {
 		                      "EffectPeopleRelocatedQ/INTEGER," .		                      
 		                      "EffectHousesDestroyedQ/INTEGER," .
 		                      "EffectHousesAffectedQ/INTEGER";
+		$this->sFieldDef .= ',' . $this->sEffectDef;	
 		$this->sFieldDef .= ',' . $this->sFieldQDef;
 		parent::__construct($prmSession);
 		$this->set("EventPredefined", 0);
@@ -100,7 +100,7 @@ class DIDisaster extends DIObject {
 	}
 	
 	public function validateUpdate() {
-		$iReturn = 1;
+		$iReturn = ERR_NO_ERROR;
 		$iReturn = $this->validateNotNull($iReturn, -53, 'DisasterSerial');
 		//$iReturn = $this->validateUnique($iReturn,  -54, 'DisasterSerial');
 		$iReturn = $this->validateNotNull($iReturn, -55, 'DisasterBeginTime');
@@ -109,8 +109,39 @@ class DIDisaster extends DIObject {
 		$iReturn = $this->validateRef($iReturn, -58, 'GeographyId', 'Geography', 'GeographyId');
 		$iReturn = $this->validateRef($iReturn, -59, 'EventId', 'Event', 'EventId');
 		$iReturn = $this->validateRef($iReturn, -60, 'CauseId', 'Cause', 'CauseId');
-		
-		//validateEffects ??
+		if ($iReturn > 0) {
+			$iReturn = $this->validateEffects();
+		}
+		return $iReturn;
+	}
+	
+	public function validateEffects() {
+		$bFound = false;
+		$iReturn = ERR_NO_ERROR;
+		foreach (split(',',$this->sEffectDef) as $sField) {
+			$oItem = split('/', $sField);
+			$sFieldName  = $oItem[0];
+			$sFieldType  = $oItem[1];
+			printf("%-24s %-10s %s\n", $sFieldName, $sFieldType, $this->get($sFieldName));
+			switch($sFieldType) {
+				case 'STRING':
+					$bFound = true;
+				break;
+				case 'INTEGER':
+					if ( ($this->get($sFieldName) > 0) || ($this->get($sFieldName) == -1) ) {
+						$bFound = true;
+					}
+				break;
+				case 'DOUBLE':
+					if ($this->get($sFieldName) > 0) {
+						$bFound = true;
+					}
+				break;
+			} //switch
+		} //foreach
+		if ($bFound == false) {
+			$iReturn = -61;
+		}
 		return $iReturn;
 	}
 	
