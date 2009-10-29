@@ -92,14 +92,14 @@ class DIDisaster extends DIObject {
 		return $sQuery;
 	}
 	
-	public function validateCreate() {
+	public function validateCreate(&$oResult=null) {
 		$iReturn = 1;
-		$iReturn = $this->validateNotNull($iReturn, -51, 'DisasterId');
-		$iReturn = $this->validatePrimaryKey($iReturn,  -52);
+		$iReturn = $this->validateNotNull($iReturn, -51, 'DisasterId', $oResult);
+		$iReturn = $this->validatePrimaryKey($iReturn,  -52, $oResult);
 		return $iReturn;
 	}
 	
-	public function validateUpdate() {
+	public function validateUpdate(&$oResult=null) {
 		$iReturn = ERR_NO_ERROR;
 		$iReturn = $this->validateNotNull($iReturn, -53, 'DisasterSerial');
 		//$iReturn = $this->validateUnique($iReturn,  -54, 'DisasterSerial');
@@ -110,14 +110,17 @@ class DIDisaster extends DIObject {
 		$iReturn = $this->validateRef($iReturn, -59, 'EventId', 'Event', 'EventId');
 		$iReturn = $this->validateRef($iReturn, -60, 'CauseId', 'Cause', 'CauseId');
 		if ($iReturn > 0) {
-			$iReturn = $this->validateEffects();
+			$iReturn = $this->validateEffects($oResult);
 		}
 		return $iReturn;
 	}
 	
-	public function validateEffects() {
+	public function validateEffects(&$oResult=null) {
 		$bFound = false;
 		$iReturn = ERR_NO_ERROR;
+		if (!is_null($oResult)) {
+			$oResult['Status'] = $iReturn;
+		}
 		foreach (split(',',$this->sEffectDef) as $sField) {
 			$oItem = split('/', $sField);
 			$sFieldName  = $oItem[0];
@@ -140,6 +143,10 @@ class DIDisaster extends DIObject {
 		} //foreach
 		if ($bFound == false) {
 			$iReturn = -61;
+			if (!is_null($oResult)) {
+				$oResult['Status'] = $iReturn;
+				$oResult['Warning'][] = 'Datacard without effects';
+			}
 		}
 		return $iReturn;
 	}
