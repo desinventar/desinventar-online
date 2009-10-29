@@ -65,39 +65,43 @@ class DIEvent extends DIObject {
 
 	public function validateCreate() {
 		$iReturn = 1;
-		$iReturn = $this->validateNotNull($iReturn, -11, 'EventId');
-		$iReturn = $this->validatePrimaryKey($iReturn,  -12);
+		$iReturn = $this->validateNotNull(-11, 'EventId');
+		if ($iReturn > 0) {
+			$iReturn = $this->validatePrimaryKey(-12);
+		}
 		return $iReturn;
 	}
 
-	public function validateNoDatacards($curReturn, $ErrCode) {
-		$iReturn = $curReturn;
-		if ($iReturn > 0) {
-			$Count = 0;
-			$Query = "SELECT COUNT(DisasterId) AS COUNT FROM Disaster WHERE EventId='" . $this->get('EventId') . "'";
-			foreach($this->q->dreg->query($Query) as $row) {
-				$Count = $row['COUNT'];
-			}
-			if ($Count > 0) {
-				$iReturn = $ErrCode;
-			}
+	public function validateNoDatacards($ErrCode) {
+		$iReturn = ERR_NO_ERROR;
+		$Count = 0;
+		$Query = "SELECT COUNT(DisasterId) AS COUNT FROM Disaster WHERE EventId='" . $this->get('EventId') . "'";
+		foreach($this->q->dreg->query($Query) as $row) {
+			$Count = $row['COUNT'];
+		}
+		if ($Count > 0) {
+			$iReturn = $ErrCode;
 		}
 		return $iReturn;
 	}
 
 	public function validateUpdate() {
-		$iReturn = 1;
-		$iReturn = $this->validateNotNull($iReturn, -13, 'EventName');
-		$iReturn = $this->validateUnique($iReturn, -14, 'EventName', true);
-		if ($this->get('EventActive') == 0) {
-			$iReturn = $this->validateNoDatacards($iReturn, -15);
+		$iReturn = ERR_NO_ERROR;
+		$iReturn = $this->validateNotNull(-13, 'EventName');
+		if ($iReturn > 0) {
+			$iReturn = $this->validateUnique(-14, 'EventName', true);
+			if ($iReturn > 0) {
+				if ($this->get('EventActive') == 0) {
+					$iReturn = $this->validateNoDatacards(-15);
+				}
+			}
 		}
 		return $iReturn;
 	}
 	
 	public function validateDelete() {
 		$iReturn = ERR_NO_ERROR;
-		$iReturn = $this->validateNoDatacards($iReturn, -15);
+		$iReturn = $this->validateNoDatacards(-15);
 		return $iReturn;
 	}
 
