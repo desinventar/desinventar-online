@@ -66,40 +66,44 @@ class DICause extends DIObject {
 	}
 
 	public function validateCreate() {
-		$iReturn = 1;
-		$iReturn = $this->validateNotNull($iReturn, -21, 'CauseId');
-		$iReturn = $this->validatePrimaryKey($iReturn,  -22);
+		$iReturn = ERR_NO_ERROR;
+		$iReturn = $this->validateNotNull(-21, 'CauseId');
+		if ($iReturn > 0) {
+			$iReturn = $this->validatePrimaryKey(-22);
+		}
 		return $iReturn;
 	}
 
-	public function validateNoDatacards($curReturn, $ErrCode) {
-		$iReturn = $curReturn;
-		if ($iReturn > 0) {
-			$Count = 0;
-			$Query = "SELECT COUNT(DisasterId) AS COUNT FROM Disaster WHERE CauseId='" . $this->get('CauseId') . "'";
-			foreach($this->q->dreg->query($Query) as $row) {
-				$Count = $row['COUNT'];
-			}
-			if ($Count > 0) {
-				$iReturn = $ErrCode;
-			}
+	public function validateNoDatacards($ErrCode) {
+		$iReturn = ERR_NO_ERROR;
+		$Count = 0;
+		$Query = "SELECT COUNT(DisasterId) AS COUNT FROM Disaster WHERE CauseId='" . $this->get('CauseId') . "'";
+		foreach($this->q->dreg->query($Query) as $row) {
+			$Count = $row['COUNT'];
+		}
+		if ($Count > 0) {
+			$iReturn = $ErrCode;
 		}
 		return $iReturn;
 	}
 
 	public function validateUpdate() {
 		$iReturn = 1;
-		$iReturn = $this->validateNotNull($iReturn, -23, 'CauseName');
-		$iReturn = $this->validateUnique($iReturn,  -24, 'CauseName', true);
-		if ($this->get('CauseActive') == 0) {
-			$iReturn = $this->validateNoDatacards($iReturn, -25);
+		$iReturn = $this->validateNotNull(-23, 'CauseName');
+		if ($iReturn > 0) {
+			$iReturn = $this->validateUnique(-24, 'CauseName', true);
+			if ($iReturn > 0) {
+				if ($this->get('CauseActive') == 0) {
+					$iReturn = $this->validateNoDatacards(-25);
+				}
+			}
 		}
 		return $iReturn;
 	}
 	
 	public function validateDelete() {
 		$iReturn = ERR_NO_ERROR;
-		$iReturn = $this->validateNoDatacards($iReturn, -25);
+		$iReturn = $this->validateNoDatacards(-25);
 		return $iReturn;
 	}
 

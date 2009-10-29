@@ -124,42 +124,52 @@ class DIGeography extends DIObject {
 
 	public function validateCreate() {
 		$iReturn = 1;
-		$iReturn = $this->validateNotNull($iReturn, -41, 'GeographyId');
-		$iReturn = $this->validatePrimaryKey($iReturn,  -42);
+		$iReturn = $this->validateNotNull(-41, 'GeographyId');
+		if ($iReturn > 0) {
+			$iReturn = $this->validatePrimaryKey(-42);
+		}
 		return $iReturn;
 	}
 
-	public function validateNoDatacards($curReturn, $ErrCode) {
-		$iReturn = $curReturn;
-		if ($iReturn > 0) {
-			$Count = 0;
-			$Query = "SELECT COUNT(DisasterId) AS COUNT FROM Disaster WHERE GeographyId LIKE '" . $this->get('GeographyId') . "%'";
-			foreach($this->q->dreg->query($Query) as $row) {
-				$Count = $row['COUNT'];
-			}
-			if ($Count > 0) {
-				$iReturn = $ErrCode;
-			}
+	public function validateNoDatacards($ErrCode) {
+		$iReturn = ERR_NO_ERROR;
+		$Count = 0;
+		$Query = "SELECT COUNT(DisasterId) AS COUNT FROM Disaster WHERE GeographyId LIKE '" . $this->get('GeographyId') . "%'";
+		foreach($this->q->dreg->query($Query) as $row) {
+			$Count = $row['COUNT'];
+		}
+		if ($Count > 0) {
+			$iReturn = $ErrCode;
 		}
 		return $iReturn;
 	}
 
 	public function validateUpdate() {
 		$iReturn = 1;
-		$iReturn = $this->validateNotNull($iReturn, -43, 'GeographyCode');
-		$iReturn = $this->validateUnique($iReturn,  -44, 'GeographyCode');
-		$iReturn = $this->validateNotNull($iReturn, -45, 'GeographyName');
-		$iReturn = $this->validateUnique($iReturn,  -46, 'GeographyName');
-		$iReturn = $this->validateNotNull($iReturn, -47, 'GeographyLevel');
-		if ($this->get('GeographyActive') == 0) {
-			$iReturn = $this->validateNoDatacards($iReturn, -48);
+		$iReturn = $this->validateNotNull(-43, 'GeographyCode');
+		if ($iReturn > 0) {
+			$iReturn = $this->validateUnique(-44, 'GeographyCode');
+			if ($iReturn > 0) {
+				$iReturn = $this->validateNotNull(-45, 'GeographyName');
+				if ($iReturn > 0) {
+					$iReturn = $this->validateUnique(-46, 'GeographyName');
+					if ($iReturn > 0) {
+						$iReturn = $this->validateNotNull(-47, 'GeographyLevel');
+						if ($iReturn > 0) {
+							if ($this->get('GeographyActive') == 0) {
+								$iReturn = $this->validateNoDatacards(-48);
+							}
+						}
+					}
+				}
+			}
 		}
 		return $iReturn;
 	}
 	
 	public function validateDelete() {
 		$iReturn = ERR_NO_ERROR;
-		$iReturn = $this->validateNoDatacards($iReturn, -48);
+		$iReturn = $this->validateNoDatacards(-48);
 		return $iReturn;
 	}
 	

@@ -94,23 +94,37 @@ class DIDisaster extends DIObject {
 	
 	public function validateCreate(&$oResult=null) {
 		$iReturn = 1;
-		$iReturn = $this->validateNotNull($iReturn, -51, 'DisasterId', $oResult);
-		$iReturn = $this->validatePrimaryKey($iReturn,  -52, $oResult);
+		$iReturn = $this->validateNotNull(-51, 'DisasterId');
+		$iReturn = $this->validatePrimaryKey(-52, $oResult);
 		return $iReturn;
 	}
 	
 	public function validateUpdate(&$oResult=null) {
 		$iReturn = ERR_NO_ERROR;
-		$iReturn = $this->validateNotNull($iReturn, -53, 'DisasterSerial');
-		//$iReturn = $this->validateUnique($iReturn,  -54, 'DisasterSerial');
-		$iReturn = $this->validateNotNull($iReturn, -55, 'DisasterBeginTime');
-		$iReturn = $this->validateNotNull($iReturn, -56, 'DisasterSource');
-		$iReturn = $this->validateNotNull($iReturn, -57, 'RecordStatus');
-		$iReturn = $this->validateRef($iReturn, -58, 'GeographyId', 'Geography', 'GeographyId');
-		$iReturn = $this->validateRef($iReturn, -59, 'EventId', 'Event', 'EventId');
-		$iReturn = $this->validateRef($iReturn, -60, 'CauseId', 'Cause', 'CauseId');
+		$iReturn = $this->validateNotNull(-53, 'DisasterSerial');
 		if ($iReturn > 0) {
-			$iReturn = $this->validateEffects($oResult);
+			$iReturn = $this->validateUnique(-54, 'DisasterSerial');
+			if ($iReturn > 0) {
+				$iReturn = $this->validateNotNull(-55, 'DisasterBeginTime');
+				if ($iReturn > 0) {
+					$iReturn = $this->validateNotNull(-56, 'DisasterSource');
+					if ($iReturn > 0) {
+						$iReturn = $this->validateNotNull(-57, 'RecordStatus');
+						if ($iReturn > 0) {
+							$iReturn = $this->validateRef(-58, 'GeographyId', 'Geography', 'GeographyId');
+							if ($iReturn > 0) {
+								$iReturn = $this->validateRef(-59, 'EventId', 'Event', 'EventId');
+								if ($iReturn > 0) {
+									$iReturn = $this->validateRef(-60, 'CauseId', 'Cause', 'CauseId');
+									if ($iReturn > 0) {
+										$iReturn = $this->validateEffects($oResult);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 		return $iReturn;
 	}
