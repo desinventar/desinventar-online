@@ -122,7 +122,6 @@ class DIDisaster extends DIObject {
 			$oItem = split('/', $sField);
 			$sFieldName  = $oItem[0];
 			$sFieldType  = $oItem[1];
-			printf("%-24s %-10s %s\n", $sFieldName, $sFieldType, $this->get($sFieldName));
 			switch($sFieldType) {
 				case 'STRING':
 					$bFound = true;
