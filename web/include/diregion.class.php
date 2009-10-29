@@ -37,8 +37,8 @@ class DIRegion extends DIObject {
 		                      "InfoAdminURL/STRING";
 		parent::__construct($prmSession);
 		$this->setConnection("core");
-		$this->createFields($this->sInfoDef);
-		$this->createFields($this->sInfoTrans);
+		$this->createFields($this->sInfoDef);		
+		$this->createFields($this->sInfoTrans, 'eng');
 		$this->set('PeriodBeginDate', '1900-01-01');
 		$this->set('PeriodEndDate', gmdate('Y-m-d'));
 
@@ -60,6 +60,13 @@ class DIRegion extends DIObject {
 		}
 		if ($iReturn > 0) {
 			$iReturn = $this->load();
+			// Load eng Info
+			$iReturn = $this->loadInfoTrans('eng');
+			$LangIsoCode = $this->get('LangIsoCode');
+			if ($LangIsoCode != 'eng') {
+				$this->createFields($this->sInfoTrans, $LangIsoCode);
+				$iReturn = $this->loadInfoTrans($LangIsoCode);
+			}
 		}
 		if ($this->get('OptionLanguageList') == '') {
 			$this->set('OptionLanguageList', $this->get('LangIsoCode'));
@@ -84,7 +91,7 @@ class DIRegion extends DIObject {
 		if ($iReturn > 0) {
 			$this->setConnection($this->get('RegionId'));
 			try {
-				$sQuery = "SELECT * FROM Info WHERE LangIsoCode=''";
+				$sQuery = "SELECT * FROM Info WHERE LangIsoCode='' AND Length(InfoKey) > 3";
 				foreach($this->conn->query($sQuery) as $row) {
 					$InfoValue = $row['InfoValue'];
 					$InfoKey   = $row['InfoKey'];
@@ -109,7 +116,7 @@ class DIRegion extends DIObject {
 				foreach($this->conn->query($sQuery) as $row) {
 					$InfoValue = $row['InfoValue'];
 					$InfoKey   = $row['InfoKey'];
-					$this->set($InfoKey, $InfoValue);
+					$this->set($InfoKey, $InfoValue,$prmLangIsoCode);
 				} // foreach
 			} catch (Exception $e) {
 				$iReturn = ERR_NO_DATABASE;
@@ -125,7 +132,7 @@ class DIRegion extends DIObject {
 		$this->setConnection($this->get('RegionId'));
 		$Translatable = $this->getTranslatableFields();
 		foreach($this->oField as $InfoKey => $InfoValue) {
-			if (! array_key_exists($InfoKey, $Translatable)) {
+			if (! array_key_exists($InfoKey, $Translatable) && (strlen($InfoKey)>3) ) {
 				$LangIsoCode = '';
 				$sQuery = "DELETE FROM Info WHERE InfoKey='" . $InfoKey . "'";
 				$this->conn->query($sQuery);
@@ -134,6 +141,7 @@ class DIRegion extends DIObject {
 			} //if
 		} //foreach
 		$this->setConnection('core');
+		$this->saveInfoTrans('eng');
 		$this->saveInfoTrans($this->get('LangIsoCode'));
 		return $iReturn;
 	}
@@ -143,7 +151,7 @@ class DIRegion extends DIObject {
 		$now = gmdate('c');
 		$this->setConnection($this->get('RegionId'));
 		$Translatable = $this->getTranslatableFields();
-		foreach($this->oField as $InfoKey => $InfoValue) {
+		foreach($this->oField[$prmLangIsoCode] as $InfoKey => $InfoValue) {
 			if (array_key_exists($InfoKey, $Translatable)) {
 				$LangIsoCode = $prmLangIsoCode;
 				$sQuery = "DELETE FROM Info WHERE InfoKey='" . $InfoKey . "' AND LangIsoCode='" . $LangIsoCode . "'";
