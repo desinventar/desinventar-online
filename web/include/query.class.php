@@ -908,19 +908,23 @@ class Query extends PDO
 		foreach ($f as $field) {
 			// Field(s) to show
 			$fl = explode("|", $field);
-			// Code to totalization: SUM, COUNT
+			// SUM > 0 values
 			if ($fl[1] == ">") {
 				$sel[$j] = "SUM(". $fl[0] .") AS ". substr($fl[0],2);
 				$whr[$j] = "OR ". $fl[0] . $fl[1] . $fl[2];
-			} else {
-				// Count Reports
+			}
+			// S, code to SECTORS 
+			elseif ($fl[1] == "S") {
+				$sel[$j] = "SUM(ABS(". $fl[0] .")) AS ". substr($fl[0],2);
+				$whr[$j] = "OR ". $fl[0] . " = " . $fl[2];
+			}
+			// Count Reports
+			else {
 				$sel[$j] = "COUNT(". $fl[0] .") AS ". substr($fl[0],2) ."_";
 				// Counts Reports with "Hay"
-				if ($fl[1] == "=") {
-					$whr[$j] = "OR (". $fl[0] . $fl[1] . $fl[2] .
-						" OR ". $fl[0] .">0)";
-				}
-			} //if
+				if ($fl[1] == "=")
+					$whr[$j] = "OR (". $fl[0] . $fl[1] . $fl[2] . " OR ". $fl[0] .">0)";
+			}
 			$j++;
 		} //foreach
 		
