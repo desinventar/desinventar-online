@@ -54,14 +54,15 @@
 {-* Show select CSV file interface *-}
 {-if $ctl_show-}
 	<p class="fixw">
-		<form id="import" method="POST" action="import.php" target="iframe2" enctype="multipart/form-data">
-			<input type="hidden" name="_REG" value="{-$reg-}">
-			<input type="hidden" name="cmd" value="upload">
-			<input type="hidden" name="diobj" value="5">
-			<input type="file" id="ieff" name="desinv" class="fixw" onChange="sendForm()" {-$ro-}>
+		<form id="import" method="POST" action="import.php" target="importres" enctype="multipart/form-data">
+			<input type="hidden" name="_REG" value="{-$reg-}" />
+			<input type="hidden" name="cmd" value="upload" />
+			<input type="hidden" name="diobj" value="5" />
+			<input type="file" id="ieff" name="desinv" class="fixw" {-$ro-} /> <!--  onChange="sendForm();"-->
+			<input type="submit" value="Ok" />
 		</form>
 		<br />
-		<iframe name="iframe2" id="iframe2" frameborder="1" src="about:blank" style="height:400px; width:830px;"></iframe>
+		<iframe name="importres" id="importres" frameborder="1" src="about:blank" style="height:400px; width:830px;"></iframe>
 	</p>
 {-/if-}
 {-* Show import interface to assign specific fields *-}

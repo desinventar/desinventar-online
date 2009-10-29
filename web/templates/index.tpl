@@ -1,6 +1,6 @@
 {-config_load file=`$lg`.conf section="di8_index"-}
 {-config_load file=`$lg`.conf section="di8_user"-}
-{-if $ctl_show-}
+{-if $ctl_show || $ctl_mainpage-}
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -13,7 +13,7 @@
 	<script type="text/javascript" src="include/prototype.js"></script>
 	<script type="text/javascript" src="include/diadmin.js"></script>
 	<script type="text/javascript" src="include/checktree.js"></script>
-	<script type="text/javascript" src="include/wd.js"></script>
+<!--	<script type="text/javascript" src="include/wd.js"></script>-->
 	<script type="text/javascript" src="include/accordion.js"></script>
 	<script type="text/javascript" src="include/palette.js"></script>
 	<!-- ExtJS 2.0.1 -->
@@ -1042,6 +1042,7 @@
 	<div id="toolbar"></div>
  </div>
  <div id="container">
+{-if $ctl_show-}
 	<!-- -Configuration -->
 	<div id="config" style="display:none;" class="tabber">
 		<div class="tabbertab"><h2>{-#mreginfo#-}</h2><p></p></div>
@@ -1056,434 +1057,420 @@
 	<!-- Results of queries -->
 	<div id="qryres" style="display:{-if $ctl_qryres-}block{-else-}none{-/if-}">
 	<table border="0" cellpadding="0" cellspacing="0" width="100%">
-	  <tr bgcolor="#bbbbbb">
-       <td width="200px">
-       	<b>{-#tsubtitle2#-} &rarr;</b><!-- <img src="images/collapse.png" onClick="var w = Ext.getCmp('westm'); w.show();"> -->
-       </td>
-       <td align="center">
-{-/if-}
-{-** END ctl_show **-}
+		<tr bgcolor="#bbbbbb">
+			<td width="200px">
+				<b>{-#tsubtitle2#-} &rarr;</b>
+			</td>
+			<td align="center">
+{-/if-} {-* END ctl_show *-}
+{-/if-} {-** END ctl_show || ctl_mainpage**-}
 {-if $ctl_qryres-}
-<!--	SECTION : DATA CONFIGURATION
-	============================ -->
-		<button id="dat-btn" class="rounded" ext:qtip="{-#tdatamsg#-}"><span>{-#bdata#-}</span></button>
-        <div id="dat-win" class="x-hidden">
-          <div class="x-window-header">{-#bdata#-}</div>
-          <div id="dat-cfg">
-            <form id="CD" method="POST">
-              {-#sresxpage#-}
-              <select id="_D+SQL_LIMIT" name="_D+SQL_LIMIT" class="line">
-                <option value="20">20</option>
-                <option value="50">50</option>
-                <option value="100" selected>100</option>
-                <option value="200">200</option>
-              </select>
-              <br><br>
-              <table>
-                <tr>
-                  <td><b>{-#savailfields#-}</b><br>
-                   <select id="_D+sel1[]" size="8" style="width:220px;" multiple class="line">
- {-foreach name=sst1 key=key item=item from=$sda1-}
-                    <option value="D.{-$item-}">{-$dc2.$item[0]-}</option>
- {-/foreach-}
- 										<option disabled>---</option>
- {-foreach name=sst2 key=key item=item from=$exteffel-}
-                    <option value="E.{-$key-}">{-$item[0]-}</option>
- {-/foreach-}
-                   </select><br>
-                   <input type="button" value="{-#balls#-}" onclick="selectall('_D+sel1[]');" class="line">
-                   <input type="button" value="{-#bnone#-}" onclick="selectnone('_D+sel1[]');" class="line">
-                  </td>
-                  <td align="center" valign="middle" style="width:20px;">
-                   <input type="button" value="&rarr;" onclick="moveOptions($('_D+sel1[]'), $('_D+Field[]'));" class="line">
-                   <br><br><br>
-                   <input type="button" value="&larr;" onclick="moveOptions($('_D+Field[]'), $('_D+sel1[]'));" class="line">
-                  </td>
-                  <td><b>{-#sviewfields#-}</b><br>
-                   <select id="_D+Field[]" size="8" style="width:220px;" multiple class="line">
- {-foreach name=sst key=key item=item from=$sda-}
-  {-if $item != "D.DisasterId"-}
-                    <option value="D.{-$item-}">{-$dc2.$item[0]-}</option>
-  {-/if-}
- {-/foreach-}
-                   </select><br>
-                   <input type="button" value="{-#balls#-}" onclick="selectall('_D+Field[]');" class="line">
-                   <input type="button" value="{-#bnone#-}" onclick="selectnone('_D+Field[]');" class="line">
-                  </td>
-                  <td style="width:20px;" align="center">
-                   <input type="button" value="&uarr;&uarr;" onclick="top('_D+Field[]');" class="line"><br>
-                   <input type="button" value="&uarr;" onclick="upone('_D+Field[]');" class="line"><br>
-                   <input type="button" value="&darr;" onclick="downone('_D+Field[]');" class="line"><br>
-                   <input type="button" value="&darr;&darr;" onclick="bottom('_D+Field[]');" class="line"><br>
-                  </td>
-                </tr>
-              </table>
-              <br><br>
-              <b>{-#dorderby#-}</b><br>
-              <select id="_D+SQL_ORDER" name="_D+SQL_ORDER" class="fixw line" size="5">
-                <option value="D.DisasterBeginTime, V.EventName, G.GeographyFQName" selected>{-#ddeg#-}</option>
-                <option value="D.DisasterBeginTime, D.GeographyId, V.EventName">{-#ddge#-}</option>
-                <option value="G.GeographyFQName, V.EventName, D.DisasterBeginTime">{-#dged#-}</option>
-                <option value="V.EventName, D.DisasterBeginTime, G.GeographyFQName">{-#dedg#-}</option>
-                <option value="D.DisasterSerial">{-#dserial#-}</option>
-                <option value="D.RecordCreation">{-#dcreation#-}</option>
-                <option value="D.RecordUpdate">{-#dlastupd#-}</option>
-              </select>
-              <input type="hidden" id="_D+FieldH" name="_D+Field" value="">
-              <input type="hidden" id="_D+cmd" name="_D+cmd" value="result">
-			  <input type="hidden" id="_D+saveopt" name="_D+saveopt" value="">
-            </form>
-          </div>
-        </div>
-<!--	END DATA SECTION -->
-<!--	SECTION : THEMATICMAP CONFIGURATION
-	==================================== -->
-<!--        <input type="button" id="map-btn" ext:qtip="{-#tthematicmsg#-}" value="{-#bthematic#-}" {-if !$ctl_showmap-}style="display:none;"{-/if-} class="bb btn">-->
-		<button id="map-btn" class="rounded" ext:qtip="{-#tthematicmsg#-}"><span>{-#bthematic#-}</span></button>
-        <div id="map-win" class="x-hidden">
-          <div class="x-window-header">{-#bthematic#-}</div>
-          <div id="map-cfg">
-          	<div id="colorpicker201" class="colorpicker201"></div>
-            <form id="CM" method="POST">
-              <table class="conf">
-                <tr valign="top"><td>
-                  <b>{-#mareaid#-}</b>
-                  <br>
-                  <select name="_M+Label" size="4" class="fixw line">
-                    <option value="NAME">{-#mareashownam#-}</option>
-                    <option value="CODE">{-#mareashowcod#-}</option>
-                    <option value="VALUE">{-#mareashowval#-}</option>
-                    <option value="NONE" selected>{-#mareanotshow#-}</option>
-                  </select>
-                  <br><br>
-                  <b>{-#mranlegcol#-}</b>&nbsp; &nbsp; &nbsp; &nbsp;
-<!-- IE Not found.. -->
-                  <input type="button" value="+" onclick="addRowToTable();" class="line">
-                  <input type="button" value="-" onclick="removeRowFromTable();" class="line">
-                  <br>
-                  <table border="0" id="tbl_range" class="grid">
-                   <thead>
-                    <th colspan=2>{-#mrange#-}</th><th>{-#mlegend#-}</th><th>{-#mcolor#-}</th>
-                   </thead>
-                   <tbody id="range">
- {-foreach name=rg key=k item=i from=$range-}
-                    <tr>
-                    <td>{-$smarty.foreach.rg.iteration-}</td>
-                    <td><input type="text" id="_M+limit[{-$smarty.foreach.rg.iteration-1-}]" class="line"
-                          name="_M+limit[{-$smarty.foreach.rg.iteration-1-}]" size="5" value="{-$i[0]-}"
-                          onBlur="miv={-if $smarty.foreach.rg.iteration > 1-}parseInt($('_M+limit[{-$smarty.foreach.rg.iteration-2-}]').value)+1{-else-}1{-/if-}; $('_M+legend[{-$smarty.foreach.rg.iteration-1-}]').value='{-#mbetween#-} '+ miv +'- '+ this.value"></td>
-                    <td><input type="text" id="_M+legend[{-$smarty.foreach.rg.iteration-1-}]" class="line"
-                          name="_M+legend[{-$smarty.foreach.rg.iteration-1-}]" size="20" value="{-#mbetween#-} {-$i[1]-}"></td>
-                    <td><input type="text" id="_M+ic[{-$smarty.foreach.rg.iteration-1-}]" 
-                          size="3" value="" style="background:#{-$i[2]-};" class="line"
-                          onclick="showColorGrid2('_M+color[{-$smarty.foreach.rg.iteration-1-}]','_M+ic[{-$smarty.foreach.rg.iteration-1-}]');">
-                        <input type="hidden" id="_M+color[{-$smarty.foreach.rg.iteration-1-}]" 
-                          name="_M+color[{-$smarty.foreach.rg.iteration-1-}]" value="{-$i[2]-}"></td>
-                    </tr>
- {-/foreach-}
-                   </tbody>
-                  </table>
-				  <table border="0" width="100%">
-				   <tr>
-				    <td>{-#mcoltransp#-} <select name="_M+Transparency" class="line">
-						<option value="10">10</option>
+				<!--	SECTION : DATA CONFIGURATION
+				============================ -->
+				<button id="dat-btn" class="rounded" ext:qtip="{-#tdatamsg#-}"><span>{-#bdata#-}</span></button>
+				<div id="dat-win" class="x-hidden">
+					<div class="x-window-header">{-#bdata#-}</div>
+					<div id="dat-cfg">
+					<form id="CD" method="POST">
+						{-#sresxpage#-}
+						<select id="_D+SQL_LIMIT" name="_D+SQL_LIMIT" class="line">
 						<option value="20">20</option>
-						<option value="30">30</option>
-						<option value="40">40</option>
 						<option value="50">50</option>
-						<option value="60">60</option>
-						<option value="70" selected>70</option>
-						<option value="80">80</option>
-						<option value="90">90</option>
-						<option value="100">100</option>
-					   </select>%
-				    </td>
-					<td align="right">
-					   <input type="button" value="{-#mcolorgrad#-}" onClick="genColors();" class="line">
-					</td>
-				   </tr>
-				  </table>
-                </td><td>
-                  <b>{-#mrepreselev#-}</b><br>
-                  <select id="_M+Type" name="_M+Type" size="3" class="fixw line">
- {-foreach name=mgel key=k item=i from=$mgel-}
-                    <option value="{-$k-}|D.GeographyId|" {-if $smarty.foreach.mgel.iteration==1-}selected{-/if-}>{-$i[0]-}</option>
- {-/foreach-}
-                  </select>
-                  <br><br>
-                  <b>{-#mviewfields#-}</b><br>
-                  <select id="_M+Field" name="_M+Field" size="8" class="fixw line">
-                    <option value="D.DisasterId||" selected>{-#trepnum#-}</option>
- {-foreach name=ef1 key=k item=i from=$ef1-}
-                    <option value="D.{-$k-}Q|>|-1">{-$i[0]-}</option>
-                    <option value="D.{-$k-}|=|-1">{-#tauxhave#-} {-$i[0]-}</option>
- {-/foreach-}
- {-foreach name=ef2 key=k item=i from=$ef2-}
-                    <option value="D.{-$k-}|>|-1">{-$i[0]-}</option>
- {-/foreach-}
- {-foreach name=ef3 key=k item=i from=$ef3-}
-                    <option value="D.{-$k-}|>|-1">{-$i[0]-}</option>
- {-/foreach-}
- {-foreach name=ef3 key=k item=i from=$sec-}
-                    <option value="D.{-$k-}|=|-1">{-#tauxaffect#-} {-$i[0]-}</option>
- {-/foreach-}
- 										<option disabled>---</option>
- {-foreach name=eef key=k item=i from=$exteffel-}
-  {-if $i[2] == "INTEGER" || $i[2] == "DOUBLE"-}
-                    <option value="E.{-$k-}|>|-1">{-$i[0]-}</option>
-  {-/if-}
- {-/foreach-}
-                  </select>
-                  <input type="hidden" id="_M+cmd" name="_M+cmd" value="result">
-                  <input type="hidden" id="_M+extent" name="_M+extent">
-                  <input type="hidden" id="_M+layers" name="_M+layers">
-                </td></tr>
-              </table>
-            </form>
-          </div>
-        </div>
-<!--	END MAP SECTION -->
-<!--	BEGIN GRAPHIC CONFIGURATION -->
-	{-include file="graphparameters.tpl" -}
-<!--	END GRAPHIC SECTION  -->
-<!--	SECTION : STATISTIC CONFIGURATION
-	============================== -->
-<!--        <input type="button" id="std-btn" value="{-#bstatistic#-}" ext:qtip="{-#tstatisticmsg#-}" class="bb btn">-->
-		<button id="std-btn" class="rounded" ext:qtip="{-#tstatisticmsg#-}"><span>{-#bstatistic#-}</span></button>
-        <div id="std-win" class="x-hidden">
-          <div class="x-window-header">{-#bstatistic#-}</div>
-          <div id="std-cfg">
-            <form id="CS" method="POST">
-            	<table border="0" width="100%">
-            		<tr>
-            			<td>
-            				{-#sresxpage#-}
-            				<select id="_S+SQL_LIMIT" name="_S+SQL_LIMIT" class="line">
-            				 <option value="20">20</option>
-            				 <option value="50">50</option>
-            				 <option value="100" selected>100</option>
-            				 <option value="200">200</option>
-            				</select>
-            			</td>
-            			<td>
-            				{-#mgeosection#-}:
-            				<select id="_S+showgeo" name="_S+showgeo" class="line">
-            				 <option value="NAME">{-#mareashownam#-}</option>
-            				 <option value="CODE">{-#mareashowcod#-}</option>
-            				 <option value="CODENAME">Code | Name</option>
-            				</select>
-            			</td>
-            		</tr>
-            	</table>
-              <br>
-              <b>{-#stotallevels#-}</b>
-              <br>
-              <table>
-                <tr valign="top">
-                  <td><b>{-$std.StatisticFirstlev[0]-}</b><br>
-                   <select id="_S+Firstlev" name="_S+Firstlev" size="8" style="width:180px;" class="line"
-                       onChange="setTotalize('_S+Firstlev', '_S+Secondlev'); setTotalize('_S+Secondlev', '_S+Thirdlev');">
+						<option value="100" selected>100</option>
+						<option value="200">200</option>
+						</select>
+						<br /><br />
+						<table>
+						<tr>
+							<td>
+								<b>{-#savailfields#-}</b><br />
+								<select id="_D+sel1[]" size="8" style="width:220px;" multiple class="line">
+{-foreach name=sst1 key=key item=item from=$sda1-}
+									<option value="D.{-$item-}">{-$dc2.$item[0]-}</option>{-/foreach-}
+									<option disabled>---</option>
+{-foreach name=sst2 key=key item=item from=$exteffel-}
+									<option value="E.{-$key-}">{-$item[0]-}</option>{-/foreach-}
+								</select><br />
+								<input type="button" value="{-#balls#-}" onclick="selectall('_D+sel1[]');" class="line" />
+								<input type="button" value="{-#bnone#-}" onclick="selectnone('_D+sel1[]');" class="line" />
+							</td>
+							<td align="center" valign="middle" style="width:20px;">
+								<input type="button" value="&rarr;" onclick="moveOptions($('_D+sel1[]'), $('_D+Field[]'));" class="line" />
+								<br /><br /><br />
+								<input type="button" value="&larr;" onclick="moveOptions($('_D+Field[]'), $('_D+sel1[]'));" class="line" />
+							</td>
+							<td><b>{-#sviewfields#-}</b><br>
+								<select id="_D+Field[]" size="8" style="width:220px;" multiple class="line">
+{-foreach name=sst key=key item=item from=$sda-}
+{-if $item != "D.DisasterId"-}
+								<option value="D.{-$item-}">{-$dc2.$item[0]-}</option>{-/if-}{-/foreach-}
+								</select><br/>
+								<input type="button" value="{-#balls#-}" onclick="selectall('_D+Field[]');" class="line" />
+								<input type="button" value="{-#bnone#-}" onclick="selectnone('_D+Field[]');" class="line" />
+							</td>
+							<td style="width:20px;" align="center">
+								<input type="button" value="&uarr;&uarr;" onclick="top('_D+Field[]');" class="line" /><br/>
+								<input type="button" value="&uarr;" onclick="upone('_D+Field[]');" class="line" /><br/>
+								<input type="button" value="&darr;" onclick="downone('_D+Field[]');" class="line" /><br/>
+								<input type="button" value="&darr;&darr;" onclick="bottom('_D+Field[]');" class="line" /><br/>
+							</td>
+						</tr>
+						</table>
+						<br/><br/>
+						<b>{-#dorderby#-}</b><br/>
+						<select id="_D+SQL_ORDER" name="_D+SQL_ORDER" class="fixw line" size="5">
+							<option value="D.DisasterBeginTime, V.EventName, G.GeographyFQName" selected>{-#ddeg#-}</option>
+							<option value="D.DisasterBeginTime, D.GeographyId, V.EventName">{-#ddge#-}</option>
+							<option value="G.GeographyFQName, V.EventName, D.DisasterBeginTime">{-#dged#-}</option>
+							<option value="V.EventName, D.DisasterBeginTime, G.GeographyFQName">{-#dedg#-}</option>
+							<option value="D.DisasterSerial">{-#dserial#-}</option>
+							<option value="D.RecordCreation">{-#dcreation#-}</option>
+							<option value="D.RecordUpdate">{-#dlastupd#-}</option>
+						</select>
+						<input type="hidden" id="_D+FieldH" name="_D+Field" value="" />
+						<input type="hidden" id="_D+cmd" name="_D+cmd" value="result" />
+						<input type="hidden" id="_D+saveopt" name="_D+saveopt" value="" />
+					</form>
+					</div>
+				</div>
+				<!--	END DATA SECTION -->
+				<!--	SECTION : THEMATICMAP CONFIGURATION
+				==================================== -->
+				<!--        <input type="button" id="map-btn" ext:qtip="{-#tthematicmsg#-}" value="{-#bthematic#-}" {-if !$ctl_showmap-}style="display:none;"{-/if-} class="bb btn">-->
+				<button id="map-btn" class="rounded" ext:qtip="{-#tthematicmsg#-}"><span>{-#bthematic#-}</span></button>
+				<div id="map-win" class="x-hidden">
+				  <div class="x-window-header">{-#bthematic#-}</div>
+				  <div id="map-cfg">
+					<div id="colorpicker201" class="colorpicker201"></div>
+					<form id="CM" method="POST">
+					  <table class="conf">
+						<tr valign="top"><td>
+						  <b>{-#mareaid#-}</b>
+						  <br>
+						  <select name="_M+Label" size="4" class="fixw line">
+							<option value="NAME">{-#mareashownam#-}</option>
+							<option value="CODE">{-#mareashowcod#-}</option>
+							<option value="VALUE">{-#mareashowval#-}</option>
+							<option value="NONE" selected>{-#mareanotshow#-}</option>
+						  </select>
+						  <br><br>
+						  <b>{-#mranlegcol#-}</b>&nbsp; &nbsp; &nbsp; &nbsp;
+							<!-- IE Not found.. -->
+						  <input type="button" value="+" onclick="addRowToTable();" class="line">
+						  <input type="button" value="-" onclick="removeRowFromTable();" class="line">
+						  <br>
+						  <table border="0" id="tbl_range" class="grid">
+						   <thead>
+							<th colspan=2>{-#mrange#-}</th><th>{-#mlegend#-}</th><th>{-#mcolor#-}</th>
+						   </thead>
+						   <tbody id="range">
+{-foreach name=rg key=k item=i from=$range-}
+							<tr>
+							<td>{-$smarty.foreach.rg.iteration-}</td>
+							<td><input type="text" id="_M+limit[{-$smarty.foreach.rg.iteration-1-}]" class="line"
+								  name="_M+limit[{-$smarty.foreach.rg.iteration-1-}]" size="5" value="{-$i[0]-}"
+								  onBlur="miv={-if $smarty.foreach.rg.iteration > 1-}parseInt($('_M+limit[{-$smarty.foreach.rg.iteration-2-}]').value)+1{-else-}1{-/if-}; $('_M+legend[{-$smarty.foreach.rg.iteration-1-}]').value='{-#mbetween#-} '+ miv +'- '+ this.value">
+							</td>
+							<td><input type="text" id="_M+legend[{-$smarty.foreach.rg.iteration-1-}]" class="line"
+								  name="_M+legend[{-$smarty.foreach.rg.iteration-1-}]" size="20" value="{-#mbetween#-} {-$i[1]-}"></td>
+							<td><input type="text" id="_M+ic[{-$smarty.foreach.rg.iteration-1-}]" 
+								  size="3" value="" style="background:#{-$i[2]-};" class="line"
+								  onclick="showColorGrid2('_M+color[{-$smarty.foreach.rg.iteration-1-}]','_M+ic[{-$smarty.foreach.rg.iteration-1-}]');">
+								<input type="hidden" id="_M+color[{-$smarty.foreach.rg.iteration-1-}]" 
+								  name="_M+color[{-$smarty.foreach.rg.iteration-1-}]" value="{-$i[2]-}"></td>
+							</tr>{-/foreach-}
+						   </tbody>
+						  </table>
+						  <table border="0" width="100%">
+						   <tr>
+							<td>{-#mcoltransp#-} <select name="_M+Transparency" class="line">
+								<option value="10">10</option>
+								<option value="20">20</option>
+								<option value="30">30</option>
+								<option value="40">40</option>
+								<option value="50">50</option>
+								<option value="60">60</option>
+								<option value="70" selected>70</option>
+								<option value="80">80</option>
+								<option value="90">90</option>
+								<option value="100">100</option>
+							   </select>%
+							</td>
+							<td align="right">
+							   <input type="button" value="{-#mcolorgrad#-}" onClick="genColors();" class="line">
+							</td>
+						   </tr>
+						  </table>
+						</td><td>
+						  <b>{-#mrepreselev#-}</b><br>
+						  <select id="_M+Type" name="_M+Type" size="3" class="fixw line">
+{-foreach name=mgel key=k item=i from=$mgel-}
+							<option value="{-$k-}|D.GeographyId|" {-if $smarty.foreach.mgel.iteration==1-}selected{-/if-}>{-$i[0]-}</option>
+{-/foreach-}
+						  </select>
+						  <br /><br />
+						  <b>{-#mviewfields#-}</b><br />
+						  <select id="_M+Field" name="_M+Field" size="8" class="fixw line">
+							<option value="D.DisasterId||" selected>{-#trepnum#-}</option>
+{-foreach name=ef1 key=k item=i from=$ef1-}
+							<option value="D.{-$k-}Q|>|-1">{-$i[0]-}</option>
+							<option value="D.{-$k-}|=|-1">{-#tauxhave#-} {-$i[0]-}</option>{-/foreach-}
+{-foreach name=ef2 key=k item=i from=$ef2-}
+							<option value="D.{-$k-}|>|-1">{-$i[0]-}</option>{-/foreach-}
+{-foreach name=ef3 key=k item=i from=$ef3-}
+							<option value="D.{-$k-}|>|-1">{-$i[0]-}</option>{-/foreach-}
+{-foreach name=ef3 key=k item=i from=$sec-}
+							<option value="D.{-$k-}|=|-1">{-#tauxaffect#-} {-$i[0]-}</option>{-/foreach-}
+							<option disabled>---</option>
+{-foreach name=eef key=k item=i from=$exteffel-}
+{-if $i[2] == "INTEGER" || $i[2] == "DOUBLE"-}
+							<option value="E.{-$k-}|>|-1">{-$i[0]-}</option>{-/if-}{-/foreach-}
+						  </select>
+						  <input type="hidden" id="_M+cmd" name="_M+cmd" value="result" />
+						  <input type="hidden" id="_M+extent" name="_M+extent" />
+						  <input type="hidden" id="_M+layers" name="_M+layers" />
+						</td></tr>
+					  </table>
+					</form>
+				  </div>
+				</div>
+				<!--	END MAP SECTION -->
+				<!--	BEGIN GRAPHIC CONFIGURATION -->
+{-include file="graphparameters.tpl"-}
+				<!--	END GRAPHIC SECTION  -->
+				<!--	SECTION : STATISTIC CONFIGURATION
+				============================== -->
+				<!--        <input type="button" id="std-btn" value="{-#bstatistic#-}" ext:qtip="{-#tstatisticmsg#-}" class="bb btn">-->
+				<button id="std-btn" class="rounded" ext:qtip="{-#tstatisticmsg#-}"><span>{-#bstatistic#-}</span></button>
+				<div id="std-win" class="x-hidden">
+				  <div class="x-window-header">{-#bstatistic#-}</div>
+				  <div id="std-cfg">
+					<form id="CS" method="POST">
+						<table border="0" width="100%">
+							<tr>
+								<td>
+									{-#sresxpage#-}
+									<select id="_S+SQL_LIMIT" name="_S+SQL_LIMIT" class="line">
+									 <option value="20">20</option>
+									 <option value="50">50</option>
+									 <option value="100" selected>100</option>
+									 <option value="200">200</option>
+									</select>
+								</td>
+								<td>
+									{-#mgeosection#-}:
+									<select id="_S+showgeo" name="_S+showgeo" class="line">
+									 <option value="NAME">{-#mareashownam#-}</option>
+									 <option value="CODE">{-#mareashowcod#-}</option>
+									 <option value="CODENAME">Code | Name</option>
+									</select>
+								</td>
+							</tr>
+						</table>
+					  <br>
+					  <b>{-#stotallevels#-}</b>
+					  <br>
+					  <table>
+						<tr valign="top">
+						  <td><b>{-$std.StatisticFirstlev[0]-}</b><br>
+						   <select id="_S+Firstlev" name="_S+Firstlev" size="8" style="width:180px;" class="line"
+							   onChange="setTotalize('_S+Firstlev', '_S+Secondlev'); setTotalize('_S+Secondlev', '_S+Thirdlev');">
 {-foreach name=glev key=k item=i from=$glev-}
-                    <option value="{-$k-}|D.GeographyId">
-                    {-assign var="ln" value=StatisticGeographyId_$k-}{-$std.$ln[0]-}</option>
-{-/foreach-}
-                    <option value="|D.EventId">{-$std.StatisticEventName[0]-}</option>
-                    <option value="YEAR|D.DisasterBeginTime">{-$std.StatisticDisasterBeginTime_YEAR[0]-}</option>
-                    <option value="MONTH|D.DisasterBeginTime">{-$std.StatisticDisasterBeginTime_MONTH[0]-}</option>
-                    <option value="|D.CauseId">{-$std.StatisticCauseName[0]-}</option>
-                   </select>
-                  </td>
-                  <td><b>{-$std.StatisticSecondlev[0]-}</b><br>
-                   <select id="_S+Secondlev" name="_S+Secondlev" size="8" style="width:180px;" class="line"
-                       onChange="setTotalize('_S+Secondlev', '_S+Thirdlev');">
-                   </select>
-                  </td>
-                  <td><b>{-$std.StatisticThirdlev[0]-}</b><br>
-                   <select id="_S+Thirdlev" name="_S+Thirdlev" size="8" style="width:180px;" class="line">
-                   </select>
-                  </td>
-                </tr>
-              </table>
-              <br>
-              <table>
-                <tr>
-                  <td><b>{-#savailfields#-}</b><br>
-                   <select id="_S+sel1[]" size="6" style="width:220px;" multiple class="line">
-<!--                    <option value="D.{-$key-}|=|-1">{-#tauxhave#-} {-$item[1]-}</option>-->
+{-assign var="ln" value=StatisticGeographyId_$k-}
+							<option value="{-$k-}|D.GeographyId">{-$std.$ln[0]-}</option>{-/foreach-}
+							<option value="|D.EventId">{-$std.StatisticEventName[0]-}</option>
+							<option value="YEAR|D.DisasterBeginTime">{-$std.StatisticDisasterBeginTime_YEAR[0]-}</option>
+							<option value="MONTH|D.DisasterBeginTime">{-$std.StatisticDisasterBeginTime_MONTH[0]-}</option>
+							<option value="|D.CauseId">{-$std.StatisticCauseName[0]-}</option>
+						   </select>
+						  </td>
+						  <td><b>{-$std.StatisticSecondlev[0]-}</b><br/>
+						   <select id="_S+Secondlev" name="_S+Secondlev" size="8" style="width:180px;" class="line"
+							   onChange="setTotalize('_S+Secondlev', '_S+Thirdlev');">
+						   </select>
+						  </td>
+						  <td><b>{-$std.StatisticThirdlev[0]-}</b><br />
+						   <select id="_S+Thirdlev" name="_S+Thirdlev" size="8" style="width:180px;" class="line">
+						   </select>
+						  </td>
+						</tr>
+					  </table>
+					  <br />
+					  <table>
+						<tr>
+						  <td><b>{-#savailfields#-}</b><br>
+						   <select id="_S+sel1[]" size="6" style="width:220px;" multiple class="line">
+							<!-- <option value="D.{-$key-}|=|-1">{-#tauxhave#-} {-$item[1]-}</option>-->
 {-foreach name=sst1 key=key item=item from=$sst1-}
-                    <option value="D.{-$item[0]-}">{-$item[1]-}</option>
-{-/foreach-}
+							<option value="D.{-$item[0]-}">{-$item[1]-}</option>{-/foreach-}
 {-foreach name=sst2 key=key item=item from=$sst2-}
-                    <option value="D.{-$key-}|=|-1"><i>{-#tauxaffect#-} {-$item[0]-}</i></option>
-{-/foreach-}
- 					<option disabled>---</option>
+							<option value="D.{-$key-}|<|0"><i>{-#tauxaffect#-} {-$item[0]-}</i></option>{-/foreach-}
+							<option disabled>---</option>
 {-foreach name=eef key=key item=item from=$exteffel-}
- {-if $item[2] == "INTEGER" || $item[2] == "DOUBLE"-}
-                    <option value="E.{-$key-}|>|-1">{-$item[0]-}</option>
- {-/if-}
-{-/foreach-}
-                   </select>
-                   <br>
-                   <input type="button" value="{-#balls#-}" onclick="selectall('_S+sel1[]');" class="line">
-                   <input type="button" value="{-#bnone#-}" onclick="selectnone('_S+sel1[]');" class="line">
-                  </td>
-                  <td align="center" valign="middle" style="width:20px;">
-                   <input type="button" value="&rarr;" onclick="moveOptions($('_S+sel1[]'), $('_S+Field[]'));" class="line">
-                   <br><br><br>
-                   <input type="button" value="&larr;" onclick="moveOptions($('_S+Field[]'), $('_S+sel1[]'));" class="line">
-                  </td>
-                  <td><b>{-#sviewfields#-}</b><br>
-                   <select id="_S+Field[]" size="6" style="width:220px;" multiple class="line">
-  {-foreach name=sst key=key item=item from=$sst-}
-                    <option value="D.{-$item[0]-}">{-$item[1]-}</option>
-  {-/foreach-}
-                   </select><br>
-                   <input type="button" value="{-#balls#-}" onclick="selectall('_S+Field[]');" class="line">
-                   <input type="button" value="{-#bnone#-}" onclick="selectnone('_S+Field[]');" class="line">
-                  </td>
-                  <td style="width:20px;" align="center">
-                   <input type="button" value="&uArr;" onclick="top('_S+Field[]');" class="line"><br>
-                   <input type="button" value="&uarr;" onclick="upone('_S+Field[]');" class="line"><br>
-                   <input type="button" value="&darr;" onclick="downone('_S+Field[]');" class="line"><br>
-                   <input type="button" value="&dArr;" onclick="bottom('_S+Field[]');" class="line"><br>
-                  </td>
-                </tr>
-              </table>
-              <input type="hidden" id="_S+FieldH" name="_S+Field" value="">
-              <input type="hidden" id="_S+cmd" name="_S+cmd" value="result">
-			  <input type="hidden" id="_S+saveopt" name="_S+saveopt" value="">
-            </form>
-          </div>
-        </div>
-<!--	END STATISTIC SECTION  -->
-{-/if-}
-{-** END ctl_qryres **-}
+{-if $item[2] == "INTEGER" || $item[2] == "DOUBLE"-}
+							<option value="E.{-$key-}|>|-1">{-$item[0]-}</option>{-/if-}{-/foreach-}
+						   </select>
+						   <br />
+						   <input type="button" value="{-#balls#-}" onclick="selectall('_S+sel1[]');" class="line" />
+						   <input type="button" value="{-#bnone#-}" onclick="selectnone('_S+sel1[]');" class="line" />
+						  </td>
+						  <td align="center" valign="middle" style="width:20px;">
+						   <input type="button" value="&rarr;" onclick="moveOptions($('_S+sel1[]'), $('_S+Field[]'));" class="line" />
+						   <br /><br /><br />
+						   <input type="button" value="&larr;" onclick="moveOptions($('_S+Field[]'), $('_S+sel1[]'));" class="line" />
+						  </td>
+						  <td><b>{-#sviewfields#-}</b><br>
+						   <select id="_S+Field[]" size="6" style="width:220px;" multiple class="line">
+{-foreach name=sst key=key item=item from=$sst-}
+							<option value="D.{-$item[0]-}">{-$item[1]-}</option>{-/foreach-}
+						   </select><br>
+						   <input type="button" value="{-#balls#-}" onclick="selectall('_S+Field[]');" class="line" />
+						   <input type="button" value="{-#bnone#-}" onclick="selectnone('_S+Field[]');" class="line" />
+						  </td>
+						  <td style="width:20px;" align="center">
+						   <input type="button" value="&uArr;" onclick="top('_S+Field[]');" class="line"><br />
+						   <input type="button" value="&uarr;" onclick="upone('_S+Field[]');" class="line"><br />
+						   <input type="button" value="&darr;" onclick="downone('_S+Field[]');" class="line"><br />
+						   <input type="button" value="&dArr;" onclick="bottom('_S+Field[]');" class="line"><br />
+						  </td>
+						</tr>
+					  </table>
+					  <input type="hidden" id="_S+FieldH" name="_S+Field" value="">
+					  <input type="hidden" id="_S+cmd" name="_S+cmd" value="result">
+					  <input type="hidden" id="_S+saveopt" name="_S+saveopt" value="">
+					</form>
+				  </div>
+				</div>
+				<!--	END STATISTIC SECTION  -->
+{-/if-} {-** END ctl_qryres **-}
+{-if $ctl_show || $ctl_mainpage-}
+				<div id="qry-win" class="x-hidden">
+					<div class="x-window-header">{-#mopenquery#-}</div>
+		          <div id="qry-cfg" style="text-align:center;">
+				     <form id="openquery" enctype="multipart/form-data" action="index.php" method="POST">
+					  <br><br><input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+					  <input type="file" id="ofile" name="qry" onChange="$('openquery').submit();"/>
+					 </form>
+				  </div>
+				</div>
+				<!-- Show DesInventar (input data) window-->
+				<div id="dif-win" class="x-hidden">
+				  <div class="x-window-header">{-#mdcsection#-} | {-$userid-} - {-$role-}</div>
+				  <div id="dif-cfg" style="text-align:center;">
+				   <iframe name="dif" id="dif" frameborder="0" height="600px;" width="100%" src="cards.php?r={-$reg-}"></iframe>
+				  </div>
+				</div>
+				<!-- Show User login/logout window -->
+				<div id="usr-win" class="x-hidden">
+				  <div class="x-window-header">{-$userid-} - {-$role-}</div>
+				  <div id="usr">
+					<form method="get" action="javascript:
+						userMan('usr', 'user.php', 'login', 'userid=' + $('userid').value + '&password=' + $('password').value);" >
+						<table border="0" align="center" valign="middle" style="margin-top:20px">
+						<tr>
+						<td>
+							{-#tuser#-} <input type="text" id="userid" name="userid" value="" size="16" class="line" />&nbsp;&nbsp;
+							{-#tpassword#-} <input type="password" name="password" id="password" value="" size="8" class="line" />&nbsp;&nbsp;
+							<input type="submit" value="{-#benter#-}" class="line" />&nbsp;&nbsp;
+							<a href="javascript:void(null)" class="rememberpasswordlink" 
+								onclick="updateList('passlost', 'user.php', 'cmd=passlost');">{-#tpasslost#-}</a>
+						</td>
+						</tr>
+						</table>
+					</form>
+					<div id="passlost"></div>
+				  </div>
+				</div>
+				<!-- Show Database functions window -->
+				<div id="dbl-win" class="x-hidden">
+				  <div class="x-window-header">{-$userid-} - {-$role-}</div>
+				  <div id="dbl">
+				  </div>
+				</div>
+				<!-- Show Dialog window -->
+				<div id="dlg-win" class="x-hidden">
+					<div class="x-window-header"></div>
+					<div id="dlg">
+						<table border="0">
+							<tr>
+								<td><img src="images/di_logo.png"></td>
+								<td><p style="font-size: 16pt;" align="center">DesInventar {-$version-}</p></td>
+							</tr>
+							<tr>
+								<td colspan="2">{-#tabout#-}<hr />{-#tcopyright#-}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
 {-if $ctl_show-}
-       </td>
-       <td>
-		<div id="qry-win" class="x-hidden">
-          <div class="x-window-header">{-#mopenquery#-}</div>
-          <div id="qry-cfg" style="text-align:center;">
-		     <form id="openquery" enctype="multipart/form-data" action="index.php" method="POST">
-			  <br><br><input type="hidden" name="MAX_FILE_SIZE" value="100000" />
-			  <input type="file" id="ofile" name="qry" onChange="$('openquery').submit();"/>
-			 </form>
-		  </div>
-        </div>
-        <span id="frmwait"></span>
-        <input id="DCRes" type="hidden" value="">
-        <input id="bsave" type="button" class="bb bsave"   style="visibility: hidden;"
-			onMouseOver="if($('DCRes').value == 'D' || $('DCRes').value == 'S') $('saveopt').style.display='block';"
-			onClick="saveRes('export', '');" ext:qtip="{-#bsavemsg#-}">
-		<span id="saveopt" style="position:absolute; display: none" 
-			onMouseOver="$('saveopt').style.display='block';" onMouseOut="setTimeout('$(\'saveopt\').style.display=\'none\';', 2000);">
-			<input type="button" value="xls" class="bb line" onClick="saveRes('export', 'xls')"> | 
-			<input type="button" value="csv" class="bb line" onClick="saveRes('export', 'csv')">
-		</span>&nbsp;&nbsp;
-        <input id="bprint" type="button" class="bb bprint" style="visibility: hidden;"
-			onClick="printRes();" ext:qtip="{-#bprintmsg#-}">&nbsp;&nbsp;
-		 <!-- Show DesInventar (input data) window-->
-		<div id="dif-win" class="x-hidden">
-		  <div class="x-window-header">{-#mdcsection#-} | {-$userid-} - {-$role-}</div>
-		  <div id="dif-cfg" style="text-align:center;">
-		   <iframe name="dif" id="dif" frameborder="0" height="600px;" width="100%" src="cards.php?r={-$reg-}"></iframe>
-		  </div>
-		</div>
-		 <!-- Show User login/logout window -->
-		<div id="usr-win" class="x-hidden">
-		  <div class="x-window-header">{-$userid-} - {-$role-}</div>
-		  <div id="usr">
-			<form method="get" action="javascript:
-				userMan('usr', 'user.php', 'login', 'userid=' + $('userid').value + '&password=' + $('password').value);" >
-				<table border="0" align="center" valign="middle" style="margin-top:20px">
-				<tr>
-				<td>
-					{-#tuser#-} <input type="text" id="userid" name="userid" value="" size="16" class="line" />&nbsp;&nbsp;
-					{-#tpassword#-} <input type="password" name="password" id="password" value="" size="8" class="line" />&nbsp;&nbsp;
-					<input type="submit" value="{-#benter#-}" class="line" />&nbsp;&nbsp;
-					<a href="javascript:void(null)" class="rememberpasswordlink" 
-						onclick="updateList('passlost', 'user.php', 'cmd=passlost');">{-#tpasslost#-}</a>
-				</td>
-				</tr>
-				</table>
-			</form>
-			<div id="passlost"></div>
-		  </div>
-		</div>
-		<!-- Show Database functions window -->
-		<div id="dbl-win" class="x-hidden">
-		  <div class="x-window-header">{-$userid-} - {-$role-}</div>
-		  <div id="dbl">
-		  </div>
-		</div>
-		 <!-- Show Dialog window -->
-		<div id="dlg-win" class="x-hidden">
-			<div class="x-window-header"></div>
-			<div id="dlg">
-				<table border="0">
-					<tr>
-						<td><img src="images/di_logo.png"></td>
-						<td><p style="font-size: 16pt;" align="center">DesInventar {-$version-}</p></td>
-					</tr>
-					<tr>
-						<td colspan="2">{-#tabout#-}<hr />{-#tcopyright#-}</td>
-					</tr>
-				</table>
-			</div>
-		</div>
-	   </td>
-	  </tr>
-	  <tr>
-	   <td colspan="3">
-		<div id="querydetails" style="height:40px;" class="dwin"></div>
-		<!--  <div id="smap" style="position:absolute; left:0px; top:20px; visibility:hidden;">[<a href="javascript:void(0);" onClick="hideMap();">X</a>]<br></div>-->
-	   </td>
-	  </tr>
+			</td>
+			<td>
+				<span id="frmwait"></span>
+				<input id="DCRes" type="hidden" value="" />
+				<input id="bsave" type="button" class="bb bsave"   style="visibility: hidden;"
+					onMouseOver="if($('DCRes').value == 'D' || $('DCRes').value == 'S') $('saveopt').style.display='block';"
+					onClick="saveRes('export', '');" ext:qtip="{-#bsavemsg#-}" />
+				<span id="saveopt" style="position:absolute; display: none" 
+					onMouseOver="$('saveopt').style.display='block';" onMouseOut="setTimeout('$(\'saveopt\').style.display=\'none\';', 2000);">
+					<input type="button" value="xls" class="bb line" onClick="saveRes('export', 'xls')" /> | 
+					<input type="button" value="csv" class="bb line" onClick="saveRes('export', 'csv')" />
+				</span>&nbsp;&nbsp;
+				<input id="bprint" type="button" class="bb bprint" style="visibility: hidden;"
+					onClick="printRes();" ext:qtip="{-#bprintmsg#-}" />&nbsp;&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<div id="querydetails" style="height:40px;" class="dwin"></div>
+				<!--  <div id="smap" style="position:absolute; left:0px; top:20px; visibility:hidden;">[<a href="javascript:void(0);" onClick="hideMap();">X</a>]<br></div>-->
+			</td>
+		</tr>
 	</table>
 	<iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" 
 		src="?cmd=getRegionFullInfo&r={-$reg-}"></iframe>
-	</div>
- {-** MAINPAGE: default page in DesInventar root **-}
- {-if $ctl_mainpage-}
-	<script type="text/javascript" language="javascript">
-	updateList('dblist', 'index.php', 'cmd=listdb');
-	</script>
+	</div> <!-- end div id=qryres -->
+{-else-} {-* MAINPAGE *-}
 	<table border="0" cellpadding="0" cellspacing="0" style="border: thin solid;">
 	<tr style="background:url(images/bgmain.png)">
-		<td width="400px">
+		<td width="400px" colspan="2">
 			<a href="index.php?cmd=main"><img src="images/di_logo1.png" border=0></a><br/>
+			<br /><hr /><br />
 		</td>
 	</tr>
 	<tr bgcolor="#e2e2e0" valign="top">
 		<td>
-			<br /><hr /><br />
-				<h2><u>{-#tdbavail#-}</u></h2>
-	<table border="1" class="grid">
-		<tr align="center">
-			<td><b>Pais</b></td>
-			<td><b>Region</b></td>
-			<td colspan="2"><b>Atributos</b></td>
-		</tr>
+			<h2><u>{-#tdbavail#-}</u></h2>
+			<table border="1" class="grid">
+				<tr align="center">
+					<td><b>Pais</b></td>
+					<td><b>Region</b></td>
+					<td colspan="2"><b>Atributos</b></td>
+				</tr>
 {-foreach name=rlist key=key item=item from=$regionlist-}
-		<tr>
-			<td>{-$item[1]-}</td>
-			<td>
-				<a href="index.php?r={-$key-}">{-$item[0]-}</a>
-				<a href="javascript:void(null)" onClick="javascript:window.open('?r={-$key-}','DI_{-$smarty.foreach.rlist.iteration-}', 
-					'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,status=yes,scrollbars=no,toolbar=no');">[-]</a>
-			</td>
-			<td>{-if $item[2] == 3-}PUBLICA{-else-}NO PUBLICA{-/if-}</td>
-			<td>{-$item[3]-}</td>
-		</tr>
+				<tr>
+					<td>{-$item[1]-}</td>
+					<td>
+						<a href="index.php?r={-$key-}">{-$item[0]-}</a>
+						<a href="javascript:void(null)" onClick="javascript:window.open('?r={-$key-}','DI_{-$smarty.foreach.rlist.iteration-}', 
+							'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,status=yes,scrollbars=no,toolbar=no');">[-]</a>
+					</td>
+					<td>{-if $item[2] == 3-}PUBLICA{-else-}NO PUBLICA{-/if-}</td>
+					<td>{-$item[3]-}</td>
+				</tr>
 {-/foreach-}
+			</table>
+		</td>
+		<td>
+			<div id="info" width="500px" height="400px" border="1"></div>
+		</td>
+	</tr>
 	</table>
- {-/if-}
- </div><!-- end div id=container-->
+{-/if-} {-* END ctl_show*-}
+ </div><!-- END div id=container-->
 <!--	SECTION : QUERY DESIGN 
 	====================== -->
  <div id="west">
-{-/if-}
-{-** END ctl_show **-}
+{-/if-} {-* END ctl_show || ctl_mainpage*-}
 {-if $ctl_qrydsg-}
   <!-- BEG DI8 QUERY FORM -->
   <form id="DC" method="POST" target="dcr">
@@ -1891,13 +1878,11 @@
 		 </td>
 		</tr>
 	   </table>
-	  </div>
     </dd>
   </dl>
   </form>
-{-/if-}
-{-** END ctl_qrydsg **-}
-{-if $ctl_show-}
+{-/if-} {-** END ctl_qrydsg **-}
+{-if $ctl_show || $ctl_mainpage-}
  </div> <!-- id = west-->
  <!-- END DI8 QUERY FORM -->
  <!-- BEG HELP SECTION -->

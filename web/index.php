@@ -53,7 +53,6 @@ switch ($cmd) {
 		$t->assign("lglst", $d->loadLanguages(1));
 		$t->assign('regionlist', $d->listDB());
 		$t->assign("userid", $us->UserId);
-		$t->assign("ctl_show", true);
 		$t->assign("ctl_noregion", true);
 		$t->assign('ctl_mainpage', true);
 		$t->display('index.tpl');
