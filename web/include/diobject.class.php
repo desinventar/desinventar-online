@@ -53,20 +53,26 @@ class DIObject {
 		}
 	}
 	
-	public function createFields($prmFieldDef) {
+	public function createFields($prmFieldDef, $LangIsoCode='') {
+		//print_r($prmFieldDef);
+		if ($LangIsoCode == '') {
+			$obj = &$this->oField;
+		} else {
+			$obj = &$this->oField[$LangIsoCode];
+		}
 		$sFields = split(',', $prmFieldDef);
 		foreach ($sFields as $sKey => $sValue) {
 			$oItem = split('/', $sValue);
 			$sFieldName = $oItem[0];
 			$sFieldType = $oItem[1];
 			$this->oFieldType[$sFieldName] = $sFieldType;
-			if ($sFieldType == "STRING")   { $this->oField[$sFieldName] = "";          }
-			if ($sFieldType == "TEXT")     { $this->oField[$sFieldName] = "";          }
-			if ($sFieldType == "DATETIME") { $this->oField[$sFieldName] = gmdate('c'); }
-			if ($sFieldType == "DATE")     { $this->oField[$sFieldName] = gmdate('Y-m-d'); }
-			if ($sFieldType == "INTEGER")  { $this->oField[$sFieldName] = 0;           }
-			if ($sFieldType == "DOUBLE")   { $this->oField[$sFieldName] = 0.0;         }
-			if ($sFieldType == "BOOLEAN")  { $this->oField[$sFieldName] = true;        }
+			if ($sFieldType == "STRING")   { $obj[$sFieldName] = "";          }
+			if ($sFieldType == "TEXT")     { $obj[$sFieldName] = "";          }
+			if ($sFieldType == "DATETIME") { $obj[$sFieldName] = gmdate('c'); }
+			if ($sFieldType == "DATE")     { $obj[$sFieldName] = gmdate('Y-m-d'); }
+			if ($sFieldType == "INTEGER")  { $obj[$sFieldName] = 0;           }
+			if ($sFieldType == "DOUBLE")   { $obj[$sFieldName] = 0.0;         }
+			if ($sFieldType == "BOOLEAN")  { $obj[$sFieldName] = true;        }
 		}
 	} // function
 	
@@ -90,9 +96,15 @@ class DIObject {
 		}		
 	}
 	
-	public function set($prmKey, $prmValue) {
+	public function set($prmKey, $prmValue,$LangIsoCode='') {
+		//printf("%3s %-20s %s\n", $LangIsoCode, $prmKey, $prmValue);
+		if ($LangIsoCode == '') {
+			$obj = &$this->oField;
+		} else {
+			$obj = &$this->oField[$LangIsoCode];
+		}
 		$iReturn = ERR_DEFAULT_ERROR;
-		if (isset($this->oField[$prmKey])) {
+		if (isset($obj[$prmKey])) {
 			$sValue = $prmValue;
 			$sFieldType = $this->oFieldType[$prmKey];
 			if ($sFieldType == 'STRING') {
@@ -107,7 +119,7 @@ class DIObject {
 			    ($sFieldType == 'DOUBLE') ) {
 				if ($sValue == "") { $sValue = 0; }
 			}
-			$this->oField[$prmKey] = $sValue;
+			$obj[$prmKey] = $sValue;
 			$iReturn = ERR_NO_ERROR;
 		}
 		return $iReturn;
