@@ -361,8 +361,11 @@ class DIObject {
 		return 1;
 	}
 
-	public function validateNotNull($curReturn, $ErrCode, $FieldName) {
+	public function validateNotNull($curReturn, $ErrCode, $FieldName, &$oResult=null) {
 		$iReturn = $curReturn;
+		if (!is_null($oResult)) {
+			$oResult['Status'] = $iReturn;
+		}
 		if ($iReturn > 0) {
 			$Value = $this->get($FieldName);
 			$FieldType = $this->getType($FieldName);
@@ -371,6 +374,10 @@ class DIObject {
 			} else {
 				if ($Value == '') {
 					$iReturn = $ErrCode;
+					if (!is_null($oResult)) {
+						$oResult['Status'] = $iReturn;
+						$oResult['Error'][] = $FieldName . ' cannot be null';
+					}
 				}
 			}
 		}
@@ -398,13 +405,20 @@ class DIObject {
 	}
 
 
-	public function validatePrimaryKey($curReturn, $ErrCode) {
+	public function validatePrimaryKey($curReturn, $ErrCode, &$oResult=null) {
 		$iReturn = $curReturn;
+		if (!is_null($oResult)) {
+			$oResult['Status'] = $iReturn;
+		}
 		if ($iReturn > 0) {
 			$quote1 = "'";
 			$sQuery = "SELECT * FROM " . $this->getTableName() . " WHERE " . $this->getIdWhereQuery();
 			foreach($this->conn->query($sQuery) as $row) {
 				$iReturn = $ErrCode;
+				if (!is_null($oResult)) {
+					$oResult['Status'] = $iReturn;
+					
+				}
 			}
 		}
 		return $iReturn;	
