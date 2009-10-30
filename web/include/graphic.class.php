@@ -273,22 +273,22 @@ class Graphic {
 					}
 					$y1p->SetLegend($sYAxisLabel);
 					$m[] = $y1p;
-					
-					// Add linear regression (Test)
-					/*
-					$std = new Math();
-					$xx = array_fill(0, count($val), 0);
-					$rl = $std->linearRegression(array_keys($xx), array_values($val));
-					$n = 0;
-					foreach ($val as $kk=>$ii) {
-						$x = ($rl['m'] * $n) + $rl['b'];
-						$linreg[] = ($x < 0) ? 0 : $x;
-						$n++;
+					// Add Tendence Line : Linear regression , others 
+					if ($opc['_G+TendLine'] == "LINREG") {
+						// Add linear regression (Test)
+						$std = new Math();
+						$xx = array_fill(0, count($val), 0);
+						$rl = $std->linearRegression(array_keys($xx), array_values($val));
+						$n = 0;
+						foreach ($val as $kk=>$ii) {
+							$x = ($rl['m'] * $n) + $rl['b'];
+							$linreg[] = ($x < 0) ? 0 : $x;
+							$n++;
+						}
+						$ylr = $this->line($opc, $linreg, 'dashed');
+						$ylr->SetLegend('Linear Regression');
+						$m[] = $ylr;
 					}
-					$ylr = $this->line($opc, $linreg, 'dashed');
-					$ylr->SetLegend('Linnear Regression');
-					$m[] = $ylr;
-					*/
 				} elseif ($gType == "2TEMPO" || $gType == "2COMPAR") {
 					$y1p = $this->line($opc, $val1, "darkblue");
 					$y2p = $this->line($opc, $val2, "darkred");
