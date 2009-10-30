@@ -377,7 +377,7 @@ class DIObject {
 	public function validateCreate() {
 		return 1;
 	}	
-	public function validateUpdate() {
+	public function validateUpdate(&$oResult=null) {
 		return 1;
 	}
 	
@@ -479,6 +479,10 @@ class DIObject {
 		$oReturn['Error'] = array();
 		$oReturn['Warning'] = array();
 		return $oReturn;
+	}
+	
+	public function getValidateMessages(&$oResult=null) {
+		$iReturn = validateUpdate($oResult);
 	}
 } // class
 
