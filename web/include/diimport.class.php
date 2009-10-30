@@ -54,11 +54,15 @@ class DIImport {
 					break;
 					case DI_DISASTER:
 						$o = new DIDisaster($this->us);
-						$r = $o->importFromCSV($cols, $values);
-						print_r($r);
-						$Result = $r['Status'];
+						$Result = $o->importFromCSV($cols, $values);
 						if ($Result > 0) {
 							if ($doImport) {
+								$oResult = array();
+								$oResult['Status'] = ERR_NO_ERROR;
+								$oResult['Error'] = array();
+								$oResult['Warning'] = array();
+								$Result = $o->validateCreate($oResult);
+								print_r($oResult);
 								$Result = $o->insert();
 							} else {
 								$Result = $o->validateCreate();
