@@ -95,7 +95,20 @@ class DIDisaster extends DIObject {
 	public function validateCreate(&$oResult=null) {
 		$iReturn = 1;
 		$iReturn = $this->validateNotNull(-51, 'DisasterId');
+		if ($iReturn < 0) {
+			if (!is_null($oResult)) {
+				$oResult['Error'][-51] = 'Disaster Id cannot be empty.(' . $this->get('DisasterId') . ')';
+			}
+		}
 		$iReturn = $this->validatePrimaryKey(-52, $oResult);
+		if ($iReturn < 0) {
+			if (!is_null($oResult)) {
+				$oResult['Error'][-52] = 'Disaster Id must be unique.(' . $this->get('DisasterId') . ')';
+			}
+		}
+		if (!is_null($oResult)) {
+			$oResult['Status'] = $iReturn;
+		} 
 		return $iReturn;
 	}
 	
@@ -180,8 +193,7 @@ class DIDisaster extends DIObject {
 	} //update
 
 	public function importFromCSV($cols, $values) {
-		$oReturn = parent::importFromCSV($cols, $values);
-		$iReturn = ERR_NO_ERROR;
+		$iReturn = parent::importFromCSV($cols, $values);
 
 		$DisasterImport = array(0 => 'DisasterId', 
 		                        1 => 'DisasterSerial',
@@ -267,44 +279,7 @@ class DIDisaster extends DIObject {
 		$this->set('RecordAuthor'  , $this->session->UserId);
 		$this->set('RecordCreation', gmdate('c'));
 		
-		/*
-		$bInsert = ($this->validateCreate() > 0);
-		if ($bInsert) {
-			if ($doImport) { $Result = $this->insert(); }
-			else { $Result = $this->validateCreate(); }
-		} else {
-			if ($doImport) { $Result = $this->update(); }
-			else { $Result = $this->validateUpdate(); }
-		}
-		if ($Result > 0) {
-			$e = new DIEEData($this->us);
-			$e->set('DisasterId', $this->get('DisasterId'));
-			if ($doImport) {
-				if ($bInsert) {
-					$e->insert();
-				} else {
-					$e->update();
-				}
-			}
-		} else {
-			// Generate Error Log
-			$sErrorMsg = $rowCount . ',' . $Result . ',';
-			switch($Result) {
-			case -59:
-				$sErrorMsg .= $this->get('DisasterSerial') . ' EventId Not Found ' . $this->get('EventId') . ',,';
-				break;						
-			default:
-				$sErrorMsg .= 'Unknown Error' . ',,';
-				break;
-			} //switch
-			fputs($flog, $sErrorMsg . "\n");
-		}  //if
-		*/
-		if ( (count($oReturn['Error']) > 0) || (count($oReturn['Warning']) > 0) ) {
-			$iReturn = ERR_UNKNOWN_ERROR;
-		}
-		$oReturn['Status'] = $iReturn;
-		return $oReturn;
+		return $iReturn;
 	} //function
 } //class
 
