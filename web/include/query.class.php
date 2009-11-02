@@ -1001,7 +1001,7 @@ class Query extends PDO
 			              default: $dl[$j][$idx] = ""; break;
 			            }
 					}
-					elseif (is_numeric($dl[$j][$idx])) {
+					elseif (is_numeric($dl[$j][$idx]) && empty($exp)) {
 						$dl[$j][$idx] = number_format($dl[$j][$idx], 0, ',', ' ');
 					}
 				}
