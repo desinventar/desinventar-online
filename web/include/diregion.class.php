@@ -38,7 +38,7 @@ class DIRegion extends DIObject {
 		parent::__construct($prmSession);
 		$this->setConnection("core");
 		$this->createFields($this->sInfoDef);		
-		$this->createFields($this->sInfoTrans, 'eng');
+		$this->addLanguageInfo('eng');
 		$this->set('PeriodBeginDate', '1900-01-01');
 		$this->set('PeriodEndDate', gmdate('Y-m-d'));
 
@@ -53,7 +53,7 @@ class DIRegion extends DIObject {
 				$prmRegionId = $prmSession->sRegionId;
 			}
 		}
-		
+		$iReturn = ERR_NO_ERROR;
 		if ($prmRegionId != '') {
 			$this->set('RegionId', $prmRegionId);
 			$iReturn = $this->q->setDBConnection($prmRegionId);
@@ -73,6 +73,10 @@ class DIRegion extends DIObject {
 		}
 	} // __construct
 
+	public function addLanguageInfo($LangIsoCode) {
+		$this->createFields($this->sInfoTrans, $LangIsoCode);
+	}
+	
 	public function getTranslatableFields() {
 		// 2009-07-28 (jhcaiced) Build an array with translatable fields
 		$Translatable = array();
