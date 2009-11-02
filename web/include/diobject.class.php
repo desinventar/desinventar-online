@@ -400,6 +400,7 @@ class DIObject {
 	}
 
 	public function validatePrimaryKey($ErrCode) {
+		$iReturn = ERR_NO_ERROR;
 		$quote1 = "'";
 		$sQuery = "SELECT * FROM " . $this->getTableName() . " WHERE " . $this->getIdWhereQuery();
 		foreach($this->conn->query($sQuery) as $row) {
@@ -409,6 +410,7 @@ class DIObject {
 	}
 	
 	public function validateUnique($ErrCode, $prmFieldName) {
+		$iReturn = ERR_NO_ERROR;
 		$quote1 = "'";
 		if ($this->getType($prmFieldName) == 'INTEGER') { $quote1 = ""; }
 		$sQuery = "SELECT * FROM " . $this->getTableName() . " WHERE " . 
