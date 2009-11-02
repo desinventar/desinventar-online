@@ -257,7 +257,7 @@
 				window.open('http://www.desinventar.org', '', '');
 			break;
 			case "mmtg":
-				window.open('http://www.desinventar.org/{-if $lg == "spa"-}es{-else-}en{-/if-}/{-if $lg == "spa"-}metodologia{-else-}methodology{-/if-}', '', '');
+				window.open('http://www.desinventar.org/{-if $lg == "spa"-}es/metodologia{-else-}en/methodology{-/if-}/', '', '');
 				//runWin('doc.php?m=metguide', 'doc');
 			break;
 			case "mdoc":
@@ -1991,10 +1991,10 @@
 			<table border="0">
 				<tr valign="top">
 					<td>
-					<!--<a href="doc/test.htm" target="idoc">Inicio rapido</a> (2minutos)<br />
-					<a href="doc/test2.htm" target="idoc">Creando una base de datos</a> (5minutos)<br />-->
+					<a href="doc/howmakequeries_spa.htm" target="idoc">Inicio rapido</a> (1 minuto)<br />
+					<!--<a href="doc/test2.htm" target="idoc">Creando una base de datos</a> (5minutos)<br />-->
 					<a href="javascript:void(null);" 
-					    onClick="window.open('http://www.desinventar.org/{-if $lg == "spa"-}es{-else-}en{-/if-}/{-if $lg == "spa"-}metodologia{-else-}methodology{-/if-}', '', '');">{-#hmoreinfo#-}</a><br />
+					    onClick="window.open('http://www.desinventar.org/{-if $lg == "spa"-}es/metodologia{-else-}en/methodology{-/if-}/', '', '');">{-#hmoreinfo#-}</a><br />
 					<a href="javascript:void(null);" 
 						onClick="window.open('http://www.desinventar.org/{-if $lg == "spa"-}es{-else-}en{-/if-}/software/', '', '');">{-#hotherdoc#-}</a><br />
 					<a href="javascript:void(null);" 
