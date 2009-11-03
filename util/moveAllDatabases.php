@@ -30,8 +30,16 @@ foreach($dbh->query("SELECT * FROM Region ORDER BY CountryIsoCode,RegionUUID") a
 //$RegionList['PANAMA'] = 'PAN-1250695231-panama_inventario_de_desastres_sinaproc';
 //$RegionList['GUATEMALA'] = '';
 foreach ($RegionList as $RegionUUID => $RegionId) {
-	if ($RegionId == '') {
-		fb($RegionUUID . ' => ' . $RegionId);
+	$bCreateRegion = false;
+	if ($RegionId != '') {
+		$DBDir = VAR_DIR . '/database/' . $RegionId;
+		if (!file_exists($DBDir)) {
+			$bCreateRegion = true;
+		}
+	} else {
+		$bCreateRegion = true;
+	}
+	if ($bCreateRegion) {
 		$InfoGeneral_eng = '';
 		foreach($dbh->query("SELECT * FROM Region WHERE RegionUUID='" . $RegionUUID . "'") as $row) {
 			$RegionId = $row['RegionId'];
@@ -49,13 +57,16 @@ foreach ($RegionList as $RegionUUID => $RegionId) {
 			case 'fr':  $LangIsoCode = 'fre'; break;
 			default:    $LangIsoCode = 'eng'; break;
 		}
-		$r = new DIRegion($us);
+		$r = new DIRegion($us,$RegionId);
 		$r->set('RegionId', $RegionId);
 		$r->set('OptionOldName', $RegionUUID);
 		$r->set('LangIsoCode', $LangIsoCode);	
 		$r->addLanguageInfo($LangIsoCode);
 		printf("%-20s %-40s\n", $RegionUUID, $RegionId);
 		$iReturn = $r->createRegionDB();
+
+		$query = "UPDATE Region SET RegionId='" . $RegionId . "' WHERE RegionUUID='" . $RegionUUID . "'";
+		$dbh->query($query);
 	} //if
 } //foreach
 $dbh = null;

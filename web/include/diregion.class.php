@@ -117,6 +117,7 @@ class DIRegion extends DIObject {
 			$this->setConnection($this->get('RegionId'));
 			try {
 				$sQuery = "SELECT * FROM Info WHERE LangIsoCode='" . $prmLangIsoCode . "'";
+				fb($sQuery);
 				foreach($this->conn->query($sQuery) as $row) {
 					$InfoValue = $row['InfoValue'];
 					$InfoKey   = $row['InfoKey'];
