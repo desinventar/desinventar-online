@@ -18,7 +18,7 @@
 	require_once(BASE . '/include/disync.class.php');
 	
 	$RegionId = '';
-	$bOption = 0;
+	$bOption = 1;
 	if ($bOption) {
 		// Gran Chaco
 		$RegionItems = array('ARG-1250695025-argentina_gran_chaco' => 'Argentina',
@@ -33,7 +33,7 @@
 		$GeoLimitMaxX    = -54;
 		$GeoLimitMinY    = -35;
 		$GeoLimitMaxY    = -11;
-		$InfoGeneral     = file_get_contents('desc2.txt');
+		$InfoGeneral     = ''; //file_get_contents('desc2.txt');
 	} else {
 		// CAN - SubRegion Andina
 		$RegionItems = array('BOL-1248983224-bolivia_inventario_historico_de_desastres'   => 'Bolivia',
@@ -50,7 +50,7 @@
 		$GeoLimitMaxX    = -53;
 		$GeoLimitMinY    = -25;
 		$GeoLimitMaxY    =  13;
-		$InfoGeneral     = file_get_contents('desc1.txt');
+		$InfoGeneral     = ''; //file_get_contents('desc1.txt');
 	}
 	// loader.php creates a UserSession when loaded...
 	$r = ERR_NO_ERROR;
@@ -60,6 +60,7 @@
 			$RegionId = DIRegion::buildRegionId('', $RegionLabel);
 		}
 		$o = new DIRegion($us, $RegionId);
+		$o->setLanguage('spa');
 		$o->set('RegionLabel'    , $RegionLabel);
 		$o->set('RegionId'       , $RegionId);
 		$o->set('RegionStatus'   , CONST_REGIONACTIVE | CONST_REGIONPUBLIC);
@@ -78,8 +79,8 @@
 		
 		// Now make this a VirtualRegion
 		$o->set('IsCRegion'   , TRUE);
-		$o->update();
-		
+		//$o->update();
+		/*
 		// Add RegionItem
 		$o->clearSyncTable();
 		foreach($RegionItems as $RegionItemId => $RegionItemGeographyName) {
@@ -87,6 +88,7 @@
 			$o->addRegionItem($RegionItemId, $RegionItemGeographyName);
 		}
 		$o->rebuildRegionData();
+		*/
 		$us->close();
 	}
 	$us->logout();	
