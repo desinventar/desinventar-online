@@ -79,8 +79,8 @@
 		
 		// Now make this a VirtualRegion
 		$o->set('IsCRegion'   , TRUE);
-		//$o->update();
-		/*
+		$o->update();
+
 		// Add RegionItem
 		$o->clearSyncTable();
 		foreach($RegionItems as $RegionItemId => $RegionItemGeographyName) {
@@ -88,7 +88,6 @@
 			$o->addRegionItem($RegionItemId, $RegionItemGeographyName);
 		}
 		$o->rebuildRegionData();
-		*/
 		$us->close();
 	}
 	$us->logout();	
