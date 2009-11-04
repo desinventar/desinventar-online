@@ -64,7 +64,7 @@ class DIRegion extends DIObject {
 			$iReturn = $this->loadInfoTrans('eng');
 			$LangIsoCode = $this->get('LangIsoCode');
 			if ($LangIsoCode != 'eng') {
-				$this->createFields($this->sInfoTrans, $LangIsoCode);
+				$this->addLanguageInfo($LangIsoCode);
 				$iReturn = $this->loadInfoTrans($LangIsoCode);
 			}
 		}
@@ -72,6 +72,11 @@ class DIRegion extends DIObject {
 			$this->set('OptionLanguageList', $this->get('LangIsoCode'));
 		}
 	} // __construct
+	
+	public function setLanguage($LangIsoCode) {
+		$this->set('LangIsoCode', $LangIsoCode);
+		$this->addLanguageInfo($LangIsoCode);
+	}
 
 	public function addLanguageInfo($LangIsoCode) {
 		$this->createFields($this->sInfoTrans, $LangIsoCode);
@@ -225,7 +230,7 @@ class DIRegion extends DIObject {
 			$this->copyEvents($LangIsoCode);
 			$this->copyCauses($LangIsoCode);
 		}
-		
+
 		if ($iReturn > 0) {
 			// Insert Data Into core.Region, create Info Table
 			$this->insert();
