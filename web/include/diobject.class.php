@@ -76,11 +76,15 @@ class DIObject {
 		}
 	} // function
 	
-	public function get($prmKey) {
+	public function get($prmKey, $LangIsoCode='') {
 		try {
 			if ($this->existField($prmKey)) {
 				return $this->oField[$prmKey];
 			} else {
+				$LangIsoCode = $this->get('LangIsoCode');
+				if (array_key_exists($prmKey, $this->oField[$LangIsoCode])) {
+					return $this->oField[$LangIsoCode][$prmKey];
+				}
 				return '';
 			}
 		} catch (Exception $e) {
