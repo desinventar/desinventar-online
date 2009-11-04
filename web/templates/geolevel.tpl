@@ -36,22 +36,19 @@
 	<br /><br />
 	<div id="levaddsect" style="display:none; width:600px;">
 		<form name="levfrm" id="levfrm" method="POST" action="geolevel.php" target="ifcarto" enctype="multipart/form-data"
-			onSubmit="javascript: var a=new Array('GeoLevelName','GeoLevelDesc'); return(checkForm(a, '{-#errmsgfrmlev#-}'));">
+			onSubmit="javascript: var a=new Array('GeoLevelName','GeoLevelDesc');
+			if(checkForm(a, '{-#errmsgfrmlev#-}')) { $('levaddsect').style.display = 'none'; return(true); } else return(false)">
 			<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevName[2]-}')">
 			{-$dic.DBLevName[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBLevName[1]-}</span></a><br />
 			<input id="GeoLevelName" name="GeoLevelName" type="text" {-$ro-} tabindex="1" class="line" style="width:400px;"
-					onBlur="updateList('levstatusmsg', 'geolevel.php', 
-						'r={-$reg-}&cmd=chkname&GeoLevelId='+ $('GeoLevelId').value +'&GeoLevelName='+ $('GeoLevelName').value);"
-					onFocus="showtip('{-$dic.DBLevName[2]-}')" />
+				onBlur="updateList('levstatusmsg', 'geolevel.php', 'r={-$reg-}&cmd=chkname&GeoLevelId='+ $('GeoLevelId').value +'&GeoLevelName='+ $('GeoLevelName').value);"
+				onFocus="showtip('{-$dic.DBLevName[2]-}')" />
 			<br /><br />
 			<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevDesc[2]-}')">
 			{-$dic.DBLevDesc[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBLevDesc[1]-}</span></a><br />
 			<textarea id="GeoLevelDesc" name="GeoLevelDesc" {-$ro-} tabindex="2" style="width:500px;"
 					onFocus="showtip('{-$dic.DBLevDesc[2]-}')"></textarea>
 			<hr />
-<!--			{-$dic.DBLevHaveMap[0]-}<b>*</b><span>{-$dic.DBLevHaveMap[1]-}</span></a>
-			<input type="checkbox" id="chkmap" name="chkmap" tabindex="3" onClick="$('shwmap').style.display = this.checked ? 'block' : 'none';" />
-			<div id="shwmap" style="display:none;"></div>-->
 			<table border="0" width="100%">
 				<tr>
 				<td>

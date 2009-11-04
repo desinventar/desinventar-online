@@ -321,19 +321,6 @@ switch ($cmd) {
 				$range[] = array('',       "1000001 ->",        "000000");
 				$t->assign ("range", $range);
 				// STATISTIC
-/*				foreach ($ef1 as $k=>$i) {
-					$sst[$k."Q"] = array($k."Q|>|-1", $i[0]);
-					$nst[$k] = array($k."|=|-1", $i[0]);
-				}
-				foreach ($ef2 as $k=>$i)
-					$nst[$k] = array("$k|>|-1", $i[0]);
-				foreach ($ef3 as $k=>$i)
-					$nst[$k] = array("$k|>|0", $i[0]);
-				foreach ($sec as $k=>$i)
-					$nst[$k] = array("$k|S|-1", $i[0]);
-				$sst1 = array_diff_key($nst, array_flip(array_keys($sst)));
-				$t->assign ("sst1", $sst1);
-				$t->assign ("sst", $sst);*/
 				$st = array();
 				foreach ($us->q->loadGeoLevels('', -1, false) as $k=>$i)
 					$st["StatisticGeographyId_". $k] = array($i[0], $i[1]);

@@ -68,12 +68,6 @@ if (isset($post['page']) || isset($post['_S+cmd'])) {
 		$cou = $us->q->getnumrows($sql);
 		$sdl = $us->q->totalize($sql);
 		$dlt = $us->q->getresult($sdl);
-/*		if ($post['_S+cmd'] != "export") {
-			foreach ($dlt as $k=>$i) {
-				if (is_numeric($i))
-					$dlt[$k] = number_format($i, 0, ',', ' ');
-			}
-		}*/
 		// 2009-08-10 (jhcaiced) In Consolidates by Event/Cause, fix
 		// the value
 		$dlt['EventName'] = '';
