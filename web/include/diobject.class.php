@@ -96,7 +96,7 @@ class DIObject {
 		}		
 	}
 	
-	public function set($prmKey, $prmValue,$LangIsoCode='') {
+	public function set($prmKey, $prmValue, $LangIsoCode='') {
 		//printf("%3s %-20s %s\n", $LangIsoCode, $prmKey, $prmValue);
 		if ($LangIsoCode == '') {
 			$obj = &$this->oField;

@@ -117,7 +117,6 @@ class DIRegion extends DIObject {
 			$this->setConnection($this->get('RegionId'));
 			try {
 				$sQuery = "SELECT * FROM Info WHERE LangIsoCode='" . $prmLangIsoCode . "'";
-				fb($sQuery);
 				foreach($this->conn->query($sQuery) as $row) {
 					$InfoValue = $row['InfoValue'];
 					$InfoKey   = $row['InfoKey'];
@@ -168,7 +167,7 @@ class DIRegion extends DIObject {
 		$this->setConnection('core');
 		return $iReturn;
 	}
-
+	
 	public function load() {
 		$iReturn = ERR_NO_ERROR;
 		if ($iReturn > 0) {

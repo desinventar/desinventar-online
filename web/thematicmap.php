@@ -139,7 +139,7 @@ if (isset($post['_M+cmd'])) {
 	$t->assign ("tot", $cou);
 	$t->assign ("qdet", $us->q->getQueryDetails($dic, $post));
 	$mapfile = str_replace('\\', '/', $m->filename());
-	$worldmap = str_replace('\\','/', DATADIR . "/main/worldmap/world_adm0.map");
+	$worldmap = str_replace('\\','/', DATADIR . "/worldmap/world_adm0.map");
 	$legend = "/cgi-bin/". MAPSERV ."?map=" . $mapfile . "&SERVICE=WMS&VERSION=1.1.1".
 				"&REQUEST=getlegendgraphic&LAYER=". substr($myly, 0, 12) ."&FORMAT=image/png";
 	$t->assign ("legend", $legend);	
