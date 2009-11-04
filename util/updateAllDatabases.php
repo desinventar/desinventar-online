@@ -27,26 +27,28 @@ foreach($q->core->query("SELECT * FROM Region ORDER BY RegionId") as $row) {
 	$RegionList[] = $row['RegionId'];
 }
 //$RegionList = array('GTM-1255694888-guatemala_inventario_historico_de_desastres');
+$RegionList = array('BOL-1250695036-bolivia_gran_chaco');
 foreach ($RegionList as $RegionId) {
 	$r = new DIRegion($us, $RegionId);
 	$RegionUUID = $r->get('OptionOldName');
 	if ($RegionUUID != '') {
 		$InfoGeneral_eng = '';
 		foreach($dbh->query("SELECT * FROM Region WHERE RegionUUID='" . $RegionUUID . "'") as $row) {
-			// Copy Region Data
-			$r->set('CountryIso'     , $row['CountryIsoCode']);
-			$r->set('RegionLabel'    , $row['RegionLabel']);
-			$r->set('RegionId'       , $RegionId);
-			$r->set('InfoGeneral'    , $row['RegionDesc']);
-			$r->setActive($row['RegionActive']);
-			$r->setPublic($row['RegionPublic']);
 			$LangIsoCode = $row['RegionLangCode'];
 			if ($LangIsoCode == 'es') { $LangIsoCode = 'spa'; }
 			if ($LangIsoCode == 'en') { $LangIsoCode = 'eng'; }
 			if ($LangIsoCode == 'fr') { $LangIsoCode = 'fre'; }
-			if ($LangIsoCode == 'pr') { $LangIsoCode = 'por'; }
-			
-			$r->set('LangIsoCode'      , $LangIsoCode);
+			if ($LangIsoCode == 'pr') { $LangIsoCode = 'por'; }			
+			$r->set('LangIsoCode', $LangIsoCode);
+
+			// Copy Region Data
+			$r->set('CountryIso'     , $row['CountryIsoCode']);
+			$r->set('RegionLabel'    , $row['RegionLabel']);
+			$r->set('RegionId'       , $RegionId);
+			$r->set('InfoGeneral'    , $row['RegionDescEN'], 'eng');
+			$r->set('InfoGeneral'    , $row['RegionDesc'], $LangIsoCode);
+			$r->setActive($row['RegionActive']);
+			$r->setPublic($row['RegionPublic']);
 			$r->set('CountryIso'       , $row['CountryIsoCode']);
 			// 2009-08-19 Fix Period when moving databases
 			$BeginDate = $row['PeriodBeginDate'];
@@ -56,27 +58,20 @@ foreach ($RegionList as $RegionId) {
 			
 			$r->set('PeriodBeginDate'  , $BeginDate);
 			$r->set('PeriodEndDate'    , $EndDate);
-			$r->set('OptionAdminURL'   , $row['OptionAdminURL']);
+			$r->set('OptionAdminURL'   , $row['OptionAdminURL'], $LangIsoCode);
 			$r->set('OptionOutOfPeriod', $row['OptionOutOfPeriod']);
 			$r->set('OptionOldName'    , $row['RegionUUID']);
 			$r->set('GeoLimitMinX'     , $row['GeoLimitMinX']);
 			$r->set('GeoLimitMaxX'     , $row['GeoLimitMaxX']);
 			$r->set('GeoLimitMinY'     , $row['GeoLimitMinY']);
 			$r->set('GeoLimitMaxY'     , $row['GeoLimitMaxY']);
-			$r->set('InfoCredits'      , $row['RegionCredits']);
-			$InfoGeneral_eng = $row['RegionDescEN'];
+			$r->set('InfoCredits'      , $row['RegionCredits'], $LangIsoCode);
 		} //foreach
 		printf("%-20s %-40s\n", $RegionUUID, $RegionId);
 		$iReturn = ERR_NO_ERROR;
 		if ($iReturn > 0) {
 			$r->q->core->query("DELETE FROM Region WHERE RegionId='" . $RegionId . "'");
 			$r->insert();
-			if ($LangIsoCode != 'eng') {
-				// Create a Record for Info in eng language
-				$r->set('LangIsoCode', 'eng');
-				$r->set('InfoGeneral', $InfoGeneral_eng);
-				$r->saveInfoTrans('eng');
-			}
 		} //if
 		$us->open($RegionId);
 		$data_dir1 = '/var/lib/desinventar-8.1';
@@ -145,5 +140,4 @@ foreach ($RegionList as $RegionId) {
 
 $dbh = null;
 $q = null;
-
 </script>
