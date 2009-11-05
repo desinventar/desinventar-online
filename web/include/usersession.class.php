@@ -429,15 +429,16 @@ class UserSession {
 	public function updateUser($UserId, $UserFullName, $UserEMail, $UserPasswd, $UserCountry, $UserCity, $UserActive) {
 		$iReturn = ERR_DEFAULT_ERROR;
 		$sQuery = "UPDATE User SET " . 
-				  "UserEMail='" . $UserEMail . "'," .
-				  "UserPasswd='" . $UserPasswd . "'," .
+				  "UserEMail='" . $UserEMail . "',".
 				  "UserFullName='" . $UserFullName . "'," .
 				  "Organization=''," .
 				  "CountryIso='" . $UserCountry . "'," .
 				  "UserCity='" . $UserCity . "'," .
 				  "UserNotes=''," .
-				  "UserActive=" . $UserActive .
-				  " WHERE UserId='" . $UserId . "'";
+				  "UserActive=" . $UserActive;
+		if (!empty($UserPasswd))
+			$sQuery .= ", UserPasswd='" . md5($UserPasswd) . "'";
+		$sQuery .=  " WHERE UserId='" . $UserId . "'";
 		if ($result = $this->q->core->query($sQuery))
 			$iReturn = ERR_NO_ERROR;
 		return $iReturn;
