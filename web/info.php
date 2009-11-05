@@ -49,8 +49,8 @@ else
 
 $us->open($reg);
 
-// EDIT REGION: Form to Create and assign regions
 if (isset($infocmd)) {
+	// EDIT REGION: Form to Create and assign regions
 	$ifo = 0;
 	$data = form2data($post);
 	$r = new DIRegion($us, $data['RegionId']);
@@ -65,9 +65,8 @@ if (isset($infocmd)) {
 		$t->assign ("ctl_errupdinfo", true);
 		$t->assign ("updstatinfo", $ifo);
 	}
-}
-// EDIT ROLE: Form to Create and assign role
-elseif (isset($get['rolecmd'])) {
+} elseif (isset($get['rolecmd'])) {
+	// EDIT ROLE: Form to Create and assign role
 	$cmd = $get['rolecmd'];
 	if (($cmd == "insert") || ($cmd == "update")) {
 		// Set Role in RegionAuth
@@ -84,9 +83,8 @@ elseif (isset($get['rolecmd'])) {
 		$t->assign ("rol", $us->getRegionRoleList($reg));
 		$t->assign ("ctl_rollist", true);
 	}
-}
-// EDIT REGION: Form to Create and assign regions
-elseif (isset($get['logcmd'])) {
+} elseif (isset($get['logcmd'])) {
+	// EDIT REGION: Form to Create and assign regions
 	$cmd = $get['logcmd']; 
 	if ($cmd == "insert") {
 		$stat = 1;
@@ -115,13 +113,16 @@ elseif (isset($get['logcmd'])) {
 		$t->assign ("log", $us->q->getRegLogList());
 		$t->assign ("ctl_loglist", true);
 	}
-}
-else {
-	if ($urol == "OBSERVER")
+} else {
+	// DISPLAY REGION INFO
+	if ($urol == "OBSERVER") {
 		$t->assign ("ro", "disabled");
+	}
 	$lang[0] = ''; //$_SESSION['lang'];
 	$lang[1] = 'eng';
 	$inf = $us->q->getDBInfo();
+	//$r = new DIRegion($us, $RegionId);
+	//fb($r->oField);
 	foreach ($lang as $lng) {
 		$info[$lng]['InfoCredits'] 		= array($inf['InfoCredits|'. $lng], "TEXT");
 		$info[$lng]['InfoGeneral'] 		= array($inf['InfoGeneral|'. $lng], "TEXT");
