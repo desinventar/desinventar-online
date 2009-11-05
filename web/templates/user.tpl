@@ -94,7 +94,7 @@
 	<form id="passlostfrm" name="passlostfrm" method="GET" 
 		action="javascript:var s=$('passlostfrm').serialize(); mod='plost'; sendData('', 'user.php', s, '');"
 		onSubmit="javascript:var a=new Array('UserEMail'); return(checkForm(a, '{-#errsendemail#-}'));">
-		{-#tuseremail#-} <input id="UserEMail" name="UserEMail" type="text" size="20" class="line">
+		{-#tuseremail#-} <input id="UserEMail" name="UserEMail" type="text" size="20" class="line" />
 		<input id="cmd" name="cmd" value="passlost" type="hidden" />
 		<input id="opt" name="opt" value="sendnewpass" type="hidden" />
 		<input type="submit" value="{-#bsend#-}" class="line" /> <input type="reset" value="{-#bcancel#-}" class="line" />
@@ -160,9 +160,9 @@
 		<td><input type="password" id="UserPasswd" name="UserPasswd" size="8" maxlength="20" class="line" />
 			<input type="button" value="ok" class="line" onClick="$('userpaaddsect').style.display='block';
 				updateList('userpaaddsect', 'user.php', 'cmd=chkpasswd&UserPasswd='+ $('UserPasswd').value);" />
-			<input type="hidden" id="UserId" name="UserId" value="{-$usri.UserId-}" />
+<!--			<input type="hidden" id="UserId" name="UserId" value="{-$usri.UserId-}" />
 			<input type="hidden" id="UserCountry" name="UserCountry" value="{-$usri.UserCountry-}" />
-			<input type="hidden" id="UserActive" name="UserActive" value="{-$usri.UserActive-}" />
+			<input type="hidden" id="UserActive" name="UserActive" value="{-$usri.UserActive-}" />-->
 		</td>
 	</tr>
 	</table>
@@ -180,7 +180,7 @@
 			<input type="text" id="UserId" name="UserId" size="15" maxlength="15" class="line"
 				onBlur="updateList('chklogin', 'user.php', 'cmd=chklogin&UserId='+ $('UserId').value);" />
 			<span id="chklogin" style="display:inline"></span>
-			<input type="hidden" id="UserPasswd" name="UserPasswd" value="{-$usri.UserPasswd-}" />
+			<input type="hidden" id="UserPasswd" name="UserPasswd" value="" />
 		</td>
 	</tr>
 	<tr>
