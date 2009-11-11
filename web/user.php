@@ -53,12 +53,8 @@ if (isset($_GET['cmd'])) {
 		case "login":
 			if ($us->login($_GET['userid'], $_GET['password']) > 0) {
 				$u = new DIUser($us, $us->UserId);
-				$t->assign ("user", $us->UserId);
-				$t->assign ("ctl_logged", true);		// Login Sucess !!
-			}
-			else {
-				$t->assign ("ctl_invalid", true);		// Login failed
-				$t->assign ("ctl_login", true);
+				echo "OK";	// Login success
+				exit();
 			}
 		break;
 		// RELOGIN: Previous session exists, reconnect to the same session
@@ -69,7 +65,8 @@ if (isset($_GET['cmd'])) {
 		// LOGOUT : Logut current user and show the login panel again
 		case "logout":
 			$us->logout();
-			$t->assign ("ctl_login", true);
+			echo "OK";
+			exit();
 		break;
 		// PASSLOST: Allows to recover a user's password by sending 
 		case "passlost":
@@ -156,7 +153,7 @@ if (isset($_GET['cmd'])) {
 		break;
 		case "chkpasswd":
 			// Check if password is correct (ask to dicore). if is OK show dialog to change it.
-			if ($us->validateUser($us->UserId, $_GET['UserPasswd'])) {
+			if (!iserror($us->validateUser($us->UserId, $_GET['UserPasswd']))) {
 				$t->assign ("ctl_chkpasswd", true);
 				$t->assign ("usri", form2user($us->getUserInfo($us->UserId)));
 			}
