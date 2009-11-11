@@ -169,10 +169,10 @@ class UserSession {
 	// Validate a user/passwd pair against database
 	public function validateUser($prmUserId, $prmUserPasswd) {
 		$iReturn = ERR_DEFAULT_ERROR;
-		if ( ($prmUserId == "") && ($prmUserPasswd == "")) {
-			// This is an anonymous session
+		// This is an anonymous session
+		if ( ($prmUserId == "") && ($prmUserPasswd == ""))
 			$iReturn = ERR_NO_ERROR;
-		} else {
+		else {
 			$sQuery = "SELECT * FROM User WHERE UserId='" . $prmUserId . "' OR UserNotes LIKE '%(UserName=" . $prmUserId . ")'" ;
 			try {
 				$result = $this->q->core->query($sQuery);

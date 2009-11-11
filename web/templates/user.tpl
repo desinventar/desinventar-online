@@ -1,9 +1,10 @@
 {-config_load file=`$lg`.conf section="di8_user"-}
+<!--
 {-*** ERRMSG: INVALID USER OR PASSWORD - USER MENU ***-}
 {-if $ctl_invalid-}
 	<span class="dlgmsg">{-#errinvaliduser#-}</span>
 {-/if-}
-
+-->
 {-*** USER LOGIN WINDOW - USER MENU ***-}
 {-if $ctl_login-}
 	<form action="javascript:updateUserBar('user.php', 'login', $('userid').value, $('password').value);" id="uf" method="get">
@@ -27,7 +28,7 @@
 	</table>
 	</form>
 {-/if-}
-
+<!--
 {-*** LOGIN SUCESSFULL - USER MENU ***-}
 {-if $ctl_logged-}
 	<span class="txt"><b>{-#tuser#-}: {-$user-}</b></span>&nbsp;&nbsp;
@@ -84,7 +85,7 @@
  {-/if-}
 	</table><br />
 {-/if-} {-** end ctl_welcome **-}
-
+-->
 {-*** PASSWORD RECOVERY - CONTENT SECTION ***-}
 {-if $ctl_passlost-}
 	<h2>{-#tgetemailpass#-}</h2><br>
@@ -141,28 +142,26 @@
 {-/if-}
 {-*** USER INFO EDIT - CONTENT ***-}
 {-if $ctl_adminusr || $ctl_viewpref || $ctl_chkpasswd-}
- {-if $ctl_adminusr || $ctl_viewpref-}
-  {-if $ctl_viewpref-}
+ {-if $ctl_viewpref-}
 	<h2>{-#tuserprefer#-}</h2>
-	<span id="userpastatusmsg" class="dlgmsg"></span><br>
-  {-else-}
+	<span id="userpastatusmsg" class="dlgmsg"></span><br />
+ {-/if-}
+ {-if $ctl_adminusr-}
 	<div id="userpaaddsect" style="display:none">
-  {-/if-}
+ {-/if-}
+ {-if $ctl_adminusr || $ctl_viewpref-}
 	<form id="userpafrm" name="userpafrm" method="GET" 
-			action="javascript:var s=$('userpafrm').serialize(); sendData('','user.php', s, '');"
-			onSubmit="javascript:var a=new Array('UserId', 'UserEMail', 'UserFullName'
-					{-if $ctl_viewpref-}, 'UserPasswd'{-/if-}); return(checkForm(a, '{-#errmsgfrmregist#-}'));">
+		action="javascript:var s=$('userpafrm').serialize(); sendData('','user.php', s, '');"
+		onSubmit="javascript:var a=new Array('UserId', 'UserEMail', 'UserFullName'
+				{-if $ctl_viewpref-}, 'UserPasswd'{-/if-}); return(checkForm(a, '{-#errmsgfrmregist#-}'));">
  {-/if-}
  {-if $ctl_viewpref-}
 	<table>
 	<tr>
 		<td><b style="color:darkred;">{-#toldpassword#-}</b></td>
 		<td><input type="password" id="UserPasswd" name="UserPasswd" size="8" maxlength="20" class="line" />
-			<input type="button" value="ok" class="line" onClick="$('userpaaddsect').style.display='block';
+			<input type="button" value="Ok" class="line" onClick="$('userpaaddsect').style.display='block';
 				updateList('userpaaddsect', 'user.php', 'cmd=chkpasswd&UserPasswd='+ $('UserPasswd').value);" />
-<!--			<input type="hidden" id="UserId" name="UserId" value="{-$usri.UserId-}" />
-			<input type="hidden" id="UserCountry" name="UserCountry" value="{-$usri.UserCountry-}" />
-			<input type="hidden" id="UserActive" name="UserActive" value="{-$usri.UserActive-}" />-->
 		</td>
 	</tr>
 	</table>
@@ -192,7 +191,7 @@
   {-/foreach-}
 			</select>
 		</td>
-  {-/if-}{-* End ctl_chkpasswd *-}
+  {-/if-}
 	</tr>
 	<tr>
 		<td><b style="color:darkred;">{-#tname#-}</b></td>
@@ -213,9 +212,7 @@
   {-if $ctl_chkpasswd-}
 		<td>{-#tnewpassword#-}</td>
 		<td><input type="password" id="NUserPasswd" name="NUserPasswd" size="8" maxlength="20" class="line" />
-<!--onBlur="updateList('userpastatusmsg', 'user.php',  'cmd=chknewpass&NUserPasswd='+ $('NUserPasswd').value + '&NUserPasswd2='+ $('NUserPasswd2').value);"> -->
 			{-#trenewpassw#-}<input type="password" id="NUserPasswd2" name="NUserPasswd2" size="8" maxlength="20" class="line" />
-<!--onBlur="updateList('userpastatusmsg', 'user.php',  'cmd=chknewpass&NUserPasswd='+ $('NUserPasswd').value + '&NUserPasswd2='+ $('NUserPasswd2').value);">-->
 		</td>
   {-else-}
 		<td><b>{-#tactive#-}</b></td>
@@ -231,6 +228,7 @@
 	</tr>
 	</table>
  {-/if-}
+ {-* End ctl_adminusr || ctl_chkpasswd *-}
  {-if $ctl_adminusr || $ctl_viewpref-}
 	</form>
  {-/if-}

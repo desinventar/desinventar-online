@@ -163,7 +163,7 @@
 					usrw.show();
 				break;
 				case "musrout":
-					userMan('usr', 'user.php', 'logout', '');
+					userMan('logout', '');
 				break;
 				case "musrmya":
 					updateList('dbl', 'user.php', 'cmd=viewpref');
@@ -464,13 +464,18 @@
 		maxWidth: 200, minWidth: 100, showDelay: 50, trackMouse: true });
 	});
     // end ExtJS object
-	function userMan(div, url, cmd, opt) {
+	function userMan(cmd, opt) {
 		var pars = "cmd=" + cmd;
 		if (opt != "")
 			pars += "&"+ opt;
-		var us = new Ajax.Updater(div, url, { method: 'get', parameters: pars,
-			onComplete: function(request) {
-				window.location.reload(false);
+		var lsAjax = new Ajax.Request('user.php', {
+			method: 'get', parameters: pars,
+			onSuccess: function(request) {
+				var res = request.responseText;
+				if (res.substr(0, 2) == "OK")
+					window.location.reload(false);
+				else
+					alert("{-#errinvaliduser#-}");
 			}
 		});
 	}
@@ -1391,8 +1396,7 @@
 				<div id="usr-win" class="x-hidden">
 					<div class="x-window-header">{-$userid-} - {-$role-}</div>
 					<div id="usr">
-					<form method="get" action="javascript: userMan('usr', 'user.php', 'login', 'userid=' + 
-							$('userid').value + '&password=' + $('password').value);" >
+					<form method="get" action="javascript: userMan('login', 'userid=' + $('userid').value + '&password=' + $('password').value);" >
 						<table border="0" align="center" valign="middle" style="margin-top:20px">
 						<tr>
 						<td>
@@ -1508,9 +1512,9 @@
     <!-- Select from Map testing ... 'selectionmap.php' -->
     <dt>{-#mgeosection#-}</dt>
     <dd>
-  {-foreach name=glev key=k item=i from=$glev-}
+ {-foreach name=glev key=k item=i from=$glev-}
       <span class="dlgmsg" onMouseOver="showtip('{-$i[1]-}');">{-$i[0]-}</span> |
-  {-/foreach-}
+ {-/foreach-}
       <div id="qgeolst" style="height: 280px;" class="dwin" ext:qtip="{-#thlpquery#-}">
 {-/if-}
 {-** END ctl_qrydsg **-}
@@ -1910,14 +1914,14 @@
   </form>
 {-/if-} {-** END ctl_qrydsg **-}
 {-if $ctl_show || $ctl_mainpage-}
- </div> <!-- id = west-->
- <!-- END DI8 QUERY FORM -->
- <!-- BEG HELP SECTION -->
- <div id="south">
+</div> <!-- id = west-->
+	<!-- END DI8 QUERY FORM -->
+	<!-- BEG HELP SECTION -->
+	<div id="south">
 	<textarea id="_DIDesc" wrap="hard" class="hlp" readonly style="width:80%; height:30px;">{-#tdescinfo#-}</textarea>
 	<a href="javascript:void(null)" onClick="window.open('doc.php?m=metguide', 'doc', winopt);"
 		class="dlgmsg" style="font-size: 8pt;">{-#hmoreinfo#-}</a>
- </div>
+	</div>
  <!-- END HELP SECTION -->
 </body>
 </html>
