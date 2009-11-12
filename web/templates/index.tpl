@@ -549,289 +549,297 @@
 		{-/if-}
 
 		{-if $ctl_show-}
-		function grpSelectbyType(fld) {
-			var grp = $(fld).value;
-			// Comparatives
-			if (grp == "D.EventId" || grp == "D.CauseId" || grp.substr(0,13) == "D.GeographyId") {
-				//disab($('_G+K_line'));
-				disabAxis2();
-				enab($('_G+K_pie'));
-				$('_G+Kind').value = "PIE";
-				$('_G+Period').value = "";
-				disab($('_G+Period'));
-				$('_G+Stat').value = "";
-				disab($('_G+Stat'));
-				disab($('_G+Scale'));
-				disab($('_G+M_accu'));
-				disab($('_G+M_over'));
-				enab($('_G+D_perc'));
-			}
-			else {
-				//enab($('_G+K_line'));
-				disab($('_G+K_pie'));
-				$('_G+Kind').value = "BAR";
-				enab($('_G+Period'));
-				enab($('_G+Stat'));
-				$('_G+Period').value = 'YEAR';
-				enab($('_G+Scale'));
-				var histt = $(fld).value;
-				if (histt.substr(19, 1) == "|") {
+			function grpSelectbyType(fld) {
+				var grp = $(fld).value;
+				// Comparatives
+				if (grp == "D.EventId" || grp == "D.CauseId" || grp.substr(0,13) == "D.GeographyId") {
+					//disab($('_G+K_line'));
 					disabAxis2();
+					enab($('_G+K_pie'));
+					$('_G+Kind').value = "PIE";
+					$('_G+Period').value = "";
+					disab($('_G+Period'));
+					$('_G+Stat').value = "";
+					disab($('_G+Stat'));
+					disab($('_G+Scale'));
 					disab($('_G+M_accu'));
-					enab($('_G+M_over'));
+					disab($('_G+M_over'));
+					enab($('_G+D_perc'));
+				} else {
+					//enab($('_G+K_line'));
+					disab($('_G+K_pie'));
+					$('_G+Kind').value = "BAR";
+					enab($('_G+Period'));
+					enab($('_G+Stat'));
+					$('_G+Period').value = 'YEAR';
+					enab($('_G+Scale'));
+					var histt = $(fld).value;
+					if (histt.substr(19, 1) == "|") {
+						disabAxis2();
+						disab($('_G+M_accu'));
+						enab($('_G+M_over'));
+					} else {
+						enabAxis2();
+						enab($('_G+M_accu'));
+						disab($('_G+M_over'));
+					}
+					disab($('_G+D_perc'));
 				}
-				else {
+				if (fld == "_G+TypeH")
+					$('_G+TypeC').value = "";
+				if (fld == "_G+TypeC")
+					$('_G+TypeH').value = "";
+				$('_G+Type').value = grp;
+			}
+			
+			function grpSelectbyKind() {
+				comp = $('_G+TypeC').value;
+				if ($('_G+Kind').value == "BAR" || $('_G+Kind').value == "LINE" || ($('_G+Kind').value != "PIE" &&
+					(comp == "D.EventId" || comp == "D.CauseId" || comp.substr(0,13) == "D.GeographyId"))) {
 					enabAxis2();
 					enab($('_G+M_accu'));
 					disab($('_G+M_over'));
+					enab($('_G+Scale'));
+				} else {
+					disabAxis2();
+					disab($('_G+M_accu'));
+					disab($('_G+Scale'));
 				}
-				disab($('_G+D_perc'));
 			}
-			if (fld == "_G+TypeH")
-				$('_G+TypeC').value = "";
-			if (fld == "_G+TypeC")
-				$('_G+TypeH').value = "";
-			$('_G+Type').value = grp;
-		}
-		function grpSelectbyKind() {
-			comp = $('_G+TypeC').value;
-			if ($('_G+Kind').value == "BAR" || $('_G+Kind').value == "LINE" || ($('_G+Kind').value != "PIE" &&
-				(comp == "D.EventId" || comp == "D.CauseId" || comp.substr(0,13) == "D.GeographyId"))) {
-				enabAxis2();
-				enab($('_G+M_accu'));
-				disab($('_G+M_over'));
-				enab($('_G+Scale'));
+
+			// forms management
+			function combineForms(dcf, ref) {
+				var dc = $(dcf);
+				var rf = $(ref).elements;
+				var ih = null;
+				for (i=0; i < rf.length; i++) {
+					if (rf[i].disabled == false) {
+						ih = document.createElement("input");
+						ih.type   = "hidden";
+						ih.value  = rf[i].value;
+						ih.name   = rf[i].name;
+						dc.appendChild(ih);
+					}
+				}
 			}
-			else {
-				disabAxis2();
-				disab($('_G+M_accu'));
-				disab($('_G+Scale'));
+
+			function setSelMap(code, gid, opc) {
+				if (opc)
+					setgeo(gid);
+				else
+					unsetgeo(gid);
 			}
-		}
-		// forms management
-		function combineForms(dcf, ref) {
-		  var dc = $(dcf);
-		  var rf = $(ref).elements;
-		  var ih = null;
-		  for (i=0; i < rf.length; i++) {
-			if (rf[i].disabled == false) {
-				ih = document.createElement("input");
-				ih.type   = "hidden";
-				ih.value  = rf[i].value;
-				ih.name   = rf[i].name;
-				dc.appendChild(ih);
+
+			function setgeo(k) {
+				// Find and fill childs
+				$('itree' + k).style.display = 'block';
+				updateList('itree' + k, 'index.php', 'r={-$reg-}&cmd=glist&GeographyId=' + k); 
 			}
-		  }
-		}
-		function setSelMap(code, gid, opc) {
-			if (opc)
-				setgeo(gid);
-			else
-				unsetgeo(gid);
-		}
-		function setgeo(k) {
-		  // Find and fill childs
-		  $('itree' + k).style.display = 'block';
-		  updateList('itree' + k, 'index.php', 'r={-$reg-}&cmd=glist&GeographyId=' + k); 
-		}
-		function unsetgeo(k) {
-			// clean childs first
-			$('itree' + k).innerHTML = '';
-			$('itree' + k).style.display = 'none';
-		}
-		function saveRes(cmd, typ) {
-			if($('DCRes').value != '') {
-			  switch ($('DCRes').value) {
-				case 'D':
-				  $('_D+saveopt').value = typ;
-				  sendList(cmd);
-				break;
-				case 'M':
-				  sendMap(cmd);
-				break;
-				case 'G':
-				  sendGraphic(cmd);
-				break;
-				case 'S':
-				  $('_S+saveopt').value = typ;
-				  sendStatistic(cmd);
-				break;
+
+			function unsetgeo(k) {
+				// clean childs first
+				$('itree' + k).innerHTML = '';
+				$('itree' + k).style.display = 'none';
+			}
+
+			function saveRes(cmd, typ) {
+				if($('DCRes').value != '') {
+					switch ($('DCRes').value) {
+						case 'D':
+							$('_D+saveopt').value = typ;
+							sendList(cmd);
+						break;
+						case 'M':
+							sendMap(cmd);
+						break;
+						case 'G':
+							sendGraphic(cmd);
+						break;
+						case 'S':
+							$('_S+saveopt').value = typ;
+							sendStatistic(cmd);
+						break;
+					} //switch
+				} //if
+			}
+
+			function sendList(cmd) {
+				if ($('_D+Field[]').length > 0) {
+					w = Ext.getCmp('westm');
+					s = Ext.getCmp('southm');
+					$('_D+cmd').value = cmd;
+					selectall('_D+Field[]');
+					var ob = $('_D+Field[]');
+					var mystr = "";
+					for (i=0; i < ob.length; i++) {
+						mystr += ob[i].value + ",";
+					}
+					mystr += "D.DisasterId";
+					$('_D+FieldH').value = mystr;
+					combineForms('DC', 'CD');
+					w.collapse();
+					s.collapse();
+					$('DC').action='data.php';
+					$('DC').submit();
+					//hideMap();
+					return true;
+				} else {
+					return false;
+				}
+			}
+
+			function sendMap(cmd) {
+			  if ($('_M+Type').length > 0) {
+				  w = Ext.getCmp('westm');
+				  s = Ext.getCmp('southm');
+				  //$('frmwait').innerHTML = waiting;
+				  $('_M+cmd').value = cmd;
+				  if (cmd == "export") {
+					// to export image save layers and extend..
+					var mm = dcr.map;
+					var extent = mm.getExtent();
+					//extent.transform(mm.prj1, mm.prj2);
+					var layers = mm.layers;
+					var activelayers = [];
+					for (i in layers) {
+						if (layers[i].getVisibility() && layers[i].calculateInRange() && !layers[i].isBaseLayer)
+							activelayers[activelayers.length] = layers[i].params['LAYERS'];
+					}
+					$('_M+extent').value = [extent.left,extent.bottom,extent.right,extent.top].join(',');
+					$('_M+layers').value = activelayers;
+				  }
+				  combineForms('DC', 'CM');
+				  w.collapse(); // hide()
+				  //e.collapse();
+				  s.collapse();
+				  $('DC').action='thematicmap.php';
+				  $('DC').submit();
+				  //hideMap();
+				  return true;
 			  }
+			  else
+				return false;
 			}
-		}
-		function sendList(cmd) {
-		  if ($('_D+Field[]').length > 0) {
-			w = Ext.getCmp('westm');
-			s = Ext.getCmp('southm');
-			$('_D+cmd').value = cmd;
-			selectall('_D+Field[]');
-			var ob = $('_D+Field[]');
-			var mystr = "";
-			for (i=0; i < ob.length; i++)
-			  mystr += ob[i].value + ",";
-			mystr += "D.DisasterId";
-			$('_D+FieldH').value = mystr;
-			combineForms('DC', 'CD');
-			w.collapse();
-			s.collapse();
-			$('DC').action='data.php';
-			$('DC').submit();
-			//hideMap();
-			return true;
-		  }
-		  else
-			return false;
-		}
-		function sendMap(cmd) {
-		  if ($('_M+Type').length > 0) {
+			function sendGraphic(cmd) {
 			  w = Ext.getCmp('westm');
 			  s = Ext.getCmp('southm');
-			  //$('frmwait').innerHTML = waiting;
-			  $('_M+cmd').value = cmd;
-			  if (cmd == "export") {
-				// to export image save layers and extend..
-				var mm = dcr.map;
-				var extent = mm.getExtent();
-				//extent.transform(mm.prj1, mm.prj2);
-				var layers = mm.layers;
-				var activelayers = [];
-				for (i in layers) {
-					if (layers[i].getVisibility() && layers[i].calculateInRange() && !layers[i].isBaseLayer)
-						activelayers[activelayers.length] = layers[i].params['LAYERS'];
-				}
-				$('_M+extent').value = [extent.left,extent.bottom,extent.right,extent.top].join(',');
-				$('_M+layers').value = activelayers;
-			  }
-			  combineForms('DC', 'CM');
-			  w.collapse(); // hide()
+			  $('_G+cmd').value = cmd;
+			  combineForms('DC', 'CG');
+			  w.collapse(); //hide()
 			  //e.collapse();
 			  s.collapse();
-			  $('DC').action='thematicmap.php';
+			  $('DC').action='graphic.php';
 			  $('DC').submit();
 			  //hideMap();
-			  return true;
-		  }
-		  else
-			return false;
-		}
-		function sendGraphic(cmd) {
-		  w = Ext.getCmp('westm');
-		  s = Ext.getCmp('southm');
-		  $('_G+cmd').value = cmd;
-		  combineForms('DC', 'CG');
-		  w.collapse(); //hide()
-		  //e.collapse();
-		  s.collapse();
-		  $('DC').action='graphic.php';
-		  $('DC').submit();
-		  //hideMap();
-		}
-		function sendStatistic(cmd) {
-		  if ($('_S+Firstlev').value != "" && $('_S+Field[]').length > 0) {
-			w = Ext.getCmp('westm');
-			s = Ext.getCmp('southm');
-			$('_S+cmd').value = cmd;
-			selectall('_S+Field[]');
-			var ob = $('_S+Field[]');
-			var mystr = "D.DisasterId||";
-			for (i=0; i < ob.length; i++)
-			  mystr += "," + ob[i].value;
-			$('_S+FieldH').value = mystr;
-			combineForms('DC', 'CS');
-			w.collapse();//hide()
-			//e.collapse();
-			s.collapse();
-			$('DC').action='statistic.php';
-			$('DC').submit();
-			//hideMap();
-			return true;
-		  }
-		  else
-			return false;
-		}
-		function saveQuery() {
-			selectall('_D+Field[]');
-			combineForms('DC', 'CD');
-			combineForms('DC', 'CM');
-			combineForms('DC', 'CG');
-			selectall('_S+Field[]');
-			combineForms('DC', 'CS');
-			$('_CMD').value='savequery';
-			$('DC').action='index.php';
-			$('DC').submit();
-			return true;
-		}
-		function addRowToTable() {
-			var tbl = $('tbl_range');
-			var lastRow = tbl.rows.length;
-			// if there's no header row in the table, then iteration = lastRow + 1
-			var iteration = lastRow;
-			var row = tbl.insertRow(lastRow);
-			var cellBeg = row.insertCell(0);
-			var textNode = document.createTextNode(iteration + 1);
-			cellBeg.appendChild(textNode);
-			// left cell
-			var cellLeft = row.insertCell(1);
-			var lim = document.createElement("input");
-			lim.setAttribute('type', 'text');
-			lim.setAttribute('size', '5');
-			lim.setAttribute('class', 'line');
-			lim.setAttribute('name', '_M+limit['+ iteration +']');
-			lim.setAttribute('id', '_M+limit['+ iteration +']');
-			lim.setAttribute('onBlur', "miv=parseInt($('_M+limit["+ iteration -1+"]').value)+1; $('_M+legend["+ iteration +"]').value='{-#mbetween#-} '+ miv +' - '+ this.value;");
-			cellLeft.appendChild(lim);
-			// center cell
-			var cellCenter = row.insertCell(2);
-			var leg = document.createElement('input');
-			leg.setAttribute('type', 'text');
-			leg.setAttribute('size', '20');
-			leg.setAttribute('class', 'line');
-			leg.setAttribute('name', '_M+legend['+ iteration +']');
-			leg.setAttribute('id', '_M+legend['+ iteration +']');
-			cellCenter.appendChild(leg);
-			// right cell
-			var cellRight = row.insertCell(3);
-			var ic = document.createElement('input');
-			ic.setAttribute('type', 'text');
-			ic.setAttribute('size', '3');
-			ic.setAttribute('class', 'line');
-			ic.setAttribute('id', '_M+ic['+ iteration +']');
-			ic.setAttribute('style', 'background:#00ff00;');
-			ic.setAttribute('onClick', "showColorGrid2('_M+color["+ iteration +"]','_M+ic["+ iteration +"]');");
-			cellRight.appendChild(ic);
-			var col = document.createElement('input');
-			col.setAttribute('type', 'hidden');
-			col.setAttribute('name', '_M+color['+ iteration +']');
-			col.setAttribute('id', '_M+color['+ iteration +']');
-			col.setAttribute('value', '00ff00;');
-			cellRight.appendChild(col);
-		}
-		function removeRowFromTable() {
-			var tbl = $('tbl_range');
-			var lastRow = tbl.rows.length;
-			if (lastRow > 2)
-				tbl.deleteRow(lastRow - 1);
-		}
-		function setTotalize(lnow, lnext) {
-		  var sour = $(lnow);
-		  var dest = $(lnext);
-		  // clean dest list
-		  for (var i = dest.length - 1; i>=0; i--) {
-			dest.remove(i);
-		  }
-		  for (var i=0; i < sour.length; i++) {
-			if (!sour[i].selected) {
-			  var opt = document.createElement('option');
-			  opt.value = sour[i].value;
-			  opt.text = sour[i].text;
-			  var pto = dest.options[i];
-			  try {
-				dest.add(opt, pto);  }
-			  catch(ex) {
-				dest.add(opt, i);    }
 			}
-		  }
-		}
+			function sendStatistic(cmd) {
+			  if ($('_S+Firstlev').value != "" && $('_S+Field[]').length > 0) {
+				w = Ext.getCmp('westm');
+				s = Ext.getCmp('southm');
+				$('_S+cmd').value = cmd;
+				selectall('_S+Field[]');
+				var ob = $('_S+Field[]');
+				var mystr = "D.DisasterId||";
+				for (i=0; i < ob.length; i++)
+				  mystr += "," + ob[i].value;
+				$('_S+FieldH').value = mystr;
+				combineForms('DC', 'CS');
+				w.collapse();//hide()
+				//e.collapse();
+				s.collapse();
+				$('DC').action='statistic.php';
+				$('DC').submit();
+				//hideMap();
+				return true;
+			  }
+			  else
+				return false;
+			}
+			function saveQuery() {
+				selectall('_D+Field[]');
+				combineForms('DC', 'CD');
+				combineForms('DC', 'CM');
+				combineForms('DC', 'CG');
+				selectall('_S+Field[]');
+				combineForms('DC', 'CS');
+				$('_CMD').value='savequery';
+				$('DC').action='index.php';
+				$('DC').submit();
+				return true;
+			}
+			function addRowToTable() {
+				var tbl = $('tbl_range');
+				var lastRow = tbl.rows.length;
+				// if there's no header row in the table, then iteration = lastRow + 1
+				var iteration = lastRow;
+				var row = tbl.insertRow(lastRow);
+				var cellBeg = row.insertCell(0);
+				var textNode = document.createTextNode(iteration + 1);
+				cellBeg.appendChild(textNode);
+				// left cell
+				var cellLeft = row.insertCell(1);
+				var lim = document.createElement("input");
+				lim.setAttribute('type', 'text');
+				lim.setAttribute('size', '5');
+				lim.setAttribute('class', 'line');
+				lim.setAttribute('name', '_M+limit['+ iteration +']');
+				lim.setAttribute('id', '_M+limit['+ iteration +']');
+				lim.setAttribute('onBlur', "miv=parseInt($('_M+limit["+ iteration -1+"]').value)+1; $('_M+legend["+ iteration +"]').value='{-#mbetween#-} '+ miv +' - '+ this.value;");
+				cellLeft.appendChild(lim);
+				// center cell
+				var cellCenter = row.insertCell(2);
+				var leg = document.createElement('input');
+				leg.setAttribute('type', 'text');
+				leg.setAttribute('size', '20');
+				leg.setAttribute('class', 'line');
+				leg.setAttribute('name', '_M+legend['+ iteration +']');
+				leg.setAttribute('id', '_M+legend['+ iteration +']');
+				cellCenter.appendChild(leg);
+				// right cell
+				var cellRight = row.insertCell(3);
+				var ic = document.createElement('input');
+				ic.setAttribute('type', 'text');
+				ic.setAttribute('size', '3');
+				ic.setAttribute('class', 'line');
+				ic.setAttribute('id', '_M+ic['+ iteration +']');
+				ic.setAttribute('style', 'background:#00ff00;');
+				ic.setAttribute('onClick', "showColorGrid2('_M+color["+ iteration +"]','_M+ic["+ iteration +"]');");
+				cellRight.appendChild(ic);
+				var col = document.createElement('input');
+				col.setAttribute('type', 'hidden');
+				col.setAttribute('name', '_M+color['+ iteration +']');
+				col.setAttribute('id', '_M+color['+ iteration +']');
+				col.setAttribute('value', '00ff00;');
+				cellRight.appendChild(col);
+			}
+			function removeRowFromTable() {
+				var tbl = $('tbl_range');
+				var lastRow = tbl.rows.length;
+				if (lastRow > 2)
+					tbl.deleteRow(lastRow - 1);
+			}
+			function setTotalize(lnow, lnext) {
+			  var sour = $(lnow);
+			  var dest = $(lnext);
+			  // clean dest list
+			  for (var i = dest.length - 1; i>=0; i--) {
+				dest.remove(i);
+			  }
+			  for (var i=0; i < sour.length; i++) {
+				if (!sour[i].selected) {
+				  var opt = document.createElement('option');
+				  opt.value = sour[i].value;
+				  opt.text = sour[i].text;
+				  var pto = dest.options[i];
+				  try {
+					dest.add(opt, pto);  }
+				  catch(ex) {
+					dest.add(opt, i);    }
+				}
+			  }
+			}
+		{-/if-}
+		{-if $ctl_show-}
 		function dechex(dec) {
 			var Char_hexadecimales = "0123456789ABCDEF";
 			var low = dec % 16;
