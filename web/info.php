@@ -122,7 +122,6 @@ if (isset($infocmd)) {
 	$lang[1] = 'eng';
 	$inf = $us->q->getDBInfo();
 	//$r = new DIRegion($us, $RegionId);
-	//fb($r->oField);
 	foreach ($lang as $lng) {
 		$info[$lng]['InfoCredits'] 		= array($inf['InfoCredits|'. $lng], "TEXT");
 		$info[$lng]['InfoGeneral'] 		= array($inf['InfoGeneral|'. $lng], "TEXT");

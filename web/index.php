@@ -15,12 +15,10 @@ $post = $_POST;
 $get  = $_GET;
 
 $cmd = getParameter('cmd','');
-$RegionId = getParameter('r', getParameter('RegionId', ''));
-if (isset($post['_REG']) && !empty($post['_REG']))
-	$RegionId = $post['_REG'];
-elseif ($cmd == '' && $RegionId == '')
+$RegionId = getParameter('r', getParameter('RegionId', getParameter('_REG'),''));
+if ($cmd == '' && $RegionId == '') {
 	$cmd = 'start';
-
+}
 // Default Template Values
 $t->assign('request_uri', $_SERVER['REQUEST_URI']);
 $t->assign('version', VERSION);
@@ -48,10 +46,9 @@ switch ($cmd) {
 		break;
 	case 'main':
 		// Direct access returns a list of public regions on this server
-		$d = new Query();
 		$t->assign('lg', $lg);
-		$t->assign("lglst", $d->loadLanguages(1));
-		$t->assign('regionlist', $d->listDB());
+		$t->assign("lglst", $us->q->loadLanguages(1));
+		$t->assign('regionlist', $us->q->listDB());
 		$t->assign("userid", $us->UserId);
 		$t->assign("ctl_noregion", true);
 		$t->assign('ctl_mainpage', true);
