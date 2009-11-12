@@ -6,7 +6,7 @@
 
  Utility to export databases from MySQL to SQLite
 
- 2009-08-20 Jhon H. Caicedo <jhcaiced@desinventar.org>
+ 2009-11-12 Jhon H. Caicedo <jhcaiced@desinventar.org>
 */
 $_SERVER["DI8_WEB"] = '../web';
 require_once($_SERVER["DI8_WEB"] . '/include/loader.php');
