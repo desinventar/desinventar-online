@@ -110,27 +110,31 @@ class DIRegion extends DIObject {
 				$iReturn = ERR_NO_DATABASE;
 			}
 			$this->setConnection('core');
+			$this->loadInfoTrans($this->get('LangIsoCode'));
 		}
-		$this->loadInfoTrans($this->get('LangIsoCode'));
 		return $iReturn;
 	}
 
 	public function loadInfoTrans($prmLangIsoCode) {
-		$iReturn = ERR_NO_ERROR;
-		$iReturn = $this->q->setDBConnection($this->get('RegionId'));
-		if ($iReturn > 0) {
-			$this->setConnection($this->get('RegionId'));
-			try {
-				$sQuery = "SELECT * FROM Info WHERE LangIsoCode='" . $prmLangIsoCode . "'";
-				foreach($this->conn->query($sQuery) as $row) {
-					$InfoValue = $row['InfoValue'];
-					$InfoKey   = $row['InfoKey'];
-					$this->set($InfoKey, $InfoValue,$prmLangIsoCode);
-				} // foreach
-			} catch (Exception $e) {
-				$iReturn = ERR_NO_DATABASE;
+		$iReturn = ERR_NO_DATABASE;
+		$RegionId = $this->get('RegionId');
+		if ($RegionId != 'core') {
+			$iReturn = ERR_NO_ERROR;
+			$iReturn = $this->q->setDBConnection($this->get('RegionId'));
+			if ($iReturn > 0) {
+				$this->setConnection($this->get('RegionId'));
+				try {
+					$sQuery = "SELECT * FROM Info WHERE LangIsoCode='" . $prmLangIsoCode . "'";
+					foreach($this->conn->query($sQuery) as $row) {
+						$InfoValue = $row['InfoValue'];
+						$InfoKey   = $row['InfoKey'];
+						$this->set($InfoKey, $InfoValue,$prmLangIsoCode);
+					} // foreach
+				} catch (Exception $e) {
+					$iReturn = ERR_NO_DATABASE;
+				}
+				$this->setConnection('core');
 			}
-			$this->setConnection('core');
 		}
 		return $iReturn;
 	}
