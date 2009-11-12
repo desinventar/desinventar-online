@@ -469,73 +469,86 @@
 
 		function userMan(cmd, opt) {
 			var pars = "cmd=" + cmd;
-			if (opt != "")
+			if (opt != "") {
 				pars += "&"+ opt;
+			}
 			var lsAjax = new Ajax.Request('user.php', {
-				method: 'get', parameters: pars,
-				onSuccess: function(request) {
-					var res = request.responseText;
-					if (res.substr(0, 2) == "OK")
-						window.location.reload(false);
-					else
-						alert("{-#errinvaliduser#-}");
-				}
+				method: 'get', 
+				parameters: pars,
+					onSuccess: function(request) {
+						var res = request.responseText;
+						if (res.substr(0, 2) == "OK") {
+							window.location.reload(false);
+						} else {
+							alert("{-#errinvaliduser#-}");
+						}
+					}
 			});
-		}
-	{-if $ctl_show-}
-		function disab(field) {
-			field.disabled = true;
-			field.className = "disabled";
-		}
-		function enab(field) {
-			field.disabled = false;
-			field.className = "";
-		}
-		function showtip(tip) {
-		  var d = $('_DIDesc');
-		  d.value = tip;
-		}
-		// Effects options
-		function showeff(val, x, y) {
-		  if (val == ">=" || val == "<=" || val == "=" || val == "-3") {
-			$(x).style.display = 'inline';
-			if (val == "-3")
-				$(y).style.display = 'inline';
-			else
-				$(y).style.display = 'none';
-		  }
-		  if (val == "" || val == "0" || val == "-1" || val == "-2") {
-			$(x).style.display = 'none';
-			$(y).style.display = 'none';
-		  }
-		}
-		function enadisEff(id, chk) {
-		  if (chk) {
-			$('o'+ id).style.display = 'inline';
-			enab($(id +'[0]'));
-			enab($(id +'[1]'));
-			enab($(id +'[2]'));
-		  }
-		  else {
-			$('o'+ id).style.display = 'none';
-			disab($(id +'[0]'));
-			disab($(id +'[1]'));
-			disab($(id +'[2]'));
-		  }
-		}
-		function disabAxis2() {
-			$('_G+Field2').value = "";
-			disab($('_G+Field2'));
-			disab($('_G+Scale2'));
-			disab($('_G+Data2'));
-			disab($('_G+Mode2'));
-		}
-		function enabAxis2() {
-			enab($('_G+Field2'));
-			enab($('_G+Scale2'));
-			enab($('_G+Data2'));
-			enab($('_G+Mode2'));
-		}
+		} //function
+
+		{-if $ctl_show-}
+			function disab(field) {
+				field.disabled = true;
+				field.className = "disabled";
+			}
+
+			function enab(field) {
+				field.disabled = false;
+				field.className = "";
+			}
+
+			function showtip(tip) {
+			  var d = $('_DIDesc');
+			  d.value = tip;
+			} //function
+
+			// Effects options
+			function showeff(val, x, y) {
+				if (val == ">=" || val == "<=" || val == "=" || val == "-3") {
+					$(x).style.display = 'inline';
+					if (val == "-3") {
+						$(y).style.display = 'inline';
+					} else {
+						$(y).style.display = 'none';
+					}
+				}
+				if (val == "" || val == "0" || val == "-1" || val == "-2") {
+					$(x).style.display = 'none';
+					$(y).style.display = 'none';
+				}
+			} //function
+
+			function enadisEff(id, chk) {
+				if (chk) {
+					$('o'+ id).style.display = 'inline';
+					enab($(id +'[0]'));
+					enab($(id +'[1]'));
+					enab($(id +'[2]'));
+				} else {
+					$('o'+ id).style.display = 'none';
+					disab($(id +'[0]'));
+					disab($(id +'[1]'));
+					disab($(id +'[2]'));
+				}
+			}
+
+			function disabAxis2() {
+				$('_G+Field2').value = "";
+				disab($('_G+Field2'));
+				disab($('_G+Scale2'));
+				disab($('_G+Data2'));
+				disab($('_G+Mode2'));
+			}
+
+			function enabAxis2() {
+				enab($('_G+Field2'));
+				enab($('_G+Scale2'));
+				enab($('_G+Data2'));
+				enab($('_G+Mode2'));
+			}
+		{-/if-}
+
+		{-if $ctl_show-}
 		function grpSelectbyType(fld) {
 			var grp = $(fld).value;
 			// Comparatives
