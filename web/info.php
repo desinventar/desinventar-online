@@ -120,25 +120,25 @@ if (isset($infocmd)) {
 	}
 	$lang[0] = ''; //$_SESSION['lang'];
 	$lang[1] = 'eng';
-	$inf = $us->q->getDBInfo();
-	//$r = new DIRegion($us, $RegionId);
+	//$inf = $us->q->getDBInfo();
+	$r = new DIRegion($us, $RegionId);
 	foreach ($lang as $lng) {
-		$info[$lng]['InfoCredits'] 		= array($inf['InfoCredits|'. $lng], "TEXT");
-		$info[$lng]['InfoGeneral'] 		= array($inf['InfoGeneral|'. $lng], "TEXT");
-		$info[$lng]['InfoSources'] 		= array($inf['InfoSources|'. $lng], "TEXT");
-		$info[$lng]['InfoSynopsis'] 	= array($inf['InfoSynopsis|'. $lng], "TEXT");
-		$info[$lng]['InfoObservation']	= array($inf['InfoObservation|'. $lng], "TEXT");
-		$info[$lng]['InfoGeography']	= array($inf['InfoGeography|'. $lng], "TEXT");
-		$info[$lng]['InfoCartography']	= array($inf['InfoCartography|'. $lng], "TEXT");
-		$info[$lng]['InfoAdminURL']		= array($inf['InfoAdminURL|'. $lng], "VARCHAR");
+		$info[$lng]['InfoCredits'] 		= array($r->get('InfoCredits'    , $lng), "TEXT");
+		$info[$lng]['InfoGeneral'] 		= array($r->get('InfoGeneral'    , $lng), "TEXT");
+		$info[$lng]['InfoSources'] 		= array($r->get('InfoSources'    , $lng), "TEXT");
+		$info[$lng]['InfoSynopsis'] 	= array($r->get('InfoSynopsis'   , $lng), "TEXT");
+		$info[$lng]['InfoObservation']	= array($r->get('InfoObservation', $lng), "TEXT");
+		$info[$lng]['InfoGeography']	= array($r->get('InfoGeography'  , $lng), "TEXT");
+		$info[$lng]['InfoCartography']	= array($r->get('InfoCartography', $lng), "TEXT");
+		$info[$lng]['InfoAdminURL']		= array($r->get('InfoAdminURL'   , $lng), "VARCHAR");
 	}
 	$t->assign ("info", $info);
-	$sett['GeoLimitMinX']	= array($inf['GeoLimitMinX|'], "NUMBER");
-	$sett['GeoLimitMinY']	= array($inf['GeoLimitMinY|'], "NUMBER");
-	$sett['GeoLimitMaxX']	= array($inf['GeoLimitMaxX|'], "NUMBER");
-	$sett['GeoLimitMaxY']	= array($inf['GeoLimitMaxY|'], "NUMBER");
-	$sett['PeriodBeginDate']= array($inf['PeriodBeginDate|'], "DATE");
-	$sett['PeriodEndDate']	= array($inf['PeriodEndDate|'], "DATE");
+	$sett['GeoLimitMinX']	= array($r->get('GeoLimitMinX'), "NUMBER");
+	$sett['GeoLimitMinY']	= array($r->get('GeoLimitMinY'), "NUMBER");
+	$sett['GeoLimitMaxX']	= array($r->get('GeoLimitMaxX'), "NUMBER");
+	$sett['GeoLimitMaxY']	= array($r->get('GeoLimitMaxY'), "NUMBER");
+	$sett['PeriodBeginDate']= array($r->get('PeriodBeginDate'), "DATE");
+	$sett['PeriodEndDate']	= array($r->get('PeriodEndDate'), "DATE");
 	$t->assign ("sett", $sett);
 	$urol = $us->getUserRole($reg);
 	//$t->assign ("usr", $us->getUserFullName(''));
