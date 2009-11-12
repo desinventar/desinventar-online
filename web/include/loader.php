@@ -119,13 +119,14 @@ if (MODE != "command") {
 	$t->right_delimiter = '-}';
 
 	// Choose Language
-	if (isset($_GET['lang']) && !empty($_GET['lang']))
-		$lg = $_GET['lang'];
-	elseif (isset($_SESSION['lang']))
-		$lg = $_SESSION['lang'];
-	else
-		$lg = getBrowserClientLanguage();
-
+	$lg = getParameter('lang');
+	if ($lg == '') {
+		if (isset($_SESSION['lang'])) {
+			$lg = $_SESSION['lang'];
+		} else {
+			$lg = getBrowserClientLanguage();
+		}
+	}
 	// 2009-02-21 (jhcaiced) Fix some languages from two to three character code
 	if ($lg == 'es') { $lg = 'spa'; }
 	if ($lg == 'en') { $lg = 'eng'; }

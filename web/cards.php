@@ -2,7 +2,7 @@
 /************************************************
  DesInventar8
  http://www.desinventar.org  
- (c) 1999-2009 Corporacion OSSO
+ (c) 1998-2009 Corporacion OSSO
  ***********************************************/
     
 require_once('include/loader.php');
@@ -70,17 +70,17 @@ function form2eedata($form) {
 	return $eedat;
 }
 
-if (isset($_POST['_REG']) && !empty($_POST['_REG'])) {
-	$sRegionId = $_POST['_REG'];
-	$us->open($sRegionId);
-} elseif (isset($_GET['r']) && !empty($_GET['r'])) {
-	$sRegionId = $_GET['r'];
-	$us->open($sRegionId);
-} else {
-	// Use Region Information from UserSession...
-	$sRegionId = $us->sRegionId;
+$sRegionId = getParameter('_REG', getParameter('r',''));
+if ($sRegionId == '') {
+	if ($us->sRegionId != 'core') {
+		$sRegionId = $us->sRegionId;
+	}
 }
-
+if ($sRegionId == '') {
+	exit(0);
+} else {
+	$us->open($sRegionId);
+}
 // 2009-08-07 (jhcaiced) Validate if Database Exists...
 if (! file_exists($us->q->getDBFile($sRegionId))) {
 	print "<h3>Requested Region doesn't exist<br>";
