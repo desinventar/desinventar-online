@@ -689,72 +689,77 @@
 			}
 
 			function sendMap(cmd) {
-			  if ($('_M+Type').length > 0) {
-				  w = Ext.getCmp('westm');
-				  s = Ext.getCmp('southm');
-				  //$('frmwait').innerHTML = waiting;
-				  $('_M+cmd').value = cmd;
-				  if (cmd == "export") {
-					// to export image save layers and extend..
-					var mm = dcr.map;
-					var extent = mm.getExtent();
-					//extent.transform(mm.prj1, mm.prj2);
-					var layers = mm.layers;
-					var activelayers = [];
-					for (i in layers) {
-						if (layers[i].getVisibility() && layers[i].calculateInRange() && !layers[i].isBaseLayer)
-							activelayers[activelayers.length] = layers[i].params['LAYERS'];
+				if ($('_M+Type').length > 0) {
+					w = Ext.getCmp('westm');
+					s = Ext.getCmp('southm');
+					//$('frmwait').innerHTML = waiting;
+					$('_M+cmd').value = cmd;
+					if (cmd == "export") {
+						// to export image save layers and extend..
+						var mm = dcr.map;
+						var extent = mm.getExtent();
+						//extent.transform(mm.prj1, mm.prj2);
+						var layers = mm.layers;
+						var activelayers = [];
+						for (i in layers) {
+							if (layers[i].getVisibility() && layers[i].calculateInRange() && !layers[i].isBaseLayer) {
+								activelayers[activelayers.length] = layers[i].params['LAYERS'];
+							}
+						} //for
+						$('_M+extent').value = [extent.left,extent.bottom,extent.right,extent.top].join(',');
+						$('_M+layers').value = activelayers;
 					}
-					$('_M+extent').value = [extent.left,extent.bottom,extent.right,extent.top].join(',');
-					$('_M+layers').value = activelayers;
-				  }
-				  combineForms('DC', 'CM');
-				  w.collapse(); // hide()
-				  //e.collapse();
-				  s.collapse();
-				  $('DC').action='thematicmap.php';
-				  $('DC').submit();
-				  //hideMap();
-				  return true;
-			  }
-			  else
-				return false;
+					combineForms('DC', 'CM');
+					w.collapse(); // hide()
+					//e.collapse();
+					s.collapse();
+					$('DC').action='thematicmap.php';
+					$('DC').submit();
+					//hideMap();
+					return true;
+				} else {
+					return false;
+				}
 			}
+
 			function sendGraphic(cmd) {
-			  w = Ext.getCmp('westm');
-			  s = Ext.getCmp('southm');
-			  $('_G+cmd').value = cmd;
-			  combineForms('DC', 'CG');
-			  w.collapse(); //hide()
-			  //e.collapse();
-			  s.collapse();
-			  $('DC').action='graphic.php';
-			  $('DC').submit();
-			  //hideMap();
-			}
-			function sendStatistic(cmd) {
-			  if ($('_S+Firstlev').value != "" && $('_S+Field[]').length > 0) {
 				w = Ext.getCmp('westm');
 				s = Ext.getCmp('southm');
-				$('_S+cmd').value = cmd;
-				selectall('_S+Field[]');
-				var ob = $('_S+Field[]');
-				var mystr = "D.DisasterId||";
-				for (i=0; i < ob.length; i++)
-				  mystr += "," + ob[i].value;
-				$('_S+FieldH').value = mystr;
-				combineForms('DC', 'CS');
-				w.collapse();//hide()
+				$('_G+cmd').value = cmd;
+				combineForms('DC', 'CG');
+				w.collapse(); //hide()
 				//e.collapse();
 				s.collapse();
-				$('DC').action='statistic.php';
+				$('DC').action='graphic.php';
 				$('DC').submit();
 				//hideMap();
-				return true;
-			  }
-			  else
-				return false;
 			}
+
+			function sendStatistic(cmd) {
+				if ($('_S+Firstlev').value != "" && $('_S+Field[]').length > 0) {
+					w = Ext.getCmp('westm');
+					s = Ext.getCmp('southm');
+					$('_S+cmd').value = cmd;
+					selectall('_S+Field[]');
+					var ob = $('_S+Field[]');
+					var mystr = "D.DisasterId||";
+					for (i=0; i < ob.length; i++) {
+						mystr += "," + ob[i].value;
+					}
+					$('_S+FieldH').value = mystr;
+					combineForms('DC', 'CS');
+					w.collapse();//hide()
+					//e.collapse();
+					s.collapse();
+					$('DC').action='statistic.php';
+					$('DC').submit();
+					//hideMap();
+					return true;
+				} else {
+					return false;
+				}
+			}
+
 			function saveQuery() {
 				selectall('_D+Field[]');
 				combineForms('DC', 'CD');
@@ -767,6 +772,7 @@
 				$('DC').submit();
 				return true;
 			}
+
 			function addRowToTable() {
 				var tbl = $('tbl_range');
 				var lastRow = tbl.rows.length;
@@ -812,32 +818,35 @@
 				col.setAttribute('value', '00ff00;');
 				cellRight.appendChild(col);
 			}
+
 			function removeRowFromTable() {
 				var tbl = $('tbl_range');
 				var lastRow = tbl.rows.length;
 				if (lastRow > 2)
 					tbl.deleteRow(lastRow - 1);
 			}
+
 			function setTotalize(lnow, lnext) {
-			  var sour = $(lnow);
-			  var dest = $(lnext);
-			  // clean dest list
-			  for (var i = dest.length - 1; i>=0; i--) {
-				dest.remove(i);
-			  }
-			  for (var i=0; i < sour.length; i++) {
-				if (!sour[i].selected) {
-				  var opt = document.createElement('option');
-				  opt.value = sour[i].value;
-				  opt.text = sour[i].text;
-				  var pto = dest.options[i];
-				  try {
-					dest.add(opt, pto);  }
-				  catch(ex) {
-					dest.add(opt, i);    }
-				}
-			  }
-			}
+				var sour = $(lnow);
+				var dest = $(lnext);
+				// clean dest list
+				for (var i = dest.length - 1; i>=0; i--) {
+					dest.remove(i);
+				} //for
+				for (var i=0; i < sour.length; i++) {
+					if (!sour[i].selected) {
+						var opt = document.createElement('option');
+						opt.value = sour[i].value;
+						opt.text = sour[i].text;
+						var pto = dest.options[i];
+						try {
+							dest.add(opt, pto);
+						} catch(ex) {
+							dest.add(opt, i);
+						}
+					} //if
+				} //for
+			} //function
 		{-/if-}
 		{-if $ctl_show-}
 		function dechex(dec) {
