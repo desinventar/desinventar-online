@@ -47,21 +47,21 @@
 			</td>
 			</tr>
 {-foreach name=sett key=key item=item from=$sett-}
-{-assign var="inf" value=DB$key-}
-{-assign var="tabind" value="`$tabind+1`"-}
-			<tr>
-			<td align="right">
-				<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.$inf[2]-}')">
-				<b style="color:darkred;">{-$dic.$inf[0]-}</b><span>{-$dic.$inf[1]-}</span></a>
-			</td>
-			<td>
-{-if $item[1] == "DATE"-}
-				<input id="{-$key-}" name="{-$key-}" type="text" class="line" style="width:120px;" value="{-$item[0]-}" tabindex="{-$tabind-}"/>
-{-elseif $item[1] == "NUMBER"-}
-				<input id="{-$key-}" name="{-$key-}" type="text" class="line" style="width:40px;" value="{-$item[0]-}" tabindex="{-$tabind-}"/>
-{-/if-}
-			</td>
-			</tr>
+	{-assign var="inf" value=DB$key-}
+	{-assign var="tabind" value="`$tabind+1`"-}
+	<tr>
+		<td align="right">
+		<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.$inf[2]-}')">
+		<b style="color:darkred;">{-$dic.$inf[0]-}</b><span>{-$dic.$inf[1]-}</span></a>
+		</td>
+		<td>
+		{-if $item[1] == "DATE"-}
+			<input id="{-$key-}" name="{-$key-}" type="text" class="line" style="width:120px;" value="{-$item[0]-}" tabindex="{-$tabind-}"/>
+		{-elseif $item[1] == "NUMBER"-}
+			<input id="{-$key-}" name="{-$key-}" type="text" class="line" style="width:40px;" value="{-$item[0]-}" tabindex="{-$tabind-}"/>
+		{-/if-}
+		</td>
+	</tr>
 {-/foreach-}
 			<tr>
 			<td align="right">
