@@ -140,14 +140,17 @@ class DIRegion extends DIObject {
 		$now = gmdate('c');
 		$this->setConnection($this->get('RegionId'));
 		$Translatable = $this->getTranslatableFields();
-		foreach($this->oField as $InfoKey => $InfoValue) {
-			if (! array_key_exists($InfoKey, $Translatable) && (strlen($InfoKey)>3) ) {
-				$LangIsoCode = '';
-				$sQuery = "DELETE FROM Info WHERE InfoKey='" . $InfoKey . "'";
+		foreach($this->oField as $Key => $Value) {
+			foreach($this->oField[$Key] as $InfoKey => $InfoValue) {
+				$LangIsoCode = $Key;
+				if (strlen($Key) > 3) {
+					$LangIsoCode = '';
+				}
+				$sQuery = "DELETE FROM Info WHERE InfoKey='" . $InfoKey . "' AND LangIsoCode='" . $LangIsoCode . "'";
 				$this->conn->query($sQuery);
 				$sQuery = "INSERT INTO Info VALUES ('" . $InfoKey . "','" . $LangIsoCode . "','" . $InfoValue . "','','" . $now . "','" . $now . "','" . $now . "')";
 				$this->conn->query($sQuery);
-			} //if
+			} //foreach
 		} //foreach
 		$this->setConnection('core');
 		$this->saveInfoTrans('eng');
