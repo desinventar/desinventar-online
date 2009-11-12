@@ -64,11 +64,28 @@ foreach ($RegionList as $RegionUUID => $RegionId) {
 			$r->set('RegionLabel', $row['RegionLabel']);
 			$r->set('CountryIso', $row['CountryIsoCode']);
 			$r->set('OptionOldName', $RegionUUID);
-			$r->set('RegionStatus', 3);
 			$r->set('LangIsoCode', $LangIsoCode);
 			$r->addLanguageInfo($LangIsoCode);
 			$r->set('InfoGeneral', $row['RegionDescEN'], 'eng');
 			$r->set('InfoGeneral', $row['RegionDesc'], $LangIsoCode);
+			$r->setActive($row['RegionActive']);
+			$r->setPublic($row['RegionPublic']);
+			// 2009-08-19 Fix Period when moving databases
+			$BeginDate = $row['PeriodBeginDate'];
+			$EndDate   = $row['PeriodEndDate'];
+			if (substr($BeginDate,0,4) == '0001') { $BeginDate = ''; }
+			if (substr($EndDate,0,4) == '9999') { $EndDate = ''; }
+			
+			$r->set('PeriodBeginDate'  , $BeginDate);
+			$r->set('PeriodEndDate'    , $EndDate);
+			$r->set('OptionAdminURL'   , $row['OptionAdminURL'], $LangIsoCode);
+			$r->set('OptionOutOfPeriod', $row['OptionOutOfPeriod']);
+			$r->set('OptionOldName'    , $row['RegionUUID']);
+			$r->set('GeoLimitMinX'     , $row['GeoLimitMinX']);
+			$r->set('GeoLimitMaxX'     , $row['GeoLimitMaxX']);
+			$r->set('GeoLimitMinY'     , $row['GeoLimitMinY']);
+			$r->set('GeoLimitMaxY'     , $row['GeoLimitMaxY']);
+			$r->set('InfoCredits'      , $row['RegionCredits'], $LangIsoCode);
 		} //foreach
 		// Update Region Information on desinventar-8.1
 		$query = "UPDATE Region SET RegionId='" . $RegionId . "' WHERE RegionUUID='" . $RegionUUID . "'";
@@ -76,6 +93,7 @@ foreach ($RegionList as $RegionUUID => $RegionId) {
 		
 		// Re-create database on desinventar-8.2.0 and update information
 		printf("%-20s %-40s\n", $RegionUUID, $RegionId);
+		$r->q->core->query("DELETE FROM Region WHERE RegionId='" . $RegionId . "'");
 		$iReturn = $r->createRegionDB();
 		$us->setUserRole('root',$RegionId,'ADMINREGION');
 	} //if
