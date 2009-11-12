@@ -64,9 +64,11 @@ foreach ($RegionList as $RegionUUID => $RegionId) {
 			$r->set('RegionLabel', $row['RegionLabel']);
 			$r->set('CountryIso', $row['CountryIsoCode']);
 			$r->set('OptionOldName', $RegionUUID);
-			$r->set('LangIsoCode', $LangIsoCode);	
 			$r->set('RegionStatus', 3);
+			$r->set('LangIsoCode', $LangIsoCode);
 			$r->addLanguageInfo($LangIsoCode);
+			$r->set('InfoGeneral', $row['RegionDescEN'], 'eng');
+			$r->set('InfoGeneral', $row['RegionDesc'], $LangIsoCode);
 		} //foreach
 		// Update Region Information on desinventar-8.1
 		$query = "UPDATE Region SET RegionId='" . $RegionId . "' WHERE RegionUUID='" . $RegionUUID . "'";
@@ -75,7 +77,6 @@ foreach ($RegionList as $RegionUUID => $RegionId) {
 		// Re-create database on desinventar-8.2.0 and update information
 		printf("%-20s %-40s\n", $RegionUUID, $RegionId);
 		$iReturn = $r->createRegionDB();
-		$r->insert();
 		$us->setUserRole('root',$RegionId,'ADMINREGION');
 	} //if
 } //foreach

@@ -33,6 +33,7 @@ class DIObject {
 			}
 		}
 		$this->oField = array();
+		$this->oField['info'] = array();
 		$this->oFieldType=array();
 		$this->createFields($this->sFieldKeyDef);
 		$this->createFields($this->sFieldDef);
@@ -56,7 +57,7 @@ class DIObject {
 	public function createFields($prmFieldDef, $LangIsoCode='') {
 		//print_r($prmFieldDef);
 		if ($LangIsoCode == '') {
-			$obj = &$this->oField;
+			$obj = &$this->oField['info'];
 		} else {
 			$obj = &$this->oField[$LangIsoCode];
 		}
@@ -78,8 +79,8 @@ class DIObject {
 	
 	public function get($prmKey, $LangIsoCode='') {
 		try {
-			if ($this->existField($prmKey)) {
-				return $this->oField[$prmKey];
+			if (array_key_exists($prmKey, $this->oField['info'])) {
+				return $this->oField['info'][$prmKey];
 			} else {
 				$LangIsoCode = $this->get('LangIsoCode');
 				if (array_key_exists($prmKey, $this->oField[$LangIsoCode])) {
@@ -103,7 +104,7 @@ class DIObject {
 	public function set($prmKey, $prmValue, $LangIsoCode='') {
 		//printf("%3s %-20s %s\n", $LangIsoCode, $prmKey, $prmValue);
 		if ($LangIsoCode == '') {
-			$obj = &$this->oField;
+			$obj = &$this->oField['info'];
 		} else {
 			$obj = &$this->oField[$LangIsoCode];
 		}
@@ -151,12 +152,12 @@ class DIObject {
 			if (($sFieldType == "STRING"  ) || 
 			    ($sFieldType == "TEXT"    ) ||
 			    ($sFieldType == "DATETIME") ) {
-			    $sQuery .= "'" . $this->oField[$sFieldName] . "'";
+			    $sQuery .= "'" . $this->get($sFieldName) . "'";
 			}
 			if (($sFieldType == "INTEGER") ||
 			    ($sFieldType == "DOUBLE" ) ||
 			    ($sFieldType == "BOOLEAN" ) ) {
-			    $sQuery .= $this->oField[$sFieldName];
+			    $sQuery .= $this->get($sFieldName);
 			}
 			$i++;
 		}
@@ -192,12 +193,12 @@ class DIObject {
 			if (($sFieldType == "STRING"  ) || 
 			    ($sFieldType == "TEXT"    ) ||
 			    ($sFieldType == "DATETIME") ) {
-			    $sQueryValues .= "'" . $this->oField[$sFieldName] . "'";
+			    $sQueryValues .= "'" . $this->get($sFieldName) . "'";
 			}
 			if (($sFieldType == "INTEGER") ||
 			    ($sFieldType == "DOUBLE" ) ||
 			    ($sFieldType == "BOOLEAN" ) ) {
-			    $sQueryValues .= $this->oField[$sFieldName];
+			    $sQueryValues .= $this->get($sFieldName);
 			}
 			$i++;
 		}
@@ -207,7 +208,6 @@ class DIObject {
 
 	public function getUpdateQuery() {
 		$i = 0;
-		
 		//2009-07-29 (jhcaiced) Update value in RecordUpdate
 		if ($this->existField('RecordUpdate')) {
 			$this->set('RecordUpdate', gmdate('c'));
@@ -227,11 +227,11 @@ class DIObject {
 			if (($sFieldType == "STRING"  ) || 
 			    ($sFieldType == "TEXT"    ) ||
 			    ($sFieldType == "DATETIME") ) {
-			    $sQueryItem .= "'" . $this->oField[$sFieldName] . "'";
+			    $sQueryItem .= "'" . $this->get($sFieldName) . "'";
 			} elseif (($sFieldType == "INTEGER") ||
 			          ($sFieldType == "DOUBLE" ) ||
 			          ($sFieldType == "BOOLEAN" ) ) {
-			    $sQueryItem .= $this->oField[$sFieldName];
+			    $sQueryItem .= $this->get($sFieldName);
 			} else {
 				print "Unknown EventType : $sFieldType ($sFieldName)<br>";
 			}
@@ -375,7 +375,7 @@ class DIObject {
 	}
 
 	public function existField($prmField) {
-		return array_key_exists($prmField, $this->oField);
+		return array_key_exists($prmField, $this->oField['info']);
 	}
 
 	public function validateCreate() {
@@ -470,7 +470,7 @@ class DIObject {
 	public function getFieldList() {
 		$i = 0;
 		$Value = '';
-		foreach(array_keys($this->oField) as $Field) {
+		foreach(array_keys($this->oField['info']) as $Field) {
 			if ($i>0) { $Value .= ','; }
 			$Value .= $Field;
 			$i++;
