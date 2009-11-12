@@ -165,320 +165,308 @@
 			tb.add('->',{id: 'mreg', text: '[{-$regname-}]', 		handler: onMenuItem });
 			tb.add('->',{id: 'mwww', text: '<img src="images/di_logo4.png">', handler: onMenuItem });
 			
-			function onMenuItem(item){
-				switch (item.id) {
-					// file menu
-					case "mreg":
-						$('dcr').src = "index.php?cmd=getRegionFullInfo&r={-$reg-}";
-						$('bsave').style.visibility = 'hidden';
-						$('bprint').style.visibility = 'hidden';
-					break;
-					case "musrlin":
-						//updateUserBar('user.php', '', '', '');
-						usrw.show();
-					break;
-					case "musrout":
-						userMan('logout', '');
-					break;
-					case "musrmya":
-						updateList('dbl', 'user.php', 'cmd=viewpref');
-						dblw.show();
-					break;
-	{-foreach name=lglst key=key item=item from=$lglst-}
-					case "{-$key-}":
-						window.location = "index.php?r={-$reg-}&lang={-$key-}";
-					break;
-	{-/foreach-}
-					case "mfilprn":
-						window.print();
-					break;
-					case "mfilqit":
-						self.close();
-					break;
-					// query menu
-					case "mqrygoq":
-						w = Ext.getCmp('westm');
-						$('config').style.display = 'none';
-						$('import').style.display = 'none';
-	{-if $ctl_noregion-}
-						$('qryres').style.display = 'none';
-						w.hide();
-	{-else-}
-						$('qryres').style.display = 'block';
-						w.show();
-	{-/if-}
-						if (w.isVisible())
-							w.collapse(); //hide()
-						else
-							w.expand(); //show()
-					break;
-					case "mqrynew":
-						w = Ext.getCmp('westm');
-						w.show();
-	{-foreach name=ef1 key=key item=item from=$ef1-}
-						if ($('{-$key-}').checked) enadisEff('{-$key-}', false);
-	{-/foreach-}
-						$('DC').reset();
-					break;
-					case "mqrysav":
-						saveQuery();
-					break;
-					case "mqryopn":
-						var qryw;
-						if (!qryw) {
-							qryw = new Ext.Window({
-								el:'qry-win',  layout:'fit',  width:300, height:200, 
-								closeAction:'hide', plain: true, animCollapse: false,
-								items: new Ext.Panel({
-									contentEl: 'qry-cfg', autoScroll: true }),
-								buttons: [{
-									text:'{-#tclose#-}',
-									handler: function(){
-										qryw.hide(); }
-								}]
-							});
-						}
-						qryw.show(this);
-					break;
-					//cards menu
-					case "mcrdins":
-						difw.show();
-					break;
-					case "mcrdimp":
-						w = Ext.getCmp('westm');
-						w.hide();
-						w.collapse();
-						$('config').style.display = 'none';
-						$('import').style.display = 'block';
-						$('qryres').style.display = 'none';
-						updateList('import', 'import.php', 'r={-$reg-}');
-					break;
-					case "mcrdbak":
-						window.location = "index.php?cmd=getRegionBackup&r={-$reg-}";
-					break;
-					case "mcrdcfg":
-						w = Ext.getCmp('westm');
-						w.hide();
-						w.collapse();
-						$('config').style.display = 'block';
-						$('import').style.display = 'none';
-						$('qryres').style.display = 'none';
-					break;
-					// databases menu
-					case "mdbsfnd":
-						updateList('dbl', 'index.php', 'cmd=listdb');
-						dblw.show();
-					break;
-					case "musradm":
-						updateList('dbl', 'user.php', 'cmd=adminusr');
-						dblw.show();
-					break;
-					case "mdbsadm":
-						updateList('dbl', 'region.php', 'cmd=adminreg');
-						dblw.show();
-					break;
-					// help menu
-					case "mabo":
-						dlgw.show();
-					break;
-					case "mwww":
-						window.open('http://www.desinventar.org', '', '');
-					break;
-					case "mmtg":
-						window.open('http://www.desinventar.org/{-if $lg == "spa"-}es/metodologia{-else-}en/methodology{-/if-}/', '', '');
-						//runWin('doc.php?m=metguide', 'doc');
-					break;
-					case "mdoc":
-						window.open('http://www.desinventar.org/{-if $lg == "spa"-}es{-else-}en{-/if-}/software', '', '');
-					break;
-				}
-			}
 			// layout
 			var viewport = new Ext.Viewport({
 				layout:'border',
 				items:[
-					{ region:'north',
-					height: 30,
-					contentEl: 'north'
-					},
-					{ region: 'south',
-					id: 'southm',
-					split: false,
-					title: '{-#tmguidedef#-}',
-					height: 80,
-					minSize: 100,
-					maxSize: 200,
-					margins: '0 0 0 0',
-					contentEl: 'south',
-					collapsible: true
+					{ region:'north', height: 30, contentEl: 'north'},
+					{ region: 'south', id: 'southm', 
+						split: false, title: '{-#tmguidedef#-}',
+						height: 80, minSize: 100, maxSize: 200, margins: '0 0 0 0',
+						contentEl: 'south', collapsible: true
 					},
 					new Ext.Panel({
-					region: 'center',
-					id: 'centerm',
-					//title: '{-#tsubtitle2#-}',
-					contentEl: 'container',
-					autoScroll: true
+						region: 'center', id: 'centerm',
+						//title: '{-#tsubtitle2#-}',
+						contentEl: 'container', autoScroll: true
 					})
-	{-if !$ctl_noregion-},
-					{ region: 'west',
-					id: 'westm',
-					split: false,
-					width: 350,
-					title: '{-#tsubtitle#-}',
-					autoScroll: true,
-					margins:'0 2 0 0',
-					collapsible: true,
-					contentEl: 'west'
-					}{-/if-}
+					{-if !$ctl_noregion-},
+						{ region: 'west', id: 'westm',
+							split: false, width: 350, title: '{-#tsubtitle#-}',
+							autoScroll: true, margins:'0 2 0 0', collapsible: true,
+							contentEl: 'west'
+						}
+					{-/if-}
 				]
-			});
-	{-if $ctl_show-}
-			// ==> Results Configuration Windows
-			// Data
-			var datw;
-			var datb = Ext.get('dat-btn');
-			datb.on('click', function(){
-			if (!datw) {
-				datw = new Ext.Window({
-					el:'dat-win',  layout:'fit',  width:600, height:400, 
-					closeAction:'hide', plain: true, animCollapse: false,
-					items: new Ext.Panel({
-						contentEl: 'dat-cfg', autoScroll: true }),
-					buttons: [{
-						text:'{-#tclean#-}',
-						handler: function() {
-							$('CD').reset();
-						}
-					},{
-						text:'{-#tsend#-}',
-						handler: function() {
-							if (sendList("result")) {
-							  $('DCRes').value = "D";
-							  datw.hide();
-							  $('bsave').style.visibility = 'visible';
-							  $('bprint').style.visibility = 'visible';
+			}); // new Ext.Viewport
+
+			{-if $ctl_show-}
+				// ==> Results Configuration Windows
+				// Data
+				var datw;
+				var datb = Ext.get('dat-btn');
+				datb.on('click', function(){
+				if (!datw) {
+					datw = new Ext.Window({
+						el:'dat-win',  layout:'fit',  width:600, height:400, 
+						closeAction:'hide', plain: true, animCollapse: false,
+						items: new Ext.Panel({
+							contentEl: 'dat-cfg', autoScroll: true }),
+						buttons: [{
+							text:'{-#tclean#-}',
+							handler: function() {
+								$('CD').reset();
 							}
-							else
-							  alert("{-#derrmsgfrm#-}");
-						}
-					},{
-						text:'{-#tclose#-}',
-						handler: function(){
-							datw.hide(); }
-					}]
-				});
-			}
-			datw.show(this);
-			});
-			// Statistics
-			var stdw;
-			var stdb = Ext.get('std-btn');
-			stdb.on('click', function() {
-			if (!stdw) {
-				stdw = new Ext.Window({
-					el:'std-win',  layout:'fit',  width:600, height:400, 
-					closeAction:'hide', plain: true, animCollapse: false,
-					items: new Ext.Panel({
-						contentEl: 'std-cfg', autoScroll: true }),
-					buttons: [{
-						text:'{-#tclean#-}',
-						handler: function() {
-							$('CS').reset(); }
-					},{
-						text:'{-#tsend#-}',
-						handler: function() {
-							if (sendStatistic("result")) {
-							  $('DCRes').value = "S";
-							  stdw.hide();
-							  $('bsave').style.visibility = 'visible';
-							  $('bprint').style.visibility = 'visible';
+						},{
+							text:'{-#tsend#-}',
+							handler: function() {
+								if (sendList("result")) {
+								  $('DCRes').value = "D";
+								  datw.hide();
+								  $('bsave').style.visibility = 'visible';
+								  $('bprint').style.visibility = 'visible';
+								}
+								else
+								  alert("{-#derrmsgfrm#-}");
 							}
-							else
-							  alert("{-#serrmsgfrm#-}");
-						}
-					},{
-						text:'{-#tclose#-}',
-						handler: function(){
-							stdw.hide(); }
-					}]
+						},{
+							text:'{-#tclose#-}',
+							handler: function(){
+								datw.hide(); }
+						}]
+					});
+				}
+				datw.show(this);
 				});
-			}
-			stdw.show(this);
-			});
-			// Graphic
-			var grpw;
-			var grpb = Ext.get('grp-btn');
-			grpb.on('click', function() {
-			if (!grpw) {
-				grpw = new Ext.Window({
-					el:'grp-win',  layout:'fit',  width:750, height:420, 
-					closeAction:'hide', plain: true, animCollapse: false,
-					items: new Ext.Panel({
-						contentEl: 'grp-cfg', autoScroll: true }),
-					buttons: [{
-						text:'{-#tclean#-}',
-						handler: function() {
-							$('CG').reset(); }
-					},{
-						text:'{-#tsend#-}',
-						handler: function() {
-							sendGraphic("result");
-							$('DCRes').value = "G";
-							grpw.hide();
-							$('bsave').style.visibility = 'visible';
-							$('bprint').style.visibility = 'visible';
-						}
-					},{
-						text:'{-#tclose#-}',
-						handler: function(){
-							grpw.hide(); }
-					}]
+				// Statistics
+				var stdw;
+				var stdb = Ext.get('std-btn');
+				stdb.on('click', function() {
+				if (!stdw) {
+					stdw = new Ext.Window({
+						el:'std-win',  layout:'fit',  width:600, height:400, 
+						closeAction:'hide', plain: true, animCollapse: false,
+						items: new Ext.Panel({
+							contentEl: 'std-cfg', autoScroll: true }),
+						buttons: [{
+							text:'{-#tclean#-}',
+							handler: function() {
+								$('CS').reset(); }
+						},{
+							text:'{-#tsend#-}',
+							handler: function() {
+								if (sendStatistic("result")) {
+								  $('DCRes').value = "S";
+								  stdw.hide();
+								  $('bsave').style.visibility = 'visible';
+								  $('bprint').style.visibility = 'visible';
+								}
+								else
+								  alert("{-#serrmsgfrm#-}");
+							}
+						},{
+							text:'{-#tclose#-}',
+							handler: function(){
+								stdw.hide(); }
+						}]
+					});
+				}
+				stdw.show(this);
 				});
-			}
-			grpw.show(this);
-			});
-			// Map
-			var mapw;
-			var mapb = Ext.get('map-btn');
-			mapb.on('click', function() {
-			if (!mapw) {
-				mapw = new Ext.Window({
-					el:'map-win',  layout:'fit',  width:650, height:400, 
-					closeAction:'hide', plain: true, animCollapse: false,
-					items: new Ext.Panel({
-						contentEl: 'map-cfg', autoScroll: true }),
-					buttons: [{
-						text:'{-#tclean#-}',
-						handler: function() {
-							$('CM').reset(); }
-					},{
-						text:'{-#tsend#-}',
-						handler: function() {
-							setfocus('_M+limit[0]');
-							if (sendMap("result")) {
-								$('DCRes').value = "M";
-								mapw.hide();
+				// Graphic
+				var grpw;
+				var grpb = Ext.get('grp-btn');
+				grpb.on('click', function() {
+				if (!grpw) {
+					grpw = new Ext.Window({
+						el:'grp-win',  layout:'fit',  width:750, height:420, 
+						closeAction:'hide', plain: true, animCollapse: false,
+						items: new Ext.Panel({
+							contentEl: 'grp-cfg', autoScroll: true }),
+						buttons: [{
+							text:'{-#tclean#-}',
+							handler: function() {
+								$('CG').reset(); }
+						},{
+							text:'{-#tsend#-}',
+							handler: function() {
+								sendGraphic("result");
+								$('DCRes').value = "G";
+								grpw.hide();
 								$('bsave').style.visibility = 'visible';
 								$('bprint').style.visibility = 'visible';
 							}
-							else
-							  alert("{-#serrmsgfrm#-}");
-						}
-					},{
-						text:'{-#tclose#-}',
-						handler: function(){
-							mapw.hide(); }
-					}]
+						},{
+							text:'{-#tclose#-}',
+							handler: function(){
+								grpw.hide(); }
+						}]
+					});
+				}
+				grpw.show(this);
 				});
-			}
-			mapw.show(this);
-			});
-	{-/if-}
+				// Map
+				var mapw;
+				var mapb = Ext.get('map-btn');
+				mapb.on('click', function() {
+				if (!mapw) {
+					mapw = new Ext.Window({
+						el:'map-win',  layout:'fit',  width:650, height:400, 
+						closeAction:'hide', plain: true, animCollapse: false,
+						items: new Ext.Panel({
+							contentEl: 'map-cfg', autoScroll: true }),
+						buttons: [{
+							text:'{-#tclean#-}',
+							handler: function() {
+								$('CM').reset(); }
+						},{
+							text:'{-#tsend#-}',
+							handler: function() {
+								setfocus('_M+limit[0]');
+								if (sendMap("result")) {
+									$('DCRes').value = "M";
+									mapw.hide();
+									$('bsave').style.visibility = 'visible';
+									$('bprint').style.visibility = 'visible';
+								}
+								else
+								  alert("{-#serrmsgfrm#-}");
+							}
+						},{
+							text:'{-#tclose#-}',
+							handler: function(){
+								mapw.hide(); }
+						}]
+					});
+				}
+				mapw.show(this);
+				});
+			{-/if-}
 			// quicktips
 			Ext.apply(Ext.QuickTips.getQuickTip(), {
 			maxWidth: 200, minWidth: 100, showDelay: 50, trackMouse: true });
-		});
-		// end ExtJS object
+		}); // function onReady()
+
+			
+		function onMenuItem(item){
+			switch (item.id) {
+				// file menu
+				case "mreg":
+					$('dcr').src = "index.php?cmd=getRegionFullInfo&r={-$reg-}";
+					$('bsave').style.visibility = 'hidden';
+					$('bprint').style.visibility = 'hidden';
+				break;
+				case "musrlin":
+					//updateUserBar('user.php', '', '', '');
+					usrw.show();
+				break;
+				case "musrout":
+					userMan('logout', '');
+				break;
+				case "musrmya":
+					updateList('dbl', 'user.php', 'cmd=viewpref');
+					dblw.show();
+				break;
+				{-foreach name=lglst key=key item=item from=$lglst-}
+					case "{-$key-}":
+						window.location = "index.php?r={-$reg-}&lang={-$key-}";
+					break;
+				{-/foreach-}
+				case "mfilprn":
+					window.print();
+				break;
+				case "mfilqit":
+					self.close();
+				break;
+				// query menu
+				case "mqrygoq":
+					w = Ext.getCmp('westm');
+					$('config').style.display = 'none';
+					$('import').style.display = 'none';
+					{-if $ctl_noregion-}
+						$('qryres').style.display = 'none';
+						w.hide();
+					{-else-}
+						$('qryres').style.display = 'block';
+						w.show();
+					{-/if-}
+					if (w.isVisible())
+						w.collapse(); //hide()
+					else
+						w.expand(); //show()
+				break;
+				case "mqrynew":
+					w = Ext.getCmp('westm');
+					w.show();
+					{-foreach name=ef1 key=key item=item from=$ef1-}
+						if ($('{-$key-}').checked) enadisEff('{-$key-}', false);
+					{-/foreach-}
+					$('DC').reset();
+				break;
+				case "mqrysav":
+					saveQuery();
+				break;
+				case "mqryopn":
+					var qryw;
+					if (!qryw) {
+						qryw = new Ext.Window({
+							el:'qry-win',  layout:'fit',  width:300, height:200, 
+							closeAction:'hide', plain: true, animCollapse: false,
+							items: new Ext.Panel({
+								contentEl: 'qry-cfg', autoScroll: true }),
+							buttons: [{
+								text:'{-#tclose#-}',
+								handler: function(){
+									qryw.hide(); }
+							}]
+						});
+					}
+					qryw.show(this);
+				break;
+				//cards menu
+				case "mcrdins":
+					difw.show();
+				break;
+				case "mcrdimp":
+					w = Ext.getCmp('westm');
+					w.hide();
+					w.collapse();
+					$('config').style.display = 'none';
+					$('import').style.display = 'block';
+					$('qryres').style.display = 'none';
+					updateList('import', 'import.php', 'r={-$reg-}');
+				break;
+				case "mcrdbak":
+					window.location = "index.php?cmd=getRegionBackup&r={-$reg-}";
+				break;
+				case "mcrdcfg":
+					w = Ext.getCmp('westm');
+					w.hide();
+					w.collapse();
+					$('config').style.display = 'block';
+					$('import').style.display = 'none';
+					$('qryres').style.display = 'none';
+				break;
+				// databases menu
+				case "mdbsfnd":
+					updateList('dbl', 'index.php', 'cmd=listdb');
+					dblw.show();
+				break;
+				case "musradm":
+					updateList('dbl', 'user.php', 'cmd=adminusr');
+					dblw.show();
+				break;
+				case "mdbsadm":
+					updateList('dbl', 'region.php', 'cmd=adminreg');
+					dblw.show();
+				break;
+				// help menu
+				case "mabo":
+					dlgw.show();
+				break;
+				case "mwww":
+					window.open('http://www.desinventar.org', '', '');
+				break;
+				case "mmtg":
+					window.open('http://www.desinventar.org/{-if $lg == "spa"-}es/metodologia{-else-}en/methodology{-/if-}/', '', '');
+					//runWin('doc.php?m=metguide', 'doc');
+				break;
+				case "mdoc":
+					window.open('http://www.desinventar.org/{-if $lg == "spa"-}es{-else-}en{-/if-}/software', '', '');
+				break;
+			} //switch
+		} //function
+
 		function userMan(cmd, opt) {
 			var pars = "cmd=" + cmd;
 			if (opt != "")
