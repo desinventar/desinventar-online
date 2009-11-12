@@ -17,12 +17,21 @@
 	<script type="text/javascript" src="include/wd.js"></script>
 	<script type="text/javascript" src="include/accordion.js"></script>
 	<script type="text/javascript" src="include/palette.js"></script>
+	<script type="text/javascript" src="/jquery/jquery.js"></script>
+	<script type="text/javascript" src="/jquery/jquery.json.js"></script>
+	<script type="text/javascript" src="include/ajaxupload.js"></script>
+	
 {-/if-}
 	<!-- ExtJS 2.0.1 -->
 	<link rel="stylesheet" type="text/css" href="/extJS/resources/css/ext-all.css"/>
 	<link rel="stylesheet" type="text/css" href="/extJS/resources/css/xtheme-gray.css"/>
 	<script type="text/javascript" src="/extJS/adapter/ext/ext-base.js"></script>
 	<script type="text/javascript" src="/extJS/ext-all.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			//alert('hello world');
+		});
+	</script>
 	<script type="text/javascript">
 	var	w;
 	var	s;
@@ -1380,7 +1389,8 @@
 					<div class="x-window-header">{-#mopenquery#-}</div>
 					<div id="qry-cfg" style="text-align:center;">
 					<form id="openquery" enctype="multipart/form-data" action="index.php" method="POST">
-						<br /><br /><input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+						<br /><br />
+						<input type="hidden" name="MAX_FILE_SIZE" value="100000" />
 						<input type="file" id="ofile" name="qry" onChange="$('openquery').submit();"/>
 					</form>
 					</div>
