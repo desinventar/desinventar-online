@@ -849,164 +849,173 @@
 			} //function
 		{-/if-}
 		{-if $ctl_show-}
-		function dechex(dec) {
-			var Char_hexadecimales = "0123456789ABCDEF";
-			var low = dec % 16;
-			var high = (dec - low)/16;
-			hex = "" + Char_hexadecimales.charAt(high) + Char_hexadecimales.charAt(low);
-			return hex;
-		}
-		function hexdec(hex) {
-			return parseInt(hex,16);
-		}
-		function genColors() {
-			var tbl = $('tbl_range');
-			var cnt = tbl.rows.length - 1;
-			var a = $('_M+color[0]').value;
-			var z = $('_M+color['+ cnt +']').value;
-			var a1 = hexdec(a.substring(1,3));	var z1 = hexdec(z.substring(1,3));
-			var a2 = hexdec(a.substring(3,5));	var z2 = hexdec(z.substring(3,5));
-			var a3 = hexdec(a.substring(5,7));	var z3 = hexdec(z.substring(5,7));
-			var m1 = ((z1 - a1) / cnt);
-			var m2 = ((z2 - a2) / cnt);
-			var m3 = ((z3 - a3) / cnt);
-			for (i=1; i <= cnt; i++) {
-				h1 = dechex(a1 + (m1 * i));
-				h2 = dechex(a2 + (m2 * i));
-				h3 = dechex(a3 + (m3 * i));
-				val = "#" + h1 + h2 + h3;
-				$('_M+color['+ i + ']').value = val;
-				$('_M+ic['+ i + ']').style.backgroundColor = val;
+			function dechex(dec) {
+				var Char_hexadecimales = "0123456789ABCDEF";
+				var low = dec % 16;
+				var high = (dec - low)/16;
+				hex = "" + Char_hexadecimales.charAt(high) + Char_hexadecimales.charAt(low);
+				return hex;
 			}
-		}
-		function setAdvQuery(value, ope) {
-			$('CusQry').value += value + ' ';
-			switch (ope) {
-				case 'text':
-				disab($('<'));
-				disab($('>'));
-				enab($('='));  $('=').value = "= ''";
-				enab($('<>')); $('<>').value = "<> ''";
-				enab($("LIKE '%%'"));
-				disab($('=-1')); disab($('=0')); disab($('=-2'));
-				break;
-				case 'date':
-				enab($('<')); $('<').value = "< ''";
-				enab($('>')); $('>').value = "> ''";
-				enab($('=')); $('=').value = "= ''";
-				enab($('<>')); $('<>').value = "<> ''";
-				enab($("LIKE '%%'"));
-				disab($('=-1')); disab($('=0')); disab($('=-2'));
-				break;
-				case 'number':
-				enab($('<')); $('<').value = "< ";
-				enab($('>')); $('>').value = "> ";
-				enab($('=')); $('=').value = "= ";
-				enab($('<>'));$('<>').value = "<> ";
-				disab($("LIKE '%%'"));
-				enab($('=-1')); enab($('=0')); enab($('=-2'));
-				break;
-				case 'boolean':
-				disab($('<'));
-				disab($('>'));
-				disab($('='));
-				disab($('<>'));
-				disab($("LIKE '%%'"));
-				enab($('=-1')); enab($('=0')); enab($('=-2'));
-				break;
+
+			function hexdec(hex) {
+				return parseInt(hex,16);
 			}
-		}
-		function printRes() {
-			if (CheckIsIE() == true) {
-				document.dcr.focus();
-				document.dcr.print();
-			} else {
-				window.frames['dcr'].focus();
-				window.frames['dcr'].print();
-			}
-		}
-		// Find all Effects fields enable by saved query
-		window.onload = function() {
-			// select optimal height in results frame
-			//varhgt = screen.height * 360 / 600;
-			//$('dcr').style = "height:"+ hgt + "px;"
-	{-foreach name=ef1 key=k item=i from=$ef1-}
-	{-assign var="ff" value=D_$k-}
-	{-if $qd.$ff[0] != ''-}
-			enadisEff('{-$k-}', true);
-			showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
-	{-/if-}
-	{-/foreach-}
-	{-foreach name=sec key=k item=i from=$sec-}
-	{-assign var="sc" value=D_$k-}
-	{-if $qd.$sc[0] != ''-}
-	{-foreach name=sc2 key=k2 item=i2 from=$i[3]-}
-	{-assign var="ff" value=D_$k2-}
-	{-if $qd.$ff[0] != ''-}
-			enadisEff('{-$k2-}', true);
-			showeff('{-$qd.$ff[0]-}', 'x{-$k2-}', 'y{-$k2-}');
-	{-/if-}
-	{-/foreach-}
-			enadisEff('{-$k-}', true);
-	{-/if-}
-	{-/foreach-}
-	{-foreach name=ef3 key=k item=i from=$ef3-}
-	{-assign var="ff" value=D_$k-}
-	{-if $qd.$ff[0] != ''-}
-			enadisEff('{-$k-}', true);
-			showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
-	{-/if-}
-	{-/foreach-}
-	{-foreach name=geol key=k item=i from=$geol-}
-	{-if $i[3]-}
-			setSelMap('{-$i[0]-}', '{-$k-}', true);
-	{-/if-}
-	{-/foreach-}
-		}
-		document.write('<style type="text/css">.tabber{display:none;}<\/style>');
-		var tabberOptions = {
-			'onClick': function(argsObj) {
-				var t = argsObj.tabber;
-				var i = argsObj.index;
-				var div = this.tabs[i].div; /* The tab content div */
-				/* Display a loading message */
-				div.innerHTML = waiting;
-				switch (i) {
-					case 0 :
-						myAjax = new Ajax.Updater(div, 'info.php', {method:'get', parameters:'r={-$reg-}'});
-					break;
-					case 1 :
-						myAjax = new Ajax.Updater(div, 'geolevel.php', {method:'get', parameters:'r={-$reg-}'});
-					break;
-					case 2 :
-						myAjax = new Ajax.Updater(div, 'geography.php', {method:'get', parameters:'r={-$reg-}'});
-					break;
-					case 3 :
-						myAjax = new Ajax.Updater(div, 'events.php', {method:'get', parameters:'r={-$reg-}'});
-					break;
-					case 4 :
-						myAjax = new Ajax.Updater(div, 'causes.php', {method:'get', parameters:'r={-$reg-}'});
-					break;
-					case 5 :
-						myAjax = new Ajax.Updater(div, 'extraeffects.php', {method:'get', parameters:'r={-$reg-}'});
-					break;
+
+			function genColors() {
+				var tbl = $('tbl_range');
+				var cnt = tbl.rows.length - 1;
+				var a = $('_M+color[0]').value;
+				var z = $('_M+color['+ cnt +']').value;
+				var a1 = hexdec(a.substring(1,3));	var z1 = hexdec(z.substring(1,3));
+				var a2 = hexdec(a.substring(3,5));	var z2 = hexdec(z.substring(3,5));
+				var a3 = hexdec(a.substring(5,7));	var z3 = hexdec(z.substring(5,7));
+				var m1 = ((z1 - a1) / cnt);
+				var m2 = ((z2 - a2) / cnt);
+				var m3 = ((z3 - a3) / cnt);
+				for (i=1; i <= cnt; i++) {
+					h1 = dechex(a1 + (m1 * i));
+					h2 = dechex(a2 + (m2 * i));
+					h3 = dechex(a3 + (m3 * i));
+					val = "#" + h1 + h2 + h3;
+					$('_M+color['+ i + ']').value = val;
+					$('_M+ic['+ i + ']').style.backgroundColor = val;
 				}
-			},
-			'onLoad': function(argsObj) {
-				/* Load the first tab */
-				argsObj.index = 0;
-				this.onClick(argsObj);
 			}
-		}
-		/* selection map functions
-		function showMap() {
-			$('smap').style.visibility = 'visible';
-		}
-		function hideMap() {
-			$('smap').style.visibility = 'hidden';
-		}
-		var g{-$reg-} = new CheckTree('g{-$reg-}');*/
-	{-/if-}
+
+			function setAdvQuery(value, ope) {
+				$('CusQry').value += value + ' ';
+				switch (ope) {
+					case 'text':
+						disab($('<'));
+						disab($('>'));
+						enab($('='));  $('=').value = "= ''";
+						enab($('<>')); $('<>').value = "<> ''";
+						enab($("LIKE '%%'"));
+						disab($('=-1')); disab($('=0')); disab($('=-2'));
+					break;
+					case 'date':
+						enab($('<')); $('<').value = "< ''";
+						enab($('>')); $('>').value = "> ''";
+						enab($('=')); $('=').value = "= ''";
+						enab($('<>')); $('<>').value = "<> ''";
+						enab($("LIKE '%%'"));
+						disab($('=-1')); disab($('=0')); disab($('=-2'));
+					break;
+					case 'number':
+						enab($('<')); $('<').value = "< ";
+						enab($('>')); $('>').value = "> ";
+						enab($('=')); $('=').value = "= ";
+						enab($('<>'));$('<>').value = "<> ";
+						disab($("LIKE '%%'"));
+						enab($('=-1')); enab($('=0')); enab($('=-2'));
+					break;
+					case 'boolean':
+						disab($('<'));
+						disab($('>'));
+						disab($('='));
+						disab($('<>'));
+						disab($("LIKE '%%'"));
+						enab($('=-1')); enab($('=0')); enab($('=-2'));
+					break;
+				} //switch
+			} //function
+
+			function printRes() {
+				if (CheckIsIE() == true) {
+					document.dcr.focus();
+					document.dcr.print();
+				} else {
+					window.frames['dcr'].focus();
+					window.frames['dcr'].print();
+				}
+			}
+		{-/if-}
+
+		{-if $ctl_show-}
+			window.onload = function() {
+				// Find all Effects fields enable by saved query
+				// select optimal height in results frame
+				//varhgt = screen.height * 360 / 600;
+				//$('dcr').style = "height:"+ hgt + "px;"
+				{-foreach name=ef1 key=k item=i from=$ef1-}
+					{-assign var="ff" value=D_$k-}
+					{-if $qd.$ff[0] != ''-}
+						enadisEff('{-$k-}', true);
+						showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
+					{-/if-}
+				{-/foreach-}
+				{-foreach name=sec key=k item=i from=$sec-}
+					{-assign var="sc" value=D_$k-}
+					{-if $qd.$sc[0] != ''-}
+						{-foreach name=sc2 key=k2 item=i2 from=$i[3]-}
+							{-assign var="ff" value=D_$k2-}
+							{-if $qd.$ff[0] != ''-}
+								enadisEff('{-$k2-}', true);
+								showeff('{-$qd.$ff[0]-}', 'x{-$k2-}', 'y{-$k2-}');
+							{-/if-}
+						{-/foreach-}
+						enadisEff('{-$k-}', true);
+					{-/if-}
+				{-/foreach-}
+				{-foreach name=ef3 key=k item=i from=$ef3-}
+					{-assign var="ff" value=D_$k-}
+					{-if $qd.$ff[0] != ''-}
+						enadisEff('{-$k-}', true);
+						showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
+					{-/if-}
+				{-/foreach-}
+				{-foreach name=geol key=k item=i from=$geol-}
+					{-if $i[3]-}
+						setSelMap('{-$i[0]-}', '{-$k-}', true);
+					{-/if-}
+				{-/foreach-}
+			} //function onload
+
+			document.write('<style type="text/css">.tabber{display:none;}<\/style>');
+			var tabberOptions = {
+				'onClick': function(argsObj) {
+					var t = argsObj.tabber;
+					var i = argsObj.index;
+					var div = this.tabs[i].div; /* The tab content div */
+					/* Display a loading message */
+					div.innerHTML = waiting;
+					switch (i) {
+						case 0 :
+							myAjax = new Ajax.Updater(div, 'info.php', {method:'get', parameters:'r={-$reg-}'});
+						break;
+						case 1 :
+							myAjax = new Ajax.Updater(div, 'geolevel.php', {method:'get', parameters:'r={-$reg-}'});
+						break;
+						case 2 :
+							myAjax = new Ajax.Updater(div, 'geography.php', {method:'get', parameters:'r={-$reg-}'});
+						break;
+						case 3 :
+							myAjax = new Ajax.Updater(div, 'events.php', {method:'get', parameters:'r={-$reg-}'});
+						break;
+						case 4 :
+							myAjax = new Ajax.Updater(div, 'causes.php', {method:'get', parameters:'r={-$reg-}'});
+						break;
+						case 5 :
+							myAjax = new Ajax.Updater(div, 'extraeffects.php', {method:'get', parameters:'r={-$reg-}'});
+						break;
+					}
+				},
+				'onLoad': function(argsObj) {
+					/* Load the first tab */
+					argsObj.index = 0;
+					this.onClick(argsObj);
+				}
+			} //tabberOptions
+			
+			/* selection map functions
+			function showMap() {
+				$('smap').style.visibility = 'visible';
+			}
+			function hideMap() {
+				$('smap').style.visibility = 'hidden';
+			}
+			var g{-$reg-} = new CheckTree('g{-$reg-}');*/
+		{-/if-}
 	</script>
 	<link rel="stylesheet" href="css/tabber.css" type="text/css">
 	<script type="text/javascript" src="include/tabber.js"></script>
