@@ -25,7 +25,6 @@ $t->assign('version', VERSION);
 
 if (!empty($RegionId))
 	$us->open($RegionId);
-
 switch ($cmd) {
 	case 'getversion':
 		print VERSION;
@@ -116,7 +115,7 @@ switch ($cmd) {
 	case 'getGraphParameters':
 		$t->display('graphparameters.tpl');
 		break;
-	case "getRegionBackup":
+	case 'getRegionBackup':
 		$FileName = TMP_DIR . '/di8backup_' . uuid() . '.zip';
 		$iReturn = DIRegion::createRegionBackup($us, $RegionId, $FileName);
 		if ($iReturn > 0) {
@@ -132,16 +131,19 @@ switch ($cmd) {
 			$RegionId = $get['r'];
 			$us->open($RegionId);
 		}
-		elseif (isset($post['_CMD']) && $post['_CMD'] == "savequery") {
+		if (isset($post['_CMD']) && $post['_CMD'] == "savequery") {
 			// Request to save Query Design in File..
 			fixPost($post);
+			// Do not save _CMD...
+			unset($post['_CMD']);
 			header("Content-type: text/xml");
 			header("Content-Disposition: attachment; filename=Query_". str_replace(" ", "", $RegionId) .".xml");
 			echo '<?xml version="1.0" encoding="UTF-8"?>'. "\n";
 			echo "<DIQuery />". base64_encode(serialize($post));
 			exit();
 		}
-		elseif (isset($_FILES['qry'])) {
+		
+		if (isset($_FILES['qry'])) {
 			// Open file, decode and assign saved query..
 			$myfile = $_FILES['qry']['tmp_name'];
 			$handle = fopen($myfile, "r");
@@ -149,12 +151,12 @@ switch ($cmd) {
 			fclose($handle);
 			$xml = '<DIQuery />';
 			$pos = strpos($cq, $xml);
-			if (!empty($cq) &&  $pos != false) {			
+			if (!empty($cq) &&  $pos != false) {
 				$qy = substr($cq, $pos + strlen($xml));
 				$qd = unserialize(base64_decode($qy));
-			}
-			else
+			} else {
 				exit();
+			}
 			$RegionId = $qd['_REG'];
 			$t->assign ("qd", $qd);
 		}
