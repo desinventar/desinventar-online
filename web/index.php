@@ -37,9 +37,9 @@ switch ($cmd) {
 		// unique database, choose than
 		if (count($listdb) == 1) {
 			$t->assign('option', "r=". key($listdb));
-		}
-		else
+		} else {
 			$t->assign('option', "cmd=main");
+		}
 		$t->assign('ctl_start', true);
 		$t->display('index.tpl');
 		break;
@@ -198,8 +198,7 @@ switch ($cmd) {
 						$t->assign ("ctl_evelst", true);
 					break;
 				} //switch
-			}
-			else {
+			} else {
 				$t->assign ("ms", MAPSERV);
 				$t->assign ("dis", $us->q->queryLabelsFromGroup('Disaster', $lg));
 				$t->assign ("rc1", $us->q->queryLabelsFromGroup('Record|1', $lg));
@@ -226,6 +225,15 @@ switch ($cmd) {
 				$ydb = $us->q->getDateRange();
 				$t->assign ("yini", substr($ydb[0], 0, 4));
 				$t->assign ("yend", substr($ydb[1], 0, 4));
+
+				// Load default list of Geography, Event, Cause
+				$geol = $us->q->loadGeography(0);
+				$glev = $us->q->loadGeoLevels('', -1, false);
+				$evepredl = $us->q->loadEvents("PREDEF", "active", $lg);
+				$eveuserl = $us->q->loadEvents("USER", "active", $lg);
+				$caupredl = $us->q->loadCauses("PREDEF", "active", $lg);
+				$cauuserl = $us->q->loadCauses("USER", "active", $lg);
+
 				// In Saved Queries set true in Geo, Events, Causes selected..
 				if (isset($qd["D_GeographyId"])) {
 					foreach ($qd["D_GeographyId"] as $ky=>$it) {
@@ -233,6 +241,7 @@ switch ($cmd) {
 							$geol[$it][3] = 1;
 					}
 				}
+
 				if (isset($qd["D_EventId"])) {
 					foreach ($qd["D_EventId"] as $ky=>$it) {
 						if (isset($evepredl[$it]))
@@ -241,6 +250,7 @@ switch ($cmd) {
 							$eveuserl[$it][3] = 1;
 					}
 				}
+
 				if (isset($qd["D_CauseId"])) {
 					foreach ($qd["D_CauseId"] as $ky=>$it) {
 						if (isset($caupredl[$it]))
@@ -250,12 +260,12 @@ switch ($cmd) {
 					}
 				}
 				// List of elements: Geography, GLevels, Events, Causes..
-				$t->assign ("geol", $us->q->loadGeography(0));
-				$t->assign ("glev", $us->q->loadGeoLevels('', -1, false));
-				$t->assign ("evepredl", $us->q->loadEvents("PREDEF", "active", $lg));
-				$t->assign ("eveuserl", $us->q->loadEvents("USER", "active", $lg));
-				$t->assign ("caupredl", $us->q->loadCauses("PREDEF", "active", $lg));
-				$t->assign ("cauuserl", $us->q->loadCauses("USER", "active", $lg));
+				$t->assign ("geol", $geol);
+				$t->assign ("glev", $glev);
+				$t->assign ("evepredl", $evepredl);
+				$t->assign ("eveuserl", $eveuserl);
+				$t->assign ("caupredl", $caupredl);
+				$t->assign ("cauuserl", $cauuserl);
 				// Query words and phrases in dictionary..
 				$ef1 = $us->q->queryLabelsFromGroup('Effect|People', $lg);
 				$ef2 = $us->q->queryLabelsFromGroup('Effect|Affected', $lg);
