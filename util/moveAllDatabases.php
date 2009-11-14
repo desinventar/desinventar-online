@@ -26,10 +26,11 @@ $RegionList = array();
 foreach($dbh->query("SELECT * FROM Region ORDER BY CountryIsoCode,RegionUUID") as $row) {
 	$RegionList[$row['RegionUUID']] = $row['RegionId'];
 }
-$RegionList = array();
+//$RegionList = array();
 //$RegionList['PANAMA'] = 'PAN-1250695231-panama_inventario_de_desastres_sinaproc';
-$RegionList['COLOMBIA'] = '';
+//$RegionList['COLOMBIA'] = '';
 //$RegionList['GUATEMALA'] = '';
+//$RegionList['CHILE'] = '';
 foreach ($RegionList as $RegionUUID => $RegionId) {
 	$bCreateRegion = false;
 	/*
