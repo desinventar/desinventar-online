@@ -157,8 +157,9 @@ switch ($cmd) {
 			} else {
 				exit();
 			}
+			fb($qd['D_EventId']);
 			$RegionId = $qd['_REG'];
-			$t->assign ("qd", $qd);
+			$t->assign("qd", $qd);
 		}
 		// 2009-08-07 (jhcaiced) Validate if Database Exists...
 		if (!empty($RegionId) && file_exists($us->q->getDBFile($RegionId))) {
