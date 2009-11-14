@@ -157,7 +157,6 @@ switch ($cmd) {
 			} else {
 				exit();
 			}
-			fb($qd['D_EventId']);
 			$RegionId = $qd['_REG'];
 			$t->assign("qd", $qd);
 		}
