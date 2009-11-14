@@ -1548,13 +1548,13 @@
       <select id="qevelst" name="D_EventId[]" multiple style="width: 250px; height: 200px;" class="line">
 {-/if-}
 {-if $ctl_qrydsg || $ctl_evelst-}
- {-foreach name=eve key=key item=item from=$evepredl-}
-        <option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
- {-/foreach-}
-        <option disabled>----</option>
- {-foreach name=eve key=key item=item from=$eveuserl-}
-        <option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
- {-/foreach-}
+	{-foreach name=eve key=key item=item from=$evepredl-}
+		<option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
+	{-/foreach-}
+	<option disabled>----</option>
+	{-foreach name=eve key=key item=item from=$eveuserl-}
+		<option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
+	{-/foreach-}
 {-/if-}
 {-** END ctl_evelst **-}
 {-if $ctl_qrydsg-}
