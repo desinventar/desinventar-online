@@ -198,12 +198,18 @@
 						w.expand(); //show()
 				break;
 				case "mqrynew":
+					window.location = "index.php?r={-$reg-}";
+					// 2009-11-18 (jhcaiced) Disabled this code, some items are not reset to
+					// their default values...
+					//index.php?r={-$reg-}
+					/*
 					w = Ext.getCmp('westm');
 					w.show();
-{-foreach name=ef1 key=key item=item from=$ef1-}
-					if ($('{-$key-}').checked) enadisEff('{-$key-}', false);
-{-/foreach-}
+					{-foreach name=ef1 key=key item=item from=$ef1-}
+						if ($('{-$key-}').checked) enadisEff('{-$key-}', false);
+					{-/foreach-}
 					$('DC').reset();
+					*/
 				break;
 				case "mqrysav":
 					saveQuery();
