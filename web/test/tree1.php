@@ -19,7 +19,8 @@
 require_once('../include/loader.php');
 //$RegionId = 'COL-1250694506-colombia_inventario_historico_de_desastres';
 //$RegionId = 'CHL-1257983285-chile_inventario_historico_de_desastres';
-$RegionId = 'ARG-1250694407-argentina_inventario_historico_de_desastres';
+//$RegionId = 'ARG-1250694407-argentina_inventario_historico_de_desastres';
+$RegionId = 'MEX-1250695136-mexico_inventario_historico_de_desastres';
 $us->open($RegionId);
 
 function getGeographyList($us, $Level, $ParentCode='') {
