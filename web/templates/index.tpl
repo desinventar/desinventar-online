@@ -11,8 +11,8 @@
 	<script type="text/javascript" src="include/prototype.js"></script>
 	<script type="text/javascript" src="include/diadmin.js"></script>
 {-if $ctl_show-}
-	<link rel="stylesheet" href="css/checktree.css" type="text/css">
-	<link rel="stylesheet" href="css/accordion.css" type="text/css">
+	<link rel="stylesheet" href="css/checktree.css" type="text/css"/>
+	<link rel="stylesheet" href="css/accordion.css" type="text/css"/>
 	<script type="text/javascript" src="include/checktree.js"></script>
 	<script type="text/javascript" src="include/wd.js"></script>
 	<script type="text/javascript" src="include/accordion.js"></script>
@@ -598,37 +598,33 @@
 			disab($('_G+Scale'));
 		}
 	}
-    // forms management
-    function combineForms(dcf, ref) {
-      var dc = $(dcf);
-      var rf = $(ref).elements;
-      var ih = null;
-      for (i=0; i < rf.length; i++) {
-      	if (rf[i].disabled == false) {
-      		ih = document.createElement("input");
-      		ih.type   = "hidden";
-      		ih.value  = rf[i].value;
-      		ih.name   = rf[i].name;
-      		dc.appendChild(ih);
-       	}
-      }
-    }
-    function setSelMap(code, gid, opc) {
-    	if (opc)
-    		setgeo(gid);
-    	else
-    		unsetgeo(gid);
-    }
-    function setgeo(k) {
-      // Find and fill childs
-      $('itree' + k).style.display = 'block';
-      updateList('itree' + k, 'index.php', 'r={-$reg-}&cmd=glist&GeographyId=' + k); 
-    }
-    function unsetgeo(k) {
-    	// clean childs first
-    	$('itree' + k).innerHTML = '';
-    	$('itree' + k).style.display = 'none';
-    }
+	// forms management
+	function combineForms(dcf, ref) {
+		var dc = $(dcf);
+		var rf = $(ref).elements;
+		var ih = null;
+		for (i=0; i < rf.length; i++) {
+			if (rf[i].disabled == false) {
+				ih = document.createElement("input");
+				ih.type   = "hidden";
+				ih.value  = rf[i].value;
+				ih.name   = rf[i].name;
+				dc.appendChild(ih);
+			}
+		}
+	}
+	function setSelMap(code, gid, opc) {
+		if (opc) {
+			// Find and fill childs
+			$('itree' + gid).style.display = 'block';
+			updateList('itree' + gid, 'index.php', 'r={-$reg-}&cmd=glist&GeographyId=' + gid);
+		}
+		else {
+			// clean childs first
+			$('itree' + gid).innerHTML = '';
+			$('itree' + gid).style.display = 'none';
+		}
+	}
     function saveRes(cmd, typ) {
 		if($('DCRes').value != '') {
 		  switch ($('DCRes').value) {
