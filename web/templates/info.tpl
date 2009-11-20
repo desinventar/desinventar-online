@@ -16,13 +16,13 @@
 		<table border="0" cellspacing="0" cellpadding="0">
 		<tr>
 		<td colspan="2">
-		{-foreach name=info key=k item=i from=$info-}
+		{-foreach name=info key=LangIsoCode item=RegionFields from=$info-}
 			<fieldset>
-			<legend><a href="javascript:void(null)" onClick="if($('inf{-$k-}').style.display=='block') 
-					$('inf{-$k-}').style.display='none'; else $('inf{-$k-}').style.display='block';"><b 
-					onMouseOver="showtip('{-$dic.DBRegion[2]-}');">{-$dic.DBRegion[0]-} {-$k-}</b></a></legend>
-			<table id="inf{-$k-}" border="0" style="display:{-if ($smarty.foreach.info.iteration) == 1-}block{-else-}none{-/if-};">
-			{-foreach name=iitt key=key item=item from=$i-}
+			<legend><a id="Legend_{-$LangIsoCode-}" href="javascript:void(null)" onClick="if($('inf{-$LangIsoCode-}').style.display=='block') 
+					$('inf{-$LangIsoCode-}').style.display='none'; else $('inf{-$LangIsoCode-}').style.display='block';"><b 
+					onMouseOver="showtip('{-$dic.DBRegion[2]-}');">{-$dic.DBRegion[0]-} {-$LangIsoCode-}</b></a></legend>
+			<table id="inf{-$LangIsoCode-}" border="0" style="display:{-if ($smarty.foreach.info.iteration) == 1-}block{-else-}none{-/if-};">
+			{-foreach name=iitt key=key item=item from=$RegionFields-}
 				{-assign var="inf" value=DB$key-}
 				{-assign var="tabind" value="`$tabind+1`"-}
 				<tr>
@@ -32,10 +32,10 @@
 				</td>
 				<td>
 					{-if $item[1] == "TEXT"-}
-						<textarea id="{-$key-}_{-$k-}" name="{-$key-}_{-$k-}" {-$ro-} style="width:350px; height:30px;" tabindex="{-$tabind-}"
+						<textarea id="RegionInfo[{-$LangIsoCode-}][{-$key-}]" name="RegionInfo[{-$LangIsoCode-}][{-$key-}]" {-$ro-} style="width:350px; height:30px;" tabindex="{-$tabind-}"
 							onFocus="showtip('{-$dic.$inf[2]-}')">{-$item[0]-}</textarea>
 					{-elseif $item[1] == "VARCHAR"-}
-						<input id="{-$key-}_{-$k-}" name="{-$key-}_{-$k-}" type="text" class="line" style="width:350px;" 
+						<input id="RegionInfo[{-$LangIsoCode-}][{-$key-}]" name="RegionInfo[{-$LangIsoCode-}][{-$key-}]" type="text" class="line" style="width:350px;" 
 							value="{-$item[0]-}" tabindex="{-$tabind-}"/>
 					{-/if-}
 				</td>

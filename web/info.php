@@ -43,21 +43,19 @@ if ($RegionId == '') {
 	exit();
 }
 $us->open($RegionId);
-
 if (isset($infocmd)) {
 	// EDIT REGION: Form to Create and assign regions
 	$ifo = 0;
 	$data = form2data($post);
+	$data = $_POST['RegionInfo'];
 	$r = new DIRegion($us, $data['RegionId']);
 	$LangIsoCode = $r->get('LangIsoCode');
-	$r->setFromArray($data);
+	$r->setFromArray($_POST);
 	// Set Translated Info
 	$tf = $r->getTranslatableFields();
 	foreach($tf as $FieldName => $FieldType) {
-		$r->set($FieldName, $data[$FieldName], $LangIsoCode);
-		if (isset($data[$FieldName . '_eng'])) {
-			$r->set($FieldName, $data[$FieldName . '_eng'],'eng');
-		}
+		$r->set($FieldName, $data[$LangIsoCode][$FieldName], $LangIsoCode);
+		$r->set($FieldName, $data['eng'][$FieldName],'eng');
 	}
 	$ifo = $r->update();
 	if (!iserror($ifo)) {
@@ -122,10 +120,11 @@ if (isset($infocmd)) {
 	if ($urol == "OBSERVER") {
 		$t->assign ("ro", "disabled");
 	}
-	$lang[0] = ''; //$_SESSION['lang'];
+	$r = new DIRegion($us, $RegionId);
+	$lang = array();
+	$lang[0] = $r->get('LangIsoCode');
 	$lang[1] = 'eng';
 	//$inf = $us->q->getDBInfo();
-	$r = new DIRegion($us, $RegionId);
 	foreach ($lang as $lng) {
 		$info[$lng]['InfoCredits'] 		= array($r->get('InfoCredits'    , $lng), "TEXT");
 		$info[$lng]['InfoGeneral'] 		= array($r->get('InfoGeneral'    , $lng), "TEXT");

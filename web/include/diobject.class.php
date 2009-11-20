@@ -78,19 +78,18 @@ class DIObject {
 	} // function
 	
 	public function get($prmKey, $LangIsoCode='') {
+		$Value = '';
 		try {
-			if (array_key_exists($prmKey, $this->oField['info'])) {
-				return $this->oField['info'][$prmKey];
-			} else {
-				$LangIsoCode = $this->get('LangIsoCode');
-				if (array_key_exists($prmKey, $this->oField[$LangIsoCode])) {
-					return $this->oField[$LangIsoCode][$prmKey];
-				}
-				return '';
+			if ($LangIsoCode == '') {
+				$LangIsoCode = 'info';
+			}
+			if (array_key_exists($prmKey, $this->oField[$LangIsoCode])) {
+				$Value = $this->oField[$LangIsoCode][$prmKey];
 			}
 		} catch (Exception $e) {
 			showErrorMsg("Error " . $e->getMessage());
-		}		
+		}
+		return $Value;
 	}
 	
 	public function getType($prmKey) {
