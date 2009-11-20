@@ -36,7 +36,6 @@ function form2data($form) {
 
 $post = $_POST;
 $get = $_GET;
-
 $RegionId = getParameter('_REG', getParameter('r', ''));
 $infocmd = getParameter('_infocmd', NULL);
 
