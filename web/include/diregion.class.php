@@ -1,7 +1,7 @@
 <script language="php">
 /*
  DesInventar - http://www.desinventar.org
- (c) 1999-2009 Corporacion OSSO
+ (c) 1998-2009 Corporacion OSSO
 */
 
 class DIRegion extends DIObject {
@@ -197,6 +197,7 @@ class DIRegion extends DIObject {
 	public function load() {
 		$iReturn = ERR_NO_ERROR;
 		if ($iReturn > 0) {
+			$this->setConnection('core');
 			$iReturn = parent::load();
 		}
 		if ($iReturn > 0) {

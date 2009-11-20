@@ -2,7 +2,7 @@
 /************************************************
  DesInventar8
  http://www.desinventar.org  
- (c) 1999-2007 Corporacion OSSO
+ (c) 1998-2007 Corporacion OSSO
  ***********************************************/
 
 class Math

@@ -1,7 +1,7 @@
 <script language="php">
 /*
  DesInventar8 - http://www.desinventar.org
- (c) 1999-2009 Corporacion OSSO
+ (c) 1998-2009 Corporacion OSSO
 */
 require_once(JPGRAPHDIR . "/jpgraph.php");
 require_once(JPGRAPHDIR . "/jpgraph_line.php");

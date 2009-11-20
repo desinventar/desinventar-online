@@ -1,7 +1,7 @@
 <script language="php">
 /*
  DesInventar8 - http://www.desinventar.org
- (c) 1999-2009 Corporacion OSSO
+ (c) 1998-2009 Corporacion OSSO
 */
 
 class Query extends PDO
@@ -436,17 +436,23 @@ class Query extends PDO
     return $data;
   }
 
-  function getEEFieldList($act) {
-    $sql = "SELECT * FROM EEField";
-    if ($act != "")
-      $sql .= " WHERE EEFieldStatus=1 OR EEFieldStatus=3";
-    $data = array();
-    $res = $this->dreg->query($sql);
-    foreach($res as $row)
-      $data[$row['EEFieldId']] = array($row['EEFieldLabel'], str2js($row['EEFieldDesc']), 
-          $row['EEFieldType'], $row['EEFieldSize'], $row['EEFieldStatus']);
-    return $data;
-  }
+	function getEEFieldList($act) {
+		$sql = "SELECT * FROM EEField";
+		if ($act != "") {
+			$sql .= " WHERE EEFieldStatus=1 OR EEFieldStatus=3";
+		}
+		$data = array();
+		try {
+			$res = $this->dreg->query($sql);
+		} catch (Exception $e) {
+			showErrorMsg("Error !: " . $e->getMessage());
+		}
+		foreach($res as $row) {
+			$data[$row['EEFieldId']] = array($row['EEFieldLabel'], str2js($row['EEFieldDesc']), 
+				$row['EEFieldType'], $row['EEFieldSize'], $row['EEFieldStatus']);
+		}
+		return $data;
+	}
 
   function getEEFieldSeries() {
     $sql = "SELECT COUNT(EEFieldId) as count FROM EEField";
