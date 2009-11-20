@@ -145,16 +145,30 @@ class DIRegion extends DIObject {
 		$this->setConnection($this->get('RegionId'));
 		$Translatable = $this->getTranslatableFields();
 		foreach($this->oField as $Key => $Value) {
-			foreach($this->oField[$Key] as $InfoKey => $InfoValue) {
-				$LangIsoCode = $Key;
-				if (strlen($Key) > 3) {
-					$LangIsoCode = '';
-				}
-				$sQuery = "DELETE FROM Info WHERE InfoKey='" . $InfoKey . "' AND LangIsoCode='" . $LangIsoCode . "'";
-				$this->conn->query($sQuery);
-				$sQuery = "INSERT INTO Info VALUES ('" . $InfoKey . "','" . $LangIsoCode . "','" . $InfoValue . "','','" . $now . "','" . $now . "','" . $now . "')";
-				$this->conn->query($sQuery);
-			} //foreach
+			if ($iReturn > 0) {
+				foreach($this->oField[$Key] as $InfoKey => $InfoValue) {
+					if ($iReturn > 0) {
+						$LangIsoCode = $Key;
+						if (strlen($LangIsoCode) > 3) {
+							$LangIsoCode = '';
+						}
+						$sQuery = "DELETE FROM Info WHERE InfoKey='" . $InfoKey . "' AND LangIsoCode='" . $LangIsoCode . "'";
+						try {
+							$this->conn->query($sQuery);
+						} catch (Exception $e) {
+							showErrorMsg("Error " . $e->getMessage());
+							$iReturn = ERR_UNKNOWN_ERROR;
+						}
+						$sQuery = "INSERT INTO Info VALUES ('" . $InfoKey . "','" . $LangIsoCode . "','" . $InfoValue . "','','" . $now . "','" . $now . "','" . $now . "')";
+						try {
+							$this->conn->query($sQuery);
+						} catch (Exception $e) {
+							showErrorMsg("Error " . $e->getMessage());
+							$iReturn = ERR_UNKNOWN_ERROR;
+						}
+					 } //if
+				} //foreach
+			} //if
 		} //foreach
 		$this->setConnection('core');
 		$this->saveInfoTrans('eng');

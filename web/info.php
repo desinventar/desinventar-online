@@ -2,7 +2,7 @@
 /************************************************
  DesInventar8
  http://www.desinventar.org  
- (c) 1999-2009 Corporacion OSSO
+ (c) 1998-2009 Corporacion OSSO
  ***********************************************/
 
 require_once('include/loader.php');
@@ -37,29 +37,28 @@ function form2data($form) {
 $post = $_POST;
 $get = $_GET;
 
-if (isset($post['_REG']) && !empty($post['_REG'])) {
-	$reg = $post['_REG'];
-	$infocmd = $post['_infocmd'];
-}
-elseif (isset($get['r']) && !empty($get['r'])) {
-	$reg = $get['r'];
-}
-else
-	exit();
+$RegionId = getParameter('_REG', getParameter('r', ''));
+$infocmd = getParameter('_infocmd', NULL);
 
-$us->open($reg);
+if ($RegionId == '') {
+	exit();
+}
+$us->open($RegionId);
 
 if (isset($infocmd)) {
 	// EDIT REGION: Form to Create and assign regions
 	$ifo = 0;
 	$data = form2data($post);
 	$r = new DIRegion($us, $data['RegionId']);
+	$LangIsoCode = $r->get('LangIsoCode');
 	$r->setFromArray($data);
+	// Set Translated Info
+	$r->set('InfoCredits', $data['InfoCredits'], $LangIsoCode);
 	$ifo = $r->update();
 	if (!iserror($ifo)) {
 		$t->assign ("ctl_msgupdinfo", true);
 		if (isset($_FILES['logofile']) && $_FILES['logofile']['error'] == UPLOAD_ERR_OK)
-			move_uploaded_file($_FILES['logofile']['tmp_name'], VAR_DIR ."/database/". $reg . "/logo.png");
+			move_uploaded_file($_FILES['logofile']['tmp_name'], VAR_DIR ."/database/". $RegionId . "/logo.png");
 	}
 	else {
 		$t->assign ("ctl_errupdinfo", true);
@@ -70,7 +69,7 @@ if (isset($infocmd)) {
 	$cmd = $get['rolecmd'];
 	if (($cmd == "insert") || ($cmd == "update")) {
 		// Set Role in RegionAuth
-		$rol = $us->setUserRole($get['UserId'], $reg, $get['AuthAuxValue']);
+		$rol = $us->setUserRole($get['UserId'], $RegionId, $get['AuthAuxValue']);
 		if (!iserror($rol)) 
 			$t->assign ("ctl_msgupdrole", true);
 		else {
@@ -80,7 +79,7 @@ if (isset($infocmd)) {
 	}
 	// reload list from local SQLITE
 	else if ($cmd == "list") {
-		$t->assign ("rol", $us->getRegionRoleList($reg));
+		$t->assign ("rol", $us->getRegionRoleList($RegionId));
 		$t->assign ("ctl_rollist", true);
 	}
 } elseif (isset($get['logcmd'])) {
@@ -140,16 +139,16 @@ if (isset($infocmd)) {
 	$sett['PeriodBeginDate']= array($r->get('PeriodBeginDate'), "DATE");
 	$sett['PeriodEndDate']	= array($r->get('PeriodEndDate'), "DATE");
 	$t->assign ("sett", $sett);
-	$urol = $us->getUserRole($reg);
+	$urol = $us->getUserRole($RegionId);
 	//$t->assign ("usr", $us->getUserFullName(''));
 	$t->assign ("usr", $us->getUsersList(''));
-	$t->assign ("rol", $us->getRegionRoleList($reg));
+	$t->assign ("rol", $us->getRegionRoleList($RegionId));
 	$t->assign ("log", $us->q->getRegLogList());
 	$t->assign ("ctl_adminreg", true);
 	$t->assign ("ctl_rollist", true);
 	$t->assign ("ctl_loglist", true);
 }
-$t->assign ("reg", $reg);
+$t->assign ("reg", $RegionId);
 $t->assign ("dic", $us->q->queryLabelsFromGroup('DB', $lg));
 $t->assign ("usern", $us->UserId);
 $t->display ("info.tpl");
