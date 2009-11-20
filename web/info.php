@@ -53,7 +53,13 @@ if (isset($infocmd)) {
 	$LangIsoCode = $r->get('LangIsoCode');
 	$r->setFromArray($data);
 	// Set Translated Info
-	$r->set('InfoCredits', $data['InfoCredits'], $LangIsoCode);
+	$tf = $r->getTranslatableFields();
+	foreach($tf as $FieldName => $FieldType) {
+		$r->set($FieldName, $data[$FieldName], $LangIsoCode);
+		if (isset($data[$FieldName . '_eng'])) {
+			$r->set($FieldName, $data[$FieldName . '_eng'],'eng');
+		}
+	}
 	$ifo = $r->update();
 	if (!iserror($ifo)) {
 		$t->assign ("ctl_msgupdinfo", true);

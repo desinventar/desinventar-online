@@ -171,8 +171,8 @@ class DIRegion extends DIObject {
 			} //if
 		} //foreach
 		$this->setConnection('core');
-		$this->saveInfoTrans('eng');
-		$this->saveInfoTrans($this->get('LangIsoCode'));
+		//$this->saveInfoTrans('eng');
+		//$this->saveInfoTrans($this->get('LangIsoCode'));
 		return $iReturn;
 	}
 	
