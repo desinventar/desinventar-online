@@ -1,7 +1,7 @@
 <script language="php">
 /*
  DesInventar - http://www.desinventar.org
- (c) 1999-2009 Corporacion OSSO
+ (c) 1998-2009 Corporacion OSSO
 */
 require_once('include/loader.php');
 

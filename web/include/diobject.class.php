@@ -1,7 +1,7 @@
 <script language="php">
 /*
   DesInventar - http://www.desinventar.org
-  (c) 1999-2009 Corporacion OSSO
+  (c) 1998-2009 Corporacion OSSO
 */
 
 class DIObject {
@@ -55,7 +55,6 @@ class DIObject {
 	}
 	
 	public function createFields($prmFieldDef, $LangIsoCode='') {
-		//print_r($prmFieldDef);
 		if ($LangIsoCode == '') {
 			$obj = &$this->oField['info'];
 		} else {
