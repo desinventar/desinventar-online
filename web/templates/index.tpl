@@ -1466,8 +1466,17 @@
 	<table border="0" cellpadding="0" cellspacing="0" style="border: thin solid;">
 	<tr style="background:url(images/bgmain.png)">
 		<td width="400px" colspan="2">
-			<a href="index.php?cmd=main"><img src="images/di_logo1.png" border=0></a><br/>
-			<br /><hr /><br />
+			<table width="100%">
+			<tr>
+			<td>
+				<a href="index.php?cmd=main"><img src="images/di_logo1.png" border=0></a><br />
+			</td>
+			<td align="right">
+				{-$version-}<br />
+			</td>
+			</tr>
+			</table>
+			<hr /><br />
 		</td>
 	</tr>
 	<tr bgcolor="#e2e2e0" valign="top">
