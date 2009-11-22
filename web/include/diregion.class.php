@@ -774,9 +774,12 @@ class DIRegion extends DIObject {
 	public function getDBInfo() {
 		$a = array();
 		foreach(array('RegionId','RegionLabel', 'PeriodBeginDate','PeriodEndDate',
-		              'InfoGeneral','InfoCredits','InfoSources','InfoSynopsis',
 		              'RegionLastUpdate') as $Field) {
 			$a[$Field] = $this->get($Field);
+		}
+		$LangIsoCode = $this->get('LangIsoCode');
+		foreach(array('InfoGeneral','InfoCredits','InfoSources','InfoSynopsis') as $Field) {
+			$a[$Field] = $this->get($Field, $LangIsoCode);
 		}
 		$a['RegionLastUpdate'] = substr($a['RegionLastUpdate'],0,10);
 		return $a;
