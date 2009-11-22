@@ -342,7 +342,7 @@ class Maps
   
   function generateKML($q, $reg, $info) {
     $fp = urlencode(TMPM_DIR ."/di8ms_$reg-". session_id() .".map");
-    $dinf = $q->getDBInfo();
+    $dinf = $q->getDBInfo($lg);
     $regn = $dinf['RegionLabel|'];
     $desc = $dinf['RegionDesc'];
     $lon = (int) (($dinf['GeoLimitMinX'] + $dinf['GeoLimitMaxX']) / 2);

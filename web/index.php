@@ -87,7 +87,7 @@ switch ($cmd) {
 		$r = new DIRegion($us, $RegionId);
 		$RegionInfo = array();
 		$RegionInfo['RegionId'] = $RegionId;
-		$a = $r->getDBInfo();
+		$a = $r->getDBInfo($lg);
 		$a['NumDatacards'] = $us->q->getNumDisasterByStatus('PUBLISHED');
 		$t->assign('RegionInfo', $a);
 		$t->display('regionbasicinfo.tpl');
@@ -96,7 +96,7 @@ switch ($cmd) {
 		$r = new DIRegion($us, $RegionId);
 		$RegionInfo = array();
 		$RegionInfo['RegionId'] = $RegionId;
-		$t->assign('RegionInfo', $r->getDBInfo());
+		$t->assign('RegionInfo', $r->getDBInfo($lg));
 		$labels = $us->q->queryLabelsFromGroup('DB', $lg, false);
 		$t->assign ('Labels', $labels);
 		$t->display('regiontechinfo.tpl');
@@ -104,7 +104,7 @@ switch ($cmd) {
 	case 'getRegionFullInfo':
 		$t->assign('reg', $RegionId);
 		$r = new DIRegion($us, $RegionId);
-		$a = $r->getDBInfo();
+		$a = $r->getDBInfo($lg);
 		$a['NumDatacards'] = $us->q->getNumDisasterByStatus('PUBLISHED');
 		$t->assign('RegionInfo', $a);
 		$labels = $us->q->queryLabelsFromGroup('DB', $lg, false);
