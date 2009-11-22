@@ -84,7 +84,7 @@ if (isset($post['_M+cmd'])) {
 	$dl = $us->q->prepareList($dislist, "MAPS");
 	// MAPS Query, RegionId, Level, datalist, ranges, dbinfo, label, maptype
 	$m = new Maps($us->q, $reg, $lev[0], $dl, $range, $info, $post['_M+Label'], $post['_M+Transparency'], "THEMATIC");	
-	$rinf = $us->q->getDBInfo();
+	$rinf = $us->q->getDBInfo($lg);
 	$rgl[0]['regname'] = $rinf['RegionLabel|'];
 	$rgl[0]['info'] = $info;
 	// if valid filename then prepare interface to view MAPFILE	

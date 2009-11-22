@@ -124,7 +124,7 @@ if (isset($infocmd)) {
 	$lang = array();
 	$lang[0] = $r->get('LangIsoCode');
 	$lang[1] = 'eng';
-	//$inf = $us->q->getDBInfo();
+	//$inf = $us->q->getDBInfo($lg);
 	foreach ($lang as $lng) {
 		$info[$lng]['InfoCredits'] 		= array($r->get('InfoCredits'    , $lng), "TEXT");
 		$info[$lng]['InfoGeneral'] 		= array($r->get('InfoGeneral'    , $lng), "TEXT");
