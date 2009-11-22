@@ -770,14 +770,26 @@ class DIRegion extends DIObject {
 		}
 		return $iReturn;
 	}
-	
+
+	public function getLanguageList() {
+		$LangIsoCode = $this->get('LangIsoCode');
+		$ll = array('eng'=>'eng');
+		if ($LangIsoCode != 'eng') {
+			$ll[$LangIsoCode] = $LangIsoCode;
+		}
+		return $ll;
+	}
+		
 	public function getDBInfo($prmLang = 'eng') {
 		$a = array();
 		foreach(array('RegionId','RegionLabel', 'PeriodBeginDate','PeriodEndDate',
 		              'RegionLastUpdate') as $Field) {
 			$a[$Field] = $this->get($Field);
 		}
-		$LangIsoCode = $this->get('LangIsoCode');
+		$ll = $this->getLanguageList();
+		if (!array_key_exists($prmLang, $ll)) {
+			$prmLang = 'eng';
+		}
 		foreach(array('InfoGeneral','InfoCredits','InfoSources','InfoSynopsis') as $Field) {
 			$a[$Field] = $this->get($Field, $prmLang);
 		}
