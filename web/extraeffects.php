@@ -44,7 +44,9 @@ switch($cmd) {
 		              'EEFieldSize'   => $get['EEFieldSize'],
 		              'EEFieldStatus' => $status);
 		$o = new DIEEField($us, $get['EEFieldId']);
+		$EEFieldId = $o->get('EEFieldId');
 		$o->setFromArray($data);
+		$o->set('EEFieldId', $EEFieldId);
 		if ($cmd == "insert") {
 			$stat = $o->insert();
 		} elseif ($cmd == "update") {
