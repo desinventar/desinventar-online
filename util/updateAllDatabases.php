@@ -28,7 +28,8 @@ foreach($q->core->query("SELECT * FROM Region ORDER BY RegionId") as $row) {
 }
 //$RegionList = array('GTM-1255694888-guatemala_inventario_historico_de_desastres');
 //$RegionList = array('BOL-1250695036-bolivia_gran_chaco');
-$RegionList = array('COL-1250694506-colombia_inventario_historico_de_desastres');
+//$RegionList = array('COL-1250694506-colombia_inventario_historico_de_desastres');
+$RegionList = array('PER-1250695241-peru_inventario_historico_de_desastres');
 //$RegionList = array('CHL-1257983285-chile_inventario_historico_de_desastres');
 foreach ($RegionList as $RegionId) {
 	$r = new DIRegion($us, $RegionId);
