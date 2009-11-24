@@ -35,7 +35,7 @@ switch($cmd) {
 		if (isset($get['EEFieldPublic']) && $get['EEFieldPublic'] == "on") {
 			$status |= CONST_REGIONPUBLIC;
 		} else {
-			$status &= CONST_REGIONPUBLIC;
+			$status &= ~CONST_REGIONPUBLIC;
 		}
 		$data = array('EEFieldId'     => $get['EEFieldId'],
 		              'EEFieldLabel'  => $get['EEFieldLabel'],
@@ -47,6 +47,7 @@ switch($cmd) {
 		$EEFieldId = $o->get('EEFieldId');
 		$o->setFromArray($data);
 		$o->set('EEFieldId', $EEFieldId);
+		$o->set('RegionId', $RegionId);
 		if ($cmd == "insert") {
 			$stat = $o->insert();
 		} elseif ($cmd == "update") {
@@ -70,7 +71,8 @@ switch($cmd) {
 			$t->assign ("ro", "disabled");
 		}
 		$t->assign ("ctl_admineef", true);
-		$t->assign ("eef", $us->q->getEEFieldList(""));
+		$eef =  $us->q->getEEFieldList("");
+		$t->assign ("eef", $eef);
 		$t->assign ("ctl_eeflist", true);
 		break;
 } //switch

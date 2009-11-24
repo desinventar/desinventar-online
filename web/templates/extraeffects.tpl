@@ -19,10 +19,10 @@
  {-foreach name=eef key=key item=item from=$eef-}
 				<tr class="{-if ($smarty.foreach.eef.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}"
 						onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
-						onClick="setExtraEff('{-$key-}','{-$item[0]-}', '{-$item[1]-}', '{-$item[2]-}', '{-$item[3]-}', 
-   											'{-$item[4]-}', '{-$item[5]-}'); $('cmd').value='update';">
-					<td>{-$item[0]-}</td>
-					<td>{-$item[1]-}</td>
+						onClick="setExtraEff('{-$key-}','{-$item.EEFieldLabel-}', '{-$item.EEFieldDesc-}', '{-$item.EEFieldType-}', '{-$item.EEFieldSize-}', 
+   											'{-$item.EEFieldActive-}', '{-$item.EEFieldPublic-}'); $('cmd').value='update';">
+					<td>{-$item.EEFieldLabel-}</td>
+					<td>{-$item.EEFieldDesc-}</td>
 				</tr>
  {-/foreach-}
 {-/if-}

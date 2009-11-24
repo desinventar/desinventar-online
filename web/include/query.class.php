@@ -448,9 +448,22 @@ class Query extends PDO
 			showErrorMsg("Error !: " . $e->getMessage());
 		}
 		foreach($res as $row) {
+			// Split EEFieldStatus in Fields Active/Public ?
+			$row['EEFieldActive'] = 0;
+			if ($row['EEFieldStatus'] & CONST_REGIONACTIVE) {
+				$row['EEFieldActive'] = 1;
+			}
+			$row['EEFieldPublic'] = 0;
+			if ($row['EEFieldStatus'] & CONST_REGIONPUBLIC) {
+				$row['EEFieldPublic'] = 1;
+			}
+			$data[$row['EEFieldId']] = $row;
+			/*			
 			$data[$row['EEFieldId']] = array($row['EEFieldLabel'], str2js($row['EEFieldDesc']), 
 				$row['EEFieldType'], $row['EEFieldSize'], $row['EEFieldStatus']);
+			*/
 		}
+		
 		return $data;
 	}
 
