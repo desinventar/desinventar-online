@@ -457,11 +457,14 @@ class Query extends PDO
 			if ($row['EEFieldStatus'] & CONST_REGIONPUBLIC) {
 				$row['EEFieldPublic'] = 1;
 			}
-			$data[$row['EEFieldId']] = $row;
-			/*			
-			$data[$row['EEFieldId']] = array($row['EEFieldLabel'], str2js($row['EEFieldDesc']), 
-				$row['EEFieldType'], $row['EEFieldSize'], $row['EEFieldStatus']);
-			*/
+			$data[$row['EEFieldId']] = array(
+				$row['EEFieldLabel'], 
+				str2js($row['EEFieldDesc']), 
+				$row['EEFieldType'], 
+				$row['EEFieldSize'], 
+				$row['EEFieldActive'],
+				$row['EEFieldPublic']
+			);
 		}
 		
 		return $data;
