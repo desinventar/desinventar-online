@@ -7,6 +7,8 @@
 	$LangIsoCode = $argv[2];
 	$TableName   = $argv[3];
 	$fh = fopen($FileName, 'r');
+	// First line are headers
+	$values = fgetcsv($fh, 1000, ',');
 	while (! feof($fh) ) {
 		$values = fgetcsv($fh, 1000, ',');
 		if (count($values) > 1) {
