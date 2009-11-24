@@ -45,13 +45,12 @@ function showResult($stat, &$tp) {
 }
 
 $get = $_GET;
-
-if (isset($get['r']) && !empty($get['r'])) {
-	$reg = $get['r'];
-	$us->open($reg);
-} else
+$RegionId = getParameter('r');
+if ($RegionId == '') {
 	exit();
+}
 
+$us->open($RegionId);
 if (isset($get['cmd'])) {
 	$dat = form2cause($get);
 	switch ($get['cmd']) {
@@ -60,14 +59,14 @@ if (isset($get['cmd'])) {
 		$o->setFromArray($dat);
 		$o->set('CauseId', uuid());
 		$o->set('CausePredefined', 0);
+		$o->set('RegionId', $RegionId);
 		$i = $o->insert();
 		showResult($i, $t);
 		break;
 	case "update";
 		$o = new DICause($us, $dat['CauseId']);
-		//$o->set('CauseId', $dat['CauseId']);
-		//$o->load();
 		$o->setFromArray($dat);
+		$o->set('RegionId', $RegionId);
 		$i = $o->update();
 		showResult($i, $t);
 		break;
@@ -94,10 +93,9 @@ if (isset($get['cmd'])) {
 		break;
 	default: break;
 	} //switch
-}
-else {
+} else {
 	$t->assign ("dic", $us->q->queryLabelsFromGroup('DB', $lg));
-	$urol = $us->getUserRole($reg);
+	$urol = $us->getUserRole($RegionId);
 	if ($urol == "OBSERVER")
 		$t->assign ("ro", "disabled");
 	$t->assign ("ctl_show", true);
@@ -107,7 +105,7 @@ else {
 	$t->assign ("cauuserl", $us->q->loadCauses("USER", null, $lg));
 }
 
-$t->assign ("reg", $reg);
+$t->assign ("reg", $RegionId);
 $t->display ("causes.tpl");
 
 </script>
