@@ -145,9 +145,20 @@ else {
 		}
 	}
 	elseif (isset($_GET['DisasterId']) && !empty($_GET['DisasterId'])) {
+		$DisasterId = $_GET['DisasterId'];
+		$d = new DIDisaster($us, $DisasterId);
+		$e = new DIEEData($us, $DisasterId);
+		$dcard = array_merge($d->oField['info'],$e->oField['info']);
+		$dcard['DisasterBeginTime[0]'] = substr($dcard['DisasterBeginTime'], 0, 4);
+		$dcard['DisasterBeginTime[1]'] = substr($dcard['DisasterBeginTime'], 5, 2);
+		$dcard['DisasterBeginTime[2]'] = substr($dcard['DisasterBeginTime'], 8, 2);
+		echo json_encode($dcard);
+		/*
 		$dcard = $us->q->hash2json($us->q->getDisasterById($_GET['DisasterId']));
-		if (isset($dcard[0]))
+		if (isset($dcard[0])) {
 			echo $dcard[0];
+		}
+		*/
 	}
 	elseif (isset($_POST['_CMD'])) {
 		// Commands in POST mode: insert, update, search.. datacards.. 
