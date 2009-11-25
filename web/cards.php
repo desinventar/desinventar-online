@@ -71,7 +71,7 @@ function form2eedata($form) {
 }
 
 $sRegionId = getParameter('_REG', getParameter('r',''));
-if ($sRegionId == '') {
+if ( ($sRegionId == '') || ($sRegionId == 'undefined') ) {
 	if ($us->sRegionId != 'core') {
 		$sRegionId = $us->sRegionId;
 	}
@@ -80,6 +80,7 @@ if ($sRegionId == '') {
 	exit(0);
 } else {
 	$us->open($sRegionId);
+	$t->assign('reg', $sRegionId);
 }
 // 2009-08-07 (jhcaiced) Validate if Database Exists...
 if (! file_exists($us->q->getDBFile($sRegionId))) {
@@ -143,8 +144,7 @@ else {
 			break;
 			default: break;
 		}
-	}
-	elseif (isset($_GET['DisasterId']) && !empty($_GET['DisasterId'])) {
+	} elseif (isset($_GET['DisasterId']) && !empty($_GET['DisasterId'])) {
 		$DisasterId = $_GET['DisasterId'];
 		$d = new DIDisaster($us, $DisasterId);
 		$e = new DIEEData($us, $DisasterId);
@@ -152,6 +152,7 @@ else {
 		$dcard['DisasterBeginTime[0]'] = substr($dcard['DisasterBeginTime'], 0, 4);
 		$dcard['DisasterBeginTime[1]'] = substr($dcard['DisasterBeginTime'], 5, 2);
 		$dcard['DisasterBeginTime[2]'] = substr($dcard['DisasterBeginTime'], 8, 2);
+		$dcard['_REG'] = $sRegionId;
 		echo json_encode($dcard);
 		/*
 		$dcard = $us->q->hash2json($us->q->getDisasterById($_GET['DisasterId']));
@@ -159,8 +160,7 @@ else {
 			echo $dcard[0];
 		}
 		*/
-	}
-	elseif (isset($_POST['_CMD'])) {
+	} elseif (isset($_POST['_CMD'])) {
 		// Commands in POST mode: insert, update, search.. datacards.. 
 		$us->releaseDatacard($_POST['DisasterId']);
 		if ($_POST['_CMD'] == "insertDICard") {
@@ -184,12 +184,10 @@ else {
 			}
 			else
 				$t->assign ("statusmsg", showerror($i));
-		}
-		elseif ($_POST['_CMD'] == "updateDICard") {
+		} elseif ($_POST['_CMD'] == "updateDICard") {
 			// Update Existing Datacard
 			$data = form2disaster($_POST, CMD_UPDATE);
 			$o = new DIDisaster($us, $data['DisasterId']);
-			$o->load();
 			$o->setFromArray($data);
 			$o->set('RecordUpdate', gmdate('c'));
 			$i = $o->update();
