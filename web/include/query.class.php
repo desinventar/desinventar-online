@@ -253,6 +253,7 @@ class Query extends PDO
       case DI_EVENT:		$name = "EventName";		$table = "Event";		$fld = "EventId";		break;
       case DI_CAUSE:		$name = "CauseName";		$table = "Cause";		$fld = "CauseId";		break;
       case DI_GEOGRAPHY:	$name = "GeographyCode";	$table = "Geography"; 	$fld = "GeographyId";	break;
+      case "GEONAME":		$name = "GeographyName";	$table = "Geography"; 	$fld = "GeographyId";	break;
       case "GEOCODE":		$name = "GeographyId";		$table = "Geography"; 	$fld = "GeographyCode";	break;
       case DI_GEOLEVEL:		$name = "GeoLevelName";		$table = "GeoLevel"; 	$fld = "GeoLevelId";	break;
       default:				return null; 		break;
@@ -280,127 +281,149 @@ class Query extends PDO
   }
 
 /*** GEOGRAPHY & GEO-LEVELS QUERIES  ***/
-  function buildGeographyId($fid, $lev) {
-    $sql = "SELECT MAX(GeographyId) AS max FROM Geography WHERE GeographyId ".
-            "LIKE '$fid%' AND GeographyLevel = $lev ORDER BY GeographyId";
-    $data = array();
-    $res = $this->getresult($sql);
-    $myid = (int)substr($res['max'], -5);
-    $myid += 1;
-    $newid = $fid . sprintf("%05s", $myid);
-    return $newid;
-  }
-
-  function getGeoNameById($geoid) {
-	if ($geoid == "")
-	  return null;
-	$sql = "SELECT GeographyName FROM Geography WHERE 1!=1";
-	$levn = (strlen($geoid) / 5);
-	for ($n = 0; $n < $levn; $n++) {
-		$len = 5 * ($n + 1);
-		$geo = substr($geoid, 0, $len);
-		$sql .= " OR GeographyId='". $geo ."'";
+	function buildGeographyId($fid, $lev) {
+		$sql = "SELECT MAX(GeographyId) AS max FROM Geography WHERE GeographyId ".
+				"LIKE '$fid%' AND GeographyLevel = $lev ORDER BY GeographyId";
+		$data = array();
+		$res = $this->getresult($sql);
+		$myid = (int)substr($res['max'], -5);
+		$myid += 1;
+		$newid = $fid . sprintf("%05s", $myid);
+		return $newid;
 	}
-	$sql .= " ORDER BY GeographyLevel";
-	$data = "";
-	$res = $this->dreg->query($sql);
-	foreach($res as $row)
-	  $data .= $row['GeographyName'] . "/";
-//	$sql = "SELECT GeographyFQName FROM Geography WHERE GeographyId='". $geoid ."'";
-//	$data = $this->dreg->query($sql);
-	return $data;
-  }
 
-  /*** GEOGRAPHY ***/
-  /* uhmm... testing function.. 
-  function loadGeoTree() {
-    $data = array();
-    $sql = "SELECT GeographyId, GeographyCode, GeographyName, GeographyLevel".
-            " FROM Geography WHERE GeographyActive=1 ORDER BY GeographyId";
-    $res = $this->dreg->query($sql);
-    $max = $this->getMaxGeoLev();
-    foreach($res as $row) {
-      $lev = $row['GeographyLevel'];
-      $key = $row['GeographyId'] ."|". str2js($row['GeographyName']);
-      if ($lev == 0) {
-        $par0 = $key;
-        $data[$par0] = array();
-      }
-      elseif ($lev == 1) {
-        $par1 = $key;
-        $ele[$key] = array();
-        $data[$par0] = array_merge($data[$par0], $ele);
-      }
-      elseif ($lev == 2) {
-        $ele[$key] = array();
-        $data[$par0][$par1] = array_merge($data[$par0][$par1], $ele);
-      }
-      $ele = null;
-    }
-    return $data;
-  }*/
-  
-  function loadGeography($level) {
-    if (!is_numeric($level) && $level >= 0)
-      return null;
-    $sql = "SELECT * FROM Geography WHERE GeographyLevel=" . $level . 
-           " AND GeographyId NOT LIKE '%00000' ORDER BY GeographyName";
-    $data = array();
-    $res = $this->dreg->query($sql);
-    foreach($res as $row)
-      $data[$row['GeographyId']] = array($row['GeographyCode'], str2js($row['GeographyName']), $row['GeographyActive']);
-    return $data;
-  }
+	function getGeoNameById($geoid) {
+		if ($geoid == "")
+			return null;
+		$sql = "SELECT GeographyName FROM Geography WHERE 1!=1";
+		$levn = (strlen($geoid) / 5);
+		for ($n = 0; $n < $levn; $n++) {
+			$len = 5 * ($n + 1);
+			$geo = substr($geoid, 0, $len);
+			$sql .= " OR GeographyId='". $geo ."'";
+		}
+		$sql .= " ORDER BY GeographyLevel";
+		$data = "";
+		$res = $this->dreg->query($sql);
+		foreach($res as $row)
+			$data .= $row['GeographyName'] . "/";
+		//	$sql = "SELECT GeographyFQName FROM Geography WHERE GeographyId='". $geoid ."'";
+		//	$data = $this->dreg->query($sql);
+		return $data;
+	}
 
-  function loadGeoChilds($geoid) {
-    $level = $this->getNextLev($geoid);
-    $sql = "SELECT * FROM Geography WHERE GeographyId LIKE '". $geoid .
-           "%' AND GeographyLevel=" . $level . " ORDER BY GeographyName";
-    $data = array();
-    $res = $this->dreg->query($sql);
-    foreach($res as $row)
-      $data[$row['GeographyId']] = array($row['GeographyCode'], $row['GeographyName'], $row['GeographyActive']);
-    return $data;
-  }
+	/*** GEOGRAPHY ***/
+	// Testing function to generate subtree from Id
+	function genGeoTree($geoit, $mylev, $maxlev) {
+		if ($maxlev >= $mylev) {
+			$gid = substr($geoit, 0, $mylev * 5);
+			return $gtree = array($gid . '|'. $this->getObjectNameById($gid, "GEONAME") 
+								=> $this->genGeoTree($geoit, $mylev + 1, $maxlev));
+		}
+		else
+			return null;
+	}
+	
+	// Testing function to build geography
+	function buildGeoTree($geolist) {
+		$gtree = array();
+		$sql = "SELECT GeographyId, GeographyName FROM Geography WHERE GeographyActive=1 ORDER BY GeographyId";
+		$res = $this->dreg->query($sql);
+		foreach ($res as $gitem) {
+			$gtree = array_merge_recursive($gtree, $this->genGeoTree($gitem['GeographyId'], 1, strlen($gitem['GeographyId']) / 5));
+		}
+		return $gtree;
+	}
 
-  function getNextLev($geoid) {
-    return (strlen($geoid) / 5);
-  }
-  
-  /* fill struct looking by: 
+	// Testing function to load geography tree
+	function loadGeoTree() {
+		$data = array();
+		$sql = "SELECT GeographyId, GeographyCode, GeographyName, GeographyLevel".
+				" FROM Geography WHERE GeographyActive=1 ORDER BY GeographyId";
+		$res = $this->dreg->query($sql);
+		$max = $this->getMaxGeoLev();
+		foreach($res as $row) {
+			$lev = $row['GeographyLevel'];
+			$key = $row['GeographyId'] ."|". str2js($row['GeographyName']);
+			if ($lev == 0) {
+				$par0 = $key;
+				$data[$par0] = array();
+			}
+			elseif ($lev == 1) {
+				$par1 = $key;
+				$ele[$key] = array();
+				$data[$par0] = array_merge($data[$par0], $ele);
+			}
+			elseif ($lev == 2) {
+				$ele[$key] = array();
+				$data[$par0][$par1] = array_merge($data[$par0][$par1], $ele);
+			}
+			$ele = null;
+		}
+		return $data;
+	}
+
+	function loadGeography($level) {
+		if (!is_numeric($level) && $level >= 0)
+			return null;
+		$sql = "SELECT * FROM Geography WHERE GeographyLevel=" . $level . 
+			" AND GeographyId NOT LIKE '%00000' ORDER BY GeographyName";
+		$data = array();
+		$res = $this->dreg->query($sql);
+		foreach($res as $row)
+			$data[$row['GeographyId']] = array($row['GeographyCode'], str2js($row['GeographyName']), $row['GeographyActive']);
+		return $data;
+	}
+
+	function loadGeoChilds($geoid) {
+		$level = $this->getNextLev($geoid);
+		$sql = "SELECT * FROM Geography WHERE GeographyId LIKE '". $geoid .
+			"%' AND GeographyLevel=" . $level . " ORDER BY GeographyName";
+		$data = array();
+		$res = $this->dreg->query($sql);
+		foreach($res as $row)
+			$data[$row['GeographyId']] = array($row['GeographyCode'], $row['GeographyName'], $row['GeographyActive']);
+		return $data;
+	}
+
+	function getNextLev($geoid) {
+		return (strlen($geoid) / 5);
+	}
+
+	/* fill struct looking by: 
 	prefix: string with prefix used in VRegions
 	level: integer of level, return only data of this level. -1 to all
 	mapping: only levels with files assigned in database, shp - dbf..
-  */
-  function loadGeoLevels($prefix, $lev, $mapping) {
-	if ($lev >= 0)
-		$olev = "GeoLevelId = $lev ";
-	else
-		$olev = "1=1 ";
-    $sqlev = "SELECT GeoLevelId, GeoLevelName, GeoLevelDesc FROM GeoLevel WHERE $olev ORDER BY GeoLevelId";
-	if (!empty($prefix))
-		$opre = "GeographyId = '$prefix' ";
-	else
-		$opre = "1=1 ";
-	if ($mapping)
-		$omap = "GeoLevelLayerFile != '' AND GeoLevelLayerCode != '' AND GeoLevelLayerName != '' ";
-	else
-		$omap = "1=1 ";
-	$sqcar = "SELECT GeographyId, GeoLevelId, GeoLevelLayerFile, GeoLevelLayerCode, GeoLevelLayerName ".
+	*/
+	function loadGeoLevels($prefix, $lev, $mapping) {
+		if ($lev >= 0)
+			$olev = "GeoLevelId = $lev ";
+		else
+			$olev = "1=1 ";
+		$sqlev = "SELECT GeoLevelId, GeoLevelName, GeoLevelDesc FROM GeoLevel WHERE $olev ORDER BY GeoLevelId";
+		if (!empty($prefix))
+			$opre = "GeographyId = '$prefix' ";
+		else
+			$opre = "1=1 ";
+		if ($mapping)
+			$omap = "GeoLevelLayerFile != '' AND GeoLevelLayerCode != '' AND GeoLevelLayerName != '' ";
+		else
+			$omap = "1=1 ";
+		$sqcar = "SELECT GeographyId, GeoLevelId, GeoLevelLayerFile, GeoLevelLayerCode, GeoLevelLayerName ".
 				"FROM GeoCarto WHERE $olev AND $opre AND $omap ORDER BY GeoLevelId";
-    $data = array();
-	$rcar = $this->getassoc($sqcar);
-    $rlev = $this->dreg->query($sqlev);
-    foreach($rlev as $row) {
-		$lay = array();
-		foreach ($rcar as $car)
-			if ($car['GeoLevelId'] == $row['GeoLevelId'])
-				$lay[] = array($car['GeographyId'], $car['GeoLevelLayerFile'], $car['GeoLevelLayerCode'], $car['GeoLevelLayerName']);
-		if (!empty($lay))
-			$data[$row['GeoLevelId']] = array(str2js($row['GeoLevelName']), str2js($row['GeoLevelDesc']), $lay);
+		$data = array();
+		$rcar = $this->getassoc($sqcar);
+		$rlev = $this->dreg->query($sqlev);
+		foreach($rlev as $row) {
+			$lay = array();
+			foreach ($rcar as $car)
+				if ($car['GeoLevelId'] == $row['GeoLevelId'])
+					$lay[] = array($car['GeographyId'], $car['GeoLevelLayerFile'], $car['GeoLevelLayerCode'], $car['GeoLevelLayerName']);
+			if (!empty($lay))
+				$data[$row['GeoLevelId']] = array(str2js($row['GeoLevelName']), str2js($row['GeoLevelDesc']), $lay);
+		}
+		return $data;
 	}
-    return $data;
-  }
 	/*
 	function loadGeoCarto($geo, $lev) {
 		$sql = "SELECT * FROM GeoCarto WHERE ";
@@ -417,24 +440,24 @@ class Query extends PDO
 		return $this->getassoc($sql);
 	}*/
 
-  function getMaxGeoLev() {
-    $sql = "SELECT MAX(GeoLevelId) AS max FROM GeoLevel";
-    $res = $this->getresult($sql);
-    if (isset($res['max']))
-      return $res['max'];
-    return -1;
-  }
+	function getMaxGeoLev() {
+		$sql = "SELECT MAX(GeoLevelId) AS max FROM GeoLevel";
+		$res = $this->getresult($sql);
+		if (isset($res['max']))
+			return $res['max'];
+		return -1;
+	}
 
-  function loadGeoLevById($geolevid) {
-    if (!is_numeric($geolevid))
-      return null;
-    $sql = "SELECT * FROM GeoLevel WHERE GeoLevelId=". $geolevid;
-    $data = array();
-    $res = $this->dreg->query($sql);
-    foreach($res as $row)
-      $data = array(str2js($row['GeoLevelName']), str2js($row['GeoLevelDesc']));
-    return $data;
-  }
+	function loadGeoLevById($geolevid) {
+		if (!is_numeric($geolevid))
+			return null;
+		$sql = "SELECT * FROM GeoLevel WHERE GeoLevelId=". $geolevid;
+		$data = array();
+		$res = $this->dreg->query($sql);
+		foreach($res as $row)
+			$data = array(str2js($row['GeoLevelName']), str2js($row['GeoLevelDesc']));
+		return $data;
+	}
 
 	function getEEFieldList($act) {
 		$sql = "SELECT * FROM EEField";
@@ -470,13 +493,13 @@ class Query extends PDO
 		return $data;
 	}
 
-  function getEEFieldSeries() {
-    $sql = "SELECT COUNT(EEFieldId) as count FROM EEField";
-    $res = $this->getresult($sql);
-    if (isset($res['count']))
-      return sprintf("%03d", $res['count']);
-    return -1;
-  }
+	function getEEFieldSeries() {
+		$sql = "SELECT COUNT(EEFieldId) as count FROM EEField";
+		$res = $this->getresult($sql);
+		if (isset($res['count']))
+			return sprintf("%03d", $res['count']);
+		return -1;
+	}
 
 	/* GET DISASTERS INFO: DATES, DATACARDS NUMBER, ETC */
 	function getDBInfo() {
