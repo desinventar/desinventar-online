@@ -17,7 +17,8 @@ class DIEEData extends DIObject {
 		$sNewFields = $this->buildFieldDef();
 		if ($sNewFields != '') {
 			$this->sFieldDef .= ',' . $sNewFields;
-			$this->createFields($this->sFieldKeyDef, $this->sFieldDef);
+			$this->createFields($this->sFieldKeyDef);
+			$this->createFields($this->sFieldDef);
 		}
 		$num_args = func_num_args();
 		if ($num_args >= 2) {
