@@ -1511,50 +1511,51 @@
  </div><!-- END div id=container-->
 <!--	SECTION : QUERY DESIGN 
 	====================== -->
- <div id="west">
+<div id="west">
 {-/if-} {-* END ctl_show || ctl_mainpage*-}
 {-if $ctl_qrydsg-}
-  <!-- BEG DI8 QUERY FORM -->
-  <form id="DC" method="POST" target="dcr">
-  <input type="hidden" id="_REG" name="_REG" value="{-$reg-}" />
-  <input type="hidden" id="_CMD" name="_CMD" />
-  <dl class="accordion">
+<!-- BEG DI8 QUERY FORM -->
+<form id="DC" method="POST" target="dcr">
+	<input type="hidden" id="_REG" name="_REG" value="{-$reg-}" />
+	<input type="hidden" id="_CMD" name="_CMD" />
+	<dl class="accordion">
     <!-- BEGIN GEOGRAPHY SECTION -->
     <!-- Select from Map testing ... 'selectionmap.php' -->
     <dt>{-#mgeosection#-}</dt>
     <dd>
  {-foreach name=glev key=k item=i from=$glev-}
-      <span class="dlgmsg" onMouseOver="showtip('{-$i[1]-}');">{-$i[0]-}</span> |
+	<span class="dlgmsg" onMouseOver="showtip('{-$i[1]-}');">{-$i[0]-}</span> |
  {-/foreach-}
-      <div id="qgeolst" style="height: 280px;" class="dwin" ext:qtip="{-#thlpquery#-}">
+	<div id="qgeolst" style="height: 280px;" class="dwin" ext:qtip="{-#thlpquery#-}">
 {-/if-}
 {-** END ctl_qrydsg **-}
 {-if $ctl_glist-}
-        <ul id="tree-g{-$reg-}" class="checktree">
+		<ul id="tree-g{-$reg-}" class="checktree">
  {-foreach name=geol key=key item=item from=$geol-}
-          <li id="show-g{-$key-}">
-            <input type="checkbox" id="{-$key-}" name="D_GeographyId[]" value="{-$key-}"
-                onClick="setSelMap('{-$item[0]-}', '{-$key-}', this.checked);" {-if $item[3]-}checked{-/if-} />
-            <label for="{-$key-}">{-$item[1]-}</label>
-            <span id="itree{-$key-}"></span>
-          </li>
+		<li id="show-g{-$key-}">
+			<input type="checkbox" id="{-$key-}" name="D_GeographyId[]" value="{-$key-}"
+				onClick="setSelMap('{-$item[0]-}', '{-$key-}', this.checked);" {-if $item[3]-}checked{-/if-} />
+			<label for="{-$key-}">{-$item[1]-}</label>
+			<span id="itree{-$key-}"></span>
+		</li>
  {-/foreach-}
-        </ul>
+		</ul>
+ {-include file="gtree.tpl" gtree=$gtree-}
 {-/if-}
 {-** END ctl_glist **-}
 {-if $ctl_qrydsg-}
-      </div>
-      <b onMouseOver="showtip('{-$dis.DisasterSiteNotes[2]-}');">{-$dis.DisasterSiteNotes[0]-}</b>
-      <select name="D_DisasterSiteNotes[0]" class="small line">
-      	<option class="small" value="AND" {-if $qd.D_DisasterSiteNotes[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-      	<option class="small" value="OR"  {-if $qd.D_DisasterSiteNotes[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-      </select><br>
-      <textarea id="DisasterSiteNotes" name="D_DisasterSiteNotes[1]" style="width:220px; height: 40px;"
-              onFocus="showtip('{-$dis.DisasterSiteNotes[2]-}');">{-$qd.D_DisasterSiteNotes[1]-}</textarea>
-    </dd>
-    <!-- BEGIN EVENT SECTION -->
-    <dt>{-#mevesection#-}</dt>
-    <dd>
+	</div>
+	<b onMouseOver="showtip('{-$dis.DisasterSiteNotes[2]-}');">{-$dis.DisasterSiteNotes[0]-}</b>
+	<select name="D_DisasterSiteNotes[0]" class="small line">
+		<option class="small" value="AND" {-if $qd.D_DisasterSiteNotes[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
+		<option class="small" value="OR"  {-if $qd.D_DisasterSiteNotes[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
+	</select><br/>
+	<textarea id="DisasterSiteNotes" name="D_DisasterSiteNotes[1]" style="width:220px; height: 40px;"
+		onFocus="showtip('{-$dis.DisasterSiteNotes[2]-}');">{-$qd.D_DisasterSiteNotes[1]-}</textarea>
+	</dd>
+	<!-- BEGIN EVENT SECTION -->
+	<dt>{-#mevesection#-}</dt>
+	<dd>
       <span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br>
       <select id="qevelst" name="D_EventId[]" multiple style="width: 250px; height: 200px;" class="line">
 {-/if-}

@@ -197,7 +197,8 @@ switch ($cmd) {
 						$t->assign ("ctl_evelst", true);
 					break;
 				} //switch
-			} else {
+			}
+			else {
 				$t->assign ("ms", MAPSERV);
 				$t->assign ("dis", $us->q->queryLabelsFromGroup('Disaster', $lg));
 				$t->assign ("rc1", $us->q->queryLabelsFromGroup('Record|1', $lg));
@@ -235,6 +236,9 @@ switch ($cmd) {
 
 				// In Saved Queries set true in Geo, Events, Causes selected..
 				if (isset($qd["D_GeographyId"])) {
+/*					$gtree = $us->q->buildGeoTree($qd["D_GeographyId"]);
+					$t->assign ("gtree", $gtree);
+					$geol = null;*/
 					foreach ($qd["D_GeographyId"] as $ky=>$it) {
 						if (isset($geol[$it]))
 							$geol[$it][3] = 1;
