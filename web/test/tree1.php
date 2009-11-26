@@ -19,11 +19,11 @@
 require_once('../include/loader.php');
 //$RegionId = 'COL-1250694506-colombia_inventario_historico_de_desastres';
 //$RegionId = 'CHL-1257983285-chile_inventario_historico_de_desastres';
-//$RegionId = 'ARG-1250694407-argentina_inventario_historico_de_desastres';
-$RegionId = 'MEX-1250695136-mexico_inventario_historico_de_desastres';
+$RegionId = 'ARG-1250694407-argentina_inventario_historico_de_desastres';
+//$RegionId = 'MEX-1250695136-mexico_inventario_historico_de_desastres';
 $us->open($RegionId);
 
-function getGeographyList($us, $Level, $ParentCode='') {
+function getGeographyList($us, $Level, &$Selected, $ParentCode='') {
 	$querysuffix .= 'FROM Geography WHERE GeographyLevel=' . $Level;
 	if ($Level > 0) {
 		$querysuffix .= " AND GeographyId LIKE '" . $ParentCode . "%' ";
@@ -40,17 +40,30 @@ function getGeographyList($us, $Level, $ParentCode='') {
 		$stmt->execute();
 		if ($Level > 0) { print '<ul>'; }
 		while ($row = $stmt->fetch()) {
+			$Checked = '';
+			if (array_key_exists($row['GeographyId'], $Selected)) {
+				$Checked = 'CHECKED';
+			}
 			print '<li>';
-			print '<input type="checkbox" name="foo" value="' . $row['GeographyId'] . '" />';
+			print '<input type="checkbox" name="foo[' . $row['GeographyId'] . ']" value="' . $row['GeographyId'] . '" ' . $Checked . ' />';
 			print '<label>' . $row['GeographyName'] . ' ' . $CurLevel . ' ' . $PrevLevel . '</label>';
-			getGeographyList($us, $Level + 1, $row['GeographyId']);
+			getGeographyList($us, $Level + 1, $Selected, $row['GeographyId']);
 			print '</li>';	
 		}
 		if ($Level > 0) { print '</ul>'; }
 	}
 }
+</script>
+<?
+	print_r($_POST);
+?>
+<hr size="2" />
+<form method="POST" action="tree1.php">
+<input type="submit" name="ok" value="ok" />
+<?php
 print '<ul class="mytree">';
-getGeographyList($us, 0);
+getGeographyList($us, 0, $_POST['foo']);
 print '</ul>';
 $us->close();
-</script>
+?>
+</form>
