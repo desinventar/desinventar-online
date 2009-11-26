@@ -310,36 +310,43 @@ class Query extends PDO
 	}
 
 	/*** GEOGRAPHY ***/
-	// Testing function to generate subtree from Id
-	function genGeoTree($geoit, $mylev, $maxlev) {
+	/* Testing function to generate subtree from Id
+	function genGeoTree($geoit, $mylev, $maxlev, $selgeolist) {
+		$chked = false;
+		if (in_array($geoit['GeographyId'], $selgeolist))
+			$chked = true;
 		if ($maxlev >= $mylev) {
 			$gid = substr($geoit['GeographyId'], 0, $mylev * 5);//$this->getObjectNameById($gid, "GEONAME") 
-			return $gtree = array($gid . '|'. $geoit['GeographyName'] => $this->genGeoTree($geoit, $mylev + 1, $maxlev));
+			return $gtree = array($gid .'|'. $geoit['GeographyName'] .'|'. $chked => $this->genGeoTree($geoit, $mylev + 1, $maxlev), $selgeolist);
+		}
+		return null;
+	}*/
+	
+	// Testing function to build geography
+	function buildGeoTree($child, $mylev, $maxlev, $selgeolist) {
+		$gtree = array();
+		if ($maxlev >= $mylev) {
+			foreach ($this->loadGeoChilds($child) as $gkey=>$gitem) {
+				$chked = false;
+				if (in_array($gkey, $selgeolist))
+					$chked = true;
+				// Use only active geography elements
+				if ($gitem[2]) 
+					$gtree[$gkey .'|'. $gitem[1] .'|'. $chked] = $this->buildGeoTree($gkey, $mylev+1, $maxlev, $selgeolist);
+			}
+			return $gtree;
 		}
 		return null;
 	}
-	
-	// Testing function to build geography
-	function buildGeoTree($selgeolist) {
-		$gtree = array();
-		$sql = "SELECT GeographyId, GeographyName, GeographyLevel FROM Geography WHERE GeographyActive=1 ORDER BY GeographyId";
+	/*		$gtree = array();
+		$sql = "SELECT GeographyId, GeographyName, GeographyLevel FROM Geography WHERE GeographyActive=1 ORDER BY GeographyName";
 		$res = $this->dreg->query($sql);
-/*		$res[] = array ("GeographyId" => "00001", "GeographyName" => "BOCAS DEL TORO", "GeographyLevel" => 0);
-		$res[] = array ("GeographyId" => "0000100001", "GeographyName" => "Ciudad BOCAS DEL TORO", "GeographyLevel" => 1);
-		$res[] = array ("GeographyId" => "000010000100001", "GeographyName" => "BOCAS DEL TORO CABECERA", "GeographyLevel" => 2);*/
 		foreach ($res as $gitem) {
-/*			for ($i = 1; $i <= ($gitem['GeographyLevel'] + 1); $i++) {
-				$mykey = substr($gitem['GeographyId'], 0, $i * 5); // ."|". $gitem['GeographyName'];
-				if (!isset($gtree[$mykey])) {
-					$gtree[$mykey] = array();
-				}
-			}*/
-			$gtree = array_merge_recursive($gtree, $this->genGeoTree($gitem, 1, strlen($gitem['GeographyId']) / 5));
+			$gtree = array_merge_recursive($gtree, $this->genGeoTree($gitem, 1, strlen($gitem['GeographyId']) / 5), $selgeolist);
 		}
-		return $gtree;
-	}
+		return $gtree;*/
 
-	// Testing function to load geography tree
+	/* OBSOLETE: Testing function to load geography tree
 	function loadGeoTree($selgeolist) {
 		$data = array();
 		$sql = "SELECT GeographyId, GeographyCode, GeographyName, GeographyLevel".
@@ -367,8 +374,8 @@ class Query extends PDO
 			$ele = null;
 		}
 		return $data;
-	}
-
+	}*/
+	
 	function loadGeography($level) {
 		if (!is_numeric($level) && $level >= 0)
 			return null;
