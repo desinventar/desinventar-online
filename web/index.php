@@ -230,7 +230,8 @@ switch ($cmd) {
 
 					// In Saved Queries set true in Geo, Events, Causes selected..
 					if (isset($qd["D_GeographyId"])) {
-						$t->assign ("gtree", $us->q->buildGeoTree('', 1, $us->q->getMaxGeoLev(), $qd["D_GeographyId"]));
+						$gtree = $us->q->buildGeoTree('', 0, $us->q->getMaxGeoLev(), $qd["D_GeographyId"]);
+						$t->assign ("gtree", $gtree);
 						$geol = null;
 						/*foreach ($qd["D_GeographyId"] as $ky=>$it) {
 							if (isset($geol[$it]))
