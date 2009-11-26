@@ -163,7 +163,7 @@
 				<table>
 				<tr>
 					<td align="right">
-						<a href="{-$di_url-}" target="_blank"><img src="images/b_desinventar3.jpg" border="0"></a>
+						<a href="{-$di_url-}?cmd=main" target="_blank"><img src="images/b_desinventar3.jpg" border="0"></a>
 					</td>
 				</tr>
 				<tr>
