@@ -96,9 +96,11 @@
 		var mquery = new Ext.menu.Menu({
 			id: 'queryMenu',
 			items: [
+{-if !$ctl_noregion-}
 				{id:'mqrygoq', text: '{-#mgotoqd#-}',	handler: onMenuItem  },
 				{id:'mqrynew', text: '{-#mnewsearch#-}',handler: onMenuItem  },
 				{id:'mqrysav', text: '{-#msavequery#-}',handler: onMenuItem  },
+{-/if-}
 				{id:'mqryopn', text: '{-#mopenquery#-}',handler: onMenuItem  }
 			]
 		});
@@ -140,9 +142,7 @@
 		var tb = new Ext.Toolbar();
 		tb.render('toolbar');
 		tb.add('-', {id: 'musr', text: '{-#tuser#-}{-if $userid != ""-}: <b>{-$userid-}</b>{-/if-}', menu: muser });
-{-if !$ctl_noregion-}
 		tb.add('-', {id: 'mqry', text: '{-#msearch#-}',		menu: mquery });
-{-/if-}
 {-if ($role == "USER" || $role == "SUPERVISOR" || $role == "OBSERVER" || $role == "ADMINREGION") && !$ctl_mainpage-}
 		tb.add('-', {id: 'minp', text: '{-#mdcsection#-}',	menu: mcards });
 {-/if-}
@@ -1053,10 +1053,10 @@
 	</style>
 </head>
 <body>
-	<div id="loading-mask"></div>
-	<div id="loading"><div class="loading-indicator">Loading...</div></div>
-	<div id="north"><div id="toolbar"></div></div>
-	<div id="container">
+<div id="loading-mask"></div>
+<div id="loading"><div class="loading-indicator">Loading...</div></div>
+<div id="north"><div id="toolbar"></div></div>
+<div id="container">
 {-if $ctl_show-}
 	<!-- -Configuration -->
 	<div id="config" style="display:none;" class="tabber">
@@ -1380,8 +1380,8 @@
 {-if $ctl_show || $ctl_mainpage-}
 				<div id="qry-win" class="x-hidden">
 					<div class="x-window-header">{-#mopenquery#-}</div>
-					<div id="qry-cfg" style="text-align:center;">
-					<form id="openquery" enctype="multipart/form-data" action="index.php?r={-$reg-}" method="POST">
+					<div id="qry-cfg" style="text-align:center;"><!-- ?r={-$reg-}-->
+					<form id="openquery" enctype="multipart/form-data" action="index.php?cmd=openquery" method="POST">
 						<br /><br /><input type="hidden" name="MAX_FILE_SIZE" value="100000" />
 						<input type="file" id="ofile" name="qry" onChange="$('openquery').submit();"/>
 					</form>
@@ -1464,22 +1464,22 @@
 	</div> <!-- end div id=qryres -->
 {-else-} {-* MAINPAGE *-}
 	<table border="0" cellpadding="0" cellspacing="0" style="border: thin solid;">
-	<tr style="background:url(images/bgmain.png)">
+		<tr style="background:url(images/bgmain.png)">
 		<td width="400px" colspan="2">
 			<table width="100%">
 			<tr>
-			<td>
-				<a href="index.php?cmd=main"><img src="images/di_logo1.png" border=0></a><br />
-			</td>
-			<td align="right">
-				{-$version-}<br />
-			</td>
+				<td>
+					<a href="index.php?cmd=main"><img src="images/di_logo1.png" border=0></a><br />
+				</td>
+				<td align="right">
+					{-$version-}<br />
+				</td>
 			</tr>
 			</table>
 			<hr /><br />
 		</td>
-	</tr>
-	<tr bgcolor="#e2e2e0" valign="top">
+		</tr>
+		<tr bgcolor="#e2e2e0" valign="top">
 		<td>
 			<h2><u>{-#tdbavail#-}</u></h2>
 			<table border="1" class="grid">
@@ -1505,10 +1505,10 @@
 		<td>
 			<div id="info" width="500px" height="400px" border="1"></div>
 		</td>
-	</tr>
+		</tr>
 	</table>
 {-/if-} {-* END ctl_show*-}
- </div><!-- END div id=container-->
+</div><!-- END div id=container-->
 <!--	SECTION : QUERY DESIGN 
 	====================== -->
 <div id="west">
@@ -1556,105 +1556,108 @@
 	<!-- BEGIN EVENT SECTION -->
 	<dt>{-#mevesection#-}</dt>
 	<dd>
-      <span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br>
-      <select id="qevelst" name="D_EventId[]" multiple style="width: 250px; height: 200px;" class="line">
+	<span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br>
+	<select id="qevelst" name="D_EventId[]" multiple style="width: 250px; height: 200px;" class="line">
 {-/if-}
 {-if $ctl_qrydsg || $ctl_evelst-}
 	{-foreach name=eve key=key item=item from=$evepredl-}
 		<option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
 	{-/foreach-}
-	<option disabled>----</option>
+		<option disabled>----</option>
 	{-foreach name=eve key=key item=item from=$eveuserl-}
 		<option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
 	{-/foreach-}
 {-/if-}
 {-** END ctl_evelst **-}
 {-if $ctl_qrydsg-}
-      </select>
-      <br><br>
-      <b onMouseOver="showtip('{-$eve.EventDuration[2]-}');">{-$eve.EventDuration[0]-}</b><br>
-      <input id="EventDuration" name="D_EventDuration" type="text" class="line fixw"
+	</select>
+	<br /><br />
+	<b onMouseOver="showtip('{-$eve.EventDuration[2]-}');">{-$eve.EventDuration[0]-}</b><br />
+	<input id="EventDuration" name="D_EventDuration" type="text" class="line fixw"
           onFocus="showtip('{-$eve.EventDuration[2]-}');" value="{-$qd.D_EventDuration-}" />
-      <br>
-      <b onMouseOver="showtip('{-$eve.EventNotes[2]-}');">{-$eve.EventNotes[0]-}</b>
-      <select name="D_EventNotes[0]" class="small line">
-      	<option class="small" value="AND" {-if $qd.D_EventNotes[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-      	<option class="small" value="OR"  {-if $qd.D_EventNotes[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-      </select><br>
-      <textarea id="EventNotes" name="D_EventNotes[1]" style="width:250px; height:40px;"
-          onFocus="showtip('{-$eve.EventNotes[2]-}');">{-$qd.D_EventNotes[1]-}</textarea>
-    </dd>
-    <!-- BEGIN CAUSE SECTION -->
-    <dt>{-#mcausection#-}</dt>
-    <dd>
-      <span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br>
-      <select id="qcaulst" name="D_CauseId[]" multiple style="width: 250px; height: 200px;" class="line">
+	<br />
+	<b onMouseOver="showtip('{-$eve.EventNotes[2]-}');">{-$eve.EventNotes[0]-}</b>
+	<select name="D_EventNotes[0]" class="small line">
+		<option class="small" value="AND" {-if $qd.D_EventNotes[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
+		<option class="small" value="OR"  {-if $qd.D_EventNotes[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
+	</select><br />
+	<textarea id="EventNotes" name="D_EventNotes[1]" style="width:250px; height:40px;"
+		onFocus="showtip('{-$eve.EventNotes[2]-}');">{-$qd.D_EventNotes[1]-}</textarea>
+	</dd>
+	<!-- BEGIN CAUSE SECTION -->
+	<dt>{-#mcausection#-}</dt>
+	<dd>
+		<span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br>
+		<select id="qcaulst" name="D_CauseId[]" multiple style="width: 250px; height: 200px;" class="line">
 {-/if-}
 {-if $ctl_qrydsg || $ctl_caulst-}
  {-foreach name=cau key=key item=item from=$caupredl-}
-        <option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
+			<option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
  {-/foreach-}
-        <option disabled>----</option>
+			<option disabled>----</option>
  {-foreach name=mycau key=key item=item from=$cauuserl-}
-        <option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
+			<option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
  {-/foreach-}
 {-/if-}
 {-** END ctl_caulst **-}
 {-if $ctl_qrydsg-}
-      </select>
-      <br><br>
-      <b onMouseOver="showtip('{-$cau.CauseNotes[2]-}');">{-$cau.CauseNotes[0]-}</b>
-      <select name="D_CauseNotes[0]" class="small line">
-      	<option class="small" value="AND" {-if $qd.D_CauseNotes[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-      	<option class="small" value="OR"  {-if $qd.D_CauseNotes[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-      </select><br>
-      <textarea name="D_CauseNotes[1]" style="width:250px; height: 40px;"
-          onFocus="showtip('{-$cau.CauseNotes[2]-}');">{-$qd.D_CauseNotes[1]-}</textarea>
-    </dd>
-    <!-- BEGIN EFFECTS SECTION -->
-    <dt>{-#meffsection#-}</dt>
-    <dd>
-      <b>{-#ttitegp#-}</b><br>
-      <div style="height: 100px;" class="dwin" ext:qtip="{-#thlpquery#-}">
-	  <table border=0 cellpadding=0 cellspacing=0>
+		</select>
+		<br /><br />
+		<b onMouseOver="showtip('{-$cau.CauseNotes[2]-}');">{-$cau.CauseNotes[0]-}</b>
+		<select name="D_CauseNotes[0]" class="small line">
+			<option class="small" value="AND" {-if $qd.D_CauseNotes[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
+			<option class="small" value="OR"  {-if $qd.D_CauseNotes[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
+		</select><br />
+		<textarea name="D_CauseNotes[1]" style="width:250px; height: 40px;"
+			onFocus="showtip('{-$cau.CauseNotes[2]-}');">{-$qd.D_CauseNotes[1]-}</textarea>
+	</dd>
+	<!-- BEGIN EFFECTS SECTION -->
+	<dt>{-#meffsection#-}</dt>
+	<dd>
+		<b>{-#ttitegp#-}</b><br />
+		<div style="height: 100px;" class="dwin" ext:qtip="{-#thlpquery#-}">
+		<table border="0" cellpadding="0" cellspacing="0">
  {-foreach name=ef1 key=key item=item from=$ef1-}
  {-assign var="ff" value=D_$key-}
-		<tr><td valign="top">
-        <input type="checkbox" onFocus="showtip('{-$item[2]-}');" id="{-$key-}"
-            onclick="enadisEff('{-$key-}', this.checked);" {-if $qd.$ff[0] != ''-}checked{-/if-} />
-        <label for="{-$key-}" onMouseOver="showtip('{-$item[2]-}');">{-$item[0]-}</label>
-        <span id="o{-$key-}" style="display:none">
-         <select id="{-$key-}[0]" name="D_{-$key-}[0]" class="small line" disabled
-         			onChange="showeff(this.value, 'x{-$key-}', 'y{-$key-}');">
-          <option class="small" value="-1" {-if $qd.$ff[0] == '-1'-}selected{-/if-}>{-#teffhav#-}</option>
-          <option class="small" value="0"  {-if $qd.$ff[0] == '0'-}selected{-/if-}>{-#teffhavnot#-}</option>
-          <option class="small" value="-2" {-if $qd.$ff[0] == '-2'-}selected{-/if-}>{-#teffdontknow#-}</option>
-          <option class="small" value=">=" {-if $qd.$ff[0] == '>='-}selected{-/if-}>{-#teffmajor#-}</option>
-          <option class="small" value="<=" {-if $qd.$ff[0] == '<='-}selected{-/if-}>{-#teffminor#-}</option>
-          <option class="small" value="="  {-if $qd.$ff[0] == '='-}selected{-/if-}>{-#teffequal#-}</option>
-          <option class="small" value="-3" {-if $qd.$ff[0] == '-3'-}selected{-/if-}>{-#teffbetween#-}</option>
-         </select>
-         <span id="x{-$key-}" style="display:none"><br>
-          <input type="text" id="{-$key-}[1]" name="D_{-$key-}[1]" size="3" class="line"
-          		value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[1]-}{-else-}1{-/if-}" />
-         </span>
-         <span id="y{-$key-}" style="display:none">{-#tand#-}
-         	<input type="text" id="{-$key-}[2]" name="D_{-$key-}[2]" size="3" class="line"
-         			value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}" />
-         </span>
-         <select id="{-$key-}[3]" id="{-$key-}[3]" name="D_{-$key-}[3]" class="small line">
-          <option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-          <option class="small" value="OR"  {-if $qd.$ff[3] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-         </select>
-        </span>
-       </td></tr>
+		<tr>
+			<td valign="top">
+				<input type="checkbox" onFocus="showtip('{-$item[2]-}');" id="{-$key-}"
+					onclick="enadisEff('{-$key-}', this.checked);" {-if $qd.$ff[0] != ''-}checked{-/if-} />
+				<label for="{-$key-}" onMouseOver="showtip('{-$item[2]-}');">{-$item[0]-}</label>
+				<span id="o{-$key-}" style="display:none">
+					<select id="{-$key-}[0]" name="D_{-$key-}[0]" class="small line" disabled
+							onChange="showeff(this.value, 'x{-$key-}', 'y{-$key-}');">
+						<option class="small" value="-1" {-if $qd.$ff[0] == '-1'-}selected{-/if-}>{-#teffhav#-}</option>
+						<option class="small" value="0"  {-if $qd.$ff[0] == '0'-}selected{-/if-}>{-#teffhavnot#-}</option>
+						<option class="small" value="-2" {-if $qd.$ff[0] == '-2'-}selected{-/if-}>{-#teffdontknow#-}</option>
+						<option class="small" value=">=" {-if $qd.$ff[0] == '>='-}selected{-/if-}>{-#teffmajor#-}</option>
+						<option class="small" value="<=" {-if $qd.$ff[0] == '<='-}selected{-/if-}>{-#teffminor#-}</option>
+						<option class="small" value="="  {-if $qd.$ff[0] == '='-}selected{-/if-}>{-#teffequal#-}</option>
+						<option class="small" value="-3" {-if $qd.$ff[0] == '-3'-}selected{-/if-}>{-#teffbetween#-}</option>
+					</select>
+					<span id="x{-$key-}" style="display:none"><br>
+						<input type="text" id="{-$key-}[1]" name="D_{-$key-}[1]" size="3" class="line"
+							value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[1]-}{-else-}1{-/if-}" />
+					</span>
+					<span id="y{-$key-}" style="display:none">{-#tand#-}
+						<input type="text" id="{-$key-}[2]" name="D_{-$key-}[2]" size="3" class="line"
+							value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}" />
+					</span>
+					<select id="{-$key-}[3]" id="{-$key-}[3]" name="D_{-$key-}[3]" class="small line">
+						<option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
+						<option class="small" value="OR"  {-if $qd.$ff[3] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
+					</select>
+				</span>
+			</td>
+		</tr>
  {-/foreach-}
-	  </table>
-      </div><br>
-      <!-- SECTORS -->
-      <b>{-#ttiteis#-}</b><br>
-      <div style="height: 80px;" class="dwin">
-      <table border=0 cellpadding=0 cellspacing=0>
+		</table>
+		</div>
+		<br />
+		<!-- SECTORS -->
+		<b>{-#ttiteis#-}</b><br />
+		<div style="height: 80px;" class="dwin">
+		<table border="0" cellpadding="0" cellspacing="0">
  {-foreach name=sec key=key item=item from=$sec-}
  {-assign var="ff" value=D_$key-}
 		<tr><td valign="top">
@@ -1702,237 +1705,226 @@
 		</td></tr>
  {-/foreach-}
 		</table>
-  		</div><br>
-      <b>{-#ttitloss#-}</b><br>
+  		</div>
+		<br />
+		<b>{-#ttitloss#-}</b><br />
  {-foreach name=ef3 key=k item=i from=$ef3-}
  {-assign var="ff" value=D_$k-}
 		<input type="checkbox" onFocus="showtip('{-$i[2]-}');" id="{-$k-}"
             onclick="enadisEff('{-$k-}', this.checked);" {-if $qd.$ff[0] != ''-}checked{-/if-} />
-      <label for="{-$k-}" onMouseOver="showtip('{-$i[2]-}');">{-$i[0]-}</label>
-      <span id="o{-$k-}" style="display:none">
-      	<select id="{-$k-}[0]" name="D_{-$k-}[0]" onChange="showeff(this.value, 'x{-$k-}', 'y{-$k-}');" class="small line" disabled>
-		  <option class="small" value=" "></option>
-		  <option class="small" value=">=" {-if $qd.$ff[0] == '>='-}selected{-/if-}>{-#teffmajor#-}</option>
-		  <option class="small" value="<=" {-if $qd.$ff[0] == '<='-}selected{-/if-}>{-#teffminor#-}</option>
-		  <option class="small" value="="  {-if $qd.$ff[0] == '='-}selected{-/if-}>{-#teffequal#-}</option>
-		  <option class="small" value="-3" {-if $qd.$ff[0] == '-3'-}selected{-/if-}>{-#teffbetween#-}</option>
-        </select>
-        <span id="x{-$k-}" style="display:none"><br>
-			<input type="text" id="{-$k-}[1]" name="D_{-$k-}[1]" size="5" class="line"
-				value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[1]-}{-else-}1{-/if-}" />
-		</span>
-		<span id="y{-$k-}" style="display:none">{-#tand#-}
-			<input type="text" id="{-$k-}[2]" name="D_{-$k-}[2]" size="5" class="line" 
-				value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}" />
-		</span>
-		<select id="{-$key-}[3]" name="D_{-$key-}[3]" class="small line">
-			<option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-			<option class="small" value="OR"  {-if $qd.$ff[3] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-		</select>
-	  </span><br />
+		<label for="{-$k-}" onMouseOver="showtip('{-$i[2]-}');">{-$i[0]-}</label>
+		<span id="o{-$k-}" style="display:none">
+			<select id="{-$k-}[0]" name="D_{-$k-}[0]" onChange="showeff(this.value, 'x{-$k-}', 'y{-$k-}');" class="small line" disabled>
+				<option class="small" value=" "></option>
+				<option class="small" value=">=" {-if $qd.$ff[0] == '>='-}selected{-/if-}>{-#teffmajor#-}</option>
+				<option class="small" value="<=" {-if $qd.$ff[0] == '<='-}selected{-/if-}>{-#teffminor#-}</option>
+				<option class="small" value="="  {-if $qd.$ff[0] == '='-}selected{-/if-}>{-#teffequal#-}</option>
+				<option class="small" value="-3" {-if $qd.$ff[0] == '-3'-}selected{-/if-}>{-#teffbetween#-}</option>
+			</select>
+			<span id="x{-$k-}" style="display:none"><br />
+				<input type="text" id="{-$k-}[1]" name="D_{-$k-}[1]" size="5" class="line"
+					value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[1]-}{-else-}1{-/if-}" />
+			</span>
+			<span id="y{-$k-}" style="display:none">{-#tand#-}
+				<input type="text" id="{-$k-}[2]" name="D_{-$k-}[2]" size="5" class="line" 
+					value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}" />
+			</span>
+			<select id="{-$key-}[3]" name="D_{-$key-}[3]" class="small line">
+				<option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
+				<option class="small" value="OR"  {-if $qd.$ff[3] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
+			</select>
+		</span><br />
  {-/foreach-}
  {-foreach name=ef4 key=k item=i from=$ef4-}
  {-assign var="ff" value=D_$k-}
-      <b onMouseOver="showtip('{-$i[2]-}');">{-$i[0]-}</b><br>
-      <input type="text" id="{-$k-}" name="D_{-$k-}" class="fixw line" value="{-$qd.$ff[1]-}"
-          onFocus="showtip('{-$i[2]-}');" /><br />
+		<b onMouseOver="showtip('{-$i[2]-}');">{-$i[0]-}</b><br />
+		<input type="text" id="{-$k-}" name="D_{-$k-}" class="fixw line" value="{-$qd.$ff[1]-}" onFocus="showtip('{-$i[2]-}');" />
+		<br />
  {-/foreach-}
-    </dd>
+	</dd>
     <!-- BEGIN EXTRAEFFECTS SECTION
-    <dt>{-#mextsection#-}</dt>
-    <dd>
-      <div style="width: 235px; height: 300px;" class="dwin" ext:qtip="{-#thlpquery#-}">
-      <table border=0 cellpadding=0 cellspacing=0>
+	<dt>{-#mextsection#-}</dt>
+	<dd>
+	<div style="width: 235px; height: 300px;" class="dwin" ext:qtip="{-#thlpquery#-}">
+		<table border=0 cellpadding=0 cellspacing=0>
  {-foreach name=eef key=key item=item from=$exteffel-}
-			 <tr><td valign="top">
+			<tr>
+			<td valign="top">
  {-if $item[2] == "INTEGER" || $item[2] == "DOUBLE"-}
-        <input type="checkbox" onFocus="showtip('{-$item[1]-}');" id="{-$key-}"
-            onclick="enadisEff('{-$key-}', this.checked);">
-        <label for="{-$key-}" onMouseOver="showtip('{-$item[1]-}');">{-$item[0]-}</label>
-        <span id="o{-$key-}" style="display:none">
-      	 <select id="{-$key-}[0]" name="E:{-$key-}[0]" onChange="showeff(this.value, 'x{-$key-}', 'y{-$key-}');" 
-						class="small" disabled>
-					<option class="small" value=""></option>
-					<option class="small" value=">=">{-#teffmajor#-}</option>
-          <option class="small" value="<=">{-#teffminor#-}</option>
-          <option class="small" value="=">{-#teffequal#-}</option>
-          <option class="small" value="-3">{-#teffbetween#-}</option>
-         </select>
-         <span id="x{-$key-}" style="display:none"><br>
-          <input type="text" id="{-$key-}[1]" name="E:{-$key-}[1]" size="3" value="1" class="line">
-         </span>
-         <span id="y{-$key-}" style="display:none">
-          {-#tand#-} <input type="text" id="{-$key-}[2]" name="E:{-$key-}[2]" size="3" value="10" class="line">
-         </span>
-         <select id="{-$key-}[3]" id="{-$key-}[3]" name="E:{-$key-}[3]" class="small">
-          <option class="small" value="AND" checked>{-#tand#-}</option>
-          <option class="small" value="OR">{-#tor#-}</option>
-         </select>
-        </span>
+				<input type="checkbox" onFocus="showtip('{-$item[1]-}');" id="{-$key-}"
+				onclick="enadisEff('{-$key-}', this.checked);" />
+				<label for="{-$key-}" onMouseOver="showtip('{-$item[1]-}');">{-$item[0]-}</label>
+				<span id="o{-$key-}" style="display:none">
+					<select id="{-$key-}[0]" name="E:{-$key-}[0]" onChange="showeff(this.value, 'x{-$key-}', 'y{-$key-}');" 
+							class="small" disabled>
+						<option class="small" value=""></option>
+						<option class="small" value=">=">{-#teffmajor#-}</option>
+						<option class="small" value="<=">{-#teffminor#-}</option>
+						<option class="small" value="=">{-#teffequal#-}</option>
+						<option class="small" value="-3">{-#teffbetween#-}</option>
+					</select>
+					<span id="x{-$key-}" style="display:none"><br />
+						<input type="text" id="{-$key-}[1]" name="E:{-$key-}[1]" size="3" value="1" class="line" />
+					</span>
+					<span id="y{-$key-}" style="display:none">
+						{-#tand#-} <input type="text" id="{-$key-}[2]" name="E:{-$key-}[2]" size="3" value="10" class="line">
+					</span>
+					<select id="{-$key-}[3]" id="{-$key-}[3]" name="E:{-$key-}[3]" class="small">
+						<option class="small" value="AND" checked>{-#tand#-}</option>
+						<option class="small" value="OR">{-#tor#-}</option>
+					</select>
+				</span>
  {-/if-}
  {-if $item[2] == "TEXT"-}
- 				{-$item[0]-}<br>
- 				<input type="text" id="{-$key-}" name="E:{-$key-}" style="width: 220px;" class="line"
- 						onFocus="showtip('{-$item[1]-}');"></input><br>
+			{-$item[0]-}<br />
+			<input type="text" id="{-$key-}" name="E:{-$key-}" style="width: 220px;" class="line"
+				onFocus="showtip('{-$item[1]-}');" /><br />
  {-/if-}
-       </td></tr>
- {-/foreach-}
+			</td>
+			</tr>
+{-/foreach-}
+		</table>
+	</div><br />
+	</dd>-->
+	<!-- BEGIN DATETIME SECTION -->
+	<dt>{-#mdcsection#-}</dt>
+	<dd class="default">
+		<div style="height: 250px;">
+			<b onMouseOver="showtip('{-$dis.DisasterBeginTime[2]-}');">{-#tdate#-}</b>
+			<span class="dlgmsg">{-#tdateformat#-}</span><br />
+			<table border="0">
+				<tr>
+				<td><b>{-#ttitsince#-}:</b></td>
+				<td><input type="text" id="iniyear" name="D_DisasterBeginTime[]" size=4 maxlength=4 class="line" 
+						value="{-if $qd.D_DisasterBeginTime[0] != ''-}{-$qd.D_DisasterBeginTime[0]-}{-else-}{-$yini-}{-/if-}" />
+					<input type="text" id="inimonth" name="D_DisasterBeginTime[]" size=2 maxlength=2 class="line"
+						value="{-$qd.D_DisasterBeginTime[1]-}" />
+					<input type="text" id="iniday" name="D_DisasterBeginTime[]" size=2 maxlength=2 class="line"
+						value="{-$qd.D_DisasterBeginTime[2]-}" />
+				</td>
+				</tr>
+				<tr>
+				<td><b>{-#ttituntil#-}:</b></td>
+				<td><input type="text" id="endyear" name="D_DisasterEndTime[]" size=4 maxlength=4 class="line" 
+						value="{-if $qd.D_DisasterEndTime[0] != ''-}{-$qd.D_DisasterEndTime[0]-}{-else-}{-$yend-}{-/if-}" />
+					<input type="text" id="endmonth" name="D_DisasterEndTime[]" size=2 maxlength=2 class="line"
+						value="{-$qd.D_DisasterEndTime[1]-}" />
+					<input type="text" id="endday" name="D_DisasterEndTime[]" size=2 maxlength=2 class="line"
+						value="{-$qd.D_DisasterEndTime[2]-}" />
+				</td>
+				</tr>
 			</table>
-      </div><br>
-    </dd>-->
-    <!-- BEGIN DATETIME SECTION -->
-    <dt>{-#mdcsection#-}</dt>
-    <dd class="default">
-      <div style="height: 250px;">
-        <b onMouseOver="showtip('{-$dis.DisasterBeginTime[2]-}');">{-#tdate#-}</b>
-        <span class="dlgmsg">{-#tdateformat#-}</span><br>
-        <table border="0">
-          <tr>
-            <td><b>{-#ttitsince#-}:</b></td>
-            <td><input type="text" id="iniyear" name="D_DisasterBeginTime[]" size=4 maxlength=4 class="line" 
-            		value="{-if $qd.D_DisasterBeginTime[0] != ''-}{-$qd.D_DisasterBeginTime[0]-}{-else-}{-$yini-}{-/if-}" />
-                <input type="text" id="inimonth" name="D_DisasterBeginTime[]" size=2 maxlength=2 class="line"
-                	value="{-$qd.D_DisasterBeginTime[1]-}" />
-                <input type="text" id="iniday" name="D_DisasterBeginTime[]" size=2 maxlength=2 class="line"
-                	value="{-$qd.D_DisasterBeginTime[2]-}" />
-            </td>
-          </tr>
-          <tr>
-            <td><b>{-#ttituntil#-}:</b></td>
-            <td><input type="text" id="endyear" name="D_DisasterEndTime[]" size=4 maxlength=4 class="line" 
-            		value="{-if $qd.D_DisasterEndTime[0] != ''-}{-$qd.D_DisasterEndTime[0]-}{-else-}{-$yend-}{-/if-}" />
-                <input type="text" id="endmonth" name="D_DisasterEndTime[]" size=2 maxlength=2 class="line"
-                	value="{-$qd.D_DisasterEndTime[1]-}" />
-                <input type="text" id="endday" name="D_DisasterEndTime[]" size=2 maxlength=2 class="line"
-                	value="{-$qd.D_DisasterEndTime[2]-}" />
-            </td>
-          </tr>
-        </table>
-        <br>
-         <b onMouseOver="showtip('{-$dis.DisasterSource[2]-}');">{-$dis.DisasterSource[0]-}</b>
-         <select name="D_DisasterSource[0]" class="small line">
-           <option class="small" value="AND" {-if $qd.D_DisasterSource[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-           <option class="small" value="OR"  {-if $qd.D_DisasterSource[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-		 </select><br>
-         <textarea id="DisasterSource" name="D_DisasterSource[1]" style="width:220px; height:40px;"
-              onFocus="showtip('{-$dis.DisasterSource[2]-}');">{-$qd.D_DisasterSource[1]-}</textarea>
-  {-if $ctl_user-}
-        <br />
-        <b onMouseOver="showtip('');">{-#tdcstatus#-}</b><br />
-        <select name="D_RecordStatus[]" multiple class="fixw line">
-          <option value="PUBLISHED" selected>{-#tdcpublished#-}</option>
-          <option value="READY" selected>{-#tdcready#-}</option>
-          <option value="DRAFT">{-#tdcdraft#-}</option>
-          <option value="TRASH">{-#tdctrash#-}</option>
-        </select>
-  {-else-}
-        <input type="hidden" name="D_RecordStatus" value="PUBLISHED" />
-  {-/if-}
-        <br>
-        <b onMouseOver="showtip('{-#tserialmsg#-}');">{-#tserial#-}</b>
-        <select name="D_DisasterSerial[0]" class="small line">
-        	<option class="small" value=""  {-if $qd.D_DisasterSerial[0] == ''-}selected{-/if-}>{-#tinclude#-}</option>
-        	<option class="small" value="NOT" {-if $qd.D_DisasterSerial[0] == 'NOT'-}selected{-/if-}>{-#texclude#-}</option>
-        </select><br>
-        <input type="text" name="D_DisasterSerial[1]" class="line fixw" value="{-$qd.D_DisasterSerial[1]-}" />
-      </div>
-    </dd>
+			<br />
+			<b onMouseOver="showtip('{-$dis.DisasterSource[2]-}');">{-$dis.DisasterSource[0]-}</b>
+			<select name="D_DisasterSource[0]" class="small line">
+				<option class="small" value="AND" {-if $qd.D_DisasterSource[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
+				<option class="small" value="OR"  {-if $qd.D_DisasterSource[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
+			</select><br />
+			<textarea id="DisasterSource" name="D_DisasterSource[1]" style="width:220px; height:40px;"
+				onFocus="showtip('{-$dis.DisasterSource[2]-}');">{-$qd.D_DisasterSource[1]-}</textarea>
+{-if $ctl_user-}
+			<br />
+			<b onMouseOver="showtip('');">{-#tdcstatus#-}</b><br />
+			<select name="D_RecordStatus[]" multiple class="fixw line">
+				<option value="PUBLISHED" selected>{-#tdcpublished#-}</option>
+				<option value="READY" selected>{-#tdcready#-}</option>
+				<option value="DRAFT">{-#tdcdraft#-}</option>
+				<option value="TRASH">{-#tdctrash#-}</option>
+			</select>
+{-else-}
+			<input type="hidden" name="D_RecordStatus" value="PUBLISHED" />
+{-/if-}
+			<br />
+			<b onMouseOver="showtip('{-#tserialmsg#-}');">{-#tserial#-}</b>
+			<select name="D_DisasterSerial[0]" class="small line">
+				<option class="small" value=""  {-if $qd.D_DisasterSerial[0] == ''-}selected{-/if-}>{-#tinclude#-}</option>
+				<option class="small" value="NOT" {-if $qd.D_DisasterSerial[0] == 'NOT'-}selected{-/if-}>{-#texclude#-}</option>
+			</select><br />
+			<input type="text" name="D_DisasterSerial[1]" class="line fixw" value="{-$qd.D_DisasterSerial[1]-}" />
+		</div>
+	</dd>
 	<!-- BEGIN CUSTOMQUERY SECTION -->
-    <dt>{-#madvsection#-}</dt>
-    <dd>
-       <textarea id="CusQry" name="__CusQry" style="width:300px; height:45px;" 
-		  onFocus="showtip('');">{-$qd.__CusQry-}</textarea>
-	   <br>
-	   <span class="dlgmsg">{-#tadvqryhelp#-}</span>
-	   <br>
-	   <table border="0" width="100%">
-		<tr valign="top">
-         <td>
-		  <div style="height:180px" class="dwin">
-		   <input type="button" class="line" value="{-$dis.DisasterSerial[0]-}" 
-			onClick="setAdvQuery('DisasterSerial', 'text')" /><br />
-		   <input type="button" class="line" value="{-$dis.DisasterBeginTime[0]-}" 
-			onClick="setAdvQuery('DisasterBeginTime', 'date')" /><br />
-		   <input type="button" class="line" value="{-$dis.DisasterSiteNotes[0]-}" 
-			onClick="setAdvQuery('DisasterSiteNotes', 'text')" /><br />
-		   <input type="button" class="line" value="{-$eve.EventDuration[0]-}" 
-			onClick="setAdvQuery('EventDuration', 'text')" /><br />
-		   <input type="button" class="line" value="{-$eve.EventNotes[0]-}" 
-			onClick="setAdvQuery('EventNotes', 'text')" /><br />
-		   <input type="button" class="line" value="{-$cau.CauseNotes[0]-}" 
-			onClick="setAdvQuery('CauseNotes', 'text')" /><br />
-		   <input type="button" class="line" value="{-$rc2.RecordAuthor[0]-}"
-			onClick="setAdvQuery('RecordAuthor', 'text')" /><br />
-		   <input type="button" class="line" value="{-$rc2.RecordCreation[0]-}"
-			onClick="setAdvQuery('RecordCreation','date')" /><br />
-		   <input type="button" class="line" value="{-$rc2.RecordUpdate[0]-}"
-			onClick="setAdvQuery('RecordUpdate','date')" /><br />
-		<hr />
+	<dt>{-#madvsection#-}</dt>
+	<dd>
+		<textarea id="CusQry" name="__CusQry" style="width:300px; height:45px;" 
+			onFocus="showtip('');">{-$qd.__CusQry-}</textarea>
+		<br />
+		<span class="dlgmsg">{-#tadvqryhelp#-}</span>
+		<br />
+		<table border="0" width="100%">
+			<tr valign="top">
+			<td>
+			<div style="height:180px" class="dwin">
+				<input type="button" class="line" value="{-$dis.DisasterSerial[0]-}" onClick="setAdvQuery('DisasterSerial', 'text')" /><br />
+				<input type="button" class="line" value="{-$dis.DisasterBeginTime[0]-}" onClick="setAdvQuery('DisasterBeginTime', 'date')" /><br />
+				<input type="button" class="line" value="{-$dis.DisasterSiteNotes[0]-}" onClick="setAdvQuery('DisasterSiteNotes', 'text')" /><br />
+				<input type="button" class="line" value="{-$eve.EventDuration[0]-}" onClick="setAdvQuery('EventDuration', 'text')" /><br />
+				<input type="button" class="line" value="{-$eve.EventNotes[0]-}" onClick="setAdvQuery('EventNotes', 'text')" /><br />
+				<input type="button" class="line" value="{-$cau.CauseNotes[0]-}" onClick="setAdvQuery('CauseNotes', 'text')" /><br />
+				<input type="button" class="line" value="{-$rc2.RecordAuthor[0]-}" onClick="setAdvQuery('RecordAuthor', 'text')" /><br />
+				<input type="button" class="line" value="{-$rc2.RecordCreation[0]-}" onClick="setAdvQuery('RecordCreation','date')" /><br />
+				<input type="button" class="line" value="{-$rc2.RecordUpdate[0]-}" onClick="setAdvQuery('RecordUpdate','date')" /><br />
+				<hr />
 {-foreach name=ef1 key=key item=item from=$ef1-}
-		   <input type="button" class="line" value="{-$item[0]-}"
-			onClick="setAdvQuery('{-$key-}','number')" /><br />
+				<input type="button" class="line" value="{-$item[0]-}" onClick="setAdvQuery('{-$key-}','number')" /><br />
 {-/foreach-}
-		<hr />
+				<hr />
 {-foreach name=sec key=key item=item from=$sec-}
-		   <input type="button" class="line" value="{-$item[0]-}"
-			onClick="setAdvQuery('{-$key-}','boolean')" /><br />
+				<input type="button" class="line" value="{-$item[0]-}" onClick="setAdvQuery('{-$key-}','boolean')" /><br />
 {-/foreach-}
-		<hr />
+				<hr />
 {-foreach name=ef3 key=key item=item from=$ef3-}
-		   <input type="button" class="line" value="{-$item[0]-}"
-			onClick="setAdvQuery('{-$key-}','number')" /><br />
+				<input type="button" class="line" value="{-$item[0]-}" onClick="setAdvQuery('{-$key-}','number')" /><br />
 {-/foreach-}
-		<hr />
+				<hr />
 {-foreach name=ef4 key=key item=item from=$ef4-}
-		   <input type="button" class="line" value="{-$item[0]-}"
-			onClick="setAdvQuery('{-$key-}','text')" /><br />
+				<input type="button" class="line" value="{-$item[0]-}" onClick="setAdvQuery('{-$key-}','text')" /><br />
 {-/foreach-}
-		<hr>
+				<hr />
 {-foreach name=eef key=key item=item from=$exteffel-}
-		   <input type="button" class="line" value="{-$item[0]-}"
-			onClick="setAdvQuery('{-$key-}','date')" /><br />
+				<input type="button" class="line" value="{-$item[0]-}" onClick="setAdvQuery('{-$key-}','date')" /><br />
 {-/foreach-}
-		  </div>
-		 </td>
-		 <td align="center">
-		  <input type="button" id="<" value="<" class="disabled" disabled 
-			onClick="$('CusQry').value += this.value; $('CusQry').focus();" onMouseOver="showtip('{-#taqlessthan#-}');" />
-		  <input type="button" id=">" value=">" class="disabled" disabled 
-			onClick="$('CusQry').value += this.value; $('CusQry').focus();" onMouseOver="showtip('{-#taqgreathan#-}');" />
-		  <input type="button" id="=" value="=" class="disabled" disabled 
-			onClick="$('CusQry').value += this.value; $('CusQry').focus();" onMouseOver="showtip('{-#taqequalto#-}');" /><br />
-		  <input type="button" id="<>" value="<>" class="disabled" disabled 
-			onClick="$('CusQry').value += this.value; $('CusQry').focus();" onMouseOver="showtip('{-#taqnoteqto#-}');" />
-		  <input type="button" id="LIKE '%%'" value="{-#tlike#-}" class="disabled" disabled 
-			onClick="$('CusQry').value += this.id; $('CusQry').focus();" onMouseOver="showtip('{-#taqlike#-}');" />
-		  <input type="button" id="=-1" value="{-#teffhav#-}" class="disabled" disabled 
-			onClick="$('CusQry').value += this.id; $('CusQry').focus();" onMouseOver="showtip('{-#taqwere#-}');" />
-		  <input type="button" id="=0" value="{-#teffhavnot#-}" class="disabled" disabled 
-			onClick="$('CusQry').value += this.id; $('CusQry').focus();" onMouseOver="showtip('{-#taqwerent#-}');" />
-		  <input type="button" id="=-2" value="{-#teffdontknow#-}" class="disabled" disabled 
-			onClick="$('CusQry').value += this.id; $('CusQry').focus();" onMouseOver="showtip('{-#taqdntknow#-}');" />
-		  <br />
-		  <input type="button" value=" (" onClick="$('CusQry').value += this.value;" />
-		  <input type="button" value=") " onClick="$('CusQry').value += this.value;" />
-		  <input type="button" value=" AND " onClick="$('CusQry').value += this.value;" onMouseOver="showtip('{-#taqandopt#-}')" />
-		  <input type="button" value=" OR " onClick="$('CusQry').value += this.value;" onMouseOver="showtip('{-#taqoropt#-}')" />
-		  <br /><br />
-		  <input type="button" value="{-#tclean#-}" onClick="$('CusQry').value = '';" />
-		 </td>
-		</tr>
-	   </table>
-    </dd>
-  </dl>
-  </form>
+			</div>
+			</td>
+			<td align="center">
+				<input type="button" id="<" value="<" class="disabled" disabled 
+					onClick="$('CusQry').value += this.value; $('CusQry').focus();" onMouseOver="showtip('{-#taqlessthan#-}');" />
+				<input type="button" id=">" value=">" class="disabled" disabled 
+					onClick="$('CusQry').value += this.value; $('CusQry').focus();" onMouseOver="showtip('{-#taqgreathan#-}');" />
+				<input type="button" id="=" value="=" class="disabled" disabled 
+					onClick="$('CusQry').value += this.value; $('CusQry').focus();" onMouseOver="showtip('{-#taqequalto#-}');" /><br />
+				<input type="button" id="<>" value="<>" class="disabled" disabled 
+					onClick="$('CusQry').value += this.value; $('CusQry').focus();" onMouseOver="showtip('{-#taqnoteqto#-}');" />
+				<input type="button" id="LIKE '%%'" value="{-#tlike#-}" class="disabled" disabled 
+					onClick="$('CusQry').value += this.id; $('CusQry').focus();" onMouseOver="showtip('{-#taqlike#-}');" />
+				<input type="button" id="=-1" value="{-#teffhav#-}" class="disabled" disabled 
+					onClick="$('CusQry').value += this.id; $('CusQry').focus();" onMouseOver="showtip('{-#taqwere#-}');" />
+				<input type="button" id="=0" value="{-#teffhavnot#-}" class="disabled" disabled 
+					onClick="$('CusQry').value += this.id; $('CusQry').focus();" onMouseOver="showtip('{-#taqwerent#-}');" />
+				<input type="button" id="=-2" value="{-#teffdontknow#-}" class="disabled" disabled 
+					onClick="$('CusQry').value += this.id; $('CusQry').focus();" onMouseOver="showtip('{-#taqdntknow#-}');" />
+				<br />
+				<input type="button" value=" (" onClick="$('CusQry').value += this.value;" />
+				<input type="button" value=") " onClick="$('CusQry').value += this.value;" />
+				<input type="button" value=" AND " onClick="$('CusQry').value += this.value;" onMouseOver="showtip('{-#taqandopt#-}')" />
+				<input type="button" value=" OR " onClick="$('CusQry').value += this.value;" onMouseOver="showtip('{-#taqoropt#-}')" />
+				<br /><br />
+				<input type="button" value="{-#tclean#-}" onClick="$('CusQry').value = '';" />
+			</td>
+			</tr>
+		</table>
+	</dd>
+	</dl>
+</form>
 {-/if-} {-** END ctl_qrydsg **-}
 {-if $ctl_show || $ctl_mainpage-}
 </div> <!-- id = west-->
 	<!-- END DI8 QUERY FORM -->
 	<!-- BEG HELP SECTION -->
 	<div id="south">
-	<textarea id="_DIDesc" wrap="hard" class="hlp" readonly style="width:80%; height:30px;">{-#tdescinfo#-}</textarea>
-	<a href="javascript:void(null)" onClick="window.open('doc.php?m=metguide', 'doc', winopt);"
-		class="dlgmsg" style="font-size: 8pt;">{-#hmoreinfo#-}</a>
+		<textarea id="_DIDesc" wrap="hard" class="hlp" readonly style="width:80%; height:30px;">{-#tdescinfo#-}</textarea>
+		<a href="javascript:void(null)" onClick="window.open('doc.php?m=metguide', 'doc', winopt);"
+			class="dlgmsg" style="font-size: 8pt;">{-#hmoreinfo#-}</a>
 	</div>
  <!-- END HELP SECTION -->
 </body>

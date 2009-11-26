@@ -207,78 +207,75 @@ class Query extends PDO
 		return $data;
 	} //function
 
-  /***** READ OBJECTS :: EVENT, CAUSE, GEOGRAPHY, GEOLEVEL READ *****/
-  public function isvalidObjectToInactivate($id, $obj) {
-    switch ($obj) {
-      case DI_EVENT:		$whr = "EventId='$id'";		break;
-      case DI_CAUSE:		$whr = "CauseId='$id'";		break;
-      case DI_GEOGRAPHY:	$whr = "GeographyId like '$id%'";		break;
-    }
-    $sql = "SELECT COUNT(DisasterId) AS counter FROM Disaster WHERE $whr ";
-    $res = $this->getresult($sql);
-    if ($res['counter'] > 0)
-      return false;
-    else
-      return true;
-  }
+	/***** READ OBJECTS :: EVENT, CAUSE, GEOGRAPHY, GEOLEVEL READ *****/
+	public function isvalidObjectToInactivate($id, $obj) {
+		switch ($obj) {
+			case DI_EVENT:		$whr = "EventId='$id'";				break;
+			case DI_CAUSE:		$whr = "CauseId='$id'";				break;
+			case DI_GEOGRAPHY:	$whr = "GeographyId like '$id%'";	break;
+		}
+		$sql = "SELECT COUNT(DisasterId) AS counter FROM Disaster WHERE $whr ";
+		$res = $this->getresult($sql);
+		if ($res['counter'] > 0)
+			return false;
+		return true;
+	}
 
-  public function isvalidObjectName($id, $sugname, $obj) {
-    switch ($obj) {
-      case DI_EVENT:			$name = "EventName";			$table = "Event";			$fld = "EventId";			break;
-      case DI_CAUSE:			$name = "CauseName";			$table = "Cause";			$fld = "CauseId";			break;
-      case DI_GEOGRAPHY:	$name = "GeographyCode";	$table = "Geography"; $fld = "GeographyId";	break;
-      case DI_GEOLEVEL:		$name = "GeoLevelName";		$table = "GeoLevel"; 	$fld = "GeoLevelId";	break;
-      case DI_EEFIELD:		$name = "EEFieldLabel";		$table = "EEField"; 	$fld = "EEFieldId";		break;
-      case DI_DISASTER:		$name = "DisasterSerial";	$table = "Disaster"; 	$fld = "DisasterId";	break;
-      case DI_REGION:			$name = "RegionId";				$table = "Region"; 		$fld = "RegionId";	break;
-      default:						return null; 		break;
-    }
-    if ($sugname == "")
-      return false;
-    // uhmm, for spanish only..
-    $tilde = array('á','é','í','ó','ú');
-    $vocal = array('a','e','i','o','u');
-    $sugname = str_replace($tilde, $vocal, $sugname);
-    $sql = "SELECT COUNT($fld) as counter FROM $table WHERE $name LIKE '". 
-          $sugname ."' AND $fld != '$id'";
-    $res = $this->getresult($sql);
-    if ($res['counter'] == 0)
-      return true;
-    else
-      return false;
-  }
-  
-  public function getObjectNameById($id, $obj) {
-    switch ($obj) {
-      case DI_EVENT:		$name = "EventName";		$table = "Event";		$fld = "EventId";		break;
-      case DI_CAUSE:		$name = "CauseName";		$table = "Cause";		$fld = "CauseId";		break;
-      case DI_GEOGRAPHY:	$name = "GeographyCode";	$table = "Geography"; 	$fld = "GeographyId";	break;
-      case "GEONAME":		$name = "GeographyName";	$table = "Geography"; 	$fld = "GeographyId";	break;
-      case "GEOCODE":		$name = "GeographyId";		$table = "Geography"; 	$fld = "GeographyCode";	break;
-      case DI_GEOLEVEL:		$name = "GeoLevelName";		$table = "GeoLevel"; 	$fld = "GeoLevelId";	break;
-      default:				return null; 		break;
-    }
-    $sql = "SELECT $name FROM $table WHERE $fld = '$id'";
-    $res = $this->getresult($sql);
-    if (isset($res[$name]))
-      return $res[$name];
-    else
-      return null;
-  }
+	public function isvalidObjectName($id, $sugname, $obj) {
+		switch ($obj) {
+			case DI_EVENT:		$name = "EventName";		$table = "Event";		$fld = "EventId";		break;
+			case DI_CAUSE:		$name = "CauseName";		$table = "Cause";		$fld = "CauseId";		break;
+			case DI_GEOGRAPHY:	$name = "GeographyCode";	$table = "Geography";	$fld = "GeographyId";	break;
+			case DI_GEOLEVEL:	$name = "GeoLevelName";		$table = "GeoLevel"; 	$fld = "GeoLevelId";	break;
+			case DI_EEFIELD:	$name = "EEFieldLabel";		$table = "EEField"; 	$fld = "EEFieldId";		break;
+			case DI_DISASTER:	$name = "DisasterSerial";	$table = "Disaster"; 	$fld = "DisasterId";	break;
+			case DI_REGION:		$name = "RegionId";			$table = "Region"; 		$fld = "RegionId";		break;
+			default:			return null;		break;
+		}
+		if ($sugname == "")
+			return false;
+		// uhmm, for spanish only..
+		$tilde = array('á','é','í','ó','ú');
+		$vocal = array('a','e','i','o','u');
+		$sugname = str_replace($tilde, $vocal, $sugname);
+		$sql = "SELECT COUNT($fld) as counter FROM $table WHERE $name LIKE '". 
+			$sugname ."' AND $fld != '$id'";
+		$res = $this->getresult($sql);
+		if ($res['counter'] == 0)
+			return true;
+		return false;
+	}
 
-  public function getObjectColor($val, $obj) {
-    switch ($obj) {
-      case DI_EVENT:			$color = "EventRGBColor";			$table = "Event";			$fld = "EventName";		break;
-      case DI_CAUSE:			$color = "CauseRGBColor";			$table = "Cause";			$fld = "CauseName";		break;
-      default:						return null; 		break;
-    }
-    $sql = "SELECT $color FROM $table WHERE $fld = '$val'";
-    $res = $this->getresult($sql);
-    if (isset($res[$color]))
-      return $res[$color];
-    else
-      return null;
-  }
+	public function getObjectNameById($id, $obj) {
+		switch ($obj) {
+			case DI_EVENT:		$name = "EventName";		$table = "Event";		$fld = "EventId";		break;
+			case DI_CAUSE:		$name = "CauseName";		$table = "Cause";		$fld = "CauseId";		break;
+			case DI_GEOGRAPHY:	$name = "GeographyCode";	$table = "Geography"; 	$fld = "GeographyId";	break;
+			// case "GEONAME":		$name = "GeographyName";	$table = "Geography"; 	$fld = "GeographyId";	break;
+			case "GEOCODE":		$name = "GeographyId";		$table = "Geography"; 	$fld = "GeographyCode";	break;
+			case DI_GEOLEVEL:		$name = "GeoLevelName";		$table = "GeoLevel"; 	$fld = "GeoLevelId";	break;
+			default:				return null; 		break;
+		}
+		$sql = "SELECT $name FROM $table WHERE $fld = '$id'";
+		$res = $this->getresult($sql);
+		if (isset($res[$name]))
+			return $res[$name];
+		else
+			return null;
+	}
+
+	public function getObjectColor($val, $obj) {
+		switch ($obj) {
+			case DI_EVENT:	$color = "EventRGBColor";	$table = "Event";	$fld = "EventName";		break;
+			case DI_CAUSE:	$color = "CauseRGBColor";	$table = "Cause";	$fld = "CauseName";		break;
+			default:			return null; 		break;
+		}
+		$sql = "SELECT $color FROM $table WHERE $fld = '$val'";
+		$res = $this->getresult($sql);
+		if (isset($res[$color]))
+			return $res[$color];
+		return null;
+	}
 
 /*** GEOGRAPHY & GEO-LEVELS QUERIES  ***/
 	function buildGeographyId($fid, $lev) {
@@ -316,46 +313,55 @@ class Query extends PDO
 	// Testing function to generate subtree from Id
 	function genGeoTree($geoit, $mylev, $maxlev) {
 		if ($maxlev >= $mylev) {
-			$gid = substr($geoit, 0, $mylev * 5);
-			return $gtree = array($gid . '|'. $this->getObjectNameById($gid, "GEONAME") 
-								=> $this->genGeoTree($geoit, $mylev + 1, $maxlev));
+			$gid = substr($geoit['GeographyId'], 0, $mylev * 5);//$this->getObjectNameById($gid, "GEONAME") 
+			return $gtree = array($gid . '|'. $geoit['GeographyName'] => $this->genGeoTree($geoit, $mylev + 1, $maxlev));
 		}
-		else
-			return null;
+		return null;
 	}
 	
 	// Testing function to build geography
-	function buildGeoTree($geolist) {
+	function buildGeoTree($selgeolist) {
 		$gtree = array();
-		$sql = "SELECT GeographyId, GeographyName FROM Geography WHERE GeographyActive=1 ORDER BY GeographyId";
+		$sql = "SELECT GeographyId, GeographyName, GeographyLevel FROM Geography WHERE GeographyActive=1 ORDER BY GeographyId";
 		$res = $this->dreg->query($sql);
+/*		$res[] = array ("GeographyId" => "00001", "GeographyName" => "BOCAS DEL TORO", "GeographyLevel" => 0);
+		$res[] = array ("GeographyId" => "0000100001", "GeographyName" => "Ciudad BOCAS DEL TORO", "GeographyLevel" => 1);
+		$res[] = array ("GeographyId" => "000010000100001", "GeographyName" => "BOCAS DEL TORO CABECERA", "GeographyLevel" => 2);*/
 		foreach ($res as $gitem) {
-			$gtree = array_merge_recursive($gtree, $this->genGeoTree($gitem['GeographyId'], 1, strlen($gitem['GeographyId']) / 5));
+/*			for ($i = 1; $i <= ($gitem['GeographyLevel'] + 1); $i++) {
+				$mykey = substr($gitem['GeographyId'], 0, $i * 5); // ."|". $gitem['GeographyName'];
+				if (!isset($gtree[$mykey])) {
+					$gtree[$mykey] = array();
+				}
+			}*/
+			$gtree = array_merge_recursive($gtree, $this->genGeoTree($gitem, 1, strlen($gitem['GeographyId']) / 5));
 		}
 		return $gtree;
 	}
 
 	// Testing function to load geography tree
-	function loadGeoTree() {
+	function loadGeoTree($selgeolist) {
 		$data = array();
 		$sql = "SELECT GeographyId, GeographyCode, GeographyName, GeographyLevel".
 				" FROM Geography WHERE GeographyActive=1 ORDER BY GeographyId";
 		$res = $this->dreg->query($sql);
 		$max = $this->getMaxGeoLev();
 		foreach($res as $row) {
+			$chked = false;
+			if (in_array($row['GeographyId'], $selgeolist))
+				$chked = true;
 			$lev = $row['GeographyLevel'];
-			$key = $row['GeographyId'] ."|". str2js($row['GeographyName']);
+			$key = $row['GeographyId'] ."|". str2js($row['GeographyName'] ."|". $chked);
+			$ele[$key] = array();
 			if ($lev == 0) {
 				$par0 = $key;
 				$data[$par0] = array();
 			}
 			elseif ($lev == 1) {
 				$par1 = $key;
-				$ele[$key] = array();
 				$data[$par0] = array_merge($data[$par0], $ele);
 			}
 			elseif ($lev == 2) {
-				$ele[$key] = array();
 				$data[$par0][$par1] = array_merge($data[$par0][$par1], $ele);
 			}
 			$ele = null;
