@@ -322,7 +322,7 @@ class Query extends PDO
 		return null;
 	}*/
 	
-	// Testing function to build geography
+	// function to build geography tree. Using child = '' built full tree.
 	function buildGeoTree($child, $mylev, $maxlev, $selgeolist) {
 		$gtree = array();
 		if ($maxlev >= $mylev) {
@@ -338,44 +338,7 @@ class Query extends PDO
 		}
 		return null;
 	}
-	/*		$gtree = array();
-		$sql = "SELECT GeographyId, GeographyName, GeographyLevel FROM Geography WHERE GeographyActive=1 ORDER BY GeographyName";
-		$res = $this->dreg->query($sql);
-		foreach ($res as $gitem) {
-			$gtree = array_merge_recursive($gtree, $this->genGeoTree($gitem, 1, strlen($gitem['GeographyId']) / 5), $selgeolist);
-		}
-		return $gtree;*/
 
-	/* OBSOLETE: Testing function to load geography tree
-	function loadGeoTree($selgeolist) {
-		$data = array();
-		$sql = "SELECT GeographyId, GeographyCode, GeographyName, GeographyLevel".
-				" FROM Geography WHERE GeographyActive=1 ORDER BY GeographyId";
-		$res = $this->dreg->query($sql);
-		$max = $this->getMaxGeoLev();
-		foreach($res as $row) {
-			$chked = false;
-			if (in_array($row['GeographyId'], $selgeolist))
-				$chked = true;
-			$lev = $row['GeographyLevel'];
-			$key = $row['GeographyId'] ."|". str2js($row['GeographyName'] ."|". $chked);
-			$ele[$key] = array();
-			if ($lev == 0) {
-				$par0 = $key;
-				$data[$par0] = array();
-			}
-			elseif ($lev == 1) {
-				$par1 = $key;
-				$data[$par0] = array_merge($data[$par0], $ele);
-			}
-			elseif ($lev == 2) {
-				$data[$par0][$par1] = array_merge($data[$par0][$par1], $ele);
-			}
-			$ele = null;
-		}
-		return $data;
-	}*/
-	
 	function loadGeography($level) {
 		if (!is_numeric($level) && $level >= 0)
 			return null;

@@ -140,18 +140,21 @@ if (isset($post['_M+cmd'])) {
 	$t->assign ("qdet", $us->q->getQueryDetails($dic, $post));
 	$mapfile = str_replace('\\', '/', $m->filename());
 	$worldmap = str_replace('\\','/', DATADIR . "/worldmap/world_adm0.map");
-	$legend = "/cgi-bin/". MAPSERV ."?map=" . $mapfile . "&SERVICE=WMS&VERSION=1.1.1".
+	$legend = "/cgi-bin/". MAPSERV ."?map=" . rawurlencode($mapfile) . "&SERVICE=WMS&VERSION=1.1.1".
 				"&REQUEST=getlegendgraphic&LAYER=". substr($myly, 0, 12) ."&FORMAT=image/png";
 	$t->assign ("legend", $legend);	
 	// 2009-09-10 (jhcaiced) Replace backslash chars to slash, when passing data to mapserver
 	if ($post['_M+cmd'] == "export") {
-		$base = "/cgi-bin/". MAPSERV ."?map=". $worldmap . "&SERVICE=WMS&VERSION=1.1.1".
+		$w = 1000;
+		$h = 756;
+		$size = "1000756";
+		$base = "/cgi-bin/". MAPSERV ."?map=". rawurlencode($worldmap) . "&SERVICE=WMS&VERSION=1.1.1".
 			"&layers=base&REQUEST=getmap&STYLES=&SRS=EPSG:900913&BBOX=". $post['_M+extent'].
-			"&WIDTH=500&HEIGHT=378&FORMAT=image/png";
+			"&WIDTH=". $w ."&HEIGHT=". $h ."&FORMAT=image/png";
 		$bf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $base);
-		$url1 = "/cgi-bin/". MAPSERV ."?map=". $mapfile ."&SERVICE=WMS&VERSION=1.1.1".
+		$url1 = "/cgi-bin/". MAPSERV ."?map=". rawurlencode($mapfile) ."&SERVICE=WMS&VERSION=1.1.1".
 			"&layers=". $post['_M+layers'] ."&REQUEST=getmap&STYLES=&SRS=EPSG:900913".
-			"&BBOX=". $post['_M+extent']."&WIDTH=500&HEIGHT=378&FORMAT=image/png";
+			"&BBOX=". $post['_M+extent']."&WIDTH=". $w ."&HEIGHT=". $h ."&FORMAT=image/png";
 		$mf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $url1);
 		if ($mf) {
 			$ibas = imagecreatefromstring($bf);
@@ -163,9 +166,9 @@ if (isset($post['_M+cmd'])) {
 			$ht = imagesy($imap);
 			$im = imagecreatetruecolor($wt, $ht);
 			imagefilledrectangle($im, 0, 0, $wt - 1, $ht - 1, imagecolorallocate($im, 255, 255, 255));
-			imagecopy($im, $ibas, 0, 0, 0, 0, 500, 378);
-			imagecopy($im, $imap, 0, 0, 0, 0, 500, 378);
-			imagecopy($im, $ileg, 501, 378-imagesy($ileg), 0, 0, imagesx($ileg), imagesy($ileg));
+			imagecopy($im, $ibas, 0, 0, 0, 0, $w, $h);
+			imagecopy($im, $imap, 0, 0, 0, 0, $w, $h);
+			imagecopy($im, $ileg, $w+1, $h - imagesy($ileg), 0, 0, imagesx($ileg), imagesy($ileg));
 			imagestring($im, 3, 2, $ht - 20, 'http://www.desinventar.org/', imagecolorallocate($im, 0, 0, 0));
 			header("Content-type: Image/png");
 			header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $rinf['RegionLabel|']) ."_ThematicMap.png");

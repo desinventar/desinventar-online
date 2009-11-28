@@ -5,7 +5,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
- <head>
+<head>
 	<meta http-equiv="Pragma" content="text/html; charset=utf-8; no-cache" />
 	{-if $googlemapkey != '' -}
 	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={-$googlemapkey-}"></script>
@@ -197,17 +197,17 @@
 		#queryOut {	width:800px; height: 200px; border: 1px solid black;
 								position:absolute; left:10px; top:500px; overflow:auto; }
 	</style>
- </head>
- <body>
+</head>
+<body>
 	<table class="grid" height="100%">
-		 <tr><td>{-$mapfilename-}</td></tr>
-		 <tr>
-		 <td valign="top">
-		  <div class="dwin" style="width:250px;">
-				<p align="right">{-#trepnum#-}: {-$tot-}</p>
-				<hr>
-				<h4>{-#tmapof#-} {-$rgl[0].info.TITLE-}</h4>
-				<p align="justify">{-#lev#-}: {-$rgl[0].info.LEVEL-}; 
+	<tr><td>{-$mapfilename-}</td></tr>
+	<tr>
+		<td valign="top">
+		<div class="dwin" style="width:250px;">
+			<p align="right">{-#trepnum#-}: {-$tot-}</p>
+			<hr />
+			<h4>{-#tmapof#-} {-$rgl[0].info.TITLE-}</h4>
+			<div align="justify" class="dwin" style="height:250px;">{-#lev#-}: {-$rgl[0].info.LEVEL-}; 
 {-foreach key=k item=i from=$rgl[0].info-}
  {-if $k == "GEO"-}<i>{-#geo#-}:</i> {-$i-}; {-/if-}
  {-if $k == "EVE"-}<i>{-#eve#-}:</i> {-$i-}; {-/if-}
@@ -218,17 +218,19 @@
  {-if $k == "SOU"-}<i>{-#sou#-}:</i> {-$i-}; {-/if-}
  {-if $k == "SER"-}<i>{-#ser#-}:</i> {-$i-}; {-/if-}
 {-/foreach-}
-         {-$rgl[0].regname-}</p>
-				<hr>
-			  <image src="images/ge_icon.png"> <a href="thematicmap.php?r={-$reg-}&cmd=getkml">{-#tgetgearth#-}</a><hr><br>
-			  <img src="{-$legend-}">
-		  </div>
-		 </td>
-		 <td valign="top">
-		  <div id="map" class="dwin" style="width:700px; height:530px"></div>
-		 </td>
-	  </tr>
+         {-$rgl[0].regname-}
+			</div>
+			<hr />
+			<image src="images/ge_icon.png" /><a href="thematicmap.php?r={-$reg-}&cmd=getkml">{-#tgetgearth#-}</a>
+			<hr /><br />
+			<img src="{-$legend-}" />
+		</div>
+		</td>
+		<td valign="top">
+			<div id="map" class="dwin" style="width:700px; height:530px"></div>
+		</td>
+	</tr>
 	</table>
- </body>
+</body>
 </html>
 {-/if-}

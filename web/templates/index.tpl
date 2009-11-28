@@ -616,13 +616,13 @@
 	function setSelMap(code, gid, opc) {
 		if (opc) {
 			// Find and fill childs
-			$('itree' + gid).style.display = 'block';
-			updateList('itree' + gid, 'index.php', 'r={-$reg-}&cmd=glist&GeographyId=' + gid);
+			$('itree-' + gid).style.display = 'block';
+			updateList('itree-' + gid, 'index.php', 'r={-$reg-}&cmd=glist&GeographyId=' + gid);
 		}
 		else {
 			// clean childs first
-			$('itree' + gid).innerHTML = '';
-			$('itree' + gid).style.display = 'none';
+			$('itree-' + gid).innerHTML = '';
+			$('itree-' + gid).style.display = 'none';
 		}
 	}
     function saveRes(cmd, typ) {
@@ -973,8 +973,9 @@
 	}
 	function hideMap() {
 		$('smap').style.visibility = 'hidden';
-	}
-	var g{-$reg-} = new CheckTree('g{-$reg-}');*/
+	}*/
+	var geotree = new CheckTree('geotree');
+	//var g{-$reg-} = new CheckTree('g{-$reg-}');
 {-/if-}
 	</script>
 	<link rel="stylesheet" href="css/tabber.css" type="text/css">
@@ -1378,6 +1379,7 @@
 				<!--	END STATISTIC SECTION  -->
 {-/if-} {-** END ctl_qryres **-}
 {-if $ctl_show || $ctl_mainpage-}
+				<!-- Show XML query open window-->
 				<div id="qry-win" class="x-hidden">
 					<div class="x-window-header">{-#mopenquery#-}</div>
 					<div id="qry-cfg" style="text-align:center;"><!-- ?r={-$reg-}-->
@@ -1459,8 +1461,7 @@
 			</td>
 		</tr>
 	</table>
-	<iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" 
-		src="?cmd=getRegionFullInfo&r={-$reg-}"></iframe>
+	<iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="?cmd=getRegionFullInfo&r={-$reg-}"></iframe>
 	</div> <!-- end div id=qryres -->
 {-else-} {-* MAINPAGE *-}
 	<table border="0" cellpadding="0" cellspacing="0" style="border: thin solid;">
@@ -1469,7 +1470,7 @@
 			<table width="100%">
 			<tr>
 				<td>
-					<a href="index.php?cmd=main"><img src="images/di_logo1.png" border=0></a><br />
+					<a href="index.php?cmd=main"><img src="images/di_logo1.png" border="0"></a><br />
 				</td>
 				<td align="right">
 					{-$version-}<br />
@@ -1527,16 +1528,17 @@
 	<span class="dlgmsg" onMouseOver="showtip('{-$i[1]-}');">{-$i[0]-}</span> |
  {-/foreach-}
 	<div id="qgeolst" style="height: 280px;" class="dwin" ext:qtip="{-#thlpquery#-}">
+ {-assign var="maintree" value="true"-}
 {-/if-}
 {-** END ctl_qrydsg **-}
 {-if $ctl_glist-}
-		<ul id="tree-g{-$reg-}" class="checktree">
+		<ul id="tree-geotree" {-if $maintree == "true"-}class="checktree"{-/if-}>
  {-foreach name=geol key=key item=item from=$geol-}
-		<li id="show-g{-$key-}">
+		<li id="show-{-$key-}">
 			<input type="checkbox" id="{-$key-}" name="D_GeographyId[]" value="{-$key-}"
 				onClick="setSelMap('{-$item[0]-}', '{-$key-}', this.checked);" {-if $item[3]-}checked{-/if-} />
 			<label for="{-$key-}">{-$item[1]-}</label>
-			<span id="itree{-$key-}"></span>
+			<span id="itree-{-$key-}" class="count"></span>
 		</li>
  {-/foreach-}
 		</ul>
@@ -1660,52 +1662,54 @@
 		<table border="0" cellpadding="0" cellspacing="0">
  {-foreach name=sec key=key item=item from=$sec-}
  {-assign var="ff" value=D_$key-}
-		<tr><td valign="top">
-        <input type="checkbox" onFocus="showtip('{-$item[2]-}');" id="{-$key-}"
-        	onclick="{-foreach name=sc2 key=k item=i from=$item[3]-}enadisEff('{-$k-}', this.checked);{-/foreach-}enadisEff('{-$key-}', this.checked);"
-        	{-if $qd.$ff[0] != ''-}checked{-/if-} />
-        <label for="{-$key-}" onMouseOver="showtip('{-$item[2]-}');">{-$item[0]-}</label>
-        <span id="o{-$key-}" style="display:none">
-         <select id="{-$key-}[0]" name="D_{-$key-}[0]" class="small line" disabled>
-          <option class="small" value="-1" selected>{-#teffhav#-}</option>
-          <option class="small" value="0"  {-if $qd.$ff[0] == '0'-}selected{-/if-}>{-#teffhavnot#-}</option>
-          <option class="small" value="-2" {-if $qd.$ff[0] == '-2'-}selected{-/if-}>{-#teffdontknow#-}</option>
-         </select>
-         <select id="{-$key-}[3]" id="{-$key-}[3]" name="D_{-$key-}[3]" class="small line">
-          <option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-          <option class="small" value="OR"  {-if $qd.$ff[3] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-         </select>
+		<tr>
+		<td valign="top">
+		<input type="checkbox" onFocus="showtip('{-$item[2]-}');" id="{-$key-}"
+			onclick="{-foreach name=sc2 key=k item=i from=$item[3]-}enadisEff('{-$k-}', this.checked);{-/foreach-}enadisEff('{-$key-}', this.checked);"
+			{-if $qd.$ff[0] != ''-}checked{-/if-} />
+		<label for="{-$key-}" onMouseOver="showtip('{-$item[2]-}');">{-$item[0]-}</label>
+		<span id="o{-$key-}" style="display:none">
+			<select id="{-$key-}[0]" name="D_{-$key-}[0]" class="small line" disabled>
+				<option class="small" value="-1" selected>{-#teffhav#-}</option>
+				<option class="small" value="0"  {-if $qd.$ff[0] == '0'-}selected{-/if-}>{-#teffhavnot#-}</option>
+				<option class="small" value="-2" {-if $qd.$ff[0] == '-2'-}selected{-/if-}>{-#teffdontknow#-}</option>
+			</select>
+			<select id="{-$key-}[3]" id="{-$key-}[3]" name="D_{-$key-}[3]" class="small line">
+				<option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
+				<option class="small" value="OR"  {-if $qd.$ff[3] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
+			</select>
  {-foreach name=sc2 key=k item=i from=$item[3]-}
  {-assign var="ff" value=D_$k-}
-         <span id="o{-$k-}" style="display:none">
-          <br>{-$i-}
-          <select id="{-$k-}[0]" name="D_{-$k-}[0]" onChange="showeff(this.value, 'x{-$k-}', 'y{-$k-}');" 
-              class="small line" disabled>
-           <option class="small" value=" "></option>
-           <option class="small" value=">=" {-if $qd.$ff[0] == '>='-}selected{-/if-}>{-#teffmajor#-}</option>
-           <option class="small" value="<=" {-if $qd.$ff[0] == '<='-}selected{-/if-}>{-#teffminor#-}</option>
-           <option class="small" value="="  {-if $qd.$ff[0] == '='-}selected{-/if-}>{-#teffequal#-}</option>
-           <option class="small" value="-3" {-if $qd.$ff[0] == '-3'-}selected{-/if-}>{-#teffbetween#-}</option>
-          </select>
-          <span id="x{-$k-}" style="display:none">
-           <input type="text" id="{-$k-}[1]" name="D_{-$k-}[1]" size="3" class="line"
-           		value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[1]-}{-else-}1{-/if-}" />
-          </span>
-          <span id="y{-$k-}" style="display:none">{-#tand#-}
-          	<input type="text" id="{-$k-}[2]" name="D_{-$k-}[2]" size="3" class="line"
-          		value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}" />
-          </span>
-          <select id="{-$k-}[3]" id="{-$k-}[3]" name="D_{-$k-}[3]" class="small line">
-           <option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-           <option class="small" value="OR"  {-if $qd.$ff[3] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-          </select><br>
-         </span>
+			<span id="o{-$k-}" style="display:none">
+				<br />{-$i-}
+				<select id="{-$k-}[0]" name="D_{-$k-}[0]" onChange="showeff(this.value, 'x{-$k-}', 'y{-$k-}');" 
+						class="small line" disabled>
+					<option class="small" value=" "></option>
+					<option class="small" value=">=" {-if $qd.$ff[0] == '>='-}selected{-/if-}>{-#teffmajor#-}</option>
+					<option class="small" value="<=" {-if $qd.$ff[0] == '<='-}selected{-/if-}>{-#teffminor#-}</option>
+					<option class="small" value="="  {-if $qd.$ff[0] == '='-}selected{-/if-}>{-#teffequal#-}</option>
+					<option class="small" value="-3" {-if $qd.$ff[0] == '-3'-}selected{-/if-}>{-#teffbetween#-}</option>
+				</select>
+				<span id="x{-$k-}" style="display:none">
+					<input type="text" id="{-$k-}[1]" name="D_{-$k-}[1]" size="3" class="line"
+						value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[1]-}{-else-}1{-/if-}" />
+				</span>
+				<span id="y{-$k-}" style="display:none">{-#tand#-}
+					<input type="text" id="{-$k-}[2]" name="D_{-$k-}[2]" size="3" class="line"
+						value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}" />
+				</span>
+				<select id="{-$k-}[3]" id="{-$k-}[3]" name="D_{-$k-}[3]" class="small line">
+					<option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
+					<option class="small" value="OR"  {-if $qd.$ff[3] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
+				</select><br />
+			</span>
  {-/foreach-}
-        </span>
-		</td></tr>
+		</span>
+		</td>
+		</tr>
  {-/foreach-}
 		</table>
-  		</div>
+		</div>
 		<br />
 		<b>{-#ttitloss#-}</b><br />
  {-foreach name=ef3 key=k item=i from=$ef3-}
@@ -2007,7 +2011,7 @@
 			<hr />
 			<table border="0">
 				<tr valign="top">
-					<td>
+				<td>
 					<h1>{-#twelcome#-}</h1>
 					<a href="doc/howmakequeries_spa.htm" target="idoc">Inicio rapido</a> (1 minuto)<br />
 					<!--<a href="doc/test2.htm" target="idoc">Creando una base de datos</a> (5minutos)<br />-->
@@ -2017,10 +2021,10 @@
 						onClick="window.open('http://www.desinventar.org/{-if $lg == "spa"-}es{-else-}en{-/if-}/software/', '', '');">{-#hotherdoc#-}</a><br />
 					<a href="javascript:void(null);" 
 						onClick="window.open('http://www.desinventar.org', '', '');">{-#mwebsite#-}</a><br />
-					</td>
-					<td>
+				</td>
+				<td>
 					<iframe id="idoc" name="idoc" frameborder="0" height="510px;" width="750px"></iframe>
-					</td>
+				</td>
 				</tr>
 			</table>
 		</td>
