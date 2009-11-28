@@ -202,7 +202,8 @@ switch ($cmd) {
 					$t->assign ("ctl_glist", true);
 					$t->assign ("reg", $RegionId);
 					$t->assign ("path", VAR_DIR);
-					$t->assign ("exteffel", $us->q->getEEFieldList("True"));
+					$EEFieldList = $us->q->getEEFieldList("True");
+					$t->assign ("EEFieldList", $EEFieldList);
 					// Get UserRole
 					$role = $us->getUserRole($RegionId);
 					$t->assign ("role", $role);

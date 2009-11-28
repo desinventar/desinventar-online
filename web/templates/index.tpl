@@ -1104,7 +1104,7 @@
 									<option value="D.{-$item-}">{-$dc2.$item[0]-}</option>
 {-/foreach-}
 									<option disabled>---</option>
-{-foreach name=sst2 key=key item=item from=$exteffel-}
+{-foreach name=sst2 key=key item=item from=$EEFieldList-}
 									<option value="E.{-$key-}">{-$item[0]-}</option>
 {-/foreach-}
 								</select><br />
@@ -1245,7 +1245,7 @@
 							<option value="D.{-$k-}|=|-1">{-#tauxaffect#-} {-$i[0]-}</option>
 {-/foreach-}
 							<option disabled>---</option>
-{-foreach name=eef key=k item=i from=$exteffel-}
+{-foreach name=eef key=k item=i from=$EEFieldList-}
 {-if $i[2] == "INTEGER" || $i[2] == "DOUBLE"-}
 							<option value="E.{-$k-}|>|-1">{-$i[0]-}</option>{-/if-}
 {-/foreach-}
@@ -1338,7 +1338,7 @@
 							<option value="D.{-$k-}|S|-1">{-#tauxaffect#-} {-$i[0]-}</option>
 {-/foreach-}
 							<option disabled>---</option>
-{-foreach name=eef key=k item=i from=$exteffel-}
+{-foreach name=eef key=k item=i from=$EEFieldList-}
 {-if $i[2] == "INTEGER" || $i[2] == "DOUBLE"-}
 							<option value="E.{-$k-}|>|-1">{-$i[0]-}</option>{-/if-}
 {-/foreach-}
@@ -1747,7 +1747,7 @@
 	<dd>
 	<div style="width: 235px; height: 300px;" class="dwin" ext:qtip="{-#thlpquery#-}">
 		<table border=0 cellpadding=0 cellspacing=0>
- {-foreach name=eef key=key item=item from=$exteffel-}
+ {-foreach name=eef key=key item=item from=$EEFieldList-}
 			<tr>
 			<td valign="top">
  {-if $item[2] == "INTEGER" || $item[2] == "DOUBLE"-}
@@ -1881,7 +1881,7 @@
 				<input type="button" class="line" value="{-$item[0]-}" onClick="setAdvQuery('{-$key-}','text')" /><br />
 {-/foreach-}
 				<hr />
-{-foreach name=eef key=key item=item from=$exteffel-}
+{-foreach name=eef key=key item=item from=$EEFieldList-}
 				<input type="button" class="line" value="{-$item[0]-}" onClick="setAdvQuery('{-$key-}','date')" /><br />
 {-/foreach-}
 			</div>
