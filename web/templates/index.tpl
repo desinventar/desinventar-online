@@ -1611,7 +1611,7 @@
 		<textarea name="D_CauseNotes[1]" style="width:250px; height: 40px;"
 			onFocus="showtip('{-$cau.CauseNotes[2]-}');">{-$qd.D_CauseNotes[1]-}</textarea>
 	</dd>
-	<!-- BEGIN EFFECTS SECTION -->
+	<!-- BEGIN QUERY EFFECTS SECTION -->
 	<dt>{-#meffsection#-}</dt>
 	<dd>
 		<b>{-#ttitegp#-}</b><br />

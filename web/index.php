@@ -268,17 +268,23 @@ switch ($cmd) {
 					$ef2 = $us->q->queryLabelsFromGroup('Effect|Affected', $lg);
 					$ef3 = $us->q->queryLabelsFromGroup('Effect|Economic', $lg);
 					$sec = $us->q->queryLabelsFromGroup('Sector', $lg);
-					$sec['SectorTransport'][3] 		= array('EffectRoads' => $ef2['EffectRoads'][0]);
+					// Add some fields to customize lists
+					$ef1['EffectFarmingAndForest'] = $ef2['EffectFarmingAndForest'];
+					$ef1['EffectLiveStock'] = $ef2['EffectLiveStock'];
+					$ef1['EffectRoads'] = $ef2['EffectRoads'];
+					$ef1['EffectEducationCenters'] = $ef2['EffectEducationCenters'];
+					$ef1['EffectMedicalCenters'] = $ef2['EffectMedicalCenters'];
+					$sec['SectorTransport'][3] 		= null; //array('EffectRoads' => $ef2['EffectRoads'][0]);
 					$sec['SectorCommunications'][3] = null;
 					$sec['SectorRelief'][3] 		= null;
-					$sec['SectorAgricultural'][3] 	= array('EffectFarmingAndForest' => $ef2['EffectFarmingAndForest'][0],
-														'EffectLiveStock' => $ef2['EffectLiveStock'][0]);
+					$sec['SectorAgricultural'][3] 	= null; //array('EffectFarmingAndForest' => $ef2['EffectFarmingAndForest'][0],
+					                                        //'EffectLiveStock' => $ef2['EffectLiveStock'][0]);
 					$sec['SectorWaterSupply'][3] 	= null;
 					$sec['SectorSewerage'][3]		= null;
-					$sec['SectorEducation'][3]		= array('EffectEducationCenters' => $ef2['EffectEducationCenters'][0]);
+					$sec['SectorEducation'][3]		= null; //array('EffectEducationCenters' => $ef2['EffectEducationCenters'][0]);
 					$sec['SectorPower'][3]			= null;
 					$sec['SectorIndustry'][3]		= null;
-					$sec['SectorHealth'][3]			= array('EffectMedicalCenters' => $ef2['EffectMedicalCenters'][0]);
+					$sec['SectorHealth'][3]			= null; //array('EffectMedicalCenters' => $ef2['EffectMedicalCenters'][0]);
 					$sec['SectorOther'][3]			= null;
 					$dic = array();
 					$dic = array_merge($dic, $us->q->queryLabelsFromGroup('MapOpt', $lg));
