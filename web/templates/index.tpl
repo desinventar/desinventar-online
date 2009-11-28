@@ -1742,50 +1742,53 @@
 		<br />
  {-/foreach-}
 	</dd>
-    <!-- BEGIN EXTRAEFFECTS SECTION
+	<!-- Begin EEField Section -->
+	<!--
 	<dt>{-#mextsection#-}</dt>
 	<dd>
-	<div style="width: 235px; height: 300px;" class="dwin" ext:qtip="{-#thlpquery#-}">
-		<table border=0 cellpadding=0 cellspacing=0>
- {-foreach name=eef key=key item=item from=$EEFieldList-}
-			<tr>
-			<td valign="top">
- {-if $item[2] == "INTEGER" || $item[2] == "DOUBLE"-}
-				<input type="checkbox" onFocus="showtip('{-$item[1]-}');" id="{-$key-}"
-				onclick="enadisEff('{-$key-}', this.checked);" />
-				<label for="{-$key-}" onMouseOver="showtip('{-$item[1]-}');">{-$item[0]-}</label>
-				<span id="o{-$key-}" style="display:none">
-					<select id="{-$key-}[0]" name="E:{-$key-}[0]" onChange="showeff(this.value, 'x{-$key-}', 'y{-$key-}');" 
-							class="small" disabled>
-						<option class="small" value=""></option>
-						<option class="small" value=">=">{-#teffmajor#-}</option>
-						<option class="small" value="<=">{-#teffminor#-}</option>
-						<option class="small" value="=">{-#teffequal#-}</option>
-						<option class="small" value="-3">{-#teffbetween#-}</option>
-					</select>
-					<span id="x{-$key-}" style="display:none"><br />
-						<input type="text" id="{-$key-}[1]" name="E:{-$key-}[1]" size="3" value="1" class="line" />
-					</span>
-					<span id="y{-$key-}" style="display:none">
-						{-#tand#-} <input type="text" id="{-$key-}[2]" name="E:{-$key-}[2]" size="3" value="10" class="line">
-					</span>
-					<select id="{-$key-}[3]" id="{-$key-}[3]" name="E:{-$key-}[3]" class="small">
-						<option class="small" value="AND" checked>{-#tand#-}</option>
-						<option class="small" value="OR">{-#tor#-}</option>
-					</select>
-				</span>
- {-/if-}
- {-if $item[2] == "TEXT"-}
-			{-$item[0]-}<br />
-			<input type="text" id="{-$key-}" name="E:{-$key-}" style="width: 220px;" class="line"
-				onFocus="showtip('{-$item[1]-}');" /><br />
- {-/if-}
-			</td>
-			</tr>
-{-/foreach-}
-		</table>
-	</div><br />
-	</dd>-->
+		<div style="width: 235px; height: 300px;" class="dwin" ext:qtip="{-#thlpquery#-}">
+			<table border=0 cellpadding=0 cellspacing=0>
+				{-foreach name=eef key=key item=item from=$EEFieldList-}
+					<tr>
+						<td valign="top">
+							{-if $item[2] == "INTEGER" || $item[2] == "DOUBLE"-}
+								<input type="checkbox" onFocus="showtip('{-$item[1]-}');" id="{-$key-}" 
+									onclick="enadisEff('{-$key-}', this.checked);" />
+								<label for="{-$key-}" onMouseOver="showtip('{-$item[1]-}');">{-$item[0]-}</label>
+								<span id="o{-$key-}" style="display:none">
+									<select id="{-$key-}[0]" name="E:{-$key-}[0]" onChange="showeff(this.value, 'x{-$key-}', 'y{-$key-}');" 
+										class="small" disabled>
+										<option class="small" value=""></option>
+										<option class="small" value=">=">{-#teffmajor#-}</option>
+										<option class="small" value="<=">{-#teffminor#-}</option>
+										<option class="small" value="=">{-#teffequal#-}</option>
+										<option class="small" value="-3">{-#teffbetween#-}</option>
+									</select>
+									<span id="x{-$key-}" style="display:none"><br />
+										<input type="text" id="{-$key-}[1]" name="E:{-$key-}[1]" size="3" value="1" class="line" />
+									</span>
+									<span id="y{-$key-}" style="display:none">
+										{-#tand#-} <input type="text" id="{-$key-}[2]" name="E:{-$key-}[2]" size="3" value="10" class="line">
+									</span>
+									<select id="{-$key-}[3]" id="{-$key-}[3]" name="E:{-$key-}[3]" class="small">
+										<option class="small" value="AND" checked>{-#tand#-}</option>
+										<option class="small" value="OR">{-#tor#-}</option>
+									</select>
+								</span>
+							{-/if-}
+							{-if $item[2] == "TEXT"-}
+								{-$item[0]-}<br />
+								<input type="text" id="{-$key-}" name="E:{-$key-}" style="width: 220px;" class="line"
+									onFocus="showtip('{-$item[1]-}');" /><br />
+							{-/if-}
+						</td>
+					</tr>
+				{-/foreach-}
+			</table>
+		</div><br />
+	</dd>
+	-->
+	<!-- END EEField Section -->
 	<!-- BEGIN DATETIME SECTION -->
 	<dt>{-#mdcsection#-}</dt>
 	<dd class="default">
