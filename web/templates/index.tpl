@@ -1749,7 +1749,7 @@
 	<!-- Begin EEField Section -->
 	<dt>{-#mextsection#-}</dt>
 	<dd>
-		<div style="width: 235px; height: 300px;" class="dwin" ext:qtip="{-#thlpquery#-}">
+		<div style="width: 300px; height: 300px;" class="dwin" ext:qtip="{-#thlpquery#-}">
 			<table border=0 cellpadding=0 cellspacing=0>
 				{-foreach name=eef key=key item=item from=$EEFieldList-}
 					<tr>
@@ -1759,7 +1759,7 @@
 									onclick="enadisEff('{-$key-}', this.checked);" />
 								<label for="{-$key-}" onMouseOver="showtip('{-$item[1]-}');">{-$item[0]-}</label>
 								<span id="o{-$key-}" style="display:none">
-									<select id="{-$key-}[0]" name="EEField[{-$key-}][Operator]" onChange="showeff(this.value, 'x{-$key-}', 'y{-$key-}');" 
+									<select id="{-$key-}[0]" name="EEFieldQuery[{-$key-}][Operator]" onChange="showeff(this.value, 'x{-$key-}', 'y{-$key-}');" 
 										class="small" disabled>
 										<option class="small" value=""></option>
 										<option class="small" value=">=">{-#teffmajor#-}</option>
@@ -1767,14 +1767,15 @@
 										<option class="small" value="=">{-#teffequal#-}</option>
 										<option class="small" value="-3">{-#teffbetween#-}</option>
 									</select>
+									<input type="hidden" name="EEFieldQuery[{-$key-}][Type]" value="{-$item[2]-}">
 									<span id="x{-$key-}" style="display:none"><br />
-										<input type="text" id="{-$key-}[1]" name="EEField[{-$key-}][Value1]" size="3" value="1" class="line" />
+										<input type="text" id="{-$key-}[1]" name="EEFieldQuery[{-$key-}][Value1]" size="3" value="1" class="line" />
 									</span>
 									<span id="y{-$key-}" style="display:none">
-										{-#tand#-} <input type="text" id="{-$key-}[2]" name="EEField[{-$key-}][Value2]" size="3" value="10" class="line">
+										{-#tand#-} <input type="text" id="{-$key-}[2]" name="EEFieldQuery[{-$key-}][Value2]" size="3" value="10" class="line">
 									</span>
 									<!--
-									<select id="{-$key-}[3]" id="{-$key-}[3]" name="EEField[{-$key-}][BetweenOperator]" class="small">
+									<select id="{-$key-}[3]" id="{-$key-}[3]" name="EEFieldQuery[{-$key-}][BetweenOperator]" class="small">
 										<option class="small" value="AND" checked>{-#tand#-}</option>
 										<option class="small" value="OR">{-#tor#-}</option>
 									</select>
@@ -1783,8 +1784,9 @@
 							{-/if-}
 							{-if $item[2] == "TEXT"-}
 								{-$item[0]-}<br />
-								<input type="text" id="{-$key-}" name="E:{-$key-}" style="width: 220px;" class="line"
+								<input type="text" id="{-$key-}" name="EEFieldQuery[{-$key-}][Value]" style="width: 290px;" class="line"
 									onFocus="showtip('{-$item[1]-}');" /><br />
+								<input type="hidden" name="EEFieldQuery[{-$key-}][Type]" value="{-$item[2]-}">
 							{-/if-}
 						</td>
 					</tr>

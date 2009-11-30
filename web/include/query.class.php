@@ -726,6 +726,36 @@ class Query extends PDO
 		if (isset($dat['__CusQry']) && !empty($dat['__CusQry'])) {
 			$cusqry = "AND (". $dat['__CusQry'] .") ";
 		}
+		// Process EEFields...
+		$First = true;
+		$EEQuery = '';
+		foreach($dat['EEFieldQuery'] as $EEField => $QueryParams) {
+			if (array_key_exists('Type', $QueryParams)) {
+				$QueryItem = '';
+				switch($QueryParams['Type']) {
+					case 'INTEGER':
+						switch($QueryParams['Operator']) {
+							case '>=':
+							case '<=':
+								$QueryItem = 'E.' . $EEField . $QueryParams['Operator'] . $QueryParams['Value1'];
+							break;
+						}
+					break;
+					case 'TEXT':
+						if ($QueryParams['Value'] != '') {
+							$QueryItem = 'E.' . $EEField . " LIKE '" . $QueryParams['Value'] . "'";
+						}
+					break;
+				}
+				if ($QueryItem != '') {
+					if (! $First) {
+						$EEQuery .= ' AND ';
+					}
+					$First = false;
+					$EEQuery .= $QueryItem;
+				}
+			}
+		}
 		
 		foreach ($dat as $k=>$v) {
 			// replace D_ by D.
@@ -827,7 +857,11 @@ class Query extends PDO
                   "AND V.LangIsoCode='$lan' AND C.LangIsoCode='$lan' AND G.LangIsoCode='$lan'";
 		foreach ($e as $i)
 			$sql .= "$i AND ";
-		$sql .= "D.DisasterId = E.DisasterId $serial $cusqry";
+		if ($EEQuery != '') {
+			$sql .= ' ' . $EEQuery;
+		}
+		$sql .=  " AND D.DisasterId = E.DisasterId $serial $cusqry";
+
     	return ($sql);
 	}
 
