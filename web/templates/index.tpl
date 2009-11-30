@@ -1747,7 +1747,6 @@
  {-/foreach-}
 	</dd>
 	<!-- Begin EEField Section -->
-	<!--
 	<dt>{-#mextsection#-}</dt>
 	<dd>
 		<div style="width: 235px; height: 300px;" class="dwin" ext:qtip="{-#thlpquery#-}">
@@ -1791,7 +1790,6 @@
 			</table>
 		</div><br />
 	</dd>
-	-->
 	<!-- END EEField Section -->
 	<!-- BEGIN DATETIME SECTION -->
 	<dt>{-#mdcsection#-}</dt>
