@@ -750,6 +750,11 @@ class Query extends PDO
 									$QueryItem = 'E.' . $EEField . $QueryParams['Operator'] . $QueryParams['Value1'];
 								}
 							break;
+							case '-3':
+								if (is_numeric($QueryParams['Value1']) && is_numeric($QueryParams['Value2'])) {
+									$QueryItem = '(' . 'E.' . $EEField . '>=' . $QueryParams['Value1'] . ' AND ' . 'E.' . $EEField . '<=' . $QueryParams['Value2'] . ')';
+								}
+							break;
 						}
 					break;
 					case 'TEXT':
