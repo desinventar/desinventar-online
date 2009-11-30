@@ -1759,7 +1759,7 @@
 									onclick="enadisEff('{-$key-}', this.checked);" />
 								<label for="{-$key-}" onMouseOver="showtip('{-$item[1]-}');">{-$item[0]-}</label>
 								<span id="o{-$key-}" style="display:none">
-									<select id="{-$key-}[0]" name="E:{-$key-}[0]" onChange="showeff(this.value, 'x{-$key-}', 'y{-$key-}');" 
+									<select id="{-$key-}[0]" name="EEField[{-$key-}][Operator]" onChange="showeff(this.value, 'x{-$key-}', 'y{-$key-}');" 
 										class="small" disabled>
 										<option class="small" value=""></option>
 										<option class="small" value=">=">{-#teffmajor#-}</option>
@@ -1768,15 +1768,17 @@
 										<option class="small" value="-3">{-#teffbetween#-}</option>
 									</select>
 									<span id="x{-$key-}" style="display:none"><br />
-										<input type="text" id="{-$key-}[1]" name="E:{-$key-}[1]" size="3" value="1" class="line" />
+										<input type="text" id="{-$key-}[1]" name="EEField[{-$key-}][Value1]" size="3" value="1" class="line" />
 									</span>
 									<span id="y{-$key-}" style="display:none">
-										{-#tand#-} <input type="text" id="{-$key-}[2]" name="E:{-$key-}[2]" size="3" value="10" class="line">
+										{-#tand#-} <input type="text" id="{-$key-}[2]" name="EEField[{-$key-}][Value2]" size="3" value="10" class="line">
 									</span>
-									<select id="{-$key-}[3]" id="{-$key-}[3]" name="E:{-$key-}[3]" class="small">
+									<!--
+									<select id="{-$key-}[3]" id="{-$key-}[3]" name="EEField[{-$key-}][BetweenOperator]" class="small">
 										<option class="small" value="AND" checked>{-#tand#-}</option>
 										<option class="small" value="OR">{-#tor#-}</option>
 									</select>
+									-->
 								</span>
 							{-/if-}
 							{-if $item[2] == "TEXT"-}
