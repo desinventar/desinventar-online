@@ -874,9 +874,9 @@ class Query extends PDO
 		foreach ($e as $i)
 			$sql .= "$i AND ";
 		if ($EEQuery != '') {
-			$sql .= ' ' . $EEQuery;
+			$sql .= ' ' . $EEQuery . ' AND ';
 		}
-		$sql .=  " AND D.DisasterId = E.DisasterId $serial $cusqry";
+		$sql .=  " D.DisasterId = E.DisasterId $serial $cusqry";
 
     	return ($sql);
 	}
