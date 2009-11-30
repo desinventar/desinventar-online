@@ -713,131 +713,123 @@ class Query extends PDO
       return false;
   }
   
-  /*****************************
-   Generate SQL from Associative array from Desconsultar Form
-   ******************************/
-  public function genSQLWhereDesconsultar($dat) {
-    $sql 	= "WHERE ";
-    $e		= array();
-    $e['Eff'] = "";
-    $e['Item'] = "";
-    $serial = "";
-	$cusqry = "";
-    //$datedb = $this->getDateRange();
-	// Add Custom Query..
-	if (isset($dat['__CusQry']) && !empty($dat['__CusQry']))
-		$cusqry = "AND (". $dat['__CusQry'] .") ";
-    foreach ($dat as $k=>$v) {
-      // replace D_ by D.
-      if (substr($k, 1, 1) == "_")
-        $k = substr_replace($k, ".", 1, 1);
-      if (!empty($v)) {
-        if (is_int($v) || is_float($v))
-          $e['Item'] .= "$k = $v AND ";
-        else if ($k == "D.RecordStatus") {
-          if (is_array($v)) {
-            $e['Item'] .= "(";
-            foreach($v as $i)
-              $e['Item'] .= "$k = '$i' OR ";
-            $e['Item'] .= "1!=1) AND ";
-          }
-          else
-            $e['Item'] .= "$k = '$v' AND ";
-        }
-        else if (is_array($v)) {
-          if ($k == "D.DisasterBeginTime") {
-            $aa = !empty($v[0])? $v[0] : "0000"; //substr($datedb[0], 0, 4);
-            $mm = !empty($v[1])? $v[1] : "00";
-            $dd = !empty($v[2])? $v[2] : "00";
-            $begt = sprintf("%04d-%02d-%02d", $aa, $mm, $dd);
-          }
-          elseif ($k == "D.DisasterEndTime") {
-            $aa = !empty($v[0])? $v[0] : "9999"; //substr($datedb[1], 0, 4);
-            $mm = !empty($v[1])? $v[1] : "12";
-            $dd = !empty($v[2])? $v[2] : "31";
-            $endt = sprintf("%04d-%02d-%02d", $aa, $mm, $dd);
-          }
-          elseif ($k == "D.EventId" || $k == "D.CauseId") {
-            $e[$k] = "(";
-            foreach ($v as $i) {
-              $e[$k] .= "$k = '$i' OR ";
-            }
-            $e[$k] .= "1!=1)";
-          }
-          elseif ($k == "D.GeographyId") {
-            $e[$k] = "(";
-            foreach ($v as $i) {
-              // Restrict to childs elements only
-              $chl = false;
-              foreach ($v as $j)
-                if ($i != $j && ($i == substr($j, 0, 5) || $i == substr($j, 0, 10)))
-                  $chl = true;
-              if (!$chl)
-                $e[$k] .= "$k LIKE '$i%' OR ";
-            }
-            $e[$k] .= "1!=1)";
-          }
-          // Process effects and sectors..
-          elseif ((substr($k, 2, 6) == "Effect" || substr($k, 2, 6) == "Sector") && isset($v[0])) {
-            if (isset($v[3]))
-              $op = $v[3];
-            else
-              $op = "AND";
-            if ($v[0] == ">=" || $v[0] == "<=" || $v[0] == "=")
-              $e['Eff'] .= "$k ". $v[0] . $v[1] ." $op ";
-            else if ($v[0] == "-1")
-              $e['Eff'] .= "($k =". $v[0] ." OR $k>0) $op ";
-            else if ($v[0] == "0" || $v[0] == "-2")
-              $e['Eff'] .= "$k =". $v[0] ." $op ";
-            else if ($v[0] == "-3")
-              $e['Eff'] .= "($k BETWEEN ". $v[1] ." AND ". $v[2] .") $op ";
-          }
-          // Process text fields with separator AND, OR..
-          elseif (substr($k, -5) == "Notes" || $k == "D.DisasterSource") {
-            $e['Item'] .= "(";
-            foreach (explode(" ", $v[1]) as $i)
-              $e['Item'] .= "$k LIKE '%$i%' ". $v[0] ." "; 
-            if ($v[0] == "AND")
-              $e['Item'] .= "1=1) AND ";
-            else
-              $e['Item'] .= "1!=1) AND ";
-          }
-          // Process serials..
-          elseif ($k == "D.DisasterSerial") {
-            if (strlen($v[1]) > 0) {
-              $serial = "AND ". $v[0] ." (";
-              foreach (explode(" ", $v[1]) as $i)
-                $serial .= "$k='$i' OR ";
-              $serial .= "1!=1) ";
-            }
-          }
-        }
-        // all minus DC hidden fields _MyField
-        elseif (substr($k, 0, 1) != "_")  {
-          $e['Item'] .= "$k like '%$v%' AND ";
-        }
-      }
-    } //foreach
-    if (isset($begt) || isset($endt)) {
-      if (!isset($begt))
-        $begt = "0000-00-00"; // $datedb[0];
-      if (!isset($endt))
-        $endt = "9999-12-31"; //$datedb[1];
-      $e['DisasterTime'] = "(D.DisasterBeginTime BETWEEN '$begt' AND '$endt')";
-    }
-    if (isset($op) && $op == "OR")
-      $e['Eff'] = "(". $e['Eff'] ." 1!=1)";
-    else
-      $e['Eff'] = "(". $e['Eff'] ." 1=1)";
-    $lan = "spa"; // select from local languages of database..
-    $e['Item'] .= "D.EventId=V.EventId AND D.CauseId=C.CauseId AND D.GeographyId=G.GeographyId ".
+	// Generate SQL from Associative array from Desconsultar Form
+	public function genSQLWhereDesconsultar($dat) {
+		$sql 	= "WHERE ";
+		$e		= array();
+		$e['Eff'] = "";
+		$e['Item'] = "";
+		$serial = "";
+		$cusqry = "";
+		//$datedb = $this->getDateRange();
+		// Add Custom Query..
+		if (isset($dat['__CusQry']) && !empty($dat['__CusQry'])) {
+			$cusqry = "AND (". $dat['__CusQry'] .") ";
+		}
+		
+		foreach ($dat as $k=>$v) {
+			// replace D_ by D.
+			if (substr($k, 1, 1) == "_") {
+				$k = substr_replace($k, ".", 1, 1);
+			}
+			if (!empty($v)) {
+				if (is_int($v) || is_float($v)) {
+					$e['Item'] .= "$k = $v AND ";
+				} elseif ($k == "D.RecordStatus") {
+					if (is_array($v)) {
+						$e['Item'] .= "(";
+						foreach($v as $i)
+							$e['Item'] .= "$k = '$i' OR ";
+						$e['Item'] .= "1!=1) AND ";
+					} else {
+						$e['Item'] .= "$k = '$v' AND ";
+					}
+				} elseif (is_array($v)) {
+					if ($k == "D.DisasterBeginTime") {
+						$aa = !empty($v[0])? $v[0] : "0000"; //substr($datedb[0], 0, 4);
+						$mm = !empty($v[1])? $v[1] : "00";
+						$dd = !empty($v[2])? $v[2] : "00";
+						$begt = sprintf("%04d-%02d-%02d", $aa, $mm, $dd);
+					} elseif ($k == "D.DisasterEndTime") {
+						$aa = !empty($v[0])? $v[0] : "9999"; //substr($datedb[1], 0, 4);
+						$mm = !empty($v[1])? $v[1] : "12";
+						$dd = !empty($v[2])? $v[2] : "31";
+						$endt = sprintf("%04d-%02d-%02d", $aa, $mm, $dd);
+					} elseif ($k == "D.EventId" || $k == "D.CauseId") {
+						$e[$k] = "(";
+						foreach ($v as $i) {
+							$e[$k] .= "$k = '$i' OR ";
+						}
+						$e[$k] .= "1!=1)";
+					} elseif ($k == "D.GeographyId") {
+						$e[$k] = "(";
+						foreach ($v as $i) {
+							// Restrict to childs elements only
+							$chl = false;
+							foreach ($v as $j)
+								if ($i != $j && ($i == substr($j, 0, 5) || $i == substr($j, 0, 10)))
+									$chl = true;
+							if (!$chl)
+								$e[$k] .= "$k LIKE '$i%' OR ";
+						}
+						$e[$k] .= "1!=1)";
+					} elseif ((substr($k, 2, 6) == "Effect" || substr($k, 2, 6) == "Sector") && isset($v[0])) {
+						// Process effects and sectors..
+						if (isset($v[3]))
+							$op = $v[3];
+						else
+							$op = "AND";
+						if ($v[0] == ">=" || $v[0] == "<=" || $v[0] == "=")
+							$e['Eff'] .= "$k ". $v[0] . $v[1] ." $op ";
+						elseif ($v[0] == "-1")
+							$e['Eff'] .= "($k =". $v[0] ." OR $k>0) $op ";
+						elseif ($v[0] == "0" || $v[0] == "-2")
+							$e['Eff'] .= "$k =". $v[0] ." $op ";
+						elseif ($v[0] == "-3")
+							$e['Eff'] .= "($k BETWEEN ". $v[1] ." AND ". $v[2] .") $op ";
+					} elseif (substr($k, -5) == "Notes" || $k == "D.DisasterSource") {
+						// Process text fields with separator AND, OR..
+						$e['Item'] .= "(";
+						foreach (explode(" ", $v[1]) as $i)
+							$e['Item'] .= "$k LIKE '%$i%' ". $v[0] ." "; 
+						if ($v[0] == "AND")
+							$e['Item'] .= "1=1) AND ";
+						else
+							$e['Item'] .= "1!=1) AND ";
+					} elseif ($k == "D.DisasterSerial") {
+						// Process serials..
+						if (strlen($v[1]) > 0) {
+							$serial = "AND ". $v[0] ." (";
+							foreach (explode(" ", $v[1]) as $i)
+								$serial .= "$k='$i' OR ";
+							$serial .= "1!=1) ";
+						}
+					}
+				} elseif (substr($k, 0, 1) != "_")  {
+					// all minus DC hidden fields _MyField
+					$e['Item'] .= "$k like '%$v%' AND ";
+				}
+			}
+		} //foreach
+		if (isset($begt) || isset($endt)) {
+			if (!isset($begt))
+				$begt = "0000-00-00"; // $datedb[0];
+			if (!isset($endt))
+				$endt = "9999-12-31"; //$datedb[1];
+			$e['DisasterTime'] = "(D.DisasterBeginTime BETWEEN '$begt' AND '$endt')";
+		}
+		if (isset($op) && $op == "OR")
+			$e['Eff'] = "(". $e['Eff'] ." 1!=1)";
+		else
+			$e['Eff'] = "(". $e['Eff'] ." 1=1)";
+		$lan = "spa"; // select from local languages of database..
+		$e['Item'] .= "D.EventId=V.EventId AND D.CauseId=C.CauseId AND D.GeographyId=G.GeographyId ".
                   "AND V.LangIsoCode='$lan' AND C.LangIsoCode='$lan' AND G.LangIsoCode='$lan'";
-    foreach ($e as $i)
-      $sql .= "$i AND ";
-    $sql .= "D.DisasterId = E.DisasterId $serial $cusqry";
-	//echo $sql;
-    return ($sql);
-  }
+		foreach ($e as $i)
+			$sql .= "$i AND ";
+		$sql .= "D.DisasterId = E.DisasterId $serial $cusqry";
+    	return ($sql);
+	}
 
   /* Counter results */
   public function genSQLSelectCount($whr) {
