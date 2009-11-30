@@ -45,9 +45,8 @@ if (isset($post['page']) || isset($post['_S+cmd'])) {
 		$geo = $post['geo'];
 		if (isset($post['ord']))
 			$sql .= " ORDER BY ". $post['ord'] ." ". $post['dir'];
-	}
-	// Process results with default options
-	else if (isset($post['_S+cmd'])) {
+	} else if (isset($post['_S+cmd'])) {
+		// Process results with default options
 		$qd 	= $us->q->genSQLWhereDesconsultar($post);
 		$sqc 	= $us->q->genSQLSelectCount($qd);
 		$c 		= $us->q->getresult($sqc);
