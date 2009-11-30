@@ -736,8 +736,19 @@ class Query extends PDO
 					case 'INTEGER':
 						switch($QueryParams['Operator']) {
 							case '>=':
+								if (is_numeric($QueryParams['Value2'])) {
+									$QueryItem = 'E.' . $EEField . $QueryParams['Operator'] . $QueryParams['Value2'];
+								}
+							break;
 							case '<=':
-								$QueryItem = 'E.' . $EEField . $QueryParams['Operator'] . $QueryParams['Value1'];
+								if (is_numeric($QueryParams['Value1'])) {
+									$QueryItem = 'E.' . $EEField . $QueryParams['Operator'] . $QueryParams['Value1'];
+								}
+							break;
+							case '=':
+								if (is_numeric($QueryParams['Value1'])) {
+									$QueryItem = 'E.' . $EEField . $QueryParams['Operator'] . $QueryParams['Value1'];
+								}
 							break;
 						}
 					break;
