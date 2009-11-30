@@ -889,30 +889,29 @@ class Query extends PDO
     return false;
   }
 
-  /* Generate SQL to data lists */
-  public function genSQLSelectData ($whr, $fld, $order) {
-    $fld = str_ireplace("D.EventId", "V.EventName", $fld); //Join with Event table
-    $fld = str_ireplace("D.EventName", "V.EventName", $fld); //Join with Event table
-    $fld = str_ireplace("D.CauseId", "C.CauseName", $fld); //Join with Cause table
-    $fld = str_ireplace("D.CauseName", "C.CauseName", $fld); //Join with Cause table
-    $fld = str_ireplace("D.GeographyCode", "G.GeographyCode", $fld);
-    $fld = str_ireplace("D.GeographyFQName", "G.GeographyFQName", $fld);
-    // Process fields to show
-    $sql = "SELECT ". $fld ." FROM Disaster AS D, EEData AS E, Event AS V, Cause AS C, Geography AS G ";
-    if ($this->chkSQLWhere($whr)) {
-      $sql .= $whr;
-      if (!empty($order))
-        $sql .= "ORDER BY $order";
-      return ($sql);
-    }
-    else
-      return false;
-  }
+	/* Generate SQL to data lists */
+	public function genSQLSelectData ($whr, $fld, $order) {
+		$fld = str_ireplace("D.EventId", "V.EventName", $fld); //Join with Event table
+		$fld = str_ireplace("D.EventName", "V.EventName", $fld); //Join with Event table
+		$fld = str_ireplace("D.CauseId", "C.CauseName", $fld); //Join with Cause table
+		$fld = str_ireplace("D.CauseName", "C.CauseName", $fld); //Join with Cause table
+		$fld = str_ireplace("D.GeographyCode", "G.GeographyCode", $fld);
+		$fld = str_ireplace("D.GeographyFQName", "G.GeographyFQName", $fld);
+		// Process fields to show
+		$sql = "SELECT ". $fld ." FROM Disaster AS D, EEData AS E, Event AS V, Cause AS C, Geography AS G ";
+		if ($this->chkSQLWhere($whr)) {
+			$sql .= $whr;
+			if (!empty($order))
+				$sql .= "ORDER BY $order";
+			return ($sql);
+		} else {
+			return false;
+		}
+	}
 
 	/* Generate Special SQL with grouped fields */
 	public function genSQLProcess ($dat, $opc) {
 		$sql = '';
-		
 		$sel = array();
 		$whr = array();
 		$grp = array();
@@ -928,13 +927,13 @@ class Query extends PDO
 					if (!empty($gp[0])) {
 						// Error with strftime when date contain '00' like '1997-06-00'
 						switch ($gp[0]) {
-							case "YEAR":		$func = "SUBSTR(". $gp[1] .", 1, 4) ";		break; // %Y
-							case "YMONTH":	$func = "SUBSTR(". $gp[1] .", 1, 7) ";		break; //%Y-%m
-							case "MONTH":		$func = "SUBSTR(". $gp[1] .", 6, 2) ";		break; //%m
-							case "YWEEK":		$func = "STRFTIME('%Y-%W', ". $gp[1] .") "; break; //%Y-%W
-							case "WEEK":		$func = "STRFTIME('%W', ". $gp[1] .") ";	break; //%W
-							case "YDAY": 		$func = "SUBSTR(". $gp[1] .", 1, 10) ";		break; //%Y-%m-%d
-							case "DAY": 		$func = "STRFTIME('%j', ". $gp[1] .") ";	break; //%j
+							case "YEAR":   $func = "SUBSTR(". $gp[1] .", 1, 4) ";		break; // %Y
+							case "YMONTH": $func = "SUBSTR(". $gp[1] .", 1, 7) ";		break; //%Y-%m
+							case "MONTH":  $func = "SUBSTR(". $gp[1] .", 6, 2) ";		break; //%m
+							case "YWEEK":  $func = "STRFTIME('%Y-%W', ". $gp[1] .") "; break; //%Y-%W
+							case "WEEK":   $func = "STRFTIME('%W', ". $gp[1] .") ";	break; //%W
+							case "YDAY":   $func = "SUBSTR(". $gp[1] .", 1, 10) ";		break; //%Y-%m-%d
+							case "DAY":    $func = "STRFTIME('%j', ". $gp[1] .") ";	break; //%j
 						} //switch
 						$sel[$j] = $func ."AS ". substr($gp[1],2) ."_". $gp[0] ; // delete last ,'_',
 						$grp[$j] = $func;
@@ -971,6 +970,15 @@ class Query extends PDO
 		foreach ($f as $field) {
 			// Field(s) to show
 			$fl = explode("|", $field);
+			// 2009-11-30 (jhcaiced) This is un ugly fix, we need to change this...
+			if ( ($fl[0] == 'D.EffectFarmingAndForestQ') ||
+			     ($fl[0] == 'D.EffectLiveStockQ') ||
+			     ($fl[0] == 'D.EffectRoadsQ') ||
+			     ($fl[0] == 'D.EffectEducationCentersQ') ||
+			     ($fl[0] == 'D.EffectMedicalCentersQ')
+			   ) {
+				$fl[0] = substr($fl[0],0,-1);
+			}			
 			// SUM > 0 values
 			if ($fl[1] == ">") {
 				$sel[$j] = "SUM(". $fl[0] .") AS ". substr($fl[0],2);
