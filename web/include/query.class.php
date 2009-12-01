@@ -1086,7 +1086,11 @@ class Query extends PDO
 							$sep = ", ";	// use comma separator to CSV
 						else
 							$sep = "\t";	// use tab separator to XLS (default option)
-						$txt .= '"'. $myv .'"'. $sep;
+						if (is_numeric($myv)) {
+							$txt .= $myv . $sep;
+						} else {
+							$txt .= '"'. $myv .'"'. $sep;
+						}
 					}
 					$txt .= "\n";
 				} //if exp
