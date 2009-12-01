@@ -113,9 +113,8 @@ if (isset($post['page']) || isset($post['_S+cmd'])) {
 			$t->assign ("geo", $geo);
 			// Show results interface 
 			$t->assign ("ctl_showres", true);
-		}
-		// show export results
-		else if ($post['_S+cmd'] == "export") {
+		} else if ($post['_S+cmd'] == "export") {
+			// Export Results to File
 			if ($post['_S+saveopt'] == "csv")
 				$export = 'csv';
 			else
@@ -163,10 +162,15 @@ if (isset($post['page']) || isset($post['_S+cmd'])) {
 						$dk[$ii] = $dic[$ii][0];
 					else
 						$dk[$ii] = $ii;		// no traduction..
-					$lb .= '"'. $dk[$ii] .'"'. "\t";
+					$ColumnSeparator = "\t";
+					if ($export == "csv") {
+						$ColumnSeparator = ",";
+					}
+					$lb .= '"'. $dk[$ii] .'"' . $ColumnSeparator;
 				}
-				if (!empty($export))
+				if (!empty($export)) {
 					fwrite($fp, $lb ."\n");
+				}
 			}
 			if (!empty($export))
 				fwrite($fp, $dl);
