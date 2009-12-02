@@ -715,11 +715,11 @@ class Query extends PDO
   
 	// Generate SQL from Associative array from Desconsultar Form
 	public function genSQLWhereDesconsultar($dat) {
-		$sql 	= "WHERE ";
+		$WhereQuery 	= "WHERE ";
 		$e		= array();
 		$e['Eff'] = "";
 		$e['Item'] = "";
-		$serial = "";
+		$DisasterSerialQuery = "";
 		$cusqry = "";
 		//$datedb = $this->getDateRange();
 		// Add Custom Query..
@@ -844,11 +844,24 @@ class Query extends PDO
 							$e['Item'] .= "1!=1) AND ";
 					} elseif ($k == "D.DisasterSerial") {
 						// Process serials..
+						$MainOp = ' AND '; 
+						if ($v[0] == 'NOT') {
+							$MainOp = ' AND NOT ';
+						}
+						if ($v[0] == 'INCLUDE') {
+							$MainOp = ' OR ';
+						}
 						if (strlen($v[1]) > 0) {
-							$serial = "AND ". $v[0] ." (";
-							foreach (explode(" ", $v[1]) as $i)
-								$serial .= "$k='$i' OR ";
-							$serial .= "1!=1) ";
+							$DisasterSerialQuery = $MainOp ."(";
+							$bFirst = true;
+							foreach (explode(" ", $v[1]) as $i) {
+								if (! $bFirst) {
+									$DisasterSerialQuery .= ' OR ';
+								}
+								$bFirst = false;
+								$DisasterSerialQuery .= "$k='$i'";
+							}
+							$DisasterSerialQuery .= ") ";
 						}
 					}
 				} elseif (substr($k, 0, 1) != "_")  {
@@ -869,16 +882,31 @@ class Query extends PDO
 		else
 			$e['Eff'] = "(". $e['Eff'] ." 1=1)";
 		$lan = "spa"; // select from local languages of database..
-		$e['Item'] .= "D.EventId=V.EventId AND D.CauseId=C.CauseId AND D.GeographyId=G.GeographyId ".
-                  "AND V.LangIsoCode='$lan' AND C.LangIsoCode='$lan' AND G.LangIsoCode='$lan'";
-		foreach ($e as $i)
-			$sql .= "$i AND ";
-		if ($EEQuery != '') {
-			$sql .= ' ' . $EEQuery . ' AND ';
-		}
-		$sql .=  " D.DisasterId = E.DisasterId $serial $cusqry";
+		//$e['Item'] .= "D.EventId=V.EventId AND D.CauseId=C.CauseId AND D.GeographyId=G.GeographyId ".
+        //          "AND V.LangIsoCode='$lan' AND C.LangIsoCode='$lan' AND G.LangIsoCode='$lan'";
+        $e['Item'] = substr($e['Item'],0,-4);
 
-    	return ($sql);
+		// Finally, build the WHERE Conditional Query using all parts...
+		// Add the JOIN conditions with all other tables...
+		$WhereQuery .= '(D.DisasterId=E.DisasterId AND D.EventId=V.EventId AND D.CauseId=C.CauseId AND D.GeographyId=G.GeographyId) AND (';
+		$WhereQuery .= ' (';
+		$bFirst = true;
+		foreach ($e as $k => $i) {
+			if (! $bFirst) {
+				$WhereQuery .= ' AND ';
+			}
+			$bFirst = false;
+			$WhereQuery .= $i;
+		}
+		if ($EEQuery != '') {
+			$WhereQuery .= ' AND ' . $EEQuery;
+		}
+		$WhereQuery .= $cusqry. ') ';
+		if ($DisasterSerialQuery != '') {
+			$WhereQuery .= ' ' . $DisasterSerialQuery;
+		}
+		$WhereQuery .= ')';
+    	return ($WhereQuery);
 	}
 
   /* Counter results */
@@ -1134,68 +1162,69 @@ class Query extends PDO
     return $sq[0] . " GROUP BY null";
   }
 
-  function getQueryDetails($dic, $post) {
-	$info = $lsf = array();
-	$dinf = $this->getDBInfo();
-	$info['TITLE'] = "";
-	if (isset($post['_M+Field'])) {
-		$fld = explode("|", $post['_M+Field']);
-		$fd0 = substr($fld[0],2);
-		$fd1 = substr($fd0, 0, -1);
-		if (isset($dic["MapOpt". $fd0 ."_"][0]))
-			$info['TITLE'] = $dic["MapOpt". $fd0 ."_"][0];
-		elseif (isset($dic[$fd0][0]))
-			$info['TITLE'] = $dic[$fd0][0];
-		elseif (isset($dic[$fd1][0]))
-			$info['TITLE'] = $dic[$fd1][0];
-    }
-	$info['LEVEL'] = "";
-	if (isset($post['_M+Type']) && !(isset($post['_VREG']) && $post['_VREG'] == "true")) {
-		$fld = explode("|", $post['_M+Type']);
-		$val = $this->loadGeoLevById($fld[0]);
-		$info['LEVEL'] = $val[0];
+	function getQueryDetails($dic, $post) {
+		$info = $lsf = array();
+		$dinf = $this->getDBInfo();
+		$info['TITLE'] = "";
+		if (isset($post['_M+Field'])) {
+			$fld = explode("|", $post['_M+Field']);
+			$fd0 = substr($fld[0],2);
+			$fd1 = substr($fd0, 0, -1);
+			if (isset($dic["MapOpt". $fd0 ."_"][0]))
+				$info['TITLE'] = $dic["MapOpt". $fd0 ."_"][0];
+			elseif (isset($dic[$fd0][0]))
+				$info['TITLE'] = $dic[$fd0][0];
+			elseif (isset($dic[$fd1][0]))
+				$info['TITLE'] = $dic[$fd1][0];
+		}
+		$info['LEVEL'] = "";
+		if (isset($post['_M+Type']) && !(isset($post['_VREG']) && $post['_VREG'] == "true")) {
+			$fld = explode("|", $post['_M+Type']);
+			$val = $this->loadGeoLevById($fld[0]);
+			$info['LEVEL'] = $val[0];
+		}
+		$info['EXTENT'] = $dinf['GeoLimitMinX'] ." ". $dinf['GeoLimitMaxX'] ." ". $dinf['GeoLimitMinY'] ." ". $dinf['GeoLimitMaxY'];
+		$info['KEYWORDS'] = $dinf['RegionLabel'];
+		//Process post
+		foreach ($post as $k=>$v) {
+			$k = substr($k,2);
+			if ($k == "GeographyId") {
+				foreach($v as $itm) {
+					$lsg[] = $this->getGeoNameById($itm);
+				}
+				$info['GEO'] = implode(", ", $lsg);
+			} elseif ($k == "EventId") {
+				foreach($v as $itm) {
+					$lse[] = $this->getObjectNameById($itm, DI_EVENT);
+				}
+				$info['EVE'] = implode(", ", $lse);
+			} elseif ($k == "CauseId") {
+				foreach($v as $itm) {
+					$lsc[] = $this->getObjectNameById($itm, DI_CAUSE);
+				}
+				$info['CAU'] = implode(", ", $lsc);
+			} elseif ($k == "DisasterBeginTime") {
+				$info['BEG'] = $v[0];
+			} elseif ($k == "DisasterEndTime") {
+				$info['END'] = $v[0];
+			} elseif ($k == "DisasterSource" && !empty($v[1])) {
+				$info['SOU'] = $v[1];
+			} elseif ($k == "DisasterSerial" && !empty($v[1])) {
+				$info['SER'] = $v[1];
+			} elseif (substr($k, 0, 6) == "Effect" && isset($v[0]) && isset($dic[$k][0])) {
+				$opt = "";
+				if ($v[0] == "=" || $v[0] == ">=" || $v[0] == "<=")
+					$opt = "(". $v[0] . $v[1] .")";
+				elseif ($v[0] == "-3")
+					$opt = "(". $v[1] ."-". $v[2] .")";
+				$lsf[] = $dic[$k][0] . $opt;
+			}
+		} //foreach
+		if (!empty($lsf)) {
+			$info['EFF'] = implode(", ", $lsf);
+		}
+		return $info;
 	}
-	$info['EXTENT'] = $dinf['GeoLimitMinX'] ." ". $dinf['GeoLimitMaxX'] ." ". $dinf['GeoLimitMinY'] ." ". $dinf['GeoLimitMaxY'];
-	$info['KEYWORDS'] = $dinf['RegionLabel'];
-	//Process post
-	foreach ($post as $k=>$v) {
-	  $k = substr($k,2);
-	  if ($k == "GeographyId") {
-		foreach($v as $itm)
-		  $lsg[] = $this->getGeoNameById($itm);
-		$info['GEO'] = implode(", ", $lsg);
-	  }
-	  elseif ($k == "EventId") {
-		foreach($v as $itm)
-		  $lse[] = $this->getObjectNameById($itm, DI_EVENT);
-		$info['EVE'] = implode(", ", $lse);
-	  }
-	  elseif ($k == "CauseId") {
-		foreach($v as $itm)
-		  $lsc[] = $this->getObjectNameById($itm, DI_CAUSE);
-		$info['CAU'] = implode(", ", $lsc);
-	  }
-	  elseif ($k == "DisasterBeginTime")
-		$info['BEG'] = $v[0];
-	  elseif ($k == "DisasterEndTime")
-		$info['END'] = $v[0];
-	  elseif ($k == "DisasterSource" && !empty($v[1]))
-		$info['SOU'] = $v[1];
-	  elseif ($k == "DisasterSerial" && !empty($v[1]))
-		$info['SER'] = $v[1];
-	  elseif (substr($k, 0, 6) == "Effect" && isset($v[0]) && isset($dic[$k][0])) {
-		$opt = "";
-		if ($v[0] == "=" || $v[0] == ">=" || $v[0] == "<=")
-		  $opt = "(". $v[0] . $v[1] .")";
-		elseif ($v[0] == "-3")
-		  $opt = "(". $v[1] ."-". $v[2] .")";
-		$lsf[] = $dic[$k][0] . $opt;
-	  }
-	}
-	if (!empty($lsf))
-		$info['EFF'] = implode(", ", $lsf);
-	return $info;
-  }
   
   // DICTIONARY FUNCTIONS
   function existLang($langID) {

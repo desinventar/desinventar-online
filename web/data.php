@@ -45,8 +45,7 @@ if (isset($post['page']) || isset($post['_D+cmd'])) {
 		$iRecordsPerPage = $post['RecordsPerPage'];
 		$fld = $post['fld'];
 		$sql = base64_decode($post['sql']);
-	}
-	elseif (isset($post['_D+cmd'])) {
+	} elseif (isset($post['_D+cmd'])) {
 		// Process results with default options
 		$qd  = $us->q->genSQLWhereDesconsultar($post);
 		$sqc = $us->q->genSQLSelectCount($qd);
