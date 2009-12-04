@@ -92,8 +92,18 @@ RecordUpdate DATETIME,
 PRIMARY KEY('SessionId','RecordId')
 );
 
+DROP TABLE IF EXISTS SessionValue;
+CREATE TABLE 'SessionValue' ( 
+SessionId VARCHAR(50), 
+Key VARCHAR(50), 
+Value NUMERIC(12), 
+AuxValue VARCHAR(100), 
+PRIMARY KEY('SessionId','Key')
+);
+
 /* Set initial values */
 INSERT INTO User VALUES ('root', 'root@localhost', '7af39c74ac6d9e68a4323440385cc1ff', 'Portal Administrator', '', '', '', '2008-01-01', '', 1);
 INSERT INTO RegionAuth VALUES ('root', '', 'REGION', 5, '');
 INSERT INTO RegionAuth VALUES ('root', '', 'USER', 5, '');
 INSERT INTO RegionAuth VALUES ('root', '', 'ROLE', 0, 'ADMINPORTAL');
+
