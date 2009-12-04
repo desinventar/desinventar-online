@@ -109,14 +109,15 @@ class DICause extends DIObject {
 
 	public function importFromCSV($cols, $values) {
 		$oReturn = parent::importFromCSV($cols, $values);
-		$iReturn = ERR_NO_ERROR;
-		$this->set('CauseName',  $values[1]);
-		
-		$this->getIdByName($this->get('CauseName'));
-		if ( (count($oReturn['Error']) > 0) || (count($oReturn['Warning']) > 0) ) {
-			$iReturn = ERR_UNKNOWN_ERROR;
+		$iReturn = $oReturn['Status'];
+		if ($iReturn > 0) {
+			$this->set('CauseName',  $values[1]);
+			$this->getIdByName($this->get('CauseName'));
+			if ( (count($oReturn['Error']) > 0) || (count($oReturn['Warning']) > 0) ) {
+				$iReturn = ERR_UNKNOWN_ERROR;
+			}
+			$oReturn['Status'] = $iReturn;
 		}
-		$oReturn['Status'] = $iReturn;
 		return $oReturn;
 	} //function
 	

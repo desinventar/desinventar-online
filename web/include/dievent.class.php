@@ -47,7 +47,7 @@ class DIEvent extends DIObject {
 		  "      OR EventKeyWords LIKE '" . $prmEventName . ";')";
 		foreach($this->q->dreg->query($sQuery) as $row) {
 			$EventId = $row['EventId'];
-			$this->set('EventId'          , $EventId);
+			$this->set('EventId' , $EventId);
 		} // foreach
 		if ($EventId != '') {
 			$this->load();
@@ -107,15 +107,16 @@ class DIEvent extends DIObject {
 
 	public function importFromCSV($cols, $values) {
 		$oReturn = parent::importFromCSV($cols, $values);
-		$iReturn = ERR_NO_ERROR;
-		$this->set('EventName',  $values[1]);
-		$this->set('EventDesc',  $values[2]);
-		
-		$this->getIdByName($this->get('EventName'));
-		if ( (count($oReturn['Error']) > 0) || (count($oReturn['Warning']) > 0) ) {
-			$iReturn = ERR_UNKNOWN_ERROR;
+		$iReturn = $oReturn['Status'];
+		if ($iReturn > 0) {
+			$this->set('EventName',  $values[1]);
+			$this->set('EventDesc',  $values[2]);
+			$this->getIdByName($this->get('EventName'));
+			if ( (count($oReturn['Error']) > 0) || (count($oReturn['Warning']) > 0) ) {
+				$iReturn = ERR_UNKNOWN_ERROR;
+			}
+			$oReturn['Status'] = $iReturn;
 		}
-		$oReturn['Status'] = $iReturn;
 		return $oReturn;
 	} //function
 }
