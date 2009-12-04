@@ -64,6 +64,15 @@ class DIGeoLevel extends DIObject {
 		}
 		return $iReturn;
 	}
+
+	public function importFromCSV($cols, $values) {
+		$oReturn = parent::importFromCSV($cols, $values);
+		$iReturn = $oReturn['Status'];
+		if ($iReturn > 0) {
+			$oReturn['Status'] = $iReturn;
+		}
+		return $oReturn;
+	} //function
 } //class
 
 </script>

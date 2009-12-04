@@ -477,8 +477,11 @@ class DIObject {
 	}
 
 	public function importFromCSV($cols, $values) {
-		$iReturn = ERR_NO_ERROR;
-		return $iReturn;
+		$oReturn = array();
+		$oReturn['Status'] = ERR_NO_ERROR;
+		$oReturn['Error'] = array();
+		$oReturn['Warning'] = array();
+		return $oReturn;
 	}
 } // class
 

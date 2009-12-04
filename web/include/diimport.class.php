@@ -34,14 +34,14 @@ class DIImport {
 					case DI_EVENT:
 						$o = new DIEvent($this->us);
 						$r = $o->importFromCSV($cols, $values);
-						if ($r['Status'] > 0) {
+						if ( ($r['Status'] > 0) && ($o->get('EventPreDefined')==0) ) {
 							$o->insert();
 						}
 					break;
 					case DI_CAUSE:
 						$o = new DICause($this->us);
 						$r = $o->importFromCSV($cols, $values);
-						if ($r['Status'] > 0) {
+						if ( ($r['Status'] > 0) && ($o->get('CausePreDefined')==0) ) {
 							$o->insert();
 						}
 					break;
