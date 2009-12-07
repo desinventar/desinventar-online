@@ -1,4 +1,5 @@
 {-config_load file=`$lg`.conf section="di8_index"-}
+{-config_load file=`$lg`.conf section="di8_listdb"-}
 {-config_load file=`$lg`.conf section="di8_user"-}
 {-if $ctl_show || $ctl_mainpage-}
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -1261,7 +1262,7 @@
 				</div>
 				<!--	END MAP SECTION -->
 				<!--	BEGIN GRAPHIC CONFIGURATION -->
-{-include file="graphparameters.tpl"-}
+				{-include file="graphparameters.tpl"-}
 				<!--	END GRAPHIC SECTION  -->
 				<!--	SECTION : STATISTIC CONFIGURATION
 				============================== -->
@@ -1482,7 +1483,7 @@
 		</tr>
 		<tr bgcolor="#e2e2e0" valign="top">
 		<td>
-			<h2><u>{-#tdbavail#-}</u></h2>
+			<h2><u>{-#listdbTitle#-}</u></h2>
 			<table border="1" class="grid">
 				<tr align="center">
 					<td><b>Pais</b></td>
@@ -1943,23 +1944,9 @@
 
 {-** LISTDB: Show available databases**-}
 {-if $ctl_showlistdb-}
-	<h4>{-#tdbavail#-}:</h4><br />
-	<table border="0" class="grid">
-		<tr align="center">
-			<td><b>Pais</b></td>
-			<td><b>Region</b></td>
-			<td colspan="2"><b>Atributos</b></td>
-		</tr>
-{-foreach name=rlist key=key item=item from=$regionlist-}
-		<tr>
-			<td>{-$item[1]-}</td>
-			<td><a href="index.php?r={-$key-}">{-$item[0]-}</a></td>
-			<td>{-if $item[2] == 3-}PUBLICA{-else-}NO PUBLICA{-/if-}</td>
-			<td>{-$item[3]-}</td>
-		</tr>
-{-/foreach-}
-	</table>
+	{-include file="listdb.tpl"-}
 {-/if-}
+{-** LISTDB: End **-}
 
 {-** REGIONINFO: Show Full Region Information **-}
 {-if $ctl_showRegionInfo-}
