@@ -212,6 +212,8 @@ class DIRegion extends DIObject {
 		if ($iReturn > 0) {
 			// This should update the region.Info table
 			$iReturn = $this->saveInfo();
+			// Create the xml file with RegionInfo
+			$iReturn = $this->saveToXML($this->getDBDir() . '/info.xml');
 		}
 		return $iReturn;
 	}
@@ -948,6 +950,31 @@ class DIRegion extends DIObject {
 		}
 		$xml .= '</RegionInfo>' . "\n";
 		return $xml;
+	}
+	
+	public function saveToXML($filename) {
+		$fh = fopen($filename, 'w');
+		fwrite($fh, $this->toXML());
+		fclose($fh);
+	}
+	public function getDBDir() {
+		return CONST_DBREGIONDIR . '/' . $this->get('RegionId');
+	}
+	
+	public function loadFromXML($filename) {
+		$a = xml2array(file_get_contents($filename));
+		if (array_key_exists('RegionInfo', $a)) {
+			$info = $a['RegionInfo'];
+			foreach(array_keys($info) as $section) {
+				foreach($info[$section] as $key => $value) {
+					if (! is_array($value)) {
+						if ($this->existField($key, $section)) {
+							$this->set($key, $value, $section);
+						}
+					}
+				} //foreach
+			} //foreach
+		}
 	}
 } //class
 

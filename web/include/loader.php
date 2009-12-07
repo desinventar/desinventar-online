@@ -81,6 +81,7 @@ require_once(BASE . '/include/diuser.class.php');
 require_once(BASE . "/include/query.class.php");
 require_once(BASE . "/include/constants.php");
 require_once(BASE . "/include/common.php");
+require_once(BASE . "/include/xml2array.php");
 
 /* SETTINGS */
 $time_start = microtime_float();
