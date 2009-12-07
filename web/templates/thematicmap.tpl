@@ -7,11 +7,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Pragma" content="text/html; charset=utf-8; no-cache" />
+	{-if $hasInternet -}
 	{-if $googlemapkey != '' -}
 	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={-$googlemapkey-}"></script>
 	{-/if-}
 	<script src='http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.1'></script>
 	<script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid=euzuro-openlayers"></script>
+	{-/if-}
 	<script src="/openlayers/lib/OpenLayers.js"></script>
 	<script type="text/javascript">
 		var lon = {-if $lon != ''-}{-$lon-}{-else-}0{-/if-};
@@ -54,57 +56,59 @@
 			//map.addControl(new OpenLayers.Control.OverviewMap());
 
 			// Effects layer(s)
-{-foreach name=rgl key=k item=i from=$rgl-}
-			var db{-$k-} = new OpenLayers.Layer.WMS("DI8 / {-$i.regname-}", 
-					"/cgi-bin/{-$mps-}?", { map:'{-$i.map-}', 'transparent':true, 'format':'png',
-					layers:'{-$i.ly1-}'}, {'isBaseLayer':false });
-			map.addLayer(db{-$k-});
-			// Admin layers
- {-foreach name=glev key=ky item=it from=$glev-}
-			var adm{-$smarty.foreach.glev.iteration-} = new OpenLayers.Layer.WMS("{-$it[0]-}", 
-					"/cgi-bin/{-$mps-}?", { map:'{-$i.map-}', 'transparent':true, 'format':'png',
-					layers:'{-foreach name=ly key=k2 item=i2 from=$it[2]-}{-$i2[0]-}admin0{-$ky-}{-if !$smarty.foreach.ly.last-},{-/if-}{-/foreach-}'},
-					{'isBaseLayer':false});
-			adm{-$smarty.foreach.glev.iteration-}.setVisibility(false);
-			map.addLayer(adm{-$smarty.foreach.glev.iteration-});
- {-/foreach-}
-{-/foreach-}
+			{-foreach name=rgl key=k item=i from=$rgl-}
+				var db{-$k-} = new OpenLayers.Layer.WMS("DI8 / {-$i.regname-}", 
+						"/cgi-bin/{-$mps-}?", { map:'{-$i.map-}', 'transparent':true, 'format':'png',
+						layers:'{-$i.ly1-}'}, {'isBaseLayer':false });
+				map.addLayer(db{-$k-});
+				// Admin layers
+				{-foreach name=glev key=ky item=it from=$glev-}
+					var adm{-$smarty.foreach.glev.iteration-} = new OpenLayers.Layer.WMS("{-$it[0]-}", 
+						"/cgi-bin/{-$mps-}?", { map:'{-$i.map-}', 'transparent':true, 'format':'png',
+						layers:'{-foreach name=ly key=k2 item=i2 from=$it[2]-}{-$i2[0]-}admin0{-$ky-}{-if !$smarty.foreach.ly.last-},{-/if-}{-/foreach-}'},
+						{'isBaseLayer':false});
+					adm{-$smarty.foreach.glev.iteration-}.setVisibility(false);
+					map.addLayer(adm{-$smarty.foreach.glev.iteration-});
+				{-/foreach-}
+			{-/foreach-}
 			// WMS Local Base Map
 			var base = new OpenLayers.Layer.WMS("Local BaseMap",
 					"/cgi-bin/{-$mps-}?", { map:'{-$basemap-}', layers:'base', 'transparent':false, 'format':'png' },
 					{'isBaseLayer':true });
 			map.addLayer(base);
 			
-			// Microsoft Virtual Earth Base Layer
-			var virtualearth = new OpenLayers.Layer.VirtualEarth("Microsoft Virtual Earth", { 'sphericalMercator': true });
-			map.addLayer(virtualearth);
+			{-if $hasInternet -}
+				// Microsoft Virtual Earth Base Layer
+				var virtualearth = new OpenLayers.Layer.VirtualEarth("Microsoft Virtual Earth", { 'sphericalMercator': true });
+				map.addLayer(virtualearth);
 			
-			// Yahoo Maps Base Layer
-			var yahoo = new OpenLayers.Layer.Yahoo( "Yahoo Maps", { 'sphericalMercator': true });
-			map.addLayer(yahoo);
+				// Yahoo Maps Base Layer
+				var yahoo = new OpenLayers.Layer.Yahoo( "Yahoo Maps", { 'sphericalMercator': true });
+				map.addLayer(yahoo);
 			
-			// Metacarta Basic Base Layer
-			var met1 = new OpenLayers.Layer.WMS("Metacarta Basic",
-				"http://labs.metacarta.com/wms/vmap0", {'layers': 'basic', 'transparent': true}, {'isBaseLayer':true});
-			met1.setVisibility(false);
-			map.addLayer(met1);
+				// Metacarta Basic Base Layer
+				var met1 = new OpenLayers.Layer.WMS("Metacarta Basic",
+					"http://labs.metacarta.com/wms/vmap0", {'layers': 'basic', 'transparent': true}, {'isBaseLayer':true});
+				met1.setVisibility(false);
+				map.addLayer(met1);
 
-			{-if $googlemapkey != '' -}
-			// maps.google.com - Base Layer
-			var google1 = new OpenLayers.Layer.Google("Google Basic", 
+				{-if $googlemapkey != '' -}
+					// maps.google.com - Base Layer
+					var google1 = new OpenLayers.Layer.Google("Google Basic", 
 			                                          {type: G_NORMAL_MAP, 'sphericalMercator': true});
-			map.addLayer(google1);
+					map.addLayer(google1);
 
-			var google2 = new OpenLayers.Layer.Google("Google Physical", 
+					var google2 = new OpenLayers.Layer.Google("Google Physical", 
 			                                          {type: G_PHYSICAL_MAP, 'sphericalMercator': true});
-			map.addLayer(google2);
+					map.addLayer(google2);
 			
-			var google3 = new OpenLayers.Layer.Google("Google Hybrid", 
-			                                          {type: G_HYBRID_MAP, 'sphericalMercator': true});
-			map.addLayer(google3);
-			var google4 = new OpenLayers.Layer.Google("Google Satellite", 
+					var google3 = new OpenLayers.Layer.Google("Google Hybrid", 
+													{type: G_HYBRID_MAP, 'sphericalMercator': true});
+					map.addLayer(google3);
+					var google4 = new OpenLayers.Layer.Google("Google Satellite", 
 			                                          {type: G_SATELLITE_MAP, 'sphericalMercator': true});
-			map.addLayer(google4);
+					map.addLayer(google4);
+				{-/if-}
 			{-/if-}
 
 			/*

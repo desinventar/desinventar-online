@@ -58,6 +58,12 @@ $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Sector', $lg));
 
 if (isset($post['_M+cmd'])) {
+	// Try to detect network connection to load the remote WMS services...
+	$hasInternet = 1;
+	if (!fsockopen('www.google.com',80)) {
+		$hasInternet = 0;
+	}
+	$t->assign('hasInternet', $hasInternet);
 	// Process QueryDesign Fields and count results
 	$qd	= $us->q->genSQLWhereDesconsultar($post);
 	$dic = array_merge($dic, $us->q->getEEFieldList("True"));
