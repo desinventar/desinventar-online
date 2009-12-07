@@ -213,7 +213,7 @@ class DIRegion extends DIObject {
 			// This should update the region.Info table
 			$iReturn = $this->saveInfo();
 			// Create the xml file with RegionInfo
-			$iReturn = $this->saveToXML($this->getDBDir() . '/info.xml');
+			//$iReturn = $this->saveToXML($this->getDBDir() . '/info.xml');
 		}
 		return $iReturn;
 	}
