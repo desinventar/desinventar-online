@@ -476,6 +476,10 @@ class DIObject {
 		return $Value;
 	}
 
+	public function getDBDir() {
+		return CONST_DBREGIONDIR . '/' . $this->get('RegionId');
+	}
+
 	public function importFromCSV($cols, $values) {
 		$oReturn = array();
 		$oReturn['Status'] = ERR_NO_ERROR;
