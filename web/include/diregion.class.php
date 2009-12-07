@@ -931,6 +931,24 @@ class DIRegion extends DIObject {
 		$zip->close();
 		return $iReturn;
 	}
+	
+	public function toXML() {
+		$xml = '';
+		$xml .= '<?xml version="1.0" encoding="utf-8"?>' . "\n";
+		$xml .= '<RegionInfo version="1.0">' . "\n";
+		// Add RegionInfo Sections
+		foreach(array_keys($this->oField) as $section) {
+			$xml .= '	<' . $section . '>' . "\n";
+			foreach($this->oField[$section] as $key => $value) {
+				$xml .= '		<' . $key . '>';
+				$xml .= $value;
+				$xml .= '</' . $key . '>' . "\n";
+			}
+			$xml .= '	</' . $section . '>' . "\n";
+		}
+		$xml .= '</RegionInfo>' . "\n";
+		return $xml;
+	}
 } //class
 
 </script>
