@@ -957,9 +957,6 @@ class DIRegion extends DIObject {
 		fwrite($fh, $this->toXML());
 		fclose($fh);
 	}
-	public function getDBDir() {
-		return CONST_DBREGIONDIR . '/' . $this->get('RegionId');
-	}
 	
 	public function loadFromXML($filename) {
 		$a = xml2array(file_get_contents($filename));
