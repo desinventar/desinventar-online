@@ -136,7 +136,6 @@ if (MODE != "command") {
 	if ($lg == 'pt') { $lg = 'por'; }
 
 	$_SESSION['lang'] = $lg;
-
 	$t->assign ("lg", $lg);
 }
 </script>
