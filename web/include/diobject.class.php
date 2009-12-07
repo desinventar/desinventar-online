@@ -372,8 +372,8 @@ class DIObject {
 		return $sQuery;
 	}
 
-	public function existField($prmField) {
-		return array_key_exists($prmField, $this->oField['info']);
+	public function existField($prmField, $section='info') {
+		return array_key_exists($prmField, $this->oField[$section]);
 	}
 
 	public function validateCreate() {
