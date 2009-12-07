@@ -34,7 +34,7 @@ InstProgressFlags     smooth
 
 !define      NAME    "DesInventar"
 !define      MAJORVER "8"
-!define      MINORVER "2.0.62"
+!define      MINORVER "2.0.63"
 !define      PUBLISHER "Corporación OSSO - DesInventar Project http://www.desinventar.org"
 !define      VERSION "${MAJORVER}.${MINORVER}"
 !define      SHORTNAME "${NAME}${MAJORVER}"
@@ -265,11 +265,11 @@ Section "Application Install"
 		File Files\fonts\fontswin.txt
 
 	    ; Install worldmap shape file
-	    CreateDirectory $INSTDIR\data\main\worldmap
+	    CreateDirectory $INSTDIR\data\worldmap
 		!define distFile "world_adm0.zip"
 		IfFileExists "$EXEDIR\${distFile}" installmap skipmap
 		installmap:
-			ZipDLL::extractall "$EXEDIR\${distFile}" '$INSTDIR\data\main\worldmap'
+			ZipDLL::extractall "$EXEDIR\${distFile}" '$INSTDIR\data\worldmap'
 		skipmap:
 		!undef distFile
 
