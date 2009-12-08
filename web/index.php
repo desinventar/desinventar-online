@@ -19,6 +19,7 @@ $RegionId = getParameter('r', getParameter('RegionId', getParameter('_REG'),''))
 if ($cmd == '' && $RegionId == '') {
 	$cmd = 'start';
 }
+
 // Default Template Values
 $t->assign('request_uri', $_SERVER['REQUEST_URI']);
 $t->assign('version', VERSION);
@@ -57,7 +58,7 @@ switch ($cmd) {
 		// Direct access returns a list of public regions on this server
 		$t->assign('regionlist', $us->q->listDB());
 		$t->assign('ctl_showlistdb', true);
-		$t->display('index.tpl');
+		$t->display('showlistdb.tpl');
 		break;
 	case 'searchdb':
 		$d = new Query();

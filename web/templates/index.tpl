@@ -1,5 +1,4 @@
 {-config_load file=`$lg`.conf section="di8_index"-}
-{-config_load file=`$lg`.conf section="di8_listdb"-}
 {-config_load file=`$lg`.conf section="di8_user"-}
 {-if $ctl_show || $ctl_mainpage-}
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -10,19 +9,17 @@
 	<title>{-#ttitle#-} | {-$regname-}</title>
 	<link rel="stylesheet" href="css/desinventar.css" type="text/css">
 	<script type="text/javascript" src="include/prototype.js"></script>
+	<!-- jQuery -->
+	{-include file="jquery.tpl" -}
 	<script type="text/javascript" src="include/diadmin.js"></script>
 	<script type="text/javascript" src="include/tabber.js"></script>
 	<script type="text/javascript" src="include/listMan.js"></script>
-	{-if $ctl_show-}
-		<link rel="stylesheet" href="css/checktree.css" type="text/css"/>
-		<link rel="stylesheet" href="css/accordion.css" type="text/css"/>
-		<script type="text/javascript" src="include/checktree.js"></script>
-		<script type="text/javascript" src="include/wd.js"></script>
-		<script type="text/javascript" src="include/accordion.js"></script>
-		<script type="text/javascript" src="include/palette.js"></script>
-	{-/if-}
-	<!-- jQuery -->
-	{-include file="jquery.tpl" -}
+	<link rel="stylesheet" href="css/checktree.css" type="text/css"/>
+	<link rel="stylesheet" href="css/accordion.css" type="text/css"/>
+	<script type="text/javascript" src="include/checktree.js"></script>
+	<script type="text/javascript" src="include/wd.js"></script>
+	<script type="text/javascript" src="include/accordion.js"></script>
+	<script type="text/javascript" src="include/palette.js"></script>
 	<!-- ExtJS -->
 	<link rel="stylesheet" type="text/css" href="/extJS/resources/css/ext-all.css"/>
 	<link rel="stylesheet" type="text/css" href="/extJS/resources/css/xtheme-gray.css"/>
@@ -636,12 +633,6 @@
 </body>
 </html>
 {-/if-}
-
-{-** LISTDB: Show available databases**-}
-{-if $ctl_showlistdb-}
-	{-include file="showlistdb.tpl"-}
-{-/if-}
-{-** LISTDB: End **-}
 
 {-** START: start page in DesInventar **-}
 {-if $ctl_start-}

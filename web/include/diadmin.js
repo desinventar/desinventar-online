@@ -19,11 +19,13 @@
 				//else  uploadMsg(waiting);
 			},
 			onComplete: function(request)	{
-				//$(div).style.cursor = "";
-				if (mod == "")  $('div').innerHTML = "";
-				//else  uploadMsg('');
+				if (mod == "") {
+					if ($('div') != null) {
+						$('div').innerHTML = "";
+					}
+				}
 			}
-		} );
+		});
 	}
 
 	function updateUserBar(url, cmd, user, pass) {
