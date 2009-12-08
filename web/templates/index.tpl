@@ -1419,9 +1419,8 @@
 				</div>
 				<!-- Show Database functions window -->
 				<div id="dbl-win" class="x-hidden">
-				  <div class="x-window-header">{-$userid-} - {-$role-}</div>
-				  <div id="dbl">
-				  </div>
+					<div class="x-window-header">{-$userid-} - {-$role-}</div>
+					<div id="dbl"></div>
 				</div>
 				<!-- Show Dialog window -->
 				<div id="dlg-win" class="x-hidden">
