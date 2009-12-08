@@ -11,6 +11,8 @@
 	<link rel="stylesheet" href="css/desinventar.css" type="text/css">
 	<script type="text/javascript" src="include/prototype.js"></script>
 	<script type="text/javascript" src="include/diadmin.js"></script>
+	<script type="text/javascript" src="include/tabber.js"></script>
+	<script type="text/javascript" src="include/listMan.js"></script>
 	{-if $ctl_show-}
 		<link rel="stylesheet" href="css/checktree.css" type="text/css"/>
 		<link rel="stylesheet" href="css/accordion.css" type="text/css"/>
@@ -27,144 +29,6 @@
 	<script type="text/javascript" src="/extJS/adapter/ext/ext-base.js"></script>
 	<script type="text/javascript" src="/extJS/ext-all.js"></script>
 	<script type="text/javascript">
-		var	w;
-		var	s;
-		var difw;
-		var usrw;
-		var dblw;
-		var dlgw;
-		// DI8 - Layout, buttons and internal windows - UI DesConsultar module
-		Ext.onReady(function() 
-		{
-			setTimeout(function() {
-				Ext.get('loading').remove();
-				Ext.get('loading-mask').fadeOut({remove:true});
-			}, 250);
-			Ext.QuickTips.init();
-			// User functions Window
-			if (!usrw) {
-				usrw = new Ext.Window({
-					el:'usr-win', layout:'fit', x:300, y:100, width:500, height:100, 
-					closeAction:'hide', plain: true, animCollapse: false,
-					items: new Ext.Panel({ contentEl: 'usr', autoScroll: true })
-				});
-			}
-			
-			// Find Bases window
-			if (!dblw) {
-				dblw = new Ext.Window({
-					el:'dbl-win', layout:'fit', x:200, y:100, width:600, height:450, 
-					closeAction:'hide', plain: true, animCollapse: false,
-					items: new Ext.Panel({ contentEl: 'dbl', autoScroll: true })
-				});
-			}
-			
-			// Dialog window
-			if (!dlgw) {
-				dlgw = new Ext.Window({
-					el:'dlg-win', layout:'fit', x:350, y:200, width:300, height:150, 
-					closeAction:'hide', plain: true, animCollapse: false,
-					items: new Ext.Panel({ contentEl: 'dlg', autoScroll: true })
-				});
-			}
-			
-			// DesInventar (input form) Window
-			if (!difw) {
-				difw = new Ext.Window({
-					el:'dif-win', layout:'fit', 
-					x: 65, y: 0, width:960, height:638, 
-					closeAction:'hide', plain: true, animCollapse: false,
-					items: new Ext.Panel({ contentEl: 'dif-cfg', autoScroll: true })
-				});
-			}
-			
-			// Main menu
-			var muser = new Ext.menu.Menu({
-				id: 'userMenu',
-				items: [
-					{-if $userid != ""-}
-						{id: 'musrmya', text: '{-#tconfigacc#-}', handler: onMenuItem },
-						{id: 'musrout', text: '{-#tclosesess#-}', handler: onMenuItem }, 
-					{-else-}
-						{id: 'musrlin', text: '{-#benter#-}', handler: onMenuItem }, 
-					{-/if-}
-					'-',
-					{ text: '{-#mlang#-}',
-						menu: { id: 'langSubMenu',
-							items: [
-								{-foreach name=lglst key=key item=item from=$lglst-}
-									{id: '{-$key-}', text: '{-$item[0]-}', handler: onMenuItem},
-								{-/foreach-}
-								'-']
-						}
-					},
-					{id: 'mfilqit',  text: '{-#mquit#-}', handler: onMenuItem  }
-				]
-			});
-			
-			var mquery = new Ext.menu.Menu({
-				id: 'queryMenu',
-				items: [
-					{-if !$ctl_noregion-}
-						{id:'mqrygoq', text: '{-#mgotoqd#-}',	handler: onMenuItem  },
-						{id:'mqrynew', text: '{-#mnewsearch#-}',handler: onMenuItem  },
-						{id:'mqrysav', text: '{-#msavequery#-}',handler: onMenuItem  },
-					{-/if-}
-					{id:'mqryopn', text: '{-#mopenquery#-}',handler: onMenuItem  }
-				]
-			});
-			
-			var mcards = new Ext.menu.Menu({
-				id: 'cardsMenu',
-				items: [
-					{id:'mcrdins', text: '{-#minsert#-}',	handler: onMenuItem  },
-					{-if $role == "SUPERVISOR" || $role == "ADMINREGION"-}
-						{id:'mcrdimp', text: '{-#mimport#-}',	handler: onMenuItem  },
-						{id:'mcrdbak', text: '{-#mbackdb#-}',	handler: onMenuItem  },
-					{-/if-}
-					{-if $role == "OBSERVER" || $role == "ADMINREGION"-}
-						{id:'mcrdcfg', text: '{-#mconfig#-}',	handler: onMenuItem  },
-					{-/if-}
-					'-'
-				]
-			});
-			
-			var mbases = new Ext.menu.Menu({
-				id: 'basesMenu',
-				items: [
-					{id:'mdbsfnd', text: '{-#mdbfind#-}',	handler: onMenuItem  }, //search Databases
-					{-if $userid == "root"-}
-						{id:'musradm', text: '{-#tadminusrs#-}',	handler: onMenuItem  }, //admin Users
-						{id:'mdbsadm', text: '{-#tadminregs#-}',	handler: onMenuItem  }, //admin Databases
-						{-/if-}
-					'-'
-				]
-			});
-			
-			var mhelp = new Ext.menu.Menu({
-				id: 'helpMenu',
-				style: { overflow: 'visible' },
-				items: [
-					{id:'mwww', text: '{-#mwebsite#-}',	handler: onMenuItem  },
-					{id:'mmtg', text: '{-#hmoreinfo#-}', handler: onMenuItem  },
-					{id:'mdoc', text: '{-#hotherdoc#-}', handler: onMenuItem  },
-					{id:'mreg', text: '{-#hdbinfo#-}', handler: onMenuItem  },
-					{id:'mabo', text: '{-#mabout#-}', handler: onMenuItem  }
-				]
-			});
-			
-			var tb = new Ext.Toolbar();
-			tb.render('toolbar');
-			tb.add('-', {id: 'musr', text: '{-#tuser#-}{-if $userid != ""-}: <b>{-$userid-}</b>{-/if-}', menu: muser });
-			tb.add('-', {id: 'mqry', text: '{-#msearch#-}',		menu: mquery });
-			{-if ($role == "USER" || $role == "SUPERVISOR" || $role == "OBSERVER" || $role == "ADMINREGION") && !$ctl_mainpage-}
-				tb.add('-', {id: 'minp', text: '{-#mdcsection#-}',	menu: mcards });
-			{-/if-}
-			tb.add('-', {id: 'mdbs', text: '{-#mdatabases#-}',	menu: mbases });
-			tb.add('-', {id: 'mhlp', text: '{-#mhelp#-}',			menu: mhelp  });
-			tb.add('->',{id: 'mreg', text: '[{-$regname-}]', 		handler: onMenuItem });
-			tb.add('->',{id: 'mwww', text: '<img src="images/di_logo4.png">', handler: onMenuItem });
-
 			function onMenuItem(item) {
 				switch (item.id) {
 					// file menu
@@ -301,6 +165,147 @@
 					break;
 				} //switch
 			} //function
+
+		var	w;
+		var	s;
+		var difw;
+		var usrw;
+		var dblw;
+		var dlgw;
+		// DI8 - Layout, buttons and internal windows - UI DesConsultar module
+		Ext.onReady(function() 
+		{
+			setTimeout(function() {
+				Ext.get('loading').remove();
+				Ext.get('loading-mask').fadeOut({remove:true});
+			}, 250);
+			Ext.QuickTips.init();
+			// User functions Window
+			if (!usrw) {
+				usrw = new Ext.Window({
+					el:'usr-win', layout:'fit', x:300, y:100, width:500, height:100, 
+					closeAction:'hide', plain: true, animCollapse: false,
+					items: new Ext.Panel({ contentEl: 'usr', autoScroll: true })
+				});
+			}
+			
+			// Find Bases window
+			if (!dblw) {
+				dblw = new Ext.Window({
+					el:'dbl-win', layout:'fit', x:200, y:100, width:600, height:450, 
+					closeAction:'hide', plain: true, animCollapse: false,
+					items: new Ext.Panel({ contentEl: 'dbl', autoScroll: true })
+				});
+			}
+			
+			// Dialog window
+			if (!dlgw) {
+				dlgw = new Ext.Window({
+					el:'dlg-win', layout:'fit', x:350, y:200, width:300, height:150, 
+					closeAction:'hide', plain: true, animCollapse: false,
+					items: new Ext.Panel({ contentEl: 'dlg', autoScroll: true })
+				});
+			}
+			
+			// DesInventar (input form) Window
+			if (!difw) {
+				difw = new Ext.Window({
+					el:'dif-win', layout:'fit', 
+					x: 65, y: 0, width:960, height:638, 
+					closeAction:'hide', plain: true, animCollapse: false,
+					items: new Ext.Panel({ contentEl: 'dif-cfg', autoScroll: true })
+				});
+			}
+			
+			// Main menu
+			var muser = new Ext.menu.Menu({
+				id: 'userMenu',
+				items: [
+					{-if $userid != ""-}
+						{id: 'musrmya', text: '{-#tconfigacc#-}', handler: onMenuItem },
+						{id: 'musrout', text: '{-#tclosesess#-}', handler: onMenuItem }, 
+					{-else-}
+						{id: 'musrlin', text: '{-#benter#-}', handler: onMenuItem }, 
+					{-/if-}
+					'-',
+					{ text: '{-#mlang#-}',
+						menu: {
+							id: 'langSubMenu',
+							items: [
+								{-foreach name=lglst key=key item=item from=$lglst-}
+									{id: '{-$key-}', text: '{-$item[0]-}', handler: onMenuItem},
+								{-/foreach-}
+								'-'
+							]
+						}
+					},
+					{id: 'mfilqit',  text: '{-#mquit#-}', handler: onMenuItem  }
+				]
+			});
+			
+			var mquery = new Ext.menu.Menu({
+				id: 'queryMenu',
+				items: [
+					{-if !$ctl_noregion-}
+						{id:'mqrygoq', text: '{-#mgotoqd#-}',	handler: onMenuItem  },
+						{id:'mqrynew', text: '{-#mnewsearch#-}',handler: onMenuItem  },
+						{id:'mqrysav', text: '{-#msavequery#-}',handler: onMenuItem  },
+					{-/if-}
+					{id:'mqryopn', text: '{-#mopenquery#-}',handler: onMenuItem  }
+				]
+			});
+			
+			var mcards = new Ext.menu.Menu({
+				id: 'cardsMenu',
+				items: [
+					{id:'mcrdins', text: '{-#minsert#-}',	handler: onMenuItem  },
+					{-if $role == "SUPERVISOR" || $role == "ADMINREGION"-}
+						{id:'mcrdimp', text: '{-#mimport#-}',	handler: onMenuItem  },
+						{id:'mcrdbak', text: '{-#mbackdb#-}',	handler: onMenuItem  },
+					{-/if-}
+					{-if $role == "OBSERVER" || $role == "ADMINREGION"-}
+						{id:'mcrdcfg', text: '{-#mconfig#-}',	handler: onMenuItem  },
+					{-/if-}
+					'-'
+				]
+			});
+			
+			var mbases = new Ext.menu.Menu({
+				id: 'basesMenu',
+				items: [
+					{id:'mdbsfnd', text: '{-#mdbfind#-}',	handler: onMenuItem  }, //search Databases
+					{-if $userid == "root"-}
+						{id:'musradm', text: '{-#tadminusrs#-}',	handler: onMenuItem  }, //admin Users
+						{id:'mdbsadm', text: '{-#tadminregs#-}',	handler: onMenuItem  }, //admin Databases
+					{-/if-}
+					'-'
+				]
+			});
+			
+			var mhelp = new Ext.menu.Menu({
+				id: 'helpMenu',
+				style: { overflow: 'visible' },
+				items: [
+					{id:'mwww', text: '{-#mwebsite#-}',	handler: onMenuItem  },
+					{id:'mmtg', text: '{-#hmoreinfo#-}', handler: onMenuItem  },
+					{id:'mdoc', text: '{-#hotherdoc#-}', handler: onMenuItem  },
+					{id:'mreg', text: '{-#hdbinfo#-}', handler: onMenuItem  },
+					{id:'mabo', text: '{-#mabout#-}', handler: onMenuItem  }
+				]
+			});
+			
+			var tb = new Ext.Toolbar();
+			tb.render('toolbar');
+			tb.add('-', {id: 'musr', text: '{-#tuser#-}{-if $userid != ""-}: <b>{-$userid-}</b>{-/if-}', menu: muser });
+			tb.add('-', {id: 'mqry', text: '{-#msearch#-}',		menu: mquery });
+			{-if ($role == "USER" || $role == "SUPERVISOR" || $role == "OBSERVER" || $role == "ADMINREGION") && !$ctl_mainpage-}
+				tb.add('-', {id: 'minp', text: '{-#mdcsection#-}',	menu: mcards });
+			{-/if-}
+			tb.add('-', {id: 'mdbs', text: '{-#mdatabases#-}',	menu: mbases });
+			tb.add('-', {id: 'mhlp', text: '{-#mhelp#-}',			menu: mhelp  });
+			tb.add('->',{id: 'mreg', text: '[{-$regname-}]', 		handler: onMenuItem });
+			tb.add('->',{id: 'mwww', text: '<img src="images/di_logo4.png">', handler: onMenuItem });
+
 
 			// layout
 			var viewport = new Ext.Viewport({
@@ -503,8 +508,10 @@
 			{-/if-}
 			
 			// quicktips
-			Ext.apply(Ext.QuickTips.getQuickTip(), {
-				maxWidth: 200, minWidth: 100, showDelay: 50, trackMouse: true });
+			Ext.apply(
+				Ext.QuickTips.getQuickTip(), {
+					maxWidth: 200, minWidth: 100, showDelay: 50, trackMouse: true
+				});
 			});
 			
 			// end ExtJS object
@@ -1045,8 +1052,6 @@
 	</script>
 			
 	<link rel="stylesheet" href="css/tabber.css" type="text/css">
-	<script type="text/javascript" src="include/tabber.js"></script>
-	<script type="text/javascript" src="include/listMan.js"></script>
 	<style type="text/css">
 		.bsave {
 			background-image: url(images/saveicon.png) !important;
