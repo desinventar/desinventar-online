@@ -109,15 +109,16 @@ if (MODE != "command") {
 	/* SMARTY template */
 	$t = new Smarty();
 	$t->debugging = false;
-	$t->force_compile = true;
-	$t->caching = false;
-	$t->compile_check = true;
-	$t->cache_lifetime = -1;
 	$t->config_dir = BASE . '/include';
 	$t->template_dir = BASE . '/templates';
 	$t->compile_dir = SMTY_DIR;
 	$t->left_delimiter = '{-';
 	$t->right_delimiter = '-}';
+	// Smarty caching settings...
+	$t->force_compile = true;
+	$t->caching = 0;
+	$t->cache_lifetime = 3600;
+	$t->compile_check = true;
 
 	// Choose Language
 	$lg = getParameter('lang');
