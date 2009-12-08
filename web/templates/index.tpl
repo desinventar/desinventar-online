@@ -260,10 +260,8 @@
 				break;
 				// databases menu
 				case "mdbsfnd":
-					//updateList('dbl', 'index.php', 'cmd=listdb');
-					//dblw.show();
-					jQuery("#listdb-win").show();
-					alert("mdbsfnd called");
+					updateList('dbl', 'index.php', 'cmd=listdb');
+					dblw.show();
 				break;
 				case "musradm":
 					updateList('dbl', 'user.php', 'cmd=adminusr');
