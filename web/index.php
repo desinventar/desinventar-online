@@ -42,7 +42,7 @@ switch ($cmd) {
 			$t->assign('option', "cmd=main");
 		}
 		$t->assign('ctl_start', true);
-		$t->display('index.tpl');
+		$t->display('main_start.tpl');
 		break;
 	case 'main':
 		// Direct access returns a list of public regions on this server
