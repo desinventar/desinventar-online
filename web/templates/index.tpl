@@ -19,7 +19,7 @@
 	<script type="text/javascript" src="include/accordion.js"></script>
 	<script type="text/javascript" src="include/palette.js"></script>
 {-/if-}
-	<!-- ExtJS 2.0.1 -->
+	<!-- ExtJS -->
 	<link rel="stylesheet" type="text/css" href="/extJS/resources/css/ext-all.css"/>
 	<link rel="stylesheet" type="text/css" href="/extJS/resources/css/xtheme-gray.css"/>
 	<script type="text/javascript" src="/extJS/adapter/ext/ext-base.js"></script>
@@ -1464,10 +1464,11 @@
 	</table>
 	<iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="?cmd=getRegionFullInfo&r={-$reg-}"></iframe>
 	</div> <!-- end div id=qryres -->
-{-else-} {-* MAINPAGE *-}
+{-/if-}
+{-if $ctl_mainpage -}
 	<table border="0" cellpadding="0" cellspacing="0" style="border: thin solid;">
 		<tr style="background:url(images/bgmain.png)">
-		<td width="400px" colspan="2">
+		<td width="100%" colspan="2">
 			<table width="100%">
 			<tr>
 				<td>
@@ -1478,38 +1479,12 @@
 				</td>
 			</tr>
 			</table>
-			<hr /><br />
-		</td>
-		</tr>
-		<tr bgcolor="#e2e2e0" valign="top">
-		<td>
-			<h2><u>{-#listdbTitle#-}</u></h2>
-			<table border="1" class="grid">
-				<tr align="center">
-					<td><b>Pais</b></td>
-					<td><b>Region</b></td>
-					<td colspan="2"><b>Atributos</b></td>
-				</tr>
-{-foreach name=rlist key=key item=item from=$regionlist-}
-				<tr>
-					<td>{-$item[1]-}</td>
-					<td>
-						<a href="index.php?r={-$key-}">{-$item[0]-}</a>
-						<a href="javascript:void(null)" onClick="javascript:window.open('?r={-$key-}','DI_{-$smarty.foreach.rlist.iteration-}', 
-							'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,status=yes,scrollbars=no,toolbar=no');">[-]</a>
-					</td>
-					<td>{-if $item[2] == 3-}PUBLICA{-else-}NO PUBLICA{-/if-}</td>
-					<td>{-$item[3]-}</td>
-				</tr>
-{-/foreach-}
-			</table>
-		</td>
-		<td>
-			<div id="info" width="500px" height="400px" border="1"></div>
+			<br />
 		</td>
 		</tr>
 	</table>
-{-/if-} {-* END ctl_show*-}
+	{-include file="listdb.tpl" -}
+{-/if-}
 </div><!-- END div id=container-->
 <!--	SECTION : QUERY DESIGN 
 	====================== -->
