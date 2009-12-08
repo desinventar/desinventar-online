@@ -109,7 +109,7 @@ switch ($cmd) {
 		$labels = $us->q->queryLabelsFromGroup('DB', $lg, false);
 		$t->assign ('Labels', $labels);
 		$t->assign ('ctl_showRegionInfo', true);
-		$t->display('index.tpl');
+		$t->display('regionfullinfo.tpl');
 		break;
 	case 'getGraphParameters':
 		$t->display('graphparameters.tpl');
