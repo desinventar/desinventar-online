@@ -159,6 +159,11 @@ switch ($cmd) {
 		if (!empty($RegionId) && file_exists($us->q->getDBFile($RegionId))) {
 			// Accessing a region with some operation
 			$us->open($RegionId);
+			if (isset($get['lang']) && !empty($get['lang']))
+				$_SESSION['lang'] = $get['lang'];
+			// Direct access returns a list of public regions on this server
+			$t->assign ("lglst", $us->q->loadLanguages(1));
+			$t->assign ("userid", $us->UserId);
 			switch ($get['cmd']) {
 				case "getGeoId":
 					$code = $us->q->getObjectNameById($get['GeoCode'], "GEOCODE");
@@ -167,25 +172,28 @@ switch ($cmd) {
 				case "glist":
 					$t->assign ("reg", $get['GeographyId']);
 					$t->assign ("geol", $us->q->loadGeoChilds($get['GeographyId']));
-					$t->assign ("ctl_glist", true);
+					$t->display("main_glist.tpl");
 				break;
 				case "levlst":
 					$t->assign ("glev", $us->q->loadGeoLevels('', -1, false));
 					$t->assign ("ctl_levlst", true);
+					$t->display("index.tpl");
 				break;
 				case "geolst":
 					$t->assign ("geol", $us->q->loadGeography(0));
-					$t->assign ("ctl_glist", true);
+					$t->display("main_glist.tpl");
 				break;
 				case "caulst":
 					$t->assign ("caupredl", $us->q->loadCauses("PREDEF", "active", $lg));
 					$t->assign ("cauuserl", $us->q->loadCauses("USER", "active", $lg));
 					$t->assign ("ctl_caulst", true);
+					$t->display("index.tpl");
 				break;
 				case "evelst":
 					$t->assign ("evepredl", $us->q->loadEvents("PREDEF", "active", $lg));
 					$t->assign ("eveuserl", $us->q->loadEvents("USER", "active", $lg));
 					$t->assign ("ctl_evelst", true);
+					$t->display("index.tpl");
 				break;
 				default:
 					$t->assign ("ms", MAPSERV);
@@ -194,7 +202,6 @@ switch ($cmd) {
 					$t->assign ("rc2", $us->q->queryLabelsFromGroup('Record|2', $lg));
 					$t->assign ("eve", $us->q->queryLabelsFromGroup('Event', $lg));
 					$t->assign ("cau", $us->q->queryLabelsFromGroup('Cause', $lg));
-					$t->assign ("ctl_glist", true);
 					$t->assign ("reg", $RegionId);
 					$t->assign ("path", VAR_DIR);
 					$EEFieldList = $us->q->getEEFieldList("True");
@@ -340,14 +347,9 @@ switch ($cmd) {
 					$t->assign ("ctl_show", true);
 					$t->assign ("ctl_qryres", true);
 					$t->assign ("ctl_qrydsg", true);
+					$t->display("index.tpl");
 				break;
 			} // switch
-			if (isset($get['lang']) && !empty($get['lang']))
-				$_SESSION['lang'] = $get['lang'];
-			// Direct access returns a list of public regions on this server
-			$t->assign ("lglst", $us->q->loadLanguages(1));
-			$t->assign ("userid", $us->UserId);
-			$t->display ("index.tpl");
 		}
 	break;
 } //switch($cmd)
