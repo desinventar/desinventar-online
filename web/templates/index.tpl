@@ -178,7 +178,7 @@
 	<iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="?cmd=getRegionFullInfo&r={-$reg-}"></iframe>
 	</div> <!-- end div id=qryres -->
 {-/if-}
-	<div id="listdb-win">
+	<div id="listdb-win" style="display:{-if $ctl_mainpage -}block{-else-}none{-/if-};">
 		<table border="0" cellpadding="0" cellspacing="0" style="border: thin solid;" width="100%">
 			<tr style="background:url(images/bgmain.png)">
 			<td width="100%">
