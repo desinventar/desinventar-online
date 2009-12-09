@@ -174,11 +174,6 @@ switch ($cmd) {
 					$t->assign ("geol", $us->q->loadGeoChilds($get['GeographyId']));
 					$t->display("main_glist.tpl");
 				break;
-				case "levlst":
-					$t->assign ("glev", $us->q->loadGeoLevels('', -1, false));
-					$t->assign ("ctl_levlst", true);
-					$t->display("index.tpl");
-				break;
 				case "geolst":
 					$t->assign ("geol", $us->q->loadGeography(0));
 					$t->display("main_glist.tpl");
