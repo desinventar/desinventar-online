@@ -224,20 +224,8 @@
  {-assign var="maintree" value="true"-}
 {-/if-}
 {-** END ctl_qrydsg **-}
-{-if $ctl_glist-}
-		<ul id="tree-geotree" {-if $maintree == "true"-}class="checktree"{-/if-}>
- {-foreach name=geol key=key item=item from=$geol-}
-		<li id="show-{-$key-}">
-			<input type="checkbox" id="{-$key-}" name="D_GeographyId[]" value="{-$key-}"
-				onClick="setSelMap('{-$item[0]-}', '{-$key-}', this.checked);" {-if $item[3]-}checked{-/if-} />
-			<label for="{-$key-}">{-$item[1]-}</label>
-			<span id="itree-{-$key-}" class="count"></span>
-		</li>
- {-/foreach-}
-		</ul>
- {-include file="gtree.tpl" gtree=$gtree-}
-{-/if-}
-{-** END ctl_glist **-}
+	{-* Show Geography List *-}
+	{-include file="main_glist.tpl" -}
 {-if $ctl_qrydsg-}
 	</div>
 	<b onMouseOver="showtip('{-$dis.DisasterSiteNotes[2]-}');">{-$dis.DisasterSiteNotes[0]-}</b>
