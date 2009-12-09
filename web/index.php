@@ -14,7 +14,7 @@ require_once('include/diregion.class.php');
 $post = $_POST;
 $get  = $_GET;
 
-$cmd = getParameter('cmd','');
+$cmd = getParameter('cmd', getParameter('_CMD',''));
 $RegionId = getParameter('r', getParameter('RegionId', getParameter('_REG'),''));
 if ($cmd == '' && $RegionId == '') {
 	$cmd = 'start';
@@ -126,19 +126,18 @@ switch ($cmd) {
 			unlink($FileName);
 		}
 	break;
-	default:
+	case 'savequery':
 		// Save XML file query
-		if (isset($post['_CMD']) && $post['_CMD'] == "savequery") {
-			// Request to save Query Design in File..
-			fixPost($post);
-			// Do not save _CMD...
-			unset($post['_CMD']);
-			header("Content-type: text/xml");
-			header("Content-Disposition: attachment; filename=Query_". str_replace(" ", "", $RegionId) .".xml");
-			echo '<?xml version="1.0" encoding="UTF-8"?>'. "\n";
-			echo "<DIQuery />". base64_encode(serialize($post));
-			exit();
-		}
+		fixPost($post);
+		// Do not save _CMD...
+		unset($post['_CMD']);
+		header("Content-type: text/xml");
+		header("Content-Disposition: attachment; filename=Query_". str_replace(" ", "", $RegionId) .".xml");
+		echo '<?xml version="1.0" encoding="UTF-8"?>'. "\n";
+		echo "<DIQuery />". base64_encode(serialize($post));
+		exit();
+	break;
+	default:
 		// Open XML file query
 		if (isset($_FILES['qry'])) {
 			// Open file, decode and assign saved query..
