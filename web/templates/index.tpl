@@ -1,6 +1,5 @@
 {-config_load file=`$lg`.conf section="di8_index"-}
 {-config_load file=`$lg`.conf section="di8_user"-}
-{-if $ctl_show || $ctl_mainpage-}
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -66,7 +65,6 @@
 						</td>
 						<td align="center">
 		{-/if-} {-* END ctl_show *-}
-{-/if-} {-** END ctl_show || ctl_mainpage**-}
 {-if $ctl_qryres-}
 					<!--	SECTION : DATA CONFIGURATION ============================ -->
 					<button id="dat-btn" class="rounded" ext:qtip="{-#tdatamsg#-}"><span>{-#bdata#-}</span></button>
@@ -90,7 +88,6 @@
 					</div> <!-- std-win -->
 					<!--	END STATISTIC SECTION  -->
 {-/if-} {-** END ctl_qryres **-}
-{-if $ctl_show || $ctl_mainpage-}
 					<!-- Show XML query open window-->
 					<div id="qry-win" class="x-hidden">
 						<div class="x-window-header">{-#mopenquery#-}</div>
@@ -181,7 +178,6 @@
 	<iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="?cmd=getRegionFullInfo&r={-$reg-}"></iframe>
 	</div> <!-- end div id=qryres -->
 {-/if-}
-{-if $ctl_mainpage -}
 	<div id="listdb-win">
 		<table border="0" cellpadding="0" cellspacing="0" style="border: thin solid;" width="100%">
 			<tr style="background:url(images/bgmain.png)">
@@ -201,12 +197,10 @@
 		</table>
 		{-include file="showlistdb.tpl" -}
 	</div>
-{-/if-}
 </div><!-- END div id=container-->
 <!--	SECTION : QUERY DESIGN 
 	====================== -->
 <div id="west">
-{-/if-} {-* END ctl_show || ctl_mainpage*-}
 {-if $ctl_qrydsg-}
 <!-- BEG DI8 QUERY FORM -->
 <form id="DC" method="POST" target="dcr">
@@ -620,7 +614,6 @@
 	</dl>
 </form>
 {-/if-} {-** END ctl_qrydsg **-}
-{-if $ctl_show || $ctl_mainpage-}
 </div> <!-- id = west-->
 	<!-- END DI8 QUERY FORM -->
 	<!-- BEG HELP SECTION -->
@@ -632,5 +625,3 @@
  <!-- END HELP SECTION -->
 </body>
 </html>
-{-/if-}
-
