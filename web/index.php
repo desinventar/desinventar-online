@@ -41,7 +41,6 @@ switch ($cmd) {
 		} else {
 			$t->assign('option', "cmd=main");
 		}
-		$t->assign('ctl_start', true);
 		$t->display('main_start.tpl');
 		break;
 	case 'main':
@@ -57,7 +56,6 @@ switch ($cmd) {
 	case 'listdb':
 		// Direct access returns a list of public regions on this server
 		$t->assign('regionlist', $us->q->listDB());
-		$t->assign('ctl_showlistdb', true);
 		$t->display('showlistdb.tpl');
 		break;
 	case 'searchdb':
@@ -65,7 +63,6 @@ switch ($cmd) {
 		$searchdbquery = getParameter('searchdbquery', '');
 		$searchbycountry = getParameter('searchbycountry', '');
 		$reglst = $d->searchDB($searchdbquery, $searchbycountry);
-		$t->assign('ctl_showregionlist', true);
 		$t->assign('regionlist', $reglst);
 		print json_encode($reglst);
 		break;
@@ -109,7 +106,6 @@ switch ($cmd) {
 		$t->assign('RegionInfo', $a);
 		$labels = $us->q->queryLabelsFromGroup('DB', $lg, false);
 		$t->assign ('Labels', $labels);
-		$t->assign ('ctl_showRegionInfo', true);
 		$t->display('regionfullinfo.tpl');
 		break;
 	case 'getGraphParameters':
