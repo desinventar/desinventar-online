@@ -268,7 +268,7 @@
 			tb.render('toolbar');
 			tb.add('-', {id: 'musr', text: '{-#tuser#-}{-if $userid != ""-}: <b>{-$userid-}</b>{-/if-}', menu: muser });
 			tb.add('-', {id: 'mqry', text: '{-#msearch#-}',		menu: mquery });
-			{-if ($role == "USER" || $role == "SUPERVISOR" || $role == "OBSERVER" || $role == "ADMINREGION") && !$ctl_mainpage-}
+			{-if ($role == "USER" || $role == "SUPERVISOR" || $role == "OBSERVER" || $role == "ADMINREGION")-}
 				tb.add('-', {id: 'minp', text: '{-#mdcsection#-}',	menu: mcards });
 			{-/if-}
 			tb.add('-', {id: 'mdbs', text: '{-#mdatabases#-}',	menu: mbases });
