@@ -50,7 +50,6 @@ switch ($cmd) {
 		$t->assign('regionlist', $us->q->listDB());
 		$t->assign("userid", $us->UserId);
 		$t->assign("ctl_noregion", true);
-		$t->assign('ctl_mainpage', true);
 		$t->display('index.tpl');
 		break;
 	case 'listdb':
@@ -181,14 +180,12 @@ switch ($cmd) {
 				case "caulst":
 					$t->assign ("caupredl", $us->q->loadCauses("PREDEF", "active", $lg));
 					$t->assign ("cauuserl", $us->q->loadCauses("USER", "active", $lg));
-					$t->assign ("ctl_caulst", true);
-					$t->display("index.tpl");
+					$t->display("main_causelist.tpl");
 				break;
 				case "evelst":
 					$t->assign ("evepredl", $us->q->loadEvents("PREDEF", "active", $lg));
 					$t->assign ("eveuserl", $us->q->loadEvents("USER", "active", $lg));
-					$t->assign ("ctl_evelst", true);
-					$t->display("index.tpl");
+					$t->display("main_eventlist.tpl");
 				break;
 				default:
 					$t->assign ("ms", MAPSERV);
