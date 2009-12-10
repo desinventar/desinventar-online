@@ -127,6 +127,12 @@
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
+					<a href="javascript:void(null);" onclick="showRegionInfo('CHL-1257983285-chile_inventario_historico_de_desastres');">Chile</a>
+				</td>
+			</tr>
+			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
+			<tr>
+				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 					<a href="javascript:void(null);" onclick="updateDatabaseList('PAR');">Paraguay</a>
 				</td>
 			</tr>
