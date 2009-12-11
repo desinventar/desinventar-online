@@ -29,7 +29,7 @@ if (!empty($RegionId))
 switch ($cmd) {
 	case 'getversion':
 		print VERSION;
-		break;
+	break;
 	case 'start':
 		$d = new Query();
 		$t->assign('lg', $lg);
@@ -42,7 +42,7 @@ switch ($cmd) {
 			$t->assign('option', "cmd=main");
 		}
 		$t->display('main_start.tpl');
-		break;
+	break;
 	case 'main':
 		// Direct access returns a list of public regions on this server
 		$t->assign('lg', $lg);
@@ -52,12 +52,12 @@ switch ($cmd) {
 		$t->assign("ctl_noregion", true);
 		$t->assign("ctl_mainpage", true);
 		$t->display('index.tpl');
-		break;
+	break;
 	case 'listdb':
 		// Direct access returns a list of public regions on this server
 		$t->assign('regionlist', $us->q->listDB());
 		$t->display('showlistdb.tpl');
-		break;
+	break;
 	case 'searchdb':
 		$d = new Query();
 		$searchdbquery = getParameter('searchdbquery', '');
@@ -65,13 +65,13 @@ switch ($cmd) {
 		$reglst = $d->searchDB($searchdbquery, $searchbycountry);
 		$t->assign('regionlist', $reglst);
 		print json_encode($reglst);
-		break;
+	break;
 	case 'getCountryName':
 		$d = new Query();
 		$CountryIso = getParameter('CountryIso','');
 		$CountryName = $d->getCountryName($CountryIso);
 		print $CountryName;
-		break;
+	break;
 	case 'getRegionLogo':
 		header("Content-type: Image/png");
 		$murl = VAR_DIR . "/database/". $RegionId . "/logo.png";
@@ -79,7 +79,7 @@ switch ($cmd) {
 			$murl = "images/di_logo.png";
 		readfile($murl);
 		exit();
-		break;
+	break;
 	case 'getRegionBasicInfo':
 		$r = new DIRegion($us, $RegionId);
 		$RegionInfo = array();
@@ -97,20 +97,22 @@ switch ($cmd) {
 		$labels = $us->q->queryLabelsFromGroup('DB', $lg, false);
 		$t->assign ('Labels', $labels);
 		$t->display('regiontechinfo.tpl');
-		break;
+	break;
 	case 'getRegionFullInfo':
-		$t->assign('reg', $RegionId);
-		$r = new DIRegion($us, $RegionId);
-		$a = $r->getDBInfo($lg);
-		$a['NumDatacards'] = $us->q->getNumDisasterByStatus('PUBLISHED');
-		$t->assign('RegionInfo', $a);
+		if ($RegionId != '') {
+			$t->assign('reg', $RegionId);
+			$r = new DIRegion($us, $RegionId);
+			$a = $r->getDBInfo($lg);
+			$a['NumDatacards'] = $us->q->getNumDisasterByStatus('PUBLISHED');
+			$t->assign('RegionInfo', $a);
+		}
 		$labels = $us->q->queryLabelsFromGroup('DB', $lg, false);
 		$t->assign ('Labels', $labels);
 		$t->display('regionfullinfo.tpl');
-		break;
+	break;
 	case 'getGraphParameters':
 		$t->display('graphparameters.tpl');
-		break;
+	break;
 	case 'getRegionBackup':
 		$FileName = TMP_DIR . '/di8backup_' . uuid() . '.zip';
 		$iReturn = DIRegion::createRegionBackup($us, $RegionId, $FileName);
