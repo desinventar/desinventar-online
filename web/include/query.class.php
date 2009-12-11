@@ -820,22 +820,27 @@ class Query extends PDO
 						$e[$k] .= ")";
 					} elseif ($k == "D.GeographyId") {
 						$bFirst = true;
-						$e[$k] = "(";
+						$GeographyQuery = '';
 						foreach ($v as $i) {
 							if (! $bFirst) {
-								$e[$k] .= ' OR ';
+								$GeographyQuery .= ' OR ';
 							}
 							// Restrict to childs elements only
 							$chl = false;
-							foreach ($v as $j)
-								if ($i != $j && ($i == substr($j, 0, 5) || $i == substr($j, 0, 10)))
+							foreach ($v as $j) {
+								if ($i != $j && ($i == substr($j, 0, 5) || $i == substr($j, 0, 10))) {
 									$chl = true;
-							if (!$chl) {
-								$e[$k] .= "$k LIKE '$i%'";
+								}
 							}
-							$bFirst = false;
+							if (!$chl) {
+								$GeographyQuery .= "$k LIKE '$i%'";
+								$bFirst = false;
+							}
 						}
-						$e[$k] .= ")";
+						if ($GeographyQuery != '') {
+							$GeographyQuery = '(' . $GeographyQuery . ')';
+						}
+						$e[$k] = $GeographyQuery;
 					} elseif ((substr($k, 2, 6) == "Effect" || substr($k, 2, 6) == "Sector") && isset($v[0])) {
 						// Process effects and sectors..
 						if (isset($v[3]))
@@ -939,23 +944,19 @@ class Query extends PDO
 		if (($WhereQuery1 != '') || ($EEQuery != '') || ($CustomQuery != '') ) {
 			$WhereQuery .= ' AND (';
 			if ($WhereQuery1 != '') {
-				fb($WhereQuery1);
 				$WhereQuery .= $WhereQuery1;
 			}
 			if ($EEQuery != '') {
-				fb($EEQuery);
 				$WhereQuery .= ' AND (' . $EEQuery . ') ';
 			}
 			if ($CustomQuery != '') {
 				$WhereQuery .= ' (' . $CustomQuery. ') ';
 			}
 			if ($DisasterSerialQuery != '') {
-				fb($DisasterSerialQuery);
 				$WhereQuery .= ' ' . $DisasterSerialQuery;
 			}
 			$WhereQuery .= ')';
 		}
-		fb($WhereQuery);
     	return ($WhereQuery);
 	}
 
