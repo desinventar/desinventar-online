@@ -30,9 +30,9 @@
 		jQuery(document).ready(function() {
 			jQuery("#listdb-win").hide();
 			{-if $ctl_mainpage -}
+				jQuery("#dcr").hide();
 				jQuery("#listdb-win").show();
 			{-/if-}
-			//alert('loading');
 		});
 	</script>
 </head>
