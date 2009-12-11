@@ -59,7 +59,7 @@
 		<div id="import" style="display:none;"></div>
 		
 		<!-- Results of queries -->
-		<div id="qryres" style="display:{-if $ctl_qryres-}block{-else-}none{-/if-}">
+		<div id="qryres" style="display:block">
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr bgcolor="#bbbbbb">
 					<td width="200px">
