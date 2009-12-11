@@ -1,11 +1,13 @@
 	<script type="text/javascript">
 			function onMenuItem(item) {
 				switch (item.id) {
-					// file menu
-					case "mreg":
-						$('dcr').src = "index.php?cmd=getRegionFullInfo&r={-$reg-}";
-						$('bsave').style.visibility = 'hidden';
-						$('bprint').style.visibility = 'hidden';
+					case "mnuRegionInfo":
+						var RegionId = '{-$reg-}';
+						if (RegionId != '') {
+							$('dcr').src = "index.php?cmd=getRegionFullInfo&r={-$reg-}";
+							$('bsave').style.visibility = 'hidden';
+							$('bprint').style.visibility = 'hidden';
+						}
 					break;
 					case "musrlin":
 						//updateUserBar('user.php', '', '', '');
@@ -259,7 +261,7 @@
 					{id:'mwww', text: '{-#mwebsite#-}',	handler: onMenuItem  },
 					{id:'mmtg', text: '{-#hmoreinfo#-}', handler: onMenuItem  },
 					{id:'mdoc', text: '{-#hotherdoc#-}', handler: onMenuItem  },
-					{id:'mreg', text: '{-#hdbinfo#-}', handler: onMenuItem  },
+					{id:'mnuRegionInfo', text: '{-#hdbinfo#-}', handler: onMenuItem  },
 					{id:'mabo', text: '{-#mabout#-}', handler: onMenuItem  }
 				]
 			});
@@ -273,9 +275,8 @@
 			{-/if-}
 			tb.add('-', {id: 'mdbs', text: '{-#mdatabases#-}',	menu: mbases });
 			tb.add('-', {id: 'mhlp', text: '{-#mhelp#-}',			menu: mhelp  });
-			tb.add('->',{id: 'mreg', text: '[{-$regname-}]', 		handler: onMenuItem });
+			tb.add('->',{id: 'mnuRegionInfo', text: '[{-$regname-}]', 		handler: onMenuItem });
 			tb.add('->',{id: 'mwww', text: '<img src="images/di_logo4.png">', handler: onMenuItem });
-
 
 			// layout
 			var viewport = new Ext.Viewport({
