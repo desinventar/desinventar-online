@@ -114,7 +114,7 @@ class DIGeography extends DIObject {
 		$iReturn = ERR_NO_ERROR;
 		if ($iReturn > 0) {
 			// Update goegraphy children data if needed...
-			if ($this->oOldField['Info']['GeographyName'] != $this->oField['Info']['GeographyName']) {
+			if ($this->oOldField['info']['GeographyName'] != $this->oField['info']['GeographyName']) {
 				$this->saveGeographyFQName();
 			} //if
 		} //if
