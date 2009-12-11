@@ -45,6 +45,13 @@ class DIImport {
 							$o->insert();
 						}
 					break;
+					case DI_GEOLEVEL:
+						$o = new DIGeoLevel($this->us);
+						$r = $o->importFromCSV($cols, $values);
+						if ($r['Status'] > 0) {
+							$o->insert();
+						}
+					break;
 					case DI_GEOGRAPHY:
 						$o = new DIGeography($this->us);
 						$r = $o->importFromCSV($cols, $values);

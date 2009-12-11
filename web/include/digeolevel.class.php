@@ -68,6 +68,8 @@ class DIGeoLevel extends DIObject {
 	public function importFromCSV($cols, $values) {
 		$oReturn = parent::importFromCSV($cols, $values);
 		$iReturn = $oReturn['Status'];
+		$this->set('GeoLevelId', $values[0]);
+		$this->set('GeoLevelName', $values[1]);
 		if ($iReturn > 0) {
 			$oReturn['Status'] = $iReturn;
 		}
