@@ -720,11 +720,11 @@ class Query extends PDO
 		$e['Eff'] = "";
 		$e['Item'] = "";
 		$DisasterSerialQuery = "";
-		$cusqry = "";
+		$CustomQuery = "";
 		//$datedb = $this->getDateRange();
 		// Add Custom Query..
 		if (isset($dat['__CusQry']) && !empty($dat['__CusQry'])) {
-			$cusqry = "AND (". $dat['__CusQry'] .") ";
+			$CustomQuery = trim($dat['__CusQry']);
 		}
 		// Process EEFields...
 		$First = true;
@@ -782,14 +782,20 @@ class Query extends PDO
 				if (is_int($v) || is_float($v)) {
 					$e['Item'] .= "$k = $v AND ";
 				} elseif ($k == "D.RecordStatus") {
-					if (is_array($v)) {
-						$e['Item'] .= "(";
-						foreach($v as $i)
-							$e['Item'] .= "$k = '$i' OR ";
-						$e['Item'] .= "1!=1) AND ";
-					} else {
-						$e['Item'] .= "$k = '$v' AND ";
+					if (!is_array($v)) {
+						$v = explode(' ',$v);						
 					}
+					$e['Item'] .= "(";
+					$bFirst = true;
+					foreach($v as $i) {
+						if (! $bFirst) {
+							$e['Item'] .= ' OR ';
+						}
+						$e['Item'] .= "$k = '$i'";
+						$bFirst = false;
+					}
+					$e['Item'] .= ')';
+					$e['Item'] .= " AND ";
 				} elseif (is_array($v)) {
 					if ($k == "D.DisasterBeginTime") {
 						$aa = !empty($v[0])? $v[0] : "0000"; //substr($datedb[0], 0, 4);
@@ -803,22 +809,33 @@ class Query extends PDO
 						$endt = sprintf("%04d-%02d-%02d", $aa, $mm, $dd);
 					} elseif ($k == "D.EventId" || $k == "D.CauseId") {
 						$e[$k] = "(";
+						$bFirst = true;
 						foreach ($v as $i) {
-							$e[$k] .= "$k = '$i' OR ";
+							if (! $bFirst) {
+								$e[$k] .= ' OR ';
+							}
+							$e[$k] .= "$k = '$i'";
+							$bFirst = false;
 						}
-						$e[$k] .= "1!=1)";
+						$e[$k] .= ")";
 					} elseif ($k == "D.GeographyId") {
+						$bFirst = true;
 						$e[$k] = "(";
 						foreach ($v as $i) {
+							if (! $bFirst) {
+								$e[$k] .= ' OR ';
+							}
 							// Restrict to childs elements only
 							$chl = false;
 							foreach ($v as $j)
 								if ($i != $j && ($i == substr($j, 0, 5) || $i == substr($j, 0, 10)))
 									$chl = true;
-							if (!$chl)
-								$e[$k] .= "$k LIKE '$i%' OR ";
+							if (!$chl) {
+								$e[$k] .= "$k LIKE '$i%'";
+							}
+							$bFirst = false;
 						}
-						$e[$k] .= "1!=1)";
+						$e[$k] .= ")";
 					} elseif ((substr($k, 2, 6) == "Effect" || substr($k, 2, 6) == "Sector") && isset($v[0])) {
 						// Process effects and sectors..
 						if (isset($v[3]))
@@ -835,13 +852,21 @@ class Query extends PDO
 							$e['Eff'] .= "($k BETWEEN ". $v[1] ." AND ". $v[2] .") $op ";
 					} elseif (substr($k, -5) == "Notes" || $k == "D.DisasterSource") {
 						// Process text fields with separator AND, OR..
-						$e['Item'] .= "(";
-						foreach (explode(" ", $v[1]) as $i)
-							$e['Item'] .= "$k LIKE '%$i%' ". $v[0] ." "; 
-						if ($v[0] == "AND")
-							$e['Item'] .= "1=1) AND ";
-						else
-							$e['Item'] .= "1!=1) AND ";
+						$Query = '';
+						foreach (explode(" ", $v[1]) as $i) {
+							$i = trim($i);
+							if ($i != '') {
+								$Query .= "$k LIKE '%$i%' ". $v[0] ." "; 
+							}
+						}
+						if ($Query != '') {
+							$Query = '(' . $Query;
+							if ($v[0] == "AND")
+								$Query .= "1=1) AND ";
+							else
+								$Query .= "1!=1) AND ";
+							$e['Item'] .= $Query;
+						}
 					} elseif ($k == "D.DisasterSerial") {
 						// Process serials..
 						$MainOp = ' AND '; 
@@ -866,7 +891,10 @@ class Query extends PDO
 					}
 				} elseif (substr($k, 0, 1) != "_")  {
 					// all minus DC hidden fields _MyField
-					$e['Item'] .= "$k like '%$v%' AND ";
+					$v = trim($v);
+					if ($v != '') {
+						$e['Item'] .= "$k like '%$v%' AND ";
+					}
 				}
 			}
 		} //foreach
@@ -877,10 +905,12 @@ class Query extends PDO
 				$endt = "9999-12-31"; //$datedb[1];
 			$e['DisasterTime'] = "(D.DisasterBeginTime BETWEEN '$begt' AND '$endt')";
 		}
+		/*
 		if (isset($op) && $op == "OR")
 			$e['Eff'] = "(". $e['Eff'] ." 1!=1)";
 		else
 			$e['Eff'] = "(". $e['Eff'] ." 1=1)";
+		*/
 		$lan = "spa"; // select from local languages of database..
 		//$e['Item'] .= "D.EventId=V.EventId AND D.CauseId=C.CauseId AND D.GeographyId=G.GeographyId ".
         //          "AND V.LangIsoCode='$lan' AND C.LangIsoCode='$lan' AND G.LangIsoCode='$lan'";
@@ -888,24 +918,44 @@ class Query extends PDO
 
 		// Finally, build the WHERE Conditional Query using all parts...
 		// Add the JOIN conditions with all other tables...
-		$WhereQuery .= '(D.DisasterId=E.DisasterId AND D.EventId=V.EventId AND D.CauseId=C.CauseId AND D.GeographyId=G.GeographyId) AND (';
-		$WhereQuery .= ' (';
-		$bFirst = true;
-		foreach ($e as $k => $i) {
-			if (! $bFirst) {
-				$WhereQuery .= ' AND ';
+		$WhereQuery .= '(D.DisasterId=E.DisasterId AND D.EventId=V.EventId AND D.CauseId=C.CauseId AND D.GeographyId=G.GeographyId) ';
+
+		$WhereQuery1 = '';
+		if (count($e) > 0) {
+			$WhereQuery1 .= ' (';
+			$bFirst = true;
+			foreach ($e as $k => $v) {
+				if (! $bFirst) {
+					$WhereQuery1 .= ' AND ';
+				}
+				$v = trim($v);
+				if ($v != '') {
+					$bFirst = false;
+					$WhereQuery1 .= $v;
+				}
 			}
-			$bFirst = false;
-			$WhereQuery .= $i;
+			$WhereQuery1 .= ')';
 		}
-		if ($EEQuery != '') {
-			$WhereQuery .= ' AND ' . $EEQuery;
+		if (($WhereQuery1 != '') || ($EEQuery != '') || ($CustomQuery != '') ) {
+			$WhereQuery .= ' AND (';
+			if ($WhereQuery1 != '') {
+				fb($WhereQuery1);
+				$WhereQuery .= $WhereQuery1;
+			}
+			if ($EEQuery != '') {
+				fb($EEQuery);
+				$WhereQuery .= ' AND (' . $EEQuery . ') ';
+			}
+			if ($CustomQuery != '') {
+				$WhereQuery .= ' (' . $CustomQuery. ') ';
+			}
+			if ($DisasterSerialQuery != '') {
+				fb($DisasterSerialQuery);
+				$WhereQuery .= ' ' . $DisasterSerialQuery;
+			}
+			$WhereQuery .= ')';
 		}
-		$WhereQuery .= $cusqry. ') ';
-		if ($DisasterSerialQuery != '') {
-			$WhereQuery .= ' ' . $DisasterSerialQuery;
-		}
-		$WhereQuery .= ')';
+		fb($WhereQuery);
     	return ($WhereQuery);
 	}
 
