@@ -11,7 +11,6 @@
 	<!-- jQuery -->
 	{-include file="jquery.tpl" -}
 	<script type="text/javascript" src="include/diadmin.js"></script>
-	<script type="text/javascript" src="include/tabber.js"></script>
 	<script type="text/javascript" src="include/listMan.js"></script>
 	<link rel="stylesheet" href="css/checktree.css" type="text/css"/>
 	<link rel="stylesheet" href="css/accordion.css" type="text/css"/>
@@ -26,6 +25,7 @@
 	<script type="text/javascript" src="/extJS/ext-all.js"></script>
 	{-include file="main_javascript.tpl" -}
 	{-include file="main_css.tpl" -}
+	<script type="text/javascript" src="include/tabber.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			jQuery("#listdb-win").hide();
