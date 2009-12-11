@@ -847,17 +847,18 @@ class Query extends PDO
 							$op = $v[3];
 						else
 							$op = "AND";
+						$EffectQuery = '';
+						if ($e['Eff'] != '') {
+							$EffectQuery .= ' ' . $op . ' ';
+						}
 						if ($v[0] == ">=" || $v[0] == "<=" || $v[0] == "=")
-							$EffectQuery .= "$k ". $v[0] . $v[1];
+							$EffectQuery .= '(' . $k . ' ' . $v[0] . $v[1] . ')';
 						elseif ($v[0] == "-1")
 							$EffectQuery .= "($k =". $v[0] ." OR $k>0)";
 						elseif ($v[0] == "0" || $v[0] == "-2")
 							$EffectQuery .= "$k =". $v[0];
 						elseif ($v[0] == "-3")
 							$EffectQuery .= "($k BETWEEN ". $v[1] ." AND ". $v[2] . ")";
-						if ($e['Eff'] != '') {
-							$e['Eff'] .= ' $op ';
-						}
 						$e['Eff'] .= $EffectQuery;
 					} elseif (substr($k, -5) == "Notes" || $k == "D.DisasterSource") {
 						// Process text fields with separator AND, OR..
@@ -961,7 +962,6 @@ class Query extends PDO
 			}
 			$WhereQuery .= ')';
 		}
-		fb($WhereQuery);
     	return ($WhereQuery);
 	}
 
