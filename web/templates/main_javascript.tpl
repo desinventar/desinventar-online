@@ -320,163 +320,161 @@
 				]
 			}); //viewport
 			
-			{-if $ctl_show-}
-				// ==> Results Configuration Windows
-				// Data
-				var datw;
-				var datb = Ext.get('dat-btn');
-				datb.on('click', function() {
-					if (!datw) {
-						datw = new Ext.Window({
-							el:'dat-win',
-							layout:'fit',
-							width:600,
-							height:400, 
-							closeAction:'hide',
-							plain: true,
-							animCollapse: false,
-							items: new Ext.Panel({contentEl: 'dat-cfg', autoScroll: true }),
-							buttons: [
-								{text:'{-#tclean#-}',
-									handler: function() {
-										$('CD').reset();
-										} //handler
-								},
-								{text:'{-#tsend#-}',
-									handler: function() {
-										if (sendList("result")) {
-											$('DCRes').value = "D";
-											datw.hide();
-											$('bsave').style.visibility = 'visible';
-											$('bprint').style.visibility = 'visible';
-										} else {
-											alert("{-#derrmsgfrm#-}");
-										}
+			// ==> Results Configuration Windows
+			// Data
+			var datw;
+			var datb = Ext.get('dat-btn');
+			datb.on('click', function() {
+				if (!datw) {
+					datw = new Ext.Window({
+						el:'dat-win',
+						layout:'fit',
+						width:600,
+						height:400, 
+						closeAction:'hide',
+						plain: true,
+						animCollapse: false,
+						items: new Ext.Panel({contentEl: 'dat-cfg', autoScroll: true }),
+						buttons: [
+							{text:'{-#tclean#-}',
+								handler: function() {
+									$('CD').reset();
 									} //handler
-								},
-								{text:'{-#tclose#-}',
-									handler: function() {
+							},
+							{text:'{-#tsend#-}',
+								handler: function() {
+									if (sendList("result")) {
+										$('DCRes').value = "D";
 										datw.hide();
-									} //handler
-								}
-							] //button
-						});
-					}
-					datw.show(this);
-				});
-				
-				// Statistics
-				var stdw;
-				var stdb = Ext.get('std-btn');
-				stdb.on('click', function() {
-					if (!stdw) {
-						stdw = new Ext.Window({
-							el:'std-win',  layout:'fit',  width:600, height:400, 
-							closeAction:'hide', plain: true, animCollapse: false,
-							items: new Ext.Panel({contentEl: 'std-cfg', autoScroll: true }),
-							buttons: [
-								{text:'{-#tclean#-}',
-									handler: function() {
-										$('CS').reset();
-									}
-								},
-								{text:'{-#tsend#-}',
-									handler: function() {
-										if (sendStatistic("result")) {
-											$('DCRes').value = "S";
-											stdw.hide();
-											$('bsave').style.visibility = 'visible';
-											$('bprint').style.visibility = 'visible';
-										} else {
-											alert("{-#serrmsgfrm#-}");
-										}
-									} //handler
-								},
-								{text:'{-#tclose#-}',
-									handler: function() {
-										stdw.hide();
-									}
-								}
-							]
-						});
-					}
-					stdw.show(this);
-				});
-				
-				// Graphic
-				var grpw;
-				var grpb = Ext.get('grp-btn');
-				grpb.on('click', function() {
-					if (!grpw) {
-						grpw = new Ext.Window({
-							el:'grp-win',  layout:'fit',  width:750, height:420, 
-							closeAction:'hide', plain: true, animCollapse: false,
-							items: new Ext.Panel({contentEl: 'grp-cfg', autoScroll: true }),
-							buttons: [
-								{text:'{-#tclean#-}',
-									handler: function() {
-										$('CG').reset();
-									}
-								},
-								{text:'{-#tsend#-}',
-									handler: function() {
-										sendGraphic("result");
-										$('DCRes').value = "G";
-										grpw.hide();
 										$('bsave').style.visibility = 'visible';
 										$('bprint').style.visibility = 'visible';
+									} else {
+										alert("{-#derrmsgfrm#-}");
 									}
-								},
-								{text:'{-#tclose#-}',
-									handler: function() {
-										grpw.hide();
-									}
+								} //handler
+							},
+							{text:'{-#tclose#-}',
+								handler: function() {
+									datw.hide();
+								} //handler
+							}
+						] //button
+					});
+				}
+				datw.show(this);
+			});
+			
+			// Statistics
+			var stdw;
+			var stdb = Ext.get('std-btn');
+			stdb.on('click', function() {
+				if (!stdw) {
+					stdw = new Ext.Window({
+						el:'std-win',  layout:'fit',  width:600, height:400, 
+						closeAction:'hide', plain: true, animCollapse: false,
+						items: new Ext.Panel({contentEl: 'std-cfg', autoScroll: true }),
+						buttons: [
+							{text:'{-#tclean#-}',
+								handler: function() {
+									$('CS').reset();
 								}
-							]
-						});
-					}
-					grpw.show(this);
-				});
-				
-				// Map
-				var mapw;
-				var mapb = Ext.get('map-btn');
-				mapb.on('click', function() {
-					if (!mapw) {
-						mapw = new Ext.Window({
-							el:'map-win',  layout:'fit',  width:650, height:400, 
-							closeAction:'hide', plain: true, animCollapse: false,
-							items: new Ext.Panel({contentEl: 'map-cfg', autoScroll: true }),
-							buttons: [
-								{text:'{-#tclean#-}',
-									handler: function() {
-										$('CM').reset();
+							},
+							{text:'{-#tsend#-}',
+								handler: function() {
+									if (sendStatistic("result")) {
+										$('DCRes').value = "S";
+										stdw.hide();
+										$('bsave').style.visibility = 'visible';
+										$('bprint').style.visibility = 'visible';
+									} else {
+										alert("{-#serrmsgfrm#-}");
 									}
-								},
-								{text:'{-#tsend#-}',
-									handler: function() {
-										setfocus('_M+limit[0]');
-										if (sendMap("result")) {
-											$('DCRes').value = "M";
-											mapw.hide();
-											$('bsave').style.visibility = 'visible';
-											$('bprint').style.visibility = 'visible';
-										} else {
-											alert("{-#serrmsgfrm#-}");
-										}
-									}
-								},
-								{text:'{-#tclose#-}',
-									handler: function() {
+								} //handler
+							},
+							{text:'{-#tclose#-}',
+								handler: function() {
+									stdw.hide();
+								}
+							}
+						]
+					});
+				}
+				stdw.show(this);
+			});
+			
+			// Graphic
+			var grpw;
+			var grpb = Ext.get('grp-btn');
+			grpb.on('click', function() {
+				if (!grpw) {
+					grpw = new Ext.Window({
+						el:'grp-win',  layout:'fit',  width:750, height:420, 
+						closeAction:'hide', plain: true, animCollapse: false,
+						items: new Ext.Panel({contentEl: 'grp-cfg', autoScroll: true }),
+						buttons: [
+							{text:'{-#tclean#-}',
+								handler: function() {
+									$('CG').reset();
+								}
+							},
+							{text:'{-#tsend#-}',
+								handler: function() {
+									sendGraphic("result");
+									$('DCRes').value = "G";
+									grpw.hide();
+									$('bsave').style.visibility = 'visible';
+									$('bprint').style.visibility = 'visible';
+								}
+							},
+							{text:'{-#tclose#-}',
+								handler: function() {
+									grpw.hide();
+								}
+							}
+						]
+					});
+				}
+				grpw.show(this);
+			});
+			
+			// Map
+			var mapw;
+			var mapb = Ext.get('map-btn');
+			mapb.on('click', function() {
+				if (!mapw) {
+					mapw = new Ext.Window({
+						el:'map-win',  layout:'fit',  width:650, height:400, 
+						closeAction:'hide', plain: true, animCollapse: false,
+						items: new Ext.Panel({contentEl: 'map-cfg', autoScroll: true }),
+						buttons: [
+							{text:'{-#tclean#-}',
+								handler: function() {
+									$('CM').reset();
+								}
+							},
+							{text:'{-#tsend#-}',
+								handler: function() {
+									setfocus('_M+limit[0]');
+									if (sendMap("result")) {
+										$('DCRes').value = "M";
 										mapw.hide();
+										$('bsave').style.visibility = 'visible';
+										$('bprint').style.visibility = 'visible';
+									} else {
+										alert("{-#serrmsgfrm#-}");
 									}
 								}
-							]
-						});
-					}
-					mapw.show(this);
-				});
-			{-/if-}
+							},
+							{text:'{-#tclose#-}',
+								handler: function() {
+									mapw.hide();
+								}
+							}
+						]
+					});
+				}
+				mapw.show(this);
+			});
 			
 			// quicktips
 			Ext.apply(
@@ -501,523 +499,522 @@
 					}
 				});
 			} //function
-			{-if $ctl_show-}
-				function disab(field) {
-					field.disabled = true;
-					field.className = "disabled";
-				}
-				
-				function enab(field) {
-					field.disabled = false;
-					field.className = "";
-				}
-				
-				function showtip(tip) {
-					var d = $('_DIDesc');
-					d.value = tip;
-				}
-				
-				// Effects options
-				function showeff(val, x, y) {
-					if (val == ">=" || val == "<=" || val == "=" || val == "-3") {
-						$(x).style.display = 'inline';
-						if (val == "-3")
-							$(y).style.display = 'inline';
-						else
-							$(y).style.display = 'none';
-					}
-					if (val == "" || val == "0" || val == "-1" || val == "-2") {
-						$(x).style.display = 'none';
+
+			function disab(field) {
+				field.disabled = true;
+				field.className = "disabled";
+			}
+			
+			function enab(field) {
+				field.disabled = false;
+				field.className = "";
+			}
+			
+			function showtip(tip) {
+				var d = $('_DIDesc');
+				d.value = tip;
+			}
+			
+			// Effects options
+			function showeff(val, x, y) {
+				if (val == ">=" || val == "<=" || val == "=" || val == "-3") {
+					$(x).style.display = 'inline';
+					if (val == "-3")
+						$(y).style.display = 'inline';
+					else
 						$(y).style.display = 'none';
-					}
 				}
-				
-				function enadisEff(id, chk) {
-					if (chk) {
-						$('o'+ id).style.display = 'inline';
-						enab($(id +'[0]'));
-						enab($(id +'[1]'));
-						enab($(id +'[2]'));
-					} else {
-						$('o'+ id).style.display = 'none';
-						disab($(id +'[0]'));
-						disab($(id +'[1]'));
-						disab($(id +'[2]'));
-					}
+				if (val == "" || val == "0" || val == "-1" || val == "-2") {
+					$(x).style.display = 'none';
+					$(y).style.display = 'none';
 				}
-				
-				function disabAxis2() {
-					$('_G+Field2').value = "";
-					disab($('_G+Field2'));
-					disab($('_G+Scale2'));
-					disab($('_G+Data2'));
-					disab($('_G+Mode2'));
+			}
+			
+			function enadisEff(id, chk) {
+				if (chk) {
+					$('o'+ id).style.display = 'inline';
+					enab($(id +'[0]'));
+					enab($(id +'[1]'));
+					enab($(id +'[2]'));
+				} else {
+					$('o'+ id).style.display = 'none';
+					disab($(id +'[0]'));
+					disab($(id +'[1]'));
+					disab($(id +'[2]'));
 				}
-				
-				function enabAxis2() {
-					enab($('_G+Field2'));
-					enab($('_G+Scale2'));
-					enab($('_G+Data2'));
-					enab($('_G+Mode2'));
-				}
-				
-				function grpSelectbyType(fld) {
-					var grp = $(fld).value;
-					// Comparatives
-					if (grp == "D.EventId" || grp == "D.CauseId" || grp.substr(0,13) == "D.GeographyId") {
-						//disab($('_G+K_line'));
+			}
+			
+			function disabAxis2() {
+				$('_G+Field2').value = "";
+				disab($('_G+Field2'));
+				disab($('_G+Scale2'));
+				disab($('_G+Data2'));
+				disab($('_G+Mode2'));
+			}
+			
+			function enabAxis2() {
+				enab($('_G+Field2'));
+				enab($('_G+Scale2'));
+				enab($('_G+Data2'));
+				enab($('_G+Mode2'));
+			}
+			
+			function grpSelectbyType(fld) {
+				var grp = $(fld).value;
+				// Comparatives
+				if (grp == "D.EventId" || grp == "D.CauseId" || grp.substr(0,13) == "D.GeographyId") {
+					//disab($('_G+K_line'));
+					disabAxis2();
+					enab($('_G+K_pie'));
+					$('_G+Kind').value = "PIE";
+					$('_G+Period').value = "";
+					disab($('_G+Period'));
+					$('_G+Stat').value = "";
+					disab($('_G+Stat'));
+					disab($('_G+Scale'));
+					disab($('_G+M_accu'));
+					disab($('_G+M_over'));
+					enab($('_G+D_perc'));
+				} else { 
+					//enab($('_G+K_line'));
+					disab($('_G+K_pie'));
+					$('_G+Kind').value = "BAR";
+					enab($('_G+Period'));
+					enab($('_G+Stat'));
+					$('_G+Period').value = 'YEAR';
+					enab($('_G+Scale'));
+					var histt = $(fld).value;
+					if (histt.substr(19, 1) == "|") {
 						disabAxis2();
-						enab($('_G+K_pie'));
-						$('_G+Kind').value = "PIE";
-						$('_G+Period').value = "";
-						disab($('_G+Period'));
-						$('_G+Stat').value = "";
-						disab($('_G+Stat'));
-						disab($('_G+Scale'));
 						disab($('_G+M_accu'));
+						enab($('_G+M_over'));
+					} else {
+						enabAxis2();
+						enab($('_G+M_accu'));
 						disab($('_G+M_over'));
-						enab($('_G+D_perc'));
-					} else { 
-						//enab($('_G+K_line'));
-						disab($('_G+K_pie'));
-						$('_G+Kind').value = "BAR";
-						enab($('_G+Period'));
-						enab($('_G+Stat'));
-						$('_G+Period').value = 'YEAR';
-						enab($('_G+Scale'));
-						var histt = $(fld).value;
-						if (histt.substr(19, 1) == "|") {
-							disabAxis2();
-							disab($('_G+M_accu'));
-							enab($('_G+M_over'));
-						} else {
-							enabAxis2();
-							enab($('_G+M_accu'));
-							disab($('_G+M_over'));
-						}
-						disab($('_G+D_perc'));
 					}
-					if (fld == "_G+TypeH")
-						$('_G+TypeC').value = "";
-					if (fld == "_G+TypeC")
-						$('_G+TypeH').value = "";
-					$('_G+Type').value = grp;
-				} //function
-				
-				function grpSelectbyKind() {
-					comp = $('_G+TypeC').value;
-					if ($('_G+Kind').value == "BAR" || $('_G+Kind').value == "LINE" || ($('_G+Kind').value != "PIE" &&
-					   (comp == "D.EventId" || comp == "D.CauseId" || comp.substr(0,13) == "D.GeographyId"))) {
-					     enabAxis2();
-					     enab($('_G+M_accu'));
-					     disab($('_G+M_over'));
-					     enab($('_G+Scale'));
-					} else {
-						disabAxis2();
-						disab($('_G+M_accu'));
-						disab($('_G+Scale'));
-					}
-				} //function
-				
-				// forms management
-				function combineForms(dcf, ref) {
-					var dc = $(dcf);
-					var rf = $(ref).elements;
-					var ih = null;
-					for (i=0; i < rf.length; i++) {
-						if (rf[i].disabled == false) {
-							ih = document.createElement("input");
-							ih.type   = "hidden";
-							ih.value  = rf[i].value;
-							ih.name   = rf[i].name;
-							dc.appendChild(ih);
-						}
+					disab($('_G+D_perc'));
+				}
+				if (fld == "_G+TypeH")
+					$('_G+TypeC').value = "";
+				if (fld == "_G+TypeC")
+					$('_G+TypeH').value = "";
+				$('_G+Type').value = grp;
+			} //function
+			
+			function grpSelectbyKind() {
+				comp = $('_G+TypeC').value;
+				if ($('_G+Kind').value == "BAR" || $('_G+Kind').value == "LINE" || ($('_G+Kind').value != "PIE" &&
+				   (comp == "D.EventId" || comp == "D.CauseId" || comp.substr(0,13) == "D.GeographyId"))) {
+					 enabAxis2();
+					 enab($('_G+M_accu'));
+					 disab($('_G+M_over'));
+					 enab($('_G+Scale'));
+				} else {
+					disabAxis2();
+					disab($('_G+M_accu'));
+					disab($('_G+Scale'));
+				}
+			} //function
+			
+			// forms management
+			function combineForms(dcf, ref) {
+				var dc = $(dcf);
+				var rf = $(ref).elements;
+				var ih = null;
+				for (i=0; i < rf.length; i++) {
+					if (rf[i].disabled == false) {
+						ih = document.createElement("input");
+						ih.type   = "hidden";
+						ih.value  = rf[i].value;
+						ih.name   = rf[i].name;
+						dc.appendChild(ih);
 					}
 				}
-				
-				function setSelMap(code, gid, opc) {
-					if (opc) {
-						// Find and fill childs
-						$('itree-' + gid).style.display = 'block';
-						updateList('itree-' + gid, 'index.php', 'r={-$reg-}&cmd=glist&GeographyId=' + gid);
-					} else {
-						// clean childs first
-						$('itree-' + gid).innerHTML = '';
-						$('itree-' + gid).style.display = 'none';
-					}
+			}
+			
+			function setSelMap(code, gid, opc) {
+				if (opc) {
+					// Find and fill childs
+					$('itree-' + gid).style.display = 'block';
+					updateList('itree-' + gid, 'index.php', 'r={-$reg-}&cmd=glist&GeographyId=' + gid);
+				} else {
+					// clean childs first
+					$('itree-' + gid).innerHTML = '';
+					$('itree-' + gid).style.display = 'none';
 				}
-				
-				function saveRes(cmd, typ) {
-					if($('DCRes').value != '') {
-						switch ($('DCRes').value) {
-							case 'D':
-								$('_D+saveopt').value = typ;
-								sendList(cmd);
-							break;
-							case 'M':
-								sendMap(cmd);
-							break;
-							case 'G':
-								sendGraphic(cmd);
-							break;
-							case 'S':
-								$('_S+saveopt').value = typ;
-								sendStatistic(cmd);
-							break;
-						} //switch
-					}
-				} //function
-				
-				function sendList(cmd) {
-					if ($('_D+Field[]').length > 0) {
-						w = Ext.getCmp('westm');
-						s = Ext.getCmp('southm');
-						$('_D+cmd').value = cmd;
-						selectall('_D+Field[]');
-						var ob = $('_D+Field[]');
-						var mystr = "";
-						for (i=0; i < ob.length; i++) {
-							mystr += ob[i].value + ",";
-						}
-						mystr += "D.DisasterId";
-						$('_D+FieldH').value = mystr;
-						combineForms('DC', 'CD');
-						w.collapse();
-						s.collapse();
-						$('DC').action='data.php';
-						$('DC').submit();
-						//hideMap();
-						return true;
-					} else {
-						return false;
-					}
-				}
-				
-				function sendMap(cmd) {
-					if ($('_M+Type').length > 0) {
-						w = Ext.getCmp('westm');
-						s = Ext.getCmp('southm');
-						//$('frmwait').innerHTML = waiting;
-						$('_M+cmd').value = cmd;
-						if (cmd == "export") {
-							// to export image save layers and extend..
-							var mm = dcr.map;
-							var extent = mm.getExtent();
-							//extent.transform(mm.prj1, mm.prj2);
-							var layers = mm.layers;
-							var activelayers = [];
-							for (i in layers) {
-								if (layers[i].getVisibility() && layers[i].calculateInRange() && !layers[i].isBaseLayer) {
-									activelayers[activelayers.length] = layers[i].params['LAYERS'];
-								}
-							}
-							$('_M+extent').value = [extent.left,extent.bottom,extent.right,extent.top].join(',');
-							$('_M+layers').value = activelayers;
-						}
-						combineForms('DC', 'CM');
-						w.collapse(); // hide()
-						//e.collapse();
-						s.collapse();
-						$('DC').action='thematicmap.php';
-						$('DC').submit();
-						//hideMap();
-						return true;
-					} else {
-						return false;
-					}
-				} //function
-				
-				function sendGraphic(cmd) {
-					w = Ext.getCmp('westm');
-					s = Ext.getCmp('southm');
-					$('_G+cmd').value = cmd;
-					combineForms('DC', 'CG');
-					w.collapse(); //hide()
-					//e.collapse();
-					s.collapse();
-					$('DC').action='graphic.php';
-					$('DC').submit();
-					//hideMap();
-				}
-				
-				function sendStatistic(cmd) {
-					if ($('_S+Firstlev').value != "" && $('_S+Field[]').length > 0) {
-						w = Ext.getCmp('westm');
-						s = Ext.getCmp('southm');
-						$('_S+cmd').value = cmd;
-						selectall('_S+Field[]');
-						var ob = $('_S+Field[]');
-						var mystr = "D.DisasterId||";
-						for (i=0; i < ob.length; i++) 
-							mystr += "," + ob[i].value;
-						$('_S+FieldH').value = mystr;
-						combineForms('DC', 'CS');
-						w.collapse();//hide()
-						//e.collapse();
-						s.collapse();
-						$('DC').action='statistic.php';
-						$('DC').submit();
-						//hideMap();
-						return true;
-					} else {
-						return false;
-					}
-				} //function
-				
-				function saveQuery() {
-					selectall('_D+Field[]');
-					combineForms('DC', 'CD');
-					combineForms('DC', 'CM');
-					combineForms('DC', 'CG');
-					selectall('_S+Field[]');
-					combineForms('DC', 'CS');
-					$('_CMD').value='savequery';
-					$('DC').action='index.php';
-					$('DC').submit();
-					return true;
-				}
-				
-				function addRowToTable() {
-					var tbl = $('tbl_range');
-					var lastRow = tbl.rows.length;
-					// if there's no header row in the table, then iteration = lastRow + 1
-					var iteration = lastRow;
-					var row = tbl.insertRow(lastRow);
-					var cellBeg = row.insertCell(0);
-					var textNode = document.createTextNode(iteration + 1);
-					cellBeg.appendChild(textNode);
-					// left cell
-					var cellLeft = row.insertCell(1);
-					var lim = document.createElement("input");
-					lim.setAttribute('type', 'text');
-					lim.setAttribute('size', '5');
-					lim.setAttribute('class', 'line');
-					lim.setAttribute('name', '_M+limit['+ iteration +']');
-					lim.setAttribute('id', '_M+limit['+ iteration +']');
-					lim.setAttribute('onBlur', "miv=parseInt($('_M+limit["+ iteration -1+"]').value)+1; $('_M+legend["+ iteration +"]').value='{-#mbetween#-} '+ miv +' - '+ this.value;");
-					cellLeft.appendChild(lim);
-					// center cell
-					var cellCenter = row.insertCell(2);
-					var leg = document.createElement('input');
-					leg.setAttribute('type', 'text');
-					leg.setAttribute('size', '20');
-					leg.setAttribute('class', 'line');
-					leg.setAttribute('name', '_M+legend['+ iteration +']');
-					leg.setAttribute('id', '_M+legend['+ iteration +']');
-					cellCenter.appendChild(leg);
-					// right cell
-					var cellRight = row.insertCell(3);
-					var ic = document.createElement('input');
-					ic.setAttribute('type', 'text');
-					ic.setAttribute('size', '3');
-					ic.setAttribute('class', 'line');
-					ic.setAttribute('id', '_M+ic['+ iteration +']');
-					ic.setAttribute('style', 'background:#00ff00;');
-					ic.setAttribute('onClick', "showColorGrid2('_M+color["+ iteration +"]','_M+ic["+ iteration +"]');");
-					cellRight.appendChild(ic);
-					var col = document.createElement('input');
-					col.setAttribute('type', 'hidden');
-					col.setAttribute('name', '_M+color['+ iteration +']');
-					col.setAttribute('id', '_M+color['+ iteration +']');
-					col.setAttribute('value', '00ff00;');
-					cellRight.appendChild(col);
-				}
-				
-				function removeRowFromTable() {
-					var tbl = $('tbl_range');
-					var lastRow = tbl.rows.length;
-					if (lastRow > 2)
-						tbl.deleteRow(lastRow - 1);
-				}
-				
-				function setTotalize(lnow, lnext) {
-					var sour = $(lnow);
-					var dest = $(lnext);
-					// clean dest list
-					for (var i = dest.length - 1; i>=0; i--) {
-						dest.remove(i);
-					}
-					for (var i=0; i < sour.length; i++) {
-						if (!sour[i].selected) {
-							var opt = document.createElement('option');
-							opt.value = sour[i].value;
-							opt.text = sour[i].text;
-							var pto = dest.options[i];
-							try {
-								dest.add(opt, pto);
-							} catch(ex) {
-								dest.add(opt, i);
-							}
-						}
-					} //for
-				} //function
-				
-				function dechex(dec) {
-					var Char_hexadecimales = "0123456789ABCDEF";
-					var low = dec % 16;
-					var high = (dec - low)/16;
-					hex = "" + Char_hexadecimales.charAt(high) + Char_hexadecimales.charAt(low);
-					return hex;
-				}
-				
-				function hexdec(hex) {
-					return parseInt(hex,16);
-				}
-				
-				function genColors() {
-					var tbl = $('tbl_range');
-					var cnt = tbl.rows.length - 1;
-					var a = $('_M+color[0]').value;
-					var z = $('_M+color['+ cnt +']').value;
-					var a1 = hexdec(a.substring(1,3));	var z1 = hexdec(z.substring(1,3));
-					var a2 = hexdec(a.substring(3,5));	var z2 = hexdec(z.substring(3,5));
-					var a3 = hexdec(a.substring(5,7));	var z3 = hexdec(z.substring(5,7));
-					var m1 = ((z1 - a1) / cnt);
-					var m2 = ((z2 - a2) / cnt);
-					var m3 = ((z3 - a3) / cnt);
-					for (i=1; i <= cnt; i++) {
-						h1 = dechex(a1 + (m1 * i));
-						h2 = dechex(a2 + (m2 * i));
-						h3 = dechex(a3 + (m3 * i));
-						val = "#" + h1 + h2 + h3;
-						$('_M+color['+ i + ']').value = val;
-						$('_M+ic['+ i + ']').style.backgroundColor = val;
-					} //for
-				}
-				
-				function setAdvQuery(value, ope) {
-					$('CusQry').value += value + ' ';
-					switch (ope) {
-						case 'text':
-							disab($('<'));
-							disab($('>'));
-							enab($('='));  $('=').value = "= ''";
-							enab($('<>')); $('<>').value = "<> ''";
-							enab($("LIKE '%%'"));
-							disab($('=-1')); disab($('=0')); disab($('=-2'));
+			}
+			
+			function saveRes(cmd, typ) {
+				if($('DCRes').value != '') {
+					switch ($('DCRes').value) {
+						case 'D':
+							$('_D+saveopt').value = typ;
+							sendList(cmd);
 						break;
-						case 'date':
-							enab($('<')); $('<').value = "< ''";
-							enab($('>')); $('>').value = "> ''";
-							enab($('=')); $('=').value = "= ''";
-							enab($('<>')); $('<>').value = "<> ''";
-							enab($("LIKE '%%'"));
-							disab($('=-1')); disab($('=0')); disab($('=-2'));
+						case 'M':
+							sendMap(cmd);
 						break;
-						case 'number':
-							enab($('<')); $('<').value = "< ";
-							enab($('>')); $('>').value = "> ";
-							enab($('=')); $('=').value = "= ";
-							enab($('<>'));$('<>').value = "<> ";
-							disab($("LIKE '%%'"));
-							enab($('=-1')); enab($('=0')); enab($('=-2'));
+						case 'G':
+							sendGraphic(cmd);
 						break;
-						case 'boolean':
-							disab($('<'));
-							disab($('>'));
-							disab($('='));
-							disab($('<>'));
-							disab($("LIKE '%%'"));
-							enab($('=-1')); enab($('=0')); enab($('=-2'));
+						case 'S':
+							$('_S+saveopt').value = typ;
+							sendStatistic(cmd);
 						break;
 					} //switch
-				} //function
-				
-				function printRes() {
-					if (CheckIsIE() == true) {
-						document.dcr.focus();
-						document.dcr.print();
-					} else {
-						window.frames['dcr'].focus();
-						window.frames['dcr'].print();
+				}
+			} //function
+			
+			function sendList(cmd) {
+				if ($('_D+Field[]').length > 0) {
+					w = Ext.getCmp('westm');
+					s = Ext.getCmp('southm');
+					$('_D+cmd').value = cmd;
+					selectall('_D+Field[]');
+					var ob = $('_D+Field[]');
+					var mystr = "";
+					for (i=0; i < ob.length; i++) {
+						mystr += ob[i].value + ",";
 					}
+					mystr += "D.DisasterId";
+					$('_D+FieldH').value = mystr;
+					combineForms('DC', 'CD');
+					w.collapse();
+					s.collapse();
+					$('DC').action='data.php';
+					$('DC').submit();
+					//hideMap();
+					return true;
+				} else {
+					return false;
 				}
-				
-				// Find all Effects fields enable by saved query
-				window.onload = function() {
-					// select optimal height in results frame
-					//varhgt = screen.height * 360 / 600;
-					//$('dcr').style = "height:"+ hgt + "px;"
-					{-foreach name=ef1 key=k item=i from=$ef1-}
-						{-assign var="ff" value=D_$k-}
-						{-if $qd.$ff[0] != ''-}
-							enadisEff('{-$k-}', true);
-							showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
-						{-/if-}
-					{-/foreach-}
-					{-foreach name=sec key=k item=i from=$sec-}
-						{-assign var="sc" value=D_$k-}
-						{-if $qd.$sc[0] != ''-}
-							{-foreach name=sc2 key=k2 item=i2 from=$i[3]-}
-								{-assign var="ff" value=D_$k2-}
-								{-if $qd.$ff[0] != ''-}
-									enadisEff('{-$k2-}', true);
-									showeff('{-$qd.$ff[0]-}', 'x{-$k2-}', 'y{-$k2-}');
-								{-/if-}
-							{-/foreach-}
-							enadisEff('{-$k-}', true);
-						{-/if-}
-					{-/foreach-}
-					{-foreach name=ef3 key=k item=i from=$ef3-}
-						{-assign var="ff" value=D_$k-}
-						{-if $qd.$ff[0] != ''-}
-							enadisEff('{-$k-}', true);
-							showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
-						{-/if-}
-					{-/foreach-}
-					{-foreach name=geol key=k item=i from=$geol-}
-						{-if $i[3]-}
-							setSelMap('{-$i[0]-}', '{-$k-}', true);
-						{-/if-}
-					{-/foreach-}
-				} //function
-				
-				document.write('<style type="text/css">.tabber{display:none;}<\/style>');
-				
-				var tabberOptions = {
-					'onClick': function(argsObj) {
-						var t = argsObj.tabber;
-						var i = argsObj.index;
-						var div = this.tabs[i].div; /* The tab content div */
-						/* Display a loading message */
-						div.innerHTML = waiting;
-						switch (i) {
-							case 0 :
-								myAjax = new Ajax.Updater(div, 'info.php', {method:'get', parameters:'r={-$reg-}'});
-							break;
-							case 1 :
-								myAjax = new Ajax.Updater(div, 'geolevel.php', {method:'get', parameters:'r={-$reg-}'});
-							break;
-							case 2 :
-								myAjax = new Ajax.Updater(div, 'geography.php', {method:'get', parameters:'r={-$reg-}'});
-							break;
-							case 3 :
-								myAjax = new Ajax.Updater(div, 'events.php', {method:'get', parameters:'r={-$reg-}'});
-							break;
-							case 4 :
-								myAjax = new Ajax.Updater(div, 'causes.php', {method:'get', parameters:'r={-$reg-}'});
-							break;
-							case 5 :
-								myAjax = new Ajax.Updater(div, 'extraeffects.php', {method:'get', parameters:'r={-$reg-}'});
-							break;
-						} //switch
-					},
-					'onLoad': function(argsObj) {
-						/* Load the first tab */
-						argsObj.index = 0;
-						this.onClick(argsObj);
+			}
+			
+			function sendMap(cmd) {
+				if ($('_M+Type').length > 0) {
+					w = Ext.getCmp('westm');
+					s = Ext.getCmp('southm');
+					//$('frmwait').innerHTML = waiting;
+					$('_M+cmd').value = cmd;
+					if (cmd == "export") {
+						// to export image save layers and extend..
+						var mm = dcr.map;
+						var extent = mm.getExtent();
+						//extent.transform(mm.prj1, mm.prj2);
+						var layers = mm.layers;
+						var activelayers = [];
+						for (i in layers) {
+							if (layers[i].getVisibility() && layers[i].calculateInRange() && !layers[i].isBaseLayer) {
+								activelayers[activelayers.length] = layers[i].params['LAYERS'];
+							}
+						}
+						$('_M+extent').value = [extent.left,extent.bottom,extent.right,extent.top].join(',');
+						$('_M+layers').value = activelayers;
 					}
+					combineForms('DC', 'CM');
+					w.collapse(); // hide()
+					//e.collapse();
+					s.collapse();
+					$('DC').action='thematicmap.php';
+					$('DC').submit();
+					//hideMap();
+					return true;
+				} else {
+					return false;
 				}
-				
-				/* selection map functions
-				function showMap() {
-					$('smap').style.visibility = 'visible';
+			} //function
+			
+			function sendGraphic(cmd) {
+				w = Ext.getCmp('westm');
+				s = Ext.getCmp('southm');
+				$('_G+cmd').value = cmd;
+				combineForms('DC', 'CG');
+				w.collapse(); //hide()
+				//e.collapse();
+				s.collapse();
+				$('DC').action='graphic.php';
+				$('DC').submit();
+				//hideMap();
+			}
+			
+			function sendStatistic(cmd) {
+				if ($('_S+Firstlev').value != "" && $('_S+Field[]').length > 0) {
+					w = Ext.getCmp('westm');
+					s = Ext.getCmp('southm');
+					$('_S+cmd').value = cmd;
+					selectall('_S+Field[]');
+					var ob = $('_S+Field[]');
+					var mystr = "D.DisasterId||";
+					for (i=0; i < ob.length; i++) 
+						mystr += "," + ob[i].value;
+					$('_S+FieldH').value = mystr;
+					combineForms('DC', 'CS');
+					w.collapse();//hide()
+					//e.collapse();
+					s.collapse();
+					$('DC').action='statistic.php';
+					$('DC').submit();
+					//hideMap();
+					return true;
+				} else {
+					return false;
 				}
-				function hideMap() {
-					$('smap').style.visibility = 'hidden';
-				}*/
-				
-				var geotree = new CheckTree('geotree');
-				//var g{-$reg-} = new CheckTree('g{-$reg-}');
-			{-/if-}
+			} //function
+			
+			function saveQuery() {
+				selectall('_D+Field[]');
+				combineForms('DC', 'CD');
+				combineForms('DC', 'CM');
+				combineForms('DC', 'CG');
+				selectall('_S+Field[]');
+				combineForms('DC', 'CS');
+				$('_CMD').value='savequery';
+				$('DC').action='index.php';
+				$('DC').submit();
+				return true;
+			}
+			
+			function addRowToTable() {
+				var tbl = $('tbl_range');
+				var lastRow = tbl.rows.length;
+				// if there's no header row in the table, then iteration = lastRow + 1
+				var iteration = lastRow;
+				var row = tbl.insertRow(lastRow);
+				var cellBeg = row.insertCell(0);
+				var textNode = document.createTextNode(iteration + 1);
+				cellBeg.appendChild(textNode);
+				// left cell
+				var cellLeft = row.insertCell(1);
+				var lim = document.createElement("input");
+				lim.setAttribute('type', 'text');
+				lim.setAttribute('size', '5');
+				lim.setAttribute('class', 'line');
+				lim.setAttribute('name', '_M+limit['+ iteration +']');
+				lim.setAttribute('id', '_M+limit['+ iteration +']');
+				lim.setAttribute('onBlur', "miv=parseInt($('_M+limit["+ iteration -1+"]').value)+1; $('_M+legend["+ iteration +"]').value='{-#mbetween#-} '+ miv +' - '+ this.value;");
+				cellLeft.appendChild(lim);
+				// center cell
+				var cellCenter = row.insertCell(2);
+				var leg = document.createElement('input');
+				leg.setAttribute('type', 'text');
+				leg.setAttribute('size', '20');
+				leg.setAttribute('class', 'line');
+				leg.setAttribute('name', '_M+legend['+ iteration +']');
+				leg.setAttribute('id', '_M+legend['+ iteration +']');
+				cellCenter.appendChild(leg);
+				// right cell
+				var cellRight = row.insertCell(3);
+				var ic = document.createElement('input');
+				ic.setAttribute('type', 'text');
+				ic.setAttribute('size', '3');
+				ic.setAttribute('class', 'line');
+				ic.setAttribute('id', '_M+ic['+ iteration +']');
+				ic.setAttribute('style', 'background:#00ff00;');
+				ic.setAttribute('onClick', "showColorGrid2('_M+color["+ iteration +"]','_M+ic["+ iteration +"]');");
+				cellRight.appendChild(ic);
+				var col = document.createElement('input');
+				col.setAttribute('type', 'hidden');
+				col.setAttribute('name', '_M+color['+ iteration +']');
+				col.setAttribute('id', '_M+color['+ iteration +']');
+				col.setAttribute('value', '00ff00;');
+				cellRight.appendChild(col);
+			}
+			
+			function removeRowFromTable() {
+				var tbl = $('tbl_range');
+				var lastRow = tbl.rows.length;
+				if (lastRow > 2)
+					tbl.deleteRow(lastRow - 1);
+			}
+			
+			function setTotalize(lnow, lnext) {
+				var sour = $(lnow);
+				var dest = $(lnext);
+				// clean dest list
+				for (var i = dest.length - 1; i>=0; i--) {
+					dest.remove(i);
+				}
+				for (var i=0; i < sour.length; i++) {
+					if (!sour[i].selected) {
+						var opt = document.createElement('option');
+						opt.value = sour[i].value;
+						opt.text = sour[i].text;
+						var pto = dest.options[i];
+						try {
+							dest.add(opt, pto);
+						} catch(ex) {
+							dest.add(opt, i);
+						}
+					}
+				} //for
+			} //function
+			
+			function dechex(dec) {
+				var Char_hexadecimales = "0123456789ABCDEF";
+				var low = dec % 16;
+				var high = (dec - low)/16;
+				hex = "" + Char_hexadecimales.charAt(high) + Char_hexadecimales.charAt(low);
+				return hex;
+			}
+			
+			function hexdec(hex) {
+				return parseInt(hex,16);
+			}
+			
+			function genColors() {
+				var tbl = $('tbl_range');
+				var cnt = tbl.rows.length - 1;
+				var a = $('_M+color[0]').value;
+				var z = $('_M+color['+ cnt +']').value;
+				var a1 = hexdec(a.substring(1,3));	var z1 = hexdec(z.substring(1,3));
+				var a2 = hexdec(a.substring(3,5));	var z2 = hexdec(z.substring(3,5));
+				var a3 = hexdec(a.substring(5,7));	var z3 = hexdec(z.substring(5,7));
+				var m1 = ((z1 - a1) / cnt);
+				var m2 = ((z2 - a2) / cnt);
+				var m3 = ((z3 - a3) / cnt);
+				for (i=1; i <= cnt; i++) {
+					h1 = dechex(a1 + (m1 * i));
+					h2 = dechex(a2 + (m2 * i));
+					h3 = dechex(a3 + (m3 * i));
+					val = "#" + h1 + h2 + h3;
+					$('_M+color['+ i + ']').value = val;
+					$('_M+ic['+ i + ']').style.backgroundColor = val;
+				} //for
+			}
+			
+			function setAdvQuery(value, ope) {
+				$('CusQry').value += value + ' ';
+				switch (ope) {
+					case 'text':
+						disab($('<'));
+						disab($('>'));
+						enab($('='));  $('=').value = "= ''";
+						enab($('<>')); $('<>').value = "<> ''";
+						enab($("LIKE '%%'"));
+						disab($('=-1')); disab($('=0')); disab($('=-2'));
+					break;
+					case 'date':
+						enab($('<')); $('<').value = "< ''";
+						enab($('>')); $('>').value = "> ''";
+						enab($('=')); $('=').value = "= ''";
+						enab($('<>')); $('<>').value = "<> ''";
+						enab($("LIKE '%%'"));
+						disab($('=-1')); disab($('=0')); disab($('=-2'));
+					break;
+					case 'number':
+						enab($('<')); $('<').value = "< ";
+						enab($('>')); $('>').value = "> ";
+						enab($('=')); $('=').value = "= ";
+						enab($('<>'));$('<>').value = "<> ";
+						disab($("LIKE '%%'"));
+						enab($('=-1')); enab($('=0')); enab($('=-2'));
+					break;
+					case 'boolean':
+						disab($('<'));
+						disab($('>'));
+						disab($('='));
+						disab($('<>'));
+						disab($("LIKE '%%'"));
+						enab($('=-1')); enab($('=0')); enab($('=-2'));
+					break;
+				} //switch
+			} //function
+			
+			function printRes() {
+				if (CheckIsIE() == true) {
+					document.dcr.focus();
+					document.dcr.print();
+				} else {
+					window.frames['dcr'].focus();
+					window.frames['dcr'].print();
+				}
+			}
+			
+			// Find all Effects fields enable by saved query
+			window.onload = function() {
+				// select optimal height in results frame
+				//varhgt = screen.height * 360 / 600;
+				//$('dcr').style = "height:"+ hgt + "px;"
+				{-foreach name=ef1 key=k item=i from=$ef1-}
+					{-assign var="ff" value=D_$k-}
+					{-if $qd.$ff[0] != ''-}
+						enadisEff('{-$k-}', true);
+						showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
+					{-/if-}
+				{-/foreach-}
+				{-foreach name=sec key=k item=i from=$sec-}
+					{-assign var="sc" value=D_$k-}
+					{-if $qd.$sc[0] != ''-}
+						{-foreach name=sc2 key=k2 item=i2 from=$i[3]-}
+							{-assign var="ff" value=D_$k2-}
+							{-if $qd.$ff[0] != ''-}
+								enadisEff('{-$k2-}', true);
+								showeff('{-$qd.$ff[0]-}', 'x{-$k2-}', 'y{-$k2-}');
+							{-/if-}
+						{-/foreach-}
+						enadisEff('{-$k-}', true);
+					{-/if-}
+				{-/foreach-}
+				{-foreach name=ef3 key=k item=i from=$ef3-}
+					{-assign var="ff" value=D_$k-}
+					{-if $qd.$ff[0] != ''-}
+						enadisEff('{-$k-}', true);
+						showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
+					{-/if-}
+				{-/foreach-}
+				{-foreach name=geol key=k item=i from=$geol-}
+					{-if $i[3]-}
+						setSelMap('{-$i[0]-}', '{-$k-}', true);
+					{-/if-}
+				{-/foreach-}
+			} //function
+			
+			document.write('<style type="text/css">.tabber{display:none;}<\/style>');
+			
+			var tabberOptions = {
+				'onClick': function(argsObj) {
+					var t = argsObj.tabber;
+					var i = argsObj.index;
+					var div = this.tabs[i].div; /* The tab content div */
+					/* Display a loading message */
+					div.innerHTML = waiting;
+					switch (i) {
+						case 0 :
+							myAjax = new Ajax.Updater(div, 'info.php', {method:'get', parameters:'r={-$reg-}'});
+						break;
+						case 1 :
+							myAjax = new Ajax.Updater(div, 'geolevel.php', {method:'get', parameters:'r={-$reg-}'});
+						break;
+						case 2 :
+							myAjax = new Ajax.Updater(div, 'geography.php', {method:'get', parameters:'r={-$reg-}'});
+						break;
+						case 3 :
+							myAjax = new Ajax.Updater(div, 'events.php', {method:'get', parameters:'r={-$reg-}'});
+						break;
+						case 4 :
+							myAjax = new Ajax.Updater(div, 'causes.php', {method:'get', parameters:'r={-$reg-}'});
+						break;
+						case 5 :
+							myAjax = new Ajax.Updater(div, 'extraeffects.php', {method:'get', parameters:'r={-$reg-}'});
+						break;
+					} //switch
+				},
+				'onLoad': function(argsObj) {
+					/* Load the first tab */
+					argsObj.index = 0;
+					this.onClick(argsObj);
+				}
+			}
+			
+			/* selection map functions
+			function showMap() {
+				$('smap').style.visibility = 'visible';
+			}
+			function hideMap() {
+				$('smap').style.visibility = 'hidden';
+			}*/
+			
+			var geotree = new CheckTree('geotree');
+			//var g{-$reg-} = new CheckTree('g{-$reg-}');
 	</script>

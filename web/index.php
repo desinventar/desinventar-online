@@ -5,7 +5,7 @@
 */
 
 // This is the version of the software
-define('VERSION', '8.2.0.64');
+define('VERSION', '8.2.0.65');
 
 //ob_start( 'ob_gzhandler' );
 require_once('include/loader.php');
@@ -337,9 +337,6 @@ switch ($cmd) {
 					$std = array_merge($std, $us->q->queryLabelsFromGroup('Statistic', $lg));
 					$std = array_merge($std, $st);
 					$t->assign ("std", $std);
-					$t->assign ("ctl_show", true);
-					$t->assign ("ctl_qryres", true);
-					$t->assign ("ctl_qrydsg", true);
 					$t->display("index.tpl");
 				break;
 			} // switch
