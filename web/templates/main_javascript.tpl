@@ -9,11 +9,11 @@
 							$('bprint').style.visibility = 'hidden';
 						}
 					break;
-					case "musrlin":
+					case "mnuUserLogin":
 						//updateUserBar('user.php', '', '', '');
 						usrw.show();
 					break;
-					case "musrout":
+					case "mnuUserLogout":
 						userMan('logout', '');
 					break;
 					case "musrmya":
@@ -195,9 +195,9 @@
 				items: [
 					{-if $userid != ""-}
 						{id: 'musrmya', text: '{-#tconfigacc#-}', handler: onMenuItem },
-						{id: 'musrout', text: '{-#tclosesess#-}', handler: onMenuItem }, 
+						{id: 'mnuUserLogout', text: '{-#tclosesess#-}', handler: onMenuItem }, 
 					{-else-}
-						{id: 'musrlin', text: '{-#benter#-}', handler: onMenuItem }, 
+						{id: 'mnuUserLogin', text: '{-#benter#-}', handler: onMenuItem }, 
 					{-/if-}
 					'-',
 					{ text: '{-#mlang#-}',
