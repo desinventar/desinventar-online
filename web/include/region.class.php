@@ -243,7 +243,6 @@ class Region {
         $ral[$k2] = $dat;
       }
     }
-    //echo "<PRE>"; print_r($ral); echo "</PRE>";
     return $ral;
   }
 

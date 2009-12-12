@@ -82,7 +82,6 @@ class Graphic {
 				}
 				$n++;
 			}
-			//echo "<pre>"; print_r($data[$sXAxisLabel]);
 			// Complete the data series for XAxis (year,month,day)
 			if ($gType == "TEMPO" || $gType == "2TEMPO") {
 				$val = $this->completeTimeSeries($opc, $val, $q);
@@ -349,7 +348,6 @@ class Graphic {
 		$dateini = "";
 		$dateend = "";
 		// Get range of dates from Database
-		//print_r($opc);
 		$qini = $opc['D_DisasterBeginTime'];
 		$qend = $opc['D_DisasterEndTime'];
 		$ydb = $q->getDateRange();

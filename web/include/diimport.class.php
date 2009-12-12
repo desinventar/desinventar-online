@@ -69,7 +69,6 @@ class DIImport {
 								$oResult['Error'] = array();
 								$oResult['Warning'] = array();
 								$Result = $o->validateCreate($oResult);
-								print_r($oResult);
 								$Result = $o->insert();
 							} else {
 								$Result = $o->validateCreate();
