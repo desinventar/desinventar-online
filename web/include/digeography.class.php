@@ -152,7 +152,7 @@ class DIGeography extends DIObject {
 			if ($iReturn > 0) {
 				$iReturn = $this->validateNotNull(-45, 'GeographyName');
 				if ($iReturn > 0) {
-					$iReturn = $this->validateUnique(-46, 'GeographyName');
+					$iReturn = $this->validateUnique(-46, 'GeographyFQName');
 					if ($iReturn > 0) {
 						$iReturn = $this->validateNotNull(-47, 'GeographyLevel');
 						if ($iReturn > 0) {
