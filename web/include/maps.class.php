@@ -300,7 +300,6 @@ class Maps
 			$eff = 2;
 		}
 		if (!empty($dl)) {
-			//echo "<pre>". $pfx; print_r($dl);
 			foreach ($dl[$ky[$geo]] as $k=>$i) {
 				if (!isset($dl['CVReg']) || $dl['CVReg'][$k] == $pfx) {
 					$li = 0;
@@ -313,7 +312,6 @@ class Maps
 							$assigned = true;
 							$vl[$i] = array($range[$j][1], $range[$j][2], $val);
 							$range[$j][1] = "";
-							//print_r($vl[$i]);
 						}
 						else
 							$li = $ls + 1;
