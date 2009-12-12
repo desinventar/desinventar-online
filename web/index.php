@@ -34,7 +34,7 @@ switch ($cmd) {
 		$d = new Query();
 		$t->assign('lg', $lg);
 		$t->assign("lglst", $d->loadLanguages(1));
-		$listdb = $d->listDB();
+		$listdb = $us->listDB();
 		// unique database, choose than
 		if (count($listdb) == 1) {
 			$t->assign('option', "r=". key($listdb));
@@ -47,7 +47,7 @@ switch ($cmd) {
 		// Direct access returns a list of public regions on this server
 		$t->assign('lg', $lg);
 		$t->assign("lglst", $us->q->loadLanguages(1));
-		$t->assign('regionlist', $us->q->listDB());
+		$t->assign('regionlist', $us->listDB());
 		$t->assign("userid", $us->UserId);
 		$t->assign("ctl_noregion", true);
 		$t->assign("ctl_mainpage", true);
@@ -55,7 +55,7 @@ switch ($cmd) {
 	break;
 	case 'listdb':
 		// Direct access returns a list of public regions on this server
-		$t->assign('regionlist', $us->q->listDB());
+		$t->assign('regionlist', $us->listDB());
 		$t->display('showlistdb.tpl');
 	break;
 	case 'searchdb':
