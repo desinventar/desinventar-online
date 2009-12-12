@@ -494,6 +494,29 @@ class UserSession {
 	public function chkPasswd ($passwd) {
 		return true;
 	}
+
+	public function listDB() {
+		$RegionList = array();
+		$query = "SELECT R.RegionId AS RegionId, R.RegionLabel AS RegionLabel, R.CountryIso AS CountryIso, R.RegionStatus AS RegionStatus, ".
+			"RA.AuthAuxValue AS Role FROM Region AS R, RegionAuth AS RA WHERE R.RegionId = RA.RegionId ";
+		/*
+		if ($searchByCountry) {
+			$query .= " AND R.CountryIso = '" . $prmQuery . "'";
+		}
+		*/
+		if ($this->UserId) {
+			$query .= " AND RA.AuthKey = 'ROLE' AND RA.UserId = '". $this->UserId ."'";
+		} else {
+			$query .= " AND R.RegionStatus = 3 GROUP BY R.RegionId";
+		}
+		$query .= " ORDER BY R.CountryIso, R.RegionLabel, R.RegionOrder";
+		$result = $this->q->core->query($query);
+		while ($row = $result->fetch(PDO::FETCH_OBJ)) {
+			$RegionList[$row->RegionId] = array($row->RegionLabel, $row->CountryIso, $row->RegionStatus, $row->Role);
+		}
+		return $RegionList;
+	}
+
 	
 } //class
 
