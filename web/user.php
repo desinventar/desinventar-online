@@ -40,26 +40,26 @@ function form2user($val) {
 
 $cmd = getParameter('cmd','');
 fb($cmd);
+fb($us->UserId);
 switch ($_GET['cmd']) {
-	// LOGIN: CONTROL USER ACCESS
 	case "login":
+		// LOGIN: CONTROL USER ACCESS
 		if ($us->login($_GET['userid'], $_GET['password']) > 0) {
-			$u = new DIUser($us, $us->UserId);
 			echo "OK";	// Login success
-			exit();
+		} else {
+			echo "ERROR";
 		}
 	break;
-	// RELOGIN: Previous session exists, reconnect to the same session
 	case "relogin":
+		// RELOGIN: Previous session exists, reconnect to the same session
 		$t->assign ("user", $us->UserId);
 		$t->assign ("ctl_logged", true);    // Success: User is logged
 		$t->display("user.tpl");
 	break;
-	// LOGOUT : Logut current user and show the login panel again
 	case "logout":
+		// LOGOUT : Logut current user and show the login panel again
 		$us->logout();
 		echo "OK";
-		exit();
 	break;
 	case "passlost":
 		// PASSLOST: Allows to recover a user's password by sending 
@@ -207,7 +207,6 @@ switch ($_GET['cmd']) {
 		$t->display("user.tpl");
 	break;
 	default:
-		fb('default user');
 		// View login window
 		if (checkAnonSess() || $us->UserId == '') {
 			$t->display("user_login.tpl");
