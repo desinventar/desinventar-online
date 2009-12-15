@@ -38,18 +38,9 @@ function form2user($val) {
 	return $dat;
 }
 
-cmd = getParameter('cmd','');
-
+$cmd = getParameter('cmd','');
+fb($cmd);
 switch ($_GET['cmd']) {
-	// ANONYMOUS LOGIN
-	case "":
-		if ($us->UserId == "")
-			$t->assign("ctl_login", true);
-		else {
-			$t->assign("ctl_logged", true);
-			$t->assign("user", $us->UserId);
-		}
-	break;
 	// LOGIN: CONTROL USER ACCESS
 	case "login":
 		if ($us->login($_GET['userid'], $_GET['password']) > 0) {
@@ -62,6 +53,7 @@ switch ($_GET['cmd']) {
 	case "relogin":
 		$t->assign ("user", $us->UserId);
 		$t->assign ("ctl_logged", true);    // Success: User is logged
+		$t->display("user.tpl");
 	break;
 	// LOGOUT : Logut current user and show the login panel again
 	case "logout":
@@ -80,6 +72,7 @@ switch ($_GET['cmd']) {
 		}
 		else
 			$t->assign ("ctl_passlost", true);
+		$t->display("user.tpl");
 	break;
 	// WELCOME: Shows default window when user's login was sucessfull
 	case "welcome":
@@ -128,6 +121,7 @@ switch ($_GET['cmd']) {
 			// Error logging user, send to password lost form
 			$t->assign ("ctl_passlost", true);
 		}
+		$t->display("user.tpl");
 	break; // end WELCOME
 	case "adminusr":
 		// USERADMIN: Register new user form, only for AdminPortal
@@ -135,11 +129,13 @@ switch ($_GET['cmd']) {
 		$t->assign ("ctl_adminusr", true);
 		$t->assign ("usrpa", $us->getUserInfo(''));
 		$t->assign ("ctl_usrlist", true);
+		$t->display("user.tpl");
 	break;
 	case "viewpref":
 		// PREFERENCES: View User Account Options
 		$t->assign ("ctl_viewpref", true);
 		$t->assign ("usri", form2user($us->getUserInfo($us->UserId)));
+		$t->display("user.tpl");
 	break;
 	case "chklogin":
 		// USERADMIN: check if UserId exists...
@@ -147,6 +143,7 @@ switch ($_GET['cmd']) {
 		if ($us->existUser($_GET['userid'])) {
 			$t->assign ("clogin", true);
 		}
+		$t->display("user.tpl");
 	break;
 	case "chkpasswd":
 		// Check if password is correct (ask to dicore). if is OK show dialog to change it.
@@ -157,6 +154,7 @@ switch ($_GET['cmd']) {
 			$t->assign ("ctl_msgupdate", true);
 			$t->assign ("errbadpass", true);
 		}
+		$t->display("user.tpl");
 	break;
 	case "insert":
 		// USERADMIN: insert new user
@@ -175,6 +173,7 @@ switch ($_GET['cmd']) {
 			$t->assign ("noerrorins", true);
 		else
 			$t->assign ("errinsuser", true);
+		$t->display("user.tpl");
 	break;
 	// USERADMIN: update selected user..
 	case "update":
@@ -199,19 +198,25 @@ switch ($_GET['cmd']) {
 		}
 		else
 			$t->assign ("errbadpass", true);
+		$t->display("user.tpl");
 	break;
 	case "list":
 		// USERADMIN: reload list..
 		$t->assign ("usrpa", $us->getUserInfo(''));
 		$t->assign ("ctl_usrlist", true);
+		$t->display("user.tpl");
 	break;
 	default:
+		fb('default user');
 		// View login window
-		if (checkAnonSess())
-			$t->assign ("ctl_login", true);
+		if (checkAnonSess() || $us->UserId == '') {
+			$t->display("user_login.tpl");
+		} else {
+			$t->assign("ctl_logged", true);
+			$t->assign("user", $us->UserId);
+			$t->display("user.tpl");
+		}
 	break;
 } // end share session
-
-$t->display ("user.tpl");
 
 </script>
