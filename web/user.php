@@ -65,14 +65,14 @@ switch ($_GET['cmd']) {
 		// PASSLOST: Allows to recover a user's password by sending 
 		// an e-mail with the login information
 		if (isset($_GET['opt']) && ($_GET['opt']) == "sendnewpass") {
-			if ($us->sendPasswdReminder($_GET['UserEMail']) != '')
-				$t->assign ("ctl_msgsend", true);
-			else
-				$t->assign ("ctl_errsend", true);
+			if ($us->sendPasswdReminder($_GET['UserEMail']) != '') {
+				$t->display('user_msgsend.tpl');
+			} else {
+				$t->display('user_errsend.tpl');
+			}
+		} else {
+			$t->display('user_passwdreminder.tpl');
 		}
-		else
-			$t->assign ("ctl_passlost", true);
-		$t->display("user.tpl");
 	break;
 	// WELCOME: Shows default window when user's login was sucessfull
 	case "welcome":
@@ -116,12 +116,11 @@ switch ($_GET['cmd']) {
 			$t->assign ("rusr", $rusr);//empty($rusr) ? false : $rusr);
 			$t->assign ("rsup", $rsup);//empty($rsup) ? false : $rsup);
 			$t->assign ("robs", $robs);//empty($robs) ? false : $robs);
-		}
-		else {
+			$t->display("user.tpl");
+		} else {
 			// Error logging user, send to password lost form
-			$t->assign ("ctl_passlost", true);
+			$t->display('user_passwdreminder.tpl');
 		}
-		$t->display("user.tpl");
 	break; // end WELCOME
 	case "adminusr":
 		// USERADMIN: Register new user form, only for AdminPortal
@@ -209,7 +208,7 @@ switch ($_GET['cmd']) {
 	default:
 		// View login window
 		if (checkAnonSess() || $us->UserId == '') {
-			$t->display("user_login.tpl");
+			$t->display('user_login.tpl');
 		} else {
 			$t->assign("ctl_logged", true);
 			$t->assign("user", $us->UserId);
