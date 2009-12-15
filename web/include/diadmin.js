@@ -326,8 +326,9 @@
 				break;
 			}
 		}
-		if (!status)
+		if (status == false) {
 			alert(errmsg);
+		}
 		return status;
 	}
 
