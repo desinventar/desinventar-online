@@ -42,7 +42,12 @@ function onReadyUserAdmin() {
 	// Submit - Finish edit, validate form and send data...
 	jQuery("#btnUserEditSubmit").click(function() {
 		bReturn = validateUserEditForm();
-		jQuery.post('user.php', jQuery("#frmUserEdit").serializeObject());
+		if (bReturn) {
+			jQuery.post('user.php', jQuery("#frmUserEdit").serializeObject(), function() {
+				clearUserEditForm();
+				jQuery("#divUserEdit").hide();
+			});
+		}
 		return false;
 	});
 };

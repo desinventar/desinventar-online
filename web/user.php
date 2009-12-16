@@ -163,64 +163,59 @@ switch ($cmd) {
 		$t->display("user.tpl");
 	break;
 	case "insert":
-		// USERADMIN: insert new user
-		$data = form2user($_GET);
-		$t->assign ("ctl_msginsert", true);
-		$t->assign ("UserId", $data['UserId']);
-		// Create user if login not exists
-		if ($us->existUser($data['UserId'])) {
-			$ret = $us->insertUser($data['UserId'], $data['UserFullName'], $data['UserEMail'], 
-				  $data['UserPasswd'], $data['UserCountry'], $data['UserCity'], $data['UserActive']);
-		}
-		else
-			$ret = ERR_OBJECT_EXISTS;
-		$t->assign ("insstat", $ret);
-		if (!iserror($ret))
-			$t->assign ("noerrorins", true);
-		else
-			$t->assign ("errinsuser", true);
-		$t->display("user.tpl");
-	break;
-	// USERADMIN: update selected user..
-	case 'update':
+		$bReturn = ERR_NO_ERROR;
 		fb($us->UserId);
 		// This function is valid only for ADMINPORTAL User (root)
 		$Role = $us->getUserRole('');
-		if ($Role == 'ADMINPORTAL') {
+		if ($Role != 'ADMINPORTAL') {
+			$bReturn = ERR_UNKNOWN_ERROR;
+		}
+		
+		if ($bReturn) {
 			$data = $_POST['User'];
 			$UserId = $data['UserId'];
-			if ($UserId != '') {
-				$u = new DIUser($us, $UserId);
-				// Do not change passwd here !!
-				unset($data['UserPasswd']);
-				$u->setFromArray($data);
-				$u->update();
-			}
 		}
-		/*
-		$data = form2user($_GET);
-		$t->assign ("ctl_msgupdate", true);
-		$t->assign ("UserId", $data['UserId']);
-		// check passwd first or adminportal admited
-		$rol1 = $us->getUserRole('');
-		if ((isset($_GET['UserPasswd']) && $us->chkPasswd($_GET['UserPasswd'])) || ($rol1 == "ADMINPORTAL")) {
-			// if password match, please update..
-			if ($data['NUserPasswd'] == $data['NUserPasswd2']) {
-				$ret = $us->updateUser($data['UserId'], $data['UserFullName'], $data['UserEMail'], 
-				 $data['UserPasswd'], $data['UserCountry'], $data['UserCity'], $data['UserActive']);
-				$t->assign ("updstat", $ret);
-				if (!iserror($ret))
-					$t->assign ("noerrorupd", true);
-				else
-					$t->assign ("errupduser", true);
-			}
-			else
-				$t->assign ("errnomatch", true);
+		
+		if ($UserId == '') {
+			$bReturn = ERR_UNKNOWN_ERROR;
 		}
-		else
-			$t->assign ("errbadpass", true);
-		$t->display("user.tpl");
-		*/
+		
+		if ($bReturn) {
+			$u = new DIUser($us, $UserId);
+			// set a Default passwd for new users...
+			$data['UserPasswd'] = md5('di8welcome');
+			$u->setFromArray($data);
+			$bReturn = $u->insert();
+		}
+		print json_encode($bReturn);
+	break;
+	// USERADMIN: update selected user..
+	case 'update':
+		$bReturn = ERR_NO_ERROR;
+		fb($us->UserId);
+		// This function is valid only for ADMINPORTAL User (root)
+		$Role = $us->getUserRole('');
+		if ($Role != 'ADMINPORTAL') {
+			$bReturn = ERR_UNKNOWN_ERROR;
+		}
+		
+		if ($bReturn) {
+			$data = $_POST['User'];
+			$UserId = $data['UserId'];
+		}
+		
+		if ($UserId == '') {
+			$bReturn = ERR_UNKNOWN_ERROR;
+		}
+		
+		if ($bReturn) {
+			$u = new DIUser($us, $UserId);
+			// Do not change passwd here !!
+			unset($data['UserPasswd']);
+			$u->setFromArray($data);
+			$bReturn = $u->update();
+		}
+		print json_encode($bReturn);
 	break;
 	case "list":
 		// USERADMIN: reload list..
