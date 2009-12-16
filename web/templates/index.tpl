@@ -18,6 +18,7 @@
 	<script type="text/javascript" src="include/wd.js"></script>
 	<script type="text/javascript" src="include/accordion.js"></script>
 	<script type="text/javascript" src="include/palette.js"></script>
+	<script type="text/javascript" src="js/jquery.snippets.js"></script>
 	<script type="text/javascript" src="js/useradmin.js"></script>
 	<!-- ExtJS -->
 	<link rel="stylesheet" type="text/css" href="/extJS/resources/css/ext-all.css"/>
