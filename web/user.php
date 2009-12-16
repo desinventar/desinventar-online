@@ -128,7 +128,7 @@ switch ($_GET['cmd']) {
 		$t->assign ("ctl_adminusr", true);
 		$t->assign ("usrpa", $us->getUserInfo(''));
 		$t->assign ("ctl_usrlist", true);
-		$t->display("user.tpl");
+		$t->display("useradmin.tpl");
 	break;
 	case "viewpref":
 		// PREFERENCES: View User Account Options

@@ -115,6 +115,7 @@
 					break;
 					case "musradm":
 						updateList('dbl', 'user.php', 'cmd=adminusr');
+						onReadyUserAdmin();
 						dblw.show();
 					break;
 					case "mdbsadm":
