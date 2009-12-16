@@ -221,7 +221,7 @@ switch ($cmd) {
 		// USERADMIN: reload list..
 		$t->assign ("usrpa", $us->getUserInfo(''));
 		$t->assign ("ctl_usrlist", true);
-		$t->display("user.tpl");
+		$t->display("userlist.tpl");
 	break;
 	default:
 		// View login window
