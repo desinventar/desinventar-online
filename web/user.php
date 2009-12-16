@@ -40,7 +40,6 @@ function form2user($val) {
 
 $cmd = getParameter('cmd','');
 fb($cmd);
-fb($us->UserId);
 switch ($_GET['cmd']) {
 	case "login":
 		// LOGIN: CONTROL USER ACCESS
@@ -122,6 +121,14 @@ switch ($_GET['cmd']) {
 			$t->display('user_passwdreminder.tpl');
 		}
 	break; // end WELCOME
+	case 'getUserInfo':
+		$user = null;
+		$UserId = getParameter('UserId', '');
+		if ($UserId != '') {
+			$user = new DIUser($us, $UserId);
+			print json_encode($user->oField['info']);
+		}
+	break;
 	case "adminusr":
 		// USERADMIN: Register new user form, only for AdminPortal
 		$t->assign ("cnt", $us->q->getCountryList());

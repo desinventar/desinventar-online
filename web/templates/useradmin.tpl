@@ -3,6 +3,7 @@
 
 <link rel="stylesheet" href="css/desinventar.css" type="text/css">
 {-include file="jquery.tpl" -}
+<script type="text/javascript" src="js/jquery.snippets.js"></script>
 <script type="text/javascript" src="js/useradmin.js"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function() {
@@ -24,10 +25,11 @@
 		<tbody id="lst_userpa">
 			{-foreach name=upa key=key item=item from=$usrpa-}
 				<tr>
-					<td>{-$key-}</td>
+					<td id="UserId">{-$key-}</td>
 					<td>{-$item[2]-}</td>
 					<td>{-$item[0]-}</td>
 					<td><input type="checkbox" {-if ($item[8] == 1) -} checked{-/if-} disabled /></td>
+					<td>
 				</tr>
 			{-/foreach-}
 		</tbody>
@@ -39,23 +41,21 @@
 	<br />
 </div> {-* divUserList *-}
 <div id="divUserEdit" style="display:block">
-	<form id="frmUserEdit" name="userpafrm" method="GET" 
-		action="javascript:var s=$('userpafrm').serialize(); sendData('','user.php', s, '');"
-		onSubmit="javascript:var a=new Array('UserId', 'UserEMail', 'UserFullName'); return(checkForm(a, '{-#errmsgfrmregist#-}'));">
+	<form id="frmUserEdit" name="userpafrm">
 		<table class="grid">
 			<tr>
 				<td><b style="color:darkred;">{-#tuser#-}</b>
 				</td>
 				<td>
-					<input type="text" id="UserId" name="UserId" size="15" maxlength="15" class="line"
-						onBlur="updateList('chklogin', 'user.php', 'cmd=chklogin&UserId='+ $('UserId').value);" />
+					<input type="text" id="txtUserId" name="User[UserId]" size="15" maxlength="15" class="line" />
+					{-* onBlur="updateList('chklogin', 'user.php', 'cmd=chklogin&UserId='+ $('UserId').value);" *-}
 					<span id="chklogin" style="display:inline"></span>
-					<input type="hidden" id="UserPasswd" name="UserPasswd" value="" />
+					<input type="hidden" id="txtUserPasswd" name="User[UserPasswd]" value="" />
 				</td>
 			</tr>
 			<tr>
 				<td>{-#tcountry#-}</td>
-				<td><select id="UserCountry" name="UserCountry">
+				<td><select id="selUserCountry" name="User[UserCountry]">
 						<option value=""></option>
 						{-foreach name=cnt key=key item=item from=$cnt-}
 							<option value="{-$key-}">{-$item-}</option>
@@ -66,13 +66,13 @@
 			<tr>
 				<td><b style="color:darkred;">{-#tname#-}</b></td>
 				<td>
-					<input type="text" id="UserFullName" name="UserFullName" size="40" maxlength="40" class="line" />
+					<input type="text" id="txtUserFullName" name="User[UserFullName]" size="40" maxlength="40" class="line" />
 				</td>
 			</tr>
 			<tr>
 				<td><b style="color:darkred;">{-#temail#-}</b>
 				</td>
-				<td><input type="text" id="UserEMail" name="UserEMail" size="50" maxlength="50" class="line" />
+				<td><input type="text" id="txtUserEMail" name="User[UserEMail]" size="50" maxlength="50" class="line" />
 				</td>
 			</tr>
 			<tr>
@@ -80,7 +80,7 @@
 					{-#tcity#-}
 				</td>
 				<td>
-					<input type="text" id="UserCity" name="UserCity" size="20" maxlength="20" class="line" />
+					<input type="text" id="txtUserCity" name="User[UserCity]" size="20" maxlength="50" class="line" />
 				</td>
 			</tr>
 			<tr>
@@ -88,12 +88,12 @@
 					<b>{-#tactive#-}</b>
 				</td>
 				<td>
-					<input id="UserActive" name="UserActive" type="checkbox" />
+					<input id="chkUserActive" name="User[UserActive]" type="checkbox" />
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<input type="hidden" id="cmd" name="cmd" />
+					<input type="hidden" id="txtUserEditCmd" name="cmd" />
 					<input type="submit" id="btnUserEditSubmit" value="{-#bsave#-}" class="line" />
 					<input type="reset"  id="btnUserEditCancel" value="{-#bcancel#-}" class="line" />
 				</td>

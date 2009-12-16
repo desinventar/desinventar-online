@@ -1,5 +1,7 @@
 
 function onReadyUserAdmin() {
+	// Start with Edit form hidden
+	jQuery("#divUserEdit").hide();
 	// Create table stripes
 	jQuery("#tblUserList tr:odd").addClass("normal");
 	jQuery("#tblUserList tr:even").addClass("under");
@@ -12,23 +14,61 @@ function onReadyUserAdmin() {
 	});
 	// When selecting a row, start editing data...
 	jQuery("#tblUserList tr").click(function() {
+		UserId = jQuery(this).children("td:first").html();
+		jQuery.getJSON('user.php' + '?cmd=getUserInfo&UserId=' + UserId, function(data) {
+			jQuery("#txtUserId").val(data.UserId);
+			jQuery("#selUserCountry").val(data.CountryIso);
+			jQuery("#txtUserEMail").val(data.UserEMail);
+			jQuery("#txtUserFullName").val(data.UserFullName);
+			jQuery("#txtUserCity").val(data.UserCity);
+			jQuery("#chkUserActive").attr('checked', data.UserActive);
+			jQuery("#txtUserEditCmd").val('update');
+		});
 		jQuery("#divUserEdit").show();
 	});
+
 	// Add new User...
 	jQuery("#btnUserAdd").click(function() {
+		clearUserEditForm();
+		jQuery("#txtUserEditCmd").val('insert');
 		jQuery("#divUserEdit").show();
-		//onclick="setUserPA('','','','','','','1'); $('cmd').value='insert'; $('UserPasswd').disabled=true;"
 	});
-	// Finish edit, validate form and send data...
-	jQuery("#btnUserEditSubmit").click(function() {
-		alert('submit');
-	});
+
+	// Cancel Edit, hide form
 	jQuery("#btnUserEditCancel").click(function() {
 		jQuery("#divUserEdit").hide();
-		//onClick="$('userpaaddsect').style.display='none'; uploadMsg('');"
+	});
+
+	// Submit - Finish edit, validate form and send data...
+	jQuery("#btnUserEditSubmit").click(function() {
+		bReturn = validateUserEditForm();
+		jQuery.post('user.php', jQuery("#frmUserEdit").serializeObject());
+		return false;
 	});
 };
 
+
+function validateUserEditForm() {
+	bReturn = true;
+	jQuery(".error").hide();
+	UserId = jQuery("#txtUserId").val();
+	if (UserId == '') {
+		jQuery("#txtUserId").after('<span class="error">Cannot be empty</span>');
+		//bReturn = false;
+	}
+	/*
+		action="javascript:var s=$('userpafrm').serialize(); sendData('','user.php', s, '');"
+		onSubmit="javascript:var a=new Array('UserId', 'UserEMail', 'UserFullName'); return(checkForm(a, '{-#errmsgfrmregist#-}'));"> 
+	*/
+	return bReturn;		
+}
+
 function clearUserEditForm() {
+	jQuery("#txtUserId").val('');
+	jQuery("#selUserCountry").val('');
+	jQuery("#txtUserEMail").val('');
+	jQuery("#txtUserFullName").val('');
+	jQuery("#txtUserCity").val('');
+	jQuery("#chkUserActive").attr('checked', '');
 };
 
