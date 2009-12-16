@@ -22,7 +22,7 @@
 	<b>{-#tadminperms#-}: </b><br />
 	<ul class="">
 		<li><a href="javascript:void(null)" onclick="updateList('pagecontent', 'region.php', 'cmd=adminreg');">{-#tadminregs#-}</a></li>
-		<li><a href="javascript:void(null)" onclick="updateList('pagecontent', 'user.php', 'cmd=adminusr');">{-#tadminusrs#-}</a></li>
+		<li><a href="javascript:void(null)" onclick="updateList('pagecontent', 'user.php', 'cmd=adminusr');onReadyUserAdmin();">{-#tadminusrs#-}</a></li>
 	</ul>
 	<br /><hr /><br />
  {-/if-}
