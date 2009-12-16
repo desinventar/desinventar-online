@@ -12,10 +12,13 @@ function onReadyUserAdmin() {
 	jQuery("#tblUserList tr").mouseout(function() {
 		jQuery(this).removeClass('highlight');
 	});
+	jQuery("#txtUserId").removeAttr('readonly');
+	
 	// When selecting a row, start editing data...
 	jQuery("#tblUserList tr").click(function() {
 		UserId = jQuery(this).children("td:first").html();
 		jQuery.getJSON('user.php' + '?cmd=getUserInfo&UserId=' + UserId, function(data) {
+			jQuery("#txtUserId").attr('readonly','true');
 			jQuery("#txtUserId").val(data.UserId);
 			jQuery("#selCountryIso").val(data.CountryIso);
 			jQuery("#txtUserEMail").val(data.UserEMail);
@@ -43,15 +46,17 @@ function onReadyUserAdmin() {
 	jQuery("#btnUserEditSubmit").click(function() {
 		bReturn = validateUserEditForm();
 		if (bReturn) {
+			// Remove the readonly attribute, this way the data is send to processing
+			jQuery("#txtUserId").removeAttr('readonly');
 			jQuery.post('user.php', jQuery("#frmUserEdit").serializeObject(), function() {
-				clearUserEditForm();
-				jQuery("#divUserEdit").hide();
+				jQuery("#divUserList").load('user.php' + '?cmd=list', function() {
+					onReadyUserAdmin();
+				});
 			});
 		}
 		return false;
 	});
 };
-
 
 function validateUserEditForm() {
 	bReturn = true;
