@@ -10,7 +10,7 @@
 		}
 	}
 	
-	function updateList(div, url, pars) {
+	function updateList(div, url, pars, callback) {
 		var lsAjax = new Ajax.Updater( div, url, {
 			method: 'get', parameters: pars,
 			onLoading: function(request) {

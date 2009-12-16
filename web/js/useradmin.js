@@ -9,6 +9,6 @@ function onReadyUserAdmin() {
 		jQuery(this).removeClass('highlight');
 	});
 	jQuery("#userListTable tr").click(function() {
-		//alert('click on row');
+		alert('click on row');
 	});
 };
