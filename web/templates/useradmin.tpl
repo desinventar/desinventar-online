@@ -9,38 +9,39 @@
 		onReadyUserAdmin();
 	});	
 </script>
-<h2>{-#tuserprefer#-}</h2>
-<br />
-<table id="userListTable" width="550px;" height="180px" class="col dwin">
-<thead>
-	<tr>
-		<th class="header"><b>{-#tuser#-}</b></th>
-		<th class="header"><b>{-#tname#-}</b></th>
-		<th class="header"><b>{-#temail#-}</b></th>
-		<th class="header"><b>{-#tactive#-}</b></th>
-	</tr>
-	</thead>
-	<tbody id="lst_userpa">
-		{-foreach name=upa key=key item=item from=$usrpa-}
-			<tr>
-				<td>{-$key-}</td>
-				<td>{-$item[2]-}</td>
-				<td>{-$item[0]-}</td>
-				<td><input type="checkbox" {-if ($item[8] == 1) -} checked{-/if-} disabled /></td>
-			</tr>
-		{-/foreach-}
-	</tbody>
-</table>
-<br />
-<input id="add" type="button" value="{-#baddoption#-}" class="line"
-	onclick="setUserPA('','','','','','','1'); $('cmd').value='insert'; $('UserPasswd').disabled=true;" />
-<span id="userpastatusmsg" class="dlgmsg"></span>
-<br /><br />
-<div id="userpaaddsect" style="display:none">
-	<form id="userpafrm" name="userpafrm" method="GET" 
+<div id="divUserList">
+	<h2>{-#tuserprefer#-}</h2>
+	<br />
+	<table id="tblUserList" width="550px;" height="180px" class="col dwin">
+	<thead>
+		<tr>
+			<th class="header"><b>{-#tuser#-}</b></th>
+			<th class="header"><b>{-#tname#-}</b></th>
+			<th class="header"><b>{-#temail#-}</b></th>
+			<th class="header"><b>{-#tactive#-}</b></th>
+		</tr>
+		</thead>
+		<tbody id="lst_userpa">
+			{-foreach name=upa key=key item=item from=$usrpa-}
+				<tr>
+					<td>{-$key-}</td>
+					<td>{-$item[2]-}</td>
+					<td>{-$item[0]-}</td>
+					<td><input type="checkbox" {-if ($item[8] == 1) -} checked{-/if-} disabled /></td>
+				</tr>
+			{-/foreach-}
+		</tbody>
+	</table>
+	<br />
+	<input id="btnUserAdd" type="button" value="{-#baddoption#-}" class="line" />
+	<span id="userpastatusmsg" class="dlgmsg"></span>
+	<br />
+	<br />
+</div> {-* divUserList *-}
+<div id="divUserEdit" style="display:block">
+	<form id="frmUserEdit" name="userpafrm" method="GET" 
 		action="javascript:var s=$('userpafrm').serialize(); sendData('','user.php', s, '');"
-		onSubmit="javascript:var a=new Array('UserId', 'UserEMail', 'UserFullName'
-				{-if $ctl_viewpref-}, 'UserPasswd'{-/if-}); return(checkForm(a, '{-#errmsgfrmregist#-}'));">
+		onSubmit="javascript:var a=new Array('UserId', 'UserEMail', 'UserFullName'); return(checkForm(a, '{-#errmsgfrmregist#-}'));">
 		<table class="grid">
 			<tr>
 				<td><b style="color:darkred;">{-#tuser#-}</b>
@@ -93,10 +94,10 @@
 			<tr>
 				<td colspan="2" align="center">
 					<input type="hidden" id="cmd" name="cmd" />
-					<input type="submit" value="{-#bsave#-}" class="line" />
-					<input type="reset" value="{-#bcancel#-}" class="line" onClick="$('userpaaddsect').style.display='none'; uploadMsg('');" />
+					<input type="submit" id="btnUserEditSubmit" value="{-#bsave#-}" class="line" />
+					<input type="reset"  id="btnUserEditCancel" value="{-#bcancel#-}" class="line" />
 				</td>
 			</tr>
 		</table>
 	</form>
-</div>
+</div> {-* divUserEdit *-}
