@@ -3,6 +3,7 @@
 
 <link rel="stylesheet" href="css/desinventar.css" type="text/css">
 {-include file="jquery.tpl" -}
+<script type="text/javascript" src="js/md5.js"></script>
 <script type="text/javascript" src="js/jquery.snippets.js"></script>
 <script type="text/javascript" src="js/useradmin.js"></script>
 <script type="text/javascript">
