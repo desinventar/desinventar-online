@@ -17,7 +17,7 @@ class DIUser extends DIObject {
 		                      "UserCity/STRING," .
 		                      "UserCreationDate/DATETIME," .
 		                      "UserNotes/STRING," .
-		                      "UserActive/INTEGER";
+		                      "UserActive/BOOLEAN";
 		parent::__construct($prmSession);
 		$num_args = func_num_args();
 		$this->setConnection("core");
@@ -36,16 +36,6 @@ class DIUser extends DIObject {
 		return $query;
 	}
 
-	public function set($prmKey, $prmValue) {
-		$iReturn = ERR_DEFAULT_ERROR;
-		// 2009-07-27 (jhcaiced) Encrypt passwords using md5...
-		if ($prmKey == 'UserPasswd') {
-			$prmValue = md5($prmValue);
-		}
-		$iReturn = parent::set($prmKey, $prmValue);
-		return $iReturn;
-	}
-	
 } //class
 
 </script>

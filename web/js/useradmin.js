@@ -17,7 +17,7 @@ function onReadyUserAdmin() {
 		UserId = jQuery(this).children("td:first").html();
 		jQuery.getJSON('user.php' + '?cmd=getUserInfo&UserId=' + UserId, function(data) {
 			jQuery("#txtUserId").val(data.UserId);
-			jQuery("#selUserCountry").val(data.CountryIso);
+			jQuery("#selCountryIso").val(data.CountryIso);
 			jQuery("#txtUserEMail").val(data.UserEMail);
 			jQuery("#txtUserFullName").val(data.UserFullName);
 			jQuery("#txtUserCity").val(data.UserCity);
@@ -65,7 +65,7 @@ function validateUserEditForm() {
 
 function clearUserEditForm() {
 	jQuery("#txtUserId").val('');
-	jQuery("#selUserCountry").val('');
+	jQuery("#selCountryIso").val('');
 	jQuery("#txtUserEMail").val('');
 	jQuery("#txtUserFullName").val('');
 	jQuery("#txtUserCity").val('');
