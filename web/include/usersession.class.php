@@ -226,10 +226,10 @@ class UserSession {
 	function getUserRoleList() {
 		$myData = array();
 		$sQuery = "SELECT RegionAuth.*,Region.RegionLabel FROM RegionAuth,Region WHERE " .
-		  " (RegionAuth.RegionId = Region.RegionId) " .
-		  " AND (UserId='" . $this->UserId . "') " .
-		  " AND AuthKey='ROLE'" . 
-		  " ORDER BY RegionAuth.RegionId";
+			" (RegionAuth.RegionId = Region.RegionId) " .
+			" AND (UserId='" . $this->UserId . "') " .
+			" AND AuthKey='ROLE'" . 
+			" ORDER BY RegionAuth.RegionId";
 		if ($result = $this->q->core->query($sQuery) ) {
 			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 				$sKey = $row->RegionId;
@@ -301,11 +301,15 @@ class UserSession {
 	// Return Role for a Region
 	function getUserRole($prmRegionId) {
 		$myAnswer = "";
-		$sQuery = "SELECT * FROM RegionAuth WHERE " .
-		  "     ((RegionId='') OR (RegionId='" . $prmRegionId . "')) " .
-		  " AND (UserId='" . $this->UserId . "') " .
-		  " AND AuthKey='ROLE'" . 
-		  " ORDER BY UserId,RegionId";
+		$sQuery = "SELECT * FROM RegionAuth WHERE ";
+		if ($prmRegionId != '') {
+			$sQuery .= "((RegionId='') OR (RegionId='" . $prmRegionId . "'))";
+		} else {
+			$sQuery .= "(RegionId='')";
+		}
+		$sQuery .= " AND (UserId='" . $this->UserId . "') " .
+		           " AND AuthKey='ROLE'" . 
+		           " ORDER BY UserId,RegionId";
 		if ($result = $this->q->core->query($sQuery) ) {
 			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 				$myAnswer = $row->AuthAuxValue;

@@ -40,7 +40,7 @@ function form2user($val) {
 
 $cmd = getParameter('cmd','');
 fb($cmd);
-switch ($_GET['cmd']) {
+switch ($cmd) {
 	case "login":
 		// LOGIN: CONTROL USER ACCESS
 		if ($us->login($_GET['userid'], $_GET['password']) > 0) {
@@ -182,7 +182,22 @@ switch ($_GET['cmd']) {
 		$t->display("user.tpl");
 	break;
 	// USERADMIN: update selected user..
-	case "update":
+	case 'update':
+		fb($us->UserId);
+		// This function is valid only for ADMINPORTAL User (root)
+		$Role = $us->getUserRole('');
+		if ($Role == 'ADMINPORTAL') {
+			$data = $_POST['User'];
+			$UserId = $data['UserId'];
+			if ($UserId != '') {
+				$u = new DIUser($us, $UserId);
+				// Do not change passwd here !!
+				unset($data['UserPasswd']);
+				$u->setFromArray($data);
+				$u->update();
+			}
+		}
+		/*
 		$data = form2user($_GET);
 		$t->assign ("ctl_msgupdate", true);
 		$t->assign ("UserId", $data['UserId']);
@@ -205,6 +220,7 @@ switch ($_GET['cmd']) {
 		else
 			$t->assign ("errbadpass", true);
 		$t->display("user.tpl");
+		*/
 	break;
 	case "list":
 		// USERADMIN: reload list..

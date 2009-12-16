@@ -72,7 +72,7 @@ class DIObject {
 			if ($sFieldType == "DATE")     { $obj[$sFieldName] = gmdate('Y-m-d'); }
 			if ($sFieldType == "INTEGER")  { $obj[$sFieldName] = 0;           }
 			if ($sFieldType == "DOUBLE")   { $obj[$sFieldName] = 0.0;         }
-			if ($sFieldType == "BOOLEAN")  { $obj[$sFieldName] = true;        }
+			if ($sFieldType == "BOOLEAN")  { $obj[$sFieldName] = 1;           }
 		}
 	} // function
 	

@@ -55,7 +55,7 @@
 			</tr>
 			<tr>
 				<td>{-#tcountry#-}</td>
-				<td><select id="selUserCountry" name="User[UserCountry]">
+				<td><select id="selCountryIso" name="User[CountryIso]">
 						<option value=""></option>
 						{-foreach name=cnt key=key item=item from=$cnt-}
 							<option value="{-$key-}">{-$item-}</option>
