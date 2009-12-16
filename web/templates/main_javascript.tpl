@@ -114,8 +114,8 @@
 						dblw.show();
 					break;
 					case "musradm":
-						updateList('dbl', 'user.php', 'cmd=adminusr');
-						onReadyUserAdmin();
+						//updateList('dbl', 'user.php', 'cmd=adminusr', 'onReadyUserAdmin');
+						jQuery("#dbl").load('user.php?cmd=adminusr',function() { onReadyUserAdmin(); });
 						dblw.show();
 					break;
 					case "mdbsadm":
