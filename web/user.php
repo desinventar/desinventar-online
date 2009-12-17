@@ -191,7 +191,7 @@ switch ($cmd) {
 			                 'Message' => 'New User Created');
 		} else {
 			$oReturn = array('Status'  => $bReturn,
-			                 'Message' => 'Error creating user'),
+			                 'Message' => 'Error creating user');
 		}
 		print json_encode($oReturn);
 	break;
@@ -226,7 +226,7 @@ switch ($cmd) {
 			                 'Message' => 'User information updated');
 		} else {
 			$oReturn = array('Status'  => $bReturn,
-			                 'Message' => 'Error updating user information'),
+			                 'Message' => 'Error updating user information');
 		}
 		print json_encode($oReturn);
 	break;
