@@ -68,6 +68,25 @@ function onReadyUserAdmin() {
 		}
 		return false;
 	});
+	
+	/*
+	jQuery("#txtUserId").keyup(function() {
+		if (this.value != this.lastValue) {
+			if (this.timer) { clearTimeout(this.timer);
+			}
+			this.timer = setTimeout(function() {
+				jQuery.ajax({
+					url      : 'user.php',
+					dataType : 'json',
+					type     : 'post',
+					success  : function(j) {
+					}
+				});
+			}, 200);
+			this.lastValue = this.value;
+		}
+	});
+	*/
 };
 
 function validateUserEditForm() {
