@@ -185,7 +185,15 @@ switch ($cmd) {
 			$u->setFromArray($data);
 			$bReturn = $u->insert();
 		}
-		print json_encode($bReturn);
+		header('Content-type: text/json');
+		if ($bReturn > 0) {
+			$oReturn = array('Status'  => $bReturn, 
+			                 'Message' => 'New User Created');
+		} else {
+			$oReturn = array('Status'  => $bReturn,
+			                 'Message' => 'Error creating user'),
+		}
+		print json_encode($oReturn);
 	break;
 	// USERADMIN: update selected user..
 	case 'update':
@@ -213,8 +221,14 @@ switch ($cmd) {
 			$bReturn = $u->update();
 		}
 		header('Content-type: text/json');
-		print json_encode(array('Status' => $bReturn, 
-		                        'Message' => 'User information updated'));
+		if ($bReturn > 0) {
+			$oReturn = array('Status'  => $bReturn, 
+			                 'Message' => 'User information updated');
+		} else {
+			$oReturn = array('Status'  => $bReturn,
+			                 'Message' => 'Error updating user information'),
+		}
+		print json_encode($oReturn);
 	break;
 	case "list":
 		// USERADMIN: reload list..
