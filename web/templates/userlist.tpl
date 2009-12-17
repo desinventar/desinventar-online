@@ -22,8 +22,3 @@
 		{-/foreach-}
 	</tbody>
 </table>
-<br />
-<input id="btnUserAdd" type="button" value="{-#baddoption#-}" class="line" />
-<span id="userpastatusmsg" class="dlgmsg"></span>
-<br />
-<br />

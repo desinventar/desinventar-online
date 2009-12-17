@@ -39,7 +39,6 @@ function form2user($val) {
 }
 
 $cmd = getParameter('cmd','');
-fb($cmd);
 switch ($cmd) {
 	case "login":
 		// LOGIN: CONTROL USER ACCESS
@@ -162,9 +161,8 @@ switch ($cmd) {
 		}
 		$t->display("user.tpl");
 	break;
-	case "insert":
+	case 'insert':
 		$bReturn = ERR_NO_ERROR;
-		fb($us->UserId);
 		// This function is valid only for ADMINPORTAL User (root)
 		$Role = $us->getUserRole('');
 		if ($Role != 'ADMINPORTAL') {
@@ -192,7 +190,6 @@ switch ($cmd) {
 	// USERADMIN: update selected user..
 	case 'update':
 		$bReturn = ERR_NO_ERROR;
-		fb($us->UserId);
 		// This function is valid only for ADMINPORTAL User (root)
 		$Role = $us->getUserRole('');
 		if ($Role != 'ADMINPORTAL') {
@@ -215,7 +212,9 @@ switch ($cmd) {
 			$u->setFromArray($data);
 			$bReturn = $u->update();
 		}
-		print json_encode($bReturn);
+		header('Content-type: text/json');
+		print json_encode(array('Status' => $bReturn, 
+		                        'Message' => 'User information updated'));
 	break;
 	case "list":
 		// USERADMIN: reload list..

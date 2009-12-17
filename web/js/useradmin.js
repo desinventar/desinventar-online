@@ -44,18 +44,23 @@ function onReadyUserAdmin() {
 
 	// Submit - Finish edit, validate form and send data...
 	jQuery("#btnUserEditSubmit").click(function() {
+		// validate Form
 		var bReturn = validateUserEditForm();
 		if (bReturn) {
-			// Remove the readonly attribute, this way the data is send to processing
+			// Remove the readonly attribute, this way the data is sent to processing
 			jQuery("#txtUserId").removeAttr('readonly');
+			// Create an object with the information to send
 			var user = jQuery("#frmUserEdit").serializeObject();
 			// Checkboxes not selected are not passed by default to server, so we need
 			// to checkout and set a value here.
 			if (! jQuery("#chkUserActive").attr('checked')) {
 				user['User[UserActive]'] = 'off';
 			}
-			jQuery.post('user.php', user, function() {
-				jQuery("#divUserList").load('user.php' + '?cmd=list', function() {
+			// Send AJAX request to update information
+			jQuery.post('user.php', user, function(data) {
+				jQuery("#lblUserStatusMsg").text(data[1]);
+				// Reload user list on success
+				jQuery("#divUserList").load('user.php' + '?cmd=list', function(data) {
 					onReadyUserAdmin();
 				});
 			});
