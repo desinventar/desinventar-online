@@ -13,6 +13,13 @@
 <div id="divUserList">
 	{-include file="userlist.tpl" -}
 </div> {-* divUserList *-}
+<div id="divUserStatus">
+	<br />
+	<input id="btnUserAdd" type="button" value="{-#baddoption#-}" class="line" />
+	<br />
+	<span id="lblUserStatusMsg" class="dlgmsg"></span>
+	<br />
+</div>
 <div id="divUserEdit" style="display:block">
 	<form id="frmUserEdit" name="userpafrm">
 		<table class="grid">
