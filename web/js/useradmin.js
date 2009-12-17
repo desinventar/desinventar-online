@@ -16,7 +16,7 @@ function onReadyUserAdmin() {
 	
 	// When selecting a row, start editing data...
 	jQuery("#tblUserList tr").click(function() {
-		UserId = jQuery(this).children("td:first").html();
+		var UserId = jQuery(this).children("td:first").html();
 		jQuery.getJSON('user.php' + '?cmd=getUserInfo&UserId=' + UserId, function(data) {
 			jQuery("#txtUserId").attr('readonly','true');
 			jQuery("#txtUserId").val(data.UserId);
@@ -44,7 +44,7 @@ function onReadyUserAdmin() {
 
 	// Submit - Finish edit, validate form and send data...
 	jQuery("#btnUserEditSubmit").click(function() {
-		bReturn = validateUserEditForm();
+		var bReturn = validateUserEditForm();
 		if (bReturn) {
 			// Remove the readonly attribute, this way the data is send to processing
 			jQuery("#txtUserId").removeAttr('readonly');
@@ -59,9 +59,9 @@ function onReadyUserAdmin() {
 };
 
 function validateUserEditForm() {
-	bReturn = true;
+	var bReturn = true;
 	jQuery(".error").hide();
-	UserId = jQuery("#txtUserId").val();
+	var UserId = jQuery("#txtUserId").val();
 	if (UserId == '') {
 		jQuery("#txtUserId").after('<span class="error">Cannot be empty</span>');
 		//bReturn = false;
