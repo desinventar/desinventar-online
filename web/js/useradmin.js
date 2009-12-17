@@ -48,7 +48,13 @@ function onReadyUserAdmin() {
 		if (bReturn) {
 			// Remove the readonly attribute, this way the data is send to processing
 			jQuery("#txtUserId").removeAttr('readonly');
-			jQuery.post('user.php', jQuery("#frmUserEdit").serializeObject(), function() {
+			var user = jQuery("#frmUserEdit").serializeObject();
+			// Checkboxes not selected are not passed by default to server, so we need
+			// to checkout and set a value here.
+			if (! jQuery("#chkUserActive").attr('checked')) {
+				user['User[UserActive]'] = 'off';
+			}
+			jQuery.post('user.php', user, function() {
 				jQuery("#divUserList").load('user.php' + '?cmd=list', function() {
 					onReadyUserAdmin();
 				});
