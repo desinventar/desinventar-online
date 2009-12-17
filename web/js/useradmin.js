@@ -58,7 +58,8 @@ function onReadyUserAdmin() {
 			}
 			// Send AJAX request to update information
 			jQuery.post('user.php', user, function(data) {
-				jQuery("#lblUserStatusMsg").text(data[1]);
+				eval('var myObj = ' + data);
+				jQuery("#lblUserStatusMsg").text(myObj.Message);
 				// Reload user list on success
 				jQuery("#divUserList").load('user.php' + '?cmd=list', function(data) {
 					onReadyUserAdmin();
