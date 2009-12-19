@@ -37,7 +37,6 @@ class DIEvent extends DIObject {
 		$sQuery = "SELECT * FROM Event " .
 		  " WHERE (EventName LIKE '" . $prmEventName . "' OR " .
 		  "        EventKeyWords LIKE '%" . $prmEventName . ";%')";
-		fb($sQuery);
 		foreach($session->q->dreg->query($sQuery) as $row) {
 			$EventId = $row['EventId'];
 		} // foreach

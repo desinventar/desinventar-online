@@ -12,6 +12,7 @@
 
 $_SERVER["DI8_WEB"] = '../web';
 require_once('../web/include/loader.php');
+require_once(BASE . '/include/diregion.class.php');
 require_once(BASE . '/include/didisaster.class.php');
 require_once(BASE . '/include/dieedata.class.php');
 require_once(BASE . '/include/digeography.class.php');
@@ -22,9 +23,15 @@ $RegionId = 'COL-1250694506-colombia_inventario_historico_de_desastres';
 $us->login('diadmin','di8');
 $us->open($RegionId);
 
+$r = new DIRegion($us, $RegionId);
+$r->copyEvents('spa');
+$r->copyCauses('spa');
+
+$line = 1;
 while (! feof(STDIN) ) {
 	$a = fgetcsv(STDIN, 1000, ',');
 	if (count($a) > 1) {
+		fb('Line : ' . $line);
 		$DisasterBeginTime = strToISO8601($a[0]);
 		if ($DisasterBeginTime != '') {
 			$d = new DIDisaster($us);
@@ -34,13 +41,9 @@ while (! feof(STDIN) ) {
 			
 			// 1 - GeographyName (Departamento)
 			// 2 - GeographyName (Municipio)
-			$g = DIGeography::loadByName($us, $a[1], '');
-			$GeographyId = $g->get('GeographyId');
+			$GeographyId = DIGeography::getIdByName($us, $a[1], '');
 			if ($GeographyId != '') {
-				$g = DIGeography::loadByName($us, $a[2], $GeographyId);
-				if ($g->get('GeographyId') != '') {
-					$GeographyId = $g->get('GeographyId');
-				}
+				$GeographyId = DIGeography::getIdByName($us, $a[2], $GeographyId);
 			}
 			$d->set('GeographyId', $GeographyId);
 			
@@ -55,6 +58,7 @@ while (! feof(STDIN) ) {
 			$d->set('EventId', $EventId);
 		}
 	}
+	$line++;
 } //while
 
 $us->close();
