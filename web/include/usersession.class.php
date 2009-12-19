@@ -408,7 +408,12 @@ class UserSession {
 	} // function
 	
 	public function existUser($prmUserId) {
-		return true;
+		$Answer = false;
+		$Query = "SELECT UserId FROM User WHERE UserId='" . $prmUserId . "'";
+		foreach ($this->q->core->query($Query) as $row) {
+			$Answer = true;
+		}
+		return $Answer;
 	}
 	
 	public function insertUser($UserId, $UserFullName, $UserEMail, $UserPasswd, $UserCountry, $UserCity, $UserActive) {
