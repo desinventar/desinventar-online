@@ -29,35 +29,26 @@ class DICause extends DIObject {
 		if ($num_args >= 2) {
 			$prmCauseId = func_get_arg(1);
 			$this->set('CauseId', $prmCauseId);
-			if ($num_args >= 3) {
-				$prmCauseName = func_get_arg(1);
-				$prmCauseDesc = func_get_arg(2);				
-				$this->set('CauseName', $prmCauseName);
-				$this->set('CauseDesc', $prmCauseDesc);
-				$this->getIdByName($this->get('CauseName'));
-			}
 			$this->load();
 		}
 	}
 	
-	public function getIdByName($prmCauseName) {
+	public static function getIdByName($us, $prmCauseName) {
 		$CauseId = '';
-		$sQuery = "SELECT * FROM " . $this->getTableName() .
-		  " WHERE LangIsoCode='" . $this->get('LangIsoCode') . "'" . 
-		  " AND (CauseName LIKE '" . $prmCauseName . "'" . 
-		  "      OR CauseKeyWords LIKE '" . $prmCauseName . ";')";
-		foreach($this->q->dreg->query($sQuery) as $row) {
+		$sQuery = "SELECT * FROM Cause " .
+		  " WHERE (CauseName LIKE '" . $prmCauseName . "' OR " . 
+		  "        CauseKeyWords LIKE '%" . $prmCauseName . ";%')";
+		foreach($us->q->dreg->query($sQuery) as $row) {
 			$CauseId = $row['CauseId'];
-			$this->set('CauseId', $CauseId);
 		} //foreach
-		
-		if ($CauseId != '') {
-			$this->load();
-		} else {
-			$CauseId = $prmCauseName;
-		}
 		return $CauseId;
 	} // function
+	
+	public static function loadByName($us, $prmCauseName) {
+		$CauseId = self::getIdByName($us, $prmCauseName);
+		$c = new self($us, $prmCauseName);
+		return $c;
+	} //function
 	
 	public function getDeleteQuery() {
 		$sQuery = "UPDATE " . $this->getTableName() . " SET CauseActive=0" .
@@ -112,7 +103,7 @@ class DICause extends DIObject {
 		$iReturn = $oReturn['Status'];
 		if ($iReturn > 0) {
 			$this->set('CauseName',  $values[1]);
-			$this->getIdByName($this->get('CauseName'));
+			$CauseId = self::getIdByName($this->session, $this->get('CauseName'));
 			if ( (count($oReturn['Error']) > 0) || (count($oReturn['Warning']) > 0) ) {
 				$iReturn = ERR_UNKNOWN_ERROR;
 			}

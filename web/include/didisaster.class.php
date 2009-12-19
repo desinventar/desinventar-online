@@ -266,8 +266,8 @@ class DIDisaster extends DIObject {
 		$e = new DIEvent($this->session);
 		$this->set('EventId', $e->getIdByName($this->get('EventId')));
 		
-		$c = new DICause($this->session);
-		$this->set('CauseId', $c->getIdByName($this->get('CauseId')));
+		$CauseId = $this->get('CauseId');
+		$this->set('CauseId', DICause::getIdByName($this->session, $CauseIdddd));
 		
 		//2009-07-25 Save fechapor/fechafec in EffectNotes
 		$this->set('EffectNotes', 
