@@ -263,11 +263,11 @@ class DIDisaster extends DIObject {
 		$DisasterGeographyCode = $this->get('GeographyId');
 		$this->set('GeographyId', $g->getIdByCode($DisasterGeographyCode));
 		
-		$e = new DIEvent($this->session);
-		$this->set('EventId', $e->getIdByName($this->get('EventId')));
+		$EventId = $this->get('EventId');
+		$this->set('EventId', DIEvent::getIdByName($this->session, $EventId));
 		
 		$CauseId = $this->get('CauseId');
-		$this->set('CauseId', DICause::getIdByName($this->session, $CauseIdddd));
+		$this->set('CauseId', DICause::getIdByName($this->session, $CauseId));
 		
 		//2009-07-25 Save fechapor/fechafec in EffectNotes
 		$this->set('EffectNotes', 

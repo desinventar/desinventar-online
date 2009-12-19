@@ -33,20 +33,20 @@ class DICause extends DIObject {
 		}
 	}
 	
-	public static function getIdByName($us, $prmCauseName) {
+	public static function getIdByName($session, $prmCauseName) {
 		$CauseId = '';
 		$sQuery = "SELECT * FROM Cause " .
 		  " WHERE (CauseName LIKE '" . $prmCauseName . "' OR " . 
 		  "        CauseKeyWords LIKE '%" . $prmCauseName . ";%')";
-		foreach($us->q->dreg->query($sQuery) as $row) {
+		foreach($session->q->dreg->query($sQuery) as $row) {
 			$CauseId = $row['CauseId'];
 		} //foreach
 		return $CauseId;
 	} // function
 	
-	public static function loadByName($us, $prmCauseName) {
-		$CauseId = self::getIdByName($us, $prmCauseName);
-		$c = new self($us, $prmCauseName);
+	public static function loadByName($session, $prmCauseName) {
+		$CauseId = self::getIdByName($session, $prmCauseName);
+		$c = new self($session, $prmCauseName);
 		return $c;
 	} //function
 	
