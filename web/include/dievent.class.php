@@ -28,34 +28,27 @@ class DIEvent extends DIObject {
 		if ($num_args >= 2) {
 			$prmEventId = func_get_arg(1);
 			$this->set('EventId', $prmEventId);
-			if ($num_args >= 3) {
-				$prmEventName = func_get_arg(1);
-				$prmEventDesc = func_get_arg(2);
-				$this->getIdByName($this->get('EventName'));
-				$this->set('EventName', $prmEventName);
-				$this->set('EventDesc', $prmEventDesc);
-			}
 			$this->load();
 		}
 	} // __construct
 	
-	public function getIdByName($prmEventName) {
+	public static function getIdByName($session, $prmEventName) {
 		$EventId = '';
-		$sQuery = "SELECT * FROM " . $this->getTableName() .
-		  " WHERE LangIsoCode = '" . $this->get('LangIsoCode') . "'" . 
-		  " AND (EventName LIKE '" . $prmEventName . "'" .
-		  "      OR EventKeyWords LIKE '" . $prmEventName . ";')";
-		foreach($this->q->dreg->query($sQuery) as $row) {
+		$sQuery = "SELECT * FROM Event " .
+		  " WHERE (EventName LIKE '" . $prmEventName . "' OR " .
+		  "        EventKeyWords LIKE '%" . $prmEventName . ";%')";
+		fb($sQuery);
+		foreach($session->q->dreg->query($sQuery) as $row) {
 			$EventId = $row['EventId'];
-			$this->set('EventId' , $EventId);
 		} // foreach
-		if ($EventId != '') {
-			$this->load();
-		} else {
-			$EventId = $prmEventName;
-		}
 		return $EventId;
 	} // function
+
+	public static function loadByName($session, $prmEventName) {
+		$EventId = self::getIdByName($session, $prmEventName);
+		$e = new self($session, $prmEventName);
+		return $e;
+	} //function
 	
 	public function getDeleteQuery() {
 		$sQuery = "UPDATE " . $this->getTableName() . " SET EventActive=0" .
@@ -111,7 +104,7 @@ class DIEvent extends DIObject {
 		if ($iReturn > 0) {
 			$this->set('EventName',  $values[1]);
 			$this->set('EventDesc',  $values[2]);
-			$this->getIdByName($this->get('EventName'));
+			$this->set('EventId', self::getIdByName($this->session, $this->get('EventName')));
 			if ( (count($oReturn['Error']) > 0) || (count($oReturn['Warning']) > 0) ) {
 				$iReturn = ERR_UNKNOWN_ERROR;
 			}

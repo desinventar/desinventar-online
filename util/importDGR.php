@@ -16,6 +16,7 @@ require_once(BASE . '/include/didisaster.class.php');
 require_once(BASE . '/include/dieedata.class.php');
 require_once(BASE . '/include/digeography.class.php');
 require_once(BASE . '/include/dicause.class.php');
+require_once(BASE . '/include/dievent.class.php');
 
 $RegionId = 'COL-1250694506-colombia_inventario_historico_de_desastres';
 $us->login('diadmin','di8');
@@ -48,7 +49,10 @@ while (! feof(STDIN) ) {
 			if ($CauseName == 'No especificado') { $CauseName = 'Otra causa'; }
 			$CauseId = DICause::getIdByName($us, $CauseName);
 			$d->set('CauseId', $CauseId);
-			//print $d->getInsertQuery() . "\n";
+			
+			$EventName = $a[4];
+			$EventId = DIEvent::getIdByName($us, $EventName);
+			$d->set('EventId', $EventId);
 		}
 	}
 } //while
