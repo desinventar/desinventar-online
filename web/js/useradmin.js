@@ -33,6 +33,7 @@ function onReadyUserAdmin() {
 	// Add new User...
 	jQuery("#btnUserAdd").click(function() {
 		clearUserEditForm();
+		jQuery("#txtUserId").removeAttr('readonly');
 		jQuery("#txtUserEditCmd").val('insert');
 		jQuery("#divUserEdit").show();
 	});
@@ -69,24 +70,24 @@ function onReadyUserAdmin() {
 		return false;
 	});
 	
-	/*
 	jQuery("#txtUserId").keyup(function() {
 		if (this.value != this.lastValue) {
+			var t = this;
 			if (this.timer) { clearTimeout(this.timer);
 			}
 			this.timer = setTimeout(function() {
 				jQuery.ajax({
 					url      : 'user.php',
-					dataType : 'json',
+					data     : 'cmd=chklogin&UserId=' + t.value,
 					type     : 'post',
-					success  : function(j) {
+					success  : function(data) {
+						jQuery("#lblUserStatusMsg").text(data);
 					}
 				});
-			}, 200);
+			}, 400);
 			this.lastValue = this.value;
 		}
 	});
-	*/
 };
 
 function validateUserEditForm() {

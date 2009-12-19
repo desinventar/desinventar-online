@@ -142,13 +142,14 @@ switch ($cmd) {
 		$t->assign ("usri", form2user($us->getUserInfo($us->UserId)));
 		$t->display("user.tpl");
 	break;
-	case "chklogin":
+	case 'chklogin':
+		$UserId = getParameter('UserId');
 		// USERADMIN: check if UserId exists...
-		$t->assign ("ctl_chklogin", true);
-		if ($us->existUser($_GET['userid'])) {
-			$t->assign ("clogin", true);
+		$Answer = 'NO';
+		if ($us->existUser($UserId)) {
+			$Answer = 'YES';
 		}
-		$t->display("user.tpl");
+		print $Answer;
 	break;
 	case "chkpasswd":
 		// Check if password is correct (ask to dicore). if is OK show dialog to change it.
