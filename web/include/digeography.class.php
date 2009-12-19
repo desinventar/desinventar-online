@@ -50,6 +50,21 @@ class DIGeography extends DIObject {
 		$g = new self($prmSession, $GeographyId);
 		return $g;
 	}
+	
+	public static function loadByName($prmSession, $prmGeographyName, $prmParentId) {
+		$Geographyid = '';
+		$LangIsoCode = $prmSession->q->getDBInfoValue('LangIsoCode');
+		$Query= "SELECT * FROM Geography WHERE GeographyName='" . $prmGeographyName . "' " . 
+		        " AND LangIsoCode='" . $LangIsoCode . "'";
+		if ($prmParentId != '') {
+			$Query .= " AND GeographyId LIKE '" . $prmParentId . "%'";
+		}
+		foreach($prmSession->q->dreg->query($Query) as $row) {
+			$GeographyId = $row['GeographyId'];
+		}
+		$g = new self($prmSession, $GeographyId);
+		return $g;
+	}
 
 	public function buildGeographyId($prmMyParentId) {
 		$iGeographyLevel = strlen($prmMyParentId)/5;
