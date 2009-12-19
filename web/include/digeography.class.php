@@ -51,17 +51,23 @@ class DIGeography extends DIObject {
 		return $g;
 	}
 	
-	public static function loadByName($prmSession, $prmGeographyName, $prmParentId) {
-		$Geographyid = '';
+	public static function getIdByName($prmSession, $prmGeographyName, $prmParentId) {
+		$GeographyId = '';
 		$LangIsoCode = $prmSession->q->getDBInfoValue('LangIsoCode');
 		$Query= "SELECT * FROM Geography WHERE GeographyName='" . $prmGeographyName . "' " . 
 		        " AND LangIsoCode='" . $LangIsoCode . "'";
 		if ($prmParentId != '') {
 			$Query .= " AND GeographyId LIKE '" . $prmParentId . "%'";
 		}
+		$Query .= ' ORDER BY GeographyLevel DESC';
 		foreach($prmSession->q->dreg->query($Query) as $row) {
 			$GeographyId = $row['GeographyId'];
 		}
+		return $GeographyId;
+	}
+	
+	public static function loadByName($prmSession, $prmGeographyName, $prmParentId) {
+		$GeographyId = self::getIdByName($prmSession, $prmGeographyName, $prmParentId);
 		$g = new self($prmSession, $GeographyId);
 		return $g;
 	}
