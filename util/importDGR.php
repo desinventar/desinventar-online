@@ -4,7 +4,7 @@
   DesInventar - http://www.desinventar.org
   (c) 1998-2009 Corporacion OSSO
   
-  2009-12-18 Jhon H. Caicedo <jhcaiced@desinventar.org>
+  2009-12-21 Jhon H. Caicedo <jhcaiced@desinventar.org>
   
   Import data from DGR (Direccion de Gestion del Riesgo) 
   SIGPAD - Colombia
@@ -31,19 +31,29 @@ $line = 1;
 while (! feof(STDIN) ) {
 	$a = fgetcsv(STDIN, 1000, ',');
 	if (count($a) > 1) {
-		fb('Line : ' . $line);
+		for($i = 0; $i<count($a); $i++) {
+			$a[$i] = trim($a[$i]);
+		}
 		$DisasterBeginTime = strToISO8601($a[0]);
 		if ($DisasterBeginTime != '') {
 			$d = new DIDisaster($us);
+			
+			$DisasterSerial = substr($DisasterBeginTime, 0, 4);
+			$DisasterSerial .= '-0001';
+			$d->set('DisasterSerial', $DisasterSerial);
+			
+			$d->set('DisasterSource', 'DGR');
 			
 			// 0 - DisasterBeginTime
 			$d->set('DisasterBeginTime', $DisasterBeginTime);
 			
 			// 1 - GeographyName (Departamento)
+			$Dpto = $a[1];
+			$Mpio = $a[2];
 			// 2 - GeographyName (Municipio)
-			$GeographyId = DIGeography::getIdByName($us, $a[1], '');
+			$GeographyId = DIGeography::getIdByName($us, $Dpto, '');
 			if ($GeographyId != '') {
-				$GeographyId = DIGeography::getIdByName($us, $a[2], $GeographyId);
+				$GeographyId = DIGeography::getIdByName($us, $Mpio, $GeographyId);
 			}
 			$d->set('GeographyId', $GeographyId);
 			
@@ -64,6 +74,53 @@ while (! feof(STDIN) ) {
 			$d->set('EffectPeopleInjured', valueToDIField($a[6]));
 			// 7 - EffectPeopleMissing
 			$d->set('EffectPeopleMissing', valueToDIField($a[7]));
+			// 8
+			$d->set('EffectPeopleAffected', valueToDIField($a[8]));
+			// 10
+			$d->set('EffectHousesDestroyed', valueToDIField($a[10]));
+			// 11 - 28
+			$d->set('EffectHousesAffected', valueToDIField($a[11]));
+			// 12
+			$d->set('EffectRoads', valueToDIField($a[12]));
+			// 15
+			$d->set('SectorWaterSupply', valueToDIField($a[15]));
+			// 16
+			$d->set('SectorSewerage', valueToDIField($a[16]));
+			// 17
+			$d->set('EffectMedicalCenters', valueToDIField($a[17]));
+			// 18
+			$d->set('EffectEducationCenters', valueToDIField($a[18]));
+			// 20
+			$d->set('EffectFarmingAndForest', valueToDIField($a[20]));
+			// 21
+			$d->set('SectorAgricultural', valueToDIField($a[21]));
+			// 22
+			$d->set('SectorIndustry', valueToDIField($a[22]));
+			// 23
+			$d->set('SectorPower', valueToDIField($a[23]));
+			// 24
+			$d->set('SectorEducation', valueToDIField($a[24]));
+			// 26
+			$d->set('SectorTransport', valueToDIField($a[26]));
+			// 27
+			$d->set('SectorCommunications', valueToDIField($a[27]));
+			// 30
+			$d->set('EffectPeopleEvacuated', valueToDIField($a[30]));
+			// 31
+			$d->set('EffectOtherLosses', $a[31]);
+			
+			// Extended Fields
+			//  9 -
+			// 13 -
+			// 14 -
+			// 19 -
+			$v = $d->validateUpdate();
+			if ($v < 0) {
+				//fb('Line : ' . $line . ' ' . $v);
+				if ($v == -58) {
+					print $line . ',' . $a[1] . ',' . $a[2] . "\n";
+				}
+			}
 		}
 	}
 	$line++;
