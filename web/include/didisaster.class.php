@@ -77,6 +77,7 @@ class DIDisaster extends DIObject {
 		$this->set("EventPredefined", 0);
 		$this->set("EventActive", 1);
 		$this->set('DisasterId', uuid());
+		$this->set('RecordStatus', 'PUBLISHED');
 
 		$num_args = func_num_args();
 		if ($num_args >= 2) {
