@@ -53,7 +53,12 @@ while (! feof(STDIN) ) {
 			// 2 - GeographyName (Municipio)
 			$GeographyId = DIGeography::getIdByName($us, $Dpto, '');
 			if ($GeographyId != '') {
-				$GeographyId = DIGeography::getIdByName($us, $Mpio, $GeographyId);
+				if ($Mpio != '') {
+					$GeographyId2 = DIGeography::getIdByName($us, $Mpio, $GeographyId);
+					if ($GeographyId2 != '') {
+						$GeographyId = $GeographyId2;
+					}
+				}
 			}
 			$d->set('GeographyId', $GeographyId);
 			
