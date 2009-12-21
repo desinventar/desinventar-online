@@ -53,9 +53,17 @@ while (! feof(STDIN) ) {
 			$CauseId = DICause::getIdByName($us, $CauseName);
 			$d->set('CauseId', $CauseId);
 			
+			// 4 - Event
 			$EventName = $a[4];
 			$EventId = DIEvent::getIdByName($us, $EventName);
 			$d->set('EventId', $EventId);
+			
+			// 5 - EffectPeopleDead
+			$d->set('EffectPeopleDead', valueToDIField($a[5]));
+			// 6 - EffectPeopleInjured
+			$d->set('EffectPeopleInjured', valueToDIField($a[6]));
+			// 7 - EffectPeopleMissing
+			$d->set('EffectPeopleMissing', valueToDIField($a[7]));
 		}
 	}
 	$line++;
@@ -65,6 +73,20 @@ $us->close();
 $us->logout();
 exit();
 
+function valueToDIField($prmValue) {
+	$Value = 0;
+	if (is_numeric($prmValue)) {
+		$Value = $prmValue;
+	} else {
+		if ($prmValue == 'hubo') {
+			$Value = -1;
+		}
+		if ($prmValue == 'no hubo') {
+			$Value = 0;
+		}
+	}
+	return $Value;
+}
 
 function strToISO8601($prmDate) {
 	$v = '';
