@@ -64,19 +64,6 @@ class DIEvent extends DIObject {
 		return $iReturn;
 	}
 
-	public function validateNoDatacards($ErrCode) {
-		$iReturn = ERR_NO_ERROR;
-		$Count = 0;
-		$Query = "SELECT COUNT(DisasterId) AS COUNT FROM Disaster WHERE EventId='" . $this->get('EventId') . "'";
-		foreach($this->q->dreg->query($Query) as $row) {
-			$Count = $row['COUNT'];
-		}
-		if ($Count > 0) {
-			$iReturn = $ErrCode;
-		}
-		return $iReturn;
-	}
-
 	public function validateUpdate() {
 		$iReturn = ERR_NO_ERROR;
 		$iReturn = $this->validateNotNull(-13, 'EventName');
@@ -91,6 +78,19 @@ class DIEvent extends DIObject {
 		return $iReturn;
 	}
 	
+	public function validateNoDatacards($ErrCode) {
+		$iReturn = ERR_NO_ERROR;
+		$Count = 0;
+		$Query = "SELECT COUNT(DisasterId) AS COUNT FROM Disaster WHERE EventId='" . $this->get('EventId') . "'";
+		foreach($this->q->dreg->query($Query) as $row) {
+			$Count = $row['COUNT'];
+		}
+		if ($Count > 0) {
+			$iReturn = $ErrCode;
+		}
+		return $iReturn;
+	}
+
 	public function validateDelete() {
 		$iReturn = ERR_NO_ERROR;
 		$iReturn = $this->validateNoDatacards(-15);

@@ -27,7 +27,8 @@ $f = new DIEEField($us);
 $f->set('EEGroupId', 'DGR');
 $f->set('EEFieldLabel', 'Demo');
 $f->set('EEFieldType', 'INTEGER');
-$f->insert();
+$i = $f->insert();
+fb($i);
 exit();
 
 $r = new DIRegion($us, $RegionId);
