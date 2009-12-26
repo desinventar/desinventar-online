@@ -30,15 +30,10 @@ class DIGeography extends DIObject {
 				$this->set('LangIsoCode', $prmLangIsoCode);
 			} //if
 			$this->load();
-			if ($num_args >= 4) {
-				$prmParentId = func_get_arg(3);
-				$prmGeographyId = $this->buildGeographyId($prmParentId);
-				$this->setGeographyId($prmParentId);
-			}
 		} //if
 	} // __construct
 	
-	public static function loadByCode($prmSession, $prmGeographyCode) {
+	public static function getIdByCode($prmSession, $prmGeographyCode) {
 		$GeographyId = '';
 		$LangIsoCode = $prmSession->q->getDBInfoValue('LangIsoCode');
 		$Query= "SELECT * FROM Geography WHERE GeographyCode='" . $prmGeographyCode . "' " . 
@@ -46,8 +41,15 @@ class DIGeography extends DIObject {
 		foreach($prmSession->q->dreg->query($Query) as $row) {
 			$GeographyId = $row['GeographyId'];
 		}
-		//$g = new DIGeography($prmSession, $GeographyId);
-		$g = new self($prmSession, $GeographyId);
+		return $GeographyId;
+	}
+	
+	public static function loadByCode($prmSession, $prmGeographyCode) {
+		$g = null;
+		$GeographyId = self::getIdByCode($prmSession, $prmGeographyCode);
+		if ($GeographyId != '') {
+			$g = new self($prmSession, $GeographyId);
+		}
 		return $g;
 	}
 	
@@ -67,8 +69,11 @@ class DIGeography extends DIObject {
 	}
 	
 	public static function loadByName($prmSession, $prmGeographyName, $prmParentId) {
+		$g = null;
 		$GeographyId = self::getIdByName($prmSession, $prmGeographyName, $prmParentId);
-		$g = new self($prmSession, $GeographyId);
+		if ($GeographyId != '') {
+			$g = new self($prmSession, $GeographyId);
+		}
 		return $g;
 	}
 
@@ -95,15 +100,6 @@ class DIGeography extends DIObject {
 		return $iReturn;
 	}
 	
-	public function getIdByCode($prmGeographyCode) {
-		$GeographyId = '';
-		$Query = "SELECT * FROM Geography Where GeographyCode='" . $prmGeographyCode . "'";
-		foreach($this->q->dreg->query($Query) as $row) {
-			$GeographyId = $row['GeographyId'];
-		}
-		return $GeographyId;
-	}
-
 	public function setGeographyLevel() {
 		$iGeographyLevel = (strlen($this->get('GeographyId'))/5) - 1;
 		$this->set('GeographyLevel', $iGeographyLevel);
@@ -118,6 +114,11 @@ class DIGeography extends DIObject {
 			$FQName = $g->get('GeographyFQName') . '/' . $FQName;
 		}
 		return $FQName;
+	}
+	
+	public function setGeographyFQName() {
+		$FQName = $this->buildGeographyFQName();
+		$this->set('GeographyFQName', $FQName);
 	}
 	
 	public function saveGeographyFQName() {
