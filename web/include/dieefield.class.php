@@ -79,7 +79,25 @@ class DIEEField extends DIObject {
 			$this->q->dreg->query($Query);
 		}
 		return $iReturn;
-	}
+	} //function
+
+	public function validateCreate() {
+		$iReturn = 1;
+		$iReturn = $this->validateNotNull(-81, 'EEFieldId');
+		if ($iReturn > 0) {
+			$iReturn = $this->validatePrimaryKey(-82);
+		}
+		
+		return $iReturn;
+	} //function
+
+	public function validateUpdate() {
+		$iReturn = ERR_NO_ERROR;
+		if ($iReturn > 0) {
+			$iReturn = $this->validateUnique(-83, 'EEFieldLabel', true);
+		}
+		return $iReturn;
+	} //function
 } //class
 
 </script>
