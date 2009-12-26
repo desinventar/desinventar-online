@@ -37,12 +37,11 @@ class DIEEField extends DIObject {
 
 	public function getMaxEEFieldId() {
 		$iMaxVal = 0;
-		$sQuery = "SELECT COUNT(EEFieldId) AS MAXVAL FROM " . $this->getTableName();
-		if ($result = $this->q->dreg->query($sQuery)) {
-			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-				$iMaxVal = $row->MAXVAL;
-			}
+		$sQuery = "SELECT EEFieldId FROM " . $this->getTableName() . " ORDER BY EEFieldId DESC LIMIT 1";
+		foreach($this->q->dreg->query($sQuery) as $row) {
+			$EEFieldId = $row['EEFieldId'];
 		}
+		$iMaxVal = (int)substr($EEFieldId, 3);
 		return $iMaxVal;
 	} // function
 	

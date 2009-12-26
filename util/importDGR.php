@@ -18,10 +18,17 @@ require_once(BASE . '/include/dieedata.class.php');
 require_once(BASE . '/include/digeography.class.php');
 require_once(BASE . '/include/dicause.class.php');
 require_once(BASE . '/include/dievent.class.php');
+require_once(BASE . '/include/dieefield.class.php');
 
 $RegionId = 'COL-1250694506-colombia_inventario_historico_de_desastres';
 $us->login('diadmin','di8');
 $us->open($RegionId);
+$f = new DIEEField($us);
+$f->set('EEGroupId', 'DGR');
+$f->set('EEFieldLabel', 'Demo');
+$f->set('EEFieldType', 'INTEGER');
+$f->insert();
+exit();
 
 $r = new DIRegion($us, $RegionId);
 $r->copyEvents('spa');
