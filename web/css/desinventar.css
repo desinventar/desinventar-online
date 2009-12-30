@@ -23,7 +23,7 @@ li  {
 .line {
 	font-family:arial,tahoma,helvetica,cursive; 
 	font-size:11px; color:#000000; background-color:#FFFFFF; 
-	border-style:solid; border-width:1px; border-color:#BBBBBB; }
+	border-style:none; border-width:1px; border-color:#BBBBBB; }
 input.btn {
 	font-family:arial,tahoma,helvetica,cursive; 
 	font-size:14px; color:#000000; background-color:#BBBBBB; }
