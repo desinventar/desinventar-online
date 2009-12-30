@@ -469,17 +469,22 @@
 		var lsAjax = new Ajax.Request('cards.php', {
 			method: 'get', parameters: 'r='+ reg +'&DisasterId='+ did,
 			onLoading: function(request) {
-				if (src == "DATA")
+				if (src == "DATA") {
 					dostat = window.parent.frames['dif'].document.getElementById('dostat');
-				else
+				} else {
 					dostat = $('dostat');
-				dostat.innerHTML = waiting;
+				}
+				if (dostat != null) {
+					dostat.innerHTML = waiting;
+				}
 			},
 			onSuccess: function(request) {
 				var res = request.responseText;
 				var json = eval('(' + res + ')');
 				setDICard(reg, json, src);
-				dostat.innerHTML = "";
+				if (dostat != null) {
+					dostat.innerHTML = "";
+				}
 				return true;
 			}
 		} );
