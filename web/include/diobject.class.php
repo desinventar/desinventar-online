@@ -277,21 +277,27 @@ class DIObject {
 	
 	public function insert($withValidate = true) {
 		$iReturn = ERR_NO_ERROR;
+		fb('0 : ' . $iReturn);
 		$bValidate = $withValidate;
 		if ($withValidate) {
 			$iReturn = $this->validateCreate();
+			fb('1 : ' . $iReturn);
 			if ($iReturn > 0 ) { 
 				$oReturn = $this->validateUpdate();
 				$iReturn = $oReturn['Status'];
+				fb('2 : ' . $iReturn);
 				$bValidate = false;
 			}
 		}
 		if ($iReturn > 0) {
 			$iReturn = $this->create($bValidate);
+			fb('3 : ' . $iReturn);
 			if ($iReturn > 0) {
 				$iReturn = $this->update($bValidate);
+				fb('4 : ' . $iReturn);
 			}
 		}
+		fb('5 : ' . $iReturn);
 		return $iReturn;
 	}
 

@@ -36,7 +36,7 @@ if (isset($get['geocmd'])) {
 			$o->setFromArray($get);
 			$o->setGeographyId($get['GeoParentId']);
 			$i = $o->insert();
-			if (!iserror($i))
+			if ($i > 0)
 				$t->assign ("ctl_msginsgeo", true);
 			else {
 				$t->assign ("ctl_errinsgeo", true);
@@ -48,7 +48,7 @@ if (isset($get['geocmd'])) {
 			$o->load();
 			$o->setFromArray($get);
 			$i = $o->update();
-			if (!iserror($i))
+			if ($i > 0)
 				$t->assign ("ctl_msgupdgeo", true);
 			else {
 				$t->assign ("ctl_errupdgeo", true);

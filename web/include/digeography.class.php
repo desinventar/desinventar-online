@@ -167,7 +167,7 @@ class DIGeography extends DIObject {
 	}
 
 	public function validateUpdate() {
-		$iReturn = 1;
+		$oReturn = parent::validateUpdate();
 		$iReturn = $this->validateNotNull(-43, 'GeographyCode');
 		if ($iReturn > 0) {
 			$iReturn = $this->validateUnique(-44, 'GeographyCode');
@@ -186,7 +186,8 @@ class DIGeography extends DIObject {
 				}
 			}
 		}
-		return $iReturn;
+		$oReturn['Status'] = $iReturn;
+		return $oReturn;
 	}
 	
 	public function validateDelete() {

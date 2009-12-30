@@ -57,12 +57,14 @@ class DIGeoLevel extends DIObject {
 	}
 
 	public function validateUpdate() {
-		$iReturn = 1;
+		$oReturn = parent::validateUpdate();
+		$iReturn = ERR_NO_ERROR;
 		$iReturn = $this->validateNotNull(-33, 'GeoLevelName');
 		if ($iReturn > 0) {
 			$iReturn = $this->validateUnique(-34, 'GeoLevelName', true);
 		}
-		return $iReturn;
+		$oReturn['Status'] = $iReturn;
+		return $oReturn;
 	}
 
 	public function importFromCSV($cols, $values) {
