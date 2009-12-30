@@ -773,6 +773,9 @@ class Query extends PDO
 			}
 		}
 		
+		// 2009-12-30 (jhcaiced) Try to separate query in logical units
+		$Query = array();
+		$Query['Period'] = '';
 		foreach ($dat as $k=>$v) {
 			// replace D_ by D.
 			if (substr($k, 1, 1) == "_") {
@@ -913,7 +916,8 @@ class Query extends PDO
 				$begt = "0000-00-00"; // $datedb[0];
 			if (!isset($endt))
 				$endt = "9999-12-31"; //$datedb[1];
-			$e['DisasterTime'] = "(D.DisasterBeginTime BETWEEN '$begt' AND '$endt')";
+			$Query['Period'] = "D.DisasterBeginTime BETWEEN '$begt' AND '$endt'";
+			//$e['DisasterTime'] = "(D.DisasterBeginTime BETWEEN '$begt' AND '$endt')";
 		}
 		/*
 		if (isset($op) && $op == "OR")
@@ -945,6 +949,11 @@ class Query extends PDO
 				}
 			}
 			$WhereQuery1 .= ')';
+		}
+		foreach($Query as $QueryKey => $QueryItem) {
+			if ($QueryItem != '') {
+				$WhereQuery .= ' AND (' . $QueryItem . ') ';
+			}
 		}
 		if (($WhereQuery1 != '') || ($EEQuery != '') || ($CustomQuery != '') ) {
 			$WhereQuery .= ' AND (';
