@@ -23,6 +23,8 @@ require_once(BASE . '/include/dieefield.class.php');
 $RegionId = 'COL-1250694506-colombia_inventario_historico_de_desastres';
 $us->login('diadmin','di8');
 $us->open($RegionId);
+
+/*
 $f = new DIEEField($us);
 $f->set('EEGroupId', 'DGR');
 $f->set('EEFieldLabel', 'Demo');
@@ -30,6 +32,19 @@ $f->set('EEFieldType', 'INTEGER');
 $i = $f->insert();
 fb($i);
 exit();
+*/
+// Translation Strings
+$geoTrans = array();
+$fh = fopen('geotransDGR.csv','r');
+while (! feof($fh) ) {
+	$a = fgetcsv($fh, 1000, ',');
+	if (count($a) > 1) {
+		$geoTrans[$a[0]] = $a[1];
+	}
+}
+fclose($fh);
+//print_r($geoTrans);
+//exit();
 
 $r = new DIRegion($us, $RegionId);
 $r->copyEvents('spa');
@@ -56,17 +71,27 @@ while (! feof(STDIN) ) {
 			$d->set('DisasterBeginTime', $DisasterBeginTime);
 			
 			// 1 - GeographyName (Departamento)
-			$Dpto = $a[1];
+			$Dpto = ucwords(strtolower($a[1]));
 			$Mpio = $a[2];
+			foreach($geoTrans as $Id => $Value) {
+				if ($Id == $Dpto) {
+					$Dpto = $Value;
+				}
+				if ($Id == $Mpio) {
+					$Mpio = $Value;
+				}
+			}
 			// 2 - GeographyName (Municipio)
 			$GeographyId = DIGeography::getIdByName($us, $Dpto, '');
 			if ($GeographyId != '') {
 				if ($Mpio != '') {
 					$GeographyId2 = DIGeography::getIdByName($us, $Mpio, $GeographyId);
-					if ($GeographyId2 != '') {
+					//if ($GeographyId2 != '') {
 						$GeographyId = $GeographyId2;
-					}
+					//}
 				}
+			} else {
+				fb('Dpto No Hallado : ' . $Dpto);
 			}
 			$d->set('GeographyId', $GeographyId);
 			
