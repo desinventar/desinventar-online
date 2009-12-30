@@ -719,17 +719,18 @@ class Query extends PDO
 		$e		= array();
 		$e['Eff'] = "";
 		$e['Item'] = "";
-		$DisasterSerialQuery = "";
-		$CustomQuery = "";
 		// 2009-12-30 (jhcaiced) Try to separate query in logical units
-		$Query = array();
-		$QueryPeriod = '';
-		$QueryEvent  = '';
-		$QueryCause  = '';
+		$QueryPeriod           = '';
+		$QueryEvent            = '';
+		$QueryCause            = '';
+		$QueryGeography        = '';
+		$QueryDisasterSerial   = '';
+		$QueryDisasterSerialOp = ' AND ';
+		$QueryCustom           = '';
 		//$datedb = $this->getDateRange();
 		// Add Custom Query..
 		if (isset($dat['__CusQry']) && !empty($dat['__CusQry'])) {
-			$CustomQuery = trim($dat['__CusQry']);
+			$QueryCustom = trim($dat['__CusQry']);
 		}
 		// Process EEFields...
 		$First = true;
@@ -896,28 +897,27 @@ class Query extends PDO
 						}
 					} elseif ($k == "D.DisasterSerial") {
 						// Process serials..
-						$MainOp = ' AND '; 
+						$QueryDisasterSerialOp = ' AND '; 
 						if ($v[0] == 'NOT') {
-							$MainOp = ' AND NOT ';
+							$QueryDisasterSerialOp = ' AND NOT ';
 						}
 						if ($v[0] == 'INCLUDE') {
-							$MainOp = ' OR ';
+							$QueryDisasterSerialOp = ' OR ';
 						}
 						if (strlen($v[1]) > 0) {
-							$DisasterSerialQuery = $MainOp ."(";
+							$QueryDisasterSerial = '';
 							$bFirst = true;
 							$SerialCount = 0;
 							foreach (explode(" ", $v[1]) as $i) {
-								if ($SerialCount < 700) {
+								if ($SerialCount < 1700) {
 								if (! $bFirst) {
-									$DisasterSerialQuery .= ' OR ';
+									$QueryDisasterSerial .= ' OR ';
 								}
 								$bFirst = false;
-									$DisasterSerialQuery .= "$k='$i'";
+									$QueryDisasterSerial .= "$k='$i'";
 								}
 								$SerialCount ++;
 							}
-							$DisasterSerialQuery .= ") ";
 						}
 					}
 				} elseif (substr($k, 0, 1) != "_")  {
@@ -987,19 +987,19 @@ class Query extends PDO
 			$WhereQuery .= ' AND (' . $QueryCause . ') ';
 		}
 		
-		if (($WhereQuery1 != '') || ($EEQuery != '') || ($CustomQuery != '') ) {
+		if (($WhereQuery1 != '') || ($EEQuery != '') || ($QueryCustom != '') ) {
 			$WhereQuery .= ' AND (';
 			if ($WhereQuery1 != '') {
 				$WhereQuery .= $WhereQuery1;
 			}
+			if ($QueryDisasterSerial != '') {
+				$WhereQuery .= ' ' . $QueryDisasterSerialOp . ' (' . $QueryDisasterSerial . ') ';
+			}
 			if ($EEQuery != '') {
 				$WhereQuery .= ' AND (' . $EEQuery . ') ';
 			}
-			if ($CustomQuery != '') {
-				$WhereQuery .= ' AND (' . $CustomQuery. ') ';
-			}
-			if ($DisasterSerialQuery != '') {
-				$WhereQuery .= ' ' . $DisasterSerialQuery;
+			if ($QueryCustom != '') {
+				$WhereQuery .= ' AND (' . $QueryCustom. ') ';
 			}
 			$WhereQuery .= ')';
 		}

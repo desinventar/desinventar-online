@@ -51,7 +51,7 @@
 			{-if $k == "BEG"-}qdet += "<b>{-#beg#-}:</b> {-$i-} ";{-/if-}
 			{-if $k == "END"-}qdet += "<b>{-#end#-}:</b> {-$i-} ";{-/if-}
 			{-if $k == "SOU"-}qdet += "<b>{-#sou#-}:</b> ";{-/if-}
-			{-if $k == "SER"-}qdet += "<b>{-#ser#-}:</b> {-$i-}";{-/if-}
+			{-if $k == "SER"-}qdet += "<b>{-#ser#-}:</b> {-$i-} ";{-/if-}
 		{-/foreach-}
 			qrydet.innerHTML = qdet;
 	}
