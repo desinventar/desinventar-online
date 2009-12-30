@@ -721,6 +721,11 @@ class Query extends PDO
 		$e['Item'] = "";
 		$DisasterSerialQuery = "";
 		$CustomQuery = "";
+		// 2009-12-30 (jhcaiced) Try to separate query in logical units
+		$Query = array();
+		$QueryPeriod = '';
+		$QueryEvent  = '';
+		$QueryCause  = '';
 		//$datedb = $this->getDateRange();
 		// Add Custom Query..
 		if (isset($dat['__CusQry']) && !empty($dat['__CusQry'])) {
@@ -773,9 +778,7 @@ class Query extends PDO
 			}
 		}
 		
-		// 2009-12-30 (jhcaiced) Try to separate query in logical units
-		$Query = array();
-		$Query['Period'] = '';
+
 		foreach ($dat as $k=>$v) {
 			// replace D_ by D.
 			if (substr($k, 1, 1) == "_") {
@@ -810,17 +813,26 @@ class Query extends PDO
 						$mm = !empty($v[1])? $v[1] : "12";
 						$dd = !empty($v[2])? $v[2] : "31";
 						$endt = sprintf("%04d-%02d-%02d", $aa, $mm, $dd);
-					} elseif ($k == "D.EventId" || $k == "D.CauseId") {
-						$e[$k] = "(";
+					} elseif ($k == "D.EventId") {
+						$QueryEvent = '';
 						$bFirst = true;
 						foreach ($v as $i) {
 							if (! $bFirst) {
-								$e[$k] .= ' OR ';
+								$QueryEvent .= ' OR ';
 							}
-							$e[$k] .= "$k = '$i'";
+							$QueryEvent .= "$k = '$i'";
 							$bFirst = false;
 						}
-						$e[$k] .= ")";
+					} elseif ($k == "D.CauseId") {
+						$QueryCause = '';
+						$bFirst = true;
+						foreach ($v as $i) {
+							if (! $bFirst) {
+								$QueryCause .= ' OR ';
+							}
+							$QueryCause .= "$k = '$i'";
+							$bFirst = false;
+						}
 					} elseif ($k == "D.GeographyId") {
 						$bFirst = true;
 						$GeographyQuery = '';
@@ -916,11 +928,13 @@ class Query extends PDO
 			}
 		} //foreach
 		if (isset($begt) || isset($endt)) {
-			if (!isset($begt))
+			if (!isset($begt)) {
 				$begt = "0000-00-00"; // $datedb[0];
-			if (!isset($endt))
+			}
+			if (!isset($endt)) {
 				$endt = "9999-12-31"; //$datedb[1];
-			$Query['Period'] = "D.DisasterBeginTime BETWEEN '$begt' AND '$endt'";
+			}
+			$QueryPeriod = "D.DisasterBeginTime BETWEEN '$begt' AND '$endt'";
 			//$e['DisasterTime'] = "(D.DisasterBeginTime BETWEEN '$begt' AND '$endt')";
 		}
 		/*
@@ -954,11 +968,18 @@ class Query extends PDO
 			}
 			$WhereQuery1 .= ')';
 		}
-		foreach($Query as $QueryKey => $QueryItem) {
-			if ($QueryItem != '') {
-				$WhereQuery .= ' AND (' . $QueryItem . ') ';
-			}
+
+		if ($QueryPeriod != '') {
+			$WhereQuery .= ' AND (' . $QueryPeriod . ') ';
 		}
+		if ($QueryEvent != '') {
+			$WhereQuery .= ' AND (' . $QueryEvent . ') ';
+		}
+
+		if ($QueryCause != '') {
+			$WhereQuery .= ' AND (' . $QueryCause . ') ';
+		}
+		
 		if (($WhereQuery1 != '') || ($EEQuery != '') || ($CustomQuery != '') ) {
 			$WhereQuery .= ' AND (';
 			if ($WhereQuery1 != '') {
