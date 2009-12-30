@@ -892,12 +892,16 @@ class Query extends PDO
 						if (strlen($v[1]) > 0) {
 							$DisasterSerialQuery = $MainOp ."(";
 							$bFirst = true;
+							$SerialCount = 0;
 							foreach (explode(" ", $v[1]) as $i) {
+								if ($SerialCount < 700) {
 								if (! $bFirst) {
 									$DisasterSerialQuery .= ' OR ';
 								}
 								$bFirst = false;
-								$DisasterSerialQuery .= "$k='$i'";
+									$DisasterSerialQuery .= "$k='$i'";
+								}
+								$SerialCount ++;
 							}
 							$DisasterSerialQuery .= ") ";
 						}
