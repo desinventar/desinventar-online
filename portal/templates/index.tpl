@@ -64,7 +64,9 @@
 
 		// Startup function (on load)
 		$(function() {
-			// Show current software version
+			jQuery("#btnMainWindow").click(function() {
+				window.open('{-$di_url-}?cmd=main','_blank', 'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');
+			});
 			$("#version").load('{-$di_url-}', { cmd: 'getversion' });
 			
 			// At start, display the map 
@@ -163,7 +165,7 @@
 				<table>
 				<tr>
 					<td align="right">
-						<a href="{-$di_url-}?cmd=main" target="_blank"><img src="images/b_desinventar3.jpg" border="0"></a>
+						<img id="btnMainWindow" src="images/b_desinventar3.jpg" border="0">
 					</td>
 				</tr>
 				<tr>
