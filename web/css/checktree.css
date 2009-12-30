@@ -37,6 +37,5 @@ ul.checktree li.minus-last {
 /* The check-count SPANs. */
 ul.checktree span.count {
  text-indent: 5pt;
- color: #999;
  font-style: italic;
 }
