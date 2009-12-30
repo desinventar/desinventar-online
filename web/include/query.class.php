@@ -905,6 +905,22 @@ class Query extends PDO
 							$QueryDisasterSerialOp = ' OR ';
 						}
 						if (strlen($v[1]) > 0) {
+							// 2009-12-30 (jhcaiced) This implementation uses the "a in (x,y,z)" construction instead of
+							// the OR..OR..OR... this way we can avoid the Depth Tree limit in SQLite
+							$bFirst = true;
+							$SerialCount = 0;
+							$QueryDisasterSerial = $k . ' IN (';
+							foreach(explode(" ", $v[1]) as $i) {
+								if (! $bFirst) {
+									$QueryDisasterSerial .= ',';
+								}
+								$bFirst = false;
+								$QueryDisasterSerial .= "'$i'";
+								$SerialCount++;
+							}
+							$QueryDisasterSerial .= ')';
+
+							/*
 							$QueryDisasterSerial = '';
 							$bFirst = true;
 							$SerialCount = 0;
@@ -918,6 +934,7 @@ class Query extends PDO
 								}
 								$SerialCount ++;
 							}
+							*/
 						}
 					}
 				} elseif (substr($k, 0, 1) != "_")  {
