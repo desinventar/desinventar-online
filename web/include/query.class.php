@@ -715,7 +715,6 @@ class Query extends PDO
   
 	// Generate SQL from Associative array from Desconsultar Form
 	public function genSQLWhereDesconsultar($dat) {
-		$WhereQuery 	= "WHERE ";
 		$e		= array();
 		$e['Eff'] = "";
 		$e['Item'] = "";
@@ -969,6 +968,7 @@ class Query extends PDO
 
 		// Finally, build the WHERE Conditional Query using all parts...
 		// Add the JOIN conditions with all other tables...
+		$WhereQuery  = "WHERE ";
 		$WhereQuery .= '(D.DisasterId=E.DisasterId AND D.EventId=V.EventId AND D.CauseId=C.CauseId AND D.GeographyId=G.GeographyId) ';
 
 		$WhereQuery1 = '';
@@ -1020,7 +1020,7 @@ class Query extends PDO
 			}
 			$WhereQuery .= ')';
 		}
-    	return ($WhereQuery);
+    	return $WhereQuery;
 	}
 
   /* Counter results */
@@ -1302,6 +1302,13 @@ class Query extends PDO
 		//Process post
 		foreach ($post as $k=>$v) {
 			$k = substr($k,2);
+			// 2009-12-30 (jhcaiced) Remove CR LF from some items which causes some javascript issues later...
+			if (array_key_exists(0, $v)) {
+				$v[0] = trim(ereg_replace("[\r\n]", '', $v[0]));
+			}
+			if (array_key_exists(1, $v)) {
+				$v[1] = trim(ereg_replace("[\r\n]", '', $v[1]));
+			}
 			if ($k == "GeographyId") {
 				foreach($v as $itm) {
 					$lsg[] = $this->getGeoNameById($itm);
