@@ -4,7 +4,7 @@
   DesInventar - http://www.desinventar.org
   (c) 1998-2009 Corporacion OSSO
   
-  2009-12-21 Jhon H. Caicedo <jhcaiced@desinventar.org>
+  2009-12-29 Jhon H. Caicedo <jhcaiced@desinventar.org>
   
   Import data from DGR (Direccion de Gestion del Riesgo) 
   SIGPAD - Colombia
@@ -64,13 +64,8 @@ while (! feof(STDIN) ) {
 			$GeographyId = DIGeography::getIdByName($us, $Dpto, '');
 			if ($GeographyId != '') {
 				if ($Mpio != '') {
-					$GeographyId2 = DIGeography::getIdByName($us, $Mpio, $GeographyId);
-					//if ($GeographyId2 != '') {
-						$GeographyId = $GeographyId2;
-					//}
+					$GeographyId = DIGeography::getIdByName($us, $Mpio, $GeographyId);
 				}
-			} else {
-				fb('Dpto No Hallado : ' . $Dpto);
 			}
 			$d->set('GeographyId', $GeographyId);
 			
@@ -132,11 +127,19 @@ while (! feof(STDIN) ) {
 			// 14 -
 			// 19 -
 			$v = $d->validateUpdate();
-			if ($v < 0) {
-				//fb('Line : ' . $line . ' ' . $v);
-				if ($v == -58) {
-					print $line . ',' . $a[1] . ',' . $a[2] . "\n";
+			if ($v['Status'] < 0) {
+				if ($v['Status'] == -58) {
+					print $line . ',' . $v['Status'] . ',' . $a[1] . ',' . $a[2] . "\n";
 				}
+				if ($v['Status'] == -59) {
+					print $line . ',' . $v['Status'] . ',' . $a[4] . "\n";
+				}
+				if ($v['Status'] == -60) {
+					print $line . ',' . $v['Status'] . ',' . $a[3] . "\n";
+				}
+			}
+			if (($line > 0) && (($line % 100) == 0) ) {
+				print $line . "\n";
 			}
 		}
 	}
