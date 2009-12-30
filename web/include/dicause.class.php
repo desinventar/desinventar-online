@@ -79,7 +79,8 @@ class DICause extends DIObject {
 	}
 
 	public function validateUpdate() {
-		$iReturn = 1;
+		$oReturn = parent::validateUpdate();
+		$iReturn = ERR_NO_ERROR;
 		$iReturn = $this->validateNotNull(-23, 'CauseName');
 		if ($iReturn > 0) {
 			$iReturn = $this->validateUnique(-24, 'CauseName', true);
@@ -89,7 +90,8 @@ class DICause extends DIObject {
 				}
 			}
 		}
-		return $iReturn;
+		$oReturn['Status'] = $iReturn;
+		return $oReturn;
 	}
 	
 	public function validateDelete() {

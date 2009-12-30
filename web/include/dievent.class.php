@@ -65,6 +65,7 @@ class DIEvent extends DIObject {
 	}
 
 	public function validateUpdate() {
+		$oReturn = parent::validateUpdate();
 		$iReturn = ERR_NO_ERROR;
 		$iReturn = $this->validateNotNull(-13, 'EventName');
 		if ($iReturn > 0) {
@@ -75,7 +76,8 @@ class DIEvent extends DIObject {
 				}
 			}
 		}
-		return $iReturn;
+		$oReturn['Status'] = $iReturn;
+		return $oReturn;
 	}
 	
 	public function validateNoDatacards($ErrCode) {

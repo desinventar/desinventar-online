@@ -92,11 +92,13 @@ class DIEEField extends DIObject {
 	} //function
 
 	public function validateUpdate() {
+		$oReturn = parent::validateUpdate();
 		$iReturn = ERR_NO_ERROR;
 		if ($iReturn > 0) {
 			$iReturn = $this->validateUnique(-83, 'EEFieldLabel', true);
 		}
-		return $iReturn;
+		$oReturn['Status'] = $iReturn;
+		return $oReturn;
 	} //function
 } //class
 
