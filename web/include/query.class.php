@@ -955,7 +955,7 @@ class Query extends PDO
 				$WhereQuery .= ' AND (' . $EEQuery . ') ';
 			}
 			if ($CustomQuery != '') {
-				$WhereQuery .= ' (' . $CustomQuery. ') ';
+				$WhereQuery .= ' AND (' . $CustomQuery. ') ';
 			}
 			if ($DisasterSerialQuery != '') {
 				$WhereQuery .= ' ' . $DisasterSerialQuery;
