@@ -10,8 +10,7 @@
   SIGPAD - Colombia
 */
 
-$_SERVER["DI8_WEB"] = '../web';
-require_once('../web/include/loader.php');
+require_once('../../web/include/loader.php');
 require_once(BASE . '/include/diregion.class.php');
 require_once(BASE . '/include/didisaster.class.php');
 require_once(BASE . '/include/dieedata.class.php');
