@@ -32,18 +32,6 @@ $i = $f->insert();
 fb($i);
 exit();
 */
-// Translation Strings
-$geoTrans = array();
-$fh = fopen('geotransDGR.csv','r');
-while (! feof($fh) ) {
-	$a = fgetcsv($fh, 1000, ',');
-	if (count($a) > 1) {
-		$geoTrans[$a[0]] = $a[1];
-	}
-}
-fclose($fh);
-//print_r($geoTrans);
-//exit();
 
 $r = new DIRegion($us, $RegionId);
 $r->copyEvents('spa');
@@ -70,16 +58,8 @@ while (! feof(STDIN) ) {
 			$d->set('DisasterBeginTime', $DisasterBeginTime);
 			
 			// 1 - GeographyName (Departamento)
-			$Dpto = ucwords(strtolower($a[1]));
+			$Dpto = $a[1];
 			$Mpio = $a[2];
-			foreach($geoTrans as $Id => $Value) {
-				if ($Id == $Dpto) {
-					$Dpto = $Value;
-				}
-				if ($Id == $Mpio) {
-					$Mpio = $Value;
-				}
-			}
 			// 2 - GeographyName (Municipio)
 			$GeographyId = DIGeography::getIdByName($us, $Dpto, '');
 			if ($GeographyId != '') {
