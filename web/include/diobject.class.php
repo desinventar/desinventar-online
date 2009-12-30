@@ -281,7 +281,8 @@ class DIObject {
 		if ($withValidate) {
 			$iReturn = $this->validateCreate();
 			if ($iReturn > 0 ) { 
-				$iReturn = $this->validateUpdate();
+				$oReturn = $this->validateUpdate();
+				$iReturn = $oReturn['Status'];
 				$bValidate = false;
 			}
 		}
@@ -329,7 +330,8 @@ class DIObject {
 	public function update($withValidate = true, $withInsert = false) {
 		$iReturn = ERR_NO_ERROR;
 		if ($withValidate) {
-			$iReturn = $this->validateUpdate();
+			$oReturn = $this->validateUpdate();
+			$iReturn = $oReturn['Status'];
 		}
 		if ($iReturn > 0) {
 			$sQuery = $this->getUpdateQuery();
@@ -379,8 +381,12 @@ class DIObject {
 	public function validateCreate() {
 		return 1;
 	}	
-	public function validateUpdate(&$oResult=null) {
-		return 1;
+	public function validateUpdate() {
+		$oReturn = array();
+		$oReturn['Status'] = 1;
+		$oReturn['Error'] = array();
+		$oReturn['Warning'] = array();
+		return $oReturn;
 	}
 	
 	public function validateDelete() {

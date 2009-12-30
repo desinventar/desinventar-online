@@ -113,7 +113,8 @@ class DIDisaster extends DIObject {
 		return $iReturn;
 	}
 	
-	public function validateUpdate(&$oResult=null) {
+	public function validateUpdate() {
+		$oReturn = parent::validateUpdate();
 		$iReturn = ERR_NO_ERROR;
 		$iReturn = $this->validateNotNull(-53, 'DisasterSerial');
 		if ($iReturn > 0) {
@@ -140,7 +141,8 @@ class DIDisaster extends DIObject {
 				}
 			}
 		}
-		return $iReturn;
+		$oReturn['Status'] = $iReturn;
+		return $oReturn;
 	}
 	
 	public function validateEffects(&$oResult=null) {
