@@ -835,10 +835,10 @@ class Query extends PDO
 						}
 					} elseif ($k == "D.GeographyId") {
 						$bFirst = true;
-						$GeographyQuery = '';
+						$QueryGeography = '';
 						foreach ($v as $i) {
 							if (! $bFirst) {
-								$GeographyQuery .= ' OR ';
+								$QueryGeography .= ' OR ';
 							}
 							// Restrict to childs elements only
 							$chl = false;
@@ -848,14 +848,16 @@ class Query extends PDO
 								}
 							}
 							if (!$chl) {
-								$GeographyQuery .= "$k LIKE '$i%'";
+								$QueryGeography .= "$k LIKE '$i%'";
 								$bFirst = false;
 							}
 						}
-						if ($GeographyQuery != '') {
-							$GeographyQuery = '(' . $GeographyQuery . ')';
+						/*
+						if ($QueryGeography != '') {
+							$QueryGeography = '(' . $QueryGeography . ')';
 						}
-						$e[$k] = $GeographyQuery;
+						$e[$k] = $QueryGeography;
+						*/
 					} elseif ((substr($k, 2, 6) == "Effect" || substr($k, 2, 6) == "Sector") && isset($v[0])) {
 						// Process effects and sectors..
 						if (isset($v[3]))
@@ -972,6 +974,11 @@ class Query extends PDO
 		if ($QueryPeriod != '') {
 			$WhereQuery .= ' AND (' . $QueryPeriod . ') ';
 		}
+
+		if ($QueryGeography != '') {
+			$WhereQuery .= ' AND (' . $QueryGeography . ') ';
+		}
+
 		if ($QueryEvent != '') {
 			$WhereQuery .= ' AND (' . $QueryEvent . ') ';
 		}
