@@ -529,10 +529,8 @@
 				
 				<!-- BEGIN CUSTOMQUERY SECTION -->
 				<dt>{-#madvsection#-}</dt>
-				<dd>
-					<textarea id="CusQry" name="__CusQry" style="width:300px; height:45px;" 
-						onFocus="showtip('');">{-$qd.__CusQry-}
-					</textarea>
+				<dd alignt="left">
+					<textarea id="CusQry" name="__CusQry" style="width:300px; height:45px;" onFocus="showtip('');">{-$qd.__CusQry-}</textarea>
 					<br />
 					<span class="dlgmsg">{-#tadvqryhelp#-}</span>
 					<br />
