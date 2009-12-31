@@ -32,7 +32,29 @@ class DIGeography extends DIObject {
 			$this->load();
 		} //if
 	} // __construct
+
+	public static function existId($prmSession, $prmGeographyId) {
+		$bFound = 0;
+		$LangIsoCode = $prmSession->q->getDBInfoValue('LangIsoCode');
+		$Query= "SELECT * FROM Geography WHERE GeographyId='" . $prmGeographyId . "' " . 
+		        " AND LangIsoCode='" . $LangIsoCode . "'";
+		foreach($prmSession->q->dreg->query($Query) as $row) {
+			$bFound = 1;
+		}
+		return $bFound;
+	}
 	
+	public static function getNameById($prmSession, $prmGeographyId) {
+		$GeographyName = '';
+		$LangIsoCode = $prmSession->q->getDBInfoValue('LangIsoCode');
+		$Query= "SELECT * FROM Geography WHERE GeographyId='" . $prmGeographyId . "' " . 
+		        " AND LangIsoCode='" . $LangIsoCode . "'";
+		foreach($prmSession->q->dreg->query($Query) as $row) {
+			$GeographyName = $row['GeographyName'];
+		}
+		return $GeographyName;
+	}
+		
 	public static function getIdByCode($prmSession, $prmGeographyCode) {
 		$GeographyId = '';
 		$LangIsoCode = $prmSession->q->getDBInfoValue('LangIsoCode');
@@ -219,6 +241,48 @@ class DIGeography extends DIObject {
 		}
 		$oReturn['Status'] = $iReturn;
 		return $oReturn;
+	}
+	
+	public static function moveNodeTo($prmSession,$prmGeographyIdPrefix,$prmNewGeographyIdPrefix,$prmGeographyCodePrefix,$prmNewGeographyCodePrefix) {
+		/* Move geography to a different parent node, updates 
+		   GeographyId and associated Disaster records
+		*/		
+		$iReturn = ERR_NO_ERROR;
+
+		$prmNewGeographyName = self::getNameById($prmSession, $prmNewGeographyIdPrefix);
+		if ($prmNewGeographyName == '') {
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($iReturn > 0) {
+			$Query = "SELECT * FROM Geography WHERE GeographyId LIKE '" . $prmGeographyIdPrefix . "%'";
+			foreach($prmSession->q->dreg->query($Query) as $row) {
+				$GeographyId = $row['GeographyId'];
+				$newGeographyId = $prmNewGeographyIdPrefix . substr($GeographyId,strlen($prmNewGeographyIdPrefix));
+				
+				// New Id must not exist in database...
+				$bExist = self::existId($prmSession, $newGeographyId);
+				if ($bExist) {
+					$iReturn = ERR_UNKNOWN_ERROR;
+				}
+
+				if ($iReturn > 0) {
+					$g = new DIGeography($prmSession, $GeographyId);
+					$Query = "UPDATE Geography SET GeographyId='" . $newGeographyId . "' WHERE GeographyId='" . $GeographyId . "'";
+					$prmSession->q->dreg->query($Query);
+					$Query = "UPDATE Disaster SET GeographyId='" . $newGeographyId . "' WHERE GeographyId='" . $GeographyId . "'";
+					$prmSession->q->dreg->query($Query);
+					$g->set('GeographyId', $newGeographyId);
+					$g->setGeographyFQName();					
+					// Update GeographyCode
+					$GeographyCode = $g->get('GeographyCode');
+					$newGeographyCode = $prmNewGeographyCodePrefix . substr($GeographyCode, strlen($prmGeographyCodePrefix));
+					fb($GeographyCode . ' ' . $newGeographyCode);
+					$g->set('GeographyCode', $newGeographyCode);
+					$g->update();
+				}
+			}
+		}
+		return $iReturn;
 	}
 } //class
 
