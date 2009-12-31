@@ -538,34 +538,34 @@
 						<tr valign="top">
 							<td>
 								<div style="height:180px" class="dwin">
-									<input type="button" class="line" value="{-$dis.DisasterSerial[0]-}" onClick="setAdvQuery('DisasterSerial', 'text')" /><br />
-									<input type="button" class="line" value="{-$dis.DisasterBeginTime[0]-}" onClick="setAdvQuery('DisasterBeginTime', 'date')" /><br />
-									<input type="button" class="line" value="{-$dis.DisasterSiteNotes[0]-}" onClick="setAdvQuery('DisasterSiteNotes', 'text')" /><br />
-									<input type="button" class="line" value="{-$eve.EventDuration[0]-}" onClick="setAdvQuery('EventDuration', 'text')" /><br />
-									<input type="button" class="line" value="{-$eve.EventNotes[0]-}" onClick="setAdvQuery('EventNotes', 'text')" /><br />
-									<input type="button" class="line" value="{-$cau.CauseNotes[0]-}" onClick="setAdvQuery('CauseNotes', 'text')" /><br />
-									<input type="button" class="line" value="{-$rc2.RecordAuthor[0]-}" onClick="setAdvQuery('RecordAuthor', 'text')" /><br />
-									<input type="button" class="line" value="{-$rc2.RecordCreation[0]-}" onClick="setAdvQuery('RecordCreation','date')" /><br />
-									<input type="button" class="line" value="{-$rc2.RecordUpdate[0]-}" onClick="setAdvQuery('RecordUpdate','date')" /><br />
+									<input type="button" class="CustomQueryListItem" value="{-$dis.DisasterSerial[0]-}" onClick="setAdvQuery('DisasterSerial', 'text')" /><br />
+									<input type="button" class="CustomQueryListItem" value="{-$dis.DisasterBeginTime[0]-}" onClick="setAdvQuery('DisasterBeginTime', 'date')" /><br />
+									<input type="button" class="CustomQueryListItem" value="{-$dis.DisasterSiteNotes[0]-}" onClick="setAdvQuery('DisasterSiteNotes', 'text')" /><br />
+									<input type="button" class="CustomQueryListItem" value="{-$eve.EventDuration[0]-}" onClick="setAdvQuery('EventDuration', 'text')" /><br />
+									<input type="button" class="CustomQueryListItem" value="{-$eve.EventNotes[0]-}" onClick="setAdvQuery('EventNotes', 'text')" /><br />
+									<input type="button" class="CustomQueryListItem" value="{-$cau.CauseNotes[0]-}" onClick="setAdvQuery('CauseNotes', 'text')" /><br />
+									<input type="button" class="CustomQueryListItem" value="{-$rc2.RecordAuthor[0]-}" onClick="setAdvQuery('RecordAuthor', 'text')" /><br />
+									<input type="button" class="CustomQueryListItem" value="{-$rc2.RecordCreation[0]-}" onClick="setAdvQuery('RecordCreation','date')" /><br />
+									<input type="button" class="CustomQueryListItem" value="{-$rc2.RecordUpdate[0]-}" onClick="setAdvQuery('RecordUpdate','date')" /><br />
 									<hr />
 									{-foreach name=ef1 key=key item=item from=$ef1-}
-										<input type="button" class="line" value="{-$item[0]-}" onClick="setAdvQuery('{-$key-}','number')" /><br />
+										<input type="button" class="CustomQueryListItem" value="{-$item[0]-}" onClick="setAdvQuery('{-$key-}','number')" /><br />
 									{-/foreach-}
 									<hr />
 									{-foreach name=sec key=key item=item from=$sec-}
-										<input type="button" class="line" value="{-$item[0]-}" onClick="setAdvQuery('{-$key-}','boolean')" /><br />
+										<input type="button" class="CustomQueryListItem" value="{-$item[0]-}" onClick="setAdvQuery('{-$key-}','boolean')" /><br />
 									{-/foreach-}
 									<hr />
 									{-foreach name=ef3 key=key item=item from=$ef3-}
-										<input type="button" class="line" value="{-$item[0]-}" onClick="setAdvQuery('{-$key-}','number')" /><br />
+										<input type="button" class="CustomQueryListItem" value="{-$item[0]-}" onClick="setAdvQuery('{-$key-}','number')" /><br />
 									{-/foreach-}
 									<hr />
 									{-foreach name=ef4 key=key item=item from=$ef4-}
-										<input type="button" class="line" value="{-$item[0]-}" onClick="setAdvQuery('{-$key-}','text')" /><br />
+										<input type="button" class="CustomQueryListItem" value="{-$item[0]-}" onClick="setAdvQuery('{-$key-}','text')" /><br />
 									{-/foreach-}
 									<hr />
 									{-foreach name=eef key=key item=item from=$EEFieldList-}
-										<input type="button" class="line" value="{-$item[0]-}" onClick="setAdvQuery('{-$key-}','date')" /><br />
+										<input type="button" class="CustomQueryListItem" value="{-$item[0]-}" onClick="setAdvQuery('{-$key-}','date')" /><br />
 									{-/foreach-}
 								</div>
 							</td>
