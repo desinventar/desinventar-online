@@ -10,18 +10,18 @@
 	<script type="text/javascript" src="include/prototype.js"></script>
 	<script type="text/javascript" src="include/diadmin.js"></script>
     <script type="text/javascript">
-	function setDIForm(did) {
+	function setDIForm(prmDisasterId) {
 		parent.w.collapse();
 		parent.difw.show();
-		setDICardfromId('{-$reg-}', did, 'DATA');
-{-if $role == 'USER' || $role == 'SUPERVISOR' || $role == 'ADMINREGION'-}
-		cupd = window.parent.frames['dif'].document.getElementById('cardupd');
-		if (cupd != null) {
-			cupd.enable();
-			Element.addClassName(cupd, 'bb');
-			Element.removeClassName(cupd, 'disabled');
-		}
-{-/if-}
+		setDICardfromId('{-$reg-}', prmDisasterId, 'DATA');
+		{-if $role == 'USER' || $role == 'SUPERVISOR' || $role == 'ADMINREGION'-}
+			cupd = window.parent.frames['dif'].document.getElementById('cardupd');
+			if (cupd != null) {
+				cupd.enable();
+				Element.addClassName(cupd, 'bb');
+				Element.removeClassName(cupd, 'disabled');
+			}
+		{-/if-}
 	}
 	function displayPage(page) {
 		var mypag = page;
