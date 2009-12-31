@@ -465,10 +465,11 @@
 		}
 	}
 
-	function setDICardfromId(reg, did, src) {
+	function setDICardfromId(prmRegionId, prmDisasterId, src) {
 		var lsAjax = new Ajax.Request('cards.php', {
-			method: 'get', parameters: 'r='+ reg +'&DisasterId='+ did,
+			method: 'get', parameters: 'r='+ prmRegionId +'&DisasterId='+ prmDisasterId,
 			onLoading: function(request) {
+				/*
 				if (src == "DATA") {
 					dostat = window.parent.frames['dif'].document.getElementById('dostat');
 				} else {
@@ -477,21 +478,24 @@
 				if (dostat != null) {
 					dostat.innerHTML = waiting;
 				}
+				*/
 			},
 			onSuccess: function(request) {
 				var res = request.responseText;
 				var json = eval('(' + res + ')');
-				setDICard(reg, json, src);
+				setDICard(prmRegionId, json, src);
+				/*
 				if (dostat != null) {
 					dostat.innerHTML = "";
 				}
+				*/
 				return true;
 			}
 		} );
 		return false;
 	}
 	
-	function setDICard(reg, arr, src) {
+	function setDICard(prmRegionId, arr, src) {
 		var diform = null;
 		if (src == "DATA")
 			diform = window.parent.frames['dif'].document.getElementById('DICard');
@@ -504,7 +508,7 @@
 			}
 			else {
 				geo = arr['GeographyId'];
-				getGeoItems(reg, arr['GeographyId'], 0, geo.length / 5, src);
+				getGeoItems(prmRegionId, arr['GeographyId'], 0, geo.length / 5, src);
 			}
 		}
 	}
@@ -533,6 +537,7 @@
 			} );
 		}
 	}
+
 	function showinfo(mydiv) {
 		if ($(mydiv).style.display == 'none')
 			$(mydiv).style.display = 'block';
