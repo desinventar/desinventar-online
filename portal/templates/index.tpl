@@ -51,7 +51,7 @@
 			$("#regionbasicinfo" ).load('{-$di_url-}', { cmd:'getRegionBasicInfo', RegionId : RegionId });
 			$("#regiontechinfo"  ).load('{-$di_url-}', { cmd:'getRegionTechInfo', RegionId : RegionId });
 			$("#regionlink").unbind('click').click(function() {
-				window.open('{-$di_url-}?r=' + RegionId,'_blank', 
+				window.open('{-$di_url-}?r=' + RegionId + '&lang={-$lang-}','_blank', 
 					'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');
 			});
 		};
@@ -65,7 +65,7 @@
 		// Startup function (on load)
 		$(function() {
 			jQuery("#btnMainWindow").click(function() {
-				window.open('{-$di_url-}?cmd=main','_blank', 'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');
+				window.open('{-$di_url-}?cmd=main&lang={-$lang-}','_blank', 'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');
 			});
 			$("#version").load('{-$di_url-}', { cmd: 'getversion' });
 			
