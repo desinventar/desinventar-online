@@ -6,7 +6,7 @@ Summary: DesInventar - Disaster Inventory System
 %define name1 desinventar
 %define major 82
 Name: %{name1}%{major}
-Version: 8.2.0.44
+Version: 8.2.0.66
 Release: 1%{dist}
 License: Propietary
 Group: Applications/Disaster
