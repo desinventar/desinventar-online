@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#!/usr/bin/php -d session.save_path='/tmp'
 <script language="php">
 /*
   DesInventar - http://www.desinventar.org
