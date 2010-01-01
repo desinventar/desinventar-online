@@ -1,3 +1,6 @@
+* 2010-01-01 Jhon H. Caicedo <jhcaiced@desinventar.org>
+- New year release started 8.2.0.68
+
 * 2009-12-31 Jhon H. Caicedo <jhcaiced@desinventar.org>
 - Release 8.2.0.67 - End of Year 2009
 

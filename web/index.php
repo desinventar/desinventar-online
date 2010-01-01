@@ -1,11 +1,11 @@
 <script language="php">
 /*
  DesInventar8 - http://www.desinventar.org
- (c) 1998-2009 Corporacion OSSO
+ (c) 1998-2010 Corporacion OSSO
 */
 
 // This is the version of the software
-define('VERSION', '8.2.0.67');
+define('VERSION', '8.2.0.68');
 
 //ob_start( 'ob_gzhandler' );
 require_once('include/loader.php');
