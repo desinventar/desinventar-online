@@ -81,7 +81,8 @@ class DIGeography extends DIObject {
 		$Query= "SELECT * FROM Geography WHERE GeographyName='" . $prmGeographyName . "' " . 
 		        " AND LangIsoCode='" . $LangIsoCode . "'";
 		if ($prmParentId != '') {
-			$Query .= " AND GeographyId LIKE '" . $prmParentId . "%'";
+			$MinGeographyLevel = strlen($prmParentId)/5 - 1;
+			$Query .= " AND GeographyId LIKE '" . $prmParentId . "%' AND GeographyLevel > " . $MinGeographyLevel;
 		}
 		$Query .= ' ORDER BY GeographyLevel DESC';
 		foreach($prmSession->q->dreg->query($Query) as $row) {
@@ -276,7 +277,6 @@ class DIGeography extends DIObject {
 					// Update GeographyCode
 					$GeographyCode = $g->get('GeographyCode');
 					$newGeographyCode = $prmNewGeographyCodePrefix . substr($GeographyCode, strlen($prmGeographyCodePrefix));
-					fb($GeographyCode . ' ' . $newGeographyCode);
 					$g->set('GeographyCode', $newGeographyCode);
 					$g->update();
 				}
