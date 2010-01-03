@@ -2,12 +2,11 @@
 <script language="php">
 /*
   DesInventar - http://www.desinventar.org
-  (c) 1998-2009 Corporacion OSSO
+  (c) 1998-2010 Corporacion OSSO
   
-  2009-12-29 Jhon H. Caicedo <jhcaiced@desinventar.org>
+  2010-01-03 Jhon H. Caicedo <jhcaiced@desinventar.org>
   
-  Import data from DGR (Direccion de Gestion del Riesgo) 
-  SIGPAD - Colombia
+  Fix CHILE Geography, update codes and create new items
 */
 
 require_once('../web/include/loader.php');
@@ -45,10 +44,8 @@ while (! feof(STDIN) ) {
 			}
 			if ($iReturn > 0) {
 				$g = new DIGeography($us, $OldId);
-				fb(sprintf("%-25s %-20s %-20s %-10s %-10s", $Name, $OldId, $newParent, $OldCode, $NewCode));
-				if ($newParent != '') {
-					DIGeography::moveNodeTo($us, $OldId, $newParent, $OldCode, $NewCode, false);
-				}
+				fb(sprintf("%3s %-20s %-20s %-10s %-10s %-25s", $line, $OldId, $newParent, $OldCode, $NewCode, $Name));
+				DIGeography::moveNodeTo($us, $OldId, $newParent, $OldCode, $NewCode, false);
 			}
 		}
 	}
