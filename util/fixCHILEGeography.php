@@ -29,13 +29,14 @@ while (! feof(STDIN) ) {
 	$Msg = '';
 	$a = fgetcsv(STDIN, 1000, ',');
 	if (count($a) > 1) {
-		$OldCode   = $a[0];
-		$NewCode   = $a[5];
-		$Parent    = $a[1];
-		$Name      = $a[3];
-		$newParent = $a[4];
+		$OldCode      = $a[2];
+		$NewCode      = $a[7];
+		$Parent       = $a[1];
+		$Name         = $a[3];
+		$newParent    = $a[4];
 		$OldId = '';
 		if ( ($Name != '--') && ($Name != '') ) {
+			$OldParent = '';
 			$OldParent = DIGeography::getIdByName($us, $Parent, '');
 			$OldId = DIGeography::getIdByName($us, $Name, $OldParent);
 			if ($OldId == '') {
@@ -44,8 +45,9 @@ while (! feof(STDIN) ) {
 			}
 			if ($iReturn > 0) {
 				$g = new DIGeography($us, $OldId);
-				if ($g->get('GeographyLevel') == 2) {
-					printf("%-20s %-20s %-5s %-10s %-10s\n", $Name, $OldId, $newParent, $OldCode, $NewCode);
+				fb(sprintf("%-25s %-20s %-20s %-10s %-10s", $Name, $OldId, $newParent, $OldCode, $NewCode));
+				if ($newParent != '') {
+					DIGeography::moveNodeTo($us, $OldId, $newParent, $OldCode, $NewCode, false);
 				}
 			}
 		}

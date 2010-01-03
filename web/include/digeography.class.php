@@ -84,7 +84,7 @@ class DIGeography extends DIObject {
 			$MinGeographyLevel = strlen($prmParentId)/5 - 1;
 			$Query .= " AND GeographyId LIKE '" . $prmParentId . "%' AND GeographyLevel > " . $MinGeographyLevel;
 		}
-		$Query .= ' ORDER BY GeographyLevel DESC';
+		$Query .= ' ORDER BY GeographyLevel';
 		foreach($prmSession->q->dreg->query($Query) as $row) {
 			$GeographyId = $row['GeographyId'];
 		}
@@ -244,7 +244,7 @@ class DIGeography extends DIObject {
 		return $oReturn;
 	}
 	
-	public static function moveNodeTo($prmSession,$prmGeographyIdPrefix,$prmNewGeographyIdPrefix,$prmGeographyCodePrefix,$prmNewGeographyCodePrefix) {
+	public static function moveNodeTo($prmSession,$prmGeographyIdPrefix,$prmNewGeographyIdPrefix,$prmGeographyCodePrefix,$prmNewGeographyCodePrefix,$withChildren) {
 		/* Move geography to a different parent node, updates 
 		   GeographyId and associated Disaster records
 		*/		
@@ -255,7 +255,11 @@ class DIGeography extends DIObject {
 			$iReturn = ERR_UNKNOWN_ERROR;
 		}
 		if ($iReturn > 0) {
-			$Query = "SELECT * FROM Geography WHERE GeographyId LIKE '" . $prmGeographyIdPrefix . "%'";
+			if ($withChildren) {
+				$Query = "SELECT * FROM Geography WHERE GeographyId LIKE '" . $prmGeographyIdPrefix . "%'";
+			} else {
+				$Query = "SELECT * FROM Geography WHERE GeographyId='" . $prmGeographyIdPrefix . "'";
+			}
 			foreach($prmSession->q->dreg->query($Query) as $row) {
 				$GeographyId = $row['GeographyId'];
 				$newGeographyId = $prmNewGeographyIdPrefix . substr($GeographyId,strlen($prmNewGeographyIdPrefix));
@@ -263,6 +267,7 @@ class DIGeography extends DIObject {
 				// New Id must not exist in database...
 				$bExist = self::existId($prmSession, $newGeographyId);
 				if ($bExist) {
+					fb('NewGeographyId already exists : ' . $newGeographyId);
 					$iReturn = ERR_UNKNOWN_ERROR;
 				}
 
@@ -276,9 +281,10 @@ class DIGeography extends DIObject {
 					$g->setGeographyFQName();					
 					// Update GeographyCode
 					$GeographyCode = $g->get('GeographyCode');
-					$newGeographyCode = $prmNewGeographyCodePrefix . substr($GeographyCode, strlen($prmGeographyCodePrefix));
+					$newGeographyCode = $prmNewGeographyCodePrefix;
 					$g->set('GeographyCode', $newGeographyCode);
 					$g->update();
+					fb(sprintf("%-25s %-20s %-20s %-10s %-10s", '', $GeographyId, $newGeographyId, $GeographyCode, $newGeographyCode));
 				}
 			}
 		}
