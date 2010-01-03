@@ -791,17 +791,15 @@ class Query extends PDO
 					if (!is_array($v)) {
 						$v = explode(' ',$v);						
 					}
-					$e['Item'] .= "(";
+					$QueryRecordStatus = '';
 					$bFirst = true;
 					foreach($v as $i) {
 						if (! $bFirst) {
-							$e['Item'] .= ' OR ';
+							$QueryRecordStatus .= ' OR ';
 						}
-						$e['Item'] .= "$k = '$i'";
+						$QueryRecordStatus .= "$k = '$i'";
 						$bFirst = false;
 					}
-					$e['Item'] .= ')';
-					$e['Item'] .= " AND ";
 				} elseif (is_array($v)) {
 					if ($k == "D.DisasterBeginTime") {
 						$aa = !empty($v[0])? $v[0] : "0000"; //substr($datedb[0], 0, 4);
@@ -976,11 +974,11 @@ class Query extends PDO
 			$WhereQuery1 .= ' (';
 			$bFirst = true;
 			foreach ($e as $k => $v) {
-				if (! $bFirst) {
-					$WhereQuery1 .= ' AND ';
-				}
 				$v = trim($v);
 				if ($v != '') {
+					if (! $bFirst) {
+						$WhereQuery1 .= ' AND ';
+					}
 					$bFirst = false;
 					$WhereQuery1 .= $v;
 				}
@@ -988,6 +986,10 @@ class Query extends PDO
 			$WhereQuery1 .= ')';
 		}
 
+		if ($QueryRecordStatus != '') {
+			$WhereQuery .= ' AND (' . $QueryRecordStatus . ') ';
+		}
+		
 		if ($QueryPeriod != '') {
 			$WhereQuery .= ' AND (' . $QueryPeriod . ') ';
 		}
