@@ -1003,13 +1003,14 @@ class Query extends PDO
 		if ($QueryCause != '') {
 			$WhereQuery .= ' AND (' . $QueryCause . ') ';
 		}
+
+		if ($QueryDisasterSerial != '') {
+			$WhereQuery .= ' ' . $QueryDisasterSerialOp . ' (' . $QueryDisasterSerial . ') ';
+		}
 		
 		if (($WhereQuery1 != '') || ($EEQuery != '') || ($QueryCustom != '') ) {
 			if ($WhereQuery1 != '') {
 				$WhereQuery .= ' AND (' . $WhereQuery1 . ')';
-			}
-			if ($QueryDisasterSerial != '') {
-				$WhereQuery .= ' ' . $QueryDisasterSerialOp . ' (' . $QueryDisasterSerial . ') ';
 			}
 			if ($EEQuery != '') {
 				$WhereQuery .= ' AND (' . $EEQuery . ') ';
