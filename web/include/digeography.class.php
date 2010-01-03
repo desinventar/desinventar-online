@@ -1,7 +1,7 @@
 <script language="php">
 /*
  DesInventar - http://www.desinventar.org
- (c) 1998-2009 Corporacion OSSO
+ (c) 1998-2010 Corporacion OSSO
 */
 
 class DIGeography extends DIObject {
@@ -84,7 +84,7 @@ class DIGeography extends DIObject {
 			$MinGeographyLevel = strlen($prmParentId)/5 - 1;
 			$Query .= " AND GeographyId LIKE '" . $prmParentId . "%' AND GeographyLevel > " . $MinGeographyLevel;
 		}
-		$Query .= ' ORDER BY GeographyLevel';
+		$Query .= ' ORDER BY GeographyLevel DESC';
 		foreach($prmSession->q->dreg->query($Query) as $row) {
 			$GeographyId = $row['GeographyId'];
 		}
@@ -249,11 +249,6 @@ class DIGeography extends DIObject {
 		   GeographyId and associated Disaster records
 		*/		
 		$iReturn = ERR_NO_ERROR;
-
-		$prmNewGeographyName = self::getNameById($prmSession, $prmNewGeographyIdPrefix);
-		if ($prmNewGeographyName == '') {
-			$iReturn = ERR_UNKNOWN_ERROR;
-		}
 		if ($iReturn > 0) {
 			if ($withChildren) {
 				$Query = "SELECT * FROM Geography WHERE GeographyId LIKE '" . $prmGeographyIdPrefix . "%'";
@@ -262,29 +257,32 @@ class DIGeography extends DIObject {
 			}
 			foreach($prmSession->q->dreg->query($Query) as $row) {
 				$GeographyId = $row['GeographyId'];
-				$newGeographyId = $prmNewGeographyIdPrefix . substr($GeographyId,strlen($prmNewGeographyIdPrefix));
+				$newGeographyId = $GeographyId;
 				
-				// New Id must not exist in database...
-				$bExist = self::existId($prmSession, $newGeographyId);
-				if ($bExist) {
-					fb('NewGeographyId already exists : ' . $newGeographyId);
-					$iReturn = ERR_UNKNOWN_ERROR;
+				if ($prmNewGeographyIdPrefix != '') {
+					$newGeographyId = $prmNewGeographyIdPrefix . substr($GeographyId,strlen($prmNewGeographyIdPrefix));
+				
+					// New Id must not exist in database...
+					$bExist = self::existId($prmSession, $newGeographyId);
+					if ($bExist) {
+						$iReturn = ERR_UNKNOWN_ERROR;
+					}
 				}
-
 				if ($iReturn > 0) {
 					$g = new DIGeography($prmSession, $GeographyId);
-					$Query = "UPDATE Geography SET GeographyId='" . $newGeographyId . "' WHERE GeographyId='" . $GeographyId . "'";
-					$prmSession->q->dreg->query($Query);
-					$Query = "UPDATE Disaster SET GeographyId='" . $newGeographyId . "' WHERE GeographyId='" . $GeographyId . "'";
-					$prmSession->q->dreg->query($Query);
-					$g->set('GeographyId', $newGeographyId);
-					$g->setGeographyFQName();					
+					if ($GeographyId != $newGeographyId) {
+						$Query = "UPDATE Geography SET GeographyId='" . $newGeographyId . "' WHERE GeographyId='" . $GeographyId . "'";
+						$prmSession->q->dreg->query($Query);
+						$Query = "UPDATE Disaster SET GeographyId='" . $newGeographyId . "' WHERE GeographyId='" . $GeographyId . "'";
+						$prmSession->q->dreg->query($Query);
+						$g->set('GeographyId', $newGeographyId);
+						$g->setGeographyFQName();
+					}
 					// Update GeographyCode
 					$GeographyCode = $g->get('GeographyCode');
 					$newGeographyCode = $prmNewGeographyCodePrefix;
 					$g->set('GeographyCode', $newGeographyCode);
-					$g->update();
-					fb(sprintf("%-25s %-20s %-20s %-10s %-10s", '', $GeographyId, $newGeographyId, $GeographyCode, $newGeographyCode));
+					$r = $g->update();
 				}
 			}
 		}
