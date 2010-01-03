@@ -971,7 +971,6 @@ class Query extends PDO
 
 		$WhereQuery1 = '';
 		if (count($e) > 0) {
-			$WhereQuery1 .= ' (';
 			$bFirst = true;
 			foreach ($e as $k => $v) {
 				$v = trim($v);
@@ -983,7 +982,6 @@ class Query extends PDO
 					$WhereQuery1 .= $v;
 				}
 			}
-			$WhereQuery1 .= ')';
 		}
 
 		if ($QueryRecordStatus != '') {
@@ -1007,9 +1005,8 @@ class Query extends PDO
 		}
 		
 		if (($WhereQuery1 != '') || ($EEQuery != '') || ($QueryCustom != '') ) {
-			$WhereQuery .= ' AND (';
 			if ($WhereQuery1 != '') {
-				$WhereQuery .= $WhereQuery1;
+				$WhereQuery .= ' AND (' . $WhereQuery1 . ')';
 			}
 			if ($QueryDisasterSerial != '') {
 				$WhereQuery .= ' ' . $QueryDisasterSerialOp . ' (' . $QueryDisasterSerial . ') ';
