@@ -979,7 +979,7 @@ class Query extends PDO
 						$WhereQuery1 .= ' AND ';
 					}
 					$bFirst = false;
-					$WhereQuery1 .= $v;
+					$WhereQuery1 .= '(' . $v . ') ';
 				}
 			}
 		}
@@ -1017,7 +1017,7 @@ class Query extends PDO
 			if ($QueryCustom != '') {
 				$WhereQuery .= ' AND (' . $QueryCustom. ') ';
 			}
-			$WhereQuery .= ')';
+			//$WhereQuery .= ')';
 		}
     	return $WhereQuery;
 	}
