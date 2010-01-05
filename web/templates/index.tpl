@@ -32,6 +32,10 @@
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			jQuery("#listdb-win").hide();
+			{-if $reg==""-}
+				jQuery("#ResultHeaderText").hide();
+				jQuery("#ResultHeaderButtonToolbar").hide();
+			{-/if-}
 			{-if $ctl_mainpage -}
 				jQuery("#dcr").hide();
 				jQuery("#listdb-win").show();
@@ -66,30 +70,32 @@
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr bgcolor="#bbbbbb">
 					<td width="200px">
-						<b>{-#tsubtitle2#-} &rarr;</b>
+						<div id="ResultHeaderText"><b>{-#tsubtitle2#-} &rarr;</b></div>
 					</td>
 					<td align="center">
-						<!--	SECTION : DATA CONFIGURATION ============================ -->
-						<button id="dat-btn" class="rounded" ext:qtip="{-#tdatamsg#-}"><span>{-#bdata#-}</span></button>
-						<div id="dat-win" class="x-hidden">
-						{-include file="viewdata_parameters.tpl" -}
-						</div> <!-- dat-win -->
-						<!--	END DATA SECTION -->
-						<!--	SECTION : THEMATICMAP CONFIGURATION -->
-						<button id="map-btn" class="rounded" ext:qtip="{-#tthematicmsg#-}"><span>{-#bthematic#-}</span></button>
-						<div id="map-win" class="x-hidden">
-						{-include file="thematicmap_parameters.tpl" -}
-						</div> <!-- map-win -->
-						<!--	END MAP SECTION -->
-						<!--	BEGIN GRAPHIC CONFIGURATION -->
-						{-include file="graph_parameters.tpl"-}
-						<!--	END GRAPHIC SECTION  -->
-						<!--	SECTION : STATISTIC CONFIGURATION -->
-						<button id="std-btn" class="rounded" ext:qtip="{-#tstatisticmsg#-}"><span>{-#bstatistic#-}</span></button>
-						<div id="std-win" class="x-hidden">
-						{-include file="statistic_parameters.tpl" -}
-						</div> <!-- std-win -->
-						<!--	END STATISTIC SECTION  -->
+						<div id="ResultHeaderButtonToolbar">
+							<!--	SECTION : DATA CONFIGURATION ============================ -->
+							<button id="dat-btn" class="rounded" ext:qtip="{-#tdatamsg#-}"><span>{-#bdata#-}</span></button>
+							<div id="dat-win" class="x-hidden">
+							{-include file="viewdata_parameters.tpl" -}
+							</div> <!-- dat-win -->
+							<!--	END DATA SECTION -->
+							<!--	SECTION : THEMATICMAP CONFIGURATION -->
+							<button id="map-btn" class="rounded" ext:qtip="{-#tthematicmsg#-}"><span>{-#bthematic#-}</span></button>
+							<div id="map-win" class="x-hidden">
+							{-include file="thematicmap_parameters.tpl" -}
+							</div> <!-- map-win -->
+							<!--	END MAP SECTION -->
+							<!--	BEGIN GRAPHIC CONFIGURATION -->
+							{-include file="graph_parameters.tpl"-}
+							<!--	END GRAPHIC SECTION  -->
+							<!--	SECTION : STATISTIC CONFIGURATION -->
+							<button id="std-btn" class="rounded" ext:qtip="{-#tstatisticmsg#-}"><span>{-#bstatistic#-}</span></button>
+							<div id="std-win" class="x-hidden">
+							{-include file="statistic_parameters.tpl" -}
+							</div> <!-- std-win -->
+							<!--	END STATISTIC SECTION  -->
+						</div>
 						<!-- Show XML query open window-->
 						<div id="qry-win" class="x-hidden">
 							<div class="x-window-header">{-#mopenquery#-}</div>
