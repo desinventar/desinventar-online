@@ -33,6 +33,7 @@
 		jQuery(document).ready(function() {
 			jQuery("#listdb-win").hide();
 			{-if $reg==""-}
+				/* Hide button toolbar if no region is selected */
 				jQuery("#ResultHeaderText").hide();
 				jQuery("#ResultHeaderButtonToolbar").hide();
 			{-/if-}

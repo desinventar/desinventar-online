@@ -23,9 +23,12 @@ if ($cmd == '' && $RegionId == '') {
 // Default Template Values
 $t->assign('request_uri', $_SERVER['REQUEST_URI']);
 $t->assign('version', VERSION);
+$t->assign("userid", $us->UserId);
 
-if (!empty($RegionId))
+if (!empty($RegionId)) {
 	$us->open($RegionId);
+}
+
 switch ($cmd) {
 	case 'getversion':
 		print VERSION;
@@ -48,7 +51,6 @@ switch ($cmd) {
 		$t->assign('lg', $lg);
 		$t->assign("lglst", $us->q->loadLanguages(1));
 		$t->assign('regionlist', $us->listDB());
-		$t->assign("userid", $us->UserId);
 		$t->assign("ctl_noregion", true);
 		$t->assign("ctl_mainpage", true);
 		$t->display('index.tpl');
@@ -165,7 +167,6 @@ switch ($cmd) {
 				$_SESSION['lang'] = $get['lang'];
 			// Direct access returns a list of public regions on this server
 			$t->assign ("lglst", $us->q->loadLanguages(1));
-			$t->assign ("userid", $us->UserId);
 			switch ($get['cmd']) {
 				case "getGeoId":
 					$code = $us->q->getObjectNameById($get['GeoCode'], "GEOCODE");

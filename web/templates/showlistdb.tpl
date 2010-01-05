@@ -5,19 +5,23 @@
 		<h2><u>{-#listdbTitle#-}</u></h2>
 		<table border="1" class="grid">
 			<tr align="center">
-				<td><b>{-#listdbCountry#-}</b></td>
+				<td width="100px"><b>{-#listdbCountry#-}</b></td>
 				<td><b>{-#listdbRegion#-}</b></td>
-				<td><b>{-#listdbStatus#-}</b><br /></td>
+				{-if $userid!=''-}
+					<td><b>{-#listdbStatus#-}</b><br /></td>
+				{-/if-}
 			</tr>
 			{-foreach name=rlist key=key item=item from=$regionlist-}
 				<tr>
-					<td>{-$item[1]-}</td>
+					<td align="center">{-$item[1]-}</td>
 					<td>
 						<a href="index.php?r={-$key-}">{-$item[0]-}</a>
 						<a href="javascript:void(null)" onClick="javascript:window.open('?r={-$key-}','DI_{-$smarty.foreach.rlist.iteration-}', 
 							'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,status=yes,scrollbars=no,toolbar=no');">[-]</a>
 					</td>
-					<td>{-if $item[2] == 3-}{-#listdbPublic#-}{-else-}{-#listdbPrivate#-}{-/if-}</td>
+					{-if $userid!=''-}
+						<td>{-if $item[2] == 3-}{-#listdbPublic#-}{-else-}{-#listdbPrivate#-}{-/if-}</td>
+					{-/if-}
 				</tr>
 			{-/foreach-}
 		</table>
