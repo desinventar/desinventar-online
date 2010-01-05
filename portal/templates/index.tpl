@@ -165,7 +165,9 @@
 				<table>
 				<tr>
 					<td align="right">
-						<img id="btnMainWindow" src="images/b_desinventar3.jpg" border="0">
+						<a href="" id="btnMainWindow">
+							<img id="btnMainWindow2" src="images/b_desinventar3.jpg" border="0">
+						</a>
 					</td>
 				</tr>
 				<tr>
