@@ -187,22 +187,7 @@
 			<iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="?cmd=getRegionFullInfo&r={-$reg-}"></iframe>
 		</div> <!-- end div id=qryres -->
 		<div id="listdb-win" >
-			<table border="0" cellpadding="0" cellspacing="0" style="border: thin solid;" width="100%">
-				<tr style="background:url(images/bgmain.png)">
-					<td width="100%">
-						<table width="100%">
-						<tr>
-							<td><a href="index.php?cmd=main"><img src="images/di_logo1.png" border="0"></a><br />
-							</td>
-							<td>{-$version-}<br />
-							</td>
-							<td width="100%">
-							</td>
-						</tr>
-						</table>
-					</td>
-				</tr>
-			</table>
+			{-include file="header_simple.tpl" -}
 			{-include file="showlistdb.tpl" -}
 		</div> <! id="listdb-win" -->
 	</div><!-- END div id=container-->

@@ -77,7 +77,7 @@ a.info:visited	{ color: #333333;  }
 	overflow: auto; padding:0px; margin: 0px; border-style:solid;
 	border-width:1px; border-color:#BBBBBB;
 }
-
+a.RegionListItem { text-decoration: none; }
 table.grid {
 	font-family:Lucida Grande, Verdana;
 	font-size:10px; width:100%; border: 0px solid #ccc;
