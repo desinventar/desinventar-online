@@ -796,6 +796,13 @@ class DIRegion extends DIObject {
 			$a[$Field] = $this->get($Field, $prmLang);
 		}
 		$a['RegionLastUpdate'] = substr($a['RegionLastUpdate'],0,10);
+
+		$Query = "SELECT MIN(DisasterBeginTime) AS MinDate, MAX(DisasterBeginTime) AS MaxDate FROM Disaster ".
+			"WHERE RecordStatus='PUBLISHED'";
+		foreach($this->q->dreg->query($Query) as $row) {
+			$a['DataMinDate'] = $row['MinDate'];
+			$a['DataMaxDate'] = $row['MaxDate'];
+		}
 		return $a;
 	}
 	
