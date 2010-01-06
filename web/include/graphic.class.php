@@ -1,7 +1,7 @@
 <script language="php">
 /*
  DesInventar8 - http://www.desinventar.org
- (c) 1998-2009 Corporacion OSSO
+ (c) 1998-2010 Corporación OSSO
 */
 require_once(JPGRAPHDIR . "/jpgraph.php");
 require_once(JPGRAPHDIR . "/jpgraph_line.php");
@@ -123,30 +123,37 @@ class Graphic {
 		} //if
 		// Choose presentation options, borders, intervals
 		$itv = 1;				// no interval
+		fb($gType);
 		if ($gType == "TEMPO" || $gType == "2TEMPO") {
-			$rl = 70;			// right limit
+			$ImgRightLimit = 50;			// right limit
+			if ($gType == '2TEMPO') {
+				$ImgRightLimit = 200;
+			}
 			switch($this->sPeriod) {
-				case "YEAR":		$bl = 50;	break;
-				case "YWEEK":		$bl = 65;	break;
-				case "YMONTH":		$bl = 65;	break;
-				case "YDAY":		$bl = 85;	break;
-				default:			$bl = 50;	break;
+				case "YEAR":		$ImgBottomLimit = 50;	break;
+				case "YWEEK":		$ImgBottomLimit = 65;	break;
+				case "YMONTH":		$ImgBottomLimit = 65;	break;
+				case "YDAY":		$ImgBottomLimit = 85;	break;
+				default:			$ImgBottomLimit = 50;	break;
 			}
 		} elseif ($gType == "XTEMPO") {
-			$rl = 160;		// right limit
-			$bl = 50;		// bottom limit
+			$ImgRightLimit = 160;		// right limit
+			$ImgBottomLimit = 50;		// bottom limit
 		} else {
-			$rl = 70;		// right limit
-			$bl = 120;		// bottom limit more space to xlabels
+			$ImgRightLimit = 70;		// right limit
+			$ImgBottomLimit = 120;		// bottom limit more space to xlabels
 		}
+		fb($ImgRightLimit);
+		fb($ImgBottomLimit);
 		// calculate graphic size
-		$wx = 760;
-		$hx = 520;
+		$wx = 980;
+		$hx = 515;
 		// 1D Graphic - PIE
 		if ($gType == "PIE") {
 			$h = (24 * count($data[$sYAxisLabel]));
-			if ($h > $hx)
+			if ($h > $hx) {
 				$hx = $h;
+			}
 			$this->g = new PieGraph($wx, $hx, "auto");
 			// Set label with variable displayed
 			$t1 = new Text($sYAxisLabel);
@@ -158,6 +165,7 @@ class Graphic {
 			$this->g->AddText($t1);
 		} else {
 			// 2D, 3D Graphic
+			
 			$w = (14 * count($data[$sXAxisLabel]));
 			if ($w > $wx)
 				$wx = $w;
@@ -168,7 +176,7 @@ class Graphic {
 				$this->g->SetScale($opc['_G+Scale']); // textint, textlog
 				$this->g->xgrid->Show(true,true);
 				$this->g->xaxis->SetTitle($sXAxisLabel, 'middle');
-				$this->g->xaxis->SetTitlemargin($bl - 20);
+				$this->g->xaxis->SetTitlemargin($ImgBottomLimit - 20);
 				$this->g->xaxis->title->SetFont(FF_ARIAL, FS_NORMAL);
 				$this->g->xaxis->SetTickLabels($lbl);
 				$this->g->xaxis->SetFont(FF_ARIAL,FS_NORMAL, 8);
@@ -180,13 +188,14 @@ class Graphic {
 				$this->g->yaxis->title->SetFont(FF_ARIAL, FS_NORMAL);
 				$this->g->yaxis->scale->SetGrace(0);
 				$this->g->yaxis->SetColor('darkblue');
-				if ($opc['_G+Scale'] == "textlog")
+				if ($opc['_G+Scale'] == "textlog") {
 					$this->g->yaxis->scale->ticks->SetLabelLogType(LOGLABELS_PLAIN);
+				}
 		        if (isset($opc['_G+Scale2']) && ($gType == "2TEMPO" || $gType == "2COMPAR")) {
 					$this->g->SetY2Scale($opc['_G+Scale2']);	// int, log
 					$this->g->y2grid->Show(true,true);
 					$this->g->y2axis->SetTitle($sY2AxisLabel, 'middle');
-					$this->g->y2axis->SetTitlemargin($rl - 20);
+					$this->g->y2axis->SetTitlemargin($ImgRightLimit - 20);
 					$this->g->y2axis->title->SetFont(FF_ARIAL, FS_NORMAL);
 					$this->g->y2axis->scale->SetGrace(0);
 					$this->g->y2axis->SetColor('darkred');
@@ -204,7 +213,7 @@ class Graphic {
 		if ($gType != "PIE")
 			$this->g->xaxis->SetTextLabelInterval($iInterval);
 		// Other options graphic
-		$this->g->img->SetMargin(50,$rl,30,$bl);
+		$this->g->img->SetMargin(50,$ImgRightLimit,30,$ImgBottomLimit);
 		$this->g->legend->SetAbsPos(5,5,'right','top');
 		//$this->g->legend->Pos(0.0, 0.1);
 		$this->g->legend->SetFont(FF_ARIAL, FS_NORMAL, 10);

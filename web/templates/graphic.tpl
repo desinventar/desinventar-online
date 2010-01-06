@@ -30,7 +30,7 @@
  </head>
  <body>
   <p align="right">{-#trepnum#-}: {-$NumRecords-}</p>
-  <img src="{-$image-}">
+  <img src="{-$image-}" border="1">
  </body>
 </html>
 {-else-}
