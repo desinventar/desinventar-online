@@ -16,12 +16,14 @@ class Graphic {
 	var $g;
 	var $sPeriod;
 	var $sStat;
+	var $data;
 	/* opc [kind:BAR,LINE,PIE Opc:Title,etc] data:Matrix
 	   data[0] == X, data[1] = Y1,  .. */
-	public function Graphic ($opc, $data) {
+	public function Graphic ($opc, $prmData) {
+		$this->data = $prmData;
 		$kind = $opc['_G+Kind'];
 		// Get Label Information
-		$oLabels     = array_keys($data);
+		$oLabels     = array_keys($this->data);
 		$sXAxisLabel = current($oLabels);
 		$sYAxisLabel = end($oLabels);
 		$q = new Query($opc['_REG']);
@@ -57,27 +59,27 @@ class Graphic {
 			elseif ($kind == "LINE")
 				$kind = "MULTILINE";
 			// Convert data in matrix [EVENT][YEAR]=>VALUE
-			foreach ($data[$sY2AxisLabel] as $k=>$i) {
-				foreach ($data[$sXAxisLabel] as $l=>$j) {
+			foreach ($this->data[$sY2AxisLabel] as $k=>$i) {
+				foreach ($this->data[$sXAxisLabel] as $l=>$j) {
 					if ($k == $l)
-						$tvl[$i][$j] = $data[$sYAxisLabel][$k];
+						$tvl[$i][$j] = $this->data[$sYAxisLabel][$k];
 				}
 			}
 			foreach ($tvl as $kk=>$ii)
 				$val[$kk] = $this->completeTimeSeries($opc, $ii, $q);
 			$lbl = array_keys($val[$kk]);
-			$acol = count(array_unique($data[$sY2AxisLabel]));
+			$acol = count(array_unique($this->data[$sY2AxisLabel]));
 		} else {
 			// Normal Graph (BAR, LINE, PIE)
 			$n = 0;
 			$acol = 1;
 			// Set Array to [YEAR]=> { VALUE1, VALUE2 }  OR Set Array to [YEAR]=>VALUE
-			foreach ($data[$sYAxisLabel] as $Key=>$Value) {
-				if ($data[$sXAxisLabel][$n] != "00") {
+			foreach ($this->data[$sYAxisLabel] as $Key=>$Value) {
+				if ($this->data[$sXAxisLabel][$n] != "00") {
 					if ($gType == "2TEMPO" || $gType == "2COMPAR")
-						$val[$data[$sXAxisLabel][$Key]] = array($Value, $data[$sY2AxisLabel][$Key]);
+						$val[$this->data[$sXAxisLabel][$Key]] = array($Value, $this->data[$sY2AxisLabel][$Key]);
 					else
-						$val[$data[$sXAxisLabel][$Key]] = $Value;
+						$val[$this->data[$sXAxisLabel][$Key]] = $Value;
 					$acol++;
 				}
 				$n++;
@@ -123,34 +125,33 @@ class Graphic {
 		} //if
 		// Choose presentation options, borders, intervals
 		$itv = 1;				// no interval
-		fb($gType);
+		$ImgMarginLeft = 50;
+		$ImgMarginTop  = 30;
 		if ($gType == "TEMPO" || $gType == "2TEMPO") {
-			$ImgRightLimit = 50;			// right limit
+			$ImgMarginRight = 50;			// right limit
 			if ($gType == '2TEMPO') {
-				$ImgRightLimit = 200;
+				$ImgMarginRight = 200;
 			}
 			switch($this->sPeriod) {
-				case "YEAR":		$ImgBottomLimit = 50;	break;
-				case "YWEEK":		$ImgBottomLimit = 65;	break;
-				case "YMONTH":		$ImgBottomLimit = 65;	break;
-				case "YDAY":		$ImgBottomLimit = 85;	break;
-				default:			$ImgBottomLimit = 50;	break;
+				case "YEAR":		$ImgMarginBottom = 50;	break;
+				case "YWEEK":		$ImgMarginBottom = 65;	break;
+				case "YMONTH":		$ImgMarginBottom = 65;	break;
+				case "YDAY":		$ImgMarginBottom = 85;	break;
+				default:			$ImgMarginBottom = 50;	break;
 			}
 		} elseif ($gType == "XTEMPO") {
-			$ImgRightLimit = 160;		// right limit
-			$ImgBottomLimit = 50;		// bottom limit
+			$ImgMarginRight = 160;		// right limit
+			$ImgMarginBottom = 50;		// bottom limit
 		} else {
-			$ImgRightLimit = 70;		// right limit
-			$ImgBottomLimit = 120;		// bottom limit more space to xlabels
+			$ImgMarginRight = 70;		// right limit
+			$ImgMarginBottom = 120;		// bottom limit more space to xlabels
 		}
-		fb($ImgRightLimit);
-		fb($ImgBottomLimit);
 		// calculate graphic size
 		$wx = 980;
 		$hx = 515;
 		// 1D Graphic - PIE
 		if ($gType == "PIE") {
-			$h = (24 * count($data[$sYAxisLabel]));
+			$h = (24 * count($this->data[$sYAxisLabel]));
 			if ($h > $hx) {
 				$hx = $h;
 			}
@@ -164,9 +165,22 @@ class Graphic {
 			$t1->SetColor("black");
 			$this->g->AddText($t1);
 		} else {
-			// 2D, 3D Graphic
+			$MaxLen = 0;
+			foreach($this->data[$sXAxisLabel] as $AxisValue) {
+				$Len = strlen($AxisValue);
+				if ($Len > $MaxLen) {
+					$MaxLen = $Len;
+				}
+			}
+			$XAxisLabelLen = $MaxLen;
+			$XAxisTitleMargin  = $XAxisLabelLen * 6;
+			$ImgMarginBottom = $XAxisTitleMargin + 24 + 20;
+
+			$Y1AxisTitleMargin = 35;
+			$Y2AxisTitleMargin = 40;
 			
-			$w = (14 * count($data[$sXAxisLabel]));
+			// 2D, 3D Graphic
+			$w = (14 * count($this->data[$sXAxisLabel]));
 			if ($w > $wx)
 				$wx = $w;
 			if ($wx > 1024)
@@ -176,7 +190,7 @@ class Graphic {
 				$this->g->SetScale($opc['_G+Scale']); // textint, textlog
 				$this->g->xgrid->Show(true,true);
 				$this->g->xaxis->SetTitle($sXAxisLabel, 'middle');
-				$this->g->xaxis->SetTitlemargin($ImgBottomLimit - 20);
+				$this->g->xaxis->SetTitlemargin($XAxisTitleMargin);
 				$this->g->xaxis->title->SetFont(FF_ARIAL, FS_NORMAL);
 				$this->g->xaxis->SetTickLabels($lbl);
 				$this->g->xaxis->SetFont(FF_ARIAL,FS_NORMAL, 8);
@@ -184,7 +198,7 @@ class Graphic {
 				$this->g->xaxis->SetLabelAngle(90);
 				$this->g->ygrid->Show(true,true);
 				$this->g->yaxis->SetTitle($sYAxisLabel, 'middle');
-				$this->g->yaxis->SetTitlemargin(40);
+				$this->g->yaxis->SetTitlemargin($Y1AxisTitleMargin);
 				$this->g->yaxis->title->SetFont(FF_ARIAL, FS_NORMAL);
 				$this->g->yaxis->scale->SetGrace(0);
 				$this->g->yaxis->SetColor('darkblue');
@@ -195,7 +209,7 @@ class Graphic {
 					$this->g->SetY2Scale($opc['_G+Scale2']);	// int, log
 					$this->g->y2grid->Show(true,true);
 					$this->g->y2axis->SetTitle($sY2AxisLabel, 'middle');
-					$this->g->y2axis->SetTitlemargin($ImgRightLimit - 20);
+					$this->g->y2axis->SetTitlemargin($Y2AxisTitleMargin);
 					$this->g->y2axis->title->SetFont(FF_ARIAL, FS_NORMAL);
 					$this->g->y2axis->scale->SetGrace(0);
 					$this->g->y2axis->SetColor('darkred');
@@ -213,7 +227,7 @@ class Graphic {
 		if ($gType != "PIE")
 			$this->g->xaxis->SetTextLabelInterval($iInterval);
 		// Other options graphic
-		$this->g->img->SetMargin(50,$ImgRightLimit,30,$ImgBottomLimit);
+		$this->g->img->SetMargin($ImgMarginLeft,$ImgMarginRight,$ImgMarginTop,$ImgMarginBottom);
 		$this->g->legend->SetAbsPos(5,5,'right','top');
 		//$this->g->legend->Pos(0.0, 0.1);
 		$this->g->legend->SetFont(FF_ARIAL, FS_NORMAL, 10);
@@ -605,6 +619,7 @@ class Graphic {
 		  $b = array(200, 0, 0);*/
 		return $pal;
 	}
+	
 
 /*
 	public function getGraphPeriod ($prmOption) {
