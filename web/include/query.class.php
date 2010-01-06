@@ -1,7 +1,7 @@
-<script language="php">
+[B<script language="php">
 /*
  DesInventar8 - http://www.desinventar.org
- (c) 1998-2009 Corporacion OSSO
+ (c) 1998-2010 Corporacion OSSO
 */
 
 class Query extends PDO
@@ -302,8 +302,9 @@ class Query extends PDO
 		$sql .= " ORDER BY GeographyLevel";
 		$data = "";
 		$res = $this->dreg->query($sql);
-		foreach($res as $row)
+		foreach($res as $row) {
 			$data .= $row['GeographyName'] . "/";
+		}
 		//	$sql = "SELECT GeographyFQName FROM Geography WHERE GeographyId='". $geoid ."'";
 		//	$data = $this->dreg->query($sql);
 		return $data;
@@ -1204,20 +1205,24 @@ class Query extends PDO
 			foreach ($dl as $k=>$i) {
 				foreach (array_keys($i) as $idx) {
 					if (substr($idx,0,11) == "GeographyId") {
-			            switch ($mode) {
-			              case "CODE": 
-			                $dl[$j][$idx] = $this->getObjectNameById($i[$idx], DI_GEOGRAPHY); break;
-			              case "NAME": 
-			                $dl[$j][$idx] = $this->getGeoNameById($i[$idx]); break;
-			              case "CODENAME": 
-			                $dl[$j][$idx] = $this->getObjectNameById($i[$idx], DI_GEOGRAPHY) ." | ". $this->getGeoNameById($i[$idx]); break;
-			              default: $dl[$j][$idx] = ""; break;
-			            }
-					}
-					elseif (is_numeric($dl[$j][$idx]) && empty($exp)) {
+						switch ($mode) {
+							case "CODE": 
+								$dl[$j][$idx] = $this->getObjectNameById($i[$idx], DI_GEOGRAPHY);
+							break;
+							case "NAME":
+								$dl[$j][$idx] = $this->getGeoNameById($i[$idx]);
+							break;
+							case "CODENAME":
+								$dl[$j][$idx] = $this->getObjectNameById($i[$idx], DI_GEOGRAPHY) ." | ". $this->getGeoNameById($i[$idx]);
+							break;
+							default:
+								$dl[$j][$idx] = "";
+							break;
+						} //switch
+					} elseif (is_numeric($dl[$j][$idx]) && empty($exp)) {
 						$dl[$j][$idx] = number_format($dl[$j][$idx], 0, ',', ' ');
 					}
-				}
+				} //foreach
 				if (!empty($exp)) {
 					foreach (array_values($dl[$j]) as $vals) {
 						if ($vals == -1)
