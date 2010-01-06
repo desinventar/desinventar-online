@@ -302,8 +302,13 @@ class Query extends PDO
 		$sql .= " ORDER BY GeographyLevel";
 		$data = "";
 		$res = $this->dreg->query($sql);
+		$i = 0;
 		foreach($res as $row) {
-			$data .= $row['GeographyName'] . "/";
+			if ($i > 0) {
+				$data .= '/';
+			}
+			$data .= $row['GeographyName'];
+			$i++;
 		}
 		//	$sql = "SELECT GeographyFQName FROM Geography WHERE GeographyId='". $geoid ."'";
 		//	$data = $this->dreg->query($sql);
