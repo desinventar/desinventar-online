@@ -1,11 +1,9 @@
-[B<script language="php">
+<script language="php">
 /*
  DesInventar8 - http://www.desinventar.org
  (c) 1998-2010 Corporacion OSSO
 */
-
-class Query extends PDO
-{
+class Query extends PDO {
 	public $sRegionId = "";
 	public $dreg = null;
 	public $core = null;
@@ -70,7 +68,7 @@ class Query extends PDO
 			if (file_exists($DBFile)) {
 				try {
 					$this->dreg = new PDO("sqlite:" . $DBFile);
-					/*** set the error reporting attribute ***/
+					// set the error reporting attribute
 					$this->dreg->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					$this->sRegionId = $prmRegionId;
 					$this->dbfile = $DBFile;
@@ -207,7 +205,7 @@ class Query extends PDO
 		return $data;
 	} //function
 
-	/***** READ OBJECTS :: EVENT, CAUSE, GEOGRAPHY, GEOLEVEL READ *****/
+	// READ OBJECTS :: EVENT, CAUSE, GEOGRAPHY, GEOLEVEL READ
 	public function isvalidObjectToInactivate($id, $obj) {
 		switch ($obj) {
 			case DI_EVENT:		$whr = "EventId='$id'";				break;
@@ -277,7 +275,7 @@ class Query extends PDO
 		return null;
 	}
 
-/*** GEOGRAPHY & GEO-LEVELS QUERIES  ***/
+	// GEOGRAPHY & GEO-LEVELS QUERIES
 	function buildGeographyId($fid, $lev) {
 		$sql = "SELECT MAX(GeographyId) AS max FROM Geography WHERE GeographyId ".
 				"LIKE '$fid%' AND GeographyLevel = $lev ORDER BY GeographyId";
@@ -315,19 +313,6 @@ class Query extends PDO
 		return $data;
 	}
 
-	/*** GEOGRAPHY ***/
-	/* Testing function to generate subtree from Id
-	function genGeoTree($geoit, $mylev, $maxlev, $selgeolist) {
-		$chked = false;
-		if (in_array($geoit['GeographyId'], $selgeolist))
-			$chked = true;
-		if ($maxlev >= $mylev) {
-			$gid = substr($geoit['GeographyId'], 0, $mylev * 5);//$this->getObjectNameById($gid, "GEONAME") 
-			return $gtree = array($gid .'|'. $geoit['GeographyName'] .'|'. $chked => $this->genGeoTree($geoit, $mylev + 1, $maxlev), $selgeolist);
-		}
-		return null;
-	}*/
-	
 	// function to build geography tree. Using child = '' built full tree.
 	function buildGeoTree($child, $mylev, $maxlev, $selgeolist) {
 		$gtree = array();
@@ -372,11 +357,10 @@ class Query extends PDO
 		return (strlen($geoid) / 5);
 	}
 
-	/* fill struct looking by: 
-	prefix: string with prefix used in VRegions
-	level: integer of level, return only data of this level. -1 to all
-	mapping: only levels with files assigned in database, shp - dbf..
-	*/
+	// fill struct looking by: 
+	//prefix: string with prefix used in VRegions
+	//level: integer of level, return only data of this level. -1 to all
+	//mapping: only levels with files assigned in database, shp - dbf..
 	function loadGeoLevels($prefix, $lev, $mapping) {
 		if ($lev >= 0)
 			$olev = "GeoLevelId = $lev ";
@@ -406,21 +390,6 @@ class Query extends PDO
 		}
 		return $data;
 	}
-	/*
-	function loadGeoCarto($geo, $lev) {
-		$sql = "SELECT * FROM GeoCarto WHERE ";
-		if (!empty($geo))
-			$sql .= "GeographyId = '$geo'";
-		else
-			$sql .= "1=1";
-		$sql .= " AND ";
-		if ($lev >= 0)
-			$sql .= "GeoLevelId = $lev";
-		else
-			$sql .= "1=1";
-		//$res = $this->dreg->query($sql);
-		return $this->getassoc($sql);
-	}*/
 
 	function getMaxGeoLev() {
 		$sql = "SELECT MAX(GeoLevelId) AS max FROM GeoLevel";
@@ -483,7 +452,7 @@ class Query extends PDO
 		return -1;
 	}
 
-	/* GET DISASTERS INFO: DATES, DATACARDS NUMBER, ETC */
+	// GET DISASTERS INFO: DATES, DATACARDS NUMBER, ETC
 	function getDBInfo() {
 		$data = array();
 		if ($this->dreg != null) {
@@ -529,8 +498,7 @@ class Query extends PDO
 		return $res;		
 	} //function
 	
-	/* This function returns an array with the database fields 
-	   of Disaster */
+	// This function returns an array with the database fields of Disaster
 	public function getDisasterFld() {
 		$fld = array();
 		$sql = "SELECT * FROM Disaster LIMIT 0,1";
@@ -538,20 +506,7 @@ class Query extends PDO
 		foreach ($res[0] as $key => $val) {
 			$fld[] = $key;
 		}
-	// (jhcaiced) SyncRecord should not appear in data grid
-		/*
-		foreach (array('RecordSync','RecordUpdate') as $item) {
-			if (array_key_exists($item, $fld)) { 
-				unset $fld[$item]; 
-			}
-		}
-		*/
-		/*
-		$pos = array_search('SyncRecord', $fld);
-		if ($pos) {
-			unset($fld[$pos]);
-		}
-		*/
+		// (jhcaiced) SyncRecord should not appear in data grid
 		return $fld;
 	}
 
@@ -632,7 +587,7 @@ class Query extends PDO
 		return $data;
 	}
 
-	/* BASE.DB & CORE.DB -> COUNTRIES, REGIONS AND VIRTUAL REGIONS FUNCTIONS */
+	// BASE.DB & CORE.DB -> COUNTRIES, REGIONS AND VIRTUAL REGIONS FUNCTIONS
 	function getCountryByCode($idcnt) {
 		$sql = "SELECT CountryName FROM Country WHERE CountryIso = '$idcnt'";
 		$res = $this->base->query($sql);
@@ -702,9 +657,7 @@ class Query extends PDO
 		return $data;
 	}
 
-  /**************************
-    General SQL test function
-    *************************/
+  // General SQL test function
   public function chkSQLWhere($sql) {
     if (substr($sql, 0, 5) == "WHERE")
       return true;
@@ -856,12 +809,6 @@ class Query extends PDO
 								$bFirst = false;
 							}
 						}
-						/*
-						if ($QueryGeography != '') {
-							$QueryGeography = '(' . $QueryGeography . ')';
-						}
-						$e[$k] = $QueryGeography;
-						*/
 					} elseif ((substr($k, 2, 6) == "Effect" || substr($k, 2, 6) == "Sector") && isset($v[0])) {
 						// Process effects and sectors..
 						if (isset($v[3]))
@@ -922,22 +869,6 @@ class Query extends PDO
 								$SerialCount++;
 							}
 							$QueryDisasterSerial .= ')';
-
-							/*
-							$QueryDisasterSerial = '';
-							$bFirst = true;
-							$SerialCount = 0;
-							foreach (explode(" ", $v[1]) as $i) {
-								if ($SerialCount < 1700) {
-								if (! $bFirst) {
-									$QueryDisasterSerial .= ' OR ';
-								}
-								$bFirst = false;
-									$QueryDisasterSerial .= "$k='$i'";
-								}
-								$SerialCount ++;
-							}
-							*/
 						}
 					}
 				} elseif (substr($k, 0, 1) != "_")  {
@@ -959,12 +890,6 @@ class Query extends PDO
 			$QueryPeriod = "D.DisasterBeginTime BETWEEN '$begt' AND '$endt'";
 			//$e['DisasterTime'] = "(D.DisasterBeginTime BETWEEN '$begt' AND '$endt')";
 		}
-		/*
-		if (isset($op) && $op == "OR")
-			$e['Eff'] = "(". $e['Eff'] ." 1!=1)";
-		else
-			$e['Eff'] = "(". $e['Eff'] ." 1=1)";
-		*/
 		$lan = "spa"; // select from local languages of database..
 		//$e['Item'] .= "D.EventId=V.EventId AND D.CauseId=C.CauseId AND D.GeographyId=G.GeographyId ".
         //          "AND V.LangIsoCode='$lan' AND C.LangIsoCode='$lan' AND G.LangIsoCode='$lan'";
@@ -1029,7 +954,7 @@ class Query extends PDO
     	return $WhereQuery;
 	}
 
-  /* Counter results */
+  // Count number of records in result
   public function genSQLSelectCount($whr) {
     $sql = "SELECT COUNT(D.DisasterId) as counter FROM Disaster AS D, EEData AS E, Event AS V, Cause AS C, Geography AS G ";
     if ($this->chkSQLWhere($whr))
@@ -1037,7 +962,7 @@ class Query extends PDO
     return false;
   }
 
-	/* Generate SQL to data lists */
+	// Generate SQL to data lists
 	public function genSQLSelectData ($whr, $fld, $order) {
 		$fld = str_ireplace("D.EventId", "V.EventName", $fld); //Join with Event table
 		$fld = str_ireplace("D.EventName", "V.EventName", $fld); //Join with Event table
@@ -1057,7 +982,7 @@ class Query extends PDO
 		}
 	}
 
-	/* Generate Special SQL with grouped fields */
+	// Generate Special SQL with grouped fields
 	public function genSQLProcess ($dat, $opc) {
 		$sql = '';
 		$sel = array();
@@ -1160,7 +1085,7 @@ class Query extends PDO
 		return $sql;
 	} //function
 
-	/* Reformat array setting to arr[X1] = array {a, b, c, d..} */
+	// Reformat array setting to arr[X1] = array {a, b, c, d..}
 	function prepareList ($dl, $mode) {
 		$res = array();
 		$j = 0;
@@ -1201,7 +1126,7 @@ class Query extends PDO
 		return $res;
 	}
 	
-	/* Print results like associative array or fields separate by Tabs */
+	// Print results like associative array or fields separate by Tabs
 	function printResults ($dl, $exp, $mode) {
 		$txt = "";
 		// Get results
@@ -1280,7 +1205,7 @@ class Query extends PDO
 		return $js;
 	} //function
   
-  /*** SET SQL TO TOTALIZATION RESULTS ***/
+  // SET SQL TO TOTALIZATION RESULTS
   function totalize($sql) {
     $sq = explode("GROUP", $sql);
     return $sq[0] . " GROUP BY null";
@@ -1525,7 +1450,5 @@ class Query extends PDO
 	function rebuildCore($fcore) {
 		return true;
 	}
-  
 } // end class
-
 </script>
