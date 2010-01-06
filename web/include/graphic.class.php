@@ -176,14 +176,18 @@ class Graphic {
 			$Y1AxisTitleMargin = $Y1AxisLabelLen * 6 + 10;
 			$ImgMarginLeft = $Y1AxisTitleMargin + 16;
 			
-			fb($sY2AxisLabel);
 			if ($sY2AxisLabel != '') {
-				fb('Y2 Label : ' . $sY2AxisLabel);
 				$Y2AxisLabelLen = $this->getSeriesMaxLen($sY2AxisLabel);
-				fb($Y2AxisLabelLen);
 				$Y2AxisTitleMargin = $Y2AxisLabelLen * 6 + 20;
 				$ImgMarginRight = $Y2AxisTitleMargin + 16;
-				$ImgMarginRight += 160; // Legend Box 
+				
+				$MaxLen = strlen($this->data[$sY1AxisLabel]);
+				$Len = strlen($this->data[$sY2AxisLabel]);
+				if ($Len > $MaxLen) {
+					$MaxLen = $Len;
+				}
+				$LegendBoxWidth = $MaxLen * 10 + 80;
+				$ImgMarginRight += $LegendBoxWidth; // Legend Box 
 			}
 			
 			// 2D, 3D Graphic
