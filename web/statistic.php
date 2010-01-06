@@ -115,10 +115,11 @@ if (isset($post['page']) || isset($post['_S+cmd'])) {
 			$t->assign ("ctl_showres", true);
 		} else if ($post['_S+cmd'] == "export") {
 			// Export Results to File
-			if ($post['_S+saveopt'] == "csv")
+			if ($post['_S+saveopt'] == "csv") {
 				$export = 'csv';
-			else
+			} else {
 				$export = 'xls';
+			}
 			//header("Content-type: application/x-zip-compressed");
 			header("Content-type: text/x-csv");
 			header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $regname) ."_Consolidate.". $export);
