@@ -25,7 +25,7 @@ class Graphic {
 		// Get Label Information
 		$oLabels     = array_keys($this->data);
 		$sXAxisLabel = current($oLabels);
-		$sYAxisLabel = end($oLabels);
+		$sY1AxisLabel = end($oLabels);
 		$q = new Query($opc['_REG']);
 		// Determine graphic type
 		if (substr($opc['_G+Type'],2,18) == "DisasterBeginTime|") {
@@ -43,7 +43,7 @@ class Graphic {
 				$gType = $kind;				// Pie Comparatives
 		}
 		if ($gType == "2TEMPO" || $gType == "2COMPAR") {
-			$sYAxisLabel = $oLabels[1];
+			$sY1AxisLabel = $oLabels[1];
 			$sY2AxisLabel = $oLabels[2];
 		}
 		$val = array();
@@ -62,7 +62,7 @@ class Graphic {
 			foreach ($this->data[$sY2AxisLabel] as $k=>$i) {
 				foreach ($this->data[$sXAxisLabel] as $l=>$j) {
 					if ($k == $l)
-						$tvl[$i][$j] = $this->data[$sYAxisLabel][$k];
+						$tvl[$i][$j] = $this->data[$sY1AxisLabel][$k];
 				}
 			}
 			foreach ($tvl as $kk=>$ii)
@@ -74,7 +74,7 @@ class Graphic {
 			$n = 0;
 			$acol = 1;
 			// Set Array to [YEAR]=> { VALUE1, VALUE2 }  OR Set Array to [YEAR]=>VALUE
-			foreach ($this->data[$sYAxisLabel] as $Key=>$Value) {
+			foreach ($this->data[$sY1AxisLabel] as $Key=>$Value) {
 				if ($this->data[$sXAxisLabel][$n] != "00") {
 					if ($gType == "2TEMPO" || $gType == "2COMPAR")
 						$val[$this->data[$sXAxisLabel][$Key]] = array($Value, $this->data[$sY2AxisLabel][$Key]);
@@ -151,13 +151,13 @@ class Graphic {
 		$hx = 515;
 		// 1D Graphic - PIE
 		if ($gType == "PIE") {
-			$h = (24 * count($this->data[$sYAxisLabel]));
+			$h = (24 * count($this->data[$sY1AxisLabel]));
 			if ($h > $hx) {
 				$hx = $h;
 			}
 			$this->g = new PieGraph($wx, $hx, "auto");
 			// Set label with variable displayed
-			$t1 = new Text($sYAxisLabel);
+			$t1 = new Text($sY1AxisLabel);
 			$t1->SetPos(0.30, 0.8);
 			$t1->SetOrientation("h");
 			$t1->SetFont(FF_ARIAL,FS_NORMAL);
@@ -165,19 +165,26 @@ class Graphic {
 			$t1->SetColor("black");
 			$this->g->AddText($t1);
 		} else {
-			$MaxLen = 0;
-			foreach($this->data[$sXAxisLabel] as $AxisValue) {
-				$Len = strlen($AxisValue);
-				if ($Len > $MaxLen) {
-					$MaxLen = $Len;
-				}
-			}
-			$XAxisLabelLen = $MaxLen;
+			$XAxisLabelLen = $this->getSeriesMaxLen($sXAxisLabel);
 			$XAxisTitleMargin  = $XAxisLabelLen * 6;
-			$ImgMarginBottom = $XAxisTitleMargin + 24 + 20;
+			$ImgMarginBottom = $XAxisTitleMargin + 16 + 16; // XAxisTitle + http://www... line
 
-			$Y1AxisTitleMargin = 35;
-			$Y2AxisTitleMargin = 40;
+			$Y1AxisLabelLen = $this->getSeriesMaxLen($sY1AxisLabel);
+			if ($opc['_G+Scale'] == 'textlog') {
+				$Y1AxisLabelLen++;
+			}
+			$Y1AxisTitleMargin = $Y1AxisLabelLen * 6 + 10;
+			$ImgMarginLeft = $Y1AxisTitleMargin + 16;
+			
+			fb($sY2AxisLabel);
+			if ($sY2AxisLabel != '') {
+				fb('Y2 Label : ' . $sY2AxisLabel);
+				$Y2AxisLabelLen = $this->getSeriesMaxLen($sY2AxisLabel);
+				fb($Y2AxisLabelLen);
+				$Y2AxisTitleMargin = $Y2AxisLabelLen * 6 + 20;
+				$ImgMarginRight = $Y2AxisTitleMargin + 16;
+				$ImgMarginRight += 160; // Legend Box 
+			}
 			
 			// 2D, 3D Graphic
 			$w = (14 * count($this->data[$sXAxisLabel]));
@@ -197,7 +204,7 @@ class Graphic {
 				$this->g->xaxis->SetTextLabelInterval($itv);
 				$this->g->xaxis->SetLabelAngle(90);
 				$this->g->ygrid->Show(true,true);
-				$this->g->yaxis->SetTitle($sYAxisLabel, 'middle');
+				$this->g->yaxis->SetTitle($sY1AxisLabel, 'middle');
 				$this->g->yaxis->SetTitlemargin($Y1AxisTitleMargin);
 				$this->g->yaxis->title->SetFont(FF_ARIAL, FS_NORMAL);
 				$this->g->yaxis->scale->SetGrace(0);
@@ -275,7 +282,7 @@ class Graphic {
 					$zp = $this->bar($opc, $zo, "");
 					$y1 = $this->bar($opc, $val1, "darkblue");
 					$y2 = $this->bar($opc, $val2, "darkred");
-					$y1->SetLegend($sYAxisLabel);
+					$y1->SetLegend($sY1AxisLabel);
 					$y2->SetLegend($sY2AxisLabel);
 					$y1p = new GroupBarPlot(array($y1, $zp));
 					$y2p = new GroupBarPlot(array($zp, $y2));
@@ -293,7 +300,7 @@ class Graphic {
 						$y1p->value->SetColor("black","darkred");
 						$y1p->value->Show();
 					}
-					$y1p->SetLegend($sYAxisLabel);
+					$y1p->SetLegend($sY1AxisLabel);
 					$m[] = $y1p;
 					// Add Tendence Line : Linear regression , others 
 					if ($opc['_G+TendLine'] == "LINREG") {
@@ -314,7 +321,7 @@ class Graphic {
 				} elseif ($gType == "2TEMPO" || $gType == "2COMPAR") {
 					$y1p = $this->line($opc, $val1, "darkblue");
 					$y2p = $this->line($opc, $val2, "darkred");
-					$y1p->SetLegend($sYAxisLabel);
+					$y1p->SetLegend($sY1AxisLabel);
 					$y2p->SetLegend($sY2AxisLabel);
 					$this->g->Add($y1p);
 					$this->g->AddY2($y2p);
@@ -619,8 +626,17 @@ class Graphic {
 		  $b = array(200, 0, 0);*/
 		return $pal;
 	}
-	
 
+	public function getSeriesMaxLen($DataKey) {
+		$MaxLen = 0;
+		foreach($this->data[$DataKey] as $AxisValue) {
+			$Len = strlen($AxisValue);
+			if ($Len > $MaxLen) {
+				$MaxLen = $Len;
+			}
+		} //foreach
+		return $MaxLen;
+	}
 /*
 	public function getGraphPeriod ($prmOption) {
 		$Index = strrpos($prmOption, "-");
