@@ -123,7 +123,12 @@
 					{-strip-}
 						{-foreach name=sel key=k item=i from=$sel-}
 							{-if $i != "DisasterId"-}
-								<td>{-$item[$i]-}
+								<td {-if $i=="GeographyId_0" || $i=="GeographyId_1" || $i=="GeographyId_2" || 
+								         $i=="EventName" || $i=="CauseName" -}
+										class="StatisticCellText"
+									{-else-}
+										class="StatisticCellNumber"
+									{-/if-}>{-$item[$i]-}
 								</td>
 							{-/if-}
 						{-/foreach-}
