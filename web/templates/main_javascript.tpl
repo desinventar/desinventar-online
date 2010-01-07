@@ -659,7 +659,6 @@
 			function sendList(cmd) {
 				if ($('_D+Field[]').length > 0) {
 					w = Ext.getCmp('westm');
-					s = Ext.getCmp('southm');
 					$('_D+cmd').value = cmd;
 					selectall('_D+Field[]');
 					var ob = $('_D+Field[]');
@@ -683,7 +682,6 @@
 			function sendMap(cmd) {
 				if ($('_M+Type').length > 0) {
 					w = Ext.getCmp('westm');
-					s = Ext.getCmp('southm');
 					//$('frmwait').innerHTML = waiting;
 					$('_M+cmd').value = cmd;
 					if (cmd == "export") {
@@ -714,7 +712,6 @@
 			
 			function sendGraphic(cmd) {
 				w = Ext.getCmp('westm');
-				s = Ext.getCmp('southm');
 				$('_G+cmd').value = cmd;
 				combineForms('DC', 'CG');
 				w.collapse(); //hide()
@@ -726,7 +723,6 @@
 			function sendStatistic(cmd) {
 				if ($('_S+Firstlev').value != "" && $('_S+Field[]').length > 0) {
 					w = Ext.getCmp('westm');
-					s = Ext.getCmp('southm');
 					$('_S+cmd').value = cmd;
 					selectall('_S+Field[]');
 					var ob = $('_S+Field[]');
