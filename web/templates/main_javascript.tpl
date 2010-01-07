@@ -51,17 +51,6 @@
 					case "mqrynew":
 						// Just reload the current region window...(need a better solution!!)
 						window.location = "index.php?r={-$reg-}";
-						// 2009-11-18 (jhcaiced) Disabled this code, some items are not reset to
-						// their default values...
-						//index.php?r={-$reg-}
-						/*
-						w = Ext.getCmp('westm');
-						w.show();
-						{-foreach name=ef1 key=key item=item from=$ef1-}
-							if ($('{-$key-}').checked) enadisEff('{-$key-}', false);
-						{-/foreach-}
-						$('DC').reset();
-						*/
 					break;
 					case "mqrysav":
 						saveQuery();
@@ -682,7 +671,6 @@
 					$('_D+FieldH').value = mystr;
 					combineForms('DC', 'CD');
 					w.collapse();
-					s.collapse();
 					$('DC').action='data.php';
 					$('DC').submit();
 					//hideMap();
@@ -715,8 +703,6 @@
 					}
 					combineForms('DC', 'CM');
 					w.collapse(); // hide()
-					//e.collapse();
-					s.collapse();
 					$('DC').action='thematicmap.php';
 					$('DC').submit();
 					//hideMap();
@@ -732,8 +718,6 @@
 				$('_G+cmd').value = cmd;
 				combineForms('DC', 'CG');
 				w.collapse(); //hide()
-				//e.collapse();
-				s.collapse();
 				$('DC').action='graphic.php';
 				$('DC').submit();
 				//hideMap();
@@ -752,8 +736,6 @@
 					$('_S+FieldH').value = mystr;
 					combineForms('DC', 'CS');
 					w.collapse();//hide()
-					//e.collapse();
-					s.collapse();
 					$('DC').action='statistic.php';
 					$('DC').submit();
 					//hideMap();
