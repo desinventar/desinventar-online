@@ -177,6 +177,9 @@
 					closeAction:'hide', plain: true, animCollapse: false,
 					items: new Ext.Panel({ contentEl: 'dif-cfg', autoScroll: true })
 				});
+				difw.on('hide',function() {
+					showtip('');					
+				});
 			}
 			
 			// Main menu
@@ -501,7 +504,8 @@
 			}
 			
 			function showtip(tip) {
-				var d = $('_DIDesc');
+				var d = parent.document.getElementById('_DIDesc');
+				d.style.backgroundColor = '#ffffff';
 				d.value = tip;
 			}
 			

@@ -226,7 +226,7 @@
 					parent.s.expand();
 				break;
 				case "cardupd":
-					// check if DC is onused
+					// check if DC is on use
 					var lsAjax = new Ajax.Updater('distatusmsg', 'cards.php', {
 						method: 'get', parameters: 'r={-$reg-}&cmd=chklocked&DisasterId='+ $('DisasterId').value,
 						onComplete: function(request) {
@@ -252,6 +252,8 @@
 						$('DICard').submit();
 						DisableEnableForm($('DICard'), true);
 						changeOptions(btn);
+						// clear Help text area
+						showtip('','#ffffff');
 					}
 				break;
 				case "cardcln":
@@ -265,6 +267,8 @@
 					DisableEnableForm($('DICard'), true);
 					uploadMsg("{-#tmsgnewcard#-}");
 					changeOptions(btn);
+					// clear Help text area
+					showtip('','#ffffff');
 				break;
 				case "cardfnd":
 				break;
