@@ -26,16 +26,22 @@
 			$.getJSON('{-$di_url-}', 
 				{ cmd: 'searchdb', searchdbquery: CountryIsoCode, searchbycountry : searchByCountry },
 				function(data) {
+					var iCount = 0;
+					var RegionId = '';
 					var jList = $("#pagecontent");
 					$("#pagecontent").empty();
 					$.each(data, function(key, value) {
-						//jList.append($('<li id="' + key + '" class="regionlistitem">' + value + '</li>'));
+						iCount++;
+						RegionId = key;
 						jList.append($('<a href="javascript:void(null)" id="' + key + '">' + value + '</a><br />'));
 						$('#' + key).addClass("alt").unbind('click').click(function() {
 							displayRegionInfo(key);
 						}); //bind
 					}); // each
-				}
+					if (iCount == 1) {
+						displayRegionInfo(RegionId);
+					}
+				} //function
 			);
 		};
 		
@@ -63,7 +69,7 @@
 		};
 
 		// Startup function (on load)
-		$(function() {
+		jQuery(document).ready(function() {
 			jQuery("#btnMainWindow").click(function() {
 				window.open('{-$di_url-}?cmd=main&lang={-$lang-}','_blank', 'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');
 			});
