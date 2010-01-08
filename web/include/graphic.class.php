@@ -125,10 +125,13 @@ class Graphic {
 		} //if
 		// Choose presentation options, borders, intervals
 		$itv = 1;				// no interval
-		$ImgMarginLeft = 50;
-		$ImgMarginTop  = 30;
+		$ImgMarginLeft   = 50;
+		$ImgMarginTop    = 30;
+		$ImgMarginRight  = 20;
+		$ImgMarginBottom = 85;
+		/*
 		if ($gType == "TEMPO" || $gType == "2TEMPO") {
-			$ImgMarginRight = 50;			// right limit
+			$ImgMarginRight = 20;			// right limit
 			if ($gType == '2TEMPO') {
 				$ImgMarginRight = 200;
 			}
@@ -143,9 +146,10 @@ class Graphic {
 			$ImgMarginRight = 160;		// right limit
 			$ImgMarginBottom = 50;		// bottom limit
 		} else {
-			$ImgMarginRight = 70;		// right limit
-			$ImgMarginBottom = 120;		// bottom limit more space to xlabels
+			$ImgMarginRight  = 20;		// right limit
+			$ImgMarginBottom = 30;		// bottom limit more space to xlabels
 		}
+		*/
 		// calculate graphic size
 		$wx = 980;
 		$hx = 515;
@@ -165,37 +169,48 @@ class Graphic {
 			$t1->SetColor("black");
 			$this->g->AddText($t1);
 		} else {
+			// Horizontal Axis (X)
 			$XAxisLabelLen = $this->getSeriesMaxLen($sXAxisLabel);
 			$XAxisTitleMargin  = $XAxisLabelLen * 6;
 			$ImgMarginBottom = $XAxisTitleMargin + 16 + 16; // XAxisTitle + http://www... line
 
+			//Left Axis (Y1)
 			$Y1AxisLabelLen = $this->getSeriesMaxLen($sY1AxisLabel);
 			if ($opc['_G+Scale'] == 'textlog') {
 				$Y1AxisLabelLen++;
 			}
-			$Y1AxisTitleMargin = $Y1AxisLabelLen * 6 + 10;
+			$Y1AxisTitleMargin = $Y1AxisLabelLen * 8 + 10;
 			$ImgMarginLeft = $Y1AxisTitleMargin + 16;
 			
 			if ($sY2AxisLabel != '') {
-				$Y2AxisLabelLen = $this->getSeriesMaxLen($sY2AxisLabel);
-				$Y2AxisTitleMargin = $Y2AxisLabelLen * 6 + 20;
-				$ImgMarginRight = $Y2AxisTitleMargin + 16;
-				
-				$MaxLen = strlen($this->data[$sY1AxisLabel]);
-				$Len = strlen($this->data[$sY2AxisLabel]);
-				if ($Len > $MaxLen) {
-					$MaxLen = $Len;
+				// Right Axis (Y2)
+				if ($gType != 'XTEMPO') {
+					// In this case this is the LegendBox width
+					$Y2AxisLabelLen = $this->getSeriesMaxLen($sY2AxisLabel);
+					$Y2AxisTitleMargin = $Y2AxisLabelLen * 8 + 20;
+					$ImgMarginRight = $Y2AxisTitleMargin + 10;
+					
+					// Legend Box
+					$MaxLen = strlen($this->data[$sY1AxisLabel]);
+					$Len = strlen($this->data[$sY2AxisLabel]);
+					if ($Len > $MaxLen) {
+						$MaxLen = $Len;
+					}
+					$LegendBoxWidth = $MaxLen * 10 + 80;
+					$ImgMarginRight += $LegendBoxWidth;
+				} else {
+					// In this case this is the LegendBox width
+					$Y2AxisLabelLen = $this->getSeriesMaxLen($sY2AxisLabel);
+					$Y2AxisTitleMargin = $Y2AxisLabelLen * 6.7;
+					$ImgMarginRight = $Y2AxisTitleMargin + 40;
 				}
-				$LegendBoxWidth = $MaxLen * 10 + 80;
-				$ImgMarginRight += $LegendBoxWidth; // Legend Box 
 			}
-			
 			// 2D, 3D Graphic
 			$w = (14 * count($this->data[$sXAxisLabel]));
 			if ($w > $wx)
 				$wx = $w;
-			if ($wx > 1024)
-				$wx = 1024;
+			if ($wx > 980)
+				$wx = 980;
 			$this->g = new Graph($wx, $hx, "auto");
 			if (isset($opc['_G+Scale'])) {
 				$this->g->SetScale($opc['_G+Scale']); // textint, textlog
@@ -415,8 +430,9 @@ class Graphic {
 						$val[$sDate] = 0;
 				} elseif ($this->sPeriod == "YWEEK")
 					$this->completeWeekSeries($dateini, $dateend, $iYear, $val);
-				else
+				else {
 					$this->completeMonthSeries($dateini, $dateend, $iYear, $val);
+				}
 			}
 		} else {
 			// MultiPeriod Graphs
