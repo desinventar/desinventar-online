@@ -125,9 +125,9 @@
 							{-if $i != "DisasterId"-}
 								<td {-if $i=="GeographyId_0" || $i=="GeographyId_1" || $i=="GeographyId_2" || 
 								         $i=="EventName" || $i=="CauseName" -}
-										class="StatisticCellText"
+										class="GridCellText"
 									{-else-}
-										class="StatisticCellNumber"
+										class="GridCellNumber"
 									{-/if-}>{-$item[$i]-}
 								</td>
 							{-/if-}
