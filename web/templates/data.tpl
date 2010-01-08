@@ -107,7 +107,11 @@
 						{-strip-}
 							{-if $i != "DisasterId"-}
 								<td {-if $i=="DisasterSerial" || $i=="DisasterBeginTime" || $i=="EventName" || $i=="GeographyFQName" || 
-								         $i=="DisasterSiteNotes" || $i=="DisasterSource" || $i=="EffectNotes" || $i=="EffectOtherLosses" || $i=="CauseName"-}class="GridCellText"{-else-}class="GridCellNumber"{-/if-}>
+								         $i=="DisasterSiteNotes" || $i=="DisasterSource" || $i=="EffectNotes" || $i=="EffectOtherLosses" || $i=="CauseName" || $i=="CauseNotes"-}
+								         class="GridCellText"
+									{-else-}
+										class="GridCellNumber"
+									{-/if-}>
 									{-if $i=="EffectNotes" || $i=="EffectOtherLosses" || $i=="EventNotes" || $i=="CauseNotes"-}
 										<div class="dwin" style="width:200px; height: 40px;">{-$item[$i]-}
 										</div>
