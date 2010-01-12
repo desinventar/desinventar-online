@@ -103,7 +103,7 @@ function validateUserEditForm() {
 		onSubmit="javascript:var a=new Array('UserId', 'UserEMail', 'UserFullName'); return(checkForm(a, '{-#errmsgfrmregist#-}'));"> 
 	*/
 	return bReturn;		
-}
+};
 
 function clearUserEditForm() {
 	jQuery("#txtUserId").val('');
