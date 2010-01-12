@@ -685,7 +685,13 @@ class Query extends PDO {
 		$QueryDisasterSerial   = '';
 		$QueryDisasterSerialOp = ' AND ';
 		$QueryCustom           = '';
-		//$datedb = $this->getDateRange();
+
+		// Remove parameters from list of options...
+		foreach($dat as $Key => $Value) {
+			if (substr($Key,0,3) == 'prm') {
+				unset($dat[$Key]);
+			}
+		}		
 		// Add Custom Query..
 		if (isset($dat['__CusQry']) && !empty($dat['__CusQry'])) {
 			$QueryCustom = trim($dat['__CusQry']);

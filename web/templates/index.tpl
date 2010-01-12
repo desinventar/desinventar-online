@@ -21,6 +21,7 @@
 	<script type="text/javascript" src="js/md5.js"></script>
 	<script type="text/javascript" src="js/jquery.snippets.js"></script>
 	<script type="text/javascript" src="js/useradmin.js"></script>
+	<script type="text/javascript" src="js/desconsultar.js"></script>
 	<!-- ExtJS -->
 	<link rel="stylesheet" type="text/css" href="/extJS/resources/css/ext-all.css"/>
 	<link rel="stylesheet" type="text/css" href="/extJS/resources/css/xtheme-gray.css"/>
@@ -198,6 +199,8 @@
 		<form id="DC" method="POST" target="dcr">
 			<input type="hidden" id="_REG" name="_REG" value="{-$reg-}" />
 			<input type="hidden" id="_CMD" name="_CMD" />
+			<input type="hidden" id="prmMinYear" name="prmMinYear" value="{-$yini-}" />
+			<input type="hidden" id="prmMaxYear" name="prmMaxYear" value="{-$yend-}" />
 			<dl class="accordion">
 				<!-- BEGIN GEOGRAPHY SECTION -->
 				<!-- Select from Map testing ... 'selectionmap.php' -->
@@ -463,22 +466,22 @@
 							<tr>
 								<td><b>{-#ttitsince#-}:</b></td>
 								<td>
-									<input type="text" id="iniyear" name="D_DisasterBeginTime[]" size=4 maxlength=4 class="line" 
+									<input type="text" id="queryBeginYear" name="D_DisasterBeginTime[]" size=4 maxlength=4 class="line" 
 										value="{-if $qd.D_DisasterBeginTime[0] != ''-}{-$qd.D_DisasterBeginTime[0]-}{-else-}{-$yini-}{-/if-}" />
-									<input type="text" id="inimonth" name="D_DisasterBeginTime[]" size=2 maxlength=2 class="line"
+									<input type="text" id="queryBeginMonth" name="D_DisasterBeginTime[]" size=2 maxlength=2 class="line"
 										value="{-$qd.D_DisasterBeginTime[1]-}" />
-									<input type="text" id="iniday" name="D_DisasterBeginTime[]" size=2 maxlength=2 class="line"
+									<input type="text" id="queryBeginDay" name="D_DisasterBeginTime[]" size=2 maxlength=2 class="line"
 										value="{-$qd.D_DisasterBeginTime[2]-}" />
 								</td>
 							</tr>
 							<tr>
 								<td><b>{-#ttituntil#-}:</b></td>
 								<td>
-									<input type="text" id="endyear" name="D_DisasterEndTime[]" size=4 maxlength=4 class="line" 
+									<input type="text" id="queryEndYear" name="D_DisasterEndTime[]" size=4 maxlength=4 class="line" 
 										value="{-if $qd.D_DisasterEndTime[0] != ''-}{-$qd.D_DisasterEndTime[0]-}{-else-}{-$yend-}{-/if-}" />
-									<input type="text" id="endmonth" name="D_DisasterEndTime[]" size=2 maxlength=2 class="line"
+									<input type="text" id="queryEndMonth" name="D_DisasterEndTime[]" size=2 maxlength=2 class="line"
 										value="{-$qd.D_DisasterEndTime[1]-}" />
-									<input type="text" id="endday" name="D_DisasterEndTime[]" size=2 maxlength=2 class="line"
+									<input type="text" id="queryEndDay" name="D_DisasterEndTime[]" size=2 maxlength=2 class="line"
 										value="{-$qd.D_DisasterEndTime[2]-}" />
 								</td>
 							</tr>
