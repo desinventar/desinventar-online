@@ -222,19 +222,26 @@ class DIGeography extends DIObject {
 	public function importFromCSV($cols, $values) {
 		$oReturn = parent::importFromCSV($cols, $values);
 		$iReturn = ERR_NO_ERROR;
-		
 		$this->set('GeographyLevel', $values[0]);
 		$this->set('GeographyCode',  $values[1]);
 		$this->set('GeographyName',  $values[2]);
 		$ParentCode = $values[3];
+		$GeographyId = '';
 		$p = self::loadByCode($this->session, $this->get('GeographyCode'));
-		if ($p->get('GeographyId') != '') {
+		if (! is_null($p)) {
+			$GeographyId = $p->get('GeographyId');
+		}
+		if ($GeographyId != '') {
 			// This Geography Code Already Exists, return error
 			$oReturn['Error'][] = -1;
 		} else {
 			// Try to locate a parent for this item
+			$ParentGeographyId = '';
 			$p = self::loadByCode($this->session, $ParentCode);
-			$this->setGeographyId($p->get('GeographyId'));
+			if (! is_null($p)) {
+				$ParentGeographyId = $p->get('GeographyId');
+			}
+			$this->setGeographyId($ParentGeographyId);
 			$this->set('GeographyFQName', $this->buildGeographyFQName());
 		}
 		if ( (count($oReturn['Error']) > 0) || (count($oReturn['Warning']) > 0) ) {

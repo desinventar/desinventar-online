@@ -1,7 +1,7 @@
 <script language="php">
 /*
   DesInventar - http://www.desinventar.org
-  (c) 1998-2009 Corporacion OSSO
+  (c) 1998-2010 Corporacion OSSO
 */
 
 class DIObject {
@@ -225,7 +225,7 @@ class DIObject {
 			if (($sFieldType == "STRING"  ) || 
 			    ($sFieldType == "TEXT"    ) ||
 			    ($sFieldType == "DATETIME") ) {
-			    $sQueryItem .= "'" . $this->get($sFieldName) . "'";
+			    $sQueryItem .= '"' . $this->get($sFieldName) . '"';
 			} elseif (($sFieldType == "INTEGER") ||
 			          ($sFieldType == "DOUBLE" ) ||
 			          ($sFieldType == "BOOLEAN" ) ) {
@@ -419,7 +419,7 @@ class DIObject {
 	
 	public function validateUnique($ErrCode, $prmFieldName) {
 		$iReturn = ERR_NO_ERROR;
-		$quote1 = "'";
+		$quote1 = '"';
 		if ($this->getType($prmFieldName) == 'INTEGER') { $quote1 = ""; }
 		$sQuery = "SELECT * FROM " . $this->getTableName() . " WHERE " . 
 			$prmFieldName . "=" . $quote1 . $this->get($prmFieldName) . $quote1;
