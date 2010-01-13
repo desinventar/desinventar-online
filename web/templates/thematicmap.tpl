@@ -79,8 +79,8 @@
 			
 			{-if $hasInternet -}
 				// Microsoft Virtual Earth Base Layer
-				//var virtualearth = new OpenLayers.Layer.VirtualEarth("Microsoft Virtual Earth", { 'sphericalMercator': true });
-				//map.addLayer(virtualearth);
+				var virtualearth = new OpenLayers.Layer.VirtualEarth("Microsoft Virtual Earth", { 'sphericalMercator': true });
+				map.addLayer(virtualearth);
 			
 				// Yahoo Maps Base Layer
 				var yahoo = new OpenLayers.Layer.Yahoo( "Yahoo Maps", { 'sphericalMercator': true });
@@ -98,9 +98,11 @@
 			                                          {type: G_NORMAL_MAP, 'sphericalMercator': true});
 					map.addLayer(google1);
 
+					/*
 					var google2 = new OpenLayers.Layer.Google("Google Physical", 
 			                                          {type: G_PHYSICAL_MAP, 'sphericalMercator': true});
 					map.addLayer(google2);
+					*/
 			
 					var google3 = new OpenLayers.Layer.Google("Google Hybrid", 
 													{type: G_HYBRID_MAP, 'sphericalMercator': true});
