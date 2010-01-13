@@ -2,11 +2,11 @@
 <script language="php">
 /*
  DesInventar - http://www.desinventar.org
- (c) 1999-2009 Corporacion OSSO
+ (c) 1999-2010 Corporacion OSSO
 
  Utility to export databases from MySQL to SQLite
 
- 2009-11-12 Jhon H. Caicedo <jhcaiced@desinventar.org>
+ 2010-01-13 Jhon H. Caicedo <jhcaiced@desinventar.org>
 */
 $_SERVER["DI8_WEB"] = '../web';
 require_once($_SERVER["DI8_WEB"] . '/include/loader.php');
@@ -26,7 +26,8 @@ $RegionList = array();
 foreach($q->core->query("SELECT * FROM Region ORDER BY RegionId") as $row) {
 	$RegionList[] = $row['RegionId'];
 }
-$RegionList = array('COL-1257291151-yumbo_inventario_de_desastres');
+$RegionList = array('COL-1263347185-armenia_inventario_historico');
+//$RegionList = array('COL-1257291151-yumbo_inventario_de_desastres');
 //$RegionList = array('PER-1250695241-peru_inventario_historico_de_desastres');
 //$RegionList = array('GTM-1255694888-guatemala_inventario_historico_de_desastres');
 //$RegionList = array('BOL-1250695036-bolivia_gran_chaco');

@@ -2,12 +2,12 @@
 <script language="php">
 /*
  DesInventar - http://www.desinventar.org
- (c) 1999-2009 Corporacion OSSO
+ (c) 1999-2010 Corporacion OSSO
 
  Utility to export databases from MySQL to SQLite
  Create databases in di-8.2 from list of databases in di-8.1
 
- 2009-11-12 Jhon H. Caicedo <jhcaiced@desinventar.org>
+ 2010-01-13 Jhon H. Caicedo <jhcaiced@desinventar.org>
 */
 $_SERVER["DI8_WEB"] = '../web';
 require_once($_SERVER["DI8_WEB"] . '/include/loader.php');
@@ -27,7 +27,8 @@ foreach($dbh->query("SELECT * FROM Region ORDER BY CountryIsoCode,RegionUUID") a
 	$RegionList[$row['RegionUUID']] = $row['RegionId'];
 }
 $RegionList = array();
-$RegionList['PERU'] = '';
+$RegionList['COLARMENIA'] = 'COL-1263347185-armenia_inventario_historico';
+//$RegionList['PERU'] = '';
 //$RegionList['PANAMA'] = 'PAN-1250695231-panama_inventario_de_desastres_sinaproc';
 //$RegionList['COLOMBIA'] = '';
 //$RegionList['GUATEMALA'] = '';
