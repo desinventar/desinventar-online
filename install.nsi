@@ -1,7 +1,7 @@
 ;
 ; DesInventar Project
 ; http://www.desinventar.org
-; (c) 1998-2009 Corporacion OSSO - Colombia
+; (c) 1998-2010 Corporacion OSSO - Colombia
 ;
 ; Installer - Complete Installer Mode
 
