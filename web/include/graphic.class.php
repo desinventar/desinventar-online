@@ -354,10 +354,15 @@ class Graphic {
 			break;
 			case "PIE":
 				$m = $this->pie($opc, $val, $pal);
-				if (isset($opc['_G+Data']) && $opc['_G+Data'] == "VALUE") {
-					$m->SetLabelType(PIE_VALUE_ABS);
-					$m->value->SetFormat("%d");
-					$m->value->SetFont(FF_ARIAL, FS_NORMAL, 9);
+				if (isset($opc['_G+Data'])) {
+					if ($opc['_G+Data'] == 'NONE') {
+						$m->value->Show(false);
+					}
+					if ($opc['_G+Data'] == "VALUE") {
+						$m->SetLabelType(PIE_VALUE_ABS);
+						$m->value->SetFormat("%d");
+						$m->value->SetFont(FF_ARIAL, FS_NORMAL, 8);
+					}
 				}
 			break;
 			default:
@@ -371,9 +376,9 @@ class Graphic {
 			if (is_array($m)) {
 				foreach ($m as $m1)
 					$this->g->Add($m1);
-			}
-			else
+			} else {
 				$this->g->Add($m);
+			}
 		}
 	} // end function Graphic
 	
@@ -520,9 +525,9 @@ class Graphic {
 			$p->SetEdge("navy");
 			$p->SetStartAngle(45);
 			$p->SetAngle(55);
-		}
-		else
+		} else {
 			$p = new PiePlot(array_values($axi));
+		}
 		$p->SetSliceColors($pal);
 		$p->SetCenter(0.32, 0.3);
 		$p->SetSize(0.22);
@@ -549,8 +554,9 @@ class Graphic {
 				$b->SetFillColor($color);
 			$b->SetWidth(1.0);
 		}
-		if ($opc['_G+Feel'] == "3D")
+		if ($opc['_G+Feel'] == "3D") {
 			$b->SetShadow("steelblue",2,2);
+		}
 		return $b;
 	}
 
