@@ -8,11 +8,11 @@
 <head>
 	<meta http-equiv="Pragma" content="text/html; charset=utf-8; no-cache" />
 	{-if $hasInternet -}
-	{-if $googlemapkey != '' -}
-	<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={-$googlemapkey-}"></script>
-	{-/if-}
-	<script src='http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.1'></script>
-	<script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid=euzuro-openlayers"></script>
+		{-if $googlemapkey != '' -}
+			<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={-$googlemapkey-}"></script>
+		{-/if-}
+		<script src='http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.1'></script>
+		<script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid=euzuro-openlayers"></script>
 	{-/if-}
 	<script src="/openlayers/lib/OpenLayers.js"></script>
 	<script type="text/javascript">
@@ -71,6 +71,7 @@
 					map.addLayer(adm{-$smarty.foreach.glev.iteration-});
 				{-/foreach-}
 			{-/foreach-}
+			
 			// WMS Local Base Map
 			var base = new OpenLayers.Layer.WMS("Local BaseMap",
 					"/cgi-bin/{-$mps-}?", { map:'{-$basemap-}', layers:'base', 'transparent':false, 'format':'png' },

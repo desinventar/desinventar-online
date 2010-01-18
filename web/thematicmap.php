@@ -1,7 +1,7 @@
 <script language="php">
 /*
  DesInventar8 - http://www.desinventar.org
- (c) 1998-2009 Corporacion OSSO
+ (c) 1998-2010 Corporacion OSSO
 */
 
 require_once('include/loader.php');
@@ -58,11 +58,18 @@ $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Sector', $lg));
 
 if (isset($post['_M+cmd'])) {
-	// Try to detect network connection to load the remote WMS services...
-	$hasInternet = 1;
-	if (!fsockopen('www.google.com',80)) {
+	// 2010-01-18 (jhcaiced) Windows machines doesn't use remote servers
+	if (isset($_SERVER["WINDIR"])) {
 		$hasInternet = 0;
-	}
+	} else {
+		// Linux machines are assumed to be connected to internet
+		$hasInternet = 1;
+		/*
+		if (!fsockopen('www.google.com',80)) {
+			$hasInternet = 0;
+		}
+		*/
+	}	
 	$t->assign('hasInternet', $hasInternet);
 	// Process QueryDesign Fields and count results
 	$qd	= $us->q->genSQLWhereDesconsultar($post);
