@@ -245,6 +245,6 @@ switch ($cmd) {
 			$t->display("user_mainpage.tpl");
 		}
 	break;
-} // end share session
+} //switch
 
 </script>
