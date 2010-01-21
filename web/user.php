@@ -149,6 +149,9 @@ switch ($cmd) {
 		$t->assign("usri", form2user($us->getUserInfo($us->UserId)));
 		$t->display("user.tpl");
 	break;
+	case "edit":
+		$t->display("user_edit.tpl");
+	break;
 	case "chkpasswd":
 		// Check if password is correct (ask to dicore). if is OK show dialog to change it.
 		if (!iserror($us->validateUser($us->UserId, $_GET['UserPasswd']))) {
