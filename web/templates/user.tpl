@@ -11,29 +11,16 @@
 	<h2>{-#tuserprefer#-}</h2>
 	<br />
 	<table width="500px;" height="180px" class="col dwin">
-	<thead>
-	<tr>
-		<td class="header"><b>{-#tuser#-}</b></td>
-		<td class="header"><b>{-#tname#-}</b></td>
-		<td class="header"><b>{-#temail#-}</b></td>
-		<td class="header"><b>{-#tactive#-}</b></td>
-	</tr>
-	</thead>
-	<tbody id="lst_userpa">
+		<thead>
+			<tr>
+				<td class="header"><b>{-#tuser#-}</b></td>
+				<td class="header"><b>{-#tname#-}</b></td>
+				<td class="header"><b>{-#temail#-}</b></td>
+				<td class="header"><b>{-#tactive#-}</b></td>
+			</tr>
+		</thead>
+		<tbody id="lst_userpa">
 {-/if-}{-* ctl_adminusr *-}
-{-if $ctl_usrlist-}
-{-foreach name=upa key=key item=item from=$usrpa-}
-	<tr class="{-if ($smarty.foreach.upa.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}"
-		onMouseOver="this.className='highlight'" onMouseOut="this.className='normal'"
-		onClick="setUserPA('{-$key-}','{-$item[2]-}','{-$item[0]-}','{-$item[1]-}','{-$item[4]-}','{-$item[5]-}','{-$item[8]-}');
-				$('cmd').value='update';">
-		<td>{-$key-}</td>
-		<td>{-$item[2]-}</td>
-		<td>{-$item[0]-}</td>
-		<td><input type="checkbox" {-if ($item[8] == 1) -} checked{-/if-} disabled /></td>
-	</tr>
-{-/foreach-}
-{-/if-}
 {-if $ctl_adminusr-}
 	</tbody>
 	</table>

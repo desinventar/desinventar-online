@@ -134,8 +134,7 @@ switch ($cmd) {
 		$t->assign ("cnt", $us->q->getCountryList());
 		$t->assign ("ctl_adminusr", true);
 		$t->assign ("usrpa", $us->getUserInfo(''));
-		$t->assign ("ctl_usrlist", true);
-		$t->display("useradmin.tpl");
+		$t->display("user_admin.tpl");
 	break;
 	case "viewpref":
 		// PREFERENCES: View User Account Options
@@ -235,8 +234,7 @@ switch ($cmd) {
 	case "list":
 		// USERADMIN: reload list..
 		$t->assign ("usrpa", $us->getUserInfo(''));
-		$t->assign ("ctl_usrlist", true);
-		$t->display("userlist.tpl");
+		$t->display("user_list.tpl");
 	break;
 	default:
 		// View login window
