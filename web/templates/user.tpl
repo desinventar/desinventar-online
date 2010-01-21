@@ -114,28 +114,3 @@
 		</form>
 	{-/if-}
 {-/if-} {-* End $ctl_viewpref || $ctl_chkpasswd *-}
-
-{-*** SHOW MESSAGES AND ERRORS ***-}
-{-if $ctl_chklogin-}
-	{-if !$clogin-}
-		{-#errinvaliduser#-}
-	{-/if-}
-{-/if-}
-{-if $ctl_msginsert-}
-	{-if $errinsuser-}
-		{-#terror#-}[{-$insstat-}]: {-#errinsert#-} {-$userid-}
-	{-elseif $noerrorins-}
-		{-#msginsertsucc#-} {-$userid-}
-	{-/if-}
-{-/if-}
-{-if $ctl_msgupdate-}
-	{-if $errnomatch-}
-		{-#errnomatch#-}
-	{-elseif $errbadpass-}
-		{-#errbadpasswd#-}
-	{-elseif $errupduser-}
-		{-#terror#-}[{-$updstat-}] {-#errupdate#-} {-$userid-}
-	{-elseif $noerrorupd-}
-		{-#msgupdatesucc#-} {-$userid-}
-	{-/if-}
-{-/if-}
