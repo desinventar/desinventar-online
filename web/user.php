@@ -2,7 +2,7 @@
 /*
  **********************************************
  DesInventar8 - http://www.desinventar.org
- (c) 1998-2009 Corporacion OSSO
+ (c) 1998-2010 Corporacion OSSO
  **********************************************
 */
 
@@ -51,8 +51,8 @@ switch ($cmd) {
 	case "relogin":
 		// RELOGIN: Previous session exists, reconnect to the same session
 		$t->assign ("user", $us->UserId);
-		$t->assign ("ctl_logged", true);    // Success: User is logged
-		$t->display("user.tpl");
+		// Success: User is logged
+		$t->display("user_mainpage.tpl");
 	break;
 	case "logout":
 		// LOGOUT : Logut current user and show the login panel again
@@ -76,12 +76,12 @@ switch ($cmd) {
 	case "welcome":
 		// Shows the list of databases available for each user.
 		if ($us->UserId != '') {
-			$t->assign ("ctl_welcome", true);
 			$t->assign ("fullname", $us->getUserFullName());
 			// Enable access only Valid Role
 			$rol1 = $us->getUserRole('');
-			if ($rol1 == "ADMINPORTAL")
+			if ($rol1 == "ADMINPORTAL") {
 				$t->assign ("ctl_portalperms", true);
+			}
 			// Find regions where user has permissions
 			//$role = $us->getUserRole('_ALL_');
 			$role  = $us->getUserRoleList();
@@ -108,13 +108,14 @@ switch ($cmd) {
 					break;
 				}
 			} // foreach
-			if ($hrole)
+			if ($hrole) {
 				$t->assign ("ctl_showreg", true);
+			}
 			$t->assign ("radm", $radm);//empty($radm) ? false : $radm);
 			$t->assign ("rusr", $rusr);//empty($rusr) ? false : $rusr);
 			$t->assign ("rsup", $rsup);//empty($rsup) ? false : $rsup);
 			$t->assign ("robs", $robs);//empty($robs) ? false : $robs);
-			$t->display("user.tpl");
+			$t->display("user_welcome.tpl");
 		} else {
 			// Error logging user, send to password lost form
 			$t->display('user_passwdreminder.tpl');
@@ -242,9 +243,8 @@ switch ($cmd) {
 		if (checkAnonSess() || $us->UserId == '') {
 			$t->display('user_login.tpl');
 		} else {
-			$t->assign("ctl_logged", true);
 			$t->assign("user", $us->UserId);
-			$t->display("user.tpl");
+			$t->display("user_mainpage.tpl");
 		}
 	break;
 } // end share session
