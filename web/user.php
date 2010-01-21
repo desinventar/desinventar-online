@@ -132,7 +132,6 @@ switch ($cmd) {
 	case "adminusr":
 		// USERADMIN: Register new user form, only for AdminPortal
 		$t->assign ("cnt", $us->q->getCountryList());
-		$t->assign ("ctl_adminusr", true);
 		$t->assign ("usrpa", $us->getUserInfo(''));
 		$t->display("user_admin.tpl");
 	break;
