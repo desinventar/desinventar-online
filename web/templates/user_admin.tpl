@@ -11,7 +11,7 @@
 	});	
 </script>
 <div id="divUserList">
-	{-include file="userlist.tpl" -}
+	{-include file="user_list.tpl" -}
 </div> {-* divUserList *-}
 <div id="divUserStatus">
 	<br />
