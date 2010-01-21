@@ -102,7 +102,7 @@
 					updateList('dbl', 'index.php', 'cmd=listdb');
 					dblw.show();
 				break;
-				case "musradm":
+				case "mnuUserAdmin":
 					//updateList('dbl', 'user.php', 'cmd=adminusr', 'onReadyUserAdmin');
 					jQuery("#dbl").load('user.php?cmd=adminusr',function() { onReadyUserAdmin(); });
 					dblw.show();
@@ -240,7 +240,7 @@
 			items: [
 				{id:'mdbsfnd', text: '{-#mdbfind#-}',	handler: onMenuItem  }, //search Databases
 				{-if $userid == "root"-}
-					{id:'musradm', text: '{-#tadminusrs#-}',	handler: onMenuItem  }, //admin Users
+					{id:'mnuUserAdmin', text: '{-#tadminusrs#-}',	handler: onMenuItem  }, //admin Users
 					{id:'mdbsadm', text: '{-#tadminregs#-}',	handler: onMenuItem  }, //admin Databases
 				{-/if-}
 				'-'
