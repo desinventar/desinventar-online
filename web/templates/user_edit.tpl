@@ -7,17 +7,9 @@
 <script type="text/javascript" src="js/useradmin.js"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function() {
-		onReadyUserAdmin();
+		jQuery("#divUserEdit").show();
+		//onReadyUserAdmin();
 	});	
 </script>
-<div id="divUserList">
-	{-include file="user_list.tpl" -}
-</div> {-* divUserList *-}
-<div id="divUserStatus">
-	<br />
-	<input id="btnUserAdd" type="button" value="{-#baddoption#-}" class="line" />
-	<br />
-	<span id="lblUserStatusMsg" class="dlgmsg"></span>
-	<br />
-</div>
-{-include file="user_editform.tpl" -}
+{-include file="user_editform.tpl" adminEdit=false-}
+
