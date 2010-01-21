@@ -135,12 +135,6 @@ switch ($cmd) {
 		$t->assign("usrpa", $us->getUserInfo(''));
 		$t->display("user_admin.tpl");
 	break;
-	case "viewpref":
-		// PREFERENCES: View User Account Options
-		$t->assign("ctl_viewpref", true);
-		$t->assign("usri", form2user($us->getUserInfo($us->UserId)));
-		$t->display("user.tpl");
-	break;
 	case 'chklogin':
 		$UserId = getParameter('UserId');
 		// USERADMIN: check if UserId exists...
@@ -149,6 +143,11 @@ switch ($cmd) {
 			$Answer = 'YES';
 		}
 		print $Answer;
+	break;
+	case "viewpref":
+		// PREFERENCES: View User Account Options
+		$t->assign("usri", form2user($us->getUserInfo($us->UserId)));
+		$t->display("user.tpl");
 	break;
 	case "chkpasswd":
 		// Check if password is correct (ask to dicore). if is OK show dialog to change it.

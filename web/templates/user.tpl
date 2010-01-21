@@ -1,29 +1,23 @@
 {-config_load file=`$lg`.conf section="di8_user"-}
 {-*** USER INFO EDIT - CONTENT ***-}
-{-if $ctl_viewpref || $ctl_chkpasswd-}
-	{-if $ctl_viewpref-}
-		<h2>{-#tuserprefer#-}</h2>
-		<span id="userpastatusmsg" class="dlgmsg"></span><br />
-	{-/if-}
-	{-if $ctl_viewpref-}
-		<form id="userpafrm" name="userpafrm" method="GET" 
-			action="javascript:var s=$('userpafrm').serialize(); sendData('','user.php', s, '');"
-			onSubmit="javascript:var a=new Array('UserId', 'UserEMail', 'UserFullName'
-			{-if $ctl_viewpref-}, 'UserPasswd'{-/if-}); return(checkForm(a, '{-#errmsgfrmregist#-}'));">
-	{-/if-}
-	{-if $ctl_viewpref-}
-		<table>
-			<tr>
-				<td><b style="color:darkred;">{-#toldpassword#-}</b>
-				</td>
-				<td><input type="password" id="UserPasswd" name="UserPasswd" size="8" maxlength="20" class="line" />
-					<input type="button" value="Ok" class="line" onClick="$('userpaaddsect').style.display='block';
-						updateList('userpaaddsect', 'user.php', 'cmd=chkpasswd&UserPasswd='+ $('UserPasswd').value);" />
-				</td>
-			</tr>
-		</table>
-		<div id="userpaaddsect" style="display:block"></div>
-	{-/if-}
+
+<h2>{-#tuserprefer#-}</h2>
+<span id="userpastatusmsg" class="dlgmsg"></span><br />
+<form id="userpafrm" name="userpafrm" method="GET" 
+	action="javascript:var s=$('userpafrm').serialize(); sendData('','user.php', s, '');"
+	onSubmit="javascript:var a=new Array('UserId', 'UserEMail', 'UserFullName', 'UserPasswd'); return(checkForm(a, '{-#errmsgfrmregist#-}'));">
+	<table>
+		<tr>
+			<td><b style="color:darkred;">{-#toldpassword#-}</b>
+			</td>
+			<td><input type="password" id="UserPasswd" name="UserPasswd" size="8" maxlength="20" class="line" />
+				<input type="button" value="Ok" class="line" onClick="$('userpaaddsect').style.display='block';
+					updateList('userpaaddsect', 'user.php', 'cmd=chkpasswd&UserPasswd='+ $('UserPasswd').value);" />
+			</td>
+		</tr>
+	</table>
+	<div id="userpaaddsect" style="display:block">
+	</div>
 	{-if $ctl_chkpasswd-}
 		<table class="grid">
 			<tr>
@@ -110,7 +104,4 @@
 			</tr>
 		</table>
 	{-/if-} {-* End $ctl_chkpasswd *-}
-	{-if $ctl_viewpref-}
-		</form>
-	{-/if-}
-{-/if-} {-* End $ctl_viewpref || $ctl_chkpasswd *-}
+</form>
