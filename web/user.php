@@ -50,7 +50,7 @@ switch ($cmd) {
 	break;
 	case "relogin":
 		// RELOGIN: Previous session exists, reconnect to the same session
-		$t->assign ("user", $us->UserId);
+		$t->assign("user", $us->UserId);
 		// Success: User is logged
 		$t->display("user_mainpage.tpl");
 	break;
@@ -76,11 +76,11 @@ switch ($cmd) {
 	case "welcome":
 		// Shows the list of databases available for each user.
 		if ($us->UserId != '') {
-			$t->assign ("fullname", $us->getUserFullName());
+			$t->assign("fullname", $us->getUserFullName());
 			// Enable access only Valid Role
 			$rol1 = $us->getUserRole('');
 			if ($rol1 == "ADMINPORTAL") {
-				$t->assign ("ctl_portalperms", true);
+				$t->assign("ctl_portalperms", true);
 			}
 			// Find regions where user has permissions
 			//$role = $us->getUserRole('_ALL_');
@@ -109,12 +109,12 @@ switch ($cmd) {
 				}
 			} // foreach
 			if ($hrole) {
-				$t->assign ("ctl_showreg", true);
+				$t->assign("ctl_showreg", true);
 			}
-			$t->assign ("radm", $radm);//empty($radm) ? false : $radm);
-			$t->assign ("rusr", $rusr);//empty($rusr) ? false : $rusr);
-			$t->assign ("rsup", $rsup);//empty($rsup) ? false : $rsup);
-			$t->assign ("robs", $robs);//empty($robs) ? false : $robs);
+			$t->assign("radm", $radm);//empty($radm) ? false : $radm);
+			$t->assign("rusr", $rusr);//empty($rusr) ? false : $rusr);
+			$t->assign("rsup", $rsup);//empty($rsup) ? false : $rsup);
+			$t->assign("robs", $robs);//empty($robs) ? false : $robs);
 			$t->display("user_welcome.tpl");
 		} else {
 			// Error logging user, send to password lost form
@@ -131,14 +131,14 @@ switch ($cmd) {
 	break;
 	case "adminusr":
 		// USERADMIN: Register new user form, only for AdminPortal
-		$t->assign ("cnt", $us->q->getCountryList());
-		$t->assign ("usrpa", $us->getUserInfo(''));
+		$t->assign("cnt", $us->q->getCountryList());
+		$t->assign("usrpa", $us->getUserInfo(''));
 		$t->display("user_admin.tpl");
 	break;
 	case "viewpref":
 		// PREFERENCES: View User Account Options
-		$t->assign ("ctl_viewpref", true);
-		$t->assign ("usri", form2user($us->getUserInfo($us->UserId)));
+		$t->assign("ctl_viewpref", true);
+		$t->assign("usri", form2user($us->getUserInfo($us->UserId)));
 		$t->display("user.tpl");
 	break;
 	case 'chklogin':
@@ -153,13 +153,14 @@ switch ($cmd) {
 	case "chkpasswd":
 		// Check if password is correct (ask to dicore). if is OK show dialog to change it.
 		if (!iserror($us->validateUser($us->UserId, $_GET['UserPasswd']))) {
-			$t->assign ("ctl_chkpasswd", true);
-			$t->assign ("usri", form2user($us->getUserInfo($us->UserId)));
+			$t->assign("ctl_chkpasswd", true);
+			$t->assign("usri", form2user($us->getUserInfo($us->UserId)));
+			$t->display("user.tpl");
 		} else {
-			$t->assign ("ctl_msgupdate", true);
-			$t->assign ("errbadpass", true);
+			$t->assign("ctl_msgupdate", true);
+			$t->assign("errbadpass", true);
+			$t->display("user_errorupdate.tpl");
 		}
-		$t->display("user.tpl");
 	break;
 	case 'insert':
 		$bReturn = ERR_NO_ERROR;
@@ -232,7 +233,7 @@ switch ($cmd) {
 	break;
 	case "list":
 		// USERADMIN: reload list..
-		$t->assign ("usrpa", $us->getUserInfo(''));
+		$t->assign("usrpa", $us->getUserInfo(''));
 		$t->display("user_list.tpl");
 	break;
 	default:
