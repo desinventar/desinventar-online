@@ -1,7 +1,7 @@
 <script language="php">
 /*
  DesInventar - http://www.desinventar.org
- (c) 1998-2009 Corporacion OSSO
+ (c) 1998-2010 Corporacion OSSO
 */
 
 class DIEEField extends DIObject {
@@ -69,7 +69,13 @@ class DIEEField extends DIObject {
 				break;
 				case 'FLOAT':
 				case 'DOUBLE':
-					$$EEFieldType = 'REAL';
+					$EEFieldType = 'REAL';
+				break;
+				case 'CURRENCY':
+					$EEFieldType = 'NUMERIC(20,5)';
+				break;
+				case 'DATE':
+					$EEFieldType = 'VARCHAR(20)';
 				break;
 				default:
 					$EEFieldType = 'TEXT';
