@@ -2,9 +2,9 @@
 <script language="php">
 /*
   DesInventar - http://www.desinventar.org
-  (c) 1998-2009 Corporacion OSSO
+  (c) 1998-2010 Corporacion OSSO
   
-  2009-12-29 Jhon H. Caicedo <jhcaiced@desinventar.org>
+  2010-01-21 Jhon H. Caicedo <jhcaiced@desinventar.org>
   
   Import data from DGR (Direccion de Gestion del Riesgo) 
   SIGPAD - Colombia
@@ -18,6 +18,7 @@ require_once(BASE . '/include/digeography.class.php');
 require_once(BASE . '/include/dicause.class.php');
 require_once(BASE . '/include/dievent.class.php');
 require_once(BASE . '/include/dieefield.class.php');
+require_once(BASE . '/include/date.class.php');
 
 $RegionId = 'COL-1250694506-colombia_inventario_historico_de_desastres';
 $us->login('diadmin','di8');
@@ -34,10 +35,15 @@ exit();
 */
 
 $r = new DIRegion($us, $RegionId);
-$r->copyEvents('spa');
-$r->copyCauses('spa');
+//$r->copyEvents('spa');
+//$r->copyCauses('spa');
 
 $line = 1;
+
+$Serial = array();
+$Serial['2008'] = 0;
+$Serial['2009'] = 0;
+
 while (! feof(STDIN) ) {
 	$a = fgetcsv(STDIN, 1000, ',');
 	if (count($a) > 1) {
@@ -48,8 +54,10 @@ while (! feof(STDIN) ) {
 		if ($DisasterBeginTime != '') {
 			$d = new DIDisaster($us);
 			
-			$DisasterSerial = substr($DisasterBeginTime, 0, 4);
-			$DisasterSerial .= '-0001';
+			$Year = substr($DisasterBeginTime, 0, 4);
+			$Serial[$Year]++;
+			$DisasterSerial = 'DGR-' . $Year . '-' . DIDate::padNumber($Serial[$Year],5);
+			
 			$d->set('DisasterSerial', $DisasterSerial);
 			
 			$d->set('DisasterSource', 'DGR');
@@ -126,23 +134,30 @@ while (! feof(STDIN) ) {
 			// 13 -
 			// 14 -
 			// 19 -
-			$v = $d->validateUpdate();
+			/*
+			$v = $d->validateCreate();
+            //$v = $d->validateUpdate();
 			if ($v['Status'] < 0) {
+				print $line . ',' . $v['Status'];
 				if ($v['Status'] == -58) {
-					print $line . ',' . $v['Status'] . ',' . $a[1] . ',' . $a[2] . "\n";
+					print ',' . $a[1] . ',' . $a[2];
+				} elseif ($v['Status'] == -59) {
+					print ',' . $a[4];
+				} elseif ($v['Status'] == -60) {
+					print ',' . $a[3];
 				}
-				if ($v['Status'] == -59) {
-					print $line . ',' . $v['Status'] . ',' . $a[4] . "\n";
-				}
-				if ($v['Status'] == -60) {
-					print $line . ',' . $v['Status'] . ',' . $a[3] . "\n";
-				}
+				print "\n";
 			}
+			*/
+			$i = $d->insert();
+			if ($i < 0) {
+				print $line . ' ' . $DisasterSerial . ' ' . $i . "\n";
+			}			
 			if (($line > 0) && (($line % 100) == 0) ) {
 				print $line . "\n";
 			}
-		}
-	}
+		} //if
+	} //if
 	$line++;
 } //while
 
