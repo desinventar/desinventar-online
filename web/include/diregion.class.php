@@ -39,8 +39,8 @@ class DIRegion extends DIObject {
 		$this->setConnection("core");
 		$this->createFields($this->sInfoDef);		
 		$this->addLanguageInfo('eng');
-		$this->set('PeriodBeginDate', '1900-01-01');
-		$this->set('PeriodEndDate', gmdate('Y-m-d'));
+		$this->set('PeriodBeginDate', '');
+		$this->set('PeriodEndDate', '');
 
 		$prmRegionId = '';
 		$num_args = func_num_args();
