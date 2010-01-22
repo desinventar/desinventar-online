@@ -66,13 +66,14 @@ class DIObject {
 			$sFieldName = $oItem[0];
 			$sFieldType = $oItem[1];
 			$this->oFieldType[$sFieldName] = $sFieldType;
-			if ($sFieldType == "STRING")   { $obj[$sFieldName] = "";          }
-			if ($sFieldType == "TEXT")     { $obj[$sFieldName] = "";          }
-			if ($sFieldType == "DATETIME") { $obj[$sFieldName] = gmdate('c'); }
+			if ($sFieldType == "STRING")   { $obj[$sFieldName] = "";              }
+			if ($sFieldType == "TEXT")     { $obj[$sFieldName] = "";              }
+			if ($sFieldType == "DATETIME") { $obj[$sFieldName] = gmdate('c');     }
 			if ($sFieldType == "DATE")     { $obj[$sFieldName] = gmdate('Y-m-d'); }
-			if ($sFieldType == "INTEGER")  { $obj[$sFieldName] = 0;           }
-			if ($sFieldType == "DOUBLE")   { $obj[$sFieldName] = 0.0;         }
-			if ($sFieldType == "BOOLEAN")  { $obj[$sFieldName] = 1;           }
+			if ($sFieldType == "INTEGER")  { $obj[$sFieldName] = 0;               }
+			if ($sFieldType == "DOUBLE")   { $obj[$sFieldName] = 0.0;             }
+			if ($sFieldType == "CURRENCY") { $obj[$sFieldName] = 0.0;             }
+			if ($sFieldType == "BOOLEAN")  { $obj[$sFieldName] = 1;               }
 		}
 	} // function
 	
@@ -224,14 +225,16 @@ class DIObject {
 			$sQueryItem = $sFieldName . "=";
 			if (($sFieldType == "STRING"  ) || 
 			    ($sFieldType == "TEXT"    ) ||
-			    ($sFieldType == "DATETIME") ) {
+			    ($sFieldType == "DATETIME") ||
+			    ($sFieldType == "DATE"    ) ) {
 			    $sQueryItem .= '"' . $this->get($sFieldName) . '"';
-			} elseif (($sFieldType == "INTEGER") ||
-			          ($sFieldType == "DOUBLE" ) ||
-			          ($sFieldType == "BOOLEAN" ) ) {
+			} elseif (($sFieldType == "INTEGER" ) ||
+			          ($sFieldType == "DOUBLE"  ) ||
+			          ($sFieldType == "BOOLEAN" ) ||
+			          ($sFieldType == "CURRENCY") ) {
 			    $sQueryItem .= $this->get($sFieldName);
 			} else {
-				print "Unknown EventType : $sFieldType ($sFieldName)<br>";
+				print "Unknown Type : $sFieldType ($sFieldName)<br>";
 			}
 			$sQuery .= $sQueryItem;
 			$i++;

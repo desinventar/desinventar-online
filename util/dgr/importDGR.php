@@ -25,11 +25,13 @@ $us->login('diadmin','di8');
 $us->open($RegionId);
 
 /*
-$f = new DIEEField($us);
-$f->set('EEGroupId', 'DGR');
-$f->set('EEFieldLabel', 'Demo');
-$f->set('EEFieldType', 'INTEGER');
-$i = $f->insert();
+$i = createEEField($us, 'Familias Afectadas'          , 'INTEGER' );      //  4
+$i = createEEField($us, 'Puentes Vehiculares'         , 'INTEGER' );      //  5
+$i = createEEField($us, 'Puentes Peatonales'          , 'INTEGER' );      //  6
+$i = createEEField($us, 'Acueductos Afectados'        , 'INTEGER' );      //  7
+$i = createEEField($us, 'Centros Comunitarios'        , 'INTEGER' );      //  8
+$i = createEEField($us, 'Fecha Trámite Administrativo', 'DATE'    );      //  9
+$i = createEEField($us, 'Menajes'                     , 'CURRENCY');      // 10
 fb($i);
 exit();
 */
@@ -102,8 +104,6 @@ while (! feof(STDIN) ) {
 			$d->set('EffectHousesAffected', valueToDIField($a[11]));
 			// 12
 			$d->set('EffectRoads', valueToDIField($a[12]));
-			// 15
-			$d->set('SectorWaterSupply', valueToDIField($a[15]));
 			// 16
 			$d->set('SectorSewerage', valueToDIField($a[16]));
 			// 17
@@ -120,6 +120,8 @@ while (! feof(STDIN) ) {
 			$d->set('SectorPower', valueToDIField($a[23]));
 			// 24
 			$d->set('SectorEducation', valueToDIField($a[24]));
+			// 25
+			$d->set('SectorWaterSupply', valueToDIField($a[25]));
 			// 26
 			$d->set('SectorTransport', valueToDIField($a[26]));
 			// 27
@@ -129,11 +131,6 @@ while (! feof(STDIN) ) {
 			// 31
 			$d->set('EffectOtherLosses', $a[31]);
 			
-			// Extended Fields
-			//  9 -
-			// 13 -
-			// 14 -
-			// 19 -
 			/*
 			$v = $d->validateCreate();
             //$v = $d->validateUpdate();
@@ -152,6 +149,21 @@ while (! feof(STDIN) ) {
 			$i = $d->insert();
 			$DisasterId = $d->get('DisasterId');
 			$e = new DIEEData($us, $DisasterId);
+			//  9 - Familias Afectadas
+			$e->set('EEF004', valueToDIField($a[9]));
+			// 13 - Puentes Vehiculares
+			$e->set('EEF005', valueToDIField($a[13]));
+			// 14 - Puentes Peatonales
+			$e->set('EEF006', valueToDIField($a[14]));
+			// 15 - Acueductos Afectados
+			$e->set('EEF007', valueToDIField($a[15]));
+			// 19 - Centros Comunitarios
+			$e->set('EEF008', valueToDIField($a[19]));
+			// 32 - Fecha Tramite Administrativo
+			$e->set('EEF009', strToISO8601($a[32]));
+			// 33 - Menajes
+			$e->set('EEF010', valueToDIField($a[33]));
+			
 			$j = $e->insert();
 			if ( ($i < 0) || ($j < 0) ) {
 				print $line . ' ' . $DisasterSerial . ' ' . $i . ' ' . $j . "\n";
@@ -207,4 +219,15 @@ function getMonth($prmMonthName) {
 	return $v;
 }
 
+function createEEField($prmSession, $EEFieldLabel, $EEFieldType, $EEFieldSize='') {
+	$f = new DIEEField($prmSession);
+	$f->set('EEGroupId', 'DGR');
+	$f->set('EEFieldLabel', $EEFieldLabel);
+	$f->set('EEFieldType', $EEFieldType);
+	if ($EEFieldSize != '') {
+		$f->set('EEFieldSize', $EEFieldSize);
+	}
+	$i = $f->insert();
+	return $i;
+}
 </script>
