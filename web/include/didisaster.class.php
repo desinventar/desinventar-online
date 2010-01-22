@@ -183,6 +183,7 @@ class DIDisaster extends DIObject {
 	
 	public function update($withValidate = true) {
 		$iReturn = ERR_NO_ERROR;
+		// Calculate Values of Q Fields...
 		foreach (split(',',$this->sFieldQDef) as $sFieldQ) {
 			$oItem = split('/', $sFieldQ);
 			$sFieldQName = $oItem[0];
@@ -191,6 +192,7 @@ class DIDisaster extends DIObject {
 			$this->set($sFieldQName, $this->get($sFieldName));
 			if ($this->get($sFieldQName) < 0) { $this->set($sFieldQName, 0); }
 		}
+		// Update Record
 		$iReturn = parent::update($withValidate);
 		return $iReturn;
 	} //update

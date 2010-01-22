@@ -150,8 +150,11 @@ while (! feof(STDIN) ) {
 			}
 			*/
 			$i = $d->insert();
-			if ($i < 0) {
-				print $line . ' ' . $DisasterSerial . ' ' . $i . "\n";
+			$DisasterId = $d->get('DisasterId');
+			$e = new DIEEData($us, $DisasterId);
+			$j = $e->insert();
+			if ( ($i < 0) || ($j < 0) ) {
+				print $line . ' ' . $DisasterSerial . ' ' . $i . ' ' . $j . "\n";
 			}			
 			if (($line > 0) && (($line % 100) == 0) ) {
 				print $line . "\n";
@@ -195,10 +198,10 @@ function strToISO8601($prmDate) {
 }
 
 function getMonth($prmMonthName) {
-	$m = array('Jan' =>  1, 'Feb' =>  2, 'Mar' =>  3, 'Apr' =>  4, 'May' =>  5, 'Jun' =>  6, 
-	           'Jul' =>  7, 'Aug' =>  8, 'Sep' =>  9, 'Oct' => 10, 'Nov' => 11, 'Dec' => 12);
+	$m = array('ene' =>  1, 'feb' =>  2, 'mar' =>  3, 'apr' =>  4, 'may' =>  5, 'jun' =>  6, 
+	           'jul' =>  7, 'aug' =>  8, 'sep' =>  9, 'oct' => 10, 'nov' => 11, 'dec' => 12);
 	$v = 0;
-	if (array_key_exists($prmMonthName, $m)) {
+	if (array_key_exists(strtolower($prmMonthName), $m)) {
 		$v = $m[$prmMonthName];
 	}
 	return $v;
