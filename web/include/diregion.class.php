@@ -1,7 +1,7 @@
 <script language="php">
 /*
  DesInventar - http://www.desinventar.org
- (c) 1998-2009 Corporacion OSSO
+ (c) 1998-2010 Corporacion OSSO
 */
 
 class DIRegion extends DIObject {
@@ -800,9 +800,18 @@ class DIRegion extends DIObject {
 		$Query = "SELECT MIN(DisasterBeginTime) AS MinDate, MAX(DisasterBeginTime) AS MaxDate FROM Disaster ".
 			"WHERE RecordStatus='PUBLISHED'";
 		foreach($this->q->dreg->query($Query) as $row) {
-			$a['DataMinDate'] = $row['MinDate'];
-			$a['DataMaxDate'] = $row['MaxDate'];
+			$MinDate = $row['MinDate'];
+			$MaxDate = $row['MaxDate'];
 		}
+		// 2010-01-21 (jhcaiced) Fix some weird cases in MinDate/MaxDate
+		if (substr($MinDate, 5, 2) == '00') {
+			$MinDate = substr($MinDate, 0, 4) . '-01-01';
+		}
+		if (substr($MaxDate, 5, 2) > '12') {
+			$MaxDate = substr($MaxDate, 0, 4) . '-12-31';
+		}
+		$a['DataMinDate'] = $MinDate;
+		$a['DataMaxDate'] = $MaxDate;
 		return $a;
 	}
 	
