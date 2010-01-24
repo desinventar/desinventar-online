@@ -22,17 +22,27 @@ desinventar.db : region.sql
 	/bin/rm -f desinventar.db; \
 	sqlite3 desinventar.db < region.sql
 
-lang : di8_interface_strings.csv
-	./createInterfaceStrings.pl --lang=spa > ../../web/include/spa.conf; \
-	./createInterfaceStrings.pl --lang=eng > ../../web/include/eng.conf; \
-	./createInterfaceStrings.pl --lang=por > ../../web/include/por.conf; \
-	./createInterfaceStrings.pl --lang=fre > ../../web/include/fre.conf;
+lang : lang_spa lang_eng lang_por lang_fre
 
-langportal: di8_portal_strings.csv
-	./createInterfaceStrings.pl --portal --lang=spa > ../../portal/include/spa.conf; \
-	./createInterfaceStrings.pl --portal --lang=eng > ../../portal/include/eng.conf; \
-	./createInterfaceStrings.pl --portal --lang=por > ../../portal/include/por.conf; \
-	./createInterfaceStrings.pl --portal --lang=fre > ../../portal/include/fre.conf;
+lang_spa : di8_interface_strings.csv
+	./createInterfaceStrings.pl --lang=spa > ../../web/include/spa.conf
+lang_eng : di8_interface_strings.csv
+	./createInterfaceStrings.pl --lang=eng > ../../web/include/eng.conf
+lang_por : di8_interface_strings.csv
+	./createInterfaceStrings.pl --lang=por > ../../web/include/por.conf
+lang_fre : di8_interface_strings.csv
+	./createInterfaceStrings.pl --lang=fre > ../../web/include/fre.conf
+
+langportal : langportal_spa langportal_eng langportal_por langportal_fre
+
+langportal_spa: di8_portal_strings.csv
+	./createInterfaceStrings.pl --portal --lang=spa > ../../portal/include/spa.conf
+langportal_eng: di8_portal_strings.csv
+	./createInterfaceStrings.pl --portal --lang=eng > ../../portal/include/eng.conf
+langportal_por: di8_portal_strings.csv
+	./createInterfaceStrings.pl --portal --lang=por > ../../portal/include/por.conf
+langportal_fre: di8_portal_strings.csv
+	./createInterfaceStrings.pl --portal --lang=fre > ../../portal/include/fre.conf
 
 clean :
 	/bin/rm -f *.db
