@@ -123,5 +123,6 @@ PRIMARY KEY('SyncId')
 insert into Language values ('spa', 'Spanish', 'Español', 1,'','','');
 insert into Language values ('eng', 'English', 'English', 1,'','','');
 insert into Language values ('por', 'Portuguese', 'Portugais', 1,'','','');
+insert into Language values ('fre', 'French', 'Français', 1,'','','');
 
 insert into Info values ('DBVersion','1.01','','','','');
