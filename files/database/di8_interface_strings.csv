@@ -36,7 +36,7 @@
 "di8_user","tmsgpasslost","Si olvidó su clave solicítela aquí. Digite su correo electrónico.","If you have forgotten your password","you can ask for it here. Type in your email address.","Si vous avez oublié votre mot de passe"
 "di8_user","msgsendemail","Su usuario es:","Your user name is:","Seu usuário é:","Votre usager est:"
 "di8_user","msgsendemail2","Su clave es:","Your password is:","Sua senha é:","Votre mot de passe est:"
-"di8_user","errsendemail","email no se encuentra registrado. Intente nuevamente..","Email address is not registered. Try again.","Email não registrado. Tente novamente",""
+"di8_user","errsendemail","email no se encuentra registrado. Intente nuevamente..","Email address is not registered. Try again.","Email não registrado. Tente novamente","Le courrier électronique n'est pas enregistré. Essayez de nouveau."
 "di8_user","terror","Error","Error","Erro","Erreur"
 "di8_user","errinvaliduser","Usuario o clave no válidos","Invalid user name or password","Usuário o senha inválido","Usager ou mot de passe non valable"
 "di8_user","errmsgfrmregist","Error enviando REGISTRO. Llene todos los campos requeridos e intente nuevamente.","Error sending REGISTER.  Fill in all required fields and try again.","Erro enviando REGISTRO. Preencha todos os campos requeridos e tente novamente","Erreur dans l'envoi d'ENREGISTREMENT. Remplissez tous les champs obligatoires et essayez de nouveau."
