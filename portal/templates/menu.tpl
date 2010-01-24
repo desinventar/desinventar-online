@@ -32,7 +32,7 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect6">
 			<tr>
 				<td class="pais">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="updateDatabaseList('BOL',true);">{-#country_BOL#-}</a>
+					<a href="javascript:void(null);" onclick="updateDatabaseList('BOL',true);">{-#tcountryBOL#-}</a>
 				</td>
 			</tr>
 			<tr><td><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -159,7 +159,7 @@
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="showRegionInfo('BOL-1250695036-bolivia_gran_chaco');">{-#tcountryBOL#-}</a>
+					<a href="javascript:void(null);" onclick="showRegionInfo('BOL-1250695036-bolivia_gran_chaco');">Bolivia</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>

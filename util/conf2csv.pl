@@ -10,9 +10,9 @@
 use encoding "utf8";
 use Encode;
 
-open(SPA,'<:encoding(utf8)','../web/include/spa.conf');
-open(ENG,'<:encoding(utf8)','../web/include/eng.conf');
-open(POR,'<:encoding(utf8)','../web/include/por.conf');
+open(SPA,'<:encoding(utf8)','../portal/include/spa.conf');
+open(ENG,'<:encoding(utf8)','../portal/include/eng.conf');
+open(POR,'<:encoding(utf8)','../portal/include/por.conf');
 
 my %trans_eng = ();
 while(<ENG>) {

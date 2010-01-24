@@ -14,17 +14,25 @@ use Getopt::Long;
 
 my $lang = '';
 my $index = 2;
+my $bHelp = 0;
+my $bPortal = 0;
+my $file  = 'di8_interface_strings.csv';
 
 if (!GetOptions('help|h'    => \$bHelp,
-                'lang|l=s'  => \$lang
+                'lang|l=s'  => \$lang,
+                'portal|p'  => \$bPortal
    )) {
 	die "Error : Incorrect parameter list, please use --help\n";
 }                
 
+if ($bPortal) {
+	$file = 'di8_portal_strings.csv';
+}
+
 my %trans = ();
 my $prevgroup = '';
 
-open(CSV,'<:encoding(utf8)','di8_interface_strings.csv');
+open(CSV,'<:encoding(utf8)',$file);
 $header = <CSV>;
 while(<CSV>) {
 	chomp $_;
@@ -32,10 +40,12 @@ while(<CSV>) {
 	($group, $key, $value_spa, $value_eng, $value_por, $value_fre) = split(',', $line);
 	$group = trim($group);
 	if ($group ne $prevgroup) {
-		if ($prevgroup ne '') {
-			print "\n";
+		if ($group ne '') {
+			if ($prevgroup ne '') {
+				print "\n";
+			}
+			print '[' . $group . ']' . "\n";
 		}
-		print '[' . $group . ']' . "\n";
 		$prevgroup = $group;
 	}
 	$key = trim($key);
@@ -53,7 +63,7 @@ while(<CSV>) {
 	} elsif ($lang eq 'fre') {
 		$value = $value_fre;
 	}
-	$line = sprintf('%s = %s', $key, $value);
+	$line = sprintf('%s=%s', $key, $value);
 	print $line . "\n";
 }
 close(CSV);

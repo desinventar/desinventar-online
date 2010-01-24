@@ -1,6 +1,6 @@
 SQLITE=sqlite3
 
-all : base.db core.db desinventar.db lang
+all : base.db core.db desinventar.db lang langportal
 
 # Rebuild base.db database
 base.db : base.sql doc-db.csv events.csv causes.csv
@@ -27,6 +27,12 @@ lang : di8_interface_strings.csv
 	./createInterfaceStrings.pl --lang=eng > ../../web/include/eng.conf; \
 	./createInterfaceStrings.pl --lang=por > ../../web/include/por.conf; \
 	./createInterfaceStrings.pl --lang=fre > ../../web/include/fre.conf;
+
+langportal: di8_portal_strings.csv
+	./createInterfaceStrings.pl --portal --lang=spa > ../../portal/include/spa.conf; \
+	./createInterfaceStrings.pl --portal --lang=eng > ../../portal/include/eng.conf; \
+	./createInterfaceStrings.pl --portal --lang=por > ../../portal/include/por.conf; \
+	./createInterfaceStrings.pl --portal --lang=fre > ../../portal/include/fre.conf;
 
 clean :
 	/bin/rm -f *.db
