@@ -1,21 +1,40 @@
 #!/usr/bin/perl
+#  DesInventar - http://www.desinventar.org
+#  (c) 1998-2010 Corporacion OSSO
+#  
+#  2010-01-24 Jhon H. Caicedo <jhcaiced@desinventar.org>
+#
+#  Move data from *.conf files into a single CSV file for 
+#  easier maintaining the interface strings and translations
+#
 use encoding "utf8";
 use Encode;
 
 open(SPA,'<:encoding(utf8)','../web/include/spa.conf');
 open(ENG,'<:encoding(utf8)','../web/include/eng.conf');
+open(POR,'<:encoding(utf8)','../web/include/por.conf');
 
-my %trans = ();
-while(<TRANS>) {
+my %trans_eng = ();
+while(<ENG>) {
 	chomp $_;
 	$line = $_;
 	($key, $value) = split('=', $line);
 	$key = trim($key);
 	$value = trim($value);
 	if ($value ne '') {
-		$trans{$key} = $value;
-		#$line = sprintf('"%s","%s","%s"', $key, $value, '');
-		#print $line . "\n";
+		$trans_eng{$key} = $value;
+	}
+}
+
+my %trans_por = ();
+while(<POR>) {
+	chomp $_;
+	$line = $_;
+	($key, $value) = split('=', $line);
+	$key = trim($key);
+	$value = trim($value);
+	if ($value ne '') {
+		$trans_por{$key} = $value;
 	}
 }
 
@@ -25,11 +44,20 @@ while(<SPA>) {
 	($key, $value) = split('=', $line);
 	$key = trim($key);
 	$value = trim($value);
+	if ($value eq '') {
+		$group = $key;
+		$group =~ s/\[//g;
+		$group =~ s/\]//g;
+	}
+	
 	if ($value ne '') {
-		$line = sprintf('"%s","%s","%s"', $key, $value, $trans{$key});
+		$line = sprintf('"%s","%s","%s","%s","%s"', $group, $key, $value, $trans_eng{$key},$trans_por{$key});
 		print $line . "\n";
 	}
 }
+close(ENG);
+close(POR);
+exit(0);
 
 sub trim() {
 	$string = shift;
