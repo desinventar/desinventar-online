@@ -1,450 +1,450 @@
 "Group","Key","Value(spa)","Value(eng)","Value(por)","Value(fre)"
-"di8_user","tuser","Usuario","User","Usuário",
-"di8_user","tname","Nombre","Name","Nome",
-"di8_user","tpassword","Clave","Password","Senha",
-"di8_user","temail","Email","Email","Email",
-"di8_user","toldpassword","Ingrese su clave","Type your password","Digite sua senha",
-"di8_user","tnewpassword","Nueva clave","New password","Nova senha",
-"di8_user","trenewpassw","Re-ingrese","Re-type your password","Digite-a novamente",
-"di8_user","tcountry","País","Country","País",
-"di8_user","tcity","Ciudad","City","Cidade",
-"di8_user","tactive","Activo","Active","Ativo",
-"di8_user","baddoption","Adicionar","Add","Adicionar",
-"di8_user","bsave","Guardar","Save","Salvar",
-"di8_user","bsend","Generar","Generate","Gerar",
-"di8_user","bcancel","Cancelar","Cancel","Cancelar",
-"di8_user","benter","Entrar","Login","Entrar",
-"di8_user","tpasslost","¿Olvidó su clave?","Forgot your password?","Esqueceu sua senha?",
-"di8_user","toptions","Opciones","Options","Opções",
-"di8_user","tclosesess","Cerrar sesión","Close session","Fechar sessão",
-"di8_user","tmyregions","Mis bases","My Databases","Meus bancos",
-"di8_user","tconfigacc","Mi cuenta","My Account","Minha conta",
-"di8_user","thello","Hola","Hi!","Olá",
-"di8_user","tdetails","Acceder","Access","Entrar",
-"di8_user","tuserprefer","Edición de cuenta de usuario","Edit user account","Edição de conta de usuário",
-"di8_user","tuseremail","Correo electrónico (<i>e-mail</i>)","Electronic mail (<i>email</i>)","Correio eletrônico (<i>e-mail</i>)",
-"di8_user","tadminperms","Permisos administrativos","Administrative authority","Permissões administrativas",
-"di8_user","tadminregs","Gestión de bases de datos","Databases management","Gestão de bancos de dados",
-"di8_user","tadminusrs","Gestión de usuarios","User management","Gestão de usuários",
-"di8_user","tyourrol","Sus roles y bases de datos son:","Your roles and databases are:","Seus perfis e bancos de dados são:",
-"di8_user","tadminof","Administrador","Manager","Administrador",
-"di8_user","tobservof","Observador","Observer","Observador",
-"di8_user","tuserof","Alimentador","Feeder","Alimentador",
-"di8_user","tsupervof","Supervisor","Supervisor","Supervisor",
-"di8_user","tnorol","Ninguna","None","Nenhuma",
-"di8_user","tgetemailpass","Recordatorio de usuario y clave","Reminder for user and password","Lembrança de usuário e senha",
-"di8_user","tmsgpasslost","Si olvidó su clave solicítela aquí. Digite su correo electrónico.","If you have forgotten your password, you can ask for it here. Type in your email address.","Se esquecer de sua senha solicite-a aqui. Digite seu email",
-"di8_user","msgsendemail","Su usuario es:","Your user name is:","Seu usuário é:",
-"di8_user","msgsendemail2","Su clave es:","Your password is:","Sua senha é:",
-"di8_user","errsendemail","email no se encuentra registrado. Intente nuevamente..","Email address is not registered. Try again.","Email não registrado. Tente novamente",
-"di8_user","terror","Error","Error","Erro",
-"di8_user","errinvaliduser","Usuario o clave no válidos","Invalid user name or password","Usuário o senha inválido",
-"di8_user","errmsgfrmregist","Error enviando REGISTRO. Llene todos los campos requeridos e intente nuevamente.","Error sending REGISTER.  Fill in all required fields and try again.","Erro enviando REGISTRO. Preencha todos os campos requeridos e tente novamente",
-"di8_user","msginsertsucc","Ingreso exitoso de nuevo usuario","New user input successful","Entrada de novo usuário com sucesso",
-"di8_user","msgupdatesucc","Actualización exitosa de usuario","User update successful","Atualização de usuário com sucesso",
-"di8_user","errinsert","No se pudo ingresar usuario","Unable to input user","Não foi possível criar entrada ao usuário",
-"di8_user","errupdate","No fué posible actualizar el usuario","Unable to update user","Não foi possível atualizar o usuário",
-"di8_user","errbadpasswd","clave es incorrecta","Incorrect password","Senha incorreta",
-"di8_user","errnomatch","clave nueva y re-ingrese no coinciden","New password and re-input do not match.","Senha não confere",
-"di8_region","ttname","Gestión de base de datos","Databases management","Gestão de bancos de dados",
-"di8_region","tregionuuid","Base ID","Database ID","Banco ID",
-"di8_region","tregnamlist","Nombre base","Name of database","Nome banco",
-"di8_region","tregcntlist","País","Country","País",
-"di8_region","tregadmlist","Administrador","Administrator","Administrador",
-"di8_region","tregactlist","Activo","Active","Ativo",
-"di8_region","tregpublist","Pública","Public","Pública",
-"di8_region","tcredits","Créditos","Credits","Créditos",
-"di8_region","tmethodology","Metodología","Methodology","Metodologia",
-"di8_region","tstaff","Hito","Landmark","Acontecimento",
-"di8_region","tsupport","Mantenimiento","Maintenance","Manutenção",
-"di8_region","tdescription","Descripción","Description","Descrição",
-"di8_region","tnopublic","Base de datos en construcción. Acceso restringido a usuarios de la base.","The database is under construction. Only for database members.","Banco de dados em construção. Acesso restrito aos usuários do banco",
-"di8_region","tvalregid","Base ID disponible","Available database ID","Banco ID disponível",
-"di8_region","tinvregid","Base ID no disponible","Database ID unavailable","Banco ID não disponível",
-"di8_region","tinsert","Creada y","Created and","Criado e",
-"di8_region","tupdate","Actualizada y","Updated and","Atualizado e",
-"di8_region","tsetrole","asignada","Assigned","Atribuído",
-"di8_region","terrinsupd","No fué posible ingresar la base.","Unable to enter database","Não foi possível o ingresso ao banco",
-"di8_region","terrsetrole","no asignada","Unassigned","Não atribuído",
-"di8_region","baddoption","Adicionar","Add","Adicionar",
-"di8_region","bloaddir","Leer de directorio","Load directory","Load directory*",
-"di8_region","bupzipfile","Crear base desde archivo ZIP","Upload Database ZIP file","Crear base desde archivo ZIP*",
-"di8_region","bsave","Guardar","Save","Salvar",
-"di8_region","bcancel","Cancelar","Cancel","Cancelar",
-"di8_region","tviewdbase","Seleccione la base de datos que desea visualizar","Select the database you wish to view","Selecione o banco de dados que deseja visualizar",
-"di8_region","tmoddescon","Consultas de datos, generación de mapas, gráficos y consolidados","Queries of Data, maps, graphics and consolidates generation","Consultas de dados, geração de mapas, gráficos e consolidados",
-"di8_region","tmoddesinv","Ingreso de fichas, administracion bases de datos, acceso restringido","Data card input, database administration, restricted access","Ingresso de formulários, administração bancos de dados, acesso restrito",
-"di8_region","RegionDatabasePeriod","Periodo","Period","Período",
-"di8_region","trepnum","Número de fichas","Reports","Formulários",
-"di8_region","tlastupd","Última modificación","Last update","Última atualização",
-"di8_region","RegionDatacardPeriod","Periodo Fichas","Datacard Period","Período de datos",
-"di8_reginfo","baddoption","Adicionar","Add","Adicionar",
-"di8_reginfo","bsave","Guardar","Save","Salvar",
-"di8_reginfo","bcancel","Cancelar","Cancel","Cancelar",
-"di8_reginfo","terror","Error","Error","Erro",
-"di8_reginfo","msgupdinfo","Base actualizada exitosamente!","Database updated successfully!","Banco atualizado com sucesso!",
-"di8_reginfo","errupdinfo","Error actualizando la base","Error updating database","Erro atualizando o banco",
-"di8_reginfo","msgupdrole","Rol de usuario actualizado exitosamente!","User role updated successfully!","Perfil de usuário atualizado com sucesso!",
-"di8_reginfo","errupdrole","Error actualizando rol de usuario","Error updating user role","Erro atualizando perfil de usuário",
-"di8_reginfo","msginslog","Bitácora creada exitosamente!","Log created successfully!","Relatório criado com sucesso!",
-"di8_reginfo","errinslog","Error ingresando Bitácora","Error creating Log","Erro ingressando Relatório",
-"di8_reginfo","msgupdlog","Bitácora actualizada exitosamente!","Log updated successfully","Relatório atualizado com sucesso!",
-"di8_reginfo","errupdlog","Error actualizando Bitácora","Error updating Log","Erro atualizando Relatório",
-"di8_reginfo","errmsgfrm","INFORMACION: Llene todos los campos requeridos e intente nuevamente.","Register all fields in the RECORD DESINVENTAR. Fill in all required fields and try again.","Registre todos os campos do FORMULÁRIO DESINVENTAR. Preencha todos os campos requeridos e tente de novo",
-"di8_reginfo","errmsgfrmrol","ROLES: Llene todos los campos requeridos e intente nuevamente.","ROLES: Fill in all required fields and try again.","Perfis: Preencha todos os campos requeridos e tente novamente",
-"di8_reginfo","errmsgfrmlog","BITACORA: Llene todos los campos requeridos e intente nuevamente.","LOG: Fill in all required fields and try again.","RELATÓRIO: Preencha todos os campos requeridos e tente novamente",
-"di8_reginfo","msgupdrole","Rol de usuario actualizado exitosamente!","User role updated successfully!","Perfil de usuário atualizado com sucesso!",
-"di8_reginfo","errupdrole","Error actualizando rol de usuario","Error updating user role","Erro atualizando perfil de usuário",
-"di8_geography","baddoption","Adicionar","Add","Adicionar",
-"di8_geography","bsave","Guardar","Save","Salvar",
-"di8_geography","bcancel","Cancelar","Cancel","Cancelar",
-"di8_geography","terror","Error","Error","Erro",
-"di8_geography","errchkname","Nombre de nivel ya existe","Unable to use type of cause name because it already exists.","Nome de causa não foi possível utilizar porque já existe",
-"di8_geography","msginslev","Nivel creado exitosamente!","Level created successfully!","Nível criado com sucesso!",
-"di8_geography","errinslev","No se pudo ingresar nuevo nivel","Unable to input new level","Não foi possível ingressar o novo nível",
-"di8_geography","msgupdlev","Nivel actualizado exitosamente","Level updated successfully!","Nível atualizado com sucesso!",
-"di8_geography","errupdlev","No se pudo actualizar nivel","Unable to update level","Não foi possível atualizar o nível",
-"di8_geography","errchkcode","Código de geografía ya existe","Geographic code already exists","Código de geografia já existe",
-"di8_geography","errchkstatus","Elemento no se puede desactivar porque se encuentra asignado","Unable to deactivate type of cause because it has been assigned.","Causa não foi possível desativar porque está atribuída",
-"di8_geography","msginsgeo","Geografía creada exitosamente","Geography created successfully!","Geografia criada com sucesso!",
-"di8_geography","errinsgeo","No se pudo crear elemento geográfico","Unable to create geographic element","Não foi possível criar elemento geográfico",
-"di8_geography","msgupdgeo","Geografía actualizada exitosamente!","Geography updated successfully!","Geografia atualizada com sucesso!",
-"di8_geography","errupdgeo","No se pudo actualizar elemento geográfico","Unable to update geographic element","Não foi possível atualizar elemento geográfico",
-"di8_geography","errmsgfrmlev","NIVEL: Llene todos los campos requeridos e intente nuevamente.","LEVEL: Fill in all required fields and try again.","NÌVEL: Preencha todos os campos requeridos e tente novamente",
-"di8_geography","errmsgfrmgeo","GEOGRAFIA: Llene todos los campos requeridos e intente nuevamente.","GEOGRAPHY: Fill in all required fields and try again.","GEOGRAFIA: Preencha todos os campos requeridos e tente novamente",
-"di8_events","baddelem","Adicionar","Add","Adicionar",
-"di8_events","bsave","Guardar","Save","Salvar",
-"di8_events","bcancel","Cancelar","Cancel","Cancelar",
-"di8_events","terror","Error","Error","Erro",
-"di8_events","msginseve","Tipo de evento creado exitosamente","Type of event created successfully!","Evento criado com sucesso!",
-"di8_events","errinseve","Error intentando ingresar Tipo de evento","Error entering Type of event","Erro tentando ingressar Evento",
-"di8_events","msgupdeve","Tipo de evento actualizado exitosamente","Type of event updated successfully!","Evento atualizado com sucesso!",
-"di8_events","errupdeve","Error actualizando Tipo de evento","Error updating Type of event","Erro atualizando Evento",
-"di8_events","errmsgfrm","TIPO de EVENTO: Llene todos los campos requeridos e intente nuevamente.","Register all fields in the RECORD DESINVENTAR. Fill in all required fields and try again.","Registre todos os campos do FORMULÁRIO DESINVENTAR. Preencha todos os campos requeridos e tente de novo",
-"di8_events","errchkname","Nombre de tipo de evento no se puede utilizar porque ya existe","Unable to use type of cause name because it already exists.","Nome de causa não foi possível utilizar porque já existe",
-"di8_events","errchkstatus","Tipo de evento no se puede desactivar porque se encuentra asignado","Unable to deactivate type of cause because it has been assigned.","Causa não foi possível desativar porque está atribuída",
-"di8_causes","baddelem","Adicionar","Add","Adicionar",
-"di8_causes","bsave","Guardar","Save","Salvar",
-"di8_causes","bcancel","Cancelar","Cancel","Cancelar",
-"di8_causes","terror","Error","Error","Erro",
-"di8_causes","msginscau","Causa creada exitosamente","Type of cause created successfully!","Causa criada com sucesso!",
-"di8_causes","errinscau","Error ingresando Causa","Error entering Type of cause","Erro ingressando Causa",
-"di8_causes","msgupdcau","Causa actualizada exitosamente","Type of cause updated successfully!","Causa atualizada com sucesso!",
-"di8_causes","errupdcau","Error actualizando Causa","Error updating Type of cause","Erro atualizando Causa",
-"di8_causes","errmsgfrm","CAUSA: Llene todos los campos requeridos e intente nuevamente.","Register all fields in the RECORD DESINVENTAR. Fill in all required fields and try again.","Registre todos os campos do FORMULÁRIO DESINVENTAR. Preencha todos os campos requeridos e tente de novo",
-"di8_causes","errchkname","Nombre de causa no se puede utilizar porque ya existe","Unable to use type of cause name because it already exists.","Nome de causa não foi possível utilizar porque já existe",
-"di8_causes","errchkstatus","Causa no se puede desactivar porque se encuentra asignada","Unable to deactivate type of cause because it has been assigned.","Causa não foi possível desativar porque está atribuída",
-"di8_extraeffects","baddoption","Adicionar","Add","Adicionar",
-"di8_extraeffects","bsave","Guardar","Save","Salvar",
-"di8_extraeffects","bcancel","Cancelar","Cancel","Cancelar",
-"di8_extraeffects","terror","Error","Error","Erro",
-"di8_extraeffects","msgupdeef","Campo de efectos actualizado exitosamente","Effect field updated successfully!","Campo de efeitos atualizado com sucesso!",
-"di8_extraeffects","errupdeef","No se pudo actualizar el campo de efectos","Unable to update effect field","Não foi possível atualizar o campo de efeitos",
-"di8_extraeffects","errmsgfrmeef","EFECTOS: Llene todos los campos requeridos e intente nuevamente.","EFFECTS: Fill in all required fields and try again.","EFEITOS: Preencha todos os campos requeridos e tente de novo",
-"di8_extraeffects","typeinteger","Numérico","Integer","Numérico",
-"di8_extraeffects","typefloat","Moneda","Float","Moeda",
-"di8_extraeffects","typedate","Fecha","Date","Data",
-"di8_extraeffects","typetext","Texto","Text","Texto",
-"di8_import","ttitle","Archivos CSV de Fichas:","Methodological guide summarize","Resumo Guia metodológico",
-"di8_import","tsuccess","Importación exitosa","Sucessfull importation","Importação bem sucedida",
-"di8_import","tfail","No se realizó la importación","Can not import file","Não foi realizada a importação",
-"di8_import","tfound1","Se encontraron","Exist some","Foram encontrados",
-"di8_import","tfound2","errores.","errors.","erros",
-"di8_import","tfile","Fila","Row","Fila",
-"di8_import","tsend","Importar","Generate","Gerar",
-"di8_input","ttitle","DesInventar8","Methodological guide summarize","Resumo Guia metodológico",
-"di8_input","mprint","Imprimir","Print","Imprimir",
-"di8_input","mloading","Un momento por favor..","One moment, please.","Um momento por favor",
-"di8_input","bnew","Nueva","New","Nova",
-"di8_input","tnewtitle","Crear una ficha","Create a data card","Criar um formulário",
-"di8_input","tnewdesc","Ingrese un nuevo registro a la base de datos","Input a new register into the database","Ingresse um novo registro ao banco de dados",
-"di8_input","bupdate","Editar","Edit","Atualizar",
-"di8_input","tupdtitle","Editar una ficha","Edit a data card","Editar um formulário",
-"di8_input","tupddesc","Edite un registro ya existente en la base de datos","Edit an existing record in the database","Edite um registro já existente no banco de dados",
-"di8_input","bsave","Guardar","Save","Salvar",
-"di8_input","tsavtitle","Guardar la ficha","Save data card","Salvar o formulário",
-"di8_input","tsavdesc","Guarde un registro en la base de datos, recuerde incluir los campos obligatorios","Save register in the database. Remember to include all obligatory fields.","Salve um registro no banco de dados, lembre incluir os campos obrigatórios",
-"di8_input","bcancel","Cancelar","Cancel","Cancelar",
-"di8_input","tcantitle","Abandonar la ficha","Discard data card","Abandonar o formulário",
-"di8_input","tcandesc","Abandone la actual ficha, no se guardará ni modificará la información.","Discard current record. Information will not be saved or modified.","Abandone o formulário atual, não será salva nem modificada a informação",
-"di8_input","bclean","Limpiar","Clear","Limpar",
-"di8_input","tclntitle","Limpiar la ficha","Clear data card","Limpar o formulário",
-"di8_input","tclndesc","Limpia la actual ficha, la información será borrada de la actual forma","Clear current record, fill form with blank or default values.","Limpa o formulário atual, a informação será apagada da atual forma",
-"di8_input","bexpsearch","Buscar","Search","Buscar",
-"di8_input","texptitle","Buscar fichas","Search data card","Buscar formulários",
-"di8_input","texpdesc","escriba el serial de la ficha que desea visualizar","Find datacard using a serial","Buscar utilizando múltiplos critérios",
-"di8_input","bfirst","Primera","First","First*",
-"di8_input","bprev","Anterior","Previous","Previous*",
-"di8_input","bnext","Siguiente","Next","Next*",
-"di8_input","blast","Última","Last","Last*",
-"di8_input","ttotal","Total","Total","Total",
-"di8_input","thelp","Definición","Definition","Definição",
-"di8_input","tcardnot","La ficha deseada no existe","Datacard request not exists","Datacard request not exists*",
-"di8_input","tdidescinfo","De click en el título deseado para ver la descripción de dicho elemento","Click on the title to see a description of the element","Selecione o título desejado para ver a descrição",
-"di8_input","mgeography","Geografía","Geographic units","Unidades Geográficas",
-"di8_input","mevents","Tipo de eventos","Types of events","Tipos de eventos",
-"di8_input","mcauses","Tipo de causas","Types of causes","Tipos de causas",
-"di8_input","tbaseffects","Efectos básicos","Basic effects","Efeitos básicos",
-"di8_input","textraeffect","Efectos adicionales","Additional effects","Efeitos adicionais",
-"di8_input","teffects","Personas y bienes","Persons and Property","Pessoas e bens",
-"di8_input","tsectors","Sectores","Affected sectors","Setores",
-"di8_input","tlosses","Pérdidas económicas","Economic Losses","As perdas econômicas",
-"di8_input","tcreatedate","Creada:","Created:","Criada:",
-"di8_input","tcreateby","Por:","By:","Por:",
-"di8_input","tcreateupdate","Modificada:","Modified:","Modificada:",
-"di8_input","tstatus","Estado","Status","Estado",
-"di8_input","tsend","Buscar","Generate","Gerar",
-"di8_input","tclean","Limpiar","Clean","Limpar",
-"di8_input","tclose","Cerrar","Close","Fechar",
-"di8_input","tsince","Desde","Since","Desde",
-"di8_input","tuntil","Hasta","Until","Até",
-"di8_input","tqueryresults","Resultados","Results","Resultados",
-"di8_input","tqueryshowcard","Ver ficha","See data card","Ver formulário",
-"di8_input","tcheckquit","¿Realmente desea salir de DesInventar?","Are you sure you want to quit DesInventar?","Realmente deseja sair de DesInventar?",
-"di8_input","tmsgeditcard","Para editar esta ficha presione Actualizar","To edit this record, select Update","Para editar este formulário selecione Atualizar",
-"di8_input","tmsgnewcard","Presione Nueva para ingresar una ficha","Select New to enter a record","Selecione Nova para ingressar um formulário",
-"di8_input","tmsgsearchdup","Ingrese las palabras para ubicar fichas existentes","Type in words to search existing records","Ingresse as palavras para localizar formulários existentes",
-"di8_input","tmsgsearchcards","Ingrese las palabras para realizar la búsqueda","Type in words to define your search","Ingresse as palavras para realizar a busca",
-"di8_input","tmsgnewcardfill","Llene los campos y presione Listo para guardar","Fill in fields and select Ready to save.","Preencha os campos e selecione Pronto para Salvar",
-"di8_input","tmsgeditcardfill","Edite los campos y presione Listo para guardar","Edit fields and select Ready to save","Edite os campos e selecione Pronto para Salvar",
-"di8_input","tmsgviewcard","De click en la fila que desee visualizar","Click on the row you wish to see","Selecione a fila de deseje visualizar",
-"di8_input","errmsgfrm","Registre todos los campos de la FICHA DESINVENTAR. Llene todos los campos requeridos e intente nuevamente.","Register all fields in the RECORD DESINVENTAR. Fill in all required fields and try again.","Registre todos os campos do FORMULÁRIO DESINVENTAR. Preencha todos os campos requeridos e tente de novo",
-"di8_input","tstatpublished","Publicada","Published","Publicada",
-"di8_input","tstatready","Por aprobar","Pending approval","Por aprovar",
-"di8_input","tstatdraft","Borrador","Draft","Rascunho",
-"di8_input","tstatrash","Para eliminar","Pending deletion","Para eliminar",
-"di8_input","tstatdeleted","Eliminar!","Delete!","Eliminar!",
-"di8_input","tdcerror","La ficha no fue guardada","Data card was not saved","O formulário não foi salvo",
-"di8_input","tdisererr","Serial inválido (asignado o incorrecto)","No valid serial (assigned o incorrect)","Serial inválido (atribuído ou incorreto)",
-"di8_input","tdiserok","Serial válido","Valid serial","Serial válido",
-"di8_input","tdccreated","Ficha creada exitosamente","Data card created sucessfully","Formulário criado com sucesso!",
-"di8_input","tdcupdated","Ficha actualizada exitosamente","Data card updated sucessfully","Formulário atualizado com sucesso!",
-"di8_input","tdconuse","La ficha está siendo editada por otro usuario, por favor intente despues..","Data card is been edited by other user, please try later..","O formulário está sendo editado por outro usuário, por favor, tente depois",
-"di8_input","teffhav","Hubo","There were","Houve",
-"di8_input","teffhavnot","No hubo","There weren't any","Não houve",
-"di8_input","teffdontknow","No sabe","Don't know","Não sabe",
-"di8_index","twelcome","Bienvenido","Welcome","Welcome*",
-"di8_index","tdititle","Sistema de inventario de efectos de desastres","Inventory system of the effects of disasters","Sistema de inventário de efeitos de desastres",
-"di8_index","hlostconn","Comunicación fallida: Verifique su conexión a Internet","Failed communication. Check your internet connection.","Comunicação falida: Verifique sua conexão à Internet",
-"di8_index","tdbnotavail","No hay bases de datos disponibles por el momento","There are no databases available at the moment.","Não há bancos de dados disponíveis no momento",
-"di8_index","tmoreinfo","Mas información","More information","Mais informação",
-"di8_index","talerdiwin","DesInventar está en uso. ¿Está seguro que desea salir?","DesInventar is being used. Are you sure you want to quit?","DesInventar está sendo usado. Tem certeza que deseja sair?",
-"di8_index","tstartpage","Inicio","Home","Início",
-"di8_index","tcopyright","(c) 1998-2010 Corporación OSSO - Colombia","(c) 1998-2010 Corporación OSSO - Colombia","(c) 1998-2010 Corporación OSSO - Colombia",
-"di8_index","labelsoftwareversion","Versión de Software","Software Version","Versão do software",
-"di8_index","ttitle","DesInventar 8","Methodological guide summarize","Resumo Guia metodológico",
-"di8_index","tsubtitle","Diseño de consulta","Query design","Esquematização de consulta",
-"di8_index","tsubtitlemsg","Acote su consulta seleccionando los campos de su interés.","Define your query by selecting the relevant fields","Limite sua consulta selecionando os campos de seu interesse",
-"di8_index","tsubtitle2","Resultados","Results","Resultados",
-"di8_index","tsubtitle2msg","Una vez diseñada su consulta, seleccione una de las herramientas de análisis Datos, Consolidados, Gráficos y Mapas.","Once you have designed your query, select one of the analysis tools: Data, Consolidated, Graphs and Maps","Una vez esquematizada sua consulta, selecione uma das ferramentas de análise Dados, Consolidados, Gráficos e Mapas",
-"di8_index","minsert","Ingreso","Insert","Insert",
-"di8_index","mconfig","Configuración","Configuration","Configuração",
-"di8_index","mimport","Importación de fichas","Import data cards","Importação de formulários",
-"di8_index","mbackdb","Respaldar base de datos","Backup database","Backup database*",
-"di8_index","mfile","Archivo","File","Arquivo",
-"di8_index","mprint","Imprimir","Print","Imprimir",
-"di8_index","msearch","Consultas","Queries","Consultas",
-"di8_index","mnewsearch","Nueva","New","Nova",
-"di8_index","msavequery","Guardar","Save file","Save file",
-"di8_index","mopenquery","Abrir","Open file","Open file",
-"di8_index","mgotoqd","Mostrar/Ocultar","Show/Hide","Mostrar/Ocultar",
-"di8_index","mquit","Salir","Quit","Sair",
-"di8_index","mhelp","Ayuda","Help","Ajuda",
-"di8_index","hotherdoc","Documentación software","Software documentation","Software documentation*",
-"di8_index","hdbinfo","Información base de datos","Database information","Informação de banco",
-"di8_index","mwebsite","Sitio web DesInventar","Website of DesInventar","Website of DesInventar*",
-"di8_index","mabout","Acerca de","About","Acerca de",
-"di8_index","mlang","Idioma","Language","Idioma",
-"di8_index","mdatabases","Bases de datos","Databases","bancos de dados",
-"di8_index","mdbfind","Buscar","Find","Find*",
-"di8_index","mgeosection","Geografía","Geography","Geografia",
-"di8_index","mmapsection","Mapa","Map","Mapa",
-"di8_index","meffsection","Efectos","Effects","Efeitos",
-"di8_index","mextsection","Efectos adicionales","Additional effects","Efeitos adicionais",
-"di8_index","mevesection","Tipos de eventos","Types of events","Tipos de eventos",
-"di8_index","mcausection","Tipos de causas","Types of causes","Tipos de causas",
-"di8_index","mdcsection","Fichas","Data cards","Formulários",
-"di8_index","madvsection","Consulta avanzada","Advanced query","Consulta avançada",
-"di8_index","mreginfo","Ficha técnica","Technical info","Formulário técnico",
-"di8_index","mgeolevel","Niveles Geográficos","Geographic levels","Níveis Geográficos",
-"di8_index","mgeography","Unidades Geográficas","Geographic units","Unidades Geográficas",
-"di8_index","mevents","Tipos de eventos","Types of events","Tipos de eventos",
-"di8_index","mcauses","Tipos de causas","Types of causes","Tipos de causas",
-"di8_index","meeffects","Efectos Adicionales","Additional Effects","Efeitos Adicionais",
-"di8_index","tmapnotavail","Mapa no disponible","Map unavailable","Mapa não disponível",
-"di8_index","bsavemsg","Le permite guardar el resultado desplegado (tablas e imágenes).","Enables you to save the displayed results (tables and images)","Permite Salvar o resultado obtido (tabelas e imagens).",
-"di8_index","bprintmsg","Para imprimir el resultado en pantalla.","Screen print result","Para imprimir o resultado na tela",
-"di8_index","bdata","Fichas","Data cards","Formulários",
-"di8_index","tdatamsg","Para visualizar las fichas en un tabla.","To visualise records in a table format","Para visualizar os formulários numa tabela",
-"di8_index","bthematic","Mapas","Maps","Mapas",
-"di8_index","tthematicmsg","Para realizar mapas temáticos de los efectos.","To create thematic maps of effects","Para realizar mapas temáticos dos efeitos",
-"di8_index","bgraphic","Gráficos","Graphs","Gráficos",
-"di8_index","tgraphicmsg","Representa los datos en histogramas y gráficos comparativos.","Represents data in histograms and comparative graphs","Representa os dados em histogramas e gráficos comparativos",
-"di8_index","bstatistic","Consolidados","Consolidated","Consolidados",
-"di8_index","tstatisticmsg","Totaliza las variables de efectos y fichas según niveles de totalización: p. ej. Años, Tipos de eventos, Niveles geográficos.","Add variables of effects and reports according to levels: eg, Years, types of events, Geographic Levels","Totaliza as variáveis de efeitos e formulários segundo níveis de totalização, por exemplo: Anos, Eventos, Níveis geográficos",
-"di8_index","gopttitle","Título","Title","Título",
-"di8_index","goptsubtit","Subtítulo","Subtitle","Subtítulo",
-"di8_index","ghistogram","Histograma","Histogram","Histograma",
-"di8_index","gcomparative","Comparativo","Comparative","Comparativo",
-"di8_index","gseaday","Días","Days","Dias",
-"di8_index","gtendline","Línea de tendencia","Tendence line","Tendence line*",
-"di8_index","glinearreg","Regresión Lineal","Linear regression","Linear regression*",
-"di8_index","GHISTOANNUAL","Histograma multianual","Multi-annual histogram","Histograma multi-anual",
-"di8_index","gseaweek","Semanas","Weeks","Semanas",
-"di8_index","gseamonth","Meses","Months","Meses",
-"di8_index","gperannual","Anual","Yearly","Anual",
-"di8_index","gperweek","Semanal","Weekly","Semanal",
-"di8_index","gpermonth","Mensual","Monthly","Mensal",
-"di8_index","gperday","Diario","Daily","Diário",
-"di8_index","gscalin","Lineal","Linear","Linear",
-"di8_index","gscalog","Logarítmica","Logarithm","Logarítmica",
-"di8_index","gfee2d","2D","2D","2D",
-"di8_index","gfee3d","3D","3D","3D",
-"di8_index","gkndbars","Barras","Bars","Barras",
-"di8_index","gkndlines","Líneas","Lines","Linhas",
-"di8_index","gkndpie","Pastel","Pie","Pizza",
-"di8_index","gmodnormal","Normal","Normal","Normal",
-"di8_index","gmodaccumul","Acumulado","Accumulated","Acumulado",
-"di8_index","gmodovercome","Superpuesto","Superimposed","Superposto",
-"di8_index","gshwval","Valores","Values","Valores",
-"di8_index","gshwperce","Porcentaje","Percentage","Porcentagem",
-"di8_index","gshwnone","Desactivar","Deactivate","Desativar",
-"di8_index","ghoraxis","Eje horizontal","Horizontal axis","Horizontal",
-"di8_index","gveraxis","Eje vertical","Vertical axis","Vertical",
-"di8_index","mareaid","Identificación de Areas","Identification of areas","Identificação de áreas",
-"di8_index","mareashownam","Mostrar nombres","Show names","Mostrar nomes",
-"di8_index","mareashowcod","Mostrar códigos","Show codes","Mostrar códigos",
-"di8_index","mareashowval","Mostrar valores","Show values","Mostrar valores",
-"di8_index","mareanotshow","No mostrar identificación","Do not display identification","Não mostrar identificação",
-"di8_index","mranlegcol","Rangos, Leyendas y Colores","Ranges, legends and colours","Intervalos, Legendas e Cores",
-"di8_index","mrange","Límite rango","Define range","Limite intervalo",
-"di8_index","mlegend","Leyenda","Legend","Legenda",
-"di8_index","mcolor","Color","Colour","Cor",
-"di8_index","mbetween","Entre","Between","Entre",
-"di8_index","mrepreselev","Nivel de representación","Level of representation","Nível de representação",
-"di8_index","mviewfields","Variable a representar","Variable to be represented","Variável a representar",
-"di8_index","mcolorgrad","Gradiente de color","Color gradient","Variação gradativa de core",
-"di8_index","mcoltransp","Transparencia","Transparency","Transparency",
-"di8_index","savailfields","Campos disponibles","Available fields","Campos disponíveis",
-"di8_index","sviewfields","Campos visibles y orden","Visible fields and order","Campos visíveis e ordem",
-"di8_index","sresxpage","Resultados por página","Results by page","Resultados por página",
-"di8_index","stotallevels","Seleccione los niveles de totalización","Select levels to be totalled","Selecione os níveis de totalização",
-"di8_index","dorderby","Ordenar por","Order by","Ordenar por",
-"di8_index","dserial","Serial","Serial","Serial",
-"di8_index","ddeg","Fecha, Tipo de evento, Geografía","Date, Type of event, Geography","Data, Evento, Geografia",
-"di8_index","ddge","Fecha, Geografia, Tipo de evento","Date, Geography, Type of event","Data, Geografia, Evento",
-"di8_index","dged","Geografia, Tipo de evento, Fecha","Geography, Type of event, Date","Geografia, Evento, Data",
-"di8_index","dedg","Tipo de evento, Fecha, Geografía","Type of event, Date, Geography","Evento, Data, Geografia",
-"di8_index","dcreation","Fecha de creación Fichas","Creation date data card","Data criação Formulários",
-"di8_index","dlastupd","Ultima actualización Fichas","Last update data card","Última atualização Formulários",
-"di8_index","serrmsgfrm","Debe escoger un nivel de totalización y por lo menos un campo a visualizar","Choose a level to be totalled and at least one field to be visualised","Deve escolher um nível de totalização e pelo menos um campo para visualizar",
-"di8_index","derrmsgfrm","Debe seleccionar por lo menos un campo","You must select at least one field","Deve selecionar pelo menos um campo",
-"di8_index","balls","Todos","All","Todos",
-"di8_index","bnone","Limpiar","Clean","Limpar",
-"di8_index","tand","y","and","e",
-"di8_index","tor","o","or","ou",
-"di8_index","ttitegp","Personas y bienes","Persons and property","Pessoas e bens",
-"di8_index","ttiteis","Sectores","Sectors","Setores",
-"di8_index","ttitloss","Pérdidas Económicas","Economic Losses","As perdas econômicas",
-"di8_index","tdate","Periodo","Range","Período",
-"di8_index","ttitsince","Desde","From","Desde",
-"di8_index","ttituntil","Hasta","To","Até",
-"di8_index","tonly","Solamente","Only","Somente",
-"di8_index","texclude","Excluir","Exclude","Excluir",
-"di8_index","tinclude","Incluir","Include","Incluir",
-"di8_index","tclean","Limpiar","Clean","Limpar",
-"di8_index","tsend","Generar","Generate","Gerar",
-"di8_index","tclose","Cerrar","Close","Fechar",
-"di8_index","tmguidedef","Definición","Definition","Definição",
-"di8_index","hmoreinfo","Guía metodológica","Methodological guide","Ver Guia metodológico",
-"di8_index","tdescinfo","De click en el campo deseado para ver la descripción de dicho elemento","Click on the field to see a description of the element","Selecione no campo desejado para ver a descrição",
-"di8_index","tcntclick","Ctrl Click para selección múltiple o deseleccionar","Ctrl+Click for multiple selection or de-selection","Ctrl + Click para seleção múltiple ou desmarcar",
-"di8_index","tauxhave","Hay","There is/are","Há",
-"di8_index","tauxaffect","Afectó","Affected","Afetou",
-"di8_index","trepnum","Número de fichas","Reports","Formulários",
-"di8_index","tabout","Correo electrónico: desinventar@desinventar.org","© 1998 – 2009 Corporación OSSO, \nCali – Colombia \nEmail: desinventar@desinventar.org","© 1998 – 2009 Corporação OSSO, \nCali – Colômbia \nCorreio eletrônico: desinventar@desinventar.org",
-"di8_index","tserialmsg","Puede incluir o excluir uno o varios seriales. Los seriales debe separarlos por espacios","May include or exclude one or several serials. Serials should be separated by spaces.","Pode incluir ou excluir um ou vários seriais. Os seriais devem ser separados com espaços",
-"di8_index","tserial","Seriales","Serials","Seriais",
-"di8_index","tdcstatus","Estado de ficha","Data card Status","Estado de formulário",
-"di8_index","tdcpublished","Publicada","Published","Publicado",
-"di8_index","tdcready","Por aprobar","To aprove","Por aprovar",
-"di8_index","tdcdraft","Borrador","Draft","Rascunho",
-"di8_index","tdctrash","Para eliminar","To delete","Para eliminar",
-"di8_index","tdateformat","Formato AAAA MM DD","Date format YYYY MM DD","Formato AAAA MM DD",
-"di8_index","thlpquery","Si no selecciona nada, significa que consultará toda la base de datos","If you do not select any option, the entire database will be searched","Se não selecionar nada, significa que consultará todo o banco de dados",
-"di8_index","teffhav","Hubo","There were","Houve",
-"di8_index","teffhavnot","No hubo","There weren't any","Não houve",
-"di8_index","teffdontknow","No sabe","Don't know","Não sabe",
-"di8_index","teffmajor","Mayor o igual a","Greater than or equal to","Maior ou igual a",
-"di8_index","teffminor","Menor o igual a","Less than or equal to","Menor ou igual a",
-"di8_index","teffequal","Igual a","Equal to","Igual a",
-"di8_index","teffbetween","Entre","Between","Entre",
-"di8_index","tlike","Expresión","Like","Like*",
-"di8_index","tadvqryhelp","Seleccione un campo seguido de un operador y el valor correspondiente","Select field follow of operator and value","Select field follow of operator and value*",
-"di8_index","taqlessthan","Busca fichas con valores menores al especificado: ej. fecha inicio < \'1920\' o Muertos < 10","Find cards with values menores al especificado: ej. fecha inicio < \'1920\' o Muertos < 10","Find cards with values menores al especificado: ej. fecha inicio < \'1920\' o Muertos < 10*",
-"di8_index","taqgreathan","Busca fichas con valores mayores al especificado: ej. fecha inicio > \'1999\' o Damnificados > 1000","Find cards with values  mayores al especificado: ej. fecha inicio > \'1999\' o Damnificados > 1000","Find cards with values  mayores al especificado: ej. fecha inicio > \'1999\' o Damnificados > 1000*",
-"di8_index","taqequalto","Busca fichas con valores exactamente igual al especificado: ej. fecha inicio","Find cards with values exactamente igual al especificado: ej. fecha inicio","Find cards with values exactamente igual al especificado: ej. fecha inicio",
-"di8_index","taqnoteqto","Busca fichas con valores diferentes al especificado: ej. Muertos <> 10","Find cards with values  diferentes al especificado: ej. Muertos <> 10","Find cards with values  diferentes al especificado: ej. Muertos <> 10*",
-"di8_index","taqlike","Busca una palabra o frase dentro de los campos de texto. Por ejemplo: Sitio LIKE \'%cauca%\' o Fuente LIKE \'%comercio%\'","Find a word or phrase in the text fields. i.e. Sitio LIKE \'%cauca%\' or Fuente LIKE \'%comercio%\'","Encontre uma palavra ou frase nos campos de texto. Por exemplo: Sitio LIKE \'%cauca%\'* ou Fuente LIKE \'%comercio%\'",
-"di8_index","taqwere","Busca fichas donde hubo ocurrencia del efecto o afectó el sector.","Find cards where there were ocurrence of effect or affect the sector.","Find cards where there were ocurrence of effect or affect the sector.*",
-"di8_index","taqwerent","Busca fichas donde NO hubo ocurrencia del efecto o NO afectó el sector.","Find cards where there were not ocurrence of effect or not affect the sector.","Find cards where there were not ocurrence of effect or not affect the sector.*",
-"di8_index","taqdntknow","Busca fichas donde NO se sabe si hubo o nó efectos o afectación del sector.","Find cards where where donot know if there were or not of effect or affect the sector.","Find cards where where donot know if there were or not of effect or affect the sector.*",
-"di8_index","taqandopt","Busca fichas que cumplen la condición de verdad de los elementos conectados.","Find cards than apply true condition of TWO connected elements.","Find cards than apply true condition of TWO connected elements.*",
-"di8_index","taqoropt","Busca fichas que cumplen la condición de verdad de alguno o ambos elementos conectados.","Find cards than apply true condition of someone or both connected elements.","Find cards than apply true condition of someone or both connected elements.*",
-"di8_listdb","listdbTitle","Inventarios de Desastres disponibles","Available Disaster Inventories",,
-"di8_listdb","listdbCountry","Código país","Country code","Código do país",
-"di8_listdb","listdbRegion","Región","Region","Região",
-"di8_listdb","listdbStatus","Estado","Status","Status",
-"di8_listdb","listdbPublic","PUBLICA","PUBLIC","PUBLICO",
-"di8_listdb","listdbPrivate","PRIVADA","PRIVATE","PRIVADO",
-"dc_qdetails","geo","Geografía","Geography","Geografia",
-"dc_qdetails","eve","Tipos de eventos","Type of events","Tipos de eventos",
-"dc_qdetails","cau","Tipos de causas","Type of causes","Tipos de causas",
-"dc_qdetails","eff","Efectos","Effects","Efeitos",
-"dc_qdetails","beg","Desde","Since","Desde",
-"dc_qdetails","end","Hasta","Until","Até",
-"dc_qdetails","sou","Fuente","Data sources","Fonte",
-"dc_qdetails","ser","Seriales","Serials","Seriais",
-"dc_data","ttitle","Datos","Methodological guide summarize","Resumo Guia metodológico",
-"dc_data","tpage","Páginas:","Pages:","Páginas:",
-"dc_data","tnumof","de","From","de",
-"dc_data","trepnum","Fichas","Reports","Formulários",
-"dc_data","trow","Fila","Row","Fila",
-"dc_thematicmap","ttitle","Mapa temático","Methodological guide summarize","Resumo Guia metodológico",
-"dc_thematicmap","tmapof","Mapa de","Map of","Mapa de",
-"dc_thematicmap","tdrawpoint","Puntos y polígonos","Points and polygons","Pontos e polígonos",
-"dc_thematicmap","trepnum","Número de fichas","Reports","Formulários",
-"dc_thematicmap","tgetgearth","Ver en GoogleEarth","View in GoogleEarth","Ver em GoogleEarth",
-"dc_thematicmap","lev","Nivel","Level","Nível",
-"dc_graphic","ttitle","Gráficos","Methodological guide summarize","Resumo Guia metodológico",
-"dc_graphic","trepnum","Número de fichas","Reports","Formulários",
-"dc_graphic","tnodata","Sin datos","No data","Sem dados",
-"dc_statistic","ttitle","Consolidados","Methodological guide summarize","Resumo Guia metodológico",
-"dc_statistic","tpage","Páginas:","Pages:","Páginas:",
-"dc_statistic","tnumof","de","From","de",
-"dc_statistic","trepnum","Fichas","Reports","Formulários",
-"dc_statistic","tsumnum","Número de consolidados","Number of consolidated","Número de consolidados",
-"dc_statistic","ttotals","Totales","Totals","Totais",
-"dc_statistic","trow","Fila","Row","Fila",
-"di_doc","ttitle","Resumen Guía metodológica","Methodological guide summarize","Resumo Guia metodológico",
-"di_doc","tintro","Introducción","Introduction","Introdução",
-"di_doc","twhatis","Que es DesInventar","What is DesInventar","O que é DesInventar?",
-"di_doc","tgenpres","Presentación General","General Presentation","Apresentação Geral",
-"di_doc","tregion","Región","Region","Região",
-"di_doc","tgeography","Geografía","Geography","Geografia",
-"di_doc","tevents","Tipos de eventos","Type of events","Tipos de eventos",
-"di_doc","tcauses","Tipos de causas","Type of causes","Tipos de causas",
-"di_doc","textraeff","Efectos Adicionales","Additional Effects","Efeitos Adicionais",
-"di_doc","tdatacards","Fichas","Data cards","Formulários",
-"di_doc","treferences","Referencias","References","Referências",
-"di_doc","thlptitle","Introducción a DesInventar8","Introduction to DesInventar8","Introdução a DesInventar8",
-"di_doc","thlpintro","Introducción","Introduction","Introdução",
-"di_doc","thlpportal","Portal DesInventar","DesInventar portal","Portal DesInventar",
-"di_doc","thlppordemo","Demo Portal","Demo Portal","Demo Portal",
-"di_doc","thlpdimod","Módulo DesInventar","DesInventar module","Módulo DesInventar",
-"di_doc","thlpdcmod","Módulo DesConsultar","DesConsultar module","Módulo DesConsultar",
-"di_doc","thlpdemreg","Demo Región","Demo Region","Demo Região",
-"di_doc","thlpdemgeo","Demo Geografía","Demo Geography","Demo Geografia",
-"di_doc","thlpdemeve","Demo Eventos","Demo Events","Demo Eventos",
-"di_doc","thlpdemcau","Demo Causas","Demo Causes","Demo Causas",
-"di_doc","thlpdemdc","Demo Fichas","Demo Data cards","Demo Formulários",
+"di8_user","tuser","Usuario","User","Usuário","Usager ou mot de passe non valable."
+"di8_user","tname","Nombre","Name","Nome","Nom"
+"di8_user","tpassword","Clave","Password","Senha","Mot de passe"
+"di8_user","temail","Email","Email","Email","Courrier électronique"
+"di8_user","toldpassword","Ingrese su clave","Type your password","Digite sua senha","Introduisez votre mot de passe"
+"di8_user","tnewpassword","Nueva clave","New password","Nova senha","Nouveau mot de passe"
+"di8_user","trenewpassw","Re-ingrese","Re-type your password","Digite-a novamente","Réintroduisez"
+"di8_user","tcountry","País","Country","País","Pays"
+"di8_user","tcity","Ciudad","City","Cidade","Ville"
+"di8_user","tactive","Activo","Active","Ativo","Actif"
+"di8_user","baddoption","Adicionar","Add","Adicionar","Ajouter"
+"di8_user","bsave","Guardar","Save","Salvar","Enregistrer"
+"di8_user","bsend","Generar","Generate","Gerar","Générer"
+"di8_user","bcancel","Cancelar","Cancel","Cancelar","Annuler"
+"di8_user","benter","Entrar","Login","Entrar","Introduire"
+"di8_user","tpasslost","¿Olvidó su clave?","Forgot your password?","Esqueceu sua senha?","Vous avez oublié votre mot de passe?"
+"di8_user","toptions","Opciones","Options","Opções","Options"
+"di8_user","tclosesess","Cerrar sesión","Close session","Fechar sessão","Fermer la session"
+"di8_user","tmyregions","Mis bases","My Databases","Meus bancos","Mes bases"
+"di8_user","tconfigacc","Mi cuenta","My Account","Minha conta","Mon compte"
+"di8_user","thello","Hola","Hi!","Olá","Salut"
+"di8_user","tdetails","Acceder","Access","Entrar","Accès"
+"di8_user","tuserprefer","Edición de cuenta de usuario","Edit user account","Edição de conta de usuário","Édition du compte usager"
+"di8_user","tuseremail","Correo electrónico (<i>e-mail</i>)","Electronic mail (<i>email</i>)","Correio eletrônico (<i>e-mail</i>)","Courrier électronique(<i>e-mail</i>)"
+"di8_user","tadminperms","Permisos administrativos","Administrative authority","Permissões administrativas","Autorisations administratives"
+"di8_user","tadminregs","Gestión de bases de datos","Databases management","Gestão de bancos de dados","Gestion des bases de données"
+"di8_user","tadminusrs","Gestión de usuarios","User management","Gestão de usuários","Gestion des usagers"
+"di8_user","tyourrol","Sus roles y bases de datos son:","Your roles and databases are:","Seus perfis e bancos de dados são:","Vos rôles et vos bases de données sont:"
+"di8_user","tadminof","Administrador","Manager","Administrador","Administrateur"
+"di8_user","tobservof","Observador","Observer","Observador","Observateur"
+"di8_user","tuserof","Alimentador","Feeder","Alimentador","Alimentation"
+"di8_user","tsupervof","Supervisor","Supervisor","Supervisor","Superviseur"
+"di8_user","tnorol","Ninguna","None","Nenhuma","Néant"
+"di8_user","tgetemailpass","Recordatorio de usuario y clave","Reminder for user and password","Lembrança de usuário e senha","Rappel d'usager et de mot de passe"
+"di8_user","tmsgpasslost","Si olvidó su clave solicítela aquí. Digite su correo electrónico.","If you have forgotten your password","you can ask for it here. Type in your email address.","Si vous avez oublié votre mot de passe"
+"di8_user","msgsendemail","Su usuario es:","Your user name is:","Seu usuário é:","Votre usager est:"
+"di8_user","msgsendemail2","Su clave es:","Your password is:","Sua senha é:","Votre mot de passe est:"
+"di8_user","errsendemail","email no se encuentra registrado. Intente nuevamente..","Email address is not registered. Try again.","Email não registrado. Tente novamente",""
+"di8_user","terror","Error","Error","Erro","Erreur"
+"di8_user","errinvaliduser","Usuario o clave no válidos","Invalid user name or password","Usuário o senha inválido","Usager ou mot de passe non valable"
+"di8_user","errmsgfrmregist","Error enviando REGISTRO. Llene todos los campos requeridos e intente nuevamente.","Error sending REGISTER.  Fill in all required fields and try again.","Erro enviando REGISTRO. Preencha todos os campos requeridos e tente novamente","Erreur dans l'envoi d'ENREGISTREMENT. Remplissez tous les champs obligatoires et essayez de nouveau."
+"di8_user","msginsertsucc","Ingreso exitoso de nuevo usuario","New user input successful","Entrada de novo usuário com sucesso","Accès réussi d'un nouvel usager. "
+"di8_user","msgupdatesucc","Actualización exitosa de usuario","User update successful","Atualização de usuário com sucesso","Mise à jour réussie d'un usager."
+"di8_user","errinsert","No se pudo ingresar usuario","Unable to input user","Não foi possível criar entrada ao usuário","Impossibilité d'introduire un usager. "
+"di8_user","errupdate","No fué posible actualizar el usuario","Unable to update user","Não foi possível atualizar o usuário","Mise à jour impossible de l'usager."
+"di8_user","errbadpasswd","clave es incorrecta","Incorrect password","Senha incorreta","Mot de passe incorrect."
+"di8_user","errnomatch","clave nueva y re-ingrese no coinciden","New password and re-input do not match.","Senha não confere","Le nouveau mot de passe et la nouvelle entrée ne coïncident pas"
+"di8_region","ttname","Gestión de base de datos","Databases management","Gestão de bancos de dados","Gestion de base de données"
+"di8_region","tregionuuid","Base ID","Database ID","Banco ID","Base ID"
+"di8_region","tregnamlist","Nombre base","Name of database","Nome banco","Nom de base"
+"di8_region","tregcntlist","País","Country","País","Pays"
+"di8_region","tregadmlist","Administrador","Administrator","Administrador","Administrateur"
+"di8_region","tregactlist","Activo","Active","Ativo","Actif"
+"di8_region","tregpublist","Pública","Public","Pública","Publique"
+"di8_region","tcredits","Créditos","Credits","Créditos","Crédits"
+"di8_region","tmethodology","Metodología","Methodology","Metodologia","Méthodologie"
+"di8_region","tstaff","Hito","Landmark","Acontecimento","Évènenent important"
+"di8_region","tsupport","Mantenimiento","Maintenance","Manutenção","Maintenance"
+"di8_region","tdescription","Descripción","Description","Descrição","Description"
+"di8_region","tnopublic","Base de datos en construcción. Acceso restringido a usuarios de la base.","The database is under construction. Only for database members.","Banco de dados em construção. Acesso restrito aos usuários do banco","Base de données en construction. Accès restreint aux usagers de la base."
+"di8_region","tvalregid","Base ID disponible","Available database ID","Banco ID disponível","Base ID disponible"
+"di8_region","tinvregid","Base ID no disponible","Database ID unavailable","Banco ID não disponível","Base ID non disponible"
+"di8_region","tinsert","Creada y","Created and","Criado e","Créée et "
+"di8_region","tupdate","Actualizada y","Updated and","Atualizado e","Mise à jour et"
+"di8_region","tsetrole","asignada","Assigned","Atribuído","Assignée"
+"di8_region","terrinsupd","No fué posible ingresar la base.","Unable to enter database","Não foi possível o ingresso ao banco","Impossible d'introduire la base"
+"di8_region","terrsetrole","no asignada","Unassigned","Não atribuído","Non assignée"
+"di8_region","baddoption","Adicionar","Add","Adicionar","Ajouter"
+"di8_region","bloaddir","Leer de directorio","Load directory","Load directory*","Lire le répertoire"
+"di8_region","bupzipfile","Crear base desde archivo ZIP","Upload Database ZIP file","Crear base desde archivo ZIP*","Créer une base depuis un fichier ZIP"
+"di8_region","bsave","Guardar","Save","Salvar","Enregistrer"
+"di8_region","bcancel","Cancelar","Cancel","Cancelar","Annuler"
+"di8_region","tviewdbase","Seleccione la base de datos que desea visualizar","Select the database you wish to view","Selecione o banco de dados que deseja visualizar","Sélectionnez la base de données que vous souhaitez afficher"
+"di8_region","tmoddescon","Consultas de datos","generación de mapas","gráficos y consolidados","generación de mapas"
+"di8_region","tmoddesinv","Ingreso de fichas","administracion bases de datos","acceso restringido","administracion bases de datos"
+"di8_region","RegionDatabasePeriod","Periodo","Period","Período","Période"
+"di8_region","trepnum","Número de fichas","Reports","Formulários","Cartes de données"
+"di8_region","tlastupd","Última modificación","Last update","Última atualização","Dernière modification"
+"di8_region","RegionDatacardPeriod","Periodo Fichas","Datacard Period","Período de datos","Période de cartes de données"
+"di8_reginfo","baddoption","Adicionar","Add","Adicionar","Ajouter"
+"di8_reginfo","bsave","Guardar","Save","Salvar","Enregistrer"
+"di8_reginfo","bcancel","Cancelar","Cancel","Cancelar","Annuler"
+"di8_reginfo","terror","Error","Error","Erro","Erreur"
+"di8_reginfo","msgupdinfo","Base actualizada exitosamente!","Database updated successfully!","Banco atualizado com sucesso!","Base mise à jour avec succès!"
+"di8_reginfo","errupdinfo","Error actualizando la base","Error updating database","Erro atualizando o banco","Erreur dans la mise à jour de la base"
+"di8_reginfo","msgupdrole","Rol de usuario actualizado exitosamente!","User role updated successfully!","Perfil de usuário atualizado com sucesso!","Rôle de l'usager mis à jour avec succès!"
+"di8_reginfo","errupdrole","Error actualizando rol de usuario","Error updating user role","Erro atualizando perfil de usuário","Erreur dans la mise à jour du rôle de l'usager"
+"di8_reginfo","msginslog","Bitácora creada exitosamente!","Log created successfully!","Relatório criado com sucesso!","Bloc-notes créé avec succès!"
+"di8_reginfo","errinslog","Error ingresando Bitácora","Error creating Log","Erro ingressando Relatório","Erreur dans l'accès au bloc-notes "
+"di8_reginfo","msgupdlog","Bitácora actualizada exitosamente!","Log updated successfully","Relatório atualizado com sucesso!","Bloc-notes mis à jour avec succès"
+"di8_reginfo","errupdlog","Error actualizando Bitácora","Error updating Log","Erro atualizando Relatório","Erreur dans la mise à jour du bloc-notes"
+"di8_reginfo","errmsgfrm","INFORMACION: Llene todos los campos requeridos e intente nuevamente.","Register all fields in the RECORD DESINVENTAR. Fill in all required fields and try again.","Registre todos os campos do FORMULÁRIO DESINVENTAR. Preencha todos os campos requeridos e tente de novo","Enregistrez tous les champs de la CARTE DE DONNÉES DÉSINVENTER. Remplissez tous les champs obligatoires et essayez de nouveau"
+"di8_reginfo","errmsgfrmrol","ROLES: Llene todos los campos requeridos e intente nuevamente.","ROLES: Fill in all required fields and try again.","Perfis: Preencha todos os campos requeridos e tente novamente","RÔLES: Remplissez tous les champs obligatoires et essayez de nouveau"
+"di8_reginfo","errmsgfrmlog","BITACORA: Llene todos los campos requeridos e intente nuevamente.","LOG: Fill in all required fields and try again.","RELATÓRIO: Preencha todos os campos requeridos e tente novamente","BLOC-NOTES: Remplissez tous les champs obligatoires et essayez de nouveau"
+"di8_reginfo","msgupdrole","Rol de usuario actualizado exitosamente!","User role updated successfully!","Perfil de usuário atualizado com sucesso!","Rôle de l'usager mis à jour avec succès!"
+"di8_reginfo","errupdrole","Error actualizando rol de usuario","Error updating user role","Erro atualizando perfil de usuário","Erreur dans la mise à jour du rôle de l'usager"
+"di8_geography","baddoption","Adicionar","Add","Adicionar","Ajouter"
+"di8_geography","bsave","Guardar","Save","Salvar","Enregistrer"
+"di8_geography","bcancel","Cancelar","Cancel","Cancelar","Annuler"
+"di8_geography","terror","Error","Error","Erro","Erreur"
+"di8_geography","errchkname","Nombre de nivel ya existe","Unable to use type of cause name because it already exists.","Nome de causa não foi possível utilizar porque já existe","Impossibilité d'utiliser le nom de cause car il existe déjà"
+"di8_geography","msginslev","Nivel creado exitosamente!","Level created successfully!","Nível criado com sucesso!","Niveau créé avec succès!"
+"di8_geography","errinslev","No se pudo ingresar nuevo nivel","Unable to input new level","Não foi possível ingressar o novo nível","Impossibilité d'introduire un nouveau niveau "
+"di8_geography","msgupdlev","Nivel actualizado exitosamente","Level updated successfully!","Nível atualizado com sucesso!","Niveau mis à jour avec succès!"
+"di8_geography","errupdlev","No se pudo actualizar nivel","Unable to update level","Não foi possível atualizar o nível","Impossibilité de mise à jour du niveau"
+"di8_geography","errchkcode","Código de geografía ya existe","Geographic code already exists","Código de geografia já existe","Code de géographie déjà existant"
+"di8_geography","errchkstatus","Elemento no se puede desactivar porque se encuentra asignado","Unable to deactivate type of cause because it has been assigned.","Causa não foi possível desativar porque está atribuída","La cause ne peut pas être désactivée car elle est déjà assignée"
+"di8_geography","msginsgeo","Geografía creada exitosamente","Geography created successfully!","Geografia criada com sucesso!","Géographie créée avec succès"
+"di8_geography","errinsgeo","No se pudo crear elemento geográfico","Unable to create geographic element","Não foi possível criar elemento geográfico","Impossibilité de créer un élément géographique"
+"di8_geography","msgupdgeo","Geografía actualizada exitosamente!","Geography updated successfully!","Geografia atualizada com sucesso!","Géographie mise à jour avec succès!"
+"di8_geography","errupdgeo","No se pudo actualizar elemento geográfico","Unable to update geographic element","Não foi possível atualizar elemento geográfico","Impossibilité de mise à jour de l'élément géographique "
+"di8_geography","errmsgfrmlev","NIVEL: Llene todos los campos requeridos e intente nuevamente.","LEVEL: Fill in all required fields and try again.","NÌVEL: Preencha todos os campos requeridos e tente novamente","NIVEAU: Remplissez tous les champs obligatoires et essayez de nouveau"
+"di8_geography","errmsgfrmgeo","GEOGRAFIA: Llene todos los campos requeridos e intente nuevamente.","GEOGRAPHY: Fill in all required fields and try again.","GEOGRAFIA: Preencha todos os campos requeridos e tente novamente","GÉOGRAPHIE: Remplissez tous les champs obligatoires et essayez de nouveau"
+"di8_events","baddelem","Adicionar","Add","Adicionar","Ajouter"
+"di8_events","bsave","Guardar","Save","Salvar","Enregistrer"
+"di8_events","bcancel","Cancelar","Cancel","Cancelar","Annuler"
+"di8_events","terror","Error","Error","Erro","Erreur"
+"di8_events","msginseve","Tipo de evento creado exitosamente","Type of event created successfully!","Evento criado com sucesso!","Type d'évènement créé avec succès"
+"di8_events","errinseve","Error intentando ingresar Tipo de evento","Error entering Type of event","Erro tentando ingressar Evento","Erreur en essayant d'introduire le Type d'évènement "
+"di8_events","msgupdeve","Tipo de evento actualizado exitosamente","Type of event updated successfully!","Evento atualizado com sucesso!","Type d'évènement mis à jour avec succès"
+"di8_events","errupdeve","Error actualizando Tipo de evento","Error updating Type of event","Erro atualizando Evento","Erreur dans la mise à jour du Type d'évènement"
+"di8_events","errmsgfrm","TIPO de EVENTO: Llene todos los campos requeridos e intente nuevamente.","Register all fields in the RECORD DESINVENTAR. Fill in all required fields and try again.","Registre todos os campos do FORMULÁRIO DESINVENTAR. Preencha todos os campos requeridos e tente de novo","Enregistrez tous les champs de la CARTE DE DONNÉES DÉSINVENTER. Remplissez tous les champs obligatoires et essayez de nouveau"
+"di8_events","errchkname","Nombre de tipo de evento no se puede utilizar porque ya existe","Unable to use type of cause name because it already exists.","Nome de causa não foi possível utilizar porque já existe","Impossibilité d'utiliser le nom de cause car il existe déjà"
+"di8_events","errchkstatus","Tipo de evento no se puede desactivar porque se encuentra asignado","Unable to deactivate type of cause because it has been assigned.","Causa não foi possível desativar porque está atribuída","La cause ne peut pas être désactivée car elle est déjà assignée"
+"di8_causes","baddelem","Adicionar","Add","Adicionar","Ajouter"
+"di8_causes","bsave","Guardar","Save","Salvar","Enregistrer"
+"di8_causes","bcancel","Cancelar","Cancel","Cancelar","Annuler"
+"di8_causes","terror","Error","Error","Erro","Erreur"
+"di8_causes","msginscau","Causa creada exitosamente","Type of cause created successfully!","Causa criada com sucesso!","Cause créée avec succès"
+"di8_causes","errinscau","Error ingresando Causa","Error entering Type of cause","Erro ingressando Causa","Erreur en introduisant la cause"
+"di8_causes","msgupdcau","Causa actualizada exitosamente","Type of cause updated successfully!","Causa atualizada com sucesso!","Cause mise à jour avec succès"
+"di8_causes","errupdcau","Error actualizando Causa","Error updating Type of cause","Erro atualizando Causa","Erreur dans la mise à jour de la Cause"
+"di8_causes","errmsgfrm","CAUSA: Llene todos los campos requeridos e intente nuevamente.","Register all fields in the RECORD DESINVENTAR. Fill in all required fields and try again.","Registre todos os campos do FORMULÁRIO DESINVENTAR. Preencha todos os campos requeridos e tente de novo","Enregistrez tous les champs de la CARTE DE DONNÉES DÉSINVENTER. Remplissez tous les champs obligatoires et essayez de nouveau"
+"di8_causes","errchkname","Nombre de causa no se puede utilizar porque ya existe","Unable to use type of cause name because it already exists.","Nome de causa não foi possível utilizar porque já existe","Impossibilité d'utiliser le nom de cause car il existe déjà"
+"di8_causes","errchkstatus","Causa no se puede desactivar porque se encuentra asignada","Unable to deactivate type of cause because it has been assigned.","Causa não foi possível desativar porque está atribuída","La cause ne peut pas être désactivée car elle est déjà assignée"
+"di8_extraeffects","baddoption","Adicionar","Add","Adicionar","Ajouter"
+"di8_extraeffects","bsave","Guardar","Save","Salvar","Enregistrer"
+"di8_extraeffects","bcancel","Cancelar","Cancel","Cancelar","Annuler"
+"di8_extraeffects","terror","Error","Error","Erro","Erreur"
+"di8_extraeffects","msgupdeef","Campo de efectos actualizado exitosamente","Effect field updated successfully!","Campo de efeitos atualizado com sucesso!","Champ d'effets mis à jour avec succès"
+"di8_extraeffects","errupdeef","No se pudo actualizar el campo de efectos","Unable to update effect field","Não foi possível atualizar o campo de efeitos","Impossibilité de mise à jour du champ d'effets"
+"di8_extraeffects","errmsgfrmeef","EFECTOS: Llene todos los campos requeridos e intente nuevamente.","EFFECTS: Fill in all required fields and try again.","EFEITOS: Preencha todos os campos requeridos e tente de novo","EFFETS: Remplissez tous les champs obligatoires et essayez de nouveau"
+"di8_extraeffects","typeinteger","Numérico","Integer","Numérico","Numérique"
+"di8_extraeffects","typefloat","Moneda","Float","Moeda","Monnaie"
+"di8_extraeffects","typedate","Fecha","Date","Data","Date"
+"di8_extraeffects","typetext","Texto","Text","Texto","Texte"
+"di8_import","ttitle","Archivos CSV de Fichas:","Methodological guide summarize","Resumo Guia metodológico","Résumé Guide méthodologique"
+"di8_import","tsuccess","Importación exitosa","Sucessfull importation","Importação bem sucedida","Importation réussie"
+"di8_import","tfail","No se realizó la importación","Can not import file","Não foi realizada a importação","L'importation n'a pas été effectuée"
+"di8_import","tfound1","Se encontraron","Exist some","Foram encontrados","Existence"
+"di8_import","tfound2","errores.","errors.","erros","erreurs"
+"di8_import","tfile","Fila","Row","Fila","Rangée"
+"di8_import","tsend","Importar","Generate","Gerar","Générer"
+"di8_input","ttitle","DesInventar8","Methodological guide summarize","Resumo Guia metodológico","Résumé Guide méthodologique"
+"di8_input","mprint","Imprimir","Print","Imprimir","Imprimer"
+"di8_input","mloading","Un momento por favor..","One moment","please.","Patientez SVP"
+"di8_input","bnew","Nueva","New","Nova","Nouvelle"
+"di8_input","tnewtitle","Crear una ficha","Create a data card","Criar um formulário","Créer une carte de données"
+"di8_input","tnewdesc","Ingrese un nuevo registro a la base de datos","Input a new register into the database","Ingresse um novo registro ao banco de dados","Introduire un nouveau registre dans la base de données "
+"di8_input","bupdate","Editar","Edit","Atualizar","Éditer"
+"di8_input","tupdtitle","Editar una ficha","Edit a data card","Editar um formulário","Éditer une carte de données"
+"di8_input","tupddesc","Edite un registro ya existente en la base de datos","Edit an existing record in the database","Edite um registro já existente no banco de dados","Éditer un registre déjà existant dans la base de données"
+"di8_input","bsave","Guardar","Save","Salvar","Enregistrer"
+"di8_input","tsavtitle","Guardar la ficha","Save data card","Salvar o formulário","Enregistrer la carte de données"
+"di8_input","tsavdesc","Guarde un registro en la base de datos","recuerde incluir los campos obligatorios","Save register in the database. Remember to include all obligatory fields.","recuerde incluir los campos obligatorios"
+"di8_input","bcancel","Cancelar","Cancel","Cancelar","Annuler"
+"di8_input","tcantitle","Abandonar la ficha","Discard data card","Abandonar o formulário","Abandonner la carte de données"
+"di8_input","tcandesc","Abandone la actual ficha","no se guardará ni modificará la información.","Discard current record. Information will not be saved or modified.","no se guardará ni modificará la información."
+"di8_input","bclean","Limpiar","Clear","Limpar","Effacer"
+"di8_input","tclntitle","Limpiar la ficha","Clear data card","Limpar o formulário","Nettoyer la carte de données"
+"di8_input","tclndesc","Limpia la actual ficha","la información será borrada de la actual forma","Clear current record","la información será borrada de la actual forma"
+"di8_input","bexpsearch","Buscar","Search","Buscar","Chercher"
+"di8_input","texptitle","Buscar fichas","Search data card","Buscar formulários","Chercher des cartes de données"
+"di8_input","texpdesc","escriba el serial de la ficha que desea visualizar","Find datacard using a serial","Buscar utilizando múltiplos critérios","Écrivez le numéro de série de la carte de données que vous souhaitez afficher"
+"di8_input","bfirst","Primera","First","First*","Première"
+"di8_input","bprev","Anterior","Previous","Previous*","Précédente"
+"di8_input","bnext","Siguiente","Next","Next*","Suivante"
+"di8_input","blast","Última","Last","Last*","Dernière"
+"di8_input","ttotal","Total","Total","Total","Total"
+"di8_input","thelp","Definición","Definition","Definição","Définition"
+"di8_input","tcardnot","La ficha deseada no existe","Datacard request not exists","Datacard request not exists*","La carte de données recherchée n'existe pas"
+"di8_input","tdidescinfo","De click en el título deseado para ver la descripción de dicho elemento","Click on the title to see a description of the element","Selecione o título desejado para ver a descrição","Cliquez sur le titre souhaité pour voir la description de cet élément"
+"di8_input","mgeography","Geografía","Geographic units","Unidades Geográficas","Unités Géographiques"
+"di8_input","mevents","Tipo de eventos","Types of events","Tipos de eventos","Types d'évènements"
+"di8_input","mcauses","Tipo de causas","Types of causes","Tipos de causas","Types de causes"
+"di8_input","tbaseffects","Efectos básicos","Basic effects","Efeitos básicos","Effets basiques"
+"di8_input","textraeffect","Efectos adicionales","Additional effects","Efeitos adicionais","Effets additionnels"
+"di8_input","teffects","Personas y bienes","Persons and Property","Pessoas e bens","Personnes et biens"
+"di8_input","tsectors","Sectores","Affected sectors","Setores","Secteurs"
+"di8_input","tlosses","Pérdidas económicas","Economic Losses","As perdas econômicas","Pertes économiques"
+"di8_input","tcreatedate","Creada:","Created:","Criada:","Créée:"
+"di8_input","tcreateby","Por:","By:","Por:","Par:"
+"di8_input","tcreateupdate","Modificada:","Modified:","Modificada:","Modifiée:"
+"di8_input","tstatus","Estado","Status","Estado","État"
+"di8_input","tsend","Buscar","Generate","Gerar","Générer"
+"di8_input","tclean","Limpiar","Clean","Limpar","Nettoyer"
+"di8_input","tclose","Cerrar","Close","Fechar","Fermer"
+"di8_input","tsince","Desde","Since","Desde","Depuis"
+"di8_input","tuntil","Hasta","Until","Até","Jusqu'à"
+"di8_input","tqueryresults","Resultados","Results","Resultados","Résultats"
+"di8_input","tqueryshowcard","Ver ficha","See data card","Ver formulário","Voir carte de données"
+"di8_input","tcheckquit","¿Realmente desea salir de DesInventar?","Are you sure you want to quit DesInventar?","Realmente deseja sair de DesInventar?","Voulez-vous réellement quitter DésInventer?"
+"di8_input","tmsgeditcard","Para editar esta ficha presione Actualizar","To edit this record","select Update","Pour éditer cette carte de données"
+"di8_input","tmsgnewcard","Presione Nueva para ingresar una ficha","Select New to enter a record","Selecione Nova para ingressar um formulário","Appuyer sur Nouveau pour introduire une carte de données"
+"di8_input","tmsgsearchdup","Ingrese las palabras para ubicar fichas existentes","Type in words to search existing records","Ingresse as palavras para localizar formulários existentes","Introduisez les mots pour localiser des cartes de données déjà existantes"
+"di8_input","tmsgsearchcards","Ingrese las palabras para realizar la búsqueda","Type in words to define your search","Ingresse as palavras para realizar a busca","Introduisez les mots pour effectuer la recherche"
+"di8_input","tmsgnewcardfill","Llene los campos y presione Listo para guardar","Fill in fields and select Ready to save.","Preencha os campos e selecione Pronto para Salvar","Remplissez les champs et appuyez sur Prêt pour enregistrer"
+"di8_input","tmsgeditcardfill","Edite los campos y presione Listo para guardar","Edit fields and select Ready to save","Edite os campos e selecione Pronto para Salvar","Éditez les champs et appuyer sur Prêt pour enregistrer"
+"di8_input","tmsgviewcard","De click en la fila que desee visualizar","Click on the row you wish to see","Selecione a fila de deseje visualizar","Cliquez sur la rangée que vous voulez afficher"
+"di8_input","errmsgfrm","Registre todos los campos de la FICHA DESINVENTAR. Llene todos los campos requeridos e intente nuevamente.","Register all fields in the RECORD DESINVENTAR. Fill in all required fields and try again.","Registre todos os campos do FORMULÁRIO DESINVENTAR. Preencha todos os campos requeridos e tente de novo","Enregistrez tous les champs de la CARTE DE DONNÉES DÉSINVENTER. Remplissez tous les champs obligatoires et essayez de nouveau"
+"di8_input","tstatpublished","Publicada","Published","Publicada","Publiée"
+"di8_input","tstatready","Por aprobar","Pending approval","Por aprovar","En cours d'approbation"
+"di8_input","tstatdraft","Borrador","Draft","Rascunho","Projet"
+"di8_input","tstatrash","Para eliminar","Pending deletion","Para eliminar","À éliminer"
+"di8_input","tstatdeleted","Eliminar!","Delete!","Eliminar!","Éliminer!"
+"di8_input","tdcerror","La ficha no fue guardada","Data card was not saved","O formulário não foi salvo","La carte de données n'a pas été enregistrée"
+"di8_input","tdisererr","Serial inválido (asignado o incorrecto)","No valid serial (assigned o incorrect)","Serial inválido (atribuído ou incorreto)","Numéro de série non valable (assigné ou incorrect)"
+"di8_input","tdiserok","Serial válido","Valid serial","Serial válido","Numéro de série valable"
+"di8_input","tdccreated","Ficha creada exitosamente","Data card created sucessfully","Formulário criado com sucesso!","Carte de données créée avec succès"
+"di8_input","tdcupdated","Ficha actualizada exitosamente","Data card updated sucessfully","Formulário atualizado com sucesso!","Carte de données mise à jour avec succès"
+"di8_input","tdconuse","La ficha está siendo editada por otro usuario","por favor intente despues..","Data card is been edited by other user","por favor intente despues.."
+"di8_input","teffhav","Hubo","There were","Houve","Il y en a eu"
+"di8_input","teffhavnot","No hubo","There weren't any","Não houve","Il n'y en a pas eu"
+"di8_input","teffdontknow","No sabe","Don't know","Não sabe","Ne sait pas"
+"di8_index","twelcome","Bienvenido","Welcome","Welcome*","Bienvenue"
+"di8_index","tdititle","Sistema de inventario de efectos de desastres","Inventory system of the effects of disasters","Sistema de inventário de efeitos de desastres","Système d'inventaire d'effets de désastres"
+"di8_index","hlostconn","Comunicación fallida: Verifique su conexión a Internet","Failed communication. Check your internet connection.","Comunicação falida: Verifique sua conexão à Internet","Communication défaillante: Vérifiez la connexion Internet"
+"di8_index","tdbnotavail","No hay bases de datos disponibles por el momento","There are no databases available at the moment.","Não há bancos de dados disponíveis no momento","Il n'y a pas de bases de données disponibles pour l'instant"
+"di8_index","tmoreinfo","Mas información","More information","Mais informação","Plus d'information"
+"di8_index","talerdiwin","DesInventar está en uso. ¿Está seguro que desea salir?","DesInventar is being used. Are you sure you want to quit?","DesInventar está sendo usado. Tem certeza que deseja sair?","DésInventer est en usage. Voulez-vous vraiment quitter?"
+"di8_index","tstartpage","Inicio","Home","Início","Accueil"
+"di8_index","tcopyright","(c) 1998-2010 Corporación OSSO - Colombia","(c) 1998-2010 Corporación OSSO - Colombia","(c) 1998-2010 Corporación OSSO - Colombia","(c) 1998-2102 Corporación OSSO - Colombie"
+"di8_index","labelsoftwareversion","Versión de Software","Software Version","Versão do software","Version de logiciel"
+"di8_index","ttitle","DesInventar 8","Methodological guide summarize","Resumo Guia metodológico","Résumé Guide méthodologique"
+"di8_index","tsubtitle","Diseño de consulta","Query design","Esquematização de consulta","Dessin de consultation"
+"di8_index","tsubtitlemsg","Acote su consulta seleccionando los campos de su interés.","Define your query by selecting the relevant fields","Limite sua consulta selecionando os campos de seu interesse","Annoter limiter restreindre votre consultation en sélectionnant les champs qui vous intéressent"
+"di8_index","tsubtitle2","Resultados","Results","Resultados","Résultats"
+"di8_index","tsubtitle2msg","Una vez diseñada su consulta","seleccione una de las herramientas de análisis Datos","Consolidados","seleccione una de las herramientas de análisis Datos"
+"di8_index","minsert","Ingreso","Insert","Insert","Introduction"
+"di8_index","mconfig","Configuración","Configuration","Configuração","Configuration"
+"di8_index","mimport","Importación de fichas","Import data cards","Importação de formulários","Importation de carte de données"
+"di8_index","mbackdb","Respaldar base de datos","Backup database","Backup database*","Garantir la base de données"
+"di8_index","mfile","Archivo","File","Arquivo","Fichier"
+"di8_index","mprint","Imprimir","Print","Imprimir","Imprimer"
+"di8_index","msearch","Consultas","Queries","Consultas","Consultations"
+"di8_index","mnewsearch","Nueva","New","Nova","Nouvelle"
+"di8_index","msavequery","Guardar","Save file","Save file","Enregistrer"
+"di8_index","mopenquery","Abrir","Open file","Open file","Ouvrir"
+"di8_index","mgotoqd","Mostrar/Ocultar","Show/Hide","Mostrar/Ocultar","Montrer/Cacher"
+"di8_index","mquit","Salir","Quit","Sair","Quitter"
+"di8_index","mhelp","Ayuda","Help","Ajuda","Aide"
+"di8_index","hotherdoc","Documentación software","Software documentation","Software documentation*","Documentation logiciel"
+"di8_index","hdbinfo","Información base de datos","Database information","Informação de banco","Information base de données"
+"di8_index","mwebsite","Sitio web DesInventar","Website of DesInventar","Website of DesInventar*","Site web DésInventer"
+"di8_index","mabout","Acerca de","About","Acerca de","À propos de "
+"di8_index","mlang","Idioma","Language","Idioma","Langue"
+"di8_index","mdatabases","Bases de datos","Databases","bancos de dados","Base de données"
+"di8_index","mdbfind","Buscar","Find","Find*","Chercher"
+"di8_index","mgeosection","Geografía","Geography","Geografia","Géographie"
+"di8_index","mmapsection","Mapa","Map","Mapa","Carte"
+"di8_index","meffsection","Efectos","Effects","Efeitos","Effets"
+"di8_index","mextsection","Efectos adicionales","Additional effects","Efeitos adicionais","Effets additionnels"
+"di8_index","mevesection","Tipos de eventos","Types of events","Tipos de eventos","Types d'évènements"
+"di8_index","mcausection","Tipos de causas","Types of causes","Tipos de causas","Types de causes"
+"di8_index","mdcsection","Fichas","Data cards","Formulários","Carte de données"
+"di8_index","madvsection","Consulta avanzada","Advanced query","Consulta avançada","Consultation avancée"
+"di8_index","mreginfo","Ficha técnica","Technical info","Formulário técnico","Fiche technique"
+"di8_index","mgeolevel","Niveles Geográficos","Geographic levels","Níveis Geográficos","Niveaux Géographiques"
+"di8_index","mgeography","Unidades Geográficas","Geographic units","Unidades Geográficas","Unités Géographiques"
+"di8_index","mevents","Tipos de eventos","Types of events","Tipos de eventos","Types d'évènements"
+"di8_index","mcauses","Tipos de causas","Types of causes","Tipos de causas","Types de causes"
+"di8_index","meeffects","Efectos Adicionales","Additional Effects","Efeitos Adicionais","Effets additionnels"
+"di8_index","tmapnotavail","Mapa no disponible","Map unavailable","Mapa não disponível","Carte non disponible"
+"di8_index","bsavemsg","Le permite guardar el resultado desplegado (tablas e imágenes).","Enables you to save the displayed results (tables and images)","Permite Salvar o resultado obtido (tabelas e imagens).","Vous permet d'enregistrer le résultat déployé (tableaux et images)"
+"di8_index","bprintmsg","Para imprimir el resultado en pantalla.","Screen print result","Para imprimir o resultado na tela","Pour imprimer le résultat sur l'écran"
+"di8_index","bdata","Fichas","Data cards","Formulários","Carte de données"
+"di8_index","tdatamsg","Para visualizar las fichas en un tabla.","To visualise records in a table format","Para visualizar os formulários numa tabela","Pour afficher les cartes de données sur un tableau"
+"di8_index","bthematic","Mapas","Maps","Mapas","Cartes"
+"di8_index","tthematicmsg","Para realizar mapas temáticos de los efectos.","To create thematic maps of effects","Para realizar mapas temáticos dos efeitos","Pour réaliser des cartes thématiques des effets"
+"di8_index","bgraphic","Gráficos","Graphs","Gráficos","Graphiques"
+"di8_index","tgraphicmsg","Representa los datos en histogramas y gráficos comparativos.","Represents data in histograms and comparative graphs","Representa os dados em histogramas e gráficos comparativos","Représente les données sur des histogrames et des graphiques comparatifs"
+"di8_index","bstatistic","Consolidados","Consolidated","Consolidados","Consolidés"
+"di8_index","tstatisticmsg","Totaliza las variables de efectos y fichas según niveles de totalización: p. ej. Años","Tipos de eventos","Niveles geográficos.","Tipos de eventos"
+"di8_index","gopttitle","Título","Title","Título","Titre"
+"di8_index","goptsubtit","Subtítulo","Subtitle","Subtítulo","Sous-titre"
+"di8_index","ghistogram","Histograma","Histogram","Histograma","Histogramme"
+"di8_index","gcomparative","Comparativo","Comparative","Comparativo","Comparatif"
+"di8_index","gseaday","Días","Days","Dias","Jours"
+"di8_index","gtendline","Línea de tendencia","Tendence line","Tendence line*","Ligne de tendance"
+"di8_index","glinearreg","Regresión Lineal","Linear regression","Linear regression*","Régression linéaire"
+"di8_index","GHISTOANNUAL","Histograma multianual","Multi-annual histogram","Histograma multi-anual","Histogramme multiannuel"
+"di8_index","gseaweek","Semanas","Weeks","Semanas","Semaines"
+"di8_index","gseamonth","Meses","Months","Meses","Mois"
+"di8_index","gperannual","Anual","Yearly","Anual","Annuel"
+"di8_index","gperweek","Semanal","Weekly","Semanal","Hebdomadaire"
+"di8_index","gpermonth","Mensual","Monthly","Mensal","Mensuel"
+"di8_index","gperday","Diario","Daily","Diário","Quotidien"
+"di8_index","gscalin","Lineal","Linear","Linear","Linéaire"
+"di8_index","gscalog","Logarítmica","Logarithm","Logarítmica","Logarithmique"
+"di8_index","gfee2d","2D","2D","2D","2D"
+"di8_index","gfee3d","3D","3D","3D","3D"
+"di8_index","gkndbars","Barras","Bars","Barras","Barres"
+"di8_index","gkndlines","Líneas","Lines","Linhas","Lignes"
+"di8_index","gkndpie","Pastel","Pie","Pizza","Gâteau"
+"di8_index","gmodnormal","Normal","Normal","Normal","Normal"
+"di8_index","gmodaccumul","Acumulado","Accumulated","Acumulado","Accumulé"
+"di8_index","gmodovercome","Superpuesto","Superimposed","Superposto","Superposé"
+"di8_index","gshwval","Valores","Values","Valores","Valeurs"
+"di8_index","gshwperce","Porcentaje","Percentage","Porcentagem","Pourcentage"
+"di8_index","gshwnone","Desactivar","Deactivate","Desativar","Désactiver"
+"di8_index","ghoraxis","Eje horizontal","Horizontal axis","Horizontal","Axe horizontal"
+"di8_index","gveraxis","Eje vertical","Vertical axis","Vertical","Axe vertical"
+"di8_index","mareaid","Identificación de Areas","Identification of areas","Identificação de áreas","Identification des Aires"
+"di8_index","mareashownam","Mostrar nombres","Show names","Mostrar nomes","Afficher des noms"
+"di8_index","mareashowcod","Mostrar códigos","Show codes","Mostrar códigos","Afficher des codes"
+"di8_index","mareashowval","Mostrar valores","Show values","Mostrar valores","Afficher des valeurs"
+"di8_index","mareanotshow","No mostrar identificación","Do not display identification","Não mostrar identificação","Ne pas afficher d'identification"
+"di8_index","mranlegcol","Rangos","Leyendas y Colores","Ranges","Leyendas y Colores"
+"di8_index","mrange","Límite rango","Define range","Limite intervalo","Limite de préférences"
+"di8_index","mlegend","Leyenda","Legend","Legenda","Légende"
+"di8_index","mcolor","Color","Colour","Cor","Couleur"
+"di8_index","mbetween","Entre","Between","Entre","Entre"
+"di8_index","mrepreselev","Nivel de representación","Level of representation","Nível de representação","Niveau de représentation"
+"di8_index","mviewfields","Variable a representar","Variable to be represented","Variável a representar","Variable à représenter"
+"di8_index","mcolorgrad","Gradiente de color","Color gradient","Variação gradativa de core","Variation de couleur"
+"di8_index","mcoltransp","Transparencia","Transparency","Transparency","Transparence"
+"di8_index","savailfields","Campos disponibles","Available fields","Campos disponíveis","Champs disponibles"
+"di8_index","sviewfields","Campos visibles y orden","Visible fields and order","Campos visíveis e ordem","Champs visibles et ordre"
+"di8_index","sresxpage","Resultados por página","Results by page","Resultados por página","Résultats par page"
+"di8_index","stotallevels","Seleccione los niveles de totalización","Select levels to be totalled","Selecione os níveis de totalização","Sélectionnez les niveaux de totalisation"
+"di8_index","dorderby","Ordenar por","Order by","Ordenar por","Ordonner par"
+"di8_index","dserial","Serial","Serial","Serial","Numéro de série"
+"di8_index","ddeg","Fecha","Tipo de evento","Geografía","Tipo de evento"
+"di8_index","ddge","Fecha","Geografia","Tipo de evento","Geografia"
+"di8_index","dged","Geografia","Tipo de evento","Fecha","Tipo de evento"
+"di8_index","dedg","Tipo de evento","Fecha","Geografía","Fecha"
+"di8_index","dcreation","Fecha de creación Fichas","Creation date data card","Data criação Formulários","Date de création de Cartes de données"
+"di8_index","dlastupd","Ultima actualización Fichas","Last update data card","Última atualização Formulários","Dernière mise à jour des Cartes de données"
+"di8_index","serrmsgfrm","Debe escoger un nivel de totalización y por lo menos un campo a visualizar","Choose a level to be totalled and at least one field to be visualised","Deve escolher um nível de totalização e pelo menos um campo para visualizar","Vous devez choisir un niveau de totalisation et au moins un champ à afficher"
+"di8_index","derrmsgfrm","Debe seleccionar por lo menos un campo","You must select at least one field","Deve selecionar pelo menos um campo","Vous devez sélectionner au moins un champ"
+"di8_index","balls","Todos","All","Todos","Tous"
+"di8_index","bnone","Limpiar","Clean","Limpar","Nettoyer"
+"di8_index","tand","y","and","e","et"
+"di8_index","tor","o","or","ou","ou"
+"di8_index","ttitegp","Personas y bienes","Persons and property","Pessoas e bens","Personnes et biens"
+"di8_index","ttiteis","Sectores","Sectors","Setores","Secteurs"
+"di8_index","ttitloss","Pérdidas Económicas","Economic Losses","As perdas econômicas","Pertes Économiques"
+"di8_index","tdate","Periodo","Range","Período","Période"
+"di8_index","ttitsince","Desde","From","Desde","Depuis"
+"di8_index","ttituntil","Hasta","To","Até","Jusqu'à"
+"di8_index","tonly","Solamente","Only","Somente","Uniquement"
+"di8_index","texclude","Excluir","Exclude","Excluir","Exclure"
+"di8_index","tinclude","Incluir","Include","Incluir","Inclure"
+"di8_index","tclean","Limpiar","Clean","Limpar","Nettoyer"
+"di8_index","tsend","Generar","Generate","Gerar","Générer"
+"di8_index","tclose","Cerrar","Close","Fechar","Fermer"
+"di8_index","tmguidedef","Definición","Definition","Definição","Définition"
+"di8_index","hmoreinfo","Guía metodológica","Methodological guide","Ver Guia metodológico","Guide méthodologique"
+"di8_index","tdescinfo","De click en el campo deseado para ver la descripción de dicho elemento","Click on the field to see a description of the element","Selecione no campo desejado para ver a descrição","Cliquez sur le champ souhaité pour voir la description de cet élément"
+"di8_index","tcntclick","Ctrl Click para selección múltiple o deseleccionar","Ctrl+Click for multiple selection or de-selection","Ctrl + Click para seleção múltiple ou desmarcar","Ctrl Clic pour une sélection multiple ou pour désélectionner"
+"di8_index","tauxhave","Hay","There is/are","Há","Existence"
+"di8_index","tauxaffect","Afectó","Affected","Afetou","Affectation"
+"di8_index","trepnum","Número de fichas","Reports","Formulários","Cartes de données"
+"di8_index","tabout","Correo electrónico: desinventar@desinventar.org","© 1998 – 2009 Corporación OSSO","\nCali – Colombia \nEmail: desinventar@desinventar.org","Courrier électronique: désinventer@désinventer.org"
+"di8_index","tserialmsg","Puede incluir o excluir uno o varios seriales. Los seriales debe separarlos por espacios","May include or exclude one or several serials. Serials should be separated by spaces.","Pode incluir ou excluir um ou vários seriais. Os seriais devem ser separados com espaços","Peut inclure ou exclure un ou plusieurs numéros de série. Les numéros de série doivent être séparés par des espaces"
+"di8_index","tserial","Seriales","Serials","Seriais","Numéros de série"
+"di8_index","tdcstatus","Estado de ficha","Data card Status","Estado de formulário","État de la carte de données"
+"di8_index","tdcpublished","Publicada","Published","Publicado","Publiée"
+"di8_index","tdcready","Por aprobar","To aprove","Por aprovar","En cours d'approbation"
+"di8_index","tdcdraft","Borrador","Draft","Rascunho","Projet"
+"di8_index","tdctrash","Para eliminar","To delete","Para eliminar","À éliminer"
+"di8_index","tdateformat","Formato AAAA MM DD","Date format YYYY MM DD","Formato AAAA MM DD","Format AAAA MM DD"
+"di8_index","thlpquery","Si no selecciona nada","significa que consultará toda la base de datos","If you do not select any option","significa que consultará toda la base de datos"
+"di8_index","teffhav","Hubo","There were","Houve","Il y en a eu"
+"di8_index","teffhavnot","No hubo","There weren't any","Não houve","Il n'y en a pas eu"
+"di8_index","teffdontknow","No sabe","Don't know","Não sabe","Ne sait pas"
+"di8_index","teffmajor","Mayor o igual a","Greater than or equal to","Maior ou igual a","Supérieur ou égal à"
+"di8_index","teffminor","Menor o igual a","Less than or equal to","Menor ou igual a","Inférieur ou égal à "
+"di8_index","teffequal","Igual a","Equal to","Igual a","Égal à"
+"di8_index","teffbetween","Entre","Between","Entre","Entre"
+"di8_index","tlike","Expresión","Like","Like*","Expression"
+"di8_index","tadvqryhelp","Seleccione un campo seguido de un operador y el valor correspondiente","Select field follow of operator and value","Select field follow of operator and value*","Sélectionnez un champ suivi d'un opérateur et de la valeur correspondante"
+"di8_index","taqlessthan","Busca fichas con valores menores al especificado: ej. fecha inicio < \'1920\' o Muertos < 10","Find cards with values menores al especificado: ej. fecha inicio < \'1920\' o Muertos < 10","Find cards with values menores al especificado: ej. fecha inicio < \'1920\' o Muertos < 10*","Recherche de cartes de données ayant des valeurs inférieures à la valeur spécifiée. Ex.: date début < \'1920\' ou Morts < 10"
+"di8_index","taqgreathan","Busca fichas con valores mayores al especificado: ej. fecha inicio > \'1999\' o Damnificados > 1000","Find cards with values  mayores al especificado: ej. fecha inicio > \'1999\' o Damnificados > 1000","Find cards with values  mayores al especificado: ej. fecha inicio > \'1999\' o Damnificados > 1000*","Recherche de cartes de données d'une valeur supérieure à la valeur spécifiée. Ex.: date début> \'1999\' o Sinistrés > 1000"
+"di8_index","taqequalto","Busca fichas con valores exactamente igual al especificado: ej. fecha inicio","Find cards with values exactamente igual al especificado: ej. fecha inicio","Find cards with values exactamente igual al especificado: ej. fecha inicio","Recherche de cartes de données d'une valeur exactement égale à la valeur spécifiée: ex.: date début"
+"di8_index","taqnoteqto","Busca fichas con valores diferentes al especificado: ej. Muertos <> 10","Find cards with values  diferentes al especificado: ej. Muertos <> 10","Find cards with values  diferentes al especificado: ej. Muertos <> 10*","Recherche de cartes de données ayant des valeurs différentes à la valeur spécifiée: ex.: Morts <> 10 "
+"di8_index","taqlike","Busca una palabra o frase dentro de los campos de texto. Por ejemplo: Sitio LIKE \'%cauca%\' o Fuente LIKE \'%comercio%\'","Find a word or phrase in the text fields. i.e. Sitio LIKE \'%cauca%\' or Fuente LIKE \'%comercio%\'","Encontre uma palavra ou frase nos campos de texto. Por exemplo: Sitio LIKE \'%cauca%\'* ou Fuente LIKE \'%comercio%\'","Recherche d'un mot ou d'une phrase dans les champs de texte: Par exemple: Site LIKE\'%cauca%\' ou Source LIKE \'%commerce%\'"
+"di8_index","taqwere","Busca fichas donde hubo ocurrencia del efecto o afectó el sector.","Find cards where there were ocurrence of effect or affect the sector.","Find cards where there were ocurrence of effect or affect the sector.*","Recherche de cartes de données où l'effet s'est présenté ou il a affecté le secteur"
+"di8_index","taqwerent","Busca fichas donde NO hubo ocurrencia del efecto o NO afectó el sector.","Find cards where there were not ocurrence of effect or not affect the sector.","Find cards where there were not ocurrence of effect or not affect the sector.*","Recherche de cartes de données où l'effet ne s'est pas produit ou il n'a pas affecté le secteur"
+"di8_index","taqdntknow","Busca fichas donde NO se sabe si hubo o nó efectos o afectación del sector.","Find cards where where donot know if there were or not of effect or affect the sector.","Find cards where where donot know if there were or not of effect or affect the sector.*","Recherche de cartes de données où l'on ne sait pas si des effets se sont présentés ou non"
+"di8_index","taqandopt","Busca fichas que cumplen la condición de verdad de los elementos conectados.","Find cards than apply true condition of TWO connected elements.","Find cards than apply true condition of TWO connected elements.*","Recherche de cartes de données satisfaisant à la condition de vérité des éléments connectés"
+"di8_index","taqoropt","Busca fichas que cumplen la condición de verdad de alguno o ambos elementos conectados.","Find cards than apply true condition of someone or both connected elements.","Find cards than apply true condition of someone or both connected elements.*","Recherche de cartes de données satisfaisant à la condition de vérité d'un ou des deux éléments connectés"
+"di8_listdb","listdbTitle","Inventarios de Desastres disponibles","Available Disaster Inventories","","Inventaires de Désastres disponibles"
+"di8_listdb","listdbCountry","Código país","Country code","Código do país","Code du pays"
+"di8_listdb","listdbRegion","Región","Region","Região","Région"
+"di8_listdb","listdbStatus","Estado","Status","Status","État"
+"di8_listdb","listdbPublic","PUBLICA","PUBLIC","PUBLICO","PUBLIQUE"
+"di8_listdb","listdbPrivate","PRIVADA","PRIVATE","PRIVADO","PRIVÉE"
+"dc_qdetails","geo","Geografía","Geography","Geografia","Géographie"
+"dc_qdetails","eve","Tipos de eventos","Type of events","Tipos de eventos","Types d'évènements"
+"dc_qdetails","cau","Tipos de causas","Type of causes","Tipos de causas","Types de causes"
+"dc_qdetails","eff","Efectos","Effects","Efeitos","Effets"
+"dc_qdetails","beg","Desde","Since","Desde","Depuis"
+"dc_qdetails","end","Hasta","Until","Até","Jusqu'à"
+"dc_qdetails","sou","Fuente","Data sources","Fonte","Source"
+"dc_qdetails","ser","Seriales","Serials","Seriais","Numéros de série"
+"dc_data","ttitle","Datos","Methodological guide summarize","Resumo Guia metodológico","Résumé Guide méthodologique"
+"dc_data","tpage","Páginas:","Pages:","Páginas:","Pages:"
+"dc_data","tnumof","de","From","de","de"
+"dc_data","trepnum","Fichas","Reports","Formulários","Cartes de données"
+"dc_data","trow","Fila","Row","Fila","Ligne"
+"dc_thematicmap","ttitle","Mapa temático","Methodological guide summarize","Resumo Guia metodológico","Résumé Guide méthodologique"
+"dc_thematicmap","tmapof","Mapa de","Map of","Mapa de","Carte de"
+"dc_thematicmap","tdrawpoint","Puntos y polígonos","Points and polygons","Pontos e polígonos","Points et polygones"
+"dc_thematicmap","trepnum","Número de fichas","Reports","Formulários","Cartes de données"
+"dc_thematicmap","tgetgearth","Ver en GoogleEarth","View in GoogleEarth","Ver em GoogleEarth","Voir dans GoogleEarth"
+"dc_thematicmap","lev","Nivel","Level","Nível","Niveau"
+"dc_graphic","ttitle","Gráficos","Methodological guide summarize","Resumo Guia metodológico","Résumé Guide méthodologique"
+"dc_graphic","trepnum","Número de fichas","Reports","Formulários","Cartes de données"
+"dc_graphic","tnodata","Sin datos","No data","Sem dados","Sans aucune donnée"
+"dc_statistic","ttitle","Consolidados","Methodological guide summarize","Resumo Guia metodológico","Résumé Guide méthodologique"
+"dc_statistic","tpage","Páginas:","Pages:","Páginas:","Pages:"
+"dc_statistic","tnumof","de","From","de","de"
+"dc_statistic","trepnum","Fichas","Reports","Formulários","Cartes de données"
+"dc_statistic","tsumnum","Número de consolidados","Number of consolidated","Número de consolidados","Nombre de consolidés"
+"dc_statistic","ttotals","Totales","Totals","Totais","Totaux"
+"dc_statistic","trow","Fila","Row","Fila","Ligne"
+"di_doc","ttitle","Resumen Guía metodológica","Methodological guide summarize","Resumo Guia metodológico","Résumé Guide méthodologique"
+"di_doc","tintro","Introducción","Introduction","Introdução","Introduction"
+"di_doc","twhatis","Que es DesInventar","What is DesInventar","O que é DesInventar?","Que signifie DésInventer"
+"di_doc","tgenpres","Presentación General","General Presentation","Apresentação Geral","Présentation Générale"
+"di_doc","tregion","Región","Region","Região","Région"
+"di_doc","tgeography","Geografía","Geography","Geografia","Géographie"
+"di_doc","tevents","Tipos de eventos","Type of events","Tipos de eventos","Types d'évènements"
+"di_doc","tcauses","Tipos de causas","Type of causes","Tipos de causas","Types de causes"
+"di_doc","textraeff","Efectos Adicionales","Additional Effects","Efeitos Adicionais","Effets Additionnels"
+"di_doc","tdatacards","Fichas","Data cards","Formulários","Cartes de données"
+"di_doc","treferences","Referencias","References","Referências","Références"
+"di_doc","thlptitle","Introducción a DesInventar8","Introduction to DesInventar8","Introdução a DesInventar8","Introduction à Désinventer8"
+"di_doc","thlpintro","Introducción","Introduction","Introdução","Introduction"
+"di_doc","thlpportal","Portal DesInventar","DesInventar portal","Portal DesInventar","Portail DésInventer"
+"di_doc","thlppordemo","Demo Portal","Demo Portal","Demo Portal","Démonstration Portail"
+"di_doc","thlpdimod","Módulo DesInventar","DesInventar module","Módulo DesInventar","Module DésInventer"
+"di_doc","thlpdcmod","Módulo DesConsultar","DesConsultar module","Módulo DesConsultar","Module Déconsulter"
+"di_doc","thlpdemreg","Demo Región","Demo Region","Demo Região","Démonstration Région"
+"di_doc","thlpdemgeo","Demo Geografía","Demo Geography","Demo Geografia","Démonstration Géographie"
+"di_doc","thlpdemeve","Demo Eventos","Demo Events","Demo Eventos","Démonstration Évènements"
+"di_doc","thlpdemcau","Demo Causas","Demo Causes","Demo Causas","Démonstration Causes"
+"di_doc","thlpdemdc","Demo Fichas","Demo Data cards","Demo Formulários","Démonstration cartes de données"
