@@ -8,7 +8,7 @@
 		{-foreach name=info key=k item=i from=$RegionInfo-}
 			{-if substr($k,0,4) == "Info" -}
 			{-if $i != ""-}
-				<b>{-$Labels.$k[0]-}</b><br>{-$i-}<br>
+				<b>{-$Labels.$k[0]-}</b><br />{-$i-}<br /><br />
 			{-/if-}
 			{-/if-}
 		{-/foreach-}
