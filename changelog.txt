@@ -1,3 +1,6 @@
+* 2010-01-24 Jhon H. Caicedo <jhcaiced@desinventar.org>
+- Sample git test
+
 * 2010-01-01 Jhon H. Caicedo <jhcaiced@desinventar.org>
 - New year release started 8.2.0.68
 
