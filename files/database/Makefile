@@ -23,10 +23,10 @@ desinventar.db : region.sql
 	sqlite3 desinventar.db < region.sql
 
 lang : di8_interface_strings.csv
-	./createInterfaceStrings.pl --lang=spa > ../web/include/spa.conf \
-	./createInterfaceStrings.pl --lang=eng > ../web/include/eng.conf \
-	./createInterfaceStrings.pl --lang=por > ../web/include/por.conf \
-	./createInterfaceStrings.pl --lang=fre > ../web/include/fre.conf
+	./createInterfaceStrings.pl --lang=spa > ../../web/include/spa.conf; \
+	./createInterfaceStrings.pl --lang=eng > ../../web/include/eng.conf; \
+	./createInterfaceStrings.pl --lang=por > ../../web/include/por.conf; \
+	./createInterfaceStrings.pl --lang=fre > ../../web/include/fre.conf;
 
 clean :
 	/bin/rm -f *.db
