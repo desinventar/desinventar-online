@@ -1,4 +1,4 @@
-{-config_load file="eng.conf" section="portal"-}
+{-config_load file="eng.conf"-}
 {-config_load file=`$lang`.conf section="portal"-}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -118,6 +118,7 @@
 						<a href="?lang=eng">English</a>
 						<a href="?lang=spa">Español</a>
 						<a href="?lang=por">Português</a>
+						<a href="?lang=fre">Français</a>
 					</div>
 				</td>
 			</tr>
