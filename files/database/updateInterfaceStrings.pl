@@ -8,6 +8,7 @@
 #
 use encoding "utf8";
 use Encode;
+use Data::Dumper;
 
 my %trans = ();
 
@@ -40,10 +41,14 @@ while(<CSV>) {
 	$value_fre = trim($value_fre);
 	if ($trans{$key} ne '') {
 		$value_fre = $trans{$key};
+		delete($trans{$key});
 	}
 	$line = sprintf('"%s","%s","%s","%s","%s","%s"', $group, $key, $value_spa, $value_eng, $value_por, $value_fre);
 	print $line . "\n";
 }
+$count = scalar keys %trans;
+print STDERR $count . "\n";
+print STDERR Dumper(%trans);
 close(CSV);
 exit(0);
 
