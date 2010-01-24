@@ -2,8 +2,8 @@
 use encoding "utf8";
 use Encode;
 
-open(SPA  ,"<:encoding(utf8)",'../web/include/spa.conf');
-open(TRANS,"<:encoding(utf8)",'../web/include/eng.conf');
+open(SPA,'<:encoding(utf8)','../web/include/spa.conf');
+open(ENG,'<:encoding(utf8)','../web/include/eng.conf');
 
 my %trans = ();
 while(<TRANS>) {
