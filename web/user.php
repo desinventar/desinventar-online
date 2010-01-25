@@ -131,9 +131,13 @@ switch ($cmd) {
 	break;
 	case "adminusr":
 		// USERADMIN: Register new user form, only for AdminPortal
-		$t->assign("cnt", $us->q->getCountryList());
-		$t->assign("usrpa", $us->getUserInfo(''));
-		$t->display("user_admin.tpl");
+		if ($us->UserId == 'root') {
+			$t->assign("cnt", $us->q->getCountryList());
+			$t->assign("usrpa", $us->getUserInfo(''));
+			$t->display("user_admin.tpl");
+		} else {
+			print "ERROR";
+		}
 	break;
 	case 'chklogin':
 		$UserId = getParameter('UserId');
