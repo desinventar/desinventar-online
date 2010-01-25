@@ -55,7 +55,7 @@
 				case "mqrysav":
 					saveQuery();
 				break;
-				case "mqryopn":
+				case "mnuQueryOpen":
 					var qryw;
 					if (!qryw) {
 						qryw = new Ext.Window({
@@ -216,7 +216,7 @@
 					{id:'mqrynew', text: '{-#mnewsearch#-}',handler: onMenuItem  },
 					{id:'mqrysav', text: '{-#msavequery#-}',handler: onMenuItem  },
 				{-/if-}
-				{id:'mqryopn', text: '{-#mopenquery#-}',handler: onMenuItem  }
+				{id:'mnuQueryOpen', text: '{-#mopenquery#-}',handler: onMenuItem  }
 			]
 		});
 		
