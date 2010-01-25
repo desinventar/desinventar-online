@@ -804,17 +804,18 @@ class Query extends PDO {
 								$QueryGeography .= ' OR ';
 							}
 							// Restrict to childs elements only
-							$chl = false;
+							$hasChildsSelected = false;
 							foreach ($v as $j) {
 								if ($i != $j && ($i == substr($j, 0, 5) || $i == substr($j, 0, 10))) {
-									$chl = true;
+									$hasChildsSelected = true;
+									$bFirst = true;
 								}
 							}
-							if (!$chl) {
+							if (! $hasChildsSelected) {
 								$QueryGeography .= "$k LIKE '$i%'";
 								$bFirst = false;
 							}
-						}
+						} //foreach
 					} elseif ((substr($k, 2, 6) == "Effect" || substr($k, 2, 6) == "Sector") && isset($v[0])) {
 						// Process effects and sectors..
 						if (isset($v[3]))
