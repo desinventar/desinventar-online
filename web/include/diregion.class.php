@@ -793,7 +793,9 @@ class DIRegion extends DIObject {
 			$prmLang = 'eng';
 		}
 		foreach(array('InfoGeneral','InfoCredits','InfoSources','InfoSynopsis') as $Field) {
-			$a[$Field] = $this->get($Field, $prmLang);
+			$a[$Field] = strip_tags($this->get($Field, $prmLang));
+			$a[$Field] = preg_replace('/\n/','<br />', $a[$Field]);
+			//$a[$Field] = $this->get($Field, $prmLang);
 		}
 		$a['RegionLastUpdate'] = substr($a['RegionLastUpdate'],0,10);
 
