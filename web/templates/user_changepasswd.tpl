@@ -39,14 +39,18 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<span id="lblStatus"></span>
+					<input type="hidden" id="txtUserId" value="{-$UserId-}" />
+					<input type="submit" id="btnUserEditSubmit" value="{-#bsave#-}" class="line" />
+					<input type="reset"  id="btnUserEditCancel" value="{-#bcancel#-}" class="line" />
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<input type="hidden" id="txtUserId" value="{-$UserId-}" />
-					<input type="submit" id="btnUserEditSubmit" value="{-#bsave#-}" class="line" />
-					<input type="reset"  id="btnUserEditCancel" value="{-#bcancel#-}" class="line" />
+					<span class="status" id="lblStatus"></span>
+					<span class="status" id="msgEmptyFields">{-#erremptyfields#-}</span>
+					<span class="status" id="msgPasswdDoNotMatch">{-#errnomatch#-}</span>
+					<span class="status" id="msgInvalidPasswd">{-#errbadpasswd#-}</span>
+					<span class="status" id="msgPasswdUpdated">{-#msgupdatesucc#-}</span>
 				</td>
 			</tr>
 		</table>

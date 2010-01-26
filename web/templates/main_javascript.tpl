@@ -16,8 +16,10 @@
 				case "mnuUserLogout":
 					userMan('logout', '');
 				break;
-				case "musrmya":
-					updateList('dbl', 'user.php', 'cmd=viewpref');
+				case "mnuUserEditAccount":
+					//updateList('dbl', 'user.php', 'cmd=changepasswd');
+					//updateList('dbl', 'user.php', 'cmd=adminusr', 'onReadyUserAdmin');
+					jQuery("#dbl").load('user.php?cmd=changepasswd',function() { onReadyUserChangePasswd(); });
 					dblw.show();
 				break;
 				{-foreach name=lglst key=key item=item from=$lglst-}
@@ -187,7 +189,7 @@
 			id: 'userMenu',
 			items: [
 				{-if $userid != ""-}
-					{id: 'musrmya', text: '{-#tconfigacc#-}', handler: onMenuItem },
+					{id: 'mnuUserEditAccount', text: '{-#tconfigacc#-}', handler: onMenuItem },
 					{id: 'mnuUserLogout', text: '{-#tclosesess#-}', handler: onMenuItem }, 
 				{-else-}
 					{id: 'mnuUserLogin', text: '{-#benter#-}', handler: onMenuItem }, 
