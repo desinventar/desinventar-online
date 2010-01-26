@@ -288,23 +288,24 @@ class UserSession {
 	// Send a Password Reminder to an E-mail
 	function sendPasswdReminder($prmEMail) {
 		$myAnswer = '';
-		$sQuery = "SELECT * FROM User " .
-		  " WHERE (UserEMail='" . $prmEMail . "') ";
-		if ($result = $this->q->core->query($sQuery) ) {
-			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-				$myAnswer = $row->UserEMail;
-				// uhmm, must revise if send mail-> offline systems ??
-				mail($myAnswer, 
-			     "DesInventar - Password Reminder",
-			     "Dear User\nYour login information for DesInventar is:\n" .
-			     "  UserId : $row->UserId\n" .
-			     "  Login    : $row->UserPasswd\n" . 
-			     "\n\n" .
-			     "Sincerely,\n" .
-			     "   The DesInventar Team",
-				"From: desinventar@desinventar.org");
-			} // while
-		}
+		$sQuery = "SELECT * FROM User WHERE (UserEMail='" . $prmEMail . "') ";
+		foreach($this->q->core->query($sQuery) as $row) {
+			$myAnswer = $row['UserEMail'];
+			$myPasswd = generatePasswd();
+			$myPasswd = 'di8welcome';
+			$this->updateUserPasswd($row['UserId'], md5($myPasswd));
+			// uhmm, must revise if send mail-> offline systems ??
+			mail($myAnswer, 
+				 "DesInventar - Password Reminder",
+				 "Dear User\nYour login information for DesInventar is:\n" .
+				 "  UserId : " . $row['UserId'] . "\n" .
+				 "  Login  : " . $myPasswd . "\n" . 
+				 "\n\n" .
+				 "Sincerely,\n" .
+				 "   The DesInventar Team",
+				"From: desinventar@desinventar.org"
+			);
+		} //foreach
 		return $myAnswer;
 	}
 
