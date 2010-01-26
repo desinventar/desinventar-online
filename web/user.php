@@ -153,8 +153,18 @@ switch ($cmd) {
 		$t->assign("usri", form2user($us->getUserInfo($us->UserId)));
 		$t->display("user.tpl");
 	break;
-	case "edit":
-		$t->display("user_edit.tpl");
+	case "changepasswd":
+		$t->assign('UserId', $us->UserId);
+		$t->display("user_changepasswd.tpl");
+	break;
+	case "updatepasswd":
+		// Check if password is correct (ask to dicore). if is OK show dialog to change it.
+		if (iserror($us->validateUser($us->UserId, $_POST['UserPasswd'],true))) {
+			print "ERRORPASSWD";
+		} else {
+			$us->updateUserPasswd($us->UserId, $_POST['UserPasswd2']);
+			print "OK";
+		}
 	break;
 	case "chkpasswd":
 		// Check if password is correct (ask to dicore). if is OK show dialog to change it.

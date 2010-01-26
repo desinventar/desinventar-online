@@ -167,21 +167,31 @@ class UserSession {
 	} // close()
 
 	// Validate a user/passwd pair against database
-	public function validateUser($prmUserId, $prmUserPasswd) {
+	public function validateUser($prmUserId, $prmUserPasswd, $withCrypt=false) {
 		$iReturn = ERR_DEFAULT_ERROR;
+		
+		if (! $withCrypt) {
+			$prmUserPasswd = md5($prmUserPasswd);
+		}
+		
 		// This is an anonymous session
 		if ( ($prmUserId == "") && ($prmUserPasswd == ""))
 			$iReturn = ERR_NO_ERROR;
 		else {
-			$sQuery = "SELECT * FROM User WHERE UserId='" . $prmUserId . "' OR UserNotes LIKE '%(UserName=" . $prmUserId . ")'" ;
+			$sQuery = "SELECT * FROM User WHERE (UserId='" . $prmUserId . "' OR UserNotes LIKE '%(UserName=" . $prmUserId . ")%') AND (UserPasswd='" . $prmUserPasswd . "')" ;
 			try {
+				foreach($this->q->core->query($sQuery) as $row) {
+					$iReturn = ERR_NO_ERROR;
+				}
+				/*
 				$result = $this->q->core->query($sQuery);
 				$iReturn = ERR_DEFAULT_ERROR;
 				while (($iReturn < 0) && ($row = $result->fetch(PDO::FETCH_OBJ))) {
-					if ($row->UserPasswd == md5($prmUserPasswd)) {
+					if ($row->UserPasswd == $prmUserPasswd) {
 						$iReturn = ERR_NO_ERROR;
 					}
 				} // while
+				*/
 			} catch (Exception $e) {
 				showErrorMsg($e->getMessage());
 			} // catch
@@ -449,6 +459,15 @@ class UserSession {
 		$sQuery .=  " WHERE UserId='" . $UserId . "'";
 		if ($result = $this->q->core->query($sQuery))
 			$iReturn = ERR_NO_ERROR;
+		return $iReturn;
+	}
+	
+	public function updateUserPasswd($UserId, $UserPasswd) {
+		$iReturn = ERR_DEFAULT_ERROR;
+		$Query = 'UPDATE User SET UserPasswd="' . $UserPasswd . '" WHERE UserId="' . $UserId . '"';
+		if ($result = $this->q->core->query($Query)) {
+			$iReturn = ERR_NO_ERROR;
+		}		
 		return $iReturn;
 	}
 	

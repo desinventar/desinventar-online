@@ -20,7 +20,7 @@
 	<script type="text/javascript" src="include/palette.js"></script>
 	<script type="text/javascript" src="js/md5.js"></script>
 	<script type="text/javascript" src="js/jquery.snippets.js"></script>
-	<script type="text/javascript" src="js/useradmin.js"></script>
+	<script type="text/javascript" src="js/user.js"></script>
 	<script type="text/javascript" src="js/desconsultar.js"></script>
 	<!-- ExtJS -->
 	<link rel="stylesheet" type="text/css" href="/extJS/resources/css/ext-all.css"/>
