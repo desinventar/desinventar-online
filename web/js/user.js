@@ -1,4 +1,4 @@
-function onReadyUserChangePasswd() {
+function onReadyUserChangePasswd(windowId) {
 	// hide all status messages on start
 	updateUserChangePasswdMsg('');
 	
@@ -12,13 +12,29 @@ function onReadyUserChangePasswd() {
 		} else if (UserPasswd2 != UserPasswd3) {
 			updateUserChangePasswdMsg('#msgPasswdDoNotMatch');
 		} else {
-			jQuery.post("user.php?cmd=updatepasswd", {'UserPasswd' : hex_md5(UserPasswd) ,'UserPasswd2' : hex_md5(UserPasswd2)}, function(data) {
-				jQuery("#lblStatus").html(data);
-			});
+			jQuery.post("user.php?cmd=updatepasswd", 
+			    {'UserPasswd'  : hex_md5(UserPasswd),
+			     'UserPasswd2' : hex_md5(UserPasswd2)
+			    },
+			    function(data) {
+					if (data == 'OK') {
+						updateUserChangePasswdMsg("#msgPasswdUpdated");
+						// After update, clear first field
+						jQuery("#txtUserPasswd").val('');
+					} else {
+						updateUserChangePasswdMsg("#msgInvalidPasswd");
+					}
+				}
+			);
 		}
 		return(false);
 	});
 	jQuery("#btnUserEditCancel").click(function() {
+		updateUserChangePasswdMsg('');
+		if (windowId != '') {
+			jQuery(windowId).hide();
+		}
+		// 2010-01-26 (jhcaiced) This reference to dblw needs to be fixed !!! 
 		dblw.hide();
 		return(false);
 	});
@@ -28,6 +44,7 @@ function updateUserChangePasswdMsg(msgId) {
 	// Hide all status Msgs (class="status")
 	jQuery(".status").hide();
 	if (msgId != '') {
+		jQuery("#divUserChangePasswdMsg").show();
 		// Show specified message(s)
 		jQuery(msgId).show();
 	}

@@ -46,11 +46,12 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<span class="status" id="lblStatus"></span>
-					<span class="status" id="msgEmptyFields">{-#erremptyfields#-}</span>
-					<span class="status" id="msgPasswdDoNotMatch">{-#errnomatch#-}</span>
-					<span class="status" id="msgInvalidPasswd">{-#errbadpasswd#-}</span>
-					<span class="status" id="msgPasswdUpdated">{-#msgupdatesucc#-}</span>
+					<div id="divUserChangePasswdMsg" style="display:none">
+						<span class="status" id="msgEmptyFields">{-#erremptyfields#-}</span>
+						<span class="status" id="msgPasswdDoNotMatch">{-#errnomatch#-}</span>
+						<span class="status" id="msgInvalidPasswd">{-#errbadpasswd#-}</span>
+						<span class="status" id="msgPasswdUpdated">{-#msgupdatesucc#-}</span>
+					</div>
 				</td>
 			</tr>
 		</table>
