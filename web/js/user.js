@@ -1,3 +1,22 @@
+function onReadyUserChangePasswd() {
+	var UserId = jQuery("#txtUserId").val();
+	jQuery("#lblStatus").html('Edit Information for ' + UserId);
+	jQuery("#frmUserChangePasswd").submit(function() {
+		var UserPasswd = jQuery("#txtUserPasswd").val();
+		var UserPasswd2 = jQuery("#txtUserPasswd2").val();
+		var UserPasswd3 = jQuery("#txtUserPasswd3").val();
+		if (UserPasswd == '' || UserPasswd2 == '' || UserPasswd3 == '') {
+			jQuery("#lblStatus").html('Este campo no puede estar vacio');
+		} else if (UserPasswd2 != UserPasswd3) {
+			jQuery("#lblStatus").html('Claves no concuerdan');
+		} else {
+			jQuery.post("user.php?cmd=updatepasswd", {'UserPasswd' : hex_md5(UserPasswd) ,'UserPasswd2' : hex_md5(UserPasswd2)}, function(data) {
+				jQuery("#lblStatus").html(data);
+			});
+		}
+		return(false);
+	});
+}
 
 function onReadyUserAdmin() {
 	// Start with Edit form hidden
