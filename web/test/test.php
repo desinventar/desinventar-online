@@ -1,5 +1,5 @@
 <?
 	require_once('../include/loader.php');
-	print_r($_POST);
-	fb($_POST);
+	$pass = generatePassword();
+	print_r($pass) . "<br />\n";
 ?>
