@@ -5,7 +5,7 @@
 */
 
 // This is the version of the software
-define('VERSION', '8.2.0.70');
+define('VERSION', '8.2.0.71');
 
 //ob_start( 'ob_gzhandler' );
 require_once('include/loader.php');
