@@ -292,7 +292,6 @@ class UserSession {
 		foreach($this->q->core->query($sQuery) as $row) {
 			$myAnswer = $row['UserEMail'];
 			$myPasswd = generatePasswd();
-			$myPasswd = 'di8welcome';
 			$this->updateUserPasswd($row['UserId'], md5($myPasswd));
 			// uhmm, must revise if send mail-> offline systems ??
 			mail($myAnswer, 
