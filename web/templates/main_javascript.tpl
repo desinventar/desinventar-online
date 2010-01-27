@@ -79,7 +79,8 @@
 				case "mcrdins":
 					difw.show();
 				break;
-				case "mcrdimp":
+				case "mnuDatacardImport":
+					// Hide Query Design Panel
 					w = Ext.getCmp('westm');
 					w.hide();
 					w.collapse();
@@ -227,7 +228,7 @@
 			items: [
 				{id:'mcrdins', text: '{-#minsert#-}',	handler: onMenuItem  },
 				{-if $role == "SUPERVISOR" || $role == "ADMINREGION"-}
-					{id:'mcrdimp', text: '{-#mimport#-}',	handler: onMenuItem  },
+					{id:'mnuDatacardImport', text: '{-#mimport#-}',	handler: onMenuItem  },
 					{id:'mcrdbak', text: '{-#mbackdb#-}',	handler: onMenuItem  },
 				{-/if-}
 				{-if $role == "OBSERVER" || $role == "ADMINREGION"-}
