@@ -1,7 +1,7 @@
 <script language="php">
 /*
  DesInventar8 - http://www.desinventar.org
- (c) 1998-2009 Corporacion OSSO
+ (c) 1998-2010 Corporacion OSSO
 */
 
 require_once('include/loader.php');
@@ -19,12 +19,12 @@ function loadCSV($ocsv) {
 $post = $_POST;
 $get = $_GET;
 
-$reg = getParameter('_REG', getParameter('r'), '');
+$RegionId = getParameter('_REG', getParameter('r'), '');
 
-if ($reg == '') {
+if ($RegionId == '') {
 	exit();
 }
-$us->open($reg);
+$us->open($RegionId);
 
 $ImportType = $post['diobj'];
 
@@ -128,13 +128,13 @@ if (isset($_FILES['desinv']) && isset($post['diobj'])) {
 	}
 } else {
 	// show upload form
-	$urol = $us->getUserRole($reg);
+	$urol = $us->getUserRole($RegionId);
 	if ($urol == "OBSERVER")
 		$t->assign ("ro", "disabled");
 	$t->assign ("ctl_show", true);
 }
 
-$t->assign ("reg", $reg);
+$t->assign ("RegionId", $RegionId);
 $t->display ("import.tpl");
 
 </script>
