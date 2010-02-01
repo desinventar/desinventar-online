@@ -86,63 +86,32 @@ class DIDisaster extends DIObject {
 			$this->load();
 		}
 	} //__construct
-	
+
 	public function getDeleteQuery() {
 		$sQuery = "UPDATE " . $this->getTableName() . " SET RecordStatus='DELETED'" .
 		  " WHERE " . $this->getWhereSubQuery();
 		return $sQuery;
 	}
 	
-	public function validateCreate(&$oResult=null) {
+	public function validateCreate() {
 		$iReturn = 1;
 		$iReturn = $this->validateNotNull(-51, 'DisasterId');
-		if ($iReturn < 0) {
-			if (!is_null($oResult)) {
-				$oResult['Error'][-51] = 'Disaster Id cannot be empty.(' . $this->get('DisasterId') . ')';
-			}
-		}
-		$iReturn = $this->validatePrimaryKey(-52, $oResult);
-		if ($iReturn < 0) {
-			if (!is_null($oResult)) {
-				$oResult['Error'][-52] = 'Disaster Id must be unique.(' . $this->get('DisasterId') . ')';
-			}
-		}
-		if (!is_null($oResult)) {
-			$oResult['Status'] = $iReturn;
-		} 
+		$iReturn = $this->validatePrimaryKey(-52);
 		return $iReturn;
 	}
 	
 	public function validateUpdate() {
-		$oReturn = parent::validateUpdate();
-		$iReturn = ERR_NO_ERROR;
+		$iReturn = parent::validateUpdate();
 		$iReturn = $this->validateNotNull(-53, 'DisasterSerial');
-		if ($iReturn > 0) {
-			$iReturn = $this->validateUnique(-54, 'DisasterSerial');
-			if ($iReturn > 0) {
-				$iReturn = $this->validateNotNull(-55, 'DisasterBeginTime');
-				if ($iReturn > 0) {
-					$iReturn = $this->validateNotNull(-56, 'DisasterSource');
-					if ($iReturn > 0) {
-						$iReturn = $this->validateNotNull(-57, 'RecordStatus');
-						if ($iReturn > 0) {
-							$iReturn = $this->validateRef(-58, 'GeographyId', 'Geography', 'GeographyId');
-							if ($iReturn > 0) {
-								$iReturn = $this->validateRef(-59, 'EventId', 'Event', 'EventId');
-								if ($iReturn > 0) {
-									$iReturn = $this->validateRef(-60, 'CauseId', 'Cause', 'CauseId');
-									if ($iReturn > 0) {
-										$iReturn = $this->validateEffects($oResult);
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		$oReturn['Status'] = $iReturn;
-		return $oReturn;
+		$iReturn = $this->validateUnique(-54, 'DisasterSerial');
+		$iReturn = $this->validateNotNull(-55, 'DisasterBeginTime');
+		$iReturn = $this->validateNotNull(-56, 'DisasterSource');
+		$iReturn = $this->validateNotNull(-57, 'RecordStatus');
+		$iReturn = $this->validateRef(-58, 'GeographyId', 'Geography', 'GeographyId');
+		$iReturn = $this->validateRef(-59, 'EventId', 'Event', 'EventId');
+		$iReturn = $this->validateRef(-60, 'CauseId', 'Cause', 'CauseId');
+		$iReturn = $this->validateEffects($oResult);
+		return $iReturn;
 	}
 	
 	public function validateEffects(&$oResult=null) {
@@ -173,10 +142,7 @@ class DIDisaster extends DIObject {
 		} //foreach
 		if ($bFound == false) {
 			$iReturn = -61;
-			if (!is_null($oResult)) {
-				$oResult['Status'] = $iReturn;
-				$oResult['Warning'][] = 'Datacard without effects';
-			}
+			$this->status->addWarning($iReturn, ' Datacard without effects');
 		}
 		return $iReturn;
 	}
@@ -285,6 +251,15 @@ class DIDisaster extends DIObject {
 		
 		return $iReturn;
 	} //function
+
+	public static function existId($prmSession, $prmDisasterId) {
+		$bFound = 0;
+		$Query= "SELECT * FROM Disaster WHERE DisasterId='" . $prmDisasterId . "'";
+		foreach($prmSession->q->dreg->query($Query) as $row) {
+			$bFound = 1;
+		}
+		return $bFound;
+	}
 } //class
 
 </script>

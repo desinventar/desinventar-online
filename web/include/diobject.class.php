@@ -3,7 +3,7 @@
   DesInventar - http://www.desinventar.org
   (c) 1998-2010 Corporacion OSSO
 */
-
+require_once(BASE . '/include/distatus.class.php');
 class DIObject {
 	var $session = null;
 	var $sRegionId  = '';
@@ -17,6 +17,7 @@ class DIObject {
 	var $oField;
 	var $oFieldType;
 	var $conn = null;
+	var $status = null;
 	
 	public function __construct($prmSession) {
 		$this->session = $prmSession;
@@ -44,6 +45,9 @@ class DIObject {
 		}
 		$this->set('LangIsoCode', $LangIsoCode);
 		$this->set('RecordUpdate', gmdate('c'));
+		
+		// Status object
+		$this->status = new DIStatus();
 	} // constructor
 	
 	public function setConnection($prmDB) {
@@ -284,8 +288,7 @@ class DIObject {
 		if ($withValidate) {
 			$iReturn = $this->validateCreate();
 			if ($iReturn > 0 ) { 
-				$oReturn = $this->validateUpdate();
-				$iReturn = $oReturn['Status'];
+				$iReturn = $this->validateUpdate();
 				$bValidate = false;
 			}
 		}
@@ -333,8 +336,7 @@ class DIObject {
 	public function update($withValidate = true, $withInsert = false) {
 		$iReturn = ERR_NO_ERROR;
 		if ($withValidate) {
-			$oReturn = $this->validateUpdate();
-			$iReturn = $oReturn['Status'];
+			$iReturn = $this->validateUpdate();
 		}
 		if ($iReturn > 0) {
 			$sQuery = $this->getUpdateQuery();
@@ -385,11 +387,7 @@ class DIObject {
 		return 1;
 	}	
 	public function validateUpdate() {
-		$oReturn = array();
-		$oReturn['Status'] = 1;
-		$oReturn['Error'] = array();
-		$oReturn['Warning'] = array();
-		return $oReturn;
+		return ERR_NO_ERROR;
 	}
 	
 	public function validateDelete() {
@@ -407,6 +405,9 @@ class DIObject {
 				$iReturn = $ErrCode;
 			}
 		}
+		if ($iReturn < 0) {
+			$this->status->addError($ErrCode, $FieldName . ' is null');
+		}
 		return $iReturn;	
 	}
 
@@ -416,6 +417,9 @@ class DIObject {
 		$sQuery = "SELECT * FROM " . $this->getTableName() . " WHERE " . $this->getIdWhereQuery();
 		foreach($this->conn->query($sQuery) as $row) {
 			$iReturn = $ErrCode;
+		}
+		if ($iReturn < 0) {
+			$this->status->addError($ErrCode, ' Primary key is not unique');
 		}
 		return $iReturn;	
 	}
@@ -450,6 +454,9 @@ class DIObject {
 				$iReturn = $ErrCode;
 			}
 		}
+		if ($iReturn < 0) {
+			$this->status->addError($ErrCode, $prmFieldName . ' value is not unique.');
+		}
 		return $iReturn;	
 	}
 	
@@ -462,6 +469,9 @@ class DIObject {
 		$iReturn = $ErrCode;
 		foreach($this->conn->query($sQuery) as $row) {
 			$iReturn = ERR_NO_ERROR;
+		}
+		if ($iReturn < 0) {
+			$this->status->addError($ErrCode, $prmFieldName . ' reference to table ' . $TableName . ' is invalid');
 		}
 		return $iReturn;
 	}
@@ -490,11 +500,7 @@ class DIObject {
 	}
 
 	public function importFromCSV($cols, $values) {
-		$oReturn = array();
-		$oReturn['Status'] = ERR_NO_ERROR;
-		$oReturn['Error'] = array();
-		$oReturn['Warning'] = array();
-		return $oReturn;
+		return ERR_NO_ERROR;
 	}
 } // class
 

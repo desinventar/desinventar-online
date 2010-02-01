@@ -65,33 +65,40 @@ class DIImport {
 					break;
 					case DI_DISASTER:
 						$o = new DIDisaster($this->us);
-						$Result = $o->importFromCSV($cols, $values);
-						if ($Result > 0) {
-							if ($doImport) {
-								$oResult = array();
-								$oResult['Status'] = ERR_NO_ERROR;
-								$oResult['Error'] = array();
-								$oResult['Warning'] = array();
-								$Result = $o->validateCreate($oResult);
-								$Result = $o->insert();
+						$iReturn = $o->importFromCSV($cols, $values);
+						if ($iReturn > 0) {
+							$iReturn = DIDisaster::existId($this->us, $o->get('DisasterId'));
+							if ($iReturn > 0) {
+								if ($doImport) {
+									$iReturn = $o->validateCreate();
+									if ($iReturn < 0) {
+										fb('insert ' . $rowCount . ' ' . $iReturn);
+										print_r($o->status->error);
+									}
+									$iReturn = $o->insert();
+								} else {
+									$iReturn = $o->validateCreate();
+								}
 							} else {
-								$Result = $o->validateCreate();
-							}
-						} else {
-							if ($doImport) {
-								$Result = $o->update();
-							} else {
-								$Result = $o->validateUpdate();
+								if ($doImport) {
+									$iReturn = $o->update();
+									if ($iReturn < 0) {
+										fb('update ' . $rowCount . ' ' . $iReturn);
+										print_r($o->status->error);
+									}
+								} else {
+									$iReturn = $o->validateUpdate();
+								}
 							}
 						}
-						if ($Result > 0) {
+						if ($iReturn > 0) {
 							$e = new DIEEData($this->us);
 							$e->set('DisasterId', $o->get('DisasterId'));
 							if ($doImport) {
-								if ($Result > 0) {
-									$Result = $e->insert();
+								if ($iReturn > 0) {
+									$iReturn = $e->insert();
 								} else {
-									$Result = $e->update();
+									$iReturn = $e->update();
 								}
 							}
 						}

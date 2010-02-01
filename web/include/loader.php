@@ -3,7 +3,6 @@
  DesInventar8 - http://www.desinventar.org
  (c) 1998-2010 Corporacion OSSO
 */
-
 // 2009-09-16 (jhcaiced) Autoconfigure software directory
 if (! isset($_SERVER["DI8_WEB"])) {
 	$_SERVER["DI8_WEB"] = dirname(dirname(__FILE__));
@@ -60,7 +59,6 @@ if (isset($_SERVER["HTTP_HOST"])) {
 	$_SERVER["DI8_CACHEDIR"] = "/var/cache/Smarty/di8";
 	define('TEMP', '/tmp');
 }
-
 define("BASE"    , $_SERVER["DI8_WEB"]);
 define("WWWDIR"  , $_SERVER["DI8_WWWDIR"]);
 define("WWWDATA" , "/desinventar-8.2-data");
@@ -71,9 +69,7 @@ define("VAR_DIR" , DATADIR);
 define("TMP_DIR" , TEMP);
 define("SMTY_DIR", CACHEDIR); // Smarty temp dir
 define("TMPM_DIR", CACHEDIR); // Mapserver temp dir
-
 $lg          = "spa";
-
 require_once(BASE . "/include/fb.php");
 require_once(BASE . "/include/usersession.class.php");
 require_once(BASE . "/include/diobject.class.php");
@@ -84,7 +80,6 @@ require_once(BASE . "/include/common.php");
 require_once(BASE . "/include/xml2array.php");
 /* SETTINGS */
 $time_start = microtime_float();
-
 $SessionId = uuid();
 if (MODE != "command") {
 	// Session Management
