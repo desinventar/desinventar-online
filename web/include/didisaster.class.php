@@ -253,12 +253,13 @@ class DIDisaster extends DIObject {
 	} //function
 
 	public static function existId($prmSession, $prmDisasterId) {
+		$iReturn = ERR_UNKNOWN_ERROR;
 		$bFound = 0;
 		$Query= "SELECT * FROM Disaster WHERE DisasterId='" . $prmDisasterId . "'";
 		foreach($prmSession->q->dreg->query($Query) as $row) {
-			$bFound = 1;
+			$iReturn = ERR_NO_ERROR;
 		}
-		return $bFound;
+		return $iReturn;
 	}
 } //class
 
