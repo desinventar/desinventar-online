@@ -264,9 +264,8 @@ class DIDisaster extends DIObject {
 			$this->set('RecordStatus', 'DRAFT');
 		}
 		
-		$g = new DIGeography($this->session);
 		$DisasterGeographyCode = $this->get('GeographyId');
-		$this->set('GeographyId', $g->getIdByCode($DisasterGeographyCode));
+		$this->set('GeographyId', DIGeography::getIdByCode($this->session, $DisasterGeographyCode));
 		
 		$EventId = $this->get('EventId');
 		$this->set('EventId', DIEvent::getIdByName($this->session, $EventId));
