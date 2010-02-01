@@ -16,7 +16,11 @@ class DIImport {
 		return $this->importFromCSV($FileName, $ObjectType, false);
 	}
 		
-	public function importFromCSV($FileName, $ObjectType, $doImport = true) {
+	public function importFromCSV($FileName, $ObjectType, $doImport = true, $prmMaxLines) {
+		$maxLines = 1000000;
+		if ($prmMaxLines > 0) {
+			$maxLines = $prmMaxLines;
+		}
 		$FLogName = '/tmp/di8import_' . $this->us->sSessionId . '.csv';
 		$FLogName = '/tmp/di8import.csv';
 		$cols = array();
@@ -27,7 +31,7 @@ class DIImport {
 		// Column Header Line
 		$values = fgetcsv($fh, 1000, ',');
 		$rowCount = 2;
-		while (! feof($fh) ) {
+		while ( (! feof($fh) ) && ($rowCount < $maxLines) ) {
 			$values = fgetcsv($fh, 1000, ',');
 			if (count($values) > 1) {
 				switch($ObjectType) {
@@ -92,8 +96,9 @@ class DIImport {
 							}
 						}
 					break;				
-				}
-			}
+				} // switch
+			} // if
+			$rowCount++;
 		} //while
 		fclose($fh);
 		fclose($flog);
