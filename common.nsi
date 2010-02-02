@@ -34,7 +34,7 @@ InstProgressFlags     smooth
 
 !define      NAME    "DesInventar"
 !define      MAJORVER "8"
-!define      MINORVER "2.0.69"
+!define      MINORVER "2.0.72"
 !define      PUBLISHER "Corporación OSSO - DesInventar Project http://www.desinventar.org"
 !define      VERSION "${MAJORVER}.${MINORVER}"
 !define      SHORTNAME "${NAME}${MAJORVER}"
