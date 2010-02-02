@@ -1,3 +1,6 @@
+* 2010-02-02 Jhon H. Caicedo <jhcaiced@desinventar.org> 8.2.0.72
+- Windows installer for this version created
+
 * 2010-01-01 Jhon H. Caicedo <jhcaiced@desinventar.org>
 - New year release started 8.2.0.68
 
