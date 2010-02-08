@@ -97,7 +97,7 @@
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="javascript:void(null);" onclick="showRegionInfo('SLV-1250695592-el_salvador_inventario_historico_de_desastres');">El Salvador</a>
+					<a href="javascript:void(null);" onclick="updateDatabaseList('SLV',true);">El Salvador</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
