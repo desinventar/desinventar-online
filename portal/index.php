@@ -41,6 +41,6 @@
 	$isdrlogo = 'logo-isdr.gif';
 	if ($lang == 'spa') { $isdrlogo = 'logo-eird.gif'; }
 	$t->assign("isdrlogo", $isdrlogo);
-
+	$t->assign('imgCANMap', 'subreg_can_' . $lang . '.png');
 	$t->display ("index.tpl");
 </script>
