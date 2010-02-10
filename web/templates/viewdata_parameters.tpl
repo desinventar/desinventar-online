@@ -52,15 +52,15 @@
 			</tr>
 		</table>
 		<br/><br/>
-		<b>{-#dorderby#-}</b><br/>
+		<b>{-#txtOrderBy#-}</b><br/>
 		<select id="_D+SQL_ORDER" name="_D+SQL_ORDER" class="fixw line" size="5">
-			<option value="D.DisasterBeginTime, V.EventName, G.GeographyFQName" selected>{-#ddeg#-}</option>
-			<option value="D.DisasterBeginTime, D.GeographyId, V.EventName">{-#ddge#-}</option>
-			<option value="G.GeographyFQName, V.EventName, D.DisasterBeginTime">{-#dged#-}</option>
-			<option value="V.EventName, D.DisasterBeginTime, G.GeographyFQName">{-#dedg#-}</option>
-			<option value="D.DisasterSerial">{-#dserial#-}</option>
-			<option value="D.RecordCreation">{-#dcreation#-}</option>
-			<option value="D.RecordUpdate">{-#dlastupd#-}</option>
+			<option value="D.DisasterBeginTime, V.EventName, G.GeographyFQName" selected>{-#txtOrderByDateEventGeography#-}</option>
+			<option value="D.DisasterBeginTime, D.GeographyId, V.EventName">{-#txtOrderByDateGeographyEvent#-}</option>
+			<option value="G.GeographyFQName, V.EventName, D.DisasterBeginTime">{-#txtOrderByGeographyEventDate#-}</option>
+			<option value="V.EventName, D.DisasterBeginTime, G.GeographyFQName">{-#txtOrderByEventDateGeography#-}</option>
+			<option value="D.DisasterSerial">{-#txtOrderBySerial#-}</option>
+			<option value="D.RecordCreation">{-#txtOrderByRecordCreation#-}</option>
+			<option value="D.RecordUpdate">{-#txtOrderByRecordUpdate#-}</option>
 		</select>
 		<input type="hidden" id="_D+FieldH" name="_D+Field" value="" />
 		<input type="hidden" id="_D+cmd" name="_D+cmd" value="result" />
