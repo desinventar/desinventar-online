@@ -2,13 +2,16 @@
 /*
  **********************************************
  DesInventar - http://www.desinventar.org  
- (c) 1998-2009 Corporacion OSSO
+ (c) 1998-2010 Corporación OSSO
  **********************************************
 */
 define('CONST_REGIONACTIVE', 1);
 define('CONST_REGIONPUBLIC', 2);
 define('FALSE', 0);
 define('TRUE' , 1);
+
+define('ERROR'  , 0);
+define('WARNING', 1);
 
 // Database File Locations
 // core.db - Users, Regions, Auths.. 

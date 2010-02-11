@@ -105,16 +105,22 @@ class DIDisaster extends DIObject {
 		$iReturn = $this->validateNotNull(-53, 'DisasterSerial');
 		$iReturn = $this->validateUnique(-54, 'DisasterSerial');
 		$iReturn = $this->validateNotNull(-55, 'DisasterBeginTime');
-		$iReturn = $this->validateNotNull(-56, 'DisasterSource');
+		// Warning
+		$iReturn = $this->validateNotNull(-56, 'DisasterSource',WARNING);
 		$iReturn = $this->validateNotNull(-57, 'RecordStatus');
 		$iReturn = $this->validateRef(-58, 'GeographyId', 'Geography', 'GeographyId');
 		$iReturn = $this->validateRef(-59, 'EventId', 'Event', 'EventId');
 		$iReturn = $this->validateRef(-60, 'CauseId', 'Cause', 'CauseId');
+		// Warning
 		$iReturn = $this->validateEffects($oResult);
 		
+		$iReturn = ERR_NO_ERROR;
 		if ($this->status->hasError()) {
 			$iReturn = ERR_UNKNOWN_ERROR;
+		} elseif ($this->status->hasWarning()) {
+			$iReturn = 0;
 		}
+		fb($iReturn);
 		return $iReturn;
 	}
 	
