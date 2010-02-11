@@ -465,13 +465,14 @@ class DIObject {
 		if ($this->getType($prmFieldName) == 'INTEGER') {
 			$quote = "";
 		}
-		$sQuery = "SELECT " . $FieldDst . " FROM " . $TableName . " WHERE " . $FieldDst . "=" . $quote . $this->get($prmFieldName) . $quote;
+		$Value = $this->get($prmFieldName);
+		$sQuery = "SELECT " . $FieldDst . " FROM " . $TableName . " WHERE " . $FieldDst . "=" . $quote . $Value .  $quote;
 		$iReturn = $ErrCode;
 		foreach($this->conn->query($sQuery) as $row) {
 			$iReturn = ERR_NO_ERROR;
 		}
 		if ($iReturn < 0) {
-			$this->status->addError($ErrCode, $prmFieldName . ' reference to table ' . $TableName . ' is invalid');
+			$this->status->addError($ErrCode, $prmFieldName . ' reference to table ' . $TableName . ' is invalid (' . $Value . ')');
 		}
 		return $iReturn;
 	}

@@ -20,5 +20,13 @@ class DIStatus {
 		$this->warning[] = $errMsg;
 		$this->status = $errCode;
 	}
+	
+	public function hasError() {
+		$bAnswer = false;
+		if ( (count($this->error) > 0) || (count($this->warning) > 0) ) {
+			$bAnswer = true;
+		}
+		return $bAnswer;
+	}
 } //class
 </script>
