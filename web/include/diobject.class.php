@@ -394,7 +394,7 @@ class DIObject {
 		return 1;
 	}
 
-	public function validateNotNull($ErrCode, $FieldName) {
+	public function validateNotNull($ErrCode, $FieldName, $isWarning=false) {
 		$iReturn = ERR_NO_ERROR;
 		$Value = $this->get($FieldName);
 		$FieldType = $this->getType($FieldName);
@@ -406,7 +406,7 @@ class DIObject {
 			}
 		}
 		if ($iReturn < 0) {
-			$this->status->addError($ErrCode, $FieldName . ' is null');
+			$this->status->addMsg($ErrCode, $FieldName . ' is null', $isWarning);
 		}
 		return $iReturn;	
 	}
@@ -419,7 +419,7 @@ class DIObject {
 			$iReturn = $ErrCode;
 		}
 		if ($iReturn < 0) {
-			$this->status->addError($ErrCode, ' Primary key is not unique');
+			$this->status->addMsg($ErrCode, ' Primary key is not unique');
 		}
 		return $iReturn;	
 	}
@@ -455,7 +455,7 @@ class DIObject {
 			}
 		}
 		if ($iReturn < 0) {
-			$this->status->addError($ErrCode, $prmFieldName . ' value is not unique.');
+			$this->status->addMsg($ErrCode, $prmFieldName . ' value is not unique.');
 		}
 		return $iReturn;	
 	}
@@ -472,7 +472,7 @@ class DIObject {
 			$iReturn = ERR_NO_ERROR;
 		}
 		if ($iReturn < 0) {
-			$this->status->addError($ErrCode, $prmFieldName . ' reference to table ' . $TableName . ' is invalid (' . $Value . ')');
+			$this->status->addMsg($ErrCode, $prmFieldName . ' reference to table ' . $TableName . ' is invalid (' . $Value . ')');
 		}
 		return $iReturn;
 	}
