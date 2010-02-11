@@ -78,17 +78,8 @@ class DIImport {
 							}
 							$iReturn = $o->validateUpdate();
 							if ($iReturn <= 0) {
-								//fb('Line : ' . $rowCount . ' Status : ' . $iReturn);
 								$o->status->getMsgList($rowCount, $o->get('DisasterSerial'), ERROR);
 								$o->status->getMsgList($rowCount, $o->get('DisasterSerial'), WARNING);
-								/*
-								if (count($o->status->error) > 0) {
-									print_r($o->status->error);
-								}
-								if (count($o->status->warning) > 0) {
-									print_r($o->status->warning);
-								}
-								*/
 							}
 							// DisasterSerial is duplicated but we insert/update anyway
 							if ($iReturn == 0) {

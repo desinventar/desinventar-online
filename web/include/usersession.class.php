@@ -72,9 +72,9 @@ class UserSession {
 
 	public function login($prmUserId, $prmUserPasswd) {
 		$iReturn = ERR_DEFAULT_ERROR;
-		$iReturn = $this->validateUser($prmUserId, $prmUserPasswd);
-		if ($iReturn > 0) {
-			$iReturn = $this->setUser($prmUserId);
+		$UserId = $this->validateUser($prmUserId, $prmUserPasswd);
+		if ($UserId != '') {
+			$iReturn = $this->setUser($UserId);
 		}
 		return $iReturn;
 	}
@@ -168,35 +168,19 @@ class UserSession {
 
 	// Validate a user/passwd pair against database
 	public function validateUser($prmUserId, $prmUserPasswd, $withCrypt=false) {
-		$iReturn = ERR_DEFAULT_ERROR;
-		
+		$UserId = '';
 		if (! $withCrypt) {
 			$prmUserPasswd = md5($prmUserPasswd);
 		}
-		
-		// This is an anonymous session
-		if ( ($prmUserId == "") && ($prmUserPasswd == ""))
-			$iReturn = ERR_NO_ERROR;
-		else {
-			$sQuery = "SELECT * FROM User WHERE (UserId='" . $prmUserId . "' OR UserNotes LIKE '%(UserName=" . $prmUserId . ")%') AND (UserPasswd='" . $prmUserPasswd . "')" ;
-			try {
-				foreach($this->q->core->query($sQuery) as $row) {
-					$iReturn = ERR_NO_ERROR;
-				}
-				/*
-				$result = $this->q->core->query($sQuery);
-				$iReturn = ERR_DEFAULT_ERROR;
-				while (($iReturn < 0) && ($row = $result->fetch(PDO::FETCH_OBJ))) {
-					if ($row->UserPasswd == $prmUserPasswd) {
-						$iReturn = ERR_NO_ERROR;
-					}
-				} // while
-				*/
-			} catch (Exception $e) {
-				showErrorMsg($e->getMessage());
-			} // catch
-		}
-		return $iReturn;
+		$sQuery = "SELECT * FROM User WHERE (UserId='" . $prmUserId . "' OR UserNotes LIKE '%(UserName=" . $prmUserId . ")%') AND (UserPasswd='" . $prmUserPasswd . "')" ;
+		try {
+			foreach($this->q->core->query($sQuery) as $row) {
+				$UserId = $row['UserId'];
+			}
+		} catch (Exception $e) {
+			showErrorMsg($e->getMessage());
+		} // catch
+		return $UserId;
 	} // valiteUser
 	
 	public function getUserFullName() {

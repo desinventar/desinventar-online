@@ -28,7 +28,6 @@ $t->assign("userid", $us->UserId);
 if (!empty($RegionId)) {
 	$us->open($RegionId);
 }
-
 switch ($cmd) {
 	case 'getversion':
 		print VERSION;
