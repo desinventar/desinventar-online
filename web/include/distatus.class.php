@@ -50,5 +50,19 @@ class DIStatus {
 		}
 		return $bAnswer;
 	}
+	
+	public function getMsgList($line, $Id, $isWarning=false) {
+		if (! $isWarning) {
+			$a = $this->error;
+			$label = 'ERROR';
+		} else {
+			$a = $this->warning;
+			$label = 'WARNING';
+		}
+		foreach($a as $k => $v) {
+			$line = sprintf('"%s","%s","%s","%s","%s"', $label,$line, $Id, $k, $v);
+			print $line . "\n";			
+		}
+	}
 } //class
 </script>
