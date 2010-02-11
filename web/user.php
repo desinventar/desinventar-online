@@ -159,7 +159,7 @@ switch ($cmd) {
 	break;
 	case "updatepasswd":
 		// Check if password is correct (ask to dicore). if is OK show dialog to change it.
-		if (iserror($us->validateUser($us->UserId, $_POST['UserPasswd'],true))) {
+		if ($us->validateUser($us->UserId, $_POST['UserPasswd'],true) == '') {
 			print "ERRORPASSWD";
 		} else {
 			$us->updateUserPasswd($us->UserId, $_POST['UserPasswd2']);
@@ -168,7 +168,7 @@ switch ($cmd) {
 	break;
 	case "chkpasswd":
 		// Check if password is correct (ask to dicore). if is OK show dialog to change it.
-		if (!iserror($us->validateUser($us->UserId, $_GET['UserPasswd']))) {
+		if ($us->validateUser($us->UserId, $_GET['UserPasswd']) != '') {
 			$t->assign("ctl_chkpasswd", true);
 			$t->assign("usri", form2user($us->getUserInfo($us->UserId)));
 			$t->display("user.tpl");
