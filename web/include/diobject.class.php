@@ -424,7 +424,7 @@ class DIObject {
 		return $iReturn;	
 	}
 	
-	public function validateUnique($ErrCode, $prmFieldName) {
+	public function validateUnique($ErrCode, $prmFieldName, $isWarning=false) {
 		$iReturn = ERR_NO_ERROR;
 		$quote1 = '"';
 		if ($this->getType($prmFieldName) == 'INTEGER') { $quote1 = ""; }
@@ -455,7 +455,7 @@ class DIObject {
 			}
 		}
 		if ($iReturn < 0) {
-			$this->status->addMsg($ErrCode, $prmFieldName . ' value is not unique.');
+			$this->status->addMsg($ErrCode, $prmFieldName . ' value is not unique.', $isWarning);
 		}
 		return $iReturn;	
 	}

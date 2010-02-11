@@ -33,6 +33,7 @@ class DIImport {
 		$rowCount = 2;
 		while ( (! feof($fh) ) && ($rowCount < $maxLines) ) {
 			$values = fgetcsv($fh, 1000, ',');
+			$rowCount++;
 			if (count($values) > 1) {
 				switch($ObjectType) {
 					case DI_EVENT:
@@ -70,36 +71,39 @@ class DIImport {
 						$o = new DIDisaster($this->us);
 						$iReturn = $o->importFromCSV($cols, $values);
 						if ($iReturn > 0) {
-							$iReturn = DIDisaster::existId($this->us, $o->get('DisasterId'));
-							if ($iReturn < 0) {
-								if ($doImport) {
-									$iReturn = $o->insert();
-									if ($iReturn < 0) {
-										fb('insert ' . $rowCount . ' ' . $iReturn);
-										print_r($o->status->error);
-									}
-								} else {
-									$iReturn = $o->validateCreate();
+							$bExistId = DIDisaster::existId($this->us, $o->get('DisasterId'));
+							if ($bExistId < 0) {
+								// Id doesn't exist, insert record
+								$iReturn = $o->validateCreate();
+							}
+							$iReturn = $o->validateUpdate();
+							if ($iReturn <= 0) {
+								fb('Line : ' . $rowCount . ' Status : ' . $iReturn);
+								if (count($o->status->error) > 0) {
+									print_r($o->status->error);
 								}
-							} else {
-								if ($doImport) {
-									$iReturn = $o->update();
-									if ($iReturn < 0) {
-										fb('update ' . $rowCount . ' ' . $iReturn);
-										print_r($o->status->error);
-									}
-								} else {
-									$iReturn = $o->validateUpdate();
+								if (count($o->status->warning) > 0) {
+									print_r($o->status->warning);
 								}
 							}
-							if ($iReturn > 0) {
-								$e = new DIEEData($this->us);
-								$e->set('DisasterId', $o->get('DisasterId'));
+							// DisasterSerial is duplicated but we insert/update anyway
+							if ($iReturn == 0) {
+								if (! $o->status->hasWarning(-54)) {
+									// With warnings, insert/update as DRAFT
+									$o->set('RecordStatus','DRAFT');
+								}
+							}
+							if ($iReturn >= 0) {
+								// insert/update datacard
 								if ($doImport) {
-									if ($iReturn > 0) {
-										$iReturn = $e->insert();
+									$e = new DIEEData($this->us, $o->get('DisasterId'));
+									$e->set('DisasterId', $o->get('DisasterId'));
+									if ($bExistId > 0) {
+										$o->update(false);
+										$e->update();
 									} else {
-										$iReturn = $e->update();
+										$o->insert(false);
+										$e->insert();
 									}
 								}
 							}
@@ -107,7 +111,6 @@ class DIImport {
 					break;				
 				} // switch
 			} // if
-			$rowCount++;
 		} //while
 		fclose($fh);
 		fclose($flog);

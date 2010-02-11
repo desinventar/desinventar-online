@@ -29,18 +29,24 @@ class DIStatus {
 		$this->status = 0;
 	}
 	
-	public function hasError() {
+	public function hasError($errCode=0) {
 		$bAnswer = false;
 		if (count($this->error) > 0) {
 			$bAnswer = true;
 		}
+		if ($errCode != 0) {
+			$bAnswer = array_key_exists($errCode, $this->error);
+		}
 		return $bAnswer;
 	}
 
-	public function hasWarning() {
+	public function hasWarning($errCode=0) {
 		$bAnswer = false;
 		if (count($this->warning) > 0) {
 			$bAnswer = true;
+		}
+		if ($errCode != 0) {
+			$bAnswer = array_key_exists($errCode, $this->warning);
 		}
 		return $bAnswer;
 	}
