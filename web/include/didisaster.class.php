@@ -111,6 +111,10 @@ class DIDisaster extends DIObject {
 		$iReturn = $this->validateRef(-59, 'EventId', 'Event', 'EventId');
 		$iReturn = $this->validateRef(-60, 'CauseId', 'Cause', 'CauseId');
 		$iReturn = $this->validateEffects($oResult);
+		
+		if ($this->status->hasError()) {
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
 		return $iReturn;
 	}
 	
@@ -233,11 +237,19 @@ class DIDisaster extends DIObject {
 		$DisasterGeographyCode = $this->get('GeographyId');
 		$this->set('GeographyId', DIGeography::getIdByCode($this->session, $DisasterGeographyCode));
 		
-		$EventId = $this->get('EventId');
-		$this->set('EventId', DIEvent::getIdByName($this->session, $EventId));
+		$DI6EventId = $this->get('EventId');
+		$EventId = DIEvent::getIdByName($this->session, $DI6EventId);
+		if ($EventId == '') {
+			$EventId = $DI6EventId;
+		}
+		$this->set('EventId', $EventId);
 		
-		$CauseId = $this->get('CauseId');
-		$this->set('CauseId', DICause::getIdByName($this->session, $CauseId));
+		$DI6CauseId = $this->get('CauseId');
+		$CauseId = DICause::getIdByName($this->session, $DI6CauseId);
+		if ($CauseId == '') {
+			$CauseId = $DI6CauseId;
+		}
+		$this->set('CauseId', $CauseId);
 		
 		//2009-07-25 Save fechapor/fechafec in EffectNotes
 		$this->set('EffectNotes', 
