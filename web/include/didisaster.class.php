@@ -103,7 +103,7 @@ class DIDisaster extends DIObject {
 	public function validateUpdate() {
 		$iReturn = parent::validateUpdate();
 		$iReturn = $this->validateNotNull(-53, 'DisasterSerial');
-		$iReturn = $this->validateUnique(-54, 'DisasterSerial');
+		$iReturn = $this->validateUnique(-54, 'DisasterSerial', WARNING);
 		$iReturn = $this->validateNotNull(-55, 'DisasterBeginTime');
 		// Warning
 		$iReturn = $this->validateNotNull(-56, 'DisasterSource',WARNING);
@@ -112,7 +112,7 @@ class DIDisaster extends DIObject {
 		$iReturn = $this->validateRef(-59, 'EventId', 'Event', 'EventId');
 		$iReturn = $this->validateRef(-60, 'CauseId', 'Cause', 'CauseId');
 		// Warning
-		$iReturn = $this->validateEffects($oResult);
+		$iReturn = $this->validateEffects(WARNING);
 		
 		$iReturn = ERR_NO_ERROR;
 		if ($this->status->hasError()) {
@@ -120,16 +120,12 @@ class DIDisaster extends DIObject {
 		} elseif ($this->status->hasWarning()) {
 			$iReturn = 0;
 		}
-		fb($iReturn);
 		return $iReturn;
 	}
 	
-	public function validateEffects(&$oResult=null) {
+	public function validateEffects($isWarning=false) {
 		$bFound = false;
 		$iReturn = ERR_NO_ERROR;
-		if (!is_null($oResult)) {
-			$oResult['Status'] = $iReturn;
-		}
 		foreach (split(',',$this->sEffectDef) as $sField) {
 			$oItem = split('/', $sField);
 			$sFieldName  = $oItem[0];
@@ -152,7 +148,7 @@ class DIDisaster extends DIObject {
 		} //foreach
 		if ($bFound == false) {
 			$iReturn = -61;
-			$this->status->addWarning($iReturn, ' Datacard without effects');
+			$this->status->addMsg($iReturn, ' Datacard without effects', $isWarning);
 		}
 		return $iReturn;
 	}
@@ -240,8 +236,12 @@ class DIDisaster extends DIObject {
 			$this->set('RecordStatus', 'DRAFT');
 		}
 		
-		$DisasterGeographyCode = $this->get('GeographyId');
-		$this->set('GeographyId', DIGeography::getIdByCode($this->session, $DisasterGeographyCode));
+		$DI6GeographyCode = $this->get('GeographyId');
+		$GeographyId = DIGeography::getIdByCode($this->session, $DI6GeographyCode);
+		if ($GeographyId == '') {
+			$GeographyId = $DI6GeographyCode;
+		}
+		$this->set('GeographyId', $GeographyId);
 		
 		$DI6EventId = $this->get('EventId');
 		$EventId = DIEvent::getIdByName($this->session, $DI6EventId);
