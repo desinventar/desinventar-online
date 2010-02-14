@@ -1,3 +1,7 @@
+* 2010-02-14 Jhon H. Caicedo <jhcaiced@desinventar.org> 8.2.0.74
+- Disabled check for VC2008, we need a more reliable way to test if
+  this package is installed on 32 and 64 bit systems.
+
 * 2010-02-02 Jhon H. Caicedo <jhcaiced@desinventar.org> 8.2.0.72
 - Windows installer for this version created
 
