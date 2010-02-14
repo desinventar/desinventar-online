@@ -34,7 +34,7 @@ InstProgressFlags     smooth
 
 !define      NAME    "DesInventar"
 !define      MAJORVER "8"
-!define      MINORVER "2.0.73"
+!define      MINORVER "2.0.74"
 !define      PUBLISHER "Corporación OSSO - DesInventar Project http://www.desinventar.org"
 !define      VERSION "${MAJORVER}.${MINORVER}"
 !define      SHORTNAME "${NAME}${MAJORVER}"
@@ -134,17 +134,17 @@ FunctionEnd
 
 ; Callback Functions
 Function .onInit
-    !insertmacro MUI_LANGDLL_DISPLAY
+         !insertmacro MUI_LANGDLL_DISPLAY
 
-	call checkVC90Redist
-	pop $hasVCRT2008
-	push $hasVCRT2008
-	pop $bContinue
-	${if} $bContinue < 0
-	    MessageBox MB_OK|MB_ICONSTOP "Cannot locate Microsoft Visual C++ 2008 Redistributable Package. Please install this package first." IDYES NoAbort
-	    Abort ;
-	NoAbort:
-	${endif}
+         ;call checkVC90Redist
+         ;pop $hasVCRT2008
+         ;push $hasVCRT2008
+         ;pop $bContinue
+         ;${if} $bContinue < 0
+         ;      MessageBox MB_OK|MB_ICONSTOP "Cannot locate Microsoft Visual C++ 2008 Redistributable Package. Please install this package first." IDYES NoAbort
+	 ;      Abort ;
+;NoAbort:
+	;${endif}
 FunctionEnd
 
 ; Installer Sections
