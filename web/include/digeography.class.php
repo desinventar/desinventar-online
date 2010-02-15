@@ -209,8 +209,7 @@ class DIGeography extends DIObject {
 				}
 			}
 		}
-		$oReturn['Status'] = $iReturn;
-		return $oReturn;
+		return $iReturn;
 	}
 	
 	public function validateDelete() {
@@ -220,8 +219,7 @@ class DIGeography extends DIObject {
 	}
 	
 	public function importFromCSV($cols, $values) {
-		$oReturn = parent::importFromCSV($cols, $values);
-		$iReturn = ERR_NO_ERROR;
+		$iReturn = parent::importFromCSV($cols, $values);
 		$this->set('GeographyLevel', $values[0]);
 		$this->set('GeographyCode',  $values[1]);
 		$this->set('GeographyName',  $values[2]);
@@ -244,11 +242,7 @@ class DIGeography extends DIObject {
 			$this->setGeographyId($ParentGeographyId);
 			$this->set('GeographyFQName', $this->buildGeographyFQName());
 		}
-		if ( (count($oReturn['Error']) > 0) || (count($oReturn['Warning']) > 0) ) {
-			$iReturn = ERR_UNKNOWN_ERROR;
-		}
-		$oReturn['Status'] = $iReturn;
-		return $oReturn;
+		return $iReturn;
 	}
 	
 	public static function moveNodeTo($prmSession,$prmGeographyIdPrefix,$prmNewGeographyIdPrefix,$prmGeographyCodePrefix,$prmNewGeographyCodePrefix,$withChildren) {

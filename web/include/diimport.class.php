@@ -60,7 +60,7 @@ class DIImport {
 					case DI_GEOGRAPHY:
 						$o = new DIGeography($this->us);
 						$r = $o->importFromCSV($cols, $values);
-						if ($r['Status'] > 0) {
+						if ($r > 0) {
 							$answer = $o->insert();
 						}
 					break;
