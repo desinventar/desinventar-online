@@ -149,5 +149,4 @@ if (isset($post['page']) || isset($post['_D+cmd'])) {
 $time_end = microtime_float();
 $t->assign ("time", $time_end - $time_start);
 $t->display ("data.tpl");
-
 </script>
