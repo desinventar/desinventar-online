@@ -678,13 +678,14 @@ class Query extends PDO {
 		$e['Eff'] = "";
 		$e['Item'] = "";
 		// 2009-12-30 (jhcaiced) Try to separate query in logical units
-		$QueryPeriod           = '';
-		$QueryEvent            = '';
-		$QueryCause            = '';
-		$QueryGeography        = '';
-		$QueryDisasterSerial   = '';
-		$QueryDisasterSerialOp = ' AND ';
-		$QueryCustom           = '';
+		$QueryItem   = array();
+		$QueryItem['Period']    = '';
+		$QueryItem['Event']     = '';
+		$QueryItem['Cause']     = '';
+		$QueryItem['Geography'] = '';
+		$QueryItem['Custom']    = '';
+		$QueryDisasterSerial    = '';
+		$QueryDisasterSerialOp  = ' AND ';
 
 		// Remove parameters from list of options...
 		foreach($dat as $Key => $Value) {
@@ -694,51 +695,51 @@ class Query extends PDO {
 		}		
 		// Add Custom Query..
 		if (isset($dat['__CusQry']) && !empty($dat['__CusQry'])) {
-			$QueryCustom = trim($dat['__CusQry']);
+			$QueryItem['Custom'] = trim($dat['__CusQry']);
 		}
 		// Process EEFields...
 		$First = true;
 		$EEQuery = '';
 		foreach($dat['EEFieldQuery'] as $EEField => $QueryParams) {
 			if (array_key_exists('Type', $QueryParams)) {
-				$QueryItem = '';
+				$QueryTmp = '';
 				switch($QueryParams['Type']) {
 					case 'INTEGER':
 						switch($QueryParams['Operator']) {
 							case '>=':
 								if (is_numeric($QueryParams['Value2'])) {
-									$QueryItem = 'E.' . $EEField . $QueryParams['Operator'] . $QueryParams['Value2'];
+									$QueryTmp = 'E.' . $EEField . $QueryParams['Operator'] . $QueryParams['Value2'];
 								}
 							break;
 							case '<=':
 								if (is_numeric($QueryParams['Value1'])) {
-									$QueryItem = 'E.' . $EEField . $QueryParams['Operator'] . $QueryParams['Value1'];
+									$QueryTmp = 'E.' . $EEField . $QueryParams['Operator'] . $QueryParams['Value1'];
 								}
 							break;
 							case '=':
 								if (is_numeric($QueryParams['Value1'])) {
-									$QueryItem = 'E.' . $EEField . $QueryParams['Operator'] . $QueryParams['Value1'];
+									$QueryTmp = 'E.' . $EEField . $QueryParams['Operator'] . $QueryParams['Value1'];
 								}
 							break;
 							case '-3':
 								if (is_numeric($QueryParams['Value1']) && is_numeric($QueryParams['Value2'])) {
-									$QueryItem = '(' . 'E.' . $EEField . '>=' . $QueryParams['Value1'] . ' AND ' . 'E.' . $EEField . '<=' . $QueryParams['Value2'] . ')';
+									$QueryTmp = '(' . 'E.' . $EEField . '>=' . $QueryParams['Value1'] . ' AND ' . 'E.' . $EEField . '<=' . $QueryParams['Value2'] . ')';
 								}
 							break;
 						}
 					break;
 					case 'TEXT':
 						if ($QueryParams['Value'] != '') {
-							$QueryItem = 'E.' . $EEField . " LIKE '" . $QueryParams['Value'] . "'";
+							$QueryTmp = 'E.' . $EEField . " LIKE '" . $QueryParams['Value'] . "'";
 						}
 					break;
 				}
-				if ($QueryItem != '') {
+				if ($QueryTmp != '') {
 					if (! $First) {
 						$EEQuery .= ' AND ';
 					}
 					$First = false;
-					$EEQuery .= $QueryItem;
+					$EEQuery .= $QueryTmp;
 				}
 			}
 		}
@@ -777,31 +778,31 @@ class Query extends PDO {
 						$dd = !empty($v[2])? $v[2] : "31";
 						$endt = sprintf("%04d-%02d-%02d", $aa, $mm, $dd);
 					} elseif ($k == "D.EventId") {
-						$QueryEvent = '';
+						$QueryItem['Event'] = '';
 						$bFirst = true;
 						foreach ($v as $i) {
 							if (! $bFirst) {
-								$QueryEvent .= ' OR ';
+								$QueryItem['Event'] .= ' OR ';
 							}
-							$QueryEvent .= "$k = '$i'";
+							$QueryItem['Event'] .= "$k = '$i'";
 							$bFirst = false;
 						}
 					} elseif ($k == "D.CauseId") {
-						$QueryCause = '';
+						$QueryItem['Cause'] = '';
 						$bFirst = true;
 						foreach ($v as $i) {
 							if (! $bFirst) {
-								$QueryCause .= ' OR ';
+								$QueryItem['Cause'] .= ' OR ';
 							}
-							$QueryCause .= "$k = '$i'";
+							$QueryItem['Cause'] .= "$k = '$i'";
 							$bFirst = false;
 						}
 					} elseif ($k == "D.GeographyId") {
 						$bFirst = true;
-						$QueryGeography = '';
+						$QueryItem['Geography'] = '';
 						foreach ($v as $i) {
 							if (! $bFirst) {
-								$QueryGeography .= ' OR ';
+								$QueryItem['Geography'] .= ' OR ';
 							}
 							// Restrict to childs elements only
 							$hasChildsSelected = false;
@@ -812,7 +813,7 @@ class Query extends PDO {
 								}
 							}
 							if (! $hasChildsSelected) {
-								$QueryGeography .= "$k LIKE '$i%'";
+								$QueryItem['Geography'] .= "$k LIKE '$i%'";
 								$bFirst = false;
 							}
 						} //foreach
@@ -894,7 +895,7 @@ class Query extends PDO {
 			if (!isset($endt)) {
 				$endt = "9999-12-31"; //$datedb[1];
 			}
-			$QueryPeriod = "D.DisasterBeginTime BETWEEN '$begt' AND '$endt'";
+			$QueryItem['Period'] = "D.DisasterBeginTime BETWEEN '$begt' AND '$endt'";
 			//$e['DisasterTime'] = "(D.DisasterBeginTime BETWEEN '$begt' AND '$endt')";
 		}
 		$lan = "spa"; // select from local languages of database..
@@ -921,42 +922,31 @@ class Query extends PDO {
 				}
 			}
 		}
-
-		if ($QueryRecordStatus != '') {
-			$WhereQuery .= ' AND (' . $QueryRecordStatus . ') ';
-		}
 		
-		if ($QueryPeriod != '') {
-			$WhereQuery .= ' AND (' . $QueryPeriod . ') ';
-		}
-
-		if ($QueryGeography != '') {
-			$WhereQuery .= ' AND (' . $QueryGeography . ') ';
-		}
-
-		if ($QueryEvent != '') {
-			$WhereQuery .= ' AND (' . $QueryEvent . ') ';
-		}
-
-		if ($QueryCause != '') {
-			$WhereQuery .= ' AND (' . $QueryCause . ') ';
-		}
-
-		if ($QueryDisasterSerial != '') {
-			$WhereQuery .= ' ' . $QueryDisasterSerialOp . ' (' . $QueryDisasterSerial . ') ';
-		}
-		
-		if (($WhereQuery1 != '') || ($EEQuery != '') || ($QueryCustom != '') ) {
-			if ($WhereQuery1 != '') {
-				$WhereQuery .= ' AND (' . $WhereQuery1 . ')';
+		$bFirst = true;
+		$WhereQuery2 = '';
+		foreach ($QueryItem as $QueryKey => $QueryValue) {
+			if ($QueryValue != '') {
+				if (! $bFirst) {
+					$WhereQuery2 .= ' AND ';
+				}
+				$bFirst = false;
+				$WhereQuery2 .= ' (' . $QueryValue . ')';
 			}
-			if ($EEQuery != '') {
-				$WhereQuery .= ' AND (' . $EEQuery . ') ';
+		}
+
+		if ( ($WhereQuery2 != '') || ($QueryDisasterSerial != '') ) {
+			$WhereQuery .= ' AND (';
+			if ($WhereQuery2 != '') {
+				$WhereQuery .= ' (' . $WhereQuery2 . ') ';
+				if ($QueryDisasterSerial != '') {
+					$WhereQuery .= ' ' . $QueryDisasterSerialOp;
+				}
 			}
-			if ($QueryCustom != '') {
-				$WhereQuery .= ' AND (' . $QueryCustom. ') ';
+			if ($QueryDisasterSerial != '') {
+				$WhereQuery .= ' (' . $QueryDisasterSerial . ') ';
 			}
-			//$WhereQuery .= ')';
+			$WhereQuery .= ')';
 		}
     	return $WhereQuery;
 	}
