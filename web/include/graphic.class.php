@@ -65,8 +65,9 @@ class Graphic {
 						$tvl[$i][$j] = $this->data[$sY1AxisLabel][$k];
 				}
 			}
-			foreach ($tvl as $kk=>$ii)
+			foreach ($tvl as $kk=>$ii) {
 				$val[$kk] = $this->completeTimeSeries($opc, $ii, $q);
+			}
 			$lbl = array_keys($val[$kk]);
 			$acol = count(array_unique($this->data[$sY2AxisLabel]));
 		} else {
@@ -129,27 +130,6 @@ class Graphic {
 		$ImgMarginTop    = 30;
 		$ImgMarginRight  = 20;
 		$ImgMarginBottom = 85;
-		/*
-		if ($gType == "TEMPO" || $gType == "2TEMPO") {
-			$ImgMarginRight = 20;			// right limit
-			if ($gType == '2TEMPO') {
-				$ImgMarginRight = 200;
-			}
-			switch($this->sPeriod) {
-				case "YEAR":		$ImgMarginBottom = 50;	break;
-				case "YWEEK":		$ImgMarginBottom = 65;	break;
-				case "YMONTH":		$ImgMarginBottom = 65;	break;
-				case "YDAY":		$ImgMarginBottom = 85;	break;
-				default:			$ImgMarginBottom = 50;	break;
-			}
-		} elseif ($gType == "XTEMPO") {
-			$ImgMarginRight = 160;		// right limit
-			$ImgMarginBottom = 50;		// bottom limit
-		} else {
-			$ImgMarginRight  = 20;		// right limit
-			$ImgMarginBottom = 30;		// bottom limit more space to xlabels
-		}
-		*/
 		// calculate graphic size
 		$wx = 980;
 		$hx = 515;
@@ -404,8 +384,8 @@ class Graphic {
 		// Get range of dates from Database
 		$qini = $opc['D_DisasterBeginTime'];
 		$qend = $opc['D_DisasterEndTime'];
-		$ydb = $q->getDateRange();
-		if (isset($qini[0])) {
+		$ydb = $q->getDateRange($opc['D_RecordStatus']);
+		if ( (isset($qini[0])) && ($qini[0] != '') ) {
 			// If no month/day value specified, set default date to YEAR/01/01 or start of month
 			if ($qini[1] == '') { $qini[1] = '1'; }
 			if ($qini[2] == '') { $qini[2] = '1'; }
@@ -413,13 +393,13 @@ class Graphic {
 		} else {
 			$dateini = $ydb[0];
 		}
-		if (isset($qend[0])) {
+		if ( (isset($qend[0])) && ($qend[0] != '') ) {
 			// If no month/day value specified in query, set default to YEAR/12/31 or end of month
 			if ($qend[1] == '') { $qend[1] = '12'; }
 			if ($qend[2] == '') { $qend[2] = DIDate::getDaysOfMonth($qend[0],$qend[1]); }
 			$dateend = sprintf("%04d-%02d-%02d", $qend[0], $qend[1], $qend[2]);
 		} else {
-			$dateend = $ydb[0];
+			$dateend = $ydb[1];
 		}
 		// Calculate Start Date/EndDate, from Database or From Query
 		// Delete initial columns with null values (MONTH,DAY=0)
