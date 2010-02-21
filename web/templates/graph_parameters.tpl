@@ -170,7 +170,7 @@
 							<b onMouseOver="showtip('{-$dic.GraphPeriod[2]-}');">{-$dic.GraphPeriod[0]-}
 						</td>
 						<td>
-							<select id="_G+Period" name="_G+Period" onChange="$('_G+Stat').value = '';" class="line"
+							<select id="graphParamPeriod" name="_G+Period" class="line"
 								onMouseOver="showtip('{-$dic.GraphPeriod[2]-}');">
 								<option value=""></option>
 								<option value="YEAR" selected>{-#gperannual#-}</option>
@@ -183,7 +183,7 @@
 					<tr>
 						<td colspan="2">
 							<b onMouseOver="showtip('{-$dic.GraphSeaHistogram[2]-}');">{-#GHISTOANNUAL#-}</b>
-							<select id="_G+Stat" name="_G+Stat" onChange="$('_G+Period').value = '';" class="line"
+							<select id="graphParamStat" name="_G+Stat" class="line"
 								onMouseOver="showtip('{-$dic.GraphSeaHistogram[2]-}');">
 								<option value=""></option>
 								<option value="DAY">{-#gseaday#-}</option>
