@@ -191,15 +191,18 @@ if (isset($post['_M+cmd'])) {
 			imagedestroy($im);
 		}
 	}
-	else
+	else {
 		$t->assign ("ctl_showres", true);
-}
-elseif (isset($get['cmd']) && $get['cmd'] == "getkml") {
+	}
+} elseif (isset($get['cmd']) && $get['cmd'] == "getkml") {
 	// Send KML file - GoogleEarth
 	header("Content-type: text/kml");
 	header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $reg) ."_ThematicMap.kml");
 	$m = new Maps($us->q, $reg, null, null, null, null, null, null, "KML");
 	echo $m->printKML();
+	$fh = fopen('/tmp/map.kml','w+');
+	fputs($fh, $m->printKML());
+	fclose($fh);
 	exit();
 }
 

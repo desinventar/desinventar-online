@@ -4,8 +4,7 @@
  (c) 1998-2009 Corporacion OSSO
 */
 
-class Maps
-{
+class Maps {
 	public $fpath = "";
 	public $url = "";
 	public $kml = "";	
@@ -338,15 +337,39 @@ class Maps
       return false;
   }
   
-  function generateKML($q, $reg, $info) {
-    $fp = urlencode(TMPM_DIR ."/di8ms_$reg-". session_id() .".map");
-    $dinf = $q->getDBInfo($lg);
-    $regn = $dinf['RegionLabel|'];
-    $desc = $dinf['RegionDesc'];
-    $lon = (int) (($dinf['GeoLimitMinX'] + $dinf['GeoLimitMaxX']) / 2);
-    $lat = (int) (($dinf['GeoLimitMinY'] + $dinf['GeoLimitMaxY']) / 2);
-    // print info in kml
-    $xml = 
+	function generateKML($q, $reg, $info) {
+		$fp = urlencode(TMPM_DIR ."/di8ms_$reg-". session_id() .".map");
+		$dinf = $q->getDBInfo($lg);
+		$regn = $dinf['RegionLabel|'];
+		$desc = $dinf['RegionDesc'];
+		
+		$MinX = $dinf['GeoLimitMinX|'];
+		$MaxX = $dinf['GeoLimitMaxX|'];
+		$MinY = $dinf['GeoLimitMinY|'];
+		$MaxY = $dinf['GeoLimitMaxY|'];
+
+		// Calculate Center of Map
+		$lon =($MinX + $MaxX) / 2;
+		$lat =($MinY + $MaxY) / 2;
+
+		
+		// 2010-02-20 (jhcaiced) Try to adjust eye altitude using the map coordinates...
+		$AreaX = abs($MaxX - $MinX);
+		$AreaY = abs($MaxY - $MinY);
+		if ($AreaX > $AreaY) {
+			$EyeAltitude = $AreaX * 10000;
+		} else {	
+			$EyeAltitude = $AreaY * 10000;
+		}
+		/*
+		fb($MinX . ' ' . $MaxX);
+		fb($MinY . ' ' . $MaxY);
+		fb($AreaX . ' ' . $AreaY);
+		fb($EyeAltitutde);
+		*/
+
+		// print info in kml
+		$xml = 
 '<?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.2">
 <Folder>
@@ -362,7 +385,7 @@ class Maps
 		<longitude>'. $lon .'</longitude>
 		<latitude>'. $lat .'</latitude>
 		<altitude>0</altitude>
-		<range>3000000</range>
+		<range>' . $EyeAltitude . '</range>
 		<tilt>0.5</tilt>
 		<heading>-5.5</heading>
 	</LookAt>
@@ -405,12 +428,11 @@ class Maps
 	</ScreenOverlay>
 </Folder>
 </kml>';
-    return $xml;
-  }
-  
-  function printKML() {
-    return $this->kml;
-  }
-}
+		return $xml;
+	} //function
 
+	function printKML() {
+		return $this->kml;
+	} //function
+} //class
 </script>
