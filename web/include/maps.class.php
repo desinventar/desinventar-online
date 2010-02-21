@@ -356,18 +356,12 @@ class Maps {
 		// 2010-02-20 (jhcaiced) Try to adjust eye altitude using the map coordinates...
 		$AreaX = abs($MaxX - $MinX);
 		$AreaY = abs($MaxY - $MinY);
+		$EyeAltitude = 300000;
 		if ($AreaX > $AreaY) {
-			$EyeAltitude = $AreaX * 10000;
+			$EyeAltitude = intval($AreaX * 110000);
 		} else {	
-			$EyeAltitude = $AreaY * 10000;
+			$EyeAltitude = intval($AreaY * 110000);
 		}
-		/*
-		fb($MinX . ' ' . $MaxX);
-		fb($MinY . ' ' . $MaxY);
-		fb($AreaX . ' ' . $AreaY);
-		fb($EyeAltitutde);
-		*/
-
 		// print info in kml
 		$xml = 
 '<?xml version="1.0" encoding="UTF-8"?>
