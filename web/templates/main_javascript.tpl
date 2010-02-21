@@ -572,10 +572,10 @@
 				disabAxis2();
 				enab($('_G+K_pie'));
 				$('_G+Kind').value = "PIE";
-				$('_G+Period').value = "";
-				disab($('_G+Period'));
-				$('_G+Stat').value = "";
-				disab($('_G+Stat'));
+				$('graphParamPeriod').value = "";
+				disab($('graphParamPeriod'));
+				$('graphParamStat').value = "";
+				disab($('graphParamStat'));
 				disab($('_G+Scale'));
 				disab($('_G+M_accu'));
 				disab($('_G+M_over'));
@@ -584,9 +584,9 @@
 				//enab($('_G+K_line'));
 				disab($('_G+K_pie'));
 				$('_G+Kind').value = "BAR";
-				enab($('_G+Period'));
-				enab($('_G+Stat'));
-				$('_G+Period').value = 'YEAR';
+				enab($('graphParamPeriod'));
+				$('graphParamPeriod').value = 'YEAR';
+				enab($('graphParamStat'));
 				enab($('_G+Scale'));
 				var histt = $(fld).value;
 				if (histt.substr(19, 1) == "|") {
