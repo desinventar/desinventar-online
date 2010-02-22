@@ -550,15 +550,15 @@
 		}
 		
 		function disabAxis2() {
-			$('_G+Field2').value = "";
-			disab($('_G+Field2'));
+			jQuery('#graphParamField2').val('');
+			disab($('graphParamField2'));
 			disab($('_G+Scale2'));
 			disab($('_G+Data2'));
 			disab($('_G+Mode2'));
 		}
 		
 		function enabAxis2() {
-			enab($('_G+Field2'));
+			enab($('graphParamField2'));
 			enab($('_G+Scale2'));
 			enab($('_G+Data2'));
 			enab($('_G+Mode2'));
@@ -566,9 +566,8 @@
 		
 		function grpSelectbyType(fld) {
 			var grp = $(fld).value;
-			// Comparatives
 			if (grp == "D.EventId" || grp == "D.CauseId" || grp.substr(0,13) == "D.GeographyId") {
-				//disab($('_G+K_line'));
+				// Comparatives
 				disabAxis2();
 				enab($('_G+K_pie'));
 				$('_G+Kind').value = "PIE";
@@ -581,7 +580,7 @@
 				disab($('_G+M_over'));
 				enab($('_G+D_perc'));
 			} else { 
-				//enab($('_G+K_line'));
+				// Histograms
 				disab($('_G+K_pie'));
 				$('_G+Kind').value = "BAR";
 				enab($('graphParamPeriod'));
@@ -600,11 +599,19 @@
 				}
 				disab($('_G+D_perc'));
 			}
-			if (fld == "_G+TypeH")
+			if (fld == "_G+TypeH") {
 				$('_G+TypeC').value = "";
-			if (fld == "_G+TypeC")
+			}
+			if (fld == "_G+TypeC") {
 				$('_G+TypeH').value = "";
+			}
 			$('_G+Type').value = grp;
+			// For other graphics different from Temporal Histogram, the second variable should be disabled
+			if (grp != 'D.DisasterBeginTime') {
+				jQuery('#graphParamField2').removeAttr('disabled');
+				jQuery('#graphParamField2').val('');
+				jQuery('#graphParamField2').attr('disabled',true);
+			}
 		} //function
 		
 		function grpSelectbyKind() {

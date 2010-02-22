@@ -56,8 +56,9 @@ if ($GraphCommand != '') {
 	} // foreach
 	$opc['Group'] = $ele;
 	$opc['Field'] = array($post['_G+Field']);
-	if (isset($post['_G+Field2']) && !empty($post['_G+Field2']))
+	if (isset($post['_G+Field2']) && !empty($post['_G+Field2'])) {
 		array_push($opc['Field'], $post['_G+Field2']);
+	}
 	$sql = $us->q->genSQLProcess($qd, $opc);
 	$dislist = $us->q->getassoc($sql);
 	if (!empty($dislist)) {
