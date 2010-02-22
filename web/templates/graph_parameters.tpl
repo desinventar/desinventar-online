@@ -90,7 +90,7 @@
 				<td>
 					<u>{-#gveraxis#-} 2:</u><br />
 					<b onMouseOver="showtip('{-$dic.GraphField[2]-}');">{-$dic.GraphField[0]-}</b><br />
-					<select id="_G+Field2" name="_G+Field2" size="1" onMouseOver="showtip('{-$dic.GraphField[2]-}');"
+					<select id="graphParamField2" name="_G+Field2" size="1" onMouseOver="showtip('{-$dic.GraphField[2]-}');"
 						onChange="enab($('_G+Scale2')); enab($('_G+Data2')); enab($('_G+Mode2'));" class="line">
 						<option value="" selected></option>
 						<option value="D.DisasterId||">{-$dic.GraphDisasterId_[0]-}</option>
