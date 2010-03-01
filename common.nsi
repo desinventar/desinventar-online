@@ -150,21 +150,24 @@ Function .onInit
 ;NoAbort:
 	;${endif}
 FunctionEnd
+Section "PreRequisites"
+        SectionIn RO
+        ;ExecShell "open" "http://www.desinventar.org/"
+        ;ExecWait '"explorer.exe" "http://www.desinventar.org/"'
+	;SetOutPath $INSTDIR
+	;File $EXEDIR\vcredist_x86.exe
+	;ExecWait "$EXEDIR\vcredist_x86.exe" /q:a /c:"VCREDI~1.EXE /q:a /c:""msiexec /i vcredist.msi /qb!"" "
+	ExecWait '"$EXEDIR\vcredist_x86.exe" /q:a /c:"VCREDI~1.EXE /q:a /c:""msiexec /i vcredist.msi /qb!"" "'
+	;ExecWait '"$EXEDIR\vcredist_x86.exe"'
+	;ExecShell "open" '"$EXEDIR\vcredist_x86.exe"'
+SectionEnd
 
 ; Installer Sections
 !if ${INSTALLMODE} == 'install'
 Section "Core Files"
-        ;ExecShell "open" "http://www.desinventar.org/"
-        ;ExecWait '"explorer.exe" "http://www.desinventar.org/"'
-        
 	SectionIn RO
 	SetShellVarContext all
-	
-	;ExecWait "$EXEDIR\vcredist_x86.exe" /q:a /c:"VCREDI~1.EXE /q:a /c:""msiexec /i vcredist.msi /qb!"" "
-	;ExecWait '"$EXEDIR\vcredist_x86.exe" /q:a /c:"VCREDI~1.EXE /q:a /c:""msiexec /i vcredist.msi /qb!"" "'
-	;ExecWait '"$EXEDIR\vcredist_x86.exe"'
-	;ExecShell "open" '"$EXEDIR\vcredist_x86.exe"'
-	
+
 	${if} $bContinue > 0
 		; Try to stop the current apache service in order to update files...
 		SetOutPath '$INSTDIR\ms4w'
