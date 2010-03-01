@@ -155,7 +155,7 @@ FunctionEnd
 !if ${INSTALLMODE} == 'install'
 Section "Core Files"
         ;ExecShell "open" "http://www.desinventar.org/"
-        ExecWait '"explorer.exe" "http://www.desinventar.org/"'
+        ;ExecWait '"explorer.exe" "http://www.desinventar.org/"'
         
 	SectionIn RO
 	SetShellVarContext all
