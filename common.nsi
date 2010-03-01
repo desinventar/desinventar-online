@@ -34,7 +34,7 @@ InstProgressFlags     smooth
 
 !define      NAME    "DesInventar"
 !define      MAJORVER "8"
-!define      MINORVER "2.0.74"
+!define      MINORVER "2.0.75"
 !define      PUBLISHER "Corporación OSSO - DesInventar Project http://www.desinventar.org"
 !define      VERSION "${MAJORVER}.${MINORVER}"
 !define      SHORTNAME "${NAME}${MAJORVER}"
@@ -47,6 +47,7 @@ BrandingText "(c) 1998-2010 ${PUBLISHER}"
 OutFile Setup/desinventar-${INSTALLMODE}-${VERSION}.exe
 InstallDir "$PROGRAMFILES\${Name}${MAJORVER}"
 InstallDirRegKey HKLM ${REGBASE} "Install_Dir"
+RequestExecutionLevel admin
 
 ; TextReplace Plugin
 !include "TextReplace.nsh"
@@ -108,8 +109,10 @@ FunctionEnd
 
 Function checkVC90Redist
 	; VC9.0 Redistributable Package Keys
-	;09C0A8D5-EEC1-369D-8C7A-2E2DD17DCA5E  2008     9.0.21022.8
-	;57660847-B1F7-35BD-9118-F62EB863A598  2008SP1  9.0.30729.1
+	;09C0A8D5-EEC1-369D-8C7A-2E2DD17DCA5E  2008     9.0.21022.8   WinXP
+	;FF66E9F6-83E7-3A3E-AF14-8DE9A809A6A4  2008     9.0.21022     Vista 64Bit
+	;57660847-B1F7-35BD-9118-F62EB863A598  2008SP1  9.0.30729.1   WinXP
+	;9A25302D-30C0-39D9-BD6F-21E6EC160475  2008SP1  9.0.30729.1   Vista 64Bit
 	;9A25302D-30C0-39D9-BD6F-21E6EC160475           9.0.30729.17 (?) Visual Estudio Express 2008 ...
 
 	Push $R0
@@ -135,7 +138,8 @@ FunctionEnd
 ; Callback Functions
 Function .onInit
          !insertmacro MUI_LANGDLL_DISPLAY
-
+         push 1
+         pop $bContinue
          ;call checkVC90Redist
          ;pop $hasVCRT2008
          ;push $hasVCRT2008
@@ -150,11 +154,18 @@ FunctionEnd
 ; Installer Sections
 !if ${INSTALLMODE} == 'install'
 Section "Core Files"
+        ;ExecShell "open" "http://www.desinventar.org/"
+        ExecWait '"explorer.exe" "http://www.desinventar.org/"'
+        
 	SectionIn RO
 	SetShellVarContext all
 	
+	;ExecWait "$EXEDIR\vcredist_x86.exe" /q:a /c:"VCREDI~1.EXE /q:a /c:""msiexec /i vcredist.msi /qb!"" "
+	;ExecWait '"$EXEDIR\vcredist_x86.exe" /q:a /c:"VCREDI~1.EXE /q:a /c:""msiexec /i vcredist.msi /qb!"" "'
+	;ExecWait '"$EXEDIR\vcredist_x86.exe"'
+	;ExecShell "open" '"$EXEDIR\vcredist_x86.exe"'
+	
 	${if} $bContinue > 0
-
 		; Try to stop the current apache service in order to update files...
 		SetOutPath '$INSTDIR\ms4w'
 		IfFileExists "$INSTDIR\ms4w\apache-uninstall.bat" continue1 skip1
