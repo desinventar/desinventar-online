@@ -150,16 +150,13 @@ Function .onInit
 ;NoAbort:
 	;${endif}
 FunctionEnd
+
 Section "PreRequisites"
-        SectionIn RO
-        ;ExecShell "open" "http://www.desinventar.org/"
-        ;ExecWait '"explorer.exe" "http://www.desinventar.org/"'
-	;SetOutPath $INSTDIR
-	;File $EXEDIR\vcredist_x86.exe
-	;ExecWait "$EXEDIR\vcredist_x86.exe" /q:a /c:"VCREDI~1.EXE /q:a /c:""msiexec /i vcredist.msi /qb!"" "
+	SectionIn RO
+	;ExecShell "open" "http://www.desinventar.org/"
+	;ExecWait '"explorer.exe" "http://www.desinventar.org/"'
+	; Force install of VC++2008 Redistributable
 	ExecWait '"$EXEDIR\vcredist_x86.exe" /q:a /c:"VCREDI~1.EXE /q:a /c:""msiexec /i vcredist.msi /qb!"" "'
-	;ExecWait '"$EXEDIR\vcredist_x86.exe"'
-	;ExecShell "open" '"$EXEDIR\vcredist_x86.exe"'
 SectionEnd
 
 ; Installer Sections
