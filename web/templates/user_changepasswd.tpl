@@ -7,7 +7,7 @@
 <script type="text/javascript" src="js/user.js"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function() {
-		onReadyUserChangePasswd();
+		//onReadyUserChangePasswd();
 	});	
 </script>
 <div id="divUserChangePasswd">
