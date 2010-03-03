@@ -19,6 +19,15 @@ function onReadyPortal() {
 		// Prevent default action
 		return false;
 	});
+	
+	// Handle clicks on RegionGroup Items
+	jQuery('.RegionGroup').click(function() {
+		var group = jQuery(this).attr('alt');
+		if (group != '') {
+			displayList(group);
+		}
+		return false;
+	});
 
 	// At start, display the map 
 	showMap();

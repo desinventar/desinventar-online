@@ -11,7 +11,7 @@
 			<tr><td colspan="3"><img src="images/p_ini.gif" width="133" height="5"></td></tr>
 			<tr>
 				<td class="paisel" colspan="3">
-					<a href="javascript:void(null);" onClick="displayList('6');">{-#di_andeansubregion#-}</a>
+					<a class="RegionGroup" href="#" alt="6">{-#di_andeansubregion#-}</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -53,7 +53,7 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 			<tr>
 				<td class="paisel">
-					<a href="javascript:void(null);" onClick="displayList(1);">{-#treg1#-}</a>
+					<a class="RegionGroup" alt="1" href="#">{-#treg1#-}</a>
 				</td>
 			</tr>
 			<tr><td><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -71,7 +71,7 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 			<tr>
 				<td class="paisel">
-					<a href="javascript:void(null);" onClick="displayList(2);">{-#treg2#-}</a>
+					<a href="#" class="RegionGroup" alt="2">{-#treg2#-}</a>
 				</td>
 			</tr><tr><td><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 			</table>
@@ -100,7 +100,7 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 			<tr>
 				<td class="paisel">
-					<a href="javascript:void(null);" onClick="displayList(3);">{-#treg3#-}</a>
+					<a href="#" class="RegionGroup" alt="3">{-#treg3#-}</a>
 				</td>
 			</tr>
 			<tr><td><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -132,7 +132,7 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 			<tr>
 				<td class="paisel">
-					<a href="javascript:void(null);" onClick="displayList(4);">{-#treg4#-}</a>
+					<a href="#" class="RegionGroup" alt="4">{-#treg4#-}</a>
 				</td>
 			</tr>
 			<tr><td><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -165,7 +165,7 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 			<tr>
 				<td class="paisel">
-					<a href="javascript:void(null);"  onClick="displayList(5);">{-#treg5#-}</a>
+					<a href="#" class="RegionGroup" alt="5">{-#treg5#-}</a>
 				</td>
 			</tr>
 			<tr><td><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -183,7 +183,7 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 			<tr>
 				<td class="paisel">
-					<a href="javascript:void(null);" onClick="displayList(7);">{-#treg7#-}</a>
+					<a href="#" class="RegionGroup" alt="7">{-#treg7#-}</a>
 				</td>
 			</tr>
 			</table>
