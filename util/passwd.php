@@ -10,5 +10,10 @@
 	
 	//$pass = generatePasswd();
 	//print($pass) . "<br />\n";
-	print 'di8welcome => ' . md5('di8welcome') . "\n";
+	
+	showPasswd('di8');
+	showPasswd('di82');
+	function showPasswd($myPasswd) {
+		print $myPasswd . ' => ' . md5($myPasswd) . "\n";
+	}
 </script>
