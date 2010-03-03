@@ -207,8 +207,9 @@
 			</td>
 		</tr>
 	</table>
-	<div id="desinventarInfo" style="display:none">
-		<span id="desinventarURL">{-$di_url-}</span>
+	<div id="desinventarInfo" style="display:none;">
+		<input type="hidden" id="desinventarURL" value="{-$di_url-}">
+		<input type="hidden" id="desinventarLang" value="{-$lang-}">
 	</div>
 </body>
 </html>
