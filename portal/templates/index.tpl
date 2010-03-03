@@ -60,11 +60,6 @@
 									<td class="sel">
 										<a href="javascript:void(null);" onclick="showMap()">{-#tstartpage#-}</a>
 									</td>
-									{-foreach name=menu key=key item=item from=$menu-}
-										<td class="sel">
-											<a href="javascript:void(null);" onclick="updateDatabaseList('pagecontent','','p={-$key-}')">{-$item[0]-}</a>
-										</td>
-									{-/foreach-}
 									<td>
 										<a href="javascript:void(null);" onMouseover="dropdownmenu(this, event, 'idioma')">{-#tlang#-}</a>
 										<div id="idioma" class="submenu">
@@ -119,7 +114,7 @@
 									</tr>
 									<tr>
 										<td colspan="2">
-											<center><a id="regionlink" href="javascript:void(null)"><img id="regionbutton" src="images/b_desinventar3.jpg" border="0"></a></center>
+											<center><a id="regionlink" href="#")"><img id="regionbutton" src="images/b_desinventar3.jpg" border="0"></a></center>
 											<div id="regiontechinfo"></div>
 										</td>
 									</tr>
@@ -129,7 +124,7 @@
 								<table>
 									<tr>
 										<td align="right">
-											<a href="" id="btnMainWindow">
+											<a href="#" id="btnMainWindow">
 												<img id="btnMainWindow2" src="images/b_desinventar3.jpg" border="0">
 											</a>
 										</td>
