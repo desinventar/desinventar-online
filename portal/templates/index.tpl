@@ -58,7 +58,7 @@
 							<table border=0 cellpadding=0 cellspacing=0 class="menu" style="margin-top:1px">
 								<tr>
 									<td class="sel">
-										<a href="javascript:void(null);" onclick="showMap()">{-#tstartpage#-}</a>
+										<a href="#" class="MenuItem" alt="MAP">{-#tstartpage#-}</a>
 									</td>
 									<td>
 										<a href="javascript:void(null);" onMouseover="dropdownmenu(this, event, 'idioma')">{-#tlang#-}</a>

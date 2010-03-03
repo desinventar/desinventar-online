@@ -29,6 +29,36 @@ function onReadyPortal() {
 		return false;
 	});
 
+	// Handle clicks on countries that return a list of regions
+	jQuery('.RegionList').click(function() {
+		var country = jQuery(this).attr('alt');
+		if (country != '') {
+			updateDatabaseList(country, true);
+		}
+		// Prevent default action
+		return false;
+	});
+
+	// Handle clicks on countries that directly shows a Region
+	jQuery('.RegionItem').click(function() {
+		var RegionId = jQuery(this).attr('alt');
+		if (RegionId != '') {
+			showRegionInfo(RegionId);
+		}
+		// Prevent default action
+		return false;
+	});
+
+	// Handle clicks on right menu (Home/LangSelect)
+	jQuery('.MenuItem').click(function() {
+		var MenuItem = jQuery(this).attr('alt');
+		if (MenuItem == 'MAP') {
+			showMap();
+		}
+		// Prevent default action
+		return false;
+	});
+
 	// At start, display the map 
 	showMap();
 };
