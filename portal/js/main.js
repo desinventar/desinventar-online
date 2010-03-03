@@ -1,10 +1,25 @@
 function onReadyPortal() {
 	var desinventarURL  = jQuery('#desinventarURL').val();
 	var desinventarLang = jQuery('#desinventarLang').val();
+	
+	// Main button to open a default desinventar
 	jQuery("#btnMainWindow").click(function() {
 		window.open(desinventarURL + '?cmd=main&lang=' + desinventarLang,'_blank', 'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');
 	});
+	
+	// Update version number on screen
 	jQuery("#version").load(desinventarURL, { cmd: 'getversion' });
+	
+	// Handle clicks on mainpage map
+	jQuery('area').click(function() {
+		var country = jQuery(this).attr('alt');
+		if (country != '') {
+			updateDatabaseList(country, true);
+		}
+		// Prevent default action
+		return false;
+	});
+
 	// At start, display the map 
 	showMap();
 };
