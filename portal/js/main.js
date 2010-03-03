@@ -1,25 +1,26 @@
 function onReadyPortal() {
-	var desinventarURL = jQuery("#desinventarURL").val();
-	alert(desinventarURL);
+	var desinventarURL  = jQuery('#desinventarURL').val();
+	var desinventarLang = jQuery('#desinventarLang').val();
 	jQuery("#btnMainWindow").click(function() {
-		window.open(desinventarURL + '?cmd=main&lang={-$lang-}','_blank', 'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');
+		window.open(desinventarURL + '?cmd=main&lang=' + desinventarLang,'_blank', 'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');
 	});
 	jQuery("#version").load(desinventarURL, { cmd: 'getversion' });
 	// At start, display the map 
 	showMap();
-}
+};
 
 function updateDatabaseList(CountryIsoCode,searchByCountry) {
 	jQuery("#pagemap").hide();
 	jQuery("#pageinfo").hide();
 	jQuery("#regionlist").show();
-	jQuery.get('{-$di_url-}', 
+	var desinventarURL = jQuery('#desinventarURL').val();
+	jQuery.get(desinventarURL, 
 		{cmd: 'getCountryName', CountryIso : CountryIsoCode },
 		function(data) { 
 			jQuery("#pagetitle").html('<h3>' + data + '</h3>');
 		}
 	);
-	jQuery.getJSON('{-$di_url-}', 
+	jQuery.getJSON(desinventarURL,
 		{ cmd: 'searchdb', searchdbquery: CountryIsoCode, searchbycountry : searchByCountry },
 		function(data) {
 			var iCount = 0;
@@ -47,13 +48,15 @@ function showRegionInfo(RegionId) {
 };
 
 function displayRegionInfo(RegionId) {
+	var desinventarURL = jQuery('#desinventarURL').val();
+	var desinventarLang = jQuery('#desinventarLang').val();
 	jQuery("#pagemap"    ).hide();
 	jQuery("#pageinfo"   ).show();
-	jQuery("#regionlogo" ).attr('src', '{-$di_url-}' + '?cmd=getRegionLogo&RegionId=' + RegionId);
-	jQuery("#regionbasicinfo" ).load('{-$di_url-}', { cmd:'getRegionBasicInfo', RegionId : RegionId });
-	jQuery("#regiontechinfo"  ).load('{-$di_url-}', { cmd:'getRegionTechInfo', RegionId : RegionId });
+	jQuery("#regionlogo" ).attr('src', desinventarURL + '?cmd=getRegionLogo&RegionId=' + RegionId);
+	jQuery("#regionbasicinfo" ).load(desinventarURL, { cmd:'getRegionBasicInfo', RegionId : RegionId });
+	jQuery("#regiontechinfo"  ).load(desinventarURL, { cmd:'getRegionTechInfo', RegionId : RegionId });
 	jQuery("#regionlink").unbind('click').click(function() {
-		window.open('{-$di_url-}?r=' + RegionId + '&lang={-$lang-}','_blank', 
+		window.open(desinventarURL + '?r=' + RegionId + '&lang=' + desinventarLang,'_blank', 
 			'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');
 	});
 };
@@ -73,4 +76,4 @@ function displayList(elem) {
 		else
 			jQuery("#sect"+ i).hide();
 	}
-} //function
+}; //function
