@@ -11,7 +11,7 @@
 			<tr><td colspan="3"><img src="images/p_ini.gif" width="133" height="5"></td></tr>
 			<tr>
 				<td class="paisel" colspan="3">
-					<a class="RegionGroup" href="#" alt="6">{-#di_andeansubregion#-}</a>
+					<a href="#" class="RegionGroup" alt="6">{-#di_andeansubregion#-}</a>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -53,7 +53,7 @@
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 			<tr>
 				<td class="paisel">
-					<a class="RegionGroup" alt="1" href="#">{-#treg1#-}</a>
+					<a href="#" class="RegionGroup" alt="1">{-#treg1#-}</a>
 				</td>
 			</tr>
 			<tr><td><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
