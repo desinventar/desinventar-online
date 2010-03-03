@@ -1,16 +1,3 @@
-<script type="text/javascript">
-	// personalization List menu..
-	function displayList(elem) {
-		lst = 7;
-		for (i=1; i <= lst; i++) {
-			if (i == elem)
-				$("#sect"+ i).show();
-			else
-				$("#sect"+ i).hide();
-		}
-	} //function
-</script>
-
 <table bgcolor="#CF9D15" border=0 cellpadding=0 cellspacing=0>
 	<tr>
 		<td>
@@ -243,4 +230,3 @@
 	</tr>
 	<tr><td><img src="images/25.gif" width=150 height=52></td></tr>
 </table>
-
