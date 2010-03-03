@@ -17,7 +17,7 @@
 					userMan('logout', '');
 				break;
 				case "mnuUserEditAccount":
-					jQuery("#dbl").load('user.php?cmd=changepasswd',function() { });
+					jQuery("#dbl").load('user.php?cmd=changepasswd',function() { onReadyUserChangePasswd('dbl-win'); });
 					dblw.show();
 				break;
 				{-foreach name=lglst key=key item=item from=$lglst-}
