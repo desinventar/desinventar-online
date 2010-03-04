@@ -6,10 +6,12 @@
 	<title>DesInventar8 - Portal</title>
 	<!-- CSS Styles -->
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" href="css/desinventar.css" TYPE="text/css">
-	<link rel="stylesheet" href="css/portal.css" TYPE="text/css">
+	<link rel="stylesheet" href="css/desinventar.css" TYPE="text/css" />
+	<link rel="stylesheet" href="css/portal.css" TYPE="text/css" />
 	{-include file="jquery.tpl" -}
 	<script type="text/javascript" src="{-$di_url-}/include/menu.js"></script>
+	<link type="text/css" rel="stylesheet" href="{-$di_url-}/include/clickmenu/clickmenu.css" />
+	<script type="text/javascript" src="{-$di_url-}/include/clickmenu/jquery.clickmenu.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 	<script type="text/javascript" language="javascript">
 		jQuery(document).ready(function() {
@@ -57,17 +59,19 @@
 							</div>
 							<table border=0 cellpadding=0 cellspacing=0 class="menu" style="margin-top:1px">
 								<tr>
-									<td class="sel">
-										<a href="#" class="MenuItem" alt="MAP">{-#tstartpage#-}</a>
-									</td>
 									<td>
-										<a href="javascript:void(null);" onMouseover="dropdownmenu(this, event, 'idioma')">{-#tlang#-}</a>
-										<div id="idioma" class="submenu">
-											<a href="?lang=eng">English</a>
-											<a href="?lang=spa">Español</a>
-											<a href="?lang=por">Português</a>
-											<a href="?lang=fre">Français</a>
-										</div>
+										<ul id="MainMenu">
+											<li><a href="#" class="MenuItem" alt="MAP">{-#tstartpage#-}</a>
+											</li>
+											<li>{-#tlang#-}
+												<ul>
+													<li><a href="?lang=eng">English</a></li>
+													<li><a href="?lang=spa">Español</a></li>
+													<li><a href="?lang=por">Português</a></li>
+													<li><a href="?lang=fre">Français</a></li>
+												</ul>
+											</li>
+										<ul>
 									</td>
 								</tr>
 							</table>
