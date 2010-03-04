@@ -27,7 +27,7 @@
 	$t->caching = false;
 	$t->compile_check = true;
 	$t->cache_lifetime = -1;
-	$t->config_dir = 'include';
+	$t->config_dir = 'conf';
 	$t->template_dir = 'templates';
 	$t->compile_dir = SMTY_DIR;
 	$t->left_delimiter = '{-';
