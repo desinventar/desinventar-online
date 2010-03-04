@@ -103,7 +103,7 @@ if (MODE != "command") {
 	/* SMARTY template */
 	$t = new Smarty();
 	$t->debugging = false;
-	$t->config_dir = BASE . '/include';
+	$t->config_dir = BASE . '/conf';
 	$t->template_dir = BASE . '/templates';
 	$t->compile_dir = SMTY_DIR;
 	$t->left_delimiter = '{-';
