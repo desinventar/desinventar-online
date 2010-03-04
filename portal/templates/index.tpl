@@ -118,7 +118,7 @@
 									</tr>
 									<tr>
 										<td colspan="2">
-											<center><a id="regionlink" href="#")"><img id="regionbutton" src="images/b_desinventar3.jpg" border="0"></a></center>
+											<center><a id="regionlink" href="#"><img id="regionbutton" src="images/b_desinventar3.jpg" border="0"></a></center>
 											<div id="regiontechinfo"></div>
 										</td>
 									</tr>
