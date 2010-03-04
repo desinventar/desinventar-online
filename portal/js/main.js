@@ -59,6 +59,11 @@ function onReadyPortal() {
 		return false;
 	});
 
+	// Top Menu/Language Select
+	jQuery('#MainMenu').clickMenu();
+	// Remove the black border from the menu
+	jQuery('div.cmDiv').css('border','0px solid black');
+
 	// At start, display the map 
 	showMap();
 };
