@@ -1,14 +1,38 @@
 <table bgcolor="#CF9D15" border=0 cellpadding=0 cellspacing=0>
 	<tr>
 		<td>
-			<!-- ANDEAN SUBREGION -->
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
+			
+			<!-- User Area Begin -->
+			<tr>
+				<td><img src="images/p_paises1.gif" width=5 height=16></td>
+				<td width="32px" bgcolor="#fcc700">Usuarios</td>
+				<td><img src="images/p_paises3.gif" width=73 height=16></td>
+			</tr>
+			<tr><td colspan="3"><img src="images/p_ini.gif" width="133" height="5"></td></tr>
+			<tr>
+				<td class="paisel" colspan="3">
+					<div id="divUserEnableLogin">
+						<a href="#" id="linkUserEnableLogin">Ingresar</a>
+					</div>
+					<div id="divUserOptionsPanel">
+						Mis Bases
+					</div>
+				</td>
+			</tr>
+			<tr>
+			<td colspan="3">
+				<img src="images/p_fin.gif" width="133" height="5"><br /><br />
+			</td>
+			</tr>
+			<!-- User Area End -->
 			<tr>
 				<td><img src="images/p_paises1.gif" width=5 height=16></td>
 				<td width="32px" bgcolor="#fcc700">{-#tcountries#-}</td>
 				<td><img src="images/p_paises3.gif" width=73 height=16></td>
 			</tr>
 			<tr><td colspan="3"><img src="images/p_ini.gif" width="133" height="5"></td></tr>
+			<!-- ANDEAN SUBREGION -->
 			<tr>
 				<td class="paisel" colspan="3">
 					<a href="#" class="RegionGroup" alt="6">{-#di_andeansubregion#-}</a>
