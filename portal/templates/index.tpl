@@ -99,14 +99,14 @@
 							</table>
 						</td>
 						<td class="centro">
-							<div id="regionlist">
+							<div class="portalcontent" id="regionlist">
 								<div id="pagetitle">
 								</div>
 								<br />
 								<ul id="pagecontent">
 								</ul>
 							</div>
-							<div id="pageinfo">
+							<div class="portalcontent" id="pageinfo">
 								<table>
 									<tr>
 										<td valign="top">
@@ -124,7 +124,7 @@
 									</tr>
 								</table>
 							</div>
-							<div id="pagemap">
+							<div class="portalcontent" id="pagemap">
 								<table>
 									<tr>
 										<td align="right">
@@ -152,6 +152,9 @@
 										</td>
 									</tr>
 								</table>
+							</div>
+							<div class="portalcontent" id="UserContent">
+								User Login<br />
 							</div>
 						</td> <!-- CENTRO -->
 						<td class="der"><img src="images/bgder.gif" width=32 height=5>
@@ -207,8 +210,9 @@
 		</tr>
 	</table>
 	<div id="desinventarInfo" style="display:none;">
-		<input type="hidden" id="desinventarURL" value="{-$di_url-}">
-		<input type="hidden" id="desinventarLang" value="{-$lang-}">
+		<input type="hidden" id="desinventarURL"    value="{-$di_url-}">
+		<input type="hidden" id="desinventarLang"   value="{-$lang-}">
+		<input type="hidden" id="desinventarUserId" value="{-$UserId-}">
 	</div>
 </body>
 </html>

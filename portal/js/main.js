@@ -63,14 +63,23 @@ function onReadyPortal() {
 	jQuery('#MainMenu').clickMenu();
 	// Remove the black border from the menu
 	jQuery('div.cmDiv').css('border','0px solid black');
+	
+	// User Menu and Items
+	jQuery('#divUserEnableLogin').show();
+	jQuery('#divUserOptionsPanel').hide();
+	
+	jQuery('#linkUserEnableLogin').click(function() {
+		jQuery('.portalcontent').hide();
+		jQuery('#UserContent').show();
+		return false;
+	});
 
 	// At start, display the map 
 	showMap();
 };
 
 function updateDatabaseList(CountryIsoCode,searchByCountry) {
-	jQuery("#pagemap").hide();
-	jQuery("#pageinfo").hide();
+	jQuery(".portalcontent").hide();
 	jQuery("#regionlist").show();
 	var desinventarURL = jQuery('#desinventarURL').val();
 	jQuery.get(desinventarURL, 
@@ -102,16 +111,16 @@ function updateDatabaseList(CountryIsoCode,searchByCountry) {
 };
 
 function showRegionInfo(RegionId) {
-	jQuery("#regionlist" ).hide();
+	jQuery(".portalcontent" ).hide();
 	displayRegionInfo(RegionId);
 };
 
 function displayRegionInfo(RegionId) {
 	var desinventarURL = jQuery('#desinventarURL').val();
 	var desinventarLang = jQuery('#desinventarLang').val();
-	jQuery("#pagemap"    ).hide();
-	jQuery("#pageinfo"   ).show();
-	jQuery("#regionlogo" ).attr('src', desinventarURL + '?cmd=getRegionLogo&RegionId=' + RegionId);
+	jQuery(".portalcontent").hide();
+	jQuery("#pageinfo"     ).show();
+	jQuery("#regionlogo"   ).attr('src', desinventarURL + '?cmd=getRegionLogo&RegionId=' + RegionId);
 	jQuery("#regionbasicinfo" ).load(desinventarURL, { cmd:'getRegionBasicInfo', RegionId : RegionId });
 	jQuery("#regiontechinfo"  ).load(desinventarURL, { cmd:'getRegionTechInfo', RegionId : RegionId });
 	jQuery("#regionlink").unbind('click').click(function() {
@@ -121,9 +130,8 @@ function displayRegionInfo(RegionId) {
 };
 
 function showMap() {
-	jQuery("#pagemap").show();
-	jQuery("#regionlist").hide();
-	jQuery("#pageinfo").hide();
+	jQuery('.portalcontent').hide();
+	jQuery('#pagemap').show();
 };
 
 // personalization List menu..
