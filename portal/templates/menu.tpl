@@ -90,6 +90,12 @@
 			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
+					<a href="#" class="RegionList" alt="GTM">Guatemala</a>
+				</td>
+			</tr>
+			<tr><td colspan="3"><img src="images/p_sep.gif" width=133 height=6 border=0></td></tr>
+			<tr>
+				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 					<a href="#" class="RegionItem" alt="PAN-1250695231-panama_inventario_de_desastres_sinaproc">Panamá</a>
 				</td>
 			</tr>
