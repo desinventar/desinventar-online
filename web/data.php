@@ -51,8 +51,6 @@ if (isset($post['page']) || isset($post['_D+cmd'])) {
 		$sqc = $us->q->genSQLSelectCount($qd);
 		$c	 = $us->q->getresult($sqc);
 		$iNumberOfRecords = $c['counter'];
-		fb($qd);
-		fb($iNumberOfRecords);
 		// Reuse calculate SQL values in all pages; calculate limits in pages
 		$levg = array();
 		$fld = $post['_D+Field'];
