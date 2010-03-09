@@ -938,6 +938,7 @@ class Query extends PDO {
 				}
 			}
 		}
+		$QueryItem['Other'] = $WhereQuery1;
 		
 		$bFirst = true;
 		$WhereQuery2 = '';
@@ -969,15 +970,16 @@ class Query extends PDO {
 			$WhereQuery .= ')';
 		}
     	return $WhereQuery;
-	}
+	} //function
 
-  // Count number of records in result
-  public function genSQLSelectCount($whr) {
-    $sql = "SELECT COUNT(D.DisasterId) as counter FROM Disaster AS D, EEData AS E, Event AS V, Cause AS C, Geography AS G ";
-    if ($this->chkSQLWhere($whr))
-      return ($sql . $whr);
-    return false;
-  }
+	// Count number of records in result
+	public function genSQLSelectCount($whr) {
+		$sql = "SELECT COUNT(D.DisasterId) as counter FROM Disaster AS D, EEData AS E, Event AS V, Cause AS C, Geography AS G ";
+		if ($this->chkSQLWhere($whr)) {
+			return ($sql . $whr);
+		}
+		return false;
+	}
 
 	// Generate SQL to data lists
 	public function genSQLSelectData ($whr, $fld, $order) {
