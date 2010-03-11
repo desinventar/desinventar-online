@@ -214,7 +214,7 @@ switch ($cmd) {
 					//  if (testMap(VAR_DIR . "/". $RegionId . "/". $data))
 					$t->assign ("ctl_showmap", true);
 					// get range of dates
-					$ydb = $us->q->getDateRange();
+					$ydb = $us->getDateRange();
 					$t->assign ("yini", substr($ydb[0], 0, 4));
 					$t->assign ("yend", substr($ydb[1], 0, 4));
 
