@@ -51,8 +51,6 @@ if (isset($post['page']) || isset($post['_D+cmd'])) {
 		$sqc = $us->q->genSQLSelectCount($qd);
 		$c	 = $us->q->getresult($sqc);
 		$iNumberOfRecords = $c['counter'];
-		fb($qd);
-		fb($iNumberOfRecords);
 		// Reuse calculate SQL values in all pages; calculate limits in pages
 		$levg = array();
 		$fld = $post['_D+Field'];
@@ -109,23 +107,34 @@ if (isset($post['page']) || isset($post['_D+cmd'])) {
 			$dislist = $us->q->getassoc($slim);
 			$dl = $us->q->printResults($dislist, $export, "NAME");
 			if ($i == $pin && !empty($dl)) {
-				// Traduce Headers to Current Language
+				// Translate headers to current interface language
+				if ($export == 'csv') {
+					$ColumnSeparator = ',';
+				} else {
+					$ColumnSeparator = "\t";
+				}
 				$lb = "";
 				$sel = array_keys($dislist[0]);
+				$bFirst = true;
 				foreach ($sel as $kk=>$ii) {
+					if (! $bFirst) {
+						$lb .= $ColumnSeparator;
+					}
 					$i3 = substr($ii, 0, -4);
-					if (isset($dic[$ii][0]))
+					if (isset($dic[$ii][0])) {
 						$dk[$ii] = $dic[$ii][0];
-					elseif (isset($dic[$i3][0]))
+					} elseif (isset($dic[$i3][0])) {
 						$dk[$ii] = $dic[$i3][0];
-					else
+					} else {
 						$dk[$ii] = $ii; // No translation, use default value
+					}					
 					//Assign Headers..
-					$lb .= '"'. $dk[$ii] .'"'. "\t";
+					$lb .= '"'. $dk[$ii] .'"';
+					$bFirst = false;
 				} //foreach
-				if (!empty($export))
+				if (!empty($export)) {
 					fwrite($fp, $lb ."\n");
-				else {
+				} else {
 					$t->assign ("dk", $dk);
 					$t->assign ("sel", $sel);
 				}
