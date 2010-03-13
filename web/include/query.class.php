@@ -1147,7 +1147,6 @@ class Query extends PDO {
 	
 	// Print results like associative array or fields separate by Tabs
 	function printResults ($dl, $exp, $mode) {
-		$txt = "";
 		// Get results
 		if (!empty($dl)) {
 			$j = 0;
@@ -1173,15 +1172,18 @@ class Query extends PDO {
 					}
 				} //foreach
 				if (!empty($exp)) {
+					$txt = '';
 					foreach (array_values($dl[$j]) as $vals) {
-						if ($vals == -1)
-							$myv = "YES";
-						else
+						if ($vals == -1) { 
+							$myv = "YES"; 
+						} else {
 							$myv = $vals;
-						if ($exp == 'csv')
-							$sep = ", ";	// use comma separator to CSV
-						else
-							$sep = "\t";	// use tab separator to XLS (default option)
+						}
+						if ($exp == 'csv') {
+							$sep = ",";	// use comma separator to CSV
+						} else {
+							$sep = "\t";// use tab separator to XLS (default option)
+						}
 						if (is_numeric($myv)) {
 							$txt .= $myv . $sep;
 						} else {
