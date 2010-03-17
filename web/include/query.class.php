@@ -1147,6 +1147,7 @@ class Query extends PDO {
 	
 	// Print results like associative array or fields separate by Tabs
 	function printResults ($dl, $exp, $mode) {
+		$txt = '';
 		// Get results
 		if (!empty($dl)) {
 			$j = 0;
@@ -1172,7 +1173,7 @@ class Query extends PDO {
 					}
 				} //foreach
 				if (!empty($exp)) {
-					$txt = '';
+					//$txt = '';
 					foreach (array_values($dl[$j]) as $vals) {
 						if ($vals == -1) { 
 							$myv = "YES"; 
@@ -1195,10 +1196,11 @@ class Query extends PDO {
 				$j++;
 			} //foreach
 		} //if !empty
-		if (!empty($exp))
+		if (!empty($exp)) {
 			return $txt;
-		else
+		} else {
 			return $dl;
+		}
 	}
   
 	// Print results like json array to Javascript
