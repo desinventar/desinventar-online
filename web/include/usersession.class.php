@@ -282,11 +282,11 @@ class UserSession {
 				 "DesInventar - Password Reminder",
 				 "Dear User\nYour login information for DesInventar is:\n" .
 				 "  UserId : " . $row['UserId'] . "\n" .
-				 "  Login  : " . $myPasswd . "\n" . 
+				 "  Passwd : " . $myPasswd . "\n" . 
 				 "\n\n" .
 				 "Sincerely,\n" .
 				 "   The DesInventar Team",
-				"From: desinventar@desinventar.org"
+				"From: support@desinventar.org"
 			);
 		} //foreach
 		return $myAnswer;
