@@ -535,9 +535,13 @@ class Query extends PDO {
 	public function getNextDisasterSerial($prmYear) {
 		$NextSerial = '';
 		if ($prmYear != '') {
-			$sQuery = "SELECT COUNT(DisasterId) AS num FROM Disaster WHERE DisasterBeginTime LIKE '". $prmYear ."-%'";
+			//$sQuery = "SELECT COUNT(DisasterId) AS num FROM Disaster WHERE DisasterBeginTime LIKE '". $prmYear ."-%'";
+			//$res = $this->getresult($sQuery);
+			//$NextSerial = sprintf("%05d", $res['num'] + 1);
+			$sQuery = "SELECT DisasterSerial FROM Disaster WHERE DisasterSerial LIKE '" . $prmYear . "-%' ORDER BY DisasterSerial DESC LIMIT 1";
 			$res = $this->getresult($sQuery);
-			$NextSerial = sprintf("%05d", $res['num'] + 1);
+			$MaxNumber = substr($res['DisasterSerial'], strlen($prmYear)+1);
+			$NextSerial = sprintf("%05d", $MaxNumber + 1);
 		}
 		return $NextSerial;
 	}
