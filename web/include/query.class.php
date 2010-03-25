@@ -541,7 +541,21 @@ class Query extends PDO {
 			$sQuery = "SELECT DisasterSerial FROM Disaster WHERE DisasterSerial LIKE '" . $prmYear . "-%' ORDER BY DisasterSerial DESC LIMIT 1";
 			$res = $this->getresult($sQuery);
 			$MaxNumber = substr($res['DisasterSerial'], strlen($prmYear)+1);
-			$NextSerial = sprintf("%05d", $MaxNumber + 1);
+			$MaxNumber = $MaxNumber + 1;
+			// Try incrementing the MaxNumber value until we find a disaster not used...
+			$bFound = 0;
+			while (! $bFound) {
+				$NextSerial = sprintf("%05d", $MaxNumber + 1);
+				$sQuery = "SELECT COUNT(DisasterId) AS NUM FROM Disaster WHERE DisasterSerial='" . $prmYear . '-' . $NextSerial . "'";
+				$iCount = 0;
+				$res = $this->getresult($sQuery);
+				$iCount = $res['NUM'];
+				if ($iCount > 0) {
+					$MaxNumber++;
+				} else {
+					$bFound = true;
+				}
+			} //while
 		}
 		return $NextSerial;
 	}
