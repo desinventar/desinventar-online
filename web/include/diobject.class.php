@@ -386,7 +386,8 @@ class DIObject {
 	public function validateCreate() {
 		return 1;
 	}	
-	public function validateUpdate() {
+
+	public function validateUpdate($bStrict=true) {
 		return ERR_NO_ERROR;
 	}
 	
