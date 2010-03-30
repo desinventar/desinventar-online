@@ -526,12 +526,24 @@ class Query extends PDO {
 		return $fld;
 	}
 
-	public function getDisasterIdFromSerial($serial) {
-		$sql = "SELECT DisasterId FROM Disaster WHERE DisasterSerial = '". $serial."'";
-		$res = $this->getresult($sql);
+	public function getDisasterIdFromSerial($prmDisasterSerial) {
+		$sQuery = "SELECT DisasterId FROM Disaster WHERE DisasterSerial = '". $prmDisasterSerial."'";
+		$res = $this->getresult($sQuery);
 		return $res['DisasterId'];
 	}
 	
+	public function existDisasterSerial($prmDisasterSerial) {
+		$Answer = '';
+		$sQuery = "SELECT DisasterSerial FROM Disaster WHERE DisasterSerial = '". $prmDisasterSerial."'";
+		$res = $this->getresult($sQuery);
+		$Answer = $res['DisasterSerial'];
+		foreach($res as $row) {
+			//$Answer = $row['DisasterSerial'];
+		}
+		if (is_null($Answer)) { $Answer = ''; }
+		return $Answer;
+	}
+
 	public function getNextDisasterSerial($prmYear) {
 		$NextSerial = '';
 		if ($prmYear != '') {

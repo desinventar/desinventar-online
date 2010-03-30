@@ -141,7 +141,13 @@ else {
 				$did = $us->q->getDisasterIdFromSerial($_GET['value']);
 				echo $did;
 			break;
-			default: break;
+			case 'existDisasterSerial':
+				$DisasterSerial = getParameter('DisasterSerial');
+				$Answer = $us->q->existDisasterSerial($DisasterSerial);
+				echo $Answer;
+			break;
+			default:
+			break;
 		}
 	} elseif (isset($_GET['DisasterId']) && !empty($_GET['DisasterId'])) {
 		$DisasterId = $_GET['DisasterId'];
