@@ -8,6 +8,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
 	<title>{-#ttitle#-} [{-$regname-}] | {-$usr-} - {-$dicrole-}</title>
 	<link rel="stylesheet" href="css/desinventar.css" type="text/css"/>
+	{-include file="jquery.tpl" -}
 	<script type="text/javascript" src="include/prototype.js"></script>
 	<script type="text/javascript" src="include/combo-box.js"></script>
 	<script type="text/javascript" src="include/diadmin.js"></script>
@@ -35,7 +36,6 @@
 				onSuccess: function(request) {
 					var res = request.responseText;
 					// check valid DisasterSerial
-					//alert(">>"+ res.length +"<<");
 					if (res.length >= 5 && cmd == "getNextSerial")
 							$('DisasterSerial').value = value +'-'+ res;
 					// check valid DisasterId
@@ -223,7 +223,7 @@
 					$('_CMD').value = 'insertDICard';
 					uploadMsg("{-#tmsgnewcardfill#-}");
 					changeOptions(btn);
-					parent.s.expand();
+					//parent.s.expand();
 				break;
 				case "cardupd":
 					// check if DC is on use
@@ -237,7 +237,7 @@
 								$('_CMD').value = 'updateDICard';
 								uploadMsg("{-#tmsgeditcardfill#-}");
 								changeOptions(btn);
-								parent.s.expand();
+								//parent.s.expand();
 							}
 							else 
 								uploadMsg("{-#tdconuse#-}");
@@ -245,15 +245,44 @@
 					} );
 				break;
 				case "cardsav":
-					var fl = new Array('DisasterSerial', 'DisasterBeginTime[0]', 'DisasterSource', 
-										'geolev0', 'EventId', 'CauseId', 'RecordStatus');
-					if (checkForm(fl, "{-#errmsgfrm#-}")) {
-						uploadMsg('');
-						$('DICard').submit();
-						DisableEnableForm($('DICard'), true);
-						changeOptions(btn);
-						// clear Help text area
-						showtip('','#ffffff');
+					var bContinue = true;
+					/*
+					var cmd = jQuery('#_CMD').val();
+					var DisasterSerial = jQuery('#DisasterSerial').val();
+					var PrevDisasterSerial = jQuery('#PrevDisasterSerial').val();
+					jQuery.post('cards.php',
+						{'cmd' : 'existDisasterSerial',
+						 'RegionId' : '{-$reg-}',
+						 'DisasterSerial' : DisasterSerial
+						},
+						function(data) {
+							if ( (cmd == 'insertDICard') && (data != '') ) {
+								// Serial of new datacard already exists...
+								//alert('Disaster Serial already exists...');
+								bContinue = false;
+							}
+							if (cmd == 'updateDICard') {
+								if (DisasterSerial != PrevDisasterSerial) {
+									// Edited Serial exists in database...
+									//alert('Disaster Serial is duplicated...');
+									bContinue = false;
+								}
+							}
+						}
+					);
+					*/
+					bContinue = true;
+					if (bContinue) {
+						var fl = new Array('DisasterSerial', 'DisasterBeginTime[0]', 'DisasterSource', 
+											'geolev0', 'EventId', 'CauseId', 'RecordStatus');
+						if (checkForm(fl, "{-#errmsgfrm#-}")) {
+							uploadMsg('');
+							$('DICard').submit();
+							DisableEnableForm($('DICard'), true);
+							changeOptions(btn);
+							// clear Help text area
+							showtip('','#ffffff');
+						}
 					}
 				break;
 				case "cardcln":
@@ -365,6 +394,7 @@
 		<input type="hidden" name="RecordAuthor" id="RecordAuthor" value="{-$usr-}">
 		<input type="hidden" name="RecordCreation" id="RecordCreation">
 		<input type="hidden" name="_CMD" id="_CMD" value="">
+		<input type="hidden" name="PrevDisasterSerial" id="PrevDisasterSerial" value="">
 		<table border="1" cellspacing="8" width="900px">
 			<!-- DATACARD INFORMATION SECTION -->
 			<tr>

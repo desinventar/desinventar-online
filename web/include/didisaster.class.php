@@ -100,7 +100,7 @@ class DIDisaster extends DIObject {
 		return $iReturn;
 	}
 	
-	public function validateUpdate() {
+	public function validateUpdate($bStrict=true) {
 		$iReturn = parent::validateUpdate();
 		$iReturn = $this->validateNotNull(-53, 'DisasterSerial');
 		$iReturn = $this->validateUnique(-54, 'DisasterSerial', WARNING);
@@ -113,12 +113,14 @@ class DIDisaster extends DIObject {
 		$iReturn = $this->validateRef(-60, 'CauseId', 'Cause', 'CauseId');
 		// Warning
 		$iReturn = $this->validateEffects(WARNING);
-		
 		$iReturn = ERR_NO_ERROR;
 		if ($this->status->hasError()) {
 			$iReturn = ERR_UNKNOWN_ERROR;
 		} elseif ($this->status->hasWarning()) {
-			$iReturn = 0;
+			$iReturn = ERR_NO_ERROR;
+			if ($bStrict) {
+				$iReturn = ERR_UNKNOWN_ERROR;
+			}
 		}
 		return $iReturn;
 	}

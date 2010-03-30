@@ -526,16 +526,50 @@ class Query extends PDO {
 		return $fld;
 	}
 
-	public function getDisasterIdFromSerial($serial) {
-		$sql = "SELECT DisasterId FROM Disaster WHERE DisasterSerial = '". $serial."'";
-		$res = $this->getresult($sql);
+	public function getDisasterIdFromSerial($prmDisasterSerial) {
+		$sQuery = "SELECT DisasterId FROM Disaster WHERE DisasterSerial = '". $prmDisasterSerial."'";
+		$res = $this->getresult($sQuery);
 		return $res['DisasterId'];
 	}
 	
-	public function getNextDisasterSerial($year) {
-		$sql = "SELECT COUNT(DisasterId) AS num FROM Disaster WHERE DisasterBeginTime LIKE '". $year ."%'";
-		$res = $this->getresult($sql);
-		return sprintf("%05d", $res['num'] + 1);
+	public function existDisasterSerial($prmDisasterSerial) {
+		$Answer = '';
+		$sQuery = "SELECT DisasterSerial FROM Disaster WHERE DisasterSerial = '". $prmDisasterSerial."'";
+		$res = $this->getresult($sQuery);
+		$Answer = $res['DisasterSerial'];
+		foreach($res as $row) {
+			//$Answer = $row['DisasterSerial'];
+		}
+		if (is_null($Answer)) { $Answer = ''; }
+		return $Answer;
+	}
+
+	public function getNextDisasterSerial($prmYear) {
+		$NextSerial = '';
+		if ($prmYear != '') {
+			//$sQuery = "SELECT COUNT(DisasterId) AS num FROM Disaster WHERE DisasterBeginTime LIKE '". $prmYear ."-%'";
+			//$res = $this->getresult($sQuery);
+			//$NextSerial = sprintf("%05d", $res['num'] + 1);
+			$sQuery = "SELECT DisasterSerial FROM Disaster WHERE DisasterSerial LIKE '" . $prmYear . "-%' ORDER BY DisasterSerial DESC LIMIT 1";
+			$res = $this->getresult($sQuery);
+			$MaxNumber = substr($res['DisasterSerial'], strlen($prmYear) + 1);
+			$MaxNumber = $MaxNumber + 1;
+			// Try incrementing the MaxNumber value until we find a disaster not used...
+			$bFound = 0;
+			while (! $bFound) {
+				$NextSerial = sprintf("%05d", $MaxNumber);
+				$sQuery = "SELECT COUNT(DisasterId) AS NUM FROM Disaster WHERE DisasterSerial='" . $prmYear . '-' . $NextSerial . "'";
+				$iCount = 0;
+				$res = $this->getresult($sQuery);
+				$iCount = $res['NUM'];
+				if ($iCount > 0) {
+					$MaxNumber++;
+				} else {
+					$bFound = true;
+				}
+			} //while
+		}
+		return $NextSerial;
 	}
 
 	public function getDisasterBySerial($diser) {
@@ -1147,7 +1181,7 @@ class Query extends PDO {
 	
 	// Print results like associative array or fields separate by Tabs
 	function printResults ($dl, $exp, $mode) {
-		$txt = "";
+		$txt = '';
 		// Get results
 		if (!empty($dl)) {
 			$j = 0;
@@ -1173,15 +1207,18 @@ class Query extends PDO {
 					}
 				} //foreach
 				if (!empty($exp)) {
+					//$txt = '';
 					foreach (array_values($dl[$j]) as $vals) {
-						if ($vals == -1)
-							$myv = "YES";
-						else
+						if ($vals == -1) { 
+							$myv = "YES"; 
+						} else {
 							$myv = $vals;
-						if ($exp == 'csv')
-							$sep = ", ";	// use comma separator to CSV
-						else
-							$sep = "\t";	// use tab separator to XLS (default option)
+						}
+						if ($exp == 'csv') {
+							$sep = ",";	// use comma separator to CSV
+						} else {
+							$sep = "\t";// use tab separator to XLS (default option)
+						}
 						if (is_numeric($myv)) {
 							$txt .= $myv . $sep;
 						} else {
@@ -1193,10 +1230,11 @@ class Query extends PDO {
 				$j++;
 			} //foreach
 		} //if !empty
-		if (!empty($exp))
+		if (!empty($exp)) {
 			return $txt;
-		else
+		} else {
 			return $dl;
+		}
 	}
   
 	// Print results like json array to Javascript
