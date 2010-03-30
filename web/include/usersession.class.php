@@ -535,10 +535,10 @@ class UserSession {
 	public function getDateRange() {
 		$Role = $this->getUserRole();
 		$StatusList = 'PUBLISHED';
-		if ($Role == 'ADMINREGION') { $StatusList = 'PUBLISHED READY DRAFT DELETED'; }
-		if ($Role == 'SUPERVISOR' ) { $StatusList = 'PUBLISHED READY DRAFT DELETED'; }
-		if ($Role == 'USER'       ) { $StatusList = 'PUBLISHED READY DRAFT DELETED'; }
-		if ($Role == 'OBSERVER'   ) { $StatusList = 'PUBLISHED READY DRAFT DELETED'; }
+		if ($Role == 'ADMINREGION') { $StatusList = 'PUBLISHED READY DRAFT'; }
+		if ($Role == 'SUPERVISOR' ) { $StatusList = 'PUBLISHED READY DRAFT'; }
+		if ($Role == 'USER'       ) { $StatusList = 'PUBLISHED READY DRAFT'; }
+		if ($Role == 'OBSERVER'   ) { $StatusList = 'PUBLISHED READY DRAFT'; }
 		return $this->q->getDateRange(explode(' ', $StatusList));
 	}
 } //class
