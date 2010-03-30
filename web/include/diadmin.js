@@ -511,6 +511,7 @@
 				getGeoItems(prmRegionId, arr['GeographyId'], 0, geo.length / 5, src);
 			}
 		}
+		jQuery('#PrevDisasterSerial').val(jQuery('#DisasterSerial').val());
 	}
 	
 	function getGeoItems(reg, geoid, l, lev, src) {
