@@ -69,7 +69,7 @@ function form2eedata($form) {
 	return $eedat;
 }
 
-$sRegionId = getParameter('_REG', getParameter('r',''));
+$sRegionId = getParameter('_REG', getParameter('r', getParameter('RegionId','')));
 if ( ($sRegionId == '') || ($sRegionId == 'undefined') ) {
 	if ($us->sRegionId != 'core') {
 		$sRegionId = $us->sRegionId;
