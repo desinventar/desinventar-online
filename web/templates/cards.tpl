@@ -8,7 +8,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
 	<title>{-#ttitle#-} [{-$regname-}] | {-$usr-} - {-$dicrole-}</title>
 	<link rel="stylesheet" href="css/desinventar.css" type="text/css"/>
-	{-include file="jquery.tpl" -}
 	<script type="text/javascript" src="include/prototype.js"></script>
 	<script type="text/javascript" src="include/combo-box.js"></script>
 	<script type="text/javascript" src="include/diadmin.js"></script>
@@ -27,7 +26,6 @@
 			d.value = tip;
 			} catch(err) { };
 		}
-
 		function requestDCard(cmd, value) {
 			var lsAjax = new Ajax.Request('cards.php', {
 				method: 'get', parameters: 'r={-$reg-}&cmd='+ cmd +'&value='+ value,
@@ -36,28 +34,28 @@
 				},
 				onSuccess: function(request) {
 					var res = request.responseText;
-					if (res.length >= 5 && cmd == "getNextSerial") {
-						$('DisasterSerial').value = value +'-'+ res;
-					} else {
-						if (res.length >= 36 && (cmd == "getPrevDId" || cmd == "getNextDId" || cmd == "getIdfromSerial")) {
-							// check valid DisasterId
+					// check valid DisasterSerial
+					//alert(">>"+ res.length +"<<");
+					if (res.length >= 5 && cmd == "getNextSerial")
+							$('DisasterSerial').value = value +'-'+ res;
+					// check valid DisasterId
+					else if (res.length >= 36 && (cmd == "getPrevDId" || cmd == "getNextDId" || cmd == "getIdfromSerial")) {
 							valid = setDICardfromId('{-$reg-}', res, '');
-							{-if $ctl_validrole-}
-								disenabutton($('cardupd'), false);
-							{-/if-}
+{-if $ctl_validrole-}
+							disenabutton($('cardupd'), false);
+{-/if-}
 							if (cmd == "getIdfromSerial") {
 								disenabutton($('prev'), false);
 								disenabutton($('next'), false);
 							}
-						} else {
-							alert("{-#tcardnot#-}");
-						}
-						$('dostat').innerHTML = "";
 					}
+					else {
+						alert("{-#tcardnot#-}");
+					}
+					$('dostat').innerHTML = "";
 				}
-			);
-		} //function
-		
+			} );
+		}
 		// Display Geography in form and search; k=geoid, l=0, desc='', opc=''
 		function setgeo(k, l, desc, opc) {
 			if (opc == "search") {
@@ -247,46 +245,15 @@
 					} );
 				break;
 				case "cardsav":
-					var cmd = jQuery('#_CMD').val();
-					var DisasterSerial = jQuery('#DisasterSerial').val();
-					var bContinue = true;
-					
-					if (DisasterSerial == '') {
-						alert('DisasterSerial cannot be empty');
-						bContinue = false;
-					}
-					if (bContinue == true) {
-						jQuery.post('cards.php',
-							{'cmd'            : 'existDisasterSerial',
-							 'RegionId'       : '{-$reg-}',
-							 'DisasterSerial' : DisasterSerial
-							},
-							function(data) {
-								if (cmd == 'insertDICard') {
-									if (data != '') {
-										bContinue = false;
-									}
-								}
-								if (cmd == 'updateDICard') {
-								}
-								if (bContinue == false) {
-									alert('DisasterSerial is duplicated');
-								}
-							}
-						);
-							 
-					}
-					if (bContinue == true) {
-						var fl = new Array('DisasterSerial', 'DisasterBeginTime[0]', 'DisasterSource', 
-											'geolev0', 'EventId', 'CauseId', 'RecordStatus');
-						if (checkForm(fl, "{-#errmsgfrm#-}")) {
-							uploadMsg('');
-							$('DICard').submit();
-							DisableEnableForm($('DICard'), true);
-							changeOptions(btn);
-							// clear Help text area
-							showtip('','#ffffff');
-						}
+					var fl = new Array('DisasterSerial', 'DisasterBeginTime[0]', 'DisasterSource', 
+										'geolev0', 'EventId', 'CauseId', 'RecordStatus');
+					if (checkForm(fl, "{-#errmsgfrm#-}")) {
+						uploadMsg('');
+						$('DICard').submit();
+						DisableEnableForm($('DICard'), true);
+						changeOptions(btn);
+						// clear Help text area
+						showtip('','#ffffff');
 					}
 				break;
 				case "cardcln":
@@ -398,7 +365,6 @@
 		<input type="hidden" name="RecordAuthor" id="RecordAuthor" value="{-$usr-}">
 		<input type="hidden" name="RecordCreation" id="RecordCreation">
 		<input type="hidden" name="_CMD" id="_CMD" value="">
-		<input type="hidden" name="PrevDisasterSerial" id="PrevDisasterSerial">
 		<table border="1" cellspacing="8" width="900px">
 			<!-- DATACARD INFORMATION SECTION -->
 			<tr>

@@ -69,7 +69,7 @@ function form2eedata($form) {
 	return $eedat;
 }
 
-$sRegionId = getParameter('_REG', getParameter('r', getParameter('RegionId','')));
+$sRegionId = getParameter('_REG', getParameter('r',''));
 if ( ($sRegionId == '') || ($sRegionId == 'undefined') ) {
 	if ($us->sRegionId != 'core') {
 		$sRegionId = $us->sRegionId;
@@ -99,8 +99,7 @@ if (isset($_GET['u'])) {
 }
 else {
 	$cmd = getParameter('cmd','');
-	// Get Geography elements 
-	if (isset($cmd)) {
+	if ($cmd != '') {
 		// Commands in GET mode: lists, checkings..
 		switch ($cmd) {
 			case "list":
