@@ -8,6 +8,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
 	<title>{-#ttitle#-} [{-$regname-}] | {-$usr-} - {-$dicrole-}</title>
 	<link rel="stylesheet" href="css/desinventar.css" type="text/css"/>
+	{-include file="jquery.tpl" -}
 	<script type="text/javascript" src="include/prototype.js"></script>
 	<script type="text/javascript" src="include/combo-box.js"></script>
 	<script type="text/javascript" src="include/diadmin.js"></script>
@@ -245,15 +246,30 @@
 					} );
 				break;
 				case "cardsav":
-					var fl = new Array('DisasterSerial', 'DisasterBeginTime[0]', 'DisasterSource', 
-										'geolev0', 'EventId', 'CauseId', 'RecordStatus');
-					if (checkForm(fl, "{-#errmsgfrm#-}")) {
-						uploadMsg('');
-						$('DICard').submit();
-						DisableEnableForm($('DICard'), true);
-						changeOptions(btn);
-						// clear Help text area
-						showtip('','#ffffff');
+					var bContinue = true;
+					var DisasterSerial = jQuery('#DisasterSerial').val();
+					var cmd = jQuery('#_CMD').val();
+					jQuery.post('cards.php',
+						{'cmd' : 'existDisasterSerial',
+						 'RegionId' : '{-$reg-}',
+						 'DisasterSerial' : DisasterSerial
+						},
+						function(data) {
+							//alert('DisasterSerial : ' + data);
+						}
+					);
+					bContinue = false;					
+					if (bContinue) {
+						var fl = new Array('DisasterSerial', 'DisasterBeginTime[0]', 'DisasterSource', 
+											'geolev0', 'EventId', 'CauseId', 'RecordStatus');
+						if (checkForm(fl, "{-#errmsgfrm#-}")) {
+							uploadMsg('');
+							$('DICard').submit();
+							DisableEnableForm($('DICard'), true);
+							changeOptions(btn);
+							// clear Help text area
+							showtip('','#ffffff');
+						}
 					}
 				break;
 				case "cardcln":
