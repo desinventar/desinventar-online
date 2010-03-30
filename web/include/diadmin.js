@@ -497,21 +497,21 @@
 	
 	function setDICard(prmRegionId, arr, src) {
 		var diform = null;
-		if (src == "DATA")
+		if (src == "DATA") {
 			diform = window.parent.frames['dif'].document.getElementById('DICard');
-		else
+		} else {
 			diform = $('DICard');
+		}
 		var objElems = diform.elements; // DICard is DesInventar form..
 		for (i=0; i < objElems.length; i++) {
 			if (objElems[i].id != "geolev0") {
 				setElementValue(objElems[i], arr[objElems[i].id]);
-			}
-			else {
+			} else {
 				geo = arr['GeographyId'];
 				getGeoItems(prmRegionId, arr['GeographyId'], 0, geo.length / 5, src);
 			}
-		}
-	}
+		} //for
+	} //function
 	
 	function getGeoItems(reg, geoid, l, lev, src) {
 		if (src == "DATA") {
