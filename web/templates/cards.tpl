@@ -224,7 +224,7 @@
 					$('_CMD').value = 'insertDICard';
 					uploadMsg("{-#tmsgnewcardfill#-}");
 					changeOptions(btn);
-					parent.s.expand();
+					//parent.s.expand();
 				break;
 				case "cardupd":
 					// check if DC is on use
@@ -238,7 +238,7 @@
 								$('_CMD').value = 'updateDICard';
 								uploadMsg("{-#tmsgeditcardfill#-}");
 								changeOptions(btn);
-								parent.s.expand();
+								//parent.s.expand();
 							}
 							else 
 								uploadMsg("{-#tdconuse#-}");
@@ -257,22 +257,33 @@
 						 'DisasterSerial' : DisasterSerial
 						},
 						function(data) {
+							if ( (cmd == 'insertDICard') && (data != '') ) {
+								// Serial of new datacard already exists...
+								alert('Disaster Serial already exists...');
+								bContinue = false;
+							}
+							if (cmd == 'updateDICard') {
+								if (DisasterSerial != PrevDisasterSerial) {
+									// Edited Serial exists in database...
+									alert('Disaster Serial is duplicated...');
+									bContinue = false;
+								}
+							}
 							//alert('DisasterSerial : ' + data);
+							if (bContinue) {
+								var fl = new Array('DisasterSerial', 'DisasterBeginTime[0]', 'DisasterSource', 
+													'geolev0', 'EventId', 'CauseId', 'RecordStatus');
+								if (checkForm(fl, "{-#errmsgfrm#-}")) {
+									uploadMsg('');
+									$('DICard').submit();
+									DisableEnableForm($('DICard'), true);
+									changeOptions(btn);
+									// clear Help text area
+									showtip('','#ffffff');
+								}
+							}
 						}
 					);
-					//bContinue = false;					
-					if (bContinue) {
-						var fl = new Array('DisasterSerial', 'DisasterBeginTime[0]', 'DisasterSource', 
-											'geolev0', 'EventId', 'CauseId', 'RecordStatus');
-						if (checkForm(fl, "{-#errmsgfrm#-}")) {
-							uploadMsg('');
-							$('DICard').submit();
-							DisableEnableForm($('DICard'), true);
-							changeOptions(btn);
-							// clear Help text area
-							showtip('','#ffffff');
-						}
-					}
 				break;
 				case "cardcln":
 					$('DICard').reset();
