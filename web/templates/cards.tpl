@@ -36,7 +36,6 @@
 				onSuccess: function(request) {
 					var res = request.responseText;
 					// check valid DisasterSerial
-					//alert(">>"+ res.length +"<<");
 					if (res.length >= 5 && cmd == "getNextSerial")
 							$('DisasterSerial').value = value +'-'+ res;
 					// check valid DisasterId
@@ -250,7 +249,6 @@
 					var cmd = jQuery('#_CMD').val();
 					var DisasterSerial = jQuery('#DisasterSerial').val();
 					var PrevDisasterSerial = jQuery('#PrevDisasterSerial').val();
-					alert(PrevDisasterSerial);
 					jQuery.post('cards.php',
 						{'cmd' : 'existDisasterSerial',
 						 'RegionId' : '{-$reg-}',
@@ -259,17 +257,16 @@
 						function(data) {
 							if ( (cmd == 'insertDICard') && (data != '') ) {
 								// Serial of new datacard already exists...
-								alert('Disaster Serial already exists...');
+								//alert('Disaster Serial already exists...');
 								bContinue = false;
 							}
 							if (cmd == 'updateDICard') {
 								if (DisasterSerial != PrevDisasterSerial) {
 									// Edited Serial exists in database...
-									alert('Disaster Serial is duplicated...');
+									//alert('Disaster Serial is duplicated...');
 									bContinue = false;
 								}
 							}
-							//alert('DisasterSerial : ' + data);
 							if (bContinue) {
 								var fl = new Array('DisasterSerial', 'DisasterBeginTime[0]', 'DisasterSource', 
 													'geolev0', 'EventId', 'CauseId', 'RecordStatus');
