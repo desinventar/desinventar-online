@@ -7,7 +7,7 @@
 class UserSession {
 	var $q               = null;
 	var $sSessionId      = '';
-	var $sRegionId       = 'core';
+	var $RegionId       = 'core';
 	var $LangIsoCode     = 'eng';
 	var $UserId          = '';
 	var $dStart          = '';
@@ -157,7 +157,7 @@ class UserSession {
 		if ($iReturn > 0) {
 			$this->awake();
 			$this->q->setDBConnection($prmRegionId);
-			$this->sRegionId = $prmRegionId;
+			$this->RegionId = $prmRegionId;
 		}
 		return $iReturn;
 	} // open()
@@ -282,18 +282,21 @@ class UserSession {
 				 "DesInventar - Password Reminder",
 				 "Dear User\nYour login information for DesInventar is:\n" .
 				 "  UserId : " . $row['UserId'] . "\n" .
-				 "  Login  : " . $myPasswd . "\n" . 
+				 "  Passwd : " . $myPasswd . "\n" . 
 				 "\n\n" .
 				 "Sincerely,\n" .
 				 "   The DesInventar Team",
-				"From: desinventar@desinventar.org"
+				"From: support@desinventar.org"
 			);
 		} //foreach
 		return $myAnswer;
 	}
 
 	// Return Role for a Region
-	function getUserRole($prmRegionId) {
+	function getUserRole($prmRegionId='') {
+		if ($prmRegionId == '') {
+			$prmRegionId = $this->RegionId;
+		}
 		$myAnswer = "";
 		$sQuery = "SELECT * FROM RegionAuth WHERE ";
 		if ($prmRegionId != '') {
@@ -528,8 +531,16 @@ class UserSession {
 		}
 		return $RegionList;
 	}
-
 	
+	public function getDateRange() {
+		$Role = $this->getUserRole();
+		$StatusList = 'PUBLISHED';
+		if ($Role == 'ADMINREGION') { $StatusList = 'PUBLISHED READY DRAFT'; }
+		if ($Role == 'SUPERVISOR' ) { $StatusList = 'PUBLISHED READY DRAFT'; }
+		if ($Role == 'USER'       ) { $StatusList = 'PUBLISHED READY DRAFT'; }
+		if ($Role == 'OBSERVER'   ) { $StatusList = 'PUBLISHED READY DRAFT'; }
+		return $this->q->getDateRange(explode(' ', $StatusList));
+	}
 } //class
 
 </script>

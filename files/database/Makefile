@@ -3,15 +3,15 @@ SQLITE=sqlite3
 all : base.db core.db desinventar.db lang langportal
 
 # Rebuild base.db database
-base.db : base.sql doc-db.csv events.csv causes.csv
+base.db : base.sql doc-db.csv event.csv cause.csv
 	/bin/rm -f base.db
 	sqlite3 base.db < base.sql
-	php insertEveCau.php events.csv spa EVENT | sqlite3 base.db
-	php insertEveCau.php events.csv eng EVENT | sqlite3 base.db
-	php insertEveCau.php events.csv fre EVENT | sqlite3 base.db
-	php insertEveCau.php causes.csv spa CAUSE | sqlite3 base.db
-	php insertEveCau.php causes.csv eng CAUSE | sqlite3 base.db
-	php insertEveCau.php causes.csv fre CAUSE | sqlite3 base.db
+	php insertEveCau.php event.csv spa EVENT | sqlite3 base.db
+	php insertEveCau.php event.csv eng EVENT | sqlite3 base.db
+	php insertEveCau.php event.csv fre EVENT | sqlite3 base.db
+	php insertEveCau.php cause.csv spa CAUSE | sqlite3 base.db
+	php insertEveCau.php cause.csv eng CAUSE | sqlite3 base.db
+	php insertEveCau.php cause.csv fre CAUSE | sqlite3 base.db
 	./createDictionary.php | sqlite3 base.db
 	./iso3166tosql.pl | sqlite3 base.db
 	./square2sql.pl | sqlite3 base.db

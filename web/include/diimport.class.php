@@ -9,7 +9,7 @@ require_once('didisaster.class.php');
 class DIImport {
 	public function __construct($prmSessionId) {
 		$this->us = $prmSessionId;
-		$this->q = new Query($this->us->sRegionId);
+		$this->q = new Query($this->us->RegionId);
 	}
 	
 	public function validateFromCSV($FileName, $ObjectType) {
@@ -65,9 +65,9 @@ class DIImport {
 						}
 					break;
 					case DI_DISASTER:
-						if ($rowCount % 100 == 0) {
-							fb($rowCount);
-						}
+						//if ( ($rowCount < 10) || ( ($rowCount >= 200) && ($rowCount<300) ) || ($rowCount % 100 == 0) ) {
+							fb($rowCount . ' ' . count($values));
+						//}
 						$o = new DIDisaster($this->us);
 						$iReturn = $o->importFromCSV($cols, $values);
 						if ($iReturn > 0) {

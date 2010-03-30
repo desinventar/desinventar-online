@@ -2,7 +2,7 @@
 /************************************************
  DesInventar8
  http://www.desinventar.org  
- (c) 1998-2009 Corporacion OSSO
+ (c) 1998-2010 Corporacion OSSO
  ***********************************************/
     
 require_once('include/loader.php');
@@ -69,7 +69,7 @@ function form2eedata($form) {
 	return $eedat;
 }
 
-$sRegionId = getParameter('_REG', getParameter('r',''));
+$sRegionId = getParameter('_REG', getParameter('r', getParameter('RegionId','')));
 if ( ($sRegionId == '') || ($sRegionId == 'undefined') ) {
 	if ($us->sRegionId != 'core') {
 		$sRegionId = $us->sRegionId;
@@ -98,10 +98,10 @@ if (isset($_GET['u'])) {
 	$t->assign ("stat", $status);
 }
 else {
-	// Get Geography elements 
-	if (isset($_GET['cmd'])) {
+	$cmd = getParameter('cmd','');
+	if ($cmd != '') {
 		// Commands in GET mode: lists, checkings..
-		switch ($_GET['cmd']) {
+		switch ($cmd) {
 			case "list":
 				$lev = $us->q->getNextLev($_GET['GeographyId']);
 				$t->assign ("lev", $lev);
@@ -141,7 +141,13 @@ else {
 				$did = $us->q->getDisasterIdFromSerial($_GET['value']);
 				echo $did;
 			break;
-			default: break;
+			case 'existDisasterSerial':
+				$DisasterSerial = getParameter('DisasterSerial');
+				$Answer = $us->q->existDisasterSerial($DisasterSerial);
+				echo $Answer;
+			break;
+			default:
+			break;
 		}
 	} elseif (isset($_GET['DisasterId']) && !empty($_GET['DisasterId'])) {
 		$DisasterId = $_GET['DisasterId'];
