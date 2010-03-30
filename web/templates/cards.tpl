@@ -247,8 +247,10 @@
 				break;
 				case "cardsav":
 					var bContinue = true;
-					var DisasterSerial = jQuery('#DisasterSerial').val();
 					var cmd = jQuery('#_CMD').val();
+					var DisasterSerial = jQuery('#DisasterSerial').val();
+					var PrevDisasterSerial = jQuery('#PrevDisasterSerial').val();
+					alert(PrevDisasterSerial);
 					jQuery.post('cards.php',
 						{'cmd' : 'existDisasterSerial',
 						 'RegionId' : '{-$reg-}',
@@ -258,7 +260,7 @@
 							//alert('DisasterSerial : ' + data);
 						}
 					);
-					bContinue = false;					
+					//bContinue = false;					
 					if (bContinue) {
 						var fl = new Array('DisasterSerial', 'DisasterBeginTime[0]', 'DisasterSource', 
 											'geolev0', 'EventId', 'CauseId', 'RecordStatus');
@@ -381,6 +383,7 @@
 		<input type="hidden" name="RecordAuthor" id="RecordAuthor" value="{-$usr-}">
 		<input type="hidden" name="RecordCreation" id="RecordCreation">
 		<input type="hidden" name="_CMD" id="_CMD" value="">
+		<input type="hidden" name="PrevDisasterSerial" id="PrevDisasterSerial" value="">
 		<table border="1" cellspacing="8" width="900px">
 			<!-- DATACARD INFORMATION SECTION -->
 			<tr>
