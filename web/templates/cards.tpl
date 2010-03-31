@@ -27,6 +27,7 @@
 			d.value = tip;
 			} catch(err) { };
 		}
+
 		function requestDCard(cmd, value) {
 			var lsAjax = new Ajax.Request('cards.php', {
 				method: 'get', parameters: 'r={-$reg-}&cmd='+ cmd +'&value='+ value,
@@ -35,27 +36,27 @@
 				},
 				onSuccess: function(request) {
 					var res = request.responseText;
-					// check valid DisasterSerial
-					if (res.length >= 5 && cmd == "getNextSerial")
+					if (res.length >= 5 && cmd == "getNextSerial") {
+						// check valid DisasterSerial
 							$('DisasterSerial').value = value +'-'+ res;
-					// check valid DisasterId
-					else if (res.length >= 36 && (cmd == "getPrevDId" || cmd == "getNextDId" || cmd == "getIdfromSerial")) {
-							valid = setDICardfromId('{-$reg-}', res, '');
-{-if $ctl_validrole-}
-							disenabutton($('cardupd'), false);
-{-/if-}
-							if (cmd == "getIdfromSerial") {
-								disenabutton($('prev'), false);
-								disenabutton($('next'), false);
-							}
-					}
-					else {
+					} else if (res.length >= 36 && (cmd == "getPrevDId" || cmd == "getNextDId" || cmd == "getIdfromSerial")) {
+						// check valid DisasterId
+						valid = setDICardfromId('{-$reg-}', res, '');
+						{-if $ctl_validrole-}
+						disenabutton($('cardupd'), false);
+						{-/if-}
+						if (cmd == "getIdfromSerial") {
+							disenabutton($('prev'), false);
+							disenabutton($('next'), false);
+						}
+					} else {
 						alert("{-#tcardnot#-}");
 					}
 					$('dostat').innerHTML = "";
 				}
 			} );
 		}
+
 		// Display Geography in form and search; k=geoid, l=0, desc='', opc=''
 		function setgeo(k, l, desc, opc) {
 			if (opc == "search") {
