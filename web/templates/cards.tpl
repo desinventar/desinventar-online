@@ -216,6 +216,7 @@
 			updateList('dostat', 'cards.php', 'u=1');
 		}
 		function onSubmitBtn(btn) {
+			displayDatacardStatusMsg('');
 			$('dic').src="about:blank";
 			switch (btn) {
 				case "cardnew":
@@ -249,13 +250,12 @@
 				break;
 				case "cardsav":
 					var bContinue = true;
-					/*
 					var cmd = jQuery('#_CMD').val();
 					var DisasterSerial = jQuery('#DisasterSerial').val();
 					var PrevDisasterSerial = jQuery('#PrevDisasterSerial').val();
 					jQuery.post('cards.php',
-						{'cmd' : 'existDisasterSerial',
-						 'RegionId' : '{-$reg-}',
+						{'cmd'            : 'existDisasterSerial',
+						 'RegionId'       : '{-$reg-}',
 						 'DisasterSerial' : DisasterSerial
 						},
 						function(data) {
@@ -271,9 +271,11 @@
 									bContinue = false;
 								}
 							}
+							if (bContinue == false) {
+								displayDatacardStatusMsg('msgDuplicateDisasterSerial');
+							}
 						}
 					);
-					*/
 					bContinue = true;
 					if (bContinue) {
 						var fl = new Array('DisasterSerial', 'DisasterBeginTime[0]', 'DisasterSource', 
@@ -307,6 +309,15 @@
 			}
 			return true;
 		}
+		
+		function displayDatacardStatusMsg(msgId) {
+			// First hide all items
+			jQuery('.datacardStatusMsg').hide();
+			// Show a specific message
+			if (msgId != '') {
+				jQuery('#' + msgId).show();
+			}
+		}
 
 		window.onload = function() {
 			DisableEnableForm($('DICard'), true);
@@ -314,6 +325,9 @@
 			{-if $ctl_validrole-}
 				uploadMsg("{-#tmsgnewcard#-}");
 			{-/if-}
+			
+			// Hide StatusMessages
+			displayDatacardStatusMsg('');
 			var pe = new PeriodicalExecuter(setActive, 60);
 		}
 	</script>
@@ -396,8 +410,9 @@
 			</td>
 		</tr>
 		<tr>
-			<td align="left" width="450px">
-				<div id="DatacardStatusMessage">
+			<td align="left" valign="top" width="450px">
+				<div id="divDatacardStatusMessage">
+					<span class="datacardStatusMsg" id="msgDuplicateDisasterSerial">El serial ya esta asignado.</span>
 				</div>
 				<br />
 			</td>
