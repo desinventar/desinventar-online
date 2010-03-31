@@ -259,20 +259,21 @@
 						 'DisasterSerial' : DisasterSerial
 						},
 						function(data) {
+							bContinue = true;
 							if ( (cmd == 'insertDICard') && (data != '') ) {
 								// Serial of new datacard already exists...
 								//alert('Disaster Serial already exists...');
 								bContinue = false;
 							}
 							if (cmd == 'updateDICard') {
-								if (DisasterSerial != PrevDisasterSerial) {
+								if ( (DisasterSerial != PrevDisasterSerial) && (data != '') ) {
 									// Edited Serial exists in database...
 									//alert('Disaster Serial is duplicated...');
 									bContinue = false;
 								}
 							}
 							if (bContinue == false) {
-								displayDatacardStatusMsg('msgDuplicateDisasterSerial');
+								displayDatacardStatusMsg('msgDuplicatedDisasterSerial');
 							}
 							if (bContinue) {
 								var fl = new Array('DisasterSerial', 'DisasterBeginTime[0]', 'DisasterSource', 
@@ -411,7 +412,7 @@
 		<tr>
 			<td align="left" valign="top" width="450px">
 				<div id="divDatacardStatusMessage">
-					<span class="datacardStatusMsg" id="msgDuplicateDisasterSerial">El serial ya esta asignado.</span>
+					<span class="datacardStatusMsg" id="msgDuplicatedDisasterSerial">{-#msgDuplicatedDisasterSerial#-}</span>
 				</div>
 				<br />
 			</td>
