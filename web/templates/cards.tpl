@@ -274,21 +274,20 @@
 							if (bContinue == false) {
 								displayDatacardStatusMsg('msgDuplicateDisasterSerial');
 							}
+							if (bContinue) {
+								var fl = new Array('DisasterSerial', 'DisasterBeginTime[0]', 'DisasterSource', 
+													'geolev0', 'EventId', 'CauseId', 'RecordStatus');
+								if (checkForm(fl, "{-#errmsgfrm#-}")) {
+									uploadMsg('');
+									$('DICard').submit();
+									DisableEnableForm($('DICard'), true);
+									changeOptions(btn);
+									// clear Help text area
+									showtip('','#ffffff');
+								}
+							}
 						}
 					);
-					bContinue = true;
-					if (bContinue) {
-						var fl = new Array('DisasterSerial', 'DisasterBeginTime[0]', 'DisasterSource', 
-											'geolev0', 'EventId', 'CauseId', 'RecordStatus');
-						if (checkForm(fl, "{-#errmsgfrm#-}")) {
-							uploadMsg('');
-							$('DICard').submit();
-							DisableEnableForm($('DICard'), true);
-							changeOptions(btn);
-							// clear Help text area
-							showtip('','#ffffff');
-						}
-					}
 				break;
 				case "cardcln":
 					$('DICard').reset();

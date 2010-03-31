@@ -144,7 +144,7 @@ else {
 			case 'existDisasterSerial':
 				$DisasterSerial = getParameter('DisasterSerial');
 				$Answer = $us->q->existDisasterSerial($DisasterSerial);
-				echo $Answer;
+				print $Answer;
 			break;
 			default:
 			break;
