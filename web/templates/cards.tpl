@@ -772,7 +772,6 @@
 </body>
 </html>
 {-/if-}
-
 {-if $ctl_result-}
 	<?xml version="1.0" encoding="UTF-8" ?>
 	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -794,7 +793,6 @@
 		</body>
 	</html>
 {-/if-}
-
 {-if $ctl_updater-}
 	<span style="width:10px; height:10px; position:absolute; left:0; top:0; background-color:{-$stat-};">
 	</span>
