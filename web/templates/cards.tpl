@@ -304,14 +304,17 @@
 			}
 			return true;
 		}
+
 		window.onload = function() {
 			DisableEnableForm($('DICard'), true);
 			changeOptions();
-{-if $ctl_validrole-}
-			uploadMsg("{-#tmsgnewcard#-}");{-/if-}
+			{-if $ctl_validrole-}
+				uploadMsg("{-#tmsgnewcard#-}");
+			{-/if-}
 			var pe = new PeriodicalExecuter(setActive, 60);
 		}
 	</script>
+
 	<style type="text/css">
 		.bnew {
 			background-image: url(images/newicon.png) !important;
@@ -346,47 +349,56 @@
 
 <body>
 	<script type="text/javascript" src="include/wz_tooltip.js"></script>
-<!-- BEG DI8 FORM CARD -->
+	<!-- BEG DI8 FORM CARD -->
 	<table width="900px" border="0" cellpadding="0" cellspacing="0" >
-	 <tr valign="middle">
-	  <td width="450px">
-{-if $ctl_validrole-}
-		<input type="button" id="cardnew" class="bb bnew" onmouseover="Tip('{-#tnewtitle#-}: {-#tnewdesc#-}')" 
-				onmouseout="UnTip()" onClick="onSubmitBtn('cardnew');" />
-		<input type="button" id="cardupd" class="bb bupd" onmouseover="Tip('{-#tupdtitle#-}: {-#tupddesc#-}')" 
-				onmouseout="UnTip()" onClick="onSubmitBtn('cardupd');" />
-		<input type="button" id="cardsav" class="bb bsave" onmouseover="Tip('{-#tsavtitle#-}: {-#tsavdesc#-}')" 
-				onmouseout="UnTip()" onClick="onSubmitBtn('cardsav');" />
-		<input type="button" id="cardcln" class="bb bclean" onmouseover="Tip('{-#tclntitle#-}: {-#tclndesc#-}')" 
-				onmouseout="UnTip()" onClick="onSubmitBtn('cardcln');" />
-		<input type="button" id="cardcan" class="bb bcancel" onmouseover="Tip('{-#tcantitle#-}: {-#tcandesc#-}')" 
-				onmouseout="UnTip()" onClick="onSubmitBtn('cardcan');" />
-{-/if-}
-		<input type="button" id="cardprn" class="bb bprint" onmouseover="Tip('{-#mprint#-}')" 
-				onmouseout="UnTip()" onClick="window.print();" />
-		&nbsp;&nbsp;|&nbsp;&nbsp;
-		<input type="button" id="first" value="<<" class="bb line" onmouseover="Tip('{-#bfirst#-}')" 
-				onmouseout="UnTip()" onClick="gotocard('first')" />
-		<input type="button" id="prev"  value="<" class="bb line" onmouseover="Tip('{-#bprev#-}')" 
-				onmouseout="UnTip()" onClick="gotocard('prev')" />
-		<input type="button" id="next"  value=">" class="bb line" onmouseover="Tip('{-#bnext#-}')" 
-				onmouseout="UnTip()" onClick="gotocard('next')" />
-		<input type="button" id="last"  value=">>" class="bb line" onmouseover="Tip('{-#blast#-}')" 
-				onmouseout="UnTip()" onClick="gotocard('last')" />
-		&nbsp;&nbsp;|&nbsp;&nbsp;
-		{-$dis.DisasterSerial[0]-}
-		<input type="text" id="fndserial" style="width:60px;" class="line"
-			onKeyDown="if(event.keyCode==13) requestDCard('getIdfromSerial', $('fndserial').value);" />
-		<input type="button" id="cardfnd" class="bb bfind" onmouseover="Tip('{-#texptitle#-}')" onmouseout="UnTip()" 
-			onClick="if($('fndserial').value !='') requestDCard('getIdfromSerial', $('fndserial').value); 
-					else alert('{-#bexpsearch#-}: {-#texpdesc#-}')" />
-		<br />
-		<span class="dlgmsg" id="distatusmsg"></span><span class="dlgmsg" id="dostat"></span>
-	  </td>
-	  <td align="right" width="450px">
-		<iframe name="dic" id="dic" frameborder="0" style="width:100%; height:28px;" src="about:blank"></iframe>
-	  </td>
-	 </tr>
+		<tr valign="middle">
+			<td width="450px" rowspan="2">
+				{-if $ctl_validrole-}
+					<input type="button" id="cardnew" class="bb bnew" onmouseover="Tip('{-#tnewtitle#-}: {-#tnewdesc#-}')" 
+						onmouseout="UnTip()" onClick="onSubmitBtn('cardnew');" />
+					<input type="button" id="cardupd" class="bb bupd" onmouseover="Tip('{-#tupdtitle#-}: {-#tupddesc#-}')" 
+						onmouseout="UnTip()" onClick="onSubmitBtn('cardupd');" />
+					<input type="button" id="cardsav" class="bb bsave" onmouseover="Tip('{-#tsavtitle#-}: {-#tsavdesc#-}')" 
+						onmouseout="UnTip()" onClick="onSubmitBtn('cardsav');" />
+					<input type="button" id="cardcln" class="bb bclean" onmouseover="Tip('{-#tclntitle#-}: {-#tclndesc#-}')" 
+						onmouseout="UnTip()" onClick="onSubmitBtn('cardcln');" />
+					<input type="button" id="cardcan" class="bb bcancel" onmouseover="Tip('{-#tcantitle#-}: {-#tcandesc#-}')" 
+						onmouseout="UnTip()" onClick="onSubmitBtn('cardcan');" />
+				{-/if-}
+				<input type="button" id="cardprn" class="bb bprint" onmouseover="Tip('{-#mprint#-}')" 
+					onmouseout="UnTip()" onClick="window.print();" />
+				&nbsp;&nbsp;|&nbsp;&nbsp;
+				<input type="button" id="first" value="<<" class="bb line" onmouseover="Tip('{-#bfirst#-}')" 
+					onmouseout="UnTip()" onClick="gotocard('first')" />
+				<input type="button" id="prev"  value="<" class="bb line" onmouseover="Tip('{-#bprev#-}')" 
+					onmouseout="UnTip()" onClick="gotocard('prev')" />
+				<input type="button" id="next"  value=">" class="bb line" onmouseover="Tip('{-#bnext#-}')" 
+					onmouseout="UnTip()" onClick="gotocard('next')" />
+				<input type="button" id="last"  value=">>" class="bb line" onmouseover="Tip('{-#blast#-}')" 
+					onmouseout="UnTip()" onClick="gotocard('last')" />
+				&nbsp;&nbsp;|&nbsp;&nbsp;
+				{-$dis.DisasterSerial[0]-}
+				<input type="text" id="fndserial" style="width:60px;" class="line"
+					onKeyDown="if(event.keyCode==13) requestDCard('getIdfromSerial', $('fndserial').value);" />
+				<input type="button" id="cardfnd" class="bb bfind" onmouseover="Tip('{-#texptitle#-}')" onmouseout="UnTip()" 
+					onClick="if($('fndserial').value !='') requestDCard('getIdfromSerial', $('fndserial').value); 
+						else alert('{-#bexpsearch#-}: {-#texpdesc#-}')" />
+				<br />
+				
+				<span class="dlgmsg" id="distatusmsg"></span>
+				<span class="dlgmsg" id="dostat"></span>
+			</td>
+			<td align="right" width="450px">
+				<iframe name="dic" id="dic" frameborder="0" style="width:100%; height:28px;" src="about:blank"></iframe>
+			</td>
+		</tr>
+		<tr>
+			<td align="left" width="450px">
+				<div id="DatacardStatusMessage">
+				</div>
+				<br />
+			</td>
+		</tr>
 	</table>
 	<form id="DICard" action="cards.php" method="POST" target="dic">
 		<input type="hidden" name="_REG" id="_REG" value="{-$reg-}">
