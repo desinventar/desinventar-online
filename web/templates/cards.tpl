@@ -260,13 +260,14 @@
 						},
 						function(data) {
 							bContinue = true;
-							if ( (cmd == 'insertDICard') && (data != '') ) {
+							eval('var myObj = ' + data);
+							if ( (cmd == 'insertDICard') && (myObj != '') ) {
 								// Serial of new datacard already exists...
 								//alert('Disaster Serial already exists...');
 								bContinue = false;
 							}
 							if (cmd == 'updateDICard') {
-								if ( (DisasterSerial != PrevDisasterSerial) && (data != '') ) {
+								if ( (DisasterSerial != PrevDisasterSerial) && (myObj != '') ) {
 									// Edited Serial exists in database...
 									//alert('Disaster Serial is duplicated...');
 									bContinue = false;
