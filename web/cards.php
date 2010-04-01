@@ -149,7 +149,7 @@ if (isset($_GET['u'])) {
 			case 'existDisasterSerial':
 				$DisasterSerial = getParameter('DisasterSerial');
 				$Answer = $us->q->existDisasterSerial($DisasterSerial);
-				print $Answer;
+				print json_encode($Answer);
 			break;
 			default:
 			break;
@@ -292,5 +292,4 @@ if (isset($_GET['u'])) {
 		$t->display("cards.tpl");
 	}
 }
-
 </script>
