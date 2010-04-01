@@ -1,6 +1,5 @@
 {-config_load file=`$lg`.conf section="di8_input"-}
 {-*** SHOWING EFFECTS ***-}
-{-if $ctl_effects-}
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -497,28 +496,7 @@
 								{-$dis.DisasterGeographyId[0]-}<b style="color:darkred;">*</b><br />
 								<input id="GeographyId" name="GeographyId" type="hidden" />
 								<span id="lst_geo" class="geodiv" style="width: 180px; height: 30px;">
-{-/if-}
-									{-*** PRINT LEVEL ITEMS ACCORDING WITH SELECTION - USED TO SELECTION AND SEARCH ***-}
-									{-if $ctl_geolist-}
-										{-if $lev <= $levmax-}
-											{-$lev-}- {-$levname[0]-}:
-											<select onChange="setgeo(this.options[this.selectedIndex].value, {-$lev-},'{-$levname[1]-}','{-$opc-}');" 
-												autoComplete="true" style="width:180px; background-Color:#eee;" tabindex="7" id="geolev{-$lev-}"
-												class="line" onFocus="showtip('{-$dis.GeographyId[2]-}', '#d4baf6')">
-												<option value="" style="text-align:center;">--</option>
-												{-foreach name=geol key=key item=item from=$geol-}
-													{-if $item[2]-}
-														<option value="{-$key-}">{-$item[1]-}</option>
-													{-/if-}
-												{-/foreach-}
-											</select>
-											<br />
-											<span id="lev{-$lev-}">
-											</span>
-										{-/if-}
-									{-/if-}
-									{-*** CONTINUE SHOWING DATACARD ***-}
-{-if $ctl_effects-}
+									{-include file="cards_geolist.tpl"-}
 									{-assign var="tabind" value="10"-}
 								</span>
 								<br />
@@ -772,4 +750,3 @@
 	<!-- END DI8 FORM CARD -->
 </body>
 </html>
-{-/if-}
