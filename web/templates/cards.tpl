@@ -11,50 +11,8 @@
 	<script type="text/javascript" src="include/prototype.js"></script>
 	<script type="text/javascript" src="include/combo-box.js"></script>
 	<script type="text/javascript" src="include/diadmin.js"></script>
+	<script type="text/javascript" src="js/cards.js"></script>
 	<script type="text/javascript" language="javascript">
-		var mod = "di";
-		function hidediv(myDiv) {
-			$(myDiv).style.visibility = 'hidden';
-		}
-		function showdiv(myDiv) {
-			$(myDiv).style.visibility = 'visible';
-		}
-		function showtip(tip, clr) {
-			try {
-			var d = parent.document.getElementById('_DIDesc');
-			d.style.backgroundColor = clr;
-			d.value = tip;
-			} catch(err) { };
-		}
-
-		function requestDCard(cmd, value) {
-			var lsAjax = new Ajax.Request('cards.php', {
-				method: 'get', parameters: 'r={-$reg-}&cmd='+ cmd +'&value='+ value,
-				onLoading: function(request) {
-					$('dostat').innerHTML = waiting;
-				},
-				onSuccess: function(request) {
-					var res = request.responseText;
-					if (res.length >= 5 && cmd == "getNextSerial") {
-						// check valid DisasterSerial
-							$('DisasterSerial').value = value +'-'+ res;
-					} else if (res.length >= 36 && (cmd == "getPrevDId" || cmd == "getNextDId" || cmd == "getIdfromSerial")) {
-						// check valid DisasterId
-						valid = setDICardfromId('{-$reg-}', res, '');
-						{-if $ctl_validrole-}
-						disenabutton($('cardupd'), false);
-						{-/if-}
-						if (cmd == "getIdfromSerial") {
-							disenabutton($('prev'), false);
-							disenabutton($('next'), false);
-						}
-					} else {
-						alert("{-#tcardnot#-}");
-					}
-					$('dostat').innerHTML = "";
-				}
-			} );
-		}
 
 		// Display Geography in form and search; k=geoid, l=0, desc='', opc=''
 		function setgeo(k, l, desc, opc) {
@@ -194,13 +152,18 @@
 					disenabutton($('next'), false);
 				break;
 				case "prev":
-					requestDCard('getPrevDId', $('DisasterId').value);
+					bFound = requestDCard('getPrevDId', $('DisasterId').value);
+					if (bFound == false) {
+						alert("{-#tcardnot#-}");
+					}
 					{-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}
 					disenabutton($('next'), false);
 				break;
 				case "next":
-					requestDCard('getNextDId', $('DisasterId').value);
-					{-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}
+					bFound = requestDCard('getNextDId', $('DisasterId').value);
+					if (bFound == false) {
+						alert("{-#tcardnot#-}");
+					}					{-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}
 					disenabutton($('prev'), false);
 				break;
 				case "last":
@@ -320,6 +283,8 @@
 		}
 
 		window.onload = function() {
+			onDatacardReady();
+			
 			DisableEnableForm($('DICard'), true);
 			changeOptions();
 			{-if $ctl_validrole-}
@@ -328,6 +293,7 @@
 			
 			// Hide StatusMessages
 			displayDatacardStatusMsg('');
+			jQuery('#divDatacardParameter').hide();
 			var pe = new PeriodicalExecuter(setActive, 60);
 		}
 	</script>
@@ -748,5 +714,9 @@
 		</table>
 	</form>
 	<!-- END DI8 FORM CARD -->
+	<div id="divDatacardParameter">
+		<span id="prmRegionId">{-$reg-}</span>
+		<span id="prmUserRole">{-$role-}</span>
+	</div>
 </body>
 </html>
