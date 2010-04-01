@@ -14,10 +14,14 @@
 	<script type="text/javascript" language="javascript">
 
 		function gotocard(opc) {
+			bUpdate = getDatacardUpdatePerm(jQuery('#prmUserRole').text());
+			RegionId = jQuery('#prmRegionId').text();
 			switch (opc) {
 				case "first":
-					setDICard('{-$reg-}', {-$fst-}, '');
-					{-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}
+					setDICard(RegionId, {-$fst-}, '');
+					if (bUpdate) {
+						disenabutton($('cardupd'), false);
+					}
 					disenabutton($('prev'), true);
 					disenabutton($('next'), false);
 				break;
@@ -26,7 +30,9 @@
 					if (bFound == false) {
 						alert('{-#tcardnot#-}');
 					}
-					{-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}
+					if (bUpdate) {
+						disenabutton($('cardupd'), false);
+					}
 					disenabutton($('next'), false);
 				break;
 				case "next":
@@ -34,12 +40,16 @@
 					if (bFound == false) {
 						alert('{-#tcardnot#-}');
 					}
-					{-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}
+					if (bUpdate) {
+						disenabutton($('cardupd'), false);
+					}
 					disenabutton($('prev'), false);
 				break;
 				case "last":
-					setDICard('{-$reg-}', {-$lst-}, '');
-					{-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}
+					setDICard(RegionId, {-$lst-}, '');
+					if (bUpdate) {
+						disenabutton($('cardupd'), false);
+					}
 					disenabutton($('prev'), false);
 					disenabutton($('next'), true);
 				break;
@@ -146,16 +156,19 @@
 		
 		window.onload = function() {
 			onDatacardReady();
-			
 			DisableEnableForm($('DICard'), true);
 			changeOptions();
-			{-if $ctl_validrole-}
+			UserRole = jQuery('#prmUserRole').text();
+			if (UserRole != '') {
 				uploadMsg("{-#tmsgnewcard#-}");
-			{-/if-}
+			}
 			
 			// Hide StatusMessages
 			displayDatacardStatusMsg('');
+			// Hide window's parameters
 			jQuery('#divDatacardParameter').hide();
+			
+			// Create periodic task to keep session alive...
 			var pe = new PeriodicalExecuter(setActive, 60);
 		}
 	</script>
