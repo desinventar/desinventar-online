@@ -100,6 +100,7 @@ if (isset($_GET['u'])) {
 		$status = "red";
 	}
 	$t->assign("stat", $status);
+	$t->display('card_updater.tpl');
 } else {
 	$t->assign("reg", $sRegionId);
 	$cmd = getParameter('cmd','');
@@ -191,9 +192,9 @@ if (isset($_GET['u'])) {
 				$o = new DIEEData($us, $eedat['DisasterId']);
 				$o->setFromArray($eedat);
 				$i = $o->insert();
-			}
-			else
+			} else {
 				$t->assign("statusmsg", showerror($i));
+			}
 		} elseif ($_POST['_CMD'] == "updateDICard") {
 			// Update Existing Datacard
 			$data = form2disaster($_POST, CMD_UPDATE);
@@ -211,14 +212,13 @@ if (isset($_GET['u'])) {
 				$o = new DIEEData($us, $eedat['DisasterId']);
 				$o->setFromArray($eedat);
 				$i = $o->update();
-			}
-			else
+			} else {
 				$t->assign("statusmsg", showerror($i));
+			}
 		}
 		$t->assign("dipub", $us->q->getNumDisasterByStatus("PUBLISHED"));
 		$t->assign("direa", $us->q->getNumDisasterByStatus("READY"));
-		$t->assign("ctl_result", true);
-		$t->display("cards.tpl");
+		$t->display("cards_result.tpl");
 		// End _CMD Block
 	} else {
 		//if ($us->UserId == '' || $us->getUserRole($sRegionId == '')) {}
