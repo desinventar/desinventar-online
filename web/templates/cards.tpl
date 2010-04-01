@@ -154,7 +154,7 @@
 				case "prev":
 					bFound = requestDCard('getPrevDId', $('DisasterId').value);
 					if (bFound == false) {
-						alert("{-#tcardnot#-}");
+						alert('{-#tcardnot#-}');
 					}
 					{-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}
 					disenabutton($('next'), false);
@@ -162,8 +162,9 @@
 				case "next":
 					bFound = requestDCard('getNextDId', $('DisasterId').value);
 					if (bFound == false) {
-						alert("{-#tcardnot#-}");
-					}					{-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}
+						alert('{-#tcardnot#-}');
+					}
+					{-if $ctl_validrole-}disenabutton($('cardupd'), false);{-/if-}
 					disenabutton($('prev'), false);
 				break;
 				case "last":
