@@ -92,7 +92,6 @@ if (! file_exists($us->q->getDBFile($sRegionId))) {
 
 // UPDATER: If user is still connected, awake session so it will not expire
 if (isset($_GET['u'])) {
-	$t->assign("ctl_updater", true);
 	$res = $us->awake();
 	if (!iserror($res)) {
 		$status = "green";
@@ -114,8 +113,7 @@ if (isset($_GET['u'])) {
 				$t->assign("levname", $us->q->loadGeoLevById($lev));
 				$t->assign("geol", $us->q->loadGeoChilds($_GET['GeographyId']));
 				$t->assign("opc", isset($_GET['opc']) ? $_GET['opc'] : '');
-				$t->assign("ctl_geolist", true);
-				$t->display("cards.tpl");
+				$t->display("cards_geolist.tpl");
 			break;
 			case "getNextSerial":
 				$ser = $us->q->getNextDisasterSerial($_GET['value']);
@@ -271,13 +269,13 @@ if (isset($_GET['u'])) {
 		$t->assign("levmax", $us->q->getMaxGeoLev());
 		$t->assign("levname", $us->q->loadGeoLevById($lev));
 		$t->assign("geol", $us->q->loadGeography($lev));
-		$t->assign("ctl_geolist", true);
 		$t->assign("evel", $us->q->loadEvents(null, "active", $lg));
 		$t->assign("caul", $us->q->loadCauses(null, "active", $lg));
 		$t->assign("eefl", $us->q->getEEFieldList("True"));
 		$t->assign("role", $role);
-		if ($role == "USER" || $role == "SUPERVISOR" || $role == "ADMINREGION")
+		if ($role == "USER" || $role == "SUPERVISOR" || $role == "ADMINREGION") {
 			$t->assign("ctl_validrole", true);
+		}
 		// get first and last datacard
 		$fst = $us->q->hash2json($us->q->getDisasterById($us->q->getFirstDisasterid()));
 		$lst = $us->q->hash2json($us->q->getDisasterById($us->q->getLastDisasterid()));
