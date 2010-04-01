@@ -30,6 +30,58 @@ function getDatacardUpdatePerm(UserRole) {
 	return bAnswer;
 }
 
+// Display Geography in form and search; k=geoid, l=0, desc='', opc=''
+function setgeo(k, l, desc, opc) {
+	var RegionId = jQuery('#prmRegionId').text();
+	if (opc == "search") {
+		var fld = '_GeographyId';
+		var lev = '_lev'+ l;
+		var op = '&opc='+ opc;
+	} else {
+		var fld = 'GeographyId';
+		var lev = 'lev'+ l;
+		var op = '';
+	}
+	if (k.length >= 5) {
+		$(fld).value = k;
+		updateList(lev, 'cards.php', 'cmd=list' + '&GeographyId='+ k + op + '&r=' + RegionId);
+	} else if (k == '') {
+		showtip(desc, '#d4baf6');
+		val = $(fld).value;
+		$(fld).value = val.substr(0, val.length - 5);
+		$(lev).innerHTML = '';
+	}
+}
+
+function DisableEnableForm(xForm, disab) {
+	objElems = xForm.elements;
+	var myname = "";
+	var mysty = "";
+	if (disab)
+		col = "#eee";
+	else
+		col = "#fff";
+	for (i=0; i < objElems.length; i++) {
+		myname = objElems[i].name + "";
+		if (myname.substring(0,1) != "_") {
+			objElems[i].disabled = disab;
+			objElems[i].style.backgroundColor = col;
+		}
+	}
+}
+
+function disenabutton(butid, disab) {
+	if (disab) {
+		butid.disable();
+		Element.removeClassName(butid, 'bb');
+		Element.addClassName(butid, 'disabled');
+	} else {
+		butid.enable();
+		Element.addClassName(butid, 'bb');
+		Element.removeClassName(butid, 'disabled');
+	}
+}
+
 function requestDCard(cmd, value) {
 	var bReturn = true;
 	var RegionId=jQuery('#prmRegionId').text();
