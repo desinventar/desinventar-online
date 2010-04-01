@@ -13,84 +13,6 @@
 	<script type="text/javascript" src="js/cards.js"></script>
 	<script type="text/javascript" language="javascript">
 
-		function changeOptions(but) {
-			{-if $ctl_validrole-}
-				switch (but) {
-					case "cardnew":
-						disenabutton($('cardnew'), true);
-						disenabutton($('cardsav'), false);
-						disenabutton($('cardupd'), true);
-						disenabutton($('cardcln'), false);
-						disenabutton($('cardcan'), false);
-						disenabutton($('first'), true);
-						disenabutton($('prev'), true);
-						disenabutton($('next'), true);
-						disenabutton($('last'), true);
-						disenabutton($('cardfnd'), true);
-					break;
-					case "cardupd":
-						disenabutton($('cardnew'), true);
-						disenabutton($('cardsav'), false);
-						disenabutton($('cardupd'), true);
-						disenabutton($('cardcan'), false);
-						disenabutton($('first'), true);
-						disenabutton($('prev'), true);
-						disenabutton($('next'), true);
-						disenabutton($('last'), true);
-						disenabutton($('cardfnd'), true);
-					break;
-					case "cardsav":
-						disenabutton($('cardnew'), false);
-						disenabutton($('cardsav'), true);
-						disenabutton($('cardupd'), false);
-						disenabutton($('cardcln'), true);
-						disenabutton($('cardcan'), true);
-						disenabutton($('first'), false);
-						disenabutton($('prev'), false);
-						disenabutton($('next'), false);
-						disenabutton($('last'), false);
-						disenabutton($('cardfnd'), false);
-					break;
-					case "cardcan":
-						if ($('DisasterId').value == "")
-							disenabutton($('cardupd'), true);
-						else
-							disenabutton($('cardupd'), false);
-						disenabutton($('cardsav'), true);
-						disenabutton($('cardcln'), true);
-						disenabutton($('cardcan'), true);
-						disenabutton($('cardnew'), false);
-						disenabutton($('first'), false);
-						disenabutton($('prev'), false);
-						disenabutton($('next'), false);
-						disenabutton($('last'), false);
-						disenabutton($('cardfnd'), false);
-					break;
-					default:
-						disenabutton($('cardnew'), false);
-						disenabutton($('cardsav'), true);
-						disenabutton($('cardupd'), true);
-						disenabutton($('cardcln'), true);
-						disenabutton($('cardcan'), true);
-					break;
-				}
-			{-/if-}
-		}
-
-		function switchEff(section) {
-			if (section == 'effext') {
-				$('eeimg').src="images/di_efftag.png";
-				$('efimg').src="images/di_eeftag.png";
-				$('effbas').style.display='none';
-				$('effext').style.display='block';
-			}
-			if (section == 'effbas') {
-				$('efimg').src="images/di_efftag.png";
-				$('eeimg').src="images/di_eeftag.png";
-				$('effbas').style.display='block';
-				$('effext').style.display='none';
-			}
-		}
 		function gotocard(opc) {
 			switch (opc) {
 				case "first":
@@ -222,15 +144,6 @@
 			return true;
 		}
 		
-		function displayDatacardStatusMsg(msgId) {
-			// First hide all items
-			jQuery('.datacardStatusMsg').hide();
-			// Show a specific message
-			if (msgId != '') {
-				jQuery('#' + msgId).show();
-			}
-		}
-
 		window.onload = function() {
 			onDatacardReady();
 			
