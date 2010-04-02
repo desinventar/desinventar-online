@@ -18,7 +18,7 @@
 			RegionId = jQuery('#prmRegionId').text();
 			switch (opc) {
 				case "first":
-					setDICard(RegionId, {-$fst-}, '');
+					bFound = requestDCard('getDisasterIdFirst', $('DisasterId').value);
 					if (bUpdate) {
 						disenabutton($('cardupd'), false);
 					}
@@ -26,7 +26,7 @@
 					disenabutton($('next'), false);
 				break;
 				case "prev":
-					bFound = requestDCard('getPrevDId', $('DisasterId').value);
+					bFound = requestDCard('getDisasterIdPrev', $('DisasterId').value);
 					if (bFound == false) {
 						alert('{-#tcardnot#-}');
 					}
@@ -36,7 +36,7 @@
 					disenabutton($('next'), false);
 				break;
 				case "next":
-					bFound = requestDCard('getNextDId', $('DisasterId').value);
+					bFound = requestDCard('getDisasterIdNext', $('DisasterId').value);
 					if (bFound == false) {
 						alert('{-#tcardnot#-}');
 					}
@@ -46,7 +46,7 @@
 					disenabutton($('prev'), false);
 				break;
 				case "last":
-					setDICard(RegionId, {-$lst-}, '');
+					bFound = requestDCard('getDisasterIdLast', $('DisasterId').value);
 					if (bUpdate) {
 						disenabutton($('cardupd'), false);
 					}
@@ -237,9 +237,9 @@
 				&nbsp;&nbsp;|&nbsp;&nbsp;
 				{-$dis.DisasterSerial[0]-}
 				<input type="text" id="fndserial" style="width:60px;" class="line"
-					onKeyDown="if(event.keyCode==13) requestDCard('getIdfromSerial', $('fndserial').value);" />
+					onKeyDown="if(event.keyCode==13) requestDCard('getDisasterIdFromSerial', $('fndserial').value);" />
 				<input type="button" id="cardfnd" class="bb bfind" onmouseover="Tip('{-#texptitle#-}')" onmouseout="UnTip()" 
-					onClick="if($('fndserial').value !='') requestDCard('getIdfromSerial', $('fndserial').value); 
+					onClick="if($('fndserial').value !='') requestDCard('getDisasterIdFromSerial', $('fndserial').value); 
 						else alert('{-#bexpsearch#-}: {-#texpdesc#-}')" />
 				<br />
 				
