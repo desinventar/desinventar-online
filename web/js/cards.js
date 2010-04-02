@@ -76,7 +76,9 @@ function disenabutton(butid, disab) {
 		Element.removeClassName(butid, 'bb');
 		Element.addClassName(butid, 'disabled');
 	} else {
-		butid.enable();
+		if (butid != null) {
+			butid.enable();
+		}
 		Element.addClassName(butid, 'bb');
 		Element.removeClassName(butid, 'disabled');
 	}
@@ -180,8 +182,8 @@ function requestDCard(cmd, value) {
 			var res = request.responseText;
 			if (res.length >= 5 && cmd == "getNextSerial") {
 				// check valid DisasterSerial
-					$('DisasterSerial').value = value +'-'+ res;
-			} else if (res.length >= 36 && (cmd == "getPrevDId" || cmd == "getNextDId" || cmd == "getIdfromSerial")) {
+				$('DisasterSerial').value = value +'-'+ res;
+			} else if (res.length >= 36) {
 				// check valid DisasterId
 				valid = setDICardfromId(RegionId, res, '');
 				UserRole = jQuery('#prmUserRole').text();
@@ -189,7 +191,7 @@ function requestDCard(cmd, value) {
 				if (canUpdateDatacard) {
 					disenabutton($('cardupd'), false);
 				}
-				if (cmd == "getIdfromSerial") {
+				if (cmd == 'getDisasterIdFromSerial') {
 					disenabutton($('prev'), false);
 					disenabutton($('next'), false);
 				}

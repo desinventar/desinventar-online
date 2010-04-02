@@ -119,13 +119,32 @@ if (isset($_GET['u'])) {
 				$ser = $us->q->getNextDisasterSerial($_GET['value']);
 				echo $ser;
 			break;
-			case "getPrevDId":
-				$prv = $us->q->getPrevDisasterId($_GET['value']);
+			case "getDisasterIdPrev":
+				$prv = $us->q->getDisasterIdPrev($_GET['value']);
 				echo $prv;
 			break;
-			case "getNextDId":
-				$nxt = $us->q->getNextDisasterId($_GET['value']);
+			case "getDisasterIdNext":
+				$nxt = $us->q->getDisasterIdNext($_GET['value']);
 				echo $nxt;
+			break;
+			case 'getDisasterIdFirst':
+				$DisasterId = $us->q->getDisasterIdFirst();
+				fb($DisasterId);
+				echo $DisasterId;
+			break;
+			case 'getDisasterIdLast':
+				$DisasterId = $us->q->getDisasterIdLast();
+				fb($DisasterId);
+				echo $DisasterId;
+			break;
+			case "getDisasterIdFromSerial":
+				$did = $us->q->getDisasterIdFromSerial($_GET['value']);
+				echo $did;
+			break;
+			case 'existDisasterSerial':
+				$DisasterSerial = getParameter('DisasterSerial');
+				$Answer = $us->q->existDisasterSerial($DisasterSerial);
+				print json_encode($Answer);
 			break;
 			case "chklocked":
 				// check if datacard is locked by some user
@@ -141,15 +160,6 @@ if (isset($_GET['u'])) {
 			case "chkrelease":
 				$us->releaseDatacard($_GET['DisasterId']);
 			break;
-			case "getIdfromSerial":
-				$did = $us->q->getDisasterIdFromSerial($_GET['value']);
-				echo $did;
-			break;
-			case 'existDisasterSerial':
-				$DisasterSerial = getParameter('DisasterSerial');
-				$Answer = $us->q->existDisasterSerial($DisasterSerial);
-				print json_encode($Answer);
-			break;
 			default:
 			break;
 		}
@@ -163,12 +173,6 @@ if (isset($_GET['u'])) {
 		$dcard['DisasterBeginTime[2]'] = substr($dcard['DisasterBeginTime'], 8, 2);
 		$dcard['_REG'] = $sRegionId;
 		echo json_encode($dcard);
-		/*
-		$dcard = $us->q->hash2json($us->q->getDisasterById($_GET['DisasterId']));
-		if (isset($dcard[0])) {
-			echo $dcard[0];
-		}
-		*/
 	} elseif (isset($_POST['_CMD'])) {
 		// Commands in POST mode: insert, update, search.. datacards.. 
 		$us->releaseDatacard($_POST['DisasterId']);
@@ -276,17 +280,6 @@ if (isset($_GET['u'])) {
 		if ($role == "USER" || $role == "SUPERVISOR" || $role == "ADMINREGION") {
 			$t->assign("ctl_validrole", true);
 		}
-		// get first and last datacard
-		$fst = $us->q->hash2json($us->q->getDisasterById($us->q->getFirstDisasterid()));
-		$lst = $us->q->hash2json($us->q->getDisasterById($us->q->getLastDisasterid()));
-		if (isset($fst[0]))
-			$t->assign("fst", $fst[0]);
-		else
-			$t->assign("fst", '{}');
-		if (isset($lst[0]))
-			$t->assign("lst", $lst[0]);
-		else
-			$t->assign("lst", '{}');
 		$t->display("cards.tpl");
 	}
 }
