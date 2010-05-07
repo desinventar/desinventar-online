@@ -71,6 +71,7 @@ a.info:hover span {
 a.info:link 		{ color: #333333;  }
 a.info:visited	{ color: #333333;  }
 .dlgmsg     { color:#42929d; text-align:right; font-size:8pt; }
+.datacardStatusMsg { text-align:left; color:#dbab28; }
 .disabled 	{ background-color: #cccccc; }
 
 .dwin {
