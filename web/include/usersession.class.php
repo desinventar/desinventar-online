@@ -167,7 +167,7 @@ class UserSession {
 	} // close()
 
 	// Validate a user/passwd pair against database
-	public function validateUser($prmUserId, $prmUserPasswd, $withCrypt=false) {
+	public function validateUser($prmUserId, $prmUserPasswd, $withCrypt=true) {
 		$UserId = '';
 		if (! $withCrypt) {
 			$prmUserPasswd = md5($prmUserPasswd);

@@ -1,0 +1,42 @@
+function onReadyUserLogin(windowId) {
+	// hide all status messages on start
+	updateUserLoginMsg('');
+	
+	// submit form validation and process..
+	jQuery("#frmUserLogin").submit(function() {
+		var UserId     = jQuery('#txtUserId').val();
+		var UserPasswd = jQuery("#txtUserPasswd").val();
+		if (UserId == '' || UserPasswd == '') {
+			updateUserLoginMsg('#msgEmptyFields');
+		} else {
+			jQuery.post('/di8-devel/user.php',
+				{'cmd'        : 'login',
+			     'UserId'     : UserId,
+			     'UserPasswd' : hex_md5(UserPasswd)
+			    },
+			    function(data) {
+					if (data == 'OK') {
+						updateUserLoginMsg("#msgUserLoggedIn");
+						// After login, clear passwd field
+						jQuery("#txtUserPasswd").val('');
+					} else {
+						updateUserLoginMsg("#msgInvalidPasswd");
+					}
+				},
+				'json'
+			);
+		}
+		return(false);
+	});
+};
+
+function updateUserLoginMsg(msgId) {
+	// Hide all status Msgs (class="status")
+	jQuery(".status").hide();
+	if (msgId != '') {
+		jQuery("#divUserLoginMsg").show();
+		// Show specified message(s)
+		jQuery(msgId).show();
+	}
+	return(true);
+};

@@ -39,14 +39,19 @@ function form2user($val) {
 }
 
 $cmd = getParameter('cmd','');
+fb($cmd);
 switch ($cmd) {
 	case "login":
 		// LOGIN: CONTROL USER ACCESS
-		if ($us->login($_GET['userid'], $_GET['password']) > 0) {
-			echo "OK";	// Login success
-		} else {
-			echo "ERROR";
+		$Answer = 'ERROR';
+		$UserId = getParameter('UserId');
+		$UserPasswd = getParameter('UserPasswd');
+		fb($UserId);
+		fb($UserPasswd);
+		if ($us->login($UserId, $UserPasswd) > 0) {
+			$Answer = "OK";	// Login success
 		}
+		print json_encode($Answer);
 	break;
 	case "relogin":
 		// RELOGIN: Previous session exists, reconnect to the same session
