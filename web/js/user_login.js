@@ -1,4 +1,4 @@
-function onReadyUserLogin(windowId) {
+function onReadyUserLogin() {
 	// hide all status messages on start
 	updateUserLoginMsg('');
 	
@@ -9,7 +9,10 @@ function onReadyUserLogin(windowId) {
 		if (UserId == '' || UserPasswd == '') {
 			updateUserLoginMsg('#msgEmptyFields');
 		} else {
-			diURL = jQuery('#desinventarURL').val() + '';
+			diURL = jQuery('#desinventarURL').val();
+			if (diURL == undefined) {
+				diURL = '';
+			}
 			jQuery.post(diURL + 'user.php',
 				{'cmd'        : 'login',
 			     'UserId'     : UserId,
