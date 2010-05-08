@@ -129,12 +129,10 @@ if (isset($_GET['u'])) {
 			break;
 			case 'getDisasterIdFirst':
 				$DisasterId = $us->q->getDisasterIdFirst();
-				fb($DisasterId);
 				echo $DisasterId;
 			break;
 			case 'getDisasterIdLast':
 				$DisasterId = $us->q->getDisasterIdLast();
-				fb($DisasterId);
 				echo $DisasterId;
 			break;
 			case "getDisasterIdFromSerial":
