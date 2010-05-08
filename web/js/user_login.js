@@ -9,7 +9,8 @@ function onReadyUserLogin(windowId) {
 		if (UserId == '' || UserPasswd == '') {
 			updateUserLoginMsg('#msgEmptyFields');
 		} else {
-			jQuery.post('/di8-devel/user.php',
+			diURL = jQuery('#desinventarURL').val() + '';
+			jQuery.post(diURL + 'user.php',
 				{'cmd'        : 'login',
 			     'UserId'     : UserId,
 			     'UserPasswd' : hex_md5(UserPasswd)
