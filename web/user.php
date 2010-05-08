@@ -39,15 +39,12 @@ function form2user($val) {
 }
 
 $cmd = getParameter('cmd','');
-fb($cmd);
 switch ($cmd) {
 	case "login":
 		// LOGIN: CONTROL USER ACCESS
 		$Answer = 'ERROR';
 		$UserId = getParameter('UserId');
 		$UserPasswd = getParameter('UserPasswd');
-		fb($UserId);
-		fb($UserPasswd);
 		if ($us->login($UserId, $UserPasswd) > 0) {
 			$Answer = "OK";	// Login success
 		}
