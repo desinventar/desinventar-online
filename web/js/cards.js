@@ -72,7 +72,9 @@ function DisableEnableForm(xForm, disab) {
 
 function disenabutton(butid, disab) {
 	if (disab) {
-		butid.disable();
+		if (butid != null) {
+			butid.disable();
+		}
 		Element.removeClassName(butid, 'bb');
 		Element.addClassName(butid, 'disabled');
 	} else {
