@@ -10,12 +10,15 @@
 	<link rel="stylesheet" href="css/portal.css" TYPE="text/css" />
 	{-include file="jquery.tpl" -}
 	<script type="text/javascript" src="{-$di_url-}/include/menu.js"></script>
+	<script type="text/javascript" src="{-$di_url-}/js/md5.js"></script>
+	<script type="text/javascript" src="{-$di_url-}/js/user_login.js"></script>
 	<link type="text/css" rel="stylesheet" href="{-$di_url-}/include/clickmenu/clickmenu.css" />
 	<script type="text/javascript" src="{-$di_url-}/include/clickmenu/jquery.clickmenu.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 	<script type="text/javascript" language="javascript">
 		jQuery(document).ready(function() {
 			onReadyPortal();
+			onReadyUserLogin();
 		});
 	</script>
 </head>
@@ -154,7 +157,7 @@
 								</table>
 							</div>
 							<div class="portalcontent" id="UserContent">
-								User Login<br />
+								{-include file="../../web/templates/user_login.tpl" confdir="../../web/conf/"-}
 							</div>
 						</td> <!-- CENTRO -->
 						<td class="der"><img src="images/bgder.gif" width=32 height=5>
