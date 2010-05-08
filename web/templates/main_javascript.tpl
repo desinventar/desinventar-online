@@ -136,8 +136,10 @@
 	var dblw;
 	var dlgw;
 	// DI8 - Layout, buttons and internal windows - UI DesConsultar module
-	Ext.onReady(function() 
-	{
+	Ext.onReady(function() {
+		// Initialize User Login Form
+		onReadyUserLogin();
+		
 		setTimeout(function() {
 			Ext.get('loading').remove();
 			Ext.get('loading-mask').fadeOut({remove:true});
@@ -358,7 +360,7 @@
 				}
 				datw.show(this);
 			}
-		});
+		}); // data window
 		
 		// Statistics
 		var stdw;
@@ -398,7 +400,7 @@
 				}
 				stdw.show(this);
 			}
-		});
+		}); // statistics
 		
 		// Graphic
 		var grpw;
@@ -435,7 +437,7 @@
 				}
 				grpw.show(this);
 			}
-		});
+		}); // Graphics
 		
 		// Map
 		var mapw;
@@ -476,7 +478,7 @@
 				}
 				mapw.show(this);
 			}
-		});
+		}); // Map
 		
 		// quicktips
 		Ext.apply(

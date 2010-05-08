@@ -21,6 +21,7 @@
 	<script type="text/javascript" src="js/md5.js"></script>
 	<script type="text/javascript" src="js/jquery.snippets.js"></script>
 	<script type="text/javascript" src="js/user.js"></script>
+	<script type="text/javascript" src="js/user_login.js"></script>
 	<script type="text/javascript" src="js/desconsultar.js"></script>
 	<!-- ExtJS -->
 	<link rel="stylesheet" type="text/css" href="/extJS/resources/css/ext-all.css"/>
@@ -208,6 +209,9 @@
 		</div> <!-- end div id=qryres -->
 		<div id="listdb-win" >
 			{-include file="header_simple.tpl" -}
+			<div id="divUserLogin">
+				{-include file="user_login.tpl" -}
+			</div>
 			{-include file="showlistdb.tpl" -}
 		</div> <! id="listdb-win" -->
 	</div><!-- END div id=container-->
