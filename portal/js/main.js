@@ -48,7 +48,18 @@ function onReadyPortal() {
 		// Prevent default action
 		return false;
 	});
+	
+	jQuery('body').bind('UserLoggedIn', function() {
+		jQuery('.lstUserMenu').show();
+		jQuery('#lstUserLogin').hide();
+	});
 
+	jQuery('body').bind('UserLoggedOut', function() {
+		// Update User Menu
+		jQuery('.lstUserMenu').hide();
+		jQuery('#lstUserLogin').show();
+	});
+	
 	// Handle clicks on right menu (Home/LangSelect)
 	jQuery('.MenuItem').click(function() {
 		var MenuItem = jQuery(this).attr('id');
@@ -73,6 +84,8 @@ function onReadyPortal() {
 
 	// At start, display the map 
 	showMap();
+	// Start without the user logged in'
+	jQuery('body').trigger('UserLoggedOut');
 };
 
 function updateDatabaseList(CountryIsoCode,searchByCountry) {

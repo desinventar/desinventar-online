@@ -23,15 +23,9 @@ function onReadyUserLogin() {
 						updateUserLoginMsg("#msgUserLoggedIn");
 						// After login, clear passwd field
 						jQuery("#txtUserPasswd").val('');
-						
-						desinventarModule = jQuery('#desinventarModule').val();
-						if (desinventarModule != 'portal') {
-							window.location.reload(false);
-						} else {
-							// Update User Menu
-							jQuery('.lstUserMenu').show();
-							jQuery('#lstUserLogin').hide();
-						}
+
+						// Trigger Event and Update User Menu etc.
+						jQuery('body').trigger('UserLoggedIn');
 					} else {
 						updateUserLoginMsg("#msgInvalidPasswd");
 					}
@@ -58,15 +52,10 @@ function doUserLogout() {
 				updateUserLoginMsg("#msgUserLoggedOut");
 				// After login, clear passwd field
 				jQuery('#txtUserId').val('');
-				jQuery('#txtUserPasswd').val('');				
-				desinventarModule = jQuery('#desinventarModule').val();
-				if (desinventarModule != 'portal') {
-					window.location.reload(false);
-				} else {
-					// Update User Menu
-					jQuery('.lstUserMenu').hide();
-					jQuery('#lstUserLogin').show();
-				}
+				jQuery('#txtUserPasswd').val('');
+				
+				// Trigger Event, used to update menu or reload page...
+				jQuery('body').trigger('UserLoggedOut');
 			} else {
 				updateUserLoginMsg("#msgInvalidLogout");
 				Answer = 0;
