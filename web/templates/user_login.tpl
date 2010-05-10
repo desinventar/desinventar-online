@@ -19,9 +19,9 @@
 	</table>
 </form>
 <div class="status" id="divUserLoginMsg">
-	<span id="msgEmptyFields"   class="status">Los campos no pueden estar en blanco</span>
-	<span id="msgUserLoggedIn"  class="status">Login Exitoso</span>
-	<span id="msgInvalidPasswd" class="status">Clave Incorrecta</span>
+	<span id="msgEmptyFields"   class="status">{-#msgEmtpyFields#-}</span>
+	<span id="msgUserLoggedIn"  class="status">{-#msgUserLoggedIn#-}</span>
+	<span id="msgInvalidPasswd" class="status">{-#msgInvalidPasswd#-}</span>
 </div>
 
 <form id="uf">
