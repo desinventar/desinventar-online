@@ -23,6 +23,7 @@ function onReadyUserLogin() {
 						updateUserLoginMsg("#msgUserLoggedIn");
 						// After login, clear passwd field
 						jQuery("#txtUserPasswd").val('');
+						window.location.reload(false);
 					} else {
 						updateUserLoginMsg("#msgInvalidPasswd");
 					}

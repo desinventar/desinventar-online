@@ -140,6 +140,9 @@
 						<div id="usr-win" class="x-hidden">
 							<div class="x-window-header">{-$userid-} - {-$role-}</div>
 							<div id="usr">
+								{-include file="user_login.tpl" -}
+								<!--
+								<br />
 								<form method="get" action="javascript: userMan('login', 'userid=' + $('userid').value + '&password=' + $('password').value);" >
 									<table border="0" align="center" valign="middle" style="margin-top:20px">
 										<tr>
@@ -155,6 +158,9 @@
 										</tr>
 									</table>
 								</form>
+								-->
+								<br />
+								<a href="javascript:void(null)" class="rememberpasswordlink" onclick="updateList('passlost', 'user.php', 'cmd=passlost');">{-#tpasslost#-}</a>
 								<div id="passlost"></div>
 							</div>
 						</div>
@@ -209,9 +215,6 @@
 		</div> <!-- end div id=qryres -->
 		<div id="listdb-win" >
 			{-include file="header_simple.tpl" -}
-			<div id="divUserLogin">
-				{-include file="user_login.tpl" -}
-			</div>
 			{-include file="showlistdb.tpl" -}
 		</div> <! id="listdb-win" -->
 	</div><!-- END div id=container-->
