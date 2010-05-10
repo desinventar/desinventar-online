@@ -14,7 +14,7 @@ function onReadyPortal() {
 	jQuery('area').click(function() {
 		var country = jQuery(this).attr('alt');
 		if (country != '') {
-			updateDatabaseList(country, true);
+			updateDatabaseList(country, 1);
 		}
 		// Prevent default action
 		return false;
@@ -33,7 +33,7 @@ function onReadyPortal() {
 	jQuery('.RegionList').click(function() {
 		var country = jQuery(this).attr('alt');
 		if (country != '') {
-			updateDatabaseList(country, true);
+			updateDatabaseList(country, 1);
 		}
 		// Prevent default action
 		return false;
@@ -52,6 +52,7 @@ function onReadyPortal() {
 	jQuery('body').bind('UserLoggedIn', function() {
 		jQuery('.lstUserMenu').show();
 		jQuery('#lstUserLogin').hide();
+		updateDatabaseListByUser();
 	});
 
 	jQuery('body').bind('UserLoggedOut', function() {
@@ -73,6 +74,9 @@ function onReadyPortal() {
 		if (MenuItem == 'mnuUserLogout') {
 			doUserLogout();
 		}
+		if (MenuItem == 'mnuUserRegionList') {
+			updateDatabaseListByUser();
+		}
 		// Prevent default action
 		return false;
 	});
@@ -84,8 +88,12 @@ function onReadyPortal() {
 
 	// At start, display the map 
 	showMap();
-	// Start without the user logged in'
-	jQuery('body').trigger('UserLoggedOut');
+	
+	if (jQuery('#desinventarUserId').val() != '') {
+		jQuery('body').trigger('UserLoggedIn');
+	} else {
+		jQuery('body').trigger('UserLoggedOut');
+	}		
 };
 
 function updateDatabaseList(CountryIsoCode,searchByCountry) {
@@ -100,6 +108,33 @@ function updateDatabaseList(CountryIsoCode,searchByCountry) {
 	);
 	jQuery.getJSON(desinventarURL,
 		{ cmd: 'searchdb', searchdbquery: CountryIsoCode, searchbycountry : searchByCountry },
+		function(data) {
+			var iCount = 0;
+			var RegionId = '';
+			var jList = jQuery("#pagecontent");
+			jQuery("#pagecontent").empty();
+			jQuery.each(data, function(key, value) {
+				iCount++;
+				RegionId = key;
+				jList.append(jQuery('<a href="javascript:void(null)" id="' + key + '">' + value + '</a><br />'));
+				jQuery('#' + key).addClass("alt").unbind('click').click(function() {
+					displayRegionInfo(key);
+				}); //bind
+			}); // each
+			if (iCount == 1) {
+				displayRegionInfo(RegionId);
+			}
+		} //function
+	);
+};
+
+function updateDatabaseListByUser() {
+	jQuery(".portalcontent").hide();
+	jQuery("#regionlist").show();
+	var desinventarURL = jQuery('#desinventarURL').val();
+	jQuery("#pagetitle").html('<h3></h3>');
+	jQuery.getJSON(desinventarURL,
+		{ cmd: 'searchdb', searchdbquery: '', searchbycountry : 0},
 		function(data) {
 			var iCount = 0;
 			var RegionId = '';
