@@ -62,6 +62,10 @@ function doUserLogout() {
 				desinventarModule = jQuery('#desinventarModule').val();
 				if (desinventarModule != 'portal') {
 					window.location.reload(false);
+				} else {
+					// Update User Menu
+					jQuery('.lstUserMenu').hide();
+					jQuery('#lstUserLogin').show();
 				}
 			} else {
 				updateUserLoginMsg("#msgInvalidLogout");
