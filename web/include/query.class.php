@@ -1482,7 +1482,7 @@ class Query extends PDO {
 	public function searchDB($prmQuery, $searchByCountry) {
 		$RegionList = array();
 		$query = "SELECT RegionId, RegionLabel FROM Region WHERE RegionStatus=3 AND "; 
-		if ($searchByCountry) {
+		if ($searchByCountry > 0) {
 			$query .= "(CountryIso = '" . $prmQuery . "')";
 		} else {
 			$query .= "(RegionId LIKE '%" . $prmQuery . "%' OR RegionLabel LIKE '%" . $prmQuery . "%')";
