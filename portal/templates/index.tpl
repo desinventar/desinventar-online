@@ -9,11 +9,11 @@
 	<link rel="stylesheet" href="css/desinventar.css" TYPE="text/css" />
 	<link rel="stylesheet" href="css/portal.css" TYPE="text/css" />
 	{-include file="jquery.tpl" -}
-	<script type="text/javascript" src="{-$di_url-}/include/menu.js"></script>
-	<script type="text/javascript" src="{-$di_url-}/js/md5.js"></script>
-	<script type="text/javascript" src="{-$di_url-}/js/user_login.js"></script>
-	<link type="text/css" rel="stylesheet" href="{-$di_url-}/include/clickmenu/clickmenu.css" />
-	<script type="text/javascript" src="{-$di_url-}/include/clickmenu/jquery.clickmenu.js"></script>
+	<script type="text/javascript" src="{-$desinventarURL-}/include/menu.js"></script>
+	<script type="text/javascript" src="{-$desinventarURL-}/js/md5.js"></script>
+	<script type="text/javascript" src="{-$desinventarURL-}/js/user_login.js"></script>
+	<link type="text/css" rel="stylesheet" href="{-$desinventarURL-}/include/clickmenu/clickmenu.css" />
+	<script type="text/javascript" src="{-$desinventarURL-}/include/clickmenu/jquery.clickmenu.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 	<script type="text/javascript" language="javascript">
 		jQuery(document).ready(function() {
@@ -212,10 +212,8 @@
 			</td>
 		</tr>
 	</table>
-	<div id="desinventarInfo" style="display:none;">
-		<input type="hidden" id="desinventarURL"    value="{-$di_url-}">
-		<input type="hidden" id="desinventarLang"   value="{-$lang-}">
-		<input type="hidden" id="desinventarUserId" value="{-$UserId-}">
+	<div>
+	{-include file="../../web/templates/desinventarinfo.tpl" confdir="../../web/conf/"-}
 	</div>
 </body>
 </html>

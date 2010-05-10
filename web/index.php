@@ -4,9 +4,6 @@
  (c) 1998-2010 Corporacion OSSO
 */
 
-// This is the version of the software
-define('VERSION', '8.2.0.78');
-
 //ob_start( 'ob_gzhandler' );
 require_once('include/loader.php');
 require_once('include/diregion.class.php');
@@ -23,7 +20,13 @@ if ($cmd == '' && $RegionId == '') {
 // Default Template Values
 $t->assign('request_uri', $_SERVER['REQUEST_URI']);
 $t->assign('version', VERSION);
-$t->assign("userid", $us->UserId);
+$t->assign('userid', $us->UserId);
+
+$t->assign('desinventarURL'    , '');
+$t->assign('desinventarVersion', VERSION);
+$t->assign('desinventarLang'   , $lg);
+$t->assign('desinventarUserId' , $us->UserId);
+$t->assign('desinventarModule' ,'desinventar');
 
 if (!empty($RegionId)) {
 	$us->open($RegionId);

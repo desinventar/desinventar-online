@@ -11,8 +11,7 @@
 	if (isset($_SERVER["REDIRECT_DI8_URL"])) {
 		$_SERVER["DI8_URL"] = $_SERVER["REDIRECT_DI8_URL"];
 	}
-	$di_url = $_SERVER["DI8_URL"];
-	
+	$desinventarURL = $_SERVER["DI8_URL"];
 	// Auto detect language for portal interface
 	$lang = getParameter('lang', getBrowserClientLanguage());
 	
@@ -37,8 +36,14 @@
 	$t->template_dir = 'templates';
 
 	$t->assign("stat"  , "on");
+
 	$t->assign("lang"  , $lang);
-	$t->assign("di_url", $di_url);
+
+	$t->assign('desinventarURL'    , $desinventarURL);
+	$t->assign('desinventarVersion', VERSION);
+	$t->assign('desinventarLang'   , $lang);
+	$t->assign('desinventarUserId' , $us->UserId);
+	$t->assign('desinventarModule' , 'portal');
 	
 	// 2009-09-23 (jhcaiced) Choose which ISDR logo to use...
 	$isdrlogo = 'logo-isdr.gif';
