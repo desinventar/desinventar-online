@@ -629,5 +629,6 @@
 			class="dlgmsg" style="font-size: 8pt;">{-#hmoreinfo#-}</a>
 	</div>
 	<!-- END HELP SECTION -->
+	{-include file="desinventarinfo.tpl"-}
 </body>
 </html>
