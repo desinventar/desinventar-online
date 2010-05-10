@@ -9,11 +9,11 @@ function onReadyUserLogin() {
 		if (UserId == '' || UserPasswd == '') {
 			updateUserLoginMsg('#msgEmptyFields');
 		} else {
-			diURL = jQuery('#desinventarURL').val();
-			if (diURL == undefined) {
-				diURL = '';
+			desinventarURL = jQuery('#desinventarURL').val();
+			if (desinventarURL == undefined) {
+				desinventarURL = '';
 			}
-			jQuery.post(diURL + 'user.php',
+			jQuery.post(desinventarURL + 'user.php',
 				{'cmd'        : 'login',
 			     'UserId'     : UserId,
 			     'UserPasswd' : hex_md5(UserPasswd)
@@ -23,7 +23,15 @@ function onReadyUserLogin() {
 						updateUserLoginMsg("#msgUserLoggedIn");
 						// After login, clear passwd field
 						jQuery("#txtUserPasswd").val('');
-						window.location.reload(false);
+						
+						desinventarModule = jQuery('#desinventarModule').val();
+						if (desinventarModule != 'portal') {
+							window.location.reload(false);
+						} else {
+							// Update User Menu
+							jQuery('.lstUserMenu').show();
+							jQuery('#lstUserLogin').hide();
+						}
 					} else {
 						updateUserLoginMsg("#msgInvalidPasswd");
 					}
@@ -35,6 +43,35 @@ function onReadyUserLogin() {
 	});
 };
 
+function doUserLogout() {
+	var Answer = 0;
+	desinventarURL = jQuery('#desinventarURL').val();
+	if (desinventarURL == undefined) {
+		desinventarURL = '';
+	}
+	jQuery.post(desinventarURL + 'user.php',
+		{'cmd'        : 'logout'
+		},
+		function(data) {
+			if (data == 'OK') {
+				Answer = 1;
+				updateUserLoginMsg("#msgUserLoggedOut");
+				// After login, clear passwd field
+				jQuery('#txtUserId').val('');
+				jQuery('#txtUserPasswd').val('');				
+				desinventarModule = jQuery('#desinventarModule').val();
+				if (desinventarModule != 'portal') {
+					window.location.reload(false);
+				}
+			} else {
+				updateUserLoginMsg("#msgInvalidLogout");
+				Answer = 0;
+			}
+		},
+		'json'
+	);
+	return Answer;
+}
 function updateUserLoginMsg(msgId) {
 	// Hide all status Msgs (class="status")
 	jQuery(".status").hide();
@@ -45,3 +82,4 @@ function updateUserLoginMsg(msgId) {
 	}
 	return(true);
 };
+

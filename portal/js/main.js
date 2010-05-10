@@ -51,9 +51,20 @@ function onReadyPortal() {
 
 	// Handle clicks on right menu (Home/LangSelect)
 	jQuery('.MenuItem').click(function() {
-		var MenuItem = jQuery(this).attr('alt');
-		if (MenuItem == 'MAP') {
+		var MenuItem = jQuery(this).attr('id');
+		if (MenuItem == 'mnuShowMap') {
 			showMap();
+		}
+		if (MenuItem == 'mnuUserLogin') {
+			jQuery('.portalcontent').hide();
+			jQuery('#UserContent').show();
+		}
+		if (MenuItem == 'mnuUserLogout') {
+			if (doUserLogout() > 0) {
+				// Update User Menu
+				jQuery('.lstUserMenu').hide();
+				jQuery('#lstUserLogin').show();
+			}
 		}
 		// Prevent default action
 		return false;
@@ -63,16 +74,6 @@ function onReadyPortal() {
 	jQuery('#MainMenu').clickMenu();
 	// Remove the black border from the menu
 	jQuery('div.cmDiv').css('border','0px solid black');
-	
-	// User Menu and Items
-	jQuery('#divUserEnableLogin').show();
-	jQuery('#divUserOptionsPanel').hide();
-	
-	jQuery('#linkUserEnableLogin').click(function() {
-		jQuery('.portalcontent').hide();
-		jQuery('#UserContent').show();
-		return false;
-	});
 
 	// At start, display the map 
 	showMap();
