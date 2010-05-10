@@ -60,11 +60,7 @@ function onReadyPortal() {
 			jQuery('#UserContent').show();
 		}
 		if (MenuItem == 'mnuUserLogout') {
-			if (doUserLogout() > 0) {
-				// Update User Menu
-				jQuery('.lstUserMenu').hide();
-				jQuery('#lstUserLogin').show();
-			}
+			doUserLogout();
 		}
 		// Prevent default action
 		return false;
