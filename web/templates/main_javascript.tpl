@@ -14,7 +14,7 @@
 					usrw.show();
 				break;
 				case "mnuUserLogout":
-					userMan('logout', '');
+					doUserLogout();
 				break;
 				case "mnuUserEditAccount":
 					jQuery("#dbl").load('user.php?cmd=changepasswd',function() { onReadyUserChangePasswd('dbl-win'); });
@@ -488,23 +488,6 @@
 		});
 		
 		// end ExtJS object
-
-		function userMan(cmd, opt) {
-			var pars = "cmd=" + cmd;
-			if (opt != "") {
-				pars += "&"+ opt;
-			}
-			var lsAjax = new Ajax.Request('user.php', {
-				method: 'get', parameters: pars,
-				onSuccess: function(request) {
-					var res = request.responseText;
-					if (res.substr(0, 2) == "OK")
-						window.location.reload(false);
-					else
-						alert("{-#errinvaliduser#-}");
-				}
-			});
-		} //function
 
 		function disab(field) {
 			field.disabled = true;

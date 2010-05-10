@@ -141,24 +141,6 @@
 							<div class="x-window-header">{-$userid-} - {-$role-}</div>
 							<div id="usr">
 								{-include file="user_login.tpl" -}
-								<!--
-								<br />
-								<form method="get" action="javascript: userMan('login', 'userid=' + $('userid').value + '&password=' + $('password').value);" >
-									<table border="0" align="center" valign="middle" style="margin-top:20px">
-										<tr>
-											<td>
-												{-#tuser#-}
-												<input type="text" id="userid" name="userid" value="" size="16" class="line" />&nbsp;&nbsp;
-												{-#tpassword#-}
-												<input type="password" name="password" id="password" value="" size="8" class="line" />&nbsp;&nbsp;
-												<input type="submit" value="{-#benter#-}" class="line" />&nbsp;&nbsp;
-												<a href="javascript:void(null)" class="rememberpasswordlink" 
-													onclick="updateList('passlost', 'user.php', 'cmd=passlost');">{-#tpasslost#-}</a>
-											</td>
-										</tr>
-									</table>
-								</form>
-								-->
 								<br />
 								<a href="javascript:void(null)" class="rememberpasswordlink" onclick="updateList('passlost', 'user.php', 'cmd=passlost');">{-#tpasslost#-}</a>
 								<div id="passlost"></div>
