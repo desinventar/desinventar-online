@@ -140,6 +140,16 @@
 		// Initialize User Login Form
 		onReadyUserLogin();
 		
+		jQuery('body').bind('UserLoggedIn',function() {
+			// When the user completes the login procedure, reload the current page...
+			 window.location.reload(false);
+		});
+
+		jQuery('body').bind('UserLoggedOut',function() {
+			// When the user logouts, reload the current page...
+			 window.location.reload(false);
+		});
+		
 		setTimeout(function() {
 			Ext.get('loading').remove();
 			Ext.get('loading-mask').fadeOut({remove:true});
