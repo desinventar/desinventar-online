@@ -1,6 +1,7 @@
 <!-- Display User Login Form -->
 {-config_load file=`$confdir``$lg`.conf section="di8_user"-}
 <form id="frmUserLogin" method="post">
+	<br />
 	<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
 			<td>
@@ -13,9 +14,6 @@
 			</td>
 			<td>
 				<input type="submit" value="{-#benter#-}" class="line" />&nbsp;&nbsp;
-				<span class="rememberpasswordlink">
-					<a href="javascript:void(null)" onclick="updateList('pagecontent', 'user.php', 'cmd=passlost');">{-#tpasslost#-}</a>
-				</span>
 			</td>
 		</tr>
 	</table>

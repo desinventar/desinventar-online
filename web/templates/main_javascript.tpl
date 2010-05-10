@@ -148,13 +148,13 @@
 		// User functions Window
 		if (!usrw) {
 			usrw = new Ext.Window({
-				el:'usr-win', layout:'fit', x:300, y:100, width:500, height:100, 
+				el:'usr-win', layout:'fit', x:300, y:100, width:500, height:300, 
 				closeAction:'hide', plain: true, animCollapse: false,
 				items: new Ext.Panel({ contentEl: 'usr', autoScroll: true })
 			});
 		}
 		
-		// Find Bases window
+		// Search databases window
 		if (!dblw) {
 			dblw = new Ext.Window({
 				el:'dbl-win', layout:'fit', x:200, y:100, width:600, height:450, 
@@ -488,10 +488,12 @@
 		});
 		
 		// end ExtJS object
+
 		function userMan(cmd, opt) {
 			var pars = "cmd=" + cmd;
-			if (opt != "")
+			if (opt != "") {
 				pars += "&"+ opt;
+			}
 			var lsAjax = new Ajax.Request('user.php', {
 				method: 'get', parameters: pars,
 				onSuccess: function(request) {
