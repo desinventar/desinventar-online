@@ -9,7 +9,7 @@ function onReadyUserLogin() {
 		if (UserId == '' || UserPasswd == '') {
 			updateUserLoginMsg('#msgEmptyFields');
 		} else {
-			desinventarURL = jQuery('#desinventarURL').val();
+			desinventarURL = jQuery('#fldDesinventarURL').val();
 			if (desinventarURL == undefined) {
 				desinventarURL = '';
 			}
@@ -39,7 +39,7 @@ function onReadyUserLogin() {
 
 function doUserLogout() {
 	var Answer = 0;
-	desinventarURL = jQuery('#desinventarURL').val();
+	desinventarURL = jQuery('#fldDesinventarURL').val();
 	if (desinventarURL == undefined) {
 		desinventarURL = '';
 	}

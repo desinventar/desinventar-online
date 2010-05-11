@@ -1,6 +1,6 @@
 function onReadyPortal() {
-	var desinventarURL  = jQuery('#desinventarURL').val();
-	var desinventarLang = jQuery('#desinventarLang').val();
+	var desinventarURL  = jQuery('#fldDesinventarURL').val();
+	var desinventarLang = jQuery('#fldDesinventarLang').val();
 	
 	// Main button to open a default desinventar
 	jQuery("#btnMainWindow").click(function() {
@@ -8,7 +8,7 @@ function onReadyPortal() {
 	});
 	
 	// Update version number on screen
-	jQuery('#version').text(jQuery('#desinventarVersion').val());
+	jQuery('#version').text(jQuery('#fldDesinventarVersion').val());
 	
 	// Handle clicks on mainpage map
 	jQuery('area').click(function() {
@@ -57,8 +57,8 @@ function onReadyPortal() {
 
 	jQuery('body').bind('UserLoggedOut', function() {
 		// Update User Menu
-		jQuery('.lstUserMenu').hide();
-		jQuery('#lstUserLogin').show();
+		jQuery('.lstUserMenu').show();
+		jQuery('#lstUserLogout').hide();
 	});
 	
 	// Handle clicks on right menu (Home/LangSelect)
@@ -89,7 +89,7 @@ function onReadyPortal() {
 	// At start, display the map 
 	showMap();
 	
-	if (jQuery('#desinventarUserId').val() != '') {
+	if (jQuery('#fldDesinventarUserId').val() != '') {
 		jQuery('body').trigger('UserLoggedIn');
 	} else {
 		jQuery('body').trigger('UserLoggedOut');
@@ -99,7 +99,7 @@ function onReadyPortal() {
 function updateDatabaseList(CountryIsoCode,searchByCountry) {
 	jQuery(".portalcontent").hide();
 	jQuery("#regionlist").show();
-	var desinventarURL = jQuery('#desinventarURL').val();
+	var desinventarURL = jQuery('#fldDesinventarURL').val();
 	jQuery.get(desinventarURL, 
 		{cmd: 'getCountryName', CountryIso : CountryIsoCode },
 		function(data) { 
@@ -131,7 +131,7 @@ function updateDatabaseList(CountryIsoCode,searchByCountry) {
 function updateDatabaseListByUser() {
 	jQuery(".portalcontent").hide();
 	jQuery("#regionlist").show();
-	var desinventarURL = jQuery('#desinventarURL').val();
+	var desinventarURL = jQuery('#fldDesinventarURL').val();
 	jQuery("#pagetitle").html('<h3></h3>');
 	jQuery.getJSON(desinventarURL,
 		{ cmd: 'searchdb', searchdbquery: '', searchbycountry : 0},
@@ -161,8 +161,8 @@ function showRegionInfo(RegionId) {
 };
 
 function displayRegionInfo(RegionId) {
-	var desinventarURL = jQuery('#desinventarURL').val();
-	var desinventarLang = jQuery('#desinventarLang').val();
+	var desinventarURL = jQuery('#fldDesinventarURL').val();
+	var desinventarLang = jQuery('#fldDesinventarLang').val();
 	jQuery(".portalcontent").hide();
 	jQuery("#pageinfo"     ).show();
 	jQuery("#regionlogo"   ).attr('src', desinventarURL + '?cmd=getRegionLogo&RegionId=' + RegionId);
