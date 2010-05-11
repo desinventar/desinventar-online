@@ -60,28 +60,38 @@
 							<div align="right">
 								<img src="images/23.jpg" width="305" height="13">
 							</div>
-							<table border=0 cellpadding=0 cellspacing=0 class="menu" style="margin-top:1px">
+							<table border="0" width="100%">
 								<tr>
-									<td>
-										<ul id="MainMenu">
-											<li><a href="#" class="MenuItem" id="mnuShowMap">{-#tstartpage#-}</a>
-											</li>
-											<li>{-#tusers#-}
-												<ul>
-													<li class="lstUserMenu" id="lstUserLogin"><a href="#" class="MenuItem" id="mnuUserLogin">{-#msgUserLogin#-}</a></li>
-													<li class="lstUserMenu" id="lstUserLogout"><a href="#" class="MenuItem" id="mnuUserLogout">{-#msgUserLogout#-}</a></li>
-													<li class="lstUserMenu" id="lstUserRegionList"><a href="#" class="MenuItem" id="mnuUserRegionList">{-#msgRegionList#-}</a></li>
-												</ul>
-											</li>
-											<li>{-#tlang#-}
-												<ul>
-													<li><a href="?lang=eng">English</a></li>
-													<li><a href="?lang=spa">Español</a></li>
-													<li><a href="?lang=por">Português</a></li>
-													<li><a href="?lang=fre">Français</a></li>
-												</ul>
-											</li>
-										<ul>
+									<td align="left">
+										<span id="txtUserFullName"></span>
+										<span id="txtUserId"></span>
+									</td>
+									<td align="right">
+										<table border=0 cellpadding=0 cellspacing=0 class="menu" style="margin-top:1px">
+											<tr>
+												<td>
+													<ul id="MainMenu">
+														<li><a href="#" class="MenuItem" id="mnuShowMap">{-#tstartpage#-}</a>
+														</li>
+														<li>{-#tusers#-}
+															<ul>
+																<li class="lstUserMenu" id="lstUserLogin"><a href="#" class="MenuItem" id="mnuUserLogin">{-#msgUserLogin#-}</a></li>
+																<li class="lstUserMenu" id="lstUserLogout"><a href="#" class="MenuItem" id="mnuUserLogout">{-#msgUserLogout#-}</a></li>
+																<li class="lstUserMenu" id="lstUserRegionList"><a href="#" class="MenuItem" id="mnuUserRegionList">{-#msgRegionList#-}</a></li>
+															</ul>
+														</li>
+														<li>{-#tlang#-}
+															<ul>
+																<li><a href="?lang=eng">English</a></li>
+																<li><a href="?lang=spa">Español</a></li>
+																<li><a href="?lang=por">Português</a></li>
+																<li><a href="?lang=fre">Français</a></li>
+															</ul>
+														</li>
+													<ul>
+												</td>
+											</tr>
+										</table>
 									</td>
 								</tr>
 							</table>

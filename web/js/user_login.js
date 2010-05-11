@@ -4,8 +4,8 @@ function onReadyUserLogin() {
 	
 	// submit form validation and process..
 	jQuery("#frmUserLogin").submit(function() {
-		var UserId     = jQuery('#txtUserId').val();
-		var UserPasswd = jQuery("#txtUserPasswd").val();
+		var UserId     = jQuery('#fldUserId').val();
+		var UserPasswd = jQuery("#fldUserPasswd").val();
 		if (UserId == '' || UserPasswd == '') {
 			updateUserLoginMsg('#msgEmptyFields');
 		} else {
@@ -19,10 +19,14 @@ function onReadyUserLogin() {
 			     'UserPasswd' : hex_md5(UserPasswd)
 			    },
 			    function(data) {
-					if (data == 'OK') {
+					if (data.Status == 'OK') {
 						updateUserLoginMsg("#msgUserLoggedIn");
 						// After login, clear passwd field
-						jQuery("#txtUserPasswd").val('');
+						jQuery("#fldUserPasswd").val('');
+
+						// Update UserInfo Fields...
+						jQuery('#fldDesinventarUserId').val(data.UserId);
+						jQuery('#fldDesinventarUserFullName').val(data.UserFullName);
 
 						// Trigger Event and Update User Menu etc.
 						jQuery('body').trigger('UserLoggedIn');
@@ -47,12 +51,16 @@ function doUserLogout() {
 		{'cmd'        : 'logout'
 		},
 		function(data) {
-			if (data == 'OK') {
+			if (data.Status == 'OK') {
 				Answer = 1;
 				updateUserLoginMsg("#msgUserLoggedOut");
 				// After login, clear passwd field
-				jQuery('#txtUserId').val('');
-				jQuery('#txtUserPasswd').val('');
+				jQuery('#fldUserId').val('');
+				jQuery('#fldUserPasswd').val('');
+				
+				// Update UserInfo Fields...
+				jQuery('#fldDesinventarUserId').val('');
+				jQuery('#fldDesinventarUserFullName').val('');
 				
 				// Trigger Event, used to update menu or reload page...
 				jQuery('body').trigger('UserLoggedOut');
