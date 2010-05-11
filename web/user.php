@@ -42,11 +42,13 @@ $cmd = getParameter('cmd','');
 switch ($cmd) {
 	case "login":
 		// LOGIN: CONTROL USER ACCESS
-		$Answer = 'ERROR';
+		$Answer = array('Status' => 'ERROR');
 		$UserId = getParameter('UserId');
 		$UserPasswd = getParameter('UserPasswd');
 		if ($us->login($UserId, $UserPasswd) > 0) {
-			$Answer = "OK";	// Login success
+			$Answer['Status'] = "OK";	// Login success
+			$Answer['UserId'] = $us->UserId;
+			$Answer['UserFullName'] = $us->getUserFullName();
 		}
 		print json_encode($Answer);
 	break;
@@ -59,7 +61,7 @@ switch ($cmd) {
 	case "logout":
 		// LOGOUT : Logut current user and show the login panel again
 		$us->logout();
-		print json_encode("OK");
+		print json_encode(array('Status' => 'OK'));
 	break;
 	case "passlost":
 		// PASSLOST: Allows to recover a user's password by sending 

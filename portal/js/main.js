@@ -49,17 +49,31 @@ function onReadyPortal() {
 		// Prevent default action
 		return false;
 	});
-	
+
+	jQuery('body').bind('UserUpdateInfo', function() {
+		UserName = jQuery('#fldDesinventarUserFullName').val();
+		UserId   = jQuery('#fldDesinventarUserId').val();
+		if (UserId != '') {
+			jQuery('#txtUserFullName').text(UserName);
+			jQuery('#txtUserId').text('(' + UserId + ')');
+		} else {
+			jQuery('#txtUserFullName').text('');
+			jQuery('#txtUserId').text('');
+		}
+	});
+		
 	jQuery('body').bind('UserLoggedIn', function() {
 		jQuery('.lstUserMenu').show();
 		jQuery('#lstUserLogin').hide();
 		updateDatabaseListByUser();
+		jQuery('body').trigger('UserUpdateInfo');
 	});
 
 	jQuery('body').bind('UserLoggedOut', function() {
 		// Update User Menu
 		jQuery('.lstUserMenu').show();
 		jQuery('#lstUserLogout').hide();
+		jQuery('body').trigger('UserUpdateInfo');
 	});
 	
 	// Handle clicks on right menu (Home/LangSelect)

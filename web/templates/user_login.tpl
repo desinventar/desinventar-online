@@ -7,8 +7,8 @@
 			<td>
 				<table border="0" align="center" style="margin-top:1px">
 					<tr>
-						<td align="right">{-#tuser#-}     <input type="text" id="txtUserId" name="userid" value="" size="16" /></td>
-						<td align="right">{-#tpassword#-} <input type="password" name="password" id="txtUserPasswd" value="" size="8" /></td>
+						<td align="right">{-#tuser#-}     <input type="text" id="fldUserId" name="userid" value="" size="16" /></td>
+						<td align="right">{-#tpassword#-} <input type="password" name="password" id="fldUserPasswd" value="" size="8" /></td>
 					</tr>
 				</table>
 			</td>

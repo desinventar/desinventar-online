@@ -39,11 +39,12 @@
 
 	$t->assign("lang"  , $lang);
 
-	$t->assign('desinventarURL'    , $desinventarURL);
-	$t->assign('desinventarVersion', VERSION);
-	$t->assign('desinventarLang'   , $lang);
-	$t->assign('desinventarUserId' , $us->UserId);
-	$t->assign('desinventarModule' , 'portal');
+	$t->assign('desinventarURL'         , $desinventarURL);
+	$t->assign('desinventarVersion'     , VERSION);
+	$t->assign('desinventarLang'        , $lang);
+	$t->assign('desinventarUserId'      , $us->UserId);
+	$t->assign('desinventarUserFullName', $us->getUserFullName());
+	$t->assign('desinventarModule'      , 'portal');
 	
 	// 2009-09-23 (jhcaiced) Choose which ISDR logo to use...
 	$isdrlogo = 'logo-isdr.gif';
