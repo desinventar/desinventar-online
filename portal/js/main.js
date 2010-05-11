@@ -5,6 +5,7 @@ function onReadyPortal() {
 	// Main button to open a default desinventar
 	jQuery("#btnMainWindow").click(function() {
 		window.open(desinventarURL + '?cmd=main&lang=' + desinventarLang,'_blank', 'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');
+		return false;
 	});
 	
 	// Update version number on screen
@@ -171,6 +172,7 @@ function displayRegionInfo(RegionId) {
 	jQuery("#regionlink").unbind('click').click(function() {
 		window.open(desinventarURL + '?r=' + RegionId + '&lang=' + desinventarLang,'_blank', 
 			'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');
+		return false;
 	});
 };
 
