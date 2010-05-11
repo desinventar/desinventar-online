@@ -66,11 +66,11 @@
 										<ul id="MainMenu">
 											<li><a href="#" class="MenuItem" id="mnuShowMap">{-#tstartpage#-}</a>
 											</li>
-											<li>Usuario
+											<li>{-#tusers#-}
 												<ul>
-													<li class="lstUserMenu" id="lstUserLogin"><a href="#" class="MenuItem" id="mnuUserLogin">Ingresar</a></li>
-													<li class="lstUserMenu" id="lstUserLogout"><a href="#" class="MenuItem" id="mnuUserLogout">Cerrar sesion</a></li>
-													<li class="lstUserMenu" id="lstUserRegionList"><a href="#" class="MenuItem" id="mnuUserRegionList">Listado de Regiones</a></li>
+													<li class="lstUserMenu" id="lstUserLogin"><a href="#" class="MenuItem" id="mnuUserLogin">{-#msgUserLogin#-}</a></li>
+													<li class="lstUserMenu" id="lstUserLogout"><a href="#" class="MenuItem" id="mnuUserLogout">{-#msgUserLogout#-}</a></li>
+													<li class="lstUserMenu" id="lstUserRegionList"><a href="#" class="MenuItem" id="mnuUserRegionList">{-#msgRegionList#-}</a></li>
 												</ul>
 											</li>
 											<li>{-#tlang#-}
