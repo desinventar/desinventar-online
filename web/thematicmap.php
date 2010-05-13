@@ -218,9 +218,9 @@ if (isset($post['_M+cmd'])) {
 			$ht = imagesy($imap) + imagesy($imgMapInfo);
 			$im = imagecreatetruecolor($wt, $ht);
 			imagefilledrectangle($im, 0, 0, $wt - 1, $ht - 1, imagecolorallocate($im, 255, 255, 255));
-			//imagecopy($im, $imgMapInfo, 0, 0, 0, 0, imagesx($imgMapInfo), imagesy($imgMapInfo));
-			imagecopy($im, $ibas, 0, 0, 0, 0, $w, $h);
-			imagecopy($im, $imap, 0, 0, 0, 0, $w, $h);
+			imagecopy($im, $imgMapInfo, 0, 0, 0, 0, imagesx($imgMapInfo), imagesy($imgMapInfo));
+			imagecopy($im, $ibas, 0, imagesy($imgMapInfo), 0, 0, $w, $h);
+			imagecopy($im, $imap, 0, imagesy($imgMapInfo), 0, 0, $w, $h);
 			imagecopy($im, $ileg, $w+1, $h - imagesy($ileg), 0, 0, imagesx($ileg), imagesy($ileg));
 			imagestring($im, 3, 2, $ht - 20, 'http://www.desinventar.org/', imagecolorallocate($im, 0, 0, 0));
 			header("Content-type: Image/png");
