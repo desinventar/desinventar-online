@@ -57,6 +57,9 @@ $dic = array_merge($dic, $us->q->queryLabelsFromGroup('MapOpt', $lg));
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Sector', $lg));
 
+$mapinfodic = $us->q->queryLabelsFromGroup('MapInfo', $lg);
+fb($mapinfodic);
+
 if (isset($post['_M+cmd'])) {
 	// 2010-01-18 (jhcaiced) Windows machines doesn't use remote servers
 	if (isset($_SERVER["WINDIR"])) {
@@ -89,6 +92,7 @@ if (isset($post['_M+cmd'])) {
 	if ($v[0] == "D.DisasterId")
 		$v[0] = "D.DisasterId_";
 	$sql .= " ORDER BY ". substr($v[0],2) ." ASC";
+	fb($dic);
 	$info = $us->q->getQueryDetails($dic, $post);
 	// get query results
 	$dislist = $us->q->getassoc($sql);
@@ -157,17 +161,21 @@ if (isset($post['_M+cmd'])) {
 	// Process array to calculate some parameters...
 	$ImageRows = 0;
 	$ImageCols = 0;
+	$infoTranslated = array();
 	foreach($info as $key => $value) {
 		$value = trim($value);
 		$info[$key] = $value;
 		if ($value != '') {
 			$ImageRows++;
-			$sx = strlen($key) + strlen($value) + 4; 
+			$title = $mapinfodic['MapInfo' . $key][0];
+			$sx = strlen($title) + strlen($value) + 4;
 			if ($sx > $ImageCols) {
 				$ImageCols = $sx;
 			}
+			$infoTranslated[$key] = array('Title' => $title, 'Value' => $value);
 		}
 	}
+	fb($infoTranslated);
 	$font = 2;
 	$sx = imagefontwidth($font);
 	$sy = imagefontheight($font);
@@ -178,9 +186,11 @@ if (isset($post['_M+cmd'])) {
 	$black = imagecolorallocate($imgMapInfo, 0,0,0);
 	imagefill($imgMapInfo, 0,0, $white);
 	$y = 0;
-	foreach($info as $key => $value) {
-		if ($value != '') {
-			imagestring($imgMapInfo, $font, 0, $sy * $y, utf8_decode($key . ' : ' . $value), $black);
+	foreach($infoTranslated as $key => $item) {
+		if ($item['Value'] != '') {
+			$sep = ' : ';
+			if ($key == 'TITLE') { $sep = ' '; }
+			imagestring($imgMapInfo, $font, 0, $sy * $y, utf8_decode($item['Title'] . $sep . $item['Value']), $black);
 			$y++;
 		}
 	}
