@@ -76,7 +76,7 @@ if (isset($post['_M+cmd'])) {
 	$dic = array_merge($dic, $us->q->getEEFieldList("True"));
 	$sqc = $us->q->genSQLSelectCount($qd);
 	$c	 = $us->q->getresult($sqc);
-	$cou = $c['counter'];
+	$NumberOfRecords = $c['counter'];
 	// Assign ranges
 	$range = setRanges($post);
 	// Data Options Interface
@@ -98,6 +98,7 @@ if (isset($post['_M+cmd'])) {
 	// MAPS Query, RegionId, Level, datalist, ranges, dbinfo, label, maptype
 	$m = new Maps($us->q, $reg, $lev[0], $dl, $range, $info, $post['_M+Label'], $post['_M+Transparency'], "THEMATIC");	
 	$rinf = $us->q->getDBInfo($lg);
+	$info['REG'] = $rinf['RegionLabel|'];
 	$rgl[0]['regname'] = $rinf['RegionLabel|'];
 	$rgl[0]['info'] = $info;
 	// if valid filename then prepare interface to view MAPFILE	
@@ -149,12 +150,48 @@ if (isset($post['_M+cmd'])) {
 	
 	$t->assign('glev', $us->q->loadGeoLevels('', -1, true));
 	$t->assign('rgl', $rgl);
-	$t->assign('tot', $cou);
+	$t->assign('MapNumberOfRecords', $NumberOfRecords);
 	$t->assign('qdet', $us->q->getQueryDetails($dic, $post));
+	
+	// 2010-05-12 (jhcaiced) Create an image for the Map Title and Description...
+	// Process array to calculate some parameters...
+	$ImageRows = 0;
+	$ImageCols = 0;
+	foreach($info as $key => $value) {
+		$value = trim($value);
+		$info[$key] = $value;
+		if ($value != '') {
+			$ImageRows++;
+			$sx = strlen($key) + strlen($value) + 4; 
+			if ($sx > $ImageCols) {
+				$ImageCols = $sx;
+			}
+		}
+	}
+	$font = 2;
+	$sx = imagefontwidth($font);
+	$sy = imagefontheight($font);
+	$width  = $sx * $ImageCols;
+	$height = $sy * $ImageRows;
+	$imgMapInfo = imagecreatetruecolor($width, $height);
+	$white = imagecolorallocate($imgMapInfo, 255,255,255);
+	$black = imagecolorallocate($imgMapInfo, 0,0,0);
+	imagefill($imgMapInfo, 0,0, $white);
+	$y = 0;
+	foreach($info as $key => $value) {
+		if ($value != '') {
+			imagestring($imgMapInfo, $font, 0, $sy * $y, utf8_decode($key . ' : ' . $value), $black);
+			$y++;
+		}
+	}
+	$MapInfoImg = 'mapinfo_' . session_id() . '_' . rand(0, 50000) . '.jpg';
+	imagejpeg($imgMapInfo, WWWDIR . '/' . $MapInfoImg, 100);
+	
 	$mapfile = str_replace('\\', '/', $m->filename());
 	$worldmap = str_replace('\\','/', DATADIR . "/worldmap/world_adm0.map");
 	$legend = "/cgi-bin/". MAPSERV ."?map=" . rawurlencode($mapfile) . "&SERVICE=WMS&VERSION=1.1.1".
 				"&REQUEST=getlegendgraphic&LAYER=". substr($myly, 0, 12) ."&FORMAT=image/png";
+	$t->assign('mapinfoimg', WWWDATA . '/' . $MapInfoImg);
 	$t->assign('legend', $legend);	
 	// 2009-09-10 (jhcaiced) Replace backslash chars to slash, when passing data to mapserver
 	if ($post['_M+cmd'] == "export") {
@@ -175,10 +212,13 @@ if (isset($post['_M+cmd'])) {
 			// Download and include legend
 			$lf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $legend);
 			$ileg = imagecreatefromstring($lf);
+			
+			// Include MapInfo Image (Title, Query Info etc.)
 			$wt = imagesx($imap) + imagesx($ileg);
-			$ht = imagesy($imap);
+			$ht = imagesy($imap) + imagesy($imgMapInfo);
 			$im = imagecreatetruecolor($wt, $ht);
 			imagefilledrectangle($im, 0, 0, $wt - 1, $ht - 1, imagecolorallocate($im, 255, 255, 255));
+			//imagecopy($im, $imgMapInfo, 0, 0, 0, 0, imagesx($imgMapInfo), imagesy($imgMapInfo));
 			imagecopy($im, $ibas, 0, 0, 0, 0, $w, $h);
 			imagecopy($im, $imap, 0, 0, 0, 0, $w, $h);
 			imagecopy($im, $ileg, $w+1, $h - imagesy($ileg), 0, 0, imagesx($ileg), imagesy($ileg));
@@ -190,10 +230,10 @@ if (isset($post['_M+cmd'])) {
 			imagedestroy($ileg);
 			imagedestroy($im);
 		}
-	}
-	else {
+	} else {
 		$t->assign('ctl_showres', true);
 	}
+	imagedestroy($imgMapInfo);
 } elseif (isset($get['cmd']) && $get['cmd'] == "getkml") {
 	// Send KML file - GoogleEarth
 	header("Content-type: text/kml");

@@ -219,7 +219,7 @@
 		<tr>
 			<td valign="top">
 				<div class="dwin" style="width:250px;">
-					<p align="right">{-#trepnum#-}: {-$tot-}</p>
+					<p align="right">{-#trepnum#-}: {-$MapNumberOfRecords-}</p>
 					<hr />
 					<h4>{-#tmapof#-} {-$rgl[0].info.TITLE-}</h4>
 					<div align="justify" class="dwin" style="height:250px;">{-#lev#-}: {-$rgl[0].info.LEVEL-}; 
@@ -237,11 +237,12 @@
 					</div>
 					<hr />
 					<image src="images/ge_icon.png" /><a href="thematicmap.php?r={-$reg-}&cmd=getkml">{-#tgetgearth#-}</a>
-					<hr /><br />
-					<img src="{-$legend-}" />
+					<hr />
+					<img src="{-$legend-}" /><br />
 				</div>
 			</td>
 			<td valign="top">
+				<img src="{-$mapinfoimg-}"><br />			
 				<div id="map" class="dwin" style="width:700px; height:530px"></div>
 			</td>
 		</tr>
