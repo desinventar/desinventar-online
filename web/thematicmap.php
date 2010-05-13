@@ -57,9 +57,6 @@ $dic = array_merge($dic, $us->q->queryLabelsFromGroup('MapOpt', $lg));
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Sector', $lg));
 
-$mapinfodic = $us->q->queryLabelsFromGroup('MapInfo', $lg);
-fb($mapinfodic);
-
 if (isset($post['_M+cmd'])) {
 	// 2010-01-18 (jhcaiced) Windows machines doesn't use remote servers
 	if (isset($_SERVER["WINDIR"])) {
@@ -92,7 +89,6 @@ if (isset($post['_M+cmd'])) {
 	if ($v[0] == "D.DisasterId")
 		$v[0] = "D.DisasterId_";
 	$sql .= " ORDER BY ". substr($v[0],2) ." ASC";
-	fb($dic);
 	$info = $us->q->getQueryDetails($dic, $post);
 	// get query results
 	$dislist = $us->q->getassoc($sql);
@@ -103,6 +99,7 @@ if (isset($post['_M+cmd'])) {
 	$m = new Maps($us->q, $reg, $lev[0], $dl, $range, $info, $post['_M+Label'], $post['_M+Transparency'], "THEMATIC");	
 	$rinf = $us->q->getDBInfo($lg);
 	$info['REG'] = $rinf['RegionLabel|'];
+	$info['RECORDS'] = $NumberOfRecords;
 	$rgl[0]['regname'] = $rinf['RegionLabel|'];
 	$rgl[0]['info'] = $info;
 	// if valid filename then prepare interface to view MAPFILE	
@@ -159,6 +156,7 @@ if (isset($post['_M+cmd'])) {
 	
 	// 2010-05-12 (jhcaiced) Create an image for the Map Title and Description...
 	// Process array to calculate some parameters...
+	$mapinfodic = $us->q->queryLabelsFromGroup('MapInfo', $lg);
 	$ImageRows = 0;
 	$ImageCols = 0;
 	$infoTranslated = array();
@@ -175,7 +173,6 @@ if (isset($post['_M+cmd'])) {
 			$infoTranslated[$key] = array('Title' => $title, 'Value' => $value);
 		}
 	}
-	fb($infoTranslated);
 	$font = 2;
 	$sx = imagefontwidth($font);
 	$sy = imagefontheight($font);
@@ -194,6 +191,7 @@ if (isset($post['_M+cmd'])) {
 			$y++;
 		}
 	}
+
 	$MapInfoImg = 'mapinfo_' . session_id() . '_' . rand(0, 50000) . '.jpg';
 	imagejpeg($imgMapInfo, WWWDIR . '/' . $MapInfoImg, 100);
 	
@@ -221,23 +219,24 @@ if (isset($post['_M+cmd'])) {
 			$imap = imagecreatefromstring($mf);
 			// Download and include legend
 			$lf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $legend);
-			$ileg = imagecreatefromstring($lf);
+			$imgMapLegend = imagecreatefromstring($lf);
 			
 			// Include MapInfo Image (Title, Query Info etc.)
-			$wt = imagesx($imap) + imagesx($ileg);
+			$wt = imagesx($imap) + imagesx($imgMapLegend);
 			$ht = imagesy($imap) + imagesy($imgMapInfo);
 			$im = imagecreatetruecolor($wt, $ht);
 			imagefilledrectangle($im, 0, 0, $wt - 1, $ht - 1, imagecolorallocate($im, 255, 255, 255));
 			imagecopy($im, $imgMapInfo, 0, 0, 0, 0, imagesx($imgMapInfo), imagesy($imgMapInfo));
 			imagecopy($im, $ibas, 0, imagesy($imgMapInfo), 0, 0, $w, $h);
 			imagecopy($im, $imap, 0, imagesy($imgMapInfo), 0, 0, $w, $h);
-			imagecopy($im, $ileg, $w+1, $h - imagesy($ileg), 0, 0, imagesx($ileg), imagesy($ileg));
+			imagecopy($im, $imgMapLegend, 0, $h - imagesy($imgMapLegend), 0, 0, imagesx($imgMapLegend), imagesy($imgMapLegend));
+			//imagecopy($im, $imgMapLegend, $w+1, $h - imagesy($imgMapLegend), 0, 0, imagesx($imgMapLegend), imagesy($imgMapLegend));
 			imagestring($im, 3, 2, $ht - 20, 'http://www.desinventar.org/', imagecolorallocate($im, 0, 0, 0));
 			header("Content-type: Image/png");
 			header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $rinf['RegionLabel|']) ."_ThematicMap.png");
 			imagepng($im);
 			imagedestroy($imap);
-			imagedestroy($ileg);
+			imagedestroy($imgMapLegend);
 			imagedestroy($im);
 		}
 	} else {
