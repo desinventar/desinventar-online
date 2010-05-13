@@ -138,24 +138,24 @@ if (isset($post['_M+cmd'])) {
 		$rgl[0]['map'] = str_replace('\\','/',$m->filename());
 	}
 	if (isset($lnl) && isset($ltl)) {
-		$t->assign ("lon", array_sum($lnl)/count($lnl));
-		$t->assign ("lat", array_sum($ltl)/count($ltl));
+		$t->assign('lon', array_sum($lnl)/count($lnl));
+		$t->assign('lat', array_sum($ltl)/count($ltl));
 		$zln = abs(max($aln) - min($aln));
 		$zlt = abs(max($alt) - min($alt));
 		$mx = ($zln == 0 || $zlt == 0) ? 1 : max($zln, $zlt); 
 		$zoom = round(log(180/$mx)) + 3;
-		$t->assign ("zoom", $zoom);
+		$t->assign('zoom', $zoom);
 	}
 	
-	$t->assign ("glev", $us->q->loadGeoLevels('', -1, true));
-	$t->assign ("rgl", $rgl);
-	$t->assign ("tot", $cou);
-	$t->assign ("qdet", $us->q->getQueryDetails($dic, $post));
+	$t->assign('glev', $us->q->loadGeoLevels('', -1, true));
+	$t->assign('rgl', $rgl);
+	$t->assign('tot', $cou);
+	$t->assign('qdet', $us->q->getQueryDetails($dic, $post));
 	$mapfile = str_replace('\\', '/', $m->filename());
 	$worldmap = str_replace('\\','/', DATADIR . "/worldmap/world_adm0.map");
 	$legend = "/cgi-bin/". MAPSERV ."?map=" . rawurlencode($mapfile) . "&SERVICE=WMS&VERSION=1.1.1".
 				"&REQUEST=getlegendgraphic&LAYER=". substr($myly, 0, 12) ."&FORMAT=image/png";
-	$t->assign ("legend", $legend);	
+	$t->assign('legend', $legend);	
 	// 2009-09-10 (jhcaiced) Replace backslash chars to slash, when passing data to mapserver
 	if ($post['_M+cmd'] == "export") {
 		$w = 1000;
@@ -192,7 +192,7 @@ if (isset($post['_M+cmd'])) {
 		}
 	}
 	else {
-		$t->assign ("ctl_showres", true);
+		$t->assign('ctl_showres', true);
 	}
 } elseif (isset($get['cmd']) && $get['cmd'] == "getkml") {
 	// Send KML file - GoogleEarth
@@ -231,10 +231,10 @@ switch($_SERVER["SERVER_NAME"]) {
 		break;
 }
 
-$t->assign ("reg", $reg);
+$t->assign('reg', $reg);
 //$t->assign ("dic", $dic);
-$t->assign ("basemap", $worldmap);
-$t->assign ("mps", MAPSERV);
-$t->assign ("googlemapkey", $GoogleMapsKey);
-$t->display ("thematicmap.tpl");
+$t->assign('basemap', $worldmap);
+$t->assign('mps', MAPSERV);
+$t->assign('googlemapkey', $GoogleMapsKey);
+$t->display('thematicmap.tpl');
 </script>
