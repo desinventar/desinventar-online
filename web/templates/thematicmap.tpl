@@ -211,36 +211,40 @@
 </head>
 <body>
 	<table class="grid" height="100%">
-	<tr><td>{-$mapfilename-}</td></tr>
-	<tr>
-		<td valign="top">
-		<div class="dwin" style="width:250px;">
-			<p align="right">{-#trepnum#-}: {-$tot-}</p>
-			<hr />
-			<h4>{-#tmapof#-} {-$rgl[0].info.TITLE-}</h4>
-			<div align="justify" class="dwin" style="height:250px;">{-#lev#-}: {-$rgl[0].info.LEVEL-}; 
-{-foreach key=k item=i from=$rgl[0].info-}
- {-if $k == "GEO"-}<i>{-#geo#-}:</i> {-$i-}; {-/if-}
- {-if $k == "EVE"-}<i>{-#eve#-}:</i> {-$i-}; {-/if-}
- {-if $k == "CAU"-}<i>{-#cau#-}:</i> {-$i-}; {-/if-}
- {-if $k == "EFF"-}<i>{-#eff#-}:</i> {-$i-}; {-/if-}
- {-if $k == "BEG"-}<i>{-#beg#-}:</i> {-$i-}; {-/if-}
- {-if $k == "END"-}<i>{-#end#-}:</i> {-$i-}; {-/if-}
- {-if $k == "SOU"-}<i>{-#sou#-}:</i> {-$i-}; {-/if-}
- {-if $k == "SER"-}<i>{-#ser#-}:</i> {-$i-}; {-/if-}
-{-/foreach-}
-         {-$rgl[0].regname-}
-			</div>
-			<hr />
-			<image src="images/ge_icon.png" /><a href="thematicmap.php?r={-$reg-}&cmd=getkml">{-#tgetgearth#-}</a>
-			<hr /><br />
-			<img src="{-$legend-}" />
-		</div>
-		</td>
-		<td valign="top">
-			<div id="map" class="dwin" style="width:700px; height:530px"></div>
-		</td>
-	</tr>
+		<tr>
+			<td>
+				{-$mapfilename-}
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">
+				<div class="dwin" style="width:250px;">
+					<p align="right">{-#trepnum#-}: {-$tot-}</p>
+					<hr />
+					<h4>{-#tmapof#-} {-$rgl[0].info.TITLE-}</h4>
+					<div align="justify" class="dwin" style="height:250px;">{-#lev#-}: {-$rgl[0].info.LEVEL-}; 
+						{-foreach key=k item=i from=$rgl[0].info-}
+							{-if $k == "GEO"-}<i>{-#geo#-}:</i> {-$i-}; {-/if-}
+							{-if $k == "EVE"-}<i>{-#eve#-}:</i> {-$i-}; {-/if-}
+							{-if $k == "CAU"-}<i>{-#cau#-}:</i> {-$i-}; {-/if-}
+							{-if $k == "EFF"-}<i>{-#eff#-}:</i> {-$i-}; {-/if-}
+							{-if $k == "BEG"-}<i>{-#beg#-}:</i> {-$i-}; {-/if-}
+							{-if $k == "END"-}<i>{-#end#-}:</i> {-$i-}; {-/if-}
+							{-if $k == "SOU"-}<i>{-#sou#-}:</i> {-$i-}; {-/if-}
+							{-if $k == "SER"-}<i>{-#ser#-}:</i> {-$i-}; {-/if-}
+						{-/foreach-}
+						{-$rgl[0].regname-}
+					</div>
+					<hr />
+					<image src="images/ge_icon.png" /><a href="thematicmap.php?r={-$reg-}&cmd=getkml">{-#tgetgearth#-}</a>
+					<hr /><br />
+					<img src="{-$legend-}" />
+				</div>
+			</td>
+			<td valign="top">
+				<div id="map" class="dwin" style="width:700px; height:530px"></div>
+			</td>
+		</tr>
 	</table>
 </body>
 </html>
