@@ -189,9 +189,12 @@ if (isset($post['_M+cmd'])) {
 		$infoTranslated['TITLE2'] .= ', ' . $title . ' : ' . $info2['RECORDS'];
 		unset($info2['RECORDS']);
 	}
-	
 	$ImageRows = 1;
-	$ImageCols = strlen($infoTranslated['TITLE']);
+	$sx = strlen($infoTranslated['TITLE']);
+	if (strlen($infoTranslated['TITLE2']) > $sx) {
+		$sx = strlen($infoTranslated['TITLE2']);
+	}
+	$ImageCols = $sx + 25;
 	foreach($info2 as $key => $value) {
 		$info2[$key] = $value;
 		if ($value != '') {
@@ -214,7 +217,7 @@ if (isset($post['_M+cmd'])) {
 	$black = imagecolorallocate($imgMapInfo, 0,0,0);
 	imagefill($imgMapInfo, 0,0, $white);
 	$item = $infoTranslated['TITLE'];
-	imagettftext($imgMapInfo, 12, 0, 0, 13, $black, 'arialbi', $item);
+	imagettftext($imgMapInfo, 11, 0, 0, 13, $black, 'arialbi', $item);
 	$item = $infoTranslated['TITLE2'];
 	imagettftext($imgMapInfo, 10, 0, 0, 25, $black, 'arial', $item);
 	$y = 0;
