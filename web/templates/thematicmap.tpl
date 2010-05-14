@@ -242,7 +242,7 @@
 				</div>
 			</td>
 			<td valign="top">
-				<img src="{-$mapinfoimg-}"><br />
+				<!-- <img src="{-$mapinfoimg-}"><br /> -->
 				<div id="map" class="dwin" style="width:700px; height:530px"></div>
 			</td>
 		</tr>
