@@ -98,7 +98,7 @@ if (isset($post['_M+cmd'])) {
 	// MAPS Query, RegionId, Level, datalist, ranges, dbinfo, label, maptype
 	$m = new Maps($us->q, $reg, $lev[0], $dl, $range, $info, $post['_M+Label'], $post['_M+Transparency'], "THEMATIC");	
 	$rinf = $us->q->getDBInfo($lg);
-	$info['REG'] = $rinf['RegionLabel|'];
+	//$info['REG'] = $rinf['RegionLabel|'];
 	$info['RECORDS'] = $NumberOfRecords;
 	$rgl[0]['regname'] = $rinf['RegionLabel|'];
 	$rgl[0]['info'] = $info;
@@ -157,12 +157,43 @@ if (isset($post['_M+cmd'])) {
 	// 2010-05-12 (jhcaiced) Create an image for the Map Title and Description...
 	// Process array to calculate some parameters...
 	$mapinfodic = $us->q->queryLabelsFromGroup('MapInfo', $lg);
-	$ImageRows = 0;
-	$ImageCols = 0;
 	$infoTranslated = array();
-	foreach($info as $key => $value) {
+	$info2 = $info;
+	// Manually Processed Data
+	foreach($info2 as $key => $value) {
 		$value = trim($value);
-		$info[$key] = $value;
+		$info2[$key] = $value;
+	}
+	if ($info2['TITLE'] != '') {
+		$value = $info2['TITLE'];
+		$title = $mapinfodic['MapInfoTITLE'][0];
+		$infoTranslated['TITLE'] = $title . ' ' . $value;
+		unset($info2['TITLE']);
+	}
+	if ($info2['BEG'] != '') {
+		$infoTranslated['TITLE'] .= ', ' . $info2['BEG'];
+		unset($info2['BEG']);
+		if ($info2['END'] != '') {
+			$infoTranslated['TITLE'] .= ' - ' . $info2['END'];
+			unset($info2['END']);
+		}
+	}
+	if ($info2['LEVEL'] != '') {
+		$title = $mapinfodic['MapInfoLEVEL'][0];
+		$infoTranslated['TITLE2'] = $title . ': ' . $info2['LEVEL'];
+		unset($info2['LEVEL']);
+	}
+
+	if ($info2['RECORDS'] != '') {
+		$title = $mapinfodic['MapInfoRECORDS'][0];
+		$infoTranslated['TITLE2'] .= ', ' . $title . ' : ' . $info2['RECORDS'];
+		unset($info2['RECORDS']);
+	}
+	
+	$ImageRows = 1;
+	$ImageCols = strlen($infoTranslated['TITLE']);
+	foreach($info2 as $key => $value) {
+		$info2[$key] = $value;
 		if ($value != '') {
 			$ImageRows++;
 			$title = $mapinfodic['MapInfo' . $key][0];
@@ -170,24 +201,26 @@ if (isset($post['_M+cmd'])) {
 			if ($sx > $ImageCols) {
 				$ImageCols = $sx;
 			}
-			$infoTranslated[$key] = array('Title' => $title, 'Value' => $value);
+			$infoTranslated[$key] = $title . ': ' . $value;
 		}
 	}
 	$font = 2;
 	$sx = imagefontwidth($font);
 	$sy = imagefontheight($font);
 	$width  = $sx * $ImageCols;
-	$height = $sy * $ImageRows;
+	$height = $sy * $ImageRows + 20;
 	$imgMapInfo = imagecreatetruecolor($width, $height);
 	$white = imagecolorallocate($imgMapInfo, 255,255,255);
 	$black = imagecolorallocate($imgMapInfo, 0,0,0);
 	imagefill($imgMapInfo, 0,0, $white);
+	$item = $infoTranslated['TITLE'];
+	imagettftext($imgMapInfo, 12, 0, 0, 13, $black, 'arialbi', $item);
+	$item = $infoTranslated['TITLE2'];
+	imagettftext($imgMapInfo, 10, 0, 0, 25, $black, 'arial', $item);
 	$y = 0;
 	foreach($infoTranslated as $key => $item) {
-		if ($item['Value'] != '') {
-			$sep = ' : ';
-			if ($key == 'TITLE') { $sep = ' '; }
-			imagestring($imgMapInfo, $font, 0, $sy * $y, utf8_decode($item['Title'] . $sep . $item['Value']), $black);
+		if ( ($key != 'TITLE') && ($key != 'TITLE2') ) {
+			imagettftext($imgMapInfo, 10, 0, 0,38 + $sy * $y, $black, 'arial', $item);
 			$y++;
 		}
 	}
@@ -222,17 +255,17 @@ if (isset($post['_M+cmd'])) {
 			$imgMapLegend = imagecreatefromstring($lf);
 			
 			// Include MapInfo Image (Title, Query Info etc.)
-			$wt = imagesx($imap) + imagesx($imgMapLegend);
+			$wt = imagesx($imap); // + imagesx($imgMapLegend);
 			$ht = imagesy($imap) + imagesy($imgMapInfo);
 			$im = imagecreatetruecolor($wt, $ht);
 			imagefilledrectangle($im, 0, 0, $wt - 1, $ht - 1, imagecolorallocate($im, 255, 255, 255));
 			imagecopy($im, $imgMapInfo, 0, 0, 0, 0, imagesx($imgMapInfo), imagesy($imgMapInfo));
 			imagecopy($im, $ibas, 0, imagesy($imgMapInfo), 0, 0, $w, $h);
 			imagecopy($im, $imap, 0, imagesy($imgMapInfo), 0, 0, $w, $h);
-			imagecopy($im, $imgMapLegend, 0, $h - imagesy($imgMapLegend), 0, 0, imagesx($imgMapLegend), imagesy($imgMapLegend));
+			imagecopy($im, $imgMapLegend, 0, ($h + imagesy($imgMapInfo)) - (imagesy($imgMapLegend) + 5), 0, 0, imagesx($imgMapLegend), imagesy($imgMapLegend));
 			//imagecopy($im, $imgMapLegend, $w+1, $h - imagesy($imgMapLegend), 0, 0, imagesx($imgMapLegend), imagesy($imgMapLegend));
-			imagestring($im, 3, 2, $ht - 20, 'http://www.desinventar.org/', imagecolorallocate($im, 0, 0, 0));
-			header("Content-type: Image/png");
+			$mapfooter = 'http://www.desinventar.org/' . ' - ' . $rinf['RegionLabel|'];
+			imagettftext($im, 10, 0, imagesx($imgMapLegend) + 2, $ht - 4, $black, 'arial',  $mapfooter);
 			header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $rinf['RegionLabel|']) ."_ThematicMap.png");
 			imagepng($im);
 			imagedestroy($imap);
