@@ -38,18 +38,14 @@ function form2data($frm, $RegionId) {
 $post = $_POST;
 $get = $_GET;
 
-if (isset($post['_REG']) && !empty($post['_REG'])) {
-	$reg = $post['_REG'];
-	$cmd = $post['cmd'];
-	$data = form2data($post, $reg);
-}
-elseif (isset($get['r']) && !empty($get['r'])) {
-	$reg = $get['r'];
-	$cmd = $get['cmd'];
-}
-else
-	exit();
+$cmd = getParameter('cmd','');
+$reg = getParameter('_REG',getParameter('r',''));
 
+if ($reg != '') {
+	$data = form2data($post, $reg);
+} else {
+	exit();
+}
 $us->open($reg);
 
 if (!empty($cmd)) {
@@ -59,8 +55,9 @@ if (!empty($cmd)) {
 			$o = new DIGeoLevel($us);
 			$o->setFromArray($data);
 			$levid = $o->getMaxGeoLevel();
-			if ($levid > 0)
+			if ($levid >= 0) {
 				$levid ++;
+			}
 			$o->set('GeoLevelId', $levid);
 			$c = new DIGeoCarto($us);
 			$c->setFromArray($data);
@@ -74,8 +71,7 @@ if (!empty($cmd)) {
 				if (!empty($data['GeoLevelLayerFile']) && !empty($data['GeoLevelLayerCode']) && !empty($data['GeoLevelLayerName'])) {
 				    $map = new Maps($us->q, $reg, 0, null, null, null, "", null, "SELECT");
 				}*/
-			}
-			else {
+			} else {
 				$t->assign ("ctl_errinslev", true);
 				$t->assign ("insstatlev", $gl);
 				if ($gl == ERR_OBJECT_EXISTS) {
@@ -126,8 +122,7 @@ if (!empty($cmd)) {
 		default:
 		break;
 	} //switch
-}
-else {
+} else {
 	$t->assign ("ctl_admingeo", true);
 	$t->assign ("ctl_levlist", true);
 	$t->assign ("levl", $us->q->loadGeoLevels('', -1, false));
@@ -135,8 +130,9 @@ else {
 	$t->assign ("lev", $lev);
 	$t->assign ("levmax", $us->q->getMaxGeoLev());
 	$t->assign ("levname", $us->q->loadGeoLevById($lev));*/
-	if ($us->getUserRole($reg) == "OBSERVER")
+	if ($us->getUserRole($reg) == "OBSERVER") {
 		$t->assign ("ro", "disabled");
+	}
 }
 
 $t->assign ("reg", $reg);
