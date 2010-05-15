@@ -39,6 +39,7 @@ class DIGeoLevel extends DIObject {
 	public function getMaxGeoLevel() {
 		$iMaxVal = 0;
 		$sQuery = "SELECT MAX(GeoLevelId) AS MAXVAL FROM GeoLevel WHERE LangIsoCode='" . $this->get('LangIsoCode') . "'";
+		fb($sQuery);
 		if ($result = $this->q->dreg->query($sQuery)) {
 			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
 				$iMaxVal = $row->MAXVAL;
