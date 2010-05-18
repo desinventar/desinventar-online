@@ -99,7 +99,7 @@ if (isset($post['_M+cmd'])) {
 	$m = new Maps($us->q, $reg, $lev[0], $dl, $range, $info, $post['_M+Label'], $post['_M+Transparency'], "THEMATIC");	
 	$rinf = $us->q->getDBInfo($lg);
 	//$info['REG'] = $rinf['RegionLabel|'];
-	$info['RECORDS'] = $NumberOfRecords;
+	$info['RECORDS'] = showStandardNumber($NumberOfRecords);
 	$rgl[0]['regname'] = $rinf['RegionLabel|'];
 	$rgl[0]['info'] = $info;
 	// if valid filename then prepare interface to view MAPFILE	
@@ -171,7 +171,7 @@ if (isset($post['_M+cmd'])) {
 	if ($info2['TITLE'] != '') {
 		$value = $info2['TITLE'];
 		$title = $mapinfodic['MapInfoTITLE'][0];
-		$txtMapTitle = $title . ' ' . $value;
+		$txtMapTitle = $title . ' ' . strtolower($value);
 		$txtMapVariable = $value;
 		unset($info2['TITLE']);
 	}
