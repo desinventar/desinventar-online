@@ -65,6 +65,8 @@ function onReadyPortal() {
 	jQuery('body').bind('UserLoggedIn', function() {
 		jQuery('.lstUserMenu').show();
 		jQuery('#lstUserLogin').hide();
+		jQuery('#divUserIsLoggedIn').show();
+		jQuery('#divUserIsLoggedOut').hide();
 		updateDatabaseListByUser();
 		jQuery('body').trigger('UserUpdateInfo');
 	});
@@ -73,6 +75,9 @@ function onReadyPortal() {
 		// Update User Menu
 		jQuery('.lstUserMenu').show();
 		jQuery('#lstUserLogout').hide();
+		jQuery('#divUserIsLoggedIn').hide();
+		jQuery('#divUserIsLoggedOut').show();
+		jQuery('#frmUserLogin').hide();
 		jQuery('body').trigger('UserUpdateInfo');
 	});
 	
@@ -82,17 +87,22 @@ function onReadyPortal() {
 		if (MenuItem == 'mnuShowMap') {
 			showMap();
 		}
-		if (MenuItem == 'mnuUserLogin') {
-			jQuery('.portalcontent').hide();
-			jQuery('#UserContent').show();
-		}
-		if (MenuItem == 'mnuUserLogout') {
-			doUserLogout();
-		}
-		if (MenuItem == 'mnuUserRegionList') {
-			updateDatabaseListByUser();
-		}
 		// Prevent default action
+		return false;
+	});
+	
+	jQuery('#linkShowUserLogin').click(function() {
+		jQuery('#frmUserLogin').show();
+		return false;
+	});
+
+	jQuery('#linkUserRegionList').click(function() {
+		updateDatabaseListByUser();
+		return false;
+	});
+	
+	jQuery('#linkUserLogout').click(function() {
+		doUserLogout();
 		return false;
 	});
 

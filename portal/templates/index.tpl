@@ -73,13 +73,6 @@
 													<ul id="MainMenu">
 														<li><a href="#" class="MenuItem" id="mnuShowMap">{-#tstartpage#-}</a>
 														</li>
-														<li>{-#tusers#-}
-															<ul>
-																<li class="lstUserMenu" id="lstUserLogin"><a href="#" class="MenuItem" id="mnuUserLogin">{-#msgUserLogin#-}</a></li>
-																<li class="lstUserMenu" id="lstUserLogout"><a href="#" class="MenuItem" id="mnuUserLogout">{-#msgUserLogout#-}</a></li>
-																<li class="lstUserMenu" id="lstUserRegionList"><a href="#" class="MenuItem" id="mnuUserRegionList">{-#msgRegionList#-}</a></li>
-															</ul>
-														</li>
 														<li>{-#tlang#-}
 															<ul>
 																<li><a href="?lang=eng">English</a></li>

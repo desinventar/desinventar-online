@@ -77,7 +77,6 @@ function updateUserLoginMsg(msgId) {
 	// Hide all status Msgs (class="status")
 	jQuery(".status").hide();
 	if (msgId != '') {
-		jQuery("#divUserLoginMsg").show();
 		// Show specified message(s)
 		jQuery(msgId).show();
 	}
