@@ -159,6 +159,10 @@ if (isset($post['_M+cmd'])) {
 	$mapinfodic = $us->q->queryLabelsFromGroup('MapInfo', $lg);
 	$infoTranslated = array();
 	$info2 = $info;
+	
+	$txtMapTitle = '';
+	$txtMapVariable = '';
+	
 	// Manually Processed Data
 	foreach($info2 as $key => $value) {
 		$value = trim($value);
@@ -167,14 +171,15 @@ if (isset($post['_M+cmd'])) {
 	if ($info2['TITLE'] != '') {
 		$value = $info2['TITLE'];
 		$title = $mapinfodic['MapInfoTITLE'][0];
-		$infoTranslated['TITLE'] = $title . ' ' . $value;
+		$txtMapTitle = $title . ' ' . $value;
+		$txtMapVariable = $value;
 		unset($info2['TITLE']);
 	}
 	if ($info2['BEG'] != '') {
-		$infoTranslated['TITLE'] .= ', ' . $info2['BEG'];
+		$txtMapTitle .= ', ' . $info2['BEG'];
 		unset($info2['BEG']);
 		if ($info2['END'] != '') {
-			$infoTranslated['TITLE'] .= ' - ' . $info2['END'];
+			$txtMapTitle .= ' - ' . $info2['END'];
 			unset($info2['END']);
 		}
 	}
@@ -198,7 +203,7 @@ if (isset($post['_M+cmd'])) {
 	$black = imagecolorallocate($imgMapTitle, 0,0,0);
 	imagefill($imgMapTitle, 0,0, $white);
 
-	$item = $infoTranslated['TITLE'];
+	$item = $txtMapTitle;
 	$bbox = imagettfbbox(11, 0, $font, $item);
 	$x = ($width - ($bbox[2] - $bbox[0]) )/2;
 	imagettftext($imgMapTitle, 11, 0, $x, 13, $black, 'arialbi', $item);
@@ -247,8 +252,15 @@ if (isset($post['_M+cmd'])) {
 			$imap = imagecreatefromstring($mf);
 			// Download and include legend
 			$lf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $legend);
-			$imgMapLegend = imagecreatefromstring($lf);
-			
+			$imgTmp = imagecreatefromstring($lf);
+			$fontsize = 11;
+			$sx = imagesx($imgTmp);
+			$sy = imagesy($imgTmp) + $fontsize + 2;
+			$imgMapLegend = imagecreatetruecolor($sx, $sy);
+			imagefill($imgMapLegend, 0,0, imagecolorallocate($imgMapLegend, 255,255,255));
+			imagecopy($imgMapLegend, $imgTmp, 0, $fontsize + 2, 0, 0, imagesx($imgTmp), imagesy($imgTmp));
+			imagettftext($imgMapLegend, 10, 0, 4, 2 + $fontsize, imagecolorallocate($imgMapLegend,0, 0, 89), 'arialbi',  $txtMapVariable);
+
 			// Include MapInfo Image (Title, Query Info etc.)
 			$wt = imagesx($imap); // + imagesx($imgMapLegend);
 			$ht = imagesy($imap) + imagesy($imgMapTitle) + imagesy($imgMapInfo);
@@ -260,9 +272,18 @@ if (isset($post['_M+cmd'])) {
 			imagecopy($im, $imgMapLegend, 5, ($h + imagesy($imgMapTitle)) - (imagesy($imgMapLegend) + 5), 0, 0, imagesx($imgMapLegend), imagesy($imgMapLegend));
 			imagecopy($im, $imgMapInfo, 0, $ht - imagesy($imgMapInfo), 0, 0, imagesx($imgMapInfo), imagesy($imgMapInfo));
 			
+			// 2010-05-18 (jhcaiced) Draw a gray rectangle around the image...
+			imagerectangle($im, 0, imagesy($imgMapTitle), $wt - 1, $ht - imagesy($imgMapInfo), imagecolorallocate($im,192,192,192));
+			
 			//imagecopy($im, $imgMapLegend, $w+1, $h - imagesy($imgMapLegend), 0, 0, imagesx($imgMapLegend), imagesy($imgMapLegend));
-			$mapfooter = 'http://www.desinventar.org/' . ' - ' . $rinf['RegionLabel|'];
-			//imagettftext($im, 10, 0, imagesx($imgMapLegend) + 2, $ht - 4, $black, 'arial',  $mapfooter);
+			$mapfooter = trim('http://www.desinventar.org/' . ' - ' . $rinf['RegionLabel|']);
+			$font = 'arial';
+			$fontsize = 10;
+			$bbox = imagettfbbox($fontsize, 0, $font, $mapfooter);
+			$x = $bbox[2] - $bbox[0];
+			$x = $wt - 2 - $x;
+			$y = $ht - imagesy($imgMapInfo) - 4;
+			imagettftext($im, $fontsize, 0, $x, $y, $black, $font,  $mapfooter);
 			header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $rinf['RegionLabel|']) ."_ThematicMap.png");
 			imagepng($im);
 			imagedestroy($imap);
