@@ -6,12 +6,12 @@
 			<tr>
 				<td colspan="3" width="100%">
 					<div id="divUserIsLoggedOut">
-						<a href="#" id="linkShowUserLogin" class="menuLink">Acceso a Usuarios</a>
+						<a href="#" id="linkShowUserLogin" class="menuLink">{-#msgUserAccess#-}</a>
 						{-include file="../../web/templates/user_login.tpl" confdir="../../web/conf/"-}						
 					</div>
 					<div id="divUserIsLoggedIn">
 						<a href="#" id="linkUserRegionList" class="menuLink">{-#msgRegionList#-}</a><br />
-						<a href="#" id="linkUserLogout" class="menuLink">Logout</a>
+						<a href="#" id="linkUserLogout" class="menuLink">{-#msgUserLogout#-}</a>
 					</div>
 				</td>
 			</tr>

@@ -162,4 +162,19 @@ function generatePasswd($length=6,$level=2){
 	return $password;
 } //function
 
+// Process a number, adding a space to separate each triplet
+// according to standard scientific representation.
+function showStandardNumber($value) {
+	$v = trim($value);
+	$s = '';
+	$m = strlen($v)%3;
+	for($i=0; $i<strlen($v); $i++) {	
+		$s .= $v[$i];
+		if (($i%3) == ($m - 1)) {
+			$s .= ' ';
+		}
+	}
+	return $s;
+}
+
 </script>
