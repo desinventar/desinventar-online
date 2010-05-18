@@ -88,8 +88,8 @@ body {
 	font:10px Trebuchet MS, sans-serif; border:1px solid #D1D1D1; 
 	width:70px; padding:0px 2px; height:15px; }
 .olvido { padding-top:3px; width:80px;}
-.olvido a	{	
-	font:10px Trebuchet MS, sans-serif; 
+.menuLink {	
+	font:11px Trebuchet MS, sans-serif; 
 	color:#fffff0; text-decoration:none;
 }
 .olvido a:hover	{ color:#8b4513;	}

@@ -5,10 +5,14 @@
 
 			<tr>
 				<td colspan="3" width="100%">
-					<div class="olvido" id="usr" style="float:right; width:100px;">
-					<a href="#">Acceso a usuarios</a>
+					<div id="divUserIsLoggedOut">
+						<a href="#" id="linkShowUserLogin" class="menuLink">Acceso a Usuarios</a>
+						{-include file="../../web/templates/user_login.tpl" confdir="../../web/conf/"-}						
 					</div>
-					{-include file="../../web/templates/user_login.tpl" confdir="../../web/conf/"-}
+					<div id="divUserIsLoggedIn">
+						<a href="#" id="linkUserRegionList" class="menuLink">{-#msgRegionList#-}</a><br />
+						<a href="#" id="linkUserLogout" class="menuLink">Logout</a>
+					</div>
 				</td>
 			</tr>
 			<tr><td colspan="3"><img src="images/c_sep.gif" width=133 height=6 border=0><br /><br /></td></tr>
