@@ -8,7 +8,7 @@
 				{-#tuser#-}
 			</td>
 			<td>
-				<input type="text" id="fldUserId" name="userid" value="" size="16" />
+				<input type="text" id="fldUserId" name="userid" value="" size="10" class="f" />
 			</td>
 		</tr>
 		<tr>
@@ -16,7 +16,7 @@
 				{-#tpassword#-}
 			</td>
 			<td>
-				<input type="password" name="password" id="fldUserPasswd" value="" size="8" />
+				<input type="password" name="password" id="fldUserPasswd" value="" size="8" class="f" />
 			</td>
 		</tr>
 		<tr>
@@ -26,6 +26,7 @@
 		</tr>
 	</table>
 </form>
+
 <div class="status" id="divUserLoginMsg">
 	<span id="msgEmptyFields"   class="status">{-#msgEmtpyFields#-}</span>
 	<span id="msgUserLoggedIn"  class="status">{-#msgUserLoggedIn#-}</span>
