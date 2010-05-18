@@ -2,17 +2,25 @@
 {-config_load file=`$confdir``$lg`.conf section="di8_user"-}
 <form id="frmUserLogin" method="post">
 	<br />
-	<table border="0" cellpadding="0" cellspacing="0">
+	<table border="0" align="center" style="margin-top:1px">
 		<tr>
-			<td>
-				<table border="0" align="center" style="margin-top:1px">
-					<tr>
-						<td align="right">{-#tuser#-}     <input type="text" id="fldUserId" name="userid" value="" size="16" /></td>
-						<td align="right">{-#tpassword#-} <input type="password" name="password" id="fldUserPasswd" value="" size="8" /></td>
-					</tr>
-				</table>
+			<td align="right">
+				{-#tuser#-}
 			</td>
 			<td>
+				<input type="text" id="fldUserId" name="userid" value="" size="16" />
+			</td>
+		</tr>
+		<tr>
+			<td align="right">
+				{-#tpassword#-}
+			</td>
+			<td>
+				<input type="password" name="password" id="fldUserPasswd" value="" size="8" />
+			</td>
+		</tr>
+		<tr>
+			<td align="right" colspan="2">
 				<input type="submit" value="{-#benter#-}" class="line" />&nbsp;&nbsp;
 			</td>
 		</tr>
