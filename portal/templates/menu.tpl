@@ -2,6 +2,18 @@
 	<tr>
 		<td>
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
+
+			<tr>
+				<td colspan="3" width="100%">
+					<div class="olvido" id="usr" style="float:right; width:100px;">
+					<a href="#">Acceso a usuarios</a>
+					</div>
+					{-include file="../../web/templates/user_login.tpl" confdir="../../web/conf/"-}
+				</td>
+			</tr>
+			<tr><td colspan="3"><img src="images/c_sep.gif" width=133 height=6 border=0><br /><br /></td></tr>
+			
+			<!-- Region List -->
 			<tr>
 				<td><img src="images/p_paises1.gif" width=5 height=16></td>
 				<td width="32px" bgcolor="#fcc700">{-#tcountries#-}</td>
