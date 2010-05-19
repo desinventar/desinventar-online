@@ -141,9 +141,10 @@ function updateDatabaseList(CountryIsoCode,searchByCountry) {
 			jQuery.each(data, function(key, value) {
 				iCount++;
 				RegionId = key;
-				jList.append(jQuery('<a href="javascript:void(null)" id="' + key + '">' + value + '</a><br />'));
+				jList.append(jQuery('<a href="#" id="' + key + '">' + value + '</a><br />'));
 				jQuery('#' + key).addClass("alt").unbind('click').click(function() {
 					displayRegionInfo(key);
+					return false;
 				}); //bind
 			}); // each
 			if (iCount == 1) {
@@ -168,9 +169,10 @@ function updateDatabaseListByUser() {
 			jQuery.each(data, function(key, value) {
 				iCount++;
 				RegionId = key;
-				jList.append(jQuery('<a href="javascript:void(null)" id="' + key + '">' + value + '</a><br />'));
+				jList.append(jQuery('<a href="#" id="' + key + '">' + value + '</a><br />'));
 				jQuery('#' + key).addClass("alt").unbind('click').click(function() {
 					displayRegionInfo(key);
+					return false;
 				}); //bind
 			}); // each
 			if (iCount == 1) {
