@@ -79,6 +79,7 @@ function onReadyPortal() {
 		jQuery('#divUserIsLoggedOut').show();
 		jQuery('#frmUserLogin').hide();
 		jQuery('body').trigger('UserUpdateInfo');
+		showMap();
 	});
 	
 	// Handle clicks on right menu (Home/LangSelect)
