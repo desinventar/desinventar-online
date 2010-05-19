@@ -191,7 +191,7 @@ function updateDatabaseListByUser() {
 					iCount++;
 				}
 				if (iCount > 0) {
-					jList.append(role + '<br />');
+					jList.append('<span class="databaseTitle">' + role + '</span><br />');
 					for (RegionId in a) {
 						jList.append('<a href="#" id="' + RegionId + '" class="databaseLink">' + a[RegionId] + '</a><br />');
 					}
