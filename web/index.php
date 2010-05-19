@@ -37,9 +37,8 @@ switch ($cmd) {
 		print VERSION;
 	break;
 	case 'start':
-		$d = new Query();
 		$t->assign('lg', $lg);
-		$t->assign("lglst", $d->loadLanguages(1));
+		$t->assign("lglst", $us->q->loadLanguages(1));
 		$listdb = $us->listDB();
 		// unique database, choose than
 		if (count($listdb) == 1) {
@@ -64,17 +63,15 @@ switch ($cmd) {
 		$t->display('showlistdb.tpl');
 	break;
 	case 'searchdb':
-		$d = new Query();
 		$searchdbquery = getParameter('searchdbquery', '');
 		$searchbycountry = getParameter('searchbycountry', '');
-		$reglst = $d->searchDB($searchdbquery, $searchbycountry);
+		$reglst = $us->q->searchDB($searchdbquery, $searchbycountry);
 		$t->assign('regionlist', $reglst);
 		print json_encode($reglst);
 	break;
 	case 'getCountryName':
-		$d = new Query();
 		$CountryIso = getParameter('CountryIso','');
-		$CountryName = $d->getCountryName($CountryIso);
+		$CountryName = $us->q->getCountryName($CountryIso);
 		print $CountryName;
 	break;
 	case 'getRegionLogo':
