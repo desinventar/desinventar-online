@@ -113,11 +113,18 @@
 						</td>
 						<td class="centro">
 							<div class="portalcontent" id="regionlist">
-								<div id="pagetitle">
-								</div>
-								<br />
-								<ul id="pagecontent">
-								</ul>
+								<span class="databaseTitle" id="regiontitle_COUNTRY"></span>
+								<ul class="databaseList" id="regionlist_COUNTRY"></ul>
+								<span class="databaseTitle" id="regiontitle_ADMINREGION">{-#txtRoleADMINREGION#-}</span>
+								<ul class="databaseList" id="regionlist_ADMINREGION"></ul>
+								<span class="databaseTitle" id="regiontitle_SUPERVISOR">{-#txtRoleSUPERVISOR#-}</span>
+								<ul class="databaseList" id="regionlist_SUPERVISOR"></ul>
+								<span class="databaseTitle" id="regiontitle_USER">{-#txtRoleUSER#-}</span>
+								<ul class="databaseList" id="regionlist_USER"></ul>
+								<span class="databaseTitle" id="regiontitle_OBSERVER">{-#txtRoleOBSERVER#-}</span>
+								<ul class="databaseList" id="regionlist_OBSERVER"></ul>
+								<span class="databaseTitle" id="regiontitle_NONE">{-#txtRoleNONE#-}</span>
+								<ul class="databaseList" id="regionlist_NONE"></ul>
 							</div>
 							<div class="portalcontent" id="pageinfo">
 								<table>
