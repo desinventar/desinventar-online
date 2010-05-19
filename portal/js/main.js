@@ -169,6 +169,37 @@ function updateDatabaseListByUser() {
 			var RegionId = '';
 			var jList = jQuery("#pagecontent");
 			jQuery("#pagecontent").empty();
+
+			RegionByRole = new Array();
+			RegionByRole['ADMINREGION'] = new Array();
+			RegionByRole['SUPERVISOR'] = new Array();
+			RegionByRole['USER'] = new Array();
+			RegionByRole['OBSERVER'] = new Array();
+			RegionByRole['NONE'] = new Array();
+			
+			jQuery.each(data, function(key, value) {
+				RegionByRole[value.Role][key] = value.RegionLabel;
+			});
+			
+			for (role in RegionByRole) {
+				a = RegionByRole[role];
+				iCount = 0;
+				for (Region in a) {
+					iCount++;
+				}
+				if (iCount > 0) {
+					jList.append(role + '<br />');
+					for (RegionId in a) {
+						jList.append('<a href="#" id="' + RegionId + '">' + a[RegionId] + '</a><br />');
+						jQuery('#' + RegionId).addClass("alt").unbind('click').click(function() {
+							displayRegionInfo(RegionId);
+							return false;
+						}); //bind
+					}
+				}
+			}
+			
+			/*
 			jQuery.each(data, function(key, value) {
 				iCount++;
 				RegionId = key;
@@ -181,6 +212,7 @@ function updateDatabaseListByUser() {
 			if (iCount == 1) {
 				displayRegionInfo(RegionId);
 			}
+			*/
 		},
 		'json' //function
 	);
