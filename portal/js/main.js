@@ -141,14 +141,16 @@ function updateDatabaseList(CountryIsoCode,searchByCountry) {
 			jQuery.each(data, function(key, value) {
 				iCount++;
 				RegionId = key;
-				jList.append('<a href="#" id="' + key + '">' + value.RegionLabel + ' (' + value.Role + ')' + '</a><br />');
-				jQuery('#' + key).addClass("alt").unbind('click').click(function() {
-					displayRegionInfo(key);
-					return false;
-				}); //bind
+				jList.append('<a href="#" id="' + key + '" class="databaseLink">' + value.RegionLabel + ' (' + value.Role + ')' + '</a><br />');
 			}); // each
 			if (iCount == 1) {
 				displayRegionInfo(RegionId);
+			} else {
+				jQuery('.databaseLink').addClass("alt").unbind('click').click(function() {
+					RegionId = jQuery(this).attr('id');
+					displayRegionInfo(RegionId);
+					return false;
+				}); //bind
 			}
 		}, //function
 		'json'
@@ -190,29 +192,16 @@ function updateDatabaseListByUser() {
 				if (iCount > 0) {
 					jList.append(role + '<br />');
 					for (RegionId in a) {
-						jList.append('<a href="#" id="' + RegionId + '">' + a[RegionId] + '</a><br />');
-						jQuery('#' + RegionId).addClass("alt").unbind('click').click(function() {
-							displayRegionInfo(RegionId);
-							return false;
-						}); //bind
+						jList.append('<a href="#" id="' + RegionId + '" class="databaseLink">' + a[RegionId] + '</a><br />');
 					}
 				}
 			}
-			
-			/*
-			jQuery.each(data, function(key, value) {
-				iCount++;
-				RegionId = key;
-				jList.append('<a href="#" id="' + key + '">' + value.RegionLabel + ' (' + value.Role + ')' + '</a><br />');
-				jQuery('#' + key).addClass("alt").unbind('click').click(function() {
-					displayRegionInfo(key);
-					return false;
-				}); //bind
-			}); // each
-			if (iCount == 1) {
+
+			jQuery('.databaseLink').addClass("alt").unbind('click').click(function() {
+				RegionId = jQuery(this).attr('id');
 				displayRegionInfo(RegionId);
-			}
-			*/
+				return false;
+			}); //bind
 		},
 		'json' //function
 	);
