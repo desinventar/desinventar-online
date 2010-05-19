@@ -153,3 +153,11 @@ a:hover	{	color:#00008b; }
 .regl {
 	font-family:arial,tahoma,helvetica,cursive; font-size:13px; color:#000;
 }
+.databaseTitle {
+	font:bold 18px Trebuchet MS, sans-serif; 
+	color:#202020; letter-spacing:-1px; 
+}
+.databaseLink {
+	text-decoration:none; 
+	padding:0px 20px; 
+}
