@@ -141,7 +141,7 @@ function updateDatabaseList(CountryIsoCode,searchByCountry) {
 			jQuery.each(data, function(key, value) {
 				iCount++;
 				RegionId = key;
-				jList.append(jQuery('<a href="#" id="' + key + '">' + value.RegionLabel + ' (' + value.Role + ')' + '</a><br />'));
+				jList.append('<a href="#" id="' + key + '">' + value.RegionLabel + ' (' + value.Role + ')' + '</a><br />');
 				jQuery('#' + key).addClass("alt").unbind('click').click(function() {
 					displayRegionInfo(key);
 					return false;
@@ -172,7 +172,7 @@ function updateDatabaseListByUser() {
 			jQuery.each(data, function(key, value) {
 				iCount++;
 				RegionId = key;
-				jList.append(jQuery('<a href="#" id="' + key + '">' + value.RegionLabel + ' (' + value.Role + ')' + '</a><br />'));
+				jList.append('<a href="#" id="' + key + '">' + value.RegionLabel + ' (' + value.Role + ')' + '</a><br />');
 				jQuery('#' + key).addClass("alt").unbind('click').click(function() {
 					displayRegionInfo(key);
 					return false;
