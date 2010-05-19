@@ -93,7 +93,7 @@ function onReadyPortal() {
 	});
 	
 	jQuery('#linkShowUserLogin').click(function() {
-		jQuery('#frmUserLogin').show();
+		jQuery('#frmUserLogin').toggle();
 		return false;
 	});
 
@@ -129,7 +129,7 @@ function updateDatabaseList(CountryIsoCode,searchByCountry) {
 	jQuery.get(desinventarURL, 
 		{cmd: 'getCountryName', CountryIso : CountryIsoCode },
 		function(data) { 
-			jQuery("#pagetitle").html('<h3>' + data + '</h3>');
+			jQuery("#regiontitle_COUNTRY").html('<h3>' + data + '</h3>');
 		}
 	);
 	jQuery.post(desinventarURL,
@@ -137,16 +137,23 @@ function updateDatabaseList(CountryIsoCode,searchByCountry) {
 		function(data) {
 			var iCount = 0;
 			var RegionId = '';
-			var jList = jQuery("#pagecontent");
-			jQuery("#pagecontent").empty();
+
+			// Hide everything at start...
+			jQuery('.databaseTitle').hide();
+			jQuery('.databaseList').hide();
+
+			var jList = jQuery("#regionlist_COUNTRY");
+			jList.empty();
 			jQuery.each(data, function(key, value) {
 				iCount++;
 				RegionId = key;
-				jList.append('<a href="#" id="' + key + '" class="databaseLink">' + value.RegionLabel + ' (' + value.Role + ')' + '</a><br />');
+				jList.append('<a href="#" id="' + key + '" class="databaseLink">' + value.RegionLabel + '</a><br />');
 			}); // each
 			if (iCount == 1) {
 				displayRegionInfo(RegionId);
 			} else {
+				jQuery('#regiontitle_COUNTRY').show();
+				jQuery('#regionlist_COUNTRY').show();
 				jQuery('.databaseLink').addClass("alt").unbind('click').click(function() {
 					RegionId = jQuery(this).attr('id');
 					displayRegionInfo(RegionId);
@@ -162,7 +169,6 @@ function updateDatabaseListByUser() {
 	jQuery(".portalcontent").hide();
 	jQuery("#regionlist").show();
 	var desinventarURL = jQuery('#fldDesinventarURL').val();
-	jQuery("#pagetitle").html('<h3></h3>');
 	jQuery.post(desinventarURL,
 		{ cmd: 'searchdb', 
 		  searchdbquery: '', 
@@ -170,8 +176,6 @@ function updateDatabaseListByUser() {
 		function(data) {
 			var iCount = 0;
 			var RegionId = '';
-			var jList = jQuery("#pagecontent");
-			jQuery("#pagecontent").empty();
 
 			RegionByRole = new Array();
 			RegionByRole['ADMINREGION'] = new Array();
@@ -184,14 +188,23 @@ function updateDatabaseListByUser() {
 				RegionByRole[value.Role][key] = value.RegionLabel;
 			});
 			
+			// Hide everything at start...
+			jQuery('.databaseTitle').hide();
+			jQuery('.databaseList').hide();
+						
 			for (role in RegionByRole) {
 				a = RegionByRole[role];
+
+				jList = jQuery('#regionlist_' + role);
+				jList.empty();
+				
 				iCount = 0;
 				for (Region in a) {
 					iCount++;
 				}
 				if (iCount > 0) {
-					jList.append('<span class="databaseTitle">' + role + '</span><br />');
+					jQuery('#regiontitle_' + role).show();
+					jQuery('#regionlist_' + role).show();
 					for (RegionId in a) {
 						jList.append('<a href="#" id="' + RegionId + '" class="databaseLink">' + a[RegionId] + '</a><br />');
 					}
