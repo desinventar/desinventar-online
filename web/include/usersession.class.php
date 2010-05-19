@@ -541,6 +541,34 @@ class UserSession {
 		if ($Role == 'OBSERVER'   ) { $StatusList = 'PUBLISHED READY DRAFT'; }
 		return $this->q->getDateRange(explode(' ', $StatusList));
 	}
+
+	public function searchDB($prmQuery, $searchByCountry) {
+		$regionlist = array();
+
+		// Search for Public Databases and assign to (ROLE=NONE)
+		$query = "SELECT RegionId, RegionLabel FROM Region WHERE RegionStatus=3 AND "; 
+		if ($searchByCountry > 0) {
+			$query .= "(CountryIso = '" . $prmQuery . "')";
+		} else {
+			$query .= "(RegionId LIKE '%" . $prmQuery . "%' OR RegionLabel LIKE '%" . $prmQuery . "%')";
+		}
+		$query .= " ORDER BY RegionLabel, RegionOrder";
+		foreach($this->q->core->query($query) as $row) {
+			$regionlist[$row['RegionId']] = array('RegionLabel' => $row['RegionLabel'],
+			                                      'Role' => 'NONE');
+		}
+		
+		if ($searchByCountry <= 0) {
+			// Add Regions with specific Roles
+			$query = "select R.RegionId,R.RegionLabel,RA.AuthAuxValue from Region R,RegionAuth RA where R.RegionId=RA.RegionId AND RA.AuthKey='ROLE' AND RA.UserId='" . $this->UserId . "';";
+			foreach($this->q->core->query($query) as $row) {
+				$regionlist[$row['RegionId']] = array('RegionLabel' => $row['RegionLabel'],
+				                                      'Role' => $row['AuthAuxValue']);
+			}
+		}
+		
+		return $regionlist;
+	}
 } //class
 
 </script>

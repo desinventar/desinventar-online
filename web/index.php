@@ -65,7 +65,7 @@ switch ($cmd) {
 	case 'searchdb':
 		$searchdbquery = getParameter('searchdbquery', '');
 		$searchbycountry = getParameter('searchbycountry', '');
-		$reglst = $us->q->searchDB($searchdbquery, $searchbycountry);
+		$reglst = $us->searchDB($searchdbquery, $searchbycountry);
 		$t->assign('regionlist', $reglst);
 		print json_encode($reglst);
 	break;
