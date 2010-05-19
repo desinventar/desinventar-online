@@ -1027,8 +1027,9 @@ class Query extends PDO {
 		$sql = "SELECT ". $fld ." FROM Disaster AS D, EEData AS E, Event AS V, Cause AS C, Geography AS G ";
 		if ($this->chkSQLWhere($whr)) {
 			$sql .= $whr;
-			if (!empty($order))
+			if (!empty($order)) {
 				$sql .= "ORDER BY $order";
+			}
 			return ($sql);
 		} else {
 			return false;
@@ -1088,10 +1089,11 @@ class Query extends PDO {
 		} //foreach
 		
 		// Process Field in select and group
-		if (!is_array($opc['Field']))
+		if (!is_array($opc['Field'])) {
 			$f[0] = $opc['Field'];
-		else
+		} else {
 			$f = $opc['Field'];
+		}
 
 		foreach ($f as $field) {
 			// Field(s) to show
@@ -1109,18 +1111,17 @@ class Query extends PDO {
 			if ($fl[1] == ">") {
 				$sel[$j] = "SUM(". $fl[0] .") AS ". substr($fl[0],2);
 				$whr[$j] = "OR ". $fl[0] . $fl[1] . $fl[2];
-			}
-			// S, code to SECTORS 
-			elseif ($fl[1] == "S") {
+			} elseif ($fl[1] == "S") {
+				// S, code to SECTORS 
 				$sel[$j] = "SUM(ABS(". $fl[0] .")) AS ". substr($fl[0],2);
 				$whr[$j] = "OR ". $fl[0] . " = " . $fl[2];
-			}
+			} else {
 			// Count Reports
-			else {
 				$sel[$j] = "COUNT(". $fl[0] .") AS ". substr($fl[0],2) ."_";
 				// Counts Reports with "Hay"
-				if ($fl[1] == "=")
+				if ($fl[1] == "=") {
 					$whr[$j] = "OR (". $fl[0] . $fl[1] . $fl[2] . " OR ". $fl[0] .">0)";
+				}
 			}
 			$j++;
 		} //foreach
@@ -1129,8 +1130,9 @@ class Query extends PDO {
 		if ($this->chkSQLWhere($dat)) {
 			$selec = implode(", ", $sel);
 			$where = implode(" ", $whr);
-			if (!empty($whr)) 
+			if (!empty($whr)) {
 				$where = "AND (1!=1 $where)";
+			}
 			$group = implode(", ", $grp);
 			$sql = $this->genSQLSelectData ($dat, $selec, "");
 			$sql .= "$where GROUP BY $group";
@@ -1147,24 +1149,27 @@ class Query extends PDO {
 			foreach ($it as $k=>$i) {
 				$val = $i;
 				if (substr($k,0,11) == "GeographyId") {
-				  if ($mode == "GRAPH")
-					$val = $this->getGeoNameById($i);
-				  elseif ($mode == "MAPS") {
-					$val = $this->getObjectNameById($i, DI_GEOGRAPHY);
-					// in VirtualRegion set base prefix - 
-					if ($creg) {
-						if ($j == 0)
-							$res['CVReg'] = array();
-						array_push($res['CVReg'], substr($i, 0, 5));
+					if ($mode == "GRAPH") {
+						$val = $this->getGeoNameById($i);
+					} elseif ($mode == "MAPS") {
+						$val = $this->getObjectNameById($i, DI_GEOGRAPHY);
+						// in VirtualRegion set base prefix - 
+						if ($creg) {
+							if ($j == 0) {
+								$res['CVReg'] = array();
+							}
+							array_push($res['CVReg'], substr($i, 0, 5));
+						}
+						if ($j == 0) {
+							$glv = $k; // save key of GeographyId
+						}
 					}
-					if ($j == 0)
-						$glv = $k; // save key of GeographyId
-				  }
-				}
-				elseif ($j == 0)
+				} elseif ($j == 0) {
 					$eff = $k; // save key of Effectvar
-				if ($j == 0)
+				}
+				if ($j == 0) {
 					$res[$k] = array();
+				}
 				array_push($res[$k], $val);
 			}
 			$j++;
@@ -1245,12 +1250,15 @@ class Query extends PDO {
 			foreach ($vl as $k=>$v) {
 				if ($k == "DisasterBeginTime") {
 					$dt = explode("-", $v);
-					if (!isset($dt[0])) 
-						$dt[0] = 0; 
-					if (!isset($dt[1])) 
+					if (!isset($dt[0])) {
+						$dt[0] = 0;
+					}
+					if (!isset($dt[1])) {
 						$dt[1] = 0; 
-					if (!isset($dt[2])) 
+					}
+					if (!isset($dt[2])) {
 						$dt[2] = 0; 
+					}
 					$js[$ky] .= "'". $k ."[0]':'". $dt[0] ."', '". $k ."[1]':'". $dt[1] ."', '". $k ."[2]':'". $dt[2] ."', ";
 				} else {
 					$js[$ky] .= "'$k': '$v', ";
@@ -1262,11 +1270,11 @@ class Query extends PDO {
 		return $js;
 	} //function
   
-  // SET SQL TO TOTALIZATION RESULTS
-  function totalize($sql) {
-    $sq = explode("GROUP", $sql);
-    return $sq[0] . " GROUP BY null";
-  }
+	// SET SQL TO TOTALIZATION RESULTS
+	function totalize($sql) {
+		$sq = explode("GROUP", $sql);
+		return $sq[0] . " GROUP BY null";
+	}
 
 	function getQueryDetails($dic, $post) {
 		$info = $lsf = array();
@@ -1276,12 +1284,13 @@ class Query extends PDO {
 			$fld = explode("|", $post['_M+Field']);
 			$fd0 = substr($fld[0],2);
 			$fd1 = substr($fd0, 0, -1);
-			if (isset($dic["MapOpt". $fd0 ."_"][0]))
+			if (isset($dic["MapOpt". $fd0 ."_"][0])) {
 				$info['TITLE'] = $dic["MapOpt". $fd0 ."_"][0];
-			elseif (isset($dic[$fd0][0]))
+			} elseif (isset($dic[$fd0][0])) {
 				$info['TITLE'] = $dic[$fd0][0];
-			elseif (isset($dic[$fd1][0]))
+			} elseif (isset($dic[$fd1][0])) {
 				$info['TITLE'] = $dic[$fd1][0];
+			}
 		}
 		$info['LEVEL'] = "";
 		if (isset($post['_M+Type']) && !(isset($post['_VREG']) && $post['_VREG'] == "true")) {
@@ -1326,10 +1335,11 @@ class Query extends PDO {
 				$info['SER'] = $v[1];
 			} elseif (substr($k, 0, 6) == "Effect" && isset($v[0]) && isset($dic[$k][0])) {
 				$opt = "";
-				if ($v[0] == "=" || $v[0] == ">=" || $v[0] == "<=")
+				if ($v[0] == "=" || $v[0] == ">=" || $v[0] == "<=") {
 					$opt = "(". $v[0] . $v[1] .")";
-				elseif ($v[0] == "-3")
+				} elseif ($v[0] == "-3") {
 					$opt = "(". $v[1] ."-". $v[2] .")";
+				}
 				$lsf[] = $dic[$k][0] . $opt;
 			}
 		} //foreach
@@ -1339,162 +1349,153 @@ class Query extends PDO {
 		return $info;
 	}
   
-  // DICTIONARY FUNCTIONS
-  function existLang($langID) {
-    if ($langID == "")
-      return false;
-    $sql = "select LangIsoCode from Language where LangIsoCode='". $langID ."'";
-    foreach ($this->base->query($sql) as $row) {
-      if (count($row) > 0) {
-        return true;
-      }
-    }
-    return false;
-  }
+	// DICTIONARY FUNCTIONS
+	function existLang($langID) {
+		$answer = false;
+		if ($langID != "") {
+			$sql = "select LangIsoCode from Language where LangIsoCode='". $langID ."'";
+			foreach ($this->base->query($sql) as $row) {
+				if (count($row) > 0) {
+					$answer = true;
+				}
+			} //foreach
+		}
+		return $answer;
+	}
   
-  function queryLabel($labgrp, $labname, $langID) {
-  	$data = '';
-    $sql = "select d.DictTranslation as DTr, d.DictTechHelp as DTe, ".
-            "d.DictBasDesc as DBa, d.DictFullDesc as DFu from Dictionary d,".
-            " LabelGroup g where (g.LGName like '" . $labgrp . "%') ".
-            "and (d.LangIsoCode='" . $langID . "') and (g.LabelName= '".
-            $labname ."') and (d.DictLabelID = g.DictLabelID) ".
-            "order by g.LGorder";
-    foreach ($this->base->query($sql) as $row) {
-      $data = array('DictTranslation'=>$row['DTr'],//utf8_encode($row['DTr']),
-                    'DictTechHelp'=>$row['DTe'],//utf8_encode($row['DTe']),
-                    'DictBasDesc'=>$row['DBa'],//utf8_encode($row['DBa']),
-                    'DictFullDesc'=>$row['DFu']);//utf8_encode($row['DFu']));
-    }
-    return $data;
-  }
-  function queryLabelsFromGroup($labgrp, $langID, $withLabelGroupPrefix=true) {
-  	$dictio = '';
-    $sql = "SELECT g.LGName as lgn, g.LabelName as lbn, DictTranslation, ".
-            "DictTechHelp, DictBasDesc, DictFullDesc from Dictionary d,".
-            " LabelGroup g where (g.LGName like '". $labgrp ."%') and ".
-            "(d.LangIsoCode='". $langID ."') and (d.DictLabelID = g.DictLabelID) ".
-            "order by g.LGorder";
-	try {
+	function queryLabel($labgrp, $labname, $langID) {
+		$data = '';
+		$sql = "select d.DictTranslation as DTr, d.DictTechHelp as DTe, ".
+			"d.DictBasDesc as DBa, d.DictFullDesc as DFu from Dictionary d,".
+			" LabelGroup g where (g.LGName like '" . $labgrp . "%') ".
+			"and (d.LangIsoCode='" . $langID . "') and (g.LabelName= '".
+			$labname ."') and (d.DictLabelID = g.DictLabelID) ".
+			"order by g.LGorder";
+		foreach ($this->base->query($sql) as $row) {
+			$data = array('DictTranslation'=>$row['DTr'],//utf8_encode($row['DTr']),
+			              'DictTechHelp'=>$row['DTe'],//utf8_encode($row['DTe']),
+			              'DictBasDesc'=>$row['DBa'],//utf8_encode($row['DBa']),
+			              'DictFullDesc'=>$row['DFu']);//utf8_encode($row['DFu']));
+		}
+		return $data;
+	}
+
+	function queryLabelsFromGroup($labgrp, $langID, $withLabelGroupPrefix=true) {
+		$dictio = '';
+		$sql = "SELECT g.LGName as lgn, g.LabelName as lbn, DictTranslation, ".
+			"DictTechHelp, DictBasDesc, DictFullDesc from Dictionary d,".
+			" LabelGroup g where (g.LGName like '". $labgrp ."%') and ".
+			"(d.LangIsoCode='". $langID ."') and (d.DictLabelID = g.DictLabelID) ".
+			"order by g.LGorder";
+		try {
+			foreach ($this->base->query($sql) as $row) {
+				$grp = explode("|", $row['lgn']);
+				if ($withLabelGroupPrefix) {
+					$dictlabel = $grp[0];
+				} else {
+					$dictlabel = '';
+				}
+				$dictlabel .= $row['lbn'];
+				$dictio[$dictlabel] = array(
+				$row['DictTranslation'],//utf8_encode($row['DicTranslation']), 
+				$row['DictTechHelp'],//utf8_encode($row['DicTechHelp']),
+				$row['DictBasDesc'], $row['DictFullDesc']);
+			} // foreach
+		} catch (Exception $e) {
+			showErrorMsg($e->getMessage());
+		}
+		return $dictio;
+	}
+
+	function querySecLabelFromGroup($labgrp, $langID) {
+		$sql = "select g.LGName as lgn, g.LabelName as lbn, DictTranslation, ".
+			"DictTechHelp, DictBasDesc, DictFullDesc from Dictionary d,".
+			" LabelGroup g where (g.LGName like '". $labgrp ."%') and ".
+			"(d.LangIsoCode='". $langID ."') and (d.DictLabelID = g.DictLabelID) ".
+			"order by g.LGorder";
 		foreach ($this->base->query($sql) as $row) {
 			$grp = explode("|", $row['lgn']);
-			if ($withLabelGroupPrefix) {
-				$dictlabel = $grp[0];
-			} else {
-				$dictlabel = '';
+			$dictio[$grp[0].$row['lbn']] = $grp[2];
+		}
+		return $dictio;
+	}
+
+	function loadAllGroups($langID) {
+		$sql = "select g.LGName as lgn, g.LabelName as lbn, DictTranslation, ".
+			"DictTechHelp, DictBasDesc, DictFullDesc from Dictionary d,".
+			" LabelGroup g where (d.LangIsoCode='" . $langID . "') and ".
+			"(d.DictLabelID = g.DictLabelID) order by g.LGorder";
+		foreach ($this->base->query($sql) as $row) {
+			$grp = explode("|", $row['lgn']);
+			$dictio[$grp[0].$row['lbn']] = array($row['DictTranslation'], 
+				$row['DictTechHelp'], $row['DictBasDesc'], $row['DictFullDesc']);
+		}
+		return $dictio;
+	}
+
+	function loadAllLabels() {
+		$sql = "select DictLabelID, LGName, LabelName from LabelGroup order by LGName";
+		$diction = array();
+		foreach ($this->base->query($sql) as $row) {
+			$dictio[$row['DictLabelID']] = $row['LGName'] .'|'. $row['LabelName'];
+		}
+		return $dictio;
+	}
+
+	function loadLanguages($status) {
+		$sql = "select LangIsoCode, LangIsoName, LangLocalName from Language";
+		if ($status != null) {
+			$sql .= " where LangStatus=". $status;
+		}
+		foreach ($this->base->query($sql) as $row) {
+			$lang[$row['LangIsoCode']] = array($row['LangLocalName'], $row['LangIsoName']);
+		}
+		return $lang;
+	}
+  
+	function findDicLabelID($labgrp, $labname) {
+		$sql = "select DictLabelID from LabelGroup where LGName like '". $labgrp .
+			"%' and LabelName='". $labname ."';";
+		foreach ($this->base->query($sql) as $row) {
+			$diclabelID = $row['DictLabelID'];
+		}
+		return $diclabelID;
+	}
+  
+	function existLabel($diclabelID) {
+		$answer = false;
+		$sql = "select DictLabelID from Dictionary where DictLabelID='". 
+			$diclabelID . "';";
+		foreach ($this->base->query($sql) as $row) {
+			$diclabelID = $row['DictLabelID'];
+			if ($diclabelID != null) {
+				$answer = true;
 			}
-			$dictlabel .= $row['lbn'];
-			$dictio[$dictlabel] = array(
-			  $row['DictTranslation'],//utf8_encode($row['DicTranslation']), 
-			  $row['DictTechHelp'],//utf8_encode($row['DicTechHelp']),
-			  $row['DictBasDesc'], $row['DictFullDesc']);
-		} // foreach
-	} catch (Exception $e) {
-		showErrorMsg($e->getMessage());
+		}
+		return $answer;
 	}
-    return $dictio;
-  }
 
-  function querySecLabelFromGroup($labgrp, $langID) {
-    $sql = "select g.LGName as lgn, g.LabelName as lbn, DictTranslation, ".
-            "DictTechHelp, DictBasDesc, DictFullDesc from Dictionary d,".
-            " LabelGroup g where (g.LGName like '". $labgrp ."%') and ".
-            "(d.LangIsoCode='". $langID ."') and (d.DictLabelID = g.DictLabelID) ".
-            "order by g.LGorder";
-    foreach ($this->base->query($sql) as $row) {
-      $grp = explode("|", $row['lgn']);
-      $dictio[$grp[0].$row['lbn']] = $grp[2];
-    }
-    return $dictio;
-  }
-
-  function loadAllGroups($langID) {
-    $sql = "select g.LGName as lgn, g.LabelName as lbn, DictTranslation, ".
-            "DictTechHelp, DictBasDesc, DictFullDesc from Dictionary d,".
-            " LabelGroup g where (d.LangIsoCode='" . $langID . "') and ".
-            "(d.DictLabelID = g.DictLabelID) order by g.LGorder";
-    foreach ($this->base->query($sql) as $row) {
-      $grp = explode("|", $row['lgn']);
-      $dictio[$grp[0].$row['lbn']] = array($row['DictTranslation'], 
-          $row['DictTechHelp'], $row['DictBasDesc'], $row['DictFullDesc']);
-    }
-    return $dictio;
-  }
-
-  function loadAllLabels() {
-    $sql = "select DictLabelID, LGName, LabelName from LabelGroup order by LGName";
-    $diction = array();
-    foreach ($this->base->query($sql) as $row) {
-      $dictio[$row['DictLabelID']] = $row['LGName'] .'|'. $row['LabelName'];
-    }
-    return $dictio;
-  }
-
-  function loadLanguages($status) {
-    $sql = "select LangIsoCode, LangIsoName, LangLocalName from Language";
-	if ($status != null)
-		$sql .= " where LangStatus=". $status;
-    foreach ($this->base->query($sql) as $row) {
-      $lang[$row['LangIsoCode']] = array($row['LangLocalName'], $row['LangIsoName']);
-    }
-    return $lang;
-  }
-  
-  function findDicLabelID($labgrp, $labname) {
-    $sql = "select DictLabelID from LabelGroup where LGName like '". $labgrp .
-            "%' and LabelName='". $labname ."';";
-    foreach ($this->base->query($sql) as $row) {
-      $diclabelID = $row['DictLabelID'];
-    }
-    return $diclabelID;
-  }
-  
-  function existLabel($diclabelID) {
-    $sql = "select DictLabelID from Dictionary where DictLabelID='". 
-            $diclabelID . "';";
-    foreach ($this->base->query($sql) as $row) {
-      $diclabelID = $row['DictLabelID'];
-      if ($diclabelID != null)
-        return true;
-    }
-    return false;
-  }
-  // Check!!
-  function updateDicLabel($labgrp, $labname, $translation, $techhelp, $basdesc, $fulldesc, $langID) {
-    if (!$this->existLang($langID))
-      return false;
-    else {
-      $diclabID = $this->findDicLabelID($labgrp, $labname);
-      if (!$this->existLabel($diclabID))
-        $sql = "insert into Dictionary values ('". $diclabID ."','". $langID .
-              "','". $translation ."','". $techhelp ."','". $basdesc ."','".
-              $fulldesc ."');";
-      else
-        $sql = "update Dictionary set LangID='". $langID ."', DicTranslation='".
-              $translation ."', DicTechHelp='". $techhelp ."', DicBasDesc='".
-              $basdesc ."', DicFullDesc='".$fulldesc .
-              "' where DicLabelID='". $diclabID ."';";
-      $this->base->exec($sql);
-    }
-    return true;
-  }
-  
-	public function searchDB($prmQuery, $searchByCountry) {
-		$RegionList = array();
-		$query = "SELECT RegionId, RegionLabel FROM Region WHERE RegionStatus=3 AND "; 
-		if ($searchByCountry > 0) {
-			$query .= "(CountryIso = '" . $prmQuery . "')";
+	// Check!!
+	function updateDicLabel($labgrp, $labname, $translation, $techhelp, $basdesc, $fulldesc, $langID) {
+		if (!$this->existLang($langID)) {
+			return false;
 		} else {
-			$query .= "(RegionId LIKE '%" . $prmQuery . "%' OR RegionLabel LIKE '%" . $prmQuery . "%')";
+			$diclabID = $this->findDicLabelID($labgrp, $labname);
+			if (!$this->existLabel($diclabID))	{
+				$sql = "insert into Dictionary values ('". $diclabID ."','". $langID .
+					"','". $translation ."','". $techhelp ."','". $basdesc ."','".
+					$fulldesc ."');";
+			} else {
+				$sql = "update Dictionary set LangID='". $langID ."', DicTranslation='".
+					$translation ."', DicTechHelp='". $techhelp ."', DicBasDesc='".
+    	          $basdesc ."', DicFullDesc='".$fulldesc .
+        	      "' where DicLabelID='". $diclabID ."';";
+        	    $this->base->exec($sql);
+			}
 		}
-		$query .= " ORDER BY RegionLabel, RegionOrder";
-		$result = $this->core->query($query);
-		while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-			$RegionList[$row->RegionId] = $row->RegionLabel;
-		}
-		return $RegionList;
+		return true;
 	}
-	
+  
 	public function getCountryName($prmCountryIso) {
 		$query = "SELECT * FROM Country WHERE CountryIso='" . $prmCountryIso . "'";
 		foreach($this->base->query($query) as $row) {

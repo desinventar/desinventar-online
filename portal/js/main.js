@@ -131,7 +131,7 @@ function updateDatabaseList(CountryIsoCode,searchByCountry) {
 			jQuery("#pagetitle").html('<h3>' + data + '</h3>');
 		}
 	);
-	jQuery.getJSON(desinventarURL,
+	jQuery.post(desinventarURL,
 		{ cmd: 'searchdb', searchdbquery: CountryIsoCode, searchbycountry : searchByCountry },
 		function(data) {
 			var iCount = 0;
@@ -141,7 +141,7 @@ function updateDatabaseList(CountryIsoCode,searchByCountry) {
 			jQuery.each(data, function(key, value) {
 				iCount++;
 				RegionId = key;
-				jList.append(jQuery('<a href="#" id="' + key + '">' + value + '</a><br />'));
+				jList.append(jQuery('<a href="#" id="' + key + '">' + value.RegionLabel + ' (' + value.Role + ')' + '</a><br />'));
 				jQuery('#' + key).addClass("alt").unbind('click').click(function() {
 					displayRegionInfo(key);
 					return false;
@@ -150,7 +150,8 @@ function updateDatabaseList(CountryIsoCode,searchByCountry) {
 			if (iCount == 1) {
 				displayRegionInfo(RegionId);
 			}
-		} //function
+		}, //function
+		'json'
 	);
 };
 
@@ -159,8 +160,10 @@ function updateDatabaseListByUser() {
 	jQuery("#regionlist").show();
 	var desinventarURL = jQuery('#fldDesinventarURL').val();
 	jQuery("#pagetitle").html('<h3></h3>');
-	jQuery.getJSON(desinventarURL,
-		{ cmd: 'searchdb', searchdbquery: '', searchbycountry : 0},
+	jQuery.post(desinventarURL,
+		{ cmd: 'searchdb', 
+		  searchdbquery: '', 
+		  searchbycountry : 0},
 		function(data) {
 			var iCount = 0;
 			var RegionId = '';
@@ -169,7 +172,7 @@ function updateDatabaseListByUser() {
 			jQuery.each(data, function(key, value) {
 				iCount++;
 				RegionId = key;
-				jList.append(jQuery('<a href="#" id="' + key + '">' + value + '</a><br />'));
+				jList.append(jQuery('<a href="#" id="' + key + '">' + value.RegionLabel + ' (' + value.Role + ')' + '</a><br />'));
 				jQuery('#' + key).addClass("alt").unbind('click').click(function() {
 					displayRegionInfo(key);
 					return false;
@@ -178,7 +181,8 @@ function updateDatabaseListByUser() {
 			if (iCount == 1) {
 				displayRegionInfo(RegionId);
 			}
-		} //function
+		},
+		'json' //function
 	);
 };
 
