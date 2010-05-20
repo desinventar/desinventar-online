@@ -34,8 +34,7 @@
 				// query menu
 				case "mqrygoq":
 					w = Ext.getCmp('westm');
-					$('config').style.display = 'none';
-					$('import').style.display = 'none';
+					jQuery('.contentBlock').hide();
 					{-if $ctl_noregion-}
 						$('qryres').style.display = 'none';
 						w.hide();
@@ -43,10 +42,11 @@
 						$('qryres').style.display = 'block';
 						w.show();
 					{-/if-}
-					if (w.isVisible())
+					if (w.isVisible()) {
 						w.collapse(); //hide()
-					else
+					} else {
 						w.expand(); //show()
+					}
 				break;
 				case "mqrynew":
 					// Just reload the current region window...(need a better solution!!)
@@ -78,25 +78,22 @@
 					difw.show();
 				break;
 				case "mnuDatacardImport":
-					// Hide Query Design Panel
-					w = Ext.getCmp('westm');
-					w.hide();
-					w.collapse();
-					$('config').style.display = 'none';
-					$('import').style.display = 'block';
-					$('qryres').style.display = 'none';
+					hideQueryDesign();
+					jQuery('.contentBlock').hide();
+					jQuery('#import').show();
 					updateList('import', 'import.php', 'r={-$reg-}');
 				break;
 				case "mnuDatabaseBackup":
-					window.location = "index.php?cmd=getRegionBackup&r={-$reg-}";
+					hideQueryDesign();
+					jQuery('.contentBlock').hide();
+					jQuery('#divDatabaseBackup').show();
+					//window.location = "index.php?cmd=getRegionBackup&r={-$reg-}";
 				break;
 				case "mcrdcfg":
-					w = Ext.getCmp('westm');
-					w.hide();
-					w.collapse();
-					$('config').style.display = 'block';
-					$('import').style.display = 'none';
-					$('qryres').style.display = 'none';
+					hideQueryDesign();
+					jQuery('.contentBlock').hide();
+					jQuery('#divDatabaseConfiguration').show();
+					jQuery('#tabDatabaseConfiguration').show();
 				break;
 				// databases menu
 				case "mdbsfnd":
@@ -128,6 +125,13 @@
 				break;
 			} //switch
 		} //function
+		
+		function hideQueryDesign() {
+			// Hide Query Design Panel
+			w = Ext.getCmp('westm');
+			w.hide();
+			w.collapse();
+		}
 
 	var	w;
 	var	s;
