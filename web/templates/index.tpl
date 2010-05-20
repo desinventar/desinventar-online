@@ -74,20 +74,22 @@
 	</div>
 	<div id="container">
 		<!-- -Configuration -->
-		<div id="config" style="display:none;" class="tabber">
-			<div class="tabbertab"><h2>{-#mreginfo#-}</h2><p></p></div>
-			<div class="tabbertab"><h2>{-#mgeolevel#-}</h2><p></p></div>
-			<div class="tabbertab"><h2>{-#mgeography#-}</h2><p></p></div>
-			<div class="tabbertab"><h2>{-#mevents#-}</h2><p></p></div>
-			<div class="tabbertab"><h2>{-#mcauses#-}</h2><p></p></div>
-			<div class="tabbertab"><h2>{-#meeffects#-}</h2><p></p></div>
+		<div class="contentBlock" id="divDatabaseConfiguration">
+			<div id="tabDatabaseConfiguration" style="display:none;" class="tabber">
+				<div class="tabbertab"><h2>{-#mreginfo#-}</h2><p></p></div>
+				<div class="tabbertab"><h2>{-#mgeolevel#-}</h2><p></p></div>
+				<div class="tabbertab"><h2>{-#mgeography#-}</h2><p></p></div>
+				<div class="tabbertab"><h2>{-#mevents#-}</h2><p></p></div>
+				<div class="tabbertab"><h2>{-#mcauses#-}</h2><p></p></div>
+				<div class="tabbertab"><h2>{-#meeffects#-}</h2><p></p></div>
+			</div>
 		</div>
 		
 		<!-- Import datacards-->
-		<div id="import" style="display:none;"></div>
+		<div class="contentBlock" id="import" style="display:none;"></div>
 		
 		<!-- Results of queries -->
-		<div id="qryres" style="display:block">
+		<div class="contentBlock" id="qryres" style="display:block">
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr bgcolor="#bbbbbb">
 					<td width="200px">
@@ -195,10 +197,13 @@
 			</table>
 			<iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="?cmd=getRegionFullInfo&r={-$reg-}"></iframe>
 		</div> <!-- end div id=qryres -->
-		<div id="listdb-win" >
+		<div class="contentBlock" id="listdb-win" >
 			{-include file="header_simple.tpl" -}
 			{-include file="showlistdb.tpl" -}
 		</div> <! id="listdb-win" -->
+		<div class="contentBlock" id="divDatabaseBackup">
+			Realizar Backup de Base de Datos
+		</div>
 	</div><!-- END div id=container-->
 	
 	<!-- SECTION : QUERY DESIGN -->
