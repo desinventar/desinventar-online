@@ -86,7 +86,7 @@
 		</div>
 		
 		<!-- Import datacards-->
-		<div class="contentBlock" id="import" style="display:none;"></div>
+		<div class="contentBlock" id="divDatacardsImport" style="display:none;"></div>
 		
 		<!-- Results of queries -->
 		<div class="contentBlock" id="qryres" style="display:block">

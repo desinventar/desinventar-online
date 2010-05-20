@@ -80,8 +80,8 @@
 				case "mnuDatacardImport":
 					hideQueryDesign();
 					jQuery('.contentBlock').hide();
-					jQuery('#import').show();
-					updateList('import', 'import.php', 'r={-$reg-}');
+					jQuery('#divDatacardsImport').show();
+					updateList('divDatacardsImport', 'import.php', 'r={-$reg-}');
 				break;
 				case "mnuDatabaseBackup":
 					hideQueryDesign();
