@@ -36,10 +36,10 @@
 					w = Ext.getCmp('westm');
 					jQuery('.contentBlock').hide();
 					{-if $ctl_noregion-}
-						$('qryres').style.display = 'none';
+						jQuery('#divQueryResults').hide();
 						w.hide();
 					{-else-}
-						$('qryres').style.display = 'block';
+						jQuery('#divQueryResults').show();
 						w.show();
 					{-/if-}
 					if (w.isVisible()) {
