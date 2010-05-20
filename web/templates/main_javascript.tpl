@@ -73,7 +73,7 @@
 					}
 					qryw.show(this);
 				break;
-				//cards menu
+				// Datacards Menu Items
 				case "mcrdins":
 					difw.show();
 				break;
@@ -87,7 +87,7 @@
 					$('qryres').style.display = 'none';
 					updateList('import', 'import.php', 'r={-$reg-}');
 				break;
-				case "mcrdbak":
+				case "mnuDatabaseBackup":
 					window.location = "index.php?cmd=getRegionBackup&r={-$reg-}";
 				break;
 				case "mcrdcfg":
@@ -239,7 +239,7 @@
 				{id:'mcrdins', text: '{-#minsert#-}',	handler: onMenuItem  },
 				{-if $role == "SUPERVISOR" || $role == "ADMINREGION"-}
 					{id:'mnuDatacardImport', text: '{-#mimport#-}',	handler: onMenuItem  },
-					{id:'mcrdbak', text: '{-#mbackdb#-}',	handler: onMenuItem  },
+					{id:'mnuDatabaseBackup', text: '{-#mbackdb#-}',	handler: onMenuItem  },
 				{-/if-}
 				{-if $role == "OBSERVER" || $role == "ADMINREGION"-}
 					{id:'mcrdcfg', text: '{-#mconfig#-}',	handler: onMenuItem  },
