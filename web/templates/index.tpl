@@ -33,7 +33,7 @@
 	<script type="text/javascript" src="include/tabber.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
-			jQuery("#listdb-win").hide();
+			jQuery("#divDatabaseList").hide();
 			{-if $reg==""-}
 				/* Hide button toolbar if no region is selected */
 				jQuery("#ResultHeaderText").hide();
@@ -41,7 +41,7 @@
 			{-/if-}
 			{-if $ctl_mainpage -}
 				jQuery("#dcr").hide();
-				jQuery("#listdb-win").show();
+				jQuery("#divDatabaseList").show();
 			{-/if-}
 			// 2010-02-21 (jhcaiced) This jQuery calls ensures that the Period and Stat
 			// parameters are not empty at the same time.
@@ -89,7 +89,7 @@
 		<div class="contentBlock" id="divDatacardsImport" style="display:none;"></div>
 		
 		<!-- Results of queries -->
-		<div class="contentBlock" id="qryres" style="display:block">
+		<div class="contentBlock" id="divQueryResults" style="display:block">
 			<table border="0" cellpadding="0" cellspacing="0" width="100%">
 				<tr bgcolor="#bbbbbb">
 					<td width="200px">
@@ -196,11 +196,11 @@
 				</tr>
 			</table>
 			<iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="?cmd=getRegionFullInfo&r={-$reg-}"></iframe>
-		</div> <!-- end div id=qryres -->
-		<div class="contentBlock" id="listdb-win" >
+		</div> <!-- end div id=divQueryResults -->
+		<div class="contentBlock" id="divDatabaseList" >
 			{-include file="header_simple.tpl" -}
 			{-include file="showlistdb.tpl" -}
-		</div> <! id="listdb-win" -->
+		</div> <! id="divDatabaseList" -->
 		<div class="contentBlock" id="divDatabaseBackup">
 			Realizar Backup de Base de Datos
 		</div>
