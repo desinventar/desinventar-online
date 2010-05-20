@@ -315,6 +315,18 @@ class UserSession {
 		return $myAnswer;
 	} // function
 	
+	function getUserNumericRole($prmRegionId = '') {
+		$Role = $this->getUserRole($prmRegionId);
+		$NumRole = 0;
+		if ($Role == 'NONE')        { $NumRole = 0; }
+		if ($Role == 'OBSERVER')    { $NumRole = 1; }
+		if ($Role == 'USER')        { $NumRole = 2; }
+		if ($Role == 'SUPERVISOR')  { $NumRole = 3; }
+		if ($Role == 'ADMINREGION') { $NumRole = 4; }
+		if ($Role == 'ADMINPORTAL') { $NumRole = 5; }
+		return $NumRole;
+	}
+	
 	public function setUserRole($prmUserId, $prmRegionId, $prmRole) {
 		$iReturn = ERR_NO_ERROR;
 		if ($prmUserId == '') { $iReturn = ERR_DEFAULT_ERROR; }
