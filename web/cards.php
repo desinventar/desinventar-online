@@ -120,19 +120,19 @@ if (isset($_GET['u'])) {
 				echo $ser;
 			break;
 			case "getDisasterIdPrev":
-				$prv = $us->q->getDisasterIdPrev($_GET['value']);
+				$prv = $us->getDisasterIdPrev($_GET['value']);
 				echo $prv;
 			break;
 			case "getDisasterIdNext":
-				$nxt = $us->q->getDisasterIdNext($_GET['value']);
+				$nxt = $us->getDisasterIdNext($_GET['value']);
 				echo $nxt;
 			break;
 			case 'getDisasterIdFirst':
-				$DisasterId = $us->q->getDisasterIdFirst();
+				$DisasterId = $us->getDisasterIdFirst();
 				echo $DisasterId;
 			break;
 			case 'getDisasterIdLast':
-				$DisasterId = $us->q->getDisasterIdLast();
+				$DisasterId = $us->getDisasterIdLast();
 				echo $DisasterId;
 			break;
 			case "getDisasterIdFromSerial":
