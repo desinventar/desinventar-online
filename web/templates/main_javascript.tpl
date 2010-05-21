@@ -75,7 +75,10 @@
 				break;
 				// Datacards Menu Items
 				case "mcrdins":
-					difw.show();
+					hideQueryDesign();
+					jQuery('.contentBlock').hide();
+					jQuery('#divDatacardsShow').show();
+					//difw.show();
 				break;
 				case "mnuDatacardImport":
 					hideQueryDesign();

@@ -33,6 +33,9 @@
 	<script type="text/javascript" src="include/tabber.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
+			jQuery('#divDatacardsShow').hide();
+			jQuery('#divDatabaseBackup').hide();
+			
 			jQuery("#divDatabaseList").hide();
 			{-if $reg==""-}
 				/* Hide button toolbar if no region is selected */
@@ -87,6 +90,14 @@
 		
 		<!-- Import datacards-->
 		<div class="contentBlock" id="divDatacardsImport" style="display:none;"></div>
+
+		<!-- Datacard Edit Window-->
+		<div class="contentBlock" id="divDatacardsShow">
+			<!-- <div class="x-window-header">{-#mdcsection#-} | {-$userid-} - {-$role-}</div> -->
+			<div id="dif-cfg" style="text-align:center;">
+				<iframe name="dif" id="dif" frameborder="0" height="600px;" width="100%" src="cards.php?r={-$reg-}"></iframe>
+			</div>
+		</div>
 		
 		<!-- Results of queries -->
 		<div class="contentBlock" id="divQueryResults" style="display:block">
@@ -129,13 +140,6 @@
 									<input type="hidden" name="MAX_FILE_SIZE" value="100000" />
 									<input type="file" id="ofile" name="qry" onChange="$('openquery').submit();"/>
 								</form>
-							</div>
-						</div>
-						<!-- Show DesInventar (input data) window-->
-						<div id="dif-win" class="x-hidden">
-							<div class="x-window-header">{-#mdcsection#-} | {-$userid-} - {-$role-}</div>
-							<div id="dif-cfg" style="text-align:center;">
-								<iframe name="dif" id="dif" frameborder="0" height="600px;" width="100%" src="cards.php?r={-$reg-}"></iframe>
 							</div>
 						</div>
 						<!-- Show User login/logout window -->
