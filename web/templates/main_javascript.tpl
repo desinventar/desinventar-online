@@ -84,10 +84,12 @@
 					updateList('divDatacardsImport', 'import.php', 'r={-$reg-}');
 				break;
 				case "mnuDatabaseBackup":
+					/*
 					hideQueryDesign();
 					jQuery('.contentBlock').hide();
 					jQuery('#divDatabaseBackup').show();
-					//window.location = "index.php?cmd=getRegionBackup&r={-$reg-}";
+					*/
+					window.location = "index.php?cmd=getRegionBackup&r={-$reg-}";
 				break;
 				case "mcrdcfg":
 					hideQueryDesign();
