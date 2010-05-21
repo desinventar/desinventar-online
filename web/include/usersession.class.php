@@ -581,6 +581,34 @@ class UserSession {
 		
 		return $regionlist;
 	}
+
+	public function getDisasterIdFirst() {
+		$sql = "SELECT DisasterId as first FROM Disaster ORDER BY DisasterBeginTime, DisasterId LIMIT 1";
+		$dat = $this->q->getresult($sql);
+		return $dat['first'];
+	}
+
+	public function getDisasterIdPrev($id) {
+		$dcd = $this->getassoc("SELECT * FROM Disaster WHERE DisasterId='$id'");
+		$sql = "SELECT DisasterId FROM Disaster WHERE DisasterId < '$id' AND DisasterBeginTime < '".
+			$dcd[0]['DisasterBeginTime'] ."' ORDER BY DisasterBeginTime DESC, DisasterId DESC LIMIT 1";
+		$dat = $this->q->getresult($sql);
+		return $dat['DisasterId'];
+	}
+
+	public function getDisasterIdNext($id) {
+		$dcd = $this->getassoc("SELECT * FROM Disaster WHERE DisasterId='$id'");
+		$sql = "SELECT DisasterId FROM Disaster WHERE DisasterId > '$id' AND DisasterBeginTime > '".
+			$dcd[0]['DisasterBeginTime'] ."' ORDER BY DisasterBeginTime, DisasterId LIMIT 1";
+		$dat = $this->q->getresult($sql);
+		return $dat['DisasterId'];
+	}
+
+	public function getDisasterIdLast() {
+		$sql = "SELECT DisasterId as last FROM Disaster ORDER BY DisasterBeginTime DESC, DisasterId DESC LIMIT 1";
+		$dat = $this->q->getresult($sql);
+		return $dat['last'];
+	}
 } //class
 
 </script>
