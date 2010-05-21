@@ -169,37 +169,37 @@ function displayDatacardStatusMsg(msgId) {
 	}
 }
 
-function requestDatacard(cmd, value) {
+function requestDatacard(myCmd, myValue) {
 	var bReturn = true;
 	var RegionId=jQuery('#prmRegionId').val();
-	var lsAjax = new Ajax.Request('cards.php', {
-		method: 'get', parameters:  'cmd='+ cmd +'&value='+ value + '&r=' + RegionId,
-		onLoading: function(request) {
-			$('dostat').innerHTML = waiting;
-		},
-		onSuccess: function(request) {
-			var res = request.responseText;
-			if (res.length >= 5 && cmd == "getNextSerial") {
-				// check valid DisasterSerial
-				$('DisasterSerial').value = value +'-'+ res;
-			} else if (res.length >= 36) {
+
+	$('dostat').innerHTML = waiting;
+
+	jQuery.post('cards.php',
+		{cmd:myCmd,value:myValue,r:RegionId},
+		function(data) {
+			if ( (myCmd == 'getNextSerial') && (data.DisasterSerial.length >= 5) ) {
+				$('DisasterSerial').value = myValue + '-' + data.DisasterSerial;
+			} else if (data.Status == 'OK') {
 				// check valid DisasterId
-				valid = setDICardfromId(RegionId, res, '');
+				valid = setDICardfromId(RegionId, data.DisasterId, '');
 				UserRole = jQuery('#prmUserRole').val();
 				canUpdateDatacard = getDatacardUpdatePerm(UserRole);
 				if (canUpdateDatacard) {
 					disenabutton($('cardupd'), false);
 				}
-				if (cmd == 'getDisasterIdFromSerial') {
+				if (myCmd == 'getDisasterIdFromSerial') {
 					disenabutton($('prev'), false);
 					disenabutton($('next'), false);
 				}
+				jQuery('#prmRecordNumber').val(data.RecordNumber);
 			} else {
 				bReturn = false;
 			}
-			$('dostat').innerHTML = "";
-		}
-	});
+		},
+		'json'
+	);
+	$('dostat').innerHTML = "";
 	return bReturn;
 }
 

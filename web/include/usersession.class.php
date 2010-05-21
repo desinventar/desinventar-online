@@ -583,40 +583,56 @@ class UserSession {
 	}
 
 	public function getDisasterIdFirst() {
-		$DisasterId = '';
-		$sQuery = "SELECT DisasterId FROM Disaster ORDER BY DisasterBeginTime,DisasterSerial LIMIT 0,1";
-		foreach($this->q->dreg->query($sQuery) as $row) {
-			$DisasterId = $row['DisasterId'];
-		}
-		return $DisasterId;
+		$Record = 0;
+		$RecordCount = $this->getDisasterCount();
+		$DisasterId = $this->getDisasterIdFromRecordNumber($Record);
+		return array('DisasterId' => $DisasterId, 'RecordNumber' => $Record, 'RecordCount' => $RecordCount, 'Status' => 'OK');
 	}
 
 	public function getDisasterIdLast() {
+		$RecordCount = $this->getDisasterCount();
+		$Record = $RecordCount - 1;
+		$DisasterId = $this->getDisasterIdFromRecordNumber($Record);
+		return array('DisasterId' => $DisasterId, 'RecordNumber' => $Record, 'RecordCount' => $RecordCount, 'Status' => 'OK');
+	}
+
+	public function getDisasterIdPrev($prmRecord) {
+		$Record = $prmRecord;
+		$RecordCount = $this->getDisasterCount();
+		if ($Record > 0) {
+			$Record--;
+		}
+		$DisasterId = $this->getDisasterIdFromRecordNumber($Record);
+		return array('DisasterId' => $DisasterId, 'RecordNumber' => $Record, 'RecordCount' => $RecordCount, 'Status' => 'OK');
+	}
+
+	public function getDisasterIdNext($prmRecord) {
+		$Record = $prmRecord;
+		$RecordCount = $this->getDisasterCount();
+		if ($Record < $RecordCount) {
+			$Record++;
+		}
+		$DisasterId = $this->getDisasterIdFromRecordNumber($Record);
+		return array('DisasterId' => $DisasterId, 'RecordNumber' => $Record, 'RecordCount' => $RecordCount, 'Status' => 'OK');
+	}
+
+	public function getDisasterCount() {
+		$iCount = 0;
+		$sQuery = "SELECT COUNT(DisasterId) AS C FROM Disaster";
+		foreach($this->q->dreg->query($sQuery) as $row) {
+			$iCount = $row['C'];
+		}
+		return $iCount;
+	}
+		
+	public function getDisasterIdFromRecordNumber($prmRecord) {
 		$DisasterId = '';
-		$sQuery = "SELECT DisasterId FROM Disaster ORDER BY DisasterBeginTime DESC,DisasterSerial DESC LIMIT 0,1";
+		$sQuery = "SELECT DisasterId FROM Disaster ORDER BY DisasterBeginTime,DisasterSerial LIMIT " . $prmRecord . ",1";
 		foreach($this->q->dreg->query($sQuery) as $row) {
 			$DisasterId = $row['DisasterId'];
 		}
-		fb($DisasterId);
 		return $DisasterId;
 	}
-
-	public function getDisasterIdPrev($id) {
-		$dcd = $this->getassoc("SELECT * FROM Disaster WHERE DisasterId='$id'");
-		$sql = "SELECT DisasterId FROM Disaster WHERE DisasterId < '$id' AND DisasterBeginTime < '".
-			$dcd[0]['DisasterBeginTime'] ."' ORDER BY DisasterBeginTime DESC, DisasterId DESC LIMIT 1";
-		$dat = $this->q->getresult($sql);
-		return $dat['DisasterId'];
-	}
-
-	public function getDisasterIdNext($id) {
-		$dcd = $this->getassoc("SELECT * FROM Disaster WHERE DisasterId='$id'");
-		$sql = "SELECT DisasterId FROM Disaster WHERE DisasterId > '$id' AND DisasterBeginTime > '".
-			$dcd[0]['DisasterBeginTime'] ."' ORDER BY DisasterBeginTime, DisasterId LIMIT 1";
-		$dat = $this->q->getresult($sql);
-		return $dat['DisasterId'];
-	}
-
 } //class
 
 </script>
