@@ -1,7 +1,4 @@
 
-function onDatacardReady() {
-}
-
 var mod = "di";
 
 function hidediv(myDiv) {
@@ -32,7 +29,7 @@ function getDatacardUpdatePerm(UserRole) {
 
 // Display Geography in form and search; k=geoid, l=0, desc='', opc=''
 function setgeo(k, l, desc, opc) {
-	var RegionId = jQuery('#prmRegionId').text();
+	var RegionId = jQuery('#prmRegionId').val();
 	if (opc == "search") {
 		var fld = '_GeographyId';
 		var lev = '_lev'+ l;
@@ -172,9 +169,9 @@ function displayDatacardStatusMsg(msgId) {
 	}
 }
 
-function requestDCard(cmd, value) {
+function requestDatacard(cmd, value) {
 	var bReturn = true;
-	var RegionId=jQuery('#prmRegionId').text();
+	var RegionId=jQuery('#prmRegionId').val();
 	var lsAjax = new Ajax.Request('cards.php', {
 		method: 'get', parameters:  'cmd='+ cmd +'&value='+ value + '&r=' + RegionId,
 		onLoading: function(request) {
@@ -188,7 +185,7 @@ function requestDCard(cmd, value) {
 			} else if (res.length >= 36) {
 				// check valid DisasterId
 				valid = setDICardfromId(RegionId, res, '');
-				UserRole = jQuery('#prmUserRole').text();
+				UserRole = jQuery('#prmUserRole').val();
 				canUpdateDatacard = getDatacardUpdatePerm(UserRole);
 				if (canUpdateDatacard) {
 					disenabutton($('cardupd'), false);
@@ -202,6 +199,7 @@ function requestDCard(cmd, value) {
 			}
 			$('dostat').innerHTML = "";
 		}
-	} );
+	});
 	return bReturn;
 }
+

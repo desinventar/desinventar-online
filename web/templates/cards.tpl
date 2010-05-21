@@ -14,11 +14,11 @@
 	<script type="text/javascript" language="javascript">
 
 		function gotocard(opc) {
-			bUpdate = getDatacardUpdatePerm(jQuery('#prmUserRole').text());
-			RegionId = jQuery('#prmRegionId').text();
+			bUpdate = getDatacardUpdatePerm(jQuery('#prmUserRole').val());
+			RegionId = jQuery('#prmRegionId').val();
 			switch (opc) {
 				case "first":
-					bFound = requestDCard('getDisasterIdFirst', $('DisasterId').value);
+					bFound = requestDatacard('getDisasterIdFirst', $('DisasterId').value);
 					if (bUpdate) {
 						disenabutton($('cardupd'), false);
 					}
@@ -26,7 +26,7 @@
 					disenabutton($('next'), false);
 				break;
 				case "prev":
-					bFound = requestDCard('getDisasterIdPrev', $('DisasterId').value);
+					bFound = requestDatacard('getDisasterIdPrev', $('DisasterId').value);
 					if (bFound == false) {
 						alert('{-#tcardnot#-}');
 					}
@@ -36,7 +36,7 @@
 					disenabutton($('next'), false);
 				break;
 				case "next":
-					bFound = requestDCard('getDisasterIdNext', $('DisasterId').value);
+					bFound = requestDatacard('getDisasterIdNext', $('DisasterId').value);
 					if (bFound == false) {
 						alert('{-#tcardnot#-}');
 					}
@@ -46,7 +46,7 @@
 					disenabutton($('prev'), false);
 				break;
 				case "last":
-					bFound = requestDCard('getDisasterIdLast', $('DisasterId').value);
+					bFound = requestDatacard('getDisasterIdLast', $('DisasterId').value);
 					if (bUpdate) {
 						disenabutton($('cardupd'), false);
 					}
@@ -154,23 +154,38 @@
 			return true;
 		}
 		
-		window.onload = function() {
-			onDatacardReady();
-			DisableEnableForm($('DICard'), true);
-			changeOptions();
-			UserRole = jQuery('#prmUserRole').text();
-			if (UserRole != '') {
-				uploadMsg("{-#tmsgnewcard#-}");
-			}
-			
+		jQuery(document).ready(function() {
+			alert('template loaded');
 			// Hide StatusMessages
 			displayDatacardStatusMsg('');
 			// Hide window's parameters
 			jQuery('#divDatacardParameter').hide();
 			
+			DisableEnableForm($('DICard'), true);
+			changeOptions();
+			UserRole = jQuery('#prmUserRole').val();
+			if (UserRole != '') {
+				uploadMsg("{-#tmsgnewcard#-}");
+			}
+			
+			// Create periodic task to keep session alive...
+			var pe = new PeriodicalExecuter(setActive, 60);
+		});
+
+		/*		
+		window.onload = function() {
+			onReadyDatacard();
+			DisableEnableForm($('DICard'), true);
+			changeOptions();
+			UserRole = jQuery('#prmUserRole').val();
+			if (UserRole != '') {
+				uploadMsg("{-#tmsgnewcard#-}");
+			}
+			
 			// Create periodic task to keep session alive...
 			var pe = new PeriodicalExecuter(setActive, 60);
 		}
+		*/
 	</script>
 
 	<style type="text/css">
@@ -237,9 +252,9 @@
 				&nbsp;&nbsp;|&nbsp;&nbsp;
 				{-$dis.DisasterSerial[0]-}
 				<input type="text" id="fndserial" style="width:60px;" class="line"
-					onKeyDown="if(event.keyCode==13) requestDCard('getDisasterIdFromSerial', $('fndserial').value);" />
+					onKeyDown="if(event.keyCode==13) requestDatacard('getDisasterIdFromSerial', $('fndserial').value);" />
 				<input type="button" id="cardfnd" class="bb bfind" onmouseover="Tip('{-#texptitle#-}')" onmouseout="UnTip()" 
-					onClick="if($('fndserial').value !='') requestDCard('getDisasterIdFromSerial', $('fndserial').value); 
+					onClick="if($('fndserial').value !='') requestDatacard('getDisasterIdFromSerial', $('fndserial').value); 
 						else alert('{-#bexpsearch#-}: {-#texpdesc#-}')" />
 				<br />
 				
@@ -280,7 +295,7 @@
 								<input id="DisasterBeginTime[0]" name="DisasterBeginTime[0]" style="width:36px;" class="line"
 									tabindex="1" type="text" maxlength="4" onFocus="showtip('{-$dis.DisasterBeginTime[2]-}', '#d4baf6')"
 									onkeypress="return blockChars(event, this.value, 'integer:4');" 
-									onBlur="if ($('_CMD').value == 'insertDICard') requestDCard('getNextSerial', this.value);" />
+									onBlur="if ($('_CMD').value == 'insertDICard') requestDatacard('getNextSerial', this.value);" />
 								<input id="DisasterBeginTime[1]" name="DisasterBeginTime[1]" style="width:18px;" class="line"
 									tabindex="2" type="text" maxlength="2" onFocus="showtip('{-$dis.DisasterBeginTime[2]-}', '#d4baf6')"
 									onkeypress="return blockChars(event, this.value, 'integer:2');" 
@@ -315,7 +330,7 @@
 								<input id="DisasterSerial" name="DisasterSerial" type="text" size="15" class="line"
 									tabindex="6" maxlength="50" onFocus="showtip('{-$dis.DisasterSerial[2]-}', '#d4baf6')"
 									onkeypress="return blockChars(event, this.value, 'alphanumber:');" />
-								<a href="javascript:void(0);" onClick="if(!$('DisasterSerial').disabled) requestDCard('getNextSerial', 
+								<a href="javascript:void(0);" onClick="if(!$('DisasterSerial').disabled) requestDatacard('getNextSerial', 
 									$('DisasterBeginTime[0]').value);"><img src="images/reload.jpg" border="0" />
 								</a>
 							</td>
@@ -590,8 +605,9 @@
 	</form>
 	<!-- END DI8 FORM CARD -->
 	<div id="divDatacardParameter">
-		<span id="prmRegionId">{-$reg-}</span>
-		<span id="prmUserRole">{-$role-}</span>
+		<input type="hidden" id="prmRegionId" value="{-$reg-}">
+		<input type="hidden" id="prmUserRole" value="{-$role-}">
+		<input type="hidden" id="prmRecordNumber" value="0">
 	</div>
 </body>
 </html>
