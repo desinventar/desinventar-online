@@ -583,9 +583,22 @@ class UserSession {
 	}
 
 	public function getDisasterIdFirst() {
-		$sql = "SELECT DisasterId as first FROM Disaster ORDER BY DisasterBeginTime, DisasterId LIMIT 1";
-		$dat = $this->q->getresult($sql);
-		return $dat['first'];
+		$DisasterId = '';
+		$sQuery = "SELECT DisasterId FROM Disaster ORDER BY DisasterBeginTime,DisasterSerial LIMIT 0,1";
+		foreach($this->q->dreg->query($sQuery) as $row) {
+			$DisasterId = $row['DisasterId'];
+		}
+		return $DisasterId;
+	}
+
+	public function getDisasterIdLast() {
+		$DisasterId = '';
+		$sQuery = "SELECT DisasterId FROM Disaster ORDER BY DisasterBeginTime DESC,DisasterSerial DESC LIMIT 0,1";
+		foreach($this->q->dreg->query($sQuery) as $row) {
+			$DisasterId = $row['DisasterId'];
+		}
+		fb($DisasterId);
+		return $DisasterId;
 	}
 
 	public function getDisasterIdPrev($id) {
@@ -604,11 +617,6 @@ class UserSession {
 		return $dat['DisasterId'];
 	}
 
-	public function getDisasterIdLast() {
-		$sql = "SELECT DisasterId as last FROM Disaster ORDER BY DisasterBeginTime DESC, DisasterId DESC LIMIT 1";
-		$dat = $this->q->getresult($sql);
-		return $dat['last'];
-	}
 } //class
 
 </script>
