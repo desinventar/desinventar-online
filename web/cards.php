@@ -103,6 +103,7 @@ if (isset($_GET['u'])) {
 } else {
 	$t->assign("reg", $sRegionId);
 	$cmd = getParameter('cmd','');
+	$value = getParameter('value','');
 	if ($cmd != '') {
 		// Commands in GET mode: lists, checkings..
 		switch ($cmd) {
@@ -116,28 +117,28 @@ if (isset($_GET['u'])) {
 				$t->display("cards_geolist.tpl");
 			break;
 			case "getNextSerial":
-				$ser = $us->q->getNextDisasterSerial($_GET['value']);
-				echo $ser;
+				$ser = $us->q->getNextDisasterSerial($value);
+				echo json_encode(array('Status' => 'OK', 'DisasterSerial' => $ser));
 			break;
 			case "getDisasterIdPrev":
-				$prv = $us->getDisasterIdPrev($_GET['value']);
-				echo $prv;
+				$answer = $us->getDisasterIdPrev($value);
+				echo json_encode($answer);
 			break;
 			case "getDisasterIdNext":
-				$nxt = $us->getDisasterIdNext($_GET['value']);
-				echo $nxt;
+				$answer = $us->getDisasterIdNext($value);
+				echo json_encode($answer);
 			break;
 			case 'getDisasterIdFirst':
-				$DisasterId = $us->getDisasterIdFirst();
-				echo $DisasterId;
+				$answer = $us->getDisasterIdFirst();
+				echo json_encode($answer);
 			break;
 			case 'getDisasterIdLast':
-				$DisasterId = $us->getDisasterIdLast();
-				echo $DisasterId;
+				$answer = $us->getDisasterIdLast();
+				echo json_encode($answer);
 			break;
 			case "getDisasterIdFromSerial":
-				$did = $us->q->getDisasterIdFromSerial($_GET['value']);
-				echo $did;
+				$did = $us->q->getDisasterIdFromSerial($value);
+				echo json_encode(array('Status' => 'OK', 'DisasterId' => $did));
 			break;
 			case 'existDisasterSerial':
 				$DisasterSerial = getParameter('DisasterSerial');

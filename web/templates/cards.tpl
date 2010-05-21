@@ -26,7 +26,7 @@
 					disenabutton($('next'), false);
 				break;
 				case "prev":
-					bFound = requestDatacard('getDisasterIdPrev', $('DisasterId').value);
+					bFound = requestDatacard('getDisasterIdPrev', jQuery('#prmRecordNumber').val());
 					if (bFound == false) {
 						alert('{-#tcardnot#-}');
 					}
@@ -36,7 +36,7 @@
 					disenabutton($('next'), false);
 				break;
 				case "next":
-					bFound = requestDatacard('getDisasterIdNext', $('DisasterId').value);
+					bFound = requestDatacard('getDisasterIdNext', jQuery('#prmRecordNumber').val());
 					if (bFound == false) {
 						alert('{-#tcardnot#-}');
 					}
@@ -155,7 +155,6 @@
 		}
 		
 		jQuery(document).ready(function() {
-			alert('template loaded');
 			// Hide StatusMessages
 			displayDatacardStatusMsg('');
 			// Hide window's parameters
@@ -170,22 +169,9 @@
 			
 			// Create periodic task to keep session alive...
 			var pe = new PeriodicalExecuter(setActive, 60);
-		});
-
-		/*		
-		window.onload = function() {
-			onReadyDatacard();
-			DisableEnableForm($('DICard'), true);
-			changeOptions();
-			UserRole = jQuery('#prmUserRole').val();
-			if (UserRole != '') {
-				uploadMsg("{-#tmsgnewcard#-}");
-			}
 			
-			// Create periodic task to keep session alive...
-			var pe = new PeriodicalExecuter(setActive, 60);
-		}
-		*/
+			gotocard('first');
+		});
 	</script>
 
 	<style type="text/css">
