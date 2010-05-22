@@ -102,8 +102,7 @@
 				<tr class="{-if ($smarty.foreach.dl.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}" 
 					onClick="Element.addClassName(this, 'highlight');" ondblClick="Element.removeClassName(this, 'highlight');">
 					<td>
-						<!-- <a href="javascript:void(null);" onClick="setDIForm('{-$item.DisasterId-}');">{-$offset+$smarty.foreach.dl.iteration-}</a> -->
-						{-$offset+$smarty.foreach.dl.iteration-}
+						<a href="javascript:void(null);" onClick="setDIForm('{-$item.DisasterId-}');">{-$offset+$smarty.foreach.dl.iteration-}</a>
 					</td>
 					{-foreach name=sel key=k item=i from=$sel-}
 						{-strip-}
