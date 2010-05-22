@@ -616,6 +616,24 @@ class UserSession {
 		return array('DisasterId' => $DisasterId, 'RecordNumber' => $Record, 'RecordCount' => $RecordCount, 'Status' => 'OK');
 	}
 
+	public function getDisasterIdFromSerial($prmDisasterSerial) {
+		$RecordCount = $this->getDisasterCount();
+		$DisasterId = '';
+		$Record = 0;
+		$sQuery = "SELECT DisasterId,DisasterSerial FROM Disaster ORDER BY DisasterBeginTime,DisasterSerial";
+		$result = $this->q->dreg->query($sQuery);
+		$bFound = 0;
+		while ( ($bFound == 0) && ($row = $result->fetch(PDO::FETCH_OBJ)) ) {
+			if ($row->DisasterSerial == $prmDisasterSerial) {
+				$bFound = 1;
+				$DisasterId = $row->DisasterId;
+			} else {
+				$Record++;
+			}
+		} //while
+		return array('DisasterId' => $DisasterId, 'RecordNumber' => $Record, 'RecordCount' => $RecordCount, 'Status' => 'OK');
+	}
+
 	public function getDisasterCount() {
 		$iCount = 0;
 		$sQuery = "SELECT COUNT(DisasterId) AS C FROM Disaster";

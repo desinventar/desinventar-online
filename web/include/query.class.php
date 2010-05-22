@@ -525,12 +525,6 @@ class Query extends PDO {
 		// (jhcaiced) SyncRecord should not appear in data grid
 		return $fld;
 	}
-
-	public function getDisasterIdFromSerial($prmDisasterSerial) {
-		$sQuery = "SELECT DisasterId FROM Disaster WHERE DisasterSerial = '". $prmDisasterSerial."'";
-		$res = $this->getresult($sQuery);
-		return $res['DisasterId'];
-	}
 	
 	public function existDisasterSerial($prmDisasterSerial) {
 		$Answer = '';

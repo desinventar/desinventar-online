@@ -137,8 +137,8 @@ if (isset($_GET['u'])) {
 				echo json_encode($answer);
 			break;
 			case "getDisasterIdFromSerial":
-				$did = $us->q->getDisasterIdFromSerial($value);
-				echo json_encode(array('Status' => 'OK', 'DisasterId' => $did));
+				$answer = $us->getDisasterIdFromSerial($value);
+				echo json_encode($answer);
 			break;
 			case 'existDisasterSerial':
 				$DisasterSerial = getParameter('DisasterSerial');
