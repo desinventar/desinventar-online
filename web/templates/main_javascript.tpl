@@ -669,6 +669,7 @@
 						sendList(cmd);
 					break;
 					case 'M':
+						// SaveMap to PNG Format
 						sendMap(cmd);
 					break;
 					case 'G':
@@ -724,6 +725,8 @@
 					}
 					$('_M+extent').value = [extent.left,extent.bottom,extent.right,extent.top].join(',');
 					$('_M+layers').value = activelayers;
+					myMap = window.parent.frames['dcr'].document.getElementById('MapTitle');
+					$('_M+title').value = myMap.value;
 				}
 				combineForms('DC', 'CM');
 				w.collapse(); // hide()
