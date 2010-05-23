@@ -203,6 +203,9 @@
 			init();
 			
 			jQuery('#MapTitle').val(jQuery('#defaultMapTitle').text());
+			jQuery('#linkRestoreMapTitle').click(function() {
+				jQuery('#MapTitle').val(jQuery('#defaultMapTitle').text());
+			});
 		}
 	</script>
 	<link rel="stylesheet" href="css/desinventar.css" type="text/css"/>
@@ -246,7 +249,8 @@
 			</td>
 			<td valign="top">
 				<!-- <img src="{-$mapinfoimg-}"><br /> -->
-				<input type="text" id="MapTitle" name="MapTitle" size=100 /><br />
+				<input type="text" id="MapTitle" name="MapTitle" size=110 />
+				<img id="linkRestoreMapTitle" border="0" src="images/reload.jpg"><br />
 				<div id="map" class="dwin" style="width:700px; height:530px"></div>
 			</td>
 		</tr>
