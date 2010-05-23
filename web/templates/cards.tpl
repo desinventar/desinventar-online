@@ -103,14 +103,13 @@
 						},
 						function(data) {
 							bContinue = true;
-							eval('var myObj = ' + data);
-							if ( (cmd == 'insertDICard') && (myObj != '') ) {
+							if ( (cmd == 'insertDICard') && (data.DisasterSerial != '') ) {
 								// Serial of new datacard already exists...
 								//alert('Disaster Serial already exists...');
 								bContinue = false;
 							}
 							if (cmd == 'updateDICard') {
-								if ( (DisasterSerial != PrevDisasterSerial) && (myObj != '') ) {
+								if ( (DisasterSerial != PrevDisasterSerial) && (data.DisasterSerial != '') ) {
 									// Edited Serial exists in database...
 									//alert('Disaster Serial is duplicated...');
 									bContinue = false;
@@ -131,7 +130,7 @@
 									showtip('','#ffffff');
 								}
 							}
-						}
+						},'json'
 					);
 				break;
 				case "cardcln":
@@ -265,7 +264,7 @@
 		<input type="hidden" name="RecordAuthor" id="RecordAuthor" value="{-$usr-}">
 		<input type="hidden" name="RecordCreation" id="RecordCreation">
 		<input type="hidden" name="_CMD" id="_CMD" value="">
-		<input type="hidden" name="PrevDisasterSerial" id="PrevDisasterSerial" value="">
+		<input type="hidden" name="PrevDisasterSerial~~" id="PrevDisasterSerial" value="">
 		<table border="1" cellspacing="8" width="900px">
 			<!-- DATACARD INFORMATION SECTION -->
 			<tr>

@@ -47,7 +47,6 @@
 	function sendData (r, url, pars, val) {
 		reg = r;
 		opt = val;
-		//alert(pars);
 		if (mod != "")
 			$(mod + 'addsect').style.display = 'none';
 		var myAjax = new Ajax.Request( url, {
@@ -503,12 +502,13 @@
 			diform = $('DICard');
 		var objElems = diform.elements; // DICard is DesInventar form..
 		for (i=0; i < objElems.length; i++) {
-			if (objElems[i].id != "geolev0") {
-				setElementValue(objElems[i], arr[objElems[i].id]);
-			}
-			else {
+			if (objElems[i].id == "geolev0") {
 				geo = arr['GeographyId'];
 				getGeoItems(prmRegionId, arr['GeographyId'], 0, geo.length / 5, src);
+			} else if (objElems[i].id == 'PrevDisasterSerial') {
+				setElementValue(objElems[i], arr['DisasterSerial']);
+			} else {
+				setElementValue(objElems[i], arr[objElems[i].id]);
 			}
 		}
 		jQuery('#PrevDisasterSerial').val(jQuery('#DisasterSerial').val());
@@ -528,7 +528,6 @@
 			if (ele.options[w].value == geo)
 				ele.selectedIndex = w ;
 		}
-		//alert("GEO: "+ geo +"- L: "+l +"-LEV: "+lev);
 		if (l < lev) {
 			var lsAjax = new Ajax.Updater( div, 'cards.php', {
 				method: 'get', parameters: 'r='+ reg +'&cmd=list&GeographyId='+ geo,
