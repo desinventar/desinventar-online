@@ -651,6 +651,15 @@ class UserSession {
 		}
 		return $DisasterId;
 	}
+
+	public function existDisasterSerial($prmDisasterSerial) {
+		$Answer = '';
+		$sQuery = "SELECT DisasterSerial FROM Disaster WHERE DisasterSerial = '". $prmDisasterSerial."'";
+		foreach($this->q->dreg->query($sQuery) as $row) {
+			$Answer = $row['DisasterSerial'];
+		}
+		return array('Status' => 'OK', 'DisasterSerial' => $Answer);
+	}
 } //class
 
 </script>

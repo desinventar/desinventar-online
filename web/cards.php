@@ -142,8 +142,8 @@ if (isset($_GET['u'])) {
 			break;
 			case 'existDisasterSerial':
 				$DisasterSerial = getParameter('DisasterSerial');
-				$Answer = $us->q->existDisasterSerial($DisasterSerial);
-				print json_encode($Answer);
+				$answer = $us->existDisasterSerial($DisasterSerial);
+				print json_encode($answer);
 			break;
 			case "chklocked":
 				// check if datacard is locked by some user

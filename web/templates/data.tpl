@@ -9,11 +9,13 @@
 	<link rel="stylesheet" href="css/desinventar.css" type="text/css"/>
 	<script type="text/javascript" src="include/prototype.js"></script>
 	<script type="text/javascript" src="include/diadmin.js"></script>
+	{-include file="jquery.tpl" -}
     <script type="text/javascript">
 	function setDIForm(prmDisasterId) {
 		parent.w.collapse();
 		parent.difw.show();
 		setDICardfromId('{-$reg-}', prmDisasterId, 'DATA');
+		jQuery('#PrevDisasterSerial').val(jQuery('#DisasterSerial').val());
 		{-if $role == 'USER' || $role == 'SUPERVISOR' || $role == 'ADMINREGION'-}
 			cupd = window.parent.frames['dif'].document.getElementById('cardupd');
 			if (cupd != null) {
