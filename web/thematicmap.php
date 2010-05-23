@@ -171,17 +171,10 @@ if (isset($post['_M+cmd'])) {
 	if ($info2['TITLE'] != '') {
 		$value = $info2['TITLE'];
 		$title = $mapinfodic['MapInfoTITLE'][0];
-		$txtMapTitle = $title . ' ' . strtolower($value);
+		//$txtMapTitle = $title . ' ' . strtolower($value);
+		$txtMapTitle = $post['_M+title'];
 		$txtMapVariable = $value;
 		unset($info2['TITLE']);
-	}
-	if ($info2['BEG'] != '') {
-		$txtMapTitle .= ', ' . $info2['BEG'];
-		unset($info2['BEG']);
-		if ($info2['END'] != '') {
-			$txtMapTitle .= ' - ' . $info2['END'];
-			unset($info2['END']);
-		}
 	}
 
 	$ImageRows = 0;

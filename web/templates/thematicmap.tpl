@@ -17,6 +17,7 @@
 		<script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid=euzuro-openlayers"></script>
 	{-/if-}
 	<script src="/openlayers/lib/OpenLayers.js"></script>
+	{-include file="jquery.tpl"-}
 	<script type="text/javascript">
 		var lon = {-if $lon != ''-}{-$lon-}{-else-}0{-/if-};
 		var lat = {-if $lon != ''-}{-$lat-}{-else-}0{-/if-};
@@ -200,6 +201,8 @@
 {-/foreach-}
 			qrydet.innerHTML = qdet;
 			init();
+			
+			jQuery('#MapTitle').val(jQuery('#defaultMapTitle').text());
 		}
 	</script>
 	<link rel="stylesheet" href="css/desinventar.css" type="text/css"/>
@@ -221,7 +224,7 @@
 				<div class="dwin" style="width:250px;">
 					<p align="right">{-#trepnum#-}: {-$MapNumberOfRecords-}</p>
 					<hr />
-					<h4>{-#tmapof#-} {-$rgl[0].info.TITLE-}</h4>
+					<h4 id="defaultMapTitle">{-#tmapof#-} {-$rgl[0].info.TITLE-}</h4>
 					<div align="justify" class="dwin" style="height:250px;">{-#lev#-}: {-$rgl[0].info.LEVEL-}; 
 						{-foreach key=k item=i from=$rgl[0].info-}
 							{-if $k == "GEO"-}<i>{-#geo#-}:</i> {-$i-}; {-/if-}
@@ -243,6 +246,7 @@
 			</td>
 			<td valign="top">
 				<!-- <img src="{-$mapinfoimg-}"><br /> -->
+				<input type="text" id="MapTitle" name="MapTitle" size=100 /><br />
 				<div id="map" class="dwin" style="width:700px; height:530px"></div>
 			</td>
 		</tr>

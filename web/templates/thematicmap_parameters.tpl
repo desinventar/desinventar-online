@@ -98,6 +98,7 @@
 											<input type="hidden" id="_M+cmd" name="_M+cmd" value="result" />
 											<input type="hidden" id="_M+extent" name="_M+extent" />
 											<input type="hidden" id="_M+layers" name="_M+layers" />
+											<input type="hidden" id="_M+title"  name="_M+title" />
 										</td>
 									</tr>
 								</table> <!-- table class=conf -->
