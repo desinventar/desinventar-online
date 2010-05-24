@@ -29,6 +29,9 @@ $t->assign('desinventarUserId'      , $us->UserId);
 $t->assign('desinventarUserFullName', $us->getUserFullName());
 $t->assign('desinventarModule'      ,'desinventar');
 
+$jsversion = time();
+$t->assign('jsversion', $jsversion);
+
 if (!empty($RegionId)) {
 	$us->open($RegionId);
 }

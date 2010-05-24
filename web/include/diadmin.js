@@ -507,6 +507,12 @@
 				getGeoItems(prmRegionId, arr['GeographyId'], 0, geo.length / 5, src);
 			} else if (objElems[i].id == 'PrevDisasterSerial') {
 				setElementValue(objElems[i], arr['DisasterSerial']);
+			} else if (objElems[i].id == 'DisasterBeginTime0') {
+				setElementValue(objElems[i], arr['DisasterBeginTime[0]']);
+			} else if (objElems[i].id == 'DisasterBeginTime1') {
+				setElementValue(objElems[i], arr['DisasterBeginTime[1]']);
+			} else if (objElems[i].id == 'DisasterBeginTime2') {
+				setElementValue(objElems[i], arr['DisasterBeginTime[2]']);
 			} else {
 				setElementValue(objElems[i], arr[objElems[i].id]);
 			}
