@@ -9,8 +9,8 @@
 	{-include file="jquery.tpl" -}
 	<script type="text/javascript" src="include/prototype.js"></script>
 	<script type="text/javascript" src="include/combo-box.js"></script>
-	<script type="text/javascript" src="include/diadmin.js"></script>
-	<script type="text/javascript" src="js/cards.js"></script>
+	<script type="text/javascript" src="include/diadmin.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="js/cards.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" language="javascript">
 
 		function gotocard(opc) {
@@ -64,10 +64,13 @@
 			switch (btn) {
 				case "cardnew":
 					DisableEnableForm($('DICard'), false);
-					setfocus('DisasterBeginTime[0]');
+					jQuery('#DisasterBeginTime0').focus();
 					$('DisasterId').value='';
 					$('DICard').reset();
 					$('_CMD').value = 'insertDICard';
+					jQuery('#DisasterBeginTime0').val('');
+					jQuery('#DisasterBeginTime1').val('');
+					jQuery('#DisasterBeginTime2').val('');
 					uploadMsg("{-#tmsgnewcardfill#-}");
 					changeOptions(btn);
 					//parent.s.expand();
@@ -80,7 +83,7 @@
 							var res = request.responseText;
 							if (res.substr(0,8) == "RESERVED") {
 								DisableEnableForm($('DICard'), false);
-								setfocus('DisasterBeginTime[0]');
+								jQuery('#DisasterBeginTime0').focus();
 								$('_CMD').value = 'updateDICard';
 								uploadMsg("{-#tmsgeditcardfill#-}");
 								changeOptions(btn);
@@ -119,7 +122,7 @@
 								displayDatacardStatusMsg('msgDuplicatedDisasterSerial');
 							}
 							if (bContinue) {
-								var fl = new Array('DisasterSerial', 'DisasterBeginTime[0]', 'DisasterSource', 
+								var fl = new Array('DisasterSerial', 'DisasterBeginTime0', 'DisasterSource', 
 													'geolev0', 'EventId', 'CauseId', 'RecordStatus');
 								if (checkForm(fl, "{-#errmsgfrm#-}")) {
 									uploadMsg('');
@@ -137,9 +140,12 @@
 					$('DICard').reset();
 					$('lev0').innerHTML='';
 					uploadMsg('');
-					setfocus('DisasterBeginTime[0]');
+					jQuery('#DisasterBeginTime0').focus();
 				break;
 				case "cardcan":
+					jQuery('#DisasterBeginTime0').val('');
+					jQuery('#DisasterBeginTime1').val('');
+					jQuery('#DisasterBeginTime2').val('');
 					updateList('distatusmsg', 'cards.php', 'r={-$reg-}&cmd=chkrelease&DisasterId='+ $('DisasterId').value);
 					DisableEnableForm($('DICard'), true);
 					uploadMsg("{-#tmsgnewcard#-}");
@@ -165,11 +171,32 @@
 			if (UserRole != '') {
 				uploadMsg("{-#tmsgnewcard#-}");
 			}
+
+			jQuery('#DisasterBeginTime0').blur(function() {
+				cmd = jQuery('#_CMD').val();
+				if (cmd == 'insertDICard') {
+					requestDatacard('getNextSerial', jQuery(this).val());
+				}
+			});
 			
+			jQuery('#DisasterBeginTime1').blur(function() {
+				if (parseInt(jQuery(this).val(),10) < 1 || 
+				    parseInt(jQuery(this).val(),10) > 12 ) {
+				    	jQuery(this).val('');
+				}
+			});
+
+			jQuery('#DisasterBeginTime2').blur(function() {
+				if (parseInt(jQuery(this).val(),10) < 1 || 
+				    parseInt(jQuery(this).val(),10) > 31 ) {
+				    	jQuery(this).val('');
+				}
+			});
+
 			// Create periodic task to keep session alive...
 			var pe = new PeriodicalExecuter(setActive, 60);
-			
 		});
+			
 	</script>
 
 	<style type="text/css">
@@ -276,20 +303,15 @@
 						<tr valign="top">
 							<td onmouseover="Tip('{-$dis.DisasterBeginTime[1]-}')" onmouseout="UnTip()">
 								{-$dis.DisasterBeginTime[0]-}<b style="color:darkred;">*</b><br />
-								<input id="DisasterBeginTime[0]" name="DisasterBeginTime[0]" style="width:36px;" class="line"
+								<input id="DisasterBeginTime0" name="DisasterBeginTime[0]" style="width:36px;" class="line"
 									tabindex="1" type="text" maxlength="4" onFocus="showtip('{-$dis.DisasterBeginTime[2]-}', '#d4baf6')"
-									onkeypress="return blockChars(event, this.value, 'integer:4');" 
-									onBlur="if ($('_CMD').value == 'insertDICard') requestDatacard('getNextSerial', this.value);" />
-								<input id="DisasterBeginTime[1]" name="DisasterBeginTime[1]" style="width:18px;" class="line"
+									onkeypress="return blockChars(event, this.value, 'integer:4');" />
+								<input id="DisasterBeginTime1" name="DisasterBeginTime[1]" style="width:18px;" class="line"
 									tabindex="2" type="text" maxlength="2" onFocus="showtip('{-$dis.DisasterBeginTime[2]-}', '#d4baf6')"
-									onkeypress="return blockChars(event, this.value, 'integer:2');" 
-									onBlur="if (parseInt($('DisasterBeginTime[1]').value,10) < 1 || 
-											parseInt($('DisasterBeginTime[1]').value,10) > 12 ) $('DisasterBeginTime[1]').value = '';" />
-								<input id="DisasterBeginTime[2]" name="DisasterBeginTime[2]" style="width:18px;" class="line"
+									onkeypress="return blockChars(event, this.value, 'integer:2');" />
+								<input id="DisasterBeginTime2" name="DisasterBeginTime[2]" style="width:18px;" class="line"
 									tabindex="3" type="text" maxlength="2" onFocus="showtip('{-$dis.DisasterBeginTime[2]-}', '#d4baf6')"
-									onkeypress="return blockChars(event, this.value, 'integer:2');"
-									onBlur="if (parseInt($('DisasterBeginTime[2]').value,10) < 1 || 
-											parseInt($('DisasterBeginTime[2]').value,10) > 31 ) $('DisasterBeginTime[2]').value = '';" />
+									onkeypress="return blockChars(event, this.value, 'integer:2');" />
 							</td>
 							<td onmouseover="Tip('{-$dis.DisasterSource[1]-}')" onmouseout="UnTip()">
 								{-$dis.DisasterSource[0]-}<b style="color:darkred;">*</b><br />
@@ -315,7 +337,7 @@
 									tabindex="6" maxlength="50" onFocus="showtip('{-$dis.DisasterSerial[2]-}', '#d4baf6')"
 									onkeypress="return blockChars(event, this.value, 'alphanumber:');" />
 								<a href="javascript:void(0);" onClick="if(!$('DisasterSerial').disabled) requestDatacard('getNextSerial', 
-									$('DisasterBeginTime[0]').value);"><img src="images/reload.jpg" border="0" />
+									$('DisasterBeginTime0').value);"><img src="images/reload.jpg" border="0" />
 								</a>
 							</td>
 						</tr>
