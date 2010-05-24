@@ -14,6 +14,7 @@ elseif (isset($post['r']) && !empty($post['r']))
 else
 	exit();
 
+$t->assign('jsversion', time());
 $us->open($reg);
 
 $regname = $us->q->getDBInfoValue('RegionLabel');
