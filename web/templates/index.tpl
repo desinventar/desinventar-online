@@ -6,7 +6,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
 	<title>{-#ttitle#-} | {-$regname-}</title>
-	<link rel="stylesheet" href="css/desinventar.css" type="text/css">
+	<link rel="stylesheet" href="css/desinventar.css?version={-$jsversion-}" type="text/css">
 	<script type="text/javascript" src="include/prototype.js"></script>
 	<!-- jQuery -->
 	{-include file="jquery.tpl" -}

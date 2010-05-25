@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
-	<link rel="stylesheet" href="css/desinventar.css" type="text/css"/>
+	<link rel="stylesheet" href="css/desinventar.css?version={-$jsversion-}" type="text/css"/>
 	<script type="text/javascript" src="include/prototype.js"></script>
 	<script type="text/javascript" src="js/diadmin.js?version={-$jsversion-}"></script>
 	<script type="text/javascript">
