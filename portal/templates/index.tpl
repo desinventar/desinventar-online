@@ -8,7 +8,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" href="css/desinventar.css" TYPE="text/css" />
 	<link rel="stylesheet" href="css/portal.css" TYPE="text/css" />
-	{-include file="jquery.tpl" -}
+	{-include file="../../web/templates/jquery.tpl" confdir="../../web/conf/"-}
 	<script type="text/javascript" src="{-$desinventarURL-}/include/menu.js"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/include/md5.js"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/js/user_login.js?version={-$jsversion-}"></script>
