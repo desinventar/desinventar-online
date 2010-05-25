@@ -89,7 +89,7 @@ function changeOptions(but) {
 			disenabutton($('btnDatacardNew'), true);
 			disenabutton($('btnDatacardSave'), false);
 			disenabutton($('btnDatacardEdit'), true);
-			disenabutton($('cardcln'), false);
+			disenabutton($('btnDatacardClear'), false);
 			disenabutton($('cardcan'), false);
 			disenabutton($('first'), true);
 			disenabutton($('prev'), true);
@@ -112,7 +112,7 @@ function changeOptions(but) {
 			disenabutton($('btnDatacardNew'), false);
 			disenabutton($('btnDatacardSave'), true);
 			disenabutton($('btnDatacardEdit'), false);
-			disenabutton($('cardcln'), true);
+			disenabutton($('btnDatacardClear'), true);
 			disenabutton($('cardcan'), true);
 			disenabutton($('first'), false);
 			disenabutton($('prev'), false);
@@ -126,7 +126,7 @@ function changeOptions(but) {
 			else
 				disenabutton($('btnDatacardEdit'), false);
 			disenabutton($('btnDatacardSave'), true);
-			disenabutton($('cardcln'), true);
+			disenabutton($('btnDatacardClear'), true);
 			disenabutton($('cardcan'), true);
 			disenabutton($('btnDatacardNew'), false);
 			disenabutton($('first'), false);
@@ -139,7 +139,7 @@ function changeOptions(but) {
 			disenabutton($('btnDatacardNew'), false);
 			disenabutton($('btnDatacardSave'), true);
 			disenabutton($('btnDatacardEdit'), true);
-			disenabutton($('cardcln'), true);
+			disenabutton($('btnDatacardClear'), true);
 			disenabutton($('cardcan'), true);
 		break;
 	}
@@ -285,4 +285,12 @@ function doDatacardSave() {
 			}
 		},'json'
 	);
+}
+
+function doDatacardClear() {
+	$('DICard').reset();
+	$('lev0').innerHTML='';
+	displayDatacardStatusMsg('');
+	uploadMsg('');
+	jQuery('#DisasterBeginTime0').focus();
 }
