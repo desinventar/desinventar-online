@@ -125,6 +125,11 @@
 				return false;
 			});
 			
+			jQuery('#btnDatacardPrint').click(function() {
+				window.print();
+				return false;
+			});
+			
 			// Create periodic task to keep session alive...
 			var pe = new PeriodicalExecuter(setActive, 60);
 		});
@@ -176,8 +181,7 @@
 					<input type="button" id="btnDatacardClear"  class="bb bclear"  onmouseover="Tip('{-#tclntitle#-}: {-#tclndesc#-}')" onmouseout="UnTip()" />
 					<input type="button" id="btnDatacardCancel" class="bb bcancel" onmouseover="Tip('{-#tcantitle#-}: {-#tcandesc#-}')" onmouseout="UnTip()" />
 				{-/if-}
-				<input type="button" id="cardprn" class="bb bprint" onmouseover="Tip('{-#mprint#-}')" 
-					onmouseout="UnTip()" onClick="window.print();" />
+				<input type="button" id="btnDatacardPrint" class="bb bprint" onmouseover="Tip('{-#mprint#-}')" onmouseout="UnTip()" />
 				&nbsp;&nbsp;|&nbsp;&nbsp;
 				<input type="button" id="first" value="<<" class="bb line" onmouseover="Tip('{-#bfirst#-}')" 
 					onmouseout="UnTip()" onClick="gotocard('first')" />
