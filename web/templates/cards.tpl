@@ -130,6 +130,7 @@
 		jQuery(document).ready(function() {
 			// Hide StatusMessages
 			displayDatacardStatusMsg('');
+			jQuery('#divDatacardStatusMsg').show();
 			// Hide window's parameters
 			jQuery('#divDatacardParameter').hide();
 			
@@ -256,7 +257,7 @@
 		</tr>
 		<tr>
 			<td align="left" valign="top" width="450px">
-				<div id="divDatacardStatusMessage" style="display:none;">
+				<div id="divDatacardStatusMsg" style="display:none;">
 					<span class="datacardStatusMsg" id="msgDuplicatedDisasterSerial">{-#msgDuplicatedDisasterSerial#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardFill">{-#tmsgnewcardfill#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardIsLocked">{-#tdconuse#-}</span>
