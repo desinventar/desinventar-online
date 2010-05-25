@@ -14,18 +14,10 @@
 	<script type="text/javascript" language="javascript">
 
 		function gotocard(opc) {
-			bUpdate = getDatacardUpdatePerm(jQuery('#prmUserRole').val());
 			RegionId = jQuery('#prmRegionId').val();
 			switch (opc) {
-				case "first":
-					bFound = requestDatacard('getDisasterIdFirst', $('DisasterId').value);
-					if (bUpdate) {
-						disenabutton($('btnDatacardEdit'), false);
-					}
-					disenabutton($('prev'), true);
-					disenabutton($('next'), false);
-				break;
 				case "prev":
+					bUpdate = getDatacardUpdatePerm(jQuery('#prmUserRole').val());
 					bFound = requestDatacard('getDisasterIdPrev', jQuery('#prmRecordNumber').val());
 					if (bFound == false) {
 						alert('{-#tcardnot#-}');
@@ -36,6 +28,7 @@
 					disenabutton($('next'), false);
 				break;
 				case "next":
+					bUpdate = getDatacardUpdatePerm(jQuery('#prmUserRole').val());
 					bFound = requestDatacard('getDisasterIdNext', jQuery('#prmRecordNumber').val());
 					if (bFound == false) {
 						alert('{-#tcardnot#-}');
@@ -46,6 +39,7 @@
 					disenabutton($('prev'), false);
 				break;
 				case "last":
+					bUpdate = getDatacardUpdatePerm(jQuery('#prmUserRole').val());
 					bFound = requestDatacard('getDisasterIdLast', $('DisasterId').value);
 					if (bUpdate) {
 						disenabutton($('btnDatacardEdit'), false);
@@ -130,6 +124,10 @@
 				return false;
 			});
 			
+			jQuery('#btnDatacardGotoFirst').click(function() {
+				doDatacardGotoFirst();
+			});
+			
 			// Create periodic task to keep session alive...
 			var pe = new PeriodicalExecuter(setActive, 60);
 		});
@@ -183,8 +181,7 @@
 				{-/if-}
 				<input type="button" id="btnDatacardPrint" class="bb bprint" onmouseover="Tip('{-#mprint#-}')" onmouseout="UnTip()" />
 				&nbsp;&nbsp;|&nbsp;&nbsp;
-				<input type="button" id="first" value="<<" class="bb line" onmouseover="Tip('{-#bfirst#-}')" 
-					onmouseout="UnTip()" onClick="gotocard('first')" />
+				<input type="button" id="btnDatacardGotoFirst" value="<<" class="bb line" onmouseover="Tip('{-#bfirst#-}')" onmouseout="UnTip()"/>
 				<input type="button" id="prev"  value="<" class="bb line" onmouseover="Tip('{-#bprev#-}')" 
 					onmouseout="UnTip()" onClick="gotocard('prev')" />
 				<input type="button" id="next"  value=">" class="bb line" onmouseover="Tip('{-#bnext#-}')" 

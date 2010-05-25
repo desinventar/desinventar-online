@@ -91,7 +91,7 @@ function changeOptions(but) {
 			disenabutton($('btnDatacardEdit'), true);
 			disenabutton($('btnDatacardClear'), false);
 			disenabutton($('btnDatacardCancel'), false);
-			disenabutton($('first'), true);
+			disenabutton($('btnDatacardGotoFirst'), true);
 			disenabutton($('prev'), true);
 			disenabutton($('next'), true);
 			disenabutton($('last'), true);
@@ -102,7 +102,7 @@ function changeOptions(but) {
 			disenabutton($('btnDatacardSave'), false);
 			disenabutton($('btnDatacardEdit'), true);
 			disenabutton($('btnDatacardCancel'), false);
-			disenabutton($('first'), true);
+			disenabutton($('btnDatacardGotoFirst'), true);
 			disenabutton($('prev'), true);
 			disenabutton($('next'), true);
 			disenabutton($('last'), true);
@@ -114,7 +114,7 @@ function changeOptions(but) {
 			disenabutton($('btnDatacardEdit'), false);
 			disenabutton($('btnDatacardClear'), true);
 			disenabutton($('btnDatacardCancel'), true);
-			disenabutton($('first'), false);
+			disenabutton($('btnDatacardGotoFirst'), false);
 			disenabutton($('prev'), false);
 			disenabutton($('next'), false);
 			disenabutton($('last'), false);
@@ -129,7 +129,7 @@ function changeOptions(but) {
 			disenabutton($('btnDatacardClear'), true);
 			disenabutton($('btnDatacardCancel'), true);
 			disenabutton($('btnDatacardNew'), false);
-			disenabutton($('first'), false);
+			disenabutton($('btnDatacardGotoFirst'), false);
 			disenabutton($('prev'), false);
 			disenabutton($('next'), false);
 			disenabutton($('last'), false);
@@ -310,4 +310,14 @@ function doDatacardCancel() {
 		},
 		'json'
 	);
+}
+
+function doDatacardGotoFirst() {
+	bUpdate = getDatacardUpdatePerm(jQuery('#prmUserRole').val());
+	bFound = requestDatacard('getDisasterIdFirst', $('DisasterId').value);
+	if (bUpdate) {
+		disenabutton($('btnDatacardEdit'), false);
+	}
+	disenabutton($('prev'), true);
+	disenabutton($('next'), false);
 }
