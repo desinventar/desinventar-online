@@ -20,7 +20,7 @@
 				case "first":
 					bFound = requestDatacard('getDisasterIdFirst', $('DisasterId').value);
 					if (bUpdate) {
-						disenabutton($('cardupd'), false);
+						disenabutton($('btnDatacardEdit'), false);
 					}
 					disenabutton($('prev'), true);
 					disenabutton($('next'), false);
@@ -31,7 +31,7 @@
 						alert('{-#tcardnot#-}');
 					}
 					if (bUpdate) {
-						disenabutton($('cardupd'), false);
+						disenabutton($('btnDatacardEdit'), false);
 					}
 					disenabutton($('next'), false);
 				break;
@@ -41,14 +41,14 @@
 						alert('{-#tcardnot#-}');
 					}
 					if (bUpdate) {
-						disenabutton($('cardupd'), false);
+						disenabutton($('btnDatacardEdit'), false);
 					}
 					disenabutton($('prev'), false);
 				break;
 				case "last":
 					bFound = requestDatacard('getDisasterIdLast', $('DisasterId').value);
 					if (bUpdate) {
-						disenabutton($('cardupd'), false);
+						disenabutton($('btnDatacardEdit'), false);
 					}
 					disenabutton($('prev'), false);
 					disenabutton($('next'), true);
@@ -62,25 +62,6 @@
 			displayDatacardStatusMsg('');
 			$('dic').src="about:blank";
 			switch (btn) {
-				case "cardupd":
-					// check if DC is on use
-					var lsAjax = new Ajax.Updater('distatusmsg', 'cards.php', {
-						method: 'get', parameters: 'r={-$reg-}&cmd=chklocked&DisasterId='+ $('DisasterId').value,
-						onComplete: function(request) {
-							var res = request.responseText;
-							if (res.substr(0,8) == "RESERVED") {
-								DisableEnableForm($('DICard'), false);
-								jQuery('#DisasterBeginTime0').focus();
-								$('_CMD').value = 'updateDICard';
-								uploadMsg("{-#tmsgeditcardfill#-}");
-								changeOptions(btn);
-								//parent.s.expand();
-							}
-							else 
-								uploadMsg("{-#tdconuse#-}");
-						}
-					} );
-				break;
 				case "cardsav":
 					var bContinue = true;
 					var cmd = jQuery('#_CMD').val();
@@ -187,6 +168,11 @@
 				return false;
 			});
 			
+			jQuery('#btnDatacardEdit').click(function() {
+				doDatacardEdit();
+				return false;
+			});
+			
 			// Create periodic task to keep session alive...
 			var pe = new PeriodicalExecuter(setActive, 60);
 		});
@@ -232,9 +218,8 @@
 		<tr valign="middle">
 			<td width="450px" rowspan="2">
 				{-if $ctl_validrole-}
-					<input type="button" id="btnDatacardNew" class="bb bnew" onmouseover="Tip('{-#tnewtitle#-}: {-#tnewdesc#-}')" onmouseout="UnTip()" />
-					<input type="button" id="cardupd" class="bb bupd" onmouseover="Tip('{-#tupdtitle#-}: {-#tupddesc#-}')" 
-						onmouseout="UnTip()" onClick="onSubmitBtn('cardupd');" />
+					<input type="button" id="btnDatacardNew"    class="bb bnew" onmouseover="Tip('{-#tnewtitle#-}: {-#tnewdesc#-}')" onmouseout="UnTip()" />
+					<input type="button" id="btnDatacardEdit" class="bb bupd" onmouseover="Tip('{-#tupdtitle#-}: {-#tupddesc#-}')" onmouseout="UnTip()" />
 					<input type="button" id="cardsav" class="bb bsave" onmouseover="Tip('{-#tsavtitle#-}: {-#tsavdesc#-}')" 
 						onmouseout="UnTip()" onClick="onSubmitBtn('cardsav');" />
 					<input type="button" id="cardcln" class="bb bclean" onmouseover="Tip('{-#tclntitle#-}: {-#tclndesc#-}')" 
@@ -271,10 +256,10 @@
 		</tr>
 		<tr>
 			<td align="left" valign="top" width="450px">
-				<div id="divDatacardStatusMessage">
+				<div id="divDatacardStatusMessage" style="display:none;">
 					<span class="datacardStatusMsg" id="msgDuplicatedDisasterSerial">{-#msgDuplicatedDisasterSerial#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardFill">{-#tmsgnewcardfill#-}</span>
-
+					<span class="datacardStatusMsg" id="msgDatacardIsLocked">{-#tdconuse#-}</span>
 				</div>
 				<br />
 			</td>

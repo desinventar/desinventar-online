@@ -17,7 +17,7 @@
 		setDICardfromId('{-$reg-}', prmDisasterId, 'DATA');
 		jQuery('#PrevDisasterSerial').val(jQuery('#DisasterSerial').val());
 		{-if $role == 'USER' || $role == 'SUPERVISOR' || $role == 'ADMINREGION'-}
-			cupd = window.parent.frames['dif'].document.getElementById('cardupd');
+			cupd = window.parent.frames['dif'].document.getElementById('btnDatacardEdit');
 			if (cupd != null) {
 				cupd.enable();
 				Element.addClassName(cupd, 'bb');
