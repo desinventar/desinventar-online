@@ -93,7 +93,7 @@ function changeOptions(but) {
 			disenabutton($('btnDatacardCancel'), false);
 			disenabutton($('btnDatacardGotoFirst'), true);
 			disenabutton($('btnDatacardGotoPrev'), true);
-			disenabutton($('next'), true);
+			disenabutton($('btnDatacardGotoNext'), true);
 			disenabutton($('btnDatacardGotoLast'), true);
 			disenabutton($('cardfnd'), true);
 		break;
@@ -104,7 +104,7 @@ function changeOptions(but) {
 			disenabutton($('btnDatacardCancel'), false);
 			disenabutton($('btnDatacardGotoFirst'), true);
 			disenabutton($('btnDatacardGotoPrev'), true);
-			disenabutton($('next'), true);
+			disenabutton($('btnDatacardGotoNext'), true);
 			disenabutton($('btnDatacardGotoLast'), true);
 			disenabutton($('cardfnd'), true);
 		break;
@@ -116,7 +116,7 @@ function changeOptions(but) {
 			disenabutton($('btnDatacardCancel'), true);
 			disenabutton($('btnDatacardGotoFirst'), false);
 			disenabutton($('btnDatacardGotoPrev'), false);
-			disenabutton($('next'), false);
+			disenabutton($('btnDatacardGotoNext'), false);
 			disenabutton($('btnDatacardGotoLast'), false);
 			disenabutton($('cardfnd'), false);
 		break;
@@ -131,7 +131,7 @@ function changeOptions(but) {
 			disenabutton($('btnDatacardNew'), false);
 			disenabutton($('btnDatacardGotoFirst'), false);
 			disenabutton($('btnDatacardGotoPrev'), false);
-			disenabutton($('next'), false);
+			disenabutton($('btnDatacardGotoNext'), false);
 			disenabutton($('btnDatacardGotoLast'), false);
 			disenabutton($('cardfnd'), false);
 		break;
@@ -192,7 +192,7 @@ function requestDatacard(myCmd, myValue) {
 				}
 				if (myCmd == 'getDisasterIdFromSerial') {
 					disenabutton($('btnDatacardGotoPrev'), false);
-					disenabutton($('next'), false);
+					disenabutton($('btnDatacardGotoNext'), false);
 				}
 				jQuery('#prmRecordNumber').val(data.RecordNumber);
 			} else {
@@ -313,26 +313,29 @@ function doDatacardCancel() {
 }
 
 function doDatacardGotoFirst() {
+	displayDatacardStatusMsg('');
 	bUpdate = getDatacardUpdatePerm(jQuery('#prmUserRole').val());
 	bFound = requestDatacard('getDisasterIdFirst', jQuery('#DisasterId').val());
 	if (bUpdate) {
 		disenabutton($('btnDatacardEdit'), false);
 	}
 	disenabutton($('btnDatacardGotoPrev'), true);
-	disenabutton($('next'), false);
+	disenabutton($('btnDatacardGotoNext'), false);
 }
 
 function doDatacardGotoLast() {
+	displayDatacardStatusMsg('');
 	bUpdate = getDatacardUpdatePerm(jQuery('#prmUserRole').val());
 	bFound = requestDatacard('getDisasterIdLast', jQuery('#DisasterId').val());
 	if (bUpdate) {
 		disenabutton($('btnDatacardEdit'), false);
 	}
 	disenabutton($('btnDatacardGotoPrev'), false);
-	disenabutton($('next'), true);
+	disenabutton($('btnDatacardGotoNext'), true);
 }
 
 function doDatacardGotoPrev() {
+	displayDatacardStatusMsg('');
 	bUpdate = getDatacardUpdatePerm(jQuery('#prmUserRole').val());
 	bFound = requestDatacard('getDisasterIdPrev', jQuery('#prmRecordNumber').val());
 	if (bFound == false) {
@@ -341,5 +344,18 @@ function doDatacardGotoPrev() {
 	if (bUpdate) {
 		disenabutton($('btnDatacardEdit'), false);
 	}
-	disenabutton($('next'), false);
+	disenabutton($('btnDatacardGotoNext'), false);
+}
+
+function doDatacardGotoNext() {
+	displayDatacardStatusMsg('');
+	bUpdate = getDatacardUpdatePerm(jQuery('#prmUserRole').val());
+	bFound = requestDatacard('getDisasterIdNext', jQuery('#prmRecordNumber').val());
+	if (bFound == false) {
+		displayDatacardStatusMsg('msgDatacardNotFound');
+	}
+	if (bUpdate) {
+		disenabutton($('btnDatacardEdit'), false);
+	}
+	disenabutton($('btnDatacardGotoPrev'), false);
 }
