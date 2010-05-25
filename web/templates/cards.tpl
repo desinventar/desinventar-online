@@ -62,17 +62,6 @@
 			displayDatacardStatusMsg('');
 			$('dic').src="about:blank";
 			switch (btn) {
-				case "cardcan":
-					jQuery('#DisasterBeginTime0').val('');
-					jQuery('#DisasterBeginTime1').val('');
-					jQuery('#DisasterBeginTime2').val('');
-					updateList('distatusmsg', 'cards.php', 'r={-$reg-}&cmd=chkrelease&DisasterId='+ $('DisasterId').value);
-					DisableEnableForm($('DICard'), true);
-					uploadMsg("{-#tmsgnewcard#-}");
-					changeOptions(btn);
-					// clear Help text area
-					showtip('','#ffffff');
-				break;
 				case "cardfnd":
 				break;
 			}
@@ -181,12 +170,11 @@
 		<tr valign="middle">
 			<td width="450px" rowspan="2">
 				{-if $ctl_validrole-}
-					<input type="button" id="btnDatacardNew"   class="bb bnew"   onmouseover="Tip('{-#tnewtitle#-}: {-#tnewdesc#-}')" onmouseout="UnTip()" />
-					<input type="button" id="btnDatacardEdit"  class="bb bupd"   onmouseover="Tip('{-#tupdtitle#-}: {-#tupddesc#-}')" onmouseout="UnTip()" />
-					<input type="button" id="btnDatacardSave"  class="bb bsave"  onmouseover="Tip('{-#tsavtitle#-}: {-#tsavdesc#-}')" onmouseout="UnTip()" />
-					<input type="button" id="btnDatacardClear" class="bb bclear" onmouseover="Tip('{-#tclntitle#-}: {-#tclndesc#-}')" onmouseout="UnTip()" />
-					<input type="button" id="cardcan" class="bb bcancel" onmouseover="Tip('{-#tcantitle#-}: {-#tcandesc#-}')" 
-						onmouseout="UnTip()" onClick="onSubmitBtn('cardcan');" />
+					<input type="button" id="btnDatacardNew"    class="bb bnew"    onmouseover="Tip('{-#tnewtitle#-}: {-#tnewdesc#-}')" onmouseout="UnTip()" />
+					<input type="button" id="btnDatacardEdit"   class="bb bupd"    onmouseover="Tip('{-#tupdtitle#-}: {-#tupddesc#-}')" onmouseout="UnTip()" />
+					<input type="button" id="btnDatacardSave"   class="bb bsave"   onmouseover="Tip('{-#tsavtitle#-}: {-#tsavdesc#-}')" onmouseout="UnTip()" />
+					<input type="button" id="btnDatacardClear"  class="bb bclear"  onmouseover="Tip('{-#tclntitle#-}: {-#tclndesc#-}')" onmouseout="UnTip()" />
+					<input type="button" id="btnDatacardCancel" class="bb bcancel" onmouseover="Tip('{-#tcantitle#-}: {-#tcandesc#-}')" onmouseout="UnTip()" />
 				{-/if-}
 				<input type="button" id="cardprn" class="bb bprint" onmouseover="Tip('{-#mprint#-}')" 
 					onmouseout="UnTip()" onClick="window.print();" />
@@ -219,6 +207,7 @@
 			<td align="left" valign="top" width="450px">
 				<div id="divDatacardStatusMsg" style="display:none;">
 					<span class="datacardStatusMsg" id="msgDuplicatedDisasterSerial">{-#msgDuplicatedDisasterSerial#-}</span>
+					<span class="datacardStatusMsg" id="msgDatacardStartNew">{-#tmsgnewcard#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardFill">{-#tmsgnewcardfill#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardIsLocked">{-#tdconuse#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardFieldsError">{-#errmsgfrm#-}</span>
