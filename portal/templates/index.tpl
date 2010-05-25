@@ -10,11 +10,11 @@
 	<link rel="stylesheet" href="css/portal.css" TYPE="text/css" />
 	{-include file="jquery.tpl" -}
 	<script type="text/javascript" src="{-$desinventarURL-}/include/menu.js"></script>
-	<script type="text/javascript" src="{-$desinventarURL-}/js/md5.js"></script>
-	<script type="text/javascript" src="{-$desinventarURL-}/js/user_login.js"></script>
+	<script type="text/javascript" src="{-$desinventarURL-}/include/md5.js"></script>
+	<script type="text/javascript" src="{-$desinventarURL-}/js/user_login.js?version={-$jsversion-}"></script>
 	<link type="text/css" rel="stylesheet" href="{-$desinventarURL-}/include/clickmenu/clickmenu.css" />
 	<script type="text/javascript" src="{-$desinventarURL-}/include/clickmenu/jquery.clickmenu.js"></script>
-	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/main.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" language="javascript">
 		jQuery(document).ready(function() {
 			onReadyPortal();
