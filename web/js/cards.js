@@ -85,8 +85,8 @@ function disenabutton(butid, disab) {
 
 function changeOptions(but) {
 	switch (but) {
-		case "cardnew":
-			disenabutton($('cardnew'), true);
+		case "btnDatacardNew":
+			disenabutton($('btnDatacardNew'), true);
 			disenabutton($('cardsav'), false);
 			disenabutton($('cardupd'), true);
 			disenabutton($('cardcln'), false);
@@ -98,7 +98,7 @@ function changeOptions(but) {
 			disenabutton($('cardfnd'), true);
 		break;
 		case "cardupd":
-			disenabutton($('cardnew'), true);
+			disenabutton($('btnDatacardNew'), true);
 			disenabutton($('cardsav'), false);
 			disenabutton($('cardupd'), true);
 			disenabutton($('cardcan'), false);
@@ -109,7 +109,7 @@ function changeOptions(but) {
 			disenabutton($('cardfnd'), true);
 		break;
 		case "cardsav":
-			disenabutton($('cardnew'), false);
+			disenabutton($('btnDatacardNew'), false);
 			disenabutton($('cardsav'), true);
 			disenabutton($('cardupd'), false);
 			disenabutton($('cardcln'), true);
@@ -128,7 +128,7 @@ function changeOptions(but) {
 			disenabutton($('cardsav'), true);
 			disenabutton($('cardcln'), true);
 			disenabutton($('cardcan'), true);
-			disenabutton($('cardnew'), false);
+			disenabutton($('btnDatacardNew'), false);
 			disenabutton($('first'), false);
 			disenabutton($('prev'), false);
 			disenabutton($('next'), false);
@@ -136,7 +136,7 @@ function changeOptions(but) {
 			disenabutton($('cardfnd'), false);
 		break;
 		default:
-			disenabutton($('cardnew'), false);
+			disenabutton($('btnDatacardNew'), false);
 			disenabutton($('cardsav'), true);
 			disenabutton($('cardupd'), true);
 			disenabutton($('cardcln'), true);
@@ -203,3 +203,16 @@ function requestDatacard(myCmd, myValue) {
 	return bReturn;
 }
 
+function doDatacardNew() {
+	alert('New');
+	DisableEnableForm($('DICard'), false);
+	jQuery('#DisasterBeginTime0').focus();
+	$('DisasterId').value='';
+	$('DICard').reset();
+	$('_CMD').value = 'insertDICard';
+	jQuery('#DisasterBeginTime0').val('');
+	jQuery('#DisasterBeginTime1').val('');
+	jQuery('#DisasterBeginTime2').val('');
+	displayDatacardStatusMsg('msgDatacardFill');
+	changeOptions('btnDatacardNew');
+}
