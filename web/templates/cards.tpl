@@ -62,19 +62,6 @@
 			displayDatacardStatusMsg('');
 			$('dic').src="about:blank";
 			switch (btn) {
-				case "cardnew":
-					DisableEnableForm($('DICard'), false);
-					jQuery('#DisasterBeginTime0').focus();
-					$('DisasterId').value='';
-					$('DICard').reset();
-					$('_CMD').value = 'insertDICard';
-					jQuery('#DisasterBeginTime0').val('');
-					jQuery('#DisasterBeginTime1').val('');
-					jQuery('#DisasterBeginTime2').val('');
-					uploadMsg("{-#tmsgnewcardfill#-}");
-					changeOptions(btn);
-					//parent.s.expand();
-				break;
 				case "cardupd":
 					// check if DC is on use
 					var lsAjax = new Ajax.Updater('distatusmsg', 'cards.php', {
@@ -192,6 +179,11 @@
 				    	jQuery(this).val('');
 				}
 			});
+			
+			jQuery('#btnDatacardNew').click(function() {
+				doDatacardNew();
+				return false;
+			});
 
 			// Create periodic task to keep session alive...
 			var pe = new PeriodicalExecuter(setActive, 60);
@@ -238,8 +230,7 @@
 		<tr valign="middle">
 			<td width="450px" rowspan="2">
 				{-if $ctl_validrole-}
-					<input type="button" id="cardnew" class="bb bnew" onmouseover="Tip('{-#tnewtitle#-}: {-#tnewdesc#-}')" 
-						onmouseout="UnTip()" onClick="onSubmitBtn('cardnew');" />
+					<input type="button" id="btnDatacardNew" class="bb bnew" onmouseover="Tip('{-#tnewtitle#-}: {-#tnewdesc#-}')" onmouseout="UnTip()" />
 					<input type="button" id="cardupd" class="bb bupd" onmouseover="Tip('{-#tupdtitle#-}: {-#tupddesc#-}')" 
 						onmouseout="UnTip()" onClick="onSubmitBtn('cardupd');" />
 					<input type="button" id="cardsav" class="bb bsave" onmouseover="Tip('{-#tsavtitle#-}: {-#tsavdesc#-}')" 
@@ -280,6 +271,8 @@
 			<td align="left" valign="top" width="450px">
 				<div id="divDatacardStatusMessage">
 					<span class="datacardStatusMsg" id="msgDuplicatedDisasterSerial">{-#msgDuplicatedDisasterSerial#-}</span>
+					<span class="datacardStatusMsg" id="msgDatacardFill">{-#tmsgnewcardfill#-}</span>
+
 				</div>
 				<br />
 			</td>
