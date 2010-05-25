@@ -13,22 +13,8 @@
 	<script type="text/javascript" src="js/cards.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" language="javascript">
 
-		function gotocard(opc) {
-			RegionId = jQuery('#prmRegionId').val();
-			switch (opc) {
-			}
-		}
 		function setActive() {
 			updateList('dostat', 'cards.php', 'u=1');
-		}
-		function onSubmitBtn(btn) {
-			displayDatacardStatusMsg('');
-			$('dic').src="about:blank";
-			switch (btn) {
-				case "cardfnd":
-				break;
-			}
-			return true;
 		}
 		
 		jQuery(document).ready(function() {
