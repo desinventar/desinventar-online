@@ -87,7 +87,7 @@ function changeOptions(but) {
 	switch (but) {
 		case "btnDatacardNew":
 			disenabutton($('btnDatacardNew'), true);
-			disenabutton($('cardsav'), false);
+			disenabutton($('btnDatacardSave'), false);
 			disenabutton($('btnDatacardEdit'), true);
 			disenabutton($('cardcln'), false);
 			disenabutton($('cardcan'), false);
@@ -99,7 +99,7 @@ function changeOptions(but) {
 		break;
 		case "btnDatacardEdit":
 			disenabutton($('btnDatacardNew'), true);
-			disenabutton($('cardsav'), false);
+			disenabutton($('btnDatacardSave'), false);
 			disenabutton($('btnDatacardEdit'), true);
 			disenabutton($('cardcan'), false);
 			disenabutton($('first'), true);
@@ -108,9 +108,9 @@ function changeOptions(but) {
 			disenabutton($('last'), true);
 			disenabutton($('cardfnd'), true);
 		break;
-		case "cardsav":
+		case "btnDatacardSave":
 			disenabutton($('btnDatacardNew'), false);
-			disenabutton($('cardsav'), true);
+			disenabutton($('btnDatacardSave'), true);
 			disenabutton($('btnDatacardEdit'), false);
 			disenabutton($('cardcln'), true);
 			disenabutton($('cardcan'), true);
@@ -125,7 +125,7 @@ function changeOptions(but) {
 				disenabutton($('btnDatacardEdit'), true);
 			else
 				disenabutton($('btnDatacardEdit'), false);
-			disenabutton($('cardsav'), true);
+			disenabutton($('btnDatacardSave'), true);
 			disenabutton($('cardcln'), true);
 			disenabutton($('cardcan'), true);
 			disenabutton($('btnDatacardNew'), false);
@@ -137,7 +137,7 @@ function changeOptions(but) {
 		break;
 		default:
 			disenabutton($('btnDatacardNew'), false);
-			disenabutton($('cardsav'), true);
+			disenabutton($('btnDatacardSave'), true);
 			disenabutton($('btnDatacardEdit'), true);
 			disenabutton($('cardcln'), true);
 			disenabutton($('cardcan'), true);
@@ -238,5 +238,51 @@ function doDatacardEdit() {
 			}
 		},
 		'json'
+	);
+}
+
+function doDatacardSave() {
+	var bContinue = true;
+	var cmd = jQuery('#_CMD').val();
+	var DisasterSerial = jQuery('#DisasterSerial').val();
+	var PrevDisasterSerial = jQuery('#PrevDisasterSerial').val();
+	jQuery.post('cards.php',
+		{'cmd'            : 'existDisasterSerial',
+		 'RegionId'       : jQuery('#prmRegionId').val(),
+		 'DisasterSerial' : DisasterSerial
+		},
+		function(data) {
+			bContinue = true;
+			if ( (cmd == 'insertDICard') && (data.DisasterSerial != '') ) {
+				// Serial of new datacard already exists...
+				//alert('Disaster Serial already exists...');
+				bContinue = false;
+			}
+			if (cmd == 'updateDICard') {
+				if ( (DisasterSerial != PrevDisasterSerial) && (data.DisasterSerial != '') ) {
+					// Edited Serial exists in database...
+					//alert('Disaster Serial is duplicated...');
+					bContinue = false;
+				}
+			}
+			if (bContinue == false) {
+				displayDatacardStatusMsg('msgDuplicatedDisasterSerial');
+			}
+			if (bContinue) {
+				var fl = new Array('DisasterSerial', 'DisasterBeginTime0', 'DisasterSource', 
+									'geolev0', 'EventId', 'CauseId', 'RecordStatus');
+				if (checkForm(fl, jQuery('#msgDatacardFieldsError').text())) {
+					displayDatacardStatusMsg('');
+					uploadMsg('');
+					$('DICard').submit();
+					DisableEnableForm($('DICard'), true);
+					changeOptions('btnDatacardSave');
+					// clear Help text area
+					showtip('','#ffffff');
+				} else {
+					displayDatacardStatusMsg('msgDatacardFieldsError');
+				}
+			}
+		},'json'
 	);
 }
