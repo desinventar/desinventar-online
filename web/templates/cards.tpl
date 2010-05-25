@@ -16,17 +16,6 @@
 		function gotocard(opc) {
 			RegionId = jQuery('#prmRegionId').val();
 			switch (opc) {
-				case "prev":
-					bUpdate = getDatacardUpdatePerm(jQuery('#prmUserRole').val());
-					bFound = requestDatacard('getDisasterIdPrev', jQuery('#prmRecordNumber').val());
-					if (bFound == false) {
-						alert('{-#tcardnot#-}');
-					}
-					if (bUpdate) {
-						disenabutton($('btnDatacardEdit'), false);
-					}
-					disenabutton($('next'), false);
-				break;
 				case "next":
 					bUpdate = getDatacardUpdatePerm(jQuery('#prmUserRole').val());
 					bFound = requestDatacard('getDisasterIdNext', jQuery('#prmRecordNumber').val());
@@ -36,7 +25,7 @@
 					if (bUpdate) {
 						disenabutton($('btnDatacardEdit'), false);
 					}
-					disenabutton($('prev'), false);
+					disenabutton($('btnDatacardGotoPrev'), false);
 				break;
 			}
 		}
@@ -125,6 +114,11 @@
 				return false;
 			});
 			
+			jQuery('#btnDatacardGotoPrev').click(function() {
+				doDatacardGotoPrev();
+				return false;
+			};
+			
 			// Create periodic task to keep session alive...
 			var pe = new PeriodicalExecuter(setActive, 60);
 		});
@@ -179,8 +173,7 @@
 				<input type="button" id="btnDatacardPrint" class="bb bprint" onmouseover="Tip('{-#mprint#-}')" onmouseout="UnTip()" />
 				&nbsp;&nbsp;|&nbsp;&nbsp;
 				<input type="button" id="btnDatacardGotoFirst" value="<<" class="bb line" onmouseover="Tip('{-#bfirst#-}')" onmouseout="UnTip()" />
-				<input type="button" id="prev"  value="<" class="bb line" onmouseover="Tip('{-#bprev#-}')" 
-					onmouseout="UnTip()" onClick="gotocard('prev')" />
+				<input type="button" id="btnDatacardGotoPrev"  value="<"  class="bb line" onmouseover="Tip('{-#bprev#-}')"  onmouseout="UnTip()" />
 				<input type="button" id="next"  value=">" class="bb line" onmouseover="Tip('{-#bnext#-}')" 
 					onmouseout="UnTip()" onClick="gotocard('next')" />
 				<input type="button" id="btnDatacardGotoLast"  value=">>" class="bb line" onmouseover="Tip('{-#blast#-}')" onmouseout="UnTip()" />
@@ -208,6 +201,7 @@
 					<span class="datacardStatusMsg" id="msgDatacardFill">{-#tmsgnewcardfill#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardIsLocked">{-#tdconuse#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardFieldsError">{-#errmsgfrm#-}</span>
+					<span class="datacardStatusMsg" id="msgDatacardNotFound">{-#tcardnot#-}</span>
 				</div>
 				<br />
 			</td>
