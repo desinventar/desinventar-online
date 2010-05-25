@@ -10,20 +10,23 @@
 	<script type="text/javascript" src="include/prototype.js"></script>
 	<!-- jQuery -->
 	{-include file="jquery.tpl" -}
-	<script type="text/javascript" src="include/diadmin.js?version={-$jsversion-}"></script>
+	
 	<script type="text/javascript" src="include/listMan.js"></script>
-	<link rel="stylesheet" href="css/checktree.css" type="text/css"/>
-	<link rel="stylesheet" href="css/accordion.css" type="text/css"/>
+	<script type="text/javascript" src="js/md5.js"></script>
 	<script type="text/javascript" src="include/checktree.js"></script>
 	<script type="text/javascript" src="include/wd.js"></script>
 	<script type="text/javascript" src="include/accordion.js"></script>
 	<script type="text/javascript" src="include/palette.js"></script>
-	<script type="text/javascript" src="js/md5.js"></script>
 	<script type="text/javascript" src="js/jquery.snippets.js"></script>
+
+	<script type="text/javascript" src="include/diadmin.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/user.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/user_login.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/desconsultar.js?version={-$jsversion-}"></script>
+
 	<!-- ExtJS -->
+	<link rel="stylesheet" href="css/checktree.css" type="text/css"/>
+	<link rel="stylesheet" href="css/accordion.css" type="text/css"/>
 	<link rel="stylesheet" type="text/css" href="/extJS/resources/css/ext-all.css"/>
 	<link rel="stylesheet" type="text/css" href="/extJS/resources/css/xtheme-gray.css"/>
 	<script type="text/javascript" src="/extJS/adapter/ext/ext-base.js"></script>
