@@ -178,8 +178,10 @@ function requestDatacard(myCmd, myValue) {
 	jQuery.post('cards.php',
 		{cmd:myCmd,value:myValue,r:RegionId},
 		function(data) {
-			if ( (myCmd == 'getNextSerial') && (data.DisasterSerial.length >= 5) ) {
-				$('DisasterSerial').value = myValue + '-' + data.DisasterSerial;
+			if (myCmd == 'getNextSerial') {
+				if (data.DisasterSerial.length >= 5) {
+					$('DisasterSerial').value = myValue + '-' + data.DisasterSerial;
+				}
 			} else if (data.Status == 'OK') {
 				// check valid DisasterId
 				valid = setDICardfromId(RegionId, data.DisasterId, '');

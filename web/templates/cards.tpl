@@ -184,7 +184,7 @@
 				doDatacardNew();
 				return false;
 			});
-
+			
 			// Create periodic task to keep session alive...
 			var pe = new PeriodicalExecuter(setActive, 60);
 		});
