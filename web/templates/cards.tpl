@@ -162,7 +162,9 @@
 			jQuery('#DisasterBeginTime0').blur(function() {
 				cmd = jQuery('#_CMD').val();
 				if (cmd == 'insertDICard') {
-					requestDatacard('getNextSerial', jQuery(this).val());
+					if (jQuery(this).val() != '') {
+						requestDatacard('getNextSerial', jQuery(this).val());
+					}
 				}
 			});
 			
