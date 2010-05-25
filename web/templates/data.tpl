@@ -8,7 +8,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
 	<link rel="stylesheet" href="css/desinventar.css" type="text/css"/>
 	<script type="text/javascript" src="include/prototype.js"></script>
-	<script type="text/javascript" src="include/diadmin.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="js/diadmin.js?version={-$jsversion-}"></script>
 	{-include file="jquery.tpl" -}
     <script type="text/javascript">
 	function setDIForm(prmDisasterId) {
