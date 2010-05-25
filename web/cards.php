@@ -147,14 +147,16 @@ if (isset($_GET['u'])) {
 			break;
 			case "chklocked":
 				// check if datacard is locked by some user
+				$answer = array('Status' => 'OK','DatacardStatus' => '');
 				$reserv = $us->isDatacardLocked($_GET['DisasterId']);
 				if ($reserv == '') {
 					// reserve datacard
 					$us->lockDatacard($_GET['DisasterId']);
-					echo "RESERVED";
+					$answer['DatacardStatus'] = 'RESERVED';
+				} else {
+					$answer['DatacardStatus'] = 'BLOCKED';
 				}
-				else
-					echo "BLOCKED";
+				print json_encode($answer);
 			break;
 			case "chkrelease":
 				$us->releaseDatacard($_GET['DisasterId']);

@@ -88,7 +88,7 @@ function changeOptions(but) {
 		case "btnDatacardNew":
 			disenabutton($('btnDatacardNew'), true);
 			disenabutton($('cardsav'), false);
-			disenabutton($('cardupd'), true);
+			disenabutton($('btnDatacardEdit'), true);
 			disenabutton($('cardcln'), false);
 			disenabutton($('cardcan'), false);
 			disenabutton($('first'), true);
@@ -97,10 +97,10 @@ function changeOptions(but) {
 			disenabutton($('last'), true);
 			disenabutton($('cardfnd'), true);
 		break;
-		case "cardupd":
+		case "btnDatacardEdit":
 			disenabutton($('btnDatacardNew'), true);
 			disenabutton($('cardsav'), false);
-			disenabutton($('cardupd'), true);
+			disenabutton($('btnDatacardEdit'), true);
 			disenabutton($('cardcan'), false);
 			disenabutton($('first'), true);
 			disenabutton($('prev'), true);
@@ -111,7 +111,7 @@ function changeOptions(but) {
 		case "cardsav":
 			disenabutton($('btnDatacardNew'), false);
 			disenabutton($('cardsav'), true);
-			disenabutton($('cardupd'), false);
+			disenabutton($('btnDatacardEdit'), false);
 			disenabutton($('cardcln'), true);
 			disenabutton($('cardcan'), true);
 			disenabutton($('first'), false);
@@ -122,9 +122,9 @@ function changeOptions(but) {
 		break;
 		case "cardcan":
 			if ($('DisasterId').value == "")
-				disenabutton($('cardupd'), true);
+				disenabutton($('btnDatacardEdit'), true);
 			else
-				disenabutton($('cardupd'), false);
+				disenabutton($('btnDatacardEdit'), false);
 			disenabutton($('cardsav'), true);
 			disenabutton($('cardcln'), true);
 			disenabutton($('cardcan'), true);
@@ -138,7 +138,7 @@ function changeOptions(but) {
 		default:
 			disenabutton($('btnDatacardNew'), false);
 			disenabutton($('cardsav'), true);
-			disenabutton($('cardupd'), true);
+			disenabutton($('btnDatacardEdit'), true);
 			disenabutton($('cardcln'), true);
 			disenabutton($('cardcan'), true);
 		break;
@@ -188,7 +188,7 @@ function requestDatacard(myCmd, myValue) {
 				UserRole = jQuery('#prmUserRole').val();
 				canUpdateDatacard = getDatacardUpdatePerm(UserRole);
 				if (canUpdateDatacard) {
-					disenabutton($('cardupd'), false);
+					disenabutton($('btnDatacardEdit'), false);
 				}
 				if (myCmd == 'getDisasterIdFromSerial') {
 					disenabutton($('prev'), false);
@@ -216,4 +216,27 @@ function doDatacardNew() {
 	jQuery('#DisasterBeginTime2').val('');
 	displayDatacardStatusMsg('msgDatacardFill');
 	changeOptions('btnDatacardNew');
+}
+
+function doDatacardEdit() {
+	displayDatacardStatusMsg('');
+	RegionId = jQuery('#prmRegionId').val();
+	jQuery.post('cards.php',
+		{'cmd'       : 'chklocked',
+		 'r'         : jQuery('#prmRegionId').val(),
+		'DisasterId' : jQuery('#DisasterId').val()
+		},
+		function(data) {
+			if (data.DatacardStatus == 'RESERVED') {
+				DisableEnableForm($('DICard'), false);
+				jQuery('#DisasterBeginTime0').focus();
+				jQuery('#_CMD').val('updateDICard');
+				displayDatacardStatusMsg('msgDatacardFill');
+				changeOptions('btnDatacardEdit');
+			} else {
+				displayDatacardStatusMsg('msgDatacardIsLocked');
+			}
+		},
+		'json'
+	);
 }
