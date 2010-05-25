@@ -90,7 +90,7 @@ function changeOptions(but) {
 			disenabutton($('btnDatacardSave'), false);
 			disenabutton($('btnDatacardEdit'), true);
 			disenabutton($('btnDatacardClear'), false);
-			disenabutton($('cardcan'), false);
+			disenabutton($('btnDatacardCancel'), false);
 			disenabutton($('first'), true);
 			disenabutton($('prev'), true);
 			disenabutton($('next'), true);
@@ -101,7 +101,7 @@ function changeOptions(but) {
 			disenabutton($('btnDatacardNew'), true);
 			disenabutton($('btnDatacardSave'), false);
 			disenabutton($('btnDatacardEdit'), true);
-			disenabutton($('cardcan'), false);
+			disenabutton($('btnDatacardCancel'), false);
 			disenabutton($('first'), true);
 			disenabutton($('prev'), true);
 			disenabutton($('next'), true);
@@ -113,21 +113,21 @@ function changeOptions(but) {
 			disenabutton($('btnDatacardSave'), true);
 			disenabutton($('btnDatacardEdit'), false);
 			disenabutton($('btnDatacardClear'), true);
-			disenabutton($('cardcan'), true);
+			disenabutton($('btnDatacardCancel'), true);
 			disenabutton($('first'), false);
 			disenabutton($('prev'), false);
 			disenabutton($('next'), false);
 			disenabutton($('last'), false);
 			disenabutton($('cardfnd'), false);
 		break;
-		case "cardcan":
+		case "btnDatacardCancel":
 			if ($('DisasterId').value == "")
 				disenabutton($('btnDatacardEdit'), true);
 			else
 				disenabutton($('btnDatacardEdit'), false);
 			disenabutton($('btnDatacardSave'), true);
 			disenabutton($('btnDatacardClear'), true);
-			disenabutton($('cardcan'), true);
+			disenabutton($('btnDatacardCancel'), true);
 			disenabutton($('btnDatacardNew'), false);
 			disenabutton($('first'), false);
 			disenabutton($('prev'), false);
@@ -140,7 +140,7 @@ function changeOptions(but) {
 			disenabutton($('btnDatacardSave'), true);
 			disenabutton($('btnDatacardEdit'), true);
 			disenabutton($('btnDatacardClear'), true);
-			disenabutton($('cardcan'), true);
+			disenabutton($('btnDatacardCancel'), true);
 		break;
 	}
 }
@@ -293,4 +293,21 @@ function doDatacardClear() {
 	displayDatacardStatusMsg('');
 	uploadMsg('');
 	jQuery('#DisasterBeginTime0').focus();
+}
+
+function doDatacardCancel() {
+	jQuery.post('cards.php',
+		{'cmd'        : 'chkrelease',
+		 'r'          : jQuery('#prmRegionId').val(),
+		 'DisasterId' : jQuery('#DisasterId').val()
+		},
+		function(data) {
+			DisableEnableForm($('DICard'), true);
+			changeOptions('btnDatacardCancel');
+			// clear Help text area
+			showtip('','#ffffff');
+			displayDatacardStatusMsg('msgDatacardStartNew');
+		},
+		'json'
+	);
 }
