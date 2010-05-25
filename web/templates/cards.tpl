@@ -62,48 +62,6 @@
 			displayDatacardStatusMsg('');
 			$('dic').src="about:blank";
 			switch (btn) {
-				case "cardsav":
-					var bContinue = true;
-					var cmd = jQuery('#_CMD').val();
-					var DisasterSerial = jQuery('#DisasterSerial').val();
-					var PrevDisasterSerial = jQuery('#PrevDisasterSerial').val();
-					jQuery.post('cards.php',
-						{'cmd'            : 'existDisasterSerial',
-						 'RegionId'       : '{-$reg-}',
-						 'DisasterSerial' : DisasterSerial
-						},
-						function(data) {
-							bContinue = true;
-							if ( (cmd == 'insertDICard') && (data.DisasterSerial != '') ) {
-								// Serial of new datacard already exists...
-								//alert('Disaster Serial already exists...');
-								bContinue = false;
-							}
-							if (cmd == 'updateDICard') {
-								if ( (DisasterSerial != PrevDisasterSerial) && (data.DisasterSerial != '') ) {
-									// Edited Serial exists in database...
-									//alert('Disaster Serial is duplicated...');
-									bContinue = false;
-								}
-							}
-							if (bContinue == false) {
-								displayDatacardStatusMsg('msgDuplicatedDisasterSerial');
-							}
-							if (bContinue) {
-								var fl = new Array('DisasterSerial', 'DisasterBeginTime0', 'DisasterSource', 
-													'geolev0', 'EventId', 'CauseId', 'RecordStatus');
-								if (checkForm(fl, "{-#errmsgfrm#-}")) {
-									uploadMsg('');
-									$('DICard').submit();
-									DisableEnableForm($('DICard'), true);
-									changeOptions(btn);
-									// clear Help text area
-									showtip('','#ffffff');
-								}
-							}
-						},'json'
-					);
-				break;
 				case "cardcln":
 					$('DICard').reset();
 					$('lev0').innerHTML='';
@@ -174,6 +132,11 @@
 				return false;
 			});
 			
+			jQuery('#btnDatacardSave').click(function() {
+				doDatacardSave();
+				return false;
+			});
+			
 			// Create periodic task to keep session alive...
 			var pe = new PeriodicalExecuter(setActive, 60);
 		});
@@ -219,10 +182,9 @@
 		<tr valign="middle">
 			<td width="450px" rowspan="2">
 				{-if $ctl_validrole-}
-					<input type="button" id="btnDatacardNew"    class="bb bnew" onmouseover="Tip('{-#tnewtitle#-}: {-#tnewdesc#-}')" onmouseout="UnTip()" />
-					<input type="button" id="btnDatacardEdit" class="bb bupd" onmouseover="Tip('{-#tupdtitle#-}: {-#tupddesc#-}')" onmouseout="UnTip()" />
-					<input type="button" id="cardsav" class="bb bsave" onmouseover="Tip('{-#tsavtitle#-}: {-#tsavdesc#-}')" 
-						onmouseout="UnTip()" onClick="onSubmitBtn('cardsav');" />
+					<input type="button" id="btnDatacardNew"  class="bb bnew"  onmouseover="Tip('{-#tnewtitle#-}: {-#tnewdesc#-}')" onmouseout="UnTip()" />
+					<input type="button" id="btnDatacardEdit" class="bb bupd"  onmouseover="Tip('{-#tupdtitle#-}: {-#tupddesc#-}')" onmouseout="UnTip()" />
+					<input type="button" id="btnDatacardSave" class="bb bsave" onmouseover="Tip('{-#tsavtitle#-}: {-#tsavdesc#-}')" onmouseout="UnTip()" />
 					<input type="button" id="cardcln" class="bb bclean" onmouseover="Tip('{-#tclntitle#-}: {-#tclndesc#-}')" 
 						onmouseout="UnTip()" onClick="onSubmitBtn('cardcln');" />
 					<input type="button" id="cardcan" class="bb bcancel" onmouseover="Tip('{-#tcantitle#-}: {-#tcandesc#-}')" 
@@ -261,6 +223,7 @@
 					<span class="datacardStatusMsg" id="msgDuplicatedDisasterSerial">{-#msgDuplicatedDisasterSerial#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardFill">{-#tmsgnewcardfill#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardIsLocked">{-#tdconuse#-}</span>
+					<span class="datacardStatusMsg" id="msgDatacardFieldsError">{-#errmsgfrm#-}</span>
 				</div>
 				<br />
 			</td>
