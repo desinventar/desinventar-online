@@ -62,12 +62,6 @@
 			displayDatacardStatusMsg('');
 			$('dic').src="about:blank";
 			switch (btn) {
-				case "cardcln":
-					$('DICard').reset();
-					$('lev0').innerHTML='';
-					uploadMsg('');
-					jQuery('#DisasterBeginTime0').focus();
-				break;
 				case "cardcan":
 					jQuery('#DisasterBeginTime0').val('');
 					jQuery('#DisasterBeginTime1').val('');
@@ -137,6 +131,11 @@
 				return false;
 			});
 			
+			jQuery('#btnDatacardClear').click(function() {
+				doDatacardClear();
+				return false;
+			});
+			
 			// Create periodic task to keep session alive...
 			var pe = new PeriodicalExecuter(setActive, 60);
 		});
@@ -156,7 +155,7 @@
 			background-image: url(images/cancelicon.png) !important; 
 			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
 		}
-		.bclean {
+		.bclear {
 			background-image: url(images/cleanicon.png) !important; 
 			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
 		}
@@ -182,11 +181,10 @@
 		<tr valign="middle">
 			<td width="450px" rowspan="2">
 				{-if $ctl_validrole-}
-					<input type="button" id="btnDatacardNew"  class="bb bnew"  onmouseover="Tip('{-#tnewtitle#-}: {-#tnewdesc#-}')" onmouseout="UnTip()" />
-					<input type="button" id="btnDatacardEdit" class="bb bupd"  onmouseover="Tip('{-#tupdtitle#-}: {-#tupddesc#-}')" onmouseout="UnTip()" />
-					<input type="button" id="btnDatacardSave" class="bb bsave" onmouseover="Tip('{-#tsavtitle#-}: {-#tsavdesc#-}')" onmouseout="UnTip()" />
-					<input type="button" id="cardcln" class="bb bclean" onmouseover="Tip('{-#tclntitle#-}: {-#tclndesc#-}')" 
-						onmouseout="UnTip()" onClick="onSubmitBtn('cardcln');" />
+					<input type="button" id="btnDatacardNew"   class="bb bnew"   onmouseover="Tip('{-#tnewtitle#-}: {-#tnewdesc#-}')" onmouseout="UnTip()" />
+					<input type="button" id="btnDatacardEdit"  class="bb bupd"   onmouseover="Tip('{-#tupdtitle#-}: {-#tupddesc#-}')" onmouseout="UnTip()" />
+					<input type="button" id="btnDatacardSave"  class="bb bsave"  onmouseover="Tip('{-#tsavtitle#-}: {-#tsavdesc#-}')" onmouseout="UnTip()" />
+					<input type="button" id="btnDatacardClear" class="bb bclear" onmouseover="Tip('{-#tclntitle#-}: {-#tclndesc#-}')" onmouseout="UnTip()" />
 					<input type="button" id="cardcan" class="bb bcancel" onmouseover="Tip('{-#tcantitle#-}: {-#tcandesc#-}')" 
 						onmouseout="UnTip()" onClick="onSubmitBtn('cardcan');" />
 				{-/if-}
