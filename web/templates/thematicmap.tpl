@@ -16,6 +16,7 @@
 		{-/if-}
 		<script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid=euzuro-openlayers"></script>
 	{-/if-}
+	<link rel="stylesheet" href="css/desinventar.css?version={-$jsversion-}" type="text/css"/>
 	<script src="/openlayers/lib/OpenLayers.js"></script>
 	{-include file="jquery.tpl"-}
 	<script type="text/javascript">
@@ -208,7 +209,6 @@
 			});
 		}
 	</script>
-	<link rel="stylesheet" href="css/desinventar.css" type="text/css"/>
 	<style type="text/css">
 		#map {	width: 100%; height: 100%; border: 1px solid black; }
 		#queryOut {	width:800px; height: 200px; border: 1px solid black;

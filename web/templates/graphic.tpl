@@ -9,6 +9,7 @@
 		<META HTTP-EQUIV="expires" CONTENT="Wed, 09 Aug 2000 08:21:57 GMT">
 		<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 		<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+		<link rel="stylesheet" href="css/desinventar.css?version={-$jsversion-}" type="text/css"/>
 		<script type="text/javascript">
 			window.onload = function() {
 				var qrydet = parent.document.getElementById('querydetails');
@@ -26,7 +27,6 @@
 				qrydet.innerHTML = qdet;
 			}
 		</script>
-		<link rel="stylesheet" href="css/desinventar.css" type="text/css"/>
 	</head>
 	<body>
 		<p align="right">{-#trepnum#-}: {-$NumRecords-}</p>
