@@ -204,7 +204,6 @@ function requestDatacard(myCmd, myValue) {
 }
 
 function doDatacardNew() {
-	alert('New');
 	DisableEnableForm($('DICard'), false);
 	jQuery('#DisasterBeginTime0').focus();
 	$('DisasterId').value='';
