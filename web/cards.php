@@ -84,9 +84,6 @@ if ($sRegionId == '') {
 	$t->assign('reg', $sRegionId);
 }
 
-$jsversion = time();
-$t->assign('jsversion', $jsversion);
-
 // 2009-08-07 (jhcaiced) Validate if Database Exists...
 if (! file_exists($us->q->getDBFile($sRegionId))) {
 	print "<h3>Requested Region doesn't exist<br>";

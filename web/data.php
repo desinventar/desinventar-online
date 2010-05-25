@@ -7,14 +7,14 @@ require_once('include/loader.php');
 
 $post = $_POST;
 
-if (isset($post['_REG']) && !empty($post['_REG']))
+if (isset($post['_REG']) && !empty($post['_REG'])) {
 	$reg = $post['_REG'];
-elseif (isset($post['r']) && !empty($post['r']))
+} elseif (isset($post['r']) && !empty($post['r'])) {
 	$reg = $post['r'];
-else
+} else {
 	exit();
+}
 
-$t->assign('jsversion', time());
 $us->open($reg);
 
 $regname = $us->q->getDBInfoValue('RegionLabel');

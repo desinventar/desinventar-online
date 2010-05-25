@@ -9,10 +9,11 @@ require_once('include/graphic.class.php');
 
 $post = $_POST;
 
-if (isset($post['_REG']) && !empty($post['_REG']))
-	$reg = $post['_REG'];
-else
+$reg = getParameter('_REG','');
+
+if ($reg == '') {
 	exit();
+}
 
 $us->open($reg);
 
