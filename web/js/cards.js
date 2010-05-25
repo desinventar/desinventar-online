@@ -94,7 +94,7 @@ function changeOptions(but) {
 			disenabutton($('btnDatacardGotoFirst'), true);
 			disenabutton($('prev'), true);
 			disenabutton($('next'), true);
-			disenabutton($('last'), true);
+			disenabutton($('btnDatacardGotoLast'), true);
 			disenabutton($('cardfnd'), true);
 		break;
 		case "btnDatacardEdit":
@@ -105,7 +105,7 @@ function changeOptions(but) {
 			disenabutton($('btnDatacardGotoFirst'), true);
 			disenabutton($('prev'), true);
 			disenabutton($('next'), true);
-			disenabutton($('last'), true);
+			disenabutton($('btnDatacardGotoLast'), true);
 			disenabutton($('cardfnd'), true);
 		break;
 		case "btnDatacardSave":
@@ -117,7 +117,7 @@ function changeOptions(but) {
 			disenabutton($('btnDatacardGotoFirst'), false);
 			disenabutton($('prev'), false);
 			disenabutton($('next'), false);
-			disenabutton($('last'), false);
+			disenabutton($('btnDatacardGotoLast'), false);
 			disenabutton($('cardfnd'), false);
 		break;
 		case "btnDatacardCancel":
@@ -132,7 +132,7 @@ function changeOptions(but) {
 			disenabutton($('btnDatacardGotoFirst'), false);
 			disenabutton($('prev'), false);
 			disenabutton($('next'), false);
-			disenabutton($('last'), false);
+			disenabutton($('btnDatacardGotoLast'), false);
 			disenabutton($('cardfnd'), false);
 		break;
 		default:
@@ -314,10 +314,20 @@ function doDatacardCancel() {
 
 function doDatacardGotoFirst() {
 	bUpdate = getDatacardUpdatePerm(jQuery('#prmUserRole').val());
-	bFound = requestDatacard('getDisasterIdFirst', $('DisasterId').value);
+	bFound = requestDatacard('getDisasterIdFirst', jQuery('#DisasterId').val());
 	if (bUpdate) {
 		disenabutton($('btnDatacardEdit'), false);
 	}
 	disenabutton($('prev'), true);
 	disenabutton($('next'), false);
+}
+
+function doDatacardGotoLast() {
+	bUpdate = getDatacardUpdatePerm(jQuery('#prmUserRole').val());
+	bFound = requestDatacard('getDisasterIdLast', jQuery('#DisasterId').val());
+	if (bUpdate) {
+		disenabutton($('btnDatacardEdit'), false);
+	}
+	disenabutton($('prev'), false);
+	disenabutton($('next'), true);
 }

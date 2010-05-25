@@ -38,15 +38,6 @@
 					}
 					disenabutton($('prev'), false);
 				break;
-				case "last":
-					bUpdate = getDatacardUpdatePerm(jQuery('#prmUserRole').val());
-					bFound = requestDatacard('getDisasterIdLast', $('DisasterId').value);
-					if (bUpdate) {
-						disenabutton($('btnDatacardEdit'), false);
-					}
-					disenabutton($('prev'), false);
-					disenabutton($('next'), true);
-				break;
 			}
 		}
 		function setActive() {
@@ -126,6 +117,12 @@
 			
 			jQuery('#btnDatacardGotoFirst').click(function() {
 				doDatacardGotoFirst();
+				return false;
+			});
+
+			jQuery('#btnDatacardGotoLast').click(function() {
+				doDatacardGotoLast();
+				return false;
 			});
 			
 			// Create periodic task to keep session alive...
@@ -181,13 +178,12 @@
 				{-/if-}
 				<input type="button" id="btnDatacardPrint" class="bb bprint" onmouseover="Tip('{-#mprint#-}')" onmouseout="UnTip()" />
 				&nbsp;&nbsp;|&nbsp;&nbsp;
-				<input type="button" id="btnDatacardGotoFirst" value="<<" class="bb line" onmouseover="Tip('{-#bfirst#-}')" onmouseout="UnTip()"/>
+				<input type="button" id="btnDatacardGotoFirst" value="<<" class="bb line" onmouseover="Tip('{-#bfirst#-}')" onmouseout="UnTip()" />
 				<input type="button" id="prev"  value="<" class="bb line" onmouseover="Tip('{-#bprev#-}')" 
 					onmouseout="UnTip()" onClick="gotocard('prev')" />
 				<input type="button" id="next"  value=">" class="bb line" onmouseover="Tip('{-#bnext#-}')" 
 					onmouseout="UnTip()" onClick="gotocard('next')" />
-				<input type="button" id="last"  value=">>" class="bb line" onmouseover="Tip('{-#blast#-}')" 
-					onmouseout="UnTip()" onClick="gotocard('last')" />
+				<input type="button" id="btnDatacardGotoLast"  value=">>" class="bb line" onmouseover="Tip('{-#blast#-}')" onmouseout="UnTip()" />
 				&nbsp;&nbsp;|&nbsp;&nbsp;
 				{-$dis.DisasterSerial[0]-}
 				<input type="text" id="fndserial" style="width:60px;" class="line"
