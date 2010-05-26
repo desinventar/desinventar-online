@@ -1,3 +1,88 @@
+function onReadyDatacards() {
+	// Hide StatusMessages
+	displayDatacardStatusMsg('');
+	jQuery('#divDatacardStatusMsg').show();
+	// Hide window's parameters
+	jQuery('#divDatacardParameter').hide();
+	
+	DisableEnableForm($('DICard'), true);
+	changeOptions();
+	UserRole = jQuery('#prmUserRole').val();
+	if (UserRole != '') {
+		displayDatacardStatusMsg('msgDatacardStartNew');
+	}
+
+	jQuery('#DisasterBeginTime0').blur(function() {
+		cmd = jQuery('#_CMD').val();
+		if (cmd == 'insertDICard') {
+			if (jQuery(this).val() != '') {
+				requestDatacard('getNextSerial', jQuery(this).val());
+			}
+		}
+	});
+	
+	jQuery('#DisasterBeginTime1').blur(function() {
+		if (parseInt(jQuery(this).val(),10) < 1 || 
+			parseInt(jQuery(this).val(),10) > 12 ) {
+				jQuery(this).val('');
+		}
+	});
+
+	jQuery('#DisasterBeginTime2').blur(function() {
+		if (parseInt(jQuery(this).val(),10) < 1 || 
+			parseInt(jQuery(this).val(),10) > 31 ) {
+				jQuery(this).val('');
+		}
+	});
+	
+	jQuery('#btnDatacardNew').click(function() {
+		doDatacardNew();
+		return false;
+	});
+	
+	jQuery('#btnDatacardEdit').click(function() {
+		doDatacardEdit();
+		return false;
+	});
+	
+	jQuery('#btnDatacardSave').click(function() {
+		doDatacardSave();
+		return false;
+	});
+	
+	jQuery('#btnDatacardClear').click(function() {
+		doDatacardClear();
+		return false;
+	});
+	
+	jQuery('#btnDatacardPrint').click(function() {
+		window.print();
+		return false;
+	});
+	
+	jQuery('#btnDatacardGotoFirst').click(function() {
+		doDatacardGotoFirst();
+		return false;
+	});
+
+	jQuery('#btnDatacardGotoLast').click(function() {
+		doDatacardGotoLast();
+		return false;
+	});
+	
+	jQuery('#btnDatacardGotoPrev').click(function() {
+		doDatacardGotoPrev();
+		return false;
+	});
+	
+	jQuery('#btnDatacardGotoNext').click(function() {
+		doDatacardGotoNext();
+		return false;
+	});
+	
+	// Create periodic task to keep session alive...
+	var pe = new PeriodicalExecuter(doKeepSessionActive, 60);
+}
 
 var mod = "di";
 
@@ -273,7 +358,6 @@ function doDatacardSave() {
 									'geolev0', 'EventId', 'CauseId', 'RecordStatus');
 				if (checkForm(fl, jQuery('#msgDatacardFieldsError').text())) {
 					displayDatacardStatusMsg('');
-					uploadMsg('');
 					$('DICard').submit();
 					DisableEnableForm($('DICard'), true);
 					changeOptions('btnDatacardSave');
@@ -291,7 +375,6 @@ function doDatacardClear() {
 	$('DICard').reset();
 	$('lev0').innerHTML='';
 	displayDatacardStatusMsg('');
-	uploadMsg('');
 	jQuery('#DisasterBeginTime0').focus();
 }
 
