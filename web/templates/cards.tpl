@@ -39,13 +39,9 @@
 				<input type="button" id="btnDatacardGotoLast"  value=">>" class="bb line" onmouseover="Tip('{-#blast#-}')"  onmouseout="UnTip()" />
 				&nbsp;&nbsp;|&nbsp;&nbsp;
 				{-$dis.DisasterSerial[0]-}
-				<input type="text" id="fndserial" style="width:60px;" class="line"
-					onKeyDown="if(event.keyCode==13) requestDatacard('getDisasterIdFromSerial', $('fndserial').value);" />
-				<input type="button" id="cardfnd" class="bb bfind" onmouseover="Tip('{-#texptitle#-}')" onmouseout="UnTip()" 
-					onClick="if($('fndserial').value !='') requestDatacard('getDisasterIdFromSerial', $('fndserial').value); 
-						else alert('{-#bexpsearch#-}: {-#texpdesc#-}')" />
-				<br />
-				
+				<input type="text"   id="txtDatacardFind" style="width:60px;" class="line" />
+				<input type="button" id="btnDatacardFind" class="bb bfind" onmouseover="Tip('{-#texptitle#-}')" onmouseout="UnTip()" />
+				<br />				
 				<span class="dlgmsg" id="distatusmsg"></span>
 				<span class="dlgmsg" id="dostat"></span>
 			</td>

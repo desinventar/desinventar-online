@@ -12,6 +12,9 @@ function onReadyDatacards() {
 		displayDatacardStatusMsg('msgDatacardStartNew');
 	}
 
+	// Create periodic task to keep session alive...
+	var pe = new PeriodicalExecuter(doKeepSessionActive, 60);
+
 	jQuery('#DisasterBeginTime0').blur(function() {
 		cmd = jQuery('#_CMD').val();
 		if (cmd == 'insertDICard') {
@@ -79,10 +82,18 @@ function onReadyDatacards() {
 		doDatacardGotoNext();
 		return false;
 	});
+
+	jQuery('#txtDatacardFind').keydown(function(event) {
+		if(event.keyCode == 13) {
+			doDatacardFind();
+		}
+	});	
 	
-	// Create periodic task to keep session alive...
-	var pe = new PeriodicalExecuter(doKeepSessionActive, 60);
+	jQuery('#btnDatacardFind').click(function() {
+		doDatacardFind();
+	});
 }
+
 
 var mod = "di";
 
@@ -180,7 +191,7 @@ function changeOptions(but) {
 			disenabutton($('btnDatacardGotoPrev'), true);
 			disenabutton($('btnDatacardGotoNext'), true);
 			disenabutton($('btnDatacardGotoLast'), true);
-			disenabutton($('cardfnd'), true);
+			disenabutton($('btnDatacardFind'), true);
 		break;
 		case "btnDatacardEdit":
 			disenabutton($('btnDatacardNew'), true);
@@ -191,7 +202,7 @@ function changeOptions(but) {
 			disenabutton($('btnDatacardGotoPrev'), true);
 			disenabutton($('btnDatacardGotoNext'), true);
 			disenabutton($('btnDatacardGotoLast'), true);
-			disenabutton($('cardfnd'), true);
+			disenabutton($('btnDatacardFind'), true);
 		break;
 		case "btnDatacardSave":
 			disenabutton($('btnDatacardNew'), false);
@@ -203,7 +214,7 @@ function changeOptions(but) {
 			disenabutton($('btnDatacardGotoPrev'), false);
 			disenabutton($('btnDatacardGotoNext'), false);
 			disenabutton($('btnDatacardGotoLast'), false);
-			disenabutton($('cardfnd'), false);
+			disenabutton($('btnDatacardFind'), false);
 		break;
 		case "btnDatacardCancel":
 			if ($('DisasterId').value == "")
@@ -218,7 +229,7 @@ function changeOptions(but) {
 			disenabutton($('btnDatacardGotoPrev'), false);
 			disenabutton($('btnDatacardGotoNext'), false);
 			disenabutton($('btnDatacardGotoLast'), false);
-			disenabutton($('cardfnd'), false);
+			disenabutton($('btnDatacardFind'), false);
 		break;
 		default:
 			disenabutton($('btnDatacardNew'), false);
@@ -268,18 +279,23 @@ function requestDatacard(myCmd, myValue) {
 					$('DisasterSerial').value = myValue + '-' + data.DisasterSerial;
 				}
 			} else if (data.Status == 'OK') {
-				// check valid DisasterId
-				valid = setDICardfromId(RegionId, data.DisasterId, '');
-				UserRole = jQuery('#prmUserRole').val();
-				canUpdateDatacard = getDatacardUpdatePerm(UserRole);
-				if (canUpdateDatacard) {
-					disenabutton($('btnDatacardEdit'), false);
+				displayDatacardStatusMsg('');
+				if (data.DisasterId != '') {
+					valid = setDICardfromId(RegionId, data.DisasterId, '');
+					UserRole = jQuery('#prmUserRole').val();
+					canUpdateDatacard = getDatacardUpdatePerm(UserRole);
+					if (canUpdateDatacard) {
+						disenabutton($('btnDatacardEdit'), false);
+					}
+					if (myCmd == 'getDisasterIdFromSerial') {
+						disenabutton($('btnDatacardGotoPrev'), false);
+						disenabutton($('btnDatacardGotoNext'), false);
+					}
+					jQuery('#prmRecordNumber').val(data.RecordNumber);
+				} else {
+					displayDatacardStatusMsg('msgDatacardNotFound');
+					bReturn = false;
 				}
-				if (myCmd == 'getDisasterIdFromSerial') {
-					disenabutton($('btnDatacardGotoPrev'), false);
-					disenabutton($('btnDatacardGotoNext'), false);
-				}
-				jQuery('#prmRecordNumber').val(data.RecordNumber);
 			} else {
 				bReturn = false;
 			}
@@ -288,6 +304,12 @@ function requestDatacard(myCmd, myValue) {
 	);
 	$('dostat').innerHTML = "";
 	return bReturn;
+}
+
+function doDatacardFind() {
+	if(jQuery('#txtDatacardFind').val() !='') {
+		requestDatacard('getDisasterIdFromSerial', jQuery('#txtDatacardFind').val());
+	}
 }
 
 function doDatacardNew() {
