@@ -18,10 +18,26 @@ function onReadyDatacards() {
 	jQuery('#DisasterBeginTime0').blur(function() {
 		cmd = jQuery('#_CMD').val();
 		if (cmd == 'insertDICard') {
-			if (jQuery(this).val() != '') {
-				requestDatacard('getNextSerial', jQuery(this).val());
-			}
+			doDatacardSuggestSerial();
 		}
+	});
+
+	jQuery('#linkDatacardSuggestSerial').click(function() {
+		if (jQuery('#DisasterSerial').attr('disabled') == false) {
+			doDatacardSuggestSerial();
+		}
+	});
+
+	jQuery('.inputInteger').keydown(function(event) {
+		return blockChars(event, jQuery(this).val(), 'integer:' + jQuery(this).attr('MaxLength'));
+	});
+
+	jQuery('.inputText').keydown(function(event) {
+		return blockChars(event, jQuery(this).val(), 'text:');
+	});
+
+	jQuery('.inputAlphaNumber').keydown(function(event) {
+		return blockChars(event, jQuery(this).val(), 'alphanumber:');
 	});
 	
 	jQuery('#DisasterBeginTime1').blur(function() {
@@ -30,6 +46,7 @@ function onReadyDatacards() {
 				jQuery(this).val('');
 		}
 	});
+	
 
 	jQuery('#DisasterBeginTime2').blur(function() {
 		if (parseInt(jQuery(this).val(),10) < 1 || 
@@ -467,4 +484,10 @@ function doDatacardGotoNext() {
 
 function doKeepSessionActive() {
 	updateList('dostat', 'cards.php', 'u=1');
+}
+
+function doDatacardSuggestSerial() {
+	if (jQuery('#DisasterBeginTime0').val() != '') {
+		requestDatacard('getNextSerial', jQuery('#DisasterBeginTime0').val());
+	}
 }

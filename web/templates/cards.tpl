@@ -69,7 +69,7 @@
 		<input type="hidden" name="RecordAuthor" id="RecordAuthor" value="{-$usr-}">
 		<input type="hidden" name="RecordCreation" id="RecordCreation">
 		<input type="hidden" name="_CMD" id="_CMD" value="">
-		<input type="hidden" name="PrevDisasterSerial~~" id="PrevDisasterSerial" value="">
+		<input type="hidden" name="PrevDisasterSerial" id="PrevDisasterSerial" value="">
 		<table border="1" cellspacing="8" width="900px">
 			<!-- DATACARD INFORMATION SECTION -->
 			<tr>
@@ -81,21 +81,17 @@
 						<tr valign="top">
 							<td onmouseover="Tip('{-$dis.DisasterBeginTime[1]-}')" onmouseout="UnTip()">
 								{-$dis.DisasterBeginTime[0]-}<b style="color:darkred;">*</b><br />
-								<input id="DisasterBeginTime0" name="DisasterBeginTime[0]" style="width:36px;" class="line"
-									tabindex="1" type="text" maxlength="4" onFocus="showtip('{-$dis.DisasterBeginTime[2]-}', '#d4baf6')"
-									onkeypress="return blockChars(event, this.value, 'integer:4');" />
-								<input id="DisasterBeginTime1" name="DisasterBeginTime[1]" style="width:18px;" class="line"
-									tabindex="2" type="text" maxlength="2" onFocus="showtip('{-$dis.DisasterBeginTime[2]-}', '#d4baf6')"
-									onkeypress="return blockChars(event, this.value, 'integer:2');" />
-								<input id="DisasterBeginTime2" name="DisasterBeginTime[2]" style="width:18px;" class="line"
-									tabindex="3" type="text" maxlength="2" onFocus="showtip('{-$dis.DisasterBeginTime[2]-}', '#d4baf6')"
-									onkeypress="return blockChars(event, this.value, 'integer:2');" />
+								<input id="DisasterBeginTime0" name="DisasterBeginTime[0]" style="width:36px;" type="text"
+									class="line inputInteger" tabindex="1" maxlength="4" onFocus="showtip('{-$dis.DisasterBeginTime[2]-}', '#d4baf6')" />
+								<input id="DisasterBeginTime1" name="DisasterBeginTime[1]" style="width:18px;" type="text" 
+									class="line inputInteger" tabindex="2" maxlength="2" onFocus="showtip('{-$dis.DisasterBeginTime[2]-}', '#d4baf6')" />
+								<input id="DisasterBeginTime2" name="DisasterBeginTime[2]" style="width:18px;" type="text"
+									class="line inputInteger" tabindex="3"  maxlength="2" onFocus="showtip('{-$dis.DisasterBeginTime[2]-}', '#d4baf6')" />
 							</td>
 							<td onmouseover="Tip('{-$dis.DisasterSource[1]-}')" onmouseout="UnTip()">
 								{-$dis.DisasterSource[0]-}<b style="color:darkred;">*</b><br />
-								<input id="DisasterSource" name="DisasterSource" size="50" class="line" type="text" 
-									onkeypress="return blockChars(event, this.value, 'text:');"
-									tabindex="4" onFocus="showtip('{-$dis.DisasterSource[2]-}', '#d4baf6')" />
+								<input id="DisasterSource" name="DisasterSource" type="text" size="50"
+									class="line inputText" tabindex="4" onFocus="showtip('{-$dis.DisasterSource[2]-}', '#d4baf6')" />
 							</td>
 							<td>
 								{-#tstatus#-}<b style="color:darkred;">*</b><br />
@@ -111,11 +107,9 @@
 							</td>
 							<td onmouseover="Tip('{-$dis.DisasterSerial[1]-}')" onmouseout="UnTip()">
 								{-$dis.DisasterSerial[0]-}<b style="color:darkred;">*<br />
-								<input id="DisasterSerial" name="DisasterSerial" type="text" size="15" class="line"
-									tabindex="6" maxlength="50" onFocus="showtip('{-$dis.DisasterSerial[2]-}', '#d4baf6')"
-									onkeypress="return blockChars(event, this.value, 'alphanumber:');" />
-								<a href="javascript:void(0);" onClick="if(!$('DisasterSerial').disabled) requestDatacard('getNextSerial', 
-									$('DisasterBeginTime0').value);"><img src="images/reload.jpg" border="0" />
+								<input id="DisasterSerial" name="DisasterSerial" type="text" size="15" 
+									class="line inputAlphaNumber" tabindex="6" maxlength="50" onFocus="showtip('{-$dis.DisasterSerial[2]-}', '#d4baf6')" />
+								<a href="#" id="linkDatacardSuggestSerial"><img src="images/reload.jpg" border="0" />
 								</a>
 							</td>
 						</tr>
