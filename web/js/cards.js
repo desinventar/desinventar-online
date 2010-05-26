@@ -113,8 +113,17 @@ function onReadyDatacards() {
 	jQuery('#btnDatacardFind').click(function() {
 		doDatacardFind();
 	});
+	
+	jQuery('#linkDatacardShowEffectsBasic').click(function() {
+		jQuery('#divDatacardEffectsBasic').show();
+		jQuery('#divDatacardEffectsAditional').hide();
+	});
+	
+	jQuery('#linkDatacardShowEffectsAditional').click(function() {
+		jQuery('#divDatacardEffectsBasic').hide();
+		jQuery('#divDatacardEffectsAditional').show();
+	});
 }
-
 
 var mod = "di";
 
@@ -259,21 +268,6 @@ function changeOptions(but) {
 			disenabutton($('btnDatacardClear'), true);
 			disenabutton($('btnDatacardCancel'), true);
 		break;
-	}
-}
-
-function switchEff(section) {
-	if (section == 'effext') {
-		$('eeimg').src="images/di_efftag.png";
-		$('efimg').src="images/di_eeftag.png";
-		$('effbas').style.display='none';
-		$('effext').style.display='block';
-	}
-	if (section == 'effbas') {
-		$('efimg').src="images/di_efftag.png";
-		$('eeimg').src="images/di_eeftag.png";
-		$('effbas').style.display='block';
-		$('effext').style.display='none';
 	}
 }
 
