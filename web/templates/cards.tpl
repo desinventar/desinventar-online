@@ -139,8 +139,8 @@
 							<td onmouseover="Tip('{-$dis.DisasterSiteNotes[1]-}')" onmouseout="UnTip()">
 								{-$dis.DisasterSiteNotes[0]-}<br />
 								<textarea id="DisasterSiteNotes" name="DisasterSiteNotes" style="height: 40px;" cols="25"
-									class="inputText" tabindex="{-$tabind-}" onFocus="showtip('{-$dis.DisasterSiteNotes[2]-}', '#d4baf6')">
-								</textarea>
+									class="inputText" tabindex="{-$tabind-}" 
+									onFocus="showtip('{-$dis.DisasterSiteNotes[2]-}', '#d4baf6')"></textarea>
 							</td>
 							<td>
 								{-assign var="tabind" value="`$tabind+1`"-}
@@ -263,9 +263,7 @@
 									<span onmouseover="Tip('{-$item[1]-}')" onmouseout="UnTip()">
 										{-$item[0]-}<br />
 										<textarea id="{-$key-}" name="{-$key-}" cols="25" style="height: {-if $key=='EffectNotes'-}70{-else-}30{-/if-}px;"
-											class="inputText" 
-											onFocus="showtip('{-$item[2]-}', '#f1bd41')" tabindex="{-$tabind-}">
-										</textarea>
+											class="inputText" onFocus="showtip('{-$item[2]-}', '#f1bd41')" tabindex="{-$tabind-}"></textarea>
 									</span>
 									<br />
 								{-/foreach-}
