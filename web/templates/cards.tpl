@@ -139,25 +139,23 @@
 							<td onmouseover="Tip('{-$dis.DisasterSiteNotes[1]-}')" onmouseout="UnTip()">
 								{-$dis.DisasterSiteNotes[0]-}<br />
 								<textarea id="DisasterSiteNotes" name="DisasterSiteNotes" style="height: 40px;" cols="25"
-									onkeypress="return blockChars(event, this.value, 'text:');"
-									tabindex="{-$tabind-}" onFocus="showtip('{-$dis.DisasterSiteNotes[2]-}', '#d4baf6')"></textarea>
+									class="inputText" tabindex="{-$tabind-}" onFocus="showtip('{-$dis.DisasterSiteNotes[2]-}', '#d4baf6')">
+								</textarea>
 							</td>
 							<td>
 								{-assign var="tabind" value="`$tabind+1`"-}
 								<span onmouseover="Tip('{-$dis.DisasterLatitude[1]-}')" onmouseout="UnTip()">
 								{-$dis.DisasterLatitude[0]-}<br />
-								<input id="DisasterLatitude" name="DisasterLatitude" type="text" size="10" class="line"
-									tabindex="{-$tabind-}" onFocus="showtip('{-$dis.DisasterLatitude[2]-}', '#d4baf6')"
-									onkeypress="return blockChars(event, this.value, 'double:10');" />
+								<input id="DisasterLatitude" name="DisasterLatitude" type="text" size="10" maxlength="10"
+									class="line inputDouble" tabindex="{-$tabind-}" onFocus="showtip('{-$dis.DisasterLatitude[2]-}', '#d4baf6')" />
 								</span>
 								<br />
 								{-assign var="tabind" value="`$tabind+1`"-}
 								<span onmouseover="Tip('{-$dis.DisasterLongitude[1]-}')" onmouseout="UnTip()">
 									{-$dis.DisasterLongitude[0]-}
 									<br />
-									<input id="DisasterLongitude" name="DisasterLongitude" type="text" size="10" class="line"
-										tabindex="{-$tabind-}" onFocus="showtip('{-$dis.DisasterLongitude[2]-}', '#d4baf6')"
-										onkeypress="return blockChars(event, this.value, 'double:10');" />
+									<input id="DisasterLongitude" name="DisasterLongitude" type="text" size="10" maxlength="10" 
+										class="line inputDouble" tabindex="{-$tabind-}" onFocus="showtip('{-$dis.DisasterLongitude[2]-}', '#d4baf6')" />
 								</span>
 								<br />
 							</td>
@@ -239,10 +237,10 @@
 									{-assign var="tabind" value="`$tabind+1`"-}
 									<span onmouseover="Tip('{-$item[1]-}')" onmouseout="UnTip()">
 										{-$item[0]-}<br />
-										<input id="{-$key-}" name="{-$key-}" type="text" size="7" 
+										<input id="{-$key-}" name="{-$key-}" type="text" size="7" maxlength="10"
+											class="line inputDouble" tabindex="{-$tabind-}" value="0"
 											onBlur="if(parseInt(this.value) > 0) { $('{-$sc3[$key]-}').value='-1';} if(parseInt(this.value) ==0) { $('{-$sc3[$key]-}').value='0';}"
-											onFocus="showtip('{-$item[2]-}', '#f1bd41')" tabindex="{-$tabind-}" class="line"
-											onkeypress="return blockChars(event, this.value, 'double:10');" value="0" />
+											onFocus="showtip('{-$item[2]-}', '#f1bd41')" />
 									</span>
 									<br />
 								{-/foreach-}
@@ -254,9 +252,9 @@
 									{-assign var="tabind" value="`$tabind+1`"-}
 									<span onmouseover="Tip('{-$item[1]-}')" onmouseout="UnTip()">
 										{-$item[0]-}<br />
-										<input id="{-$key-}" name="{-$key-}" type="text" size="11" tabindex="{-$tabind-}" class="line"
-											onFocus="showtip('{-$item[2]-}', '#f1bd41');" value="0" 
-											onkeypress="return blockChars(event, this.value, 'double:');" />
+										<input id="{-$key-}" name="{-$key-}" type="text" size="11" maxlength="15"
+											class="line inputDouble" tabindex="{-$tabind-}" value="0" 
+											onFocus="showtip('{-$item[2]-}', '#f1bd41');" />
 									</span>
 									<br />
 								{-/foreach-}
@@ -265,8 +263,7 @@
 									<span onmouseover="Tip('{-$item[1]-}')" onmouseout="UnTip()">
 										{-$item[0]-}<br />
 										<textarea id="{-$key-}" name="{-$key-}" cols="25" style="height: {-if $key=='EffectNotes'-}70{-else-}30{-/if-}px;"
-											onBlur="if(this.value != '') { $('SectorOther').value='-1'; }"
-											onkeypress="return blockChars(event, this.value, 'text:');"
+											class="inputText" 
 											onFocus="showtip('{-$item[2]-}', '#f1bd41')" tabindex="{-$tabind-}">
 										</textarea>
 									</span>
@@ -290,8 +287,9 @@
 							{-/if-}
 									<td onmouseover="Tip('{-$item[1]-}')" onmouseout="UnTip()">
 										{-$item[0]-}<br />
-										<input type="text" id="{-$key-}" name="{-$key-}" size="30" class="line" tabindex="{-$tabeef-}"
-											onFocus="showtip('{-$item[1]-}', '#f1bd41')" onkeypress="return blockChars(event, this.value, 'text:');" />
+										<input type="text" id="{-$key-}" name="{-$key-}" size="30"
+											class="line inputText" tabindex="{-$tabeef-}"
+											onFocus="showtip('{-$item[1]-}', '#f1bd41')" />
 									</td>
 							{-if ($smarty.foreach.eefl.iteration ) % 3 == 0-}
 								</tr>
@@ -325,23 +323,20 @@
 							<td onmouseover="Tip('{-$eve.EventMagnitude[1]-}')" onmouseout="UnTip()">
 								{-assign var="tabind" value="`$tabind+1`"-}
 								{-$eve.EventMagnitude[0]-}<br />
-								<input id="EventMagnitude" name="EventMagnitude" type="text" size="5" tabindex="{-$tabind-}" 
-									class="line" onFocus="showtip('{-$eve.EventMagnitude[2]-}', 'lightblue')"
-									onkeypress="return blockChars(event, this.value, 'text:');" />
+								<input id="EventMagnitude" name="EventMagnitude" type="text" size="5" 
+									class="line inputText" tabindex="{-$tabind-}" onFocus="showtip('{-$eve.EventMagnitude[2]-}', 'lightblue')" />
 							</td>
 							<td onmouseover="Tip('{-$eve.EventDuration[1]-}')" onmouseout="UnTip()">
 								{-assign var="tabind" value="`$tabind+1`"-}
 								{-$eve.EventDuration[0]-}<br />
-								<input id="EventDuration" name="EventDuration" type="text" size="5" tabindex="{-$tabind-}" 
-									class="line" onFocus="showtip('{-$eve.EventDuration[2]-}', 'lightblue')"
-									onkeypress="return blockChars(event, this.value, 'integer:');" />
+								<input id="EventDuration" name="EventDuration" type="text" size="5" maxlength="8"
+									class="line inputInteger" tabindex="{-$tabind-}" onFocus="showtip('{-$eve.EventDuration[2]-}', 'lightblue')" />
 							</td>
 							<td onmouseover="Tip('{-$eve.EventNotes[1]-}')" onmouseout="UnTip()">
 								{-assign var="tabind" value="`$tabind+1`"-}
 								{-$eve.EventNotes[0]-}<br />
-								<input type="texto" id="EventNotes" name="EventNotes" style="width: 350px;" class="line"
-									tabindex="{-$tabind-}" onFocus="showtip('{-$eve.EventNotes[2]-}', 'lightblue')"
-									onkeypress="return blockChars(event, this.value, 'text:');" />
+								<input type="texto" id="EventNotes" name="EventNotes" style="width: 350px;" 
+									class="line inputText" tabindex="{-$tabind-}" onFocus="showtip('{-$eve.EventNotes[2]-}', 'lightblue')" />
 							</td>
 						</tr>
 					</table>
@@ -371,9 +366,8 @@
 							<td onmouseover="Tip('{-$cau.CauseNotes[1]-}')" onmouseout="UnTip()">
 								{-assign var="tabind" value="`$tabind+1`"-}
 								{-$cau.CauseNotes[0]-}<br />
-								<input type="text" id="CauseNotes" name="CauseNotes" style="width: 450px;" class="line"
-									onkeypress="return blockChars(event, this.value, 'text:');" tabindex="{-$tabind-}" 
-									onFocus="showtip('{-$cau.CauseNotes[2]-}', '#ffffc0')" />
+								<input type="text" id="CauseNotes" name="CauseNotes" style="width: 450px;" 
+									class="line inputText" tabindex="{-$tabind-}" onFocus="showtip('{-$cau.CauseNotes[2]-}', '#ffffc0')" />
 							</td>
 						</tr>
 					</table>

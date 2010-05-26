@@ -32,6 +32,10 @@ function onReadyDatacards() {
 		return blockChars(event, jQuery(this).val(), 'integer:' + jQuery(this).attr('MaxLength'));
 	});
 
+	jQuery('.inputDouble').keydown(function(event) {
+		return blockChars(event, jQuery(this).val(), 'double:' + jQuery(this).attr('MaxLength'));
+	});
+
 	jQuery('.inputText').keydown(function(event) {
 		return blockChars(event, jQuery(this).val(), 'text:');
 	});
