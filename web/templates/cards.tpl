@@ -166,26 +166,20 @@
 			<!-- EFFECTS SECTION--> 
 			<tr>
 				<td width="30px" valign="top" style="border:0px;">
-					<a href="javascript:void(null)" onClick="switchEff('effbas')">
+					<a href="#" id="linkDatacardShowEffectsBasic">
 						<img id="efimg" src="images/di_efftag.png" border=0
-							onmouseover="Tip('<b>{-#tbaseffects#-}</b><br />{-$dmg.MetGuidedatacards[2]-}', BGCOLOR, '#f1bd41', SHADOW, true, WIDTH, 400)"
-							onmouseout="UnTip()">
+							onmouseover="Tip('<b>{-#tbaseffects#-}</b><br />{-$dmg.MetGuidedatacards[2]-}', BGCOLOR, '#f1bd41', SHADOW, true, WIDTH, 400)" onmouseout="UnTip()" />
 					</a>
 					<br /><br />
-					<a href="javascript:void(null)" onClick="switchEff('effext')">
+					<a href="#" id="linkDatacardShowEffectsAditional">
 						<img id="eeimg" src="images/di_eeftag.png" border=0 
-							onmouseover="Tip('<b>{-#textraeffect#-}</b><br />{-$dmg.MetGuideextraeffects[2]-}', BGCOLOR, '#f1bd41', SHADOW, true, WIDTH, 400)" 
-							onmouseout="UnTip()">
+							onmouseover="Tip('<b>{-#textraeffect#-}</b><br />{-$dmg.MetGuideextraeffects[2]-}', BGCOLOR, '#f1bd41', SHADOW, true, WIDTH, 400)" onmouseout="UnTip()" />
 					</a>
-					<!-- usemap="#efx"
-					<map id="efx" name="efx">
-						<area shape="rect" coords="4,4,20,115" href="javascript:void(null)" onClick="switchEff('effbas')">
-						<area shape="rect" coords="4,130,20,240" href="javascript:void(null)" onClick="switchEff('effext')">
-					</map>-->
 				</td>
 				<td valign="top">
+					<div class="divDatacardEffects" id="divDatacardEffectsBasic">
 					<!-- BEG BASIC EFFECTS -->
-					<table class="grid" id="effbas">
+					<table class="grid">
 						<tr valign="top">
 							<td>
 								<b align="left">{-#teffects#-}</b><br />
@@ -270,8 +264,10 @@
 							</td>
 						</tr>
 					</table>
+					</div>
 					<!-- BEG EXTRA EFFECTS FIELDS -->
-					<table class="grid" id="effext" style="display:none;">
+					<div class="divDatacardEffects" id="divDatacardEffectsAdditional" style="display:none;">
+					<table class="grid">
 						<tr>
 							<td>
 								<br />
@@ -294,6 +290,8 @@
 							{-/if-}
 						{-/foreach-}
 					</table>
+					</div>
+					<!-- END EXTRA EFFECTS FIELDS -->
 				</td>
 			</tr>
 			<!-- BEG EVENT SECTION -->
