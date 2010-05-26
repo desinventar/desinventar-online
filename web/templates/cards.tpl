@@ -5,53 +5,19 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
 	<title>{-#ttitle#-} [{-$regname-}] | {-$usr-} - {-$dicrole-}</title>
-	<link rel="stylesheet" href="css/desinventar.css?version={-$jsversion-}" type="text/css"/>
+	<link rel="stylesheet" type="text/css" href="css/desinventar.css?version={-$jsversion-}" />
+	<link rel="stylesheet" type="text/css" href="css/datacards.css?version={-$jsversion-}" />
 	{-include file="jquery.tpl" -}
 	<script type="text/javascript" src="include/prototype.js"></script>
 	<script type="text/javascript" src="include/combo-box.js"></script>
 	<script type="text/javascript" src="js/diadmin.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/cards.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" language="javascript">
-
-		
 		jQuery(document).ready(function() {
 			onReadyDatacards();
 		});
-			
 	</script>
-
-	<style type="text/css">
-		.bnew {
-			background-image: url(images/newicon.png) !important;
-			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
-		}
-		.bupd {
-			background-image: url(images/updateicon.png) !important;
-			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
-		}
-		.bcancel {
-			background-image: url(images/cancelicon.png) !important; 
-			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
-		}
-		.bclear {
-			background-image: url(images/cleanicon.png) !important; 
-			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
-		}
-		.bfind {
-			background-image: url(images/findicon.png) !important;
-			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
-		}
-		.bsave {
-			background-image: url(images/saveicon.png) !important;
-			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
-		}
-		.bprint {
-			background-image: url(images/printicon.png) !important;
-			background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
-		}
-	</style>
 </head>
-
 <body>
 	<script type="text/javascript" src="include/wz_tooltip.js"></script>
 	<!-- BEG DI8 FORM CARD -->
