@@ -13,9 +13,6 @@
 	<script type="text/javascript" src="js/cards.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" language="javascript">
 
-		function setActive() {
-			updateList('dostat', 'cards.php', 'u=1');
-		}
 		
 		jQuery(document).ready(function() {
 			// Hide StatusMessages
@@ -100,7 +97,7 @@
 			});
 			
 			// Create periodic task to keep session alive...
-			var pe = new PeriodicalExecuter(setActive, 60);
+			var pe = new PeriodicalExecuter(doKeepSessionActive, 60);
 		});
 			
 	</script>

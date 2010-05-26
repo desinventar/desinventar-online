@@ -359,3 +359,7 @@ function doDatacardGotoNext() {
 	}
 	disenabutton($('btnDatacardGotoPrev'), false);
 }
+
+function doKeepSessionActive() {
+	updateList('dostat', 'cards.php', 'u=1');
+}
