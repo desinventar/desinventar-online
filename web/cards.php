@@ -229,10 +229,12 @@ if (isset($_GET['u'])) {
 		// Default view of DesInventar
 		$t->assign("usr", $us->UserId);
 		$t->assign("regname", $us->q->getDBInfoValue('RegionLabel'));
-		$role = $us->getUserRole($RegionId);
+		$UserRole = $us->getUserRole($RegionId);
+		$UserRoleValue = $us->getUserRoleValue($RegionId);
+		
 		// Validate if user has permission to access database
 		$dic = $us->q->queryLabelsFromGroup('DB', $lg);
-		switch ($role) {
+		switch ($UserRole) {
 			case "ADMINREGION":
 				$t->assign("showconfig", true);
 				$dicrole = $dic['DBRoleAdmin'][0];
@@ -278,10 +280,11 @@ if (isset($_GET['u'])) {
 		$t->assign("evel", $us->q->loadEvents(null, "active", $lg));
 		$t->assign("caul", $us->q->loadCauses(null, "active", $lg));
 		$t->assign("eefl", $us->q->getEEFieldList("True"));
-		$t->assign("role", $role);
-		if ($role == "USER" || $role == "SUPERVISOR" || $role == "ADMINREGION") {
-			$t->assign("ctl_validrole", true);
-		}
+
+		$t->assign('RegionId', $RegionId);
+		$t->assign('UserRole', $UserRole);
+		$t->assign('UserRoleValue', $UserRoleValue);
+
 		$t->display("cards.tpl");
 	}
 }

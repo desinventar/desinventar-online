@@ -123,6 +123,12 @@ function onReadyDatacards() {
 		jQuery('#divDatacardEffectsBasic').hide();
 		jQuery('#divDatacardEffectsAditional').show();
 	});
+	
+	jQuery('.DatacardCmdButton').hide;
+	jQuery('#btnDatacardPrint').show();
+	if (jQuery('#prmUserRoleValue').val() >= 2) {
+		jQuery('.DatacardCmdButton').show();
+	}
 }
 
 var mod = "di";

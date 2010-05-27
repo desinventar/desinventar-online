@@ -24,23 +24,22 @@
 	<table width="900px" border="0" cellpadding="0" cellspacing="0" >
 		<tr valign="middle">
 			<td width="450px" rowspan="2">
-				{-if $ctl_validrole-}
-					<input type="button" id="btnDatacardNew"    class="bb bnew"    onmouseover="Tip('{-#tnewtitle#-}: {-#tnewdesc#-}')" onmouseout="UnTip()" />
-					<input type="button" id="btnDatacardEdit"   class="bb bupd"    onmouseover="Tip('{-#tupdtitle#-}: {-#tupddesc#-}')" onmouseout="UnTip()" />
-					<input type="button" id="btnDatacardSave"   class="bb bsave"   onmouseover="Tip('{-#tsavtitle#-}: {-#tsavdesc#-}')" onmouseout="UnTip()" />
-					<input type="button" id="btnDatacardClear"  class="bb bclear"  onmouseover="Tip('{-#tclntitle#-}: {-#tclndesc#-}')" onmouseout="UnTip()" />
-					<input type="button" id="btnDatacardCancel" class="bb bcancel" onmouseover="Tip('{-#tcantitle#-}: {-#tcandesc#-}')" onmouseout="UnTip()" />
-				{-/if-}
-				<input type="button" id="btnDatacardPrint" class="bb bprint" onmouseover="Tip('{-#mprint#-}')" onmouseout="UnTip()" />
+				<input type="button" id="btnDatacardNew"    class="DatacardCmdButton bb bnew"    onmouseover="Tip('{-#tnewtitle#-}: {-#tnewdesc#-}')" onmouseout="UnTip()" />
+				<input type="button" id="btnDatacardEdit"   class="DatacardCmdButton bb bupd"    onmouseover="Tip('{-#tupdtitle#-}: {-#tupddesc#-}')" onmouseout="UnTip()" />
+				<input type="button" id="btnDatacardSave"   class="DatacardCmdButton bb bsave"   onmouseover="Tip('{-#tsavtitle#-}: {-#tsavdesc#-}')" onmouseout="UnTip()" />
+				<input type="button" id="btnDatacardClear"  class="DatacardCmdButton bb bclear"  onmouseover="Tip('{-#tclntitle#-}: {-#tclndesc#-}')" onmouseout="UnTip()" />
+				<input type="button" id="btnDatacardCancel" class="DatacardCmdButton bb bcancel" onmouseover="Tip('{-#tcantitle#-}: {-#tcandesc#-}')" onmouseout="UnTip()" />
 				&nbsp;&nbsp;|&nbsp;&nbsp;
-				<input type="button" id="btnDatacardGotoFirst" value="<<" class="bb line" onmouseover="Tip('{-#bfirst#-}')" onmouseout="UnTip()" />
-				<input type="button" id="btnDatacardGotoPrev"  value="<"  class="bb line" onmouseover="Tip('{-#bprev#-}')"  onmouseout="UnTip()" />
-				<input type="button" id="btnDatacardGotoNext"  value=">"  class="bb line" onmouseover="Tip('{-#bnext#-}')"  onmouseout="UnTip()" />
-				<input type="button" id="btnDatacardGotoLast"  value=">>" class="bb line" onmouseover="Tip('{-#blast#-}')"  onmouseout="UnTip()" />
+				<input type="button" id="btnDatacardPrint"  class="DatacardCmdButton bb bprint"  onmouseover="Tip('{-#mprint#-}')" onmouseout="UnTip()" />
+				&nbsp;&nbsp;|&nbsp;&nbsp;
+				<input type="button" id="btnDatacardGotoFirst" class="DatacardNavButton bb line" value="<<" onmouseover="Tip('{-#bfirst#-}')" onmouseout="UnTip()" />
+				<input type="button" id="btnDatacardGotoPrev"  class="DatacardNavButton bb line" value="<"  onmouseover="Tip('{-#bprev#-}')"  onmouseout="UnTip()" />
+				<input type="button" id="btnDatacardGotoNext"  class="DatacardNavButton bb line" value=">"  onmouseover="Tip('{-#bnext#-}')"  onmouseout="UnTip()" />
+				<input type="button" id="btnDatacardGotoLast"  class="DatacardNavButton bb line" value=">>" onmouseover="Tip('{-#blast#-}')"  onmouseout="UnTip()" />
 				&nbsp;&nbsp;|&nbsp;&nbsp;
 				{-$dis.DisasterSerial[0]-}
-				<input type="text"   id="txtDatacardFind" style="width:60px;" class="line" />
-				<input type="button" id="btnDatacardFind" class="bb bfind" onmouseover="Tip('{-#texptitle#-}')" onmouseout="UnTip()" />
+				<input type="text"   id="txtDatacardFind" class="DatacardCmdFind line" style="width:60px;" />
+				<input type="button" id="btnDatacardFind" class="DatacardCmdFind bb bfind" onmouseover="Tip('{-#texptitle#-}')" onmouseout="UnTip()" />
 				<br />				
 				<span class="dlgmsg" id="distatusmsg"></span>
 				<span class="dlgmsg" id="dostat"></span>
@@ -373,9 +372,10 @@
 	</form>
 	<!-- END DI8 FORM CARD -->
 	<div id="divDatacardParameter">
-		<input type="hidden" id="prmRegionId" value="{-$reg-}">
-		<input type="hidden" id="prmUserRole" value="{-$role-}">
-		<input type="hidden" id="prmRecordNumber" value="0">
+		<input type="hidden" id="prmRegionId"      value="{-$RegionId-}" />
+		<input type="hidden" id="prmUserRole"      value="{-$UserRole-}" />
+		<input type="hidden" id="prmUserRoleValue" value="{-$UserRoleValue-}" />
+		<input type="hidden" id="prmRecordNumber"  value="0" />
 	</div>
 </body>
 </html>
