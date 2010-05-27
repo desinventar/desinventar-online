@@ -233,6 +233,7 @@ function changeOptions(but) {
 			disenabutton($('btnDatacardNew'), true);
 			disenabutton($('btnDatacardSave'), false);
 			disenabutton($('btnDatacardEdit'), true);
+			disenabutton($('btnDatacardClear'), false);
 			disenabutton($('btnDatacardCancel'), false);
 			disenabutton($('btnDatacardGotoFirst'), true);
 			disenabutton($('btnDatacardGotoPrev'), true);
