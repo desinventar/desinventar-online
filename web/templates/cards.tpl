@@ -12,6 +12,7 @@
 	<script type="text/javascript" src="include/combo-box.js"></script>
 	<script type="text/javascript" src="js/diadmin.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/cards.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="js/jquery.snippets.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" language="javascript">
 		jQuery(document).ready(function() {
 			onReadyDatacards();
@@ -51,12 +52,13 @@
 		<tr>
 			<td align="left" valign="top" width="450px">
 				<div id="divDatacardStatusMsg" style="display:none;">
-					<span class="datacardStatusMsg" id="msgDuplicatedDisasterSerial">{-#msgDuplicatedDisasterSerial#-}</span>
+					<span class="datacardStatusMsg" id="msgDatacardDuplicatedSerial">{-#msgDuplicatedDisasterSerial#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardStartNew">{-#tmsgnewcard#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardFill">{-#tmsgnewcardfill#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardIsLocked">{-#tdconuse#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardFieldsError">{-#errmsgfrm#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardNotFound">{-#tcardnot#-}</span>
+					<span class="datacardStatusMsg" id="msgDatacardInvalidStatus">{-#msgDatacardInvalidStatus#-}</span>
 				</div>
 				<br />
 			</td>
@@ -94,14 +96,14 @@
 							</td>
 							<td>
 								{-#tstatus#-}<b style="color:darkred;">*</b><br />
-								<select name="RecordStatus" id="RecordStatus" tabindex="5" class="line"
-										onFocus="showtip('{-$rc1.RecordStatus[1]-}', '')">
+								<select name="RecordStatus" id="RecordStatus" 
+									class="line" tabindex="5" onFocus="showtip('{-$rc1.RecordStatus[1]-}', '')">
 									<option value=""></option>
-									<option value="PUBLISHED" {-if $role == "USER"-}disabled{-/if-}>{-#tstatpublished#-}</option>
-									<option value="READY">{-#tstatready#-}</option>
-									<option value="DRAFT">{-#tstatdraft#-}</option>
-									<option value="TRASH">{-#tstatrash#-}</option>
-									<option value="DELETED" {-if $role == "USER"-}disabled{-/if-}>{-#tstatdeleted#-}</option>
+									<option value="PUBLISHED">{-#tstatpublished#-}</option>
+									<option value="READY"    >{-#tstatready#-}</option>
+									<option value="DRAFT"    >{-#tstatdraft#-}</option>
+									<option value="TRASH"    >{-#tstatrash#-}</option>
+									<option value="DELETED"  >{-#tstatdeleted#-}</option>
 								</select>
 							</td>
 							<td onmouseover="Tip('{-$dis.DisasterSerial[1]-}')" onmouseout="UnTip()">

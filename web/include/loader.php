@@ -140,11 +140,13 @@ if (MODE != "command") {
 	// 2010-05-25 (jhcaiced) Handle the versioning of js files, used to force refresh of
 	// these files when doing changes.
 	$jsversion = JSVERSION;
+	/*
 	$hostname  = $_SERVER["SERVER_NAME"];
 	if ( ($hostname == 'devel.desinventar.org') ||
 	     ($hostname == '192.168.0.13') ) {
 	     $jsversion = time();
 	}
+	*/	
 	$t->assign('jsversion', $jsversion);
 }
 </script>
