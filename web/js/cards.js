@@ -137,6 +137,7 @@ function onReadyDatacards() {
 	if (jQuery('#prmUserRoleValue').val() >= 2) {
 		jQuery('.DatacardCmdButton').show();
 	}
+	
 }
 
 var mod = "di";
@@ -364,44 +365,60 @@ function doDatacardSave() {
 	var cmd = jQuery('#_CMD').val();
 	var DisasterSerial = jQuery('#DisasterSerial').val();
 	var PrevDisasterSerial = jQuery('#PrevDisasterSerial').val();
-	jQuery.post('cards.php',
-		{'cmd'            : 'existDisasterSerial',
-		 'RegionId'       : jQuery('#prmRegionId').val(),
-		 'DisasterSerial' : DisasterSerial
-		},
-		function(data) {
-			bContinue = true;
-			if ( (cmd == 'insertDICard') && (data.DisasterSerial != '') ) {
-				// Serial of new datacard already exists...
-				//alert('Disaster Serial already exists...');
-				bContinue = false;
-			}
-			if (cmd == 'updateDICard') {
-				if ( (DisasterSerial != PrevDisasterSerial) && (data.DisasterSerial != '') ) {
-					// Edited Serial exists in database...
-					//alert('Disaster Serial is duplicated...');
+	
+	// Validate Record Status
+	if (jQuery('#RecordStatus').val() == '') { 
+		jQuery('#RecordStatus').val('DRAFT');
+	}
+	if ( (jQuery('#RecordStatus').val() == 'PUBLISHED') ||
+	     (jQuery('#RecordStatus').val() == 'TRASH') ||
+	     (jQuery('#RecordStatus').val() == 'DELETED') ) {
+		if (jQuery('#prmUserRoleValue').val() <= 3) {
+			displayDatacardStatusMsg('msgDatacardInvalidStatus');
+			jQuery('#RecordStatus').highlight();
+			bContinue = false;
+		}
+	}
+	if (bContinue) {
+		jQuery.post('cards.php',
+			{'cmd'            : 'existDisasterSerial',
+			 'RegionId'       : jQuery('#prmRegionId').val(),
+			 'DisasterSerial' : DisasterSerial
+			},
+			function(data) {
+				bContinue = true;
+				if ( (cmd == 'insertDICard') && (data.DisasterSerial != '') ) {
+					// Serial of new datacard already exists...
+					//alert('Disaster Serial already exists...');
 					bContinue = false;
 				}
-			}
-			if (bContinue == false) {
-				displayDatacardStatusMsg('msgDuplicatedDisasterSerial');
-			}
-			if (bContinue) {
-				var fl = new Array('DisasterSerial', 'DisasterBeginTime0', 'DisasterSource', 
-									'geolev0', 'EventId', 'CauseId', 'RecordStatus');
-				if (checkForm(fl, jQuery('#msgDatacardFieldsError').text())) {
-					displayDatacardStatusMsg('');
-					$('DICard').submit();
-					DisableEnableForm($('DICard'), true);
-					changeOptions('btnDatacardSave');
-					// clear Help text area
-					showtip('','#ffffff');
-				} else {
-					displayDatacardStatusMsg('msgDatacardFieldsError');
+				if (cmd == 'updateDICard') {
+					if ( (DisasterSerial != PrevDisasterSerial) && (data.DisasterSerial != '') ) {
+						// Edited Serial exists in database...
+						//alert('Disaster Serial is duplicated...');
+						bContinue = false;
+					}
 				}
-			}
-		},'json'
-	);
+				if (bContinue == false) {
+					displayDatacardStatusMsg('msgDatacardDuplicatedSerial');
+				}
+				if (bContinue) {
+					var fl = new Array('DisasterSerial', 'DisasterBeginTime0', 'DisasterSource', 
+										'geolev0', 'EventId', 'CauseId', 'RecordStatus');
+					if (checkForm(fl, jQuery('#msgDatacardFieldsError').text())) {
+						displayDatacardStatusMsg('');
+						$('DICard').submit();
+						DisableEnableForm($('DICard'), true);
+						changeOptions('btnDatacardSave');
+						// clear Help text area
+						showtip('','#ffffff');
+					} else {
+						displayDatacardStatusMsg('msgDatacardFieldsError');
+					}
+				}
+			},'json'
+		);
+	}
 }
 
 function doDatacardClear() {
