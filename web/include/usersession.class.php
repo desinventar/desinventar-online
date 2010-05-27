@@ -19,6 +19,8 @@ class UserSession {
 	var $UserId          = '';
 	var $dStart          = '';
 	var $dLastUpdate     = '';
+	var $UserRole        = '';
+	var $UserRoleValue   = ROLE_NONE;
 
 	public function __construct() {
 		$this->sSessionId = session_id();
@@ -155,17 +157,22 @@ class UserSession {
 		$iReturn = ERR_NO_ERROR;
 		$this->clearLocks();
 		
+		$this->RegionId = '';
+		$this->UserRole = '';
+		$this->UserRoleValue = ROLE_NONE;
+		
 		$DBDir = VAR_DIR . '/database/' . $prmRegionId;
 		$DBFile = $DBDir . '/desinventar.db';
 		if (! file_exists($DBFile)) {
 			$iReturn = ERR_NO_DATABASE;
-		}
-		
+		}		
 		if ($iReturn > 0) {
 			$this->awake();
 			$this->q->setDBConnection($prmRegionId);
 			$this->RegionId = $prmRegionId;
-		}
+			$this->UserRole = $this->getUserRole($prmRegionId);
+			$this->UserRoleValue = $this->getUserRoleValue($prmRegionId);
+		} 
 		return $iReturn;
 	} // open()
 
@@ -323,7 +330,7 @@ class UserSession {
 	} // function
 	
 	// Get User Role as a Numeric Value, easier to compare
-	function getUserRoleNumeric($prmRegionId = '') {
+	function getUserRoleValue($prmRegionId = '') {
 		$Role = $this->getUserRole($prmRegionId);
 		$NumRole = ROLE_NONE;
 		if ($Role == 'NONE')        { $NumRole = ROLE_NONE;        }
