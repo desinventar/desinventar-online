@@ -15,6 +15,7 @@ function onReadyDatacards() {
 	// Create periodic task to keep session alive...
 	var pe = new PeriodicalExecuter(doKeepSessionActive, 60);
 
+	// Validation of DisasterBeginTime and Suggest Serial for New Datacards
 	jQuery('#DisasterBeginTime0').blur(function() {
 		cmd = jQuery('#_CMD').val();
 		if (cmd == 'insertDICard') {
@@ -22,12 +23,28 @@ function onReadyDatacards() {
 		}
 	});
 
+	jQuery('#DisasterBeginTime1').blur(function() {
+		if (parseInt(jQuery(this).val(),10) < 1 || 
+			parseInt(jQuery(this).val(),10) > 12 ) {
+				jQuery(this).val('');
+		}
+	});
+
+	jQuery('#DisasterBeginTime2').blur(function() {
+		if (parseInt(jQuery(this).val(),10) < 1 || 
+			parseInt(jQuery(this).val(),10) > 31 ) {
+				jQuery(this).val('');
+		}
+	});
+
+	// Button for suggesting serial of datacard
 	jQuery('#linkDatacardSuggestSerial').click(function() {
 		if (jQuery('#DisasterSerial').attr('disabled') == false) {
 			doDatacardSuggestSerial();
 		}
 	});
 
+	// Apply some validation for several types of input fields
 	jQuery('.inputInteger').keydown(function(event) {
 		return blockChars(event, jQuery(this).val(), 'integer:' + jQuery(this).attr('MaxLength'));
 	});
@@ -44,21 +61,8 @@ function onReadyDatacards() {
 		return blockChars(event, jQuery(this).val(), 'alphanumber:');
 	});
 	
-	jQuery('#DisasterBeginTime1').blur(function() {
-		if (parseInt(jQuery(this).val(),10) < 1 || 
-			parseInt(jQuery(this).val(),10) > 12 ) {
-				jQuery(this).val('');
-		}
-	});
 	
-
-	jQuery('#DisasterBeginTime2').blur(function() {
-		if (parseInt(jQuery(this).val(),10) < 1 || 
-			parseInt(jQuery(this).val(),10) > 31 ) {
-				jQuery(this).val('');
-		}
-	});
-	
+	// Datacard New/Edit/Save Commands
 	jQuery('#btnDatacardNew').click(function() {
 		doDatacardNew();
 		return false;
@@ -83,7 +87,8 @@ function onReadyDatacards() {
 		window.print();
 		return false;
 	});
-	
+
+	// Datacard Navigation Functions
 	jQuery('#btnDatacardGotoFirst').click(function() {
 		doDatacardGotoFirst();
 		return false;
@@ -104,6 +109,7 @@ function onReadyDatacards() {
 		return false;
 	});
 
+	// Datatacard Find function 
 	jQuery('#txtDatacardFind').keydown(function(event) {
 		if(event.keyCode == 13) {
 			doDatacardFind();
@@ -113,7 +119,8 @@ function onReadyDatacards() {
 	jQuery('#btnDatacardFind').click(function() {
 		doDatacardFind();
 	});
-	
+
+	// Switch between Basic and Additional Effects
 	jQuery('#linkDatacardShowEffectsBasic').click(function() {
 		jQuery('#divDatacardEffectsBasic').show();
 		jQuery('#divDatacardEffectsAditional').hide();
@@ -123,7 +130,8 @@ function onReadyDatacards() {
 		jQuery('#divDatacardEffectsBasic').hide();
 		jQuery('#divDatacardEffectsAditional').show();
 	});
-	
+
+	//Show Command Buttons only for Role>=USER
 	jQuery('.DatacardCmdButton').hide;
 	jQuery('#btnDatacardPrint').show();
 	if (jQuery('#prmUserRoleValue').val() >= 2) {
