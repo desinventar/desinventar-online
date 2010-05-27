@@ -6,7 +6,7 @@
 require_once(BASE . '/include/distatus.class.php');
 class DIObject {
 	var $session = null;
-	var $sRegionId  = '';
+	var $RegionId  = '';
 	// Dynamic Objects Variables
 	var $sTableName = 'MyTable';
 	var $sPermPrefix = 'OBJECT';
@@ -22,9 +22,9 @@ class DIObject {
 	public function __construct($prmSession) {
 		$this->session = $prmSession;
 		$this->q = $prmSession->q;
-		$prmSession->sRegionId = $this->q->sRegionId;
-		//$this->q = new Query($prmSession->sRegionId);
-		$this->setConnection($prmSession->sRegionId);
+		$prmSession->RegionId = $this->q->RegionId;
+		//$this->q = new Query($prmSession->RegionId);
+		$this->setConnection($prmSession->RegionId);
 		$num_args = func_num_args();
 		if ($num_args >= 1) {
 			$this->oSession = func_get_arg(0);
@@ -38,9 +38,9 @@ class DIObject {
 		$this->oFieldType=array();
 		$this->createFields($this->sFieldKeyDef);
 		$this->createFields($this->sFieldDef);
-		$this->set('RegionId', $this->session->sRegionId);
+		$this->set('RegionId', $this->session->RegionId);
 		$LangIsoCode = 'eng';
-		if ($this->q->sRegionId != 'core') {
+		if ($this->q->RegionId != 'core') {
 			$LangIsoCode = $this->q->getDBInfoValue('LangIsoCode');
 		}
 		$this->set('LangIsoCode', $LangIsoCode);

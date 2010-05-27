@@ -95,18 +95,18 @@ switch ($cmd) {
 			$rsup = array();
 			$hrole = false;
 			foreach ($role as $k=>$v) {
-				$sRegionId    = $k;
+				$RegionId    = $k;
 				$sRole        = $v['Role'];
 				$sRegionLabel = $v['RegionLabel'];
 				$hrole = true;
 				switch ($sRole) {
-					case "ADMINREGION":		$radm[$sRegionId] = $sRegionLabel;
+					case "ADMINREGION":		$radm[$RegionId] = $sRegionLabel;
 					break;
-					case "USER":			$rusr[$sRegionId] = $sRegionLabel;
+					case "USER":			$rusr[$RegionId] = $sRegionLabel;
 					break;
-					case "SUPERVISOR":		$rsup[$sRegionId] = $sRegionLabel;
+					case "SUPERVISOR":		$rsup[$RegionId] = $sRegionLabel;
 					break;
-					case "OBSERVER":		$obs[$sRegionId] = $sRegionLabel;
+					case "OBSERVER":		$obs[$RegionId] = $sRegionLabel;
 					break;
 					default:				$hrole = false;
 					break;
