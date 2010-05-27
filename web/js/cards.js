@@ -141,30 +141,12 @@ function onReadyDatacards() {
 
 var mod = "di";
 
-function hidediv(myDiv) {
-	$(myDiv).style.visibility = 'hidden';
-}
-
-function showdiv(myDiv) {
-	$(myDiv).style.visibility = 'visible';
-}
-
 function showtip(tip, clr) {
 	try {
 	var d = parent.document.getElementById('_DIDesc');
 	d.style.backgroundColor = clr;
 	d.value = tip;
 	} catch(err) { };
-}
-
-function getDatacardUpdatePerm(UserRole) {
-	var bAnswer = false;
-	if ( (UserRole == 'USER') || 
-	     (UserRole == 'SUPERVISOR') ||
-	     (UserRole == 'ADMINREGION') ) {
-	     bAnswer = true;
-	}
-	return bAnswer;
 }
 
 // Display Geography in form and search; k=geoid, l=0, desc='', opc=''
@@ -312,9 +294,8 @@ function requestDatacard(myCmd, myValue) {
 				displayDatacardStatusMsg('');
 				if (data.DisasterId != '') {
 					valid = setDICardfromId(RegionId, data.DisasterId, '');
-					UserRole = jQuery('#prmUserRole').val();
-					canUpdateDatacard = getDatacardUpdatePerm(UserRole);
-					if (canUpdateDatacard) {
+					
+					if (jQuery('#prmUserRoleValue').val() >= 2) {
 						disenabutton($('btnDatacardEdit'), false);
 					}
 					if (myCmd == 'getDisasterIdFromSerial') {
@@ -449,9 +430,8 @@ function doDatacardCancel() {
 
 function doDatacardGotoFirst() {
 	displayDatacardStatusMsg('');
-	bUpdate = getDatacardUpdatePerm(jQuery('#prmUserRole').val());
 	bFound = requestDatacard('getDisasterIdFirst', jQuery('#DisasterId').val());
-	if (bUpdate) {
+	if (jQuery('#prmUserRoleValue').val() >= 2) {
 		disenabutton($('btnDatacardEdit'), false);
 	}
 	disenabutton($('btnDatacardGotoPrev'), true);
@@ -460,9 +440,8 @@ function doDatacardGotoFirst() {
 
 function doDatacardGotoLast() {
 	displayDatacardStatusMsg('');
-	bUpdate = getDatacardUpdatePerm(jQuery('#prmUserRole').val());
 	bFound = requestDatacard('getDisasterIdLast', jQuery('#DisasterId').val());
-	if (bUpdate) {
+	if (jQuery('#prmUserRoleValue').val() >= 2) {
 		disenabutton($('btnDatacardEdit'), false);
 	}
 	disenabutton($('btnDatacardGotoPrev'), false);
@@ -471,12 +450,11 @@ function doDatacardGotoLast() {
 
 function doDatacardGotoPrev() {
 	displayDatacardStatusMsg('');
-	bUpdate = getDatacardUpdatePerm(jQuery('#prmUserRole').val());
 	bFound = requestDatacard('getDisasterIdPrev', jQuery('#prmRecordNumber').val());
 	if (bFound == false) {
 		displayDatacardStatusMsg('msgDatacardNotFound');
 	}
-	if (bUpdate) {
+	if (jQuery('#prmUserRoleValue').val() >= 2) {
 		disenabutton($('btnDatacardEdit'), false);
 	}
 	disenabutton($('btnDatacardGotoNext'), false);
@@ -484,12 +462,11 @@ function doDatacardGotoPrev() {
 
 function doDatacardGotoNext() {
 	displayDatacardStatusMsg('');
-	bUpdate = getDatacardUpdatePerm(jQuery('#prmUserRole').val());
 	bFound = requestDatacard('getDisasterIdNext', jQuery('#prmRecordNumber').val());
 	if (bFound == false) {
 		displayDatacardStatusMsg('msgDatacardNotFound');
 	}
-	if (bUpdate) {
+	if (jQuery('#prmUserRoleValue').val() >= 2) {
 		disenabutton($('btnDatacardEdit'), false);
 	}
 	disenabutton($('btnDatacardGotoPrev'), false);
