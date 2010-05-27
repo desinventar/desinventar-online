@@ -4,6 +4,13 @@
  (c) 1998-2010 Corporacion OSSO
 */
 
+define('ROLE_NONE'       , 0);
+define('ROLE_OBSERVER'   , 1);
+define('ROLE_USER'       , 2);
+define('ROLE_SUPERVISOR' , 3);
+define('ROLE_ADMINREGION', 4);
+define('ROLE_ADMINPORTAL', 5);
+
 class UserSession {
 	var $q               = null;
 	var $sSessionId      = '';
@@ -315,15 +322,16 @@ class UserSession {
 		return $myAnswer;
 	} // function
 	
-	function getUserNumericRole($prmRegionId = '') {
+	// Get User Role as a Numeric Value, easier to compare
+	function getUserRoleNumeric($prmRegionId = '') {
 		$Role = $this->getUserRole($prmRegionId);
-		$NumRole = 0;
-		if ($Role == 'NONE')        { $NumRole = 0; }
-		if ($Role == 'OBSERVER')    { $NumRole = 1; }
-		if ($Role == 'USER')        { $NumRole = 2; }
-		if ($Role == 'SUPERVISOR')  { $NumRole = 3; }
-		if ($Role == 'ADMINREGION') { $NumRole = 4; }
-		if ($Role == 'ADMINPORTAL') { $NumRole = 5; }
+		$NumRole = ROLE_NONE;
+		if ($Role == 'NONE')        { $NumRole = ROLE_NONE;        }
+		if ($Role == 'OBSERVER')    { $NumRole = ROLE_OBSERVER;    }
+		if ($Role == 'USER')        { $NumRole = ROLE_USER;        }
+		if ($Role == 'SUPERVISOR')  { $NumRole = ROLE_SUPERVISOR;  }
+		if ($Role == 'ADMINREGION') { $NumRole = ROLE_ADMINREGION; }
+		if ($Role == 'ADMINPORTAL') { $NumRole = ROLE_ADMINPORTAL; }
 		return $NumRole;
 	}
 	
