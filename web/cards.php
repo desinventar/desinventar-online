@@ -71,21 +71,22 @@ function form2eedata($form) {
 	return $eedat;
 }
 
-$sRegionId = getParameter('_REG', getParameter('r', getParameter('RegionId','')));
-if ( ($sRegionId == '') || ($sRegionId == 'undefined') ) {
-	if ($us->sRegionId != 'core') {
-		$sRegionId = $us->sRegionId;
+$RegionId = getParameter('_REG', getParameter('r', getParameter('RegionId','')));
+if ( ($RegionId == '') || ($RegionId == 'undefined') ) {
+	if ($us->RegionId != 'core') {
+		$RegionId = $us->RegionId;
 	}
 }
-if ($sRegionId == '') {
+
+if ($RegionId == '') {
 	exit(0);
 } else {
-	$us->open($sRegionId);
-	$t->assign('reg', $sRegionId);
+	$us->open($RegionId);
+	$t->assign('reg', $RegionId);
 }
 
 // 2009-08-07 (jhcaiced) Validate if Database Exists...
-if (! file_exists($us->q->getDBFile($sRegionId))) {
+if (! file_exists($us->q->getDBFile($RegionId))) {
 	print "<h3>Requested Region doesn't exist<br>";
 	exit();
 }
@@ -99,9 +100,9 @@ if (isset($_GET['u'])) {
 		$status = "red";
 	}
 	$t->assign("stat", $status);
-	$t->display('card_updater.tpl');
+	$t->display('cards_updater.tpl');
 } else {
-	$t->assign("reg", $sRegionId);
+	$t->assign("reg", $RegionId);
 	$cmd = getParameter('cmd','');
 	$value = getParameter('value','');
 	if ($cmd != '') {
@@ -172,7 +173,7 @@ if (isset($_GET['u'])) {
 		$dcard['DisasterBeginTime[0]'] = substr($dcard['DisasterBeginTime'], 0, 4);
 		$dcard['DisasterBeginTime[1]'] = substr($dcard['DisasterBeginTime'], 5, 2);
 		$dcard['DisasterBeginTime[2]'] = substr($dcard['DisasterBeginTime'], 8, 2);
-		$dcard['_REG'] = $sRegionId;
+		$dcard['_REG'] = $RegionId;
 		echo json_encode($dcard);
 	} elseif (isset($_POST['_CMD'])) {
 		// Commands in POST mode: insert, update, search.. datacards.. 
@@ -224,11 +225,11 @@ if (isset($_GET['u'])) {
 		$t->display("cards_result.tpl");
 		// End _CMD Block
 	} else {
-		//if ($us->UserId == '' || $us->getUserRole($sRegionId == '')) {}
+		//if ($us->UserId == '' || $us->getUserRole($RegionId == '')) {}
 		// Default view of DesInventar
 		$t->assign("usr", $us->UserId);
 		$t->assign("regname", $us->q->getDBInfoValue('RegionLabel'));
-		$role = $us->getUserRole($sRegionId);
+		$role = $us->getUserRole($RegionId);
 		// Validate if user has permission to access database
 		$dic = $us->q->queryLabelsFromGroup('DB', $lg);
 		switch ($role) {

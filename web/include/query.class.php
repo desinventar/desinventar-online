@@ -4,7 +4,7 @@
  (c) 1998-2010 Corporacion OSSO
 */
 class Query extends PDO {
-	public $sRegionId = "";
+	public $RegionId = "";
 	public $dreg = null;
 	public $core = null;
 	public $dbfile = '';
@@ -30,11 +30,11 @@ class Query extends PDO {
 				$this->base = new PDO("sqlite:" . $dbb);
 
 			if ($num_args > 0) {
-				$this->sRegionId = func_get_arg(0);
+				$this->RegionId = func_get_arg(0);
 			}
 			
-			if ($this->sRegionId != '') {
-				$this->setDBConnection($this->sRegionId);
+			if ($this->RegionId != '') {
+				$this->setDBConnection($this->RegionId);
 			} else {
 				$this->setDBConnection('core');
 			} //if
@@ -70,7 +70,7 @@ class Query extends PDO {
 					$this->dreg = new PDO("sqlite:" . $DBFile);
 					// set the error reporting attribute
 					$this->dreg->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-					$this->sRegionId = $prmRegionId;
+					$this->RegionId = $prmRegionId;
 					$this->dbfile = $DBFile;
 				} catch (PDOException $e) {
 					showErrorMsg($e->getMessage());
@@ -81,7 +81,7 @@ class Query extends PDO {
 		} else {
 			$iReturn = ERR_NO_DATABASE;
 			$this->dreg = null;
-			$this->sRegionId = '';
+			$this->RegionId = '';
 		}
 		return $iReturn;
 	}
@@ -1219,7 +1219,7 @@ class Query extends PDO {
 					$js[$ky] .= "'$k': '$v', ";
 				}
 			} //foreach
-			$js[$ky] .= "'_REG': '". $this->sRegionId . "'";
+			$js[$ky] .= "'_REG': '". $this->RegionId . "'";
 			$js[$ky] .= "}";
 		}
 		return $js;

@@ -49,8 +49,8 @@ class DIRegion extends DIObject {
 			$prmRegionId = func_get_arg(1);
 		} else {
 			// Try to load region from Current Session if no parameter was specified
-			if ( ($prmSession->sRegionId != '') && ($prmSession->sRegionId != 'core')) {
-				$prmRegionId = $prmSession->sRegionId;
+			if ( ($prmSession->RegionId != '') && ($prmSession->RegionId != 'core')) {
+				$prmRegionId = $prmSession->RegionId;
 			}
 		}
 		$iReturn = ERR_NO_ERROR;
