@@ -71,7 +71,7 @@ function form2eedata($form) {
 	return $eedat;
 }
 
-$RegionId = getParameter('_REG', getParameter('r', getParameter('RegionId','')));
+$RegionId = getParameter('RegionId', getParameter('r',''));
 if ( ($RegionId == '') || ($RegionId == 'undefined') ) {
 	if ($us->RegionId != 'core') {
 		$RegionId = $us->RegionId;
@@ -177,7 +177,6 @@ if (isset($_GET['u'])) {
 		$dcard['DisasterBeginTime[0]'] = substr($dcard['DisasterBeginTime'], 0, 4);
 		$dcard['DisasterBeginTime[1]'] = substr($dcard['DisasterBeginTime'], 5, 2);
 		$dcard['DisasterBeginTime[2]'] = substr($dcard['DisasterBeginTime'], 8, 2);
-		$dcard['_REG'] = $RegionId;
 		echo json_encode($dcard);
 	} elseif (isset($_POST['_CMD'])) {
 		// Commands in POST mode: insert, update, search.. datacards.. 

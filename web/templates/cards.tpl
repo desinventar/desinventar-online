@@ -65,12 +65,12 @@
 		</tr>
 	</table>
 	<form id="DICard" action="cards.php" method="POST" target="dic">
-		<input type="hidden" name="_REG" id="_REG" value="{-$RegionId-}">
-		<input type="hidden" name="DisasterId" id="DisasterId" value="">
-		<input type="hidden" name="RecordAuthor" id="RecordAuthor" value="{-$usr-}">
-		<input type="hidden" name="RecordCreation" id="RecordCreation">
-		<input type="hidden" name="_CMD" id="_CMD" value="">
-		<input type="hidden" name="PrevDisasterSerial" id="PrevDisasterSerial" value="">
+		<input type="hidden" id="RegionId"           name="RegionId" value="{-$RegionId-}">
+		<input type="hidden" id="DisasterId"         name="DisasterId" value="">
+		<input type="hidden" id="RecordAuthor"       name="RecordAuthor" value="{-$usr-}">
+		<input type="hidden" id="RecordCreation"     name="RecordCreation">
+		<input type="hidden" id="_CMD"               name="_CMD" value="">
+		<input type="hidden" id="PrevDisasterSerial" name="PrevDisasterSerial" value="">
 		<table border="1" cellspacing="8" width="900px">
 			<!-- DATACARD INFORMATION SECTION -->
 			<tr>
