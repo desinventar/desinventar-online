@@ -687,15 +687,16 @@ class UserSession {
 	}
 	
 	// Return an array with the subcomponents of a GeographyId item...
-	function getGeographyItems($prmGeographyId) {
+	function getGeographyItems($prmGeographyLevel, $prmGeographyParentId) {
 		$gItems = array();
-		for($i = 0; $i < strlen($prmGeographyId)/5; $i++) {
-			$gId = substr($prmGeographyId, 0, ($i+1)*5);
-			$sQuery = 'SELECT GeographyId,GeographyName FROM Geography WHERE GeographyId=' . '"' . $gId . '"';
-			foreach($this->q->dreg->query($sQuery) as $row) {
-				array_push($gItems, $row);				
-			}
+		$sQuery = 'SELECT GeographyId,GeographyName FROM Geography WHERE GeographyActive=1 AND GeographyLevel=' . $prmGeographyLevel;
+		if ($i > 0) {
+			$sQuery .= ' AND GeographyId=' . '"' . $prmGeographyParentId . '"';
 		}
+		$sQuery .= ' ORDER BY GeographyName';
+		foreach($this->q->dreg->query($sQuery) as $row) {
+			$gItems[$row['GeographyId']] = $row['GeographyName'];
+		} //foreach
 		return $gItems;
 	}
 } //class
