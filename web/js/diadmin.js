@@ -496,23 +496,28 @@
 	
 	function setDICard(prmRegionId, arr, src) {
 		var diform = null;
-		if (src == "DATA")
+		if (src == "DATA") {
 			diform = window.parent.frames['dif'].document.getElementById('DICard');
-		else
+			myForm = jQuery(diform);
+		} else {
 			diform = $('DICard');
+			myForm = jQuery(diform);
+		}
+		
 		var objElems = diform.elements; // DICard is DesInventar form..
 		for (i=0; i < objElems.length; i++) {
 			if (objElems[i].id == "geolev0") {
 				geo = arr['GeographyId'];
 				getGeoItems(prmRegionId, geo, 0, geo.length / 5, src);
 			} else if (objElems[i].id == 'PrevDisasterSerial') {
-				setElementValue(objElems[i], arr['DisasterSerial']);
+				//setElementValue(objElems[i], arr['DisasterSerial']);
 			} else {
-				varName = jQuery('#' + objElems[i].id).attr('name');
+				varName = jQuery(myForm).find('#' + objElems[i].id).attr('name');
 				setElementValue(objElems[i], arr[varName]);
 			}
 		}
-		jQuery('#PrevDisasterSerial').val(jQuery('#DisasterSerial').val());
+		
+		jQuery(myForm).find('#PrevDisasterSerial').val(jQuery(myForm).find('#DisasterSerial').val());
 	}
 	
 	function getGeoItems(reg, geoid, l, lev, src) {
