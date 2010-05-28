@@ -392,11 +392,12 @@ class Query extends PDO {
 	}
 
 	function getMaxGeoLev() {
-		$sql = "SELECT MAX(GeoLevelId) AS max FROM GeoLevel";
-		$res = $this->getresult($sql);
-		if (isset($res['max']))
-			return $res['max'];
-		return -1;
+		$sQuery = "SELECT MAX(GeoLevelId) AS Max FROM GeoLevel";
+		$MaxGeoLevel = -1;
+		foreach($this->query($sQuery) as $row) {
+			$MaxGeoLevel = $row['Max'];
+		}
+		return $MaxGeoLevel;
 	}
 
 	function loadGeoLevById($geolevid) {
