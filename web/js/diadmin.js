@@ -520,6 +520,7 @@
 		jQuery(myForm).find('#PrevDisasterSerial').val(jQuery(myForm).find('#DisasterSerial').val());
 
 		// Clear all GeoLevel Select Boxes
+		/*
 		jQuery(myForm).find('.GeoLevelSelect').each(function(key, value) {
 			jQuery(this).find('option').remove().end();
 		});
@@ -527,6 +528,7 @@
 		jQuery(arr['GeographyItems']).each(function(key, value) {
 			GeoLevel = jQuery(myForm).find('#GeoLevel' + key).append('<option value=' + value[0] +'>' + value[1] + '</option>');
 		});
+		*/
 	}
 	
 	function getGeoItems(reg, geoid, l, lev, src) {
