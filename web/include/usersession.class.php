@@ -676,6 +676,7 @@ class UserSession {
 		return array('Status' => 'OK', 'DisasterSerial' => $Answer);
 	}
 
+	// Return a small list with the information about levels in database
 	function getGeoLevels() {
 		$sQuery = "SELECT GeoLevelId, GeoLevelName FROM GeoLevel WHERE GeoLevelActive=1 ORDER BY GeoLevelId";
 		$GeoLevels = array();
@@ -683,6 +684,19 @@ class UserSession {
 			array_push($GeoLevels, $row);
 		}
 		return $GeoLevels;
+	}
+	
+	// Return an array with the subcomponents of a GeographyId item...
+	function getGeographyItems($prmGeographyId) {
+		$gItems = array();
+		for($i = 0; $i < strlen($prmGeographyId)/5; $i++) {
+			$gId = substr($prmGeographyId, 0, ($i+1)*5);
+			$sQuery = 'SELECT GeographyId,GeographyName FROM Geography WHERE GeographyId=' . '"' . $gId . '"';
+			foreach($this->q->dreg->query($sQuery) as $row) {
+				array_push($gItems, $row);				
+			}
+		}
+		return $gItems;
 	}
 } //class
 
