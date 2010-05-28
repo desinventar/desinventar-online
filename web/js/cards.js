@@ -82,6 +82,11 @@ function onReadyDatacards() {
 		doDatacardClear();
 		return false;
 	});
+
+	jQuery('#btnDatacardCancel').click(function() {
+		doDatacardCancel();
+		return false;
+	});
 	
 	jQuery('#btnDatacardPrint').click(function() {
 		window.print();
