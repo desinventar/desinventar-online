@@ -130,11 +130,27 @@
 							<td onmouseover="Tip('{-$dis.DisasterGeographyId[1]-}')" onmouseout="UnTip()">
 								{-$dis.DisasterGeographyId[0]-}<b style="color:darkred;">*</b><br />
 								<input id="GeographyId" name="GeographyId" type="hidden" />
+								<table>
+								{-foreach key=key item=GeoLevel from=$GeoLevelList name=GeoLevelList-}
+									<tr>
+										<td>
+											{-$GeoLevel.GeoLevelId-} - {-$GeoLevel.GeoLevelName-}<br />
+										</td>
+										<td>
+											<select id="GeoLevel{-$key-}" tabindex="{-$MyIndex-}" autoComplete="true" style="width:180px; background-Color:#eee;" 
+												class="GeoLevelSelect line" onFocus="showtip('{-$dis.GeographyId[2]-}', '#d4baf6')">
+											</select>
+										</td>
+									</tr>
+								{-/foreach-}
+								</table>
+								<!--
 								<span id="lst_geo" class="geodiv" style="width: 180px; height: 30px;">
 									{-include file="cards_geolist.tpl"-}
 									{-assign var="tabind" value="10"-}
 								</span>
 								<br />
+								-->
 							</td>
 							{-assign var="tabind" value="`$tabind+1`"-}
 							<td onmouseover="Tip('{-$dis.DisasterSiteNotes[1]-}')" onmouseout="UnTip()">

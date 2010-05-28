@@ -675,6 +675,15 @@ class UserSession {
 		}
 		return array('Status' => 'OK', 'DisasterSerial' => $Answer);
 	}
+
+	function getGeoLevels() {
+		$sQuery = "SELECT GeoLevelId, GeoLevelName FROM GeoLevel WHERE GeoLevelActive=1 ORDER BY GeoLevelId";
+		$GeoLevels = array();
+		foreach ($this->q->dreg->query($sQuery) as $row) {
+			array_push($GeoLevels, $row);
+		}
+		return $GeoLevels;
+	}
 } //class
 
 </script>

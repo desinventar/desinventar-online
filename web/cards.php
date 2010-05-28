@@ -110,10 +110,13 @@ if (isset($_GET['u'])) {
 		switch ($cmd) {
 			case "list":
 				$lev = $us->q->getNextLev($_GET['GeographyId']);
+				$levmax = $us->q->getMaxGeoLev();
+				$levname = $us->q->loadGeoLevById($lev);
+				$geol = $us->q->loadGeoChilds($_GET['GeographyId']);
 				$t->assign("lev", $lev);
-				$t->assign("levmax", $us->q->getMaxGeoLev());
-				$t->assign("levname", $us->q->loadGeoLevById($lev));
-				$t->assign("geol", $us->q->loadGeoChilds($_GET['GeographyId']));
+				$t->assign("levmax", $levmax);
+				$t->assign("levname", $levname);
+				$t->assign("geol", $geol);
 				$t->assign("opc", isset($_GET['opc']) ? $_GET['opc'] : '');
 				$t->display("cards_geolist.tpl");
 			break;
@@ -271,7 +274,10 @@ if (isset($_GET['u'])) {
 		$t->assign("sec", $us->q->queryLabelsFromGroup('Sector', $lg));
 		//$t->assign("rcsl", $us->q->queryLabelsFromGroup('RecordStatus', $lg));
 		$t->assign("dmg", $us->q->queryLabelsFromGroup('MetGuide', $lg));
-		$t->assign("levl", $us->q->loadGeoLevels('', -1, false));
+		
+		// Geography Levels
+		$GeoLevelList = $us->getGeoLevels();
+		$t->assign("GeoLevelList", $GeoLevelList);
 		$lev = 0;
 		$t->assign("lev", $lev);
 		$t->assign("levmax", $us->q->getMaxGeoLev());
