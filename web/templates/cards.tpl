@@ -65,7 +65,7 @@
 		</tr>
 	</table>
 	<form id="DICard" action="cards.php" method="POST" target="dic">
-		<input type="hidden" name="_REG" id="_REG" value="{-$reg-}">
+		<input type="hidden" name="_REG" id="_REG" value="{-$RegionId-}">
 		<input type="hidden" name="DisasterId" id="DisasterId" value="">
 		<input type="hidden" name="RecordAuthor" id="RecordAuthor" value="{-$usr-}">
 		<input type="hidden" name="RecordCreation" id="RecordCreation">

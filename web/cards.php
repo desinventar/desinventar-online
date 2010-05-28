@@ -82,7 +82,7 @@ if ($RegionId == '') {
 	exit(0);
 } else {
 	$us->open($RegionId);
-	$t->assign('reg', $RegionId);
+	$t->assign('RegionId', $RegionId);
 }
 
 // 2009-08-07 (jhcaiced) Validate if Database Exists...
@@ -102,7 +102,7 @@ if (isset($_GET['u'])) {
 	$t->assign("stat", $status);
 	$t->display('cards_updater.tpl');
 } else {
-	$t->assign("reg", $RegionId);
+	$t->assign('RegionId', $RegionId);
 	$cmd = getParameter('cmd','');
 	$value = getParameter('value','');
 	if ($cmd != '') {
@@ -169,6 +169,7 @@ if (isset($_GET['u'])) {
 			break;
 		}
 	} elseif (isset($_GET['DisasterId']) && !empty($_GET['DisasterId'])) {
+		// Read Datacard Info and return in JSON
 		$DisasterId = $_GET['DisasterId'];
 		$d = new DIDisaster($us, $DisasterId);
 		$e = new DIEEData($us, $DisasterId);
