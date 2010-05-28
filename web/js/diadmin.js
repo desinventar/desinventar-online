@@ -509,8 +509,6 @@
 			if (objElems[i].id == "geolev0") {
 				geo = arr['GeographyId'];
 				getGeoItems(prmRegionId, geo, 0, geo.length / 5, src);
-			} else if (objElems[i].id == 'PrevDisasterSerial') {
-				//setElementValue(objElems[i], arr['DisasterSerial']);
 			} else {
 				varName = jQuery(myForm).find('#' + objElems[i].id).attr('name');
 				setElementValue(objElems[i], arr[varName]);
