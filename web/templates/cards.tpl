@@ -131,6 +131,7 @@
 								{-$dis.DisasterGeographyId[0]-}<b style="color:darkred;">*</b><br />
 								<input id="GeographyId" name="GeographyId" type="hidden" />
 								<table>
+								{-counter assign=MyIndex start=7-}
 								{-foreach key=key item=GeoLevel from=$GeoLevelList name=GeoLevelList-}
 									<tr>
 										<td>
@@ -140,6 +141,7 @@
 											<select id="GeoLevel{-$key-}" tabindex="{-$MyIndex-}" autoComplete="true" style="width:180px; background-Color:#eee;" 
 												class="GeoLevelSelect line" onFocus="showtip('{-$dis.GeographyId[2]-}', '#d4baf6')">
 											</select>
+											{-counter-}
 										</td>
 									</tr>
 								{-/foreach-}
