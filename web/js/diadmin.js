@@ -506,9 +506,11 @@
 		
 		var objElems = diform.elements; // DICard is DesInventar form..
 		for (i=0; i < objElems.length; i++) {
-			if (objElems[i].id == "geolev0") {
-				geo = arr['GeographyId'];
-				getGeoItems(prmRegionId, geo, 0, geo.length / 5, src);
+			if ( (objElems[i].id == 'GeoLevel0') ||
+			     (objElems[i].id == 'GeoLevel1') ||
+			     (objElems[i].id == 'GeoLevel2') ) {
+				//geo = arr['GeographyId'];
+				//getGeoItems(prmRegionId, geo, 0, geo.length / 5, src);
 			} else {
 				varName = jQuery(myForm).find('#' + objElems[i].id).attr('name');
 				setElementValue(objElems[i], arr[varName]);
@@ -516,6 +518,15 @@
 		}
 		
 		jQuery(myForm).find('#PrevDisasterSerial').val(jQuery(myForm).find('#DisasterSerial').val());
+
+		// Clear all GeoLevel Select Boxes
+		jQuery(myForm).find('.GeoLevelSelect').each(function(key, value) {
+			jQuery(this).find('option').remove().end();
+		});
+		//Show data for Current datacard in Geography Select Boxes
+		jQuery(arr['GeographyItems']).each(function(key, value) {
+			GeoLevel = jQuery(myForm).find('#GeoLevel' + key).append('<option value=' + value[0] +'>' + value[1] + '</option>');
+		});
 	}
 	
 	function getGeoItems(reg, geoid, l, lev, src) {
