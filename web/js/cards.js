@@ -1,4 +1,44 @@
 function onReadyDatacards() {
+	// Geography Levels/Items Functions...
+	jQuery('.GeoLevelSelect').bind('loadGeographyItems', function(event) {
+		GeographyLevelId = parseInt(jQuery(this).attr('level'));
+		if (GeographyLevelId > 0) {
+			GeographyParentId = event.GeographyParentId;
+			mySelect = jQuery(this);
+			mySelect.trigger('clearGeographyItems');
+			jQuery.post('cards.php',
+				{'cmd'               : 'getGeographyItemsByLevel',
+				 'GeographyLevelId'  : GeographyLevelId,
+				 'GeographyParentId' : GeographyParentId,
+				 'RegionId'          : jQuery('#prmRegionId').val()
+				},
+				function(data) {
+					jQuery(data).each(function(key,value) {
+						mySelect.append('<option value="' + value['GeographyId'] + '">' + value['GeographyName'] + '</option>');
+					});
+					mySelect.val('');
+					NextLevel = parseInt(GeographyLevelId) + 1;
+					jQuery('#GeoLevel' + NextLevel).trigger('clearGeographyItems'); 
+				},
+				'json'
+			);
+		} //if
+	});
+
+	// Clear Geography Items from a Select Box
+	jQuery('.GeoLevelSelect').bind('clearGeographyItems', function(event) {
+		mySelect = jQuery(this);
+		mySelect.find('option').remove();
+		mySelect.append('<option value=""></option>');
+		mySelect.val('');
+	});
+	
+	// Enable loading of geographic levels when editing...
+	jQuery('.GeoLevelSelect').change(function() {
+		NextLevel = parseInt(jQuery(this).attr('level')) + 1;
+		jQuery('#GeoLevel' + NextLevel).trigger({type: 'loadGeographyItems', GeographyParentId:jQuery(this).val()});
+	});	
+
 	// Hide StatusMessages
 	displayDatacardStatusMsg('');
 	jQuery('#divDatacardStatusMsg').show();
@@ -142,7 +182,7 @@ function onReadyDatacards() {
 	if (jQuery('#prmUserRoleValue').val() >= 2) {
 		jQuery('.DatacardCmdButton').show();
 	}
-	
+
 }
 
 var mod = "di";
@@ -394,13 +434,11 @@ function doDatacardSave() {
 				bContinue = true;
 				if ( (cmd == 'insertDICard') && (data.DisasterSerial != '') ) {
 					// Serial of new datacard already exists...
-					//alert('Disaster Serial already exists...');
 					bContinue = false;
 				}
 				if (cmd == 'updateDICard') {
 					if ( (DisasterSerial != PrevDisasterSerial) && (data.DisasterSerial != '') ) {
 						// Edited Serial exists in database...
-						//alert('Disaster Serial is duplicated...');
 						bContinue = false;
 					}
 				}

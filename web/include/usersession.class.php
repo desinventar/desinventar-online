@@ -702,12 +702,12 @@ class UserSession {
 	function getGeographyItemsByLevel($prmGeographyLevel, $prmGeographyParentId) {
 		$gItems = array();
 		$sQuery = 'SELECT GeographyId,GeographyName FROM Geography WHERE GeographyActive=1 AND GeographyLevel=' . $prmGeographyLevel;
-		if ($i > 0) {
-			$sQuery .= ' AND GeographyId=' . '"' . $prmGeographyParentId . '"';
+		if ($prmGeographyLevel > 0) {
+			$sQuery .= ' AND SUBSTR(GeographyId,1,' . ($prmGeographyLevel*5) . ')="' . $prmGeographyParentId . '"';
 		}
 		$sQuery .= ' ORDER BY GeographyName';
 		foreach($this->q->dreg->query($sQuery) as $row) {
-			$gItems[$row['GeographyId']] = $row['GeographyName'];
+			array_push($gItems, $row);
 		} //foreach
 		return $gItems;
 	}
