@@ -307,29 +307,36 @@
 		var status = true;
 		for (i=0; i<fl.length; i++) {
 			field = $(fl[i]);
-			switch(field.type) {
-				case "text":	case "hidden":	case "password":	case "textarea":
-					// is it a required field?
-					if (encodeURI(field.value).length < 1) {
-						status = false;
-						if (!status)
-						  field.style.backgroundColor = "#f1c7c7";
-					}
-				break;   
-				case "select-one":
-					if (encodeURI(field.options[field.selectedIndex].value).length < 1) {
-						status = false;
-						if (!status)
-						  field.style.backgroundColor = "#f1c7c7";
-					}
-				break;
+			if (field != null) {
+				switch(field.type) {
+					case "text":
+					case "hidden":
+					case "password":
+					case "textarea":
+						// is it a required field?
+						if (encodeURI(field.value).length < 1) {
+							status = false;
+							if (!status) {
+								field.style.backgroundColor = "#f1c7c7";
+							}
+						}
+					break;   
+					case "select-one":
+						if (encodeURI(field.options[field.selectedIndex].value).length < 1) {
+							status = false;
+							if (!status) {
+								field.style.backgroundColor = "#f1c7c7";
+							}
+						}
+					break;
+				} //switch
 			}
 		}
 		if (status == false) {
 			alert(errmsg);
 		}
 		return status;
-	}
+	} //function
 
 	function getForm(fobj) {
 		var str = '';
