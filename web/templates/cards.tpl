@@ -142,8 +142,8 @@
 												class="GeoLevelSelect line" onFocus="showtip('{-$dis.GeographyId[2]-}', '#d4baf6')">
 												<option></option>
 												{-if $key == 0 -}
-													{-foreach key=GeographyId item=GeographyName from=$GeoLevelItems -}
-															<option value="{-$GeographyId-}">{-$GeographyName-}</option>
+													{-foreach key=GeographyKey item=GeographyItem from=$GeoLevelItems -}
+															<option value="{-$GeographyItem.GeographyId-}">{-$GeographyItem.GeographyName-}</option>
 													{-/foreach-}
 												{-/if-}
 											</select>

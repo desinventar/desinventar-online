@@ -77,7 +77,6 @@ if ( ($RegionId == '') || ($RegionId == 'undefined') ) {
 		$RegionId = $us->RegionId;
 	}
 }
-
 if ($RegionId == '') {
 	exit(0);
 } else {
@@ -119,6 +118,10 @@ if (isset($_GET['u'])) {
 				$t->assign("geol", $geol);
 				$t->assign("opc", isset($_GET['opc']) ? $_GET['opc'] : '');
 				$t->display("cards_geolist.tpl");
+			break;
+			case 'getGeographyItemsByLevel':
+				$gItems = $us->getGeographyItemsByLevel(getParameter('GeographyLevelId',''),getParameter('GeographyParentId', ''));
+				echo json_encode($gItems);
 			break;
 			case "getNextSerial":
 				$ser = $us->q->getNextDisasterSerial($value);
