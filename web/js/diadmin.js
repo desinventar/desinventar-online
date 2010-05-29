@@ -520,15 +520,19 @@
 		jQuery(myForm).find('#PrevDisasterSerial').val(jQuery(myForm).find('#DisasterSerial').val());
 
 		// Clear all GeoLevel Select Boxes
-		/*
 		jQuery(myForm).find('.GeoLevelSelect').each(function(key, value) {
-			jQuery(this).find('option').remove().end();
+			if (jQuery(this).attr('level') > 0) {
+				jQuery(this).find('option').remove().end();
+			}
 		});
 		//Show data for Current datacard in Geography Select Boxes
 		jQuery(arr['GeographyItems']).each(function(key, value) {
-			GeoLevel = jQuery(myForm).find('#GeoLevel' + key).append('<option value=' + value[0] +'>' + value[1] + '</option>');
+			if (key == 0) {
+				jQuery(myForm).find('#GeoLevel' + key).val(value['GeographyId']);
+			} else {
+				jQuery(myForm).find('#GeoLevel' + key).append('<option value=' + value['GeographyId'] +'>' + value['GeographyName'] + '</option>');
+			}
 		});
-		*/
 	}
 	
 	function getGeoItems(reg, geoid, l, lev, src) {

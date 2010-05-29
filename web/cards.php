@@ -177,8 +177,8 @@ if (isset($_GET['u'])) {
 		$dcard['DisasterBeginTime[0]'] = substr($dcard['DisasterBeginTime'], 0, 4);
 		$dcard['DisasterBeginTime[1]'] = substr($dcard['DisasterBeginTime'], 5, 2);
 		$dcard['DisasterBeginTime[2]'] = substr($dcard['DisasterBeginTime'], 8, 2);
-		$gItems = $us->getGeographyItems($dcard['GeographyId']);
-		$dcard['GeographyItems'] = array(0 => $gItems);
+		$gItems = $us->getGeographyItemsById($dcard['GeographyId']);
+		$dcard['GeographyItems'] = $gItems;
 		echo json_encode($dcard);
 	} elseif (isset($_POST['_CMD'])) {
 		// Commands in POST mode: insert, update, search.. datacards.. 
@@ -286,7 +286,7 @@ if (isset($_GET['u'])) {
 		$t->assign("levmax", $us->q->getMaxGeoLev());
 		$t->assign("levname", $us->q->loadGeoLevById($lev));
 		$t->assign("geol", $us->q->loadGeography($lev));
-		$gItems = $us->getGeographyItems(0, '');
+		$gItems = $us->getGeographyItemsByLevel(0, '');
 		$t->assign('GeoLevelItems', $gItems);
 		$t->assign("evel", $us->q->loadEvents(null, "active", $lg));
 		$t->assign("caul", $us->q->loadCauses(null, "active", $lg));

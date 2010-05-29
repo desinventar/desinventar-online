@@ -138,8 +138,9 @@
 											{-$GeoLevel.GeoLevelId-} - {-$GeoLevel.GeoLevelName-}<br />
 										</td>
 										<td>
-											<select id="GeoLevel{-$key-}" tabindex="{-$MyIndex-}" autoComplete="true" style="width:180px; background-Color:#eee;" 
+											<select id="GeoLevel{-$key-}" level="{-$key-}" tabindex="{-$MyIndex-}" autoComplete="true" style="width:180px; background-Color:#eee;" 
 												class="GeoLevelSelect line" onFocus="showtip('{-$dis.GeographyId[2]-}', '#d4baf6')">
+												<option></option>
 												{-if $key == 0 -}
 													{-foreach key=GeographyId item=GeographyName from=$GeoLevelItems -}
 															<option value="{-$GeographyId-}">{-$GeographyName-}</option>
