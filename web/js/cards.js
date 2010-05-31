@@ -5,6 +5,7 @@ function onReadyDatacards() {
 		if (GeographyLevelId > 0) {
 			GeographyParentId = event.GeographyParentId;
 			mySelect = jQuery(this);
+			myValue = mySelect.val();
 			mySelect.trigger('clearGeographyItems');
 			jQuery.post('cards.php',
 				{'cmd'               : 'getGeographyItemsByLevel',
@@ -16,15 +17,15 @@ function onReadyDatacards() {
 					jQuery(data).each(function(key,value) {
 						mySelect.append('<option value="' + value['GeographyId'] + '">' + value['GeographyName'] + '</option>');
 					});
-					mySelect.val('');
-					NextLevel = parseInt(GeographyLevelId) + 1;
-					jQuery('#GeoLevel' + NextLevel).trigger('clearGeographyItems'); 
+					mySelect.val(myValue);
+					//NextLevel = parseInt(GeographyLevelId) + 1;
+					//jQuery('#GeoLevel' + NextLevel).trigger('clearGeographyItems'); 
 				},
 				'json'
 			);
 		} //if
 	});
-
+	
 	// Clear Geography Items from a Select Box
 	jQuery('.GeoLevelSelect').bind('clearGeographyItems', function(event) {
 		mySelect = jQuery(this);
@@ -378,6 +379,7 @@ function requestDatacard(myCmd, myValue) {
 		'json'
 	);
 	$('dostat').innerHTML = "";
+	//jQuery('.GeoLevelSelect').trigger({type: 'loadGeographyItems', GeographyParentId:jQuery('#GeoLevel0').val()});
 	return bReturn;
 }
 
