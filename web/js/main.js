@@ -1,6 +1,7 @@
 function onReadyMain() {
 	jQuery('#DC').submit(function() {
-		jQuery.post('data.php',
+		var myURL = jQuery(this).attr('action');
+		jQuery.post(myURL,
 			jQuery(this).serialize(),
 			function(data) {
 				jQuery('#divGridView').html('');

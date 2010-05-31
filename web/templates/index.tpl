@@ -223,7 +223,7 @@
 			</table>
 			<div id="divGridView">
 			</div>
-			<iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="?cmd=getRegionFullInfo&r={-$reg-}"></iframe>
+			<!-- <iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="?cmd=getRegionFullInfo&r={-$reg-}"></iframe> -->
 		</div> <!-- end div id=divQueryResults -->
 		<div class="contentBlock" id="divDatabaseList" >
 			{-include file="header_simple.tpl" -}
@@ -240,6 +240,7 @@
 		<form id="DC" method="POST" target="dcr">
 			<input type="hidden" id="_REG" name="_REG" value="{-$reg-}" />
 			<input type="hidden" id="_CMD" name="_CMD" />
+			<input type="hidden" id="prmCommand" name="prmCommand" value="DEFAULT" />
 			<input type="hidden" id="prmMinYear" name="prmMinYear" value="{-$yini-}" />
 			<input type="hidden" id="prmMaxYear" name="prmMaxYear" value="{-$yend-}" />
 			<dl class="accordion">

@@ -698,7 +698,6 @@
 				combineForms('DC', 'CD');
 				w.collapse();
 				$('DC').action='data.php';
-				//$('DC').submit();
 				jQuery('#DC').submit();
 				//hideMap();
 				return true;
@@ -732,7 +731,7 @@
 				combineForms('DC', 'CM');
 				w.collapse(); // hide()
 				$('DC').action='thematicmap.php';
-				$('DC').submit();
+				jQuery('#DC').submit();
 				//hideMap();
 				return true;
 			} else {
@@ -746,7 +745,7 @@
 			combineForms('DC', 'CG');
 			w.collapse(); //hide()
 			$('DC').action='graphic.php';
-			$('DC').submit();
+			jQuery('#DC').submit();
 			//hideMap();
 		}
 		
