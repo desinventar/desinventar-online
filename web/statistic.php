@@ -192,6 +192,6 @@ if (isset($post['page']) || isset($post['_S+cmd'])) {
 		}
 	}
 }
-$t->display ("statistic.tpl");
+$t->display('statistic.tpl');
 
 </script>

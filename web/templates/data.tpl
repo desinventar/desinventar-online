@@ -78,7 +78,6 @@
 	</table>
 	<div style="display:none;">
 		<input type="hidden" id="prmRegionId"       value="{-$RegionId-}"       />
-		<input type="hidden" id="prmRegionLabel"    value="{-$RegionLabel-}"    />
 		<input type="hidden" id="prmUserRole"       value="{-$UserRole-}"       />
 		<input type="hidden" id="prmUserRoleValue"  value="{-$UserRoleValue-}"  />
 		<input type="hidden" id="prmRecordsPerPage" value="{-$RecordsPerPage-}" />
