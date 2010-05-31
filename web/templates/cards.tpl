@@ -1,25 +1,4 @@
 {-config_load file=`$lg`.conf section="di8_input"-}
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
-	<title>{-#ttitle#-} [{-$regname-}] | {-$usr-} - {-$dicrole-}</title>
-	<link rel="stylesheet" type="text/css" href="css/desinventar.css?version={-$jsversion-}" />
-	<link rel="stylesheet" type="text/css" href="css/datacards.css?version={-$jsversion-}" />
-	{-include file="jquery.tpl" -}
-	<script type="text/javascript" src="include/prototype.js"></script>
-	<script type="text/javascript" src="include/combo-box.js"></script>
-	<script type="text/javascript" src="js/diadmin.js?version={-$jsversion-}"></script>
-	<script type="text/javascript" src="js/cards.js?version={-$jsversion-}"></script>
-	<script type="text/javascript" src="js/jquery.snippets.js?version={-$jsversion-}"></script>
-	<script type="text/javascript" language="javascript">
-		jQuery(document).ready(function() {
-			onReadyDatacards();
-		});
-	</script>
-</head>
-<body>
 	<script type="text/javascript" src="include/wz_tooltip.js"></script>
 	<!-- BEG DI8 FORM CARD -->
 	<table width="900px" border="0" cellpadding="0" cellspacing="0" >
@@ -417,5 +396,3 @@
 		<input type="hidden" id="prmUserRoleValue" value="{-$UserRoleValue-}" />
 		<input type="hidden" id="prmRecordNumber"  value="0" />
 	</div>
-</body>
-</html>

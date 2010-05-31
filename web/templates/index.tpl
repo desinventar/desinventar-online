@@ -6,7 +6,8 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
 	<title>{-#ttitle#-} | {-$regname-}</title>
-	<link rel="stylesheet" href="css/desinventar.css?version={-$jsversion-}" type="text/css">
+	<link rel="stylesheet" type="text/css" href="css/desinventar.css?version={-$jsversion-}" />
+	<link rel="stylesheet" type="text/css" href="css/datacards.css?version={-$jsversion-}" />
 	<script type="text/javascript" src="include/prototype.js"></script>
 	<!-- jQuery -->
 	{-include file="jquery.tpl" -}
@@ -17,8 +18,10 @@
 	<script type="text/javascript" src="include/wd.js"></script>
 	<script type="text/javascript" src="include/accordion.js"></script>
 	<script type="text/javascript" src="include/palette.js"></script>
+	<script type="text/javascript" src="include/combo-box.js"></script>
 
 	<script type="text/javascript" src="js/diadmin.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="js/cards.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/jquery.snippets.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/user.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/user_login.js?version={-$jsversion-}"></script>
@@ -36,6 +39,8 @@
 	<script type="text/javascript" src="include/tabber.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
+			onReadyDatacards();
+			
 			jQuery('#divDatacardsShow').hide();
 			jQuery('#divDatabaseBackup').hide();
 			
@@ -151,7 +156,9 @@
 						<div id="dif-win" class="x-hidden">
 							<div class="x-window-header">{-#mdcsection#-} | {-$userid-} - {-$role-}</div>
 							<div id="dif-cfg" style="text-align:center;">
-								<iframe name="dif" id="dif" frameborder="0" height="600px;" width="100%" src="cards.php?r={-$reg-}"></iframe>
+								<div name="dif" id="dif" frameborder="0" height="600px;" width="100%">
+									{-include file="cards.tpl"-}
+								</div>
 							</div>
 						</div>
 						<!-- Show User login/logout window -->

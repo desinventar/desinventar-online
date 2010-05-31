@@ -341,6 +341,76 @@ switch ($cmd) {
 					$std = array_merge($std, $us->q->queryLabelsFromGroup('Statistic', $lg));
 					$std = array_merge($std, $st);
 					$t->assign ("std", $std);
+
+					/* DATACARDS */
+					//if ($us->UserId == '' || $us->getUserRole($RegionId == '')) {}
+					// Default view of DesInventar
+					$t->assign("usr", $us->UserId);
+					$t->assign("regname", $us->q->getDBInfoValue('RegionLabel'));
+					$UserRole = $us->getUserRole($RegionId);
+					$UserRoleValue = $us->getUserRoleValue($RegionId);
+					
+					// Validate if user has permission to access database
+					$dic = $us->q->queryLabelsFromGroup('DB', $lg);
+					switch ($UserRole) {
+						case "ADMINREGION":
+							$t->assign("showconfig", true);
+							$dicrole = $dic['DBRoleAdmin'][0];
+						break;
+						case "OBSERVER":
+							$t->assign("showconfig", true);
+							$t->assign("ro", "disabled");
+							$dicrole = $dic['DBRoleObserver'][0];
+						break;
+						case "SUPERVISOR":
+							$dicrole = $dic['DBRoleSupervisor'][0];
+						break;
+						case "USER":
+							$dicrole = $dic['DBRoleUser'][0];
+						break;
+						default:
+							$dicrole = null;
+						break;
+					}
+					$t->assign("dicrole", $dicrole);
+					$t->assign("ctl_effects", true);
+					$dis = $us->q->queryLabelsFromGroup('Disaster', $lg);
+					$dis = array_merge($dis, $us->q->queryLabelsFromGroup('Geography', $lg));
+					$t->assign("dis", $dis);
+					$t->assign("rc1", $us->q->queryLabelsFromGroup('Record|1', $lg));
+					$t->assign("rc2", $us->q->queryLabelsFromGroup('Record|2', $lg));
+					$t->assign("eve", $us->q->queryLabelsFromGroup('Event', $lg));
+					$t->assign("cau", $us->q->queryLabelsFromGroup('Cause', $lg));
+					$t->assign("ef1", $us->q->queryLabelsFromGroup('Effect|People', $lg));
+					$t->assign("ef2", $us->q->queryLabelsFromGroup('Effect|Economic', $lg));
+					$t->assign("ef3", $us->q->queryLabelsFromGroup('Effect|Affected', $lg));
+					$sc3 = $us->q->querySecLabelFromGroup('Effect|Affected', $lg);
+					$t->assign("sc3", $sc3);
+					$t->assign("ef4", $us->q->queryLabelsFromGroup('Effect|More', $lg));
+					$t->assign("sec", $us->q->queryLabelsFromGroup('Sector', $lg));
+					//$t->assign("rcsl", $us->q->queryLabelsFromGroup('RecordStatus', $lg));
+					$t->assign("dmg", $us->q->queryLabelsFromGroup('MetGuide', $lg));
+					
+					// Geography Levels
+					$GeoLevelList = $us->getGeoLevels();
+					$t->assign("GeoLevelList", $GeoLevelList);
+					
+					$lev = 0;
+					$t->assign("lev", $lev);
+					$t->assign("levmax", $us->q->getMaxGeoLev());
+					$t->assign("levname", $us->q->loadGeoLevById($lev));
+					$t->assign("geol", $us->q->loadGeography($lev));
+					$gItems = $us->getGeographyItemsByLevel(0, '');
+					$t->assign('GeoLevelItems', $gItems);
+					$t->assign("evel", $us->q->loadEvents(null, "active", $lg));
+					$t->assign("caul", $us->q->loadCauses(null, "active", $lg));
+					$t->assign("eefl", $us->q->getEEFieldList("True"));
+
+					$t->assign('RegionId', $RegionId);
+					$t->assign('UserRole', $UserRole);
+					$t->assign('UserRoleValue', $UserRoleValue);
+					/* DATACARDS END */
+
 					$t->display("index.tpl");
 				break;
 			} // switch

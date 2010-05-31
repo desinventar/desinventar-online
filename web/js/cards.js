@@ -662,13 +662,14 @@ function setDICardfromId(prmRegionId, prmDisasterId, src) {
 
 function setDICard(prmRegionId, arr, src) {
 	var diform = null;
-	if (src == "DATA") {
+/*	if (src == "DATA") {
 		diform = window.parent.frames['dif'].document.getElementById('DICard');
 		myForm = jQuery(diform);
 	} else {
+	*/
 		diform = $('DICard');
 		myForm = jQuery(diform);
-	}
+	//}
 	
 	var objElems = diform.elements; // DICard is DesInventar form..
 	for (i=0; i < objElems.length; i++) {
