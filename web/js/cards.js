@@ -1,10 +1,10 @@
 function onReadyDatacards() {
 	// Geography Levels/Items Functions...
 	jQuery('.GeoLevelSelect').bind('loadGeographyItems', function(event) {
-		LevelId = parseInt(jQuery(this).attr('level'));
-		mySelect = jQuery(this);
+		var mySelect = jQuery(this);
 		mySelect.trigger('clearGeographyItems');
-		myValue = jQuery('#GeographyItemId' + LevelId).text();
+		var LevelId = parseInt(mySelect.attr('level'));
+		var myValue = jQuery('#GeographyItemId' + LevelId).text();
 		if (event.ReadOnly) {
 			if (LevelId > 0) {
 				mySelect.append('<option value="' + jQuery('#GeographyItemId' + LevelId).text() +'">' + jQuery('#GeographyItemValue' + LevelId).text() + '</option>');
@@ -14,7 +14,7 @@ function onReadyDatacards() {
 			if (LevelId > 0) {
 				PrevLevel = parseInt(LevelId) - 1;
 				GeographyParentId = jQuery('#GeographyItemId' + PrevLevel).text();
-				jQuery.post('cards.php',
+				jQuery.get('cards.php',
 					{'cmd'               : 'getGeographyItemsByLevel',
 					 'GeographyLevelId'  : LevelId,
 					 'GeographyParentId' : GeographyParentId,
@@ -34,8 +34,8 @@ function onReadyDatacards() {
 	
 	// Clear Geography Items from a Select Box
 	jQuery('.GeoLevelSelect').bind('clearGeographyItems', function(event) {
-		mySelect = jQuery(this);
-		LevelId = parseInt(mySelect.attr('level'));
+		var mySelect = jQuery(this);
+		var LevelId = parseInt(mySelect.attr('level'));
 		if (LevelId > 0) {
 			mySelect.find('option').remove();
 			mySelect.append('<option value=""></option>');
@@ -45,22 +45,34 @@ function onReadyDatacards() {
 	
 	// Enable loading of geographic levels when editing...
 	jQuery('.GeoLevelSelect').change(function() {
-		Level = parseInt(jQuery(this).attr('level'));
-		NextLevel = parseInt(Level) + 1;
-		jQuery('#GeoLevel' + NextLevel).trigger({type : 'loadGeographyItems', ReadOnly: false});
+		var LevelId = parseInt(jQuery(this).attr('level'));
+		var NextLevelId = parseInt(LevelId) + 1;
+		var MyGeoLevelId = jQuery(this).val();
+		var GeoLevelCount = jQuery('.GeoLevelSelect').size();
+		
+		// Update Select Boxes for Next Level
+		jQuery('#GeographyItemId' + LevelId).text(MyGeoLevelId);
+		jQuery('#GeographyItemValue' + LevelId).text(jQuery(this).find('option[value=' + MyGeoLevelId + ']').text());
+
+		// Clear values of following sublevels
+		for(var i = NextLevelId; i < GeoLevelCount; i++) {
+			jQuery('#GeoLevel' + i).trigger('clearGeographyItems');
+			jQuery('#GeographyItemId' + i).text('');
+			jQuery('#GeographyItemValue' + i).text('');
+		}
+		
+		// Preload Items for Next Level only
+		jQuery('#GeoLevel' + NextLevelId).trigger({type : 'loadGeographyItems', ReadOnly: false});
 		
 		// Update value of GeographyId
-		if (Level == 0) {
-			jQuery('#GeographyId').val(jQuery(this).val());
-		} else {
-			if (jQuery(this).val() != '') {
-				jQuery('#GeographyId').val(jQuery(this).val());
-			} else {
-				PrevLevel = parseInt(Level) - 1;
-				jQuery('#GeographyId').val(jQuery('#GeoLevel' + PrevLevel).val());
+		var myGeographyId = '';
+		for(var i = 0; i < GeoLevelCount; i++) {
+			myValue = jQuery('#GeographyItemId' + i).text();
+			if (myValue != '') {
+				myGeographyId = myValue;
 			}
 		}
-		alert('Change : ' + Level + ' GeographyId=' + jQuery('#GeographyId').val());
+		jQuery('#GeographyId').val(myGeographyId);
 	});	
 
 	// Hide StatusMessages
@@ -423,8 +435,7 @@ function doDatacardEdit() {
 				jQuery('#_CMD').val('updateDICard');
 				displayDatacardStatusMsg('msgDatacardFill');
 				changeOptions('btnDatacardEdit');
-				jQuery('#GeoLevel1').trigger({type : 'loadGeographyItems', ReadOnly : false});
-				jQuery('#GeoLevel2').trigger({type : 'loadGeographyItems', ReadOnly : false});
+				jQuery('.GeoLevelSelect').trigger({type : 'loadGeographyItems', ReadOnly : false});
 			} else {
 				displayDatacardStatusMsg('msgDatacardIsLocked');
 			}
