@@ -133,8 +133,8 @@
 										<td valign="top">
 											{-$dis.DisasterGeographyId[0]-}<b style="color:darkred;">*</b>
 											<br />
-											<input id="GeographyId" name="GeographyId" type="text" size="25" />
-											<div style="display:block;">
+											<input id="GeographyId" name="GeographyId" type="hidden" size="25" />
+											<div style="display:none;">
 											<br />
 											{-foreach key=key item=GeoLevel from=$GeoLevelList name=GeoLevelList-}
 												<span class="GeographyItemInfo" id="GeographyItemId{-$GeoLevel.GeoLevelId-}">GeographyItem{-$GeoLevel.GeoLevelId-}</span>
