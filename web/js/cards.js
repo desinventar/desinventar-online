@@ -1,12 +1,24 @@
 function onReadyDatacards() {
-	jQuery('.EffectNumeric').keypress(function(event) {
+	// Process combobox/input fields in effects
+	jQuery('.clsEffectNumeric').keypress(function(event) {
 		edit(event);
 	});
-	jQuery('.EffectNumeric').blur(function(event) {
+	jQuery('.clsEffectNumeric').blur(function(event) {
 		this.editing=false;
 		if(parseInt(this.value) == 0) { 
 			this.value = '0';
 		}
+	});
+
+	// Enable/Disable related EffectSector fields based on value of other fields...	
+	jQuery('.clsEffectDouble').blur(function(event) {
+		altField = jQuery(this).attr('altField');
+		if(parseInt(jQuery(this).val()) > 0) {
+			jQuery('#' + altField).val('-1');
+		}
+		if(parseInt(jQuery(this).val()) == 0) {
+			jQuery('#' + altField).val('0');
+		}	
 	});
 	
 	// Geography Levels/Items Functions...

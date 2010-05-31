@@ -274,7 +274,8 @@ if (isset($_GET['u'])) {
 		$t->assign("ef1", $us->q->queryLabelsFromGroup('Effect|People', $lg));
 		$t->assign("ef2", $us->q->queryLabelsFromGroup('Effect|Economic', $lg));
 		$t->assign("ef3", $us->q->queryLabelsFromGroup('Effect|Affected', $lg));
-		$t->assign("sc3", $us->q->querySecLabelFromGroup('Effect|Affected', $lg));
+		$sc3 = $us->q->querySecLabelFromGroup('Effect|Affected', $lg);
+		$t->assign("sc3", $sc3);
 		$t->assign("ef4", $us->q->queryLabelsFromGroup('Effect|More', $lg));
 		$t->assign("sec", $us->q->queryLabelsFromGroup('Sector', $lg));
 		//$t->assign("rcsl", $us->q->queryLabelsFromGroup('RecordStatus', $lg));
