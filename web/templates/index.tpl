@@ -23,6 +23,9 @@
 	<script type="text/javascript" src="js/diadmin.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/cards.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/data.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="js/graphic.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="js/thematicmap.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="js/statistic.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/jquery.snippets.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/user.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/user_login.js?version={-$jsversion-}"></script>
@@ -43,6 +46,8 @@
 		jQuery(document).ready(function() {
 			onReadyMain();
 			onReadyDatacards();
+			onReadyData();
+			onReadyGraphic();
 			
 			jQuery('#divDatacardsShow').hide();
 			jQuery('#divDatabaseBackup').hide();

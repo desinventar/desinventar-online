@@ -7,6 +7,9 @@ function onReadyMain() {
 				jQuery('#divGridView').html('');
 				jQuery('#divGridView').html(data);
 				onReadyData();
+				onReadyGraphic();
+				onReadyThematicMap();
+				onReadyStatistic();
 			}
 		);
 		return false;

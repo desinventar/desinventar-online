@@ -108,6 +108,6 @@ if ($GraphCommand != '') {
 	} // if
 } //if
 
-$t->display ("graphic.tpl");
+$t->display("graphic.tpl");
 
 </script>
