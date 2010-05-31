@@ -130,11 +130,13 @@
 							<td onmouseover="Tip('{-$dis.DisasterGeographyId[1]-}')" onmouseout="UnTip()">
 								{-$dis.DisasterGeographyId[0]-}<b style="color:darkred;">*</b>
 								<br />
-								<input id="GeographyId" name="GeographyId" type="text" size="25" /><br />
+								<input id="GeographyId" name="GeographyId" type="hidden" size="25" /><br />
+								<div style="display:none;">
 								{-foreach key=key item=GeoLevel from=$GeoLevelList name=GeoLevelList-}
 									<span class="GeographyItemInfo" id="GeographyItemId{-$GeoLevel.GeoLevelId-}">GeographyItem{-$GeoLevel.GeoLevelId-}</span>
 									<span class="GeographyItemInfo" id="GeographyItemValue{-$GeoLevel.GeoLevelId-}">GeographyItem{-$GeoLevel.GeoLevelId-}</span><br />
 								{-/foreach-}
+								</div>
 								<table>
 								{-counter assign=MyIndex start=7-}
 								{-foreach key=key item=GeoLevel from=$GeoLevelList name=GeoLevelList-}
