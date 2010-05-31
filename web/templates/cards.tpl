@@ -272,9 +272,9 @@
 									{-assign var="tabind" value="`$tabind+1`"-}
 									<span onmouseover="Tip('{-$item[1]-}')" onmouseout="UnTip()">
 										{-$item[0]-}<br />
-										<input id="{-$key-}" name="{-$key-}" type="text" size="7" maxlength="10"
-											class="line inputDouble" tabindex="{-$tabind-}" value="0" onFocus="showtip('{-$item[2]-}', '#f1bd41')"
-											onBlur="if(parseInt(this.value) > 0) { $('{-$sc3[$key]-}').value='-1';} if(parseInt(this.value) ==0) { $('{-$sc3[$key]-}').value='0';}" />
+										<input id="{-$key-}" name="{-$key-}" type="text" size="7" maxlength="10" altfield="{-$sc3[$key]-}"
+											class="line inputDouble clsEffectDouble" tabindex="{-$tabind-}" value="0" onFocus="showtip('{-$item[2]-}', '#f1bd41')"
+											 />
 									</span>
 									<br />
 								{-/foreach-}
