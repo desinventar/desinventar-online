@@ -7,17 +7,14 @@ require_once('include/loader.php');
 
 $post = $_POST;
 
-if (isset($post['_REG']) && !empty($post['_REG'])) {
-	$reg = $post['_REG'];
-} elseif (isset($post['r']) && !empty($post['r'])) {
-	$reg = $post['r'];
-} else {
+$RegionId = getParameter('RegionId', getParameter('_REG', getParameter('r','')));
+if ($RegionId == '') {
 	exit();
 }
 
-$us->open($reg);
+$us->open($RegionId);
 
-$regname = $us->q->getDBInfoValue('RegionLabel');
+$RegionLabel = $us->q->getDBInfoValue('RegionLabel');
 fixPost($post);
 
 // load basic field of dictionary
@@ -30,9 +27,15 @@ $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Cause', $lg));
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Sector', $lg));
 $dic = array_merge($dic, $us->q->getEEFieldList("True"));
-//$t->assign ("dic", $dic);
-$t->assign ("reg", $reg);
-$t->assign ("regname", $regname);
+
+
+$UserRole = $us->getUserRole($RegionId);
+$UserRoleValue = $us->getUserRoleValue($RegionId);
+
+$t->assign('RegionId'   , $RegionId);
+$t->assign('RegionLabel', $RegionLabel);
+$t->assign('UserRole', $UserRole);
+$t->assign('UserRoleValue', $UserRoleValue);
 
 // Data Options Interface
 if (isset($post['page']) || isset($post['_D+cmd'])) {
@@ -67,24 +70,24 @@ if (isset($post['page']) || isset($post['_D+cmd'])) {
 			// Set values to paging list
 			$iNumberOfPages = (int) (($iNumberOfRecords / $iRecordsPerPage) + 1);
 			// Smarty assign SQL values
-			$t->assign ("sql", base64_encode($sql));
-			$t->assign ("fld", $fld);
-			$t->assign ("tot", $iNumberOfRecords);
-			$t->assign ("RecordsPerPage", $iRecordsPerPage);
-			$t->assign ("NumberOfPages" ,$iNumberOfPages);
+			$t->assign('sql', base64_encode($sql));
+			$t->assign('fld', $fld);
+			$t->assign('tot', $iNumberOfRecords);
+			$t->assign('RecordsPerPage', $iRecordsPerPage);
+			$t->assign('NumberOfPages',$iNumberOfPages);
 			// Show results interface 
-			$t->assign ("role", $us->getUserRole($reg));
-			$t->assign ("qdet", $us->q->getQueryDetails($dic, $post));
-			$t->assign ("ctl_showres", true);
-		} else if ($post['_D+cmd'] == "export") {
-			if ($post['_D+saveopt'] == "csv")
+			$t->assign('role', $us->getUserRole($RegionId));
+			$t->assign('qdet', $us->q->getQueryDetails($dic, $post));
+			$t->assign('ctl_showres', true);
+		} else if ($post['_D+cmd'] == 'export') {
+			if ($post['_D+saveopt'] == 'csv')
 				$export = 'csv';
 			else
 				$export = 'xls';
 			// show export results
 			//header("Content-type: application/x-zip-compressed");
 			header("Content-type: text/x-csv");
-			header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $regname) ."_Data.". $export);
+			header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $RegionLabel) ."_Data.". $export);
 			//header("Content-Transfer-Encoding: binary");
 			// Limit 1000 results in export: few memory in PHP
 			$iRecordsPerPage = 1000;

@@ -8,38 +8,37 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
 	<link rel="stylesheet" href="css/desinventar.css?version={-$jsversion-}" type="text/css"/>
 	<script type="text/javascript" src="include/prototype.js"></script>
+	{-include file="jquery.tpl" -}
 	<script type="text/javascript" src="js/diadmin.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/cards.js?version={-$jsversion-}"></script>
-	{-include file="jquery.tpl" -}
+	<script type="text/javascript" src="js/data.js?version={-$jsversion-}"></script>
     <script type="text/javascript">
+
 	function setDIForm(prmDisasterId) {
 		parent.w.collapse();
 		parent.difw.show();
-		setDICardFromId('{-$reg-}', prmDisasterId, 'DATA');
-		{-if $role == 'USER' || $role == 'SUPERVISOR' || $role == 'ADMINREGION'-}
-			//jQuery('#btnDatacardEdit').enable();
-			/*
-			cupd = window.parent.frames['dif'].document.getElementById('btnDatacardEdit');
-			if (cupd != null) {
-				cupd.enable();
-				Element.addClassName(cupd, 'bb');
-				Element.removeClassName(cupd, 'disabled');
-			}
-			*/
-		{-/if-}
+		setDICardFromId(jQuery('#RegionId').val(), prmDisasterId, 'DATA');
 	}
+
 	function displayPage(page) {
 		var mypag = page;
 		now = parseInt($('pp').value);
-		if (page == 'prev')
+		if (page == 'prev') {
 			mypag = now - 1;
-		else if (page == 'next')
+		} else if (page == 'next') {
 			mypag = now + 1;
-		if (mypag < 1 || mypag > {-$NumberOfPages-})
+		}
+		var NumberOfPages = jQuery('#prmNumberOfPages').val();
+		if (mypag < 1 || mypag > NumberOfPages) {
 			return false;
+		}
 		$('pp').value = mypag ;
+		var RegionId = jQuery('#prmRegionId').val();
+		var RecordsPerPage = jQuery('#prmRecordsPerPage').val();
+		var QueryDef = jQuery('#prmQueryDef').val();
+		var FieldList = jQuery('#prmFieldList').val();
 		var lsAjax = new Ajax.Updater('lst_dis', 'data.php', {
-			method: 'post', parameters: 'r={-$reg-}&page='+ mypag +'&RecordsPerPage={-$RecordsPerPage-}&sql={-$sql-}&fld={-$fld-}',
+			method: 'post', parameters: 'r=' + RegionId + '&page='+ mypag +'&RecordsPerPage=' + RecordsPerPage + '&sql=' + QueryDef + '&fld=' + FieldList,
 			onLoading: function(request) {
 				$(div).innerHTML = "<img src='loading.gif>";
 			}
@@ -140,6 +139,16 @@
 {-if $ctl_showres-}
 		</tbody>
 	</table>
+	<div style="display:none;">
+		<input type="hidden" id="prmRegionId"       value="{-$RegionId-}"       />
+		<input type="hidden" id="prmRegionLabel"    value="{-$RegionLabel-}"    />
+		<input type="hidden" id="prmUserRole"       value="{-$UserRole-}"       />
+		<input type="hidden" id="prmUserRoleValue"  value="{-$UserRoleValue-}"  />
+		<input type="hidden" id="prmRecordsPerPage" value="{-$RecordsPerPage-}" />
+		<input type="hidden" id="prmNumberOfPages"  value="{-$NumberOfPages-}"  />
+		<input type="hidden" id="prmQueryDef"       value="{-$sql-}"            />
+		<input type="hidden" id="prmFieldList"      value="{-$fld-}"            />
+	</div>
 </body>
 </html>
 {-/if-}
