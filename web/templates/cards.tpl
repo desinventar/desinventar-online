@@ -128,8 +128,9 @@
 					<table class="grid">
 						<tr valign="top">
 							<td onmouseover="Tip('{-$dis.DisasterGeographyId[1]-}')" onmouseout="UnTip()">
-								{-$dis.DisasterGeographyId[0]-}<b style="color:darkred;">*</b><br />
-								<input id="GeographyId" name="GeographyId" type="hidden" />
+								{-$dis.DisasterGeographyId[0]-}<b style="color:darkred;">*</b>
+								<br />
+								<input id="GeographyId" name="GeographyId" type="hidden" size="25" />
 								<table>
 								{-counter assign=MyIndex start=7-}
 								{-foreach key=key item=GeoLevel from=$GeoLevelList name=GeoLevelList-}

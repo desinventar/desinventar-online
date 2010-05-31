@@ -37,7 +37,7 @@ function onReadyDatacards() {
 	
 	// Enable loading of geographic levels when editing...
 	jQuery('.GeoLevelSelect').change(function() {
-		Level = jQuery(this).attr('level');
+		Level = parseInt(jQuery(this).attr('level'));
 		NextLevel = parseInt(Level) + 1;
 		jQuery('#GeoLevel' + NextLevel).trigger({type: 'loadGeographyItems', GeographyParentId:jQuery(this).val()});
 		
@@ -45,7 +45,7 @@ function onReadyDatacards() {
 		if (Level == 0) {
 			jQuery('#GeographyId').val(jQuery(this).val());
 		} else {
-			if (jQuery(this).val()) {
+			if (jQuery(this).val() != '') {
 				jQuery('#GeographyId').val(jQuery(this).val());
 			} else {
 				PrevLevel = parseInt(Level) - 1;
