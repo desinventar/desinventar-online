@@ -18,12 +18,15 @@
 		setDICardfromId('{-$reg-}', prmDisasterId, 'DATA');
 		jQuery('#PrevDisasterSerial').val(jQuery('#DisasterSerial').val());
 		{-if $role == 'USER' || $role == 'SUPERVISOR' || $role == 'ADMINREGION'-}
+			//jQuery('#btnDatacardEdit').enable();
+			/*
 			cupd = window.parent.frames['dif'].document.getElementById('btnDatacardEdit');
 			if (cupd != null) {
 				cupd.enable();
 				Element.addClassName(cupd, 'bb');
 				Element.removeClassName(cupd, 'disabled');
 			}
+			*/
 		{-/if-}
 	}
 	function displayPage(page) {
