@@ -20,6 +20,7 @@
 	<script type="text/javascript" src="include/palette.js"></script>
 	<script type="text/javascript" src="include/combo-box.js"></script>
 
+	<script type="text/javascript" src="js/main.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/diadmin.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/cards.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/jquery.snippets.js?version={-$jsversion-}"></script>
