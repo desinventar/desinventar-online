@@ -14,36 +14,6 @@
 	<script type="text/javascript" src="js/data.js?version={-$jsversion-}"></script>
     <script type="text/javascript">
 
-	function setDIForm(prmDisasterId) {
-		parent.w.collapse();
-		parent.difw.show();
-		setDICardFromId(jQuery('#RegionId').val(), prmDisasterId, 'DATA');
-	}
-
-	function displayPage(page) {
-		var mypag = page;
-		now = parseInt($('pp').value);
-		if (page == 'prev') {
-			mypag = now - 1;
-		} else if (page == 'next') {
-			mypag = now + 1;
-		}
-		var NumberOfPages = jQuery('#prmNumberOfPages').val();
-		if (mypag < 1 || mypag > NumberOfPages) {
-			return false;
-		}
-		$('pp').value = mypag ;
-		var RegionId = jQuery('#prmRegionId').val();
-		var RecordsPerPage = jQuery('#prmRecordsPerPage').val();
-		var QueryDef = jQuery('#prmQueryDef').val();
-		var FieldList = jQuery('#prmFieldList').val();
-		var lsAjax = new Ajax.Updater('lst_dis', 'data.php', {
-			method: 'post', parameters: 'r=' + RegionId + '&page='+ mypag +'&RecordsPerPage=' + RecordsPerPage + '&sql=' + QueryDef + '&fld=' + FieldList,
-			onLoading: function(request) {
-				$(div).innerHTML = "<img src='loading.gif>";
-			}
-		} );
-	}
 	window.onload = function() {
 		var qrydet = parent.document.getElementById('querydetails');
 		var qdet = "";
@@ -76,7 +46,7 @@
 				<input type="button" id="btnGridGotoLastPage"  value=">>" class="line" />
 			</td>
 			<td align="center">
-				<span id="datstatusmsg" class="dlgmsg"></span><!--{-$time-}s-->
+				<span id="datstatusmsg" class="dlgmsg"></span>
 			</td>
 			<td align="right">
 				{-#trepnum#-}: {-$tot-}
@@ -105,7 +75,7 @@
 				<tr class="{-if ($smarty.foreach.dl.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}" 
 					onClick="Element.addClassName(this, 'highlight');" ondblClick="Element.removeClassName(this, 'highlight');">
 					<td>
-						<a href="javascript:void(null);" onClick="setDIForm('{-$item.DisasterId-}');">{-$offset+$smarty.foreach.dl.iteration-}</a>
+						<a href="#" class="linkGridGotoCard" disasterid="{-$item.DisasterId-}">{-$offset+$smarty.foreach.dl.iteration-}</a>
 					</td>
 					{-foreach name=sel key=k item=i from=$sel-}
 						{-strip-}
