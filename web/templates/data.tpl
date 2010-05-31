@@ -15,8 +15,7 @@
 	function setDIForm(prmDisasterId) {
 		parent.w.collapse();
 		parent.difw.show();
-		setDICardfromId('{-$reg-}', prmDisasterId, 'DATA');
-		jQuery('#PrevDisasterSerial').val(jQuery('#DisasterSerial').val());
+		setDICardFromId('{-$reg-}', prmDisasterId, 'DATA');
 		{-if $role == 'USER' || $role == 'SUPERVISOR' || $role == 'ADMINREGION'-}
 			//jQuery('#btnDatacardEdit').enable();
 			/*

@@ -168,21 +168,22 @@ if (isset($_GET['u'])) {
 			case "chkrelease":
 				$us->releaseDatacard($_GET['DisasterId']);
 			break;
+			case 'getDatacard':
+				// Read Datacard Info and return in JSON
+				$DisasterId = getParameter('DisasterId','');
+				$d = new DIDisaster($us, $DisasterId);
+				$e = new DIEEData($us, $DisasterId);
+				$dcard = array_merge($d->oField['info'],$e->oField['info']);
+				$dcard['DisasterBeginTime[0]'] = substr($dcard['DisasterBeginTime'], 0, 4);
+				$dcard['DisasterBeginTime[1]'] = substr($dcard['DisasterBeginTime'], 5, 2);
+				$dcard['DisasterBeginTime[2]'] = substr($dcard['DisasterBeginTime'], 8, 2);
+				$gItems = $us->getGeographyItemsById($dcard['GeographyId']);
+				$dcard['GeographyItems'] = $gItems;
+				echo json_encode($dcard);
+			break;
 			default:
 			break;
-		}
-	} elseif (isset($_GET['DisasterId']) && !empty($_GET['DisasterId'])) {
-		// Read Datacard Info and return in JSON
-		$DisasterId = $_GET['DisasterId'];
-		$d = new DIDisaster($us, $DisasterId);
-		$e = new DIEEData($us, $DisasterId);
-		$dcard = array_merge($d->oField['info'],$e->oField['info']);
-		$dcard['DisasterBeginTime[0]'] = substr($dcard['DisasterBeginTime'], 0, 4);
-		$dcard['DisasterBeginTime[1]'] = substr($dcard['DisasterBeginTime'], 5, 2);
-		$dcard['DisasterBeginTime[2]'] = substr($dcard['DisasterBeginTime'], 8, 2);
-		$gItems = $us->getGeographyItemsById($dcard['GeographyId']);
-		$dcard['GeographyItems'] = $gItems;
-		echo json_encode($dcard);
+		} //switch
 	} elseif (isset($_POST['_CMD'])) {
 		// Commands in POST mode: insert, update, search.. datacards.. 
 		$us->releaseDatacard($_POST['DisasterId']);
