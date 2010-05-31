@@ -647,6 +647,7 @@ function setDICardFromId(prmRegionId, prmDisasterId, src) {
 
 function setDICard(prmRegionId, arr, src) {
 	var diform = null;
+	var myform = null;
 	if (src == "DATA") {
 		diform = window.parent.document.getElementById('DICard');
 		myForm = jQuery(diform);
@@ -679,4 +680,9 @@ function setDICard(prmRegionId, arr, src) {
 	
 	// Load Select Boxes with Geography Info
 	jQuery(myForm).find('.GeoLevelSelect').trigger({type: 'loadGeographyItems', ReadOnly: true});
+	
+	// Enable Edit Button according to Role
+	if (jQuery('#prmUserRoleValue').val() >= 2) {
+		disenabutton($('btnDatacardEdit'), false);
+	}
 }
