@@ -390,7 +390,7 @@
 		</table>
 	</form>
 	<!-- END DI8 FORM CARD -->
-	<div id="divDatacardParameter">
+	<div id="divDatacardParameter" style="display:none;">
 		<input type="hidden" id="prmRegionId"      value="{-$RegionId-}" />
 		<input type="hidden" id="prmUserRole"      value="{-$UserRole-}" />
 		<input type="hidden" id="prmUserRoleValue" value="{-$UserRoleValue-}" />
