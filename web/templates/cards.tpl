@@ -133,8 +133,9 @@
 										<td valign="top">
 											{-$dis.DisasterGeographyId[0]-}<b style="color:darkred;">*</b>
 											<br />
-											<input id="GeographyId" name="GeographyId" type="hidden" size="25" />
-											<div style="display:none;">
+											<input id="GeographyId" name="GeographyId" type="text" size="25" />
+											<div style="display:block;">
+											<br />
 											{-foreach key=key item=GeoLevel from=$GeoLevelList name=GeoLevelList-}
 												<span class="GeographyItemInfo" id="GeographyItemId{-$GeoLevel.GeoLevelId-}">GeographyItem{-$GeoLevel.GeoLevelId-}</span>
 												<span class="GeographyItemInfo" id="GeographyItemValue{-$GeoLevel.GeoLevelId-}">GeographyItem{-$GeoLevel.GeoLevelId-}</span><br />
@@ -232,8 +233,8 @@
 												<span onmouseover="Tip('{-$item[1]-}')" onmouseout="UnTip()">{-$item[0]-}</span>
 											</td>
 											<td>
-												<select id="{-$key-}" name="{-$key-}" style="width:120px;" class="line" tabindex="{-$tabind-}" onKeyPress="edit(event);" onFocus="showtip('{-$item[2]-}', '#f1bd41');" 
-													onBlur="this.editing=false; if(parseInt(this.value) == 0) { this.value = '0'; }">
+												<select id="{-$key-}" name="{-$key-}" 
+													class="line clsEffectNumeric" tabindex="{-$tabind-}" style="width:120px;" onFocus="showtip('{-$item[2]-}', '#f1bd41');" >
 													<option class="small" value="-1">{-#teffhav#-}</option>
 													<option class="small" value="0" selected>{-#teffhavnot#-}</option>
 													<option class="small" value="-2">{-#teffdontknow#-}</option>
@@ -253,8 +254,8 @@
 											<td align="right"><span onmouseover="Tip('{-$item[1]-}')" onmouseout="UnTip()">{-$item[0]-}</span>
 											</td>
 											<td>
-												<select id="{-$key-}" name="{-$key-}" style="width:120px;" tabindex="{-$tabind-}" 
-													class="line" onFocus="showtip('{-$item[2]-}', '#f1bd41')">
+												<select id="{-$key-}" name="{-$key-}" style="width:120px;" 
+													class="line clsEffectSector" tabindex="{-$tabind-}" onFocus="showtip('{-$item[2]-}', '#f1bd41')">
 													<option class="small" value="-1">{-#teffhav#-}</option>
 													<option class="small" value="0" selected>{-#teffhavnot#-}</option>
 													<option class="small" value="-2">{-#teffdontknow#-}</option>
@@ -272,9 +273,8 @@
 									<span onmouseover="Tip('{-$item[1]-}')" onmouseout="UnTip()">
 										{-$item[0]-}<br />
 										<input id="{-$key-}" name="{-$key-}" type="text" size="7" maxlength="10"
-											class="line inputDouble" tabindex="{-$tabind-}" value="0"
-											onBlur="if(parseInt(this.value) > 0) { $('{-$sc3[$key]-}').value='-1';} if(parseInt(this.value) ==0) { $('{-$sc3[$key]-}').value='0';}"
-											onFocus="showtip('{-$item[2]-}', '#f1bd41')" />
+											class="line inputDouble" tabindex="{-$tabind-}" value="0" onFocus="showtip('{-$item[2]-}', '#f1bd41')"
+											onBlur="if(parseInt(this.value) > 0) { $('{-$sc3[$key]-}').value='-1';} if(parseInt(this.value) ==0) { $('{-$sc3[$key]-}').value='0';}" />
 									</span>
 									<br />
 								{-/foreach-}
