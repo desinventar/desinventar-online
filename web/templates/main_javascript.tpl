@@ -762,7 +762,7 @@
 				combineForms('DC', 'CS');
 				w.collapse();//hide()
 				$('DC').action='statistic.php';
-				$('DC').submit();
+				jQuery('#DC').submit();
 				//hideMap();
 				return true;
 			} else {
@@ -779,7 +779,7 @@
 			combineForms('DC', 'CS');
 			$('_CMD').value='savequery';
 			$('DC').action='index.php';
-			$('DC').submit();
+			jQuery('#DC').submit();
 			return true;
 		}
 		
