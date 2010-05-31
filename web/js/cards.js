@@ -647,14 +647,9 @@ function setDICardFromId(prmRegionId, prmDisasterId, src) {
 
 function setDICard(prmRegionId, arr, src) {
 	var diform = null;
-	var myform = null;
-	if (src == "DATA") {
-		diform = window.parent.document.getElementById('DICard');
-		myForm = jQuery(diform);
-	} else {
-		diform = $('DICard');
-		myForm = jQuery(diform);
-	}
+	var myForm = null;
+	diform = $('DICard');
+	myForm = jQuery(diform);
 	
 	var objElems = diform.elements; // DICard is DesInventar form..
 	for (i=0; i < objElems.length; i++) {
