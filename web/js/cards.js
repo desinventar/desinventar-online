@@ -1,4 +1,14 @@
 function onReadyDatacards() {
+	jQuery('.EffectNumeric').keypress(function(event) {
+		edit(event);
+	});
+	jQuery('.EffectNumeric').blur(function(event) {
+		this.editing=false;
+		if(parseInt(this.value) == 0) { 
+			this.value = '0';
+		}
+	});
+	
 	// Geography Levels/Items Functions...
 	jQuery('.GeoLevelSelect').bind('loadGeographyItems', function(event) {
 		var mySelect = jQuery(this);
@@ -664,12 +674,12 @@ function setDICard(prmRegionId, arr, src) {
 	jQuery(myForm).find('#PrevDisasterSerial').val(jQuery(myForm).find('#DisasterSerial').val());
 
 	//Set GeographyItem info into hidden fields
-	jQuery('.GeographyItemInfo').text('');
+	jQuery(myForm).find('.GeographyItemInfo').text('');
 	jQuery(arr['GeographyItems']).each(function(key, value) {
 		jQuery(myForm).find('#GeographyItemId' + key).text(value['GeographyId']);
 		jQuery(myForm).find('#GeographyItemValue' + key).text(value['GeographyName']);
 	});
 	
 	// Load Select Boxes with Geography Info
-	jQuery('.GeoLevelSelect').trigger({type: 'loadGeographyItems', ReadOnly: true});
+	jQuery(myForm).find('.GeoLevelSelect').trigger({type: 'loadGeographyItems', ReadOnly: true});
 }
