@@ -698,7 +698,8 @@
 				combineForms('DC', 'CD');
 				w.collapse();
 				$('DC').action='data.php';
-				$('DC').submit();
+				//$('DC').submit();
+				jQuery('#DC').submit();
 				//hideMap();
 				return true;
 			} else {

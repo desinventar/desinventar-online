@@ -20,13 +20,14 @@
 	<script type="text/javascript" src="include/palette.js"></script>
 	<script type="text/javascript" src="include/combo-box.js"></script>
 
-	<script type="text/javascript" src="js/main.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/diadmin.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/cards.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="js/data.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/jquery.snippets.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/user.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/user_login.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/desconsultar.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="js/main.js?version={-$jsversion-}"></script>
 
 	<!-- ExtJS -->
 	<link rel="stylesheet" href="css/checktree.css" type="text/css"/>
@@ -40,6 +41,7 @@
 	<script type="text/javascript" src="include/tabber.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
+			onReadyMain();
 			onReadyDatacards();
 			
 			jQuery('#divDatacardsShow').hide();
@@ -219,6 +221,8 @@
 					</td>
 				</tr>
 			</table>
+			<div id="divGridView">
+			</div>
 			<iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="?cmd=getRegionFullInfo&r={-$reg-}"></iframe>
 		</div> <!-- end div id=divQueryResults -->
 		<div class="contentBlock" id="divDatabaseList" >

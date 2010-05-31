@@ -1,38 +1,6 @@
 {-config_load file=`$lg`.conf section="dc_data"-}
 {-config_load file=`$lg`.conf section="dc_qdetails"-}
 {-if $ctl_showres-}
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
-	<link rel="stylesheet" href="css/desinventar.css?version={-$jsversion-}" type="text/css"/>
-	<script type="text/javascript" src="include/prototype.js"></script>
-	{-include file="jquery.tpl" -}
-	<script type="text/javascript" src="js/diadmin.js?version={-$jsversion-}"></script>
-	<script type="text/javascript" src="js/cards.js?version={-$jsversion-}"></script>
-	<script type="text/javascript" src="js/data.js?version={-$jsversion-}"></script>
-    <script type="text/javascript">
-
-	window.onload = function() {
-		var qrydet = parent.document.getElementById('querydetails');
-		var qdet = "";
-		{-foreach key=k item=i from=$qdet-}
-			{-if $k == "GEO"-}qdet += "<b>{-#geo#-}:</b> {-$i-} ";{-/if-}
-			{-if $k == "EVE"-}qdet += "<b>{-#eve#-}:</b> {-$i-} ";{-/if-}
-			{-if $k == "CAU"-}qdet += "<b>{-#cau#-}:</b> {-$i-} ";{-/if-}
-			{-if $k == "EFF"-}qdet += "<b>{-#eff#-}:</b> {-$i-} ";{-/if-}
-			{-if $k == "BEG"-}qdet += "<b>{-#beg#-}:</b> {-$i-} ";{-/if-}
-			{-if $k == "END"-}qdet += "<b>{-#end#-}:</b> {-$i-} ";{-/if-}
-			{-if $k == "SOU"-}qdet += "<b>{-#sou#-}:</b> {-$i-} ";{-/if-}
-			{-if $k == "SER"-}qdet += "<b>{-#ser#-}:</b> {-$i-} ";{-/if-}
-		{-/foreach-}
-		qrydet.innerHTML = qdet;
-		onReadyData();
-	}
-    </script>
-</head>
-<body>
 	<table width="920px" class="grid">
 		<tr>
 			<td>
@@ -118,6 +86,4 @@
 		<input type="hidden" id="prmQueryDef"       value="{-$sql-}"            />
 		<input type="hidden" id="prmFieldList"      value="{-$fld-}"            />
 	</div>
-</body>
-</html>
 {-/if-}
