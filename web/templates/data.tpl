@@ -57,7 +57,8 @@
 			{-if $k == "SOU"-}qdet += "<b>{-#sou#-}:</b> {-$i-} ";{-/if-}
 			{-if $k == "SER"-}qdet += "<b>{-#ser#-}:</b> {-$i-} ";{-/if-}
 		{-/foreach-}
-			qrydet.innerHTML = qdet;
+		qrydet.innerHTML = qdet;
+		onReadyData();
 	}
     </script>
 </head>
@@ -66,15 +67,13 @@
 		<tr>
 			<td>
 				{-#tpage#-}
-				<input type="text" id="pp" size="2" value="1" class="line" onKeyDown="if(event.keyCode==13) displayPage(this.value);"
-					onkeypress="return blockChars(event, this.value, 'integer:');">
-				&nbsp; {-#tnumof#-} &nbsp;
-				<a href="javascript:void(null)" onclick="displayPage({-$NumberOfPages-});">{-$NumberOfPages-}</a>
+				<input type="text" id="pp" size="2" value="1" class="line"  />
+				&nbsp; {-#tnumof#-} &nbsp; {-$NumberOfPages-}
 				&nbsp;&nbsp;|&nbsp;&nbsp;
-				<input type="button" id="first" value="<<" class="line" onClick="displayPage(1)" />
-				<input type="button" id="prev"  value="<"  class="line" onClick="displayPage('prev')" />
-				<input type="button" id="next"  value=">"  class="line" onClick="displayPage('next')" />
-				<input type="button" id="last"  value=">>" class="line" onClick="displayPage({-$NumberOfPages-})" />
+				<input type="button" id="btnGridGotoFirstPage" value="<<" class="line" />
+				<input type="button" id="btnGridGotoPrevPage"  value="<"  class="line" />
+				<input type="button" id="btnGridGotoNextPage"  value=">"  class="line" />
+				<input type="button" id="btnGridGotoLastPage"  value=">>" class="line" />
 			</td>
 			<td align="center">
 				<span id="datstatusmsg" class="dlgmsg"></span><!--{-$time-}s-->
