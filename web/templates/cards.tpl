@@ -128,36 +128,44 @@
 					<table class="grid">
 						<tr valign="top">
 							<td onmouseover="Tip('{-$dis.DisasterGeographyId[1]-}')" onmouseout="UnTip()">
-								{-$dis.DisasterGeographyId[0]-}<b style="color:darkred;">*</b>
-								<br />
-								<input id="GeographyId" name="GeographyId" type="hidden" size="25" /><br />
-								<div style="display:none;">
-								{-foreach key=key item=GeoLevel from=$GeoLevelList name=GeoLevelList-}
-									<span class="GeographyItemInfo" id="GeographyItemId{-$GeoLevel.GeoLevelId-}">GeographyItem{-$GeoLevel.GeoLevelId-}</span>
-									<span class="GeographyItemInfo" id="GeographyItemValue{-$GeoLevel.GeoLevelId-}">GeographyItem{-$GeoLevel.GeoLevelId-}</span><br />
-								{-/foreach-}
-								</div>
 								<table>
-								{-counter assign=MyIndex start=7-}
-								{-foreach key=key item=GeoLevel from=$GeoLevelList name=GeoLevelList-}
 									<tr>
-										<td>
-											{-$GeoLevel.GeoLevelId-} - {-$GeoLevel.GeoLevelName-}<br />
+										<td valign="top">
+											{-$dis.DisasterGeographyId[0]-}<b style="color:darkred;">*</b>
+											<br />
+											<input id="GeographyId" name="GeographyId" type="hidden" size="25" />
+											<div style="display:none;">
+											{-foreach key=key item=GeoLevel from=$GeoLevelList name=GeoLevelList-}
+												<span class="GeographyItemInfo" id="GeographyItemId{-$GeoLevel.GeoLevelId-}">GeographyItem{-$GeoLevel.GeoLevelId-}</span>
+												<span class="GeographyItemInfo" id="GeographyItemValue{-$GeoLevel.GeoLevelId-}">GeographyItem{-$GeoLevel.GeoLevelId-}</span><br />
+											{-/foreach-}
+											</div>
 										</td>
-										<td>
-											<select id="GeoLevel{-$key-}" level="{-$key-}" tabindex="{-$MyIndex-}" autoComplete="true" style="width:180px; background-Color:#eee;" 
-												class="GeoLevelSelect line" onFocus="showtip('{-$dis.GeographyId[2]-}', '#d4baf6')">
-												<option></option>
-												{-if $key == 0 -}
-													{-foreach key=GeographyKey item=GeographyItem from=$GeoLevelItems -}
-															<option value="{-$GeographyItem.GeographyId-}">{-$GeographyItem.GeographyName-}</option>
-													{-/foreach-}
-												{-/if-}
-											</select>
-											{-counter-}
+										<td valign="top">
+											<table>
+											{-counter assign=MyIndex start=7-}
+											{-foreach key=key item=GeoLevel from=$GeoLevelList name=GeoLevelList-}
+												<tr>
+													<td>
+														{-$GeoLevel.GeoLevelId-} - {-$GeoLevel.GeoLevelName-}<br />
+													</td>
+													<td>
+														<select id="GeoLevel{-$key-}" level="{-$key-}" tabindex="{-$MyIndex-}" autoComplete="true" style="width:180px; background-Color:#eee;" 
+															class="GeoLevelSelect line" onFocus="showtip('{-$dis.GeographyId[2]-}', '#d4baf6')">
+															<option></option>
+															{-if $key == 0 -}
+																{-foreach key=GeographyKey item=GeographyItem from=$GeoLevelItems -}
+																		<option value="{-$GeographyItem.GeographyId-}">{-$GeographyItem.GeographyName-}</option>
+																{-/foreach-}
+															{-/if-}
+														</select>
+														{-counter-}
+													</td>
+												</tr>
+											{-/foreach-}
+											</table>
 										</td>
 									</tr>
-								{-/foreach-}
 								</table>
 								<!--
 								<span id="lst_geo" class="geodiv" style="width: 180px; height: 30px;">
