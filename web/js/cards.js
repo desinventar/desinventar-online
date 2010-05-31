@@ -399,7 +399,7 @@ function requestDatacard(myCmd, myValue) {
 			} else if (data.Status == 'OK') {
 				displayDatacardStatusMsg('');
 				if (data.DisasterId != '') {
-					valid = setDICardfromId(RegionId, data.DisasterId, '');
+					valid = setDICardFromId(RegionId, data.DisasterId, '');
 					
 					if (jQuery('#prmUserRoleValue').val() >= 2) {
 						disenabutton($('btnDatacardEdit'), false);
@@ -630,46 +630,30 @@ function setElementValue(formElement, value) {
 	}
 }
 
-function setDICardfromId(prmRegionId, prmDisasterId, src) {
-	var lsAjax = new Ajax.Request('cards.php', {
-		method: 'get', parameters: 'r='+ prmRegionId +'&DisasterId='+ prmDisasterId,
-		onLoading: function(request) {
-			/*
-			if (src == "DATA") {
-				dostat = window.parent.frames['dif'].document.getElementById('dostat');
-			} else {
-				dostat = $('dostat');
-			}
-			if (dostat != null) {
-				dostat.innerHTML = waiting;
-			}
-			*/
+function setDICardFromId(prmRegionId, prmDisasterId, src) {
+	jQuery.post('cards.php',
+		{'cmd' : 'getDatacard',
+		 'RegionId' : prmRegionId,
+		 'DisasterId' : prmDisasterId
 		},
-		onSuccess: function(request) {
-			var res = request.responseText;
-			var json = eval('(' + res + ')');
-			setDICard(prmRegionId, json, src);
-			/*
-			if (dostat != null) {
-				dostat.innerHTML = "";
-			}
-			*/
+		function(data) {
+			setDICard(prmRegionId, data, src);
 			return true;
-		}
-	} );
+		},
+		'json'
+	);
 	return false;
 }
 
 function setDICard(prmRegionId, arr, src) {
 	var diform = null;
-/*	if (src == "DATA") {
-		diform = window.parent.frames['dif'].document.getElementById('DICard');
+	if (src == "DATA") {
+		diform = window.parent.document.getElementById('DICard');
 		myForm = jQuery(diform);
 	} else {
-	*/
 		diform = $('DICard');
 		myForm = jQuery(diform);
-	//}
+	}
 	
 	var objElems = diform.elements; // DICard is DesInventar form..
 	for (i=0; i < objElems.length; i++) {
