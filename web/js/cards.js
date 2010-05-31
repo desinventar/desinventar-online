@@ -1,46 +1,53 @@
 function onReadyDatacards() {
 	// Geography Levels/Items Functions...
 	jQuery('.GeoLevelSelect').bind('loadGeographyItems', function(event) {
-		GeographyLevelId = parseInt(jQuery(this).attr('level'));
-		if (GeographyLevelId > 0) {
-			GeographyParentId = event.GeographyParentId;
-			mySelect = jQuery(this);
-			myValue = mySelect.val();
-			mySelect.trigger('clearGeographyItems');
-			jQuery.post('cards.php',
-				{'cmd'               : 'getGeographyItemsByLevel',
-				 'GeographyLevelId'  : GeographyLevelId,
-				 'GeographyParentId' : GeographyParentId,
-				 'RegionId'          : jQuery('#prmRegionId').val()
-				},
-				function(data) {
-					jQuery(data).each(function(key,value) {
-						mySelect.append('<option value="' + value['GeographyId'] + '">' + value['GeographyName'] + '</option>');
-					});
-					mySelect.val(myValue);
-					//NextLevel = parseInt(GeographyLevelId) + 1;
-					//jQuery('#GeoLevel' + NextLevel).trigger('clearGeographyItems'); 
-				},
-				'json'
-			);
-		} //if
+		LevelId = parseInt(jQuery(this).attr('level'));
+		mySelect = jQuery(this);
+		mySelect.trigger('clearGeographyItems');
+		myValue = jQuery('#GeographyItemId' + LevelId).text();
+		if (event.ReadOnly) {
+			if (LevelId > 0) {
+				mySelect.append('<option value="' + jQuery('#GeographyItemId' + LevelId).text() +'">' + jQuery('#GeographyItemValue' + LevelId).text() + '</option>');
+			}
+			mySelect.val(myValue);
+		} else {
+			if (LevelId > 0) {
+				PrevLevel = parseInt(LevelId) - 1;
+				GeographyParentId = jQuery('#GeographyItemId' + PrevLevel).text();
+				jQuery.post('cards.php',
+					{'cmd'               : 'getGeographyItemsByLevel',
+					 'GeographyLevelId'  : LevelId,
+					 'GeographyParentId' : GeographyParentId,
+					 'RegionId'          : jQuery('#prmRegionId').val()
+					},
+					function(data) {
+						jQuery(data).each(function(key,value) {
+							mySelect.append('<option value="' + value['GeographyId'] + '">' + value['GeographyName'] + '</option>');
+						});
+						mySelect.val(myValue);
+					},
+					'json'
+				);
+			} //if
+		}
 	});
 	
 	// Clear Geography Items from a Select Box
 	jQuery('.GeoLevelSelect').bind('clearGeographyItems', function(event) {
 		mySelect = jQuery(this);
-		if (parseInt(mySelect.attr('level')) > 0) {
+		LevelId = parseInt(mySelect.attr('level'));
+		if (LevelId > 0) {
 			mySelect.find('option').remove();
 			mySelect.append('<option value=""></option>');
-			mySelect.val('');
 		}
+		//mySelect.val('');
 	});
 	
 	// Enable loading of geographic levels when editing...
 	jQuery('.GeoLevelSelect').change(function() {
 		Level = parseInt(jQuery(this).attr('level'));
 		NextLevel = parseInt(Level) + 1;
-		jQuery('#GeoLevel' + NextLevel).trigger({type: 'loadGeographyItems', GeographyParentId:jQuery(this).val()});
+		jQuery('#GeoLevel' + NextLevel).trigger({type : 'loadGeographyItems', ReadOnly: false});
 		
 		// Update value of GeographyId
 		if (Level == 0) {
@@ -53,6 +60,7 @@ function onReadyDatacards() {
 				jQuery('#GeographyId').val(jQuery('#GeoLevel' + PrevLevel).val());
 			}
 		}
+		alert('Change : ' + Level + ' GeographyId=' + jQuery('#GeographyId').val());
 	});	
 
 	// Hide StatusMessages
@@ -121,8 +129,7 @@ function onReadyDatacards() {
 	// Datacard New/Edit/Save Commands
 	jQuery('#btnDatacardNew').click(function() {
 		doDatacardNew();
-		jQuery('.GeoLevelSelect').trigger('clearGeographyItems');
-		jQuery('.GeoLevelSelect').val('');
+		jQuery('#GeoLevel0').trigger('clearGeographyItems');
 		jQuery('#GeographyId').val('');
 		return false;
 	});
@@ -379,7 +386,6 @@ function requestDatacard(myCmd, myValue) {
 		'json'
 	);
 	$('dostat').innerHTML = "";
-	//jQuery('.GeoLevelSelect').trigger({type: 'loadGeographyItems', GeographyParentId:jQuery('#GeoLevel0').val()});
 	return bReturn;
 }
 
@@ -417,6 +423,8 @@ function doDatacardEdit() {
 				jQuery('#_CMD').val('updateDICard');
 				displayDatacardStatusMsg('msgDatacardFill');
 				changeOptions('btnDatacardEdit');
+				jQuery('#GeoLevel1').trigger({type : 'loadGeographyItems', ReadOnly : false});
+				jQuery('#GeoLevel2').trigger({type : 'loadGeographyItems', ReadOnly : false});
 			} else {
 				displayDatacardStatusMsg('msgDatacardIsLocked');
 			}
@@ -560,4 +568,97 @@ function doDatacardSuggestSerial() {
 	if (jQuery('#DisasterBeginTime0').val() != '') {
 		requestDatacard('getNextSerial', jQuery('#DisasterBeginTime0').val());
 	}
+}
+
+/**** SET DATACARD FORM  *****/
+function setElementValue(formElement, value) {
+	switch(formElement.type) {
+		case 'undefined': return;
+		case 'radio': formElement.checked = value; break;
+		case 'checkbox': formElement.checked = value; break;
+		case 'select-one': 
+			var unk = true;
+			for (var w=0; w < formElement.length; w++) {
+				if (formElement.options[w].value == value) {
+					formElement.selectedIndex = w ;
+					unk = false;
+				}
+			}
+			if (unk)
+				formElement[3]=new Option(value, value, false, true);
+		break;
+		case 'select-multiple':
+			for(var x=0; x < formElement.length; x++)
+				formElement[x].selected = value[x];
+		break;
+		default: 
+			formElement.value = value; 
+		break;
+	}
+}
+
+function setDICardfromId(prmRegionId, prmDisasterId, src) {
+	var lsAjax = new Ajax.Request('cards.php', {
+		method: 'get', parameters: 'r='+ prmRegionId +'&DisasterId='+ prmDisasterId,
+		onLoading: function(request) {
+			/*
+			if (src == "DATA") {
+				dostat = window.parent.frames['dif'].document.getElementById('dostat');
+			} else {
+				dostat = $('dostat');
+			}
+			if (dostat != null) {
+				dostat.innerHTML = waiting;
+			}
+			*/
+		},
+		onSuccess: function(request) {
+			var res = request.responseText;
+			var json = eval('(' + res + ')');
+			setDICard(prmRegionId, json, src);
+			/*
+			if (dostat != null) {
+				dostat.innerHTML = "";
+			}
+			*/
+			return true;
+		}
+	} );
+	return false;
+}
+
+function setDICard(prmRegionId, arr, src) {
+	var diform = null;
+	if (src == "DATA") {
+		diform = window.parent.frames['dif'].document.getElementById('DICard');
+		myForm = jQuery(diform);
+	} else {
+		diform = $('DICard');
+		myForm = jQuery(diform);
+	}
+	
+	var objElems = diform.elements; // DICard is DesInventar form..
+	for (i=0; i < objElems.length; i++) {
+		if ( (objElems[i].id == 'GeoLevel0') ||
+			 (objElems[i].id == 'GeoLevel1') ||
+			 (objElems[i].id == 'GeoLevel2') ) {
+			//geo = arr['GeographyId'];
+			//getGeoItems(prmRegionId, geo, 0, geo.length / 5, src);
+		} else {
+			varName = jQuery(myForm).find('#' + objElems[i].id).attr('name');
+			setElementValue(objElems[i], arr[varName]);
+		}
+	}
+	
+	jQuery(myForm).find('#PrevDisasterSerial').val(jQuery(myForm).find('#DisasterSerial').val());
+
+	//Set GeographyItem info into hidden fields
+	jQuery('.GeographyItemInfo').text('');
+	jQuery(arr['GeographyItems']).each(function(key, value) {
+		jQuery(myForm).find('#GeographyItemId' + key).text(value['GeographyId']);
+		jQuery(myForm).find('#GeographyItemValue' + key).text(value['GeographyName']);
+	});
+	
+	// Load Select Boxes with Geography Info
+	jQuery('.GeoLevelSelect').trigger({type: 'loadGeographyItems', ReadOnly: true});
 }

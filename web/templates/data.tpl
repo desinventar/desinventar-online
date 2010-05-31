@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="css/desinventar.css?version={-$jsversion-}" type="text/css"/>
 	<script type="text/javascript" src="include/prototype.js"></script>
 	<script type="text/javascript" src="js/diadmin.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="js/cards.js?version={-$jsversion-}"></script>
 	{-include file="jquery.tpl" -}
     <script type="text/javascript">
 	function setDIForm(prmDisasterId) {
