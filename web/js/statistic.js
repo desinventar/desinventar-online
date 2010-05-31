@@ -1,6 +1,4 @@
 function onReadyStatistic() {
-	alert('onReadyStatistic');
-
 	jQuery('#btnStatGotoFirstPage').click(function() {
 		doStatDisplayPage(1);
 	});
