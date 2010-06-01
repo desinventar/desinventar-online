@@ -459,6 +459,7 @@
 		}); // Graphics
 		
 		// Map
+		var map; // Map Object
 		var mapw;
 		var mapb = Ext.get('map-btn');
 		mapb.on('click', function() {
@@ -659,128 +660,6 @@
 				$('itree-' + gid).innerHTML = '';
 				$('itree-' + gid).style.display = 'none';
 			}
-		}
-		
-		function saveRes(cmd, typ) {
-			if($('DCRes').value != '') {
-				switch ($('DCRes').value) {
-					case 'D':
-						$('_D+saveopt').value = typ;
-						sendList(cmd);
-					break;
-					case 'M':
-						// SaveMap to PNG Format
-						sendMap(cmd);
-					break;
-					case 'G':
-						sendGraphic(cmd);
-					break;
-					case 'S':
-						$('_S+saveopt').value = typ;
-						sendStatistic(cmd);
-					break;
-				} //switch
-			}
-		} //function
-		
-		function sendList(cmd) {
-			if ($('_D+Field[]').length > 0) {
-				w = Ext.getCmp('westm');
-				$('_D+cmd').value = cmd;
-				selectall('_D+Field[]');
-				var ob = $('_D+Field[]');
-				var mystr = "";
-				for (i=0; i < ob.length; i++) {
-					mystr += ob[i].value + ",";
-				}
-				mystr += "D.DisasterId";
-				$('_D+FieldH').value = mystr;
-				combineForms('DC', 'CD');
-				w.collapse();
-				$('DC').action='data.php';
-				jQuery('#DC').submit();
-				//hideMap();
-				return true;
-			} else {
-				return false;
-			}
-		}
-		
-		function sendMap(cmd) {
-			if ($('_M+Type').length > 0) {
-				w = Ext.getCmp('westm');
-				//$('frmwait').innerHTML = waiting;
-				$('_M+cmd').value = cmd;
-				if (cmd == "export") {
-					// to export image save layers and extend..
-					var mm = dcr.map;
-					var extent = mm.getExtent();
-					//extent.transform(mm.prj1, mm.prj2);
-					var layers = mm.layers;
-					var activelayers = [];
-					for (i in layers) {
-						if (layers[i].getVisibility() && layers[i].calculateInRange() && !layers[i].isBaseLayer) {
-							activelayers[activelayers.length] = layers[i].params['LAYERS'];
-						}
-					}
-					$('_M+extent').value = [extent.left,extent.bottom,extent.right,extent.top].join(',');
-					$('_M+layers').value = activelayers;
-					myMap = window.parent.frames['dcr'].document.getElementById('MapTitle');
-					$('_M+title').value = myMap.value;
-				}
-				combineForms('DC', 'CM');
-				w.collapse(); // hide()
-				$('DC').action='thematicmap.php';
-				jQuery('#DC').submit();
-				//hideMap();
-				return true;
-			} else {
-				return false;
-			}
-		} //function
-		
-		function sendGraphic(cmd) {
-			w = Ext.getCmp('westm');
-			$('_G+cmd').value = cmd;
-			combineForms('DC', 'CG');
-			w.collapse(); //hide()
-			$('DC').action='graphic.php';
-			jQuery('#DC').submit();
-			//hideMap();
-		}
-		
-		function sendStatistic(cmd) {
-			if ($('_S+Firstlev').value != "" && $('_S+Field[]').length > 0) {
-				w = Ext.getCmp('westm');
-				$('_S+cmd').value = cmd;
-				selectall('_S+Field[]');
-				var ob = $('_S+Field[]');
-				var mystr = "D.DisasterId||";
-				for (i=0; i < ob.length; i++) 
-					mystr += "," + ob[i].value;
-				$('_S+FieldH').value = mystr;
-				combineForms('DC', 'CS');
-				w.collapse();//hide()
-				$('DC').action='statistic.php';
-				jQuery('#DC').submit();
-				//hideMap();
-				return true;
-			} else {
-				return false;
-			}
-		} //function
-		
-		function saveQuery() {
-			selectall('_D+Field[]');
-			combineForms('DC', 'CD');
-			combineForms('DC', 'CM');
-			combineForms('DC', 'CG');
-			selectall('_S+Field[]');
-			combineForms('DC', 'CS');
-			$('_CMD').value='savequery';
-			$('DC').action='index.php';
-			jQuery('#DC').submit();
-			return true;
 		}
 		
 		function addRowToTable() {

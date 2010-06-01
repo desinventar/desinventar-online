@@ -1,4 +1,4 @@
-var map = null;
+//var map = null;
 
 function onReadyThematicMap() {
 	var lon = parseFloat(jQuery('#prmMapLat').val());
