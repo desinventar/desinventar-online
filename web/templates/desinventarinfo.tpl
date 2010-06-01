@@ -6,5 +6,5 @@
 	<input type="hidden" id="fldDesinventarUserFullName" value="{-$desinventarUserFullName-}" />
 	<input type="hidden" id="fldDesinventarModule"       value="{-$desinventarModule-}" />
 	<input type="hidden" id="prmHasInternet"             value="{-$hasInternet-}" />
-	<input type="hidden" id="prmGoogleMapKey"            value="{-$GoogleMapKey-}" />
+	<input type="hidden" id="prmGoogleMapsKey"           value="{-$GoogleMapsKey-}" />
 </div>

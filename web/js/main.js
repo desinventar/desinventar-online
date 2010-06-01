@@ -4,8 +4,8 @@ function onReadyMain() {
 		jQuery.post(myURL,
 			jQuery(this).serialize(),
 			function(data) {
-				jQuery('#divGridView').html('');
-				jQuery('#divGridView').html(data);
+				jQuery('#dcr').html('');
+				jQuery('#dcr').html(data);
 				onReadyData();
 				onReadyGraphic();
 				onReadyThematicMap();
