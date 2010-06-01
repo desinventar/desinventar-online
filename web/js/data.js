@@ -24,9 +24,9 @@ function onReadyData() {
 	});
 	
 	// Page Number Fields
-	jQuery('#pp').keydown(function(event) {
+	jQuery('#DataCurPage').keydown(function(event) {
 		if(event.keyCode == 13) {
-			displayPage(jQuery(this).val());
+			doDataDisplayPage(jQuery(this).val());
 		} else {
 			return blockChars(event, jQuery(this).val(), 'integer:');
 		}
@@ -34,16 +34,16 @@ function onReadyData() {
 	
 	// Navigation Buttons
 	jQuery('#btnGridGotoFirstPage').click(function() {
-		displayPage(1);
+		doDataDisplayPage(1);
 	});
 	jQuery('#btnGridGotoPrevPage').click(function() {
-		displayPage('prev');
+		doDataDisplayPage('prev');
 	});
 	jQuery('#btnGridGotoNextPage').click(function() {
-		displayPage('next');
+		doDataDisplayPage('next');
 	});
 	jQuery('#btnGridGotoLastPage').click(function() {
-		displayPage(jQuery('#prmNumberOfPages').val());
+		doDataDisplayPage(jQuery('#prmNumberOfPages').val());
 	});
 }
 
@@ -53,9 +53,9 @@ function setDIForm(prmDisasterId) {
 	setDICardFromId(jQuery('#prmRegionId').val(), prmDisasterId, '');
 }
 
-function displayPage(page) {
+function doDataDisplayPage(page) {
 	var mypag = page;
-	now = parseInt($('pp').value);
+	now = parseInt($('DataCurPage').value);
 	if (page == 'prev') {
 		mypag = now - 1;
 	} else if (page == 'next') {
@@ -65,7 +65,7 @@ function displayPage(page) {
 	if (mypag < 1 || mypag > NumberOfPages) {
 		return false;
 	}
-	$('pp').value = mypag ;
+	$('DataCurPage').value = mypag ;
 	var RegionId = jQuery('#prmRegionId').val();
 	var RecordsPerPage = jQuery('#prmRecordsPerPage').val();
 	var QueryDef = jQuery('#prmQueryDef').val();
@@ -75,5 +75,6 @@ function displayPage(page) {
 		onLoading: function(request) {
 			$(div).innerHTML = "<img src='loading.gif>";
 		}
-	} );
-}
+	});
+} //function
+

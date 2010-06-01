@@ -5,7 +5,7 @@
 		<tr>
 			<td>
 				{-#tpage#-}
-				<input type="text" id="pp" size="2" value="1" class="line"  />
+				<input type="text" id="DataCurPage" size="2" value="1" class="line"  />
 				&nbsp; {-#tnumof#-} &nbsp; {-$NumberOfPages-}
 				&nbsp;&nbsp;|&nbsp;&nbsp;
 				<input type="button" id="btnGridGotoFirstPage" value="<<" class="line" />
