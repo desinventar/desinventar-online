@@ -47,16 +47,16 @@
 		</tr>
 	</table>
 	<div style="display:none;">
-		<input type="hidden" id="prmMapRegionId" value="{-$reg-}" />
-		<input type="hidden" id="prmMapLat"      value="{-$lat-}" />
-		<input type="hidden" id="prmMapLon"      value="{-$lon-}" />
-		<input type="hidden" id="prmMapZoom"     value="{-$zoom-}" />
-		<input type="hidden" id="prmMapMinX"     value="{-$minx-}" />
-		<input type="hidden" id="prmMapMinY"     value="{-$miny-}" />
-		<input type="hidden" id="prmMapMaxX"     value="{-$maxx-}" />
-		<input type="hidden" id="prmMapMaxY"     value="{-$maxy-}" />
-		<input type="hidden" id="prmMapServer"   value="{-$mps-}"  />
-		<input type="hidden" id="prmMapBase"     value="{-$basemap-}" />
+		<input type="hidden" id="prmMapRegionId" value="{-$reg-}"/>
+		<input type="hidden" id="prmMapLat"      value="{-$lat-}"/>
+		<input type="hidden" id="prmMapLon"      value="{-$lon-}"/>
+		<input type="hidden" id="prmMapZoom"     value="{-$zoom-}"/>
+		<input type="hidden" id="prmMapMinX"     value="{-$minx-}"/>
+		<input type="hidden" id="prmMapMinY"     value="{-$miny-}"/>
+		<input type="hidden" id="prmMapMaxX"     value="{-$maxx-}"/>
+		<input type="hidden" id="prmMapMaxY"     value="{-$maxy-}"/>
+		<input type="hidden" id="prmMapServer"   value="{-$mps-}"/>
+		<input type="hidden" id="prmMapBase"     value="{-$basemap-}"/>
 	</div>
 	<div id="MapEffectLayers" style="display:none;">
 		{-foreach name=rgl key=k item=i from=$rgl-}
@@ -71,12 +71,7 @@
 		{-foreach name=glev key=ky item=it from=$glev-}
 			<div id=AdminLayer{-$smarty.foreach.glev.iteration-}>
 				<span>{-$it[0]-}</span>
-				<span>
-				{-foreach name=ly key=k2 item=i2 from=$it[2]-}
-					{-$i2[0]-}admin0{-$ky-}
-					{-if !$smarty.foreach.ly.last-},{-/if-}
-				{-/foreach-}
-				</span>
+				<span>{-foreach name=ly key=k2 item=i2 from=$it[2]-}{-$i2[0]-}admin0{-$ky-}{-if !$smarty.foreach.ly.last-},{-/if-}{-/foreach-}</span>
 			</div>
 		{-/foreach-}
 	</div>
