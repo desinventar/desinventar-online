@@ -43,38 +43,43 @@ function onReadyData() {
 		doDataDisplayPage('next');
 	});
 	jQuery('#btnGridGotoLastPage').click(function() {
-		doDataDisplayPage(jQuery('#prmNumberOfPages').val());
+		doDataDisplayPage(jQuery('#prmDataNumberOfPages').val());
 	});
 }
 
 function setDIForm(prmDisasterId) {
 	//parent.w.collapse();
 	difw.show();
-	setDICardFromId(jQuery('#prmRegionId').val(), prmDisasterId, '');
+	setDICardFromId(jQuery('#prmDataRegionId').val(), prmDisasterId, '');
 }
 
 function doDataDisplayPage(page) {
 	var mypag = page;
-	now = parseInt($('DataCurPage').value);
+	var now = parseInt(jQuery('#DataCurPage').val());
 	if (page == 'prev') {
 		mypag = now - 1;
 	} else if (page == 'next') {
 		mypag = now + 1;
 	}
-	var NumberOfPages = jQuery('#prmNumberOfPages').val();
-	if (mypag < 1 || mypag > NumberOfPages) {
-		return false;
+	var NumberOfPages = jQuery('#prmDataNumberOfPages').val();
+	if ((mypag < 1) || (mypag > NumberOfPages)) {
+		// Out of Range Page
+	} else {
+		jQuery('#DataCurPage').val(mypag);
+		var RegionId = jQuery('#prmDataRegionId').val();
+		var RecordsPerPage = jQuery('#prmDataRecordsPerPage').val();
+		var QueryDef = jQuery('#prmDataQueryDef').val();
+		var FieldList = jQuery('#prmDataFieldList').val();
+		var lsAjax = new Ajax.Updater('lst_dis', 'data.php', {
+			method: 'post', parameters: 'r=' + RegionId + '&page='+ mypag +'&RecordsPerPage=' + RecordsPerPage + '&sql=' + QueryDef + '&fld=' + FieldList,
+			onLoading: function(request) {
+				$(div).innerHTML = "<img src='loading.gif>";
+			},
+			onComplete: function(request) {
+				// Reload the jQuery functions on the new DOM elements...
+				onReadyData();
+			}
+		});
 	}
-	$('DataCurPage').value = mypag ;
-	var RegionId = jQuery('#prmRegionId').val();
-	var RecordsPerPage = jQuery('#prmRecordsPerPage').val();
-	var QueryDef = jQuery('#prmQueryDef').val();
-	var FieldList = jQuery('#prmFieldList').val();
-	var lsAjax = new Ajax.Updater('lst_dis', 'data.php', {
-		method: 'post', parameters: 'r=' + RegionId + '&page='+ mypag +'&RecordsPerPage=' + RecordsPerPage + '&sql=' + QueryDef + '&fld=' + FieldList,
-		onLoading: function(request) {
-			$(div).innerHTML = "<img src='loading.gif>";
-		}
-	});
 } //function
 
