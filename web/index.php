@@ -424,7 +424,7 @@ switch ($cmd) {
 						}
 						*/
 					}	
-					// 2009-07-14 (jhcaiced) Configure Google Map Key
+					// 2009-07-14 (jhcaiced) Configure GoogleMapsKey
 					$GoogleMapsKey = "";
 					switch($_SERVER["SERVER_NAME"]) {
 						case "devel.desinventar.org":
@@ -448,7 +448,7 @@ switch ($cmd) {
 							$GoogleMapsKey = "";
 							break;
 					}
-					$t->assign('googlemapkey', $GoogleMapsKey);
+					$t->assign('GoogleMapsKey', $GoogleMapsKey);
 					$t->assign('hasInternet', $hasInternet);
 					
 					/* END THEMATIC MAP */

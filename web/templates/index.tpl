@@ -237,7 +237,7 @@
 					</td>
 				</tr>
 			</table>
-			<div id="divGridView">
+			<div id="dcr">
 			</div>
 			<!-- <iframe id="dcr" name="dcr" frameborder="0" scrolling="auto" height="550px" width="100%" src="?cmd=getRegionFullInfo&r={-$reg-}"></iframe> -->
 		</div> <!-- end div id=divQueryResults -->

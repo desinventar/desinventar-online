@@ -49,7 +49,7 @@ function onReadyThematicMap() {
 		met1.setVisibility(false);
 		map.addLayer(met1);
 
-		if (jQuery('#prmGoogleMapKey').val() != '') {
+		if (jQuery('#prmGoogleMapsKey').val() != '') {
 			// maps.google.com - Base Layer
 			var google1 = new OpenLayers.Layer.Google("Google Basic", 
 											  {type: G_NORMAL_MAP, 'sphericalMercator': true});
@@ -85,6 +85,41 @@ function onReadyThematicMap() {
 		map.zoomToMaxExtent();
 	}
 
+	// Effects layer(s)
+	jQuery('#MapEffectLayers div').each(function() {
+		//alert(jQuery(this).attr('id'));
+		//alert(jQuery(this).find(':eq(1)').text());
+		var layer = new OpenLayers.Layer.WMS(
+			'DI8/' + jQuery(this).find(':eq(0)').text(),
+			'/cgi-bin/' + jQuery('#prmMapServer').val() + '?',
+			{map         : jQuery(this).find(':eq(1)').text(),
+			 transparent : true,
+			 format      : 'png',
+			 layers      : jQuery(this).find(':eq(2)').text()
+			},
+			{isBaseLayer :false
+			}
+		);
+		map.addLayer(layer);
+	});
+
+	/*
+	{-foreach name=rgl key=k item=i from=$rgl-}
+		var db{-$k-} = new OpenLayers.Layer.WMS("DI8 / {-$i.regname-}", 
+				"/cgi-bin/" + jQuery('#prmMapServer').val() + "?", { map:'{-$i.map-}', 'transparent':true, 'format':'png',
+				layers:'{-$i.ly1-}'}, {'isBaseLayer':false });
+		map.addLayer(db{-$k-});
+		// Admin layers
+		{-foreach name=glev key=ky item=it from=$glev-}
+			var adm{-$smarty.foreach.glev.iteration-} = new OpenLayers.Layer.WMS("{-$it[0]-}", 
+				"/cgi-bin/" + jQuery('#prmMapServer').val() + "?", { map:'{-$i.map-}', 'transparent':true, 'format':'png',
+				layers:'{-foreach name=ly key=k2 item=i2 from=$it[2]-}{-$i2[0]-}admin0{-$ky-}{-if !$smarty.foreach.ly.last-},{-/if-}{-/foreach-}'},
+				{'isBaseLayer':false});
+			adm{-$smarty.foreach.glev.iteration-}.setVisibility(false);
+			map.addLayer(adm{-$smarty.foreach.glev.iteration-});
+		{-/foreach-}
+	{-/foreach-}
+	*/
 		
 	jQuery('#MapTitle').val(jQuery('#defaultMapTitle').text());
 	jQuery('#linkRestoreMapTitle').click(function() {
