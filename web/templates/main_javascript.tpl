@@ -1,10 +1,10 @@
 <script type="text/javascript">
 		function onMenuItem(item) {
+			var RegionId = jQuery('#fldDesinventarRegionId').val();
 			switch (item.id) {
 				case "mnuRegionInfo":
-					var RegionId = '{-$reg-}';
 					if (RegionId != '') {
-						$('dcr').src = "index.php?cmd=getRegionFullInfo&r={-$reg-}";
+						$('dcr').src = 'index.php?cmd=getRegionFullInfo&r=' + RegionId;
 						$('bsave').style.visibility = 'hidden';
 						$('bprint').style.visibility = 'hidden';
 					}
@@ -35,13 +35,13 @@
 				case "mqrygoq":
 					w = Ext.getCmp('westm');
 					jQuery('.contentBlock').hide();
-					{-if $ctl_noregion-}
+					if (RegionId == '') {
 						jQuery('#divQueryResults').hide();
 						w.hide();
-					{-else-}
+					} else {
 						jQuery('#divQueryResults').show();
 						w.show();
-					{-/if-}
+					}
 					if (w.isVisible()) {
 						w.collapse(); //hide()
 					} else {
@@ -50,7 +50,7 @@
 				break;
 				case "mqrynew":
 					// Just reload the current region window...(need a better solution!!)
-					window.location = "index.php?r={-$reg-}";
+					window.location = 'index.php?r=' + RegionId;
 				break;
 				case "mqrysav":
 					saveQuery();
@@ -84,15 +84,13 @@
 					hideQueryDesign();
 					jQuery('.contentBlock').hide();
 					jQuery('#divDatacardsImport').show();
-					updateList('divDatacardsImport', 'import.php', 'r={-$reg-}');
+					updateList('divDatacardsImport', 'import.php', 'r=' + RegionId);
 				break;
 				case "mnuDatabaseBackup":
-					/*
-					hideQueryDesign();
-					jQuery('.contentBlock').hide();
-					jQuery('#divDatabaseBackup').show();
-					*/
-					window.location = "index.php?cmd=getRegionBackup&r={-$reg-}";
+					//hideQueryDesign();
+					//jQuery('.contentBlock').hide();
+					//jQuery('#divDatabaseBackup').show();
+					window.location = 'index.php?cmd=getRegionBackup&r=' + RegionId;
 				break;
 				case "mcrdcfg":
 					hideQueryDesign();
@@ -122,11 +120,17 @@
 					window.open('http://www.desinventar.org', '', '');
 				break;
 				case "mmtg":
-					window.open('http://www.desinventar.org/{-if $lg == "spa"-}es/metodologia{-else-}en/methodology{-/if-}/', '', '');
-					//runWin('doc.php?m=metguide', 'doc');
+					var url = 'http://www.desinventar.org';
+					if (jQuery('#fldDesinventarLang').val() == 'spa') {
+						url = url + '/es/metodologia';
+					} else {
+						url = url + '/en/methodology';
+					}
+					window.open(url, '', '');
 				break;
 				case "mdoc":
-					window.open('http://www.desinventar.org/{-if $lg == "spa"-}es{-else-}en{-/if-}/software', '', '');
+					var url = 'http://www.desinventar.org/';
+					window.open(url, '', '');
 				break;
 			} //switch
 		} //function
@@ -654,7 +658,7 @@
 			if (opc) {
 				// Find and fill childs
 				$('itree-' + gid).style.display = 'block';
-				updateList('itree-' + gid, 'index.php', 'r={-$reg-}&cmd=glist&GeographyId=' + gid);
+				updateList('itree-' + gid, 'index.php', 'r=' + jQuery('#fldDesinventarRegionId').val() + '&cmd=glist&GeographyId=' + gid);
 			} else {
 				// clean childs first
 				$('itree-' + gid).innerHTML = '';
@@ -863,45 +867,37 @@
 			'onClick': function(argsObj) {
 				var t = argsObj.tabber;
 				var i = argsObj.index;
-				var div = this.tabs[i].div; /* The tab content div */
-				/* Display a loading message */
+				var div = this.tabs[i].div; // The tab content div
+				var RegionId = jQuery('#fldDesinventarRegionId').val();
+				// Display a loading message
 				div.innerHTML = waiting;
 				switch (i) {
 					case 0 :
-						myAjax = new Ajax.Updater(div, 'info.php', {method:'get', parameters:'r={-$reg-}'});
+						myAjax = new Ajax.Updater(div, 'info.php', {method:'get', parameters:'r=' + RegionId});
 					break;
 					case 1 :
-						myAjax = new Ajax.Updater(div, 'geolevel.php', {method:'get', parameters:'r={-$reg-}'});
+						myAjax = new Ajax.Updater(div, 'geolevel.php', {method:'get', parameters:'r=' + RegionId});
 					break;
 					case 2 :
-						myAjax = new Ajax.Updater(div, 'geography.php', {method:'get', parameters:'r={-$reg-}'});
+						myAjax = new Ajax.Updater(div, 'geography.php', {method:'get', parameters:'r=' + RegionId});
 					break;
 					case 3 :
-						myAjax = new Ajax.Updater(div, 'events.php', {method:'get', parameters:'r={-$reg-}'});
+						myAjax = new Ajax.Updater(div, 'events.php', {method:'get', parameters:'r=' + RegionId});
 					break;
 					case 4 :
-						myAjax = new Ajax.Updater(div, 'causes.php', {method:'get', parameters:'r={-$reg-}'});
+						myAjax = new Ajax.Updater(div, 'causes.php', {method:'get', parameters:'r=' + RegionId});
 					break;
 					case 5 :
-						myAjax = new Ajax.Updater(div, 'extraeffects.php', {method:'get', parameters:'r={-$reg-}'});
+						myAjax = new Ajax.Updater(div, 'extraeffects.php', {method:'get', parameters:'r=' + RegionId});
 					break;
 				} //switch
 			},
 			'onLoad': function(argsObj) {
-				/* Load the first tab */
+				// Load the first tab
 				argsObj.index = 0;
 				this.onClick(argsObj);
 			}
 		}
 		
-		/* selection map functions
-		function showMap() {
-			$('smap').style.visibility = 'visible';
-		}
-		function hideMap() {
-			$('smap').style.visibility = 'hidden';
-		}*/
-		
 		var geotree = new CheckTree('geotree');
-		//var g{-$reg-} = new CheckTree('g{-$reg-}');
 </script>
