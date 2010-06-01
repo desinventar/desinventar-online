@@ -17,7 +17,7 @@ function onReadyStatistic() {
 		return false;
 	});
 
-	jQuery('#lst_dis tr:even').addClass('under');
+	jQuery('#tblStatRows tr:even').addClass('under');
 	
 	jQuery('#StatCurPage').keydown(function(event) {
 		if(event.keyCode == 13) {
@@ -42,7 +42,7 @@ function doStatDisplayPage(page) {
 	}
 	$('StatCurPage').value = mypag ;
 	var RecordsPerPage = jQuery('#prmStatRecordsPerPage').val();
-	var lsAjax = new Ajax.Updater('lst_dis', 'statistic.php', {
+	var lsAjax = new Ajax.Updater('tblStatRows', 'statistic.php', {
 		method: 'post', parameters: 'r=' + jQuery('#prmStatRegionId').val + '&page='+ mypag +'&rxp=' + RecordsPerPage +'&sql=' + jQuery('#prmStatQueryDef').val() + '&fld=' + jQuery('#prmStatFieldList').val() + '&geo=' + jQuery('#prmStatGeography').val(),
 		onLoading: function(request) {
 			$(div).innerHTML = "<img src='loading.gif>";
@@ -51,7 +51,7 @@ function doStatDisplayPage(page) {
 }
 
 function doStatOrderByField(field, dir) {
-	var lsAjax = new Ajax.Updater('lst_dis', 'statistic.php', {
+	var lsAjax = new Ajax.Updater('tblStatRows', 'statistic.php', {
 		method: 'post', 
 		parameters: 'r=' + jQuery('#prmStatRegionId').val() + '&page='+ $('StatCurPage').value +'&rxp=' + jQuery('#prmStatRecordsPerPage').val() + '&sql=' + jQuery('#prmStatQueryDef').val() + '&fld=' + jQuery('#prmStatFieldList').val() + '&ord='+ field + '&geo=' + jQuery('#prmStatGeography').val() + '&dir='+ dir,
 		onLoading: function(request) {

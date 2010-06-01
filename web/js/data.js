@@ -45,6 +45,8 @@ function onReadyData() {
 	jQuery('#btnGridGotoLastPage').click(function() {
 		doDataDisplayPage(jQuery('#prmDataNumberOfPages').val());
 	});
+
+	jQuery('#tblDataRows tr:even').addClass('under');
 }
 
 function setDIForm(prmDisasterId) {
@@ -70,7 +72,7 @@ function doDataDisplayPage(page) {
 		var RecordsPerPage = jQuery('#prmDataRecordsPerPage').val();
 		var QueryDef = jQuery('#prmDataQueryDef').val();
 		var FieldList = jQuery('#prmDataFieldList').val();
-		var lsAjax = new Ajax.Updater('lst_dis', 'data.php', {
+		var lsAjax = new Ajax.Updater('tblDataRows', 'data.php', {
 			method: 'post', parameters: 'r=' + RegionId + '&page='+ mypag +'&RecordsPerPage=' + RecordsPerPage + '&sql=' + QueryDef + '&fld=' + FieldList,
 			onLoading: function(request) {
 				$(div).innerHTML = "<img src='loading.gif>";

@@ -35,12 +35,12 @@
 				{-/foreach-}
 			</tr>
 		</thead>
-		<tbody id="lst_dis">
+		<tbody id="tblDataRows">
 {-/if-}
 {-*** SHOW RESULT LIST: PAGING ***-}
 {-if $ctl_dislist-}
 			{-foreach name=dl key=key item=item from=$dislist-}
-				<tr class="{-if ($smarty.foreach.dl.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}" 
+				<tr class="normal" 
 					onClick="Element.addClassName(this, 'highlight');" ondblClick="Element.removeClassName(this, 'highlight');">
 					<td>
 						<a href="#" class="linkGridGotoCard" disasterid="{-$item.DisasterId-}">{-$offset+$smarty.foreach.dl.iteration-}</a>
