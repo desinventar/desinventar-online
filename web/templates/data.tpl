@@ -77,12 +77,12 @@
 		</tbody>
 	</table>
 	<div style="display:none;">
-		<input type="hidden" id="prmRegionId"       value="{-$RegionId-}"       />
-		<input type="hidden" id="prmUserRole"       value="{-$UserRole-}"       />
-		<input type="hidden" id="prmUserRoleValue"  value="{-$UserRoleValue-}"  />
-		<input type="hidden" id="prmRecordsPerPage" value="{-$RecordsPerPage-}" />
-		<input type="hidden" id="prmNumberOfPages"  value="{-$NumberOfPages-}"  />
-		<input type="hidden" id="prmQueryDef"       value="{-$sql-}"            />
-		<input type="hidden" id="prmFieldList"      value="{-$fld-}"            />
+		<input type="hidden" id="prmDataRegionId"       value="{-$RegionId-}"       />
+		<input type="hidden" id="prmDataUserRole"       value="{-$UserRole-}"       />
+		<input type="hidden" id="prmDataUserRoleValue"  value="{-$UserRoleValue-}"  />
+		<input type="hidden" id="prmDataRecordsPerPage" value="{-$RecordsPerPage-}" />
+		<input type="hidden" id="prmDataNumberOfPages"  value="{-$NumberOfPages-}"  />
+		<input type="hidden" id="prmDataQueryDef"       value="{-$sql-}"            />
+		<input type="hidden" id="prmDataFieldList"      value="{-$fld-}"            />
 	</div>
 {-/if-}
