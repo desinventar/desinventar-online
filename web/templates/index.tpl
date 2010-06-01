@@ -32,6 +32,17 @@
 	<script type="text/javascript" src="js/desconsultar.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/main.js?version={-$jsversion-}"></script>
 
+	{-if $hasInternet -}
+		{-if $googlemapkey != '' -}
+			<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={-$googlemapkey-}"></script>
+		{-/if-}
+		{-if $hasVEMap -}
+			<script src='http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.1'></script>
+		{-/if-}
+		<script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid=euzuro-openlayers"></script>
+	{-/if-}
+	<script src="/openlayers/lib/OpenLayers.js"></script>
+
 	<!-- ExtJS -->
 	<link rel="stylesheet" href="css/checktree.css" type="text/css"/>
 	<link rel="stylesheet" href="css/accordion.css" type="text/css"/>
