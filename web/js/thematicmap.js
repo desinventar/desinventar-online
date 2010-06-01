@@ -1,4 +1,4 @@
-var map;
+var map = null;
 
 function onReadyThematicMap() {
 	var lon = 0;
@@ -180,25 +180,6 @@ function onReadyThematicMap() {
 	map.addControl(WMSToolbar);
 	//parent.document.getElementById('frmwait').innerHTML='';
 	
-	*/
-
-	/*
-	// Effects layer(s)
-	{-foreach name=rgl key=k item=i from=$rgl-}
-		var db{-$k-} = new OpenLayers.Layer.WMS("DI8 / {-$i.regname-}", 
-				"/cgi-bin/" + jQuery('#prmMapServer').val() + "?", { map:'{-$i.map-}', 'transparent':true, 'format':'png',
-				layers:'{-$i.ly1-}'}, {'isBaseLayer':false });
-		map.addLayer(db{-$k-});
-		// Admin layers
-		{-foreach name=glev key=ky item=it from=$glev-}
-			var adm{-$smarty.foreach.glev.iteration-} = new OpenLayers.Layer.WMS("{-$it[0]-}", 
-				"/cgi-bin/" + jQuery('#prmMapServer').val() + "?", { map:'{-$i.map-}', 'transparent':true, 'format':'png',
-				layers:'{-foreach name=ly key=k2 item=i2 from=$it[2]-}{-$i2[0]-}admin0{-$ky-}{-if !$smarty.foreach.ly.last-},{-/if-}{-/foreach-}'},
-				{'isBaseLayer':false});
-			adm{-$smarty.foreach.glev.iteration-}.setVisibility(false);
-			map.addLayer(adm{-$smarty.foreach.glev.iteration-});
-		{-/foreach-}
-	{-/foreach-}
 	*/
 
 	/*
