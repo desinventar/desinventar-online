@@ -17,11 +17,7 @@ function onReadyStatistic() {
 		return false;
 	});
 
-	// Create rows of different color
-	/*
-{-if ($smarty.foreach.dl.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}" 
-					onClick="Element.addClassName(this, 'highlight');" ondblClick="Element.removeClassName(this, 'highlight');"	
-	*/
+	jQuery('#lst_dis tr:even').addClass('under');
 	
 	jQuery('#StatCurPage').keydown(function(event) {
 		if(event.keyCode == 13) {
