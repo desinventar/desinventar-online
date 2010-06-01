@@ -1,8 +1,8 @@
 var map = null;
 
 function onReadyThematicMap() {
-	var lon = 0;
-	var lat = 0;
+	var lon = parseFloat(jQuery('#prmMapLat').val());
+	var lat = parseFloat(jQuery('#prmMapLon').val());
 	var zoom = parseInt(jQuery('#prmMapZoom').val());
 	var minx = parseFloat(jQuery('#prmMapMinX').val());
 	var maxx = parseFloat(jQuery('#prmMapMaxX').val());
