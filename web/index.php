@@ -28,7 +28,7 @@ $t->assign('desinventarLang'        , $lg);
 $t->assign('desinventarUserId'      , $us->UserId);
 $t->assign('desinventarUserFullName', $us->getUserFullName());
 $t->assign('desinventarModule'      ,'desinventar');
-
+$t->assign('desinventarRegionId'    , $RegionId);
 
 if (!empty($RegionId)) {
 	$us->open($RegionId);
