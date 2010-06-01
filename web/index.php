@@ -410,6 +410,48 @@ switch ($cmd) {
 					$t->assign('UserRole', $UserRole);
 					$t->assign('UserRoleValue', $UserRoleValue);
 					/* DATACARDS END */
+					
+					/* BEGIN THEMATIC MAP */
+					// 2010-01-18 (jhcaiced) Windows machines doesn't use remote servers
+					if (isset($_SERVER["WINDIR"])) {
+						$hasInternet = 0;
+					} else {
+						// Linux machines are assumed to be connected to internet
+						$hasInternet = 1;
+						/*
+						if (!fsockopen('www.google.com',80)) {
+							$hasInternet = 0;
+						}
+						*/
+					}	
+					// 2009-07-14 (jhcaiced) Configure Google Map Key
+					$GoogleMapsKey = "";
+					switch($_SERVER["SERVER_NAME"]) {
+						case "devel.desinventar.org":
+							$GoogleMapsKey = "ABQIAAAAv_HCDVf4YK_pJceWBA7XmRQHPIpdtLPiHEY9M3_iWXAS0AXQLhTwoORtm0ZLuqG03CB3sP09KKDtAg";
+							break;
+						case "online.desinventar.org":
+							$GoogleMapsKey = "ABQIAAAAv_HCDVf4YK_pJceWBA7XmRQHPIpdtLPiHEY9M3_iWXAS0AXQLhTwoORtm0ZLuqG03CB3sP09KKDtAg";		
+							break;
+						/*
+						case "192.168.0.13":
+							$GoogleMapsKey = "ABQIAAAAv_HCDVf4YK_pJceWBA7XmRRT41YKyiJ82KgcK-Dai8T6I93cWxT4pcci6xQX6tWCkefVHbB2AtUGKw";
+							break;
+						*/
+						case "localhost":
+							$GoogleMapsKey = "ABQIAAAAv_HCDVf4YK_pJceWBA7XmRT2yXp_ZAY8_ufC3CFXhHIE1NvwkxQrE9s8Pd9b8nrmaDwyyilebSXcPw";
+							break;
+						case "127.0.0.1":
+							$GoogleMapsKey = "ABQIAAAAv_HCDVf4YK_pJceWBA7XmRRi_j0U6kJrkFvY4-OX2XYmEAa76BSA4JvNpGUXBDLtWrA-lnRXmTahHg";
+							break;
+						default:
+							$GoogleMapsKey = "";
+							break;
+					}
+					$t->assign('googlemapkey', $GoogleMapsKey);
+					$t->assign('hasInternet', $hasInternet);
+					
+					/* END THEMATIC MAP */
 
 					$t->display("index.tpl");
 				break;
