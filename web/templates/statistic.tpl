@@ -56,7 +56,7 @@
 				{-/foreach-}
 			</tr>
 		</thead>
-		<tbody id="lst_dis">
+		<tbody id="tblStatRows">
 {-/if-}
 			{-*** SHOW RESULT LIST: PAGING ***-}
 {-if $ctl_dislist-}
