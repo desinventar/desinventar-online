@@ -135,8 +135,9 @@ if (isset($post['_M+cmd'])) {
 		$zoom = round(log(180/$mx)) + 3;
 		$t->assign('zoom', $zoom);
 	}
-	
-	$t->assign('glev', $us->q->loadGeoLevels('', -1, true));
+
+	$glev = $us->q->loadGeoLevels('', -1, true);
+	$t->assign('glev', $glev );
 	$t->assign('rgl', $rgl);
 	$t->assign('MapNumberOfRecords', $NumberOfRecords);
 	$t->assign('qdet', $us->q->getQueryDetails($dic, $post));
@@ -175,7 +176,7 @@ if (isset($post['_M+cmd'])) {
 	}
 	$font = 'arialbi';
 	
-	/* Map Title Image */
+	// Map Title Image
 	$width  = 1000; //$sx * $ImageCols;
 	$height = 20;
 	$imgMapTitle = imagecreatetruecolor($width, $height);
@@ -188,7 +189,7 @@ if (isset($post['_M+cmd'])) {
 	$x = ($width - ($bbox[2] - $bbox[0]) )/2;
 	imagettftext($imgMapTitle, 11, 0, $x, 13, $black, 'arialbi', $item);
 	
-	/* Map Info Image */
+	// Map Info Image
 	$fontsize = 10;
 	$sy = $fontsize;
 	$height = ($sy + 2) * $ImageRows + 2;
@@ -292,4 +293,5 @@ $t->assign('reg', $reg);
 $t->assign('basemap', $worldmap);
 $t->assign('mps', MAPSERV);
 $t->display('thematicmap.tpl');
+
 </script>

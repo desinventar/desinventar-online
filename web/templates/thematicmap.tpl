@@ -58,4 +58,27 @@
 		<input type="hidden" id="prmMapServer"   value="{-$mps-}"  />
 		<input type="hidden" id="prmMapBase"     value="{-$basemap-}" />
 	</div>
+	<div style="display:none;">
+	<!--
+	{-foreach name=rgl key=k item=i from=$rgl-}
+		<div id=MapLayer{-$k-}>
+			<span>{-$i.regname-}</span>
+			<span>{-$i.map-}</span>
+			<span>{-$i.ly1-}</span>
+		</div>
+	{-/foreach-}
+	-->
+	<!--
+	{-foreach name=glev key=ky item=it from=$glev-}
+		<div id=AdminLayer{-$smarty.foreach.glev.iteration-}>
+			<span>{-$it[0]-}</span>
+			<span>
+			{-foreach name=ly key=k2 item=i2 from=$it[2]-}
+				{-$i2[0]-}admin0{-$ky-}
+				{-if !$smarty.foreach.ly.last-},{-/if-}
+			{-/foreach-}
+			</span>
+	{-/foreach-}
+	-->
+	</div>
 {-/if-}
