@@ -506,6 +506,7 @@
 	} //function
 	
 	function sendList(cmd) {
+		jQuery('#prmCommand').val('cmdGridShow');
 		if ($('_D+Field[]').length > 0) {
 			w = Ext.getCmp('westm');
 			$('_D+cmd').value = cmd;
@@ -535,6 +536,7 @@
 			//$('frmwait').innerHTML = waiting;
 			$('_M+cmd').value = cmd;
 			if (cmd == "export") {
+				jQuery('#prmCommand').val('cmdMapSave');
 				// to export image save layers and extend..
 				var dcr = document.getElementById('dcr');
 				var mm = map;
@@ -553,7 +555,6 @@
 				//myMap = window.parent.frames['dcr'].document.getElementById('MapTitle');
 				myMap = jQuery('#MapTitle');
 				$('_M+title').value = myMap.val();
-				jQuery('#prmCommand').val('cmdMapSave');
 			}
 			combineForms('DC', 'CM');
 			w.collapse(); // hide()
@@ -567,6 +568,7 @@
 	} //function
 	
 	function sendGraphic(cmd) {
+		jQuery('#prmCommand').val('cmdGraphShow');
 		w = Ext.getCmp('westm');
 		$('_G+cmd').value = cmd;
 		combineForms('DC', 'CG');
@@ -577,6 +579,7 @@
 	}
 	
 	function sendStatistic(cmd) {
+		jQuery('#prmCommand').val('cmdStatShow');
 		if ($('_S+Firstlev').value != "" && $('_S+Field[]').length > 0) {
 			w = Ext.getCmp('westm');
 			$('_S+cmd').value = cmd;
@@ -598,6 +601,7 @@
 	} //function
 	
 	function saveQuery() {
+		jQuery('#prmCommand').val('cmdQuerySave');
 		selectall('_D+Field[]');
 		combineForms('DC', 'CD');
 		combineForms('DC', 'CM');
