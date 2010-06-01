@@ -428,7 +428,7 @@ switch ($cmd) {
 					$GoogleMapsKey = "";
 					switch($_SERVER["SERVER_NAME"]) {
 						case "devel.desinventar.org":
-							$GoogleMapsKey = "ABQIAAAAv_HCDVf4YK_pJceWBA7XmRQHPIpdtLPiHEY9M3_iWXAS0AXQLhTwoORtm0ZLuqG03CB3sP09KKDtAg";
+							$GoogleMapsKey = 'ABQIAAAALchGiIjlsbdmE3fN4eRcYBQB70apFGkcE_JIKPq7c7oktNLHXhTU2xdzBNS_-XzWYh911SdinR2Xkw';
 							break;
 						case "online.desinventar.org":
 							$GoogleMapsKey = "ABQIAAAAv_HCDVf4YK_pJceWBA7XmRQHPIpdtLPiHEY9M3_iWXAS0AXQLhTwoORtm0ZLuqG03CB3sP09KKDtAg";		
