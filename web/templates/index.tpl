@@ -91,6 +91,10 @@
 					jQuery('#graphParamPeriod').val('YEAR');
 				}
 			})
+			
+			if (jQuery('#fldDesinventarRegionId').val() != '') {
+				jQuery('#dcr').load('index.php?cmd=getRegionFullInfo&r=' + jQuery('#fldDesinventarRegionId').val());
+			}
 		});
 	</script>
 </head>
