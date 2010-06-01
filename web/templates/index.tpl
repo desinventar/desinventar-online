@@ -33,7 +33,7 @@
 	<script type="text/javascript" src="js/main.js?version={-$jsversion-}"></script>
 
 	{-if $hasInternet -}
-		{-if $googlemapkey != '' -}
+		{-if $GoogleMapsKey != '' -}
 			<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={-$googlemapkey-}"></script>
 		{-/if-}
 		{-if $hasVEMap -}
