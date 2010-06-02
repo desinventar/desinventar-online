@@ -11,7 +11,8 @@ require_once('include/diregion.class.php');
 $post = $_POST;
 $get  = $_GET;
 
-$cmd = getParameter('cmd', getParameter('_CMD',''));
+$cmd = getParameter('prmCommand', getParameter('cmd', getParameter('_CMD','')));
+fb($cmd);
 $RegionId = getParameter('r', getParameter('RegionId', getParameter('_REG'),''));
 if ($cmd == '' && $RegionId == '') {
 	$cmd = 'start';
@@ -128,6 +129,7 @@ switch ($cmd) {
 		}
 	break;
 	case 'savequery':
+	case 'cmdQuerySave':
 		// Save XML file query
 		fixPost($post);
 		// Do not save _CMD...
