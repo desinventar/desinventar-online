@@ -32,7 +32,7 @@
 					self.close();
 				break;
 				// query menu
-				case "mqrygoq":
+				case "menuQueryToggle":
 					w = Ext.getCmp('westm');
 					jQuery('.contentBlock').hide();
 					if (RegionId == '') {
@@ -48,11 +48,11 @@
 						w.expand(); //show()
 					}
 				break;
-				case "mqrynew":
+				case "mnuQueryNew":
 					// Just reload the current region window...(need a better solution!!)
 					window.location = 'index.php?r=' + RegionId;
 				break;
-				case "mqrysav":
+				case "menuQuerySave":
 					saveQuery();
 				break;
 				case "mnuQueryOpen":
@@ -238,9 +238,9 @@
 			id: 'queryMenu',
 			items: [
 				{-if !$ctl_noregion-}
-					{id:'mqrygoq', text: '{-#mgotoqd#-}',	handler: onMenuItem  },
-					{id:'mqrynew', text: '{-#mnewsearch#-}',handler: onMenuItem  },
-					{id:'mqrysav', text: '{-#msavequery#-}',handler: onMenuItem  },
+					{id:'menuQueryToggle', text: '{-#mgotoqd#-}'   ,handler: onMenuItem  },
+					{id:'mnuQueryNew'    , text: '{-#mnewsearch#-}',handler: onMenuItem  },
+					{id:'menuQuerySave'  , text: '{-#msavequery#-}',handler: onMenuItem  },
 				{-/if-}
 				{id:'mnuQueryOpen', text: '{-#mopenquery#-}',handler: onMenuItem  }
 			]
