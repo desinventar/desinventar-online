@@ -3,6 +3,22 @@
 {-if $ctl_showres-}
 	<table width="920px" class="grid">
 		<tr>
+			<td colspan="3">
+				<div style="height:40px;" class="dwin">
+					{-foreach key=k item=i from=$qdet-}
+						{-if $k == "GEO"-}<b>{-#geo#-}:</b> {-$i-}; {-/if-}
+						{-if $k == "EVE"-}<b>{-#eve#-}:</b> {-$i-}; {-/if-}
+						{-if $k == "CAU"-}<b>{-#cau#-}:</b> {-$i-}; {-/if-}
+						{-if $k == "EFF"-}<b>{-#eff#-}:</b> {-$i-}; {-/if-}
+						{-if $k == "BEG"-}<b>{-#beg#-}:</b> {-$i-}; {-/if-}
+						{-if $k == "END"-}<b>{-#end#-}:</b> {-$i-}; {-/if-}
+						{-if $k == "SOU"-}<b>{-#sou#-}:</b> {-$i-}; {-/if-}
+						{-if $k == "SER"-}<b>{-#ser#-}:</b> {-$i-}; {-/if-}
+					{-/foreach-}
+				</div>
+			</td>
+		</tr>
+		<tr>
 			<td>
 				{-#tpage#-}
 				<input type="text" id="DataCurPage" size="2" value="1" class="line"  />
@@ -84,5 +100,17 @@
 		<input type="hidden" id="prmDataNumberOfPages"  value="{-$NumberOfPages-}"  />
 		<input type="hidden" id="prmDataQueryDef"       value="{-$sql-}"            />
 		<input type="hidden" id="prmDataFieldList"      value="{-$fld-}"            />
+	</div>
+	<div id="divDataQueryDetails" style="display:none;">
+		{-foreach key=k item=i from=$qdet-}
+			{-if $k == "GEO"-}<b>{-#geo#-}:</b> {-$i-}; {-/if-}
+			{-if $k == "EVE"-}<b>{-#eve#-}:</b> {-$i-}; {-/if-}
+			{-if $k == "CAU"-}<b>{-#cau#-}:</b> {-$i-}; {-/if-}
+			{-if $k == "EFF"-}<b>{-#eff#-}:</b> {-$i-}; {-/if-}
+			{-if $k == "BEG"-}<b>{-#beg#-}:</b> {-$i-}; {-/if-}
+			{-if $k == "END"-}<b>{-#end#-}:</b> {-$i-}; {-/if-}
+			{-if $k == "SOU"-}<b>{-#sou#-}:</b> {-$i-}; {-/if-}
+			{-if $k == "SER"-}<b>{-#ser#-}:</b> {-$i-}; {-/if-}
+		{-/foreach-}
 	</div>
 {-/if-}

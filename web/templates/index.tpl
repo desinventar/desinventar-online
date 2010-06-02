@@ -234,12 +234,6 @@
 							onClick="printRes();" ext:qtip="{-#bprintmsg#-}" />&nbsp;&nbsp;
 					</td>
 				</tr>
-				<tr>
-					<td colspan="3">
-						<div id="querydetails" style="height:40px;" class="dwin"></div>
-						<!--  <div id="smap" style="position:absolute; left:0px; top:20px; visibility:hidden;">[<a href="javascript:void(0);" onClick="hideMap();">X</a>]<br></div>-->
-					</td>
-				</tr>
 			</table>
 			<div id="dcr">
 			</div>
