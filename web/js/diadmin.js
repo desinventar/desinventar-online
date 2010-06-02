@@ -608,8 +608,8 @@
 		combineForms('DC', 'CG');
 		selectall('_S+Field[]');
 		combineForms('DC', 'CS');
-		$('_CMD').value='savequery';
-		$('DC').action='index.php';
+		jQuery('#_CMD').val('savequery');
+		$('DC').action='index.php?r=' + jQuery('#fldDesinventarRegionId').val();
 		jQuery('#DC').submit();
 		return true;
 	}
