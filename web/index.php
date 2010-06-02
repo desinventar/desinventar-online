@@ -12,7 +12,7 @@ $post = $_POST;
 $get  = $_GET;
 
 $cmd = getParameter('prmCommand', getParameter('cmd', getParameter('_CMD','')));
-fb($cmd);
+
 $RegionId = getParameter('r', getParameter('RegionId', getParameter('_REG'),''));
 if ($cmd == '' && $RegionId == '') {
 	$cmd = 'start';
