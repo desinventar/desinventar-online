@@ -30,20 +30,20 @@ function onReadyStatistic() {
 
 function doStatDisplayPage(page) {
 	var mypag = page;
-	now = parseInt($('StatCurPage').value);
+	now = parseInt(jQuery('#StatCurPage').val());
 	if (page == 'prev') {
 		mypag = now - 1;
 	} else if (page == 'next') {
 		mypag = now + 1;
 	}
 	var NumberOfPages = jQuery('#prmStatNumberOfPages').val();
-	if (mypag < 1 || mypag > NumberOfPages) {
+	if ((mypag < 1) || (mypag > NumberOfPages)) {
 		return false;
 	}
-	$('StatCurPage').value = mypag ;
+	jQuery('#StatCurPage').val(mypag);
 	var RecordsPerPage = jQuery('#prmStatRecordsPerPage').val();
 	var lsAjax = new Ajax.Updater('tblStatRows', 'statistic.php', {
-		method: 'post', parameters: 'r=' + jQuery('#prmStatRegionId').val + '&page='+ mypag +'&rxp=' + RecordsPerPage +'&sql=' + jQuery('#prmStatQueryDef').val() + '&fld=' + jQuery('#prmStatFieldList').val() + '&geo=' + jQuery('#prmStatGeography').val(),
+		method: 'post', parameters: 'r=' + jQuery('#prmStatRegionId').val() + '&page='+ mypag +'&rxp=' + RecordsPerPage +'&sql=' + jQuery('#prmStatQueryDef').val() + '&fld=' + jQuery('#prmStatFieldList').val() + '&geo=' + jQuery('#prmStatGeography').val(),
 		onLoading: function(request) {
 			$(div).innerHTML = "<img src='loading.gif>";
 		}
