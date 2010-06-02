@@ -1,5 +1,4 @@
 {-config_load file=`$lg`.conf section="di8_input"-}
-	<script type="text/javascript" src="include/wz_tooltip.js"></script>
 	<!-- BEG DI8 FORM CARD -->
 	<table width="900px" border="0" cellpadding="0" cellspacing="0" >
 		<tr valign="middle">

@@ -2,7 +2,8 @@ function onReadyMain() {
 	jQuery('#DC').submit(function() {
 		var myURL = jQuery(this).attr('action');
 		var myCmd = jQuery('#prmCommand').val();
-		if (myCmd == 'cmdMapSave') {
+		if ( (myCmd == 'cmdMapSave') || 
+		     (myCmd == 'cmdQuerySave')) {
 			return true;
 		} else {
 			jQuery.post(myURL,
