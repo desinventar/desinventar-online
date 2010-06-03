@@ -3,22 +3,22 @@
 	<table width="900px" border="0" cellpadding="0" cellspacing="0" >
 		<tr valign="middle">
 			<td width="450px" rowspan="2">
-				<input type="button" id="btnDatacardNew"    class="DatacardCmdButton bb bnew"    onmouseover="Tip('{-#tnewtitle#-}: {-#tnewdesc#-}')" onmouseout="UnTip()" />
-				<input type="button" id="btnDatacardEdit"   class="DatacardCmdButton bb bupd"    onmouseover="Tip('{-#tupdtitle#-}: {-#tupddesc#-}')" onmouseout="UnTip()" />
-				<input type="button" id="btnDatacardSave"   class="DatacardCmdButton bb bsave"   onmouseover="Tip('{-#tsavtitle#-}: {-#tsavdesc#-}')" onmouseout="UnTip()" />
-				<input type="button" id="btnDatacardClear"  class="DatacardCmdButton bb bclear"  onmouseover="Tip('{-#tclntitle#-}: {-#tclndesc#-}')" onmouseout="UnTip()" />
-				<input type="button" id="btnDatacardCancel" class="DatacardCmdButton bb bcancel" onmouseover="Tip('{-#tcantitle#-}: {-#tcandesc#-}')" onmouseout="UnTip()" />
+				<input type="button" id="btnDatacardNew"    class="DatacardCmdButton bb bnew"    ext:qtip="{-#tnewtitle#-}: {-#tnewdesc#-}" />
+				<input type="button" id="btnDatacardEdit"   class="DatacardCmdButton bb bupd"    ext:qtip="{-#tupdtitle#-}: {-#tupddesc#-}" />
+				<input type="button" id="btnDatacardSave"   class="DatacardCmdButton bb bsave"   ext:qtip="{-#tsavtitle#-}: {-#tsavdesc#-}" />
+				<input type="button" id="btnDatacardClear"  class="DatacardCmdButton bb bclear"  ext:qtip="{-#tclntitle#-}: {-#tclndesc#-}" />
+				<input type="button" id="btnDatacardCancel" class="DatacardCmdButton bb bcancel" ext:qtip="{-#tcantitle#-}: {-#tcandesc#-}" />
 				&nbsp;&nbsp;|&nbsp;&nbsp;
-				<input type="button" id="btnDatacardPrint"  class="DatacardCmdButton bb bprint"  onmouseover="Tip('{-#mprint#-}')" onmouseout="UnTip()" />
+				<input type="button" id="btnDatacardPrint"  class="DatacardCmdButton bb bprint"  ext:qtip="{-#mprint#-}" />
 				&nbsp;&nbsp;|&nbsp;&nbsp;
-				<input type="button" id="btnDatacardGotoFirst" class="DatacardNavButton bb line" value="<<" onmouseover="Tip('{-#bfirst#-}')" onmouseout="UnTip()" />
-				<input type="button" id="btnDatacardGotoPrev"  class="DatacardNavButton bb line" value="<"  onmouseover="Tip('{-#bprev#-}')"  onmouseout="UnTip()" />
-				<input type="button" id="btnDatacardGotoNext"  class="DatacardNavButton bb line" value=">"  onmouseover="Tip('{-#bnext#-}')"  onmouseout="UnTip()" />
-				<input type="button" id="btnDatacardGotoLast"  class="DatacardNavButton bb line" value=">>" onmouseover="Tip('{-#blast#-}')"  onmouseout="UnTip()" />
+				<input type="button" id="btnDatacardGotoFirst" class="DatacardNavButton bb line" value="<<" ext:qtip="{-#bfirst#-}" />
+				<input type="button" id="btnDatacardGotoPrev"  class="DatacardNavButton bb line" value="<"  ext:qtip="{-#bprev#-}"  />
+				<input type="button" id="btnDatacardGotoNext"  class="DatacardNavButton bb line" value=">"  ext:qtip="{-#bnext#-}"  />
+				<input type="button" id="btnDatacardGotoLast"  class="DatacardNavButton bb line" value=">>" ext:qtip="{-#blast#-}"  />
 				&nbsp;&nbsp;|&nbsp;&nbsp;
 				{-$dis.DisasterSerial[0]-}
 				<input type="text"   id="txtDatacardFind" class="DatacardCmdFind line" style="width:60px;" />
-				<input type="button" id="btnDatacardFind" class="DatacardCmdFind bb bfind" onmouseover="Tip('{-#texptitle#-}')" onmouseout="UnTip()" />
+				<input type="button" id="btnDatacardFind" class="DatacardCmdFind bb bfind" ext:qtip="{-#texptitle#-}" />
 				<br />				
 				<span class="dlgmsg" id="distatusmsg"></span>
 				<span class="dlgmsg" id="dostat"></span>
@@ -58,7 +58,7 @@
 				<td style="border-color:#000000;">
 					<table class="grid">
 						<tr valign="top">
-							<td onmouseover="Tip('{-$dis.DisasterBeginTime[1]-}')" onmouseout="UnTip()">
+							<td ext:qtip="{-$dis.DisasterBeginTime[1]-}" />
 								{-$dis.DisasterBeginTime[0]-}<b style="color:darkred;">*</b><br />
 								<input id="DisasterBeginTime0" name="DisasterBeginTime[0]" style="width:36px;" type="text"
 									class="line inputInteger" tabindex="1" maxlength="4" onFocus="showtip('{-$dis.DisasterBeginTime[2]-}', '#d4baf6')" />
@@ -67,7 +67,7 @@
 								<input id="DisasterBeginTime2" name="DisasterBeginTime[2]" style="width:18px;" type="text"
 									class="line inputInteger" tabindex="3"  maxlength="2" onFocus="showtip('{-$dis.DisasterBeginTime[2]-}', '#d4baf6')" />
 							</td>
-							<td onmouseover="Tip('{-$dis.DisasterSource[1]-}')" onmouseout="UnTip()">
+							<td ext:qtip="{-$dis.DisasterSource[1]-}" />
 								{-$dis.DisasterSource[0]-}<b style="color:darkred;">*</b><br />
 								<input id="DisasterSource" name="DisasterSource" type="text" size="50"
 									class="line inputText" tabindex="4" onFocus="showtip('{-$dis.DisasterSource[2]-}', '#d4baf6')" />
@@ -84,7 +84,7 @@
 									<option value="DELETED"  >{-#tstatdeleted#-}</option>
 								</select>
 							</td>
-							<td onmouseover="Tip('{-$dis.DisasterSerial[1]-}')" onmouseout="UnTip()">
+							<td ext:qtip="{-$dis.DisasterSerial[1]-}" />
 								{-$dis.DisasterSerial[0]-}<b style="color:darkred;">*<br />
 								<input id="DisasterSerial" name="DisasterSerial" type="text" size="15" 
 									class="line inputAlphaNumber" tabindex="6" maxlength="50" onFocus="showtip('{-$dis.DisasterSerial[2]-}', '#d4baf6')" />
@@ -98,14 +98,12 @@
 			<!-- GEOGRAPHY SECTION -->
 			<tr>
 				<td width="30px" style="border:0px;" valign="top">
-					<img src="images/di_geotag.png" 
-						onmouseover="Tip('<b>{-#mgeography#-}</b><br />{-$dmg.MetGuidegeography[2]-}', BGCOLOR, '#d4baf6', SHADOW, true, WIDTH, 400)" 
-						onmouseout="UnTip()" />
+					<img src="images/di_geotag.png" ext:qtip="<b>{-#mgeography#-}</b><br />{-$dmg.MetGuidegeography[2]-}" />
 				</td>
 				<td>
 					<table class="grid">
 						<tr valign="top">
-							<td onmouseover="Tip('{-$dis.DisasterGeographyId[1]-}')" onmouseout="UnTip()">
+							<td ext:qtip="{-$dis.DisasterGeographyId[1]-}" />
 								<table>
 									<tr>
 										<td valign="top">
@@ -155,7 +153,7 @@
 								-->
 							</td>
 							{-assign var="tabind" value="`$tabind+1`"-}
-							<td onmouseover="Tip('{-$dis.DisasterSiteNotes[1]-}')" onmouseout="UnTip()">
+							<td ext:qtip="{-$dis.DisasterSiteNotes[1]-}" />
 								{-$dis.DisasterSiteNotes[0]-}<br />
 								<textarea id="DisasterSiteNotes" name="DisasterSiteNotes" style="height: 40px;" cols="25"
 									class="inputText" tabindex="{-$tabind-}" 
@@ -163,14 +161,14 @@
 							</td>
 							<td>
 								{-assign var="tabind" value="`$tabind+1`"-}
-								<span onmouseover="Tip('{-$dis.DisasterLatitude[1]-}')" onmouseout="UnTip()">
+								<span ext:qtip="{-$dis.DisasterLatitude[1]-}" />
 								{-$dis.DisasterLatitude[0]-}<br />
 								<input id="DisasterLatitude" name="DisasterLatitude" type="text" size="10" maxlength="10"
 									class="line inputDouble" tabindex="{-$tabind-}" onFocus="showtip('{-$dis.DisasterLatitude[2]-}', '#d4baf6')" />
 								</span>
 								<br />
 								{-assign var="tabind" value="`$tabind+1`"-}
-								<span onmouseover="Tip('{-$dis.DisasterLongitude[1]-}')" onmouseout="UnTip()">
+								<span ext:qtip="{-$dis.DisasterLongitude[1]-}">
 									{-$dis.DisasterLongitude[0]-}
 									<br />
 									<input id="DisasterLongitude" name="DisasterLongitude" type="text" size="10" maxlength="10" 
@@ -187,12 +185,12 @@
 				<td width="30px" valign="top" style="border:0px;">
 					<a href="#" id="linkDatacardShowEffectsBasic">
 						<img id="efimg" src="images/di_efftag.png" border=0
-							onmouseover="Tip('<b>{-#tbaseffects#-}</b><br />{-$dmg.MetGuidedatacards[2]-}', BGCOLOR, '#f1bd41', SHADOW, true, WIDTH, 400)" onmouseout="UnTip()" />
+							ext:qtip="<b>{-#tbaseffects#-}</b><br />{-$dmg.MetGuidedatacards[2]-}" />
 					</a>
 					<br /><br />
 					<a href="#" id="linkDatacardShowEffectsAditional">
 						<img id="eeimg" src="images/di_eeftag.png" border=0 
-							onmouseover="Tip('<b>{-#textraeffect#-}</b><br />{-$dmg.MetGuideextraeffects[2]-}', BGCOLOR, '#f1bd41', SHADOW, true, WIDTH, 400)" onmouseout="UnTip()" />
+							ext:qtip="<b>{-#textraeffect#-}</b><br />{-$dmg.MetGuideextraeffects[2]-}" />
 					</a>
 				</td>
 				<td valign="top">
@@ -208,7 +206,7 @@
 										{-assign var="tabind" value="`$tabind+1`"-}
 										<tr>
 											<td align="right">
-												<span onmouseover="Tip('{-$item[1]-}')" onmouseout="UnTip()">{-$item[0]-}</span>
+												<span ext:qtip="{-$item[1]-}">{-$item[0]-}</span>
 											</td>
 											<td>
 												<select id="{-$key-}" name="{-$key-}" 
@@ -229,7 +227,7 @@
 									{-foreach name=sec key=key item=item from=$sec-}
 										{-assign var="tabind" value="`$tabind+1`"-}
 										<tr>
-											<td align="right"><span onmouseover="Tip('{-$item[1]-}')" onmouseout="UnTip()">{-$item[0]-}</span>
+											<td align="right"><span ext:qtip="{-$item[1]-}">{-$item[0]-}</span>
 											</td>
 											<td>
 												<select id="{-$key-}" name="{-$key-}" style="width:120px;" 
@@ -248,7 +246,7 @@
 								<!-- BEGIN Table Effects over Affected -->
 								{-foreach name=ef3 key=key item=item from=$ef3-}
 									{-assign var="tabind" value="`$tabind+1`"-}
-									<span onmouseover="Tip('{-$item[1]-}')" onmouseout="UnTip()">
+									<span ext:qtip="{-$item[1]-}">
 										{-$item[0]-}<br />
 										<input id="{-$key-}" name="{-$key-}" type="text" size="7" maxlength="10" altfield="{-$sc3[$key]-}"
 											class="line inputDouble clsEffectDouble" tabindex="{-$tabind-}" value="0" onFocus="showtip('{-$item[2]-}', '#f1bd41')" />
@@ -261,7 +259,7 @@
 								<!-- BEGIN Table Effects over $$ -->
 								{-foreach name=ef2 key=key item=item from=$ef2-}
 									{-assign var="tabind" value="`$tabind+1`"-}
-									<span onmouseover="Tip('{-$item[1]-}')" onmouseout="UnTip()">
+									<span ext:qtip="{-$item[1]-}">
 										{-$item[0]-}<br />
 										<input id="{-$key-}" name="{-$key-}" type="text" size="11" maxlength="15"
 											class="line inputDouble" tabindex="{-$tabind-}" value="0" 
@@ -271,7 +269,7 @@
 								{-/foreach-}
 								{-foreach name=ef4 key=key item=item from=$ef4-}
 									{-assign var="tabind" value="`$tabind+1`"-}
-									<span onmouseover="Tip('{-$item[1]-}')" onmouseout="UnTip()">
+									<span ext:qtip="{-$item[1]-}">
 										{-$item[0]-}<br />
 										<textarea id="{-$key-}" name="{-$key-}" cols="25" style="height: {-if $key=='EffectNotes'-}70{-else-}30{-/if-}px;"
 											class="inputText" onFocus="showtip('{-$item[2]-}', '#f1bd41')" tabindex="{-$tabind-}"></textarea>
@@ -296,7 +294,7 @@
 							{-if ($smarty.foreach.eefl.iteration - 1) % 3 == 0-}
 								<tr>
 							{-/if-}
-									<td onmouseover="Tip('{-$item[1]-}')" onmouseout="UnTip()">
+									<td ext:qtip="{-$item[1]-}">
 										{-$item[0]-}<br />
 										<input type="text" id="{-$key-}" name="{-$key-}" size="30"
 											class="line inputText" tabindex="{-$tabeef-}"
@@ -315,13 +313,12 @@
 			<tr style="border:1px solid #ff0;">
 				<td width="30px" valign="top" style="border:0px;">
 					<img src="images/di_evetag.png" 
-					onmouseover="Tip('<b>{-#mevents#-}</b><br />{-$dmg.MetGuideevents[2]-}', BGCOLOR, 'lightblue', SHADOW, true, WIDTH, 400)" 
-					onmouseout="UnTip()">
+					ext:qtip="<b>{-#mevents#-}</b><br />{-$dmg.MetGuideevents[2]-}" />
 				</td>
 				<td>
 					<table class="grid">
 						<tr valign="top">
-							<td onmouseover="Tip('{-$eve.EventName[1]-}')" onmouseout="UnTip()">
+							<td ext:qtip="{-$eve.EventName[1]-}">
 								{-assign var="tabind" value="`$tabind+1`"-}
 								{-$eve.EventName[0]-}<b style="color:darkred;">*</b><br />
 								<select id="EventId" name="EventId" style='width: 180px;' tabindex="{-$tabind-}"
@@ -333,19 +330,19 @@
 									{-/foreach-}
 								</select>
 							</td>
-							<td onmouseover="Tip('{-$eve.EventMagnitude[1]-}')" onmouseout="UnTip()">
+							<td ext:qtip="{-$eve.EventMagnitude[1]-}">
 								{-assign var="tabind" value="`$tabind+1`"-}
 								{-$eve.EventMagnitude[0]-}<br />
 								<input id="EventMagnitude" name="EventMagnitude" type="text" size="5" 
 									class="line inputText" tabindex="{-$tabind-}" onFocus="showtip('{-$eve.EventMagnitude[2]-}', 'lightblue')" />
 							</td>
-							<td onmouseover="Tip('{-$eve.EventDuration[1]-}')" onmouseout="UnTip()">
+							<td ext:qtip="{-$eve.EventDuration[1]-}">
 								{-assign var="tabind" value="`$tabind+1`"-}
 								{-$eve.EventDuration[0]-}<br />
 								<input id="EventDuration" name="EventDuration" type="text" size="5" maxlength="8"
 									class="line inputInteger" tabindex="{-$tabind-}" onFocus="showtip('{-$eve.EventDuration[2]-}', 'lightblue')" />
 							</td>
-							<td onmouseover="Tip('{-$eve.EventNotes[1]-}')" onmouseout="UnTip()">
+							<td ext:qtip="{-$eve.EventNotes[1]-}">
 								{-assign var="tabind" value="`$tabind+1`"-}
 								{-$eve.EventNotes[0]-}<br />
 								<input type="texto" id="EventNotes" name="EventNotes" style="width: 350px;" 
@@ -358,14 +355,12 @@
 			<!-- BEG CAUSE SECTION -->
 			<tr style="border:1px solid #ffffc0;">
 				<td width="30px" valign="top" style="border:0px;">
-					<img src="images/di_cautag.png" 
-						onmouseover="Tip('<b>{-#mcauses#-}</b><br />{-$dmg.MetGuidecauses[2]-}', BGCOLOR, '#ffffc0', SHADOW, true, WIDTH, 400)" 
-						onmouseout="UnTip()">
+					<img src="images/di_cautag.png" ext:qtip="<b>{-#mcauses#-}</b><br />{-$dmg.MetGuidecauses[2]-}" />
 				</td>
 				<td>
 					<table class="grid">
 						<tr>
-							<td onmouseover="Tip('{-$cau.CauseName[1]-}')" onmouseout="UnTip()">
+							<td ext:qtip="{-$cau.CauseName[1]-}">
 								{-assign var="tabind" value="`$tabind+1`"-}
 								{-$cau.CauseName[0]-}<b style="color:darkred;">*</b><br />
 								<select id="CauseId" name="CauseId" style='width: 180px;' class="line" 
@@ -376,7 +371,7 @@
 									{-/foreach-}
 								</select>
 							</td>
-							<td onmouseover="Tip('{-$cau.CauseNotes[1]-}')" onmouseout="UnTip()">
+							<td ext:qtip="{-$cau.CauseNotes[1]-}">
 								{-assign var="tabind" value="`$tabind+1`"-}
 								{-$cau.CauseNotes[0]-}<br />
 								<input type="text" id="CauseNotes" name="CauseNotes" style="width: 450px;" 
