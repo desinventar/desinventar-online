@@ -100,7 +100,7 @@ class DIDisaster extends DIObject {
 		return $iReturn;
 	}
 	
-	public function validateUpdate($bStrict=true) {
+	public function validateUpdate($bStrict=false) {
 		$iReturn = parent::validateUpdate();
 		$iReturn = $this->validateNotNull(-53, 'DisasterSerial');
 		$iReturn = $this->validateUnique(-54, 'DisasterSerial', WARNING);
