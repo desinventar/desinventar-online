@@ -1,4 +1,15 @@
 function onReadyDatacards() {
+	jQuery('#DICard').submit(function() {
+		jQuery('#DatacardCommand').val(jQuery('#_CMD').val());
+		jQuery.post('cards.php',
+			jQuery(this).serialize(),
+			function(data) {
+				jQuery('#dic').html(data);
+			}
+		);
+		return false;
+	});
+	
 	// Process combobox/input fields in effects
 	jQuery('.clsEffectNumeric').keypress(function(event) {
 		edit(event);
@@ -510,8 +521,8 @@ function doDatacardSave() {
 					var fl = new Array('DisasterSerial', 'DisasterBeginTime0', 'DisasterSource', 
 										'geolev0', 'EventId', 'CauseId', 'RecordStatus');
 					if (checkForm(fl, jQuery('#msgDatacardFieldsError').text())) {
+						jQuery('#DICard').submit();
 						displayDatacardStatusMsg('');
-						$('DICard').submit();
 						DisableEnableForm($('DICard'), true);
 						changeOptions('btnDatacardSave');
 						// clear Help text area

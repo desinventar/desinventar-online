@@ -24,7 +24,7 @@
 				<span class="dlgmsg" id="dostat"></span>
 			</td>
 			<td align="right" width="450px">
-				<iframe name="dic" id="dic" frameborder="0" style="width:100%; height:28px;" src="about:blank"></iframe>
+				<div name="dic" id="dic" style="width:100%; height:28px;"></div>
 			</td>
 		</tr>
 		<tr>
@@ -43,12 +43,13 @@
 		</tr>
 	</table>
 	<form id="DICard" action="cards.php" method="POST" target="dic">
-		<input type="hidden" id="RegionId"           name="RegionId" value="{-$RegionId-}">
-		<input type="hidden" id="DisasterId"         name="DisasterId" value="">
-		<input type="hidden" id="RecordAuthor"       name="RecordAuthor" value="{-$usr-}">
-		<input type="hidden" id="RecordCreation"     name="RecordCreation">
-		<input type="hidden" id="_CMD"               name="_CMD" value="">
-		<input type="hidden" id="PrevDisasterSerial" name="PrevDisasterSerial" value="">
+		<input type="hidden" id="RegionId"           name="RegionId" value="{-$RegionId-}" />
+		<input type="hidden" id="DisasterId"         name="DisasterId" value="" />
+		<input type="hidden" id="RecordAuthor"       name="RecordAuthor" value="{-$usr-}" />
+		<input type="hidden" id="RecordCreation"     name="RecordCreation" />
+		<input type="hidden" id="_CMD"               name="_CMD" value="" />
+		<input type="hidden" id="PrevDisasterSerial" name="PrevDisasterSerial" value="" />
+		<input type="hidden" id="DatacardCommand"    name="DatacardCommand" valu="" />
 		<table border="1" cellspacing="8" width="900px">
 			<!-- DATACARD INFORMATION SECTION -->
 			<tr>
