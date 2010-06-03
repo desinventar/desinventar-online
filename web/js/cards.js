@@ -398,14 +398,14 @@ function requestDatacard(myCmd, myValue) {
 	var bReturn = true;
 	var RegionId=jQuery('#prmRegionId').val();
 
-	$('dostat').innerHTML = waiting;
+	jQuery('#dostat').html(waiting);
 
 	jQuery.post('cards.php',
 		{cmd:myCmd,value:myValue,r:RegionId},
 		function(data) {
 			if (myCmd == 'getNextSerial') {
 				if (data.DisasterSerial.length >= 5) {
-					$('DisasterSerial').value = myValue + '-' + data.DisasterSerial;
+					jQuery('#DisasterSerial').val(myValue + '-' + data.DisasterSerial);
 				}
 			} else if (data.Status == 'OK') {
 				displayDatacardStatusMsg('');
@@ -430,7 +430,7 @@ function requestDatacard(myCmd, myValue) {
 		},
 		'json'
 	);
-	$('dostat').innerHTML = "";
+	jQuery'#dostat').html();
 	return bReturn;
 }
 
@@ -443,9 +443,9 @@ function doDatacardFind() {
 function doDatacardNew() {
 	DisableEnableForm($('DICard'), false);
 	jQuery('#DisasterBeginTime0').focus();
-	$('DisasterId').value='';
+	jQuery('#DisasterId').val();
 	$('DICard').reset();
-	$('_CMD').value = 'insertDICard';
+	jQuery('#_CMD').val('insertDICard');
 	jQuery('#DisasterBeginTime0').val('');
 	jQuery('#DisasterBeginTime1').val('');
 	jQuery('#DisasterBeginTime2').val('');
@@ -538,7 +538,7 @@ function doDatacardSave() {
 
 function doDatacardClear() {
 	$('DICard').reset();
-	$('lev0').innerHTML='';
+	jQuery('#lev0').html();
 	displayDatacardStatusMsg('');
 	jQuery('#DisasterBeginTime0').focus();
 }
