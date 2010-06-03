@@ -99,7 +99,6 @@
 	</script>
 </head>
 <body>
-	<script type="text/javascript" src="include/wz_tooltip.js"></script>
 	<div id="loading-mask"></div>
 	<div id="loading">
 		<div class="loading-indicator">Loading...</div>
