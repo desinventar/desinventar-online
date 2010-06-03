@@ -74,7 +74,7 @@
 							</td>
 							<td>
 								{-#tstatus#-}<b style="color:darkred;">*</b><br />
-								<select name="RecordStatus" id="RecordStatus" 
+								<select name="RecordStatus" id="RecordStatus"  ext:qtip="{-$rc1.RecordStatus[1]-}"
 									class="line" tabindex="5" onFocus="showtip('{-$rc1.RecordStatus[1]-}', '')">
 									<option value=""></option>
 									<option value="PUBLISHED">{-#tstatpublished#-}</option>
@@ -103,10 +103,10 @@
 				<td>
 					<table class="grid">
 						<tr valign="top">
-							<td ext:qtip="{-$dis.DisasterGeographyId[1]-}" />
+							<td >
 								<table>
 									<tr>
-										<td valign="top">
+										<td valign="top" ext:qtip="{-$dis.DisasterGeographyId[1]-}">
 											{-$dis.DisasterGeographyId[0]-}<b style="color:darkred;">*</b>
 											<br />
 											<input id="GeographyId" name="GeographyId" type="hidden" size="25" />
@@ -118,7 +118,7 @@
 											{-/foreach-}
 											</div>
 										</td>
-										<td valign="top">
+										<td valign="top" ext:qtip="{-$dis.DisasterGeographyId[1]-}">
 											<table>
 											{-counter assign=MyIndex start=7-}
 											{-foreach key=key item=GeoLevel from=$GeoLevelList name=GeoLevelList-}
