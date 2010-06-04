@@ -72,6 +72,7 @@ function form2eedata($form) {
 }
 
 $RegionId = getParameter('RegionId', getParameter('r',''));
+$t->assign('RegionId', $RegionId);
 if ( ($RegionId == '') || ($RegionId == 'undefined') ) {
 	if ($us->RegionId != 'core') {
 		$RegionId = $us->RegionId;
@@ -81,7 +82,6 @@ if ($RegionId == '') {
 	exit(0);
 } else {
 	$us->open($RegionId);
-	$t->assign('RegionId', $RegionId);
 }
 
 // 2009-08-07 (jhcaiced) Validate if Database Exists...
@@ -101,7 +101,6 @@ if (isset($_GET['u'])) {
 	$t->assign("stat", $status);
 	$t->display('cards_updater.tpl');
 } else {
-	$t->assign('RegionId', $RegionId);
 	$cmd = getParameter('cmd',getParameter('DatacardCommand',''));
 	$value = getParameter('value','');
 	// Commands in GET mode: lists, checkings..
@@ -295,7 +294,6 @@ if (isset($_GET['u'])) {
 			$t->assign("caul", $us->q->loadCauses(null, "active", $lg));
 			$t->assign("eefl", $us->q->getEEFieldList("True"));
 
-			$t->assign('RegionId', $RegionId);
 			$t->assign('UserRole', $UserRole);
 			$t->assign('UserRoleValue', $UserRoleValue);
 

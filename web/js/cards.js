@@ -1,10 +1,16 @@
 function onReadyDatacards() {
 	jQuery('#DICard').submit(function() {
 		jQuery('#DatacardCommand').val(jQuery('#_CMD').val());
+		jQuery('#RegionId').val(jQuery('#fldDesinventarRegionId').val());
 		jQuery.post('cards.php',
 			jQuery(this).serialize(),
 			function(data) {
 				jQuery('#dic').html(data);
+				displayDatacardStatusMsg('');
+				DisableEnableForm($('DICard'), true);
+				changeOptions('btnDatacardSave');
+				// clear Help text area
+				showtip('','#ffffff');
 			}
 		);
 		return false;
@@ -524,11 +530,6 @@ function doDatacardSave() {
 										'geolev0', 'EventId', 'CauseId', 'RecordStatus');
 					if (checkForm(fl, jQuery('#msgDatacardFieldsError').text())) {
 						jQuery('#DICard').submit();
-						displayDatacardStatusMsg('');
-						DisableEnableForm($('DICard'), true);
-						changeOptions('btnDatacardSave');
-						// clear Help text area
-						showtip('','#ffffff');
 					} else {
 						displayDatacardStatusMsg('msgDatacardFieldsError');
 					}
