@@ -253,7 +253,15 @@ function onReadyDatacards() {
 	if (jQuery('#prmUserRoleValue').val() >= 2) {
 		jQuery('.DatacardCmdButton').show();
 	}
+} //onReadyDatacards()
 
+function displayDatacardStatusMsg(msgId) {
+	// First hide all items
+	jQuery('.datacardStatusMsg').hide();
+	// Show a specific message
+	if (msgId != '') {
+		jQuery('#' + msgId).show();
+	}
 }
 
 var mod = "di";
@@ -385,15 +393,6 @@ function changeOptions(but) {
 	}
 }
 
-function displayDatacardStatusMsg(msgId) {
-	// First hide all items
-	jQuery('.datacardStatusMsg').hide();
-	// Show a specific message
-	if (msgId != '') {
-		jQuery('#' + msgId).show();
-	}
-}
-
 function requestDatacard(myCmd, myValue) {
 	var bReturn = true;
 	var RegionId=jQuery('#prmRegionId').val();
@@ -430,9 +429,10 @@ function requestDatacard(myCmd, myValue) {
 		},
 		'json'
 	);
-	jQuery'#dostat').html();
+	jQuery('#dostat').html('');
 	return bReturn;
 }
+
 
 function doDatacardFind() {
 	if(jQuery('#txtDatacardFind').val() !='') {
@@ -452,6 +452,7 @@ function doDatacardNew() {
 	displayDatacardStatusMsg('msgDatacardFill');
 	changeOptions('btnDatacardNew');
 }
+
 
 function doDatacardEdit() {
 	displayDatacardStatusMsg('');
@@ -476,6 +477,7 @@ function doDatacardEdit() {
 		'json'
 	);
 }
+
 
 function doDatacardSave() {
 	var bContinue = true;
@@ -536,6 +538,7 @@ function doDatacardSave() {
 	}
 }
 
+
 function doDatacardClear() {
 	$('DICard').reset();
 	jQuery('#lev0').html();
@@ -580,6 +583,7 @@ function doDatacardGotoLast() {
 	disenabutton($('btnDatacardGotoNext'), true);
 }
 
+
 function doDatacardGotoPrev() {
 	displayDatacardStatusMsg('');
 	bFound = requestDatacard('getDisasterIdPrev', jQuery('#prmRecordNumber').val());
@@ -614,7 +618,8 @@ function doDatacardSuggestSerial() {
 	}
 }
 
-/**** SET DATACARD FORM  *****/
+
+// SET DATACARD FORM
 function setElementValue(formElement, value) {
 	switch(formElement.type) {
 		case 'undefined': return;
@@ -656,6 +661,7 @@ function setDICardFromId(prmRegionId, prmDisasterId, src) {
 	return false;
 }
 
+
 function setDICard(prmRegionId, arr, src) {
 	var diform = null;
 	var myForm = null;
@@ -692,3 +698,4 @@ function setDICard(prmRegionId, arr, src) {
 		disenabutton($('btnDatacardEdit'), false);
 	}
 }
+
