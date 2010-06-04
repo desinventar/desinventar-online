@@ -234,15 +234,26 @@ function displayRegionInfo(RegionId) {
 	var desinventarURL = jQuery('#fldDesinventarURL').val();
 	var desinventarLang = jQuery('#fldDesinventarLang').val();
 	jQuery(".portalcontent").hide();
-	jQuery("#pageinfo"     ).show();
-	jQuery("#regionlogo"   ).attr('src', desinventarURL + '?cmd=getRegionLogo&RegionId=' + RegionId);
-	jQuery("#regionbasicinfo" ).load(desinventarURL, { cmd:'getRegionBasicInfo', RegionId : RegionId });
-	jQuery("#regiontechinfo"  ).load(desinventarURL, { cmd:'getRegionTechInfo', RegionId : RegionId });
-	jQuery("#regionlink").unbind('click').click(function() {
-		window.open(desinventarURL + '?r=' + RegionId + '&lang=' + desinventarLang,'_blank', 
-			'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');
-		return false;
-	});
+	jQuery("#pageinfo"     ).hide();
+	jQuery.post(desinventarURL,
+		{ cmd:'getRegionBasicInfo', RegionId : RegionId },
+		function(data) {
+			jQuery('#regionbasicinfo').html(data);
+			jQuery.post(desinventarURL,
+				{ cmd:'getRegionTechInfo', RegionId : RegionId },
+				function(data) {
+					jQuery("#regionlogo"   ).attr('src', desinventarURL + '?cmd=getRegionLogo&RegionId=' + RegionId);
+					jQuery('#regiontechinfo').html(data);
+					jQuery("#regionlink").unbind('click').click(function() {
+						window.open(desinventarURL + '?r=' + RegionId + '&lang=' + desinventarLang,'_blank', 
+							'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');
+						return false;
+					});
+					jQuery('#pageinfo').show();
+				}
+			);
+		}
+	);
 };
 
 function showMap() {
