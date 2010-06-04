@@ -235,6 +235,8 @@ function displayRegionInfo(RegionId) {
 	var desinventarLang = jQuery('#fldDesinventarLang').val();
 	jQuery(".portalcontent").hide();
 	jQuery("#pageinfo"     ).hide();
+	jQuery('#regionbasicinfo').html('');
+	jQuery('#regiontechinfo').html('');
 	jQuery.post(desinventarURL,
 		{ cmd:'getRegionBasicInfo', RegionId : RegionId },
 		function(data) {
