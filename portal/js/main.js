@@ -124,12 +124,16 @@ function onReadyPortal() {
 
 function updateDatabaseList(CountryIsoCode,searchByCountry) {
 	jQuery(".portalcontent").hide();
-	jQuery("#regionlist").show();
+	// Hide everything at start...
+	jQuery('.databaseTitle').hide();
+	jQuery('.databaseList').hide();
+	jQuery("#regionlist").hide();
 	var desinventarURL = jQuery('#fldDesinventarURL').val();
 	jQuery.get(desinventarURL, 
 		{cmd: 'getCountryName', CountryIso : CountryIsoCode },
 		function(data) { 
 			jQuery("#regiontitle_COUNTRY").html('<h3>' + data + '</h3>');
+			jQuery("#regionlist").show();
 		}
 	);
 	jQuery.post(desinventarURL,
@@ -169,6 +173,10 @@ function updateDatabaseListByUser() {
 	jQuery(".portalcontent").hide();
 	jQuery("#regionlist").show();
 	var desinventarURL = jQuery('#fldDesinventarURL').val();
+	// Hide everything at start...
+	jQuery('.databaseTitle').hide();
+	jQuery('.databaseList').hide();
+				
 	jQuery.post(desinventarURL,
 		{ cmd: 'searchdb', 
 		  searchdbquery: '', 
@@ -188,24 +196,20 @@ function updateDatabaseListByUser() {
 				RegionByRole[value.Role][key] = value.RegionLabel;
 			});
 			
-			// Hide everything at start...
-			jQuery('.databaseTitle').hide();
-			jQuery('.databaseList').hide();
-						
 			for (role in RegionByRole) {
-				a = RegionByRole[role];
+				var a = RegionByRole[role];
 
 				jList = jQuery('#regionlist_' + role);
 				jList.empty();
 				
-				iCount = 0;
+				var iCount = 0;
 				for (Region in a) {
 					iCount++;
 				}
 				if (iCount > 0) {
 					jQuery('#regiontitle_' + role).show();
 					jQuery('#regionlist_' + role).show();
-					for (RegionId in a) {
+					for (var RegionId in a) {
 						jList.append('<a href="#" id="' + RegionId + '" class="databaseLink">' + a[RegionId] + '</a><br />');
 					}
 				}
