@@ -237,7 +237,6 @@ function displayRegionInfo(RegionId) {
 	jQuery("#pageinfo"     ).hide();
 	jQuery('#regionbasicinfo').html('');
 	jQuery('#regiontechinfo').html('');
-	jQuery('#pageinfo').show();
 	jQuery.post(desinventarURL,
 		{ cmd:'getRegionBasicInfo', RegionId : RegionId },
 		function(data) {
