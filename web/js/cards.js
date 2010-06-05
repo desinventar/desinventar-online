@@ -423,6 +423,7 @@ function requestDatacard(myCmd, myValue) {
 					if (myCmd == 'getDisasterIdFromSerial') {
 						disenabutton($('btnDatacardGotoPrev'), false);
 						disenabutton($('btnDatacardGotoNext'), false);
+						displayDatacardStatusMsg('msgDatacardFound');
 					}
 					jQuery('#prmRecordNumber').val(data.RecordNumber);
 				} else {

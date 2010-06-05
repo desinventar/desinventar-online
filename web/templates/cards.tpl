@@ -35,7 +35,8 @@
 					<span class="datacardStatusMsg" id="msgDatacardFill">{-#tmsgnewcardfill#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardIsLocked">{-#tdconuse#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardFieldsError">{-#errmsgfrm#-}</span>
-					<span class="datacardStatusMsg" id="msgDatacardNotFound">{-#tcardnot#-}</span>
+					<span class="datacardStatusMsg" id="msgDatacardFound">{-#msgDatacardFound#-}</span>
+					<span class="datacardStatusMsg" id="msgDatacardNotFound">{-#msgDatacardNotFound#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardInvalidStatus">{-#msgDatacardInvalidStatus#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardInvalidGeography">{-#msgDatacardInvalidGeography#-}</span>
 				</div>
