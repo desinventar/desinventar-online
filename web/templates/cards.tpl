@@ -37,6 +37,7 @@
 					<span class="datacardStatusMsg" id="msgDatacardFieldsError">{-#errmsgfrm#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardNotFound">{-#tcardnot#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardInvalidStatus">{-#msgDatacardInvalidStatus#-}</span>
+					<span class="datacardStatusMsg" id="msgDatacardInvalidGeography">{-#msgDatacardInvalidGeography#-}</span>
 				</div>
 				<br />
 			</td>
