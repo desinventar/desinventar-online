@@ -455,12 +455,14 @@ function doDatacardNew() {
 	jQuery('#DisasterBeginTime0').val('');
 	jQuery('#DisasterBeginTime1').val('');
 	jQuery('#DisasterBeginTime2').val('');
+	jQuery('#dic').html('');
 	displayDatacardStatusMsg('msgDatacardFill');
 	changeOptions('btnDatacardNew');
 }
 
 
 function doDatacardEdit() {
+	jQuery('#dic').html('');
 	displayDatacardStatusMsg('');
 	RegionId = jQuery('#prmRegionId').val();
 	jQuery.post('cards.php',
@@ -490,20 +492,40 @@ function doDatacardSave() {
 	var cmd = jQuery('#_CMD').val();
 	var DisasterSerial = jQuery('#DisasterSerial').val();
 	var PrevDisasterSerial = jQuery('#PrevDisasterSerial').val();
-	
-	// Validate Record Status
-	if (jQuery('#RecordStatus').val() == '') { 
-		jQuery('#RecordStatus').val('DRAFT');
-	}
-	if ( (jQuery('#RecordStatus').val() == 'PUBLISHED') ||
-	     (jQuery('#RecordStatus').val() == 'TRASH') ||
-	     (jQuery('#RecordStatus').val() == 'DELETED') ) {
-		if (jQuery('#prmUserRoleValue').val() <= 3) {
+
+	if (bContinue) {
+		// Validate Record Status
+		if (jQuery('#RecordStatus').val() == '') {
 			displayDatacardStatusMsg('msgDatacardInvalidStatus');
-			jQuery('#RecordStatus').highlight();
+			jQuery('#RecordStatus').highlight().focus();
 			bContinue = false;
 		}
 	}
+	
+	if (bContinue) {
+		// Validate Record Status
+		if ( (jQuery('#RecordStatus').val() == 'PUBLISHED') ||
+		     (jQuery('#RecordStatus').val() == 'TRASH') ||
+		     (jQuery('#RecordStatus').val() == 'DELETED') ) {
+			if (jQuery('#prmUserRoleValue').val() <= 3) {
+				displayDatacardStatusMsg('msgDatacardInvalidStatus');
+				jQuery('#RecordStatus').highlight().focus();
+				bContinue = false;
+			}
+		}
+	}
+	
+	if (bContinue) {
+		// Validate GeographyId
+		if (jQuery('#GeographyId').val() == '') {
+			displayDatacardStatusMsg('msgDatacardInvalidGeography');
+			jQuery('.GeoLevelSelect').highlight();
+			jQuery('#GeoLevel0').focus();
+			bContinue = false;
+		}
+	}
+	
+	// Use AJAX to save datacard
 	if (bContinue) {
 		jQuery.post('cards.php',
 			{'cmd'            : 'existDisasterSerial',
@@ -527,7 +549,7 @@ function doDatacardSave() {
 				}
 				if (bContinue) {
 					var fl = new Array('DisasterSerial', 'DisasterBeginTime0', 'DisasterSource', 
-										'geolev0', 'EventId', 'CauseId', 'RecordStatus');
+										'geolev0', 'EventId', 'CauseId');
 					if (checkForm(fl, jQuery('#msgDatacardFieldsError').text())) {
 						jQuery('#DICard').submit();
 					} else {
