@@ -442,6 +442,7 @@ function requestDatacard(myCmd, myValue) {
 
 
 function doDatacardFind() {
+	jQuery('#dic').html('');
 	if(jQuery('#txtDatacardFind').val() !='') {
 		requestDatacard('getDisasterIdFromSerial', jQuery('#txtDatacardFind').val());
 	}
