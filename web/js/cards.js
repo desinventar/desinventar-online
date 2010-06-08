@@ -182,6 +182,7 @@ function onReadyDatacards() {
 		doDatacardNew();
 		jQuery('#GeoLevel0').trigger('clearGeographyItems');
 		jQuery('#GeographyId').val('');
+		jQuery('#DisasterId').val('');
 		return false;
 	});
 	
@@ -583,6 +584,17 @@ function doDatacardCancel() {
 			// clear Help text area
 			showtip('','#ffffff');
 			displayDatacardStatusMsg('msgDatacardStartNew');
+			if (jQuery('#DisasterId').val() != '') {
+				valid = setDICardFromId(jQuery('#RegionId').val(), jQuery('#DisasterId').val(), '');
+				
+				if (jQuery('#prmUserRoleValue').val() >= 2) {
+					disenabutton($('btnDatacardEdit'), false);
+				}
+				disenabutton($('btnDatacardGotoPrev'), false);
+				disenabutton($('btnDatacardGotoNext'), false);
+				displayDatacardStatusMsg('');
+				jQuery('#prmRecordNumber').val(data.RecordNumber);
+			}
 		},
 		'json'
 	);
