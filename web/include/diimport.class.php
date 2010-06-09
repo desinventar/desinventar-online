@@ -65,9 +65,14 @@ class DIImport {
 						}
 					break;
 					case DI_DISASTER:
-						//if ( ($rowCount < 10) || ( ($rowCount >= 200) && ($rowCount<300) ) || ($rowCount % 100 == 0) ) {
+						if ($rowCount % 100 == 0) {
 							fb($rowCount . ' ' . count($values));
-						//}
+						}
+						/*
+						if ( ($rowCount >= 2000) && ($rowCount < 2100) ) {
+							fb($rowCount . ' ' . count($values));
+						}
+						*/
 						$o = new DIDisaster($this->us);
 						$iReturn = $o->importFromCSV($cols, $values);
 						if ($iReturn > 0) {
