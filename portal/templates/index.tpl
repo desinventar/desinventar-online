@@ -99,7 +99,19 @@
 					<tr valign="top">
 						<td class="izq">
 							<!-- Regions -->
-							{- include file="menu.tpl" -}
+							<table bgcolor="#CF9D15" border=0 cellpadding="0" cellspacing="0">
+								<tr>
+									<td>
+										{-include file="menu_user.tpl"-}
+									</td>
+								</tr>
+								<tr>
+									<td>
+										{-include file="menu_dblist_portal.tpl"-}
+									</td>
+								</tr>
+								<tr><td><img src="{-$desinventarURLPortal-}/images/25.gif" width=150 height=52></td></tr>
+							</table>
 							<!-- References -->
 							<table bgcolor="#CF9D15" border=0 cellpadding=0 cellspacing=0 align="center">
 								<tr><td bgcolor="white">
