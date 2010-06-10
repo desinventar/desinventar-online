@@ -510,7 +510,7 @@ function doDatacardSave() {
 		if ( (jQuery('#RecordStatus').val() == 'PUBLISHED') ||
 		     (jQuery('#RecordStatus').val() == 'TRASH') ||
 		     (jQuery('#RecordStatus').val() == 'DELETED') ) {
-			if (jQuery('#prmUserRoleValue').val() <= 3) {
+			if (jQuery('#prmUserRoleValue').val() <= 2) {
 				displayDatacardStatusMsg('msgDatacardInvalidStatus');
 				jQuery('#RecordStatus').highlight().focus();
 				bContinue = false;
