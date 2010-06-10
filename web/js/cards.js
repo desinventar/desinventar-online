@@ -419,7 +419,7 @@ function requestDatacard(myCmd, myValue) {
 				if (data.DisasterId != '') {
 					jQuery('#cardsRecordNumber').val(data.RecordNumber);
 					jQuery('#cardsRecordCount').val(data.RecordCount);
-					valid = setDICardFromId(RegionId, data.DisasterId, '');
+					valid = setDICardFromId(RegionId, data.DisasterId);
 					
 					if (jQuery('#desinventarUserRoleValue').val() >= 2) {
 						disenabutton($('btnDatacardEdit'), false);
@@ -587,7 +587,7 @@ function doDatacardCancel() {
 			showtip('','#ffffff');
 			displayDatacardStatusMsg('msgDatacardStartNew');
 			if (jQuery('#DisasterId').val() != '') {
-				valid = setDICardFromId(jQuery('#RegionId').val(), jQuery('#DisasterId').val(), '');
+				valid = setDICardFromId(jQuery('#desinventarRegionId').val(), jQuery('#DisasterId').val());
 				
 				if (jQuery('#desinventarUserRoleValue').val() >= 2) {
 					disenabutton($('btnDatacardEdit'), false);
@@ -604,7 +604,14 @@ function doDatacardCancel() {
 
 function doDatacardGotoFirst() {
 	displayDatacardStatusMsg('');
-	bFound = requestDatacard('getDisasterIdFirst', jQuery('#DisasterId').val());
+	if (jQuery('#cardsRecordSource').val() == 'data') {
+		var RecordNumber = 1;
+		var DisasterId = jQuery('.linkGridGotoCard[rowindex=' + RecordNumber + ']').attr('DisasterId');
+		jQuery('#cardsRecordNumber').val(RecordNumber);
+		valid = setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId);
+	} else {
+		bFound = requestDatacard('getDisasterIdFirst', jQuery('#DisasterId').val());
+	}
 	if (jQuery('#desinventarUserRoleValue').val() >= 2) {
 		disenabutton($('btnDatacardEdit'), false);
 	}
@@ -614,7 +621,14 @@ function doDatacardGotoFirst() {
 
 function doDatacardGotoLast() {
 	displayDatacardStatusMsg('');
-	bFound = requestDatacard('getDisasterIdLast', jQuery('#DisasterId').val());
+	if (jQuery('#cardsRecordSource').val() == 'data') {
+		var RecordNumber = jQuery('#cardsRecordCount').val();
+		var DisasterId = jQuery('.linkGridGotoCard[rowindex=' + RecordNumber + ']').attr('DisasterId');
+		jQuery('#cardsRecordNumber').val(RecordNumber);
+		valid = setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId);
+	} else {
+		bFound = requestDatacard('getDisasterIdLast', jQuery('#DisasterId').val());
+	}
 	if (jQuery('#desinventarUserRoleValue').val() >= 2) {
 		disenabutton($('btnDatacardEdit'), false);
 	}
@@ -625,9 +639,19 @@ function doDatacardGotoLast() {
 
 function doDatacardGotoPrev() {
 	displayDatacardStatusMsg('');
-	bFound = requestDatacard('getDisasterIdPrev', jQuery('#cardsRecordNumber').val());
-	if (bFound == false) {
-		displayDatacardStatusMsg('msgDatacardNotFound');
+	if (jQuery('#cardsRecordSource').val() == 'data') {
+		var RecordNumber = jQuery('#cardsRecordNumber').val();
+		if (RecordNumber > 1) {
+			RecordNumber--;
+			var DisasterId = jQuery('.linkGridGotoCard[rowindex=' + RecordNumber + ']').attr('DisasterId');
+			jQuery('#cardsRecordNumber').val(RecordNumber);
+			valid = setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId);
+		}
+	} else {
+		bFound = requestDatacard('getDisasterIdPrev', jQuery('#cardsRecordNumber').val());
+		if (bFound == false) {
+			displayDatacardStatusMsg('msgDatacardNotFound');
+		}
 	}
 	if (jQuery('#desinventarUserRoleValue').val() >= 2) {
 		disenabutton($('btnDatacardEdit'), false);
@@ -637,9 +661,19 @@ function doDatacardGotoPrev() {
 
 function doDatacardGotoNext() {
 	displayDatacardStatusMsg('');
-	bFound = requestDatacard('getDisasterIdNext', jQuery('#cardsRecordNumber').val());
-	if (bFound == false) {
-		displayDatacardStatusMsg('msgDatacardNotFound');
+	if (jQuery('#cardsRecordSource').val() == 'data') {
+		var RecordNumber = parseInt(jQuery('#cardsRecordNumber').val());
+		if (RecordNumber < jQuery('#cardsRecordCount').val() ) {
+			RecordNumber = RecordNumber + 1;
+			var DisasterId = jQuery('.linkGridGotoCard[rowindex=' + RecordNumber + ']').attr('DisasterId');
+			jQuery('#cardsRecordNumber').val(RecordNumber);
+			valid = setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId);
+		}
+	} else {
+		bFound = requestDatacard('getDisasterIdNext', jQuery('#cardsRecordNumber').val());
+		if (bFound == false) {
+			displayDatacardStatusMsg('msgDatacardNotFound');
+		}
 	}
 	if (jQuery('#desinventarUserRoleValue').val() >= 2) {
 		disenabutton($('btnDatacardEdit'), false);
@@ -685,14 +719,14 @@ function setElementValue(formElement, value) {
 	}
 }
 
-function setDICardFromId(prmRegionId, prmDisasterId, src) {
+function setDICardFromId(prmRegionId, prmDisasterId) {
 	jQuery.post('cards.php',
 		{'cmd' : 'getDatacard',
 		 'RegionId' : prmRegionId,
 		 'DisasterId' : prmDisasterId
 		},
 		function(data) {
-			setDICard(prmRegionId, data, src);
+			setDICard(prmRegionId, data);
 			jQuery('#dic').html(jQuery('#cardsRecordNumber').val() + '/' + jQuery('#cardsRecordCount').val());
 			return true;
 		},
@@ -702,7 +736,7 @@ function setDICardFromId(prmRegionId, prmDisasterId, src) {
 }
 
 
-function setDICard(prmRegionId, arr, src) {
+function setDICard(prmRegionId, arr) {
 	var diform = null;
 	var myForm = null;
 	diform = $('DICard');
