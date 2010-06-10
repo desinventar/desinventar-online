@@ -5,7 +5,7 @@
 						<tr>
 							<td><a href="index.php?cmd=main"><img src="images/di_logo1.png" border="0"></a><br />
 							</td>
-							<td>{-$version-}<br />
+							<td>{-$desinventarVersion-}<br />
 							</td>
 							<td width="100%">
 							</td>

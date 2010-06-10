@@ -124,7 +124,7 @@
 
 		<!-- Datacard Edit Window-->
 		<div class="contentBlock" id="divDatacardsShow">
-			<!-- <div class="x-window-header">{-#mdcsection#-} | {-$userid-} - {-$role-}</div> -->
+			<!-- <div class="x-window-header">{-#mdcsection#-} | {-$desinventarUserId-} - {-$role-}</div> -->
 			<!--
 			<div id="dif-cfg" style="text-align:center;">
 				<iframe name="dif" id="dif" frameborder="0" height="600px;" width="100%" src="cards.php?r={-$reg-}"></iframe>
@@ -177,7 +177,7 @@
 						</div>
 						<!-- Show DesInventar (input data) window-->
 						<div id="dif-win" class="x-hidden">
-							<div class="x-window-header">{-#mdcsection#-} | {-$userid-} - {-$role-}</div>
+							<div class="x-window-header">{-#mdcsection#-} | {-$desinventarUserId-} - {-$role-}</div>
 							<div id="dif-cfg" style="text-align:center;">
 								<div name="dif" id="dif" frameborder="0" height="600px;" width="100%">
 									{-include file="cards.tpl"-}
@@ -186,7 +186,7 @@
 						</div>
 						<!-- Show User login/logout window -->
 						<div id="usr-win" class="x-hidden">
-							<div class="x-window-header">{-$userid-} - {-$role-}</div>
+							<div class="x-window-header">{-$desinventarUserId-} - {-$role-}</div>
 							<div id="usr">
 								{-include file="user_login.tpl" -}
 								<br />
@@ -196,7 +196,7 @@
 						</div>
 						<!-- Show Database functions window -->
 						<div id="dbl-win" class="x-hidden">
-							<div class="x-window-header">{-$userid-} - {-$role-}</div>
+							<div class="x-window-header">{-$desinventarUserId-} - {-$role-}</div>
 							<div id="dbl"></div>
 						</div>
 						<!-- Show Dialog window -->
@@ -207,7 +207,7 @@
 									<tr>
 										<td><img src="images/di_logo.png">
 										</td>
-										<td><p style="font-size: 16pt;" align="center">DesInventar {-$version-}</p>
+										<td><p style="font-size: 16pt;" align="center">DesInventar {-$desinventarVersion-}</p>
 										</td>
 									</tr>
 									<tr>

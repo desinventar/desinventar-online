@@ -3,7 +3,7 @@
 {-elseif $errbadpass-}
 	{-#errbadpasswd#-}
 {-elseif $errupduser-}
-	{-#terror#-}[{-$updstat-}] {-#errupdate#-} {-$userid-}
+	{-#terror#-}[{-$updstat-}] {-#errupdate#-} {-$desinventarUserId-}
 {-elseif $noerrorupd-}
-	{-#msgupdatesucc#-} {-$userid-}
+	{-#msgupdatesucc#-} {-$desinventarUserId-}
 {-/if-}

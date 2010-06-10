@@ -19,16 +19,7 @@ if ($cmd == '' && $RegionId == '') {
 }
 
 // Default Template Values
-$t->assign('request_uri', $_SERVER['REQUEST_URI']);
-$t->assign('version', VERSION);
 $t->assign('userid', $us->UserId);
-
-$t->assign('desinventarURL'         , '');
-$t->assign('desinventarVersion'     , VERSION);
-$t->assign('desinventarLang'        , $lg);
-$t->assign('desinventarUserId'      , $us->UserId);
-$t->assign('desinventarUserFullName', $us->getUserFullName());
-$t->assign('desinventarModule'      ,'desinventar');
 $t->assign('desinventarRegionId'    , $RegionId);
 
 if (!empty($RegionId)) {
@@ -178,21 +169,21 @@ switch ($cmd) {
 				case "glist":
 					$t->assign ("reg", $get['GeographyId']);
 					$t->assign ("geol", $us->q->loadGeoChilds($get['GeographyId']));
-					$t->display("main_glist.tpl");
+					$t->display('main_glist.tpl');
 				break;
 				case "geolst":
 					$t->assign ("geol", $us->q->loadGeography(0));
-					$t->display("main_glist.tpl");
+					$t->display('main_glist.tpl');
 				break;
 				case "caulst":
 					$t->assign ("caupredl", $us->q->loadCauses("PREDEF", "active", $lg));
 					$t->assign ("cauuserl", $us->q->loadCauses("USER", "active", $lg));
-					$t->display("main_causelist.tpl");
+					$t->display('main_causelist.tpl');
 				break;
 				case "evelst":
 					$t->assign ("evepredl", $us->q->loadEvents("PREDEF", "active", $lg));
 					$t->assign ("eveuserl", $us->q->loadEvents("USER", "active", $lg));
-					$t->display("main_eventlist.tpl");
+					$t->display('main_eventlist.tpl');
 				break;
 				default:
 					$t->assign ("ms", MAPSERV);
@@ -455,7 +446,7 @@ switch ($cmd) {
 					
 					/* END THEMATIC MAP */
 
-					$t->display("index.tpl");
+					$t->display('index.tpl');
 				break;
 			} // switch
 		}

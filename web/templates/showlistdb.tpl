@@ -7,7 +7,7 @@
 			<tr align="center">
 				<td width="100px"><b>{-#listdbCountry#-}</b></td>
 				<td><b>{-#listdbRegion#-}</b></td>
-				{-if $userid!=''-}
+				{-if $desinventarUserId!=''-}
 					<td><b>{-#listdbStatus#-}</b><br /></td>
 				{-/if-}
 			</tr>
@@ -19,7 +19,7 @@
 						<a href="javascript:void(null)" class="RegionListItem" onClick="javascript:window.open('?r={-$key-}','DI_{-$smarty.foreach.rlist.iteration-}', 
 							'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,status=yes,scrollbars=no,toolbar=no');">[-]</a>
 					</td>
-					{-if $userid!=''-}
+					{-if $desinventarUserId!=''-}
 						<td>{-if $item[2] == 3-}{-#listdbPublic#-}{-else-}{-#listdbPrivate#-}{-/if-}</td>
 					{-/if-}
 				</tr>
