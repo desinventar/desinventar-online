@@ -182,7 +182,7 @@
 					</tr>
 				</table>
 			</td>
-			<td style="background:url({-$desinventarURLPortal-}/{-$desinventarURLPortal-}/images/bg2.gif) 0px -1px"><img src="{-$desinventarURLPortal-}/images/e2.gif" width=16 height=74 border=0>
+			<td style="background:url({-$desinventarURLPortal-}/images/bg2.gif) 0px -1px"><img src="{-$desinventarURLPortal-}/images/e2.gif" width=16 height=74 border=0>
 			</td>
 		</tr>
 		<tr valign=bottom>
