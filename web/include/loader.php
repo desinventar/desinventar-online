@@ -161,8 +161,9 @@ if (MODE != 'command') {
 	if (isset($_SERVER['DI8_PORTAL'])) {
 		$desinventarURLPortal = $_SERVER['DI8_PORTAL'];
 	}
-	if (substr($desinventarURLPortal, strlen($desinventarURLPortal) - 1, 1) != '/') {
-		$desinventarURLPortal .= '/';
+	// Remove trailing slash in URL
+	if (substr($desinventarURLPortal, strlen($desinventarURLPortal) - 1, 1) == '/') {
+		$desinventarURLPortal = substr($desinventarURLPortal, 0, strlen($desinventarURLPortal) - 1);
 	}
 
 	// General Information (common to portal/app)
