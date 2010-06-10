@@ -1,6 +1,6 @@
 <script type="text/javascript">
 		function onMenuItem(item) {
-			var RegionId = jQuery('#fldDesinventarRegionId').val();
+			var RegionId = jQuery('#desinventarRegionId').val();
 			switch (item.id) {
 				case "mnuRegionInfo":
 					if (RegionId != '') {
@@ -121,7 +121,7 @@
 				break;
 				case "mmtg":
 					var url = 'http://www.desinventar.org';
-					if (jQuery('#fldDesinventarLang').val() == 'spa') {
+					if (jQuery('#desinventarLang').val() == 'spa') {
 						url = url + '/es/metodologia';
 					} else {
 						url = url + '/en/methodology';
@@ -658,7 +658,7 @@
 			if (opc) {
 				// Find and fill childs
 				$('itree-' + gid).style.display = 'block';
-				updateList('itree-' + gid, 'index.php', 'r=' + jQuery('#fldDesinventarRegionId').val() + '&cmd=glist&GeographyId=' + gid);
+				updateList('itree-' + gid, 'index.php', 'r=' + jQuery('#desinventarRegionId').val() + '&cmd=glist&GeographyId=' + gid);
 			} else {
 				// clean childs first
 				$('itree-' + gid).innerHTML = '';
@@ -868,7 +868,7 @@
 				var t = argsObj.tabber;
 				var i = argsObj.index;
 				var div = this.tabs[i].div; // The tab content div
-				var RegionId = jQuery('#fldDesinventarRegionId').val();
+				var RegionId = jQuery('#desinventarRegionId').val();
 				// Display a loading message
 				div.innerHTML = waiting;
 				switch (i) {

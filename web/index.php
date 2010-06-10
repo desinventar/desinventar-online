@@ -404,13 +404,13 @@ switch ($cmd) {
 					/* BEGIN THEMATIC MAP */
 					// 2010-01-18 (jhcaiced) Windows machines doesn't use remote servers
 					if (isset($_SERVER['WINDIR'])) {
-						$hasInternet = 0;
+						$desinventarHasInternet = 0;
 					} else {
 						// Linux machines are assumed to be connected to internet
-						$hasInternet = 1;
+						$desinventarHasInternet = 1;
 						/*
 						if (!fsockopen('www.google.com',80)) {
-							$hasInternet = 0;
+							$desinventarHasInternet = 0;
 						}
 						*/
 					}	
@@ -439,7 +439,7 @@ switch ($cmd) {
 							break;
 					}
 					$t->assign('GoogleMapsKey', $GoogleMapsKey);
-					$t->assign('hasInternet', $hasInternet);
+					$t->assign('desinventarHasInternet', $desinventarHasInternet);
 					
 					/* END THEMATIC MAP */
 

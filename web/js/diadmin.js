@@ -609,7 +609,7 @@
 		selectall('_S+Field[]');
 		combineForms('DC', 'CS');
 		jQuery('#_CMD').val('savequery');
-		$('DC').action='index.php?r=' + jQuery('#fldDesinventarRegionId').val();
+		$('DC').action='index.php?r=' + jQuery('#desinventarRegionId').val();
 		jQuery('#DC').submit();
 		return true;
 	}

@@ -32,7 +32,7 @@
 	<script type="text/javascript" src="js/desconsultar.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/main.js?version={-$jsversion-}"></script>
 
-	{-if $hasInternet -}
+	{-if $desinventarHasInternet -}
 		{-if $GoogleMapsKey != '' -}
 			<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={-$GoogleMapsKey-}"></script>
 		{-/if-}
@@ -92,8 +92,8 @@
 				}
 			})
 			
-			if (jQuery('#fldDesinventarRegionId').val() != '') {
-				jQuery('#dcr').load('index.php?cmd=getRegionFullInfo&r=' + jQuery('#fldDesinventarRegionId').val());
+			if (jQuery('#desinventarRegionId').val() != '') {
+				jQuery('#dcr').load('index.php?cmd=getRegionFullInfo&r=' + jQuery('#desinventarRegionId').val());
 			}
 		});
 	</script>

@@ -2,7 +2,7 @@ function onReadyDatacards() {
 	jQuery('#DICard').submit(function() {
 		jQuery('#DatacardCommand').val(jQuery('#_CMD').val());
 		jQuery('#RecordAuthor').val(jQuery('#desinventarUserId').val());
-		jQuery('#RegionId').val(jQuery('#fldDesinventarRegionId').val());
+		jQuery('#RegionId').val(jQuery('#desinventarRegionId').val());
 		jQuery.post('cards.php',
 			jQuery(this).serialize(),
 			function(data) {
@@ -58,7 +58,7 @@ function onReadyDatacards() {
 					{'cmd'               : 'getGeographyItemsByLevel',
 					 'GeographyLevelId'  : LevelId,
 					 'GeographyParentId' : GeographyParentId,
-					 'RegionId'          : jQuery('#fldDesinventarRegionId').val()
+					 'RegionId'          : jQuery('#desinventarRegionId').val()
 					},
 					function(data) {
 						jQuery(data).each(function(key,value) {
@@ -284,7 +284,7 @@ function showtip(tip, clr) {
 
 // Display Geography in form and search; k=geoid, l=0, desc='', opc=''
 function setgeo(k, l, desc, opc) {
-	var RegionId = jQuery('#fldDesinventarRegionId').val();
+	var RegionId = jQuery('#desinventarRegionId').val();
 	if (opc == "search") {
 		var fld = '_GeographyId';
 		var lev = '_lev'+ l;
@@ -403,7 +403,7 @@ function changeOptions(but) {
 
 function requestDatacard(myCmd, myValue) {
 	var bReturn = true;
-	var RegionId=jQuery('#fldDesinventarRegionId').val();
+	var RegionId=jQuery('#desinventarRegionId').val();
 
 	jQuery('#dostat').html(waiting);
 
@@ -468,10 +468,10 @@ function doDatacardNew() {
 function doDatacardEdit() {
 	jQuery('#dic').html('');
 	displayDatacardStatusMsg('');
-	RegionId = jQuery('#fldDesinventarRegionId').val();
+	RegionId = jQuery('#desinventarRegionId').val();
 	jQuery.post('cards.php',
 		{'cmd'       : 'chklocked',
-		 'r'         : jQuery('#fldDesinventarRegionId').val(),
+		 'r'         : jQuery('#desinventarRegionId').val(),
 		'DisasterId' : jQuery('#DisasterId').val()
 		},
 		function(data) {
@@ -533,7 +533,7 @@ function doDatacardSave() {
 	if (bContinue) {
 		jQuery.post('cards.php',
 			{'cmd'            : 'existDisasterSerial',
-			 'RegionId'       : jQuery('#fldDesinventarRegionId').val(),
+			 'RegionId'       : jQuery('#desinventarRegionId').val(),
 			 'DisasterSerial' : DisasterSerial
 			},
 			function(data) {
@@ -576,7 +576,7 @@ function doDatacardClear() {
 function doDatacardCancel() {
 	jQuery.post('cards.php',
 		{'cmd'        : 'chkrelease',
-		 'r'          : jQuery('#fldDesinventarRegionId').val(),
+		 'r'          : jQuery('#desinventarRegionId').val(),
 		 'DisasterId' : jQuery('#DisasterId').val()
 		},
 		function(data) {
