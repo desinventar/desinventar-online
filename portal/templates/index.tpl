@@ -172,7 +172,11 @@
 									{-include file="block_southamerica.tpl"-}
 								{-/if-}
 								{-if $portaltype_gar-}
-									{-include file="block_desinventar.tpl"-}
+									{-if $lang == 'spa'-}
+										{-include file="block_desinventar_spa.tpl"-}
+									{-else-}
+										{-include file="block_desinventar_eng.tpl"-}
+									{-/if-}
 								{-/if-}
 							</div>
 							<div class="portalcontent" id="UserContent">
