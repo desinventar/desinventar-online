@@ -57,7 +57,7 @@ function onReadyDatacards() {
 					{'cmd'               : 'getGeographyItemsByLevel',
 					 'GeographyLevelId'  : LevelId,
 					 'GeographyParentId' : GeographyParentId,
-					 'RegionId'          : jQuery('#prmRegionId').val()
+					 'RegionId'          : jQuery('#fldDesinventarRegionId').val()
 					},
 					function(data) {
 						jQuery(data).each(function(key,value) {
@@ -122,7 +122,7 @@ function onReadyDatacards() {
 	
 	DisableEnableForm($('DICard'), true);
 	changeOptions();
-	UserRole = jQuery('#prmUserRole').val();
+	UserRole = jQuery('#desinventarUserRole').val();
 	if (UserRole != '') {
 		displayDatacardStatusMsg('msgDatacardStartNew');
 	}
@@ -257,7 +257,7 @@ function onReadyDatacards() {
 	//Show Command Buttons only for Role>=USER
 	jQuery('.DatacardCmdButton').hide;
 	jQuery('#btnDatacardPrint').show();
-	if (jQuery('#prmUserRoleValue').val() >= 2) {
+	if (jQuery('#desinventarUserRoleValue').val() >= 2) {
 		jQuery('.DatacardCmdButton').show();
 	}
 } //onReadyDatacards()
@@ -283,7 +283,7 @@ function showtip(tip, clr) {
 
 // Display Geography in form and search; k=geoid, l=0, desc='', opc=''
 function setgeo(k, l, desc, opc) {
-	var RegionId = jQuery('#prmRegionId').val();
+	var RegionId = jQuery('#fldDesinventarRegionId').val();
 	if (opc == "search") {
 		var fld = '_GeographyId';
 		var lev = '_lev'+ l;
@@ -402,7 +402,7 @@ function changeOptions(but) {
 
 function requestDatacard(myCmd, myValue) {
 	var bReturn = true;
-	var RegionId=jQuery('#prmRegionId').val();
+	var RegionId=jQuery('#fldDesinventarRegionId').val();
 
 	jQuery('#dostat').html(waiting);
 
@@ -418,7 +418,7 @@ function requestDatacard(myCmd, myValue) {
 				if (data.DisasterId != '') {
 					valid = setDICardFromId(RegionId, data.DisasterId, '');
 					
-					if (jQuery('#prmUserRoleValue').val() >= 2) {
+					if (jQuery('#desinventarUserRoleValue').val() >= 2) {
 						disenabutton($('btnDatacardEdit'), false);
 					}
 					if (myCmd == 'getDisasterIdFromSerial') {
@@ -426,7 +426,7 @@ function requestDatacard(myCmd, myValue) {
 						disenabutton($('btnDatacardGotoNext'), false);
 						displayDatacardStatusMsg('msgDatacardFound');
 					}
-					jQuery('#prmRecordNumber').val(data.RecordNumber);
+					jQuery('#cardsRecordNumber').val(data.RecordNumber);
 				} else {
 					displayDatacardStatusMsg('msgDatacardNotFound');
 					bReturn = false;
@@ -467,10 +467,10 @@ function doDatacardNew() {
 function doDatacardEdit() {
 	jQuery('#dic').html('');
 	displayDatacardStatusMsg('');
-	RegionId = jQuery('#prmRegionId').val();
+	RegionId = jQuery('#fldDesinventarRegionId').val();
 	jQuery.post('cards.php',
 		{'cmd'       : 'chklocked',
-		 'r'         : jQuery('#prmRegionId').val(),
+		 'r'         : jQuery('#fldDesinventarRegionId').val(),
 		'DisasterId' : jQuery('#DisasterId').val()
 		},
 		function(data) {
@@ -510,7 +510,7 @@ function doDatacardSave() {
 		if ( (jQuery('#RecordStatus').val() == 'PUBLISHED') ||
 		     (jQuery('#RecordStatus').val() == 'TRASH') ||
 		     (jQuery('#RecordStatus').val() == 'DELETED') ) {
-			if (jQuery('#prmUserRoleValue').val() <= 2) {
+			if (jQuery('#desinventarUserRoleValue').val() <= 2) {
 				displayDatacardStatusMsg('msgDatacardInvalidStatus');
 				jQuery('#RecordStatus').highlight().focus();
 				bContinue = false;
@@ -532,7 +532,7 @@ function doDatacardSave() {
 	if (bContinue) {
 		jQuery.post('cards.php',
 			{'cmd'            : 'existDisasterSerial',
-			 'RegionId'       : jQuery('#prmRegionId').val(),
+			 'RegionId'       : jQuery('#fldDesinventarRegionId').val(),
 			 'DisasterSerial' : DisasterSerial
 			},
 			function(data) {
@@ -575,7 +575,7 @@ function doDatacardClear() {
 function doDatacardCancel() {
 	jQuery.post('cards.php',
 		{'cmd'        : 'chkrelease',
-		 'r'          : jQuery('#prmRegionId').val(),
+		 'r'          : jQuery('#fldDesinventarRegionId').val(),
 		 'DisasterId' : jQuery('#DisasterId').val()
 		},
 		function(data) {
@@ -587,13 +587,13 @@ function doDatacardCancel() {
 			if (jQuery('#DisasterId').val() != '') {
 				valid = setDICardFromId(jQuery('#RegionId').val(), jQuery('#DisasterId').val(), '');
 				
-				if (jQuery('#prmUserRoleValue').val() >= 2) {
+				if (jQuery('#desinventarUserRoleValue').val() >= 2) {
 					disenabutton($('btnDatacardEdit'), false);
 				}
 				disenabutton($('btnDatacardGotoPrev'), false);
 				disenabutton($('btnDatacardGotoNext'), false);
 				displayDatacardStatusMsg('');
-				jQuery('#prmRecordNumber').val(data.RecordNumber);
+				jQuery('#cardsRecordNumber').val(data.RecordNumber);
 			}
 		},
 		'json'
@@ -603,7 +603,7 @@ function doDatacardCancel() {
 function doDatacardGotoFirst() {
 	displayDatacardStatusMsg('');
 	bFound = requestDatacard('getDisasterIdFirst', jQuery('#DisasterId').val());
-	if (jQuery('#prmUserRoleValue').val() >= 2) {
+	if (jQuery('#desinventarUserRoleValue').val() >= 2) {
 		disenabutton($('btnDatacardEdit'), false);
 	}
 	disenabutton($('btnDatacardGotoPrev'), true);
@@ -613,7 +613,7 @@ function doDatacardGotoFirst() {
 function doDatacardGotoLast() {
 	displayDatacardStatusMsg('');
 	bFound = requestDatacard('getDisasterIdLast', jQuery('#DisasterId').val());
-	if (jQuery('#prmUserRoleValue').val() >= 2) {
+	if (jQuery('#desinventarUserRoleValue').val() >= 2) {
 		disenabutton($('btnDatacardEdit'), false);
 	}
 	disenabutton($('btnDatacardGotoPrev'), false);
@@ -623,11 +623,11 @@ function doDatacardGotoLast() {
 
 function doDatacardGotoPrev() {
 	displayDatacardStatusMsg('');
-	bFound = requestDatacard('getDisasterIdPrev', jQuery('#prmRecordNumber').val());
+	bFound = requestDatacard('getDisasterIdPrev', jQuery('#cardsRecordNumber').val());
 	if (bFound == false) {
 		displayDatacardStatusMsg('msgDatacardNotFound');
 	}
-	if (jQuery('#prmUserRoleValue').val() >= 2) {
+	if (jQuery('#desinventarUserRoleValue').val() >= 2) {
 		disenabutton($('btnDatacardEdit'), false);
 	}
 	disenabutton($('btnDatacardGotoNext'), false);
@@ -635,11 +635,11 @@ function doDatacardGotoPrev() {
 
 function doDatacardGotoNext() {
 	displayDatacardStatusMsg('');
-	bFound = requestDatacard('getDisasterIdNext', jQuery('#prmRecordNumber').val());
+	bFound = requestDatacard('getDisasterIdNext', jQuery('#cardsRecordNumber').val());
 	if (bFound == false) {
 		displayDatacardStatusMsg('msgDatacardNotFound');
 	}
-	if (jQuery('#prmUserRoleValue').val() >= 2) {
+	if (jQuery('#desinventarUserRoleValue').val() >= 2) {
 		disenabutton($('btnDatacardEdit'), false);
 	}
 	disenabutton($('btnDatacardGotoPrev'), false);
@@ -710,8 +710,6 @@ function setDICard(prmRegionId, arr, src) {
 		if ( (objElems[i].id == 'GeoLevel0') ||
 			 (objElems[i].id == 'GeoLevel1') ||
 			 (objElems[i].id == 'GeoLevel2') ) {
-			//geo = arr['GeographyId'];
-			//getGeoItems(prmRegionId, geo, 0, geo.length / 5, src);
 		} else {
 			varName = jQuery(myForm).find('#' + objElems[i].id).attr('name');
 			setElementValue(objElems[i], arr[varName]);
@@ -731,7 +729,7 @@ function setDICard(prmRegionId, arr, src) {
 	jQuery(myForm).find('.GeoLevelSelect').trigger({type: 'loadGeographyItems', ReadOnly: true});
 	
 	// Enable Edit Button according to Role
-	if (jQuery('#prmUserRoleValue').val() >= 2) {
+	if (jQuery('#desinventarUserRoleValue').val() >= 2) {
 		disenabutton($('btnDatacardEdit'), false);
 	}
 }

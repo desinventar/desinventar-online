@@ -388,8 +388,6 @@
 	</form>
 	<!-- END DI8 FORM CARD -->
 	<div id="divDatacardParameter" style="display:none;">
-		<input type="hidden" id="prmRegionId"      value="{-$RegionId-}" />
-		<input type="hidden" id="prmUserRole"      value="{-$UserRole-}" />
-		<input type="hidden" id="prmUserRoleValue" value="{-$UserRoleValue-}" />
-		<input type="hidden" id="prmRecordNumber"  value="0" />
+		<input type="hidden" id="cardsRecordNumber"  value="0" />
+		<input type="hidden" id="cardsRecordCount" value="0" />
 	</div>

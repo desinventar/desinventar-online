@@ -294,9 +294,6 @@ if (isset($_GET['u'])) {
 			$t->assign("caul", $us->q->loadCauses(null, "active", $lg));
 			$t->assign("eefl", $us->q->getEEFieldList("True"));
 
-			$t->assign('UserRole', $UserRole);
-			$t->assign('UserRoleValue', $UserRoleValue);
-
 			$t->display("cards.tpl");
 		break;
 	} //switch
