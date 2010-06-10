@@ -104,9 +104,7 @@ if (MODE != 'command') {
 
 	$confdir = dirname($_SERVER['SCRIPT_FILENAME']) . '/conf';
 	$templatedir = dirname($_SERVER['SCRIPT_FILENAME']) . '/templates';
-	fb($confdir);
-	fb($templatedir);
-	
+
 	/* Smarty configuration */
 	require_once(SMARTYDIR . '/Smarty.class.php');
 	/* SMARTY template */
@@ -149,6 +147,9 @@ if (MODE != 'command') {
 		$_SERVER['DI8_URL'] = $_SERVER['REDIRECT_DI8_URL'];
 	}
 	$desinventarURL = $_SERVER['DI8_URL'];
+	if (substr($desinventarURL, strlen($desinventarURL) - 1, 1) != '/') {
+		$desinventarURL .= '/';
+	}
 
 	// Configure DI8 (portal) application location
 	$desinventarURLPortal = WWWURL;
@@ -156,6 +157,9 @@ if (MODE != 'command') {
 		$_SERVER['DI8_PORTAL'] = $_SERVER['REDIRECT_DI8_PORTAL'];
 	}
 	$desinventarURLPortal = $_SERVER['DI8_PORTAL'];
+	if (substr($desinventarURLPortal, strlen($desinventarURLPortal) - 1, 1) != '/') {
+		$desinventarURLPortal .= '/';
+	}
 
 	// General Information (common to portal/app)
 	$t->assign('desinventarURL'         , $desinventarURL);
