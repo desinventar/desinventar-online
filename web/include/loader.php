@@ -152,11 +152,13 @@ if (MODE != 'command') {
 	}
 
 	// Configure DI8 (portal) application location
-	$desinventarURLPortal = WWWURL;
+	$desinventarURLPortal = $_SERVER['REQUEST_URI'];
 	if (isset($_SERVER['REDIRECT_DI8_PORTAL'])) {
 		$_SERVER['DI8_PORTAL'] = $_SERVER['REDIRECT_DI8_PORTAL'];
 	}
-	$desinventarURLPortal = $_SERVER['DI8_PORTAL'];
+	if (isset($_SERVER['DI8_PORTAL'])) {
+		$desinventarURLPortal = $_SERVER['DI8_PORTAL'];
+	}
 	if (substr($desinventarURLPortal, strlen($desinventarURLPortal) - 1, 1) != '/') {
 		$desinventarURLPortal .= '/';
 	}
