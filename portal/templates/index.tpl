@@ -168,8 +168,11 @@
 								</table>
 							</div>
 							<div class="portalcontent" id="pagemap">
-								{-if $portaltype_desinventar -}
+								{-if $portaltype_desinventar-}
 									{-include file="block_southamerica.tpl"-}
+								{-/if-}
+								{-if $portaltype_gar-}
+									{-include file="block_desinventar.tpl"-}
 								{-/if-}
 							</div>
 							<div class="portalcontent" id="UserContent">
