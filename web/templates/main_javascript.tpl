@@ -81,6 +81,7 @@
 					if (jQuery('#DisasterId').val() == '') {
 						doDatacardGotoFirst();
 					}
+					jQuery('#cardsRecordSource').val('');
 					difw.show();
 				break;
 				case "mnuDatacardImport":

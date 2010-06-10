@@ -1,6 +1,9 @@
 function onReadyData() {
 	jQuery('.linkGridGotoCard').click(function() {
 		var DisasterId = jQuery(this).attr('DisasterId');
+		jQuery('#cardsRecordSource').val('data');
+		jQuery('#cardsRecordCount').val(jQuery('#prmDataPageRecords').val());
+		jQuery('#cardsRecordNumber').val(jQuery(this).attr('RowIndex'));
 		setDIForm(DisasterId);
 		return false;
 	});
@@ -25,16 +28,19 @@ function onReadyData() {
 		doDataDisplayPage('next');
 	});
 	jQuery('#btnGridGotoLastPage').click(function() {
-		doDataDisplayPage(jQuery('#prmDataNumberOfPages').val());
+		doDataDisplayPage(jQuery('#prmDataPageCount').val());
 	});
 
 	jQuery('#tblDataRows tr:even').addClass('under');
+	
+	// Set Number of Records in Current Displayed Page
+	jQuery('#prmDataPageRecords').val(jQuery('#tblDataRows tr').size());
 }
 
 function setDIForm(prmDisasterId) {
 	//parent.w.collapse();
 	difw.show();
-	setDICardFromId(jQuery('#prmDataRegionId').val(), prmDisasterId, '');
+	setDICardFromId(jQuery('#desinventarRegionId').val(), prmDisasterId, '');
 }
 
 function doDataDisplayPage(page) {
@@ -45,13 +51,13 @@ function doDataDisplayPage(page) {
 	} else if (page == 'next') {
 		mypag = now + 1;
 	}
-	var NumberOfPages = jQuery('#prmDataNumberOfPages').val();
+	var NumberOfPages = jQuery('#prmDataPageCount').val();
 	if ((mypag < 1) || (mypag > NumberOfPages)) {
 		// Out of Range Page
 	} else {
 		jQuery('#DataCurPage').val(mypag);
-		var RegionId = jQuery('#prmDataRegionId').val();
-		var RecordsPerPage = jQuery('#prmDataRecordsPerPage').val();
+		var RegionId = jQuery('#desinventarRegionId').val();
+		var RecordsPerPage = jQuery('#prmDataPageSize').val();
 		var QueryDef = jQuery('#prmDataQueryDef').val();
 		var FieldList = jQuery('#prmDataFieldList').val();
 		var lsAjax = new Ajax.Updater('tblDataRows', 'data.php', {
@@ -62,6 +68,9 @@ function doDataDisplayPage(page) {
 			onComplete: function(request) {
 				// Reload the jQuery functions on the new DOM elements...
 				onReadyData();
+				jQuery('#prmDataPageNumber').val(mypag);
+				// Set Number of Records in Current Displayed Page
+				jQuery('#prmDataPageRecords').val(jQuery('#tblDataRows tr').size());
 			}
 		});
 	}

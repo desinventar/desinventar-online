@@ -417,6 +417,8 @@ function requestDatacard(myCmd, myValue) {
 			} else if (data.Status == 'OK') {
 				displayDatacardStatusMsg('');
 				if (data.DisasterId != '') {
+					jQuery('#cardsRecordNumber').val(data.RecordNumber);
+					jQuery('#cardsRecordCount').val(data.RecordCount);
 					valid = setDICardFromId(RegionId, data.DisasterId, '');
 					
 					if (jQuery('#desinventarUserRoleValue').val() >= 2) {
@@ -427,9 +429,6 @@ function requestDatacard(myCmd, myValue) {
 						disenabutton($('btnDatacardGotoNext'), false);
 						displayDatacardStatusMsg('msgDatacardFound');
 					}
-					jQuery('#cardsRecordNumber').val(data.RecordNumber);
-					jQuery('#cardsRecordCount').val(data.RecordCount);
-					jQuery('#dic').html(data.RecordNumber + '/' + data.RecordCount);
 				} else {
 					displayDatacardStatusMsg('msgDatacardNotFound');
 					bReturn = false;
@@ -694,6 +693,7 @@ function setDICardFromId(prmRegionId, prmDisasterId, src) {
 		},
 		function(data) {
 			setDICard(prmRegionId, data, src);
+			jQuery('#dic').html(jQuery('#cardsRecordNumber').val() + '/' + jQuery('#cardsRecordCount').val());
 			return true;
 		},
 		'json'
