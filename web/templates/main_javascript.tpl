@@ -74,10 +74,13 @@
 					qryw.show(this);
 				break;
 				// Datacards Menu Items
-				case "mcrdins":
+				case "mnuDatacardInsertEdit":
 					//hideQueryDesign();
 					//jQuery('.contentBlock').hide();
 					//jQuery('#divDatacardsShow').show();
+					if (jQuery('#DisasterId').val() == '') {
+						doDatacardGotoFirst();
+					}
 					difw.show();
 				break;
 				case "mnuDatacardImport":
@@ -249,7 +252,7 @@
 		var mcards = new Ext.menu.Menu({
 			id: 'cardsMenu',
 			items: [
-				{id:'mcrdins', text: '{-#minsert#-}',	handler: onMenuItem  },
+				{id:'mnuDatacardInsertEdit', text: '{-#minsert#-}',	handler: onMenuItem  },
 				{-if $role == "SUPERVISOR" || $role == "ADMINREGION"-}
 					{id:'mnuDatacardImport', text: '{-#mimport#-}',	handler: onMenuItem  },
 					{id:'mnuDatabaseBackup', text: '{-#mbackdb#-}',	handler: onMenuItem  },
