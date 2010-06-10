@@ -337,12 +337,12 @@ switch ($cmd) {
 					/* DATACARDS */
 					$t->assign('usr', $us->UserId);
 					$t->assign('regname', $us->q->getDBInfoValue('RegionLabel'));
-					$UserRole = $us->getUserRole($RegionId);
-					$UserRoleValue = $us->getUserRoleValue($RegionId);
+					$desinventarUserRole = $us->getUserRole($RegionId);
+					$desinventarUserRoleValue = $us->getUserRoleValue($RegionId);
 					
 					// Validate if user has permission to access database
 					$dic = $us->q->queryLabelsFromGroup('DB', $lg);
-					switch ($UserRole) {
+					switch ($desinventarUserRole) {
 						case 'ADMINREGION':
 							$t->assign('showconfig', true);
 							$dicrole = $dic['DBRoleAdmin'][0];
@@ -397,8 +397,8 @@ switch ($cmd) {
 					$t->assign('eefl', $us->q->getEEFieldList('True'));
 
 					$t->assign('RegionId', $RegionId);
-					$t->assign('UserRole', $UserRole);
-					$t->assign('UserRoleValue', $UserRoleValue);
+					$t->assign('desinventarUserRole', $desinventarUserRole);
+					$t->assign('desinventarUserRoleValue', $desinventarUserRoleValue);
 					/* DATACARDS END */
 					
 					/* BEGIN THEMATIC MAP */
