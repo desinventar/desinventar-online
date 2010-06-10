@@ -212,7 +212,7 @@
 		var muser = new Ext.menu.Menu({
 			id: 'userMenu',
 			items: [
-				{-if $userid != ""-}
+				{-if $desinventarUserId != ""-}
 					{id: 'mnuUserEditAccount', text: '{-#tconfigacc#-}', handler: onMenuItem },
 					{id: 'mnuUserLogout', text: '{-#tclosesess#-}', handler: onMenuItem }, 
 				{-else-}
@@ -265,7 +265,7 @@
 			id: 'basesMenu',
 			items: [
 				{id:'mdbsfnd', text: '{-#mdbfind#-}',	handler: onMenuItem  }, //search Databases
-				{-if $userid == "root"-}
+				{-if $desinventarUserId == "root"-}
 					{id:'mnuUserAdmin', text: '{-#tadminusrs#-}',	handler: onMenuItem  }, //admin Users
 					{id:'mdbsadm', text: '{-#tadminregs#-}',	handler: onMenuItem  }, //admin Databases
 				{-/if-}
@@ -287,7 +287,7 @@
 		
 		var tb = new Ext.Toolbar();
 		tb.render('toolbar');
-		tb.add('-', {id: 'musr', text: '{-#tuser#-}{-if $userid != ""-}: <b>{-$userid-}</b>{-/if-}', menu: muser });
+		tb.add('-', {id: 'musr', text: '{-#tuser#-}{-if $desinventarUserId != ""-}: <b>{-$desinventarUserId-}</b>{-/if-}', menu: muser });
 		tb.add('-', {id: 'mqry', text: '{-#msearch#-}',		menu: mquery });
 		{-if ($role == "USER" || $role == "SUPERVISOR" || $role == "OBSERVER" || $role == "ADMINREGION")-}
 			tb.add('-', {id: 'minp', text: '{-#mdcsection#-}',	menu: mcards });

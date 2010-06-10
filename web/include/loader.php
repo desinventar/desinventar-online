@@ -104,8 +104,6 @@ if (MODE != "command") {
 
 	$confdir = dirname($_SERVER['SCRIPT_FILENAME']) . '/conf';
 	$templatedir = dirname($_SERVER['SCRIPT_FILENAME']) . '/templates';
-	fb($confdir);
-	fb($templatedir);
 	/* Smarty configuration */
 	require_once(SMARTYDIR . '/Smarty.class.php');
 	/* SMARTY template */
