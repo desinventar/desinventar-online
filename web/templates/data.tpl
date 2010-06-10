@@ -59,7 +59,9 @@
 				<tr class="normal" 
 					onClick="Element.addClassName(this, 'highlight');" ondblClick="Element.removeClassName(this, 'highlight');">
 					<td>
-						<a href="#" class="linkGridGotoCard" disasterid="{-$item.DisasterId-}">{-$offset+$smarty.foreach.dl.iteration-}</a>
+						<a href="#" class="linkGridGotoCard" 
+							disasterid="{-$item.DisasterId-}"
+							rowindex="{-$smarty.foreach.dl.iteration-}">{-$offset+$smarty.foreach.dl.iteration-}</a>
 					</td>
 					{-foreach name=sel key=k item=i from=$sel-}
 						{-strip-}
@@ -93,13 +95,12 @@
 		</tbody>
 	</table>
 	<div style="display:none;">
-		<input type="hidden" id="prmDataRegionId"       value="{-$RegionId-}"       />
-		<input type="hidden" id="prmDataUserRole"       value="{-$UserRole-}"       />
-		<input type="hidden" id="prmDataUserRoleValue"  value="{-$UserRoleValue-}"  />
-		<input type="hidden" id="prmDataRecordsPerPage" value="{-$RecordsPerPage-}" />
-		<input type="hidden" id="prmDataNumberOfPages"  value="{-$NumberOfPages-}"  />
-		<input type="hidden" id="prmDataQueryDef"       value="{-$sql-}"            />
-		<input type="hidden" id="prmDataFieldList"      value="{-$fld-}"            />
+		<input type="hidden" id="prmDataPageNumber"  value="1"                   />
+		<input type="hidden" id="prmDataPageRecords" value="0"                   />
+		<input type="hidden" id="prmDataPageSize"    value="{-$RecordsPerPage-}" />
+		<input type="hidden" id="prmDataPageCount"   value="{-$NumberOfPages-}"  />
+		<input type="hidden" id="prmDataQueryDef"    value="{-$sql-}"            />
+		<input type="hidden" id="prmDataFieldList"   value="{-$fld-}"            />
 	</div>
 	<div id="divDataQueryDetails" style="display:none;">
 		{-foreach key=k item=i from=$qdet-}

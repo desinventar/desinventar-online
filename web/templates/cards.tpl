@@ -390,4 +390,5 @@
 	<div id="divDatacardParameter" style="display:none;">
 		<input type="hidden" id="cardsRecordNumber"  value="0" />
 		<input type="hidden" id="cardsRecordCount" value="0" />
+		<input type="hidden" id="cardsRecordSource" value="" />
 	</div>
