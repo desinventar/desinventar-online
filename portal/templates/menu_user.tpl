@@ -11,4 +11,9 @@
 		</div>
 	</td>
 </tr>
+	<tr>
+		<td colspan="3">
+			<img src="{-$desinventarURLPortal-}/images/c_sep.gif" width=133 height=6 border=0><br /><br />
+		</td>
+	</tr>
 </table>

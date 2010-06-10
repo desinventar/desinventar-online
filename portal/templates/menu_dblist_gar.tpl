@@ -1,10 +1,51 @@
-	<!-- ANDEAN SUBREGION -->
 	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 		<tr>
 			<td><img src="{-$desinventarURLPortal-}/images/p_paises1.gif" width=5 height=16></td>
 			<td width="32px" bgcolor="#fcc700">{-#tcountries#-}</td>
 			<td><img src="{-$desinventarURLPortal-}/images/p_paises3.gif" width=73 height=16></td>
 		</tr>
+	</table>
+
+	<!-- ASIA-->
+	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
+		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_ini.gif" width="133" height="5"></td></tr>
+		<tr>
+			<td class="paisel">
+				<a href="#" class="RegionGroup" alt="1">{-#treg1#-}</a>
+			</td>
+		</tr>
+		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
+	</table>
+	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect1" style="display:none;">
+		<tr>
+			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
+				<a href="#" class="RegionItem" alt="IND-1250695040-india_orissa_historic_inventory_of_disasters">India - Orissa</a>
+			</td>
+		</tr>
+		<tr>
+			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
+				<a href="#" class="RegionItem" alt="IND-1250695066-india_tamil_nadu_historic_inventory_of_disasters">India - Tamil Nadu</a>
+			</td>
+		</tr>
+		<tr>
+			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
+				<a href="#" class="RegionItem" alt="IRN-1250695109-iran_historic_inventory_of_disasters">Iran</a>
+			</td>
+		</tr>
+		<tr>
+			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
+				<a href="#" class="RegionItem" alt="NPL-1250695185-nepal_historic_inventory_of_disasters">Nepal</a>
+			</td>
+		</tr>
+		<tr>
+			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
+				<a href="#" class="RegionItem" alt="LKA-1250695608-srilanka_historic_inventory_of_disasters">Srilanka</a>
+			</td>
+		</tr>
+	</table>
+		
+	<!-- ANDEAN SUBREGION -->
+	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_ini.gif" width="133" height="5"></td></tr>
 		<tr>
 			<td class="paisel" colspan="3">
@@ -46,24 +87,6 @@
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 	</table>
 
-	<!-- ASIA-->
-	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
-		<tr>
-			<td class="paisel">
-				<a href="#" class="RegionGroup" alt="1">{-#treg1#-}</a>
-			</td>
-		</tr>
-		<tr><td><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
-	</table>
-	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect1" style="display:none;">
-		<tr>
-			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-				<a href="#" class="RegionItem" alt="IND-1250695040-india_orissa_historic_inventory_of_disasters">India - Orissa</a>
-			</td>
-		</tr>
-		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
-	</table>
-		
 	<!-- CENTRAL AMERICA -->
 	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 		<tr>
@@ -126,61 +149,12 @@
 				<a href="#" class="RegionList" alt="PAR">Paraguay</a>
 			</td>
 		</tr>
+		<tr>
+			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
+				<a href="#" class="RegionItem" alt="MEX-1250695136-mexico_inventario_historico_de_desastres">México</a>
+			</td>
+		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
-	</table>
-	
-	<!-- GREAT AMERICAN CHACO -->
-	<!-- 2009-09-28 (jhcaiced) Removed Big Chaco databases from menu -->
-	<!--
-	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
-	<tr>
-		<td class="paisel">
-			<a href="#" class="RegionGroup" alt="4">{-#treg4#-}</a>
-		</td>
-	</tr>
-	<tr><td><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
-	</table>
-	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect4" style="display:none;">
-	<tr>
-		<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-			<a href="#" class="RegionItem" alt="ARG-1250695025-argentina_gran_chaco">Argentina</a>
-		</td>
-	</tr>
-	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
-	<tr>
-		<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-			<a href="#" class="RegionItem" alt="BOL-1250695036-bolivia_gran_chaco">Bolivia</a>
-		</td>
-	</tr>
-	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
-	<tr>
-		<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-			<a href="#" class="RegionItem" alt="PAR-1250695038-paraguay_gran_chaco">Paraguay</a>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0>
-	</td>
-	</tr>
-	</table>
-	-->
-
-	<!-- NORTH AMERICA -->
-	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
-	<tr>
-		<td class="paisel">
-			<a href="#" class="RegionGroup" alt="5">{-#treg5#-}</a>
-		</td>
-	</tr>
-	<tr><td><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
-	</table>
-	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect5" style="display:none;">
-	<tr>
-		<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-			<a href="#" class="RegionItem" alt="MEX-1250695136-mexico_inventario_historico_de_desastres">México</a>
-		</td>
-	</tr>
-	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 	</table>
 	
 	<!-- CITIES -->
@@ -192,11 +166,6 @@
 	</tr>
 	</table>
 	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect7" style="display:none;">
-	<tr>
-		<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-			<a href="#" class="RegionItem" alt="COL-1263347185-armenia_inventario_historico">Armenia (COL)</a>
-		</td>
-	</tr>
 	<tr>
 		<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 			<a href="#" class="RegionItem" alt="COL-1250694494-colombia_inventario_desastres_cali_zona_urbana">Cali (COL)</a>
@@ -219,13 +188,6 @@
 	<tr>
 		<td class="pais" colspan="3">
 			<a href="#" class="RegionItem" alt="DESINV-1249040429-can_subregion_andina">{-#treg6#-}</a>
-		</td>
-	</tr>
-	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_fin.gif" width="133" height="5"></td></tr>
-	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_ini.gif" width="133" height="5"></td></tr>
-	<tr>
-		<td class="pais" colspan="3">
-			<a href="#" class="RegionItem" alt="DESINV-1249126759-subregion_gran_chaco">{-#treg8#-}</a>
 		</td>
 	</tr>
 	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_fin.gif" width="133" height="5"></td></tr>
