@@ -6,8 +6,8 @@
 	<title>DesInventar8 - Portal</title>
 	<!-- CSS Styles -->
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" href="css/desinventar.css?version={-$jsversion-}" TYPE="text/css" />
-	<link rel="stylesheet" href="css/portal.css?version={-$jsversion-}" TYPE="text/css" />
+	<link rel="stylesheet" href="{-$desinventarURLPortal-}/css/desinventar.css?version={-$jsversion-}" TYPE="text/css" />
+	<link rel="stylesheet" href="{-$desinventarURLPortal-}/css/portal.css?version={-$jsversion-}" TYPE="text/css" />
 	{-include file="../../web/templates/jquery.tpl" confdir="../../web/conf/"-}
 	<script type="text/javascript" src="{-$desinventarURL-}/include/menu.js"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/include/md5.js"></script>
@@ -25,18 +25,18 @@
 <body>
 	<table width=839 border=0 cellpadding=0 cellspacing=0 align=center style="margin-top:4px">
 		<tr valign=top>
-			<td style="background:url(images/bg1.gif) 0px -1px"><img src="images/e1.gif" width=16 height=74 border=0>
+			<td style="background:url({-$desinventarURLPortal-}/images/bg1.gif) 0px -1px"><img src="{-$desinventarURLPortal-}/images/e1.gif" width=16 height=74 border=0>
 			</td>
 			<td>
 				<!-- Header Table -->
 				<table width=807 border=0 cellpadding=0 cellspacing=0>
 					<tr>
 						<td colspan="2">
-							<img src="images/10.gif" width="807" height="15">
+							<img src="{-$desinventarURLPortal-}/images/10.gif" width="807" height="15">
 						</td>
 					</tr>
 					<tr valign="top">
-						<td style="background:url(images/dionl.jpg);width:462px;height:92px">
+						<td style="background:url({-$desinventarURLPortal-}/images/dionl.jpg);width:462px;height:92px">
 							<div id="version">
 							</div>
 							<div id="slogan">
@@ -44,7 +44,7 @@
 							</div>
 						</td>
 						<td>
-							<img src="images/11.jpg" width=345 height=92 border=0>
+							<img src="{-$desinventarURLPortal-}/images/11.jpg" width=345 height=92 border=0>
 						</td>
 					</tr>
 				</table>
@@ -52,13 +52,13 @@
 				<table width=807 border=0 cellpadding=0 cellspacing=0>
 					<tr valign=top>
 						<td width=182>
-							<img src="images/21.gif" width=182 height=52>
+							<img src="{-$desinventarURLPortal-}/images/21.gif" width=182 height=52>
 						</td>
-						<td width=585 style="background:url(images/22.gif);" align="right">
+						<td width=585 style="background:url({-$desinventarURLPortal-}/images/22.gif);" align="right">
 							<span id="dostat" style="color: #e1ac00; float:left; font-size:8pt;">
 							</span>
 							<div align="right">
-								<img src="images/23.jpg" width="305" height="13">
+								<img src="{-$desinventarURLPortal-}/images/23.jpg" width="305" height="13">
 							</div>
 							<table border="0" width="100%">
 								<tr>
@@ -90,7 +90,7 @@
 							</table>
 						</td>
 						<td width=40>
-							<img src="images/24.jpg" width=40 height=52 border=0>
+							<img src="{-$desinventarURLPortal-}/images/24.jpg" width=40 height=52 border=0>
 						</td>
 					</tr>
 				</table>
@@ -103,10 +103,10 @@
 							<!-- References -->
 							<table bgcolor="#CF9D15" border=0 cellpadding=0 cellspacing=0 align="center">
 								<tr><td bgcolor="white"><center>
-									<a href="http://www.preventionweb.net/gar09/" target="_blank"><img src="images/logos/{-$isdrlogo-}" border="0" width="140"></a><br /><br />
-									<a href="http://www.georiesgo.net" target="_blank"><img src="images/logos/banner_SIAPAD.jpg" border="0"></a><br /><br />
-									<a href="http://www.redbivapad.org.pe/" target="_blank"><img src="images/logos/banner_BIVAPAD.jpg" border="0"></a><br /><br />
-									<a href="http://www.desaprender.org/" target="_blank"><img src="images/logos/banner_DESAPRENDER.gif" border="0"></a>
+									<a href="http://www.preventionweb.net/gar09/" target="_blank"><img src="{-$desinventarURLPortal-}/images/logos/{-$isdrlogo-}" border="0" width="140"></a><br /><br />
+									<a href="http://www.georiesgo.net" target="_blank"><img src="{-$desinventarURLPortal-}/images/logos/banner_SIAPAD.jpg" border="0"></a><br /><br />
+									<a href="http://www.redbivapad.org.pe/" target="_blank"><img src="{-$desinventarURLPortal-}/images/logos/banner_BIVAPAD.jpg" border="0"></a><br /><br />
+									<a href="http://www.desaprender.org/" target="_blank"><img src="{-$desinventarURLPortal-}/images/logos/banner_DESAPRENDER.gif" border="0"></a>
 									</center>
 								</td></tr>
 							</table>
@@ -138,7 +138,7 @@
 									</tr>
 									<tr>
 										<td colspan="2">
-											<center><a id="regionlink" href="#"><img id="regionbutton" src="images/b_desinventar3.jpg" border="0"></a></center>
+											<center><a id="regionlink" href="#"><img id="regionbutton" src="{-$desinventarURLPortal-}/images/b_desinventar3.jpg" border="0"></a></center>
 											<div id="regiontechinfo"></div>
 										</td>
 									</tr>
@@ -149,13 +149,13 @@
 									<tr>
 										<td align="right">
 											<a href="#" id="btnMainWindow">
-												<img id="btnMainWindow2" src="images/b_desinventar3.jpg" border="0">
+												<img id="btnMainWindow2" src="{-$desinventarURLPortal-}/images/b_desinventar3.jpg" border="0">
 											</a>
 										</td>
 									</tr>
 									<tr>
 										<td>
-											<img id="imgCAN" src="images/{-$imgCANMap-}" alt="" usemap="#srcan" style="border-style:none" />
+											<img id="imgCAN" src="{-$desinventarURLPortal-}/images/{-$imgCANMap-}" alt="" usemap="#srcan" style="border-style:none" />
 											<map id="srcan" name="srcan">
 												<area shape="poly" coords="173,39,175,41,155,62,155,69,193,105,216,105,215,142,221,152,219,153,214,145,189,145,189,152,193,152,197,156,186,157,186,162,190,167,190,200,180,200,186,192,186,184,161,184,138,161,113,161,98,145,114,129,114,97,105,86,116,74,121,78,137,62,137,55,144,55,145,51,130,36,75,37,75,24,127,25,145,47,162,48" 
 													href="#" alt="COL" title="{-#tcountryCOL#-}" />
@@ -177,39 +177,39 @@
 								{-include file="../../web/templates/user_login.tpl" confdir="../../web/conf/"-}
 							</div>
 						</td> <!-- CENTRO -->
-						<td class="der"><img src="images/bgder.gif" width=32 height=5>
+						<td class="der"><img src="{-$desinventarURLPortal-}/images/bgder.gif" width=32 height=5>
 						</td>
 					</tr>
 				</table>
 			</td>
-			<td style="background:url(images/bg2.gif) 0px -1px"><img src="images/e2.gif" width=16 height=74 border=0>
+			<td style="background:url({-$desinventarURLPortal-}/{-$desinventarURLPortal-}/images/bg2.gif) 0px -1px"><img src="{-$desinventarURLPortal-}/images/e2.gif" width=16 height=74 border=0>
 			</td>
 		</tr>
 		<tr valign=bottom>
-			<td style="background:url(images/bg1.gif) 0px -1px">
-				<img src="images/e3.gif" width="16" height=85 border=0>
+			<td style="background:url({-$desinventarURLPortal-}/images/bg1.gif) 0px -1px">
+				<img src="{-$desinventarURLPortal-}/images/e3.gif" width="16" height=85 border=0>
 			</td>
 			<td>
-				<table width=807 border=0 cellpadding=0 cellspacing=0 style="background:url(images/40_1.gif) left bottom no-repeat">
+				<table width=807 border=0 cellpadding=0 cellspacing=0 style="background:url({-$desinventarURLPortal-}/images/40_1.gif) left bottom no-repeat">
 					<tr>
-						<td width="182"><img src="images/31_1.gif" width="182" height="22" border=0>
+						<td width="182"><img src="{-$desinventarURLPortal-}/images/31_1.gif" width="182" height="22" border=0>
 						</td>
-						<td style="background:url(images/32_1.gif)"><img src="images/32_1.gif" width="1" height="22" border=0>
+						<td style="background:url({-$desinventarURLPortal-}/images/32_1.gif)"><img src="{-$desinventarURLPortal-}/images/32_1.gif" width="1" height="22" border=0>
 						</td>
-						<td width="40"><img src="images/33_1.gif" width="40" height="22" border=0>
+						<td width="40"><img src="{-$desinventarURLPortal-}/images/33_1.gif" width="40" height="22" border=0>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="3">
 							<div align="right" style="margin-right:30px;">
-								<img src="images/logos/can.jpg" border=0><br />
+								<img src="{-$desinventarURLPortal-}/images/logos/can.jpg" border=0><br />
 								{-#tcredits#-}<br />
-								<a href="http://www.osso.org.co" target="_blank"><img src="images/logos/corposso.png" border=0></a>
-								<a href="http://www.desenredando.org" target="_blank"><img src="images/logos/lared.png" border=0></a><br />
+								<a href="http://www.osso.org.co" target="_blank"><img src="{-$desinventarURLPortal-}/images/logos/corposso.png" border=0></a>
+								<a href="http://www.desenredando.org" target="_blank"><img src="{-$desinventarURLPortal-}/images/logos/lared.png" border=0></a><br />
 								{-#tcopyright#-}
 							</div>
 						
-							<!--<img src="images/logosinst.png" width=730 height=63 border=0 vspace=15 usemap="#logosinst"> -->
+							<!--<img src="{-$desinventarURLPortal-}/images/logosinst.png" width=730 height=63 border=0 vspace=15 usemap="#logosinst"> -->
 							<!--
 							<map id="logosinst" name="logosinst">
 								<area shape="rect" alt="Comunidad Andina" coords="1,3,124,52" href="http://www.caprade.org" target="_blank"/>
@@ -223,9 +223,9 @@
 						</td>
 					</tr>
 				</table>
-				<img src="images/40.gif" width=807 height=15 border="0">
+				<img src="{-$desinventarURLPortal-}/images/40.gif" width=807 height=15 border="0">
 			</td>
-			<td style="background:url(images/bg2.gif) 0px -1px"><img src="images/e4.gif" width="16" height=85 border=0>
+			<td style="background:url({-$desinventarURLPortal-}/images/bg2.gif) 0px -1px"><img src="{-$desinventarURLPortal-}/images/e4.gif" width="16" height=85 border=0>
 			</td>
 		</tr>
 	</table>
