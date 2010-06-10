@@ -1,7 +1,7 @@
 function onReadyDatacards() {
 	jQuery('#DICard').submit(function() {
 		jQuery('#DatacardCommand').val(jQuery('#_CMD').val());
-		jQuery('#RecordAuthor').val(jQuery('desinventarUserId').val());
+		jQuery('#RecordAuthor').val(jQuery('#desinventarUserId').val());
 		jQuery('#RegionId').val(jQuery('#fldDesinventarRegionId').val());
 		jQuery.post('cards.php',
 			jQuery(this).serialize(),

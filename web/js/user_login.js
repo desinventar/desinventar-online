@@ -9,7 +9,7 @@ function onReadyUserLogin() {
 		if (UserId == '' || UserPasswd == '') {
 			updateUserLoginMsg('#msgEmptyFields');
 		} else {
-			desinventarURL = jQuery('#fldDesinventarURL').val();
+			desinventarURL = jQuery('#desinventarURL').val();
 			if (desinventarURL == undefined) {
 				desinventarURL = '';
 			}
@@ -25,7 +25,7 @@ function onReadyUserLogin() {
 						jQuery("#fldUserPasswd").val('');
 
 						// Update UserInfo Fields...
-						jQuery('#fldDesinventarUserId').val(data.UserId);
+						jQuery('#desinventarUserId').val(data.UserId);
 						jQuery('#fldDesinventarUserFullName').val(data.UserFullName);
 
 						// Trigger Event and Update User Menu etc.
@@ -43,7 +43,7 @@ function onReadyUserLogin() {
 
 function doUserLogout() {
 	var Answer = 0;
-	desinventarURL = jQuery('#fldDesinventarURL').val();
+	desinventarURL = jQuery('#desinventarURL').val();
 	if (desinventarURL == undefined) {
 		desinventarURL = '';
 	}
@@ -59,7 +59,7 @@ function doUserLogout() {
 				jQuery('#fldUserPasswd').val('');
 				
 				// Update UserInfo Fields...
-				jQuery('#fldDesinventarUserId').val('');
+				jQuery('#desinventarUserId').val('');
 				jQuery('#fldDesinventarUserFullName').val('');
 				
 				// Trigger Event, used to update menu or reload page...
