@@ -428,6 +428,8 @@ function requestDatacard(myCmd, myValue) {
 						displayDatacardStatusMsg('msgDatacardFound');
 					}
 					jQuery('#cardsRecordNumber').val(data.RecordNumber);
+					jQuery('#cardsRecordCount').val(data.RecordCount);
+					jQuery('#dic').html(data.RecordNumber + '/' + data.RecordCount);
 				} else {
 					displayDatacardStatusMsg('msgDatacardNotFound');
 					bReturn = false;

@@ -598,7 +598,7 @@ class UserSession {
 	}
 
 	public function getDisasterIdFirst() {
-		$Record = 0;
+		$Record = 1;
 		$RecordCount = $this->getDisasterCount();
 		$DisasterId = $this->getDisasterIdFromRecordNumber($Record);
 		return array('DisasterId' => $DisasterId, 'RecordNumber' => $Record, 'RecordCount' => $RecordCount, 'Status' => 'OK');
@@ -606,7 +606,7 @@ class UserSession {
 
 	public function getDisasterIdLast() {
 		$RecordCount = $this->getDisasterCount();
-		$Record = $RecordCount - 1;
+		$Record = $RecordCount;
 		$DisasterId = $this->getDisasterIdFromRecordNumber($Record);
 		return array('DisasterId' => $DisasterId, 'RecordNumber' => $Record, 'RecordCount' => $RecordCount, 'Status' => 'OK');
 	}
@@ -614,7 +614,7 @@ class UserSession {
 	public function getDisasterIdPrev($prmRecord) {
 		$Record = $prmRecord;
 		$RecordCount = $this->getDisasterCount();
-		if ($Record > 0) {
+		if ($Record > 1) {
 			$Record--;
 		}
 		$DisasterId = $this->getDisasterIdFromRecordNumber($Record);
@@ -634,19 +634,18 @@ class UserSession {
 	public function getDisasterIdFromSerial($prmDisasterSerial) {
 		$RecordCount = $this->getDisasterCount();
 		$DisasterId = '';
-		$Record = 0;
 		$sQuery = "SELECT DisasterId,DisasterSerial FROM Disaster ORDER BY DisasterBeginTime,DisasterSerial";
 		$result = $this->q->dreg->query($sQuery);
 		$bFound = 0;
+		$RecordNumber = 0;
 		while ( ($bFound == 0) && ($row = $result->fetch(PDO::FETCH_OBJ)) ) {
+			$RecordNumber++;
 			if ($row->DisasterSerial == $prmDisasterSerial) {
 				$bFound = 1;
 				$DisasterId = $row->DisasterId;
-			} else {
-				$Record++;
 			}
 		} //while
-		return array('DisasterId' => $DisasterId, 'RecordNumber' => $Record, 'RecordCount' => $RecordCount, 'Status' => 'OK');
+		return array('DisasterId' => $DisasterId, 'RecordNumber' => $RecordNumber, 'RecordCount' => $RecordCount, 'Status' => 'OK');
 	}
 
 	public function getDisasterCount() {
@@ -660,6 +659,7 @@ class UserSession {
 		
 	public function getDisasterIdFromRecordNumber($prmRecord) {
 		$DisasterId = '';
+		$prmRecord--;
 		$sQuery = "SELECT DisasterId FROM Disaster ORDER BY DisasterBeginTime,DisasterSerial LIMIT " . $prmRecord . ",1";
 		foreach($this->q->dreg->query($sQuery) as $row) {
 			$DisasterId = $row['DisasterId'];
