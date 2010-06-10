@@ -419,6 +419,7 @@ function requestDatacard(myCmd, myValue) {
 				if (data.DisasterId != '') {
 					jQuery('#cardsRecordNumber').val(data.RecordNumber);
 					jQuery('#cardsRecordCount').val(data.RecordCount);
+					jQuery('#cardsRecordSource').val('');
 					valid = setDICardFromId(RegionId, data.DisasterId);
 					
 					if (jQuery('#desinventarUserRoleValue').val() >= 2) {
