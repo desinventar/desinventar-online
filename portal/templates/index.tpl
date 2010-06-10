@@ -102,11 +102,10 @@
 							{- include file="menu.tpl" -}
 							<!-- References -->
 							<table bgcolor="#CF9D15" border=0 cellpadding=0 cellspacing=0 align="center">
-								<tr><td bgcolor="white"><center>
-									<a href="http://www.preventionweb.net/gar09/" target="_blank"><img src="{-$desinventarURLPortal-}/images/logos/{-$isdrlogo-}" border="0" width="140"></a><br /><br />
-									<a href="http://www.georiesgo.net" target="_blank"><img src="{-$desinventarURLPortal-}/images/logos/banner_SIAPAD.jpg" border="0"></a><br /><br />
-									<a href="http://www.redbivapad.org.pe/" target="_blank"><img src="{-$desinventarURLPortal-}/images/logos/banner_BIVAPAD.jpg" border="0"></a><br /><br />
-									<a href="http://www.desaprender.org/" target="_blank"><img src="{-$desinventarURLPortal-}/images/logos/banner_DESAPRENDER.gif" border="0"></a>
+								<tr><td bgcolor="white">
+									<center>
+										{-include file="logo_isdr.tpl" -}
+										{-include file="logo_siapad.tpl" -}
 									</center>
 								</td></tr>
 							</table>
@@ -202,11 +201,9 @@
 					<tr>
 						<td colspan="3">
 							<div align="right" style="margin-right:30px;">
-								<img src="{-$desinventarURLPortal-}/images/logos/can.jpg" border=0><br />
-								{-#tcredits#-}<br />
-								<a href="http://www.osso.org.co" target="_blank"><img src="{-$desinventarURLPortal-}/images/logos/corposso.png" border=0></a>
-								<a href="http://www.desenredando.org" target="_blank"><img src="{-$desinventarURLPortal-}/images/logos/lared.png" border=0></a><br />
-								{-#tcopyright#-}
+								{-include file="logo_predecan.tpl"-}
+								<br />
+								{-include file="logo_osso.tpl"-}
 							</div>
 						
 							<!--<img src="{-$desinventarURLPortal-}/images/logosinst.png" width=730 height=63 border=0 vspace=15 usemap="#logosinst"> -->
