@@ -102,13 +102,17 @@ if (MODE != "command") {
 	header('Content-Type: text/html; charset=UTF-8');
 	define("DEFAULT_CHARSET", 'UTF-8');
 
+	$confdir = dirname($_SERVER['SCRIPT_FILENAME']) . '/conf';
+	$templatedir = dirname($_SERVER['SCRIPT_FILENAME']) . '/templates';
+	fb($confdir);
+	fb($templatedir);
 	/* Smarty configuration */
 	require_once(SMARTYDIR . '/Smarty.class.php');
 	/* SMARTY template */
 	$t = new Smarty();
 	$t->debugging = false;
-	$t->config_dir = BASE . '/conf';
-	$t->template_dir = BASE . '/templates';
+	$t->config_dir = $confdir;
+	$t->template_dir = $templatedir;
 	$t->compile_dir = SMTY_DIR;
 	$t->left_delimiter = '{-';
 	$t->right_delimiter = '-}';
@@ -138,11 +142,18 @@ if (MODE != "command") {
 	$jsversion = JSVERSION;
 	$t->assign('jsversion', $jsversion);
 
+	// Configure DI8 (web) application location
+	$desinventarURL = WWWURL;
+	if (isset($_SERVER["REDIRECT_DI8_URL"])) {
+		$_SERVER["DI8_URL"] = $_SERVER["REDIRECT_DI8_URL"];
+	}
+	$desinventarURL = $_SERVER["DI8_URL"];
+
 	// General Information (common to portal/app)
+	$t->assign('desinventarURL'         , $desinventarURL);
 	$t->assign('desinventarVersion'     , VERSION);
 	$t->assign('desinventarLang'        , $lg);
 	$t->assign('desinventarUserId'      , $us->UserId);
 	$t->assign('desinventarUserFullName', $us->getUserFullName());
-	fb(SMARTYDIR);
 }
 </script>
