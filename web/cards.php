@@ -16,7 +16,7 @@ require_once('include/dieedata.class.php');
  */
 function form2disaster($form, $icmd) {
 	$data = array();
-	$geogid = "";
+	$geogid = '';
 	foreach ($form as $k=>$i) {
 		if (($icmd == CMD_NEW) || ($icmd == CMD_UPDATE)) {
 			if ((substr($k, 0, 1)  != '_') &&
@@ -34,7 +34,7 @@ function form2disaster($form, $icmd) {
 	if ($icmd == CMD_NEW) {
 		// New Disaster
 		$data['DisasterId'] = uuid();
-		$data['RecordCreation'] = date("Y-m-d H:i:s");
+		$data['RecordCreation'] = date('Y-m-d H:i:s');
 	} elseif ($icmd == CMD_UPDATE) {
 		// On Update
 		$data['DisasterId'] = $form['DisasterId'];
@@ -42,20 +42,20 @@ function form2disaster($form, $icmd) {
 	}
 	$data['RecordAuthor'] = $form['RecordAuthor'];
 	$data['RecordUpdate'] = gmdate('c');
-	$c = "";
+	$c = '';
 	// Disaster date
 	$aaaa = $form[$c .'DisasterBeginTime'][0];
 	if (!empty($form[$c .'DisasterBeginTime'][1])) {
 		$mm = $form[$c .'DisasterBeginTime'][1];
 	} else {
-		$mm = "00";
+		$mm = '00';
 	}
 	if (!empty($form[$c .'DisasterBeginTime'][2])) {
 		$dd = $form[$c .'DisasterBeginTime'][2];
 	} else {
-		$dd = "00";
+		$dd = '00';
 	}
-	$data['DisasterBeginTime'] = sprintf("%04d-%02d-%02d", $aaaa, $mm, $dd);
+	$data['DisasterBeginTime'] = sprintf('%04d-%02d-%02d', $aaaa, $mm, $dd);
 	// Disaster Geography
 	$data['GeographyId'] = $geogid;
 	return $data;
@@ -86,7 +86,7 @@ if ($RegionId == '') {
 
 // 2009-08-07 (jhcaiced) Validate if Database Exists...
 if (! file_exists($us->q->getDBFile($RegionId))) {
-	print "<h3>Requested Region doesn't exist<br>";
+	print '<h3>Requested Region not found<br />';
 	exit();
 }
 
@@ -94,42 +94,42 @@ if (! file_exists($us->q->getDBFile($RegionId))) {
 if (isset($_GET['u'])) {
 	$res = $us->awake();
 	if (!iserror($res)) {
-		$status = "green";
+		$status = 'green';
 	} else {
-		$status = "red";
+		$status = 'red';
 	}
-	$t->assign("stat", $status);
+	$t->assign('stat', $status);
 	$t->display('cards_updater.tpl');
 } else {
 	$cmd = getParameter('cmd',getParameter('DatacardCommand',''));
 	$value = getParameter('value','');
 	// Commands in GET mode: lists, checkings..
 	switch ($cmd) {
-		case "list":
+		case 'list':
 			$lev = $us->q->getNextLev($_GET['GeographyId']);
 			$levmax = $us->q->getMaxGeoLev();
 			$levname = $us->q->loadGeoLevById($lev);
 			$geol = $us->q->loadGeoChilds($_GET['GeographyId']);
-			$t->assign("lev", $lev);
-			$t->assign("levmax", $levmax);
-			$t->assign("levname", $levname);
-			$t->assign("geol", $geol);
-			$t->assign("opc", isset($_GET['opc']) ? $_GET['opc'] : '');
-			$t->display("cards_geolist.tpl");
+			$t->assign('lev', $lev);
+			$t->assign('levmax', $levmax);
+			$t->assign('levname', $levname);
+			$t->assign('geol', $geol);
+			$t->assign('opc', isset($_GET['opc']) ? $_GET['opc'] : '');
+			$t->display('cards_geolist.tpl');
 		break;
 		case 'getGeographyItemsByLevel':
 			$gItems = $us->getGeographyItemsByLevel(getParameter('GeographyLevelId',''),getParameter('GeographyParentId', ''));
 			echo json_encode($gItems);
 		break;
-		case "getNextSerial":
+		case 'getNextSerial':
 			$ser = $us->q->getNextDisasterSerial($value);
 			echo json_encode(array('Status' => 'OK', 'DisasterSerial' => $ser));
 		break;
-		case "getDisasterIdPrev":
+		case 'getDisasterIdPrev':
 			$answer = $us->getDisasterIdPrev($value);
 			echo json_encode($answer);
 		break;
-		case "getDisasterIdNext":
+		case 'getDisasterIdNext':
 			$answer = $us->getDisasterIdNext($value);
 			echo json_encode($answer);
 		break;
@@ -141,7 +141,7 @@ if (isset($_GET['u'])) {
 			$answer = $us->getDisasterIdLast();
 			echo json_encode($answer);
 		break;
-		case "getDisasterIdFromSerial":
+		case 'getDisasterIdFromSerial':
 			$answer = $us->getDisasterIdFromSerial($value);
 			echo json_encode($answer);
 		break;
@@ -150,7 +150,7 @@ if (isset($_GET['u'])) {
 			$answer = $us->existDisasterSerial($DisasterSerial);
 			print json_encode($answer);
 		break;
-		case "chklocked":
+		case 'chklocked':
 			// check if datacard is locked by some user
 			$answer = array('Status' => 'OK','DatacardStatus' => '');
 			$reserv = $us->isDatacardLocked($_GET['DisasterId']);
@@ -163,7 +163,7 @@ if (isset($_GET['u'])) {
 			}
 			print json_encode($answer);
 		break;
-		case "chkrelease":
+		case 'chkrelease':
 			$us->releaseDatacard($_GET['DisasterId']);
 		break;
 		case 'getDatacard':
@@ -188,10 +188,10 @@ if (isset($_GET['u'])) {
 			$o->set('RecordCreation', gmdate('c'));
 			$o->set('RecordUpdate', gmdate('c'));
 			$i = $o->insert();
-			$t->assign("statusmsg", "insertok");
+			$t->assign('statusmsg', 'insertok');
 			if (!iserror($i)) {
 				// Save EEData ....
-				$t->assign("diserial", $data['DisasterSerial']);
+				$t->assign('diserial', $data['DisasterSerial']);
 				// If Datacard is valid, update EEData Table..
 				$eedat = form2eedata($_POST);
 				$eedat['DisasterId'] = $data['DisasterId'];
@@ -199,11 +199,11 @@ if (isset($_GET['u'])) {
 				$o->setFromArray($eedat);
 				$i = $o->insert();
 			} else {
-				$t->assign("statusmsg", showerror($i));
+				$t->assign('statusmsg', showerror($i));
 			}
-			$t->assign("dipub", $us->q->getNumDisasterByStatus("PUBLISHED"));
-			$t->assign("direa", $us->q->getNumDisasterByStatus("READY"));
-			$t->display("cards_result.tpl");
+			$t->assign('dipub', $us->q->getNumDisasterByStatus('PUBLISHED'));
+			$t->assign('direa', $us->q->getNumDisasterByStatus('READY'));
+			$t->display('cards_result.tpl');
 		break;
 		case 'updateDICard':
 			// Update Existing Datacard
@@ -213,10 +213,10 @@ if (isset($_GET['u'])) {
 			$o->setFromArray($data);
 			$o->set('RecordUpdate', gmdate('c'));
 			$i = $o->update();
-			$t->assign("statusmsg", "updateok");
+			$t->assign('statusmsg', 'updateok');
 			if (!iserror($i)) {
 				// Save EEData ....
-				$t->assign("diserial", $data['DisasterSerial']);
+				$t->assign('diserial', $data['DisasterSerial']);
 				// If Datacard is valid, update EEData Table..
 				$eedat = form2eedata($_POST);
 				$eedat['DisasterId'] = $data['DisasterId'];
@@ -224,77 +224,77 @@ if (isset($_GET['u'])) {
 				$o->setFromArray($eedat);
 				$i = $o->update();
 			} else {
-				$t->assign("statusmsg", showerror($i));
+				$t->assign('statusmsg', showerror($i));
 			}
-			$t->assign("dipub", $us->q->getNumDisasterByStatus("PUBLISHED"));
-			$t->assign("direa", $us->q->getNumDisasterByStatus("READY"));
-			$t->display("cards_result.tpl");
+			$t->assign('dipub', $us->q->getNumDisasterByStatus('PUBLISHED'));
+			$t->assign('direa', $us->q->getNumDisasterByStatus('READY'));
+			$t->display('cards_result.tpl');
 		break;
 		default:
 			//if ($us->UserId == '' || $us->getUserRole($RegionId == '')) {}
 			// Default view of DesInventar
-			$t->assign("usr", $us->UserId);
-			$t->assign("regname", $us->q->getDBInfoValue('RegionLabel'));
+			$t->assign('usr', $us->UserId);
+			$t->assign('regname', $us->q->getDBInfoValue('RegionLabel'));
 			$UserRole = $us->getUserRole($RegionId);
 			$UserRoleValue = $us->getUserRoleValue($RegionId);
 			
 			// Validate if user has permission to access database
 			$dic = $us->q->queryLabelsFromGroup('DB', $lg);
 			switch ($UserRole) {
-				case "ADMINREGION":
-					$t->assign("showconfig", true);
+				case 'ADMINREGION':
+					$t->assign('showconfig', true);
 					$dicrole = $dic['DBRoleAdmin'][0];
 				break;
-				case "OBSERVER":
-					$t->assign("showconfig", true);
-					$t->assign("ro", "disabled");
+				case 'OBSERVER':
+					$t->assign('showconfig', true);
+					$t->assign('ro', 'disabled');
 					$dicrole = $dic['DBRoleObserver'][0];
 				break;
-				case "SUPERVISOR":
+				case 'SUPERVISOR':
 					$dicrole = $dic['DBRoleSupervisor'][0];
 				break;
-				case "USER":
+				case 'USER':
 					$dicrole = $dic['DBRoleUser'][0];
 				break;
 				default:
 					$dicrole = null;
 				break;
 			}
-			$t->assign("dicrole", $dicrole);
-			$t->assign("ctl_effects", true);
+			$t->assign('dicrole', $dicrole);
+			$t->assign('ctl_effects', true);
 			$dis = $us->q->queryLabelsFromGroup('Disaster', $lg);
 			$dis = array_merge($dis, $us->q->queryLabelsFromGroup('Geography', $lg));
-			$t->assign("dis", $dis);
-			$t->assign("rc1", $us->q->queryLabelsFromGroup('Record|1', $lg));
-			$t->assign("rc2", $us->q->queryLabelsFromGroup('Record|2', $lg));
-			$t->assign("eve", $us->q->queryLabelsFromGroup('Event', $lg));
-			$t->assign("cau", $us->q->queryLabelsFromGroup('Cause', $lg));
-			$t->assign("ef1", $us->q->queryLabelsFromGroup('Effect|People', $lg));
-			$t->assign("ef2", $us->q->queryLabelsFromGroup('Effect|Economic', $lg));
-			$t->assign("ef3", $us->q->queryLabelsFromGroup('Effect|Affected', $lg));
+			$t->assign('dis', $dis);
+			$t->assign('rc1', $us->q->queryLabelsFromGroup('Record|1', $lg));
+			$t->assign('rc2', $us->q->queryLabelsFromGroup('Record|2', $lg));
+			$t->assign('eve', $us->q->queryLabelsFromGroup('Event', $lg));
+			$t->assign('cau', $us->q->queryLabelsFromGroup('Cause', $lg));
+			$t->assign('ef1', $us->q->queryLabelsFromGroup('Effect|People', $lg));
+			$t->assign('ef2', $us->q->queryLabelsFromGroup('Effect|Economic', $lg));
+			$t->assign('ef3', $us->q->queryLabelsFromGroup('Effect|Affected', $lg));
 			$sc3 = $us->q->querySecLabelFromGroup('Effect|Affected', $lg);
-			$t->assign("sc3", $sc3);
-			$t->assign("ef4", $us->q->queryLabelsFromGroup('Effect|More', $lg));
-			$t->assign("sec", $us->q->queryLabelsFromGroup('Sector', $lg));
-			//$t->assign("rcsl", $us->q->queryLabelsFromGroup('RecordStatus', $lg));
-			$t->assign("dmg", $us->q->queryLabelsFromGroup('MetGuide', $lg));
+			$t->assign('sc3', $sc3);
+			$t->assign('ef4', $us->q->queryLabelsFromGroup('Effect|More', $lg));
+			$t->assign('sec', $us->q->queryLabelsFromGroup('Sector', $lg));
+			//$t->assign('rcsl', $us->q->queryLabelsFromGroup('RecordStatus', $lg));
+			$t->assign('dmg', $us->q->queryLabelsFromGroup('MetGuide', $lg));
 			
 			// Geography Levels
 			$GeoLevelList = $us->getGeoLevels();
-			$t->assign("GeoLevelList", $GeoLevelList);
+			$t->assign('GeoLevelList', $GeoLevelList);
 			
 			$lev = 0;
-			$t->assign("lev", $lev);
-			$t->assign("levmax", $us->q->getMaxGeoLev());
-			$t->assign("levname", $us->q->loadGeoLevById($lev));
-			$t->assign("geol", $us->q->loadGeography($lev));
+			$t->assign('lev', $lev);
+			$t->assign('levmax', $us->q->getMaxGeoLev());
+			$t->assign('levname', $us->q->loadGeoLevById($lev));
+			$t->assign('geol', $us->q->loadGeography($lev));
 			$gItems = $us->getGeographyItemsByLevel(0, '');
 			$t->assign('GeoLevelItems', $gItems);
-			$t->assign("evel", $us->q->loadEvents(null, "active", $lg));
-			$t->assign("caul", $us->q->loadCauses(null, "active", $lg));
-			$t->assign("eefl", $us->q->getEEFieldList("True"));
+			$t->assign('evel', $us->q->loadEvents(null, 'active', $lg));
+			$t->assign('caul', $us->q->loadCauses(null, 'active', $lg));
+			$t->assign('eefl', $us->q->getEEFieldList('True'));
 
-			$t->display("cards.tpl");
+			$t->display('cards.tpl');
 		break;
 	} //switch
 }
