@@ -142,17 +142,19 @@ if (MODE != 'command') {
 	$t->assign('jsversion', $jsversion);
 
 	// Configure DI8 (web) application location
-	$desinventarURL = WWWURL;
+	$desinventarURL = substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'],'/'));
 	if (isset($_SERVER['REDIRECT_DI8_URL'])) {
 		$_SERVER['DI8_URL'] = $_SERVER['REDIRECT_DI8_URL'];
 	}
-	$desinventarURL = $_SERVER['DI8_URL'];
+	if (isset($_SERVER['DI8_URL'])) {
+		$desinventarURL = $_SERVER['DI8_URL'];
+	}
 	if (substr($desinventarURL, strlen($desinventarURL) - 1, 1) != '/') {
 		$desinventarURL .= '/';
 	}
 
 	// Configure DI8 (portal) application location
-	$desinventarURLPortal = $_SERVER['REQUEST_URI'];
+	$desinventarURLPortal = substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'],'/'));
 	if (isset($_SERVER['REDIRECT_DI8_PORTAL'])) {
 		$_SERVER['DI8_PORTAL'] = $_SERVER['REDIRECT_DI8_PORTAL'];
 	}
