@@ -73,7 +73,6 @@ define("VAR_DIR" , DATADIR);
 define("TMP_DIR" , TEMP);
 define("SMTY_DIR", CACHEDIR); // Smarty temp dir
 define("TMPM_DIR", CACHEDIR); // Mapserver temp dir
-$lg          = "spa";
 require_once(BASE . "/include/fb.php");
 require_once(BASE . "/include/usersession.class.php");
 require_once(BASE . "/include/diobject.class.php");
@@ -120,14 +119,9 @@ if (MODE != "command") {
 	$t->compile_check = true;
 
 	// Choose Language
-	$lg = getParameter('lang');
-	if ($lg == '') {
-		if (isset($_SESSION['lang'])) {
-			$lg = $_SESSION['lang'];
-		} else {
-			$lg = getBrowserClientLanguage();
-		}
-	}
+	$lg = getParameter('lang', getBrowserClientLanguage());
+	if ($lg == '') { $lg = 'eng'; }
+	
 	// 2009-02-21 (jhcaiced) Fix some languages from two to three character code
 	if ($lg == 'es') { $lg = 'spa'; }
 	if ($lg == 'en') { $lg = 'eng'; }
@@ -137,17 +131,18 @@ if (MODE != "command") {
 
 	$_SESSION['lang'] = $lg;
 	$t->assign ("lg", $lg);
+	$t->assign("lang"  , $lg);
 
 	// 2010-05-25 (jhcaiced) Handle the versioning of js files, used to force refresh of
 	// these files when doing changes.
 	$jsversion = JSVERSION;
-	/*
-	$hostname  = $_SERVER["SERVER_NAME"];
-	if ( ($hostname == 'devel.desinventar.org') ||
-	     ($hostname == '192.168.0.13') ) {
-	     $jsversion = time();
-	}
-	*/	
 	$t->assign('jsversion', $jsversion);
+
+	// General Information (common to portal/app)
+	$t->assign('desinventarVersion'     , VERSION);
+	$t->assign('desinventarLang'        , $lg);
+	$t->assign('desinventarUserId'      , $us->UserId);
+	$t->assign('desinventarUserFullName', $us->getUserFullName());
+	fb(SMARTYDIR);
 }
 </script>

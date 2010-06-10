@@ -12,44 +12,21 @@
 		$_SERVER["DI8_URL"] = $_SERVER["REDIRECT_DI8_URL"];
 	}
 	$desinventarURL = $_SERVER["DI8_URL"];
-	// Auto detect language for portal interface
-	$lang = getParameter('lang', getBrowserClientLanguage());
 	
 	/* Smarty configuration */
 	define("SMARTYDIR", "/usr/share/php/Smarty");
 	define("SMTY_DIR", "/var/cache/Smarty"); // Smarty temp dir
 	require_once(SMARTYDIR . '/Smarty.class.php');
+	fb(SMARTYDIR);
 
-	/* SMARTY template */
-	/*
-	$t = new Smarty();
-	$t->debugging = false;
-	$t->force_compile = true;
-	$t->caching = false;
-	$t->compile_check = true;
-	$t->cache_lifetime = -1;
-	$t->compile_dir = SMTY_DIR;
-	$t->left_delimiter = '{-';
-	$t->right_delimiter = '-}';
-	*/
 	$t->config_dir = 'conf';
 	$t->template_dir = 'templates';
-
-	$t->assign("stat"  , "on");
-
-	$t->assign("lang"  , $lang);
-
 	$t->assign('desinventarURL'         , $desinventarURL);
-	$t->assign('desinventarVersion'     , VERSION);
-	$t->assign('desinventarLang'        , $lang);
-	$t->assign('desinventarUserId'      , $us->UserId);
-	$t->assign('desinventarUserFullName', $us->getUserFullName());
-	$t->assign('desinventarModule'      , 'portal');
 	
 	// 2009-09-23 (jhcaiced) Choose which ISDR logo to use...
 	$isdrlogo = 'logo-isdr.gif';
-	if ($lang == 'spa') { $isdrlogo = 'logo-eird.gif'; }
+	if ($lg == 'spa') { $isdrlogo = 'logo-eird.gif'; }
 	$t->assign("isdrlogo", $isdrlogo);
-	$t->assign('imgCANMap', 'subreg_can_' . $lang . '.png');
+	$t->assign('imgCANMap', 'subreg_can_' . $lg . '.png');
 	$t->display ("index.tpl");
 </script>
