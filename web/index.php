@@ -17,9 +17,7 @@ $RegionId = getParameter('r', getParameter('RegionId', getParameter('_REG'),''))
 if ($cmd == '' && $RegionId == '') {
 	$cmd = 'start';
 }
-
 // Default Template Values
-$t->assign('userid', $us->UserId);
 $t->assign('desinventarRegionId'    , $RegionId);
 
 if (!empty($RegionId)) {
@@ -31,23 +29,23 @@ switch ($cmd) {
 	break;
 	case 'start':
 		$t->assign('lg', $lg);
-		$t->assign("lglst", $us->q->loadLanguages(1));
+		$t->assign('lglst', $us->q->loadLanguages(1));
 		$listdb = $us->listDB();
 		// unique database, choose than
 		if (count($listdb) == 1) {
-			$t->assign('option', "r=". key($listdb));
+			$t->assign('option', 'r='. key($listdb));
 		} else {
-			$t->assign('option', "cmd=main");
+			$t->assign('option', 'cmd=main');
 		}
 		$t->display('main_start.tpl');
 	break;
 	case 'main':
 		// Direct access returns a list of public regions on this server
 		$t->assign('lg', $lg);
-		$t->assign("lglst", $us->q->loadLanguages(1));
+		$t->assign('lglst', $us->q->loadLanguages(1));
 		$t->assign('regionlist', $us->listDB());
-		$t->assign("ctl_noregion", true);
-		$t->assign("ctl_mainpage", true);
+		$t->assign('ctl_noregion', true);
+		$t->assign('ctl_mainpage', true);
 		$t->display('index.tpl');
 	break;
 	case 'listdb':
@@ -68,10 +66,11 @@ switch ($cmd) {
 		print $CountryName;
 	break;
 	case 'getRegionLogo':
-		header("Content-type: Image/png");
-		$murl = VAR_DIR . "/database/". $RegionId . "/logo.png";
-		if (!file_exists($murl))
-			$murl = "images/di_logo.png";
+		header('Content-type: Image/png');
+		$murl = VAR_DIR . '/database/'. $RegionId . '/logo.png';
+		if (!file_exists($murl)) {
+			$murl = 'images/di_logo.png';
+		}
 		readfile($murl);
 		exit();
 	break;
@@ -90,7 +89,7 @@ switch ($cmd) {
 		$RegionInfo['RegionId'] = $RegionId;
 		$t->assign('RegionInfo', $r->getDBInfo($lg));
 		$labels = $us->q->queryLabelsFromGroup('DB', $lg, false);
-		$t->assign ('Labels', $labels);
+		$t->assign('Labels', $labels);
 		$t->display('regiontechinfo.tpl');
 	break;
 	case 'getRegionFullInfo':
@@ -102,7 +101,7 @@ switch ($cmd) {
 			$t->assign('RegionInfo', $a);
 		}
 		$labels = $us->q->queryLabelsFromGroup('DB', $lg, false);
-		$t->assign ('Labels', $labels);
+		$t->assign('Labels', $labels);
 		$t->display('regionfullinfo.tpl');
 	break;
 	case 'getGraphParameters':
@@ -112,8 +111,8 @@ switch ($cmd) {
 		$FileName = TMP_DIR . '/di8backup_' . uuid() . '.zip';
 		$iReturn = DIRegion::createRegionBackup($us, $RegionId, $FileName);
 		if ($iReturn > 0) {
-			header("Content-type: application/x-zip-compressed");
-			header("Content-Disposition: attachment; filename=". $RegionId .".zip");
+			header('Content-type: application/x-zip-compressed');
+			header('Content-Disposition: attachment; filename=' . $RegionId . '.zip');
 			flush();
 			readfile($FileName);
 			unlink($FileName);
@@ -125,10 +124,10 @@ switch ($cmd) {
 		fixPost($post);
 		// Do not save _CMD...
 		unset($post['_CMD']);
-		header("Content-type: text/xml");
-		header("Content-Disposition: attachment; filename=Query_". str_replace(" ", "", $RegionId) .".xml");
+		header('Content-type: text/xml');
+		header('Content-Disposition: attachment; filename=Query_' . str_replace(' ', '', $RegionId) . '.xml');
 		echo '<?xml version="1.0" encoding="UTF-8"?>'. "\n";
-		echo "<DIQuery />". base64_encode(serialize($post));
+		echo '<DIQuery />' . base64_encode(serialize($post));
 		exit();
 	break;
 	default:
@@ -136,7 +135,7 @@ switch ($cmd) {
 		if (isset($_FILES['qry'])) {
 			// Open file, decode and assign saved query..
 			$myfile = $_FILES['qry']['tmp_name'];
-			$handle = fopen($myfile, "r");
+			$handle = fopen($myfile, 'r');
 			$cq = fread($handle, filesize($myfile));
 			fclose($handle);
 			$xml = '<DIQuery />';
@@ -148,7 +147,7 @@ switch ($cmd) {
 				exit();
 			}
 			$RegionId = $qd['_REG'];
-			$t->assign("qd", $qd);
+			$t->assign('qd', $qd);
 		}
 		elseif (isset($get['r']) && !empty($get['r'])) {
 			$RegionId = $get['r'];
@@ -157,105 +156,106 @@ switch ($cmd) {
 		if (!empty($RegionId) && file_exists($us->q->getDBFile($RegionId))) {
 			// Accessing a region with some operation
 			$us->open($RegionId);
-			if (isset($get['lang']) && !empty($get['lang']))
+			if (isset($get['lang']) && !empty($get['lang'])) {
 				$_SESSION['lang'] = $get['lang'];
+			}
 			// Direct access returns a list of public regions on this server
-			$t->assign ("lglst", $us->q->loadLanguages(1));
+			$t->assign('lglst', $us->q->loadLanguages(1));
 			switch ($get['cmd']) {
-				case "getGeoId":
-					$code = $us->q->getObjectNameById($get['GeoCode'], "GEOCODE");
-					echo "$code";
+				case 'getGeoId':
+					$code = $us->q->getObjectNameById($get['GeoCode'], 'GEOCODE');
+					echo $code;
 				break;
-				case "glist":
-					$t->assign ("reg", $get['GeographyId']);
-					$t->assign ("geol", $us->q->loadGeoChilds($get['GeographyId']));
+				case 'glist':
+					$t->assign('reg', $get['GeographyId']);
+					$t->assign('geol', $us->q->loadGeoChilds($get['GeographyId']));
 					$t->display('main_glist.tpl');
 				break;
-				case "geolst":
-					$t->assign ("geol", $us->q->loadGeography(0));
+				case 'geolst':
+					$t->assign('geol', $us->q->loadGeography(0));
 					$t->display('main_glist.tpl');
 				break;
-				case "caulst":
-					$t->assign ("caupredl", $us->q->loadCauses("PREDEF", "active", $lg));
-					$t->assign ("cauuserl", $us->q->loadCauses("USER", "active", $lg));
+				case 'caulst':
+					$t->assign('caupredl', $us->q->loadCauses('PREDEF', 'active', $lg));
+					$t->assign('cauuserl', $us->q->loadCauses('USER', 'active', $lg));
 					$t->display('main_causelist.tpl');
 				break;
-				case "evelst":
-					$t->assign ("evepredl", $us->q->loadEvents("PREDEF", "active", $lg));
-					$t->assign ("eveuserl", $us->q->loadEvents("USER", "active", $lg));
+				case 'evelst':
+					$t->assign('evepredl', $us->q->loadEvents('PREDEF', 'active', $lg));
+					$t->assign('eveuserl', $us->q->loadEvents('USER', 'active', $lg));
 					$t->display('main_eventlist.tpl');
 				break;
 				default:
-					$t->assign ("ms", MAPSERV);
-					$t->assign ("dis", $us->q->queryLabelsFromGroup('Disaster', $lg));
-					$t->assign ("rc1", $us->q->queryLabelsFromGroup('Record|1', $lg));
-					$t->assign ("rc2", $us->q->queryLabelsFromGroup('Record|2', $lg));
-					$t->assign ("eve", $us->q->queryLabelsFromGroup('Event', $lg));
-					$t->assign ("cau", $us->q->queryLabelsFromGroup('Cause', $lg));
-					$t->assign ("reg", $RegionId);
-					$t->assign ("path", VAR_DIR);
-					$EEFieldList = $us->q->getEEFieldList("True");
-					$t->assign ("EEFieldList", $EEFieldList);
+					$t->assign('ms', MAPSERV);
+					$t->assign('dis', $us->q->queryLabelsFromGroup('Disaster', $lg));
+					$t->assign('rc1', $us->q->queryLabelsFromGroup('Record|1', $lg));
+					$t->assign('rc2', $us->q->queryLabelsFromGroup('Record|2', $lg));
+					$t->assign('eve', $us->q->queryLabelsFromGroup('Event', $lg));
+					$t->assign('cau', $us->q->queryLabelsFromGroup('Cause', $lg));
+					$t->assign('reg', $RegionId);
+					$t->assign('path', VAR_DIR);
+					$EEFieldList = $us->q->getEEFieldList('True');
+					$t->assign('EEFieldList', $EEFieldList);
 					// Get UserRole
 					$role = $us->getUserRole($RegionId);
-					$t->assign ("role", $role);
-					if (strlen($role) > 0)
-						$t->assign ("ctl_user", true);
-					else
-						$t->assign ("ctl_user", false);
+					$t->assign('role', $role);
+					if (strlen($role) > 0) {
+						$t->assign('ctl_user', true);
+					} else {
+						$t->assign('ctl_user', false);
+					}
 					// Set selection map
 					$regname = $us->q->getDBInfoValue('RegionLabel');
-					$t->assign ("regname", $regname);
-					//  if (testMap(VAR_DIR . "/". $RegionId . "/". $data))
-					$t->assign ("ctl_showmap", true);
+					$t->assign('regname', $regname);
+					$t->assign('ctl_showmap', true);
 					// get range of dates
 					$ydb = $us->getDateRange();
-					$t->assign ("yini", substr($ydb[0], 0, 4));
-					$t->assign ("yend", substr($ydb[1], 0, 4));
+					$t->assign('yini', substr($ydb[0], 0, 4));
+					$t->assign('yend', substr($ydb[1], 0, 4));
 
 					// Load default list of Geography, Event, Cause
 					$geol = $us->q->loadGeography(0);
 					$glev = $us->q->loadGeoLevels('', -1, false);
-					$evepredl = $us->q->loadEvents("PREDEF", "active", $lg);
-					$eveuserl = $us->q->loadEvents("USER", "active", $lg);
-					$caupredl = $us->q->loadCauses("PREDEF", "active", $lg);
-					$cauuserl = $us->q->loadCauses("USER", "active", $lg);
+					$evepredl = $us->q->loadEvents('PREDEF', 'active', $lg);
+					$eveuserl = $us->q->loadEvents('USER', 'active', $lg);
+					$caupredl = $us->q->loadCauses('PREDEF', 'active', $lg);
+					$cauuserl = $us->q->loadCauses('USER', 'active', $lg);
 
 					// In Saved Queries set true in Geo, Events, Causes selected..
-					if (isset($qd["D_GeographyId"])) {
-						$gtree = $us->q->buildGeoTree('', 0, $us->q->getMaxGeoLev(), $qd["D_GeographyId"]);
-						$t->assign ("gtree", $gtree);
+					if (isset($qd['D_GeographyId'])) {
+						$gtree = $us->q->buildGeoTree('', 0, $us->q->getMaxGeoLev(), $qd['D_GeographyId']);
+						$t->assign('gtree', $gtree);
 						$geol = null;
-						/*foreach ($qd["D_GeographyId"] as $ky=>$it) {
-							if (isset($geol[$it]))
-								$geol[$it][3] = 1;
-						}*/
 					}
 
-					if (isset($qd["D_EventId"])) {
-						foreach ($qd["D_EventId"] as $ky=>$it) {
-							if (isset($evepredl[$it]))
+					if (isset($qd['D_EventId'])) {
+						foreach ($qd['D_EventId'] as $ky=>$it) {
+							if (isset($evepredl[$it])) {
 								$evepredl[$it][3] = 1;
-							if (isset($eveuserl[$it]))
+							}
+							if (isset($eveuserl[$it])) {
 								$eveuserl[$it][3] = 1;
+							}
 						}
 					}
 
-					if (isset($qd["D_CauseId"])) {
-						foreach ($qd["D_CauseId"] as $ky=>$it) {
-							if (isset($caupredl[$it]))
+					if (isset($qd['D_CauseId'])) {
+						foreach ($qd['D_CauseId'] as $ky=>$it) {
+							if (isset($caupredl[$it])) {
 								$caupredl[$it][3] = 1;
-							if (isset($cauuserl[$it]))
+							}
+							if (isset($cauuserl[$it])) {
 								$cauuserl[$it][3] = 1;
+							}
 						}
 					}
 					// List of elements: Geography, GLevels, Events, Causes..
-					$t->assign ("geol", $geol);
-					$t->assign ("glev", $glev);
-					$t->assign ("evepredl", $evepredl);
-					$t->assign ("eveuserl", $eveuserl);
-					$t->assign ("caupredl", $caupredl);
-					$t->assign ("cauuserl", $cauuserl);
+					$t->assign('geol', $geol);
+					$t->assign('glev', $glev);
+					$t->assign('evepredl', $evepredl);
+					$t->assign('eveuserl', $eveuserl);
+					$t->assign('caupredl', $caupredl);
+					$t->assign('cauuserl', $cauuserl);
 					// Query words and phrases in dictionary..
 					$ef1 = $us->q->queryLabelsFromGroup('Effect|People', $lg);
 					$ef2 = $us->q->queryLabelsFromGroup('Effect|Affected', $lg);
@@ -286,12 +286,12 @@ switch ($cmd) {
 					$dic = array_merge($dic, $ef2);
 					$dic = array_merge($dic, $ef3);
 					$dic = array_merge($dic, $sec);
-					$t->assign ("dic", $dic);
-					$t->assign ("ef1", $ef1);
-					$t->assign ("ef2", $ef2);
-					$t->assign ("ef3", $ef3);
-					$t->assign ("sec", $sec);
-					$t->assign ("ef4", $us->q->queryLabelsFromGroup('Effect|More', $lg));
+					$t->assign('dic', $dic);
+					$t->assign('ef1', $ef1);
+					$t->assign('ef2', $ef2);
+					$t->assign('ef3', $ef3);
+					$t->assign('sec', $sec);
+					$t->assign('ef4', $us->q->queryLabelsFromGroup('Effect|More', $lg));
 					// DATA
 					$dc2 = array();
 					$dc2 = array_merge($dc2, $us->q->queryLabelsFromGroup('Disaster', $lg));
@@ -301,103 +301,100 @@ switch ($cmd) {
 					$dc2 = array_merge($dc2, $us->q->queryLabelsFromGroup('Cause', $lg));
 					$dc2 = array_merge($dc2, $us->q->queryLabelsFromGroup('Effect', $lg));
 					$dc2 = array_merge($dc2, $us->q->queryLabelsFromGroup('Sector', $lg));
-					$t->assign ("dc2", $dc2);
-					$fld = "DisasterSerial,DisasterBeginTime,EventName,GeographyFQName,DisasterSiteNotes,".
-						"DisasterSource,EffectNotes,EffectPeopleDead,EffectPeopleMissing,EffectPeopleInjured,".
-						"EffectPeopleHarmed,EffectPeopleAffected,EffectPeopleEvacuated,EffectPeopleRelocated,".
-						"EffectHousesDestroyed,EffectHousesAffected,EffectFarmingAndForest,EffectRoads,".
-						"EffectEducationCenters,EffectMedicalCenters,EffectLiveStock,EffectLossesValueLocal,".
-						"EffectLossesValueUSD,EffectOtherLosses,SectorTransport,SectorCommunications,SectorRelief,".
-						"SectorAgricultural,SectorWaterSupply,SectorSewerage,SectorEducation,SectorPower,SectorIndustry,".
-						"SectorHealth,SectorOther,EventDuration,EventMagnitude,CauseName,CauseNotes";
-					$sda = explode(",", $fld);
-					$t->assign ("sda", $sda);
-					$sda1 = explode(",",
-					"GeographyCode,DisasterLatitude,DisasterLongitude,RecordAuthor,RecordCreation,RecordUpdate,EventNotes");
-					$t->assign ("sda1", $sda1);	// array_diff_key($dc2, array_flip($sda))
+					$t->assign('dc2', $dc2);
+					$fld = 'DisasterSerial,DisasterBeginTime,EventName,GeographyFQName,DisasterSiteNotes,'.
+						'DisasterSource,EffectNotes,EffectPeopleDead,EffectPeopleMissing,EffectPeopleInjured,'.
+						'EffectPeopleHarmed,EffectPeopleAffected,EffectPeopleEvacuated,EffectPeopleRelocated,'.
+						'EffectHousesDestroyed,EffectHousesAffected,EffectFarmingAndForest,EffectRoads,'.
+						'EffectEducationCenters,EffectMedicalCenters,EffectLiveStock,EffectLossesValueLocal,'.
+						'EffectLossesValueUSD,EffectOtherLosses,SectorTransport,SectorCommunications,SectorRelief,'.
+						'SectorAgricultural,SectorWaterSupply,SectorSewerage,SectorEducation,SectorPower,SectorIndustry,'.
+						'SectorHealth,SectorOther,EventDuration,EventMagnitude,CauseName,CauseNotes';
+					$sda = explode(',', $fld);
+					$t->assign('sda', $sda);
+					$sda1 = explode(',', 'GeographyCode,DisasterLatitude,DisasterLongitude,RecordAuthor,RecordCreation,RecordUpdate,EventNotes');
+					$t->assign('sda1', $sda1);	// array_diff_key($dc2, array_flip($sda))
 					// MAPS
 					$mgl = $us->q->loadGeoLevels('', -1, true);
-					$t->assign ("mgel", $mgl);
-					$range[] = array(10, "1 - 10", "ffff99");
-					$range[] = array(100, "11 - 100", "ffff00");
-					$range[] = array(1000, "101 - 1000", "ffcc00");
-					$range[] = array(10000, "1001 - 10000", "ff6600");
-					$range[] = array(100000, "10001 - 100000", "cc0000");
-					$range[] = array(1000000, "100001 - 1000000", "660000");
-					$range[] = array('',       "1000001 ->",        "000000");
-					$t->assign ("range", $range);
+					$t->assign('mgel', $mgl);
+					$range[] = array(     10, '1 - 10'          , 'ffff99');
+					$range[] = array(    100, '11 - 100'        , 'ffff00');
+					$range[] = array(   1000, '101 - 1000'      , 'ffcc00');
+					$range[] = array(  10000, '1001 - 10000'    , 'ff6600');
+					$range[] = array( 100000, '10001 - 100000'  , 'cc0000');
+					$range[] = array(1000000, '100001 - 1000000', '660000');
+					$range[] = array(''     , '1000001 ->'      , '000000');
+					$t->assign('range', $range);
 					// STATISTIC
 					$st = array();
 					foreach ($us->q->loadGeoLevels('', -1, false) as $k=>$i)
-						$st["StatisticGeographyId_". $k] = array($i[0], $i[1]);
+						$st['StatisticGeographyId_'. $k] = array($i[0], $i[1]);
 					$std = array();
 					$std = array_merge($std, $us->q->queryLabelsFromGroup('Statistic', $lg));
 					$std = array_merge($std, $st);
-					$t->assign ("std", $std);
+					$t->assign('std', $std);
 
 					/* DATACARDS */
-					//if ($us->UserId == '' || $us->getUserRole($RegionId == '')) {}
-					// Default view of DesInventar
-					$t->assign("usr", $us->UserId);
-					$t->assign("regname", $us->q->getDBInfoValue('RegionLabel'));
+					$t->assign('usr', $us->UserId);
+					$t->assign('regname', $us->q->getDBInfoValue('RegionLabel'));
 					$UserRole = $us->getUserRole($RegionId);
 					$UserRoleValue = $us->getUserRoleValue($RegionId);
 					
 					// Validate if user has permission to access database
 					$dic = $us->q->queryLabelsFromGroup('DB', $lg);
 					switch ($UserRole) {
-						case "ADMINREGION":
-							$t->assign("showconfig", true);
+						case 'ADMINREGION':
+							$t->assign('showconfig', true);
 							$dicrole = $dic['DBRoleAdmin'][0];
 						break;
-						case "OBSERVER":
-							$t->assign("showconfig", true);
-							$t->assign("ro", "disabled");
+						case 'OBSERVER':
+							$t->assign('showconfig', true);
+							$t->assign('ro', 'disabled');
 							$dicrole = $dic['DBRoleObserver'][0];
 						break;
-						case "SUPERVISOR":
+						case 'SUPERVISOR':
 							$dicrole = $dic['DBRoleSupervisor'][0];
 						break;
-						case "USER":
+						case 'USER':
 							$dicrole = $dic['DBRoleUser'][0];
 						break;
 						default:
 							$dicrole = null;
 						break;
 					}
-					$t->assign("dicrole", $dicrole);
-					$t->assign("ctl_effects", true);
+					$t->assign('dicrole', $dicrole);
+					$t->assign('ctl_effects', true);
 					$dis = $us->q->queryLabelsFromGroup('Disaster', $lg);
 					$dis = array_merge($dis, $us->q->queryLabelsFromGroup('Geography', $lg));
-					$t->assign("dis", $dis);
-					$t->assign("rc1", $us->q->queryLabelsFromGroup('Record|1', $lg));
-					$t->assign("rc2", $us->q->queryLabelsFromGroup('Record|2', $lg));
-					$t->assign("eve", $us->q->queryLabelsFromGroup('Event', $lg));
-					$t->assign("cau", $us->q->queryLabelsFromGroup('Cause', $lg));
-					$t->assign("ef1", $us->q->queryLabelsFromGroup('Effect|People', $lg));
-					$t->assign("ef2", $us->q->queryLabelsFromGroup('Effect|Economic', $lg));
-					$t->assign("ef3", $us->q->queryLabelsFromGroup('Effect|Affected', $lg));
+					$t->assign('dis', $dis);
+					$t->assign('rc1', $us->q->queryLabelsFromGroup('Record|1', $lg));
+					$t->assign('rc2', $us->q->queryLabelsFromGroup('Record|2', $lg));
+					$t->assign('eve', $us->q->queryLabelsFromGroup('Event', $lg));
+					$t->assign('cau', $us->q->queryLabelsFromGroup('Cause', $lg));
+					$t->assign('ef1', $us->q->queryLabelsFromGroup('Effect|People', $lg));
+					$t->assign('ef2', $us->q->queryLabelsFromGroup('Effect|Economic', $lg));
+					$t->assign('ef3', $us->q->queryLabelsFromGroup('Effect|Affected', $lg));
 					$sc3 = $us->q->querySecLabelFromGroup('Effect|Affected', $lg);
-					$t->assign("sc3", $sc3);
-					$t->assign("ef4", $us->q->queryLabelsFromGroup('Effect|More', $lg));
-					$t->assign("sec", $us->q->queryLabelsFromGroup('Sector', $lg));
-					//$t->assign("rcsl", $us->q->queryLabelsFromGroup('RecordStatus', $lg));
-					$t->assign("dmg", $us->q->queryLabelsFromGroup('MetGuide', $lg));
+					$t->assign('sc3', $sc3);
+					$t->assign('ef4', $us->q->queryLabelsFromGroup('Effect|More', $lg));
+					$t->assign('sec', $us->q->queryLabelsFromGroup('Sector', $lg));
+					//$t->assign('rcsl', $us->q->queryLabelsFromGroup('RecordStatus', $lg));
+					$t->assign('dmg', $us->q->queryLabelsFromGroup('MetGuide', $lg));
 					
 					// Geography Levels
 					$GeoLevelList = $us->getGeoLevels();
-					$t->assign("GeoLevelList", $GeoLevelList);
+					$t->assign('GeoLevelList', $GeoLevelList);
 					
 					$lev = 0;
-					$t->assign("lev", $lev);
-					$t->assign("levmax", $us->q->getMaxGeoLev());
-					$t->assign("levname", $us->q->loadGeoLevById($lev));
-					$t->assign("geol", $us->q->loadGeography($lev));
+					$t->assign('lev', $lev);
+					$t->assign('levmax', $us->q->getMaxGeoLev());
+					$t->assign('levname', $us->q->loadGeoLevById($lev));
+					$t->assign('geol', $us->q->loadGeography($lev));
 					$gItems = $us->getGeographyItemsByLevel(0, '');
 					$t->assign('GeoLevelItems', $gItems);
-					$t->assign("evel", $us->q->loadEvents(null, "active", $lg));
-					$t->assign("caul", $us->q->loadCauses(null, "active", $lg));
-					$t->assign("eefl", $us->q->getEEFieldList("True"));
+					$t->assign('evel', $us->q->loadEvents(null, 'active', $lg));
+					$t->assign('caul', $us->q->loadCauses(null, 'active', $lg));
+					$t->assign('eefl', $us->q->getEEFieldList('True'));
 
 					$t->assign('RegionId', $RegionId);
 					$t->assign('UserRole', $UserRole);
@@ -406,7 +403,7 @@ switch ($cmd) {
 					
 					/* BEGIN THEMATIC MAP */
 					// 2010-01-18 (jhcaiced) Windows machines doesn't use remote servers
-					if (isset($_SERVER["WINDIR"])) {
+					if (isset($_SERVER['WINDIR'])) {
 						$hasInternet = 0;
 					} else {
 						// Linux machines are assumed to be connected to internet
@@ -418,27 +415,27 @@ switch ($cmd) {
 						*/
 					}	
 					// 2009-07-14 (jhcaiced) Configure GoogleMapsKey
-					$GoogleMapsKey = "";
-					switch($_SERVER["SERVER_NAME"]) {
-						case "devel.desinventar.org":
+					$GoogleMapsKey = '';
+					switch($_SERVER['SERVER_NAME']) {
+						case 'devel.desinventar.org':
 							$GoogleMapsKey = 'ABQIAAAALchGiIjlsbdmE3fN4eRcYBQB70apFGkcE_JIKPq7c7oktNLHXhTU2xdzBNS_-XzWYh911SdinR2Xkw';
 							break;
-						case "online.desinventar.org":
-							$GoogleMapsKey = "ABQIAAAAv_HCDVf4YK_pJceWBA7XmRQHPIpdtLPiHEY9M3_iWXAS0AXQLhTwoORtm0ZLuqG03CB3sP09KKDtAg";		
+						case 'online.desinventar.org':
+							$GoogleMapsKey = 'ABQIAAAAv_HCDVf4YK_pJceWBA7XmRQHPIpdtLPiHEY9M3_iWXAS0AXQLhTwoORtm0ZLuqG03CB3sP09KKDtAg';		
 							break;
 						/*
-						case "192.168.0.13":
-							$GoogleMapsKey = "ABQIAAAAv_HCDVf4YK_pJceWBA7XmRRT41YKyiJ82KgcK-Dai8T6I93cWxT4pcci6xQX6tWCkefVHbB2AtUGKw";
+						case '192.168.0.13':
+							$GoogleMapsKey = 'ABQIAAAAv_HCDVf4YK_pJceWBA7XmRRT41YKyiJ82KgcK-Dai8T6I93cWxT4pcci6xQX6tWCkefVHbB2AtUGKw';
 							break;
 						*/
-						case "localhost":
-							$GoogleMapsKey = "ABQIAAAAv_HCDVf4YK_pJceWBA7XmRT2yXp_ZAY8_ufC3CFXhHIE1NvwkxQrE9s8Pd9b8nrmaDwyyilebSXcPw";
+						case 'localhost':
+							$GoogleMapsKey = 'ABQIAAAAv_HCDVf4YK_pJceWBA7XmRT2yXp_ZAY8_ufC3CFXhHIE1NvwkxQrE9s8Pd9b8nrmaDwyyilebSXcPw';
 							break;
-						case "127.0.0.1":
-							$GoogleMapsKey = "ABQIAAAAv_HCDVf4YK_pJceWBA7XmRRi_j0U6kJrkFvY4-OX2XYmEAa76BSA4JvNpGUXBDLtWrA-lnRXmTahHg";
+						case '127.0.0.1':
+							$GoogleMapsKey = 'ABQIAAAAv_HCDVf4YK_pJceWBA7XmRRi_j0U6kJrkFvY4-OX2XYmEAa76BSA4JvNpGUXBDLtWrA-lnRXmTahHg';
 							break;
 						default:
-							$GoogleMapsKey = "";
+							$GoogleMapsKey = '';
 							break;
 					}
 					$t->assign('GoogleMapsKey', $GoogleMapsKey);
