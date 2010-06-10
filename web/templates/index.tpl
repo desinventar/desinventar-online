@@ -33,8 +33,8 @@
 	<script type="text/javascript" src="js/main.js?version={-$jsversion-}"></script>
 
 	{-if $desinventarHasInternet -}
-		{-if $GoogleMapsKey != '' -}
-			<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={-$GoogleMapsKey-}"></script>
+		{-if $desinventarGoogleMapsKey != '' -}
+			<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={-$desinventarGoogleMapsKey-}"></script>
 		{-/if-}
 		{-if $hasVEMap -}
 			<script src='http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.1'></script>

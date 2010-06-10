@@ -49,7 +49,7 @@ function onReadyThematicMap() {
 		met1.setVisibility(false);
 		map.addLayer(met1);
 
-		if (jQuery('#prmGoogleMapsKey').val() != '') {
+		if (jQuery('#desinventarGoogleMapsKey').val() != '') {
 			// maps.google.com - Base Layer
 			var google1 = new OpenLayers.Layer.Google("Google Basic", 
 											  {type: G_NORMAL_MAP, 'sphericalMercator': true});
