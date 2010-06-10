@@ -47,7 +47,7 @@
 	<form id="DICard" action="cards.php" method="POST" target="dic">
 		<input type="hidden" id="RegionId"           name="RegionId" value="{-$RegionId-}" />
 		<input type="hidden" id="DisasterId"         name="DisasterId" value="" />
-		<input type="hidden" id="RecordAuthor"       name="RecordAuthor" value="{-$usr-}" />
+		<input type="hidden" id="RecordAuthor"       name="RecordAuthor" value="" />
 		<input type="hidden" id="RecordCreation"     name="RecordCreation" />
 		<input type="hidden" id="_CMD"               name="_CMD" value="" />
 		<input type="hidden" id="PrevDisasterSerial" name="PrevDisasterSerial" value="" />
@@ -292,7 +292,7 @@
 							</td>
 						</tr>
 						{-assign var="tabeef" value="200"-}
-						{-foreach name=eefl key=key item=item from=$eefl-}
+						{-foreach name=eefl key=key item=item from=$EEFList-}
 							{-assign var="tabeef" value="`$tabeef+1`"-}
 							{-if ($smarty.foreach.eefl.iteration - 1) % 3 == 0-}
 								<tr>
@@ -327,7 +327,7 @@
 								<select id="EventId" name="EventId" style='width: 180px;' tabindex="{-$tabind-}"
 									class="line" onFocus="showtip('{-$eve.EventName[2]-}', 'lightblue')">
 									<option value=""></option>
-									{-foreach name=eln key=key item=item from=$evel-}
+									{-foreach name=eln key=key item=item from=$EventList-}
 										<option value="{-$key-}" onKeyPress="showtip('{-$item[1]-}', 'lightblue')" 
 											onMouseOver="showtip('{-$item[1]-}', 'lightblue')">{-$item[0]-}</option>
 									{-/foreach-}
@@ -369,7 +369,7 @@
 								<select id="CauseId" name="CauseId" style='width: 180px;' class="line" 
 									tabindex="{-$tabind-}" onFocus="showtip('{-$cau.CauseName[2]-}', '#ffffc0')">
 									<option value=""></option>
-									{-foreach name=cln key=key item=item from=$caul-}
+									{-foreach name=cln key=key item=item from=$CauseList-}
 										<option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}', '#ffffc0')">{-$item[0]-}</option>
 									{-/foreach-}
 								</select>

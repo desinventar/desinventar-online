@@ -233,11 +233,7 @@ if (isset($_GET['u'])) {
 		default:
 			//if ($us->UserId == '' || $us->getUserRole($RegionId == '')) {}
 			// Default view of DesInventar
-			$t->assign('usr', $us->UserId);
-			$t->assign('regname', $us->q->getDBInfoValue('RegionLabel'));
 			$UserRole = $us->getUserRole($RegionId);
-			$UserRoleValue = $us->getUserRoleValue($RegionId);
-			
 			// Validate if user has permission to access database
 			$dic = $us->q->queryLabelsFromGroup('DB', $lg);
 			switch ($UserRole) {
@@ -276,23 +272,17 @@ if (isset($_GET['u'])) {
 			$t->assign('sc3', $sc3);
 			$t->assign('ef4', $us->q->queryLabelsFromGroup('Effect|More', $lg));
 			$t->assign('sec', $us->q->queryLabelsFromGroup('Sector', $lg));
-			//$t->assign('rcsl', $us->q->queryLabelsFromGroup('RecordStatus', $lg));
 			$t->assign('dmg', $us->q->queryLabelsFromGroup('MetGuide', $lg));
 			
 			// Geography Levels
 			$GeoLevelList = $us->getGeoLevels();
 			$t->assign('GeoLevelList', $GeoLevelList);
 			
-			$lev = 0;
-			$t->assign('lev', $lev);
-			$t->assign('levmax', $us->q->getMaxGeoLev());
-			$t->assign('levname', $us->q->loadGeoLevById($lev));
-			$t->assign('geol', $us->q->loadGeography($lev));
 			$gItems = $us->getGeographyItemsByLevel(0, '');
 			$t->assign('GeoLevelItems', $gItems);
-			$t->assign('evel', $us->q->loadEvents(null, 'active', $lg));
-			$t->assign('caul', $us->q->loadCauses(null, 'active', $lg));
-			$t->assign('eefl', $us->q->getEEFieldList('True'));
+			$t->assign('EventList', $us->q->loadEvents(null, 'active', $lg));
+			$t->assign('CauseList', $us->q->loadCauses(null, 'active', $lg));
+			$t->assign('EEFList', $us->q->getEEFieldList('True'));
 
 			$t->display('cards.tpl');
 		break;
