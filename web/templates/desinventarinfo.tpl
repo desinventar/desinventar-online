@@ -10,5 +10,5 @@
 	<input type="hidden" id="desinventarModule"        value="{-$desinventarModule-}" />
 	<input type="hidden" id="desinventarRegionId"      value="{-$desinventarRegionId-}" />
 	<input type="hidden" id="desinventarHasInternet"   value="{-$desinventarHasInternet-}" />
-	<input type="hidden" id="prmGoogleMapsKey"         value="{-$GoogleMapsKey-}" />
+	<input type="hidden" id="desinventarGoogleMapsKey" value="{-$desinventarGoogleMapsKey-}" />
 </div>
