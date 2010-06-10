@@ -30,6 +30,9 @@ function onReadyPortal() {
 		return false;
 	});
 
+	// Expand first region group at start
+	jQuery('.RegionGroup:first').trigger('click');
+
 	// Handle clicks on countries that return a list of regions
 	jQuery('.RegionList').click(function() {
 		var country = jQuery(this).attr('alt');
@@ -119,8 +122,8 @@ function onReadyPortal() {
 		jQuery('body').trigger('UserLoggedIn');
 	} else {
 		jQuery('body').trigger('UserLoggedOut');
-	}		
-};
+	}
+}; //onReadyPortal()
 
 function updateDatabaseList(CountryIsoCode,searchByCountry) {
 	jQuery(".portalcontent").hide();
