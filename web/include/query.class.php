@@ -7,7 +7,7 @@ class Query extends PDO {
 	public $RegionId = "";
 	public $dreg = null;
 	public $core = null;
-	public $dbfile = '';
+	public $DBFile = '';
 
 	public function __construct() {
 		if (!extension_loaded('pdo')) {
@@ -56,14 +56,18 @@ class Query extends PDO {
 		return $DBFile;
 	}
 	
-	public function setDBConnection($prmRegionId) {
+	public function setDBConnection($prmRegionId, $prmDBFile='') {
 		$iReturn = ERR_NO_ERROR;
 		$DBFile = VAR_DIR;
 		if ($prmRegionId != '') {
 			if ($prmRegionId == 'core') {
 				$DBFile .= "/main/core.db";
 			} else {
-				$DBFile .= "/database/" . $prmRegionId ."/desinventar.db";
+				if ($prmDBFile == '') {
+					$DBFile .= "/database/" . $prmRegionId ."/desinventar.db";
+				} else {
+					$DBFile = $prmDBFile;
+				}
 			}
 			if (file_exists($DBFile)) {
 				try {
@@ -71,7 +75,7 @@ class Query extends PDO {
 					// set the error reporting attribute
 					$this->dreg->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					$this->RegionId = $prmRegionId;
-					$this->dbfile = $DBFile;
+					$this->DBFile = $DBFile;
 				} catch (PDOException $e) {
 					showErrorMsg($e->getMessage());
 				}

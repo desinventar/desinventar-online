@@ -10,6 +10,7 @@
 	require_once(BASE . '/include/diregion.class.php');
 	
 	$RegionId = 'ECU-1250695659-ecuador_sist_de_inf_de_desastres_y_emergencias';
+	$RegionId = 'ECU-1250695011-ecuador_inventario_historico_de_desastres';
 	$us->login('diadmin','di8');
 	$us->open($RegionId);
 	//$r = new DIRegion($us, $RegionId);
