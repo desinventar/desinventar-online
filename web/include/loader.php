@@ -52,7 +52,9 @@ if (isset($_SERVER['HTTP_HOST'])) {
 			$_SERVER['DI8_WEB']      = '/usr/share/desinventar-8.2/web';
 		}
 		$_SERVER['DI8_WWWDIR']   = '/var/www/desinventar-8.2';
-		$_SERVER['DI8_DATADIR']  = '/var/lib/desinventar-8.2';
+		if (! isset($_SERVER['DI8_DATADIR'])) {
+			$_SERVER['DI8_DATADIR']  = '/var/lib/desinventar-8.2';
+		}
 		$_SERVER['DI8_CACHEDIR'] = '/var/cache/Smarty/di8';
 	}
 } else {
