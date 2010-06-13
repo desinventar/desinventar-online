@@ -312,7 +312,7 @@
 					<!-- END EXTRA EFFECTS FIELDS -->
 				</td>
 			</tr>
-			<!-- BEG EVENT SECTION -->
+			<!-- BEGIN EVENT SECTION -->
 			<tr style="border:1px solid #ff0;">
 				<td width="30px" valign="top" style="border:0px;">
 					<img src="images/di_evetag.png" 

@@ -392,9 +392,9 @@ switch ($cmd) {
 					$t->assign('geol', $us->q->loadGeography($lev));
 					$gItems = $us->getGeographyItemsByLevel(0, '');
 					$t->assign('GeoLevelItems', $gItems);
-					$t->assign('evel', $us->q->loadEvents(null, 'active', $lg));
-					$t->assign('caul', $us->q->loadCauses(null, 'active', $lg));
-					$t->assign('eefl', $us->q->getEEFieldList('True'));
+					$t->assign('EventList', $us->q->loadEvents(null, 'active', $lg));
+					$t->assign('CauseList', $us->q->loadCauses(null, 'active', $lg));
+					$t->assign('EEFList', $us->q->getEEFieldList('True'));
 
 					$t->assign('RegionId', $RegionId);
 					$t->assign('desinventarUserRole', $desinventarUserRole);
