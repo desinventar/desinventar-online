@@ -6,7 +6,7 @@ Summary: DesInventar - Disaster Inventory System
 %define name1 desinventar
 %define major 82
 Name: %{name1}%{major}
-Version: 8.2.0.66
+Version: 8.2.0.79
 Release: 1%{dist}
 License: Propietary
 Group: Applications/Disaster
@@ -20,11 +20,12 @@ BuildRoot: %{_tmppath}/%{name}-buildroot
 
 Requires: php >= 5.1.0
 Requires: php-gd php-Smarty
-Requires: extJS jpgraph jquery
+Requires: extJS jpgraph
 Requires: httpd
 Requires: openlayers mapserver
 Requires: liberation-fonts-extras
 Requires: sqlite >= 3.6.14
+Requires: jquery
 
 %define DI_DIR    %{_prefix}/share/desinventar-8.2
 %define WEB_DIR   %{DI_DIR}/web
