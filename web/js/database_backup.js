@@ -5,13 +5,17 @@ function onReadyDatabaseBackup() {
 	jQuery('#btnDBBackupDoBackup').click(function() {
 		jQuery('#divDBBackupProgress').show();
 		jQuery.post(jQuery('#desinventarURL').val(),
-			{cmd : 'getversion'
+			{cmd      : 'doDatabaseBackup',
+			 RegionId : jQuery('#desinventarRegionId').val()
 			},
 			function(data) {
+				if (data != null) {
+				jQuery('#linkDBBackupDownload').attr('href', data.FileName);
+				}
 				jQuery('#divDBBackupProgress').hide();
-				jQuery('#linkDBBackupDownload').attr('href','http://www.google.com');
 				jQuery('#divDBBackupResults').show();
-			}
+			},
+			'json'
 		);
 	});
 }

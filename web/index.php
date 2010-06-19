@@ -25,6 +25,7 @@ if (!empty($RegionId)) {
 $RegionLabel = $us->q->getDBInfoValue('RegionLabel');
 $t->assign('desinventarRegionLabel', $RegionLabel);
 
+fb($cmd);
 switch ($cmd) {
 	case 'test':
 		$t->display('test.tpl');
@@ -112,8 +113,13 @@ switch ($cmd) {
 	case 'getGraphParameters':
 		$t->display('graphparameters.tpl');
 	break;
-	case 'getRegionBackup':
+	case 'doDatabaseBackup':
+		fb(TMP_DIR);
 		$FileName = TMP_DIR . '/di8backup_' . uuid() . '.zip';
+		$answer = array('Status'   => 'OK', 'FileName' => $FileName);
+		fb($answer);
+		echo json_encode($answer);
+		/*
 		$iReturn = DIRegion::createRegionBackup($us, $RegionId, $FileName);
 		if ($iReturn > 0) {
 			header('Content-type: application/x-zip-compressed');
@@ -122,6 +128,7 @@ switch ($cmd) {
 			readfile($FileName);
 			unlink($FileName);
 		}
+		*/
 	break;
 	case 'savequery':
 	case 'cmdQuerySave':
