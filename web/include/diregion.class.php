@@ -934,22 +934,42 @@ class DIRegion extends DIObject {
 		return $iReturn;
 	}
 	
-	public static function createRegionBackup($us, $RegionId, $OutFile) {
+	public static function createRegionBackup($us,$OutFile) {
 		$iReturn = ERR_NO_ERROR;
-		$zip = new ZipArchive();
-		if ($zip->open($OutFile, ZIPARCHIVE::CREATE) != TRUE) {
+		if ($us->RegionId == '') {
 			$iReturn = ERR_UNKNOWN_ERROR;
-		} else {
-			$DBDir = VAR_DIR . '/database/' . $RegionId ."/";
-			$fhdir = dir($DBDir);
-			while ($file = $fhdir->read()) {
-				if (is_file($DBDir . $file)) {
-					$zip->addFile($DBDir . $file, $file);
+		}
+		
+		if ($iReturn > 0) {
+			$DirName = dirname($OutFile);
+			if (! file_exists($DirName) ) {
+				if (! mkdir($DirName, 0777, true)) {
+					$iReturn = ERR_UNKNOWN_ERROR;
 				}
 			}
-			$fhdir->close();
 		}
-		$zip->close();
+		if ($iReturn > 0) {
+			unlink($OutFile);
+			$zip = new ZipArchive();
+			if ($zip->open($OutFile, ZIPARCHIVE::CREATE) != TRUE) {
+				$iReturn = ERR_UNKNOWN_ERROR;
+			} else {
+				$DBDir = $us->getDBDir();
+				$filelist = array('desinventar.db');
+				$sQuery = "SELECT * FROM GeoCarto ORDER BY GeoLevelId";
+				foreach($us->q->dreg->query($sQuery) as $row) {
+					foreach(array('dbf','shp','shx') as $ext) {
+						array_push($filelist, $row['GeoLevelLayerFile'] . '.' . $ext);
+					}
+				}
+				foreach($filelist as $file) {
+					if (file_exists($DBDir . '/' . $file) ) {
+						$zip->addFile($DBDir . '/' . $file, $file);
+					}
+				}
+			}
+			$zip->close();
+		}
 		return $iReturn;
 	}
 	

@@ -711,6 +711,15 @@ class UserSession {
 		} //foreach
 		return $gItems;
 	}
+
+	public function getDBDir() {
+		$DBDir = '';
+		if ($this->RegionId != '') {
+			$DBDir = CONST_DBREGIONDIR . '/' . $this->RegionId;
+		}
+		return $DBDir;
+	}
+
 } //class
 
 </script>
