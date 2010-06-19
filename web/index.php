@@ -25,7 +25,6 @@ if (!empty($RegionId)) {
 $RegionLabel = $us->q->getDBInfoValue('RegionLabel');
 $t->assign('desinventarRegionLabel', $RegionLabel);
 
-fb($cmd);
 switch ($cmd) {
 	case 'test':
 		$t->display('test.tpl');
@@ -114,21 +113,18 @@ switch ($cmd) {
 		$t->display('graphparameters.tpl');
 	break;
 	case 'doDatabaseBackup':
-		fb(TMP_DIR);
-		$FileName = TMP_DIR . '/di8backup_' . uuid() . '.zip';
-		$answer = array('Status'   => 'OK', 'FileName' => $FileName);
-		fb($answer);
-		echo json_encode($answer);
-		/*
-		$iReturn = DIRegion::createRegionBackup($us, $RegionId, $FileName);
+		$BackupFileName = WWWDIR  . '/data/' . $SessionId . '/di8backup_' . $RegionId . '.zip';
+		$BackupURL      = WWWDATA . '/data/' . $SessionId . '/di8backup_' . $RegionId . '.zip';
+		$answer = array('Status'   => 'ERROR');
+		$iReturn = DIRegion::createRegionBackup($us, $BackupFileName);
 		if ($iReturn > 0) {
-			header('Content-type: application/x-zip-compressed');
-			header('Content-Disposition: attachment; filename=' . $RegionId . '.zip');
-			flush();
-			readfile($FileName);
-			unlink($FileName);
+			$answer['Status'] = 'OK';
+			$answer['BackupFileName'] = $BackupFileName;
+			$answer['BackupURL'     ] = $BackupURL;
+		} else {
+			$answer['Status'] = 'ERROR';
 		}
-		*/
+		echo json_encode($answer);
 	break;
 	case 'savequery':
 	case 'cmdQuerySave':
