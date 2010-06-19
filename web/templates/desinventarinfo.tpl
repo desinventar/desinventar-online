@@ -9,6 +9,7 @@
 	<input type="hidden" id="desinventarUserRoleValue" value="{-$desinventarUserRoleValue-}" />
 	<input type="hidden" id="desinventarModule"        value="{-$desinventarModule-}" />
 	<input type="hidden" id="desinventarRegionId"      value="{-$desinventarRegionId-}" />
+	<input type="hidden" id="desinventarRegionLabel"   value="{-$desinventarRegionLabel-}" />
 	<input type="hidden" id="desinventarHasInternet"   value="{-$desinventarHasInternet-}" />
 	<input type="hidden" id="desinventarGoogleMapsKey" value="{-$desinventarGoogleMapsKey-}" />
 </div>
