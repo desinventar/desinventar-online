@@ -18,12 +18,17 @@ if ($cmd == '' && $RegionId == '') {
 	$cmd = 'start';
 }
 // Default Template Values
-$t->assign('desinventarRegionId'    , $RegionId);
-
+$t->assign('desinventarRegionId'   , $RegionId);
 if (!empty($RegionId)) {
 	$us->open($RegionId);
 }
+$RegionLabel = $us->q->getDBInfoValue('RegionLabel');
+$t->assign('desinventarRegionLabel', $RegionLabel);
+
 switch ($cmd) {
+	case 'test':
+		$t->display('test.tpl');
+	break;
 	case 'getversion':
 		print VERSION;
 	break;
@@ -205,8 +210,7 @@ switch ($cmd) {
 						$t->assign('ctl_user', false);
 					}
 					// Set selection map
-					$regname = $us->q->getDBInfoValue('RegionLabel');
-					$t->assign('regname', $regname);
+					$t->assign('regname', $RegionLabel);
 					$t->assign('ctl_showmap', true);
 					// get range of dates
 					$ydb = $us->getDateRange();
@@ -336,7 +340,7 @@ switch ($cmd) {
 
 					/* DATACARDS */
 					$t->assign('usr', $us->UserId);
-					$t->assign('regname', $us->q->getDBInfoValue('RegionLabel'));
+					$t->assign('regname', $RegionLabel);
 					$desinventarUserRole = $us->getUserRole($RegionId);
 					$desinventarUserRoleValue = $us->getUserRoleValue($RegionId);
 					

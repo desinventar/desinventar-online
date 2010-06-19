@@ -244,7 +244,7 @@
 			{-include file="showlistdb.tpl" -}
 		</div> <! id="divDatabaseList" -->
 		<div class="contentBlock" id="divDatabaseBackup">
-			Realizar Backup de Base de Datos
+			{-include file="database_backup.tpl" -}
 		</div>
 	</div><!-- END div id=container-->
 	
