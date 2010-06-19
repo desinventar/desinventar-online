@@ -10,7 +10,15 @@ function onReadyDatabaseBackup() {
 			 RegionId : jQuery('#desinventarRegionId').val()
 			},
 			function(data) {
-				if (data.Status == 'OK') {
+				var bOk = true;
+				if (data == null) {
+					bOk = false;
+				} else {
+					if (data.Status != 'OK') {
+						$bOk = false;
+					}
+				}				
+				if (bOk) {
 					jQuery('#linkDBBackupDownload').attr('href', data.BackupURL);
 					jQuery('.DBBackup').hide();
 					jQuery('#divDBBackupResults').show();
