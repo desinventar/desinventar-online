@@ -963,13 +963,15 @@ class DIRegion extends DIObject {
 				$iReturn = ERR_UNKNOWN_ERROR;
 			} else {
 				$DBDir = $us->getDBDir();
-				$filelist = array('desinventar.db');
+				// Build a list of files that goes into the zip file
+				$filelist = array('desinventar.db','info.xml');
 				$sQuery = "SELECT * FROM GeoCarto ORDER BY GeoLevelId";
 				foreach($us->q->dreg->query($sQuery) as $row) {
 					foreach(array('dbf','shp','shx') as $ext) {
 						array_push($filelist, $row['GeoLevelLayerFile'] . '.' . $ext);
 					}
 				}
+				// Add each file to the zip file
 				foreach($filelist as $file) {
 					if (file_exists($DBDir . '/' . $file) ) {
 						$zip->addFile($DBDir . '/' . $file, $file);
