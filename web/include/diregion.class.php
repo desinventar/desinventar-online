@@ -60,12 +60,20 @@ class DIRegion extends DIObject {
 		}
 		if ($iReturn > 0) {
 			$iReturn = $this->load();
-			// Load eng Info
-			$iReturn = $this->loadInfoTrans('eng');
-			$LangIsoCode = $this->get('LangIsoCode');
-			if ($LangIsoCode != 'eng') {
-				$this->addLanguageInfo($LangIsoCode);
-				$iReturn = $this->loadInfoTrans($LangIsoCode);
+			$XMLFile = $this->getXMLFileName();
+			if (file_exists($XMLFile)) {
+				// XML File Exists, load data...
+				$iReturn = $this->loadFromXML();
+			} else {
+				//XML File does not exists, create xml file from Info Table
+				// Load eng Info
+				$iReturn = $this->loadInfoTrans('eng');
+				$LangIsoCode = $this->get('LangIsoCode');
+				if ($LangIsoCode != 'eng') {
+					$this->addLanguageInfo($LangIsoCode);
+					$iReturn = $this->loadInfoTrans($LangIsoCode);
+				}
+				$iReturn = $this->saveToXML();
 			}
 		}
 		if ($this->get('OptionLanguageList') == '') {
@@ -212,8 +220,8 @@ class DIRegion extends DIObject {
 		if ($iReturn > 0) {
 			// This should update the region.Info table
 			$iReturn = $this->saveInfo();
-			// Create the xml file with RegionInfo
-			//$iReturn = $this->saveToXML($this->getDBDir() . '/info.xml');
+			// Also save to xml file with RegionInfo
+			$iReturn = $this->saveToXML();
 		}
 		return $iReturn;
 	}
@@ -974,44 +982,89 @@ class DIRegion extends DIObject {
 	}
 	
 	public function toXML() {
-		$xml = '';
-		$xml .= '<?xml version="1.0" encoding="utf-8"?>' . "\n";
-		$xml .= '<RegionInfo version="1.0">' . "\n";
-		// Add RegionInfo Sections
+		$doc = new DomDocument('1.0','UTF-8');
+		$root = $doc->createElement('RegionInfo');
+		$root = $doc->appendChild($root);
+		$root->setAttribute('Version', '1.0');
+		
+		// Add Translation Sections
 		foreach(array_keys($this->oField) as $section) {
-			$xml .= '	<' . $section . '>' . "\n";
+			if ($section == 'info') {
+				$occ = $doc->createElement('General');
+				$occ = $root->appendChild($occ);
+			} else {
+				$occ = $doc->createElement('Description');
+				$occ = $root->appendChild($occ);
+				$occ->setAttribute('LangIsoCode', $section);
+			} 
 			foreach($this->oField[$section] as $key => $value) {
-				$xml .= '		<' . $key . '>';
-				$xml .= $value;
-				$xml .= '</' . $key . '>' . "\n";
+				$child = $doc->createElement($key);
+				$child = $occ->appendChild($child);
+				$value = $doc->createTextNode($value);
+				$value = $child->appendChild($value);
 			}
-			$xml .= '	</' . $section . '>' . "\n";
+			
 		}
-		$xml .= '</RegionInfo>' . "\n";
+		$xml = $doc->saveXML();
 		return $xml;
 	}
 	
-	public function saveToXML($filename) {
+	public function getXMLFileName() {
+		$filename = $this->session->getDBDir() . '/info.xml';
+		return $filename;
+	}
+	
+	public function saveToXML($filename='') {
+		if ($filename == '') {
+			$filename = $this->getXMLFileName();
+		}
 		$fh = fopen($filename, 'w');
 		fwrite($fh, $this->toXML());
 		fclose($fh);
 	}
 	
-	public function loadFromXML($filename) {
-		$a = xml2array(file_get_contents($filename));
-		if (array_key_exists('RegionInfo', $a)) {
-			$info = $a['RegionInfo'];
-			foreach(array_keys($info) as $section) {
-				foreach($info[$section] as $key => $value) {
-					if (! is_array($value)) {
-						if ($this->existField($key, $section)) {
-							$this->set($key, $value, $section);
-						}
-					}
-				} //foreach
-			} //foreach
+	public function loadFromXML($filename = '') {
+		$iReturn = ERR_NO_ERROR;
+		if ($filename == '') {
+			$filename = $this->getXMLFileName();
 		}
-	}
+		if (! file_exists($filename) ) {
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		
+		if ($iReturn > 0) {
+			$doc = new DomDocument('1.0','UTF-8');
+			$doc->load($filename);
+			foreach($doc->getElementsByTagName('General') as $tree) {
+				$section = 'info';
+				foreach($tree->childNodes as $node) {
+					$key = $node->nodeName;
+					$value = $node->nodeValue;
+					//print $node->nodeName . ' => ' . $node->nodeValue . "\n";
+					if ($this->existField($key, $section)) {
+						$this->set($key, $value, $section);
+					}
+				}
+			} //foreach
+
+
+			// Add Translated Information
+			foreach($doc->getElementsByTagName('Description') as $tree) {
+				$LangIsoCode = $tree->getAttribute('LangIsoCode');
+				$section = $LangIsoCode;
+				$this->addLanguageInfo($section);
+				foreach($tree->childNodes as $node) {
+					$key = $node->nodeName;
+					$value = $node->nodeValue;
+					//print $node->nodeName . ' => ' . $node->nodeValue . "\n";
+					if ($this->existField($key, $section)) {
+						$this->set($key, $value, $section);
+					}
+				}
+			} //foreach
+		} //if
+		return $iReturn;
+	} //function
 } //class
 
 </script>
