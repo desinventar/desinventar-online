@@ -30,6 +30,7 @@
 	<script type="text/javascript" src="js/user.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/user_login.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/desconsultar.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="js/database_backup.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/main.js?version={-$jsversion-}"></script>
 
 	{-if $desinventarHasInternet -}
@@ -59,6 +60,7 @@
 			onReadyDatacards();
 			onReadyData();
 			onReadyGraphic();
+			onReadyDatabaseBackup();
 			
 			jQuery('#divDatacardsShow').hide();
 			jQuery('#divDatabaseBackup').hide();
