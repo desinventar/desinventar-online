@@ -93,8 +93,8 @@
 				case "mnuDatabaseBackup":
 					hideQueryDesign();
 					jQuery('.contentBlock').hide();
+					jQuery('#divDatabaseBackup').trigger('DBBackupRestart');
 					jQuery('#divDatabaseBackup').show();
-					//window.location = 'index.php?cmd=getRegionBackup&r=' + RegionId;
 				break;
 				case "mcrdcfg":
 					hideQueryDesign();

@@ -7,6 +7,10 @@ body {
 	border:0 none;
 	height:100%;
 }
+h2 {
+	font-family:arial,tahoma,helvetica,cursive;
+	font-size:14px;
+}
 p  {
 	font-family:arial,tahoma,helvetica,cursive;
 	font-size:11px;

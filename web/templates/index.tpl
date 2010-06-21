@@ -245,9 +245,8 @@
 			{-include file="header_simple.tpl" -}
 			{-include file="showlistdb.tpl" -}
 		</div> <! id="divDatabaseList" -->
-		<div class="contentBlock" id="divDatabaseBackup">
-			{-include file="database_backup.tpl" -}
-		</div>
+		<!-- divDatabaseBackup -->
+		{-include file="database_backup.tpl" -}
 	</div><!-- END div id=container-->
 	
 	<!-- SECTION : QUERY DESIGN -->

@@ -22,12 +22,19 @@ function onReadyDatabaseBackup() {
 					jQuery('#linkDBBackupDownload').attr('href', data.BackupURL);
 					jQuery('.DBBackup').hide();
 					jQuery('#divDBBackupResults').show();
+					jQuery('#divDBBackupParameters').show();		
 				} else {
 					jQuery('.DBBackup').hide();
 					jQuery('#divDBBackupErrors').show();
+					jQuery('#divDBBackupParameters').show();		
 				}
 			},
 			'json'
 		);
+	});
+	
+	jQuery('#divDatabaseBackup').bind('DBBackupRestart', function() {
+		jQuery('.DBBackup').hide();
+		jQuery('#divDBBackupParameters').show();		
 	});
 }
