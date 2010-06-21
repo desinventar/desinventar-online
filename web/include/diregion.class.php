@@ -989,7 +989,7 @@ class DIRegion extends DIObject {
 		$root = $doc->appendChild($root);
 		$root->setAttribute('Version', '1.0');
 		
-		// Add Translation Sections
+		// General Info and Translations of Descriptions
 		foreach(array_keys($this->oField) as $section) {
 			if ($section == 'info') {
 				$occ = $doc->createElement('General');
@@ -1007,6 +1007,25 @@ class DIRegion extends DIObject {
 			}
 			
 		}
+		
+		// Add GeoCarto Section
+		$sQuery = "SELECT * FROM GeoCarto ORDER BY GeoLevelId";
+		$occ = $doc->createElement('GeoCarto');
+		$occ = $root->appendChild($occ);
+		foreach($this->session->q->dreg->query($sQuery) as $row) {
+			fb($row['GeoLevelLayerFile']);
+			$level = $doc->createElement('GeoCartoItem');
+			$level = $occ->appendChild($level);
+			$level->setAttribute('GeoLevelId', $row['GeoLevelId']);
+			$level->setAttribute('LangIsoCode', $row['LangIsoCode']);
+			foreach(array('GeoLevelLayerFile','GeoLevelLayerName','GeoLevelLayerCode') as $field) {
+				$child = $doc->createElement($field);
+				$child = $level->appendChild($child);
+				$value = $doc->createTextNode($row[$field]);
+				$value = $child->appendChild($value);
+			} //foreach
+		} //foreach
+		// Save to String...
 		$xml = $doc->saveXML();
 		return $xml;
 	}
