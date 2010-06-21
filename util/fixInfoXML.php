@@ -25,8 +25,8 @@ foreach ($RegionList as $RegionId) {
 	print $RegionId . "\n";
 	$r = new DIRegion($us, $RegionId);
 	$FileName = $us->getDBDir() . '/info.xml';
-	$r->loadFromXML($FileName);
-	//$r->saveToXML($FileName);
+	//$r->loadFromXML($FileName);
+	$r->saveToXML($FileName);
 }
 
 $q = null;
