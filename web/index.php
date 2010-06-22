@@ -29,18 +29,20 @@ fb($cmd);
 
 switch ($cmd) {
 	case 'fileupload':
+		$FileName1 = $_FILES['Filedata']['tmp_name'];
+		$FileName2 = TMP_DIR . '/di8file_' . $us->sSessionId . '_' . $_FILES['Filedata']['name'];
+		rename($FileName1, $FileName2);
+		echo json_encode(array('Status' => 'OK', 'FileName' => 'XXXXXXX1'));
+		/*
 		// fb debug doesn't work in this code... why ?
 		ob_start();
-		print_r($_FILES);
-		print_r($_POST);
-		print_r($_GET);
-		print_r($_SERVER);
+		print_r($_FILES['Filedata']);
 		$out = ob_get_contents();
 		ob_end_clean();		
 		$fp = fopen('/tmp/fileupload.log', 'w+');
 		fwrite($fp, $out);
 		fclose($fp);
-		echo json_encode(array('Status' => 'OK', 'FileName' => 'XXXXXXX1'));
+		*/
 	break;
 	case 'test':
 		$t->display('test.tpl');
