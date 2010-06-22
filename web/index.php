@@ -26,6 +26,12 @@ $RegionLabel = $us->q->getDBInfoValue('RegionLabel');
 $t->assign('desinventarRegionLabel', $RegionLabel);
 
 switch ($cmd) {
+	case 'fileupload':
+		fb($_FILES);
+		fb($_POST);
+		fb($_GET);
+		echo '1';
+	break;
 	case 'test':
 		$t->display('test.tpl');
 	break;
