@@ -19,6 +19,10 @@ function onReadyDatabaseCreate() {
 		// start the upload since it's queued
 		jQuery(this).swfupload('startUpload');
 	})
+	.bind('uploadSuccess', function(event, file, serverData) {
+		var data = eval('(' + serverData + ')');
+		alert(data.Status);
+	})
 	.bind('uploadComplete', function(event, file) {
 		// upload has completed, lets try the next one in the queue
 		jQuery(this).swfupload('startUpload');

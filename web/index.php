@@ -25,12 +25,22 @@ if (!empty($RegionId)) {
 $RegionLabel = $us->q->getDBInfoValue('RegionLabel');
 $t->assign('desinventarRegionLabel', $RegionLabel);
 
+fb($cmd);
+
 switch ($cmd) {
 	case 'fileupload':
-		fb($_FILES);
-		fb($_POST);
-		fb($_GET);
-		echo '1';
+		// fb debug doesn't work in this code... why ?
+		ob_start();
+		print_r($_FILES);
+		print_r($_POST);
+		print_r($_GET);
+		print_r($_SERVER);
+		$out = ob_get_contents();
+		ob_end_clean();		
+		$fp = fopen('/tmp/fileupload.log', 'w+');
+		fwrite($fp, $out);
+		fclose($fp);
+		echo json_encode(array('Status' => 'OK', 'FileName' => 'XXXXXXX1'));
 	break;
 	case 'test':
 		$t->display('test.tpl');
