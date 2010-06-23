@@ -1,6 +1,6 @@
 function onReadyDatabaseImport() {
 	jQuery('#btnDBImportCancel').hide();
-	jQuery('#divDBEdit').hide();
+	//jQuery('#divDBEdit').hide();
 	// Create a SWFUpload instance and attach events...
 	jQuery('#divDBImportControl').swfupload({
 		upload_url: 'index.php',
@@ -38,7 +38,7 @@ function onReadyDatabaseImport() {
 		jQuery.each(data, function(index, value) {
 			if ( (value != null) && (typeof(value) == 'object') ) {
 				jQuery.each(value, function(index, value) {
-					jQuery('#txtDBEditInfo').append(index + ' => ' + value + '<br />');
+					jQuery('#frmDBEdit #' + index).val(value);
 				});
 			} else {
 				jQuery('#txtDBEditInfo').append(index + ' => ' + value + '<br />');

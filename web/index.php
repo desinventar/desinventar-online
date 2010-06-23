@@ -43,6 +43,7 @@ switch ($cmd) {
 			$zip->extractTo(TMP_DIR, 'info.xml');
 			$zip->close();
 			$r = new DIRegion($us, '', TMP_DIR . '/info.xml');
+			$info = array();
 			$info['RegionId']    = $r->get('RegionId');
 			$info['RegionLabel'] = $r->get('RegionLabel');
 			$info['LangIsoCode'] = $r->get('LangIsoCode');
@@ -85,6 +86,7 @@ switch ($cmd) {
 		// Direct access returns a list of public regions on this server
 		$t->assign('lg', $lg);
 		$t->assign('lglst', $us->q->loadLanguages(1));
+		fb($lglst);
 		$t->assign('regionlist', $us->listDB());
 		$t->assign('ctl_noregion', true);
 		$t->assign('ctl_mainpage', true);
