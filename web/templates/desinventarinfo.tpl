@@ -12,4 +12,9 @@
 	<input type="hidden" id="desinventarRegionLabel"   value="{-$desinventarRegionLabel-}" />
 	<input type="hidden" id="desinventarHasInternet"   value="{-$desinventarHasInternet-}" />
 	<input type="hidden" id="desinventarGoogleMapsKey" value="{-$desinventarGoogleMapsKey-}" />
+	<select id="desinventarLanguageList" style="display:none;">
+		{-foreach name=lglst key=key item=item from=$lglst-}
+			<option value="{-$key-}">{-$item-}</option>
+		{-/foreach-}	
+	</select>
 </div>

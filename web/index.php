@@ -65,6 +65,7 @@ switch ($cmd) {
 		*/
 	break;
 	case 'test':
+		$t->assign('lglst', $us->q->loadLanguages(1));
 		$t->display('test.tpl');
 	break;
 	case 'getversion':
