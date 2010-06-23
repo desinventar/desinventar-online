@@ -1407,10 +1407,8 @@ class Query extends PDO {
 		if ($prmLangStatus != '') {
 			$sQuery .= " WHERE LangStatus=" . $prmLangStatus;
 		}
-		fb($sQuery);
 		$langlist = array();
 		foreach ($this->base->query($sQuery) as $row) {
-			fb($row['LangIsoCode']);
 			$langlist[$row['LangIsoCode']] = $row['LangLocalName'];
 		}
 		return $langlist;
