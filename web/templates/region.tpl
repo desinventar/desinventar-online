@@ -73,7 +73,7 @@
 				<td>{-$dic.DBLangIsoCode[0]-}<b style="color:darkred;">*</b></td>
 				<td>
 					<select id="LangIsoCode" name="LangIsoCode" {-$ro-} class="line fixw" tabindex="3">
-						{-foreach name=lglst key=key item=item from=$lglst-}
+						{-foreach name=LanguageList key=key item=item from=$LanguageList-}
 							<option value="{-$key-}">{-$item-}</option>
 						{-/foreach-}
 					</select>

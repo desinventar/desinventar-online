@@ -65,7 +65,8 @@ switch ($cmd) {
 		*/
 	break;
 	case 'test':
-		$t->assign('lglst', $us->q->loadLanguages(1));
+		$t->assign('LanguageList', $us->q->loadLanguages(1));
+		//$t->assign('cntl', $us->q->getCountryList());
 		$t->display('test.tpl');
 	break;
 	case 'getversion':
@@ -73,7 +74,7 @@ switch ($cmd) {
 	break;
 	case 'start':
 		$t->assign('lg', $lg);
-		$t->assign('lglst', $us->q->loadLanguages(1));
+		$t->assign('LanguageList', $us->q->loadLanguages(1));
 		$listdb = $us->listDB();
 		// unique database, choose than
 		if (count($listdb) == 1) {
@@ -86,7 +87,7 @@ switch ($cmd) {
 	case 'main':
 		// Direct access returns a list of public regions on this server
 		$t->assign('lg', $lg);
-		$t->assign('lglst', $us->q->loadLanguages(1));
+		$t->assign('LanguageList', $us->q->loadLanguages(1));
 		$t->assign('regionlist', $us->listDB());
 		$t->assign('ctl_noregion', true);
 		$t->assign('ctl_mainpage', true);
@@ -207,7 +208,7 @@ switch ($cmd) {
 				$_SESSION['lang'] = $get['lang'];
 			}
 			// Direct access returns a list of public regions on this server
-			$t->assign('lglst', $us->q->loadLanguages(1));
+			$t->assign('LanguageList', $us->q->loadLanguages(1));
 			switch ($get['cmd']) {
 				case 'getGeoId':
 					$code = $us->q->getObjectNameById($get['GeoCode'], 'GEOCODE');
