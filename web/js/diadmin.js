@@ -378,7 +378,7 @@
 		var key = window.event ? e.keyCode : e.which;
 		var keychar = String.fromCharCode(key);
 		var opt = type.split(":"); // 0=type; 1=minlength; 2=minval-maxval
-			// Accept keys: backspace, tab, shift, cntl, insert, delete
+			// Accept keys: backspace, tab, shift, ctrl, insert, delete
 			//        pagedown, pageup, rows
 		var spckey = (key==8 || key==9 || key==17 || key==20 ||
 		              key==45 || key==46 || (key>=33 && key<=40) || key==0);

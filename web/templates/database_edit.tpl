@@ -32,7 +32,7 @@
 				CountryIso:
 			</td>
 			<td>
-				<input type="text" id="CountryIso"  class="line fixw" size="40" /><br />
+				<span id="spanCountryIso"></span>
 			</td>
 		</tr>
 	</form>

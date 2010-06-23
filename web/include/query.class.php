@@ -606,11 +606,11 @@ class Query extends PDO {
 	}
 
 	function getCountryList() {
-		$sql = "SELECT CountryIso, CountryName FROM Country ORDER BY CountryName";
+		$sQuery = "SELECT CountryIso, CountryName FROM Country ORDER BY CountryName";
 		$data = array();
-		$res = $this->base->query($sql);
-		foreach ($res as $row)
-		  $data[$row['CountryIso']] = $row['CountryName'];
+		foreach($this->base->query($sQuery) as $row) {
+			$data[$row['CountryIso']] = $row['CountryName'];
+		}
 		return $data;
 	}
 
