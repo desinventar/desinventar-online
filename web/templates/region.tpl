@@ -58,12 +58,14 @@
 		<table class="grid">
 			<tr>
 				<td>{-#tregcntlist#-}<b style="color:darkred;">*</b></td>
-				<td><select id="CountryIso" name="CountryIso" class="fixw" tabindex="1">
+				<td>
+					<select id="CountryIso" name="CountryIso" class="fixw" tabindex="1">
 						<option value=""></option>
-{-foreach name=cnt key=key item=item from=$cntl-}
-						<option value="{-$key-}">{-$item-}</option>
-{-/foreach-}
-					</select></td>
+						{-foreach name=CountryList key=key item=item from=$CountryList-}
+							<option value="{-$key-}">{-$item-}</option>
+						{-/foreach-}
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<td>{-#tregnamlist#-}<b style="color:darkred;">*</b></td>

@@ -4,6 +4,7 @@ function onReadyDatabaseImport() {
 	
 	// Copy Select Control with Language List to this form
 	jQuery('#desinventarLanguageList').clone().attr('id','LangIsoCode').appendTo('#frmDBEdit #spanLangIsoCode').show();
+	jQuery('#desinventarCountryList').clone().attr('id','CountryIso').appendTo('#frmDBEdit #spanCountryIso').show();
 
 	// Create a SWFUpload instance and attach events...
 	jQuery('#divDBImportControl').swfupload({

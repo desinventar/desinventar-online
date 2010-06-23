@@ -66,7 +66,7 @@ switch ($cmd) {
 	break;
 	case 'test':
 		$t->assign('LanguageList', $us->q->loadLanguages(1));
-		//$t->assign('cntl', $us->q->getCountryList());
+		$t->assign('CountryList', $us->q->getCountryList());
 		$t->display('test.tpl');
 	break;
 	case 'getversion':
@@ -88,6 +88,7 @@ switch ($cmd) {
 		// Direct access returns a list of public regions on this server
 		$t->assign('lg', $lg);
 		$t->assign('LanguageList', $us->q->loadLanguages(1));
+		$t->assign('CountryList', $us->q->getCountryList());
 		$t->assign('regionlist', $us->listDB());
 		$t->assign('ctl_noregion', true);
 		$t->assign('ctl_mainpage', true);
@@ -209,6 +210,7 @@ switch ($cmd) {
 			}
 			// Direct access returns a list of public regions on this server
 			$t->assign('LanguageList', $us->q->loadLanguages(1));
+			$t->assign('CountryList', $us->q->getCountryList());
 			switch ($get['cmd']) {
 				case 'getGeoId':
 					$code = $us->q->getObjectNameById($get['GeoCode'], 'GEOCODE');
