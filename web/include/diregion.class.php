@@ -43,10 +43,16 @@ class DIRegion extends DIObject {
 		$this->set('PeriodEndDate', '');
 
 		$prmRegionId = '';
+		$XMLFile = '';
 		$num_args = func_num_args();
 		if ($num_args >= 2) {
 			// Load region if parameter was specified
 			$prmRegionId = func_get_arg(1);
+			if ($num_args >= 3) {
+				// Load Info from Specified XML File
+				$prmRegionId = '';
+				$XMLFile = func_get_arg(2);
+			}
 		} else {
 			// Try to load region from Current Session if no parameter was specified
 			if ( ($prmSession->RegionId != '') && ($prmSession->RegionId != 'core')) {
@@ -60,21 +66,29 @@ class DIRegion extends DIObject {
 		}
 		if ($iReturn > 0) {
 			$iReturn = $this->load();
-			$XMLFile = $this->getXMLFileName();
-			if (file_exists($XMLFile)) {
-				// XML File Exists, load data...
-				$iReturn = $this->loadFromXML();
+			fb($XMLFile);
+			if ($XMLFile != '') {
+				// Load Info from specified XML File
+				$iReturn = $this->loadFromXML($XMLFile);
+				fb('ok');
 			} else {
-				//XML File does not exists, create xml file from Info Table
-				// Load eng Info
-				$iReturn = $this->loadInfoTrans('eng');
-				$LangIsoCode = $this->get('LangIsoCode');
-				if ($LangIsoCode != 'eng') {
-					$this->addLanguageInfo($LangIsoCode);
-					$iReturn = $this->loadInfoTrans($LangIsoCode);
-				}
-				$iReturn = $this->saveToXML();
-			}
+				// Attempt to load from XML in Region directory...
+				$XMLFile = $this->getXMLFileName();
+				if (file_exists($XMLFile)) {
+					// XML File Exists, load data...
+					$iReturn = $this->loadFromXML($XMLFile);
+				} else {
+					//XML File does not exists, create xml file from Info Table
+					// Load eng Info
+					$iReturn = $this->loadInfoTrans('eng');
+					$LangIsoCode = $this->get('LangIsoCode');
+					if ($LangIsoCode != 'eng') {
+						$this->addLanguageInfo($LangIsoCode);
+						$iReturn = $this->loadInfoTrans($LangIsoCode);
+					}
+					$iReturn = $this->saveToXML();
+				} //if
+			} //if
 		}
 		if ($this->get('OptionLanguageList') == '') {
 			$this->set('OptionLanguageList', $this->get('LangIsoCode'));

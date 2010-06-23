@@ -25,14 +25,33 @@ if (!empty($RegionId)) {
 $RegionLabel = $us->q->getDBInfoValue('RegionLabel');
 $t->assign('desinventarRegionLabel', $RegionLabel);
 
-fb($cmd);
-
 switch ($cmd) {
 	case 'fileupload':
-		$FileName1 = $_FILES['Filedata']['tmp_name'];
-		$FileName2 = TMP_DIR . '/di8file_' . $us->sSessionId . '_' . $_FILES['Filedata']['name'];
-		rename($FileName1, $FileName2);
-		echo json_encode(array('Status' => 'OK', 'FileName' => 'XXXXXXX1'));
+		$answer = array('Status' => 'OK');
+		
+		// Rename uploaded file
+		$FileNameOld = $_FILES['Filedata']['tmp_name'];
+		$FileName = TMP_DIR . '/di8file_' . $us->sSessionId . '_' . $_FILES['Filedata']['name'];
+		$answer['FileName'] == $FileName;
+		
+		rename($FileNameOld, $FileName);
+		
+		// Open ZIP File, extract info.xml and return values...
+		$zip = new ZipArchive();
+		$res = $zip->open($FileName);
+		if ($res == TRUE) {
+			$zip->extractTo(TMP_DIR, 'info.xml');
+			$zip->close();
+			$r = new DIRegion($us, '', TMP_DIR . '/info.xml');
+			$info['RegionId']    = $r->get('RegionId');
+			$info['RegionLabel'] = $r->get('RegionLabel');
+			$info['LangIsoCode'] = $r->get('LangIsoCode');
+			$info['CountryIso']  = $r->get('CountryIso');
+			$answer['Info'] = $info;
+		} else {
+			$answer['Status'] = 'ERROR';
+		}
+		echo json_encode($answer);
 		/*
 		// fb debug doesn't work in this code... why ?
 		ob_start();
