@@ -16,7 +16,7 @@
 				{-#mlang#-}:
 				<select onChange="window.location='index.php?lang='+ this.value;">
 				{-foreach name=lglst key=key item=item from=$lglst-}
-					<option value="{-$key-}" {-if $lg == $key-}selected{-/if-}>{-$item[0]-}</option>
+					<option value="{-$key-}" {-if $lg == $key-}selected{-/if-}>{-$item-}</option>
 				{-/foreach-}
 				</select>
 			</td>

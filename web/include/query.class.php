@@ -1402,15 +1402,18 @@ class Query extends PDO {
 		return $dictio;
 	}
 
-	function loadLanguages($status) {
-		$sql = "select LangIsoCode, LangIsoName, LangLocalName from Language";
-		if ($status != null) {
-			$sql .= " where LangStatus=". $status;
+	function loadLanguages($prmLangStatus='') {
+		$sQuery = "SELECT * FROM Language";
+		if ($prmLangStatus != '') {
+			$sQuery .= " WHERE LangStatus=" . $prmLangStatus;
 		}
-		foreach ($this->base->query($sql) as $row) {
-			$lang[$row['LangIsoCode']] = array($row['LangLocalName'], $row['LangIsoName']);
+		fb($sQuery);
+		$langlist = array();
+		foreach ($this->base->query($sQuery) as $row) {
+			fb($row['LangIsoCode']);
+			$langlist[$row['LangIsoCode']] = $row['LangLocalName'];
 		}
-		return $lang;
+		return $langlist;
 	}
   
 	function findDicLabelID($labgrp, $labname) {

@@ -71,11 +71,13 @@
 			</tr>
 			<tr>
 				<td>{-$dic.DBLangIsoCode[0]-}<b style="color:darkred;">*</b></td>
-				<td><select id="LangIsoCode" name="LangIsoCode" {-$ro-} class="line fixw" tabindex="3">
-{-foreach name=lglst key=key item=item from=$lglst-}
-						<option value="{-$key-}">{-$item[0]-}</option>
-{-/foreach-}
-					</select></td>
+				<td>
+					<select id="LangIsoCode" name="LangIsoCode" {-$ro-} class="line fixw" tabindex="3">
+						{-foreach name=lglst key=key item=item from=$lglst-}
+							<option value="{-$key-}">{-$item-}</option>
+						{-/foreach-}
+					</select>
+				</td>
 			</tr>
 			<tr>
 				<td>{-#tregadmlist#-}<b style="color:darkred;">*</b></td>

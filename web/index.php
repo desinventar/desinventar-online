@@ -14,6 +14,7 @@ $get  = $_GET;
 $cmd = getParameter('prmCommand', getParameter('cmd', getParameter('_CMD','')));
 
 $RegionId = getParameter('r', getParameter('RegionId', getParameter('_REG'),''));
+$RegionLabel = '';
 if ($cmd == '' && $RegionId == '') {
 	$cmd = 'start';
 }
@@ -21,10 +22,9 @@ if ($cmd == '' && $RegionId == '') {
 $t->assign('desinventarRegionId'   , $RegionId);
 if (!empty($RegionId)) {
 	$us->open($RegionId);
+	$RegionLabel = $us->q->getDBInfoValue('RegionLabel');
 }
-$RegionLabel = $us->q->getDBInfoValue('RegionLabel');
 $t->assign('desinventarRegionLabel', $RegionLabel);
-
 switch ($cmd) {
 	case 'fileupload':
 		$answer = array('Status' => 'OK');
@@ -86,7 +86,6 @@ switch ($cmd) {
 		// Direct access returns a list of public regions on this server
 		$t->assign('lg', $lg);
 		$t->assign('lglst', $us->q->loadLanguages(1));
-		fb($lglst);
 		$t->assign('regionlist', $us->listDB());
 		$t->assign('ctl_noregion', true);
 		$t->assign('ctl_mainpage', true);

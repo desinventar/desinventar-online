@@ -228,7 +228,7 @@
 						id: 'langSubMenu',
 						items: [
 							{-foreach name=lglst key=key item=item from=$lglst-}
-								{id: '{-$key-}', text: '{-$item[0]-}', handler: onMenuItem},
+								{id: '{-$key-}', text: '{-$item-}', handler: onMenuItem},
 							{-/foreach-}
 							'-'
 						]
