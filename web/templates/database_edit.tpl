@@ -24,7 +24,7 @@
 				LangIsoCode:
 			</td>
 			<td>
-				<input type="text" id="LangIsoCode" class="line fixw" size="40" /><br />
+				<span id="spanLangIsoCode"></span>
 			</td>
 		</tr>
 		<tr>
