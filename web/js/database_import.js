@@ -1,5 +1,6 @@
-function onReadyDatabaseCreate() {
+function onReadyDatabaseImport() {
 	jQuery('#btnDBImportCancel').hide();
+	jQuery('#divDBEdit').hide();
 	// Create a SWFUpload instance and attach events...
 	jQuery('#divDBImportControl').swfupload({
 		upload_url: 'index.php',
@@ -21,6 +22,7 @@ function onReadyDatabaseCreate() {
 		jQuery('#txtDBImportFileName').val(file.name);
 		jQuery('#prgDBImportProgressMark').css('width', '0px');
 		jQuery('#btnDBImportCancel').attr('file_id', file.id).show();
+		jQuery('#divDBEdit').hide();
 		jQuery(this).swfupload('startUpload');
 	})
 	.bind('uploadProgress', function(event, file, bytesLoaded) {
@@ -31,6 +33,17 @@ function onReadyDatabaseCreate() {
 	.bind('uploadSuccess', function(event, file, serverData) {
 		jQuery('#btnDBImportCancel').hide();
 		var data = eval('(' + serverData + ')');
+		jQuery('#divDBEdit').show();
+		jQuery('#txtDBEditInfo').html('');
+		jQuery.each(data, function(index, value) {
+			if ( (value != null) && (typeof(value) == 'object') ) {
+				jQuery.each(value, function(index, value) {
+					jQuery('#txtDBEditInfo').append(index + ' => ' + value + '<br />');
+				});
+			} else {
+				jQuery('#txtDBEditInfo').append(index + ' => ' + value + '<br />');
+			}
+		});
 	})
 	.bind('uploadComplete', function(event, file) {
 		// upload has completed, lets try the next one in the queue
