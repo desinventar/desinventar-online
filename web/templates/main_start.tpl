@@ -15,7 +15,7 @@
 			<td height="100%" align="center">
 				{-#mlang#-}:
 				<select onChange="window.location='index.php?lang='+ this.value;">
-				{-foreach name=lglst key=key item=item from=$lglst-}
+				{-foreach name=LanguageList key=key item=item from=$LanguageList-}
 					<option value="{-$key-}" {-if $lg == $key-}selected{-/if-}>{-$item-}</option>
 				{-/foreach-}
 				</select>

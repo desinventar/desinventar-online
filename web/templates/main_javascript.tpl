@@ -20,7 +20,7 @@
 					jQuery("#dbl").load('user.php?cmd=changepasswd',function() { onReadyUserChangePasswd('dbl-win'); });
 					dblw.show();
 				break;
-				{-foreach name=lglst key=key item=item from=$lglst-}
+				{-foreach name=LanguageList key=key item=item from=$LanguageList-}
 					case "{-$key-}":
 						window.location = "index.php?r={-$reg-}&lang={-$key-}";
 					break;
@@ -227,7 +227,7 @@
 					menu: {
 						id: 'langSubMenu',
 						items: [
-							{-foreach name=lglst key=key item=item from=$lglst-}
+							{-foreach name=LanguageList key=key item=item from=$LanguageList-}
 								{id: '{-$key-}', text: '{-$item-}', handler: onMenuItem},
 							{-/foreach-}
 							'-'
