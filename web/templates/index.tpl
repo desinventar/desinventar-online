@@ -8,6 +8,7 @@
 	<title>{-#ttitle#-} | {-$regname-}</title>
 	<link rel="stylesheet" type="text/css" href="css/desinventar.css?version={-$jsversion-}" />
 	<link rel="stylesheet" type="text/css" href="css/datacards.css?version={-$jsversion-}" />
+	<link rel="stylesheet" type="text/css" href="css/main.css?version={-$jsversion-}" />
 	<script type="text/javascript" src="include/prototype.js"></script>
 	<!-- jQuery -->
 	{-include file="jquery.tpl" -}
@@ -52,7 +53,6 @@
 	<script type="text/javascript" src="/extJS/adapter/ext/ext-base.js"></script>
 	<script type="text/javascript" src="/extJS/ext-all.js"></script>
 	{-include file="main_javascript.tpl" -}
-	{-include file="main_css.tpl" -}
 	<script type="text/javascript" src="include/tabber.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
