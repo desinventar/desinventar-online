@@ -67,13 +67,12 @@
 				jQuery("#ResultHeaderText").hide();
 				jQuery("#ResultHeaderButtonToolbar").hide();
 			{-/if-}
-			{-if $ctl_mainpage -}
-				jQuery("#dcr").hide();
-				jQuery("#divDatabaseList").show();
-			{-/if-}
 			
 			if (jQuery('#desinventarRegionId').val() != '') {
 				jQuery('#dcr').load('index.php?cmd=getRegionFullInfo&r=' + jQuery('#desinventarRegionId').val());
+			} else {
+				jQuery("#dcr").hide();
+				jQuery("#divDatabaseList").show();
 			}
 		});
 	</script>
