@@ -91,7 +91,6 @@ switch ($cmd) {
 		$t->assign('CountryList', $us->q->getCountryList());
 		$t->assign('regionlist', $us->listDB());
 		$t->assign('ctl_noregion', true);
-		$t->assign('ctl_mainpage', true);
 		$t->display('index.tpl');
 	break;
 	case 'listdb':
