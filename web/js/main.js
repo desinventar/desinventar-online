@@ -20,4 +20,8 @@ function onReadyMain() {
 			return false;
 		}
 	});
+
+	jQuery('#divDatacardsShow').hide();
+	jQuery('#divDatabaseBackup').hide();
+	jQuery("#divDatabaseList").hide();
 }

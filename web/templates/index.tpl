@@ -56,16 +56,12 @@
 	<script type="text/javascript" src="include/tabber.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
-			onReadyMain();
 			onReadyDatacards();
 			onReadyData();
 			onReadyGraphic();
 			onReadyDatabaseBackup();
+			onReadyMain();
 			
-			jQuery('#divDatacardsShow').hide();
-			jQuery('#divDatabaseBackup').hide();
-			
-			jQuery("#divDatabaseList").hide();
 			{-if $reg==""-}
 				/* Hide button toolbar if no region is selected */
 				jQuery("#ResultHeaderText").hide();
@@ -75,24 +71,6 @@
 				jQuery("#dcr").hide();
 				jQuery("#divDatabaseList").show();
 			{-/if-}
-			// 2010-02-21 (jhcaiced) This jQuery calls ensures that the Period and Stat
-			// parameters are not empty at the same time.
-			jQuery('#graphParamPeriod').change(function() {
-				var Value = jQuery(this).val();
-				if (Value != '') {
-					jQuery('#graphParamStat').val('');
-				} else {
-					jQuery('#graphParamStat').val('MONTH');
-				}
-			});
-			jQuery('#graphParamStat').change(function() {
-				var Value = jQuery(this).val();
-				if (Value != '') {
-					jQuery('#graphParamPeriod').val('');
-				} else {
-					jQuery('#graphParamPeriod').val('YEAR');
-				}
-			})
 			
 			if (jQuery('#desinventarRegionId').val() != '') {
 				jQuery('#dcr').load('index.php?cmd=getRegionFullInfo&r=' + jQuery('#desinventarRegionId').val());
