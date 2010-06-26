@@ -69,7 +69,7 @@ function onReadyUserAdmin() {
 	// When selecting a row, start editing data...
 	jQuery("#tblUserList tr").click(function() {
 		var UserId = jQuery(this).children("td:first").html();
-		jQuery.getJSON('user.php' + '?cmd=getUserInfo&UserId=' + UserId, function(data) {
+		jQuery.getJSON('user.php' + '?cmd=getUserInfo&UserId=' + UserId + '&t=' + new Date().getTime(), function(data) {
 			jQuery("#txtUserId").attr('readonly','true');
 			jQuery("#txtUserId").val(data.UserId);
 			jQuery("#selCountryIso").val(data.CountryIso);
