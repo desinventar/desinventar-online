@@ -36,7 +36,7 @@
 			return false;
 		$('pp').value = mypag ;
 		var lsAjax = new Ajax.Updater('lst_dis', 'data.php', {
-			method: 'post', parameters: 'r={-$reg-}&page='+ mypag +'&RecordsPerPage={-$RecordsPerPage-}&sql={-$sql-}&fld={-$fld-}',
+			method: 'post', parameters: 'r={-$reg-}&page='+ mypag +'&RecordsPerPage={-$RecordsPerPage-}&sql={-$sql-}&fld={-$fld-}&t=' + new Date().getTime(),
 			onLoading: function(request) {
 				$(div).innerHTML = "<img src='loading.gif>";
 			}

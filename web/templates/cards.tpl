@@ -66,7 +66,7 @@
 				case "cardupd":
 					// check if DC is on use
 					var lsAjax = new Ajax.Updater('distatusmsg', 'cards.php', {
-						method: 'get', parameters: 'r={-$reg-}&cmd=chklocked&DisasterId='+ $('DisasterId').value,
+						method: 'get', parameters: 'r={-$reg-}&cmd=chklocked&DisasterId='+ $('DisasterId').value + '&t=' + new Date().getTime(),
 						onComplete: function(request) {
 							var res = request.responseText;
 							if (res.substr(0,8) == "RESERVED") {

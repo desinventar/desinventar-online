@@ -11,8 +11,9 @@
 	}
 	
 	function updateList(div, url, pars, callback) {
+		var myParams = pars + '&t=' + new Date().getTime();
 		var lsAjax = new Ajax.Updater( div, url, {
-			method: 'get', parameters: pars,
+			method: 'get', parameters: myParams,
 			onLoading: function(request) {
 				//$(div).style.cursor = "wait";
 				if (mod == "")	$(div).innerHTML = waiting;
@@ -29,7 +30,7 @@
 	}
 
 	function updateUserBar(url, cmd, user, pass) {
-		var pars = 'cmd=' + cmd + '&userid=' + user + '&password=' + pass;
+		var pars = 'cmd=' + cmd + '&userid=' + user + '&password=' + pass + '&t=' + new Date().getTime();
 		var upd = true;
 		var rbAjax = new Ajax.Updater('rightcontent', url, {
 			method: 'get', parameters: pars,
@@ -536,7 +537,7 @@
 		}
 		if (l < lev) {
 			var lsAjax = new Ajax.Updater( div, 'cards.php', {
-				method: 'get', parameters: 'r='+ reg +'&cmd=list&GeographyId='+ geo,
+				method: 'get', parameters: 'r='+ reg +'&cmd=list&GeographyId='+ geo + '&t=' + new Date().getTime(),
 				onComplete: function(request)	{
 					getGeoItems(reg, geoid, l+1, lev, src);
 				}
