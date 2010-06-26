@@ -60,19 +60,24 @@ function doDataDisplayPage(page) {
 		var RecordsPerPage = jQuery('#prmDataPageSize').val();
 		var QueryDef = jQuery('#prmDataQueryDef').val();
 		var FieldList = jQuery('#prmDataFieldList').val();
-		var lsAjax = new Ajax.Updater('tblDataRows', 'data.php', {
-			method: 'post', parameters: 'r=' + RegionId + '&page='+ mypag +'&RecordsPerPage=' + RecordsPerPage + '&sql=' + QueryDef + '&fld=' + FieldList,
-			onLoading: function(request) {
-				$(div).innerHTML = "<img src='loading.gif>";
+		
+		jQuery('#tblDataRows').html('<img src="loading.gif">');
+		jQuery.post('data.php',
+			{'r' : RegionId,
+			 'page': mypag,
+			 'RecordsPerPage' : RecordsPerPage,
+			 'sql'            : QueryDef,
+			 'fld'            : FieldList
 			},
-			onComplete: function(request) {
+			function(data) {
+				jQuery('#tblDataRows').html(data);
 				// Reload the jQuery functions on the new DOM elements...
 				onReadyData();
 				jQuery('#prmDataPageNumber').val(mypag);
 				// Set Number of Records in Current Displayed Page
 				jQuery('#prmDataPageRecords').val(jQuery('#tblDataRows tr').size());
 			}
-		});
+		);
 	}
 } //function
 
