@@ -48,10 +48,12 @@
 	function sendData (r, url, pars, val) {
 		reg = r;
 		opt = val;
-		if (mod != "")
+		if (mod != "") { 
 			$(mod + 'addsect').style.display = 'none';
+		}
+		var myParams = pars + '&t=' + new Date().getTime();
 		var myAjax = new Ajax.Request( url, {
-			method: 'get', parameters: pars,
+			method: 'get', parameters: myParams,
 			onLoading: function(request) {
 				window.style.cursor = "wait";
 				uploadMsg(waiting);
@@ -467,7 +469,7 @@
 
 	function setDICardfromId(prmRegionId, prmDisasterId, src) {
 		var lsAjax = new Ajax.Request('cards.php', {
-			method: 'get', parameters: 'r='+ prmRegionId +'&DisasterId='+ prmDisasterId,
+			method: 'get', parameters: 'r='+ prmRegionId +'&DisasterId='+ prmDisasterId + '&t=' + new Date().getTime(),
 			onLoading: function(request) {
 				/*
 				if (src == "DATA") {
