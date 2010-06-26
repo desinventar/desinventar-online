@@ -989,22 +989,22 @@
 				div.innerHTML = waiting;
 				switch (i) {
 					case 0 :
-						myAjax = new Ajax.Updater(div, 'info.php', {method:'get', parameters:'r={-$reg-}'});
+						myAjax = new Ajax.Updater(div, 'info.php', {method:'get', parameters:'r={-$reg-}&t=' + new Date().getTime()});
 					break;
 					case 1 :
-						myAjax = new Ajax.Updater(div, 'geolevel.php', {method:'get', parameters:'r={-$reg-}'});
+						myAjax = new Ajax.Updater(div, 'geolevel.php', {method:'get', parameters:'r={-$reg-}&t=' + new Date().getTime()});
 					break;
 					case 2 :
-						myAjax = new Ajax.Updater(div, 'geography.php', {method:'get', parameters:'r={-$reg-}'});
+						myAjax = new Ajax.Updater(div, 'geography.php', {method:'get', parameters:'r={-$reg-}&t=' + new Date().getTime()});
 					break;
 					case 3 :
-						myAjax = new Ajax.Updater(div, 'events.php', {method:'get', parameters:'r={-$reg-}'});
+						myAjax = new Ajax.Updater(div, 'events.php', {method:'get', parameters:'r={-$reg-}&t=' + new Date().getTime()});
 					break;
 					case 4 :
-						myAjax = new Ajax.Updater(div, 'causes.php', {method:'get', parameters:'r={-$reg-}'});
+						myAjax = new Ajax.Updater(div, 'causes.php', {method:'get', parameters:'r={-$reg-}&t=' + new Date().getTime()});
 					break;
 					case 5 :
-						myAjax = new Ajax.Updater(div, 'extraeffects.php', {method:'get', parameters:'r={-$reg-}'});
+						myAjax = new Ajax.Updater(div, 'extraeffects.php', {method:'get', parameters:'r={-$reg-}&t=' + new Date().getTime()});
 					break;
 				} //switch
 			},

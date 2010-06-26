@@ -21,7 +21,7 @@
 				return false;
 			$('pp').value = mypag ;
 			var lsAjax = new Ajax.Updater('lst_dis', 'statistic.php', {
-				method: 'post', parameters: 'r={-$reg-}&page='+ mypag +'&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}&geo={-$geo-}',
+				method: 'post', parameters: 'r={-$reg-}&page='+ mypag +'&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}&geo={-$geo-}' + '&t=' + new Date().getTime(),
 				onLoading: function(request) {
 					$(div).innerHTML = "<img src='loading.gif>";
 				}
@@ -30,7 +30,7 @@
 		function orderByField(field, dir) {
 			var lsAjax = new Ajax.Updater('lst_dis', 'statistic.php', {
 				method: 'post', 
-				parameters: 'r={-$reg-}&page='+ $('pp').value +'&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}&ord='+ field +'&geo={-$geo-}&dir='+ dir,
+				parameters: 'r={-$reg-}&page='+ $('pp').value +'&rxp={-$rxp-}&sql={-$sql-}&fld={-$fld-}&ord='+ field +'&geo={-$geo-}&dir='+ dir + '&t=' + new Date().getTime(),
 				onLoading: function(request) {
 					$(div).innerHTML = "<img src='loading.gif>";
 				}
