@@ -35,7 +35,19 @@
 	{-include file="main_css.tpl" -}
 	<script type="text/javascript" src="include/tabber.js"></script>
 	<script type="text/javascript">
+
+		function doKeepSessionAlive() {
+			var refreshTime = 60 * 1000; // in milliseconds, so 10 minutes
+			window.setInterval( function() {
+			var url = 'cards.php?u=1&t=' + new Date().getTime();
+			jQuery.get(url);
+			}, refreshTime);
+		}
+		
 		jQuery(document).ready(function() {
+			//Keep Session Open
+			doKeepSessionAlive();
+			
 			jQuery('#divDatacardsShow').hide();
 			jQuery('#divDatabaseBackup').hide();
 			

@@ -58,6 +58,7 @@
 		function setActive() {
 			updateList('dostat', 'cards.php', 'u=1');
 		}
+
 		function onSubmitBtn(btn) {
 			displayDatacardStatusMsg('');
 			$('dic').src="about:blank";
@@ -186,9 +187,6 @@
 				doDatacardNew();
 				return false;
 			});
-			
-			// Create periodic task to keep session alive...
-			var pe = new PeriodicalExecuter(setActive, 60);
 		});
 			
 	</script>
