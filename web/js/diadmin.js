@@ -11,44 +11,32 @@
 	}
 	
 	function updateList(div, url, pars, callback) {
-		var lsAjax = new Ajax.Updater( div, url, {
-			method: 'get', parameters: pars,
-			onLoading: function(request) {
-				//$(div).style.cursor = "wait";
-				if (mod == "")	$(div).innerHTML = waiting;
-				//else  uploadMsg(waiting);
-			},
-			onComplete: function(request)	{
-				if (mod == "") {
-					if ($('div') != null) {
-						$('div').innerHTML = "";
-					}
-				}
-			}
-		});
+		jQuery('#' + div).load(url, pars);
 	}
 
 	function updateUserBar(url, cmd, user, pass) {
-		var pars = 'cmd=' + cmd + '&userid=' + user + '&password=' + pass;
-		var upd = true;
-		var rbAjax = new Ajax.Updater('rightcontent', url, {
-			method: 'get', parameters: pars,
-			onComplete: function(request) {
-				if (cmd == "login")
-					updateList('pagecontent', url, 'cmd=welcome');
-				else if (cmd == "logout")
-					window.location.reload(false);
+		jQuery.post(url,
+			{cmd      : cmd,
+			 userid   : user,
+			 password : pass
 			},
-			onFailure: 	function(request) {
-				$('rightcontent').innerHTML = "{-#hlostconn#-}";
+			function(data) {
+				jQuery('#pagecontent').html(data);
+				if (cmd == "login") {
+					updateList('pagecontent', url, 'cmd=welcome');
+				} else if (cmd == "logout") {
+					window.location.reload(false);
+				}				
 			}
-		});
-	}
+		);
+	} //function
+
 	function sendData (r, url, pars, val) {
 		reg = r;
 		opt = val;
-		if (mod != "")
+		if (mod != "") {
 			$(mod + 'addsect').style.display = 'none';
+		}
 		var myAjax = new Ajax.Request( url, {
 			method: 'get', parameters: pars,
 			onLoading: function(request) {
@@ -57,7 +45,8 @@
 			},
 			onComplete: showResponse
 		} );
-	}
+	} //function
+
 	function showResponse (originalRequest) {
 		var newData = originalRequest.responseText;
 		uploadMsg(newData);
