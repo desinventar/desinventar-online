@@ -23,5 +23,13 @@ function onReadyMain() {
 
 	jQuery('#divDatacardsShow').hide();
 	jQuery('#divDatabaseBackup').hide();
-	jQuery("#divDatabaseList").hide();
+	jQuery('#divDatabaseList').hide();
+	
+	// Tabs for Database Configuration
+	jQuery('#DBConfig_tabs').tabs();
+	jQuery('.classDBConfig_tabs').click(function() {
+		jQuery(jQuery(this).attr('href')).html('<img src="loading.gif" />');
+		jQuery(jQuery(this).attr('href')).load(jQuery(this).attr('data'), {r : jQuery('#desinventarRegionId').val() });
+	});
+	jQuery('.classDBConfig_tabs').first().click();
 }

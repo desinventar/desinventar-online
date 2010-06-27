@@ -53,7 +53,6 @@
 	<script type="text/javascript" src="/extJS/adapter/ext/ext-base.js"></script>
 	<script type="text/javascript" src="/extJS/ext-all.js"></script>
 	{-include file="main_javascript.tpl" -}
-	<script type="text/javascript" src="include/tabber.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			onReadyDatacards();
