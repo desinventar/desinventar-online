@@ -26,7 +26,7 @@ function onReadyStatistic() {
 			return blockChars(event, jQuery(this).val(), 'integer:');
 		}
 	});
-}
+} //function
 
 function doStatDisplayPage(page) {
 	var mypag = page;
@@ -42,20 +42,36 @@ function doStatDisplayPage(page) {
 	}
 	jQuery('#StatCurPage').val(mypag);
 	var RecordsPerPage = jQuery('#prmStatRecordsPerPage').val();
-	var lsAjax = new Ajax.Updater('tblStatRows', 'statistic.php', {
-		method: 'post', parameters: 'r=' + jQuery('#prmStatRegionId').val() + '&page='+ mypag +'&rxp=' + RecordsPerPage +'&sql=' + jQuery('#prmStatQueryDef').val() + '&fld=' + jQuery('#prmStatFieldList').val() + '&geo=' + jQuery('#prmStatGeography').val(),
-		onLoading: function(request) {
-			$(div).innerHTML = "<img src='loading.gif>";
+
+	jQuery('#tblStatRows').html('<img src="loading.gif">');
+	jQuery.post('statistic.php',
+		{r : jQuery('#prmStatRegionId').val(),
+		 page : mypag,
+		 rxp  : RecordsPerPage,
+		 sql  : jQuery('#prmStatQueryDef').val(),
+		 fld  : jQuery('#prmStatFieldList').val(),
+		 geo  : jQuery('#prmStatGeography').val()
+		},
+		function(data) {
+			jQuery('#tblStatRows').html(data);
 		}
-	} );
-}
+	);
+} //function
 
 function doStatOrderByField(field, dir) {
-	var lsAjax = new Ajax.Updater('tblStatRows', 'statistic.php', {
-		method: 'post', 
-		parameters: 'r=' + jQuery('#prmStatRegionId').val() + '&page='+ $('StatCurPage').value +'&rxp=' + jQuery('#prmStatRecordsPerPage').val() + '&sql=' + jQuery('#prmStatQueryDef').val() + '&fld=' + jQuery('#prmStatFieldList').val() + '&ord='+ field + '&geo=' + jQuery('#prmStatGeography').val() + '&dir='+ dir,
-		onLoading: function(request) {
-			$(div).innerHTML = "<img src='loading.gif>";
+	jQuery('#tblStatRows').html('<img src="loading.gif">');
+	jQuery.post('statistic.php',
+		{r  : jQuery('#prmStatRegionId').val(),
+		 page : $('StatCurPage').value,
+		 rxp  : jQuery('#prmStatRecordsPerPage').val(),
+		 sql  : jQuery('#prmStatQueryDef').val(),
+		 fld  : jQuery('#prmStatFieldList').val(),
+		 ord  : field,
+		 geo  : jQuery('#prmStatGeography').val(),
+		 dir  : dir
+		},
+		function(data) {
+			jQuery('#tblStatRows').html(data);
 		}
-	} );
-}
+	);
+} //function
