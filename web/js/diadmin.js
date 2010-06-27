@@ -37,6 +37,7 @@
 		if (mod != "") {
 			$(mod + 'addsect').style.display = 'none';
 		}
+		pars = pars + '&t=' + new Date().getTime();
 		var myAjax = new Ajax.Request( url, {
 			method: 'get', parameters: pars,
 			onLoading: function(request) {
@@ -450,7 +451,7 @@
 		}
 		if (l < lev) {
 			var lsAjax = new Ajax.Updater( div, 'cards.php', {
-				method: 'get', parameters: 'r='+ reg +'&cmd=list&GeographyId='+ geo,
+				method: 'get', parameters: 'r='+ reg +'&cmd=list&GeographyId='+ geo + '&t=' + new Date().getTime(),
 				onComplete: function(request)	{
 					getGeoItems(reg, geoid, l+1, lev, src);
 				}
