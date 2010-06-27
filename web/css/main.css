@@ -25,7 +25,7 @@
   margin:   -35px 0 0 -30px;
 }
 #loading .loading-indicator {
-  background: url(loading.gif) no-repeat;
+  background: url(../loading.gif) no-repeat;
   color:      #555;
   font:       bold 13px tahoma,arial,helvetica;
   padding:    8px 42px;
