@@ -865,43 +865,5 @@
 			{-/foreach-}
 		} //function
 		
-		document.write('<style type="text/css">.tabber{display:none;}<\/style>');
-		
-		var tabberOptions = {
-			'onClick': function(argsObj) {
-				var t = argsObj.tabber;
-				var i = argsObj.index;
-				var div = this.tabs[i].div; // The tab content div
-				var RegionId = jQuery('#desinventarRegionId').val();
-				// Display a loading message
-				div.innerHTML = waiting;
-				switch (i) {
-					case 0 :
-						myAjax = new Ajax.Updater(div, 'info.php', {method:'get', parameters:'r=' + RegionId});
-					break;
-					case 1 :
-						myAjax = new Ajax.Updater(div, 'geolevel.php', {method:'get', parameters:'r=' + RegionId});
-					break;
-					case 2 :
-						myAjax = new Ajax.Updater(div, 'geography.php', {method:'get', parameters:'r=' + RegionId});
-					break;
-					case 3 :
-						myAjax = new Ajax.Updater(div, 'events.php', {method:'get', parameters:'r=' + RegionId});
-					break;
-					case 4 :
-						myAjax = new Ajax.Updater(div, 'causes.php', {method:'get', parameters:'r=' + RegionId});
-					break;
-					case 5 :
-						myAjax = new Ajax.Updater(div, 'extraeffects.php', {method:'get', parameters:'r=' + RegionId});
-					break;
-				} //switch
-			},
-			'onLoad': function(argsObj) {
-				// Load the first tab
-				argsObj.index = 0;
-				this.onClick(argsObj);
-			}
-		}
-		
 		var geotree = new CheckTree('geotree');
 </script>

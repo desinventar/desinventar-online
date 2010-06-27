@@ -46,11 +46,12 @@ function showResult($stat, &$tp) {
 
 $get = $_GET;
 
-if (isset($get['r']) && !empty($get['r'])) {
-	$reg = $get['r'];
-	$us->open($reg);
-} else
+$RegionId = getParameter('r','');
+if ($RegionId != '') {
+	$us->open($RegionId);
+} else {
 	exit();
+}
 
 if (isset($get['cmd'])) {
 	$dat = form2event($get);
