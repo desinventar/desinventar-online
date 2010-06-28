@@ -486,7 +486,6 @@
 									<span onmouseover="Tip('{-$item[1]-}')" onmouseout="UnTip()">
 										{-$item[0]-}<br />
 										<textarea id="{-$key-}" name="{-$key-}" cols="25" style="height: {-if $key=='EffectNotes'-}70{-else-}30{-/if-}px;"
-											onBlur="if(this.value != '') { $('SectorOther').value='-1'; }"
 											onkeypress="return blockChars(event, this.value, 'text:');"
 											onFocus="showtip('{-$item[2]-}', '#f1bd41')" tabindex="{-$tabind-}">
 										</textarea>
