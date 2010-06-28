@@ -26,6 +26,12 @@
 				<input type="button" id="btnDBImportCancel" class="bb2" value="{-#msgDBImportCancel#-}" />
 			</td>
 		</tr>
+		<tr>
+			<td colspan="3">
+				<input type="radio" name="radbtnDBImportOption" value="NEW" checked />Crear nueva base de datos<br />
+				<input type="radio" name="radbtnDBImportOption" value="OVERWRITE" />SobreEscribir base de datos existente<br />
+			</td>
+		</tr>
 		</table>
 	</div>
 </div>
