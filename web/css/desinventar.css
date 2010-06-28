@@ -181,3 +181,19 @@ a:hover	{	color:#00008b; }
 	margin: 40px;
 	border: 1px solid black;
 }
+#divDatabaseImport h2 {
+	font-family:arial,tahoma,helvetica,cursive;
+	font-size:18px;
+	padding: 0px;
+}
+#divDatabaseImport table {
+	padding: 1px;
+}
+#divDatabaseImport {
+	margin: 40px;
+	border: 1px solid black;
+}
+#divDBEdit {
+	margin: 40px;
+	border: 1px solid black;
+}

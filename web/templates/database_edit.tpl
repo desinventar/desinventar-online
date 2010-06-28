@@ -35,5 +35,6 @@
 				<span id="spanCountryIso"></span>
 			</td>
 		</tr>
+		</table>
 	</form>
 </div>

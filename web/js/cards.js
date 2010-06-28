@@ -306,18 +306,20 @@ function setgeo(k, l, desc, opc) {
 }
 
 function DisableEnableForm(xForm, disab) {
-	objElems = xForm.elements;
-	var myname = "";
-	var mysty = "";
-	if (disab)
-		col = "#eee";
-	else
-		col = "#fff";
-	for (i=0; i < objElems.length; i++) {
-		myname = objElems[i].name + "";
-		if (myname.substring(0,1) != "_") {
-			objElems[i].disabled = disab;
-			objElems[i].style.backgroundColor = col;
+	if (xForm != null) {
+		objElems = xForm.elements;
+		var myname = "";
+		var mysty = "";
+		if (disab)
+			col = "#eee";
+		else
+			col = "#fff";
+		for (i=0; i < objElems.length; i++) {
+			myname = objElems[i].name + "";
+			if (myname.substring(0,1) != "_") {
+				objElems[i].disabled = disab;
+				objElems[i].style.backgroundColor = col;
+			}
 		}
 	}
 }
