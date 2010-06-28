@@ -533,9 +533,11 @@
 			ele = $('geolev'+ l);
 		}
 		geo = geoid.substr(0, (l+1) * 5);
-		for (var w=0; w < ele.length; w++) {
-			if (ele.options[w].value == geo)
-				ele.selectedIndex = w ;
+		if (ele != null) {
+			for (var w=0; w < ele.length; w++) {
+				if (ele.options[w].value == geo)
+					ele.selectedIndex = w ;
+			}
 		}
 		if (l < lev) {
 			var lsAjax = new Ajax.Updater( div, 'cards.php', {
