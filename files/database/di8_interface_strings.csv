@@ -465,3 +465,7 @@
 "di8_DBImport","msgDBImportTitle","Importar Base de Datos","Import Database","Importação de banco de dados","Import de base de données"
 "di8_DBImport","msgDBImportFilename","Archivo","Filename","Nome do arquivo","Nom du fichier"
 "di8_DBImport","msgDBImportCancel","Cancelar","Cancel","Cancelar","Annuler"
+"di8_DBEdit","msgDBEditRegionId","Identificador","Identification of areas","Identidade","Id"
+"di8_DBEdit","msgDBEDitRegionLabel","Nombre","Name","Nome","Nom"
+"di8_DBEdit","msgDBEDitLangIsoCode","Idioma","Language","Limguagem","Langue"
+"di8_DBEdit","msgDBEditCountryIso","País","Country","País","Pays"
