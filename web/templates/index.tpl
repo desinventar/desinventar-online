@@ -21,6 +21,9 @@
 	<script type="text/javascript" src="include/palette.js"></script>
 	<script type="text/javascript" src="include/combo-box.js"></script>
 
+	<script type="text/javascript" src="external/swfupload/swfupload.js"></script>
+	<script type="text/javascript" src="external/jquery.swfupload.js"></script>
+
 	<script type="text/javascript" src="js/diadmin.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/cards.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/data.js?version={-$jsversion-}"></script>
@@ -32,6 +35,7 @@
 	<script type="text/javascript" src="js/user_login.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/desconsultar.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/database_backup.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="js/database_import.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/main.js?version={-$jsversion-}"></script>
 
 	{-if $desinventarHasInternet -}
@@ -59,6 +63,7 @@
 			onReadyData();
 			onReadyGraphic();
 			onReadyDatabaseBackup();
+			onReadyDatabaseImport();
 			onReadyMain();			
 		});
 	</script>

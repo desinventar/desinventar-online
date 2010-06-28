@@ -12,15 +12,15 @@
 	<script type="text/javascript" src="external/jquery.swfupload.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
-			onReadyDatabaseBackup();
-			//onReadyDatabaseImport();
+			//onReadyDatabaseBackup();
+			onReadyDatabaseImport();
 		});
 	</script>
 </head>
 <body>
-{-include file="database_backup.tpl"-}
-{-include file="database_import2.tpl"-}
-{-include file="database_edit2.tpl"-}
+{-include file="database_backup2.tpl"-}
+{-include file="database_import.tpl"-}
+{-include file="database_edit.tpl"-}
 {-include file="desinventarinfo.tpl"-}
 </body>
 </html>

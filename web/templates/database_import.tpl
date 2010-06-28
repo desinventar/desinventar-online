@@ -1,6 +1,6 @@
 {-config_load file=`$lg`.conf section="di8_DBImport"-}
 <div class="contentBlock" id="divDatabaseImport">
-	<h2>Crear Base de Datos</h2>
+	<h2>Importar Base de Datos</h2>
 	<div id="divDBImportControl">
 		<table border="0">
 		<tr>

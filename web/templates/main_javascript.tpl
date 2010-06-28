@@ -96,6 +96,11 @@
 					jQuery('#divDatabaseBackup').trigger('DBBackupRestart');
 					jQuery('#divDatabaseBackup').show();
 				break;
+				case "mnuDatabaseImport":
+					hideQueryDesign();
+					jQuery('.contentBlock').hide();
+					jQuery('#divDatabaseImport').show();
+				break;
 				case "mcrdcfg":
 					hideQueryDesign();
 					jQuery('.contentBlock').hide();
@@ -272,8 +277,9 @@
 				{-if $desinventarUserId == "root"-}
 					{id:'mnuUserAdmin', text: '{-#tadminusrs#-}',	handler: onMenuItem  }, //admin Users
 					{id:'mdbsadm', text: '{-#tadminregs#-}',	handler: onMenuItem  }, //admin Databases
+					'-',
+					{id:'mnuDatabaseImport', text: 'Import Databases',	handler: onMenuItem  }
 				{-/if-}
-				'-'
 			]
 		});
 		
@@ -347,167 +353,171 @@
 		// Data
 		var datw;
 		var datb = Ext.get('dat-btn');
-		datb.on('click', function() {
-			if (validateQueryDefinition()) {
-				if (!datw) {
-					datw = new Ext.Window({
-						el:'dat-win',
-						layout:'fit',
-						width:600,
-						height:400, 
-						closeAction:'hide',
-						plain: true,
-						animCollapse: false,
-						items: new Ext.Panel({contentEl: 'dat-cfg', autoScroll: true }),
-						buttons: [
-							{text:'{-#tclean#-}',
-								handler: function() {
-									$('CD').reset();
+		if (datb != null) {
+			datb.on('click', function() {
+				if (validateQueryDefinition()) {
+					if (!datw) {
+						datw = new Ext.Window({
+							el:'dat-win',
+							layout:'fit',
+							width:600,
+							height:400, 
+							closeAction:'hide',
+							plain: true,
+							animCollapse: false,
+							items: new Ext.Panel({contentEl: 'dat-cfg', autoScroll: true }),
+							buttons: [
+								{text:'{-#tclean#-}',
+									handler: function() {
+										$('CD').reset();
+										} //handler
+								},
+								{text:'{-#tsend#-}',
+									handler: function() {
+										if (sendList("result")) {
+											$('DCRes').value = "D";
+											datw.hide();
+											$('bsave').style.visibility = 'visible';
+											$('bprint').style.visibility = 'visible';
+										} else {
+											alert("{-#derrmsgfrm#-}");
+										}
 									} //handler
-							},
-							{text:'{-#tsend#-}',
-								handler: function() {
-									if (sendList("result")) {
-										$('DCRes').value = "D";
+								},
+								{text:'{-#tclose#-}',
+									handler: function() {
 										datw.hide();
-										$('bsave').style.visibility = 'visible';
-										$('bprint').style.visibility = 'visible';
-									} else {
-										alert("{-#derrmsgfrm#-}");
-									}
-								} //handler
-							},
-							{text:'{-#tclose#-}',
-								handler: function() {
-									datw.hide();
-								} //handler
-							}
-						] //button
-					});
+									} //handler
+								}
+							] //button
+						});
+					}
+					datw.show(this);
 				}
-				datw.show(this);
-			}
-		}); // data window
-		
+			}); // data window
+		}
 		// Statistics
 		var stdw;
 		var stdb = Ext.get('std-btn');
-		stdb.on('click', function() {
-			if (validateQueryDefinition()) {
-				if (!stdw) {
-					stdw = new Ext.Window({
-						el:'std-win',  layout:'fit',  width:600, height:400, 
-						closeAction:'hide', plain: true, animCollapse: false,
-						items: new Ext.Panel({contentEl: 'std-cfg', autoScroll: true }),
-						buttons: [
-							{text:'{-#tclean#-}',
-								handler: function() {
-									$('CS').reset();
-								}
-							},
-							{text:'{-#tsend#-}',
-								handler: function() {
-									if (sendStatistic("result")) {
-										$('DCRes').value = "S";
-										stdw.hide();
-										$('bsave').style.visibility = 'visible';
-										$('bprint').style.visibility = 'visible';
-									} else {
-										alert("{-#serrmsgfrm#-}");
+		if (stdb != null) {
+			stdb.on('click', function() {
+				if (validateQueryDefinition()) {
+					if (!stdw) {
+						stdw = new Ext.Window({
+							el:'std-win',  layout:'fit',  width:600, height:400, 
+							closeAction:'hide', plain: true, animCollapse: false,
+							items: new Ext.Panel({contentEl: 'std-cfg', autoScroll: true }),
+							buttons: [
+								{text:'{-#tclean#-}',
+									handler: function() {
+										$('CS').reset();
 									}
-								} //handler
-							},
-							{text:'{-#tclose#-}',
-								handler: function() {
-									stdw.hide();
+								},
+								{text:'{-#tsend#-}',
+									handler: function() {
+										if (sendStatistic("result")) {
+											$('DCRes').value = "S";
+											stdw.hide();
+											$('bsave').style.visibility = 'visible';
+											$('bprint').style.visibility = 'visible';
+										} else {
+											alert("{-#serrmsgfrm#-}");
+										}
+									} //handler
+								},
+								{text:'{-#tclose#-}',
+									handler: function() {
+										stdw.hide();
+									}
 								}
-							}
-						]
-					});
+							]
+						});
+					}
+					stdw.show(this);
 				}
-				stdw.show(this);
-			}
-		}); // statistics
-		
+			}); // statistics
+		}
 		// Graphic
 		var grpw;
 		var grpb = Ext.get('grp-btn');
-		grpb.on('click', function() {
-			if (validateQueryDefinition()) {
-				if (!grpw) {
-					grpw = new Ext.Window({
-						el:'grp-win',  layout:'fit',  width:750, height:420, 
-						closeAction:'hide', plain: true, animCollapse: false,
-						items: new Ext.Panel({contentEl: 'grp-cfg', autoScroll: true }),
-						buttons: [
-							{text:'{-#tclean#-}',
-								handler: function() {
-									$('CG').reset();
+		if (grpb != null) {
+			grpb.on('click', function() {
+				if (validateQueryDefinition()) {
+					if (!grpw) {
+						grpw = new Ext.Window({
+							el:'grp-win',  layout:'fit',  width:750, height:420, 
+							closeAction:'hide', plain: true, animCollapse: false,
+							items: new Ext.Panel({contentEl: 'grp-cfg', autoScroll: true }),
+							buttons: [
+								{text:'{-#tclean#-}',
+									handler: function() {
+										$('CG').reset();
+									}
+								},
+								{text:'{-#tsend#-}',
+									handler: function() {
+										sendGraphic("result");
+										$('DCRes').value = "G";
+										grpw.hide();
+										$('bsave').style.visibility = 'visible';
+										$('bprint').style.visibility = 'visible';
+									}
+								},
+								{text:'{-#tclose#-}',
+									handler: function() {
+										grpw.hide();
+									}
 								}
-							},
-							{text:'{-#tsend#-}',
-								handler: function() {
-									sendGraphic("result");
-									$('DCRes').value = "G";
-									grpw.hide();
-									$('bsave').style.visibility = 'visible';
-									$('bprint').style.visibility = 'visible';
-								}
-							},
-							{text:'{-#tclose#-}',
-								handler: function() {
-									grpw.hide();
-								}
-							}
-						]
-					});
+							]
+						});
+					}
+					grpw.show(this);
 				}
-				grpw.show(this);
-			}
-		}); // Graphics
-		
+			}); // Graphics
+		}
 		// Map
 		var map; // Map Object
 		var mapw;
 		var mapb = Ext.get('map-btn');
-		mapb.on('click', function() {
-			if (validateQueryDefinition()) {
-				if (!mapw) {
-					mapw = new Ext.Window({
-						el:'map-win',  layout:'fit',  width:650, height:400, 
-						closeAction:'hide', plain: true, animCollapse: false,
-						items: new Ext.Panel({contentEl: 'map-cfg', autoScroll: true }),
-						buttons: [
-							{text:'{-#tclean#-}',
-								handler: function() {
-									$('CM').reset();
-								}
-							},
-							{text:'{-#tsend#-}',
-								handler: function() {
-									setfocus('_M+limit[0]');
-									if (sendMap("result")) {
-										$('DCRes').value = "M";
+		if (mapb != null) {
+			mapb.on('click', function() {
+				if (validateQueryDefinition()) {
+					if (!mapw) {
+						mapw = new Ext.Window({
+							el:'map-win',  layout:'fit',  width:650, height:400, 
+							closeAction:'hide', plain: true, animCollapse: false,
+							items: new Ext.Panel({contentEl: 'map-cfg', autoScroll: true }),
+							buttons: [
+								{text:'{-#tclean#-}',
+									handler: function() {
+										$('CM').reset();
+									}
+								},
+								{text:'{-#tsend#-}',
+									handler: function() {
+										setfocus('_M+limit[0]');
+										if (sendMap("result")) {
+											$('DCRes').value = "M";
+											mapw.hide();
+											$('bsave').style.visibility = 'visible';
+											$('bprint').style.visibility = 'visible';
+										} else {
+											alert("{-#serrmsgfrm#-}");
+										}
+									}
+								},
+								{text:'{-#tclose#-}',
+									handler: function() {
 										mapw.hide();
-										$('bsave').style.visibility = 'visible';
-										$('bprint').style.visibility = 'visible';
-									} else {
-										alert("{-#serrmsgfrm#-}");
 									}
 								}
-							},
-							{text:'{-#tclose#-}',
-								handler: function() {
-									mapw.hide();
-								}
-							}
-						]
-					});
+							]
+						});
+					}
+					mapw.show(this);
 				}
-				mapw.show(this);
-			}
-		}); // Map
-		
+			}); // Map
+		}
 		// quicktips
 		Ext.apply(
 			Ext.QuickTips.getQuickTip(), {

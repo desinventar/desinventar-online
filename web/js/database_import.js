@@ -46,7 +46,7 @@ function onReadyDatabaseImport() {
 					jQuery('#frmDBEdit #' + index).val(value);
 				});
 			} else {
-				jQuery('#txtDBEditInfo').append(index + ' => ' + value + '<br />');
+				//jQuery('#txtDBEditInfo').append(index + ' => ' + value + '<br />');
 			}
 		});
 	})
