@@ -5,7 +5,7 @@
 		<table border="0">
 		<tr>
 			<td align="right" valign="bottom">
-				{-#msgDBImportFilename-} :
+				{-#msgDBImportFilename#-} :
 			</td>
 			<td colspan="2" valign="top">
 				<input type="text"   id="txtDBImportFileName" value="" size="50"/>
@@ -23,7 +23,7 @@
 				</div>
 			</td>
 			<td>
-				<input type="button" id="btnDBImportCancel" class="bb2" value="{-#msgDBImportCancel-}" />
+				<input type="button" id="btnDBImportCancel" class="bb2" value="{-#msgDBImportCancel#-}" />
 			</td>
 		</tr>
 		</table>
