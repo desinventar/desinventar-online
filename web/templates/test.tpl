@@ -7,15 +7,18 @@
 	<link rel="stylesheet" type="text/css" href="css/desinventar.css?version={-$jsversion-}" />
 	{-include file="jquery.tpl" -}
 	<script type="text/javascript" src="js/database_import.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="js/database_backup.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="external/swfupload/swfupload.js"></script>
 	<script type="text/javascript" src="external/jquery.swfupload.js"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
-			onReadyDatabaseImport();
+			onReadyDatabaseBackup();
+			//onReadyDatabaseImport();
 		});
 	</script>
 </head>
 <body>
+{-include file="database_backup.tpl"-}
 {-include file="database_import.tpl"-}
 {-include file="database_edit.tpl"-}
 {-include file="desinventarinfo.tpl"-}

@@ -85,16 +85,17 @@
 	<div id="north">
 		<div id="toolbar"></div>
 	</div>
+
+	<!-- Query Design -->
+	<div id="west">
+		{-include file="main_querydesign.tpl" -}
+	</div>
 	
 	<!-- Central Content Area -->
 	<div id="container">
 		{-include file="main_content.tpl" -}
 	</div>
 	
-	<!-- Query Design -->
-	<div id="west">
-		{-include file="main_querydesign.tpl" -}
-	</div>
 
 	<!-- Help Section -->
 	<div id="south">
