@@ -462,3 +462,6 @@
 "di8_DBBackup","msgDBBackupButton","Crear Copia","Create Backup","Criar backup","Créer une sauvegarde"
 "di8_DBBackup","msgDBBackupWaiting","Por favor espere mientras se realiza la copia de seguridad.","Please wait while the backup is performed.","Por favor aguarde enquanto o backup é realizado","S'il vous plaît patienter pendant que la sauvegarde est effectuée"
 "di8_DBBackup","msgDBBackupError","Se ha producido un error al crear la copia de seguridad.","There was and error while creating the backup","Houve um error ao criar o backup","Il ya eu une erreur lors de la création de la sauvegarde"
+"di8_DBImport","msgDBImportTitle","Importar Base de Datos","Import Database","Importação de banco de dados","Import de base de données"
+"di8_DBImport","msgDBImportFilename","Archivo","Filename","Nome do arquivo","Nom du fichier"
+"di8_DBImport","msgDBImportCancel","Cancelar","Cancel","Cancelar","Annuler"
