@@ -59,19 +59,7 @@
 			onReadyData();
 			onReadyGraphic();
 			onReadyDatabaseBackup();
-			onReadyMain();
-			
-			if (jQuery('#desinventarRegionId').val() != '') {
-				jQuery('#dcr').load('index.php?cmd=getRegionFullInfo&r=' + jQuery('#desinventarRegionId').val());
-			} else {
-				// Hide button toolbar if no region is selected
-				jQuery("#ResultHeaderText").hide();
-				jQuery("#ResultHeaderButtonToolbar").hide();
-				// Hide Query Design if no region is selected
-				jQuery("#dcr").hide();
-				// Show database list
-				jQuery("#divDatabaseList").show();
-			}
+			onReadyMain();			
 		});
 	</script>
 </head>
