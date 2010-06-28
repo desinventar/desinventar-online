@@ -19,8 +19,8 @@
 </head>
 <body>
 {-include file="database_backup.tpl"-}
-{-include file="database_import.tpl"-}
-{-include file="database_edit.tpl"-}
+{-include file="database_import2.tpl"-}
+{-include file="database_edit2.tpl"-}
 {-include file="desinventarinfo.tpl"-}
 </body>
 </html>

@@ -169,4 +169,15 @@ a:hover	{	color:#00008b; }
 	font-family:arial,tahoma,helvetica,cursive;
 	font-size:9px;
 }
-
+#divDatabaseBackup h2 {
+	font-family:arial,tahoma,helvetica,cursive;
+	font-size:18px;
+	padding: 5px;
+}
+#divDatabaseBackup table {
+	padding: 10px;
+}
+#divDatabaseBackup {
+	margin: 40px;
+	border: 1px solid black;
+}
