@@ -1,11 +1,11 @@
 {-config_load file=`$lg`.conf section="di8_DBImport"-}
 <div class="contentBlock" id="divDatabaseImport">
-	<h2>Importar Base de Datos</h2>
+	<h2>{-#msgDBImportTitle#-}</h2>
 	<div id="divDBImportControl">
 		<table border="0">
 		<tr>
 			<td align="right" valign="bottom">
-				FileName :
+				{-#msgDBImportFilename-} :
 			</td>
 			<td colspan="2" valign="top">
 				<input type="text"   id="txtDBImportFileName" value="" size="50"/>
@@ -23,7 +23,7 @@
 				</div>
 			</td>
 			<td>
-				<input type="button" id="btnDBImportCancel" class="bb2" value="Cancelar" />
+				<input type="button" id="btnDBImportCancel" class="bb2" value="{-#msgDBImportCancel-}" />
 			</td>
 		</tr>
 		</table>
