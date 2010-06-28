@@ -5,7 +5,7 @@
 		<table>
 		<tr>
 			<td>
-				{-#msgDBEditRegionId#-}:
+				{-#msgDBEditRegionId#-} :
 			</td>
 			<td>
 				<input type="text" id="RegionId"    class="line fixw" size="40" /><br />
@@ -13,7 +13,7 @@
 		</tr>
 		<tr>
 			<td>
-				{-#msgDBEditRegionLabel#-}:
+				{-#msgDBEDitRegionLabel#-} :
 			</td>
 			<td>
 				<input type="text" id="RegionLabel" class="line fixw" size="80" /><br />
@@ -21,7 +21,7 @@
 		</tr>
 		<tr>
 			<td>
-				{-#msgDBEditLangIsoCode#-}:
+				{-#msgDBEDitLangIsoCode#-} :
 			</td>
 			<td>
 				<span id="spanLangIsoCode"></span>
@@ -29,7 +29,7 @@
 		</tr>
 		<tr>
 			<td>
-				{-#msgDBEditCountryIso#-}:
+				{-#msgDBEditCountryIso#-} :
 			</td>
 			<td>
 				<span id="spanCountryIso"></span>
