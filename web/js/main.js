@@ -21,9 +21,15 @@ function onReadyMain() {
 		}
 	});
 
-	jQuery('#divDatacardsShow').hide();
-	jQuery('#divDatabaseBackup').hide();
-	jQuery('#divDatabaseList').hide();
+	jQuery('.contentBlock').hide();
+	if (jQuery('#desinventarRegionId').val() != '') {
+		// Load Database Info and Show
+		jQuery('#dcr').load('index.php?cmd=getRegionFullInfo&r=' + jQuery('#desinventarRegionId').val());
+		jQuery('#divQueryResults').show();
+	} else {
+		// Show database list
+		jQuery("#divDatabaseList").show();
+	}
 	
 	// Tabs for Database Configuration
 	jQuery('#DBConfig_tabs').tabs();
