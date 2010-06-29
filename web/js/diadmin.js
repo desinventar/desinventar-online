@@ -496,7 +496,11 @@
 	} //function
 	
 	function sendList(cmd) {
-		jQuery('#prmCommand').val('cmdGridShow');
+		if (cmd == 'result') {
+			jQuery('#prmCommand').val('cmdGridShow');
+		} else {
+			jQuery('#prmCommand').val('cmdGridSave');
+		}
 		if ($('_D+Field[]').length > 0) {
 			w = Ext.getCmp('westm');
 			$('_D+cmd').value = cmd;
@@ -558,7 +562,11 @@
 	} //function
 	
 	function sendGraphic(cmd) {
-		jQuery('#prmCommand').val('cmdGraphShow');
+		if (cmd == 'result') {
+			jQuery('#prmCommand').val('cmdGraphShow');
+		} else {
+			jQuery('#prmCommand').val('cmdGraphSave');
+		}
 		w = Ext.getCmp('westm');
 		$('_G+cmd').value = cmd;
 		combineForms('DC', 'CG');
@@ -569,7 +577,11 @@
 	}
 	
 	function sendStatistic(cmd) {
-		jQuery('#prmCommand').val('cmdStatShow');
+		if (cmd == 'result') {
+			jQuery('#prmCommand').val('cmdStatShow');
+		} else {
+			jQuery('#prmCommand').val('cmdStatSave');
+		}
 		if ($('_S+Firstlev').value != "" && $('_S+Field[]').length > 0) {
 			w = Ext.getCmp('westm');
 			$('_S+cmd').value = cmd;
