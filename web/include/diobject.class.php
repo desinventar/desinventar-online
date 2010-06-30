@@ -250,9 +250,14 @@ class DIObject {
 	public function exist() {
 		$iReturn = ERR_DEFAULT_ERROR;
 		$query = $this->getSelectQuery();
-		foreach($this->conn->query($query) as $row) {
-			$iReturn = ERR_NO_ERROR;
-		} //foreach
+		try {
+			foreach($this->conn->query($query) as $row) {
+				$iReturn = ERR_NO_ERROR;
+			} //foreach
+		} catch (Exception $e) {
+			showErrorMsg('exist : ' . $e->getMessage);
+			$iReturn = ERR_TABLE_LOCKED;
+		}
 		return $iReturn;
 	} // function
 	
@@ -275,8 +280,8 @@ class DIObject {
 				}
 				$iReturn = ERR_NO_ERROR;
 			} // foreach
-		} catch (Exception $e) {
-			showErrorMsg($e->getMessage);
+		} catch (PDOException $e) {
+			showErrorMsg('load : ' . $e->getMessage);
 		}
 		$this->oOldField = $this->oField;
 		return $iReturn;
@@ -308,8 +313,13 @@ class DIObject {
 		}
 		if ($iReturn > 0) {
 			$sQuery = $this->getDeleteQuery();
-			if ($result = $this->conn->query($sQuery)) {
-				$iReturn = ERR_NO_ERROR;
+			try {
+				if ($result = $this->conn->query($sQuery)) {
+					$iReturn = ERR_NO_ERROR;
+				}
+			} catch (PDOException $e) {
+				showErrorMsg('delete : ' . $e->getMessage);
+				$iReturn = ERR_TABLE_LOCKED;
 			}
 		}
 		return $iReturn;
@@ -327,7 +337,8 @@ class DIObject {
 					$iReturn = ERR_NO_ERROR;
 				}
 			} catch (PDOException $e) {
-				showErrorMsg("Error " . $e->getMessage());
+				showErrorMsg("create : " . $e->getMessage());
+				$iReturn = ERR_TABLE_LOCKED;
 			}
 		}
 		return $iReturn;
@@ -340,17 +351,20 @@ class DIObject {
 		}
 		if ($iReturn > 0) {
 			$sQuery = $this->getUpdateQuery();
-			try {
-				if ($withInsert == true) {
-					if ($this->exists() < 0) {
-						$iReturn = $this->create($withValidate);
-					}
+			
+			if ($withInsert == true) {
+				if ($this->exists() < 0) {
+					$iReturn = $this->create($withValidate);
 				}
-				if ($result = $this->conn->query($sQuery)) {
-					$iReturn = ERR_NO_ERROR;
+			}
+			
+			try {
+				if (! $result = $this->conn->query($sQuery)) {
+					$iReturn = ERR_UNKNOWN_ERROR;
 				}
 			} catch (PDOException $e) {
-				showErrorMsg("Error " . $e->getMessage());
+				showErrorMsg("update : " . $e->getCode() . ' '. $e->getMessage());
+				$iReturn = ERR_TABLE_LOCKED;
 			}
 		}
 		if ($iReturn > 0) {
@@ -416,9 +430,14 @@ class DIObject {
 		$iReturn = ERR_NO_ERROR;
 		$quote1 = "'";
 		$sQuery = "SELECT * FROM " . $this->getTableName() . " WHERE " . $this->getIdWhereQuery();
-		foreach($this->conn->query($sQuery) as $row) {
-			$iReturn = $ErrCode;
+		try {
+			foreach($this->conn->query($sQuery) as $row) {
+				$iReturn = $ErrCode;
+			} //foreach
+		} catch (Exception $e) {
+			showErrorMsg('validatePrimaryKey : ' . $e->getMessage);
 		}
+		
 		if ($iReturn < 0) {
 			$this->status->addMsg($ErrCode, ' Primary key is not unique');
 		}
@@ -435,25 +454,29 @@ class DIObject {
 		if ($this->existField('LangIsoCode')) {
 			$sQuery .= " AND LangIsoCode='" . $this->get('LangIsoCode') . "'";
 		}
-		foreach($this->conn->query($sQuery) as $row) {
-			// Check if it's me !!
-			$bFound = true;
-			$i = 0;
-			$sFields = split(',', $this->sFieldKeyDef);
-			foreach ($sFields as $sKey => $sValue) {
+		try {
+			foreach($this->conn->query($sQuery) as $row) {
+				// Check if it's me !!
+				$bFound = true;
+				$i = 0;
+				$sFields = split(',', $this->sFieldKeyDef);
+				foreach ($sFields as $sKey => $sValue) {
+					if ($bFound) {
+						$oItem = split('/', $sValue);
+						$sFieldName = $oItem[0];
+						$sFieldType = $oItem[1];
+						$bFound = $row[$sFieldName] == $this->get($sFieldName);
+						$i++;
+					}
+				} // foreach
 				if ($bFound) {
-					$oItem = split('/', $sValue);
-					$sFieldName = $oItem[0];
-					$sFieldType = $oItem[1];
-					$bFound = $row[$sFieldName] == $this->get($sFieldName);
-					$i++;
+					$iReturn = ERR_NO_ERROR;
+				} else {
+					$iReturn = $ErrCode;
 				}
-			} // foreach
-			if ($bFound) {
-				$iReturn = ERR_NO_ERROR;
-			} else {
-				$iReturn = $ErrCode;
-			}
+			} //foreach
+		} catch (Exception $e) {
+			showErrorMsg('validateUnique : ' . $e->getMessage);
 		}
 		if ($iReturn < 0) {
 			$this->status->addMsg($ErrCode, $prmFieldName . ' value is not unique.', $isWarning);
@@ -469,8 +492,12 @@ class DIObject {
 		$Value = $this->get($prmFieldName);
 		$sQuery = "SELECT " . $FieldDst . " FROM " . $TableName . " WHERE " . $FieldDst . "=" . $quote . $Value .  $quote;
 		$iReturn = $ErrCode;
-		foreach($this->conn->query($sQuery) as $row) {
-			$iReturn = ERR_NO_ERROR;
+		try {
+			foreach($this->conn->query($sQuery) as $row) {
+				$iReturn = ERR_NO_ERROR;
+			}
+		} catch (Exception $e) {
+			showErrorMsg('validateRef : ' . $e->getMessage);
 		}
 		if ($iReturn < 0) {
 			$this->status->addMsg($ErrCode, $prmFieldName . ' reference to table ' . $TableName . ' is invalid (' . $Value . ')');
