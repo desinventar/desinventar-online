@@ -51,7 +51,7 @@ class DIObject {
 	} // constructor
 	
 	public function setConnection($prmDB) {
-		if ($prmDB == "core") {
+		if ($prmDB == 'core') {
 			$this->conn = $this->q->core;
 		} else {
 			$this->conn = $this->q->dreg;
@@ -70,14 +70,14 @@ class DIObject {
 			$sFieldName = $oItem[0];
 			$sFieldType = $oItem[1];
 			$this->oFieldType[$sFieldName] = $sFieldType;
-			if ($sFieldType == "STRING")   { $obj[$sFieldName] = "";              }
-			if ($sFieldType == "TEXT")     { $obj[$sFieldName] = "";              }
-			if ($sFieldType == "DATETIME") { $obj[$sFieldName] = gmdate('c');     }
-			if ($sFieldType == "DATE")     { $obj[$sFieldName] = gmdate('Y-m-d'); }
-			if ($sFieldType == "INTEGER")  { $obj[$sFieldName] = 0;               }
-			if ($sFieldType == "DOUBLE")   { $obj[$sFieldName] = 0.0;             }
-			if ($sFieldType == "CURRENCY") { $obj[$sFieldName] = 0.0;             }
-			if ($sFieldType == "BOOLEAN")  { $obj[$sFieldName] = 1;               }
+			if ($sFieldType == 'STRING')   { $obj[$sFieldName] = '';              }
+			if ($sFieldType == 'TEXT')     { $obj[$sFieldName] = '';              }
+			if ($sFieldType == 'DATETIME') { $obj[$sFieldName] = gmdate('c');     }
+			if ($sFieldType == 'DATE')     { $obj[$sFieldName] = gmdate('Y-m-d'); }
+			if ($sFieldType == 'INTEGER')  { $obj[$sFieldName] = 0;               }
+			if ($sFieldType == 'DOUBLE')   { $obj[$sFieldName] = 0.0;             }
+			if ($sFieldType == 'CURRENCY') { $obj[$sFieldName] = 0.0;             }
+			if ($sFieldType == 'BOOLEAN')  { $obj[$sFieldName] = 1;               }
 		}
 	} // function
 	
@@ -91,7 +91,7 @@ class DIObject {
 				$Value = $this->oField[$LangIsoCode][$prmKey];
 			}
 		} catch (Exception $e) {
-			showErrorMsg("Error " . $e->getMessage());
+			showErrorMsg('object get : ' . $e->getMessage());
 		}
 		return $Value;
 	}
@@ -100,12 +100,12 @@ class DIObject {
 		try {
 			return $this->oFieldType[$prmKey];
 		} catch (Exception $e) {
-			showErrorMsg("Error " . $e->getMessage());
+			showErrorMsg('object getType : ' . $e->getMessage());
 		}		
 	}
 	
 	public function set($prmKey, $prmValue, $LangIsoCode='') {
-		//printf("%3s %-20s %s\n", $LangIsoCode, $prmKey, $prmValue);
+		//printf('%3s %-20s %s\n', $LangIsoCode, $prmKey, $prmValue);
 		if ($LangIsoCode == '') {
 			$obj = &$this->oField['info'];
 		} else {
@@ -119,13 +119,13 @@ class DIObject {
 				$sValue = trim($sValue);
 			}
 			if ($sFieldType == 'BOOLEAN') {
-				if ($sValue . "" == "on")  { $sValue = 1; }
-				if ($sValue . "" == "off") { $sValue = 0; }
-				if ($sValue . "" == "")    { $sValue = 0; }
+				if ($sValue . '' == 'on')  { $sValue = 1; }
+				if ($sValue . '' == 'off') { $sValue = 0; }
+				if ($sValue . '' == '')    { $sValue = 0; }
 			}
 			if (($sFieldType == 'INTEGER') ||
 			    ($sFieldType == 'DOUBLE') ) {
-				if ($sValue == "") { $sValue = 0; }
+				if ($sValue == '') { $sValue = 0; }
 			}
 			$obj[$prmKey] = $sValue;
 			$iReturn = ERR_NO_ERROR;
@@ -145,67 +145,67 @@ class DIObject {
 	
 	public function getWhereSubQuery() {
 		$i = 0;
-		$sQuery = "(";
+		$sQuery = '(';
 		foreach (split(',', $this->sFieldKeyDef) as $sKey => $sValue) {
 			$oItem = split('/', $sValue);
 			$sFieldName = $oItem[0];
 			$sFieldType = $oItem[1];
-			if ($i > 0) { $sQuery .= " AND "; }
-			$sQuery .= $sFieldName . "=";
-			if (($sFieldType == "STRING"  ) || 
-			    ($sFieldType == "TEXT"    ) ||
-			    ($sFieldType == "DATETIME") ) {
-			    $sQuery .= "'" . $this->get($sFieldName) . "'";
+			if ($i > 0) { $sQuery .= ' AND '; }
+			$sQuery .= $sFieldName . '=';
+			if (($sFieldType == 'STRING'  ) || 
+			    ($sFieldType == 'TEXT'    ) ||
+			    ($sFieldType == 'DATETIME') ) {
+			    $sQuery .= '"' . $this->get($sFieldName) . '"';
 			}
-			if (($sFieldType == "INTEGER") ||
-			    ($sFieldType == "DOUBLE" ) ||
-			    ($sFieldType == "BOOLEAN" ) ) {
+			if (($sFieldType == 'INTEGER') ||
+			    ($sFieldType == 'DOUBLE' ) ||
+			    ($sFieldType == 'BOOLEAN' ) ) {
 			    $sQuery .= $this->get($sFieldName);
 			}
 			$i++;
 		}
-		$sQuery .= ")";
+		$sQuery .= ')';
 		return $sQuery;
 	} // function
 
 	public function getSelectQuery() {
-		$sQuery = "SELECT * FROM " . $this->getTableName();
-		$sQuery .= " WHERE " . $this->getWhereSubQuery();
+		$sQuery = 'SELECT * FROM ' . $this->getTableName();
+		$sQuery .= ' WHERE ' . $this->getWhereSubQuery();
 		return $sQuery;
 	} // function
 
 	public function getDeleteQuery() {
-		$sQuery = "DELETE FROM " . $this->getTableName();
-		$sQuery .= " WHERE " . $this->getWhereSubQuery();
+		$sQuery = 'DELETE FROM ' . $this->getTableName();
+		$sQuery .= ' WHERE ' . $this->getWhereSubQuery();
 		return $sQuery;
 	} // function
 	
 	public function getInsertQuery() {
 		$i = 0;
-		$sQueryFields = "";
-		$sQueryValues = "";
+		$sQueryFields = '';
+		$sQueryValues = '';
 		foreach (split(',', $this->sFieldKeyDef) as $sKey => $sValue) {
 			$oItem = split('/', $sValue);
 			$sFieldName = $oItem[0];
 			$sFieldType = $oItem[1];
 			if ($i > 0) {
-				$sQueryFields .= ",";
-				$sQueryValues .= ",";
+				$sQueryFields .= ',';
+				$sQueryValues .= ',';
 			}
 			$sQueryFields .= $sFieldName;
-			if (($sFieldType == "STRING"  ) || 
-			    ($sFieldType == "TEXT"    ) ||
-			    ($sFieldType == "DATETIME") ) {
-			    $sQueryValues .= "'" . $this->get($sFieldName) . "'";
+			if (($sFieldType == 'STRING'  ) || 
+			    ($sFieldType == 'TEXT'    ) ||
+			    ($sFieldType == 'DATETIME') ) {
+			    $sQueryValues .= '"' . $this->get($sFieldName) . '"';
 			}
-			if (($sFieldType == "INTEGER") ||
-			    ($sFieldType == "DOUBLE" ) ||
-			    ($sFieldType == "BOOLEAN" ) ) {
+			if (($sFieldType == 'INTEGER') ||
+			    ($sFieldType == 'DOUBLE' ) ||
+			    ($sFieldType == 'BOOLEAN' ) ) {
 			    $sQueryValues .= $this->get($sFieldName);
 			}
 			$i++;
 		}
-		$sQuery = "INSERT INTO " . $this->getTableName() . " (" . $sQueryFields . ") VALUES (" . $sQueryValues . ")";
+		$sQuery = 'INSERT INTO ' . $this->getTableName() . ' (' . $sQueryFields . ') VALUES (' . $sQueryValues . ')';
 		return $sQuery;
 	} // function
 
@@ -216,43 +216,48 @@ class DIObject {
 			$this->set('RecordUpdate', gmdate('c'));
 		}
 		
-		$sQueryFields = "";
-		$sQueryValues = "";
-		$sQuery = "UPDATE " . $this->getTableName() . " SET ";
+		$sQueryFields = '';
+		$sQueryValues = '';
+		$sQuery = 'UPDATE ' . $this->getTableName() . ' SET ';
 		foreach (split(',', $this->sFieldDef) as $sKey => $sValue) {
 			$oItem = split('/', $sValue);
 			$sFieldName = $oItem[0];
 			$sFieldType = $oItem[1];
 			if ($i > 0) {
-				$sQuery .= ",";
+				$sQuery .= ',';
 			}
-			$sQueryItem = $sFieldName . "=";
-			if (($sFieldType == "STRING"  ) || 
-			    ($sFieldType == "TEXT"    ) ||
-			    ($sFieldType == "DATETIME") ||
-			    ($sFieldType == "DATE"    ) ) {
+			$sQueryItem = $sFieldName . '=';
+			if (($sFieldType == 'STRING'  ) || 
+			    ($sFieldType == 'TEXT'    ) ||
+			    ($sFieldType == 'DATETIME') ||
+			    ($sFieldType == 'DATE'    ) ) {
 			    $sQueryItem .= '"' . $this->get($sFieldName) . '"';
-			} elseif (($sFieldType == "INTEGER" ) ||
-			          ($sFieldType == "DOUBLE"  ) ||
-			          ($sFieldType == "BOOLEAN" ) ||
-			          ($sFieldType == "CURRENCY") ) {
+			} elseif (($sFieldType == 'INTEGER' ) ||
+			          ($sFieldType == 'DOUBLE'  ) ||
+			          ($sFieldType == 'BOOLEAN' ) ||
+			          ($sFieldType == 'CURRENCY') ) {
 			    $sQueryItem .= $this->get($sFieldName);
 			} else {
-				print "Unknown Type : $sFieldType ($sFieldName)<br>";
+				print 'Unknown Type : $sFieldType ($sFieldName)<br>';
 			}
 			$sQuery .= $sQueryItem;
 			$i++;
 		}
-		$sQuery .= " WHERE " . $this->getWhereSubQuery();
+		$sQuery .= ' WHERE ' . $this->getWhereSubQuery();
 		return $sQuery;
 	} // function
 	
 	public function exist() {
 		$iReturn = ERR_DEFAULT_ERROR;
 		$query = $this->getSelectQuery();
-		foreach($this->conn->query($query) as $row) {
-			$iReturn = ERR_NO_ERROR;
-		} //foreach
+		try {
+			foreach($this->conn->query($query) as $row) {
+				$iReturn = ERR_NO_ERROR;
+			} //foreach
+		} catch (PDOException $e) {
+			showErrorMsg('object exist : ' . $e->getMessage());
+			$iReturn = ERR_TABLE_LOCKED;
+		}
 		return $iReturn;
 	} // function
 	
@@ -261,7 +266,7 @@ class DIObject {
 		$sQuery = $this->getSelectQuery();
 		try {
 			foreach ($this->conn->query($sQuery) as $row) {
-				$sAllFields = $this->sFieldKeyDef . "," . $this->sFieldDef;
+				$sAllFields = $this->sFieldKeyDef . ',' . $this->sFieldDef;
 				$sFields = split(',', $sAllFields);
 				foreach ($sFields as $sKey => $sValue) {
 					$oItem = split('/', $sValue);
@@ -275,8 +280,9 @@ class DIObject {
 				}
 				$iReturn = ERR_NO_ERROR;
 			} // foreach
-		} catch (Exception $e) {
-			showErrorMsg($e->getMessage);
+		} catch (PDOException $e) {
+			showErrorMsg('object load : ' . $e->getMessage());
+			$iReturn = ERR_TABLE_LOCKED;
 		}
 		$this->oOldField = $this->oField;
 		return $iReturn;
@@ -308,8 +314,13 @@ class DIObject {
 		}
 		if ($iReturn > 0) {
 			$sQuery = $this->getDeleteQuery();
-			if ($result = $this->conn->query($sQuery)) {
-				$iReturn = ERR_NO_ERROR;
+			try {
+				if ($result = $this->conn->query($sQuery)) {
+					$iReturn = ERR_NO_ERROR;
+				}
+			} catch (PDOException $e) {
+				showErrorMsg('object delete : ' . $e->getMessage());
+				$iReturn = ERR_TABLE_LOCKED;
 			}
 		}
 		return $iReturn;
@@ -327,7 +338,8 @@ class DIObject {
 					$iReturn = ERR_NO_ERROR;
 				}
 			} catch (PDOException $e) {
-				showErrorMsg("Error " . $e->getMessage());
+				showErrorMsg('object create : ' . $e->getMessage());
+				$iReturn = ERR_TABLE_LOCKED;
 			}
 		}
 		return $iReturn;
@@ -350,7 +362,8 @@ class DIObject {
 					$iReturn = ERR_NO_ERROR;
 				}
 			} catch (PDOException $e) {
-				showErrorMsg("Error " . $e->getMessage());
+				showErrorMsg('object update : ' . $e->getMessage());
+				$iReturn = ERR_TABLE_LOCKED;
 			}
 		}
 		if ($iReturn > 0) {
@@ -367,12 +380,12 @@ class DIObject {
 			$oItem = split('/', $sValue);
 			$sFieldName = $oItem[0];
 			$sFieldType = $oItem[1];
-			$quote2 = "'";
-			if ($sFieldType == 'INTEGER')  { $quote2 = ""; }
+			$quote2 = '"';
+			if ($sFieldType == 'INTEGER')  { $quote2 = ''; }
 			if ($i > 0) { 
 				$sQuery .= ' AND ';
 			}
-			$sQuery .= $sFieldName . "=" . $quote2 . $this->get($sFieldName) . $quote2;
+			$sQuery .= $sFieldName . '=' . $quote2 . $this->get($sFieldName) . $quote2;
 			$i++;
 		} // foreach
 		$sQuery .= ')';
@@ -414,10 +427,14 @@ class DIObject {
 
 	public function validatePrimaryKey($ErrCode) {
 		$iReturn = ERR_NO_ERROR;
-		$quote1 = "'";
-		$sQuery = "SELECT * FROM " . $this->getTableName() . " WHERE " . $this->getIdWhereQuery();
-		foreach($this->conn->query($sQuery) as $row) {
-			$iReturn = $ErrCode;
+		$quote1 = '"';
+		$sQuery = 'SELECT * FROM ' . $this->getTableName() . ' WHERE ' . $this->getIdWhereQuery();
+		try {
+			foreach($this->conn->query($sQuery) as $row) {
+				$iReturn = $ErrCode;
+			}
+		} catch (PDOException $e) {
+			showErrorMsg('validatePrimaryKey : ' . $e->getMessage());
 		}
 		if ($iReturn < 0) {
 			$this->status->addMsg($ErrCode, ' Primary key is not unique');
@@ -428,32 +445,36 @@ class DIObject {
 	public function validateUnique($ErrCode, $prmFieldName, $isWarning=false) {
 		$iReturn = ERR_NO_ERROR;
 		$quote1 = '"';
-		if ($this->getType($prmFieldName) == 'INTEGER') { $quote1 = ""; }
-		$sQuery = "SELECT * FROM " . $this->getTableName() . " WHERE " . 
-			$prmFieldName . "=" . $quote1 . $this->get($prmFieldName) . $quote1;
+		if ($this->getType($prmFieldName) == 'INTEGER') { $quote1 = ''; }
+		$sQuery = 'SELECT * FROM ' . $this->getTableName() . ' WHERE ' . 
+			$prmFieldName . '=' . $quote1 . $this->get($prmFieldName) . $quote1;
 		// Validate is LangIsoCode is defined and Modify the query when needed
 		if ($this->existField('LangIsoCode')) {
-			$sQuery .= " AND LangIsoCode='" . $this->get('LangIsoCode') . "'";
+			$sQuery .= ' AND LangIsoCode="' . $this->get('LangIsoCode') . '"';
 		}
-		foreach($this->conn->query($sQuery) as $row) {
-			// Check if it's me !!
-			$bFound = true;
-			$i = 0;
-			$sFields = split(',', $this->sFieldKeyDef);
-			foreach ($sFields as $sKey => $sValue) {
+		try {
+			foreach($this->conn->query($sQuery) as $row) {
+				// Check if it's me !!
+				$bFound = true;
+				$i = 0;
+				$sFields = split(',', $this->sFieldKeyDef);
+				foreach ($sFields as $sKey => $sValue) {
+					if ($bFound) {
+						$oItem = split('/', $sValue);
+						$sFieldName = $oItem[0];
+						$sFieldType = $oItem[1];
+						$bFound = $row[$sFieldName] == $this->get($sFieldName);
+						$i++;
+					}
+				} // foreach
 				if ($bFound) {
-					$oItem = split('/', $sValue);
-					$sFieldName = $oItem[0];
-					$sFieldType = $oItem[1];
-					$bFound = $row[$sFieldName] == $this->get($sFieldName);
-					$i++;
+					$iReturn = ERR_NO_ERROR;
+				} else {
+					$iReturn = $ErrCode;
 				}
-			} // foreach
-			if ($bFound) {
-				$iReturn = ERR_NO_ERROR;
-			} else {
-				$iReturn = $ErrCode;
 			}
+		} catch (PDOException $e) {
+			showErrorMsg('validateUnique : ' . $e->getMessage());
 		}
 		if ($iReturn < 0) {
 			$this->status->addMsg($ErrCode, $prmFieldName . ' value is not unique.', $isWarning);
@@ -462,15 +483,19 @@ class DIObject {
 	}
 	
 	public function validateRef($ErrCode, $prmFieldName, $TableName, $FieldDst) {
-		$quote = "'";
+		$quote = '"';
 		if ($this->getType($prmFieldName) == 'INTEGER') {
-			$quote = "";
+			$quote = '';
 		}
 		$Value = $this->get($prmFieldName);
-		$sQuery = "SELECT " . $FieldDst . " FROM " . $TableName . " WHERE " . $FieldDst . "=" . $quote . $Value .  $quote;
+		$sQuery = 'SELECT ' . $FieldDst . ' FROM ' . $TableName . ' WHERE ' . $FieldDst . '=' . $quote . $Value .  $quote;
 		$iReturn = $ErrCode;
-		foreach($this->conn->query($sQuery) as $row) {
-			$iReturn = ERR_NO_ERROR;
+		try {
+			foreach($this->conn->query($sQuery) as $row) {
+				$iReturn = ERR_NO_ERROR;
+			}
+		} catch (PDOException $e) {
+			showErrorMsg('validateRef : ' . $e->getMessage());
 		}
 		if ($iReturn < 0) {
 			$this->status->addMsg($ErrCode, $prmFieldName . ' reference to table ' . $TableName . ' is invalid (' . $Value . ')');
@@ -479,9 +504,9 @@ class DIObject {
 	}
 
 	public static function padNumber($iNumber, $iLen) {
-		$sNumber = "" . $iNumber;
+		$sNumber = '' . $iNumber;
 		while (strlen($sNumber) < $iLen) {
-			$sNumber = "0" . $sNumber;
+			$sNumber = '0' . $sNumber;
 		}
 		return $sNumber;
 	} // function
