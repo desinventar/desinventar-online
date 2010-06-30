@@ -133,18 +133,51 @@ if (MODE != "command") {
 	if ($lg == 'fr') { $lg = 'fre'; }
 	if ($lg == 'pr') { $lg = 'por'; }
 	if ($lg == 'pt') { $lg = 'por'; }
+	$lang = $lg;
 
 	$_SESSION['lang'] = $lg;
-	$t->assign ("lg", $lg);
+	$t->assign('lg', $lg);
+	$t->assign('lang', $lg);
 
 	// 2010-05-25 (jhcaiced) Handle the versioning of js files, used to force refresh of
 	// these files when doing changes.
 	$jsversion = JSVERSION;
-	$hostname  = $_SERVER["SERVER_NAME"];
-	if ( ($hostname == 'devel.desinventar.org') ||
-	     ($hostname == '192.168.0.13') ) {
-	     $jsversion = time();
-	}
 	$t->assign('jsversion', $jsversion);
+
+	// Configure DI8 (web) application location
+	$desinventarURL = substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'],'/'));
+	if (isset($_SERVER['REDIRECT_DI8_URL'])) {
+		$_SERVER['DI8_URL'] = $_SERVER['REDIRECT_DI8_URL'];
+	}
+	if (isset($_SERVER['DI8_URL'])) {
+		$desinventarURL = $_SERVER['DI8_URL'];
+	}
+
+	// Remove trailing slash in URL
+	if (substr($desinventarURL, strlen($desinventarURL) - 1, 1) == '/') {
+		$desinventarURL = substr($desinventarURL, 0, strlen($desinventarURL) - 1);
+	}
+
+	// Configure DI8 (portal) application location
+	$desinventarURLPortal = substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'],'/'));
+	if (isset($_SERVER['REDIRECT_DI8_PORTAL'])) {
+		$_SERVER['DI8_PORTAL'] = $_SERVER['REDIRECT_DI8_PORTAL'];
+	}
+
+	if (isset($_SERVER['DI8_PORTAL'])) {
+		$desinventarURLPortal = $_SERVER['DI8_PORTAL'];
+	}
+	// Remove trailing slash in URL
+	if (substr($desinventarURLPortal, strlen($desinventarURLPortal) - 1, 1) == '/') {
+		$desinventarURLPortal = substr($desinventarURLPortal, 0, strlen($desinventarURLPortal) - 1);
+	}
+
+	$t->assign('desinventarURL'         , $desinventarURL);
+	$t->assign('desinventarURLPortal'   , $desinventarURLPortal);
+	$t->assign('desinventarVersion'     , VERSION);
+	$t->assign('desinventarLang'        , $lang);
+	$t->assign('desinventarUserId'      , $us->UserId);
+	$t->assign('desinventarUserFullName', $us->getUserFullName());
+	$t->assign('desinventarModule'      , 'portal');
 }
 </script>
