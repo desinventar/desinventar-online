@@ -22,14 +22,6 @@ $t->assign('request_uri', $_SERVER['REQUEST_URI']);
 $t->assign('version', VERSION);
 $t->assign('userid', $us->UserId);
 
-$t->assign('desinventarURL'         , '');
-$t->assign('desinventarVersion'     , VERSION);
-$t->assign('desinventarLang'        , $lg);
-$t->assign('desinventarUserId'      , $us->UserId);
-$t->assign('desinventarUserFullName', $us->getUserFullName());
-$t->assign('desinventarModule'      ,'desinventar');
-
-
 if (!empty($RegionId)) {
 	$us->open($RegionId);
 }

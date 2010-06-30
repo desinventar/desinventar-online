@@ -9,7 +9,7 @@ function onReadyUserLogin() {
 		if (UserId == '' || UserPasswd == '') {
 			updateUserLoginMsg('#msgEmptyFields');
 		} else {
-			jQuery.post(jQuery('#fldDesinventarURL').val() + '/' + 'user.php',
+			jQuery.post(jQuery('#desinventarURL').val() + '/user.php',
 				{'cmd'        : 'login',
 			     'UserId'     : UserId,
 			     'UserPasswd' : hex_md5(UserPasswd)
@@ -39,7 +39,7 @@ function onReadyUserLogin() {
 
 function doUserLogout() {
 	var Answer = 0;
-	jQuery.post(jQuery('#fldDesinventarURL').val() + '/' + 'user.php',
+	jQuery.post(jQuery('#desinventarURL').val() + '/user.php',
 		{'cmd'        : 'logout'
 		},
 		function(data) {

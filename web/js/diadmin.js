@@ -69,7 +69,7 @@
 				updateList('lst_regionpa', 'region.php', 'cmd=list');
 			break;
 			case "userpa":
-				updateList('lst_userpa', 'user.php', 'cmd=list');
+				updateList('lst_userpa', jQuery('#desinventarURL').val() + '/user.php', 'cmd=list');
 			break;
 			case "event":
 				if (opt == "1")
