@@ -4,7 +4,7 @@ function onReadyPortal() {
 	
 	// Main button to open a default desinventar
 	jQuery("#btnMainWindow").click(function() {
-		window.open(desinventarURL + '?cmd=main&lang=' + desinventarLang,'_blank', 'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');
+		window.open(desinventarURL + '/?cmd=main&lang=' + desinventarLang,'_blank', 'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');
 		return false;
 	});
 	
@@ -126,13 +126,13 @@ function updateDatabaseList(CountryIsoCode,searchByCountry) {
 	jQuery(".portalcontent").hide();
 	jQuery("#regionlist").show();
 	var desinventarURL = jQuery('#fldDesinventarURL').val();
-	jQuery.get(desinventarURL, 
+	jQuery.get(desinventarURL + '/', 
 		{cmd: 'getCountryName', CountryIso : CountryIsoCode },
 		function(data) { 
 			jQuery("#regiontitle_COUNTRY").html('<h3>' + data + '</h3>');
 		}
 	);
-	jQuery.post(desinventarURL,
+	jQuery.post(desinventarURL + '/',
 		{ cmd: 'searchdb', searchdbquery: CountryIsoCode, searchbycountry : searchByCountry },
 		function(data) {
 			var iCount = 0;
@@ -169,7 +169,7 @@ function updateDatabaseListByUser() {
 	jQuery(".portalcontent").hide();
 	jQuery("#regionlist").show();
 	var desinventarURL = jQuery('#fldDesinventarURL').val();
-	jQuery.post(desinventarURL,
+	jQuery.post(desinventarURL + '/',
 		{ cmd: 'searchdb', 
 		  searchdbquery: '', 
 		  searchbycountry : 0},
@@ -231,11 +231,11 @@ function displayRegionInfo(RegionId) {
 	var desinventarLang = jQuery('#fldDesinventarLang').val();
 	jQuery(".portalcontent").hide();
 	jQuery("#pageinfo"     ).show();
-	jQuery("#regionlogo"   ).attr('src', desinventarURL + '?cmd=getRegionLogo&RegionId=' + RegionId);
-	jQuery("#regionbasicinfo" ).load(desinventarURL, { cmd:'getRegionBasicInfo', RegionId : RegionId });
-	jQuery("#regiontechinfo"  ).load(desinventarURL, { cmd:'getRegionTechInfo', RegionId : RegionId });
+	jQuery("#regionlogo"   ).attr('src', desinventarURL + '/' + '?cmd=getRegionLogo&RegionId=' + RegionId);
+	jQuery("#regionbasicinfo" ).load(desinventarURL + '/', { cmd:'getRegionBasicInfo', RegionId : RegionId });
+	jQuery("#regiontechinfo"  ).load(desinventarURL + '/', { cmd:'getRegionTechInfo', RegionId : RegionId });
 	jQuery("#regionlink").unbind('click').click(function() {
-		window.open(desinventarURL + '?r=' + RegionId + '&lang=' + desinventarLang,'_blank', 
+		window.open(desinventarURL + '/?r=' + RegionId + '&lang=' + desinventarLang,'_blank', 
 			'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');
 		return false;
 	});
