@@ -40,5 +40,5 @@ function onReadyMain() {
 		jQuery(jQuery(this).attr('href')).html('<img src="loading.gif" />');
 		jQuery(jQuery(this).attr('href')).load(jQuery(this).attr('data'), {r : jQuery('#desinventarRegionId').val() });
 	});
-	jQuery('.classDBConfig_tabs').first().click();
+	jQuery('.classDBConfig_tabs:first').click();
 }
