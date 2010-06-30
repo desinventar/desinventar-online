@@ -13,6 +13,7 @@ require_once('../web/include/loader.php');
 require_once(BASE . '/include/didisaster.class.php');
 
 $RegionId = 'BOL-1248983224-bolivia_inventario_historico_de_desastres';
+$RegionId = 'COL-1250123456-colombia_base_de_prueba';
 $us->login('diadmin','di8');
 $r = $us->open($RegionId);
 if ($r < 0) {
