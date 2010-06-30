@@ -21,8 +21,8 @@ function onReadyUserLogin() {
 						jQuery("#fldUserPasswd").val('');
 
 						// Update UserInfo Fields...
-						jQuery('#fldDesinventarUserId').val(data.UserId);
-						jQuery('#fldDesinventarUserFullName').val(data.UserFullName);
+						jQuery('#desinventarUserId').val(data.UserId);
+						jQuery('#desinventarUserFullName').val(data.UserFullName);
 
 						// Trigger Event and Update User Menu etc.
 						jQuery('body').trigger('UserLoggedIn');
@@ -51,8 +51,8 @@ function doUserLogout() {
 				jQuery('#fldUserPasswd').val('');
 				
 				// Update UserInfo Fields...
-				jQuery('#fldDesinventarUserId').val('');
-				jQuery('#fldDesinventarUserFullName').val('');
+				jQuery('#desinventarUserId').val('');
+				jQuery('#desinventarUserFullName').val('');
 				
 				// Trigger Event, used to update menu or reload page...
 				jQuery('body').trigger('UserLoggedOut');
