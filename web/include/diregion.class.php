@@ -66,11 +66,9 @@ class DIRegion extends DIObject {
 		}
 		if ($iReturn > 0) {
 			$iReturn = $this->load();
-			fb($XMLFile);
 			if ($XMLFile != '') {
 				// Load Info from specified XML File
 				$iReturn = $this->loadFromXML($XMLFile);
-				fb('ok');
 			} else {
 				// Attempt to load from XML in Region directory...
 				$XMLFile = $this->getXMLFileName();
@@ -1027,7 +1025,6 @@ class DIRegion extends DIObject {
 		$occ = $doc->createElement('GeoCarto');
 		$occ = $root->appendChild($occ);
 		foreach($this->session->q->dreg->query($sQuery) as $row) {
-			fb($row['GeoLevelLayerFile']);
 			$level = $doc->createElement('GeoCartoItem');
 			$level = $occ->appendChild($level);
 			$level->setAttribute('GeoLevelId', $row['GeoLevelId']);
