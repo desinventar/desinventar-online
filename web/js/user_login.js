@@ -9,11 +9,7 @@ function onReadyUserLogin() {
 		if (UserId == '' || UserPasswd == '') {
 			updateUserLoginMsg('#msgEmptyFields');
 		} else {
-			desinventarURL = jQuery('#fldDesinventarURL').val();
-			if (desinventarURL == undefined) {
-				desinventarURL = '';
-			}
-			jQuery.post(desinventarURL + 'user.php',
+			jQuery.post(jQuery('#fldDesinventarURL').val() + '/' + 'user.php',
 				{'cmd'        : 'login',
 			     'UserId'     : UserId,
 			     'UserPasswd' : hex_md5(UserPasswd)
@@ -43,11 +39,7 @@ function onReadyUserLogin() {
 
 function doUserLogout() {
 	var Answer = 0;
-	desinventarURL = jQuery('#fldDesinventarURL').val();
-	if (desinventarURL == undefined) {
-		desinventarURL = '';
-	}
-	jQuery.post(desinventarURL + 'user.php',
+	jQuery.post(jQuery('#fldDesinventarURL').val() + '/' + 'user.php',
 		{'cmd'        : 'logout'
 		},
 		function(data) {
