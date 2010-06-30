@@ -12,7 +12,7 @@ function onReadyUserChangePasswd(windowId) {
 		} else if (UserPasswd2 != UserPasswd3) {
 			updateUserChangePasswdMsg('#msgPasswdDoNotMatch');
 		} else {
-			jQuery.post("user.php?cmd=updatepasswd", 
+			jQuery.post(jQuery('#desinventarURL').val() + '/user.php?cmd=updatepasswd', 
 			    {'UserPasswd'  : hex_md5(UserPasswd),
 			     'UserPasswd2' : hex_md5(UserPasswd2)
 			    },
@@ -69,7 +69,7 @@ function onReadyUserAdmin() {
 	// When selecting a row, start editing data...
 	jQuery("#tblUserList tr").click(function() {
 		var UserId = jQuery(this).children("td:first").html();
-		jQuery.getJSON('user.php' + '?cmd=getUserInfo&UserId=' + UserId + '&t=' + new Date().getTime(), function(data) {
+		jQuery.getJSON(jQuery('#desinventarURL').val() + '/user.php' + '?cmd=getUserInfo&UserId=' + UserId + '&t=' + new Date().getTime(), function(data) {
 			jQuery("#txtUserId").attr('readonly','true');
 			jQuery("#txtUserId").val(data.UserId);
 			jQuery("#selCountryIso").val(data.CountryIso);
@@ -110,11 +110,11 @@ function onReadyUserAdmin() {
 				user['User[UserActive]'] = 'off';
 			}
 			// Send AJAX request to update information
-			jQuery.post('user.php', user, function(data) {
+			jQuery.post(jQuery('#desinventarURL').val() + '/user.php', user, function(data) {
 				eval('var myObj = ' + data);
 				jQuery("#lblUserStatusMsg").text(myObj.Message);
 				// Reload user list on success
-				jQuery("#divUserList").load('user.php' + '?cmd=list', function(data) {
+				jQuery("#divUserList").load(jQuery('#desinventarURL').val() + '/user.php' + '?cmd=list', function(data) {
 					onReadyUserAdmin();
 				});
 			});
@@ -129,7 +129,7 @@ function onReadyUserAdmin() {
 			}
 			this.timer = setTimeout(function() {
 				jQuery.ajax({
-					url      : 'user.php',
+					url      : jQuery('#desinventarURL').val() + '/user.php',
 					data     : 'cmd=chklogin&UserId=' + t.value,
 					type     : 'post',
 					success  : function(data) {
@@ -150,10 +150,6 @@ function validateUserEditForm() {
 		jQuery("#txtUserId").after('<span class="error">Cannot be empty</span>');
 		//bReturn = false;
 	}
-	/*
-		action="javascript:var s=$('userpafrm').serialize(); sendData('','user.php', s, '');"
-		onSubmit="javascript:var a=new Array('UserId', 'UserEMail', 'UserFullName'); return(checkForm(a, '{-#errmsgfrmregist#-}'));"> 
-	*/
 	return bReturn;		
 };
 

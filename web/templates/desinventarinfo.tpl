@@ -1,8 +1,9 @@
 <div id="desinventarInfo" style="display:none;">
-	<input type="hidden" id="fldDesinventarURL"          value="{-$desinventarURL-}">
-	<input type="hidden" id="fldDesinventarLang"         value="{-$desinventarLang-}">
-	<input type="hidden" id="fldDesinventarVersion"      value="{-$desinventarVersion-}">
-	<input type="hidden" id="fldDesinventarUserId"       value="{-$desinventarUserId-}">
-	<input type="hidden" id="fldDesinventarUserFullName" value="{-$desinventarUserFullName-}">
-	<input type="hidden" id="fldDesinventarModule"       value="{-$desinventarModule-}">
+	<input type="hidden" id="desinventarURL"          value="{-$desinventarURL-}" />
+	<input type="hidden" id="desinventarURLPortal"    value="{-$desinventarURLPortal-}" />
+	<input type="hidden" id="desinventarLang"         value="{-$desinventarLang-}" />
+	<input type="hidden" id="desinventarVersion"      value="{-$desinventarVersion-}" />
+	<input type="hidden" id="desinventarUserId"       value="{-$desinventarUserId-}" />
+	<input type="hidden" id="desinventarUserFullName" value="{-$desinventarUserFullName-}" />
+	<input type="hidden" id="desinventarModule"       value="{-$desinventarModule-}" />
 </div>
