@@ -9,8 +9,8 @@ if (! isset($_SERVER['DI8_WEB'])) {
 }
 
 // This is the version of the software
-define('VERSION', '8.2.1.01');
-define('JSVERSION', '2010-06-28.01');
+define('VERSION', '8.2.1.02');
+define('JSVERSION', '2010-06-30.01');
 
 // 2009-07-22 (jhcaiced) Adapted Configuration and Startup for 
 // using with PHP Command Line 
@@ -60,9 +60,15 @@ if (isset($_SERVER['HTTP_HOST'])) {
 } else {
 	// Running a Command Line Script
 	define('MODE', 'command');
-	$_SERVER['DI8_WWWDIR']   = '/var/www/desinventar-8.2';
-	$_SERVER['DI8_DATADIR']  = '/var/lib/desinventar-8.2';
-	$_SERVER['DI8_CACHEDIR'] = '/var/cache/Smarty/di8';
+	if (! isset($_SERVER['DI8_WWWDIR'])) {
+		$_SERVER['DI8_WWWDIR']   = '/var/www/desinventar-8.2';
+	}
+	if (! isset($_SERVER['DI8_DATADIR'])) {
+		$_SERVER['DI8_DATADIR']  = '/var/lib/desinventar-8.2';
+	}
+	if (! isset($_SERVER['DI8_CACHEDIR'])) {
+		$_SERVER['DI8_CACHEDIR'] = '/var/cache/Smarty/di8';
+	}
 	define('TEMP', '/tmp');
 }
 define('BASE'    , $_SERVER['DI8_WEB']);
