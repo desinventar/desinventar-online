@@ -47,7 +47,7 @@ function getParameter($prmName, $prmDefault) {
 }
 
 function showDebugMsg($sMsg) {
-	print $sMsg . "<br />\n";
+	print $sMsg . '<br />' . "\n";
 }
 
 function createIfNotExistDirectory($sMyPath) {
@@ -59,7 +59,7 @@ function createIfNotExistDirectory($sMyPath) {
 }
 
 function testMap($laypath) {
-	if (file_exists($laypath .".shp") && file_exists($laypath .".dbf"))
+	if (file_exists($laypath .'.shp') && file_exists($laypath .'.dbf'))
 		return true;
 	return false;
 }
@@ -92,22 +92,23 @@ function iserror ($val) {
 	
 function showerror ($val) {
 	switch ($val) {
-		case ERR_UNKNOWN_ERROR:     $error = "Desconocido"; break;
-		case ERR_INVALID_COMMAND:   $error = "Comando inv&aacute;lido"; break;
-		case ERR_OBJECT_EXISTS:     $error = "Objeto ya existe"; break;
-		case ERR_NO_DATABASE:       $error = "Sin conexi&oacute;n a la BD"; break;
-		case ERR_INVALID_PASSWD:    $error = "Clave inv&aacute;lida"; break;
-		case ERR_ACCESS_DENIED:     $error = "Acceso denegado a Usuario"; break;
-		case ERR_OBJECT_NOT_FOUND:  $error = "Objeto no funciona"; break;
-		case ERR_CONSTRAINT_FAIL:   $error = "Permisos insuficientes"; break;
-		case ERR_NO_CONNECTION:     $error = "Sin conexi&oacute;n al Sistema"; break;
-		default:                    $error = "No codificado"; break;
+		case ERR_UNKNOWN_ERROR:     $error = 'Desconocido'; break;
+		case ERR_INVALID_COMMAND:   $error = 'Comando inv&aacute;lido'; break;
+		case ERR_OBJECT_EXISTS:     $error = 'Objeto ya existe'; break;
+		case ERR_NO_DATABASE:       $error = 'Sin conexi&oacute;n a la BD'; break;
+		case ERR_INVALID_PASSWD:    $error = 'Clave inv&aacute;lida'; break;
+		case ERR_ACCESS_DENIED:     $error = 'Acceso denegado a Usuario'; break;
+		case ERR_OBJECT_NOT_FOUND:  $error = 'Objeto no funciona'; break;
+		case ERR_CONSTRAINT_FAIL:   $error = 'Permisos insuficientes'; break;
+		case ERR_NO_CONNECTION:     $error = 'Sin conexi&oacute;n al Sistema'; break;
+		case ERR_TABLE_LOCKED:      $error = 'Problema temporal, repita la operaci&oacute;n'; break;
+		default:                    $error = 'No codificado'; break;
 	}
-	$res = "Error: $error";
+	$res = 'Error: $error';
 	// Very Serious Errors inmediatly notify to Portal Administrator.. 
 	if ($val == ERR_NO_CONNECTION || $val == ERR_NO_DATABASE) {
-		$res .= " (Automatic notification is required)";
-		// SendMessage ("root@di..", "Severe DI8 Not connection", "Error: $res");
+		$res .= ' (Automatic notification is required)';
+		// SendMessage ('root@di..', 'Severe DI8 Not connection', 'Error: $res');
 	}
 	return $res;
 }
@@ -138,18 +139,18 @@ function fixPost($post) {
 }
 
 function microtime_float() {
-    list($usec, $sec) = explode(" ", microtime());
+    list($usec, $sec) = explode(' ', microtime());
     return ((float)$usec + (float)$sec);
 }
 
 function generatePasswd($length=6,$level=2){
 	list($usec, $sec) = explode(' ', microtime());
 	srand((float) $sec + ((float) $usec * 100000));
-	$validchars[1] = "0123456789abcdfghjkmnpqrstvwxyz";
-	$validchars[2] = "0123456789abcdfghjkmnpqrstvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	$validchars[3] = "0123456789_!@#$%&*()-=+/abcdfghjkmnpqrstvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_!@#$%&*()-=+/";
+	$validchars[1] = '0123456789abcdfghjkmnpqrstvwxyz';
+	$validchars[2] = '0123456789abcdfghjkmnpqrstvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	$validchars[3] = '0123456789_!@#$%&*()-=+/abcdfghjkmnpqrstvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_!@#$%&*()-=+/';
 	
-	$password  = "";
+	$password  = '';
 	$counter   = 0;
 	while ($counter < $length) {
 		$actChar = substr($validchars[$level], rand(0, strlen($validchars[$level])-1), 1);
