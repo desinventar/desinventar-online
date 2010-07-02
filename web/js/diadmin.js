@@ -89,11 +89,6 @@
 				updateList('lst_eef', 'extraeffects.php', 'r='+ reg +'&cmd=list');
 			break;
 			default:
-				/* alert(newData);
-				if (newData == "REGISTERED") {
-					alert('Se ha enviado un correo con la clave');
-					window.location = "";
-				}*/
 			break;
 		}
 	}
@@ -323,7 +318,7 @@
 			}
 		}
 		if (status == false) {
-			alert(errmsg);
+			//alert(errmsg);
 		}
 		return status;
 	} //function
@@ -343,7 +338,7 @@
 				case "text": case "hidden": case "password": case "textarea":
 					// is it a required field?
 					if (encodeURI(ft) == "required" && encodeURI(fv).length < 1) {
-						alert('-' + fn + '- is a required field, please complete.');
+						//alert('-' + fn + '- is a required field, please complete.');
 						els.focus();
 						return false;
 					}

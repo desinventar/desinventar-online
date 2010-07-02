@@ -215,7 +215,6 @@ if (isset($_GET['u'])) {
 			$o->setFromArray($data);
 			$o->set('RecordUpdate', gmdate('c'));
 			$i = $o->update();
-			fb('main : ' . $i);
 			$t->assign('statusmsg', 'updateok');
 			if (!iserror($i)) {
 				// Save EEData ....
@@ -225,9 +224,7 @@ if (isset($_GET['u'])) {
 				$eedat['DisasterId'] = $data['DisasterId'];
 				$o = new DIEEData($us, $eedat['DisasterId']);
 				$o->setFromArray($eedat);
-				fb($o->getUpdateQuery());
 				$i = $o->update();
-				fb('extra : ' . $i);
 			} else {
 				$t->assign('statusmsg', showerror($i));
 			}

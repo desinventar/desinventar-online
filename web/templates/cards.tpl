@@ -285,7 +285,7 @@
 					</table>
 					</div>
 					<!-- BEG EXTRA EFFECTS FIELDS -->
-					<div class="divDatacardEffects" id="divDatacardEffectsAdditional" style="display:none;">
+					<div class="divDatacardEffects" id="divDatacardEffectsAdditional">
 					<table class="grid">
 						<tr>
 							<td>
@@ -300,8 +300,16 @@
 							{-/if-}
 								<td ext:qtip="{-$item[1]-}">
 									{-$item[0]-}<br />
+									
+									{-assign var="inputClass" value="inputText" -}
+									{-if $item[2] == "INTEGER" -} 
+										{-assign var="inputClass" value="inputInteger" -}
+									{-/if-}
+									{-if $item[2] == "CURRENCY" -} 
+										{-assign var="inputClass" value="inputDouble" -}
+									{-/if-}
 									<input type="text" id="{-$key-}" name="{-$key-}" size="30"
-										class="line inputText" tabindex="{-$tabeef-}"
+										class="line {-$inputClass-}" tabindex="{-$tabeef-}"
 										onFocus="showtip('{-$item[1]-}', '#f1bd41')" />
 								</td>
 							{-if ($smarty.foreach.eefl.iteration ) % 3 == 0-}

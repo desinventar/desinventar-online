@@ -106,7 +106,6 @@ class DIObject {
 	}
 	
 	public function set($prmKey, $prmValue, $LangIsoCode='') {
-		//printf('%3s %-20s %s\n', $LangIsoCode, $prmKey, $prmValue);
 		if ($LangIsoCode == '') {
 			$obj = &$this->oField['info'];
 		} else {
@@ -125,7 +124,9 @@ class DIObject {
 				if ($sValue . '' == '')    { $sValue = 0; }
 			}
 			if (($sFieldType == 'INTEGER') ||
-			    ($sFieldType == 'DOUBLE') ) {
+			    ($sFieldType == 'DOUBLE' ) ||
+			    ($sFieldType == 'FLOAT'  ) ||
+			    ($sFieldType == 'CURRENCY')) {
 				if ($sValue == '') { $sValue = 0; }
 			}
 			$obj[$prmKey] = $sValue;
@@ -226,7 +227,6 @@ class DIObject {
 			$oItem = split('/', $sValue);
 			$sFieldName = $oItem[0];
 			$sFieldType = $oItem[1];
-			fb($sFieldName . ' ' . $sFieldType . ' ' . $this->get($sFieldName));
 			if ($i > 0) {
 				$sQuery .= ',';
 			}
