@@ -3,8 +3,9 @@ function onReadyDatacards() {
 		jQuery('#DatacardCommand').val(jQuery('#_CMD').val());
 		jQuery('#RecordAuthor').val(jQuery('#desinventarUserId').val());
 		jQuery('#RegionId').val(jQuery('#desinventarRegionId').val());
+		var params = 'RegionId=' + jQuery('#RegionId').val() + '&' + jQuery(this).serialize();
 		jQuery.post('cards.php',
-			jQuery(this).serialize(),
+			params,
 			function(data) {
 				jQuery('#dic').html(data);
 				displayDatacardStatusMsg('');
