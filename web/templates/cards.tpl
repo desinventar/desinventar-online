@@ -293,7 +293,7 @@
 							</td>
 						</tr>
 						{-assign var="tabeef" value="200"-}
-						{-foreach name=eefl key=key item=item from=$EEFList-}
+						{-foreach name=eefl key=key item=item from=$EEFieldList-}
 							{-assign var="tabeef" value="`$tabeef+1`"-}
 							{-if ($smarty.foreach.eefl.iteration - 1) % 3 == 0-}
 								<tr>
