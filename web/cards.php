@@ -72,16 +72,15 @@ function form2eedata($form) {
 }
 
 $RegionId = getParameter('RegionId', getParameter('r',''));
-$t->assign('RegionId', $RegionId);
+/*
 if ( ($RegionId == '') || ($RegionId == 'undefined') ) {
 	if ($us->RegionId != 'core') {
 		$RegionId = $us->RegionId;
 	}
 }
+*/
 if ($RegionId == '') {
 	exit(0);
-} else {
-	$us->open($RegionId);
 }
 
 // 2009-08-07 (jhcaiced) Validate if Database Exists...
@@ -89,6 +88,9 @@ if (! file_exists($us->q->getDBFile($RegionId))) {
 	print '<h3>Requested Region not found<br />';
 	exit();
 }
+
+$us->open($RegionId);
+$t->assign('RegionId', $RegionId);
 
 // UPDATER: If user is still connected, awake session so it will not expire
 if (isset($_GET['u'])) {
@@ -213,6 +215,7 @@ if (isset($_GET['u'])) {
 			$o->setFromArray($data);
 			$o->set('RecordUpdate', gmdate('c'));
 			$i = $o->update();
+			fb('main : ' . $i);
 			$t->assign('statusmsg', 'updateok');
 			if (!iserror($i)) {
 				// Save EEData ....
@@ -222,7 +225,9 @@ if (isset($_GET['u'])) {
 				$eedat['DisasterId'] = $data['DisasterId'];
 				$o = new DIEEData($us, $eedat['DisasterId']);
 				$o->setFromArray($eedat);
+				fb($o->getUpdateQuery());
 				$i = $o->update();
+				fb('extra : ' . $i);
 			} else {
 				$t->assign('statusmsg', showerror($i));
 			}

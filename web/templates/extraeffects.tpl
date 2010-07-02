@@ -52,7 +52,7 @@
 				tabindex="3" onFocus="showtip('{-$dic.DBEEFieldType[2]-}');">
 				<option value=""></option>
 				<option value="INTEGER">{-#typeinteger#-}</option>
-				<option value="FLOAT">{-#typefloat#-}</option>
+				<option value="CURRENCY">{-#typefloat#-}</option>
 				<option value="DATE">{-#typedate#-}</option>
 				<option value="TEXT">{-#typetext#-}</option>
 			</select>

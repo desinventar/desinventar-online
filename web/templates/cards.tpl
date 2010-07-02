@@ -45,7 +45,8 @@
 		</tr>
 	</table>
 	<form id="DICard" action="cards.php" method="POST" target="dic">
-		<input type="hidden" id="RegionId"           name="RegionId" value="{-$RegionId-}" />
+		<!--<input type="hidden" id="RegionId"           name="RegionId" value="{-$RegionId-}" />
+		-->
 		<input type="hidden" id="DisasterId"         name="DisasterId" value="" />
 		<input type="hidden" id="RecordAuthor"       name="RecordAuthor" value="" />
 		<input type="hidden" id="RecordCreation"     name="RecordCreation" />
@@ -297,12 +298,12 @@
 							{-if ($smarty.foreach.eefl.iteration - 1) % 3 == 0-}
 								<tr>
 							{-/if-}
-									<td ext:qtip="{-$item[1]-}">
-										{-$item[0]-}<br />
-										<input type="text" id="{-$key-}" name="{-$key-}" size="30"
-											class="line inputText" tabindex="{-$tabeef-}"
-											onFocus="showtip('{-$item[1]-}', '#f1bd41')" />
-									</td>
+								<td ext:qtip="{-$item[1]-}">
+									{-$item[0]-}<br />
+									<input type="text" id="{-$key-}" name="{-$key-}" size="30"
+										class="line inputText" tabindex="{-$tabeef-}"
+										onFocus="showtip('{-$item[1]-}', '#f1bd41')" />
+								</td>
 							{-if ($smarty.foreach.eefl.iteration ) % 3 == 0-}
 								</tr>
 							{-/if-}
