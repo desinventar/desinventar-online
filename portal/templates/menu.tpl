@@ -222,7 +222,7 @@
 			</tr>
 			<tr>
 				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-					<a href="#" class="RegionItem" alt="1257291151-yumbo_inventario_de_desastres">Yumbo (COL)</a>
+					<a href="#" class="RegionItem" alt="COL-1257291151-yumbo_inventario_de_desastres">Yumbo (COL)</a>
 				</td>
 			</tr>
 			</table>
