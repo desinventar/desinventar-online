@@ -220,6 +220,11 @@
 					<a href="#" class="RegionItem" alt="COL-1250694494-colombia_inventario_desastres_cali_zona_urbana">Cali (COL)</a>
 				</td>
 			</tr>
+			<tr>
+				<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
+					<a href="#" class="RegionItem" alt="1257291151-yumbo_inventario_de_desastres">Yumbo (COL)</a>
+				</td>
+			</tr>
 			</table>
 			<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 			<tr><td colspan="3"><img src="images/p_fin.gif" width="133" height="5"></td></tr>
