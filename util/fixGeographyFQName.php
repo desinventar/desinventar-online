@@ -17,9 +17,7 @@ $RegionList = array();
 foreach($q->core->query("SELECT * FROM Region ORDER BY RegionId") as $row) {
 	$RegionList[] = $row['RegionId'];
 }
-//DEBUG
-//$RegionList = array('DEMO' => 'BOL-1248983224-bolivia_inventario_historico_de_desastres');
-unset($RegionList['DEMO']);
+$RegionList = array('COL-1257291151-yumbo_inventario_de_desastres');
 foreach ($RegionList as $RegionId) {
 	print $RegionId . "\n";
 	$us->q->setDBConnection($RegionId);
