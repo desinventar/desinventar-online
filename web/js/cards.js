@@ -245,15 +245,20 @@ function onReadyDatacards() {
 		doDatacardFind();
 	});
 
+	// Start with Basic Effects show
+	jQuery('#divDatacardEffectsBasic').show();
+	
 	// Switch between Basic and Additional Effects
 	jQuery('#linkDatacardShowEffectsBasic').click(function() {
 		jQuery('#divDatacardEffectsBasic').show();
-		jQuery('#divDatacardEffectsAditional').hide();
+		jQuery('#divDatacardEffectsAdditional').hide();
+		return false;
 	});
 	
 	jQuery('#linkDatacardShowEffectsAditional').click(function() {
 		jQuery('#divDatacardEffectsBasic').hide();
-		jQuery('#divDatacardEffectsAditional').show();
+		jQuery('#divDatacardEffectsAdditional').show();
+		return false;
 	});
 
 	//Show Command Buttons only for Role>=USER

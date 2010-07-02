@@ -441,7 +441,6 @@ switch ($cmd) {
 					$t->assign('EventList', $us->q->loadEvents(null, 'active', $lg));
 					$t->assign('CauseList', $us->q->loadCauses(null, 'active', $lg));
 					$EEFieldList = $us->q->getEEFieldList('True');
-					fb($EEFieldList);
 					$t->assign('EEFieldList', $EEFieldList);
 					$t->assign('RegionId', $RegionId);
 					$t->assign('desinventarUserRole', $desinventarUserRole);
