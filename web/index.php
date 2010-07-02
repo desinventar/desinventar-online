@@ -243,8 +243,6 @@ switch ($cmd) {
 					$t->assign('cau', $us->q->queryLabelsFromGroup('Cause', $lg));
 					$t->assign('reg', $RegionId);
 					$t->assign('path', VAR_DIR);
-					$EEFieldList = $us->q->getEEFieldList('True');
-					$t->assign('EEFieldList', $EEFieldList);
 					// Get UserRole
 					$role = $us->getUserRole($RegionId);
 					$t->assign('role', $role);
@@ -442,8 +440,9 @@ switch ($cmd) {
 					$t->assign('GeoLevelItems', $gItems);
 					$t->assign('EventList', $us->q->loadEvents(null, 'active', $lg));
 					$t->assign('CauseList', $us->q->loadCauses(null, 'active', $lg));
-					$t->assign('EEFList', $us->q->getEEFieldList('True'));
-
+					$EEFieldList = $us->q->getEEFieldList('True');
+					fb($EEFieldList);
+					$t->assign('EEFieldList', $EEFieldList);
 					$t->assign('RegionId', $RegionId);
 					$t->assign('desinventarUserRole', $desinventarUserRole);
 					$t->assign('desinventarUserRoleValue', $desinventarUserRoleValue);
