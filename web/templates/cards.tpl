@@ -285,7 +285,7 @@
 					</table>
 					</div>
 					<!-- BEG EXTRA EFFECTS FIELDS -->
-					<div class="divDatacardEffects" id="divDatacardEffectsAdditional">
+					<div class="divDatacardEffects" id="divDatacardEffectsAdditional" style="display:none;">
 					<table class="grid">
 						<tr>
 							<td>
