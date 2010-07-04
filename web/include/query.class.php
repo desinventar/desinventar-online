@@ -639,21 +639,29 @@ class Query extends PDO {
 	}
 
 	public function getRegionAdminList() {
-		$sql = "SELECT R.RegionId AS RegionId, R.CountryIso AS CountryIso, R.RegionLabel AS RegionLabel, ".
-				"R.LangIsoCode AS LangIsoCode, RA.UserId AS UserId, R.RegionStatus AS RegionStatus ".
-				"FROM Region AS R, RegionAuth AS RA WHERE R.RegionId=RA.RegionId AND RA.AuthAuxValue='ADMINREGION' ".
-				"ORDER BY R.CountryIso, R.RegionLabel";
+		$sql = "SELECT * FROM Region WHERE RegionStatus>0 " . 
+				"ORDER BY CountryIso, RegionLabel";
 		$data = array();
 		foreach($this->core->query($sql) as $row) {
-			$RegionActive = ($row['RegionStatus'] & CONST_REGIONACTIVE) > 0;
-			$RegionPublic = ($row['RegionStatus'] & CONST_REGIONPUBLIC) > 0;
+			$RegionId = $row['RegionId'];
+			$row['RegionActive'] = ($row['RegionStatus'] & CONST_REGIONACTIVE) > 0;
+			$row['RegionPublic'] = ($row['RegionStatus'] & CONST_REGIONPUBLIC) > 0;
 			$RegionLabel  = $row['RegionLabel'];
-			if ($RegionLabel == '') {
-				$RegionLabel = $row['RegionId'];
+			if ($row['RegionLabel'] == '') {
+				$row['RegionLabel'] = $row['RegionId'];
 			}
-			$data[$row['RegionId']] = array($row['CountryIso'], $RegionLabel, $row['LangIsoCode'], 
-											$row['UserId'], $RegionActive, $RegionPublic);
-		}
+			$row['UserId_AdminRegion'] = '';
+			$data[$RegionId] = $row;
+		} //foreach
+		
+		foreach($data as $RegionId => &$info) {
+			$sQuery = 'SELECT * FROM RegionAuth WHERE ' . 
+				' RegionId="' . $RegionId . '" AND ' . 
+				' AuthKey="ROLE" AND AuthAuxValue="ADMINREGION" LIMIT 1;';
+			foreach($this->core->query($sQuery) as $row) {
+				$info['UserId_AdminRegion'] = $row['UserId'];
+			} //foreach
+		} //foreach
 		return $data;
 	}
 

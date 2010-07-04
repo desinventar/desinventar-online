@@ -127,22 +127,26 @@
 		}
 	}
 
-	function setRegionPA (id, cnt, name, lang, admin, active, pub) {
+	function setRegionPA (prmRegionId, prmCountryIso, prmRegionLabel, 
+	                      prmLangIsoCode, prmUserId_AdminRegion, 
+	                      prmRegionActive, prmRegionPublic) {
 		mod = "regionpa";
 		$(mod + 'addsect').style.display = 'block';
-		$('RegionId').value = id;
-		$('CountryIso').value = cnt;
-		$('RegionLabel').value = name;
-		$('LangIsoCode').value = lang;
-		$('RegionUserAdmin').value = admin;
-		if (active == "1")
+		jQuery('#RegionId').val(prmRegionId);
+		jQuery('#CountryIso').val(prmCountryIso);
+		jQuery('#RegionLabel').val(prmRegionLabel);
+		jQuery('#LangIsoCode').val(prmLangIsoCode);
+		jQuery('#RegionUserAdmin').val(prmUserId_AdminRegion);
+		if (prmRegionActive == "1") {
 			$('RegionActive').checked = true;
-		else
+		} else {
 			$('RegionActive').checked = false;
-		if (pub == "1")
+		}
+		if (prmRegionPublic == "1") {
 			$('RegionPublic').checked = true;
-		else
+		} else {
 			$('RegionPublic').checked = false;
+		}
 	}
 
 	function setRolLog (key, val, module) {
