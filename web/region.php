@@ -46,18 +46,18 @@ switch ($cmd) {
 		$t->assign ("usr", $us->getUsersList(''));
 		$t->assign ("LanguageList", $us->q->loadLanguages(1));
 		$t->assign ("ctl_adminreg", true);
-		$t->assign ("regpa", $us->q->getRegionAdminList());
-		$t->assign ("ctl_reglist", true);
+		$t->assign('RegionList', $us->q->getRegionAdminList());
+		$t->assign('ctl_reglist', true);
 	break;
 	case "list":
 		// ADMINREG: reload list from local SQLITE
-		$t->assign ("regpa", $us->q->getRegionAdminList());
-		$t->assign ("ctl_reglist", true);
+		$t->assign ('RegionList', $us->q->getRegionAdminList());
+		$t->assign ('ctl_reglist', true);
 	break;
 	case "createRegionsFromDBDir":
 		DIRegion::rebuildRegionListFromDirectory($us);
-		$t->assign ("regpa", $us->q->getRegionAdminList());
-		$t->assign ("ctl_reglist", true);
+		$t->assign ('RegionList', $us->q->getRegionAdminList());
+		$t->assign ('ctl_reglist', true);
 	break;
 	case "createRegionFromZip":
 		if (isset($_FILES['filereg']) && $_FILES['filereg']['error'] == UPLOAD_ERR_OK) {

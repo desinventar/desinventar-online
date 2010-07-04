@@ -3,6 +3,7 @@
 {-if $ctl_adminreg-}
 	<h2>{-#ttname#-}</h2>
 	<br />
+	<!--
 	<input id="directory" type="hidden" value="{-#bloaddir#-}"
 		onClick="updateList('lst_regionpa', 'region.php', 'cmd=createRegionsFromDBDir');" />
 	<b>{-#bupzipfile#-}</b> <br />
@@ -13,6 +14,7 @@
 		<input type="submit" value="Ok" onClick="uploadMsg('');" />
 	</form>
 	<br /><hr /><br />
+	-->
 	<div class="dwin" style="width:500px; height:150px;">
 	 <table class="col">
 	  <thead>
@@ -28,16 +30,16 @@
 {-/if-}
 {-** ADMINREG: reload region lists **-}
 {-if $ctl_reglist-}
-{-foreach name=rpa key=key item=item from=$regpa-}
+{-foreach name=rpa key=key item=item from=$RegionList-}
 		<tr class="{-if ($smarty.foreach.rpa.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}"
 			onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
 			onClick="uploadMsg(''); mod='regionpa'; $('cmd').value='update';
-					setRegionPA('{-$key-}','{-$item[0]-}','{-$item[1]-}','{-$item[2]-}','{-$item[3]-}','{-$item[4]-}','{-$item[5]-}');">
-			<td>{-$item[0]-}</td>
-			<td>{-$item[1]-}</td>
-			<td>{-$item[3]-}</td>
-			<td><input type="checkbox" {-if ($item[4] == 1) -} checked {-/if-} disabled /></td>
-			<td><input type="checkbox" {-if ($item[5] == 1) -} checked {-/if-} disabled /></td>
+				setRegionPA('{-$key-}','{-$item.CountryIso-}','{-$item.RegionLabel-}','{-$item.LangIsoCode-}','{-$item.UserId_AdminRegion-}','{-$item.RegionActive-}','{-$item.RegionPublic-}');">
+			<td>{-$item.CountryIso-}</td>
+			<td>{-$item.RegionLabel-}</td>
+			<td>{-$item.UserId_AdminRegion-}</td>
+			<td><input type="checkbox" {-if ($item.RegionActive == 1) -} checked {-/if-} disabled /></td>
+			<td><input type="checkbox" {-if ($item.RegionPublic == 1) -} checked {-/if-} disabled /></td>
 		</tr>
 {-/foreach-}
 {-/if-}
