@@ -40,26 +40,26 @@ elseif (isset($_GET['cmd']) && !empty($_GET['cmd']))
 	$cmd = $_GET['cmd'];
 
 switch ($cmd) {
-	case "adminreg":
+	case 'adminreg':
 		// ADMINREG: Form to Create and assign regions
 		$t->assign ("cntl", $us->q->getCountryList());
 		$t->assign ("usr", $us->getUsersList(''));
 		$t->assign ("lglst", $us->q->loadLanguages(1));
 		$t->assign ("ctl_adminreg", true);
-		$t->assign ("regpa", $us->q->getRegionAdminList());
-		$t->assign ("ctl_reglist", true);
+		$t->assign ('RegionList', $us->q->getRegionAdminList());
+		$t->assign ('ctl_reglist', true);
 	break;
-	case "list":
+	case 'list':
 		// ADMINREG: reload list from local SQLITE
-		$t->assign ("regpa", $us->q->getRegionAdminList());
-		$t->assign ("ctl_reglist", true);
+		$t->assign ('RegionList', $us->q->getRegionAdminList());
+		$t->assign ('ctl_reglist', true);
 	break;
-	case "createRegionsFromDBDir":
+	case 'createRegionsFromDBDir':
 		DIRegion::rebuildRegionListFromDirectory($us);
-		$t->assign ("regpa", $us->q->getRegionAdminList());
-		$t->assign ("ctl_reglist", true);
+		$t->assign ('RegionList', $us->q->getRegionAdminList());
+		$t->assign ('ctl_reglist', true);
 	break;
-	case "createRegionFromZip":
+	case 'createRegionFromZip':
 		if (isset($_FILES['filereg']) && $_FILES['filereg']['error'] == UPLOAD_ERR_OK) {
 			$zip = new ZipArchive;
 			if ($zip->open($_FILES['filereg']['tmp_name'])) {
@@ -117,7 +117,7 @@ switch ($cmd) {
 		}
 	break;
 } //switch
-$t->assign ("dic", $us->q->queryLabelsFromGroup('DB', $lg));
-$t->display ("region.tpl");
+$t->assign('dic', $us->q->queryLabelsFromGroup('DB', $lg));
+$t->display('region.tpl');
 
 </script>
