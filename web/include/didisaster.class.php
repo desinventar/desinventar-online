@@ -92,11 +92,19 @@ class DIDisaster extends DIObject {
 		  " WHERE " . $this->getWhereSubQuery();
 		return $sQuery;
 	}
+
+	public function insert($withValidate = true) {
+		if ($this->get('DisasterId') == '') {
+			$this->set('DisasterId', uuid());
+		}
+		return parent::insert($withValidate);
+	}
 	
-	public function validateCreate() {
+	public function validateCreate($bStrict=false) {
 		$iReturn = 1;
 		$iReturn = $this->validateNotNull(-51, 'DisasterId');
 		$iReturn = $this->validatePrimaryKey(-52);
+		$iReturn = parent::validateCreate($bStrict);
 		return $iReturn;
 	}
 	
@@ -113,15 +121,7 @@ class DIDisaster extends DIObject {
 		$iReturn = $this->validateRef(-60, 'CauseId', 'Cause', 'CauseId');
 		// Warning
 		$iReturn = $this->validateEffects(WARNING);
-		$iReturn = ERR_NO_ERROR;
-		if ($this->status->hasError()) {
-			$iReturn = ERR_UNKNOWN_ERROR;
-		} elseif ($this->status->hasWarning()) {
-			$iReturn = ERR_NO_ERROR;
-			if ($bStrict) {
-				$iReturn = ERR_UNKNOWN_ERROR;
-			}
-		}
+		$iReturn = parent::validateUpdate($bStrict);
 		return $iReturn;
 	}
 	
