@@ -44,7 +44,6 @@ while (! feof(STDIN) ) {
 		$DisasterSerial = $a[0];
 		$p = $us->getDisasterIdFromSerial($DisasterSerial);
 		$DisasterId = $p['DisasterId'];		
-		print $DisasterSerial . ' ' . $DisasterId . "\n";
 		$DisasterBeginTime = strToISO8601($a[1]);
 		if ($DisasterBeginTime != '') {
 			$d = new DIDisaster($us, $DisasterId);
@@ -119,24 +118,8 @@ while (! feof(STDIN) ) {
 			// 32 - 46 EffectNotes
 			$d->set('EffectNotes', $a[46]);
 			
-			/*
-			$v = $d->validateCreate();
-            //$v = $d->validateUpdate();
-			if ($v['Status'] < 0) {
-				print $line . ',' . $v['Status'];
-				if ($v['Status'] == -58) {
-					print ',' . $a[2] . ',' . $a[3];
-				} elseif ($v['Status'] == -59) {
-					print ',' . $a[5];
-				} elseif ($v['Status'] == -60) {
-					print ',' . $a[4];
-				}
-				print "\n";
-			}
-			*/
 			if ($d->exist() < 0) {
 				$i = $d->insert();
-				fb($i);
 			} else {
 				$i = $d->update();
 			}
