@@ -71,16 +71,16 @@
 							var res = request.responseText;
 							if (res.substr(0,8) == "RESERVED") {
 								DisableEnableForm($('DICard'), false);
+								jQuery('#PrevDisasterSerial').val(jQuery('#DisasterSerial').val());
 								jQuery('#DisasterBeginTime0').focus();
 								$('_CMD').value = 'updateDICard';
 								uploadMsg("{-#tmsgeditcardfill#-}");
 								changeOptions(btn);
-								//parent.s.expand();
 							}
 							else 
 								uploadMsg("{-#tdconuse#-}");
 						}
-					} );
+					});
 				break;
 				case "cardsav":
 					var bContinue = true;
@@ -89,20 +89,18 @@
 					var PrevDisasterSerial = jQuery('#PrevDisasterSerial').val();
 					jQuery.post('cards.php',
 						{'cmd'            : 'existDisasterSerial',
-						 'RegionId'       : '{-$reg-}',
+						 'RegionId'       : jQuery('#prmRegionId').val(),
 						 'DisasterSerial' : DisasterSerial
 						},
 						function(data) {
 							bContinue = true;
 							if ( (cmd == 'insertDICard') && (data.DisasterSerial != '') ) {
 								// Serial of new datacard already exists...
-								//alert('Disaster Serial already exists...');
 								bContinue = false;
 							}
 							if (cmd == 'updateDICard') {
 								if ( (DisasterSerial != PrevDisasterSerial) && (data.DisasterSerial != '') ) {
 									// Edited Serial exists in database...
-									//alert('Disaster Serial is duplicated...');
 									bContinue = false;
 								}
 							}
@@ -114,7 +112,9 @@
 													'geolev0', 'EventId', 'CauseId', 'RecordStatus');
 								if (checkForm(fl, "{-#errmsgfrm#-}")) {
 									uploadMsg('');
-									$('DICard').submit();
+									jQuery('#PrevDisasterSerial').val(jQuery('#DisasterSerial').val());
+									//$('DICard').submit();
+									jQuery('#DICard').submit();
 									DisableEnableForm($('DICard'), true);
 									changeOptions(btn);
 									// clear Help text area

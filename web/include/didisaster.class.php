@@ -96,14 +96,14 @@ class DIDisaster extends DIObject {
 	public function validateCreate() {
 		$iReturn = 1;
 		$iReturn = $this->validateNotNull(-51, 'DisasterId');
+		$iReturn = $this->validateUnique(-54, 'DisasterSerial', WARNING);
 		$iReturn = $this->validatePrimaryKey(-52);
 		return $iReturn;
 	}
 	
-	public function validateUpdate($bStrict=true) {
+	public function validateUpdate($bStrict=false) {
 		$iReturn = parent::validateUpdate();
 		$iReturn = $this->validateNotNull(-53, 'DisasterSerial');
-		$iReturn = $this->validateUnique(-54, 'DisasterSerial', WARNING);
 		$iReturn = $this->validateNotNull(-55, 'DisasterBeginTime');
 		// Warning
 		$iReturn = $this->validateNotNull(-56, 'DisasterSource',WARNING);
@@ -115,11 +115,11 @@ class DIDisaster extends DIObject {
 		$iReturn = $this->validateEffects(WARNING);
 		$iReturn = ERR_NO_ERROR;
 		if ($this->status->hasError()) {
-			$iReturn = ERR_UNKNOWN_ERROR;
+			$iReturn = reset(array_keys($this->status->error));
 		} elseif ($this->status->hasWarning()) {
 			$iReturn = ERR_NO_ERROR;
 			if ($bStrict) {
-				$iReturn = ERR_UNKNOWN_ERROR;
+				$iReturn = reset(array_keys($this->status->warning));
 			}
 		}
 		return $iReturn;
