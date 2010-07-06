@@ -78,7 +78,7 @@ class DIGeography extends DIObject {
 	public static function getIdByName($prmSession, $prmGeographyName, $prmParentId) {
 		$GeographyId = '';
 		$LangIsoCode = $prmSession->q->getDBInfoValue('LangIsoCode');
-		$Query= "SELECT * FROM Geography WHERE GeographyName='" . $prmGeographyName . "' " . 
+		$Query= "SELECT * FROM Geography WHERE GeographyName LIKE '" . $prmGeographyName . "' " . 
 		        " AND LangIsoCode='" . $LangIsoCode . "'";
 		if ($prmParentId != '') {
 			$MinGeographyLevel = strlen($prmParentId)/5 - 1;
