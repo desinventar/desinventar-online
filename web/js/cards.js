@@ -214,6 +214,7 @@ function doDatacardNew() {
 	jQuery('#DisasterBeginTime0').val('');
 	jQuery('#DisasterBeginTime1').val('');
 	jQuery('#DisasterBeginTime2').val('');
+	jQuery('#PrevDisasterSerial').val(jQuery('#DisasterSerial').val());	
 	displayDatacardStatusMsg('msgDatacardFill');
 	changeOptions('btnDatacardNew');
 }
