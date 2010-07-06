@@ -814,6 +814,12 @@ class DIRegion extends DIObject {
 		}
 		$a['DataMinDate'] = $MinDate;
 		$a['DataMaxDate'] = $MaxDate;
+		
+		// 2010-07-06 (jhcaiced) Manually Calculate RegionLastUpdate
+		$sQuery = "SELECT MAX(RecordUpdate) AS MAX FROM Disaster;";
+		foreach($this->q->dreg->query($sQuery) as $row) {
+			$a['RegionLastUpdate'] = substr($row['MAX'],0,10);
+		}
 		return $a;
 	}
 	
