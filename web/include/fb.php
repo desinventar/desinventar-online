@@ -21,7 +21,7 @@ if (isset($_SERVER["HTTP_HOST"])) {
 } else {
 	// Command Line Mode...
 	function fb($Msg) {
-		print "fb: " . $Msg . "\n";
+		print "fb: "; print_r($Msg); print "\n";
 	}
 }
 

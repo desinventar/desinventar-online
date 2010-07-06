@@ -116,6 +116,7 @@ class DIObject {
 			$sValue = $prmValue;
 			$sFieldType = $this->oFieldType[$prmKey];
 			if ($sFieldType == 'STRING') {
+				// Remove special chars...
 				$sValue = trim($sValue);
 			}
 			if ($sFieldType == 'BOOLEAN') {
@@ -402,12 +403,32 @@ class DIObject {
 		return array_key_exists($prmField, $this->oField[$section]);
 	}
 
-	public function validateCreate() {
-		return 1;
+	public function validateCreate($bStrict=true) {
+		$iReturn = ERR_NO_ERROR;
+		if ($this->status->hasError()) {
+			fb($this->status->error);
+			$iReturn = reset(array_keys($this->status->error));
+		} elseif ($this->status->hasWarning()) {
+			$iReturn = ERR_NO_ERROR;
+			if ($bStrict) {
+				$iReturn = reset(array_keys($this->status->warning));
+			}
+		}
+		return $iReturn;
 	}	
 
 	public function validateUpdate($bStrict=true) {
-		return ERR_NO_ERROR;
+		$iReturn = ERR_NO_ERROR;
+		if ($this->status->hasError()) {
+			fb($this->status->error);
+			$iReturn = reset(array_keys($this->status->error));
+		} elseif ($this->status->hasWarning()) {
+			$iReturn = ERR_NO_ERROR;
+			if ($bStrict) {
+				$iReturn = reset(array_keys($this->status->warning));
+			}
+		}
+		return $iReturn;
 	}
 	
 	public function validateDelete() {
