@@ -219,7 +219,11 @@ if (isset($_GET['u'])) {
 		}
 		$t->assign("dipub", $us->q->getNumDisasterByStatus("PUBLISHED"));
 		$t->assign("direa", $us->q->getNumDisasterByStatus("READY"));
-		$t->display("cards_result.tpl");
+		//$t->display("cards_result.tpl");
+		$answer = array();
+		$answer['Status'] = 'OK';
+		$answer['DisasterId'] = $o->get('DisasterId');
+		echo json_encode($answer);
 		// End _CMD Block
 	} else {
 		//if ($us->UserId == '' || $us->getUserRole($sRegionId == '')) {}

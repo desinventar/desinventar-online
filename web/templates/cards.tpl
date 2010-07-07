@@ -113,7 +113,6 @@
 								if (checkForm(fl, "{-#errmsgfrm#-}")) {
 									uploadMsg('');
 									jQuery('#PrevDisasterSerial').val(jQuery('#DisasterSerial').val());
-									//$('DICard').submit();
 									jQuery('#DICard').submit();
 									DisableEnableForm($('DICard'), true);
 									changeOptions(btn);
@@ -185,6 +184,17 @@
 			
 			jQuery('#btnDatacardNew').click(function() {
 				doDatacardNew();
+				return false;
+			});
+
+			jQuery('#DICard').submit(function() {
+				jQuery.post('cards.php',
+					jQuery(this).serialize(),
+					function(data) {
+						jQuery('#DisasterId').val(data.DisasterId);
+					},
+					'json'
+				);
 				return false;
 			});
 		});
