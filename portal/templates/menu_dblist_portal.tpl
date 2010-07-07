@@ -8,7 +8,7 @@
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_ini.gif" width="133" height="5"></td></tr>
 		<tr>
 			<td class="paisel" colspan="3">
-				<a href="#" class="RegionGroup" alt="6">{-#di_andeansubregion#-}</a>
+				<a href="#" class="RegionGroup" alt="6" expand="true">{-#di_andeansubregion#-}</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
