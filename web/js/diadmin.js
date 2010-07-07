@@ -504,6 +504,7 @@
 		else
 			diform = $('DICard');
 		var objElems = diform.elements; // DICard is DesInventar form..
+		
 		for (i=0; i < objElems.length; i++) {
 			if (objElems[i].id == "geolev0") {
 				geo = arr['GeographyId'];
