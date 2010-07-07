@@ -1,6 +1,39 @@
 
 var mod = "di";
 
+function onReadyDatacard() {
+	jQuery('.divStatusMsg').hide();
+
+	jQuery('#DICard').submit(function() {
+		jQuery.post('cards.php',
+			jQuery(this).serialize(),
+			function(data) {
+				jQuery('#DisasterId').val(data.DisasterId);
+				jQuery('#RecordSerial').text(data.RecordSerial);
+				jQuery('#RecordPublished').text(data.RecordPublished);
+				jQuery('#RecordReady').text(data.RecordReady);
+				
+				switch(data.Status) {
+					case 'INSERTOK':
+						jQuery('#divRecordStat').show();
+						displayDatacardStatusMsg('msgInsertOk');
+					break;
+					case 'UPDATEOK':
+						jQuery('#divRecordStat').show();
+						displayDatacardStatusMsg('msgUpdateOk');
+					break;
+					default:
+						jQuery('#msgStatus').text(data.StatusMsg);
+						displayDatacardStatusMsg('msgStatus');
+					break;
+				} //switch
+			},
+			'json'
+		);
+		return false;
+	});
+}
+
 function hidediv(myDiv) {
 	$(myDiv).style.visibility = 'hidden';
 }
@@ -162,6 +195,7 @@ function switchEff(section) {
 
 function displayDatacardStatusMsg(msgId) {
 	// First hide all items
+	jQuery('#divDatacardStatusMessage').show();
 	jQuery('.datacardStatusMsg').hide();
 	// Show a specific message
 	if (msgId != '') {

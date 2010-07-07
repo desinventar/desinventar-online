@@ -175,6 +175,7 @@ if (isset($_GET['u'])) {
 	} elseif (isset($_POST['_CMD'])) {
 		// Commands in POST mode: insert, update, search.. datacards.. 
 		$us->releaseDatacard($_POST['DisasterId']);
+		$StatusMsg = '';
 		if ($_POST['_CMD'] == "insertDICard") {
 			// Insert New Datacard
 			$data = form2disaster($_POST, CMD_NEW);
@@ -183,18 +184,19 @@ if (isset($_GET['u'])) {
 			$o->set('RecordCreation', gmdate('c'));
 			$o->set('RecordUpdate', gmdate('c'));
 			$i = $o->insert();
-			$t->assign("statusmsg", "insertok");
+			$Status = 'INSERTOK';
+			$ErrorCode = ERR_NO_ERROR;
 			if (!iserror($i)) {
-				// Save EEData ....
-				$t->assign("diserial", $data['DisasterSerial']);
 				// If Datacard is valid, update EEData Table..
 				$eedat = form2eedata($_POST);
 				$eedat['DisasterId'] = $data['DisasterId'];
-				$o = new DIEEData($us, $eedat['DisasterId']);
-				$o->setFromArray($eedat);
-				$i = $o->insert();
+				$e = new DIEEData($us, $eedat['DisasterId']);
+				$e->setFromArray($eedat);
+				$i = $e->insert();
 			} else {
-				$t->assign("statusmsg", showerror($i));
+				$Status = 'ERROR';
+				$StatusMsg = showerror($i);
+				$ErrorCode = $i;
 			}
 		} elseif ($_POST['_CMD'] == "updateDICard") {
 			// Update Existing Datacard
@@ -203,26 +205,31 @@ if (isset($_GET['u'])) {
 			$o->setFromArray($data);
 			$o->set('RecordUpdate', gmdate('c'));
 			$i = $o->update();
-			$t->assign("statusmsg", "updateok");
+			$Status = 'UPDATEOK';
+			$ErrorCode = ERR_NO_ERROR;
 			if (!iserror($i)) {
 				// Save EEData ....
 				$t->assign("diserial", $data['DisasterSerial']);
 				// If Datacard is valid, update EEData Table..
 				$eedat = form2eedata($_POST);
 				$eedat['DisasterId'] = $data['DisasterId'];
-				$o = new DIEEData($us, $eedat['DisasterId']);
-				$o->setFromArray($eedat);
-				$i = $o->update();
+				$e = new DIEEData($us, $eedat['DisasterId']);
+				$e->setFromArray($eedat);
+				$i = $e->update();
 			} else {
-				$t->assign("statusmsg", showerror($i));
+				$Status = 'ERROR';
+				$StatusMsg = showerror($i);
+				$ErrorCode = $i;
 			}
 		}
-		$t->assign("dipub", $us->q->getNumDisasterByStatus("PUBLISHED"));
-		$t->assign("direa", $us->q->getNumDisasterByStatus("READY"));
-		//$t->display("cards_result.tpl");
 		$answer = array();
-		$answer['Status'] = 'OK';
-		$answer['DisasterId'] = $o->get('DisasterId');
+		$answer['Status']          = $Status;
+		$answer['ErrorCode']       = $ErrorCode;
+		$answer['DisasterId']      = $o->get('DisasterId');
+		$answer['RecordSerial']    = $o->get('DisasterSerial');
+		$answer['RecordPublished'] = $us->q->getNumDisasterByStatus("PUBLISHED");
+		$answer['RecordReady']     = $us->q->getNumDisasterByStatus("READY");
+		$answer['StatusMsg']       = $StatusMsg;
 		echo json_encode($answer);
 		// End _CMD Block
 	} else {

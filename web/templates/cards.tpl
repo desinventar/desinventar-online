@@ -16,6 +16,8 @@
 		function gotocard(opc) {
 			bUpdate = getDatacardUpdatePerm(jQuery('#prmUserRole').val());
 			RegionId = jQuery('#prmRegionId').val();
+			displayDatacardStatusMsg('');
+			jQuery('#divRecordStat').hide();
 			switch (opc) {
 				case "first":
 					bFound = requestDatacard('getDisasterIdFirst', $('DisasterId').value);
@@ -61,7 +63,6 @@
 
 		function onSubmitBtn(btn) {
 			displayDatacardStatusMsg('');
-			$('dic').src="about:blank";
 			switch (btn) {
 				case "cardupd":
 					// check if DC is on use
@@ -130,6 +131,7 @@
 					jQuery('#DisasterBeginTime0').focus();
 				break;
 				case "cardcan":
+					jQuery('#DisasterSerial').val('');
 					jQuery('#DisasterBeginTime0').val('');
 					jQuery('#DisasterBeginTime1').val('');
 					jQuery('#DisasterBeginTime2').val('');
@@ -186,19 +188,9 @@
 				doDatacardNew();
 				return false;
 			});
-
-			jQuery('#DICard').submit(function() {
-				jQuery.post('cards.php',
-					jQuery(this).serialize(),
-					function(data) {
-						jQuery('#DisasterId').val(data.DisasterId);
-					},
-					'json'
-				);
-				return false;
-			});
-		});
 			
+			onReadyDatacard();
+		});	
 	</script>
 
 	<style type="text/css">
@@ -237,7 +229,7 @@
 	<script type="text/javascript" src="include/wz_tooltip.js"></script>
 	<!-- BEG DI8 FORM CARD -->
 	<table width="900px" border="0" cellpadding="0" cellspacing="0" >
-		<tr valign="middle">
+		<tr valign="top">
 			<td width="450px" rowspan="2">
 				{-if $ctl_validrole-}
 					<input type="button" id="btnDatacardNew" class="bb bnew" onmouseover="Tip('{-#tnewtitle#-}: {-#tnewdesc#-}')" onmouseout="UnTip()" />
@@ -274,21 +266,25 @@
 				<span class="dlgmsg" id="dostat"></span>
 			</td>
 			<td align="right" width="450px">
-				<iframe name="dic" id="dic" frameborder="0" style="width:100%; height:28px;" src="about:blank"></iframe>
+				<div id="divDatacardStatusMessage" style="display:none;">
+					<span class="datacardStatusMsg" id="msgDuplicatedDisasterSerial">{-#msgDuplicatedDisasterSerial#-}</span>
+					<span class="datacardStatusMsg" id="msgDatacardFill">{-#tmsgnewcardfill#-}</span>
+					<span class="datacardStatusMsg" id="msgDuplicatedSerial"><b>{-#tdcerror#-}:</b> {-#tdisererr#-}</span>
+					<span class="datacardStatusMsg" id="msgInsertOk">{-#tdccreated#-}</span>
+					<span class="datacardStatusMsg" id="msgUpdateOk">{-#tdcupdated#-}</span>
+					<span class="datacardStatusMsg" id="msgStatus">{-$statusmsg-}</span>
+				</div>
 			</td>
 		</tr>
 		<tr>
-			<td align="left" valign="top" width="450px">
-				<div id="divDatacardStatusMessage">
-					<span class="datacardStatusMsg" id="msgDuplicatedDisasterSerial">{-#msgDuplicatedDisasterSerial#-}</span>
-					<span class="datacardStatusMsg" id="msgDatacardFill">{-#tmsgnewcardfill#-}</span>
-
+			<td align="right" valign="top" width="450px">
+				<div class="divStatusMsg" id="divRecordStat" style="display:none">
+					{-#tstatpublished#-} <span id="RecordPublished"></span>, {-#tstatready#-} <span id="RecordReady"></span>
 				</div>
-				<br />
 			</td>
 		</tr>
 	</table>
-	<form id="DICard" action="cards.php" method="POST" target="dic">
+	<form id="DICard" action="cards.php">
 		<input type="hidden" name="_REG" id="_REG" value="{-$reg-}">
 		<input type="hidden" name="DisasterId" id="DisasterId" value="">
 		<input type="hidden" name="RecordAuthor" id="RecordAuthor" value="{-$usr-}">
