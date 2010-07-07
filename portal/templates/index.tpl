@@ -102,18 +102,21 @@
 							<table bgcolor="#CF9D15" border=0 cellpadding="0" cellspacing="0">
 								<tr>
 									<td>
-										{-if $portaltype_desinventar-}
-										{-include file="menu_user.tpl"-}
+										{-if $portaltype == 'desinventar' -}
+											{-include file="menu_user.tpl"-}
 										{-/if-}										
 									</td>
 								</tr>
 								<tr>
 									<td>
-										{-if $portaltype_desinventar-}
+										{-if $portaltype == 'desinventar' -}
 											{-include file="menu_dblist_portal.tpl"-}
 										{-/if-}
-										{-if $portaltype_gar-}
-											{-include file="menu_dblist_gar.tpl"-}
+										{-if $portaltype == 'gar2009' -}
+											{-include file="menu_dblist_gar2009.tpl"-}
+										{-/if-}
+										{-if $portaltype == 'gar2011' -}
+											{-include file="menu_dblist_gar2011.tpl"-}
 										{-/if-}
 									</td>
 								</tr>
@@ -124,10 +127,10 @@
 								<tr><td bgcolor="white">
 									<center>
 										{-include file="logo_isdr.tpl" -}
-										{-if $portaltype_desinventar -}
+										{-if $portaltype == 'desinventar' -}
 											{-include file="logo_siapad.tpl" -}
 										{-/if-}
-										{-if $portaltype_gar-}
+										{-if $portaltype == 'gar2009' || $portaltype == 'gar2011' -}
 											{-include file="logo_gar.tpl"-}
 										{-/if-}
 									</center>
@@ -168,10 +171,10 @@
 								</table>
 							</div>
 							<div class="portalcontent" id="pagemap">
-								{-if $portaltype_desinventar-}
+								{-if $portaltype == 'desinventar' -}
 									{-include file="block_southamerica.tpl"-}
 								{-/if-}
-								{-if $portaltype_gar-}
+								{-if $portaltype == 'gar2009' || $portaltype == 'gar2011' -}
 									{-if $lang == 'spa'-}
 										{-include file="block_desinventar_spa.tpl"-}
 									{-else-}
@@ -208,7 +211,7 @@
 					<tr>
 						<td colspan="3">
 							<div align="right" style="margin-right:30px;">
-								{-if $portaltype_desinventar -}
+								{-if $portaltype == 'desinventar' -}
 									{-include file="logo_predecan.tpl"-}
 								{-/if-}
 								<br />
