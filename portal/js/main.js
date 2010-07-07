@@ -31,7 +31,7 @@ function onReadyPortal() {
 	});
 
 	// Expand first region group at start
-	jQuery('.RegionGroup:first').trigger('click');
+	jQuery('.RegionGroup[expand=yes]').trigger('click');
 
 	// Handle clicks on countries that return a list of regions
 	jQuery('.RegionList').click(function() {

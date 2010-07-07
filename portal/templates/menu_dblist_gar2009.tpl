@@ -11,7 +11,7 @@
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_ini.gif" width="133" height="5"></td></tr>
 		<tr>
 			<td class="paisel">
-				<a href="#" class="RegionGroup" alt="1">{-#treg1#-}</a>
+				<a href="#" class="RegionGroup" alt="1" expand="yes">{-#treg1#-}</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
