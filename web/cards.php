@@ -43,19 +43,17 @@ function form2disaster($form, $icmd) {
 	$data['RecordAuthor'] = $form['RecordAuthor'];
 	$data['RecordUpdate'] = gmdate('c');
 	$c = "";
+
 	// Disaster date
-	$aaaa = $form[$c .'DisasterBeginTime'][0];
-	if (!empty($form[$c .'DisasterBeginTime'][1])) {
-		$mm = $form[$c .'DisasterBeginTime'][1];
-	} else {
-		$mm = "00";
+	$str = sprintf('%04d', $form['DisasterBeginTime'][0]);
+	if (!empty($form['DisasterBeginTime'][1])) {
+		$str .= '-' . sprintf('%02d', $form['DisasterBeginTime'][1]);
+		if (!empty($form['DisasterBeginTime'][2])) {
+			$str .= '-' . sprintf('%02d', $form[$c .'DisasterBeginTime'][2]);
+		}
 	}
-	if (!empty($form[$c .'DisasterBeginTime'][2])) {
-		$dd = $form[$c .'DisasterBeginTime'][2];
-	} else {
-		$dd = "00";
-	}
-	$data['DisasterBeginTime'] = sprintf("%04d-%02d-%02d", $aaaa, $mm, $dd);
+	//$data['DisasterBeginTime'] = sprintf("%04d-%02d-%02d", $aaaa, $mm, $dd);
+	$data['DisasterBeginTime'] = $str;
 	// Disaster Geography
 	$data['GeographyId'] = $geogid;
 	return $data;
@@ -168,8 +166,14 @@ if (isset($_GET['u'])) {
 		$e = new DIEEData($us, $DisasterId);
 		$dcard = array_merge($d->oField['info'],$e->oField['info']);
 		$dcard['DisasterBeginTime[0]'] = substr($dcard['DisasterBeginTime'], 0, 4);
-		$dcard['DisasterBeginTime[1]'] = substr($dcard['DisasterBeginTime'], 5, 2);
-		$dcard['DisasterBeginTime[2]'] = substr($dcard['DisasterBeginTime'], 8, 2);
+		$dcard['DisasterBeginTime[1]'] = '';
+		$dcard['DisasterBeginTime[2]'] = '';
+		if (strlen($dcard['DisasterBeginTime']) > 4) {
+			$dcard['DisasterBeginTime[1]'] = substr($dcard['DisasterBeginTime'], 5, 2);
+		}
+		if (strlen($dcard['DisasterBeginTime']) > 7) {
+			$dcard['DisasterBeginTime[2]'] = substr($dcard['DisasterBeginTime'], 8, 2);
+		}
 		$dcard['_REG'] = $sRegionId;
 		echo json_encode($dcard);
 	} elseif (isset($_POST['_CMD'])) {

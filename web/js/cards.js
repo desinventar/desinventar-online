@@ -12,7 +12,6 @@ function onReadyDatacard() {
 				jQuery('#RecordSerial').text(data.RecordSerial);
 				jQuery('#RecordPublished').text(data.RecordPublished);
 				jQuery('#RecordReady').text(data.RecordReady);
-				
 				switch(data.Status) {
 					case 'INSERTOK':
 						jQuery('#divRecordStat').show();
