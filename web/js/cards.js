@@ -487,6 +487,7 @@ function doDatacardEdit() {
 		function(data) {
 			if (data.DatacardStatus == 'RESERVED') {
 				DisableEnableForm($('DICard'), false);
+				jQuery('#PrevDisasterSerial').val(jQuery('#DisasterSerial').val());
 				jQuery('#DisasterBeginTime0').focus();
 				jQuery('#_CMD').val('updateDICard');
 				displayDatacardStatusMsg('msgDatacardFill');
@@ -565,6 +566,7 @@ function doDatacardSave() {
 					var fl = new Array('DisasterSerial', 'DisasterBeginTime0', 'DisasterSource', 
 										'geolev0', 'EventId', 'CauseId');
 					if (checkForm(fl, jQuery('#msgDatacardFieldsError').text())) {
+						jQuery('#PrevDisasterSerial').val(jQuery('#DisasterSerial').val());
 						jQuery('#DICard').submit();
 					} else {
 						displayDatacardStatusMsg('msgDatacardFieldsError');
