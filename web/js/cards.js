@@ -154,9 +154,11 @@ function onReadyDatacards() {
 	});
 
 	jQuery('#DisasterBeginTime1').blur(function() {
-		if (parseInt(jQuery(this).val(),10) < 1 || 
+		if (jQuery(this).val() == '' ||
+		    parseInt(jQuery(this).val(),10) < 1 || 
 			parseInt(jQuery(this).val(),10) > 12 ) {
 				jQuery(this).val('');
+				jQuery('#DisasterBeginTime2').val('');
 		}
 	});
 
