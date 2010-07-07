@@ -1,8 +1,8 @@
 {-config_load file=`$lg`.conf section="di8_input"-}
 	<!-- BEG DI8 FORM CARD -->
 	<table width="900px" border="0" cellpadding="0" cellspacing="0" >
-		<tr valign="middle">
-			<td width="450px" rowspan="2">
+		<tr valign="top">
+			<td align="left" width="450px" rowspan="2">
 				<input type="button" id="btnDatacardNew"    class="DatacardCmdButton bb bnew"    ext:qtip="{-#tnewtitle#-}: {-#tnewdesc#-}" />
 				<input type="button" id="btnDatacardEdit"   class="DatacardCmdButton bb bupd"    ext:qtip="{-#tupdtitle#-}: {-#tupddesc#-}" />
 				<input type="button" id="btnDatacardSave"   class="DatacardCmdButton bb bsave"   ext:qtip="{-#tsavtitle#-}: {-#tsavdesc#-}" />
@@ -24,11 +24,6 @@
 				<span class="dlgmsg" id="dostat"></span>
 			</td>
 			<td align="right" width="450px">
-				<div name="dic" id="dic" style="width:100%; height:28px;"></div>
-			</td>
-		</tr>
-		<tr>
-			<td align="left" valign="top" width="450px">
 				<div id="divDatacardStatusMsg" style="display:none;">
 					<span class="datacardStatusMsg" id="msgDatacardDuplicatedSerial">{-#msgDuplicatedDisasterSerial#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardStartNew">{-#tmsgnewcard#-}</span>
@@ -39,14 +34,22 @@
 					<span class="datacardStatusMsg" id="msgDatacardNotFound">{-#msgDatacardNotFound#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardInvalidStatus">{-#msgDatacardInvalidStatus#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardInvalidGeography">{-#msgDatacardInvalidGeography#-}</span>
+					<span class="datacardStatusMsg" id="msgDatacardInsertOk">{-#tdccreated#-}</span>
+					<span class="datacardStatusMsg" id="msgDatacardUpdateOk">{-#tdcupdated#-}</span>
+					<span class="datacardStatusMsg" id="msgDatacardStatus">{-$statusmsg-}</span>
 				</div>
 				<br />
 			</td>
 		</tr>
+		<tr>
+			<td align="right" valign="top" width="450px">
+				<div id="divRecordStat" style="display:none;">
+					{-#tstatpublished#-} <span id="RecordPublished"></span>, {-#tstatready#-} <span id="RecordReady"></span>
+				</div>
+			</td>
+		</tr>
 	</table>
 	<form id="DICard" action="cards.php" method="POST" target="dic">
-		<!--<input type="hidden" id="RegionId"           name="RegionId" value="{-$RegionId-}" />
-		-->
 		<input type="hidden" id="DisasterId"         name="DisasterId" value="" />
 		<input type="hidden" id="RecordAuthor"       name="RecordAuthor" value="" />
 		<input type="hidden" id="RecordCreation"     name="RecordCreation" />

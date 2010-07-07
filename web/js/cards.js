@@ -7,13 +7,26 @@ function onReadyDatacards() {
 		jQuery.post('cards.php',
 			params,
 			function(data) {
-				jQuery('#dic').html(data);
-				displayDatacardStatusMsg('');
+				jQuery('#DisasterId').val(data.DisasterId);
+				jQuery('#RecordSerial').text(data.RecordSerial);
+				jQuery('#RecordPublished').text(data.RecordPublished);
+				jQuery('#RecordReady').text(data.RecordReady);
+				switch (data.Status) {
+					case 'INSERTOK':
+						displayDatacardStatusMsg('msgDatacardInsertOk');
+						jQuery('#divRecordStat').show();
+					break;
+					case 'UPDATEOK':
+						displayDatacardStatusMsg('msgDatacardUpdateOk');
+						jQuery('#divRecordStat').show();
+					break;
+				}
 				DisableEnableForm($('DICard'), true);
 				changeOptions('btnDatacardSave');
 				// clear Help text area
 				showtip('','#ffffff');
-			}
+			},
+			'json'
 		);
 		return false;
 	});
@@ -215,21 +228,25 @@ function onReadyDatacards() {
 
 	// Datacard Navigation Functions
 	jQuery('#btnDatacardGotoFirst').click(function() {
+		jQuery('#divRecordStat').hide();
 		doDatacardGotoFirst();
 		return false;
 	});
 
 	jQuery('#btnDatacardGotoLast').click(function() {
+		jQuery('#divRecordStat').hide();
 		doDatacardGotoLast();
 		return false;
 	});
 	
 	jQuery('#btnDatacardGotoPrev').click(function() {
+		jQuery('#divRecordStat').hide();
 		doDatacardGotoPrev();
 		return false;
 	});
 	
 	jQuery('#btnDatacardGotoNext').click(function() {
+		jQuery('#divRecordStat').hide();
 		doDatacardGotoNext();
 		return false;
 	});
