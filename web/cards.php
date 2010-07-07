@@ -197,9 +197,9 @@ if (isset($_GET['u'])) {
 				// If Datacard is valid, update EEData Table..
 				$eedat = form2eedata($_POST);
 				$eedat['DisasterId'] = $data['DisasterId'];
-				$o = new DIEEData($us, $eedat['DisasterId']);
-				$o->setFromArray($eedat);
-				$i = $o->insert();
+				$e = new DIEEData($us, $eedat['DisasterId']);
+				$e->setFromArray($eedat);
+				$i = $e->insert();
 			} else {
 				$t->assign('statusmsg', showerror($i));
 			}
@@ -222,9 +222,9 @@ if (isset($_GET['u'])) {
 				// If Datacard is valid, update EEData Table..
 				$eedat = form2eedata($_POST);
 				$eedat['DisasterId'] = $data['DisasterId'];
-				$o = new DIEEData($us, $eedat['DisasterId']);
-				$o->setFromArray($eedat);
-				$i = $o->update();
+				$e = new DIEEData($us, $eedat['DisasterId']);
+				$e->setFromArray($eedat);
+				$i = $e->update();
 			} else {
 				$t->assign('statusmsg', showerror($i));
 			}
