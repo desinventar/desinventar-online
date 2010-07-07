@@ -406,7 +406,6 @@ class DIObject {
 	public function validateCreate($bStrict=true) {
 		$iReturn = ERR_NO_ERROR;
 		if ($this->status->hasError()) {
-			fb($this->status->error);
 			$iReturn = reset(array_keys($this->status->error));
 		} elseif ($this->status->hasWarning()) {
 			$iReturn = ERR_NO_ERROR;
@@ -420,7 +419,6 @@ class DIObject {
 	public function validateUpdate($bStrict=true) {
 		$iReturn = ERR_NO_ERROR;
 		if ($this->status->hasError()) {
-			fb($this->status->error);
 			$iReturn = reset(array_keys($this->status->error));
 		} elseif ($this->status->hasWarning()) {
 			$iReturn = ERR_NO_ERROR;

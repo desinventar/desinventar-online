@@ -52,7 +52,7 @@ function form2disaster($form, $icmd) {
 			$str .= '-' . sprintf('%02d', $form['DisasterBeginTime'][2]);
 		}
 	}
-	$data = $str;
+	$data['DisasterBeginTime'] = $str;
 	// Disaster Geography
 	$data['GeographyId'] = $geogid;
 	return $data;
