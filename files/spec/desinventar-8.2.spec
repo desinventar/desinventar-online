@@ -19,7 +19,7 @@ BuildArch: noarch
 BuildRoot: %{_tmppath}/%{name}-buildroot
 
 Requires: php >= 5.1.0
-Requires: php-gd php-Smarty
+Requires: php-gd php-pdo php-Smarty
 Requires: extJS jpgraph
 Requires: httpd
 Requires: openlayers mapserver
