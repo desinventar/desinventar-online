@@ -211,7 +211,7 @@ if (isset($post['_M+cmd'])) {
 	//$t->assign('mapinfoimg', WWWDATA . '/' . $MapInfoImg);
 	
 	$mapfile = str_replace('\\', '/', $m->filename());
-	$worldmap = str_replace('\\','/', MAPDIR . "/world_adm0.map");
+	$worldmap = str_replace('\\','/', MAPDIR . "/worldmap.map");
 	$legend = "/cgi-bin/". MAPSERV ."?map=" . rawurlencode($mapfile) . "&SERVICE=WMS&VERSION=1.1.1".
 				"&REQUEST=getlegendgraphic&LAYER=". substr($myly, 0, 12) ."&FORMAT=image/png";
 	$t->assign('legend', $legend);	
