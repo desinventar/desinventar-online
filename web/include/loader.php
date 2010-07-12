@@ -37,6 +37,7 @@ if (isset($_SERVER['HTTP_HOST'])) {
 		}
 		$_SERVER['DI8_WWWDIR'] = $Install_Dir . '/www';
 		$_SERVER['DI8_DATADIR'] = $Install_Dir . '/data';
+		$_SERVER['DI8_MAPDIR'] = $Install_Dir . '/data/worldmap';
 		$_SERVER['DI8_CACHEDIR'] = $Install_Dir . '/tmp';
 		define('FONTSET' , $Install_Dir . '/data/main/fontswin.txt');	
 	} else {
@@ -55,6 +56,7 @@ if (isset($_SERVER['HTTP_HOST'])) {
 		if (! isset($_SERVER['DI8_DATADIR'])) {
 			$_SERVER['DI8_DATADIR']  = '/var/lib/desinventar-8.2';
 		}
+		$_SERVER['DI8_MAPDIR'] = '/usr/share/desinventar-8.2/worldmap';
 		$_SERVER['DI8_CACHEDIR'] = '/var/cache/Smarty/di8';
 	}
 } else {
@@ -66,6 +68,7 @@ if (isset($_SERVER['HTTP_HOST'])) {
 	if (! isset($_SERVER['DI8_DATADIR'])) {
 		$_SERVER['DI8_DATADIR']  = '/var/lib/desinventar-8.2';
 	}
+	$_SERVER['DI8_MAPDIR'] = '/usr/share/desinventar-8.2/worldmap';
 	if (! isset($_SERVER['DI8_CACHEDIR'])) {
 		$_SERVER['DI8_CACHEDIR'] = '/var/cache/Smarty/di8';
 	}
@@ -76,6 +79,7 @@ define('WWWDIR'  , $_SERVER['DI8_WWWDIR']);
 define('WWWDATA' , '/desinventar-8.2-data');
 define('WWWURL'  , '/');
 define('DATADIR' , $_SERVER['DI8_DATADIR']);
+define('MAPDIR'  , $_SERVER['DI8_MAPDIR']);
 define('CACHEDIR', $_SERVER['DI8_CACHEDIR']);
 define('VAR_DIR' , DATADIR);
 define('TMP_DIR' , TEMP);
