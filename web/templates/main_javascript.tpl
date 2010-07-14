@@ -79,6 +79,7 @@
 						//doDatacardGotoFirst();
 					}
 					jQuery('#cardsRecordSource').val('');
+					jQuery('#divDatacardWindow').trigger('displayForm');
 					difw.show();
 				break;
 				case "mnuDatacardImport":

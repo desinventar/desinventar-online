@@ -1,5 +1,9 @@
 function onReadyDatacards() {
 	jQuery('#divDatacardWindow').hide();
+	jQuery('#divDatacardWindow').bind('displayForm', function() {
+		jQuery(this).show();
+		doDatacardClear();
+	});
 	
 	jQuery('#DICard').submit(function() {
 		jQuery('#DatacardCommand').val(jQuery('#_CMD').val());
@@ -598,8 +602,10 @@ function doDatacardClear() {
 	$('DICard').reset();
 	jQuery('#lev0').html();
 	displayDatacardStatusMsg('');
-	jQuery('#DisasterBeginTime0').focus();
 	jQuery('#divRecordNavigationInfo').hide();
+	disenabutton($('btnDatacardGotoPrev'), true);
+	disenabutton($('btnDatacardGotoNext'), true);
+	jQuery('#DisasterBeginTime0').focus();
 }
 
 function doDatacardCancel() {
