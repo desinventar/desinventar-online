@@ -2,7 +2,7 @@
 	<!-- BEG DI8 FORM CARD -->
 	<table width="900px" border="0" cellpadding="0" cellspacing="0" >
 		<tr valign="top">
-			<td align="left" width="450px" rowspan="2">
+			<td align="left" width="450px">
 				<input type="button" id="btnDatacardNew"    class="DatacardCmdButton bb bnew"    ext:qtip="{-#tnewtitle#-}: {-#tnewdesc#-}" />
 				<input type="button" id="btnDatacardEdit"   class="DatacardCmdButton bb bupd"    ext:qtip="{-#tupdtitle#-}: {-#tupddesc#-}" />
 				<input type="button" id="btnDatacardSave"   class="DatacardCmdButton bb bsave"   ext:qtip="{-#tsavtitle#-}: {-#tsavdesc#-}" />
@@ -19,11 +19,8 @@
 				{-$dis.DisasterSerial[0]-}
 				<input type="text"   id="txtDatacardFind" class="DatacardCmdFind line" style="width:60px;" />
 				<input type="button" id="btnDatacardFind" class="DatacardCmdFind bb bfind" ext:qtip="{-#texptitle#-}" />
-				<br />				
-				<span class="dlgmsg" id="distatusmsg"></span>
-				<span class="dlgmsg" id="dostat"></span>
 			</td>
-			<td align="right" width="450px">
+			<td align="right" width="450px" colspan="2">
 				<div id="divDatacardStatusMsg" style="display:none;">
 					<span class="datacardStatusMsg" id="msgDatacardDuplicatedSerial">{-#msgDuplicatedDisasterSerial#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardStartNew">{-#tmsgnewcard#-}</span>
@@ -38,13 +35,21 @@
 					<span class="datacardStatusMsg" id="msgDatacardUpdateOk">{-#tdcupdated#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardStatus">{-$statusmsg-}</span>
 				</div>
-				<br />
 			</td>
 		</tr>
 		<tr>
-			<td align="right" valign="top" width="450px">
+			<td align="left" width="450px">
+				<span class="dlgmsg" id="distatusmsg"></span>
+				<span class="dlgmsg" id="dostat"></span>
+			</td>
+			<td align="left" valign="top" width="350px">
 				<div id="divRecordStat" style="display:none;">
 					{-#tstatpublished#-} <span id="RecordPublished"></span>, {-#tstatready#-} <span id="RecordReady"></span>
+				</div>
+			</td>
+			<td align="right" valign="top" width="100px">
+				<div id="divRecordNavigationInfo" style="display:none;">
+					<span id="RecordNumber"></span>/<span id="RecordCount"></span>
 				</div>
 			</td>
 		</tr>

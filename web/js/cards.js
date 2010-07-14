@@ -475,7 +475,6 @@ function requestDatacard(myCmd, myValue) {
 
 
 function doDatacardFind() {
-	jQuery('#dic').html('');
 	if(jQuery('#txtDatacardFind').val() !='') {
 		requestDatacard('getDisasterIdFromSerial', jQuery('#txtDatacardFind').val());
 	}
@@ -490,14 +489,12 @@ function doDatacardNew() {
 	jQuery('#DisasterBeginTime0').val('');
 	jQuery('#DisasterBeginTime1').val('');
 	jQuery('#DisasterBeginTime2').val('');
-	jQuery('#dic').html('');
 	displayDatacardStatusMsg('msgDatacardFill');
 	changeOptions('btnDatacardNew');
 }
 
 
 function doDatacardEdit() {
-	jQuery('#dic').html('');
 	displayDatacardStatusMsg('');
 	RegionId = jQuery('#desinventarRegionId').val();
 	jQuery.post('cards.php',
@@ -759,7 +756,12 @@ function setDICardFromId(prmRegionId, prmDisasterId) {
 		},
 		function(data) {
 			setDICard(prmRegionId, data);
-			jQuery('#dic').html(jQuery('#cardsRecordNumber').val() + '/' + jQuery('#cardsRecordCount').val());
+			jQuery('#divRecordNavigationInfo').hide();
+			if (jQuery('#cardsRecordNumber').val() > 0) {
+				jQuery('#divRecordNavigationInfo').show();
+				jQuery('#RecordNumber').text(jQuery('#cardsRecordNumber').val());
+				jQuery('#RecordCount').text(jQuery('#cardsRecordCount').val());
+			}
 			return true;
 		},
 		'json'
