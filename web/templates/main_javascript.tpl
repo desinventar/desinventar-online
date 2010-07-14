@@ -207,12 +207,13 @@
 		// DesInventar (input form) Window
 		if (!difw) {
 			difw = new Ext.Window({
-				el:'dif-win', layout:'fit', 
+				el:'divDatacardWindow', layout:'fit', 
 				x: 65, y: 0, width:960, height:638, 
 				closeAction:'hide', plain: true, animCollapse: false,
 				items: new Ext.Panel({ contentEl: 'dif-cfg', autoScroll: true })
 			});
 			difw.on('hide',function() {
+				jQuery('#divDatacardWindow').hide();
 				showtip('');					
 			});
 		}

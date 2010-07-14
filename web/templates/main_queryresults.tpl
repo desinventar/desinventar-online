@@ -41,7 +41,7 @@
 					</div>
 				</div>
 				<!-- Show DesInventar (input data) window-->
-				<div id="dif-win" class="x-hidden">
+				<div id="divDatacardWindow" class="x-hidden">
 					<div class="x-window-header">{-#mdcsection#-} | {-$desinventarUserId-} - {-$role-}</div>
 					<div id="dif-cfg" style="text-align:center;">
 						<div name="dif" id="dif" frameborder="0" height="600px;" width="100%">
