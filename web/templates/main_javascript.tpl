@@ -75,11 +75,8 @@
 				break;
 				// Datacards Menu Items
 				case "mnuDatacardInsertEdit":
-					//hideQueryDesign();
-					//jQuery('.contentBlock').hide();
-					//jQuery('#divDatacardsShow').show();
 					if (jQuery('#DisasterId').val() == '') {
-						doDatacardGotoFirst();
+						//doDatacardGotoFirst();
 					}
 					jQuery('#cardsRecordSource').val('');
 					difw.show();
