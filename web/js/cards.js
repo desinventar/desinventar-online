@@ -1,4 +1,6 @@
 function onReadyDatacards() {
+	jQuery('#divDatacardWindow').hide();
+	
 	jQuery('#DICard').submit(function() {
 		jQuery('#DatacardCommand').val(jQuery('#_CMD').val());
 		jQuery('#RecordAuthor').val(jQuery('#desinventarUserId').val());
