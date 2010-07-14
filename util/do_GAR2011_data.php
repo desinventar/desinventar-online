@@ -17,7 +17,7 @@ foreach($us->q->core->query("SELECT * FROM Region WHERE RegionId LIKE 'GAR-ISDR-
 	$RegionList[] = $row['RegionId'];
 }
 //DEBUG
-$RegionList = array('GAR-ISDR-2011_COL');
+$RegionList = array('GAR-ISDR-2011_ECU');
 foreach ($RegionList as $RegionId) {
 	$us->open($RegionId);
 	print $RegionId . "\n";
@@ -26,14 +26,14 @@ foreach ($RegionList as $RegionId) {
 	foreach($us->q->dreg->query($sQuery) as $row) {
 		$iCount = $row['C'];
 	}
-	print 'Number of Records Before: ' . $iCount . "\n";
+	print 'Registros Inicio        : ' . $iCount . "\n";
 	
 	$iCount = 0;
 	// Remove datacard outside of period 1970-2009
 	$iCount += removeData($us, 'DisasterBeginTime < 1970');
 	$iCount += removeData($us, 'DisasterBeginTime >= 2010');
 	
-	print 'Outside of Period       : ' . $iCount . "\n";
+	print 'Fichas Fuera del Periodo: ' . $iCount . "\n";
 	
 	// Remove events outside of list
 	$iCount = 0;
@@ -51,10 +51,13 @@ foreach ($RegionList as $RegionId) {
 	$iCount += removeData($us, 'EventId="PANIC"');
 	$iCount += removeData($us, 'EventId="SEDIMENTATION"');
 	
-	print 'Predefined Events       : ' . $iCount . "\n";
+	print 'Eventos Predefinidos    : ' . $iCount . "\n";
 	
 	$iCount = 0;
 
+	// Local Events
+	$iCount += removeData($us, 'EventId="ESTRUCTURA"');
+	
 	// Local Events CHL
 	$iCount += removeData($us, 'EventId="FALLA"');
 	$iCount += removeData($us, 'EventId="INTOXICACIÓN"');
@@ -85,7 +88,7 @@ foreach ($RegionList as $RegionId) {
 	$iCount += removeData($us, 'EventId="A. TRANSITO"');
 	$iCount += removeData($us, 'EventId="ARBOL CAIDO"');
 	
-	print 'Local Events            : ' . $iCount . "\n";
+	print 'Eventos Locales         : ' . $iCount . "\n";
 
 	// Change RecordStatus=DRAFT when only GeoLevel0 is selected
 	$iCount = 0;
@@ -93,7 +96,7 @@ foreach ($RegionList as $RegionId) {
 	foreach($us->q->dreg->query($sQuery) as $row) {
 		$iCount = $row['C'];
 	}
-	print 'Draft                   : ' . $iCount . "\n";
+	print 'Borrador (GeoLevel=0)   : ' . $iCount . "\n";
 		
 	$sQuery = 'UPDATE Disaster SET RecordStatus="DRAFT" WHERE LENGTH(GeographyId)==5';
 	$us->q->dreg->query($sQuery);
@@ -102,7 +105,7 @@ foreach ($RegionList as $RegionId) {
 	foreach($us->q->dreg->query($sQuery) as $row) {
 		$iCount = $row['C'];
 	}
-	print 'Number of Records After : ' . $iCount . "\n";
+	print 'Registros Finales       : ' . $iCount . "\n";
 		
 } //foreach
 exit();
