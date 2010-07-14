@@ -491,8 +491,8 @@ function doDatacardNew() {
 	jQuery('#DisasterBeginTime2').val('');
 	displayDatacardStatusMsg('msgDatacardFill');
 	changeOptions('btnDatacardNew');
+	jQuery('#divRecordNavigationInfo').hide();
 }
-
 
 function doDatacardEdit() {
 	displayDatacardStatusMsg('');
@@ -518,7 +518,6 @@ function doDatacardEdit() {
 		'json'
 	);
 }
-
 
 function doDatacardSave() {
 	var bContinue = true;
@@ -595,40 +594,48 @@ function doDatacardSave() {
 	}
 }
 
-
 function doDatacardClear() {
 	$('DICard').reset();
 	jQuery('#lev0').html();
 	displayDatacardStatusMsg('');
 	jQuery('#DisasterBeginTime0').focus();
+	jQuery('#divRecordNavigationInfo').hide();
 }
 
 function doDatacardCancel() {
-	jQuery.post('cards.php',
-		{'cmd'        : 'chkrelease',
-		 'r'          : jQuery('#desinventarRegionId').val(),
-		 'DisasterId' : jQuery('#DisasterId').val()
-		},
-		function(data) {
-			DisableEnableForm($('DICard'), true);
-			changeOptions('btnDatacardCancel');
-			// clear Help text area
-			showtip('','#ffffff');
-			displayDatacardStatusMsg('msgDatacardStartNew');
-			if (jQuery('#DisasterId').val() != '') {
-				valid = setDICardFromId(jQuery('#desinventarRegionId').val(), jQuery('#DisasterId').val());
-				
-				if (jQuery('#desinventarUserRoleValue').val() >= 2) {
-					disenabutton($('btnDatacardEdit'), false);
+	if (jQuery('#DisasterId').val() != '') {
+		jQuery.post('cards.php',
+			{'cmd'        : 'chkrelease',
+			 'r'          : jQuery('#desinventarRegionId').val(),
+			 'DisasterId' : jQuery('#DisasterId').val()
+			},
+			function(data) {
+				DisableEnableForm($('DICard'), true);
+				changeOptions('btnDatacardCancel');
+				// clear Help text area
+				showtip('','#ffffff');
+				if (jQuery('#DisasterId').val() != '') {
+					valid = setDICardFromId(jQuery('#desinventarRegionId').val(), jQuery('#DisasterId').val());
+					
+					if (jQuery('#desinventarUserRoleValue').val() >= 2) {
+						disenabutton($('btnDatacardEdit'), false);
+					}
+					disenabutton($('btnDatacardGotoPrev'), false);
+					disenabutton($('btnDatacardGotoNext'), false);
+					displayDatacardStatusMsg('');
+					//jQuery('#cardsRecordNumber').val(data.RecordNumber);
 				}
-				disenabutton($('btnDatacardGotoPrev'), false);
-				disenabutton($('btnDatacardGotoNext'), false);
-				displayDatacardStatusMsg('');
-				jQuery('#cardsRecordNumber').val(data.RecordNumber);
-			}
-		},
-		'json'
-	);
+			},
+			'json'
+		);
+	} else {
+		doDatacardClear();
+		DisableEnableForm($('DICard'), true);
+		changeOptions('btnDatacardCancel');
+		// clear Help text area
+		showtip('','#ffffff');
+		displayDatacardStatusMsg('msgDatacardStartNew');
+	}
 }
 
 function doDatacardGotoFirst() {
