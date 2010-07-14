@@ -41,6 +41,24 @@
 				<a href="#" class="RegionItem" alt="GAR-ISDR-2011_COL">{-#tcountryCOL#-}</a>
 			</td>
 		</tr>
+		<tr><td><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
+		<tr>
+			<td class="pais">&nbsp;&nbsp;&nbsp; >
+				<a href="#" class="RegionItem" alt="GAR-ISDR-2011_CRI">CostaRica</a>
+			</td>
+		</tr>
+		<tr><td><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
+		<tr>
+			<td class="pais">&nbsp;&nbsp;&nbsp; >
+				<a href="#" class="RegionItem" alt="GAR-ISDR-2011_ECU">Ecuador</a>
+			</td>
+		</tr>
+		<tr><td><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
+		<tr>
+			<td class="pais">&nbsp;&nbsp;&nbsp; >
+				<a href="#" class="RegionItem" alt="GAR-ISDR-2011_GTM">Guatemala</a>
+			</td>
+		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
