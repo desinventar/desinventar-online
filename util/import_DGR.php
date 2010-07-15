@@ -117,12 +117,13 @@ while (! feof(STDIN) ) {
 			
 			// 32 - 46 EffectNotes
 			$d->set('EffectNotes', $a[46]);
-			
-			if ($d->exist() < 0) {
-				$i = $d->insert();
-			} else {
+
+			//$bExist = $d->exist();
+			//if ($bExist < 0) {
+			//	$i = $d->insert();
+			//} else {
 				$i = $d->update();
-			}
+			//}
 			$DisasterId = $d->get('DisasterId');
 			$e = new DIEEData($us, $DisasterId);
 			//  9 - Familias Afectadas
@@ -223,7 +224,11 @@ while (! feof(STDIN) ) {
 			$e->set('EEF091', valueToDIField($a[115]));
 			$e->set('EEF092', valueToDIField($a[116]));
 			$e->set('EEF093', valueToDIField($a[117]));
-			$j = $e->insert();
+			//if ($bExist < 0) {
+			//	$j = $e->insert();
+			//} else {
+				$j = $e->update();
+			//}
 			if ( ($i < 0) || ($j < 0) ) {
 				print $line . ' ' . $DisasterSerial . ' ' . $i . ' ' . $j . "\n";
 			}			
@@ -259,6 +264,14 @@ function valueToDIField($prmValue) {
 
 function strToISO8601($prmDate) {
 	$v = '';
+	if (strlen($prmDate) > 0) {
+		$day   = substr($prmDate,0,2);
+		$month = substr($prmDate,3,2);
+		$year  = substr($prmDate,6,4);
+		$v = sprintf('%4d-%2d-%2d', $year, $month, $day);
+		$v = str_replace(' ', '0', $v);
+	}
+	/*
 	$a = array();
 	preg_match('/([0-9]+) de (.*) de ([0-9]+)/', $prmDate, $a);
 	if ( (count($a) > 2) && (is_numeric($a[3])) ) {
@@ -268,6 +281,7 @@ function strToISO8601($prmDate) {
 		$v = sprintf('%4d-%2d-%2d', $year, $month, $day);
 		$v = str_replace(' ', '0', $v);
 	}
+	*/
 	return $v;
 }
 

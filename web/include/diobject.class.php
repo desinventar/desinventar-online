@@ -114,10 +114,13 @@ class DIObject {
 		$iReturn = ERR_DEFAULT_ERROR;
 		if (isset($obj[$prmKey])) {
 			$sValue = $prmValue;
+
 			$sFieldType = $this->oFieldType[$prmKey];
 			if ($sFieldType == 'STRING') {
 				// Remove special chars...
 				$sValue = trim($sValue);
+				// Remove Double Quotes to prevent failures in SQL Queries
+				$sValue = preg_replace('/"/', '', $sValue);
 			}
 			if ($sFieldType == 'BOOLEAN') {
 				if ($sValue . '' == 'on')  { $sValue = 1; }
