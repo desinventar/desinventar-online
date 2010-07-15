@@ -22,6 +22,7 @@ require_once(BASE . '/include/date.class.php');
 
 
 $RegionId = 'COL-1250694506-colombia_inventario_historico_de_desastres';
+//$RegionId = 'GAR-ISDR-2011_COL';
 $us->login('diadmin','di8');
 $us->open($RegionId);
 
