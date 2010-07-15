@@ -182,8 +182,7 @@ if (isset($post['page']) || isset($post['_S+cmd'])) {
 			flush();
 			readfile($stdpth);
 			exit;
-		}
-		else {
+		} else {
 			$t->assign ("offset", ($pag - 1) * $rxp);
 			$t->assign ("sel", $sel);
 			$t->assign ("dk", $dk);
