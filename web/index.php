@@ -149,6 +149,10 @@ switch ($cmd) {
 		$t->assign('Labels', $labels);
 		$t->display('regionfullinfo.tpl');
 	break;
+	case 'getRegionRecordCount' :
+		$RecordCount = $us->getDisasterCount();
+		echo json_encode(array('Status' => 'OK', 'RecordCount' => $RecordCount));
+	break;
 	case 'getGraphParameters':
 		$t->display('graphparameters.tpl');
 	break;

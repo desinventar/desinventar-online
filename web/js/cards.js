@@ -1,10 +1,5 @@
 function onReadyDatacards() {
 	jQuery('#divDatacardWindow').hide();
-	jQuery('#divDatacardWindow').bind('displayForm', function() {
-		jQuery(this).show();
-		doDatacardClear();
-	});
-	
 	jQuery('#DICard').submit(function() {
 		jQuery('#DatacardCommand').val(jQuery('#_CMD').val());
 		jQuery('#RecordAuthor').val(jQuery('#desinventarUserId').val());
@@ -219,11 +214,6 @@ function onReadyDatacards() {
 		return false;
 	});
 	
-	jQuery('#btnDatacardClear').click(function() {
-		doDatacardClear();
-		return false;
-	});
-
 	jQuery('#btnDatacardCancel').click(function() {
 		doDatacardCancel();
 		return false;
@@ -371,64 +361,85 @@ function disenabutton(butid, disab) {
 	}
 }
 
+function doDatacardNavButtonsDisable() {
+	disenabutton($('btnDatacardGotoFirst'), true);
+	disenabutton($('btnDatacardGotoPrev'), true);
+	disenabutton($('btnDatacardGotoNext'), true);
+	disenabutton($('btnDatacardGotoLast'), true);
+}
+
+function doDatacardNavButtonsEnable() {
+	var RecordNumber = parseInt(jQuery('#cardsRecordNumber').val());
+	var RecordCount  = parseInt(jQuery('#cardsRecordCount').val());
+	if (RecordNumber > 0) {
+		if (RecordNumber > 1) {
+			disenabutton($('btnDatacardGotoFirst'), false);
+			disenabutton($('btnDatacardGotoPrev'), false);
+		} else {
+			disenabutton($('btnDatacardGotoFirst'), true);
+			disenabutton($('btnDatacardGotoPrev'), true);
+		}
+		if (RecordNumber < RecordCount) {
+			disenabutton($('btnDatacardGotoLast'), false);
+			disenabutton($('btnDatacardGotoNext'), false);
+		} else {
+			disenabutton($('btnDatacardGotoLast'), true);
+			disenabutton($('btnDatacardGotoNext'), true);
+		}
+	} else {
+		disenabutton($('btnDatacardGotoPrev'), true);
+		disenabutton($('btnDatacardGotoNext'), true);
+		if (RecordCount > 0) {
+			disenabutton($('btnDatacardGotoFirst'), false);
+			disenabutton($('btnDatacardGotoLast'), false);
+		} else {
+			disenabutton($('btnDatacardGotoFirst'), true);
+			disenabutton($('btnDatacardGotoLast'), true);
+		}
+	}
+}
 function changeOptions(but) {
 	switch (but) {
 		case "btnDatacardNew":
 			disenabutton($('btnDatacardNew'), true);
 			disenabutton($('btnDatacardSave'), false);
 			disenabutton($('btnDatacardEdit'), true);
-			disenabutton($('btnDatacardClear'), false);
 			disenabutton($('btnDatacardCancel'), false);
-			disenabutton($('btnDatacardGotoFirst'), true);
-			disenabutton($('btnDatacardGotoPrev'), true);
-			disenabutton($('btnDatacardGotoNext'), true);
-			disenabutton($('btnDatacardGotoLast'), true);
+			doDatacardNavButtonsDisable();
 			disenabutton($('btnDatacardFind'), true);
 		break;
 		case "btnDatacardEdit":
 			disenabutton($('btnDatacardNew'), true);
 			disenabutton($('btnDatacardSave'), false);
 			disenabutton($('btnDatacardEdit'), true);
-			disenabutton($('btnDatacardClear'), false);
 			disenabutton($('btnDatacardCancel'), false);
-			disenabutton($('btnDatacardGotoFirst'), true);
-			disenabutton($('btnDatacardGotoPrev'), true);
-			disenabutton($('btnDatacardGotoNext'), true);
-			disenabutton($('btnDatacardGotoLast'), true);
+			doDatacardNavButtonsDisable();
 			disenabutton($('btnDatacardFind'), true);
 		break;
 		case "btnDatacardSave":
 			disenabutton($('btnDatacardNew'), false);
 			disenabutton($('btnDatacardSave'), true);
 			disenabutton($('btnDatacardEdit'), false);
-			disenabutton($('btnDatacardClear'), true);
 			disenabutton($('btnDatacardCancel'), true);
-			disenabutton($('btnDatacardGotoFirst'), false);
-			disenabutton($('btnDatacardGotoPrev'), false);
-			disenabutton($('btnDatacardGotoNext'), false);
-			disenabutton($('btnDatacardGotoLast'), false);
+			doDatacardNavButtonsEnable();
 			disenabutton($('btnDatacardFind'), false);
 		break;
 		case "btnDatacardCancel":
-			if ($('DisasterId').value == "")
+			if ($('DisasterId').value == "") {
 				disenabutton($('btnDatacardEdit'), true);
-			else
+			} else {
 				disenabutton($('btnDatacardEdit'), false);
+			}
 			disenabutton($('btnDatacardSave'), true);
-			disenabutton($('btnDatacardClear'), true);
 			disenabutton($('btnDatacardCancel'), true);
 			disenabutton($('btnDatacardNew'), false);
-			disenabutton($('btnDatacardGotoFirst'), false);
-			disenabutton($('btnDatacardGotoPrev'), false);
-			disenabutton($('btnDatacardGotoNext'), false);
-			disenabutton($('btnDatacardGotoLast'), false);
+			doDatacardNavButtonsEnable();
 			disenabutton($('btnDatacardFind'), false);
 		break;
 		default:
 			disenabutton($('btnDatacardNew'), false);
 			disenabutton($('btnDatacardSave'), true);
 			disenabutton($('btnDatacardEdit'), true);
-			disenabutton($('btnDatacardClear'), true);
 			disenabutton($('btnDatacardCancel'), true);
 		break;
 	}
@@ -459,8 +470,6 @@ function requestDatacard(myCmd, myValue) {
 						disenabutton($('btnDatacardEdit'), false);
 					}
 					if (myCmd == 'getDisasterIdFromSerial') {
-						disenabutton($('btnDatacardGotoPrev'), false);
-						disenabutton($('btnDatacardGotoNext'), false);
 						displayDatacardStatusMsg('msgDatacardFound');
 					}
 				} else {
@@ -493,6 +502,7 @@ function doDatacardNew() {
 	jQuery('#DisasterBeginTime0').val('');
 	jQuery('#DisasterBeginTime1').val('');
 	jQuery('#DisasterBeginTime2').val('');
+	jQuery('#cardsRecordNumber').val(0);
 	displayDatacardStatusMsg('msgDatacardFill');
 	changeOptions('btnDatacardNew');
 	jQuery('#divRecordNavigationInfo').hide();
@@ -598,16 +608,6 @@ function doDatacardSave() {
 	}
 }
 
-function doDatacardClear() {
-	$('DICard').reset();
-	jQuery('#lev0').html();
-	displayDatacardStatusMsg('');
-	jQuery('#divRecordNavigationInfo').hide();
-	disenabutton($('btnDatacardGotoPrev'), true);
-	disenabutton($('btnDatacardGotoNext'), true);
-	jQuery('#DisasterBeginTime0').focus();
-}
-
 function doDatacardCancel() {
 	if (jQuery('#DisasterId').val() != '') {
 		jQuery.post('cards.php',
@@ -626,21 +626,21 @@ function doDatacardCancel() {
 					if (jQuery('#desinventarUserRoleValue').val() >= 2) {
 						disenabutton($('btnDatacardEdit'), false);
 					}
-					disenabutton($('btnDatacardGotoPrev'), false);
-					disenabutton($('btnDatacardGotoNext'), false);
 					displayDatacardStatusMsg('');
+					doDatacardNavButtonsEnable();
 					//jQuery('#cardsRecordNumber').val(data.RecordNumber);
 				}
 			},
 			'json'
 		);
 	} else {
-		doDatacardClear();
+		$('DICard').reset();
 		DisableEnableForm($('DICard'), true);
 		changeOptions('btnDatacardCancel');
 		// clear Help text area
 		showtip('','#ffffff');
 		displayDatacardStatusMsg('msgDatacardStartNew');
+		doDatacardNavButtonsEnable();
 	}
 }
 
@@ -657,16 +657,14 @@ function doDatacardGotoFirst() {
 	if (jQuery('#desinventarUserRoleValue').val() >= 2) {
 		disenabutton($('btnDatacardEdit'), false);
 	}
-	disenabutton($('btnDatacardGotoPrev'), true);
-	disenabutton($('btnDatacardGotoNext'), false);
 }
 
 function doDatacardGotoLast() {
 	displayDatacardStatusMsg('');
 	if (jQuery('#cardsRecordSource').val() == 'data') {
-		var RecordNumber = jQuery('#cardsRecordCount').val();
-		var DisasterId = jQuery('.linkGridGotoCard[rowindex=' + RecordNumber + ']').attr('DisasterId');
-		jQuery('#cardsRecordNumber').val(RecordNumber);
+		var RecordCount = parseInt(jQuery('#cardsRecordCount').val());
+		var DisasterId = jQuery('.linkGridGotoCard[rowindex=' + RecordCount + ']').attr('DisasterId');
+		jQuery('#cardsRecordNumber').val(RecordCount);
 		valid = setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId);
 	} else {
 		bFound = requestDatacard('getDisasterIdLast', jQuery('#DisasterId').val());
@@ -674,15 +672,13 @@ function doDatacardGotoLast() {
 	if (jQuery('#desinventarUserRoleValue').val() >= 2) {
 		disenabutton($('btnDatacardEdit'), false);
 	}
-	disenabutton($('btnDatacardGotoPrev'), false);
-	disenabutton($('btnDatacardGotoNext'), true);
 }
 
 
 function doDatacardGotoPrev() {
 	displayDatacardStatusMsg('');
 	if (jQuery('#cardsRecordSource').val() == 'data') {
-		var RecordNumber = jQuery('#cardsRecordNumber').val();
+		var RecordNumber = parseInt(jQuery('#cardsRecordNumber').val());
 		if (RecordNumber > 1) {
 			RecordNumber--;
 			var DisasterId = jQuery('.linkGridGotoCard[rowindex=' + RecordNumber + ']').attr('DisasterId');
@@ -698,14 +694,13 @@ function doDatacardGotoPrev() {
 	if (jQuery('#desinventarUserRoleValue').val() >= 2) {
 		disenabutton($('btnDatacardEdit'), false);
 	}
-	disenabutton($('btnDatacardGotoNext'), false);
 }
 
 function doDatacardGotoNext() {
 	displayDatacardStatusMsg('');
 	if (jQuery('#cardsRecordSource').val() == 'data') {
 		var RecordNumber = parseInt(jQuery('#cardsRecordNumber').val());
-		if (RecordNumber < jQuery('#cardsRecordCount').val() ) {
+		if (RecordNumber < parseInt(jQuery('#cardsRecordCount').val()) ) {
 			RecordNumber = RecordNumber + 1;
 			var DisasterId = jQuery('.linkGridGotoCard[rowindex=' + RecordNumber + ']').attr('DisasterId');
 			jQuery('#cardsRecordNumber').val(RecordNumber);
@@ -720,7 +715,6 @@ function doDatacardGotoNext() {
 	if (jQuery('#desinventarUserRoleValue').val() >= 2) {
 		disenabutton($('btnDatacardEdit'), false);
 	}
-	disenabutton($('btnDatacardGotoPrev'), false);
 }
 
 function doKeepSessionActive() {
@@ -770,11 +764,14 @@ function setDICardFromId(prmRegionId, prmDisasterId) {
 		function(data) {
 			setDICard(prmRegionId, data);
 			jQuery('#divRecordNavigationInfo').hide();
-			if (jQuery('#cardsRecordNumber').val() > 0) {
+			var RecordNumber = parseInt(jQuery('#cardsRecordNumber').val());
+			var RecordCount  = parseInt(jQuery('#cardsRecordCount').val());
+			if (RecordNumber > 0) {
 				jQuery('#divRecordNavigationInfo').show();
-				jQuery('#RecordNumber').text(jQuery('#cardsRecordNumber').val());
-				jQuery('#RecordCount').text(jQuery('#cardsRecordCount').val());
+				jQuery('#RecordNumber').text(RecordNumber);
+				jQuery('#RecordCount').text(RecordCount);
 			}
+			doDatacardNavButtonsEnable();
 			return true;
 		},
 		'json'

@@ -75,12 +75,21 @@
 				break;
 				// Datacards Menu Items
 				case "mnuDatacardInsertEdit":
-					if (jQuery('#DisasterId').val() == '') {
-						//doDatacardGotoFirst();
-					}
 					jQuery('#cardsRecordSource').val('');
-					jQuery('#divDatacardWindow').trigger('displayForm');
-					difw.show();
+					jQuery.post('index.php',
+						{cmd      : 'getRegionRecordCount',
+						 RegionId : jQuery('#desinventarRegionId').val()
+						},
+						function(data) {
+							jQuery('#cardsRecordCount').val(data.RecordCount);
+							$('DICard').reset();	
+							//doDatacardClear();
+							jQuery('#divDatacardWindow').show();
+							doDatacardNavButtonsEnable();
+							difw.show();
+						},
+						'json'
+					);
 				break;
 				case "mnuDatacardImport":
 					hideQueryDesign();
