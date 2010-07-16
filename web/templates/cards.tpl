@@ -6,7 +6,6 @@
 				<input type="button" id="btnDatacardNew"    class="DatacardCmdButton bb bnew"    ext:qtip="{-#tnewtitle#-}: {-#tnewdesc#-}" />
 				<input type="button" id="btnDatacardEdit"   class="DatacardCmdButton bb bupd"    ext:qtip="{-#tupdtitle#-}: {-#tupddesc#-}" />
 				<input type="button" id="btnDatacardSave"   class="DatacardCmdButton bb bsave"   ext:qtip="{-#tsavtitle#-}: {-#tsavdesc#-}" />
-				<input type="button" id="btnDatacardClear"  class="DatacardCmdButton bb bclear"  ext:qtip="{-#tclntitle#-}: {-#tclndesc#-}" />
 				<input type="button" id="btnDatacardCancel" class="DatacardCmdButton bb bcancel" ext:qtip="{-#tcantitle#-}: {-#tcandesc#-}" />
 				&nbsp;&nbsp;|&nbsp;&nbsp;
 				<input type="button" id="btnDatacardPrint"  class="DatacardCmdButton bb bprint"  ext:qtip="{-#mprint#-}" />
