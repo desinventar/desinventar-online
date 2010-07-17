@@ -17,7 +17,7 @@ foreach($us->q->core->query("SELECT * FROM Region WHERE RegionId LIKE 'GAR-ISDR-
 	$RegionList[] = $row['RegionId'];
 }
 //DEBUG
-$RegionList = array('GAR-ISDR-2011_ECU');
+$RegionList = array('GAR-ISDR-2011_SLV');
 foreach ($RegionList as $RegionId) {
 	$us->open($RegionId);
 	print $RegionId . "\n";
@@ -87,6 +87,10 @@ foreach ($RegionList as $RegionId) {
 	//Local Events VEN
 	$iCount += removeData($us, 'EventId="A. TRANSITO"');
 	$iCount += removeData($us, 'EventId="ARBOL CAIDO"');
+	
+	//Local Events SLV
+	$iCount += removeData($us, 'EventId="1cb0d2bf-a5c8-4a4d-adbd-43112a8244ea"'); // PAJIZO
+	$iCount += removeData($us, 'EventId="6c3d7356-36cd-425b-a68d-cd9b7d91f0d9"'); // Deforestación
 	
 	print 'Eventos Locales         : ' . $iCount . "\n";
 

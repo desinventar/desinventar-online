@@ -116,9 +116,10 @@ class DIRegion extends DIObject {
 
 	public function loadInfo() {
 		$iReturn = ERR_NO_ERROR;
-		$iReturn = $this->q->setDBConnection($this->get('RegionId'));
+		$RegionId = $this->get('RegionId');
+		$iReturn = $this->q->setDBConnection($RegionId);
 		if ($iReturn > 0) {
-			$this->setConnection($this->get('RegionId'));
+			$this->setConnection($RegionId);
 			try {
 				$sQuery = "SELECT * FROM Info WHERE LangIsoCode='' AND Length(InfoKey) > 3";
 				foreach($this->conn->query($sQuery) as $row) {
@@ -130,6 +131,7 @@ class DIRegion extends DIObject {
 				$iReturn = ERR_NO_DATABASE;
 			}
 			$this->setConnection('core');
+			$this->set('RegionId', $RegionId);
 			$this->loadInfoTrans($this->get('LangIsoCode'));
 		}
 		return $iReturn;
