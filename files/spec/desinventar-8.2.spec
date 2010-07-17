@@ -6,8 +6,8 @@ Summary: DesInventar - Disaster Inventory System
 %define name1 desinventar
 %define major 82
 Name: %{name1}%{major}
-Version: 8.2.0.79
-Release: 1%{dist}
+Version: 8.2.1
+Release: 04%{dist}
 License: Propietary
 Group: Applications/Disaster
 Source0: %{name1}-%{version}.tar.gz
@@ -25,7 +25,7 @@ Requires: httpd
 Requires: openlayers mapserver
 Requires: liberation-fonts-extras
 Requires: sqlite >= 3.6.14
-Requires: jquery
+Requires: jquery jquery-ui
 
 %define DI_DIR    %{_prefix}/share/desinventar-8.2
 %define WEB_DIR   %{DI_DIR}/web
