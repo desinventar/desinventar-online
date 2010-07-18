@@ -81,7 +81,7 @@
 			onSubmit="javascript: var a=new Array('aEventName','aEventDesc'); return(checkForm(a, '{-#errmsgfrm#-}'));">
 			{-$dic.DBEvePersonName[0]-}<b style="color:darkred;">*</b><br />
 			<input id="aEventName" name="EventName" type="text" class="line" maxlength="40" style="width:500px;" tabindex="1" {-$ro-}
-				onBlur="updateList('eventstatusmsg', 'events.php', 'r={-$reg-}&cmd=chkname&EventId='+ $('EventId').value +'&EventName='+ $('aEventName').value);"
+				onBlur="updateList('eventstatusmsg', 'events.php', 'r={-$reg-}&cmd=chkname&EventId='+ $('aEventId').value +'&EventName='+ $('aEventName').value);"
 				onFocus="showtip('{-$dic.DBEvePersonName[2]-}');" />
 			<br /><br />
 			{-$dic.DBEvePersonDef[0]-}<b style="color:darkred;">*</b><br />
