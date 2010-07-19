@@ -266,8 +266,8 @@ function valueToDIField($prmValue) {
 function strToISO8601($prmDate) {
 	$v = '';
 	if (strlen($prmDate) > 0) {
-		$day   = substr($prmDate,0,2);
-		$month = substr($prmDate,3,2);
+		$month = substr($prmDate,0,2);
+		$day   = substr($prmDate,3,2);
 		$year  = substr($prmDate,6,4);
 		$v = sprintf('%4d-%2d-%2d', $year, $month, $day);
 		$v = str_replace(' ', '0', $v);

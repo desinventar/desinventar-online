@@ -61,6 +61,9 @@
 			$msg[] = 'GeographyId Error : ' . $record['GeographyId'];
 		}
 		
+		// Validate DisasterBeginTime
+		
+		
 		if (count($msg) > 0) {
 			foreach($msg as $line) {
 				printf('%-36s %-10s %s' . "\n", $record['DisasterId'], $record['DisasterSerial'], $line);
