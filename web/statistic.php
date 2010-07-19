@@ -67,6 +67,7 @@ if (isset($post['page']) || isset($post['_S+cmd'])) {
 		$cou = $us->q->getnumrows($sql);
 		$sdl = $us->q->totalize($sql);
 		$dlt = $us->q->getresult($sdl);
+		fb($sdl);
 		// 2009-08-10 (jhcaiced) In Consolidates by Event/Cause, fix
 		// the value
 		$dlt['EventName'] = '';
