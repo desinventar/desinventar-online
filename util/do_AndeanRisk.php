@@ -21,6 +21,9 @@
 	$GeoLevelList = array('GAR-ISDR-2011_COL' => 1,
 	                      'GAR-ISDR-2011_ECU' => 1,
 	                      'GAR-ISDR-2011_PER' => 2);
+	//$EveList      = array();
+	//$EveList      = array('RAIN','FLOOD');
+	//$EveList      = array('EARTHQUAKE');
 	
 	$us->login('diadmin','di8');
 	foreach($RegionList as $RegionId) {
@@ -46,6 +49,8 @@
 						$table[$key][$iYear] = 0;
 					}
 					$GeoLen = ($GeoLevel + 1) * 5;
+					
+					// EffectField SubQuery
 					if ($Field == 'DisasterId') {
 						$SubQuery1 = 'COUNT(' . $Field . ') AS S';
 						$SubQuery2 = '';
@@ -53,20 +58,39 @@
 						$SubQuery1 = 'SUM(' . $Field . 'Q) as S';
 						$SubQuery2 = ' AND ' . $Field . 'Q>-1';
 					}
+					
+					// RecordStatus SubQuery
 					$SubQuery3 = '';
 					$st = explode(',', $Status);
 					$bFirst = true;
 					foreach($st as $sta) {
-						if (! $bFirst) {
-							$SubQuery3 .= ' OR ';
-						}
+						if (! $bFirst) { $SubQuery3 .= ' OR '; }
 						$SubQuery3 .= 'RecordStatus="' . $sta . '"';
 						$bFirst = false;
 					}
+					
+					$SubQuery4 = '';
+					$FileExt4 = '';
+					$bFirst = true;
+					foreach($EveList as $Event) {
+						if (! $bFirst) { $SubQuery4 .= ' OR '; $FileExt4 .= '+'; }
+						$SubQuery4 .= 'EventId="' . $Event . '"';
+						$FileExt4 .= $Event;
+						$bFirst = false;
+					}
+					if ($SubQuery4 != '') {
+						$SubQuery4 = ' AND (' . $SubQuery4 . ')';
+					}
+					if ($FileExt4 != '') {
+						$FileExt4 = '_' . $FileExt4;
+					}
+					
+					// Assembly Query
 					$sQuery = 'SELECT SUBSTR(GeographyId,1,' . $GeoLen . ') AS G, ' . $SubQuery1 . ' FROM Disaster WHERE ' .
-							  ' (' . $SubQuery3 . ') AND ' . 
-							  ' DisasterBeginTime LIKE "' . $iYear . '%" ' . 
-							  ' ' . $SubQuery2 .
+							  ' (' . $SubQuery3 . ') ' . 
+							  ' AND DisasterBeginTime LIKE "' . $iYear . '%" ' . 
+							  $SubQuery2 .
+							  $SubQuery4 . 
 							  ' GROUP BY G ORDER BY G';
 					foreach($us->q->dreg->query($sQuery) as $row) {
 						if (array_key_exists($row['G'], $table)) {
@@ -76,7 +100,7 @@
 				}
 				print "\n";
 
-				$fh = fopen($RegionId . '_' . $FileList1[$Field] . '_' . $FileList2[$Status] . '.csv', 'w+');
+				$fh = fopen($RegionId . '_' . $FileList1[$Field] . '_' . $FileList2[$Status] . $FileExt4 . '.csv', 'w+');
 				// Header
 				$line = '"ID","CODIGO","NOMBRE",';
 				for($iYear = 1970; $iYear <= $YearLast; $iYear++) {
