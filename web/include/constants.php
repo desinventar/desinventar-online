@@ -42,6 +42,11 @@ define('CMD_NEW',			1);
 define('CMD_UPDATE',		2);
 define('CMD_DELETE',		3);
 
+// Normal Answer Codes
+define('STATUS_NO'  , 0);
+define('STATUS_YES' , 1);
+define('STATUS_OK'  , 1);
+
 // Error Codes
 define('ERR_NO_ERROR',          1);
 define('ERR_DEFAULT_ERROR',    -1);
