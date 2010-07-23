@@ -1,5 +1,5 @@
 function onReadyDatabaseImport() {
-	jQuery('#btnDBImportCancel').hide();
+	jQuery('#btnDBImportCancelUpload').hide();
 	jQuery('#divDBImportParameters').hide();
 	doDBImportStatusMsg('');
 	
@@ -29,7 +29,7 @@ function onReadyDatabaseImport() {
 		// start the upload since it's queued
 		jQuery('#txtDBImportFileName').val(file.name);
 		jQuery('#prgDBImportProgressMark').css('width', '0px');
-		jQuery('#btnDBImportCancel').attr('file_id', file.id).show();
+		jQuery('#btnDBImportCancelUpload').attr('file_id', file.id).show();
 		jQuery('#divDBEdit').hide();
 		jQuery(this).swfupload('startUpload');
 	})
@@ -39,10 +39,11 @@ function onReadyDatabaseImport() {
 		jQuery('#prgDBImportProgressMark').css('width', percentage + '%');
 	})
 	.bind('uploadSuccess', function(event, file, serverData) {
-		jQuery('#btnDBImportCancel').hide();
+		jQuery('#btnDBImportCancelUpload').hide();
 		var data = eval('(' + serverData + ')');
 		if (data.Status == 'OK') {
 			doDBImportStatusMsg('msgDBImportUploadOk');
+			jQuery('#frmDBImport #Filename').val(data.Filename);
 			jQuery.each(data, function(index, value) {
 				if ( (value != null) && (typeof(value) == 'object') ) {
 					jQuery.each(value, function(index, value) {
@@ -67,11 +68,11 @@ function onReadyDatabaseImport() {
 	jQuery('#txtDBImportFileName').attr('disabled',true).val('');
 	jQuery('#prgDBImportProgressBar').css('width', jQuery('#txtDBImportFileName').css('width'));
 		
-	jQuery('#btnDBImportCancel').click(function() {
+	jQuery('#btnDBImportCancelUpload').click(function() {
 		var swfu = jQuery.swfupload.getInstance('#divDBImportControl');
 		swfu.cancelUpload(jQuery(this).attr('file_id'));
 		jQuery('#prgDBImportProgressMark').css('width', '0px');
-		jQuery('#btnDBImportCancel').hide();
+		jQuery('#btnDBImportCancelUpload').hide();
 		jQuery('#txtDBImportFileName').val('');
 	});
 	
@@ -86,6 +87,16 @@ function onReadyDatabaseImport() {
 				jQuery('#frmDBImport #RegionLabel').val(jQuery('#frmDBImport #RegionLabel_Prev').val());
 			break;
 		}
+	});
+	
+	jQuery('#btnDBImportCancel').click(function() {
+		jQuery('#divDBImportParameters').hide();
+	});
+	
+	jQuery('#frmDBImport').submit(function() {
+		alert(jQuery('#Filename').val());
+		//alert(jQuery('#frmDBImport').serialize());
+		return false;
 	});
 	
 	// Debug Lines (remember to remove!)

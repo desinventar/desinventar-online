@@ -28,7 +28,7 @@
 				</div>
 			</td>
 			<td>
-				<input type="button" id="btnDBImportCancel" class="bb2" value="{-#msgDBImportCancel#-}" />
+				<input type="button" id="btnDBImportCancelUpload" class="bb2" value="{-#msgDBImportCancel#-}" />
 			</td>
 		</tr>
 		</table>
@@ -43,6 +43,7 @@
 		<form id="frmDBImport">
 			<input type="hidden" id="RegionId_Prev" value="" />
 			<input type="hidden" id="RegionLabel_Prev" value="" />
+			<input type="hidden" id="Filename" value="" />
 			<table>
 			<tr>
 				<td>
@@ -84,6 +85,12 @@
 				<td>
 					<span id="spanCountryIso"></span>
 				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="right">
+					<input type="submit" id="btnDBImportSubmit" class="line" value="Aceptar" />
+					<input type="button" id="btnDBImportCancel" class="line" value="Cancelar" />
+				</td>				
 			</tr>
 			</table>
 		</form>

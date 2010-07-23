@@ -35,15 +35,15 @@ if ( (substr($_SERVER['CONTENT_TYPE'],0,19) == 'multipart/form-data') &&
 }
 switch ($cmd) {
 	case 'fileupload':
-		$answer = array('Status' => 'OK');		
+		$answer = array('Status' => 'OK', 'Filename' => '');
 		if (array_key_exists('Filedata', $_FILES)) {
-			$FileNameOld = $_FILES['Filedata']['tmp_name'];
-			$FileName = TMP_DIR . '/di8file_' . $us->sSessionId . '_' . $_FILES['Filedata']['name'];
-			$answer['FileName'] == $FileName;
-			rename($FileNameOld, $FileName);		
+			$answer['Filename'] = $_FILES['Filedata']['name'];
+			$FilenameOld = $_FILES['Filedata']['tmp_name'];
+			$Filename = TMP_DIR . '/di8file_' . $us->sSessionId . '_' . $_FILES['Filedata']['name'];
+			rename($FilenameOld, $Filename);		
 			// Open ZIP File, extract info.xml and return values...
 			$zip = new ZipArchive();
-			$res = $zip->open($FileName);
+			$res = $zip->open($Filename);
 			if ($res == TRUE) {
 				$zip->extractTo(TMP_DIR, 'info.xml');
 				$zip->close();
@@ -67,11 +67,11 @@ switch ($cmd) {
 		// fb debug doesn't work in this code... why ?
 		/*
 		ob_start();
-		print 'Demo Line ' . "\n";
-		print_r($_GET);
-		print_r($_POST);
-		print_r($_FILES);
-		print_r($_SERVER);
+		print_r($answer);
+		//print_r($_GET);
+		//print_r($_POST);
+		//print_r($_FILES);
+		//print_r($_SERVER);
 		$out = ob_get_contents();
 		ob_end_clean();		
 		$fp = fopen('/tmp/fileupload.log', 'w+');
