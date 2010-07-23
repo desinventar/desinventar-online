@@ -43,7 +43,8 @@
 		<form id="frmDBImport">
 			<input type="hidden" id="RegionId_Prev" value="" />
 			<input type="hidden" id="RegionLabel_Prev" value="" />
-			<input type="hidden" id="Filename" value="" />
+			<input type="hidden" id="Filename" name="Filename" value="" />
+			<input type="hidden" id="DBExist" name="DBExist" value="" />
 			<table>
 			<tr>
 				<td>
@@ -59,7 +60,7 @@
 					{-#msgDBImportRegionId#-} :
 				</td>
 				<td>
-					<input type="text" id="RegionId"    class="line fixw" size="40" /><br />
+					<input type="text" id="RegionId" name="RegionId" class="line fixw" size="40" /><br />
 				</td>
 			</tr>
 			<tr>
@@ -67,7 +68,7 @@
 					{-#msgDBImportRegionLabel#-} :
 				</td>
 				<td>
-					<input type="text" id="RegionLabel" class="line fixw" size="80" /><br />
+					<input type="text" id="RegionLabel" name="RegionLabel" class="line fixw" size="80" /><br />
 				</td>
 			</tr>
 			<tr>
