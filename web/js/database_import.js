@@ -79,7 +79,7 @@ function onReadyDatabaseImport() {
 		switch(jQuery(this).val()) {
 			case 'NEW':
 				jQuery('#frmDBImport #RegionId').val(doCreateNewRegionId(jQuery('#frmDBImport #CountryIso').val()));
-				jQuery('#frmDBImport #RegionLabel').val(jQuery('#frmDBImport #RegionId').val());
+				jQuery('#frmDBImport #RegionLabel').val(jQuery('#frmDBImport #CountryIso :selected').html() + ' ' + jQuery('#frmDBImport #RegionId').val());
 			break;
 			case 'UPDATE':
 				jQuery('#frmDBImport #RegionId').val(jQuery('#frmDBImport #RegionId_Prev').val());
