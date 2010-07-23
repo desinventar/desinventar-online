@@ -54,6 +54,7 @@ switch ($cmd) {
 				$info['LangIsoCode'] = $r->get('LangIsoCode');
 				$info['CountryIso']  = $r->get('CountryIso');
 				$answer['Info'] = $info;
+				$answer['DBExist'] = DIRegion::existRegion($us, $info['RegionId']);
 			} else {
 				$answer['Status'] = 'ERROR';
 			}

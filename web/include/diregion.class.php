@@ -1106,6 +1106,19 @@ class DIRegion extends DIObject {
 		} //if
 		return $iReturn;
 	} //function
+
+	public static function existRegion($us, $prmRegionId) {
+		$iReturn = STATUS_NO;
+		$sQuery = 'SELECT RegionId FROM Region WHERE RegionId="' . $prmRegionId . '"';
+		try {
+			foreach($us->q->core->query($sQuery) as $row) {
+				$iReturn = STATUS_YES;
+			}
+		} catch (Exception $e) {
+			$iReturn = ERR_NO_DATABASE;
+		}
+		return $iReturn;
+	}
 } //class
 
 </script>

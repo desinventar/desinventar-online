@@ -50,12 +50,12 @@
 					<br />
 				</td>
 				<td>
-					<input type="radio" class="radioDBImportOption" name="radioDBImportOption" value="NEW" checked />{-#msgDBImportDatabaseNew#-}<br />
-					<input type="radio" class="radioDBImportOption" name="radioDBImportOption" value="UPDATE" />{-#msgDBImportDatabaseReplace#-}<br />
+					<span id="spanDBImportNew"><input type="radio" id="radioDBImportOptionNew" class="radioDBImportOption" name="radioDBImportOption" value="NEW" checked />{-#msgDBImportDatabaseNew#-}</span><br />
+					<span id="spanDBImportUpdate"><input type="radio" id="radioDBImportOptionUpdate" class="radioDBImportOption" name="radioDBImportOption" value="UPDATE" />{-#msgDBImportDatabaseReplace#-}</span><br />
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td align="right">
 					{-#msgDBImportRegionId#-} :
 				</td>
 				<td>
@@ -63,7 +63,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td align="right">
 					{-#msgDBImportRegionLabel#-} :
 				</td>
 				<td>
@@ -71,7 +71,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td align="right">
 					{-#msgDBImportLangIsoCode#-} :
 				</td>
 				<td>
@@ -79,7 +79,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>
+				<td align="right">
 					{-#msgDBImportCountryIso#-} :
 				</td>
 				<td>

@@ -30,7 +30,7 @@ function onReadyDatabaseImport() {
 		jQuery('#txtDBImportFileName').val(file.name);
 		jQuery('#prgDBImportProgressMark').css('width', '0px');
 		jQuery('#btnDBImportCancelUpload').attr('file_id', file.id).show();
-		jQuery('#divDBEdit').hide();
+		jQuery('#divDBImportParameters').hide();
 		jQuery(this).swfupload('startUpload');
 	})
 	.bind('uploadProgress', function(event, file, bytesLoaded) {
@@ -54,6 +54,12 @@ function onReadyDatabaseImport() {
 				} else {
 				}
 			});
+			if (parseInt(data.DBExist) < 1) {
+				jQuery('#spanDBImportUpdate').hide();
+				jQuery('#radioDBImportOptionNew').attr('checked',true).trigger('change');
+			} else {
+				jQuery('#radioDBImportOptionUpdate').attr('checked',true).trigger('change');
+			}
 			jQuery('#divDBImportParameters').show();
 		} else {
 			// Upload error (file size ?)
@@ -79,14 +85,22 @@ function onReadyDatabaseImport() {
 	jQuery('.radioDBImportOption').change(function() {
 		switch(jQuery(this).val()) {
 			case 'NEW':
-				jQuery('#frmDBImport #RegionId').val(doCreateNewRegionId(jQuery('#frmDBImport #CountryIso').val()));
-				jQuery('#frmDBImport #RegionLabel').val(jQuery('#frmDBImport #CountryIso :selected').html() + ' ' + jQuery('#frmDBImport #RegionId').val());
+				jQuery('#frmDBImport #RegionId')
+					.val(doCreateNewRegionId(jQuery('#frmDBImport #CountryIso').val()))
+					.attr('disabled',true);
+				jQuery('#frmDBImport #RegionLabel')
+					.val(jQuery('#frmDBImport #CountryIso :selected').html() + ' ' + jQuery('#frmDBImport #RegionId').val())
+					.attr('disabled',false);
 			break;
 			case 'UPDATE':
-				jQuery('#frmDBImport #RegionId').val(jQuery('#frmDBImport #RegionId_Prev').val());
-				jQuery('#frmDBImport #RegionLabel').val(jQuery('#frmDBImport #RegionLabel_Prev').val());
+				jQuery('#frmDBImport #RegionId')
+					.val(jQuery('#frmDBImport #RegionId_Prev').val())
+					.attr('disabled',true);
+				jQuery('#frmDBImport #RegionLabel')
+					.val(jQuery('#frmDBImport #RegionLabel_Prev').val())
+					.attr('disabled',true);
 			break;
-		}
+		} //switch
 	});
 	
 	jQuery('#btnDBImportCancel').click(function() {
@@ -100,7 +114,7 @@ function onReadyDatabaseImport() {
 	});
 	
 	// Debug Lines (remember to remove!)
-	jQuery('#divDBImportParameters').show();
+	//jQuery('#divDBImportParameters').show();
 	
 } //onReady
 
