@@ -41,14 +41,16 @@
 	</div>
 	<div id="divDBImportParameters" style="display:none;">
 		<form id="frmDBImport">
+			<input type="hidden" id="RegionId_Prev" value="" />
+			<input type="hidden" id="RegionLabel_Prev" value="" />
 			<table>
 			<tr>
 				<td>
 					<br />
 				</td>
 				<td>
-					<input type="radio" name="radbtnDBImportOption" value="NEW" checked />{-#msgDBImportDatabaseNew#-}<br />
-					<input type="radio" name="radbtnDBImportOption" value="OVERWRITE" />{-#msgDBImportDatabaseReplace#-}<br />
+					<input type="radio" class="radioDBImportOption" name="radioDBImportOption" value="NEW" checked />{-#msgDBImportDatabaseNew#-}<br />
+					<input type="radio" class="radioDBImportOption" name="radioDBImportOption" value="UPDATE" />{-#msgDBImportDatabaseReplace#-}<br />
 				</td>
 			</tr>
 			<tr>

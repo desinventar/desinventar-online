@@ -1,11 +1,14 @@
 function onReadyDatabaseImport() {
 	jQuery('#btnDBImportCancel').hide();
+	jQuery('#divDBImportParameters').hide();
 	doDBImportStatusMsg('');
-	jQuery('#divDBEdit').hide();
 	
 	// Copy Select Control with Language List to this form
-	jQuery('#desinventarLanguageList').clone().attr('id','LangIsoCode').appendTo('#frmDBEdit #spanLangIsoCode').show();
-	jQuery('#desinventarCountryList').clone().attr('id','CountryIso').appendTo('#frmDBEdit #spanCountryIso').show();
+	jQuery('#desinventarLanguageList').clone().attr('id','LangIsoCode').appendTo('#frmDBImport #spanLangIsoCode').show();
+	jQuery('#desinventarCountryList').clone().attr('id','CountryIso').appendTo('#frmDBImport #spanCountryIso').show();
+	// These controls are readonly
+	jQuery('#frmDBImport #LangIsoCode').attr('disabled', true);
+	jQuery('#frmDBImport #CountryIso').attr('disabled', true);
 
 	// Create a SWFUpload instance and attach events...
 	jQuery('#divDBImportControl').swfupload({
@@ -43,8 +46,10 @@ function onReadyDatabaseImport() {
 			jQuery.each(data, function(index, value) {
 				if ( (value != null) && (typeof(value) == 'object') ) {
 					jQuery.each(value, function(index, value) {
-						//jQuery('#frmDBEdit #' + index).val(value);
+						jQuery('#frmDBImport #' + index).val(value);
 					});
+					jQuery('#frmDBImport #RegionId_Prev').val(value.RegionId);
+					jQuery('#frmDBImport #RegionLabel_Prev').val(value.RegionLabel);
 				} else {
 				}
 			});
@@ -69,8 +74,24 @@ function onReadyDatabaseImport() {
 		jQuery('#btnDBImportCancel').hide();
 		jQuery('#txtDBImportFileName').val('');
 	});
+	
+	jQuery('.radioDBImportOption').change(function() {
+		switch(jQuery(this).val()) {
+			case 'NEW':
+				jQuery('#frmDBImport #RegionId').val(doCreateNewRegionId(jQuery('#frmDBImport #CountryIso').val()));
+				jQuery('#frmDBImport #RegionLabel').val(jQuery('#frmDBImport #RegionId').val());
+			break;
+			case 'UPDATE':
+				jQuery('#frmDBImport #RegionId').val(jQuery('#frmDBImport #RegionId_Prev').val());
+				jQuery('#frmDBImport #RegionLabel').val(jQuery('#frmDBImport #RegionLabel_Prev').val());
+			break;
+		}
+	});
+	
+	// Debug Lines (remember to remove!)
+	jQuery('#divDBImportParameters').show();
+	
 } //onReady
-
 
 function doDBImportStatusMsg(Id) {
 	jQuery('.DBImportStatusMsg').hide();
@@ -78,3 +99,28 @@ function doDBImportStatusMsg(Id) {
 		jQuery('.DBImportStatusMsg#' + Id).show();
 	}
 } //function
+
+function doCreateNewRegionId(CountryIso) {
+	var t = new Date();
+	var RegionId = '';
+	if (CountryIso == '') {
+		RegionId = 'DESINV';
+	} else {
+		RegionId = CountryIso;
+	}
+	RegionId = RegionId + '-' + padNumber(t.getUTCFullYear(), 4) + 
+	                            padNumber(t.getUTCMonth()+1 , 2) + 
+	                            padNumber(t.getUTCDate()    , 2) + 
+	                            padNumber(t.getUTCHours()   , 2) +
+	                            padNumber(t.getUTCMinutes() , 2) +
+	                            padNumber(t.getUTCSeconds() , 2);
+	return RegionId;
+}
+
+function padNumber(myValue, myLen) {
+	var value = '' + myValue;
+	while (value.length < myLen) {
+		value = '0' + value;
+	}
+	return value;
+}
