@@ -8,8 +8,8 @@ function onReadyDatabaseImport() {
 
 	// Create a SWFUpload instance and attach events...
 	jQuery('#divDBImportControl').swfupload({
-		upload_url: 'index.php',
-		post_params: {cmd : 'fileupload'},
+		upload_url: 'index.php', //?cmd=fileupload', //'&t=' + new Date().getTime(),
+		post_params: {'cmd':'fileupload'},
 		file_size_limit : "204800",
 		file_types : "*.*",
 		file_types_description : "All Files",
@@ -19,7 +19,6 @@ function onReadyDatabaseImport() {
 		button_width : 48,
 		button_height : 48,
 		button_placeholder_id : 'btnDBImportSelectFile',
-		debug: false,
 		custom_settings : {something : "here"}
 	})
 	.bind('fileQueued', function(event, file) {
@@ -37,18 +36,22 @@ function onReadyDatabaseImport() {
 	})
 	.bind('uploadSuccess', function(event, file, serverData) {
 		jQuery('#btnDBImportCancel').hide();
+		alert(serverData);
 		var data = eval('(' + serverData + ')');
-		jQuery('#divDBEdit').show();
-		jQuery('#txtDBEditInfo').html('');
-		jQuery.each(data, function(index, value) {
-			if ( (value != null) && (typeof(value) == 'object') ) {
-				jQuery.each(value, function(index, value) {
-					jQuery('#frmDBEdit #' + index).val(value);
-				});
-			} else {
-				//jQuery('#txtDBEditInfo').append(index + ' => ' + value + '<br />');
-			}
-		});
+		if (data.Status == 'OK') {
+			jQuery('#divDBEdit').show();
+			jQuery('#txtDBEditInfo').html('');
+			jQuery.each(data, function(index, value) {
+				if ( (value != null) && (typeof(value) == 'object') ) {
+					jQuery.each(value, function(index, value) {
+						jQuery('#frmDBEdit #' + index).val(value);
+					});
+				} else {
+				}
+			});
+		} else {
+			// Upload error (file size ?)
+		}
 	})
 	.bind('uploadComplete', function(event, file) {
 		// upload has completed, lets try the next one in the queue

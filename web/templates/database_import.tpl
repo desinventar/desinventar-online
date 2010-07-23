@@ -9,7 +9,7 @@
 			</td>
 			<td colspan="2" valign="top">
 				<input type="text"   id="txtDBImportFileName" value="" size="50"/>
-				<input type="button" id="btnDBImportSelectFile" />
+				<input id="btnDBImportSelectFile" type="button" />
 			</td>
 		</tr>
 		<tr>
