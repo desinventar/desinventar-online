@@ -27,13 +27,12 @@ if (!empty($RegionId)) {
 $t->assign('desinventarRegionLabel', $RegionLabel);
 
 // 2010-07-23 (jhcaiced) When uploaded file with SWFUpload is bigger than 
-// upload_max_filesize in php.ini the script is called with emtpy POST/FILES 
+// post__max_size in php.ini the script is called with emtpy POST/FILES 
 // parameters, here we try to detect that case and call the appropiate command.
 if ( (substr($_SERVER['CONTENT_TYPE'],0,19) == 'multipart/form-data') &&
      ($_SERVER['HTTP_USER_AGENT'] == 'Shockwave Flash') ) {
      $cmd = 'fileupload';
 }
-
 switch ($cmd) {
 	case 'fileupload':
 		$answer = array('Status' => 'OK');		
@@ -59,7 +58,8 @@ switch ($cmd) {
 				$answer['Status'] = 'ERROR';
 			}
 		} else {
-			// If $_FILES is empty, usually the PHP upload_max_filesize parameter needs configuration
+			// If $_FILES is empty, usually the PHP post_max_size parameter 
+			// needs configuration in php.ini
 			$answer['Status'] = 'ERROR';
 			$answer['ErrCode'] = ERR_UPLOAD_FAILED;
 		}
@@ -153,7 +153,7 @@ switch ($cmd) {
 		$t->display('regiontechinfo.tpl');
 	break;
 	case 'getRegionFullInfo':
-		if ($RegionId != '') {
+		if (isset($RegionId) && $RegionId != '') {
 			$t->assign('reg', $RegionId);
 			$r = new DIRegion($us, $RegionId);
 			$a = $r->getDBInfo($lg);

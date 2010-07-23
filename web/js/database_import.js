@@ -1,6 +1,7 @@
 function onReadyDatabaseImport() {
 	jQuery('#btnDBImportCancel').hide();
-	//jQuery('#divDBEdit').hide();
+	doDBImportStatusMsg('');
+	jQuery('#divDBEdit').hide();
 	
 	// Copy Select Control with Language List to this form
 	jQuery('#desinventarLanguageList').clone().attr('id','LangIsoCode').appendTo('#frmDBEdit #spanLangIsoCode').show();
@@ -36,21 +37,21 @@ function onReadyDatabaseImport() {
 	})
 	.bind('uploadSuccess', function(event, file, serverData) {
 		jQuery('#btnDBImportCancel').hide();
-		alert(serverData);
 		var data = eval('(' + serverData + ')');
 		if (data.Status == 'OK') {
-			jQuery('#divDBEdit').show();
-			jQuery('#txtDBEditInfo').html('');
+			doDBImportStatusMsg('msgDBImportUploadOk');
 			jQuery.each(data, function(index, value) {
 				if ( (value != null) && (typeof(value) == 'object') ) {
 					jQuery.each(value, function(index, value) {
-						jQuery('#frmDBEdit #' + index).val(value);
+						//jQuery('#frmDBEdit #' + index).val(value);
 					});
 				} else {
 				}
 			});
+			jQuery('#divDBImportParameters').show();
 		} else {
 			// Upload error (file size ?)
+			doDBImportStatusMsg('msgDBImportUploadError');
 		}
 	})
 	.bind('uploadComplete', function(event, file) {
@@ -68,4 +69,12 @@ function onReadyDatabaseImport() {
 		jQuery('#btnDBImportCancel').hide();
 		jQuery('#txtDBImportFileName').val('');
 	});
-}
+} //onReady
+
+
+function doDBImportStatusMsg(Id) {
+	jQuery('.DBImportStatusMsg').hide();
+	if (Id != '') {
+		jQuery('.DBImportStatusMsg#' + Id).show();
+	}
+} //function
