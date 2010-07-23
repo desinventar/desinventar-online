@@ -7,8 +7,9 @@ function onReadyDatabaseImport() {
 	jQuery('#desinventarLanguageList').clone().attr('id','LangIsoCode').appendTo('#frmDBImport #spanLangIsoCode').show();
 	jQuery('#desinventarCountryList').clone().attr('id','CountryIso').appendTo('#frmDBImport #spanCountryIso').show();
 	// These controls are readonly
-	jQuery('#frmDBImport #LangIsoCode').attr('disabled', true);
-	jQuery('#frmDBImport #CountryIso').attr('disabled', true);
+	jQuery('#frmDBImport #RegionId').attr('disabled', true).css('background-color','#ccc');
+	jQuery('#frmDBImport #LangIsoCode').attr('disabled', true).css('background-color','#ccc');
+	jQuery('#frmDBImport #CountryIso').attr('disabled', true).css('background-color','#ccc');
 
 	// Create a SWFUpload instance and attach events...
 	jQuery('#divDBImportControl').swfupload({
@@ -54,6 +55,7 @@ function onReadyDatabaseImport() {
 				} else {
 				}
 			});
+			jQuery('#frmDBImport #DBExist').val(data.DBExist);
 			if (parseInt(data.DBExist) < 1) {
 				jQuery('#spanDBImportUpdate').hide();
 				jQuery('#radioDBImportOptionNew').attr('checked',true).trigger('change');
@@ -90,7 +92,8 @@ function onReadyDatabaseImport() {
 					.attr('disabled',true);
 				jQuery('#frmDBImport #RegionLabel')
 					.val(jQuery('#frmDBImport #CountryIso :selected').html() + ' ' + jQuery('#frmDBImport #RegionId').val())
-					.attr('disabled',false);
+					.attr('disabled',false)
+					.css('background-color','#fff');
 			break;
 			case 'UPDATE':
 				jQuery('#frmDBImport #RegionId')
@@ -98,7 +101,8 @@ function onReadyDatabaseImport() {
 					.attr('disabled',true);
 				jQuery('#frmDBImport #RegionLabel')
 					.val(jQuery('#frmDBImport #RegionLabel_Prev').val())
-					.attr('disabled',true);
+					.attr('disabled',true)
+					.css('background-color','#ccc');
 			break;
 		} //switch
 	});
@@ -108,13 +112,13 @@ function onReadyDatabaseImport() {
 	});
 	
 	jQuery('#frmDBImport').submit(function() {
-		alert(jQuery('#Filename').val());
-		//alert(jQuery('#frmDBImport').serialize());
+		alert(jQuery('#frmDBImport').serialize());
 		return false;
 	});
 	
 	// Debug Lines (remember to remove!)
-	//jQuery('#divDBImportParameters').show();
+	jQuery('#divDBImportParameters').show();
+	jQuery('#frmDBImport #RegionId').val('DEMO');
 	
 } //onReady
 
