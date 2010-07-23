@@ -20,7 +20,6 @@
 <body>
 {-include file="database_backup2.tpl"-}
 {-include file="database_import.tpl"-}
-{-include file="database_edit.tpl"-}
 {-include file="desinventarinfo.tpl"-}
 </body>
 </html>
