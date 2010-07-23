@@ -25,38 +25,53 @@ if (!empty($RegionId)) {
 	$RegionLabel = $us->q->getDBInfoValue('RegionLabel');
 }
 $t->assign('desinventarRegionLabel', $RegionLabel);
+
+// 2010-07-23 (jhcaiced) When uploaded file with SWFUpload is bigger than 
+// upload_max_filesize in php.ini the script is called with emtpy POST/FILES 
+// parameters, here we try to detect that case and call the appropiate command.
+if ( (substr($_SERVER['CONTENT_TYPE'],0,19) == 'multipart/form-data') &&
+     ($_SERVER['HTTP_USER_AGENT'] == 'Shockwave Flash') ) {
+     $cmd = 'fileupload';
+}
+
 switch ($cmd) {
 	case 'fileupload':
-		$answer = array('Status' => 'OK');
-		
-		// Rename uploaded file
-		$FileNameOld = $_FILES['Filedata']['tmp_name'];
-		$FileName = TMP_DIR . '/di8file_' . $us->sSessionId . '_' . $_FILES['Filedata']['name'];
-		$answer['FileName'] == $FileName;
-		
-		rename($FileNameOld, $FileName);
-		
-		// Open ZIP File, extract info.xml and return values...
-		$zip = new ZipArchive();
-		$res = $zip->open($FileName);
-		if ($res == TRUE) {
-			$zip->extractTo(TMP_DIR, 'info.xml');
-			$zip->close();
-			$r = new DIRegion($us, '', TMP_DIR . '/info.xml');
-			$info = array();
-			$info['RegionId']    = $r->get('RegionId');
-			$info['RegionLabel'] = $r->get('RegionLabel');
-			$info['LangIsoCode'] = $r->get('LangIsoCode');
-			$info['CountryIso']  = $r->get('CountryIso');
-			$answer['Info'] = $info;
+		$answer = array('Status' => 'OK');		
+		if (array_key_exists('Filedata', $_FILES)) {
+			$FileNameOld = $_FILES['Filedata']['tmp_name'];
+			$FileName = TMP_DIR . '/di8file_' . $us->sSessionId . '_' . $_FILES['Filedata']['name'];
+			$answer['FileName'] == $FileName;
+			rename($FileNameOld, $FileName);		
+			// Open ZIP File, extract info.xml and return values...
+			$zip = new ZipArchive();
+			$res = $zip->open($FileName);
+			if ($res == TRUE) {
+				$zip->extractTo(TMP_DIR, 'info.xml');
+				$zip->close();
+				$r = new DIRegion($us, '', TMP_DIR . '/info.xml');
+				$info = array();
+				$info['RegionId']    = $r->get('RegionId');
+				$info['RegionLabel'] = $r->get('RegionLabel');
+				$info['LangIsoCode'] = $r->get('LangIsoCode');
+				$info['CountryIso']  = $r->get('CountryIso');
+				$answer['Info'] = $info;
+			} else {
+				$answer['Status'] = 'ERROR';
+			}
 		} else {
+			// If $_FILES is empty, usually the PHP upload_max_filesize parameter needs configuration
 			$answer['Status'] = 'ERROR';
+			$answer['ErrCode'] = ERR_UPLOAD_FAILED;
 		}
 		echo json_encode($answer);
-		/*
 		// fb debug doesn't work in this code... why ?
+		/*
 		ob_start();
-		print_r($_FILES['Filedata']);
+		print 'Demo Line ' . "\n";
+		print_r($_GET);
+		print_r($_POST);
+		print_r($_FILES);
+		print_r($_SERVER);
 		$out = ob_get_contents();
 		ob_end_clean();		
 		$fp = fopen('/tmp/fileupload.log', 'w+');

@@ -154,8 +154,10 @@
 		function hideQueryDesign() {
 			// Hide Query Design Panel
 			w = Ext.getCmp('westm');
-			w.hide();
-			w.collapse();
+			if (w != undefined) {
+				w.hide();
+				w.collapse();
+			}
 		}
 
 	var	w;

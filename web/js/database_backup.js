@@ -20,6 +20,7 @@ function onReadyDatabaseBackup() {
 				}				
 				if (bOk) {
 					jQuery('#linkDBBackupDownload').attr('href', data.BackupURL);
+					jQuery('#btnDBBackupDownload').attr('href', data.BackupURL);
 					jQuery('.DBBackup').hide();
 					jQuery('#divDBBackupResults').show();
 					jQuery('#divDBBackupParameters').show();		
@@ -31,6 +32,11 @@ function onReadyDatabaseBackup() {
 			},
 			'json'
 		);
+	});
+	
+	jQuery('#btnDBBackupDownload').click(function() {
+		var url = jQuery(this).attr('href');
+		window.open(url,'','');
 	});
 	
 	jQuery('#divDatabaseBackup').bind('DBBackupRestart', function() {

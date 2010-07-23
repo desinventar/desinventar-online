@@ -15,6 +15,7 @@
 			<div id="divDBBackupResults" style="display:none;" class="DBBackup">
 				<p>{-#msgDBBackupComplete#-}</p>
 				<a id="linkDBBackupDownload" href="#"><img src="images/save-as-icon.png"></a><br />
+				<input id="btnDBBackupDownload" type="button" class="line" value="Download" href="" />
 				<br />
 				<hr size="2" noshade />
 			</div>
