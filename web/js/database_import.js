@@ -4,12 +4,9 @@ function onReadyDatabaseImport() {
 	doDBImportStatusMsg('');
 	
 	// Copy Select Control with Language List to this form
-	jQuery('#desinventarLanguageList').clone().attr('id','LangIsoCode').appendTo('#frmDBImport #spanLangIsoCode').show();
-	jQuery('#desinventarCountryList').clone().attr('id','CountryIso').appendTo('#frmDBImport #spanCountryIso').show();
-	// These controls are readonly
-	jQuery('#frmDBImport #RegionId').attr('disabled', true).css('background-color','#ccc');
-	jQuery('#frmDBImport #LangIsoCode').attr('disabled', true).css('background-color','#ccc');
-	jQuery('#frmDBImport #CountryIso').attr('disabled', true).css('background-color','#ccc');
+	jQuery('#desinventarLanguageList').clone().attr('id','LangIsoCode').attr('name','LangIsoCode').appendTo('#frmDBImport #spanLangIsoCode').show();
+	jQuery('#desinventarCountryList').clone().attr('id','CountryIso').attr('name','CountryIso').appendTo('#frmDBImport #spanCountryIso').show();
+	
 
 	// Create a SWFUpload instance and attach events...
 	jQuery('#divDBImportControl').swfupload({
@@ -87,13 +84,8 @@ function onReadyDatabaseImport() {
 	jQuery('.radioDBImportOption').change(function() {
 		switch(jQuery(this).val()) {
 			case 'NEW':
-				jQuery('#frmDBImport #RegionId')
-					.val(doCreateNewRegionId(jQuery('#frmDBImport #CountryIso').val()))
-					.attr('disabled',true);
-				jQuery('#frmDBImport #RegionLabel')
-					.val(jQuery('#frmDBImport #CountryIso :selected').html() + ' ' + jQuery('#frmDBImport #RegionId').val())
-					.attr('disabled',false)
-					.css('background-color','#fff');
+				jQuery('#frmDBImport #RegionId').val(doCreateNewRegionId(jQuery('#frmDBImport #CountryIso').val()));
+				jQuery('#frmDBImport #RegionLabel').val(jQuery('#frmDBImport #CountryIso :selected').html() + ' ' + jQuery('#frmDBImport #RegionId').val());
 			break;
 			case 'UPDATE':
 				jQuery('#frmDBImport #RegionId')
@@ -105,6 +97,7 @@ function onReadyDatabaseImport() {
 					.css('background-color','#ccc');
 			break;
 		} //switch
+		doUpdateDBImportFormOptions(jQuery(this).val());
 	});
 	
 	jQuery('#btnDBImportCancel').click(function() {
@@ -112,15 +105,53 @@ function onReadyDatabaseImport() {
 	});
 	
 	jQuery('#frmDBImport').submit(function() {
-		alert(jQuery('#frmDBImport').serialize());
+		// Enable fields to the value can be send with serialize...
+		jQuery('#frmDBImport input').attr('disabled',false);
+		jQuery('#frmDBImport select').attr('disabled', false);
+		
+		var params = {};
+		jQuery.each(jQuery('#frmDBImport').serializeArray(), function(index,value) {
+			params[value.name] = value.value;
+		});
+		jQuery.post('index.php',
+			{cmd : 'dbimport', 
+			 RegionInfo : params
+			},
+			function(data) {
+				// Update form again to reset/disable the fields to their previous state
+				var x = jQuery('#frmDBImport .radioDBImportOption').serializeArray();
+				doUpdateDBImportFormOptions(x[0].value);
+			},
+			'json'
+		);
 		return false;
 	});
+
+	jQuery('#radioDBImportOptionUpdate').trigger('change');
 	
 	// Debug Lines (remember to remove!)
 	jQuery('#divDBImportParameters').show();
 	jQuery('#frmDBImport #RegionId').val('DEMO');
 	
 } //onReady
+
+function doUpdateDBImportFormOptions(value) {
+	// These controls are readonly
+	jQuery('#frmDBImport #RegionId').attr('disabled', true).css('background-color','#ccc');
+	jQuery('#frmDBImport #LangIsoCode').attr('disabled', true).css('background-color','#ccc');
+	jQuery('#frmDBImport #CountryIso').attr('disabled', true).css('background-color','#ccc');
+
+	switch(value) {
+		case 'NEW':
+			jQuery('#frmDBImport #RegionId').attr('disabled',true);
+			jQuery('#frmDBImport #RegionLabel').attr('disabled',false).css('background-color','#fff');
+		break;
+		case 'UPDATE':
+			jQuery('#frmDBImport #RegionId').attr('disabled',true);
+			jQuery('#frmDBImport #RegionLabel').attr('disabled',true).css('background-color','#ccc');
+		break;
+	} //switch
+}
 
 function doDBImportStatusMsg(Id) {
 	jQuery('.DBImportStatusMsg').hide();

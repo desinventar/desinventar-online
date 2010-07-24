@@ -34,6 +34,11 @@ if ( (substr($_SERVER['CONTENT_TYPE'],0,19) == 'multipart/form-data') &&
      $cmd = 'fileupload';
 }
 switch ($cmd) {
+	case 'dbimport' : 
+		$answer = array('Status' => 'OK');
+		fb($_POST);
+		echo json_encode($answer);		
+	break;
 	case 'fileupload':
 		$answer = array('Status' => 'OK', 'Filename' => '');
 		if (array_key_exists('Filedata', $_FILES)) {
