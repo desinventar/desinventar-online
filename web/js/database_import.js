@@ -125,6 +125,7 @@ function onReadyDatabaseImport() {
 				}					
 				// Restore form again by enable/disable fields to their previous state
 				var x = jQuery('#frmDBImport .radioDBImportOption').serializeArray();
+				alert(x[0].value);
 				doUpdateDBImportFormOptions(x[0].value);
 			},
 			'json'

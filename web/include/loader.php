@@ -79,6 +79,7 @@ define('WWWDIR'  , $_SERVER['DI8_WWWDIR']);
 define('WWWDATA' , '/desinventar-8.2-data');
 define('WWWURL'  , '/');
 define('DATADIR' , $_SERVER['DI8_DATADIR']);
+define('DBDIR'   , DATADIR . '/database');
 define('MAPDIR'  , $_SERVER['DI8_MAPDIR']);
 define('CACHEDIR', $_SERVER['DI8_CACHEDIR']);
 define('VAR_DIR' , DATADIR);
