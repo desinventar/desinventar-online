@@ -34,17 +34,39 @@ if ( (substr($_SERVER['CONTENT_TYPE'],0,19) == 'multipart/form-data') &&
      $cmd = 'fileupload';
 }
 switch ($cmd) {
-	case 'dbimport' : 
-		$answer = array('Status' => 'OK');
-		fb($_POST);
+	case 'dbzipimport' : 
+		$answer = array();
+		$iReturn = ERR_NO_ERROR;
+		if ($us->UserId != 'root') {
+			$iReturn = ERR_ACCESS_DENIED;
+		}
+		if ($iReturn > 0) {
+			// Use the parameters to create a new database from zip file...
+			$Filename = TMP_DIR . '/di8file_' . $us->sSessionId . '_' . $_POST['RegionInfo']['Filename'];
+			fb($Filename);
+		}
+		$answer['Status'] = $iReturn;
+		fb($answer);
 		echo json_encode($answer);		
 	break;
 	case 'fileupload':
-		$answer = array('Status' => 'OK', 'Filename' => '');
-		if (array_key_exists('Filedata', $_FILES)) {
+		$iReturn = ERR_NO_ERROR;
+		$answer = array('Filename' => '');
+		if ($us->UserId != 'root') {
+			//$iReturn = ERR_ACCESS_DENIED;
+		}
+		if ($iReturn > 0) {
+			if (! array_key_exists('Filedata', $_FILES)) {
+				// If $_FILES is empty, usually the PHP post_max_size parameter 
+				// needs configuration in php.ini
+				$iReturn = ERR_UPLOAD_FAILED;
+			}
+		}
+		
+		if ($iReturn > 0) {
 			$answer['Filename'] = $_FILES['Filedata']['name'];
 			$FilenameOld = $_FILES['Filedata']['tmp_name'];
-			$Filename = TMP_DIR . '/di8file_' . $us->sSessionId . '_' . $_FILES['Filedata']['name'];
+			$Filename = TMP_DIR . '/di8file_' . $_POST['SessionId'] . '_' . $_FILES['Filedata']['name'];
 			rename($FilenameOld, $Filename);		
 			// Open ZIP File, extract info.xml and return values...
 			$zip = new ZipArchive();
@@ -61,21 +83,20 @@ switch ($cmd) {
 				$answer['Info'] = $info;
 				$answer['DBExist'] = DIRegion::existRegion($us, $info['RegionId']);
 			} else {
-				$answer['Status'] = 'ERROR';
+				$iReturn = ERR_UNKNOWN_ERROR;
 			}
-		} else {
-			// If $_FILES is empty, usually the PHP post_max_size parameter 
-			// needs configuration in php.ini
-			$answer['Status'] = 'ERROR';
-			$answer['ErrCode'] = ERR_UPLOAD_FAILED;
 		}
+		$answer['Status'] = $iReturn;
+		// This command fileupload is called by swfupload directly so 
+		// this session can be removed...
+		$us->delete();
 		echo json_encode($answer);
 		// fb debug doesn't work in this code... why ?
 		/*
 		ob_start();
 		print_r($answer);
 		//print_r($_GET);
-		//print_r($_POST);
+		print_r($_POST);
 		//print_r($_FILES);
 		//print_r($_SERVER);
 		$out = ob_get_contents();
@@ -83,7 +104,7 @@ switch ($cmd) {
 		$fp = fopen('/tmp/fileupload.log', 'w+');
 		fwrite($fp, $out);
 		fclose($fp);
-		*/
+		*/		
 	break;
 	case 'test':
 		$t->assign('LanguageList', $us->q->loadLanguages(1));

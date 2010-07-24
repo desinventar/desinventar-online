@@ -11,7 +11,9 @@ function onReadyDatabaseImport() {
 	// Create a SWFUpload instance and attach events...
 	jQuery('#divDBImportControl').swfupload({
 		upload_url: 'index.php', //?cmd=fileupload', //'&t=' + new Date().getTime(),
-		post_params: {'cmd':'fileupload'},
+		post_params: {cmd : 'fileupload', 
+		              SessionId : ('' + document.cookie.match(/DI8SESSID=[^;]+/)).substr(10)
+		             },
 		file_size_limit : "204800",
 		file_types : "*.*",
 		file_types_description : "All Files",
@@ -29,6 +31,7 @@ function onReadyDatabaseImport() {
 		jQuery('#prgDBImportProgressMark').css('width', '0px');
 		jQuery('#btnDBImportCancelUpload').attr('file_id', file.id).show();
 		jQuery('#divDBImportParameters').hide();
+		doDBImportStatusMsg('');
 		jQuery(this).swfupload('startUpload');
 	})
 	.bind('uploadProgress', function(event, file, bytesLoaded) {
@@ -39,7 +42,7 @@ function onReadyDatabaseImport() {
 	.bind('uploadSuccess', function(event, file, serverData) {
 		jQuery('#btnDBImportCancelUpload').hide();
 		var data = eval('(' + serverData + ')');
-		if (data.Status == 'OK') {
+		if (parseInt(data.Status) > 0) {
 			doDBImportStatusMsg('msgDBImportUploadOk');
 			jQuery('#frmDBImport #Filename').val(data.Filename);
 			jQuery.each(data, function(index, value) {
@@ -114,11 +117,13 @@ function onReadyDatabaseImport() {
 			params[value.name] = value.value;
 		});
 		jQuery.post('index.php',
-			{cmd : 'dbimport', 
+			{cmd : 'dbzipimport', 
 			 RegionInfo : params
 			},
 			function(data) {
-				// Update form again to reset/disable the fields to their previous state
+				if (parseInt(data.Status) > 0) {
+				}					
+				// Restore form again by enable/disable fields to their previous state
 				var x = jQuery('#frmDBImport .radioDBImportOption').serializeArray();
 				doUpdateDBImportFormOptions(x[0].value);
 			},
