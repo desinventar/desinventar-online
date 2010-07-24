@@ -7,6 +7,7 @@
 //ob_start( 'ob_gzhandler' );
 require_once('include/loader.php');
 require_once('include/diregion.class.php');
+require_once('include/diregiondb.class.php');
 
 $post = $_POST;
 $get  = $_GET;
@@ -43,18 +44,19 @@ switch ($cmd) {
 		if ($iReturn > 0) {
 			// Use the parameters to create a new database from zip file...
 			$Filename = TMP_DIR . '/di8file_' . $us->sSessionId . '_' . $_POST['RegionInfo']['Filename'];
-			fb($Filename);
+			$iReturn = DIRegionDB::createRegionDBFromZip($_POST['RegionInfo']['Mode'],
+			                                            $_POST['RegionInfo']['RegionId'],
+			                                            $_POST['RegionInfo']['RegionLabel'],
+			                                            $Filename);
 		}
 		$answer['Status'] = $iReturn;
-		fb($answer);
 		echo json_encode($answer);		
 	break;
 	case 'fileupload':
+		// This command is called directly by SWFUpload, so be aware that it runs 
+		// under his own session and cannot be debug in the browser.
 		$iReturn = ERR_NO_ERROR;
 		$answer = array('Filename' => '');
-		if ($us->UserId != 'root') {
-			//$iReturn = ERR_ACCESS_DENIED;
-		}
 		if ($iReturn > 0) {
 			if (! array_key_exists('Filedata', $_FILES)) {
 				// If $_FILES is empty, usually the PHP post_max_size parameter 
