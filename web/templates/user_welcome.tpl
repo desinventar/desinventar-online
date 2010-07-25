@@ -4,8 +4,8 @@
 {-if $ctl_portalperms-}
 	<b>{-#tadminperms#-}: </b><br />
 	<ul class="">
-		<li><a href="javascript:void(null)" onclick="updateList('pagecontent', 'region.php', 'cmd=adminreg');">{-#tadminregs#-}</a></li>
-		<li><a href="javascript:void(null)" onclick="updateList('pagecontent', 'user.php', 'cmd=adminusr');onReadyUserAdmin();">{-#tadminusrs#-}</a></li>
+		<li><a href="javascript:void(null)" onclick="updateList('pagecontent', 'region.php', 'cmd=adminreg');">{-#mnuDatabaseAdmin#-}</a></li>
+		<li><a href="javascript:void(null)" onclick="updateList('pagecontent', 'user.php', 'cmd=adminusr');onReadyUserAdmin();">{-#mnuUserAdmin#-}</a></li>
 	</ul>
 	<br /><hr /><br />
 {-/if-}
