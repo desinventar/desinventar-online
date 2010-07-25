@@ -1005,6 +1005,7 @@ class DIRegion extends DIObject {
 	}
 	
 	public function toXML() {
+		$iReturn = ERR_NO_ERROR;
 		$doc = new DomDocument('1.0','UTF-8');
 		$root = $doc->createElement('RegionInfo');
 		$root = $doc->appendChild($root);
@@ -1033,20 +1034,28 @@ class DIRegion extends DIObject {
 		$sQuery = "SELECT * FROM GeoCarto ORDER BY GeoLevelId";
 		$occ = $doc->createElement('GeoCarto');
 		$occ = $root->appendChild($occ);
-		foreach($this->session->q->dreg->query($sQuery) as $row) {
-			$level = $doc->createElement('GeoCartoItem');
-			$level = $occ->appendChild($level);
-			$level->setAttribute('GeoLevelId', $row['GeoLevelId']);
-			$level->setAttribute('LangIsoCode', $row['LangIsoCode']);
-			foreach(array('GeoLevelLayerFile','GeoLevelLayerName','GeoLevelLayerCode') as $field) {
-				$child = $doc->createElement($field);
-				$child = $level->appendChild($child);
-				$value = $doc->createTextNode($row[$field]);
-				$value = $child->appendChild($value);
+		try {
+			foreach($this->session->q->dreg->query($sQuery) as $row) {
+				$level = $doc->createElement('GeoCartoItem');
+				$level = $occ->appendChild($level);
+				$level->setAttribute('GeoLevelId', $row['GeoLevelId']);
+				$level->setAttribute('LangIsoCode', $row['LangIsoCode']);
+				foreach(array('GeoLevelLayerFile','GeoLevelLayerName','GeoLevelLayerCode') as $field) {
+					$child = $doc->createElement($field);
+					$child = $level->appendChild($child);
+					$value = $doc->createTextNode($row[$field]);
+					$value = $child->appendChild($value);
+				} //foreach
 			} //foreach
-		} //foreach
-		// Save to String...
-		$xml = $doc->saveXML();
+		} catch (Exception $e) {
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($iReturn > 0) {
+			// Save to String...
+			$xml = $doc->saveXML();
+		} else {
+			$xml = '';
+		}
 		return $xml;
 	}
 	
@@ -1056,12 +1065,19 @@ class DIRegion extends DIObject {
 	}
 	
 	public function saveToXML($filename='') {
+		$iReturn = ERR_NO_ERROR;
 		if ($filename == '') {
 			$filename = $this->getXMLFileName();
 		}
-		$fh = fopen($filename, 'w');
-		fwrite($fh, $this->toXML());
-		fclose($fh);
+		$xml = $this->toXML();
+		if ($xml != '') {
+			$fh = fopen($filename, 'w');
+			fwrite($fh, $this->toXML());
+			fclose($fh);
+		} else {
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		return $iReturn;
 	}
 	
 	public function loadFromXML($filename = '') {
@@ -1116,6 +1132,19 @@ class DIRegion extends DIObject {
 			}
 		} catch (Exception $e) {
 			$iReturn = ERR_NO_DATABASE;
+		}
+		return $iReturn;
+	}
+	
+	public static function deleteRegion($us, $prmRegionId) {
+		$iReturn = STATUS_NO;
+		$sQuery = 'DELETE FROM Region WHERE RegionId="' . $prmRegionId . '"';
+		try {
+			foreach($us->q->core->query($sQuery) as $row) {
+				$iReturn = STATUS_YES;
+			}
+		} catch (Exception $e) {
+			$iReturn = ERR_UNKNOWN_ERROR;
 		}
 		return $iReturn;
 	}

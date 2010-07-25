@@ -44,10 +44,11 @@ switch ($cmd) {
 		if ($iReturn > 0) {
 			// Use the parameters to create a new database from zip file...
 			$Filename = TMP_DIR . '/di8file_' . $us->sSessionId . '_' . $_POST['RegionInfo']['Filename'];
-			$iReturn = DIRegionDB::createRegionDBFromZip($_POST['RegionInfo']['Mode'],
-			                                            $_POST['RegionInfo']['RegionId'],
-			                                            $_POST['RegionInfo']['RegionLabel'],
-			                                            $Filename);
+			$iReturn = DIRegionDB::createRegionDBFromZip($us,
+			             $_POST['RegionInfo']['Mode'],
+			             $_POST['RegionInfo']['RegionId'],
+			             $_POST['RegionInfo']['RegionLabel'],
+			             $Filename);
 		}
 		$answer['Status'] = $iReturn;
 		echo json_encode($answer);		
