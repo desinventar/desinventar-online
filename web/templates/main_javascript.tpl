@@ -268,13 +268,13 @@
 		var mcards = new Ext.menu.Menu({
 			id: 'cardsMenu',
 			items: [
-				{id:'mnuDatacardInsertEdit', text: '{-#minsert#-}',	handler: onMenuItem  },
+				{id:'mnuDatacardInsertEdit', text: '{-#mnuDatacardInsertEdit#-}',	handler: onMenuItem  },
 				{-if $role == "SUPERVISOR" || $role == "ADMINREGION"-}
-					{id:'mnuDatacardImport', text: '{-#mimport#-}',	handler: onMenuItem  },
-					{id:'mnuDatabaseBackup', text: '{-#mbackdb#-}',	handler: onMenuItem  },
+					{id:'mnuDatacardImport', text: '{-#mnuDatacardImport#-}',	handler: onMenuItem  },
+					{id:'mnuDatabaseBackup', text: '{-#mnuDatabaseBackup#-}',	handler: onMenuItem  },
 				{-/if-}
 				{-if $role == "OBSERVER" || $role == "ADMINREGION"-}
-					{id:'mcrdcfg', text: '{-#mconfig#-}',	handler: onMenuItem  },
+					{id:'mcrdcfg', text: '{-#mnuDatabaseConfig#-}',	handler: onMenuItem  },
 				{-/if-}
 				'-'
 			]
@@ -285,10 +285,10 @@
 			items: [
 				{id:'mdbsfnd', text: '{-#mdbfind#-}',	handler: onMenuItem  }, //search Databases
 				{-if $desinventarUserId == "root"-}
-					{id:'mnuUserAdmin', text: '{-#tadminusrs#-}',	handler: onMenuItem  }, //admin Users
-					{id:'mdbsadm', text: '{-#tadminregs#-}',	handler: onMenuItem  }, //admin Databases
+					{id:'mnuUserAdmin', text: '{-#mnuUserAdmin#-}',	handler: onMenuItem  }, //admin Users
+					{id:'mdbsadm', text: '{-#mnuDatabaseAdmin#-}',	handler: onMenuItem  }, //admin Databases
 					'-',
-					{id:'mnuDatabaseImport', text: 'Import Databases',	handler: onMenuItem  }
+					{id:'mnuDatabaseImport', text: '{-#mnuDatabaseImport#-}',	handler: onMenuItem  }
 				{-/if-}
 			]
 		});
