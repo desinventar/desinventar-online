@@ -38,6 +38,7 @@
 		<span class="DBImportStatusMsg" id="msgDBImportUploadError">{-#msgDBImportUploadError#-}</span>
 		<span class="DBImportStatusMsg" id="msgDBImportFileError">{-#msgDBImportFileError#-}</span>
 		<span class="DBImportStatusMsg" id="msgDBImportDBUpdated">{-#msgDBImportDBUpdated#-}</span>
+		<span class="DBImportStatusMsg" id="msgDBImportUpdateError">{-#msgDBImportUpdateError#-}</span>
 	</div>
 	<div id="divDBImportParameters" style="display:none;">
 		<form id="frmDBImport">
