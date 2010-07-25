@@ -122,7 +122,12 @@ function onReadyDatabaseImport() {
 			},
 			function(data) {
 				if (parseInt(data.Status) > 0) {
-				}					
+					jQuery('#divDBImportParameters').hide();
+					doDBImportStatusMsg('msgDBImportDBUpdated');
+				} else {
+					jQuery('#divDBImportParameters').hide();
+					doDBImportStatusMsg('msgDBImportUpdateError');
+				}
 				// Restore form again by enable/disable fields to their previous state
 				var x = jQuery('#frmDBImport .radioDBImportOption').serializeArray();
 				doUpdateDBImportFormOptions(x[0].value);
@@ -133,11 +138,6 @@ function onReadyDatabaseImport() {
 	});
 
 	jQuery('#radioDBImportOptionUpdate').trigger('change');
-	
-	// Debug Lines (remember to remove!)
-	jQuery('#divDBImportParameters').show();
-	jQuery('#frmDBImport #RegionId').val('DEMO');
-	
 } //onReady
 
 function doUpdateDBImportFormOptions(value) {
