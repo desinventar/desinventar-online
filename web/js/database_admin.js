@@ -1,20 +1,20 @@
 function onReadyDatabaseAdmin() {
 	// Table Stripes...
-	jQuery('#tblDatabaseList tr:odd').addClass('normal');
-	jQuery('#tblDatabaseList tr:even').addClass('under');
+	jQuery('#tblDatabaseList tr:odd').removeClass('normal').addClass('normal');
+	jQuery('#tblDatabaseList tr:even').removeClass('normal').addClass('under');
 	
 	jQuery('#tblDatabaseList #RegionId').hide();
 	jQuery('#tblDatabaseList #LangIsoCode').hide();
 
 	// Highlight row on mouseOver
-	jQuery('#tblDatabaseList tr:not(:first)').hover(
+	jQuery('#tblDatabaseList tr:not(:first)').unbind('hover').hover(
 		function() {
 			jQuery(this).addClass('highlight');
 		},
 		function() {
 			jQuery(this).removeClass('highlight');
 		}
-	).click(function() {
+	).unbind('click').click(function() {
 		uploadMsg(''); 
 		jQuery('#frmDatabaseEdit #cmd').val('cmdRegionUpdate');
 		setRegionPA(jQuery(this).find('#RegionId').html(),
@@ -32,7 +32,7 @@ function onReadyDatabaseAdmin() {
 		mod='regionpa'; sendData('','region.php', s, '');" onSubmit="javascript: 
 		var a=new Array('CountryIso','RegionLabel','LangIsoCode','RegionUserAdmin'); return(checkForm(a, '{-#errmsgfrm#-}'));"
 	*/
-	jQuery('#frmDatabaseEdit').submit(function() {
+	jQuery('#frmDatabaseEdit').unbind('submit').submit(function() {
 		jQuery.post('index.php',
 			{cmd        : 'cmdRegionUpdate',
 			 RegionInfo :jQuery(this).serializeObject()
