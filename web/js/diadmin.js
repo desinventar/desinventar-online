@@ -134,11 +134,11 @@
 	                      prmRegionActive, prmRegionPublic) {
 		mod = "regionpa";
 		$(mod + 'addsect').style.display = 'block';
-		jQuery('#RegionId').val(prmRegionId);
-		jQuery('#CountryIso').val(prmCountryIso);
-		jQuery('#RegionLabel').val(prmRegionLabel);
-		jQuery('#LangIsoCode').val(prmLangIsoCode);
-		jQuery('#RegionUserAdmin').val(prmUserId_AdminRegion);
+		jQuery('#regionpafrm #RegionId').val(prmRegionId);
+		jQuery('#regionpafrm #CountryIso').val(prmCountryIso);
+		jQuery('#regionpafrm #RegionLabel').val(prmRegionLabel);
+		jQuery('#regionpafrm #LangIsoCode').val(prmLangIsoCode);
+		jQuery('#regionpafrm #RegionUserAdmin').val(prmUserId_AdminRegion);
 		if (prmRegionActive == "1") {
 			$('RegionActive').checked = true;
 		} else {

@@ -7,11 +7,13 @@
 	 <table id="tblDatabaseList" class="col">
 	  <thead>
 		<tr>
-			<td class="header"><b>{-#tregcntlist#-}</b></td>
-			<td class="header"><b>{-#tregnamlist#-}</b></td>
-			<td class="header"><b>{-#tregadmlist#-}</b></td>
-			<td class="header"><b>{-#tregactlist#-}</b></td>
-			<td class="header"><b>{-#tregpublist#-}</b></td>
+			<th class="header"><b>{-#tregcntlist#-}</b></th>
+			<th class="header"><b>{-#tregnamlist#-}</b></th>
+			<th class="header"><b>{-#tregadmlist#-}</b></th>
+			<th class="header"><b>{-#tregactlist#-}</b></th>
+			<th class="header"><b>{-#tregpublist#-}</b></th>
+			<th class="header" id="RegionId"></th>
+			<th class="header" id="LangIsoCode"></th>
 		</tr>
 	  </thead>
 	  <tbody id="lst_regionpa">
@@ -19,14 +21,14 @@
 {-** ADMINREG: reload region lists **-}
 {-if $ctl_reglist-}
 {-foreach name=rpa key=key item=item from=$RegionList-}
-		<tr onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
-			onClick="uploadMsg(''); mod='regionpa'; $('cmd').value='update';
-				setRegionPA('{-$key-}','{-$item.CountryIso-}','{-$item.RegionLabel-}','{-$item.LangIsoCode-}','{-$item.UserId_AdminRegion-}','{-$item.RegionActive-}','{-$item.RegionPublic-}');">
-			<td>{-$item.CountryIso-}</td>
-			<td>{-$item.RegionLabel-}</td>
-			<td>{-$item.UserId_AdminRegion-}</td>
-			<td><input type="checkbox" {-if ($item.RegionActive == 1) -} checked {-/if-} disabled /></td>
-			<td><input type="checkbox" {-if ($item.RegionPublic == 1) -} checked {-/if-} disabled /></td>
+		<tr>
+			<td id="CountryIso">{-$item.CountryIso-}</td>
+			<td id="RegionLabel">{-$item.RegionLabel-}</td>
+			<td id="RegionUserAdmin">{-$item.UserId_AdminRegion-}</td>
+			<td id="RegionActive"><input type="checkbox" {-if ($item.RegionActive == 1) -} checked {-/if-} disabled /></td>
+			<td id="RegionPublic"><input type="checkbox" {-if ($item.RegionPublic == 1) -} checked {-/if-} disabled /></td>
+			<td id="RegionId">{-$key-}</td>
+			<td id="LangIsoCode">{-$item.LangIsoCode-}</td>
 		</tr>
 {-/foreach-}
 {-/if-}
@@ -90,8 +92,8 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<input id="cmd" name="cmd" type="hidden" />
-					<input id="RegionId" name="RegionId" type="hidden" />
+					<input type="hidden" id="cmd" name="cmd" />
+					<input type="hidden" id="RegionId" name="RegionId" />
 					<input type="submit" value="{-#bsave#-}" class="line" tabindex="7" />
 					<input type="reset" value="{-#bcancel#-}" 
 						onClick="$('regionpaaddsect').style.display='none'; uploadMsg('');" class="line" />
