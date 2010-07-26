@@ -3,18 +3,6 @@
 {-if $ctl_adminreg-}
 	<h2>{-#ttname#-}</h2>
 	<br />
-	<!--
-	<input id="directory" type="hidden" value="{-#bloaddir#-}"
-		onClick="updateList('lst_regionpa', 'region.php', 'cmd=createRegionsFromDBDir');" />
-	<b>{-#bupzipfile#-}</b> <br />
-	<form id="putregion" method="POST" action="region.php" target="fresult" enctype="multipart/form-data">
-		<input type="hidden" name="cmd" value="createRegionFromZip" />
-		{-#tregnamlist#-} <input type="text" name="RegionLabel" />
-		<input type="file" name="filereg" />
-		<input type="submit" value="Ok" onClick="uploadMsg('');" />
-	</form>
-	<br /><hr /><br />
-	-->
 	<div class="dwin" style="width:500px; height:150px;">
 	 <table class="col">
 	  <thead>
