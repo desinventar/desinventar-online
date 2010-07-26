@@ -270,38 +270,16 @@
 		$(a_field_id).focus();
 	}
 
-	function checkForm(myForm, fl, errmsg) {
-		var field;
-		var color = "";
-		var status = true;
-		for (i=0; i<fl.length; i++) {
-			field = $(fl[i]);
-			if (field != null) {
-				switch(field.type) {
-					case "text":
-					case "hidden":
-					case "password":
-					case "textarea":
-						// is it a required field?
-						if (encodeURI(field.value).length < 1) {
-							status = false;
-							if (!status) {
-								field.style.backgroundColor = "#f1c7c7";
-							}
-						}
-					break;   
-					case "select-one":
-						if (encodeURI(field.options[field.selectedIndex].value).length < 1) {
-							status = false;
-							if (!status) {
-								field.style.backgroundColor = "#f1c7c7";
-							}
-						}
-					break;
-				} //switch
-			}
-		}
-		return status;
+	function checkForm(prmForm, prmFieldList, errmsg) {
+		var bReturn = true;
+		jQuery.each(prmFieldList, function(index, value) {
+			var selector = '#' + prmForm + ' #' + value;
+			if (jQuery(selector).val().length < 1) {
+				jQuery(selector).highlight();
+				bReturn = false;
+			} //if
+		}); //.each
+		return bReturn;
 	} //function
 
 	function getForm(fobj) {

@@ -16,6 +16,7 @@ function onReadyDatabaseAdmin() {
 		}
 	).unbind('click').click(function() {
 		uploadMsg(''); 
+		jQuery('#frmDatabaseEdit :input').unhighlight();
 		jQuery('#frmDatabaseEdit #cmd').val('cmdRegionUpdate');
 		setRegionPA(jQuery(this).find('#RegionId').html(),
 		            jQuery(this).find('#CountryIso').html(),
