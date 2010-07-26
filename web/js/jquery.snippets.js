@@ -17,5 +17,12 @@ jQuery.fn.serializeObject = function() {
 };
 
 jQuery.fn.highlight = function() {
-	return jQuery(this).css({'background-color':'#ffff66'});
+	jQuery(this).attr('old-bg-color', jQuery(this).css('background-color'));
+	return jQuery(this).css('background-color', '#ffff66');
+}
+
+jQuery.fn.unhighlight = function() {
+	if (jQuery(this).attr('old-bg-color') != '') {
+		jQuery(this).css('background-color', jQuery(this).attr('old-bg-color'));
+	}
 }
