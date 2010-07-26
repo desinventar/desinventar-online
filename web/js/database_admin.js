@@ -17,14 +17,13 @@ function onReadyDatabaseAdmin() {
 	).click(function() {
 		uploadMsg(''); 
 		mod='regionpa';
-		alert(jQuery(this).find('#RegionId').html());
 		jQuery('#regionpafrm #cmd').val('update');
 		setRegionPA(jQuery(this).find('#RegionId').html(),
 		            jQuery(this).find('#CountryIso').html(),
 		            jQuery(this).find('#RegionLabel').html(),
 		            jQuery(this).find('#LangIsoCode').html(),
 		            jQuery(this).find('#RegionUserAdmin').html(),
-		            1,
-		            1);
+		            jQuery(this).find('#RegionActive input').attr('checked'),
+		            jQuery(this).find('#RegionPublic input').attr('checked'));
 	});
 }
