@@ -301,9 +301,6 @@
 				} //switch
 			}
 		}
-		if (status == false) {
-			//alert(errmsg);
-		}
 		return status;
 	} //function
 

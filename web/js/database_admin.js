@@ -27,25 +27,27 @@ function onReadyDatabaseAdmin() {
 		);
 	});
 
-	/*
-	method="GET" action="javascript: var s=$('regionpafrm').serialize(); 
-		mod='regionpa'; sendData('','region.php', s, '');" onSubmit="javascript: 
-		var a=new Array('CountryIso','RegionLabel','LangIsoCode','RegionUserAdmin'); return(checkForm(a, '{-#errmsgfrm#-}'));"
-	*/
+	
 	jQuery('#frmDatabaseEdit').unbind('submit').submit(function() {
-		jQuery.post('index.php',
-			{cmd        : 'cmdRegionUpdate',
-			 RegionInfo :jQuery(this).serializeObject()
-			},
-			function(data) {
-				if (parseInt(data.Status) > 0) {
-					// (jhcaiced) Change this for a method to update only the 
-					// affected row intead of loading all list again
-					updateList('dbl', 'region.php', 'cmd=adminreg');
-				}
-			},
-			'json'
-		);
+		// Validate Fields
+		var a=new Array('CountryIso','RegionLabel','LangIsoCode','RegionUserAdmin');
+		var bContinue = checkForm(a, '{-#errmsgfrm#-}');
+		
+		if (bContinue) {
+			jQuery.post('index.php',
+				{cmd        : 'cmdRegionUpdate',
+				 RegionInfo :jQuery(this).serializeObject()
+				},
+				function(data) {
+					if (parseInt(data.Status) > 0) {
+						// (jhcaiced) Change this for a method to update only the 
+						// affected row intead of loading all list again
+						updateList('dbl', 'region.php', 'cmd=adminreg');
+					}
+				},
+				'json'
+			);
+		}
 		return false;
 	});
 }

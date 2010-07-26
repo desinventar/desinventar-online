@@ -15,12 +15,12 @@
 	
 	<script type="text/javascript" src="include/listMan.js"></script>
 	<script type="text/javascript" src="include/md5.js"></script>
-	<script type="text/javascript" src="include/checktree.js"></script>
 	<script type="text/javascript" src="include/wd.js"></script>
 	<script type="text/javascript" src="include/accordion.js"></script>
 	<script type="text/javascript" src="include/palette.js"></script>
 	<script type="text/javascript" src="include/combo-box.js"></script>
 
+	<script type="text/javascript" src="external/checktree/checktree.js"></script>
 	<script type="text/javascript" src="external/swfupload/swfupload.js"></script>
 	<script type="text/javascript" src="external/jquery.swfupload.js"></script>
 
@@ -51,7 +51,7 @@
 	<script src="/openlayers/lib/OpenLayers.js"></script>
 
 	<!-- ExtJS -->
-	<link rel="stylesheet" href="css/checktree.css" type="text/css"/>
+	<link rel="stylesheet" href="external/checktree/checktree.css" type="text/css"/>
 	<link rel="stylesheet" href="css/accordion.css" type="text/css"/>
 	<link rel="stylesheet" type="text/css" href="/extJS/resources/css/ext-all.css"/>
 	<link rel="stylesheet" type="text/css" href="/extJS/resources/css/xtheme-gray.css"/>
