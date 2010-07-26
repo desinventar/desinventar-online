@@ -11,7 +11,9 @@
 	}
 	
 	function updateList(div, url, pars, callback) {
-		jQuery('#' + div).load(url, pars);
+		jQuery('#' + div).load(url, pars, function(response, status, xhr) {
+			onReadyDatabaseAdmin();
+		});
 	}
 
 	function updateUserBar(url, cmd, user, pass) {

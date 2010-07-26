@@ -4,7 +4,7 @@
 	<h2>{-#ttname#-}</h2>
 	<br />
 	<div class="dwin" style="width:500px; height:150px;">
-	 <table class="col">
+	 <table id="tblDatabaseList" class="col">
 	  <thead>
 		<tr>
 			<td class="header"><b>{-#tregcntlist#-}</b></td>
@@ -19,8 +19,7 @@
 {-** ADMINREG: reload region lists **-}
 {-if $ctl_reglist-}
 {-foreach name=rpa key=key item=item from=$RegionList-}
-		<tr class="{-if ($smarty.foreach.rpa.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}"
-			onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
+		<tr onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
 			onClick="uploadMsg(''); mod='regionpa'; $('cmd').value='update';
 				setRegionPA('{-$key-}','{-$item.CountryIso-}','{-$item.RegionLabel-}','{-$item.LangIsoCode-}','{-$item.UserId_AdminRegion-}','{-$item.RegionActive-}','{-$item.RegionPublic-}');">
 			<td>{-$item.CountryIso-}</td>
