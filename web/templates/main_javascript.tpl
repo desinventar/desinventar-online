@@ -124,7 +124,7 @@
 					jQuery("#dbl").load('user.php?cmd=adminusr',function() { onReadyUserAdmin(); });
 					dblw.show();
 				break;
-				case "mdbsadm":
+				case "mnuDatabaseAdmin":
 					updateList('dbl', 'region.php', 'cmd=adminreg');
 					dblw.show();
 				break;
@@ -286,7 +286,7 @@
 				{id:'mdbsfnd', text: '{-#mdbfind#-}',	handler: onMenuItem  }, //search Databases
 				{-if $desinventarUserId == "root"-}
 					{id:'mnuUserAdmin', text: '{-#mnuUserAdmin#-}',	handler: onMenuItem  }, //admin Users
-					{id:'mdbsadm', text: '{-#mnuDatabaseAdmin#-}',	handler: onMenuItem  }, //admin Databases
+					{id:'mnuDatabaseAdmin', text: '{-#mnuDatabaseAdmin#-}',	handler: onMenuItem  }, //admin Databases
 					'-',
 					{id:'mnuDatabaseImport', text: '{-#mnuDatabaseImport#-}',	handler: onMenuItem  }
 				{-/if-}
