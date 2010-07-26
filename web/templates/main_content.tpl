@@ -1,13 +1,14 @@
+<!-- divDatabaseHeader -->
+{-include file="database_header.tpl" -}
+
 <!-- divDatabaseConfiguration - Database Configuration Parameters -->
 {-include file="main_dbconfig.tpl" -}
 
 <!-- divQueryResults - Results of queries -->
 {-include file="main_queryresults.tpl" -}
 
-<div class="contentBlock" id="divDatabaseList" >
-	{-include file="header_simple.tpl" -}
-	{-include file="showlistdb.tpl" -}
-</div>
+<!-- "divDatabaseList" -->
+{-include file="database_list.tpl" -}
 
 <!-- divDatabaseBackup -->
 {-include file="database_backup.tpl" -}
