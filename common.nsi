@@ -34,7 +34,7 @@ InstProgressFlags     smooth
 
 !define      NAME    "DesInventar"
 !define      MAJORVER "8"
-!define      MINORVER "2.0.75"
+!define      MINORVER "2.1.04"
 !define      PUBLISHER "Corporación OSSO - DesInventar Project http://www.desinventar.org"
 !define      VERSION "${MAJORVER}.${MINORVER}"
 !define      SHORTNAME "${NAME}${MAJORVER}"
@@ -190,11 +190,19 @@ Section "Core Files"
 		!undef distFile
 
 		; Install jQuery file into install directory
-		!define distFile "jquery-1.3.2.min.zip"
+		!define distFile "jquery-1.4.2.zip"
 		IfFileExists "$EXEDIR\${distFile}" continue4 skip4
 		continue4:
 		    ZipDLL::extractall "$EXEDIR\${distFile}" '$INSTDIR\ms4w\apps\jquery'
 		skip4:
+		!undef distFile
+
+		; Install jQuery file into install directory
+		!define distFile "jquery-ui-1.8.2.zip"
+		IfFileExists "$EXEDIR\${distFile}" continue4a skip4a
+		continue4a:
+		    ZipDLL::extractall "$EXEDIR\${distFile}" '$INSTDIR\ms4w\apps\jquery'
+		skip4a:
 		!undef distFile
 
 		; Install Smarty file into install directory
