@@ -35,6 +35,40 @@ if ( (substr($_SERVER['CONTENT_TYPE'],0,19) == 'multipart/form-data') &&
      $cmd = 'fileupload';
 }
 switch ($cmd) {
+	case 'test':
+		$t->assign('LanguageList', $us->q->loadLanguages(1));
+		$t->assign('CountryList', $us->q->getCountryList());
+		$t->display('test.tpl');
+	break;
+	case 'getversion':
+		print VERSION;
+	break;
+	case 'cmdRegionUpdate':
+		$iReturn = ERR_NO_ERROR;
+		$RegionId = $_POST['RegionInfo']['RegionId'];
+		$RegionCmd = $_POST['RegionInfo']['cmd'];
+
+		$r = new DIRegion($us, $RegionId);
+		$iReturn = $r->setFromArray($_POST['RegionInfo']);
+		if ($iReturn > 0) {
+			if ($RegionCmd == 'cmdRegionCreate') {
+				$iReturn = $r->createRegionDB();
+			} else {
+				$iReturn = $r->update();
+			}
+		}
+		if ($iReturn > 0) {
+			// Set Role ADMINREGION in RegionAuth: master for this region
+			$iReturn = $us->setUserRole($_POST['RegionInfo']['RegionUserAdmin'], 
+			                            $_POST['RegionInfo']['RegionId'],
+			                            'ADMINREGION');
+		}
+		fb($iReturn);
+		$answer = array();
+		$answer['Status'] = $iReturn;
+		fb($answer);
+		echo json_encode($answer);
+	break;
 	case 'dbzipimport' : 
 		$answer = array();
 		$iReturn = ERR_NO_ERROR;
@@ -108,14 +142,6 @@ switch ($cmd) {
 		fwrite($fp, $out);
 		fclose($fp);
 		*/		
-	break;
-	case 'test':
-		$t->assign('LanguageList', $us->q->loadLanguages(1));
-		$t->assign('CountryList', $us->q->getCountryList());
-		$t->display('test.tpl');
-	break;
-	case 'getversion':
-		print VERSION;
 	break;
 	case 'start':
 		$t->assign('lg', $lg);
