@@ -24,7 +24,7 @@
 	<div id="geoaddsect" style="display:none; width:600px;">
 		<form name="geofrm" id="geofrm" method="GET" 
 			action="javascript: var s=$('geofrm').serialize(); mod='geo'; sendData('{-$reg-}','geography.php', s, '');"
-			onSubmit="javascript: var a=new Array('aGeographyCode','aGeographyName'); return(checkForm(a, '{-#errmsgfrmgeo#-}'));">
+			onSubmit="javascript: var a=new Array('aGeographyCode','aGeographyName'); return(checkForm('geofrm',a, '{-#errmsgfrmgeo#-}'));">
 			<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBEleCode[2]-}');">
 			{-$dic.DBEleCode[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBEleCode[1]-}</span></a><br />
 			<input id="aGeographyCode" name="GeographyCode" type="text" {-$ro-} class="line" tabindex="1" style="width:500px;"

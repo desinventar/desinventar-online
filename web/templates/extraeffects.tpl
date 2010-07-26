@@ -38,7 +38,7 @@
 	<div id="extraeffaddsect" style="display:none; width:600px;">
 		<form name="eeffrm" id="eeffrm" method="GET" 
 			action="javascript: var s=$('eeffrm').serialize(); sendData('{-$reg-}', 'extraeffects.php', s, '');"
-			onSubmit="javascript: var a=new Array('EEFieldLabel','EEFieldDesc', 'EEFieldType'); return(checkForm(a, '{-#errmsgfrmeef#-}'));">
+			onSubmit="javascript: var a=new Array('EEFieldLabel','EEFieldDesc', 'EEFieldType'); return(checkForm('eeffrm',a, '{-#errmsgfrmeef#-}'));">
 			{-$dic.DBEEFieldLabel[0]-}<b style="color:darkred;">*</b><br />
 			<input type="text" id="EEFieldLabel" name="EEFieldLabel" {-$ro-} class="line" style="width:500px;"
 				tabindex="1" onFocus="showtip('{-$dic.DBEEFieldLabel[2]-}')" />

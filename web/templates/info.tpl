@@ -134,7 +134,7 @@
 		<div id="roleaddsect" style="display:none">
 			<form name="rolefrm" id="rolefrm" method="GET" 
 				action="javascript: var s=$('rolefrm').serialize(); sendData('{-$reg-}', 'info.php', s, '');"
-				onSubmit="javascript: var a=new Array('UserId','AuthAuxValue'); return(checkForm(a, '{-#errmsgfrmrol#-}'));">
+				onSubmit="javascript: var a=new Array('UserId','AuthAuxValue'); return(checkForm('rolefrm',a, '{-#errmsgfrmrol#-}'));">
 				<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBUserId[2]-}')">
 					{-$dic.DBUserId[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBUserId[1]-}</span></a><br />
 				<select id="UserId" name="UserId" {-$ro-} class="line fixw" onFocus="showtip('{-$dic.DBUserId[2]-}');" tabindex="1">
@@ -209,7 +209,7 @@
 		<div id="logaddsect" style="display:none; width:280px;">
 			<form name="logfrm" id="logfrm" method="GET" 
 				action="javascript: var s=$('logfrm').serialize(); sendData('{-$reg-}', 'info.php', s, '');"
-				onSubmit="javascript: var a=new Array('DBLogType','DBLogNotes'); return(checkForm(a, '{-#errmsgfrmlog#-}'));">
+				onSubmit="javascript: var a=new Array('DBLogType','DBLogNotes'); return(checkForm('logfrm',a, '{-#errmsgfrmlog#-}'));">
 				<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLogType[2]-}');">
 				{-$dic.DBLogType[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBLogType[1]-}</span></a><br>
 				<select id="DBLogType" name="DBLogType" {-$ro-} onFocus="showtip('{-$dic.DBLogType[2]-}');" class="line fixw" tabindex="1">

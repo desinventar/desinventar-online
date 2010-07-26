@@ -150,10 +150,6 @@ function validateUserEditForm() {
 		jQuery("#txtUserId").after('<span class="error">Cannot be empty</span>');
 		//bReturn = false;
 	}
-	/*
-		action="javascript:var s=$('userpafrm').serialize(); sendData('','user.php', s, '');"
-		onSubmit="javascript:var a=new Array('UserId', 'UserEMail', 'UserFullName'); return(checkForm(a, '{-#errmsgfrmregist#-}'));"> 
-	*/
 	return bReturn;		
 };
 

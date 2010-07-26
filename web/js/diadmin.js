@@ -270,7 +270,7 @@
 		$(a_field_id).focus();
 	}
 
-	function checkForm(fl, errmsg) {
+	function checkForm(myForm, fl, errmsg) {
 		var field;
 		var color = "";
 		var status = true;

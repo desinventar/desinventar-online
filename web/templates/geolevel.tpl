@@ -37,7 +37,7 @@
 	<div id="levaddsect" style="display:none; width:600px;">
 		<form name="levfrm" id="levfrm" method="POST" action="geolevel.php" target="ifcarto" enctype="multipart/form-data"
 			onSubmit="javascript: var a=new Array('GeoLevelName','GeoLevelDesc');
-			if(checkForm(a, '{-#errmsgfrmlev#-}')) { $('levaddsect').style.display = 'none'; return(true); } else return(false)">
+			if(checkForm('levfrm',a, '{-#errmsgfrmlev#-}')) { $('levaddsect').style.display = 'none'; return(true); } else return(false)">
 			<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevName[2]-}')">
 			{-$dic.DBLevName[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBLevName[1]-}</span></a><br />
 			<input id="GeoLevelName" name="GeoLevelName" type="text" {-$ro-} tabindex="1" class="line" style="width:400px;"
