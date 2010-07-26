@@ -25,7 +25,7 @@ Requires: httpd
 Requires: openlayers mapserver
 Requires: liberation-fonts-extras
 Requires: sqlite >= 3.6.14
-Requires: jquery jquery-ui
+Requires: jquery >= 1.4.2, jquery-ui
 
 %define DI_DIR    %{_prefix}/share/desinventar-8.2
 %define WEB_DIR   %{DI_DIR}/web
