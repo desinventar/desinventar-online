@@ -92,6 +92,7 @@
 				<td colspan="2" align="center">
 					<input type="hidden" id="cmd" name="cmd" />
 					<input type="hidden" id="RegionId" name="RegionId" />
+					<input type="hidden" id="RegionStatus" name="RegionStatus" />
 					<input type="submit" value="{-#bsave#-}" class="line" tabindex="7" />
 					<input type="reset" value="{-#bcancel#-}" 
 						onClick="$('regionpaaddsect').style.display='none'; uploadMsg('');" class="line" />

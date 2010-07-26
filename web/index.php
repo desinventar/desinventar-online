@@ -45,11 +45,14 @@ switch ($cmd) {
 	break;
 	case 'cmdRegionUpdate':
 		$iReturn = ERR_NO_ERROR;
+		fb($_POST);
 		$RegionId = $_POST['RegionInfo']['RegionId'];
 		$RegionCmd = $_POST['RegionInfo']['cmd'];
 
 		$r = new DIRegion($us, $RegionId);
 		$iReturn = $r->setFromArray($_POST['RegionInfo']);
+		fb($r->oField);
+		fb($r->get('RegionStatus'));
 		if ($iReturn > 0) {
 			if ($RegionCmd == 'cmdRegionCreate') {
 				$iReturn = $r->createRegionDB();

@@ -33,11 +33,19 @@ function onReadyDatabaseAdmin() {
 		// Validate Fields
 		var a=new Array('CountryIso','RegionLabel','LangIsoCode','RegionUserAdmin');
 		var bContinue = checkForm('frmDatabaseEdit',a, '{-#errmsgfrm#-}');
-		
+		var s = jQuery(this).find('#RegionStatus');
+		s.val(0);
+		if (jQuery(this).find('#RegionActive').attr('checked')) {
+			s.val(parseInt(s.val()) | 1);
+		}
+		if (jQuery(this).find('#RegionPublic').attr('checked')) {
+			s.val(parseInt(s.val()) | 2);
+		}
+		var params = jQuery(this).serializeObject();
 		if (bContinue) {
 			jQuery.post('index.php',
 				{cmd        : 'cmdRegionUpdate',
-				 RegionInfo :jQuery(this).serializeObject()
+				 RegionInfo : params
 				},
 				function(data) {
 					if (parseInt(data.Status) > 0) {
