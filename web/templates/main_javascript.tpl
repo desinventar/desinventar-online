@@ -126,7 +126,6 @@
 				break;
 				case "mnuDatabaseAdmin":
 					updateList('dbl', 'region.php', 'cmd=adminreg');
-					onReadyDatabaseAdmin();
 					dblw.show();
 				break;
 				// help menu
