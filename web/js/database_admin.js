@@ -31,7 +31,7 @@ function onReadyDatabaseAdmin() {
 	jQuery('#frmDatabaseEdit').unbind('submit').submit(function() {
 		// Validate Fields
 		var a=new Array('CountryIso','RegionLabel','LangIsoCode','RegionUserAdmin');
-		var bContinue = checkForm(a, '{-#errmsgfrm#-}');
+		var bContinue = checkForm('frmDatabaseEdit',a, '{-#errmsgfrm#-}');
 		
 		if (bContinue) {
 			jQuery.post('index.php',

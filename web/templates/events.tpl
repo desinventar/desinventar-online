@@ -78,7 +78,7 @@
 	<div id="eventaddsect" style="display:none">
 		<form id="eventfrm" name="eventfrm" method="GET" 
 			action="javascript:var s=$('eventfrm').serialize(); sendData('{-$reg-}', 'events.php', s, $('aEventPreDefined').value);"
-			onSubmit="javascript: var a=new Array('aEventName','aEventDesc'); return(checkForm(a, '{-#errmsgfrm#-}'));">
+			onSubmit="javascript: var a=new Array('aEventName','aEventDesc'); return(checkForm('eventfrm',a, '{-#errmsgfrm#-}'));">
 			{-$dic.DBEvePersonName[0]-}<b style="color:darkred;">*</b><br />
 			<input id="aEventName" name="EventName" type="text" class="line" maxlength="40" style="width:500px;" tabindex="1" {-$ro-}
 				onBlur="updateList('eventstatusmsg', 'events.php', 'r={-$reg-}&cmd=chkname&EventId='+ $('aEventId').value +'&EventName='+ $('aEventName').value);"

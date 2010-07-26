@@ -5,7 +5,7 @@
 <span id="userpastatusmsg" class="dlgmsg"></span><br />
 <form id="userpafrm" name="userpafrm" method="GET" 
 	action="javascript:var s=$('userpafrm').serialize(); sendData('','user.php', s, '');"
-	onSubmit="javascript:var a=new Array('UserId', 'UserEMail', 'UserFullName', 'UserPasswd'); return(checkForm(a, '{-#errmsgfrmregist#-}'));">
+	onSubmit="javascript:var a=new Array('UserId', 'UserEMail', 'UserFullName', 'UserPasswd'); return(checkForm('userpafrm',a, '{-#errmsgfrmregist#-}'));">
 	<table>
 		<tr>
 			<td><b style="color:darkred;">{-#toldpassword#-}</b>

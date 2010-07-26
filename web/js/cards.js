@@ -596,7 +596,7 @@ function doDatacardSave() {
 				if (bContinue) {
 					var fl = new Array('DisasterSerial', 'DisasterBeginTime0', 'DisasterSource', 
 										'geolev0', 'EventId', 'CauseId');
-					if (checkForm(fl, jQuery('#msgDatacardFieldsError').text())) {
+					if (checkForm('DICard', fl, jQuery('#msgDatacardFieldsError').text())) {
 						jQuery('#PrevDisasterSerial').val(jQuery('#DisasterSerial').val());
 						jQuery('#DICard').submit();
 					} else {
