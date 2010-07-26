@@ -38,6 +38,11 @@ function onReadyDatabaseAdmin() {
 			 RegionInfo :jQuery(this).serializeObject()
 			},
 			function(data) {
+				if (parseInt(data.Status) > 0) {
+					// (jhcaiced) Change this for a method to update only the 
+					// affected row intead of loading all list again
+					updateList('dbl', 'region.php', 'cmd=adminreg');
+				}
 			},
 			'json'
 		);

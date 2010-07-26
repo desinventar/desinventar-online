@@ -343,8 +343,9 @@ class UserSession {
 	}
 	
 	public function setUserRole($prmUserId, $prmRegionId, $prmRole) {
+		fb('setUserRole : ' . $prmUserId . ' ' . $prmRegionId . ' ' . $prmRole);
 		$iReturn = ERR_NO_ERROR;
-		if ($prmUserId == '') { $iReturn = ERR_DEFAULT_ERROR; }
+		if ($prmUserId   == '') { $iReturn = ERR_DEFAULT_ERROR; }
 		if ($prmRegionId == '') { $iReturn = ERR_DEFAULT_ERROR; }
 		if ($iReturn > 0) {
 			// Remove All Permissions for This User on This Database
