@@ -129,20 +129,6 @@
 		}
 	}
 
-	function setRegionPA(prmRegionId, prmCountryIso, prmRegionLabel, 
-	                     prmLangIsoCode, prmUserId_AdminRegion, 
-	                     prmRegionActive, prmRegionPublic) {
-		mod = "regionpa";
-		$(mod + 'addsect').style.display = 'block';
-		jQuery('#regionpafrm #RegionId').val(prmRegionId);
-		jQuery('#regionpafrm #CountryIso').val(prmCountryIso);
-		jQuery('#regionpafrm #RegionLabel').val(prmRegionLabel);
-		jQuery('#regionpafrm #LangIsoCode').val(prmLangIsoCode);
-		jQuery('#regionpafrm #RegionUserAdmin').val(prmUserId_AdminRegion);
-		jQuery('#regionpafrm #RegionActive').attr('checked', prmRegionActive);
-		jQuery('#regionpafrm #RegionPublic').attr('checked', prmRegionPublic);
-	}
-
 	function setRolLog (key, val, module) {
 		mod = module;
 		$(mod + 'addsect').style.display = 'block';

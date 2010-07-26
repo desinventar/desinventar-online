@@ -59,32 +59,6 @@ switch ($cmd) {
 		$t->assign ('RegionList', $us->q->getRegionAdminList());
 		$t->assign ('ctl_reglist', true);
 	break;
-	case "createRegionFromZip":
-		if (isset($_FILES['filereg']) && $_FILES['filereg']['error'] == UPLOAD_ERR_OK) {
-			$zip = new ZipArchive;
-			if ($zip->open($_FILES['filereg']['tmp_name'])) {
-				//$myreg = $zip->statIndex(0);
-				$myreg = $_FILES['filereg']['name'];
-				$regid = substr($myreg, 0, -4);
-				if (!empty($regid)) {
-					if (empty($_POST['RegionLabel']))
-						$myreg = $regid;
-					else
-						$myreg = DIRegion::buildRegionId(substr($regid, 0, 3), $_POST['RegionLabel']);
-					mkdir(VAR_DIR . "/database/". $myreg, 0755);
-					$zip->extractTo(VAR_DIR . "/database/". $myreg);
-					$result = DIRegion::createRegionEntryFromDir($us, $myreg, $_POST['RegionLabel']);
-					if (!iserror($result)) {
-						$t->assign ("ctl_successfromzip", true);
-						$t->assign ("cfunct", 'insert');
-						$t->assign ("csetrole", true);
-					}
-				}
-				$zip->close();
-			}
-		}
-		$t->assign ("ctl_admregmess", true);
-	break;
 	default:
 		// ADMINREG: insert or update region
 		if (($cmd == "insert") || ($cmd == "update")) {

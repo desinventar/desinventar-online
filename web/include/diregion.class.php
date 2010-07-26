@@ -956,7 +956,9 @@ class DIRegion extends DIObject {
 				$r->setFromArray($data);
 				$iReturn = $r->insert();
 				if (!iserror($iReturn)) {
-					$rol = $us->setUserRole($data['RegionUserAdmin'], $data['RegionId'], "ADMINREGION");
+					$rol = $us->setUserRole($_POST['RegionInfo']['RegionUserAdmin'], 
+					                        $_POST['RegionInfo']['RegionId'],
+					                        'ADMINREGION');
 				}
 			}
 		}

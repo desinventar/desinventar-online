@@ -140,9 +140,11 @@ class DIObject {
 	}
 
 	public function setFromArray($prmArray) {
+		$iReturn = ERR_NO_ERROR;
 		foreach($prmArray as $sKey => $sValue) {
 			$this->set($sKey, $sValue);
 		}
+		return $iReturn;
 	}
 		
 	public function getTableName() {

@@ -112,13 +112,9 @@ function onReadyDatabaseImport() {
 		jQuery('#frmDBImport input').attr('disabled',false);
 		jQuery('#frmDBImport select').attr('disabled', false);
 		
-		var params = {};
-		jQuery.each(jQuery('#frmDBImport').serializeArray(), function(index,value) {
-			params[value.name] = value.value;
-		});
 		jQuery.post('index.php',
 			{cmd : 'dbzipimport', 
-			 RegionInfo : params
+			 RegionInfo : jQuery('#frmDBImport').serializeObject()
 			},
 			function(data) {
 				if (parseInt(data.Status) > 0) {
