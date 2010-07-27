@@ -43,6 +43,7 @@ function onReadyDatabaseAdmin() {
 		}
 		var params = jQuery(this).serializeObject();
 		if (bContinue) {
+			jQuery('#frmDatabaseEdit :input').unhighlight();
 			jQuery.post('index.php',
 				{cmd        : 'cmdRegionUpdate',
 				 RegionInfo : params

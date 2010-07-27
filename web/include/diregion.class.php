@@ -245,7 +245,7 @@ class DIRegion extends DIObject {
 		$iReturn = ERR_NO_ERROR;
 		$prmRegionId = $this->get('RegionId');
 		// Create Directory for New Region
-		$DBDir = VAR_DIR . '/database/' . $prmRegionId;
+		$DBDir = DBDIR . '/' . $prmRegionId;
 		$DBFile = $DBDir . '/desinventar.db';
 		$this->q->dreg = null;
 		try {
@@ -266,7 +266,7 @@ class DIRegion extends DIObject {
 		} catch (Exception $e) {
 			showErrorMsg("Error " . $e->getMessage());
 		}
-		$this->session->q->setDBConnection($this->get('RegionId'));
+		$this->q->setDBConnection($this->get('RegionId'));
 		// Delete all database records
 		$this->clearRegionTables();
 		$this->set('RegionId', $prmRegionId);
@@ -879,23 +879,13 @@ class DIRegion extends DIObject {
 		} //if
 	} //updateMapArea
 	
-	public static function buildRegionId($prmCountryIso, $prmRegionLabel) {
+	public static function buildRegionId($prmCountryIso) {
 		$RegionId = '';
 		if ($prmCountryIso == '') {
 			$prmCountryIso = 'DESINV';
 		}
-		$Timestamp = DIObject::padNumber(time(),10);
-		//$prmRegionLabel = 'Región de Prueba ññáéíóúÓÚ';
-		$prmRegionLabel = strtolower($prmRegionLabel);
-		$prmRegionLabel = str_replace(' - ','_',$prmRegionLabel);
-		$prmRegionLabel = str_replace(' ','_',$prmRegionLabel);
-		$prmRegionLabel = str_replace(' ','',$prmRegionLabel);
-		$prmRegionLabel = str_replace('.','',$prmRegionLabel);
-		$prmRegionLabel = str_replace(array('ñ','á','é','í','ó','ú','Á','É','Í','Ó','Ú'),
-		                              array('n','a','e','i','o','u','a','e','i','o','u'),
-		                              $prmRegionLabel);
-		$prmRegionLabel = substr($prmRegionLabel, 0, 60);
-		$RegionId = $prmCountryIso . '-' . $Timestamp . '-' . $prmRegionLabel;
+		$prmTimestamp = date('YmdHis', time());
+		$RegionId = $prmCountryIso . '-' . $prmTimestamp;
 		return $RegionId;
 	} //buildRegionId
 	
@@ -1037,7 +1027,7 @@ class DIRegion extends DIObject {
 		$occ = $doc->createElement('GeoCarto');
 		$occ = $root->appendChild($occ);
 		try {
-			foreach($this->session->q->dreg->query($sQuery) as $row) {
+			foreach($this->q->dreg->query($sQuery) as $row) {
 				$level = $doc->createElement('GeoCartoItem');
 				$level = $occ->appendChild($level);
 				$level->setAttribute('GeoLevelId', $row['GeoLevelId']);

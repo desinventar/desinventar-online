@@ -45,15 +45,22 @@ switch ($cmd) {
 	break;
 	case 'cmdRegionUpdate':
 		$iReturn = ERR_NO_ERROR;
-		fb($_POST);
-		$RegionId = $_POST['RegionInfo']['RegionId'];
-		$RegionCmd = $_POST['RegionInfo']['cmd'];
-
-		$r = new DIRegion($us, $RegionId);
-		$iReturn = $r->setFromArray($_POST['RegionInfo']);
-		fb($r->oField);
-		fb($r->get('RegionStatus'));
+		
+		if ($us->UserId != 'root') {
+			$iReturn = ERR_ACCESS_DENIED;
+		}
 		if ($iReturn > 0) {
+			$RegionId = $_POST['RegionInfo']['RegionId'];
+			$RegionCmd = $_POST['RegionInfo']['cmd'];
+
+			$r = new DIRegion($us, $RegionId);
+			$iReturn = $r->setFromArray($_POST['RegionInfo']);
+		}
+		if ($iReturn > 0) {
+			if ($r->get('RegionId') == '') {
+				$r->set('RegionId', DIRegion::buildRegionId($r->get('CountryIso')));
+			}
+
 			if ($RegionCmd == 'cmdRegionCreate') {
 				$iReturn = $r->createRegionDB();
 			} else {
@@ -66,10 +73,8 @@ switch ($cmd) {
 			                            $_POST['RegionInfo']['RegionId'],
 			                            'ADMINREGION');
 		}
-		fb($iReturn);
 		$answer = array();
 		$answer['Status'] = $iReturn;
-		fb($answer);
 		echo json_encode($answer);
 	break;
 	case 'dbzipimport' : 
