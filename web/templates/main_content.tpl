@@ -1,5 +1,5 @@
 <!-- divDatabaseHeader -->
-{-include file="database_header.tpl" -}
+{-include file="database_header2.tpl" -}
 
 <!-- divDatabaseConfiguration - Database Configuration Parameters -->
 {-include file="main_dbconfig.tpl" -}
