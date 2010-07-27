@@ -94,6 +94,13 @@ require_once(BASE . '/include/query.class.php');
 require_once(BASE . '/include/constants.php');
 require_once(BASE . '/include/common.php');
 require_once(BASE . '/include/xml2array.php');
+require_once(BASE . '/include/dievent.class.php');
+require_once(BASE . '/include/dicause.class.php');
+require_once(BASE . '/include/digeography.class.php');
+require_once(BASE . '/include/digeolevel.class.php');
+require_once(BASE . '/include/digeocarto.class.php');
+require_once(BASE . '/include/didisaster.class.php');
+
 
 /* SETTINGS */
 $time_start = microtime_float();
