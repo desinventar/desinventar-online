@@ -6,15 +6,18 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
 	<link rel="stylesheet" type="text/css" href="css/desinventar.css?version={-$jsversion-}" />
 	{-include file="jquery.tpl" -}
-	<script type="text/javascript" src="js/database_admin.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="external/swfupload/swfupload.js"></script>
+	<script type="text/javascript" src="external/jquery.swfupload.js"></script>
+	<script type="text/javascript" src="js/jquery.snippets.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="js/database_import.js?version={-$jsversion-}"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
-			onReadyDatabaseAdmin();
+			onReadyDatabaseImport();
 		});
 	</script>
 </head>
 <body>
-{-include file="region.tpl" ctl_adminreg=true -}
+{-include file="database_import.tpl" -}
 {-include file="desinventarinfo.tpl"-}
 </body>
 </html>

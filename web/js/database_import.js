@@ -57,9 +57,12 @@ function onReadyDatabaseImport() {
 			});
 			jQuery('#frmDBImport #DBExist').val(data.DBExist);
 			if (parseInt(data.DBExist) < 1) {
+				jQuery('#spanDBImportClone').show();
 				jQuery('#spanDBImportUpdate').hide();
-				jQuery('#radioDBImportOptionNew').attr('checked',true).trigger('change');
+				jQuery('#radioDBImportOptionClone').attr('checked',true).trigger('change');
 			} else {
+				jQuery('#spanDBImportClone').hide();
+				jQuery('#spanDBImportUpdate').show();
 				jQuery('#radioDBImportOptionUpdate').attr('checked',true).trigger('change');
 			}
 			jQuery('#divDBImportParameters').show();
@@ -90,6 +93,7 @@ function onReadyDatabaseImport() {
 				jQuery('#frmDBImport #RegionId').val(doCreateNewRegionId(jQuery('#frmDBImport #CountryIso').val()));
 				jQuery('#frmDBImport #RegionLabel').val(jQuery('#frmDBImport #CountryIso :selected').html() + ' ' + jQuery('#frmDBImport #RegionId').val());
 			break;
+			case 'CLONE':
 			case 'UPDATE':
 				jQuery('#frmDBImport #RegionId')
 					.val(jQuery('#frmDBImport #RegionId_Prev').val())

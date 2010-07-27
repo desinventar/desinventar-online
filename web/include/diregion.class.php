@@ -1052,7 +1052,7 @@ class DIRegion extends DIObject {
 	}
 	
 	public function getXMLFileName() {
-		$filename = $this->session->getDBDir() . '/info.xml';
+		$filename = DBDIR . '/' . $this->get('RegionId') . '/info.xml';
 		return $filename;
 	}
 	

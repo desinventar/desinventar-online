@@ -85,13 +85,22 @@ switch ($cmd) {
 			$iReturn = ERR_ACCESS_DENIED;
 		}
 		if ($iReturn > 0) {
+			$RegionId = $_POST['RegionInfo']['RegionId'];
 			// Use the parameters to create a new database from zip file...
 			$Filename = TMP_DIR . '/di8file_' . $us->sSessionId . '_' . $_POST['RegionInfo']['Filename'];
 			$iReturn = DIRegionDB::createRegionDBFromZip($us,
 			             $_POST['RegionInfo']['Mode'],
-			             $_POST['RegionInfo']['RegionId'],
+			             $RegionId,
 			             $_POST['RegionInfo']['RegionLabel'],
 			             $Filename);
+			if ($iReturn > 0) {
+				$r = new DIRegion($us, $RegionId);
+				if (DIRegion::existRegion($us, $RegionId) == STATUS_NO) {
+					$r->insert();
+				} else {
+					$r->update();
+				}
+			}
 		}
 		$answer['Status'] = $iReturn;
 		echo json_encode($answer);		

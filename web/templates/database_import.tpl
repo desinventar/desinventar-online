@@ -52,8 +52,9 @@
 					<br />
 				</td>
 				<td>
-					<span id="spanDBImportNew"><input type="radio" id="radioDBImportOptionNew" class="radioDBImportOption" name="Mode" value="NEW" checked />{-#msgDBImportDatabaseNew#-}</span><br />
-					<span id="spanDBImportUpdate"><input type="radio" id="radioDBImportOptionUpdate" class="radioDBImportOption" name="Mode" value="UPDATE" />{-#msgDBImportDatabaseReplace#-}</span><br />
+					<span id="spanDBImportNew"   ><input type="radio" id="radioDBImportOptionNew"    class="radioDBImportOption" name="Mode" value="NEW" checked />{-#msgDBImportDatabaseNew#-}<br /></span>
+					<span id="spanDBImportClone" ><input type="radio" id="radioDBImportOptionClone"  class="radioDBImportOption" name="Mode" value="CLONE"       />{-#msgDBImportDatabaseClone#-}<br /></span>
+					<span id="spanDBImportUpdate"><input type="radio" id="radioDBImportOptionUpdate" class="radioDBImportOption" name="Mode" value="UPDATE"      />{-#msgDBImportDatabaseUpdate#-}<br /></span>
 				</td>
 			</tr>
 			<tr>
