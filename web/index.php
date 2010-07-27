@@ -69,6 +69,7 @@ switch ($cmd) {
 		}
 		if ($iReturn > 0) {
 			// Set Role ADMINREGION in RegionAuth: master for this region
+			$r->removeRegionUserAdmin();
 			$iReturn = $us->setUserRole($_POST['RegionInfo']['RegionUserAdmin'], 
 			                            $r->get('RegionId'),
 			                            'ADMINREGION');

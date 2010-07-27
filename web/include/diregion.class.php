@@ -1140,6 +1140,23 @@ class DIRegion extends DIObject {
 		}
 		return $iReturn;
 	}
+	
+	public function removeRegionUserAdmin() {
+		$iReturn = ERR_NO_ERROR;
+		$sQuery = 'SELECT * FROM RegionAuth WHERE RegionId="' . $this->get('RegionId') . '" AND AuthKey="ROLE" AND AuthAuxValue="ADMINREGION"';
+		try {
+			$a = array();
+			foreach($this->session->q->core->query($sQuery) as $row) {
+				$a[] = $row['UserId'];
+			} //foreach
+			foreach($a as $UserId) {
+				$this->session->setUserRole($UserId, $this->get('RegionId'), 'NONE');
+			}
+		} catch (Exception $e) {
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		return $iReturn;
+	}
 } //class
 
 </script>

@@ -399,6 +399,9 @@ class UserSession {
 				case 'MINIMAL':
 					$this->setPerm($prmUserId, $prmRegionId, "USER"     , 2, "");
 					break;
+				case 'NONE' :
+					// Do not set any permission
+					break;
 			} //switch
 		}
 		return $iReturn;
