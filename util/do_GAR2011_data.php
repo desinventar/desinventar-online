@@ -4,7 +4,7 @@
   DesInventar - http://www.desinventar.org
   (c) 1998-2010 Corporacion OSSO
   
-  2010-07-04 Jhon H. Caicedo <jhcaiced@desinventar.org>
+  2010-07-28 Jhon H. Caicedo <jhcaiced@desinventar.org>
 
   Process GAR2011 databases, apply rules to discard records.
 
@@ -17,7 +17,7 @@ foreach($us->q->core->query("SELECT * FROM Region WHERE RegionId LIKE 'GAR-ISDR-
 	$RegionList[] = $row['RegionId'];
 }
 //DEBUG
-$RegionList = array('GAR-ISDR-2011_SLV');
+$RegionList = array('GAR-ISDR-2011_PAN');
 foreach ($RegionList as $RegionId) {
 	$us->open($RegionId);
 	print $RegionId . "\n";
