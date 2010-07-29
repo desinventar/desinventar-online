@@ -59,38 +59,50 @@ foreach ($RegionList as $RegionId) {
 	$iCount += removeData($us, 'EventId="ESTRUCTURA"');
 	
 	// Local Events CHL
-	$iCount += removeData($us, 'EventId="FALLA"');
-	$iCount += removeData($us, 'EventId="INTOXICACIÓN"');
-	$iCount += removeData($us, 'EventId="LITORAL"');
-	$iCount += removeData($us, 'EventId="OZONO"');
+	if ($RegionId == 'GAR-ISDR-2011_CHL') {
+		$iCount += removeData($us, 'EventId="FALLA"');
+		$iCount += removeData($us, 'EventId="INTOXICACIÓN"');
+		$iCount += removeData($us, 'EventId="LITORAL"');
+		$iCount += removeData($us, 'EventId="OZONO"');
+	}
 
 	// Local Events COL
-	$iCount += removeData($us, 'EventId="fb1184be-1912-46c3-b4de-22011701e26c"');
-	$iCount += removeData($us, 'EventId="INTOXICACION"');
-	$iCount += removeData($us, 'EventId="f8280625-4320-4033-81cb-8feb19bd2f2e"');
-	$iCount += removeData($us, 'EventId="8d1f7788-2766-47f2-8472-deea68515086"');
+	if ($RegionId == 'GAR-ISDR-2011_COL') {
+		$iCount += removeData($us, 'EventId="fb1184be-1912-46c3-b4de-22011701e26c"');
+		$iCount += removeData($us, 'EventId="INTOXICACION"');
+		$iCount += removeData($us, 'EventId="f8280625-4320-4033-81cb-8feb19bd2f2e"');
+		$iCount += removeData($us, 'EventId="8d1f7788-2766-47f2-8472-deea68515086"');
+	}
 	
 	// Local Events MEX
-	$iCount += removeData($us, 'EventId="f8ec243e-f589-4c57-8b93-beeef2043aca"');
-	$iCount += removeData($us, 'EventId="3cc22906-21be-4ba9-baed-591c06ad2bea"');
-	$iCount += removeData($us, 'EventId="2be72ac5-c4a8-4d42-bea2-acaa8666e3f4"');
-	$iCount += removeData($us, 'EventId="dfeee180-23fa-4a69-9fc2-b95e777426b3"');
-	$iCount += removeData($us, 'EventId="7ce5f128-934c-40a5-b131-dd32c7ac8a34"');
-	$iCount += removeData($us, 'EventId="dd1aeeed-735e-4a81-96a5-e9d7bf404f19"');
+	if ($RegionId == 'GAR-ISDR-2011_MEX') {
+		$iCount += removeData($us, 'EventId="f8ec243e-f589-4c57-8b93-beeef2043aca"'); // Hambruna
+		$iCount += removeData($us, 'EventId="3cc22906-21be-4ba9-baed-591c06ad2bea"'); // Hundimiento
+		$iCount += removeData($us, 'EventId="2be72ac5-c4a8-4d42-bea2-acaa8666e3f4"'); // Intoxicación
+		$iCount += removeData($us, 'EventId="dfeee180-23fa-4a69-9fc2-b95e777426b3"'); // NIEBLA
+		$iCount += removeData($us, 'EventId="7ce5f128-934c-40a5-b131-dd32c7ac8a34"'); // Racionamiento
+		$iCount += removeData($us, 'EventId="dd1aeeed-735e-4a81-96a5-e9d7bf404f19"'); // Tormenta Tropical
+	}
 
 	// Local Events PER
-	$iCount += removeData($us, 'EventId="EPIZOOTIA"');
-	$iCount += removeData($us, 'EventId="EROSION"');
-	$iCount += removeData($us, 'EventId="INTOXICACION"');
-	$iCount += removeData($us, 'EventId="OLA DE FRIO"');
+	if ($RegionId == 'GAR-ISDR-2011_PER') {
+		$iCount += removeData($us, 'EventId="EPIZOOTIA"');
+		$iCount += removeData($us, 'EventId="EROSION"');
+		$iCount += removeData($us, 'EventId="INTOXICACION"');
+		$iCount += removeData($us, 'EventId="OLA DE FRIO"');
+	}
 
 	//Local Events VEN
-	$iCount += removeData($us, 'EventId="A. TRANSITO"');
-	$iCount += removeData($us, 'EventId="ARBOL CAIDO"');
+	if ($RegionId == 'GAR-ISDR-2011_VEN') {
+		$iCount += removeData($us, 'EventId="A. TRANSITO"');
+		$iCount += removeData($us, 'EventId="ARBOL CAIDO"');
+	}
 	
 	//Local Events SLV
-	$iCount += removeData($us, 'EventId="1cb0d2bf-a5c8-4a4d-adbd-43112a8244ea"'); // PAJIZO
-	$iCount += removeData($us, 'EventId="6c3d7356-36cd-425b-a68d-cd9b7d91f0d9"'); // Deforestación
+	if ($RegionId == 'GAR-ISDR-2011_SLV') {
+		$iCount += removeData($us, 'EventId="1cb0d2bf-a5c8-4a4d-adbd-43112a8244ea"'); // PAJIZO
+		$iCount += removeData($us, 'EventId="6c3d7356-36cd-425b-a68d-cd9b7d91f0d9"'); // Deforestación
+	}
 	
 	print 'Eventos Locales         : ' . $iCount . "\n";
 
