@@ -34,8 +34,6 @@ while (! feof(STDIN) ) {
 		$p = $us->getDisasterIdFromSerial($DisasterSerial);
 		$DisasterId = $p['DisasterId'];
 		
-		print $line . ' ' . $DisasterSerial . "\n";
-
 		$d = new DIDisaster($us, $DisasterId);
 
 		// 0 - DisasterSerial
@@ -166,17 +164,21 @@ while (! feof(STDIN) ) {
 		// 53-54
 		// 55-56
 		$d->set('EffectPeopleRelocated', valueToDIField($a[56], $a[55]));
-
-		$e = new DIEEData($us, $DisasterId);
+		
+		$e = new DIEEData($us, $d->get('DisasterId'));
 		
 		$bExist = $d->exist();
 		if ($bExist < 0) {
+			$mode = 'INSERT';
 			$i = $d->insert();
+			$e->set('DisasterId', $d->get('DisasterId'));
 			$j = $e->insert();
 		} else {
+			$mode = 'UPDATE';
 			$i = $d->update();
 			$j = $e->update();
 		}
+		printf('%4d %-10s %s %d %d %s %s' . "\n", $line, $DisasterSerial, $mode, $i, $j, $d->get('DisasterId'), $e->get('DisasterId'));
 		if ( ($i < 0) || ($j < 0) ) {
 			print $line . ' ' . $DisasterSerial . ' ' . $i . ' ' . $j . "\n";
 		}			
