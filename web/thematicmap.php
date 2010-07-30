@@ -212,8 +212,9 @@ if (isset($post['_M+cmd'])) {
 	
 	$mapfile = str_replace('\\', '/', $m->filename());
 	$worldmap = str_replace('\\','/', MAPDIR . "/worldmap.map");
+	$timestamp = time();
 	$legend = "/cgi-bin/". MAPSERV ."?map=" . rawurlencode($mapfile) . "&SERVICE=WMS&VERSION=1.1.1".
-				"&REQUEST=getlegendgraphic&LAYER=". substr($myly, 0, 12) ."&FORMAT=image/png";
+				"&REQUEST=getlegendgraphic&LAYER=". substr($myly, 0, 12) ."&FORMAT=image/png" . '&t=' . $timestamp;
 	$t->assign('legend', $legend);	
 	// 2009-09-10 (jhcaiced) Replace backslash chars to slash, when passing data to mapserver
 	if ($post['_M+cmd'] == "export") {
@@ -222,11 +223,11 @@ if (isset($post['_M+cmd'])) {
 		$size = "1000756";
 		$base = "/cgi-bin/". MAPSERV ."?map=". rawurlencode($worldmap) . "&SERVICE=WMS&VERSION=1.1.1".
 			"&layers=base&REQUEST=getmap&STYLES=&SRS=EPSG:900913&BBOX=". $post['_M+extent'].
-			"&WIDTH=". $w ."&HEIGHT=". $h ."&FORMAT=image/png";
+			"&WIDTH=". $w ."&HEIGHT=". $h ."&FORMAT=image/png" . '&t=' . $timestamp;
 		$bf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $base);
 		$url1 = "/cgi-bin/". MAPSERV ."?map=". rawurlencode($mapfile) ."&SERVICE=WMS&VERSION=1.1.1".
 			"&layers=". $post['_M+layers'] ."&REQUEST=getmap&STYLES=&SRS=EPSG:900913".
-			"&BBOX=". $post['_M+extent']."&WIDTH=". $w ."&HEIGHT=". $h ."&FORMAT=image/png";
+			"&BBOX=". $post['_M+extent']."&WIDTH=". $w ."&HEIGHT=". $h ."&FORMAT=image/png" . '&t=' . $timestamp;
 		$mf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $url1);
 		if ($mf) {
 			$ibas = imagecreatefromstring($bf);

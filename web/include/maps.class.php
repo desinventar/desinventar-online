@@ -40,7 +40,7 @@ class Maps {
 				$fp = TMPM_DIR ."/di8ms_";
 				$map .= $this->setLayerEff($q, $reg, $lev, $dl, $range, $info, $lbl, $trans);
 				if ($type == "THEMATIC")
-					$fp .= "$reg-". session_id() .".map";
+					$fp .= "$reg-". session_id() . '_' . time() . '.map';
 				elseif (strlen($type) > 0)
 					$fp .= "$reg-$type.map";
 				else
@@ -52,7 +52,7 @@ class Maps {
 	}
 	
 	function makefile($fp, $map) {
-	  $fh = fopen($fp, 'w') or die("Error setting file");
+		$fh = fopen($fp, 'w') or die("Error setting file");
 		fwrite($fh, $map);
 		fclose($fh);
 		$this->fpath = $fp;
