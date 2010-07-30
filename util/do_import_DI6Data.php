@@ -29,6 +29,7 @@ while (! feof(STDIN) ) {
 		for($i = 0; $i<count($a); $i++) {
 			$a[$i] = trim($a[$i]);
 		}
+		
 		// Get DisasterSerial/DisasterId
 		$DisasterSerial = $a[0];
 		$p = $us->getDisasterIdFromSerial($DisasterSerial);
@@ -178,7 +179,7 @@ while (! feof(STDIN) ) {
 			$i = $d->update();
 			$j = $e->update();
 		}
-		printf('%4d %-10s %s %d %d %s %s' . "\n", $line, $DisasterSerial, $mode, $i, $j, $d->get('DisasterId'), $e->get('DisasterId'));
+		printf('%4d %-10s %s %s %s' . "\n", $line, $DisasterSerial, $mode, $d->get('EffectFarmingAndForest'), $a[47]);
 		if ( ($i < 0) || ($j < 0) ) {
 			print $line . ' ' . $DisasterSerial . ' ' . $i . ' ' . $j . "\n";
 		}			
@@ -216,7 +217,7 @@ function valueToDIField($prmValue, $prmValue2='') {
 			}
 		}
 	} else {
-		$Value = -2;
+		$Value = 0;
 		if ( ($prmValue2 == 'FALSO') || ($prmValue2 == 'FALSE') ) {
 			$Value = -2;
 		}
