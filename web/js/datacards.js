@@ -718,7 +718,13 @@ function doDatacardGotoNext() {
 }
 
 function doKeepSessionActive() {
-	updateList('dostat', 'cards.php', 'u=1');
+	jQuery.post('index.php',
+		{cmd : 'cmdSessionAwake'},
+		function(data) {
+		},
+		'json'
+	);
+	//updateList('dostat', 'cards.php', 'u=1');
 }
 
 function doDatacardSuggestSerial() {
