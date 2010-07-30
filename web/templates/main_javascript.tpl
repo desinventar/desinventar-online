@@ -314,7 +314,7 @@
 		{-/if-}
 		tb.add('-', {id: 'mdbs', text: '{-#mdatabases#-}',	menu: mbases });
 		tb.add('-', {id: 'mhlp', text: '{-#mhelp#-}',			menu: mhelp  });
-		tb.add('->',{id: 'mnuRegionInfo', text: '[{-$regname-}]', 		handler: onMenuItem });
+		tb.add('->',{id: 'mnuRegionInfo', text: '[{-$RegionLabel-}]', 		handler: onMenuItem });
 		tb.add('->',{id: 'mwww', text: '<img src="images/di_logo4.png">', handler: onMenuItem });
 
 		// layout

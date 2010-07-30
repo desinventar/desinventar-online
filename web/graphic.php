@@ -17,7 +17,8 @@ if ($reg == '') {
 
 $us->open($reg);
 
-$regname = $us->q->getDBInfoValue('RegionLabel');
+$RegionLabel = $us->q->getDBInfoValue('RegionLabel');
+$t->assign('RegionLabel', $RegionLabel);
 fixPost($post);
 // load levels to display in totalizations
 foreach ($us->q->loadGeoLevels('', -1, false) as $k=>$i)
@@ -28,7 +29,6 @@ $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Sector', $lg));
 $dic = array_merge($dic, $us->q->getEEFieldList("True"));
 //$t->assign ("dic", $dic);
-$t->assign ("regname", $regname);
 $GraphCommand = getParameter('_G+cmd');
 if ($GraphCommand != '') {
 	// Process QueryDesign Fields and count results
@@ -91,7 +91,7 @@ if ($GraphCommand != '') {
 		if ($GraphCommand == "export") {
 			// Export Graph as a Image
 			header("Content-type: Image/png");
-			header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $regname) ."_Graphic.png");
+			header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $RegionLabel) ."_Graphic.png");
 			header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 			header('Last-Modified: '. gmdate('D, d M Y H:i:s') .' GMT');
 			header('Cache-Control: no-store, no-cache, must-revalidate');

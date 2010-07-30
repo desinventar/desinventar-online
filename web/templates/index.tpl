@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
-	<title>{-#ttitle#-} | {-$regname-}</title>
+	<title>{-#ttitle#-} | {-$RegionLabel-}</title>
 	<link rel="stylesheet" type="text/css" href="css/desinventar.css?version={-$jsversion-}" />
 	<link rel="stylesheet" type="text/css" href="css/datacards.css?version={-$jsversion-}" />
 	<link rel="stylesheet" type="text/css" href="css/main.css?version={-$jsversion-}" />

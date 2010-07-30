@@ -366,7 +366,7 @@ switch ($cmd) {
 						$t->assign('ctl_user', false);
 					}
 					// Set selection map
-					$t->assign('regname', $RegionLabel);
+					$t->assign('RegionLabel', $RegionLabel);
 					$t->assign('ctl_showmap', true);
 					// get range of dates
 					$ydb = $us->getDateRange();
@@ -496,7 +496,6 @@ switch ($cmd) {
 
 					/* DATACARDS */
 					$t->assign('usr', $us->UserId);
-					$t->assign('regname', $RegionLabel);
 					$desinventarUserRole = $us->getUserRole($RegionId);
 					$desinventarUserRoleValue = $us->getUserRoleValue($RegionId);
 					
