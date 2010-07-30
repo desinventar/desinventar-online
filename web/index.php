@@ -43,6 +43,12 @@ switch ($cmd) {
 	case 'getversion':
 		print VERSION;
 	break;
+	case 'cmdSessionAwake':
+		$iReturn = $us->awake();
+		$answer = array();
+		$answer['Status'] = $iReturn;
+		echo json_encode($answer);
+	break;
 	case 'cmdRegionUpdate':
 		$iReturn = ERR_NO_ERROR;
 		
