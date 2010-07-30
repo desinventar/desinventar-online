@@ -25,7 +25,7 @@
 	<script type="text/javascript" src="external/jquery.swfupload.js"></script>
 
 	<script type="text/javascript" src="js/diadmin.js?version={-$jsversion-}"></script>
-	<script type="text/javascript" src="js/cards.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="js/datacards.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/data.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/graphic.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/thematicmap.js?version={-$jsversion-}"></script>
