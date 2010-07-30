@@ -65,7 +65,7 @@ class Maps {
 	function setHeader($q, $reg, $inf, $typ) {
 		$x = 400;
 		$y = 550;
-		$regname = $q->getDBInfoValue('RegionLabel');
+		$RegionLabel = $q->getDBInfoValue('RegionLabel');
 		$map = 
 '	MAP
     IMAGETYPE		PNG

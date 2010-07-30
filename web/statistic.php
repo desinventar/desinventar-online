@@ -16,7 +16,7 @@ else
 
 $us->open($reg);
 
-$regname = $us->q->getDBInfoValue('RegionLabel');
+$RegionLabel = $us->q->getDBInfoValue('RegionLabel');
 fixPost($post);
 
 // load levels to display in totalizations
@@ -27,8 +27,8 @@ $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Statistic', $lg));
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Sector', $lg));
 $dic = array_merge($dic, $us->q->getEEFieldList("True"));
-$t->assign ("reg", $reg);
-$t->assign ("regname", $regname);
+$t->assign('reg', $reg);
+$t->assign('RegionLabel', $RegionLabel);
 
 // Data Options Interface
 if (isset($post['page']) || isset($post['_S+cmd'])) {
@@ -100,19 +100,19 @@ if (isset($post['page']) || isset($post['_S+cmd'])) {
 			// Set values to paging list
 			$last = (int) (($cou / $rxp) + 1);
 			// Smarty assign SQL values
-			$t->assign ("gp", $gp);
-			$t->assign ("dlt", $dlt); // List of totals..
-			$t->assign ("sql", base64_encode($sql));
-			$t->assign ("sqt", $sql);
-			$t->assign ("qdet", $us->q->getQueryDetails($dic, $post));
-			$t->assign ("fld", $fld);
-			$t->assign ("cou", $cou);
-			$t->assign ("tot", $tot);
-			$t->assign ("rxp", $rxp);
-			$t->assign ("last",$last);
-			$t->assign ("geo", $geo);
+			$t->assign("gp", $gp);
+			$t->assign("dlt", $dlt); // List of totals..
+			$t->assign("sql", base64_encode($sql));
+			$t->assign("sqt", $sql);
+			$t->assign("qdet", $us->q->getQueryDetails($dic, $post));
+			$t->assign("fld", $fld);
+			$t->assign("cou", $cou);
+			$t->assign("tot", $tot);
+			$t->assign("rxp", $rxp);
+			$t->assign("last",$last);
+			$t->assign("geo", $geo);
 			// Show results interface 
-			$t->assign ("ctl_showres", true);
+			$t->assign('ctl_showres', true);
 		} else if ($post['_S+cmd'] == "export") {
 			// Export Results to File
 			if ($post['_S+saveopt'] == "csv") {
@@ -122,7 +122,7 @@ if (isset($post['page']) || isset($post['_S+cmd'])) {
 			}
 			//header("Content-type: application/x-zip-compressed");
 			header("Content-type: text/x-csv");
-			header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $regname) ."_Consolidate.". $export);
+			header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $RegionLabel) ."_Consolidate.". $export);
 			//header("Content-Transfer-Encoding: binary");
 			// Limit 5000 results in export: few memory in PHP
 			$rxp 		= 5000;
@@ -182,13 +182,12 @@ if (isset($post['page']) || isset($post['_S+cmd'])) {
 			flush();
 			readfile($stdpth);
 			exit;
-		}
-		else {
-			$t->assign ("offset", ($pag - 1) * $rxp);
-			$t->assign ("sel", $sel);
-			$t->assign ("dk", $dk);
-			$t->assign ("dislist", $dl);
-			$t->assign ("ctl_dislist", true);
+		} else {
+			$t->assign('offset', ($pag - 1) * $rxp);
+			$t->assign('sel', $sel);
+			$t->assign('dk', $dk);
+			$t->assign('dislist', $dl);
+			$t->assign('ctl_dislist', true);
 		}
 	}
 }
