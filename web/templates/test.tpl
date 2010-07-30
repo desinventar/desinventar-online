@@ -5,20 +5,23 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
 	<link rel="stylesheet" type="text/css" href="css/desinventar.css?version={-$jsversion-}" />
+	<link rel="stylesheet" type="text/css" href="css/datacards.css?version={-$jsversion-}" />
 	{-include file="jquery.tpl" -}
 	<script type="text/javascript" src="external/swfupload/swfupload.js"></script>
 	<script type="text/javascript" src="external/jquery.swfupload.js"></script>
 	<script type="text/javascript" src="js/jquery.snippets.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/database_import.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="js/datacards.js?version={-$jsversion-}"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
-			onReadyDatabaseImport();
+			//onReadyDatabaseImport();
+			onReadyDatacards();
 		});
 	</script>
 </head>
 <body>
-{-include file="database_import.tpl" -}
+{-include file="datacards.tpl" -}
+{-include file="database_import2.tpl" -}
 {-include file="desinventarinfo.tpl"-}
 </body>
 </html>
-

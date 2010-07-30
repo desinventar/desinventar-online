@@ -45,7 +45,7 @@
 					<div class="x-window-header">{-#mdcsection#-} | {-$desinventarUserId-} - {-$role-}</div>
 					<div id="dif-cfg" style="text-align:center;">
 						<div name="dif" id="dif" frameborder="0" height="600px;" width="100%">
-							{-include file="cards.tpl"-}
+							{-include file="datacards.tpl"-}
 						</div>
 					</div>
 				</div>

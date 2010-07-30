@@ -155,13 +155,6 @@
 										</td>
 									</tr>
 								</table>
-								<!--
-								<span id="lst_geo" class="geodiv" style="width: 180px; height: 30px;">
-									{-include file="cards_geolist.tpl"-}
-									{-assign var="tabind" value="10"-}
-								</span>
-								<br />
-								-->
 							</td>
 							{-assign var="tabind" value="`$tabind+1`"-}
 							<td ext:qtip="{-$dis.DisasterSiteNotes[1]-}" />
