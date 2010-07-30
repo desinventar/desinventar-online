@@ -35,11 +35,6 @@ if ( (substr($_SERVER['CONTENT_TYPE'],0,19) == 'multipart/form-data') &&
      $cmd = 'fileupload';
 }
 switch ($cmd) {
-	case 'test':
-		$t->assign('LanguageList', $us->q->loadLanguages(1));
-		$t->assign('CountryList', $us->q->getCountryList());
-		$t->display('test.tpl');
-	break;
 	case 'getversion':
 		print VERSION;
 	break;
@@ -333,15 +328,35 @@ switch ($cmd) {
 					$t->assign('eveuserl', $us->q->loadEvents('USER', 'active', $lg));
 					$t->display('main_eventlist.tpl');
 				break;
-				default:
-					$t->assign('ms', MAPSERV);
-					$t->assign('dis', $us->q->queryLabelsFromGroup('Disaster', $lg));
-					$t->assign('rc1', $us->q->queryLabelsFromGroup('Record|1', $lg));
+				case 'test':
+					// DesInventarInfo
+					$t->assign('LanguageList', $us->q->loadLanguages(1));
+					$t->assign('CountryList', $us->q->getCountryList());
+					
+					// Datacards
+					$t->assign('LabelsDisaster', $us->q->queryLabelsFromGroup('Disaster', $lg));
+					$t->assign('LabelsRecord1', $us->q->queryLabelsFromGroup('Record|1', $lg));
+					$t->assign('LabelsEvent', $us->q->queryLabelsFromGroup('Event', $lg));
+					$t->assign('LabelsCause', $us->q->queryLabelsFromGroup('Cause', $lg));
+
+					// Query Design
 					$t->assign('rc2', $us->q->queryLabelsFromGroup('Record|2', $lg));
-					$t->assign('eve', $us->q->queryLabelsFromGroup('Event', $lg));
-					$t->assign('cau', $us->q->queryLabelsFromGroup('Cause', $lg));
+
+					$t->display('test.tpl');
+				break;
+				default:
+					// Datacards
+					$t->assign('LabelsDisaster', $us->q->queryLabelsFromGroup('Disaster', $lg));
+					$t->assign('LabelsRecord1', $us->q->queryLabelsFromGroup('Record|1', $lg));
+					$t->assign('LabelsEvent', $us->q->queryLabelsFromGroup('Event', $lg));
+					$t->assign('LabelsCause', $us->q->queryLabelsFromGroup('Cause', $lg));
+
+					// Query Design
+					$t->assign('rc2', $us->q->queryLabelsFromGroup('Record|2', $lg));
+					
 					$t->assign('reg', $RegionId);
-					$t->assign('path', VAR_DIR);
+					//$t->assign('path', VAR_DIR);
+					
 					// Get UserRole
 					$role = $us->getUserRole($RegionId);
 					$t->assign('role', $role);

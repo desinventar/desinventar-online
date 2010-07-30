@@ -724,7 +724,6 @@ function doKeepSessionActive() {
 		},
 		'json'
 	);
-	//updateList('dostat', 'cards.php', 'u=1');
 }
 
 function doDatacardSuggestSerial() {
