@@ -6,37 +6,37 @@
 
 class DIRegion extends DIObject {
 	public function __construct($prmSession) {
-		$this->sTableName   = "Region";
-		$this->sPermPrefix  = "INFO";
-		$this->sFieldKeyDef = "RegionId/STRING";
-		$this->sFieldDef    = "RegionLabel/STRING," .
-		                      "LangIsoCode/STRING," . 
-		                      "CountryIso/STRING," .
-		                      "RegionOrder/INTEGER," .
-		                      "RegionStatus/INTEGER," .
-		                      "RegionLastUpdate/DATETIME," .
-		                      "IsCRegion/INTEGER," .
-		                      "IsVRegion/INTEGER";
-		$this->sInfoDef     = "DBVersion/STRING," .
-		                      "PeriodBeginDate/DATE," .
-		                      "PeriodEndDate/DATE," .
-		                      "GeoLimitMinX/DOUBLE," . 
-		                      "GeoLimitMinY/DOUBLE," . 
-		                      "GeoLimitMaxX/DOUBLE," . 
-		                      "GeoLimitMaxY/DOUBLE," .
-		                      "OptionOutOfRange/INTEGER," .
-		                      "OptionLanguageList/STRING," .
-		                      "OptionOldName/STRING";
-		$this->sInfoTrans   = "InfoCredits/STRING," . 
-		                      "InfoGeneral/STRING," .
-		                      "InfoSources/STRING," .
-		                      "InfoSynopsis/STRING," . 
-		                      "InfoObservation/STRING," . 
-		                      "InfoGeography/STRING," . 
-		                      "InfoCartography/STRING," .
-		                      "InfoAdminURL/STRING";
+		$this->sTableName   = 'Region';
+		$this->sPermPrefix  = 'INFO';
+		$this->sFieldKeyDef = 'RegionId/STRING';
+		$this->sFieldDef    = 'RegionLabel/STRING,' .
+		                      'LangIsoCode/STRING,' . 
+		                      'CountryIso/STRING,' .
+		                      'RegionOrder/INTEGER,' .
+		                      'RegionStatus/INTEGER,' .
+		                      'RegionLastUpdate/DATETIME,' .
+		                      'IsCRegion/INTEGER,' .
+		                      'IsVRegion/INTEGER';
+		$this->sInfoDef     = 'DBVersion/STRING,' .
+		                      'PeriodBeginDate/DATE,' .
+		                      'PeriodEndDate/DATE,' .
+		                      'GeoLimitMinX/DOUBLE,' . 
+		                      'GeoLimitMinY/DOUBLE,' . 
+		                      'GeoLimitMaxX/DOUBLE,' . 
+		                      'GeoLimitMaxY/DOUBLE,' .
+		                      'OptionOutOfRange/INTEGER,' .
+		                      'OptionLanguageList/STRING,' .
+		                      'OptionOldName/STRING';
+		$this->sInfoTrans   = 'InfoCredits/STRING,' . 
+		                      'InfoGeneral/STRING,' .
+		                      'InfoSources/STRING,' .
+		                      'InfoSynopsis/STRING,' . 
+		                      'InfoObservation/STRING,' . 
+		                      'InfoGeography/STRING,' . 
+		                      'InfoCartography/STRING,' .
+		                      'InfoAdminURL/STRING';
 		parent::__construct($prmSession);
-		$this->setConnection("core");
+		$this->setConnection('core');
 		$this->createFields($this->sInfoDef);		
 		$this->addLanguageInfo('eng');
 		$this->set('PeriodBeginDate', '');
@@ -121,12 +121,15 @@ class DIRegion extends DIObject {
 		if ($iReturn > 0) {
 			$this->setConnection($RegionId);
 			try {
-				$sQuery = "SELECT * FROM Info WHERE LangIsoCode='' AND Length(InfoKey) > 3";
-				foreach($this->conn->query($sQuery) as $row) {
+				$sQuery = 'SELECT * FROM Info WHERE LangIsoCode=:LangIsoCode AND Length(InfoKey) > 3';
+				$sth = $this->conn->prepare($sQuery);
+				$sth->bindValue(':LangIsoCode', '', PDO::PARAM_STR);
+				$sth->execute();
+				while($row = $sth->fetch(PDO::FETCH_ASSOC)) {
 					$InfoValue = $row['InfoValue'];
 					$InfoKey   = $row['InfoKey'];
 					$this->set($InfoKey, $InfoValue);
-				} // foreach
+				} // while
 			} catch (Exception $e) {
 				$iReturn = ERR_NO_DATABASE;
 			}
@@ -146,12 +149,15 @@ class DIRegion extends DIObject {
 			if ($iReturn > 0) {
 				$this->setConnection($this->get('RegionId'));
 				try {
-					$sQuery = "SELECT * FROM Info WHERE LangIsoCode='" . $prmLangIsoCode . "'";
-					foreach($this->conn->query($sQuery) as $row) {
+					$sQuery = 'SELECT * FROM Info WHERE LangIsoCode=:LangIsoCode';
+					$sth = $this->conn->prepare($sQuery);
+					$sth->bindParam(':LangIsoCode', $prmLangIsoCode, PDO::PARAM_STR);
+					$sth->execute();
+					while($row = $sth->fetch(PDO::FETCH_ASSOC)) {
 						$InfoValue = $row['InfoValue'];
 						$InfoKey   = $row['InfoKey'];
 						$this->set($InfoKey, $InfoValue,$prmLangIsoCode);
-					} // foreach
+					} // while
 				} catch (Exception $e) {
 					$iReturn = ERR_NO_DATABASE;
 				}
@@ -174,18 +180,29 @@ class DIRegion extends DIObject {
 						if (strlen($LangIsoCode) > 3) {
 							$LangIsoCode = '';
 						}
-						$sQuery = "DELETE FROM Info WHERE InfoKey='" . $InfoKey . "' AND LangIsoCode='" . $LangIsoCode . "'";
+						$sQuery = 'DELETE FROM Info WHERE InfoKey=:InfoKey AND LangIsoCode=:LangIsoCode';
+						$sth = $this->conn->prepare($sQuery);
+						$sth->bindParam(':InfoKey'    , $InfoKey    , PDO::PARAM_STR);
+						$sth->bindParam(':LangIsoCode', $LangIsoCode, PDO::PARAM_STR);
 						try {
-							$this->conn->query($sQuery);
+							$sth->execute();
 						} catch (Exception $e) {
-							showErrorMsg("Error " . $e->getMessage());
+							showErrorMsg('Error : ' . $e->getMessage());
 							$iReturn = ERR_UNKNOWN_ERROR;
 						}
-						$sQuery = "INSERT INTO Info VALUES ('" . $InfoKey . "','" . $LangIsoCode . "','" . $InfoValue . "','','" . $now . "','" . $now . "','" . $now . "')";
+						$sQuery = 'INSERT INTO Info VALUES (:InfoKey,:LangIsoCode,:InfoValue,:InfoAuxValue,:RecordCreation,:RecordSync,:RecordUpdate)';
+						$sth = $this->conn->prepare($sQuery);
+						$sth->bindParam(':InfoKey'       , $InfoKey    , PDO::PARAM_STR);
+						$sth->bindParam(':LangIsoCode'   , $LangIsoCode, PDO::PARAM_STR);
+						$sth->bindParam(':InfoValue'     , $InfoValue  , PDO::PARAM_STR);
+						$sth->bindValue(':InfoAuxValue'  , ''          , PDO::PARAM_STR);
+						$sth->bindParam(':RecordCreation', $now        , PDO::PARAM_STR);
+						$sth->bindParam(':RecordSync'    , $now        , PDO::PARAM_STR);
+						$sth->bindParam(':RecordUpdate'  , $now        , PDO::PARAM_STR);
 						try {
-							$this->conn->query($sQuery);
+							$sth->execute();
 						} catch (Exception $e) {
-							showErrorMsg("Error " . $e->getMessage());
+							showErrorMsg('Error : ' . $e->getMessage());
 							$iReturn = ERR_UNKNOWN_ERROR;
 						}
 					 } //if
@@ -206,10 +223,30 @@ class DIRegion extends DIObject {
 		foreach($this->oField[$prmLangIsoCode] as $InfoKey => $InfoValue) {
 			if (array_key_exists($InfoKey, $Translatable)) {
 				$LangIsoCode = $prmLangIsoCode;
-				$sQuery = "DELETE FROM Info WHERE InfoKey='" . $InfoKey . "' AND LangIsoCode='" . $LangIsoCode . "'";
-				$this->conn->query($sQuery);
-				$sQuery = "INSERT INTO Info VALUES ('" . $InfoKey . "','" . $LangIsoCode . "','" . $InfoValue . "','','" . $now . "','" . $now . "','" . $now . "')";
-				$this->conn->query($sQuery);
+				$sQuery = 'DELETE FROM Info WHERE InfoKey=:InfoKey AND LangIsoCode=:LangIsoCode';
+				$sth = $this->conn->prepare($sth);
+				$sth->bindParam(':InfoKey'    , $InfoKey    , PDO::PARAM_STR);
+				$sth->bindParam(':LangIsoCode', $LangIsoCode, PDO::PARAM_STR);
+				try {
+					$sth->execute();
+				}  catch (Exception $e) {
+					showErrorMsg('Error : ' . $e->getMessage());
+				}
+
+				$sQuery = 'INSERT INTO Info VALUES (:InfoKey,:LangIsoCode,:InfoValue,:InfoAuxValue,:RecordCreation,:RecordSync,:RecordUpdate)';
+				$sth = $this->conn->prepare($sQuery);
+				$sth->bindParam(':InfoKey'       , $InfoKey    , PDO::PARAM_STR);
+				$sth->bindParam(':LangIsoCode'   , $LangIsoCode, PDO::PARAM_STR);
+				$sth->bindParam(':InfoValue'     , $InfoValue  , PDO::PARAM_STR);
+				$sth->bindValue(':InfoAuxValue'  , ''          , PDO::PARAM_STR);
+				$sth->bindParam(':RecordCreation', $now        , PDO::PARAM_STR);
+				$sth->bindParam(':RecordSync'    , $now        , PDO::PARAM_STR);
+				$sth->bindParam(':RecordUpdate'  , $now        , PDO::PARAM_STR);
+				try {
+					$sth->execute();
+				} catch (Exception $e) {
+					showErrorMsg('Error : ' . $e->getMessage());
+				}
 			}
 		} //foreach
 		$this->setConnection('core');
@@ -264,7 +301,7 @@ class DIRegion extends DIObject {
 				$iReturn = copy(CONST_DBNEWREGION, $DBFile);
 			}
 		} catch (Exception $e) {
-			showErrorMsg("Error " . $e->getMessage());
+			showErrorMsg('Error : ' . $e->getMessage());
 		}
 		$this->q->setDBConnection($this->get('RegionId'));
 		// Delete all database records
@@ -294,8 +331,7 @@ class DIRegion extends DIObject {
 			if ($g->exist() > 0) {
 				$g->update();
 				$c->update();
-			}
-			else {
+			} else {
 				$g->insert();
 				$c->insert();
 			}
@@ -315,8 +351,10 @@ class DIRegion extends DIObject {
 
 		// Create Geography element at GeographyLevel=0 for this RegionItem
 		// Delete Existing Elements
-		$query = "DELETE FROM Geography WHERE GeographyCode='" . $prmRegionItemId . "'";
-		$this->q->dreg->query($query);
+		$query = 'DELETE FROM Geography WHERE GeographyCode=:GeographyCode';
+		$sth = $this->q->dreg->prepare($query);
+		$sth->bindParam(':GeographyCode', $prmRegionItemId, PDO::PARAM_STR);
+		$sth->execute();
 		$g = new DIGeography($this->session, 
 		                     $prmRegionItemGeographyId,
 		                     $this->get('LangIsoCode'));
@@ -349,7 +387,7 @@ class DIRegion extends DIObject {
 			$s = new DISync($this->session);
 			$s->set('SyncTable', $TableName);
 			$s->set('RegionId', $this->get('RegionId'));
-			$s->set('SyncURL', "file:///" . $prmRegionItemId);
+			$s->set('SyncURL', 'file:///' . $prmRegionItemId);
 			$s->insert();
 		} //foreach
 	}
@@ -357,8 +395,10 @@ class DIRegion extends DIObject {
 	public function clearRegionTables() {
 		// Delete ALL Record from Database - Be Careful...
 		foreach($this->getRegionTables() as $TableName) {
-			$query = "DELETE FROM " . $TableName;
-			$this->q->dreg->query($query);
+			$query = 'DELETE FROM :TableName';
+			$sth = $this->q->dreg->prepare($query);
+			$sth->bindParam(':TableName', $TableName, PDO::PARAM_STR);
+			$sth->execute();
 		} //foreach
 	}
 	
@@ -398,8 +438,11 @@ class DIRegion extends DIObject {
 		*/
 		if ($iReturn > 0) {
 			if ($prmRegionItemGeographyName != '') {
-				$Query = "UPDATE Geography SET GeographyName='" . $prmRegionItemGeographyName . "' WHERE GeographyLevel=0 AND GeographyCode='" . $prmRegionItemId . "'";
-				$this->q->dreg->query($Query);
+				$Query = 'UPDATE Geography SET GeographyName=:GeographyName WHERE GeographyLevel=0 AND GeographyCode=:GeographyCode';
+				$sth = $this->q->dreg->prepare($Query);
+				$sth->bindParam(':GeographyName', $prmRegionItemGeographyName, PDO::PARAM_STR);
+				$sth->bindParam(':GeographyCode', $prmRegionItemId, PDO::PARAM_STR);
+				$sth->execute();
 			}
 		}
 		return $iReturn;
@@ -413,7 +456,8 @@ class DIRegion extends DIObject {
 	}
 
 	public function clearSyncTable() {
-		$this->q->dreg->query("DELETE FROM Sync;");
+		$sth = $this->q->dreg->prepare('DELETE FROM Sync;');
+		$sth->execute();
 	}
 	
 	public function addRegionItemRecord($prmRegionItemId) {
@@ -714,7 +758,7 @@ class DIRegion extends DIObject {
 		}
 		$e = new DIEvent($this->session);
 		$FieldList = $e->getFieldList();
-		$Queries = array();		
+		$Queries = array();
 		$Query = "ATTACH DATABASE '" . CONST_DBBASE . "' AS base";
 		array_push($Queries, $Query);
 		//Copy PreDefined Event List Into Database
@@ -772,28 +816,20 @@ class DIRegion extends DIObject {
 	public function getDBInfoValue($prmInfoKey, $LangIsoCode) {
 		$sReturn = '';
 		if ($this->q->dreg != null) {
-			$query = "SELECT * FROM Info WHERE InfoKey='" . $prmInfoKey . "'";
+			$query = 'SELECT * FROM Info WHERE InfoKey=:InfoKey';
 			if ($prmInfoKey != 'LangIsoCode') {
-				$query .= " AND LangIsoCode='" . $LangIsoCode . "'";
+				$query .= ' AND LangIsoCode=:LangIsoCode';
 			}
-			foreach($this->q->dreg->query($query) as $row) {
+			$sth = $this->q->dreg->prepare($query);
+			$sth->bindParam(':InfoKey', $prmInfoKey, PDO::PARAM_STR);
+			$sth->bindParam(':LangIsoCode', $LangIsoCode, PDO::PARAM_STR);
+			$sth->execute();
+			while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
 				$sReturn = $row['InfoValue'];
 			}
 		} //if
 		return $sReturn;
 	} //function
-
-	public function saveDBInfoValue($prmInfoKey, $LangIsoCode, $prmInfoValue, $prmInfoAuxValue = '') {
-		$iReturn = ERR_NO_ERROR;
-		$now = gmdate('c');
-		if ($this->q->dreg != null) {
-			$query = "DELETE FROM Info WHERE InfoKey='" . $prmInfoKey . "'" . " AND LangIsoCode='" . $LangIsoCode . "'";
-			$this->q->dreg->query($query);
-			$query = sprintf("INSERT INTO Info (InfoKey,LangIsoCode,InfoValue,InfoAuxValue,RecordCreation,RecordUpdate,RecordSync) VALUES ('%s','%s','%s','%s','%s','%s','%s')",
-			         $prmInfoKey,$LangIsoCode,$prmInfoValue,$prmInfoAuxValue,$now,$now,$now);
-		}
-		return $iReturn;
-	}
 
 	public function getLanguageList() {
 		$LangIsoCode = $this->get('LangIsoCode');
@@ -1130,11 +1166,12 @@ class DIRegion extends DIObject {
 	
 	public static function deleteRegion($us, $prmRegionId) {
 		$iReturn = STATUS_NO;
-		$sQuery = 'DELETE FROM Region WHERE RegionId="' . $prmRegionId . '"';
 		try {
-			foreach($us->q->core->query($sQuery) as $row) {
-				$iReturn = STATUS_YES;
-			}
+			$sQuery = 'DELETE FROM Region WHERE RegionId=:RegionId';
+			$sth = $us->q->core->prepare($sQuery);
+			$sth->bindParam(':RegionId', $prmRegionId, PDO::PARAM_STR);
+			$sth->execute();
+			$iReturn = STATUS_YES;
 		} catch (Exception $e) {
 			$iReturn = ERR_UNKNOWN_ERROR;
 		}
@@ -1143,10 +1180,15 @@ class DIRegion extends DIObject {
 	
 	public function removeRegionUserAdmin() {
 		$iReturn = ERR_NO_ERROR;
-		$sQuery = 'SELECT * FROM RegionAuth WHERE RegionId="' . $this->get('RegionId') . '" AND AuthKey="ROLE" AND AuthAuxValue="ADMINREGION"';
 		try {
+			$sQuery = 'SELECT * FROM RegionAuth WHERE RegionId=:RegionId AND AuthKey=:AuthKey AND AuthAuxValue=:AuthAuxValue';
+			$sth = $this->session->q->core->prepare($sQuery);
+			$sth->bindValue(':RegionId'    , $this->get('RegionId'), PDO::PARAM_STR);
+			$sth->bindValue(':AuthKey'     , 'ROLE'       , PDO::PARAM_STR);
+			$sth->bindValue(':AuthAuxValue', 'ADMINREGION', PDO::PARAM_STR);
+			$sth->execute();
 			$a = array();
-			foreach($this->session->q->core->query($sQuery) as $row) {
+			while($row = $sth->fetch(PDO::FETCH_ASSOC)) {
 				$a[] = $row['UserId'];
 			} //foreach
 			foreach($a as $UserId) {
