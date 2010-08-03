@@ -113,14 +113,14 @@ class UserSession {
 	// this could be an anonymous or authenticated session
 	public function insert() {
 		$iReturn = ERR_DEFAULT_ERROR;
-		$sQuery = 'INSERT INTO UserSession VALUES (:SessionId,:RegionId,:UserId,:Valid,:dStart,:dLastUpdate)';
+		$sQuery = 'INSERT INTO UserSession VALUES (:SessionId,:RegionId,:UserId,:Valid,:Start,:LastUpdate)';
 		$sth = $this->q->core->prepare($sQuery);
 		$sth->bindParam(':SessionId'  , $this->sSessionId, PDO::PARAM_STR);
 		$sth->bindValue(':RegionId'   , '', PDO::PARAM_STR);
 		$sth->bindParam(':UserId'     , $this->UserId, PDO::PARAM_STR);
 		$sth->bindValue(':Valid'      , 1, PDO::PARAM_INT);
-		$sth->bindParam(':dStart'     , $this->dStart, PDO::PARAM_STR);
-		$sth->bindParam(':dLastUpdate', $this->dLastUpdate, PDO::PARAM_STR);
+		$sth->bindParam(':Start'     , $this->dStart, PDO::PARAM_STR);
+		$sth->bindParam(':LastUpdate', $this->dLastUpdate, PDO::PARAM_STR);
 		if ($result = $sth->execute()) {
 			$iReturn = ERR_NO_ERROR;
 		}
@@ -135,19 +135,22 @@ class UserSession {
 		$sQuery = 'UPDATE UserSession SET ' . 
 				  'UserId=:UserId,' . 
 				  'Valid=:Valid,' .
-				  'Start=:dStart,' .
-				  'LastUpdate=:dLastUpdate ' . 
+				  'Start=:Start,' .
+				  'LastUpdate=:LastUpdate ' . 
 				  'WHERE SessionId=:SessionId';
 		$sth = $this->q->core->prepare($sQuery);
 		$sth->bindParam(':SessionId'  , $this->sSessionId, PDO::PARAM_STR);
 		$sth->bindValue(':RegionId'   , '', PDO::PARAM_STR);
 		$sth->bindParam(':UserId'     , $this->UserId, PDO::PARAM_STR);
 		$sth->bindValue(':Valid'      , 1, PDO::PARAM_INT);
-		$sth->bindParam(':dStart'     , $this->dStart, PDO::PARAM_STR);
-		$sth->bindParam(':dLastUpdate', $this->dLastUpdate, PDO::PARAM_STR);
+		$sth->bindParam(':Start'     , $this->dStart, PDO::PARAM_STR);
+		$sth->bindParam(':LastUpdate', $this->dLastUpdate, PDO::PARAM_STR);
 		if ($result = $sth->execute()) {
-			$sQuery = "UPDATE UserLockList SET LastUpdate='" . $this->dLastUpdate . "' WHERE SessionId='" . $this->sSessionId . "'";
-			$this->q->core->query($sQuery);
+			$sQuery = 'UPDATE UserLockList SET LastUpdate=:LastUpdate WHERE SessionId=:SessionId';
+			$sth = $this->q->core->prepare($sQuery);
+			$sth->bindParam(':LastUpdate', $this->dLastUpdate, PDO::PARAM_STR);
+			$sth->bindParam(':SessionId'  , $this->sSessionId, PDO::PARAM_STR);
+			$sth->execute();
 			$iReturn = ERR_NO_ERROR;
 		}
 		return $iReturn;
