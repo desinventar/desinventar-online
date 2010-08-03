@@ -132,13 +132,20 @@ class UserSession {
 		$iReturn = ERR_DEFAULT_ERROR;
 		// Always update this field...
 		$this->dLastUpdate = gmdate('c');
-		$sQuery = "UPDATE UserSession SET " . 
-				  "UserId='"   . $this->UserId  . "'," .
-				  "Valid=1," .
-				  "Start='"      . $this->dStart     . "'," .
-				  "LastUpdate='" . $this->dLastUpdate . "'" .
-				  "WHERE SessionId ='" . $this->sSessionId . "'";
-		if ($result = $this->q->core->query($sQuery)) {
+		$sQuery = 'UPDATE UserSession SET ' . 
+				  'UserId=:UserId,' . 
+				  'Valid=:Valid,' .
+				  'Start=:dStart,' .
+				  'LastUpdate=:dLastUpdate ' . 
+				  'WHERE SessionId=:SessionId';
+		$sth = $this->q->core->prepare($sQuery);
+		$sth->bindParam(':SessionId'  , $this->sSessionId, PDO::PARAM_STR);
+		$sth->bindValue(':RegionId'   , '', PDO::PARAM_STR);
+		$sth->bindParam(':UserId'     , $this->UserId, PDO::PARAM_STR);
+		$sth->bindValue(':Valid'      , 1, PDO::PARAM_INT);
+		$sth->bindParam(':dStart'     , $this->dStart, PDO::PARAM_STR);
+		$sth->bindParam(':dLastUpdate', $this->dLastUpdate, PDO::PARAM_STR);
+		if ($result = $sth->execute()) {
 			$sQuery = "UPDATE UserLockList SET LastUpdate='" . $this->dLastUpdate . "' WHERE SessionId='" . $this->sSessionId . "'";
 			$this->q->core->query($sQuery);
 			$iReturn = ERR_NO_ERROR;
