@@ -29,7 +29,7 @@ class UserSession {
 		$this->q = new Query();
 		$num_args = func_num_args();
 		if ($num_args > 0) {
-			if (func_get_arg(0) != "") {  
+			if (func_get_arg(0) != '') {  
 				$this->sSessionId = func_get_arg(0);
 			}
 		}
@@ -92,7 +92,7 @@ class UserSession {
 	}
 
 	public function logout() {
-		return $this->setUser("");
+		return $this->setUser('');
 	}
 
 	public function setUser($prmUserId) {
@@ -160,9 +160,11 @@ class UserSession {
 	// database.
 	public function delete() {
 		$iReturn = ERR_DEFAULT_ERROR;
-		$sQuery = "DELETE FROM UserSession WHERE SessionId='" . $this->sSessionId . "'";
-		if ($result = $this->q->core->query($sQuery)) {
-			$this->UserId = "";
+		$sQuery = 'DELETE FROM UserSession WHERE SessionId=:SessionId';
+		$sth = $this->q->core->prepare($sQuery);
+		$sth->bindParam(':SessionId'  , $this->sSessionId, PDO::PARAM_STR);
+		if ($result = $sth->execute()) {
+			$this->UserId = '';
 			$iReturn = ERR_NO_ERROR;
 		}
 		return $iReturn;
@@ -193,7 +195,7 @@ class UserSession {
 	} // open()
 
 	public function close($prmRegionId = '') {
-		return $this->open("");
+		return $this->open('');
 	} // close()
 
 	// Validate a user/passwd pair against database
@@ -202,9 +204,15 @@ class UserSession {
 		if (! $withCrypt) {
 			$prmUserPasswd = md5($prmUserPasswd);
 		}
-		$sQuery = "SELECT * FROM User WHERE (UserId='" . $prmUserId . "' OR UserNotes LIKE '%(UserName=" . $prmUserId . ")%') AND (UserPasswd='" . $prmUserPasswd . "')" ;
+		$sQuery = 'SELECT * FROM User WHERE (UserId=:UserId OR UserNotes LIKE :UserNotes) AND UserPasswd=:UserPasswd';
+		fb($sQuery);
+		$sth = $this->q->core->prepare($sQuery);
+		$sth->bindParam(':UserId', $prmUserId, PDO::PARAM_STR);
+		$sth->bindValue(':UserNotes', '%(UserName=' . $prmUserId. ')%', PDO::PARAM_STR);
+		$sth->bindParam(':UserPasswd', $prmUserPasswd, PDO::PARAM_STR);
+		$sth->execute();
 		try {
-			foreach($this->q->core->query($sQuery) as $row) {
+			while($row = $sth->fetch(PDO::FETCH_ASSOC)) {
 				$UserId = $row['UserId'];
 			}
 		} catch (Exception $e) {
