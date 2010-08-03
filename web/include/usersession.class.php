@@ -41,15 +41,18 @@ class UserSession {
 	// Read Session Information from Database
 	public function load($prmSessionId) {
 		$iReturn = ERR_UNKNOWN_ERROR;
-		$sQuery = "SELECT * FROM UserSession WHERE SessionId='" . $prmSessionId . "'";
 		try {
-			foreach($this->q->core->query($sQuery) as $row) {
+			$sQuery = 'SELECT * FROM UserSession WHERE SessionId=:SessionId';
+			$sth = $this->q->core->prepare($sQuery);
+			$sth->bindParam(':SessionId', $prmSessionId, PDO::PARAM_STR);
+			$sth->execute();
+			while($row = $sth->fetch(PDO::FETCH_ASSOC)) {
 				$this->sSessionId  = $row['SessionId'];
 				$this->UserId      = $row['UserId'];
 				$this->dStart      = $row['Start'];
 				$this->dLastUpdate = $row['LastUpdate'];
 				$iReturn = ERR_NO_ERROR;
-			} //foreach
+			} //while
 		} catch (Exception $e) {
 			showErrorMsg($e->getMessage());
 		}
@@ -94,9 +97,12 @@ class UserSession {
 
 	public function setUser($prmUserId) {
 		$iReturn = ERR_DEFAULT_ERROR;
-		$sQuery = "UPDATE UserSession SET UserId='" . $prmUserId . "' " .
-		          "WHERE SessionId='" . $this->sSessionId . "'";
-		if ($result = $this->q->core->query($sQuery)) {
+		$sQuery = 'UPDATE UserSession SET UserId=:UserId ' . 
+		          'WHERE SessionId=:SessionId';
+		$sth = $this->q->core->prepare($sQuery);
+		$sth->bindParam(':UserId', $prmUserId, PDO::PARAM_STR);
+		$sth->bindParam(':SessionId', $this->sSessionId, PDO::PARAM_STR);
+		if ($result = $sth->execute()) {
 			$iReturn = ERR_NO_ERROR;
 			$this->UserId = $prmUserId;
 		}
@@ -107,15 +113,15 @@ class UserSession {
 	// this could be an anonymous or authenticated session
 	public function insert() {
 		$iReturn = ERR_DEFAULT_ERROR;
-		$sQuery = "INSERT INTO UserSession VALUES (" . 
-				  "'" . $this->sSessionId . "'," .
-				  "''," .
-				  "'" . $this->UserId  . "'," .
-				  "1," .
-				  "'" . $this->dStart     . "'," .
-				  "'" . $this->dLastUpdate . "'" .
-				  ")";
-		if ($result = $this->q->core->query($sQuery)) {
+		$sQuery = 'INSERT INTO UserSession VALUES (:SessionId,:RegionId,:UserId,:Valid,:dStart,:dLastUpdate)';
+		$sth = $this->q->core->prepare($sQuery);
+		$sth->bindParam(':SessionId'  , $this->sSessionId, PDO::PARAM_STR);
+		$sth->bindValue(':RegionId'   , '', PDO::PARAM_STR);
+		$sth->bindParam(':UserId'     , $this->UserId, PDO::PARAM_STR);
+		$sth->bindValue(':Valid'      , 1, PDO::PARAM_INT);
+		$sth->bindParam(':dStart'     , $this->dStart, PDO::PARAM_STR);
+		$sth->bindParam(':dLastUpdate', $this->dLastUpdate, PDO::PARAM_STR);
+		if ($result = $sth->execute()) {
 			$iReturn = ERR_NO_ERROR;
 		}
 		return $iReturn;
