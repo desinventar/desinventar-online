@@ -205,7 +205,6 @@ class UserSession {
 			$prmUserPasswd = md5($prmUserPasswd);
 		}
 		$sQuery = 'SELECT * FROM User WHERE (UserId=:UserId OR UserNotes LIKE :UserNotes) AND UserPasswd=:UserPasswd';
-		fb($sQuery);
 		$sth = $this->q->core->prepare($sQuery);
 		$sth->bindParam(':UserId', $prmUserId, PDO::PARAM_STR);
 		$sth->bindValue(':UserNotes', '%(UserName=' . $prmUserId. ')%', PDO::PARAM_STR);
