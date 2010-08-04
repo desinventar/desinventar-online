@@ -702,6 +702,7 @@ class Query extends PDO {
 		$QueryItem['Cause']     = '';
 		$QueryItem['Geography'] = '';
 		$QueryItem['Custom']    = '';
+		$QueryItem['EEField']   = '';
 		$QueryDisasterSerial    = '';
 		$QueryDisasterSerialOp  = ' AND ';
 
@@ -719,14 +720,15 @@ class Query extends PDO {
 		$First = true;
 		$EEQuery = '';
 		foreach($dat['EEFieldQuery'] as $EEField => $QueryParams) {
-			if (array_key_exists('Type', $QueryParams)) {
+			if ( (array_key_exists('Operator', $QueryParams)) && 
+			     (array_key_exists('Type', $QueryParams)) ) {
 				$QueryTmp = '';
 				switch($QueryParams['Type']) {
 					case 'INTEGER':
 						switch($QueryParams['Operator']) {
 							case '>=':
-								if (is_numeric($QueryParams['Value2'])) {
-									$QueryTmp = 'E.' . $EEField . $QueryParams['Operator'] . $QueryParams['Value2'];
+								if (is_numeric($QueryParams['Value1'])) {
+									$QueryTmp = 'E.' . $EEField . $QueryParams['Operator'] . $QueryParams['Value1'];
 								}
 							break;
 							case '<=':
@@ -744,6 +746,9 @@ class Query extends PDO {
 									$QueryTmp = '(' . 'E.' . $EEField . '>=' . $QueryParams['Value1'] . ' AND ' . 'E.' . $EEField . '<=' . $QueryParams['Value2'] . ')';
 								}
 							break;
+							default:
+									$QueryTmp = '(' . '(E.' . $EEField . '>0) OR (E.' . $EEField . '=-1)' . ')';
+							break;
 						}
 					break;
 					case 'TEXT':
@@ -751,18 +756,18 @@ class Query extends PDO {
 							$QueryTmp = 'E.' . $EEField . " LIKE '" . $QueryParams['Value'] . "'";
 						}
 					break;
-				}
+				} //switch
 				if ($QueryTmp != '') {
 					if (! $First) {
 						$EEQuery .= ' AND ';
 					}
 					$First = false;
 					$EEQuery .= $QueryTmp;
-				}
-			}
-		}
+				} //if
+			} //if
+		} //foreach
+		$QueryItem['EEField'] = $EEQuery;
 		
-
 		foreach ($dat as $k=>$v) {
 			// replace D_ by D.
 			if (substr($k, 1, 1) == "_") {
