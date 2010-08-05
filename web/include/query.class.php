@@ -1009,6 +1009,34 @@ class Query extends PDO {
 		}
 	}
 
+
+	public function getGroupFieldName($prmGroup) {
+		$GroupFieldName = '';
+		$gp = explode("|", $prmGroup);
+		switch ($gp[1]) {
+			case "D.DisasterBeginTime":
+				// Check if exist Operator(s): Year, month, week, day
+				if (!empty($gp[0])) {
+					$GroupFieldName = substr($gp[1],2) ."_". $gp[0] ; // delete last ,'_',
+				} else {
+					$GroupFieldName = $gp[1];
+				} //if
+			break;
+			case "D.GeographyId":
+				// Lev is 0, 1, .. N 
+				$lev = isset($gp[0]) ? $gp[0]: 0;
+				$off = ($lev * 5) + 5;
+				$GroupFieldName = substr($gp[1],2) .'_' . $lev;
+			break;
+			default:
+				if (!empty($gp[1])) {
+					$GroupFieldName = $gp[1];
+				}
+			break;
+		} //switch
+		return $GroupFieldName;
+	} //function
+	
 	// Generate Special SQL with grouped fields
 	public function genSQLProcess ($dat, $opc) {
 		$sql = '';
@@ -1035,7 +1063,7 @@ class Query extends PDO {
 							case "YDAY":   $func = "SUBSTR(". $gp[1] .", 1, 10) ";		break; //%Y-%m-%d
 							case "DAY":    $func = "STRFTIME('%j', ". $gp[1] .") ";	break; //%j
 						} //switch
-						$sel[$j] = $func ."AS ". substr($gp[1],2) ."_". $gp[0] ; // delete last ,'_',
+						$sel[$j] = $func . ' AS '. substr($gp[1],2) ."_". $gp[0] ; // delete last ,'_',
 						$grp[$j] = $func;
 					} else {
 						$sel[$j] = $gp[1];
@@ -1063,37 +1091,40 @@ class Query extends PDO {
 		
 		// Process Field in select and group
 		if (!is_array($opc['Field'])) {
-			$f[0] = $opc['Field'];
+			$FieldList[0] = $opc['Field'];
 		} else {
-			$f = $opc['Field'];
+			$FieldList = $opc['Field'];
 		}
 
-		foreach ($f as $field) {
+		foreach ($FieldList as $Field) {
 			// Field(s) to show
-			$fl = explode("|", $field);
+			$fl = explode("|", $Field);
+			$FieldName  = $fl[0];
+			$FieldOp    = $fl[1];
+			$FieldValue = $fl[2];
 			// 2009-11-30 (jhcaiced) This is un ugly fix, we need to change this...
-			if ( ($fl[0] == 'D.EffectFarmingAndForestQ') ||
-			     ($fl[0] == 'D.EffectLiveStockQ') ||
-			     ($fl[0] == 'D.EffectRoadsQ') ||
-			     ($fl[0] == 'D.EffectEducationCentersQ') ||
-			     ($fl[0] == 'D.EffectMedicalCentersQ')
+			if ( ($FieldName == 'D.EffectFarmingAndForestQ') ||
+			     ($FieldName == 'D.EffectLiveStockQ') ||
+			     ($FieldName == 'D.EffectRoadsQ') ||
+			     ($FieldName == 'D.EffectEducationCentersQ') ||
+			     ($FieldName == 'D.EffectMedicalCentersQ')
 			   ) {
-				$fl[0] = substr($fl[0],0,-1);
+				$FieldName = substr($FieldName,0,-1);
 			}			
 			// SUM > 0 values
-			if ($fl[1] == ">") {
-				$sel[$j] = "SUM(". $fl[0] .") AS ". substr($fl[0],2);
-				$whr[$j] = "OR ". $fl[0] . $fl[1] . $fl[2];
-			} elseif ($fl[1] == "S") {
+			if ($FieldOp == ">") {
+				$sel[$j] = "SUM(". $FieldName .") AS ". substr($FieldName,2);
+				$whr[$j] = "OR ". $FieldName . $FieldOp . $FieldValue;
+			} elseif ($FieldOp == "S") {
 				// S, code to SECTORS 
-				$sel[$j] = "SUM(ABS(". $fl[0] .")) AS ". substr($fl[0],2);
-				$whr[$j] = "OR ". $fl[0] . " = " . $fl[2];
+				$sel[$j] = "SUM(ABS(". $FieldName .")) AS ". substr($FieldName, 2);
+				$whr[$j] = "OR ". $FieldName . " = " . $FieldValue;
 			} else {
-			// Count Reports
-				$sel[$j] = "COUNT(". $fl[0] .") AS ". substr($fl[0],2) ."_";
+				// Count Reports
+				$sel[$j] = 'COUNT('. $FieldName .') AS ' . substr($FieldName, 2); //. "_";
 				// Counts Reports with "Hay"
-				if ($fl[1] == "=") {
-					$whr[$j] = "OR (". $fl[0] . $fl[1] . $fl[2] . " OR ". $fl[0] .">0)";
+				if ($FieldOp == '=') {
+					$whr[$j] = "OR (". $FieldName . $FieldOp . $FieldValue . " OR ". $FieldName .">0)";
 				}
 			}
 			$j++;
