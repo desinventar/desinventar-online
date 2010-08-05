@@ -58,6 +58,7 @@ if ($GraphCommand != '') {
 		}
 	} // foreach
 
+	/*
 	$post['NumberOfVerticalAxis'] = 1;
 	$post['FieldList'] = array($post['_G+Field']);
 	if (isset($post['_G+Field2']) && !empty($post['_G+Field2'])) {
@@ -105,6 +106,15 @@ if ($GraphCommand != '') {
 	//$post['NumberOfVerticalAxis'] = 1;
 	//$dislist = $ResultData['D.DisasterId'];
 	$dislist = $ResultData;
+	*/
+
+	$opc['Group'] = $ele;
+	$opc['Field'] = array($post['_G+Field']);
+	if (isset($post['_G+Field2']) && !empty($post['_G+Field2'])) {
+		array_push($opc['Field'], $post['_G+Field2']);
+	}
+	$sql = $us->q->genSQLProcess($qd, $opc);
+	$dislist = $us->q->getassoc($sql);
 
 	if (!empty($dislist)) {
 		// Process results data
