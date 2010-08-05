@@ -21,8 +21,10 @@ $RegionLabel = $us->q->getDBInfoValue('RegionLabel');
 $t->assign('RegionLabel', $RegionLabel);
 fixPost($post);
 // load levels to display in totalizations
-foreach ($us->q->loadGeoLevels('', -1, false) as $k=>$i)
+foreach ($us->q->loadGeoLevels('', -1, false) as $k=>$i) {
 	$st["GraphGeographyId_". $k] = array($i[0], $i[1]);
+} //foreach
+
 $dic = array_merge(array(), $st);
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Graph', $lg));
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
@@ -55,13 +57,33 @@ if ($GraphCommand != '') {
 			$ele[] = "|". $itm;
 		}
 	} // foreach
-	$opc['Group'] = $ele;
-	$opc['Field'] = array($post['_G+Field']);
+
+	$post['NumberOfVerticalAxis'] = 1;
+	$post['FieldList'] = array($post['_G+Field']);
 	if (isset($post['_G+Field2']) && !empty($post['_G+Field2'])) {
-		array_push($opc['Field'], $post['_G+Field2']);
+		$post['NumberOfVerticalAxis'] = 2;
+		array_push($post['FieldList'], $post['_G+Field2']);
 	}
-	$sql = $us->q->genSQLProcess($qd, $opc);
-	$dislist = $us->q->getassoc($sql);
+
+	$ResultData = array();	
+	foreach($post['FieldList'] as $GraphVariable) {
+		$VariableName = substr($GraphVariable,0,strpos($GraphVariable,'|'));
+		fb($VariableName);
+		$opc['Group'] = $ele;
+		$opc['Field'] = $GraphVariable;
+		$sql = $us->q->genSQLProcess($qd, $opc);
+		$TmpData = $us->q->getassoc($sql);
+		$TmpData1 = array();
+		foreach($TmpData as $DataItem) {
+			$Index = $DataItem['DisasterBeginTime_YEAR'];
+			$TmpData1[$Index] = $DataItem;
+		}
+		$ResultData[$VariableName] = $TmpData1;
+	}
+	fb($ResultData);
+	$post['NumberOfVerticalAxis'] = 1;
+	$dislist = $ResultData['D.DisasterId'];
+
 	if (!empty($dislist)) {
 		// Process results data
 		$dl = $us->q->prepareList($dislist, "GRAPH");

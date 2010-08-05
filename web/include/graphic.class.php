@@ -34,13 +34,15 @@ class Graphic {
 		} elseif (substr($opc['_G+Type'],2,17) == "DisasterBeginTime") {
 			$gType = "TEMPO";				// One var x time
 			// Set 2 axis graph only in Bars..
-			if (isset($opc['_G+Field2']) && !empty($opc['_G+Field2']) && ($kind == "BAR" || $kind == "LINE"))
+			if ( ($opc['NumberOfVerticalAxis'] > 1) && ($kind == "BAR" || $kind == "LINE") ) {
 				$gType = "2TEMPO";			// Two vars x time
+			}
 		} else {
-			if (isset($opc['_G+Field2']) && !empty($opc['_G+Field2']) && ($kind == "BAR" || $kind == "LINE"))
+			if ( ($opc['NumberOfVerticalAxis'] > 1) && ($kind == "BAR" || $kind == "LINE") ) {
 				$gType = "2COMPAR";			// Two vars x event, cause...
-			else
+			} else {
 				$gType = $kind;				// Pie Comparatives
+			}
 		}
 		if ($gType == "2TEMPO" || $gType == "2COMPAR") {
 			$sY1AxisLabel = $oLabels[1];
