@@ -64,8 +64,16 @@ if ($GraphCommand != '') {
 		$post['NumberOfVerticalAxis'] = 2;
 		array_push($post['FieldList'], $post['_G+Field2']);
 	}
-
-	$ResultData = array();	
+	
+	// Try to find the X Axis Field to Use (DisasterBeginTime)
+	$XAxisField = '';
+	foreach($ele as $XAxisItem) {
+		$fl = explode('|', $XAxisItem);
+		if (substr($fl[1],2) == 'DisasterBeginTime') {
+			$XAxisField = $us->q->getGroupFieldName($XAxisItem);
+		}
+	}
+	$ResultData = array();
 	foreach($post['FieldList'] as $GraphVariable) {
 		$VariableName = substr($GraphVariable,0,strpos($GraphVariable,'|'));
 		fb($VariableName);
@@ -75,7 +83,7 @@ if ($GraphCommand != '') {
 		$TmpData = $us->q->getassoc($sql);
 		$TmpData1 = array();
 		foreach($TmpData as $DataItem) {
-			$Index = $DataItem['DisasterBeginTime_YEAR'];
+			$Index = $DataItem[$XAxisField];
 			$TmpData1[$Index] = $DataItem;
 		}
 		$ResultData[$VariableName] = $TmpData1;
