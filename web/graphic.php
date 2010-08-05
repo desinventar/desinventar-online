@@ -58,7 +58,6 @@ if ($GraphCommand != '') {
 		}
 	} // foreach
 
-	/*
 	$post['NumberOfVerticalAxis'] = 1;
 	$post['FieldList'] = array($post['_G+Field']);
 	if (isset($post['_G+Field2']) && !empty($post['_G+Field2'])) {
@@ -66,6 +65,7 @@ if ($GraphCommand != '') {
 		array_push($post['FieldList'], $post['_G+Field2']);
 	}
 	
+	/*	
 	// Try to find the X Axis Field to Use (DisasterBeginTime)
 	$XAxisField = '';
 	foreach($ele as $XAxisItem) {
