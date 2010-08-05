@@ -81,16 +81,30 @@ if ($GraphCommand != '') {
 		$opc['Field'] = $GraphVariable;
 		$sql = $us->q->genSQLProcess($qd, $opc);
 		$TmpData = $us->q->getassoc($sql);
-		$TmpData1 = array();
+		fb($TmpData);
 		foreach($TmpData as $DataItem) {
 			$Index = $DataItem[$XAxisField];
-			$TmpData1[$Index] = $DataItem;
+			foreach($DataItem as $Key => $Value) {
+				$ResultData[$Index][$Key] = $Value;
+			} //foreach
 		}
-		$ResultData[$VariableName] = $TmpData1;
 	}
+	
+	// Complete Data Series, fill with zeros...
+	foreach($post['FieldList'] as $GraphVariable) {
+		$VariableName = substr($GraphVariable,0,strpos($GraphVariable,'|'));
+		$VariableName = substr($VariableName, 2);
+		foreach($ResultData as $XAxis => $DataItem) {
+			if (! array_key_exists($VariableName, $DataItem)) {
+				$ResultData[$XAxis][$VariableName] = 0;
+			}
+		}
+	}
+	
 	fb($ResultData);
-	$post['NumberOfVerticalAxis'] = 1;
-	$dislist = $ResultData['D.DisasterId'];
+	//$post['NumberOfVerticalAxis'] = 1;
+	//$dislist = $ResultData['D.DisasterId'];
+	$dislist = $ResultData;
 
 	if (!empty($dislist)) {
 		// Process results data
