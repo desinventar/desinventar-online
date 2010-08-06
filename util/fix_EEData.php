@@ -9,8 +9,7 @@
 	require_once(BASE . '/include/diimport.class.php');
 	require_once(BASE . '/include/diregion.class.php');
 	
-	$RegionId = 'ECU-1250695659-ecuador_sist_de_inf_de_desastres_y_emergencias';
-	$RegionId = 'BOL-1248983224-bolivia_inventario_historico_de_desastres';
+	$RegionId = 'GAR-ISDR-2011_ECU';
 	$us->login('diadmin','di8');
 	$us->open($RegionId);
 	//$r = new DIRegion($us, $RegionId);

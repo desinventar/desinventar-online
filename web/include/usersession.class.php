@@ -171,7 +171,7 @@ class UserSession {
 	} // delete()
 
 	// Associate a RegionId with the session
-	public function open($prmRegionId) {
+	public function open($prmRegionId, $prmDBFile = '') {
 		$iReturn = ERR_NO_ERROR;
 		$this->clearLocks();
 		
@@ -180,13 +180,17 @@ class UserSession {
 		$this->UserRoleValue = ROLE_NONE;
 		
 		$DBDir = VAR_DIR . '/database/' . $prmRegionId;
-		$DBFile = $DBDir . '/desinventar.db';
+		if ($prmDBFile == '') {
+			$DBFile = $DBDir . '/desinventar.db';
+		} else {
+			$DBFile = $DBDir . '/' . $prmDBFile;
+		}
 		if (! file_exists($DBFile)) {
 			$iReturn = ERR_NO_DATABASE;
 		}		
 		if ($iReturn > 0) {
 			$this->awake();
-			$this->q->setDBConnection($prmRegionId);
+			$this->q->setDBConnection($prmRegionId, $DBFile);
 			$this->RegionId = $prmRegionId;
 			$this->UserRole = $this->getUserRole($prmRegionId);
 			$this->UserRoleValue = $this->getUserRoleValue($prmRegionId);
