@@ -17,9 +17,9 @@ foreach($us->q->core->query("SELECT * FROM Region WHERE RegionId LIKE 'GAR-ISDR-
 	$RegionList[] = $row['RegionId'];
 }
 //DEBUG
-$RegionList = array('GAR-ISDR-2011_ECU');
+$RegionList = array('GAR-ISDR-2011_MEX');
 foreach ($RegionList as $RegionId) {
-	$us->open($RegionId, 'desinventar_2009.db');
+	$us->open($RegionId);
 	print $RegionId . "\n";
 	
 	$sQuery = 'SELECT COUNT(*) AS C FROM Disaster';
