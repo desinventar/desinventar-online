@@ -11,7 +11,7 @@
 	
 	$RegionId = 'GAR-ISDR-2011_ECU';
 	$us->login('diadmin','di8');
-	$us->open($RegionId);
+	$us->open($RegionId,'desinventar.db');
 	//$r = new DIRegion($us, $RegionId);
 	//$r->copyEvents('spa');
 	//$r->copyCauses('spa');
@@ -20,18 +20,36 @@
 	//$a = $i->importFromCSV('/tmp/mx_cause.csv', DI_CAUSE, true, 0);
 	//$a = $i->importFromCSV('/tmp/mx_geography.csv', DI_GEOGRAPHY, true, 0);
 	//$a = $i->importFromCSV('/tmp/mx_disaster.csv', DI_DISASTER, true, 0);
+	$us->q->dreg->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	try {
 	$sQuery = 'SELECT DisasterId FROM EEData';
-	foreach($us->q->dreg->query($sQuery) as $row) {
-		$sQuery = 'SELECT COUNT(DisasterId) AS C FROM Disaster WHERE DisasterId="' . $row['DisasterId'] . '"';
-		$result = $us->q->dreg->query($sQuery);
-		while($line = $result->fetch()) {
-			$count = $line[0];
+	$sth = $us->q->dreg->prepare($sQuery);
+	$sth->execute();
+
+	$sQuery = 'SELECT DisasterId FROM Disaster WHERE DisasterId=:DisasterId';
+	$sth2 = $us->q->dreg->prepare($sQuery);
+
+	$sQuery = 'DELETE FROM EEData WHERE DisasterId=:DisasterId';
+	$sth3 = $us->q->dreg->prepare($sQuery);
+	
+	$iCount = 0;
+	while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+		$iCount++;
+		printf('%5d %s', $iCount, $row['DisasterId']);
+		$RecordCount = 0;
+		$sth2->execute(array('DisasterId' => $row['DisasterId']));
+		while($line = $sth2->fetch(PDO::FETCH_ASSOC)) {
+			$RecordCount++;
 		}
-		if ($count == 0) {
-			$sQuery = 'DELETE FROM EEData WHERE DisasterId="' . $row['DisasterId'] . '"';
-			$us->q->dreg->query($sQuery);
-			print $row['DisasterId'] . ' ' . $count . "\n";
+		print ' ' . $RecordCount . ' ';
+		if ($RecordCount == 0) {
+			$sth3->execute(array('DisasterId' => $row['DisasterId']));
+			print 'DELETE : ' . $row['DisasterId'];
 		}
+		print "\n";
+	}
+	} catch (Exception $e) {
+		showErrorMsg("Error !: " . $e->getMessage());
 	}
 	$us->close();
 	$us->logout();
