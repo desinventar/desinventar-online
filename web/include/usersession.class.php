@@ -100,9 +100,8 @@ class UserSession {
 		$sQuery = 'UPDATE UserSession SET UserId=:UserId ' . 
 		          'WHERE SessionId=:SessionId';
 		$sth = $this->q->core->prepare($sQuery);
-		$sth->bindParam(':UserId', $prmUserId, PDO::PARAM_STR);
-		$sth->bindParam(':SessionId', $this->sSessionId, PDO::PARAM_STR);
-		if ($result = $sth->execute()) {
+		if ($result = $sth->execute(array(':UserId'    => $prmUserId,
+		                                  ':SessionId' => $this->sSessionId))) {
 			$iReturn = ERR_NO_ERROR;
 			$this->UserId = $prmUserId;
 		}
