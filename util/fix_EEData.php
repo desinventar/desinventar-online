@@ -9,7 +9,7 @@
 	require_once(BASE . '/include/diimport.class.php');
 	require_once(BASE . '/include/diregion.class.php');
 	
-	$RegionId = 'GAR-ISDR-2011_ECU';
+	$RegionId = 'GAR-ISDR-2011_MEX';
 	$us->login('diadmin','di8');
 	$us->open($RegionId,'desinventar.db');
 	//$r = new DIRegion($us, $RegionId);
@@ -22,32 +22,44 @@
 	//$a = $i->importFromCSV('/tmp/mx_disaster.csv', DI_DISASTER, true, 0);
 	$us->q->dreg->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	try {
-	$sQuery = 'SELECT DisasterId FROM EEData';
-	$sth = $us->q->dreg->prepare($sQuery);
-	$sth->execute();
+		$sQuery = 'SELECT COUNT(DisasterId) FROM Disaster';
+		$res = $us->q->dreg->query($sQuery);
+		$TotalCountD = $res->fetchColumn();
 
-	$sQuery = 'SELECT DisasterId FROM Disaster WHERE DisasterId=:DisasterId';
-	$sth2 = $us->q->dreg->prepare($sQuery);
+		$sQuery = 'SELECT COUNT(DisasterId) FROM EEData';
+		$res = $us->q->dreg->query($sQuery);
+		$TotalCountE = $res->fetchColumn();
 
-	$sQuery = 'DELETE FROM EEData WHERE DisasterId=:DisasterId';
-	$sth3 = $us->q->dreg->prepare($sQuery);
-	
-	$iCount = 0;
-	while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
-		$iCount++;
-		printf('%5d %s', $iCount, $row['DisasterId']);
-		$RecordCount = 0;
-		$sth2->execute(array('DisasterId' => $row['DisasterId']));
-		while($line = $sth2->fetch(PDO::FETCH_ASSOC)) {
-			$RecordCount++;
+		print 'Disaster Records : ' . $TotalCountD . "\n";
+		print 'EEData Records   : ' . $TotalCountE . "\n";
+
+		$sQuery = 'SELECT DisasterId FROM EEData';
+		$sth = $us->q->dreg->prepare($sQuery);
+		$sth->execute();
+		
+		$sQuery = 'SELECT DisasterId FROM Disaster WHERE DisasterId=:DisasterId';
+		$sth2 = $us->q->dreg->prepare($sQuery);
+
+		$sQuery = 'DELETE FROM EEData WHERE DisasterId=:DisasterId';
+		$sth3 = $us->q->dreg->prepare($sQuery);
+		
+		$iCount = 0;
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+			$iCount++;
+			
+			$RecordCount = 0;
+			$sth2->execute(array('DisasterId' => $row['DisasterId']));
+			while($line = $sth2->fetch(PDO::FETCH_ASSOC)) {
+				$RecordCount++;
+			}
+			if ($RecordCount == 0) {
+				$sth3->execute(array('DisasterId' => $row['DisasterId']));
+				printf('%5d %s', $iCount, $row['DisasterId']);
+				print ' ' . $RecordCount . ' ';
+				print 'DELETE : ' . $row['DisasterId'];
+				print "\n";
+			}
 		}
-		print ' ' . $RecordCount . ' ';
-		if ($RecordCount == 0) {
-			$sth3->execute(array('DisasterId' => $row['DisasterId']));
-			print 'DELETE : ' . $row['DisasterId'];
-		}
-		print "\n";
-	}
 	} catch (Exception $e) {
 		showErrorMsg("Error !: " . $e->getMessage());
 	}
