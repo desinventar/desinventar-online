@@ -84,7 +84,7 @@
 							jQuery('#cardsRecordCount').val(data.RecordCount);
 							$('DICard').reset();	
 							//doDatacardClear();
-							jQuery('#divDatacardWindow').show();
+							jQuery('#divDatacardWindow').trigger('display');
 							doDatacardNavButtonsEnable();
 							difw.show();
 						},
