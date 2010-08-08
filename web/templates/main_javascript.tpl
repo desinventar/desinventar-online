@@ -310,7 +310,9 @@
 		tb.render('toolbar');
 		tb.add('-', {id: 'musr', text: '{-#tuser#-}{-if $desinventarUserId != ""-}: <b>{-$desinventarUserId-}</b>{-/if-}', menu: muser });
 		tb.add('-', {id: 'mqry', text: '{-#msearch#-}',		menu: mquery });
-		tb.add('-', {id: 'minp', text: '{-#mdcsection#-}',	menu: mcards });
+		{-if $desinventarRegionId != "" -}
+			tb.add('-', {id: 'minp', text: '{-#mdcsection#-}',	menu: mcards });
+		{-/if-}
 		tb.add('-', {id: 'mdbs', text: '{-#mdatabases#-}',	menu: mbases });
 		tb.add('-', {id: 'mhlp', text: '{-#mhelp#-}',			menu: mhelp  });
 		tb.add('->',{id: 'mnuRegionInfo', text: '[{-$RegionLabel-}]', 		handler: onMenuItem });
