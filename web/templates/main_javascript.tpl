@@ -268,7 +268,8 @@
 		var mcards = new Ext.menu.Menu({
 			id: 'cardsMenu',
 			items: [
-				{id:'mnuDatacardInsertEdit', text: '{-#mnuDatacardInsertEdit#-}',	handler: onMenuItem  },
+				
+				{id:'mnuDatacardInsertEdit', text:{-if $role == "" || $role == "OBSERVER"-}'{-#mnuDatacardView#-}'{-else-}'{-#mnuDatacardInsertEdit#-}'{-/if-},	handler: onMenuItem  },
 				{-if $role == "SUPERVISOR" || $role == "ADMINREGION"-}
 					{id:'mnuDatacardImport', text: '{-#mnuDatacardImport#-}',	handler: onMenuItem  },
 					{id:'mnuDatabaseBackup', text: '{-#mnuDatabaseBackup#-}',	handler: onMenuItem  },
@@ -309,9 +310,7 @@
 		tb.render('toolbar');
 		tb.add('-', {id: 'musr', text: '{-#tuser#-}{-if $desinventarUserId != ""-}: <b>{-$desinventarUserId-}</b>{-/if-}', menu: muser });
 		tb.add('-', {id: 'mqry', text: '{-#msearch#-}',		menu: mquery });
-		{-if ($role == "USER" || $role == "SUPERVISOR" || $role == "OBSERVER" || $role == "ADMINREGION")-}
-			tb.add('-', {id: 'minp', text: '{-#mdcsection#-}',	menu: mcards });
-		{-/if-}
+		tb.add('-', {id: 'minp', text: '{-#mdcsection#-}',	menu: mcards });
 		tb.add('-', {id: 'mdbs', text: '{-#mdatabases#-}',	menu: mbases });
 		tb.add('-', {id: 'mhlp', text: '{-#mhelp#-}',			menu: mhelp  });
 		tb.add('->',{id: 'mnuRegionInfo', text: '[{-$RegionLabel-}]', 		handler: onMenuItem });
