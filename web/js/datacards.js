@@ -1,5 +1,8 @@
 function onReadyDatacards() {
 	jQuery('#divDatacardWindow').hide();
+	jQuery('#DICard').bind('show', function() {
+		alert('DICard Form Show');
+	});
 	jQuery('#DICard').submit(function() {
 		jQuery('#DatacardCommand').val(jQuery('#_CMD').val());
 		jQuery('#RecordAuthor').val(jQuery('#desinventarUserId').val());
@@ -620,16 +623,13 @@ function doDatacardCancel() {
 				changeOptions('btnDatacardCancel');
 				// clear Help text area
 				showtip('','#ffffff');
-				if (jQuery('#DisasterId').val() != '') {
-					valid = setDICardFromId(jQuery('#desinventarRegionId').val(), jQuery('#DisasterId').val());
-					
-					if (jQuery('#desinventarUserRoleValue').val() >= 2) {
-						disenabutton($('btnDatacardEdit'), false);
-					}
-					displayDatacardStatusMsg('');
-					doDatacardNavButtonsEnable();
-					//jQuery('#cardsRecordNumber').val(data.RecordNumber);
+
+				valid = setDICardFromId(jQuery('#desinventarRegionId').val(), jQuery('#DisasterId').val());
+				if (jQuery('#desinventarUserRoleValue').val() >= 2) {
+					disenabutton($('btnDatacardEdit'), false);
 				}
+				displayDatacardStatusMsg('');
+				doDatacardNavButtonsEnable();
 			},
 			'json'
 		);
