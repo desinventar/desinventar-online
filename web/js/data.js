@@ -38,7 +38,7 @@ function onReadyData() {
 }
 
 function setDIForm(prmDisasterId) {
-	//parent.w.collapse();
+	jQuery('#divDatacardWindow').trigger('display');
 	setDICardFromId(jQuery('#desinventarRegionId').val(), prmDisasterId);
 	difw.show();
 }

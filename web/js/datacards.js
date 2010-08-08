@@ -1,8 +1,32 @@
 function onReadyDatacards() {
 	jQuery('#divDatacardWindow').hide();
-	jQuery('#DICard').bind('show', function() {
-		alert('DICard Form Show');
+	
+	// Initialize controls in form when it is displayed
+	jQuery('#divDatacardWindow').bind('display', function() {
+		// Reset buttons
+		//doDatacardCancel();
+		doDatacardClear();
+		// Hide StatusMessages
+		displayDatacardStatusMsg('');
+		jQuery('#divDatacardStatusMsg').show();
+		// Hide window's parameters
+		jQuery('#divDatacardParameter').hide();
+		
+		DisableEnableForm($('DICard'), true);
+		changeOptions();
+
+		// Start with Basic Effects show
+		jQuery('#linkDatacardShowEffectsBasic').trigger('click');
+		
+		//Show Command Buttons only for Role>=USER
+		jQuery('.DatacardCmdButton').hide();
+		jQuery('#btnDatacardPrint').show();
+		if (parseInt(jQuery('#desinventarUserRoleValue').val()) >= 2) {
+			jQuery('.DatacardCmdButton').show();
+			displayDatacardStatusMsg('msgDatacardStartNew');
+		}
 	});
+
 	jQuery('#DICard').submit(function() {
 		jQuery('#DatacardCommand').val(jQuery('#_CMD').val());
 		jQuery('#RecordAuthor').val(jQuery('#desinventarUserId').val());
@@ -133,19 +157,6 @@ function onReadyDatacards() {
 		jQuery('#GeographyId').val(myGeographyId);
 	});	
 
-	// Hide StatusMessages
-	displayDatacardStatusMsg('');
-	jQuery('#divDatacardStatusMsg').show();
-	// Hide window's parameters
-	jQuery('#divDatacardParameter').hide();
-	
-	DisableEnableForm($('DICard'), true);
-	changeOptions();
-	UserRole = jQuery('#desinventarUserRole').val();
-	if (UserRole != '') {
-		displayDatacardStatusMsg('msgDatacardStartNew');
-	}
-
 	// Create periodic task to keep session alive...
 	var pe = new PeriodicalExecuter(doKeepSessionActive, 60);
 
@@ -263,8 +274,6 @@ function onReadyDatacards() {
 		doDatacardFind();
 	});
 
-	// Start with Basic Effects show
-	jQuery('#divDatacardEffectsBasic').show();
 	
 	// Switch between Basic and Additional Effects
 	jQuery('#linkDatacardShowEffectsBasic').click(function() {
@@ -279,12 +288,6 @@ function onReadyDatacards() {
 		return false;
 	});
 
-	//Show Command Buttons only for Role>=USER
-	jQuery('.DatacardCmdButton').hide;
-	jQuery('#btnDatacardPrint').show();
-	if (jQuery('#desinventarUserRoleValue').val() >= 2) {
-		jQuery('.DatacardCmdButton').show();
-	}
 } //onReadyDatacards()
 
 function displayDatacardStatusMsg(msgId) {
@@ -496,9 +499,7 @@ function doDatacardFind() {
 	}
 }
 
-function doDatacardNew() {
-	DisableEnableForm($('DICard'), false);
-	jQuery('#DisasterBeginTime0').focus();
+function doDatacardClear() {
 	jQuery('#DisasterId').val();
 	$('DICard').reset();
 	jQuery('#_CMD').val('insertDICard');
@@ -506,6 +507,11 @@ function doDatacardNew() {
 	jQuery('#DisasterBeginTime1').val('');
 	jQuery('#DisasterBeginTime2').val('');
 	jQuery('#cardsRecordNumber').val(0);
+}
+
+function doDatacardNew() {
+	DisableEnableForm($('DICard'), false);
+	jQuery('#DisasterBeginTime0').focus();
 	displayDatacardStatusMsg('msgDatacardFill');
 	changeOptions('btnDatacardNew');
 	jQuery('#divRecordNavigationInfo').hide();
