@@ -158,7 +158,7 @@ function onReadyDatacards() {
 	});	
 
 	// Create periodic task to keep session alive...
-	var pe = new PeriodicalExecuter(doKeepSessionActive, 60);
+	var pe = new PeriodicalExecuter(doKeepSessionAwake, 60);
 
 	// Validation of DisasterBeginTime and Suggest Serial for New Datacards
 	jQuery('#DisasterBeginTime0').blur(function() {
@@ -723,7 +723,7 @@ function doDatacardGotoNext() {
 	}
 }
 
-function doKeepSessionActive() {
+function doKeepSessionAwake() {
 	jQuery.post('index.php',
 		{cmd : 'cmdSessionAwake'},
 		function(data) {
