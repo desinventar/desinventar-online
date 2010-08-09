@@ -269,7 +269,7 @@
 			id: 'cardsMenu',
 			items: [
 				
-				{id:'mnuDatacardInsertEdit', text:{-if $role == "" || $role == "NONE" || $role == "OBSERVER"-}'{-#mnuDatacardView#-}'{-else-}'{-#mnuDatacardInsertEdit#-}'{-/if-},	handler: onMenuItem  },
+				{id:'mnuDatacardInsertEdit', text:{-if $desinventarUserRoleValue >= 2-}'{-#mnuDatacardInsertEdit#-}'{-else-}'{-#mnuDatacardView#-}'{-/if-},	handler: onMenuItem  },
 				{-if $role == "SUPERVISOR" || $role == "ADMINREGION"-}
 					{id:'mnuDatacardImport', text: '{-#mnuDatacardImport#-}',	handler: onMenuItem  },
 					{id:'mnuDatabaseBackup', text: '{-#mnuDatabaseBackup#-}',	handler: onMenuItem  },
