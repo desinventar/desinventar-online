@@ -309,6 +309,7 @@
 						<option value="READY" selected>{-#tdcready#-}</option>
 						<option value="DRAFT">{-#tdcdraft#-}</option>
 						<option value="TRASH">{-#tdctrash#-}</option>
+						<option value="DELETED"  >{-#tdcdeleted#-}</option>
 					</select>
 				{-else-}
 					<input type="hidden" name="D_RecordStatus" value="PUBLISHED" />

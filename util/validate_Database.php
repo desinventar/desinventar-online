@@ -10,7 +10,7 @@
 	require_once(BASE . '/include/diregion.class.php');
 	
 	$RegionId = 'ECU-1250695659-ecuador_sist_de_inf_de_desastres_y_emergencias';
-	$RegionId = 'GAR-ISDR-2011_ECU';
+	$RegionId = 'GAR-ISDR-2011_MEX';
 	$us->login('diadmin','di8');
 	$us->open($RegionId);
 	//$r = new DIRegion($us, $RegionId);

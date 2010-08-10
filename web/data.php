@@ -50,9 +50,11 @@ if (isset($post['page']) || isset($post['_D+cmd'])) {
 		$fld = $post['fld'];
 		$sql = base64_decode($post['sql']);
 	} elseif (isset($post['_D+cmd'])) {
+		fb($post);
 		// Process results with default options
 		$qd  = $us->q->genSQLWhereDesconsultar($post);
 		$sqc = $us->q->genSQLSelectCount($qd);
+		fb($sqc);
 		$c	 = $us->q->getresult($sqc);
 		$iNumberOfRecords = $c['counter'];
 		// Reuse calculate SQL values in all pages; calculate limits in pages
