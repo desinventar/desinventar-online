@@ -143,32 +143,39 @@ function updateDatabaseList(CountryIsoCode,searchByCountry) {
 		}
 	);
 	jQuery.post(desinventarURL,
-		{ cmd: 'searchdb', searchdbquery: CountryIsoCode, searchbycountry : searchByCountry },
+		{cmd: 'searchdb', 
+		 searchdbquery: CountryIsoCode, 
+		 searchbycountry : searchByCountry
+		},
 		function(data) {
-			var iCount = 0;
-			var RegionId = '';
+			if (data.Status == 'OK') {
+				var iCount = 0;
+				var RegionId = '';
 
-			// Hide everything at start...
-			jQuery('.databaseTitle').hide();
-			jQuery('.databaseList').hide();
+				// Hide everything at start...
+				jQuery('.databaseTitle').hide();
+				jQuery('.databaseList').hide();
 
-			var jList = jQuery("#regionlist_COUNTRY");
-			jList.empty();
-			jQuery.each(data, function(key, value) {
-				iCount++;
-				RegionId = key;
-				jList.append('<a href="#" id="' + key + '" class="databaseLink">' + value.RegionLabel + '</a><br />');
-			}); // each
-			if (iCount == 1) {
-				displayRegionInfo(RegionId);
-			} else {
-				jQuery('#regiontitle_COUNTRY').show();
-				jQuery('#regionlist_COUNTRY').show();
-				jQuery('.databaseLink').addClass("alt").unbind('click').click(function() {
-					RegionId = jQuery(this).attr('id');
-					displayRegionInfo(RegionId);
-					return false;
-				}); //bind
+				var jList = jQuery("#regionlist_COUNTRY");
+				var myRegionId = '';
+				jList.empty();
+				jQuery.each(data.RegionList, function(RegionId, value) {
+					iCount++;
+					jList.append('<a href="#" id="' + RegionId + '" class="databaseLink">' + value.RegionLabel + '</a><br />');
+					myRegionId = RegionId;
+				}); // each
+				if (iCount == 1) {	
+					// If only one region is in list, show directly info instead of list
+					displayRegionInfo(myRegionId);
+				} else {
+					jQuery('#regiontitle_COUNTRY').show();
+					jQuery('#regionlist_COUNTRY').show();
+					jQuery('.databaseLink').addClass("alt").unbind('click').click(function() {
+						RegionId = jQuery(this).attr('id');
+						displayRegionInfo(RegionId);
+						return false;
+					}); //bind
+				}
 			}
 		}, //function
 		'json'
@@ -186,46 +193,32 @@ function updateDatabaseListByUser() {
 	jQuery.post(desinventarURL,
 		{ cmd: 'searchdb', 
 		  searchdbquery: '', 
-		  searchbycountry : 0},
+		  searchbycountry : 0
+		},
 		function(data) {
-			var iCount = 0;
-			var RegionId = '';
+			if (data.Status == 'OK') {
+				RegionByRole = new Array(5);
+				RegionByRole['ADMINREGION'] = new Array();
+				RegionByRole['SUPERVISOR'] = new Array();
+				RegionByRole['USER'] = new Array();
+				RegionByRole['OBSERVER'] = new Array();
+				RegionByRole['NONE'] = new Array();
 
-			RegionByRole = new Array();
-			RegionByRole['ADMINREGION'] = new Array();
-			RegionByRole['SUPERVISOR'] = new Array();
-			RegionByRole['USER'] = new Array();
-			RegionByRole['OBSERVER'] = new Array();
-			RegionByRole['NONE'] = new Array();
-			
-			jQuery.each(data, function(key, value) {
-				RegionByRole[value.Role][key] = value.RegionLabel;
-			});
-			
-			for (role in RegionByRole) {
-				var a = RegionByRole[role];
-
-				jList = jQuery('#regionlist_' + role);
-				jList.empty();
-				
+				$RoleList = new Array(5);
 				var iCount = 0;
-				for (Region in a) {
+				jQuery('.databaseList').empty();
+				jQuery.each(data.RegionList, function(RegionId, value) {
+					jQuery('#regiontitle_' + value.Role).show();
+					jQuery('#regionlist_' + value.Role).show().append('<a href="#" id="' + RegionId + '" class="databaseLink">' + value.RegionLabel + '</a><br />');
 					iCount++;
-				}
-				if (iCount > 0) {
-					jQuery('#regiontitle_' + role).show();
-					jQuery('#regionlist_' + role).show();
-					for (var RegionId in a) {
-						jList.append('<a href="#" id="' + RegionId + '" class="databaseLink">' + a[RegionId] + '</a><br />');
-					}
-				}
-			}
-
-			jQuery('.databaseLink').addClass("alt").unbind('click').click(function() {
-				RegionId = jQuery(this).attr('id');
-				displayRegionInfo(RegionId);
-				return false;
-			}); //bind
+				});
+				
+				jQuery('.databaseLink').addClass("alt").unbind('click').click(function() {
+					RegionId = jQuery(this).attr('id');
+					displayRegionInfo(RegionId);
+					return false;
+				}); //bind
+			} //if
 		},
 		'json' //function
 	);
