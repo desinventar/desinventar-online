@@ -192,8 +192,11 @@ switch ($cmd) {
 		$searchdbquery = getParameter('searchdbquery', '');
 		$searchbycountry = getParameter('searchbycountry', '');
 		$reglst = $us->searchDB($searchdbquery, $searchbycountry);
+		$RoleList = array();
 		$t->assign('regionlist', $reglst);
-		print json_encode($reglst);
+		print json_encode(array('Status'     => 'OK', 
+		                        'RoleList'   => $RoleList,
+		                        'RegionList' => $reglst));
 	break;
 	case 'getCountryName':
 		$CountryIso = getParameter('CountryIso','');
