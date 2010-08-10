@@ -1,6 +1,6 @@
 function onReadyCommon() {
 	// Create periodic task to keep session alive...
-	var pe = new PeriodicalExecuter(doKeepSessionAwake, 10);
+	var pe = new PeriodicalExecuter(doKeepSessionAwake, 60);
 }
 
 function doKeepSessionAwake() {
