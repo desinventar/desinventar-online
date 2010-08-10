@@ -1,4 +1,6 @@
 function onReadyMain() {
+	onReadyCommon();
+
 	jQuery('#DC').submit(function() {
 		var myURL = jQuery(this).attr('action');
 		var myCmd = jQuery('#prmCommand').val();

@@ -9,11 +9,13 @@
 	<link rel="stylesheet" href="{-$desinventarURLPortal-}/css/desinventar.css?version={-$jsversion-}" TYPE="text/css" />
 	<link rel="stylesheet" href="{-$desinventarURLPortal-}/css/portal.css?version={-$jsversion-}" TYPE="text/css" />
 	{-include file="../../web/templates/jquery.tpl" confdir="../../web/conf/"-}
+	<script type="text/javascript" src="{-$desinventarURL-}/include/prototype.js"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/include/menu.js"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/include/md5.js"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/js/user_login.js?version={-$jsversion-}"></script>
 	<link type="text/css" rel="stylesheet" href="{-$desinventarURL-}/include/clickmenu/clickmenu.css" />
 	<script type="text/javascript" src="{-$desinventarURL-}/include/clickmenu/jquery.clickmenu.js"></script>
+	<script type="text/javascript" src="{-$desinventarURL-}/js/common.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURLPortal-}/js/main.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" language="javascript">
 		jQuery(document).ready(function() {

@@ -78,7 +78,11 @@ class UserSession {
 			$this->close();
 			$this->logout();
 		}
-		$iReturn = $this->update();
+		$sQuery = "UPDATE UserSession SET LastUpdate='" . $this->dLastUpdate . "' WHERE SessionId='" . $this->sSessionId . "'";
+		$this->q->core->query($sQuery);
+		
+		$sQuery = "UPDATE UserLockList SET LastUpdate='" . $this->dLastUpdate . "' WHERE SessionId='" . $this->sSessionId . "'";
+		$this->q->core->query($sQuery);
 		return $iReturn;
 	}
 
@@ -144,14 +148,11 @@ class UserSession {
 		$sth->bindValue(':Valid'      , 1, PDO::PARAM_INT);
 		$sth->bindParam(':Start'     , $this->dStart, PDO::PARAM_STR);
 		$sth->bindParam(':LastUpdate', $this->dLastUpdate, PDO::PARAM_STR);
-		if ($result = $sth->execute()) {
-			$sQuery = 'UPDATE UserLockList SET LastUpdate=:LastUpdate WHERE SessionId=:SessionId';
-			$sth = $this->q->core->prepare($sQuery);
-			$sth->bindParam(':LastUpdate', $this->dLastUpdate, PDO::PARAM_STR);
-			$sth->bindParam(':SessionId'  , $this->sSessionId, PDO::PARAM_STR);
-			$sth->execute();
-			$iReturn = ERR_NO_ERROR;
-		}
+		$sth->execute();
+
+		$sQuery = "UPDATE UserLockList SET LastUpdate='" . $this->dLastUpdate . "' WHERE SessionId='" . $this->sSessionId . "'";
+		$this->q->core->query($sQuery);
+		$iReturn = ERR_NO_ERROR;
 		return $iReturn;
 	} // update()
 

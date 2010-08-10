@@ -157,9 +157,6 @@ function onReadyDatacards() {
 		jQuery('#GeographyId').val(myGeographyId);
 	});	
 
-	// Create periodic task to keep session alive...
-	var pe = new PeriodicalExecuter(doKeepSessionAwake, 60);
-
 	// Validation of DisasterBeginTime and Suggest Serial for New Datacards
 	jQuery('#DisasterBeginTime0').blur(function() {
 		cmd = jQuery('#_CMD').val();
@@ -721,15 +718,6 @@ function doDatacardGotoNext() {
 	if (jQuery('#desinventarUserRoleValue').val() >= 2) {
 		disenabutton($('btnDatacardEdit'), false);
 	}
-}
-
-function doKeepSessionAwake() {
-	jQuery.post('index.php',
-		{cmd : 'cmdSessionAwake'},
-		function(data) {
-		},
-		'json'
-	);
 }
 
 function doDatacardSuggestSerial() {

@@ -1,4 +1,7 @@
 function onReadyPortal() {
+	// Run common functions in web/portal
+	onReadyCommon();
+
 	var desinventarURL  = jQuery('#desinventarURL').val();
 	var desinventarLang = jQuery('#desinventarLang').val();
 	
