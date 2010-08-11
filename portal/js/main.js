@@ -129,7 +129,7 @@ function onReadyPortal() {
 }; //onReadyPortal()
 
 function updateDatabaseList(CountryIsoCode,searchByCountry) {
-	jQuery(".portalcontent").hide();
+	jQuery(".contentBlock").hide();
 	// Hide everything at start...
 	jQuery('.databaseTitle').hide();
 	jQuery('.databaseList').hide();
@@ -183,7 +183,7 @@ function updateDatabaseList(CountryIsoCode,searchByCountry) {
 };
 
 function updateDatabaseListByUser() {
-	jQuery(".portalcontent").hide();
+	jQuery(".contentBlock").hide();
 	jQuery("#regionlist").show();
 	var desinventarURL = jQuery('#desinventarURL').val();
 	// Hide everything at start...
@@ -225,14 +225,14 @@ function updateDatabaseListByUser() {
 };
 
 function showRegionInfo(RegionId) {
-	jQuery(".portalcontent" ).hide();
+	jQuery(".contentBlock" ).hide();
 	displayRegionInfo(RegionId);
 };
 
 function displayRegionInfo(RegionId) {
 	var desinventarURL = jQuery('#desinventarURL').val();
 	var desinventarLang = jQuery('#desinventarLang').val();
-	jQuery(".portalcontent").hide();
+	jQuery(".contentBlock").hide();
 	jQuery("#pageinfo"     ).hide();
 	jQuery('#regionbasicinfo').html('');
 	jQuery('#regiontechinfo').html('');
@@ -258,7 +258,7 @@ function displayRegionInfo(RegionId) {
 };
 
 function showMap() {
-	jQuery('.portalcontent').hide();
+	jQuery('.contentBlock').hide();
 	jQuery('#pagemap').show();
 };
 

@@ -140,7 +140,7 @@
 							</table>
 						</td>
 						<td class="centro">
-							<div class="portalcontent" id="regionlist">
+							<div class="contentBlock" id="regionlist">
 								<span class="databaseTitle" id="regiontitle_COUNTRY"></span>
 								<ul   class="databaseList"  id="regionlist_COUNTRY"></ul>
 								<span class="databaseTitle" id="regiontitle_ADMINREGION">{-#txtRoleADMINREGION#-}</span>
@@ -154,7 +154,7 @@
 								<span class="databaseTitle" id="regiontitle_NONE">{-#txtRoleNONE#-}</span>
 								<ul   class="databaseList"  id="regionlist_NONE"></ul>
 							</div>
-							<div class="portalcontent" id="pageinfo">
+							<div class="contentBlock" id="pageinfo">
 								<table>
 									<tr>
 										<td valign="top">
@@ -172,7 +172,7 @@
 									</tr>
 								</table>
 							</div>
-							<div class="portalcontent" id="pagemap">
+							<div class="contentBlock" id="pagemap">
 								{-if $portaltype == 'desinventar' -}
 									{-include file="block_southamerica.tpl"-}
 								{-/if-}
@@ -184,7 +184,7 @@
 									{-/if-}
 								{-/if-}
 							</div>
-							<div class="portalcontent" id="UserContent">
+							<div class="contentBlock" id="UserContent">
 								{-include file="../../web/templates/user_login.tpl" confdir="../../web/conf/"-}
 							</div>
 						</td> <!-- CENTRO -->
