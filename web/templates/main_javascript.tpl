@@ -2,37 +2,34 @@
 		function onMenuItem(item) {
 			var RegionId = jQuery('#desinventarRegionId').val();
 			switch (item.id) {
-				case "mnuRegionInfo":
+				case 'mnuRegionInfo':
 					if (RegionId != '') {
 						$('dcr').src = 'index.php?cmd=getRegionFullInfo&r=' + RegionId;
 						$('bsave').style.visibility = 'hidden';
 						$('bprint').style.visibility = 'hidden';
 					}
 				break;
-				case "mnuUserLogin":
+				case 'mnuUserLogin':
 					//updateUserBar('user.php', '', '', '');
 					usrw.show();
 				break;
-				case "mnuUserLogout":
+				case 'mnuUserLogout':
 					doUserLogout();
 				break;
-				case "mnuUserEditAccount":
-					jQuery("#dbl").load('user.php?cmd=changepasswd',function() { onReadyUserChangePasswd('dbl-win'); });
+				case 'mnuUserEditAccount':
+					jQuery('#dbl').load('user.php?cmd=changepasswd',function() { onReadyUserChangePasswd('dbl-win'); });
 					dblw.show();
 				break;
 				{-foreach name=LanguageList key=key item=item from=$LanguageList-}
-					case "{-$key-}":
-						window.location = "index.php?r={-$reg-}&lang={-$key-}";
+					case '{-$key-}':
+						window.location = 'index.php?r={-$reg-}&lang={-$key-}';
 					break;
 				{-/foreach-}
-				case "mfilprn":
-					window.print();
-				break;
-				case "mfilqit":
+				case 'mnuFileQuit':
 					self.close();
 				break;
 				// query menu
-				case "menuQueryToggle":
+				case 'menuQueryToggle':
 					w = Ext.getCmp('westm');
 					jQuery('.contentBlock').hide();
 					if (RegionId == '') {
@@ -48,14 +45,14 @@
 						w.expand(); //show()
 					}
 				break;
-				case "mnuQueryNew":
+				case 'mnuQueryNew':
 					// Just reload the current region window...(need a better solution!!)
 					window.location = 'index.php?r=' + RegionId;
 				break;
-				case "menuQuerySave":
+				case 'menuQuerySave':
 					saveQuery();
 				break;
-				case "mnuQueryOpen":
+				case 'mnuQueryOpen':
 					var qryw;
 					if (!qryw) {
 						qryw = new Ext.Window({
@@ -74,7 +71,7 @@
 					qryw.show(this);
 				break;
 				// Datacards Menu Items
-				case "mnuDatacardInsertEdit":
+				case 'mnuDatacardInsertEdit':
 					jQuery('#cardsRecordSource').val('');
 					jQuery.post('index.php',
 						{cmd      : 'getRegionRecordCount',
@@ -91,51 +88,51 @@
 						'json'
 					);
 				break;
-				case "mnuDatacardImport":
+				case 'mnuDatacardImport':
 					hideQueryDesign();
 					jQuery('.contentBlock').hide();
 					jQuery('#divDatacardsImport').show();
 					updateList('divDatacardsImport', 'import.php', 'r=' + RegionId);
 				break;
-				case "mnuDatabaseBackup":
+				case 'mnuDatabaseBackup':
 					hideQueryDesign();
 					jQuery('.contentBlock').hide();
 					jQuery('#divDatabaseBackup').trigger('DBBackupRestart');
 					jQuery('#divDatabaseBackup').show();
 				break;
-				case "mnuDatabaseImport":
+				case 'mnuDatabaseImport':
 					hideQueryDesign();
 					jQuery('.contentBlock').hide();
 					jQuery('#divDatabaseImport').show();
 				break;
-				case "mcrdcfg":
+				case 'mnuDatabaseConfig':
 					hideQueryDesign();
 					jQuery('.contentBlock').hide();
 					jQuery('#divDatabaseConfiguration').show();
 					jQuery('#tabDatabaseConfiguration').show();
 				break;
 				// databases menu
-				case "mdbsfnd":
+				case 'mnuDatabaseFind':
 					updateList('dbl', 'index.php', 'cmd=listdb');
 					dblw.show();
 				break;
-				case "mnuUserAdmin":
+				case 'mnuUserAdmin':
 					//updateList('dbl', 'user.php', 'cmd=adminusr', 'onReadyUserAdmin');
-					jQuery("#dbl").load('user.php?cmd=adminusr',function() { onReadyUserAdmin(); });
+					jQuery('#dbl').load('user.php?cmd=adminusr',function() { onReadyUserAdmin(); });
 					dblw.show();
 				break;
-				case "mnuDatabaseAdmin":
+				case 'mnuDatabaseAdmin':
 					updateList('dbl', 'region.php', 'cmd=adminreg');
 					dblw.show();
 				break;
 				// help menu
-				case "mabo":
+				case 'mnuHelpAbout':
 					dlgw.show();
 				break;
-				case "mwww":
+				case 'mnuHelpWebsite':
 					window.open('http://www.desinventar.org', '', '');
 				break;
-				case "mmtg":
+				case 'mnuHelpMethodology':
 					var url = 'http://www.desinventar.org';
 					if (jQuery('#desinventarLang').val() == 'spa') {
 						url = url + '/es/metodologia';
@@ -144,7 +141,7 @@
 					}
 					window.open(url, '', '');
 				break;
-				case "mdoc":
+				case 'mnuHelpDocumentation':
 					var url = 'http://www.desinventar.org/';
 					window.open(url, '', '');
 				break;
@@ -249,7 +246,7 @@
 						]
 					}
 				},
-				{id: 'mfilqit',  text: '{-#mquit#-}', handler: onMenuItem  }
+				{id: 'mnuFileQuit',  text: '{-#mquit#-}', handler: onMenuItem  }
 			]
 		});
 		
@@ -275,7 +272,7 @@
 					{id:'mnuDatabaseBackup', text: '{-#mnuDatabaseBackup#-}',	handler: onMenuItem  },
 				{-/if-}
 				{-if $role == "OBSERVER" || $role == "ADMINREGION"-}
-					{id:'mcrdcfg', text: '{-#mnuDatabaseConfig#-}',	handler: onMenuItem  },
+					{id:'mnuDatabaseConfig', text: '{-#mnuDatabaseConfig#-}',	handler: onMenuItem  },
 				{-/if-}
 				'-'
 			]
@@ -284,7 +281,7 @@
 		var mbases = new Ext.menu.Menu({
 			id: 'basesMenu',
 			items: [
-				{id:'mdbsfnd', text: '{-#mdbfind#-}',	handler: onMenuItem  }, //search Databases
+				{id:'mnuDatabaseFind', text: '{-#mdbfind#-}',	handler: onMenuItem  }, //search Databases
 				{-if $desinventarUserId == "root"-}
 					{id:'mnuUserAdmin', text: '{-#mnuUserAdmin#-}',	handler: onMenuItem  }, //admin Users
 					{id:'mnuDatabaseAdmin', text: '{-#mnuDatabaseAdmin#-}',	handler: onMenuItem  }, //admin Databases
@@ -298,11 +295,11 @@
 			id: 'helpMenu',
 			style: { overflow: 'visible' },
 			items: [
-				{id:'mwww', text: '{-#mwebsite#-}',	handler: onMenuItem  },
-				{id:'mmtg', text: '{-#hmoreinfo#-}', handler: onMenuItem  },
-				{id:'mdoc', text: '{-#hotherdoc#-}', handler: onMenuItem  },
+				{id:'mnuHelpWebsite', text: '{-#mwebsite#-}',	handler: onMenuItem  },
+				{id:'mnuHelpMethodology', text: '{-#hmoreinfo#-}', handler: onMenuItem  },
+				{id:'mnuHelpDocumentation', text: '{-#hotherdoc#-}', handler: onMenuItem  },
 				{id:'mnuRegionInfo', text: '{-#hdbinfo#-}', handler: onMenuItem  },
-				{id:'mabo', text: '{-#mabout#-}', handler: onMenuItem  }
+				{id:'mnuHelpAbout', text: '{-#mabout#-}', handler: onMenuItem  }
 			]
 		});
 		
@@ -316,7 +313,7 @@
 		tb.add('-', {id: 'mdbs', text: '{-#mdatabases#-}',	menu: mbases });
 		tb.add('-', {id: 'mhlp', text: '{-#mhelp#-}',			menu: mhelp  });
 		tb.add('->',{id: 'mnuRegionInfo', text: '[{-$RegionLabel-}]', 		handler: onMenuItem });
-		tb.add('->',{id: 'mwww', text: '<img src="images/di_logo4.png">', handler: onMenuItem });
+		tb.add('->',{id: 'mnuHelpWebsite', text: '<img src="images/di_logo4.png">', handler: onMenuItem });
 
 		// layout
 		var viewport = new Ext.Viewport({
