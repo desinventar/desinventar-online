@@ -1,6 +1,4 @@
 <!-- BEGIN GRAPHIC PARAMETERS -->
-{-config_load file=`$lg`.conf section="di8_index"-}
-
 <button id="grp-btn" class="rounded" ext:qtip="{-#tgraphicmsg#-}"><span>{-#bgraphic#-}</span></button>
 <div id="grp-win" class="x-hidden">
 	<div class="x-window-header">{-#bgraphic#-}</div>
@@ -153,7 +151,7 @@
 							<b>{-#ghistogram#-}</b>
 						</td>
 						<td>
-							<select id="_G+TypeH" onChange="grpSelectbyType('_G+TypeH');" class="line"
+							<select id="graphParamTypeHistogram" name="_G+TypeH" class="line"
 								onMouseOver="showtip('{-$dic.GraphType[2]-}');">
 								<option value="" disabled></option>
 								<option value="D.DisasterBeginTime" selected>{-$dic.GraphHisTemporal[0]-}</option>
@@ -197,7 +195,7 @@
 							<b>{-#gcomparative#-}</b>
 						</td>
 						<td>
-							<select id="_G+TypeC" onChange="grpSelectbyType('_G+TypeC');" class="line"
+							<select id="graphParamTypeComparative" name="_G+TypeC" class="line"
 								onMouseOver="showtip('{-$dic.GraphType[2]-}');">
 								<option value="" disabled selected></option>
 								<option value="D.EventId">{-$dic.GraphComByEvents[0]-}</option>
