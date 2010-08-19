@@ -281,8 +281,9 @@
 		var mbases = new Ext.menu.Menu({
 			id: 'basesMenu',
 			items: [
-				{id:'mnuDatabaseFind', text: '{-#mdbfind#-}',	handler: onMenuItem  }, //search Databases
+				{id:'mnuDatabaseFind', text: '{-#mdbfind#-}',	handler: onMenuItem  } //search Databases
 				{-if $desinventarUserId == "root"-}
+					, // Keep this coma inside the if block to prevent IE from going crazy when rending page...
 					{id:'mnuUserAdmin', text: '{-#mnuUserAdmin#-}',	handler: onMenuItem  }, //admin Users
 					{id:'mnuDatabaseAdmin', text: '{-#mnuDatabaseAdmin#-}',	handler: onMenuItem  }, //admin Databases
 					'-',
