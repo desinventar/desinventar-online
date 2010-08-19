@@ -581,37 +581,6 @@
 			}
 		}
 		
-		function disabAxis2() {
-			jQuery('#graphParamField2').val('');
-			disab($('graphParamField2'));
-			disab($('_G+Scale2'));
-			disab($('_G+Data2'));
-			disab($('_G+Mode2'));
-		}
-		
-		function enabAxis2() {
-			enab($('graphParamField2'));
-			enab($('_G+Scale2'));
-			enab($('_G+Data2'));
-			enab($('_G+Mode2'));
-		}
-		
-		
-		function grpSelectbyKind() {
-			comp = $('_G+TypeC').value;
-			if ($('_G+Kind').value == "BAR" || $('_G+Kind').value == "LINE" || ($('_G+Kind').value != "PIE" &&
-			   (comp == "D.EventId" || comp == "D.CauseId" || comp.substr(0,13) == "D.GeographyId"))) {
-				 enabAxis2();
-				 enab($('_G+M_accu'));
-				 disab($('_G+M_over'));
-				 enab($('_G+Scale'));
-			} else {
-				disabAxis2();
-				disab($('_G+M_accu'));
-				disab($('_G+Scale'));
-			}
-		} //function
-		
 		// forms management
 		function combineForms(dcf, ref) {
 			var dc = $(dcf);

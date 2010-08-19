@@ -26,3 +26,13 @@ jQuery.fn.unhighlight = function() {
 		jQuery(this).css('background-color', jQuery(this).attr('old-bg-color'));
 	}
 }
+
+jQuery.fn.disable = function() {
+	jQuery(this).attr('disabled',true);
+	return this;
+}
+
+jQuery.fn.enable = function() {
+	jQuery(this).removeAttr('disabled');
+	return this;
+}

@@ -1,31 +1,31 @@
 function onReadyGraphic() {
 	// 2010-02-21 (jhcaiced) This jQuery calls ensures that the Period and Stat
 	// parameters are not empty at the same time.
-	jQuery('#graphParamPeriod').change(function() {
+	jQuery('#prmGraphPeriod').change(function() {
 		var Value = jQuery(this).val();
 		if (Value != '') {
-			jQuery('#graphParamStat').val('');
+			jQuery('#prmGraphStat').val('');
 		} else {
-			jQuery('#graphParamStat').val('MONTH');
+			jQuery('#prmGraphStat').val('MONTH');
 		}
 	});
-	jQuery('#graphParamStat').change(function() {
+	jQuery('#prmGraphStat').change(function() {
 		var Value = jQuery(this).val();
 		if (Value != '') {
-			jQuery('#graphParamPeriod').val('');
+			jQuery('#prmGraphPeriod').val('');
 		} else {
-			jQuery('#graphParamPeriod').val('YEAR');
+			jQuery('#prmGraphPeriod').val('YEAR');
 		}
 	});
 	
-	jQuery('#graphParamTypeHistogram').change(function() {
+	jQuery('#prmGraphTypeHistogram').change(function() {
 		var grp = jQuery(this).val();
 		// Histogram Type
 		disab($('_G+K_pie'));
 		$('_G+Kind').value = "BAR";
-		enab($('graphParamPeriod'));
-		$('graphParamPeriod').value = 'YEAR';
-		enab($('graphParamStat'));
+		enab($('prmGraphPeriod'));
+		$('prmGraphPeriod').value = 'YEAR';
+		enab($('prmGraphStat'));
 		enab($('_G+Scale'));
 		if (grp.substr(19, 1) == "|") {
 			disabAxis2();
@@ -37,33 +37,63 @@ function onReadyGraphic() {
 			disab($('_G+M_over'));
 		}
 		disab($('_G+D_perc'));
-
-		jQuery('#graphParamTypeComparative').val('');
-		$('_G+Type').value = grp;
-		// For other graphics different from Temporal Histogram, the second variable should be disabled
-		if (grp != 'D.DisasterBeginTime') {
-			jQuery('#graphParamField2').removeAttr('disabled');
-			jQuery('#graphParamField2').val('');
-			jQuery('#graphParamField2').attr('disabled',true);
+		
+		if (jQuery('#prmGraphTypeComparative').val() != '') {
+			jQuery('#prmGraphTypeComparative').val('');
 		}
+		$('_G+Type').value = grp;
 	});
 	
-	jQuery('#graphParamTypeComparative').change(function() {
+	jQuery('#prmGraphTypeComparative').change(function() {
 		var grp = jQuery(this).val();
 		// Comparatives
 		disabAxis2();
 		enab($('_G+K_pie'));
 		$('_G+Kind').value = "PIE";
-		$('graphParamPeriod').value = "";
-		jQuery('#graphParamField2').val('');
-		disab($('graphParamPeriod'));
-		$('graphParamStat').value = "";
-		disab($('graphParamStat'));
+		$('prmGraphPeriod').value = "";
+		//jQuery('#prmGraphField2').disable();
+		disab($('prmGraphPeriod'));
+		$('prmGraphStat').value = "";
+		disab($('prmGraphStat'));
 		disab($('_G+Scale'));
 		disab($('_G+M_accu'));
 		disab($('_G+M_over'));
 		enab($('_G+D_perc'));
-		jQuery('#graphParamTypeHistogram').val('');
+		if (jQuery('#prmGraphTypeHistogram').val() != '') {
+			jQuery('#prmGraphTypeHistogram').val('');
+		}
 		$('_G+Type').value = grp;
 	});
 } // onReadyGraphic()
+
+function disabAxis2() {
+	jQuery('#divVerticalAxis2').hide();
+	jQuery('#prmGraphField2').val('');
+	disab($('_G+Scale2'));
+	disab($('_G+Data2'));
+	disab($('_G+Mode2'));
+}
+
+function enabAxis2() {
+	jQuery('#divVerticalAxis2').show();
+	jQuery('#prmGraphField2').val('');
+	enab($('_G+Scale2'));
+	enab($('_G+Data2'));
+	enab($('_G+Mode2'));
+}
+
+function grpSelectbyKind() {
+	comp = $('_G+TypeC').value;
+	if ($('_G+Kind').value == "BAR" || $('_G+Kind').value == "LINE" || ($('_G+Kind').value != "PIE" &&
+	   (comp == "D.EventId" || comp == "D.CauseId" || comp.substr(0,13) == "D.GeographyId"))) {
+		 enabAxis2();
+		 enab($('_G+M_accu'));
+		 disab($('_G+M_over'));
+		 enab($('_G+Scale'));
+	} else {
+		disabAxis2();
+		disab($('_G+M_accu'));
+		disab($('_G+Scale'));
+	}
+} //function
+
