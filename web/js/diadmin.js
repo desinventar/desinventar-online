@@ -320,6 +320,11 @@
 	// Block characters according to type
 	function blockChars(e, value, type) {
 		var key = window.event ? e.keyCode : e.which;
+
+		// 2010-08-19 (jhcaiced) Accept values in numeric keypad
+		if (key >= 96 && key <= 105) {
+			key = key - 48;
+		}
 		var keychar = String.fromCharCode(key);
 		var opt = type.split(":"); // 0=type; 1=minlength; 2=minval-maxval
 			// Accept keys: backspace, tab, shift, ctrl, insert, delete
@@ -329,7 +334,7 @@
 		var chk = true;
 		var val = true; // validate characters
 			// Check max length
-		if (value.lenght >= parseInt(opt[1]))
+		if (value.length >= parseInt(opt[1]))
 			var len = false;
 		else
 			var len = true;
