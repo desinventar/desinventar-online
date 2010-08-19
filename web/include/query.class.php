@@ -692,8 +692,8 @@ class Query extends PDO {
   
 	// Generate SQL from Associative array from Desconsultar Form
 	public function genSQLWhereDesconsultar($dat) {
-		$e		= array();
-		$e['Eff'] = "";
+		$e		   = array();
+		$e['Eff']  = "";
 		$e['Item'] = "";
 		// 2009-12-30 (jhcaiced) Try to separate query in logical units
 		$QueryItem   = array();
@@ -906,7 +906,7 @@ class Query extends PDO {
 					// all minus DC hidden fields _MyField
 					$v = trim($v);
 					if ($v != '') {
-						$e['Item'] .= "$k like '%$v%' AND ";
+						$e['Item'] .= "$k LIKE '%$v%' AND ";
 					}
 				}
 			}

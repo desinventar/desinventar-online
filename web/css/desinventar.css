@@ -197,3 +197,12 @@ a:hover	{	color:#00008b; }
 	margin: 40px;
 	border: 1px solid black;
 }
+#tdGraphParamAxis1 {
+	width:180px;
+}
+#tdGraphParamCenter {
+	width:180px;
+}
+#tdGraphParamAxis2 {
+	width:180px;
+}
