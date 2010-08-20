@@ -27,6 +27,17 @@ function onReadyDatacards() {
 		}
 	});
 
+	// Limit length of text area fields using a maxlength attribute...	
+	jQuery('#DICard textarea').keyup(function() {
+		var maxlength = parseInt(jQuery(this).attr('maxlength'));
+		if (! isNaN(maxlength) ) {
+			var value     = jQuery(this).val();
+			if (value.length > maxlength) {
+				jQuery(this).val(value.substr(0,maxlength));
+			}
+		}
+	});
+
 	jQuery('#DICard').submit(function() {
 		jQuery('#DatacardCommand').val(jQuery('#_CMD').val());
 		jQuery('#RecordAuthor').val(jQuery('#desinventarUserId').val());
