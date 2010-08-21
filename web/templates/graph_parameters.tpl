@@ -153,7 +153,7 @@
 							<b>{-#ghistogram#-}</b>
 						</td>
 						<td>
-							<select id="prmGraphTypeHistogram" name="_G+TypeH" class="line"
+							<select id="prmGraphTypeHistogram" name="prmGraphTypeHistogram" class="line"
 								onMouseOver="showtip('{-$dic.GraphType[2]-}');">
 								<option value="" disabled></option>
 								<option value="D.DisasterBeginTime">{-$dic.GraphHisTemporal[0]-}</option>
@@ -197,7 +197,7 @@
 							<b>{-#gcomparative#-}</b>
 						</td>
 						<td>
-							<select id="prmGraphTypeComparative" name="_G+TypeC" class="line"
+							<select id="prmGraphTypeComparative" name="prmGraphTypeComparative" class="line"
 								onMouseOver="showtip('{-$dic.GraphType[2]-}');">
 								<option value="" disabled></option>
 								<option value="D.EventId">{-$dic.GraphComByEvents[0]-}</option>
@@ -215,7 +215,7 @@
 			</table>
 			<input type="hidden" id="_G+cmd" name="_G+cmd" value="result" />
 			<input type="hidden" id="prmGraphType" name="prmGraphType" value="" />
-			<input type="hidden" id="_G+Type" name="_G+Type" value="D.DisasterBeginTime" />
+			<input type="hidden" id="prmGraphVar"  name="prmGraphVar"  value="D.DisasterBeginTime" />
 		</form>
 	</div>
 </div>

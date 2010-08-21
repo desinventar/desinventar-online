@@ -16,7 +16,7 @@ if ($reg == '') {
 }
 
 $us->open($reg);
-fb($_POST['_G+Type']);
+fb($_POST['prmGraphVar']);
 $RegionLabel = $us->q->getDBInfoValue('RegionLabel');
 $t->assign('RegionLabel', $RegionLabel);
 fixPost($post);
@@ -42,7 +42,7 @@ if ($GraphCommand != '') {
 	
 	// Process Configuration options to Graphic
 	$ele = array();
-	foreach (explode("|", $post['_G+Type']) as $itm) {
+	foreach (explode("|", $post['prmGraphVar']) as $itm) {
 		if ($itm == "D.DisasterBeginTime") {
 			// Histogram
 			if (isset($post['_G+Stat']) && strlen($post['_G+Stat'])>0) {
