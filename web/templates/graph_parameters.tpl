@@ -1,13 +1,13 @@
 <!-- BEGIN GRAPHIC PARAMETERS -->
 <button id="grp-btn" class="rounded" ext:qtip="{-#tgraphicmsg#-}"><span>{-#bgraphic#-}</span></button>
-<div id="grp-win" class="x-hidden">
+<div id="divGraphParameters" class="x-hidden">
 	<div class="x-window-header">{-#bgraphic#-}</div>
 	<div id="grp-cfg">
 		<form id="CG" method="POST">
 			<table class="conf" cellpadding=1 cellspacing=1>
 			<tr valign="top">
 				<td colspan=3 align="center">
-					<b>{-#gopttitle#-}</b><input type="text" name="_G+Title" class="line fixw" />
+					<b>{-#gopttitle#-}</b><input type="text" name="prmGraphTitle" class="line fixw" />
 					<!--<b>{-#goptsubtit#-}</b><br>-->
 				</td>
 			</tr>
@@ -156,7 +156,7 @@
 							<select id="prmGraphTypeHistogram" name="_G+TypeH" class="line"
 								onMouseOver="showtip('{-$dic.GraphType[2]-}');">
 								<option value="" disabled></option>
-								<option value="D.DisasterBeginTime" selected>{-$dic.GraphHisTemporal[0]-}</option>
+								<option value="D.DisasterBeginTime">{-$dic.GraphHisTemporal[0]-}</option>
 								<option value="D.DisasterBeginTime|D.EventId">{-$dic.GraphHisEveTemporal[0]-}</option>
 								{-foreach name=glev key=k item=i from=$glev-}
 								<option value="D.DisasterBeginTime|D.GeographyId_{-$k-}">{-$i[0]-} {-$dic.GraphHisGeoTemporal[0]-}</option>
@@ -209,12 +209,13 @@
 						</td>
 					</tr>
 					</table>
-					<input type="hidden" id="_G+Type" name="_G+Type" value="D.DisasterBeginTime" />
 				</td>
 				<td></td>
 			</tr>
 			</table>
 			<input type="hidden" id="_G+cmd" name="_G+cmd" value="result" />
+			<input type="hidden" id="prmGraphType" name="prmGraphType" value="" />
+			<input type="hidden" id="_G+Type" name="_G+Type" value="D.DisasterBeginTime" />
 		</form>
 	</div>
 </div>
