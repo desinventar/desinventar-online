@@ -20,6 +20,7 @@ foreach($_POST['prmGraph']['Field'] as $key => $value) {
 	if ($value == '') {
 		unset($_POST['prmGraph']['Field'][$key]);
 		unset($_POST['prmGraph']['Scale'][$key]);
+		unset($_POST['prmGraph']['Data'][$key]);
 	}
 }
 $post = $_POST;

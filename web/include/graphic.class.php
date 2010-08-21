@@ -272,7 +272,7 @@ class Graphic {
 			case "BAR":
 				if ($gType == "TEMPO" || $gType == "BAR") {
 					$m = $this->bar($opc, $val, $pal);
-					if (isset($opc['_G+Data']) && $opc['_G+Data'] == "VALUE") {
+					if (isset($opc['prmGraph']['Data'][0]) && $opc['prmGraph']['Data'][0] == "VALUE") {
 						$m->value->SetFont(FF_ARIAL, FS_NORMAL, 8);
 						$m->value->SetFormat("%d");
 						$m->value->SetAngle(90);
@@ -294,7 +294,7 @@ class Graphic {
 			case "LINE":
 				if ($gType == "TEMPO" || $gType == "LINE") {
 					$y1p = $this->line($opc, $val, $pal);
-					if (isset($opc['_G+Data']) && $opc['_G+Data'] == "VALUE") {
+					if (isset($opc['prmGraph']['Data'][0]) && $opc['prmGraph']['Data'][0] == "VALUE") {
 						$y1p->value->SetFont(FF_ARIAL, FS_NORMAL, 8);
 						$y1p->value->SetFormat("%d");
 						$y1p->value->SetAngle(90);
@@ -336,11 +336,11 @@ class Graphic {
 			break;
 			case "PIE":
 				$m = $this->pie($opc, $val, $pal);
-				if (isset($opc['_G+Data'])) {
-					if ($opc['_G+Data'] == 'NONE') {
+				if (isset($opc['prmGraph']['Data'][0])) {
+					if ($opc['prmGraph']['Data'][0] == 'NONE') {
 						$m->value->Show(false);
 					}
-					if ($opc['_G+Data'] == "VALUE") {
+					if ($opc['prmGraph']['Data'][0] == "VALUE") {
 						$m->SetLabelType(PIE_VALUE_ABS);
 						$m->value->SetFormat("%d");
 						$m->value->SetFont(FF_ARIAL, FS_NORMAL, 8);
