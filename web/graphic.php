@@ -24,7 +24,6 @@ foreach($_POST['prmGraph']['Field'] as $key => $value) {
 		unset($_POST['prmGraph']['Tendency'][$key]);
 	}
 }
-fb($_POST['prmGraph']);
 $post = $_POST;
 $RegionLabel = $us->q->getDBInfoValue('RegionLabel');
 $t->assign('RegionLabel', $RegionLabel);
