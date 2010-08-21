@@ -240,8 +240,8 @@ class Graphic {
 		//$this->g->legend->Pos(0.0, 0.1);
 		$this->g->legend->SetFont(FF_ARIAL, FS_NORMAL, 10);
 		$this->g->SetFrame(false);
-		$title = wordwrap($opc['_G+Title'], 80);
-		$subti = wordwrap($opc['_G+Title2'], 100);
+		$title = wordwrap($opc['prmGraphTitle'], 80);
+		$subti = wordwrap($opc['prmGraphSubTitle'], 100);
 		$this->g->title->Set($title);
 		$this->g->subtitle->Set($subti);
 		$this->g->title->SetFont(FF_ARIAL,FS_NORMAL, 12);

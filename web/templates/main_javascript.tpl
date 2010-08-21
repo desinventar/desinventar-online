@@ -454,7 +454,7 @@
 				if (validateQueryDefinition()) {
 					if (!grpw) {
 						grpw = new Ext.Window({
-							el:'grp-win',  layout:'fit',  width:750, height:420, 
+							el:'divGraphParameters',  layout:'fit',  width:750, height:420, 
 							closeAction:'hide', plain: true, animCollapse: false,
 							items: new Ext.Panel({contentEl: 'grp-cfg', autoScroll: true }),
 							buttons: [

@@ -19,6 +19,7 @@ function onReadyGraphic() {
 	});
 	
 	jQuery('#prmGraphTypeHistogram').change(function() {
+		jQuery('#prmGraphType').val('HISTOGRAM');
 		var grp = jQuery(this).val();
 		// Histogram Type
 		disab($('_G+K_pie'));
@@ -37,7 +38,6 @@ function onReadyGraphic() {
 			disab($('_G+M_over'));
 		}
 		disab($('_G+D_perc'));
-		
 		if (jQuery('#prmGraphTypeComparative').val() != '') {
 			jQuery('#prmGraphTypeComparative').val('');
 		}
@@ -45,6 +45,7 @@ function onReadyGraphic() {
 	});
 	
 	jQuery('#prmGraphTypeComparative').change(function() {
+		jQuery('#prmGraphType').val('COMPARATIVE');
 		var grp = jQuery(this).val();
 		// Comparatives
 		disabAxis2();
@@ -64,6 +65,9 @@ function onReadyGraphic() {
 		}
 		$('_G+Type').value = grp;
 	});
+
+	// Initialize Controls on Load
+	jQuery('#prmGraphTypeHistogram').trigger('change');
 } // onReadyGraphic()
 
 function disabAxis2() {
