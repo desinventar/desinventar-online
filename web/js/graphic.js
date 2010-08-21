@@ -42,7 +42,7 @@ function onReadyGraphic() {
 		if (jQuery('#prmGraphTypeComparative').val() != '') {
 			jQuery('#prmGraphTypeComparative').val('');
 		}
-		$('_G+Type').value = grp;
+		jQuery('#prmGraphVar').val(grp);
 	});
 	
 	jQuery('#prmGraphTypeComparative').change(function() {
@@ -63,7 +63,7 @@ function onReadyGraphic() {
 		if (jQuery('#prmGraphTypeHistogram').val() != '') {
 			jQuery('#prmGraphTypeHistogram').val('');
 		}
-		$('_G+Type').value = grp;
+		jQuery('#prmGraphVar').val(grp);
 	});
 
 	// Initialize Controls on Load
@@ -82,7 +82,7 @@ function enabAxis2() {
 }
 
 function grpSelectbyKind() {
-	comp = $('_G+TypeC').value;
+	comp = $('prmGraphTypeComparative').value;
 	if ($('_G+Kind').value == "BAR" || $('_G+Kind').value == "LINE" || ($('_G+Kind').value != "PIE" &&
 	   (comp == "D.EventId" || comp == "D.CauseId" || comp.substr(0,13) == "D.GeographyId"))) {
 		 enabAxis2();
