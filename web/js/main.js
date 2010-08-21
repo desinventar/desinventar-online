@@ -11,10 +11,10 @@ function onReadyMain() {
 		     (myCmd == 'cmdQuerySave')) {
 			return true;
 		} else {
+			jQuery('#dcr').html('<img src="loading.gif">');
 			jQuery.post(myURL,
 				jQuery(this).serialize(),
 				function(data) {
-					jQuery('#dcr').html('');
 					jQuery('#dcr').html(data);
 					onReadyData();
 					onReadyThematicMap();
