@@ -7,7 +7,7 @@
 			<table class="conf" cellpadding=1 cellspacing=1>
 			<tr valign="top">
 				<td colspan=3 align="center">
-					<b>{-#gopttitle#-}</b><input type="text" name="prmGraphTitle" class="line fixw" />
+					<b>{-#gopttitle#-}</b><input type="text" name="prmGraph[Title]" class="line fixw" />
 					<!--<b>{-#goptsubtit#-}</b><br>-->
 				</td>
 			</tr>
@@ -214,8 +214,8 @@
 			</tr>
 			</table>
 			<input type="hidden" id="_G+cmd" name="_G+cmd" value="result" />
-			<input type="hidden" id="prmGraphType" name="prmGraphType" value="" />
-			<input type="hidden" id="prmGraphVar"  name="prmGraphVar"  value="D.DisasterBeginTime" />
+			<input type="hidden" id="prmGraphType" name="prmGraph[Type]"     value="" />
+			<input type="hidden" id="prmGraphVar"  name="prmGraph[Variable]" value="D.DisasterBeginTime" />
 		</form>
 	</div>
 </div>
