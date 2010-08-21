@@ -503,7 +503,7 @@ class Graphic {
                                                                                         
 	// Setting a PIE graphic
 	function pie ($opc, $axi, $pal) {
-		if ($opc['_G+Feel'] == "3D") {
+		if ($opc['prmGraph']['Feel'] == "3D") {
 			$p = new PiePlot3d(array_values($axi));
 			$p->SetEdge("navy");
 			$p->SetStartAngle(45);
@@ -537,7 +537,7 @@ class Graphic {
 				$b->SetFillColor($color);
 			$b->SetWidth(1.0);
 		}
-		if ($opc['_G+Feel'] == "3D") {
+		if ($opc['prmGraph']['Feel'] == "3D") {
 			$b->SetShadow("steelblue",2,2);
 		}
 		return $b;
