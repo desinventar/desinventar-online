@@ -59,7 +59,7 @@
 					</select>
 					<br />
 					<b>{-#gtendline#-}</b><br/>
-					<select id="_G+TendLine" name="_G+TendLine" class="line">
+					<select id="prmGraphTendency0" name="prmGraph[Tendency][0]" class="line">
 						<option value="" selected></option>
 						<option value="LINREG">{-#glinearreg#-}</option>
 					</select>
