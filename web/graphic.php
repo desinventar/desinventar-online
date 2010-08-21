@@ -57,7 +57,7 @@ if ($GraphCommand != '') {
 			if (isset($post['_G+Stat']) && strlen($post['_G+Stat'])>0) {
 				$ele[] = $post['_G+Stat'] ."|". $itm;
 			} else {
-				$ele[] = $post['_G+Period'] ."|". $itm;
+				$ele[] = $post['prmGraph']['Period'] ."|". $itm;
 			}
 		} elseif (substr($itm, 2, 11) == "GeographyId") {
 			$gl = explode("_", $itm);
