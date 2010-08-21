@@ -39,7 +39,7 @@
 					</select>
 					<br />
 					<b onMouseOver="showtip('{-$dic.GraphScale[2]-}');">{-$dic.GraphScale[0]-}</b><br />
-					<select id="_G+Scale" name="_G+Scale" onMouseOver="showtip('{-$dic.GraphScale[2]-}');" class="line">
+					<select id="prmGraphScale0" name="prmGraph[Scale][0]" onMouseOver="showtip('{-$dic.GraphScale[2]-}');" class="line">
 						<option value="textint" selected>{-#gscalin#-}</option>
 						<option value="textlog">{-#gscalog#-}</option>
 					</select>
@@ -90,7 +90,7 @@
 						<u>{-#gveraxis#-} 2:</u><br />
 						<b onMouseOver="showtip('{-$dic.GraphField[2]-}');">{-$dic.GraphField[0]-}</b><br />
 						<select id="prmGraphField1" name="prmGraph[Field][1]" size="1" onMouseOver="showtip('{-$dic.GraphField[2]-}');"
-							onChange="enab($('_G+Scale2')); enab($('_G+Data2')); enab($('_G+Mode2'));" class="line">
+							onChange="enab($('prmGraphScale1')); enab($('_G+Data2')); enab($('_G+Mode2'));" class="line">
 							<option value="" selected></option>
 							<option value="D.DisasterId||">{-$dic.GraphDisasterId_[0]-}</option>
 							{-foreach name=ef1 key=k item=i from=$ef1-}
@@ -115,7 +115,7 @@
 						</select>
 						<br />
 						<b onMouseOver="showtip('{-$dic.GraphScale[2]-}');">{-$dic.GraphScale[0]-}</b><br />
-						<select id="_G+Scale2" name="_G+Scale2" class="disabled line" disabled
+						<select id="prmGraphScale1" name="prmGraph[Scale][1]" class="disabled line" disabled
 							onMouseOver="showtip('{-$dic.GraphScale[2]-}');">
 							<option value="int" selected>{-#gscalin#-}</option>
 							<option value="log">{-#gscalog#-}</option>

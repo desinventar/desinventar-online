@@ -28,7 +28,7 @@ function onReadyGraphic() {
 		enab($('prmGraphPeriod'));
 		$('prmGraphPeriod').value = 'YEAR';
 		enab($('prmGraphStat'));
-		enab($('_G+Scale'));
+		jQuery('#prmGraphScale0').enable();
 		if (grp.substr(19, 1) == "|") {
 			disabAxis2();
 			disab($('_G+M_accu'));
@@ -56,7 +56,7 @@ function onReadyGraphic() {
 		disab($('prmGraphPeriod'));
 		$('prmGraphStat').value = "";
 		disab($('prmGraphStat'));
-		disab($('_G+Scale'));
+		jQuery('#prmGraphScale0').disable();
 		disab($('_G+M_accu'));
 		disab($('_G+M_over'));
 		enab($('_G+D_perc'));
@@ -88,11 +88,11 @@ function grpSelectbyKind() {
 		 enabAxis2();
 		 enab($('_G+M_accu'));
 		 disab($('_G+M_over'));
-		 enab($('_G+Scale'));
+		 jQuery('#prmGraphScale0').enable();
 	} else {
 		disabAxis2();
 		disab($('_G+M_accu'));
-		disab($('_G+Scale'));
+		jQuery('#prmGraphScale0').disable();
 	}
 } //function
 
