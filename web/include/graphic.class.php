@@ -99,7 +99,7 @@ class Graphic {
 		}
 		// Cummulative Graph : Add Values in Graph
 		if ($gType == 'TEMPO') {
-			if ($opc['_G+Mode'] == "ACCUMULATE") {
+			if ($opc['prmGraph']['Mode'][0] == "ACCUMULATE") {
 				$SumValue = 0;
 				foreach ($val as $key=>$value) {
 					$SumValue += $value;
@@ -110,14 +110,14 @@ class Graphic {
 		
 		// Cummulative Graph for MultiSeries
 		if ( ($gType == '2TEMPO') || ($gType == '2COMPAR') ) {
-			if ($opc['_G+Mode'] == "ACCUMULATE") {
+			if ($opc['prmGraph']['Mode'][0] == "ACCUMULATE") {
 				$SumValue = 0;
 				foreach($val as $key => $value) {
 					$SumValue += $value[0];
 					$val[$key][0] = $SumValue;
 				}
 			}
-			$GraphValueMode2 = $opc['_G+Mode2'];
+			$GraphValueMode2 = $opc['prmGraph']['Mode'][1];
 			if ($GraphValueMode2 == "ACCUMULATE") {
 				$SumValue = 0;
 				foreach($val as $key => $value) {
@@ -553,7 +553,7 @@ class Graphic {
 			$b[] = $bar;
 			$i++;
 		}
-		if ($opc['_G+Mode'] == "OVERCOME")
+		if ($opc['prmGraph']['Mode'][0] == "OVERCOME")
 			$gb = new AccBarPlot($b);
 		else
 			$gb = new GroupBarPlot($b);
@@ -587,7 +587,7 @@ class Graphic {
 			$l[] = $line;
 			$i++;
 		}
-		if ($opc['_G+Mode'] == "OVERCOME")
+		if ($opc['prmGraph']['Mode'][0] == "OVERCOME")
 			$gl = new AccLinePlot($l);
 		else
 			$gl = $l;
