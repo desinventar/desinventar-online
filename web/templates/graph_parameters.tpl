@@ -52,7 +52,7 @@
 					</select>
 					<br />
 					<b onMouseOver="showtip('{-$dic.GraphMode[2]-}');">{-$dic.GraphMode[0]-}</b><br/>
-					<select id="_G+Mode" name="_G+Mode" onMouseOver="showtip('{-$dic.GraphMode[2]-}');" class="line">
+					<select id="prmGraphMode0" name="prmGraph[Mode][0]" onMouseOver="showtip('{-$dic.GraphMode[2]-}');" class="line">
 						<option value="NORMAL" selected>{-#gmodnormal#-}</option>
 						<option id="_G+M_accu" value="ACCUMULATE">{-#gmodaccumul#-}</option>
 						<option id="_G+M_over" value="OVERCOME" disabled>{-#gmodovercome#-}</option>
@@ -90,7 +90,7 @@
 						<u>{-#gveraxis#-} 2:</u><br />
 						<b onMouseOver="showtip('{-$dic.GraphField[2]-}');">{-$dic.GraphField[0]-}</b><br />
 						<select id="prmGraphField1" name="prmGraph[Field][1]" size="1" onMouseOver="showtip('{-$dic.GraphField[2]-}');"
-							onChange="enab($('prmGraphScale1')); enab($('prmGraphData1')); enab($('_G+Mode2'));" class="line">
+							onChange="enab($('prmGraphScale1')); enab($('prmGraphData1')); enab($('prmGraphMode1'));" class="line">
 							<option value="" selected></option>
 							<option value="D.DisasterId||">{-$dic.GraphDisasterId_[0]-}</option>
 							{-foreach name=ef1 key=k item=i from=$ef1-}
@@ -130,7 +130,7 @@
 						</select>
 						<br />
 						<b onMouseOver="showtip('{-$dic.GraphMode[2]-}');">{-$dic.GraphMode[0]-}</b><br />
-						<select id="_G+Mode2" name="_G+Mode2" class="disabled line" disabled
+						<select id="prmGraphMode1" name="prmGraph[Mode][1]" class="disabled line" disabled
 							onMouseOver="showtip('{-$dic.GraphMode[2]-}');">
 							<option value="NORMAL" selected>{-#gmodnormal#-}</option>
 							<option id="_G+M_accu2" value="ACCUMULATE">{-#gmodaccumul#-}</option>
