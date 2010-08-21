@@ -88,6 +88,10 @@ function onReadyGraphic() {
 			jQuery('#prmGraphScale0').disable();
 		}
 	});
+	
+	jQuery('[help_tip]').mouseover(function() {
+		showtip(jQuery(this).attr('help_tip'));
+	});
 
 	// Initialize Controls on Load
 	jQuery('#prmGraphTypeComparative').val('').trigger('change');
