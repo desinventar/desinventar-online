@@ -9,6 +9,7 @@ function onReadyGraphic() {
 			jQuery('#prmGraphStat').val('MONTH');
 		}
 	});
+
 	jQuery('#prmGraphStat').change(function() {
 		var Value = jQuery(this).val();
 		if (Value != '') {
@@ -17,7 +18,7 @@ function onReadyGraphic() {
 			jQuery('#prmGraphPeriod').val('YEAR');
 		}
 	});
-	
+
 	jQuery('#prmGraphTypeHistogram').change(function() {
 		jQuery('#prmGraphType').val('HISTOGRAM');
 		var grp = jQuery(this).val();
@@ -52,7 +53,6 @@ function onReadyGraphic() {
 		enab($('_G+K_pie'));
 		$('_G+Kind').value = "PIE";
 		$('prmGraphPeriod').value = "";
-		//jQuery('#prmGraphField2').disable();
 		disab($('prmGraphPeriod'));
 		$('prmGraphStat').value = "";
 		disab($('prmGraphStat'));
@@ -67,23 +67,18 @@ function onReadyGraphic() {
 	});
 
 	// Initialize Controls on Load
-	jQuery('#prmGraphTypeHistogram').trigger('change');
+	jQuery('#prmGraphTypeComparative').val('').trigger('change');
+	jQuery('#prmGraphTypeHistogram').val('D.DisasterBeginTime').trigger('change');
 } // onReadyGraphic()
 
 function disabAxis2() {
 	jQuery('#divVerticalAxis2').hide();
 	jQuery('#prmGraphField2').val('');
-	disab($('_G+Scale2'));
-	disab($('_G+Data2'));
-	disab($('_G+Mode2'));
 }
 
 function enabAxis2() {
 	jQuery('#divVerticalAxis2').show();
 	jQuery('#prmGraphField2').val('');
-	enab($('_G+Scale2'));
-	enab($('_G+Data2'));
-	enab($('_G+Mode2'));
 }
 
 function grpSelectbyKind() {

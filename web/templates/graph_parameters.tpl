@@ -199,7 +199,7 @@
 						<td>
 							<select id="prmGraphTypeComparative" name="_G+TypeC" class="line"
 								onMouseOver="showtip('{-$dic.GraphType[2]-}');">
-								<option value="" disabled selected></option>
+								<option value="" disabled></option>
 								<option value="D.EventId">{-$dic.GraphComByEvents[0]-}</option>
 								<option value="D.CauseId">{-$dic.GraphComByCauses[0]-}</option>
 								{-foreach name=glev key=k item=i from=$glev-}
