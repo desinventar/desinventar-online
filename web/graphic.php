@@ -7,7 +7,6 @@
 require_once('include/loader.php');
 require_once('include/graphic.class.php');
 
-$post = $_POST;
 
 $reg = getParameter('_REG','');
 
@@ -16,8 +15,13 @@ if ($reg == '') {
 }
 
 $us->open($reg);
-fb($_POST);
-fb($_POST['prmGraph']['Type']);
+foreach($_POST['prmGraph']['Field'] as $key => $value) {
+	if ($value == '') {
+		unset($_POST['prmGraph']['Field'][$key]);
+	}
+}
+fb($_POST['prmGraph']['Field']);
+$post = $_POST;
 $RegionLabel = $us->q->getDBInfoValue('RegionLabel');
 $t->assign('RegionLabel', $RegionLabel);
 fixPost($post);
@@ -60,11 +64,8 @@ if ($GraphCommand != '') {
 	} // foreach
 
 	$post['NumberOfVerticalAxis'] = 1;
-	$post['FieldList'] = array($post['_G+Field']);
-	if (isset($post['prmGraphField2']) && !empty($post['prmGraphField2'])) {
-		$post['NumberOfVerticalAxis'] = 2;
-		array_push($post['FieldList'], $post['prmGraphField2']);
-	}
+	$post['FieldList'] = $post['prmGraph']['Field'];
+	$post['NumberOfVerticalAxis'] = count($post['FieldList']);
 	
 	/*	
 	// Try to find the X Axis Field to Use (DisasterBeginTime)
@@ -109,10 +110,7 @@ if ($GraphCommand != '') {
 	$dislist = $ResultData;
 	*/
 	$opc['Group'] = $ele;
-	$opc['Field'] = array($post['_G+Field']);
-	if (isset($post['prmGraphField2']) && !empty($post['prmGraphField2'])) {
-		array_push($opc['Field'], $post['prmGraphField2']);
-	}
+	$opc['Field'] = $post['prmGraph']['Field'];
 	$sql = $us->q->genSQLProcess($qd, $opc);
 	$dislist = $us->q->getassoc($sql);
 	if (!empty($dislist)) {
