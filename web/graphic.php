@@ -21,6 +21,8 @@ foreach($_POST['prmGraph']['Field'] as $key => $value) {
 		unset($_POST['prmGraph']['Field'][$key]);
 		unset($_POST['prmGraph']['Scale'][$key]);
 		unset($_POST['prmGraph']['Data'][$key]);
+		unset($_POST['prmGraph']['Mode'][$key]);
+		unset($_POST['prmGraph']['Tendency'][$key]);
 	}
 }
 $post = $_POST;

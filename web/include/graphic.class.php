@@ -304,7 +304,7 @@ class Graphic {
 					$y1p->SetLegend($sY1AxisLabel);
 					$m[] = $y1p;
 					// Add Tendence Line : Linear regression , others 
-					if ($opc['_G+TendLine'] == "LINREG") {
+					if ($opc['prmGraph']['TendLine'][0] == "LINREG") {
 						// Add linear regression (Test)
 						$std = new Math();
 						$xx = array_fill(0, count($val), 0);
