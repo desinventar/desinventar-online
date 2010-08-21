@@ -527,7 +527,7 @@
 			jQuery('#prmCommand').val('cmdGraphSave');
 		}
 		w = Ext.getCmp('westm');
-		$('_G+cmd').value = cmd;
+		jQuery('#prmGraphCommand').val(cmd);
 		combineForms('DC', 'CG');
 		w.collapse(); //hide()
 		$('DC').action='graphic.php';
