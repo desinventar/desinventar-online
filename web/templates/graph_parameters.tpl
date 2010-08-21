@@ -213,9 +213,9 @@
 				<td></td>
 			</tr>
 			</table>
-			<input type="hidden" id="_G+cmd" name="_G+cmd" value="result" />
-			<input type="hidden" id="prmGraphType" name="prmGraph[Type]"     value="" />
-			<input type="hidden" id="prmGraphVar"  name="prmGraph[Variable]" value="D.DisasterBeginTime" />
+			<input type="hidden" id="prmGraphCommand" name="prmGraph[Command]"  value="result" />
+			<input type="hidden" id="prmGraphType"    name="prmGraph[Type]"     value="" />
+			<input type="hidden" id="prmGraphVar"     name="prmGraph[Variable]" value="D.DisasterBeginTime" />
 		</form>
 	</div>
 </div>

@@ -40,7 +40,7 @@ $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Sector', $lg));
 $dic = array_merge($dic, $us->q->getEEFieldList("True"));
 //$t->assign ("dic", $dic);
-$GraphCommand = getParameter('_G+cmd');
+$GraphCommand = $_POST['prmGraph']['Command'];
 if ($GraphCommand != '') {
 	// Process QueryDesign Fields and count results
 	$qd  = $us->q->genSQLWhereDesconsultar($post);
