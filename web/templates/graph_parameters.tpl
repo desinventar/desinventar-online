@@ -77,7 +77,7 @@
 							</select>
 							<br /><br />
 							<!--<b onMouseOver="showtip('{-$dic.GraphFeel[2]-}');">{-$dic.GraphFeel[0]-}</b><br>-->
-							<select id="_G+Feel" name="_G+Feel" size="2" onMouseOver="showtip('{-$dic.GraphFeel[2]-}');" class="line">
+							<select id="prmGraphFeel" name="prmGraph[Feel]" size="2" onMouseOver="showtip('{-$dic.GraphFeel[2]-}');" class="line">
 								<option value="2D">{-#gfee2d#-}</option>
 								<option value="3D" selected>{-#gfee3d#-}</option>
 							</select>
