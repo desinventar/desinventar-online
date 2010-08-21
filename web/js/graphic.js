@@ -19,6 +19,12 @@ function onReadyGraphic() {
 		}
 	});
 
+	jQuery('#prmGraphField1').change(function() {
+		enab($('prmGraphScale1'));
+		enab($('prmGraphData1'));
+		enab($('prmGraphMode1'));
+	});
+	
 	jQuery('#prmGraphTypeHistogram').change(function() {
 		jQuery('#prmGraphType').val('HISTOGRAM');
 		var grp = jQuery(this).val();
