@@ -15,7 +15,7 @@
 				<td id="tdGraphParamAxis1" align="right">
 					<u>{-#gveraxis#-} 1:</u><br>
 					<b onMouseOver="showtip('{-$dic.GraphField[2]-}');">{-$dic.GraphField[0]-}</b><br>
-					<select id="_G+Field" name="_G+Field" onMouseOver="showtip('{-$dic.GraphField[2]-}');" class="line">
+					<select id="prmGraphField0" name="prmGraph[Field][0]" onMouseOver="showtip('{-$dic.GraphField[2]-}');" class="line">
 						<option value="D.DisasterId||" selected>{-$dic.GraphDisasterId_[0]-}</option>
 					{-foreach name=ef1 key=k item=i from=$ef1-}
 						<option value="D.{-$k-}Q|>|-1">{-$i[0]-}</option>
@@ -89,7 +89,7 @@
 					<div id="divVerticalAxis2">
 						<u>{-#gveraxis#-} 2:</u><br />
 						<b onMouseOver="showtip('{-$dic.GraphField[2]-}');">{-$dic.GraphField[0]-}</b><br />
-						<select id="prmGraphField2" name="prmGraphField2" size="1" onMouseOver="showtip('{-$dic.GraphField[2]-}');"
+						<select id="prmGraphField1" name="prmGraph[Field][1]" size="1" onMouseOver="showtip('{-$dic.GraphField[2]-}');"
 							onChange="enab($('_G+Scale2')); enab($('_G+Data2')); enab($('_G+Mode2'));" class="line">
 							<option value="" selected></option>
 							<option value="D.DisasterId||">{-$dic.GraphDisasterId_[0]-}</option>

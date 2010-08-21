@@ -73,12 +73,12 @@ function onReadyGraphic() {
 
 function disabAxis2() {
 	jQuery('#divVerticalAxis2').hide();
-	jQuery('#prmGraphField2').val('');
+	jQuery('#prmGraphField1').val('');
 }
 
 function enabAxis2() {
 	jQuery('#divVerticalAxis2').show();
-	jQuery('#prmGraphField2').val('');
+	jQuery('#prmGraphField1').val('');
 }
 
 function grpSelectbyKind() {

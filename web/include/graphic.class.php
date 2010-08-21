@@ -356,8 +356,9 @@ class Graphic {
 			$this->g->footer->left->Set("DesInventar - http://www.desinventar.org");
 			//$this->g->footer->right->Set("Fuentes: __________________________");
 			if (is_array($m)) {
-				foreach ($m as $m1)
+				foreach ($m as $m1) {
 					$this->g->Add($m1);
+				}
 			} else {
 				$this->g->Add($m);
 			}
