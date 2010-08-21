@@ -16,7 +16,7 @@ if ($reg == '') {
 }
 
 $us->open($reg);
-
+fb($_POST['_G+Type']);
 $RegionLabel = $us->q->getDBInfoValue('RegionLabel');
 $t->assign('RegionLabel', $RegionLabel);
 fixPost($post);

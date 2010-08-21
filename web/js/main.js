@@ -17,7 +17,6 @@ function onReadyMain() {
 					jQuery('#dcr').html('');
 					jQuery('#dcr').html(data);
 					onReadyData();
-					onReadyGraphic();
 					onReadyThematicMap();
 					onReadyStatistic();
 				}
