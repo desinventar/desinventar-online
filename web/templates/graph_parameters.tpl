@@ -90,7 +90,7 @@
 						<u>{-#gveraxis#-} 2:</u><br />
 						<b onMouseOver="showtip('{-$dic.GraphField[2]-}');">{-$dic.GraphField[0]-}</b><br />
 						<select id="prmGraphField1" name="prmGraph[Field][1]" size="1" onMouseOver="showtip('{-$dic.GraphField[2]-}');"
-							onChange="enab($('prmGraphScale1')); enab($('prmGraphData1')); enab($('prmGraphMode1'));" class="line">
+							 class="line">
 							<option value="" selected></option>
 							<option value="D.DisasterId||">{-$dic.GraphDisasterId_[0]-}</option>
 							{-foreach name=ef1 key=k item=i from=$ef1-}
