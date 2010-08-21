@@ -52,8 +52,8 @@ class Graphic {
 		// get Period and Stationality of the Graph (YEAR, YMONTH, YWEEK, YDAY)
 		if (isset($opc['prmGraph']['Period']))
 			$this->sPeriod = $opc['prmGraph']['Period'];
-		if (isset($opc['_G+Stat']))
-			$this->sStat = $opc['_G+Stat'];
+		if (isset($opc['prmGraph']['Stat']))
+			$this->sStat = $opc['prmGraph']['Stat'];
 		// MULTIBAR OR MULTILINE: reformat arrays completing time serie
 		if ($gType == "XTEMPO") {
 			if ($kind == "BAR")
