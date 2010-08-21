@@ -50,8 +50,8 @@ class Graphic {
 		}
 		$val = array();
 		// get Period and Stationality of the Graph (YEAR, YMONTH, YWEEK, YDAY)
-		if (isset($opc['_G+Period']))
-			$this->sPeriod = $opc['_G+Period']; //$this->getGraphPeriod($opc['_G+Period']);
+		if (isset($opc['prmGraph']['Period']))
+			$this->sPeriod = $opc['prmGraph']['Period'];
 		if (isset($opc['_G+Stat']))
 			$this->sStat = $opc['_G+Stat'];
 		// MULTIBAR OR MULTILINE: reformat arrays completing time serie

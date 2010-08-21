@@ -170,7 +170,7 @@
 							<b onMouseOver="showtip('{-$dic.GraphPeriod[2]-}');">{-$dic.GraphPeriod[0]-}
 						</td>
 						<td>
-							<select id="prmGraphPeriod" name="_G+Period" class="line"
+							<select id="prmGraphPeriod" name="prmGraph[Period]" class="line"
 								onMouseOver="showtip('{-$dic.GraphPeriod[2]-}');">
 								<option value=""></option>
 								<option value="YEAR" selected>{-#gperannual#-}</option>
