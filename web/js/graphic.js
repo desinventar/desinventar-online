@@ -69,8 +69,9 @@ function onReadyGraphic() {
 	jQuery('#prmGraphKind').change(function() {
 		comp = $('prmGraphTypeComparative').value;
 		var kind = jQuery(this).val();
-		if (kind == 'BAR' || kind 'LINE' || kind 'PIE' &&
-		   (comp == "D.EventId" || comp == "D.CauseId" || comp.substr(0,13) == "D.GeographyId"))) {
+		if ( (kind == 'BAR' || kind == 'LINE' || kind == 'PIE') &&
+		     (comp == 'D.EventId' || comp == 'D.CauseId' || comp.substr(0,13) == 'D.GeographyId') 
+		   ) {
 			 enabAxis2();
 			 enab($('_G+M_accu'));
 			 disab($('_G+M_over'));
