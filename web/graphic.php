@@ -15,7 +15,6 @@ if ($reg == '') {
 }
 
 $us->open($reg);
-fb($_POST['prmGraph']['Field']);
 foreach($_POST['prmGraph']['Field'] as $key => $value) {
 	if ($value == '') {
 		unset($_POST['prmGraph']['Field'][$key]);
@@ -25,6 +24,7 @@ foreach($_POST['prmGraph']['Field'] as $key => $value) {
 		unset($_POST['prmGraph']['Tendency'][$key]);
 	}
 }
+fb($_POST['prmGraph']);
 $post = $_POST;
 $RegionLabel = $us->q->getDBInfoValue('RegionLabel');
 $t->assign('RegionLabel', $RegionLabel);

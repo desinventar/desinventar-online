@@ -100,12 +100,12 @@ function onReadyGraphic() {
 
 function disabAxis2() {
 	jQuery('#divVerticalAxis2').hide();
-	jQuery('#prmGraphField1').val('');
+	jQuery('#prmGraphField1').val('').disable();
 }
 
 function enabAxis2() {
 	jQuery('#divVerticalAxis2').show();
-	jQuery('#prmGraphField1').val('');
+	jQuery('#prmGraphField1').val('').enable();
 }
 
 
