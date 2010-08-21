@@ -15,12 +15,13 @@ if ($reg == '') {
 }
 
 $us->open($reg);
+fb($_POST['prmGraph']['Field']);
 foreach($_POST['prmGraph']['Field'] as $key => $value) {
 	if ($value == '') {
 		unset($_POST['prmGraph']['Field'][$key]);
+		unset($_POST['prmGraph']['Scale'][$key]);
 	}
 }
-fb($_POST['prmGraph']['Field']);
 $post = $_POST;
 $RegionLabel = $us->q->getDBInfoValue('RegionLabel');
 $t->assign('RegionLabel', $RegionLabel);

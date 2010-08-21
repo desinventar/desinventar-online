@@ -158,7 +158,7 @@ class Graphic {
 
 			//Left Axis (Y1)
 			$Y1AxisLabelLen = $this->getSeriesMaxLen($sY1AxisLabel);
-			if ($opc['_G+Scale'] == 'textlog') {
+			if ($opc['prmGraph']['Scale'][0] == 'textlog') {
 				$Y1AxisLabelLen++;
 			}
 			$Y1AxisTitleMargin = $Y1AxisLabelLen * 8 + 10;
@@ -194,8 +194,8 @@ class Graphic {
 			if ($wx > 980)
 				$wx = 980;
 			$this->g = new Graph($wx, $hx, "auto");
-			if (isset($opc['_G+Scale'])) {
-				$this->g->SetScale($opc['_G+Scale']); // textint, textlog
+			if (isset($opc['prmGraph']['Scale'][0])) {
+				$this->g->SetScale($opc['prmGraph']['Scale'][0]); // textint, textlog
 				$this->g->xgrid->Show(true,true);
 				$this->g->xaxis->SetTitle($sXAxisLabel, 'middle');
 				$this->g->xaxis->SetTitlemargin($XAxisTitleMargin);
@@ -210,18 +210,18 @@ class Graphic {
 				$this->g->yaxis->title->SetFont(FF_ARIAL, FS_NORMAL);
 				$this->g->yaxis->scale->SetGrace(0);
 				$this->g->yaxis->SetColor('darkblue');
-				if ($opc['_G+Scale'] == "textlog") {
+				if ($opc['prmGraph']['Scale'][0] == "textlog") {
 					$this->g->yaxis->scale->ticks->SetLabelLogType(LOGLABELS_PLAIN);
 				}
-		        if (isset($opc['_G+Scale2']) && ($gType == "2TEMPO" || $gType == "2COMPAR")) {
-					$this->g->SetY2Scale($opc['_G+Scale2']);	// int, log
+		        if (isset($opc['prmGraph']['Scale'][1]) && ($gType == "2TEMPO" || $gType == "2COMPAR")) {
+					$this->g->SetY2Scale($opc['prmGraph']['Scale'][1]);	// int, log
 					$this->g->y2grid->Show(true,true);
 					$this->g->y2axis->SetTitle($sY2AxisLabel, 'middle');
 					$this->g->y2axis->SetTitlemargin($Y2AxisTitleMargin);
 					$this->g->y2axis->title->SetFont(FF_ARIAL, FS_NORMAL);
 					$this->g->y2axis->scale->SetGrace(0);
 					$this->g->y2axis->SetColor('darkred');
-					if ($opc['_G+Scale2'] == "log")
+					if ($opc['prmGraph']['Scale'][1] == "log")
 						$this->g->y2axis->scale->ticks->SetLabelLogType(LOGLABELS_PLAIN);
 		        }
 			} // if G+Scale

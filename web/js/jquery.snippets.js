@@ -29,10 +29,14 @@ jQuery.fn.unhighlight = function() {
 
 jQuery.fn.disable = function() {
 	jQuery(this).attr('disabled',true);
+	jQuery(this).attr('readonly',true);
+	jQuery(this).addClass('disabled');
 	return this;
 }
 
 jQuery.fn.enable = function() {
 	jQuery(this).removeAttr('disabled');
+	jQuery(this).removeAttr('readonly');
+	jQuery(this).removeClass('disabled');
 	return this;
 }
