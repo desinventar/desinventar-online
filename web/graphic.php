@@ -54,8 +54,8 @@ if ($GraphCommand != '') {
 	foreach (explode("|", $post['prmGraph']['Variable']) as $itm) {
 		if ($itm == "D.DisasterBeginTime") {
 			// Histogram
-			if (isset($post['_G+Stat']) && strlen($post['_G+Stat'])>0) {
-				$ele[] = $post['_G+Stat'] ."|". $itm;
+			if (isset($post['prmGraph']['Stat']) && strlen($post['prmGraph']['Stat'])>0) {
+				$ele[] = $post['prmGraph']['Stat'] ."|". $itm;
 			} else {
 				$ele[] = $post['prmGraph']['Period'] ."|". $itm;
 			}

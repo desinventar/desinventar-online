@@ -183,7 +183,7 @@
 					<tr>
 						<td colspan="2">
 							<b onMouseOver="showtip('{-$dic.GraphSeaHistogram[2]-}');">{-#GHISTOANNUAL#-}</b>
-							<select id="prmGraphStat" name="_G+Stat" class="line"
+							<select id="prmGraphStat" name="prmGraph[Stat]" class="line"
 								onMouseOver="showtip('{-$dic.GraphSeaHistogram[2]-}');">
 								<option value=""></option>
 								<option value="DAY">{-#gseaday#-}</option>
