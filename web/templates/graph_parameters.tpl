@@ -69,7 +69,7 @@
 					<tr valign="center">
 						<td align="center">
 							<!--<b onMouseOver="showtip('{-$dic.GraphKind[2]-}');">{-$dic.GraphKind[0]-}</b><br>-->
-							<select id="_G+Kind" name="_G+Kind" size="3" onChange="grpSelectbyKind();"
+							<select id="prmGraphKind" name="prmGraph[Kind]" size="3"
 								onMouseOver="showtip('{-$dic.GraphKind[2]-}');" class="line">
 								<option value="BAR" selected>{-#gkndbars#-}</option>
 								<option id="_G+K_line" value="LINE">{-#gkndlines#-}</option>

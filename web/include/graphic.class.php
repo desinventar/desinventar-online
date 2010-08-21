@@ -21,7 +21,7 @@ class Graphic {
 	   data[0] == X, data[1] = Y1,  .. */
 	public function Graphic ($opc, $prmData) {
 		$this->data = $prmData;
-		$kind = $opc['_G+Kind'];
+		$kind = $opc['prmGraph']['Kind'];
 		// Get Label Information
 		$oLabels     = array_keys($this->data);
 		$sXAxisLabel = current($oLabels);

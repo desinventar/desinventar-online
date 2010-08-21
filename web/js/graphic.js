@@ -24,7 +24,7 @@ function onReadyGraphic() {
 		var grp = jQuery(this).val();
 		// Histogram Type
 		disab($('_G+K_pie'));
-		$('_G+Kind').value = "BAR";
+		jQuery('#prmGraphKind').val('BAR');
 		enab($('prmGraphPeriod'));
 		$('prmGraphPeriod').value = 'YEAR';
 		enab($('prmGraphStat'));
@@ -51,7 +51,7 @@ function onReadyGraphic() {
 		// Comparatives
 		disabAxis2();
 		enab($('_G+K_pie'));
-		$('_G+Kind').value = "PIE";
+		jQuery('#prmGraphKind').val('PIE');
 		$('prmGraphPeriod').value = "";
 		disab($('prmGraphPeriod'));
 		$('prmGraphStat').value = "";
@@ -64,6 +64,22 @@ function onReadyGraphic() {
 			jQuery('#prmGraphTypeHistogram').val('');
 		}
 		jQuery('#prmGraphVar').val(grp);
+	});
+
+	jQuery('#prmGraphKind').change(function() {
+		comp = $('prmGraphTypeComparative').value;
+		var kind = jQuery(this).val();
+		if (kind == 'BAR' || kind 'LINE' || kind 'PIE' &&
+		   (comp == "D.EventId" || comp == "D.CauseId" || comp.substr(0,13) == "D.GeographyId"))) {
+			 enabAxis2();
+			 enab($('_G+M_accu'));
+			 disab($('_G+M_over'));
+			 jQuery('#prmGraphScale0').enable();
+		} else {
+			disabAxis2();
+			disab($('_G+M_accu'));
+			jQuery('#prmGraphScale0').disable();
+		}
 	});
 
 	// Initialize Controls on Load
@@ -81,18 +97,4 @@ function enabAxis2() {
 	jQuery('#prmGraphField1').val('');
 }
 
-function grpSelectbyKind() {
-	comp = $('prmGraphTypeComparative').value;
-	if ($('_G+Kind').value == "BAR" || $('_G+Kind').value == "LINE" || ($('_G+Kind').value != "PIE" &&
-	   (comp == "D.EventId" || comp == "D.CauseId" || comp.substr(0,13) == "D.GeographyId"))) {
-		 enabAxis2();
-		 enab($('_G+M_accu'));
-		 disab($('_G+M_over'));
-		 jQuery('#prmGraphScale0').enable();
-	} else {
-		disabAxis2();
-		disab($('_G+M_accu'));
-		jQuery('#prmGraphScale0').disable();
-	}
-} //function
 
