@@ -206,7 +206,7 @@
 			</table>
 			<input type="hidden" id="prmGraphCommand" name="prmGraph[Command]"  value="result" />
 			<input type="hidden" id="prmGraphType"    name="prmGraph[Type]"     value="" />
-			<input type="hidden" id="prmGraphVar"     name="prmGraph[Variable]" value="D.DisasterBeginTime" />
+			<input type="hidden" id="prmGraphSubType" name="prmGraph[SubType]" value="D.DisasterBeginTime" />
 		</form>
 	</div>
 </div>

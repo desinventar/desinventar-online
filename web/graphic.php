@@ -50,7 +50,7 @@ if ($GraphCommand != '') {
 	
 	// Process Configuration options to Graphic
 	$ele = array();
-	foreach (explode("|", $post['prmGraph']['Variable']) as $itm) {
+	foreach (explode("|", $post['prmGraph']['SubType']) as $itm) {
 		if ($itm == "D.DisasterBeginTime") {
 			// Histogram
 			if (isset($post['prmGraph']['Stat']) && strlen($post['prmGraph']['Stat'])>0) {
