@@ -28,10 +28,10 @@ class Graphic {
 		$sY1AxisLabel = end($oLabels);
 		$q = new Query($opc['_REG']);
 		// Determine graphic type
-		if (substr($opc['prmGraph']['Variable'],2,18) == "DisasterBeginTime|") {
+		if (substr($opc['prmGraph']['SubType'],2,18) == "DisasterBeginTime|") {
 			$gType = "XTEMPO";				// One var x Event/Temporal..
 			$sY2AxisLabel = $oLabels[1];
-		} elseif (substr($opc['prmGraph']['Variable'],2,17) == "DisasterBeginTime") {
+		} elseif (substr($opc['prmGraph']['SubType'],2,17) == "DisasterBeginTime") {
 			$gType = "TEMPO";				// One var x time
 			// Set 2 axis graph only in Bars..
 			if ( ($opc['NumberOfVerticalAxis'] > 1) && ($kind == "BAR" || $kind == "LINE") ) {
@@ -256,11 +256,11 @@ class Graphic {
 		$this->g->subtitle->Set($subti);
 		$this->g->title->SetFont(FF_ARIAL,FS_NORMAL, 12);
 		// Get color palette..
-		if (substr_count($opc['prmGraph']['Variable'], "Event") > 0) {
+		if (substr_count($opc['prmGraph']['SubType'], "Event") > 0) {
 			$pal = $this->genPalette($acol, DI_EVENT, array_keys($val), $q);
-		} elseif (substr_count($opc['prmGraph']['Variable'], "Cause") > 0) {
+		} elseif (substr_count($opc['prmGraph']['SubType'], "Cause") > 0) {
 			$pal = $this->genPalette($acol, DI_CAUSE, array_keys($val), $q);
-		} elseif (substr_count($opc['prmGraph']['Variable'], "Geography") > 0) {
+		} elseif (substr_count($opc['prmGraph']['SubType'], "Geography") > 0) {
 			$pal = $this->genPalette($acol, DI_GEOGRAPHY, array_keys($val), null);
 		} elseif ($gType == "TEMPO") {
 			$pal = "darkorange";
