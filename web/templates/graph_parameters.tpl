@@ -150,12 +150,14 @@
 						<td>
 							<select id="prmGraphTypeHistogram" name="prmGraphTypeHistogram" class="line" help_tip="{-$dic.GraphType[2]-}">
 								<option value="" disabled></option>
-								<option value="D.DisasterBeginTime">{-$dic.GraphHisTemporal[0]-}</option>
-								<option value="D.DisasterBeginTime|D.EventId">{-$dic.GraphHisEveTemporal[0]-}</option>
+								<option value="{-$smarty.const.GRAPH_HISTOGRAM_TEMPORAL-}">{-$dic.GraphHisTemporal[0]-}</option>
+								<option value="{-$smarty.const.GRAPH_HISTOGRAM_EVENT-}">{-$dic.GraphHisEveTemporal[0]-}</option>
+								<option value="{-$smarty.const.GRAPH_HISTOGRAM_CAUSE-}">{-$dic.GraphHisCauTemporal[0]-}</option>
+								{-assign var='IndexOffset' value="100"-}
 								{-foreach name=glev key=k item=i from=$glev-}
-								<option value="D.DisasterBeginTime|D.GeographyId_{-$k-}">{-$i[0]-} {-$dic.GraphHisGeoTemporal[0]-}</option>
+									{-assign var='GeoLevel' value=`$IndexOffset+$k`-}
+									<option value="{-$GeoLevel-}">{-$i[0]-} {-$dic.GraphHisGeoTemporal[0]-}</option>
 								{-/foreach-}
-								<option value="D.DisasterBeginTime|D.CauseId">{-$dic.GraphHisCauTemporal[0]-}</option>
 							</select>
 						</td>
 					</tr>
@@ -191,10 +193,12 @@
 						<td>
 							<select id="prmGraphTypeComparative" name="prmGraphTypeComparative" class="line" help_tip="{-$dic.GraphType[2]-}">
 								<option value="" disabled></option>
-								<option value="D.EventId">{-$dic.GraphComByEvents[0]-}</option>
-								<option value="D.CauseId">{-$dic.GraphComByCauses[0]-}</option>
+								<option value="{-$smarty.const.GRAPH_COMPARATIVE_EVENT-}">{-$dic.GraphComByEvents[0]-}</option>
+								<option value="{-$smarty.const.GRAPH_COMPARATIVE_CAUSE-}">{-$dic.GraphComByCauses[0]-}</option>
+								{-assign var='IndexOffset' value="200"-}
 								{-foreach name=glev key=k item=i from=$glev-}
-								<option value="D.GeographyId_{-$k-}">{-$dic.GraphComByGeography[0]-} {-$i[0]-}</option>
+									{-assign var='GeoLevel' value=`$IndexOffset+$k`-}
+								<option value="{-$GeoLevel-}">{-$dic.GraphComByGeography[0]-} {-$i[0]-}</option>
 								{-/foreach-}
 							</select>
 						</td>

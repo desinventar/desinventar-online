@@ -39,7 +39,8 @@ $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Sector', $lg));
 $dic = array_merge($dic, $us->q->getEEFieldList("True"));
 //$t->assign ("dic", $dic);
-$GraphCommand = $_POST['prmGraph']['Command'];
+$prmGraph = $post['prmGraph'];
+$GraphCommand = $prmGraph['Command'];
 if ($GraphCommand != '') {
 	// Process QueryDesign Fields and count results
 	$qd  = $us->q->genSQLWhereDesconsultar($post);
@@ -47,16 +48,37 @@ if ($GraphCommand != '') {
 	$c   = $us->q->getresult($sqc);
 	$NumRecords = $c['counter'];
 	$t->assign ("NumRecords", $NumRecords);
-	
+
+	$prmGraph['SubType'] = (int)$prmGraph['SubType'];
+	if ($prmGraph['SubType'] == GRAPH_HISTOGRAM_TEMPORAL) {
+		$prmGraph['VarList'] = 'D.DisasterBeginTime';
+	} elseif ($prmGraph['SubType'] == GRAPH_HISTOGRAM_EVENT) {
+		$prmGraph['VarList'] = 'D.DisasterBeginTime|D.EventId';
+	} elseif ($prmGraph['SubType'] == GRAPH_HISTOGRAM_CAUSE) {
+		$prmGraph['VarList'] = 'D.DisasterBeginTime|D.CauseId';
+	} elseif ($prmGraph['SubType'] == GRAPH_COMPARATIVE_EVENT) {
+		$prmGraph['VarList'] = 'D.EventId';
+	} elseif ($prmGraph['SubType'] == GRAPH_COMPARATIVE_CAUSE) {
+		$prmGraph['VarList'] = 'D.CauseId';
+	} elseif (($prmGraph['SubType'] >= 100) && ($prmGraph['SubType'] < 200) ) {
+		$k = $prmGraph['SubType'] - 100;
+		$prmGraph['VarList'] = 'D.DisasterBeginTime|D.GeographyId_' . $k;
+	} elseif ($prmGraph['SubType'] >= 200) {
+		$k = $prmGraph['SubType'] - 200;
+		$prmGraph['VarList'] = 'D.GeographyId_' . $k;
+	} else {
+		$prmGraph['VarList'] = $prmGraph['SubType'];
+	}
+	$post['prmGraph'] = $prmGraph;
 	// Process Configuration options to Graphic
 	$ele = array();
-	foreach (explode("|", $post['prmGraph']['SubType']) as $itm) {
+	foreach (explode("|", $prmGraph['VarList']) as $itm) {
 		if ($itm == "D.DisasterBeginTime") {
 			// Histogram
-			if (isset($post['prmGraph']['Stat']) && strlen($post['prmGraph']['Stat'])>0) {
-				$ele[] = $post['prmGraph']['Stat'] ."|". $itm;
+			if (isset($prmGraph['Stat']) && strlen($prmGraph['Stat'])>0) {
+				$ele[] = $prmGraph['Stat'] ."|". $itm;
 			} else {
-				$ele[] = $post['prmGraph']['Period'] ."|". $itm;
+				$ele[] = $prmGraph['Period'] ."|". $itm;
 			}
 		} elseif (substr($itm, 2, 11) == "GeographyId") {
 			$gl = explode("_", $itm);
@@ -67,7 +89,7 @@ if ($GraphCommand != '') {
 	} // foreach
 
 	$post['NumberOfVerticalAxis'] = 1;
-	$post['FieldList'] = $post['prmGraph']['Field'];
+	$post['FieldList'] = $prmGraph['Field'];
 	$post['NumberOfVerticalAxis'] = count($post['FieldList']);
 	
 	/*	
@@ -113,7 +135,7 @@ if ($GraphCommand != '') {
 	$dislist = $ResultData;
 	*/
 	$opc['Group'] = $ele;
-	$opc['Field'] = $post['prmGraph']['Field'];
+	$opc['Field'] = $prmGraph['Field'];
 	$sql = $us->q->genSQLProcess($qd, $opc);
 	$dislist = $us->q->getassoc($sql);
 	if (!empty($dislist)) {
