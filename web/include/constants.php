@@ -63,4 +63,13 @@ define('ERR_TABLE_LOCKED',     -10);
 define('ERR_UPLOAD_FAILED',    -11);
 define('ERR_NO_CONNECTION',    -99);
 
+// Graph Types
+define('GRAPH_HISTOGRAM_TEMPORAL'   , 0);
+define('GRAPH_HISTOGRAM_EVENT'      , 1);
+define('GRAPH_HISTOGRAM_CAUSE'      , 2);
+define('GRAPH_HISTOGRAM_GEOGRAPHY'  , 100);
+define('GRAPH_COMPARATIVE_EVENT'    , 3);
+define('GRAPH_COMPARATIVE_CAUSE'    , 4);
+define('GRAPH_COMPARATIVE_GEOGRAPHY', 200);
+
 </script>
