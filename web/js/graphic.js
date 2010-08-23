@@ -48,7 +48,7 @@ function onReadyGraphic() {
 		if (jQuery('#prmGraphTypeComparative').val() != '') {
 			jQuery('#prmGraphTypeComparative').val('');
 		}
-		jQuery('#prmGraphVar').val(grp);
+		jQuery('#prmGraphSubType').val(grp);
 	});
 	
 	jQuery('#prmGraphTypeComparative').change(function() {
@@ -69,7 +69,7 @@ function onReadyGraphic() {
 		if (jQuery('#prmGraphTypeHistogram').val() != '') {
 			jQuery('#prmGraphTypeHistogram').val('');
 		}
-		jQuery('#prmGraphVar').val(grp);
+		jQuery('#prmGraphSubType').val(grp);
 	});
 
 	jQuery('#prmGraphKind').change(function() {
