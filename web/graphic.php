@@ -70,6 +70,10 @@ if ($GraphCommand != '') {
 		$prmGraph['VarList'] = $prmGraph['SubType'];
 	}
 	$post['prmGraph'] = $prmGraph;
+
+	$sImageURL  = WWWDATA . '/graphs/di8graphic_'. session_id() . '_' . time() . '.png';
+	$sImageFile = WWWDIR  . '/graphs/di8graphic_'. session_id() . '_' . time() . '.png';
+
 	// Process Configuration options to Graphic
 	$ele = array();
 	foreach (explode('|', $prmGraph['VarList']) as $itm) {
@@ -160,10 +164,10 @@ if ($GraphCommand != '') {
 		}
 		// Construct Graphic Object and Show Page
 		$g = new Graphic($post, $gl);
-		$sImageURL  = WWWDATA . '/graphs/di8graphic_'. session_id() . '_' . time() . '.png';
-		$sImageFile = WWWDIR  . '/graphs/di8graphic_'. session_id() . '_' . time() . '.png';
 		// Wrote graphic to file
 		$g->Stroke($sImageFile);
+	}
+	if ($NumRecords > 0) {
 		if ($GraphCommand == 'export') {
 			// Export Graph as a Image
 			header('Content-type: Image/png');
@@ -181,7 +185,7 @@ if ($GraphCommand != '') {
 			$t->assign('image', $sImageURL . '?'. rand(1,3000));
 			$t->assign('ctl_showres', true);
 		} //if
-	} // if
+	}
 } //if
 
 $t->display('graphic.tpl');
