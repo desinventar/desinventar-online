@@ -77,6 +77,7 @@ switch ($cmd) {
 		}
 		$answer = array();
 		$answer['Status'] = $iReturn;
+		$answer['RegionId'] = $r->get('RegionId');
 		echo json_encode($answer);
 	break;
 	case 'dbzipimport' : 

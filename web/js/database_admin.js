@@ -50,6 +50,7 @@ function onReadyDatabaseAdmin() {
 				},
 				function(data) {
 					if (parseInt(data.Status) > 0) {
+						jQuery('#divDatabaseEditResult').html(data.Status + ' ' + data.RegionId);
 						// (jhcaiced) Change this for a method to update only the 
 						// affected row intead of loading all list again
 						updateList('dbl', 'region.php', 'cmd=adminreg');
