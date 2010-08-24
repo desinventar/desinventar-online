@@ -44,9 +44,10 @@ switch ($cmd) {
 		$answer['Status'] = $iReturn;
 		echo json_encode($answer);
 	break;
+	case 'cmdRegionCreate':
 	case 'cmdRegionUpdate':
 		$iReturn = ERR_NO_ERROR;
-		
+		fb($us->UserId);
 		if ($us->UserId != 'root') {
 			$iReturn = ERR_ACCESS_DENIED;
 		}

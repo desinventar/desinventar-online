@@ -395,9 +395,8 @@ class DIRegion extends DIObject {
 	public function clearRegionTables() {
 		// Delete ALL Record from Database - Be Careful...
 		foreach($this->getRegionTables() as $TableName) {
-			$query = 'DELETE FROM :TableName';
+			$query = 'DELETE FROM ' . $TableName;
 			$sth = $this->q->dreg->prepare($query);
-			$sth->bindParam(':TableName', $TableName, PDO::PARAM_STR);
 			$sth->execute();
 		} //foreach
 	}
