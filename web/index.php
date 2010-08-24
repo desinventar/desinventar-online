@@ -47,7 +47,6 @@ switch ($cmd) {
 	case 'cmdRegionCreate':
 	case 'cmdRegionUpdate':
 		$iReturn = ERR_NO_ERROR;
-		fb($us->UserId);
 		if ($us->UserId != 'root') {
 			$iReturn = ERR_ACCESS_DENIED;
 		}
