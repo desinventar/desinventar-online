@@ -41,7 +41,8 @@
 	<input id="add" type="button" value="{-#baddoption#-}" onclick="mod='regionpa'; setRegionPA('','', '', '', '', true,false); 
 		$('cmd').value='cmdRegionCreate'; $('fresult').src='about:blank;'" />
 	<span id="regionpastatusmsg" class="dlgmsg"></span><br />
-	<iframe name="fresult" id="fresult" frameborder="0" src="about:blank" style="height:30px; width:400px;"></iframe>
+	<div id="divDatabaseEditResult">
+	</div>
 	<div id="regionpaaddsect" style="display:none">
    	  <form id="frmDatabaseEdit">
 		<table class="grid">
