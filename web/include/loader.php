@@ -9,7 +9,7 @@ if (! isset($_SERVER["DI8_WEB"])) {
 }
 
 // This is the version of the software
-define('VERSION', '8.2.0.84');
+define('VERSION', '8.2.0.85');
 define('JSVERSION', '2010-08-24-01');
 
 // 2009-07-22 (jhcaiced) Adapted Configuration and Startup for 
