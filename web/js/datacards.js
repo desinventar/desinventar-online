@@ -11,6 +11,7 @@ function onReadyDatacards() {
 		jQuery('#divDatacardStatusMsg').show();
 		// Hide window's parameters
 		jQuery('#divDatacardParameter').hide();
+		jQuery('#divRecordNavigationInfo').hide();
 		
 		DisableEnableForm($('DICard'), true);
 		changeOptions();

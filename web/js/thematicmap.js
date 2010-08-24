@@ -72,7 +72,6 @@ function onReadyThematicMap() {
 
 	// Effects and Admin layer(s)
 	jQuery('#MapEffectLayers div').each(function() {
-		//alert(jQuery(this).attr('id'));
 		var MapFile = jQuery(this).find(':eq(1)').text();
 		var layer = new OpenLayers.Layer.WMS(
 			'DI8/' + jQuery(this).find(':eq(0)').text(),

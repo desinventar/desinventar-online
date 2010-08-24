@@ -297,7 +297,6 @@
 				case "text": case "hidden": case "password": case "textarea":
 					// is it a required field?
 					if (encodeURI(ft) == "required" && encodeURI(fv).length < 1) {
-						//alert('-' + fn + '- is a required field, please complete.');
 						els.focus();
 						return false;
 					}

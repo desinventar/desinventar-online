@@ -72,12 +72,14 @@
 				break;
 				// Datacards Menu Items
 				case 'mnuDatacardInsertEdit':
+					jQuery('#cardsRecordNumber').val(0);
 					jQuery('#cardsRecordSource').val('');
 					jQuery.post('index.php',
 						{cmd      : 'getRegionRecordCount',
 						 RegionId : jQuery('#desinventarRegionId').val()
 						},
 						function(data) {
+							jQuery('#cardsRecordNumber').val(0);
 							jQuery('#cardsRecordCount').val(data.RecordCount);
 							$('DICard').reset();	
 							//doDatacardClear();
