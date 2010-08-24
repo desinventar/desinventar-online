@@ -1,10 +1,12 @@
 function onReadyData() {
 	jQuery('.linkGridGotoCard').click(function() {
 		var DisasterId = jQuery(this).attr('DisasterId');
+		jQuery('#divDatacardWindow').trigger('display');
 		jQuery('#cardsRecordSource').val('data');
 		jQuery('#cardsRecordCount').val(jQuery('#prmDataPageRecords').val());
-		jQuery('#cardsRecordNumber').val(jQuery(this).attr('RowIndex'));
-		setDIForm(DisasterId);
+		jQuery('#cardsRecordNumber').val(jQuery(this).attr('rowindex'));
+		setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId);
+		difw.show();
 		return false;
 	});
 	
@@ -35,12 +37,6 @@ function onReadyData() {
 	
 	// Set Number of Records in Current Displayed Page
 	jQuery('#prmDataPageRecords').val(jQuery('#tblDataRows tr').size());
-}
-
-function setDIForm(prmDisasterId) {
-	jQuery('#divDatacardWindow').trigger('display');
-	setDICardFromId(jQuery('#desinventarRegionId').val(), prmDisasterId);
-	difw.show();
 }
 
 function doDataDisplayPage(page) {
