@@ -220,6 +220,7 @@ function onReadyDatacards() {
 	
 	// Datacard New/Edit/Save Commands
 	jQuery('#btnDatacardNew').click(function() {
+		doDatacardClear();
 		doDatacardNew();
 		jQuery('#GeoLevel0').trigger('clearGeographyItems');
 		jQuery('#GeographyId').val('');
