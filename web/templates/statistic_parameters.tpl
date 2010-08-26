@@ -1,3 +1,4 @@
+<div id="std-win" class="x-hidden">
 						<div class="x-window-header">{-#bstatistic#-}</div>
 						<div id="std-cfg">
 							<form id="CS" method="POST">
@@ -105,3 +106,4 @@
 								<input type="hidden" id="_S+saveopt" name="_S+saveopt" value="" />
 							</form>
 						</div>
+</div>

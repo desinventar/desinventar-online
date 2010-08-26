@@ -22,5 +22,3 @@
 <!-- Import datacards-->
 <div class="contentBlock" id="divDatacardsImport" style="display:none;">
 </div>
-
-

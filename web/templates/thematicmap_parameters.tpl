@@ -1,3 +1,4 @@
+<div id="map-win" class="x-hidden">
 						<div class="x-window-header">{-#bthematic#-}</div>
 						<div id="map-cfg">
 							<div id="colorpicker201" class="colorpicker201"></div>
@@ -104,3 +105,4 @@
 								</table> <!-- table class=conf -->
 							</form>
 						</div>
+</div>
