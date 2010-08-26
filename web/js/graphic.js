@@ -27,7 +27,7 @@ function onReadyGraphic() {
 	
 	jQuery('#prmGraphTypeHistogram').change(function() {
 		jQuery('#prmGraphType').val('HISTOGRAM');
-		var grp = jQuery(this).val();
+		var grp = parseInt(jQuery(this).val());
 		// Histogram Type
 		disab($('_G+K_pie'));
 		jQuery('#prmGraphKind').val('BAR');
@@ -35,7 +35,7 @@ function onReadyGraphic() {
 		$('prmGraphPeriod').value = 'YEAR';
 		enab($('prmGraphStat'));
 		jQuery('#prmGraphScale0').enable();
-		if (grp.substr(19, 1) == "|") {
+		if (grp > 0) {
 			disabAxis2();
 			disab($('_G+M_accu'));
 			enab($('_G+M_over'));
@@ -53,7 +53,7 @@ function onReadyGraphic() {
 	
 	jQuery('#prmGraphTypeComparative').change(function() {
 		jQuery('#prmGraphType').val('COMPARATIVE');
-		var grp = jQuery(this).val();
+		var grp = parseInt(jQuery(this).val());
 		// Comparatives
 		disabAxis2();
 		enab($('_G+K_pie'));
@@ -76,7 +76,7 @@ function onReadyGraphic() {
 		comp = $('prmGraphTypeComparative').value;
 		var kind = jQuery(this).val();
 		if ( (kind == 'BAR' || kind == 'LINE' || kind == 'PIE') &&
-		     (comp == 'D.EventId' || comp == 'D.CauseId' || comp.substr(0,13) == 'D.GeographyId') 
+		     (comp < 200) 
 		   ) {
 			 enabAxis2();
 			 enab($('_G+M_accu'));
