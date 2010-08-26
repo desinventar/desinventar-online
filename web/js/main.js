@@ -1,5 +1,6 @@
 function onReadyMain() {
 	onReadyCommon();
+	onReadyThematicMap();
 
 	jQuery('#DC').submit(function() {
 		var myURL = jQuery(this).attr('action');

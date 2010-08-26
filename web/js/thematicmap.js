@@ -55,12 +55,6 @@ function onReadyThematicMap() {
 											  {type: G_NORMAL_MAP, 'sphericalMercator': true});
 			map.addLayer(google1);
 
-			/*
-			var google2 = new OpenLayers.Layer.Google("Google Physical", 
-											  {type: G_PHYSICAL_MAP, 'sphericalMercator': true});
-			map.addLayer(google2);
-			*/
-	
 			var google3 = new OpenLayers.Layer.Google("Google Hybrid", 
 											{type: G_HYBRID_MAP, 'sphericalMercator': true});
 			map.addLayer(google3);
@@ -69,7 +63,7 @@ function onReadyThematicMap() {
 			map.addLayer(google4);
 		}
 	} //if
-
+	
 	// Effects and Admin layer(s)
 	jQuery('#MapEffectLayers div').each(function() {
 		var MapFile = jQuery(this).find(':eq(1)').text();
@@ -114,7 +108,7 @@ function onReadyThematicMap() {
 	if (lon == 0 && lat == 0) {
 		map.zoomToMaxExtent();
 	}
-
+	
 	jQuery('#MapTitle').val(jQuery('#defaultMapTitle').text());
 	jQuery('#linkRestoreMapTitle').click(function() {
 		jQuery('#MapTitle').val(jQuery('#defaultMapTitle').text());
