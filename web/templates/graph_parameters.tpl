@@ -53,9 +53,9 @@
 					<br />
 					<b help_tip="{-$dic.GraphMode[2]-}">{-$dic.GraphMode[0]-}</b><br/>
 					<select id="prmGraphMode0" name="prmGraph[Mode][0]" help_tip="{-$dic.GraphMode[2]-}" class="line">
-						<option value="NORMAL" selected>{-#gmodnormal#-}</option>
-						<option id="_G+M_accu" value="ACCUMULATE">{-#gmodaccumul#-}</option>
-						<option id="_G+M_over" value="OVERCOME" disabled>{-#gmodovercome#-}</option>
+						<option id="prmGraphModeNormal0"      value="NORMAL" selected>{-#gmodnormal#-}</option>
+						<option id="prmGraphModeCummulative0" value="CUMMULATIVE">{-#gmodaccumul#-}</option>
+						<option id="prmGraphModeStacked0"     value="STACKED" disabled>{-#gmodovercome#-}</option>
 					</select>
 					<br />
 					<b>{-#gtendline#-}</b><br/>
@@ -127,9 +127,9 @@
 						<br />
 						<b help_tip="{-$dic.GraphMode[2]-}">{-$dic.GraphMode[0]-}</b><br />
 						<select id="prmGraphMode1" name="prmGraph[Mode][1]" class="disabled line" disabled help_tip="{-$dic.GraphMode[2]-}">
-							<option value="NORMAL" selected>{-#gmodnormal#-}</option>
-							<option id="_G+M_accu2" value="ACCUMULATE">{-#gmodaccumul#-}</option>
-							<option id="_G+M_over2" value="OVERCOME" disabled>{-#gmodovercome#-}</option>
+							<option id="prmGraphModeNormal1"      value="NORMAL" selected>{-#gmodnormal#-}</option>
+							<option id="prmGraphModeCummulative1" value="CUMMULATIVE">{-#gmodaccumul#-}</option>
+							<option id="prmGraphModeStacked1"     value="STACKED" disabled>{-#gmodovercome#-}</option>
 						</select>
 					</div>
 				</td>

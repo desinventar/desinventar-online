@@ -104,7 +104,7 @@ class Graphic {
 		}
 		// Cummulative Graph : Add Values in Graph
 		if ($gType == 'TEMPO') {
-			if ($opc['prmGraph']['Mode'][0] == 'ACCUMULATE') {
+			if ($opc['prmGraph']['Mode'][0] == 'CUMMULATIVE') {
 				$SumValue = 0;
 				foreach ($val as $key=>$value) {
 					$SumValue += $value;
@@ -115,7 +115,7 @@ class Graphic {
 		
 		// Cummulative Graph for MultiSeries
 		if ( ($gType == '2TEMPO') || ($gType == '2COMPAR') ) {
-			if ($opc['prmGraph']['Mode'][0] == 'ACCUMULATE') {
+			if ($opc['prmGraph']['Mode'][0] == 'CUMMULATIVE') {
 				$SumValue = 0;
 				foreach($val as $key => $value) {
 					$SumValue += $value[0];
@@ -123,7 +123,7 @@ class Graphic {
 				}
 			}
 			$GraphValueMode2 = $opc['prmGraph']['Mode'][1];
-			if ($GraphValueMode2 == 'ACCUMULATE') {
+			if ($GraphValueMode2 == 'CUMMULATIVE') {
 				$SumValue = 0;
 				foreach($val as $key => $value) {
 					$SumValue += $value[1];
@@ -581,7 +581,7 @@ class Graphic {
 			$b[] = $bar;
 			$i++;
 		}
-		if ($opc['prmGraph']['Mode'][0] == 'OVERCOME') {
+		if ($opc['prmGraph']['Mode'][0] == 'STACKED') {
 			$gb = new AccBarPlot($b);
 		} else { 
 			$gb = new GroupBarPlot($b);
@@ -616,7 +616,7 @@ class Graphic {
 			$l[] = $line;
 			$i++;
 		}
-		if ($opc['prmGraph']['Mode'][0] == 'OVERCOME') {
+		if ($opc['prmGraph']['Mode'][0] == 'STACKED') {
 			$gl = new AccLinePlot($l);
 		} else { 
 			$gl = $l;
