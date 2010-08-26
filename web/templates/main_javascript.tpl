@@ -3,10 +3,11 @@
 			var RegionId = jQuery('#desinventarRegionId').val();
 			switch (item.id) {
 				case 'mnuRegionInfo':
+					jQuery('#divDatabaseInfo').html('');
 					if (RegionId != '') {
-						$('dcr').src = 'index.php?cmd=getRegionFullInfo&r=' + RegionId;
-						$('bsave').style.visibility = 'hidden';
-						$('bprint').style.visibility = 'hidden';
+						jQuery('#divDatabaseInfo').load('index.php?cmd=getRegionFullInfo&r=' + jQuery('#desinventarRegionId').val());
+						jQuery('#divDatabaseInfo').show();
+						jQuery('#dcr').hide();
 					}
 				break;
 				case 'mnuUserLogin':

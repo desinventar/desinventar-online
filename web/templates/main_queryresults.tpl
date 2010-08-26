@@ -100,6 +100,8 @@
 			</td>
 		</tr>
 	</table>
-	<div id="dcr">
-	</div>
+		<!-- divDatabaseInfo - Database Info -->
+		{-include file="database_info.tpl" -}
+		<div id="dcr">
+		</div>
 </div> <!-- end div id=divQueryResults -->
