@@ -1,5 +1,4 @@
 <!-- BEGIN GRAPHIC PARAMETERS -->
-<button id="grp-btn" class="rounded" ext:qtip="{-#tgraphicmsg#-}"><span>{-#bgraphic#-}</span></button>
 <div id="divGraphParameters" class="x-hidden">
 	<div class="x-window-header">{-#bgraphic#-}</div>
 	<div id="grp-cfg">

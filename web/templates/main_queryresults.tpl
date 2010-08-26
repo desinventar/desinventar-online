@@ -6,32 +6,20 @@
 			</td>
 			<td align="center">
 				<div id="ResultHeaderButtonToolbar">
-					<!--	SECTION : DATA CONFIGURATION ============================ -->
 					<button id="dat-btn" class="rounded" ext:qtip="{-#tdatamsg#-}"><span>{-#bdata#-}</span></button>
-					<div id="dat-win" class="x-hidden">
 					{-include file="viewdata_parameters.tpl" -}
-					</div> <!-- dat-win -->
-					<!--	END DATA SECTION -->
-					<!--	SECTION : THEMATICMAP CONFIGURATION -->
 					<button id="map-btn" class="rounded" ext:qtip="{-#tthematicmsg#-}"><span>{-#bthematic#-}</span></button>
-					<div id="map-win" class="x-hidden">
 					{-include file="thematicmap_parameters.tpl" -}
-					</div> <!-- map-win -->
-					<!--	END MAP SECTION -->
-					<!--	BEGIN GRAPHIC CONFIGURATION -->
+					<button id="grp-btn" class="rounded" ext:qtip="{-#tgraphicmsg#-}"><span>{-#bgraphic#-}</span></button>
 					{-include file="graph_parameters.tpl"-}
-					<!--	END GRAPHIC SECTION  -->
-					<!--	SECTION : STATISTIC CONFIGURATION -->
 					<button id="std-btn" class="rounded" ext:qtip="{-#tstatisticmsg#-}"><span>{-#bstatistic#-}</span></button>
-					<div id="std-win" class="x-hidden">
 					{-include file="statistic_parameters.tpl" -}
-					</div> <!-- std-win -->
-					<!--	END STATISTIC SECTION  -->
 				</div>
 				<!-- Show XML query open window-->
 				<div id="qry-win" class="x-hidden">
-					<div class="x-window-header">{-#mopenquery#-}</div>
-					<div id="qry-cfg" style="text-align:center;"><!-- ?r={-$reg-}-->
+					<div class="x-window-header">{-#mopenquery#-}
+					</div>
+					<div id="qry-cfg" style="text-align:center;">
 						<form id="openquery" enctype="multipart/form-data" action="index.php?r={-$reg-}" method="POST">
 							<br /><br />
 							<input type="hidden" name="cmd" value="openquery" />
@@ -42,7 +30,8 @@
 				</div>
 				<!-- Show DesInventar (input data) window-->
 				<div id="divDatacardWindow" class="x-hidden">
-					<div class="x-window-header">{-#mdcsection#-} | {-$desinventarUserId-} - {-$role-}</div>
+					<div class="x-window-header">{-#mdcsection#-} | {-$desinventarUserId-} - {-$role-}
+					</div>
 					<div id="dif-cfg" style="text-align:center;">
 						<div name="dif" id="dif" frameborder="0" height="600px;" width="100%">
 							{-include file="datacards.tpl"-}
@@ -51,22 +40,27 @@
 				</div>
 				<!-- Show User login/logout window -->
 				<div id="usr-win" class="x-hidden">
-					<div class="x-window-header">{-$desinventarUserId-} - {-$role-}</div>
+					<div class="x-window-header">{-$desinventarUserId-} - {-$role-}
+					</div>
 					<div id="usr">
 						{-include file="user_login.tpl" -}
 						<br />
 						<a href="javascript:void(null)" class="rememberpasswordlink" onclick="updateList('passlost', 'user.php', 'cmd=passlost');">{-#tpasslost#-}</a>
-						<div id="passlost"></div>
+						<div id="passlost">
+						</div>
 					</div>
 				</div>
 				<!-- Show Database functions window -->
 				<div id="dbl-win" class="x-hidden">
-					<div class="x-window-header">{-$desinventarUserId-} - {-$role-}</div>
-					<div id="dbl"></div>
+					<div class="x-window-header">{-$desinventarUserId-} - {-$role-}
+					</div>
+					<div id="dbl">
+					</div>
 				</div>
 				<!-- Show Dialog window -->
 				<div id="dlg-win" class="x-hidden">
-					<div class="x-window-header"></div>
+					<div class="x-window-header">
+					</div>
 					<div id="dlg">
 						<table border="0">
 							<tr>
@@ -100,8 +94,8 @@
 			</td>
 		</tr>
 	</table>
-		<!-- divDatabaseInfo - Database Info -->
-		{-include file="database_info.tpl" -}
-		<div id="dcr">
-		</div>
+	<!-- divDatabaseInfo - Database Info -->
+	{-include file="database_info.tpl" -}
+	<div id="dcr">
+	</div>
 </div> <!-- end div id=divQueryResults -->

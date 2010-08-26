@@ -1,3 +1,4 @@
+<div id="dat-win" class="x-hidden">
 <div class="x-window-header">{-#bdata#-}
 </div>
 <div id="dat-cfg">
@@ -66,4 +67,5 @@
 		<input type="hidden" id="_D+cmd" name="_D+cmd" value="result" />
 		<input type="hidden" id="_D+saveopt" name="_D+saveopt" value="" />
 	</form>
+</div>
 </div>
