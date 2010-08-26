@@ -37,12 +37,14 @@ function onReadyGraphic() {
 		jQuery('#prmGraphScale0').enable();
 		if (grp > 0) {
 			disabAxis2();
-			disab($('_G+M_accu'));
-			enab($('_G+M_over'));
+			jQuery('#prmGraphMode0').val('NORMAL');
+			disab($('prmGraphModeCummulative0'));
+			enab($('prmGraphModeStacked0'));
 		} else {
 			enabAxis2();
-			enab($('_G+M_accu'));
-			disab($('_G+M_over'));
+			jQuery('#prmGraphMode0').val('NORMAL');
+			enab($('prmGraphModeCummulative0'));
+			disab($('prmGraphModeStacked0'));
 		}
 		disab($('_G+D_perc'));
 		if (jQuery('#prmGraphTypeComparative').val() != '') {
@@ -63,8 +65,9 @@ function onReadyGraphic() {
 		$('prmGraphStat').value = "";
 		disab($('prmGraphStat'));
 		jQuery('#prmGraphScale0').disable();
-		disab($('_G+M_accu'));
-		disab($('_G+M_over'));
+		jQuery('#prmGraphMode0').val('NORMAL');
+		disab($('prmGraphModeCummulative0'));
+		disab($('prmGraphModeStacked0'));
 		enab($('_G+D_perc'));
 		if (jQuery('#prmGraphTypeHistogram').val() != '') {
 			jQuery('#prmGraphTypeHistogram').val('');
@@ -79,12 +82,12 @@ function onReadyGraphic() {
 		     (comp < 200) 
 		   ) {
 			 enabAxis2();
-			 enab($('_G+M_accu'));
-			 disab($('_G+M_over'));
+			 enab($('prmGraphModeCummulative0'));
+			 disab($('prmGraphModeStacked0'));
 			 jQuery('#prmGraphScale0').enable();
 		} else {
 			disabAxis2();
-			disab($('_G+M_accu'));
+			disab($('prmGraphModeCummulative0'));
 			jQuery('#prmGraphScale0').disable();
 		}
 	});
