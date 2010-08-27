@@ -167,7 +167,7 @@ class Graphic {
 				$Y1AxisLabelLen++;
 			}
 			$Y1AxisTitleMargin = $Y1AxisLabelLen + 20;
-			$ImgMarginLeft = $Y1AxisTitleMargin + 5;
+			$ImgMarginLeft = $Y1AxisTitleMargin + 15;
 
 			if ($sY2AxisLabel != '') {
 				// Right Axis (Y2)
