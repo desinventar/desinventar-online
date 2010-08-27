@@ -168,7 +168,7 @@ class Graphic {
 			}
 			$Y1AxisTitleMargin = $Y1AxisLabelLen * 8 + 10;
 			$ImgMarginLeft = $Y1AxisTitleMargin + 16;
-			
+
 			if ($sY2AxisLabel != '') {
 				// Right Axis (Y2)
 				if ($gType != 'XTEMPO') {
@@ -188,8 +188,8 @@ class Graphic {
 				} else {
 					// In this case this is the LegendBox width
 					$Y2AxisLabelLen = $this->getSeriesMaxLen($sY2AxisLabel);
-					$Y2AxisTitleMargin = $Y2AxisLabelLen * 6.7;
-					$ImgMarginRight = $Y2AxisTitleMargin + 40;
+					$Y2AxisTitleMargin = $Y2AxisLabelLen * 8.5;
+					$ImgMarginRight += $Y2AxisTitleMargin + 40;
 				}
 			}
 			// 2D, 3D Graphic
