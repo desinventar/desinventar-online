@@ -158,7 +158,7 @@ class Graphic {
 		} else {
 			// Horizontal Axis (X)
 			$XAxisLabelLen = $this->getSeriesMaxLen($sXAxisLabel);
-			$XAxisTitleMargin  = $XAxisLabelLen * 6;
+			$XAxisTitleMargin  = $XAxisLabelLen; // * 6;
 			$ImgMarginBottom = $XAxisTitleMargin + 16 + 16; // XAxisTitle + http://www... line
 
 			//Left Axis (Y1)
@@ -166,16 +166,16 @@ class Graphic {
 			if ($opc['prmGraph']['Scale'][0] == 'textlog') {
 				$Y1AxisLabelLen++;
 			}
-			$Y1AxisTitleMargin = $Y1AxisLabelLen * 8 + 10;
-			$ImgMarginLeft = $Y1AxisTitleMargin + 16;
+			$Y1AxisTitleMargin = $Y1AxisLabelLen + 20;
+			$ImgMarginLeft = $Y1AxisTitleMargin + 5;
 
 			if ($sY2AxisLabel != '') {
 				// Right Axis (Y2)
 				if ($gType != 'XTEMPO') {
 					// In this case this is the LegendBox width
 					$Y2AxisLabelLen = $this->getSeriesMaxLen($sY2AxisLabel);
-					$Y2AxisTitleMargin = $Y2AxisLabelLen * 8 + 20;
-					$ImgMarginRight = $Y2AxisTitleMargin + 10;
+					$Y2AxisTitleMargin = $Y2AxisLabelLen; // * 8 + 20;
+					$ImgMarginRight = $Y2AxisTitleMargin + 50;
 					
 					// Legend Box
 					$MaxLen = strlen($this->data[$sY1AxisLabel]);
@@ -188,8 +188,8 @@ class Graphic {
 				} else {
 					// In this case this is the LegendBox width
 					$Y2AxisLabelLen = $this->getSeriesMaxLen($sY2AxisLabel);
-					$Y2AxisTitleMargin = $Y2AxisLabelLen * 8.5;
-					$ImgMarginRight += $Y2AxisTitleMargin + 40;
+					$Y2AxisTitleMargin = $Y2AxisLabelLen; // * 8.5;
+					$ImgMarginRight += $Y2AxisTitleMargin + 50;
 				}
 			}
 			// 2D, 3D Graphic
@@ -652,10 +652,13 @@ class Graphic {
 		return $pal;
 	}
 
-	public function getSeriesMaxLen($DataKey) {
+	public function getSeriesMaxLen($DataKey) {	
+		$myFont = 'arial.ttf';
 		$MaxLen = 0;
 		foreach($this->data[$DataKey] as $AxisValue) {
-			$Len = strlen($AxisValue);
+			//$Len = strlen($AxisValue);
+			$bbox = imagettfbbox(10, $Angle, $myFont, $AxisValue);
+			$Len = $bbox[2] - $bbox[0];
 			if ($Len > $MaxLen) {
 				$MaxLen = $Len;
 			}
