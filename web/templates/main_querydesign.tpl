@@ -3,8 +3,8 @@
 	<input type="hidden" id="_REG" name="_REG" value="{-$reg-}" />
 	<input type="hidden" id="_CMD" name="_CMD" />
 	<input type="hidden" id="prmCommand" name="prmCommand" value="DEFAULT" />
-	<input type="hidden" id="prmMinYear" name="prmMinYear" value="{-$yini-}" />
-	<input type="hidden" id="prmMaxYear" name="prmMaxYear" value="{-$yend-}" />
+	<input type="hidden" id="prmQueryMinYear" name="prmQuery[ConstMinYear]" value="{-$yini-}" />
+	<input type="hidden" id="prmQueryMaxYear" name="prmQuery[ConstMaxYear]" value="{-$yend-}" />
 	<dl class="accordion">
 		<!-- BEGIN GEOGRAPHY SECTION -->
 		<!-- Select from Map testing ... 'selectionmap.php' -->
