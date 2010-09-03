@@ -749,7 +749,6 @@ class UserSession {
 		}
 		return $DBDir;
 	}
-
 } //class
 
 </script>

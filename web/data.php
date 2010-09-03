@@ -4,7 +4,7 @@
  (c) 1998-2010 Corporacion OSSO
 */
 require_once('include/loader.php');
-
+require_once('include/diregion.class.php');
 $post = $_POST;
 
 $RegionId = getParameter('RegionId', getParameter('_REG', getParameter('r','')));
@@ -13,8 +13,8 @@ if ($RegionId == '') {
 }
 
 $us->open($RegionId);
-
-$RegionLabel = $us->q->getDBInfoValue('RegionLabel');
+$r = new DIRegion($us, $RegionId);
+$RegionLabel = $r->getDBInfoValue('RegionLabel');
 fixPost($post);
 
 // load basic field of dictionary

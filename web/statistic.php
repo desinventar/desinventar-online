@@ -4,6 +4,7 @@
  (c) 1998-2010 Corporacion OSSO
 */
 require_once('include/loader.php');
+require_once('include/diregion.class.php');
 
 $post = $_POST;
 
@@ -15,8 +16,8 @@ else
 	exit();
 
 $us->open($reg);
-
-$RegionLabel = $us->q->getDBInfoValue('RegionLabel');
+$r = new DIRegion($us, $reg);
+$RegionLabel = $r->getDBInfoValue('RegionLabel');
 fixPost($post);
 
 // load levels to display in totalizations

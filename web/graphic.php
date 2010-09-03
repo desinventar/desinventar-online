@@ -5,6 +5,7 @@
 */
 
 require_once('include/loader.php');
+require_once('include/diregion.class.php');
 require_once('include/graphic.class.php');
 
 
@@ -25,7 +26,8 @@ foreach($_POST['prmGraph']['Field'] as $key => $value) {
 	}
 }
 $post = $_POST;
-$RegionLabel = $us->q->getDBInfoValue('RegionLabel');
+$r = new DIRegion($us, $reg);
+$RegionLabel = $r->getDBInfoValue('RegionLabel');
 $t->assign('RegionLabel', $RegionLabel);
 fixPost($post);
 // load levels to display in totalizations
