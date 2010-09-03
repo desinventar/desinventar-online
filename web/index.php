@@ -23,7 +23,8 @@ if ($cmd == '' && $RegionId == '') {
 $t->assign('desinventarRegionId'   , $RegionId);
 if (!empty($RegionId)) {
 	$us->open($RegionId);
-	$RegionLabel = $us->q->getDBInfoValue('RegionLabel');
+	$r = new DIRegion($us, $RegionId);
+	$RegionLabel = $r->getDBInfoValue('RegionLabel');
 }
 $t->assign('desinventarRegionLabel', $RegionLabel);
 

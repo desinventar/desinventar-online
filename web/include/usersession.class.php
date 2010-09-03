@@ -749,19 +749,6 @@ class UserSession {
 		}
 		return $DBDir;
 	}
-
-	// Read an specific InfoKey value from the table
-	function getDBInfoValue($prmInfoKey) {
-		$sReturn = '';
-		$sValue = '';
-		$r = new DIRegion($this, $this->RegionId);
-		$sValue = $r->get($prmInfoKey);
-		if ($sValue == '') {
-			$LangIsoCode = $r->get('LangIsoCode');
-			$sValue = $r->get($prmInfoKey, $LangIsoCode);
-		}
-		return $sValue;
-	} //function
 } //class
 
 </script>
