@@ -814,19 +814,10 @@ class DIRegion extends DIObject {
 	// Read an specific InfoKey value from the table
 	public function getDBInfoValue($prmInfoKey, $LangIsoCode) {
 		$sReturn = '';
-		if ($this->q->dreg != null) {
-			$query = 'SELECT * FROM Info WHERE InfoKey=:InfoKey';
-			if ($prmInfoKey != 'LangIsoCode') {
-				$query .= ' AND LangIsoCode=:LangIsoCode';
-			}
-			$sth = $this->q->dreg->prepare($query);
-			$sth->bindParam(':InfoKey', $prmInfoKey, PDO::PARAM_STR);
-			$sth->bindParam(':LangIsoCode', $LangIsoCode, PDO::PARAM_STR);
-			$sth->execute();
-			while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
-				$sReturn = $row['InfoValue'];
-			}
-		} //if
+		$sReturn = $this->get($prmInfoKey);
+		if ($sReturn == '') {
+			$sReturn = $this->get($prmInfoKey, $LangIsoCode);
+		}
 		return $sReturn;
 	} //function
 
