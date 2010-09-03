@@ -1,20 +1,15 @@
 
 function validateQueryDefinition() {
 	var iReturn = 1;
-	var prmMinYear;
-	var MinYear;
-	var prmMaxYear;
-	var MaxYear;
-	prmMinYear = jQuery("#prmMinYear").val();
-	prmMaxYear = jQuery("#prmMaxYear").val();
-	MinYear = jQuery("#queryBeginYear").val();
-	MaxYear = jQuery("#queryEndYear").val();
-	if ( (MinYear == '') || (MinYear < prmMinYear) ) {
-		jQuery("#queryBeginYear").val(prmMinYear);
+	var prmQueryMinYear = jQuery("#prmQueryMinYear").val();
+	var prmQueryMaxYear = jQuery("#prmQueryMaxYear").val();
+	var MinYear = jQuery("#queryBeginYear").val();
+	var MaxYear = jQuery("#queryEndYear").val();
+	if ( (MinYear == '') || (MinYear < prmQueryMinYear) ) {
+		jQuery("#queryBeginYear").val(prmQueryMinYear);
 	}
-	if ( (MaxYear == '') || (MaxYear > prmMaxYear) ) {
-		jQuery("#queryEndYear").val(prmMaxYear);
+	if ( (MaxYear == '') || (MaxYear > prmQueryMaxYear) ) {
+		jQuery("#queryEndYear").val(prmQueryMaxYear);
 	}
 	return iReturn;
 };
-

@@ -9,7 +9,7 @@ function onReadyUserLogin() {
 		if (UserId == '' || UserPasswd == '') {
 			updateUserLoginMsg('#msgEmptyFields');
 		} else {
-			desinventarURL = jQuery('#desinventarURL').val();
+			var desinventarURL = jQuery('#desinventarURL').val();
 			if (desinventarURL == undefined) {
 				desinventarURL = '';
 			}
