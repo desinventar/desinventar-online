@@ -1,5 +1,6 @@
 function onReadyMain() {
 	onReadyCommon();
+	onReadyThematicMap();
 
 	jQuery('#DC').submit(function() {
 		var myURL = jQuery(this).attr('action');
@@ -11,6 +12,8 @@ function onReadyMain() {
 		     (myCmd == 'cmdQuerySave')) {
 			return true;
 		} else {
+			jQuery('#divDatabaseInfo').hide();
+			jQuery('#dcr').show();
 			jQuery('#dcr').html('<img src="loading.gif">');
 			jQuery.post(myURL,
 				jQuery(this).serialize(),
@@ -28,7 +31,9 @@ function onReadyMain() {
 	jQuery('.contentBlock').hide();
 	if (jQuery('#desinventarRegionId').val() != '') {
 		// Load Database Info and Show
-		jQuery('#dcr').load('index.php?cmd=getRegionFullInfo&r=' + jQuery('#desinventarRegionId').val());
+		jQuery('#divDatabaseInfo').load('index.php?cmd=getRegionFullInfo&r=' + jQuery('#desinventarRegionId').val());
+		jQuery('#divDatabaseInfo').show();
+		jQuery('#dcr').hide();
 		jQuery('#divQueryResults').show();
 	} else {
 		// Show database list

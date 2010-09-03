@@ -3,10 +3,11 @@
 			var RegionId = jQuery('#desinventarRegionId').val();
 			switch (item.id) {
 				case 'mnuRegionInfo':
+					jQuery('#divDatabaseInfo').html('');
 					if (RegionId != '') {
-						$('dcr').src = 'index.php?cmd=getRegionFullInfo&r=' + RegionId;
-						$('bsave').style.visibility = 'hidden';
-						$('bprint').style.visibility = 'hidden';
+						jQuery('#divDatabaseInfo').load('index.php?cmd=getRegionFullInfo&r=' + jQuery('#desinventarRegionId').val());
+						jQuery('#divDatabaseInfo').show();
+						jQuery('#dcr').hide();
 					}
 				break;
 				case 'mnuUserLogin':
@@ -255,12 +256,10 @@
 		var mquery = new Ext.menu.Menu({
 			id: 'queryMenu',
 			items: [
-				{-if !$ctl_noregion-}
-					{id:'menuQueryToggle', text: '{-#mgotoqd#-}'   ,handler: onMenuItem  },
-					{id:'mnuQueryNew'    , text: '{-#mnewsearch#-}',handler: onMenuItem  },
-					{id:'menuQuerySave'  , text: '{-#msavequery#-}',handler: onMenuItem  },
-				{-/if-}
-				{id:'mnuQueryOpen', text: '{-#mopenquery#-}',handler: onMenuItem  }
+				{id:'menuQueryToggle', text: '{-#mgotoqd#-}'   , handler: onMenuItem  },
+				{id:'mnuQueryNew'    , text: '{-#mnewsearch#-}', handler: onMenuItem  },
+				{id:'menuQuerySave'  , text: '{-#msavequery#-}', handler: onMenuItem  },
+				{id:'mnuQueryOpen'   , text: '{-#mopenquery#-}', handler: onMenuItem  }
 			]
 		});
 		
@@ -309,7 +308,9 @@
 		var tb = new Ext.Toolbar();
 		tb.render('toolbar');
 		tb.add('-', {id: 'musr', text: '{-#tuser#-}{-if $desinventarUserId != ""-}: <b>{-$desinventarUserId-}</b>{-/if-}', menu: muser });
+		{-if !$ctl_noregion-}
 		tb.add('-', {id: 'mqry', text: '{-#msearch#-}',		menu: mquery });
+		{-/if-}
 		{-if $desinventarRegionId != "" -}
 			tb.add('-', {id: 'minp', text: '{-#mdcsection#-}',	menu: mcards });
 		{-/if-}

@@ -104,7 +104,7 @@ class Graphic {
 		}
 		// Cummulative Graph : Add Values in Graph
 		if ($gType == 'TEMPO') {
-			if ($opc['prmGraph']['Mode'][0] == 'ACCUMULATE') {
+			if ($opc['prmGraph']['Mode'][0] == 'CUMMULATIVE') {
 				$SumValue = 0;
 				foreach ($val as $key=>$value) {
 					$SumValue += $value;
@@ -115,7 +115,7 @@ class Graphic {
 		
 		// Cummulative Graph for MultiSeries
 		if ( ($gType == '2TEMPO') || ($gType == '2COMPAR') ) {
-			if ($opc['prmGraph']['Mode'][0] == 'ACCUMULATE') {
+			if ($opc['prmGraph']['Mode'][0] == 'CUMMULATIVE') {
 				$SumValue = 0;
 				foreach($val as $key => $value) {
 					$SumValue += $value[0];
@@ -123,7 +123,7 @@ class Graphic {
 				}
 			}
 			$GraphValueMode2 = $opc['prmGraph']['Mode'][1];
-			if ($GraphValueMode2 == 'ACCUMULATE') {
+			if ($GraphValueMode2 == 'CUMMULATIVE') {
 				$SumValue = 0;
 				foreach($val as $key => $value) {
 					$SumValue += $value[1];
@@ -158,7 +158,7 @@ class Graphic {
 		} else {
 			// Horizontal Axis (X)
 			$XAxisLabelLen = $this->getSeriesMaxLen($sXAxisLabel);
-			$XAxisTitleMargin  = $XAxisLabelLen * 6;
+			$XAxisTitleMargin  = $XAxisLabelLen; // * 6;
 			$ImgMarginBottom = $XAxisTitleMargin + 16 + 16; // XAxisTitle + http://www... line
 
 			//Left Axis (Y1)
@@ -166,16 +166,16 @@ class Graphic {
 			if ($opc['prmGraph']['Scale'][0] == 'textlog') {
 				$Y1AxisLabelLen++;
 			}
-			$Y1AxisTitleMargin = $Y1AxisLabelLen * 8 + 10;
-			$ImgMarginLeft = $Y1AxisTitleMargin + 16;
-			
+			$Y1AxisTitleMargin = $Y1AxisLabelLen + 20;
+			$ImgMarginLeft = $Y1AxisTitleMargin + 15;
+
 			if ($sY2AxisLabel != '') {
 				// Right Axis (Y2)
 				if ($gType != 'XTEMPO') {
 					// In this case this is the LegendBox width
 					$Y2AxisLabelLen = $this->getSeriesMaxLen($sY2AxisLabel);
-					$Y2AxisTitleMargin = $Y2AxisLabelLen * 8 + 20;
-					$ImgMarginRight = $Y2AxisTitleMargin + 10;
+					$Y2AxisTitleMargin = $Y2AxisLabelLen; // * 8 + 20;
+					$ImgMarginRight = $Y2AxisTitleMargin + 50;
 					
 					// Legend Box
 					$MaxLen = strlen($this->data[$sY1AxisLabel]);
@@ -188,8 +188,8 @@ class Graphic {
 				} else {
 					// In this case this is the LegendBox width
 					$Y2AxisLabelLen = $this->getSeriesMaxLen($sY2AxisLabel);
-					$Y2AxisTitleMargin = $Y2AxisLabelLen * 6.7;
-					$ImgMarginRight = $Y2AxisTitleMargin + 40;
+					$Y2AxisTitleMargin = $Y2AxisLabelLen; // * 8.5;
+					$ImgMarginRight += $Y2AxisTitleMargin + 50;
 				}
 			}
 			// 2D, 3D Graphic
@@ -581,7 +581,7 @@ class Graphic {
 			$b[] = $bar;
 			$i++;
 		}
-		if ($opc['prmGraph']['Mode'][0] == 'OVERCOME') {
+		if ($opc['prmGraph']['Mode'][0] == 'STACKED') {
 			$gb = new AccBarPlot($b);
 		} else { 
 			$gb = new GroupBarPlot($b);
@@ -616,7 +616,7 @@ class Graphic {
 			$l[] = $line;
 			$i++;
 		}
-		if ($opc['prmGraph']['Mode'][0] == 'OVERCOME') {
+		if ($opc['prmGraph']['Mode'][0] == 'STACKED') {
 			$gl = new AccLinePlot($l);
 		} else { 
 			$gl = $l;
@@ -652,10 +652,13 @@ class Graphic {
 		return $pal;
 	}
 
-	public function getSeriesMaxLen($DataKey) {
+	public function getSeriesMaxLen($DataKey) {	
+		$myFont = 'arial.ttf';
 		$MaxLen = 0;
 		foreach($this->data[$DataKey] as $AxisValue) {
-			$Len = strlen($AxisValue);
+			//$Len = strlen($AxisValue);
+			$bbox = imagettfbbox(10, $Angle, $myFont, $AxisValue);
+			$Len = $bbox[2] - $bbox[0];
 			if ($Len > $MaxLen) {
 				$MaxLen = $Len;
 			}
