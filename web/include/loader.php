@@ -158,8 +158,8 @@ if (MODE != 'command') {
 
 	// 2010-05-25 (jhcaiced) Handle the versioning of js files, used to force refresh of
 	// these files when doing changes.
-	$jsversion = JSVERSION;
-	$t->assign('jsversion', $jsversion);
+	$t->assign('version'  , VERSION);
+	$t->assign('jsversion', JSVERSION);
 
 	// Configure DI8 (web) application location
 	$desinventarURL = substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'],'/'));
