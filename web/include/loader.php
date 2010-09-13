@@ -10,7 +10,7 @@ if (! isset($_SERVER['DI8_WEB'])) {
 
 // This is the version of the software
 define('VERSION', '8.2.3.00');
-define('JSVERSION', '2010-09-03.01');
+define('JSVERSION', '2010-09-13.01');
 
 // 2009-07-22 (jhcaiced) Adapted Configuration and Startup for 
 // using with PHP Command Line 
@@ -158,8 +158,8 @@ if (MODE != 'command') {
 
 	// 2010-05-25 (jhcaiced) Handle the versioning of js files, used to force refresh of
 	// these files when doing changes.
-	$jsversion = JSVERSION;
-	$t->assign('jsversion', $jsversion);
+	$t->assign('version'  , VERSION);
+	$t->assign('jsversion', JSVERSION);
 
 	// Configure DI8 (web) application location
 	$desinventarURL = substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'],'/'));
