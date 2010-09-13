@@ -41,9 +41,9 @@
 	<script type="text/javascript" src="js/main.js?version={-$jsversion-}"></script>
 
 	{-if $desinventarHasInternet -}
-		{-if $desinventarGoogleMapsKey != '' -}
-			<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={-$desinventarGoogleMapsKey-}"></script>
-		{-/if-}
+		<link rel="stylesheet" type="text/css" href="/openlayers/theme/default/style.css" />
+		<link rel="stylesheet" type="text/css" href="/openlayers/theme/default/google.css" />
+		<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 		{-if $hasVEMap -}
 			<script src='http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.1'></script>
 		{-/if-}
