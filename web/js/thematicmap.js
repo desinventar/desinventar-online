@@ -14,19 +14,19 @@ function onReadyThematicMap() {
 	var prj1 = new OpenLayers.Projection("EPSG:4326");
 	var prj2 = new OpenLayers.Projection("EPSG:900913");
 	var options = {
-		projection    : prj2,
-		displayProjection: prj1,
-		minResolution : "auto",
-		minExtent     : new OpenLayers.Bounds(-1, -1, 1, 1),
-		units         : "m",
-		maxResolution : 156543.0339,
-		maxExtent     : new OpenLayers.Bounds(-20037508.34, -20037508.34, 20037508.34,  20037508.34),
-		controls: [],
-		numZoomLevels: 50
+		projection        : prj2,
+		displayProjection : prj2,
+		minResolution     : "auto",
+		minExtent         : new OpenLayers.Bounds(-1, -1, 1, 1),
+		units             : "m",
+		maxResolution     : 156543.0339,
+		maxExtent         : new OpenLayers.Bounds(-20037508.34, -20037508.34, 20037508.34,  20037508.34),
+		controls          : [],
+		numZoomLevels     : 22
 	};
 	map = new OpenLayers.Map('map', options);
 	map.addControl(new OpenLayers.Control.PanZoomBar({zoomStopHeight:3,zoomWorldIcon:true}));
-	map.addControl(new OpenLayers.Control.LayerSwitcher({'ascending':false}));
+	map.addControl(new OpenLayers.Control.LayerSwitcher({ascending:false}));
 	map.addControl(new OpenLayers.Control.MousePosition());
 	map.addControl(new OpenLayers.Control.NavToolbar());
 	
@@ -43,25 +43,21 @@ function onReadyThematicMap() {
 		var yahoo = new OpenLayers.Layer.Yahoo( "Yahoo Maps", { 'sphericalMercator': true });
 		map.addLayer(yahoo);
 	
-		// Metacarta Basic Base Layer
+		// Metacarta Basic Base Layer (not working with OpenLayers 3...
+		/*
 		var met1 = new OpenLayers.Layer.WMS("Metacarta Basic",
 			"http://labs.metacarta.com/wms/vmap0", {'layers': 'basic', 'transparent': true}, {'isBaseLayer':true});
 		met1.setVisibility(false);
 		map.addLayer(met1);
-
-		if (jQuery('#desinventarGoogleMapsKey').val() != '') {
-			// maps.google.com - Base Layer
-			var google1 = new OpenLayers.Layer.Google("Google Basic", 
-											  {type: G_NORMAL_MAP, 'sphericalMercator': true});
-			map.addLayer(google1);
-
-			var google3 = new OpenLayers.Layer.Google("Google Hybrid", 
-											{type: G_HYBRID_MAP, 'sphericalMercator': true});
-			map.addLayer(google3);
-			var google4 = new OpenLayers.Layer.Google("Google Satellite", 
-											  {type: G_SATELLITE_MAP, 'sphericalMercator': true});
-			map.addLayer(google4);
-		}
+		*/
+		var gphy = new OpenLayers.Layer.Google("Google Physical" , {type: google.maps.MapTypeId.TERRAIN});
+		map.addLayer(gphy);
+		var gmap = new OpenLayers.Layer.Google("Google Basic"    , {numZoomLevels: 20 });
+		map.addLayer(gmap);
+		var ghyb = new OpenLayers.Layer.Google("Google Hybrid"   , {type: google.maps.MapTypeId.HYBRID, numZoomLevels:20});
+		map.addLayer(ghyb);
+		var gsat = new OpenLayers.Layer.Google("Google Satellite", {type: google.maps.MapTypeId.SATELLITE, numZoomLevels:22});
+		map.addLayer(gsat);
 	} //if
 	
 	// Effects and Admin layer(s)
