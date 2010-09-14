@@ -1115,7 +1115,6 @@ class DIRegion extends DIObject {
 				foreach($tree->childNodes as $node) {
 					$key = $node->nodeName;
 					$value = $node->nodeValue;
-					//print $node->nodeName . ' => ' . $node->nodeValue . "\n";
 					if ($this->existField($key, $section)) {
 						$this->set($key, $value, $section);
 					}
