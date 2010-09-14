@@ -76,7 +76,7 @@ class DIRegion extends DIObject {
 					// XML File Exists, load data...
 					$iReturn = $this->loadFromXML($XMLFile);
 				} else {
-					//XML File does not exists, create xml file from Info Table
+					//XML File does not exists, create xml file using Info Table
 					// Load eng Info
 					$iReturn = $this->loadInfoTrans('eng');
 					$LangIsoCode = $this->get('LangIsoCode');
@@ -812,7 +812,7 @@ class DIRegion extends DIObject {
 	}
 	
 	// Read an specific InfoKey value from the table
-	public function getDBInfoValue($prmInfoKey, $LangIsoCode) {
+	public function getRegionInfoValue($prmInfoKey, $LangIsoCode) {
 		$sReturn = '';
 		$sReturn = $this->get($prmInfoKey);
 		if ($sReturn == '') {
@@ -884,13 +884,13 @@ class DIRegion extends DIObject {
 			foreach ($this->q->core->query($Query) as $row) {
 				$RegionItemId = $row['RegionItem'];
 				$r = new DIRegion($this->session, $RegionItemId);
-				$ItemMinX = $r->getDBInfoValue('GeoLimitMinX');
+				$ItemMinX = $r->getRegionInfoValue('GeoLimitMinX');
 				if ($ItemMinX < $MinX) { $MinX = $ItemMinX; }
-				$ItemMaxX = $r->getDBInfoValue('GeoLimitMaxX');
+				$ItemMaxX = $r->getRegionInfoValue('GeoLimitMaxX');
 				if ($ItemMaxX > $MaxX) { $MaxX = $ItemMaxX; }
-				$ItemMinY = $r->getDBInfoValue('GeoLimitMinY');
+				$ItemMinY = $r->getRegionInfoValue('GeoLimitMinY');
 				if ($ItemMinY < $MinY) { $MinY = $ItemMinY; }
-				$ItemMaxY = $r->getDBInfoValue('GeoLimitMaxY');
+				$ItemMaxY = $r->getRegionInfoValue('GeoLimitMaxY');
 				if ($ItemMaxY > $MaxY) { $MaxY = $ItemMaxY; }
 				$r = null;
 			} //foreach

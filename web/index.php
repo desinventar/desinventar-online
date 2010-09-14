@@ -24,7 +24,7 @@ $t->assign('desinventarRegionId'   , $RegionId);
 if (!empty($RegionId)) {
 	$us->open($RegionId);
 	$r = new DIRegion($us, $RegionId);
-	$RegionLabel = $r->getDBInfoValue('RegionLabel');
+	$RegionLabel = $r->getRegionInfoValue('RegionLabel');
 }
 $t->assign('desinventarRegionLabel', $RegionLabel);
 
