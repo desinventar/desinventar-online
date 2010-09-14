@@ -15,7 +15,7 @@ function onReadyThematicMap() {
 	var prj2 = new OpenLayers.Projection("EPSG:900913");
 	var options = {
 		projection        : prj2,
-		displayProjection : prj2,
+		displayProjection : prj1,
 		minResolution     : "auto",
 		minExtent         : new OpenLayers.Bounds(-1, -1, 1, 1),
 		units             : "m",

@@ -6,6 +6,7 @@
 
 require_once('include/loader.php');
 require_once('include/maps.class.php');
+require_once('include/diregion.class.php');
 
 function hex2dec($col) {
 	$h = str_split(substr($col, -6), 2);
@@ -83,20 +84,19 @@ if (isset($post['_M+cmd'])) {
 	// generate map
 	$dl = $us->q->prepareList($dislist, "MAPS");
 	// MAPS Query, RegionId, Level, datalist, ranges, dbinfo, label, maptype
-	$m = new Maps($us->q, $reg, $lev[0], $dl, $range, $info, $post['_M+Label'], $post['_M+Transparency'], "THEMATIC");	
-	$rinf = $us->q->getDBInfo($lg);
-	//$info['REG'] = $rinf['RegionLabel|'];
+	$m = new Maps($us, $reg, $lev[0], $dl, $range, $info, $post['_M+Label'], $post['_M+Transparency'], "THEMATIC");	
+	$rinf = new DIRegion($us);
 	$info['RECORDS'] = showStandardNumber($NumberOfRecords);
-	$rgl[0]['regname'] = $rinf['RegionLabel|'];
+	$rgl[0]['regname'] = $rinf->get('RegionLabel');
 	$rgl[0]['info'] = $info;
 	// if valid filename then prepare interface to view MAPFILE	
 	if (strlen($m->filename()) > 0) {
 		$lon = 0;
 		$lat = 0;
-		$minx = $rinf['GeoLimitMinX|'];
-		$maxx = $rinf['GeoLimitMaxX|'];
-		$miny = $rinf['GeoLimitMinY|'];
-		$maxy = $rinf['GeoLimitMaxY|'];
+		$minx = $rinf->get('GeoLimitMinX');
+		$maxx = $rinf->get('GeoLimitMaxX');
+		$miny = $rinf->get('GeoLimitMinY');
+		$maxy = $rinf->get('GeoLimitMaxY');
 		$t->assign('minx', $minx);
 		$t->assign('maxx', $maxx);
 		$t->assign('miny', $miny);
@@ -258,7 +258,7 @@ if (isset($post['_M+cmd'])) {
 			imagerectangle($im, 0, imagesy($imgMapTitle), $wt - 1, $ht - imagesy($imgMapInfo), imagecolorallocate($im,192,192,192));
 			
 			//imagecopy($im, $imgMapLegend, $w+1, $h - imagesy($imgMapLegend), 0, 0, imagesx($imgMapLegend), imagesy($imgMapLegend));
-			$mapfooter = trim('http://www.desinventar.org/' . ' - ' . $rinf['RegionLabel|']);
+			$mapfooter = trim('http://www.desinventar.org/' . ' - ' . $rinf->get('RegionLabel'));
 			$font = 'arial';
 			$fontsize = 10;
 			$bbox = imagettfbbox($fontsize, 0, $font, $mapfooter);
@@ -266,7 +266,7 @@ if (isset($post['_M+cmd'])) {
 			$x = $wt - 2 - $x;
 			$y = $ht - imagesy($imgMapInfo) - 4;
 			imagettftext($im, $fontsize, 0, $x, $y, $black, $font,  $mapfooter);
-			header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $rinf['RegionLabel|']) ."_ThematicMap.png");
+			header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $rinf->get('RegionLabel')) ."_ThematicMap.png");
 			imagepng($im);
 			imagedestroy($imap);
 			imagedestroy($imgMapLegend);
@@ -280,7 +280,7 @@ if (isset($post['_M+cmd'])) {
 	// Send KML file - GoogleEarth
 	header("Content-type: text/kml");
 	header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $reg) ."_ThematicMap.kml");
-	$m = new Maps($us->q, $reg, null, null, null, null, null, null, "KML");
+	$m = new Maps($us, $reg, null, null, null, null, null, null, "KML");
 	echo $m->printKML();
 	$fh = fopen('/tmp/map.kml','w+');
 	fputs($fh, $m->printKML());
