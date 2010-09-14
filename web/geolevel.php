@@ -69,7 +69,7 @@ if (!empty($cmd)) {
 				$t->assign ("ctl_msginslev", true);
 				/* Create selection map.. -> disabled method
 				if (!empty($data['GeoLevelLayerFile']) && !empty($data['GeoLevelLayerCode']) && !empty($data['GeoLevelLayerName'])) {
-				    $map = new Maps($us->q, $reg, 0, null, null, null, "", null, "SELECT");
+				    $map = new Maps($us, $reg, 0, null, null, null, "", null, "SELECT");
 				}*/
 			} else {
 				$t->assign ("ctl_errinslev", true);
@@ -98,7 +98,7 @@ if (!empty($cmd)) {
 				$t->assign ("ctl_msgupdlev", true);
 				/* Create selection map..
 				if (!empty($data['GeoLevelLayerFile']) && !empty($data['GeoLevelLayerCode']) && !empty($data['GeoLevelLayerName']))
-					$map = new Maps($us->q, $reg, 0, null, null, null, "", "SELECT");*/
+					$map = new Maps($us, $reg, 0, null, null, null, "", "SELECT");*/
 			}
 			else {
 				$t->assign ("ctl_errupdlev", true);

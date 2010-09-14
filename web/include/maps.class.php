@@ -21,16 +21,16 @@ class Maps {
 	   trans : Transparency %
 	   type	: filename, THEMATIC, SELECT, KML
   */
-	function Maps($q, $reg, $lev, $dl, $range, $info, $lbl, $trans, $type) {
+	function Maps($us, $reg, $lev, $dl, $range, $info, $lbl, $trans, $type) {
 		$this->url = "http://". $_SERVER['HTTP_HOST'] ."/cgi-bin/". MAPSERV ."?";
 		$this->reg = $reg;
 		$fp = "";
 		if ($type == "KML")
-			$this->kml = $this->generateKML($q, $reg, $info);
+			$this->kml = $this->generateKML($us, $reg, $info);
 		else {
 			$map = "## DesInventar8.2 autogenerate mapfile\n";
-			$map .= $this->setHeader($q, $reg, $info, $type);
-			$gl = $q->loadGeoLevels('', -1, true);
+			$map .= $this->setHeader($us, $reg, $info, $type);
+			$gl = $us->q->loadGeoLevels('', -1, true);
 			$map .= $this->setLayerAdm($gl, $reg, $type);
 			// mapfile and html template to interactive selection
 			if ($type == "SELECT")
@@ -38,7 +38,7 @@ class Maps {
 			else {
 				// generate effects maps: type=filename | thematic=sessid
 				$fp = TMPM_DIR ."/di8ms_";
-				$map .= $this->setLayerEff($q, $reg, $lev, $dl, $range, $info, $lbl, $trans);
+				$map .= $this->setLayerEff($us, $reg, $lev, $dl, $range, $info, $lbl, $trans);
 				if ($type == "THEMATIC")
 					$fp .= "$reg-". session_id() . '_' . time() . '.map';
 				elseif (strlen($type) > 0)
@@ -62,10 +62,10 @@ class Maps {
 		return $this->fpath;
 	}
 	
-	function setHeader($q, $reg, $inf, $typ) {
+	function setHeader($us, $reg, $inf, $typ) {
 		$x = 400;
 		$y = 550;
-		$RegionLabel = $q->getDBInfoValue('RegionLabel');
+		$RegionLabel = $us->q->getDBInfoValue('RegionLabel');
 		$map = 
 '	MAP
     IMAGETYPE		PNG
@@ -195,8 +195,8 @@ class Maps {
 	}
 	
 	// Generate standard layer with query results
-	function setLayerEff($q, $reg, $lev, $dl, $range, $inf, $lbl, $trans) {
-		$gl = $q->loadGeoLevels('', $lev, true);
+	function setLayerEff($us, $reg, $lev, $dl, $range, $inf, $lbl, $trans) {
+		$gl = $us->q->loadGeoLevels('', $lev, true);
 		$map = "";
 		foreach ($gl[$lev][2] as $ly) {
 			$data = $ly[1];
@@ -337,9 +337,9 @@ class Maps {
       return false;
   }
   
-	function generateKML($q, $reg, $info) {
+	function generateKML($us, $reg, $info) {
 		$fp = urlencode(TMPM_DIR ."/di8ms_$reg-". session_id() .".map");
-		$dinf = $q->getDBInfo($lg);
+		$dinf = $us->q->getDBInfo($lg);
 		$regn = $dinf['RegionLabel|'];
 		$desc = $dinf['RegionDesc'];
 		
