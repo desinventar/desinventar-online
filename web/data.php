@@ -14,7 +14,7 @@ if ($RegionId == '') {
 
 $us->open($RegionId);
 $r = new DIRegion($us, $RegionId);
-$RegionLabel = $r->getDBInfoValue('RegionLabel');
+$RegionLabel = $r->getRegionInfoValue('RegionLabel');
 fixPost($post);
 
 // load basic field of dictionary

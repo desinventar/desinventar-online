@@ -27,7 +27,7 @@ foreach($_POST['prmGraph']['Field'] as $key => $value) {
 }
 $post = $_POST;
 $r = new DIRegion($us, $reg);
-$RegionLabel = $r->getDBInfoValue('RegionLabel');
+$RegionLabel = $r->getRegionInfoValue('RegionLabel');
 $t->assign('RegionLabel', $RegionLabel);
 fixPost($post);
 // load levels to display in totalizations

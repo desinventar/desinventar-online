@@ -17,7 +17,7 @@ else
 
 $us->open($reg);
 $r = new DIRegion($us, $reg);
-$RegionLabel = $r->getDBInfoValue('RegionLabel');
+$RegionLabel = $r->getRegionInfoValue('RegionLabel');
 fixPost($post);
 
 // load levels to display in totalizations
