@@ -93,11 +93,6 @@ class DIRegion extends DIObject {
 		}
 	} // __construct
 	
-	public function setLanguage($LangIsoCode) {
-		$this->set('LangIsoCode', $LangIsoCode);
-		$this->addLanguageInfo($LangIsoCode);
-	}
-
 	public function addLanguageInfo($LangIsoCode) {
 		$this->createFields($this->sInfoTrans, $LangIsoCode);
 	}
