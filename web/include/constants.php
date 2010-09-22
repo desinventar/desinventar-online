@@ -63,6 +63,8 @@ define('ERR_TABLE_LOCKED',     -10);
 define('ERR_UPLOAD_FAILED',    -11);
 define('ERR_NO_CONNECTION',    -99);
 
+define('ERR_USER_DUPLICATE_ID', -100);
+
 // Graph Types
 define('GRAPH_HISTOGRAM_TEMPORAL'   , 0);
 define('GRAPH_HISTOGRAM_EVENT'      , 1);

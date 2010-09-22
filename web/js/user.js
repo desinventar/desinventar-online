@@ -79,6 +79,7 @@ function onReadyUserAdmin() {
 			jQuery("#chkUserActive").attr('checked', data.UserActive);
 			jQuery("#txtUserEditCmd").val('update');
 		});
+		UserEditFormUpdateStatus('');
 		jQuery("#divUserEdit").show();
 	});
 
@@ -87,19 +88,21 @@ function onReadyUserAdmin() {
 		clearUserEditForm();
 		jQuery("#txtUserId").removeAttr('readonly');
 		jQuery("#txtUserEditCmd").val('insert');
+		UserEditFormUpdateStatus('');
 		jQuery("#divUserEdit").show();
 	});
 
 	// Cancel Edit, hide form
-	jQuery("#btnUserEditCancel").click(function() {
+	jQuery("#btnUserEditCancel").unbind('click').click(function() {
 		jQuery("#divUserEdit").hide();
 	});
 
 	// Submit - Finish edit, validate form and send data...
-	jQuery("#btnUserEditSubmit").click(function() {
+	jQuery('#frmUserEdit').unbind('submit').submit(function() {
+		UserEditFormUpdateStatus('');
 		// validate Form
 		var bReturn = validateUserEditForm();
-		if (bReturn) {
+		if (bReturn > 0) {
 			// Remove the readonly attribute, this way the data is sent to processing
 			jQuery("#txtUserId").removeAttr('readonly');
 			// Create an object with the information to send
@@ -110,46 +113,64 @@ function onReadyUserAdmin() {
 				user['User[UserActive]'] = 'off';
 			}
 			// Send AJAX request to update information
-			jQuery.post('user.php', user, function(data) {
-				eval('var myObj = ' + data);
-				jQuery("#lblUserStatusMsg").text(myObj.Message);
-				// Reload user list on success
-				jQuery("#divUserList").load('user.php' + '?cmd=list', function(data) {
-					onReadyUserAdmin();
-				});
-			});
+			jQuery.post('user.php', 
+				user, 
+				function(data) {
+					if (data.Status > 0) {
+						// Reload user list on success
+						jQuery("#divUserList").load('user.php' + '?cmd=list', function(data) {
+							onReadyUserAdmin();
+						});
+					}
+					UserEditFormUpdateStatus(data.Status);
+				},
+				'json'
+			);
 		}
 		return false;
-	});
-	
-	jQuery("#txtUserId").keyup(function() {
-		if (this.value != this.lastValue) {
-			var t = this;
-			if (this.timer) { clearTimeout(this.timer);
-			}
-			this.timer = setTimeout(function() {
-				jQuery.ajax({
-					url      : 'user.php',
-					data     : 'cmd=chklogin&UserId=' + t.value,
-					type     : 'post',
-					success  : function(data) {
-						jQuery("#lblUserStatusMsg").text(data);
-					}
-				});
-			}, 400);
-			this.lastValue = this.value;
-		}
-	});
+	}); //submit
 };
 
-function validateUserEditForm() {
-	var bReturn = true;
-	jQuery(".error").hide();
-	var UserId = jQuery("#txtUserId").val();
-	if (UserId == '') {
-		jQuery("#txtUserId").after('<span class="error">Cannot be empty</span>');
-		//bReturn = false;
+function UserEditFormUpdateStatus(value) {
+	jQuery('.UserEditFormStatus').hide();
+	MsgId = '';
+	switch(value) {
+		case  1:
+			MsgId = 'UserEditFormStatusOk';
+		break;
+		case -1:
+			MsgId = 'UserEditFormStatusError';
+		break;
+		case -100:
+			MsgId = 'UserEditFormStatusDuplicateId';
+		break;
+		case -101:
+			MsgId = 'UserEditFormStatusEmptyId';
+		break;
 	}
+	if (MsgId != '') {
+		jQuery('#' + MsgId).show();
+	}
+}
+
+function validateUserEditForm() {
+	var bReturn = 1;
+	jQuery('#txtUserId').unhighlight();
+	if (jQuery('#txtUserId').val() == '') {
+		bReturn = -101;
+		jQuery("#txtUserId").highlight();
+	}
+	jQuery('#txtUserFullName').unhighlight();
+	if (jQuery('#txtUserFullName').val() == '') {
+		bReturn = -101;
+		jQuery("#txtUserFullName").highlight();
+	}
+	jQuery('#txtUserEMail').unhighlight();
+	if (jQuery('#txtUserEMail').val() == '') {
+		bReturn = -101;
+		jQuery("#txtUserEMail").highlight();
+	}
+	UserEditFormUpdateStatus(bReturn);
 	return bReturn;		
 };
 
