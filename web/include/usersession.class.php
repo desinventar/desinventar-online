@@ -461,11 +461,11 @@ class UserSession {
 		return $myData;
 	} // function
 	
-	public function existUser($prmUserId) {
-		$Answer = false;
+	public function doUserExist($prmUserId) {
+		$Answer = ERR_UNKNOWN_ERROR;
 		$Query = "SELECT UserId FROM User WHERE UserId='" . $prmUserId . "'";
 		foreach ($this->q->core->query($Query) as $row) {
-			$Answer = true;
+			$Answer = ERR_NO_ERROR;
 		}
 		return $Answer;
 	}
