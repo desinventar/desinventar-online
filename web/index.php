@@ -12,7 +12,12 @@ require_once('include/diregiondb.class.php');
 $post = $_POST;
 $get  = $_GET;
 
-$cmd = getParameter('prmCommand', getParameter('cmd', getParameter('_CMD','')));
+$cmd = getParameter('cmd', getParameter('_CMD',''));
+if ($cmd == '') {
+	if (isset($_POST['prmQuery']['Command'])) {
+		$cmd = $_POST['prmQuery']['Command'];
+	}
+}
 
 $RegionId = getParameter('r', getParameter('RegionId', getParameter('_REG'),''));
 $RegionLabel = '';
