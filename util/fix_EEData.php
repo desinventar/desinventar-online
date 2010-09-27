@@ -9,7 +9,7 @@
 	require_once(BASE . '/include/diimport.class.php');
 	require_once(BASE . '/include/diregion.class.php');
 	
-	$RegionId = 'GAR-ISDR-2011_MEX';
+	$RegionId = 'COL-1260541809-colombia_risaralda';
 	$us->login('diadmin','di8');
 	$us->open($RegionId,'desinventar.db');
 	//$r = new DIRegion($us, $RegionId);
@@ -57,6 +57,33 @@
 				printf('%5d %s', $iCount, $row['DisasterId']);
 				print ' ' . $RecordCount . ' ';
 				print 'DELETE : ' . $row['DisasterId'];
+				print "\n";
+			}
+		}
+
+		$sQuery = 'SELECT DisasterId FROM Disaster';
+		$sth = $us->q->dreg->prepare($sQuery);
+		$sth->execute();
+		
+		$sQuery = 'SELECT DisasterId FROM EEData WHERE DisasterId=:DisasterId';
+		$sth2 = $us->q->dreg->prepare($sQuery);
+
+		$sQuery = 'INSERT INTO EEData (DisasterId) VALUES (:DisasterId)';
+		$sth3 = $us->q->dreg->prepare($sQuery);
+		
+		$iCount = 0;
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+			$iCount++;			
+			$RecordCount = 0;
+			$sth2->execute(array('DisasterId' => $row['DisasterId']));
+			while($line = $sth2->fetch(PDO::FETCH_ASSOC)) {
+				$RecordCount++;
+			}
+			if ($RecordCount == 0) {
+				$sth3->execute(array('DisasterId' => $row['DisasterId']));
+				printf('%5d %s', $iCount, $row['DisasterId']);
+				print ' ' . $RecordCount . ' ';
+				print 'INSERT : ' . $row['DisasterId'];
 				print "\n";
 			}
 		}
