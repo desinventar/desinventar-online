@@ -193,4 +193,12 @@ function rrmdir($dir) {
 	} //if
 }  //function
 
+function padNumber($prmValue, $prmLength) {
+	$value = $prmValue;
+	while(strlen($value) < $prmLength) {
+		$value = '0' . $value;
+	}
+	return $value;
+}
+
 </script>
