@@ -147,7 +147,7 @@ switch ($cmd) {
 		$UserId = getParameter('UserId');
 		// USERADMIN: check if UserId exists...
 		$Answer = 'NO';
-		if ($us->existUser($UserId)) {
+		if ($us->doUserExist($UserId) > 0) {
 			$Answer = 'YES';
 		}
 		print $Answer;
@@ -182,74 +182,47 @@ switch ($cmd) {
 			$t->display("user_errorupdate.tpl");
 		}
 	break;
-	case 'insert':
-		$bReturn = ERR_NO_ERROR;
-		// This function is valid only for ADMINPORTAL User (root)
-		$Role = $us->getUserRole('');
-		if ($Role != 'ADMINPORTAL') {
-			$bReturn = ERR_UNKNOWN_ERROR;
-		}
-		
-		if ($bReturn) {
-			$data = $_POST['User'];
-			$UserId = $data['UserId'];
-		}
-		
-		if ($UserId == '') {
-			$bReturn = ERR_UNKNOWN_ERROR;
-		}
-		
-		if ($bReturn) {
-			$u = new DIUser($us, $UserId);
-			// set a Default passwd for new users...
-			$data['UserPasswd'] = md5('di8welcome');
-			$u->setFromArray($data);
-			$bReturn = $u->insert();
-		}
-		header('Content-type: text/json');
-		if ($bReturn > 0) {
-			$oReturn = array('Status'  => $bReturn, 
-			                 'Message' => 'New User Created');
-		} else {
-			$oReturn = array('Status'  => $bReturn,
-			                 'Message' => 'Error creating user');
-		}
-		print json_encode($oReturn);
 	break;
 	// USERADMIN: update selected user..
+	case 'insert':
 	case 'update':
 		$bReturn = ERR_NO_ERROR;
 		// This function is valid only for ADMINPORTAL User (root)
-		$Role = $us->getUserRole('');
-		if ($Role != 'ADMINPORTAL') {
+		if ($us->UserId != 'root') {
 			$bReturn = ERR_UNKNOWN_ERROR;
 		}
 		
-		if ($bReturn) {
+		if ($bReturn > 0) {
 			$data = $_POST['User'];
 			$UserId = $data['UserId'];
+			if ($UserId == '') {
+				$bReturn = ERR_UNKNOWN_ERROR;
+			}
 		}
 		
-		if ($UserId == '') {
-			$bReturn = ERR_UNKNOWN_ERROR;
-		}
+		if ($cmd == 'insert') {
+			if ($us->doUserExist($UserId) > 0) {
+				$bReturn = ERR_USER_DUPLICATE_ID;
+			}
+		}		
 		
-		if ($bReturn) {
+		if ($bReturn > 0) {
 			$u = new DIUser($us, $UserId);
-			// Do not change passwd here !!
-			unset($data['UserPasswd']);
+			if ($cmd == 'insert') {
+				// set a Default passwd for new users...
+				$data['UserPasswd'] = md5('di8welcome');
+			} else {
+				// Do not change passwd here !!
+				unset($data['UserPasswd']);
+			}
 			$u->setFromArray($data);
+			if ($cmd == 'insert') {
+				$bReturn = $u->insert();
+			}
 			$bReturn = $u->update();
 		}
-		header('Content-type: text/json');
-		if ($bReturn > 0) {
-			$oReturn = array('Status'  => $bReturn, 
-			                 'Message' => 'User information updated');
-		} else {
-			$oReturn = array('Status'  => $bReturn,
-			                 'Message' => 'Error updating user information');
-		}
-		print json_encode($oReturn);
+		$Answer = array('Status' => $bReturn);
+		print json_encode($Answer);
 	break;
 	case "list":
 		// USERADMIN: reload list..
