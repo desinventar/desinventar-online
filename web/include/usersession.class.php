@@ -763,12 +763,9 @@ class UserSession {
 		$datemin = $this->getDBInfoValue('PeriodBeginDate');
 		$datemax = $this->getDBInfoValue('PeriodEndDate');
 		if (($datemin == '') || ($datemax == '')) {
-			if ($StatusList == null) {
-				$StatusList = array('PUBLISHED');
-			}
 			$bFirst = true;
 			$statusQuery = '';
-			foreach($StatusList as $status) {
+			foreach(explode(' ',$StatusList) as $status) {
 				if (! $bFirst) {
 					$statusQuery .= ',';
 				}
