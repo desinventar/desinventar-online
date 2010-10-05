@@ -110,12 +110,10 @@ if ($GraphCommand != '') {
 	$ResultData = array();
 	foreach($post['FieldList'] as $GraphVariable) {
 		$VariableName = substr($GraphVariable,0,strpos($GraphVariable,'|'));
-		fb($VariableName);
 		$opc['Group'] = $ele;
 		$opc['Field'] = $GraphVariable;
 		$sql = $us->q->genSQLProcess($qd, $opc);
 		$TmpData = $us->q->getassoc($sql);
-		fb($TmpData);
 		foreach($TmpData as $DataItem) {
 			$Index = $DataItem[$XAxisField];
 			foreach($DataItem as $Key => $Value) {
@@ -135,7 +133,6 @@ if ($GraphCommand != '') {
 		}
 	}
 	
-	fb($ResultData);
 	//$post['NumberOfVerticalAxis'] = 1;
 	//$dislist = $ResultData['D.DisasterId'];
 	$dislist = $ResultData;
@@ -165,7 +162,7 @@ if ($GraphCommand != '') {
 			$gl[$dk] = $i;
 		}
 		// Construct Graphic Object and Show Page
-		$g = new Graphic($post, $gl);
+		$g = new Graphic($us, $post, $gl);
 		// Wrote graphic to file
 		$g->Stroke($sImageFile);
 	}
