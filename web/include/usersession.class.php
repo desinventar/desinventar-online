@@ -589,15 +589,6 @@ class UserSession {
 		return $RegionList;
 	}
 	
-	public function getDateRange() {
-		$Role = $this->getUserRole();
-		$StatusList = 'PUBLISHED';
-		if ($Role == 'ADMINREGION') { $StatusList = 'PUBLISHED READY DRAFT TRASH'; }
-		if ($Role == 'SUPERVISOR' ) { $StatusList = 'PUBLISHED READY DRAFT TRASH'; }
-		if ($Role == 'USER'       ) { $StatusList = 'PUBLISHED READY DRAFT'; }
-		if ($Role == 'OBSERVER'   ) { $StatusList = 'PUBLISHED READY DRAFT'; }
-		return $this->q->getDateRange(explode(' ', $StatusList));
-	}
 
 	public function searchDB($prmQuery, $searchByCountry) {
 		$regionlist = array();
@@ -749,6 +740,56 @@ class UserSession {
 		}
 		return $DBDir;
 	}
+
+	// Read an specific InfoKey value from the table
+	function getDBInfoValue($prmInfoKey) {
+		$sReturn = '';
+		if ($this->RegionId != 'core') {
+			$r = new DIRegion($this, $this->RegionId);
+			$sReturn = $r->getRegionInfoValue($prmInfoKey);
+		}
+		return $sReturn;
+	}
+
+	public function getDateRange() {
+		$Role = $this->getUserRole();
+		$StatusList = 'PUBLISHED';
+		if ($Role == 'ADMINREGION') { $StatusList = 'PUBLISHED READY DRAFT TRASH'; }
+		if ($Role == 'SUPERVISOR' ) { $StatusList = 'PUBLISHED READY DRAFT TRASH'; }
+		if ($Role == 'USER'       ) { $StatusList = 'PUBLISHED READY DRAFT'; }
+		if ($Role == 'OBSERVER'   ) { $StatusList = 'PUBLISHED READY DRAFT'; }
+
+		$res = array();
+		$datemin = $this->getDBInfoValue('PeriodBeginDate');
+		$datemax = $this->getDBInfoValue('PeriodEndDate');
+		if (($datemin == '') || ($datemax == '')) {
+			if ($StatusList == null) {
+				$StatusList = array('PUBLISHED');
+			}
+			$bFirst = true;
+			$statusQuery = '';
+			foreach($StatusList as $status) {
+				if (! $bFirst) {
+					$statusQuery .= ',';
+				}
+				$statusQuery .= '"' . $status . '"';
+				$bFirst = false;
+			}
+			$statusQuery = 'RecordStatus IN (' . $statusQuery . ')';
+			$sql = "SELECT MIN(DisasterBeginTime) AS datemin, MAX(DisasterBeginTime) AS datemax FROM Disaster ".
+			"WHERE " . $statusQuery;
+			$r2 = $this->q->getresult($sql);
+			if ($datemin == '' ) { $datemin = $r2['datemin']; }
+			if ($datemax == '' ) { $datemax = $r2['datemax']; }
+		}
+		$res[0] = substr($datemin, 0, 10);
+		$res[1] = substr($datemax, 0, 10);
+		
+		if (! $res[0]) { $res[0] = date('Y-m-d'); }
+		if (! $res[1]) { $res[1] = date('Y-m-d'); }
+		return $res;
+	} //function
 } //class
+
 
 </script>
