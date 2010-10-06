@@ -272,7 +272,7 @@
 					{id:'mnuDatacardImport', text: '{-#mnuDatacardImport#-}',	handler: onMenuItem  },
 					{id:'mnuDatabaseBackup', text: '{-#mnuDatabaseBackup#-}',	handler: onMenuItem  },
 				{-/if-}
-				{-if $role == "OBSERVER" || $role == "ADMINREGION"-}
+				{-if $role == "ADMINREGION"-}
 					{id:'mnuDatabaseConfig', text: '{-#mnuDatabaseConfig#-}',	handler: onMenuItem  },
 				{-/if-}
 				'-'
