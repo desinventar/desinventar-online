@@ -467,7 +467,7 @@ class Query extends PDO {
 		} //if
 		return $data;
 	}
-	
+
 	// Read an specific InfoKey value from the table
 	function getDBInfoValue($prmInfoKey) {
 		$sReturn = '';
@@ -486,38 +486,6 @@ class Query extends PDO {
 		} //if
 		return $sReturn;
 	}
-
-	public function getDateRange($statusList=null) {
-		$res = array();
-		$datemin = $this->getDBInfoValue('PeriodBeginDate');
-		$datemax = $this->getDBInfoValue('PeriodEndDate');
-		if (($datemin == '') || ($datemax == '')) {
-			if ($statusList == null) {
-				$statusList = array('PUBLISHED');
-			}
-			$bFirst = true;
-			$statusQuery = '';
-			foreach($statusList as $status) {
-				if (! $bFirst) {
-					$statusQuery .= ',';
-				}
-				$statusQuery .= '"' . $status . '"';
-				$bFirst = false;
-			}
-			$statusQuery = 'RecordStatus IN (' . $statusQuery . ')';
-			$sql = "SELECT MIN(DisasterBeginTime) AS datemin, MAX(DisasterBeginTime) AS datemax FROM Disaster ".
-			"WHERE " . $statusQuery;
-			$r2 = $this->getresult($sql);
-			if ($datemin == '' ) { $datemin = $r2['datemin']; }
-			if ($datemax == '' ) { $datemax = $r2['datemax']; }
-		}
-		$res[0] = substr($datemin, 0, 10);
-		$res[1] = substr($datemax, 0, 10);
-		
-		if (! $res[0]) { $res[0] = date('Y-m-d'); }
-		if (! $res[1]) { $res[1] = date('Y-m-d'); }
-		return $res;
-	} //function
 	
 	// This function returns an array with the database fields of Disaster
 	public function getDisasterFld() {

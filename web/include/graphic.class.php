@@ -19,14 +19,14 @@ class Graphic {
 	var $data;
 	/* opc [kind:BAR,LINE,PIE Opc:Title,etc] data:Matrix
 	   data[0] == X, data[1] = Y1,  .. */
-	public function Graphic ($opc, $prmData) {
+	public function Graphic ($prmSession, $opc, $prmData) {
 		$this->data = $prmData;
 		$kind = $opc['prmGraph']['Kind'];
 		// Get Label Information
 		$oLabels     = array_keys($this->data);
 		$sXAxisLabel = current($oLabels);
 		$sY1AxisLabel = end($oLabels);
-		$q = new Query($opc['_REG']);
+		$q = $prmSession->q; //new Query($opc['_REG']);
 		// Determine graphic type
 		if (substr($opc['prmGraph']['VarList'],2,18) == 'DisasterBeginTime|') {
 			$gType = 'XTEMPO';				// One var x Event/Temporal..
@@ -72,7 +72,7 @@ class Graphic {
 				} //foreach
 			} //foreach
 			foreach ($tvl as $kk=>$ii) {
-				$val[$kk] = $this->completeTimeSeries($opc, $ii, $q);
+				$val[$kk] = $this->completeTimeSeries($opc, $ii, $prmSession);
 			} //foreach
 			$lbl = array_keys($val[$kk]);
 			$acol = count(array_unique($this->data[$sY2AxisLabel]));
@@ -94,7 +94,7 @@ class Graphic {
 			} //foreach
 			// Complete the data series for XAxis (year,month,day)
 			if ($gType == 'TEMPO' || $gType == '2TEMPO') {
-				$val = $this->completeTimeSeries($opc, $val, $q);
+				$val = $this->completeTimeSeries($opc, $val, $prmSession);
 			} elseif ($gType == 'PIE') {
 				// In Pie Graphs must order the values
 				arsort($val, SORT_NUMERIC);
@@ -393,13 +393,13 @@ class Graphic {
 		return $iWeek;
 	}
 	
-	function completeTimeSeries($opc, $val, $q) {
+	function completeTimeSeries($opc, $val, $prmSession) {
 		$dateini = '';
 		$dateend = '';
 		// Get range of dates from Database
 		$qini = $opc['D_DisasterBeginTime'];
 		$qend = $opc['D_DisasterEndTime'];
-		$ydb = $q->getDateRange($opc['D_RecordStatus']);
+		$ydb = $prmSession->getDateRange($opc['D_RecordStatus']);
 		if ( (isset($qini[0])) && ($qini[0] != '') ) {
 			// If no month/day value specified, set default date to YEAR/01/01 or start of month
 			if ($qini[1] == '') { $qini[1] = '1'; }
