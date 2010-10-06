@@ -4,7 +4,7 @@
  (c) 1998-2010 Corporacion OSSO
 */
 
-class DIGeoLevel extends DIObject {
+class DIGeoLevel extends DIRecord {
 	public function __construct($prmSession) {
 		$this->sTableName   = "GeoLevel";
 		$this->sPermPrefix  = "GEOLEVEL";

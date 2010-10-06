@@ -4,7 +4,7 @@
  (c) 1998-2010 Corporacion OSSO
 */
 
-class DIEEField extends DIObject {
+class DIEEField extends DIRecord {
 	public function __construct($prmSession) {
 		$this->sTableName   = "EEField";
 		$this->sPermPrefix  = "EEFIELD";

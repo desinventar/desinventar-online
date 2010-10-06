@@ -4,7 +4,7 @@
  (c) 1998-2009 Corporacion OSSO
 */
 
-class DIEvent extends DIObject {
+class DIEvent extends DIRecord {
 	public function __construct($prmSession) {
 		$this->sTableName   = "Event";
 		$this->sPermPrefix  = "EVENT";

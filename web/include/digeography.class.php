@@ -4,7 +4,7 @@
  (c) 1998-2010 Corporacion OSSO
 */
 
-class DIGeography extends DIObject {
+class DIGeography extends DIRecord {
 	public function __construct($prmSession) {
 		$this->sTableName   = "Geography";
 		$this->sPermPrefix  = "GEOGRAPHY";
