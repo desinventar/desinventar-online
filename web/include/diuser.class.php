@@ -4,7 +4,7 @@
  (c) 1998-2009 Corporacion OSSO
 */
 
-class DIUser extends DIObject {
+class DIUser extends DIRecord {
 	public function __construct($prmSession) {
 		$this->sTableName   = "User";
 		$this->sPermPrefix  = "ADMIN";

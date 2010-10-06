@@ -4,7 +4,7 @@
  (c) 1998-2010 Corporacion OSSO
 */
 
-class DIRegion extends DIObject {
+class DIRegion extends DIRecord {
 	public function __construct($prmSession) {
 		$this->sTableName   = 'Region';
 		$this->sPermPrefix  = 'INFO';

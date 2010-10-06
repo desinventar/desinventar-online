@@ -89,6 +89,7 @@ define('TMPM_DIR', CACHEDIR); // Mapserver temp dir
 require_once(BASE . '/include/fb.php');
 require_once(BASE . '/include/usersession.class.php');
 require_once(BASE . '/include/diobject.class.php');
+require_once(BASE . '/include/direcord.class.php');
 require_once(BASE . '/include/diuser.class.php');
 require_once(BASE . '/include/query.class.php');
 require_once(BASE . '/include/constants.php');
