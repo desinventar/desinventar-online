@@ -33,7 +33,7 @@ class DIObject {
 		$this->set('RegionId', $this->session->RegionId);
 		$LangIsoCode = 'eng';
 		if ($this->q->RegionId != 'core') {
-			//$LangIsoCode = $this->getDBInfoValue('LangIsoCode');
+			$LangIsoCode = $this->session->RegionLangIsoCode; //getDBInfoValue('LangIsoCode');
 		}
 		$this->set('LangIsoCode', $LangIsoCode);
 		$this->set('RecordUpdate', gmdate('c'));

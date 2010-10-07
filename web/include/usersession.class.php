@@ -35,6 +35,7 @@ class UserSession {
 		}
 		$this->UserId = '';
 		$this->LangIsoCode = 'eng';
+		$this->RegionLangIsoCode = 'eng';
 		$this->load($this->sSessionId);
 	} //constructor
 	
@@ -194,6 +195,7 @@ class UserSession {
 			$this->RegionId = $prmRegionId;
 			$this->UserRole = $this->getUserRole($prmRegionId);
 			$this->UserRoleValue = $this->getUserRoleValue($prmRegionId);
+			$this->RegionLangIsoCode = $this->getDBInfoValue('LangIsoCode');
 		} 
 		return $iReturn;
 	} // open()
