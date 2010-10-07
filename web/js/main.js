@@ -4,7 +4,7 @@ function onReadyMain() {
 
 	jQuery('#DC').submit(function() {
 		var myURL = jQuery(this).attr('action');
-		var myCmd = jQuery('#prmCommand').val();
+		var myCmd = jQuery('#prmQueryCommand').val();
 		if ( (myCmd == 'cmdGridSave') ||
 		     (myCmd == 'cmdGraphSave') ||
 		     (myCmd == 'cmdMapSave') || 

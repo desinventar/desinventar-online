@@ -4,7 +4,7 @@
  (c) 1998-2010 Corporacion OSSO
 */
 
-class DIEEData extends DIObject {
+class DIEEData extends DIRecord {
 	public function __construct($prmSession) {
 		$this->sTableName   = "EEData";
 		$this->sPermPrefix  = "DISASTER";

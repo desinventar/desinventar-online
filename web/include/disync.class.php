@@ -4,7 +4,7 @@
  (c) 1998-2009 Corporacion OSSO
 */
 
-class DISync extends DIObject {
+class DISync extends DIRecord {
 	public function __construct($prmSession) {
 		$this->sTableName   = "Sync";
 		$this->sPermPrefix  = "ADMIN";

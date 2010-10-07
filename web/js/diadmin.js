@@ -455,9 +455,9 @@
 	
 	function sendList(cmd) {
 		if (cmd == 'result') {
-			jQuery('#prmCommand').val('cmdGridShow');
+			jQuery('#prmQueryCommand').val('cmdGridShow');
 		} else {
-			jQuery('#prmCommand').val('cmdGridSave');
+			jQuery('#prmQueryCommand').val('cmdGridSave');
 		}
 		if ($('_D+Field[]').length > 0) {
 			w = Ext.getCmp('westm');
@@ -482,13 +482,13 @@
 	}
 	
 	function sendMap(cmd) {
-		jQuery('#prmCommand').val('cmdMapShow');
+		jQuery('#prmQueryCommand').val('cmdMapShow');
 		if ($('_M+Type').length > 0) {
 			w = Ext.getCmp('westm');
 			//$('frmwait').innerHTML = waiting;
 			$('_M+cmd').value = cmd;
 			if (cmd == "export") {
-				jQuery('#prmCommand').val('cmdMapSave');
+				jQuery('#prmQueryCommand').val('cmdMapSave');
 				// to export image save layers and extend..
 				var dcr = document.getElementById('dcr');
 				var mm = map;
@@ -521,9 +521,9 @@
 	
 	function sendGraphic(cmd) {
 		if (cmd == 'result') {
-			jQuery('#prmCommand').val('cmdGraphShow');
+			jQuery('#prmQueryCommand').val('cmdGraphShow');
 		} else {
-			jQuery('#prmCommand').val('cmdGraphSave');
+			jQuery('#prmQueryCommand').val('cmdGraphSave');
 		}
 		w = Ext.getCmp('westm');
 		jQuery('#prmGraphCommand').val(cmd);
@@ -536,9 +536,9 @@
 	
 	function sendStatistic(cmd) {
 		if (cmd == 'result') {
-			jQuery('#prmCommand').val('cmdStatShow');
+			jQuery('#prmQueryCommand').val('cmdStatShow');
 		} else {
-			jQuery('#prmCommand').val('cmdStatSave');
+			jQuery('#prmQueryCommand').val('cmdStatSave');
 		}
 		if ($('_S+Firstlev').value != "" && $('_S+Field[]').length > 0) {
 			w = Ext.getCmp('westm');
@@ -561,7 +561,7 @@
 	} //function
 	
 	function saveQuery() {
-		jQuery('#prmCommand').val('cmdQuerySave');
+		jQuery('#prmQueryCommand').val('cmdQuerySave');
 		selectall('_D+Field[]');
 		combineForms('DC', 'CD');
 		combineForms('DC', 'CM');

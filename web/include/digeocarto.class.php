@@ -4,7 +4,7 @@
  (c) 1998-2009 Corporacion OSSO
 */
 
-class DIGeoCarto extends DIObject {
+class DIGeoCarto extends DIRecord {
 	public function __construct($prmSession) {
 		$this->sTableName   = "GeoCarto";
 		$this->sPermPrefix  = "GEOLEVEL";
