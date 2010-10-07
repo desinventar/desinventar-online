@@ -9,8 +9,8 @@ if (! isset($_SERVER['DI8_WEB'])) {
 }
 
 // This is the version of the software
-define('VERSION', '8.2.3.00');
-define('JSVERSION', '2010-10-06.01');
+define('VERSION', '8.2.2.01');
+define('JSVERSION', '2010-10-07.01');
 
 // 2009-07-22 (jhcaiced) Adapted Configuration and Startup for 
 // using with PHP Command Line 
@@ -101,7 +101,6 @@ require_once(BASE . '/include/digeography.class.php');
 require_once(BASE . '/include/digeolevel.class.php');
 require_once(BASE . '/include/digeocarto.class.php');
 require_once(BASE . '/include/didisaster.class.php');
-
 
 /* SETTINGS */
 $time_start = microtime_float();

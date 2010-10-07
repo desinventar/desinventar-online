@@ -411,4 +411,3 @@ class DIRecord extends DIObject {
 	
 } //class
 </script>
-
