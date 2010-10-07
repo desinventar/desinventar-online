@@ -11,7 +11,7 @@
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_ini.gif" width="133" height="5"></td></tr>
 		<tr>
 			<td class="paisel">
-				<a href="#" class="RegionGroup" alt="1" expand="yes">{-#treg1#-}</a>
+				<a href="#" class="RegionGroup" alt="1" expand="yes">{-#msgRegionAsia#-}</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -53,7 +53,7 @@
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_ini.gif" width="133" height="5"></td></tr>
 		<tr>
 			<td class="paisel" colspan="3">
-				<a href="#" class="RegionGroup" alt="6">{-#treg_LatinAmerica#-}</a>
+				<a href="#" class="RegionGroup" alt="6">{-#msgRegionLatinAmerica#-}</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -119,7 +119,7 @@
 	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 	<tr>
 		<td class="paisel">
-			<a href="#" class="RegionGroup" alt="7">{-#treg7#-}</a>
+			<a href="#" class="RegionGroup" alt="7">{-#msgRegionCities#-}</a>
 		</td>
 	</tr>
 	</table>
@@ -145,7 +145,7 @@
 	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_ini.gif" width="133" height="5"></td></tr>
 	<tr>
 		<td class="pais" colspan="3">
-			<a href="#" class="RegionItem" alt="DESINV-1249040429-can_subregion_andina">{-#treg6#-}</a>
+			<a href="#" class="RegionItem" alt="DESINV-1249040429-can_subregion_andina">{-#msgRegionAndean#-}</a>
 		</td>
 	</tr>
 	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_fin.gif" width="133" height="5"></td></tr>
