@@ -8,18 +8,30 @@
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_ini.gif" width="133" height="5"></td></tr>
 		<tr>
 			<td class="paisel" colspan="3">
-				<a href="#" class="RegionGroup" alt="6" expand="true">{-#di_andeansubregion#-}</a>
+				<a href="#" class="RegionGroup" alt="6" expand="true">{-#msgRegionSouthAmerica#-}</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 	</table>
 	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect6">
 		<tr>
+			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
+				<a href="#" class="RegionList" alt="ARG">Argentina</a>
+			</td>
+		</tr>
+		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
+		<tr>
 			<td class="pais">&nbsp;&nbsp;&nbsp; >
 				<a href="#" class="RegionList" alt="BOL">{-#tcountryBOL#-}</a>
 			</td>
 		</tr>
 		<tr><td><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
+		<tr>
+			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
+				<a href="#" class="RegionItem" alt="CHL-1257983285-chile_inventario_historico_de_desastres">Chile</a>
+			</td>
+		</tr>
+		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 		<tr>
 			<td class="pais">&nbsp;&nbsp;&nbsp; >
 				<a href="#" class="RegionList" alt="COL">{-#tcountryCOL#-}</a>
@@ -29,6 +41,18 @@
 		<tr>
 			<td class="pais">&nbsp;&nbsp;&nbsp; >
 				<a href="#" class="RegionList" alt="ECU">{-#tcountryECU#-}</a>
+			</td>
+		</tr>
+		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
+		<tr>
+			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
+				<a href="#" class="RegionList" alt="GUY">Guyana</a>
+			</td>
+		</tr>
+		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
+		<tr>
+			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
+				<a href="#" class="RegionList" alt="PAR">Paraguay</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -45,12 +69,13 @@
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 	</table>
+	
 
 	<!-- ASIA-->
 	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 		<tr>
 			<td class="paisel">
-				<a href="#" class="RegionGroup" alt="1">{-#treg1#-}</a>
+				<a href="#" class="RegionGroup" alt="1">{-#msgRegionAsia#-}</a>
 			</td>
 		</tr>
 		<tr><td><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -68,7 +93,7 @@
 	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 		<tr>
 			<td class="paisel">
-				<a href="#" class="RegionGroup" alt="2">{-#treg2#-}</a>
+				<a href="#" class="RegionGroup" alt="2">{-#msgRegionCentralAmerica#-}</a>
 			</td>
 		</tr><tr><td><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 	</table>
@@ -105,77 +130,11 @@
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 	</table>
 		
-	<!-- SOUTHERN CONE -->
-	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
-		<tr>
-			<td class="paisel">
-				<a href="#" class="RegionGroup" alt="3">{-#treg3#-}</a>
-			</td>
-		</tr>
-		<tr><td><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
-	</table>
-	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect3" style="display:none;">
-		<tr>
-			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-				<a href="#" class="RegionList" alt="ARG">Argentina</a>
-			</td>
-		</tr>
-		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
-		<tr>
-			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-				<a href="#" class="RegionItem" alt="CHL-1257983285-chile_inventario_historico_de_desastres">Chile</a>
-			</td>
-		</tr>
-		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
-		<tr>
-			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-				<a href="#" class="RegionList" alt="PAR">Paraguay</a>
-			</td>
-		</tr>
-		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
-	</table>
-	
-	<!-- GREAT AMERICAN CHACO -->
-	<!-- 2009-09-28 (jhcaiced) Removed Big Chaco databases from menu -->
-	<!--
-	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
-	<tr>
-		<td class="paisel">
-			<a href="#" class="RegionGroup" alt="4">{-#treg4#-}</a>
-		</td>
-	</tr>
-	<tr><td><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
-	</table>
-	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect4" style="display:none;">
-	<tr>
-		<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-			<a href="#" class="RegionItem" alt="ARG-1250695025-argentina_gran_chaco">Argentina</a>
-		</td>
-	</tr>
-	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
-	<tr>
-		<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-			<a href="#" class="RegionItem" alt="BOL-1250695036-bolivia_gran_chaco">Bolivia</a>
-		</td>
-	</tr>
-	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
-	<tr>
-		<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-			<a href="#" class="RegionItem" alt="PAR-1250695038-paraguay_gran_chaco">Paraguay</a>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0>
-	</td>
-	</tr>
-	</table>
-	-->
-
 	<!-- NORTH AMERICA -->
 	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 	<tr>
 		<td class="paisel">
-			<a href="#" class="RegionGroup" alt="5">{-#treg5#-}</a>
+			<a href="#" class="RegionGroup" alt="5">{-#msgRegionNorthAmerica#-}</a>
 		</td>
 	</tr>
 	<tr><td><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -193,7 +152,7 @@
 	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 	<tr>
 		<td class="paisel">
-			<a href="#" class="RegionGroup" alt="7">{-#treg7#-}</a>
+			<a href="#" class="RegionGroup" alt="7">{-#msgRegionCities#-}</a>
 		</td>
 	</tr>
 	</table>
@@ -229,14 +188,14 @@
 	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_ini.gif" width="133" height="5"></td></tr>
 	<tr>
 		<td class="pais" colspan="3">
-			<a href="#" class="RegionItem" alt="DESINV-1249040429-can_subregion_andina">{-#treg6#-}</a>
+			<a href="#" class="RegionItem" alt="DESINV-1249040429-can_subregion_andina">{-#msgRegionAndean#-}</a>
 		</td>
 	</tr>
 	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_fin.gif" width="133" height="5"></td></tr>
 	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_ini.gif" width="133" height="5"></td></tr>
 	<tr>
 		<td class="pais" colspan="3">
-			<a href="#" class="RegionItem" alt="DESINV-1249126759-subregion_gran_chaco">{-#treg8#-}</a>
+			<a href="#" class="RegionItem" alt="DESINV-1249126759-subregion_gran_chaco">{-#msgRegionGreatAmericanChaco#-}</a>
 		</td>
 	</tr>
 	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_fin.gif" width="133" height="5"></td></tr>
