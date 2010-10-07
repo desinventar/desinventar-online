@@ -806,16 +806,6 @@ class DIRegionRecord extends DIRecord {
 		return $iAnswer;
 	}
 	
-	// Read an specific InfoKey value from the table
-	public function getRegionInfoValue($prmInfoKey, $LangIsoCode) {
-		$sReturn = '';
-		$sReturn = $this->get($prmInfoKey);
-		if ($sReturn == '') {
-			$sReturn = $this->get($prmInfoKey, $LangIsoCode);
-		}
-		return $sReturn;
-	} //function
-
 	public function getLanguageList() {
 		$LangIsoCode = $this->get('LangIsoCode');
 		$ll = array('eng'=>'eng');
