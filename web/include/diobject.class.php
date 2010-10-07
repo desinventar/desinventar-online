@@ -32,7 +32,7 @@ class DIObject {
 		$this->createFields($this->sFieldDef);
 		$this->set('RegionId', $this->session->RegionId);
 		$LangIsoCode = 'eng';
-		if ($this->q->RegionId != 'core') {
+		if ($this->session->q->RegionId != 'core') {
 			$LangIsoCode = $this->session->RegionLangIsoCode; //getDBInfoValue('LangIsoCode');
 		}
 		$this->set('LangIsoCode', $LangIsoCode);

@@ -3,7 +3,6 @@
  DesInventar - http://www.desinventar.org
  (c) 1998-2010 Corporacion OSSO
 */
-
 class DIRegion extends DIObject {
 	public function __construct($prmSession) {
 		$this->sFieldKeyDef = 'RegionId/STRING';
@@ -71,6 +70,7 @@ class DIRegion extends DIObject {
 					// XML File Exists, load data...
 					$iReturn = $this->loadFromXML($XMLFile);
 				} else {
+					$this->set('RegionLabel', $prmRegionId);
 					/*
 					//XML File does not exists, create xml file using Info Table
 					// Load eng Info
@@ -131,7 +131,7 @@ class DIRegion extends DIObject {
 	}
 
 	// Read an specific InfoKey value from the table
-	public function getRegionInfoValue($prmInfoKey, $LangIsoCode) {
+	public function getRegionInfoValue($prmInfoKey, $LangIsoCode='') {
 		$sReturn = '';
 		$sReturn = $this->get($prmInfoKey);
 		if ($sReturn == '') {
@@ -487,5 +487,4 @@ class DIRegion extends DIObject {
 		return $iReturn;
 	}
 } //class
-
 </script>
