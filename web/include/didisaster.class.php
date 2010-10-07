@@ -4,7 +4,7 @@
  (c) 1998-2010 Corporacion OSSO
 */
 
-class DIDisaster extends DIObject {
+class DIDisaster extends DIRecord {
 	public function __construct($prmSession) {
 		$this->sTableName   = "Disaster";
 		$this->sPermPrefix  = "DISASTER";

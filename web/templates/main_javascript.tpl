@@ -468,7 +468,7 @@
 								},
 								{text:'{-#tsend#-}',
 									handler: function() {
-										sendGraphic("result");
+										sendGraphic('result');
 										$('DCRes').value = "G";
 										grpw.hide();
 										$('bsave').style.visibility = 'visible';

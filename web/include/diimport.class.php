@@ -27,12 +27,12 @@ class DIImport {
 		$flog = fopen($FLogName,'w');
 		$fh = fopen($FileName, 'r');
 		// Version Line
-		$values = fgetcsv($fh, 1000, ',');
+		$values = fgetcsv($fh, 0, ',');
 		// Column Header Line
-		$values = fgetcsv($fh, 1000, ',');
+		$values = fgetcsv($fh, 0, ',');
 		$rowCount = 2;
 		while ( (! feof($fh) ) && ($rowCount < $maxLines) ) {
-			$values = fgetcsv($fh, 1000, ',');
+			$values = fgetcsv($fh, 0, ',');
 			$rowCount++;
 			if (count($values) > 1) {
 				switch($ObjectType) {

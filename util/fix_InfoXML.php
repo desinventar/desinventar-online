@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#!/usr/bin/php -d session.save_path='/tmp'
 <script language="php">
 /*
   DesInventar - http://www.desinventar.org
@@ -8,26 +8,26 @@
 
   Updates info.xml file for all databases
 */
-
-$_SERVER["DI8_WEB"] = '../web';
 require_once('../web/include/loader.php');
-require_once('../web/include/diregion.class.php');
-
+require_once(BASE . '/include/diregion.class.php');
+require_once(BASE . '/include/diregionrecord.class.php');
 $q = new Query();
 $RegionList = array();
 foreach($q->core->query("SELECT * FROM Region") as $row) {
 	$RegionList[] = $row['RegionId'];
 }
 //DEBUG
-$RegionList = array('BOL-1248983224-bolivia_inventario_historico_de_desastres');
+//$RegionList = array('ARG-1250695025-argentina_gran_chaco');
 foreach ($RegionList as $RegionId) {
 	$us->open($RegionId);
-	print $RegionId . "\n";
-	$r = new DIRegion($us, $RegionId);
-	$FileName = $us->getDBDir() . '/info.xml';
-	//$r->loadFromXML($FileName);
-	$r->saveToXML($FileName);
+	$XMLFile = $us->getDBDir() . '/info.xml';
+	if (! file_exists($XMLFile)) {
+		print $RegionId . "\n";
+		$r = new DIRegionRecord($us, $RegionId);
+		//print $r->get('RegionLabel') . "\n";
+		//$r->loadFromXML($FileName);
+		//$r->saveToXML($FileName);
+	}
 }
-
 $q = null;
 </script>

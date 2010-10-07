@@ -4,7 +4,7 @@
  (c) 1998-2009 Corporacion OSSO
 */
 
-class DIRegionAuth extends DIObject {
+class DIRegionAuth extends DIRecord {
 	public function __construct($prmSession) {
 		$this->sTableName   = "RegionAuth";
 		$this->sPermPrefix  = "ADMIN";

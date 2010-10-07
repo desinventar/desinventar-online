@@ -4,7 +4,7 @@
  (c) 1998-2009 Corporacion OSSO
 */
 
-class DICause extends DIObject {
+class DICause extends DIRecord {
 	public function __construct($prmSession) {
 		$this->sTableName   = "Cause";
 		$this->sPermPrefix  = "CAUSE";
