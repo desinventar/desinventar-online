@@ -4,10 +4,8 @@
  (c) 1998-2010 Corporacion OSSO
 */
 
-class DIRegion extends DIRecord {
+class DIRegion extends DIObject {
 	public function __construct($prmSession) {
-		$this->sTableName   = 'Region';
-		$this->sPermPrefix  = 'INFO';
 		$this->sFieldKeyDef = 'RegionId/STRING';
 		$this->sFieldDef    = 'RegionLabel/STRING,' .
 		                      'LangIsoCode/STRING,' . 
@@ -36,7 +34,6 @@ class DIRegion extends DIRecord {
 		                      'InfoCartography/STRING,' .
 		                      'InfoAdminURL/STRING';
 		parent::__construct($prmSession);
-		$this->setConnection('core');
 		$this->createFields($this->sInfoDef);		
 		$this->addLanguageInfo('eng');
 		$this->set('PeriodBeginDate', '');
@@ -62,10 +59,8 @@ class DIRegion extends DIRecord {
 		$iReturn = ERR_NO_ERROR;
 		if ($prmRegionId != '') {
 			$this->set('RegionId', $prmRegionId);
-			$iReturn = $this->q->setDBConnection($prmRegionId);
 		}
 		if ($iReturn > 0) {
-			$iReturn = $this->load();
 			if ($XMLFile != '') {
 				// Load Info from specified XML File
 				$iReturn = $this->loadFromXML($XMLFile);
