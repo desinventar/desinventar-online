@@ -10,7 +10,7 @@ if (! isset($_SERVER['DI8_WEB'])) {
 
 // This is the version of the software
 define('VERSION', '8.2.2.01');
-define('JSVERSION', '2010-10-07.01');
+define('JSVERSION', '2010-10-07.02');
 
 // 2009-07-22 (jhcaiced) Adapted Configuration and Startup for 
 // using with PHP Command Line 
@@ -89,6 +89,7 @@ define('TMPM_DIR', CACHEDIR); // Mapserver temp dir
 require_once(BASE . '/include/fb.php');
 require_once(BASE . '/include/usersession.class.php');
 require_once(BASE . '/include/diobject.class.php');
+require_once(BASE . '/include/diregion.class.php');
 require_once(BASE . '/include/direcord.class.php');
 require_once(BASE . '/include/diuser.class.php');
 require_once(BASE . '/include/query.class.php');
