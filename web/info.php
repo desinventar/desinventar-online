@@ -48,7 +48,9 @@ if (isset($infocmd)) {
 	$ifo = 0;
 	$data = form2data($post);
 	$data = $_POST['RegionInfo'];
-	$r = new DIRegion($us, $data['RegionId']);
+
+	// Load Current info.xml data
+	$r = new DIRegion($us, $RegionId);
 	$LangIsoCode = $r->get('LangIsoCode');
 	$r->setFromArray($_POST);
 	// Set Translated Info
@@ -57,7 +59,7 @@ if (isset($infocmd)) {
 		$r->set($FieldName, $data[$LangIsoCode][$FieldName], $LangIsoCode);
 		$r->set($FieldName, $data['eng'][$FieldName],'eng');
 	}
-	$ifo = $r->update();
+	$ifo = $r->saveToXML();
 	if (!iserror($ifo)) {
 		$t->assign ("ctl_msgupdinfo", true);
 		if (isset($_FILES['logofile']) && $_FILES['logofile']['error'] == UPLOAD_ERR_OK)
@@ -155,5 +157,4 @@ $t->assign ("reg", $RegionId);
 $t->assign ("dic", $us->q->queryLabelsFromGroup('DB', $lg));
 $t->assign ("usern", $us->UserId);
 $t->display ("info.tpl");
-
 </script>
