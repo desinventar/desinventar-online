@@ -12,7 +12,7 @@
 	<td>
 		<fieldset style="padding:5px 5px 5px 5px;">
 		<!-- GENERAL REGION INFO SECTION -->
-		<form name="infofrm" id="infofrm" method="POST" action="info.php" target="ifinfo" enctype="multipart/form-data">
+		<form id="frmDatabaseInfo" name="infofrm" method="POST" action="info.php" target="ifinfo">
 		<table border="0" cellspacing="0" cellpadding="0">
 		<tr>
 		<td colspan="2">
@@ -65,6 +65,7 @@
 			</tr>
 		{-/foreach-}
 		
+		<!--
 		<tr>
 		<td align="right">
 			<b>Logo imagen</b>
@@ -73,6 +74,7 @@
 			<input type="file" name="logofile" />
 		</td>
 		</tr>
+		-->
 		<tr>
 		<td colspan="2" align="center">
 			<br />

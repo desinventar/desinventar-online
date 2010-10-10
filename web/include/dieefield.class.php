@@ -38,6 +38,7 @@ class DIEEField extends DIRecord {
 	public function getMaxEEFieldId() {
 		$iMaxVal = 0;
 		$sQuery = "SELECT EEFieldId FROM " . $this->getTableName() . " ORDER BY EEFieldId DESC LIMIT 1";
+		$EEFieldId = 'EEF000';
 		foreach($this->q->dreg->query($sQuery) as $row) {
 			$EEFieldId = $row['EEFieldId'];
 		}
@@ -103,7 +104,8 @@ class DIEEField extends DIRecord {
 		if ($iReturn > 0) {
 			$iReturn = $this->validateUnique(-83, 'EEFieldLabel', true);
 		}
-		$oReturn['Status'] = $iReturn;
+		//$oReturn['Status'] = $iReturn;
+		$oReturn = $iReturn;
 		return $oReturn;
 	} //function
 } //class
