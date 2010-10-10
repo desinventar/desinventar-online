@@ -137,6 +137,7 @@ if (isset($infocmd)) {
 		$info[$lng]['InfoAdminURL']		= array($r->get('InfoAdminURL'   , $lng), "VARCHAR");
 	}
 	$t->assign ("info", $info);
+	$sett['RegionLabel']    = array($r->get('RegionLabel'), "TEXT");
 	$sett['GeoLimitMinX']	= array($r->get('GeoLimitMinX'), "NUMBER");
 	$sett['GeoLimitMinY']	= array($r->get('GeoLimitMinY'), "NUMBER");
 	$sett['GeoLimitMaxX']	= array($r->get('GeoLimitMaxX'), "NUMBER");
