@@ -383,7 +383,6 @@ class DIRegion extends DIObject {
 			$filename = $this->getXMLFileName();
 		}
 		$xml = $this->toXML();
-		fb($xml);
 		if ($xml != '') {
 			$fh = fopen($filename, 'w');
 			fwrite($fh, $this->toXML());
@@ -391,7 +390,6 @@ class DIRegion extends DIObject {
 		} else {
 			$iReturn = ERR_UNKNOWN_ERROR;
 		}
-		fb($iReturn);
 		return $iReturn;
 	}
 	
