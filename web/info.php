@@ -118,8 +118,9 @@ if (isset($infocmd)) {
 		$t->assign ("ctl_loglist", true);
 	}
 } else {
+	$UserRole = $us->getUserRole($RegionId);
 	// DISPLAY REGION INFO
-	if ($urol == "OBSERVER") {
+	if ($UserRole == "OBSERVER") {
 		$t->assign ("ro", "disabled");
 	}
 	$r = new DIRegion($us, $RegionId);
@@ -145,10 +146,10 @@ if (isset($infocmd)) {
 	$sett['PeriodBeginDate']= array($r->get('PeriodBeginDate'), "DATE");
 	$sett['PeriodEndDate']	= array($r->get('PeriodEndDate'), "DATE");
 	$t->assign ("sett", $sett);
-	$urol = $us->getUserRole($RegionId);
-	//$t->assign ("usr", $us->getUserFullName(''));
-	$t->assign ("usr", $us->getUsersList(''));
-	$t->assign ("rol", $us->getRegionRoleList($RegionId));
+	$UserList = $us->getUsersList('');
+	$UserRoleList = $us->getRegionRoleList($RegionId);
+	$t->assign ("usr", $UserList);
+	$t->assign ("rol", $UserRoleList);
 	$t->assign ("log", $us->q->getRegLogList());
 	$t->assign ("ctl_adminreg", true);
 	$t->assign ("ctl_rollist", true);

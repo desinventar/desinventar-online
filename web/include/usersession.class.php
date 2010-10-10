@@ -284,7 +284,7 @@ class UserSession {
 		$sQuery = "SELECT RegionAuth.*,Region.RegionLabel FROM RegionAuth,Region WHERE " .
 		  " (RegionAuth.RegionId = Region.RegionId) " .
 		  " AND (Region.RegionId='" . $myregion . "') " .
-		  " AND AuthKey='ROLE'" . 
+		  " AND RegionAuth.AuthKey='ROLE' AND RegionAuth.AuthAuxValue != 'NONE'" .
 		  " ORDER BY RegionAuth.RegionId";
 		if ($result = $this->q->core->query($sQuery) ) {
 			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
