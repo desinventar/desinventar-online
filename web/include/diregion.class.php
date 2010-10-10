@@ -102,6 +102,20 @@ class DIRegion extends DIObject {
 	
 	public function update() {
 		$iReturn = $this->saveToXML();
+		$this->updateCore();
+		return $iReturn;
+	}
+	
+	public function updateCore() {
+		// Update core.Region table using new data...
+		$sQuery = 'UPDATE Region SET ' .
+		 ' RegionLabel="' . $this->get('RegionLabel') . '",' .
+		 ' LangIsoCode="' . $this->get('LangIsoCode') . '",' .
+		 ' CountryIso="'  . $this->get('CountryIso') . '",' .
+		 ' RegionStatus=' . $this->get('RegionStatus') .
+		 ' WHERE RegionId="' . $this->get('RegionId') . '"';
+		$iReturn = ERR_NO_ERROR;
+		$this->session->q->core->query($sQuery);
 		return $iReturn;
 	}
 	
@@ -347,7 +361,7 @@ class DIRegion extends DIObject {
 				} //foreach
 			} //foreach
 		} catch (Exception $e) {
-			$iReturn = ERR_UNKNOWN_ERROR;
+			$iReturn = ERR_NO_ERROR;
 		}
 		if ($iReturn > 0) {
 			// Save to String...

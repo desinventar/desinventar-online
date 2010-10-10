@@ -60,6 +60,8 @@
 						<input id="{-$key-}" name="{-$key-}" type="text" class="line" style="width:120px;" value="{-$item[0]-}" tabindex="{-$tabind-}"/>
 					{-elseif $item[1] == "NUMBER"-}
 						<input id="{-$key-}" name="{-$key-}" type="text" class="line" style="width:40px;" value="{-$item[0]-}" tabindex="{-$tabind-}"/>
+					{-elseif $item[1] == "TEXT"-}
+						<input id="{-$key-}" name="{-$key-}" type="text" class="line" style="width:300px;" value="{-$item[0]-}" tabindex="{-$tabind-}"/>
 					{-/if-}
 				</td>
 			</tr>
