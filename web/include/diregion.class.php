@@ -71,17 +71,6 @@ class DIRegion extends DIObject {
 					$iReturn = $this->loadFromXML($XMLFile);
 				} else {
 					$this->set('RegionLabel', $prmRegionId);
-					/*
-					//XML File does not exists, create xml file using Info Table
-					// Load eng Info
-					$iReturn = $this->loadInfoTrans('eng');
-					$LangIsoCode = $this->get('LangIsoCode');
-					if ($LangIsoCode != 'eng') {
-						$this->addLanguageInfo($LangIsoCode);
-						$iReturn = $this->loadInfoTrans($LangIsoCode);
-					}
-					$iReturn = $this->saveToXML();
-					*/
 				} //if
 			} //if
 		}
@@ -112,12 +101,7 @@ class DIRegion extends DIObject {
 	}
 	
 	public function update() {
-		// Call the original update() function, update core.Region table
-		$iReturn = parent::update();
-		if ($iReturn > 0) {
-			// Also save to xml file with RegionInfo
-			$iReturn = $this->saveToXML();
-		}
+		$iReturn = $this->saveToXML();
 		return $iReturn;
 	}
 	
@@ -350,7 +334,7 @@ class DIRegion extends DIObject {
 		$occ = $doc->createElement('GeoCarto');
 		$occ = $root->appendChild($occ);
 		try {
-			foreach($this->q->dreg->query($sQuery) as $row) {
+			foreach($this->session->q->dreg->query($sQuery) as $row) {
 				$level = $doc->createElement('GeoCartoItem');
 				$level = $occ->appendChild($level);
 				$level->setAttribute('GeoLevelId', $row['GeoLevelId']);
@@ -419,6 +403,10 @@ class DIRegion extends DIObject {
 				}
 			} //foreach
 
+			$LangIsoCode = $this->get('LangIsoCode');
+			if ($LangIsoCode != 'eng') {
+				$this->addLanguageInfo($LangIsoCode);
+			}
 
 			// Add Translated Information
 			foreach($doc->getElementsByTagName('Description') as $tree) {
