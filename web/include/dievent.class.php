@@ -111,7 +111,7 @@ class DIEvent extends DIRecord {
 			if ( $this->status->hasError() || $this->status->hasWarning() ) {
 				$iReturn = ERR_UNKNOWN_ERROR;
 			}
-			$this->status = $iReturn;
+			$this->status->status = $iReturn;
 		}
 		return $iReturn;
 	} //function
