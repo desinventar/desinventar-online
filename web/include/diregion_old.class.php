@@ -4,7 +4,7 @@
  (c) 1998-2010 Corporacion OSSO
 */
 
-class DIRegionRecord extends DIRegion {
+class DIRegionRecord extends DIRecord {
 	public function __construct($prmSession) {
 		$this->sTableName   = 'Region';
 		$this->sPermPrefix  = 'INFO';
@@ -36,6 +36,7 @@ class DIRegionRecord extends DIRegion {
 		                      'InfoCartography/STRING,' .
 		                      'InfoAdminURL/STRING';
 		parent::__construct($prmSession);
+		$this->setConnection('core');
 		$this->createFields($this->sInfoDef);		
 		$this->addLanguageInfo('eng');
 		$this->set('PeriodBeginDate', '');
@@ -61,7 +62,7 @@ class DIRegionRecord extends DIRegion {
 		$iReturn = ERR_NO_ERROR;
 		if ($prmRegionId != '') {
 			$this->set('RegionId', $prmRegionId);
-			$iReturn = $this->session->q->setDBConnection($prmRegionId);
+			$iReturn = $this->q->setDBConnection($prmRegionId);
 		}
 		if ($iReturn > 0) {
 			$iReturn = $this->load();
@@ -77,9 +78,11 @@ class DIRegionRecord extends DIRegion {
 				} else {
 					//XML File does not exists, create xml file using Info Table
 					// Load eng Info
+					$iReturn = $this->loadInfoTrans('eng');
 					$LangIsoCode = $this->get('LangIsoCode');
 					if ($LangIsoCode != 'eng') {
 						$this->addLanguageInfo($LangIsoCode);
+						$iReturn = $this->loadInfoTrans($LangIsoCode);
 					}
 					$iReturn = $this->saveToXML();
 				} //if
@@ -106,12 +109,169 @@ class DIRegionRecord extends DIRegion {
 		return $Translatable;
 	}
 
-	public function insert() {
-		parent::insert();
-		$this->createRegionDB('');
-		return ERR_NO_ERROR;
+	public function loadInfo() {
+		$iReturn = ERR_NO_ERROR;
+		$RegionId = $this->get('RegionId');
+		$iReturn = $this->q->setDBConnection($RegionId);
+		if ($iReturn > 0) {
+			$this->setConnection($RegionId);
+			try {
+				$sQuery = 'SELECT * FROM Info WHERE LangIsoCode=:LangIsoCode AND Length(InfoKey) > 3';
+				$sth = $this->conn->prepare($sQuery);
+				$sth->bindValue(':LangIsoCode', '', PDO::PARAM_STR);
+				$sth->execute();
+				while($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+					$InfoValue = $row['InfoValue'];
+					$InfoKey   = $row['InfoKey'];
+					$this->set($InfoKey, $InfoValue);
+				} // while
+			} catch (Exception $e) {
+				$iReturn = ERR_NO_DATABASE;
+			}
+			$this->setConnection('core');
+			$this->set('RegionId', $RegionId);
+			$this->loadInfoTrans($this->get('LangIsoCode'));
+		}
+		return $iReturn;
 	}
 
+	public function loadInfoTrans($prmLangIsoCode) {
+		$iReturn = ERR_NO_DATABASE;
+		$RegionId = $this->get('RegionId');
+		if ($RegionId != 'core') {
+			$iReturn = ERR_NO_ERROR;
+			$iReturn = $this->q->setDBConnection($this->get('RegionId'));
+			if ($iReturn > 0) {
+				$this->setConnection($this->get('RegionId'));
+				try {
+					$sQuery = 'SELECT * FROM Info WHERE LangIsoCode=:LangIsoCode';
+					$sth = $this->conn->prepare($sQuery);
+					$sth->bindParam(':LangIsoCode', $prmLangIsoCode, PDO::PARAM_STR);
+					$sth->execute();
+					while($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+						$InfoValue = $row['InfoValue'];
+						$InfoKey   = $row['InfoKey'];
+						$this->set($InfoKey, $InfoValue,$prmLangIsoCode);
+					} // while
+				} catch (Exception $e) {
+					$iReturn = ERR_NO_DATABASE;
+				}
+				$this->setConnection('core');
+			}
+		}
+		return $iReturn;
+	}
+	
+	public function	saveInfo() {
+		$iReturn = ERR_NO_ERROR;
+		$now = gmdate('c');
+		$this->setConnection($this->get('RegionId'));
+		$Translatable = $this->getTranslatableFields();
+		foreach($this->oField as $Key => $Value) {
+			if ($iReturn > 0) {
+				foreach($this->oField[$Key] as $InfoKey => $InfoValue) {
+					if ($iReturn > 0) {
+						$LangIsoCode = $Key;
+						if (strlen($LangIsoCode) > 3) {
+							$LangIsoCode = '';
+						}
+						$sQuery = 'DELETE FROM Info WHERE InfoKey=:InfoKey AND LangIsoCode=:LangIsoCode';
+						$sth = $this->conn->prepare($sQuery);
+						$sth->bindParam(':InfoKey'    , $InfoKey    , PDO::PARAM_STR);
+						$sth->bindParam(':LangIsoCode', $LangIsoCode, PDO::PARAM_STR);
+						try {
+							$sth->execute();
+						} catch (Exception $e) {
+							showErrorMsg('Error : ' . $e->getMessage());
+							$iReturn = ERR_UNKNOWN_ERROR;
+						}
+						$sQuery = 'INSERT INTO Info VALUES (:InfoKey,:LangIsoCode,:InfoValue,:InfoAuxValue,:RecordCreation,:RecordSync,:RecordUpdate)';
+						$sth = $this->conn->prepare($sQuery);
+						$sth->bindParam(':InfoKey'       , $InfoKey    , PDO::PARAM_STR);
+						$sth->bindParam(':LangIsoCode'   , $LangIsoCode, PDO::PARAM_STR);
+						$sth->bindParam(':InfoValue'     , $InfoValue  , PDO::PARAM_STR);
+						$sth->bindValue(':InfoAuxValue'  , ''          , PDO::PARAM_STR);
+						$sth->bindParam(':RecordCreation', $now        , PDO::PARAM_STR);
+						$sth->bindParam(':RecordSync'    , $now        , PDO::PARAM_STR);
+						$sth->bindParam(':RecordUpdate'  , $now        , PDO::PARAM_STR);
+						try {
+							$sth->execute();
+						} catch (Exception $e) {
+							showErrorMsg('Error : ' . $e->getMessage());
+							$iReturn = ERR_UNKNOWN_ERROR;
+						}
+					 } //if
+				} //foreach
+			} //if
+		} //foreach
+		$this->setConnection('core');
+		//$this->saveInfoTrans('eng');
+		//$this->saveInfoTrans($this->get('LangIsoCode'));
+		return $iReturn;
+	}
+	
+	public function saveInfoTrans($prmLangIsoCode) {
+		$iReturn = ERR_NO_ERROR;
+		$now = gmdate('c');
+		$this->setConnection($this->get('RegionId'));
+		$Translatable = $this->getTranslatableFields();
+		foreach($this->oField[$prmLangIsoCode] as $InfoKey => $InfoValue) {
+			if (array_key_exists($InfoKey, $Translatable)) {
+				$LangIsoCode = $prmLangIsoCode;
+				$sQuery = 'DELETE FROM Info WHERE InfoKey=:InfoKey AND LangIsoCode=:LangIsoCode';
+				$sth = $this->conn->prepare($sth);
+				$sth->bindParam(':InfoKey'    , $InfoKey    , PDO::PARAM_STR);
+				$sth->bindParam(':LangIsoCode', $LangIsoCode, PDO::PARAM_STR);
+				try {
+					$sth->execute();
+				}  catch (Exception $e) {
+					showErrorMsg('Error : ' . $e->getMessage());
+				}
+
+				$sQuery = 'INSERT INTO Info VALUES (:InfoKey,:LangIsoCode,:InfoValue,:InfoAuxValue,:RecordCreation,:RecordSync,:RecordUpdate)';
+				$sth = $this->conn->prepare($sQuery);
+				$sth->bindParam(':InfoKey'       , $InfoKey    , PDO::PARAM_STR);
+				$sth->bindParam(':LangIsoCode'   , $LangIsoCode, PDO::PARAM_STR);
+				$sth->bindParam(':InfoValue'     , $InfoValue  , PDO::PARAM_STR);
+				$sth->bindValue(':InfoAuxValue'  , ''          , PDO::PARAM_STR);
+				$sth->bindParam(':RecordCreation', $now        , PDO::PARAM_STR);
+				$sth->bindParam(':RecordSync'    , $now        , PDO::PARAM_STR);
+				$sth->bindParam(':RecordUpdate'  , $now        , PDO::PARAM_STR);
+				try {
+					$sth->execute();
+				} catch (Exception $e) {
+					showErrorMsg('Error : ' . $e->getMessage());
+				}
+			}
+		} //foreach
+		$this->setConnection('core');
+		return $iReturn;
+	}
+	
+	public function load() {
+		$iReturn = ERR_NO_ERROR;
+		if ($iReturn > 0) {
+			$this->setConnection('core');
+			$iReturn = parent::load();
+		}
+		if ($iReturn > 0) {
+			$iReturn = $this->loadInfo();
+		}
+		return $iReturn;
+	}
+	
+	public function update() {
+		// Call the original update() function, update core.Region table
+		$iReturn = parent::update();
+		if ($iReturn > 0) {
+			// This should update the region.Info table
+			$iReturn = $this->saveInfo();
+			// Also save to xml file with RegionInfo
+			$iReturn = $this->saveToXML();
+		}
+		return $iReturn;
+	}
+	
 	public function createRegionDB($prmGeoLevelName='') {
 		// Creates/Initialize the region database
 		$iReturn = ERR_NO_ERROR;
@@ -119,9 +279,11 @@ class DIRegionRecord extends DIRegion {
 		// Create Directory for New Region
 		$DBDir = DBDIR . '/' . $prmRegionId;
 		$DBFile = $DBDir . '/desinventar.db';
-		$this->session->q->dreg = null;
-		$this->createRegionDBDir();
+		$this->q->dreg = null;
 		try {
+			if (!file_exists($DBDir)) {
+				mkdir($DBDir);
+			}
 			if (file_exists(CONST_DBNEWREGION)) {
 				// Backup previous desinventar.db if exists
 				if (file_exists($DBFile)) {
@@ -136,7 +298,7 @@ class DIRegionRecord extends DIRegion {
 		} catch (Exception $e) {
 			showErrorMsg('Error : ' . $e->getMessage());
 		}
-		$this->session->q->setDBConnection($this->get('RegionId'));
+		$this->q->setDBConnection($this->get('RegionId'));
 		// Delete all database records
 		$this->clearRegionTables();
 		$this->set('RegionId', $prmRegionId);
@@ -149,7 +311,7 @@ class DIRegionRecord extends DIRegion {
 
 		if ($iReturn > 0) {
 			// Insert Data Into core.Region, create Info Table
-			//$this->insert();
+			$this->insert();
 		}
 		if ($iReturn > 0) {
 			// Calculate Name of GeoLevel 0
@@ -185,7 +347,7 @@ class DIRegionRecord extends DIRegion {
 		// Create Geography element at GeographyLevel=0 for this RegionItem
 		// Delete Existing Elements
 		$query = 'DELETE FROM Geography WHERE GeographyCode=:GeographyCode';
-		$sth = $this->session->q->dreg->prepare($query);
+		$sth = $this->q->dreg->prepare($query);
 		$sth->bindParam(':GeographyCode', $prmRegionItemId, PDO::PARAM_STR);
 		$sth->execute();
 		$g = new DIGeography($this->session, 
@@ -229,7 +391,7 @@ class DIRegionRecord extends DIRegion {
 		// Delete ALL Record from Database - Be Careful...
 		foreach($this->getRegionTables() as $TableName) {
 			$query = 'DELETE FROM ' . $TableName;
-			$sth = $this->session->q->dreg->prepare($query);
+			$sth = $this->q->dreg->prepare($query);
 			$sth->execute();
 		} //foreach
 	}
@@ -271,7 +433,7 @@ class DIRegionRecord extends DIRegion {
 		if ($iReturn > 0) {
 			if ($prmRegionItemGeographyName != '') {
 				$Query = 'UPDATE Geography SET GeographyName=:GeographyName WHERE GeographyLevel=0 AND GeographyCode=:GeographyCode';
-				$sth = $this->session->q->dreg->prepare($Query);
+				$sth = $this->q->dreg->prepare($Query);
 				$sth->bindParam(':GeographyName', $prmRegionItemGeographyName, PDO::PARAM_STR);
 				$sth->bindParam(':GeographyCode', $prmRegionItemId, PDO::PARAM_STR);
 				$sth->execute();
@@ -288,7 +450,7 @@ class DIRegionRecord extends DIRegion {
 	}
 
 	public function clearSyncTable() {
-		$sth = $this->session->q->dreg->prepare('DELETE FROM Sync;');
+		$sth = $this->q->dreg->prepare('DELETE FROM Sync;');
 		$sth->execute();
 	}
 	
@@ -323,7 +485,8 @@ class DIRegionRecord extends DIRegion {
 	}
 	public function addRegionItemGeography($prmRegionItemId, $prmRegionItemGeographyId) {
 		$iReturn = ERR_NO_ERROR;
-		$q = $this->session->q->dreg;
+		$this->setConnection($this->get('RegionId'));
+		$q = $this->q->dreg;
 		
 		// Copy Geography From Database
 		if ($iReturn > 0) {
@@ -334,6 +497,7 @@ class DIRegionRecord extends DIRegion {
 			$this->copyData($q, 'Geography','GeographyId', $prmRegionItemId, $prmRegionItemGeographyId, false);
 			$q->query($this->detachQuery());
 		}
+		$this->setConnection('core');
 		return $iReturn;
 	}
 	
@@ -349,35 +513,35 @@ class DIRegionRecord extends DIRegion {
 	
 	public function rebuildEventData() {
 		$this->copyEvents($this->get('LangIsoCode'));
-		$this->session->q->dreg->query("DELETE FROM Event WHERE EventPredefined=0");
+		$this->q->dreg->query("DELETE FROM Event WHERE EventPredefined=0");
 		$o = new DIEvent($this->session);
 		$query = "SELECT * FROM Sync WHERE SyncTable='Event'";
-		foreach($this->session->q->dreg->query($query) as $row) {
+		foreach($this->q->dreg->query($query) as $row) {
 			$url = $this->processURL($row['SyncURL']);
 			$RegionItemId = $url['regionid'];
-			$this->session->q->dreg->query($this->attachQuery($RegionItemId,'RegItem'));
-			foreach($this->session->q->dreg->query("SELECT * FROM RegItem.Event WHERE EventPredefined=0") as $row) {
+			$this->q->dreg->query($this->attachQuery($RegionItemId,'RegItem'));
+			foreach($this->q->dreg->query("SELECT * FROM RegItem.Event WHERE EventPredefined=0") as $row) {
 				$o->setFromArray($row);
 				$o->insert();
 			}
-			$this->session->q->dreg->query($this->detachQuery('RegItem'));
+			$this->q->dreg->query($this->detachQuery('RegItem'));
 		}
 	}
 
 	public function rebuildCauseData() {
 		$this->copyCauses($this->get('LangIsoCode'));
-		$this->session->q->dreg->query("DELETE FROM Cause WHERE CausePredefined=0");
+		$this->q->dreg->query("DELETE FROM Cause WHERE CausePredefined=0");
 		$o = new DICause($this->session);
 		$query = "SELECT * FROM Sync WHERE SyncTable='Cause'";
-		foreach($this->session->q->dreg->query($query) as $row) {
+		foreach($this->q->dreg->query($query) as $row) {
 			$url = $this->processURL($row['SyncURL']);
 			$RegionItemId = $url['regionid'];
-			$this->session->q->dreg->query($this->attachQuery($RegionItemId,'RegItem'));
-			foreach($this->session->q->dreg->query("SELECT * FROM RegItem.Cause WHERE CausePredefined=0") as $row) {
+			$this->q->dreg->query($this->attachQuery($RegionItemId,'RegItem'));
+			foreach($this->q->dreg->query("SELECT * FROM RegItem.Cause WHERE CausePredefined=0") as $row) {
 				$o->setFromArray($row);
 				$o->insert();
 			}
-			$this->session->q->dreg->query($this->detachQuery('RegItem'));
+			$this->q->dreg->query($this->detachQuery('RegItem'));
 		}
 	}
 
@@ -386,11 +550,11 @@ class DIRegionRecord extends DIRegion {
 		
 		// Delete existing Geography except for Level0 in Virtual Region
 		$query = "DELETE FROM Geography WHERE GeographyLevel>0";
-		$this->session->q->dreg->query($query);
+		$this->q->dreg->query($query);
 		
 		$list = array();
 		$query = "SELECT * FROM Sync WHERE SyncTable='Geography'";
-		foreach($this->session->q->dreg->query($query) as $row) {
+		foreach($this->q->dreg->query($query) as $row) {
 			$list[] = $row['SyncURL'];
 		}
 		
@@ -401,37 +565,37 @@ class DIRegionRecord extends DIRegion {
 			$prmRegionItemGeographyId = $this->getRegionItemGeographyId($RegionItemId);
 
 			// Attach Database
-			$this->session->q->dreg->query($this->attachQuery($RegionItemId,'RegItem'));
+			$this->q->dreg->query($this->attachQuery($RegionItemId,'RegItem'));
 
 			// Copy Geography From Database
-			$this->copyData($this->session->q->dreg, 'Geography','GeographyId', $prmRegionItemId, $prmRegionItemGeographyId, false);
+			$this->copyData($this->q->dreg, 'Geography','GeographyId', $prmRegionItemId, $prmRegionItemGeographyId, false);
 			
 			// Update GeographyFQName in child nodes
 			$g = new DIGeography($this->session, $prmRegionItemGeographyId);
 			$GeographyFQName = $g->get('GeographyFQName');
 			$query = 'UPDATE Geography SET GeographyFQName="' . $GeographyFQName . '/' . '"||GeographyFQName WHERE GeographyLevel>0 AND GeographyId LIKE "' . $prmRegionItemGeographyId . '%"';
-			$this->session->q->dreg->query($query);
+			$this->q->dreg->query($query);
 
-			$this->session->q->dreg->query($this->detachQuery('RegItem'));
+			$this->q->dreg->query($this->detachQuery('RegItem'));
 		}
 		return $iReturn;
 	}
 
 	public function rebuildGeoLevelData() {
 		$iReturn = ERR_NO_ERROR;
-		$this->session->q->dreg->query("DELETE FROM GeoLevel WHERE GeoLevelId>0");
+		$this->q->dreg->query("DELETE FROM GeoLevel WHERE GeoLevelId>0");
 		$query = "SELECT * FROM Sync WHERE SyncTable='Cause'";
-		foreach($this->session->q->dreg->query($query) as $row) {
+		foreach($this->q->dreg->query($query) as $row) {
 			$url = $this->processURL($row['SyncURL']);
 			$RegionItemId = $url['regionid'];
-			$this->session->q->dreg->query($this->attachQuery($RegionItemId,'RegItem'));
+			$this->q->dreg->query($this->attachQuery($RegionItemId,'RegItem'));
 
 			// GetCurrentMaxLevel
 			$iMaxLevel = 0;
-			foreach($this->session->q->dreg->query('SELECT MAX(GeoLevelId) AS MAXVAL FROM GeoLevel') as $row) {
+			foreach($this->q->dreg->query('SELECT MAX(GeoLevelId) AS MAXVAL FROM GeoLevel') as $row) {
 				$iMaxLevel = $row['MAXVAL'];
 			}
-			foreach($this->session->q->dreg->query('SELECT * FROM RegItem.GeoLevel') as $row) {
+			foreach($this->q->dreg->query('SELECT * FROM RegItem.GeoLevel') as $row) {
 				if ($iReturn > 0) {
 					if (($row['GeoLevelId'] + 1) > $iMaxLevel) {
 						$iMaxLevel++;
@@ -441,7 +605,7 @@ class DIRegionRecord extends DIRegion {
 					}
 				}			
 			} //foreach
-			$this->session->q->dreg->query($this->detachQuery('RegItem'));
+			$this->q->dreg->query($this->detachQuery('RegItem'));
 		}
 		return $iReturn;
 	}
@@ -450,7 +614,7 @@ class DIRegionRecord extends DIRegion {
 		$iReturn = ERR_NO_ERROR;
 		$query = "SELECT * FROM Sync WHERE SyncTable='GeoCarto'";
 		$list = array();
-		foreach($this->session->q->dreg->query($query) as $row) {
+		foreach($this->q->dreg->query($query) as $row) {
 			$list[] = $row['SyncURL'];
 		}
 		
@@ -460,17 +624,17 @@ class DIRegionRecord extends DIRegion {
 			$prmRegionItemGeographyId = $this->getRegionItemGeographyId($RegionItemId);
 
 			$query = "DELETE FROM GeoCarto WHERE GeographyId='" . $prmRegionItemGeographyId . "'";
-			$this->session->q->dreg->query($query);
+			$this->q->dreg->query($query);
 			
 			// Attach Database
-			$this->session->q->dreg->query($this->attachQuery($RegionItemId,'RegItem'));
+			$this->q->dreg->query($this->attachQuery($RegionItemId,'RegItem'));
 
 			// Copy GeoCarto Items
-			$this->copyData($this->session->q->dreg, 'GeoCarto','GeographyId',$RegionItemId, $prmRegionItemGeographyId, false);
+			$this->copyData($this->q->dreg, 'GeoCarto','GeographyId',$RegionItemId, $prmRegionItemGeographyId, false);
 			// Copy SHP,SHX,DBF files from each RegionItem to Region
 			$RegionDir     = VAR_DIR . '/database/' . $this->get('RegionId');
 			$RegionItemDir = VAR_DIR . '/database/' . $RegionItemId;
-			foreach($this->session->q->dreg->query('SELECT * FROM RegItem.GeoCarto') as $row) {
+			foreach($this->q->dreg->query('SELECT * FROM RegItem.GeoCarto') as $row) {
 				foreach(array('dbf','shp','shx','prj') as $ext) {
 					$file0 = $row['GeoLevelLayerFile'] . '.' . $ext;
 					$file1 = $RegionItemDir . '/' . $file0;
@@ -486,7 +650,7 @@ class DIRegionRecord extends DIRegion {
 			$g->set('RegionId', $RegionItemId);
 			$g->insert();
 
-			$this->session->q->dreg->query($this->detachQuery('RegItem'));
+			$this->q->dreg->query($this->detachQuery('RegItem'));
 		}
 		return $iReturn;
 	}
@@ -498,14 +662,14 @@ class DIRegionRecord extends DIRegion {
 			$query .= "AND SyncURL LIKE '%" . $prmRegionItemId . "%'";
 		}
 		$list = array();
-		foreach($this->session->q->dreg->query($query) as $row) {
+		foreach($this->q->dreg->query($query) as $row) {
 			$list[] = $row['SyncURL'];
 		}
 		
 		$query = "DELETE FROM Disaster";
-		$this->session->q->dreg->query($query);
+		$this->q->dreg->query($query);
 		$query = "DELETE FROM EEData";
-		$this->session->q->dreg->query($query);
+		$this->q->dreg->query($query);
 		
 		foreach($list as $SyncURL) {
 			$url = $this->processURL($SyncURL);
@@ -513,18 +677,18 @@ class DIRegionRecord extends DIRegion {
 			$RegionItemGeographyId = $this->getRegionItemGeographyId($RegionItemId);
 
 			// Attach Database
-			$this->session->q->dreg->query($this->attachQuery($RegionItemId,'RegItem'));
+			$this->q->dreg->query($this->attachQuery($RegionItemId,'RegItem'));
 
 			// Copy Disaster Table, adjust GeographyId Field
-			$this->copyData($this->session->q->dreg, 'Disaster','GeographyId', $RegionItemId, $RegionItemGeographyId, false);
+			$this->copyData($this->q->dreg, 'Disaster','GeographyId', $RegionItemId, $RegionItemGeographyId, false);
 			
 			// Delete Non Published Data cards
-			$this->session->q->dreg->query("DELETE FROM Disaster WHERE RecordStatus<>'PUBLISHED'");
+			$this->q->dreg->query("DELETE FROM Disaster WHERE RecordStatus<>'PUBLISHED'");
 			
 			// Copy DisasterId from EEData, Other Fields are Ignored...
-			$this->session->q->dreg->query("INSERT INTO EEData (DisasterId) SELECT DisasterId FROM Disaster WHERE GeographyId LIKE '" . $RegionItemGeographyId . "%'");
+			$this->q->dreg->query("INSERT INTO EEData (DisasterId) SELECT DisasterId FROM Disaster WHERE GeographyId LIKE '" . $RegionItemGeographyId . "%'");
 
-			$this->session->q->dreg->query($this->detachQuery('RegItem'));
+			$this->q->dreg->query($this->detachQuery('RegItem'));
 		}
 	}
 	
@@ -573,7 +737,7 @@ class DIRegionRecord extends DIRegion {
 		$Query = "INSERT INTO " . $prmTable . " SELECT * FROM TmpTable";
 		array_push($Queries,$Query);
 		foreach ($Queries as $Query) {
-			//$this->session->q->dreg->query($Query);
+			//$this->q->dreg->query($Query);
 			try {
 				$prmConn->query($Query);
 			} catch (Exception $e) {
@@ -599,7 +763,7 @@ class DIRegionRecord extends DIRegion {
 		$Query = 'DETACH DATABASE base';
 		array_push($Queries, $Query);
 		foreach($Queries as $Query) {
-			$this->session->q->dreg->query($Query);
+			$this->q->dreg->query($Query);
 		}
 	}
 
@@ -620,7 +784,7 @@ class DIRegionRecord extends DIRegion {
 		$Query = 'DETACH DATABASE base';
 		array_push($Queries, $Query);
 		foreach($Queries as $Query) {
-			$this->session->q->dreg->query($Query);
+			$this->q->dreg->query($Query);
 		}
 	}
 
@@ -670,7 +834,7 @@ class DIRegionRecord extends DIRegion {
 
 		$Query = "SELECT MIN(DisasterBeginTime) AS MinDate, MAX(DisasterBeginTime) AS MaxDate FROM Disaster ".
 			"WHERE RecordStatus='PUBLISHED'";
-		foreach($this->session->q->dreg->query($Query) as $row) {
+		foreach($this->q->dreg->query($Query) as $row) {
 			$MinDate = $row['MinDate'];
 			$MaxDate = $row['MaxDate'];
 		}
@@ -686,7 +850,7 @@ class DIRegionRecord extends DIRegion {
 
 		// 2010-07-06 (jhcaiced) Manually Calculate RegionLastUpdate
 		$sQuery = "SELECT MAX(RecordUpdate) AS MAX FROM Disaster;";
-		foreach($this->session->q->dreg->query($sQuery) as $row) {
+		foreach($this->q->dreg->query($sQuery) as $row) {
 			$a['RegionLastUpdate'] = substr($row['MAX'],0,10);
 		}
 
@@ -702,7 +866,7 @@ class DIRegionRecord extends DIRegion {
 			$MinY =  90; $MaxY = -90;
 			// Use information about each RegionItem to Calcule the Map Area
 			$Query = "SELECT * FROM RegionItem WHERE RegionId='" . $this->get('RegionId') . "'";
-			foreach ($this->session->q->core->query($Query) as $row) {
+			foreach ($this->q->core->query($Query) as $row) {
 				$RegionItemId = $row['RegionItem'];
 				$r = new DIRegion($this->session, $RegionItemId);
 				$ItemMinX = $r->getRegionInfoValue('GeoLimitMinX');
@@ -715,7 +879,7 @@ class DIRegionRecord extends DIRegion {
 				if ($ItemMaxY > $MaxY) { $MaxY = $ItemMaxY; }
 				$r = null;
 			} //foreach
-			$this->session->q->setDBConnection($this->get('RegionId'));
+			$this->q->setDBConnection($this->get('RegionId'));
 			if ($iReturn > 0) {
 				$this->set('GeoLimitMinX', $MinX);
 				$this->set('GeoLimitMaxX', $MaxX);
@@ -725,6 +889,16 @@ class DIRegionRecord extends DIRegion {
 			}
 		} //if
 	} //updateMapArea
+	
+	public static function buildRegionId($prmCountryIso) {
+		$RegionId = '';
+		if ($prmCountryIso == '') {
+			$prmCountryIso = 'DESINV';
+		}
+		$prmTimestamp = date('YmdHis', time());
+		$RegionId = $prmCountryIso . '-' . $prmTimestamp;
+		return $RegionId;
+	} //buildRegionId
 	
 	public function setActive($prmValue) {
 		return $this->setBit($prmValue, CONST_REGIONACTIVE);
@@ -833,6 +1007,125 @@ class DIRegionRecord extends DIRegion {
 		return $iReturn;
 	}
 	
+	public function toXML() {
+		$iReturn = ERR_NO_ERROR;
+		$doc = new DomDocument('1.0','UTF-8');
+		$root = $doc->createElement('RegionInfo');
+		$root = $doc->appendChild($root);
+		$root->setAttribute('Version', '1.0');
+		
+		// General Info and Translations of Descriptions
+		foreach(array_keys($this->oField) as $section) {
+			if ($section == 'info') {
+				$occ = $doc->createElement('General');
+				$occ = $root->appendChild($occ);
+			} else {
+				$occ = $doc->createElement('Description');
+				$occ = $root->appendChild($occ);
+				$occ->setAttribute('LangIsoCode', $section);
+			} 
+			foreach($this->oField[$section] as $key => $value) {
+				$child = $doc->createElement($key);
+				$child = $occ->appendChild($child);
+				$value = $doc->createTextNode($value);
+				$value = $child->appendChild($value);
+			}
+			
+		}
+		
+		// Add GeoCarto Section
+		$sQuery = "SELECT * FROM GeoCarto ORDER BY GeoLevelId";
+		$occ = $doc->createElement('GeoCarto');
+		$occ = $root->appendChild($occ);
+		try {
+			foreach($this->q->dreg->query($sQuery) as $row) {
+				$level = $doc->createElement('GeoCartoItem');
+				$level = $occ->appendChild($level);
+				$level->setAttribute('GeoLevelId', $row['GeoLevelId']);
+				$level->setAttribute('LangIsoCode', $row['LangIsoCode']);
+				foreach(array('GeoLevelLayerFile','GeoLevelLayerName','GeoLevelLayerCode') as $field) {
+					$child = $doc->createElement($field);
+					$child = $level->appendChild($child);
+					$value = $doc->createTextNode($row[$field]);
+					$value = $child->appendChild($value);
+				} //foreach
+			} //foreach
+		} catch (Exception $e) {
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($iReturn > 0) {
+			// Save to String...
+			$xml = $doc->saveXML();
+		} else {
+			$xml = '';
+		}
+		return $xml;
+	}
+	
+	public function getXMLFileName() {
+		$filename = DBDIR . '/' . $this->get('RegionId') . '/info.xml';
+		return $filename;
+	}
+	
+	public function saveToXML($filename='') {
+		$iReturn = ERR_NO_ERROR;
+		if ($filename == '') {
+			$filename = $this->getXMLFileName();
+		}
+		$xml = $this->toXML();
+		if ($xml != '') {
+			$fh = fopen($filename, 'w');
+			fwrite($fh, $this->toXML());
+			fclose($fh);
+		} else {
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		return $iReturn;
+	}
+	
+	public function loadFromXML($filename = '') {
+		$iReturn = ERR_NO_ERROR;
+		if ($filename == '') {
+			$filename = $this->getXMLFileName();
+		}
+		if (! file_exists($filename) ) {
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		
+		if ($iReturn > 0) {
+			$doc = new DomDocument('1.0','UTF-8');
+			$doc->load($filename);
+			foreach($doc->getElementsByTagName('General') as $tree) {
+				$section = 'info';
+				foreach($tree->childNodes as $node) {
+					$key = $node->nodeName;
+					$value = str_replace("\n",'', $node->nodeValue);
+					$value = str_replace("\r",'', $value);
+					if ($this->existField($key, $section)) {
+						$this->set($key, $value, $section);
+					}
+				}
+			} //foreach
+
+
+			// Add Translated Information
+			foreach($doc->getElementsByTagName('Description') as $tree) {
+				$LangIsoCode = $tree->getAttribute('LangIsoCode');
+				$section = $LangIsoCode;
+				$this->addLanguageInfo($section);
+				foreach($tree->childNodes as $node) {
+					$key = $node->nodeName;
+					$value = $node->nodeValue;
+					//print $node->nodeName . ' => ' . $node->nodeValue . "\n";
+					if ($this->existField($key, $section)) {
+						$this->set($key, $value, $section);
+					}
+				}
+			} //foreach
+		} //if
+		return $iReturn;
+	} //function
+
 	public static function existRegion($us, $prmRegionId) {
 		$iReturn = STATUS_NO;
 		$sQuery = 'SELECT RegionId FROM Region WHERE RegionId="' . $prmRegionId . '"';
