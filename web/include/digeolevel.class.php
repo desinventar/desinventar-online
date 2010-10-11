@@ -57,25 +57,23 @@ class DIGeoLevel extends DIRecord {
 	}
 
 	public function validateUpdate() {
-		$oReturn = parent::validateUpdate();
-		$iReturn = ERR_NO_ERROR;
+		$iReturn = parent::validateUpdate();
 		$iReturn = $this->validateNotNull(-33, 'GeoLevelName');
 		if ($iReturn > 0) {
 			$iReturn = $this->validateUnique(-34, 'GeoLevelName', true);
 		}
-		$oReturn['Status'] = $iReturn;
-		return $oReturn;
+		$this->status->status = $iReturn;
+		return $iReturn;
 	}
 
 	public function importFromCSV($cols, $values) {
-		$oReturn = parent::importFromCSV($cols, $values);
-		$iReturn = $oReturn['Status'];
+		$iReturn = parent::importFromCSV($cols, $values);
 		$this->set('GeoLevelId', $values[0]);
 		$this->set('GeoLevelName', $values[1]);
 		if ($iReturn > 0) {
-			$oReturn['Status'] = $iReturn;
+			$this->status->status = $iReturn;
 		}
-		return $oReturn;
+		return $iReturn;
 	} //function
 } //class
 
