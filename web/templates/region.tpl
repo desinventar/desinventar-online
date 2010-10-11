@@ -38,13 +38,12 @@
 	 </table>
 	</div>
 	<br />
-	<input id="add" type="button" value="{-#baddoption#-}" onclick="mod='regionpa'; setRegionPA('','', '', '', '', true,false); 
-		$('cmd').value='cmdRegionCreate'; $('fresult').src='about:blank;'" />
+	<input id="btnDatabaseEditAdd" type="button" value="{-#baddoption#-}"  />
 	<span id="regionpastatusmsg" class="dlgmsg"></span><br />
 	<div id="divDatabaseEditResult">
 	</div>
 	<div id="regionpaaddsect" style="display:none">
-   	  <form id="frmDatabaseEdit">
+  	  <form id="frmDatabaseEdit">
 		<table class="grid">
 			<tr>
 				<td>{-#tregcntlist#-}<b style="color:darkred;">*</b></td>
@@ -58,13 +57,17 @@
 				</td>
 			</tr>
 			<tr>
+				<td>RegionId</td>
+				<td><input id="RegionId" name="RegionId" type="text" maxlength="50" class="line fixw" tabindex="2" /></td>
+			</tr>
+			<tr>
 				<td>{-#tregnamlist#-}<b style="color:darkred;">*</b></td>
-				<td><input id="RegionLabel" name="RegionLabel" type="text" maxlength="200" class="line fixw" tabindex="2" /></td>
+				<td><input id="RegionLabel" name="RegionLabel" type="text" maxlength="200" class="line fixw" tabindex="3" /></td>
 			</tr>
 			<tr>
 				<td>{-$dic.DBLangIsoCode[0]-}<b style="color:darkred;">*</b></td>
 				<td>
-					<select id="LangIsoCode" name="LangIsoCode" {-$ro-} class="line fixw" tabindex="3">
+					<select id="LangIsoCode" name="LangIsoCode" {-$ro-} class="line fixw" tabindex="4">
 						{-foreach name=LanguageList key=key item=item from=$LanguageList-}
 							<option value="{-$key-}">{-$item-}</option>
 						{-/foreach-}
@@ -74,7 +77,7 @@
 			<tr>
 				<td>{-#tregadmlist#-}<b style="color:darkred;">*</b></td>
 				<td>
-					<select id="RegionUserAdmin" name="RegionUserAdmin" class="fixw" tabindex="4">
+					<select id="RegionUserAdmin" name="RegionUserAdmin" class="fixw" tabindex="5">
 						<option value=""></option>
 {-foreach name=usr key=key item=item from=$usr-}
 						<option value="{-$key-}">{-$item-}</option>
@@ -83,18 +86,17 @@
 			</tr>
 			<tr>
 				<td>{-#tregactlist#-}<b>*</b></td>
-				<td><input id="RegionActive" name="RegionActive" type="checkbox" checked tabindex="5" /></td>
+				<td><input id="RegionActive" name="RegionActive" type="checkbox" checked tabindex="6" /></td>
 			</tr>
 			<tr>
 				<td>{-#tregpublist#-}<b>*</b></td>
-				<td><input id="RegionPublic" name="RegionPublic" type="checkbox" tabindex="6" /></td>
+				<td><input id="RegionPublic" name="RegionPublic" type="checkbox" tabindex="7" /></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
 					<input type="hidden" id="cmd" name="cmd" />
-					<input type="hidden" id="RegionId" name="RegionId" />
 					<input type="hidden" id="RegionStatus" name="RegionStatus" />
-					<input type="submit" value="{-#bsave#-}" class="line" tabindex="7" />
+					<input type="submit" value="{-#bsave#-}" class="line" tabindex="8" />
 					<input type="reset" value="{-#bcancel#-}" 
 						onClick="$('regionpaaddsect').style.display='none'; uploadMsg('');" class="line" />
 				</td>

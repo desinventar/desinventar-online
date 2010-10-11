@@ -27,7 +27,6 @@ function onReadyDatabaseAdmin() {
 		            jQuery(this).find('#RegionPublic input').attr('checked')
 		);
 	});
-
 	
 	jQuery('#frmDatabaseEdit').unbind('submit').submit(function() {
 		// Validate Fields
@@ -60,6 +59,13 @@ function onReadyDatabaseAdmin() {
 			);
 		}
 		return false;
+	});
+
+	// Add New Region
+	jQuery('#btnDatabaseEditAdd').unbind('click').click(function() {
+		jQuery('#regionpaaddsect').show();
+		setRegionPA('','', '', '', '', true,false);
+		jQuery('#frmDatabaseEdit #cmd').val('cmdRegionCreate');
 	});
 }
 
