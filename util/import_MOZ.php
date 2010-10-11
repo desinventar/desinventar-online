@@ -10,24 +10,19 @@
 	require_once(BASE . '/include/diregion.class.php');
 	require_once(BASE . '/include/diregionrecord.class.php');
 	
-	$RegionId = 'GAR-ISDR-2011_IRN';
+	$RegionId = 'GAR-ISDR-2011_MOZ';
 	$us->login('diadmin','di8');
 	$us->open($RegionId);
 	
-	$e = new DIEvent($us, '');
-	//fb($e->getIdByName($us,'FLOOD'));
-	//$e->set('EventId', 'FLOOD');
-	//$e->load();
-	//print_r($e->oField);
 	$r = new DIRegionRecord($us, $RegionId);
-	$r->copyEvents('eng');
-	$r->copyCauses('eng');
+	$r->copyEvents('por');
+	$r->copyCauses('por');
 	$i = new DIImport($us);
-	//$a = $i->importFromCSV('/tmp/IRN_event.csv', DI_EVENT, true, 0);
-	//$a = $i->importFromCSV('/tmp/IRN_cause.csv', DI_CAUSE, true, 0);
-	$a = $i->importFromCSV('/tmp/IRN_geolevel.csv', DI_GEOLEVEL, true, 0);
-	//$a = $i->importFromCSV('/tmp/IRN_geography.csv', DI_GEOGRAPHY, true, 0);
-	//$a = $i->importFromCSV('/tmp/IRN_disaster.csv', DI_DISASTER, true, 0);
+	//$a = $i->importFromCSV('/tmp/MOZ_event.csv', DI_EVENT, true, 0);
+	//$a = $i->importFromCSV('/tmp/MOZ_cause.csv', DI_CAUSE, true, 0);
+	//$a = $i->importFromCSV('/tmp/MOZ_geolevel.csv', DI_GEOLEVEL, true, 0);
+	//$a = $i->importFromCSV('/tmp/MOZ_geography.csv', DI_GEOGRAPHY, true, 0);
+	//$a = $i->importFromCSV('/tmp/MOZ_disaster.csv', DI_DISASTER, true, 0);
 	$us->close();
 	$us->logout();
 </script>
