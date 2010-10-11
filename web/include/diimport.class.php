@@ -39,21 +39,21 @@ class DIImport {
 					case DI_EVENT:
 						$o = new DIEvent($this->us);
 						$r = $o->importFromCSV($cols, $values);
-						if ( ($r['Status'] > 0) && ($o->get('EventPreDefined')==0) ) {
+						if ( ($r > 0) && ($o->get('EventPreDefined')==0) ) {
 							$o->insert();
 						}
 					break;
 					case DI_CAUSE:
 						$o = new DICause($this->us);
 						$r = $o->importFromCSV($cols, $values);
-						if ( ($r['Status'] > 0) && ($o->get('CausePreDefined')==0) ) {
+						if ( ($r > 0) && ($o->get('CausePreDefined')==0) ) {
 							$o->insert();
 						}
 					break;
 					case DI_GEOLEVEL:
 						$o = new DIGeoLevel($this->us);
 						$r = $o->importFromCSV($cols, $values);
-						if ($r['Status'] > 0) {
+						if ($r > 0) {
 							$o->insert();
 						}
 					break;
@@ -62,6 +62,12 @@ class DIImport {
 						$r = $o->importFromCSV($cols, $values);
 						if ($r > 0) {
 							$answer = $o->insert();
+							if ($answer < 0) {
+								if ($o->status->hasError()) {
+									print $o->get('GeographyCode') . ' ' .
+									      reset($o->status->error) . "\n";
+								}
+							}
 						}
 					break;
 					case DI_DISASTER:
