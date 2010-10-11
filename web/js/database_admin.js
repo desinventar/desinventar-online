@@ -27,6 +27,28 @@ function onReadyDatabaseAdmin() {
 		            jQuery(this).find('#RegionPublic input').attr('checked')
 		);
 	});
+
+	jQuery('#frmDatabaseEdit #CountryIso').unbind('change').change(function() {
+		if (jQuery('#frmDatabaseEdit #cmd').val() == 'cmdRegionCreate') {
+			jQuery.post('index.php',
+				{cmd        : 'cmdRegionBuildRegionId',
+				 CountryIso : jQuery(this).val(),
+				},
+				function(data) {
+					if (parseInt(data.Status) > 0) {
+						jQuery('#frmDatabaseEdit #RegionId').val(data.RegionId);					
+					}
+				},
+				'json'
+			);
+		}
+	});
+	
+	jQuery('#frmDatabaseEdit #lblRegionId').dblclick(function() {
+		if (jQuery('#frmDatabaseEdit #cmd').val() == 'cmdRegionCreate') {
+			jQuery('#frmDatabaseEdit #RegionId').removeAttr('disabled').focus();
+		}
+	});
 	
 	jQuery('#frmDatabaseEdit').unbind('submit').submit(function() {
 		// Validate Fields
@@ -81,4 +103,6 @@ function setRegionPA(prmRegionId, prmCountryIso, prmRegionLabel,
 	jQuery('#frmDatabaseEdit #RegionUserAdmin').val(prmUserId_AdminRegion);
 	jQuery('#frmDatabaseEdit #RegionActive').attr('checked', prmRegionActive);
 	jQuery('#frmDatabaseEdit #RegionPublic').attr('checked', prmRegionPublic);
+	// RegionId is readonly by default
+	jQuery('#frmDatabaseEdit #RegionId').attr('disabled','disabled');
 }

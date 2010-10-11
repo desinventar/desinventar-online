@@ -726,16 +726,6 @@ class DIRegionRecord extends DIRegion {
 		} //if
 	} //updateMapArea
 	
-	public static function buildRegionId($prmCountryIso) {
-		$RegionId = '';
-		if ($prmCountryIso == '') {
-			$prmCountryIso = 'DESINV';
-		}
-		$prmTimestamp = date('YmdHis', time());
-		$RegionId = $prmCountryIso . '-' . $prmTimestamp;
-		return $RegionId;
-	} //buildRegionId
-	
 	public function setActive($prmValue) {
 		return $this->setBit($prmValue, CONST_REGIONACTIVE);
 	}

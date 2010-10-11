@@ -57,7 +57,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td>RegionId</td>
+				<td><span id="lblRegionId">RegionId</span></td>
 				<td><input id="RegionId" name="RegionId" type="text" maxlength="50" class="line fixw" tabindex="2" /></td>
 			</tr>
 			<tr>
