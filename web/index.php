@@ -8,6 +8,7 @@
 require_once('include/loader.php');
 require_once('include/diregion.class.php');
 require_once('include/diregiondb.class.php');
+require_once('include/diregionrecord.class.php');
 
 $post = $_POST;
 $get  = $_GET;
@@ -50,8 +51,16 @@ switch ($cmd) {
 		$answer['Status'] = $iReturn;
 		echo json_encode($answer);
 	break;
+	case 'cmdRegionBuildRegionId':
+		$answer = array();
+		$answer['Status']     = ERR_NO_ERROR;
+		$answer['CountryIso'] = getParameter('CountryIso');
+		$answer['RegionId']   = DIRegion::buildRegionId($answer['CountryIso']);
+		echo json_encode($answer);
+	break;
 	case 'cmdRegionCreate':
 	case 'cmdRegionUpdate':
+		fb($_POST);
 		$iReturn = ERR_NO_ERROR;
 		if ($us->UserId != 'root') {
 			$iReturn = ERR_ACCESS_DENIED;
@@ -60,16 +69,16 @@ switch ($cmd) {
 			$RegionId = $_POST['RegionInfo']['RegionId'];
 			$RegionCmd = $_POST['RegionInfo']['cmd'];
 
-			$r = new DIRegion($us, $RegionId);
+			$r = new DIRegionRecord($us, $RegionId);
 			$iReturn = $r->setFromArray($_POST['RegionInfo']);
 		}
 		if ($iReturn > 0) {
 			if ($r->get('RegionId') == '') {
 				$r->set('RegionId', DIRegion::buildRegionId($r->get('CountryIso')));
 			}
-
+			$RegionId = $r->get('RegionId');
 			if ($RegionCmd == 'cmdRegionCreate') {
-				$iReturn = $r->createRegionDB();
+				$iReturn = $r->insert(); //createRegionDB();
 			} else {
 				$iReturn = $r->update();
 			}

@@ -99,6 +99,23 @@ class DIRegion extends DIObject {
 		$iReturn = ERR_NO_ERROR;
 		return $iReturn;
 	}
+
+	public function createRegionDBDir() {
+		$prmRegionId = $this->get('RegionId');
+		// Create Directory for New Region
+		$DBDir = DBDIR . '/' . $prmRegionId;
+		if (!file_exists($DBDir)) {
+			mkdir($DBDir);
+		}
+	}
+
+	public function insert() {
+		$iReturn = ERR_NO_ERROR;
+		$this->createRegionDBDir();
+		$this->saveToXML();
+		$this->insertCore();
+		return $iReturn;
+	}
 	
 	public function update() {
 		$iReturn = $this->saveToXML();
@@ -106,6 +123,12 @@ class DIRegion extends DIObject {
 		return $iReturn;
 	}
 	
+	public function insertCore() {
+		$sQuery = 'INSERT INTO Region(RegionId) VALUES ("' . $this->get('RegionId') . '")';
+		$this->session->q->core->query($sQuery);
+		$this->updateCore();
+	}
+
 	public function updateCore() {
 		// Update core.Region table using new data...
 		$sQuery = 'UPDATE Region SET ' .
@@ -377,14 +400,14 @@ class DIRegion extends DIObject {
 		return $filename;
 	}
 	
-	public function saveToXML($filename='') {
+	public function saveToXML($XMLFile='') {
 		$iReturn = ERR_NO_ERROR;
-		if ($filename == '') {
-			$filename = $this->getXMLFileName();
+		if ($XMLFile == '') {
+			$XMLFile = $this->getXMLFileName();
 		}
 		$xml = $this->toXML();
 		if ($xml != '') {
-			$fh = fopen($filename, 'w');
+			$fh = fopen($XMLFile, 'w');
 			fwrite($fh, $this->toXML());
 			fclose($fh);
 		} else {
@@ -393,18 +416,18 @@ class DIRegion extends DIObject {
 		return $iReturn;
 	}
 	
-	public function loadFromXML($filename = '') {
+	public function loadFromXML($XMLFile = '') {
 		$iReturn = ERR_NO_ERROR;
-		if ($filename == '') {
-			$filename = $this->getXMLFileName();
+		if ($XMLFile == '') {
+			$XMLFile = $this->getXMLFileName();
 		}
-		if (! file_exists($filename) ) {
+		if (! file_exists($XMLFile) ) {
 			$iReturn = ERR_UNKNOWN_ERROR;
 		}
 		
 		if ($iReturn > 0) {
 			$doc = new DomDocument('1.0','UTF-8');
-			$doc->load($filename);
+			$doc->load($XMLFile);
 			foreach($doc->getElementsByTagName('General') as $tree) {
 				$section = 'info';
 				foreach($tree->childNodes as $node) {
