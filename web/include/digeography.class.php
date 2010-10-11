@@ -46,7 +46,7 @@ class DIGeography extends DIRecord {
 	
 	public static function getNameById($prmSession, $prmGeographyId) {
 		$GeographyName = '';
-		$LangIsoCode = $prmSession->q->getDBInfoValue('LangIsoCode');
+		$LangIsoCode = $prmSession->getDBInfoValue('LangIsoCode');
 		$Query= "SELECT * FROM Geography WHERE GeographyId='" . $prmGeographyId . "' " . 
 		        " AND LangIsoCode='" . $LangIsoCode . "'";
 		foreach($prmSession->q->dreg->query($Query) as $row) {
@@ -57,7 +57,7 @@ class DIGeography extends DIRecord {
 		
 	public static function getIdByCode($prmSession, $prmGeographyCode) {
 		$GeographyId = '';
-		$LangIsoCode = $prmSession->q->getDBInfoValue('LangIsoCode');
+		$LangIsoCode = $prmSession->getDBInfoValue('LangIsoCode');
 		$Query= "SELECT * FROM Geography WHERE GeographyCode='" . $prmGeographyCode . "' " . 
 		        " AND LangIsoCode='" . $LangIsoCode . "'";
 		foreach($prmSession->q->dreg->query($Query) as $row) {
@@ -77,7 +77,7 @@ class DIGeography extends DIRecord {
 	
 	public static function getIdByName($prmSession, $prmGeographyName, $prmParentId) {
 		$GeographyId = '';
-		$LangIsoCode = $prmSession->q->getDBInfoValue('LangIsoCode');
+		$LangIsoCode = $prmSession->getDBInfoValue('LangIsoCode');
 		$Query= "SELECT * FROM Geography WHERE GeographyName LIKE '" . $prmGeographyName . "' " . 
 		        " AND LangIsoCode='" . $LangIsoCode . "'";
 		if ($prmParentId != '') {

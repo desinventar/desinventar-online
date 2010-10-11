@@ -26,7 +26,7 @@
 	//$a = $i->importFromCSV('/tmp/NPL_event.csv', DI_EVENT, true, 0);
 	//$a = $i->importFromCSV('/tmp/NPL_cause.csv', DI_CAUSE, true, 0);
 	//$a = $i->importFromCSV('/tmp/NPL_geolevel.csv', DI_GEOLEVEL, true, 0);
-	$a = $i->importFromCSV('/tmp/NPL_geography.csv', DI_GEOGRAPHY, true, 0);
+	//$a = $i->importFromCSV('/tmp/NPL_geography.csv', DI_GEOGRAPHY, true, 0);
 	//$a = $i->importFromCSV('/tmp/NPL_disaster.csv', DI_DISASTER, true, 0);
 	$us->close();
 	$us->logout();
