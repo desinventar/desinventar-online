@@ -9,6 +9,7 @@ class DIObject {
 	var $RegionId  = '';
 	var $sFieldKeyDef = '';
 	var $sFieldDef = '';
+	var $status = null;
 
 	var $oOldField;	
 	var $oField;

@@ -9,7 +9,6 @@ class DIRecord extends DIObject {
 	var $sPermPrefix = 'OBJECT';
 	var $conn = null;
 	var $q = null;
-	var $status = null;
 
 	public function __construct($prmSession) {
 		parent::__construct($prmSession);
