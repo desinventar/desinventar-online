@@ -19,6 +19,12 @@
 	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect1">
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
+				<a href="#" class="RegionItem" alt="GAR-ISDR-2011_IDN">Indonesia</a>
+			</td>
+		</tr>
+		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
+		<tr>
+			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 				<a href="#" class="RegionItem" alt="GAR-ISDR-2011_NPL">Nepal</a>
 			</td>
 		</tr>
