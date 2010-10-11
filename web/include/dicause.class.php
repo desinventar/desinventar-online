@@ -36,7 +36,8 @@ class DICause extends DIRecord {
 	public static function getIdByName($session, $prmCauseName) {
 		$CauseId = '';
 		$sQuery = "SELECT * FROM Cause " .
-		  " WHERE (CauseName LIKE '" . $prmCauseName . "' OR " . 
+		  " WHERE (CauseId       LIKE '" . $prmCauseName . "' OR " .
+		  "        CauseName     LIKE '" . $prmCauseName . "' OR " . 
 		  "        CauseKeyWords LIKE '%" . $prmCauseName . ";%')";
 		foreach($session->q->dreg->query($sQuery) as $row) {
 			$CauseId = $row['CauseId'];
@@ -79,8 +80,7 @@ class DICause extends DIRecord {
 	}
 
 	public function validateUpdate() {
-		$oReturn = parent::validateUpdate();
-		$iReturn = ERR_NO_ERROR;
+		$iReturn = parent::validateUpdate();
 		$iReturn = $this->validateNotNull(-23, 'CauseName');
 		if ($iReturn > 0) {
 			$iReturn = $this->validateUnique(-24, 'CauseName', true);
@@ -90,8 +90,7 @@ class DICause extends DIRecord {
 				}
 			}
 		}
-		$oReturn['Status'] = $iReturn;
-		return $oReturn;
+		return $iReturn;
 	}
 	
 	public function validateDelete() {
@@ -101,17 +100,19 @@ class DICause extends DIRecord {
 	}
 
 	public function importFromCSV($cols, $values) {
-		$oReturn = parent::importFromCSV($cols, $values);
-		$iReturn = $oReturn['Status'];
+		$iReturn = parent::importFromCSV($cols, $values);
 		if ($iReturn > 0) {
 			$this->set('CauseName',  $values[1]);
 			$CauseId = self::getIdByName($this->session, $this->get('CauseName'));
-			if ( (count($oReturn['Error']) > 0) || (count($oReturn['Warning']) > 0) ) {
+			if ($CauseId != '') {
+				$this->set('CauseId', $CauseId);
+				$this->load();
+			}
+			if ( $this->status->hasError() || $this->status->hasWarning() ) {
 				$iReturn = ERR_UNKNOWN_ERROR;
 			}
-			$oReturn['Status'] = $iReturn;
 		}
-		return $oReturn;
+		return $iReturn;
 	} //function
 	
 }

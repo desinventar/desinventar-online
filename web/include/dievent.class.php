@@ -1,7 +1,7 @@
 <script language="php">
 /*
  DesInventar8 - http://www.desinventar.org
- (c) 1998-2009 Corporacion OSSO
+ (c) 1998-2010 Corporacion OSSO
 */
 
 class DIEvent extends DIRecord {
@@ -35,7 +35,8 @@ class DIEvent extends DIRecord {
 	public static function getIdByName($session, $prmEventName) {
 		$EventId = '';
 		$sQuery = "SELECT * FROM Event " .
-		  " WHERE (EventName LIKE '" . $prmEventName . "' OR " .
+		  " WHERE (EventId       LIKE '"  . $prmEventName . "' OR " .
+		  "        EventName     LIKE '"  . $prmEventName . "' OR " .
 		  "        EventKeyWords LIKE '%" . $prmEventName . ";%')";
 		foreach($session->q->dreg->query($sQuery) as $row) {
 			$EventId = $row['EventId'];
@@ -65,7 +66,6 @@ class DIEvent extends DIRecord {
 	}
 
 	public function validateUpdate() {
-		$oReturn = parent::validateUpdate();
 		$iReturn = ERR_NO_ERROR;
 		$iReturn = $this->validateNotNull(-13, 'EventName');
 		if ($iReturn > 0) {
@@ -76,8 +76,7 @@ class DIEvent extends DIRecord {
 				}
 			}
 		}
-		$oReturn['Status'] = $iReturn;
-		return $oReturn;
+		return $iReturn;
 	}
 	
 	public function validateNoDatacards($ErrCode) {
@@ -100,18 +99,21 @@ class DIEvent extends DIRecord {
 	}
 
 	public function importFromCSV($cols, $values) {
-		$oReturn = parent::importFromCSV($cols, $values);
-		$iReturn = $oReturn['Status'];
+		$iReturn = parent::importFromCSV($cols, $values);
 		if ($iReturn > 0) {
 			$this->set('EventName',  $values[1]);
 			$this->set('EventDesc',  $values[2]);
-			$this->set('EventId', self::getIdByName($this->session, $this->get('EventName')));
-			if ( (count($oReturn['Error']) > 0) || (count($oReturn['Warning']) > 0) ) {
+			$EventId = self::getIdByName($this->session, $this->get('EventName'));
+			if ($EventId != '') {
+				$this->set('EventId', $EventId);
+				$this->load();
+			}
+			if ( $this->status->hasError() || $this->status->hasWarning() ) {
 				$iReturn = ERR_UNKNOWN_ERROR;
 			}
-			$oReturn['Status'] = $iReturn;
+			$this->status = $iReturn;
 		}
-		return $oReturn;
+		return $iReturn;
 	} //function
 }
 
