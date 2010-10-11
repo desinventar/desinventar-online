@@ -51,6 +51,13 @@ switch ($cmd) {
 		$answer['Status'] = $iReturn;
 		echo json_encode($answer);
 	break;
+	case 'cmdRegionBuildRegionId':
+		$answer = array();
+		$answer['Status']     = ERR_NO_ERROR;
+		$answer['CountryIso'] = getParameter('CountryIso');
+		$answer['RegionId']   = DIRegion::buildRegionId($answer['CountryIso']);
+		echo json_encode($answer);
+	break;
 	case 'cmdRegionCreate':
 	case 'cmdRegionUpdate':
 		fb($_POST);
