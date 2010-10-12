@@ -118,7 +118,7 @@
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-				<a href="#" class="RegionItem" alt="HND-1274015354-honduras_huracan_mitch">Honduras</a>
+				<a href="#" class="RegionItem" alt="HND-20101004">Honduras</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
