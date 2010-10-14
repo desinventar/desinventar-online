@@ -25,6 +25,12 @@
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
+				<a href="#" class="RegionItem" alt="GAR-ISDR-2011_IRN">Iran</a>
+			</td>
+		</tr>
+		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
+		<tr>
+			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 				<a href="#" class="RegionItem" alt="GAR-ISDR-2011_NPL">Nepal</a>
 			</td>
 		</tr>
