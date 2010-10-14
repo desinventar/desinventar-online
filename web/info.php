@@ -59,7 +59,7 @@ if (isset($infocmd)) {
 		$r->set($FieldName, $data[$LangIsoCode][$FieldName], $LangIsoCode);
 		$r->set($FieldName, $data['eng'][$FieldName],'eng');
 	}
-	$ifo = $r->saveToXML();
+	$ifo = $r->update();
 	if (!iserror($ifo)) {
 		$t->assign ("ctl_msgupdinfo", true);
 		if (isset($_FILES['logofile']) && $_FILES['logofile']['error'] == UPLOAD_ERR_OK)
