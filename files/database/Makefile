@@ -9,9 +9,11 @@ base.db : base.sql doc-db.csv event.csv cause.csv
 	php insertEveCau.php event.csv spa EVENT | sqlite3 base.db
 	php insertEveCau.php event.csv eng EVENT | sqlite3 base.db
 	php insertEveCau.php event.csv fre EVENT | sqlite3 base.db
+	php insertEveCau.php event.csv por EVENT | sqlite3 base.db
 	php insertEveCau.php cause.csv spa CAUSE | sqlite3 base.db
 	php insertEveCau.php cause.csv eng CAUSE | sqlite3 base.db
 	php insertEveCau.php cause.csv fre CAUSE | sqlite3 base.db
+	php insertEveCau.php cause.csv por CAUSE | sqlite3 base.db
 	./createDictionary.php | sqlite3 base.db
 	./iso3166tosql.pl | sqlite3 base.db
 	./square2sql.pl | sqlite3 base.db
