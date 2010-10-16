@@ -94,7 +94,10 @@ class DIImport {
 							}
 							// DisasterSerial is duplicated but we insert/update anyway
 							if ($iReturn == 0) {
-								if (! $o->status->hasWarning(-54)) {
+								if ( ($o->status->hasWarning(-54)) ||
+								     ($o->status->hasWarning(-56)) ||
+								     ($o->status->hasWarning(-61))
+								   ) {
 									// With warnings, insert/update as DRAFT
 									$o->set('RecordStatus','DRAFT');
 								}

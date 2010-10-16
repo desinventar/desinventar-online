@@ -427,7 +427,11 @@ class DIRegion extends DIObject {
 		
 		if ($iReturn > 0) {
 			$doc = new DomDocument('1.0','UTF-8');
-			$doc->load($XMLFile);
+			try {
+				$doc->load($XMLFile);
+			} catch (Exception $e) {
+				fb('cannot load XML');
+			}
 			foreach($doc->getElementsByTagName('General') as $tree) {
 				$section = 'info';
 				foreach($tree->childNodes as $node) {
