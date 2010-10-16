@@ -366,19 +366,22 @@ class Query extends PDO {
 	//level: integer of level, return only data of this level. -1 to all
 	//mapping: only levels with files assigned in database, shp - dbf..
 	function loadGeoLevels($prefix, $lev, $mapping) {
-		if ($lev >= 0)
+		if ($lev >= 0) {
 			$olev = "GeoLevelId = $lev ";
-		else
+		} else {
 			$olev = "1=1 ";
+		}
 		$sqlev = "SELECT GeoLevelId, GeoLevelName, GeoLevelDesc FROM GeoLevel WHERE $olev ORDER BY GeoLevelId";
-		if (!empty($prefix))
+		if (!empty($prefix)) {
 			$opre = "GeographyId = '$prefix' ";
-		else
+		} else {
 			$opre = "1=1 ";
-		if ($mapping)
+		}
+		if ($mapping) {
 			$omap = "GeoLevelLayerFile != '' AND GeoLevelLayerCode != '' AND GeoLevelLayerName != '' ";
-		else
+		} else {
 			$omap = "1=1 ";
+		}
 		$sqcar = "SELECT GeographyId, GeoLevelId, GeoLevelLayerFile, GeoLevelLayerCode, GeoLevelLayerName ".
 				"FROM GeoCarto WHERE $olev AND $opre AND $omap ORDER BY GeoLevelId";
 		$data = array();
@@ -386,11 +389,18 @@ class Query extends PDO {
 		$rlev = $this->dreg->query($sqlev);
 		foreach($rlev as $row) {
 			$lay = array();
-			foreach ($rcar as $car)
-				if ($car['GeoLevelId'] == $row['GeoLevelId'])
+			foreach ($rcar as $car) {
+				if ($car['GeoLevelId'] == $row['GeoLevelId']) {
 					$lay[] = array($car['GeographyId'], $car['GeoLevelLayerFile'], $car['GeoLevelLayerCode'], $car['GeoLevelLayerName']);
-			if (!empty($lay))
+				}
+			}
+			$bAdd = true;
+			if ($mapping) {
+				$bAdd = !empty($lay);
+			}
+			if ($bAdd) {
 				$data[$row['GeoLevelId']] = array(str2js($row['GeoLevelName']), str2js($row['GeoLevelDesc']), $lay);
+			}
 		}
 		return $data;
 	}
