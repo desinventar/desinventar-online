@@ -9,18 +9,17 @@
   Fix Geography table by calculating GeographyFQName again.
 */
 
-$_SERVER["DI8_WEB"] = '../web';
-require_once($_SERVER["DI8_WEB"] . '/include/loader.php');
+require_once('../web/include/loader.php');
 require_once(BASE . '/include/digeography.class.php');
 $q = new Query();
 $RegionList = array();
 foreach($q->core->query("SELECT * FROM Region ORDER BY RegionId") as $row) {
 	$RegionList[] = $row['RegionId'];
 }
-$RegionList = array('COL-1257291151-yumbo_inventario_de_desastres');
+$RegionList = array('IRN-1250695109-iran_historic_inventory_of_disasters');
 foreach ($RegionList as $RegionId) {
 	print $RegionId . "\n";
-	$us->q->setDBConnection($RegionId);
+	$us->open($RegionId);
 	//$query = "ALTER TABLE Geography ADD COLUMN GeographyFQName VARCHAR(500);";
 	//$us->q->dreg->query($query);
 	$query = "SELECT * FROM Geography WHERE GeographyLevel=0 ORDER BY GeographyId";
