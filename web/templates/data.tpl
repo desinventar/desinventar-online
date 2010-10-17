@@ -95,6 +95,7 @@
 		</tbody>
 	</table>
 	<div style="display:none;">
+		<input type="hidden" id="prmDataPageUpdate"  value="0"                   />
 		<input type="hidden" id="prmDataPageNumber"  value="1"                   />
 		<input type="hidden" id="prmDataPageRecords" value="0"                   />
 		<input type="hidden" id="prmDataPageSize"    value="{-$RecordsPerPage-}" />
