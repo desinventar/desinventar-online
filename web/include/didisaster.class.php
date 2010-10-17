@@ -126,29 +126,33 @@ class DIDisaster extends DIRecord {
 	}
 	
 	public function validateEffects($isWarning=false) {
-		$bFound = false;
+		$bFound = -1;
 		$iReturn = ERR_NO_ERROR;
 		foreach (split(',',$this->sEffectDef) as $sField) {
 			$oItem = split('/', $sField);
 			$sFieldName  = $oItem[0];
 			$sFieldType  = $oItem[1];
+			if ($sFieldName != 'EffectNotes') {
 			switch($sFieldType) {
 				case 'STRING':
-					$bFound = true;
+					if (trim($this->get($sFieldName)) != '') {
+						$bFound = 1;
+					}
 				break;
 				case 'INTEGER':
 					if ( ($this->get($sFieldName) > 0) || ($this->get($sFieldName) == -1) ) {
-						$bFound = true;
+						$bFound = 1;
 					}
 				break;
 				case 'DOUBLE':
 					if ($this->get($sFieldName) > 0) {
-						$bFound = true;
+						$bFound = 1;
 					}
 				break;
 			} //switch
+			}
 		} //foreach
-		if ($bFound == false) {
+		if ($bFound < 0) {
 			$iReturn = -61;
 			$this->status->addMsg($iReturn, ' Datacard without effects', $isWarning);
 		}
