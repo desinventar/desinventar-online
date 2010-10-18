@@ -15,8 +15,8 @@
 	$us->open($RegionId);
 	
 	$r = new DIRegionRecord($us, $RegionId);
-	$r->copyEvents('por');
-	$r->copyCauses('por');
+	//$r->copyEvents('por');
+	//$r->copyCauses('por');
 	$i = new DIImport($us);
 	//$a = $i->importFromCSV('/tmp/MOZ_event.csv', DI_EVENT, true, 0);
 	//$a = $i->importFromCSV('/tmp/MOZ_cause.csv', DI_CAUSE, true, 0);
