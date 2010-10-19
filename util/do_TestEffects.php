@@ -3,7 +3,7 @@
 	require_once('../web/include/loader.php');
 	require_once(BASE . '/include/didisaster.class.php');
 	
-	$RegionId = 'GAR-ISDR-2011_IRN';
+	$RegionId = 'GAR-ISDR-2011_MOZ';
 	$us->login('diadmin','di8');
 	$us->open($RegionId);
 
@@ -23,11 +23,11 @@
 		$i = $d->validateUpdate();
 		if ($d->get('RecordStatus') != 'DRAFT') {
 			if ($d->status->hasWarning(-61)) {
-				$bUpdate = 1;
+				$bUpdate = 0;
 				$iCount['SINEFECTOS']++;
 			}
 			if ($d->status->hasWarning(-56)) {
-				$bUpdate = 1;
+				$bUpdate = 0;
 				$iCount['SINFUENTE']++;
 			}
 			if (strlen($d->get('GeographyId')) == 5) {
