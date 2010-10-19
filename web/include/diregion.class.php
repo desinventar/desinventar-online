@@ -58,20 +58,17 @@ class DIRegion extends DIObject {
 		$iReturn = ERR_NO_ERROR;
 		if ($prmRegionId != '') {
 			$this->set('RegionId', $prmRegionId);
+			$XMLFile = $this->getXMLFileName();
 		}
 		if ($iReturn > 0) {
-			if ($XMLFile != '') {
-				// Load Info from specified XML File
+			// Attempt to load from XML in Region directory...
+			if (file_exists($XMLFile)) {
+				// XML File Exists, load data...
 				$iReturn = $this->loadFromXML($XMLFile);
+				// Fix RegionId because in some files is wrong when copying data...
+				$this->set('RegionId', $prmRegionId);
 			} else {
-				// Attempt to load from XML in Region directory...
-				$XMLFile = $this->getXMLFileName();
-				if (file_exists($XMLFile)) {
-					// XML File Exists, load data...
-					$iReturn = $this->loadFromXML($XMLFile);
-				} else {
-					$this->set('RegionLabel', $prmRegionId);
-				} //if
+				$this->set('RegionLabel', $prmRegionId);
 			} //if
 		}
 		if ($this->get('OptionLanguageList') == '') {
