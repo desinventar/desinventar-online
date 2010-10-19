@@ -162,7 +162,12 @@ class DIRegion extends DIObject {
 	} //function
 
 		
-	public function getDBInfo($prmLang = 'eng') {
+	public function getDBInfo($prmLang='eng') {
+		$InfoGeneral = trim($this->get('InfoGeneral', $prmLang)) . '';
+		$isInfoEmpty =  strlen($InfoGeneral) < 1;
+		if ($isInfoEmpty) {
+			$prmLang = $this->get('LangIsoCode');
+		}
 		$a = array();
 		foreach(array('RegionId','RegionLabel', 'PeriodBeginDate','PeriodEndDate',
 		              'RegionLastUpdate') as $Field) {

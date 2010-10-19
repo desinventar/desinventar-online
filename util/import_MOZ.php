@@ -15,14 +15,14 @@
 	$us->open($RegionId);
 	
 	$r = new DIRegionRecord($us, $RegionId);
-	//$r->copyEvents('por');
-	//$r->copyCauses('por');
+	$r->copyEvents('por');
+	$r->copyCauses('por');
 	$i = new DIImport($us);
 	//$a = $i->importFromCSV('/tmp/MOZ_event.csv', DI_EVENT, true, 0);
 	//$a = $i->importFromCSV('/tmp/MOZ_cause.csv', DI_CAUSE, true, 0);
 	//$a = $i->importFromCSV('/tmp/MOZ_geolevel.csv', DI_GEOLEVEL, true, 0);
 	//$a = $i->importFromCSV('/tmp/MOZ_geography.csv', DI_GEOGRAPHY, true, 0);
-	//$a = $i->importFromCSV('/tmp/MOZ_disaster.csv', DI_DISASTER, true, 0);
+	$a = $i->importFromCSV('/tmp/MOZ_disaster.csv', DI_DISASTER, true, 0);
 	$us->close();
 	$us->logout();
 </script>
