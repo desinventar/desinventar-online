@@ -177,10 +177,11 @@
 									{-include file="block_southamerica.tpl"-}
 								{-/if-}
 								{-if $portaltype == 'gar2009' || $portaltype == 'gar2011' -}
+									{-include file="block_gar2011_spa.tpl"-}
 									{-if $lang == 'spa'-}
-										{-include file="block_desinventar_spa.tpl"-}
+										{-include file="block_desinventar_spa2.tpl"-}
 									{-else-}
-										{-include file="block_desinventar_eng.tpl"-}
+										{-include file="block_desinventar_eng2.tpl"-}
 									{-/if-}
 								{-/if-}
 							</div>
