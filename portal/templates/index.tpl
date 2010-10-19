@@ -184,7 +184,13 @@
 									{-/if-}
 								{-/if-}
 								{-if $portaltype == 'gar2011' -}
-									{-include file="block_gar2011_spa.tpl"-}
+									{-if $lang == 'spa' -}
+										{-include file="block_gar2011_spa.tpl"-}
+									{-elseif $lang == 'por' -}
+										{-include file="block_gar2011_por.tpl"-}
+									{-else-}
+										{-include file="block_gar2011_eng.tpl"-}
+									{-/if-}
 								{-/if-}
 							</div>
 							<div class="contentBlock" id="UserContent">
