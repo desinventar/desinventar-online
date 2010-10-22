@@ -3,7 +3,7 @@
 	require_once('../web/include/loader.php');
 	require_once(BASE . '/include/didisaster.class.php');
 	
-	$RegionId = 'GAR-ISDR-2011_MOZ';
+	$RegionId = 'GAR-ISDR-2011_JOR';
 	$us->login('diadmin','di8');
 	$us->open($RegionId);
 
