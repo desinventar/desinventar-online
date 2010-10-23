@@ -16,7 +16,7 @@ $RegionList = array();
 foreach($q->core->query("SELECT * FROM Region ORDER BY RegionId") as $row) {
 	$RegionList[] = $row['RegionId'];
 }
-$RegionList = array('IRN-1250695109-iran_historic_inventory_of_disasters');
+$RegionList = array('MEX-1250695136-mexico_inventario_historico_de_desastres');
 foreach ($RegionList as $RegionId) {
 	print $RegionId . "\n";
 	$us->open($RegionId);
