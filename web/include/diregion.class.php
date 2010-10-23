@@ -160,8 +160,8 @@ class DIRegion extends DIObject {
 
 		
 	public function getDBInfo($prmLang='eng') {
-		$InfoGeneral = trim($this->get('InfoGeneral', $prmLang)) . '';
-		$isInfoEmpty =  strlen($InfoGeneral) < 1;
+		$InfoSynopsis = trim($this->get('InfoSynopsis', $prmLang)) . '';
+		$isInfoEmpty =  strlen($InfoSynopsis) < 1;
 		if ($isInfoEmpty) {
 			$prmLang = $this->get('LangIsoCode');
 		}

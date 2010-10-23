@@ -245,6 +245,22 @@ switch ($cmd) {
 		$t->assign('Labels', $labels);
 		$t->display('regiontechinfo.tpl');
 	break;
+	case 'getRegionInfo':
+		$LangIsoCode = getParameter('LangIsoCode', $lg);
+		$answer = array();
+		$answer['Status'] = ERR_NO_ERROR;
+		if (isset($RegionId) && $RegionId != '') {
+			$t->assign('reg', $RegionId);
+			$r = new DIRegion($us, $RegionId);
+			$a = $r->getDBInfo($LangIsoCode);
+			$a['NumDatacards'] = $us->q->getNumDisasterByStatus('PUBLISHED');
+			$answer['RegionInfo'] = $a;
+		} else {
+			$answer['Status'] = ERR_NO_DATABASE;
+			$answer['RegionInfo'] = array();
+		}
+		echo json_encode($answer);
+	break;
 	case 'getRegionFullInfo':
 		if (isset($RegionId) && $RegionId != '') {
 			$t->assign('reg', $RegionId);
