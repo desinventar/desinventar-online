@@ -1,7 +1,7 @@
 <script language="php">
 /*
  DesInventar - http://www.desinventar.org
- (c) 1998-2009 Corporacion OSSO
+ (c) 1998-2010 Corporacion OSSO
 */
 
 class DIGeoCarto extends DIRecord {
