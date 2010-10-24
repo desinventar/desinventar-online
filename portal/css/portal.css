@@ -46,15 +46,15 @@ body {
 	padding:0; margin:0; 
 /*	background:url(../images/bg.gif) #09A5B9; */
 }
-#version {
-	font:bold 12px Trebuchet MS, sans-serif; 
-	color:#409FAC; position: relative; left:380px;
-	top:40px; text-align:right; width:53px; 
+#divSlogan {
+	font:bold 13px Trebuchet MS, sans-serif; 
+	color:#409FAC; position: relative; text-align:left; 
+	left:105px; top:60px; width:300px; 
 }
-#slogan {
+#divVersion {
 	font:bold 11px Trebuchet MS, sans-serif; 
-	color:#949392; position: relative; left:115px;
-	top:45px; text-align:center; width:260px; 
+	color:#409FAC; position: relative; text-align:left;
+	left:105px; top:60px;  width:300px; 
 }
 .menu td { 
 	font:10px Trebuchet MS, sans-serif; 
