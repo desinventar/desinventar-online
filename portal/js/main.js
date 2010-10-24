@@ -12,7 +12,7 @@ function onReadyPortal() {
 	});
 	
 	// Update version number on screen
-	jQuery('#version').text(jQuery('#desinventarVersion').val());
+	jQuery('#txtVersion').text(jQuery('#desinventarVersion').val());
 	
 	// Handle clicks on mainpage map
 	jQuery('area').click(function() {
