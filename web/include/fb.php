@@ -4,7 +4,7 @@ if (isset($_SERVER["HTTP_HOST"])) {
 		// Running on a Windows Server
 		// 2009-05-01 (jhcaiced) Read Registry to obtain MS4W installation path	
 		$shell = new COM("WScript.Shell") or die("Requires Windows Scripting Host");
-		$Install_Dir = $shell->RegRead("HKEY_LOCAL_MACHINE\\Software\\OSSO\\DesInventar8\Install_Dir");		
+		$Install_Dir = $shell->RegRead("HKEY_LOCAL_MACHINE\\Software\\OSSO\\DesInventar8\Install_Dir");
 		$FBCore = $Install_Dir . '/ms4w/apps/FirePHPCore-0.3.1/lib/FirePHPCore/fb.php';
 	} else {
 		// Running on a Linux Server

@@ -2,7 +2,7 @@
 {-**** INDEX FRAME SECTION ****-}
 {-if $ctl_page == 'index'-}
  {-if $ctl_module == 'start'-}
-	<h2>Bienvenido a DesInventar8</h2>
+	<h2>Bienvenido a DesInventar</h2>
 	Acceso a usuarios: <br>
 	Buscar bases de datos: <br>
 	Documentaci&oacute;n<br>

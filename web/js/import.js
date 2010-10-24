@@ -1,5 +1,5 @@
 /*
- DesInventar8 - http://www.desinventar.org
+ DesInventar - http://www.desinventar.org
  (c) 1998-2010 Corporacion OSSO
  
  Javascript functions for import datacards methods
