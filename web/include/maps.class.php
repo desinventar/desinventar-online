@@ -1,7 +1,7 @@
 <script language="php">
 /*
- DesInventar8 - http://www.desinventar.org
- (c) 1998-2009 Corporacion OSSO
+  DesInventar - http://www.desinventar.org
+  (c) 1998-2010 Corporacion OSSO
 */
 
 class Maps {
@@ -28,7 +28,7 @@ class Maps {
 		if ($type == "KML")
 			$this->kml = $this->generateKML($us, $reg, $info);
 		else {
-			$map = "## DesInventar8.2 autogenerate mapfile\n";
+			$map = "## DesInventar mapfile\n";
 			$map .= $this->setHeader($us, $reg, $info, $type);
 			$gl = $us->q->loadGeoLevels('', -1, true);
 			$map .= $this->setLayerAdm($gl, $reg, $type);
@@ -370,7 +370,7 @@ class Maps {
 	<open>1</open>
 	<description><![CDATA[<body style="background-color: #FFFFFF">
 <p><font face="Arial, Helvetica, sans-serif">
-<font color="#008080" face="Arial, Helvetica, sans-serif">DesInventar8</font>
+<font color="#008080" face="Arial, Helvetica, sans-serif">DesInventar</font>
 <p><font face="Arial, Helvetica, sans-serif">
 <b>Base de datos '. $regn .'</b><br><br>'. $desc . '</font></p>
 </body>]]></description>
@@ -410,7 +410,7 @@ class Maps {
 		<size x="0" y="0" xunits="pixels" yunits="pixels"/>
 	</ScreenOverlay>
 	<ScreenOverlay id="DILogo">
-		<name>&lt;a href=&quot;http://'. $_SERVER['HTTP_HOST'] .'/&quot;&gt;DesInventar8 Online&lt;/a&gt;</name>
+		<name>&lt;a href=&quot;http://'. $_SERVER['HTTP_HOST'] .'/&quot;&gt;DesInventar Online&lt;/a&gt;</name>
 		<Icon>
 			<href>http://'. $_SERVER['HTTP_HOST'] .'/images/di_logo2.png</href>
 		</Icon>
