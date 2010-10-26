@@ -28,7 +28,15 @@ function onReadyPortal() {
 	jQuery('.RegionGroup').click(function() {
 		var group = jQuery(this).attr('alt');
 		if (group != '') {
-			displayList(group);
+			var expanded = jQuery(this).attr('expanded');
+			if (expanded == 'yes') {
+				jQuery('#sect' + group).hide();
+				jQuery(this).attr('expanded','no');
+			} else {
+				jQuery('#sect' + group).show();
+				jQuery(this).attr('expanded','yes');
+			}
+			//displayList(group);
 		}
 		return false;
 	});
