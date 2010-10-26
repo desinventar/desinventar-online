@@ -11,7 +11,7 @@
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_ini.gif" width="133" height="5"></td></tr>
 		<tr>
 			<td class="paisel">
-				<a href="#" class="RegionGroup" alt="1">{-#msgRegionAfrica#-}</a>
+				<a href="#" class="RegionGroup" alt="1" expand="yes">{-#msgRegionAfrica#-}</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -29,12 +29,12 @@
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_ini.gif" width="133" height="5"></td></tr>
 		<tr>
 			<td class="paisel">
-				<a href="#" class="RegionGroup" alt="1">{-#msgRegionAsia#-}</a>
+				<a href="#" class="RegionGroup" alt="2" expand="yes">{-#msgRegionAsia#-}</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 	</table>
-	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect1">
+	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect2">
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 				<a href="#" class="RegionItem" alt="GAR-ISDR-2011_IND_ORISSA">India - Orissa</a>
@@ -83,12 +83,24 @@
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_ini.gif" width="133" height="5"></td></tr>
 		<tr>
 			<td class="paisel" colspan="3">
-				<a href="#" class="RegionGroup" alt="6" expand="yes">{-#msgRegionLatinAmerica#-}</a>
+				<a href="#" class="RegionGroup" alt="3" expand="yes">{-#msgRegionLatinAmerica#-}</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 	</table>
-	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect6">
+	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect3">
+		<tr>
+			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
+				<a href="#" class="RegionItem" alt="GAR-ISDR-2011_ARG">Argentina</a>
+			</td>
+		</tr>
+		<tr><td><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
+		<tr>
+			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
+				<a href="#" class="RegionItem" alt="GAR-ISDR-2011_BOL">Bolivia</a>
+			</td>
+		</tr>
+		<tr><td><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 				<a href="#" class="RegionItem" alt="GAR-ISDR-2011_CHL">Chile</a>
@@ -121,13 +133,25 @@
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-				<a href="#" class="RegionItem" alt="GAR-ISDR-2011_MEX">México</a>
+				<a href="#" class="RegionItem" alt="GAR-ISDR-2011_MEX">M&eacute;xico</a>
+			</td>
+		</tr>
+		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
+		<tr>
+			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
+				<a href="#" class="RegionItem" alt="GAR-ISDR-2011_PAN">Panam&aacute;</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 				<a href="#" class="RegionItem" alt="GAR-ISDR-2011_PER">{-#tcountryPER#-}</a>
+			</td>
+		</tr>
+		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
+		<tr>
+			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
+				<a href="#" class="RegionItem" alt="GAR-ISDR-2011_SLV">El Salvador</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>

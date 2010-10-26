@@ -9,7 +9,7 @@ if (! isset($_SERVER['DI8_WEB'])) {
 }
 
 // This is the version of the software
-define('VERSION'   , '2010.297');
+define('VERSION'   , '2010.299');
 define('INTVERSION', '8.2.2.01');
 define('JSVERSION' , '2010-10-24.01');
 
