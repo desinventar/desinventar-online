@@ -62,7 +62,9 @@ function onReadyDatabaseAdmin() {
 		if (jQuery(this).find('#RegionPublic').attr('checked')) {
 			s.val(parseInt(s.val()) | 2);
 		}
+		jQuery('#frmDatabaseEdit #RegionId').removeAttr('disabled');
 		var params = jQuery(this).serializeObject();
+		jQuery('#frmDatabaseEdit #RegionId').attr('disabled','disabled');
 		if (bContinue) {
 			jQuery('#frmDatabaseEdit :input').unhighlight();
 			jQuery.post('index.php',
