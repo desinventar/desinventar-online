@@ -132,20 +132,22 @@ class Query extends PDO {
 	// STANDARDS FUNCTION TO GET GENERAL EVENTS, CAUSES LISTS
 	function loadEvents($type, $status, $lang) {
 		$data = array();
-		if ($type == "BASE")
+		if ($type == "BASE") {
 			$data = $this->getBasicEventList($lang);
-		else
+		} else {
 			$data = $this->getRegionEventList($type, $status, $lang);
+		}
 		return $data;
 	}
 
 	// active : active, inactive  | types : predef, user | empty == all
 	function loadCauses($type, $status, $lang) {
 		$data = array();
-		if ($type == "BASE")
+		if ($type == "BASE") {
 			$data = $this->getBasicCauseList($lang);
-		else
+		} else {
 			$data = $this->getRegionCauseList($type, $status, $lang);
+		}
 		return $data;
 	}
 
