@@ -44,16 +44,16 @@ function showResult($stat, &$tp) {
 	}
 }
 
-$get = $_GET;
-$RegionId = getParameter('r');
+$get = $_POST;
+$RegionId = getParameter('r', getParameter('RegionId'));
 if ($RegionId == '') {
 	exit();
 }
-
 $us->open($RegionId);
-if (isset($get['cmd'])) {
+$cmd = getParameter('cmd');
+if ($cmd != '') {
 	$dat = form2cause($get);
-	switch ($get['cmd']) {
+	switch ($cmd) {
 	case "insert":
 		$o = new DICause($us);
 		$o->setFromArray($dat);
@@ -72,7 +72,8 @@ if (isset($get['cmd'])) {
 		break;
 	case "list":
 		// reload list from local SQLITE
-		if ($get['predef'] == "1") {
+		$prmType = getParameter('predef');
+		if ($prmType == "1") {
 			$t->assign ("ctl_caupred", true);
 			$t->assign ("caupredl", $us->q->loadCauses("PREDEF", null, $lg));
 		}
@@ -83,13 +84,18 @@ if (isset($get['cmd'])) {
 		break;
 	case "chkname":
 		$t->assign ("ctl_chkname", true);
-		if ($us->q->isvalidObjectName($get['CauseId'], $get['CauseName'], DI_CAUSE))
+		$CauseId = getParameter('CauseId');
+		$CauseName = getParameter('CauseName');
+		if ($us->q->isvalidObjectName($CauseId, $CauseName, DI_CAUSE)) {
 			$t->assign ("chkname", true);
+		}
 		break;
 	case "chkstatus":
 		$t->assign ("ctl_chkstatus", true);
-		if ($us->q->isvalidObjectToInactivate($get['CauseId'], DI_CAUSE))
+		$CauseId = getParameter('CauseId');
+		if ($us->q->isvalidObjectToInactivate($CauseId, DI_CAUSE)) {
 			$t->assign ("chkstatus", true);
+		}
 		break;
 	default: break;
 	} //switch

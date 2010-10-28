@@ -76,9 +76,7 @@
 	<span id="causestatusmsg" class="dlgmsg"></span>
 	<br /><br />
 	<div id="causeaddsect" style="display:none">
-		<form id="causefrm" name="causefrm" method="GET" 
-			action="javascript:var s=$('causefrm').serialize(); sendData('{-$reg-}', 'causes.php', s, $('aCausePreDefined').value);"
-			onSubmit="javascript: var a=new Array('aCauseName','aCauseDesc'); return(checkForm('causefrm',a, '{-#errmsgfrm#-}'));">
+		<form id="frmCauseEdit">
 			{-$dic.DBCauPersonName[0]-}<b style="color:darkred;">*</b><br />
 			<input id="aCauseName" name="CauseName" type="text" class="line" maxlength="40" style="width:500px;" tabindex="1" {-$ro-} 
 				onBlur="updateList('causestatusmsg', 'causes.php', 'r={-$reg-}&cmd=chkname&CauseId='+ $('aCauseId').value +'&CauseName='+ $('aCauseName').value);"
