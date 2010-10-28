@@ -76,12 +76,10 @@
 	<span id="eventstatusmsg" class="dlgmsg"></span>
 	<br /><br />
 	<div id="eventaddsect" style="display:none">
-		<form id="eventfrm" name="eventfrm" method="GET" 
-			action="javascript:var s=$('eventfrm').serialize(); sendData('{-$reg-}', 'events.php', s, $('aEventPreDefined').value);"
-			onSubmit="javascript: var a=new Array('aEventName','aEventDesc'); return(checkForm('eventfrm',a, '{-#errmsgfrm#-}'));">
+		<form id="frmEventEdit" name="frmEventEdit" method="POST">
 			{-$dic.DBEvePersonName[0]-}<b style="color:darkred;">*</b><br />
-			<input id="aEventName" name="EventName" type="text" class="line" maxlength="40" style="width:500px;" tabindex="1" {-$ro-}
-				onBlur="updateList('eventstatusmsg', 'events.php', 'r={-$reg-}&cmd=chkname&EventId='+ $('aEventId').value +'&EventName='+ $('aEventName').value);"
+			<input id="EventName" name="EventName" type="text" class="line" maxlength="40" style="width:500px;" tabindex="1" {-$ro-}
+				onBlur="updateList('eventstatusmsg', 'events.php', 'r={-$reg-}&cmd=chkname&EventId='+ $('aEventId').value +'&EventName='+ $('EventName').value);"
 				onFocus="showtip('{-$dic.DBEvePersonName[2]-}');" />
 			<br /><br />
 			{-$dic.DBEvePersonDef[0]-}<b style="color:darkred;">*</b><br />
@@ -94,7 +92,7 @@
 				onClick="if (!this.checked) updateList('eventstatusmsg', 'events.php', 'r={-$reg-}&cmd=chkstatus&EventId='+ $('aEventId').value);" />
 			<br /><br />
 			<p align="center" style="width:500px;">
-				<input id="r" name="r" type="hidden" value="{-$reg-}" />
+				<input id="RegionId" name="r" type="hidden" value="{-$reg-}" />
 				<input id="aEventId" name="EventId" type="hidden" />
 				<input id="aEventPreDefined" name="EventPreDefined" type="hidden" />
 				<input id="cmd" name="cmd" type="hidden" />

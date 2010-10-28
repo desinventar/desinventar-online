@@ -36,7 +36,7 @@ function getBrowserClientLanguage() {
 	return $IsoLang;
 } // function
 
-function getParameter($prmName, $prmDefault) {
+function getParameter($prmName, $prmDefault='') {
 	$prmValue = $prmDefault;
 	if (isset($_GET[$prmName])) {
 		$prmValue = $_GET[$prmName];

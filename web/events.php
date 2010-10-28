@@ -44,18 +44,18 @@ function showResult($stat, &$tp) {
 	}
 }
 
-$get = $_GET;
+$get = $_POST;
 
-$RegionId = getParameter('r','');
+$RegionId = getParameter('r', getParameter('RegionId'));
 if ($RegionId != '') {
 	$us->open($RegionId);
 } else {
 	exit();
 }
-
-if (isset($get['cmd'])) {
-	$dat = form2event($get);
-	switch ($get['cmd']) {
+$cmd = getParameter('cmd','');
+if ($cmd != '') {
+	$dat = form2event($_POST);
+	switch ($cmd) {
 	case "insert":
 		$o = new DIEvent($us);
 		$o->setFromArray($dat);
@@ -73,42 +73,44 @@ if (isset($get['cmd'])) {
 		showResult($i, $t);
 		break;
 	case "list":
-		// reload list from local SQLITE
-		if ($get['predef'] == "1") {
+		$prmType = getParameter('predef');
+		if ($prmType == "1") {
 			$t->assign ("ctl_evepred", true);
 			$t->assign ("evepredl", $us->q->loadEvents("PREDEF", null, $lg));
-		}
-		else {
+		} else {
 			$t->assign ("ctl_evepers", true);
 			$t->assign ("eveuserl", $us->q->loadEvents("USER", null, $lg));
 		}
 		break;
 	case "chkname":
 		$t->assign ("ctl_chkname", true);
-		if ($us->q->isvalidObjectName($get['EventId'], $get['EventName'], DI_EVENT))
+		$EventId = getParameter('EventId');
+		$EventName = getParameter('EventName');
+		if ($us->q->isvalidObjectName($EventId, $EventName, DI_EVENT)) {
 			$t->assign ("chkname", true);
+		}
 		break;
 	case "chkstatus":
 		$t->assign ("ctl_chkstatus", true);
-		if ($us->q->isvalidObjectToInactivate($get['EventId'], DI_EVENT))
+		$EventId = getParameter('EventId');
+		if ($us->q->isvalidObjectToInactivate($EventId, DI_EVENT)) {
 			$t->assign ("chkstatus", true);
+		}
 		break;
 	default: break;
 	} // switch
-}
-else {
+} else {
 	$t->assign ("dic", $us->q->queryLabelsFromGroup('DB', $lg));
 	$urol = $us->getUserRole($reg);
-	if ($urol == "OBSERVER")
+	if ($urol == "OBSERVER") {
 		$t->assign ("ro", "disabled");
+	}
 	$t->assign ("ctl_show", true);
 	$t->assign ("ctl_evepred", true);
 	$t->assign ("evepredl", $us->q->loadEvents("PREDEF", null, $lg));
 	$t->assign ("ctl_evepers", true);
 	$t->assign ("eveuserl", $us->q->loadEvents("USER", null, $lg));
 }
-
-$t->assign ("reg", $reg);
-$t->display ("events.tpl");
-
+$t->assign('reg', $reg);
+$t->display('events.tpl');
 </script>

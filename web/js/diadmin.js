@@ -33,7 +33,7 @@
 		);
 	} //function
 
-	function sendData (r, url, pars, val) {
+	function sendData(r, url, pars, val) {
 		reg = r;
 		opt = val;
 		if (mod != "") {
@@ -102,7 +102,7 @@
 		$(mod + 'addsect').style.display = 'block';
 		uploadMsg('');
 		if (module == "event") {
-			$('aEventName').value = name;
+			$('EventName').value = name;
 			$('aEventDesc').value = desc;
 			if (active == "1")
 				$('aEventActive').checked = true;
