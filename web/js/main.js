@@ -43,8 +43,18 @@ function onReadyMain() {
 	// Tabs for Database Configuration
 	jQuery('#DBConfig_tabs').tabs();
 	jQuery('.classDBConfig_tabs').click(function() {
-		jQuery(jQuery(this).attr('href')).html('<img src="loading.gif" />');
-		jQuery(jQuery(this).attr('href')).load(jQuery(this).attr('data'), {r : jQuery('#desinventarRegionId').val() });
+		var me = jQuery(jQuery(this).attr('href'));
+		me.html('<img src="loading.gif" />');
+		//jQuery(jQuery(this).attr('href')).load(jQuery(this).attr('data'), {r : jQuery('#desinventarRegionId').val() });
+		jQuery.post(
+			jQuery(this).attr('data'),
+			{r : jQuery('#desinventarRegionId').val()
+			},
+			function(data) {
+				me.html(data);
+				onReadyDatabaseConfig();
+			}
+		);
 	});
 	jQuery('.classDBConfig_tabs:first').click();
 }
