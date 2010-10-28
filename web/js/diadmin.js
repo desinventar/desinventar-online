@@ -61,21 +61,6 @@
 			case "userpa":
 				updateList('lst_userpa', 'user.php', 'cmd=list');
 			break;
-			case "event":
-				if (opt == "1") {
-					updateList('lst_evepred', 'events.php', 'r='+ reg +'&cmd=list&predef=1');
-				} else {
-					updateList('lst_eveuser', 'events.php', 'r='+ reg +'&cmd=list&predef=0');
-				}
-				updateList('qevelst', 'index.php', 'r='+ reg +'&cmd=evelst');
-			break;
-			case "cause":
-				if (opt == "1")
-					updateList('lst_caupred', 'causes.php', 'r='+ reg +'&cmd=list&predef=1');
-				else
-					updateList('lst_cauuser', 'causes.php', 'r='+ reg +'&cmd=list&predef=0');
-				updateList('qcaulst', 'index.php', 'r='+ reg +'&cmd=caulst');
-			break;
 			case "role":
 				updateList('lst_role', 'info.php', 'r='+ reg +'&rolecmd=list');
 			break;
