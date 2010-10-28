@@ -50,8 +50,9 @@
 		} );
 	} //function
 
-	function showResponse (originalRequest) {
+	function showResponse(originalRequest) {
 		var newData = originalRequest.responseText;
+		var reg = jQuery('#desinventarRegionId').val();
 		uploadMsg(newData);
 		switch(mod) {
 			case "regionpa":
@@ -61,10 +62,11 @@
 				updateList('lst_userpa', 'user.php', 'cmd=list');
 			break;
 			case "event":
-				if (opt == "1")
+				if (opt == "1") {
 					updateList('lst_evepred', 'events.php', 'r='+ reg +'&cmd=list&predef=1');
-				else
+				} else {
 					updateList('lst_eveuser', 'events.php', 'r='+ reg +'&cmd=list&predef=0');
+				}
 				updateList('qevelst', 'index.php', 'r='+ reg +'&cmd=evelst');
 			break;
 			case "cause":
@@ -359,7 +361,6 @@
 		}
 		// Block special characters: (like !@#$%^&'*" etc)
 		val = !(key == 34 || key == 39 || key == 92 || key == 13 || key == 16)
-		//alert ("Key: "+ key +" - "+ chk +" "+ len +" "+ spckey +" ");
 	  return (val && ((chk && len) || spckey));
 	}
 
