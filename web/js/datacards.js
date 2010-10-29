@@ -222,6 +222,7 @@ function onReadyDatacards() {
 	jQuery('#btnDatacardNew').click(function() {
 		doDatacardClear();
 		doDatacardNew();
+		jQuery('#txtDatacardFind').val('');
 		jQuery('#GeoLevel0').trigger('clearGeographyItems');
 		jQuery('#GeographyId').val('');
 		jQuery('#DisasterId').val('');
@@ -229,6 +230,7 @@ function onReadyDatacards() {
 	});
 	
 	jQuery('#btnDatacardEdit').click(function() {
+		jQuery('#txtDatacardFind').val('');
 		doDatacardEdit();
 		return false;
 	});
@@ -251,24 +253,28 @@ function onReadyDatacards() {
 	// Datacard Navigation Functions
 	jQuery('#btnDatacardGotoFirst').click(function() {
 		jQuery('#divRecordStat').hide();
+		jQuery('#txtDatacardFind').val('');
 		doDatacardGotoFirst();
 		return false;
 	});
 
 	jQuery('#btnDatacardGotoLast').click(function() {
 		jQuery('#divRecordStat').hide();
+		jQuery('#txtDatacardFind').val('');
 		doDatacardGotoLast();
 		return false;
 	});
 	
 	jQuery('#btnDatacardGotoPrev').click(function() {
 		jQuery('#divRecordStat').hide();
+		jQuery('#txtDatacardFind').val('');
 		doDatacardGotoPrev();
 		return false;
 	});
 	
 	jQuery('#btnDatacardGotoNext').click(function() {
 		jQuery('#divRecordStat').hide();
+		jQuery('#txtDatacardFind').val('');
 		doDatacardGotoNext();
 		return false;
 	});
