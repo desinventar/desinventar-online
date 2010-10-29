@@ -9,7 +9,7 @@
 	require_once(BASE . '/include/diimport.class.php');
 	require_once(BASE . '/include/diregion.class.php');
 	
-	$RegionId = 'MEX-1250695136-mexico_inventario_historico_de_desastres';
+	$RegionId = 'GAR-ISDR-2011_IND_TAMILNADU';
 	$us->login('diadmin','di8');
 	$us->open($RegionId);
 	$iCount = 0;
