@@ -574,6 +574,16 @@ function doDatacardSave() {
 	}
 	
 	if (bContinue) {
+		if (jQuery('#RecordStatus').val() != 'DRAFT') {
+			if (jQuery.trim(jQuery('#DisasterSource').val()) == '') {
+				displayDatacardStatusMsg('msgDatacardWithoutSource');
+				jQuery('#RecordStatus').highlight().focus();
+				bContinue = false;
+			}
+		}
+	}
+	
+	if (bContinue) {
 		// Validate Record Status
 		if ( (jQuery('#RecordStatus').val() == 'PUBLISHED') ||
 		     (jQuery('#RecordStatus').val() == 'DELETED'  ) ) {
@@ -618,7 +628,8 @@ function doDatacardSave() {
 					displayDatacardStatusMsg('msgDatacardDuplicatedSerial');
 				}
 				if (bContinue) {
-					var fl = new Array('DisasterSerial', 'DisasterBeginTime0', 'DisasterSource', 
+					//'DisasterSource', 
+					var fl = new Array('DisasterSerial', 'DisasterBeginTime0', 
 										'GeoLevel0', 'EventId', 'CauseId');
 					if (checkForm('DICard', fl, jQuery('#msgDatacardFieldsError').text())) {
 						jQuery('#PrevDisasterSerial').val(jQuery('#DisasterSerial').val());
