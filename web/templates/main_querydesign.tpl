@@ -297,7 +297,7 @@
 					<option class="small" value="OR"  {-if $qd.D_DisasterSource[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
 				</select>
 				<br />
-				<textarea id="DisasterSource" name="D_DisasterSource[1]" style="width:220px; height:40px;"
+				<textarea id="txtDisasterSource" name="D_DisasterSource[1]" style="width:220px; height:40px;"
 					onFocus="showtip('{-$dis.DisasterSource[2]-}');">{-$qd.D_DisasterSource[1]-}
 				</textarea>
 				
