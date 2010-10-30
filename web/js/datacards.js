@@ -575,7 +575,9 @@ function doDatacardSave() {
 	
 	if (bContinue) {
 		if (jQuery('#RecordStatus').val() != 'DRAFT') {
-			if (jQuery('#DisasterSource').val() == '') {
+			var DisasterSource = jQuery('#DICard #DisasterSource').val();
+			DisasterSource = jQuery.trim(DisasterSource);
+			if (DisasterSource == '') {
 				displayDatacardStatusMsg('msgDatacardWithoutSource');
 				jQuery('#RecordStatus').highlight().focus();
 				bContinue = false;
