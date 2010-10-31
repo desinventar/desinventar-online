@@ -17,7 +17,7 @@ foreach($us->q->core->query("SELECT * FROM Region WHERE RegionId LIKE 'GAR-ISDR-
 	$RegionList[] = $row['RegionId'];
 }
 //DEBUG
-$RegionList = array('GAR-ISDR-2011_NPL');
+$RegionList = array('GAR-ISDR-2011_IND_TAMILNADU');
 foreach ($RegionList as $RegionId) {
 	$us->open($RegionId);
 	print $RegionId . "\n";
@@ -119,6 +119,10 @@ foreach ($RegionList as $RegionId) {
 	if ($RegionId == 'GAR-ISDR-2011_SLV') {
 		//$iCount += removeData($us, 'Pajizo', 'EventId="1cb0d2bf-a5c8-4a4d-adbd-43112a8244ea"'); // PAJIZO
 		$iCount += removeData($us, 'Deforestación' , 'EventId="6c3d7356-36cd-425b-a68d-cd9b7d91f0d9"'); // Deforestación
+	}
+	
+	if ($RegionId == 'GAR-ISDR-2011_IND_TAMILNADU') {
+		$iCount += removeData($us, 'Sea Erosion', 'EventId="a313f9c8-9057-4f1d-8366-b6fcc1729f5b"');
 	}
 	
 	print 'FICHAS BORRADAS POR EVENTOS LOCALES : ' . $iCount . "\n";
