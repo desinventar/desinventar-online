@@ -10,19 +10,19 @@
 	require_once(BASE . '/include/diregion.class.php');
 	require_once(BASE . '/include/diregionrecord.class.php');
 	
-	$RegionId = 'GAR-ISDR-2011_IND_TAMILNADU';
+	$RegionId = 'GAR-ISDR-2011_IND_ORISSA';
 	$us->login('diadmin','di8');
 	$us->open($RegionId);
 	
 	$r = new DIRegionRecord($us, $RegionId);
-	$r->copyEvents('eng');
-	$r->copyCauses('eng');
+	//$r->copyEvents('eng');
+	//$r->copyCauses('eng');
 	$i = new DIImport($us);
-	//$a = $i->importFromCSV('/tmp/I2_event.csv', DI_EVENT, true, 0);
-	//$a = $i->importFromCSV('/tmp/I2_cause.csv', DI_CAUSE, true, 0);
-	//$a = $i->importFromCSV('/tmp/I2_geolevel.csv', DI_GEOLEVEL, true, 0);
-	//$a = $i->importFromCSV('/tmp/I2_geography.csv', DI_GEOGRAPHY, true, 0);
-	//$a = $i->importFromCSV('/tmp/I2_disaster.csv', DI_DISASTER, true, 0);
+	//$a = $i->importFromCSV('/tmp/IN_event.csv', DI_EVENT, true, 0);
+	//$a = $i->importFromCSV('/tmp/IN_cause.csv', DI_CAUSE, true, 0);
+	//$a = $i->importFromCSV('/tmp/IN_geolevel.csv', DI_GEOLEVEL, true, 0);
+	//$a = $i->importFromCSV('/tmp/IN_geography.csv', DI_GEOGRAPHY, true, 0);
+	//$a = $i->importFromCSV('/tmp/IN_disaster.csv', DI_DISASTER, true, 0);
 	$us->close();
 	$us->logout();
 </script>
