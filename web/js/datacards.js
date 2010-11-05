@@ -303,7 +303,6 @@ function onReadyDatacards() {
 		jQuery('#divDatacardEffectsAdditional').show();
 		return false;
 	});
-
 } //onReadyDatacards()
 
 function displayDatacardStatusMsg(msgId) {
@@ -574,7 +573,7 @@ function doDatacardSave() {
 	}
 	
 	if (bContinue) {
-		if (jQuery('#RecordStatus').val() != 'DRAFT') {
+		if (jQuery('#RecordStatus').val() == 'PUBLISHED') {
 			var DisasterSource = jQuery('#DICard #DisasterSource').val();
 			DisasterSource = jQuery.trim(DisasterSource);
 			if (DisasterSource == '') {
