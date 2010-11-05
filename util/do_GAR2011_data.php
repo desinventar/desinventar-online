@@ -17,7 +17,7 @@ foreach($us->q->core->query("SELECT * FROM Region WHERE RegionId LIKE 'GAR-ISDR-
 	$RegionList[] = $row['RegionId'];
 }
 //DEBUG
-$RegionList = array('GAR-ISDR-2011_IND_TAMILNADU');
+$RegionList = array('GAR-ISDR-2011_IND_ORISSA');
 foreach ($RegionList as $RegionId) {
 	$us->open($RegionId);
 	print $RegionId . "\n";
