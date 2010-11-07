@@ -771,10 +771,14 @@ class Query extends PDO {
 					}
 				} elseif (is_array($v)) {
 					if ($k == "D.DisasterBeginTime") {
-						$aa = !empty($v[0])? $v[0] : "0000"; //substr($datedb[0], 0, 4);
-						$mm = !empty($v[1])? $v[1] : "00";
-						$dd = !empty($v[2])? $v[2] : "00";
-						$begt = sprintf("%04d-%02d-%02d", $aa, $mm, $dd);
+						if (empty($v[0])) { $v[0] = '0000'; }
+						$begt = padNumber($v[0], 4);
+						if (!empty($v[1])) { 
+							$begt .= '-' . padNumber($v[1], 2);
+							if (!empty($v[2])) {
+								$begt .= '-' . padNumber($v[2], 2);
+							}
+						}
 					} elseif ($k == "D.DisasterEndTime") {
 						$aa = !empty($v[0])? $v[0] : "9999"; //substr($datedb[1], 0, 4);
 						$mm = !empty($v[1])? $v[1] : "12";
