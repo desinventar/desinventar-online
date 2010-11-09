@@ -15,7 +15,7 @@
 	$us->login('diadmin','di8');
 	$us->open($RegionId);
 	
-	$r = new DIRegionRecord($us, $RegionId);
+	//$r = new DIRegionRecord($us, $RegionId);
 	//$r->copyEvents('eng');
 	//$r->copyCauses('eng');
 	$i = new DIImport($us);

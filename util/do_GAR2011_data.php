@@ -17,7 +17,7 @@ foreach($us->q->core->query("SELECT * FROM Region WHERE RegionId LIKE 'GAR-ISDR-
 	$RegionList[] = $row['RegionId'];
 }
 //DEBUG
-$RegionList = array('GAR-ISDR-2011_MOZ');
+$RegionList = array('GAR-ISDR-2011_IDN');
 foreach ($RegionList as $RegionId) {
 	$us->open($RegionId);
 	print $RegionId . "\n";
@@ -44,7 +44,7 @@ foreach ($RegionList as $RegionId) {
 	$iCount += removeData($us, 'EPIDEMIA'      , 'EventId="EPIDEMIC"');
 	$iCount += removeData($us, 'ESCAPE'        , 'EventId="LEAK"');
 	$iCount += removeData($us, 'EXPLOSION'     , 'EventId="EXPLOSION"');
-	$iCount += removeData($us, 'LICUACION'     , 'EventId="LIQUEFACTION"');
+	//$iCount += removeData($us, 'LICUACION'     , 'EventId="LIQUEFACTION"');
 	$iCount += removeData($us, 'OTRO'          , 'EventId="OTHER"');
 	$iCount += removeData($us, 'PLAGA'         , 'EventId="PLAGUE"');
 	$iCount += removeData($us, 'PANICO'        , 'EventId="PANIC"');
