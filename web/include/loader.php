@@ -9,9 +9,9 @@ if (! isset($_SERVER['DI8_WEB'])) {
 }
 
 // This is the version of the software
-define('VERSION'   , '2010.311');
+define('VERSION'   , '2010.313');
 define('INTVERSION', '8.2.2.01');
-define('JSVERSION' , '2010-11-07.01');
+define('JSVERSION' , '2010-11-09.01');
 
 // 2009-07-22 (jhcaiced) Adapted Configuration and Startup for 
 // using with PHP Command Line 
