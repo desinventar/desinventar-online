@@ -383,8 +383,17 @@ switch ($cmd) {
 					$role = $us->getUserRole($RegionId);
 					$roleValue = $us->getUserRoleValue($RegionId);
 					$r = new DIRegion($us, $RegionId);
-					$RegionPublic = (int)$r->get('RegionStatus') & 2;
-					if ( ($roleValue >= 0) && ($RegionPublic == CONST_REGIONPUBLIC) ) {
+					$RegionStatus = (int)$r->get('RegionStatus');
+					$RegionPublic = $RegionStatus & 2;
+					$bShow = 0;
+					if ($RegionPublic > 0) {
+						$bShow = 1;
+					} else {
+						if ($roleValue > 0) {
+							$bShow = 1;
+						}
+					}
+					if ($bShow > 0) {
 						// Datacards
 						$t->assign('LabelsDisaster', $us->q->queryLabelsFromGroup('Disaster', $lg));
 						$t->assign('LabelsRecord1', $us->q->queryLabelsFromGroup('Record|1', $lg));
