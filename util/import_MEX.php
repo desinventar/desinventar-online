@@ -9,7 +9,8 @@
 	require_once(BASE . '/include/diimport.class.php');
 	require_once(BASE . '/include/diregion.class.php');
 	
-	$RegionId = 'GAR-ISDR-2011_MEX';
+	//$RegionId = 'GAR-ISDR-2011_MEX';
+	$RegionId = 'GAR-UMBRAL-2011_MEX';
 	$us->login('diadmin','di8');
 	$us->open($RegionId);
 	//$r = new DIRegion($us, $RegionId);
