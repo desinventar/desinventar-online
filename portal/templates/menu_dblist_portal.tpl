@@ -8,12 +8,12 @@
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_ini.gif" width="133" height="5"></td></tr>
 		<tr>
 			<td class="paisel" colspan="3">
-				<a href="#" class="RegionGroup" alt="6" expand="true">{-#msgRegionSouthAmerica#-}</a>
+				<a href="#" class="RegionGroup" alt="1" expand="true">{-#msgRegionSouthAmerica#-}</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 	</table>
-	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect6">
+	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect1">
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 				<a href="#" class="RegionList" alt="ARG">Argentina</a>
@@ -75,12 +75,12 @@
 	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 		<tr>
 			<td class="paisel">
-				<a href="#" class="RegionGroup" alt="1">{-#msgRegionAsia#-}</a>
+				<a href="#" class="RegionGroup" alt="2">{-#msgRegionAsia#-}</a>
 			</td>
 		</tr>
 		<tr><td><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 	</table>
-	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect1" style="display:none;">
+	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect2" style="display:none;">
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 				<a href="#" class="RegionItem" alt="IND-1250695040-india_orissa_historic_inventory_of_disasters">India - Orissa</a>
@@ -93,11 +93,11 @@
 	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 		<tr>
 			<td class="paisel">
-				<a href="#" class="RegionGroup" alt="2">{-#msgRegionCentralAmerica#-}</a>
+				<a href="#" class="RegionGroup" alt="3">{-#msgRegionCentralAmerica#-}</a>
 			</td>
 		</tr><tr><td><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 	</table>
-	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect2" style="display:none;">
+	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect3" style="display:none;">
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 				<a href="#" class="RegionItem" alt="CRI-1250694968-costa_rica_inventario_historico_de_desastres">Costa Rica</a>
@@ -134,12 +134,48 @@
 	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 	<tr>
 		<td class="paisel">
-			<a href="#" class="RegionGroup" alt="5">{-#msgRegionNorthAmerica#-}</a>
+			<a href="#" class="RegionGroup" alt="4">{-#msgRegionNorthAmerica#-}</a>
+		</td>
+	</tr>
+	<tr><td><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
+	</table>
+	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect4" style="display:none;">
+	<tr>
+		<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
+			<a href="#" class="RegionItem" alt="MEX-1250695136-mexico_inventario_historico_de_desastres">México</a>
+		</td>
+	</tr>
+	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
+	</table>
+
+	<!-- CARIBBEAN -->
+	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
+	<tr>
+		<td class="paisel">
+			<a href="#" class="RegionGroup" alt="5">{-#msgRegionCaribbean#-}</a>
 		</td>
 	</tr>
 	<tr><td><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 	</table>
 	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect5" style="display:none;">
+	<tr>
+		<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
+			<a href="#" class="RegionItem" alt="MEX-1250695136-mexico_inventario_historico_de_desastres">México</a>
+		</td>
+	</tr>
+	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
+	</table>
+
+	<!-- SOUTH PACIFIC -->
+	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
+	<tr>
+		<td class="paisel">
+			<a href="#" class="RegionGroup" alt="6">{-#msgRegionPacific#-}</a>
+		</td>
+	</tr>
+	<tr><td><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
+	</table>
+	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect6" style="display:none;">
 	<tr>
 		<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
 			<a href="#" class="RegionItem" alt="MEX-1250695136-mexico_inventario_historico_de_desastres">México</a>

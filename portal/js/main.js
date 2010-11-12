@@ -41,7 +41,7 @@ function onReadyPortal() {
 		return false;
 	});
 
-	// Expand first region group at start
+	// Expand some region groups at start
 	jQuery('.RegionGroup[expand=yes]').trigger('click');
 
 	// Handle clicks on countries that return a list of regions
