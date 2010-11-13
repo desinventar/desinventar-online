@@ -122,11 +122,9 @@
 	<tr><td><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 	</table>
 	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect4" style="display:none;">
-	<tr>
-		<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-			<a href="#" class="RegionItem" alt="MEX-1250695136-mexico_inventario_historico_de_desastres">México</a>
-		</td>
-	</tr>
+	<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionItem" alt="MEX-1250695136-mexico_inventario_historico_de_desastres">México</a></td></tr>
+	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
+	<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionItem" alt="USA-FLORIDA">USA-Florida</a></td></tr>
 	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 	</table>
 
