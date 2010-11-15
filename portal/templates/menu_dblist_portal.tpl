@@ -16,7 +16,7 @@
 	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect1">
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-				<a href="#" class="RegionList" alt="ARG">Argentina</a>
+				<a href="#" class="RegionList" alt="ARG">{-#tcountryARG#-}</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -28,7 +28,7 @@
 		<tr><td><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-				<a href="#" class="RegionItem" alt="CHL-1257983285-chile_inventario_historico_de_desastres">Chile</a>
+				<a href="#" class="RegionItem" alt="CHL-1257983285-chile_inventario_historico_de_desastres">{-#tcountryCHL#-}</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -46,13 +46,13 @@
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-				<a href="#" class="RegionItem" alt="GUY-20100727000000">Guyana</a>
+				<a href="#" class="RegionItem" alt="GUY-20100727000000">{-#tcountryGUY#-}</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-				<a href="#" class="RegionList" alt="PRY">Paraguay</a>
+				<a href="#" class="RegionList" alt="PRY">{-#tcountryPRY#-}</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -64,7 +64,7 @@
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-				<a href="#" class="RegionList" alt="VEN">Venezuela</a>
+				<a href="#" class="RegionList" alt="VEN">{-#tcountryVEN#-}</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -83,7 +83,7 @@
 	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect2" style="display:none;">
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-				<a href="#" class="RegionItem" alt="IND-1250695040-india_orissa_historic_inventory_of_disasters">India - Orissa</a>
+				<a href="#" class="RegionItem" alt="IND-1250695040-india_orissa_historic_inventory_of_disasters">{-#tcountryIND#-} - Orissa</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -98,17 +98,17 @@
 		</tr><tr><td><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 	</table>
 	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect3" style="display:none;">
-		<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionItem" alt="CRI-1250694968-costa_rica_inventario_historico_de_desastres">Costa Rica</a></td></tr>
+		<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionItem" alt="CRI-1250694968-costa_rica_inventario_historico_de_desastres">{-#tcountryCRI#-}</a></td></tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
-		<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionList" alt="SLV">El Salvador</a></td></tr>
+		<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionList" alt="SLV">{-#tcountrySLV#-}</a></td></tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
-		<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionList" alt="GTM">Guatemala</a></td></tr>
+		<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionList" alt="GTM">{-#tcountryGTM#-}</a></td></tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
-		<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionItem" alt="HND-20101004">Honduras</a></td></tr>
+		<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionItem" alt="HND-20101004">{-#tcountryHND#-}</a></td></tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
-		<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionList" alt="NIC">Nicaragua</a></td></tr>
+		<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionList" alt="NIC">{-#tcountryNIC#-}</a></td></tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
-		<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionItem" alt="PAN-1250695231-panama_inventario_de_desastres_sinaproc">Panamá</a></td></tr>
+		<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionItem" alt="PAN-1250695231-panama_inventario_de_desastres_sinaproc">{-#tcountryPAN#-}</a></td></tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 	</table>
 		
@@ -122,9 +122,9 @@
 	<tr><td><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 	</table>
 	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect4" style="display:none;">
-	<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionItem" alt="MEX-1250695136-mexico_inventario_historico_de_desastres">México</a></td></tr>
+	<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionItem" alt="MEX-1250695136-mexico_inventario_historico_de_desastres">{-#tcountryMEX#-}</a></td></tr>
 	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
-	<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionItem" alt="USA-FLORIDA">USA-Florida</a></td></tr>
+	<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionItem" alt="USA-FLORIDA">{-#msgRegionUSAFL#-}</a></td></tr>
 	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 	</table>
 
@@ -138,13 +138,13 @@
 	<tr><td><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 	</table>
 	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect5" style="display:none;">
-	<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionList" alt="HTI">Haiti</a></td></tr>
+	<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionList" alt="HTI">{-#tcountryHTI#-}</a></td></tr>
 	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
-	<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionList" alt="JAM">Jamaica</a></td></tr>
+	<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionList" alt="JAM">{-#tcountryJAM#-}</a></td></tr>
 	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
-	<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionList" alt="DOM">Rep. Dominicana</a></td></tr>
+	<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionList" alt="DOM">{-#tcountryDOM#-}</a></td></tr>
 	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
-	<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionList" alt="TTO">Trinidad and Tobago</a></td></tr>
+	<tr><td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; ><a href="#" class="RegionList" alt="TTO">{-#tcountryTTO#-}</a></td></tr>
 	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 	</table>
 
@@ -160,7 +160,7 @@
 	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect6" style="display:none;">
 	<tr>
 		<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-			<a href="#" class="RegionList" alt="VUT">Vanuatu</a>
+			<a href="#" class="RegionList" alt="VUT">{-#tcountryVUT#-}</a>
 		</td>
 	</tr>
 	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
