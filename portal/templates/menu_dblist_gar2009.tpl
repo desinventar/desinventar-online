@@ -19,31 +19,31 @@
 	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect1">
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-				<a href="#" class="RegionItem" alt="IND-1250695040-india_orissa_historic_inventory_of_disasters">India - Orissa</a>
+				<a href="#" class="RegionItem" alt="IND-1250695040-india_orissa_historic_inventory_of_disasters">{-#tcountryIND#-} - Orissa</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-				<a href="#" class="RegionItem" alt="IND-1250695066-india_tamil_nadu_historic_inventory_of_disasters">India - Tamil Nadu</a>
+				<a href="#" class="RegionItem" alt="IND-1250695066-india_tamil_nadu_historic_inventory_of_disasters">{-#tcountryIND#-} - Tamil Nadu</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-				<a href="#" class="RegionItem" alt="IRN-1250695109-iran_historic_inventory_of_disasters">Iran</a>
+				<a href="#" class="RegionItem" alt="IRN-1250695109-iran_historic_inventory_of_disasters">{-#tcountryIRN#-}</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-				<a href="#" class="RegionItem" alt="NPL-1250695185-nepal_historic_inventory_of_disasters">Nepal</a>
+				<a href="#" class="RegionItem" alt="NPL-1250695185-nepal_historic_inventory_of_disasters">{-#tcountryNPL#-}</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-				<a href="#" class="RegionItem" alt="LKA-1250695608-srilanka_historic_inventory_of_disasters">Srilanka</a>
+				<a href="#" class="RegionItem" alt="LKA-1250695608-srilanka_historic_inventory_of_disasters">{-#tcountryLKA#-}</a>
 			</td>
 		</tr>
 	</table>
@@ -61,7 +61,7 @@
 	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center id="sect6">
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-				<a href="#" class="RegionItem" alt="ARG-1250694407-argentina_inventario_historico_de_desastres">Argentina</a>
+				<a href="#" class="RegionItem" alt="ARG-1250694407-argentina_inventario_historico_de_desastres">{-#tcountryARG#-}</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -79,7 +79,7 @@
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-				<a href="#" class="RegionItem" alt="CRI-1250694968-costa_rica_inventario_historico_de_desastres">Costa Rica</a>
+				<a href="#" class="RegionItem" alt="CRI-1250694968-costa_rica_inventario_historico_de_desastres">{-#tcountryCRI#-}</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -91,13 +91,13 @@
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-				<a href="#" class="RegionItem" alt="SLV-1250695592-el_salvador_inventario_historico_de_desastres">El Salvador</a>
+				<a href="#" class="RegionItem" alt="SLV-1250695592-el_salvador_inventario_historico_de_desastres">{-#tcountrySLV#-}</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-				<a href="#" class="RegionItem" alt="MEX-1250695136-mexico_inventario_historico_de_desastres">México</a>
+				<a href="#" class="RegionItem" alt="MEX-1250695136-mexico_inventario_historico_de_desastres">{-#tcountryMEX#-}</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
@@ -109,7 +109,7 @@
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
 		<tr>
 			<td class="pais" colspan="3">&nbsp;&nbsp;&nbsp; >
-				<a href="#" class="RegionItem" alt="VEN-1250695640-venezuela_inventario_historico_de_desastres">Venezuela</a>
+				<a href="#" class="RegionItem" alt="VEN-1250695640-venezuela_inventario_historico_de_desastres">{-#tcountryVEN#-}</a>
 			</td>
 		</tr>
 		<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_sep.gif" width=133 height=6 border=0></td></tr>
