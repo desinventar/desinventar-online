@@ -84,13 +84,21 @@ function onReadyDatacards() {
 
 	// Enable/Disable related EffectSector fields based on value of other fields...	
 	jQuery('.clsEffectDouble').blur(function(event) {
-		altField = jQuery(this).attr('altField');
-		if(parseInt(jQuery(this).val()) > 0) {
-			jQuery('#' + altField).val('-1');
+		var altField = jQuery(this).attr('altField');
+		var value    = parseInt(jQuery(this).val());
+		var field    = jQuery('#DICard #' + altField);
+		if (value > 0) {
+			field.attr('oldValue', field.val());
+			field.val(-1);
+		} else {
+			if (value == 0) {
+				if (field.attr('oldValue') == '') {
+					field.attr('oldValue', 0);
+				}
+				field.val(field.attr('oldValue'));
+				
+			}
 		}
-		if(parseInt(jQuery(this).val()) == 0) {
-			jQuery('#' + altField).val('0');
-		}	
 	});
 	
 	// Geography Levels/Items Functions...
