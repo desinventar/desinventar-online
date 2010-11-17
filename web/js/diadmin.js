@@ -312,6 +312,7 @@
 			key = key - 48;
 		}
 		var keychar = String.fromCharCode(key);
+		if (key == 190 || key == 110 || key == 188) { keychar = '.'; }
 		var opt = type.split(":"); // 0=type; 1=minlength; 2=minval-maxval
 			// Accept keys: backspace, tab, shift, ctrl, insert, delete
 			//        pagedown, pageup, rows
