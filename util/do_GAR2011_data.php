@@ -17,7 +17,7 @@ foreach($us->q->core->query("SELECT * FROM Region WHERE RegionId LIKE 'GAR-ISDR-
 	$RegionList[] = $row['RegionId'];
 }
 //DEBUG
-$RegionList = array('GAR-ISDR-2011_IDN');
+$RegionList = array('GAR-ISDR-2011_IND_ORISSA');
 foreach ($RegionList as $RegionId) {
 	$us->open($RegionId);
 	print $RegionId . "\n";
@@ -30,7 +30,7 @@ foreach ($RegionList as $RegionId) {
 
 	$iCount = 0;
 	// Remove datacard outside of period 1970-2009
-	$answer = removeData($us, 'Fichas Fuera del Periodo' , "DisasterBeginTime < '1970-00-00' OR DisasterBeginTime >= '2010-00-00'");
+	$answer = removeData($us, 'Fichas Fuera del Periodo' , "DisasterBeginTime <= '1969-12-31' OR DisasterBeginTime >= '2010-00-00'");
 	//printList($answer, 'Fichas Fuera del Periodo');
 	
 	// Remove events outside of list
@@ -136,7 +136,7 @@ foreach ($RegionList as $RegionId) {
 	print 'FICHAS CONVERTIDAS A BORRADOR POR GEOGRAFIA NIVEL 0 : ' . $iCount . "\n";
 		
 	$sQuery = 'UPDATE Disaster SET RecordStatus="DRAFT" WHERE LENGTH(GeographyId)==5';
-	$us->q->dreg->query($sQuery);
+	//$us->q->dreg->query($sQuery);
 
 	$sQuery = 'SELECT COUNT(*) AS C FROM Disaster';
 	foreach($us->q->dreg->query($sQuery) as $row) {
