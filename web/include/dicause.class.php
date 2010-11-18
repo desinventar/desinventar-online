@@ -30,6 +30,10 @@ class DICause extends DIRecord {
 			$prmCauseId = func_get_arg(1);
 			$this->set('CauseId', $prmCauseId);
 			$this->load();
+			if ($num_args >= 3) {
+				$prmCauseName = func_get_arg(2);
+				$this->set('CauseName', $prmCauseName);
+			}
 		}
 	}
 	

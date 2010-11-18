@@ -63,13 +63,14 @@ function onReadyThematicMap() {
 	// Effects and Admin layer(s)
 	jQuery('#MapEffectLayers div').each(function() {
 		var MapFile = jQuery(this).find(':eq(1)').text();
+		var LayerName = jQuery(this).find(':eq(2)').text().trim();
 		var layer = new OpenLayers.Layer.WMS(
 			'DI8/' + jQuery(this).find(':eq(0)').text(),
 			'/cgi-bin/' + jQuery('#prmMapServer').val() + '?',
 			{map         : MapFile,
 			 transparent : true,
 			 format      : 'png',
-			 layers      : jQuery(this).find(':eq(2)').text().trim()
+			 layers      : LayerName
 			},
 			{isBaseLayer :false
 			}

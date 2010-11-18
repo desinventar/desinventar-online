@@ -8,6 +8,7 @@
 
 require_once('../web/include/loader.php');
 require_once(BASE . '/include/diregion.class.php');
+require_once(BASE . '/include/diregiondb.class.php');
 require_once(BASE . '/include/dievent.class.php');
 require_once(BASE . '/include/dicause.class.php');
 require_once(BASE . '/include/digeography.class.php');
@@ -17,9 +18,10 @@ require_once(BASE . '/include/digeocarto.class.php');
 require_once(BASE . '/include/disync.class.php');
 	
 // GAR 2011 Virtual Region LATAM
-$RegionItems = array('GAR-ISDR-2011_COL' => 'Colombia',
-					 'GAR-ISDR-2011_ECU' => 'Ecuador'
-					);
+$rlist = array();
+//$rlist['GAR-ISDR-2011_COL'] = 'Colombia';
+$rlist['GAR-ISDR-2011_ECU'] = 'Ecuador';
+
 $RegionId        = 'DESINV-GAR-ISDR-2011_LATAM';
 $RegionLabel     = 'GAR2011 Latin America Virtual Region';
 $PeriodBeginDate = '1970-00-00';
@@ -31,8 +33,9 @@ $GeoLimitMaxY    =  13;
 $InfoGeneral     = ''; //file_get_contents('desc1.txt');
 
 $us->login('diadmin','di8');
+$us->open($RegionId);
 
-$o = new DIRegion($us, $RegionId);
+$o = new DIRegionDB($us, $RegionId);
 /*
 $o->set('RegionLabel'    , $RegionLabel);
 $o->set('RegionId'       , $RegionId);
@@ -49,19 +52,35 @@ fb($o->get('IsCRegion'));
 $o->update();
 */
 
-//Open database
-$us->open($RegionId);
-
-/*
-$iReturn = $o->createRegionDB('País');
+//$iReturn = $o->createRegionDB('País');
 // Add RegionItem
 $o->clearSyncTable();
-foreach($RegionItems as $RegionItemId => $RegionItemGeographyName) {
+// Create GeoLevels
+/*
+$o->clearGeoLevelTable();
+$o->createGeoLevel(0, 'País');
+$o->createGeoLevel(1, 'Nivel 1');
+$o->createGeoLevel(2, 'Nivel 2');
+*/
+
+// Personalized Events
+$o->createEvent('10d35cac-d2e9-4aed-8481-fc2ae52760b8','Desboardamiento ECU');
+$o->createEvent('31d7820b-180c-4374-b9dd-31f414f6bb61','Lahares');
+$o->createEvent('59c36df4-cf51-4ca5-a3aa-0e225a3b93c3','Asentamientos ECU');
+$o->createEvent('a77993f3-2e77-4c1b-bc71-bd9d4513c06c','Hundimiento ECU');
+// Personalized Causes
+$o->createCause('2091c421-0ac2-44bb-bbeb-a23debcb2116','Erupción ECU');
+$o->createCause('3a23b6ac-7ea4-4030-a5cd-ef673b50cd79','Inundación ECU');
+$o->createCause('3f985d85-04ec-48ab-855d-7264e5f69a3e','Lahares ECU');
+$o->createCause('4961dda8-7503-4573-aee2-e52589d8fc09','Sin Nombre ECU');
+$o->createCause('5a640417-3a03-4957-9cf0-8868e0c20138','Depresión Tropical COL');
+$o->clearGeographyTable();
+
+foreach($rlist as $RegionItemId => $RegionItemGeographyName) {
 	printf("%-60s %-20s\n", $RegionItemId, $RegionItemGeographyName);
 	$o->addRegionItem($RegionItemId, $RegionItemGeographyName);
 }
 $o->rebuildRegionData();
-*/
 
 $us->close();
 $us->logout();

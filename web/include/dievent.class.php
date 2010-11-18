@@ -29,6 +29,10 @@ class DIEvent extends DIRecord {
 			$prmEventId = func_get_arg(1);
 			$this->set('EventId', $prmEventId);
 			$this->load();
+			if ($num_args >= 3) {
+				$prmEventName = func_get_arg(2);
+				$this->set('EventName', $prmEventName);
+			}
 		}
 	} // __construct
 	
