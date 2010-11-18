@@ -116,12 +116,13 @@ if (isset($post['_M+cmd'])) {
 		$ltl[] = $lat;
 		$myly = "";
 		if (isset($dl['CVReg'])) {
-			foreach (array_unique($dl['CVReg']) as $it)
+			foreach (array_unique($dl['CVReg']) as $it) {
 				$myly .= $it ."effects,";
+			}
 			$myly = substr($myly, 0, -1);
-		}
-		else
+		} else {
 			$myly = "effects";
+		}
 		$rgl[0]['ly1'] = $myly;
 		$rgl[0]['lv'] = $lev[0];
 		$rgl[0]['map'] = str_replace('\\','/',$m->filename());
@@ -213,9 +214,9 @@ if (isset($post['_M+cmd'])) {
 	$mapfile = str_replace('\\', '/', $m->filename());
 	$worldmap = str_replace('\\','/', MAPDIR . "/worldmap.map");
 	$timestamp = time();
-	$legend = "/cgi-bin/". MAPSERV ."?map=" . rawurlencode($mapfile) . "&SERVICE=WMS&VERSION=1.1.1".
+	$sLegendURL = "/cgi-bin/". MAPSERV ."?map=" . rawurlencode($mapfile) . "&SERVICE=WMS&VERSION=1.1.1".
 				"&REQUEST=getlegendgraphic&LAYER=". substr($myly, 0, 12) ."&FORMAT=image/png" . '&t=' . $timestamp;
-	$t->assign('legend', $legend);	
+	$t->assign('legend', $sLegendURL);	
 	// 2009-09-10 (jhcaiced) Replace backslash chars to slash, when passing data to mapserver
 	if ($post['_M+cmd'] == "export") {
 		$w = 1000;
@@ -233,7 +234,7 @@ if (isset($post['_M+cmd'])) {
 			$ibas = imagecreatefromstring($bf);
 			$imap = imagecreatefromstring($mf);
 			// Download and include legend
-			$lf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $legend);
+			$lf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $sLegendURL);
 			$imgTmp = imagecreatefromstring($lf);
 			$fontsize = 11;
 			$sx = imagesx($imgTmp);

@@ -58,9 +58,9 @@ class DIGeography extends DIRecord {
 	public static function getIdByCode($prmSession, $prmGeographyCode) {
 		$GeographyId = '';
 		$LangIsoCode = $prmSession->getDBInfoValue('LangIsoCode');
-		$Query= "SELECT * FROM Geography WHERE GeographyCode='" . $prmGeographyCode . "' " . 
-		        " AND LangIsoCode='" . $LangIsoCode . "'";
-		foreach($prmSession->q->dreg->query($Query) as $row) {
+		$sQuery= "SELECT * FROM Geography WHERE GeographyCode='" . $prmGeographyCode . "' " . 
+		         " AND LangIsoCode='" . $LangIsoCode . "'";
+		foreach($prmSession->q->dreg->query($sQuery) as $row) {
 			$GeographyId = $row['GeographyId'];
 		}
 		return $GeographyId;
@@ -69,9 +69,7 @@ class DIGeography extends DIRecord {
 	public static function loadByCode($prmSession, $prmGeographyCode) {
 		$g = null;
 		$GeographyId = self::getIdByCode($prmSession, $prmGeographyCode);
-		if ($GeographyId != '') {
-			$g = new self($prmSession, $GeographyId);
-		}
+		$g = new self($prmSession, $GeographyId);
 		return $g;
 	}
 	
