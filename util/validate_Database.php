@@ -60,7 +60,7 @@
 			}
 		}
 		if ( ($iCount > 0) && ($iCount % 100 == 0) ) {
-			printf('%-5d' . "\n", $iCount);
+			//printf('%-5d' . "\n", $iCount);
 		}
 		$iCount++;
 	} //while

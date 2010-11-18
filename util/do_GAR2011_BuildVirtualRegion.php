@@ -19,18 +19,18 @@ require_once(BASE . '/include/disync.class.php');
 	
 // GAR 2011 Virtual Region LATAM
 $rlist = array();
-//$rlist['GAR-ISDR-2011_ARG'] = 'Argentina';
-//$rlist['GAR-ISDR-2011_BOL'] = 'Bolivia';
-//$rlist['GAR-ISDR-2011_CHL'] = 'Chile';
-//$rlist['GAR-ISDR-2011_COL'] = 'Colombia';
-//$rlist['GAR-ISDR-2011_CRI'] = 'Costa Rica';
-//$rlist['GAR-ISDR-2011_ECU'] = 'Ecuador';
-//$rlist['GAR-ISDR-2011_GTM'] = 'Guatemala';
+$rlist['GAR-ISDR-2011_ARG'] = 'Argentina';
+$rlist['GAR-ISDR-2011_BOL'] = 'Bolivia';
+$rlist['GAR-ISDR-2011_CHL'] = 'Chile';
+$rlist['GAR-ISDR-2011_COL'] = 'Colombia';
+$rlist['GAR-ISDR-2011_CRI'] = 'Costa Rica';
+$rlist['GAR-ISDR-2011_ECU'] = 'Ecuador';
+$rlist['GAR-ISDR-2011_GTM'] = 'Guatemala';
 $rlist['GAR-ISDR-2011_MEX'] = 'México';
-//$rlist['GAR-ISDR-2011_PAN'] = 'Panamá';
-//$rlist['GAR-ISDR-2011_PER'] = 'Perú';
-//$rlist['GAR-ISDR-2011_SLV'] = 'El Salvador';
-//$rlist['GAR-ISDR-2011_VEN'] = 'Venezuela';
+$rlist['GAR-ISDR-2011_PAN'] = 'Panamá';
+$rlist['GAR-ISDR-2011_PER'] = 'Perú';
+$rlist['GAR-ISDR-2011_SLV'] = 'El Salvador';
+$rlist['GAR-ISDR-2011_VEN'] = 'Venezuela';
 
 $RegionId        = 'DESINV-GAR-ISDR-2011_LATAM';
 $RegionLabel     = 'GAR2011 Latin America Virtual Region';
@@ -104,6 +104,23 @@ $o->createCause('corto circuito','Corto Circuito (GTM)');
 $o->createCause('fuga de gas propano','Fuga de gas propano (GTM)');
 $o->createCause('8e9262ba-effd-4130-ad8d-efa73614df15','Tormenta Tropical Stan (GTM)');
 $o->createCause('1b42c371-6624-4cb5-a295-7958900dd40f','Huracán Mitch (GTM)');
+
+$o->createCause('acf374ef-2c4d-4491-ab4b-6b7006185825','ONDA FRIA (MEX)');
+$o->createCause('01b61cfa-947c-4e33-b9a3-9af9eb1a62df','Norte (MEX)');
+$o->createCause('03488106-9a03-4a09-aa2c-33615f05c34b','Accidente (MEX)');
+$o->createCause('1e336f2c-3ecd-4da3-8269-8fa617694e49','Tormenta Eléctrica (MEX)');
+$o->createCause('227af961-162d-4584-9998-67be3aad2876','Marejada (MEX)');
+$o->createCause('24801dbe-ccd8-4375-9b47-cacd2636a4ea','Quema (MEX)');
+$o->createCause('26ebdda1-e4b3-42e1-ab94-d4e54263221f','Granizada (MEX)');
+$o->createCause('27007076-4401-47cc-85d0-6dff1d1c3309','Falla Geotécnica (MEX)');
+$o->createCause('29aa9449-f527-439b-bd34-62ddcd2a7540','Huracán (MEX)');
+$o->createCause('76b07f89-e1b2-423d-a535-f760bb8fdd5a','Tormenta Tropical (MEX)');
+$o->createCause('98b382a2-ae08-458d-a312-049205441708','Avenida Torrencial (MEX)');
+$o->createCause('a73d0b34-8056-4bf4-8981-38ba80399ff6','Ola de Calor (MEX)');
+$o->createCause('b54909e2-1136-457b-8da7-0ae1c3d57c47','Incendio (MEX)');
+$o->createCause('ec8c5fab-3228-4049-921d-3cf9bbf37b60','Provocado (MEX)');
+$o->createEvent('3cc22906-21be-4ba9-baed-591c06ad2bea','Hundimiento (MEX)');
+$o->createEvent('af6863db-b11d-49b8-b8e4-f42f0811bbf8','Onda fría (MEX)');
 
 $o->createCause('Alcantarillados','Alcantarillados (PAN)');
 $o->createCause('06ff9db7-ea3b-412d-8d74-07e80749f621','Depresión Tropical (SLV)');
