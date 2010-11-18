@@ -13,8 +13,8 @@ class DIRegionDB extends DIRegion {
 		//$this->rebuildCauseData();
 		//$this->rebuildGeoLevelData();
 		$this->rebuildGeographyData();
-		$this->rebuildGeoCartoData();
-		$this->rebuildDisasterData();
+		//$this->rebuildGeoCartoData();
+		//$this->rebuildDisasterData();
 	}
 
 	public function rebuildGeoCartoData() {
@@ -29,6 +29,7 @@ class DIRegionDB extends DIRegion {
 			$url = $this->processURL($SyncURL);
 			$RegionItemId = $url['regionid'];
 			$prmRegionItemGeographyId = $this->getRegionItemGeographyId($RegionItemId);
+			fb('GeoCarto : ' . $RegionItemId);
 
 			$query = "DELETE FROM GeoCarto WHERE GeographyId='" . $prmRegionItemGeographyId . "'";
 			$this->session->q->dreg->query($query);
@@ -36,16 +37,23 @@ class DIRegionDB extends DIRegion {
 			// Attach Database
 			$this->session->q->dreg->query($this->attachQuery($RegionItemId,'RegItem'));
 
+			$r2 = new DIRegion($this->session, $RegionItemId);
+			$CountryIso2 = $r2->get('CountryIso');
+
 			// Copy GeoCarto Items
 			$this->copyData($this->session->q->dreg, 'GeoCarto','GeographyId',$RegionItemId, $prmRegionItemGeographyId, false);
+			
+			$sQuery = 'UPDATE GeoCarto SET GeoLevelLayerFile="' . $CountryIso2 . '_"||GeoLevelLayerFile WHERE RegionId="' . $RegionItemId . '"';
+			$this->session->q->dreg->query($sQuery);
+			
 			// Copy SHP,SHX,DBF files from each RegionItem to Region
 			$RegionDir     = VAR_DIR . '/database/' . $this->get('RegionId');
-			$RegionItemDir = VAR_DIR . '/database/' . $RegionItemId;
+			$RegionItemDir = VAR_DIR . '/database/' . $RegionItemId;			
 			foreach($this->session->q->dreg->query('SELECT * FROM RegItem.GeoCarto') as $row) {
 				foreach(array('dbf','shp','shx','prj') as $ext) {
 					$file0 = $row['GeoLevelLayerFile'] . '.' . $ext;
 					$file1 = $RegionItemDir . '/' . $file0;
-					$file2 = $RegionDir . '/' . $file0;
+					$file2 = $RegionDir . '/' . $CountryIso2 . '_' . $file0;
 					if (file_exists($file1)) {
 						copy($file1, $file2);
 					}
@@ -91,6 +99,7 @@ class DIRegionDB extends DIRegion {
 			$url = $this->processURL($SyncURL);
 			$RegionItemId = $url['regionid'];
 			$RegionItemGeographyId = $this->getRegionItemGeographyId($RegionItemId);
+			fb('Disaster : ' . $RegionItemId);
 
 			// Attach Database
 			$this->session->q->dreg->query($this->attachQuery($RegionItemId,'RegItem'));
@@ -189,7 +198,8 @@ class DIRegionDB extends DIRegion {
 		array_push($Queries, $Query);
 		$Query = "CREATE TABLE TmpTable AS SELECT * FROM " . $prmTable . " LIMIT 0";
 		array_push($Queries, $Query);
-		$Query = "INSERT INTO TmpTable SELECT * FROM RegItem." . $prmTable;
+		
+		$Query = "INSERT INTO TmpTable SELECT * FROM RegItem." . $prmTable; // . ' WHERE GeographyId LIKE "00030%"';
 		array_push($Queries, $Query);
 		if ($isNumeric) {
 			$Query = "UPDATE TmpTable SET " . $prmField . "=" . $prmField . "+1";
@@ -200,7 +210,6 @@ class DIRegionDB extends DIRegion {
 		if ($prmTable == 'Geography') {
 			$Query = "UPDATE TmpTable SET GeographyLevel=GeographyLevel+1";
 			array_push($Queries, $Query);
-			// Rename GeographyCode to avoid duplicates ???
 		}
 		if ($prmTable == 'GeoCarto') {
 			$Query = "UPDATE TmpTable SET GeoLevelId=GeoLevelId+1";
@@ -217,9 +226,13 @@ class DIRegionDB extends DIRegion {
 		//array_push($Queries,$Query);
 		$Query = "INSERT INTO " . $prmTable . " SELECT * FROM TmpTable";
 		array_push($Queries,$Query);
+		// Delete Table at End
+		$Query = "DROP TABLE IF EXISTS TmpTable";
+		//array_push($Queries, $Query);
 		foreach ($Queries as $Query) {
 			//$this->session->q->dreg->query($Query);
 			try {
+				fb($Query);
 				$prmConn->query($Query);
 			} catch (Exception $e) {
 				showErrorMsg($e->getMessage());
@@ -301,6 +314,11 @@ class DIRegionDB extends DIRegion {
 	}
 	
 	public function clearGeographyTable() {
+		$sth = $this->session->q->dreg->prepare('DELETE FROM Geography;');
+		$sth->execute();
+	}
+
+	public function clearGeoCartoTable() {
 		$sth = $this->session->q->dreg->prepare('DELETE FROM Geography;');
 		$sth->execute();
 	}
