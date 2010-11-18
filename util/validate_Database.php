@@ -9,7 +9,7 @@
 	require_once(BASE . '/include/diimport.class.php');
 	require_once(BASE . '/include/diregion.class.php');
 	
-	$RegionId = 'DESINV-GAR-ISDR-2011_LATAM';
+	$RegionId = 'DESINV-GAR-ISDR-2011_VR';
 	$us->login('diadmin','di8');
 	$us->open($RegionId);
 	$iCount = 0;
