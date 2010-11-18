@@ -13,8 +13,8 @@ class DIRegionDB extends DIRegion {
 		//$this->rebuildCauseData();
 		//$this->rebuildGeoLevelData();
 		$this->rebuildGeographyData();
-		//$this->rebuildGeoCartoData();
-		//$this->rebuildDisasterData();
+		$this->rebuildGeoCartoData();
+		$this->rebuildDisasterData();
 	}
 
 	public function rebuildGeoCartoData() {
@@ -199,40 +199,53 @@ class DIRegionDB extends DIRegion {
 		$Query = "CREATE TABLE TmpTable AS SELECT * FROM " . $prmTable . " LIMIT 0";
 		array_push($Queries, $Query);
 		
-		$Query = "INSERT INTO TmpTable SELECT * FROM RegItem." . $prmTable; // . ' WHERE GeographyId LIKE "00030%"';
-		array_push($Queries, $Query);
-		if ($isNumeric) {
-			$Query = "UPDATE TmpTable SET " . $prmField . "=" . $prmField . "+1";
-		} else {
-			$Query = "UPDATE TmpTable SET " . $prmField . "='" . $prmValue . "'||" . $prmField;
-		}
-		array_push($Queries, $Query);
-		if ($prmTable == 'Geography') {
-			$Query = "UPDATE TmpTable SET GeographyLevel=GeographyLevel+1";
-			array_push($Queries, $Query);
-		}
-		if ($prmTable == 'GeoCarto') {
-			$Query = "UPDATE TmpTable SET GeoLevelId=GeoLevelId+1";
-			array_push($Queries, $Query);
-			$Query = "UPDATE TmpTable SET RegionId='" . $prmRegionItemId . "'";
-			array_push($Queries, $Query);
-		}
+		$endLoop = 1;
+		if ($prmTable == 'Geography') { $endLoop = 100; }
 		
-		if ($isNumeric) {
-			$Query = "DELETE FROM " . $prmTable . " WHERE " . $prmField . "=" . ((int)$prmValue + 1);
-		} else {
-			$Query = "DELETE FROM " . $prmTable . " WHERE " . $prmField . " LIKE '" . $prmValue . "%'";
-		}
-		//array_push($Queries,$Query);
-		$Query = "INSERT INTO " . $prmTable . " SELECT * FROM TmpTable";
-		array_push($Queries,$Query);
+		for($i = 0; $i<$endLoop; $i++) {
+			
+			$Query = 'DELETE FROM TmpTable';
+			array_push($Queries, $Query);
+		
+			$Query = "INSERT INTO TmpTable SELECT * FROM RegItem." . $prmTable;
+			if ($prmTable == 'Geography') {
+				$gId = padNumber($i, 5);
+				$Query .= ' WHERE GeographyId LIKE "' . $gId . '%"';
+			}
+			array_push($Queries, $Query);
+			if ($isNumeric) {
+				$Query = "UPDATE TmpTable SET " . $prmField . "=" . $prmField . "+1";
+			} else {
+				$Query = "UPDATE TmpTable SET " . $prmField . "='" . $prmValue . "'||" . $prmField;
+			}
+			array_push($Queries, $Query);
+			if ($prmTable == 'Geography') {
+				$Query = "UPDATE TmpTable SET GeographyLevel=GeographyLevel+1";
+				array_push($Queries, $Query);
+			}
+			if ($prmTable == 'GeoCarto') {
+				$Query = "UPDATE TmpTable SET GeoLevelId=GeoLevelId+1";
+				array_push($Queries, $Query);
+				$Query = "UPDATE TmpTable SET RegionId='" . $prmRegionItemId . "'";
+				array_push($Queries, $Query);
+			}
+			
+			if ($isNumeric) {
+				$Query = "DELETE FROM " . $prmTable . " WHERE " . $prmField . "=" . ((int)$prmValue + 1);
+			} else {
+				$Query = "DELETE FROM " . $prmTable . " WHERE " . $prmField . " LIKE '" . $prmValue . "%'";
+			}
+			//array_push($Queries,$Query);
+			$Query = "INSERT INTO " . $prmTable . " SELECT * FROM TmpTable";
+			array_push($Queries,$Query);
+		} //for
 		// Delete Table at End
 		$Query = "DROP TABLE IF EXISTS TmpTable";
 		//array_push($Queries, $Query);
 		foreach ($Queries as $Query) {
 			//$this->session->q->dreg->query($Query);
 			try {
-				fb($Query);
+				//fb($Query);
 				$prmConn->query($Query);
 			} catch (Exception $e) {
 				showErrorMsg($e->getMessage());
