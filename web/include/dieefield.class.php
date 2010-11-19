@@ -82,7 +82,8 @@ class DIEEField extends DIRecord {
 					$EEFieldType = 'TEXT';
 				break;
 			}
-			$Query = "ALTER TABLE EEData ADD COLUMN " . $this->get('EEFieldId') . ' ' . $EEFieldType;
+			$EEFieldId = $this->get('EEFieldId');
+			$Query = "ALTER TABLE EEData ADD COLUMN " . $EEFieldId . ' ' . $EEFieldType;
 			$this->q->dreg->query($Query);
 		}
 		return $iReturn;
