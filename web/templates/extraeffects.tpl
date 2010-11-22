@@ -20,7 +20,7 @@
 				<tr class="{-if ($smarty.foreach.eef.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}"
 						onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
 						onClick="setExtraEff('{-$key-}','{-$item[0]-}', '{-$item[1]-}', '{-$item[2]-}', '{-$item[3]-}', 
-   											'{-$item[4]-}', '{-$item[5]-}'); $('cmd').value='cmdEEFieldUpdate';">
+   											'{-$item[4]-}', '{-$item[5]-}'); $('EEFieldCmd').value='cmdEEFieldUpdate';">
 					<td>{-$item[0]-}</td>
 					<td>{-$item[1]-}</td>
 				</tr>
@@ -31,8 +31,7 @@
 		</table>
 	</div>
 	<br /><br />
-	<input id="add" type="button" value="{-#baddoption#-}" class="line"
-		onclick="setExtraEff('','','','','','',''); $('cmd').value='cmdEEFieldInsert';" />
+	<input id="btnEEFieldAdd" type="button" value="{-#baddoption#-}" class="line" />
 	<br />
 	<div id="divEEFieldStatusMsg">
 		<span class="msgEEFieldStatus" id="msgEEFieldStatusOk"    style="display:none;">{-#msgupdeef#-}</span>
@@ -72,10 +71,9 @@
 				<input id="RegionId" name="RegionId" type="hidden" value="{-$reg-}" />
 				<input id="EEFieldSize" name="EEField[EEFieldSize]" value="100" type="hidden" />
 				<input id="EEFieldId" name="EEField[EEFieldId]" type="hidden" />
-				<input id="cmd" name="cmd" type="hidden" />
-				<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="6" />
-				<input type="reset" value="{-#bcancel#-}" class="line"
-					onClick="$('extraeffaddsect').style.display='none'; uploadMsg('');" {-$ro-} />
+				<input id="EEFieldCmd" name="cmd" type="hidden" />
+				<input type="submit" value="{-#bsave#-}"   {-$ro-} class="line" tabindex="6" />
+				<input type="reset"  value="{-#bcancel#-}" {-$ro-} class="line" tabindex="7" id="btnEEFieldReset" />
 			</p>
 		</form>
 	</div>

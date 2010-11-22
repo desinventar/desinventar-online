@@ -13,16 +13,16 @@ function form2cause ($form) {
 	if (isset($form['CauseId']) && !empty($form['CauseId']))
 		$data['CauseId'] = $form['CauseId'];
 	else
-		$data['CauseId'] = "";
+		$data['CauseId'] = '';
 	if (isset($form['CauseName']))
 		$data['CauseName'] = $form['CauseName'];
 	if (isset($form['CauseDesc']))
 		$data['CauseDesc'] = $form['CauseDesc'];
-	if (isset($form['CauseActive']) && $form['CauseActive'] == "on")
+	if (isset($form['CauseActive']) && $form['CauseActive'] == 'on')
 		$data['CauseActive'] = 1;
 	else
 		$data['CauseActive'] = 0;
-	if (isset($form['CausePreDefined']) && $form['CausePreDefined'] == "1")
+	if (isset($form['CausePreDefined']) && $form['CausePreDefined'] == '1')
 		$data['CausePreDefined'] = 1;
 	else
 		$data['CausePreDefined'] = 0;
@@ -31,16 +31,16 @@ function form2cause ($form) {
 
 function showResult($stat, &$tp) {
 	if (!iserror($stat))
-		$tp->assign ("ctl_msgupdcau", true);
+		$tp->assign('ctl_msgupdcau', true);
 	else {
-		$tp->assign ("ctl_errupdcau", true);
-		$tp->assign ("updstatcau", $stat);
-		$tp->assign ("ctl_chkname", true);
-		$tp->assign ("ctl_chkstatus", true);
+		$tp->assign('ctl_errupdcau', true);
+		$tp->assign('updstatcau', $stat);
+		$tp->assign('ctl_chkname', true);
+		$tp->assign('ctl_chkstatus', true);
 		if ($stat != ERR_OBJECT_EXISTS)
-			$tp->assign ("chkname", true);
+			$tp->assign('chkname', true);
 		if ($stat != ERR_CONSTRAINT_FAIL)
-			$tp->assign ("chkstatus", true);
+			$tp->assign('chkstatus', true);
 	}
 }
 
@@ -50,11 +50,11 @@ if ($RegionId == '') {
 	exit();
 }
 $us->open($RegionId);
-$cmd = getParameter('cmd');
-if ($cmd != '') {
-	$dat = form2cause($get);
-	switch ($cmd) {
-	case "insert":
+$cmd = getParameter('cmd','');
+
+$dat = form2cause($get);
+switch($cmd) {
+	case 'insert':
 		$o = new DICause($us);
 		$o->setFromArray($dat);
 		$o->set('CauseId', uuid());
@@ -63,55 +63,55 @@ if ($cmd != '') {
 		$i = $o->insert();
 		showResult($i, $t);
 		break;
-	case "update";
+	case 'update';
 		$o = new DICause($us, $dat['CauseId']);
 		$o->setFromArray($dat);
 		$o->set('RegionId', $RegionId);
 		$i = $o->update();
 		showResult($i, $t);
 		break;
-	case "list":
+	case 'list':
 		// reload list from local SQLITE
 		$prmType = getParameter('predef');
-		if ($prmType == "1") {
-			$t->assign ("ctl_caupred", true);
-			$t->assign ("caupredl", $us->q->loadCauses("PREDEF", null, $lg));
+		if ($prmType == '1') {
+			$t->assign('ctl_caupred', true);
+			$t->assign('caupredl', $us->q->loadCauses('PREDEF', null, $lg));
 		}
 		else {
-			$t->assign ("ctl_caupers", true);
-			$t->assign ("cauuserl", $us->q->loadCauses("USER", null, $lg));
+			$t->assign('ctl_caupers', true);
+			$t->assign('cauuserl', $us->q->loadCauses('USER', null, $lg));
 		}
 		break;
-	case "chkname":
-		$t->assign ("ctl_chkname", true);
+	case 'chkname':
+		$t->assign('ctl_chkname', true);
 		$CauseId = getParameter('CauseId');
 		$CauseName = getParameter('CauseName');
 		if ($us->q->isvalidObjectName($CauseId, $CauseName, DI_CAUSE)) {
-			$t->assign ("chkname", true);
+			$t->assign('chkname', true);
 		}
 		break;
-	case "chkstatus":
-		$t->assign ("ctl_chkstatus", true);
+	case 'chkstatus':
+		$t->assign('ctl_chkstatus', true);
 		$CauseId = getParameter('CauseId');
 		if ($us->q->isvalidObjectToInactivate($CauseId, DI_CAUSE)) {
-			$t->assign ("chkstatus", true);
+			$t->assign('chkstatus', true);
 		}
-		break;
-	default: break;
-	} //switch
-} else {
-	$t->assign ("dic", $us->q->queryLabelsFromGroup('DB', $lg));
-	$urol = $us->getUserRole($RegionId);
-	if ($urol == "OBSERVER")
-		$t->assign ("ro", "disabled");
-	$t->assign ("ctl_show", true);
-	$t->assign ("ctl_caupred", true);
-	$t->assign ("caupredl", $us->q->loadCauses("PREDEF", null, $lg));
-	$t->assign ("ctl_caupers", true);
-	$t->assign ("cauuserl", $us->q->loadCauses("USER", null, $lg));
-}
-
-$t->assign ("reg", $RegionId);
-$t->display ("causes.tpl");
+	break;
+	case 'cmdDBInfoCause':
+		$t->assign('dic', $us->q->queryLabelsFromGroup('DB', $lg));
+		$urol = $us->getUserRole($RegionId);
+		if ($urol == 'OBSERVER')
+			$t->assign('ro', 'disabled');
+		$t->assign('ctl_show', true);
+		$t->assign('ctl_caupred', true);
+		$t->assign('caupredl', $us->q->loadCauses('PREDEF', null, $lg));
+		$t->assign('ctl_caupers', true);
+		$t->assign('cauuserl', $us->q->loadCauses('USER', null, $lg));
+	break;
+	default:
+	break;
+} //switch
+$t->assign('reg', $RegionId);
+$t->display('causes.tpl');
 
 </script>
