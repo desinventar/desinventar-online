@@ -45,10 +45,10 @@ function onReadyMain() {
 	jQuery('.classDBConfig_tabs').click(function() {
 		var me = jQuery(jQuery(this).attr('href'));
 		me.html('<img src="loading.gif" />');
-		//jQuery(jQuery(this).attr('href')).load(jQuery(this).attr('data'), {r : jQuery('#desinventarRegionId').val() });
 		jQuery.post(
 			jQuery(this).attr('data'),
-			{r : jQuery('#desinventarRegionId').val()
+			{RegionId : jQuery('#desinventarRegionId').val(),
+			 cmd      : jQuery(this).attr('cmd')
 			},
 			function(data) {
 				me.html(data);
