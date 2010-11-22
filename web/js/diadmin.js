@@ -74,9 +74,6 @@
 				updateList('lst_ageo', 'geography.php', 'r='+ reg +'&geocmd=list&GeographyId=');
 				updateList('qgeolst', 'index.php', 'r='+ reg +'&cmd=geolst');
 			break;
-			case "extraeff":
-				updateList('lst_eef', 'extraeffects.php', 'r='+ reg +'&cmd=list');
-			break;
 			default:
 			break;
 		}
@@ -194,24 +191,6 @@
 			$('UserActive').checked = true;
 		else
 			$('UserActive').checked = false;
-	}
-
-	function setExtraEff (id, label, def, type, size, active, public) {
-		mod = "extraeff";
-		$(mod + 'addsect').style.display = 'block';
-		$('EEFieldId').value = id;
-		$('EEFieldLabel').value = label;
-		$('EEFieldDesc').value = def;
-		$('EEFieldType').value = type;
-		$('EEFieldSize').value = size;
-		if (active == "1")
-			$('EEFieldActive').checked = true;
-		else
-			$('EEFieldActive').checked = false;
-		if (public == "1")
-			$('EEFieldPublic').checked = true;
-		else
-			$('EEFieldPublic').checked = false;
 	}
 
 	/*** MANAGE MODULES WINDOWS  ***/

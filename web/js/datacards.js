@@ -39,7 +39,7 @@ function onReadyDatacards() {
 		}
 	});
 
-	jQuery('#DICard').submit(function() {
+	jQuery('#DICard').unbind('submit').submit(function() {
 		jQuery('#DatacardCommand').val(jQuery('#_CMD').val());
 		jQuery('#RecordAuthor').val(jQuery('#desinventarUserId').val());
 		jQuery('#RegionId').val(jQuery('#desinventarRegionId').val());
