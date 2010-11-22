@@ -5,7 +5,7 @@
 				case 'mnuRegionInfo':
 					jQuery('#divDatabaseInfo').html('');
 					if (RegionId != '') {
-						jQuery('#divDatabaseInfo').load('index.php?cmd=getRegionFullInfo&r=' + jQuery('#desinventarRegionId').val());
+						jQuery('#divDatabaseInfo').load('index.php?cmd=getRegionFullInfo&amp;r=' + jQuery('#desinventarRegionId').val());
 						jQuery('#divDatabaseInfo').show();
 						jQuery('#dcr').hide();
 					}
@@ -307,7 +307,7 @@
 		
 		var tb = new Ext.Toolbar();
 		tb.render('toolbar');
-		tb.add('-', {id: 'musr', text: '{-#tuser#-}{-if $desinventarUserId != ""-}: <b>{-$desinventarUserId-}</b>{-/if-}', menu: muser });
+		tb.add('-', {id: 'musr', text: '{-#tuser#-}{-if $desinventarUserId != ""-}: {-$desinventarUserId-}{-/if-}', menu: muser });
 		{-if !$ctl_noregion-}
 		tb.add('-', {id: 'mqry', text: '{-#msearch#-}',		menu: mquery });
 		{-/if-}
@@ -317,7 +317,7 @@
 		tb.add('-', {id: 'mdbs', text: '{-#mdatabases#-}',	menu: mbases });
 		tb.add('-', {id: 'mhlp', text: '{-#mhelp#-}',			menu: mhelp  });
 		tb.add('->',{id: 'mnuRegionInfo', text: '[{-$RegionLabel-}]', 		handler: onMenuItem });
-		tb.add('->',{id: 'mnuHelpWebsite', text: '<img src="images/di_logo4.png">', handler: onMenuItem });
+		tb.add('->',{id: 'mnuHelpWebsite', text: '<img src="images/di_logo4.png" alt="" />', handler: onMenuItem });
 
 		// layout
 		var viewport = new Ext.Viewport({

@@ -436,10 +436,10 @@
 			}
 			mystr += "D.DisasterId";
 			$('_D+FieldH').value = mystr;
-			combineForms('DC', 'CD');
+			combineForms('frmMainQuery', 'CD');
 			w.collapse();
-			$('DC').action='data.php';
-			jQuery('#DC').submit();
+			$('frmMainQuery').action='data.php';
+			jQuery('#frmMainQuery').submit();
 			//hideMap();
 			return true;
 		} else {
@@ -474,10 +474,10 @@
 				myMap = jQuery('#MapTitle');
 				$('_M+title').value = myMap.val();
 			}
-			combineForms('DC', 'CM');
+			combineForms('frmMainQuery', 'CM');
 			w.collapse(); // hide()
-			$('DC').action='thematicmap.php';
-			jQuery('#DC').submit();
+			$('frmMainQuery').action='thematicmap.php';
+			jQuery('#frmMainQuery').submit();
 			//hideMap();
 			return true;
 		} else {
@@ -493,10 +493,10 @@
 		}
 		w = Ext.getCmp('westm');
 		jQuery('#prmGraphCommand').val(cmd);
-		combineForms('DC', 'CG');
+		combineForms('frmMainQuery', 'CG');
 		w.collapse(); //hide()
-		$('DC').action='graphic.php';
-		jQuery('#DC').submit();
+		$('frmMainQuery').action='graphic.php';
+		jQuery('#frmMainQuery').submit();
 		//hideMap();
 	}
 	
@@ -515,10 +515,10 @@
 			for (i=0; i < ob.length; i++) 
 				mystr += "," + ob[i].value;
 			$('_S+FieldH').value = mystr;
-			combineForms('DC', 'CS');
+			combineForms('frmMainQuery', 'CS');
 			w.collapse();//hide()
-			$('DC').action='statistic.php';
-			jQuery('#DC').submit();
+			$('frmMainQuery').action='statistic.php';
+			jQuery('#frmMainQuery').submit();
 			//hideMap();
 			return true;
 		} else {
@@ -529,14 +529,14 @@
 	function saveQuery() {
 		jQuery('#prmQueryCommand').val('cmdQuerySave');
 		selectall('_D+Field[]');
-		combineForms('DC', 'CD');
-		combineForms('DC', 'CM');
-		combineForms('DC', 'CG');
+		combineForms('frmMainQuery', 'CD');
+		combineForms('frmMainQuery', 'CM');
+		combineForms('frmMainQuery', 'CG');
 		selectall('_S+Field[]');
-		combineForms('DC', 'CS');
+		combineForms('frmMainQuery', 'CS');
 		jQuery('#_CMD').val('savequery');
-		$('DC').action='index.php?r=' + jQuery('#desinventarRegionId').val();
-		jQuery('#DC').submit();
+		$('frmMainQuery').action='index.php?r=' + jQuery('#desinventarRegionId').val();
+		jQuery('#frmMainQuery').submit();
 		return true;
 	}
 
