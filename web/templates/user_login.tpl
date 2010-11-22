@@ -1,7 +1,7 @@
 <!-- Display User Login Form -->
 {-config_load file=`$confdir``$lg`.conf section="di8_user"-}
 
-	<form id="frmUserLogin" method="post">
+	<form id="frmUserLogin" method="post" action="">
 		<br />
 		<table border="0" align="center" style="margin-top:1px">
 			<tr>
@@ -32,7 +32,7 @@
 	<span id="msgUserLoggedIn"  class="status">{-#msgUserLoggedIn#-}</span>
 	<span id="msgInvalidPasswd" class="status">{-#msgInvalidPasswd#-}</span>
 
-	<form id="uf">
+	<form id="uf" action="">
 		<!-- method="get" 
 		action="javascript:updateUserBar('user.php', 'login', $('userid').value, $('password').value);"> 
 		-->

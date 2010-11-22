@@ -251,7 +251,7 @@ function displayRegionInfo(RegionId) {
 			jQuery.post(desinventarURL,
 				{ cmd:'getRegionTechInfo', RegionId : RegionId },
 				function(data) {
-					jQuery("#regionlogo"   ).attr('src', desinventarURL + '?cmd=getRegionLogo&RegionId=' + RegionId);
+					jQuery('#divRegionLogo').html('<img src="' + desinventarURL + '?cmd=getRegionLogo&RegionId=' + RegionId + '" alt="" />');
 					jQuery('#regiontechinfo').html(data);
 					jQuery("#regionlink").unbind('click').click(function() {
 						window.open(desinventarURL + '?r=' + RegionId + '&lang=' + desinventarLang,'_blank', 
