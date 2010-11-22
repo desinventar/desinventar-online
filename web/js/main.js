@@ -2,7 +2,7 @@ function onReadyMain() {
 	onReadyCommon();
 	onReadyThematicMap();
 
-	jQuery('#DC').submit(function() {
+	jQuery('#frmMainQuery').submit(function() {
 		var myURL = jQuery(this).attr('action');
 		var myCmd = jQuery('#prmQueryCommand').val();
 		if ( (myCmd == 'cmdGridSave') ||

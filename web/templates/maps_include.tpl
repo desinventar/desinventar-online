@@ -7,4 +7,4 @@
 	{-/if-}
 	<script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid=euzuro-openlayers"></script>
 {-/if-}
-<script src="/openlayers/lib/OpenLayers.js?version={-$version-}"></script>
+<script type="text/javascript" src="/openlayers/lib/OpenLayers.js?version={-$version-}"></script>
