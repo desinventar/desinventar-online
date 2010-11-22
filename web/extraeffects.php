@@ -40,8 +40,13 @@ switch($cmd) {
 		$o = new DIEEField($us, $get['EEField']['EEFieldId']);
 		$EEFieldId = $o->get('EEFieldId');
 		$o->setFromArray($get['EEField']);
+		$o->set('EEFieldId', $EEFieldId);
 		$o->set('RegionId', $RegionId);
 		if ($cmd == 'cmdEEFieldInsert') {
+			if ($EEFieldId == '') {
+				$EEFieldId = $o->getNextEEFieldId();
+				$o->set('EEFieldId', $EEFieldId);
+			}
 			$stat = $o->insert();
 		} elseif ($cmd == 'cmdEEFieldUpdate') {
 			$stat = $o->update();
