@@ -39,8 +39,6 @@ $post = $_POST;
 $get = $_GET;
 $RegionId = getParameter('_REG', getParameter('r', getParameter('RegionId','')));
 $cmd  = getParameter('_infocmd', getParameter('cmd',''));
-fb($cmd);
-fb($RegionId);
 if ($RegionId == '') {
 	exit();
 }

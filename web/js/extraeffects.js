@@ -1,5 +1,15 @@
 function onReadyExtraEffects() {
 	jQuery('.msgEEFieldStatus').hide();
+
+	jQuery('#btnEEFieldAdd').unbind('click').click(function() {
+		setExtraEff('','','','','','','');
+		jQuery('#EEFieldCmd').val('cmdEEFieldInsert');
+	});	
+
+	jQuery('#btnEEFieldReset').unbind('click').click(function() {
+		jQuery('#extraeffaddsect').hide();
+		uploadMsg('');
+	});
 	
 	jQuery('#frmEEFieldEdit').unbind('submit').submit(function() {
 		//onSubmit="javascript: var a=new Array('EEFieldLabel','EEFieldDesc', 'EEFieldType'); return(checkForm('eeffrm',a, '{-#errmsgfrmeef#-}'));"	
