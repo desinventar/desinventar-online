@@ -15,7 +15,7 @@
 	<select id="desinventarLanguageList" style="display:none;">
 		{-foreach name=LanguageList key=key item=item from=$LanguageList-}
 			<option value="{-$key-}">{-$item-}</option>
-		{-/foreach-}	
+		{-/foreach-}
 	</select>
 	<select id="desinventarCountryList" style="display:none;">
 		{-foreach name=CountryList key=key item=item from=$CountryList-}

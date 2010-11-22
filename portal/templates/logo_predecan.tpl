@@ -1,4 +1,4 @@
-<img src="{-$desinventarURLPortal-}/images/logos/can.jpg" border=0>
+<img src="{-$desinventarURLPortal-}/images/logos/can.jpg" border="0" alt="" />
 						
 <!--<img src="{-$desinventarURLPortal-}/images/logosinst.png" width=730 height=63 border=0 vspace=15 usemap="#logosinst"> -->
 <!--
