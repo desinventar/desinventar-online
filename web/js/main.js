@@ -53,6 +53,7 @@ function onReadyMain() {
 			function(data) {
 				me.html(data);
 				onReadyDatabaseConfig();
+				onReadyExtraEffects();
 			}
 		);
 	});

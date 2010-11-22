@@ -43,6 +43,7 @@ function getParameter($prmName, $prmDefault='') {
 	} elseif (isset($_POST[$prmName])) {
 		$prmValue = $_POST[$prmName];
 	}
+	$prmValue = trim($prmValue);
 	return $prmValue;
 }
 
