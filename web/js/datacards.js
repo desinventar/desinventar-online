@@ -202,8 +202,11 @@ function onReadyDatacards() {
 
 	// Button for suggesting serial of datacard or restoring initial Serial when editing...
 	jQuery('#linkDatacardSuggestSerial').unbind('click').click(function() {
-		if (jQuery('#DisasterSerial').attr('disabled') == false) {
+		if (jQuery('#DICard #Status').val() == 'NEW') {
 			doDatacardSuggestSerial();
+		}
+		if (jQuery('#DICard #Status').val() == 'EDIT') {
+			jQuery('#DisasterSerial').val(jQuery('#PrevDisasterSerial').val());
 		}
 	});
 
