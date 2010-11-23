@@ -31,14 +31,15 @@ function form2disaster($form, $icmd) {
 			}
 		} //if
 	} //foreach
+	// On Update
+	$data['DisasterId'] = $form['DisasterId'];
+	$data['RecordCreation'] = $form['RecordCreation'];
 	if ($icmd == CMD_NEW) {
 		// New Disaster
-		$data['DisasterId'] = uuid();
+		if ($data['DisasterId'] == '') {
+			$data['DisasterId'] = uuid();
+		}
 		$data['RecordCreation'] = date('Y-m-d H:i:s');
-	} elseif ($icmd == CMD_UPDATE) {
-		// On Update
-		$data['DisasterId'] = $form['DisasterId'];
-		$data['RecordCreation'] = $form['RecordCreation'];
 	}
 	$data['RecordAuthor'] = $form['RecordAuthor'];
 	$data['RecordUpdate'] = gmdate('c');
