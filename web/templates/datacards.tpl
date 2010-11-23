@@ -32,7 +32,7 @@
 					<span class="datacardStatusMsg" id="msgDatacardInvalidGeography">{-#msgDatacardInvalidGeography#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardInsertOk">{-#tdccreated#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardUpdateOk">{-#tdcupdated#-}</span>
-					<span class="datacardStatusMsg" id="msgDatacardStatus">{-$statusmsg-}</span>
+					<span class="datacardStatusMsg" id="msgDatacardCustom"></span>
 				</div>
 			</td>
 		</tr>

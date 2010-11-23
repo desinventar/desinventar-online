@@ -46,22 +46,27 @@ function onReadyDatacards() {
 		jQuery.post('cards.php',
 			params,
 			function(data) {
-				jQuery('#DisasterId').val(data.DisasterId);
-				jQuery('#RecordSerial').text(data.RecordSerial);
-				jQuery('#RecordPublished').text(data.RecordPublished);
-				jQuery('#RecordReady').text(data.RecordReady);
-				switch (data.Status) {
-					case 'INSERTOK':
-						displayDatacardStatusMsg('msgDatacardInsertOk');
-						jQuery('#divRecordStat').show();
-					break;
-					case 'UPDATEOK':
-						displayDatacardStatusMsg('msgDatacardUpdateOk');
-						jQuery('#divRecordStat').show();
-					break;
+				if (data.Status == 'OK') {
+					jQuery('#DisasterId').val(data.DisasterId);
+					jQuery('#RecordSerial').text(data.RecordSerial);
+					jQuery('#RecordPublished').text(data.RecordPublished);
+					jQuery('#RecordReady').text(data.RecordReady);
+					switch (data.StatusCode) {
+						case 'INSERTOK':
+							displayDatacardStatusMsg('msgDatacardInsertOk');
+							jQuery('#divRecordStat').show();
+						break;
+						case 'UPDATEOK':
+							displayDatacardStatusMsg('msgDatacardUpdateOk');
+							jQuery('#divRecordStat').show();
+						break;
+					} //switch
+					DisableEnableForm($('DICard'), true);
+					changeOptions('btnDatacardSave');
+				} else {
+					jQuery('#msgDatacardCustom').text(data.StatusMsg);
+					displayDatacardStatusMsg('msgDatacardCustom');
 				}
-				DisableEnableForm($('DICard'), true);
-				changeOptions('btnDatacardSave');
 				// clear Help text area
 				showtip('','#ffffff');
 			},
