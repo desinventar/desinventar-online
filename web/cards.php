@@ -186,64 +186,59 @@ if (isset($_GET['u'])) {
 			echo json_encode($dcard);
 		break;
 		case 'insertDICard':
-			$answer = array();
-			$answer['Status']    = 'INSERTOK';
-			$answer['StatusMsg'] = '';
-			$answer['ErrorCode'] = ERR_NO_ERROR;
-			// Insert New Datacard
-			$us->releaseDatacard($_POST['DisasterId']);
-			$data = form2disaster($_POST, CMD_NEW);
-			$o = new DIDisaster($us, $data['DisasterId']);
-			$o->setFromArray($data);
-			$o->set('RecordCreation', gmdate('c'));
-			$o->set('RecordUpdate', gmdate('c'));
-			$i = $o->insert();
-			if (!iserror($i)) {
-				// Save EEData ....
-				// If Datacard is valid, update EEData Table..
-				$eedat = form2eedata($_POST);
-				$eedat['DisasterId'] = $data['DisasterId'];
-				$e = new DIEEData($us, $eedat['DisasterId']);
-				$e->setFromArray($eedat);
-				$i = $e->insert();
-			} else {
-				$answer['StatusMsg'] = showerror($i);
-				$answer['ErrorCode'] = $i;				
-			}
-			$answer['DisasterId']      = $o->get('DisasterId');
-			$answer['DisasterSerial']  = $o->get('DisasterSerial');
-			$answer['RecordPublished'] = $us->q->getNumDisasterByStatus('PUBLISHED');
-			$answer['RecordReady']     = $us->q->getNumDisasterByStatus('READY');
-			echo json_encode($answer);
-		break;
 		case 'updateDICard':
 			// Update Existing Datacard
 			$answer = array();
-			$answer['Status'] = 'UPDATEOK';
-			$answer['StatusMsg'] = '';
-			$answer['ErrorCode'] = ERR_NO_ERROR;
+			$answer['Status']     = 'OK';
+			$answer['StatusCode'] = 'UPDATEOK';
+			if ($cmd == 'insertDICard') {
+				$answer['StatusCode'] = 'INSERTOK';
+			}
+			$answer['StatusMsg']  = '';
+			$answer['ErrorCode']  = ERR_NO_ERROR;
 			$us->releaseDatacard($_POST['DisasterId']);
-			$data = form2disaster($_POST, CMD_UPDATE);
+			if ($cmd == 'insertDICard') {
+				$data = form2disaster($_POST, CMD_NEW);
+			} else {
+				$data = form2disaster($_POST, CMD_UPDATE);
+			}
 			$o = new DIDisaster($us, $data['DisasterId']);
 			$o->setFromArray($data);
+			if ($cmd == 'insertDICard') { $o->set('RecordCreation', gmdate('c')); }
 			$o->set('RecordUpdate', gmdate('c'));
-			$i = $o->update();
-			if (!iserror($i)) {
+			if ($cmd == 'insertDICard') {
+				$i = $o->insert();
+			} else {
+				$i = $o->update();
+			}
+			if ($i > 0) {
 				// Save EEData ....
 				// If Datacard is valid, update EEData Table..
 				$eedat = form2eedata($_POST);
 				$eedat['DisasterId'] = $data['DisasterId'];
 				$e = new DIEEData($us, $eedat['DisasterId']);
 				$e->setFromArray($eedat);
-				$i = $e->update();
+				if ($cmd == 'insertDICard') {
+					$i = $e->insert();
+				} else {
+					$i = $e->update();
+				}
+				if ($i < 0) {
+					$answer['Status'] = 'ERROR';
+					$answer['StatusMsg'] = showerror($i) . '(' . $i . ')';
+					$answer['ErrorCode'] = $i;				
+				}
 			} else {
-				$answer['StatusMsg'] = showerror($i);
+				$answer['Status']    = 'ERROR';
+				$answer['StatusMsg'] = showerror($i) . '(' . $i . ')';
 				$answer['ErrorCode'] = $i;				
 			}
-			$answer['DisasterId']      = $o->get('DisasterId');
-			$answer['DisasterSerial']  = $o->get('DisasterSerial');
-			$answer['RecordPublished'] = $us->q->getNumDisasterByStatus('PUBLISHED');
-			$answer['RecordReady']     = $us->q->getNumDisasterByStatus('READY');
+			if ($answer['Status'] == 'OK') {
+				$answer['DisasterId']      = $o->get('DisasterId');
+				$answer['DisasterSerial']  = $o->get('DisasterSerial');
+				$answer['RecordPublished'] = $us->q->getNumDisasterByStatus('PUBLISHED');
+				$answer['RecordReady']     = $us->q->getNumDisasterByStatus('READY');
+			}
 			echo json_encode($answer);
 		break;
 		default:

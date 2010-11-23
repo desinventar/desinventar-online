@@ -175,29 +175,29 @@ class DIRecord extends DIObject {
 		return $iReturn;
 	} // function load
 	
-	public function insert($withValidate = true) {
+	public function insert($withValidate = true, $bStrict = true) {
 		$iReturn = ERR_NO_ERROR;
 		$bValidate = $withValidate;
 		if ($withValidate) {
-			$iReturn = $this->validateCreate();
+			$iReturn = $this->validateCreate($bStrict);
 			if ($iReturn > 0 ) { 
-				$iReturn = $this->validateUpdate();
+				$iReturn = $this->validateUpdate($bStrict);
 				$bValidate = false;
 			}
 		}
 		if ($iReturn > 0) {
-			$iReturn = $this->create($bValidate);
+			$iReturn = $this->create($bValidate, $bStrict);
 			if ($iReturn > 0) {
-				$iReturn = $this->update($bValidate);
+				$iReturn = $this->update($bValidate, $bStrict);
 			}
 		}
 		return $iReturn;
 	}
 
-	public function delete($withValidate = true) {
+	public function delete($withValidate = true, $bStrict = true) {
 		$iReturn = ERR_NO_ERROR;
 		if ($withValidate) {
-			$iReturn = validateDelete();
+			$iReturn = validateDelete($bStrict);
 		}
 		if ($iReturn > 0) {
 			$sQuery = $this->getDeleteQuery();
@@ -213,10 +213,10 @@ class DIRecord extends DIObject {
 		return $iReturn;
 	} // function
 
-	public function create($withValidate = true) {
+	public function create($withValidate = true, $bStrict = true) {
 		$iReturn = ERR_NO_ERROR;
 		if ($withValidate) {
-			$iReturn = $this->validateCreate();
+			$iReturn = $this->validateCreate($bStrict);
 		}
 		if ($iReturn > 0) {
 			$sQuery = $this->getInsertQuery();
@@ -232,20 +232,13 @@ class DIRecord extends DIObject {
 		return $iReturn;
 	} // function
 
-	public function update($withValidate = true, $withInsert = false) {
+	public function update($withValidate = true, $bStrict = true) {
 		$iReturn = ERR_NO_ERROR;
 		if ($withValidate) {
-			$iReturn = $this->validateUpdate();
+			$iReturn = $this->validateUpdate($bStrict);
 		}
 		if ($iReturn > 0) {
 			$sQuery = $this->getUpdateQuery();
-			
-			if ($withInsert == true) {
-				if ($this->exists() < 0) {
-					$iReturn = $this->create($withValidate);
-				}
-			}
-			
 			try {
 				if (! $result = $this->conn->query($sQuery)) {
 					$iReturn = ERR_UNKNOWN_ERROR;
@@ -281,7 +274,7 @@ class DIRecord extends DIObject {
 		return $sQuery;
 	}
 
-	public function validateCreate($bStrict=true) {
+	public function validateCreate($bStrict) {
 		$iReturn = ERR_NO_ERROR;
 		if ($this->status->hasError()) {
 			$iReturn = reset(array_keys($this->status->error));
@@ -294,20 +287,17 @@ class DIRecord extends DIObject {
 		return $iReturn;
 	}	
 
-	public function validateUpdate($bStrict=true) {
+	public function validateUpdate($bStrict) {
 		$iReturn = ERR_NO_ERROR;
 		if ($this->status->hasError()) {
 			$iReturn = reset(array_keys($this->status->error));
 		} elseif ($this->status->hasWarning()) {
 			$iReturn = ERR_NO_ERROR;
-			if ($bStrict) {
-				$iReturn = reset(array_keys($this->status->warning));
-			}
 		}
 		return $iReturn;
 	}
 	
-	public function validateDelete() {
+	public function validateDelete($bStrict) {
 		return 1;
 	}
 
