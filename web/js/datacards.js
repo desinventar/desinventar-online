@@ -533,6 +533,7 @@ function doDatacardClear() {
 }
 
 function doDatacardNew() {
+	jQuery('#DICard #Status').val('');
 	DisableEnableForm($('DICard'), false);
 	jQuery('#DisasterBeginTime0').focus();
 	displayDatacardStatusMsg('msgDatacardFill');
@@ -542,6 +543,7 @@ function doDatacardNew() {
 
 function doDatacardEdit() {
 	displayDatacardStatusMsg('');
+	jQuery('#DICard #Status').val('');
 	RegionId = jQuery('#desinventarRegionId').val();
 	jQuery.post('cards.php',
 		{'cmd'       : 'chklocked',
@@ -616,39 +618,46 @@ function doDatacardSave() {
 	
 	// Use AJAX to save datacard
 	if (bContinue) {
-		jQuery.post('cards.php',
-			{'cmd'            : 'existDisasterSerial',
-			 'RegionId'       : jQuery('#desinventarRegionId').val(),
-			 'DisasterSerial' : DisasterSerial
-			},
-			function(data) {
-				bContinue = true;
-				if ( (cmd == 'insertDICard') && (data.DisasterSerial != '') ) {
-					// Serial of new datacard already exists...
-					bContinue = false;
-				}
-				if (cmd == 'updateDICard') {
-					if ( (DisasterSerial != PrevDisasterSerial) && (data.DisasterSerial != '') ) {
-						// Edited Serial exists in database...
+		if (jQuery('#DICard #Status').val() != '') {
+			// Do Nothing.. already saving datacard...
+		} else {
+			jQuery('#DICard #Status').val('SAVING');
+			jQuery.post('cards.php',
+				{'cmd'            : 'existDisasterSerial',
+				 'RegionId'       : jQuery('#desinventarRegionId').val(),
+				 'DisasterSerial' : DisasterSerial
+				},
+				function(data) {
+					bContinue = true;
+					if ( (cmd == 'insertDICard') && (data.DisasterSerial != '') ) {
+						// Serial of new datacard already exists...
 						bContinue = false;
 					}
-				}
-				if (bContinue == false) {
-					displayDatacardStatusMsg('msgDatacardDuplicatedSerial');
-				}
-				if (bContinue) {
-					//'DisasterSource', 
-					var fl = new Array('DisasterSerial', 'DisasterBeginTime0', 
-										'GeoLevel0', 'EventId', 'CauseId');
-					if (checkForm('DICard', fl, jQuery('#msgDatacardFieldsError').text())) {
-						jQuery('#PrevDisasterSerial').val(jQuery('#DisasterSerial').val());
-						jQuery('#DICard').submit();
-					} else {
-						displayDatacardStatusMsg('msgDatacardFieldsError');
+					if (cmd == 'updateDICard') {
+						if ( (DisasterSerial != PrevDisasterSerial) && (data.DisasterSerial != '') ) {
+							// Edited Serial exists in database...
+							bContinue = false;
+						}
 					}
-				}
-			},'json'
-		);
+					if (bContinue == false) {
+						displayDatacardStatusMsg('msgDatacardDuplicatedSerial');
+					}
+					if (bContinue) {
+						//'DisasterSource', 
+						var fl = new Array('DisasterSerial', 'DisasterBeginTime0', 
+											'GeoLevel0', 'EventId', 'CauseId');
+						if (checkForm('DICard', fl, jQuery('#msgDatacardFieldsError').text())) {
+							jQuery('#PrevDisasterSerial').val(jQuery('#DisasterSerial').val());
+							jQuery('#DICard').submit();
+						} else {
+							displayDatacardStatusMsg('msgDatacardFieldsError');
+						}
+					}
+					jQuery('#DICard #Status').val('');
+				},
+				'json'
+			);
+		}
 	}
 }
 
