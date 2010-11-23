@@ -346,7 +346,7 @@
 			default:;
 		}
 		// Block special characters: (like !@#$%^&'*" etc)
-		val = !(key == 34 || key == 39 || key == 92 || key == 13 || key == 16)
+		val = !(key == 92 || key == 13 || key == 16)
 	  return (val && ((chk && len) || spckey));
 	}
 
