@@ -8,6 +8,8 @@ require_once('include/loader.php');
 require_once('include/query.class.php');
 require_once('include/digeography.class.php');
 
+fb($_POST);
+
 $get = $_GET;
 
 $RegionId = getParameter('RegionId', getParameter('r',''));
@@ -17,6 +19,7 @@ if ($RegionId == '') {
 $us->open($RegionId);
 // EDIT REGION: Form to Create and assign regions
 $cmd = getParameter('geocmd', getParameter('cmd', ''));
+fb($cmd);
 
 // Set Variables to insert or update
 $dat = array();
