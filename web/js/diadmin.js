@@ -71,7 +71,7 @@
 				updateList('lst_lev', 'geolevel.php', 'r='+ reg +'&levcmd=list');
 			break;
 			case "geo":
-				updateList('lst_ageo', 'geography.php', 'r='+ reg +'&geocmd=list&GeographyId=');
+				updateList('lst_ageo', 'geography.php', 'r='+ reg +'&cmd=list&GeographyId=');
 				updateList('qgeolst', 'index.php', 'r='+ reg +'&cmd=geolst');
 			break;
 			default:
@@ -167,15 +167,15 @@
 			if (l == 0) {
 				$('aGeoParentId').value = '';
 			}
-			$('geocmd').value='insert';
+			jQuery('#frmDBConfigGeographyEdit #Cmd').val('cmdGeographyInsert');
 			$('alev' + l).style.display = "none";
 		} else if (v[0] == -2) {
 			$('geoaddsect').style.display = 'none';
 		} else {
 			setLevGeo(v[0],v[1],v[2],v[3],'','','','geo');
 			$('aGeoParentId').value = v[0];
-			$('geocmd').value='update';
-			updateList('alev' + l, 'geography.php', 'r='+ reg +'&geocmd=list&GeographyId=' + v[0]);
+			jQuery('#frmDBConfigGeographyEdit #Cmd').val('cmdGeographyUpdate');
+			updateList('alev' + l, 'geography.php', 'r='+ reg +'&cmd=list&GeographyId=' + v[0]);
 		}
 	} //function
 	

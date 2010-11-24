@@ -54,6 +54,7 @@ function onReadyMain() {
 				me.html(data);
 				onReadyDatabaseConfig();
 				onReadyExtraEffects();
+				onReadyDBConfigGeography();
 			}
 		);
 	});
