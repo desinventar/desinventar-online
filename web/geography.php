@@ -76,14 +76,22 @@ switch ($cmd) {
 	case 'cmdDBInfoGeography':
 		$t->assign('ctl_admingeo', true);
 		$lev = 0;
+		$levmax = $us->q->getMaxGeoLev();
+		$levname = $us->q->loadGeoLevById($lev);
+		$geol = $us->q->loadGeography($lev);
+		fb($lev);
+		fb($levmax);
+		fb($levname);
+		fb($geol);
 		$t->assign('lev', $lev);
-		$t->assign('levmax', $us->q->getMaxGeoLev());
-		$t->assign('levname', $us->q->loadGeoLevById($lev));
-		$t->assign('geol', $us->q->loadGeography($lev));
+		$t->assign('levmax', $levmax);
+		$t->assign('levname', $levname);
+		$t->assign('geol', $geol);
 		$t->assign('ctl_geolist', true);
 		$urol = $us->getUserRole($reg);
-		if ($urol == 'OBSERVER')
+		if ($urol == 'OBSERVER') {
 			$t->assign('ro', 'disabled');
+		}
 	break;
 	default: 
 	break;
