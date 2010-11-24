@@ -158,25 +158,26 @@
 	}
 
 	function setadmingeo(reg, k, l) {
+		reg = jQuery('#desinventarRegionId').val();
 		var v = k.split("|");
 		mod = 'geo';
 		uploadMsg('');
 		if (v[0] == -1) {
 			setLevGeo('','','',1,'','','','geo');
-			if (l == 0)
+			if (l == 0) {
 				$('aGeoParentId').value = '';
+			}
 			$('geocmd').value='insert';
 			$('alev' + l).style.display = "none";
-		}
-		else if (v[0] == -2) 
+		} else if (v[0] == -2) {
 			$('geoaddsect').style.display = 'none';
-		else {
+		} else {
 			setLevGeo(v[0],v[1],v[2],v[3],'','','','geo');
 			$('aGeoParentId').value = v[0];
 			$('geocmd').value='update';
 			updateList('alev' + l, 'geography.php', 'r='+ reg +'&geocmd=list&GeographyId=' + v[0]);
 		}
-	}
+	} //function
 	
 	function setUserPA (login, name, email, pass, cnt, city, active) {
 		mod = "userpa";

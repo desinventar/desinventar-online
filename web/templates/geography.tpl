@@ -9,10 +9,9 @@
 		<select onChange="setadmingeo('{-$reg-}', this.options[this.selectedIndex].value, {-$lev-});" class="line" style="width:250px;">
 			<option value="-2" style="color:blue; text-align:center;">-- {-$levname[0]-} --</option>
 			<option value="-1" style="color:green; text-align:center;">-- {-#baddoption#-} --</option>
- {-foreach name=geol key=key item=item from=$geol-}
-			<option {-if !$item[2]-} style="color:red;"{-/if-}
-				value="{-$key-}|{-$item[0]-}|{-$item[1]-}|{-$item[2]-}">{-$item[1]-} ({-$item[0]-})</option>
- {-/foreach-}
+			{-foreach name=geol key=key item=item from=$geol-}
+				<option {-if !$item[2]-} style="color:red;"{-/if-} value="{-$key-}|{-$item[0]-}|{-$item[1]-}|{-$item[2]-}">{-$item[1]-} ({-$item[0]-})</option>
+			{-/foreach-}
 		</select><br />
 		<span id="alev{-$lev-}"></span>
  {-/if-}
