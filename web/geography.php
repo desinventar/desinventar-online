@@ -8,8 +8,6 @@ require_once('include/loader.php');
 require_once('include/query.class.php');
 require_once('include/digeography.class.php');
 
-fb($_POST);
-
 $get = $_GET;
 
 $RegionId = getParameter('RegionId', getParameter('r',''));
@@ -17,9 +15,7 @@ if ($RegionId == '') {
 	exit();
 }
 $us->open($RegionId);
-// EDIT REGION: Form to Create and assign regions
-$cmd = getParameter('geocmd', getParameter('cmd', ''));
-fb($cmd);
+$cmd = getParameter('cmd', '');
 
 // Set Variables to insert or update
 $dat = array();
@@ -33,30 +29,22 @@ if (isset($get['GeographyActive']) && $get['GeographyActive'] == 'on') {
 } else {
 	$dat['GeographyActive'] = 0;
 }
+
 switch ($cmd) {
-	case 'insert':
-		$o = new DIGeography($us);
-		$o->setFromArray($get);
-		$o->setGeographyId($get['GeoParentId']);
-		$i = $o->insert();
-		if ($i > 0)
-			$t->assign('ctl_msginsgeo', true);
-		else {
-			$t->assign('ctl_errinsgeo', true);
-			$t->assign('insstatgeo', $i);
+	case 'cmdGeographyInsert':
+	case 'cmdGeographyUpdate':
+		$answer = array();
+		$GeographyId = $_POST['data']['GeographyId'];
+		$o = new DIGeography($us, $GeographyId);
+		$o->setFromArray($_POST['data']);
+		if ($cmd == 'cmdGeographyInsert') {
+			$o->setGeographyId($_POST['data']['GeoParentId']);
+			$i = $o->insert();
+		} else {
+			$i = $o->update();
 		}
-	break;
-	case 'update':
-		$o = new DIGeography($us, $get['GeographyId']);
-		$o->load();
-		$o->setFromArray($get);
-		$i = $o->update();
-		if ($i > 0)
-			$t->assign('ctl_msgupdgeo', true);
-		else {
-			$t->assign('ctl_errupdgeo', true);
-			$t->assign('updstatgeo', $i);
-		}
+		$answer['Status'] = $i;
+		print json_encode($answer);
 	break;
 	case 'list':
 		$lev = $us->q->getNextLev($get['GeographyId']);
@@ -82,10 +70,6 @@ switch ($cmd) {
 		$levmax = $us->q->getMaxGeoLev();
 		$levname = $us->q->loadGeoLevById($lev);
 		$geol = $us->q->loadGeography($lev);
-		fb($lev);
-		fb($levmax);
-		fb($levname);
-		fb($geol);
 		$t->assign('lev', $lev);
 		$t->assign('levmax', $levmax);
 		$t->assign('levname', $levname);

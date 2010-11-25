@@ -20,6 +20,12 @@
 	</div>
 	<br />
 	<span id="geostatusmsg" class="dlgmsg"></span><br />
+	<div id="divDBConfigGeographyStatus">
+		<span class="clsDBConfigGeographyStatus" id="msgDBConfigGeographyInsert">Geography was created correctly</span>
+		<span class="clsDBConfigGeographyStatus" id="msgDBConfigGeographyUpdate">Geography updated correctly</span>
+		<span class="clsDBConfigGeographyStatus" id="msgDBConfigGeographyError" ></span>
+		<br />
+	</div>
 	<div id="geoaddsect" style="display:none; width:100%;">
 		<form id="frmDBConfigGeographyEdit" method="POST" action="" >
 			<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBEleCode[2]-}');">
