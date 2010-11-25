@@ -48,6 +48,7 @@ function onReadyMain() {
 		jQuery.post(
 			jQuery(this).attr('data'),
 			{RegionId : jQuery('#desinventarRegionId').val(),
+			 lang     : jQuery('#desinventarLang').val(),
 			 cmd      : jQuery(this).attr('cmd')
 			},
 			function(data) {

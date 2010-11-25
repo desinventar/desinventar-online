@@ -1,7 +1,7 @@
 {-config_load file=`$lg`.conf section="di8_geography"-}
 {-if $ctl_admingeo-}
-	<b onMouseOver="showtip('{-$dic.DBGeoEle[2]-}');">{-$dic.DBGeoEle[0]-}</b>
-	<div id="lst_ageo" class="dwin" style="width:600px; height:80px;">
+	<b onMouseOver="showtip('{-$dic.DBGeoEle[2]-}');">{-$dic.DBGeoEle[0]-}</b><br />
+	<div id="lst_ageo" class="dwin" style="width:100%; height:180px;">
 {-/if-}
 {-if $ctl_geolist-}
  {-if $lev <= $levmax-}
@@ -21,9 +21,9 @@
 	<br />
 	<span id="geostatusmsg" class="dlgmsg"></span><br />
 	<div id="divDBConfigGeographyStatus">
-		<span class="clsDBConfigGeographyStatus" id="msgDBConfigGeographyInsert">Geography was created correctly</span>
-		<span class="clsDBConfigGeographyStatus" id="msgDBConfigGeographyUpdate">Geography updated correctly</span>
-		<span class="clsDBConfigGeographyStatus" id="msgDBConfigGeographyError" ></span>
+		<span class="clsDBConfigGeographyStatus" id="msgDBConfigGeographyInsert">{-#msgDBConfigGeographyInsert#-}</span>
+		<span class="clsDBConfigGeographyStatus" id="msgDBConfigGeographyUpdate">{-#msgDBConfigGeographyUpdate#-}</span>
+		<span class="clsDBConfigGeographyStatus" id="msgDBConfigGeographyError" >{-#msgDBConfigGeographyError#-}</span>
 		<br />
 	</div>
 	<div id="geoaddsect" style="display:none; width:100%;">
@@ -71,12 +71,8 @@
 	-->
 {-/if-}
 {-** INFO AND ERRORS MESSAGES **-}
-{-if $ctl_msginsgeo-}
- {-#msginsgeo#-}
-{-elseif $ctl_errinsgeo-}
+{-if $ctl_errinsgeo-}
  {-#terror#-}[{-$insstatgeo-}]: {-#errinsgeo#-}
-{-elseif $ctl_msgupdgeo-}
- {-#msgupdgeo#-}
 {-elseif $ctl_errupdgeo-}
  {-#terror#-}[{-$updstatgeo-}]: {-#errupdgeo#-}
 {-/if-}
