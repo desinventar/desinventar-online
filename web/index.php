@@ -467,6 +467,7 @@ switch ($cmd) {
 						$ef1 = $us->q->queryLabelsFromGroup('Effect|People', $lg);
 						$ef2 = $us->q->queryLabelsFromGroup('Effect|Affected', $lg);
 						$ef3 = $us->q->queryLabelsFromGroup('Effect|Economic', $lg);
+						$ef4 = $us->q->queryLabelsFromGroup('Effect|More', $lg);
 						$sec = $us->q->queryLabelsFromGroup('Sector', $lg);
 						// Add some fields to customize lists
 						$ef1['EffectFarmingAndForest'] = $ef2['EffectFarmingAndForest'];
@@ -497,8 +498,8 @@ switch ($cmd) {
 						$t->assign('ef1', $ef1);
 						$t->assign('ef2', $ef2);
 						$t->assign('ef3', $ef3);
+						$t->assign('ef4', $ef4);
 						$t->assign('sec', $sec);
-						$t->assign('ef4', $us->q->queryLabelsFromGroup('Effect|More', $lg));
 						// DATA
 						$dc2 = array();
 						$dc2 = array_merge($dc2, $us->q->queryLabelsFromGroup('Disaster', $lg));
@@ -576,14 +577,8 @@ switch ($cmd) {
 						$t->assign('rc2', $us->q->queryLabelsFromGroup('Record|2', $lg));
 						$t->assign('eve', $us->q->queryLabelsFromGroup('Event', $lg));
 						$t->assign('cau', $us->q->queryLabelsFromGroup('Cause', $lg));
-						$t->assign('ef1', $us->q->queryLabelsFromGroup('Effect|People', $lg));
-						$t->assign('ef2', $us->q->queryLabelsFromGroup('Effect|Economic', $lg));
-						$t->assign('ef3', $us->q->queryLabelsFromGroup('Effect|Affected', $lg));
 						$sc3 = $us->q->querySecLabelFromGroup('Effect|Affected', $lg);
 						$t->assign('sc3', $sc3);
-						$t->assign('ef4', $us->q->queryLabelsFromGroup('Effect|More', $lg));
-						$t->assign('sec', $us->q->queryLabelsFromGroup('Sector', $lg));
-						//$t->assign('rcsl', $us->q->queryLabelsFromGroup('RecordStatus', $lg));
 						$t->assign('dmg', $us->q->queryLabelsFromGroup('MetGuide', $lg));
 						
 						// Geography Levels
