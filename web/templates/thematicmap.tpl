@@ -75,4 +75,6 @@
 			</div>
 		{-/foreach-}
 	</div>
+{-else-}
+	{-#msgMapNoData#-}
 {-/if-}
