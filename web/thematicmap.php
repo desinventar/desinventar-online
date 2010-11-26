@@ -8,26 +8,33 @@ require_once('include/loader.php');
 require_once('include/maps.class.php');
 require_once('include/diregion.class.php');
 
-function hex2dec($col) {
+function hex2dec($col)
+{
 	$h = str_split(substr($col, -6), 2);
-	return hexdec($h[0])." ". hexdec($h[1]) . " ". hexdec($h[2]);
+	return hexdec($h[0]) . ' ' . hexdec($h[1]) . ' ' . hexdec($h[2]);
 }
 
 // set hash with limits, legends and colors
-function setRanges($opc) {
+function setRanges($opc)
+{
 	$lim = $opc['_M+limit'];
 	$leg = $opc['_M+legend'];
 	$col = $opc['_M+color'];
-	$lmx = "10000000";
+	$lmx = '10000000';
 	$maxr = false;
 	// First range is No data
-	$range[0] = array(0, "= 0", "255 255 255");
+	$range[0] = array(0, '= 0', '255 255 255');
 	// generate range hash with limit, legend and color
-	for ($j = 0; $j < count($lim); $j++) {
-		if (isset($lim[$j])) {
-			if ($lim[$j] != "")
+	for ($j = 0; $j < count($lim); $j++)
+	{
+		if (isset($lim[$j]))
+		{
+			if ($lim[$j] != '')
+			{
 				$range[$j+1] = array($lim[$j], $leg[$j], hex2dec($col[$j]));
-			else {
+			}
+			else
+			{
 				$range[$j+1] = array($lmx, $leg[$j], hex2dec($col[$j]));
 				$maxr = true;
 			}
@@ -35,22 +42,21 @@ function setRanges($opc) {
 	}
 	// if not assigned, set last range between last number and infinit
 	if (!$maxr)
-		$range[$j+1] = array($lmx, (int)$lim[$j-1] + 1 . " -> ", "30 30 30");
+	{
+		$range[$j+1] = array($lmx, (int)$lim[$j-1] + 1 . ' -> ', '30 30 30');
+	}
 	return $range;
 }
 
 $post = $_POST;
 $get = $_GET;
 
-if (isset($post['_REG']) && !empty($post['_REG']))
-	$reg = $post['_REG'];
-elseif (isset($get['r']) && !empty($get['r']))
-	$reg = $get['r'];
-else
+$RegionId = getParameter('_REG',getParameter('r',''));
+if ($RegionId == '') {
 	exit();
+}
 
-$us->open($reg);
-
+$us->open($RegionId);
 fixPost($post);
 
 $dic = array();
@@ -58,10 +64,11 @@ $dic = array_merge($dic, $us->q->queryLabelsFromGroup('MapOpt', $lg));
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Sector', $lg));
 
-if (isset($post['_M+cmd'])) {
+if (isset($post['_M+cmd']))
+{
 	// Process QueryDesign Fields and count results
 	$qd	= $us->q->genSQLWhereDesconsultar($post);
-	$dic = array_merge($dic, $us->q->getEEFieldList("True"));
+	$dic = array_merge($dic, $us->q->getEEFieldList('True'));
 	$sqc = $us->q->genSQLSelectCount($qd);
 	$c	 = $us->q->getresult($sqc);
 	$NumberOfRecords = $c['counter'];
@@ -69,28 +76,32 @@ if (isset($post['_M+cmd'])) {
 	$range = setRanges($post);
 	// Data Options Interface
 	$opc['Group'] = array($post['_M+Type']);
-	$lev = explode("|", $post['_M+Type']);
+	$lev = explode('|', $post['_M+Type']);
 	$opc['Field'] = $post['_M+Field'];
 	$sql = $us->q->genSQLProcess($qd, $opc);
 	// Apply Order fields to order legend too
-	$v = explode("|", $opc['Field']);
-	if ($v[0] == "D.DisasterId")
-		$v[0] = "D.DisasterId_";
-	$sql .= " ORDER BY ". substr($v[0],2) ." ASC";
+	$v = explode('|', $opc['Field']);
+	if ($v[0] == 'D.DisasterId')
+	{
+		$v[0] = 'D.DisasterId_';
+	}
+	$sql .= ' ORDER BY '. substr($v[0],2) .' ASC';
 	$info = $us->q->getQueryDetails($dic, $post);
+	$info['NumberOfRecords'] = $NumberOfRecords;
 	// get query results
 	$dislist = $us->q->getassoc($sql);
 	//$gitem = $us->q->getGeoCartoItems();
 	// generate map
-	$dl = $us->q->prepareList($dislist, "MAPS");
+	$dl = $us->q->prepareList($dislist, 'MAPS');
 	// MAPS Query, RegionId, Level, datalist, ranges, dbinfo, label, maptype
-	$m = new Maps($us, $reg, $lev[0], $dl, $range, $info, $post['_M+Label'], $post['_M+Transparency'], "THEMATIC");	
+	$m = new Maps($us, $RegionId, $lev[0], $dl, $range, $info, $post['_M+Label'], $post['_M+Transparency'], 'THEMATIC');	
 	$rinf = new DIRegion($us);
 	$info['RECORDS'] = showStandardNumber($NumberOfRecords);
 	$rgl[0]['regname'] = $rinf->get('RegionLabel');
 	$rgl[0]['info'] = $info;
 	// if valid filename then prepare interface to view MAPFILE	
-	if (strlen($m->filename()) > 0) {
+	if (strlen($m->filename()) > 0)
+	{
 		$lon = 0;
 		$lat = 0;
 		$minx = $rinf->get('GeoLimitMinX');
@@ -102,32 +113,39 @@ if (isset($post['_M+cmd'])) {
 		$t->assign('miny', $miny);
 		$t->assign('maxy', $maxy);
 		// set center
-		if (!empty($minx) && !empty($miny) && !empty($maxx) && !empty($maxy)) {
+		if (!empty($minx) && !empty($miny) && !empty($maxx) && !empty($maxy))
+		{
 			$lon = (int) (($minx + $maxx) / 2);
 			$lat = (int) (($miny + $maxy) / 2);
 			$aln[] = $minx;	$aln[] = $maxx;
 			$alt[] = $miny; $alt[] = $maxy;
 		}
-		else {
+		else
+		{
 			$aln[] = 0;
 			$alt[] = 0;
 		}
 		$lnl[] = $lon;
 		$ltl[] = $lat;
-		$myly = "";
-		if (isset($dl['CVReg'])) {
-			foreach (array_unique($dl['CVReg']) as $it) {
-				$myly .= $it ."effects,";
+		$myly = '';
+		if (isset($dl['CVReg']))
+		{
+			foreach (array_unique($dl['CVReg']) as $it)
+			{
+				$myly .= $it .'effects,';
 			}
 			$myly = substr($myly, 0, -1);
-		} else {
-			$myly = "effects";
+		}
+		else
+		{
+			$myly = 'effects';
 		}
 		$rgl[0]['ly1'] = $myly;
 		$rgl[0]['lv'] = $lev[0];
 		$rgl[0]['map'] = str_replace('\\','/',$m->filename());
 	}
-	if (isset($lnl) && isset($ltl)) {
+	if (isset($lnl) && isset($ltl))
+	{
 		$t->assign('lon', array_sum($lnl)/count($lnl));
 		$t->assign('lat', array_sum($ltl)/count($ltl));
 		$zln = abs(max($aln) - min($aln));
@@ -153,11 +171,13 @@ if (isset($post['_M+cmd'])) {
 	$txtMapVariable = '';
 	
 	// Manually Processed Data
-	foreach($info2 as $key => $value) {
+	foreach($info2 as $key => $value)
+	{
 		$value = trim($value);
 		$info2[$key] = $value;
 	}
-	if ($info2['TITLE'] != '') {
+	if ($info2['TITLE'] != '')
+	{
 		$value = $info2['TITLE'];
 		$title = $mapinfodic['MapInfoTITLE'][0];
 		//$txtMapTitle = $title . ' ' . strtolower($value);
@@ -167,9 +187,11 @@ if (isset($post['_M+cmd'])) {
 	}
 
 	$ImageRows = 0;
-	foreach($info2 as $key => $value) {
+	foreach($info2 as $key => $value)
+	{
 		$info2[$key] = $value;
-		if ($value != '') {
+		if ($value != '')
+		{ 
 			$ImageRows++;
 			$title = $mapinfodic['MapInfo' . $key][0];
 			$infoTranslated[$key] = $title . ': ' . $value;
@@ -200,8 +222,10 @@ if (isset($post['_M+cmd'])) {
 	imagefill($imgMapInfo, 0,0, $white);
 	
 	$y = 0;
-	foreach($infoTranslated as $key => $item) {
-		if ( ($key != 'TITLE') && ($key != 'TITLE2') ) {
+	foreach($infoTranslated as $key => $item)
+	{
+		if ( ($key != 'TITLE') && ($key != 'TITLE2') )
+		{
 			imagettftext($imgMapInfo, 10, 0, 0, ($sy + 2) * ($y + 1), $black, 'arial', $item);
 			$y++;
 		}
@@ -212,29 +236,31 @@ if (isset($post['_M+cmd'])) {
 	//$t->assign('mapinfoimg', WWWDATA . '/' . $MapInfoImg);
 	
 	$mapfile = str_replace('\\', '/', $m->filename());
-	$worldmap = str_replace('\\','/', MAPDIR . "/worldmap.map");
+	$worldmap = str_replace('\\','/', MAPDIR . '/worldmap.map');
 	$timestamp = microtime(true);
-	$sLegendURL = "/cgi-bin/". MAPSERV ."?map=" . rawurlencode($mapfile) . "&SERVICE=WMS&VERSION=1.1.1".
-				"&REQUEST=getlegendgraphic&LAYER=". substr($myly, 0, 12) ."&FORMAT=image/png" . '&t=' . $timestamp;
+	$sLegendURL = '/cgi-bin/'. MAPSERV .'?map=' . rawurlencode($mapfile) . '&SERVICE=WMS&VERSION=1.1.1'.
+				'&REQUEST=getlegendgraphic&LAYER='. substr($myly, 0, 12) .'&FORMAT=image/png' . '&t=' . $timestamp;
 	$t->assign('legend', $sLegendURL);	
 	// 2009-09-10 (jhcaiced) Replace backslash chars to slash, when passing data to mapserver
-	if ($post['_M+cmd'] == "export") {
+	if ($post['_M+cmd'] == 'export')
+	{
 		$w = 1000;
 		$h = 756;
-		$size = "1000756";
-		$base = "/cgi-bin/". MAPSERV ."?map=". rawurlencode($worldmap) . "&SERVICE=WMS&VERSION=1.1.1".
-			"&layers=base&REQUEST=getmap&STYLES=&SRS=EPSG:900913&BBOX=". $post['_M+extent'].
-			"&WIDTH=". $w ."&HEIGHT=". $h ."&FORMAT=image/png" . '&t=' . $timestamp;
-		$bf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $base);
-		$url1 = "/cgi-bin/". MAPSERV ."?map=". rawurlencode($mapfile) ."&SERVICE=WMS&VERSION=1.1.1".
-			"&layers=". $post['_M+layers'] ."&REQUEST=getmap&STYLES=&SRS=EPSG:900913".
-			"&BBOX=". $post['_M+extent']."&WIDTH=". $w ."&HEIGHT=". $h ."&FORMAT=image/png" . '&t=' . $timestamp;
-		$mf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $url1);
-		if ($mf) {
+		$size = '1000756';
+		$base = '/cgi-bin/'. MAPSERV .'?map='. rawurlencode($worldmap) . '&SERVICE=WMS&VERSION=1.1.1'.
+			'&layers=base&REQUEST=getmap&STYLES=&SRS=EPSG:900913&BBOX='. $post['_M+extent'].
+			'&WIDTH='. $w .'&HEIGHT='. $h .'&FORMAT=image/png' . '&t=' . $timestamp;
+		$bf = file_get_contents('http://'. $_SERVER['HTTP_HOST'] . $base);
+		$url1 = '/cgi-bin/'. MAPSERV .'?map='. rawurlencode($mapfile) .'&SERVICE=WMS&VERSION=1.1.1'.
+			'&layers='. $post['_M+layers'] .'&REQUEST=getmap&STYLES=&SRS=EPSG:900913'.
+			'&BBOX='. $post['_M+extent'].'&WIDTH='. $w .'&HEIGHT='. $h .'&FORMAT=image/png' . '&t=' . $timestamp;
+		$mf = file_get_contents('http://'. $_SERVER['HTTP_HOST'] . $url1);
+		if ($mf)
+		{
 			$ibas = imagecreatefromstring($bf);
 			$imap = imagecreatefromstring($mf);
 			// Download and include legend
-			$lf = file_get_contents("http://". $_SERVER['HTTP_HOST'] . $sLegendURL);
+			$lf = file_get_contents('http://'. $_SERVER['HTTP_HOST'] . $sLegendURL);
 			$imgTmp = imagecreatefromstring($lf);
 			$fontsize = 11;
 			$sx = imagesx($imgTmp);
@@ -267,21 +293,25 @@ if (isset($post['_M+cmd'])) {
 			$x = $wt - 2 - $x;
 			$y = $ht - imagesy($imgMapInfo) - 4;
 			imagettftext($im, $fontsize, 0, $x, $y, $black, $font,  $mapfooter);
-			header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $rinf->get('RegionLabel')) ."_ThematicMap.png");
+			header('Content-Disposition: attachment; filename=DI8_'. str_replace(' ', '', $rinf->get('RegionLabel')) .'_ThematicMap.png');
 			imagepng($im);
 			imagedestroy($imap);
 			imagedestroy($imgMapLegend);
 			imagedestroy($im);
 		}
-	} else {
+	}
+	else
+	{
 		$t->assign('ctl_showres', true);
 	}
 	imagedestroy($imgMapInfo);
-} elseif (isset($get['cmd']) && $get['cmd'] == "getkml") {
+}
+elseif (isset($get['cmd']) && $get['cmd'] == 'getkml')
+{
 	// Send KML file - GoogleEarth
-	header("Content-type: text/kml");
-	header("Content-Disposition: attachment; filename=DI8_". str_replace(" ", "", $reg) ."_ThematicMap.kml");
-	$m = new Maps($us, $reg, null, null, null, null, null, null, "KML");
+	header('Content-type: text/kml');
+	header('Content-Disposition: attachment; filename=DI8_'. str_replace(' ', '', $RegionId) .'_ThematicMap.kml');
+	$m = new Maps($us, $RegionId, null, null, null, null, null, null, 'KML');
 	echo $m->printKML();
 	$fh = fopen('/tmp/map.kml','w+');
 	fputs($fh, $m->printKML());
@@ -289,9 +319,7 @@ if (isset($post['_M+cmd'])) {
 	exit();
 }
 
-
-$t->assign('reg', $reg);
-//$t->assign ("dic", $dic);
+$t->assign('reg', $RegionId);
 $t->assign('basemap', $worldmap);
 $t->assign('mps', MAPSERV);
 $t->display('thematicmap.tpl');

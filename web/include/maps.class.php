@@ -21,30 +21,31 @@ class Maps {
 	   trans : Transparency %
 	   type	: filename, THEMATIC, SELECT, KML
   */
-	function Maps($us, $reg, $lev, $dl, $range, $info, $lbl, $trans, $type) {
+	function Maps($us, $reg, $lev, $dl, $range, $info, $lbl, $prmTransparency, $type) {
 		$this->url = "http://". $_SERVER['HTTP_HOST'] ."/cgi-bin/". MAPSERV ."?";
 		$this->reg = $reg;
 		$fp = "";
-		if ($type == "KML")
+		if ($type == "KML") {
 			$this->kml = $this->generateKML($us, $reg, $info);
-		else {
+		} else {
 			$map = "## DesInventar mapfile\n";
 			$map .= $this->setHeader($us, $reg, $info, $type);
 			$gl = $us->q->loadGeoLevels('', -1, true);
 			$map .= $this->setLayerAdm($gl, $reg, $type);
 			// mapfile and html template to interactive selection
-			if ($type == "SELECT")
+			if ($type == "SELECT") {
 				$fp = DATADIR ."/database/". $reg . "/region.map";
-			else {
+			} else {
 				// generate effects maps: type=filename | thematic=sessid
 				$fp = TMPM_DIR ."/di8ms_";
-				$map .= $this->setLayerEff($us, $reg, $lev, $dl, $range, $info, $lbl, $trans);
-				if ($type == "THEMATIC")
+				$map .= $this->setLayerEff($us, $reg, $lev, $dl, $range, $info, $lbl, $prmTransparency);
+				if ($type == "THEMATIC") {
 					$fp .= "$reg-". session_id() . '_' . time() . '.map';
-				elseif (strlen($type) > 0)
+				} elseif (strlen($type) > 0) {
 					$fp .= "$reg-$type.map";
-				else
+				} else {
 					exit();
+				}
 			}
 			$map .= $this->setFooter();
 			$this->makefile($fp, $map);
@@ -194,7 +195,7 @@ class Maps {
 	}
 	
 	// Generate standard layer with query results
-	function setLayerEff($us, $reg, $lev, $dl, $range, $inf, $lbl, $trans) {
+	function setLayerEff($us, $reg, $lev, $dl, $range, $inf, $lbl, $prmTransparency) {
 		$gl = $us->q->loadGeoLevels('', $lev, true);
 		$map = "";
 		foreach ($gl[$lev][2] as $ly) {
@@ -213,7 +214,7 @@ class Maps {
 		STATUS	ON
 		TYPE	POLYGON
 		PROJECTION	"init=epsg:4326" END
-		TRANSPARENCY	'. $trans .'
+		TRANSPARENCY	'. $prmTransparency .'
 		CLASSITEM	"'. $code .'"
 		LABELITEM	"'. $name .'"
 		METADATA
