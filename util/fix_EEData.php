@@ -10,6 +10,7 @@
 	require_once(BASE . '/include/diregion.class.php');
 	
 	$RegionId = 'GAR-ISDR-2011_ARG';
+	$RegionId = 'DESINV-1249040429-can_subregion_andina';
 	$us->login('diadmin','di8');
 	$us->open($RegionId,'desinventar.db');
 	//$r = new DIRegion($us, $RegionId);
