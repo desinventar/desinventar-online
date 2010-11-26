@@ -10,14 +10,16 @@ require_once('include/graphic.class.php');
 
 
 $reg = getParameter('_REG','');
-
-if ($reg == '') {
+if ($reg == '')
+{
 	exit();
 }
 
 $us->open($reg);
-foreach($_POST['prmGraph']['Field'] as $key => $value) {
-	if ($value == '') {
+foreach($_POST['prmGraph']['Field'] as $key => $value)
+{
+	if ($value == '')
+	{
 		unset($_POST['prmGraph']['Field'][$key]);
 		unset($_POST['prmGraph']['Scale'][$key]);
 		unset($_POST['prmGraph']['Data'][$key]);
@@ -31,7 +33,8 @@ $RegionLabel = $r->getRegionInfoValue('RegionLabel');
 $t->assign('RegionLabel', $RegionLabel);
 fixPost($post);
 // load levels to display in totalizations
-foreach ($us->q->loadGeoLevels('', -1, false) as $k=>$i) {
+foreach ($us->q->loadGeoLevels('', -1, false) as $k=>$i)
+{
 	$st['GraphGeographyId_'. $k] = array($i[0], $i[1]);
 } //foreach
 
@@ -43,7 +46,8 @@ $dic = array_merge($dic, $us->q->getEEFieldList('True'));
 //$t->assign ('dic', $dic);
 $prmGraph = $post['prmGraph'];
 $GraphCommand = $prmGraph['Command'];
-if ($GraphCommand != '') {
+if ($GraphCommand != '')
+{
 	// Process QueryDesign Fields and count results
 	$qd  = $us->q->genSQLWhereDesconsultar($post);
 	$sqc = $us->q->genSQLSelectCount($qd);	
@@ -52,23 +56,38 @@ if ($GraphCommand != '') {
 	$t->assign ('NumRecords', $NumRecords);
 
 	$prmGraph['SubType'] = (int)$prmGraph['SubType'];
-	if ($prmGraph['SubType'] == GRAPH_HISTOGRAM_TEMPORAL) {
+	if ($prmGraph['SubType'] == GRAPH_HISTOGRAM_TEMPORAL)
+	{
 		$prmGraph['VarList'] = 'D.DisasterBeginTime';
-	} elseif ($prmGraph['SubType'] == GRAPH_HISTOGRAM_EVENT) {
+	}
+	elseif ($prmGraph['SubType'] == GRAPH_HISTOGRAM_EVENT)
+	{
 		$prmGraph['VarList'] = 'D.DisasterBeginTime|D.EventId';
-	} elseif ($prmGraph['SubType'] == GRAPH_HISTOGRAM_CAUSE) {
+	}
+	elseif ($prmGraph['SubType'] == GRAPH_HISTOGRAM_CAUSE)
+	{
 		$prmGraph['VarList'] = 'D.DisasterBeginTime|D.CauseId';
-	} elseif ($prmGraph['SubType'] == GRAPH_COMPARATIVE_EVENT) {
+	}
+	elseif ($prmGraph['SubType'] == GRAPH_COMPARATIVE_EVENT)
+	{
 		$prmGraph['VarList'] = 'D.EventId';
-	} elseif ($prmGraph['SubType'] == GRAPH_COMPARATIVE_CAUSE) {
+	}
+	elseif ($prmGraph['SubType'] == GRAPH_COMPARATIVE_CAUSE)
+	{
 		$prmGraph['VarList'] = 'D.CauseId';
-	} elseif (($prmGraph['SubType'] >= 100) && ($prmGraph['SubType'] < 200) ) {
+	}
+	elseif (($prmGraph['SubType'] >= 100) && ($prmGraph['SubType'] < 200) )
+	{
 		$k = $prmGraph['SubType'] - 100;
 		$prmGraph['VarList'] = 'D.DisasterBeginTime|D.GeographyId_' . $k;
-	} elseif ($prmGraph['SubType'] >= 200) {
+	}
+	elseif ($prmGraph['SubType'] >= 200)
+	{
 		$k = $prmGraph['SubType'] - 200;
 		$prmGraph['VarList'] = 'D.GeographyId_' . $k;
-	} else {
+	}
+	else
+	{
 		$prmGraph['VarList'] = $prmGraph['SubType'];
 	}
 	$post['prmGraph'] = $prmGraph;
@@ -78,18 +97,26 @@ if ($GraphCommand != '') {
 
 	// Process Configuration options to Graphic
 	$ele = array();
-	foreach (explode('|', $prmGraph['VarList']) as $itm) {
-		if ($itm == 'D.DisasterBeginTime') {
+	foreach (explode('|', $prmGraph['VarList']) as $itm)
+	{
+		if ($itm == 'D.DisasterBeginTime')
+		{
 			// Histogram
-			if (isset($prmGraph['Stat']) && strlen($prmGraph['Stat'])>0) {
+			if (isset($prmGraph['Stat']) && strlen($prmGraph['Stat'])>0)
+			{
 				$ele[] = $prmGraph['Stat'] .'|'. $itm;
-			} else {
+			}
+			else
+			{
 				$ele[] = $prmGraph['Period'] .'|'. $itm;
 			}
-		} elseif (substr($itm, 2, 11) == 'GeographyId') {
+		} elseif (substr($itm, 2, 11) == 'GeographyId')
+		{
 			$gl = explode('_', $itm);
 			$ele[] = $gl[1] .'|'. $gl[0];// '0|$itm'; 
-		} else {
+		}
+		else
+		{
 			$ele[] = '|'. $itm;
 		}
 	} // foreach
@@ -101,33 +128,41 @@ if ($GraphCommand != '') {
 	/*	
 	// Try to find the X Axis Field to Use (DisasterBeginTime)
 	$XAxisField = '';
-	foreach($ele as $XAxisItem) {
+	foreach($ele as $XAxisItem)
+	{
 		$fl = explode('|', $XAxisItem);
-		if (substr($fl[1],2) == 'DisasterBeginTime') {
+		if (substr($fl[1],2) == 'DisasterBeginTime')
+		{
 			$XAxisField = $us->q->getGroupFieldName($XAxisItem);
 		}
 	}
 	$ResultData = array();
-	foreach($post['FieldList'] as $GraphVariable) {
+	foreach($post['FieldList'] as $GraphVariable)
+	{
 		$VariableName = substr($GraphVariable,0,strpos($GraphVariable,'|'));
 		$opc['Group'] = $ele;
 		$opc['Field'] = $GraphVariable;
 		$sql = $us->q->genSQLProcess($qd, $opc);
 		$TmpData = $us->q->getassoc($sql);
-		foreach($TmpData as $DataItem) {
+		foreach($TmpData as $DataItem)
+		{
 			$Index = $DataItem[$XAxisField];
-			foreach($DataItem as $Key => $Value) {
+			foreach($DataItem as $Key => $Value)
+			{
 				$ResultData[$Index][$Key] = $Value;
 			} //foreach
 		}
 	}
 	
 	// Complete Data Series, fill with zeros...
-	foreach($post['FieldList'] as $GraphVariable) {
+	foreach($post['FieldList'] as $GraphVariable)
+	{
 		$VariableName = substr($GraphVariable,0,strpos($GraphVariable,'|'));
 		$VariableName = substr($VariableName, 2);
-		foreach($ResultData as $XAxis => $DataItem) {
-			if (! array_key_exists($VariableName, $DataItem)) {
+		foreach($ResultData as $XAxis => $DataItem)
+		{
+			if (! array_key_exists($VariableName, $DataItem))
+			{
 				$ResultData[$XAxis][$VariableName] = 0;
 			}
 		}
@@ -141,24 +176,36 @@ if ($GraphCommand != '') {
 	$opc['Field'] = $prmGraph['Field'];
 	$sql = $us->q->genSQLProcess($qd, $opc);
 	$dislist = $us->q->getassoc($sql);
-	if (!empty($dislist)) {
+	if (!empty($dislist))
+	{
 		// Process results data
 		$dl = $us->q->prepareList($dislist, 'GRAPH');
 		$gl = array();
 		// Translate Labels to Selected Language
-		foreach ($dl as $k=>$i) {
+		foreach ($dl as $k=>$i)
+		{
 			$kk = substr($k, 0, -1); // Select Hay marked like EffectsXX_
 			$k2 = substr($k, 2);
 			if (isset($dic['Graph'. $k][0]))
+			{
 				$dk = $dic['Graph'. $k][0];
+			}
 			elseif (isset($dic['Graph'. $k2][0]))
+			{
 				$dk = $dic['Graph'. $k2][0];
+			}
 			elseif (isset($dic[$k][0]))
+			{
 				$dk = $dic[$k][0];
+			}
 			elseif (isset($dic[$kk][0]))
+			{
 				$dk = $dic[$kk][0];
+			}
 			else
+			{
 				$dk = $k;
+			}
 			$gl[$dk] = $i;
 		}
 		// Construct Graphic Object and Show Page
@@ -166,8 +213,10 @@ if ($GraphCommand != '') {
 		// Wrote graphic to file
 		$g->Stroke($sImageFile);
 	}
-	if ($NumRecords > 0) {
-		if ($GraphCommand == 'export') {
+	if ($NumRecords > 0)
+	{
+		if ($GraphCommand == 'export')
+		{
 			// Export Graph as a Image
 			header('Content-type: Image/png');
 			header('Content-Disposition: attachment; filename=DI8_'. str_replace(' ', '', $RegionLabel) .'_Graphic.png');
@@ -178,7 +227,9 @@ if ($GraphCommand != '') {
 			header('Pragma: no-cache');
 			readfile($sImageFile);
 			exit();
-		} else {
+		}
+		else
+		{
 			// Display Graph in Browser
 			$t->assign('qdet', $us->q->getQueryDetails($dic, $post));
 			$t->assign('image', $sImageURL . '?'. rand(1,3000));
