@@ -8,14 +8,13 @@ require_once('include/loader.php');
 require_once('include/diregion.class.php');
 require_once('include/graphic.class.php');
 
-
-$reg = getParameter('_REG','');
-if ($reg == '')
+$RegionId = getParameter('_REG','');
+if ($RegionId == '')
 {
 	exit();
 }
-
-$us->open($reg);
+fb($_POST);
+$us->open($RegionId);
 foreach($_POST['prmGraph']['Field'] as $key => $value)
 {
 	if ($value == '')
@@ -28,7 +27,7 @@ foreach($_POST['prmGraph']['Field'] as $key => $value)
 	}
 }
 $post = $_POST;
-$r = new DIRegion($us, $reg);
+$r = new DIRegion($us, $RegionId);
 $RegionLabel = $r->getRegionInfoValue('RegionLabel');
 $t->assign('RegionLabel', $RegionLabel);
 fixPost($post);
