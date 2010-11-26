@@ -432,6 +432,7 @@
 "dc_thematicmap","trepnum","Número de fichas","Reports","Formulários","Cartes de données"
 "dc_thematicmap","tgetgearth","Ver en GoogleEarth","View in GoogleEarth","Ver em GoogleEarth","Voir dans GoogleEarth"
 "dc_thematicmap","lev","Nivel","Level","Nível","Niveau"
+"dc_thematicmap","msgMapNoData","Sin datos","No data","Sem dados","Sans aucune donnée"
 "dc_graphic","ttitle","Gráficos","Methodological guide summarize","Resumo Guia metodológico","Résumé Guide méthodologique"
 "dc_graphic","trepnum","Número de fichas","Reports","Formulários","Cartes de données"
 "dc_graphic","tnodata","Sin datos","No data","Sem dados","Sans aucune donnée"
