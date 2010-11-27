@@ -20,7 +20,8 @@ function onReadyMain() {
 				function(data) {
 					jQuery('#dcr').html(data);
 					onReadyData();
-					onReadyThematicMap();
+					//onReadyThematicMap();
+					createThematicMap();
 					onReadyStatistic();
 				}
 			);
