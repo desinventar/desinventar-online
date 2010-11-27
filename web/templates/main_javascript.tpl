@@ -507,7 +507,6 @@
 								},
 								{text:'{-#tsend#-}',
 									handler: function() {
-										setfocus('_M+limit[0]');
 										if (sendMap("result")) {
 											$('DCRes').value = "M";
 											mapw.hide();
@@ -539,59 +538,6 @@
 		
 		// end ExtJS object
 
-		function addRowToTable() {
-			var tbl = $('tbl_range');
-			var lastRow = tbl.rows.length;
-			// if there's no header row in the table, then iteration = lastRow + 1
-			var iteration = lastRow;
-			var row = tbl.insertRow(lastRow);
-			var cellBeg = row.insertCell(0);
-			var textNode = document.createTextNode(iteration + 1);
-			cellBeg.appendChild(textNode);
-			// left cell
-			var cellLeft = row.insertCell(1);
-			var lim = document.createElement("input");
-			lim.setAttribute('type', 'text');
-			lim.setAttribute('size', '5');
-			lim.setAttribute('class', 'line');
-			lim.setAttribute('name', '_M+limit['+ iteration +']');
-			lim.setAttribute('id', '_M+limit['+ iteration +']');
-			lim.setAttribute('onBlur', "miv=parseInt($('_M+limit["+ iteration -1+"]').value)+1; $('_M+legend["+ iteration +"]').value='{-#mbetween#-} '+ miv +' - '+ this.value;");
-			cellLeft.appendChild(lim);
-			// center cell
-			var cellCenter = row.insertCell(2);
-			var leg = document.createElement('input');
-			leg.setAttribute('type', 'text');
-			leg.setAttribute('size', '20');
-			leg.setAttribute('class', 'line');
-			leg.setAttribute('name', '_M+legend['+ iteration +']');
-			leg.setAttribute('id', '_M+legend['+ iteration +']');
-			cellCenter.appendChild(leg);
-			// right cell
-			var cellRight = row.insertCell(3);
-			var ic = document.createElement('input');
-			ic.setAttribute('type', 'text');
-			ic.setAttribute('size', '3');
-			ic.setAttribute('class', 'line');
-			ic.setAttribute('id', '_M+ic['+ iteration +']');
-			ic.setAttribute('style', 'background:#00ff00;');
-			ic.setAttribute('onClick', "showColorGrid2('_M+color["+ iteration +"]','_M+ic["+ iteration +"]');");
-			cellRight.appendChild(ic);
-			var col = document.createElement('input');
-			col.setAttribute('type', 'hidden');
-			col.setAttribute('name', '_M+color['+ iteration +']');
-			col.setAttribute('id', '_M+color['+ iteration +']');
-			col.setAttribute('value', '00ff00;');
-			cellRight.appendChild(col);
-		}
-		
-		function removeRowFromTable() {
-			var tbl = $('tbl_range');
-			var lastRow = tbl.rows.length;
-			if (lastRow > 2)
-				tbl.deleteRow(lastRow - 1);
-		}
-		
 		function setTotalize(lnow, lnext) {
 			var sour = $(lnow);
 			var dest = $(lnext);
@@ -613,39 +559,6 @@
 				}
 			} //for
 		} //function
-		
-		function dechex(dec) {
-			var Char_hexadecimales = "0123456789ABCDEF";
-			var low = dec % 16;
-			var high = (dec - low)/16;
-			hex = "" + Char_hexadecimales.charAt(high) + Char_hexadecimales.charAt(low);
-			return hex;
-		}
-		
-		function hexdec(hex) {
-			return parseInt(hex,16);
-		}
-		
-		function genColors() {
-			var tbl = $('tbl_range');
-			var cnt = tbl.rows.length - 1;
-			var a = $('_M+color[0]').value;
-			var z = $('_M+color['+ cnt +']').value;
-			var a1 = hexdec(a.substring(1,3));	var z1 = hexdec(z.substring(1,3));
-			var a2 = hexdec(a.substring(3,5));	var z2 = hexdec(z.substring(3,5));
-			var a3 = hexdec(a.substring(5,7));	var z3 = hexdec(z.substring(5,7));
-			var m1 = ((z1 - a1) / cnt);
-			var m2 = ((z2 - a2) / cnt);
-			var m3 = ((z3 - a3) / cnt);
-			for (i=1; i <= cnt; i++) {
-				h1 = dechex(a1 + (m1 * i));
-				h2 = dechex(a2 + (m2 * i));
-				h3 = dechex(a3 + (m3 * i));
-				val = "#" + h1 + h2 + h3;
-				$('_M+color['+ i + ']').value = val;
-				$('_M+ic['+ i + ']').style.backgroundColor = val;
-			} //for
-		}
 		
 		function setAdvQuery(value, ope) {
 			$('CusQry').value += value + ' ';
