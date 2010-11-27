@@ -2,7 +2,7 @@
 
 function onReadyThematicMap()
 {
-	createThematicMap();
+	//createThematicMap();
 } //onReadyThematicMap()
 
 function createThematicMap()
