@@ -10,7 +10,7 @@ if (! isset($_SERVER['DI8_WEB'])) {
 
 // This is the version of the software
 define('MAJORVERSION', '2010');
-define('MINORVERSION', '332');
+define('MINORVERSION', '333');
 define('VERSION'     , MAJORVERSION . '.' . MINORVERSION);
 define('INTVERSION'  , '8.2.2.05');
 define('JSVERSION'   , '2010-11-28.01');
