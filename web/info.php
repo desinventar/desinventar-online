@@ -8,26 +8,37 @@ require_once('include/loader.php');
 require_once('include/diobject.class.php');
 require_once('include/diregion.class.php');
 
-function getRAPermList($lst) {
+function getRAPermList($lst)
+{
 	$dat = array();
-	foreach ($lst as $k=>$v) {
-		if ($v=='NONE' || $v=='USER' || $v=='OBSERVER' || $v=='SUPERVISOR') {
+	foreach ($lst as $k=>$v)
+	{
+		if ($v=='NONE' || $v=='USER' || $v=='OBSERVER' || $v=='SUPERVISOR')
+		{
 			$dat[$k] = $v;
 		}
 	}
 	return $dat;
 }
 
-function form2data($form) {
+function form2data($form)
+{
 	$dat = array();
-	foreach ($form as $key=>$value) {
+	foreach ($form as $key=>$value)
+	{
 		$k = explode('_', $key);
-		if (count($k) == 1) {
+		if (count($k) == 1)
+		{
 			$dat[$key] = $value;
-		} elseif (count($k) == 2) {
-			if (empty($k[1])) {
+		}
+		elseif (count($k) == 2)
+		{
+			if (empty($k[1]))
+			{
 				$dat[$k[0]] = $value;
-			} elseif (empty($k[0])) {
+			}
+			elseif (empty($k[0]))
+			{
 				$dat[$k[1]] = $value;
 			}
 		}
@@ -39,11 +50,13 @@ $post = $_POST;
 $get = $_GET;
 $RegionId = getParameter('_REG', getParameter('r', getParameter('RegionId','')));
 $cmd  = getParameter('_infocmd', getParameter('cmd',''));
-if ($RegionId == '') {
+if ($RegionId == '')
+{
 	exit();
 }
 $us->open($RegionId);
-switch($cmd) {
+switch($cmd)
+{
 	case 'cmdDBInfoUpdate':
 		// EDIT REGION: Form to Create and assign regions
 		$ifo = 0;
@@ -56,17 +69,22 @@ switch($cmd) {
 		$r->setFromArray($_POST);
 		// Set Translated Info
 		$tf = $r->getTranslatableFields();
-		foreach($tf as $FieldName => $FieldType) {
+		foreach($tf as $FieldName => $FieldType)
+		{
 			$r->set($FieldName, $data[$LangIsoCode][$FieldName], $LangIsoCode);
 			$r->set($FieldName, $data['eng'][$FieldName],'eng');
 		}
 		$ifo = $r->update();
-		if (!iserror($ifo)) {
+		if (!iserror($ifo))
+		{
 			$t->assign('ctl_msgupdinfo', true);
-			if (isset($_FILES['logofile']) && $_FILES['logofile']['error'] == UPLOAD_ERR_OK) {
+			if (isset($_FILES['logofile']) && $_FILES['logofile']['error'] == UPLOAD_ERR_OK)
+			{
 				move_uploaded_file($_FILES['logofile']['tmp_name'], VAR_DIR . '/database/' . $RegionId . '/logo.png');
 			}
-		} else {
+		}
+		else
+		{
 			$t->assign('ctl_errupdinfo', true);
 			$t->assign('updstatinfo', $ifo);
 		}
@@ -74,14 +92,16 @@ switch($cmd) {
 	case 'cmdDBInfoEdit':
 		$UserRole = $us->getUserRole($RegionId);
 		// DISPLAY REGION INFO
-		if ($UserRole == 'OBSERVER') {
+		if ($UserRole == 'OBSERVER')
+		{
 			$t->assign('ro', 'disabled');
 		}
 		$r = new DIRegion($us, $RegionId);
 		$lang = array();
 		$lang[0] = $r->get('LangIsoCode');
 		$lang[1] = 'eng';
-		foreach ($lang as $lng) {
+		foreach ($lang as $lng)
+		{
 			$info[$lng]['InfoCredits'] 		= array($r->get('InfoCredits'    , $lng), 'TEXT');
 			$info[$lng]['InfoGeneral'] 		= array($r->get('InfoGeneral'    , $lng), 'TEXT');
 			$info[$lng]['InfoSources'] 		= array($r->get('InfoSources'    , $lng), 'TEXT');
@@ -118,9 +138,12 @@ switch($cmd) {
 	case 'cmdDBInfoRoleUpdate':
 		// Set Role in RegionAuth
 		$rol = $us->setUserRole($get['UserId'], $RegionId, $get['AuthAuxValue']);
-		if (!iserror($rol)) {
+		if (!iserror($rol))
+		{
 			$t->assign('ctl_msgupdrole', true);
-		} else {
+		}
+		else
+		{
 			$t->assign('ctl_errupdrole', true);
 			$t->assign('updstatrole', showerror($rol));
 		}
@@ -133,9 +156,12 @@ switch($cmd) {
 		$stat = 1;
 		//2009-07-06 (jhcaiced) Replace this with another class...
 		//$stat = $r->insertRegLog($get['DBLogType'], $get['DBLogNotes']);
-		if (!iserror($stat)) {
+		if (!iserror($stat))
+		{
 			$t->assign('ctl_msginslog', true);
-		} else {
+		}
+		else
+		{
 			$t->assign('ctl_errinslog', true);
 			$t->assign('insstatlog', $stat);
 		}
@@ -144,9 +170,12 @@ switch($cmd) {
 		$stat = 1;
 		// 2009-07-06 (jhcaiced) Replace this with another class...
 		//$stat = $r->updateRegLog($get['DBLogDate'], $get['DBLogType'], $get['DBLogNotes']);
-		if (!iserror($stat)) {
+		if (!iserror($stat))
+		{
 			$t->assign('ctl_msgupdlog', true);
-		} else {
+		}
+		else
+		{
 			$t->assign('ctl_errupdlog', true);
 			$t->assign('updstatlog', showerror($stat));
 		}
