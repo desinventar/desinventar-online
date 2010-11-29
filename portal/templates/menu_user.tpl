@@ -1,4 +1,4 @@
-<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
+<table width="133" border="0" cellpadding="0" cellspacing="0" align="center">
 <tr>
 	<td width="100%">
 		<div id="divUserIsLoggedOut">
@@ -13,7 +13,7 @@
 </tr>
 	<tr>
 		<td colspan="3">
-			<img src="{-$desinventarURLPortal-}/images/c_sep.gif" width=133 height=6 border=0><br /><br />
+			<img src="{-$desinventarURLPortal-}/images/c_sep.gif" width="133" height="6" border="0" alt="" /><br /><br />
 		</td>
 	</tr>
 </table>

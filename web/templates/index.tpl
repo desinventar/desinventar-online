@@ -23,9 +23,12 @@
 	<script type="text/javascript" src="external/checktree/checktree.js"></script>
 	<script type="text/javascript" src="external/swfupload/swfupload.js"></script>
 	<script type="text/javascript" src="external/jquery.swfupload.js"></script>
+	<script type="text/javascript" src="external/Math.uuid.js"></script>
 
 	<script type="text/javascript" src="js/diadmin.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/datacards.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="js/extraeffects.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="js/dbconfig_geography.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/data.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/graphic.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/thematicmap.js?version={-$jsversion-}"></script>
@@ -57,6 +60,7 @@
 			onReadyGraphic();
 			onReadyDatabaseBackup();
 			onReadyDatabaseImport();
+			onReadyExtraEffects();
 			onReadyMain();			
 		});
 	</script>

@@ -14,20 +14,24 @@ $post = $_POST;
 $get  = $_GET;
 
 $cmd = getParameter('cmd', getParameter('_CMD',''));
-if ($cmd == '') {
-	if (isset($_POST['prmQuery']['Command'])) {
+if ($cmd == '')
+{
+	if (isset($_POST['prmQuery']['Command']))
+	{
 		$cmd = $_POST['prmQuery']['Command'];
 	}
 }
 
 $RegionId = getParameter('r', getParameter('RegionId', getParameter('_REG'),''));
 $RegionLabel = '';
-if ($cmd == '' && $RegionId == '') {
+if ($cmd == '' && $RegionId == '')
+{
 	$cmd = 'start';
 }
 // Default Template Values
 $t->assign('desinventarRegionId'   , $RegionId);
-if (!empty($RegionId)) {
+if (!empty($RegionId))
+{
 	$us->open($RegionId);
 	$r = new DIRegion($us, $RegionId);
 	$RegionLabel = $r->getRegionInfoValue('RegionLabel');
@@ -38,10 +42,12 @@ $t->assign('desinventarRegionLabel', $RegionLabel);
 // post__max_size in php.ini the script is called with emtpy POST/FILES 
 // parameters, here we try to detect that case and call the appropiate command.
 if ( (substr($_SERVER['CONTENT_TYPE'],0,19) == 'multipart/form-data') &&
-     ($_SERVER['HTTP_USER_AGENT'] == 'Shockwave Flash') ) {
+     ($_SERVER['HTTP_USER_AGENT'] == 'Shockwave Flash') )
+{
      $cmd = 'fileupload';
 }
-switch ($cmd) {
+switch ($cmd)
+{
 	case 'getversion':
 		print VERSION;
 	break;
@@ -61,28 +67,36 @@ switch ($cmd) {
 	case 'cmdRegionCreate':
 	case 'cmdRegionUpdate':
 		$iReturn = ERR_NO_ERROR;
-		if ($us->UserId != 'root') {
+		if ($us->UserId != 'root')
+		{
 			$iReturn = ERR_ACCESS_DENIED;
 		}
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			$RegionId = $_POST['RegionInfo']['RegionId'];
 			$RegionCmd = $_POST['RegionInfo']['cmd'];
 
 			$r = new DIRegionRecord($us, $RegionId);
 			$iReturn = $r->setFromArray($_POST['RegionInfo']);
 		}
-		if ($iReturn > 0) {
-			if ($r->get('RegionId') == '') {
+		if ($iReturn > 0)
+		{
+			if ($r->get('RegionId') == '')
+			{
 				$r->set('RegionId', DIRegion::buildRegionId($r->get('CountryIso')));
 			}
 			$RegionId = $r->get('RegionId');
-			if ($RegionCmd == 'cmdRegionCreate') {
+			if ($RegionCmd == 'cmdRegionCreate')
+			{
 				$iReturn = $r->insert(); //createRegionDB();
-			} else {
+			}
+			else
+			{
 				$iReturn = $r->update();
 			}
 		}
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			// Set Role ADMINREGION in RegionAuth: master for this region
 			$r->removeRegionUserAdmin();
 			$iReturn = $us->setUserRole($_POST['RegionInfo']['RegionUserAdmin'], 
@@ -97,10 +111,12 @@ switch ($cmd) {
 	case 'dbzipimport' : 
 		$answer = array();
 		$iReturn = ERR_NO_ERROR;
-		if ($us->UserId != 'root') {
+		if ($us->UserId != 'root')
+		{
 			$iReturn = ERR_ACCESS_DENIED;
 		}
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			$RegionId = $_POST['RegionInfo']['RegionId'];
 			// Use the parameters to create a new database from zip file...
 			$Filename = TMP_DIR . '/di8file_' . $us->sSessionId . '_' . $_POST['RegionInfo']['Filename'];
@@ -109,11 +125,15 @@ switch ($cmd) {
 			             $RegionId,
 			             $_POST['RegionInfo']['RegionLabel'],
 			             $Filename);
-			if ($iReturn > 0) {
+			if ($iReturn > 0)
+			{
 				$r = new DIRegion($us, $RegionId);
-				if (DIRegion::existRegion($us, $RegionId) == STATUS_NO) {
+				if (DIRegion::existRegion($us, $RegionId) == STATUS_NO)
+				{
 					$r->insert();
-				} else {
+				}
+				else
+				{
 					$r->update();
 				}
 			}
@@ -126,15 +146,18 @@ switch ($cmd) {
 		// under his own session and cannot be debug in the browser.
 		$iReturn = ERR_NO_ERROR;
 		$answer = array('Filename' => '');
-		if ($iReturn > 0) {
-			if (! array_key_exists('Filedata', $_FILES)) {
+		if ($iReturn > 0)
+		{
+			if (! array_key_exists('Filedata', $_FILES))
+			{
 				// If $_FILES is empty, usually the PHP post_max_size parameter 
 				// needs configuration in php.ini
 				$iReturn = ERR_UPLOAD_FAILED;
 			}
 		}
 		
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			$answer['Filename'] = $_FILES['Filedata']['name'];
 			$FilenameOld = $_FILES['Filedata']['tmp_name'];
 			$Filename = TMP_DIR . '/di8file_' . $_POST['SessionId'] . '_' . $_FILES['Filedata']['name'];
@@ -142,7 +165,8 @@ switch ($cmd) {
 			// Open ZIP File, extract info.xml and return values...
 			$zip = new ZipArchive();
 			$res = $zip->open($Filename);
-			if ($res == TRUE) {
+			if ($res == TRUE)
+			{
 				$zip->extractTo(TMP_DIR, 'info.xml');
 				$zip->close();
 				$r = new DIRegion($us, '', TMP_DIR . '/info.xml');
@@ -153,7 +177,9 @@ switch ($cmd) {
 				$info['CountryIso']  = $r->get('CountryIso');
 				$answer['Info'] = $info;
 				$answer['DBExist'] = DIRegion::existRegion($us, $info['RegionId']);
-			} else {
+			}
+			else
+			{
 				$iReturn = ERR_UNKNOWN_ERROR;
 			}
 		}
@@ -182,9 +208,12 @@ switch ($cmd) {
 		$t->assign('LanguageList', $us->q->loadLanguages(1));
 		$listdb = $us->listDB();
 		// unique database, choose than
-		if (count($listdb) == 1) {
+		if (count($listdb) == 1)
+		{
 			$t->assign('option', 'r='. key($listdb));
-		} else {
+		}
+		else
+		{
 			$t->assign('option', 'cmd=main');
 		}
 		$t->display('main_start.tpl');
@@ -221,7 +250,8 @@ switch ($cmd) {
 	case 'getRegionLogo':
 		header('Content-type: Image/png');
 		$murl = VAR_DIR . '/database/'. $RegionId . '/logo.png';
-		if (!file_exists($murl)) {
+		if (!file_exists($murl))
+		{
 			$murl = 'images/di_logo.png';
 		}
 		readfile($murl);
@@ -249,20 +279,24 @@ switch ($cmd) {
 		$LangIsoCode = getParameter('LangIsoCode', $lg);
 		$answer = array();
 		$answer['Status'] = ERR_NO_ERROR;
-		if (isset($RegionId) && $RegionId != '') {
+		if (isset($RegionId) && $RegionId != '')
+		{
 			$t->assign('reg', $RegionId);
 			$r = new DIRegion($us, $RegionId);
 			$a = $r->getDBInfo($LangIsoCode);
 			$a['NumDatacards'] = $us->q->getNumDisasterByStatus('PUBLISHED');
 			$answer['RegionInfo'] = $a;
-		} else {
+		}
+		else
+		{
 			$answer['Status'] = ERR_NO_DATABASE;
 			$answer['RegionInfo'] = array();
 		}
 		echo json_encode($answer);
 	break;
 	case 'getRegionFullInfo':
-		if (isset($RegionId) && $RegionId != '') {
+		if (isset($RegionId) && $RegionId != '')
+		{
 			$t->assign('reg', $RegionId);
 			$r = new DIRegion($us, $RegionId);
 			$a = $r->getDBInfo($lg);
@@ -285,11 +319,14 @@ switch ($cmd) {
 		$BackupURL      = WWWDATA . '/data/' . $SessionId . '/di8backup_' . $RegionId . '.zip';
 		$answer = array('Status'   => 'ERROR');
 		$iReturn = DIRegion::createRegionBackup($us, $BackupFileName);
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			$answer['Status'] = 'OK';
 			$answer['BackupFileName'] = $BackupFileName;
 			$answer['BackupURL'     ] = $BackupURL;
-		} else {
+		}
+		else
+		{
 			$answer['Status'] = 'ERROR';
 		}
 		echo json_encode($answer);
@@ -308,7 +345,8 @@ switch ($cmd) {
 	break;
 	default:
 		// Open XML file query
-		if (isset($_FILES['qry'])) {
+		if (isset($_FILES['qry']))
+		{
 			// Open file, decode and assign saved query..
 			$myfile = $_FILES['qry']['tmp_name'];
 			$handle = fopen($myfile, 'r');
@@ -316,29 +354,36 @@ switch ($cmd) {
 			fclose($handle);
 			$xml = '<DIQuery />';
 			$pos = strpos($cq, $xml);
-			if (!empty($cq) &&  $pos != false) {
+			if (!empty($cq) &&  $pos != false)
+			{
 				$qy = substr($cq, $pos + strlen($xml));
 				$qd = unserialize(base64_decode($qy));
-			} else {
+			}
+			else
+			{
 				exit();
 			}
 			$RegionId = $qd['_REG'];
 			$t->assign('qd', $qd);
 		}
-		elseif (isset($get['r']) && !empty($get['r'])) {
+		elseif (isset($get['r']) && !empty($get['r']))
+		{
 			$RegionId = $get['r'];
 		}
 		// 2009-08-07 (jhcaiced) Validate if Database Exists...
-		if (!empty($RegionId) && file_exists($us->q->getDBFile($RegionId))) {
+		if (!empty($RegionId) && file_exists($us->q->getDBFile($RegionId)))
+		{
 			// Accessing a region with some operation
 			$us->open($RegionId);
-			if (isset($get['lang']) && !empty($get['lang'])) {
+			if (isset($get['lang']) && !empty($get['lang']))
+			{
 				$_SESSION['lang'] = $get['lang'];
 			}
 			// Direct access returns a list of public regions on this server
 			$t->assign('LanguageList', $us->q->loadLanguages(1));
 			$t->assign('CountryList', $us->q->getCountryList());
-			switch ($get['cmd']) {
+			switch ($get['cmd'])
+			{
 				case 'getGeoId':
 					$code = $us->q->getObjectNameById($get['GeoCode'], 'GEOCODE');
 					echo $code;
@@ -386,14 +431,19 @@ switch ($cmd) {
 					$RegionStatus = (int)$r->get('RegionStatus');
 					$RegionPublic = $RegionStatus & 2;
 					$bShow = 0;
-					if ($RegionPublic > 0) {
+					if ($RegionPublic > 0)
+					{
 						$bShow = 1;
-					} else {
-						if ($roleValue > 0) {
+					}
+					else
+					{
+						if ($roleValue > 0)
+						{
 							$bShow = 1;
 						}
 					}
-					if ($bShow > 0) {
+					if ($bShow > 0)
+					{
 						// Datacards
 						$t->assign('LabelsDisaster', $us->q->queryLabelsFromGroup('Disaster', $lg));
 						$t->assign('LabelsRecord1', $us->q->queryLabelsFromGroup('Record|1', $lg));
@@ -407,9 +457,12 @@ switch ($cmd) {
 						//$t->assign('path', VAR_DIR);
 						
 						$t->assign('role', $role);
-						if (strlen($role) > 0) {
+						if (strlen($role) > 0)
+						{
 							$t->assign('ctl_user', true);
-						} else {
+						}
+						else
+						{
 							$t->assign('ctl_user', false);
 						}
 						// Set selection map
@@ -429,29 +482,38 @@ switch ($cmd) {
 						$cauuserl = $us->q->loadCauses('USER', 'active', $lg);
 
 						// In Saved Queries set true in Geo, Events, Causes selected..
-						if (isset($qd['D_GeographyId'])) {
+						if (isset($qd['D_GeographyId']))
+						{
 							$gtree = $us->q->buildGeoTree('', 0, $us->q->getMaxGeoLev(), $qd['D_GeographyId']);
 							$t->assign('gtree', $gtree);
 							$geol = null;
 						}
 
-						if (isset($qd['D_EventId'])) {
-							foreach ($qd['D_EventId'] as $ky=>$it) {
-								if (isset($evepredl[$it])) {
+						if (isset($qd['D_EventId']))
+						{
+							foreach ($qd['D_EventId'] as $ky=>$it)
+							{
+								if (isset($evepredl[$it]))
+								{
 									$evepredl[$it][3] = 1;
 								}
-								if (isset($eveuserl[$it])) {
+								if (isset($eveuserl[$it]))
+								{
 									$eveuserl[$it][3] = 1;
 								}
 							}
 						}
 
-						if (isset($qd['D_CauseId'])) {
-							foreach ($qd['D_CauseId'] as $ky=>$it) {
-								if (isset($caupredl[$it])) {
+						if (isset($qd['D_CauseId']))
+						{
+							foreach ($qd['D_CauseId'] as $ky=>$it)
+							{
+								if (isset($caupredl[$it]))
+								{
 									$caupredl[$it][3] = 1;
 								}
-								if (isset($cauuserl[$it])) {
+								if (isset($cauuserl[$it]))
+								{
 									$cauuserl[$it][3] = 1;
 								}
 							}
@@ -467,6 +529,7 @@ switch ($cmd) {
 						$ef1 = $us->q->queryLabelsFromGroup('Effect|People', $lg);
 						$ef2 = $us->q->queryLabelsFromGroup('Effect|Affected', $lg);
 						$ef3 = $us->q->queryLabelsFromGroup('Effect|Economic', $lg);
+						$ef4 = $us->q->queryLabelsFromGroup('Effect|More', $lg);
 						$sec = $us->q->queryLabelsFromGroup('Sector', $lg);
 						// Add some fields to customize lists
 						$ef1['EffectFarmingAndForest'] = $ef2['EffectFarmingAndForest'];
@@ -497,8 +560,8 @@ switch ($cmd) {
 						$t->assign('ef1', $ef1);
 						$t->assign('ef2', $ef2);
 						$t->assign('ef3', $ef3);
+						$t->assign('ef4', $ef4);
 						$t->assign('sec', $sec);
-						$t->assign('ef4', $us->q->queryLabelsFromGroup('Effect|More', $lg));
 						// DATA
 						$dc2 = array();
 						$dc2 = array_merge($dc2, $us->q->queryLabelsFromGroup('Disaster', $lg));
@@ -547,7 +610,8 @@ switch ($cmd) {
 						$desinventarUserRoleValue = $roleValue;
 						// Validate if user has permission to access database
 						$dic = $us->q->queryLabelsFromGroup('DB', $lg);
-						switch ($desinventarUserRole) {
+						switch ($desinventarUserRole)
+						{
 							case 'ADMINREGION':
 								$t->assign('showconfig', true);
 								$dicrole = $dic['DBRoleAdmin'][0];
@@ -576,14 +640,8 @@ switch ($cmd) {
 						$t->assign('rc2', $us->q->queryLabelsFromGroup('Record|2', $lg));
 						$t->assign('eve', $us->q->queryLabelsFromGroup('Event', $lg));
 						$t->assign('cau', $us->q->queryLabelsFromGroup('Cause', $lg));
-						$t->assign('ef1', $us->q->queryLabelsFromGroup('Effect|People', $lg));
-						$t->assign('ef2', $us->q->queryLabelsFromGroup('Effect|Economic', $lg));
-						$t->assign('ef3', $us->q->queryLabelsFromGroup('Effect|Affected', $lg));
 						$sc3 = $us->q->querySecLabelFromGroup('Effect|Affected', $lg);
 						$t->assign('sc3', $sc3);
-						$t->assign('ef4', $us->q->queryLabelsFromGroup('Effect|More', $lg));
-						$t->assign('sec', $us->q->queryLabelsFromGroup('Sector', $lg));
-						//$t->assign('rcsl', $us->q->queryLabelsFromGroup('RecordStatus', $lg));
 						$t->assign('dmg', $us->q->queryLabelsFromGroup('MetGuide', $lg));
 						
 						// Geography Levels
@@ -608,20 +666,25 @@ switch ($cmd) {
 						
 						/* BEGIN THEMATIC MAP */
 						// 2010-01-18 (jhcaiced) Windows machines doesn't use remote servers
-						if (isset($_SERVER['WINDIR'])) {
+						if (isset($_SERVER['WINDIR']))
+						{
 							$desinventarHasInternet = 0;
-						} else {
+						}
+						else
+						{
 							// Linux machines are assumed to be connected to internet
 							$desinventarHasInternet = 1;
 							/*
-							if (!fsockopen('www.google.com',80)) {
+							if (!fsockopen('www.google.com',80))
+							{
 								$desinventarHasInternet = 0;
 							}
 							*/
 						}	
 						// 2009-07-14 (jhcaiced) Configure desinventarGoogleMapsKey
 						$desinventarGoogleMapsKey = '';
-						switch($_SERVER['SERVER_NAME']) {
+						switch($_SERVER['SERVER_NAME'])
+						{
 							case 'devel.desinventar.org':
 								$desinventarGoogleMapsKey = 'ABQIAAAALchGiIjlsbdmE3fN4eRcYBQB70apFGkcE_JIKPq7c7oktNLHXhTU2xdzBNS_-XzWYh911SdinR2Xkw';
 								break;
@@ -649,7 +712,9 @@ switch ($cmd) {
 						/* END THEMATIC MAP */
 
 						$t->display('index.tpl');
-					} else {
+					}
+					else
+					{
 						$t->display('database_header.tpl');
 						// Private Database, do not show anything...
 						print 'PRIVATE DATABASE <br />' . "\n";

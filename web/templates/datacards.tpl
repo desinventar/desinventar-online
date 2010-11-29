@@ -20,7 +20,7 @@
 			</td>
 			<td align="right" width="450px" colspan="2">
 				<div id="divDatacardStatusMsg" style="display:none;">
-					<span class="datacardStatusMsg" id="msgDatacardDuplicatedSerial">{-#msgDuplicatedDisasterSerial#-}</span>
+					<span class="datacardStatusMsg" id="msgDatacardDuplicatedSerial">{-#msgDatacardDuplicatedSerial#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardStartNew">{-#tmsgnewcard#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardFill">{-#tmsgnewcardfill#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardIsLocked">{-#tdconuse#-}</span>
@@ -32,7 +32,7 @@
 					<span class="datacardStatusMsg" id="msgDatacardInvalidGeography">{-#msgDatacardInvalidGeography#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardInsertOk">{-#tdccreated#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardUpdateOk">{-#tdcupdated#-}</span>
-					<span class="datacardStatusMsg" id="msgDatacardStatus">{-$statusmsg-}</span>
+					<span class="datacardStatusMsg" id="msgDatacardCustom"></span>
 				</div>
 			</td>
 		</tr>
@@ -59,7 +59,8 @@
 		<input type="hidden" id="RecordCreation"     name="RecordCreation" />
 		<input type="hidden" id="_CMD"               name="_CMD" value="" />
 		<input type="hidden" id="PrevDisasterSerial" name="PrevDisasterSerial" value="" />
-		<input type="hidden" id="DatacardCommand"    name="DatacardCommand" valu="" />
+		<input type="hidden" id="DatacardCommand"    name="DatacardCommand" value="" />
+		<input type="hidden" id="Status"             name="Status" value="" />
 		<table border="1" cellspacing="8" width="900px">
 			<!-- DATACARD INFORMATION SECTION -->
 			<tr>

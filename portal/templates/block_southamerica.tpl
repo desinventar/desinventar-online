@@ -2,7 +2,7 @@
 	<tr>
 		<td align="right">
 			<a href="#" id="btnMainWindow">
-				<img id="btnMainWindow2" src="{-$desinventarURLPortal-}/images/b_desinventar3.jpg" border="0">
+				<img id="btnMainWindow2" src="{-$desinventarURLPortal-}/images/b_desinventar3.jpg" border="0" width="150" height="44" alt="" />
 			</a>
 		</td>
 	</tr>

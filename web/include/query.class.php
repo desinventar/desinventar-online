@@ -410,20 +410,22 @@ class Query extends PDO {
 	function getMaxGeoLev() {
 		$sQuery = "SELECT MAX(GeoLevelId) AS Max FROM GeoLevel";
 		$MaxGeoLevel = -1;
-		foreach($this->query($sQuery) as $row) {
+		foreach($this->dreg->query($sQuery) as $row) {
 			$MaxGeoLevel = $row['Max'];
 		}
 		return $MaxGeoLevel;
 	}
 
 	function loadGeoLevById($geolevid) {
-		if (!is_numeric($geolevid))
+		if (!is_numeric($geolevid)) {
 			return null;
+		}
 		$sql = "SELECT * FROM GeoLevel WHERE GeoLevelId=". $geolevid;
 		$data = array();
 		$res = $this->dreg->query($sql);
-		foreach($res as $row)
+		foreach($res as $row) {
 			$data = array(str2js($row['GeoLevelName']), str2js($row['GeoLevelDesc']));
+		}
 		return $data;
 	}
 

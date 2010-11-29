@@ -6,8 +6,8 @@
 	<title>DesInventar Online Edition {-$majorversion-}</title>
 	<!-- CSS Styles -->
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" href="{-$desinventarURLPortal-}/css/desinventar.css?version={-$jsversion-}" TYPE="text/css" />
-	<link rel="stylesheet" href="{-$desinventarURLPortal-}/css/portal.css?version={-$jsversion-}" TYPE="text/css" />
+	<link rel="stylesheet" href="{-$desinventarURLPortal-}/css/desinventar.css?version={-$jsversion-}" type="text/css" />
+	<link rel="stylesheet" href="{-$desinventarURLPortal-}/css/portal.css?version={-$jsversion-}" type="text/css" />
 	{-include file="../../web/templates/jquery.tpl" confdir="../../web/conf/"-}
 	<script type="text/javascript" src="{-$desinventarURL-}/include/prototype.js"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/include/menu.js"></script>
@@ -25,16 +25,17 @@
 	</script>
 </head>
 <body>
-	<table width=839 border=0 cellpadding=0 cellspacing=0 align=center style="margin-top:4px">
-		<tr valign=top>
-			<td style="background:url({-$desinventarURLPortal-}/images/bg1.gif) 0px -1px"><img src="{-$desinventarURLPortal-}/images/e1.gif" width=16 height=74 border=0>
+	<table width="839" border="0" cellpadding="0" cellspacing="0" align="center" style="margin-top:4px">
+		<tr valign="top">
+			<td style="background:url({-$desinventarURLPortal-}/images/bg1.gif) 0px -1px">
+			<img src="{-$desinventarURLPortal-}/images/e1.gif" alt="" width="16" height="74" border="0" />
 			</td>
 			<td>
 				<!-- Header Table -->
-				<table width=807 border=0 cellpadding=0 cellspacing=0>
+				<table width="807" border="0" cellpadding="0" cellspacing="0">
 					<tr>
 						<td colspan="2">
-							<img src="{-$desinventarURLPortal-}/images/10.gif" width="807" height="15">
+							<img src="{-$desinventarURLPortal-}/images/10.gif" alt="" width="807" height="15" />
 						</td>
 					</tr>
 					<tr valign="top">
@@ -47,28 +48,28 @@
 							</div>
 						</td>
 						<td>
-							<img src="{-$desinventarURLPortal-}/images/11.jpg" width=345 height=92 border=0>
+							<img src="{-$desinventarURLPortal-}/images/11.jpg" alt="" width="345" height="92" border="0" />
 						</td>
 					</tr>
 				</table>
 				<!-- Pages and Language Menu -->
-				<table width=807 border=0 cellpadding=0 cellspacing=0>
-					<tr valign=top>
-						<td width=182>
-							<img src="{-$desinventarURLPortal-}/images/21.gif" width=182 height=52>
+				<table width="807" border="0" cellpadding="0" cellspacing="0">
+					<tr valign="top">
+						<td width="182">
+							<img src="{-$desinventarURLPortal-}/images/21.gif" width="182" height="52" alt="" />
 						</td>
-						<td width=585 style="background:url({-$desinventarURLPortal-}/images/22.gif);" align="right">
+						<td width="585" style="background:url({-$desinventarURLPortal-}/images/22.gif);" align="right">
 							<span id="dostat" style="color: #e1ac00; float:left; font-size:8pt;">
 							</span>
 							<div align="right">
-								<img src="{-$desinventarURLPortal-}/images/23.jpg" width="305" height="13">
+								<img src="{-$desinventarURLPortal-}/images/23.jpg" width="305" height="13" alt="" />
 							</div>
 							<table border="0" width="100%">
 								<tr>
 									<td align="right" width="50%">
 									</td>
 									<td align="right">
-										<table border=0 cellpadding=0 cellspacing=0 class="menu" style="margin-top:1px">
+										<table border="0" cellpadding="0" cellspacing="0" class="menu" style="margin-top:1px">
 											<tr>
 												<td>
 													<ul id="MainMenu">
@@ -82,7 +83,7 @@
 																<li><a href="?lang=fre">Français</a></li>
 															</ul>
 														</li>
-													<ul>
+													</ul>
 												</td>
 											</tr>
 										</table>
@@ -90,17 +91,17 @@
 								</tr>
 							</table>
 						</td>
-						<td width=40>
-							<img src="{-$desinventarURLPortal-}/images/24.jpg" width=40 height=52 border=0>
+						<td width="40">
+							<img src="{-$desinventarURLPortal-}/images/24.jpg" width="40" height="52" border="0" alt="" />
 						</td>
 					</tr>
 				</table>
 				<!-- Left Menu/Icons -->
-				<table width=807 border=0 cellpadding=0 cellspacing=0>
+				<table width="807" border="0" cellpadding="0" cellspacing="0">
 					<tr valign="top">
 						<td class="izq">
 							<!-- Regions -->
-							<table bgcolor="#CF9D15" border=0 cellpadding="0" cellspacing="0">
+							<table bgcolor="#CF9D15" border="0" cellpadding="0" cellspacing="0">
 								<tr>
 									<td>
 										{-if $portaltype == 'desinventar' -}
@@ -121,10 +122,10 @@
 										{-/if-}
 									</td>
 								</tr>
-								<tr><td><img src="{-$desinventarURLPortal-}/images/25.gif" width=150 height=52></td></tr>
+								<tr><td><img src="{-$desinventarURLPortal-}/images/25.gif" width="150" height="52" alt="" /></td></tr>
 							</table>
 							<!-- References -->
-							<table bgcolor="#CF9D15" border=0 cellpadding=0 cellspacing=0 align="center">
+							<table bgcolor="#CF9D15" border="0" cellpadding="0" cellspacing="0" align="center">
 								<tr><td bgcolor="white">
 									<center>
 										{-include file="logo_isdr.tpl" -}
@@ -141,23 +142,24 @@
 						<td class="centro">
 							<div class="contentBlock" id="regionlist">
 								<span class="databaseTitle" id="regiontitle_COUNTRY"></span>
-								<ul   class="databaseList"  id="regionlist_COUNTRY"></ul>
+								<ul   class="databaseList"  id="regionlist_COUNTRY"><li></li></ul>
 								<span class="databaseTitle" id="regiontitle_ADMINREGION">{-#txtRoleADMINREGION#-}</span>
-								<ul   class="databaseList"  id="regionlist_ADMINREGION"></ul>
+								<ul   class="databaseList"  id="regionlist_ADMINREGION"><li></li></ul>
 								<span class="databaseTitle" id="regiontitle_SUPERVISOR">{-#txtRoleSUPERVISOR#-}</span>
-								<ul   class="databaseList"  id="regionlist_SUPERVISOR"></ul>
+								<ul   class="databaseList"  id="regionlist_SUPERVISOR"><li></li></ul>
 								<span class="databaseTitle" id="regiontitle_USER">{-#txtRoleUSER#-}</span>
-								<ul   class="databaseList"  id="regionlist_USER"></ul>
+								<ul   class="databaseList"  id="regionlist_USER"><li></li></ul>
 								<span class="databaseTitle" id="regiontitle_OBSERVER">{-#txtRoleOBSERVER#-}</span>
-								<ul   class="databaseList"  id="regionlist_OBSERVER"></ul>
+								<ul   class="databaseList"  id="regionlist_OBSERVER"><li></li></ul>
 								<span class="databaseTitle" id="regiontitle_NONE">{-#txtRoleNONE#-}</span>
-								<ul   class="databaseList"  id="regionlist_NONE"></ul>
+								<ul   class="databaseList"  id="regionlist_NONE"><li></li></ul>
 							</div>
 							<div class="contentBlock" id="pageinfo">
 								<table>
 									<tr>
 										<td valign="top">
-											<img id="regionlogo" width="80">
+											<div id="divRegionLogo">
+											</div>
 										</td>
 										<td align="left">
 											<div id="regionbasicinfo"></div>
@@ -165,7 +167,7 @@
 									</tr>
 									<tr>
 										<td colspan="2">
-											<center><a id="regionlink" href="#"><img id="regionbutton" src="{-$desinventarURLPortal-}/images/b_desinventar3.jpg" border="0"></a></center>
+											<center><a id="regionlink" href="#"><img id="regionbutton" src="{-$desinventarURLPortal-}/images/b_desinventar3.jpg" border="0" alt="" /></a></center>
 											<div id="regiontechinfo"></div>
 										</td>
 									</tr>
@@ -192,30 +194,27 @@
 									{-/if-}
 								{-/if-}
 							</div>
-							<div class="contentBlock" id="UserContent">
-								{-include file="../../web/templates/user_login.tpl" confdir="../../web/conf/"-}
-							</div>
-						</td> <!-- CENTRO -->
-						<td class="der"><img src="{-$desinventarURLPortal-}/images/bgder.gif" width=32 height=5>
+						</td>
+						<td class="der"><img src="{-$desinventarURLPortal-}/images/bgder.gif" width="32" height="5" alt="" />
 						</td>
 					</tr>
 				</table>
 			</td>
-			<td style="background:url({-$desinventarURLPortal-}/images/bg2.gif) 0px -1px"><img src="{-$desinventarURLPortal-}/images/e2.gif" width=16 height=74 border=0>
+			<td style="background:url({-$desinventarURLPortal-}/images/bg2.gif) 0px -1px"><img src="{-$desinventarURLPortal-}/images/e2.gif" width="16" height="74" border="0" alt="" />
 			</td>
 		</tr>
-		<tr valign=bottom>
+		<tr valign="bottom">
 			<td style="background:url({-$desinventarURLPortal-}/images/bg1.gif) 0px -1px">
-				<img src="{-$desinventarURLPortal-}/images/e3.gif" width="16" height=85 border=0>
+				<img src="{-$desinventarURLPortal-}/images/e3.gif" width="16" height="85" border="0" alt="" />
 			</td>
 			<td>
-				<table width=807 border=0 cellpadding=0 cellspacing=0 style="background:url({-$desinventarURLPortal-}/images/40_1.gif) left bottom no-repeat">
+				<table width="807" border="0" cellpadding="0" cellspacing="0" style="background:url({-$desinventarURLPortal-}/images/40_1.gif) left bottom no-repeat">
 					<tr>
-						<td width="182"><img src="{-$desinventarURLPortal-}/images/31_1.gif" width="182" height="22" border=0>
+						<td width="182"><img src="{-$desinventarURLPortal-}/images/31_1.gif" width="182" height="22" border="0" alt="" />
 						</td>
-						<td style="background:url({-$desinventarURLPortal-}/images/32_1.gif)"><img src="{-$desinventarURLPortal-}/images/32_1.gif" width="1" height="22" border=0>
+						<td style="background:url({-$desinventarURLPortal-}/images/32_1.gif)"><img src="{-$desinventarURLPortal-}/images/32_1.gif" width="1" height="22" border="0" alt="" />
 						</td>
-						<td width="40"><img src="{-$desinventarURLPortal-}/images/33_1.gif" width="40" height="22" border=0>
+						<td width="40"><img src="{-$desinventarURLPortal-}/images/33_1.gif" width="40" height="22" border="0" alt="" />
 						</td>
 					</tr>
 					<tr>
@@ -230,9 +229,9 @@
 						</td>
 					</tr>
 				</table>
-				<img src="{-$desinventarURLPortal-}/images/40.gif" width=807 height=15 border="0">
+				<img src="{-$desinventarURLPortal-}/images/40.gif" width="807" height="15" border="0" alt="" />
 			</td>
-			<td style="background:url({-$desinventarURLPortal-}/images/bg2.gif) 0px -1px"><img src="{-$desinventarURLPortal-}/images/e4.gif" width="16" height=85 border=0>
+			<td style="background:url({-$desinventarURLPortal-}/images/bg2.gif) 0px -1px"><img src="{-$desinventarURLPortal-}/images/e4.gif" width="16" height="85" border="0" alt="" />
 			</td>
 		</tr>
 	</table>
