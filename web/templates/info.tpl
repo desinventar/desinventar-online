@@ -81,7 +81,7 @@
 		<td colspan="2" align="center">
 			<br />
 			<input name="_REG" type="hidden" value="{-$reg-}" />
-			<input id="_infocmd" name="_infocmd" value="update" type="hidden" />
+			<input id="_infocmd" name="cmd" value="cmdDBInfoUpdate" type="hidden" />
 			<input type="submit" value="{-#bsave#-}" {-$ro-} class="line"/>
 			<input type="reset" value="{-#bcancel#-}" {-$ro-} onclick="mod='info'; uploadMsg('');" class="line" />
 			<br />
@@ -114,7 +114,7 @@
  {-if $usern != $key-}
 					<tr class="{-if ($smarty.foreach.rol.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}"
 						onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
-						onClick="setRolLog('{-$key-}','{-$item-}', 'role'); $('rolecmd').value='update';">
+						onClick="setRolLog('{-$key-}','{-$item-}', 'role'); $('RoleCmd').value='cmdDBInfoRoleUpdate';">
 						<td>{-$key-}</td>
 						<td>
   {-if $item == "NONE"-}			{-$dic.DBRoleNone[0]-}
@@ -132,7 +132,7 @@
 			</table>
 		</div>
 		<br />
-		<input id="add" type="button" value="{-#baddoption#-}" class="line" onclick="setRolLog('', '', 'role'); $('rolecmd').value='insert';" />
+		<input id="add" type="button" value="{-#baddoption#-}" class="line" onclick="setRolLog('', '', 'role'); $('RoleCmd').value='cmdDBInfoRoleInsert';" />
 		<span id="rolestatusmsg" class="dlgmsg"></span>
 		<br />
 		<div id="roleaddsect" style="display:none">
@@ -161,7 +161,7 @@
 				<br /><br />
 				<p class="fixw" align="center">
 					<input name="r" type="hidden" value="{-$reg-}" />
-					<input id="rolecmd" name="rolecmd" type="hidden" />
+					<input id="RoleCmd" name="cmd" type="hidden" />
 					<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="3"/>
 					<input type="reset" value="{-#bcancel#-}" class="line"
 	   	  				onClick="$('roleaddsect').style.display='none'; mod='role'; uploadMsg('');" {-$ro-} />
@@ -189,7 +189,7 @@
 {-foreach name=log key=key item=item from=$log-}
 					<tr class="{-if ($smarty.foreach.log.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}"
 						onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
-						onClick="setRolLog('{-$item[0]-}','{-$item[1]-}', 'log'); $('DBLogDate').value='{-$key-}'; $('logcmd').value='update';">
+						onClick="setRolLog('{-$item[0]-}','{-$item[1]-}', 'log'); $('DBLogDate').value='{-$key-}'; $('LogCmd').value='cmdDBInfoLogUpdate';">
 						<td>
  {-if $item[0] == "CREDIT"-}			{-$dic.DBLogCredits[0]-}
  {-elseif $item[0] == "METHODOLOGY"-}	{-$dic.DBLogMethodology[0]-}
@@ -207,7 +207,7 @@
 			</table>
 		</div>
 		<br />
-		<input id="add" type="button" value="{-#baddoption#-}" class="line" onclick="setRolLog('', '', 'log'); $('logcmd').value='insert';" />
+		<input id="add" type="button" value="{-#baddoption#-}" class="line" onclick="setRolLog('', '', 'log'); $('LogCmd').value='cmdDBInfoLogInsert';" />
 		<span id="logstatusmsg" class="dlgmsg"></span>
 		<br />
 		<div id="logaddsect" style="display:none; width:280px;">
@@ -233,7 +233,7 @@
 				<p align="center" class="fixw">
 					<input name="r" type="hidden" value="{-$reg-}" />
 					<input id="DBLogDate" name="DBLogDate" type="hidden" />
-					<input id="logcmd" name="logcmd" type="hidden" />
+					<input id="LogCmd" name="cmd" type="hidden" />
 					<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="3" />
 					<input type="reset" value="{-#bcancel#-}" class="line"
 							onClick="$('logaddsect').style.display='none'; mod='log'; uploadMsg('');" {-$ro-} />

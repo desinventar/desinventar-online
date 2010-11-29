@@ -13,13 +13,21 @@
 	<input type="hidden" id="desinventarHasInternet"   value="{-$desinventarHasInternet-}" />
 	<input type="hidden" id="desinventarGoogleMapsKey" value="{-$desinventarGoogleMapsKey-}" />
 	<select id="desinventarLanguageList" style="display:none;">
-		{-foreach name=LanguageList key=key item=item from=$LanguageList-}
-			<option value="{-$key-}">{-$item-}</option>
-		{-/foreach-}	
+		{-if count($LanguageList) > 0 -}
+			{-foreach name=LanguageList key=key item=item from=$LanguageList-}
+				<option value="{-$key-}">{-$item-}</option>
+			{-/foreach-}
+		{-else-}
+			<option></option>
+		{-/if-}
 	</select>
 	<select id="desinventarCountryList" style="display:none;">
-		{-foreach name=CountryList key=key item=item from=$CountryList-}
-			<option value="{-$key-}">{-$item-}</option>
-		{-/foreach-}	
+		{-if count($CountryList) > 0 -}
+			{-foreach name=CountryList key=key item=item from=$CountryList-}
+				<option value="{-$key-}">{-$item-}</option>
+			{-/foreach-}
+		{-else-}
+			<option></option>
+		{-/if-}		
 	</select>
 </div>

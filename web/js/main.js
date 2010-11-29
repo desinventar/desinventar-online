@@ -2,7 +2,7 @@ function onReadyMain() {
 	onReadyCommon();
 	onReadyThematicMap();
 
-	jQuery('#DC').submit(function() {
+	jQuery('#frmMainQuery').submit(function() {
 		var myURL = jQuery(this).attr('action');
 		var myCmd = jQuery('#prmQueryCommand').val();
 		if ( (myCmd == 'cmdGridSave') ||
@@ -20,7 +20,8 @@ function onReadyMain() {
 				function(data) {
 					jQuery('#dcr').html(data);
 					onReadyData();
-					onReadyThematicMap();
+					//onReadyThematicMap();
+					createThematicMap();
 					onReadyStatistic();
 				}
 			);
@@ -45,14 +46,17 @@ function onReadyMain() {
 	jQuery('.classDBConfig_tabs').click(function() {
 		var me = jQuery(jQuery(this).attr('href'));
 		me.html('<img src="loading.gif" />');
-		//jQuery(jQuery(this).attr('href')).load(jQuery(this).attr('data'), {r : jQuery('#desinventarRegionId').val() });
 		jQuery.post(
 			jQuery(this).attr('data'),
-			{r : jQuery('#desinventarRegionId').val()
+			{RegionId : jQuery('#desinventarRegionId').val(),
+			 lang     : jQuery('#desinventarLang').val(),
+			 cmd      : jQuery(this).attr('cmd')
 			},
 			function(data) {
 				me.html(data);
 				onReadyDatabaseConfig();
+				onReadyExtraEffects();
+				onReadyDBConfigGeography();
 			}
 		);
 	});

@@ -11,73 +11,74 @@ require_once('include/dieefield.class.php');
 function getRAPermList($lst) {
 	$dat = array();
 	foreach ($lst as $k=>$v)
-		if ($v=="NONE" || $v=="USER" || $v=="OBSERVER" || $v=="SUPERVISOR")
+		if ($v=='NONE' || $v=='USER' || $v=='OBSERVER' || $v=='SUPERVISOR')
 			$dat[$k] = $v;
 	return $dat;
 }
-$get = $_GET;
-
-$RegionId = getParameter('r','');
+$get = $_POST;
+$RegionId = getParameter('RegionId',getParameter('r',''));
 if ($RegionId == '') {
 	exit();
 }
 $cmd = getParameter('cmd','');
 $us->open($RegionId);
 switch($cmd) {
-	case 'insert':
-	case 'update':
-		if (isset($get['EEFieldActive']) && $get['EEFieldActive'] == "on") {
+	case 'cmdEEFieldInsert':
+	case 'cmdEEFieldUpdate':
+		$status = 0;
+		if ($get['EEField']['EEFieldActive'] == 'on') {
 			$status |= CONST_REGIONACTIVE;
 		} else {
 			$status &= ~CONST_REGIONACTIVE;
 		}
-		if (isset($get['EEFieldPublic']) && $get['EEFieldPublic'] == "on") {
+		if ($get['EEField']['EEFieldPublic'] == 'on') {
 			$status |= CONST_REGIONPUBLIC;
 		} else {
 			$status &= ~CONST_REGIONPUBLIC;
 		}
-		$data = array('EEFieldId'     => $get['EEFieldId'],
-		              'EEFieldLabel'  => $get['EEFieldLabel'],
-		              'EEFieldDesc'   => $get['EEFieldDesc'], 
-		              'EEFieldType'   => $get['EEFieldType'], 
-		              'EEFieldSize'   => $get['EEFieldSize'],
-		              'EEFieldStatus' => $status);
-		$o = new DIEEField($us, $get['EEFieldId']);
+		$get['EEField']['EEFieldStatus'] = $status;
+		$o = new DIEEField($us, $get['EEField']['EEFieldId']);
 		$EEFieldId = $o->get('EEFieldId');
-		$o->setFromArray($data);
+		$o->setFromArray($get['EEField']);
 		$o->set('EEFieldId', $EEFieldId);
 		$o->set('RegionId', $RegionId);
-		if ($cmd == "insert") {
+		if ($cmd == 'cmdEEFieldInsert') {
+			if ($EEFieldId == '') {
+				$EEFieldId = $o->getNextEEFieldId();
+				$o->set('EEFieldId', $EEFieldId);
+			}
 			$stat = $o->insert();
-		} elseif ($cmd == "update") {
+		} elseif ($cmd == 'cmdEEFieldUpdate') {
 			$stat = $o->update();
 		}
+		$answer = array();
 		if (!iserror($stat)) {
-			$t->assign ("ctl_msgupdeef", true);
+			$answer['Status'] = 'OK';
 		} else {
-			$t->assign ("ctl_errupdeef", true);
-			$t->assign ("updstateef", showerror($stat));
+			$answer['Status'] = 'ERROR';
+			$answer['ErrorMsg'] = showerror($stat);
 		}
-		break;
-	case 'list':
+		print json_encode($answer);
+	break;
+	case 'cmdEEFieldList':
 		// reload list from local SQLITE
-		$t->assign ("eef", $us->q->getEEFieldList(""));
-		$t->assign ("ctl_eeflist", true);
-		break;
+		$t->assign('eef', $us->q->getEEFieldList(''));
+		$t->assign('ctl_eeflist', true);
+		$t->display('extraeffects.tpl');
+	break;
 	default:
+		$t->assign('reg', $RegionId);
+		$t->assign('dic', $us->q->queryLabelsFromGroup('DB', $lg));
 		$urol = $us->getUserRole($RegionId);
-		if ($urol == "OBSERVER") {
-			$t->assign ("ro", "disabled");
+		if ($urol == 'OBSERVER') {
+			$t->assign('ro', 'disabled');
 		}
-		$t->assign ("ctl_admineef", true);
-		$eef =  $us->q->getEEFieldList("");
-		$t->assign ("eef", $eef);
-		$t->assign ("ctl_eeflist", true);
-		break;
+		$t->assign('ctl_admineef', true);
+		$eef =  $us->q->getEEFieldList('');
+		$t->assign('eef', $eef);
+		$t->assign('ctl_eeflist', true);
+		$t->display('extraeffects.tpl');
+	break;
 } //switch
-
-$t->assign ("reg", $RegionId);
-$t->assign ("dic", $us->q->queryLabelsFromGroup('DB', $lg));
-$t->display ("extraeffects.tpl");
 
 </script>

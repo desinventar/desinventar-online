@@ -1,5 +1,5 @@
 <!-- BEG DI8 QUERY FORM -->
-<form id="DC" method="POST" target="dcr">
+<form id="frmMainQuery" method="POST" action="" target="dcr">
 	<input type="hidden" id="_REG" name="_REG" value="{-$reg-}" />
 	<input type="hidden" id="_CMD" name="_CMD" />
 	<input type="hidden" id="prmQueryCommand"      name="prmQuery[Command]"      value="DEFAULT" />

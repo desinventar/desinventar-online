@@ -19,19 +19,20 @@ foreach($us->q->core->query("SELECT * FROM Region WHERE RegionId LIKE 'GAR-ISDR-
 	$RegionList[] = $row['RegionId'];
 }
 //DEBUG
-$RegionList = array('GAR-ISDR-2011_ARG');
+$RegionList = array('DESINV-GAR-ISDR-2011_LATAM');
 foreach ($RegionList as $RegionId) {
+	print $RegionId . "\n";
 	$us->open($RegionId);
 	$sQuery = 'SELECT COUNT(*) AS C FROM Disaster';
 	foreach($us->q->dreg->query($sQuery) as $row) {
 		$iTotal = $row['C'];
 	}
-	print $RegionId . '(' . $iTotal . ' Records)' . "\n";
+	print 'Total Records : ' . $iTotal . "\n";
 	$EEFieldId = createEEField($us, 'Risk Type', 'INTEGER');
 	if ($EEFieldId == '') {
 		print "Error creating field...\n";
 	} else {
-		print $EEFieldId . "\n";
+		print 'EEField created : ' . $EEFieldId . "\n";
 		$sQuery = 'SELECT * FROM Disaster';
 		$sth = $us->q->dreg->prepare($sQuery);
 		//$sth->bindParam(':SessionId', $prmSessionId, PDO::PARAM_STR);
@@ -47,7 +48,7 @@ foreach ($RegionList as $RegionId) {
 			$us->q->dreg->query($sQuery);
 			$iCount++;
 			if ($iCount % 100 == 0) {
-				print $iCount . '/' . $iTotal . "\n";
+				printf('%6d %6d' . "\n", $iCount, $iTotal);
 			}
 		} //while
 	} 

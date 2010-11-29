@@ -100,7 +100,7 @@ class DIDisaster extends DIRecord {
 		return parent::insert($withValidate);
 	}
 	
-	public function validateCreate($bStrict=false) {
+	public function validateCreate($bStrict) {
 		$iReturn = 1;
 		$iReturn = $this->validateNotNull(-51, 'DisasterId');
 		$iReturn = $this->validatePrimaryKey(-52);
@@ -108,19 +108,37 @@ class DIDisaster extends DIRecord {
 		return $iReturn;
 	}
 	
-	public function validateUpdate($bStrict=false) {
+	public function validateUpdate($bStrict) {
 		$iReturn = parent::validateUpdate();
 		$iReturn = $this->validateNotNull(-53, 'DisasterSerial');
-		$iReturn = $this->validateUnique(-54, 'DisasterSerial', WARNING);
+		if ($bStrict) {
+			$iReturn = $this->validateUnique(-54, 'DisasterSerial');
+		} else {
+			$iReturn = $this->validateUnique(-54, 'DisasterSerial', WARNING);
+		}
 		$iReturn = $this->validateNotNull(-55, 'DisasterBeginTime');
 		// Warning
-		$iReturn = $this->validateNotNull(-56, 'DisasterSource',WARNING);
+		$bStrict2 = $bStrict;
+		if ($this->get('RecordStatus') != 'PUBLISHED') { $bStrict2 = false; }
+		if ($bStrict2) {
+			$iReturn = $this->validateNotNull(-56, 'DisasterSource');
+		} else {
+			$iReturn = $this->validateNotNull(-56, 'DisasterSource',WARNING);
+		}
 		$iReturn = $this->validateNotNull(-57, 'RecordStatus');
 		$iReturn = $this->validateRef(-58, 'GeographyId', 'Geography', 'GeographyId');
 		$iReturn = $this->validateRef(-59, 'EventId', 'Event', 'EventId');
 		$iReturn = $this->validateRef(-60, 'CauseId', 'Cause', 'CauseId');
 		// Warning
-		$iReturn = $this->validateEffects(WARNING);
+		/*
+		$bStrict2 = $bStrict;
+		if ($this->get('RecordStatus') != 'PUBLISHED') { $bStrict2 = false; }
+		if ($bStrict2) {
+			$iReturn = $this->validateEffects();
+		} else {
+			$iReturn = $this->validateEffects(WARNING);
+		}
+		*/
 		$iReturn = parent::validateUpdate($bStrict);
 		return $iReturn;
 	}

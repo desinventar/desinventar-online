@@ -85,9 +85,9 @@ class DIImport {
 							$bExistId = DIDisaster::existId($this->us, $o->get('DisasterId'));
 							if ($bExistId < 0) {
 								// Id doesn't exist, insert record
-								$iReturn = $o->validateCreate();
+								$iReturn = $o->validateCreate(false);
 							}
-							$iReturn = $o->validateUpdate();
+							$iReturn = $o->validateUpdate(false);
 							if ($iReturn <= 0) {
 								$o->status->getMsgList($rowCount, $o->get('DisasterSerial'), ERROR);
 								$o->status->getMsgList($rowCount, $o->get('DisasterSerial'), WARNING);
