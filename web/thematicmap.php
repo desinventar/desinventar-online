@@ -55,7 +55,8 @@ $post = $_POST;
 $get = $_GET;
 
 $RegionId = getParameter('_REG',getParameter('r',''));
-if ($RegionId == '') {
+if ($RegionId == '')
+{
 	exit();
 }
 
@@ -314,7 +315,9 @@ if (isset($post['_M+cmd']))
 		$t->assign('reg', $RegionId);
 		$t->assign('basemap', $worldmap);
 		$t->assign('mps', MAPSERV);
-	} else {
+	}
+	else
+	{
 		$t->assign('ctl_showres', false);
 	}
 	$t->display('thematicmap.tpl');
