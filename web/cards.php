@@ -14,18 +14,25 @@ require_once('include/dieedata.class.php');
  * Insert  (1) create DisasterId. 
  * Update  (2) keep RecordCreation and RecordAuthor 
  */
-function form2disaster($form, $icmd) {
+function form2disaster($form, $icmd)
+{
 	$data = array();
 	$geogid = '';
-	foreach ($form as $k=>$i) {
-		if (($icmd == CMD_NEW) || ($icmd == CMD_UPDATE)) {
+	foreach ($form as $k=>$i)
+	{
+		if (($icmd == CMD_NEW) || ($icmd == CMD_UPDATE))
+		{
 			if ((substr($k, 0, 1)  != '_') &&
 			    (substr($k, 0, 12) != 'RecordAuthor') &&
 			    (substr($k, 0, 19) != 'GeographyId') &&
 			    (substr($k, 0, 3)  != 'EEF'))
+			{
 			    $data[$k] = $i;
-			else {
-				if (substr($k, 0, 19) == 'GeographyId') {
+			}
+			else
+			{
+				if (substr($k, 0, 19) == 'GeographyId')
+				{
 					$geogid = $i;
 				}
 			}
@@ -34,9 +41,11 @@ function form2disaster($form, $icmd) {
 	// On Update
 	$data['DisasterId'] = $form['DisasterId'];
 	$data['RecordCreation'] = $form['RecordCreation'];
-	if ($icmd == CMD_NEW) {
+	if ($icmd == CMD_NEW)
+	{
 		// New Disaster
-		if ($data['DisasterId'] == '') {
+		if ($data['DisasterId'] == '')
+		{
 			$data['DisasterId'] = uuid();
 		}
 		$data['RecordCreation'] = date('Y-m-d H:i:s');
@@ -47,9 +56,11 @@ function form2disaster($form, $icmd) {
 
 	// Disaster date
 	$str = sprintf('%04d', $form['DisasterBeginTime'][0]);
-	if (!empty($form[$c .'DisasterBeginTime'][1])) {
+	if (!empty($form[$c .'DisasterBeginTime'][1]))
+	{
 		$str .= '-' . sprintf('%02d', $form['DisasterBeginTime'][1]);
-		if (!empty($form[$c .'DisasterBeginTime'][2])) {
+		if (!empty($form[$c .'DisasterBeginTime'][2]))
+		{
 			$str .= '-' . sprintf('%02d', $form['DisasterBeginTime'][2]);
 		}
 	}
@@ -59,10 +70,13 @@ function form2disaster($form, $icmd) {
 	return $data;
 } // function
 
-function form2eedata($form) {
+function form2eedata($form)
+{
 	$eedat['DisasterId'] = $form['DisasterId'];
-	foreach ($form as $k=>$i) {
-		if (substr($k, 0, 3) == 'EEF') {
+	foreach ($form as $k=>$i)
+	{
+		if (substr($k, 0, 3) == 'EEF')
+		{
 			$eedat[$k] = $i;
 		}
 	}
@@ -71,18 +85,22 @@ function form2eedata($form) {
 
 $RegionId = getParameter('RegionId', getParameter('r',''));
 /*
-if ( ($RegionId == '') || ($RegionId == 'undefined') ) {
-	if ($us->RegionId != 'core') {
+if ( ($RegionId == '') || ($RegionId == 'undefined') )
+{
+	if ($us->RegionId != 'core')
+	{
 		$RegionId = $us->RegionId;
 	}
 }
 */
-if ($RegionId == '') {
+if ($RegionId == '')
+{
 	exit(0);
 }
 
 // 2009-08-07 (jhcaiced) Validate if Database Exists...
-if (! file_exists($us->q->getDBFile($RegionId))) {
+if (! file_exists($us->q->getDBFile($RegionId)))
+{
 	print '<h3>Requested Region not found<br />';
 	exit();
 }
@@ -91,20 +109,27 @@ $us->open($RegionId);
 $t->assign('RegionId', $RegionId);
 
 // UPDATER: If user is still connected, awake session so it will not expire
-if (isset($_GET['u'])) {
+if (isset($_GET['u']))
+{
 	$res = $us->awake();
-	if (!iserror($res)) {
+	if (!iserror($res))
+	{
 		$status = 'green';
-	} else {
+	}
+	else
+	{
 		$status = 'red';
 	}
 	$t->assign('stat', $status);
 	$t->display('cards_updater.tpl');
-} else {
+}
+else
+{
 	$cmd = getParameter('cmd',getParameter('DatacardCommand',''));
 	$value = getParameter('value','');
 	// Commands in GET mode: lists, checkings..
-	switch ($cmd) {
+	switch ($cmd)
+	{
 		case 'list':
 			$lev = $us->q->getNextLev($_GET['GeographyId']);
 			$levmax = $us->q->getMaxGeoLev();
@@ -154,11 +179,14 @@ if (isset($_GET['u'])) {
 			// check if datacard is locked by some user
 			$answer = array('Status' => 'OK','DatacardStatus' => '');
 			$reserv = $us->isDatacardLocked($_GET['DisasterId']);
-			if ($reserv == '') {
+			if ($reserv == '')
+			{
 				// reserve datacard
 				$us->lockDatacard($_GET['DisasterId']);
 				$answer['DatacardStatus'] = 'RESERVED';
-			} else {
+			}
+			else
+			{
 				$answer['DatacardStatus'] = 'BLOCKED';
 			}
 			print json_encode($answer);
@@ -175,10 +203,12 @@ if (isset($_GET['u'])) {
 			$dcard['DisasterBeginTime[0]'] = substr($dcard['DisasterBeginTime'], 0, 4);
 			$dcard['DisasterBeginTime[1]'] = '';
 			$dcard['DisasterBeginTime[2]'] = '';
-			if (strlen($dcard['DisasterBeginTime']) > 4) {
+			if (strlen($dcard['DisasterBeginTime']) > 4)
+			{
 				$dcard['DisasterBeginTime[1]'] = substr($dcard['DisasterBeginTime'], 5, 2);
 			}
-			if (strlen($dcard['DisasterBeginTime']) > 7) {
+			if (strlen($dcard['DisasterBeginTime']) > 7)
+			{
 				$dcard['DisasterBeginTime[2]'] = substr($dcard['DisasterBeginTime'], 8, 2);
 			}
 			$gItems = $us->getGeographyItemsById($dcard['GeographyId']);
@@ -191,49 +221,67 @@ if (isset($_GET['u'])) {
 			$answer = array();
 			$answer['Status']     = 'OK';
 			$answer['StatusCode'] = 'UPDATEOK';
-			if ($cmd == 'insertDICard') {
+			if ($cmd == 'insertDICard')
+			{
 				$answer['StatusCode'] = 'INSERTOK';
 			}
 			$answer['StatusMsg']  = '';
 			$answer['ErrorCode']  = ERR_NO_ERROR;
 			$us->releaseDatacard($_POST['DisasterId']);
-			if ($cmd == 'insertDICard') {
+			if ($cmd == 'insertDICard')
+			{
 				$data = form2disaster($_POST, CMD_NEW);
-			} else {
+			}
+			else
+			{
 				$data = form2disaster($_POST, CMD_UPDATE);
 			}
 			$o = new DIDisaster($us, $data['DisasterId']);
 			$o->setFromArray($data);
-			if ($cmd == 'insertDICard') { $o->set('RecordCreation', gmdate('c')); }
+			if ($cmd == 'insertDICard')
+			{
+				$o->set('RecordCreation', gmdate('c'));
+			}
 			$o->set('RecordUpdate', gmdate('c'));
-			if ($cmd == 'insertDICard') {
+			if ($cmd == 'insertDICard')
+			{
 				$i = $o->insert();
-			} else {
+			}
+			else
+			{
 				$i = $o->update();
 			}
-			if ($i > 0) {
+			if ($i > 0)
+			{
 				// Save EEData ....
 				// If Datacard is valid, update EEData Table..
 				$eedat = form2eedata($_POST);
 				$eedat['DisasterId'] = $data['DisasterId'];
 				$e = new DIEEData($us, $eedat['DisasterId']);
 				$e->setFromArray($eedat);
-				if ($cmd == 'insertDICard') {
+				if ($cmd == 'insertDICard')
+				{
 					$i = $e->insert();
-				} else {
+				}
+				else
+				{
 					$i = $e->update();
 				}
-				if ($i < 0) {
+				if ($i < 0)
+				{
 					$answer['Status'] = 'ERROR';
 					$answer['StatusMsg'] = showerror($i) . '(' . $i . ')';
 					$answer['ErrorCode'] = $i;				
 				}
-			} else {
+			}
+			else
+			{
 				$answer['Status']    = 'ERROR';
 				$answer['StatusMsg'] = showerror($i) . '(' . $i . ')';
 				$answer['ErrorCode'] = $i;				
 			}
-			if ($answer['Status'] == 'OK') {
+			if ($answer['Status'] == 'OK')
+			{
 				$answer['DisasterId']      = $o->get('DisasterId');
 				$answer['DisasterSerial']  = $o->get('DisasterSerial');
 				$answer['RecordPublished'] = $us->q->getNumDisasterByStatus('PUBLISHED');
