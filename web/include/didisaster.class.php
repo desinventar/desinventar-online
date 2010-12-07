@@ -109,7 +109,7 @@ class DIDisaster extends DIRecord {
 	}
 	
 	public function validateUpdate($bStrict) {
-		$iReturn = parent::validateUpdate();
+		$iReturn = parent::validateUpdate($bStrict);
 		$iReturn = $this->validateNotNull(-53, 'DisasterSerial');
 		if ($bStrict) {
 			$iReturn = $this->validateUnique(-54, 'DisasterSerial');
