@@ -29,7 +29,6 @@ class DIRegionDB extends DIRegion {
 			$url = $this->processURL($SyncURL);
 			$RegionItemId = $url['regionid'];
 			$prmRegionItemGeographyId = $this->getRegionItemGeographyId($RegionItemId);
-			fb('GeoCarto : ' . $RegionItemId);
 
 			$query = "DELETE FROM GeoCarto WHERE GeographyId='" . $prmRegionItemGeographyId . "'";
 			$this->session->q->dreg->query($query);
@@ -99,7 +98,6 @@ class DIRegionDB extends DIRegion {
 			$url = $this->processURL($SyncURL);
 			$RegionItemId = $url['regionid'];
 			$RegionItemGeographyId = $this->getRegionItemGeographyId($RegionItemId);
-			fb('Disaster : ' . $RegionItemId);
 
 			// Attach Database
 			$this->session->q->dreg->query($this->attachQuery($RegionItemId,'RegItem'));
@@ -245,7 +243,6 @@ class DIRegionDB extends DIRegion {
 		foreach ($Queries as $Query) {
 			//$this->session->q->dreg->query($Query);
 			try {
-				//fb($Query);
 				$prmConn->query($Query);
 			} catch (Exception $e) {
 				showErrorMsg($e->getMessage());

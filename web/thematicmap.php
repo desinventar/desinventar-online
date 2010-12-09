@@ -22,7 +22,6 @@ function setRanges($opc)
 	$col = $opc['_M+color'];
 	$lmx = '10000000';
 	$maxr = false;
-	fb($leg);
 	// First range is No data
 	$range[0] = array(0, '= 0', '255 255 255');
 	// generate range hash with limit, legend and color
@@ -42,12 +41,10 @@ function setRanges($opc)
 		}
 	}
 	// if not assigned, set last range between last number and infinit
-	fb($maxr);
 	if (!$maxr)
 	{
 		$range[$j+1] = array($lmx, (int)$lim[$j-1] + 1 . ' -> ', '30 30 30');
 	}
-	fb($range);
 	return $range;
 }
 
