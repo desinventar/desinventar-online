@@ -432,7 +432,7 @@ class DIRegion extends DIObject {
 			try {
 				$doc->load($XMLFile);
 			} catch (Exception $e) {
-				fb('cannot load XML');
+				fb($e->getCode() . ' ' . $e->getMessage());
 			}
 			foreach($doc->getElementsByTagName('General') as $tree) {
 				$section = 'info';

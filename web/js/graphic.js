@@ -78,6 +78,20 @@ function onReadyGraphic() {
 	jQuery('#prmGraphKind').change(function() {
 		comp = $('prmGraphTypeComparative').value;
 		var kind = jQuery(this).val();
+		if (comp > 0) {
+			if (kind != 'PIE')
+			{
+				disab($('_G+D_perc'));
+				if (jQuery('#prmGraphData0').val() == 'PERCENT')
+				{	
+					jQuery('#prmGraphData0').val('NONE');
+				}
+			}
+			else
+			{
+				enab($('_G+D_perc'));
+			}
+		}
 		if ( (kind == 'BAR' || kind == 'LINE' || kind == 'PIE') &&
 		     (comp < 200) 
 		   ) {
