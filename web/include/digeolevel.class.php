@@ -56,8 +56,8 @@ class DIGeoLevel extends DIRecord {
 		return $iReturn;
 	}
 
-	public function validateUpdate() {
-		$iReturn = parent::validateUpdate();
+	public function validateUpdate($bStrict) {
+		$iReturn = parent::validateUpdate($bStrict);
 		$iReturn = $this->validateNotNull(-33, 'GeoLevelName');
 		if ($iReturn > 0) {
 			$iReturn = $this->validateUnique(-34, 'GeoLevelName', true);
