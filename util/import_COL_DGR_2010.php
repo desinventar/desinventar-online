@@ -45,6 +45,8 @@ while (! feof(STDIN) ) {
 		$p = $us->getDisasterIdFromSerial($DisasterSerial);
 		$DisasterId = $p['DisasterId'];		
 		$DisasterBeginTime = strToISO8601($a[1]);
+		//printf('%-10s %-20s' . "\n", $DisasterSerial, $DisasterBeginTime);
+		//$DisasterBeginTime = '';
 		if ($DisasterBeginTime != '') {
 			$d = new DIDisaster($us, $DisasterId);
 			
@@ -577,10 +579,10 @@ while (! feof(STDIN) ) {
 				$j = $e->update();
 			}
 			if ( ($i < 0) || ($j < 0) ) {
-				print $line . ' ' . $DisasterSerial . ' ' . $i . ' ' . $j . "\n";
+				//print $line . ' ' . $DisasterSerial . ' ' . $i . ' ' . $j . "\n";
 			}			
 			if (($line > 0) && (($line % 100) == 0) ) {
-				print $line . "\n";
+				//print $line . "\n";
 			}
 		} //if
 	} //if
@@ -613,8 +615,8 @@ function strToISO8601($prmDate) {
 	$v = '';
 	if (strlen($prmDate) > 0) {
 		$year  = substr($prmDate,0,4);
-		$month = substr($prmDate,4,2);
-		$day   = substr($prmDate,6,2);
+		$month = substr($prmDate,5,2);
+		$day   = substr($prmDate,8,2);
 		$v = sprintf('%4d-%2d-%2d', $year, $month, $day);
 		$v = str_replace(' ', '0', $v);
 	}
