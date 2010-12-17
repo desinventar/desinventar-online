@@ -19,7 +19,7 @@ foreach($us->q->core->query("SELECT * FROM Region WHERE RegionId LIKE 'GAR-ISDR-
 	$RegionList[] = $row['RegionId'];
 }
 //DEBUG
-$RegionList = array('DESINV-GAR-ISDR-2011_LATAM');
+$RegionList = array('GAR-ISDR-2011_IND_TAMILNADU');
 foreach ($RegionList as $RegionId) {
 	print $RegionId . "\n";
 	$us->open($RegionId);
@@ -28,7 +28,7 @@ foreach ($RegionList as $RegionId) {
 		$iTotal = $row['C'];
 	}
 	print 'Total Records : ' . $iTotal . "\n";
-	$EEFieldId = createEEField($us, 'Risk Type', 'INTEGER');
+	$EEFieldId = createEEField($us, 'Risk Type GAR2011', 'INTEGER');
 	if ($EEFieldId == '') {
 		print "Error creating field...\n";
 	} else {
@@ -66,6 +66,7 @@ function createEEField($prmSession, $EEFieldLabel, $EEFieldType, $EEFieldSize=''
 	}
 	$sAnswer = '';
 	$i = $f->insert();
+	fb($i);
 	if ($i > 0) {
 		$sAnswer = $f->get('EEFieldId');
 	}

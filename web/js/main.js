@@ -17,12 +17,25 @@ function onReadyMain() {
 			jQuery('#dcr').html('<img src="loading.gif">');
 			jQuery.post(myURL,
 				jQuery(this).serialize(),
-				function(data) {
+				function(data)
+				{
 					jQuery('#dcr').html(data);
-					onReadyData();
-					//onReadyThematicMap();
-					createThematicMap();
-					onReadyStatistic();
+					switch(myCmd)
+					{
+						case 'cmdGridShow':
+							onReadyData();
+						break;
+						case 'cmdMapShow':
+							createThematicMap();
+						break;
+						case 'cmdGraphShow':
+						break;
+						case 'cmdStatShow':
+							onReadyStatistic();
+						break;
+						default:
+						break;
+					} //switch
 				}
 			);
 			return false;

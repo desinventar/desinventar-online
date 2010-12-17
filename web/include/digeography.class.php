@@ -187,8 +187,8 @@ class DIGeography extends DIRecord {
 		return $iReturn;
 	}
 
-	public function validateUpdate() {
-		$oReturn = parent::validateUpdate();
+	public function validateUpdate($bStrict) {
+		$oReturn = parent::validateUpdate($bStrict);
 		$iReturn = $this->validateNotNull(-43, 'GeographyCode');
 		if ($iReturn > 0) {
 			$iReturn = $this->validateUnique(-44, 'GeographyCode');
