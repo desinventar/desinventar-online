@@ -11,7 +11,8 @@ require_once('include/diobject.class.php');
 require_once('include/digeolevel.class.php');
 require_once('include/digeocarto.class.php');
 
-function form2data($frm, $RegionId) {
+function form2data($frm, $RegionId)
+{
 	$dat = array();
 	$dat['GeoLevelId'] = isset($frm['GeoLevelId']) ? $frm['GeoLevelId'] : -1;
 	$dat['GeoLevelName'] = isset($frm['GeoLevelName']) ? $frm['GeoLevelName']: '';
@@ -21,14 +22,17 @@ function form2data($frm, $RegionId) {
 	// Replace files
 	if (isset($_FILES['GeoLevelFileSHP']) && $_FILES['GeoLevelFileSHP']['error'] == UPLOAD_ERR_OK &&
 		isset($_FILES['GeoLevelFileSHX']) && $_FILES['GeoLevelFileSHX']['error'] == UPLOAD_ERR_OK &&
-		isset($_FILES['GeoLevelFileDBF']) && $_FILES['GeoLevelFileDBF']['error'] == UPLOAD_ERR_OK) {
-			move_uploaded_file($_FILES['GeoLevelFileSHP']['tmp_name'], $cartoPath .'.shp');
-			move_uploaded_file($_FILES['GeoLevelFileSHX']['tmp_name'], $cartoPath .'.shx');
-			move_uploaded_file($_FILES['GeoLevelFileDBF']['tmp_name'], $cartoPath .'.dbf');
+		isset($_FILES['GeoLevelFileDBF']) && $_FILES['GeoLevelFileDBF']['error'] == UPLOAD_ERR_OK)
+	{
+		move_uploaded_file($_FILES['GeoLevelFileSHP']['tmp_name'], $cartoPath .'.shp');
+		move_uploaded_file($_FILES['GeoLevelFileSHX']['tmp_name'], $cartoPath .'.shx');
+		move_uploaded_file($_FILES['GeoLevelFileDBF']['tmp_name'], $cartoPath .'.dbf');
 	}
-	// Check if exists files of map..
 	elseif (!file_exists($cartoPath .'.shp') || !file_exists($cartoPath .'.shx') || !file_exists($cartoPath .'.dbf'))
+	{
+		// Check if exists files of map..
 		$cartoFile = '';
+	}
 	$dat['GeoLevelLayerFile'] = $cartoFile;
 	$dat['GeoLevelLayerCode'] = isset($frm['GeoLevelLayerCode']) ? $frm['GeoLevelLayerCode']: '';
 	$dat['GeoLevelLayerName'] = isset($frm['GeoLevelLayerName']) ? $frm['GeoLevelLayerName']: '';
@@ -40,20 +44,23 @@ $get = $_GET;
 $cmd = getParameter('cmd','');
 $RegionId = getParameter('_REG',getParameter('RegionId', getParameter('r','')));
 
-if ($RegionId == '') {
+if ($RegionId == '')
+{
 	exit();
 }
 
 $data = form2data($post, $RegionId);
 $us->open($RegionId);
 
-switch ($cmd) {
+switch ($cmd)
+{
 	case 'insert':
 		// Create new GeoLevel and GeoCarto Objects
 		$o = new DIGeoLevel($us);
 		$o->setFromArray($data);
 		$levid = $o->getMaxGeoLevel();
-		if ($levid >= 0) {
+		if ($levid >= 0)
+		{
 			$levid ++;
 		}
 		$o->set('GeoLevelId', $levid);
@@ -63,16 +70,21 @@ switch ($cmd) {
 		// Save to database
 		$gl = $o->insert();
 		$gl = $c->insert();
-		if (!iserror($gl)) {
+		if (!iserror($gl))
+		{
 			$t->assign('ctl_msginslev', true);
 			/* Create selection map.. -> disabled method
-			if (!empty($data['GeoLevelLayerFile']) && !empty($data['GeoLevelLayerCode']) && !empty($data['GeoLevelLayerName'])) {
+			if (!empty($data['GeoLevelLayerFile']) && !empty($data['GeoLevelLayerCode']) && !empty($data['GeoLevelLayerName']))
+			{
 				$map = new Maps($us, $RegionId, 0, null, null, null, '', null, 'SELECT');
 			}*/
-		} else {
+		}
+		else
+		{
 			$t->assign('ctl_errinslev', true);
 			$t->assign('insstatlev', $gl);
-			if ($gl == ERR_OBJECT_EXISTS) {
+			if ($gl == ERR_OBJECT_EXISTS)
+			{
 				$t->assign('ctl_chkname', true);
 				$t->assign('chkname', true);
 			} //if
@@ -92,16 +104,19 @@ switch ($cmd) {
 		// Save to database
 		$gl = $o->update();
 		$gl = $c->update();
-		if (!iserror($gl)) {
+		if (!iserror($gl))
+		{
 			$t->assign('ctl_msgupdlev', true);
 			/* Create selection map..
 			if (!empty($data['GeoLevelLayerFile']) && !empty($data['GeoLevelLayerCode']) && !empty($data['GeoLevelLayerName']))
 				$map = new Maps($us, $RegionId, 0, null, null, null, '', 'SELECT');*/
 		}
-		else {
+		else
+		{
 			$t->assign('ctl_errupdlev', true);
 			$t->assign('updstatlev', $gl);
-			if ($gl == ERR_OBJECT_EXISTS) {
+			if ($gl == ERR_OBJECT_EXISTS)
+			{
 				$t->assign('ctl_chkname', true);
 				$t->assign('chkname', true);
 			}
@@ -109,7 +124,8 @@ switch ($cmd) {
 	break;
 	case 'chkname':
 		$t->assign('ctl_chkname', true);
-		if ($us->q->isvalidObjectName($get['GeoLevelId'], $get['GeoLevelName'], DI_GEOLEVEL)) {
+		if ($us->q->isvalidObjectName($get['GeoLevelId'], $get['GeoLevelName'], DI_GEOLEVEL))
+		{
 			$t->assign('chkname', true);
 		}
 	break;
@@ -125,7 +141,8 @@ switch ($cmd) {
 		$t->assign('lev', $lev);
 		$t->assign('levmax', $us->q->getMaxGeoLev());
 		$t->assign('levname', $us->q->loadGeoLevById($lev));*/
-		if ($us->getUserRole($RegionId) == 'OBSERVER') {
+		if ($us->getUserRole($RegionId) == 'OBSERVER')
+		{
 			$t->assign('ro', 'disabled');
 		}
 	break;

@@ -83,8 +83,8 @@ class DICause extends DIRecord {
 		return $iReturn;
 	}
 
-	public function validateUpdate() {
-		$iReturn = parent::validateUpdate();
+	public function validateUpdate($bStrict) {
+		$iReturn = parent::validateUpdate($bStrict);
 		$iReturn = $this->validateNotNull(-23, 'CauseName');
 		if ($iReturn > 0) {
 			$iReturn = $this->validateUnique(-24, 'CauseName', true);

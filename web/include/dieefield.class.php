@@ -99,8 +99,8 @@ class DIEEField extends DIRecord {
 		return $iReturn;
 	} //function
 
-	public function validateUpdate() {
-		$oReturn = parent::validateUpdate();
+	public function validateUpdate($bStrict) {
+		$oReturn = parent::validateUpdate($bStrict);
 		$iReturn = ERR_NO_ERROR;
 		if ($iReturn > 0) {
 			$iReturn = $this->validateUnique(-83, 'EEFieldLabel', true);

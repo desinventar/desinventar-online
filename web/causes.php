@@ -8,7 +8,8 @@ require_once('include/loader.php');
 require_once('include/query.class.php');
 require_once('include/dicause.class.php');
 
-function form2cause ($form) {
+function form2cause ($form)
+{
 	$data = array ();
 	if (isset($form['CauseId']) && !empty($form['CauseId']))
 		$data['CauseId'] = $form['CauseId'];
@@ -29,10 +30,14 @@ function form2cause ($form) {
 	return $data;
 }
 
-function showResult($stat, &$tp) {
+function showResult($stat, &$tp)
+{
 	if (!iserror($stat))
+	{
 		$tp->assign('ctl_msgupdcau', true);
-	else {
+	}
+	else
+	{
 		$tp->assign('ctl_errupdcau', true);
 		$tp->assign('updstatcau', $stat);
 		$tp->assign('ctl_chkname', true);
@@ -46,14 +51,16 @@ function showResult($stat, &$tp) {
 
 $get = $_POST;
 $RegionId = getParameter('r', getParameter('RegionId'));
-if ($RegionId == '') {
+if ($RegionId == '')
+{
 	exit();
 }
 $us->open($RegionId);
 $cmd = getParameter('cmd','');
 
 $dat = form2cause($get);
-switch($cmd) {
+switch($cmd)
+{
 	case 'insert':
 		$o = new DICause($us);
 		$o->setFromArray($dat);
@@ -73,11 +80,13 @@ switch($cmd) {
 	case 'list':
 		// reload list from local SQLITE
 		$prmType = getParameter('predef');
-		if ($prmType == '1') {
+		if ($prmType == '1')
+		{
 			$t->assign('ctl_caupred', true);
 			$t->assign('caupredl', $us->q->loadCauses('PREDEF', null, $lg));
 		}
-		else {
+		else
+		{
 			$t->assign('ctl_caupers', true);
 			$t->assign('cauuserl', $us->q->loadCauses('USER', null, $lg));
 		}
@@ -86,14 +95,16 @@ switch($cmd) {
 		$t->assign('ctl_chkname', true);
 		$CauseId = getParameter('CauseId');
 		$CauseName = getParameter('CauseName');
-		if ($us->q->isvalidObjectName($CauseId, $CauseName, DI_CAUSE)) {
+		if ($us->q->isvalidObjectName($CauseId, $CauseName, DI_CAUSE))
+		{
 			$t->assign('chkname', true);
 		}
 		break;
 	case 'chkstatus':
 		$t->assign('ctl_chkstatus', true);
 		$CauseId = getParameter('CauseId');
-		if ($us->q->isvalidObjectToInactivate($CauseId, DI_CAUSE)) {
+		if ($us->q->isvalidObjectToInactivate($CauseId, DI_CAUSE))
+		{
 			$t->assign('chkstatus', true);
 		}
 	break;

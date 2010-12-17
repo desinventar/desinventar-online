@@ -88,7 +88,9 @@ switch ($cmd)
 			$RegionId = $r->get('RegionId');
 			if ($RegionCmd == 'cmdRegionCreate')
 			{
-				$iReturn = $r->insert(); //createRegionDB();
+				$iReturn = $r->insert();
+				$r2 = new DIRegionDB($us, $RegionId);
+				$r2->createRegionDB();
 			}
 			else
 			{

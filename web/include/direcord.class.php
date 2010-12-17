@@ -143,7 +143,7 @@ class DIRecord extends DIObject {
 				$iReturn = ERR_NO_ERROR;
 			} //foreach
 		} catch (Exception $e) {
-			showErrorMsg('exist : ' . $e->getMessage);
+			showErrorMsg('exist : ' . $e->getMessage());
 			$iReturn = ERR_TABLE_LOCKED;
 		}
 		return $iReturn;
@@ -169,7 +169,7 @@ class DIRecord extends DIObject {
 				$iReturn = ERR_NO_ERROR;
 			} // foreach
 		} catch (PDOException $e) {
-			showErrorMsg('load : ' . $e->getMessage);
+			showErrorMsg('load : ' . $e->getMessage());
 		}
 		$this->oOldField = $this->oField;
 		return $iReturn;
@@ -206,7 +206,7 @@ class DIRecord extends DIObject {
 					$iReturn = ERR_NO_ERROR;
 				}
 			} catch (PDOException $e) {
-				showErrorMsg('delete : ' . $e->getMessage);
+				showErrorMsg('delete : ' . $e->getMessage());
 				$iReturn = ERR_TABLE_LOCKED;
 			}
 		}
@@ -327,7 +327,7 @@ class DIRecord extends DIObject {
 				$iReturn = $ErrCode;
 			} //foreach
 		} catch (Exception $e) {
-			showErrorMsg('validatePrimaryKey : ' . $e->getMessage);
+			showErrorMsg('validatePrimaryKey : ' . $e->getMessage());
 		}
 		
 		if ($iReturn < 0) {
@@ -368,7 +368,7 @@ class DIRecord extends DIObject {
 				}
 			} //foreach
 		} catch (Exception $e) {
-			showErrorMsg('validateUnique : ' . $e->getMessage);
+			showErrorMsg('validateUnique : ' . $e->getMessage());
 		}
 		if ($iReturn < 0) {
 			$this->status->addMsg($ErrCode, $prmFieldName . ' value is not unique.', $isWarning);
@@ -389,7 +389,7 @@ class DIRecord extends DIObject {
 				$iReturn = ERR_NO_ERROR;
 			}
 		} catch (Exception $e) {
-			showErrorMsg('validateRef : ' . $e->getMessage);
+			showErrorMsg('validateRef : ' . $e->getMessage());
 		}
 		if ($iReturn < 0) {
 			$this->status->addMsg($ErrCode, $prmFieldName . ' reference to table ' . $TableName . ' is invalid (' . $Value . ')');
