@@ -13,7 +13,6 @@ if ($RegionId == '')
 {
 	exit();
 }
-fb($_POST);
 $us->open($RegionId);
 foreach($_POST['prmGraph']['Field'] as $key => $value)
 {
