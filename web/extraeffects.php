@@ -8,7 +8,8 @@ require_once('include/loader.php');
 require_once('include/query.class.php');
 require_once('include/dieefield.class.php');
 
-function getRAPermList($lst) {
+function getRAPermList($lst)
+{
 	$dat = array();
 	foreach ($lst as $k=>$v)
 		if ($v=='NONE' || $v=='USER' || $v=='OBSERVER' || $v=='SUPERVISOR')
@@ -17,23 +18,31 @@ function getRAPermList($lst) {
 }
 $get = $_POST;
 $RegionId = getParameter('RegionId',getParameter('r',''));
-if ($RegionId == '') {
+if ($RegionId == '')
+{
 	exit();
 }
 $cmd = getParameter('cmd','');
 $us->open($RegionId);
-switch($cmd) {
+switch($cmd)
+{
 	case 'cmdEEFieldInsert':
 	case 'cmdEEFieldUpdate':
 		$status = 0;
-		if ($get['EEField']['EEFieldActive'] == 'on') {
+		if ($get['EEField']['EEFieldActive'] == 'on')
+		{
 			$status |= CONST_REGIONACTIVE;
-		} else {
+		}
+		else
+		{
 			$status &= ~CONST_REGIONACTIVE;
 		}
-		if ($get['EEField']['EEFieldPublic'] == 'on') {
+		if ($get['EEField']['EEFieldPublic'] == 'on')
+		{
 			$status |= CONST_REGIONPUBLIC;
-		} else {
+		}
+		else
+		{
 			$status &= ~CONST_REGIONPUBLIC;
 		}
 		$get['EEField']['EEFieldStatus'] = $status;
@@ -42,19 +51,26 @@ switch($cmd) {
 		$o->setFromArray($get['EEField']);
 		$o->set('EEFieldId', $EEFieldId);
 		$o->set('RegionId', $RegionId);
-		if ($cmd == 'cmdEEFieldInsert') {
-			if ($EEFieldId == '') {
+		if ($cmd == 'cmdEEFieldInsert')
+		{
+			if ($EEFieldId == '')
+			{
 				$EEFieldId = $o->getNextEEFieldId();
 				$o->set('EEFieldId', $EEFieldId);
 			}
 			$stat = $o->insert();
-		} elseif ($cmd == 'cmdEEFieldUpdate') {
+		}
+		elseif ($cmd == 'cmdEEFieldUpdate')
+		{
 			$stat = $o->update();
 		}
 		$answer = array();
-		if (!iserror($stat)) {
+		if (!iserror($stat))
+		{
 			$answer['Status'] = 'OK';
-		} else {
+		}
+		else
+		{
 			$answer['Status'] = 'ERROR';
 			$answer['ErrorMsg'] = showerror($stat);
 		}
@@ -70,7 +86,8 @@ switch($cmd) {
 		$t->assign('reg', $RegionId);
 		$t->assign('dic', $us->q->queryLabelsFromGroup('DB', $lg));
 		$urol = $us->getUserRole($RegionId);
-		if ($urol == 'OBSERVER') {
+		if ($urol == 'OBSERVER')
+		{
 			$t->assign('ro', 'disabled');
 		}
 		$t->assign('ctl_admineef', true);

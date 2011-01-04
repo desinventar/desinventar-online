@@ -11,7 +11,8 @@ require_once('include/digeography.class.php');
 $get = $_GET;
 
 $RegionId = getParameter('RegionId', getParameter('r',''));
-if ($RegionId == '') {
+if ($RegionId == '')
+{
 	exit();
 }
 $us->open($RegionId);
@@ -24,23 +25,30 @@ $dat['GeoParentId'] = isset($get['GeoParentId']) ? $get['GeoParentId']: '';
 $dat['GeographyLevel'] = isset($get['GeographyLevel']) ? $get['GeographyLevel']: '';
 $dat['GeographyCode'] = isset($get['GeographyCode']) ? $get['GeographyCode']:'';
 $dat['GeographyName'] = isset($get['GeographyName']) ? $get['GeographyName']:'';
-if (isset($get['GeographyActive']) && $get['GeographyActive'] == 'on') {
+if (isset($get['GeographyActive']) && $get['GeographyActive'] == 'on')
+{
 	$dat['GeographyActive'] = 1;
-} else {
+}
+else
+{
 	$dat['GeographyActive'] = 0;
 }
 
-switch ($cmd) {
+switch ($cmd)
+{
 	case 'cmdGeographyInsert':
 	case 'cmdGeographyUpdate':
 		$answer = array();
 		$GeographyId = $_POST['data']['GeographyId'];
 		$o = new DIGeography($us, $GeographyId);
 		$o->setFromArray($_POST['data']);
-		if ($cmd == 'cmdGeographyInsert') {
+		if ($cmd == 'cmdGeographyInsert')
+		{
 			$o->setGeographyId($_POST['data']['GeoParentId']);
 			$i = $o->insert();
-		} else {
+		}
+		else
+		{
 			$i = $o->update();
 		}
 		$answer['Status'] = $i;
@@ -76,7 +84,8 @@ switch ($cmd) {
 		$t->assign('geol', $geol);
 		$t->assign('ctl_geolist', true);
 		$urol = $us->getUserRole($reg);
-		if ($urol == 'OBSERVER') {
+		if ($urol == 'OBSERVER')
+		{
 			$t->assign('ro', 'disabled');
 		}
 	break;

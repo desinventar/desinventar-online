@@ -13,7 +13,7 @@ define('MAJORVERSION', '2011');
 define('MINORVERSION', '002');
 define('VERSION'     , MAJORVERSION . '.' . MINORVERSION);
 define('INTVERSION'  , '8.2.2.05');
-define('JSVERSION'   , '2010-11-28.01');
+define('JSVERSION'   , '2010-12-17.01');
 
 // 2009-07-22 (jhcaiced) Adapted Configuration and Startup for 
 // using with PHP Command Line 
