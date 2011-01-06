@@ -1,7 +1,7 @@
 <script language="php">
 /*
  DesInventar - http://www.desinventar.org
- (c) 1998-2010 Corporacion OSSO
+ (c) 1998-2011 Corporacion OSSO
 */
 // 2009-09-16 (jhcaiced) Autoconfigure software directory
 if (! isset($_SERVER['DI8_WEB'])) {
@@ -10,10 +10,10 @@ if (! isset($_SERVER['DI8_WEB'])) {
 
 // This is the version of the software
 define('MAJORVERSION', '2011');
-define('MINORVERSION', '003');
+define('MINORVERSION', '006');
 define('VERSION'     , MAJORVERSION . '.' . MINORVERSION);
 define('INTVERSION'  , '8.2.2.05');
-define('JSVERSION'   , '2010-12-17.01');
+define('JSVERSION'   , '2011-01-06.01');
 
 // 2009-07-22 (jhcaiced) Adapted Configuration and Startup for 
 // using with PHP Command Line 
