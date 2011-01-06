@@ -180,17 +180,30 @@ if (isset($post['page']) || isset($post['_S+cmd']))
 		{
 			$slim = $sql .' LIMIT ' . $i * $rxp .', '. $rxp;
 			$dislist = $us->q->getassoc($slim);
-			//$dlt['GeographyId_0'] = '';
-			//$dislist[] = $dlt;
+			
+			// 2011-01-06 (jhcaiced) Adding Totals to data when exporting...
+			if ($export != '') 
+			{
+				foreach($gp as $GroupField)
+				{
+					$dlt[$GroupField] = '';
+				}
+				$dislist[] = $dlt;
+			}
 			$dl = $us->q->printResults($dislist, $export, $geo);
+			
 			/*
+			//2011-01-06 (jhcaiced) Create a log used for debug.
 			ob_start();
-			print_r($dl);
-			print_r($dislist);
-			print_r($dlt);
+			//print_r($gp);
+			//print_r($post);
+			//print_r($dl);
+			//print_r($dislist);
+			//print_r($dlt);
 			$Log = ob_get_clean();
 			file_put_contents('/tmp/log.txt', $Log);
 			*/
+			
 			if ($i == $pin && !empty($dl))
 			{
 				// Set translation in headers
