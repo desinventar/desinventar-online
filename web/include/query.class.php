@@ -1175,15 +1175,21 @@ class Query extends PDO {
 	}
 	
 	// Print results like associative array or fields separate by Tabs
-	function printResults ($dl, $exp, $mode) {
+	function printResults($dl, $exp, $mode)
+	{
 		$txt = '';
 		// Get results
-		if (!empty($dl)) {
+		if (!empty($dl))
+		{
 			$j = 0;
-			foreach ($dl as $k=>$i) {
-				foreach (array_keys($i) as $idx) {
-					if (substr($idx,0,11) == "GeographyId") {
-						switch ($mode) {
+			foreach ($dl as $k=>$i)
+			{
+				foreach (array_keys($i) as $idx)
+				{
+					if (substr($idx,0,11) == "GeographyId")
+					{
+						switch ($mode)
+						{
 							case "CODE": 
 								$dl[$j][$idx] = $this->getObjectNameById($i[$idx], DI_GEOGRAPHY);
 							break;
@@ -1197,41 +1203,57 @@ class Query extends PDO {
 								$dl[$j][$idx] = "";
 							break;
 						} //switch
-					} elseif (is_numeric($dl[$j][$idx]) && empty($exp)) {
+					}
+					elseif (is_numeric($dl[$j][$idx]) && empty($exp))
+					{
 						$dl[$j][$idx] = number_format($dl[$j][$idx], 0, ',', ' ');
 					}
 				} //foreach
-				if (!empty($exp)) {
+				if (!empty($exp))
+				{
 					//$txt = '';
-					foreach (array_values($dl[$j]) as $vals) {
-						if ($vals == -1) { 
+					foreach (array_values($dl[$j]) as $vals)
+					{
+						if ($vals == -1)
+						{ 
 							$myv = "YES"; 
-						} else {
+						}
+						else
+						{
 							$myv = $vals;
 						}
-						if ($exp == 'csv') {
+						if ($exp == 'csv')
+						{
 							$sep = ",";	// use comma separator to CSV
-						} else {
+						}
+						else
+						{
 							$sep = "\t";// use tab separator to XLS (default option)
 						}
-						if (is_numeric($myv)) {
+						if (is_numeric($myv))
+						{
 							$txt .= $myv . $sep;
-						} else {
+						}
+						else
+						{
 							$txt .= '"'. $myv .'"'. $sep;
 						}
-					}
+					} //foreach
 					$txt .= "\n";
 				} //if exp
 				$j++;
 			} //foreach
 		} //if !empty
-		if (!empty($exp)) {
+		if (!empty($exp))
+		{
 			return $txt;
-		} else {
+		}
+		else
+		{
 			return $dl;
 		}
 	}
-  
+
 	// Print results like json array to Javascript
 	function hash2json($dlist) {
 		$js = array();
