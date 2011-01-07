@@ -1,7 +1,7 @@
 <script language="php">
 /*
   DesInventar - http://www.desinventar.org
- (c) 1998-2010 Corporacion OSSO
+ (c) 1998-2011 Corporacion OSSO
 */
 
 define('ROLE_NONE'       , 0);
@@ -12,20 +12,17 @@ define('ROLE_ADMINREGION', 4);
 define('ROLE_ADMINPORTAL', 5);
 
 class UserSession {
-	var $q               = null;
-	var $sSessionId      = '';
-	var $RegionId       = 'core';
-	var $LangIsoCode     = 'eng';
-	var $UserId          = '';
-	var $dStart          = '';
-	var $dLastUpdate     = '';
-	var $UserRole        = '';
-	var $UserRoleValue   = ROLE_NONE;
 
 	public function __construct() {
 		$this->sSessionId = session_id();
-		$this->dStart = gmdate('c');
-		$this->dLastUpdate = $this->dStart;
+		$this->UserId            = '';
+		$this->LangIsoCode       = 'eng';
+		$this->RegionId          = 'core';
+		$this->RegionLangIsoCode = 'eng';
+		$this->dStart            = gmdate('c');
+		$this->dLastUpdate       = $this->dStart;
+		$this->UserRole          = '';
+		$this->UserRoleValue     = ROLE_NONE;
 		$this->q = new Query();
 		$num_args = func_num_args();
 		if ($num_args > 0) {
@@ -33,9 +30,6 @@ class UserSession {
 				$this->sSessionId = func_get_arg(0);
 			}
 		}
-		$this->UserId = '';
-		$this->LangIsoCode = 'eng';
-		$this->RegionLangIsoCode = 'eng';
 		$this->load($this->sSessionId);
 	} //constructor
 	
@@ -113,6 +107,11 @@ class UserSession {
 		}
 		return $iReturn;
 	}
+	
+	public function setLangIsoCode($prmLangIsoCode) 
+	{
+		$this->LangIsoCode = $prmLangIsoCode;
+	}
 
 	// Start a Session by creating a record in the database
 	// this could be an anonymous or authenticated session
@@ -147,15 +146,16 @@ class UserSession {
 				  'LastUpdate=:LastUpdate ' . 
 				  'WHERE SessionId=:SessionId';
 		$sth = $this->q->core->prepare($sQuery);
-		$sth->bindParam(':SessionId'  , $this->sSessionId, PDO::PARAM_STR);
-		$sth->bindValue(':RegionId'   , '', PDO::PARAM_STR);
-		$sth->bindParam(':UserId'     , $this->UserId, PDO::PARAM_STR);
-		$sth->bindValue(':Valid'      , 1, PDO::PARAM_INT);
+		$sth->bindParam(':SessionId'  , $this->sSessionId , PDO::PARAM_STR);
+		$sth->bindValue(':RegionId'   , ''                , PDO::PARAM_STR);
+		$sth->bindParam(':UserId'     , $this->UserId     , PDO::PARAM_STR);
+		$sth->bindValue(':Valid'      , 1                 , PDO::PARAM_INT);
 		$sth->bindParam(':LangIsoCode', $this->LangIsoCode, PDO::PARAM_STR);
-		$sth->bindParam(':Start'      , $this->dStart, PDO::PARAM_STR);
+		$sth->bindParam(':Start'      , $this->dStart     , PDO::PARAM_STR);
 		$sth->bindParam(':LastUpdate' , $this->dLastUpdate, PDO::PARAM_STR);
 		$sth->execute();
-
+		$sQuery = 'UPDATE UserSession SET LangIsoCode="' . $this->LangIsoCode . '" WHERE SessionId="' . $this->sSessionId . '"';
+		$this->q->core->query($sQuery);
 		$sQuery = "UPDATE UserLockList SET LastUpdate='" . $this->dLastUpdate . "' WHERE SessionId='" . $this->sSessionId . "'";
 		$this->q->core->query($sQuery);
 		$iReturn = ERR_NO_ERROR;
