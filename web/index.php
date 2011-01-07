@@ -426,6 +426,8 @@ switch ($cmd)
 					$t->display('test.tpl');
 				break;
 				default:
+					// Update UserSession with Current Language.
+					$us->update();
 					// Get UserRole
 					$role = $us->getUserRole($RegionId);
 					$roleValue = $us->getUserRoleValue($RegionId);

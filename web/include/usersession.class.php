@@ -50,6 +50,7 @@ class UserSession {
 			while($row = $sth->fetch(PDO::FETCH_ASSOC)) {
 				$this->sSessionId  = $row['SessionId'];
 				$this->UserId      = $row['UserId'];
+				$this->LangIsoCode = $row['LangIsoCode'];
 				$this->dStart      = $row['Start'];
 				$this->dLastUpdate = $row['LastUpdate'];
 				$iReturn = ERR_NO_ERROR;
@@ -117,14 +118,16 @@ class UserSession {
 	// this could be an anonymous or authenticated session
 	public function insert() {
 		$iReturn = ERR_DEFAULT_ERROR;
-		$sQuery = 'INSERT INTO UserSession VALUES (:SessionId,:RegionId,:UserId,:Valid,:Start,:LastUpdate)';
+		$sQuery = 'INSERT INTO UserSession (SessionId,RegionId,UserId,Valid,LangIsoCode,Start,LastUpdate) ' .
+		          ' VALUES (:SessionId,:RegionId,:UserId,:Valid,:LangIsoCode,:Start,:LastUpdate)';
 		$sth = $this->q->core->prepare($sQuery);
 		$sth->bindParam(':SessionId'  , $this->sSessionId, PDO::PARAM_STR);
 		$sth->bindValue(':RegionId'   , '', PDO::PARAM_STR);
 		$sth->bindParam(':UserId'     , $this->UserId, PDO::PARAM_STR);
 		$sth->bindValue(':Valid'      , 1, PDO::PARAM_INT);
-		$sth->bindParam(':Start'     , $this->dStart, PDO::PARAM_STR);
-		$sth->bindParam(':LastUpdate', $this->dLastUpdate, PDO::PARAM_STR);
+		$sth->bindParam(':LangIsoCode', $this->LangIsoCode, PDO::PARAM_STR);
+		$sth->bindParam(':Start'      , $this->dStart, PDO::PARAM_STR);
+		$sth->bindParam(':LastUpdate' , $this->dLastUpdate, PDO::PARAM_STR);
 		if ($result = $sth->execute()) {
 			$iReturn = ERR_NO_ERROR;
 		}
@@ -139,6 +142,7 @@ class UserSession {
 		$sQuery = 'UPDATE UserSession SET ' . 
 				  'UserId=:UserId,' . 
 				  'Valid=:Valid,' .
+				  'LangIsoCode=:LangIsoCode,' . 
 				  'Start=:Start,' .
 				  'LastUpdate=:LastUpdate ' . 
 				  'WHERE SessionId=:SessionId';
@@ -147,8 +151,9 @@ class UserSession {
 		$sth->bindValue(':RegionId'   , '', PDO::PARAM_STR);
 		$sth->bindParam(':UserId'     , $this->UserId, PDO::PARAM_STR);
 		$sth->bindValue(':Valid'      , 1, PDO::PARAM_INT);
-		$sth->bindParam(':Start'     , $this->dStart, PDO::PARAM_STR);
-		$sth->bindParam(':LastUpdate', $this->dLastUpdate, PDO::PARAM_STR);
+		$sth->bindParam(':LangIsoCode', $this->LangIsoCode, PDO::PARAM_STR);
+		$sth->bindParam(':Start'      , $this->dStart, PDO::PARAM_STR);
+		$sth->bindParam(':LastUpdate' , $this->dLastUpdate, PDO::PARAM_STR);
 		$sth->execute();
 
 		$sQuery = "UPDATE UserLockList SET LastUpdate='" . $this->dLastUpdate . "' WHERE SessionId='" . $this->sSessionId . "'";

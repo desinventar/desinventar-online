@@ -420,19 +420,25 @@
 		}
 	} //function
 	
-	function sendList(cmd) {
-		if (cmd == 'result') {
+	function sendList(cmd)
+	{
+		if (cmd == 'result')
+		{
 			jQuery('#prmQueryCommand').val('cmdGridShow');
-		} else {
+		}
+		else
+		{
 			jQuery('#prmQueryCommand').val('cmdGridSave');
 		}
-		if ($('_D+Field[]').length > 0) {
+		if ($('_D+Field[]').length > 0)
+		{
 			w = Ext.getCmp('westm');
 			$('_D+cmd').value = cmd;
 			selectall('_D+Field[]');
 			var ob = $('_D+Field[]');
 			var mystr = "";
-			for (i=0; i < ob.length; i++) {
+			for (i=0; i < ob.length; i++)
+			{
 				mystr += ob[i].value + ",";
 			}
 			mystr += "D.DisasterId";
@@ -443,7 +449,9 @@
 			jQuery('#frmMainQuery').submit();
 			//hideMap();
 			return true;
-		} else {
+		}
+		else
+		{
 			return false;
 		}
 	}
