@@ -33,7 +33,7 @@
 		<!-- BEGIN EVENT SECTION -->
 		<dt>{-#mevesection#-}</dt>
 		<dd>
-			<span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br>
+			<span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br />
 			<select id="qevelst" name="D_EventId[]" multiple style="width: 250px; height: 200px;" class="line">
 				{-include file="main_eventlist.tpl" -}
 			</select>
