@@ -39,20 +39,28 @@ function onReadyData() {
 	jQuery('#prmDataPageRecords').val(jQuery('#tblDataRows tr').size());
 }
 
-function doDataDisplayPage(page) {
-	if (parseInt(jQuery('#prmDataPageUpdate').val()) < 1) {
+function doDataDisplayPage(page)
+{
+	if (parseInt(jQuery('#prmDataPageUpdate').val()) < 1)
+	{
 		jQuery('#prmDataPageUpdate').val(1);
 		var mypag = page;
 		var now = parseInt(jQuery('#DataCurPage').val());
-		if (page == 'prev') {
+		if (page == 'prev')
+		{
 			mypag = now - 1;
-		} else if (page == 'next') {
+		}
+		else if (page == 'next')
+		{
 			mypag = now + 1;
 		}
 		var NumberOfPages = jQuery('#prmDataPageCount').val();
-		if ((mypag < 1) || (mypag > NumberOfPages)) {
+		if ((mypag < 1) || (mypag > NumberOfPages))
+		{
 			// Out of Range Page, do nothing
-		} else {
+		}
+		else
+		{
 			jQuery('#DataCurPage').val(mypag);
 			var RegionId = jQuery('#desinventarRegionId').val();
 			var RecordsPerPage = jQuery('#prmDataPageSize').val();
@@ -67,7 +75,8 @@ function doDataDisplayPage(page) {
 				 'sql'            : QueryDef,
 				 'fld'            : FieldList
 				},
-				function(data) {
+				function(data)
+				{
 					jQuery('#tblDataRows').html(data);
 					// Reload the jQuery functions on the new DOM elements...
 					onReadyData();
