@@ -117,7 +117,8 @@ class UserSession {
 	// this could be an anonymous or authenticated session
 	public function insert() {
 		$iReturn = ERR_DEFAULT_ERROR;
-		$sQuery = 'INSERT INTO UserSession VALUES (:SessionId,:RegionId,:UserId,:Valid,:Start,:LastUpdate)';
+		$sQuery = 'INSERT INTO UserSession (SessionId, RegionId, UserId, Valid, Start, LastUpdate) ' .
+		          ' VALUES (:SessionId,:RegionId,:UserId,:Valid,:Start,:LastUpdate)';
 		$sth = $this->q->core->prepare($sQuery);
 		$sth->bindParam(':SessionId'  , $this->sSessionId, PDO::PARAM_STR);
 		$sth->bindValue(':RegionId'   , '', PDO::PARAM_STR);
