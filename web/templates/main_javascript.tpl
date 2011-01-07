@@ -599,13 +599,7 @@
 		} //function
 		
 		function printRes() {
-			if (CheckIsIE() == true) {
-				document.dcr.focus();
-				document.dcr.print();
-			} else {
-				window.frames['dcr'].focus();
-				window.frames['dcr'].print();
-			}
+			window.print();
 		}
 		
 		// Find all Effects fields enable by saved query
