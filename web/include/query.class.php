@@ -1,7 +1,7 @@
 <script language="php">
 /*
  DesInventar - http://www.desinventar.org
- (c) 1998-2010 Corporacion OSSO
+ (c) 1998-2011 Corporacion OSSO
 */
 class Query extends PDO {
 	public $RegionId = "";
@@ -130,34 +130,72 @@ class Query extends PDO {
 	}
 
 	// STANDARDS FUNCTION TO GET GENERAL EVENTS, CAUSES LISTS
-	function loadEvents($type, $status, $lang) {
+	function loadEvents($type, $status, $LangIsoCode)
+	{
 		$data = array();
-		if ($type == "BASE") {
-			$data = $this->getBasicEventList($lang);
+		if ($type == 'BASE')
+		{
+			$data = $this->getBasicEventList($LangIsoCode);
 		} else {
-			$data = $this->getRegionEventList($type, $status, $lang);
+			// This is the data from the Region Database...
+			$data = $this->getRegionEventList($type, $status, $LangIsoCode);
+			if ($type == 'PREDEF') 
+			{
+				// Attempt to translate the list to the requested language using 
+				// data from base.Event table
+				$data1 = $this->getBasicEventList($LangIsoCode);
+				foreach($data as $EventId => $EventData)
+				{
+					if (array_key_exists($EventId, $data1))
+					{
+						$data[$EventId][0] = $data1[$EventId][0];
+						$data[$EventId][1] = $data1[$EventId][1];
+					}
+				}
+			}
 		}
 		return $data;
 	}
 
 	// active : active, inactive  | types : predef, user | empty == all
-	function loadCauses($type, $status, $lang) {
+	function loadCauses($type, $status, $LangIsoCode)
+	{
 		$data = array();
-		if ($type == "BASE") {
-			$data = $this->getBasicCauseList($lang);
-		} else {
-			$data = $this->getRegionCauseList($type, $status, $lang);
+		if ($type == 'BASE')
+		{
+			$data = $this->getBasicCauseList($LangIsoCode);
+		}
+		else
+		{
+			$data = $this->getRegionCauseList($type, $status, $LangIsoCode);
+			if ($type == 'PREDEF') 
+			{
+				// Attempt to translate the list to the requested language using 
+				// data from base.Cause table
+				$data1 = $this->getBasicCauseList($LangIsoCode);
+				foreach($data as $CauseId => $CauseData)
+				{
+					if (array_key_exists($CauseId, $data1))
+					{
+						$data[$CauseId][0] = $data1[$CauseId][0];
+						$data[$CauseId][1] = $data1[$CauseId][1];
+					}
+				} //foreach
+			} //if
 		}
 		return $data;
 	}
 
-	public function getBasicEventList($lg) {
+	public function getBasicEventList($lg)
+	{
 		$sql = "SELECT EventId, EventName, EventDesc FROM Event ".
 				"WHERE LangIsoCode='$lg' ORDER BY EventName";
 		$data = array();
 		$res = $this->base->query($sql);
 		foreach($res as $row)
+		{
 			$data[$row['EventId']] = array($row['EventName'], $row['EventDesc']);
+		}
 		return $data;
 	}
 
@@ -171,7 +209,7 @@ class Query extends PDO {
 		return $data;
 	}
 
-	public function getRegionEventList($type, $status, $lang) {
+	public function getRegionEventList($type, $status, $LangIsoCode) {
 		if ($type == "PREDEF")
 			$sqlt = "EventPreDefined=1";
 		else if ($type == "USER")
@@ -190,7 +228,7 @@ class Query extends PDO {
 		return $data;
 	}
 
-	public function getRegionCauseList($type, $status, $lang) {
+	public function getRegionCauseList($type, $status, $LangIsoCode) {
 		if ($type == "PREDEF")
 			$sqlt = "CausePredefined=1";
 		else if ($type == "USER")
@@ -1362,10 +1400,10 @@ class Query extends PDO {
 	}
   
 	// DICTIONARY FUNCTIONS
-	function existLang($langID) {
+	function existLang($LangIsoCode) {
 		$answer = false;
-		if ($langID != "") {
-			$sql = "select LangIsoCode from Language where LangIsoCode='". $langID ."'";
+		if ($LangIsoCode != "") {
+			$sql = "select LangIsoCode from Language where LangIsoCode='". $LangIsoCodeID ."'";
 			foreach ($this->base->query($sql) as $row) {
 				if (count($row) > 0) {
 					$answer = true;
