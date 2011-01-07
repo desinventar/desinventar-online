@@ -1,7 +1,7 @@
 <script language="php">
 /*
  DesInventar - http://www.desinventar.org
- (c) 1998-2010 Corporacion OSSO
+ (c) 1998-2011 Corporacion OSSO
 */
 require_once('include/loader.php');
 require_once('include/diregion.class.php');
@@ -22,7 +22,9 @@ fixPost($post);
 
 // load levels to display in totalizations
 foreach ($us->q->loadGeoLevels('', -1, false) as $k=>$i)
+{
 	$st['StatisticGeographyId_'. $k] = array($i[0], $i[1]);
+}
 $dic = array_merge(array(), $st);
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Statistic', $lg));
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
@@ -178,7 +180,30 @@ if (isset($post['page']) || isset($post['_S+cmd']))
 		{
 			$slim = $sql .' LIMIT ' . $i * $rxp .', '. $rxp;
 			$dislist = $us->q->getassoc($slim);
+			
+			// 2011-01-06 (jhcaiced) Adding Totals to data when exporting...
+			if ($export != '') 
+			{
+				foreach($gp as $GroupField)
+				{
+					$dlt[$GroupField] = '';
+				}
+				$dislist[] = $dlt;
+			}
 			$dl = $us->q->printResults($dislist, $export, $geo);
+			
+			/*
+			//2011-01-06 (jhcaiced) Create a log used for debug.
+			ob_start();
+			//print_r($gp);
+			//print_r($post);
+			//print_r($dl);
+			//print_r($dislist);
+			//print_r($dlt);
+			$Log = ob_get_clean();
+			file_put_contents('/tmp/log.txt', $Log);
+			*/
+			
 			if ($i == $pin && !empty($dl))
 			{
 				// Set translation in headers
