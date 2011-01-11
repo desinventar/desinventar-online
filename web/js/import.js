@@ -1,9 +1,8 @@
 /*
  DesInventar - http://www.desinventar.org
- (c) 1998-2010 Corporacion OSSO
- 
- Javascript functions for import datacards methods
+ (c) 1998-2011 Corporacion OSSO
 */
+
 function onReadyImport() {
 	jQuery("div.divImport").hide();
 	jQuery("div#divImportSelectFile").show();

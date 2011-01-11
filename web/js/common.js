@@ -1,3 +1,8 @@
+/*
+ DesInventar - http://www.desinventar.org
+ (c) 1998-2011 Corporacion OSSO
+*/
+
 function onReadyCommon() {
 	// Create periodic task to keep session alive...
 	var pe = new PeriodicalExecuter(doKeepSessionAwake, 60);

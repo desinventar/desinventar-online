@@ -1,3 +1,7 @@
+/*
+ DesInventar - http://www.desinventar.org
+ (c) 1998-2011 Corporacion OSSO
+*/
 // http://css-tricks.com/snippets/jquery/serialize-form-to-json/
 // Serialize Form to JSON
 jQuery.fn.serializeObject = function() {
