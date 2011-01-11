@@ -1,3 +1,8 @@
+/*
+ DesInventar - http://www.desinventar.org
+ (c) 1998-2011 Corporacion OSSO
+*/
+
 function onReadyDatabaseAdmin() {
 	// Table Stripes...
 	jQuery('#tblDatabaseList tr:odd').removeClass('normal').addClass('normal');

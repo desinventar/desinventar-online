@@ -1,3 +1,8 @@
+/*
+ DesInventar - http://www.desinventar.org
+ (c) 1998-2011 Corporacion OSSO
+*/
+
 function onReadyGraphic() {
 	// 2010-02-21 (jhcaiced) This jQuery calls ensures that the Period and Stat
 	// parameters are not empty at the same time.
