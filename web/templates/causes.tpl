@@ -71,8 +71,8 @@
 		</table>
 	</div>
 	<br />
-	<input id="add" type="button" value="{-#baddelem#-}" class="line"
-		onclick="setEveCau('','','','1','0','cause'); uploadMsg(''); $('cmd').value='insert';" />
+	<input id="btnCauseAdd" type="button" value="{-#baddelem#-}" class="line"
+/>
 	<span id="causestatusmsg" class="dlgmsg"></span>
 	<br /><br />
 	<div id="causeaddsect" style="display:none">
@@ -95,7 +95,7 @@
 				<input id="r" name="r" type="hidden" value="{-$reg-}" />
 				<input id="aCauseId" name="CauseId" type="hidden" />
 				<input id="aCausePreDefined" name="CausePreDefined" type="hidden" />
-				<input id="cmd" name="cmd" type="hidden" />
+				<input id="cmd" name="cmd" type="hidden" value="" />
 				<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="4" />
 				<input type="reset" value="{-#bcancel#-}" onClick="$('causeaddsect').style.display='none'; uploadMsg('');" {-$ro-} class="line" />
 			</p>

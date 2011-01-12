@@ -1,3 +1,8 @@
+/*
+ DesInventar - http://www.desinventar.org
+ (c) 1998-2011 Corporacion OSSO
+*/
+
 function onReadyDBConfigGeography() {
 	jQuery('.clsDBConfigGeographyStatus').hide();
 

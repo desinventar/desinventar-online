@@ -16,7 +16,7 @@ class UserSession {
 	public function __construct() {
 		$this->sSessionId = session_id();
 		$this->UserId            = '';
-		$this->LangIsoCode       = 'eng';
+		$this->LangIsoCode       = '';
 		$this->RegionId          = 'core';
 		$this->RegionLangIsoCode = 'eng';
 		$this->dStart            = gmdate('c');

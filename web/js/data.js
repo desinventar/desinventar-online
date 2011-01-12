@@ -1,3 +1,8 @@
+/*
+ DesInventar - http://www.desinventar.org
+ (c) 1998-2011 Corporacion OSSO
+*/
+
 function onReadyData() {
 	jQuery('.linkGridGotoCard').click(function() {
 		var DisasterId = jQuery(this).attr('DisasterId');

@@ -28,24 +28,24 @@ desinventar.db : region.sql
 
 lang : lang_spa lang_eng lang_por lang_fre
 
-lang_spa : di8_interface_strings.csv
+lang_spa : interface_strings.csv
 	./createInterfaceStrings.pl --lang=spa > ../../web/conf/spa.conf
-lang_eng : di8_interface_strings.csv
+lang_eng : interface_strings.csv
 	./createInterfaceStrings.pl --lang=eng > ../../web/conf/eng.conf
-lang_por : di8_interface_strings.csv
+lang_por : interface_strings.csv
 	./createInterfaceStrings.pl --lang=por > ../../web/conf/por.conf
-lang_fre : di8_interface_strings.csv
+lang_fre : interface_strings.csv
 	./createInterfaceStrings.pl --lang=fre > ../../web/conf/fre.conf
 
 langportal : langportal_spa langportal_eng langportal_por langportal_fre
 
-langportal_spa: di8_portal_strings.csv
+langportal_spa: portal_strings.csv
 	./createInterfaceStrings.pl --portal --lang=spa > ../../portal/conf/spa.conf
-langportal_eng: di8_portal_strings.csv
+langportal_eng: portal_strings.csv
 	./createInterfaceStrings.pl --portal --lang=eng > ../../portal/conf/eng.conf
-langportal_por: di8_portal_strings.csv
+langportal_por: portal_strings.csv
 	./createInterfaceStrings.pl --portal --lang=por > ../../portal/conf/por.conf
-langportal_fre: di8_portal_strings.csv
+langportal_fre: portal_strings.csv
 	./createInterfaceStrings.pl --portal --lang=fre > ../../portal/conf/fre.conf
 
 clean :
