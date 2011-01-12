@@ -1,4 +1,8 @@
 <script language="php">
+/*
+ DesInventar - http://www.desinventar.org
+ (c) 1998-2011 Corporacion OSSO
+*/
 	class DIDate {
 		// Return 1 if its a Leap Year, 0 if it's not and -1 if an error occurs
 		public static function isLeapYear($prmYear) {
