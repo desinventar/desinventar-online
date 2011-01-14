@@ -4,12 +4,6 @@
 */
 
 function onReadyDatabaseConfig() {
-	jQuery('#frmCauseEdit #btnCauseAdd').unbind('click').submit(function() {
-		setEveCau('','','','1','0','cause');
-		uploadMsg('');
-		jQuery('#frmCauseEdit #cmd').val('insert');
-	});
-
 	jQuery('#frmCauseEdit').unbind('submit').submit(function() {
 		//onSubmit="javascript: var a=new Array('aCauseName','aCauseDesc'); return(checkForm('frmCauseEdit',a, '{-#errmsgfrm#-}'));"		return false;
 		//action="javascript:var s=$('frmCauseEdit').serialize(); sendData('{-$reg-}', 'causes.php', s, $('aCausePreDefined').value);"

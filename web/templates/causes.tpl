@@ -71,8 +71,8 @@
 		</table>
 	</div>
 	<br />
-	<input id="btnCauseAdd" type="button" value="{-#baddelem#-}" class="line"
-/>
+	<input id="btnCauseAdd" type="button" value="{-#baddelem#-}" class="line" 
+		onClick="setEveCau('','','','1','0','cause');uploadMsg('');$('cmd').value='insert';" />
 	<span id="causestatusmsg" class="dlgmsg"></span>
 	<br /><br />
 	<div id="causeaddsect" style="display:none">

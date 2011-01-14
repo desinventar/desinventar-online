@@ -2,7 +2,8 @@
  DesInventar - http://www.desinventar.org
  (c) 1998-2011 Corporacion OSSO
 */
-function onReadyMain() {
+function onReadyMain()
+{
 	onReadyCommon();
 	onReadyThematicMap();
 
@@ -13,9 +14,12 @@ function onReadyMain() {
 		     (myCmd == 'cmdGraphSave') ||
 		     (myCmd == 'cmdMapSave') || 
 		     (myCmd == 'cmdStatSave') ||
-		     (myCmd == 'cmdQuerySave')) {
+		     (myCmd == 'cmdQuerySave'))
+		{
 			return true;
-		} else {
+		}
+		else
+		{
 			jQuery('#divDatabaseInfo').hide();
 			jQuery('#dcr').show();
 			jQuery('#dcr').html('<img src="loading.gif">');
@@ -47,13 +51,16 @@ function onReadyMain() {
 	});
 
 	jQuery('.contentBlock').hide();
-	if (jQuery('#desinventarRegionId').val() != '') {
+	if (jQuery('#desinventarRegionId').val() != '')
+	{
 		// Load Database Info and Show
 		jQuery('#divDatabaseInfo').load('index.php?cmd=getRegionFullInfo&r=' + jQuery('#desinventarRegionId').val());
 		jQuery('#divDatabaseInfo').show();
 		jQuery('#dcr').hide();
 		jQuery('#divQueryResults').show();
-	} else {
+	}
+	else
+	{
 		// Show database list
 		jQuery("#divDatabaseList").show();
 	}
@@ -69,7 +76,8 @@ function onReadyMain() {
 			 lang     : jQuery('#desinventarLang').val(),
 			 cmd      : jQuery(this).attr('cmd')
 			},
-			function(data) {
+			function(data)
+			{
 				me.html(data);
 				onReadyDatabaseConfig();
 				onReadyExtraEffects();
