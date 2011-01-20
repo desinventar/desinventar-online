@@ -231,7 +231,7 @@
 "di8_input","teffhav","Hubo","There were","Houve","Il y en a eu"
 "di8_input","teffhavnot","No hubo","There weren't any","Não houve","Il n'y en a pas eu"
 "di8_input","teffdontknow","No sabe","Don't know","Não sabe","Ne sait pas"
-"di8_input","msgDatacardDuplicatedSerial","Valor serial del registro no es único; no se puede guardar.","Serial value is duplicated; cannot save.","Serial valor é duplicado, não pode salvar.","La valeur de série est en double; ne pouvez pas enregistrer."
+"di8_input","msgDatacardDuplicatedSerial","Valor del campo Serial ya existe; no se puede guardar el registro","Serial field value already exists, record cannot be saved","Valor do campo Serial já existe, o registro não pode ser salva","Valeur du champ de série existe déjà, record ne peut être sauvé"
 "di8_input","msgDatacardInvalidStatus","No puede guardar ficha con este estado.","Cannot save datacard with this status.","Não é possível salvar datacard com este estatuto","Impossible d'enregister carte de données avec ce statut"
 "di8_input","msgDatacardWithoutSource","Ficha sin fuente no puede ser publicada.","Datacard without source information cannot be published.","Datacard sem informação de origem não pode ser publicado.","Datacard sans source d'information ne peut pas être publié"
 "di8_input","msgDatacardInvalidGeography","No ha seleccionado Geografía","Geography has not been selected","Geografia não foi selecionado","Géographie n'a pas été sélectionné"
