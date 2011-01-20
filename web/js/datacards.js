@@ -655,6 +655,7 @@ function doDatacardSave() {
 					if (bContinue == false) {
 						displayDatacardStatusMsg('msgDatacardDuplicatedSerial');
 						jQuery('#DICard #Status').val(Status);
+						jQuery('#DICard #DisasterSerial').highlight().focus();
 					}
 					if (bContinue) {
 						//'DisasterSource', 
