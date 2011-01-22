@@ -5,7 +5,7 @@
 				case 'mnuRegionInfo':
 					jQuery('#divDatabaseInfo').html('');
 					if (RegionId != '') {
-						jQuery('#divDatabaseInfo').load('index.php?cmd=getRegionFullInfo&amp;r=' + jQuery('#desinventarRegionId').val());
+						jQuery('#divDatabaseInfo').load('index.php?cmd=getRegionFullInfo&RegionId=' + jQuery('#desinventarRegionId').val() + '&t=' + new Date().getTime());
 						jQuery('#divDatabaseInfo').show();
 						jQuery('#dcr').hide();
 					}
