@@ -54,7 +54,7 @@ function onReadyMain()
 	if (jQuery('#desinventarRegionId').val() != '')
 	{
 		// Load Database Info and Show
-		jQuery('#divDatabaseInfo').load('index.php?cmd=getRegionFullInfo&r=' + jQuery('#desinventarRegionId').val());
+		jQuery('#divDatabaseInfo').load('index.php?cmd=getRegionFullInfo&RegionId=' + jQuery('#desinventarRegionId').val() + '&t=' + new Date().getTime());
 		jQuery('#divDatabaseInfo').show();
 		jQuery('#dcr').hide();
 		jQuery('#divQueryResults').show();
