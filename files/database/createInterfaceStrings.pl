@@ -1,8 +1,8 @@
 #!/usr/bin/perl
 #  DesInventar - http://www.desinventar.org
-#  (c) 1998-2010 Corporacion OSSO
+#  (c) 1998-2011 Corporacion OSSO
 #  
-#  2010-01-24 Jhon H. Caicedo <jhcaiced@desinventar.org>
+#  Jhon H. Caicedo <jhcaiced@desinventar.org>
 #
 #  Create the spa.conf,eng.conf,por.conf,fre.conf files 
 #  with the interface strings using the csv file
@@ -16,7 +16,7 @@ my $lang = '';
 my $index = 2;
 my $bHelp = 0;
 my $bPortal = 0;
-my $file  = 'di8_interface_strings.csv';
+my $file  = 'interface_strings.csv';
 
 if (!GetOptions('help|h'    => \$bHelp,
                 'lang|l=s'  => \$lang,
@@ -26,7 +26,7 @@ if (!GetOptions('help|h'    => \$bHelp,
 }                
 
 if ($bPortal) {
-	$file = 'di8_portal_strings.csv';
+	$file = 'portal_strings.csv';
 }
 
 my %trans = ();

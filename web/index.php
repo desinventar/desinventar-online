@@ -29,7 +29,7 @@ if ($cmd == '' && $RegionId == '')
 	$cmd = 'start';
 }
 // Default Template Values
-$t->assign('desinventarRegionId'   , $RegionId);
+$t->assign('desinventarRegionId', $RegionId);
 if (!empty($RegionId))
 {
 	$us->open($RegionId);
