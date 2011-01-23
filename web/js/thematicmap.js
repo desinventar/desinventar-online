@@ -38,7 +38,7 @@ function createThematicMap()
 	map = new OpenLayers.Map('map', options);
 	map.addControl(new OpenLayers.Control.PanZoomBar({zoomStopHeight:3,zoomWorldIcon:true}));
 	map.addControl(new OpenLayers.Control.LayerSwitcher({ascending:false}));
-	map.addControl(new OpenLayers.Control.MousePosition());
+	map.addControl(new OpenLayers.Control.MousePosition({displayClass:'MapMousePosition'}));
 	map.addControl(new OpenLayers.Control.NavToolbar());
 	
 	// WMS Local Base Map

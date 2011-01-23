@@ -211,3 +211,8 @@ a:hover	{	color:#00008b; }
 #divDatacardStatusMsg {
 	width:400px;
 }
+.MapMousePosition {
+	position: absolute;
+	left: 45px;
+	top: 2px;
+}
