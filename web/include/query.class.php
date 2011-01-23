@@ -1548,9 +1548,9 @@ class Query extends PDO
 			}
 			else
 			{
-				// Count Reports
+				// Count Records
 				$sel[$j] = 'COUNT('. $FieldName .') AS ' . substr($FieldName, 2) . '_';
-				// Counts Reports with "Hay"
+				// Counts Records with "Hay"
 				if ($FieldOp == '=')
 				{
 					$whr[$j] = "OR (". $FieldName . $FieldOp . $FieldValue . " OR ". $FieldName .">0)";
