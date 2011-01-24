@@ -70,7 +70,6 @@ function showResult($stat, &$tp)
 }
 
 $get = $_POST;
-
 $RegionId = getParameter('r', getParameter('RegionId'));
 if ($RegionId == '')
 { 
