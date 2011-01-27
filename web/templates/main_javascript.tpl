@@ -170,21 +170,24 @@
 	Ext.onReady(function() {
 		// Initialize User Login Form
 		onReadyUserLogin();
+		jQuery('#loading').hide();
+		jQuery('#loading-mask').hide();
 		
 		jQuery('body').bind('UserLoggedIn',function() {
+			Ext.getCmp('viewport').destroy();
+			jQuery('#loading').show();
+			jQuery('#loading-mask').show();
 			// When the user completes the login procedure, reload the current page...
 			 window.location.reload(false);
 		});
 
 		jQuery('body').bind('UserLoggedOut',function() {
+			Ext.getCmp('viewport').destroy();
+			jQuery('#loading').show();
+			jQuery('#loading-mask').show();
 			// When the user logouts, reload the current page...
 			 window.location.reload(false);
 		});
-		
-		setTimeout(function() {
-			Ext.get('loading').remove();
-			Ext.get('loading-mask').fadeOut({remove:true});
-		}, 250);
 		Ext.QuickTips.init();
 		// User functions Window
 		if (!usrw) {
@@ -321,6 +324,8 @@
 
 		// layout
 		var viewport = new Ext.Viewport({
+			id:'viewport',
+			contentEl: 'divViewport',
 			layout:'border',
 			items:[
 				{ region:'north',
