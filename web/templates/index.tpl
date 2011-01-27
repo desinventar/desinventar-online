@@ -70,26 +70,27 @@
 	<div id="loading">
 		<div class="loading-indicator">Loading...</div>
 	</div>
-	
-	<!-- Top Menu Area - Toolbar -->
-	<div id="north">
-		<div id="toolbar"></div>
-	</div>
+	<div id="divViewport">
+		<!-- Top Menu Area - Toolbar -->
+		<div id="north">
+			<div id="toolbar"></div>
+		</div>
 
-	<!-- Query Design -->
-	<div id="west">
-		{-include file="main_querydesign.tpl" -}
-	</div>
-	
-	<!-- Central Content Area -->
-	<div id="container">
-		{-include file="main_content.tpl" -}
-	</div>
-	
+		<!-- Query Design -->
+		<div id="west">
+			{-include file="main_querydesign.tpl" -}
+		</div>
+		
+		<!-- Central Content Area -->
+		<div id="container">
+			{-include file="main_content.tpl" -}
+		</div>
+		
 
-	<!-- Help Section -->
-	<div id="south">
-		{-include file="main_help.tpl" -}
+		<!-- Help Section -->
+		<div id="south">
+			{-include file="main_help.tpl" -}
+		</div>
 	</div>
 	
 	<!-- General App Information -->

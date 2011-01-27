@@ -713,9 +713,6 @@ switch ($cmd)
 						}
 						$t->assign('desinventarGoogleMapsKey', $desinventarGoogleMapsKey);
 						$t->assign('desinventarHasInternet', $desinventarHasInternet);
-						
-						/* END THEMATIC MAP */
-
 						$t->display('index.tpl');
 					}
 					else
