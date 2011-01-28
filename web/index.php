@@ -26,7 +26,7 @@ $RegionId = getParameter('r', getParameter('RegionId', getParameter('_REG'),''))
 $RegionLabel = '';
 if ($cmd == '' && $RegionId == '')
 {
-	$cmd = 'start';
+	$cmd = 'main';
 }
 // Default Template Values
 $t->assign('desinventarRegionId', $RegionId);
