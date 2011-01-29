@@ -991,6 +991,9 @@ class Query extends PDO
 	// Generate SQL from Associative array from Desconsultar Form
 	public function genSQLWhereDesconsultar($dat)
 	{
+		// 2011-01-29 (jhcaiced) Updated method for applying operator between fields
+		$dat['D_DisasterSiteNotes'][0] = $dat['QueryGeography']['OP'];
+
 		$e		   = array();
 		$e['Eff']  = "";
 		$e['Item'] = "";
@@ -1080,7 +1083,46 @@ class Query extends PDO
 			} //if
 		} //foreach
 		$QueryItem['EEField'] = $EEQuery;
+
+		// Geography Section Query (GeographyId + DisasterSiteNotes)
+		$Query = '';
+		$bFirst = true;
+		$GeographyList = $dat['D_GeographyId'];
+		$Field = 'D.GeographyId';
+		foreach ($GeographyList as $i)
+		{
+			if (! $bFirst)
+			{
+				$Query .= ' OR ';
+			}
+			// Restrict to childs elements only
+			$hasChildsSelected = false;
+			foreach ($GeographyList as $j)
+			{
+				if ($i != $j && ($i == substr($j, 0, 5) || $i == substr($j, 0, 10)))
+				{
+					$hasChildsSelected = true;
+					$bFirst = true;
+				}
+			}
+			if (! $hasChildsSelected)
+			{
+				$Query .= $Field . ' LIKE "' . $i . '%"';
+				$bFirst = false;
+			}
+		} //foreach
+		$value = trim($dat['D_DisasterSiteNotes'][1]);
+		if ($value != '')
+		{
+			$Query = '(' . $Query . ') ' . $dat['QueryGeography']['OP'] . ' ' .
+			         '(' . 'D.DisasterSiteNotes LIKE "%' . $value . '%"' . ')';
+		}
+		$QueryItem['Geography'] = $Query;
+		// Remove data to avoid further processing by old query method..
+		unset($dat['D_GeographyId']);
+		unset($dat['D_DisasterSiteNotes']);
 		
+		// Process all other fields...		
 		foreach ($dat as $k=>$v)
 		{
 			// replace D_ by D.
@@ -1163,33 +1205,6 @@ class Query extends PDO
 							$QueryItem['Cause'] .= "$k = '$i'";
 							$bFirst = false;
 						}
-					}
-					elseif ($k == "D.GeographyId")
-					{
-						$bFirst = true;
-						$QueryItem['Geography'] = '';
-						foreach ($v as $i)
-						{
-							if (! $bFirst)
-							{
-								$QueryItem['Geography'] .= ' OR ';
-							}
-							// Restrict to childs elements only
-							$hasChildsSelected = false;
-							foreach ($v as $j)
-							{
-								if ($i != $j && ($i == substr($j, 0, 5) || $i == substr($j, 0, 10)))
-								{
-									$hasChildsSelected = true;
-									$bFirst = true;
-								}
-							}
-							if (! $hasChildsSelected)
-							{
-								$QueryItem['Geography'] .= "$k LIKE '$i%'";
-								$bFirst = false;
-							}
-						} //foreach
 					}
 					elseif ((substr($k, 2, 6) == "Effect" || substr($k, 2, 6) == "Sector") && isset($v[0]))
 					{
@@ -1375,6 +1390,7 @@ class Query extends PDO
 			}
 			$WhereQuery .= ')';
 		}
+		fb($WhereQuery);
     	return $WhereQuery;
 	} //function
 

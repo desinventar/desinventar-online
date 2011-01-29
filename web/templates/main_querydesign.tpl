@@ -10,6 +10,12 @@
 		<!-- Select from Map testing ... 'selectionmap.php' -->
 		<dt>{-#mgeosection#-}</dt>
 		<dd>
+			<p align="right">{-#msgOperator#-}
+			<select name="QueryGeography[OP]" class="dlgmsg small line">
+				<option class="small" value="AND" {-if $qd.D_DisasterSiteNotes[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
+				<option class="small" value="OR"  {-if $qd.D_DisasterSiteNotes[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
+			</select>
+			</p>
 			{-foreach name=glev key=k item=i from=$glev-}
 				<span class="dlgmsg" onMouseOver="showtip('{-$i[1]-}');">{-$i[0]-}</span> |
 			{-/foreach-}
@@ -20,10 +26,13 @@
 			</div>
 			
 			<b onMouseOver="showtip('{-$dis.DisasterSiteNotes[2]-}');">{-$dis.DisasterSiteNotes[0]-}</b>
+			<input type="hidden" name="D_DisasterSiteNotes[0]" />
+			<!--
 			<select name="D_DisasterSiteNotes[0]" class="small line">
 				<option class="small" value="AND" {-if $qd.D_DisasterSiteNotes[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
 				<option class="small" value="OR"  {-if $qd.D_DisasterSiteNotes[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
 			</select>
+			-->
 			<br/>
 			<textarea id="DisasterSiteNotes" name="D_DisasterSiteNotes[1]" style="width:220px; height: 40px;"
 				onFocus="showtip('{-$dis.DisasterSiteNotes[2]-}');">{-$qd.D_DisasterSiteNotes[1]-}
