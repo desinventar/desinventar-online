@@ -12,8 +12,8 @@
 		<dd>
 			<p align="right">{-#msgOperator#-}
 			<select name="QueryGeography[OP]" class="dlgmsg small line">
-				<option class="small" value="AND" {-if $qd.D_DisasterSiteNotes[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-				<option class="small" value="OR"  {-if $qd.D_DisasterSiteNotes[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
+				<option class="small" value="AND" {-if $qd.QueryGeography[OP] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
+				<option class="small" value="OR"  {-if $qd.QueryGeography[OP] == 'OR' -}selected{-/if-}>{-#tor#-}</option>
 			</select>
 			</p>
 			{-foreach name=glev key=k item=i from=$glev-}
@@ -82,6 +82,12 @@
 		<!-- BEGIN QUERY EFFECTS SECTION -->
 		<dt>{-#meffsection#-}</dt>
 		<dd>
+			<p align="right">{-#msgOperator#-}
+			<select name="QueryEffects[OP]" class="dlgmsg small line">
+				<option class="small" value="AND" {-if $qd.QueryEffects[OP] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
+				<option class="small" value="OR"  {-if $qd.QueryEffects[OP] == 'OR' -}selected{-/if-}>{-#tor#-}</option>
+			</select>
+			</p>
 			<b>{-#ttitegp#-}</b><br />
 			<div style="height: 100px;" class="dwin" ext:qtip="{-#thlpquery#-}">
 				<table border="0" cellpadding="0" cellspacing="0">
@@ -111,10 +117,6 @@
 										<input type="text" id="{-$key-}[2]" name="D_{-$key-}[2]" size="3" class="line"
 											value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}" />
 									</span>
-									<select id="{-$key-}[3]" id="{-$key-}[3]" name="D_{-$key-}[3]" class="small line">
-										<option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-										<option class="small" value="OR"  {-if $qd.$ff[3] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-									</select>
 								</span>
 							</td>
 						</tr>
@@ -141,10 +143,6 @@
 										<option class="small" value="0"  {-if $qd.$ff[0] == '0'-}selected{-/if-}>{-#teffhavnot#-}</option>
 										<option class="small" value="-2" {-if $qd.$ff[0] == '-2'-}selected{-/if-}>{-#teffdontknow#-}</option>
 									</select>
-									<select id="{-$key-}[3]" id="{-$key-}[3]" name="D_{-$key-}[3]" class="small line">
-										<option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-										<option class="small" value="OR"  {-if $qd.$ff[3] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-									</select>
 									{-foreach name=sc2 key=k item=i from=$item[3]-}
 										{-assign var="ff" value=D_$k-}
 										<span id="o{-$k-}" style="display:none">
@@ -165,10 +163,7 @@
 												<input type="text" id="{-$k-}[2]" name="D_{-$k-}[2]" size="3" class="line"
 													value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}" />
 											</span>
-											<select id="{-$k-}[3]" id="{-$k-}[3]" name="D_{-$k-}[3]" class="small line">
-												<option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-												<option class="small" value="OR"  {-if $qd.$ff[3] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-											</select><br />
+											<br />
 										</span>
 									{-/foreach-}
 								</span>
@@ -202,10 +197,6 @@
 						<input type="text" id="{-$k-}[2]" name="D_{-$k-}[2]" size="5" class="line" 
 							value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}" />
 					</span>
-					<select id="{-$key-}[3]" name="D_{-$key-}[3]" class="small line">
-						<option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-						<option class="small" value="OR"  {-if $qd.$ff[3] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-					</select>
 				</span>
 				<br />
 			{-/foreach-}
@@ -246,12 +237,6 @@
 										<span id="y{-$key-}" style="display:none">
 											{-#tand#-} <input type="text" id="{-$key-}[2]" name="EEFieldQuery[{-$key-}][Value2]" size="3" value="10" class="line">
 										</span>
-										<!--
-										<select id="{-$key-}[3]" id="{-$key-}[3]" name="EEFieldQuery[{-$key-}][BetweenOperator]" class="small">
-											<option class="small" value="AND" checked>{-#tand#-}</option>
-											<option class="small" value="OR">{-#tor#-}</option>
-										</select>
-										-->
 									</span>
 								{-/if-}
 								{-if $item[2] == "TEXT"-}
