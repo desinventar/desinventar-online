@@ -288,11 +288,8 @@
 					</tr>
 				</table>
 				<br />
+				<input type="hidden" name="D_DisasterSource[0]" value="AND" />
 				<b onMouseOver="showtip('{-$dis.DisasterSource[2]-}');">{-$dis.DisasterSource[0]-}</b>
-				<select name="D_DisasterSource[0]" class="small line">
-					<option class="small" value="AND" {-if $qd.D_DisasterSource[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-					<option class="small" value="OR"  {-if $qd.D_DisasterSource[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-				</select>
 				<br />
 				<textarea id="txtDisasterSource" name="D_DisasterSource[1]" style="width:220px; height:40px;"
 					onFocus="showtip('{-$dis.DisasterSource[2]-}');">{-$qd.D_DisasterSource[1]-}
