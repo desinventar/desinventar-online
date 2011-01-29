@@ -997,6 +997,21 @@ class Query extends PDO
 			{
 				$Query = $prmQuery . ' '. $prmOp . ' ';
 			}
+			$Query .= '(' . $prmField . '="' . $Value . '"' . ')';
+		}
+		return $Query;
+	}
+
+	function querySQLAddMemoField($prmQuery, $prmField, $prmValue, $prmOp)
+	{
+		$Value = trim($prmValue);
+		$Query = $prmQuery;
+		if ($Value != '')
+		{
+			if ($prmQuery != '') 
+			{
+				$Query = $prmQuery . ' '. $prmOp . ' ';
+			}
 			$Query .= '(' . $prmField . ' LIKE "%' . $Value . '%"' . ')';
 		}
 		return $Query;
@@ -1136,12 +1151,36 @@ class Query extends PDO
 		{
 			$Query = '(' . $Query . ')';
 		}
-		$Query = $this->querySQLAddTextField($Query, 'D.DisasterSiteNotes', $dat['D.DisasterSiteNotes'][1], $dat['QueryGeography']['OP']);
-		
+		$Query = $this->querySQLAddMemoField($Query, 'D.DisasterSiteNotes', $dat['D.DisasterSiteNotes'][1], $dat['QueryGeography']['OP']);
 		$QueryItem['Geography'] = $Query;
 		// Remove data to avoid further processing by old query method..
 		unset($dat['D.GeographyId']);
 		unset($dat['D.DisasterSiteNotes']);
+
+		// Event Section Query
+		$Query = '';
+		$Field = 'D.EventId';
+		$bFirst = true;
+		foreach ($dat[$Field] as $EventId)
+		{
+			if (! $bFirst)
+			{
+				$Query .= ' OR ';
+			}
+			$Query .= $Field . '="' . $EventId . '"';
+			$bFirst = false;
+		}
+		if ($Query != '')
+		{
+			$Query = '(' . $Query . ')';
+		}
+		fb($Query);
+		$Query = $this->querySQLAddTextField($Query, 'D.EventDuration', $dat['D.EventDuration'], $dat['QueryEvent']['OP']);
+		$Query = $this->querySQLAddMemoField($Query, 'D.EventNotes', $dat['D.EventNotes'][1], $dat['QueryEvent']['OP']);
+		$QueryItem['Event'] = $Query;
+		unset($dat['D.EventId']);
+		unset($dat['D.EventDuration']);
+		unset($dat['D.EventNotes']);
 
 		// Effects Query
 		$Query = '';
@@ -1178,8 +1217,8 @@ class Query extends PDO
 				}
 			}
 		} //foreach
-		$Query = $this->querySQLAddTextField($Query, 'D.EffectNotes', $dat['D.EffectNotes'], $dat['QueryEffects']['OP']);
-		$Query = $this->querySQLAddTextField($Query, 'D.EffectOtherLosses', $dat['D.EffectOtherLosses'], $dat['QueryEffects']['OP']);
+		$Query = $this->querySQLAddMemoField($Query, 'D.EffectNotes', $dat['D.EffectNotes'], $dat['QueryEffects']['OP']);
+		$Query = $this->querySQLAddMemoField($Query, 'D.EffectOtherLosses', $dat['D.EffectOtherLosses'], $dat['QueryEffects']['OP']);
 		unset($dat['D.EffectNotes']);
 		unset($dat['D.EffectOtherLosses']);
 		$e['Eff'] = $Query;
