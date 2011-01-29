@@ -1114,7 +1114,7 @@ class Query extends PDO
 				{
 					if (! $First)
 					{
-						$EEQuery .= ' AND ';
+						$EEQuery .= ' ' . $dat['QueryEEField']['OP'] . ' ';
 					}
 					$First = false;
 					$EEQuery .= $QueryTmp;
@@ -1215,7 +1215,7 @@ class Query extends PDO
 			{
 				if (is_array($v))
 				{
-					$op = $dat['QueryEffects']['OP'];
+					$op = $dat['QueryEffect']['OP'];
 					if (! $bFirst)
 					{
 						$Query .= ' ' . $op . ' ';
@@ -1241,8 +1241,8 @@ class Query extends PDO
 				}
 			}
 		} //foreach
-		$Query = $this->querySQLAddMemoField($Query, 'D.EffectNotes', $dat['D.EffectNotes'], $dat['QueryEffects']['OP']);
-		$Query = $this->querySQLAddMemoField($Query, 'D.EffectOtherLosses', $dat['D.EffectOtherLosses'], $dat['QueryEffects']['OP']);
+		$Query = $this->querySQLAddMemoField($Query, 'D.EffectNotes', $dat['D.EffectNotes'], $dat['QueryEffect']['OP']);
+		$Query = $this->querySQLAddMemoField($Query, 'D.EffectOtherLosses', $dat['D.EffectOtherLosses'], $dat['QueryEffect']['OP']);
 		unset($dat['D.EffectNotes']);
 		unset($dat['D.EffectOtherLosses']);
 		$e['Eff'] = $Query;
