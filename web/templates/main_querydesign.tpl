@@ -60,16 +60,19 @@
 		<!-- BEGIN CAUSE SECTION -->
 		<dt>{-#mcausection#-}</dt>
 		<dd>
+			<p align="right">{-#msgOperator#-}
+			<select name="QueryCause[OP]" class="dlgmsg small line">
+				<option class="small" value="AND" {-if $qd.QueryCause[OP] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
+				<option class="small" value="OR"  {-if $qd.QueryCause[OP] == 'OR' -}selected{-/if-}>{-#tor#-}</option>
+			</select>
+			</p>
 			<span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br>
 			<select id="qcaulst" name="D_CauseId[]" multiple style="width: 250px; height: 200px;" class="line">
 				{-include file="main_causelist.tpl" -}
 			</select>
 			<br />
 			<b onMouseOver="showtip('{-$cau.CauseNotes[2]-}');">{-$cau.CauseNotes[0]-}</b>
-			<select name="D_CauseNotes[0]" class="small line">
-				<option class="small" value="AND" {-if $qd.D_CauseNotes[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-				<option class="small" value="OR"  {-if $qd.D_CauseNotes[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-			</select><br />
+			<br />
 			<textarea name="D_CauseNotes[1]" style="width:250px; height: 40px;"
 				onFocus="showtip('{-$cau.CauseNotes[2]-}');">{-$qd.D_CauseNotes[1]-}
 			</textarea>

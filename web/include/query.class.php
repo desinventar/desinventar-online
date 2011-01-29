@@ -5,7 +5,7 @@
 */
 class Query extends PDO
 {
-	public $RegionId = "";
+	public $RegionId = '';
 	public $dreg = null;
 	public $core = null;
 	public $DBFile = '';
@@ -14,8 +14,8 @@ class Query extends PDO
 	{
 		if (!extension_loaded('pdo'))
 		{
-		  dl( "pdo.so" );
-		  dl( "pdo_sqlite.so" );
+		  dl( 'pdo.so' );
+		  dl( 'pdo_sqlite.so' );
 		}
 		try
 		{
@@ -24,14 +24,14 @@ class Query extends PDO
 			// Open core.db - Users, Regions, Auths.. 
 			$dbc = CONST_DBCORE;
 			if (file_exists($dbc))
-				$this->core = new PDO("sqlite:" . $dbc);
+				$this->core = new PDO('sqlite:' . $dbc);
 			else
 				$this->rebuildCore($dbc); // Rebuild data from directory..
 
 			// Open base.db - DI's Basic database
 			$dbb = CONST_DBBASE;
 			if (file_exists($dbb))
-				$this->base = new PDO("sqlite:" . $dbb);
+				$this->base = new PDO('sqlite:' . $dbb);
 
 			if ($num_args > 0)
 			{
@@ -49,7 +49,7 @@ class Query extends PDO
 		}
 		catch (Exception $e)
 		{
-			showErrorMsg("Error !: " . $e->getMessage());
+			showErrorMsg('Error !: ' . $e->getMessage());
 			die();
 		}
 	}
@@ -61,11 +61,11 @@ class Query extends PDO
 		{
 			if ($prmRegionId == 'core')
 			{
-				$DBFile .= "/main/core.db";
+				$DBFile .= '/main/core.db';
 			}
 			else
 			{
-				$DBFile .= "/database/" . $prmRegionId ."/desinventar.db";
+				$DBFile .= '/database/' . $prmRegionId .'/desinventar.db';
 			}
 		}
 		return $DBFile;
@@ -79,13 +79,13 @@ class Query extends PDO
 		{
 			if ($prmRegionId == 'core')
 			{
-				$DBFile .= "/main/core.db";
+				$DBFile .= '/main/core.db';
 			}
 			else
 			{
 				if ($prmDBFile == '')
 				{
-					$DBFile .= "/database/" . $prmRegionId ."/desinventar.db";
+					$DBFile .= '/database/' . $prmRegionId .'/desinventar.db';
 				}
 				else
 				{
@@ -96,7 +96,7 @@ class Query extends PDO
 			{
 				try
 				{
-					$this->dreg = new PDO("sqlite:" . $DBFile);
+					$this->dreg = new PDO('sqlite:' . $DBFile);
 					// set the error reporting attribute
 					$this->dreg->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					$this->RegionId = $prmRegionId;
@@ -144,7 +144,7 @@ class Query extends PDO
 		}
 		else
 		{
-			echo "Empty Query !!";
+			echo 'Empty Query !!';
 		}
 		return $data;
 	}
@@ -235,8 +235,8 @@ class Query extends PDO
 
 	public function getBasicEventList($lg)
 	{
-		$sql = "SELECT EventId, EventName, EventDesc FROM Event ".
-				"WHERE LangIsoCode='$lg' ORDER BY EventName";
+		$sql = 'SELECT EventId, EventName, EventDesc FROM Event ' .
+		       ' WHERE LangIsoCode="' . $lg . '" ORDER BY EventName';
 		$data = array();
 		$res = $this->base->query($sql);
 		foreach($res as $row)
@@ -248,8 +248,8 @@ class Query extends PDO
 
 	public function getBasicCauseList($lg)
 	{
-		$sql = "SELECT CauseId, CauseName, CauseDesc FROM Cause ".
-				"WHERE LangIsoCode='$lg' ORDER BY CauseName";
+		$sql = 'SELECT CauseId, CauseName, CauseDesc FROM Cause ' .
+		       ' WHERE LangIsoCode="' . $lg . '" ORDER BY CauseName';
 		$data = array();
 		$res = $this->base->query($sql);
 		foreach($res as $row)
@@ -261,21 +261,21 @@ class Query extends PDO
 
 	public function getRegionEventList($type, $status, $LangIsoCode)
 	{
-		if ($type == "PREDEF")
+		if ($type == 'PREDEF')
 		{
-			$sqlt = "EventPreDefined=1";
+			$sqlt = 'EventPreDefined=1';
 		}
-		else if ($type == "USER")
+		else if ($type == 'USER')
 		{
-			$sqlt = "EventPreDefined=0";
+			$sqlt = 'EventPreDefined=0';
 		}
 		else
 		{
 			$sqlt = "'1=1'";	// all
 		}
-		if ($status == "active")
+		if ($status == 'active')
 		{
-			$sqls = "EventActive=1";
+			$sqls = 'EventActive=1';
 		}
 		else
 		{
@@ -1174,13 +1174,34 @@ class Query extends PDO
 		{
 			$Query = '(' . $Query . ')';
 		}
-		fb($Query);
 		$Query = $this->querySQLAddTextField($Query, 'D.EventDuration', $dat['D.EventDuration'], $dat['QueryEvent']['OP']);
 		$Query = $this->querySQLAddMemoField($Query, 'D.EventNotes', $dat['D.EventNotes'][1], $dat['QueryEvent']['OP']);
 		$QueryItem['Event'] = $Query;
 		unset($dat['D.EventId']);
 		unset($dat['D.EventDuration']);
 		unset($dat['D.EventNotes']);
+
+		// Cause Section Query
+		$Query = '';
+		$Field = 'D.CauseId';
+		$bFirst = true;
+		foreach ($dat[$Field] as $CauseId)
+		{
+			if (! $bFirst)
+			{
+				$Query .= ' OR ';
+			}
+			$Query .= $Field . '="' . $CauseId . '"';
+			$bFirst = false;
+		}
+		if ($Query != '')
+		{
+			$Query = '(' . $Query . ')';
+		}
+		$Query = $this->querySQLAddMemoField($Query, 'D.CauseNotes', $dat['D.CauseNotes'][1], $dat['QueryCause']['OP']);
+		$QueryItem['Cause'] = $Query;
+		unset($dat['D.CauseId']);
+		unset($dat['D.CauseNotes']);
 
 		// Effects Query
 		$Query = '';
@@ -1273,34 +1294,6 @@ class Query extends PDO
 						$mm = !empty($v[1])? $v[1] : "12";
 						$dd = !empty($v[2])? $v[2] : "31";
 						$endt = sprintf("%04d-%02d-%02d", $aa, $mm, $dd);
-					}
-					elseif ($k == "D.EventId")
-					{
-						$QueryItem['Event'] = '';
-						$bFirst = true;
-						foreach ($v as $i)
-						{
-							if (! $bFirst)
-							{
-								$QueryItem['Event'] .= ' OR ';
-							}
-							$QueryItem['Event'] .= "$k = '$i'";
-							$bFirst = false;
-						}
-					}
-					elseif ($k == "D.CauseId")
-					{
-						$QueryItem['Cause'] = '';
-						$bFirst = true;
-						foreach ($v as $i)
-						{
-							if (! $bFirst)
-							{
-								$QueryItem['Cause'] .= ' OR ';
-							}
-							$QueryItem['Cause'] .= "$k = '$i'";
-							$bFirst = false;
-						}
 					}
 					elseif ($k == "D.DisasterSource")
 					{
