@@ -1054,7 +1054,6 @@ class Query extends PDO
 		}
 
 		// Add Custom Query..
-		fb($dat);
 		if (isset($dat['QueryCustom']) && !empty($dat['QueryCustom']))
 		{
 			$QueryItem['Custom'] = trim($dat['QueryCustom']);
@@ -1448,7 +1447,6 @@ class Query extends PDO
 			}
 			$WhereQuery .= ')';
 		}
-		fb($WhereQuery);
     	return $WhereQuery;
 	} //function
 
