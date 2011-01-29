@@ -27,12 +27,6 @@
 			
 			<b onMouseOver="showtip('{-$dis.DisasterSiteNotes[2]-}');">{-$dis.DisasterSiteNotes[0]-}</b>
 			<input type="hidden" name="D_DisasterSiteNotes[0]" />
-			<!--
-			<select name="D_DisasterSiteNotes[0]" class="small line">
-				<option class="small" value="AND" {-if $qd.D_DisasterSiteNotes[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-				<option class="small" value="OR"  {-if $qd.D_DisasterSiteNotes[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-			</select>
-			-->
 			<br/>
 			<textarea id="DisasterSiteNotes" name="D_DisasterSiteNotes[1]" style="width:220px; height: 40px;"
 				onFocus="showtip('{-$dis.DisasterSiteNotes[2]-}');">{-$qd.D_DisasterSiteNotes[1]-}
@@ -42,6 +36,12 @@
 		<!-- BEGIN EVENT SECTION -->
 		<dt>{-#mevesection#-}</dt>
 		<dd>
+			<p align="right">{-#msgOperator#-}
+			<select name="QueryEvent[OP]" class="dlgmsg small line">
+				<option class="small" value="AND" {-if $qd.QueryEvent[OP] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
+				<option class="small" value="OR"  {-if $qd.QueryEvent[OP] == 'OR' -}selected{-/if-}>{-#tor#-}</option>
+			</select>
+			</p>
 			<span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br />
 			<select id="qevelst" name="D_EventId[]" multiple style="width: 250px; height: 200px;" class="line">
 				{-include file="main_eventlist.tpl" -}
@@ -52,10 +52,6 @@
 				onFocus="showtip('{-$eve.EventDuration[2]-}');" value="{-$qd.D_EventDuration-}" />
 			<br />
 			<b onMouseOver="showtip('{-$eve.EventNotes[2]-}');">{-$eve.EventNotes[0]-}</b>
-			<select name="D_EventNotes[0]" class="small line">
-				<option class="small" value="AND" {-if $qd.D_EventNotes[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-				<option class="small" value="OR"  {-if $qd.D_EventNotes[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-			</select><br />
 			<textarea id="EventNotes" name="D_EventNotes[1]" style="width:250px; height:40px;"
 				onFocus="showtip('{-$eve.EventNotes[2]-}');">{-$qd.D_EventNotes[1]-}
 			</textarea>
@@ -68,7 +64,7 @@
 			<select id="qcaulst" name="D_CauseId[]" multiple style="width: 250px; height: 200px;" class="line">
 				{-include file="main_causelist.tpl" -}
 			</select>
-			<br /><br />
+			<br />
 			<b onMouseOver="showtip('{-$cau.CauseNotes[2]-}');">{-$cau.CauseNotes[0]-}</b>
 			<select name="D_CauseNotes[0]" class="small line">
 				<option class="small" value="AND" {-if $qd.D_CauseNotes[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
