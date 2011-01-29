@@ -131,10 +131,9 @@ function uuid() {
 			mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ) );
 }
 
-// Fix in form _POST var CusQry to let '', ""
 function fixPost($post) {
-	if (isset($post['__CusQry'])) {
-		$post['__CusQry'] = stripslashes($post['__CusQry']);
+	if (isset($post['QueryCustom'])) {
+		$post['QueryCustom'] = stripslashes($post['QueryCustom']);
 	}
 }
 

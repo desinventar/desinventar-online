@@ -1051,11 +1051,14 @@ class Query extends PDO
 			{
 				unset($dat[$k]);
 			}
-		}		
+		}
+
 		// Add Custom Query..
-		if (isset($dat['__CusQry']) && !empty($dat['__CusQry']))
+		fb($dat);
+		if (isset($dat['QueryCustom']) && !empty($dat['QueryCustom']))
 		{
-			$QueryItem['Custom'] = trim($dat['__CusQry']);
+			$QueryItem['Custom'] = trim($dat['QueryCustom']);
+			unset($dat['QueryCustom']);
 		}
 		// Process EEFields...
 		$First = true;

@@ -323,7 +323,7 @@
 		<!-- BEGIN CUSTOMQUERY SECTION -->
 		<dt>{-#madvsection#-}</dt>
 		<dd alignt="left">
-			<textarea id="CusQry" name="__CusQry" style="width:300px; height:45px;" onFocus="showtip('');">{-$qd.__CusQry-}</textarea>
+			<textarea id="QueryCustom" name="QueryCustom" style="width:300px; height:45px;" onFocus="showtip('');">{-$qd.QueryCustom-}</textarea>
 			<br />
 			<span class="dlgmsg">{-#tadvqryhelp#-}</span>
 			<br />
@@ -364,28 +364,28 @@
 					</td>
 					<td align="center">
 						<input type="button" id="<" value="<" class="disabled" disabled 
-							onClick="$('CusQry').value += this.value; $('CusQry').focus();" onMouseOver="showtip('{-#taqlessthan#-}');" />
+							onClick="$('QueryCustom').value += this.value; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqlessthan#-}');" />
 						<input type="button" id=">" value=">" class="disabled" disabled 
-							onClick="$('CusQry').value += this.value; $('CusQry').focus();" onMouseOver="showtip('{-#taqgreathan#-}');" />
+							onClick="$('QueryCustom').value += this.value; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqgreathan#-}');" />
 						<input type="button" id="=" value="=" class="disabled" disabled 
-							onClick="$('CusQry').value += this.value; $('CusQry').focus();" onMouseOver="showtip('{-#taqequalto#-}');" /><br />
+							onClick="$('QueryCustom').value += this.value; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqequalto#-}');" /><br />
 						<input type="button" id="<>" value="<>" class="disabled" disabled 
-							onClick="$('CusQry').value += this.value; $('CusQry').focus();" onMouseOver="showtip('{-#taqnoteqto#-}');" />
+							onClick="$('QueryCustom').value += this.value; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqnoteqto#-}');" />
 						<input type="button" id="LIKE '%%'" value="{-#tlike#-}" class="disabled" disabled 
-							onClick="$('CusQry').value += this.id; $('CusQry').focus();" onMouseOver="showtip('{-#taqlike#-}');" />
+							onClick="$('QueryCustom').value += this.id; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqlike#-}');" />
 						<input type="button" id="=-1" value="{-#teffhav#-}" class="disabled" disabled 
-							onClick="$('CusQry').value += this.id; $('CusQry').focus();" onMouseOver="showtip('{-#taqwere#-}');" />
+							onClick="$('QueryCustom').value += this.id; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqwere#-}');" />
 						<input type="button" id="=0" value="{-#teffhavnot#-}" class="disabled" disabled 
-							onClick="$('CusQry').value += this.id; $('CusQry').focus();" onMouseOver="showtip('{-#taqwerent#-}');" />
+							onClick="$('QueryCustom').value += this.id; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqwerent#-}');" />
 						<input type="button" id="=-2" value="{-#teffdontknow#-}" class="disabled" disabled 
-							onClick="$('CusQry').value += this.id; $('CusQry').focus();" onMouseOver="showtip('{-#taqdntknow#-}');" />
+							onClick="$('QueryCustom').value += this.id; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqdntknow#-}');" />
 						<br />
-						<input type="button" value=" (" onClick="$('CusQry').value += this.value;" />
-						<input type="button" value=") " onClick="$('CusQry').value += this.value;" />
-						<input type="button" value=" AND " onClick="$('CusQry').value += this.value;" onMouseOver="showtip('{-#taqandopt#-}')" />
-						<input type="button" value=" OR " onClick="$('CusQry').value += this.value;" onMouseOver="showtip('{-#taqoropt#-}')" />
+						<input type="button" value=" (" onClick="$('QueryCustom').value += this.value;" />
+						<input type="button" value=") " onClick="$('QueryCustom').value += this.value;" />
+						<input type="button" value=" AND " onClick="$('QueryCustom').value += this.value;" onMouseOver="showtip('{-#taqandopt#-}')" />
+						<input type="button" value=" OR " onClick="$('QueryCustom').value += this.value;" onMouseOver="showtip('{-#taqoropt#-}')" />
 						<br /><br />
-						<input type="button" value="{-#tclean#-}" onClick="$('CusQry').value = '';" />
+						<input type="button" value="{-#tclean#-}" onClick="$('QueryCustom').value = '';" />
 					</td>
 				</tr>
 			</table>

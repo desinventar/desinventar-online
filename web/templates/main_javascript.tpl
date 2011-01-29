@@ -566,7 +566,7 @@
 		} //function
 		
 		function setAdvQuery(value, ope) {
-			$('CusQry').value += value + ' ';
+			$('QueryCustom').value += value + ' ';
 			switch (ope) {
 				case 'text':
 					disab($('<'));
