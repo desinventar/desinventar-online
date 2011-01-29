@@ -995,8 +995,8 @@ class Query extends PDO
 		$dat['D_DisasterSiteNotes'][0] = $dat['QueryGeography']['OP'];
 
 		$e		   = array();
-		$e['Eff']  = "";
-		$e['Item'] = "";
+		$e['Eff']  = '';
+		$e['Item'] = '';
 		// 2009-12-30 (jhcaiced) Try to separate query in logical units
 		$QueryItem   = array();
 		$QueryItem['Period']    = '';
@@ -1009,11 +1009,18 @@ class Query extends PDO
 		$QueryDisasterSerialOp  = ' AND ';
 
 		// Remove parameters from list of options...
-		foreach($dat as $Key => $Value)
+		foreach($dat as $k => $v)
 		{
-			if (substr($Key,0,3) == 'prm')
+			// replace D_ by D.
+			if (substr($k, 1, 1) == "_")
 			{
-				unset($dat[$Key]);
+				$newK = substr_replace($k, ".", 1, 1);
+				$dat[$newK] = $v;
+				unset($dat[$k]);
+			}
+			if (substr($k,0,3) == 'prm')
+			{
+				unset($dat[$k]);
 			}
 		}		
 		// Add Custom Query..
@@ -1087,8 +1094,8 @@ class Query extends PDO
 		// Geography Section Query (GeographyId + DisasterSiteNotes)
 		$Query = '';
 		$bFirst = true;
-		$GeographyList = $dat['D_GeographyId'];
 		$Field = 'D.GeographyId';
+		$GeographyList = $dat[$Field];
 		foreach ($GeographyList as $i)
 		{
 			if (! $bFirst)
@@ -1111,25 +1118,79 @@ class Query extends PDO
 				$bFirst = false;
 			}
 		} //foreach
-		$value = trim($dat['D_DisasterSiteNotes'][1]);
-		if ($value != '')
+		$Field = 'D.DisasterSiteNotes';
+		$Value = trim($dat[$Field][1]);
+		if ($Value != '')
 		{
-			$Query = '(' . $Query . ') ' . $dat['QueryGeography']['OP'] . ' ' .
-			         '(' . 'D.DisasterSiteNotes LIKE "%' . $value . '%"' . ')';
+			if ($Query != '') 
+			{
+				$Query = '(' . $Query . ') ' . $dat['QueryGeography']['OP'] . ' ';
+			}
+			$Query .= '(' . $Field . ' LIKE "%' . $Value . '%"' . ')';
 		}
 		$QueryItem['Geography'] = $Query;
 		// Remove data to avoid further processing by old query method..
-		unset($dat['D_GeographyId']);
-		unset($dat['D_DisasterSiteNotes']);
+		unset($dat['D.GeographyId']);
+		unset($dat['D.DisasterSiteNotes']);
+
+		// Effects Query
+		$Query = '';
+		$bFirst = true;
+		foreach($dat as $k => $v)
+		{
+			if ((substr($k, 2, 6) == 'Effect' || substr($k, 2, 6) == 'Sector') && isset($v[0]))
+			{
+				$op = $dat['QueryEffects']['OP'];
+				if (! $bFirst)
+				{
+					$Query .= ' ' . $op . ' ';
+				}
+				if ($v[0] == '>=' || $v[0] == '<=' || $v[0] == '=')
+				{
+					$Query .= '(' . $k . ' ' . $v[0] . $v[1] . ')';
+				}
+				elseif ($v[0] == '-1')
+				{
+					$Query .= '(' . $k . '=' . $v[0] . ' OR ' . $k . '>0)';
+				}
+				elseif ($v[0] == '0' || $v[0] == '-2')
+				{
+					$Query .= $k . '=' . $v[0];
+				}
+				elseif ($v[0] == '-3')
+				{
+					$Query .= '(' . $k . ' BETWEEN ' . $v[1] . ' AND ' . $v[2] . ')';
+				}
+				$bFirst = false;
+				unset($dat[$k]);
+			}
+		} //foreach
+		$Field = 'D.EffectNotes';
+		$Value = trim($dat[$Field][1]);
+		if ($Value != '')
+		{
+			if ($Query != '') 
+			{
+				$Query = '(' . $Query . ') ' . $dat['QueryEffects']['OP'] . ' ';
+			}
+			$Query .= ' (' . $Field . ' LIKE "%' . $Value . '%"' . ')';
+		}
+		$Field = 'D.EffectOtherLosses';
+		$Value = trim($dat[$Field][1]);
+		if ($Value != '')
+		{
+			if ($Query != '')
+			{
+				$Query = '(' . $Query . ') ' . $dat['QueryEffects']['OP'] . ' ';
+			}
+			$Query .= ' (' . $Field . ' LIKE "%' . $Value . '%"' . ')';
+		}
+		fb($Query);
+		$e['Eff'] = $Query;
 		
 		// Process all other fields...		
 		foreach ($dat as $k=>$v)
 		{
-			// replace D_ by D.
-			if (substr($k, 1, 1) == "_")
-			{
-				$k = substr_replace($k, ".", 1, 1);
-			}
 			if (!empty($v))
 			{
 				if (is_int($v) || is_float($v))
