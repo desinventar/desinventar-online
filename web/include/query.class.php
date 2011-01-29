@@ -1206,41 +1206,7 @@ class Query extends PDO
 							$bFirst = false;
 						}
 					}
-					elseif ((substr($k, 2, 6) == "Effect" || substr($k, 2, 6) == "Sector") && isset($v[0]))
-					{
-						// Process effects and sectors..
-						if (isset($v[3]))
-						{
-							$op = $v[3];
-						}
-						else
-						{
-							$op = "AND";
-						}
-						$EffectQuery = '';
-						if ($e['Eff'] != '')
-						{
-							$EffectQuery .= ' ' . $op . ' ';
-						}
-						if ($v[0] == ">=" || $v[0] == "<=" || $v[0] == "=")
-						{
-							$EffectQuery .= '(' . $k . ' ' . $v[0] . $v[1] . ')';
-						}
-						elseif ($v[0] == "-1")
-						{
-							$EffectQuery .= "($k =". $v[0] ." OR $k>0)";
-						}
-						elseif ($v[0] == "0" || $v[0] == "-2")
-						{
-							$EffectQuery .= "$k =". $v[0];
-						}
-						elseif ($v[0] == "-3")
-						{
-							$EffectQuery .= "($k BETWEEN ". $v[1] ." AND ". $v[2] . ")";
-						}
-						$e['Eff'] .= $EffectQuery;
-					}
-					elseif (substr($k, -5) == "Notes" || $k == "D.DisasterSource")
+					elseif (substr($k, -5) == "Notes" || $k == "D.DisasterSource" || $k == "D.EffectOtherLosses")
 					{
 						// Process text fields with separator AND, OR..
 						$Query = '';
@@ -1265,6 +1231,32 @@ class Query extends PDO
 							}
 							$e['Item'] .= $Query;
 						}
+					}
+					elseif ((substr($k, 2, 6) == "Effect" || substr($k, 2, 6) == "Sector") && isset($v[0]))
+					{
+						$op = $dat['QueryEffects']['OP'];
+						$EffectQuery = '';
+						if ($e['Eff'] != '')
+						{
+							$EffectQuery .= ' ' . $op . ' ';
+						}
+						if ($v[0] == ">=" || $v[0] == "<=" || $v[0] == "=")
+						{
+							$EffectQuery .= '(' . $k . ' ' . $v[0] . $v[1] . ')';
+						}
+						elseif ($v[0] == "-1")
+						{
+							$EffectQuery .= "($k =". $v[0] ." OR $k>0)";
+						}
+						elseif ($v[0] == "0" || $v[0] == "-2")
+						{
+							$EffectQuery .= "$k =". $v[0];
+						}
+						elseif ($v[0] == "-3")
+						{
+							$EffectQuery .= "($k BETWEEN ". $v[1] ." AND ". $v[2] . ")";
+						}
+						$e['Eff'] .= $EffectQuery;
 					}
 					elseif ($k == "D.DisasterSerial")
 					{
