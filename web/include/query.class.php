@@ -987,6 +987,20 @@ class Query extends PDO
 		}
 	}
 
+	function querySQLAddTextField($prmQuery, $prmField, $prmValue, $prmOp)
+	{
+		$Value = trim($prmValue);
+		$Query = $prmQuery;
+		if ($Value != '')
+		{
+			if ($prmQuery != '') 
+			{
+				$Query = $prmQuery . ' '. $prmOp . ' ';
+			}
+			$Query .= '(' . $prmField . ' LIKE "%' . $Value . '%"' . ')';
+		}
+		return $Query;
+	}
 
 	// Generate SQL from Associative array from Desconsultar Form
 	public function genSQLWhereDesconsultar($dat)
@@ -1118,16 +1132,12 @@ class Query extends PDO
 				$bFirst = false;
 			}
 		} //foreach
-		$Field = 'D.DisasterSiteNotes';
-		$Value = trim($dat[$Field][1]);
-		if ($Value != '')
+		if ($Query != '') 
 		{
-			if ($Query != '') 
-			{
-				$Query = '(' . $Query . ') ' . $dat['QueryGeography']['OP'] . ' ';
-			}
-			$Query .= '(' . $Field . ' LIKE "%' . $Value . '%"' . ')';
+			$Query = '(' . $Query . ')';
 		}
+		$Query = $this->querySQLAddTextField($Query, 'D.DisasterSiteNotes', $dat['D.DisasterSiteNotes'][1], $dat['QueryGeography']['OP']);
+		
 		$QueryItem['Geography'] = $Query;
 		// Remove data to avoid further processing by old query method..
 		unset($dat['D.GeographyId']);
@@ -1140,52 +1150,38 @@ class Query extends PDO
 		{
 			if ((substr($k, 2, 6) == 'Effect' || substr($k, 2, 6) == 'Sector') && isset($v[0]))
 			{
-				$op = $dat['QueryEffects']['OP'];
-				if (! $bFirst)
+				if (is_array($v))
 				{
-					$Query .= ' ' . $op . ' ';
+					$op = $dat['QueryEffects']['OP'];
+					if (! $bFirst)
+					{
+						$Query .= ' ' . $op . ' ';
+					}
+					if ($v[0] == '>=' || $v[0] == '<=' || $v[0] == '=')
+					{
+						$Query .= '(' . $k . ' ' . $v[0] . $v[1] . ')';
+					}
+					elseif ($v[0] == '-1')
+					{
+						$Query .= '(' . $k . '=' . $v[0] . ' OR ' . $k . '>0)';
+					}
+					elseif ($v[0] == '0' || $v[0] == '-2')
+					{
+						$Query .= $k . '=' . $v[0];
+					}
+					elseif ($v[0] == '-3')
+					{
+						$Query .= '(' . $k . ' BETWEEN ' . $v[1] . ' AND ' . $v[2] . ')';
+					}
+					$bFirst = false;
+					unset($dat[$k]);
 				}
-				if ($v[0] == '>=' || $v[0] == '<=' || $v[0] == '=')
-				{
-					$Query .= '(' . $k . ' ' . $v[0] . $v[1] . ')';
-				}
-				elseif ($v[0] == '-1')
-				{
-					$Query .= '(' . $k . '=' . $v[0] . ' OR ' . $k . '>0)';
-				}
-				elseif ($v[0] == '0' || $v[0] == '-2')
-				{
-					$Query .= $k . '=' . $v[0];
-				}
-				elseif ($v[0] == '-3')
-				{
-					$Query .= '(' . $k . ' BETWEEN ' . $v[1] . ' AND ' . $v[2] . ')';
-				}
-				$bFirst = false;
-				unset($dat[$k]);
 			}
 		} //foreach
-		$Field = 'D.EffectNotes';
-		$Value = trim($dat[$Field][1]);
-		if ($Value != '')
-		{
-			if ($Query != '') 
-			{
-				$Query = '(' . $Query . ') ' . $dat['QueryEffects']['OP'] . ' ';
-			}
-			$Query .= ' (' . $Field . ' LIKE "%' . $Value . '%"' . ')';
-		}
-		$Field = 'D.EffectOtherLosses';
-		$Value = trim($dat[$Field][1]);
-		if ($Value != '')
-		{
-			if ($Query != '')
-			{
-				$Query = '(' . $Query . ') ' . $dat['QueryEffects']['OP'] . ' ';
-			}
-			$Query .= ' (' . $Field . ' LIKE "%' . $Value . '%"' . ')';
-		}
-		fb($Query);
+		$Query = $this->querySQLAddTextField($Query, 'D.EffectNotes', $dat['D.EffectNotes'], $dat['QueryEffects']['OP']);
+		$Query = $this->querySQLAddTextField($Query, 'D.EffectOtherLosses', $dat['D.EffectOtherLosses'], $dat['QueryEffects']['OP']);
+		unset($dat['D.EffectNotes']);
+		unset($dat['D.EffectOtherLosses']);
 		$e['Eff'] = $Query;
 		
 		// Process all other fields...		
@@ -1267,7 +1263,7 @@ class Query extends PDO
 							$bFirst = false;
 						}
 					}
-					elseif (substr($k, -5) == "Notes" || $k == "D.DisasterSource" || $k == "D.EffectOtherLosses")
+					elseif ($k == "D.DisasterSource")
 					{
 						// Process text fields with separator AND, OR..
 						$Query = '';
@@ -1292,32 +1288,6 @@ class Query extends PDO
 							}
 							$e['Item'] .= $Query;
 						}
-					}
-					elseif ((substr($k, 2, 6) == "Effect" || substr($k, 2, 6) == "Sector") && isset($v[0]))
-					{
-						$op = $dat['QueryEffects']['OP'];
-						$EffectQuery = '';
-						if ($e['Eff'] != '')
-						{
-							$EffectQuery .= ' ' . $op . ' ';
-						}
-						if ($v[0] == ">=" || $v[0] == "<=" || $v[0] == "=")
-						{
-							$EffectQuery .= '(' . $k . ' ' . $v[0] . $v[1] . ')';
-						}
-						elseif ($v[0] == "-1")
-						{
-							$EffectQuery .= "($k =". $v[0] ." OR $k>0)";
-						}
-						elseif ($v[0] == "0" || $v[0] == "-2")
-						{
-							$EffectQuery .= "$k =". $v[0];
-						}
-						elseif ($v[0] == "-3")
-						{
-							$EffectQuery .= "($k BETWEEN ". $v[1] ." AND ". $v[2] . ")";
-						}
-						$e['Eff'] .= $EffectQuery;
 					}
 					elseif ($k == "D.DisasterSerial")
 					{
