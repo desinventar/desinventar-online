@@ -106,7 +106,7 @@ require_once(BASE . '/include/digeolevel.class.php');
 require_once(BASE . '/include/digeocarto.class.php');
 require_once(BASE . '/include/didisaster.class.php');
 
-/* SETTINGS */
+// SETTINGS
 $time_start = microtime_float();
 $SessionId = uuid();
 if (MODE != 'command') {
@@ -129,9 +129,8 @@ if (MODE != 'command') {
 	$confdir = dirname($_SERVER['SCRIPT_FILENAME']) . '/conf';
 	$templatedir = dirname($_SERVER['SCRIPT_FILENAME']) . '/templates';
 
-	/* Smarty configuration */
+	// Smarty configuration
 	require_once(SMARTYDIR . '/Smarty.class.php');
-	/* SMARTY template */
 	$t = new Smarty();
 	$t->debugging = false;
 	$t->config_dir = $confdir;

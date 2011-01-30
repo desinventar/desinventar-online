@@ -73,11 +73,6 @@ switch ($cmd)
 		if (!iserror($gl))
 		{
 			$t->assign('ctl_msginslev', true);
-			/* Create selection map.. -> disabled method
-			if (!empty($data['GeoLevelLayerFile']) && !empty($data['GeoLevelLayerCode']) && !empty($data['GeoLevelLayerName']))
-			{
-				$map = new Maps($us, $RegionId, 0, null, null, null, '', null, 'SELECT');
-			}*/
 		}
 		else
 		{
@@ -107,9 +102,6 @@ switch ($cmd)
 		if (!iserror($gl))
 		{
 			$t->assign('ctl_msgupdlev', true);
-			/* Create selection map..
-			if (!empty($data['GeoLevelLayerFile']) && !empty($data['GeoLevelLayerCode']) && !empty($data['GeoLevelLayerName']))
-				$map = new Maps($us, $RegionId, 0, null, null, null, '', 'SELECT');*/
 		}
 		else
 		{
@@ -137,10 +129,6 @@ switch ($cmd)
 		$t->assign('ctl_admingeo', true);
 		$t->assign('ctl_levlist', true);
 		$t->assign('levl', $us->q->loadGeoLevels('', -1, false));
-		/*$lev = 0;
-		$t->assign('lev', $lev);
-		$t->assign('levmax', $us->q->getMaxGeoLev());
-		$t->assign('levname', $us->q->loadGeoLevById($lev));*/
 		if ($us->getUserRole($RegionId) == 'OBSERVER')
 		{
 			$t->assign('ro', 'disabled');
