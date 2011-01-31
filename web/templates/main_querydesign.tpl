@@ -373,7 +373,7 @@
 						<input type="button" value=" AND " onClick="$('QueryCustom').value += this.value;" onMouseOver="showtip('{-#taqandopt#-}')" />
 						<input type="button" value=" OR " onClick="$('QueryCustom').value += this.value;" onMouseOver="showtip('{-#taqoropt#-}')" />
 						<br /><br />
-						<input type="button" value="{-#tclean#-}" onClick="$('QueryCustom').value = '';" />
+						<input type="button" value="{-#tclear#-}" onClick="$('QueryCustom').value = '';" />
 					</td>
 				</tr>
 			</table>
