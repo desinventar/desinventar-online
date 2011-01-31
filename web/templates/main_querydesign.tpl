@@ -355,7 +355,8 @@
 						<input type="button" id=">" value=">" class="disabled" disabled 
 							onClick="$('QueryCustom').value += this.value; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqgreathan#-}');" />
 						<input type="button" id="=" value="=" class="disabled" disabled 
-							onClick="$('QueryCustom').value += this.value; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqequalto#-}');" /><br />
+							onClick="$('QueryCustom').value += this.value; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqequalto#-}');" />
+						<br />
 						<input type="button" id="<>" value="<>" class="disabled" disabled 
 							onClick="$('QueryCustom').value += this.value; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqnoteqto#-}');" />
 						<input type="button" id="LIKE '%%'" value="{-#tlike#-}" class="disabled" disabled 
