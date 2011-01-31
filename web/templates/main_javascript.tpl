@@ -571,24 +571,24 @@
 				case 'text':
 					disab($('<'));
 					disab($('>'));
-					enab($('='));  $('=').value = "= ''";
-					enab($('<>')); $('<>').value = "<> ''";
+					enab($('='));  $('=').value = "=''";
+					enab($('<>')); $('<>').value = "<>''";
 					enab($("LIKE '%%'"));
 					disab($('=-1')); disab($('=0')); disab($('=-2'));
 				break;
 				case 'date':
-					enab($('<')); $('<').value = "< ''";
-					enab($('>')); $('>').value = "> ''";
-					enab($('=')); $('=').value = "= ''";
-					enab($('<>')); $('<>').value = "<> ''";
+					enab($('<')); $('<').value = "<''";
+					enab($('>')); $('>').value = ">''";
+					enab($('=')); $('=').value = "=''";
+					enab($('<>')); $('<>').value = "<>''";
 					enab($("LIKE '%%'"));
 					disab($('=-1')); disab($('=0')); disab($('=-2'));
 				break;
 				case 'number':
-					enab($('<')); $('<').value = "< ";
-					enab($('>')); $('>').value = "> ";
-					enab($('=')); $('=').value = "= ";
-					enab($('<>'));$('<>').value = "<> ";
+					enab($('<')); $('<').value = "<";
+					enab($('>')); $('>').value = ">";
+					enab($('=')); $('=').value = "=";
+					enab($('<>'));$('<>').value = "<>";
 					disab($("LIKE '%%'"));
 					enab($('=-1')); enab($('=0')); enab($('=-2'));
 				break;
