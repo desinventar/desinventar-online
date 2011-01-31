@@ -174,7 +174,6 @@ class Query extends PDO
 		return count($rst);
 	}
 
-	// STANDARDS FUNCTION TO GET GENERAL EVENTS, CAUSES LISTS
 	function loadEvents($type, $status, $LangIsoCode)
 	{
 		$data = array();
@@ -195,8 +194,11 @@ class Query extends PDO
 				{
 					if (array_key_exists($EventId, $data1))
 					{
-						$data[$EventId][0] = $data1[$EventId][0];
-						$data[$EventId][1] = $data1[$EventId][1];
+						if ($data1[$EventId]['RecordUpdate'] >= $data[$EventId]['RecordUpdate'])
+						{
+							$data[$EventId][0] = $data1[$EventId][0];
+							$data[$EventId][1] = $data1[$EventId][1];
+						}
 					}
 				}
 			}
@@ -224,8 +226,11 @@ class Query extends PDO
 				{
 					if (array_key_exists($CauseId, $data1))
 					{
-						$data[$CauseId][0] = $data1[$CauseId][0];
-						$data[$CauseId][1] = $data1[$CauseId][1];
+						if ($data1[$CauseId]['RecordUpdate'] >= $data[$CauseId]['RecordUpdate'])
+						{
+							$data[$CauseId][0] = $data1[$CauseId][0];
+							$data[$CauseId][1] = $data1[$CauseId][1];
+						}
 					}
 				} //foreach
 			} //if
@@ -235,26 +240,30 @@ class Query extends PDO
 
 	public function getBasicEventList($lg)
 	{
-		$sql = 'SELECT EventId, EventName, EventDesc FROM Event ' .
+		$sql = 'SELECT EventId, EventName,EventDesc,RecordUpdate FROM Event ' .
 		       ' WHERE LangIsoCode="' . $lg . '" ORDER BY EventName';
 		$data = array();
 		$res = $this->base->query($sql);
 		foreach($res as $row)
 		{
-			$data[$row['EventId']] = array($row['EventName'], $row['EventDesc']);
+			$data[$row['EventId']] = array(0 => $row['EventName'], 
+			                               1 => $row['EventDesc'],
+			                               'RecordUpdate' => $row['RecordUpdate']);
 		}
 		return $data;
 	}
 
 	public function getBasicCauseList($lg)
 	{
-		$sql = 'SELECT CauseId, CauseName, CauseDesc FROM Cause ' .
+		$sql = 'SELECT CauseId,CauseName,CauseDesc,RecordUpdate FROM Cause ' .
 		       ' WHERE LangIsoCode="' . $lg . '" ORDER BY CauseName';
 		$data = array();
 		$res = $this->base->query($sql);
 		foreach($res as $row)
 		{
-			$data[$row['CauseId']] = array($row['CauseName'], $row['CauseDesc']);
+			$data[$row['CauseId']] = array(0 => $row['CauseName'],
+			                               1 => $row['CauseDesc'],
+			                               'RecordUpdate' => $row['RecordUpdate']);
 		}
 		return $data;
 	}
@@ -286,7 +295,10 @@ class Query extends PDO
 		$res = $this->dreg->query($sql);
 		foreach($res as $row)
 		{
-			$data[$row['EventId']] = array($row['EventName'], str2js($row['EventDesc']), $row['EventActive']);
+			$data[$row['EventId']] = array(0 => $row['EventName'],
+			                               1 => str2js($row['EventDesc']),
+			                               2 => $row['EventActive'],
+			                               'RecordUpdate' => $row['RecordUpdate']);
 		}
 		return $data;
 	}
@@ -320,7 +332,10 @@ class Query extends PDO
 		$res = $this->dreg->query($sql);
 		foreach($res as $row)
 		{
-			$data[$row['CauseId']] = array($row['CauseName'], str2js($row['CauseDesc']), $row['CauseActive']);
+			$data[$row['CauseId']] = array(0 => $row['CauseName'], 
+			                               1 => str2js($row['CauseDesc']),
+			                               2 => $row['CauseActive'],
+			                               'RecordUpdate' => $row['RecordUpdate']);
 		} //foreach
 		return $data;
 	} //function
