@@ -384,7 +384,7 @@
 							animCollapse: false,
 							items: new Ext.Panel({contentEl: 'dat-cfg', autoScroll: true }),
 							buttons: [
-								{text:'{-#tclean#-}',
+								{text:'{-#tclear#-}',
 									handler: function() {
 										$('CD').reset();
 										} //handler
@@ -425,7 +425,7 @@
 							closeAction:'hide', plain: true, animCollapse: false,
 							items: new Ext.Panel({contentEl: 'std-cfg', autoScroll: true }),
 							buttons: [
-								{text:'{-#tclean#-}',
+								{text:'{-#tclear#-}',
 									handler: function() {
 										$('CS').reset();
 									}
@@ -466,7 +466,7 @@
 							closeAction:'hide', plain: true, animCollapse: false,
 							items: new Ext.Panel({contentEl: 'grp-cfg', autoScroll: true }),
 							buttons: [
-								{text:'{-#tclean#-}',
+								{text:'{-#tclear#-}',
 									handler: function() {
 										$('CG').reset();
 									}
@@ -505,7 +505,7 @@
 							closeAction:'hide', plain: true, animCollapse: false,
 							items: new Ext.Panel({contentEl: 'map-cfg', autoScroll: true }),
 							buttons: [
-								{text:'{-#tclean#-}',
+								{text:'{-#tclear#-}',
 									handler: function() {
 										$('CM').reset();
 									}
