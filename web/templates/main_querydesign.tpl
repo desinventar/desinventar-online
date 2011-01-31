@@ -10,12 +10,7 @@
 		<!-- Select from Map testing ... 'selectionmap.php' -->
 		<dt>{-#mgeosection#-}</dt>
 		<dd>
-			<p align="right">{-#msgOperator#-}
-			<select name="QueryGeography[OP]" class="dlgmsg small line">
-				<option class="small" value="AND" {-if $qd.QueryGeography[OP] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-				<option class="small" value="OR"  {-if $qd.QueryGeography[OP] == 'OR' -}selected{-/if-}>{-#tor#-}</option>
-			</select>
-			</p>
+			<input type="hidden" name="QueryGeography[OP]" value="AND" />
 			{-foreach name=glev key=k item=i from=$glev-}
 				<span class="dlgmsg" onMouseOver="showtip('{-$i[1]-}');">{-$i[0]-}</span> |
 			{-/foreach-}
@@ -36,12 +31,7 @@
 		<!-- BEGIN EVENT SECTION -->
 		<dt>{-#mevesection#-}</dt>
 		<dd>
-			<p align="right">{-#msgOperator#-}
-			<select name="QueryEvent[OP]" class="dlgmsg small line">
-				<option class="small" value="AND" {-if $qd.QueryEvent[OP] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-				<option class="small" value="OR"  {-if $qd.QueryEvent[OP] == 'OR' -}selected{-/if-}>{-#tor#-}</option>
-			</select>
-			</p>
+			<input type="hidden" name="QueryEvent[OP]" value="AND" />
 			<span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br />
 			<select id="qevelst" name="D_EventId[]" multiple style="width: 250px; height: 200px;" class="line">
 				{-include file="main_eventlist.tpl" -}
@@ -60,12 +50,7 @@
 		<!-- BEGIN CAUSE SECTION -->
 		<dt>{-#mcausection#-}</dt>
 		<dd>
-			<p align="right">{-#msgOperator#-}
-			<select name="QueryCause[OP]" class="dlgmsg small line">
-				<option class="small" value="AND" {-if $qd.QueryCause[OP] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-				<option class="small" value="OR"  {-if $qd.QueryCause[OP] == 'OR' -}selected{-/if-}>{-#tor#-}</option>
-			</select>
-			</p>
+			<input type="hidden" name="QueryCause[OP]" value="AND" />
 			<span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br>
 			<select id="qcaulst" name="D_CauseId[]" multiple style="width: 250px; height: 200px;" class="line">
 				{-include file="main_causelist.tpl" -}
@@ -217,43 +202,44 @@
 				<option class="small" value="OR"  {-if $qd.QueryEEField[OP] == 'OR' -}selected{-/if-}>{-#tor#-}</option>
 			</select>
 			</p>
-			<table border=0 cellpadding=0 cellspacing=0>
-				{-foreach name=eef key=key item=item from=$EEFieldList-}
-					<tr>
-						<td valign="top">
-							{-if $item[2] == "INTEGER" || $item[2] == "DOUBLE"-}
-								<input type="checkbox" onFocus="showtip('{-$item[1]-}');" id="{-$key-}" 
-									onclick="enadisEff('{-$key-}', this.checked);" />
-								<label for="{-$key-}" onMouseOver="showtip('{-$item[1]-}');">{-$item[0]-}</label>
-								<span id="o{-$key-}" style="display:none">
-									<select id="{-$key-}[0]" name="EEFieldQuery[{-$key-}][Operator]" onChange="showeff(this.value, 'x{-$key-}', 'y{-$key-}');" 
-										class="small" disabled>
-										<option class="small" value=""></option>
-										<option class="small" value=">=">{-#teffmajor#-}</option>
-										<option class="small" value="<=">{-#teffminor#-}</option>
-										<option class="small" value="=">{-#teffequal#-}</option>
-										<option class="small" value="-3">{-#teffbetween#-}</option>
-									</select>
+			<div style="height: 300px;" class="dwin">
+				<table border=0 cellpadding=0 cellspacing=0>
+					{-foreach name=eef key=key item=item from=$EEFieldList-}
+						<tr>
+							<td valign="top">
+								{-if $item[2] == "INTEGER" || $item[2] == "DOUBLE"-}
+									<input type="checkbox" onFocus="showtip('{-$item[1]-}');" id="{-$key-}" 
+										onclick="enadisEff('{-$key-}', this.checked);" />
+									<label for="{-$key-}" onMouseOver="showtip('{-$item[1]-}');">{-$item[0]-}</label>
+									<span id="o{-$key-}" style="display:none">
+										<select id="{-$key-}[0]" name="EEFieldQuery[{-$key-}][Operator]" onChange="showeff(this.value, 'x{-$key-}', 'y{-$key-}');" 
+											class="small" disabled>
+											<option class="small" value=""></option>
+											<option class="small" value=">=">{-#teffmajor#-}</option>
+											<option class="small" value="<=">{-#teffminor#-}</option>
+											<option class="small" value="=">{-#teffequal#-}</option>
+											<option class="small" value="-3">{-#teffbetween#-}</option>
+										</select>
+										<input type="hidden" name="EEFieldQuery[{-$key-}][Type]" value="{-$item[2]-}">
+										<span id="x{-$key-}" style="display:none"><br />
+											<input type="text" id="{-$key-}[1]" name="EEFieldQuery[{-$key-}][Value1]" size="3" value="1" class="line" />
+										</span>
+										<span id="y{-$key-}" style="display:none">
+											{-#tand#-} <input type="text" id="{-$key-}[2]" name="EEFieldQuery[{-$key-}][Value2]" size="3" value="10" class="line">
+										</span>
+									</span>
+								{-/if-}
+								{-if $item[2] == "TEXT"-}
+									{-$item[0]-}<br />
+									<input type="text" id="{-$key-}" name="EEFieldQuery[{-$key-}][Value]" style="width: 290px;" class="line"
+										onFocus="showtip('{-$item[1]-}');" /><br />
 									<input type="hidden" name="EEFieldQuery[{-$key-}][Type]" value="{-$item[2]-}">
-									<span id="x{-$key-}" style="display:none"><br />
-										<input type="text" id="{-$key-}[1]" name="EEFieldQuery[{-$key-}][Value1]" size="3" value="1" class="line" />
-									</span>
-									<span id="y{-$key-}" style="display:none">
-										{-#tand#-} <input type="text" id="{-$key-}[2]" name="EEFieldQuery[{-$key-}][Value2]" size="3" value="10" class="line">
-									</span>
-								</span>
-							{-/if-}
-							{-if $item[2] == "TEXT"-}
-								{-$item[0]-}<br />
-								<input type="text" id="{-$key-}" name="EEFieldQuery[{-$key-}][Value]" style="width: 290px;" class="line"
-									onFocus="showtip('{-$item[1]-}');" /><br />
-								<input type="hidden" name="EEFieldQuery[{-$key-}][Type]" value="{-$item[2]-}">
-							{-/if-}
-						</td>
-					</tr>
-				{-/foreach-}
-			</table>
-			<br />
+								{-/if-}
+							</td>
+						</tr>
+					{-/foreach-}
+				</table>
+			</div>
 		</dd>
 		<!-- END EEField Section -->
 		
