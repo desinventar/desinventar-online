@@ -5,7 +5,7 @@
 */
 class Query extends PDO
 {
-	public $RegionId = "";
+	public $RegionId = '';
 	public $dreg = null;
 	public $core = null;
 	public $DBFile = '';
@@ -14,8 +14,8 @@ class Query extends PDO
 	{
 		if (!extension_loaded('pdo'))
 		{
-		  dl( "pdo.so" );
-		  dl( "pdo_sqlite.so" );
+		  dl( 'pdo.so' );
+		  dl( 'pdo_sqlite.so' );
 		}
 		try
 		{
@@ -24,14 +24,14 @@ class Query extends PDO
 			// Open core.db - Users, Regions, Auths.. 
 			$dbc = CONST_DBCORE;
 			if (file_exists($dbc))
-				$this->core = new PDO("sqlite:" . $dbc);
+				$this->core = new PDO('sqlite:' . $dbc);
 			else
 				$this->rebuildCore($dbc); // Rebuild data from directory..
 
 			// Open base.db - DI's Basic database
 			$dbb = CONST_DBBASE;
 			if (file_exists($dbb))
-				$this->base = new PDO("sqlite:" . $dbb);
+				$this->base = new PDO('sqlite:' . $dbb);
 
 			if ($num_args > 0)
 			{
@@ -49,7 +49,7 @@ class Query extends PDO
 		}
 		catch (Exception $e)
 		{
-			showErrorMsg("Error !: " . $e->getMessage());
+			showErrorMsg('Error !: ' . $e->getMessage());
 			die();
 		}
 	}
@@ -61,11 +61,11 @@ class Query extends PDO
 		{
 			if ($prmRegionId == 'core')
 			{
-				$DBFile .= "/main/core.db";
+				$DBFile .= '/main/core.db';
 			}
 			else
 			{
-				$DBFile .= "/database/" . $prmRegionId ."/desinventar.db";
+				$DBFile .= '/database/' . $prmRegionId .'/desinventar.db';
 			}
 		}
 		return $DBFile;
@@ -79,13 +79,13 @@ class Query extends PDO
 		{
 			if ($prmRegionId == 'core')
 			{
-				$DBFile .= "/main/core.db";
+				$DBFile .= '/main/core.db';
 			}
 			else
 			{
 				if ($prmDBFile == '')
 				{
-					$DBFile .= "/database/" . $prmRegionId ."/desinventar.db";
+					$DBFile .= '/database/' . $prmRegionId .'/desinventar.db';
 				}
 				else
 				{
@@ -96,7 +96,7 @@ class Query extends PDO
 			{
 				try
 				{
-					$this->dreg = new PDO("sqlite:" . $DBFile);
+					$this->dreg = new PDO('sqlite:' . $DBFile);
 					// set the error reporting attribute
 					$this->dreg->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					$this->RegionId = $prmRegionId;
@@ -144,7 +144,7 @@ class Query extends PDO
 		}
 		else
 		{
-			echo "Empty Query !!";
+			echo 'Empty Query !!';
 		}
 		return $data;
 	}
@@ -174,7 +174,6 @@ class Query extends PDO
 		return count($rst);
 	}
 
-	// STANDARDS FUNCTION TO GET GENERAL EVENTS, CAUSES LISTS
 	function loadEvents($type, $status, $LangIsoCode)
 	{
 		$data = array();
@@ -195,8 +194,11 @@ class Query extends PDO
 				{
 					if (array_key_exists($EventId, $data1))
 					{
-						$data[$EventId][0] = $data1[$EventId][0];
-						$data[$EventId][1] = $data1[$EventId][1];
+						if ($data1[$EventId]['RecordUpdate'] >= $data[$EventId]['RecordUpdate'])
+						{
+							$data[$EventId][0] = $data1[$EventId][0];
+							$data[$EventId][1] = $data1[$EventId][1];
+						}
 					}
 				}
 			}
@@ -224,8 +226,11 @@ class Query extends PDO
 				{
 					if (array_key_exists($CauseId, $data1))
 					{
-						$data[$CauseId][0] = $data1[$CauseId][0];
-						$data[$CauseId][1] = $data1[$CauseId][1];
+						if ($data1[$CauseId]['RecordUpdate'] >= $data[$CauseId]['RecordUpdate'])
+						{
+							$data[$CauseId][0] = $data1[$CauseId][0];
+							$data[$CauseId][1] = $data1[$CauseId][1];
+						}
 					}
 				} //foreach
 			} //if
@@ -235,47 +240,51 @@ class Query extends PDO
 
 	public function getBasicEventList($lg)
 	{
-		$sql = "SELECT EventId, EventName, EventDesc FROM Event ".
-				"WHERE LangIsoCode='$lg' ORDER BY EventName";
+		$sql = 'SELECT EventId, EventName,EventDesc,RecordUpdate FROM Event ' .
+		       ' WHERE LangIsoCode="' . $lg . '" ORDER BY EventName';
 		$data = array();
 		$res = $this->base->query($sql);
 		foreach($res as $row)
 		{
-			$data[$row['EventId']] = array($row['EventName'], $row['EventDesc']);
+			$data[$row['EventId']] = array(0 => $row['EventName'], 
+			                               1 => $row['EventDesc'],
+			                               'RecordUpdate' => $row['RecordUpdate']);
 		}
 		return $data;
 	}
 
 	public function getBasicCauseList($lg)
 	{
-		$sql = "SELECT CauseId, CauseName, CauseDesc FROM Cause ".
-				"WHERE LangIsoCode='$lg' ORDER BY CauseName";
+		$sql = 'SELECT CauseId,CauseName,CauseDesc,RecordUpdate FROM Cause ' .
+		       ' WHERE LangIsoCode="' . $lg . '" ORDER BY CauseName';
 		$data = array();
 		$res = $this->base->query($sql);
 		foreach($res as $row)
 		{
-			$data[$row['CauseId']] = array($row['CauseName'], $row['CauseDesc']);
+			$data[$row['CauseId']] = array(0 => $row['CauseName'],
+			                               1 => $row['CauseDesc'],
+			                               'RecordUpdate' => $row['RecordUpdate']);
 		}
 		return $data;
 	}
 
 	public function getRegionEventList($type, $status, $LangIsoCode)
 	{
-		if ($type == "PREDEF")
+		if ($type == 'PREDEF')
 		{
-			$sqlt = "EventPreDefined=1";
+			$sqlt = 'EventPreDefined=1';
 		}
-		else if ($type == "USER")
+		else if ($type == 'USER')
 		{
-			$sqlt = "EventPreDefined=0";
+			$sqlt = 'EventPreDefined=0';
 		}
 		else
 		{
 			$sqlt = "'1=1'";	// all
 		}
-		if ($status == "active")
+		if ($status == 'active')
 		{
-			$sqls = "EventActive=1";
+			$sqls = 'EventActive=1';
 		}
 		else
 		{
@@ -286,7 +295,10 @@ class Query extends PDO
 		$res = $this->dreg->query($sql);
 		foreach($res as $row)
 		{
-			$data[$row['EventId']] = array($row['EventName'], str2js($row['EventDesc']), $row['EventActive']);
+			$data[$row['EventId']] = array(0 => $row['EventName'],
+			                               1 => str2js($row['EventDesc']),
+			                               2 => $row['EventActive'],
+			                               'RecordUpdate' => $row['RecordUpdate']);
 		}
 		return $data;
 	}
@@ -320,7 +332,10 @@ class Query extends PDO
 		$res = $this->dreg->query($sql);
 		foreach($res as $row)
 		{
-			$data[$row['CauseId']] = array($row['CauseName'], str2js($row['CauseDesc']), $row['CauseActive']);
+			$data[$row['CauseId']] = array(0 => $row['CauseName'], 
+			                               1 => str2js($row['CauseDesc']),
+			                               2 => $row['CauseActive'],
+			                               'RecordUpdate' => $row['RecordUpdate']);
 		} //foreach
 		return $data;
 	} //function
@@ -987,13 +1002,45 @@ class Query extends PDO
 		}
 	}
 
+	function querySQLAddTextField($prmQuery, $prmField, $prmValue, $prmOp)
+	{
+		$Value = trim($prmValue);
+		$Query = $prmQuery;
+		if ($Value != '')
+		{
+			if ($prmQuery != '') 
+			{
+				$Query = $prmQuery . ' '. $prmOp . ' ';
+			}
+			$Query .= '(' . $prmField . '="' . $Value . '"' . ')';
+		}
+		return $Query;
+	}
+
+	function querySQLAddMemoField($prmQuery, $prmField, $prmValue, $prmOp)
+	{
+		$Value = trim($prmValue);
+		$Query = $prmQuery;
+		if ($Value != '')
+		{
+			if ($prmQuery != '') 
+			{
+				$Query = $prmQuery . ' '. $prmOp . ' ';
+			}
+			$Query .= '(' . $prmField . ' LIKE "%' . $Value . '%"' . ')';
+		}
+		return $Query;
+	}
 
 	// Generate SQL from Associative array from Desconsultar Form
 	public function genSQLWhereDesconsultar($dat)
 	{
+		// 2011-01-29 (jhcaiced) Updated method for applying operator between fields
+		$dat['D_DisasterSiteNotes'][0] = $dat['QueryGeography']['OP'];
+
 		$e		   = array();
-		$e['Eff']  = "";
-		$e['Item'] = "";
+		$e['Eff']  = '';
+		$e['Item'] = '';
 		// 2009-12-30 (jhcaiced) Try to separate query in logical units
 		$QueryItem   = array();
 		$QueryItem['Period']    = '';
@@ -1006,17 +1053,26 @@ class Query extends PDO
 		$QueryDisasterSerialOp  = ' AND ';
 
 		// Remove parameters from list of options...
-		foreach($dat as $Key => $Value)
+		foreach($dat as $k => $v)
 		{
-			if (substr($Key,0,3) == 'prm')
+			// replace D_ by D.
+			if (substr($k, 1, 1) == "_")
 			{
-				unset($dat[$Key]);
+				$newK = substr_replace($k, ".", 1, 1);
+				$dat[$newK] = $v;
+				unset($dat[$k]);
 			}
-		}		
+			if (substr($k,0,3) == 'prm')
+			{
+				unset($dat[$k]);
+			}
+		}
+
 		// Add Custom Query..
-		if (isset($dat['__CusQry']) && !empty($dat['__CusQry']))
+		if (isset($dat['QueryCustom']) && !empty($dat['QueryCustom']))
 		{
-			$QueryItem['Custom'] = trim($dat['__CusQry']);
+			$QueryItem['Custom'] = trim($dat['QueryCustom']);
+			unset($dat['QueryCustom']);
 		}
 		// Process EEFields...
 		$First = true;
@@ -1072,7 +1128,7 @@ class Query extends PDO
 				{
 					if (! $First)
 					{
-						$EEQuery .= ' AND ';
+						$EEQuery .= ' ' . $dat['QueryEEField']['OP'] . ' ';
 					}
 					$First = false;
 					$EEQuery .= $QueryTmp;
@@ -1080,14 +1136,134 @@ class Query extends PDO
 			} //if
 		} //foreach
 		$QueryItem['EEField'] = $EEQuery;
+
+		// Geography Section Query (GeographyId + DisasterSiteNotes)
+		$Query = '';
+		$bFirst = true;
+		$Field = 'D.GeographyId';
+		$GeographyList = $dat[$Field];
+		foreach ($GeographyList as $i)
+		{
+			if (! $bFirst)
+			{
+				$Query .= ' OR ';
+			}
+			// Restrict to childs elements only
+			$hasChildsSelected = false;
+			foreach ($GeographyList as $j)
+			{
+				if ($i != $j && ($i == substr($j, 0, 5) || $i == substr($j, 0, 10)))
+				{
+					$hasChildsSelected = true;
+					$bFirst = true;
+				}
+			}
+			if (! $hasChildsSelected)
+			{
+				$Query .= $Field . ' LIKE "' . $i . '%"';
+				$bFirst = false;
+			}
+		} //foreach
+		if ($Query != '') 
+		{
+			$Query = '(' . $Query . ')';
+		}
+		$Query = $this->querySQLAddMemoField($Query, 'D.DisasterSiteNotes', $dat['D.DisasterSiteNotes'][1], $dat['QueryGeography']['OP']);
+		$QueryItem['Geography'] = $Query;
+		// Remove data to avoid further processing by old query method..
+		unset($dat['D.GeographyId']);
+		unset($dat['D.DisasterSiteNotes']);
+
+		// Event Section Query
+		$Query = '';
+		$Field = 'D.EventId';
+		$bFirst = true;
+		foreach ($dat[$Field] as $EventId)
+		{
+			if (! $bFirst)
+			{
+				$Query .= ' OR ';
+			}
+			$Query .= $Field . '="' . $EventId . '"';
+			$bFirst = false;
+		}
+		if ($Query != '')
+		{
+			$Query = '(' . $Query . ')';
+		}
+		$Query = $this->querySQLAddTextField($Query, 'D.EventDuration', $dat['D.EventDuration'], $dat['QueryEvent']['OP']);
+		$Query = $this->querySQLAddMemoField($Query, 'D.EventNotes', $dat['D.EventNotes'][1], $dat['QueryEvent']['OP']);
+		$QueryItem['Event'] = $Query;
+		unset($dat['D.EventId']);
+		unset($dat['D.EventDuration']);
+		unset($dat['D.EventNotes']);
+
+		// Cause Section Query
+		$Query = '';
+		$Field = 'D.CauseId';
+		$bFirst = true;
+		foreach ($dat[$Field] as $CauseId)
+		{
+			if (! $bFirst)
+			{
+				$Query .= ' OR ';
+			}
+			$Query .= $Field . '="' . $CauseId . '"';
+			$bFirst = false;
+		}
+		if ($Query != '')
+		{
+			$Query = '(' . $Query . ')';
+		}
+		$Query = $this->querySQLAddMemoField($Query, 'D.CauseNotes', $dat['D.CauseNotes'][1], $dat['QueryCause']['OP']);
+		$QueryItem['Cause'] = $Query;
+		unset($dat['D.CauseId']);
+		unset($dat['D.CauseNotes']);
+
+		// Effects Query
+		$Query = '';
+		$bFirst = true;
+		foreach($dat as $k => $v)
+		{
+			if ((substr($k, 2, 6) == 'Effect' || substr($k, 2, 6) == 'Sector') && isset($v[0]))
+			{
+				if (is_array($v))
+				{
+					$op = $dat['QueryEffect']['OP'];
+					if (! $bFirst)
+					{
+						$Query .= ' ' . $op . ' ';
+					}
+					if ($v[0] == '>=' || $v[0] == '<=' || $v[0] == '=')
+					{
+						$Query .= '(' . $k . ' ' . $v[0] . $v[1] . ')';
+					}
+					elseif ($v[0] == '-1')
+					{
+						$Query .= '(' . $k . '=' . $v[0] . ' OR ' . $k . '>0)';
+					}
+					elseif ($v[0] == '0' || $v[0] == '-2')
+					{
+						$Query .= $k . '=' . $v[0];
+					}
+					elseif ($v[0] == '-3')
+					{
+						$Query .= '(' . $k . ' BETWEEN ' . $v[1] . ' AND ' . $v[2] . ')';
+					}
+					$bFirst = false;
+					unset($dat[$k]);
+				}
+			}
+		} //foreach
+		$Query = $this->querySQLAddMemoField($Query, 'D.EffectNotes', $dat['D.EffectNotes'], $dat['QueryEffect']['OP']);
+		$Query = $this->querySQLAddMemoField($Query, 'D.EffectOtherLosses', $dat['D.EffectOtherLosses'], $dat['QueryEffect']['OP']);
+		unset($dat['D.EffectNotes']);
+		unset($dat['D.EffectOtherLosses']);
+		$e['Eff'] = $Query;
 		
+		// Process all other fields...		
 		foreach ($dat as $k=>$v)
 		{
-			// replace D_ by D.
-			if (substr($k, 1, 1) == "_")
-			{
-				$k = substr_replace($k, ".", 1, 1);
-			}
 			if (!empty($v))
 			{
 				if (is_int($v) || is_float($v))
@@ -1136,96 +1312,7 @@ class Query extends PDO
 						$dd = !empty($v[2])? $v[2] : "31";
 						$endt = sprintf("%04d-%02d-%02d", $aa, $mm, $dd);
 					}
-					elseif ($k == "D.EventId")
-					{
-						$QueryItem['Event'] = '';
-						$bFirst = true;
-						foreach ($v as $i)
-						{
-							if (! $bFirst)
-							{
-								$QueryItem['Event'] .= ' OR ';
-							}
-							$QueryItem['Event'] .= "$k = '$i'";
-							$bFirst = false;
-						}
-					}
-					elseif ($k == "D.CauseId")
-					{
-						$QueryItem['Cause'] = '';
-						$bFirst = true;
-						foreach ($v as $i)
-						{
-							if (! $bFirst)
-							{
-								$QueryItem['Cause'] .= ' OR ';
-							}
-							$QueryItem['Cause'] .= "$k = '$i'";
-							$bFirst = false;
-						}
-					}
-					elseif ($k == "D.GeographyId")
-					{
-						$bFirst = true;
-						$QueryItem['Geography'] = '';
-						foreach ($v as $i)
-						{
-							if (! $bFirst)
-							{
-								$QueryItem['Geography'] .= ' OR ';
-							}
-							// Restrict to childs elements only
-							$hasChildsSelected = false;
-							foreach ($v as $j)
-							{
-								if ($i != $j && ($i == substr($j, 0, 5) || $i == substr($j, 0, 10)))
-								{
-									$hasChildsSelected = true;
-									$bFirst = true;
-								}
-							}
-							if (! $hasChildsSelected)
-							{
-								$QueryItem['Geography'] .= "$k LIKE '$i%'";
-								$bFirst = false;
-							}
-						} //foreach
-					}
-					elseif ((substr($k, 2, 6) == "Effect" || substr($k, 2, 6) == "Sector") && isset($v[0]))
-					{
-						// Process effects and sectors..
-						if (isset($v[3]))
-						{
-							$op = $v[3];
-						}
-						else
-						{
-							$op = "AND";
-						}
-						$EffectQuery = '';
-						if ($e['Eff'] != '')
-						{
-							$EffectQuery .= ' ' . $op . ' ';
-						}
-						if ($v[0] == ">=" || $v[0] == "<=" || $v[0] == "=")
-						{
-							$EffectQuery .= '(' . $k . ' ' . $v[0] . $v[1] . ')';
-						}
-						elseif ($v[0] == "-1")
-						{
-							$EffectQuery .= "($k =". $v[0] ." OR $k>0)";
-						}
-						elseif ($v[0] == "0" || $v[0] == "-2")
-						{
-							$EffectQuery .= "$k =". $v[0];
-						}
-						elseif ($v[0] == "-3")
-						{
-							$EffectQuery .= "($k BETWEEN ". $v[1] ." AND ". $v[2] . ")";
-						}
-						$e['Eff'] .= $EffectQuery;
-					}
-					elseif (substr($k, -5) == "Notes" || $k == "D.DisasterSource")
+					elseif ($k == "D.DisasterSource")
 					{
 						// Process text fields with separator AND, OR..
 						$Query = '';

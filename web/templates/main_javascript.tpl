@@ -170,21 +170,24 @@
 	Ext.onReady(function() {
 		// Initialize User Login Form
 		onReadyUserLogin();
+		jQuery('#loading').hide();
+		jQuery('#loading-mask').hide();
 		
 		jQuery('body').bind('UserLoggedIn',function() {
+			Ext.getCmp('viewport').destroy();
+			jQuery('#loading').show();
+			jQuery('#loading-mask').show();
 			// When the user completes the login procedure, reload the current page...
 			 window.location.reload(false);
 		});
 
 		jQuery('body').bind('UserLoggedOut',function() {
+			Ext.getCmp('viewport').destroy();
+			jQuery('#loading').show();
+			jQuery('#loading-mask').show();
 			// When the user logouts, reload the current page...
 			 window.location.reload(false);
 		});
-		
-		setTimeout(function() {
-			Ext.get('loading').remove();
-			Ext.get('loading-mask').fadeOut({remove:true});
-		}, 250);
 		Ext.QuickTips.init();
 		// User functions Window
 		if (!usrw) {
@@ -321,6 +324,8 @@
 
 		// layout
 		var viewport = new Ext.Viewport({
+			id:'viewport',
+			contentEl: 'divViewport',
 			layout:'border',
 			items:[
 				{ region:'north',
@@ -379,7 +384,7 @@
 							animCollapse: false,
 							items: new Ext.Panel({contentEl: 'dat-cfg', autoScroll: true }),
 							buttons: [
-								{text:'{-#tclean#-}',
+								{text:'{-#tclear#-}',
 									handler: function() {
 										$('CD').reset();
 										} //handler
@@ -420,7 +425,7 @@
 							closeAction:'hide', plain: true, animCollapse: false,
 							items: new Ext.Panel({contentEl: 'std-cfg', autoScroll: true }),
 							buttons: [
-								{text:'{-#tclean#-}',
+								{text:'{-#tclear#-}',
 									handler: function() {
 										$('CS').reset();
 									}
@@ -461,7 +466,7 @@
 							closeAction:'hide', plain: true, animCollapse: false,
 							items: new Ext.Panel({contentEl: 'grp-cfg', autoScroll: true }),
 							buttons: [
-								{text:'{-#tclean#-}',
+								{text:'{-#tclear#-}',
 									handler: function() {
 										$('CG').reset();
 									}
@@ -500,7 +505,7 @@
 							closeAction:'hide', plain: true, animCollapse: false,
 							items: new Ext.Panel({contentEl: 'map-cfg', autoScroll: true }),
 							buttons: [
-								{text:'{-#tclean#-}',
+								{text:'{-#tclear#-}',
 									handler: function() {
 										$('CM').reset();
 									}
@@ -561,29 +566,29 @@
 		} //function
 		
 		function setAdvQuery(value, ope) {
-			$('CusQry').value += value + ' ';
+			$('QueryCustom').value += value + ' ';
 			switch (ope) {
 				case 'text':
 					disab($('<'));
 					disab($('>'));
-					enab($('='));  $('=').value = "= ''";
-					enab($('<>')); $('<>').value = "<> ''";
+					enab($('='));  $('=').value = "=''";
+					enab($('<>')); $('<>').value = "<>''";
 					enab($("LIKE '%%'"));
 					disab($('=-1')); disab($('=0')); disab($('=-2'));
 				break;
 				case 'date':
-					enab($('<')); $('<').value = "< ''";
-					enab($('>')); $('>').value = "> ''";
-					enab($('=')); $('=').value = "= ''";
-					enab($('<>')); $('<>').value = "<> ''";
+					enab($('<')); $('<').value = "<''";
+					enab($('>')); $('>').value = ">''";
+					enab($('=')); $('=').value = "=''";
+					enab($('<>')); $('<>').value = "<>''";
 					enab($("LIKE '%%'"));
 					disab($('=-1')); disab($('=0')); disab($('=-2'));
 				break;
 				case 'number':
-					enab($('<')); $('<').value = "< ";
-					enab($('>')); $('>').value = "> ";
-					enab($('=')); $('=').value = "= ";
-					enab($('<>'));$('<>').value = "<> ";
+					enab($('<')); $('<').value = "<";
+					enab($('>')); $('>').value = ">";
+					enab($('=')); $('=').value = "=";
+					enab($('<>'));$('<>').value = "<>";
 					disab($("LIKE '%%'"));
 					enab($('=-1')); enab($('=0')); enab($('=-2'));
 				break;

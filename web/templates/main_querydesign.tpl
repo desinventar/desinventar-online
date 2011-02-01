@@ -10,6 +10,7 @@
 		<!-- Select from Map testing ... 'selectionmap.php' -->
 		<dt>{-#mgeosection#-}</dt>
 		<dd>
+			<input type="hidden" name="QueryGeography[OP]" value="AND" />
 			{-foreach name=glev key=k item=i from=$glev-}
 				<span class="dlgmsg" onMouseOver="showtip('{-$i[1]-}');">{-$i[0]-}</span> |
 			{-/foreach-}
@@ -20,10 +21,7 @@
 			</div>
 			
 			<b onMouseOver="showtip('{-$dis.DisasterSiteNotes[2]-}');">{-$dis.DisasterSiteNotes[0]-}</b>
-			<select name="D_DisasterSiteNotes[0]" class="small line">
-				<option class="small" value="AND" {-if $qd.D_DisasterSiteNotes[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-				<option class="small" value="OR"  {-if $qd.D_DisasterSiteNotes[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-			</select>
+			<input type="hidden" name="D_DisasterSiteNotes[0]" />
 			<br/>
 			<textarea id="DisasterSiteNotes" name="D_DisasterSiteNotes[1]" style="width:220px; height: 40px;"
 				onFocus="showtip('{-$dis.DisasterSiteNotes[2]-}');">{-$qd.D_DisasterSiteNotes[1]-}
@@ -33,6 +31,7 @@
 		<!-- BEGIN EVENT SECTION -->
 		<dt>{-#mevesection#-}</dt>
 		<dd>
+			<input type="hidden" name="QueryEvent[OP]" value="AND" />
 			<span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br />
 			<select id="qevelst" name="D_EventId[]" multiple style="width: 250px; height: 200px;" class="line">
 				{-include file="main_eventlist.tpl" -}
@@ -43,10 +42,6 @@
 				onFocus="showtip('{-$eve.EventDuration[2]-}');" value="{-$qd.D_EventDuration-}" />
 			<br />
 			<b onMouseOver="showtip('{-$eve.EventNotes[2]-}');">{-$eve.EventNotes[0]-}</b>
-			<select name="D_EventNotes[0]" class="small line">
-				<option class="small" value="AND" {-if $qd.D_EventNotes[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-				<option class="small" value="OR"  {-if $qd.D_EventNotes[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-			</select><br />
 			<textarea id="EventNotes" name="D_EventNotes[1]" style="width:250px; height:40px;"
 				onFocus="showtip('{-$eve.EventNotes[2]-}');">{-$qd.D_EventNotes[1]-}
 			</textarea>
@@ -55,16 +50,14 @@
 		<!-- BEGIN CAUSE SECTION -->
 		<dt>{-#mcausection#-}</dt>
 		<dd>
+			<input type="hidden" name="QueryCause[OP]" value="AND" />
 			<span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br>
 			<select id="qcaulst" name="D_CauseId[]" multiple style="width: 250px; height: 200px;" class="line">
 				{-include file="main_causelist.tpl" -}
 			</select>
-			<br /><br />
+			<br />
 			<b onMouseOver="showtip('{-$cau.CauseNotes[2]-}');">{-$cau.CauseNotes[0]-}</b>
-			<select name="D_CauseNotes[0]" class="small line">
-				<option class="small" value="AND" {-if $qd.D_CauseNotes[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-				<option class="small" value="OR"  {-if $qd.D_CauseNotes[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-			</select><br />
+			<br />
 			<textarea name="D_CauseNotes[1]" style="width:250px; height: 40px;"
 				onFocus="showtip('{-$cau.CauseNotes[2]-}');">{-$qd.D_CauseNotes[1]-}
 			</textarea>
@@ -73,6 +66,12 @@
 		<!-- BEGIN QUERY EFFECTS SECTION -->
 		<dt>{-#meffsection#-}</dt>
 		<dd>
+			<p align="right">{-#msgOperator#-}
+			<select name="QueryEffect[OP]" class="dlgmsg small line">
+				<option class="small" value="AND" {-if $qd.QueryEffect[OP] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
+				<option class="small" value="OR"  {-if $qd.QueryEffect[OP] == 'OR' -}selected{-/if-}>{-#tor#-}</option>
+			</select>
+			</p>
 			<b>{-#ttitegp#-}</b><br />
 			<div style="height: 100px;" class="dwin" ext:qtip="{-#thlpquery#-}">
 				<table border="0" cellpadding="0" cellspacing="0">
@@ -102,10 +101,6 @@
 										<input type="text" id="{-$key-}[2]" name="D_{-$key-}[2]" size="3" class="line"
 											value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}" />
 									</span>
-									<select id="{-$key-}[3]" id="{-$key-}[3]" name="D_{-$key-}[3]" class="small line">
-										<option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-										<option class="small" value="OR"  {-if $qd.$ff[3] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-									</select>
 								</span>
 							</td>
 						</tr>
@@ -132,10 +127,6 @@
 										<option class="small" value="0"  {-if $qd.$ff[0] == '0'-}selected{-/if-}>{-#teffhavnot#-}</option>
 										<option class="small" value="-2" {-if $qd.$ff[0] == '-2'-}selected{-/if-}>{-#teffdontknow#-}</option>
 									</select>
-									<select id="{-$key-}[3]" id="{-$key-}[3]" name="D_{-$key-}[3]" class="small line">
-										<option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-										<option class="small" value="OR"  {-if $qd.$ff[3] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-									</select>
 									{-foreach name=sc2 key=k item=i from=$item[3]-}
 										{-assign var="ff" value=D_$k-}
 										<span id="o{-$k-}" style="display:none">
@@ -156,10 +147,7 @@
 												<input type="text" id="{-$k-}[2]" name="D_{-$k-}[2]" size="3" class="line"
 													value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}" />
 											</span>
-											<select id="{-$k-}[3]" id="{-$k-}[3]" name="D_{-$k-}[3]" class="small line">
-												<option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-												<option class="small" value="OR"  {-if $qd.$ff[3] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-											</select><br />
+											<br />
 										</span>
 									{-/foreach-}
 								</span>
@@ -193,10 +181,6 @@
 						<input type="text" id="{-$k-}[2]" name="D_{-$k-}[2]" size="5" class="line" 
 							value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}" />
 					</span>
-					<select id="{-$key-}[3]" name="D_{-$key-}[3]" class="small line">
-						<option class="small" value="AND" {-if $qd.$ff[3] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-						<option class="small" value="OR"  {-if $qd.$ff[3] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-					</select>
 				</span>
 				<br />
 			{-/foreach-}
@@ -212,7 +196,13 @@
 		<!-- Begin EEField Section -->
 		<dt>{-#mextsection#-}</dt>
 		<dd>
-			<div style="width: 300px; height: 300px;" class="dwin" ext:qtip="{-#thlpquery#-}">
+			<p align="right">{-#msgOperator#-}
+			<select name="QueryEEField[OP]" class="dlgmsg small line">
+				<option class="small" value="AND" {-if $qd.QueryEEField[OP] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
+				<option class="small" value="OR"  {-if $qd.QueryEEField[OP] == 'OR' -}selected{-/if-}>{-#tor#-}</option>
+			</select>
+			</p>
+			<div style="height: 300px;" class="dwin">
 				<table border=0 cellpadding=0 cellspacing=0>
 					{-foreach name=eef key=key item=item from=$EEFieldList-}
 						<tr>
@@ -237,12 +227,6 @@
 										<span id="y{-$key-}" style="display:none">
 											{-#tand#-} <input type="text" id="{-$key-}[2]" name="EEFieldQuery[{-$key-}][Value2]" size="3" value="10" class="line">
 										</span>
-										<!--
-										<select id="{-$key-}[3]" id="{-$key-}[3]" name="EEFieldQuery[{-$key-}][BetweenOperator]" class="small">
-											<option class="small" value="AND" checked>{-#tand#-}</option>
-											<option class="small" value="OR">{-#tor#-}</option>
-										</select>
-										-->
 									</span>
 								{-/if-}
 								{-if $item[2] == "TEXT"-}
@@ -256,7 +240,6 @@
 					{-/foreach-}
 				</table>
 			</div>
-			<br />
 		</dd>
 		<!-- END EEField Section -->
 		
@@ -291,11 +274,8 @@
 					</tr>
 				</table>
 				<br />
+				<input type="hidden" name="D_DisasterSource[0]" value="AND" />
 				<b onMouseOver="showtip('{-$dis.DisasterSource[2]-}');">{-$dis.DisasterSource[0]-}</b>
-				<select name="D_DisasterSource[0]" class="small line">
-					<option class="small" value="AND" {-if $qd.D_DisasterSource[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-					<option class="small" value="OR"  {-if $qd.D_DisasterSource[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
-				</select>
 				<br />
 				<textarea id="txtDisasterSource" name="D_DisasterSource[1]" style="width:220px; height:40px;"
 					onFocus="showtip('{-$dis.DisasterSource[2]-}');">{-$qd.D_DisasterSource[1]-}
@@ -330,7 +310,7 @@
 		<!-- BEGIN CUSTOMQUERY SECTION -->
 		<dt>{-#madvsection#-}</dt>
 		<dd alignt="left">
-			<textarea id="CusQry" name="__CusQry" style="width:300px; height:45px;" onFocus="showtip('');">{-$qd.__CusQry-}</textarea>
+			<textarea id="QueryCustom" name="QueryCustom" style="width:300px; height:45px;" onFocus="showtip('');">{-$qd.QueryCustom-}</textarea>
 			<br />
 			<span class="dlgmsg">{-#tadvqryhelp#-}</span>
 			<br />
@@ -371,28 +351,29 @@
 					</td>
 					<td align="center">
 						<input type="button" id="<" value="<" class="disabled" disabled 
-							onClick="$('CusQry').value += this.value; $('CusQry').focus();" onMouseOver="showtip('{-#taqlessthan#-}');" />
+							onClick="$('QueryCustom').value += this.value; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqlessthan#-}');" />
 						<input type="button" id=">" value=">" class="disabled" disabled 
-							onClick="$('CusQry').value += this.value; $('CusQry').focus();" onMouseOver="showtip('{-#taqgreathan#-}');" />
+							onClick="$('QueryCustom').value += this.value; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqgreathan#-}');" />
 						<input type="button" id="=" value="=" class="disabled" disabled 
-							onClick="$('CusQry').value += this.value; $('CusQry').focus();" onMouseOver="showtip('{-#taqequalto#-}');" /><br />
-						<input type="button" id="<>" value="<>" class="disabled" disabled 
-							onClick="$('CusQry').value += this.value; $('CusQry').focus();" onMouseOver="showtip('{-#taqnoteqto#-}');" />
-						<input type="button" id="LIKE '%%'" value="{-#tlike#-}" class="disabled" disabled 
-							onClick="$('CusQry').value += this.id; $('CusQry').focus();" onMouseOver="showtip('{-#taqlike#-}');" />
-						<input type="button" id="=-1" value="{-#teffhav#-}" class="disabled" disabled 
-							onClick="$('CusQry').value += this.id; $('CusQry').focus();" onMouseOver="showtip('{-#taqwere#-}');" />
-						<input type="button" id="=0" value="{-#teffhavnot#-}" class="disabled" disabled 
-							onClick="$('CusQry').value += this.id; $('CusQry').focus();" onMouseOver="showtip('{-#taqwerent#-}');" />
-						<input type="button" id="=-2" value="{-#teffdontknow#-}" class="disabled" disabled 
-							onClick="$('CusQry').value += this.id; $('CusQry').focus();" onMouseOver="showtip('{-#taqdntknow#-}');" />
+							onClick="$('QueryCustom').value += this.value; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqequalto#-}');" />
 						<br />
-						<input type="button" value=" (" onClick="$('CusQry').value += this.value;" />
-						<input type="button" value=") " onClick="$('CusQry').value += this.value;" />
-						<input type="button" value=" AND " onClick="$('CusQry').value += this.value;" onMouseOver="showtip('{-#taqandopt#-}')" />
-						<input type="button" value=" OR " onClick="$('CusQry').value += this.value;" onMouseOver="showtip('{-#taqoropt#-}')" />
+						<input type="button" id="<>" value="<>" class="disabled" disabled 
+							onClick="$('QueryCustom').value += this.value; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqnoteqto#-}');" />
+						<input type="button" id="LIKE '%%'" value="{-#tlike#-}" class="disabled" disabled 
+							onClick="$('QueryCustom').value += this.id; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqlike#-}');" />
+						<input type="button" id="=-1" value="{-#teffhav#-}" class="disabled" disabled 
+							onClick="$('QueryCustom').value += this.id; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqwere#-}');" />
+						<input type="button" id="=0" value="{-#teffhavnot#-}" class="disabled" disabled 
+							onClick="$('QueryCustom').value += this.id; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqwerent#-}');" />
+						<input type="button" id="=-2" value="{-#teffdontknow#-}" class="disabled" disabled 
+							onClick="$('QueryCustom').value += this.id; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqdntknow#-}');" />
+						<br />
+						<input type="button" value=" (" onClick="$('QueryCustom').value += this.value;" />
+						<input type="button" value=") " onClick="$('QueryCustom').value += this.value;" />
+						<input type="button" value=" AND " onClick="$('QueryCustom').value += this.value;" onMouseOver="showtip('{-#taqandopt#-}')" />
+						<input type="button" value=" OR " onClick="$('QueryCustom').value += this.value;" onMouseOver="showtip('{-#taqoropt#-}')" />
 						<br /><br />
-						<input type="button" value="{-#tclean#-}" onClick="$('CusQry').value = '';" />
+						<input type="button" value="{-#tclear#-}" onClick="$('QueryCustom').value = '';" />
 					</td>
 				</tr>
 			</table>

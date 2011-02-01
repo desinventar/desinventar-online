@@ -8,8 +8,8 @@
 		public static function isLeapYear($prmYear) {
 			$bReturn = -1; // Error
 	        if (is_int($prmYear) && $prmYear > 0) {
-	        	# In the Gregorian calendar there is a leap year every year divisible by four
-	        	# except for years which are both divisible by 100 and not divisible by 400.
+	        	// In the Gregorian calendar there is a leap year every year divisible by four
+	        	// except for years which are both divisible by 100 and not divisible by 400.
 	        	if ($prmYear % 4 != 0) {
 	        		$iReturn = 0; // Not Leap Year
 				} else {
