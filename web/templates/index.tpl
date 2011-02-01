@@ -1,5 +1,6 @@
 {-config_load file=`$lg`.conf section="di8_index"-}
 {-config_load file=`$lg`.conf section="di8_user"-}
+{-config_load file=`$lg`.conf section="querydef"-}
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -70,26 +71,27 @@
 	<div id="loading">
 		<div class="loading-indicator">Loading...</div>
 	</div>
-	
-	<!-- Top Menu Area - Toolbar -->
-	<div id="north">
-		<div id="toolbar"></div>
-	</div>
+	<div id="divViewport">
+		<!-- Top Menu Area - Toolbar -->
+		<div id="north">
+			<div id="toolbar"></div>
+		</div>
 
-	<!-- Query Design -->
-	<div id="west">
-		{-include file="main_querydesign.tpl" -}
-	</div>
-	
-	<!-- Central Content Area -->
-	<div id="container">
-		{-include file="main_content.tpl" -}
-	</div>
-	
+		<!-- Query Design -->
+		<div id="west">
+			{-include file="main_querydesign.tpl" -}
+		</div>
+		
+		<!-- Central Content Area -->
+		<div id="container">
+			{-include file="main_content.tpl" -}
+		</div>
+		
 
-	<!-- Help Section -->
-	<div id="south">
-		{-include file="main_help.tpl" -}
+		<!-- Help Section -->
+		<div id="south">
+			{-include file="main_help.tpl" -}
+		</div>
 	</div>
 	
 	<!-- General App Information -->

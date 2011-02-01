@@ -10,10 +10,9 @@ require_once('include/didisaster.class.php');
 require_once('include/diregion.class.php');
 require_once('include/dieedata.class.php');
 
-/* Convert Post Form to DesInventar Disaster Table struct 
- * Insert  (1) create DisasterId. 
- * Update  (2) keep RecordCreation and RecordAuthor 
- */
+// Convert Post Form to DesInventar Disaster Table struct 
+// Insert  (1) create DisasterId. 
+// Update  (2) keep RecordCreation and RecordAuthor 
 function form2disaster($form, $icmd)
 {
 	$data = array();
@@ -84,15 +83,6 @@ function form2eedata($form)
 }
 
 $RegionId = getParameter('RegionId', getParameter('r',''));
-/*
-if ( ($RegionId == '') || ($RegionId == 'undefined') )
-{
-	if ($us->RegionId != 'core')
-	{
-		$RegionId = $us->RegionId;
-	}
-}
-*/
 if ($RegionId == '')
 {
 	exit(0);

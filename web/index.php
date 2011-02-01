@@ -26,7 +26,7 @@ $RegionId = getParameter('r', getParameter('RegionId', getParameter('_REG'),''))
 $RegionLabel = '';
 if ($cmd == '' && $RegionId == '')
 {
-	$cmd = 'start';
+	$cmd = 'main';
 }
 // Default Template Values
 $t->assign('desinventarRegionId', $RegionId);
@@ -191,19 +191,17 @@ switch ($cmd)
 		$us->delete();
 		echo json_encode($answer);
 		// fb debug doesn't work in this code... why ?
-		/*
-		ob_start();
-		print_r($answer);
+		//ob_start();
+		//print_r($answer);
 		//print_r($_GET);
-		print_r($_POST);
+		//print_r($_POST);
 		//print_r($_FILES);
 		//print_r($_SERVER);
-		$out = ob_get_contents();
-		ob_end_clean();		
-		$fp = fopen('/tmp/fileupload.log', 'w+');
-		fwrite($fp, $out);
-		fclose($fp);
-		*/		
+		//$out = ob_get_contents();
+		//ob_end_clean();		
+		//$fp = fopen('/tmp/fileupload.log', 'w+');
+		//fwrite($fp, $out);
+		//fclose($fp);
 	break;
 	case 'start':
 		$t->assign('lg', $lg);
@@ -609,7 +607,7 @@ switch ($cmd)
 						$std = array_merge($std, $st);
 						$t->assign('std', $std);
 
-						/* DATACARDS */
+						// DATACARDS
 						$t->assign('usr', $us->UserId);
 						$desinventarUserRole = $role;
 						$desinventarUserRoleValue = $roleValue;
@@ -667,9 +665,9 @@ switch ($cmd)
 						$t->assign('RegionId', $RegionId);
 						$t->assign('desinventarUserRole', $desinventarUserRole);
 						$t->assign('desinventarUserRoleValue', $desinventarUserRoleValue);
-						/* DATACARDS END */
+						// DATACARDS END
 						
-						/* BEGIN THEMATIC MAP */
+						// BEGIN THEMATIC MAP
 						// 2010-01-18 (jhcaiced) Windows machines doesn't use remote servers
 						if (isset($_SERVER['WINDIR']))
 						{
@@ -679,43 +677,12 @@ switch ($cmd)
 						{
 							// Linux machines are assumed to be connected to internet
 							$desinventarHasInternet = 1;
-							/*
-							if (!fsockopen('www.google.com',80))
-							{
-								$desinventarHasInternet = 0;
-							}
-							*/
-						}	
-						// 2009-07-14 (jhcaiced) Configure desinventarGoogleMapsKey
-						$desinventarGoogleMapsKey = '';
-						switch($_SERVER['SERVER_NAME'])
-						{
-							case 'devel.desinventar.org':
-								$desinventarGoogleMapsKey = 'ABQIAAAALchGiIjlsbdmE3fN4eRcYBQB70apFGkcE_JIKPq7c7oktNLHXhTU2xdzBNS_-XzWYh911SdinR2Xkw';
-								break;
-							case 'online.desinventar.org':
-								$desinventarGoogleMapsKey = 'ABQIAAAAv_HCDVf4YK_pJceWBA7XmRQHPIpdtLPiHEY9M3_iWXAS0AXQLhTwoORtm0ZLuqG03CB3sP09KKDtAg';		
-								break;
-							/*
-							case '192.168.0.13':
-								$desinventarGoogleMapsKey = 'ABQIAAAAv_HCDVf4YK_pJceWBA7XmRRT41YKyiJ82KgcK-Dai8T6I93cWxT4pcci6xQX6tWCkefVHbB2AtUGKw';
-								break;
-							*/
-							case 'localhost':
-								$desinventarGoogleMapsKey = 'ABQIAAAAv_HCDVf4YK_pJceWBA7XmRT2yXp_ZAY8_ufC3CFXhHIE1NvwkxQrE9s8Pd9b8nrmaDwyyilebSXcPw';
-								break;
-							case '127.0.0.1':
-								$desinventarGoogleMapsKey = 'ABQIAAAAv_HCDVf4YK_pJceWBA7XmRRi_j0U6kJrkFvY4-OX2XYmEAa76BSA4JvNpGUXBDLtWrA-lnRXmTahHg';
-								break;
-							default:
-								$desinventarGoogleMapsKey = '';
-								break;
+							//if (!fsockopen('www.google.com',80))
+							//{
+							//	$desinventarHasInternet = 0;
+							//}
 						}
-						$t->assign('desinventarGoogleMapsKey', $desinventarGoogleMapsKey);
 						$t->assign('desinventarHasInternet', $desinventarHasInternet);
-						
-						/* END THEMATIC MAP */
-
 						$t->display('index.tpl');
 					}
 					else

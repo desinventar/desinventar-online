@@ -10,10 +10,10 @@ if (! isset($_SERVER['DI8_WEB'])) {
 
 // This is the version of the software
 define('MAJORVERSION', '2011');
-define('MINORVERSION', '025');
+define('MINORVERSION', '032');
 define('VERSION'     , MAJORVERSION . '.' . MINORVERSION);
 define('INTVERSION'  , '8.2.2.05');
-define('JSVERSION'   , '2011-01-25.01');
+define('JSVERSION'   , '2011-02-01.01');
 
 // 2009-07-22 (jhcaiced) Adapted Configuration and Startup for 
 // using with PHP Command Line 
@@ -106,7 +106,7 @@ require_once(BASE . '/include/digeolevel.class.php');
 require_once(BASE . '/include/digeocarto.class.php');
 require_once(BASE . '/include/didisaster.class.php');
 
-/* SETTINGS */
+// SETTINGS
 $time_start = microtime_float();
 $SessionId = uuid();
 if (MODE != 'command') {
@@ -129,9 +129,8 @@ if (MODE != 'command') {
 	$confdir = dirname($_SERVER['SCRIPT_FILENAME']) . '/conf';
 	$templatedir = dirname($_SERVER['SCRIPT_FILENAME']) . '/templates';
 
-	/* Smarty configuration */
+	// Smarty configuration
 	require_once(SMARTYDIR . '/Smarty.class.php');
-	/* SMARTY template */
 	$t = new Smarty();
 	$t->debugging = false;
 	$t->config_dir = $confdir;
