@@ -271,12 +271,26 @@
 					</tr>
 				</table>
 				<br />
-				<input type="hidden" name="D_DisasterSource[0]" value="AND" />
-				<b onMouseOver="showtip('{-$dis.DisasterSource[2]-}');">{-$dis.DisasterSource[0]-}</b>
-				<br />
-				<textarea id="txtDisasterSource" name="D_DisasterSource[1]" style="width:220px; height:40px;" 
-					class="inputText" onFocus="showtip('{-$dis.DisasterSource[2]-}');">{-$qd.D_DisasterSource[1]-}</textarea>
-				
+				<table border="0" cellspacing="0">
+					<tr>
+						<td colspan="2" valign="top">
+							<b onMouseOver="showtip('{-$dis.DisasterSource[2]-}');">{-$dis.DisasterSource[0]-}</b>
+							<br />
+						</td>
+					</tr>
+					<tr>
+						<td valign="top">
+							<textarea id="txtDisasterSource" name="D_DisasterSource[1]" style="width:220px; height:40px;" 
+								class="inputText" onFocus="showtip('{-$dis.DisasterSource[2]-}');">{-$qd.D_DisasterSource[1]-}</textarea>
+						</td>
+						<td valign="top">
+							<select name="D_DisasterSource[0]" class="dlgmsg small line">
+								<option class="small" value="AND" {-if $qd.D_DisasterSource[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
+								<option class="small" value="OR"  {-if $qd.D_DisasterSource[0] == 'OR' -}selected{-/if-}>{-#tor#-}</option>
+							</select>
+						</td>
+					</tr>
+				</table>
 				{-if $ctl_user-}
 					<br />
 					<b onMouseOver="showtip('');">{-#tdcstatus#-}</b><br />
