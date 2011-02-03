@@ -59,6 +59,9 @@ function onReadyDatacards() {
 					switch (data.StatusCode) {
 						case 'INSERTOK':
 							displayDatacardStatusMsg('msgDatacardInsertOk');
+							jQuery('#cardsRecordSource').val('');
+							jQuery('#cardsRecordCount').val(data.RecordCount);
+							jQuery('#cardsRecordNumber').val(data.RecordCount);
 							jQuery('#divRecordStat').show();
 						break;
 						case 'UPDATEOK':
@@ -68,6 +71,11 @@ function onReadyDatacards() {
 					} //switch
 					DisableEnableForm($('DICard'), true);
 					changeOptions('btnDatacardSave');
+					if (parseInt(jQuery('#cardsRecordNumber').val()) > 0) {
+						jQuery('#RecordNumber').text(jQuery('#cardsRecordNumber').val());
+						jQuery('#RecordCount').text(jQuery('#cardsRecordCount').val());
+						jQuery('#divRecordNavigationInfo').show();
+					}
 				} else {
 					jQuery('#msgDatacardCustom').text(data.StatusMsg);
 					displayDatacardStatusMsg('msgDatacardCustom');

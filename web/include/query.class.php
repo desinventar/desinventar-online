@@ -31,7 +31,9 @@ class Query extends PDO
 			// Open base.db - DI's Basic database
 			$dbb = CONST_DBBASE;
 			if (file_exists($dbb))
+			{
 				$this->base = new PDO('sqlite:' . $dbb);
+			}
 
 			if ($num_args > 0)
 			{
