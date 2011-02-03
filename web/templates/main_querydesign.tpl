@@ -24,8 +24,7 @@
 			<input type="hidden" name="D_DisasterSiteNotes[0]" />
 			<br/>
 			<textarea id="DisasterSiteNotes" name="D_DisasterSiteNotes[1]" style="width:220px; height: 40px;"
-				onFocus="showtip('{-$dis.DisasterSiteNotes[2]-}');">{-$qd.D_DisasterSiteNotes[1]-}
-			</textarea>
+				class="inputText" onFocus="showtip('{-$dis.DisasterSiteNotes[2]-}');">{-$qd.D_DisasterSiteNotes[1]-}</textarea>
 		</dd>
 		
 		<!-- BEGIN EVENT SECTION -->
@@ -43,8 +42,7 @@
 			<br />
 			<b onMouseOver="showtip('{-$eve.EventNotes[2]-}');">{-$eve.EventNotes[0]-}</b>
 			<textarea id="EventNotes" name="D_EventNotes[1]" style="width:250px; height:40px;"
-				onFocus="showtip('{-$eve.EventNotes[2]-}');">{-$qd.D_EventNotes[1]-}
-			</textarea>
+				class="inputText" onFocus="showtip('{-$eve.EventNotes[2]-}');">{-$qd.D_EventNotes[1]-}</textarea>
 		</dd>
 			
 		<!-- BEGIN CAUSE SECTION -->
@@ -59,8 +57,7 @@
 			<b onMouseOver="showtip('{-$cau.CauseNotes[2]-}');">{-$cau.CauseNotes[0]-}</b>
 			<br />
 			<textarea name="D_CauseNotes[1]" style="width:250px; height: 40px;"
-				onFocus="showtip('{-$cau.CauseNotes[2]-}');">{-$qd.D_CauseNotes[1]-}
-			</textarea>
+				class="inputText" onFocus="showtip('{-$cau.CauseNotes[2]-}');">{-$qd.D_CauseNotes[1]-}</textarea>
 		</dd>
 		
 		<!-- BEGIN QUERY EFFECTS SECTION -->
@@ -274,13 +271,14 @@
 					</tr>
 				</table>
 				<br />
-				<input type="hidden" name="D_DisasterSource[0]" value="AND" />
 				<b onMouseOver="showtip('{-$dis.DisasterSource[2]-}');">{-$dis.DisasterSource[0]-}</b>
+				<select name="D_DisasterSource[0]" class="dlgmsg small line">
+					<option class="small" value="AND" {-if $qd.D_DisasterSource[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
+					<option class="small" value="OR"  {-if $qd.D_DisasterSource[0] == 'OR' -}selected{-/if-}>{-#tor#-}</option>
+				</select>
 				<br />
-				<textarea id="txtDisasterSource" name="D_DisasterSource[1]" style="width:220px; height:40px;"
-					onFocus="showtip('{-$dis.DisasterSource[2]-}');">{-$qd.D_DisasterSource[1]-}
-				</textarea>
-				
+				<textarea id="txtDisasterSource" name="D_DisasterSource[1]" style="width:220px; height:40px;" 
+					class="inputText" onFocus="showtip('{-$dis.DisasterSource[2]-}');">{-$qd.D_DisasterSource[1]-}</textarea>
 				{-if $ctl_user-}
 					<br />
 					<b onMouseOver="showtip('');">{-#tdcstatus#-}</b><br />
@@ -310,7 +308,8 @@
 		<!-- BEGIN CUSTOMQUERY SECTION -->
 		<dt>{-#madvsection#-}</dt>
 		<dd alignt="left">
-			<textarea id="QueryCustom" name="QueryCustom" style="width:300px; height:45px;" onFocus="showtip('');">{-$qd.QueryCustom-}</textarea>
+			<textarea id="QueryCustom" name="QueryCustom" style="width:300px; height:45px;" 
+				class="inputText" onFocus="showtip('');">{-$qd.QueryCustom-}</textarea>
 			<br />
 			<span class="dlgmsg">{-#tadvqryhelp#-}</span>
 			<br />

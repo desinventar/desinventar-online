@@ -277,6 +277,10 @@ else
 				$answer['RecordPublished'] = $us->q->getNumDisasterByStatus('PUBLISHED');
 				$answer['RecordReady']     = $us->q->getNumDisasterByStatus('READY');
 			}
+			if ($cmd == 'insertDICard')
+			{
+				$answer['RecordCount'] = $us->getDisasterCount();
+			}
 			echo json_encode($answer);
 		break;
 		default:

@@ -226,28 +226,51 @@
 								</table> 
 							</td>
 							<td>
-								<b align="center">{-#tsectors#-}</b><br />
-								<table width="100%" class="grid">
-									<!-- BEGIN Table Sectors -->
-									{-foreach name=sec key=key item=item from=$sec-}
-										{-assign var="tabind" value="`$tabind+1`"-}
-										<tr>
-											<td align="right"><span ext:qtip="{-$item[1]-}">{-$item[0]-}</span>
-											</td>
-											<td>
-												<select id="{-$key-}" name="{-$key-}" style="width:120px;" 
-													class="line clsEffectSector" tabindex="{-$tabind-}" onFocus="showtip('{-$item[2]-}', '#f1bd41')">
-													<option class="small" value="-1">{-#teffhav#-}</option>
-													<option class="small" value="0" selected>{-#teffhavnot#-}</option>
-													<option class="small" value="-2">{-#teffdontknow#-}</option>
-												</select>
-											</td>
-										</tr>
-									{-/foreach-}
+								<table>
+									<tr>
+										<td colspan="2" valign="top">
+											<b align="center">{-#tsectors#-}</b><br />
+										</td>
+									</tr>
+									<tr>
+										<td valign="top">
+											<table width="100%" class="grid">
+												<!-- BEGIN Table Sectors -->
+												{-foreach name=sec key=key item=item from=$sec-}
+													{-assign var="tabind" value="`$tabind+1`"-}
+													<tr>
+														<td align="right"><span ext:qtip="{-$item[1]-}">{-$item[0]-}</span>
+														</td>
+														<td>
+															<select id="{-$key-}" name="{-$key-}" style="width:120px;" 
+																class="line clsEffectSector" tabindex="{-$tabind-}" onFocus="showtip('{-$item[2]-}', '#f1bd41')">
+																<option class="small" value="-1">{-#teffhav#-}</option>
+																<option class="small" value="0" selected>{-#teffhavnot#-}</option>
+																<option class="small" value="-2">{-#teffdontknow#-}</option>
+															</select>
+														</td>
+													</tr>
+												{-/foreach-}
+											</table>
+										</td>
+										<td valign="top">
+											<!-- BEGIN Table Effects over $$ -->
+											{-foreach name=ef2 key=key item=item from=$ef2-}
+												{-assign var="tabind" value="`$tabind+1`"-}
+												<span ext:qtip="{-$item[1]-}">
+													{-$item[0]-}<br />
+													<input id="{-$key-}" name="{-$key-}" type="text" size="11" maxlength="15"
+														class="line inputDouble" tabindex="{-$tabind-}" value="0" 
+														onFocus="showtip('{-$item[2]-}', '#f1bd41');" />
+												</span>
+												<br />
+											{-/foreach-}
+										</td>
+									</tr>
 								</table>
 							</td>
-							<td>
-								<br />
+							<td valign="top">
+								<b align="right">{-#tlosses#-}</b><br />
 								<!-- BEGIN Table Effects over Affected -->
 								{-foreach name=ef3 key=key item=item from=$ef3-}
 									{-assign var="tabind" value="`$tabind+1`"-}
@@ -255,20 +278,6 @@
 										{-$item[0]-}<br />
 										<input id="{-$key-}" name="{-$key-}" type="text" size="7" maxlength="10" altfield="{-$sc3[$key]-}"
 											class="line inputDouble clsEffectDouble" tabindex="{-$tabind-}" value="0" onFocus="showtip('{-$item[2]-}', '#f1bd41')" />
-									</span>
-									<br />
-								{-/foreach-}
-							</td>
-							<td valign="top">
-								<b align="right">{-#tlosses#-}</b><br />
-								<!-- BEGIN Table Effects over $$ -->
-								{-foreach name=ef2 key=key item=item from=$ef2-}
-									{-assign var="tabind" value="`$tabind+1`"-}
-									<span ext:qtip="{-$item[1]-}">
-										{-$item[0]-}<br />
-										<input id="{-$key-}" name="{-$key-}" type="text" size="11" maxlength="15"
-											class="line inputDouble" tabindex="{-$tabind-}" value="0" 
-											onFocus="showtip('{-$item[2]-}', '#f1bd41');" />
 									</span>
 									<br />
 								{-/foreach-}
