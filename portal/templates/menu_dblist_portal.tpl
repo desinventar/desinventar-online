@@ -1,3 +1,4 @@
+<div class="divBlock divBlockSouthAmerica" style="display:none;">
 	<!-- ANDEAN SUBREGION -->
 	<table width="133" border="0" cellpadding="0" cellspacing="0" align="center">
 		<tr>
@@ -218,3 +219,4 @@
 	</tr>
 	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_fin.gif" width="133" height="5" alt="" /></td></tr>
 	</table>
+</div>

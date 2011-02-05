@@ -126,8 +126,22 @@ function onReadyPortal() {
 	// Remove the black border from the menu
 	jQuery('div.cmDiv').css('border','0px solid black');
 
-	// At start, display the map 
-	showMap();
+	// Select which portal to display : main, gar2009, gar2011
+	jQuery('.divBlock').hide();
+	switch(jQuery('#desinventarPortalType').val())
+	{
+		case 'gar2009':
+			jQuery('.divBlockGAR2009').show();
+		break;
+		case 'gar2011':
+			jQuery('.divBlockGAR2011').show();
+		break;
+		default:
+			jQuery('.divBlockSouthAmerica').show();
+			// At start, display the map 
+			showMap();
+		break;
+	}
 	
 	if (jQuery('#desinventarUserId').val() != '') {
 		jQuery('body').trigger('UserLoggedIn');

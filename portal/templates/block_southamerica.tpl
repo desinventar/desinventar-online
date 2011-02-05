@@ -1,3 +1,4 @@
+<div class="divBlock divBlockSouthAmerica" style="display:none;">
 <table>
 	<tr>
 		<td align="right">
@@ -26,4 +27,4 @@
 		</td>
 	</tr>
 </table>
-
+</div>
