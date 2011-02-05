@@ -73,7 +73,8 @@
 											<tr>
 												<td>
 													<ul id="MainMenu">
-														<li><a href="#" class="MenuItem" id="mnuShowMap">{-#tstartpage#-}</a>
+														<li>
+															<a href="#" class="MenuItem" id="mnuShowMap">{-#tstartpage#-}</a>
 														</li>
 														<li>{-#tlang#-}
 															<ul>
