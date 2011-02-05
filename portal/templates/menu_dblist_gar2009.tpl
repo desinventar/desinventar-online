@@ -1,3 +1,4 @@
+<div class="divBlock divBlockGAR2009" style="display:none;">
 	<table width="133" border=0 cellpadding=0 cellspacing=0 align=center>
 		<tr>
 			<td><img src="{-$desinventarURLPortal-}/images/p_paises1.gif" width=5 height=16></td>
@@ -150,3 +151,4 @@
 	</tr>
 	<tr><td colspan="3"><img src="{-$desinventarURLPortal-}/images/p_fin.gif" width="133" height="5"></td></tr>
 	</table>
+</div>

@@ -6,6 +6,6 @@
 	require_once('../web/include/loader.php');
 
 	$portaltype = getParameter('portaltype', 'desinventar');
-	$t->assign('portaltype', $portaltype);
+	$t->assign('desinventarPortalType', $portaltype);
 	$t->display('index.tpl');
 </script>

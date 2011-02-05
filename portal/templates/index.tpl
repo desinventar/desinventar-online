@@ -104,22 +104,14 @@
 							<table bgcolor="#CF9D15" border="0" cellpadding="0" cellspacing="0">
 								<tr>
 									<td>
-										{-if $portaltype == 'desinventar' -}
-											{-include file="menu_user.tpl"-}
-										{-/if-}										
+										{-include file="menu_user.tpl"-}
 									</td>
 								</tr>
 								<tr>
 									<td>
-										{-if $portaltype == 'desinventar' -}
-											{-include file="menu_dblist_portal.tpl"-}
-										{-/if-}
-										{-if $portaltype == 'gar2009' -}
-											{-include file="menu_dblist_gar2009.tpl"-}
-										{-/if-}
-										{-if $portaltype == 'gar2011' -}
-											{-include file="menu_dblist_gar2011.tpl"-}
-										{-/if-}
+										{-include file="menu_dblist_portal.tpl"-}
+										{-include file="menu_dblist_gar2009.tpl"-}
+										{-include file="menu_dblist_gar2011.tpl"-}
 									</td>
 								</tr>
 								<tr><td><img src="{-$desinventarURLPortal-}/images/25.gif" width="150" height="52" alt="" /></td></tr>
@@ -129,12 +121,8 @@
 								<tr><td bgcolor="white">
 									<center>
 										{-include file="logo_isdr.tpl" -}
-										{-if $portaltype == 'desinventar' -}
-											{-include file="logo_siapad.tpl" -}
-										{-/if-}
-										{-if $portaltype == 'gar2009' || $portaltype == 'gar2011' -}
-											{-include file="logo_gar.tpl"-}
-										{-/if-}
+										{-include file="logo_siapad.tpl" -}
+										{-include file="logo_gar.tpl"-}
 									</center>
 								</td></tr>
 							</table>
@@ -174,25 +162,9 @@
 								</table>
 							</div>
 							<div class="contentBlock" id="pagemap">
-								{-if $portaltype == 'desinventar' -}
-									{-include file="block_southamerica.tpl"-}
-								{-/if-}
-								{-if $portaltype == 'gar2009' -}
-									{-if $lang == 'spa'-}
-										{-include file="block_desinventar_spa.tpl"-}
-									{-else-}
-										{-include file="block_desinventar_eng.tpl"-}
-									{-/if-}
-								{-/if-}
-								{-if $portaltype == 'gar2011' -}
-									{-if $lang == 'spa' -}
-										{-include file="block_gar2011_spa.tpl"-}
-									{-elseif $lang == 'por' -}
-										{-include file="block_gar2011_por.tpl"-}
-									{-else-}
-										{-include file="block_gar2011_eng.tpl"-}
-									{-/if-}
-								{-/if-}
+								{-include file="block_southamerica.tpl"-}
+								{-include file="block_gar2009.tpl"-}
+								{-include file="block_gar2011.tpl"-}
 							</div>
 						</td>
 						<td class="der"><img src="{-$desinventarURLPortal-}/images/bgder.gif" width="32" height="5" alt="" />
@@ -220,9 +192,7 @@
 					<tr>
 						<td colspan="3">
 							<div align="right" style="margin-right:30px;">
-								{-if $portaltype == 'desinventar' -}
-									{-include file="logo_predecan.tpl"-}
-								{-/if-}
+								{-include file="logo_predecan.tpl"-}
 								<br />
 								{-include file="logo_osso.tpl"-}
 							</div>
@@ -236,7 +206,10 @@
 		</tr>
 	</table>
 	<div>
-	{-include file="../../web/templates/desinventarinfo.tpl" confdir="../../web/conf/"-}
+		{-include file="../../web/templates/desinventarinfo.tpl" confdir="../../web/conf/"-}
+		<div id="desinventarPortalInfo" style="display:none;">
+			<input type="hidden" id="desinventarPortalType" value="{-$desinventarPortalType-}" />
+		</div>
 	</div>
 </body>
 </html>
