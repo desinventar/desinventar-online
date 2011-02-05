@@ -11,6 +11,18 @@ function onReadyQueryDesign()
 	jQuery('#queryEndYear').blur(function() {
 		validateEndYear();
 	});
+
+	// 2011-02-05 (jhcaiced) Configure RecordStatus field
+	if (jQuery('#desinventarUserRoleValue').val() > 0)
+	{
+		jQuery('#fldQueryRecordStatus').val(['PUBLISHED','READY']);
+		jQuery('#divQueryRecordStatus').show();
+	}
+	else
+	{
+		jQuery('#fldQueryRecordStatus').val('PUBLISHED');
+		jQuery('#divQueryRecordStatus').hide();
+	}
 }
 
 function validateQueryDefinition()
