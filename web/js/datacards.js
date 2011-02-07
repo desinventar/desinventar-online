@@ -77,8 +77,16 @@ function onReadyDatacards() {
 						jQuery('#divRecordNavigationInfo').show();
 					}
 				} else {
-					jQuery('#msgDatacardCustom').text(data.StatusMsg);
-					displayDatacardStatusMsg('msgDatacardCustom');
+					switch(data.ErrorCode)
+					{
+						case -61:
+							displayDatacardStatusMsg('msgDatacardWithoutEffects');
+						break;
+						default:
+							jQuery('#msgDatacardCustom').text(data.StatusMsg);
+							displayDatacardStatusMsg('msgDatacardCustom');
+						break;
+					}
 				}
 				// clear Help text area
 				showtip('','#ffffff');

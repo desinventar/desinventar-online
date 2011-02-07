@@ -108,76 +108,87 @@ class DIDisaster extends DIRecord {
 		return $iReturn;
 	}
 	
-	public function validateUpdate($bStrict) {
+	public function validateUpdate($bStrict)
+	{
 		$iReturn = parent::validateUpdate($bStrict);
 		$iReturn = $this->validateNotNull(-53, 'DisasterSerial');
-		if ($bStrict) {
+		if ($bStrict)
+		{
 			$iReturn = $this->validateUnique(-54, 'DisasterSerial');
-		} else {
+		}
+		else
+		{
 			$iReturn = $this->validateUnique(-54, 'DisasterSerial', WARNING);
 		}
 		$iReturn = $this->validateNotNull(-55, 'DisasterBeginTime');
-		// Warning
-		$bStrict2 = $bStrict;
-		if ($this->get('RecordStatus') != 'PUBLISHED') { $bStrict2 = false; }
-		if ($bStrict2) {
-			$iReturn = $this->validateNotNull(-56, 'DisasterSource');
-		} else {
-			$iReturn = $this->validateNotNull(-56, 'DisasterSource',WARNING);
-		}
 		$iReturn = $this->validateNotNull(-57, 'RecordStatus');
 		$iReturn = $this->validateRef(-58, 'GeographyId', 'Geography', 'GeographyId');
 		$iReturn = $this->validateRef(-59, 'EventId', 'Event', 'EventId');
 		$iReturn = $this->validateRef(-60, 'CauseId', 'Cause', 'CauseId');
 		// Warning
-		/*
 		$bStrict2 = $bStrict;
-		if ($this->get('RecordStatus') != 'PUBLISHED') { $bStrict2 = false; }
-		if ($bStrict2) {
-			$iReturn = $this->validateEffects();
-		} else {
-			$iReturn = $this->validateEffects(WARNING);
+		if ($this->get('RecordStatus') != 'PUBLISHED')
+		{
+			$bStrict2 = false;
 		}
-		*/
+		if ($bStrict2)
+		{
+			$iReturn = $this->validateNotNull(-56, 'DisasterSource');
+			$iReturn = $this->validateEffects(-61);
+		}
+		else
+		{
+			$iReturn = $this->validateNotNull(-56, 'DisasterSource',WARNING);
+			$iReturn = $this->validateEffects(-61, WARNING);
+		}
 		$iReturn = parent::validateUpdate($bStrict);
 		return $iReturn;
 	}
 	
-	public function validateEffects($isWarning=false) {
+	public function validateEffects($ErrCode, $isWarning=false)
+	{
 		$bFound = -1;
 		$iReturn = ERR_NO_ERROR;
-		foreach (split(',',$this->sEffectDef) as $sField) {
+		foreach (split(',',$this->sEffectDef) as $sField)
+		{
 			$oItem = split('/', $sField);
 			$sFieldName  = $oItem[0];
 			$sFieldType  = $oItem[1];
-			if ($sFieldName != 'EffectNotes') {
-			switch($sFieldType) {
-				case 'STRING':
-					if (trim($this->get($sFieldName)) != '') {
-						$bFound = 1;
-					}
-				break;
-				case 'INTEGER':
-					if ( ($this->get($sFieldName) > 0) || ($this->get($sFieldName) == -1) ) {
-						$bFound = 1;
-					}
-				break;
-				case 'DOUBLE':
-					if ($this->get($sFieldName) > 0) {
-						$bFound = 1;
-					}
-				break;
-			} //switch
+			if ($sFieldName != 'EffectNotes')
+			{
+				switch($sFieldType)
+				{
+					case 'STRING':
+						if (trim($this->get($sFieldName)) != '')
+						{
+							$bFound = 1;
+						}
+					break;
+					case 'INTEGER':
+						if ( ($this->get($sFieldName) > 0) || ($this->get($sFieldName) == -1) )
+						{
+							$bFound = 1;
+						}
+					break;
+					case 'DOUBLE':
+						if ($this->get($sFieldName) > 0)
+						{
+							$bFound = 1;
+						}
+					break;
+				} //switch
 			}
 		} //foreach
-		if ($bFound < 0) {
-			$iReturn = -61;
+		if ($bFound < 0)
+		{
+			$iReturn = $ErrCode;
 			$this->status->addMsg($iReturn, ' Datacard without effects', $isWarning);
 		}
 		return $iReturn;
 	}
 	
-	public function update($withValidate = true) {
+	public function update($withValidate = true)
+	{
 		$iReturn = ERR_NO_ERROR;
 		// Calculate Values of Q Fields...
 		foreach (split(',',$this->sFieldQDef) as $sFieldQ) {
