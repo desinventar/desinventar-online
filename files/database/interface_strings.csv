@@ -235,6 +235,7 @@
 "di8_input","msgDatacardInvalidStatus","No puede guardar ficha con este estado.","Cannot save datacard with this status.","Não é possível salvar datacard com este estatuto","Impossible d'enregister carte de données avec ce statut"
 "di8_input","msgDatacardWithoutSource","Ficha sin fuente no puede ser publicada.","Datacard without source information cannot be published.","Datacard sem informação de origem não pode ser publicado.","Datacard sans source d'information ne peut pas être publié"
 "di8_input","msgDatacardInvalidGeography","No ha seleccionado Geografía","Geography has not been selected","Geografia não foi selecionado","Géographie n'a pas été sélectionné"
+"di8_input","msgDatacardWithoutEffects","Registro sin efectos no se puede guardar","Record without effects cannot be saved","Gravar sem efeitos não podem ser salvos","Record sans effets ne peuvent pas être sauvés"
 "di8_input","msgDatacardNotFound","La ficha deseada no existe","Datacard request not exists","Datacard request not exists*","La carte de données recherchée n'existe pas"
 "di8_input","msgDatacardFound","Ficha encontrada y cargada","Datacard found and loaded","Registro encontrado e carregado","Record trouvé et chargé"
 "di8_index","twelcome","Bienvenido","Welcome","Welcome*","Bienvenue"
