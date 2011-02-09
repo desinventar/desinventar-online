@@ -79,6 +79,9 @@ function onReadyDatacards() {
 				} else {
 					switch(data.ErrorCode)
 					{
+						case -54:
+							displayDatacardStatusMsg('msgDatacardDuplicatedSerial');
+						break;
 						case -61:
 							displayDatacardStatusMsg('msgDatacardWithoutEffects');
 						break;
