@@ -26,7 +26,7 @@ desinventar.db : region.sql
 	/bin/rm -f desinventar.db; \
 	sqlite3 desinventar.db < region.sql
 
-lang : lang_spa lang_eng lang_por lang_fre
+lang : lang_spa langportal_spa lang_eng langportal_eng lang_por langportal_por lang_fre langportal_fre
 
 lang_spa : interface_strings.csv
 	./createInterfaceStrings.pl --lang=spa > ../../web/conf/spa.conf
@@ -40,13 +40,13 @@ lang_fre : interface_strings.csv
 langportal : langportal_spa langportal_eng langportal_por langportal_fre
 
 langportal_spa: portal_strings.csv
-	./createInterfaceStrings.pl --portal --lang=spa > ../../portal/conf/spa.conf
+	./createInterfaceStrings.pl --portal --lang=spa >> ../../web/conf/spa.conf
 langportal_eng: portal_strings.csv
-	./createInterfaceStrings.pl --portal --lang=eng > ../../portal/conf/eng.conf
+	./createInterfaceStrings.pl --portal --lang=eng >> ../../web/conf/eng.conf
 langportal_por: portal_strings.csv
-	./createInterfaceStrings.pl --portal --lang=por > ../../portal/conf/por.conf
+	./createInterfaceStrings.pl --portal --lang=por >> ../../web/conf/por.conf
 langportal_fre: portal_strings.csv
-	./createInterfaceStrings.pl --portal --lang=fre > ../../portal/conf/fre.conf
+	./createInterfaceStrings.pl --portal --lang=fre >> ../../web/conf/fre.conf
 
 clean :
 	/bin/rm -f *.db

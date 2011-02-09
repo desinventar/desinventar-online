@@ -143,22 +143,22 @@ if (MODE != 'command')
 	define('DEFAULT_CHARSET', 'UTF-8');
 
 	$confdir = dirname($_SERVER['SCRIPT_FILENAME']) . '/conf';
+	$confdir = dirname(dirname(__FILE__)) . '/conf';
 	$templatedir = dirname($_SERVER['SCRIPT_FILENAME']) . '/templates';
 
 	// Smarty configuration
 	require_once(SMARTYDIR . '/Smarty.class.php');
 	$t = new Smarty();
-	$t->debugging = false;
-	$t->config_dir = $confdir;
-	$t->template_dir = $templatedir;
-	$t->compile_dir = SMTY_DIR;
-	$t->left_delimiter = '{-';
+	$t->debugging       = true;
+	$t->config_dir      = $confdir;
+	$t->template_dir    = $templatedir;
+	$t->compile_dir     = SMTY_DIR;
+	$t->left_delimiter  = '{-';
 	$t->right_delimiter = '-}';
-	// Smarty caching settings...
-	$t->force_compile = true;
-	$t->caching = 0;
-	$t->cache_lifetime = 3600;
-	$t->compile_check = true;
+	$t->force_compile   = true;
+	$t->caching         = 0;
+	$t->cache_lifetime  = 3600;
+	$t->compile_check   = true;
 
 	// Choose Language (First from Parameter, next from UserSession table, then autodetect from browser)
 	$lg = getParameter('lang');
