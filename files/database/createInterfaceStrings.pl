@@ -34,7 +34,8 @@ my $prevgroup = '';
 
 open(CSV,'<:encoding(utf8)',$file);
 $header = <CSV>;
-while(<CSV>) {
+while(<CSV>)
+{
 	chomp $_;
 	$line = $_;
 	($group, $key, $value_spa, $value_eng, $value_por, $value_fre) = split(',', $line);
@@ -66,6 +67,7 @@ while(<CSV>) {
 	$line = sprintf('%s=%s', $key, $value);
 	print $line . "\n";
 }
+print "\n";
 close(CSV);
 exit(0);
 
