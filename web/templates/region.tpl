@@ -2,21 +2,32 @@
 {-* ADMINREG: Interface to Edit Portal Admin *-}
 {-if $ctl_adminreg-}
 	<h2>{-#ttname#-}</h2>
-	<br />
 	<div class="dwin" style="width:500px; height:150px;">
-	 <table id="tblDatabaseList" class="col">
-	  <thead>
-		<tr>
-			<th class="header"><b>{-#tregcntlist#-}</b></th>
-			<th class="header"><b>{-#tregnamlist#-}</b></th>
-			<th class="header"><b>{-#tregadmlist#-}</b></th>
-			<th class="header"><b>{-#tregactlist#-}</b></th>
-			<th class="header"><b>{-#tregpublist#-}</b></th>
-			<th class="header" id="RegionId"></th>
-			<th class="header" id="LangIsoCode"></th>
-		</tr>
-	  </thead>
-	  <tbody id="lst_regionpa">
+		<table id="tblDatabaseList" class="col">
+			<thead>
+				<tr>
+					<th class="header">
+						<b>{-#tregcntlist#-}</b>
+					</th>
+					<th class="header">
+						<b>{-#tregnamlist#-}</b>
+					</th>
+					<th class="header">
+						<b>{-#tregadmlist#-}</b>
+					</th>
+					<th class="header">
+						<b>{-#tregactlist#-}</b>
+					</th>
+					<th class="header">
+						<b>{-#tregpublist#-}</b>
+					</th>
+					<th class="header" id="RegionId">
+					</th>
+					<th class="header" id="LangIsoCode">
+					</th>
+				</tr>
+			</thead>
+			<tbody id="lst_regionpa">
 {-/if-}
 {-** ADMINREG: reload region lists **-}
 {-if $ctl_reglist-}

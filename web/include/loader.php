@@ -4,7 +4,8 @@
  (c) 1998-2011 Corporacion OSSO
 */
 // 2009-09-16 (jhcaiced) Autoconfigure software directory
-if (! isset($_SERVER['DI8_WEB'])) {
+if (! isset($_SERVER['DI8_WEB']))
+{
 	$_SERVER['DI8_WEB'] = dirname(dirname(__FILE__));
 }
 
@@ -17,9 +18,11 @@ define('JSVERSION'   , '2011-02-09.01');
 
 // 2009-07-22 (jhcaiced) Adapted Configuration and Startup for 
 // using with PHP Command Line 
-if (isset($_SERVER['HTTP_HOST'])) {
+if (isset($_SERVER['HTTP_HOST']))
+{
 	// Online Modes (HTTP)
-	if (isset($_SERVER['WINDIR'])) {
+	if (isset($_SERVER['WINDIR']))
+	{
 		// Running on a Windows Server
 		define('MODE', 'online');
 		define('ARCH', 'WINDOWS');
@@ -32,10 +35,12 @@ if (isset($_SERVER['HTTP_HOST'])) {
 		define('JPGRAPHDIR', $Install_Dir . '/ms4w/apps/jpgraph/src');
 		define('TEMP', $Install_Dir . '/tmp');
 		// MS4W doesn't load the gd extension by default, so we do here now...
-		if (!extension_loaded( 'gd' )) {
+		if (!extension_loaded( 'gd' ))
+		{
 			//dl( 'php_gd2.'.PHP_SHLIB_SUFFIX);
 		}
-		if (! isset($_SERVER['DI8_WEB'])) {
+		if (! isset($_SERVER['DI8_WEB']))
+		{
 			$_SERVER['DI8_WEB'] = $Install_Dir . '/ms4w/Apache/htdocs';
 		}
 		$_SERVER['DI8_WWWDIR'] = $Install_Dir . '/www';
@@ -43,7 +48,9 @@ if (isset($_SERVER['HTTP_HOST'])) {
 		$_SERVER['DI8_MAPDIR'] = $Install_Dir . '/data/worldmap';
 		$_SERVER['DI8_CACHEDIR'] = $Install_Dir . '/tmp';
 		define('FONTSET' , $Install_Dir . '/data/main/fontswin.txt');	
-	} else {
+	}
+	else
+	{
 		// Running on a Linux Server
 		define('MODE', 'online');
 		define('ARCH', 'LINUX');
@@ -52,27 +59,34 @@ if (isset($_SERVER['HTTP_HOST'])) {
 		define('TEMP', '/tmp');
 		define('JPGRAPHDIR', '/usr/share/php/jpgraph');
 		define('FONTSET' , '/usr/share/fonts/liberation/fonts.txt');
-		if (! isset($_SERVER['DI8_WEB'])) {
+		if (! isset($_SERVER['DI8_WEB']))
+		{
 			$_SERVER['DI8_WEB']      = '/usr/share/desinventar-8.2/web';
 		}
 		$_SERVER['DI8_WWWDIR']   = '/var/www/desinventar-8.2';
-		if (! isset($_SERVER['DI8_DATADIR'])) {
+		if (! isset($_SERVER['DI8_DATADIR']))
+		{
 			$_SERVER['DI8_DATADIR']  = '/var/lib/desinventar-8.2';
 		}
 		$_SERVER['DI8_MAPDIR'] = '/usr/share/desinventar-8.2/worldmap';
 		$_SERVER['DI8_CACHEDIR'] = '/var/cache/Smarty/di8';
 	}
-} else {
+}
+else
+{
 	// Running a Command Line Script
 	define('MODE', 'command');
-	if (! isset($_SERVER['DI8_WWWDIR'])) {
+	if (! isset($_SERVER['DI8_WWWDIR']))
+	{
 		$_SERVER['DI8_WWWDIR']   = '/var/www/desinventar-8.2';
 	}
-	if (! isset($_SERVER['DI8_DATADIR'])) {
+	if (! isset($_SERVER['DI8_DATADIR']))
+	{
 		$_SERVER['DI8_DATADIR']  = '/var/lib/desinventar-8.2';
 	}
 	$_SERVER['DI8_MAPDIR'] = '/usr/share/desinventar-8.2/worldmap';
-	if (! isset($_SERVER['DI8_CACHEDIR'])) {
+	if (! isset($_SERVER['DI8_CACHEDIR']))
+	{
 		$_SERVER['DI8_CACHEDIR'] = '/var/cache/Smarty/di8';
 	}
 	define('TEMP', '/tmp');
@@ -109,7 +123,8 @@ require_once(BASE . '/include/didisaster.class.php');
 // SETTINGS
 $time_start = microtime_float();
 $SessionId = uuid();
-if (MODE != 'command') {
+if (MODE != 'command')
+{
 	// Session Management
 	session_name('DI8SESSID');
 	session_start();
@@ -121,7 +136,8 @@ if (MODE != 'command') {
 $us = new UserSession($SessionId);
 $us->awake();
 
-if (MODE != 'command') {
+if (MODE != 'command')
+{
 	error_reporting(E_ALL && ~E_NOTICE);
 	header('Content-Type: text/html; charset=UTF-8');
 	define('DEFAULT_CHARSET', 'UTF-8');
@@ -154,7 +170,10 @@ if (MODE != 'command') {
 	{
 		$lg = getBrowserClientLanguage();
 	}
-	if ($lg == '') { $lg = 'eng'; }
+	if ($lg == '')
+	{
+		$lg = 'eng';
+	}
 	$us->setLangIsoCode($lg);
 	
 	// 2009-02-21 (jhcaiced) Fix some languages from two to three character code
@@ -165,8 +184,8 @@ if (MODE != 'command') {
 	if ($lg == 'pt') { $lg = 'por'; }
 
 	$_SESSION['lang'] = $lg;
-	$t->assign ('lg', $lg);
-	$t->assign('lang'  , $lg);
+	$t->assign('lg'  , $lg);
+	$t->assign('lang', $lg);
 
 	// 2010-05-25 (jhcaiced) Handle the versioning of js files, used to force refresh of
 	// these files when doing changes.
@@ -176,26 +195,32 @@ if (MODE != 'command') {
 
 	// Configure DI8 (web) application location
 	$desinventarURL = substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'],'/'));
-	if (isset($_SERVER['REDIRECT_DI8_URL'])) {
+	if (isset($_SERVER['REDIRECT_DI8_URL']))
+	{
 		$_SERVER['DI8_URL'] = $_SERVER['REDIRECT_DI8_URL'];
 	}
-	if (isset($_SERVER['DI8_URL'])) {
+	if (isset($_SERVER['DI8_URL']))
+	{
 		$desinventarURL = $_SERVER['DI8_URL'];
 	}
-	if (substr($desinventarURL, strlen($desinventarURL) - 1, 1) != '/') {
+	if (substr($desinventarURL, strlen($desinventarURL) - 1, 1) != '/')
+	{
 		$desinventarURL .= '/';
 	}
 
 	// Configure DI8 (portal) application location
 	$desinventarURLPortal = substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'],'/'));
-	if (isset($_SERVER['REDIRECT_DI8_PORTAL'])) {
+	if (isset($_SERVER['REDIRECT_DI8_PORTAL']))
+	{
 		$_SERVER['DI8_PORTAL'] = $_SERVER['REDIRECT_DI8_PORTAL'];
 	}
-	if (isset($_SERVER['DI8_PORTAL'])) {
+	if (isset($_SERVER['DI8_PORTAL']))
+	{
 		$desinventarURLPortal = $_SERVER['DI8_PORTAL'];
 	}
 	// Remove trailing slash in URL
-	if (substr($desinventarURLPortal, strlen($desinventarURLPortal) - 1, 1) == '/') {
+	if (substr($desinventarURLPortal, strlen($desinventarURLPortal) - 1, 1) == '/')
+	{
 		$desinventarURLPortal = substr($desinventarURLPortal, 0, strlen($desinventarURLPortal) - 1);
 	}
 
