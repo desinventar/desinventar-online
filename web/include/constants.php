@@ -48,22 +48,22 @@ define('STATUS_YES' , 1);
 define('STATUS_OK'  , 1);
 
 // Error Codes
-define('ERR_NO_ERROR',          1);
-define('ERR_DEFAULT_ERROR',    -1);
-define('ERR_UNKNOWN_ERROR',    -1);
-define('ERR_INVALID_COMMAND',  -2);
-define('ERR_OBJECT_EXISTS',    -3);
-define('ERR_NO_DATABASE',      -4);
-define('ERR_INVALID_PASSWD',   -5);
-define('ERR_ACCESS_DENIED',    -6);
-define('ERR_OBJECT_NOT_FOUND', -7);
-define('ERR_CONSTRAINT_FAIL',  -8);
-define('ERR_FILE_NOT_FOUND',   -9);
-define('ERR_TABLE_LOCKED',     -10);
-define('ERR_UPLOAD_FAILED',    -11);
-define('ERR_NO_CONNECTION',    -99);
-
+define('ERR_NO_ERROR'         , 1);
+define('ERR_DEFAULT_ERROR'    , -1);
+define('ERR_UNKNOWN_ERROR'    , -1);
+define('ERR_INVALID_COMMAND'  , -2);
+define('ERR_OBJECT_EXISTS'    , -3);
+define('ERR_NO_DATABASE'      , -4);
+define('ERR_INVALID_PASSWD'   , -5);
+define('ERR_ACCESS_DENIED'    , -6);
+define('ERR_OBJECT_NOT_FOUND' , -7);
+define('ERR_CONSTRAINT_FAIL'  , -8);
+define('ERR_FILE_NOT_FOUND'   , -9);
+define('ERR_TABLE_LOCKED'     , -10);
+define('ERR_UPLOAD_FAILED'    , -11);
+define('ERR_NO_CONNECTION'    , -99);
 define('ERR_USER_DUPLICATE_ID', -100);
+define('ERR_WITH_WARNINGS'    , -101);
 
 // Graph Types
 define('GRAPH_HISTOGRAM_TEMPORAL'   , 0);

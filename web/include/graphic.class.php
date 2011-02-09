@@ -218,10 +218,11 @@ class Graphic
 				// Right Axis (Y2)
 				if ($gType != 'XTEMPO')
 				{
-					// In this case this is the LegendBox width
+					// Return the width in pixels of the max value in series
 					$Y2AxisLabelLen = $this->getSeriesMaxLen($sY2AxisLabel);
-					$Y2AxisTitleMargin = $Y2AxisLabelLen; // * 8 + 20;
-					$ImgMarginRight = $Y2AxisTitleMargin + 50;
+					$Y2AxisTitleMargin = $Y2AxisLabelLen + 15;
+					$ImgMarginRight = 30;
+					$ImgMarginRight += $Y2AxisTitleMargin;
 					
 					// Legend Box
 					$MaxLen = strlen($this->data[$sY1AxisLabel]);

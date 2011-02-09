@@ -259,16 +259,18 @@ else
 				}
 				if ($i < 0)
 				{
-					$answer['Status'] = 'ERROR';
-					$answer['StatusMsg'] = showerror($i) . '(' . $i . ')';
-					$answer['ErrorCode'] = $i;				
+					$answer['Status']     = 'ERROR';
+					$answer['StatusCode'] = 'ERROR';
+					$answer['StatusMsg']  = showerror($i) . '(' . $i . ')';
+					$answer['ErrorCode']  = $i;				
 				}
 			}
 			else
 			{
-				$answer['Status']    = 'ERROR';
-				$answer['StatusMsg'] = showerror($i) . '(' . $i . ')';
-				$answer['ErrorCode'] = $i;				
+				$answer['Status']     = 'ERROR';
+				$answer['StatusCode'] = 'ERROR';
+				$answer['StatusMsg']  = showerror($i) . '(' . $i . ')';
+				$answer['ErrorCode']  = $i;				
 			}
 			if ($answer['Status'] == 'OK')
 			{

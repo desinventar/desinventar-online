@@ -9,7 +9,7 @@
 	require_once(BASE . '/include/diimport.class.php');
 	require_once(BASE . '/include/diregion.class.php');
 	
-	$RegionId = 'COL-2010';
+	$RegionId = 'COL-HUILA';
 	$us->login('diadmin','di8');
 	$us->open($RegionId,'desinventar.db');
 	//$r = new DIRegion($us, $RegionId);

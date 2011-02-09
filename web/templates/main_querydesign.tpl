@@ -279,20 +279,18 @@
 				<br />
 				<textarea id="txtDisasterSource" name="D_DisasterSource[1]" style="width:220px; height:40px;" 
 					class="inputText" onFocus="showtip('{-$dis.DisasterSource[2]-}');">{-$qd.D_DisasterSource[1]-}</textarea>
-				{-if $ctl_user-}
-					<br />
-					<b onMouseOver="showtip('');">{-#tdcstatus#-}</b><br />
-					<select name="D_RecordStatus[]" multiple class="fixw line">
-						<option value="PUBLISHED" selected>{-#tdcpublished#-}</option>
-						<option value="READY" selected>{-#tdcready#-}</option>
-						<option value="DRAFT">{-#tdcdraft#-}</option>
-						<option value="TRASH">{-#tdctrash#-}</option>
-						<option value="DELETED"  >{-#tdcdeleted#-}</option>
-					</select>
-				{-else-}
-					<input type="hidden" name="D_RecordStatus" value="PUBLISHED" />
-				{-/if-}
 				<br />
+				<div id="divQueryRecordStatus">
+					<b onMouseOver="showtip('');">{-#tdcstatus#-}</b><br />
+					<select id="fldQueryRecordStatus" name="D_RecordStatus[]" multiple class="fixw line">
+						<option value="PUBLISHED" selected>{-#tdcpublished#-}</option>
+						<option value="READY"     selected>{-#tdcready#-}    </option>
+						<option value="DRAFT"             >{-#tdcdraft#-}    </option>
+						<option value="TRASH"             >{-#tdctrash#-}    </option>
+						<option value="DELETED"           >{-#tdcdeleted#-}  </option>
+					</select>
+				<br />
+				</div>
 				<b onMouseOver="showtip('{-#tserialmsg#-}');">{-#tserial#-}</b>
 				<select name="D_DisasterSerial[0]" class="small line">
 					<option class="small" value=""  {-if $qd.D_DisasterSerial[0] == ''-}selected{-/if-}>{-#tonly#-}</option>
