@@ -100,6 +100,7 @@ function onReadyPortal() {
 	jQuery('.MenuItem').click(function() {
 		var MenuItem = jQuery(this).attr('id');
 		if (MenuItem == 'mnuShowMap') {
+			displayPortal('portal');
 			showMap();
 		}
 		// Prevent default action
@@ -125,9 +126,13 @@ function onReadyPortal() {
 	jQuery('#MainMenu').clickMenu();
 	// Remove the black border from the menu
 	jQuery('div.cmDiv').css('border','0px solid black');
+	
+	displayPortal(jQuery('#desinventarPortalType').val());
 
-	// At start, display the map 
-	showMap();
+	jQuery('#linkPortalGAR2011').click(function() {
+		displayPortal('gar2011');
+		return false;
+	});
 	
 	if (jQuery('#desinventarUserId').val() != '') {
 		jQuery('body').trigger('UserLoggedIn');
@@ -135,6 +140,27 @@ function onReadyPortal() {
 		jQuery('body').trigger('UserLoggedOut');
 	}
 }; //onReadyPortal()
+
+function displayPortal(myPortal) 
+{
+	// Select which portal to display : main, gar2009, gar2011
+	jQuery('.divBlock').hide();
+	jQuery('#desinventarPortalType').val(myPortal);
+	switch(myPortal)
+	{
+		case 'gar2009':
+			jQuery('.divBlockGAR2009').show();
+		break;
+		case 'gar2011':
+			jQuery('.divBlockGAR2011').show();
+		break;
+		default:
+			jQuery('.divBlockSouthAmerica').show();
+			// At start, display the map 
+			showMap();
+		break;
+	}
+}
 
 function updateDatabaseList(CountryIsoCode,searchByCountry) {
 	jQuery(".contentBlock").hide();

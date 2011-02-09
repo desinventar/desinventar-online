@@ -70,6 +70,8 @@ a.info:visited	{ color: #333333;  }
 .dlgmsg     { color:#42929d; text-align:right; font-size:8pt; }
 .disabled 	{ background-color: #cccccc; }
 
+.link { color: #333333;  }
+
 .dwin {
  overflow: auto; padding:0px; margin: 0px; border-style:solid;
   border-width:1px; border-color:#BBBBBB;

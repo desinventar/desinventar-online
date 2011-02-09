@@ -5,7 +5,8 @@
 function onReadyMain()
 {
 	onReadyCommon();
-	onReadyThematicMap();
+	onReadyQueryDesign();
+	onReadyThematicMap();	
 	
 	jQuery('#frmMainQuery').submit(function() {
 		var myURL = jQuery(this).attr('action');

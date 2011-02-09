@@ -30,6 +30,7 @@
 					<span class="datacardStatusMsg" id="msgDatacardInvalidStatus">{-#msgDatacardInvalidStatus#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardWithoutSource">{-#msgDatacardWithoutSource#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardInvalidGeography">{-#msgDatacardInvalidGeography#-}</span>
+					<span class="datacardStatusMsg" id="msgDatacardWithoutEffects">{-#msgDatacardWithoutEffects#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardInsertOk">{-#tdccreated#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardUpdateOk">{-#tdcupdated#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardCustom"></span>
@@ -61,6 +62,7 @@
 		<input type="hidden" id="PrevDisasterSerial" name="PrevDisasterSerial" value="" />
 		<input type="hidden" id="DatacardCommand"    name="DatacardCommand" value="" />
 		<input type="hidden" id="Status"             name="Status" value="" />
+		{-counter assign="MyTabIndex" start="1" print=false -}
 		<table border="1" cellspacing="8" width="900px">
 			<!-- DATACARD INFORMATION SECTION -->
 			<tr>
@@ -73,21 +75,25 @@
 							<td ext:qtip="{-$LabelsDisaster.DisasterBeginTime[1]-}" />
 								{-$LabelsDisaster.DisasterBeginTime[0]-}<b style="color:darkred;">*</b><br />
 								<input id="DisasterBeginTime0" name="DisasterBeginTime[0]" style="width:36px;" type="text"
-									class="line inputInteger" tabindex="1" maxlength="4" onFocus="showtip('{-$LabelsDisaster.DisasterBeginTime[2]-}', '#d4baf6')" />
+									class="line inputInteger" tabindex="{-$MyTabIndex-}" maxlength="4" onFocus="showtip('{-$LabelsDisaster.DisasterBeginTime[2]-}', '#d4baf6')" />
+								{-counter-}
 								<input id="DisasterBeginTime1" name="DisasterBeginTime[1]" style="width:18px;" type="text" 
-									class="line inputInteger" tabindex="2" maxlength="2" onFocus="showtip('{-$LabelsDisaster.DisasterBeginTime[2]-}', '#d4baf6')" />
+									class="line inputInteger" tabindex="{-$MyTabIndex-}" maxlength="2" onFocus="showtip('{-$LabelsDisaster.DisasterBeginTime[2]-}', '#d4baf6')" />
+								{-counter-}
 								<input id="DisasterBeginTime2" name="DisasterBeginTime[2]" style="width:18px;" type="text"
-									class="line inputInteger" tabindex="3"  maxlength="2" onFocus="showtip('{-$LabelsDisaster.DisasterBeginTime[2]-}', '#d4baf6')" />
+									class="line inputInteger" tabindex="{-$MyTabIndex-}"  maxlength="2" onFocus="showtip('{-$LabelsDisaster.DisasterBeginTime[2]-}', '#d4baf6')" />
+								{-counter-}
 							</td>
 							<td ext:qtip="{-$LabelsDisaster.DisasterSource[1]-}" />
 								{-$LabelsDisaster.DisasterSource[0]-}<b style="color:darkred;">*</b><br />
 								<input id="DisasterSource" name="DisasterSource" type="text" size="50"
-									class="line inputText" tabindex="4" onFocus="showtip('{-$LabelsDisaster.DisasterSource[2]-}', '#d4baf6')" />
+									class="line inputText" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsDisaster.DisasterSource[2]-}', '#d4baf6')" />
+								{-counter-}
 							</td>
 							<td>
 								{-#tstatus#-}<b style="color:darkred;">*</b><br />
 								<select name="RecordStatus" id="RecordStatus"  ext:qtip="{-$LabelsRecord1.RecordStatus[1]-}"
-									class="line" tabindex="5" onFocus="showtip('{-$LabelsRecord1.RecordStatus[1]-}', '')">
+									class="line" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsRecord1.RecordStatus[1]-}', '')">
 									<option value=""></option>
 									<option value="PUBLISHED">{-#tstatpublished#-}</option>
 									<option value="READY"    >{-#tstatready#-}</option>
@@ -95,11 +101,13 @@
 									<option value="TRASH"    >{-#tstatrash#-}</option>
 									<option value="DELETED"  >{-#tstatdeleted#-}</option>
 								</select>
+								{-counter-}
 							</td>
 							<td ext:qtip="{-$LabelsDisaster.DisasterSerial[1]-}" />
 								{-$LabelsDisaster.DisasterSerial[0]-}<b style="color:darkred;">*<br />
 								<input id="DisasterSerial" name="DisasterSerial" type="text" size="15" 
-									class="line inputAlphaNumber" tabindex="6" maxlength="50" onFocus="showtip('{-$LabelsDisaster.DisasterSerial[2]-}', '#d4baf6')" />
+									class="line inputAlphaNumber" tabindex="{-$MyTabIndex-}" maxlength="50" onFocus="showtip('{-$LabelsDisaster.DisasterSerial[2]-}', '#d4baf6')" />
+								{-counter-}
 								<a href="#" id="linkDatacardSuggestSerial"><img src="images/reload.jpg" border="0" />
 								</a>
 							</td>
@@ -132,14 +140,13 @@
 										</td>
 										<td valign="top" ext:qtip="{-$LabelsDisaster.DisasterGeographyId[1]-}">
 											<table>
-											{-counter assign=MyIndex start=7-}
 											{-foreach key=key item=GeoLevel from=$GeoLevelList name=GeoLevelList-}
 												<tr>
 													<td>
 														{-$GeoLevel.GeoLevelId-} - {-$GeoLevel.GeoLevelName-}<br />
 													</td>
 													<td>
-														<select id="GeoLevel{-$key-}" level="{-$key-}" tabindex="{-$MyIndex-}" autoComplete="true" style="width:180px; background-Color:#eee;" 
+														<select id="GeoLevel{-$key-}" level="{-$key-}" tabindex="{-$MyTabIndex-}" autoComplete="true" style="width:180px; background-Color:#eee;" 
 															class="GeoLevelSelect line" onFocus="showtip('{-$LabelsDisaster.GeographyId[2]-}', '#d4baf6')">
 															<option></option>
 															{-if $key == 0 -}
@@ -157,28 +164,28 @@
 									</tr>
 								</table>
 							</td>
-							{-assign var="tabind" value="`$tabind+1`"-}
 							<td ext:qtip="{-$LabelsDisaster.DisasterSiteNotes[1]-}" />
 								{-$LabelsDisaster.DisasterSiteNotes[0]-}<br />
 								<textarea id="DisasterSiteNotes" name="DisasterSiteNotes" style="height: 40px;" cols="25" maxlength="512"
-									class="inputText" tabindex="{-$tabind-}" 
+									class="inputText" tabindex="{-$MyTabIndex-}" 
 									onFocus="showtip('{-$LabelsDisaster.DisasterSiteNotes[2]-}', '#d4baf6')"></textarea>
+								{-counter-}
 							</td>
 							<td>
-								{-assign var="tabind" value="`$tabind+1`"-}
 								<span ext:qtip="{-$LabelsDisaster.DisasterLatitude[1]-}" />
 								{-$LabelsDisaster.DisasterLatitude[0]-}<br />
 								<input id="DisasterLatitude" name="DisasterLatitude" type="text" size="10" maxlength="10"
-									class="line inputDouble" tabindex="{-$tabind-}" onFocus="showtip('{-$LabelsDisaster.DisasterLatitude[2]-}', '#d4baf6')" />
+									class="line inputDouble" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsDisaster.DisasterLatitude[2]-}', '#d4baf6')" />
 								</span>
+								{-counter-}
 								<br />
-								{-assign var="tabind" value="`$tabind+1`"-}
 								<span ext:qtip="{-$LabelsDisaster.DisasterLongitude[1]-}">
 									{-$LabelsDisaster.DisasterLongitude[0]-}
 									<br />
 									<input id="DisasterLongitude" name="DisasterLongitude" type="text" size="10" maxlength="10" 
-										class="line inputDouble" tabindex="{-$tabind-}" onFocus="showtip('{-$LabelsDisaster.DisasterLongitude[2]-}', '#d4baf6')" />
+										class="line inputDouble" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsDisaster.DisasterLongitude[2]-}', '#d4baf6')" />
 								</span>
+								{-counter-}
 								<br />
 							</td>
 						</tr>
@@ -208,20 +215,20 @@
 								<table width="100%" class="grid">
 									<!-- BEGIN Table Effects over People-->
 									{-foreach name=ef1 key=key item=item from=$ef1-}
-										{-assign var="tabind" value="`$tabind+1`"-}
 										<tr>
 											<td align="right">
 												<span ext:qtip="{-$item[1]-}">{-$item[0]-}</span>
 											</td>
 											<td>
 												<select id="{-$key-}" name="{-$key-}" 
-													class="line clsEffectNumeric" tabindex="{-$tabind-}" style="width:120px;" onFocus="showtip('{-$item[2]-}', '#f1bd41');" >
+													class="line clsEffectNumeric" tabindex="{-$MyTabIndex-}" style="width:120px;" onFocus="showtip('{-$item[2]-}', '#f1bd41');" >
 													<option class="small" value="-1">{-#teffhav#-}</option>
 													<option class="small" value="0" selected>{-#teffhavnot#-}</option>
 													<option class="small" value="-2">{-#teffdontknow#-}</option>
 												</select>
 											</td>
 										</tr>
+										{-counter-}
 									{-/foreach-}
 								</table> 
 							</td>
@@ -237,33 +244,33 @@
 											<table width="100%" class="grid">
 												<!-- BEGIN Table Sectors -->
 												{-foreach name=sec key=key item=item from=$sec-}
-													{-assign var="tabind" value="`$tabind+1`"-}
 													<tr>
 														<td align="right"><span ext:qtip="{-$item[1]-}">{-$item[0]-}</span>
 														</td>
 														<td>
 															<select id="{-$key-}" name="{-$key-}" style="width:120px;" 
-																class="line clsEffectSector" tabindex="{-$tabind-}" onFocus="showtip('{-$item[2]-}', '#f1bd41')">
+																class="line clsEffectSector" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$item[2]-}', '#f1bd41')">
 																<option class="small" value="-1">{-#teffhav#-}</option>
 																<option class="small" value="0" selected>{-#teffhavnot#-}</option>
 																<option class="small" value="-2">{-#teffdontknow#-}</option>
 															</select>
 														</td>
 													</tr>
+													{-counter-}
 												{-/foreach-}
 											</table>
 										</td>
 										<td valign="top">
 											<!-- BEGIN Table Effects over $$ -->
 											{-foreach name=ef2 key=key item=item from=$ef2-}
-												{-assign var="tabind" value="`$tabind+1`"-}
 												<span ext:qtip="{-$item[1]-}">
 													{-$item[0]-}<br />
 													<input id="{-$key-}" name="{-$key-}" type="text" size="11" maxlength="15"
-														class="line inputDouble" tabindex="{-$tabind-}" value="0" 
+														class="line inputDouble" tabindex="{-$MyTabIndex-}" value="0" 
 														onFocus="showtip('{-$item[2]-}', '#f1bd41');" />
 												</span>
 												<br />
+												{-counter-}
 											{-/foreach-}
 										</td>
 									</tr>
@@ -273,20 +280,20 @@
 								<b align="right">{-#tlosses#-}</b><br />
 								<!-- BEGIN Table Effects over Affected -->
 								{-foreach name=ef3 key=key item=item from=$ef3-}
-									{-assign var="tabind" value="`$tabind+1`"-}
 									<span ext:qtip="{-$item[1]-}">
 										{-$item[0]-}<br />
 										<input id="{-$key-}" name="{-$key-}" type="text" size="7" maxlength="10" altfield="{-$sc3[$key]-}"
-											class="line inputDouble clsEffectDouble" tabindex="{-$tabind-}" value="0" onFocus="showtip('{-$item[2]-}', '#f1bd41')" />
+											class="line inputDouble clsEffectDouble" tabindex="{-$MyTabIndex-}" value="0" onFocus="showtip('{-$item[2]-}', '#f1bd41')" />
+										{-counter-}
 									</span>
 									<br />
 								{-/foreach-}
 								{-foreach name=ef4 key=key item=item from=$ef4-}
-									{-assign var="tabind" value="`$tabind+1`"-}
 									<span ext:qtip="{-$item[1]-}">
 										{-$item[0]-}<br />
 										<textarea id="{-$key-}" name="{-$key-}" maxlength="2048" cols="25" style="height: {-if $key=='EffectNotes'-}70{-else-}30{-/if-}px;"
-											class="inputText" onFocus="showtip('{-$item[2]-}', '#f1bd41')" tabindex="{-$tabind-}"></textarea>
+											class="inputText" onFocus="showtip('{-$item[2]-}', '#f1bd41')" tabindex="{-$MyTabIndex-}"></textarea>
+										{-counter-}
 									</span>
 									<br />
 								{-/foreach-}
@@ -302,9 +309,7 @@
 								<br />
 							</td>
 						</tr>
-						{-assign var="tabeef" value="200"-}
 						{-foreach name=eefl key=key item=item from=$EEFieldList-}
-							{-assign var="tabeef" value="`$tabeef+1`"-}
 							{-if ($smarty.foreach.eefl.iteration - 1) % 3 == 0-}
 								<tr>
 							{-/if-}
@@ -319,8 +324,9 @@
 										{-assign var="inputClass" value="inputDouble" -}
 									{-/if-}
 									<input type="text" id="{-$key-}" name="{-$key-}" size="30"
-										class="line {-$inputClass-}" tabindex="{-$tabeef-}"
+										class="line {-$inputClass-}" tabindex="{-$MyTabIndex-}"
 										onFocus="showtip('{-$item[1]-}', '#f1bd41')" />
+									{-counter-}
 								</td>
 							{-if ($smarty.foreach.eefl.iteration ) % 3 == 0-}
 								</tr>
@@ -341,9 +347,8 @@
 					<table class="grid">
 						<tr valign="top">
 							<td ext:qtip="{-$LabelsEvent.EventName[1]-}">
-								{-assign var="tabind" value="`$tabind+1`"-}
 								{-$LabelsEvent.EventName[0]-}<b style="color:darkred;">*</b><br />
-								<select id="EventId" name="EventId" style='width: 180px;' tabindex="{-$tabind-}"
+								<select id="EventId" name="EventId" style='width: 180px;' tabindex="{-$MyTabIndex-}"
 									class="line" onFocus="showtip('{-$LabelsEvent.EventName[2]-}', 'lightblue')">
 									<option value=""></option>
 									{-foreach name=eln key=key item=item from=$EventList-}
@@ -351,24 +356,25 @@
 											onMouseOver="showtip('{-$item[1]-}', 'lightblue')">{-$item[0]-}</option>
 									{-/foreach-}
 								</select>
+								{-counter-}
 							</td>
 							<td ext:qtip="{-$LabelsEvent.EventMagnitude[1]-}">
-								{-assign var="tabind" value="`$tabind+1`"-}
 								{-$LabelsEvent.EventMagnitude[0]-}<br />
 								<input id="EventMagnitude" name="EventMagnitude" type="text" size="5" 
-									class="line inputText" tabindex="{-$tabind-}" onFocus="showtip('{-$LabelsEvent.EventMagnitude[2]-}', 'lightblue')" />
+									class="line inputText" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsEvent.EventMagnitude[2]-}', 'lightblue')" />
+								{-counter-}
 							</td>
 							<td ext:qtip="{-$LabelsEvent.EventDuration[1]-}">
-								{-assign var="tabind" value="`$tabind+1`"-}
 								{-$LabelsEvent.EventDuration[0]-}<br />
 								<input id="EventDuration" name="EventDuration" type="text" size="5" maxlength="8"
-									class="line inputInteger" tabindex="{-$tabind-}" onFocus="showtip('{-$LabelsEvent.EventDuration[2]-}', 'lightblue')" />
+									class="line inputInteger" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsEvent.EventDuration[2]-}', 'lightblue')" />
+								{-counter-}
 							</td>
 							<td ext:qtip="{-$LabelsEvent.EventNotes[1]-}">
-								{-assign var="tabind" value="`$tabind+1`"-}
 								{-$LabelsEvent.EventNotes[0]-}<br />
 								<input type="texto" id="EventNotes" name="EventNotes" style="width: 350px;" 
-									class="line inputText" tabindex="{-$tabind-}" onFocus="showtip('{-$LabelsEvent.EventNotes[2]-}', 'lightblue')" />
+									class="line inputText" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsEvent.EventNotes[2]-}', 'lightblue')" />
+								{-counter-}
 							</td>
 						</tr>
 					</table>
@@ -383,21 +389,21 @@
 					<table class="grid">
 						<tr>
 							<td ext:qtip="{-$LabelsCause.CauseName[1]-}">
-								{-assign var="tabind" value="`$tabind+1`"-}
 								{-$LabelsCause.CauseName[0]-}<b style="color:darkred;">*</b><br />
 								<select id="CauseId" name="CauseId" style='width: 180px;' class="line" 
-									tabindex="{-$tabind-}" onFocus="showtip('{-$LabelsCause.CauseName[2]-}', '#ffffc0')">
+									tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsCause.CauseName[2]-}', '#ffffc0')">
 									<option value=""></option>
 									{-foreach name=cln key=key item=item from=$CauseList-}
 										<option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}', '#ffffc0')">{-$item[0]-}</option>
 									{-/foreach-}
 								</select>
+								{-counter-}
 							</td>
 							<td ext:qtip="{-$LabelsCause.CauseNotes[1]-}">
-								{-assign var="tabind" value="`$tabind+1`"-}
 								{-$LabelsCause.CauseNotes[0]-}<br />
 								<input type="text" id="CauseNotes" name="CauseNotes" style="width: 450px;" 
-									class="line inputText" tabindex="{-$tabind-}" onFocus="showtip('{-$LabelsCause.CauseNotes[2]-}', '#ffffc0')" />
+									class="line inputText" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsCause.CauseNotes[2]-}', '#ffffc0')" />
+								{-counter-}
 							</td>
 						</tr>
 					</table>
