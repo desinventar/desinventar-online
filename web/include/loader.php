@@ -156,14 +156,13 @@ if (MODE != 'command')
 	$t->left_delimiter  = '{-';
 	$t->right_delimiter = '-}';
 	$t->force_compile   = false;
-	$t->caching         = 1;
+	$t->caching         = 0;
 	$t->cache_lifetime  = 3600;
 	$t->compile_check   = true;
 	// 2011-02-10 (jhcaiced) Enable caching only when using in LAN (development)
 	if (substr($_SERVER['SERVER_ADDR'], 0, 6) == '192.168')
 	{
 		$t->force_compile   = true;
-		$t->caching         = 0;
 	}
 
 	// Choose Language (First from Parameter, next from UserSession table, then autodetect from browser)
