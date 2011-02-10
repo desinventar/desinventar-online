@@ -185,9 +185,9 @@ function updateDatabaseList(CountryIsoCode,searchByCountry) {
 		}
 	);
 	jQuery.post(desinventarURL,
-		{cmd: 'searchdb', 
-		 searchdbquery: CountryIsoCode, 
-		 searchbycountry : searchByCountry
+		{cmd: 'cmdSearchDB', 
+		 searchDBQuery: CountryIsoCode, 
+		 searchDBCountry : 1
 		},
 		function(data) {
 			if (data.Status == 'OK') {
@@ -233,9 +233,9 @@ function updateDatabaseListByUser() {
 	jQuery('.databaseList').hide();
 				
 	jQuery.post(desinventarURL,
-		{ cmd: 'searchdb', 
-		  searchdbquery: '', 
-		  searchbycountry : 0
+		{ cmd: 'cmdSearchDB', 
+		  searchDBQuery: '', 
+		  searchDBCountry : 0
 		},
 		function(data) {
 			if (data.Status == 'OK') {
