@@ -232,15 +232,31 @@ switch ($cmd)
 		$t->assign('regionlist', $us->listDB());
 		$t->display('database_list.tpl');
 	break;
+	case 'cmdSearchDB':
 	case 'searchdb':
-		$searchdbquery = getParameter('searchdbquery', '');
-		$searchbycountry = getParameter('searchbycountry', '');
-		$reglst = $us->searchDB($searchdbquery, $searchbycountry);
+		$searchDBQuery   = getParameter('searchDBQuery', getParameter('searchdbquery', ''));
+		$searchDBCountry = getParameter('searchDBCountry', getParameter('searchbycountry', ''));
+		$searchDBType    = getParameter('searchDBType', '');
+		$LangIsoCode     = getParameter('LangIsoCode', $lg);
+		$reglst = $us->searchDB($searchDBQuery, $searchDBCountry);
+		if ($searchDBType == 'FULLINFO')
+		{
+			foreach($reglst as $RegionId => $RegionInfo)
+			{
+				$r = new DIRegion($us, $RegionId);
+				$a = $r->getDBInfo($LangIsoCode);
+				unset($r);
+				$RegionList[$RegionId] = array_merge($RegionInfo, $a);
+			}
+		}
+		else
+		{
+			$RegionList = $reglst;
+		}
 		$RoleList = array();
-		$t->assign('regionlist', $reglst);
 		print json_encode(array('Status'     => 'OK', 
 		                        'RoleList'   => $RoleList,
-		                        'RegionList' => $reglst));
+		                        'RegionList' => $RegionList));
 	break;
 	case 'getCountryName':
 		$CountryIso = getParameter('CountryIso','');
@@ -283,15 +299,6 @@ switch ($cmd)
 		{
 			$r = new DIRegion($us, $RegionId);
 			$a = $r->getDBInfo($LangIsoCode);
-			if ($a['PeriodBeginDate'] == '')
-			{
-				$a['PeriodBeginDate'] = $a['DataMinDate'];
-			}
-			if ($a['PeriodEndDate'] == '')
-			{
-				$a['PeriodEndDate'] = $a['DataMaxDate'];
-			}
-			$a['NumDatacards'] = $us->q->getNumDisasterByStatus('PUBLISHED');
 			$answer['RegionInfo'] = $a;
 		}
 		else
