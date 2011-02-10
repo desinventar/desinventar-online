@@ -143,7 +143,16 @@
 								<ul   class="databaseList"  id="regionlist_NONE"><li></li></ul>
 							</div>
 							<div class="contentBlock" id="pageinfo">
-								<table>
+								<table width="100%">
+									<tr>
+										<td colspan="2">
+											<p align="right">
+											<a id="regionlink" href="#">
+												<img id="regionbutton" src="{-$desinventarURLPortal-}/images/b_desinventar3.jpg" border="0" alt="" />
+											</a>
+											</p>
+										</td>
+									</tr>
 									<tr>
 										<td valign="top">
 											<div id="divRegionLogo">
@@ -154,12 +163,6 @@
 											<div id="regionbasicinfo2"></div>
 										</td>
 									</tr>
-									<tr>
-										<td colspan="2">
-											<center><a id="regionlink" href="#"><img id="regionbutton" src="{-$desinventarURLPortal-}/images/b_desinventar3.jpg" border="0" alt="" /></a></center>
-											<div id="regiontechinfo2"></div>
-										</td>
-									</tr>
 								</table>
 							</div>
 							<div class="contentBlock" id="pagemap">
@@ -168,7 +171,7 @@
 								{-include file="block_gar2011.tpl"-}
 							</div>
 						</td>
-						<td class="der"><img src="{-$desinventarURLPortal-}/images/bgder.gif" width="32" height="5" alt="" />
+						<td class="der" width="10"><img src="{-$desinventarURLPortal-}/images/bgder.gif" width="32" height="5" alt="" />
 						</td>
 					</tr>
 				</table>
