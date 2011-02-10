@@ -1,4 +1,3 @@
-{-config_load file="eng.conf"-}
 {-config_load file=`$lang`.conf section="portal"-}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -6,8 +5,8 @@
 	<title>DesInventar Online Edition {-$majorversion-}</title>
 	<!-- CSS Styles -->
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" href="{-$desinventarURLPortal-}/css/desinventar.css?version={-$jsversion-}" type="text/css" />
 	<link rel="stylesheet" href="{-$desinventarURLPortal-}/css/portal.css?version={-$jsversion-}" type="text/css" />
+	<link rel="stylesheet" href="{-$desinventarURL-}/css/desinventar.css?version={-$jsversion-}" type="text/css" />
 	{-include file="../../web/templates/jquery.tpl" confdir="../../web/conf/"-}
 	<script type="text/javascript" src="{-$desinventarURL-}/include/prototype.js"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/include/menu.js"></script>
@@ -151,13 +150,14 @@
 											</div>
 										</td>
 										<td align="left">
-											<div id="regionbasicinfo"></div>
+											{-include file="../../web/templates/region_info.tpl"-}
+											<div id="regionbasicinfo2"></div>
 										</td>
 									</tr>
 									<tr>
 										<td colspan="2">
 											<center><a id="regionlink" href="#"><img id="regionbutton" src="{-$desinventarURLPortal-}/images/b_desinventar3.jpg" border="0" alt="" /></a></center>
-											<div id="regiontechinfo"></div>
+											<div id="regiontechinfo2"></div>
 										</td>
 									</tr>
 								</table>

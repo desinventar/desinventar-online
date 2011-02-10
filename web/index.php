@@ -275,15 +275,22 @@ switch ($cmd)
 		$t->assign('Labels', $labels);
 		$t->display('regiontechinfo.tpl');
 	break;
-	case 'getRegionInfo':
+	case 'cmdGetRegionInfo':
 		$LangIsoCode = getParameter('LangIsoCode', $lg);
 		$answer = array();
 		$answer['Status'] = ERR_NO_ERROR;
 		if (isset($RegionId) && $RegionId != '')
 		{
-			$t->assign('reg', $RegionId);
 			$r = new DIRegion($us, $RegionId);
 			$a = $r->getDBInfo($LangIsoCode);
+			if ($a['PeriodBeginDate'] == '')
+			{
+				$a['PeriodBeginDate'] = $a['DataMinDate'];
+			}
+			if ($a['PeriodEndDate'] == '')
+			{
+				$a['PeriodEndDate'] = $a['DataMaxDate'];
+			}
 			$a['NumDatacards'] = $us->q->getNumDisasterByStatus('PUBLISHED');
 			$answer['RegionInfo'] = $a;
 		}

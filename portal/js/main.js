@@ -268,26 +268,30 @@ function displayRegionInfo(RegionId) {
 	var desinventarLang = jQuery('#desinventarLang').val();
 	jQuery(".contentBlock").hide();
 	jQuery("#pageinfo"     ).hide();
-	jQuery('#regionbasicinfo').html('');
-	jQuery('#regiontechinfo').html('');
-	jQuery.post(desinventarURL,
-		{ cmd:'getRegionBasicInfo', RegionId : RegionId },
-		function(data) {
-			jQuery('#regionbasicinfo').html(data);
-			jQuery.post(desinventarURL,
-				{ cmd:'getRegionTechInfo', RegionId : RegionId },
-				function(data) {
-					jQuery('#divRegionLogo').html('<img src="' + desinventarURL + '?cmd=getRegionLogo&RegionId=' + RegionId + '" alt="" />');
-					jQuery('#regiontechinfo').html(data);
-					jQuery("#regionlink").unbind('click').click(function() {
-						window.open(desinventarURL + '?r=' + RegionId + '&lang=' + desinventarLang,'_blank', 
-							'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');
-						return false;
-					});
-					jQuery('#pageinfo').show();
-				}
-			);
-		}
+	jQuery.post(jQuery('#desinventarURL').val(),
+		{
+		  cmd         : 'cmdGetRegionInfo', 
+		  RegionId    : RegionId,
+		  LangIsoCode : desinventarLang
+		},
+		function(data)
+		{
+			if (parseInt(data.Status)>0)
+			{
+				var i = data.RegionInfo;
+				jQuery('#divRegionInfo #divRegionLogo').html('<img src="' + desinventarURL + '?cmd=getRegionLogo&RegionId=' + RegionId + '" alt="" />');
+				jQuery('#divRegionInfo #txtRegionLabel').text(i.RegionLabel);
+				jQuery('#divRegionInfo #txtRegionPeriod').text(i.PeriodBeginDate + ' - ' + i.PeriodEndDate);
+				jQuery('#divRegionInfo #txtRegionNumDatacards').text(i.NumDatacards);
+				jQuery('#divRegionInfo #txtRegionLastUpdate').text(i.RegionLastUpdate);
+				jQuery('#divRegionInfo #txtInfoGeneral').html(i.InfoGeneral);
+				jQuery('#divRegionInfo #txtInfoCredits').html(i.InfoCredits);
+				jQuery('#divRegionInfo #txtInfoSources').html(i.InfoSources);
+				jQuery('#divRegionInfo #txtInfoSynopsis').html(i.InfoSynopsis);
+				jQuery('#pageinfo').show();
+			}
+		},
+		'json'
 	);
 };
 
