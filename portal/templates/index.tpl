@@ -154,13 +154,8 @@
 										</td>
 									</tr>
 									<tr>
-										<td valign="top">
-											<div id="divRegionLogo">
-											</div>
-										</td>
 										<td align="left">
 											{-include file="../../web/templates/region_info.tpl"-}
-											<div id="regionbasicinfo2"></div>
 										</td>
 									</tr>
 								</table>
