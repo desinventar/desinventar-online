@@ -44,19 +44,17 @@
 				<table border=0 style="width:100%; font-family:Lucida Grande, Verdana; font-size:10px;">
 					<tr>
 						<td>
-							<div id="info" style="width:500px" class="dwin" align="justify">
-								<span class="RegionInfoTitle">{-#msgInfoGeneral#-}</span><br />
-								<span class="RegionInfoText" id="txtInfoGeneral"></span><br />
-								<br />
-								<span class="RegionInfoTitle">{-#msgInfoCredits#-}</span><br />
-								<span class="RegionInfoText" id="txtInfoCredits"></span><br />
-								<br />
-								<span class="RegionInfoTitle">{-#msgInfoSources#-}</span><br />
-								<span class="RegionInfoText" id="txtInfoSources"></span><br />
-								<br />
-								<span class="RegionInfoTitle">{-#msgInfoSynopsis#-}</span><br />
-								<span class="RegionInfoText" id="txtInfoSynopsis"></span><br />
-							</div>
+							<span class="RegionInfoTitle">{-#msgInfoGeneral#-}</span><br />
+							<span class="RegionInfoText" id="txtInfoGeneral"></span><br />
+							<br />
+							<span class="RegionInfoTitle">{-#msgInfoCredits#-}</span><br />
+							<span class="RegionInfoText" id="txtInfoCredits"></span><br />
+							<br />
+							<span class="RegionInfoTitle">{-#msgInfoSources#-}</span><br />
+							<span class="RegionInfoText" id="txtInfoSources"></span><br />
+							<br />
+							<span class="RegionInfoTitle">{-#msgInfoSynopsis#-}</span><br />
+							<span class="RegionInfoText" id="txtInfoSynopsis"></span><br />
 						</td>
 					</tr>
 				</table>
