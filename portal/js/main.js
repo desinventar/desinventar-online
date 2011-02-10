@@ -139,6 +139,14 @@ function onReadyPortal() {
 	} else {
 		jQuery('body').trigger('UserLoggedOut');
 	}
+	
+	jQuery("#regionlink").unbind('click').click(function() {
+		var RegionId = jQuery('#desinventarRegionId').val();
+		var LangIsoCode = jQuery('#desinventarLang').val();
+		window.open(desinventarURL + '?r=' + RegionId + '&lang=' + desinventarLang,'_blank',
+			'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no');
+		return false;
+	});
 }; //onReadyPortal()
 
 function displayPortal(myPortal) 
@@ -288,6 +296,7 @@ function displayRegionInfo(RegionId) {
 				jQuery('#divRegionInfo #txtInfoCredits').html(i.InfoCredits);
 				jQuery('#divRegionInfo #txtInfoSources').html(i.InfoSources);
 				jQuery('#divRegionInfo #txtInfoSynopsis').html(i.InfoSynopsis);
+				jQuery('#desinventarRegionId').val(RegionId);
 				jQuery('#pageinfo').show();
 			}
 		},
