@@ -1,5 +1,5 @@
-{-config_load file=`$lg`.conf section="dc_thematicmap"-}
-{-config_load file=`$lg`.conf section="dc_qdetails"-}
+{-config_load file="$lg.conf" section="dc_thematicmap"-}
+{-config_load file="$lg.conf" section="dc_qdetails"-}
 {-**** SHOW RESULTS ****-}
 {-if $ctl_showres-}
 	<style type="text/css">

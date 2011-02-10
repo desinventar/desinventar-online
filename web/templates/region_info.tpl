@@ -1,5 +1,5 @@
-{-config_load file=`$lg`.conf section="di8_index"-}
-{-config_load file=`$lg`.conf section="di8_region" -}
+{-config_load file="$lg.conf" section="di8_index"-}
+{-config_load file="$lg.conf" section="di8_region"-}
 {-** REGIONINFO: Show Full Region Information **-}
 <div id="divRegionInfo">
 	<table border="0">
@@ -22,7 +22,7 @@
 					</tr>
 					<tr>
 						<td>
-							{-#trepnum# -}:
+							{-#trepnum#-}:
 						</td>
 						<td>
 							<span id="txtRegionNumDatacards"></span><br />

@@ -1,5 +1,5 @@
-{-config_load file=`$lg`.conf section="dc_statistic"-}
-{-config_load file=`$lg`.conf section="dc_qdetails"-}
+{-config_load file="$lg.conf" section="dc_statistic"-}
+{-config_load file="$lg.conf" section="dc_qdetails"-}
 {-if $ctl_showres-}
 	<table width="920px" class="grid">
 		<tr>
@@ -84,7 +84,7 @@
 						{-foreach name=sel key=k item=i from=$sel-}
 							{-if $i != "DisasterId"-}
 								<td {-if $i=="GeographyId_0" || $i=="GeographyId_1" || $i=="GeographyId_2" || 
-								         $i=="EventName" || $i=="CauseName" -}
+								         $i=="EventName" || $i=="CauseName"-}
 										class="GridCellText"
 									{-else-}
 										class="GridCellNumber"

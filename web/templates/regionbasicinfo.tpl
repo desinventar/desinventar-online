@@ -1,5 +1,5 @@
-{-config_load file=`$lg`.conf section="di8_index"-}
-{-config_load file=`$lg`.conf section="di8_region" -}
+{-config_load file="$lg.conf" section="di8_index"-}
+{-config_load file="$lg.conf" section="di8_region"-}
 <h2>{-$RegionInfo.RegionLabel-}</h2>
 <table>
 	{-if $RegionInfo.PeriodBeginDate != "" && $RegionInfo.PeriodEndDate != ""-}
@@ -23,7 +23,7 @@
 	{-/if-}
 	<tr>
 		<td>
-			{-#trepnum# -}:
+			{-#trepnum#-}:
 		</td>
 		<td>
 			{-$RegionInfo.NumDatacards-}<br />

@@ -1,4 +1,4 @@
-{-config_load file=`$lg`.conf section="di8_listdb"-}
+{-config_load file="$lg.conf" section="di8_listdb"-}
 <div class="contentBlock" id="divDatabaseList">
 	<table border="0" cellpadding="0" cellspacing="0" style="border: thin solid;" width="100%">
 		<tr valign="top">

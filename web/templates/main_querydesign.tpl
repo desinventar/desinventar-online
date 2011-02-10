@@ -17,7 +17,7 @@
 			<div id="qgeolst" style="height: 280px;" class="dwin" ext:qtip="{-#thlpquery#-}">
 				{-assign var="maintree" value="true"-}
 				{-* Show Geography List *-}
-				{-include file="main_glist.tpl" -}
+				{-include file="main_glist.tpl"-}
 			</div>
 			
 			<b onMouseOver="showtip('{-$dis.DisasterSiteNotes[2]-}');">{-$dis.DisasterSiteNotes[0]-}</b>
@@ -33,7 +33,7 @@
 			<input type="hidden" name="QueryEvent[OP]" value="AND" />
 			<span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br />
 			<select id="qevelst" name="D_EventId[]" multiple style="width: 250px; height: 200px;" class="line">
-				{-include file="main_eventlist.tpl" -}
+				{-include file="main_eventlist.tpl"-}
 			</select>
 			<br /><br />
 			<b onMouseOver="showtip('{-$eve.EventDuration[2]-}');">{-$eve.EventDuration[0]-}</b><br />
@@ -51,7 +51,7 @@
 			<input type="hidden" name="QueryCause[OP]" value="AND" />
 			<span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br>
 			<select id="qcaulst" name="D_CauseId[]" multiple style="width: 250px; height: 200px;" class="line">
-				{-include file="main_causelist.tpl" -}
+				{-include file="main_causelist.tpl"-}
 			</select>
 			<br />
 			<b onMouseOver="showtip('{-$cau.CauseNotes[2]-}');">{-$cau.CauseNotes[0]-}</b>
@@ -66,14 +66,14 @@
 			<p align="right">{-#msgOperator#-}
 			<select name="QueryEffect[OP]" class="dlgmsg small line">
 				<option class="small" value="AND" {-if $qd.QueryEffect[OP] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-				<option class="small" value="OR"  {-if $qd.QueryEffect[OP] == 'OR' -}selected{-/if-}>{-#tor#-}</option>
+				<option class="small" value="OR"  {-if $qd.QueryEffect[OP] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
 			</select>
 			</p>
 			<b>{-#ttitegp#-}</b><br />
 			<div style="height: 100px;" class="dwin" ext:qtip="{-#thlpquery#-}">
 				<table border="0" cellpadding="0" cellspacing="0">
 					{-foreach name=ef1 key=key item=item from=$ef1-}
-						{-assign var="ff" value=D_$key-}
+						{-assign var="ff" value="D_$key"-}
 						<tr>
 							<td valign="top">
 								<input type="checkbox" onFocus="showtip('{-$item[2]-}');" id="{-$key-}"
@@ -111,7 +111,7 @@
 			<div style="height: 80px;" class="dwin">
 				<table border="0" cellpadding="0" cellspacing="0">
 					{-foreach name=sec key=key item=item from=$sec-}
-						{-assign var="ff" value=D_$key-}
+						{-assign var="ff" value="D_$key"-}
 						<tr>
 							<td valign="top">
 								<input type="checkbox" onFocus="showtip('{-$item[2]-}');" id="{-$key-}"
@@ -125,7 +125,7 @@
 										<option class="small" value="-2" {-if $qd.$ff[0] == '-2'-}selected{-/if-}>{-#teffdontknow#-}</option>
 									</select>
 									{-foreach name=sc2 key=k item=i from=$item[3]-}
-										{-assign var="ff" value=D_$k-}
+										{-assign var="ff" value="D_$k"-}
 										<span id="o{-$k-}" style="display:none">
 											<br />{-$i-}
 											<select id="{-$k-}[0]" name="D_{-$k-}[0]" onChange="showeff(this.value, 'x{-$k-}', 'y{-$k-}');" 
@@ -158,7 +158,7 @@
 			<!-- Losses -->
 			<b>{-#ttitloss#-}</b><br />
 			{-foreach name=ef3 key=k item=i from=$ef3-}
-				{-assign var="ff" value=D_$k-}
+				{-assign var="ff" value="D_$k"-}
 				<input type="checkbox" onFocus="showtip('{-$i[2]-}');" id="{-$k-}"
 					onclick="enadisEff('{-$k-}', this.checked);" {-if $qd.$ff[0] != ''-}checked{-/if-} />
 				<label for="{-$k-}" onMouseOver="showtip('{-$i[2]-}');">{-$i[0]-}</label>
@@ -182,7 +182,7 @@
 				<br />
 			{-/foreach-}
 			{-foreach name=ef4 key=k item=i from=$ef4-}
-				{-assign var="ff" value=D_$k-}
+				{-assign var="ff" value="D_$k"-}
 				<b onMouseOver="showtip('{-$i[2]-}');">{-$i[0]-}</b><br />
 				<input type="text" id="{-$k-}" name="D_{-$k-}" class="fixw line" value="{-$qd.$ff[1]-}" onFocus="showtip('{-$i[2]-}');" />
 				<br />
@@ -196,7 +196,7 @@
 			<p align="right">{-#msgOperator#-}
 			<select name="QueryEEField[OP]" class="dlgmsg small line">
 				<option class="small" value="AND" {-if $qd.QueryEEField[OP] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-				<option class="small" value="OR"  {-if $qd.QueryEEField[OP] == 'OR' -}selected{-/if-}>{-#tor#-}</option>
+				<option class="small" value="OR"  {-if $qd.QueryEEField[OP] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
 			</select>
 			</p>
 			<div style="height: 300px;" class="dwin">
@@ -274,7 +274,7 @@
 				<b onMouseOver="showtip('{-$dis.DisasterSource[2]-}');">{-$dis.DisasterSource[0]-}</b>
 				<select name="D_DisasterSource[0]" class="dlgmsg small line">
 					<option class="small" value="AND" {-if $qd.D_DisasterSource[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-					<option class="small" value="OR"  {-if $qd.D_DisasterSource[0] == 'OR' -}selected{-/if-}>{-#tor#-}</option>
+					<option class="small" value="OR"  {-if $qd.D_DisasterSource[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
 				</select>
 				<br />
 				<textarea id="txtDisasterSource" name="D_DisasterSource[1]" style="width:220px; height:40px;" 
