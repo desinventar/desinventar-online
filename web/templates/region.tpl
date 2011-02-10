@@ -1,4 +1,4 @@
-{-config_load file=`$lg`.conf section="di8_region"-}
+{-config_load file="$lg.conf" section="di8_region"-}
 {-* ADMINREG: Interface to Edit Portal Admin *-}
 {-if $ctl_adminreg-}
 	<h2>{-#ttname#-}</h2>

@@ -1,4 +1,4 @@
-{-config_load file=`$lg`.conf section="di8_DBImport"-}
+{-config_load file="$lg.conf" section="di8_DBImport"-}
 <div class="contentBlock" id="divDatabaseImport" style="display:none" >
 	<h2>{-#msgDBImportTitle#-}</h2>
 	<div id="divDBImportControl">

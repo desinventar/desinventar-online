@@ -1,4 +1,4 @@
-{-config_load file=`$lg`.conf section="di8_user"-}
+{-config_load file="$lg.conf" section="di8_user"-}
 <h2>{-#tuserprefer#-}</h2>
 <br />
 <table id="tblUserList" width="550px;" height="180px" class="col dwin">

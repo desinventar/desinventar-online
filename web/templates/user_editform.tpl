@@ -1,4 +1,4 @@
-{-config_load file=`$lg`.conf section="di8_user"-}
+{-config_load file="$lg.conf" section="di8_user"-}
 <div id="divUserEdit" style="display:none">
 	<form id="frmUserEdit" name="userpafrm">
 		<table class="grid">

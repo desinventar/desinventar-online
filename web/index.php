@@ -690,6 +690,7 @@ switch ($cmd)
 							//}
 						}
 						$t->assign('desinventarHasInternet', $desinventarHasInternet);
+						$t->assign('configfile', $lg . '.conf');
 						$t->display('index.tpl');
 					}
 					else

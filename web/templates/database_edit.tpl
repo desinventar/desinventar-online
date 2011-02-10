@@ -1,4 +1,4 @@
-{-config_load file=`$lg`.conf section="di8_DBEdit"-}
+{-config_load file="$lg.conf" section="di8_DBEdit"-}
 <div class="contentBlock" id="divDBEdit" style="display:none">
 	<p id="txtDBEditInfo"></p>
 	<form id="frmDBEdit">
