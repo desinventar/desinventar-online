@@ -1,5 +1,5 @@
-{-config_load file=`$lg`.conf section="dc_graphic"-}
-{-config_load file=`$lg`.conf section="dc_qdetails"-}
+{-config_load file="$lg.conf" section="dc_graphic"-}
+{-config_load file="$lg.conf" section="dc_qdetails"-}
 {-if $ctl_showres-}
 	<div class="dwin" style="height:40px;">
 		{-foreach key=k item=i from=$qdet-}

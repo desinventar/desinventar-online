@@ -1,5 +1,5 @@
-{-config_load file=`$lg`.conf section="dc_data"-}
-{-config_load file=`$lg`.conf section="dc_qdetails"-}
+{-config_load file="$lg.conf" section="dc_data"-}
+{-config_load file="$lg.conf" section="dc_qdetails"-}
 {-if $ctl_showres-}
 	<table width="920px" class="grid">
 		<tr>

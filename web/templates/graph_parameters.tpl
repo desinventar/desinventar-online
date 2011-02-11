@@ -154,7 +154,7 @@
 								<option value="{-$smarty.const.GRAPH_HISTOGRAM_CAUSE-}">{-$dic.GraphHisCauTemporal[0]-}</option>
 								{-assign var='IndexOffset' value="100"-}
 								{-foreach name=glev key=k item=i from=$glev-}
-									{-assign var='GeoLevel' value=`$IndexOffset+$k`-}
+									{-assign var='GeoLevel' value="`$IndexOffset+$k`"-}
 									<option value="{-$GeoLevel-}">{-$i[0]-} {-$dic.GraphHisGeoTemporal[0]-}</option>
 								{-/foreach-}
 							</select>
@@ -196,7 +196,7 @@
 								<option value="{-$smarty.const.GRAPH_COMPARATIVE_CAUSE-}">{-$dic.GraphComByCauses[0]-}</option>
 								{-assign var='IndexOffset' value="200"-}
 								{-foreach name=glev key=k item=i from=$glev-}
-									{-assign var='GeoLevel' value=`$IndexOffset+$k`-}
+									{-assign var='GeoLevel' value="`$IndexOffset+$k`"-}
 								<option value="{-$GeoLevel-}">{-$dic.GraphComByGeography[0]-} {-$i[0]-}</option>
 								{-/foreach-}
 							</select>

@@ -1,4 +1,4 @@
-{-config_load file=`$lg`.conf section="di8_reginfo"-}
+{-config_load file="$lg.conf" section="di8_reginfo"-}
 {-if $ctl_adminreg-}
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -23,7 +23,7 @@
 					onMouseOver="showtip('{-$dic.DBRegion[2]-}');">{-$dic.DBRegion[0]-} {-$LangIsoCode-}</b></a></legend>
 			<table id="inf{-$LangIsoCode-}" border="0" style="display:{-if ($smarty.foreach.info.iteration) == 1-}block{-else-}none{-/if-};">
 			{-foreach name=iitt key=key item=item from=$RegionFields-}
-				{-assign var="inf" value=DB$key-}
+				{-assign var="inf" value="DB$key"-}
 				{-assign var="tabind" value="`$tabind+1`"-}
 				<tr>
 				<td align="right">
@@ -48,7 +48,7 @@
 		</tr>
 		
 		{-foreach name=sett key=key item=item from=$sett-}
-			{-assign var="inf" value=DB$key-}
+			{-assign var="inf" value="DB$key"-}
 			{-assign var="tabind" value="`$tabind+1`"-}
 			<tr>
 				<td align="right">

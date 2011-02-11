@@ -1,4 +1,4 @@
-{-config_load file=`$lg`.conf section="di8_input"-}
+{-config_load file="$lg.conf" section="di8_input"-}
 	<table width="900px" border="0" cellpadding="0" cellspacing="0" >
 		<tr valign="top">
 			<td align="left" width="450px">
@@ -62,7 +62,7 @@
 		<input type="hidden" id="PrevDisasterSerial" name="PrevDisasterSerial" value="" />
 		<input type="hidden" id="DatacardCommand"    name="DatacardCommand" value="" />
 		<input type="hidden" id="Status"             name="Status" value="" />
-		{-counter assign="MyTabIndex" start="1" print=false -}
+		{-counter assign="MyTabIndex" start="1" print="false"-}
 		<table border="1" cellspacing="8" width="900px">
 			<!-- DATACARD INFORMATION SECTION -->
 			<tr>
@@ -149,8 +149,8 @@
 														<select id="GeoLevel{-$key-}" level="{-$key-}" tabindex="{-$MyTabIndex-}" autoComplete="true" style="width:180px; background-Color:#eee;" 
 															class="GeoLevelSelect line" onFocus="showtip('{-$LabelsDisaster.GeographyId[2]-}', '#d4baf6')">
 															<option></option>
-															{-if $key == 0 -}
-																{-foreach key=GeographyKey item=GeographyItem from=$GeoLevelItems -}
+															{-if $key == 0-}
+																{-foreach key=GeographyKey item=GeographyItem from=$GeoLevelItems-}
 																		<option value="{-$GeographyItem.GeographyId-}">{-$GeographyItem.GeographyName-}</option>
 																{-/foreach-}
 															{-/if-}
@@ -316,12 +316,12 @@
 								<td ext:qtip="{-$item[1]-}">
 									{-$item[0]-}<br />
 									
-									{-assign var="inputClass" value="inputText" -}
-									{-if $item[2] == "INTEGER" -} 
-										{-assign var="inputClass" value="inputInteger" -}
+									{-assign var="inputClass" value="inputText"-}
+									{-if $item[2] == "INTEGER"-} 
+										{-assign var="inputClass" value="inputInteger"-}
 									{-/if-}
-									{-if $item[2] == "CURRENCY" -} 
-										{-assign var="inputClass" value="inputDouble" -}
+									{-if $item[2] == "CURRENCY"-} 
+										{-assign var="inputClass" value="inputDouble"-}
 									{-/if-}
 									<input type="text" id="{-$key-}" name="{-$key-}" size="30"
 										class="line {-$inputClass-}" tabindex="{-$MyTabIndex-}"

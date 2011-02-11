@@ -1,4 +1,4 @@
-{-config_load file=`$lg`.conf section="di8_events"-}
+{-config_load file="$lg.conf" section="di8_events"-}
 {-** EVENTS: Interface to Edit Custom and Predefined events lists.. **-}
 {-if $ctl_show-}
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -32,7 +32,7 @@
 							uploadMsg(''); $('cmd').value='update';">
    				<td>{-$item[0]-}</td>
    				<td>{-$item[1]|truncate:150-}</td>
-   				<td><input type="checkbox" {-if ($item[2] == 1) -} checked {-/if-} disabled /></td>
+   				<td><input type="checkbox" {-if ($item[2]==1)-} checked {-/if-} disabled /></td>
 				</tr>
    {-/foreach-}
 {-/if-}
@@ -62,7 +62,7 @@
 					onClick="setEveCau('{-$key-}','{-$item[0]-}','{-$item[1]-}','{-$item[2]-}','1','event'); uploadMsg(''); $('cmd').value='update';">
    				<td>{-$item[0]-}</td>
    				<td>{-$item[1]|truncate:150-}</td>
-   				<td><input type="checkbox" {-if ($item[2] == 1) -} checked {-/if-} disabled /></td>
+   				<td><input type="checkbox" {-if ($item[2]==1)-} checked {-/if-} disabled /></td>
 				</tr>
    {-/foreach-}
 {-/if-}

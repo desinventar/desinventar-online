@@ -1,4 +1,4 @@
-{-config_load file=`$lg`.conf section="di8_DBBackup"-}
+{-config_load file="$lg.conf" section="di8_DBBackup"-}
 <div class="contentBlock" id="divDatabaseBackup" style="display:none" >
 	<h2>{-#msgDBBackupTitle#-}</h2>
 	<table>

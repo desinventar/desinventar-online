@@ -1,4 +1,4 @@
-{-config_load file=`$lg`.conf section="di_doc"-}
+{-config_load file="$lg.conf" section="di_doc"-}
 {-**** INDEX FRAME SECTION ****-}
 {-if $ctl_page == 'index'-}
  {-if $ctl_module == 'start'-}

@@ -1,6 +1,6 @@
-{-config_load file=`$lg`.conf section="di8_index"-}
-{-config_load file=`$lg`.conf section="di8_user"-}
-{-config_load file=`$lg`.conf section="querydef"-}
+{-config_load file="$lg.conf" section="di8_index"-}
+{-config_load file="$lg.conf" section="di8_user"-}
+{-config_load file="$lg.conf" section="querydef"-}
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -12,7 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css?version={-$jsversion-}" />
 	<script type="text/javascript" src="include/prototype.js"></script>
 	<!-- jQuery -->
-	{-include file="jquery.tpl" -}
+	{-include file="jquery.tpl"-}
 	
 	<script type="text/javascript" src="include/listMan.js"></script>
 	<script type="text/javascript" src="include/md5.js"></script>
@@ -53,7 +53,7 @@
 	<link rel="stylesheet" type="text/css" href="/extJS/resources/css/xtheme-gray.css"/>
 	<script type="text/javascript" src="/extJS/adapter/ext/ext-base.js"></script>
 	<script type="text/javascript" src="/extJS/ext-all.js"></script>
-	{-include file="main_javascript.tpl" -}
+	{-include file="main_javascript.tpl"-}
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			onReadyDatacards();
@@ -79,18 +79,18 @@
 
 		<!-- Query Design -->
 		<div id="west">
-			{-include file="main_querydesign.tpl" -}
+			{-include file="main_querydesign.tpl"-}
 		</div>
 		
 		<!-- Central Content Area -->
 		<div id="container">
-			{-include file="main_content.tpl" -}
+			{-include file="main_content.tpl"-}
 		</div>
 		
 
 		<!-- Help Section -->
 		<div id="south">
-			{-include file="main_help.tpl" -}
+			{-include file="main_help.tpl"-}
 		</div>
 	</div>
 	
