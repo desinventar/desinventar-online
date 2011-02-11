@@ -273,24 +273,6 @@ switch ($cmd)
 		readfile($murl);
 		exit();
 	break;
-	case 'getRegionBasicInfo':
-		$r = new DIRegion($us, $RegionId);
-		$RegionInfo = array();
-		$RegionInfo['RegionId'] = $RegionId;
-		$a = $r->getDBInfo($lg);
-		$a['NumDatacards'] = $us->q->getNumDisasterByStatus('PUBLISHED');
-		$t->assign('RegionInfo', $a);
-		$t->display('regionbasicinfo.tpl');
-		break;
-	case 'getRegionTechInfo':
-		$r = new DIRegion($us, $RegionId);
-		$RegionInfo = array();
-		$RegionInfo['RegionId'] = $RegionId;
-		$t->assign('RegionInfo', $r->getDBInfo($lg));
-		$labels = $us->q->queryLabelsFromGroup('DB', $lg, false);
-		$t->assign('Labels', $labels);
-		$t->display('regiontechinfo.tpl');
-	break;
 	case 'cmdGetRegionInfo':
 		$LangIsoCode = getParameter('LangIsoCode', $lg);
 		$answer = array();
@@ -307,19 +289,6 @@ switch ($cmd)
 			$answer['RegionInfo'] = array();
 		}
 		echo json_encode($answer);
-	break;
-	case 'getRegionFullInfo':
-		if (isset($RegionId) && $RegionId != '')
-		{
-			$t->assign('reg', $RegionId);
-			$r = new DIRegion($us, $RegionId);
-			$a = $r->getDBInfo($lg);
-			$a['NumDatacards'] = $us->q->getNumDisasterByStatus('PUBLISHED');
-			$t->assign('RegionInfo', $a);
-		}
-		$labels = $us->q->queryLabelsFromGroup('DB', $lg, false);
-		$t->assign('Labels', $labels);
-		$t->display('regionfullinfo.tpl');
 	break;
 	case 'getRegionRecordCount' :
 		$RecordCount = $us->getDisasterCount();

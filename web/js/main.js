@@ -21,7 +21,7 @@ function onReadyMain()
 		}
 		else
 		{
-			jQuery('#divDatabaseInfo').hide();
+			jQuery('#divRegionInfo').hide();
 			jQuery('#dcr').show();
 			jQuery('#dcr').html('<img src="loading.gif">');
 			jQuery.post(myURL,
@@ -55,8 +55,8 @@ function onReadyMain()
 	if (jQuery('#desinventarRegionId').val() != '')
 	{
 		// Load Database Info and Show
-		jQuery('#divDatabaseInfo').load('index.php?cmd=getRegionFullInfo&RegionId=' + jQuery('#desinventarRegionId').val() + '&t=' + new Date().getTime());
-		jQuery('#divDatabaseInfo').show();
+		doGetRegionInfo(jQuery('#desinventarRegionId').val());
+		jQuery('#divRegionInfo').show();
 		jQuery('#dcr').hide();
 		jQuery('#divQueryResults').show();
 	}
