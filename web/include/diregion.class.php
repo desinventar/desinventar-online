@@ -180,6 +180,8 @@ class DIRegion extends DIObject {
 			//$a[$Field] = $this->get($Field, $prmLang);
 		}
 		$a['RegionLastUpdate'] = substr($a['RegionLastUpdate'],0,10);
+		
+		$this->session->open($this->get('RegionId'));
 
 		$Query = "SELECT MIN(DisasterBeginTime) AS MinDate, MAX(DisasterBeginTime) AS MaxDate FROM Disaster ".
 			"WHERE RecordStatus='PUBLISHED'";
@@ -203,6 +205,15 @@ class DIRegion extends DIObject {
 			$a['RegionLastUpdate'] = substr($row['MAX'],0,10);
 		}
 
+		if ($a['PeriodBeginDate'] == '')
+		{
+			$a['PeriodBeginDate'] = $a['DataMinDate'];
+		}
+		if ($a['PeriodEndDate'] == '')
+		{
+			$a['PeriodEndDate'] = $a['DataMaxDate'];
+		}
+		$a['NumDatacards'] = $this->session->q->getNumDisasterByStatus('PUBLISHED');
 		return $a;
 	}
 	
@@ -517,5 +528,6 @@ class DIRegion extends DIObject {
 		}
 		return $iReturn;
 	}
+
 } //class
 </script>

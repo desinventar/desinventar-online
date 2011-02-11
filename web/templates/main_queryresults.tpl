@@ -7,13 +7,13 @@
 			<td align="center">
 				<div id="ResultHeaderButtonToolbar">
 					<button id="dat-btn" class="rounded" ext:qtip="{-#tdatamsg#-}"><span>{-#bdata#-}</span></button>
-					{-include file="viewdata_parameters.tpl" -}
+					{-include file="viewdata_parameters.tpl"-}
 					<button id="map-btn" class="rounded" ext:qtip="{-#tthematicmsg#-}"><span>{-#bthematic#-}</span></button>
-					{-include file="thematicmap_parameters.tpl" -}
+					{-include file="thematicmap_parameters.tpl"-}
 					<button id="grp-btn" class="rounded" ext:qtip="{-#tgraphicmsg#-}"><span>{-#bgraphic#-}</span></button>
 					{-include file="graph_parameters.tpl"-}
 					<button id="std-btn" class="rounded" ext:qtip="{-#tstatisticmsg#-}"><span>{-#bstatistic#-}</span></button>
-					{-include file="statistic_parameters.tpl" -}
+					{-include file="statistic_parameters.tpl"-}
 				</div>
 				<!-- Show XML query open window-->
 				<div id="qry-win" class="x-hidden">
@@ -43,7 +43,7 @@
 					<div class="x-window-header">{-$desinventarUserId-} - {-$role-}
 					</div>
 					<div id="usr">
-						{-include file="user_login.tpl" -}
+						{-include file="user_login.tpl"-}
 						<br />
 						<a href="javascript:void(null)" class="rememberpasswordlink" onclick="updateList('passlost', 'user.php', 'cmd=passlost');">{-#tpasslost#-}</a>
 						<div id="passlost">
@@ -95,7 +95,7 @@
 		</tr>
 	</table>
 	<!-- divDatabaseInfo - Database Info -->
-	{-include file="database_info.tpl" -}
+	{-include file="database_info.tpl"-}
 	<div id="dcr">
 	</div>
 </div> <!-- end div id=divQueryResults -->

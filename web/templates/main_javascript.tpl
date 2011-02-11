@@ -314,7 +314,7 @@
 		{-if !$ctl_noregion-}
 		tb.add('-', {id: 'mqry', text: '{-#msearch#-}',		menu: mquery });
 		{-/if-}
-		{-if $desinventarRegionId != "" -}
+		{-if $desinventarRegionId != ""-}
 			tb.add('-', {id: 'minp', text: '{-#mdcsection#-}',	menu: mcards });
 		{-/if-}
 		tb.add('-', {id: 'mdbs', text: '{-#mdatabases#-}',	menu: mbases });
@@ -613,17 +613,17 @@
 			//varhgt = screen.height * 360 / 600;
 			//$('dcr').style = "height:"+ hgt + "px;"
 			{-foreach name=ef1 key=k item=i from=$ef1-}
-				{-assign var="ff" value=D_$k-}
+				{-assign var="ff" value="D_$k"-}
 				{-if $qd.$ff[0] != ''-}
 					enadisEff('{-$k-}', true);
 					showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
 				{-/if-}
 			{-/foreach-}
 			{-foreach name=sec key=k item=i from=$sec-}
-				{-assign var="sc" value=D_$k-}
+				{-assign var="sc" value="D_$k"-}
 				{-if $qd.$sc[0] != ''-}
 					{-foreach name=sc2 key=k2 item=i2 from=$i[3]-}
-						{-assign var="ff" value=D_$k2-}
+						{-assign var="ff" value="D_$k2"-}
 						{-if $qd.$ff[0] != ''-}
 							enadisEff('{-$k2-}', true);
 							showeff('{-$qd.$ff[0]-}', 'x{-$k2-}', 'y{-$k2-}');
@@ -633,7 +633,7 @@
 				{-/if-}
 			{-/foreach-}
 			{-foreach name=ef3 key=k item=i from=$ef3-}
-				{-assign var="ff" value=D_$k-}
+				{-assign var="ff" value="D_$k"-}
 				{-if $qd.$ff[0] != ''-}
 					enadisEff('{-$k-}', true);
 					showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');

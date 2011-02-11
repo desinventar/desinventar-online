@@ -1,13 +1,12 @@
-{-config_load file="eng.conf"-}
-{-config_load file=`$lang`.conf section="portal"-}
+{-config_load file="$lang.conf" section="portal"-}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>DesInventar Online Edition {-$majorversion-}</title>
 	<!-- CSS Styles -->
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" href="{-$desinventarURLPortal-}/css/desinventar.css?version={-$jsversion-}" type="text/css" />
 	<link rel="stylesheet" href="{-$desinventarURLPortal-}/css/portal.css?version={-$jsversion-}" type="text/css" />
+	<link rel="stylesheet" href="{-$desinventarURL-}/css/desinventar.css?version={-$jsversion-}" type="text/css" />
 	{-include file="../../web/templates/jquery.tpl" confdir="../../web/conf/"-}
 	<script type="text/javascript" src="{-$desinventarURL-}/include/prototype.js"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/include/menu.js"></script>
@@ -121,8 +120,8 @@
 							<table bgcolor="#CF9D15" border="0" cellpadding="0" cellspacing="0" align="center">
 								<tr><td bgcolor="white">
 									<center>
-										{-include file="logo_isdr.tpl" -}
-										{-include file="logo_siapad.tpl" -}
+										{-include file="logo_isdr.tpl"-}
+										{-include file="logo_siapad.tpl"-}
 										{-include file="logo_gar.tpl"-}
 									</center>
 								</td></tr>
@@ -144,20 +143,19 @@
 								<ul   class="databaseList"  id="regionlist_NONE"><li></li></ul>
 							</div>
 							<div class="contentBlock" id="pageinfo">
-								<table>
+								<table width="100%">
 									<tr>
-										<td valign="top">
-											<div id="divRegionLogo">
-											</div>
-										</td>
-										<td align="left">
-											<div id="regionbasicinfo"></div>
+										<td colspan="2">
+											<p align="right">
+											<a id="regionlink" href="#">
+												<img id="regionbutton" src="{-$desinventarURLPortal-}/images/b_desinventar3.jpg" border="0" alt="" />
+											</a>
+											</p>
 										</td>
 									</tr>
 									<tr>
-										<td colspan="2">
-											<center><a id="regionlink" href="#"><img id="regionbutton" src="{-$desinventarURLPortal-}/images/b_desinventar3.jpg" border="0" alt="" /></a></center>
-											<div id="regiontechinfo"></div>
+										<td align="left">
+											{-include file="../../web/templates/region_info.tpl"-}
 										</td>
 									</tr>
 								</table>
@@ -168,7 +166,7 @@
 								{-include file="block_gar2011.tpl"-}
 							</div>
 						</td>
-						<td class="der"><img src="{-$desinventarURLPortal-}/images/bgder.gif" width="32" height="5" alt="" />
+						<td class="der" width="10"><img src="{-$desinventarURLPortal-}/images/bgder.gif" width="32" height="5" alt="" />
 						</td>
 					</tr>
 				</table>

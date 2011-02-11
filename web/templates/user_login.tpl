@@ -1,5 +1,5 @@
 <!-- Display User Login Form -->
-{-config_load file=`$confdir``$lg`.conf section="di8_user"-}
+{-config_load file="$lg.conf" section="di8_user"-}
 
 	<form id="frmUserLogin" method="post" action="">
 		<br />

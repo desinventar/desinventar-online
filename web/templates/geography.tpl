@@ -1,4 +1,4 @@
-{-config_load file=`$lg`.conf section="di8_geography"-}
+{-config_load file="$lg.conf" section="di8_geography"-}
 {-if $ctl_admingeo-}
 	<b onMouseOver="showtip('{-$dic.DBGeoEle[2]-}');">{-$dic.DBGeoEle[0]-}</b><br />
 	<div id="lst_ageo" class="dwin" style="width:100%; height:180px;">

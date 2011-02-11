@@ -12,7 +12,7 @@
 	<input type="hidden" id="desinventarRegionLabel"   value="{-$desinventarRegionLabel-}" />
 	<input type="hidden" id="desinventarHasInternet"   value="{-$desinventarHasInternet-}" />
 	<select id="desinventarLanguageList" style="display:none;">
-		{-if count($LanguageList) > 0 -}
+		{-if count($LanguageList) > 0-}
 			{-foreach name=LanguageList key=key item=item from=$LanguageList-}
 				<option value="{-$key-}">{-$item-}</option>
 			{-/foreach-}
@@ -21,7 +21,7 @@
 		{-/if-}
 	</select>
 	<select id="desinventarCountryList" style="display:none;">
-		{-if count($CountryList) > 0 -}
+		{-if count($CountryList) > 0-}
 			{-foreach name=CountryList key=key item=item from=$CountryList-}
 				<option value="{-$key-}">{-$item-}</option>
 			{-/foreach-}
