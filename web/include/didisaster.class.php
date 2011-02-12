@@ -93,11 +93,11 @@ class DIDisaster extends DIRecord {
 		return $sQuery;
 	}
 
-	public function insert($withValidate = true) {
+	public function insert($withValidate=1, $bStrict=1) {
 		if ($this->get('DisasterId') == '') {
 			$this->set('DisasterId', uuid());
 		}
-		return parent::insert($withValidate);
+		return parent::insert($withValidate, $bStrict);
 	}
 	
 	public function validateCreate($bStrict) {
@@ -112,7 +112,7 @@ class DIDisaster extends DIRecord {
 	{
 		$iReturn = parent::validateUpdate($bStrict);
 		$iReturn = $this->validateNotNull(-53, 'DisasterSerial');
-		if ($bStrict)
+		if ($bStrict > 0)
 		{
 			$iReturn = $this->validateUnique(-54, 'DisasterSerial');
 		}
@@ -131,21 +131,20 @@ class DIDisaster extends DIRecord {
 		{
 			$bStrict2 = false;
 		}
-		if ($bStrict2)
+		if ($bStrict2 > 0)
 		{
 			$iReturn = $this->validateNotNull(-56, 'DisasterSource');
-			$iReturn = $this->validateEffects(-61);
+			$iReturn = $this->validateEffects(-61, 1);
 		}
 		else
 		{
-			$iReturn = $this->validateNotNull(-56, 'DisasterSource',WARNING);
-			$iReturn = $this->validateEffects(-61, WARNING);
+			//$iReturn = $this->validateNotNull(-56, 'DisasterSource',WARNING);
+			//$iReturn = $this->validateEffects(-61, 0);
 		}
-		$iReturn = parent::validateUpdate($bStrict);
 		return $iReturn;
 	}
 	
-	public function validateEffects($ErrCode, $isWarning=false)
+	public function validateEffects($ErrCode, $isError)
 	{
 		$bFound = -1;
 		$iReturn = ERR_NO_ERROR;
@@ -182,16 +181,24 @@ class DIDisaster extends DIRecord {
 		if ($bFound < 0)
 		{
 			$iReturn = $ErrCode;
-			$this->status->addMsg($iReturn, ' Datacard without effects', $isWarning);
+			if ($isError > 0)
+			{
+				$this->status->addMsg($iReturn, ' Datacard without effects', false);
+			}
+			else
+			{
+				$this->status->addMsg($iReturn, ' Datacard without effects', true);
+			}
 		}
 		return $iReturn;
 	}
 	
-	public function update($withValidate = true)
+	public function update($withValidate = 1, $bStrict = 1)
 	{
 		$iReturn = ERR_NO_ERROR;
 		// Calculate Values of Q Fields...
-		foreach (split(',',$this->sFieldQDef) as $sFieldQ) {
+		foreach (split(',',$this->sFieldQDef) as $sFieldQ)
+		{
 			$oItem = split('/', $sFieldQ);
 			$sFieldQName = $oItem[0];
 			$sFieldName  = substr($sFieldQName, 0, -1);
@@ -200,7 +207,7 @@ class DIDisaster extends DIRecord {
 			if ($this->get($sFieldQName) < 0) { $this->set($sFieldQName, 0); }
 		}
 		// Update Record
-		$iReturn = parent::update($withValidate);
+		$iReturn = parent::update($withValidate, $bStrict);
 		return $iReturn;
 	} //update
 
