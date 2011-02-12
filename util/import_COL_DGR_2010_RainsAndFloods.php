@@ -20,7 +20,7 @@ require_once(BASE . '/include/dieefield.class.php');
 require_once(BASE . '/include/date.class.php');
 
 
-$RegionId = 'COL-1250694506-colombia_inventario_historico_de_desastres';
+$RegionId = 'COL-2010';
 $us->login('diadmin','di8');
 $us->open($RegionId);
 
@@ -34,15 +34,10 @@ $line = 1;
 
 $a = fgetcsv(STDIN, 0, ',');
 $a = fgetcsv(STDIN, 0, ',');
-$a = fgetcsv(STDIN, 0, ',');
-
-while (! feof(STDIN) )
-{
+while (! feof(STDIN) ) {
 	$a = fgetcsv(STDIN, 0, ',');
-	if (count($a) > 1)
-	{
-		for($i = 0; $i<count($a); $i++)
-		{
+	if (count($a) > 1) {
+		for($i = 0; $i<count($a); $i++) {
 			$a[$i] = trim($a[$i]);
 		}
 		// 0 - DisasterSerial
@@ -50,9 +45,9 @@ while (! feof(STDIN) )
 		$p = $us->getDisasterIdFromSerial($DisasterSerial);
 		$DisasterId = $p['DisasterId'];		
 		$DisasterBeginTime = strToISO8601($a[1]);
-		printf('%-10s %-20s' . "\n", $DisasterSerial, $DisasterBeginTime);
-		if ($DisasterBeginTime != '')
-		{
+		//printf('%-10s %-20s' . "\n", $DisasterSerial, $DisasterBeginTime);
+		//$DisasterBeginTime = '';
+		if ($DisasterBeginTime != '') {
 			$d = new DIDisaster($us, $DisasterId);
 			
 			$d->set('DisasterSerial', $DisasterSerial);
@@ -69,15 +64,12 @@ while (! feof(STDIN) )
 							'CAQUETA'     => 'Caquetá',
 							'CHOCO'       => 'Chocó',
 							'CORDOBA'     => 'Córdoba',
-							'GUAINIA'     => 'Guainía',
 							'GUAJIRA'     => 'La Guajira',
 							'NARIÑO'      => 'Nariño',
-							'QUINDIO'     => 'Quindio',
-							'SAN ANDRES'  => 'Archipiélago de San Andrés Providencia y Santa Catalina'
+							'QUINDIO'     => 'Quindio'
 						 );
 			$MpioFixes = array(
 							'00001' => array( // Antioquia
-								'APARTADO' => 'Apartadó',
 								'MEDELLIN'         => 'Medellín',
 								'MURINDO'          => 'Murindó',
 								'YONDO'            => 'Yondó',
@@ -86,7 +78,6 @@ while (! feof(STDIN) )
 								'MUTATA'    => 'Mutatá',
 								'JERICO'    => 'Jericó',
 								'RIO NEGRO' => 'Rionegro',
-								'NECOCLI'   => 'Necoclí',
 								'NECHI'     => 'Nechí',
 								'TAMESIS'   => 'Támesis',
 								'LA UNION'  => 'La Unión',
@@ -115,20 +106,17 @@ while (! feof(STDIN) )
 								'PUERTO RONDON' => 'Puerto Rondón',
 								'DEPARTAMENTO'  => ''
 							),
-							'00002' => array( // Atlántico
+							'00002' => array(
 								'USIACURI' => 'Usiacurí',
 								'TUBARA'   => 'Tubará',
 								'PIOJO'    => 'Piojó',
 								'DEPARTAMENTO' => '',
 								'MANATI'       => 'Manatí',
-								'POLO NUEVO' => 'Polonuevo',
 								'REPELON'      => 'Repelón',
 								'SANTO TOMAS'  => 'Santó Tomás',
 								'SANTA LUCIA'  => 'Santa Lucía'
 							),
 							'00004' => array( // Bolívar
-								'ARENAL SUR' => 'Arenal',
-								'ARROYO HONDO' => 'Arroyohondo',
 								'CARMEN DE BOLIVAR' => 'El Carmen de Bolívar',
 								'ACHI' => 'Achí',
 								'RIOVIEJO' => 'Río Viejo',
@@ -139,44 +127,29 @@ while (! feof(STDIN) )
 								'EL PEÑON' => 'El Peñón',
 								'SANTA ROSA SUR' => 'Santa Rosa del Sur',
 								'MAGANGUE' => 'Magangué',
-								'NOROSI' => 'Norosí',
 								'SAN CRISTOBAL' => 'San Cristóbal',
 								'SOPLAVIENTO' => 'Soplavento',
 								'MOMPOX' => 'Mompós',
 								'MARIA LA BAJA' => 'María la Baja',
 								'SAN JUAN NEPOMUCENO' => 'San Juan de Nepomuceno',
-								'SAN JUAN NEPUMUCENO' => 'San Juan de Nepomuceno',
 								'SAN MARTIN DE LOBA'  => 'San Martín de Loba',
 								'SAN ESTANISLAO DE KOSTA' => 'San Estanislao',
-								'SANTA ROSA DE LIMA' => 'Santa Rosa',
 								'TURBANA' => 'Turbaná'
 							),
 							'00005' => array( // Boyacá
-								'CIENEGA' => 'Ciénaga',
-								'CUITIVA' => 'Cuítiva',
-								'CHIQUINQUIRA' => 'Chiquinquirá',
-								'COMBITA' => 'Cómbita',
-								'COOPER' => 'Coper',
-								'GACHANTIVA' => 'Gachantivá',
 								'QUIPAMA' => 'Quípama',
 								'GUICAN'  => 'Güican',
 								'BELEN'   => 'Belén',
 								'JERICO'  => 'Jericó',
-								'OICATA'  => 'Oicatá',
-								'PAEZ'    => 'Páez',
-								'SABOYA'  => 'Saboyá',
 								'SOATA'   => 'Soatá',
 								'TIBANA'  => 'Tibaná',
 								'RAQUIRA' => 'Ráquira',
 								'MONIQUIRA' => 'Moniquirá',
-								'MONGOA' => 'Mongua',
 								'PUERTO BOYACA' => 'Puerto Boyacá',
 								'SOGAMOSO'      => 'Sogamosos',
 								'SOGAMOZO'      => 'Sogamosos',
-								'SOTAQUIRA'    => 'Sotaquirá',
 								'DEPARTAMENTO'  => '',
 								'SANTA ANA'  => 'Santana',
-								'SORACA'   => 'Soracá',
 								'SUSACON'   => 'Susacón',
 								'CIENAGA'   => 'Ciénaga',
 								'MONGUI'    => 'Monguí',
@@ -185,47 +158,34 @@ while (! feof(STDIN) )
 								'MARIPI'    => 'Maripí',
 								'PAZ DE RIO' => 'Paz de Río'								
 							),
-							'00006' => array( // Caldas
-								'LA VICTORIA' => 'Victoria',
-								'PACORA' => 'Pácora',
-								'SAMANA' => 'Samaná',
+							'00006' => array(
 								'SUPIA' => 'Supía',
+								'LA VICTORIA' => 'Victoria',
 								'VILLA MARIA' => 'Villamaria'
 							),
-							'00007' => array( // Caquetá
-								'BELEN DE LOS ANDAQUIES' => 'Belén de los Andaquíes',
-								'DONCELLO' => 'El Doncello',
+							'00007' => array(
 								'LA MONTAÑITA' => 'La Montañita',
 								'MILAN' => 'Milán',
-								'PAUJIL' => 'El Paujil',
-								'SAN JOSE DEL FRAGUA' => 'San José del Fragua',
+								'DONCELLO' => 'El Doncello',
 								'SOLITA' => 'Salita'
 							),
-							'00026' => array( //Casanare
+							'00026' => array(
 								'MANI' => 'Maní',
-								'NUNCHIA' => 'Nunchía',
-								'OROCUE' => 'Orocué'
+								'OROCUE' => 'Orocué',
+								'NUNCHIA' => 'Nunchía'
 							),
-							'00025' => array( // Arauca
+							'00025' => array(
 								'PUERTO RONDON' => 'Puerto Rondón',
 							),
 							'00008' => array( // Cauca
-								'BOLIVAR' => 'Bolívar',
-								'GUACHENE' => 'Gachené',
-								'JAMBALO' => 'Jambaló',
-								'MONDOMO' => 'Santander de Quilichao',
-								'PIENDAMO' => 'Piendamó',
 								'PURACE' => 'Puracé',
-								'TIMBIQUI' => 'Timbiquí',
 								'INZA' => 'Inzá',
 								'POPAYAN' => 'Popayán',
 								'CAJIBIO' => 'Cajibío',
 								'SUAREZ' => 'Suárez',
 								'LOPEZ DE MICAY' => 'López',
 								'TIMBA' => 'Buenos Aires',
-								'TIMBIO' => 'Timbío',
 								'PATIA' => 'Patía',
-								'SAN SEBASTIAN' => 'San Sebastián',
 								'TOTORO' => 'Totoró'
 							),
 							'00009' => array( // Cesar
@@ -237,11 +197,8 @@ while (! feof(STDIN) )
 								'CHIRIGUANA' => 'Chiriguaná',
 								'SAN MARTIN' => 'San Martín',
 								'RIO DE ORO' => 'Río de Oro'
-							), 
-							'00012' => array( // Choco
-								'BAJO SAN JUAN' => 'El Litoral de San Juan',
-								'LLORO' => 'Lloró',
-								'NUQUI' => 'Nuquí',
+							), // Choco
+							'00012' => array(
 								'QUIBDO' => 'Quibdó',
 								'ITSMINA' => 'Istmina',
 								'LITORAL DEL SAN JUAN' => 'El Litoral de San Juan',
@@ -263,35 +220,20 @@ while (! feof(STDIN) )
 								'SAN JOSE DEL PALMAR' => 'San José del Palmar'
 							),
 							'00010' => array( // Córdoba
+								'SAN JOSE DE URE' => 'San José de Uré',
 								'DEPARTAMENTO' => '',
+								'SAN MATEO' => 'Chinú',
+								'MONTERIA' => 'Montería',
+								'MONTELIBANO' => 'Montelíbano',
+								'TUCHIN' => 'Tuchín',
 								'CHIMA' => 'Chimá',
 								'CIENAGA DE ORO' => 'Ciénaga de Oro',
 								'CERETE' => 'Cereté',
-								'CHINU' => 'Chinú',
-								'LOS CORDOBAS' => 'Los Córdobas',
-								'MONTERIA' => 'Montería',
-								'MONTELIBANO' => 'Montelíbano',
-								'MOÑITOS' => 'Moñitos',
 								'PURISIMA' => 'Purísima',
-								'SAN ANDRES DE SOTAVENTO' => 'San Andrés de Sotavento',
-								'SAN JOSE DE URE' => 'San José de Uré',
-								'SAN MATEO' => 'Chinú',
-								'TUCHIN' => 'Tuchín'
+								'MOÑITOS' => 'Moñitos',
+								'SAN ANDRES DE SOTAVENTO' => 'San Andrés de Sotavento'
 							),
 							'00011' => array( // Cundinamarca
-								'ALBAN' => 'Albán',
-								'FUQUENE' => 'Fúquene',
-								'GACHALA' => 'Gachalá',
-								'GUACHETA' => 'Guachetá',
-								'GUATAQUI' => 'Guataquí',
-								'LA PEÑA' => 'La Peña',
-								'MESITAS DEL COLEGIO' => 'El Colegio',
-								'PULI' => 'Pulí',
-								'SAN JUAN DE RIOSECO' => 'San Juan de Río Seco',
-								'TIBACUI' => 'Tibacuy',
-								'VIOTA' => 'Viotá',
-								'YACOPI' => 'Yacopí',
-								'ZIPACON' => 'Zipacón',
 								'ZIPAQUIRA' => 'Zipaquirá',
 								'GUTIERREZ' => 'Gutiérrez',
 								'CAJICA' => 'Cajicá',
@@ -308,22 +250,13 @@ while (! feof(STDIN) )
 								'TOCANCIPA' => 'Tocancipá',
 								'CHAGUANI' => 'Chaguaní'
 							),
-							'00014' => array( // La Guajira
-								'DISTRACCION' => 'Distracción'
-							),
-							'00030' => array( //Guainía
-								'PUERTO INIRIDA' => 'Inírida',
-							),
 							'00031' => array( //Guaviare
 								'SAN JOSE DEL GUAVIARE' => 'San José del Guaviare'
 							),
 							'00013' => array( // Huila
-								'CAMPO ALEGRE' => 'Campoalegre',
-								'NATAGA' => 'Nátaga',
-								'SAN AGUSTIN' => 'San Agustín',
+								'YAGUARA' => 'Yaguará',
 								'SANTA MARIA' => 'Santa María',
-								'TIMANA' => 'Timaná',
-								'YAGUARA' => 'Yaguará'
+								'TIMANA' => 'Timaná'
 							),
 							'00015' => array( // Magdalena
 								'CIENAGA' => 'Ciénaga',
@@ -343,7 +276,6 @@ while (! feof(STDIN) )
 							'00016' => array( // Meta
 								'CALVARIO' => 'El Calvario',
 								'LEJANIAS' => 'Lejanías',
-								'MAPIRIPAN' => 'Mapiripán',
 								'VISTA HERMOSA' => 'Vistahermosa',
 								'PUERTO LOPEZ' => 'Puerto López',
 								'SAN MARTIN' => 'San Martín',
@@ -352,24 +284,15 @@ while (! feof(STDIN) )
 								'ACACIAS' => 'Acacías'
 							),
 							'00017' => array( // Nariño
-								'ALBAN' => 'Albán',
-								'BELEN' => 'Belén',
-								'CHACHAGUI' => 'Chachagüí',
-								'EL TABLON' => 'El Tablón de Gómez',
-								'LA UNION' => 'La Unión',
 								'LEYVA' => 'Leiva',
-								'POTOSI' => 'Potosí',
-								'ROBERTO PAYAN' => 'Roberto Payán',
 								'ANDES' => 'Los Andes',
 								'ANCUYA' => 'Ancuyá',
 								'GUALMATAN' => 'Gualmatán',
-								'SAN JOSE DE ALBAN' => 'Albán',
 								'TUMACO' => 'San Andrés de Tumaco',
 								'MAGUI PAYAN' => 'Magüi',
 								'SANDONA' => 'Sandoná',
 							),
 							'00018' => array( // Norte de Santander
-								'CACHIRA' => 'Cachirá',
 								'CONVENCION' => 'Convención',
 								'CHITAGA' => 'Chitagá',
 								'CUCUTA' => 'Cúcuta',
@@ -378,8 +301,6 @@ while (! feof(STDIN) )
 								'HERRAN' => 'Herrán',
 								'CHINACOTA' => 'Chinácota',
 								'HACARI' => 'Hacarí',
-								'LA PLAYA DE BELEN' => 'La Playa',
-								'ZULIA' => 'El Zulia'
 							),
 							'00027' => array( //Putumayo
 								'VILLA GARZON' => 'Villagarzón'
@@ -398,19 +319,11 @@ while (! feof(STDIN) )
 								'MISTRATO' => 'Mistrató',
 								'DEPARTAMENTO' => ''
 							),
-							'00028' => array( // San Andrés
-								'SAN ANDRES' => 'San Andrés'
-							),
 							'00021' => array( // Santander
-								'CHARALA' => 'Charalá',
 								'CONCEPCION' => 'Concepción',
-								'EL CERRITO' => 'Cerrito',
-								'EL PLAYON' => 'El Playón',
 								'GUACAMAYO' => 'El Guacamayo',
-								'GUAVATA' => 'Guavatá',
 								'JESUS MARIA' => 'Jesús María',
 								'MALAGA' => 'Málaga',
-								'SAN JOAQUIN' => 'San Joaquín',
 								'BOLIVAR' => 'Bolívar',
 								'VELEZ' => 'Vélez',
 								'SURATA' => 'Suratá',
@@ -433,27 +346,17 @@ while (! feof(STDIN) )
 								'GUABATA' => 'Guavatá'
 							),
 							'00022' => array( // Sucre
-								'CHALAN' => 'Chalán',
-								'SUCRE/MAJAGUAL' => 'Majagual',
-								'SAN ONOFRE' => 'San Onofré',
-								'SAN PEDRO' => 'San Pedró',
 								'SAN BENITO ABAD' => 'San Benito de Abad',
 								'DEPARTAMENTO' => '',
 								'COVEÑAS' => 'Coveñas',
-								'SAMPUES' => 'Sampués',
 								'SINCE' => 'Sincelejo',
 								'TOLU' => 'Tolú Viejo',
-								'TOLUVIEJO' => 'Tolú Viejo',
 								'LA UNION' => 'La Unión',
 							),
 							'00023' => array( // Tolima
-								'ANSOATEGUI' => 'Anzoátegui',
-								'ARMERO GUAYABAL' => 'Armero',
 								'LIBANO' => 'Líbano',
 								'IBAGUE' => 'Ibagué',
 								'HERBEO' => 'Herveo',
-								'VANDAILLO' => 'Venadillo',
-								'VILLA HERMOSA' => 'Villahermosa',
 								'VILLARICA' => 'Villarrica',
 								'CARMEN DE APICALA' => 'Carmen de Apicalá',
 								'PURIFICACION' => 'Purificación',
@@ -488,10 +391,8 @@ while (! feof(STDIN) )
 			{
 				$Mpio = $MpioFixes[$DptoCode][$Mpio];
 			}
-			if ($GeographyId != '')
-			{
-				if ($Mpio != '')
-				{
+			if ($GeographyId != '') {
+				if ($Mpio != '') {
 					$GeographyId = DIGeography::getIdByName($us, $Mpio, $GeographyId);
 				}
 			}
@@ -522,9 +423,7 @@ while (! feof(STDIN) )
 			$EventFix = array(
 							'TORMENTA ELECTRICA' => 'Tormenta eléctrica',
 							'AVALANCHA' => 'Alud',
-							'EROSION' => 'Erosión',
-							'SEQUIA' => 'DROUGHT',
-							'INCENDIO ESTRUCTURAL' => 'FIRE'
+							'EROSION' => 'Erosión'
 						);
 			if (array_key_exists($EventName, $EventFix))
 			{
@@ -554,10 +453,33 @@ while (! feof(STDIN) )
 			$d->set('EffectEducationCenters', valueToDIField($a[19]));
 			// 20 Centros Comunitarios
 			$d->set('EffectFarmingAndForest', valueToDIField($a[21]));
-			$d->set('EffectOtherLosses'     , $a[22]);
+			$d->set('EffectOtherLosses'     , valueToDIField($a[22]));
 			// 23 - 37 ????
 			$d->set('EffectNotes'           , valueToDIField($a[38]));
 
+			/*
+			// 22 Otros
+			$d->set('SectorAgricultural', valueToDIField($a[22]));
+			// 22
+			$d->set('SectorIndustry', valueToDIField($a[23]));
+			// 23
+			$d->set('SectorPower', valueToDIField($a[24]));
+			// 24
+			$d->set('SectorEducation', valueToDIField($a[25]));
+			// 26
+			$d->set('SectorTransport', valueToDIField($a[27]));
+			// 27
+			$d->set('SectorCommunications', valueToDIField($a[28]));
+			// 30
+			$d->set('EffectPeopleEvacuated', valueToDIField($a[31]));
+			*/
+
+			$bExist = $d->exist();
+			if ($bExist < 0) {
+				$i = $d->insert();
+			} else {
+				$i = $d->update();
+			}
 			$DisasterId = $d->get('DisasterId');
 			$e = new DIEEData($us, $DisasterId);
 
@@ -573,54 +495,15 @@ while (! feof(STDIN) )
 			$e->set('EEF013', valueToDIField($a[27]));  // Sacos
 			$e->set('EEF014', valueToDIField($a[28]));  // Otros
 			$e->set('EEF015', valueToDIField($a[29]));  // Giro Directo
+			//$e->set('EEF016', valueToDIField($a[40]));
+			//$e->set('EEF017', valueToDIField($a[41]));
 			$e->set('EEF018', valueToDIField($a[31]));  // Apoyos en Tramite
 			$e->set('EEF019',   strToISO8601($a[32]));  // Fecha Recibo
+			//$e->set('EEF020',   strToISO8601($a[44]));
 			$e->set('EEF021', valueToDIField($a[35]));  // Atendido
 			$e->set('EEF022', valueToDIField($a[37]));  // Analisis y Evaluacion de la Solicitud
-			$e->set('EEF033', valueToDIField($a[39]));  // Cobija (Cant)
-			$e->set('EEF034', valueToDIField($a[40]));  // Cobija (Valor)
-			$e->set('EEF035', valueToDIField($a[41]));  // Cobija Térmica (Cant)
-			$e->set('EEF036', valueToDIField($a[42]));  // Cobija Térmica (Valor)
-			$e->set('EEF037', valueToDIField($a[43]));  // Colchoneta (Cant)
-			$e->set('EEF038', valueToDIField($a[44]));  // Colchoneta (Valor)
-			$e->set('EEF039', valueToDIField($a[45]));  // Catre (Cant)
-			$e->set('EEF040', valueToDIField($a[46]));  // Catre (Valor)
-			$e->set('EEF049', valueToDIField($a[47]));  // Hamacas (Cant)
-			$e->set('EEF050', valueToDIField($a[48]));  // Hamacas (Valor)
-			$e->set('EEF061', valueToDIField($a[49]));  // Peinilla (Cant)
-			$e->set('EEF062', valueToDIField($a[50]));  // Peinilla (Valor)
-			$e->set('EEF063', valueToDIField($a[51]));  // Plastico Negro (Cant)
-			$e->set('EEF064', valueToDIField($a[52]));  // Plastico Negro (Valor)
-			$e->set('EEF065', valueToDIField($a[53]));  // Plato Hondo (Cant)
-			$e->set('EEF066', valueToDIField($a[54]));  // Plato Hondo (Valor)
-			$e->set('EEF067', valueToDIField($a[55]));  // Plato Pando (Cant)
-			$e->set('EEF068', valueToDIField($a[56]));  // Plato Pando (Valor)
-			$e->set('EEF069', valueToDIField($a[57]));  // Pocillo (Cant)
-			$e->set('EEF070', valueToDIField($a[58]));  // Pocillo (Valor)
-			$e->set('EEF071', valueToDIField($a[59]));  // Sábanas (Cant)
-			$e->set('EEF072', valueToDIField($a[60]));  // Sábanas (Valor)
-			$e->set('EEF073', valueToDIField($a[61]));  // Sobrecamas (Cant)
-			$e->set('EEF074', valueToDIField($a[62]));  // Sobrecamas (Valor)
-			$e->set('EEF075', valueToDIField($a[63]));  // Toallas (Cant)
-			$e->set('EEF076', valueToDIField($a[64]));  // Toallas (Valor)
-			$e->set('EEF077', valueToDIField($a[65]));  // Toldillos (Cant)
-			$e->set('EEF078', valueToDIField($a[66]));  // Toldillos (Valor)
-			$e->set('EEF079', valueToDIField($a[67]));  // Kit Aseo (Cant)
-			$e->set('EEF080', valueToDIField($a[68]));  // Kit Aseo (Valor)
-			$e->set('EEF081', valueToDIField($a[69]));  // Kit Cocina (Cant)
-			$e->set('EEF082', valueToDIField($a[70]));  // Kit Cocina (Valor)
-			$e->set('EEF085', valueToDIField($a[71]));  // Menajes (Valor Total)
-			$e->set('EEF086', valueToDIField($a[72])); // Sacos (Cant)
-			$e->set('EEF087', valueToDIField($a[73])); // Sacos (Valor)
-			$e->set('EEF088', valueToDIField($a[74])); // Mercados (Cant)
-			$e->set('EEF089', valueToDIField($a[75])); // Mercados (Valor)
-			$e->set('EEF090', valueToDIField($a[76])); // Cemento (Cant)
-			$e->set('EEF091', valueToDIField($a[77])); // Cemento (Valor)
-			$e->set('EEF092', valueToDIField($a[78])); // Tejas (Cant)
-			$e->set('EEF093', valueToDIField($a[79])); // Tejas (Valor)
-			
-			
-			/*
+			//$e->set('EEF023', valueToDIField($a[47]));
+			//$e->set('EEF024', valueToDIField($a[48]));
 			$e->set('EEF025', valueToDIField($a[39]));  // Cepillo Adulto (Cant)
 			$e->set('EEF026', valueToDIField($a[40]));  // Cepillo Adulto (Valor)
 			$e->set('EEF027', valueToDIField($a[41]));  // Cepillo Niño (Cant)
@@ -629,6 +512,14 @@ while (! feof(STDIN) )
 			$e->set('EEF030', valueToDIField($a[44]));  // Chocolatera (Valor)
 			$e->set('EEF031', valueToDIField($a[45]));  // Cinta Empalmar (Cant)
 			$e->set('EEF032', valueToDIField($a[46]));  // Cinta Empalmar (Valor)
+			$e->set('EEF033', valueToDIField($a[47]));  // Cobija (Cant)
+			$e->set('EEF034', valueToDIField($a[48]));  // Cobija (Valor)
+			$e->set('EEF035', valueToDIField($a[49]));  // Cobija Térmica (Cant)
+			$e->set('EEF036', valueToDIField($a[50]));  // Cobija Térmica (Valor)
+			$e->set('EEF037', valueToDIField($a[51]));  // Colchoneta (Cant)
+			$e->set('EEF038', valueToDIField($a[52]));  // Colchoneta (Valor)
+			$e->set('EEF039', valueToDIField($a[53]));  // Catre (Cant)
+			$e->set('EEF040', valueToDIField($a[54]));  // Catre (Valor)
 			$e->set('EEF041', valueToDIField($a[55]));  // Crema Desod. (Cant)
 			$e->set('EEF042', valueToDIField($a[56]));  // Crema Desoc. (Valor)
 			$e->set('EEF043', valueToDIField($a[57]));  // Cuchara Acero (Cant)
@@ -637,6 +528,8 @@ while (! feof(STDIN) )
 			$e->set('EEF046', valueToDIField($a[60]));  // Cuchara Madera (Valor)
 			$e->set('EEF047', valueToDIField($a[61]));  // Estufas (Cant)
 			$e->set('EEF048', valueToDIField($a[62]));  // Estufas (Valor)
+			$e->set('EEF049', valueToDIField($a[63]));  // Hamacas (Cant)
+			$e->set('EEF050', valueToDIField($a[64]));  // Hamacas (Valor)
 			$e->set('EEF051', valueToDIField($a[65]));  // Jabon Baño (Cant)
 			$e->set('EEF052', valueToDIField($a[66]));  // Jabon Baño (Valor)
 			$e->set('EEF053', valueToDIField($a[67]));  // Jabon Barra (Cant)
@@ -647,43 +540,49 @@ while (! feof(STDIN) )
 			$e->set('EEF058', valueToDIField($a[72]));  // Ollas (Valor)
 			$e->set('EEF059', valueToDIField($a[73]));  // Papel Higiénico (Cant)
 			$e->set('EEF060', valueToDIField($a[74]));  // Papel Higiénico (Valor)
+			$e->set('EEF061', valueToDIField($a[75]));  // Peinilla (Cant)
+			$e->set('EEF062', valueToDIField($a[76]));  // Peinilla (Valor)
+			$e->set('EEF063', valueToDIField($a[77]));  // Plastico Negro (Cant)
+			$e->set('EEF064', valueToDIField($a[78]));  // Plastico Negro (Valor)
+			$e->set('EEF065', valueToDIField($a[79]));  // Plato Hondo (Cant)
+			$e->set('EEF066', valueToDIField($a[80]));  // Plato Hondo (Valor)
+			$e->set('EEF067', valueToDIField($a[81]));  // Plato Pando (Cant)
+			$e->set('EEF068', valueToDIField($a[82]));  // Plato Pando (Valor)
+			$e->set('EEF069', valueToDIField($a[83]));  // Pocillo (Cant)
+			$e->set('EEF070', valueToDIField($a[84]));  // Pocillo (Valor)
+			$e->set('EEF071', valueToDIField($a[85]));  // Sábanas (Cant)
+			$e->set('EEF072', valueToDIField($a[86]));  // Sábanas (Valor)
+			$e->set('EEF073', valueToDIField($a[87]));  // Sobrecamas (Cant)
+			$e->set('EEF074', valueToDIField($a[88]));  // Sobrecamas (Valor)
+			$e->set('EEF075', valueToDIField($a[89]));  // Toallas (Cant)
+			$e->set('EEF076', valueToDIField($a[90]));  // Toallas (Valor)
+			$e->set('EEF077', valueToDIField($a[91]));  // Toldillos (Cant)
+			$e->set('EEF078', valueToDIField($a[92]));  // Toldillos (Valor)
+			$e->set('EEF079', valueToDIField($a[93]));  // Kit Aseo (Cant)
+			$e->set('EEF080', valueToDIField($a[94]));  // Kit Aseo (Valor)
+			$e->set('EEF081', valueToDIField($a[95]));  // Kit Cocina (Cant)
+			$e->set('EEF082', valueToDIField($a[96]));  // Kit Cocina (Valor)
 			$e->set('EEF083', valueToDIField($a[97]));  // Kit Alcoba (Cant)
 			$e->set('EEF084', valueToDIField($a[98]));  // Kit Alcoba (Valor)
-			*/
-		
-			$i = 1;
-			$j = 1;
-
-			// Validate Effects and Save as DRAFT if needed
-			$i = $d->validateEffects(-61,0);
-			if ($i < 0) 
-			{
-				$d->set('RecordStatus', 'DRAFT');
-			}
-			$Cmd = '';
-			$bExist = $d->exist();
+			$e->set('EEF085', valueToDIField($a[99]));  // Menajes (Valor Total)
+			$e->set('EEF086', valueToDIField($a[100])); // Sacos (Cant)
+			$e->set('EEF087', valueToDIField($a[101])); // Sacos (Valor)
+			$e->set('EEF088', valueToDIField($a[102])); // Mercados (Cant)
+			$e->set('EEF089', valueToDIField($a[103])); // Mercados (Valor)
+			$e->set('EEF090', valueToDIField($a[104])); // Cemento (Cant)
+			$e->set('EEF091', valueToDIField($a[105])); // Cemento (Valor)
+			$e->set('EEF092', valueToDIField($a[106])); // Tejas (Cant)
+			$e->set('EEF093', valueToDIField($a[107])); // Tejas (Valor)
 			if ($bExist < 0) {
-				$i = $d->insert(1,0);
-				if ($i > 0) 
-				{
-					$j = $e->insert(1,0);
-				}
-				$Cmd = 'INSERT';
+				$j = $e->insert();
 			} else {
-				$i = $d->update(1,0);
-				if ($i > 0)
-				{
-					$j = $e->update(1,0);
-				}				
-				$Cmd = 'UPDATE';
+				$j = $e->update();
 			}
-			if ( ($i < 0) || ($j < 0) )
-			{
-				print $line . ' ' . $DisasterSerial . ' ' . $i . ' ' . $j . "\n";
+			if ( ($i < 0) || ($j < 0) ) {
+				//print $line . ' ' . $DisasterSerial . ' ' . $i . ' ' . $j . "\n";
 			}			
-			if (($line > 0) && (($line % 100) == 0) )
-			{
-				print $line . "\n";
+			if (($line > 0) && (($line % 100) == 0) ) {
+				//print $line . "\n";
 			}
 		} //if
 	} //if
@@ -694,46 +593,57 @@ $us->close();
 $us->logout();
 exit();
 
-function valueToDIField($prmValue)
-{
+function valueToDIField($prmValue) {
 	$Value = 0;
 	$prmValue = preg_replace('/\$/', '', $prmValue);
 	$prmValue = preg_replace('/\./', '', $prmValue);
 	$prmValue = preg_replace('/,/', '.', $prmValue);
-	if (is_numeric($prmValue))
-	{
+	if (is_numeric($prmValue)) {
 		$Value = $prmValue;
-	}
-	else
-	{
-		if ($prmValue == 'hubo')
-		{
+	} else {
+		if ($prmValue == 'hubo') {
 			$Value = -1;
 		}
-		if ($prmValue == 'no hubo')
-		{
+		if ($prmValue == 'no hubo') {
 			$Value = 0;
 		}
 	}
 	return $Value;
 }
 
-function strToISO8601($prmDate)
-{
+function strToISO8601($prmDate) {
 	$v = '';
-	if (strlen($prmDate) > 0)
-	{
+	if (strlen($prmDate) > 0) {
 		$year  = substr($prmDate,0,4);
 		$month = substr($prmDate,5,2);
 		$day   = substr($prmDate,8,2);
 		$v = sprintf('%4d-%2d-%2d', $year, $month, $day);
 		$v = str_replace(' ', '0', $v);
 	}
+	/*
+	if (strlen($prmDate) > 0) {
+		$month = substr($prmDate,0,2);
+		$day   = substr($prmDate,3,2);
+		$year  = substr($prmDate,6,4);
+		$v = sprintf('%4d-%2d-%2d', $year, $month, $day);
+		$v = str_replace(' ', '0', $v);
+	}
+	*/
+	/*
+	$a = array();
+	preg_match('/([0-9]+) de (.*) de ([0-9]+)/', $prmDate, $a);
+	if ( (count($a) > 2) && (is_numeric($a[3])) ) {
+		$year = $a[3] + 2000;
+		$month = getMonth($a[2]);
+		$day = $a[1];
+		$v = sprintf('%4d-%2d-%2d', $year, $month, $day);
+		$v = str_replace(' ', '0', $v);
+	}
+	*/
 	return $v;
 }
 
-function getMonth($prmMonthName)
-{
+function getMonth($prmMonthName) {
 	$m = array('ene' =>  1, 'feb' =>  2, 'mar' =>  3, 'apr' =>  4, 'may' =>  5, 'jun' =>  6, 
 	           'jul' =>  7, 'aug' =>  8, 'sep' =>  9, 'oct' => 10, 'nov' => 11, 'dec' => 12);
 	$v = 0;
@@ -744,8 +654,7 @@ function getMonth($prmMonthName)
 	return $v;
 }
 
-function createEEField($prmSession, $EEFieldLabel, $EEFieldType, $EEFieldSize='')
-{
+function createEEField($prmSession, $EEFieldLabel, $EEFieldType, $EEFieldSize='') {
 	$f = new DIEEField($prmSession);
 	$f->set('EEGroupId', 'DGR');
 	$f->set('EEFieldLabel', $EEFieldLabel);
@@ -757,8 +666,7 @@ function createEEField($prmSession, $EEFieldLabel, $EEFieldType, $EEFieldSize=''
 	return $i;
 }
 
-function createEEFields($us)
-{
+function createEEFields($us) {
 	$i = createEEField($us, 'Familias Afectadas'          , 'INTEGER' );      //  4
 	$i = createEEField($us, 'Puentes Vehiculares'         , 'INTEGER' );      //  5
 	$i = createEEField($us, 'Puentes Peatonales'          , 'INTEGER' );      //  6

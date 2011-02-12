@@ -175,19 +175,24 @@ class DIRecord extends DIObject {
 		return $iReturn;
 	} // function load
 	
-	public function insert($withValidate = true, $bStrict = true) {
+	public function insert($withValidate=1, $bStrict=1)
+	{
 		$iReturn = ERR_NO_ERROR;
 		$bValidate = $withValidate;
-		if ($withValidate) {
+		if ($withValidate > 0)
+		{
 			$iReturn = $this->validateCreate($bStrict);
-			if ($iReturn > 0 ) { 
+			if ($iReturn > 0 )
+			{ 
 				$iReturn = $this->validateUpdate($bStrict);
-				$bValidate = false;
+				$bValidate = 0;
 			}
 		}
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			$iReturn = $this->create($bValidate, $bStrict);
-			if ($iReturn > 0) {
+			if ($iReturn > 0)
+			{
 				$iReturn = $this->update($bValidate, $bStrict);
 			}
 		}
@@ -213,18 +218,25 @@ class DIRecord extends DIObject {
 		return $iReturn;
 	} // function
 
-	public function create($withValidate = true, $bStrict = true) {
+	public function create($withValidate = 1, $bStrict = 1)
+	{
 		$iReturn = ERR_NO_ERROR;
-		if ($withValidate) {
+		if ($withValidate > 0)
+		{
 			$iReturn = $this->validateCreate($bStrict);
 		}
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			$sQuery = $this->getInsertQuery();
-			try {
-				if ($result = $this->conn->query($sQuery)) {
+			try
+			{
+				if ($result = $this->conn->query($sQuery))
+				{
 					$iReturn = ERR_NO_ERROR;
 				}
-			} catch (PDOException $e) {
+			}
+			catch (PDOException $e)
+			{
 				showErrorMsg('create : ' . $e->getMessage());
 				$iReturn = ERR_TABLE_LOCKED;
 			}
@@ -232,23 +244,31 @@ class DIRecord extends DIObject {
 		return $iReturn;
 	} // function
 
-	public function update($withValidate = true, $bStrict = true) {
+	public function update($withValidate=1, $bStrict=1)
+	{
 		$iReturn = ERR_NO_ERROR;
-		if ($withValidate) {
+		if ($withValidate > 0)
+		{
 			$iReturn = $this->validateUpdate($bStrict);
 		}
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			$sQuery = $this->getUpdateQuery();
-			try {
-				if (! $result = $this->conn->query($sQuery)) {
+			try
+			{
+				if (! $result = $this->conn->query($sQuery))
+				{
 					$iReturn = ERR_UNKNOWN_ERROR;
 				}
-			} catch (PDOException $e) {
+			}
+			catch (PDOException $e)
+			{
 				showErrorMsg('update : ' . $e->getCode() . ' '. $e->getMessage());
 				$iReturn = ERR_TABLE_LOCKED;
 			}
 		}
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			$this->oOldField = $this->oField;
 		}
 		return $iReturn;
@@ -274,25 +294,38 @@ class DIRecord extends DIObject {
 		return $sQuery;
 	}
 
-	public function validateCreate($bStrict) {
+	public function validateCreate($bStrict)
+	{
 		$iReturn = ERR_NO_ERROR;
-		if ($this->status->hasError()) {
+		if ($this->status->hasError())
+		{
 			$iReturn = reset(array_keys($this->status->error));
-		} elseif ($this->status->hasWarning()) {
+		}
+		elseif ($this->status->hasWarning())
+		{
 			$iReturn = ERR_NO_ERROR;
-			if ($bStrict) {
+			if ($bStrict > 0)
+			{
 				$iReturn = reset(array_keys($this->status->warning));
 			}
 		}
 		return $iReturn;
 	}	
 
-	public function validateUpdate($bStrict) {
+	public function validateUpdate($bStrict)
+	{
 		$iReturn = ERR_NO_ERROR;
-		if ($this->status->hasError()) {
+		if ($this->status->hasError())
+		{
 			$iReturn = reset(array_keys($this->status->error));
-		} elseif ($this->status->hasWarning()) {
+		}
+		elseif ($this->status->hasWarning())
+		{
 			$iReturn = ERR_NO_ERROR;
+			if ($bStrict > 0)
+			{
+				$iReturn = reset(array_keys($this->status->warning));
+			}
 		}
 		return $iReturn;
 	}
