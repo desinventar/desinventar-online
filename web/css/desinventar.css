@@ -228,3 +228,11 @@ a:hover	{	color:#00008b; }
 	left: 45px;
 	top: 2px;
 }
+.databaseTitle {
+	font:bold 18px Trebuchet MS, sans-serif; 
+	color:#202020; letter-spacing:-1px; 
+}
+.databaseLink {
+	text-decoration:none; 
+	padding:0px 20px; 
+}

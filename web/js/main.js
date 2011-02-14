@@ -63,7 +63,7 @@ function onReadyMain()
 	else
 	{
 		// Show database list
-		jQuery("#divDatabaseList").show();
+		updateDatabaseListByUser();
 	}
 	
 	// Tabs for Database Configuration

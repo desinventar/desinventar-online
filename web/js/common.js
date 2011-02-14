@@ -66,3 +66,100 @@ function doGetRegionInfo(RegionId)
 		'json'
 	);
 }
+
+function updateDatabaseList(CountryIsoCode,searchByCountry) {
+	jQuery(".contentBlock").hide();
+	// Hide everything at start...
+	jQuery('.databaseTitle').hide();
+	jQuery('.databaseList').hide();
+	jQuery("#divRegionList").hide();
+	var desinventarURL = jQuery('#desinventarURL').val();
+	jQuery.get(desinventarURL, 
+		{cmd: 'getCountryName', CountryIso : CountryIsoCode },
+		function(data) { 
+			jQuery("#divRegionList #title_COUNTRY").html('<h3>' + data + '</h3>');
+			jQuery("#divRegionList").show();
+		}
+	);
+	jQuery.post(desinventarURL,
+		{cmd: 'cmdSearchDB', 
+		 searchDBQuery: CountryIsoCode, 
+		 searchDBCountry : 1
+		},
+		function(data) {
+			if (data.Status == 'OK') {
+				var iCount = 0;
+				var RegionId = '';
+
+				// Hide everything at start...
+				jQuery('.databaseTitle').hide();
+				jQuery('.databaseList').hide();
+
+				var jList = jQuery("#divRegionList #list_COUNTRY");
+				var myRegionId = '';
+				jList.empty();
+				jQuery.each(data.RegionList, function(RegionId, value) {
+					iCount++;
+					jList.append('<a href="#" id="' + RegionId + '" class="databaseLink">' + value.RegionLabel + '</a><br />');
+					myRegionId = RegionId;
+				}); // each
+				if (iCount == 1) {	
+					// If only one region is in list, show directly info instead of list
+					displayRegionInfo(myRegionId);
+				} else {
+					jQuery('#divRegionList #title_COUNTRY').show();
+					jQuery('#divRegionList #list_COUNTRY').show();
+					jQuery('.databaseLink').addClass("alt").unbind('click').click(function() {
+						RegionId = jQuery(this).attr('id');
+						displayRegionInfo(RegionId);
+						return false;
+					}); //bind
+				}
+			}
+		}, //function
+		'json'
+	);
+};
+
+function updateDatabaseListByUser()
+{
+	jQuery(".contentBlock").hide();
+	jQuery("#divRegionList").show();
+	var desinventarURL = jQuery('#desinventarURL').val();
+	// Hide everything at start...
+	jQuery('.databaseTitle').hide();
+	jQuery('.databaseList').hide();
+				
+	jQuery.post(desinventarURL,
+		{ cmd: 'cmdSearchDB', 
+		  searchDBQuery: '', 
+		  searchDBCountry : 0
+		},
+		function(data) {
+			if (data.Status == 'OK') {
+				RegionByRole = new Array(5);
+				RegionByRole['ADMINREGION'] = new Array();
+				RegionByRole['SUPERVISOR'] = new Array();
+				RegionByRole['USER'] = new Array();
+				RegionByRole['OBSERVER'] = new Array();
+				RegionByRole['NONE'] = new Array();
+
+				$RoleList = new Array(5);
+				var iCount = 0;
+				jQuery('.databaseList').empty();
+				jQuery.each(data.RegionList, function(RegionId, value) {
+					jQuery('#divRegionList #title_' + value.Role).show();
+					jQuery('#divRegionList #list_' + value.Role).show().append('<a href="#" id="' + RegionId + '" class="databaseLink">' + value.RegionLabel + '</a><br />');
+					iCount++;
+				});
+				
+				jQuery('.databaseLink').addClass("alt").unbind('click').click(function() {
+					RegionId = jQuery(this).attr('id');
+					displayRegionInfo(RegionId);
+					return false;
+				}); //bind
+			} //if
+		},
+		'json' //function
+	);
+}
