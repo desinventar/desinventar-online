@@ -113,8 +113,10 @@
 				break;
 				// databases menu
 				case 'mnuDatabaseFind':
-					updateList('dbl', 'index.php', 'cmd=listdb');
-					dblw.show();
+					// Show database list
+					updateDatabaseListByUser();
+					//updateList('dbl', 'index.php', 'cmd=listdb');
+					//dblw.show();
 				break;
 				case 'mnuUserAdmin':
 					//updateList('dbl', 'user.php', 'cmd=adminusr', 'onReadyUserAdmin');

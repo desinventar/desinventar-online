@@ -227,11 +227,6 @@ switch ($cmd)
 		$t->assign('ctl_noregion', true);
 		$t->display('index.tpl');
 	break;
-	case 'listdb':
-		// Direct access returns a list of public regions on this server
-		$t->assign('regionlist', $us->listDB());
-		$t->display('database_list.tpl');
-	break;
 	case 'cmdSearchDB':
 	case 'searchdb':
 		$searchDBQuery   = getParameter('searchDBQuery', getParameter('searchdbquery', ''));

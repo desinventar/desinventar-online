@@ -497,3 +497,8 @@
 "di8_DBEdit","msgDBEDitLangIsoCode","Idioma","Language","Limguagem","Langue"
 "di8_DBEdit","msgDBEditCountryIso","País","Country","País","Pays"
 "querydef","msgOperator","Operador","Operator","Operador","Opérateur"
+"region","txtRoleADMINREGION","Administrador","Manager","Administrador","Administrateur"
+"region","txtRoleSUPERVISOR","Supervisor","Supervisor","Supervisor","Superviseur"
+"region","txtRoleUSER","Alimentador","Feeder","Alimentador","Alimentation"
+"region","txtRoleOBSERVER","Observador","Observer","Observador","Observateur"
+"region","txtRoleNONE","Bases Públicas","Public Databases","Bases de datos públicas","Bases de données publiques"
