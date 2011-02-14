@@ -114,9 +114,9 @@
 				// databases menu
 				case 'mnuDatabaseFind':
 					// Show database list
+					hideQueryDesign();
+					jQuery('.contentBlock').hide();
 					updateDatabaseListByUser();
-					//updateList('dbl', 'index.php', 'cmd=listdb');
-					//dblw.show();
 				break;
 				case 'mnuUserAdmin':
 					//updateList('dbl', 'user.php', 'cmd=adminusr', 'onReadyUserAdmin');

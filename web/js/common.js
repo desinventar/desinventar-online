@@ -155,7 +155,14 @@ function updateDatabaseListByUser()
 				
 				jQuery('.databaseLink').addClass("alt").unbind('click').click(function() {
 					RegionId = jQuery(this).attr('id');
-					displayRegionInfo(RegionId);
+					if (jQuery('#desinventarPortalType').val() != '')
+					{
+						displayRegionInfo(RegionId);
+					}
+					else
+					{
+						window.location = 'index.php?r=' + RegionId;
+					}
 					return false;
 				}); //bind
 			} //if
