@@ -105,7 +105,6 @@ switch ($cmd)
 			{
 				$info['EventActive'] = 'off';
 			}
-			fb($info);
 			$o = new DIEvent($us, $info['EventId']);
 			$o->setFromArray($info);
 			$i = $o->update();

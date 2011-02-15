@@ -21,8 +21,9 @@
 	{
 		jQuery('#' + div).load(url, pars, function(response, status, xhr) {
 			onReadyDatabaseAdmin();
-			// Hide first Column (EventId)
-			jQuery('#tblEventListUser td:nth-child(1)').hide();
+			// Hide first two columns (EventId,EventPreDefined)
+			jQuery('td:nth-child(1)','#tblEventListUser,#tblEventListPredef').hide();
+			jQuery('td:nth-child(2)','#tblEventListUser,#tblEventListPredef').hide();
 		});
 	}
 
