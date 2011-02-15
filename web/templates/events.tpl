@@ -74,8 +74,7 @@
 		</table>
 	</div>
 	<br />
-	<input id="add" type="button" value="{-#baddelem#-}" class="line" 
-		onclick="setEveCau('','','','1','0','event'); uploadMsg(''); $('cmd').value='insert';" />
+	<input id="btnEventEditAdd" type="button" value="{-#baddelem#-}" class="line" />
 	<span id="eventstatusmsg" class="dlgmsg"></span>
 	<br /><br />
 	<div id="eventaddsect" style="display:none">
@@ -92,15 +91,14 @@
 			<br /><br />
 			{-$dic.DBEveActive[0]-}
 			<input id="Active" name="Info[EventActive]" type="checkbox" {-$ro-} 
-				onFocus="showtip('{-$dic.DBEveActive[2]-}');" tabindex="3" 
-				onClick="if (!this.checked) updateList('eventstatusmsg', 'events.php', 'r={-$reg-}&cmd=chkstatus&EventId='+ $('aEventId').value);" />
+				onFocus="showtip('{-$dic.DBEveActive[2]-}');" tabindex="3" />
 			<br /><br />
 			<input id="PreDefined" name="Info[EventPreDefined]" type="hidden" />
 			<p align="center" style="width:500px;">
 				<input id="RegionId" name="RegionId" type="hidden" value="{-$reg-}" />
 				<input id="cmd" name="cmd" type="hidden" />
 				<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="4" />
-				<input type="reset" value="{-#bcancel#-}" onClick="$('eventaddsect').style.display='none'; uploadMsg('');" {-$ro-} class="line" />
+				<input id="btnCancel" type="reset" value="{-#bcancel#-}" {-$ro-} class="line" />
 			</p>
 		</form>
 	</div>

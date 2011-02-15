@@ -80,13 +80,22 @@ $cmd = getParameter('cmd','');
 $dat = form2event($_POST);
 switch ($cmd)
 {
-	case 'insert':
-		$o = new DIEvent($us);
-		$o->setFromArray($dat);
-		$o->set('EventId', uuid());
-		$o->set('EventPredefined', 0);
-		$i = $o->insert();
-		showResult($i, $t);
+	case 'cmdEventInsert':
+		fb($_POST);
+		if ($us->UserRoleValue >= ROLE_ADMINREGION)
+		{
+			$info = $_POST['Info'];
+			if (! isset($info['EventActive']))
+			{
+				$info['EventActive'] = 'off';
+			}
+			$o = new DIEvent($us);
+			$o->setFromArray($info);
+			$o->set('EventId', uuid());
+			$o->set('EventPredefined', 0);
+			$i = $o->insert();
+			showResult($i, $t);
+		}
 	break;
 	case 'cmdEventUpdate':
 		if ($us->UserRoleValue >= ROLE_ADMINREGION)
@@ -96,6 +105,7 @@ switch ($cmd)
 			{
 				$info['EventActive'] = 'off';
 			}
+			fb($info);
 			$o = new DIEvent($us, $info['EventId']);
 			$o->setFromArray($info);
 			$i = $o->update();
