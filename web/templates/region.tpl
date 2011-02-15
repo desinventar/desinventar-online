@@ -1,5 +1,4 @@
 {-config_load file="$lg.conf" section="di8_region"-}
-{-* ADMINREG: Interface to Edit Portal Admin *-}
 {-if $ctl_adminreg-}
 	<h2>{-#ttname#-}</h2>
 	<div class="dwin" style="width:500px; height:150px;">
@@ -36,8 +35,8 @@
 			<td id="CountryIso">{-$item.CountryIso-}</td>
 			<td id="RegionLabel">{-$item.RegionLabel-}</td>
 			<td id="RegionUserAdmin">{-$item.UserId_AdminRegion-}</td>
-			<td id="RegionActive"><input type="checkbox" {-if ($item.RegionActive == 1) -} checked {-/if-} disabled /></td>
-			<td id="RegionPublic"><input type="checkbox" {-if ($item.RegionPublic == 1) -} checked {-/if-} disabled /></td>
+			<td id="RegionActive"><input type="checkbox" {-if ($item.RegionActive == 1)-} checked {-/if-} disabled /></td>
+			<td id="RegionPublic"><input type="checkbox" {-if ($item.RegionPublic == 1)-} checked {-/if-} disabled /></td>
 			<td id="RegionId">{-$key-}</td>
 			<td id="LangIsoCode">{-$item.LangIsoCode-}</td>
 		</tr>
@@ -127,22 +126,22 @@
 
 {-*** INSERT OR UPDATE MESSAGES - STATUS SPAN ***-}
 {-if $ctl_admregmess-}
- {-if $ctl_successfromzip-}
-	<script type="text/javascript" language="javascript">
-	parent.updateList('lst_regionpa', 'region.php', 'cmd=list');
-	</script>
- {-/if-}
- {-if $cfunct == 'insert'-}
- 	<span style="color:#42929d; font-size:8pt;">{-#tinsert#-}</span>
- {-elseif $cfunct == 'update'-}
-	<span style="color:#42929d; font-size:8pt;">{-#tupdate#-}</span>
- {-else-}
-  {-#terrinsupd#-}
- {-/if-}
- {-if $csetrole-}
- 	{-#tsetrole#-}
- {-else-}
-  {-#terrsetrole#-} [{-$errsetrole-}]
- {-/if-}
- {-$regid-}
+	{-if $ctl_successfromzip-}
+		<script type="text/javascript" language="javascript">
+			parent.updateList('lst_regionpa', 'region.php', 'cmd=list');
+		</script>
+	{-/if-}
+	{-if $cfunct == 'insert'-}
+		<span style="color:#42929d; font-size:8pt;">{-#tinsert#-}</span>
+	{-elseif $cfunct == 'update'-}
+		<span style="color:#42929d; font-size:8pt;">{-#tupdate#-}</span>
+	{-else-}
+		{-#terrinsupd#-}
+	{-/if-}
+	{-if $csetrole-}
+		{-#tsetrole#-}
+	{-else-}
+		{-#terrsetrole#-} [{-$errsetrole-}]
+	{-/if-}
+	{-$regid-}
 {-/if-}
