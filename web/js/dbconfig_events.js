@@ -15,9 +15,6 @@ function onReadyDBConfigEvents()
 	});
 	
 	jQuery('#tblEventListUser').delegate('tr','click', function(event) {
-		//onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
-		//onClick="setEveCau('{-$key-}','{-$item[0]-}','{-$item[1]-}','{-$item[2]-}','0','event'); 
-		//	uploadMsg(''); $('cmd').value='update';">
 		jQuery('#eventaddsect').show();
 		jQuery('#frmEventEdit #Id').val(jQuery('#Id',this).text());
 		jQuery('#frmEventEdit #Name').val(jQuery('#Name',this).text());
@@ -26,6 +23,24 @@ function onReadyDBConfigEvents()
 		jQuery('#frmEventEdit #PreDefined').val(0);
 		jQuery('#frmEventEdit #RegionId').val(jQuery('#desinventarRegionId').val());
 		jQuery('#frmEventEdit #cmd').val('cmdEventUpdate');
+		jQuery('#btnEventEditAdd').hide();
+	});
+
+	jQuery('#btnEventEditAdd').unbind('click').click(function() {
+		jQuery('#eventaddsect').show();
+		jQuery(this).hide();
+		jQuery('#frmEventEdit #Id').val('');
+		jQuery('#frmEventEdit #Name').val('');
+		jQuery('#frmEventEdit #Desc').val('');
+		jQuery('#frmEventEdit #Active').attr('checked', true);
+		jQuery('#frmEventEdit #PreDefined').val(0);
+		jQuery('#frmEventEdit #RegionId').val(jQuery('#desinventarRegionId').val());
+		jQuery('#frmEventEdit #cmd').val('cmdEventInsert');
+	});
+
+	jQuery('#frmEventEdit #btnCancel').unbind('click').click(function() {
+		jQuery('#eventaddsect').hide();
+		jQuery('#btnEventEditAdd').show();
 	});
 
 	jQuery('#frmEventEdit').unbind('submit').submit(function()
@@ -52,6 +67,7 @@ function onReadyDBConfigEvents()
 					}
 					updateList('qevelst', 'index.php', 'r='+ reg +'&cmd=evelst&t=' + new Date().getTime());
 					jQuery('#eventaddsect').hide();
+					jQuery('#btnEventEditAdd').show();
 				}
 			);
 		}
