@@ -3,10 +3,9 @@
  (c) 1998-2011 Corporacion OSSO
 */
 
-function onReadyDatabaseConfig() {
+function onReadyDatabaseConfig()
+{
 	jQuery('#frmCauseEdit').unbind('submit').submit(function() {
-		//onSubmit="javascript: var a=new Array('aCauseName','aCauseDesc'); return(checkForm('frmCauseEdit',a, '{-#errmsgfrm#-}'));"		return false;
-		//action="javascript:var s=$('frmCauseEdit').serialize(); sendData('{-$reg-}', 'causes.php', s, $('aCausePreDefined').value);"
 		var a = new Array('aCauseName','aCauseDesc');
 		var validForm = checkForm('frmCauseEdit', a, '');
 		if (validForm == true)
