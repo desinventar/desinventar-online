@@ -5,22 +5,23 @@
 
 function onReadyDBConfigEvents()
 {
-	// Hide first Column (EventId)
-	jQuery('#tblEventListUser td:nth-child(1)').hide();
+	// Hide first two columns (EventId,EventPreDefined)
+	jQuery('td:nth-child(1)','#tblEventListUser,#tblEventListPredef').hide();
+	jQuery('td:nth-child(2)','#tblEventListUser,#tblEventListPredef').hide();
 	
-	jQuery('#tblEventListUser').delegate('tr','mouseover', function(event) {
+	jQuery('#tblEventListUser,#tblEventListPredef').delegate('tr','mouseover', function(event) {
 		jQuery(this).addClass('highlight');
 	}).delegate('tr', 'mouseout', function(event) {
 		jQuery(this).removeClass('highlight');
 	});
-	
-	jQuery('#tblEventListUser').delegate('tr','click', function(event) {
+
+	jQuery('#tblEventListUser,#tblEventListPredef').delegate('tr','click', function(event) {
 		jQuery('#eventaddsect').show();
 		jQuery('#frmEventEdit #Id').val(jQuery('#Id',this).text());
 		jQuery('#frmEventEdit #Name').val(jQuery('#Name',this).text());
 		jQuery('#frmEventEdit #Desc').val(jQuery('#Desc',this).text());
 		jQuery('#frmEventEdit #Active').attr('checked', jQuery('#Active',this).is(':checked'));
-		jQuery('#frmEventEdit #PreDefined').val(0);
+		jQuery('#frmEventEdit #PreDefined').val(jQuery('#PreDefined',this).text());
 		jQuery('#frmEventEdit #RegionId').val(jQuery('#desinventarRegionId').val());
 		jQuery('#frmEventEdit #cmd').val('cmdEventUpdate');
 		jQuery('#btnEventEditAdd').hide();

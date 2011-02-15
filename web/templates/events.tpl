@@ -14,7 +14,11 @@
 		<table class="grid" id="tblEventListUser">
 			<thead>
 				<tr>
-					<td width="0">
+					<td>
+						Id
+					</td>
+					<td>
+						PreDef
 					</td>
 					<td class="header" onMouseOver="showtip('{-$dic.DBEvePersonName[2]-}');">
 						<b>{-$dic.DBEvePersonName[0]-}</b>
@@ -33,9 +37,10 @@
 					{-foreach name=eve key=key item=item from=$eveuserl-}
 						<tr class="{-if ($smarty.foreach.eve.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}" >
 							<td id="Id">{-$key-}</td>
-			   				<td id="Name">{-$item[0]-}</td>
-   							<td id="Desc">{-$item[1]|truncate:150-}</td>
-			   				<td><input id="Active" type="checkbox" {-if ($item[2]==1)-} checked {-/if-} disabled /></td>
+							<td id="PreDefined">0</td>
+							<td id="Name">{-$item[0]-}</td>
+							<td id="Desc">{-$item[1]|truncate:150-}</td>
+							<td><input id="Active" type="checkbox" {-if ($item[2]==1)-} checked {-/if-} disabled /></td>
 						</tr>
 					{-/foreach-}
 				{-/if-}
@@ -45,27 +50,36 @@
 	</div>
 	<br />
 	<div class="dwin" style="width:600px; height:100px;">
-		<table width="100%" class="grid">
+		<table id="tblEventListPredef" width="100%" class="grid">
 			<thead>
 				<tr>
-				<td class="header" onMouseOver="showtip('{-$dic.DBEvePredefName[2]-}');">
-					<b>{-$dic.DBEvePredefName[0]-}</b></td>
-				<td class="header" onMouseOver="showtip('{-$dic.DBEvePredefDef[2]-}');">
-					<b>{-$dic.DBEvePredefDef[0]-}</b></td>
-				<td class="header" onMouseOver="showtip('{-$dic.DBEveActive[2]-}');">
-					<b>{-$dic.DBEveActive[0]-}</b></td>
+					<td>
+						Id
+					</td>
+					<td>
+						Predef
+					</td>
+					<td class="header" onMouseOver="showtip('{-$dic.DBEvePredefName[2]-}');">
+						<b>{-$dic.DBEvePredefName[0]-}</b>
+					</td>
+					<td class="header" onMouseOver="showtip('{-$dic.DBEvePredefDef[2]-}');">
+						<b>{-$dic.DBEvePredefDef[0]-}</b>
+					</td>
+					<td class="header" onMouseOver="showtip('{-$dic.DBEveActive[2]-}');">
+						<b>{-$dic.DBEveActive[0]-}</b>
+					</td>
 				</tr>
 			</thead>
 			<tbody id="lst_evepred">
 {-/if-}
 				{-if $ctl_evepred-}
 				   {-foreach name=eve key=key item=item from=$evepredl-}
-						<tr class="{-if ($smarty.foreach.eve.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}"
-							onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
-							onClick="setEveCau('{-$key-}','{-$item[0]-}','{-$item[1]-}','{-$item[2]-}','1','event'); uploadMsg(''); $('cmd').value='update';">
-   							<td>{-$item[0]-}</td>
-   							<td>{-$item[1]|truncate:150-}</td>
-   							<td><input type="checkbox" {-if ($item[2]==1)-} checked {-/if-} disabled /></td>
+						<tr class="{-if ($smarty.foreach.eve.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}">
+							<td id="Id">{-$key-}</td>
+							<td id="PreDefined">1</td>
+   							<td id="Name">{-$item[0]-}</td>
+   							<td id="Desc">{-$item[1]|truncate:150-}</td>
+   							<td><input id="Active" type="checkbox" {-if ($item[2]==1)-} checked {-/if-} disabled /></td>
 						</tr>
 				   {-/foreach-}
 			  {-/if-}
