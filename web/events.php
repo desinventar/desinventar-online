@@ -88,11 +88,19 @@ switch ($cmd)
 		$i = $o->insert();
 		showResult($i, $t);
 	break;
-	case 'update':
-		$o = new DIEvent($us, $dat['EventId']);
-		$o->setFromArray($dat);
-		$i = $o->update();
-		showResult($i, $t);
+	case 'cmdEventUpdate':
+		if ($us->UserRoleValue >= ROLE_ADMINREGION)
+		{
+			$info = $_POST['Info'];
+			if (! isset($info['EventActive']))
+			{
+				$info['EventActive'] = 'off';
+			}
+			$o = new DIEvent($us, $info['EventId']);
+			$o->setFromArray($info);
+			$i = $o->update();
+			showResult($i, $t);
+		}
 	break;
 	case 'list':
 		$prmType = getParameter('predef');
