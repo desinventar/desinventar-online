@@ -400,19 +400,19 @@ function showtip(tip, clr)
 }
 
 // Display Geography in form and search; k=geoid, l=0, desc='', opc=''
-function setgeo(k, l, desc, opc)
+function setgeo(k, prmGeoLevelId, desc, opc)
 {
 	var RegionId = jQuery('#desinventarRegionId').val();
 	if (opc == "search")
 	{
 		var fld = '_GeographyId';
-		var lev = '_lev'+ l;
+		var lev = '_lev' + prmGeoLevelId;
 		var op = '&opc='+ opc;
 	}
 	else
 	{
 		var fld = 'GeographyId';
-		var lev = 'lev'+ l;
+		var lev = 'lev'+ prmGeoLevelId;
 		var op = '';
 	}
 	if (k.length >= 5)
