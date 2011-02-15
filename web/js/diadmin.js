@@ -21,7 +21,7 @@
 	{
 		jQuery('#' + div).load(url, pars, function(response, status, xhr) {
 			onReadyDatabaseAdmin();
-			// Hide first two columns (EventId,EventPreDefined)
+			// Hide first two columns (EventId,EventPredefined)
 			jQuery('td:nth-child(1)','#tblEventListUser,#tblEventListPredef').hide();
 			jQuery('td:nth-child(2)','#tblEventListUser,#tblEventListPredef').hide();
 		});
@@ -127,7 +127,7 @@
 			{
 				$('aEventDesc').disabled = false;
 			}
-			$('aEventPreDefined').value = is_pred;
+			$('aEventPredefined').value = is_pred;
 			$('aEventId').value = id;
 		}
 		else if (module == "cause")
@@ -150,7 +150,7 @@
 			{
 				$('aCauseDesc').disabled = false;
 			}
-			$('aCausePreDefined').value = is_pred;
+			$('aCausePredefined').value = is_pred;
 			$('aCauseId').value = id;
 		}
 	}

@@ -358,7 +358,7 @@ class DIRegionDB extends DIRegion
 	
 	public function createCause($prmCauseId, $prmCauseName) {
 		$o = new DICause($this->session, $prmCauseId, $prmCauseName);
-		$o->set('CausePreDefined', 0);
+		$o->set('CausePredefined', 0);
 		if ($o->exist() > 0) {
 			$o->update(); 
 		} else {
@@ -368,7 +368,7 @@ class DIRegionDB extends DIRegion
 
 	public function createEvent($prmEventId, $prmEventName) {
 		$o = new DIEvent($this->session, $prmEventId, $prmEventName);
-		$o->set('EventPreDefined', 0);
+		$o->set('EventPredefined', 0);
 		if ($o->exist() > 0) {
 			$o->update(); 
 		} else {
@@ -654,7 +654,7 @@ class DIRegionDB extends DIRegion
 		$Queries = array();
 		$Query = "ATTACH DATABASE '" . CONST_DBBASE . "' AS base";
 		array_push($Queries, $Query);
-		//Copy PreDefined Event List Into Database
+		//Copy Predefined Event List Into Database
 		$Query = "DELETE FROM Event WHERE EventPredefined=1 AND LangIsoCode='" . $prmLangIsoCode . "'";
 		array_push($Queries, $Query);
 		$Query = "INSERT INTO Event(" . $FieldList . ") SELECT " . $FieldList . " FROM base.Event WHERE LangIsoCode='" . $prmLangIsoCode . "'";
@@ -675,7 +675,7 @@ class DIRegionDB extends DIRegion
 		$Queries = array();		
 		$Query = "ATTACH DATABASE '" . CONST_DBBASE . "' AS base";
 		array_push($Queries, $Query);
-		//Copy PreDefined Cause List Into Database
+		//Copy Predefined Cause List Into Database
 		$Query = "DELETE FROM Cause WHERE CausePredefined=1 AND LangIsoCode='" . $prmLangIsoCode . "'";
 		array_push($Queries, $Query);
 		$Query = "INSERT INTO Cause (" . $FieldList . ") SELECT " . $FieldList . " FROM base.Cause WHERE LangIsoCode='" . $prmLangIsoCode . "'";

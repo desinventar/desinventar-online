@@ -35,13 +35,13 @@ function form2event($form)
 	{
 		$data['EventActive'] = 0;
 	}
-	if (isset($form['EventPreDefined']) && $form['EventPreDefined'] == '1')
+	if (isset($form['EventPredefined']) && $form['EventPredefined'] == '1')
 	{
-		$data['EventPreDefined'] = 1;
+		$data['EventPredefined'] = 1;
 	}
 	else
 	{
-		$data['EventPreDefined'] = 0;
+		$data['EventPredefined'] = 0;
 	}
 	return $data;
 }
@@ -81,7 +81,6 @@ $dat = form2event($_POST);
 switch ($cmd)
 {
 	case 'cmdEventInsert':
-		fb($_POST);
 		if ($us->UserRoleValue >= ROLE_ADMINREGION)
 		{
 			$info = $_POST['Info'];
@@ -104,6 +103,10 @@ switch ($cmd)
 			if (! isset($info['EventActive']))
 			{
 				$info['EventActive'] = 'off';
+			}
+			if ($info['EventPredefined'] > 0)
+			{
+				$info['EventPredefined'] = 2; // Predefined but Localized
 			}
 			$o = new DIEvent($us, $info['EventId']);
 			$o->setFromArray($info);
