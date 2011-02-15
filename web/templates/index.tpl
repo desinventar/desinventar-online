@@ -31,6 +31,7 @@
 	<script type="text/javascript" src="js/extraeffects.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/dbconfig_geography.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/dbconfig_events.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="js/dbconfig_causes.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/data.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/graphic.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/thematicmap.js?version={-$jsversion-}"></script>

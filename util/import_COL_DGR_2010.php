@@ -50,7 +50,7 @@ while (! feof(STDIN) )
 		$p = $us->getDisasterIdFromSerial($DisasterSerial);
 		$DisasterId = $p['DisasterId'];		
 		$DisasterBeginTime = strToISO8601($a[1]);
-		printf('%-10s %-20s' . "\n", $DisasterSerial, $DisasterBeginTime);
+		printf('%-10s %-30s' . "\n", $DisasterSerial, $DisasterBeginTime);
 		if ($DisasterBeginTime != '')
 		{
 			$d = new DIDisaster($us, $DisasterId);
@@ -556,9 +556,14 @@ while (! feof(STDIN) )
 			$d->set('EffectFarmingAndForest', valueToDIField($a[21]));
 			$d->set('EffectOtherLosses'     , $a[22]);
 			// 23 - 37 ????
-			$d->set('EffectNotes'           , valueToDIField($a[38]));
+			$d->set('EffectNotes'           , $a[38]);
 
 			$DisasterId = $d->get('DisasterId');
+			if ($DisasterId=='')
+			{
+				$d->set('DisasterId', uuid());
+				$DisasterId = $d->get('DisasterId');
+			}
 			$e = new DIEEData($us, $DisasterId);
 
 			$e->set('EEF004', valueToDIField($a[10]));  // 10 - Familias Afectadas

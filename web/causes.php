@@ -61,22 +61,40 @@ $cmd = getParameter('cmd','');
 $dat = form2cause($get);
 switch($cmd)
 {
-	case 'insert':
-		$o = new DICause($us);
-		$o->setFromArray($dat);
-		$o->set('CauseId', uuid());
-		$o->set('CausePredefined', 0);
-		$o->set('RegionId', $RegionId);
-		$i = $o->insert();
-		showResult($i, $t);
-		break;
-	case 'update';
-		$o = new DICause($us, $dat['CauseId']);
-		$o->setFromArray($dat);
-		$o->set('RegionId', $RegionId);
-		$i = $o->update();
-		showResult($i, $t);
-		break;
+	case 'cmdCauseInsert':
+		if ($us->UserRoleValue >= ROLE_ADMINREGION)
+		{
+			$info = $_POST['Info'];
+			if (! isset($info['CauseActive']))
+			{
+				$info['CauseActive'] = 'off';
+			}
+			$o = new DICause($us);
+			$o->setFromArray($info);
+			$o->set('CauseId', uuid());
+			$o->set('CausePredefined', 0);
+			$i = $o->insert();
+			showResult($i, $t);
+		}
+	break;
+	case 'cmdCauseUpdate':
+		if ($us->UserRoleValue >= ROLE_ADMINREGION)
+		{
+			$info = $_POST['Info'];
+			if (! isset($info['CauseActive']))
+			{
+				$info['CauseActive'] = 'off';
+			}
+			if ($info['CausePredefined'] > 0)
+			{
+				$info['CausePredefined'] = 2; // Predefined but Localized
+			}
+			$o = new DICause($us, $info['CauseId']);
+			$o->setFromArray($info);
+			$i = $o->update();
+			showResult($i, $t);
+		}
+	break;
 	case 'list':
 		// reload list from local SQLITE
 		$prmType = getParameter('predef');

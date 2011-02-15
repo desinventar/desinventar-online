@@ -24,6 +24,9 @@
 			// Hide first two columns (EventId,EventPredefined)
 			jQuery('td:nth-child(1)','#tblEventListUser,#tblEventListPredef').hide();
 			jQuery('td:nth-child(2)','#tblEventListUser,#tblEventListPredef').hide();
+			// Hide first two columns (CauseId,CausePredefined)
+			jQuery('td:nth-child(1)','#tblCauseListUser,#tblCauseListPredef').hide();
+			jQuery('td:nth-child(2)','#tblCauseListUser,#tblCauseListPredef').hide();
 		});
 	}
 
