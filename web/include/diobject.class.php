@@ -108,11 +108,13 @@ class DIObject {
 				$sValue = preg_replace('/"/', '', $sValue);
 			}
 			if ($sFieldType == 'BOOLEAN') {
-				if ($sValue . '' == 'on')    { $sValue = 1; }
-				if ($sValue . '' == 'true')  { $sValue = 1; }
-				if ($sValue . '' == 'off')   { $sValue = 0; }
-				if ($sValue . '' == 'false') { $sValue = 0; }
+				if (strtolower($sValue) . '' == 'on')    { $sValue = 1; }
+				if (strtolower($sValue) . '' == 'true')  { $sValue = 1; }
+				if (strtolower($sValue) . '' == 'off')   { $sValue = 0; }
+				if (strtolower($sValue) . '' == 'false') { $sValue = 0; }
 				if ($sValue . '' == '')      { $sValue = 0; }
+				if ($sValue . '' == '1')     { $sValue = 1; }
+				if ($sValue . '' == '0')     { $sValue = 0; }
 			}
 			if (($sFieldType == 'INTEGER') ||
 			    ($sFieldType == 'DOUBLE' ) ||

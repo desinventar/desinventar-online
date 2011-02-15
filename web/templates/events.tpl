@@ -79,25 +79,25 @@
 	<span id="eventstatusmsg" class="dlgmsg"></span>
 	<br /><br />
 	<div id="eventaddsect" style="display:none">
-		<form id="frmEventEdit" name="frmEventEdit" method="POST">
-			<input id="Id" name="EventId" type="hidden" />
+		<form id="frmEventEdit" method="POST">
+			<input id="Id" name="Info[EventId]" type="hidden" />
 			{-$dic.DBEvePersonName[0]-}<b style="color:darkred;">*</b><br />
-			<input id="Name" name="EventName" type="text" class="line" maxlength="40" style="width:500px;" tabindex="1" {-$ro-}
+			<input id="Name" name="Info[EventName]" type="text" class="line" maxlength="40" style="width:500px;" tabindex="1" {-$ro-}
 				onBlur="updateList('eventstatusmsg', 'events.php', 'r={-$reg-}&cmd=chkname&EventId='+ $('aEventId').value +'&EventName='+ $('EventName').value);"
 				onFocus="showtip('{-$dic.DBEvePersonName[2]-}');" />
 			<br /><br />
 			{-$dic.DBEvePersonDef[0]-}<b style="color:darkred;">*</b><br />
-			<textarea id="Desc" name="EventDesc" class="line" rows="2" style="width:500px;" tabindex="2" 
+			<textarea id="Desc" name="Info[EventDesc]" class="line" rows="2" style="width:500px;" tabindex="2" 
 				onFocus="showtip('{-$dic.DBEvePersonDef[2]-}');" {-$ro-}></textarea>
 			<br /><br />
 			{-$dic.DBEveActive[0]-}
-			<input id="Active" name="EventActive" type="checkbox" {-$ro-} 
+			<input id="Active" name="Info[EventActive]" type="checkbox" {-$ro-} 
 				onFocus="showtip('{-$dic.DBEveActive[2]-}');" tabindex="3" 
 				onClick="if (!this.checked) updateList('eventstatusmsg', 'events.php', 'r={-$reg-}&cmd=chkstatus&EventId='+ $('aEventId').value);" />
 			<br /><br />
-			<input id="PreDefined" name="EventPreDefined" type="hidden" />
+			<input id="PreDefined" name="Info[EventPreDefined]" type="hidden" />
 			<p align="center" style="width:500px;">
-				<input id="RegionId" name="r" type="hidden" value="{-$reg-}" />
+				<input id="RegionId" name="RegionId" type="hidden" value="{-$reg-}" />
 				<input id="cmd" name="cmd" type="hidden" />
 				<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="4" />
 				<input type="reset" value="{-#bcancel#-}" onClick="$('eventaddsect').style.display='none'; uploadMsg('');" {-$ro-} class="line" />

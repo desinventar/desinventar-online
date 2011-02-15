@@ -25,7 +25,7 @@ function onReadyDBConfigEvents()
 		jQuery('#frmEventEdit #Active').attr('checked', jQuery('#Active',this).is(':checked'));
 		jQuery('#frmEventEdit #PreDefined').val(0);
 		jQuery('#frmEventEdit #RegionId').val(jQuery('#desinventarRegionId').val());
-		jQuery('#frmEventEdit #cmd').val('update');
+		jQuery('#frmEventEdit #cmd').val('cmdEventUpdate');
 	});
 
 	jQuery('#frmEventEdit').unbind('submit').submit(function()
