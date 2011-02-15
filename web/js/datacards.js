@@ -415,17 +415,19 @@ function setgeo(k, prmGeoLevelId, desc, opc)
 		var lev = 'lev'+ prmGeoLevelId;
 		var op = '';
 	}
+	fld = '#DICard #' + fld;
+	lev = '#DICard #' + lev;
 	if (k.length >= 5)
 	{
-		$(fld).value = k;
+		jQuery(fld).val(k);
 		updateList(lev, 'cards.php', 'cmd=list' + '&GeographyId='+ k + op + '&r=' + RegionId);
 	}
 	else if (k == '')
 	{
 		showtip(desc, '#d4baf6');
-		val = $(fld).value;
-		$(fld).value = val.substr(0, val.length - 5);
-		$(lev).innerHTML = '';
+		val = jQuery(fld).val();
+		jQuery(fld).val(val.substr(0, val.length - 5));
+		jQuery(lev).html('');
 	}
 }
 
