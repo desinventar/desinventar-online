@@ -5,7 +5,7 @@
 
 function onReadyDBConfigEvents()
 {
-	// Hide first two columns (EventId,EventPreDefined)
+	// Hide first two columns (EventId,EventPredefined)
 	jQuery('td:nth-child(1)','#tblEventListUser,#tblEventListPredef').hide();
 	jQuery('td:nth-child(2)','#tblEventListUser,#tblEventListPredef').hide();
 	
@@ -21,7 +21,7 @@ function onReadyDBConfigEvents()
 		jQuery('#frmEventEdit #Name').val(jQuery('#Name',this).text());
 		jQuery('#frmEventEdit #Desc').val(jQuery('#Desc',this).text());
 		jQuery('#frmEventEdit #Active').attr('checked', jQuery('#Active',this).is(':checked'));
-		jQuery('#frmEventEdit #PreDefined').val(jQuery('#PreDefined',this).text());
+		jQuery('#frmEventEdit #Predefined').val(jQuery('#Predefined',this).text());
 		jQuery('#frmEventEdit #RegionId').val(jQuery('#desinventarRegionId').val());
 		jQuery('#frmEventEdit #cmd').val('cmdEventUpdate');
 		jQuery('#btnEventEditAdd').hide();
@@ -34,7 +34,7 @@ function onReadyDBConfigEvents()
 		jQuery('#frmEventEdit #Name').val('');
 		jQuery('#frmEventEdit #Desc').val('');
 		jQuery('#frmEventEdit #Active').attr('checked', true);
-		jQuery('#frmEventEdit #PreDefined').val(0);
+		jQuery('#frmEventEdit #Predefined').val(0);
 		jQuery('#frmEventEdit #RegionId').val(jQuery('#desinventarRegionId').val());
 		jQuery('#frmEventEdit #cmd').val('cmdEventInsert');
 	});
@@ -57,7 +57,7 @@ function onReadyDBConfigEvents()
 				function(data)
 				{
 					var reg = jQuery('#desinventarRegionId').val();
-					var opt = jQuery('#aEventPreDefined').val();
+					var opt = jQuery('#frmEventEdit #Predefined').val();
 					if (opt == "1")
 					{
 						updateList('lst_evepred', 'events.php', 'r=' + reg + '&cmd=list&predef=1&t=' + new Date().getTime());

@@ -29,7 +29,7 @@ class Region {
     $data['EventName'] = $name;
     $data['EventDesc'] = $desc;
     $data['EventActive'] = $active;
-    $data['EventPreDefined'] = false;
+    $data['EventPredefined'] = false;
     $data['EventCreationDate'] = date("Y-m-d H:i:s");
     if ($this->q->isvalidObjectName($data['EventId'], $data['EventName'], DI_EVENT)) {
       $rpcargs = array($_SESSION['sessionid'], DI_EVENT, CMD_NEW, $data);
@@ -47,7 +47,7 @@ class Region {
     $data['EventName'] = $name;
     $data['EventDesc'] = $desc;
     $data['EventActive'] = $active;
-    $data['EventPreDefined'] = $predef;
+    $data['EventPredefined'] = $predef;
     $data['EventCreationDate'] = date("Y-m-d H:i:s");
     if (!$this->q->isvalidObjectName($id, $name, DI_EVENT))
       $ev = ERR_OBJECT_EXISTS;
@@ -66,7 +66,7 @@ class Region {
     $data['CauseName'] = $name;
     $data['CauseDesc'] = $desc;
     $data['CauseActive'] = $active;
-    $data['CausePreDefined'] = false;
+    $data['CausePredefined'] = false;
     $data['CauseCreationDate'] = date("Y-m-d H:i:s");
     if ($this->q->isvalidObjectName($data['CauseId'], $data['CauseName'], DI_CAUSE)) {
       $rpcargs = array($_SESSION['sessionid'], DI_CAUSE, CMD_NEW, $data);
@@ -84,7 +84,7 @@ class Region {
     $data['CauseName'] = $name;
     $data['CauseDesc'] = $desc;
     $data['CauseActive'] = $active;
-    $data['CausePreDefined'] = $predef;
+    $data['CausePredefined'] = $predef;
     $data['CauseCreationDate'] = date("Y-m-d H:i:s");
     if (!$this->q->isvalidObjectName($id, $name, DI_CAUSE))
       $ca = ERR_OBJECT_EXISTS;

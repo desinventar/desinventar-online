@@ -14,7 +14,7 @@ class DIEvent extends DIRecord {
 		                      "EventName/STRING," .
 		                      "EventDesc/STRING," .
 		                      "EventActive/BOOLEAN," .  
-		                      "EventPredefined/BOOLEAN," .
+		                      "EventPredefined/INTEGER," .
 		                      "EventRGBColor/STRING," .
 		                      "EventKeyWords/STRING," .
 		                      "RecordCreation/DATETIME," .

@@ -18,7 +18,7 @@ function onReadyDatabaseConfig()
 				function(data)
 				{
 					var reg = jQuery('#desinventarRegionId').val();
-					var opt = jQuery('#aCausePreDefined').val();
+					var opt = jQuery('#aCausePredefined').val();
 					if (opt == "1")
 					{
 						updateList('lst_caupred', 'causes.php', 'r='+ reg +'&cmd=list&predef=1&t=' + new Date().getTime());

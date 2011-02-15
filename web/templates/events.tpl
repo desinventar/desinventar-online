@@ -18,7 +18,7 @@
 						Id
 					</td>
 					<td>
-						PreDef
+						Predefined
 					</td>
 					<td class="header" onMouseOver="showtip('{-$dic.DBEvePersonName[2]-}');">
 						<b>{-$dic.DBEvePersonName[0]-}</b>
@@ -37,7 +37,7 @@
 					{-foreach name=eve key=key item=item from=$eveuserl-}
 						<tr class="{-if ($smarty.foreach.eve.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}" >
 							<td id="Id">{-$key-}</td>
-							<td id="PreDefined">0</td>
+							<td id="Predefined">0</td>
 							<td id="Name">{-$item[0]-}</td>
 							<td id="Desc">{-$item[1]|truncate:150-}</td>
 							<td><input id="Active" type="checkbox" {-if ($item[2]==1)-} checked {-/if-} disabled /></td>
@@ -57,7 +57,7 @@
 						Id
 					</td>
 					<td>
-						Predef
+						Predefined
 					</td>
 					<td class="header" onMouseOver="showtip('{-$dic.DBEvePredefName[2]-}');">
 						<b>{-$dic.DBEvePredefName[0]-}</b>
@@ -76,7 +76,7 @@
 				   {-foreach name=eve key=key item=item from=$evepredl-}
 						<tr class="{-if ($smarty.foreach.eve.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}">
 							<td id="Id">{-$key-}</td>
-							<td id="PreDefined">1</td>
+							<td id="Predefined">1</td>
    							<td id="Name">{-$item[0]-}</td>
    							<td id="Desc">{-$item[1]|truncate:150-}</td>
    							<td><input id="Active" type="checkbox" {-if ($item[2]==1)-} checked {-/if-} disabled /></td>
@@ -107,7 +107,7 @@
 			<input id="Active" name="Info[EventActive]" type="checkbox" {-$ro-} 
 				onFocus="showtip('{-$dic.DBEveActive[2]-}');" tabindex="3" />
 			<br /><br />
-			<input id="PreDefined" name="Info[EventPreDefined]" type="hidden" />
+			<input id="Predefined" name="Info[EventPredefined]" type="hidden" />
 			<p align="center" style="width:500px;">
 				<input id="RegionId" name="RegionId" type="hidden" value="{-$reg-}" />
 				<input id="cmd" name="cmd" type="hidden" />

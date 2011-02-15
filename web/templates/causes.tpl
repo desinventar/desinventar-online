@@ -94,7 +94,7 @@
 			<p align="center" style="width:500px;">
 				<input id="r" name="r" type="hidden" value="{-$reg-}" />
 				<input id="aCauseId" name="CauseId" type="hidden" />
-				<input id="aCausePreDefined" name="CausePreDefined" type="hidden" />
+				<input id="aCausePredefined" name="CausePredefined" type="hidden" />
 				<input id="cmd" name="cmd" type="hidden" value="" />
 				<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="4" />
 				<input type="reset" value="{-#bcancel#-}" onClick="$('causeaddsect').style.display='none'; uploadMsg('');" {-$ro-} class="line" />
