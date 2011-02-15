@@ -70,19 +70,29 @@ function onReadyMain()
 	jQuery('#DBConfig_tabs').tabs();
 	jQuery('.classDBConfig_tabs').click(function() {
 		var me = jQuery(jQuery(this).attr('href'));
+		var cmd = jQuery(this).attr('cmd');
 		me.html('<img src="loading.gif" />');
 		jQuery.post(
 			jQuery(this).attr('data'),
-			{RegionId : jQuery('#desinventarRegionId').val(),
-			 lang     : jQuery('#desinventarLang').val(),
-			 cmd      : jQuery(this).attr('cmd')
+			{
+				cmd      : cmd,
+				RegionId : jQuery('#desinventarRegionId').val(),
+				lang     : jQuery('#desinventarLang').val()
 			},
 			function(data)
 			{
 				me.html(data);
-				onReadyDatabaseConfig();
-				onReadyExtraEffects();
-				onReadyDBConfigGeography();
+				switch(cmd)
+				{
+					case 'cmdDBInfoEvent':
+						onReadyDBConfigEvents();
+					break;
+					default:
+						onReadyDatabaseConfig();
+						onReadyExtraEffects();
+						onReadyDBConfigGeography();
+					break;
+				}
 			}
 		);
 	});
