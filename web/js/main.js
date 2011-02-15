@@ -87,6 +87,9 @@ function onReadyMain()
 					case 'cmdDBInfoEvent':
 						onReadyDBConfigEvents();
 					break;
+					case 'cmdDBInfoCause':
+						onReadyDBConfigCauses();
+					break;
 					default:
 						onReadyDatabaseConfig();
 						onReadyExtraEffects();
