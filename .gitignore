@@ -3,3 +3,6 @@ web/test/*
 util/*.csv
 setup/*
 Setup/*
+Thumbs.db
+thumbs.db
+#
