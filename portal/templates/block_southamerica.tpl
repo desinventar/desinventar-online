@@ -27,6 +27,7 @@
 			</td>
 		</tr>
 	</table>
+	{-*
 	<hr size="1" />
 	<a href="#" id="linkPortalGAR2011">GAR 2011</a>
 	<br />
@@ -36,4 +37,5 @@
 	{-/if-}
 	{-assign var="myFile" value="block_gar2011_1_$myLang.tpl" -}
 	{-include file="$myFile"-}
+	*-}
 </div>
