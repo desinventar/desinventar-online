@@ -25,6 +25,11 @@ function onReadyDBConfigEvents()
 		jQuery('#frmEventEdit #RegionId').val(jQuery('#desinventarRegionId').val());
 		jQuery('#frmEventEdit #cmd').val('cmdEventUpdate');
 		jQuery('#btnEventEditAdd').hide();
+		// In Predefined Events cannot edit Description
+		if (parseInt(jQuery('#frmEventEdit #Predefined').val()) > 0)
+		{
+			jQuery('#frmEventEdit #Desc').attr('readonly', true);
+		}
 	});
 
 	jQuery('#btnEventEditAdd').unbind('click').click(function() {
@@ -67,6 +72,7 @@ function onReadyDBConfigEvents()
 						updateList('lst_eveuser', 'events.php', 'r=' + reg + '&cmd=list&predef=0&t=' + new Date().getTime());
 					}
 					updateList('qevelst', 'index.php', 'r='+ reg +'&cmd=evelst&t=' + new Date().getTime());
+					jQuery('#frmEventEdit #Desc').removeAttr('readonly');
 					jQuery('#eventaddsect').hide();
 					jQuery('#btnEventEditAdd').show();
 				}

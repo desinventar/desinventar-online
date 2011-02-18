@@ -25,6 +25,10 @@ function onReadyDBConfigCauses()
 		jQuery('#frmCauseEdit #RegionId').val(jQuery('#desinventarRegionId').val());
 		jQuery('#frmCauseEdit #cmd').val('cmdCauseUpdate');
 		jQuery('#btnCauseEditAdd').hide();
+		if (parseInt(jQuery('#frmCauseEdit #Predefined').val()) > 0)
+		{
+			jQuery('#frmCauseEdit #Desc').attr('readonly', true);
+		}
 	});
 
 	jQuery('#btnCauseEditAdd').unbind('click').click(function() {
@@ -67,6 +71,7 @@ function onReadyDBConfigCauses()
 						updateList('lst_cauuser', 'causes.php', 'r=' + reg + '&cmd=list&predef=0&t=' + new Date().getTime());
 					}
 					updateList('qevelst', 'index.php', 'r='+ reg +'&cmd=evelst&t=' + new Date().getTime());
+					jQuery('#frmCauseEdit #Desc').removeAttr('readonly');
 					jQuery('#causeaddsect').hide();
 					jQuery('#btnCauseEditAdd').show();
 				}
