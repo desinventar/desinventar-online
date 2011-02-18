@@ -4,103 +4,147 @@
  (c) 1998-2011 Corporacion OSSO
 */
 
-class DIDisaster extends DIRecord {
-	public function __construct($prmSession) {
-		$this->sTableName   = "Disaster";
-		$this->sPermPrefix  = "DISASTER";
-		$this->sFieldKeyDef = "DisasterId/STRING";
-		$this->sFieldDef    = "RegionId/STRING," .
-		                      "DisasterSerial/STRING," .
-		                      "DisasterBeginTime/STRING," .
-		                      "GeographyId/STRING," .
-		                      "DisasterSiteNotes/STRING," .
-		                      "DisasterLatitude/DOUBLE," .
-		                      "DisasterLongitude/DOUBLE," .
-		                      "DisasterSource/STRING," .
+class DIDisaster extends DIRecord
+{
+	public function __construct($prmSession)
+	{
+		$this->sTableName   = 'Disaster';
+		$this->sPermPrefix  = 'DISASTER';
+		$this->sFieldKeyDef = 'DisasterId/STRING';
+		$this->sFieldDef    = 'RegionId/STRING,' .
+		                      'DisasterSerial/STRING,' .
+		                      'DisasterBeginTime/STRING,' .
+		                      'GeographyId/STRING,' .
+		                      'DisasterSiteNotes/STRING,' .
+		                      'DisasterLatitude/DOUBLE,' .
+		                      'DisasterLongitude/DOUBLE,' .
+		                      'DisasterSource/STRING,' .
 		                      
-		                      "RecordStatus/STRING," .
-		                      "RecordAuthor/STRING," .
-		                      "RecordCreation/DATETIME," .
-		                      "RecordSync/DATETIME," .
-		                      "RecordUpdate/DATETIME," .
+		                      'RecordStatus/STRING,' .
+		                      'RecordAuthor/STRING,' .
+		                      'RecordCreation/DATETIME,' .
+		                      'RecordSync/DATETIME,' .
+		                      'RecordUpdate/DATETIME,' .
 		                      
-		                      "EventId/STRING," .
-		                      "EventNotes/STRING," .
-		                      "EventDuration/INTEGER," .
-		                      "EventMagnitude/STRING," .
+		                      'EventId/STRING,' .
+		                      'EventNotes/STRING,' .
+		                      'EventDuration/INTEGER,' .
+		                      'EventMagnitude/STRING,' .
 		                      
-		                      "CauseId/STRING," .
-		                      "CauseNotes/STRING";
-		$this->sEffectDef    ="EffectPeopleDead/INTEGER," .
-		                      "EffectPeopleMissing/INTEGER," .
-		                      "EffectPeopleInjured/INTEGER," .
-		                      "EffectPeopleHarmed/INTEGER," .
-		                      "EffectPeopleAffected/INTEGER," .
-		                      "EffectPeopleEvacuated/INTEGER," .
-		                      "EffectPeopleRelocated/INTEGER," .		                      
-		                      "EffectHousesDestroyed/INTEGER," .
-		                      "EffectHousesAffected/INTEGER," .
+		                      'CauseId/STRING,' .
+		                      'CauseNotes/STRING';
+		$this->sEffectDef    ='EffectPeopleDead/INTEGER,' .
+		                      'EffectPeopleMissing/INTEGER,' .
+		                      'EffectPeopleInjured/INTEGER,' .
+		                      'EffectPeopleHarmed/INTEGER,' .
+		                      'EffectPeopleAffected/INTEGER,' .
+		                      'EffectPeopleEvacuated/INTEGER,' .
+		                      'EffectPeopleRelocated/INTEGER,' .		                      
+		                      'EffectHousesDestroyed/INTEGER,' .
+		                      'EffectHousesAffected/INTEGER,' .
 		                      
-		                      "EffectLossesValueLocal/DOUBLE," .
-		                      "EffectLossesValueUSD/DOUBLE," .
-		                      "EffectRoads/DOUBLE," .
-		                      "EffectFarmingAndForest/DOUBLE," .
-		                      "EffectLiveStock/INTEGER," .
-		                      "EffectEducationCenters/INTEGER," .
-		                      "EffectMedicalCenters/INTEGER," .
-		                      "EffectOtherLosses/STRING," .
-		                      "EffectNotes/STRING," .
+		                      'EffectLossesValueLocal/DOUBLE,' .
+		                      'EffectLossesValueUSD/DOUBLE,' .
+		                      'EffectRoads/DOUBLE,' .
+		                      'EffectFarmingAndForest/DOUBLE,' .
+		                      'EffectLiveStock/INTEGER,' .
+		                      'EffectEducationCenters/INTEGER,' .
+		                      'EffectMedicalCenters/INTEGER,' .
+		                      'EffectOtherLosses/STRING,' .
+		                      'EffectNotes/STRING,' .
 		                      
-		                      "SectorTransport/INTEGER," .
-		                      "SectorCommunications/INTEGER," .
-		                      "SectorRelief/INTEGER," .
-		                      "SectorAgricultural/INTEGER," .
-		                      "SectorWaterSupply/INTEGER," .
-		                      "SectorSewerage/INTEGER," .
-		                      "SectorEducation/INTEGER," .
-		                      "SectorPower/INTEGER," .
-		                      "SectorIndustry/INTEGER," .
-		                      "SectorHealth/INTEGER," .
-		                      "SectorOther/INTEGER";
-		$this->sFieldQDef =   "EffectPeopleDeadQ/INTEGER," .
-		                      "EffectPeopleMissingQ/INTEGER," .
-		                      "EffectPeopleInjuredQ/INTEGER," .
-		                      "EffectPeopleHarmedQ/INTEGER," .
-		                      "EffectPeopleAffectedQ/INTEGER," .
-		                      "EffectPeopleEvacuatedQ/INTEGER," .
-		                      "EffectPeopleRelocatedQ/INTEGER," .		                      
-		                      "EffectHousesDestroyedQ/INTEGER," .
-		                      "EffectHousesAffectedQ/INTEGER";
+		                      'SectorTransport/INTEGER,' .
+		                      'SectorCommunications/INTEGER,' .
+		                      'SectorRelief/INTEGER,' .
+		                      'SectorAgricultural/INTEGER,' .
+		                      'SectorWaterSupply/INTEGER,' .
+		                      'SectorSewerage/INTEGER,' .
+		                      'SectorEducation/INTEGER,' .
+		                      'SectorPower/INTEGER,' .
+		                      'SectorIndustry/INTEGER,' .
+		                      'SectorHealth/INTEGER,' .
+		                      'SectorOther/INTEGER';
+		$this->sFieldQDef =   'EffectPeopleDeadQ/INTEGER,' .
+		                      'EffectPeopleMissingQ/INTEGER,' .
+		                      'EffectPeopleInjuredQ/INTEGER,' .
+		                      'EffectPeopleHarmedQ/INTEGER,' .
+		                      'EffectPeopleAffectedQ/INTEGER,' .
+		                      'EffectPeopleEvacuatedQ/INTEGER,' .
+		                      'EffectPeopleRelocatedQ/INTEGER,' .		                      
+		                      'EffectHousesDestroyedQ/INTEGER,' .
+		                      'EffectHousesAffectedQ/INTEGER';
 		$this->sFieldDef .= ',' . $this->sEffectDef;	
 		$this->sFieldDef .= ',' . $this->sFieldQDef;
 		parent::__construct($prmSession);
-		$this->set("EventPredefined", 0);
-		$this->set("EventActive", 1);
+		$this->sEEFieldDef  = $this->buildEEFieldDef();
+		if ($this->sEEFieldDef != '')
+		{
+			//$this->sFieldDef .= ',' . $sNewFields;
+			$this->createFields($this->sFieldKeyDef);
+			$this->createFields($this->sEEFieldDef);
+		}
+		$this->set('EventPredefined', 0);
+		$this->set('EventActive', 1);
 		$this->set('DisasterId', uuid());
 		$this->set('RecordStatus', 'PUBLISHED');
 
 		$num_args = func_num_args();
-		if ($num_args >= 2) {
+		if ($num_args >= 2)
+		{
 			$prmDisasterId = func_get_arg(1);
 			$this->set('DisasterId', $prmDisasterId);
 			$this->load();
 		}
 	} //__construct
 
-	public function getDeleteQuery() {
-		$sQuery = "UPDATE " . $this->getTableName() . " SET RecordStatus='DELETED'" .
-		  " WHERE " . $this->getWhereSubQuery();
+	public function buildEEFieldDef()
+	{
+		$sFieldDef = '';
+		$sQuery = 'SELECT * FROM EEField ORDER BY EEFieldOrder';
+		$i = 0;
+		foreach ($result = $this->q->dreg->query($sQuery) as $row)
+		{
+			if ($i > 0)
+			{
+				$sFieldDef .= ',';
+			}
+			$sFieldDef .= $row['EEFieldId'] . '/' . $row['EEFieldType'];
+			$i++;
+		}
+		return $sFieldDef;
+	} // function
+	
+	public function load()
+	{
+		$iReturn = parent::load();
+		if ($iReturn > 0)
+		{
+			$iReturn = $this->loadRecord('EEData', $this->sEEFieldDef);
+		}
+		return $iReturn;
+	}
+
+	public function getDeleteQuery()
+	{
+		$sQuery = 'UPDATE ' . $this->getTableName() . ' SET RecordStatus="DELETED" ' .
+		  ' WHERE ' . $this->getWhereSubQuery();
 		return $sQuery;
 	}
 
-	public function insert($withValidate=1, $bStrict=1) {
-		if ($this->get('DisasterId') == '') {
-			$this->set('DisasterId', uuid());
+	public function create($withValidate=1, $bStrict=1)
+	{
+		// First, create Disaster record
+		$iReturn = parent::create($withValidate, $bStrict);
+		if ($iReturn > 0)
+		{
+			// Create EEData Record
+			$iReturn = $this->createRecord('EEData');
 		}
-		return parent::insert($withValidate, $bStrict);
+		return $iReturn;
 	}
-	
-	public function validateCreate($bStrict) {
+
+	public function validateCreate($bStrict)
+	{
 		$iReturn = 1;
 		$iReturn = $this->validateNotNull(-51, 'DisasterId');
 		$iReturn = $this->validatePrimaryKey(-52);
@@ -148,7 +192,8 @@ class DIDisaster extends DIRecord {
 	{
 		$bFound = -1;
 		$iReturn = ERR_NO_ERROR;
-		foreach (split(',',$this->sEffectDef) as $sField)
+		$sFieldList = $this->sEffectDef . ',' . $this->sEEFieldDef;
+		foreach (split(',',$sFieldList) as $sField)
 		{
 			$oItem = split('/', $sField);
 			$sFieldName  = $oItem[0];
@@ -158,6 +203,7 @@ class DIDisaster extends DIRecord {
 				switch($sFieldType)
 				{
 					case 'STRING':
+					case 'DATE':
 						if (trim($this->get($sFieldName)) != '')
 						{
 							$bFound = 1;
@@ -169,6 +215,7 @@ class DIDisaster extends DIRecord {
 							$bFound = 1;
 						}
 					break;
+					case 'CURRENCY':
 					case 'DOUBLE':
 						if ($this->get($sFieldName) > 0)
 						{
@@ -204,16 +251,24 @@ class DIDisaster extends DIRecord {
 			$sFieldName  = substr($sFieldQName, 0, -1);
 			$sFieldType  = $oItem[1];
 			$this->set($sFieldQName, $this->get($sFieldName));
-			if ($this->get($sFieldQName) < 0) { $this->set($sFieldQName, 0); }
+			if ($this->get($sFieldQName) < 0)
+			{
+				$this->set($sFieldQName, 0);
+			}
 		}
-		// Update Record
+		// Update Disaster record
 		$iReturn = parent::update($withValidate, $bStrict);
+		if ($iReturn > 0)
+		{
+			// Update EEData record
+			$iReturn = $this->updateRecord('EEData', $this->sEEFieldDef);
+		}
 		return $iReturn;
 	} //update
 
-	public function importFromCSV($cols, $values) {
+	public function importFromCSV($cols, $values)
+	{
 		$iReturn = parent::importFromCSV($cols, $values);
-
 		$DisasterImport = array(0 => 'DisasterId', 
 		                        1 => 'DisasterSerial',
 		                        2 => 'DisasterBeginTime',
@@ -268,33 +323,38 @@ class DIDisaster extends DIRecord {
 						   );
 		$this->set('EventId', 'OTHER');
 		$this->set('CauseId', 'UNKNOWN');
-		foreach($DisasterImport as $Index => $Field) {
+		foreach($DisasterImport as $Index => $Field)
+		{
 			$this->set($Field, $values[$Index]);
 		}
 		
 		// Validation Settings
 		$this->set('RecordStatus', 'PUBLISHED');
-		if ($this->get('DisasterSource') == '') {
+		if ($this->get('DisasterSource') == '')
+		{
 			$this->set('RecordStatus', 'DRAFT');
 		}
 		
 		$DI6GeographyCode = $this->get('GeographyId');
 		$GeographyId = DIGeography::getIdByCode($this->session, $DI6GeographyCode);
-		if ($GeographyId == '') {
+		if ($GeographyId == '')
+		{
 			$GeographyId = $DI6GeographyCode;
 		}
 		$this->set('GeographyId', $GeographyId);
 		
 		$DI6EventId = $this->get('EventId');
 		$EventId = DIEvent::getIdByName($this->session, $DI6EventId);
-		if ($EventId == '') {
+		if ($EventId == '')
+		{
 			$EventId = $DI6EventId;
 		}
 		$this->set('EventId', $EventId);
 		
 		$DI6CauseId = $this->get('CauseId');
 		$CauseId = DICause::getIdByName($this->session, $DI6CauseId);
-		if ($CauseId == '') {
+		if ($CauseId == '')
+		{
 			$CauseId = $DI6CauseId;
 		}
 		$this->set('CauseId', $CauseId);
@@ -312,11 +372,13 @@ class DIDisaster extends DIRecord {
 		return $iReturn;
 	} //function
 
-	public static function existId($prmSession, $prmDisasterId) {
+	public static function existId($prmSession, $prmDisasterId)
+	{
 		$iReturn = ERR_UNKNOWN_ERROR;
 		$bFound = 0;
-		$Query= "SELECT * FROM Disaster WHERE DisasterId='" . $prmDisasterId . "'";
-		foreach($prmSession->q->dreg->query($Query) as $row) {
+		$Query= 'SELECT * FROM Disaster WHERE DisasterId="' . $prmDisasterId . '"';
+		foreach($prmSession->q->dreg->query($Query) as $row)
+		{
 			$iReturn = ERR_NO_ERROR;
 		}
 		return $iReturn;

@@ -12,7 +12,6 @@
 require_once('../web/include/loader.php');
 require_once(BASE . '/include/diregion.class.php');
 require_once(BASE . '/include/didisaster.class.php');
-require_once(BASE . '/include/dieedata.class.php');
 require_once(BASE . '/include/digeography.class.php');
 require_once(BASE . '/include/dicause.class.php');
 require_once(BASE . '/include/dievent.class.php');
@@ -558,106 +557,105 @@ while (! feof(STDIN) )
 			// 23 - 37 ????
 			$d->set('EffectNotes'           , $a[38]);
 
+
+			$d->set('EEF004', valueToDIField($a[10]));  // 10 - Familias Afectadas
+			$d->set('EEF005', valueToDIField($a[14]));  // 14 - Puentes Vehiculares
+			$d->set('EEF006', valueToDIField($a[15]));  // 15 - Puentes Peatonales
+			$d->set('EEF007', valueToDIField($a[16]));  // 16 - Acueductos Afectados
+			$d->set('EEF008', valueToDIField($a[20]));  // 20 - Centros Comunitarios
+			$d->set('EEF009',   strToISO8601($a[23]));  // 23 - Fecha Tramite Administrativo
+			$d->set('EEF010', valueToDIField($a[24]));  // 24 Menajes
+			$d->set('EEF011', valueToDIField($a[25]));  // 25 Ap. Aliment.
+			$d->set('EEF012', valueToDIField($a[26]));  // 26 Materiales Construccion
+			$d->set('EEF013', valueToDIField($a[27]));  // Sacos
+			$d->set('EEF014', valueToDIField($a[28]));  // Otros
+			$d->set('EEF015', valueToDIField($a[29]));  // Giro Directo
+			$d->set('EEF018', valueToDIField($a[31]));  // Apoyos en Tramite
+			$d->set('EEF019',   strToISO8601($a[32]));  // Fecha Recibo
+			$d->set('EEF021', valueToDIField($a[35]));  // Atendido
+			$d->set('EEF022', valueToDIField($a[37]));  // Analisis y Evaluacion de la Solicitud
+			$d->set('EEF033', valueToDIField($a[39]));  // Cobija (Cant)
+			$d->set('EEF034', valueToDIField($a[40]));  // Cobija (Valor)
+			$d->set('EEF035', valueToDIField($a[41]));  // Cobija Térmica (Cant)
+			$d->set('EEF036', valueToDIField($a[42]));  // Cobija Térmica (Valor)
+			$d->set('EEF037', valueToDIField($a[43]));  // Colchoneta (Cant)
+			$d->set('EEF038', valueToDIField($a[44]));  // Colchoneta (Valor)
+			$d->set('EEF039', valueToDIField($a[45]));  // Catre (Cant)
+			$d->set('EEF040', valueToDIField($a[46]));  // Catre (Valor)
+			$d->set('EEF049', valueToDIField($a[47]));  // Hamacas (Cant)
+			$d->set('EEF050', valueToDIField($a[48]));  // Hamacas (Valor)
+			$d->set('EEF061', valueToDIField($a[49]));  // Peinilla (Cant)
+			$d->set('EEF062', valueToDIField($a[50]));  // Peinilla (Valor)
+			$d->set('EEF063', valueToDIField($a[51]));  // Plastico Negro (Cant)
+			$d->set('EEF064', valueToDIField($a[52]));  // Plastico Negro (Valor)
+			$d->set('EEF065', valueToDIField($a[53]));  // Plato Hondo (Cant)
+			$d->set('EEF066', valueToDIField($a[54]));  // Plato Hondo (Valor)
+			$d->set('EEF067', valueToDIField($a[55]));  // Plato Pando (Cant)
+			$d->set('EEF068', valueToDIField($a[56]));  // Plato Pando (Valor)
+			$d->set('EEF069', valueToDIField($a[57]));  // Pocillo (Cant)
+			$d->set('EEF070', valueToDIField($a[58]));  // Pocillo (Valor)
+			$d->set('EEF071', valueToDIField($a[59]));  // Sábanas (Cant)
+			$d->set('EEF072', valueToDIField($a[60]));  // Sábanas (Valor)
+			$d->set('EEF073', valueToDIField($a[61]));  // Sobrecamas (Cant)
+			$d->set('EEF074', valueToDIField($a[62]));  // Sobrecamas (Valor)
+			$d->set('EEF075', valueToDIField($a[63]));  // Toallas (Cant)
+			$d->set('EEF076', valueToDIField($a[64]));  // Toallas (Valor)
+			$d->set('EEF077', valueToDIField($a[65]));  // Toldillos (Cant)
+			$d->set('EEF078', valueToDIField($a[66]));  // Toldillos (Valor)
+			$d->set('EEF079', valueToDIField($a[67]));  // Kit Aseo (Cant)
+			$d->set('EEF080', valueToDIField($a[68]));  // Kit Aseo (Valor)
+			$d->set('EEF081', valueToDIField($a[69]));  // Kit Cocina (Cant)
+			$d->set('EEF082', valueToDIField($a[70]));  // Kit Cocina (Valor)
+			$d->set('EEF085', valueToDIField($a[71]));  // Menajes (Valor Total)
+			$d->set('EEF086', valueToDIField($a[72])); // Sacos (Cant)
+			$d->set('EEF087', valueToDIField($a[73])); // Sacos (Valor)
+			$d->set('EEF088', valueToDIField($a[74])); // Mercados (Cant)
+			$d->set('EEF089', valueToDIField($a[75])); // Mercados (Valor)
+			$d->set('EEF090', valueToDIField($a[76])); // Cemento (Cant)
+			$d->set('EEF091', valueToDIField($a[77])); // Cemento (Valor)
+			$d->set('EEF092', valueToDIField($a[78])); // Tejas (Cant)
+			$d->set('EEF093', valueToDIField($a[79])); // Tejas (Valor)
+			
+			
+			/*
+			$d->set('EEF025', valueToDIField($a[39]));  // Cepillo Adulto (Cant)
+			$d->set('EEF026', valueToDIField($a[40]));  // Cepillo Adulto (Valor)
+			$d->set('EEF027', valueToDIField($a[41]));  // Cepillo Niño (Cant)
+			$d->set('EEF028', valueToDIField($a[42]));  // Cepillo Niño (Valor)
+			$d->set('EEF029', valueToDIField($a[43]));  // Chocolatera (Cant)
+			$d->set('EEF030', valueToDIField($a[44]));  // Chocolatera (Valor)
+			$d->set('EEF031', valueToDIField($a[45]));  // Cinta Empalmar (Cant)
+			$d->set('EEF032', valueToDIField($a[46]));  // Cinta Empalmar (Valor)
+			$d->set('EEF041', valueToDIField($a[55]));  // Crema Desod. (Cant)
+			$d->set('EEF042', valueToDIField($a[56]));  // Crema Desoc. (Valor)
+			$d->set('EEF043', valueToDIField($a[57]));  // Cuchara Acero (Cant)
+			$d->set('EEF044', valueToDIField($a[58]));  // Cuchara Acero (Valor)
+			$d->set('EEF045', valueToDIField($a[59]));  // Cuchara Madera (Cant)
+			$d->set('EEF046', valueToDIField($a[60]));  // Cuchara Madera (Valor)
+			$d->set('EEF047', valueToDIField($a[61]));  // Estufas (Cant)
+			$d->set('EEF048', valueToDIField($a[62]));  // Estufas (Valor)
+			$d->set('EEF051', valueToDIField($a[65]));  // Jabon Baño (Cant)
+			$d->set('EEF052', valueToDIField($a[66]));  // Jabon Baño (Valor)
+			$d->set('EEF053', valueToDIField($a[67]));  // Jabon Barra (Cant)
+			$d->set('EEF054', valueToDIField($a[68]));  // Jabon Barra (Valor)
+			$d->set('EEF055', valueToDIField($a[69]));  // Juego Cubiertos (Cant)
+			$d->set('EEF056', valueToDIField($a[70]));  // Juego Cubiertos (Valor)
+			$d->set('EEF057', valueToDIField($a[71]));  // Ollas (Cant)
+			$d->set('EEF058', valueToDIField($a[72]));  // Ollas (Valor)
+			$d->set('EEF059', valueToDIField($a[73]));  // Papel Higiénico (Cant)
+			$d->set('EEF060', valueToDIField($a[74]));  // Papel Higiénico (Valor)
+			$d->set('EEF083', valueToDIField($a[97]));  // Kit Alcoba (Cant)
+			$d->set('EEF084', valueToDIField($a[98]));  // Kit Alcoba (Valor)
+			*/
+		
+			$i = 1;
+
 			$DisasterId = $d->get('DisasterId');
 			if ($DisasterId=='')
 			{
 				$d->set('DisasterId', uuid());
 				$DisasterId = $d->get('DisasterId');
 			}
-			$e = new DIEEData($us, $DisasterId);
-
-			$e->set('EEF004', valueToDIField($a[10]));  // 10 - Familias Afectadas
-			$e->set('EEF005', valueToDIField($a[14]));  // 14 - Puentes Vehiculares
-			$e->set('EEF006', valueToDIField($a[15]));  // 15 - Puentes Peatonales
-			$e->set('EEF007', valueToDIField($a[16]));  // 16 - Acueductos Afectados
-			$e->set('EEF008', valueToDIField($a[20]));  // 20 - Centros Comunitarios
-			$e->set('EEF009',   strToISO8601($a[23]));  // 23 - Fecha Tramite Administrativo
-			$e->set('EEF010', valueToDIField($a[24]));  // 24 Menajes
-			$e->set('EEF011', valueToDIField($a[25]));  // 25 Ap. Aliment.
-			$e->set('EEF012', valueToDIField($a[26]));  // 26 Materiales Construccion
-			$e->set('EEF013', valueToDIField($a[27]));  // Sacos
-			$e->set('EEF014', valueToDIField($a[28]));  // Otros
-			$e->set('EEF015', valueToDIField($a[29]));  // Giro Directo
-			$e->set('EEF018', valueToDIField($a[31]));  // Apoyos en Tramite
-			$e->set('EEF019',   strToISO8601($a[32]));  // Fecha Recibo
-			$e->set('EEF021', valueToDIField($a[35]));  // Atendido
-			$e->set('EEF022', valueToDIField($a[37]));  // Analisis y Evaluacion de la Solicitud
-			$e->set('EEF033', valueToDIField($a[39]));  // Cobija (Cant)
-			$e->set('EEF034', valueToDIField($a[40]));  // Cobija (Valor)
-			$e->set('EEF035', valueToDIField($a[41]));  // Cobija Térmica (Cant)
-			$e->set('EEF036', valueToDIField($a[42]));  // Cobija Térmica (Valor)
-			$e->set('EEF037', valueToDIField($a[43]));  // Colchoneta (Cant)
-			$e->set('EEF038', valueToDIField($a[44]));  // Colchoneta (Valor)
-			$e->set('EEF039', valueToDIField($a[45]));  // Catre (Cant)
-			$e->set('EEF040', valueToDIField($a[46]));  // Catre (Valor)
-			$e->set('EEF049', valueToDIField($a[47]));  // Hamacas (Cant)
-			$e->set('EEF050', valueToDIField($a[48]));  // Hamacas (Valor)
-			$e->set('EEF061', valueToDIField($a[49]));  // Peinilla (Cant)
-			$e->set('EEF062', valueToDIField($a[50]));  // Peinilla (Valor)
-			$e->set('EEF063', valueToDIField($a[51]));  // Plastico Negro (Cant)
-			$e->set('EEF064', valueToDIField($a[52]));  // Plastico Negro (Valor)
-			$e->set('EEF065', valueToDIField($a[53]));  // Plato Hondo (Cant)
-			$e->set('EEF066', valueToDIField($a[54]));  // Plato Hondo (Valor)
-			$e->set('EEF067', valueToDIField($a[55]));  // Plato Pando (Cant)
-			$e->set('EEF068', valueToDIField($a[56]));  // Plato Pando (Valor)
-			$e->set('EEF069', valueToDIField($a[57]));  // Pocillo (Cant)
-			$e->set('EEF070', valueToDIField($a[58]));  // Pocillo (Valor)
-			$e->set('EEF071', valueToDIField($a[59]));  // Sábanas (Cant)
-			$e->set('EEF072', valueToDIField($a[60]));  // Sábanas (Valor)
-			$e->set('EEF073', valueToDIField($a[61]));  // Sobrecamas (Cant)
-			$e->set('EEF074', valueToDIField($a[62]));  // Sobrecamas (Valor)
-			$e->set('EEF075', valueToDIField($a[63]));  // Toallas (Cant)
-			$e->set('EEF076', valueToDIField($a[64]));  // Toallas (Valor)
-			$e->set('EEF077', valueToDIField($a[65]));  // Toldillos (Cant)
-			$e->set('EEF078', valueToDIField($a[66]));  // Toldillos (Valor)
-			$e->set('EEF079', valueToDIField($a[67]));  // Kit Aseo (Cant)
-			$e->set('EEF080', valueToDIField($a[68]));  // Kit Aseo (Valor)
-			$e->set('EEF081', valueToDIField($a[69]));  // Kit Cocina (Cant)
-			$e->set('EEF082', valueToDIField($a[70]));  // Kit Cocina (Valor)
-			$e->set('EEF085', valueToDIField($a[71]));  // Menajes (Valor Total)
-			$e->set('EEF086', valueToDIField($a[72])); // Sacos (Cant)
-			$e->set('EEF087', valueToDIField($a[73])); // Sacos (Valor)
-			$e->set('EEF088', valueToDIField($a[74])); // Mercados (Cant)
-			$e->set('EEF089', valueToDIField($a[75])); // Mercados (Valor)
-			$e->set('EEF090', valueToDIField($a[76])); // Cemento (Cant)
-			$e->set('EEF091', valueToDIField($a[77])); // Cemento (Valor)
-			$e->set('EEF092', valueToDIField($a[78])); // Tejas (Cant)
-			$e->set('EEF093', valueToDIField($a[79])); // Tejas (Valor)
-			
-			
-			/*
-			$e->set('EEF025', valueToDIField($a[39]));  // Cepillo Adulto (Cant)
-			$e->set('EEF026', valueToDIField($a[40]));  // Cepillo Adulto (Valor)
-			$e->set('EEF027', valueToDIField($a[41]));  // Cepillo Niño (Cant)
-			$e->set('EEF028', valueToDIField($a[42]));  // Cepillo Niño (Valor)
-			$e->set('EEF029', valueToDIField($a[43]));  // Chocolatera (Cant)
-			$e->set('EEF030', valueToDIField($a[44]));  // Chocolatera (Valor)
-			$e->set('EEF031', valueToDIField($a[45]));  // Cinta Empalmar (Cant)
-			$e->set('EEF032', valueToDIField($a[46]));  // Cinta Empalmar (Valor)
-			$e->set('EEF041', valueToDIField($a[55]));  // Crema Desod. (Cant)
-			$e->set('EEF042', valueToDIField($a[56]));  // Crema Desoc. (Valor)
-			$e->set('EEF043', valueToDIField($a[57]));  // Cuchara Acero (Cant)
-			$e->set('EEF044', valueToDIField($a[58]));  // Cuchara Acero (Valor)
-			$e->set('EEF045', valueToDIField($a[59]));  // Cuchara Madera (Cant)
-			$e->set('EEF046', valueToDIField($a[60]));  // Cuchara Madera (Valor)
-			$e->set('EEF047', valueToDIField($a[61]));  // Estufas (Cant)
-			$e->set('EEF048', valueToDIField($a[62]));  // Estufas (Valor)
-			$e->set('EEF051', valueToDIField($a[65]));  // Jabon Baño (Cant)
-			$e->set('EEF052', valueToDIField($a[66]));  // Jabon Baño (Valor)
-			$e->set('EEF053', valueToDIField($a[67]));  // Jabon Barra (Cant)
-			$e->set('EEF054', valueToDIField($a[68]));  // Jabon Barra (Valor)
-			$e->set('EEF055', valueToDIField($a[69]));  // Juego Cubiertos (Cant)
-			$e->set('EEF056', valueToDIField($a[70]));  // Juego Cubiertos (Valor)
-			$e->set('EEF057', valueToDIField($a[71]));  // Ollas (Cant)
-			$e->set('EEF058', valueToDIField($a[72]));  // Ollas (Valor)
-			$e->set('EEF059', valueToDIField($a[73]));  // Papel Higiénico (Cant)
-			$e->set('EEF060', valueToDIField($a[74]));  // Papel Higiénico (Valor)
-			$e->set('EEF083', valueToDIField($a[97]));  // Kit Alcoba (Cant)
-			$e->set('EEF084', valueToDIField($a[98]));  // Kit Alcoba (Valor)
-			*/
-		
-			$i = 1;
-			$j = 1;
 
 			// Validate Effects and Save as DRAFT if needed
 			$i = $d->validateEffects(-61,0);
@@ -669,22 +667,14 @@ while (! feof(STDIN) )
 			$bExist = $d->exist();
 			if ($bExist < 0) {
 				$i = $d->insert(1,0);
-				if ($i > 0) 
-				{
-					$j = $e->insert(1,0);
-				}
 				$Cmd = 'INSERT';
 			} else {
 				$i = $d->update(1,0);
-				if ($i > 0)
-				{
-					$j = $e->update(1,0);
-				}				
 				$Cmd = 'UPDATE';
 			}
-			if ( ($i < 0) || ($j < 0) )
+			if ($i < 0)
 			{
-				print $line . ' ' . $DisasterSerial . ' ' . $i . ' ' . $j . "\n";
+				print $line . ' ' . $DisasterSerial . ' ' . $i . "\n";
 			}			
 			if (($line > 0) && (($line % 100) == 0) )
 			{

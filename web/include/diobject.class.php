@@ -37,7 +37,8 @@ class DIObject {
 			$LangIsoCode = $this->session->RegionLangIsoCode; //getDBInfoValue('LangIsoCode');
 		}
 		$this->set('LangIsoCode', $LangIsoCode);
-		$this->set('RecordUpdate', gmdate('c'));
+		$this->set('RecordCreation', gmdate('c'));
+		$this->set('RecordUpdate'  , gmdate('c'));
 		
 		// Status object
 		$this->status = new DIStatus();
@@ -55,15 +56,15 @@ class DIObject {
 			$sFieldName = $oItem[0];
 			$sFieldType = $oItem[1];
 			$this->oFieldType[$sFieldName] = $sFieldType;
-			if ($sFieldType == 'STRING')   { $obj[$sFieldName] = '';              }
-			if ($sFieldType == 'TEXT')     { $obj[$sFieldName] = '';              }
-			if ($sFieldType == 'DATETIME') { $obj[$sFieldName] = gmdate('c');     }
-			if ($sFieldType == 'DATE')     { $obj[$sFieldName] = gmdate('Y-m-d'); }
-			if ($sFieldType == 'INTEGER')  { $obj[$sFieldName] = 0;               }
-			if ($sFieldType == 'FLOAT')    { $obj[$sFieldName] = 0.0;             }
-			if ($sFieldType == 'DOUBLE')   { $obj[$sFieldName] = 0.0;             }
-			if ($sFieldType == 'CURRENCY') { $obj[$sFieldName] = 0.0;             }
-			if ($sFieldType == 'BOOLEAN')  { $obj[$sFieldName] = 1;               }
+			if ($sFieldType == 'STRING')   { $obj[$sFieldName] = '';  }
+			if ($sFieldType == 'TEXT')     { $obj[$sFieldName] = '';  }
+			if ($sFieldType == 'DATETIME') { $obj[$sFieldName] = '';  }
+			if ($sFieldType == 'DATE')     { $obj[$sFieldName] = '';  }
+			if ($sFieldType == 'INTEGER')  { $obj[$sFieldName] = 0;   }
+			if ($sFieldType == 'FLOAT')    { $obj[$sFieldName] = 0.0; }
+			if ($sFieldType == 'DOUBLE')   { $obj[$sFieldName] = 0.0; }
+			if ($sFieldType == 'CURRENCY') { $obj[$sFieldName] = 0.0; }
+			if ($sFieldType == 'BOOLEAN')  { $obj[$sFieldName] = 1;   }
 		}
 	} // function
 	
