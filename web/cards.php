@@ -8,7 +8,6 @@ require_once('include/loader.php');
 require_once('include/query.class.php');
 require_once('include/didisaster.class.php');
 require_once('include/diregion.class.php');
-require_once('include/dieedata.class.php');
 
 // Convert Post Form to DesInventar Disaster Table struct 
 // Insert  (1) create DisasterId. 
