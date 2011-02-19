@@ -153,53 +153,68 @@ class DIGeography extends DIRecord {
 		} //foreach
 	} //function
 
-	public function update($withValidate = true) {
+	public function update($withValidate=1, $bStrict=1)
+	{
 		$iReturn = ERR_NO_ERROR;
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			// Update goegraphy children data if needed...
-			if ($this->oOldField['info']['GeographyName'] != $this->oField['info']['GeographyName']) {
+			if ($this->oOldField['info']['GeographyName'] != $this->oField['info']['GeographyName'])
+			{
 				$this->saveGeographyFQName();
 			} //if
 		} //if
-		$iReturn = parent::update($withValidate);
+		$iReturn = parent::update($withValidate,$bStrict);
 		return $iReturn;
 	}
 
-	public function validateCreate() {
+	public function validateCreate($bStrict)
+	{
 		$iReturn = 1;
 		$iReturn = $this->validateNotNull(-41, 'GeographyId');
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			$iReturn = $this->validatePrimaryKey(-42);
 		}
 		return $iReturn;
 	}
 
-	public function validateNoDatacards($ErrCode) {
+	public function validateNoDatacards($ErrCode)
+	{
 		$iReturn = ERR_NO_ERROR;
 		$Count = 0;
 		$Query = "SELECT COUNT(DisasterId) AS COUNT FROM Disaster WHERE GeographyId LIKE '" . $this->get('GeographyId') . "%'";
-		foreach($this->q->dreg->query($Query) as $row) {
+		foreach($this->q->dreg->query($Query) as $row)
+		{
 			$Count = $row['COUNT'];
 		}
-		if ($Count > 0) {
+		if ($Count > 0)
+		{
 			$iReturn = $ErrCode;
 		}
 		return $iReturn;
 	}
 
-	public function validateUpdate($bStrict) {
+	public function validateUpdate($bStrict)
+	{
 		$oReturn = parent::validateUpdate($bStrict);
 		$iReturn = $this->validateNotNull(-43, 'GeographyCode');
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			$iReturn = $this->validateUnique(-44, 'GeographyCode');
-			if ($iReturn > 0) {
+			if ($iReturn > 0)
+			{
 				$iReturn = $this->validateNotNull(-45, 'GeographyName');
-				if ($iReturn > 0) {
+				if ($iReturn > 0)
+				{
 					$iReturn = $this->validateUnique(-46, 'GeographyFQName');
-					if ($iReturn > 0) {
+					if ($iReturn > 0)
+					{
 						$iReturn = $this->validateNotNull(-47, 'GeographyLevel');
-						if ($iReturn > 0) {
-							if ($this->get('GeographyActive') == 0) {
+						if ($iReturn > 0)
+						{
+							if ($this->get('GeographyActive') == 0)
+							{
 								$iReturn = $this->validateNoDatacards(-48);
 							}
 						}
@@ -210,7 +225,8 @@ class DIGeography extends DIRecord {
 		return $iReturn;
 	}
 	
-	public function validateDelete() {
+	public function validateDelete()
+	{
 		$iReturn = ERR_NO_ERROR;
 		$iReturn = $this->validateNoDatacards(-48);
 		return $iReturn;

@@ -62,7 +62,7 @@
 		<input type="hidden" id="PrevDisasterSerial" name="PrevDisasterSerial" value="" />
 		<input type="hidden" id="DatacardCommand"    name="DatacardCommand" value="" />
 		<input type="hidden" id="Status"             name="Status" value="" />
-		{-counter assign="MyTabIndex" start="1" print="false"-}
+		{-counter assign="MyTabIndex" start="1"-}
 		<table border="1" cellspacing="8" width="900px">
 			<!-- DATACARD INFORMATION SECTION -->
 			<tr>

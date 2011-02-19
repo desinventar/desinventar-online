@@ -5,8 +5,8 @@
 <!-- divQueryResults - Results of queries -->
 {-include file="main_queryresults.tpl"-}
 
-<!-- "divDatabaseList" -->
-{-include file="database_list.tpl"-}
+<!-- "divRegionList" -->
+{-include file="region_list.tpl"-}
 
 <!-- divDatabaseBackup -->
 {-include file="database_backup.tpl"-}

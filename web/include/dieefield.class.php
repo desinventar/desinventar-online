@@ -52,16 +52,21 @@ class DIEEField extends DIRecord {
 		return $FieldName;
 	}
 	
-	public function insert($withValidate = true) {
+	public function insert($withValidate=1, $bStrict=1)
+	{
 		$iReturn = ERR_NO_ERROR;
-		if ($iReturn > 0) {
-			$iReturn = parent::insert($withValidate);
+		if ($iReturn > 0)
+		{
+			// Insert Record in EField table
+			$iReturn = parent::insert($withValidate, $bStrict);
 		}
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			// Create column in EEData table
 			$EEFieldType = $this->get('EEFieldType');
 			$EEFieldSize = $this->get('EEFieldSize');
-			switch ($EEFieldType) {
+			switch ($EEFieldType)
+			{
 				case 'INT':
 				case 'INTEGER':
 				case 'NUMERIC':
@@ -89,17 +94,20 @@ class DIEEField extends DIRecord {
 		return $iReturn;
 	} //function
 
-	public function validateCreate() {
+	public function validateCreate($bStrict)
+	{
 		$iReturn = 1;
 		$iReturn = $this->validateNotNull(-81, 'EEFieldId');
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			$iReturn = $this->validatePrimaryKey(-82);
 		}
 		
 		return $iReturn;
 	} //function
 
-	public function validateUpdate($bStrict) {
+	public function validateUpdate($bStrict)
+	{
 		$oReturn = parent::validateUpdate($bStrict);
 		$iReturn = ERR_NO_ERROR;
 		if ($iReturn > 0) {

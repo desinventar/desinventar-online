@@ -102,7 +102,7 @@ function setRegionPA(prmRegionId, prmCountryIso, prmRegionLabel,
 					 prmLangIsoCode, prmUserId_AdminRegion, 
 					 prmRegionActive, prmRegionPublic) {
 	mod = "regionpa";
-	$(mod + 'addsect').style.display = 'block';
+	jQuery('#regionpaaddsect').show();
 	jQuery('#frmDatabaseEdit #RegionId').val(prmRegionId);
 	jQuery('#frmDatabaseEdit #CountryIso').val(prmCountryIso);
 	jQuery('#frmDatabaseEdit #RegionLabel').val(prmRegionLabel);

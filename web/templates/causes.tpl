@@ -11,93 +11,108 @@
 	<b onMouseOver="showtip('{-$dic.DBCause[2]-}');">{-$dic.DBCause[0]-}</b>
 	<br />
 	<div class="dwin" style="width:600px; height:100px;">
-		<table class="grid">
+		<table id="tblCauseListUser" class="grid">
 			<thead>
 				<tr>
-				<td class="header" onMouseOver="showtip('{-$dic.DBCauPersonName[2]-}');">
-					<b>{-$dic.DBCauPersonName[0]-}</b></td>
-				<td class="header" onMouseOver="showtip('{-$dic.DBCauPersonDef[2]-}');">
-					<b>{-$dic.DBCauPersonDef[0]-}</b></td>
-				<td class="header" onMouseOver="showtip('{-$dic.DBCauActive[2]-}');">
-					<b>{-$dic.DBCauActive[0]-}</b></td>
+					<td>
+						Id
+					</td>
+					<td>
+						Predefined
+					</td>
+					<td class="header" onMouseOver="showtip('{-$dic.DBCauPersonName[2]-}');">
+						<b>{-$dic.DBCauPersonName[0]-}</b>
+					</td>
+					<td class="header" onMouseOver="showtip('{-$dic.DBCauPersonDef[2]-}');">
+						<b>{-$dic.DBCauPersonDef[0]-}</b>
+					</td>
+					<td class="header" onMouseOver="showtip('{-$dic.DBCauActive[2]-}');">
+						<b>{-$dic.DBCauActive[0]-}</b>
+					</td>
 				</tr>
 			</thead>
 			<tbody id="lst_cauuser">
 {-/if-}
-{-if $ctl_caupers-}
-   {-foreach name=cau key=key item=item from=$cauuserl-}
-				<tr class="{-if ($smarty.foreach.cau.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}" 
-					onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
-					onClick="setEveCau('{-$key-}','{-$item[0]-}','{-$item[1]-}','{-$item[2]-}','0','cause'); 
-							uploadMsg(''); $('cmd').value='update';">
-   				<td>{-$item[0]-}</td>
-   				<td>{-$item[1]|truncate:150-}</td>
-   				<td><input type="checkbox" {-if ($item[2]==1)-} checked {-/if-} disabled /></td>
-				</tr>
-   {-/foreach-}
-{-/if-}
+				{-if $ctl_caupers-}
+					{-foreach name=cau key=key item=item from=$cauuserl-}
+						<tr class="{-if ($smarty.foreach.cau.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}" >
+							<td id="Id">{-$key-}</td>
+							<td id="Predefined">0</td>
+							<td id="Name">{-$item[0]-}</td>
+							<td id="Desc">{-$item[1]|truncate:150-}</td>
+							<td><input id="Active" type="checkbox" {-if ($item[2]==1)-} checked {-/if-} disabled /></td>
+						</tr>
+					{-/foreach-}
+				{-/if-}
 {-if $ctl_show-}
 			</tbody>
 		</table>
 	</div>
 	<br />
 	<div class="dwin" style="width:600px; height:100px;">
-		<table width="100%" class="grid">
+		<table id="tblCauseListPredef" width="100%" class="grid">
 			<thead>
 				<tr>
-				<td class="header" onMouseOver="showtip('{-$dic.DBCauPredefName[2]-}');">
-					<b>{-$dic.DBCauPredefName[0]-}</b></td>
-				<td class="header" onMouseOver="showtip('{-$dic.DBCauPredefDef[2]-}');">
-					<b>{-$dic.DBCauPredefDef[0]-}</b></td>
-				<td class="header" onMouseOver="showtip('{-$dic.DBCauActive[2]-}');">
-					<b>{-$dic.DBCauActive[0]-}</b></td>
+					<td>
+						Id
+					</td>
+					<td>
+						Predefined
+					</td>
+					<td class="header" onMouseOver="showtip('{-$dic.DBCauPredefName[2]-}');">
+						<b>{-$dic.DBCauPredefName[0]-}</b>
+					</td>
+					<td class="header" onMouseOver="showtip('{-$dic.DBCauPredefDef[2]-}');">
+						<b>{-$dic.DBCauPredefDef[0]-}</b>
+					</td>
+					<td class="header" onMouseOver="showtip('{-$dic.DBCauActive[2]-}');">
+						<b>{-$dic.DBCauActive[0]-}</b>
+					</td>
 				</tr>
 			</thead>
 			<tbody id="lst_caupred">
 {-/if-}
-{-if $ctl_caupred-}
-   {-foreach name=cau key=key item=item from=$caupredl-}
-				<tr class="{-if ($smarty.foreach.cau.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}" 
-					onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
-					onClick="setEveCau('{-$key-}','{-$item[0]-}','{-$item[1]-}','{-$item[2]-}','1','cause'); uploadMsg(''); $('cmd').value='update';">
-				<td>{-$item[0]-}</td>
-				<td>{-$item[1]|truncate:150-}</td>
-				<td><input type="checkbox" {-if ($item[2]==1)-} checked {-/if-} disabled /></td>
-				</tr>
-   {-/foreach-}
-{-/if-}
+				{-if $ctl_caupred-}
+					{-foreach name=cau key=key item=item from=$caupredl-}
+						<tr class="{-if ($smarty.foreach.cau.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}">
+							<td id="Id">{-$key-}</td>
+							<td id="Predefined">1</td>
+							<td id="Name">{-$item[0]-}</td>
+							<td id="Desc">{-$item[1]|truncate:150-}</td>
+							<td><input id="Active" type="checkbox" {-if ($item[2]==1)-} checked {-/if-} disabled /></td>
+						</tr>
+					{-/foreach-}
+				{-/if-}
 {-if $ctl_show-}
 			</tbody>
 		</table>
 	</div>
 	<br />
-	<input id="btnCauseAdd" type="button" value="{-#baddelem#-}" class="line" 
-		onClick="setEveCau('','','','1','0','cause');uploadMsg('');$('cmd').value='insert';" />
+	<input id="btnCauseEditAdd" type="button" value="{-#baddelem#-}" class="line" />
 	<span id="causestatusmsg" class="dlgmsg"></span>
 	<br /><br />
 	<div id="causeaddsect" style="display:none">
 		<form id="frmCauseEdit">
+			<input id="Id" name="Info[CauseId]" type="hidden" />
 			{-$dic.DBCauPersonName[0]-}<b style="color:darkred;">*</b><br />
-			<input id="aCauseName" name="CauseName" type="text" class="line" maxlength="40" style="width:500px;" tabindex="1" {-$ro-} 
+			<input id="Name" name="Info[CauseName]" type="text" class="line" maxlength="40" style="width:500px;" tabindex="1" {-$ro-} 
 				onBlur="updateList('causestatusmsg', 'causes.php', 'r={-$reg-}&cmd=chkname&CauseId='+ $('aCauseId').value +'&CauseName='+ $('aCauseName').value);"
 				onFocus="showtip('{-$dic.DBCauPersonName[2]-}');" />
 			<br /><br />
 			{-$dic.DBCauPersonDef[0]-}<b style="color:darkred;">*</b><br />
-			<textarea id="aCauseDesc" name="CauseDesc" class="line" rows="2" style="width:500px;" tabindex="2" 
+			<textarea id="Desc" name="Info[CauseDesc]" class="line" rows="2" style="width:500px;" tabindex="2" 
 				onFocus="showtip('{-$dic.DBCauPersonDef[2]-}');" {-$ro-}></textarea>
 			<br /><br />
 			{-$dic.DBCauActive[0]-} 
-			<input id="aCauseActive" name="CauseActive" type="checkbox" {-$ro-} 
-				onFocus="showtip('{-$dic.DBCauActive[2]-}');" tabindex="3" 
-				onClick="if (!this.checked) updateList('causestatusmsg', 'causes.php', 'r={-$reg-}&cmd=chkstatus&CauseId='+ $('aCauseId').value);" />
+			<input id="Active" name="Info[CauseActive]" type="checkbox" {-$ro-} 
+				onFocus="showtip('{-$dic.DBCauActive[2]-}');" tabindex="3" />
 			<br /><br />
+			<input id="Predefined" name="Info[CausePredefined]" type="hidden" />
 			<p align="center" style="width:500px;">
 				<input id="r" name="r" type="hidden" value="{-$reg-}" />
-				<input id="aCauseId" name="CauseId" type="hidden" />
-				<input id="aCausePreDefined" name="CausePreDefined" type="hidden" />
 				<input id="cmd" name="cmd" type="hidden" value="" />
-				<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="4" />
-				<input type="reset" value="{-#bcancel#-}" onClick="$('causeaddsect').style.display='none'; uploadMsg('');" {-$ro-} class="line" />
+				<input id="btnSubmit" type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="4" />
+				<input id="btnCancel" type="reset" value="{-#bcancel#-}" {-$ro-} class="line" />
 			</p>
 		</form>
 	</div>

@@ -14,7 +14,7 @@ class DICause extends DIRecord {
 		                      "CauseName/STRING," .
 		                      "CauseDesc/STRING," .
 		                      "CauseActive/BOOLEAN," .  
-		                      "CausePredefined/BOOLEAN," .
+		                      "CausePredefined/INTEGER," .
 		                      "CauseRGBColor/STRING," .
 		                      "CauseKeyWords/STRING," .
 		                      "RecordCreation/DATETIME," .

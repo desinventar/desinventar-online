@@ -3,12 +3,9 @@
 			var RegionId = jQuery('#desinventarRegionId').val();
 			switch (item.id) {
 				case 'mnuRegionInfo':
-					jQuery('#divDatabaseInfo').html('');
-					if (RegionId != '') {
-						jQuery('#divDatabaseInfo').load('index.php?cmd=getRegionFullInfo&RegionId=' + jQuery('#desinventarRegionId').val() + '&t=' + new Date().getTime());
-						jQuery('#divDatabaseInfo').show();
-						jQuery('#dcr').hide();
-					}
+					jQuery('#dcr').hide();
+					doGetRegionInfo(jQuery('#desinventarRegionId').val());
+					jQuery('#divRegionInfo').show();
 				break;
 				case 'mnuUserLogin':
 					//updateUserBar('user.php', '', '', '');
@@ -116,8 +113,10 @@
 				break;
 				// databases menu
 				case 'mnuDatabaseFind':
-					updateList('dbl', 'index.php', 'cmd=listdb');
-					dblw.show();
+					// Show database list
+					hideQueryDesign();
+					jQuery('.contentBlock').hide();
+					updateDatabaseListByUser();
 				break;
 				case 'mnuUserAdmin':
 					//updateList('dbl', 'user.php', 'cmd=adminusr', 'onReadyUserAdmin');
@@ -397,7 +396,7 @@
 											$('bsave').style.visibility = 'visible';
 											$('bprint').style.visibility = 'visible';
 										} else {
-											alert("{-#derrmsgfrm#-}");
+											console.debug("{-#derrmsgfrm#-}");
 										}
 									} //handler
 								},
@@ -438,7 +437,7 @@
 											$('bsave').style.visibility = 'visible';
 											$('bprint').style.visibility = 'visible';
 										} else {
-											alert("{-#serrmsgfrm#-}");
+											console.debug("{-#serrmsgfrm#-}");
 										}
 									} //handler
 								},
@@ -518,7 +517,7 @@
 											$('bsave').style.visibility = 'visible';
 											$('bprint').style.visibility = 'visible';
 										} else {
-											alert("{-#serrmsgfrm#-}");
+											console.debug("{-#serrmsgfrm#-}");
 										}
 									}
 								},

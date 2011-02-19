@@ -128,20 +128,7 @@
 							</table>
 						</td>
 						<td class="centro">
-							<div class="contentBlock" id="regionlist">
-								<span class="databaseTitle" id="regiontitle_COUNTRY"></span>
-								<ul   class="databaseList"  id="regionlist_COUNTRY"><li></li></ul>
-								<span class="databaseTitle" id="regiontitle_ADMINREGION">{-#txtRoleADMINREGION#-}</span>
-								<ul   class="databaseList"  id="regionlist_ADMINREGION"><li></li></ul>
-								<span class="databaseTitle" id="regiontitle_SUPERVISOR">{-#txtRoleSUPERVISOR#-}</span>
-								<ul   class="databaseList"  id="regionlist_SUPERVISOR"><li></li></ul>
-								<span class="databaseTitle" id="regiontitle_USER">{-#txtRoleUSER#-}</span>
-								<ul   class="databaseList"  id="regionlist_USER"><li></li></ul>
-								<span class="databaseTitle" id="regiontitle_OBSERVER">{-#txtRoleOBSERVER#-}</span>
-								<ul   class="databaseList"  id="regionlist_OBSERVER"><li></li></ul>
-								<span class="databaseTitle" id="regiontitle_NONE">{-#txtRoleNONE#-}</span>
-								<ul   class="databaseList"  id="regionlist_NONE"><li></li></ul>
-							</div>
+							{-include file="../../web/templates/region_list.tpl"-}
 							<div class="contentBlock" id="pageinfo">
 								<table width="100%">
 									<tr>
