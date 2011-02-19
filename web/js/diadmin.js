@@ -8,46 +8,65 @@
 	var reg = "";
 	var waiting = "<img src='loading.gif'>";
 
-	function uploadMsg(msg) {
-		if (mod != "") {
+	function uploadMsg(msg)
+	{
+		if (mod != '')
+		{
 			var mydiv = $(mod + 'statusmsg');
 			mydiv.innerHTML = msg;
 		}
 	}
 	
-	function updateList(div, url, pars, callback) {
+	function updateList(div, url, pars, callback)
+	{
 		jQuery('#' + div).load(url, pars, function(response, status, xhr) {
 			onReadyDatabaseAdmin();
+			// Hide first two columns (EventId,EventPredefined)
+			jQuery('td:nth-child(1)','#tblEventListUser,#tblEventListPredef').hide();
+			jQuery('td:nth-child(2)','#tblEventListUser,#tblEventListPredef').hide();
+			// Hide first two columns (CauseId,CausePredefined)
+			jQuery('td:nth-child(1)','#tblCauseListUser,#tblCauseListPredef').hide();
+			jQuery('td:nth-child(2)','#tblCauseListUser,#tblCauseListPredef').hide();
 		});
 	}
 
-	function updateUserBar(url, cmd, user, pass) {
+	function updateUserBar(url, cmd, user, pass)
+	{
 		jQuery.post(url,
-			{cmd      : cmd,
-			 userid   : user,
-			 password : pass
+			{
+				cmd      : cmd,
+				userid   : user,
+				password : pass
 			},
-			function(data) {
+			function(data)
+			{
 				jQuery('#pagecontent').html(data);
-				if (cmd == "login") {
+				if (cmd == "login")
+				{
 					updateList('pagecontent', url, 'cmd=welcome');
-				} else if (cmd == "logout") {
+				}
+				else if (cmd == "logout")
+				{
 					window.location.reload(false);
 				}				
 			}
 		);
 	} //function
 
-	function sendData(r, url, pars, val) {
+	function sendData(r, url, pars, val)
+	{
 		reg = r;
 		opt = val;
-		if (mod != "") {
+		if (mod != "")
+		{
 			$(mod + 'addsect').style.display = 'none';
 		}
 		pars = pars + '&t=' + new Date().getTime();
-		var myAjax = new Ajax.Request( url, {
+		var myAjax = new Ajax.Request( url,
+		{
 			method: 'get', parameters: pars,
-			onLoading: function(request) {
+			onLoading: function(request)
+			{
 				window.style.cursor = "wait";
 				uploadMsg(waiting);
 			},
@@ -55,11 +74,13 @@
 		} );
 	} //function
 
-	function showResponse(originalRequest) {
+	function showResponse(originalRequest)
+	{
 		var newData = originalRequest.responseText;
 		var reg = jQuery('#desinventarRegionId').val();
 		uploadMsg(newData);
-		switch(mod) {
+		switch(mod)
+		{
 			case "regionpa":
 				updateList('lst_regionpa', 'region.php', 'cmd=list');
 			break;
@@ -84,99 +105,125 @@
 		}
 	}
 
-	function setEveCau(id, name, desc, active, is_pred, module) {
+	function setEveCau(id, name, desc, active, is_pred, module)
+	{
 		mod = module;
 		$(mod + 'addsect').style.display = 'block';
 		uploadMsg('');
-		if (module == "event") {
+		if (module == "event")
+		{
 			$('EventName').value = name;
 			$('aEventDesc').value = desc;
 			if (active == "1")
+			{
 				$('aEventActive').checked = true;
+			}
 			else
+			{
 				$('aEventActive').checked = false;
+			}
 			if (is_pred == "1")
+			{
 				$('aEventDesc').disabled = true;
+			}
 			else
+			{
 				$('aEventDesc').disabled = false;
-			$('aEventPreDefined').value = is_pred;
+			}
+			$('aEventPredefined').value = is_pred;
 			$('aEventId').value = id;
 		}
-		else if (module == "cause") {
+		else if (module == "cause")
+		{
 			$('aCauseName').value = name;
 			$('aCauseDesc').value = desc;
 			if (active == "1")
+			{
 				$('aCauseActive').checked = true;
+			}
 			else
+			{
 				$('aCauseActive').checked = false;
+			}
 			if (is_pred == "1")
+			{
 				$('aCauseDesc').disabled = true;
+			}
 			else
+			{
 				$('aCauseDesc').disabled = false;
-			$('aCausePreDefined').value = is_pred;
+			}
+			$('aCausePredefined').value = is_pred;
 			$('aCauseId').value = id;
 		}
 	}
 
-	function setRolLog (key, val, module) {
+	function setRolLog (key, val, module)
+	{
 		mod = module;
 		$(mod + 'addsect').style.display = 'block';
-		if (module == "role") {
+		if (module == "role")
+		{
 			$('UserId').value = key;
 			$('AuthAuxValue').value = val;
 		}
-		else if (module == "log") {
+		else if (module == "log")
+		{
 			$('DBLogType').value = key;
 			$('DBLogNotes').value = val;
 		}
 	}
 	
-	function setLevGeo (key, val, val2, val3, ly1, ly2, ly3, module) {
+	function setLevGeo (key, val, val2, val3, ly1, ly2, ly3, module)
+	{
 		mod = module;
 		$(mod + 'addsect').style.display = 'block';
-		if (module == "lev") {
+		if (module == "lev")
+		{
 			$('GeoLevelId').value = key;
 			$('GeoLevelName').value = val;
 			$('GeoLevelDesc').value = val2;
-			/*
-			if ($('GeoLevelLayerFile').length == 0) {
-				$('chkmap').checked = false;
-				$('shwmap').style.display = 'none';
-			}
-			else {
-				$('chkmap').checked = true;
-				$('shwmap').style.display = 'block';
-			}*/
-			//$('GeoLevelLayerFile').value = ly1;
 			$('GeoLevelLayerCode').value = ly2;
 			$('GeoLevelLayerName').value = ly3;
 		}
-		else if (module == "geo") {
+		else if (module == "geo")
+		{
 			$('aGeographyId').value = key;
 			$('aGeographyCode').value = val;
 			$('aGeographyName').value = val2;
 			if (val3 == "1")
+			{
 				$('aGeographyActive').checked = true;
+			}
 			else
+			{
 				$('aGeographyActive').checked = false;
+			}
 		}
 	}
 
-	function setadmingeo(reg, k, l) {
+	function setadmingeo(reg, k, l)
+	{
 		reg = jQuery('#desinventarRegionId').val();
 		var v = k.split("|");
 		mod = 'geo';
 		uploadMsg('');
-		if (v[0] == -1) {
+		if (v[0] == -1)
+		{
 			setLevGeo('','','',1,'','','','geo');
-			if (l == 0) {
+			if (l == 0)
+			{
 				$('aGeoParentId').value = '';
 			}
 			jQuery('#frmDBConfigGeographyEdit #Cmd').val('cmdGeographyInsert');
 			$('alev' + l).style.display = "none";
-		} else if (v[0] == -2) {
+		}
+		else if (v[0] == -2)
+		{
 			$('geoaddsect').style.display = 'none';
-		} else {
+		}
+		else
+		{
 			setLevGeo(v[0],v[1],v[2],v[3],'','','','geo');
 			$('aGeoParentId').value = v[0];
 			jQuery('#frmDBConfigGeographyEdit #Cmd').val('cmdGeographyUpdate');
@@ -184,7 +231,8 @@
 		}
 	} //function
 	
-	function setUserPA (login, name, email, pass, cnt, city, active) {
+	function setUserPA(login, name, email, pass, cnt, city, active)
+	{
 		mod = "userpa";
 		$(mod + 'addsect').style.display = 'block';
 		$('UserId').value = login;
@@ -194,59 +242,29 @@
 		$('UserCountry').value = cnt;
 		$('UserCity').value = city;
 		if (active == "1")
+		{
 			$('UserActive').checked = true;
-		else
-			$('UserActive').checked = false;
-	}
-
-	/*** MANAGE MODULES WINDOWS  ***/
-/*	var diwin = null;
-	var docw = null;*/
-	var winopt = 'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no';
-/*
-	function runWin(url, name) {
-		var w	= 1020;
-		var h	= 700;
-		if (name == "doc")
-			w = 800;
-		if (win != null && !win.closed && win.location)
-			win.opener = self;
-		else {
-			if (CheckIsIE())
-				win = window.open(url, name);
-			else
-				win = window.open(url, name, options);
 		}
-		if (window.focus) win.focus();
-		return false;
+		else
+		{
+			$('UserActive').checked = false;
+		}
 	}
 
-	function endWin(name) {
-		if (name == 'desinventar' && !diwin.closed && diwin.location)
-			diwin.close();
-		else if (name == 'doc' && !docw.closed && docw.location)
-			docw.close();
-		return false;
-	}
+	var winopt = 'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no';
 
-	function chkWin(name) {
-		if (name == 'desinventar' && !diwin.closed && diwin.location)
-			return true;
-		else if (name == 'doc' && !docw.closed && docw.location)
-			return true;
-		return false;
-	}
-*/
-	/******* MANAGE FORMS ********/
-	function setfocus(a_field_id) {
+	function setfocus(a_field_id)
+	{
 		$(a_field_id).focus();
 	}
 
-	function checkForm(prmForm, prmFieldList, errmsg) {
+	function checkForm(prmForm, prmFieldList, errmsg)
+	{
 		var bReturn = true;
 		jQuery.each(prmFieldList, function(index, value) {
 			var selector = '#' + prmForm + ' #' + value;
-			if (jQuery(selector).val().length < 1) {
+			if (jQuery(selector).val().length < 1)
+			{
 				jQuery(selector).highlight();
 				bReturn = false;
 			} //if
@@ -254,21 +272,25 @@
 		return bReturn;
 	} //function
 
-	function getForm(fobj) {
+	function getForm(fobj)
+	{
 		var str = '';
 		var ft = ''; 
 		var fv = ''; 
 		var fn = ''; 
 		var els = ''; 
-		for(var i = 0;i < fobj.elements.length;i++) {
+		for(var i = 0;i < fobj.elements.length;i++)
+		{
 			els = fobj.elements[i];
 			ft = els.title;
 			fv = els.value;
 			fn = els.name;
-			switch(els.type) {
+			switch(els.type)
+			{
 				case "text": case "hidden": case "password": case "textarea":
 					// is it a required field?
-					if (encodeURI(ft) == "required" && encodeURI(fv).length < 1) {
+					if (encodeURI(ft) == "required" && encodeURI(fv).length < 1)
+					{
 						els.focus();
 						return false;
 					}
@@ -289,11 +311,13 @@
 	}
 
 	// Block characters according to type
-	function blockChars(e, value, type) {
+	function blockChars(e, value, type)
+	{
 		var key = window.event ? e.keyCode : e.which;
 
 		// 2010-08-19 (jhcaiced) Accept values in numeric keypad
-		if (key >= 96 && key <= 105) {
+		if (key >= 96 && key <= 105)
+		{
 			key = key - 48;
 		}
 		var keychar = String.fromCharCode(key);
@@ -307,11 +331,16 @@
 		var val = true; // validate characters
 			// Check max length
 		if (value.length >= parseInt(opt[1]))
+		{
 			var len = false;
+		}
 		else
+		{
 			var len = true;
-			// Check datatype
-		switch (opt[0]) {
+		}
+		// Check datatype
+		switch (opt[0])
+		{
 			case "date" :
 				reg = /^\d{4}-\d{0,2}-\d{0,2}$/;
 				chk = reg.test(keychar);
@@ -335,14 +364,17 @@
 	  return (val && ((chk && len) || spckey));
 	}
 
-	function onlyText(e) {
+	function onlyText(e)
+	{
 		var keynum;
 		var keychar;
 		var numcheck;
-		if(window.event) { // IE
+		if(window.event)
+		{ // IE
 			keynum = e.keyCode;
 		}
-		else if(e.which) { // Netscape/Firefox/Opera
+		else if(e.which)
+		{ // Netscape/Firefox/Opera
 			keynum = e.which;
 		}
 		keychar = String.fromCharCode(keynum);
@@ -350,13 +382,16 @@
 		return !numcheck.test(keychar);
 	}
 
-	function onlyNumber(e) {
+	function onlyNumber(e)
+	{
 		var keynum;
 		var keychar;
-		if(window.event) { // IE
+		if(window.event)
+		{ // IE
 			keynum = e.keyCode;
 		}
-		else if(e.which) { // Netscape/Firefox/Opera
+		else if(e.which)
+		{ // Netscape/Firefox/Opera
 			keynum = e.which;
 		}
 		if (e.keyCode < 48 || e.keyCode > 57)
@@ -365,47 +400,67 @@
 	}
 
 	
-	function getGeoItems(reg, geoid, l, lev, src) {
-		if (src == "DATA") {
+	function getGeoItems(reg, geoid, l, lev, src)
+	{
+		if (src == "DATA")
+		{
 			div = window.parent.frames['dif'].document.getElementById('lev'+ l);
 			ele = window.parent.frames['dif'].document.getElementById('geolev'+ l);
 		}
-		else {
+		else
+		{
 			div = $('lev'+ l);
 			ele = $('geolev'+ l);
 		}
 		geo = geoid.substr(0, (l+1) * 5);
-		for (var w=0; w < ele.length; w++) {
+		for (var w=0; w < ele.length; w++)
+		{
 			if (ele.options[w].value == geo)
 				ele.selectedIndex = w ;
 		}
-		if (l < lev) {
-			var lsAjax = new Ajax.Updater( div, 'cards.php', {
-				method: 'get', parameters: 'r='+ reg +'&cmd=list&GeographyId='+ geo + '&t=' + new Date().getTime(),
-				onComplete: function(request)	{
-					getGeoItems(reg, geoid, l+1, lev, src);
-				}
-			} );
+		if (l < lev)
+		{
+			var lsAjax = new Ajax.Updater( div, 'cards.php',
+				{
+					method: 'get', 
+					parameters: 'r='+ reg +'&cmd=list&GeographyId='+ geo + '&t=' + new Date().getTime(),
+					onComplete: function(request) {
+						getGeoItems(reg, geoid, l+1, lev, src);
+					}
+				});
 		}
 	}
 
-	function showinfo(mydiv) {
+	function showinfo(mydiv)
+	{
 		if ($(mydiv).style.display == 'none')
+		{
 			$(mydiv).style.display = 'block';
+		}
 		else
+		{
 			$(mydiv).style.display = 'none';
+		}
 	}
 
-	function CheckIsIE() {
+	function CheckIsIE()
+	{
 		if (navigator.appName.toUpperCase() == 'MICROSOFT INTERNET EXPLORER')
+		{
 			return true;
+		}
 		else
+		{
 			return false;
+		}
 	}
 
-	function saveRes(cmd, typ) {
-		if($('DCRes').value != '') {
-			switch ($('DCRes').value) {
+	function saveRes(cmd, typ)
+	{
+		if($('DCRes').value != '')
+		{
+			switch ($('DCRes').value)
+			{
 				case 'D':
 					$('_D+saveopt').value = typ;
 					sendList(cmd);
@@ -461,13 +516,16 @@
 		}
 	}
 	
-	function sendMap(cmd) {
+	function sendMap(cmd)
+	{
 		jQuery('#prmQueryCommand').val('cmdMapShow');
-		if ($('_M+Type').length > 0) {
+		if ($('_M+Type').length > 0)
+		{
 			w = Ext.getCmp('westm');
 			//$('frmwait').innerHTML = waiting;
 			$('_M+cmd').value = cmd;
-			if (cmd == "export") {
+			if (cmd == "export")
+			{
 				jQuery('#prmQueryCommand').val('cmdMapSave');
 				// to export image save layers and extend..
 				var dcr = document.getElementById('dcr');
@@ -477,8 +535,10 @@
 				//extent.transform(mm.prj1, mm.prj2);
 				var layers = mm.layers;
 				var activelayers = [];
-				for (i in layers) {
-					if (layers[i].visibility && layers[i].calculateInRange() && !layers[i].isBaseLayer) {
+				for (i in layers)
+				{
+					if (layers[i].visibility && layers[i].calculateInRange() && !layers[i].isBaseLayer)
+					{
 						activelayers[activelayers.length] = layers[i].params['LAYERS'];
 					}
 				}
@@ -494,15 +554,21 @@
 			jQuery('#frmMainQuery').submit();
 			//hideMap();
 			return true;
-		} else {
+		}
+		else
+		{
 			return false;
 		}
 	} //function
 	
-	function sendGraphic(cmd) {
-		if (cmd == 'result') {
+	function sendGraphic(cmd)
+	{
+		if (cmd == 'result')
+		{
 			jQuery('#prmQueryCommand').val('cmdGraphShow');
-		} else {
+		}
+		else
+		{
 			jQuery('#prmQueryCommand').val('cmdGraphSave');
 		}
 		w = Ext.getCmp('westm');
@@ -514,20 +580,27 @@
 		//hideMap();
 	}
 	
-	function sendStatistic(cmd) {
-		if (cmd == 'result') {
+	function sendStatistic(cmd)
+	{
+		if (cmd == 'result')
+		{
 			jQuery('#prmQueryCommand').val('cmdStatShow');
-		} else {
+		}
+		else
+		{
 			jQuery('#prmQueryCommand').val('cmdStatSave');
 		}
-		if ($('_S+Firstlev').value != "" && $('_S+Field[]').length > 0) {
+		if ($('_S+Firstlev').value != "" && $('_S+Field[]').length > 0)
+		{
 			w = Ext.getCmp('westm');
 			$('_S+cmd').value = cmd;
 			selectall('_S+Field[]');
 			var ob = $('_S+Field[]');
 			var mystr = "D.DisasterId||";
-			for (i=0; i < ob.length; i++) 
+			for (i=0; i < ob.length; i++)
+			{
 				mystr += "," + ob[i].value;
+			}
 			$('_S+FieldH').value = mystr;
 			combineForms('frmMainQuery', 'CS');
 			w.collapse();//hide()
@@ -535,12 +608,15 @@
 			jQuery('#frmMainQuery').submit();
 			//hideMap();
 			return true;
-		} else {
+		}
+		else
+		{
 			return false;
 		}
 	} //function
 	
-	function saveQuery() {
+	function saveQuery()
+	{
 		jQuery('#prmQueryCommand').val('cmdQuerySave');
 		selectall('_D+Field[]');
 		combineForms('frmMainQuery', 'CD');
@@ -554,44 +630,58 @@
 		return true;
 	}
 
-	function disab(field) {
+	function disab(field)
+	{
 		field.disabled = true;
 		field.className = "disabled";
 	}
 	
-	function enab(field) {
+	function enab(field)
+	{
 		field.disabled = false;
 		field.className = "";
 	}
 	
-	function showtip(tip) {
+	function showtip(tip)
+	{
 		var d = parent.document.getElementById('_DIDesc');
 		d.style.backgroundColor = '#ffffff';
 		d.value = tip;
 	}
 	
 	// Effects options
-	function showeff(val, x, y) {
-		if (val == ">=" || val == "<=" || val == "=" || val == "-3") {
+	function showeff(val, x, y)
+	{
+		if (val == ">=" || val == "<=" || val == "=" || val == "-3")
+		{
 			$(x).style.display = 'inline';
 			if (val == "-3")
+			{
 				$(y).style.display = 'inline';
+			}
 			else
+			{
 				$(y).style.display = 'none';
+			}
 		}
-		if (val == "" || val == "0" || val == "-1" || val == "-2") {
+		if (val == "" || val == "0" || val == "-1" || val == "-2")
+		{
 			$(x).style.display = 'none';
 			$(y).style.display = 'none';
 		}
 	}
 	
-	function enadisEff(id, chk) {
-		if (chk) {
+	function enadisEff(id, chk)
+	{
+		if (chk)
+		{
 			$('o'+ id).style.display = 'inline';
 			enab($(id +'[0]'));
 			enab($(id +'[1]'));
 			enab($(id +'[2]'));
-		} else {
+		}
+		else
+		{
 			$('o'+ id).style.display = 'none';
 			disab($(id +'[0]'));
 			disab($(id +'[1]'));
@@ -600,12 +690,15 @@
 	}
 	
 	// forms management
-	function combineForms(dcf, ref) {
+	function combineForms(dcf, ref)
+	{
 		var dc = $(dcf);
 		var rf = $(ref).elements;
 		var ih = null;
-		for (i=0; i < rf.length; i++) {
-			if (rf[i].disabled == false) {
+		for (i=0; i < rf.length; i++)
+		{
+			if (rf[i].disabled == false)
+			{
 				ih = document.createElement("input");
 				ih.type   = "hidden";
 				ih.value  = rf[i].value;
@@ -615,15 +708,18 @@
 		}
 	}
 	
-	function setSelMap(code, gid, opc) {
-		if (opc) {
+	function setSelMap(code, gid, opc)
+	{
+		if (opc)
+		{
 			// Find and fill childs
 			$('itree-' + gid).style.display = 'block';
 			updateList('itree-' + gid, 'index.php', 'r=' + jQuery('#desinventarRegionId').val() + '&cmd=glist&GeographyId=' + gid);
-		} else {
+		}
+		else
+		{
 			// clean childs first
 			$('itree-' + gid).innerHTML = '';
 			$('itree-' + gid).style.display = 'none';
 		}
 	}
-	

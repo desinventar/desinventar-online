@@ -35,13 +35,13 @@ function form2event($form)
 	{
 		$data['EventActive'] = 0;
 	}
-	if (isset($form['EventPreDefined']) && $form['EventPreDefined'] == '1')
+	if (isset($form['EventPredefined']) && $form['EventPredefined'] == '1')
 	{
-		$data['EventPreDefined'] = 1;
+		$data['EventPredefined'] = 1;
 	}
 	else
 	{
-		$data['EventPreDefined'] = 0;
+		$data['EventPredefined'] = 0;
 	}
 	return $data;
 }
@@ -80,19 +80,39 @@ $cmd = getParameter('cmd','');
 $dat = form2event($_POST);
 switch ($cmd)
 {
-	case 'insert':
-		$o = new DIEvent($us);
-		$o->setFromArray($dat);
-		$o->set('EventId', uuid());
-		$o->set('EventPredefined', 0);
-		$i = $o->insert();
-		showResult($i, $t);
+	case 'cmdEventInsert':
+		if ($us->UserRoleValue >= ROLE_ADMINREGION)
+		{
+			$info = $_POST['Info'];
+			if (! isset($info['EventActive']))
+			{
+				$info['EventActive'] = 'off';
+			}
+			$o = new DIEvent($us);
+			$o->setFromArray($info);
+			$o->set('EventId', uuid());
+			$o->set('EventPredefined', 0);
+			$i = $o->insert();
+			showResult($i, $t);
+		}
 	break;
-	case 'update':
-		$o = new DIEvent($us, $dat['EventId']);
-		$o->setFromArray($dat);
-		$i = $o->update();
-		showResult($i, $t);
+	case 'cmdEventUpdate':
+		if ($us->UserRoleValue >= ROLE_ADMINREGION)
+		{
+			$info = $_POST['Info'];
+			if (! isset($info['EventActive']))
+			{
+				$info['EventActive'] = 'off';
+			}
+			if ($info['EventPredefined'] > 0)
+			{
+				$info['EventPredefined'] = 2; // Predefined but Localized
+			}
+			$o = new DIEvent($us, $info['EventId']);
+			$o->setFromArray($info);
+			$i = $o->update();
+			showResult($i, $t);
+		}
 	break;
 	case 'list':
 		$prmType = getParameter('predef');

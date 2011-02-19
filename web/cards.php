@@ -8,7 +8,6 @@ require_once('include/loader.php');
 require_once('include/query.class.php');
 require_once('include/didisaster.class.php');
 require_once('include/diregion.class.php');
-require_once('include/dieedata.class.php');
 
 // Convert Post Form to DesInventar Disaster Table struct 
 // Insert  (1) create DisasterId. 
@@ -23,8 +22,8 @@ function form2disaster($form, $icmd)
 		{
 			if ((substr($k, 0, 1)  != '_') &&
 			    (substr($k, 0, 12) != 'RecordAuthor') &&
-			    (substr($k, 0, 19) != 'GeographyId') &&
-			    (substr($k, 0, 3)  != 'EEF'))
+			    (substr($k, 0, 19) != 'GeographyId')
+			   )
 			{
 			    $data[$k] = $i;
 			}
@@ -188,8 +187,7 @@ else
 			// Read Datacard Info and return in JSON
 			$DisasterId = getParameter('DisasterId','');
 			$d = new DIDisaster($us, $DisasterId);
-			$e = new DIEEData($us, $DisasterId);
-			$dcard = array_merge($d->oField['info'],$e->oField['info']);
+			$dcard = $d->oField['info'];
 			$dcard['DisasterBeginTime[0]'] = substr($dcard['DisasterBeginTime'], 0, 4);
 			$dcard['DisasterBeginTime[1]'] = '';
 			$dcard['DisasterBeginTime[2]'] = '';
@@ -241,37 +239,15 @@ else
 			{
 				$i = $o->update();
 			}
-			if ($i > 0)
-			{
-				// Save EEData ....
-				// If Datacard is valid, update EEData Table..
-				$eedat = form2eedata($_POST);
-				$eedat['DisasterId'] = $data['DisasterId'];
-				$e = new DIEEData($us, $eedat['DisasterId']);
-				$e->setFromArray($eedat);
-				if ($cmd == 'insertDICard')
-				{
-					$i = $e->insert();
-				}
-				else
-				{
-					$i = $e->update();
-				}
-				if ($i < 0)
-				{
-					$answer['Status']     = 'ERROR';
-					$answer['StatusCode'] = 'ERROR';
-					$answer['StatusMsg']  = showerror($i) . '(' . $i . ')';
-					$answer['ErrorCode']  = $i;				
-				}
-			}
-			else
+
+			if ($i < 0)
 			{
 				$answer['Status']     = 'ERROR';
 				$answer['StatusCode'] = 'ERROR';
 				$answer['StatusMsg']  = showerror($i) . '(' . $i . ')';
 				$answer['ErrorCode']  = $i;				
 			}
+
 			if ($answer['Status'] == 'OK')
 			{
 				$answer['DisasterId']      = $o->get('DisasterId');
@@ -279,6 +255,7 @@ else
 				$answer['RecordPublished'] = $us->q->getNumDisasterByStatus('PUBLISHED');
 				$answer['RecordReady']     = $us->q->getNumDisasterByStatus('READY');
 			}
+
 			if ($cmd == 'insertDICard')
 			{
 				$answer['RecordCount'] = $us->getDisasterCount();

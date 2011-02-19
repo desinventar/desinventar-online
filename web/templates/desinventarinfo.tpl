@@ -1,6 +1,7 @@
 <div id="desinventarInfo" style="display:none;">
 	<input type="hidden" id="desinventarURL"           value="{-$desinventarURL-}" />
 	<input type="hidden" id="desinventarURLPortal"     value="{-$desinventarURLPortal-}" />
+	<input type="hidden" id="desinventarPortalType"    value="{-$desinventarPortalType-}" />
 	<input type="hidden" id="desinventarLang"          value="{-$desinventarLang-}" />
 	<input type="hidden" id="desinventarVersion"       value="{-$desinventarVersion-}" />
 	<input type="hidden" id="desinventarUserId"        value="{-$desinventarUserId-}" /> 
@@ -11,6 +12,7 @@
 	<input type="hidden" id="desinventarRegionId"      value="{-$desinventarRegionId-}" />
 	<input type="hidden" id="desinventarRegionLabel"   value="{-$desinventarRegionLabel-}" />
 	<input type="hidden" id="desinventarHasInternet"   value="{-$desinventarHasInternet-}" />
+	<input type="hidden" id="desinventarOpenLayersURL" value="{-$desinventarOpenLayersURL-}" />
 	<select id="desinventarLanguageList" style="display:none;">
 		{-if count($LanguageList) > 0-}
 			{-foreach name=LanguageList key=key item=item from=$LanguageList-}

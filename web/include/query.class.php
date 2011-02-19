@@ -196,7 +196,7 @@ class Query extends PDO
 				{
 					if (array_key_exists($EventId, $data1))
 					{
-						if ($data1[$EventId]['RecordUpdate'] >= $data[$EventId]['RecordUpdate'])
+						if ($data[$EventId]['EventPredefined'] == 1)
 						{
 							$data[$EventId][0] = $data1[$EventId][0];
 							$data[$EventId][1] = $data1[$EventId][1];
@@ -228,7 +228,7 @@ class Query extends PDO
 				{
 					if (array_key_exists($CauseId, $data1))
 					{
-						if ($data1[$CauseId]['RecordUpdate'] >= $data[$CauseId]['RecordUpdate'])
+						if ($data[$CauseId]['CausePredefined'] == 1)
 						{
 							$data[$CauseId][0] = $data1[$CauseId][0];
 							$data[$CauseId][1] = $data1[$CauseId][1];
@@ -242,7 +242,7 @@ class Query extends PDO
 
 	public function getBasicEventList($lg)
 	{
-		$sql = 'SELECT EventId, EventName,EventDesc,RecordUpdate FROM Event ' .
+		$sql = 'SELECT EventId, EventName,EventDesc,EventPredefined,RecordUpdate FROM Event ' .
 		       ' WHERE LangIsoCode="' . $lg . '" ORDER BY EventName';
 		$data = array();
 		$res = $this->base->query($sql);
@@ -250,14 +250,16 @@ class Query extends PDO
 		{
 			$data[$row['EventId']] = array(0 => $row['EventName'], 
 			                               1 => $row['EventDesc'],
-			                               'RecordUpdate' => $row['RecordUpdate']);
+			                               'EventPredefined' => $row['EventPredefined'],
+			                               'RecordUpdate' => $row['RecordUpdate']
+			                              );
 		}
 		return $data;
 	}
 
 	public function getBasicCauseList($lg)
 	{
-		$sql = 'SELECT CauseId,CauseName,CauseDesc,RecordUpdate FROM Cause ' .
+		$sql = 'SELECT CauseId,CauseName,CauseDesc,CausePredefined,RecordUpdate FROM Cause ' .
 		       ' WHERE LangIsoCode="' . $lg . '" ORDER BY CauseName';
 		$data = array();
 		$res = $this->base->query($sql);
@@ -265,6 +267,7 @@ class Query extends PDO
 		{
 			$data[$row['CauseId']] = array(0 => $row['CauseName'],
 			                               1 => $row['CauseDesc'],
+			                               'CausePredefined' => $row['CausePredefined'],
 			                               'RecordUpdate' => $row['RecordUpdate']);
 		}
 		return $data;
@@ -274,11 +277,11 @@ class Query extends PDO
 	{
 		if ($type == 'PREDEF')
 		{
-			$sqlt = 'EventPreDefined=1';
+			$sqlt = 'EventPredefined>=1';
 		}
 		else if ($type == 'USER')
 		{
-			$sqlt = 'EventPreDefined=0';
+			$sqlt = 'EventPredefined=0';
 		}
 		else
 		{
@@ -300,7 +303,9 @@ class Query extends PDO
 			$data[$row['EventId']] = array(0 => $row['EventName'],
 			                               1 => str2js($row['EventDesc']),
 			                               2 => $row['EventActive'],
-			                               'RecordUpdate' => $row['RecordUpdate']);
+			                               'EventPredefined' => $row['EventPredefined'],
+			                               'RecordUpdate' => $row['RecordUpdate']
+			                              );
 		}
 		return $data;
 	}
@@ -309,7 +314,7 @@ class Query extends PDO
 	{
 		if ($type == "PREDEF")
 		{
-			$sqlt = "CausePredefined=1";
+			$sqlt = "CausePredefined>0";
 		}
 		else if ($type == "USER")
 		{
@@ -337,6 +342,7 @@ class Query extends PDO
 			$data[$row['CauseId']] = array(0 => $row['CauseName'], 
 			                               1 => str2js($row['CauseDesc']),
 			                               2 => $row['CauseActive'],
+			                               'CausePredefined' => $row['CausePredefined'],
 			                               'RecordUpdate' => $row['RecordUpdate']);
 		} //foreach
 		return $data;

@@ -94,8 +94,8 @@
 			</td>
 		</tr>
 	</table>
-	<!-- divDatabaseInfo - Database Info -->
-	{-include file="database_info.tpl"-}
+	<!-- divRegionInfo -->
+	{-include file="region_info.tpl"-}
 	<div id="dcr">
 	</div>
 </div> <!-- end div id=divQueryResults -->

@@ -21,7 +21,7 @@ function onReadyMain()
 		}
 		else
 		{
-			jQuery('#divDatabaseInfo').hide();
+			jQuery('#divRegionInfo').hide();
 			jQuery('#dcr').show();
 			jQuery('#dcr').html('<img src="loading.gif">');
 			jQuery.post(myURL,
@@ -55,34 +55,47 @@ function onReadyMain()
 	if (jQuery('#desinventarRegionId').val() != '')
 	{
 		// Load Database Info and Show
-		jQuery('#divDatabaseInfo').load('index.php?cmd=getRegionFullInfo&RegionId=' + jQuery('#desinventarRegionId').val() + '&t=' + new Date().getTime());
-		jQuery('#divDatabaseInfo').show();
+		doGetRegionInfo(jQuery('#desinventarRegionId').val());
+		jQuery('#divRegionInfo').show();
 		jQuery('#dcr').hide();
 		jQuery('#divQueryResults').show();
 	}
 	else
 	{
 		// Show database list
-		jQuery("#divDatabaseList").show();
+		updateDatabaseListByUser();
 	}
 	
 	// Tabs for Database Configuration
 	jQuery('#DBConfig_tabs').tabs();
 	jQuery('.classDBConfig_tabs').click(function() {
 		var me = jQuery(jQuery(this).attr('href'));
+		var cmd = jQuery(this).attr('cmd');
 		me.html('<img src="loading.gif" />');
 		jQuery.post(
 			jQuery(this).attr('data'),
-			{RegionId : jQuery('#desinventarRegionId').val(),
-			 lang     : jQuery('#desinventarLang').val(),
-			 cmd      : jQuery(this).attr('cmd')
+			{
+				cmd      : cmd,
+				RegionId : jQuery('#desinventarRegionId').val(),
+				lang     : jQuery('#desinventarLang').val()
 			},
 			function(data)
 			{
 				me.html(data);
-				onReadyDatabaseConfig();
-				onReadyExtraEffects();
-				onReadyDBConfigGeography();
+				switch(cmd)
+				{
+					case 'cmdDBInfoEvent':
+						onReadyDBConfigEvents();
+					break;
+					case 'cmdDBInfoCause':
+						onReadyDBConfigCauses();
+					break;
+					default:
+						onReadyDatabaseConfig();
+						onReadyExtraEffects();
+						onReadyDBConfigGeography();
+					break;
+				}
 			}
 		);
 	});
