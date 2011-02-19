@@ -396,7 +396,7 @@
 											$('bsave').style.visibility = 'visible';
 											$('bprint').style.visibility = 'visible';
 										} else {
-											alert("{-#derrmsgfrm#-}");
+											console.debug("{-#derrmsgfrm#-}");
 										}
 									} //handler
 								},
@@ -437,7 +437,7 @@
 											$('bsave').style.visibility = 'visible';
 											$('bprint').style.visibility = 'visible';
 										} else {
-											alert("{-#serrmsgfrm#-}");
+											console.debug("{-#serrmsgfrm#-}");
 										}
 									} //handler
 								},
@@ -517,7 +517,7 @@
 											$('bsave').style.visibility = 'visible';
 											$('bprint').style.visibility = 'visible';
 										} else {
-											alert("{-#serrmsgfrm#-}");
+											console.debug("{-#serrmsgfrm#-}");
 										}
 									}
 								},

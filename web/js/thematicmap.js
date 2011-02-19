@@ -2,7 +2,9 @@
  DesInventar - http://www.desinventar.org
  (c) 1998-2011 Corporacion OSSO
 */
-//var map = null;
+//2011-02-19 (jhcaiced) Do not remove this line, initialize map=null 
+// to avoid an error with IE and the maps
+var map = null;
 
 function onReadyThematicMap()
 {
