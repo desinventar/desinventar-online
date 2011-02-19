@@ -18,8 +18,9 @@ function createThematicMap()
 	var maxx = parseFloat(jQuery('#prmMapMaxX').val());
 	var miny = parseFloat(jQuery('#prmMapMinY').val());
 	var maxy = parseFloat(jQuery('#prmMapMaxY').val());
-
 	OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
+	OpenLayers.ImgPath = jQuery('#desinventarOpenLayersURL').val() + '/img/';
+
 	OpenLayers.Util.onImageLoadErrorColor = "transparent";
 	var prj1 = new OpenLayers.Projection("EPSG:4326");
 	var prj2 = new OpenLayers.Projection("EPSG:900913");
@@ -55,14 +56,7 @@ function createThematicMap()
 		// Yahoo Maps Base Layer
 		var yahoo = new OpenLayers.Layer.Yahoo( "Yahoo Maps", { 'sphericalMercator': true });
 		map.addLayer(yahoo);
-	
-		// Metacarta Basic Base Layer (not working with OpenLayers 3...
-		/*
-		var met1 = new OpenLayers.Layer.WMS("Metacarta Basic",
-			"http://labs.metacarta.com/wms/vmap0", {'layers': 'basic', 'transparent': true}, {'isBaseLayer':true});
-		met1.setVisibility(false);
-		map.addLayer(met1);
-		*/
+		// Google Layers
 		var gphy = new OpenLayers.Layer.Google("Google Physical" , {type: google.maps.MapTypeId.TERRAIN});
 		map.addLayer(gphy);
 		var gmap = new OpenLayers.Layer.Google("Google Basic"    , {numZoomLevels: 20 });
@@ -71,6 +65,11 @@ function createThematicMap()
 		map.addLayer(ghyb);
 		var gsat = new OpenLayers.Layer.Google("Google Satellite", {type: google.maps.MapTypeId.SATELLITE, numZoomLevels:22});
 		map.addLayer(gsat);
+
+		// Metacarta Basic Base Layer (not working with OpenLayers 3...
+		//var met1 = new OpenLayers.Layer.WMS("Metacarta Basic", "http://labs.metacarta.com/wms/vmap0", {'layers': 'basic', 'transparent': true}, {'isBaseLayer':true});
+		//met1.setVisibility(false);
+		//map.addLayer(met1);
 	} //if
 	
 	// Effects and Admin layer(s)

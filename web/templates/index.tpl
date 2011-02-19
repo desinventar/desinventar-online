@@ -47,7 +47,10 @@
 	<script type="text/javascript" src="js/common.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/main.js?version={-$jsversion-}"></script>
 
-	{-include file="maps_include.tpl"-}
+	<script type="text/javascript" src="http://api.maps.yahoo.com/ajaxymap?v=3.0&amp;appid=euzuro-openlayers"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+	{-*include file="maps_include.tpl"*-}
 	<!-- ExtJS -->
 	<link rel="stylesheet" href="external/checktree/checktree.css" type="text/css"/>
 	<link rel="stylesheet" href="css/accordion.css" type="text/css"/>
@@ -64,11 +67,12 @@
 			onReadyDatabaseBackup();
 			onReadyDatabaseImport();
 			onReadyExtraEffects();
-			onReadyMain();			
+			onReadyMain();		
 		});
 	</script>
 </head>
 <body>
+	<div id="divMapHeader"></div>
 	<div id="loading-mask"></div>
 	<div id="loading">
 		<div class="loading-indicator">Loading...</div>
