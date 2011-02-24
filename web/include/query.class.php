@@ -101,7 +101,7 @@ class Query //extends PDO
 					$this->dreg = new PDO('sqlite:' . $DBFile);
 					// set the error reporting attribute
 					$this->dreg->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-					$this->dreg->setAttribute(PDO::ATTR_TIMEOUT, 5.0);
+					$this->dreg->setAttribute(PDO::ATTR_TIMEOUT, 15.0);
 					$this->RegionId = $prmRegionId;
 					$this->DBFile = $DBFile;
 				}
