@@ -272,35 +272,50 @@ class DIRegionRecord extends DIRegion {
 	
 	public static function deleteRegion($us, $prmRegionId) {
 		$iReturn = STATUS_NO;
-		try {
-			$sQuery = 'DELETE FROM Region WHERE RegionId=:RegionId';
-			$sth = $us->q->core->prepare($sQuery);
+		$sQuery = 'DELETE FROM Region WHERE RegionId=:RegionId';
+		$sth = $us->q->core->prepare($sQuery);
+		$us->q->core->beginTransaction();
+		try
+		{
 			$sth->bindParam(':RegionId', $prmRegionId, PDO::PARAM_STR);
 			$sth->execute();
+			$us->q->core->commit();
 			$iReturn = STATUS_YES;
 		} catch (Exception $e) {
+			$us->q->core->rollBack();
+			showErrorMsg($e->getMessage());
 			$iReturn = ERR_UNKNOWN_ERROR;
 		}
 		return $iReturn;
 	}
 	
-	public function removeRegionUserAdmin() {
+	public function removeRegionUserAdmin()
+	{
 		$iReturn = ERR_NO_ERROR;
-		try {
-			$sQuery = 'SELECT * FROM RegionAuth WHERE RegionId=:RegionId AND AuthKey=:AuthKey AND AuthAuxValue=:AuthAuxValue';
-			$sth = $this->session->q->core->prepare($sQuery);
+		$sQuery = 'SELECT * FROM RegionAuth WHERE RegionId=:RegionId AND AuthKey=:AuthKey AND AuthAuxValue=:AuthAuxValue';
+		$sth = $this->session->q->core->prepare($sQuery);
+		$this->session->q->core->beginTransaction();
+		try
+		{
 			$sth->bindValue(':RegionId'    , $this->get('RegionId'), PDO::PARAM_STR);
 			$sth->bindValue(':AuthKey'     , 'ROLE'       , PDO::PARAM_STR);
 			$sth->bindValue(':AuthAuxValue', 'ADMINREGION', PDO::PARAM_STR);
 			$sth->execute();
+			$this->session->q->core->commit();
 			$a = array();
-			while($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
+			{
 				$a[] = $row['UserId'];
 			} //foreach
-			foreach($a as $UserId) {
+			foreach ($a as $UserId)
+			{
 				$this->session->setUserRole($UserId, $this->get('RegionId'), 'NONE');
 			}
-		} catch (Exception $e) {
+		}
+		catch (Exception $e)
+		{
+			$this->session->q->core->rollBack();
+			showErrorMsg($e->getMessage());
 			$iReturn = ERR_UNKNOWN_ERROR;
 		}
 		return $iReturn;
