@@ -48,6 +48,7 @@ function onReadyDatacards()
 		jQuery('#DatacardCommand').val(jQuery('#_CMD').val());
 		jQuery('#RecordAuthor').val(jQuery('#desinventarUserId').val());
 		jQuery('#RegionId').val(jQuery('#desinventarRegionId').val());
+		displayDatacardStatusMsg('');
 		var params = 'RegionId=' + jQuery('#RegionId').val() + '&' + jQuery(this).serialize();
 		jQuery.post('cards.php',
 			params,
@@ -86,6 +87,10 @@ function onReadyDatacards()
 				{
 					switch(data.ErrorCode)
 					{
+						case -10:
+						case -52:
+							displayDatacardStatusMsg('msgDatacardNetworkError');
+						break;
 						case -54:
 							displayDatacardStatusMsg('msgDatacardDuplicatedSerial');
 						break;
