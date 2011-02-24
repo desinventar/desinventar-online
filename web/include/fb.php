@@ -25,6 +25,11 @@ if (isset($_SERVER["HTTP_HOST"])) {
 	}
 }
 
+function fbdebug($sMsg)
+{
+	fb(time() . ' ' . $sMsg);
+}
+
 function showErrorMsg($sMsg) {
 	fb($sMsg);
 }

@@ -1,7 +1,7 @@
 {-config_load file="$lg.conf" section="di8_input"-}
 	<table width="900px" border="0" cellpadding="0" cellspacing="0" >
 		<tr valign="top">
-			<td align="left" width="450px">
+			<td align="left" width="45%">
 				<input type="button" id="btnDatacardNew"    class="DatacardCmdButton bb bnew"    ext:qtip="{-#tnewtitle#-}: {-#tnewdesc#-}" />
 				<input type="button" id="btnDatacardEdit"   class="DatacardCmdButton bb bupd"    ext:qtip="{-#tupdtitle#-}: {-#tupddesc#-}" />
 				<input type="button" id="btnDatacardSave"   class="DatacardCmdButton bb bsave"   ext:qtip="{-#tsavtitle#-}: {-#tsavdesc#-}" />
@@ -18,7 +18,7 @@
 				<input type="text"   id="txtDatacardFind" class="DatacardCmdFind line" style="width:60px;" />
 				<input type="button" id="btnDatacardFind" class="DatacardCmdFind bb bfind" ext:qtip="{-#tooltipDatacardFind#-}" />
 			</td>
-			<td align="right" width="450px" colspan="2">
+			<td align="right" width="55%" colspan="2">
 				<div id="divDatacardStatusMsg" style="display:none;">
 					<span class="datacardStatusMsg" id="msgDatacardDuplicatedSerial">{-#msgDatacardDuplicatedSerial#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardStartNew">{-#tmsgnewcard#-}</span>
@@ -31,25 +31,27 @@
 					<span class="datacardStatusMsg" id="msgDatacardWithoutSource">{-#msgDatacardWithoutSource#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardInvalidGeography">{-#msgDatacardInvalidGeography#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardWithoutEffects">{-#msgDatacardWithoutEffects#-}</span>
+					<span class="datacardStatusMsg" id="msgDatacardNetworkError">{-#msgDatacardNetworkError#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardInsertOk">{-#tdccreated#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardUpdateOk">{-#tdcupdated#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardCustom"></span>
 				</div>
+				<br />
 			</td>
 		</tr>
 		<tr>
-			<td align="left" width="450px">
+			<td align="left">
 				<span class="dlgmsg" id="distatusmsg"></span>
 				<span class="dlgmsg" id="dostat"></span>
 			</td>
-			<td align="left" valign="top" width="350px">
+			<td align="left" valign="top">
 				<div id="divRecordStat" style="display:none;">
-					{-#tstatpublished#-} <span id="RecordPublished"></span>, {-#tstatready#-} <span id="RecordReady"></span>
+					{-#tstatpublished#-} <span id="RecordPublished"></span>, {-#tstatready#-} <span id="RecordReady"></span><br />
 				</div>
 			</td>
-			<td align="right" valign="top" width="100px">
+			<td align="right" valign="top">
 				<div id="divRecordNavigationInfo" style="display:none;">
-					<span id="RecordNumber"></span>/<span id="RecordCount"></span>
+					<span id="RecordNumber"></span>/<span id="RecordCount"></span><br />
 				</div>
 			</td>
 		</tr>

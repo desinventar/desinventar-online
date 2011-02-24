@@ -36,9 +36,10 @@ class UserSession {
 	// Read Session Information from Database
 	public function load($prmSessionId) {
 		$iReturn = ERR_UNKNOWN_ERROR;
+		$sQuery = 'SELECT * FROM UserSession WHERE SessionId=:SessionId';
+		$sth = $this->q->core->prepare($sQuery);
+		$this->q->core->beginTransaction();
 		try {
-			$sQuery = 'SELECT * FROM UserSession WHERE SessionId=:SessionId';
-			$sth = $this->q->core->prepare($sQuery);
 			$sth->bindParam(':SessionId', $prmSessionId, PDO::PARAM_STR);
 			$sth->execute();
 			while($row = $sth->fetch(PDO::FETCH_ASSOC)) {
@@ -49,8 +50,10 @@ class UserSession {
 				$this->dLastUpdate = $row['LastUpdate'];
 				$iReturn = ERR_NO_ERROR;
 			} //while
+			$this->q->core->commit();
 		} catch (Exception $e) {
 			showErrorMsg($e->getMessage());
+			$this->q->core->rollBack();
 		}
 		// If session doesn't exist in database, insert record
 		if ($iReturn < 0) {
@@ -74,11 +77,28 @@ class UserSession {
 			$this->close();
 			$this->logout();
 		}
-		$sQuery = "UPDATE UserSession SET LastUpdate='" . $this->dLastUpdate . "' WHERE SessionId='" . $this->sSessionId . "'";
-		$this->q->core->query($sQuery);
-		
-		$sQuery = "UPDATE UserLockList SET LastUpdate='" . $this->dLastUpdate . "' WHERE SessionId='" . $this->sSessionId . "'";
-		$this->q->core->query($sQuery);
+		try {
+			$sQuery = 'UPDATE UserSession SET LastUpdate=:LastUpdate WHERE SessionId=:SessionId';
+			$sth = $this->q->core->prepare($sQuery);
+			$this->q->core->beginTransaction();
+			$sth->bindParam(':SessionId', $this->sSessionId, PDO::PARAM_STR);
+			$sth->bindParam(':LastUpdate', $this->dLastUpdate, PDO::PARAM_STR);
+			$sth->execute();
+			$this->q->core->commit();
+
+			$sQuery = 'UPDATE UserLockList SET LastUpdate=:LastUpdate WHERE SessionId=:SessionId';
+			$sth = $this->q->core->prepare($sQuery);
+			$this->q->core->beginTransaction();			
+			$sth->bindParam(':SessionId', $this->sSessionId, PDO::PARAM_STR);
+			$sth->bindParam(':LastUpdate', $this->dLastUpdate, PDO::PARAM_STR);
+			$sth->execute();
+			$this->q->core->commit();
+		}
+		catch (Exception $e)
+		{
+			showErrorMsg($e->getMessage());
+			$this->q->core->rollBack();
+		}
 		return $iReturn;
 	}
 
@@ -661,21 +681,38 @@ class UserSession {
 		return array('DisasterId' => $DisasterId, 'RecordNumber' => $Record, 'RecordCount' => $RecordCount, 'Status' => 'OK');
 	}
 
-	public function getDisasterIdFromSerial($prmDisasterSerial) {
+	public function getDisasterIdFromSerial($prmDisasterSerial)
+	{
 		$RecordCount = $this->getDisasterCount();
 		$DisasterId = '';
-		$sQuery = "SELECT DisasterId,DisasterSerial FROM Disaster ORDER BY DisasterBeginTime,DisasterSerial";
-		$result = $this->q->dreg->query($sQuery);
+		$sQuery = 'SELECT DisasterId,DisasterSerial FROM Disaster ORDER BY DisasterSerial';
+		$sth = $this->q->dreg->prepare($sQuery);
+		$this->q->dreg->beginTransaction();
+		try {
+			$sth->execute();
+			$reclist = $sth->fetchAll(PDO::FETCH_ASSOC);
+			$this->q->dreg->commit();
+		}
+		catch (Exception $e)
+		{
+			showErrorMsg($e->getMessage());
+			$this->q->dreg->rollBack();
+		}
 		$bFound = 0;
 		$RecordNumber = 0;
-		while ( ($bFound == 0) && ($row = $result->fetch(PDO::FETCH_OBJ)) ) {
+		foreach ($reclist as $row)
+		{
 			$RecordNumber++;
-			if ($row->DisasterSerial == $prmDisasterSerial) {
+			if ($row['DisasterSerial'] == $prmDisasterSerial)
+			{
 				$bFound = 1;
-				$DisasterId = $row->DisasterId;
+				$DisasterId = $row['DisasterId'];
+				break;
 			}
 		} //while
-		return array('DisasterId' => $DisasterId, 'RecordNumber' => $RecordNumber, 'RecordCount' => $RecordCount, 'Status' => 'OK');
+		unset($reclist);
+		return array('Status' => 'OK', 'DisasterId' => $DisasterId, 
+		             'RecordNumber' => $RecordNumber, 'RecordCount' => $RecordCount);
 	}
 
 	public function getDisasterCount() {
