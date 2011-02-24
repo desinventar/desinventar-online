@@ -672,18 +672,8 @@ class UserSession {
 		$sth = $this->q->dreg->prepare($sQuery);
 		$this->q->dreg->beginTransaction();
 		try {
-			$bFound = 0;
-			$RecordNumber = 0;
 			$sth->execute();
-			while ( ($bFound < 1) && ($row = $sth->fetch(PDO::FETCH_ASSOC)) )
-			{
-				$RecordNumber++;
-				if ($row['DisasterSerial'] == $prmDisasterSerial)
-				{
-					$bFound = 1;
-					$DisasterId = $row['DisasterId'];
-				}
-			} //while
+			$reclist = $sth->fetchAll(PDO::FETCH_ASSOC);
 			$this->q->dreg->commit();
 		}
 		catch (Exception $e)
@@ -691,6 +681,19 @@ class UserSession {
 			showErrorMsg($e->getMessage());
 			$this->q->dreg->rollBack();
 		}
+		$bFound = 0;
+		$RecordNumber = 0;
+		foreach ($reclist as $row)
+		{
+			$RecordNumber++;
+			if ($row['DisasterSerial'] == $prmDisasterSerial)
+			{
+				$bFound = 1;
+				$DisasterId = $row['DisasterId'];
+				break;
+			}
+		} //while
+		unset($reclist);
 		return array('Status' => 'OK', 'DisasterId' => $DisasterId, 
 		             'RecordNumber' => $RecordNumber, 'RecordCount' => $RecordCount);
 	}
