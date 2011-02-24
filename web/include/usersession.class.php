@@ -77,11 +77,28 @@ class UserSession {
 			$this->close();
 			$this->logout();
 		}
-		$sQuery = "UPDATE UserSession SET LastUpdate='" . $this->dLastUpdate . "' WHERE SessionId='" . $this->sSessionId . "'";
-		$this->q->core->query($sQuery);
-		
-		$sQuery = "UPDATE UserLockList SET LastUpdate='" . $this->dLastUpdate . "' WHERE SessionId='" . $this->sSessionId . "'";
-		$this->q->core->query($sQuery);
+		try {
+			$sQuery = 'UPDATE UserSession SET LastUpdate=:LastUpdate WHERE SessionId=:SessionId';
+			$sth = $this->q->core->prepare($sQuery);
+			$this->q->core->beginTransaction();
+			$sth->bindParam(':SessionId', $this->sSessionId, PDO::PARAM_STR);
+			$sth->bindParam(':LastUpdate', $this->dLastUpdate, PDO::PARAM_STR);
+			$sth->execute();
+			$this->q->core->commit();
+
+			$sQuery = 'UPDATE UserLockList SET LastUpdate=:LastUpdate WHERE SessionId=:SessionId';
+			$sth = $this->q->core->prepare($sQuery);
+			$this->q->core->beginTransaction();			
+			$sth->bindParam(':SessionId', $this->sSessionId, PDO::PARAM_STR);
+			$sth->bindParam(':LastUpdate', $this->dLastUpdate, PDO::PARAM_STR);
+			$sth->execute();
+			$this->q->core->commit();
+		}
+		catch (Exception $e)
+		{
+			showErrorMsg($e->getMessage());
+			$this->q->core->rollBack();
+		}
 		return $iReturn;
 	}
 
