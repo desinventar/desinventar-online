@@ -191,15 +191,20 @@ class DIRecord extends DIObject
 	{
 		$iReturn = ERR_DEFAULT_ERROR;
 		$query = $this->getSelectQuery();
+		$sth = $this->conn->prepare($query);
+		$this->conn->beginTransaction();
 		try
 		{
-			foreach($this->conn->query($query) as $row)
+			$sth->execute();
+			$this->conn->commit();
+			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
 				$iReturn = ERR_NO_ERROR;
-			} //foreach
+			} //while
 		}
 		catch (Exception $e)
 		{
+			$this->conn->rollBack();
 			showErrorMsg('exist : ' . $e->getMessage());
 			$iReturn = ERR_TABLE_LOCKED;
 		}
@@ -210,9 +215,13 @@ class DIRecord extends DIObject
 	{
 		$iReturn = ERR_OBJECT_NOT_FOUND;
 		$sQuery = $this->getSelectQuery($prmTableName);
+		$sth = $this->conn->prepare($sQuery);
+		$this->conn->beginTransaction();
 		try
 		{
-			foreach ($this->conn->query($sQuery) as $row)
+			$sth->execute();
+			$this->conn->commit();
+			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
 				$sFields = split(',', $prmFieldList);
 				foreach ($sFields as $sKey => $sValue)
@@ -230,10 +239,11 @@ class DIRecord extends DIObject
 					}
 				}
 				$iReturn = ERR_NO_ERROR;
-			} // foreach
+			} //while
 		}
 		catch (PDOException $e)
 		{
+			$this->conn->rollBack();
 			showErrorMsg('load : ' . $e->getMessage());
 		}
 		return $iReturn;
@@ -274,15 +284,17 @@ class DIRecord extends DIObject
 	{
 		$iReturn = ERR_NO_ERROR;
 		$sQuery = $this->getInsertQuery($sTableName);
+		$sth = $this->conn->prepare($sQuery);
+		$this->conn->beginTransaction();
 		try
 		{
-			if ($result = $this->conn->query($sQuery))
-			{
-				$iReturn = ERR_NO_ERROR;
-			}
+			$sth->execute();
+			$this->conn->commit();
+			$iReturn = ERR_NO_ERROR;
 		}
 		catch (PDOException $e)
 		{
+			$this->conn->rollBack();
 			showErrorMsg('createRecord : ' . $sTableName . ' ' . $e->getMessage());
 			$iReturn = ERR_TABLE_LOCKED;
 		}
@@ -307,15 +319,17 @@ class DIRecord extends DIObject
 	{
 		$iReturn = ERR_NO_ERROR;
 		$sQuery = $this->getUpdateQuery($prmTableName, $prmFieldList);
+		$sth = $this->conn->prepare($sQuery);
+		$this->conn->beginTransaction();
 		try
 		{
-			if (! $result = $this->conn->query($sQuery))
-			{
-				$iReturn = ERR_UNKNOWN_ERROR;
-			}
+			$sth->execute();
+			$this->conn->commit();
+			$iReturn = ERR_NO_ERROR;
 		}
 		catch (PDOException $e)
 		{
+			$this->conn->rollBack();
 			showErrorMsg('update : ' . $prmTableName . ' : ' . $e->getCode() . ' '. $e->getMessage());
 			$iReturn = ERR_TABLE_LOCKED;
 		}
@@ -350,15 +364,17 @@ class DIRecord extends DIObject
 		if ($iReturn > 0)
 		{
 			$sQuery = $this->getDeleteQuery();
+			$sth = $this->conn->prepare($sQuery);
+			$this->conn->beginTransaction();
 			try
-			{
-				if ($result = $this->conn->query($sQuery))
-				{
-					$iReturn = ERR_NO_ERROR;
-				}
+			{	
+				$sth->execute();
+				$this->conn->commit();
+				$iReturn = ERR_NO_ERROR;
 			}
 			catch (PDOException $e)
 			{
+				$this->conn->rollBack();
 				showErrorMsg('delete : ' . $e->getMessage());
 				$iReturn = ERR_TABLE_LOCKED;
 			}
@@ -462,15 +478,20 @@ class DIRecord extends DIObject
 		$iReturn = ERR_NO_ERROR;
 		$quote1 = '"';
 		$sQuery = 'SELECT * FROM ' . $this->getTableName() . ' WHERE ' . $this->getIdWhereQuery();
+		$sth = $this->conn->prepare($sQuery);
+		$this->conn->beginTransaction();
 		try
 		{
-			foreach($this->conn->query($sQuery) as $row)
+			$sth->execute();
+			$this->conn->commit();
+			while($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
 				$iReturn = $ErrCode;
-			} //foreach
+			} //while
 		}
 		catch (Exception $e)
 		{
+			$this->conn->rollBack();
 			showErrorMsg('validatePrimaryKey : ' . $e->getMessage());
 		}
 		
@@ -496,9 +517,13 @@ class DIRecord extends DIObject
 		{
 			$sQuery .= ' AND LangIsoCode="' . $this->get('LangIsoCode') . '"';
 		}
+		$sth = $this->conn->prepare($sQuery);
+		$this->conn->beginTransaction();
 		try
 		{
-			foreach($this->conn->query($sQuery) as $row)
+			$sth->execute();
+			$this->conn->commit();
+			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
 				// Check if it's me !!
 				$bFound = true;
@@ -523,10 +548,11 @@ class DIRecord extends DIObject
 				{
 					$iReturn = $ErrCode;
 				}
-			} //foreach
+			} //while
 		}
 		catch (Exception $e)
 		{
+			$this->conn->rollBack();
 			showErrorMsg('validateUnique : ' . $e->getMessage());
 		}
 		if ($iReturn < 0)
@@ -546,15 +572,20 @@ class DIRecord extends DIObject
 		$Value = $this->get($prmFieldName);
 		$sQuery = 'SELECT ' . $FieldDst . ' FROM ' . $TableName . ' WHERE ' . $FieldDst . '=' . $quote . $Value .  $quote;
 		$iReturn = $ErrCode;
+		$sth = $this->conn->prepare($sQuery);
+		$this->conn->beginTransaction();
 		try
 		{
-			foreach($this->conn->query($sQuery) as $row)
+			$sth->execute();
+			$this->conn->commit();
+			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
 				$iReturn = ERR_NO_ERROR;
 			}
 		}
 		catch (Exception $e)
 		{
+			$this->conn->rollBack();
 			showErrorMsg('validateRef : ' . $e->getMessage());
 		}
 		if ($iReturn < 0)
