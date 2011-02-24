@@ -36,9 +36,10 @@ class UserSession {
 	// Read Session Information from Database
 	public function load($prmSessionId) {
 		$iReturn = ERR_UNKNOWN_ERROR;
+		$sQuery = 'SELECT * FROM UserSession WHERE SessionId=:SessionId';
+		$sth = $this->q->core->prepare($sQuery);
+		$this->q->core->beginTransaction();
 		try {
-			$sQuery = 'SELECT * FROM UserSession WHERE SessionId=:SessionId';
-			$sth = $this->q->core->prepare($sQuery);
 			$sth->bindParam(':SessionId', $prmSessionId, PDO::PARAM_STR);
 			$sth->execute();
 			while($row = $sth->fetch(PDO::FETCH_ASSOC)) {
@@ -49,8 +50,10 @@ class UserSession {
 				$this->dLastUpdate = $row['LastUpdate'];
 				$iReturn = ERR_NO_ERROR;
 			} //while
+			$this->q->core->commit();
 		} catch (Exception $e) {
 			showErrorMsg($e->getMessage());
+			$this->q->core->rollBack();
 		}
 		// If session doesn't exist in database, insert record
 		if ($iReturn < 0) {
