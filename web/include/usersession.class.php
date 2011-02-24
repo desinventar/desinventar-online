@@ -664,21 +664,35 @@ class UserSession {
 		return array('DisasterId' => $DisasterId, 'RecordNumber' => $Record, 'RecordCount' => $RecordCount, 'Status' => 'OK');
 	}
 
-	public function getDisasterIdFromSerial($prmDisasterSerial) {
+	public function getDisasterIdFromSerial($prmDisasterSerial)
+	{
 		$RecordCount = $this->getDisasterCount();
 		$DisasterId = '';
-		$sQuery = "SELECT DisasterId,DisasterSerial FROM Disaster ORDER BY DisasterBeginTime,DisasterSerial";
-		$result = $this->q->dreg->query($sQuery);
-		$bFound = 0;
-		$RecordNumber = 0;
-		while ( ($bFound == 0) && ($row = $result->fetch(PDO::FETCH_OBJ)) ) {
-			$RecordNumber++;
-			if ($row->DisasterSerial == $prmDisasterSerial) {
-				$bFound = 1;
-				$DisasterId = $row->DisasterId;
-			}
-		} //while
-		return array('DisasterId' => $DisasterId, 'RecordNumber' => $RecordNumber, 'RecordCount' => $RecordCount, 'Status' => 'OK');
+		$sQuery = 'SELECT DisasterId,DisasterSerial FROM Disaster ORDER BY DisasterSerial';
+		$sth = $this->q->dreg->prepare($sQuery);
+		$this->q->dreg->beginTransaction();
+		try {
+			$bFound = 0;
+			$RecordNumber = 0;
+			$sth->execute();
+			while ( ($bFound < 1) && ($row = $sth->fetch(PDO::FETCH_ASSOC)) )
+			{
+				$RecordNumber++;
+				if ($row['DisasterSerial'] == $prmDisasterSerial)
+				{
+					$bFound = 1;
+					$DisasterId = $row['DisasterId'];
+				}
+			} //while
+			$this->q->dreg->commit();
+		}
+		catch (Exception $e)
+		{
+			showErrorMsg($e->getMessage());
+			$this->q->dreg->rollBack();
+		}
+		return array('Status' => 'OK', 'DisasterId' => $DisasterId, 
+		             'RecordNumber' => $RecordNumber, 'RecordCount' => $RecordCount);
 	}
 
 	public function getDisasterCount() {
