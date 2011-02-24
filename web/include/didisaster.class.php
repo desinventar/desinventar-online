@@ -257,21 +257,18 @@ class DIDisaster extends DIRecord
 			}
 		}
 		try {
-			$this->session->q->dreg->beginTransaction();
 			// Update Disaster record
 			$iReturn = parent::update($withValidate, $bStrict);
 			if ($iReturn > 0)
 			{
 				// Update EEData record
 				$iReturn = $this->updateRecord('EEData', $this->sEEFieldDef);
-				$this->session->q->dreg->commit();
 			}
 		}
 		catch (Exception $e)
 		{
 			showErrorMsg('update : ' . $prmTableName . ' : ' . $e->getCode() . ' '. $e->getMessage());
 			$iReturn = ERR_TABLE_LOCKED;
-			$this->session->q->dreg->rollBack();
 		}
 		return $iReturn;
 	} //update
