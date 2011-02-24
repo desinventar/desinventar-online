@@ -256,12 +256,22 @@ class DIDisaster extends DIRecord
 				$this->set($sFieldQName, 0);
 			}
 		}
-		// Update Disaster record
-		$iReturn = parent::update($withValidate, $bStrict);
-		if ($iReturn > 0)
+		try {
+			$this->session->q->dreg->beginTransaction();
+			// Update Disaster record
+			$iReturn = parent::update($withValidate, $bStrict);
+			if ($iReturn > 0)
+			{
+				// Update EEData record
+				$iReturn = $this->updateRecord('EEData', $this->sEEFieldDef);
+				$this->session->q->dreg->commit();
+			}
+		}
+		catch (Exception $e)
 		{
-			// Update EEData record
-			$iReturn = $this->updateRecord('EEData', $this->sEEFieldDef);
+			showErrorMsg('update : ' . $prmTableName . ' : ' . $e->getCode() . ' '. $e->getMessage());
+			$iReturn = ERR_TABLE_LOCKED;
+			$this->session->q->dreg->rollBack();
 		}
 		return $iReturn;
 	} //update
