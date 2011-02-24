@@ -8,79 +8,6 @@ require_once('include/loader.php');
 require_once('include/query.class.php');
 require_once('include/didisaster.class.php');
 require_once('include/diregion.class.php');
-
-// Convert Post Form to DesInventar Disaster Table struct 
-// Insert  (1) create DisasterId. 
-// Update  (2) keep RecordCreation and RecordAuthor 
-function form2disaster($form, $icmd)
-{
-	$data = array();
-	$geogid = '';
-	foreach ($form as $k=>$i)
-	{
-		if (($icmd == CMD_NEW) || ($icmd == CMD_UPDATE))
-		{
-			if ((substr($k, 0, 1)  != '_') &&
-			    (substr($k, 0, 12) != 'RecordAuthor') &&
-			    (substr($k, 0, 19) != 'GeographyId')
-			   )
-			{
-			    $data[$k] = $i;
-			}
-			else
-			{
-				if (substr($k, 0, 19) == 'GeographyId')
-				{
-					$geogid = $i;
-				}
-			}
-		} //if
-	} //foreach
-	// On Update
-	$data['DisasterId'] = $form['DisasterId'];
-	$data['RecordCreation'] = $form['RecordCreation'];
-	if ($icmd == CMD_NEW)
-	{
-		// New Disaster
-		if ($data['DisasterId'] == '')
-		{
-			$data['DisasterId'] = uuid();
-		}
-		$data['RecordCreation'] = date('Y-m-d H:i:s');
-	}
-	$data['RecordAuthor'] = $form['RecordAuthor'];
-	$data['RecordUpdate'] = gmdate('c');
-	$c = '';
-
-	// Disaster date
-	$str = sprintf('%04d', $form['DisasterBeginTime'][0]);
-	if (!empty($form[$c .'DisasterBeginTime'][1]))
-	{
-		$str .= '-' . sprintf('%02d', $form['DisasterBeginTime'][1]);
-		if (!empty($form[$c .'DisasterBeginTime'][2]))
-		{
-			$str .= '-' . sprintf('%02d', $form['DisasterBeginTime'][2]);
-		}
-	}
-	$data['DisasterBeginTime'] = $str;
-	// Disaster Geography
-	$data['GeographyId'] = $geogid;
-	return $data;
-} // function
-
-function form2eedata($form)
-{
-	$eedat['DisasterId'] = $form['DisasterId'];
-	foreach ($form as $k=>$i)
-	{
-		if (substr($k, 0, 3) == 'EEF')
-		{
-			$eedat[$k] = $i;
-		}
-	}
-	return $eedat;
-}
-
 $RegionId = getParameter('RegionId', getParameter('r',''));
 if ($RegionId == '')
 {
@@ -265,5 +192,77 @@ else
 		default:
 		break;
 	} //switch
+}
+
+// Convert Post Form to DesInventar Disaster Table struct 
+// Insert  (1) create DisasterId. 
+// Update  (2) keep RecordCreation and RecordAuthor 
+function form2disaster($form, $icmd)
+{
+	$data = array();
+	$geogid = '';
+	foreach ($form as $k=>$i)
+	{
+		if (($icmd == CMD_NEW) || ($icmd == CMD_UPDATE))
+		{
+			if ((substr($k, 0, 1)  != '_') &&
+			    (substr($k, 0, 12) != 'RecordAuthor') &&
+			    (substr($k, 0, 19) != 'GeographyId')
+			   )
+			{
+			    $data[$k] = $i;
+			}
+			else
+			{
+				if (substr($k, 0, 19) == 'GeographyId')
+				{
+					$geogid = $i;
+				}
+			}
+		} //if
+	} //foreach
+	// On Update
+	$data['DisasterId'] = $form['DisasterId'];
+	$data['RecordCreation'] = $form['RecordCreation'];
+	if ($icmd == CMD_NEW)
+	{
+		// New Disaster
+		if ($data['DisasterId'] == '')
+		{
+			$data['DisasterId'] = uuid();
+		}
+		$data['RecordCreation'] = date('Y-m-d H:i:s');
+	}
+	$data['RecordAuthor'] = $form['RecordAuthor'];
+	$data['RecordUpdate'] = gmdate('c');
+	$c = '';
+
+	// Disaster date
+	$str = sprintf('%04d', $form['DisasterBeginTime'][0]);
+	if (!empty($form[$c .'DisasterBeginTime'][1]))
+	{
+		$str .= '-' . sprintf('%02d', $form['DisasterBeginTime'][1]);
+		if (!empty($form[$c .'DisasterBeginTime'][2]))
+		{
+			$str .= '-' . sprintf('%02d', $form['DisasterBeginTime'][2]);
+		}
+	}
+	$data['DisasterBeginTime'] = $str;
+	// Disaster Geography
+	$data['GeographyId'] = $geogid;
+	return $data;
+} // function
+
+function form2eedata($form)
+{
+	$eedat['DisasterId'] = $form['DisasterId'];
+	foreach ($form as $k=>$i)
+	{
+		if (substr($k, 0, 3) == 'EEF')
+		{
+			$eedat[$k] = $i;
+		}
+	}
+	return $eedat;
 }
 </script>

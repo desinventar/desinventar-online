@@ -3,7 +3,7 @@
  DesInventar - http://www.desinventar.org
  (c) 1998-2011 Corporacion OSSO
 */
-class Query extends PDO
+class Query //extends PDO
 {
 	public $RegionId = '';
 	public $dreg = null;
@@ -101,6 +101,7 @@ class Query extends PDO
 					$this->dreg = new PDO('sqlite:' . $DBFile);
 					// set the error reporting attribute
 					$this->dreg->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+					$this->dreg->setAttribute(PDO::ATTR_TIMEOUT, 5.0);
 					$this->RegionId = $prmRegionId;
 					$this->DBFile = $DBFile;
 				}

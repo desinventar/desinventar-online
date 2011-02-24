@@ -5,13 +5,13 @@
 	require_once(BASE . '/include/dicause.class.php');
 	require_once(BASE . '/include/digeography.class.php');
 	require_once(BASE . '/include/didisaster.class.php');
-	require_once(BASE . '/include/dieedata.class.php');
 	require_once(BASE . '/include/diimport.class.php');
 	require_once(BASE . '/include/diregion.class.php');
 	
 	$RegionId = 'DESINV-GAR-ISDR-2011_VR';
 	$RegionId = 'DESINV-1249040429-can_subregion_andina';
 	$RegionId = 'COL-HUILA';
+	$RegionId = 'COL-1250694506-colombia_inventario_historico_de_desastres';
 	$us->login('diadmin','di8');
 	$us->open($RegionId);
 	$iCount = 0;
