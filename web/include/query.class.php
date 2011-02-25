@@ -246,15 +246,26 @@ class Query //extends PDO
 		$sql = 'SELECT EventId, EventName,EventDesc,EventPredefined,RecordUpdate FROM Event ' .
 		       ' WHERE LangIsoCode="' . $lg . '" ORDER BY EventName';
 		$data = array();
-		$res = $this->base->query($sql);
-		foreach($res as $row)
+		$sth = $this->base->prepare($sql);
+		$this->base->beginTransaction();
+		try
 		{
-			$data[$row['EventId']] = array(0 => $row['EventName'], 
-			                               1 => $row['EventDesc'],
-			                               'EventPredefined' => $row['EventPredefined'],
-			                               'RecordUpdate' => $row['RecordUpdate']
-			                              );
+			$sth->execute();
+			$this->base->commit();
+			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
+			{
+				$data[$row['EventId']] = array(0 => $row['EventName'], 
+				                               1 => $row['EventDesc'],
+				                               'EventPredefined' => $row['EventPredefined'],
+				                               'RecordUpdate' => $row['RecordUpdate']
+				                              );
+			}
 		}
+		catch (Exception $e)
+		{
+			$this->base->rollBack();
+			showErrorMsg('ERROR getBasicEventList : ' . $e->getMessage());
+		}			
 		return $data;
 	}
 

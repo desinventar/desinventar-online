@@ -30,7 +30,12 @@ function fbdebug($sMsg)
 	fb(time() . ' ' . $sMsg);
 }
 
-function showErrorMsg($sMsg) {
+function showErrorMsg($sMsg, Exception $e = null)
+{
+	if ($e != null)
+	{
+		$sMsg = 'ERROR ' . $sMsg . $e->getMessage();
+	}
 	fb($sMsg);
 }
 

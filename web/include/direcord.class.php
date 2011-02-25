@@ -295,7 +295,7 @@ class DIRecord extends DIObject
 		catch (PDOException $e)
 		{
 			$this->conn->rollBack();
-			showErrorMsg('createRecord : ' . $sTableName . ' ' . $e->getMessage());
+			showErrorMsg('createRecord : ' . $sTableName, $e);
 			$iReturn = ERR_TABLE_LOCKED;
 		}
 		return $iReturn;
@@ -330,7 +330,7 @@ class DIRecord extends DIObject
 		catch (PDOException $e)
 		{
 			$this->conn->rollBack();
-			showErrorMsg('update : ' . $prmTableName . ' : ' . $e->getCode() . ' '. $e->getMessage());
+			showErrorMsg('updateRecord ' . $prmTableName, $e);
 			$iReturn = ERR_TABLE_LOCKED;
 		}
 		return $iReturn;
