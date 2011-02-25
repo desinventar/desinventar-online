@@ -223,7 +223,7 @@ class UserSession {
 		{
 			$sth->bindParam(':SessionId'  , $this->sSessionId, PDO::PARAM_STR);
 			$sth->execute();
-			$this-q->core->commit();
+			$this->q->core->commit();
 			$this->UserId = '';
 			$iReturn = ERR_NO_ERROR;
 		}
@@ -297,12 +297,12 @@ class UserSession {
 	public function getUserFullName() {
 		$sUserFullName = "";
 		$sQuery = "SELECT * FROM User WHERE UserId='" . $this->UserId . "'";
-		$sth = $this-q->core->prepare($sQuery);
-		$this-q->core->beginTransaction();
+		$sth = $this->q->core->prepare($sQuery);
+		$this->q->core->beginTransaction();
 		try
 		{
 			$sth->execute();
-			$this-q->core->commit();
+			$this->q->core->commit();
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
 				$sUserFullName = $row['UserFullName'];
@@ -310,7 +310,7 @@ class UserSession {
 		}
 		catch (Exception $e)
 		{
-			$this-q->core->rollBack();
+			$this->q->core->rollBack();
 			showErrorMsg('getUserFullName Error : ' . $e->getMessage());
 		}
 		return $sUserFullName;
@@ -328,12 +328,12 @@ class UserSession {
 			$sQuery .= " AND " . "((RegionId='" . $prmRegionId . "') OR (RegionId='')) ";
 		}
 		$sQuery = $sQuery + " ORDER BY AuthKey,AuthValue";
-		$sth = $this-q->core->prepare($sQuery);
-		$this-q->core->beginTransaction();
+		$sth = $this->q->core->prepare($sQuery);
+		$this->q->core->beginTransaction();
 		try
 		{
 			$sth->execute();
-			$this-q->core->commit();
+			$this->q->core->commit();
 			$i = 0;
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
@@ -344,7 +344,7 @@ class UserSession {
 		}
 		catch (Exception $e)
 		{
-			$this-q->core->rollBack();
+			$this->q->core->rollBack();
 			showErrorMsg('getAllPermsGeneric Error : ' . $e->getMessage());
 		}
 		return $myPerms;
@@ -358,12 +358,12 @@ class UserSession {
 			" AND (UserId='" . $this->UserId . "') " .
 			" AND AuthKey='ROLE'" . 
 			" ORDER BY RegionAuth.RegionId";
-		$sth = $this-q->core->prepare($sQuery);
-		$this-q->core->beginTransaction();
+		$sth = $this->q->core->prepare($sQuery);
+		$this->q->core->beginTransaction();
 		try
 		{
 			$sth->execute();
-			$this-q->core->commit();
+			$this->q->core->commit();
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
 				$sKey   = $row['RegionId'];
@@ -374,7 +374,7 @@ class UserSession {
 		}
 		catch (Exception $e)
 		{
-			$this-q->core->rollBack();
+			$this->q->core->rollBack();
 			showErrorMsg('getUserRoleList Error : ' . $e->getMessage());
 		}
 		return $myData;
@@ -388,12 +388,12 @@ class UserSession {
 		  " AND (Region.RegionId='" . $myregion . "') " .
 		  " AND RegionAuth.AuthKey='ROLE' AND RegionAuth.AuthAuxValue != 'NONE'" .
 		  " ORDER BY RegionAuth.RegionId";
-		$sth = $this-q->core->prepare($sQuery);
-		$this-q->core->beginTransaction();
+		$sth = $this->q->core->prepare($sQuery);
+		$this->q->core->beginTransaction();
 		try
 		{
 			$sth->execute();
-			$this-q->core->commit();
+			$this->q->core->commit();
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
 				$sKey = $row['UserId'];
@@ -403,7 +403,7 @@ class UserSession {
 		}
 		catch (Exception $e)
 		{
-			$this-q->core->rollBack();
+			$this->q->core->rollBack();
 			showErrorMsg('getRegionRoleList Error : ' . $e->getMessage());
 		}
 		return $myData;
@@ -419,11 +419,11 @@ class UserSession {
 			$sQuery .= " WHERE UserId='" . $prmUserId . "'";
 		}
 		$sQuery .= " ORDER BY UserFullName";
-		$sth = $this-q->core->prepare($sQuery);
+		$sth = $this->q->core->prepare($sQuery);
 		try
 		{
 			$sth->execute();
-			$this-q->core->commit();
+			$this->q->core->commit();
 			while ($row = $sth->fetch(PDO::FETCH_OBJ))
 			{
 				$myData[$row->UserId] = array ($row->UserEMail, $row->UserPasswd, $row->UserFullName, $row->Organization, 
@@ -432,7 +432,7 @@ class UserSession {
 		}
 		catch (Exception $e)
 		{
-			$this-q->core->rollBack();
+			$this->q->core->rollBack();
 			showErrorMsg('ERROR getUserInfo : ' . $e->getMessage());
 		}
 		return $myData;
@@ -442,12 +442,12 @@ class UserSession {
 	function sendPasswdReminder($prmEMail) {
 		$myAnswer = '';
 		$sQuery = "SELECT * FROM User WHERE (UserEMail='" . $prmEMail . "') ";
-		$sth = $this-q->core->prepare($sQuery);
-		$this-q->core->beginTransaction();
+		$sth = $this->q->core->prepare($sQuery);
+		$this->q->core->beginTransaction();
 		try
 		{
 			$sth->execute();
-			$this-q->core->commit();
+			$this->q->core->commit();
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
 				$myAnswer = $row['UserEMail'];
@@ -468,7 +468,7 @@ class UserSession {
 		}
 		catch (Exception $e)
 		{
-			$this-q->core->rollBack();
+			$this->q->core->rollBack();
 			showStatusMsg('ERROR sendPasswdReminder : ' . $e->getMessage());
 		}
 		return $myAnswer;
@@ -489,12 +489,12 @@ class UserSession {
 		$sQuery .= " AND (UserId='" . $this->UserId . "') " .
 		           " AND AuthKey='ROLE'" . 
 		           " ORDER BY UserId,RegionId";
-		$sth = $this-q->core->prepare($sQuery);
-		$this-q->core->beginTransaction();
+		$sth = $this->q->core->prepare($sQuery);
+		$this->q->core->beginTransaction();
 		try
 		{
 			$sth->execute();
-			$this-q->core->commit();
+			$this->q->core->commit();
 			while ($row = $sth->fetch(PDO::FETCH_OBJ))
 			{
 				$myAnswer = $row->AuthAuxValue;
@@ -502,7 +502,7 @@ class UserSession {
 		}
 		catch (Exception $e)
 		{
-			$this-q->core->rollBack();
+			$this->q->core->rollBack();
 			showErrorMsg('ERROR getUserRole : ' . $e->getMessage());
 		}
 		return $myAnswer;
@@ -535,8 +535,8 @@ class UserSession {
 		{
 			// Remove All Permissions for This User on This Database
 			$sQuery = "DELETE FROM RegionAuth WHERE UserId='" . $prmUserId . "' AND RegionId='" . $prmRegionId . "'";
-			$sth = $this-q->core->prepare($sQuery);
-			$this-q->core->beginTransaction();
+			$sth = $this->q->core->prepare($sQuery);
+			$this->q->core->beginTransaction();
 			try
 			{
 				$sth->execute();
@@ -544,7 +544,7 @@ class UserSession {
 			}
 			catch (Exception $e)
 			{
-				$this-q->core->rollBack();
+				$this->q->core->rollBack();
 				showErrorMsg('ERROR setUserRole : '. $e->getMessage());
 			}
 		}
@@ -615,15 +615,15 @@ class UserSession {
 			"'" . $prmUserId . "','" . $prmRegionId  . "'," .
 			"'" . $prmAuthKey . "','" . $prmValue . "','" . $prmAuxValue . "')";
 		$sth = $this->q->core->prepare($sQuery);
-		$this-q->core->beginTransaction();
+		$this->q->core->beginTransaction();
 		try
 		{
 			$sth->execute();
-			$this-q->core->commit();
+			$this->q->core->commit();
 		}
 		catch (Exception $e)
 		{
-			$this-q->core->rollBack();
+			$this->q->core->rollBack();
 			showErrorMsg('ERROR setPerm : ' . $e->getMessage());
 		}
 	}
@@ -646,11 +646,11 @@ class UserSession {
 		          " WHERE $opt ORDER BY RegionLabel";
 		$myData = array();
 		$sth = $this->q->core->prepare($sQuery);
-		$this-q->core->beginTransaction();
+		$this->q->core->beginTransaction();
 		try
 		{
 			$sth->execute();
-			$this-q->core->commit();
+			$this->q->core->commit();
 			while ($row = $sth->fetch(PDO::FETCH_OBJ))
 			{
 				$sKey = $row->RegionId;
@@ -660,7 +660,7 @@ class UserSession {
 		}
 		catch (Exception $e)
 		{
-			$this-q->core->rollBack();
+			$this->q->core->rollBack();
 			showErrorMsg('ERROR getRegionList : ' . $e->getMessage());
 		}
 		return $myData;
@@ -670,12 +670,12 @@ class UserSession {
 	{
 		$Answer = ERR_UNKNOWN_ERROR;
 		$Query = "SELECT UserId FROM User WHERE UserId='" . $prmUserId . "'";
-		$sth = $this-q->core->prepare($Query);
-		$this-q->core->beginTransaction();
+		$sth = $this->q->core->prepare($Query);
+		$this->q->core->beginTransaction();
 		try
 		{
 			$sth->execute();
-			$this-q->core->commit();
+			$this->q->core->commit();
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
 				$Answer = ERR_NO_ERROR;
@@ -683,7 +683,7 @@ class UserSession {
 		}
 		catch (Exception $e)
 		{
-			$this-q->core->rollBack();
+			$this->q->core->rollBack();
 			showErrorMsg('ERROR doUserExist : ' . $e->getMessage());
 		}
 		return $Answer;
@@ -704,18 +704,18 @@ class UserSession {
 				  "'" . gmdate('c') . "'," .
 				  "''," .
 				  $UserActive . ")";
-		$sth = $this-q->core->prepare($sQuery);
-		$this-q->core->beginTransaction();
+		$sth = $this->q->core->prepare($sQuery);
+		$this->q->core->beginTransaction();
 		try
 		{
 			$sth->execute();
-			$this-q->core->commit();
+			$this->q->core->commit();
 			$iReturn = ERR_NO_ERROR;
 		}
 		catch (Exception $e)
-			$this-q->core->rollBack();
-			showErrorMsg('ERROR insertUser : ' . $e->getMessage());
 		{
+			$this->q->core->rollBack();
+			showErrorMsg('ERROR insertUser : ' . $e->getMessage());
 		}
 		return $iReturn;
 	}
@@ -738,16 +738,16 @@ class UserSession {
 		}
 		$sQuery .=  " WHERE UserId='" . $UserId . "'";
 		$sth = $this->q->core->prepare($sQuery);
-		$this-q->core->beginTransaction();
+		$this->q->core->beginTransaction();
 		try
 		{
 			$sth->execute();
-			$this-q->core->commit();
+			$this->q->core->commit();
 			$iReturn = ERR_NO_ERROR;
 		}
 		catch (Exception $e)
 		{
-			$this-q->core->rollBack();
+			$this->q->core->rollBack();
 			showErrorMsg('ERROR updateUser : ' . $e->getMessage());
 		}
 		return $iReturn;
@@ -758,16 +758,16 @@ class UserSession {
 		$iReturn = ERR_DEFAULT_ERROR;
 		$Query = 'UPDATE User SET UserPasswd="' . $UserPasswd . '" WHERE UserId="' . $UserId . '"';
 		$sth = $this->q->core->prepare($Query);
-		$this-q->core->beginTransaction();
+		$this->q->core->beginTransaction();
 		try
 		{
 			$sth->execute();
-			$this-q->core->commit();
+			$this->q->core->commit();
 			$iReturn = ERR_NO_ERROR;
 		}
 		catch (Exception $e)
 		{
-			$this-q->core->rollBack();
+			$this->q->core->rollBack();
 			showErrorMsg('ERROR updateUserPasswd : ' . $e->getMessage());
 		}
 		return $iReturn;
@@ -778,15 +778,15 @@ class UserSession {
 		$deltime = gmdate('c', time() - 600);
 		$sQuery = "DELETE FROM UserLockList WHERE RecordUpdate<='" . $deltime . "'";
 		$sth = $this->q->core->prepare($sQuery);
-		$this-q->core->beginTransaction();
+		$this->q->core->beginTransaction();
 		try
 		{
 			$sth->execute();
-			$this-q->core->commit();
+			$this->q->core->commit();
 		}
 		catch (Exception $e)
 		{
-			$this-q->core->rollBack();
+			$this->q->core->rollBack();
 			showErrorMsg('ERROR clearOldLocks : ' . $e->getMessage());
 		}
 	}
@@ -798,11 +798,11 @@ class UserSession {
 		$sReturn = '';
 		$sQuery = "SELECT * FROM UserLockList WHERE RecordId='" . $prmDisasterId . "'";
 		$sth = $this->q->core->prepare($sQuery);
-		$this-q->core->beginTransaction();
+		$this->q->core->beginTransaction();
 		try
 		{
 			$sth->execute();
-			$this-q->core->commit();
+			$this->q->core->commit();
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
 				$sReturn = $row['SessionId'];
@@ -810,7 +810,7 @@ class UserSession {
 		}
 		catch (Exception $e)
 		{
-			$this-q->core->rollBack();
+			$this->q->core->rollBack();
 			showErrorMsg('ERROR isDatacardLocked : ' . $e->getMessage());
 		}
 		return $sReturn;
@@ -823,15 +823,15 @@ class UserSession {
 		$now = gmdate('c');
 		$sQuery = "INSERT INTO UserLockList VALUES ('" . $this->sSessionId . "','DISASTER','" . $prmDisasterId . "','" . $now . "')";
 		$sth = $this->q->core->prepare($sQuery);
-		$this-q->core->beginTransaction();
+		$this->q->core->beginTransaction();
 		try
 		{
 			$sth->execute();
-			$this-q->core->commit();
+			$this->q->core->commit();
 		}
 		catch (Exception $e)
 		{
-			$this-q->core->rollBack();
+			$this->q->core->rollBack();
 			showErrorMsg('ERROR lockDatacard : ' . $e->getMessage());
 		}
 	}
@@ -840,15 +840,15 @@ class UserSession {
 	{
 		$sQuery = "DELETE FROM UserLockList WHERE SessionId='" . $this->sSessionId . "' AND RecordId='" . $prmDisasterId . "'";
 		$sth = $this->q->core->prepare($sQuery);
-		$this-q->core->beginTransaction();
+		$this->q->core->beginTransaction();
 		try
 		{
 			$sth->execute();
-			$this-q->core->commit();
+			$this->q->core->commit();
 		}
 		catch (Exception $e)
 		{
-			$this-q->core->rollBack();
+			$this->q->core->rollBack();
 			showErrorMsg('ERROR releaseDatacard : ' . $e->getMessage());
 		}
 	}
@@ -857,15 +857,15 @@ class UserSession {
 	{
 		$sQuery = "DELETE FROM UserLockList WHERE SessionId='" . $this->sSessionId . "'";
 		$sth = $this->q->core->prepare($sQuery);
-		$this-q->core->beginTransaction();
+		$this->q->core->beginTransaction();
 		try
 		{
 			$sth->execute();
-			$this-q->core->commit();
+			$this->q->core->commit();
 		}
 		catch (Exception $e)
 		{
-			$this-q->core->rollBack();
+			$this->q->core->rollBack();
 			showErrorMsg('ERROR clearLocks : ' . $e->getMessage());
 		}
 	}
@@ -879,11 +879,11 @@ class UserSession {
 		}
 		$sQuery .= " ORDER BY UserFullName";
 		$sth = $this->q->core->prepare($sQuery);
-		$this-q->core->beginTransaction();
+		$this->q->core->beginTransaction();
 		try
 		{
 			$sth->execute();
-			$this-q->core->commit();
+			$this->q->core->commit();
 			while($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
 				$list[$row['UserId']]=$row['UserFullName'];
@@ -891,7 +891,7 @@ class UserSession {
 		}
 		catch (Exception $e)
 		{
-			$this-q->core->rollBack();
+			$this->q->core->rollBack();
 			showErrorMsg('ERROR getUsersList : ' . $e->getMessage());
 		}
 		return $list;
