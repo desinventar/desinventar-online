@@ -3,6 +3,7 @@
  DesInventar - http://www.desinventar.org
  (c) 1998-2011 Corporacion OSSO
 */
+
 // 2009-09-16 (jhcaiced) Autoconfigure software directory
 if (! isset($_SERVER['DI8_WEB']))
 {
@@ -27,13 +28,12 @@ if (isset($_SERVER['HTTP_HOST']))
 		define('MODE', 'online');
 		define('ARCH', 'WINDOWS');
 		define('MAPSERV', 'mapserv.exe');
-		// 2009-05-01 (jhcaiced) Read Registry to obtain MS4W 
-		//                       installation path	
-		$shell = new COM('WScript.Shell') or die('Requires Windows Scripting Host');
-		$Install_Dir = $shell->RegRead('HKEY_LOCAL_MACHINE\\Software\\OSSO\\DesInventar8\Install_Dir');		
-		define('SMARTYDIR', $Install_Dir . '/ms4w/apps/Smarty/libs');
-		define('JPGRAPHDIR', $Install_Dir . '/ms4w/apps/jpgraph/src');
+		// 2011-02-25 (jhcaiced) Use DOCUMENT_ROOT to get installation path	
+		$Install_Dir = dirname(dirname($_SERVER['DOCUMENT_ROOT']));
+		define('SMARTYDIR', $Install_Dir . '/apps/Smarty');
+		define('JPGRAPHDIR', $Install_Dir . '/apps/jpgraph');
 		define('TEMP', $Install_Dir . '/tmp');
+		define('FONTSET' , $Install_Dir . '/fontswin.txt');	
 		// MS4W doesn't load the gd extension by default, so we do here now...
 		if (!extension_loaded( 'gd' ))
 		{
@@ -41,13 +41,13 @@ if (isset($_SERVER['HTTP_HOST']))
 		}
 		if (! isset($_SERVER['DI8_WEB']))
 		{
-			$_SERVER['DI8_WEB'] = $Install_Dir . '/ms4w/Apache/htdocs';
+			$_SERVER['DI8_WEB'] = $Install_Dir . '/Apache/htdocs';
 		}
+		$Install_Dir = dirname($Install_Dir);
 		$_SERVER['DI8_WWWDIR'] = $Install_Dir . '/www';
 		$_SERVER['DI8_DATADIR'] = $Install_Dir . '/data';
 		$_SERVER['DI8_MAPDIR'] = $Install_Dir . '/data/worldmap';
-		$_SERVER['DI8_CACHEDIR'] = $Install_Dir . '/tmp';
-		define('FONTSET' , $Install_Dir . '/data/main/fontswin.txt');	
+		$_SERVER['DI8_CACHEDIR'] = $Install_Dir . '/tmp';		
 	}
 	else
 	{
@@ -223,7 +223,6 @@ if (MODE != 'command')
 	{
 		$desinventarURLPortal = substr($desinventarURLPortal, 0, strlen($desinventarURLPortal) - 1);
 	}
-
 	
 	// General Information (common to portal/app)
 	$t->assign('desinventarURL'         , $desinventarURL);
