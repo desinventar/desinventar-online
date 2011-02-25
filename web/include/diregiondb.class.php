@@ -122,8 +122,18 @@ class DIRegionDB extends DIRegion
 			//$this->session->q->dreg->query("DELETE FROM Disaster WHERE RecordStatus<>'PUBLISHED'");
 			
 			// Copy DisasterId from EEData, Other Fields are Ignored...
-			$this->session->q->dreg->query("INSERT INTO EEData (DisasterId) SELECT DisasterId FROM Disaster WHERE GeographyId LIKE '" . $RegionItemGeographyId . "%'");
-
+			$sth = $this->session->q->dreg->prepare("INSERT INTO EEData (DisasterId) SELECT DisasterId FROM Disaster WHERE GeographyId LIKE '" . $RegionItemGeographyId . "%'");
+			$this->session->q->dreg->beginTransaction();
+			try
+			{
+				$sth->execute();
+				$this->session->q->dreg->commit();
+			}
+			catch (Exception $e)
+			{
+				$this->session->q->dreg->rollBack();
+				showErrorMsg('rebuildDisasterData', $e);
+			}
 			$this->session->q->dreg->query($this->detachQuery('RegItem'));
 		} //foreach
 
