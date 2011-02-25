@@ -776,7 +776,7 @@ class UserSession {
 	public function clearOldLocks()
 	{
 		$deltime = gmdate('c', time() - 600);
-		$sQuery = "DELETE FROM UserLockList WHERE RecordUpdate<='" . $deltime . "'";
+		$sQuery = "DELETE FROM UserLockList WHERE LastUpdate<='" . $deltime . "'";
 		$sth = $this->q->core->prepare($sQuery);
 		$this->q->core->beginTransaction();
 		try
