@@ -183,6 +183,10 @@ class UserSession {
 				  'LastUpdate=:LastUpdate ' . 
 				  'WHERE SessionId=:SessionId';
 		$sth = $this->q->core->prepare($sQuery);
+		$sQuery = 'UPDATE UserSession SET LangIsoCode="' . $this->LangIsoCode . '" WHERE SessionId="' . $this->sSessionId . '"';
+		$sth1 = $this->q->core->prepare($sQuery);
+		$sQuery = "UPDATE UserLockList SET LastUpdate='" . $this->dLastUpdate . "' WHERE SessionId='" . $this->sSessionId . "'";
+		$sth2 = $this->q->core->prepare($sQuery);
 		$this->q->core->beginTransaction();
 		try
 		{
@@ -194,12 +198,9 @@ class UserSession {
 			$sth->bindParam(':Start'      , $this->dStart     , PDO::PARAM_STR);
 			$sth->bindParam(':LastUpdate' , $this->dLastUpdate, PDO::PARAM_STR);
 			$sth->execute();
+			$sth1->execute();
+			$sth2->execute();
 			$this->q->core->commit();
-			
-			$sQuery = 'UPDATE UserSession SET LangIsoCode="' . $this->LangIsoCode . '" WHERE SessionId="' . $this->sSessionId . '"';
-			$this->q->core->query($sQuery);
-			$sQuery = "UPDATE UserLockList SET LastUpdate='" . $this->dLastUpdate . "' WHERE SessionId='" . $this->sSessionId . "'";
-			$this->q->core->query($sQuery);
 			$iReturn = ERR_NO_ERROR;
 		}
 		catch (Exception $e)
@@ -221,12 +222,10 @@ class UserSession {
 		try
 		{
 			$sth->bindParam(':SessionId'  , $this->sSessionId, PDO::PARAM_STR);
-			if ($result = $sth->execute())
-			{
-				$this->UserId = '';
-				$iReturn = ERR_NO_ERROR;
-			}
-			$this->q->core->commit();
+			$sth->execute();
+			$this-q->core->commit();
+			$this->UserId = '';
+			$iReturn = ERR_NO_ERROR;
 		}
 		catch (Exception $e)
 		{
@@ -297,10 +296,22 @@ class UserSession {
 	
 	public function getUserFullName() {
 		$sUserFullName = "";
-		if ($result = $this->q->core->query("SELECT * FROM User WHERE UserId='" . $this->UserId . "'") ) {
-			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-				$sUserFullName = $row->UserFullName;
+		$sQuery = "SELECT * FROM User WHERE UserId='" . $this->UserId . "'";
+		$sth = $this-q->core->prepare($sQuery);
+		$this-q->core->beginTransaction();
+		try
+		{
+			$sth->execute();
+			$this-q->core->commit();
+			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
+			{
+				$sUserFullName = $row['UserFullName'];
 			} // while
+		}
+		catch (Exception $e)
+		{
+			$this-q->core->rollBack();
+			showErrorMsg('getUserFullName Error : ' . $e->getMessage());
 		}
 		return $sUserFullName;
 	}
@@ -317,13 +328,24 @@ class UserSession {
 			$sQuery .= " AND " . "((RegionId='" . $prmRegionId . "') OR (RegionId='')) ";
 		}
 		$sQuery = $sQuery + " ORDER BY AuthKey,AuthValue";
-		if ($result = $this->q->core->query($sQuery) ) {
+		$sth = $this-q->core->prepare($sQuery);
+		$this-q->core->beginTransaction();
+		try
+		{
+			$sth->execute();
+			$this-q->core->commit();
 			$i = 0;
-			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-			 $sAuthKey = $row->AuthKey;
-			 $sAuthValue = $row->AuthValue . "/" . $row->AuthAuxValue;
-			 $myPerms[$sAuthkey] = $sAuthValue;
+			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
+			{
+				$sAuthKey   = $row['AuthKey'];
+				$sAuthValue = $row['AuthValue'] . "/" . $row['AuthAuxValue'];
+				$myPerms[$sAuthkey] = $sAuthValue;
 			} // while
+		}
+		catch (Exception $e)
+		{
+			$this-q->core->rollBack();
+			showErrorMsg('getAllPermsGeneric Error : ' . $e->getMessage());
 		}
 		return $myPerms;
 	}
@@ -336,13 +358,24 @@ class UserSession {
 			" AND (UserId='" . $this->UserId . "') " .
 			" AND AuthKey='ROLE'" . 
 			" ORDER BY RegionAuth.RegionId";
-		if ($result = $this->q->core->query($sQuery) ) {
-			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-				$sKey = $row->RegionId;
-				$sValue = $row->AuthAuxValue;
-				$myData[$sKey]['Role']        = $row->AuthAuxValue;
-				$myData[$sKey]['RegionLabel'] = $row->RegionLabel;
+		$sth = $this-q->core->prepare($sQuery);
+		$this-q->core->beginTransaction();
+		try
+		{
+			$sth->execute();
+			$this-q->core->commit();
+			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
+			{
+				$sKey   = $row['RegionId'];
+				$sValue = $row['AuthAuxValue'];
+				$myData[$sKey]['Role']        = $row['AuthAuxValue'];
+				$myData[$sKey]['RegionLabel'] = $row['RegionLabel'];
 			} // while
+		}
+		catch (Exception $e)
+		{
+			$this-q->core->rollBack();
+			showErrorMsg('getUserRoleList Error : ' . $e->getMessage());
 		}
 		return $myData;
 	} // function
@@ -355,28 +388,52 @@ class UserSession {
 		  " AND (Region.RegionId='" . $myregion . "') " .
 		  " AND RegionAuth.AuthKey='ROLE' AND RegionAuth.AuthAuxValue != 'NONE'" .
 		  " ORDER BY RegionAuth.RegionId";
-		if ($result = $this->q->core->query($sQuery) ) {
-			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-				$sKey = $row->UserId;
-				$sValue = $row->AuthAuxValue;
+		$sth = $this-q->core->prepare($sQuery);
+		$this-q->core->beginTransaction();
+		try
+		{
+			$sth->execute();
+			$this-q->core->commit();
+			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
+			{
+				$sKey = $row['UserId'];
+				$sValue = $row['AuthAuxValue'];
 				$myData[$sKey] = $sValue;
 			} // while
+		}
+		catch (Exception $e)
+		{
+			$this-q->core->rollBack();
+			showErrorMsg('getRegionRoleList Error : ' . $e->getMessage());
 		}
 		return $myData;
 	} // function
 
 	// Get basic user info: user=>[email,pass,name,org,country,city,creadate,iplist,notes,active]
-	function getUserInfo ($prmUserId) {
+	function getUserInfo ($prmUserId)
+	{
 		$myData = array();
 		$sQuery = "SELECT * FROM User";
 		if ($prmUserId != '')
+		{
 			$sQuery .= " WHERE UserId='" . $prmUserId . "'";
+		}
 		$sQuery .= " ORDER BY UserFullName";
-		if ($result = $this->q->core->query($sQuery) ) {
-			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
+		$sth = $this-q->core->prepare($sQuery);
+		try
+		{
+			$sth->execute();
+			$this-q->core->commit();
+			while ($row = $sth->fetch(PDO::FETCH_OBJ))
+			{
 				$myData[$row->UserId] = array ($row->UserEMail, $row->UserPasswd, $row->UserFullName, $row->Organization, 
 					$row->CountryIso, $row->UserCity, $row->UserCreationDate, $row->UserNotes, $row->UserActive);
 			}
+		}
+		catch (Exception $e)
+		{
+			$this-q->core->rollBack();
+			showErrorMsg('ERROR getUserInfo : ' . $e->getMessage());
 		}
 		return $myData;
 	}
@@ -385,22 +442,35 @@ class UserSession {
 	function sendPasswdReminder($prmEMail) {
 		$myAnswer = '';
 		$sQuery = "SELECT * FROM User WHERE (UserEMail='" . $prmEMail . "') ";
-		foreach($this->q->core->query($sQuery) as $row) {
-			$myAnswer = $row['UserEMail'];
-			$myPasswd = generatePasswd();
-			$this->updateUserPasswd($row['UserId'], md5($myPasswd));
-			// uhmm, must revise if send mail-> offline systems ??
-			mail($myAnswer, 
-				 "DesInventar - Password Reminder",
-				 "Dear User\nYour login information for DesInventar is:\n" .
-				 "  UserId : " . $row['UserId'] . "\n" .
-				 "  Passwd : " . $myPasswd . "\n" . 
-				 "\n\n" .
-				 "Sincerely,\n" .
-				 "   The DesInventar Team",
-				"From: support@desinventar.org"
-			);
-		} //foreach
+		$sth = $this-q->core->prepare($sQuery);
+		$this-q->core->beginTransaction();
+		try
+		{
+			$sth->execute();
+			$this-q->core->commit();
+			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
+			{
+				$myAnswer = $row['UserEMail'];
+				$myPasswd = generatePasswd();
+				$this->updateUserPasswd($row['UserId'], md5($myPasswd));
+				// uhmm, must revise if send mail-> offline systems ??
+				mail($myAnswer, 
+				     "DesInventar - Password Reminder",
+				     "Dear User\nYour login information for DesInventar is:\n" .
+				     "  UserId : " . $row['UserId'] . "\n" .
+				     "  Passwd : " . $myPasswd . "\n" . 
+				     "\n\n" .
+				     "Sincerely,\n" .
+				     "   The DesInventar Team",
+				     "From: support@desinventar.org"
+				);
+			} //while
+		}
+		catch (Exception $e)
+		{
+			$this-q->core->rollBack();
+			showStatusMsg('ERROR sendPasswdReminder : ' . $e->getMessage());
+		}
 		return $myAnswer;
 	}
 
@@ -419,10 +489,21 @@ class UserSession {
 		$sQuery .= " AND (UserId='" . $this->UserId . "') " .
 		           " AND AuthKey='ROLE'" . 
 		           " ORDER BY UserId,RegionId";
-		if ($result = $this->q->core->query($sQuery) ) {
-			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
+		$sth = $this-q->core->prepare($sQuery);
+		$this-q->core->beginTransaction();
+		try
+		{
+			$sth->execute();
+			$this-q->core->commit();
+			while ($row = $sth->fetch(PDO::FETCH_OBJ))
+			{
 				$myAnswer = $row->AuthAuxValue;
 			} // while
+		}
+		catch (Exception $e)
+		{
+			$this-q->core->rollBack();
+			showErrorMsg('ERROR getUserRole : ' . $e->getMessage());
 		}
 		return $myAnswer;
 	} // function
@@ -440,17 +521,40 @@ class UserSession {
 		return $NumRole;
 	}
 	
-	public function setUserRole($prmUserId, $prmRegionId, $prmRole) {
+	public function setUserRole($prmUserId, $prmRegionId, $prmRole)
+	{
 		$iReturn = ERR_NO_ERROR;
-		if ($prmUserId   == '') { $iReturn = ERR_DEFAULT_ERROR; }
-		if ($prmRegionId == '') { $iReturn = ERR_DEFAULT_ERROR; }
-		if ($iReturn > 0) {
+		if ($prmUserId   == '')
+		{
+			$iReturn = ERR_DEFAULT_ERROR;
+		}
+		if ($prmRegionId == '') {
+			$iReturn = ERR_DEFAULT_ERROR;
+		}
+		if ($iReturn > 0)
+		{
 			// Remove All Permissions for This User on This Database
 			$sQuery = "DELETE FROM RegionAuth WHERE UserId='" . $prmUserId . "' AND RegionId='" . $prmRegionId . "'";
-			$this->q->core->query($sQuery);
+			$sth = $this-q->core->prepare($sQuery);
+			$this-q->core->beginTransaction();
+			try
+			{
+				$sth->execute();
+				$this->q->core->commit();
+			}
+			catch (Exception $e)
+			{
+				$this-q->core->rollBack();
+				showErrorMsg('ERROR setUserRole : '. $e->getMessage());
+			}
+		}
+
+		if ($iReturn > 0)
+		{
 			// Insert ROLE Permission First		
 			$this->setPerm($prmUserId, $prmRegionId, 'ROLE', 0, $prmRole);
-			switch($prmRole) {
+			switch($prmRole)
+			{
 				case 'ADMINREGION':
 					$this->setPerm($prmUserId, $prmRegionId, "DISASTER" , 5, "");
 					$this->setPerm($prmUserId, $prmRegionId, "EVENT"    , 5, "");
@@ -463,7 +567,7 @@ class UserSession {
 					$this->setPerm($prmUserId, $prmRegionId, "DBPUBLIC" , 2, "");
 					$this->setPerm($prmUserId, $prmRegionId, "DBACTIVE" , 2, "");
 					$this->setPerm($prmUserId, $prmRegionId, "DBLOG"    , 5, "");
-					break;
+				break;
 				case 'SUPERVISOR':
 					$this->setPerm($prmUserId, $prmRegionId, "DISASTER" , 4, "STATUS=DRAFT,STATUS=READY");
 					$this->setPerm($prmUserId, $prmRegionId, "EVENT"    , 1, "STATUS=ACTIVE");
@@ -473,7 +577,7 @@ class UserSession {
 					$this->setPerm($prmUserId, $prmRegionId, "EEFIELD"  , 1, "STATUS=ACTIVE");
 					$this->setPerm($prmUserId, $prmRegionId, "DBINFO"   , 1, "");
 					$this->setPerm($prmUserId, $prmRegionId, "DBLOG"    , 3, "");
-					break;
+				break;
 				case 'USER':
 					$this->setPerm($prmUserId, $prmRegionId, "DISASTER" , 3, "STATUS=DRAFT,STATUS=READY");
 					$this->setPerm($prmUserId, $prmRegionId, "EVENT"    , 1, "STATUS=ACTIVE");
@@ -483,7 +587,7 @@ class UserSession {
 					$this->setPerm($prmUserId, $prmRegionId, "EEFIELD"  , 1, "STATUS=ACTIVE");
 					$this->setPerm($prmUserId, $prmRegionId, "DBINFO"   , 1, "");
 					$this->setPerm($prmUserId, $prmRegionId, "DBLOG"    , 3, "");
-					break;
+				break;
 				case 'OBSERVER':
 					$this->setPerm($prmUserId, $prmRegionId, "DISASTER" , 1, "STATUS=ACTIVE");
 					$this->setPerm($prmUserId, $prmRegionId, "EVENT"    , 1, "STATUS=ACTIVE");
@@ -493,55 +597,101 @@ class UserSession {
 					$this->setPerm($prmUserId, $prmRegionId, "DBINFO"   , 1, "");
 					$this->setPerm($prmUserId, $prmRegionId, "DBLOG"    , 1, "");
 					$this->setPerm($prmUserId, $prmRegionId, "EEFIELD"  , 1, "STATUS=ACTIVE");
-					break;
+				break;
 				case 'MINIMAL':
 					$this->setPerm($prmUserId, $prmRegionId, "USER"     , 2, "");
-					break;
+				break;
 				case 'NONE' :
 					// Do not set any permission
-					break;
+				break;
 			} //switch
 		}
 		return $iReturn;
 	} //function
 	
-	public function setPerm($prmUserId, $prmRegionId, $prmAuthKey, $prmValue, $prmAuxValue) {
+	public function setPerm($prmUserId, $prmRegionId, $prmAuthKey, $prmValue, $prmAuxValue)
+	{
 		$sQuery = "INSERT INTO RegionAuth VALUES (" . 
 			"'" . $prmUserId . "','" . $prmRegionId  . "'," .
 			"'" . $prmAuthKey . "','" . $prmValue . "','" . $prmAuxValue . "')";
-		$this->q->core->query($sQuery);
+		$sth = $this->q->core->prepare($sQuery);
+		$this-q->core->beginTransaction();
+		try
+		{
+			$sth->execute();
+			$this-q->core->commit();
+		}
+		catch (Exception $e)
+		{
+			$this-q->core->rollBack();
+			showErrorMsg('ERROR setPerm : ' . $e->getMessage());
+		}
 	}
 
-	public function getRegionList($prmCountryIsoCode, $prmStatus) {
+	public function getRegionList($prmCountryIsoCode, $prmStatus)
+	{
 		if (!empty($prmCountryIsoCode))
+		{
 			$opt = " CountryIsoCode='$prmCountryIsoCode'";
+		}
 		else
+		{
 			$opt = " 1=1";
+		}
 		if ($prmStatus == "ACTIVE")
+		{
 			$opt .= " AND RegionActive = True";
+		}
 		$sQuery = "SELECT RegionId, RegionLabel FROM Region " .
-		  " WHERE $opt ORDER BY RegionLabel";
+		          " WHERE $opt ORDER BY RegionLabel";
 		$myData = array();
-		if ($result = $this->q->core->query($sQuery) ) {
-			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-			 $sKey = $row->RegionId;
-			 $sValue = $row->RegionLabel;
-			 $myData[$sKey] = $sValue;
+		$sth = $this->q->core->prepare($sQuery);
+		$this-q->core->beginTransaction();
+		try
+		{
+			$sth->execute();
+			$this-q->core->commit();
+			while ($row = $sth->fetch(PDO::FETCH_OBJ))
+			{
+				$sKey = $row->RegionId;
+				$sValue = $row->RegionLabel;
+				$myData[$sKey] = $sValue;
 			} // while
+		}
+		catch (Exception $e)
+		{
+			$this-q->core->rollBack();
+			showErrorMsg('ERROR getRegionList : ' . $e->getMessage());
 		}
 		return $myData;
 	} // function
 	
-	public function doUserExist($prmUserId) {
+	public function doUserExist($prmUserId)
+	{
 		$Answer = ERR_UNKNOWN_ERROR;
 		$Query = "SELECT UserId FROM User WHERE UserId='" . $prmUserId . "'";
-		foreach ($this->q->core->query($Query) as $row) {
-			$Answer = ERR_NO_ERROR;
+		$sth = $this-q->core->prepare($Query);
+		$this-q->core->beginTransaction();
+		try
+		{
+			$sth->execute();
+			$this-q->core->commit();
+			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
+			{
+				$Answer = ERR_NO_ERROR;
+			}
+		}
+		catch (Exception $e)
+		{
+			$this-q->core->rollBack();
+			showErrorMsg('ERROR doUserExist : ' . $e->getMessage());
 		}
 		return $Answer;
 	}
 	
-	public function insertUser($UserId, $UserFullName, $UserEMail, $UserPasswd, $UserCountry, $UserCity, $UserActive) {
+	public function insertUser($UserId, $UserFullName, $UserEMail, $UserPasswd, 
+	                           $UserCountry, $UserCity, $UserActive)
+	{
 		$iReturn = ERR_DEFAULT_ERROR;
 		$sQuery = "INSERT INTO User VALUES (" . 
 				  "'" . $UserId . "'," .
@@ -554,12 +704,25 @@ class UserSession {
 				  "'" . gmdate('c') . "'," .
 				  "''," .
 				  $UserActive . ")";
-		if ($result = $this->q->core->query($sQuery))
+		$sth = $this-q->core->prepare($sQuery);
+		$this-q->core->beginTransaction();
+		try
+		{
+			$sth->execute();
+			$this-q->core->commit();
 			$iReturn = ERR_NO_ERROR;
+		}
+		catch (Exception $e)
+			$this-q->core->rollBack();
+			showErrorMsg('ERROR insertUser : ' . $e->getMessage());
+		{
+		}
 		return $iReturn;
 	}
 	
-	public function updateUser($UserId, $UserFullName, $UserEMail, $UserPasswd, $UserCountry, $UserCity, $UserActive) {
+	public function updateUser($UserId, $UserFullName, $UserEMail, $UserPasswd,
+	                           $UserCountry, $UserCity, $UserActive)
+	{
 		$iReturn = ERR_DEFAULT_ERROR;
 		$sQuery = "UPDATE User SET " . 
 				  "UserEMail='" . $UserEMail . "',".
@@ -570,66 +733,166 @@ class UserSession {
 				  "UserNotes=''," .
 				  "UserActive=" . $UserActive;
 		if (!empty($UserPasswd))
+		{
 			$sQuery .= ", UserPasswd='" . md5($UserPasswd) . "'";
+		}
 		$sQuery .=  " WHERE UserId='" . $UserId . "'";
-		if ($result = $this->q->core->query($sQuery))
+		$sth = $this->q->core->prepare($sQuery);
+		$this-q->core->beginTransaction();
+		try
+		{
+			$sth->execute();
+			$this-q->core->commit();
 			$iReturn = ERR_NO_ERROR;
+		}
+		catch (Exception $e)
+		{
+			$this-q->core->rollBack();
+			showErrorMsg('ERROR updateUser : ' . $e->getMessage());
+		}
 		return $iReturn;
 	}
 	
-	public function updateUserPasswd($UserId, $UserPasswd) {
+	public function updateUserPasswd($UserId, $UserPasswd)
+	{
 		$iReturn = ERR_DEFAULT_ERROR;
 		$Query = 'UPDATE User SET UserPasswd="' . $UserPasswd . '" WHERE UserId="' . $UserId . '"';
-		if ($result = $this->q->core->query($Query)) {
+		$sth = $this->q->core->prepare($Query);
+		$this-q->core->beginTransaction();
+		try
+		{
+			$sth->execute();
+			$this-q->core->commit();
 			$iReturn = ERR_NO_ERROR;
-		}		
+		}
+		catch (Exception $e)
+		{
+			$this-q->core->rollBack();
+			showErrorMsg('ERROR updateUserPasswd : ' . $e->getMessage());
+		}
 		return $iReturn;
 	}
 	
-	public function clearOldLocks() {
+	public function clearOldLocks()
+	{
 		$deltime = gmdate('c', time() - 600);
 		$sQuery = "DELETE FROM UserLockList WHERE RecordUpdate<='" . $deltime . "'";
-		$this->q->core->query($sQuery);
+		$sth = $this->q->core->prepare($sQuery);
+		$this-q->core->beginTransaction();
+		try
+		{
+			$sth->execute();
+			$this-q->core->commit();
+		}
+		catch (Exception $e)
+		{
+			$this-q->core->rollBack();
+			showErrorMsg('ERROR clearOldLocks : ' . $e->getMessage());
+		}
 	}
 	
-	public function isDatacardLocked($prmDisasterId) {
+	public function isDatacardLocked($prmDisasterId)
+	{
 		// First delete old datacard locks...
 		$this->clearOldLocks();
-		$sQuery = "SELECT * FROM UserLockList WHERE RecordId='" . $prmDisasterId . "'";
 		$sReturn = '';
-		foreach ($this->q->core->query($sQuery) as $row) {
-			$sReturn = $row['SessionId'];
+		$sQuery = "SELECT * FROM UserLockList WHERE RecordId='" . $prmDisasterId . "'";
+		$sth = $this->q->core->prepare($sQuery);
+		$this-q->core->beginTransaction();
+		try
+		{
+			$sth->execute();
+			$this-q->core->commit();
+			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
+			{
+				$sReturn = $row['SessionId'];
+			}
+		}
+		catch (Exception $e)
+		{
+			$this-q->core->rollBack();
+			showErrorMsg('ERROR isDatacardLocked : ' . $e->getMessage());
 		}
 		return $sReturn;
 	}
 	
-	public function lockDatacard($prmDisasterId) {
+	public function lockDatacard($prmDisasterId)
+	{
 		// First delete old datacard locks...
 		$this->clearOldLocks();
 		$now = gmdate('c');
 		$sQuery = "INSERT INTO UserLockList VALUES ('" . $this->sSessionId . "','DISASTER','" . $prmDisasterId . "','" . $now . "')";
-		$this->q->core->query($sQuery);
+		$sth = $this->q->core->prepare($sQuery);
+		$this-q->core->beginTransaction();
+		try
+		{
+			$sth->execute();
+			$this-q->core->commit();
+		}
+		catch (Exception $e)
+		{
+			$this-q->core->rollBack();
+			showErrorMsg('ERROR lockDatacard : ' . $e->getMessage());
+		}
 	}
 	
-	public function releaseDatacard($prmDisasterId) {
+	public function releaseDatacard($prmDisasterId)
+	{
 		$sQuery = "DELETE FROM UserLockList WHERE SessionId='" . $this->sSessionId . "' AND RecordId='" . $prmDisasterId . "'";
-		$this->q->core->query($sQuery);
+		$sth = $this->q->core->prepare($sQuery);
+		$this-q->core->beginTransaction();
+		try
+		{
+			$sth->execute();
+			$this-q->core->commit();
+		}
+		catch (Exception $e)
+		{
+			$this-q->core->rollBack();
+			showErrorMsg('ERROR releaseDatacard : ' . $e->getMessage());
+		}
 	}
 
-	public function clearLocks() {
+	public function clearLocks()
+	{
 		$sQuery = "DELETE FROM UserLockList WHERE SessionId='" . $this->sSessionId . "'";
-		$this->q->core->query($sQuery);
+		$sth = $this->q->core->prepare($sQuery);
+		$this-q->core->beginTransaction();
+		try
+		{
+			$sth->execute();
+			$this-q->core->commit();
+		}
+		catch (Exception $e)
+		{
+			$this-q->core->rollBack();
+			showErrorMsg('ERROR clearLocks : ' . $e->getMessage());
+		}
 	}
 	
-	public function getUsersList($prmUserId) {
+	public function getUsersList($prmUserId)
+	{
 		$list = array();
 		$sQuery = "SELECT * FROM User WHERE UserActive > 0 ";
 		if ($prmUserId != '') {
 			$sQuery .= " AND UserId='" . $prmUserId . "'";
 		}
 		$sQuery .= " ORDER BY UserFullName";
-		foreach($this->q->core->query($sQuery) as $row) {
-			$list[$row['UserId']]=$row['UserFullName'];
+		$sth = $this->q->core->prepare($sQuery);
+		$this-q->core->beginTransaction();
+		try
+		{
+			$sth->execute();
+			$this-q->core->commit();
+			while($row = $sth->fetch(PDO::FETCH_ASSOC))
+			{
+				$list[$row['UserId']]=$row['UserFullName'];
+			}
+		}
+		catch (Exception $e)
+		{
+			$this-q->core->rollBack();
+			showErrorMsg('ERROR getUsersList : ' . $e->getMessage());
 		}
 		return $list;
 	}
@@ -638,74 +901,82 @@ class UserSession {
 		return true;
 	}
 
-	public function listDB() {
+	public function listDB()
+	{
 		$RegionList = array();
 		$query = "SELECT R.RegionId AS RegionId, R.RegionLabel AS RegionLabel, R.CountryIso AS CountryIso, R.RegionStatus AS RegionStatus, ".
 			"RA.AuthAuxValue AS Role FROM Region AS R, RegionAuth AS RA WHERE R.RegionId = RA.RegionId ";
-		/*
-		if ($searchByCountry) {
-			$query .= " AND R.CountryIso = '" . $prmQuery . "'";
-		}
-		*/
-		if ($this->UserId) {
+		if ($this->UserId)
+		{
 			$query .= " AND RA.AuthKey = 'ROLE' AND RA.UserId = '". $this->UserId ."'";
-		} else {
+		}
+		else
+		{
 			$query .= " AND R.RegionStatus = 3 GROUP BY R.RegionId";
 		}
 		$query .= " ORDER BY R.CountryIso, R.RegionLabel, R.RegionOrder";
 		$result = $this->q->core->query($query);
-		while ($row = $result->fetch(PDO::FETCH_OBJ)) {
+		while ($row = $result->fetch(PDO::FETCH_OBJ))
+		{
 			$RegionList[$row->RegionId] = array($row->RegionLabel, $row->CountryIso, $row->RegionStatus, $row->Role);
 		}
 		return $RegionList;
 	}
-	
 
-	public function searchDB($prmQuery, $searchByCountry) {
+	public function searchDB($prmQuery, $searchByCountry)
+	{
 		$regionlist = array();
 
 		// Search for Public Databases and assign to (ROLE=NONE)
 		$query = "SELECT RegionId,CountryIso,RegionLabel FROM Region WHERE RegionStatus=3 AND "; 
-		if ($searchByCountry > 0) {
+		if ($searchByCountry > 0)
+		{
 			$query .= "(CountryIso = '" . $prmQuery . "')";
-		} else {
+		}
+		else
+		{
 			$query .= "(RegionId LIKE '%" . $prmQuery . "%' OR RegionLabel LIKE '%" . $prmQuery . "%')";
 		}
 		$query .= " ORDER BY CountryIso,RegionLabel,RegionOrder";
-		foreach($this->q->core->query($query) as $row) {
+		foreach($this->q->core->query($query) as $row)
+		{
 			$regionlist[$row['RegionId']] = array('RegionLabel' => $row['RegionLabel'],
 			                                      'CountryIso'  => $row['CountryIso'],
 			                                      'Role' => 'NONE');
 		}
 		
-		if ($searchByCountry <= 0) {
+		if ($searchByCountry <= 0)
+		{
 			// Add Regions with specific Roles
 			$query = "select R.RegionId,R.CountryIso,R.RegionLabel,RA.AuthAuxValue from Region R,RegionAuth RA where R.RegionId=RA.RegionId AND RA.AuthKey='ROLE' AND RA.UserId='" . $this->UserId . "' ORDER BY R.CountryIso,R.RegionLabel;";
-			foreach($this->q->core->query($query) as $row) {
+			foreach($this->q->core->query($query) as $row)
+			{
 				$regionlist[$row['RegionId']] = array('RegionLabel' => $row['RegionLabel'],
 				                                      'CountryIso'  => $row['CountryIso'],
 				                                      'Role' => $row['AuthAuxValue']);
 			}
 		}
-		
 		return $regionlist;
 	}
 
-	public function getDisasterIdFirst() {
+	public function getDisasterIdFirst()
+	{
 		$Record = 1;
 		$RecordCount = $this->getDisasterCount();
 		$DisasterId = $this->getDisasterIdFromRecordNumber($Record);
 		return array('DisasterId' => $DisasterId, 'RecordNumber' => $Record, 'RecordCount' => $RecordCount, 'Status' => 'OK');
 	}
 
-	public function getDisasterIdLast() {
+	public function getDisasterIdLast()
+	{
 		$RecordCount = $this->getDisasterCount();
 		$Record = $RecordCount;
 		$DisasterId = $this->getDisasterIdFromRecordNumber($Record);
 		return array('DisasterId' => $DisasterId, 'RecordNumber' => $Record, 'RecordCount' => $RecordCount, 'Status' => 'OK');
 	}
 
-	public function getDisasterIdPrev($prmRecord) {
+	public function getDisasterIdPrev($prmRecord)
+	{
 		$Record = $prmRecord;
 		$RecordCount = $this->getDisasterCount();
 		if ($Record > 1) {
@@ -715,10 +986,12 @@ class UserSession {
 		return array('DisasterId' => $DisasterId, 'RecordNumber' => $Record, 'RecordCount' => $RecordCount, 'Status' => 'OK');
 	}
 
-	public function getDisasterIdNext($prmRecord) {
+	public function getDisasterIdNext($prmRecord)
+	{
 		$Record = $prmRecord;
 		$RecordCount = $this->getDisasterCount();
-		if ($Record < $RecordCount) {
+		if ($Record < $RecordCount)
+		{
 			$Record++;
 		}
 		$DisasterId = $this->getDisasterIdFromRecordNumber($Record);
@@ -732,7 +1005,8 @@ class UserSession {
 		$sQuery = 'SELECT DisasterId,DisasterSerial FROM Disaster ORDER BY DisasterSerial';
 		$sth = $this->q->dreg->prepare($sQuery);
 		$this->q->dreg->beginTransaction();
-		try {
+		try
+		{
 			$sth->execute();
 			$this->q->dreg->commit();
 			$reclist = $sth->fetchAll(PDO::FETCH_ASSOC);
@@ -759,20 +1033,24 @@ class UserSession {
 		             'RecordNumber' => $RecordNumber, 'RecordCount' => $RecordCount);
 	}
 
-	public function getDisasterCount() {
+	public function getDisasterCount()
+	{
 		$iCount = 0;
 		$sQuery = "SELECT COUNT(DisasterId) AS C FROM Disaster";
-		foreach($this->q->dreg->query($sQuery) as $row) {
+		foreach($this->q->dreg->query($sQuery) as $row)
+		{
 			$iCount = $row['C'];
 		}
 		return $iCount;
 	}
 		
-	public function getDisasterIdFromRecordNumber($prmRecord) {
+	public function getDisasterIdFromRecordNumber($prmRecord)
+	{
 		$DisasterId = '';
 		$prmRecord--;
 		$sQuery = "SELECT DisasterId FROM Disaster ORDER BY DisasterBeginTime,DisasterSerial LIMIT " . $prmRecord . ",1";
-		foreach($this->q->dreg->query($sQuery) as $row) {
+		foreach($this->q->dreg->query($sQuery) as $row)
+		{
 			$DisasterId = $row['DisasterId'];
 		}
 		return $DisasterId;
