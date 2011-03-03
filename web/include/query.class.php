@@ -193,14 +193,23 @@ class Query //extends PDO
 				// Attempt to translate the list to the requested language using 
 				// data from base.Event table
 				$data1 = $this->getBasicEventList($LangIsoCode);
+				$RegionLangIsoCode = $this->getDBInfoValue('LangIsoCode');
 				foreach($data as $EventId => $EventData)
 				{
 					if (array_key_exists($EventId, $data1))
 					{
-						if ($data[$EventId]['EventPredefined'] == 1)
+						if ($LangIsoCode != $RegionLangIsoCode)
 						{
-							$data[$EventId][0] = $data1[$EventId][0];
-							$data[$EventId][1] = $data1[$EventId][1];
+							$bReplace = $data[$EventId]['EventPredefined'] > 0;
+						}
+						else
+						{
+							$bReplace = $data[$EventId]['EventPredefined'] == 1;
+						}
+						if ($bReplace == true)
+						{
+							$data[$EventId][0] = $data1[$EventId][0]; // Name
+							$data[$EventId][1] = $data1[$EventId][1]; // Desc
 						}
 					}
 				}
@@ -225,14 +234,23 @@ class Query //extends PDO
 				// Attempt to translate the list to the requested language using 
 				// data from base.Cause table
 				$data1 = $this->getBasicCauseList($LangIsoCode);
+				$RegionLangIsoCode = $this->getDBInfoValue('LangIsoCode');
 				foreach($data as $CauseId => $CauseData)
 				{
 					if (array_key_exists($CauseId, $data1))
 					{
-						if ($data[$CauseId]['CausePredefined'] == 1)
+						if ($LangIsoCode != $RegionLangIsoCode)
 						{
-							$data[$CauseId][0] = $data1[$CauseId][0];
-							$data[$CauseId][1] = $data1[$CauseId][1];
+							$bReplace = $data[$CauseId]['CausePredefined'] > 0;
+						}
+						else
+						{
+							$bReplace = $data[$CauseId]['CausePredefined'] == 1;
+						}
+						if ($bReplace == true)
+						{
+							$data[$CauseId][0] = $data1[$CauseId][0]; // Name
+							$data[$CauseId][1] = $data1[$CauseId][1]; // Desc
 						}
 					}
 				} //foreach
