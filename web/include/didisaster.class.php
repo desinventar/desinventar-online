@@ -77,11 +77,16 @@ class DIDisaster extends DIRecord
 		$this->sFieldDef .= ',' . $this->sFieldQDef;
 		parent::__construct($prmSession);
 		$this->sEEFieldDef  = $this->buildEEFieldDef();
+		$this->EEFieldCount = 0;
 		if ($this->sEEFieldDef != '')
 		{
 			//$this->sFieldDef .= ',' . $sNewFields;
 			$this->createFields($this->sFieldKeyDef);
 			$this->createFields($this->sEEFieldDef);
+			foreach (split(',', $this->sEEFieldDef) as $sKey => $sValue)
+			{
+				$this->EEFieldCount++;
+			}
 		}
 		$this->set('EventPredefined', 0);
 		$this->set('EventActive', 1);
@@ -256,19 +261,15 @@ class DIDisaster extends DIRecord
 				$this->set($sFieldQName, 0);
 			}
 		}
-		try {
-			// Update Disaster record
-			$iReturn = parent::update($withValidate, $bStrict);
-			if ($iReturn > 0)
+		// Update Disaster record
+		$iReturn = parent::update($withValidate, $bStrict);
+		if ($iReturn > 0)
+		{
+			if ($this->EEFieldCount > 0)
 			{
 				// Update EEData record
 				$iReturn = $this->updateRecord('EEData', $this->sEEFieldDef);
 			}
-		}
-		catch (Exception $e)
-		{
-			showErrorMsg('update : ' . $prmTableName . ' : ' . $e->getCode() . ' '. $e->getMessage());
-			$iReturn = ERR_TABLE_LOCKED;
 		}
 		return $iReturn;
 	} //update
