@@ -140,7 +140,7 @@ function onReadyPortal() {
 		jQuery('body').trigger('UserLoggedOut');
 	}
 	
-	jQuery("#regionlink").unbind('click').click(function() {
+	jQuery(".regionlink").unbind('click').click(function() {
 		var RegionId = jQuery('#desinventarRegionId').val();
 		var LangIsoCode = jQuery('#desinventarLang').val();
 		window.open(desinventarURL + '?r=' + RegionId + '&lang=' + desinventarLang,'_blank',

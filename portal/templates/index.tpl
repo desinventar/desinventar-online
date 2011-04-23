@@ -132,12 +132,15 @@
 							<div class="contentBlock" id="pageinfo">
 								<table width="100%">
 									<tr>
-										<td colspan="2">
-											<p align="right">
-											<a id="regionlink" href="#">
-												<img id="regionbutton" src="{-$desinventarURLPortal-}/images/b_desinventar3.jpg" border="0" alt="" />
-											</a>
-											</p>
+										<td colspan="2" align="right">
+											<div></div>
+											<div style="float:right;">
+												<a class="regionlink" href="#"><img id="regionbutton" src="{-$desinventarURLPortal-}/images/b_desinventar3.jpg" border="0" alt="" /></a>
+												<br />
+												<center>
+													<a class="regionlink" href="#">{-#msgRegionOpenDB#-}</a>
+												</center>
+											</div>
 										</td>
 									</tr>
 									<tr>
