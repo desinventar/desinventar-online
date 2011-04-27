@@ -1,0 +1,3413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StringList>
+	<Group name="di8_user">
+		<Message id="tuser">
+			<Text LangIsoCode="eng">User</Text>
+			<Text LangIsoCode="spa">Usuario</Text>
+			<Text LangIsoCode="por">Usuário</Text>
+			<Text LangIsoCode="fre">Utilisateur</Text>
+		</Message>
+		<Message id="tname">
+			<Text LangIsoCode="eng">Name</Text>
+			<Text LangIsoCode="spa">Nombre</Text>
+			<Text LangIsoCode="por">Nome</Text>
+			<Text LangIsoCode="fre">Nom</Text>
+		</Message>
+		<Message id="tpassword">
+			<Text LangIsoCode="eng">Password</Text>
+			<Text LangIsoCode="spa">Clave</Text>
+			<Text LangIsoCode="por">Senha</Text>
+			<Text LangIsoCode="fre">Mot de passe</Text>
+		</Message>
+		<Message id="temail">
+			<Text LangIsoCode="eng">E-mail</Text>
+			<Text LangIsoCode="spa">E-mail</Text>
+			<Text LangIsoCode="por">E-mail</Text>
+			<Text LangIsoCode="fre">E-mail</Text>
+		</Message>
+		<Message id="toldpassword">
+			<Text LangIsoCode="eng">Type your password</Text>
+			<Text LangIsoCode="spa">Ingrese su clave</Text>
+			<Text LangIsoCode="por">Digite sua senha</Text>
+			<Text LangIsoCode="fre">Introduisez votre mot de passe</Text>
+		</Message>
+		<Message id="tnewpassword">
+			<Text LangIsoCode="eng">New password</Text>
+			<Text LangIsoCode="spa">Nueva clave</Text>
+			<Text LangIsoCode="por">Nova senha</Text>
+			<Text LangIsoCode="fre">Nouveau mot de passe</Text>
+		</Message>
+		<Message id="tnewpassword2">
+			<Text LangIsoCode="eng">Re-type your password</Text>
+			<Text LangIsoCode="spa">Re-ingrese</Text>
+			<Text LangIsoCode="por">Digite-a novamente</Text>
+			<Text LangIsoCode="fre">Réintroduisez</Text>
+		</Message>
+		<Message id="tcountry">
+			<Text LangIsoCode="eng">Country</Text>
+			<Text LangIsoCode="spa">País</Text>
+			<Text LangIsoCode="por">País</Text>
+			<Text LangIsoCode="fre">Pays</Text>
+		</Message>
+		<Message id="tcity">
+			<Text LangIsoCode="eng">City</Text>
+			<Text LangIsoCode="spa">Ciudad</Text>
+			<Text LangIsoCode="por">Cidade</Text>
+			<Text LangIsoCode="fre">Ville</Text>
+		</Message>
+		<Message id="tactive">
+			<Text LangIsoCode="eng">Active</Text>
+			<Text LangIsoCode="spa">Activo</Text>
+			<Text LangIsoCode="por">Ativo</Text>
+			<Text LangIsoCode="fre">Actif</Text>
+		</Message>
+		<Message id="baddoption">
+			<Text LangIsoCode="eng">Add</Text>
+			<Text LangIsoCode="spa">Adicionar</Text>
+			<Text LangIsoCode="por">Adicionar</Text>
+			<Text LangIsoCode="fre">Ajouter</Text>
+		</Message>
+		<Message id="bsave">
+			<Text LangIsoCode="eng">Save</Text>
+			<Text LangIsoCode="spa">Guardar</Text>
+			<Text LangIsoCode="por">Salvar</Text>
+			<Text LangIsoCode="fre">Enregistrer</Text>
+		</Message>
+		<Message id="bsend">
+			<Text LangIsoCode="eng">Generate</Text>
+			<Text LangIsoCode="spa">Generar</Text>
+			<Text LangIsoCode="por">Gerar</Text>
+			<Text LangIsoCode="fre">Générer</Text>
+		</Message>
+		<Message id="bcancel">
+			<Text LangIsoCode="eng">Cancel</Text>
+			<Text LangIsoCode="spa">Cancelar</Text>
+			<Text LangIsoCode="por">Cancelar</Text>
+			<Text LangIsoCode="fre">Annuler</Text>
+		</Message>
+		<Message id="benter">
+			<Text LangIsoCode="eng">Login</Text>
+			<Text LangIsoCode="spa">Entrar</Text>
+			<Text LangIsoCode="por">Entrar</Text>
+			<Text LangIsoCode="fre">Se connecter</Text>
+		</Message>
+		<Message id="tpasslost">
+			<Text LangIsoCode="eng">Forgot your password?</Text>
+			<Text LangIsoCode="spa">¿Olvidó su clave?</Text>
+			<Text LangIsoCode="por">Esqueceu sua senha?</Text>
+			<Text LangIsoCode="fre">Vous avez oublié votre mot de passe?</Text>
+		</Message>
+		<Message id="msgEmptyFields">
+			<Text LangIsoCode="eng">Fields cannot be empty</Text>
+			<Text LangIsoCode="spa">Los campos no pueden estar vacios</Text>
+			<Text LangIsoCode="por">Campos não pode ser vazio</Text>
+			<Text LangIsoCode="fre">Les champs ne peuvent pas être vide</Text>
+		</Message>
+		<Message id="msgUserLoggedIn">
+			<Text LangIsoCode="eng">Login successfull.</Text>
+			<Text LangIsoCode="spa">Ingreso exitoso.</Text>
+			<Text LangIsoCode="por">Succesfull login</Text>
+			<Text LangIsoCode="fre">Succesfull connexion</Text>
+		</Message>
+		<Message id="msgInvalidPasswd">
+			<Text LangIsoCode="eng">Invalid user name or password</Text>
+			<Text LangIsoCode="spa">Usuario o clave incorrecta</Text>
+			<Text LangIsoCode="por">Inválido ou senha</Text>
+			<Text LangIsoCode="fre">Nom d&quot;utilisateur ou mot de passe</Text>
+		</Message>
+		<Message id="toptions">
+			<Text LangIsoCode="eng">Options</Text>
+			<Text LangIsoCode="spa">Opciones</Text>
+			<Text LangIsoCode="por">Opções</Text>
+			<Text LangIsoCode="fre">Options</Text>
+		</Message>
+		<Message id="tclosesess">
+			<Text LangIsoCode="eng">Close session</Text>
+			<Text LangIsoCode="spa">Cerrar sesión</Text>
+			<Text LangIsoCode="por">Fechar sessão</Text>
+			<Text LangIsoCode="fre">Fermer la session</Text>
+		</Message>
+		<Message id="tmyregions">
+			<Text LangIsoCode="eng">My Databases</Text>
+			<Text LangIsoCode="spa">Mis bases</Text>
+			<Text LangIsoCode="por">Meus bancos</Text>
+			<Text LangIsoCode="fre">Mes bases</Text>
+		</Message>
+		<Message id="tconfigacc">
+			<Text LangIsoCode="eng">My Account</Text>
+			<Text LangIsoCode="spa">Mi cuenta</Text>
+			<Text LangIsoCode="por">Minha conta</Text>
+			<Text LangIsoCode="fre">Mon compte</Text>
+		</Message>
+		<Message id="thello">
+			<Text LangIsoCode="eng">Hi!</Text>
+			<Text LangIsoCode="spa">Hola</Text>
+			<Text LangIsoCode="por">Olá</Text>
+			<Text LangIsoCode="fre">Salut</Text>
+		</Message>
+		<Message id="tdetails">
+			<Text LangIsoCode="eng">Access</Text>
+			<Text LangIsoCode="spa">Acceder</Text>
+			<Text LangIsoCode="por">Entrar</Text>
+			<Text LangIsoCode="fre">Accès</Text>
+		</Message>
+		<Message id="tuserprefer">
+			<Text LangIsoCode="eng">Edit user account</Text>
+			<Text LangIsoCode="spa">Edición de cuenta de usuario</Text>
+			<Text LangIsoCode="por">Edição de conta de usuário</Text>
+			<Text LangIsoCode="fre">Édition du compte usager</Text>
+		</Message>
+		<Message id="tuseremail">
+			<Text LangIsoCode="eng">Electronic mail (&lt;i&gt;email&lt;/i&gt;)</Text>
+			<Text LangIsoCode="spa">Correo electrónico (&lt;i&gt;e-mail&lt;/i&gt;)</Text>
+			<Text LangIsoCode="por">Correio eletrônico (&lt;i&gt;e-mail&lt;/i&gt;)</Text>
+			<Text LangIsoCode="fre">Courrier électronique(&lt;i&gt;e-mail&lt;/i&gt;)</Text>
+		</Message>
+		<Message id="tadminperms">
+			<Text LangIsoCode="eng">Administrative authority</Text>
+			<Text LangIsoCode="spa">Permisos administrativos</Text>
+			<Text LangIsoCode="por">Permissões administrativas</Text>
+			<Text LangIsoCode="fre">Autorisations administratives</Text>
+		</Message>
+		<Message id="mnuDatabaseAdmin">
+			<Text LangIsoCode="eng">Databases management</Text>
+			<Text LangIsoCode="spa">Gestión de bases de datos</Text>
+			<Text LangIsoCode="por">Gestão de bancos de dados</Text>
+			<Text LangIsoCode="fre">Gestion des bases de données</Text>
+		</Message>
+		<Message id="mnuDatabaseImport">
+			<Text LangIsoCode="eng">Import databases</Text>
+			<Text LangIsoCode="spa">Importar Bases de Datos</Text>
+			<Text LangIsoCode="por">Importação de banco de dados</Text>
+			<Text LangIsoCode="fre">Importation base de données</Text>
+		</Message>
+		<Message id="mnuUserAdmin">
+			<Text LangIsoCode="eng">User management</Text>
+			<Text LangIsoCode="spa">Gestión de usuarios</Text>
+			<Text LangIsoCode="por">Gestão de usuários</Text>
+			<Text LangIsoCode="fre">Gestion des usagers</Text>
+		</Message>
+		<Message id="tyourrol">
+			<Text LangIsoCode="eng">Your roles and databases are:</Text>
+			<Text LangIsoCode="spa">Sus roles y bases de datos son:</Text>
+			<Text LangIsoCode="por">Seus perfis e bancos de dados são:</Text>
+			<Text LangIsoCode="fre">Vos rôles et vos bases de données sont:</Text>
+		</Message>
+		<Message id="tadminof">
+			<Text LangIsoCode="eng">Manager</Text>
+			<Text LangIsoCode="spa">Administrador</Text>
+			<Text LangIsoCode="por">Administrador</Text>
+			<Text LangIsoCode="fre">Administrateur</Text>
+		</Message>
+		<Message id="tobservof">
+			<Text LangIsoCode="eng">Observer</Text>
+			<Text LangIsoCode="spa">Observador</Text>
+			<Text LangIsoCode="por">Observador</Text>
+			<Text LangIsoCode="fre">Observateur</Text>
+		</Message>
+		<Message id="tuserof">
+			<Text LangIsoCode="eng">Feeder</Text>
+			<Text LangIsoCode="spa">Alimentador</Text>
+			<Text LangIsoCode="por">Alimentador</Text>
+			<Text LangIsoCode="fre">Alimentation</Text>
+		</Message>
+		<Message id="tsupervof">
+			<Text LangIsoCode="eng">Supervisor</Text>
+			<Text LangIsoCode="spa">Supervisor</Text>
+			<Text LangIsoCode="por">Supervisor</Text>
+			<Text LangIsoCode="fre">Superviseur</Text>
+		</Message>
+		<Message id="tnorol">
+			<Text LangIsoCode="eng">None</Text>
+			<Text LangIsoCode="spa">Ninguna</Text>
+			<Text LangIsoCode="por">Nenhuma</Text>
+			<Text LangIsoCode="fre">Néant</Text>
+		</Message>
+		<Message id="tgetemailpass">
+			<Text LangIsoCode="eng">Reminder for user and password</Text>
+			<Text LangIsoCode="spa">Recordatorio de usuario y clave</Text>
+			<Text LangIsoCode="por">Lembrança de usuário e senha</Text>
+			<Text LangIsoCode="fre">Rappel d&quot;usager et de mot de passe</Text>
+		</Message>
+		<Message id="tmsgpasslost">
+			<Text LangIsoCode="eng">If you have forgotten your password</Text>
+			<Text LangIsoCode="spa">Si olvidó su clave solicítela aquí. Digite su correo electrónico.</Text>
+			<Text LangIsoCode="por">you can ask for it here. Type in your email address.</Text>
+			<Text LangIsoCode="fre">Si vous avez oublié votre mot de passe</Text>
+		</Message>
+		<Message id="msgsendemail">
+			<Text LangIsoCode="eng">Your user name is:</Text>
+			<Text LangIsoCode="spa">Su usuario es:</Text>
+			<Text LangIsoCode="por">Seu usuário é:</Text>
+			<Text LangIsoCode="fre">Votre usager est:</Text>
+		</Message>
+		<Message id="msgsendemail2">
+			<Text LangIsoCode="eng">Your password is:</Text>
+			<Text LangIsoCode="spa">Su clave es:</Text>
+			<Text LangIsoCode="por">Sua senha é:</Text>
+			<Text LangIsoCode="fre">Votre mot de passe est:</Text>
+		</Message>
+		<Message id="errsendemail">
+			<Text LangIsoCode="eng">Email address is not registered. Try again.</Text>
+			<Text LangIsoCode="spa">email no se encuentra registrado. Intente nuevamente..</Text>
+			<Text LangIsoCode="por">Email não registrado. Tente novamente</Text>
+			<Text LangIsoCode="fre">Le courrier électronique n&quot;est pas enregistré. Essayez de nouveau.</Text>
+		</Message>
+		<Message id="terror">
+			<Text LangIsoCode="eng">Error</Text>
+			<Text LangIsoCode="spa">Error</Text>
+			<Text LangIsoCode="por">Erro</Text>
+			<Text LangIsoCode="fre">Erreur</Text>
+		</Message>
+		<Message id="errinvaliduser">
+			<Text LangIsoCode="eng">Invalid user name or password</Text>
+			<Text LangIsoCode="spa">Usuario o clave no válidos</Text>
+			<Text LangIsoCode="por">Usuário o senha inválido</Text>
+			<Text LangIsoCode="fre">Usager ou mot de passe non valable</Text>
+		</Message>
+		<Message id="errmsgfrmregist">
+			<Text LangIsoCode="eng">Error sending REGISTER.  Fill in all required fields and try again.</Text>
+			<Text LangIsoCode="spa">Error enviando REGISTRO. Llene todos los campos requeridos e intente nuevamente.</Text>
+			<Text LangIsoCode="por">Erro enviando REGISTRO. Preencha todos os campos requeridos e tente novamente</Text>
+			<Text LangIsoCode="fre">Erreur dans l&quot;envoi d&quot;ENREGISTREMENT. Remplissez tous les champs obligatoires et essayez de nouveau.</Text>
+		</Message>
+		<Message id="msginsertsucc">
+			<Text LangIsoCode="eng">New user input successful</Text>
+			<Text LangIsoCode="spa">Ingreso exitoso de nuevo usuario</Text>
+			<Text LangIsoCode="por">Entrada de novo usuário com sucesso</Text>
+			<Text LangIsoCode="fre">Accès réussi d&quot;un nouvel usager. </Text>
+		</Message>
+		<Message id="msgupdatesucc">
+			<Text LangIsoCode="eng">User update successful</Text>
+			<Text LangIsoCode="spa">Actualización exitosa de usuario</Text>
+			<Text LangIsoCode="por">Atualização de usuário com sucesso</Text>
+			<Text LangIsoCode="fre">Mise à jour réussie d&quot;un usager.</Text>
+		</Message>
+		<Message id="errinsert">
+			<Text LangIsoCode="eng">Unable to input user</Text>
+			<Text LangIsoCode="spa">No se pudo ingresar usuario</Text>
+			<Text LangIsoCode="por">Não foi possível criar entrada ao usuário</Text>
+			<Text LangIsoCode="fre">Impossibilité d&quot;introduire un usager. </Text>
+		</Message>
+		<Message id="errupdate">
+			<Text LangIsoCode="eng">Unable to update user</Text>
+			<Text LangIsoCode="spa">No fué posible actualizar el usuario</Text>
+			<Text LangIsoCode="por">Não foi possível atualizar o usuário</Text>
+			<Text LangIsoCode="fre">Mise à jour impossible de l&quot;usager.</Text>
+		</Message>
+		<Message id="errbadpasswd">
+			<Text LangIsoCode="eng">Incorrect password</Text>
+			<Text LangIsoCode="spa">Clave es incorrecta</Text>
+			<Text LangIsoCode="por">Senha incorreta</Text>
+			<Text LangIsoCode="fre">Mot de passe incorrect.</Text>
+		</Message>
+		<Message id="errnomatch">
+			<Text LangIsoCode="eng">New password and re-input do not match.</Text>
+			<Text LangIsoCode="spa">clave nueva y re-ingrese no coinciden</Text>
+			<Text LangIsoCode="por">Senha não confere</Text>
+			<Text LangIsoCode="fre">Le nouveau mot de passe et la nouvelle entrée ne coïncident pas</Text>
+		</Message>
+		<Message id="erremptyfields">
+			<Text LangIsoCode="eng">Fields cannot be empty</Text>
+			<Text LangIsoCode="spa">Todos los campos deben ser ingresados</Text>
+			<Text LangIsoCode="por">Campos não pode ser vazio</Text>
+			<Text LangIsoCode="fre">Champs ne peuvent pas être vide</Text>
+		</Message>
+		<Message id="msgUserEditFormStatusOk">
+			<Text LangIsoCode="eng">User information updated</Text>
+			<Text LangIsoCode="spa">Información de usuario actualizada correctamente.</Text>
+			<Text LangIsoCode="por">Usuário actualização da informação</Text>
+			<Text LangIsoCode="fre">Usuário actualização da informação</Text>
+		</Message>
+		<Message id="msgUserEditFormStatusError">
+			<Text LangIsoCode="eng">Error while updating user information</Text>
+			<Text LangIsoCode="spa">Error actualizando los datos del usuario</Text>
+			<Text LangIsoCode="por">Erro ao atualizar as informações do usuário</Text>
+			<Text LangIsoCode="fre">Erreur lors de la mise à jour des informations utilisateur</Text>
+		</Message>
+		<Message id="msgUserEditFormStatusDuplicateId">
+			<Text LangIsoCode="eng">Username duplicated</Text>
+			<Text LangIsoCode="spa">Nombre de usuario duplicado</Text>
+			<Text LangIsoCode="por">Usuário duplicado</Text>
+			<Text LangIsoCode="fre">Nom d&quot;utilisateur en double</Text>
+		</Message>
+		<Message id="msgUserEditFormStatusEmptyFields">
+			<Text LangIsoCode="eng">Fields must have a value</Text>
+			<Text LangIsoCode="spa">Los campos no pueden estar vacios</Text>
+			<Text LangIsoCode="por">Campos deve ter um valor</Text>
+			<Text LangIsoCode="fre">Les champs doivent avoir une valeur</Text>
+		</Message>
+	</Group>
+	<Group name="di8_region">
+		<Message id="ttname">
+			<Text LangIsoCode="eng">Databases management</Text>
+			<Text LangIsoCode="spa">Gestión de base de datos</Text>
+			<Text LangIsoCode="por">Gestão de bancos de dados</Text>
+			<Text LangIsoCode="fre">Gestion de base de données</Text>
+		</Message>
+		<Message id="tregionuuid">
+			<Text LangIsoCode="eng">Database ID</Text>
+			<Text LangIsoCode="spa">Base ID</Text>
+			<Text LangIsoCode="por">Banco ID</Text>
+			<Text LangIsoCode="fre">Base ID</Text>
+		</Message>
+		<Message id="tregnamlist">
+			<Text LangIsoCode="eng">Name of database</Text>
+			<Text LangIsoCode="spa">Nombre base</Text>
+			<Text LangIsoCode="por">Nome banco</Text>
+			<Text LangIsoCode="fre">Nom de base</Text>
+		</Message>
+		<Message id="tregcntlist">
+			<Text LangIsoCode="eng">Country</Text>
+			<Text LangIsoCode="spa">País</Text>
+			<Text LangIsoCode="por">País</Text>
+			<Text LangIsoCode="fre">Pays</Text>
+		</Message>
+		<Message id="tregadmlist">
+			<Text LangIsoCode="eng">Administrator</Text>
+			<Text LangIsoCode="spa">Administrador</Text>
+			<Text LangIsoCode="por">Administrador</Text>
+			<Text LangIsoCode="fre">Administrateur</Text>
+		</Message>
+		<Message id="tregactlist">
+			<Text LangIsoCode="eng">Active</Text>
+			<Text LangIsoCode="spa">Activo</Text>
+			<Text LangIsoCode="por">Ativo</Text>
+			<Text LangIsoCode="fre">Actif</Text>
+		</Message>
+		<Message id="tregpublist">
+			<Text LangIsoCode="eng">Public</Text>
+			<Text LangIsoCode="spa">Pública</Text>
+			<Text LangIsoCode="por">Pública</Text>
+			<Text LangIsoCode="fre">Publique</Text>
+		</Message>
+		<Message id="tcredits">
+			<Text LangIsoCode="eng">Credits</Text>
+			<Text LangIsoCode="spa">Créditos</Text>
+			<Text LangIsoCode="por">Créditos</Text>
+			<Text LangIsoCode="fre">Crédits</Text>
+		</Message>
+		<Message id="tmethodology">
+			<Text LangIsoCode="eng">Methodology</Text>
+			<Text LangIsoCode="spa">Metodología</Text>
+			<Text LangIsoCode="por">Metodologia</Text>
+			<Text LangIsoCode="fre">Méthodologie</Text>
+		</Message>
+		<Message id="tstaff">
+			<Text LangIsoCode="eng">Landmark</Text>
+			<Text LangIsoCode="spa">Hito</Text>
+			<Text LangIsoCode="por">Acontecimento</Text>
+			<Text LangIsoCode="fre">Évènenent important</Text>
+		</Message>
+		<Message id="tsupport">
+			<Text LangIsoCode="eng">Maintenance</Text>
+			<Text LangIsoCode="spa">Mantenimiento</Text>
+			<Text LangIsoCode="por">Manutenção</Text>
+			<Text LangIsoCode="fre">Maintenance</Text>
+		</Message>
+		<Message id="tdescription">
+			<Text LangIsoCode="eng">Description</Text>
+			<Text LangIsoCode="spa">Descripción</Text>
+			<Text LangIsoCode="por">Descrição</Text>
+			<Text LangIsoCode="fre">Description</Text>
+		</Message>
+		<Message id="tnopublic">
+			<Text LangIsoCode="eng">The database is under construction. Only for database members.</Text>
+			<Text LangIsoCode="spa">Base de datos en construcción. Acceso restringido a usuarios de la base.</Text>
+			<Text LangIsoCode="por">Banco de dados em construção. Acesso restrito aos usuários do banco</Text>
+			<Text LangIsoCode="fre">Base de données en construction. Accès restreint aux usagers de la base.</Text>
+		</Message>
+		<Message id="tvalregid">
+			<Text LangIsoCode="eng">Available database ID</Text>
+			<Text LangIsoCode="spa">Base ID disponible</Text>
+			<Text LangIsoCode="por">Banco ID disponível</Text>
+			<Text LangIsoCode="fre">Base ID disponible</Text>
+		</Message>
+		<Message id="tinvregid">
+			<Text LangIsoCode="eng">Database ID unavailable</Text>
+			<Text LangIsoCode="spa">Base ID no disponible</Text>
+			<Text LangIsoCode="por">Banco ID não disponível</Text>
+			<Text LangIsoCode="fre">Base ID non disponible</Text>
+		</Message>
+		<Message id="tinsert">
+			<Text LangIsoCode="eng">Created and</Text>
+			<Text LangIsoCode="spa">Creada y</Text>
+			<Text LangIsoCode="por">Criado e</Text>
+			<Text LangIsoCode="fre">Créée et </Text>
+		</Message>
+		<Message id="tupdate">
+			<Text LangIsoCode="eng">Updated and</Text>
+			<Text LangIsoCode="spa">Actualizada y</Text>
+			<Text LangIsoCode="por">Atualizado e</Text>
+			<Text LangIsoCode="fre">Mise à jour et</Text>
+		</Message>
+		<Message id="tsetrole">
+			<Text LangIsoCode="eng">Assigned</Text>
+			<Text LangIsoCode="spa">asignada</Text>
+			<Text LangIsoCode="por">Atribuído</Text>
+			<Text LangIsoCode="fre">Assignée</Text>
+		</Message>
+		<Message id="terrinsupd">
+			<Text LangIsoCode="eng">Unable to enter database</Text>
+			<Text LangIsoCode="spa">No fué posible ingresar la base.</Text>
+			<Text LangIsoCode="por">Não foi possível o ingresso ao banco</Text>
+			<Text LangIsoCode="fre">Impossible d&quot;introduire la base</Text>
+		</Message>
+		<Message id="terrsetrole">
+			<Text LangIsoCode="eng">Unassigned</Text>
+			<Text LangIsoCode="spa">no asignada</Text>
+			<Text LangIsoCode="por">Não atribuído</Text>
+			<Text LangIsoCode="fre">Non assignée</Text>
+		</Message>
+		<Message id="baddoption">
+			<Text LangIsoCode="eng">Add</Text>
+			<Text LangIsoCode="spa">Adicionar</Text>
+			<Text LangIsoCode="por">Adicionar</Text>
+			<Text LangIsoCode="fre">Ajouter</Text>
+		</Message>
+		<Message id="bloaddir">
+			<Text LangIsoCode="eng">Load directory</Text>
+			<Text LangIsoCode="spa">Leer de directorio</Text>
+			<Text LangIsoCode="por">Load directory*</Text>
+			<Text LangIsoCode="fre">Lire le répertoire</Text>
+		</Message>
+		<Message id="bupzipfile">
+			<Text LangIsoCode="eng">Upload Database ZIP file</Text>
+			<Text LangIsoCode="spa">Crear base desde archivo ZIP</Text>
+			<Text LangIsoCode="por">Crear base desde archivo ZIP*</Text>
+			<Text LangIsoCode="fre">Créer une base depuis un fichier ZIP</Text>
+		</Message>
+		<Message id="bsave">
+			<Text LangIsoCode="eng">Save</Text>
+			<Text LangIsoCode="spa">Guardar</Text>
+			<Text LangIsoCode="por">Salvar</Text>
+			<Text LangIsoCode="fre">Enregistrer</Text>
+		</Message>
+		<Message id="bcancel">
+			<Text LangIsoCode="eng">Cancel</Text>
+			<Text LangIsoCode="spa">Cancelar</Text>
+			<Text LangIsoCode="por">Cancelar</Text>
+			<Text LangIsoCode="fre">Annuler</Text>
+		</Message>
+		<Message id="tviewdbase">
+			<Text LangIsoCode="eng">Select the database you wish to view</Text>
+			<Text LangIsoCode="spa">Seleccione la base de datos que desea visualizar</Text>
+			<Text LangIsoCode="por">Selecione o banco de dados que deseja visualizar</Text>
+			<Text LangIsoCode="fre">Sélectionnez la base de données que vous souhaitez afficher</Text>
+		</Message>
+		<Message id="tmoddescon">
+			<Text LangIsoCode="eng">generación de mapas</Text>
+			<Text LangIsoCode="spa">Consultas de datos</Text>
+			<Text LangIsoCode="por">gráficos y consolidados</Text>
+			<Text LangIsoCode="fre">generación de mapas</Text>
+		</Message>
+		<Message id="tmoddesinv">
+			<Text LangIsoCode="eng">administracion bases de datos</Text>
+			<Text LangIsoCode="spa">Ingreso de fichas</Text>
+			<Text LangIsoCode="por">acceso restringido</Text>
+			<Text LangIsoCode="fre">administracion bases de datos</Text>
+		</Message>
+		<Message id="RegionDatabasePeriod">
+			<Text LangIsoCode="eng">Period</Text>
+			<Text LangIsoCode="spa">Periodo</Text>
+			<Text LangIsoCode="por">Período</Text>
+			<Text LangIsoCode="fre">Période</Text>
+		</Message>
+		<Message id="trepnum">
+			<Text LangIsoCode="eng">Records</Text>
+			<Text LangIsoCode="spa">Número de fichas</Text>
+			<Text LangIsoCode="por">Formulários</Text>
+			<Text LangIsoCode="fre">Cartes de données</Text>
+		</Message>
+		<Message id="tlastupd">
+			<Text LangIsoCode="eng">Last update</Text>
+			<Text LangIsoCode="spa">Última actualización</Text>
+			<Text LangIsoCode="por">Última atualização</Text>
+			<Text LangIsoCode="fre">Dernière mise á jour</Text>
+		</Message>
+		<Message id="RegionDatacardPeriod">
+			<Text LangIsoCode="eng">Datacard Period</Text>
+			<Text LangIsoCode="spa">Periodo Fichas</Text>
+			<Text LangIsoCode="por">Período de datos</Text>
+			<Text LangIsoCode="fre">Période de cartes de données</Text>
+		</Message>
+		<Message id="msgInfoGeneral">
+			<Text LangIsoCode="eng">General Information</Text>
+			<Text LangIsoCode="spa">Información General</Text>
+			<Text LangIsoCode="por">Informações Gerais</Text>
+			<Text LangIsoCode="fre">Informations générales</Text>
+		</Message>
+		<Message id="msgInfoCredits">
+			<Text LangIsoCode="eng">Credits</Text>
+			<Text LangIsoCode="spa">Créditos</Text>
+			<Text LangIsoCode="por">Créditos</Text>
+			<Text LangIsoCode="fre">Crédits</Text>
+		</Message>
+		<Message id="msgInfoSources">
+			<Text LangIsoCode="eng">Sources</Text>
+			<Text LangIsoCode="spa">Fuentes</Text>
+			<Text LangIsoCode="por">Fontes</Text>
+			<Text LangIsoCode="fre">Sources</Text>
+		</Message>
+		<Message id="msgInfoSynopsis">
+			<Text LangIsoCode="eng">Synopsis</Text>
+			<Text LangIsoCode="spa">Sinopsis</Text>
+			<Text LangIsoCode="por">Sinopse</Text>
+			<Text LangIsoCode="fre">Synopsis</Text>
+		</Message>
+	</Group>
+	<Group name="di8_reginfo">
+		<Message id="baddoption">
+			<Text LangIsoCode="eng">Add</Text>
+			<Text LangIsoCode="spa">Adicionar</Text>
+			<Text LangIsoCode="por">Adicionar</Text>
+			<Text LangIsoCode="fre">Ajouter</Text>
+		</Message>
+		<Message id="bsave">
+			<Text LangIsoCode="eng">Save</Text>
+			<Text LangIsoCode="spa">Guardar</Text>
+			<Text LangIsoCode="por">Salvar</Text>
+			<Text LangIsoCode="fre">Enregistrer</Text>
+		</Message>
+		<Message id="bcancel">
+			<Text LangIsoCode="eng">Cancel</Text>
+			<Text LangIsoCode="spa">Cancelar</Text>
+			<Text LangIsoCode="por">Cancelar</Text>
+			<Text LangIsoCode="fre">Annuler</Text>
+		</Message>
+		<Message id="terror">
+			<Text LangIsoCode="eng">Error</Text>
+			<Text LangIsoCode="spa">Error</Text>
+			<Text LangIsoCode="por">Erro</Text>
+			<Text LangIsoCode="fre">Erreur</Text>
+		</Message>
+		<Message id="msgupdinfo">
+			<Text LangIsoCode="eng">Database updated successfully!</Text>
+			<Text LangIsoCode="spa">Base actualizada exitosamente!</Text>
+			<Text LangIsoCode="por">Banco atualizado com sucesso!</Text>
+			<Text LangIsoCode="fre">Base mise à jour avec succès!</Text>
+		</Message>
+		<Message id="errupdinfo">
+			<Text LangIsoCode="eng">Error updating database</Text>
+			<Text LangIsoCode="spa">Error actualizando la base</Text>
+			<Text LangIsoCode="por">Erro atualizando o banco</Text>
+			<Text LangIsoCode="fre">Erreur dans la mise à jour de la base</Text>
+		</Message>
+		<Message id="msgupdrole">
+			<Text LangIsoCode="eng">User role updated successfully!</Text>
+			<Text LangIsoCode="spa">Rol de usuario actualizado exitosamente!</Text>
+			<Text LangIsoCode="por">Perfil de usuário atualizado com sucesso!</Text>
+			<Text LangIsoCode="fre">Rôle de l&quot;usager mis à jour avec succès!</Text>
+		</Message>
+		<Message id="errupdrole">
+			<Text LangIsoCode="eng">Error updating user role</Text>
+			<Text LangIsoCode="spa">Error actualizando rol de usuario</Text>
+			<Text LangIsoCode="por">Erro atualizando perfil de usuário</Text>
+			<Text LangIsoCode="fre">Erreur dans la mise à jour du rôle de l&quot;usager</Text>
+		</Message>
+		<Message id="msginslog">
+			<Text LangIsoCode="eng">Log created successfully!</Text>
+			<Text LangIsoCode="spa">Bitácora creada exitosamente!</Text>
+			<Text LangIsoCode="por">Relatório criado com sucesso!</Text>
+			<Text LangIsoCode="fre">Bloc-notes créé avec succès!</Text>
+		</Message>
+		<Message id="errinslog">
+			<Text LangIsoCode="eng">Error creating Log</Text>
+			<Text LangIsoCode="spa">Error ingresando Bitácora</Text>
+			<Text LangIsoCode="por">Erro ingressando Relatório</Text>
+			<Text LangIsoCode="fre">Erreur dans l&quot;accès au bloc-notes </Text>
+		</Message>
+		<Message id="msgupdlog">
+			<Text LangIsoCode="eng">Log updated successfully</Text>
+			<Text LangIsoCode="spa">Bitácora actualizada exitosamente!</Text>
+			<Text LangIsoCode="por">Relatório atualizado com sucesso!</Text>
+			<Text LangIsoCode="fre">Bloc-notes mis à jour avec succès</Text>
+		</Message>
+		<Message id="errupdlog">
+			<Text LangIsoCode="eng">Error updating Log</Text>
+			<Text LangIsoCode="spa">Error actualizando Bitácora</Text>
+			<Text LangIsoCode="por">Erro atualizando Relatório</Text>
+			<Text LangIsoCode="fre">Erreur dans la mise à jour du bloc-notes</Text>
+		</Message>
+		<Message id="errmsgfrm">
+			<Text LangIsoCode="eng">Register all fields in the RECORD DESINVENTAR. Fill in all required fields and try again.</Text>
+			<Text LangIsoCode="spa">INFORMACION: Llene todos los campos requeridos e intente nuevamente.</Text>
+			<Text LangIsoCode="por">Registre todos os campos do FORMULÁRIO DESINVENTAR. Preencha todos os campos requeridos e tente de novo</Text>
+			<Text LangIsoCode="fre">Enregistrez tous les champs de la CARTE DE DONNÉES DÉSINVENTER. Remplissez tous les champs obligatoires et essayez de nouveau</Text>
+		</Message>
+		<Message id="errmsgfrmrol">
+			<Text LangIsoCode="eng">ROLES: Fill in all required fields and try again.</Text>
+			<Text LangIsoCode="spa">ROLES: Llene todos los campos requeridos e intente nuevamente.</Text>
+			<Text LangIsoCode="por">Perfis: Preencha todos os campos requeridos e tente novamente</Text>
+			<Text LangIsoCode="fre">RÔLES: Remplissez tous les champs obligatoires et essayez de nouveau</Text>
+		</Message>
+		<Message id="errmsgfrmlog">
+			<Text LangIsoCode="eng">LOG: Fill in all required fields and try again.</Text>
+			<Text LangIsoCode="spa">BITACORA: Llene todos los campos requeridos e intente nuevamente.</Text>
+			<Text LangIsoCode="por">RELATÓRIO: Preencha todos os campos requeridos e tente novamente</Text>
+			<Text LangIsoCode="fre">BLOC-NOTES: Remplissez tous les champs obligatoires et essayez de nouveau</Text>
+		</Message>
+		<Message id="msgupdrole">
+			<Text LangIsoCode="eng">User role updated successfully!</Text>
+			<Text LangIsoCode="spa">Rol de usuario actualizado exitosamente!</Text>
+			<Text LangIsoCode="por">Perfil de usuário atualizado com sucesso!</Text>
+			<Text LangIsoCode="fre">Rôle de l&quot;usager mis à jour avec succès!</Text>
+		</Message>
+		<Message id="errupdrole">
+			<Text LangIsoCode="eng">Error updating user role</Text>
+			<Text LangIsoCode="spa">Error actualizando rol de usuario</Text>
+			<Text LangIsoCode="por">Erro atualizando perfil de usuário</Text>
+			<Text LangIsoCode="fre">Erreur dans la mise à jour du rôle de l&quot;usager</Text>
+		</Message>
+	</Group>
+	<Group name="di8_geography">
+		<Message id="baddoption">
+			<Text LangIsoCode="eng">Add</Text>
+			<Text LangIsoCode="spa">Adicionar</Text>
+			<Text LangIsoCode="por">Adicionar</Text>
+			<Text LangIsoCode="fre">Ajouter</Text>
+		</Message>
+		<Message id="bsave">
+			<Text LangIsoCode="eng">Save</Text>
+			<Text LangIsoCode="spa">Guardar</Text>
+			<Text LangIsoCode="por">Salvar</Text>
+			<Text LangIsoCode="fre">Enregistrer</Text>
+		</Message>
+		<Message id="bcancel">
+			<Text LangIsoCode="eng">Cancel</Text>
+			<Text LangIsoCode="spa">Cancelar</Text>
+			<Text LangIsoCode="por">Cancelar</Text>
+			<Text LangIsoCode="fre">Annuler</Text>
+		</Message>
+		<Message id="terror">
+			<Text LangIsoCode="eng">Error</Text>
+			<Text LangIsoCode="spa">Error</Text>
+			<Text LangIsoCode="por">Erro</Text>
+			<Text LangIsoCode="fre">Erreur</Text>
+		</Message>
+		<Message id="errchkname">
+			<Text LangIsoCode="eng">Unable to use type of cause name because it already exists.</Text>
+			<Text LangIsoCode="spa">Nombre de nivel ya existe</Text>
+			<Text LangIsoCode="por">Nome de causa não foi possível utilizar porque já existe</Text>
+			<Text LangIsoCode="fre">Impossibilité d&quot;utiliser le nom de cause car il existe déjà</Text>
+		</Message>
+		<Message id="msginslev">
+			<Text LangIsoCode="eng">Level created successfully!</Text>
+			<Text LangIsoCode="spa">Nivel creado exitosamente!</Text>
+			<Text LangIsoCode="por">Nível criado com sucesso!</Text>
+			<Text LangIsoCode="fre">Niveau créé avec succès!</Text>
+		</Message>
+		<Message id="errinslev">
+			<Text LangIsoCode="eng">Unable to input new level</Text>
+			<Text LangIsoCode="spa">No se pudo ingresar nuevo nivel</Text>
+			<Text LangIsoCode="por">Não foi possível ingressar o novo nível</Text>
+			<Text LangIsoCode="fre">Impossibilité d&quot;introduire un nouveau niveau </Text>
+		</Message>
+		<Message id="msgupdlev">
+			<Text LangIsoCode="eng">Level updated successfully!</Text>
+			<Text LangIsoCode="spa">Nivel actualizado exitosamente</Text>
+			<Text LangIsoCode="por">Nível atualizado com sucesso!</Text>
+			<Text LangIsoCode="fre">Niveau mis à jour avec succès!</Text>
+		</Message>
+		<Message id="errupdlev">
+			<Text LangIsoCode="eng">Unable to update level</Text>
+			<Text LangIsoCode="spa">No se pudo actualizar nivel</Text>
+			<Text LangIsoCode="por">Não foi possível atualizar o nível</Text>
+			<Text LangIsoCode="fre">Impossibilité de mise à jour du niveau</Text>
+		</Message>
+		<Message id="errchkcode">
+			<Text LangIsoCode="eng">Geographic code already exists</Text>
+			<Text LangIsoCode="spa">Código de geografía ya existe</Text>
+			<Text LangIsoCode="por">Código de geografia já existe</Text>
+			<Text LangIsoCode="fre">Code de géographie déjà existant</Text>
+		</Message>
+		<Message id="errchkstatus">
+			<Text LangIsoCode="eng">Unable to deactivate type of cause because it has been assigned.</Text>
+			<Text LangIsoCode="spa">Elemento no se puede desactivar porque se encuentra asignado</Text>
+			<Text LangIsoCode="por">Causa não foi possível desativar porque está atribuída</Text>
+			<Text LangIsoCode="fre">La cause ne peut pas être désactivée car elle est déjà assignée</Text>
+		</Message>
+		<Message id="msgDBConfigGeographyInsert">
+			<Text LangIsoCode="eng">Geography created successfully!</Text>
+			<Text LangIsoCode="spa">Geografía creada exitosamente</Text>
+			<Text LangIsoCode="por">Geografia criada com sucesso!</Text>
+			<Text LangIsoCode="fre">Géographie créée avec succès</Text>
+		</Message>
+		<Message id="errinsgeo">
+			<Text LangIsoCode="eng">Unable to create geographic element</Text>
+			<Text LangIsoCode="spa">No se pudo crear elemento geográfico</Text>
+			<Text LangIsoCode="por">Não foi possível criar elemento geográfico</Text>
+			<Text LangIsoCode="fre">Impossibilité de créer un élément géographique</Text>
+		</Message>
+		<Message id="msgDBConfigGeographyUpdate">
+			<Text LangIsoCode="eng">Geography updated successfully!</Text>
+			<Text LangIsoCode="spa">Geografía actualizada exitosamente!</Text>
+			<Text LangIsoCode="por">Geografia atualizada com sucesso!</Text>
+			<Text LangIsoCode="fre">Géographie mise à jour avec succès!</Text>
+		</Message>
+		<Message id="msgDBConfigGeographyError">
+			<Text LangIsoCode="eng">Unable to update geographic element</Text>
+			<Text LangIsoCode="spa">No se pudo actualizar elemento geográfico</Text>
+			<Text LangIsoCode="por">Não foi possível atualizar elemento geográfico</Text>
+			<Text LangIsoCode="fre">Impossibilité de mise à jour de l&quot;élément géographique </Text>
+		</Message>
+		<Message id="errmsgfrmlev">
+			<Text LangIsoCode="eng">LEVEL: Fill in all required fields and try again.</Text>
+			<Text LangIsoCode="spa">NIVEL: Llene todos los campos requeridos e intente nuevamente.</Text>
+			<Text LangIsoCode="por">NÌVEL: Preencha todos os campos requeridos e tente novamente</Text>
+			<Text LangIsoCode="fre">NIVEAU: Remplissez tous les champs obligatoires et essayez de nouveau</Text>
+		</Message>
+		<Message id="errmsgfrmgeo">
+			<Text LangIsoCode="eng">GEOGRAPHY: Fill in all required fields and try again.</Text>
+			<Text LangIsoCode="spa">GEOGRAFIA: Llene todos los campos requeridos e intente nuevamente.</Text>
+			<Text LangIsoCode="por">GEOGRAFIA: Preencha todos os campos requeridos e tente novamente</Text>
+			<Text LangIsoCode="fre">GÉOGRAPHIE: Remplissez tous les champs obligatoires et essayez de nouveau</Text>
+		</Message>
+	</Group>
+	<Group name="di8_events">
+		<Message id="baddelem">
+			<Text LangIsoCode="eng">Add</Text>
+			<Text LangIsoCode="spa">Adicionar</Text>
+			<Text LangIsoCode="por">Adicionar</Text>
+			<Text LangIsoCode="fre">Ajouter</Text>
+		</Message>
+		<Message id="bsave">
+			<Text LangIsoCode="eng">Save</Text>
+			<Text LangIsoCode="spa">Guardar</Text>
+			<Text LangIsoCode="por">Salvar</Text>
+			<Text LangIsoCode="fre">Enregistrer</Text>
+		</Message>
+		<Message id="bcancel">
+			<Text LangIsoCode="eng">Cancel</Text>
+			<Text LangIsoCode="spa">Cancelar</Text>
+			<Text LangIsoCode="por">Cancelar</Text>
+			<Text LangIsoCode="fre">Annuler</Text>
+		</Message>
+		<Message id="terror">
+			<Text LangIsoCode="eng">Error</Text>
+			<Text LangIsoCode="spa">Error</Text>
+			<Text LangIsoCode="por">Erro</Text>
+			<Text LangIsoCode="fre">Erreur</Text>
+		</Message>
+		<Message id="msginseve">
+			<Text LangIsoCode="eng">Type of event created successfully!</Text>
+			<Text LangIsoCode="spa">Tipo de evento creado exitosamente</Text>
+			<Text LangIsoCode="por">Evento criado com sucesso!</Text>
+			<Text LangIsoCode="fre">Type d&quot;évènement créé avec succès</Text>
+		</Message>
+		<Message id="errinseve">
+			<Text LangIsoCode="eng">Error entering Type of event</Text>
+			<Text LangIsoCode="spa">Error intentando ingresar Tipo de evento</Text>
+			<Text LangIsoCode="por">Erro tentando ingressar Evento</Text>
+			<Text LangIsoCode="fre">Erreur en essayant d&quot;introduire le Type d&quot;évènement </Text>
+		</Message>
+		<Message id="msgupdeve">
+			<Text LangIsoCode="eng">Type of event updated successfully!</Text>
+			<Text LangIsoCode="spa">Tipo de evento actualizado exitosamente</Text>
+			<Text LangIsoCode="por">Evento atualizado com sucesso!</Text>
+			<Text LangIsoCode="fre">Type d&quot;évènement mis à jour avec succès</Text>
+		</Message>
+		<Message id="errupdeve">
+			<Text LangIsoCode="eng">Error updating Type of event</Text>
+			<Text LangIsoCode="spa">Error actualizando Tipo de evento</Text>
+			<Text LangIsoCode="por">Erro atualizando Evento</Text>
+			<Text LangIsoCode="fre">Erreur dans la mise à jour du Type d&quot;évènement</Text>
+		</Message>
+		<Message id="errmsgfrm">
+			<Text LangIsoCode="eng">Register all fields in the RECORD DESINVENTAR. Fill in all required fields and try again.</Text>
+			<Text LangIsoCode="spa">TIPO de EVENTO: Llene todos los campos requeridos e intente nuevamente.</Text>
+			<Text LangIsoCode="por">Registre todos os campos do FORMULÁRIO DESINVENTAR. Preencha todos os campos requeridos e tente de novo</Text>
+			<Text LangIsoCode="fre">Enregistrez tous les champs de la CARTE DE DONNÉES DÉSINVENTER. Remplissez tous les champs obligatoires et essayez de nouveau</Text>
+		</Message>
+		<Message id="errchkname">
+			<Text LangIsoCode="eng">Unable to use type of cause name because it already exists.</Text>
+			<Text LangIsoCode="spa">Nombre de tipo de evento no se puede utilizar porque ya existe</Text>
+			<Text LangIsoCode="por">Nome de causa não foi possível utilizar porque já existe</Text>
+			<Text LangIsoCode="fre">Impossibilité d&quot;utiliser le nom de cause car il existe déjà</Text>
+		</Message>
+		<Message id="errchkstatus">
+			<Text LangIsoCode="eng">Unable to deactivate type of cause because it has been assigned.</Text>
+			<Text LangIsoCode="spa">Tipo de evento no se puede desactivar porque se encuentra asignado</Text>
+			<Text LangIsoCode="por">Causa não foi possível desativar porque está atribuída</Text>
+			<Text LangIsoCode="fre">La cause ne peut pas être désactivée car elle est déjà assignée</Text>
+		</Message>
+	</Group>
+	<Group name="di8_causes">
+		<Message id="baddelem">
+			<Text LangIsoCode="eng">Add</Text>
+			<Text LangIsoCode="spa">Adicionar</Text>
+			<Text LangIsoCode="por">Adicionar</Text>
+			<Text LangIsoCode="fre">Ajouter</Text>
+		</Message>
+		<Message id="bsave">
+			<Text LangIsoCode="eng">Save</Text>
+			<Text LangIsoCode="spa">Guardar</Text>
+			<Text LangIsoCode="por">Salvar</Text>
+			<Text LangIsoCode="fre">Enregistrer</Text>
+		</Message>
+		<Message id="bcancel">
+			<Text LangIsoCode="eng">Cancel</Text>
+			<Text LangIsoCode="spa">Cancelar</Text>
+			<Text LangIsoCode="por">Cancelar</Text>
+			<Text LangIsoCode="fre">Annuler</Text>
+		</Message>
+		<Message id="terror">
+			<Text LangIsoCode="eng">Error</Text>
+			<Text LangIsoCode="spa">Error</Text>
+			<Text LangIsoCode="por">Erro</Text>
+			<Text LangIsoCode="fre">Erreur</Text>
+		</Message>
+		<Message id="msginscau">
+			<Text LangIsoCode="eng">Type of cause created successfully!</Text>
+			<Text LangIsoCode="spa">Causa creada exitosamente</Text>
+			<Text LangIsoCode="por">Causa criada com sucesso!</Text>
+			<Text LangIsoCode="fre">Cause créée avec succès</Text>
+		</Message>
+		<Message id="errinscau">
+			<Text LangIsoCode="eng">Error entering Type of cause</Text>
+			<Text LangIsoCode="spa">Error ingresando Causa</Text>
+			<Text LangIsoCode="por">Erro ingressando Causa</Text>
+			<Text LangIsoCode="fre">Erreur en introduisant la cause</Text>
+		</Message>
+		<Message id="msgupdcau">
+			<Text LangIsoCode="eng">Type of cause updated successfully!</Text>
+			<Text LangIsoCode="spa">Causa actualizada exitosamente</Text>
+			<Text LangIsoCode="por">Causa atualizada com sucesso!</Text>
+			<Text LangIsoCode="fre">Cause mise à jour avec succès</Text>
+		</Message>
+		<Message id="errupdcau">
+			<Text LangIsoCode="eng">Error updating Type of cause</Text>
+			<Text LangIsoCode="spa">Error actualizando Causa</Text>
+			<Text LangIsoCode="por">Erro atualizando Causa</Text>
+			<Text LangIsoCode="fre">Erreur dans la mise à jour de la Cause</Text>
+		</Message>
+		<Message id="errmsgfrm">
+			<Text LangIsoCode="eng">Register all fields in the RECORD DESINVENTAR. Fill in all required fields and try again.</Text>
+			<Text LangIsoCode="spa">CAUSA: Llene todos los campos requeridos e intente nuevamente.</Text>
+			<Text LangIsoCode="por">Registre todos os campos do FORMULÁRIO DESINVENTAR. Preencha todos os campos requeridos e tente de novo</Text>
+			<Text LangIsoCode="fre">Enregistrez tous les champs de la CARTE DE DONNÉES DÉSINVENTER. Remplissez tous les champs obligatoires et essayez de nouveau</Text>
+		</Message>
+		<Message id="errchkname">
+			<Text LangIsoCode="eng">Unable to use type of cause name because it already exists.</Text>
+			<Text LangIsoCode="spa">Nombre de causa no se puede utilizar porque ya existe</Text>
+			<Text LangIsoCode="por">Nome de causa não foi possível utilizar porque já existe</Text>
+			<Text LangIsoCode="fre">Impossibilité d&quot;utiliser le nom de cause car il existe déjà</Text>
+		</Message>
+		<Message id="errchkstatus">
+			<Text LangIsoCode="eng">Unable to deactivate type of cause because it has been assigned.</Text>
+			<Text LangIsoCode="spa">Causa no se puede desactivar porque se encuentra asignada</Text>
+			<Text LangIsoCode="por">Causa não foi possível desativar porque está atribuída</Text>
+			<Text LangIsoCode="fre">La cause ne peut pas être désactivée car elle est déjà assignée</Text>
+		</Message>
+	</Group>
+	<Group name="di8_extraeffects">
+		<Message id="baddoption">
+			<Text LangIsoCode="eng">Add</Text>
+			<Text LangIsoCode="spa">Adicionar</Text>
+			<Text LangIsoCode="por">Adicionar</Text>
+			<Text LangIsoCode="fre">Ajouter</Text>
+		</Message>
+		<Message id="bsave">
+			<Text LangIsoCode="eng">Save</Text>
+			<Text LangIsoCode="spa">Guardar</Text>
+			<Text LangIsoCode="por">Salvar</Text>
+			<Text LangIsoCode="fre">Enregistrer</Text>
+		</Message>
+		<Message id="bcancel">
+			<Text LangIsoCode="eng">Cancel</Text>
+			<Text LangIsoCode="spa">Cancelar</Text>
+			<Text LangIsoCode="por">Cancelar</Text>
+			<Text LangIsoCode="fre">Annuler</Text>
+		</Message>
+		<Message id="terror">
+			<Text LangIsoCode="eng">Error</Text>
+			<Text LangIsoCode="spa">Error</Text>
+			<Text LangIsoCode="por">Erro</Text>
+			<Text LangIsoCode="fre">Erreur</Text>
+		</Message>
+		<Message id="msgupdeef">
+			<Text LangIsoCode="eng">Effect field updated successfully!</Text>
+			<Text LangIsoCode="spa">Campo de efectos actualizado exitosamente</Text>
+			<Text LangIsoCode="por">Campo de efeitos atualizado com sucesso!</Text>
+			<Text LangIsoCode="fre">Champ d&quot;effets mis à jour avec succès</Text>
+		</Message>
+		<Message id="errupdeef">
+			<Text LangIsoCode="eng">Unable to update effect field</Text>
+			<Text LangIsoCode="spa">No se pudo actualizar el campo de efectos</Text>
+			<Text LangIsoCode="por">Não foi possível atualizar o campo de efeitos</Text>
+			<Text LangIsoCode="fre">Impossibilité de mise à jour du champ d&quot;effets</Text>
+		</Message>
+		<Message id="errmsgfrmeef">
+			<Text LangIsoCode="eng">EFFECTS: Fill in all required fields and try again.</Text>
+			<Text LangIsoCode="spa">EFECTOS: Llene todos los campos requeridos e intente nuevamente.</Text>
+			<Text LangIsoCode="por">EFEITOS: Preencha todos os campos requeridos e tente de novo</Text>
+			<Text LangIsoCode="fre">EFFETS: Remplissez tous les champs obligatoires et essayez de nouveau</Text>
+		</Message>
+		<Message id="typeinteger">
+			<Text LangIsoCode="eng">Integer</Text>
+			<Text LangIsoCode="spa">Numérico</Text>
+			<Text LangIsoCode="por">Numérico</Text>
+			<Text LangIsoCode="fre">Numérique</Text>
+		</Message>
+		<Message id="typefloat">
+			<Text LangIsoCode="eng">Float</Text>
+			<Text LangIsoCode="spa">Moneda</Text>
+			<Text LangIsoCode="por">Moeda</Text>
+			<Text LangIsoCode="fre">Monnaie</Text>
+		</Message>
+		<Message id="typedate">
+			<Text LangIsoCode="eng">Date</Text>
+			<Text LangIsoCode="spa">Fecha</Text>
+			<Text LangIsoCode="por">Data</Text>
+			<Text LangIsoCode="fre">Date</Text>
+		</Message>
+		<Message id="typetext">
+			<Text LangIsoCode="eng">Text</Text>
+			<Text LangIsoCode="spa">Texto</Text>
+			<Text LangIsoCode="por">Texto</Text>
+			<Text LangIsoCode="fre">Texte</Text>
+		</Message>
+	</Group>
+	<Group name="di8_import">
+		<Message id="ttitle">
+			<Text LangIsoCode="eng">CSV Files</Text>
+			<Text LangIsoCode="spa">Archivos CSV de Fichas:</Text>
+			<Text LangIsoCode="por">CSV Files</Text>
+			<Text LangIsoCode="fre">Des fichiers CSV</Text>
+		</Message>
+		<Message id="tsuccess">
+			<Text LangIsoCode="eng">Sucessfull importation</Text>
+			<Text LangIsoCode="spa">Importación exitosa</Text>
+			<Text LangIsoCode="por">Importação bem sucedida</Text>
+			<Text LangIsoCode="fre">Importation réussie</Text>
+		</Message>
+		<Message id="tfail">
+			<Text LangIsoCode="eng">Can not import file</Text>
+			<Text LangIsoCode="spa">No se realizó la importación</Text>
+			<Text LangIsoCode="por">Não foi realizada a importação</Text>
+			<Text LangIsoCode="fre">L&quot;importation n&quot;a pas été effectuée</Text>
+		</Message>
+		<Message id="tfound1">
+			<Text LangIsoCode="eng">Exist some</Text>
+			<Text LangIsoCode="spa">Se encontraron</Text>
+			<Text LangIsoCode="por">Foram encontrados</Text>
+			<Text LangIsoCode="fre">Existence</Text>
+		</Message>
+		<Message id="tfound2">
+			<Text LangIsoCode="eng">errors.</Text>
+			<Text LangIsoCode="spa">errores.</Text>
+			<Text LangIsoCode="por">erros</Text>
+			<Text LangIsoCode="fre">erreurs</Text>
+		</Message>
+		<Message id="tfile">
+			<Text LangIsoCode="eng">Row</Text>
+			<Text LangIsoCode="spa">Fila</Text>
+			<Text LangIsoCode="por">Fila</Text>
+			<Text LangIsoCode="fre">Rangée</Text>
+		</Message>
+		<Message id="tsend">
+			<Text LangIsoCode="eng">Generate</Text>
+			<Text LangIsoCode="spa">Importar</Text>
+			<Text LangIsoCode="por">Gerar</Text>
+			<Text LangIsoCode="fre">Générer</Text>
+		</Message>
+	</Group>
+	<Group name="di8_input">
+		<Message id="ttitle">
+			<Text LangIsoCode="eng">DesInventar</Text>
+			<Text LangIsoCode="spa">DesInventar</Text>
+			<Text LangIsoCode="por">DesInventar</Text>
+			<Text LangIsoCode="fre">DesInventar</Text>
+		</Message>
+		<Message id="mprint">
+			<Text LangIsoCode="eng">Print</Text>
+			<Text LangIsoCode="spa">Imprimir</Text>
+			<Text LangIsoCode="por">Imprimir</Text>
+			<Text LangIsoCode="fre">Imprimer</Text>
+		</Message>
+		<Message id="mloading">
+			<Text LangIsoCode="eng">One moment</Text>
+			<Text LangIsoCode="spa">Un momento por favor..</Text>
+			<Text LangIsoCode="por">please.</Text>
+			<Text LangIsoCode="fre">Patientez SVP</Text>
+		</Message>
+		<Message id="bnew">
+			<Text LangIsoCode="eng">New</Text>
+			<Text LangIsoCode="spa">Nueva</Text>
+			<Text LangIsoCode="por">Nova</Text>
+			<Text LangIsoCode="fre">Nouvelle</Text>
+		</Message>
+		<Message id="tnewtitle">
+			<Text LangIsoCode="eng">Create a data card</Text>
+			<Text LangIsoCode="spa">Crear una ficha</Text>
+			<Text LangIsoCode="por">Criar um formulário</Text>
+			<Text LangIsoCode="fre">Créer une carte de données</Text>
+		</Message>
+		<Message id="tnewdesc">
+			<Text LangIsoCode="eng">Input a new register into the database</Text>
+			<Text LangIsoCode="spa">Ingrese un nuevo registro a la base de datos</Text>
+			<Text LangIsoCode="por">Ingresse um novo registro ao banco de dados</Text>
+			<Text LangIsoCode="fre">Introduire un nouveau registre dans la base de données </Text>
+		</Message>
+		<Message id="bupdate">
+			<Text LangIsoCode="eng">Edit</Text>
+			<Text LangIsoCode="spa">Editar</Text>
+			<Text LangIsoCode="por">Atualizar</Text>
+			<Text LangIsoCode="fre">Éditer</Text>
+		</Message>
+		<Message id="tupdtitle">
+			<Text LangIsoCode="eng">Edit a data card</Text>
+			<Text LangIsoCode="spa">Editar una ficha</Text>
+			<Text LangIsoCode="por">Editar um formulário</Text>
+			<Text LangIsoCode="fre">Éditer une carte de données</Text>
+		</Message>
+		<Message id="tupddesc">
+			<Text LangIsoCode="eng">Edit an existing record in the database</Text>
+			<Text LangIsoCode="spa">Edite un registro ya existente en la base de datos</Text>
+			<Text LangIsoCode="por">Edite um registro já existente no banco de dados</Text>
+			<Text LangIsoCode="fre">Éditer un registre déjà existant dans la base de données</Text>
+		</Message>
+		<Message id="bsave">
+			<Text LangIsoCode="eng">Save</Text>
+			<Text LangIsoCode="spa">Guardar</Text>
+			<Text LangIsoCode="por">Salvar</Text>
+			<Text LangIsoCode="fre">Enregistrer</Text>
+		</Message>
+		<Message id="tsavtitle">
+			<Text LangIsoCode="eng">Save data card</Text>
+			<Text LangIsoCode="spa">Guardar la ficha</Text>
+			<Text LangIsoCode="por">Salvar o formulário</Text>
+			<Text LangIsoCode="fre">Enregistrer la carte de données</Text>
+		</Message>
+		<Message id="tsavdesc">
+			<Text LangIsoCode="eng">recuerde incluir los campos obligatorios</Text>
+			<Text LangIsoCode="spa">Guarde un registro en la base de datos</Text>
+			<Text LangIsoCode="por">Save register in the database. Remember to include all obligatory fields.</Text>
+			<Text LangIsoCode="fre">recuerde incluir los campos obligatorios</Text>
+		</Message>
+		<Message id="bcancel">
+			<Text LangIsoCode="eng">Cancel</Text>
+			<Text LangIsoCode="spa">Cancelar</Text>
+			<Text LangIsoCode="por">Cancelar</Text>
+			<Text LangIsoCode="fre">Annuler</Text>
+		</Message>
+		<Message id="tcantitle">
+			<Text LangIsoCode="eng">Discard data card</Text>
+			<Text LangIsoCode="spa">Abandonar la ficha</Text>
+			<Text LangIsoCode="por">Abandonar o formulário</Text>
+			<Text LangIsoCode="fre">Abandonner la carte de données</Text>
+		</Message>
+		<Message id="tcandesc">
+			<Text LangIsoCode="eng">no se guardará ni modificará la información.</Text>
+			<Text LangIsoCode="spa">Abandone la actual ficha</Text>
+			<Text LangIsoCode="por">Discard current record. Information will not be saved or modified.</Text>
+			<Text LangIsoCode="fre">no se guardará ni modificará la información.</Text>
+		</Message>
+		<Message id="bclean">
+			<Text LangIsoCode="eng">Clear</Text>
+			<Text LangIsoCode="spa">Limpiar</Text>
+			<Text LangIsoCode="por">Limpar</Text>
+			<Text LangIsoCode="fre">Effacer</Text>
+		</Message>
+		<Message id="tclntitle">
+			<Text LangIsoCode="eng">Clear data card</Text>
+			<Text LangIsoCode="spa">Limpiar la ficha</Text>
+			<Text LangIsoCode="por">Limpar o formulário</Text>
+			<Text LangIsoCode="fre">Nettoyer la carte de données</Text>
+		</Message>
+		<Message id="tclndesc">
+			<Text LangIsoCode="eng">la información será borrada de la actual forma</Text>
+			<Text LangIsoCode="spa">Limpia la actual ficha</Text>
+			<Text LangIsoCode="por">Clear current record</Text>
+			<Text LangIsoCode="fre">la información será borrada de la actual forma</Text>
+		</Message>
+		<Message id="msgDatacardSerialFind">
+			<Text LangIsoCode="eng">Search</Text>
+			<Text LangIsoCode="spa">Buscar</Text>
+			<Text LangIsoCode="por">Buscar</Text>
+			<Text LangIsoCode="fre">Chercher</Text>
+		</Message>
+		<Message id="tooltipDatacardFind">
+			<Text LangIsoCode="eng">Search data card</Text>
+			<Text LangIsoCode="spa">Buscar fichas</Text>
+			<Text LangIsoCode="por">Buscar formulários</Text>
+			<Text LangIsoCode="fre">Chercher des cartes de données</Text>
+		</Message>
+		<Message id="texpdesc">
+			<Text LangIsoCode="eng">Find datacard using a serial</Text>
+			<Text LangIsoCode="spa">escriba el serial de la ficha que desea visualizar</Text>
+			<Text LangIsoCode="por">Buscar utilizando múltiplos critérios</Text>
+			<Text LangIsoCode="fre">Écrivez le numéro de série de la carte de données que vous souhaitez afficher</Text>
+		</Message>
+		<Message id="bfirst">
+			<Text LangIsoCode="eng">First</Text>
+			<Text LangIsoCode="spa">Primera</Text>
+			<Text LangIsoCode="por">First*</Text>
+			<Text LangIsoCode="fre">Première</Text>
+		</Message>
+		<Message id="bprev">
+			<Text LangIsoCode="eng">Previous</Text>
+			<Text LangIsoCode="spa">Anterior</Text>
+			<Text LangIsoCode="por">Previous*</Text>
+			<Text LangIsoCode="fre">Précédente</Text>
+		</Message>
+		<Message id="bnext">
+			<Text LangIsoCode="eng">Next</Text>
+			<Text LangIsoCode="spa">Siguiente</Text>
+			<Text LangIsoCode="por">Next*</Text>
+			<Text LangIsoCode="fre">Suivante</Text>
+		</Message>
+		<Message id="blast">
+			<Text LangIsoCode="eng">Last</Text>
+			<Text LangIsoCode="spa">Última</Text>
+			<Text LangIsoCode="por">Last*</Text>
+			<Text LangIsoCode="fre">Dernière</Text>
+		</Message>
+		<Message id="ttotal">
+			<Text LangIsoCode="eng">Total</Text>
+			<Text LangIsoCode="spa">Total</Text>
+			<Text LangIsoCode="por">Total</Text>
+			<Text LangIsoCode="fre">Total</Text>
+		</Message>
+		<Message id="thelp">
+			<Text LangIsoCode="eng">Definition</Text>
+			<Text LangIsoCode="spa">Definición</Text>
+			<Text LangIsoCode="por">Definição</Text>
+			<Text LangIsoCode="fre">Définition</Text>
+		</Message>
+		<Message id="tdidescinfo">
+			<Text LangIsoCode="eng">Click on the title to see a description of the element</Text>
+			<Text LangIsoCode="spa">De click en el título deseado para ver la descripción de dicho elemento</Text>
+			<Text LangIsoCode="por">Selecione o título desejado para ver a descrição</Text>
+			<Text LangIsoCode="fre">Cliquez sur le titre souhaité pour voir la description de cet élément</Text>
+		</Message>
+		<Message id="mgeography">
+			<Text LangIsoCode="eng">Geographic units</Text>
+			<Text LangIsoCode="spa">Geografía</Text>
+			<Text LangIsoCode="por">Unidades Geográficas</Text>
+			<Text LangIsoCode="fre">Unités Géographiques</Text>
+		</Message>
+		<Message id="mevents">
+			<Text LangIsoCode="eng">Types of events</Text>
+			<Text LangIsoCode="spa">Tipo de eventos</Text>
+			<Text LangIsoCode="por">Tipos de eventos</Text>
+			<Text LangIsoCode="fre">Types d&quot;évènements</Text>
+		</Message>
+		<Message id="mcauses">
+			<Text LangIsoCode="eng">Types of causes</Text>
+			<Text LangIsoCode="spa">Tipo de causas</Text>
+			<Text LangIsoCode="por">Tipos de causas</Text>
+			<Text LangIsoCode="fre">Types de causes</Text>
+		</Message>
+		<Message id="tbaseffects">
+			<Text LangIsoCode="eng">Basic effects</Text>
+			<Text LangIsoCode="spa">Efectos básicos</Text>
+			<Text LangIsoCode="por">Efeitos básicos</Text>
+			<Text LangIsoCode="fre">Effets basiques</Text>
+		</Message>
+		<Message id="textraeffect">
+			<Text LangIsoCode="eng">Additional effects</Text>
+			<Text LangIsoCode="spa">Efectos adicionales</Text>
+			<Text LangIsoCode="por">Efeitos adicionais</Text>
+			<Text LangIsoCode="fre">Effets additionnels</Text>
+		</Message>
+		<Message id="teffects">
+			<Text LangIsoCode="eng">Persons and Property</Text>
+			<Text LangIsoCode="spa">Personas y bienes</Text>
+			<Text LangIsoCode="por">Pessoas e bens</Text>
+			<Text LangIsoCode="fre">Personnes et biens</Text>
+		</Message>
+		<Message id="tsectors">
+			<Text LangIsoCode="eng">Affected sectors</Text>
+			<Text LangIsoCode="spa">Sectores</Text>
+			<Text LangIsoCode="por">Setores</Text>
+			<Text LangIsoCode="fre">Secteurs</Text>
+		</Message>
+		<Message id="tlosses">
+			<Text LangIsoCode="eng">Economic Losses</Text>
+			<Text LangIsoCode="spa">Pérdidas económicas</Text>
+			<Text LangIsoCode="por">As perdas econômicas</Text>
+			<Text LangIsoCode="fre">Pertes économiques</Text>
+		</Message>
+		<Message id="tcreatedate">
+			<Text LangIsoCode="eng">Created:</Text>
+			<Text LangIsoCode="spa">Creada:</Text>
+			<Text LangIsoCode="por">Criada:</Text>
+			<Text LangIsoCode="fre">Créée:</Text>
+		</Message>
+		<Message id="tcreateby">
+			<Text LangIsoCode="eng">By:</Text>
+			<Text LangIsoCode="spa">Por:</Text>
+			<Text LangIsoCode="por">Por:</Text>
+			<Text LangIsoCode="fre">Par:</Text>
+		</Message>
+		<Message id="tcreateupdate">
+			<Text LangIsoCode="eng">Modified:</Text>
+			<Text LangIsoCode="spa">Modificada:</Text>
+			<Text LangIsoCode="por">Modificada:</Text>
+			<Text LangIsoCode="fre">Modifiée:</Text>
+		</Message>
+		<Message id="tstatus">
+			<Text LangIsoCode="eng">Status</Text>
+			<Text LangIsoCode="spa">Estado</Text>
+			<Text LangIsoCode="por">Estado</Text>
+			<Text LangIsoCode="fre">État</Text>
+		</Message>
+		<Message id="tsend">
+			<Text LangIsoCode="eng">Generate</Text>
+			<Text LangIsoCode="spa">Buscar</Text>
+			<Text LangIsoCode="por">Gerar</Text>
+			<Text LangIsoCode="fre">Générer</Text>
+		</Message>
+		<Message id="tclear">
+			<Text LangIsoCode="eng">Clear</Text>
+			<Text LangIsoCode="spa">Limpiar</Text>
+			<Text LangIsoCode="por">Limpar</Text>
+			<Text LangIsoCode="fre">Nettoyer</Text>
+		</Message>
+		<Message id="tclose">
+			<Text LangIsoCode="eng">Close</Text>
+			<Text LangIsoCode="spa">Cerrar</Text>
+			<Text LangIsoCode="por">Fechar</Text>
+			<Text LangIsoCode="fre">Fermer</Text>
+		</Message>
+		<Message id="tsince">
+			<Text LangIsoCode="eng">Since</Text>
+			<Text LangIsoCode="spa">Desde</Text>
+			<Text LangIsoCode="por">Desde</Text>
+			<Text LangIsoCode="fre">Depuis</Text>
+		</Message>
+		<Message id="tuntil">
+			<Text LangIsoCode="eng">Until</Text>
+			<Text LangIsoCode="spa">Hasta</Text>
+			<Text LangIsoCode="por">Até</Text>
+			<Text LangIsoCode="fre">Jusqu&quot;à</Text>
+		</Message>
+		<Message id="tqueryresults">
+			<Text LangIsoCode="eng">Results</Text>
+			<Text LangIsoCode="spa">Resultados</Text>
+			<Text LangIsoCode="por">Resultados</Text>
+			<Text LangIsoCode="fre">Résultats</Text>
+		</Message>
+		<Message id="tqueryshowcard">
+			<Text LangIsoCode="eng">See data card</Text>
+			<Text LangIsoCode="spa">Ver ficha</Text>
+			<Text LangIsoCode="por">Ver formulário</Text>
+			<Text LangIsoCode="fre">Voir carte de données</Text>
+		</Message>
+		<Message id="tcheckquit">
+			<Text LangIsoCode="eng">Are you sure you want to quit DesInventar?</Text>
+			<Text LangIsoCode="spa">¿Realmente desea salir de DesInventar?</Text>
+			<Text LangIsoCode="por">Realmente deseja sair de DesInventar?</Text>
+			<Text LangIsoCode="fre">Voulez-vous réellement quitter DésInventer?</Text>
+		</Message>
+		<Message id="tmsgeditcard">
+			<Text LangIsoCode="eng">To edit this record</Text>
+			<Text LangIsoCode="spa">Para editar esta ficha presione Actualizar</Text>
+			<Text LangIsoCode="por">select Update</Text>
+			<Text LangIsoCode="fre">Pour éditer cette carte de données</Text>
+		</Message>
+		<Message id="tmsgnewcard">
+			<Text LangIsoCode="eng">Select New to enter a record</Text>
+			<Text LangIsoCode="spa">Presione Nueva para ingresar una ficha</Text>
+			<Text LangIsoCode="por">Selecione Nova para ingressar um formulário</Text>
+			<Text LangIsoCode="fre">Appuyer sur Nouveau pour introduire une carte de données</Text>
+		</Message>
+		<Message id="tmsgsearchdup">
+			<Text LangIsoCode="eng">Type in words to search existing records</Text>
+			<Text LangIsoCode="spa">Ingrese las palabras para ubicar fichas existentes</Text>
+			<Text LangIsoCode="por">Ingresse as palavras para localizar formulários existentes</Text>
+			<Text LangIsoCode="fre">Introduisez les mots pour localiser des cartes de données déjà existantes</Text>
+		</Message>
+		<Message id="tmsgsearchcards">
+			<Text LangIsoCode="eng">Type in words to define your search</Text>
+			<Text LangIsoCode="spa">Ingrese las palabras para realizar la búsqueda</Text>
+			<Text LangIsoCode="por">Ingresse as palavras para realizar a busca</Text>
+			<Text LangIsoCode="fre">Introduisez les mots pour effectuer la recherche</Text>
+		</Message>
+		<Message id="tmsgnewcardfill">
+			<Text LangIsoCode="eng">Fill in fields and select Ready to save.</Text>
+			<Text LangIsoCode="spa">Llene los campos y presione Listo para guardar</Text>
+			<Text LangIsoCode="por">Preencha os campos e selecione Pronto para Salvar</Text>
+			<Text LangIsoCode="fre">Remplissez les champs et appuyez sur Prêt pour enregistrer</Text>
+		</Message>
+		<Message id="tmsgeditcardfill">
+			<Text LangIsoCode="eng">Edit fields and select Ready to save</Text>
+			<Text LangIsoCode="spa">Edite los campos y presione Listo para guardar</Text>
+			<Text LangIsoCode="por">Edite os campos e selecione Pronto para Salvar</Text>
+			<Text LangIsoCode="fre">Éditez les champs et appuyer sur Prêt pour enregistrer</Text>
+		</Message>
+		<Message id="tmsgviewcard">
+			<Text LangIsoCode="eng">Click on the row you wish to see</Text>
+			<Text LangIsoCode="spa">De click en la fila que desee visualizar</Text>
+			<Text LangIsoCode="por">Selecione a fila de deseje visualizar</Text>
+			<Text LangIsoCode="fre">Cliquez sur la rangée que vous voulez afficher</Text>
+		</Message>
+		<Message id="errmsgfrm">
+			<Text LangIsoCode="eng">Register all fields in the RECORD DESINVENTAR. Fill in all required fields and try again.</Text>
+			<Text LangIsoCode="spa">Registre todos los campos de la FICHA DESINVENTAR. Llene todos los campos requeridos e intente nuevamente.</Text>
+			<Text LangIsoCode="por">Registre todos os campos do FORMULÁRIO DESINVENTAR. Preencha todos os campos requeridos e tente de novo</Text>
+			<Text LangIsoCode="fre">Enregistrez tous les champs de la CARTE DE DONNÉES DÉSINVENTER. Remplissez tous les champs obligatoires et essayez de nouveau</Text>
+		</Message>
+		<Message id="tstatpublished">
+			<Text LangIsoCode="eng">Published</Text>
+			<Text LangIsoCode="spa">Publicada</Text>
+			<Text LangIsoCode="por">Publicada</Text>
+			<Text LangIsoCode="fre">Publiée</Text>
+		</Message>
+		<Message id="tstatready">
+			<Text LangIsoCode="eng">Pending approval</Text>
+			<Text LangIsoCode="spa">Por aprobar</Text>
+			<Text LangIsoCode="por">Por aprovar</Text>
+			<Text LangIsoCode="fre">En cours d&quot;approbation</Text>
+		</Message>
+		<Message id="tstatdraft">
+			<Text LangIsoCode="eng">Draft</Text>
+			<Text LangIsoCode="spa">Borrador</Text>
+			<Text LangIsoCode="por">Rascunho</Text>
+			<Text LangIsoCode="fre">Projet</Text>
+		</Message>
+		<Message id="tstatrash">
+			<Text LangIsoCode="eng">Pending deletion</Text>
+			<Text LangIsoCode="spa">Para eliminar</Text>
+			<Text LangIsoCode="por">Para eliminar</Text>
+			<Text LangIsoCode="fre">À éliminer</Text>
+		</Message>
+		<Message id="tstatdeleted">
+			<Text LangIsoCode="eng">Delete!</Text>
+			<Text LangIsoCode="spa">Eliminar!</Text>
+			<Text LangIsoCode="por">Eliminar!</Text>
+			<Text LangIsoCode="fre">Éliminer!</Text>
+		</Message>
+		<Message id="tdcerror">
+			<Text LangIsoCode="eng">Data card was not saved</Text>
+			<Text LangIsoCode="spa">La ficha no fue guardada</Text>
+			<Text LangIsoCode="por">O formulário não foi salvo</Text>
+			<Text LangIsoCode="fre">La carte de données n&quot;a pas été enregistrée</Text>
+		</Message>
+		<Message id="tdisererr">
+			<Text LangIsoCode="eng">No valid serial (assigned o incorrect)</Text>
+			<Text LangIsoCode="spa">Serial inválido (asignado o incorrecto)</Text>
+			<Text LangIsoCode="por">Serial inválido (atribuído ou incorreto)</Text>
+			<Text LangIsoCode="fre">Numéro de série non valable (assigné ou incorrect)</Text>
+		</Message>
+		<Message id="tdiserok">
+			<Text LangIsoCode="eng">Valid serial</Text>
+			<Text LangIsoCode="spa">Serial válido</Text>
+			<Text LangIsoCode="por">Serial válido</Text>
+			<Text LangIsoCode="fre">Numéro de série valable</Text>
+		</Message>
+		<Message id="tdccreated">
+			<Text LangIsoCode="eng">Data card created sucessfully</Text>
+			<Text LangIsoCode="spa">Ficha creada exitosamente</Text>
+			<Text LangIsoCode="por">Formulário criado com sucesso!</Text>
+			<Text LangIsoCode="fre">Carte de données créée avec succès</Text>
+		</Message>
+		<Message id="tdcupdated">
+			<Text LangIsoCode="eng">Data card updated sucessfully</Text>
+			<Text LangIsoCode="spa">Ficha actualizada exitosamente</Text>
+			<Text LangIsoCode="por">Formulário atualizado com sucesso!</Text>
+			<Text LangIsoCode="fre">Carte de données mise à jour avec succès</Text>
+		</Message>
+		<Message id="tdconuse">
+			<Text LangIsoCode="eng">por favor intente despues..</Text>
+			<Text LangIsoCode="spa">La ficha está siendo editada por otro usuario</Text>
+			<Text LangIsoCode="por">Data card is been edited by other user</Text>
+			<Text LangIsoCode="fre">por favor intente despues..</Text>
+		</Message>
+		<Message id="teffhav">
+			<Text LangIsoCode="eng">There were</Text>
+			<Text LangIsoCode="spa">Hubo</Text>
+			<Text LangIsoCode="por">Houve</Text>
+			<Text LangIsoCode="fre">Il y en a eu</Text>
+		</Message>
+		<Message id="teffhavnot">
+			<Text LangIsoCode="eng">There weren&quot;t any</Text>
+			<Text LangIsoCode="spa">No hubo</Text>
+			<Text LangIsoCode="por">Não houve</Text>
+			<Text LangIsoCode="fre">Il n&quot;y en a pas eu</Text>
+		</Message>
+		<Message id="teffdontknow">
+			<Text LangIsoCode="eng">Don&quot;t know</Text>
+			<Text LangIsoCode="spa">No sabe</Text>
+			<Text LangIsoCode="por">Não sabe</Text>
+			<Text LangIsoCode="fre">Ne sait pas</Text>
+		</Message>
+		<Message id="msgDatacardDuplicatedSerial">
+			<Text LangIsoCode="eng">Serial field value already exists; record cannot be saved</Text>
+			<Text LangIsoCode="spa">Valor del campo Serial ya existe; no se puede guardar el registro</Text>
+			<Text LangIsoCode="por">Valor do campo Serial já existe; o registro não pode ser salva</Text>
+			<Text LangIsoCode="fre">Valeur du champ de série existe déjà; record ne peut être sauvé</Text>
+		</Message>
+		<Message id="msgDatacardInvalidStatus">
+			<Text LangIsoCode="eng">Cannot save datacard with this status.</Text>
+			<Text LangIsoCode="spa">No puede guardar ficha con este estado.</Text>
+			<Text LangIsoCode="por">Não é possível salvar datacard com este estatuto</Text>
+			<Text LangIsoCode="fre">Impossible d&quot;enregister carte de données avec ce statut</Text>
+		</Message>
+		<Message id="msgDatacardWithoutSource">
+			<Text LangIsoCode="eng">Datacard without source information cannot be published.</Text>
+			<Text LangIsoCode="spa">Ficha sin fuente no puede ser publicada.</Text>
+			<Text LangIsoCode="por">Datacard sem informação de origem não pode ser publicado.</Text>
+			<Text LangIsoCode="fre">Datacard sans source d&quot;information ne peut pas être publié</Text>
+		</Message>
+		<Message id="msgDatacardInvalidGeography">
+			<Text LangIsoCode="eng">Geography has not been selected</Text>
+			<Text LangIsoCode="spa">No ha seleccionado Geografía</Text>
+			<Text LangIsoCode="por">Geografia não foi selecionado</Text>
+			<Text LangIsoCode="fre">Géographie n&quot;a pas été sélectionné</Text>
+		</Message>
+		<Message id="msgDatacardWithoutEffects">
+			<Text LangIsoCode="eng">Record without effects cannot be saved</Text>
+			<Text LangIsoCode="spa">Registro sin efectos no se puede guardar</Text>
+			<Text LangIsoCode="por">Gravar sem efeitos não podem ser salvos</Text>
+			<Text LangIsoCode="fre">Record sans effets ne peuvent pas être sauvés</Text>
+		</Message>
+		<Message id="msgDatacardNetworkError">
+			<Text LangIsoCode="eng">Network error; please try again.</Text>
+			<Text LangIsoCode="spa">Error de red; por favor intente nuevamente.</Text>
+			<Text LangIsoCode="por">Erro de rede; por favor tente novamente</Text>
+			<Text LangIsoCode="fre">Erreur de réseau; s&quot;il vous plaît essayer à nouveau.</Text>
+		</Message>
+		<Message id="msgDatacardNotFound">
+			<Text LangIsoCode="eng">Datacard request not exists</Text>
+			<Text LangIsoCode="spa">La ficha deseada no existe</Text>
+			<Text LangIsoCode="por">Datacard request not exists*</Text>
+			<Text LangIsoCode="fre">La carte de données recherchée n&quot;existe pas</Text>
+		</Message>
+		<Message id="msgDatacardFound">
+			<Text LangIsoCode="eng">Datacard found and loaded</Text>
+			<Text LangIsoCode="spa">Ficha encontrada y cargada</Text>
+			<Text LangIsoCode="por">Registro encontrado e carregado</Text>
+			<Text LangIsoCode="fre">Record trouvé et chargé</Text>
+		</Message>
+	</Group>
+	<Group name="di8_index">
+		<Message id="twelcome">
+			<Text LangIsoCode="eng">Welcome</Text>
+			<Text LangIsoCode="spa">Bienvenido</Text>
+			<Text LangIsoCode="por">Welcome*</Text>
+			<Text LangIsoCode="fre">Bienvenue</Text>
+		</Message>
+		<Message id="tdititle">
+			<Text LangIsoCode="eng">Inventory system of the effects of disasters</Text>
+			<Text LangIsoCode="spa">Sistema de inventario de efectos de desastres</Text>
+			<Text LangIsoCode="por">Sistema de inventário de efeitos de desastres</Text>
+			<Text LangIsoCode="fre">Système d&quot;inventaire d&quot;effets de désastres</Text>
+		</Message>
+		<Message id="hlostconn">
+			<Text LangIsoCode="eng">Failed communication. Check your internet connection.</Text>
+			<Text LangIsoCode="spa">Comunicación fallida: Verifique su conexión a Internet</Text>
+			<Text LangIsoCode="por">Comunicação falida: Verifique sua conexão à Internet</Text>
+			<Text LangIsoCode="fre">Communication défaillante: Vérifiez la connexion Internet</Text>
+		</Message>
+		<Message id="tdbnotavail">
+			<Text LangIsoCode="eng">There are no databases available at the moment.</Text>
+			<Text LangIsoCode="spa">No hay bases de datos disponibles por el momento</Text>
+			<Text LangIsoCode="por">Não há bancos de dados disponíveis no momento</Text>
+			<Text LangIsoCode="fre">Il n&quot;y a pas de bases de données disponibles pour l&quot;instant</Text>
+		</Message>
+		<Message id="tmoreinfo">
+			<Text LangIsoCode="eng">More information</Text>
+			<Text LangIsoCode="spa">Mas información</Text>
+			<Text LangIsoCode="por">Mais informação</Text>
+			<Text LangIsoCode="fre">Plus d&quot;information</Text>
+		</Message>
+		<Message id="talerdiwin">
+			<Text LangIsoCode="eng">DesInventar is being used. Are you sure you want to quit?</Text>
+			<Text LangIsoCode="spa">DesInventar está en uso. ¿Está seguro que desea salir?</Text>
+			<Text LangIsoCode="por">DesInventar está sendo usado. Tem certeza que deseja sair?</Text>
+			<Text LangIsoCode="fre">DésInventer est en usage. Voulez-vous vraiment quitter?</Text>
+		</Message>
+		<Message id="tstartpage">
+			<Text LangIsoCode="eng">Home</Text>
+			<Text LangIsoCode="spa">Inicio</Text>
+			<Text LangIsoCode="por">Início</Text>
+			<Text LangIsoCode="fre">Accueil</Text>
+		</Message>
+		<Message id="tcopyright">
+			<Text LangIsoCode="eng">(c) 1998-2011 Corporación OSSO - Colombia</Text>
+			<Text LangIsoCode="spa">(c) 1998-2011 Corporación OSSO - Colombia</Text>
+			<Text LangIsoCode="por">(c) 1998-2011 Corporación OSSO - Colombia</Text>
+			<Text LangIsoCode="fre">(c) 1998-2011 Corporación OSSO - Colombie</Text>
+		</Message>
+		<Message id="labelsoftwareversion">
+			<Text LangIsoCode="eng">Software Version</Text>
+			<Text LangIsoCode="spa">Versión de Software</Text>
+			<Text LangIsoCode="por">Versão do software</Text>
+			<Text LangIsoCode="fre">Version de logiciel</Text>
+		</Message>
+		<Message id="ttitle">
+			<Text LangIsoCode="eng">DesInventar</Text>
+			<Text LangIsoCode="spa">DesInventar</Text>
+			<Text LangIsoCode="por">DesInventar</Text>
+			<Text LangIsoCode="fre">DesInventar</Text>
+		</Message>
+		<Message id="tsubtitle">
+			<Text LangIsoCode="eng">Query design</Text>
+			<Text LangIsoCode="spa">Diseño de consulta</Text>
+			<Text LangIsoCode="por">Esquematização de consulta</Text>
+			<Text LangIsoCode="fre">Dessin de consultation</Text>
+		</Message>
+		<Message id="tsubtitlemsg">
+			<Text LangIsoCode="eng">Define your query by selecting the relevant fields</Text>
+			<Text LangIsoCode="spa">Acote su consulta seleccionando los campos de su interés.</Text>
+			<Text LangIsoCode="por">Limite sua consulta selecionando os campos de seu interesse</Text>
+			<Text LangIsoCode="fre">Annoter limiter restreindre votre consultation en sélectionnant les champs qui vous intéressent</Text>
+		</Message>
+		<Message id="tsubtitle2">
+			<Text LangIsoCode="eng">Results</Text>
+			<Text LangIsoCode="spa">Resultados</Text>
+			<Text LangIsoCode="por">Resultados</Text>
+			<Text LangIsoCode="fre">Résultats</Text>
+		</Message>
+		<Message id="tsubtitle2msg">
+			<Text LangIsoCode="eng">seleccione una de las herramientas de análisis Datos</Text>
+			<Text LangIsoCode="spa">Una vez diseñada su consulta</Text>
+			<Text LangIsoCode="por">Consolidados</Text>
+			<Text LangIsoCode="fre">seleccione una de las herramientas de análisis Datos</Text>
+		</Message>
+		<Message id="mnuDatacardView">
+			<Text LangIsoCode="eng">View Records</Text>
+			<Text LangIsoCode="spa">Ver ficha</Text>
+			<Text LangIsoCode="por">Ver registos</Text>
+			<Text LangIsoCode="fre">Voir les dossiers</Text>
+		</Message>
+		<Message id="mnuDatacardInsertEdit">
+			<Text LangIsoCode="eng">Insert</Text>
+			<Text LangIsoCode="spa">Ingreso</Text>
+			<Text LangIsoCode="por">Insert</Text>
+			<Text LangIsoCode="fre">Modifier les donées</Text>
+		</Message>
+		<Message id="mnuDatabaseConfig">
+			<Text LangIsoCode="eng">Configuration</Text>
+			<Text LangIsoCode="spa">Configuración</Text>
+			<Text LangIsoCode="por">Configuração</Text>
+			<Text LangIsoCode="fre">Configuration</Text>
+		</Message>
+		<Message id="mnuDatacardImport">
+			<Text LangIsoCode="eng">Import data cards</Text>
+			<Text LangIsoCode="spa">Importación de fichas</Text>
+			<Text LangIsoCode="por">Importação de formulários</Text>
+			<Text LangIsoCode="fre">Importation de carte de données</Text>
+		</Message>
+		<Message id="mnuDatabaseBackup">
+			<Text LangIsoCode="eng">Backup database</Text>
+			<Text LangIsoCode="spa">Respaldar base de datos</Text>
+			<Text LangIsoCode="por">Backup database*</Text>
+			<Text LangIsoCode="fre">Garantir la base de données</Text>
+		</Message>
+		<Message id="mfile">
+			<Text LangIsoCode="eng">File</Text>
+			<Text LangIsoCode="spa">Archivo</Text>
+			<Text LangIsoCode="por">Arquivo</Text>
+			<Text LangIsoCode="fre">Fichier</Text>
+		</Message>
+		<Message id="mprint">
+			<Text LangIsoCode="eng">Print</Text>
+			<Text LangIsoCode="spa">Imprimir</Text>
+			<Text LangIsoCode="por">Imprimir</Text>
+			<Text LangIsoCode="fre">Imprimer</Text>
+		</Message>
+		<Message id="msearch">
+			<Text LangIsoCode="eng">Queries</Text>
+			<Text LangIsoCode="spa">Consultas</Text>
+			<Text LangIsoCode="por">Consultas</Text>
+			<Text LangIsoCode="fre">Consultations</Text>
+		</Message>
+		<Message id="mnewsearch">
+			<Text LangIsoCode="eng">New</Text>
+			<Text LangIsoCode="spa">Nueva</Text>
+			<Text LangIsoCode="por">Nova</Text>
+			<Text LangIsoCode="fre">Nouvelle</Text>
+		</Message>
+		<Message id="msavequery">
+			<Text LangIsoCode="eng">Save file</Text>
+			<Text LangIsoCode="spa">Guardar</Text>
+			<Text LangIsoCode="por">Save file</Text>
+			<Text LangIsoCode="fre">Enregistrer</Text>
+		</Message>
+		<Message id="mopenquery">
+			<Text LangIsoCode="eng">Open file</Text>
+			<Text LangIsoCode="spa">Abrir</Text>
+			<Text LangIsoCode="por">Open file</Text>
+			<Text LangIsoCode="fre">Ouvrir</Text>
+		</Message>
+		<Message id="mgotoqd">
+			<Text LangIsoCode="eng">Show/Hide</Text>
+			<Text LangIsoCode="spa">Mostrar/Ocultar</Text>
+			<Text LangIsoCode="por">Mostrar/Ocultar</Text>
+			<Text LangIsoCode="fre">Montrer/Cacher</Text>
+		</Message>
+		<Message id="mquit">
+			<Text LangIsoCode="eng">Quit</Text>
+			<Text LangIsoCode="spa">Salir</Text>
+			<Text LangIsoCode="por">Sair</Text>
+			<Text LangIsoCode="fre">Quitter</Text>
+		</Message>
+		<Message id="mhelp">
+			<Text LangIsoCode="eng">Help</Text>
+			<Text LangIsoCode="spa">Ayuda</Text>
+			<Text LangIsoCode="por">Ajuda</Text>
+			<Text LangIsoCode="fre">Aide</Text>
+		</Message>
+		<Message id="hotherdoc">
+			<Text LangIsoCode="eng">Software documentation</Text>
+			<Text LangIsoCode="spa">Documentación software</Text>
+			<Text LangIsoCode="por">Software documentation*</Text>
+			<Text LangIsoCode="fre">Documentation logiciel</Text>
+		</Message>
+		<Message id="hdbinfo">
+			<Text LangIsoCode="eng">Database information</Text>
+			<Text LangIsoCode="spa">Información base de datos</Text>
+			<Text LangIsoCode="por">Informação de banco</Text>
+			<Text LangIsoCode="fre">Information base de données</Text>
+		</Message>
+		<Message id="mwebsite">
+			<Text LangIsoCode="eng">Website of DesInventar</Text>
+			<Text LangIsoCode="spa">Sitio web DesInventar</Text>
+			<Text LangIsoCode="por">Website of DesInventar*</Text>
+			<Text LangIsoCode="fre">Site web DésInventer</Text>
+		</Message>
+		<Message id="mabout">
+			<Text LangIsoCode="eng">About</Text>
+			<Text LangIsoCode="spa">Acerca de</Text>
+			<Text LangIsoCode="por">Acerca de</Text>
+			<Text LangIsoCode="fre">À propos de </Text>
+		</Message>
+		<Message id="mlang">
+			<Text LangIsoCode="eng">Language</Text>
+			<Text LangIsoCode="spa">Idioma</Text>
+			<Text LangIsoCode="por">Idioma</Text>
+			<Text LangIsoCode="fre">Langue</Text>
+		</Message>
+		<Message id="mdatabases">
+			<Text LangIsoCode="eng">Databases</Text>
+			<Text LangIsoCode="spa">Bases de datos</Text>
+			<Text LangIsoCode="por">bancos de dados</Text>
+			<Text LangIsoCode="fre">Base de données</Text>
+		</Message>
+		<Message id="mdbfind">
+			<Text LangIsoCode="eng">Find</Text>
+			<Text LangIsoCode="spa">Buscar</Text>
+			<Text LangIsoCode="por">Find*</Text>
+			<Text LangIsoCode="fre">Chercher</Text>
+		</Message>
+		<Message id="mgeosection">
+			<Text LangIsoCode="eng">Geography</Text>
+			<Text LangIsoCode="spa">Geografía</Text>
+			<Text LangIsoCode="por">Geografia</Text>
+			<Text LangIsoCode="fre">Géographie</Text>
+		</Message>
+		<Message id="mmapsection">
+			<Text LangIsoCode="eng">Map</Text>
+			<Text LangIsoCode="spa">Mapa</Text>
+			<Text LangIsoCode="por">Mapa</Text>
+			<Text LangIsoCode="fre">Carte</Text>
+		</Message>
+		<Message id="meffsection">
+			<Text LangIsoCode="eng">Effects</Text>
+			<Text LangIsoCode="spa">Efectos</Text>
+			<Text LangIsoCode="por">Efeitos</Text>
+			<Text LangIsoCode="fre">Effets</Text>
+		</Message>
+		<Message id="mextsection">
+			<Text LangIsoCode="eng">Additional effects</Text>
+			<Text LangIsoCode="spa">Efectos adicionales</Text>
+			<Text LangIsoCode="por">Efeitos adicionais</Text>
+			<Text LangIsoCode="fre">Effets additionnels</Text>
+		</Message>
+		<Message id="mevesection">
+			<Text LangIsoCode="eng">Types of events</Text>
+			<Text LangIsoCode="spa">Tipos de eventos</Text>
+			<Text LangIsoCode="por">Tipos de eventos</Text>
+			<Text LangIsoCode="fre">Types d&quot;évènements</Text>
+		</Message>
+		<Message id="mcausection">
+			<Text LangIsoCode="eng">Types of causes</Text>
+			<Text LangIsoCode="spa">Tipos de causas</Text>
+			<Text LangIsoCode="por">Tipos de causas</Text>
+			<Text LangIsoCode="fre">Types de causes</Text>
+		</Message>
+		<Message id="mdcsection">
+			<Text LangIsoCode="eng">Data cards</Text>
+			<Text LangIsoCode="spa">Fichas</Text>
+			<Text LangIsoCode="por">Formulários</Text>
+			<Text LangIsoCode="fre">Carte de données</Text>
+		</Message>
+		<Message id="madvsection">
+			<Text LangIsoCode="eng">Advanced query</Text>
+			<Text LangIsoCode="spa">Consulta avanzada</Text>
+			<Text LangIsoCode="por">Consulta avançada</Text>
+			<Text LangIsoCode="fre">Consultation avancée</Text>
+		</Message>
+		<Message id="mreginfo">
+			<Text LangIsoCode="eng">Technical info</Text>
+			<Text LangIsoCode="spa">Ficha técnica</Text>
+			<Text LangIsoCode="por">Formulário técnico</Text>
+			<Text LangIsoCode="fre">Fiche technique</Text>
+		</Message>
+		<Message id="mgeolevel">
+			<Text LangIsoCode="eng">Geographic levels</Text>
+			<Text LangIsoCode="spa">Niveles Geográficos</Text>
+			<Text LangIsoCode="por">Níveis Geográficos</Text>
+			<Text LangIsoCode="fre">Niveaux Géographiques</Text>
+		</Message>
+		<Message id="mgeography">
+			<Text LangIsoCode="eng">Geographic units</Text>
+			<Text LangIsoCode="spa">Unidades Geográficas</Text>
+			<Text LangIsoCode="por">Unidades Geográficas</Text>
+			<Text LangIsoCode="fre">Unités Géographiques</Text>
+		</Message>
+		<Message id="mevents">
+			<Text LangIsoCode="eng">Types of events</Text>
+			<Text LangIsoCode="spa">Tipos de eventos</Text>
+			<Text LangIsoCode="por">Tipos de eventos</Text>
+			<Text LangIsoCode="fre">Types d&quot;évènements</Text>
+		</Message>
+		<Message id="mcauses">
+			<Text LangIsoCode="eng">Types of causes</Text>
+			<Text LangIsoCode="spa">Tipos de causas</Text>
+			<Text LangIsoCode="por">Tipos de causas</Text>
+			<Text LangIsoCode="fre">Types de causes</Text>
+		</Message>
+		<Message id="meeffects">
+			<Text LangIsoCode="eng">Additional Effects</Text>
+			<Text LangIsoCode="spa">Efectos Adicionales</Text>
+			<Text LangIsoCode="por">Efeitos Adicionais</Text>
+			<Text LangIsoCode="fre">Effets additionnels</Text>
+		</Message>
+		<Message id="tmapnotavail">
+			<Text LangIsoCode="eng">Map unavailable</Text>
+			<Text LangIsoCode="spa">Mapa no disponible</Text>
+			<Text LangIsoCode="por">Mapa não disponível</Text>
+			<Text LangIsoCode="fre">Carte non disponible</Text>
+		</Message>
+		<Message id="bsavemsg">
+			<Text LangIsoCode="eng">Enables you to save the displayed results (tables and images)</Text>
+			<Text LangIsoCode="spa">Le permite guardar el resultado desplegado (tablas e imágenes).</Text>
+			<Text LangIsoCode="por">Permite Salvar o resultado obtido (tabelas e imagens).</Text>
+			<Text LangIsoCode="fre">Vous permet d&quot;enregistrer le résultat déployé (tableaux et images)</Text>
+		</Message>
+		<Message id="bprintmsg">
+			<Text LangIsoCode="eng">Screen print result</Text>
+			<Text LangIsoCode="spa">Para imprimir el resultado en pantalla.</Text>
+			<Text LangIsoCode="por">Para imprimir o resultado na tela</Text>
+			<Text LangIsoCode="fre">Pour imprimer le résultat sur l&quot;écran</Text>
+		</Message>
+		<Message id="bdata">
+			<Text LangIsoCode="eng">Data cards</Text>
+			<Text LangIsoCode="spa">Fichas</Text>
+			<Text LangIsoCode="por">Formulários</Text>
+			<Text LangIsoCode="fre">Carte de données</Text>
+		</Message>
+		<Message id="tdatamsg">
+			<Text LangIsoCode="eng">To visualise records in a table format</Text>
+			<Text LangIsoCode="spa">Para visualizar las fichas en un tabla.</Text>
+			<Text LangIsoCode="por">Para visualizar os formulários numa tabela</Text>
+			<Text LangIsoCode="fre">Pour afficher les cartes de données sur un tableau</Text>
+		</Message>
+		<Message id="bthematic">
+			<Text LangIsoCode="eng">Maps</Text>
+			<Text LangIsoCode="spa">Mapas</Text>
+			<Text LangIsoCode="por">Mapas</Text>
+			<Text LangIsoCode="fre">Cartes</Text>
+		</Message>
+		<Message id="tthematicmsg">
+			<Text LangIsoCode="eng">To create thematic maps of effects</Text>
+			<Text LangIsoCode="spa">Para realizar mapas temáticos de los efectos.</Text>
+			<Text LangIsoCode="por">Para realizar mapas temáticos dos efeitos</Text>
+			<Text LangIsoCode="fre">Pour réaliser des cartes thématiques des effets</Text>
+		</Message>
+		<Message id="bgraphic">
+			<Text LangIsoCode="eng">Graphs</Text>
+			<Text LangIsoCode="spa">Gráficos</Text>
+			<Text LangIsoCode="por">Gráficos</Text>
+			<Text LangIsoCode="fre">Graphiques</Text>
+		</Message>
+		<Message id="tgraphicmsg">
+			<Text LangIsoCode="eng">Represents data in histograms and comparative graphs</Text>
+			<Text LangIsoCode="spa">Representa los datos en histogramas y gráficos comparativos.</Text>
+			<Text LangIsoCode="por">Representa os dados em histogramas e gráficos comparativos</Text>
+			<Text LangIsoCode="fre">Représente les données sur des histogrames et des graphiques comparatifs</Text>
+		</Message>
+		<Message id="bstatistic">
+			<Text LangIsoCode="eng">Consolidated</Text>
+			<Text LangIsoCode="spa">Consolidados</Text>
+			<Text LangIsoCode="por">Consolidados</Text>
+			<Text LangIsoCode="fre">Consolidés</Text>
+		</Message>
+		<Message id="tstatisticmsg">
+			<Text LangIsoCode="eng">Tipos de eventos</Text>
+			<Text LangIsoCode="spa">Totaliza las variables de efectos y fichas según niveles de totalización: p. ej. Años</Text>
+			<Text LangIsoCode="por">Niveles geográficos.</Text>
+			<Text LangIsoCode="fre">Tipos de eventos</Text>
+		</Message>
+		<Message id="gopttitle">
+			<Text LangIsoCode="eng">Title</Text>
+			<Text LangIsoCode="spa">Título</Text>
+			<Text LangIsoCode="por">Título</Text>
+			<Text LangIsoCode="fre">Titre</Text>
+		</Message>
+		<Message id="goptsubtit">
+			<Text LangIsoCode="eng">Subtitle</Text>
+			<Text LangIsoCode="spa">Subtítulo</Text>
+			<Text LangIsoCode="por">Subtítulo</Text>
+			<Text LangIsoCode="fre">Sous-titre</Text>
+		</Message>
+		<Message id="ghistogram">
+			<Text LangIsoCode="eng">Histogram</Text>
+			<Text LangIsoCode="spa">Histograma</Text>
+			<Text LangIsoCode="por">Histograma</Text>
+			<Text LangIsoCode="fre">Histogramme</Text>
+		</Message>
+		<Message id="gcomparative">
+			<Text LangIsoCode="eng">Comparative</Text>
+			<Text LangIsoCode="spa">Comparativo</Text>
+			<Text LangIsoCode="por">Comparativo</Text>
+			<Text LangIsoCode="fre">Comparatif</Text>
+		</Message>
+		<Message id="gseaday">
+			<Text LangIsoCode="eng">Days</Text>
+			<Text LangIsoCode="spa">Días</Text>
+			<Text LangIsoCode="por">Dias</Text>
+			<Text LangIsoCode="fre">Jours</Text>
+		</Message>
+		<Message id="gtendline">
+			<Text LangIsoCode="eng">Tendence line</Text>
+			<Text LangIsoCode="spa">Línea de tendencia</Text>
+			<Text LangIsoCode="por">Tendence line*</Text>
+			<Text LangIsoCode="fre">Ligne de tendance</Text>
+		</Message>
+		<Message id="glinearreg">
+			<Text LangIsoCode="eng">Linear regression</Text>
+			<Text LangIsoCode="spa">Regresión Lineal</Text>
+			<Text LangIsoCode="por">Linear regression*</Text>
+			<Text LangIsoCode="fre">Régression linéaire</Text>
+		</Message>
+		<Message id="GHISTOANNUAL">
+			<Text LangIsoCode="eng">Multi-annual histogram</Text>
+			<Text LangIsoCode="spa">Histograma multianual</Text>
+			<Text LangIsoCode="por">Histograma multi-anual</Text>
+			<Text LangIsoCode="fre">Histogramme multiannuel</Text>
+		</Message>
+		<Message id="gseaweek">
+			<Text LangIsoCode="eng">Weeks</Text>
+			<Text LangIsoCode="spa">Semanas</Text>
+			<Text LangIsoCode="por">Semanas</Text>
+			<Text LangIsoCode="fre">Semaines</Text>
+		</Message>
+		<Message id="gseamonth">
+			<Text LangIsoCode="eng">Months</Text>
+			<Text LangIsoCode="spa">Meses</Text>
+			<Text LangIsoCode="por">Meses</Text>
+			<Text LangIsoCode="fre">Mois</Text>
+		</Message>
+		<Message id="gperannual">
+			<Text LangIsoCode="eng">Yearly</Text>
+			<Text LangIsoCode="spa">Anual</Text>
+			<Text LangIsoCode="por">Anual</Text>
+			<Text LangIsoCode="fre">Annuel</Text>
+		</Message>
+		<Message id="gperweek">
+			<Text LangIsoCode="eng">Weekly</Text>
+			<Text LangIsoCode="spa">Semanal</Text>
+			<Text LangIsoCode="por">Semanal</Text>
+			<Text LangIsoCode="fre">Hebdomadaire</Text>
+		</Message>
+		<Message id="gpermonth">
+			<Text LangIsoCode="eng">Monthly</Text>
+			<Text LangIsoCode="spa">Mensual</Text>
+			<Text LangIsoCode="por">Mensal</Text>
+			<Text LangIsoCode="fre">Mensuel</Text>
+		</Message>
+		<Message id="gperday">
+			<Text LangIsoCode="eng">Daily</Text>
+			<Text LangIsoCode="spa">Diario</Text>
+			<Text LangIsoCode="por">Diário</Text>
+			<Text LangIsoCode="fre">Quotidien</Text>
+		</Message>
+		<Message id="gscalin">
+			<Text LangIsoCode="eng">Linear</Text>
+			<Text LangIsoCode="spa">Lineal</Text>
+			<Text LangIsoCode="por">Linear</Text>
+			<Text LangIsoCode="fre">Linéaire</Text>
+		</Message>
+		<Message id="gscalog">
+			<Text LangIsoCode="eng">Logarithm</Text>
+			<Text LangIsoCode="spa">Logarítmica</Text>
+			<Text LangIsoCode="por">Logarítmica</Text>
+			<Text LangIsoCode="fre">Logarithmique</Text>
+		</Message>
+		<Message id="gfee2d">
+			<Text LangIsoCode="eng">2D</Text>
+			<Text LangIsoCode="spa">2D</Text>
+			<Text LangIsoCode="por">2D</Text>
+			<Text LangIsoCode="fre">2D</Text>
+		</Message>
+		<Message id="gfee3d">
+			<Text LangIsoCode="eng">3D</Text>
+			<Text LangIsoCode="spa">3D</Text>
+			<Text LangIsoCode="por">3D</Text>
+			<Text LangIsoCode="fre">3D</Text>
+		</Message>
+		<Message id="gkndbars">
+			<Text LangIsoCode="eng">Bars</Text>
+			<Text LangIsoCode="spa">Barras</Text>
+			<Text LangIsoCode="por">Barras</Text>
+			<Text LangIsoCode="fre">Barres</Text>
+		</Message>
+		<Message id="gkndlines">
+			<Text LangIsoCode="eng">Lines</Text>
+			<Text LangIsoCode="spa">Líneas</Text>
+			<Text LangIsoCode="por">Linhas</Text>
+			<Text LangIsoCode="fre">Lignes</Text>
+		</Message>
+		<Message id="gkndpie">
+			<Text LangIsoCode="eng">Pie</Text>
+			<Text LangIsoCode="spa">Pastel</Text>
+			<Text LangIsoCode="por">Pizza</Text>
+			<Text LangIsoCode="fre">Gâteau</Text>
+		</Message>
+		<Message id="gmodnormal">
+			<Text LangIsoCode="eng">Normal</Text>
+			<Text LangIsoCode="spa">Normal</Text>
+			<Text LangIsoCode="por">Normal</Text>
+			<Text LangIsoCode="fre">Normal</Text>
+		</Message>
+		<Message id="gmodaccumul">
+			<Text LangIsoCode="eng">Accumulated</Text>
+			<Text LangIsoCode="spa">Acumulado</Text>
+			<Text LangIsoCode="por">Acumulado</Text>
+			<Text LangIsoCode="fre">Accumulé</Text>
+		</Message>
+		<Message id="gmodovercome">
+			<Text LangIsoCode="eng">Superimposed</Text>
+			<Text LangIsoCode="spa">Superpuesto</Text>
+			<Text LangIsoCode="por">Superposto</Text>
+			<Text LangIsoCode="fre">Superposé</Text>
+		</Message>
+		<Message id="gshwval">
+			<Text LangIsoCode="eng">Values</Text>
+			<Text LangIsoCode="spa">Valores</Text>
+			<Text LangIsoCode="por">Valores</Text>
+			<Text LangIsoCode="fre">Valeurs</Text>
+		</Message>
+		<Message id="gshwperce">
+			<Text LangIsoCode="eng">Percentage</Text>
+			<Text LangIsoCode="spa">Porcentaje</Text>
+			<Text LangIsoCode="por">Porcentagem</Text>
+			<Text LangIsoCode="fre">Pourcentage</Text>
+		</Message>
+		<Message id="gshwnone">
+			<Text LangIsoCode="eng">Deactivate</Text>
+			<Text LangIsoCode="spa">Desactivar</Text>
+			<Text LangIsoCode="por">Desativar</Text>
+			<Text LangIsoCode="fre">Désactiver</Text>
+		</Message>
+		<Message id="ghoraxis">
+			<Text LangIsoCode="eng">Horizontal axis</Text>
+			<Text LangIsoCode="spa">Eje horizontal</Text>
+			<Text LangIsoCode="por">Horizontal</Text>
+			<Text LangIsoCode="fre">Axe horizontal</Text>
+		</Message>
+		<Message id="gveraxis">
+			<Text LangIsoCode="eng">Vertical axis</Text>
+			<Text LangIsoCode="spa">Eje vertical</Text>
+			<Text LangIsoCode="por">Vertical</Text>
+			<Text LangIsoCode="fre">Axe vertical</Text>
+		</Message>
+		<Message id="mareaid">
+			<Text LangIsoCode="eng">Identification of areas</Text>
+			<Text LangIsoCode="spa">Identificación de Areas</Text>
+			<Text LangIsoCode="por">Identificação de áreas</Text>
+			<Text LangIsoCode="fre">Identification des Aires</Text>
+		</Message>
+		<Message id="mareashownam">
+			<Text LangIsoCode="eng">Show names</Text>
+			<Text LangIsoCode="spa">Mostrar nombres</Text>
+			<Text LangIsoCode="por">Mostrar nomes</Text>
+			<Text LangIsoCode="fre">Afficher des noms</Text>
+		</Message>
+		<Message id="mareashowcod">
+			<Text LangIsoCode="eng">Show codes</Text>
+			<Text LangIsoCode="spa">Mostrar códigos</Text>
+			<Text LangIsoCode="por">Mostrar códigos</Text>
+			<Text LangIsoCode="fre">Afficher des codes</Text>
+		</Message>
+		<Message id="mareashowval">
+			<Text LangIsoCode="eng">Show values</Text>
+			<Text LangIsoCode="spa">Mostrar valores</Text>
+			<Text LangIsoCode="por">Mostrar valores</Text>
+			<Text LangIsoCode="fre">Afficher des valeurs</Text>
+		</Message>
+		<Message id="mareanotshow">
+			<Text LangIsoCode="eng">Do not display identification</Text>
+			<Text LangIsoCode="spa">No mostrar identificación</Text>
+			<Text LangIsoCode="por">Não mostrar identificação</Text>
+			<Text LangIsoCode="fre">Ne pas afficher d&quot;identification</Text>
+		</Message>
+		<Message id="mranlegcol">
+			<Text LangIsoCode="eng">Legends and colors</Text>
+			<Text LangIsoCode="spa">Leyendas y colores</Text>
+			<Text LangIsoCode="por">Lendas e cores</Text>
+			<Text LangIsoCode="fre">Légendes et couleurs</Text>
+		</Message>
+		<Message id="mrange">
+			<Text LangIsoCode="eng">Define range</Text>
+			<Text LangIsoCode="spa">Límite rango</Text>
+			<Text LangIsoCode="por">Limite intervalo</Text>
+			<Text LangIsoCode="fre">Limite de préférences</Text>
+		</Message>
+		<Message id="mlegend">
+			<Text LangIsoCode="eng">Legend</Text>
+			<Text LangIsoCode="spa">Leyenda</Text>
+			<Text LangIsoCode="por">Legenda</Text>
+			<Text LangIsoCode="fre">Légende</Text>
+		</Message>
+		<Message id="mcolor">
+			<Text LangIsoCode="eng">Colour</Text>
+			<Text LangIsoCode="spa">Color</Text>
+			<Text LangIsoCode="por">Cor</Text>
+			<Text LangIsoCode="fre">Couleur</Text>
+		</Message>
+		<Message id="mbetween">
+			<Text LangIsoCode="eng">Between</Text>
+			<Text LangIsoCode="spa">Entre</Text>
+			<Text LangIsoCode="por">Entre</Text>
+			<Text LangIsoCode="fre">Entre</Text>
+		</Message>
+		<Message id="mrepreselev">
+			<Text LangIsoCode="eng">Level of representation</Text>
+			<Text LangIsoCode="spa">Nivel de representación</Text>
+			<Text LangIsoCode="por">Nível de representação</Text>
+			<Text LangIsoCode="fre">Niveau de représentation</Text>
+		</Message>
+		<Message id="mviewfields">
+			<Text LangIsoCode="eng">Variable to be represented</Text>
+			<Text LangIsoCode="spa">Variable a representar</Text>
+			<Text LangIsoCode="por">Variável a representar</Text>
+			<Text LangIsoCode="fre">Variable à représenter</Text>
+		</Message>
+		<Message id="mcolorgrad">
+			<Text LangIsoCode="eng">Color gradient</Text>
+			<Text LangIsoCode="spa">Gradiente de color</Text>
+			<Text LangIsoCode="por">Variação gradativa de core</Text>
+			<Text LangIsoCode="fre">Variation de couleur</Text>
+		</Message>
+		<Message id="mcoltransp">
+			<Text LangIsoCode="eng">Transparency</Text>
+			<Text LangIsoCode="spa">Transparencia</Text>
+			<Text LangIsoCode="por">Transparency</Text>
+			<Text LangIsoCode="fre">Transparence</Text>
+		</Message>
+		<Message id="savailfields">
+			<Text LangIsoCode="eng">Available fields</Text>
+			<Text LangIsoCode="spa">Campos disponibles</Text>
+			<Text LangIsoCode="por">Campos disponíveis</Text>
+			<Text LangIsoCode="fre">Champs disponibles</Text>
+		</Message>
+		<Message id="sviewfields">
+			<Text LangIsoCode="eng">Visible fields and order</Text>
+			<Text LangIsoCode="spa">Campos visibles y orden</Text>
+			<Text LangIsoCode="por">Campos visíveis e ordem</Text>
+			<Text LangIsoCode="fre">Champs visibles et ordre</Text>
+		</Message>
+		<Message id="sresxpage">
+			<Text LangIsoCode="eng">Results by page</Text>
+			<Text LangIsoCode="spa">Resultados por página</Text>
+			<Text LangIsoCode="por">Resultados por página</Text>
+			<Text LangIsoCode="fre">Résultats par page</Text>
+		</Message>
+		<Message id="stotallevels">
+			<Text LangIsoCode="eng">Select levels to be totalled</Text>
+			<Text LangIsoCode="spa">Seleccione los niveles de totalización</Text>
+			<Text LangIsoCode="por">Selecione os níveis de totalização</Text>
+			<Text LangIsoCode="fre">Sélectionnez les niveaux de totalisation</Text>
+		</Message>
+		<Message id="txtOrderBy">
+			<Text LangIsoCode="eng">Order by</Text>
+			<Text LangIsoCode="spa">Ordenar por</Text>
+			<Text LangIsoCode="por">Ordenar por</Text>
+			<Text LangIsoCode="fre">Ordonner par</Text>
+		</Message>
+		<Message id="txtOrderBySerial">
+			<Text LangIsoCode="eng">Serial</Text>
+			<Text LangIsoCode="spa">Serial</Text>
+			<Text LangIsoCode="por">Serial</Text>
+			<Text LangIsoCode="fre">Numéro de série</Text>
+		</Message>
+		<Message id="txtOrderByDateEventGeography">
+			<Text LangIsoCode="eng">Date/Event/Geography</Text>
+			<Text LangIsoCode="spa">Fecha/Evento/Geografía</Text>
+			<Text LangIsoCode="por">Data/Evento/Geografía</Text>
+			<Text LangIsoCode="fre">Date/Événement/Géographie</Text>
+		</Message>
+		<Message id="txtOrderByDateGeographyEvent">
+			<Text LangIsoCode="eng">Date/Geography/Event</Text>
+			<Text LangIsoCode="spa">Fecha/Geografía/Evento</Text>
+			<Text LangIsoCode="por">Data/Geografía/Evento</Text>
+			<Text LangIsoCode="fre">Date/Géographie/Événement</Text>
+		</Message>
+		<Message id="txtOrderByGeographyEventDate">
+			<Text LangIsoCode="eng">Geography/Event/Date</Text>
+			<Text LangIsoCode="spa">Geografía/Event/Fecha</Text>
+			<Text LangIsoCode="por">Geografía/Evento/Data</Text>
+			<Text LangIsoCode="fre">Géographie/Événement/Date</Text>
+		</Message>
+		<Message id="txtOrderByEventDateGeography">
+			<Text LangIsoCode="eng">Event/Date/Geography</Text>
+			<Text LangIsoCode="spa">Evento/Fecha/Geografía</Text>
+			<Text LangIsoCode="por">Evento/Data/Geografia</Text>
+			<Text LangIsoCode="fre">Événement/Date/Géographie</Text>
+		</Message>
+		<Message id="txtOrderByRecordCreation">
+			<Text LangIsoCode="eng">Record creation date</Text>
+			<Text LangIsoCode="spa">Fecha de creación</Text>
+			<Text LangIsoCode="por">Criação do registro</Text>
+			<Text LangIsoCode="fre">Création de la fiche</Text>
+		</Message>
+		<Message id="txtOrderByRecordUpdate">
+			<Text LangIsoCode="eng">Record update date</Text>
+			<Text LangIsoCode="spa">Fecha de actualización</Text>
+			<Text LangIsoCode="por">Atualização de registro</Text>
+			<Text LangIsoCode="fre">Date of mettre á jour</Text>
+		</Message>
+		<Message id="serrmsgfrm">
+			<Text LangIsoCode="eng">Choose a level to be totalled and at least one field to be visualised</Text>
+			<Text LangIsoCode="spa">Debe escoger un nivel de totalización y por lo menos un campo a visualizar</Text>
+			<Text LangIsoCode="por">Deve escolher um nível de totalização e pelo menos um campo para visualizar</Text>
+			<Text LangIsoCode="fre">Vous devez choisir un niveau de totalisation et au moins un champ à afficher</Text>
+		</Message>
+		<Message id="derrmsgfrm">
+			<Text LangIsoCode="eng">You must select at least one field</Text>
+			<Text LangIsoCode="spa">Debe seleccionar por lo menos un campo</Text>
+			<Text LangIsoCode="por">Deve selecionar pelo menos um campo</Text>
+			<Text LangIsoCode="fre">Vous devez sélectionner au moins un champ</Text>
+		</Message>
+		<Message id="balls">
+			<Text LangIsoCode="eng">All</Text>
+			<Text LangIsoCode="spa">Todos</Text>
+			<Text LangIsoCode="por">Todos</Text>
+			<Text LangIsoCode="fre">Tous</Text>
+		</Message>
+		<Message id="bnone">
+			<Text LangIsoCode="eng">Clear</Text>
+			<Text LangIsoCode="spa">Limpiar</Text>
+			<Text LangIsoCode="por">Limpar</Text>
+			<Text LangIsoCode="fre">Nettoyer</Text>
+		</Message>
+		<Message id="tand">
+			<Text LangIsoCode="eng">and</Text>
+			<Text LangIsoCode="spa">y</Text>
+			<Text LangIsoCode="por">e</Text>
+			<Text LangIsoCode="fre">et</Text>
+		</Message>
+		<Message id="tor">
+			<Text LangIsoCode="eng">or</Text>
+			<Text LangIsoCode="spa">o</Text>
+			<Text LangIsoCode="por">ou</Text>
+			<Text LangIsoCode="fre">ou</Text>
+		</Message>
+		<Message id="ttitegp">
+			<Text LangIsoCode="eng">Persons and property</Text>
+			<Text LangIsoCode="spa">Personas y bienes</Text>
+			<Text LangIsoCode="por">Pessoas e bens</Text>
+			<Text LangIsoCode="fre">Personnes et biens</Text>
+		</Message>
+		<Message id="ttiteis">
+			<Text LangIsoCode="eng">Sectors</Text>
+			<Text LangIsoCode="spa">Sectores</Text>
+			<Text LangIsoCode="por">Setores</Text>
+			<Text LangIsoCode="fre">Secteurs</Text>
+		</Message>
+		<Message id="ttitloss">
+			<Text LangIsoCode="eng">Economic Losses</Text>
+			<Text LangIsoCode="spa">Pérdidas Económicas</Text>
+			<Text LangIsoCode="por">As perdas econômicas</Text>
+			<Text LangIsoCode="fre">Pertes Économiques</Text>
+		</Message>
+		<Message id="tdate">
+			<Text LangIsoCode="eng">Range</Text>
+			<Text LangIsoCode="spa">Periodo</Text>
+			<Text LangIsoCode="por">Período</Text>
+			<Text LangIsoCode="fre">Période</Text>
+		</Message>
+		<Message id="ttitsince">
+			<Text LangIsoCode="eng">From</Text>
+			<Text LangIsoCode="spa">Desde</Text>
+			<Text LangIsoCode="por">Desde</Text>
+			<Text LangIsoCode="fre">Depuis</Text>
+		</Message>
+		<Message id="ttituntil">
+			<Text LangIsoCode="eng">To</Text>
+			<Text LangIsoCode="spa">Hasta</Text>
+			<Text LangIsoCode="por">Até</Text>
+			<Text LangIsoCode="fre">Jusqu&quot;à</Text>
+		</Message>
+		<Message id="tonly">
+			<Text LangIsoCode="eng">Only</Text>
+			<Text LangIsoCode="spa">Solamente</Text>
+			<Text LangIsoCode="por">Somente</Text>
+			<Text LangIsoCode="fre">Uniquement</Text>
+		</Message>
+		<Message id="texclude">
+			<Text LangIsoCode="eng">Exclude</Text>
+			<Text LangIsoCode="spa">Excluir</Text>
+			<Text LangIsoCode="por">Excluir</Text>
+			<Text LangIsoCode="fre">Exclure</Text>
+		</Message>
+		<Message id="tinclude">
+			<Text LangIsoCode="eng">Include</Text>
+			<Text LangIsoCode="spa">Incluir</Text>
+			<Text LangIsoCode="por">Incluir</Text>
+			<Text LangIsoCode="fre">Inclure</Text>
+		</Message>
+		<Message id="tclear">
+			<Text LangIsoCode="eng">Clear</Text>
+			<Text LangIsoCode="spa">Limpiar</Text>
+			<Text LangIsoCode="por">Limpar</Text>
+			<Text LangIsoCode="fre">Nettoyer</Text>
+		</Message>
+		<Message id="tsend">
+			<Text LangIsoCode="eng">Generate</Text>
+			<Text LangIsoCode="spa">Generar</Text>
+			<Text LangIsoCode="por">Gerar</Text>
+			<Text LangIsoCode="fre">Générer</Text>
+		</Message>
+		<Message id="tclose">
+			<Text LangIsoCode="eng">Close</Text>
+			<Text LangIsoCode="spa">Cerrar</Text>
+			<Text LangIsoCode="por">Fechar</Text>
+			<Text LangIsoCode="fre">Fermer</Text>
+		</Message>
+		<Message id="tmguidedef">
+			<Text LangIsoCode="eng">Definition</Text>
+			<Text LangIsoCode="spa">Definición</Text>
+			<Text LangIsoCode="por">Definição</Text>
+			<Text LangIsoCode="fre">Définition</Text>
+		</Message>
+		<Message id="hmoreinfo">
+			<Text LangIsoCode="eng">Methodological guide</Text>
+			<Text LangIsoCode="spa">Guía metodológica</Text>
+			<Text LangIsoCode="por">Ver Guia metodológico</Text>
+			<Text LangIsoCode="fre">Guide méthodologique</Text>
+		</Message>
+		<Message id="tdescinfo">
+			<Text LangIsoCode="eng">Click on the field to see a description of the element</Text>
+			<Text LangIsoCode="spa">De click en el campo deseado para ver la descripción de dicho elemento</Text>
+			<Text LangIsoCode="por">Selecione no campo desejado para ver a descrição</Text>
+			<Text LangIsoCode="fre">Cliquez sur le champ souhaité pour voir la description de cet élément</Text>
+		</Message>
+		<Message id="tcntclick">
+			<Text LangIsoCode="eng">Ctrl+Click for multiple selection or de-selection</Text>
+			<Text LangIsoCode="spa">Ctrl Click para selección múltiple o deseleccionar</Text>
+			<Text LangIsoCode="por">Ctrl + Click para seleção múltiple ou desmarcar</Text>
+			<Text LangIsoCode="fre">Ctrl Clic pour une sélection multiple ou pour désélectionner</Text>
+		</Message>
+		<Message id="tauxhave">
+			<Text LangIsoCode="eng">There is/are</Text>
+			<Text LangIsoCode="spa">Hay</Text>
+			<Text LangIsoCode="por">Há</Text>
+			<Text LangIsoCode="fre">Existence</Text>
+		</Message>
+		<Message id="tauxaffect">
+			<Text LangIsoCode="eng">Affected</Text>
+			<Text LangIsoCode="spa">Afectó</Text>
+			<Text LangIsoCode="por">Afetou</Text>
+			<Text LangIsoCode="fre">Affectation</Text>
+		</Message>
+		<Message id="trepnum">
+			<Text LangIsoCode="eng">Records</Text>
+			<Text LangIsoCode="spa">Número de fichas</Text>
+			<Text LangIsoCode="por">Formulários</Text>
+			<Text LangIsoCode="fre">Données</Text>
+		</Message>
+		<Message id="tabout">
+			<Text LangIsoCode="eng">E-Mail desinventar@desinventar.org</Text>
+			<Text LangIsoCode="spa">Correo electrónico: desinventar@desinventar.org</Text>
+			<Text LangIsoCode="por">Email: desinventar@desinventar.org</Text>
+			<Text LangIsoCode="fre">Courrier électronique: désinventer@désinventer.org</Text>
+		</Message>
+		<Message id="tserialmsg">
+			<Text LangIsoCode="eng">May include or exclude one or several serials. Serials should be separated by spaces.</Text>
+			<Text LangIsoCode="spa">Puede incluir o excluir uno o varios seriales. Los seriales debe separarlos por espacios</Text>
+			<Text LangIsoCode="por">Pode incluir ou excluir um ou vários seriais. Os seriais devem ser separados com espaços</Text>
+			<Text LangIsoCode="fre">Peut inclure ou exclure un ou plusieurs numéros de série. Les numéros de série doivent être séparés par des espaces</Text>
+		</Message>
+		<Message id="tserial">
+			<Text LangIsoCode="eng">Serials</Text>
+			<Text LangIsoCode="spa">Seriales</Text>
+			<Text LangIsoCode="por">Seriais</Text>
+			<Text LangIsoCode="fre">Numéros de série</Text>
+		</Message>
+		<Message id="tdcstatus">
+			<Text LangIsoCode="eng">Data card Status</Text>
+			<Text LangIsoCode="spa">Estado de ficha</Text>
+			<Text LangIsoCode="por">Estado de formulário</Text>
+			<Text LangIsoCode="fre">État de la carte de données</Text>
+		</Message>
+		<Message id="tdcpublished">
+			<Text LangIsoCode="eng">Published</Text>
+			<Text LangIsoCode="spa">Publicada</Text>
+			<Text LangIsoCode="por">Publicado</Text>
+			<Text LangIsoCode="fre">Publiée</Text>
+		</Message>
+		<Message id="tdcready">
+			<Text LangIsoCode="eng">To aprove</Text>
+			<Text LangIsoCode="spa">Por aprobar</Text>
+			<Text LangIsoCode="por">Por aprovar</Text>
+			<Text LangIsoCode="fre">En cours d&quot;approbation</Text>
+		</Message>
+		<Message id="tdcdraft">
+			<Text LangIsoCode="eng">Draft</Text>
+			<Text LangIsoCode="spa">Borrador</Text>
+			<Text LangIsoCode="por">Rascunho</Text>
+			<Text LangIsoCode="fre">Projet</Text>
+		</Message>
+		<Message id="tdctrash">
+			<Text LangIsoCode="eng">To delete</Text>
+			<Text LangIsoCode="spa">Para eliminar</Text>
+			<Text LangIsoCode="por">Para eliminar</Text>
+			<Text LangIsoCode="fre">À éliminer</Text>
+		</Message>
+		<Message id="tdcdeleted">
+			<Text LangIsoCode="eng">Deleted</Text>
+			<Text LangIsoCode="spa">Eliminadas</Text>
+			<Text LangIsoCode="por">Excluída</Text>
+			<Text LangIsoCode="fre">Supprimé</Text>
+		</Message>
+		<Message id="tdateformat">
+			<Text LangIsoCode="eng">Date format YYYY MM DD</Text>
+			<Text LangIsoCode="spa">Formato AAAA MM DD</Text>
+			<Text LangIsoCode="por">Formato AAAA MM DD</Text>
+			<Text LangIsoCode="fre">Format AAAA MM DD</Text>
+		</Message>
+		<Message id="thlpquery">
+			<Text LangIsoCode="eng">significa que consultará toda la base de datos</Text>
+			<Text LangIsoCode="spa">Si no selecciona nada</Text>
+			<Text LangIsoCode="por">If you do not select any option</Text>
+			<Text LangIsoCode="fre">significa que consultará toda la base de datos</Text>
+		</Message>
+		<Message id="teffhav">
+			<Text LangIsoCode="eng">There were</Text>
+			<Text LangIsoCode="spa">Hubo</Text>
+			<Text LangIsoCode="por">Houve</Text>
+			<Text LangIsoCode="fre">Il y en a eu</Text>
+		</Message>
+		<Message id="teffhavnot">
+			<Text LangIsoCode="eng">There weren&quot;t any</Text>
+			<Text LangIsoCode="spa">No hubo</Text>
+			<Text LangIsoCode="por">Não houve</Text>
+			<Text LangIsoCode="fre">Il n&quot;y en a pas eu</Text>
+		</Message>
+		<Message id="teffdontknow">
+			<Text LangIsoCode="eng">Don&quot;t know</Text>
+			<Text LangIsoCode="spa">No sabe</Text>
+			<Text LangIsoCode="por">Não sabe</Text>
+			<Text LangIsoCode="fre">Ne sait pas</Text>
+		</Message>
+		<Message id="teffmajor">
+			<Text LangIsoCode="eng">Greater than or equal to</Text>
+			<Text LangIsoCode="spa">Mayor o igual a</Text>
+			<Text LangIsoCode="por">Maior ou igual a</Text>
+			<Text LangIsoCode="fre">Supérieur ou égal à</Text>
+		</Message>
+		<Message id="teffminor">
+			<Text LangIsoCode="eng">Less than or equal to</Text>
+			<Text LangIsoCode="spa">Menor o igual a</Text>
+			<Text LangIsoCode="por">Menor ou igual a</Text>
+			<Text LangIsoCode="fre">Inférieur ou égal à </Text>
+		</Message>
+		<Message id="teffequal">
+			<Text LangIsoCode="eng">Equal to</Text>
+			<Text LangIsoCode="spa">Igual a</Text>
+			<Text LangIsoCode="por">Igual a</Text>
+			<Text LangIsoCode="fre">Égal à</Text>
+		</Message>
+		<Message id="teffbetween">
+			<Text LangIsoCode="eng">Between</Text>
+			<Text LangIsoCode="spa">Entre</Text>
+			<Text LangIsoCode="por">Entre</Text>
+			<Text LangIsoCode="fre">Entre</Text>
+		</Message>
+		<Message id="tlike">
+			<Text LangIsoCode="eng">Like</Text>
+			<Text LangIsoCode="spa">Expresión</Text>
+			<Text LangIsoCode="por">Like*</Text>
+			<Text LangIsoCode="fre">Expression</Text>
+		</Message>
+		<Message id="tadvqryhelp">
+			<Text LangIsoCode="eng">Select field follow of operator and value</Text>
+			<Text LangIsoCode="spa">Seleccione un campo seguido de un operador y el valor correspondiente</Text>
+			<Text LangIsoCode="por">Select field follow of operator and value*</Text>
+			<Text LangIsoCode="fre">Sélectionnez un champ suivi d&quot;un opérateur et de la valeur correspondante</Text>
+		</Message>
+		<Message id="taqlessthan">
+			<Text LangIsoCode="eng">Find cards with values menores al especificado: ej. fecha inicio &lt; 1920 o Muertos &lt; 10</Text>
+			<Text LangIsoCode="spa">Busca fichas con valores menores al especificado: ej. fecha inicio &lt; 1920 o Muertos &lt; 10</Text>
+			<Text LangIsoCode="por">Find cards with values menores al especificado: ej. fecha inicio &lt; 1920 o Muertos &lt; 10</Text>
+			<Text LangIsoCode="fre">Recherche de cartes de données ayant des valeurs inférieures à la valeur spécifiée. Ex.: date début &lt; 1920 ou Morts &lt; 10</Text>
+		</Message>
+		<Message id="taqgreathan">
+			<Text LangIsoCode="eng">Find cards with values  mayores al especificado: ej. fecha inicio &gt; 1999 o Damnificados &gt; 1000</Text>
+			<Text LangIsoCode="spa">Busca fichas con valores mayores al especificado: ej. fecha inicio &gt; 1999 o Damnificados &gt; 1000</Text>
+			<Text LangIsoCode="por">Find cards with values  mayores al especificado: ej. fecha inicio &gt; 1999 o Damnificados &gt; 1000</Text>
+			<Text LangIsoCode="fre">Recherche de cartes de données d&quot;une valeur supérieure à la valeur spécifiée. Ex.: date début&gt; 1999 o Sinistrés &gt; 1000</Text>
+		</Message>
+		<Message id="taqequalto">
+			<Text LangIsoCode="eng">Find cards with values exactamente igual al especificado: ej. fecha inicio</Text>
+			<Text LangIsoCode="spa">Busca fichas con valores exactamente igual al especificado: ej. fecha inicio</Text>
+			<Text LangIsoCode="por">Find cards with values exactamente igual al especificado: ej. fecha inicio</Text>
+			<Text LangIsoCode="fre">Recherche de cartes de données d&quot;une valeur exactement égale à la valeur spécifiée: ex.: date début</Text>
+		</Message>
+		<Message id="taqnoteqto">
+			<Text LangIsoCode="eng">Find cards with values  diferentes al especificado: ej. Muertos &lt;&gt; 10</Text>
+			<Text LangIsoCode="spa">Busca fichas con valores diferentes al especificado: ej. Muertos &lt;&gt; 10</Text>
+			<Text LangIsoCode="por">Find cards with values  diferentes al especificado: ej. Muertos &lt;&gt; 10*</Text>
+			<Text LangIsoCode="fre">Recherche de cartes de données ayant des valeurs différentes à la valeur spécifiée: ex.: Morts &lt;&gt; 10 </Text>
+		</Message>
+		<Message id="taqlike">
+			<Text LangIsoCode="eng">Find a word or phrase in the text fields. i.e. Sitio LIKE \&quot;%cauca%\&quot; or Fuente LIKE \&quot;%comercio%\&quot;</Text>
+			<Text LangIsoCode="spa">Busca una palabra o frase dentro de los campos de texto. Por ejemplo: Sitio LIKE \&quot;%cauca%\&quot; o Fuente LIKE \&quot;%comercio%\&quot;</Text>
+			<Text LangIsoCode="por">Encontre uma palavra ou frase nos campos de texto. Por exemplo: Sitio LIKE \&quot;%cauca%\&quot;* ou Fuente LIKE \&quot;%comercio%\&quot;</Text>
+			<Text LangIsoCode="fre">Recherche d&quot;un mot ou d&quot;une phrase dans les champs de texte: Par exemple: Site LIKE\&quot;%cauca%\&quot; ou Source LIKE \&quot;%commerce%\&quot;</Text>
+		</Message>
+		<Message id="taqwere">
+			<Text LangIsoCode="eng">Find cards where there were ocurrence of effect or affect the sector.</Text>
+			<Text LangIsoCode="spa">Busca fichas donde hubo ocurrencia del efecto o afectó el sector.</Text>
+			<Text LangIsoCode="por">Find cards where there were ocurrence of effect or affect the sector.*</Text>
+			<Text LangIsoCode="fre">Recherche de cartes de données où l&quot;effet s&quot;est présenté ou il a affecté le secteur</Text>
+		</Message>
+		<Message id="taqwerent">
+			<Text LangIsoCode="eng">Find cards where there were not ocurrence of effect or not affect the sector.</Text>
+			<Text LangIsoCode="spa">Busca fichas donde NO hubo ocurrencia del efecto o NO afectó el sector.</Text>
+			<Text LangIsoCode="por">Find cards where there were not ocurrence of effect or not affect the sector.*</Text>
+			<Text LangIsoCode="fre">Recherche de cartes de données où l&quot;effet ne s&quot;est pas produit ou il n&quot;a pas affecté le secteur</Text>
+		</Message>
+		<Message id="taqdntknow">
+			<Text LangIsoCode="eng">Find cards where where donot know if there were or not of effect or affect the sector.</Text>
+			<Text LangIsoCode="spa">Busca fichas donde NO se sabe si hubo o nó efectos o afectación del sector.</Text>
+			<Text LangIsoCode="por">Find cards where where donot know if there were or not of effect or affect the sector.*</Text>
+			<Text LangIsoCode="fre">Recherche de cartes de données où l&quot;on ne sait pas si des effets se sont présentés ou non</Text>
+		</Message>
+		<Message id="taqandopt">
+			<Text LangIsoCode="eng">Find cards than apply true condition of TWO connected elements.</Text>
+			<Text LangIsoCode="spa">Busca fichas que cumplen la condición de verdad de los elementos conectados.</Text>
+			<Text LangIsoCode="por">Find cards than apply true condition of TWO connected elements.*</Text>
+			<Text LangIsoCode="fre">Recherche de cartes de données satisfaisant à la condition de vérité des éléments connectés</Text>
+		</Message>
+		<Message id="taqoropt">
+			<Text LangIsoCode="eng">Find cards than apply true condition of someone or both connected elements.</Text>
+			<Text LangIsoCode="spa">Busca fichas que cumplen la condición de verdad de alguno o ambos elementos conectados.</Text>
+			<Text LangIsoCode="por">Find cards than apply true condition of someone or both connected elements.*</Text>
+			<Text LangIsoCode="fre">Recherche de cartes de données satisfaisant à la condition de vérité d&quot;un ou des deux éléments connectés</Text>
+		</Message>
+	</Group>
+	<Group name="dc_qdetails">
+		<Message id="geo">
+			<Text LangIsoCode="eng">Geography</Text>
+			<Text LangIsoCode="spa">Geografía</Text>
+			<Text LangIsoCode="por">Geografia</Text>
+			<Text LangIsoCode="fre">Géographie</Text>
+		</Message>
+		<Message id="eve">
+			<Text LangIsoCode="eng">Type of events</Text>
+			<Text LangIsoCode="spa">Tipos de eventos</Text>
+			<Text LangIsoCode="por">Tipos de eventos</Text>
+			<Text LangIsoCode="fre">Types d&quot;évènements</Text>
+		</Message>
+		<Message id="cau">
+			<Text LangIsoCode="eng">Type of causes</Text>
+			<Text LangIsoCode="spa">Tipos de causas</Text>
+			<Text LangIsoCode="por">Tipos de causas</Text>
+			<Text LangIsoCode="fre">Types de causes</Text>
+		</Message>
+		<Message id="eff">
+			<Text LangIsoCode="eng">Effects</Text>
+			<Text LangIsoCode="spa">Efectos</Text>
+			<Text LangIsoCode="por">Efeitos</Text>
+			<Text LangIsoCode="fre">Effets</Text>
+		</Message>
+		<Message id="beg">
+			<Text LangIsoCode="eng">Since</Text>
+			<Text LangIsoCode="spa">Desde</Text>
+			<Text LangIsoCode="por">Desde</Text>
+			<Text LangIsoCode="fre">Depuis</Text>
+		</Message>
+		<Message id="end">
+			<Text LangIsoCode="eng">Until</Text>
+			<Text LangIsoCode="spa">Hasta</Text>
+			<Text LangIsoCode="por">Até</Text>
+			<Text LangIsoCode="fre">Jusqu&quot;à</Text>
+		</Message>
+		<Message id="sou">
+			<Text LangIsoCode="eng">Data sources</Text>
+			<Text LangIsoCode="spa">Fuente</Text>
+			<Text LangIsoCode="por">Fonte</Text>
+			<Text LangIsoCode="fre">Source</Text>
+		</Message>
+		<Message id="ser">
+			<Text LangIsoCode="eng">Serials</Text>
+			<Text LangIsoCode="spa">Seriales</Text>
+			<Text LangIsoCode="por">Seriais</Text>
+			<Text LangIsoCode="fre">Numéros de série</Text>
+		</Message>
+	</Group>
+	<Group name="dc_data">
+		<Message id="ttitle">
+			<Text LangIsoCode="eng">Data</Text>
+			<Text LangIsoCode="spa">Datos</Text>
+			<Text LangIsoCode="por">Dados</Text>
+			<Text LangIsoCode="fre">Données</Text>
+		</Message>
+		<Message id="tpage">
+			<Text LangIsoCode="eng">Pages:</Text>
+			<Text LangIsoCode="spa">Páginas:</Text>
+			<Text LangIsoCode="por">Páginas:</Text>
+			<Text LangIsoCode="fre">Pages:</Text>
+		</Message>
+		<Message id="tnumof">
+			<Text LangIsoCode="eng">From</Text>
+			<Text LangIsoCode="spa">de</Text>
+			<Text LangIsoCode="por">de</Text>
+			<Text LangIsoCode="fre">de</Text>
+		</Message>
+		<Message id="trepnum">
+			<Text LangIsoCode="eng">Records</Text>
+			<Text LangIsoCode="spa">Fichas</Text>
+			<Text LangIsoCode="por">Formulários</Text>
+			<Text LangIsoCode="fre">Données</Text>
+		</Message>
+		<Message id="trow">
+			<Text LangIsoCode="eng">Row</Text>
+			<Text LangIsoCode="spa">Fila</Text>
+			<Text LangIsoCode="por">Fila</Text>
+			<Text LangIsoCode="fre">Ligne</Text>
+		</Message>
+	</Group>
+	<Group name="dc_thematicmap">
+		<Message id="ttitle">
+			<Text LangIsoCode="eng">Methodological guide summarize</Text>
+			<Text LangIsoCode="spa">Mapa temático</Text>
+			<Text LangIsoCode="por">Resumo Guia metodológico</Text>
+			<Text LangIsoCode="fre">Résumé Guide méthodologique</Text>
+		</Message>
+		<Message id="tmapof">
+			<Text LangIsoCode="eng">Map of</Text>
+			<Text LangIsoCode="spa">Mapa de</Text>
+			<Text LangIsoCode="por">Mapa de</Text>
+			<Text LangIsoCode="fre">Carte de</Text>
+		</Message>
+		<Message id="tdrawpoint">
+			<Text LangIsoCode="eng">Points and polygons</Text>
+			<Text LangIsoCode="spa">Puntos y polígonos</Text>
+			<Text LangIsoCode="por">Pontos e polígonos</Text>
+			<Text LangIsoCode="fre">Points et polygones</Text>
+		</Message>
+		<Message id="trepnum">
+			<Text LangIsoCode="eng">Records</Text>
+			<Text LangIsoCode="spa">Número de fichas</Text>
+			<Text LangIsoCode="por">Formulários</Text>
+			<Text LangIsoCode="fre">Cartes de données</Text>
+		</Message>
+		<Message id="tgetgearth">
+			<Text LangIsoCode="eng">View in GoogleEarth</Text>
+			<Text LangIsoCode="spa">Ver en GoogleEarth</Text>
+			<Text LangIsoCode="por">Ver em GoogleEarth</Text>
+			<Text LangIsoCode="fre">Voir dans GoogleEarth</Text>
+		</Message>
+		<Message id="lev">
+			<Text LangIsoCode="eng">Level</Text>
+			<Text LangIsoCode="spa">Nivel</Text>
+			<Text LangIsoCode="por">Nível</Text>
+			<Text LangIsoCode="fre">Niveau</Text>
+		</Message>
+		<Message id="msgMapNoData">
+			<Text LangIsoCode="eng">No data</Text>
+			<Text LangIsoCode="spa">Sin datos</Text>
+			<Text LangIsoCode="por">Sem dados</Text>
+			<Text LangIsoCode="fre">Sans aucune donnée</Text>
+		</Message>
+	</Group>
+	<Group name="dc_graphic">
+		<Message id="ttitle">
+			<Text LangIsoCode="eng">Methodological guide summarize</Text>
+			<Text LangIsoCode="spa">Gráficos</Text>
+			<Text LangIsoCode="por">Resumo Guia metodológico</Text>
+			<Text LangIsoCode="fre">Résumé Guide méthodologique</Text>
+		</Message>
+		<Message id="trepnum">
+			<Text LangIsoCode="eng">Records</Text>
+			<Text LangIsoCode="spa">Número de fichas</Text>
+			<Text LangIsoCode="por">Formulários</Text>
+			<Text LangIsoCode="fre">Cartes de données</Text>
+		</Message>
+		<Message id="tnodata">
+			<Text LangIsoCode="eng">No data</Text>
+			<Text LangIsoCode="spa">Sin datos</Text>
+			<Text LangIsoCode="por">Sem dados</Text>
+			<Text LangIsoCode="fre">Sans aucune donnée</Text>
+		</Message>
+	</Group>
+	<Group name="dc_statistic">
+		<Message id="ttitle">
+			<Text LangIsoCode="eng">Methodological guide summarize</Text>
+			<Text LangIsoCode="spa">Consolidados</Text>
+			<Text LangIsoCode="por">Resumo Guia metodológico</Text>
+			<Text LangIsoCode="fre">Résumé Guide méthodologique</Text>
+		</Message>
+		<Message id="tpage">
+			<Text LangIsoCode="eng">Pages:</Text>
+			<Text LangIsoCode="spa">Páginas:</Text>
+			<Text LangIsoCode="por">Páginas:</Text>
+			<Text LangIsoCode="fre">Pages:</Text>
+		</Message>
+		<Message id="tnumof">
+			<Text LangIsoCode="eng">From</Text>
+			<Text LangIsoCode="spa">de</Text>
+			<Text LangIsoCode="por">de</Text>
+			<Text LangIsoCode="fre">de</Text>
+		</Message>
+		<Message id="trepnum">
+			<Text LangIsoCode="eng">Records</Text>
+			<Text LangIsoCode="spa">Fichas</Text>
+			<Text LangIsoCode="por">Formulários</Text>
+			<Text LangIsoCode="fre">Cartes de données</Text>
+		</Message>
+		<Message id="tsumnum">
+			<Text LangIsoCode="eng">Number of consolidated</Text>
+			<Text LangIsoCode="spa">Número de consolidados</Text>
+			<Text LangIsoCode="por">Número de consolidados</Text>
+			<Text LangIsoCode="fre">Nombre de consolidés</Text>
+		</Message>
+		<Message id="ttotals">
+			<Text LangIsoCode="eng">Totals</Text>
+			<Text LangIsoCode="spa">Totales</Text>
+			<Text LangIsoCode="por">Totais</Text>
+			<Text LangIsoCode="fre">Totaux</Text>
+		</Message>
+		<Message id="trow">
+			<Text LangIsoCode="eng">Row</Text>
+			<Text LangIsoCode="spa">Fila</Text>
+			<Text LangIsoCode="por">Fila</Text>
+			<Text LangIsoCode="fre">Ligne</Text>
+		</Message>
+	</Group>
+	<Group name="di_doc">
+		<Message id="ttitle">
+			<Text LangIsoCode="eng">Methodological guide summarize</Text>
+			<Text LangIsoCode="spa">Resumen Guía metodológica</Text>
+			<Text LangIsoCode="por">Resumo Guia metodológico</Text>
+			<Text LangIsoCode="fre">Résumé Guide méthodologique</Text>
+		</Message>
+		<Message id="tintro">
+			<Text LangIsoCode="eng">Introduction</Text>
+			<Text LangIsoCode="spa">Introducción</Text>
+			<Text LangIsoCode="por">Introdução</Text>
+			<Text LangIsoCode="fre">Introduction</Text>
+		</Message>
+		<Message id="twhatis">
+			<Text LangIsoCode="eng">What is DesInventar</Text>
+			<Text LangIsoCode="spa">Que es DesInventar</Text>
+			<Text LangIsoCode="por">O que é DesInventar?</Text>
+			<Text LangIsoCode="fre">Que signifie DésInventer</Text>
+		</Message>
+		<Message id="tgenpres">
+			<Text LangIsoCode="eng">General Presentation</Text>
+			<Text LangIsoCode="spa">Presentación General</Text>
+			<Text LangIsoCode="por">Apresentação Geral</Text>
+			<Text LangIsoCode="fre">Présentation Générale</Text>
+		</Message>
+		<Message id="tregion">
+			<Text LangIsoCode="eng">Region</Text>
+			<Text LangIsoCode="spa">Región</Text>
+			<Text LangIsoCode="por">Região</Text>
+			<Text LangIsoCode="fre">Région</Text>
+		</Message>
+		<Message id="tgeography">
+			<Text LangIsoCode="eng">Geography</Text>
+			<Text LangIsoCode="spa">Geografía</Text>
+			<Text LangIsoCode="por">Geografia</Text>
+			<Text LangIsoCode="fre">Géographie</Text>
+		</Message>
+		<Message id="tevents">
+			<Text LangIsoCode="eng">Type of events</Text>
+			<Text LangIsoCode="spa">Tipos de eventos</Text>
+			<Text LangIsoCode="por">Tipos de eventos</Text>
+			<Text LangIsoCode="fre">Types d&quot;évènements</Text>
+		</Message>
+		<Message id="tcauses">
+			<Text LangIsoCode="eng">Type of causes</Text>
+			<Text LangIsoCode="spa">Tipos de causas</Text>
+			<Text LangIsoCode="por">Tipos de causas</Text>
+			<Text LangIsoCode="fre">Types de causes</Text>
+		</Message>
+		<Message id="textraeff">
+			<Text LangIsoCode="eng">Additional Effects</Text>
+			<Text LangIsoCode="spa">Efectos Adicionales</Text>
+			<Text LangIsoCode="por">Efeitos Adicionais</Text>
+			<Text LangIsoCode="fre">Effets Additionnels</Text>
+		</Message>
+		<Message id="tdatacards">
+			<Text LangIsoCode="eng">Data cards</Text>
+			<Text LangIsoCode="spa">Fichas</Text>
+			<Text LangIsoCode="por">Formulários</Text>
+			<Text LangIsoCode="fre">Données</Text>
+		</Message>
+		<Message id="treferences">
+			<Text LangIsoCode="eng">References</Text>
+			<Text LangIsoCode="spa">Referencias</Text>
+			<Text LangIsoCode="por">Referências</Text>
+			<Text LangIsoCode="fre">Références</Text>
+		</Message>
+		<Message id="thlptitle">
+			<Text LangIsoCode="eng">Introduction to DesInventar</Text>
+			<Text LangIsoCode="spa">Introducción a DesInventar</Text>
+			<Text LangIsoCode="por">Introdução a DesInventar</Text>
+			<Text LangIsoCode="fre">Introduction à Désinventer</Text>
+		</Message>
+		<Message id="thlpintro">
+			<Text LangIsoCode="eng">Introduction</Text>
+			<Text LangIsoCode="spa">Introducción</Text>
+			<Text LangIsoCode="por">Introdução</Text>
+			<Text LangIsoCode="fre">Introduction</Text>
+		</Message>
+		<Message id="thlpportal">
+			<Text LangIsoCode="eng">DesInventar portal</Text>
+			<Text LangIsoCode="spa">Portal DesInventar</Text>
+			<Text LangIsoCode="por">Portal DesInventar</Text>
+			<Text LangIsoCode="fre">Portail DésInventer</Text>
+		</Message>
+		<Message id="thlppordemo">
+			<Text LangIsoCode="eng">Demo Portal</Text>
+			<Text LangIsoCode="spa">Demo Portal</Text>
+			<Text LangIsoCode="por">Demo Portal</Text>
+			<Text LangIsoCode="fre">Démonstration Portail</Text>
+		</Message>
+		<Message id="thlpdimod">
+			<Text LangIsoCode="eng">DesInventar module</Text>
+			<Text LangIsoCode="spa">Módulo DesInventar</Text>
+			<Text LangIsoCode="por">Módulo DesInventar</Text>
+			<Text LangIsoCode="fre">Module DésInventer</Text>
+		</Message>
+		<Message id="thlpdcmod">
+			<Text LangIsoCode="eng">DesConsultar module</Text>
+			<Text LangIsoCode="spa">Módulo DesConsultar</Text>
+			<Text LangIsoCode="por">Módulo DesConsultar</Text>
+			<Text LangIsoCode="fre">Module Déconsulter</Text>
+		</Message>
+		<Message id="thlpdemreg">
+			<Text LangIsoCode="eng">Demo Region</Text>
+			<Text LangIsoCode="spa">Demo Región</Text>
+			<Text LangIsoCode="por">Demo Região</Text>
+			<Text LangIsoCode="fre">Démonstration Région</Text>
+		</Message>
+		<Message id="thlpdemgeo">
+			<Text LangIsoCode="eng">Demo Geography</Text>
+			<Text LangIsoCode="spa">Demo Geografía</Text>
+			<Text LangIsoCode="por">Demo Geografia</Text>
+			<Text LangIsoCode="fre">Démonstration Géographie</Text>
+		</Message>
+		<Message id="thlpdemeve">
+			<Text LangIsoCode="eng">Demo Events</Text>
+			<Text LangIsoCode="spa">Demo Eventos</Text>
+			<Text LangIsoCode="por">Demo Eventos</Text>
+			<Text LangIsoCode="fre">Démonstration Évènements</Text>
+		</Message>
+		<Message id="thlpdemcau">
+			<Text LangIsoCode="eng">Demo Causes</Text>
+			<Text LangIsoCode="spa">Demo Causas</Text>
+			<Text LangIsoCode="por">Demo Causas</Text>
+			<Text LangIsoCode="fre">Démonstration Causes</Text>
+		</Message>
+		<Message id="thlpdemdc">
+			<Text LangIsoCode="eng">Demo Data cards</Text>
+			<Text LangIsoCode="spa">Demo Fichas</Text>
+			<Text LangIsoCode="por">Demo Formulários</Text>
+			<Text LangIsoCode="fre">Démonstration cartes de données</Text>
+		</Message>
+	</Group>
+	<Group name="di8_DBBackup">
+		<Message id="msgDBBackupTitle">
+			<Text LangIsoCode="eng">Create Region Backup</Text>
+			<Text LangIsoCode="spa">Realizar Copia de Seguridad</Text>
+			<Text LangIsoCode="por">Criar um backup do banco de dados</Text>
+			<Text LangIsoCode="fre">Créer des sauvegardes de bases</Text>
+		</Message>
+		<Message id="msgDBBackupComplete">
+			<Text LangIsoCode="eng">Backup has been created and can be downloaded now.</Text>
+			<Text LangIsoCode="spa">La copia ha sido realizada puede descargarla.</Text>
+			<Text LangIsoCode="por">Backup foi criado e pode ser baixado agora.</Text>
+			<Text LangIsoCode="fre">Backup a été crée et peut être téléchargé dès maintenant.</Text>
+		</Message>
+		<Message id="msgDBBackupParameters">
+			<Text LangIsoCode="eng">Press button to start or repeat backup.</Text>
+			<Text LangIsoCode="spa">Presione el botón para iniciar o repetir la copia de seguridad.</Text>
+			<Text LangIsoCode="por">Pressione a botão para iniciar ou repetir backup</Text>
+			<Text LangIsoCode="fre">Cliquez sur le bouton pour démarrer ou reprendre sauvegarde.</Text>
+		</Message>
+		<Message id="msgDBBackupButton">
+			<Text LangIsoCode="eng">Create Backup</Text>
+			<Text LangIsoCode="spa">Crear Copia</Text>
+			<Text LangIsoCode="por">Criar backup</Text>
+			<Text LangIsoCode="fre">Créer une sauvegarde</Text>
+		</Message>
+		<Message id="msgDBBackupWaiting">
+			<Text LangIsoCode="eng">Please wait while the backup is performed.</Text>
+			<Text LangIsoCode="spa">Por favor espere mientras se realiza la copia de seguridad.</Text>
+			<Text LangIsoCode="por">Por favor aguarde enquanto o backup é realizado</Text>
+			<Text LangIsoCode="fre">S&quot;il vous plaît patienter pendant que la sauvegarde est effectuée</Text>
+		</Message>
+		<Message id="msgDBBackupError">
+			<Text LangIsoCode="eng">There was and error while creating the backup</Text>
+			<Text LangIsoCode="spa">Se ha producido un error al crear la copia de seguridad.</Text>
+			<Text LangIsoCode="por">Houve um error ao criar o backup</Text>
+			<Text LangIsoCode="fre">Il ya eu une erreur lors de la création de la sauvegarde</Text>
+		</Message>
+	</Group>
+	<Group name="di8_DBImport">
+		<Message id="msgDBImportTitle">
+			<Text LangIsoCode="eng">Import Database</Text>
+			<Text LangIsoCode="spa">Importar Base de Datos</Text>
+			<Text LangIsoCode="por">Importação de banco de dados</Text>
+			<Text LangIsoCode="fre">Import de base de données</Text>
+		</Message>
+		<Message id="msgDBImportMsg1">
+			<Text LangIsoCode="eng">Please select the database backup file to import</Text>
+			<Text LangIsoCode="spa">Seleccione el archivo de copia de seguridad de base de datos para importar</Text>
+			<Text LangIsoCode="por">Por favor selecione o arquivo de backup do banco de dados de importação</Text>
+			<Text LangIsoCode="fre">S&quot;il vous plaît sélectionnez la sauvegarde de base de données de fichier à importer</Text>
+		</Message>
+		<Message id="msgDBImportFilename">
+			<Text LangIsoCode="eng">Filename</Text>
+			<Text LangIsoCode="spa">Archivo</Text>
+			<Text LangIsoCode="por">Nome do arquivo</Text>
+			<Text LangIsoCode="fre">Nom du fichier</Text>
+		</Message>
+		<Message id="msgDBImportCancel">
+			<Text LangIsoCode="eng">Cancel</Text>
+			<Text LangIsoCode="spa">Cancelar</Text>
+			<Text LangIsoCode="por">Cancelar</Text>
+			<Text LangIsoCode="fre">Annuler</Text>
+		</Message>
+		<Message id="msgDBImportUploadOk">
+			<Text LangIsoCode="eng">File was successfully uploaded</Text>
+			<Text LangIsoCode="spa">El archivo se envió correctamente.</Text>
+			<Text LangIsoCode="por">O arquivo foi enviado com sucesso</Text>
+			<Text LangIsoCode="fre">Le fichier a été téléchargé avec succès</Text>
+		</Message>
+		<Message id="msgDBImportUploadError">
+			<Text LangIsoCode="eng">There was an error with the upload process please try again</Text>
+			<Text LangIsoCode="spa">Hubo un error con el proceso de subida por favor inténtelo de nuevo</Text>
+			<Text LangIsoCode="por">Houve um erro com o processo de upload por favor tente novamente</Text>
+			<Text LangIsoCode="fre">Il y avait une erreur avec le processus de téléchargement s&quot;il vous plaît essayer de nouveau</Text>
+		</Message>
+		<Message id="msgDBImportFileError">
+			<Text LangIsoCode="eng">The file has no database backup format</Text>
+			<Text LangIsoCode="spa">El archivo no tiene formato de copia de seguridad de base de datos</Text>
+			<Text LangIsoCode="por">O arquivo tem o formato de backup do banco de dados</Text>
+			<Text LangIsoCode="fre">Le fichier n&quot;a pas de format de sauvegarde de base de données</Text>
+		</Message>
+		<Message id="msgDBImportDBUpdated">
+			<Text LangIsoCode="eng">Database updated correctly</Text>
+			<Text LangIsoCode="spa">Base de datos actualizada correctamente</Text>
+			<Text LangIsoCode="por">Banco de dados atualizado corretamente</Text>
+			<Text LangIsoCode="fre">Base de données mis à jour correctement</Text>
+		</Message>
+		<Message id="msgDBImportUpdateError">
+			<Text LangIsoCode="eng">Database cannot be updated or created</Text>
+			<Text LangIsoCode="spa">Base de datos no pudo se creada/actualizada</Text>
+			<Text LangIsoCode="por">Banco de dados não pode ser criado ou atualizado</Text>
+			<Text LangIsoCode="fre">Base de datos no pueden ser creados o actualizados</Text>
+		</Message>
+		<Message id="msgDBImportDatabaseNew">
+			<Text LangIsoCode="eng">Create new database</Text>
+			<Text LangIsoCode="spa">Crear nueva base de datos</Text>
+			<Text LangIsoCode="por">Criar um novo banco de dados</Text>
+			<Text LangIsoCode="fre">Créer une nouvelle base</Text>
+		</Message>
+		<Message id="msgDBImportDatabaseClone">
+			<Text LangIsoCode="eng">Clone database</Text>
+			<Text LangIsoCode="spa">Duplicar base de datos</Text>
+			<Text LangIsoCode="por">Clone de banco de dados</Text>
+			<Text LangIsoCode="fre">Base de données en double</Text>
+		</Message>
+		<Message id="msgDBImportDatabaseUpdate">
+			<Text LangIsoCode="eng">Replace an existing database</Text>
+			<Text LangIsoCode="spa">Reemplazar base de datos existente</Text>
+			<Text LangIsoCode="por">Substituir um banco de dados existente</Text>
+			<Text LangIsoCode="fre">Remplacer une base de données existante</Text>
+		</Message>
+		<Message id="msgDBImportRegionId">
+			<Text LangIsoCode="eng">Identifier</Text>
+			<Text LangIsoCode="spa">Identificador</Text>
+			<Text LangIsoCode="por">Identifier</Text>
+			<Text LangIsoCode="fre">Identifiant</Text>
+		</Message>
+		<Message id="msgDBImportRegionLabel">
+			<Text LangIsoCode="eng">Label</Text>
+			<Text LangIsoCode="spa">Etiqueta</Text>
+			<Text LangIsoCode="por">Etiqueta</Text>
+			<Text LangIsoCode="fre">Étiquette</Text>
+		</Message>
+		<Message id="msgDBImportLangIsoCode">
+			<Text LangIsoCode="eng">Language</Text>
+			<Text LangIsoCode="spa">Idioma</Text>
+			<Text LangIsoCode="por">Limguagem</Text>
+			<Text LangIsoCode="fre">Langue</Text>
+		</Message>
+		<Message id="msgDBImportCountryIso">
+			<Text LangIsoCode="eng">Country</Text>
+			<Text LangIsoCode="spa">País</Text>
+			<Text LangIsoCode="por">País</Text>
+			<Text LangIsoCode="fre">Pays</Text>
+		</Message>
+	</Group>
+	<Group name="di8_DBEdit">
+		<Message id="msgDBEditRegionId">
+			<Text LangIsoCode="eng">Identification of areas</Text>
+			<Text LangIsoCode="spa">Identificador</Text>
+			<Text LangIsoCode="por">Identidade</Text>
+			<Text LangIsoCode="fre">Id</Text>
+		</Message>
+		<Message id="msgDBEDitRegionLabel">
+			<Text LangIsoCode="eng">Name</Text>
+			<Text LangIsoCode="spa">Nombre</Text>
+			<Text LangIsoCode="por">Nome</Text>
+			<Text LangIsoCode="fre">Nom</Text>
+		</Message>
+		<Message id="msgDBEDitLangIsoCode">
+			<Text LangIsoCode="eng">Language</Text>
+			<Text LangIsoCode="spa">Idioma</Text>
+			<Text LangIsoCode="por">Limguagem</Text>
+			<Text LangIsoCode="fre">Langue</Text>
+		</Message>
+		<Message id="msgDBEditCountryIso">
+			<Text LangIsoCode="eng">Country</Text>
+			<Text LangIsoCode="spa">País</Text>
+			<Text LangIsoCode="por">País</Text>
+			<Text LangIsoCode="fre">Pays</Text>
+		</Message>
+	</Group>
+	<Group name="querydef">
+		<Message id="msgOperator">
+			<Text LangIsoCode="eng">Operator</Text>
+			<Text LangIsoCode="spa">Operador</Text>
+			<Text LangIsoCode="por">Operador</Text>
+			<Text LangIsoCode="fre">Opérateur</Text>
+		</Message>
+	</Group>
+	<Group name="region">
+		<Message id="txtRoleADMINREGION">
+			<Text LangIsoCode="eng">Manager</Text>
+			<Text LangIsoCode="spa">Administrador</Text>
+			<Text LangIsoCode="por">Administrador</Text>
+			<Text LangIsoCode="fre">Administrateur</Text>
+		</Message>
+		<Message id="txtRoleSUPERVISOR">
+			<Text LangIsoCode="eng">Supervisor</Text>
+			<Text LangIsoCode="spa">Supervisor</Text>
+			<Text LangIsoCode="por">Supervisor</Text>
+			<Text LangIsoCode="fre">Superviseur</Text>
+		</Message>
+		<Message id="txtRoleUSER">
+			<Text LangIsoCode="eng">Feeder</Text>
+			<Text LangIsoCode="spa">Alimentador</Text>
+			<Text LangIsoCode="por">Alimentador</Text>
+			<Text LangIsoCode="fre">Alimentation</Text>
+		</Message>
+		<Message id="txtRoleOBSERVER">
+			<Text LangIsoCode="eng">Observer</Text>
+			<Text LangIsoCode="spa">Observador</Text>
+			<Text LangIsoCode="por">Observador</Text>
+			<Text LangIsoCode="fre">Observateur</Text>
+		</Message>
+		<Message id="txtRoleNONE">
+			<Text LangIsoCode="eng">Public Databases</Text>
+			<Text LangIsoCode="spa">Bases Públicas</Text>
+			<Text LangIsoCode="por">Bases de datos públicas</Text>
+			<Text LangIsoCode="fre">Bases de données publiques</Text>
+		</Message>
+		<Message id="txtAvailableDB">
+			<Text LangIsoCode="eng">Available Disaster Inventories</Text>
+			<Text LangIsoCode="spa">Inventarios de Desastres disponibles</Text>
+			<Text LangIsoCode="por">Desastres inventários disponíveis</Text>
+			<Text LangIsoCode="fre">Inventaires de Désastres disponibles</Text>
+		</Message>
+	</Group>
+	<Group name="portal">
+		<Message id="di_slogan">
+			<Text LangIsoCode="eng">Inventory system of the effects of disasters</Text>
+			<Text LangIsoCode="spa">Sistema de inventario de efectos de desastres</Text>
+			<Text LangIsoCode="por">Sistema de inventário de efeitos de desastres</Text>
+			<Text LangIsoCode="fre">Système d&quot;inventaire des effets des catastrophes</Text>
+		</Message>
+		<Message id="tdititle">
+			<Text LangIsoCode="eng">Inventory system of the effects of disasters</Text>
+			<Text LangIsoCode="spa">Sistema de inventario de efectos de desastres</Text>
+			<Text LangIsoCode="por">Sistema de inventário de efeitos de desastres</Text>
+			<Text LangIsoCode="fre">Système d&quot;inventaire des effets des catastrophes</Text>
+		</Message>
+		<Message id="tcountries">
+			<Text LangIsoCode="eng">Regions</Text>
+			<Text LangIsoCode="spa">Regiones</Text>
+			<Text LangIsoCode="por">Regiões</Text>
+			<Text LangIsoCode="fre">Régions</Text>
+		</Message>
+		<Message id="tvirtualreg">
+			<Text LangIsoCode="eng">Virtual regions</Text>
+			<Text LangIsoCode="spa">Regiones Virtuales</Text>
+			<Text LangIsoCode="por">Regiões Virtuais</Text>
+			<Text LangIsoCode="fre">Régions Virtuelles</Text>
+		</Message>
+		<Message id="hlostconn">
+			<Text LangIsoCode="eng">Failed communication. Check your internet connection.</Text>
+			<Text LangIsoCode="spa">Comunicación fallida: Verifique su conexión a Internet</Text>
+			<Text LangIsoCode="por">Comunicação falida: Verifique sua conexão à Internet</Text>
+			<Text LangIsoCode="fre">Échec de la communication. Vérifiez votre connexion Internet</Text>
+		</Message>
+		<Message id="tdbavail">
+			<Text LangIsoCode="eng">Databases of available effects</Text>
+			<Text LangIsoCode="spa">Bases de efectos disponibles</Text>
+			<Text LangIsoCode="por">Bancos de efeitos disponíveis</Text>
+			<Text LangIsoCode="fre">Inventaires de Désastres disponibles</Text>
+		</Message>
+		<Message id="tdbnotavail">
+			<Text LangIsoCode="eng">There are no databases available at the moment.</Text>
+			<Text LangIsoCode="spa">No hay bases de datos disponibles por el momento</Text>
+			<Text LangIsoCode="por">Não há bancos de dados disponíveis no momento</Text>
+			<Text LangIsoCode="fre">Il n&quot;existe pas de bases de données disponibles</Text>
+		</Message>
+		<Message id="tmoreinfo">
+			<Text LangIsoCode="eng">More information</Text>
+			<Text LangIsoCode="spa">Mas información</Text>
+			<Text LangIsoCode="por">Mais informação</Text>
+			<Text LangIsoCode="fre">Plus d&quot;informations</Text>
+		</Message>
+		<Message id="talerdiwin">
+			<Text LangIsoCode="eng">DesInventar is being used. Are you sure do you want to quit?</Text>
+			<Text LangIsoCode="spa">DesInventar está en uso. ¿Está seguro que desea salir?</Text>
+			<Text LangIsoCode="por">DesInventar está sendo usado. Tem certeza que deseja sair?</Text>
+			<Text LangIsoCode="fre">Êtes-vous sûr de vouloir arrêter de fumer?</Text>
+		</Message>
+		<Message id="tstartpage">
+			<Text LangIsoCode="eng">Home</Text>
+			<Text LangIsoCode="spa">Inicio</Text>
+			<Text LangIsoCode="por">Início</Text>
+			<Text LangIsoCode="fre">Accueil</Text>
+		</Message>
+		<Message id="tlang">
+			<Text LangIsoCode="eng">Language</Text>
+			<Text LangIsoCode="spa">Idioma</Text>
+			<Text LangIsoCode="por">Idioma</Text>
+			<Text LangIsoCode="fre">Langue</Text>
+		</Message>
+		<Message id="tusers">
+			<Text LangIsoCode="eng">Users</Text>
+			<Text LangIsoCode="spa">Usuarios</Text>
+			<Text LangIsoCode="por">Usuários</Text>
+			<Text LangIsoCode="fre">Utilisateur</Text>
+		</Message>
+		<Message id="msgUserAccess">
+			<Text LangIsoCode="eng">Users&quot;s Access</Text>
+			<Text LangIsoCode="spa">Acceso a Usuarios</Text>
+			<Text LangIsoCode="por">Acessos de usuários</Text>
+			<Text LangIsoCode="fre">L&quot;accès des utilisateurs</Text>
+		</Message>
+		<Message id="msgUserLogin">
+			<Text LangIsoCode="eng">Login</Text>
+			<Text LangIsoCode="spa">Ingresar</Text>
+			<Text LangIsoCode="por">Entrada</Text>
+			<Text LangIsoCode="fre">Connexion</Text>
+		</Message>
+		<Message id="msgUserLogout">
+			<Text LangIsoCode="eng">Logout</Text>
+			<Text LangIsoCode="spa">Salir</Text>
+			<Text LangIsoCode="por">Logout</Text>
+			<Text LangIsoCode="fre">Déconnexion</Text>
+		</Message>
+		<Message id="msgRegionList">
+			<Text LangIsoCode="eng">Region List</Text>
+			<Text LangIsoCode="spa">Listado Regiones</Text>
+			<Text LangIsoCode="por">Lista de banco de dados</Text>
+			<Text LangIsoCode="fre">La liste de base de données</Text>
+		</Message>
+		<Message id="msgRegionOpenDB">
+			<Text LangIsoCode="eng">Open database</Text>
+			<Text LangIsoCode="spa">Abrir la base de datos</Text>
+			<Text LangIsoCode="por">Abrir banco de dados</Text>
+			<Text LangIsoCode="fre">Ouvrir base de données</Text>
+		</Message>
+		<Message id="tcredits">
+			<Text LangIsoCode="eng">In strategic alliance with</Text>
+			<Text LangIsoCode="spa">En alianza estratégica con</Text>
+			<Text LangIsoCode="por">Em convenio estratégico com</Text>
+			<Text LangIsoCode="fre">En alliance stratégique avec</Text>
+		</Message>
+		<Message id="msgRegionAfrica">
+			<Text LangIsoCode="eng">Africa</Text>
+			<Text LangIsoCode="spa">África</Text>
+			<Text LangIsoCode="por">África</Text>
+			<Text LangIsoCode="fre">Afrique</Text>
+		</Message>
+		<Message id="msgRegionAsia">
+			<Text LangIsoCode="eng">Asia</Text>
+			<Text LangIsoCode="spa">Asia</Text>
+			<Text LangIsoCode="por">Ásia</Text>
+			<Text LangIsoCode="fre">Asie</Text>
+		</Message>
+		<Message id="msgRegionSouthAmerica">
+			<Text LangIsoCode="eng">South America</Text>
+			<Text LangIsoCode="spa">América del Sur</Text>
+			<Text LangIsoCode="por">América do Sul</Text>
+			<Text LangIsoCode="fre">Amérique du Sud</Text>
+		</Message>
+		<Message id="msgRegionCentralAmerica">
+			<Text LangIsoCode="eng">Central America</Text>
+			<Text LangIsoCode="spa">Centro América</Text>
+			<Text LangIsoCode="por">América Central</Text>
+			<Text LangIsoCode="fre">Amérique centrale</Text>
+		</Message>
+		<Message id="msgRegionNorthAmerica">
+			<Text LangIsoCode="eng">North America</Text>
+			<Text LangIsoCode="spa">Norte América</Text>
+			<Text LangIsoCode="por">América do Norte</Text>
+			<Text LangIsoCode="fre">Amérique du Nord</Text>
+		</Message>
+		<Message id="msgRegionSouthernCone">
+			<Text LangIsoCode="eng">Southern Cone</Text>
+			<Text LangIsoCode="spa">Cono Sur</Text>
+			<Text LangIsoCode="por">Cone Sul</Text>
+			<Text LangIsoCode="fre">Cône Sud</Text>
+		</Message>
+		<Message id="msgregionGranChaco">
+			<Text LangIsoCode="eng">Gran Chaco</Text>
+			<Text LangIsoCode="spa">Gran Chaco</Text>
+			<Text LangIsoCode="por">Grande Chaco</Text>
+			<Text LangIsoCode="fre">Gran Chaco</Text>
+		</Message>
+		<Message id="msgRegionAndean">
+			<Text LangIsoCode="eng">Andean Subregion</Text>
+			<Text LangIsoCode="spa">SubRegión Andina</Text>
+			<Text LangIsoCode="por"></Text>
+			<Text LangIsoCode="fre">Sous-région andine</Text>
+		</Message>
+		<Message id="msgRegionCities">
+			<Text LangIsoCode="eng">Cities</Text>
+			<Text LangIsoCode="spa">Ciudades</Text>
+			<Text LangIsoCode="por">Cidades</Text>
+			<Text LangIsoCode="fre">Villes</Text>
+		</Message>
+		<Message id="msgRegionGreatAmericanChaco">
+			<Text LangIsoCode="eng">Great American Chaco</Text>
+			<Text LangIsoCode="spa">Gran Chaco Americano</Text>
+			<Text LangIsoCode="por">Grande Chaco Americano</Text>
+			<Text LangIsoCode="fre">Gran Chaco Americano</Text>
+		</Message>
+		<Message id="msgRegionLatinAmerica">
+			<Text LangIsoCode="eng">Latin America</Text>
+			<Text LangIsoCode="spa">América Latina</Text>
+			<Text LangIsoCode="por">América Latina</Text>
+			<Text LangIsoCode="fre">Amérique latine</Text>
+		</Message>
+		<Message id="msgRegionCaribbean">
+			<Text LangIsoCode="eng">Caribbean Region</Text>
+			<Text LangIsoCode="spa">Región Caribe</Text>
+			<Text LangIsoCode="por">Região do Caribe</Text>
+			<Text LangIsoCode="fre">La région des Caraïbes</Text>
+		</Message>
+		<Message id="msgRegionPacific">
+			<Text LangIsoCode="eng">South Pacific</Text>
+			<Text LangIsoCode="spa">Pacífico Sur</Text>
+			<Text LangIsoCode="por">Pacífico Sul</Text>
+			<Text LangIsoCode="fre">Pacifique Sud</Text>
+		</Message>
+		<Message id="tcopyright">
+			<Text LangIsoCode="eng">(c) 1998-2011 Corporación OSSO - Colombia</Text>
+			<Text LangIsoCode="spa">(c) 1998-2011 Corporación OSSO - Colombia</Text>
+			<Text LangIsoCode="por">(c) 1998-2011 Corporação OSSO - Colômbia</Text>
+			<Text LangIsoCode="fre">(c) 1998-2011 Corporación OSSO - Colombia</Text>
+		</Message>
+		<Message id="tcountryARG">
+			<Text LangIsoCode="eng">Argentina</Text>
+			<Text LangIsoCode="spa">Argentina</Text>
+			<Text LangIsoCode="por">Argentina</Text>
+			<Text LangIsoCode="fre">Argentine</Text>
+		</Message>
+		<Message id="tcountryBOL">
+			<Text LangIsoCode="eng">Bolivia</Text>
+			<Text LangIsoCode="spa">Bolivia</Text>
+			<Text LangIsoCode="por">Bolívia</Text>
+			<Text LangIsoCode="fre">Bolivie</Text>
+		</Message>
+		<Message id="tcountryCHL">
+			<Text LangIsoCode="eng">Chile</Text>
+			<Text LangIsoCode="spa">Chile</Text>
+			<Text LangIsoCode="por">Chile</Text>
+			<Text LangIsoCode="fre">Chile</Text>
+		</Message>
+		<Message id="tcountryCOL">
+			<Text LangIsoCode="eng">Colombia</Text>
+			<Text LangIsoCode="spa">Colombia</Text>
+			<Text LangIsoCode="por">Colômbia</Text>
+			<Text LangIsoCode="fre">Colombie</Text>
+		</Message>
+		<Message id="tcountryCRI">
+			<Text LangIsoCode="eng">Costa Rica</Text>
+			<Text LangIsoCode="spa">Costa Rica</Text>
+			<Text LangIsoCode="por">Costa Rica</Text>
+			<Text LangIsoCode="fre">Costa Rica</Text>
+		</Message>
+		<Message id="tcountryDOM">
+			<Text LangIsoCode="eng">Dominican Rep.</Text>
+			<Text LangIsoCode="spa">Rep. Dominicana</Text>
+			<Text LangIsoCode="por">Rep. Dominicana</Text>
+			<Text LangIsoCode="fre">Rép Dominicaine</Text>
+		</Message>
+		<Message id="tcountryECU">
+			<Text LangIsoCode="eng">Ecuador</Text>
+			<Text LangIsoCode="spa">Ecuador</Text>
+			<Text LangIsoCode="por">Equador</Text>
+			<Text LangIsoCode="fre">Équateur</Text>
+		</Message>
+		<Message id="tcountryGTM">
+			<Text LangIsoCode="eng">Guatemala</Text>
+			<Text LangIsoCode="spa">Guatemala</Text>
+			<Text LangIsoCode="por">Guatemala</Text>
+			<Text LangIsoCode="fre">Guatemala</Text>
+		</Message>
+		<Message id="tcountryGUY">
+			<Text LangIsoCode="eng">Guyana</Text>
+			<Text LangIsoCode="spa">Guyana</Text>
+			<Text LangIsoCode="por">Guiana</Text>
+			<Text LangIsoCode="fre">Guyana</Text>
+		</Message>
+		<Message id="tcountryHND">
+			<Text LangIsoCode="eng">Honduras</Text>
+			<Text LangIsoCode="spa">Honduras</Text>
+			<Text LangIsoCode="por">Honduras</Text>
+			<Text LangIsoCode="fre">Honduras</Text>
+		</Message>
+		<Message id="tcountryHTI">
+			<Text LangIsoCode="eng">Haiti</Text>
+			<Text LangIsoCode="spa">Haití</Text>
+			<Text LangIsoCode="por">Haiti</Text>
+			<Text LangIsoCode="fre">Haïti</Text>
+		</Message>
+		<Message id="tcountryIDN">
+			<Text LangIsoCode="eng">Indonesia</Text>
+			<Text LangIsoCode="spa">Indonesia</Text>
+			<Text LangIsoCode="por">Indonésia</Text>
+			<Text LangIsoCode="fre">Indonésie</Text>
+		</Message>
+		<Message id="tcountryIND">
+			<Text LangIsoCode="eng">India</Text>
+			<Text LangIsoCode="spa">India</Text>
+			<Text LangIsoCode="por">India</Text>
+			<Text LangIsoCode="fre">Inde</Text>
+		</Message>
+		<Message id="tcountryIRN">
+			<Text LangIsoCode="eng">Iran</Text>
+			<Text LangIsoCode="spa">Irán</Text>
+			<Text LangIsoCode="por">Iran</Text>
+			<Text LangIsoCode="fre">Iran</Text>
+		</Message>
+		<Message id="tcountryJAM">
+			<Text LangIsoCode="eng">Jamaica</Text>
+			<Text LangIsoCode="spa">Jamaica</Text>
+			<Text LangIsoCode="por">Jamaica</Text>
+			<Text LangIsoCode="fre">Jamaïque</Text>
+		</Message>
+		<Message id="tcountryJOR">
+			<Text LangIsoCode="eng">Jordan</Text>
+			<Text LangIsoCode="spa">Jordania</Text>
+			<Text LangIsoCode="por">Jordan</Text>
+			<Text LangIsoCode="fre">Jordan</Text>
+		</Message>
+		<Message id="tcountryLKA">
+			<Text LangIsoCode="eng">Sri Lanka</Text>
+			<Text LangIsoCode="spa">Sri Lanka</Text>
+			<Text LangIsoCode="por">Sri Lanka</Text>
+			<Text LangIsoCode="fre">Sri Lanka</Text>
+		</Message>
+		<Message id="tcountryMEX">
+			<Text LangIsoCode="eng">Mexico</Text>
+			<Text LangIsoCode="spa">México</Text>
+			<Text LangIsoCode="por">México</Text>
+			<Text LangIsoCode="fre">Mexique</Text>
+		</Message>
+		<Message id="tcountryMOZ">
+			<Text LangIsoCode="eng">Mozambique</Text>
+			<Text LangIsoCode="spa">Mozambique</Text>
+			<Text LangIsoCode="por">Moçambique</Text>
+			<Text LangIsoCode="fre">Mozambique</Text>
+		</Message>
+		<Message id="tcountryNPL">
+			<Text LangIsoCode="eng">Nepal</Text>
+			<Text LangIsoCode="spa">Nepal</Text>
+			<Text LangIsoCode="por">Nepal</Text>
+			<Text LangIsoCode="fre">Népal</Text>
+		</Message>
+		<Message id="tcountryNIC">
+			<Text LangIsoCode="eng">Nicaragua</Text>
+			<Text LangIsoCode="spa">Nicaragua</Text>
+			<Text LangIsoCode="por">Nicarágua</Text>
+			<Text LangIsoCode="fre">Nicaragua</Text>
+		</Message>
+		<Message id="tcountryPAN">
+			<Text LangIsoCode="eng">Panama</Text>
+			<Text LangIsoCode="spa">Panamá</Text>
+			<Text LangIsoCode="por">Panamá</Text>
+			<Text LangIsoCode="fre">Panama</Text>
+		</Message>
+		<Message id="tcountryPER">
+			<Text LangIsoCode="eng">Peru</Text>
+			<Text LangIsoCode="spa">Perú</Text>
+			<Text LangIsoCode="por">Perú</Text>
+			<Text LangIsoCode="fre">Pérou</Text>
+		</Message>
+		<Message id="tcountryPRY">
+			<Text LangIsoCode="eng">Paraguay</Text>
+			<Text LangIsoCode="spa">Paraguay</Text>
+			<Text LangIsoCode="por">Paraguai</Text>
+			<Text LangIsoCode="fre">Paraguay</Text>
+		</Message>
+		<Message id="tcountrySLV">
+			<Text LangIsoCode="eng">El Salvador</Text>
+			<Text LangIsoCode="spa">El Salvador</Text>
+			<Text LangIsoCode="por">El Salvador</Text>
+			<Text LangIsoCode="fre">El Salvador</Text>
+		</Message>
+		<Message id="tcountryTTO">
+			<Text LangIsoCode="eng">Trinidad and Tobago</Text>
+			<Text LangIsoCode="spa">Trinidad y Tobago</Text>
+			<Text LangIsoCode="por">Trinidad e Tobago</Text>
+			<Text LangIsoCode="fre">Trinité-et-Tobago</Text>
+		</Message>
+		<Message id="tcountryVEN">
+			<Text LangIsoCode="eng">Venezuela</Text>
+			<Text LangIsoCode="spa">Venezuela</Text>
+			<Text LangIsoCode="por">Venezuela</Text>
+			<Text LangIsoCode="fre">Venezuela</Text>
+		</Message>
+		<Message id="tcountryVUT">
+			<Text LangIsoCode="eng">Vanuatu</Text>
+			<Text LangIsoCode="spa">Vanuatu</Text>
+			<Text LangIsoCode="por">Vanuatu</Text>
+			<Text LangIsoCode="fre">Vanuatu</Text>
+		</Message>
+		<Message id="msgRegionUSAFL">
+			<Text LangIsoCode="eng">Florida; USA</Text>
+			<Text LangIsoCode="spa">Florida; EE.UU.</Text>
+			<Text LangIsoCode="por">Flórida; EUA</Text>
+			<Text LangIsoCode="fre">Floride; USA</Text>
+		</Message>
+		<Message id="txtVersion">
+			<Text LangIsoCode="eng">Version</Text>
+			<Text LangIsoCode="spa">Versión</Text>
+			<Text LangIsoCode="por">Versão</Text>
+			<Text LangIsoCode="fre">Version</Text>
+		</Message>
+	</Group>
+</StringList>
