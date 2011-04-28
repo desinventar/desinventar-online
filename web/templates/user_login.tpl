@@ -28,7 +28,7 @@
 		</table>
 	</form>
 
-	<span id="msgEmptyFields"   class="status">{-#msgEmtpyFields#-}</span>
+	<span id="msgEmptyFields"   class="status">{-#msgEmptyFields#-}</span>
 	<span id="msgUserLoggedIn"  class="status">{-#msgUserLoggedIn#-}</span>
 	<span id="msgInvalidPasswd" class="status">{-#msgInvalidPasswd#-}</span>
 
