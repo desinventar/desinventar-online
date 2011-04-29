@@ -321,6 +321,18 @@
 		tb.add('->',{id: 'mnuRegionInfo', text: '[{-$RegionLabel-}]', 		handler: onMenuItem });
 		tb.add('->',{id: 'mnuHelpWebsite', text: '<img src="images/di_logo4.png" alt="" />', handler: onMenuItem });
 
+		// 2011-04-29 (jhcaiced) Fix for use of ExtJS in IE9 ?
+		if ((typeof Range !== "undefined") && !Range.prototype.createContextualFragment)
+		{
+			Range.prototype.createContextualFragment = function(html)
+			{
+				var frag = document.createDocumentFragment(), div = document.createElement("div");
+				frag.appendChild(div);
+				div.outerHTML = html;
+				return frag;
+			};
+		}
+
 		// layout
 		var viewport = new Ext.Viewport({
 			id:'viewport',
