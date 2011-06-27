@@ -6,8 +6,8 @@ Summary: DesInventar - Disaster Inventory System
 %define name1 desinventar
 %define major 82
 Name: %{name1}%{major}
-Version: 8.2.1
-Release: 04%{dist}
+Version: 2011.056
+Release: 1%{dist}
 License: Propietary
 Group: Applications/Disaster
 Source0: %{name1}-%{version}.tar.gz
@@ -19,13 +19,13 @@ BuildArch: noarch
 BuildRoot: %{_tmppath}/%{name}-buildroot
 
 Requires: php >= 5.1.0
-Requires: php-gd php-pdo php-Smarty php-xml
+Requires: php-gd php-Smarty
 Requires: extJS jpgraph
 Requires: httpd
 Requires: openlayers mapserver
 Requires: liberation-fonts-extras
 Requires: sqlite >= 3.6.14
-Requires: jquery >= 1.4.2, jquery-ui
+Requires: jquery jquery-ui jquery-uploadify jquery-colorpicker
 
 %define DI_DIR    %{_prefix}/share/desinventar-8.2
 %define WEB_DIR   %{DI_DIR}/web
@@ -83,7 +83,7 @@ popd
 # HTTPD Conf File
 pushd .
 install -m 755 -d $RPM_BUILD_ROOT/etc/httpd/conf.d
-install -m 644 conf/httpd/desinventar-8.2.conf $RPM_BUILD_ROOT/etc/httpd/conf.d
+install -m 644 files/conf/desinventar-8.2.conf $RPM_BUILD_ROOT/etc/httpd/conf.d
 popd
 
 # WorldMap Install

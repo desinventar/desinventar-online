@@ -121,6 +121,7 @@ require_once(BASE . '/include/digeocarto.class.php');
 require_once(BASE . '/include/didisaster.class.php');
 
 // SETTINGS
+date_default_timezone_set('UTC');
 $time_start = microtime_float();
 $SessionId = uuid();
 if (MODE != 'command')
