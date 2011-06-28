@@ -78,6 +78,7 @@ SessionId VARCHAR(50),
 RegionId VARCHAR(50), 
 UserId VARCHAR(20), 
 Valid INTEGER, 
+LangIsoCode VARCHAR(3),
 Start DATETIME, 
 LastUpdate DATETIME, 
 PRIMARY KEY('SessionId')
