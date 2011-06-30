@@ -91,6 +91,7 @@ pushd .
 cd worldmap
 install -m 755 -d $RPM_BUILD_ROOT/%{_datadir}/desinventar-8.2/worldmap/
 install -m 644 * $RPM_BUILD_ROOT/%{_datadir}/desinventar-8.2/worldmap/
+install -m 644 %{SOURCE2} $RPM_BUILD_ROOT/%{_datadir}/desinventar-8.2/worldmap
 install -m 644 %{SOURCE2} $RPM_BUILD_ROOT/%{_datadir}/desinventar-8.2/worldmap/worldmap.map
 
 popd
