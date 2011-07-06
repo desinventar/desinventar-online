@@ -37,7 +37,7 @@ function onReadyDatabaseAdmin() {
 		if (jQuery('#frmDatabaseEdit #cmd').val() == 'cmdRegionCreate') {
 			jQuery.post('index.php',
 				{cmd        : 'cmdRegionBuildRegionId',
-				 CountryIso : jQuery(this).val(),
+				 CountryIso : jQuery(this).val()
 				},
 				function(data) {
 					if (parseInt(data.Status) > 0) {
