@@ -2468,10 +2468,10 @@
 			<Text LangIsoCode="fre">Recherche de cartes de données ayant des valeurs différentes à la valeur spécifiée: ex.: Morts &lt;&gt; 10 </Text>
 		</Message>
 		<Message id="taqlike">
-			<Text LangIsoCode="eng">Find a word or phrase in the text fields. i.e. Sitio LIKE \&quot;%cauca%\&quot; or Fuente LIKE \&quot;%comercio%\&quot;</Text>
-			<Text LangIsoCode="spa">Busca una palabra o frase dentro de los campos de texto. Por ejemplo: Sitio LIKE \&quot;%cauca%\&quot; o Fuente LIKE \&quot;%comercio%\&quot;</Text>
-			<Text LangIsoCode="por">Encontre uma palavra ou frase nos campos de texto. Por exemplo: Sitio LIKE \&quot;%cauca%\&quot;* ou Fuente LIKE \&quot;%comercio%\&quot;</Text>
-			<Text LangIsoCode="fre">Recherche d&quot;un mot ou d&quot;une phrase dans les champs de texte: Par exemple: Site LIKE\&quot;%cauca%\&quot; ou Source LIKE \&quot;%commerce%\&quot;</Text>
+			<Text LangIsoCode="eng">Find a word or phrase in the text fields.</Text>
+			<Text LangIsoCode="spa">Busca una palabra o frase dentro de los campos de texto.</Text>
+			<Text LangIsoCode="por">Encontre uma palavra ou frase nos campos de texto.</Text>
+			<Text LangIsoCode="fre">Recherche d&quot;un mot ou d&quot;une phrase dans les champs de	texte.</Text>
 		</Message>
 		<Message id="taqwere">
 			<Text LangIsoCode="eng">Find cards where there were ocurrence of effect or affect the sector.</Text>

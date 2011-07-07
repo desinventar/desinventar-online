@@ -30,11 +30,11 @@ lang : lang_spa lang_eng lang_por lang_fre
 
 lang_spa : interface_strings.xml
 	./xml2conf.php interface_strings.xml spa > ../../web/conf/spa.conf
-lang_eng : interface_strings.csv
+lang_eng : interface_strings.xml
 	./xml2conf.php interface_strings.xml eng > ../../web/conf/eng.conf
-lang_por : interface_strings.csv
+lang_por : interface_strings.xml
 	./xml2conf.php interface_strings.xml por > ../../web/conf/por.conf
-lang_fre : interface_strings.csv
+lang_fre : interface_strings.xml
 	./xml2conf.php interface_strings.xml fre > ../../web/conf/fre.conf
 
 clean :
