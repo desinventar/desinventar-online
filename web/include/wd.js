@@ -221,8 +221,20 @@ getEvent:function (e)
 	}
 	else{return null}
 
-	e.mouseX = e.pageX || (e.clientX +  Math.max(document.body.scrollLeft, document.documentElement.scrollLeft));
-	e.mouseY = e.pageY || (e.clientY + Math.max(document.body.scrollTop, document.documentElement.scrollTop));
+	var scrollLeft = 0;
+	var scrollTop  = 0;
+	if (document.compatMode && document.compatMode != "BackCompat")
+	{
+		scrollLeft = document.documentElement.scrollLeft;
+		scrollTop  = document.documentElement.scrollTop;
+	}
+	else
+	{
+		scrollLeft = document.body.scrollLeft;
+		scrollTop  = document.body.scrollTop;
+	}
+	e.mouseX = e.pageX || (e.clientX + scrollLeft);
+	e.mouseY = e.pageY || (e.clientY + scrollTop);
 	return e;
 },
 
