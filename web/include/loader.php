@@ -127,7 +127,7 @@ $SessionId = uuid();
 if (MODE != 'command')
 {
 	// Session Management
-	session_name('DI8SESSID');
+	session_name('DESINVENTAR_SSID');
 	session_start();
 	$SessionId = session_id();
 }
