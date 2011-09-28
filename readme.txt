@@ -4,7 +4,7 @@ DesInventar8 - http://www.desinventar.org
 
 Requeriments
 ------------
-- PHP
+- PHP (php-pdo php-xml php-gd)
 - MapServer
 - SQLite
 
@@ -15,6 +15,6 @@ PHP Components
   http://corefonts.sourceforge.net/
 
 Javascript Components
-- ExtJS (http://www.extjs.com/)
-- OpenLayers.org (http://www.openlayers.org/)
+- ExtJS 2.3.0 (http://www.extjs.com/) (don't use ExtJS 3.X)
+- OpenLayers.org (http://www.openlayers.org/) (tested with version 2.11)
 
