@@ -249,14 +249,33 @@ switch ($cmd)
 			$RegionList = $reglst;
 		}
 		$RoleList = array();
-		print json_encode(array('Status'     => 'OK', 
-		                        'RoleList'   => $RoleList,
-		                        'RegionList' => $RegionList));
+		$answer = array('Status'     => 'OK', 
+		                'RoleList'   => $RoleList,
+		                'RegionList' => $RegionList);
+		if (isset($_GET['callback']))
+		{
+			// Enable support for JSONP requests...
+			echo $_GET['callback'] . '(' . json_encode($answer) . ')';
+		}
+		else
+		{
+			echo json_encode($answer);   
+		}
 	break;
 	case 'getCountryName':
-		$CountryIso = getParameter('CountryIso','');
-		$CountryName = $us->q->getCountryName($CountryIso);
-		print $CountryName;
+			$CountryIso = getParameter('CountryIso','');
+			$CountryName = $us->q->getCountryName($CountryIso);
+			$answer = array('Status' => 1,
+			                'CountryName' => $CountryName);
+			if (isset($_GET['callback']))
+			{
+				// Enable support for JSONP requests...
+				echo $_GET['callback'] . '(' . json_encode($answer) . ')';
+			}
+			else
+			{
+				echo json_encode($answer);
+			}
 	break;
 	case 'getRegionLogo':
 		header('Content-type: Image/png');
@@ -283,7 +302,15 @@ switch ($cmd)
 			$answer['Status'] = ERR_NO_DATABASE;
 			$answer['RegionInfo'] = array();
 		}
-		echo json_encode($answer);
+		if (isset($_GET['callback']))
+		{
+			// Enable support for JSONP requests...
+			echo $_GET['callback'] . '(' . json_encode($answer) . ')';
+		}
+		else
+		{
+			echo json_encode($answer);
+		}
 	break;
 	case 'getRegionRecordCount' :
 		$RecordCount = $us->getDisasterCount();

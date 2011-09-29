@@ -78,9 +78,10 @@ function updateDatabaseList(CountryIsoCode,searchByCountry) {
 	jQuery.get(desinventarURL, 
 		{cmd: 'getCountryName', CountryIso : CountryIsoCode },
 		function(data) { 
-			jQuery("#divRegionList #title_COUNTRY").html('<h3>' + data + '</h3>');
+			jQuery("#divRegionList #title_COUNTRY").html('<h3>' + data.CountryName + '</h3>');
 			jQuery("#divRegionList").show();
-		}
+		},
+		'jsonp'
 	);
 	jQuery.post(desinventarURL,
 		{cmd: 'cmdSearchDB', 
