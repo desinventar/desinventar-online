@@ -89,7 +89,7 @@ CREATE TABLE 'UserLockList' (
 SessionId VARCHAR(50), 
 TableId VARCHAR(50), 
 RecordId VARCHAR(50), 
-RecordUpdate DATETIME, 
+LastUpdate DATETIME, 
 PRIMARY KEY('SessionId','RecordId')
 );
 
