@@ -39,9 +39,9 @@ class DIRecord extends DIObject
 	{
 		$i = 0;
 		$sQuery = '(';
-		foreach (split(',', $this->sFieldKeyDef) as $sKey => $sValue)
+		foreach (preg_split('/,/', $this->sFieldKeyDef) as $sKey => $sValue)
 		{
-			$oItem = split('/', $sValue);
+			$oItem = preg_split('#/#', $sValue);
 			$sFieldName = $oItem[0];
 			$sFieldType = $oItem[1];
 			if ($i > 0)
@@ -96,9 +96,9 @@ class DIRecord extends DIObject
 		$i = 0;
 		$sQueryFields = '';
 		$sQueryValues = '';
-		foreach (split(',', $this->sFieldKeyDef) as $sKey => $sValue)
+		foreach (preg_split('/,/', $this->sFieldKeyDef) as $sKey => $sValue)
 		{
-			$oItem = split('/', $sValue);
+			$oItem = preg_split('#/#', $sValue);
 			$sFieldName = $oItem[0];
 			$sFieldType = $oItem[1];
 			if ($i > 0)
@@ -150,9 +150,9 @@ class DIRecord extends DIObject
 		$sQuery = 'UPDATE ' . $sTableName . ' SET ';
 		if ($sFieldList != '')
 		{
-			foreach (split(',', $sFieldList) as $sKey => $sValue)
+			foreach (preg_split('/,/', $sFieldList) as $sKey => $sValue)
 			{
-				$oItem = split('/', $sValue);
+				$oItem = preg_split('#/#', $sValue);
 				$sFieldName = $oItem[0];
 				$sFieldType = $oItem[1];
 				if ($i > 0)
@@ -223,10 +223,10 @@ class DIRecord extends DIObject
 			$this->conn->commit();
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
-				$sFields = split(',', $prmFieldList);
+				$sFields = preg_split('/,/', $prmFieldList);
 				foreach ($sFields as $sKey => $sValue)
 				{
-					$oItem = split('/', $sValue);
+					$oItem = preg_split('#/#', $sValue);
 					$sFieldName = $oItem[0];
 					$sFieldType = $oItem[1];
 					if (array_key_exists($sFieldName, $row))
@@ -387,10 +387,10 @@ class DIRecord extends DIObject
 	{
 		$sQuery = '(';
 		$i = 0;
-		$sFields = split(',', $this->sFieldKeyDef);
+		$sFields = preg_split('/,/', $this->sFieldKeyDef);
 		foreach ($sFields as $sKey => $sValue)
 		{
-			$oItem = split('/', $sValue);
+			$oItem = preg_split('#/#', $sValue);
 			$sFieldName = $oItem[0];
 			$sFieldType = $oItem[1];
 			$quote2 = '"';
@@ -528,12 +528,12 @@ class DIRecord extends DIObject
 				// Check if it's me !!
 				$bFound = true;
 				$i = 0;
-				$sFields = split(',', $this->sFieldKeyDef);
+				$sFields = preg_split('/,/', $this->sFieldKeyDef);
 				foreach ($sFields as $sKey => $sValue)
 				{
 					if ($bFound)
 					{
-						$oItem = split('/', $sValue);
+						$oItem = preg_split('#/#', $sValue);
 						$sFieldName = $oItem[0];
 						$sFieldType = $oItem[1];
 						$bFound = $row[$sFieldName] == $this->get($sFieldName);

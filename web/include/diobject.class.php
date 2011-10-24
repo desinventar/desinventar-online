@@ -50,9 +50,9 @@ class DIObject {
 		} else {
 			$obj = &$this->oField[$LangIsoCode];
 		}
-		$sFields = split(',', $prmFieldDef);
+		$sFields = preg_split('/,/', $prmFieldDef);
 		foreach ($sFields as $sKey => $sValue) {
-			$oItem = split('/', $sValue);
+			$oItem = preg_split('#/#', $sValue);
 			$sFieldName = $oItem[0];
 			$sFieldType = $oItem[1];
 			$this->oFieldType[$sFieldName] = $sFieldType;

@@ -8,10 +8,7 @@
 	require_once(BASE . '/include/diimport.class.php');
 	require_once(BASE . '/include/diregion.class.php');
 	
-	$RegionId = 'DESINV-GAR-ISDR-2011_VR';
-	$RegionId = 'DESINV-1249040429-can_subregion_andina';
-	$RegionId = 'COL-HUILA';
-	$RegionId = 'COL-1250694506-colombia_inventario_historico_de_desastres';
+	$RegionId = 'COL-CUNDINAMARCA';
 	$us->login('diadmin','di8');
 	$us->open($RegionId);
 	$iCount = 0;
@@ -69,7 +66,7 @@
 		// Validate DisasterBeginTime
 		if (count($msg) > 0) {
 			foreach($msg as $line) {
-				printf('%-36s %-10s %s' . "\n", $DisasterId, $record['DisasterSerial'], $line);
+				printf('%-36s %-10s %s' . "\n", $record['DisasterId'], $record['DisasterSerial'], $line);
 			}
 		}
 		if ( ($iCount > 0) && ($iCount % 100 == 0) ) {
