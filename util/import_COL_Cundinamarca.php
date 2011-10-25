@@ -13,8 +13,9 @@
 	$us->open($RegionId);
 	
 	// Delete Records outside Cundinamarca
-	$sQuery = 'DELETE FROM Disaster WHERE GeographyId NOT LIKE "00011%"';
-	$us->q->dreg->query($sQuery);
+	$us->q->dreg->query('DELETE FROM Disaster WHERE GeographyId NOT LIKE "00011%"');
+	$us->q->dreg->query('DELETE FROM Disaster WHERE GeographyId="00011"');
+	// Delete non matching EEData Records
 	$sQuery = 'DELETE FROM EEData WHERE DisasterId IN (SELECT EEData.DisasterId FROM EEData LEFT JOIN Disaster ON EEData.DisasterId=Disaster.DisasterId WHERE Disaster.DisasterId IS NULL)';
 	$us->q->dreg->query($sQuery);
 
@@ -34,6 +35,7 @@
 	$a = $i->importFromCSV('/tmp/g2.csv', DI_GEOGRAPHY, true, 0);
 
 	// Update Geography Codes
+	$g = array();
 	$fh = fopen('/tmp/g2.csv', 'r');
 	$a = fgetcsv($fh, 0, ',');
 	while (! feof($fh) )
@@ -41,10 +43,17 @@
 		$a = fgetcsv($fh, 0, ',');
 		$NewId = $a[4];
 		$OldId = $a[5];
-		$us->q->dreg->query('UPDATE Disaster SET GeographyId="' . $NewId . '" WHERE GeographyId="' . $OldId . '";');
+		$g[$OldId] = $NewId;
+		//$us->q->dreg->query('UPDATE Disaster SET GeographyId="' . $NewId . '" WHERE GeographyId="' . $OldId . '";');
 	}
 	fclose($fh);
-	
+
+	foreach($us->q->dreg->query('SELECT * FROM Disaster') as $row) 
+	{
+		$NewId = $g[$row['GeographyId']];
+		$Query = 'UPDATE Disaster SET GeographyId="' . $NewId . '" WHERE DisasterId="' . $row['DisasterId'] . '"';
+		$us->q->dreg->query($Query);
+	}
 	$us->close();
 	$us->logout();
 </script>
