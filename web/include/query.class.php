@@ -12,11 +12,6 @@ class Query //extends PDO
 
 	public function __construct()
 	{
-		if (!extension_loaded('pdo'))
-		{
-		  dl( 'pdo.so' );
-		  dl( 'pdo_sqlite.so' );
-		}
 		try
 		{
 			$num_args = func_num_args();
