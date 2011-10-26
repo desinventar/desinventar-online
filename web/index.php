@@ -46,8 +46,15 @@ if ( (substr($_SERVER['CONTENT_TYPE'],0,19) == 'multipart/form-data') &&
 {
      $cmd = 'fileupload';
 }
+fb($cmd);
 switch ($cmd)
 {
+	case 'cmdAdminDB':
+		$t->assign('ctl_adminreg', true);
+		$t->assign('ctl_reglist', true);
+		$t->assign('ctl_admregmess', true);
+		$t->display('main_region.tpl');
+	break;
 	case 'getversion':
 		print VERSION;
 	break;
