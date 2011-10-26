@@ -20,9 +20,9 @@
 					<th class="header">
 						<b>{-#tregpublist#-}</b>
 					</th>
-					<th class="header" id="RegionId">
+					<th class="header" id="RegionId" style="display:none;">
 					</th>
-					<th class="header" id="LangIsoCode">
+					<th class="header" id="LangIsoCode" style="display:none;">
 					</th>
 				</tr>
 			</thead>
@@ -30,6 +30,15 @@
 {-/if-}
 {-** ADMINREG: reload region lists **-}
 {-if $ctl_reglist-}
+		<tr style="display:none;">
+			<td class="CountryIso"></td>
+			<td class="RegionLabel"></td>
+			<td class="RegionUserAdmin"></td>
+			<td><input class="RegionActive" type="checkbox" disabled /></td>
+			<td><input class="RegionPublic" type="checkbox" disabled /></td>
+			<td class="RegionId"></td>
+			<td class="LangIsoCode"></td>
+		</tr>
 {-foreach name=rpa key=key item=item from=$RegionList-}
 		<tr>
 			<td id="CountryIso">{-$item.CountryIso-}</td>

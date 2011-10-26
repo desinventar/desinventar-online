@@ -6,10 +6,19 @@
 		<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/desinventar.css?version={-$jsversion-}" />
 		<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/datacards.css?version={-$jsversion-}" />
 		<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/main.css?version={-$jsversion-}" />
+		{-include file="jquery.tpl"-}
+		<script type="text/javascript" src="{-$desinventarURL-}/js/database_admin.js?version={-$jsversion-}"></script>
+		<script type="text/javascript">
+			jQuery(document).ready(function() {
+				onReadyDatabaseAdmin();
+				doDatabaseAdminUpdateList();
+			});
+		</script>
 	</head>
 	<body>
 		DesInventar Database Admin
 		Version : {-$jsversion-}<br />
 		{-include file="region.tpl"-}
+		{-include file="desinventarinfo.tpl"-}
 	</body>
 </html>

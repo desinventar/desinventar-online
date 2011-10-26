@@ -49,6 +49,12 @@ if ( (substr($_SERVER['CONTENT_TYPE'],0,19) == 'multipart/form-data') &&
 fb($cmd);
 switch ($cmd)
 {
+	case 'cmdAdminGetDatabaseList':
+		$answer['Status']     = ERR_NO_ERROR;
+		$answer['RegionList'] = $us->q->getRegionAdminList();
+		fb($answer['RegionList']);
+		echo json_encode($answer);
+	break;
 	case 'cmdAdminDB':
 		$t->assign('ctl_adminreg', true);
 		$t->assign('ctl_reglist', true);
