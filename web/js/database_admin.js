@@ -12,25 +12,26 @@ function onReadyDatabaseAdmin() {
 	jQuery('#tblDatabaseList #LangIsoCode').hide();
 
 	// Highlight row on mouseOver
-	jQuery('#tblDatabaseList tr:not(:first)').live({
+	jQuery('#tblDatabaseList tr').live({
 		mouseenter: function() {
 			jQuery(this).addClass('highlight');
 		},
 		mouseleave: function() {
 			jQuery(this).removeClass('highlight');
+		},
+		click:  function() {
+			uploadMsg(''); 
+			jQuery('#frmDatabaseEdit :input').unhighlight();
+			jQuery('#frmDatabaseEdit #cmd').val('cmdRegionUpdate');
+			setRegionPA(jQuery(this).find('#RegionId').html(),
+						jQuery(this).find('#CountryIso').html(),
+						jQuery(this).find('#RegionLabel').html(),
+						jQuery(this).find('#LangIsoCode').html(),
+						jQuery(this).find('#RegionUserAdmin').html(),
+						jQuery(this).find('#RegionActive input').attr('checked'),
+						jQuery(this).find('#RegionPublic input').attr('checked')
+			);
 		}
-	}).live('click', function() {
-		uploadMsg(''); 
-		jQuery('#frmDatabaseEdit :input').unhighlight();
-		jQuery('#frmDatabaseEdit #cmd').val('cmdRegionUpdate');
-		setRegionPA(jQuery(this).find('#RegionId').html(),
-		            jQuery(this).find('#CountryIso').html(),
-		            jQuery(this).find('#RegionLabel').html(),
-		            jQuery(this).find('#LangIsoCode').html(),
-		            jQuery(this).find('#RegionUserAdmin').html(),
-		            jQuery(this).find('#RegionActive input').attr('checked'),
-		            jQuery(this).find('#RegionPublic input').attr('checked')
-		);
 	});
 
 	jQuery('#frmDatabaseEdit #CountryIso').unbind('change').change(function() {

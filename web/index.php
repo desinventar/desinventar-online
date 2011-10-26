@@ -52,7 +52,6 @@ switch ($cmd)
 	case 'cmdAdminGetDatabaseList':
 		$answer['Status']     = ERR_NO_ERROR;
 		$answer['RegionList'] = $us->q->getRegionAdminList();
-		fb($answer['RegionList']);
 		echo json_encode($answer);
 	break;
 	case 'cmdAdminDB':
