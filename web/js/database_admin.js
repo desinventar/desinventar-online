@@ -12,14 +12,14 @@ function onReadyDatabaseAdmin() {
 	jQuery('#tblDatabaseList #LangIsoCode').hide();
 
 	// Highlight row on mouseOver
-	jQuery('#tblDatabaseList tr:not(:first)').unbind('hover').hover(
-		function() {
+	jQuery('#tblDatabaseList tr:not(:first)').live({
+		mouseenter: function() {
 			jQuery(this).addClass('highlight');
 		},
-		function() {
+		mouseleave: function() {
 			jQuery(this).removeClass('highlight');
 		}
-	).unbind('click').click(function() {
+	}).live('click', function() {
 		uploadMsg(''); 
 		jQuery('#frmDatabaseEdit :input').unhighlight();
 		jQuery('#frmDatabaseEdit #cmd').val('cmdRegionUpdate');
@@ -96,6 +96,35 @@ function onReadyDatabaseAdmin() {
 		setRegionPA('','', '', '', '', true,false);
 		jQuery('#frmDatabaseEdit #cmd').val('cmdRegionCreate');
 	});
+} //onReadyDatabaseAdmin()
+
+function doDatabaseAdminUpdateList()
+{
+	jQuery.post(
+		jQuery('#desinventarURL').val(),
+		{cmd:'cmdAdminGetDatabaseList'}, 
+		function(data)
+		{
+			jQuery.each(data.RegionList, function(index, value) {
+				var clonedRow = jQuery('#lst_regionpa tr:last').clone().show();
+				jQuery('.CountryIso'     , clonedRow).html(value.CountryIso);
+				jQuery('.RegionLabel'    , clonedRow).html(value.RegionLabel);
+				jQuery('.RegionUserAdmin', clonedRow).html(value.UserId_AdminRegion);
+				jQuery('.RegionActive'   , clonedRow).attr('checked', value.RegionActive).attr('disabled',true);
+				jQuery('.RegionPublic'   , clonedRow).attr('checked', value.RegionPublic).attr('disabled',true);
+				jQuery('.RegionId'       , clonedRow).html(value.RegionId).hide();
+				jQuery('.LangIsoCode'    , clonedRow).html(value.LangIsoCode).hide();
+				jQuery('#lst_regionpa').append(clonedRow);
+			});
+			// Table Stripes...
+			jQuery('#tblDatabaseList tr:odd').removeClass('normal').addClass('normal');
+			jQuery('#tblDatabaseList tr:even').removeClass('normal').addClass('under');
+			
+			jQuery('#tblDatabaseList #RegionId').hide();
+			jQuery('#tblDatabaseList #LangIsoCode').hide();
+		},
+		'json'
+	);
 }
 
 function setRegionPA(prmRegionId, prmCountryIso, prmRegionLabel, 
