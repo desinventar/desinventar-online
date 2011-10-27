@@ -46,7 +46,11 @@
 	 </table>
 	</div>
 	<br />
-	<input id="btnDatabaseEditAdd" type="button" value="{-#baddoption#-}"  />
+	<input id="btnDatabaseAdminNew"    type="button" value="{-#baddoption#-}" style="display:none;" />
+	<input id="btnDatabaseAdminEdit"   class="clsDatabaseAdminButton" type="button" value="Edit" />
+	<input id="btnDatabaseAdminExport" class="clsDatabaseAdminButton" type="button" value="Export" />
+	<input id="btnDatabaseAdminImport" class="clsDatabaseAdminButton" type="button" value="Import" />
+	<br />
 	<span id="regionpastatusmsg" class="dlgmsg"></span><br />
 	<div id="divDatabaseEditResult">
 	</div>
