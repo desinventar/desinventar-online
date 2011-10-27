@@ -340,7 +340,7 @@
 	</Group>
 	<Group name="di8_region">
 		<Message id="ttname">
-			<Text LangIsoCode="eng">Databases management</Text>
+			<Text LangIsoCode="eng">Database management</Text>
 			<Text LangIsoCode="spa">Gestión de base de datos</Text>
 			<Text LangIsoCode="por">Gestão de bancos de dados</Text>
 			<Text LangIsoCode="fre">Gestion de base de données</Text>
