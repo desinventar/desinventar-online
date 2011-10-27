@@ -55,6 +55,8 @@ switch ($cmd)
 		echo json_encode($answer);
 	break;
 	case 'cmdAdminDB':
+		$t->assign('LanguageList', $us->q->loadLanguages(1));
+		$t->assign('CountryList', $us->q->getCountryList());
 		$t->assign('ctl_adminreg', true);
 		$t->assign('ctl_reglist', true);
 		$t->assign('ctl_admregmess', true);

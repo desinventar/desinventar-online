@@ -1,7 +1,7 @@
 {-config_load file="$lg.conf" section="di8_region"-}
 {-if $ctl_adminreg-}
 	<h2>{-#ttname#-}</h2>
-	<div class="dwin" style="width:500px; height:150px;">
+	<div class="dwin" style="width:100%;height:200px;">
 		<table id="tblDatabaseList" class="col">
 			<thead>
 				<tr>
@@ -33,11 +33,11 @@
 		<tr style="display:none;">
 			<td class="CountryIso"></td>
 			<td class="RegionLabel"></td>
-			<td class="RegionUserAdmin"></td>
+			<td><span class="RegionAdminUserFullName"></span>/<span class="RegionAdminUserId"></span></td>
 			<td><input class="RegionActive" type="checkbox" disabled /></td>
 			<td><input class="RegionPublic" type="checkbox" disabled /></td>
-			<td class="RegionId"></td>
-			<td class="LangIsoCode"></td>
+			<td class="RegionId"            style="display:none;"></td>
+			<td class="LangIsoCode"         style="display:none;"></td>
 		</tr>
 {-/if-}
 {-* Continue with adminreg.. *-}

@@ -980,18 +980,20 @@ class Query //extends PDO
 			{
 				$row['RegionLabel'] = $row['RegionId'];
 			}
-			$row['UserId_AdminRegion'] = '';
+			$row['RegionAdminUserId'] = '';
 			$data[$RegionId] = $row;
 		} //foreach
 		
 		foreach($data as $RegionId => &$info)
 		{
-			$sQuery = 'SELECT * FROM RegionAuth WHERE ' . 
-				' RegionId="' . $RegionId . '" AND ' . 
-				' AuthKey="ROLE" AND AuthAuxValue="ADMINREGION" LIMIT 1;';
+			$sQuery = 'SELECT RA.*,U.UserFullName FROM RegionAuth RA,User U WHERE ' . 
+				' RA.UserId=U.UserId AND ' .
+				' RA.RegionId="' . $RegionId . '" AND ' . 
+				' RA.AuthKey="ROLE" AND RA.AuthAuxValue="ADMINREGION" LIMIT 1;';
 			foreach($this->core->query($sQuery) as $row)
 			{
-				$info['UserId_AdminRegion'] = $row['UserId'];
+				$info['RegionAdminUserId']       = $row['UserId'];
+				$info['RegionAdminUserFullName'] = $row['UserFullName'];
 			} //foreach
 		} //foreach
 		return $data;
