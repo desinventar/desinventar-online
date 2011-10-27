@@ -3,14 +3,12 @@
  (c) 1998-2011 Corporacion OSSO
 */
 
-function onReadyDatabaseAdmin() {
-	// Table Stripes...
-	jQuery('#tblDatabaseList tr:odd').removeClass('normal').addClass('normal');
-	jQuery('#tblDatabaseList tr:even').removeClass('normal').addClass('under');
+function onReadyDatabaseAdmin()
+{
+	// Populate CountryList/LanguageList
+	jQuery('#desinventarCountryList').clone().attr('id','CountryIso').attr('name','CountryIso').appendTo('#frmDBImport #spanCountryIso').show();
+	jQuery('#desinventarLanguageList').clone().attr('id','LangIsoCode').attr('name','LangIsoCode').appendTo('#frmDBImport #spanLangIsoCode').show();
 	
-	jQuery('#tblDatabaseList #RegionId').hide();
-	jQuery('#tblDatabaseList #LangIsoCode').hide();
-
 	// Highlight row on mouseOver
 	jQuery('#tblDatabaseList tr').live({
 		mouseenter: function() {
@@ -22,13 +20,14 @@ function onReadyDatabaseAdmin() {
 		click:  function() {
 			jQuery('#frmDatabaseEdit :input').unhighlight();
 			jQuery('#frmDatabaseEdit #cmd').val('cmdRegionUpdate');
-			setRegionPA(jQuery(this).find('.RegionId').html(),
-						jQuery(this).find('.CountryIso').html(),
+			setRegionPA(jQuery(this).find('.CountryIso').html(),
 						jQuery(this).find('.RegionLabel').html(),
-						jQuery(this).find('.LangIsoCode').html(),
 						jQuery(this).find('.RegionUserAdmin').html(),
 						jQuery(this).find('.RegionActive').attr('checked'),
-						jQuery(this).find('.RegionPublic').attr('checked')
+						jQuery(this).find('.RegionPublic').attr('checked'),
+						jQuery(this).find('.RegionId').html(),
+						jQuery(this).find('.LangIsoCode').html(),
+						jQuery(this).find('.RegionUserAdminName').html()
 			);
 		}
 	});
@@ -109,7 +108,8 @@ function doDatabaseAdminUpdateList()
 				var clonedRow = jQuery('#lst_regionpa tr:last').clone().show();
 				jQuery('.CountryIso'     , clonedRow).html(value.CountryIso);
 				jQuery('.RegionLabel'    , clonedRow).html(value.RegionLabel);
-				jQuery('.RegionUserAdmin', clonedRow).html(value.UserId_AdminRegion);
+				jQuery('.RegionAdminUserId', clonedRow).text(value.RegionAdminUserId);
+				jQuery('.RegionAdminUserFullName', clonedRow).text(value.RegionAdminUserFullName).show();
 				jQuery('.RegionActive'   , clonedRow).attr('checked', value.RegionActive).attr('disabled',true);
 				jQuery('.RegionPublic'   , clonedRow).attr('checked', value.RegionPublic).attr('disabled',true);
 				jQuery('.RegionId'       , clonedRow).html(value.RegionId).hide();
