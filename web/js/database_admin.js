@@ -18,6 +18,9 @@ function onReadyDatabaseAdmin()
 			jQuery(this).removeClass('highlight');
 		},
 		click:  function() {
+			jQuery('.clsDatabaseAdminButton').show();
+			jQuery('#btnDatabaseAdminNew').hide();
+			/*
 			jQuery('#frmDatabaseEdit :input').unhighlight();
 			jQuery('#frmDatabaseEdit #cmd').val('cmdRegionUpdate');
 			setRegionPA(jQuery(this).find('.CountryIso').html(),
@@ -29,6 +32,7 @@ function onReadyDatabaseAdmin()
 						jQuery(this).find('.LangIsoCode').html(),
 						jQuery(this).find('.RegionUserAdminName').html()
 			);
+			*/
 		}
 	});
 
@@ -90,11 +94,12 @@ function onReadyDatabaseAdmin()
 	});
 
 	// Add New Region
-	jQuery('#btnDatabaseEditAdd').unbind('click').click(function() {
+	jQuery('#btnDatabaseAdminNew').live('click', function() {
 		jQuery('#regionpaaddsect').show();
 		setRegionPA('','', '', '', '', true,false);
 		jQuery('#frmDatabaseEdit #cmd').val('cmdRegionCreate');
-	});
+	}).hide();
+	jQuery('.clsDatabaseAdminButton').hide();
 } //onReadyDatabaseAdmin()
 
 function doDatabaseAdminUpdateList()
@@ -122,6 +127,10 @@ function doDatabaseAdminUpdateList()
 			
 			jQuery('#tblDatabaseList #RegionId').hide();
 			jQuery('#tblDatabaseList #LangIsoCode').hide();
+			if (jQuery('#desinventarUserId').val() == 'root') 
+			{
+				jQuery('#btnDatabaseAdminNew').show();
+			}
 		},
 		'json'
 	);
