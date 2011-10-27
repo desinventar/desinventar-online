@@ -39,17 +39,6 @@
 			<td class="RegionId"></td>
 			<td class="LangIsoCode"></td>
 		</tr>
-{-foreach name=rpa key=key item=item from=$RegionList-}
-		<tr>
-			<td id="CountryIso">{-$item.CountryIso-}</td>
-			<td id="RegionLabel">{-$item.RegionLabel-}</td>
-			<td id="RegionUserAdmin">{-$item.UserId_AdminRegion-}</td>
-			<td id="RegionActive"><input type="checkbox" {-if ($item.RegionActive == 1)-} checked {-/if-} disabled /></td>
-			<td id="RegionPublic"><input type="checkbox" {-if ($item.RegionPublic == 1)-} checked {-/if-} disabled /></td>
-			<td id="RegionId">{-$key-}</td>
-			<td id="LangIsoCode">{-$item.LangIsoCode-}</td>
-		</tr>
-{-/foreach-}
 {-/if-}
 {-* Continue with adminreg.. *-}
 {-if $ctl_adminreg-}
