@@ -26,7 +26,7 @@
 					</th>
 				</tr>
 			</thead>
-			<tbody id="lst_regionpa">
+			<tbody id="tbodyDatabaseList">
 				<tr style="display:none;">
 					<td class="CountryIso">
 					</td>
@@ -53,11 +53,13 @@
 </div>
 
 <div id="divDatabaseAdminUpdate" style="display:none;">
-	<span class="RegionLabel"></span><br />
+	<span class="RegionLabel"></span>
+	<br />
 	<input id="btnDatabaseAdminEdit"   class="clsDatabaseAdminButton" type="button" value="Edit" />
 	<input id="btnDatabaseAdminExport" class="clsDatabaseAdminButton" type="button" value="Export" />
 	<input id="btnDatabaseAdminImport" class="clsDatabaseAdminButton" type="button" value="Import" />
 	<br />
+	<a id="btnDatabaseAdminSelect" title="Select a new database fro list">[Select another database]</a>
 </div>
 
 <div id="divDatbaseAdminEdit" style="display:none">

@@ -18,7 +18,7 @@ function onReadyDatabaseAdmin()
 			jQuery(this).removeClass('highlight');
 		},
 		click:  function() {
-			jQuery('#divDatabaseAdminList').slideToggle(500);
+			jQuery('#divDatabaseAdminList').hide();
 			jQuery('#divDatabaseAdminUpdate .RegionLabel').text(jQuery('.RegionLabel',this).html());
 			jQuery('#divDatabaseAdminUpdate').show();
 			jQuery('.clsDatabaseAdminButton').show();
@@ -39,8 +39,24 @@ function onReadyDatabaseAdmin()
 		}
 	});
 
+	// Add New Region
+	jQuery('#btnDatabaseAdminNew').live('click', function() {
+		jQuery('#regionpaaddsect').show();
+		setRegionPA('','', '', '', '', true,false);
+		jQuery('#frmDatabaseEdit #cmd').val('cmdRegionCreate');
+	}).hide();
+	jQuery('.clsDatabaseAdminButton').hide();
+
+	// Select Database from List
+	jQuery('#btnDatabaseAdminSelect').live('click', function() {
+		jQuery('#divDatabaseAdminUpdate').hide();
+		jQuery('#divDatabaseAdminList').show();
+	});
+
+	/*
 	jQuery('#frmDatabaseEdit #CountryIso').unbind('change').change(function() {
-		if (jQuery('#frmDatabaseEdit #cmd').val() == 'cmdRegionCreate') {
+		if (jQuery('#frmDatabaseEdit #cmd').val() == 'cmdRegionCreate')
+		{
 			jQuery.post('index.php',
 				{cmd        : 'cmdRegionBuildRegionId',
 				 CountryIso : jQuery(this).val()
@@ -56,7 +72,8 @@ function onReadyDatabaseAdmin()
 	});
 	
 	jQuery('#frmDatabaseEdit #lblRegionId').dblclick(function() {
-		if (jQuery('#frmDatabaseEdit #cmd').val() == 'cmdRegionCreate') {
+		if (jQuery('#frmDatabaseEdit #cmd').val() == 'cmdRegionCreate')
+		{
 			jQuery('#frmDatabaseEdit #RegionId').removeAttr('disabled').focus();
 		}
 	});
@@ -95,14 +112,7 @@ function onReadyDatabaseAdmin()
 		}
 		return false;
 	});
-
-	// Add New Region
-	jQuery('#btnDatabaseAdminNew').live('click', function() {
-		jQuery('#regionpaaddsect').show();
-		setRegionPA('','', '', '', '', true,false);
-		jQuery('#frmDatabaseEdit #cmd').val('cmdRegionCreate');
-	}).hide();
-	jQuery('.clsDatabaseAdminButton').hide();
+	*/
 } //onReadyDatabaseAdmin()
 
 function doDatabaseAdminUpdateList()
@@ -113,7 +123,7 @@ function doDatabaseAdminUpdateList()
 		function(data)
 		{
 			jQuery.each(data.RegionList, function(index, value) {
-				var clonedRow = jQuery('#lst_regionpa tr:last').clone().show();
+				var clonedRow = jQuery('#tbodyDatabaseList tr:last').clone().show();
 				jQuery('.CountryIso'     , clonedRow).html(value.CountryIso);
 				jQuery('.RegionLabel'    , clonedRow).html(value.RegionLabel);
 				jQuery('.RegionAdminUserId', clonedRow).text(value.RegionAdminUserId);
@@ -122,7 +132,7 @@ function doDatabaseAdminUpdateList()
 				jQuery('.RegionPublic'   , clonedRow).attr('checked', value.RegionPublic).attr('disabled',true);
 				jQuery('.RegionId'       , clonedRow).html(value.RegionId).hide();
 				jQuery('.LangIsoCode'    , clonedRow).html(value.LangIsoCode).hide();
-				jQuery('#lst_regionpa').append(clonedRow);
+				jQuery('#tbodyDatabaseList').append(clonedRow);
 			});
 			// Table Stripes...
 			jQuery('#tblDatabaseList tr:odd').removeClass('normal').addClass('normal');
