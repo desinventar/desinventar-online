@@ -7,6 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/datacards.css?version={-$jsversion-}" />
 		<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/main.css?version={-$jsversion-}" />
 		{-include file="jquery.tpl"-}
+		<script type="text/javascript" src="{-$desinventarURL-}/js/jquery.snippets.js?version={-$jsversion-}"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/js/database_admin.js?version={-$jsversion-}"></script>
 		<script type="text/javascript">
 			jQuery(document).ready(function() {

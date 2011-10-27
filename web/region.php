@@ -62,7 +62,7 @@ switch ($cmd)
 		$t->assign('usr'         , $us->getUsersList(''));
 		$t->assign('LanguageList', $us->q->loadLanguages(1));
 		$t->assign('ctl_adminreg', true);
-		$t->assign('RegionList'  , $us->q->getRegionAdminList());
+		//$t->assign('RegionList'  , $us->q->getRegionAdminList());
 		$t->assign('ctl_reglist' , true);
 	break;
 	case 'list':

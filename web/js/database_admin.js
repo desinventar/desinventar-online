@@ -20,16 +20,15 @@ function onReadyDatabaseAdmin() {
 			jQuery(this).removeClass('highlight');
 		},
 		click:  function() {
-			uploadMsg(''); 
 			jQuery('#frmDatabaseEdit :input').unhighlight();
 			jQuery('#frmDatabaseEdit #cmd').val('cmdRegionUpdate');
-			setRegionPA(jQuery(this).find('#RegionId').html(),
-						jQuery(this).find('#CountryIso').html(),
-						jQuery(this).find('#RegionLabel').html(),
-						jQuery(this).find('#LangIsoCode').html(),
-						jQuery(this).find('#RegionUserAdmin').html(),
-						jQuery(this).find('#RegionActive input').attr('checked'),
-						jQuery(this).find('#RegionPublic input').attr('checked')
+			setRegionPA(jQuery(this).find('.RegionId').html(),
+						jQuery(this).find('.CountryIso').html(),
+						jQuery(this).find('.RegionLabel').html(),
+						jQuery(this).find('.LangIsoCode').html(),
+						jQuery(this).find('.RegionUserAdmin').html(),
+						jQuery(this).find('.RegionActive').attr('checked'),
+						jQuery(this).find('.RegionPublic').attr('checked')
 			);
 		}
 	});
