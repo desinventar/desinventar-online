@@ -18,6 +18,9 @@ function onReadyDatabaseAdmin()
 			jQuery(this).removeClass('highlight');
 		},
 		click:  function() {
+			jQuery('#divDatabaseAdminList').slideToggle(500);
+			jQuery('#divDatabaseAdminUpdate .RegionLabel').text(jQuery('.RegionLabel',this).html());
+			jQuery('#divDatabaseAdminUpdate').show();
 			jQuery('.clsDatabaseAdminButton').show();
 			jQuery('#btnDatabaseAdminNew').hide();
 			/*
