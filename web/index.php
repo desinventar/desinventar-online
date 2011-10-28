@@ -46,7 +46,6 @@ if ( (substr($_SERVER['CONTENT_TYPE'],0,19) == 'multipart/form-data') &&
 {
      $cmd = 'fileupload';
 }
-fb($cmd);
 switch ($cmd)
 {
 	case 'cmdAdminDatabaseGetList':
@@ -56,7 +55,6 @@ switch ($cmd)
 	break;
 	case 'cmdAdminDatabaseGetInfo':
 		$RegionId = getParameter('RegionId', '');
-		fb($RegionId);
 		$r = new DIRegion($us, $RegionId);
 		$answer['Status'] = ERR_NO_ERROR;
 		$answer['Region'] = $r->getRegionInfoCore();
@@ -89,19 +87,17 @@ switch ($cmd)
 	case 'cmdRegionCreate':
 	case 'cmdRegionUpdate':
 		$iReturn = ERR_NO_ERROR;
-		fb($_POST);
-		/*
 		if ($us->UserId != 'root')
 		{
 			$iReturn = ERR_ACCESS_DENIED;
 		}
 		if ($iReturn > 0)
 		{
-			$RegionId = $_POST['RegionInfo']['RegionId'];
-			$RegionCmd = $_POST['RegionInfo']['cmd'];
+			$RegionId = $_POST['Region']['RegionId'];
+			$RegionCmd = $_POST['Region']['cmd'];
 
 			$r = new DIRegionRecord($us, $RegionId);
-			$iReturn = $r->setFromArray($_POST['RegionInfo']);
+			$iReturn = $r->setFromArray($_POST['Region']);
 		}
 		if ($iReturn > 0)
 		{
@@ -125,11 +121,10 @@ switch ($cmd)
 		{
 			// Set Role ADMINREGION in RegionAuth: master for this region
 			$r->removeRegionUserAdmin();
-			$iReturn = $us->setUserRole($_POST['RegionInfo']['RegionUserAdmin'], 
+			$iReturn = $us->setUserRole($_POST['Region']['RegionUserAdmin'], 
 			                            $r->get('RegionId'),
 			                            'ADMINREGION');
 		}
-		*/
 		$answer = array();
 		$answer['Status'] = $iReturn;
 		$answer['RegionId'] = $r->get('RegionId');

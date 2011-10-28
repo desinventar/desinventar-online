@@ -419,7 +419,6 @@ class UserSession {
 			$sQuery .= " WHERE UserId='" . $prmUserId . "'";
 		}
 		$sQuery .= " ORDER BY UserFullName";
-		fb($sQuery);
 		$sth = $this->q->core->prepare($sQuery);
 		try
 		{
