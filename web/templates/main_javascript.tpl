@@ -123,10 +123,10 @@
 					jQuery('#dbl').load('user.php?cmd=adminusr',function() { onReadyUserAdmin(); });
 					dblw.show();
 				break;
-				case 'mnuDatabaseAdmin':
-					updateList('dbl', 'region.php', 'cmd=adminreg');
-					doDatabaseAdminUpdateList();
-					dblw.show();
+				case 'mnuAdminDatabase':
+					jQuery('.contentBlock').hide();
+					jQuery('#divAdminDatabase').show();
+					doAdminDatabaseUpdateList();
 				break;
 				// help menu
 				case 'mnuHelpAbout':
@@ -289,7 +289,7 @@
 				{-if $desinventarUserId == "root"-}
 					, // Keep this coma inside the if block to prevent IE from going crazy when rending page...
 					{id:'mnuUserAdmin', text: '{-#mnuUserAdmin#-}',	handler: onMenuItem  }, //admin Users
-					{id:'mnuDatabaseAdmin', text: '{-#mnuDatabaseAdmin#-}',	handler: onMenuItem  }, //admin Databases
+					{id:'mnuAdminDatabase', text: '{-#mnuAdminDatabase#-}',	handler: onMenuItem  }, //admin Databases
 					'-',
 					{id:'mnuDatabaseImport', text: '{-#mnuDatabaseImport#-}',	handler: onMenuItem  }
 				{-/if-}

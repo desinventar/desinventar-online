@@ -169,7 +169,7 @@
 			<Text LangIsoCode="por">Permissões administrativas</Text>
 			<Text LangIsoCode="fre">Autorisations administratives</Text>
 		</Message>
-		<Message id="mnuDatabaseAdmin">
+		<Message id="mnuAdminDatabase">
 			<Text LangIsoCode="eng">Database management</Text>
 			<Text LangIsoCode="spa">Gestión de bases de datos</Text>
 			<Text LangIsoCode="por">Gestão de bancos de dados</Text>

@@ -11,8 +11,8 @@
 		<script type="text/javascript" src="{-$desinventarURL-}/js/database_admin.js?version={-$jsversion-}"></script>
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
-				onReadyDatabaseAdmin();
-				doDatabaseAdminUpdateList();
+				onReadyAdminDatabase();
+				doAdminDatabaseUpdateList();
 			});
 		</script>
 	</head>
