@@ -42,7 +42,7 @@
 	<script type="text/javascript" src="js/desconsultar.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/database_backup.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/database_import.js?version={-$jsversion-}"></script>
-	<script type="text/javascript" src="js/database_admin.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="js/admin_database.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/database_config.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/common.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/main.js?version={-$jsversion-}"></script>

@@ -5,9 +5,9 @@
 
 function onReadyAdminDatabase()
 {
-	// Populate CountryList/LanguageList
-	jQuery('#desinventarCountryList').clone().attr('id','CountryIso').attr('name','CountryIso').appendTo('#frmDBImport #spanCountryIso').show();
-	jQuery('#desinventarLanguageList').clone().attr('id','LangIsoCode').attr('name','LangIsoCode').appendTo('#frmDBImport #spanLangIsoCode').show();
+	// Populate CountryList/LanguageList in frmRegionEdit form
+	jQuery('#desinventarCountryList option').clone().appendTo('#frmRegionEdit_CountryIso');
+	jQuery('#desinventarLanguageList option').clone().appendTo('#frmRegionEdit_LangIsoCode');
 	
 	// Highlight row on mouseOver
 	jQuery('#tblDatabaseList tr').live({
@@ -20,6 +20,7 @@ function onReadyAdminDatabase()
 		click:  function() {
 			jQuery('#divAdminDatabaseList').hide();
 			jQuery('#divAdminDatabaseUpdate .RegionLabel').text(jQuery('.RegionLabel',this).html());
+			jQuery('#divAdminDatabaseUpdate .RegionId').text(jQuery('.RegionId',this).html());
 			jQuery('#divAdminDatabaseUpdate').show();
 			jQuery('.clsAdminDatabaseButton').show();
 			jQuery('#btnAdminDatabaseNew').hide();
@@ -28,7 +29,7 @@ function onReadyAdminDatabase()
 	});
 
 	jQuery('#btnAdminDatabaseEdit').click(function() {
-		var RegionId = jQuery(this).find('.RegionId').html();
+		var RegionId = jQuery('#divAdminDatabaseUpdate .RegionId').text();
 		// Load Information about database...
 		jQuery.post(
 			jQuery('#desinventarURL').val(),
@@ -38,30 +39,30 @@ function onReadyAdminDatabase()
 			function(data)
 			{
 				jQuery('#divAdminDatabaseEdit').show();
+				jQuery('#frmRegionEdit_CountryIso').val(data.Region.CountryIso);
+				jQuery('#frmRegionEdit_RegionId').val(data.Region.RegionId);
+				jQuery('#frmRegionEdit_RegionLabel').val(data.Region.RegionLabel);
+				jQuery('#frmRegionEdit_LangIsoCode').val(data.Region.LangIsoCode);
+				jQuery('#frmRegionEdit_RegionActive').removeAttr('checked');
+				if (parseInt(data.Region.RegionActive) > 0)
+				{
+					jQuery('#frmRegionEdit_RegionActive').attr('checked','checked');
+				}
+				jQuery('#frmRegionEdit_RegionPublic').removeAttr('checked');
+				if (parseInt(data.Region.RegionPublic) > 0)
+				{
+					jQuery('#frmRegionEdit_RegionPublic').attr('checked','checked');
+				}
 			},
 			'json'
 		);
-			
-		/*
-		jQuery('#frmDatabaseEdit :input').unhighlight();
-		jQuery('#frmDatabaseEdit #cmd').val('cmdRegionUpdate');
-		setRegionPA(jQuery(this).find('.CountryIso').html(),
-					jQuery(this).find('.RegionLabel').html(),
-					jQuery(this).find('.RegionUserAdmin').html(),
-					jQuery(this).find('.RegionActive').attr('checked'),
-					jQuery(this).find('.RegionPublic').attr('checked'),
-					jQuery(this).find('.RegionId').html(),
-					jQuery(this).find('.LangIsoCode').html(),
-					jQuery(this).find('.RegionUserAdminName').html()
-		);
-		*/
 	});
 
 	// Add New Region
 	jQuery('#btnAdminDatabaseNew').live('click', function() {
 		jQuery('#regionpaaddsect').show();
 		setRegionPA('','', '', '', '', true,false);
-		jQuery('#frmDatabaseEdit #cmd').val('cmdRegionCreate');
+		jQuery('#frmRegionEdit #cmd').val('cmdRegionCreate');
 	}).hide();
 	jQuery('.clsAdminDatabaseButton').hide();
 
@@ -72,8 +73,8 @@ function onReadyAdminDatabase()
 	});
 
 	/*
-	jQuery('#frmDatabaseEdit #CountryIso').unbind('change').change(function() {
-		if (jQuery('#frmDatabaseEdit #cmd').val() == 'cmdRegionCreate')
+	jQuery('#frmRegionEdit #CountryIso').unbind('change').change(function() {
+		if (jQuery('#frmRegionEdit #cmd').val() == 'cmdRegionCreate')
 		{
 			jQuery.post('index.php',
 				{cmd        : 'cmdRegionBuildRegionId',
@@ -81,7 +82,7 @@ function onReadyAdminDatabase()
 				},
 				function(data) {
 					if (parseInt(data.Status) > 0) {
-						jQuery('#frmDatabaseEdit #RegionId').val(data.RegionId);					
+						jQuery('#frmRegionEdit #RegionId').val(data.RegionId);					
 					}
 				},
 				'json'
@@ -89,17 +90,17 @@ function onReadyAdminDatabase()
 		}
 	});
 	
-	jQuery('#frmDatabaseEdit #lblRegionId').dblclick(function() {
-		if (jQuery('#frmDatabaseEdit #cmd').val() == 'cmdRegionCreate')
+	jQuery('#frmRegionEdit #lblRegionId').dblclick(function() {
+		if (jQuery('#frmRegionEdit #cmd').val() == 'cmdRegionCreate')
 		{
-			jQuery('#frmDatabaseEdit #RegionId').removeAttr('disabled').focus();
+			jQuery('#frmRegionEdit #RegionId').removeAttr('disabled').focus();
 		}
 	});
 	
-	jQuery('#frmDatabaseEdit').unbind('submit').submit(function() {
+	jQuery('#frmRegionEdit').unbind('submit').submit(function() {
 		// Validate Fields
 		var a=new Array('CountryIso','RegionLabel','LangIsoCode','RegionUserAdmin');
-		var bContinue = checkForm('frmDatabaseEdit',a, '{-#errmsgfrm#-}');
+		var bContinue = checkForm('frmRegionEdit',a, '{-#errmsgfrm#-}');
 		var s = jQuery(this).find('#RegionStatus');
 		s.val(0);
 		if (jQuery(this).find('#RegionActive').attr('checked')) {
@@ -108,11 +109,11 @@ function onReadyAdminDatabase()
 		if (jQuery(this).find('#RegionPublic').attr('checked')) {
 			s.val(parseInt(s.val()) | 2);
 		}
-		jQuery('#frmDatabaseEdit #RegionId').removeAttr('disabled');
+		jQuery('#frmRegionEdit #RegionId').removeAttr('disabled');
 		var params = jQuery(this).serializeObject();
-		jQuery('#frmDatabaseEdit #RegionId').attr('disabled','disabled');
+		jQuery('#frmRegionEdit #RegionId').attr('disabled','disabled');
 		if (bContinue) {
-			jQuery('#frmDatabaseEdit :input').unhighlight();
+			jQuery('#frmRegionEdit :input').unhighlight();
 			jQuery.post('index.php',
 				{cmd        : 'cmdRegionUpdate',
 				 RegionInfo : params
@@ -174,13 +175,13 @@ function setRegionPA(prmRegionId, prmCountryIso, prmRegionLabel,
 					 prmRegionActive, prmRegionPublic) {
 	mod = "regionpa";
 	jQuery('#regionpaaddsect').show();
-	jQuery('#frmDatabaseEdit #RegionId').val(prmRegionId);
-	jQuery('#frmDatabaseEdit #CountryIso').val(prmCountryIso);
-	jQuery('#frmDatabaseEdit #RegionLabel').val(prmRegionLabel);
-	jQuery('#frmDatabaseEdit #LangIsoCode').val(prmLangIsoCode);
-	jQuery('#frmDatabaseEdit #RegionUserAdmin').val(prmUserId_AdminRegion);
-	jQuery('#frmDatabaseEdit #RegionActive').attr('checked', prmRegionActive);
-	jQuery('#frmDatabaseEdit #RegionPublic').attr('checked', prmRegionPublic);
+	jQuery('#frmRegionEdit #RegionId').val(prmRegionId);
+	jQuery('#frmRegionEdit #CountryIso').val(prmCountryIso);
+	jQuery('#frmRegionEdit #RegionLabel').val(prmRegionLabel);
+	jQuery('#frmRegionEdit #LangIsoCode').val(prmLangIsoCode);
+	jQuery('#frmRegionEdit #RegionUserAdmin').val(prmUserId_AdminRegion);
+	jQuery('#frmRegionEdit #RegionActive').attr('checked', prmRegionActive);
+	jQuery('#frmRegionEdit #RegionPublic').attr('checked', prmRegionPublic);
 	// RegionId is readonly by default
-	jQuery('#frmDatabaseEdit #RegionId').attr('disabled','disabled');
+	jQuery('#frmRegionEdit #RegionId').attr('disabled','disabled');
 }

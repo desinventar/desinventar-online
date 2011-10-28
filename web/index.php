@@ -55,8 +55,11 @@ switch ($cmd)
 		echo json_encode($answer);
 	break;
 	case 'cmdAdminDatabaseGetInfo':
+		$RegionId = getParameter('RegionId', '');
+		fb($RegionId);
+		$r = new DIRegion($us, $RegionId);
 		$answer['Status'] = ERR_NO_ERROR;
-		$answer['RegionInfo'] = array();
+		$answer['Region'] = $r->getRegionInfoCore();
 		echo json_encode($answer);
 	break;
 	case 'cmdAdminDB':
