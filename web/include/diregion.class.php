@@ -180,7 +180,21 @@ class DIRegion extends DIObject {
 		return $sReturn;
 	} //function
 
-		
+	public function getRegionInfoCore()
+	{
+		$answer = array();
+		if ($this->RegionId != '')
+		{
+			foreach(array('RegionId','RegionLabel','CountryIso','LangIsoCode','RegionStatus') as $Field)
+			{
+				$answer[$Field] = $this->get($Field);
+			}
+		}
+		$answer['RegionActive'] = intval($answer['RegionStatus']) & CONST_REGIONACTIVE;
+		$answer['RegionPublic'] = intval($answer['RegionStatus']) & CONST_REGIONPUBLIC;
+		return $answer;
+	}
+
 	public function getDBInfo($prmLang='eng') {
 		$InfoSynopsis = trim($this->get('InfoSynopsis', $prmLang)) . '';
 		$isInfoEmpty =  strlen($InfoSynopsis) < 1;
