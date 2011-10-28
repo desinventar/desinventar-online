@@ -20,3 +20,7 @@
 <!-- Import datacards-->
 <div class="contentBlock" id="divDatacardsImport" style="display:none;">
 </div>
+
+<div class="contentBlock" id="divAdminDatabase" style="display:none;">
+	{-include file="region.tpl"-}
+</div>

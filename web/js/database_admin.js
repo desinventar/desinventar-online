@@ -3,7 +3,7 @@
  (c) 1998-2011 Corporacion OSSO
 */
 
-function onReadyDatabaseAdmin()
+function onReadyAdminDatabase()
 {
 	// Populate CountryList/LanguageList
 	jQuery('#desinventarCountryList').clone().attr('id','CountryIso').attr('name','CountryIso').appendTo('#frmDBImport #spanCountryIso').show();
@@ -18,39 +18,57 @@ function onReadyDatabaseAdmin()
 			jQuery(this).removeClass('highlight');
 		},
 		click:  function() {
-			jQuery('#divDatabaseAdminList').hide();
-			jQuery('#divDatabaseAdminUpdate .RegionLabel').text(jQuery('.RegionLabel',this).html());
-			jQuery('#divDatabaseAdminUpdate').show();
-			jQuery('.clsDatabaseAdminButton').show();
-			jQuery('#btnDatabaseAdminNew').hide();
-			/*
-			jQuery('#frmDatabaseEdit :input').unhighlight();
-			jQuery('#frmDatabaseEdit #cmd').val('cmdRegionUpdate');
-			setRegionPA(jQuery(this).find('.CountryIso').html(),
-						jQuery(this).find('.RegionLabel').html(),
-						jQuery(this).find('.RegionUserAdmin').html(),
-						jQuery(this).find('.RegionActive').attr('checked'),
-						jQuery(this).find('.RegionPublic').attr('checked'),
-						jQuery(this).find('.RegionId').html(),
-						jQuery(this).find('.LangIsoCode').html(),
-						jQuery(this).find('.RegionUserAdminName').html()
-			);
-			*/
+			jQuery('#divAdminDatabaseList').hide();
+			jQuery('#divAdminDatabaseUpdate .RegionLabel').text(jQuery('.RegionLabel',this).html());
+			jQuery('#divAdminDatabaseUpdate').show();
+			jQuery('.clsAdminDatabaseButton').show();
+			jQuery('#btnAdminDatabaseNew').hide();
+			
 		}
 	});
 
+	jQuery('#btnAdminDatabaseEdit').click(function() {
+		var RegionId = jQuery(this).find('.RegionId').html();
+		// Load Information about database...
+		jQuery.post(
+			jQuery('#desinventarURL').val(),
+			{cmd      : 'cmdAdminDatabaseGetInfo',
+			 RegionId : RegionId
+			},
+			function(data)
+			{
+				jQuery('#divAdminDatabaseEdit').show();
+			},
+			'json'
+		);
+			
+		/*
+		jQuery('#frmDatabaseEdit :input').unhighlight();
+		jQuery('#frmDatabaseEdit #cmd').val('cmdRegionUpdate');
+		setRegionPA(jQuery(this).find('.CountryIso').html(),
+					jQuery(this).find('.RegionLabel').html(),
+					jQuery(this).find('.RegionUserAdmin').html(),
+					jQuery(this).find('.RegionActive').attr('checked'),
+					jQuery(this).find('.RegionPublic').attr('checked'),
+					jQuery(this).find('.RegionId').html(),
+					jQuery(this).find('.LangIsoCode').html(),
+					jQuery(this).find('.RegionUserAdminName').html()
+		);
+		*/
+	});
+
 	// Add New Region
-	jQuery('#btnDatabaseAdminNew').live('click', function() {
+	jQuery('#btnAdminDatabaseNew').live('click', function() {
 		jQuery('#regionpaaddsect').show();
 		setRegionPA('','', '', '', '', true,false);
 		jQuery('#frmDatabaseEdit #cmd').val('cmdRegionCreate');
 	}).hide();
-	jQuery('.clsDatabaseAdminButton').hide();
+	jQuery('.clsAdminDatabaseButton').hide();
 
 	// Select Database from List
-	jQuery('#btnDatabaseAdminSelect').live('click', function() {
-		jQuery('#divDatabaseAdminUpdate').hide();
-		jQuery('#divDatabaseAdminList').show();
+	jQuery('#btnAdminDatabaseSelect').live('click', function() {
+		jQuery('#divAdminDatabaseUpdate').hide();
+		jQuery('#divAdminDatabaseList').show();
 	});
 
 	/*
@@ -113,13 +131,15 @@ function onReadyDatabaseAdmin()
 		return false;
 	});
 	*/
-} //onReadyDatabaseAdmin()
+} //onReadyAdminDatabase()
 
-function doDatabaseAdminUpdateList()
+function doAdminDatabaseUpdateList()
 {
 	jQuery.post(
 		jQuery('#desinventarURL').val(),
-		{cmd:'cmdAdminGetDatabaseList'}, 
+		{
+			cmd:'cmdAdminDatabaseGetList'
+		},
 		function(data)
 		{
 			jQuery.each(data.RegionList, function(index, value) {
@@ -142,7 +162,7 @@ function doDatabaseAdminUpdateList()
 			jQuery('#tblDatabaseList #LangIsoCode').hide();
 			if (jQuery('#desinventarUserId').val() == 'root') 
 			{
-				jQuery('#btnDatabaseAdminNew').show();
+				jQuery('#btnAdminDatabaseNew').show();
 			}
 		},
 		'json'

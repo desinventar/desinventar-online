@@ -66,6 +66,7 @@
 			onReadyGraphic();
 			onReadyDatabaseBackup();
 			onReadyDatabaseImport();
+			onReadyAdminDatabase();
 			onReadyExtraEffects();
 			onReadyMain();		
 		});
