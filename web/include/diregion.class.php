@@ -190,8 +190,6 @@ class DIRegion extends DIObject {
 				$answer[$Field] = $this->get($Field);
 			}
 		}
-		$answer['RegionActive'] = intval($answer['RegionStatus']) & CONST_REGIONACTIVE;
-		$answer['RegionPublic'] = intval($answer['RegionStatus']) & CONST_REGIONPUBLIC;
 		return $answer;
 	}
 

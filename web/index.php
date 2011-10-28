@@ -89,6 +89,8 @@ switch ($cmd)
 	case 'cmdRegionCreate':
 	case 'cmdRegionUpdate':
 		$iReturn = ERR_NO_ERROR;
+		fb($_POST);
+		/*
 		if ($us->UserId != 'root')
 		{
 			$iReturn = ERR_ACCESS_DENIED;
@@ -127,6 +129,7 @@ switch ($cmd)
 			                            $r->get('RegionId'),
 			                            'ADMINREGION');
 		}
+		*/
 		$answer = array();
 		$answer['Status'] = $iReturn;
 		$answer['RegionId'] = $r->get('RegionId');

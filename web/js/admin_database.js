@@ -39,17 +39,21 @@ function onReadyAdminDatabase()
 			function(data)
 			{
 				jQuery('#divAdminDatabaseEdit').show();
+				jQuery('#frmRegionEdit_Cmd').val('cmdRegionUpdate');
 				jQuery('#frmRegionEdit_CountryIso').val(data.Region.CountryIso);
 				jQuery('#frmRegionEdit_RegionId').val(data.Region.RegionId);
 				jQuery('#frmRegionEdit_RegionLabel').val(data.Region.RegionLabel);
 				jQuery('#frmRegionEdit_LangIsoCode').val(data.Region.LangIsoCode);
+				jQuery('#frmRegionEdit_RegionStatus').val(data.Region.RegionStatus);
+				
+				// RegionActive/RegionPublic are set based on RegionStatus value
 				jQuery('#frmRegionEdit_RegionActive').removeAttr('checked');
-				if (parseInt(data.Region.RegionActive) > 0)
+				if (parseInt(data.Region.RegionStatus) & 1)
 				{
 					jQuery('#frmRegionEdit_RegionActive').attr('checked','checked');
 				}
 				jQuery('#frmRegionEdit_RegionPublic').removeAttr('checked');
-				if (parseInt(data.Region.RegionPublic) > 0)
+				if (parseInt(data.Region.RegionStatus) & 2)
 				{
 					jQuery('#frmRegionEdit_RegionPublic').attr('checked','checked');
 				}
@@ -62,7 +66,7 @@ function onReadyAdminDatabase()
 	jQuery('#btnAdminDatabaseNew').live('click', function() {
 		jQuery('#regionpaaddsect').show();
 		setRegionPA('','', '', '', '', true,false);
-		jQuery('#frmRegionEdit #cmd').val('cmdRegionCreate');
+		jQuery('#frmRegionEdit_Cmd').val('cmdRegionCreate');
 	}).hide();
 	jQuery('.clsAdminDatabaseButton').hide();
 
@@ -72,9 +76,8 @@ function onReadyAdminDatabase()
 		jQuery('#divAdminDatabaseList').show();
 	});
 
-	/*
-	jQuery('#frmRegionEdit #CountryIso').unbind('change').change(function() {
-		if (jQuery('#frmRegionEdit #cmd').val() == 'cmdRegionCreate')
+	jQuery('#frmRegionEdit_CountryIso').change(function() {
+		if (jQuery('#frmRegionEdit_Cmd').val() == 'cmdRegionCreate')
 		{
 			jQuery.post('index.php',
 				{cmd        : 'cmdRegionBuildRegionId',
@@ -82,7 +85,7 @@ function onReadyAdminDatabase()
 				},
 				function(data) {
 					if (parseInt(data.Status) > 0) {
-						jQuery('#frmRegionEdit #RegionId').val(data.RegionId);					
+						jQuery('#frmRegionEdit_RegionId').val(data.RegionId);
 					}
 				},
 				'json'
@@ -91,33 +94,35 @@ function onReadyAdminDatabase()
 	});
 	
 	jQuery('#frmRegionEdit #lblRegionId').dblclick(function() {
-		if (jQuery('#frmRegionEdit #cmd').val() == 'cmdRegionCreate')
+		if (jQuery('#frmRegionEdit_Cmd').val() == 'cmdRegionCreate')
 		{
-			jQuery('#frmRegionEdit #RegionId').removeAttr('disabled').focus();
+			jQuery('#frmRegionEdit_RegionId').removeAttr('disabled').focus();
 		}
 	});
 	
-	jQuery('#frmRegionEdit').unbind('submit').submit(function() {
+	jQuery('#frmRegionEdit').submit(function() {
 		// Validate Fields
+		var bContinue = true;
+		/*
 		var a=new Array('CountryIso','RegionLabel','LangIsoCode','RegionUserAdmin');
 		var bContinue = checkForm('frmRegionEdit',a, '{-#errmsgfrm#-}');
-		var s = jQuery(this).find('#RegionStatus');
-		s.val(0);
-		if (jQuery(this).find('#RegionActive').attr('checked')) {
-			s.val(parseInt(s.val()) | 1);
+		*/
+		var RegionStatus = jQuery('#frmRegionEdit_RegionStatus');
+		RegionStatus.val(0);
+		if (jQuery('#frmRegionEdit_RegionActive').attr('checked')) {
+			RegionStatus.val(parseInt(RegionStatus.val()) | 1);
 		}
-		if (jQuery(this).find('#RegionPublic').attr('checked')) {
-			s.val(parseInt(s.val()) | 2);
+		if (jQuery('#frmRegionEdit_RegionPublic').attr('checked')) {
+			RegionStatus.val(parseInt(RegionStatus.val()) | 2);
 		}
-		jQuery('#frmRegionEdit #RegionId').removeAttr('disabled');
+		jQuery('#frmRegionEdit_RegionId').removeAttr('disabled');
 		var params = jQuery(this).serializeObject();
-		jQuery('#frmRegionEdit #RegionId').attr('disabled','disabled');
+		jQuery('#frmRegionEdit_RegionId').attr('disabled','disabled');
 		if (bContinue) {
 			jQuery('#frmRegionEdit :input').unhighlight();
-			jQuery.post('index.php',
-				{cmd        : 'cmdRegionUpdate',
-				 RegionInfo : params
-				},
+			jQuery.post(
+				jQuery('#desinventarURL').val(),
+				params, 
 				function(data) {
 					if (parseInt(data.Status) > 0) {
 						jQuery('#divDatabaseEditResult').html(data.Status + ' ' + data.RegionId);
@@ -131,7 +136,6 @@ function onReadyAdminDatabase()
 		}
 		return false;
 	});
-	*/
 } //onReadyAdminDatabase()
 
 function doAdminDatabaseUpdateList()

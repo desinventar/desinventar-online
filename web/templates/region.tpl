@@ -105,7 +105,7 @@
 						{-#tregactlist#-}<b>*</b>
 					</td>
 					<td>
-						<input id="frmRegionEdit_RegionActive" name="Region[RegionActive]" type="checkbox" checked tabindex="6" />
+						<input id="frmRegionEdit_RegionActive" name="" type="checkbox" checked tabindex="6" />
 					</td>
 				</tr>
 				<tr>
@@ -113,7 +113,7 @@
 						{-#tregpublist#-}<b>*</b>
 					</td>
 					<td>
-						<input id="frmRegionEdit_RegionPublic" name="Region[RegionPublic]" type="checkbox" tabindex="7" />
+						<input id="frmRegionEdit_RegionPublic" name="" type="checkbox" tabindex="7" />
 					</td>
 				</tr>
 				<!--
@@ -133,9 +133,10 @@
 				-->
 				<tr>
 					<td colspan="2" align="center">
-						<input id="frmRegionEdit_Cmd"    type="hidden" name="cmd" />
-						<input id="frmRegionEdit_Submit" type="submit" value="{-#bsave#-}"   class="line" tabindex="8" />
-						<input id="frmRegionEdit_Cancel" type="reset"  value="{-#bcancel#-}" onClick="$('regionpaaddsect').style.display='none'; uploadMsg('');" class="line" />
+						<input id="frmRegionEdit_RegionStatus" type="hidden" name="Region[RegionStatus]" value="0" />
+						<input id="frmRegionEdit_Cmd"          type="hidden" name="cmd" />
+						<input id="frmRegionEdit_Submit"       type="submit" value="{-#bsave#-}"   class="line" tabindex="8" />
+						<input id="frmRegionEdit_Cancel"       type="reset"  value="{-#bcancel#-}" onClick="$('regionpaaddsect').style.display='none'; uploadMsg('');" class="line" />
 					</td>
 				</tr>
 			</table>
