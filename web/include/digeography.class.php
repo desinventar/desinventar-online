@@ -76,11 +76,11 @@ class DIGeography extends DIRecord {
 	public static function getIdByName($prmSession, $prmGeographyName, $prmParentId) {
 		$GeographyId = '';
 		$LangIsoCode = $prmSession->getDBInfoValue('LangIsoCode');
-		$Query= "SELECT * FROM Geography WHERE GeographyName LIKE '" . $prmGeographyName . "' " . 
-		        " AND LangIsoCode='" . $LangIsoCode . "'";
+		$Query= 'SELECT * FROM Geography WHERE GeographyName LIKE "' . $prmGeographyName . '" ' . 
+		        ' AND LangIsoCode="' . $LangIsoCode . '"';
 		if ($prmParentId != '') {
 			$MinGeographyLevel = strlen($prmParentId)/5 - 1;
-			$Query .= " AND GeographyId LIKE '" . $prmParentId . "%' AND GeographyLevel > " . $MinGeographyLevel;
+			$Query .= ' AND GeographyId LIKE "' . $prmParentId . '%" AND GeographyLevel > ' . $MinGeographyLevel;
 		}
 		$Query .= ' ORDER BY GeographyLevel DESC';
 		foreach($prmSession->q->dreg->query($Query) as $row) {

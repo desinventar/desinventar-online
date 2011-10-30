@@ -197,10 +197,14 @@ class DIDisaster extends DIRecord
 	{
 		$bFound = -1;
 		$iReturn = ERR_NO_ERROR;
-		$sFieldList = $this->sEffectDef . ',' . $this->sEEFieldDef;
-		foreach (split(',',$sFieldList) as $sField)
+		$sFieldList = $this->sEffectDef;
+		if ($this->sEEFieldDef != '')
 		{
-			$oItem = split('/', $sField);
+			$sFieldList .= ',' . $this->sEEFieldDef;
+		}
+		foreach (preg_split('#,#', $sFieldList) as $sField)
+		{
+			$oItem = preg_split('#/#', $sField);
 			$sFieldName  = $oItem[0];
 			$sFieldType  = $oItem[1];
 			if ($sFieldName != 'EffectNotes')
