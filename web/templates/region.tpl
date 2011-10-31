@@ -136,7 +136,8 @@
 						<input id="frmRegionEdit_RegionStatus" type="hidden" name="Region[RegionStatus]" value="0" />
 						<input id="frmRegionEdit_Cmd"          type="hidden" name="cmd" />
 						<input id="frmRegionEdit_Submit"       type="submit" value="{-#bsave#-}"   class="line" tabindex="8" />
-						<input id="frmRegionEdit_Cancel"       type="reset"  value="{-#bcancel#-}" onClick="$('regionpaaddsect').style.display='none'; uploadMsg('');" class="line" />
+						<input id="frmRegionEdit_Cancel"       type="reset"  value="{-#bcancel#-}" class="line" tabindex="9" />
+						
 					</td>
 				</tr>
 			</table>

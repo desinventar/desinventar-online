@@ -124,10 +124,10 @@ switch ($cmd)
 			$iReturn = $us->setUserRole($_POST['Region']['RegionUserAdmin'], 
 			                            $r->get('RegionId'),
 			                            'ADMINREGION');
+			$answer['RegionId'] = $r->get('RegionId');
 		}
 		$answer = array();
 		$answer['Status'] = $iReturn;
-		$answer['RegionId'] = $r->get('RegionId');
 		echo json_encode($answer);
 	break;
 	case 'dbzipimport' : 

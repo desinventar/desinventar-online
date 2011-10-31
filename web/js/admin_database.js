@@ -136,6 +136,9 @@ function onReadyAdminDatabase()
 		}
 		return false;
 	});
+	jQuery('#frmRegionEdit_Cancel').click(function() {
+		jQuery('#divAdminDatabaseEdit').hide();
+	});
 } //onReadyAdminDatabase()
 
 function doAdminDatabaseUpdateList()
