@@ -10,16 +10,16 @@
 	<link rel="stylesheet" type="text/css" href="css/desinventar.css?version={-$jsversion-}" />
 	<link rel="stylesheet" type="text/css" href="css/datacards.css?version={-$jsversion-}" />
 	<link rel="stylesheet" type="text/css" href="css/main.css?version={-$jsversion-}" />
-	<script type="text/javascript" src="include/prototype.js"></script>
+	<script type="text/javascript" src="external/prototype.js"></script>
 	<!-- jQuery -->
 	{-include file="jquery.tpl"-}
 	
-	<script type="text/javascript" src="include/listMan.js"></script>
-	<script type="text/javascript" src="include/md5.js"></script>
-	<script type="text/javascript" src="include/wd.js"></script>
-	<script type="text/javascript" src="include/accordion.js"></script>
-	<script type="text/javascript" src="include/palette.js"></script>
-	<script type="text/javascript" src="include/combo-box.js"></script>
+	<script type="text/javascript" src="external/listMan.js"></script>
+	<script type="text/javascript" src="external/md5.js"></script>
+	<script type="text/javascript" src="external/wd.js"></script>
+	<script type="text/javascript" src="external/accordion.js"></script>
+	<script type="text/javascript" src="external/palette.js"></script>
+	<script type="text/javascript" src="external/combo-box.js"></script>
 
 	<script type="text/javascript" src="external/checktree/checktree.js"></script>
 	<script type="text/javascript" src="external/swfupload/swfupload.js"></script>
