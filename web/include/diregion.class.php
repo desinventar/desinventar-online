@@ -83,8 +83,8 @@ class DIRegion extends DIObject {
 	public function getTranslatableFields() {
 		// 2009-07-28 (jhcaiced) Build an array with translatable fields
 		$Translatable = array();
-		foreach (split(',', $this->sInfoTrans) as $sItem) {
-			$oItem = split('/', $sItem);
+		foreach (preg_split('#,#', $this->sInfoTrans) as $sItem) {
+			$oItem = preg_split('#/#', $sItem);
 			$sFieldName = $oItem[0];
 			$sFieldType = $oItem[1];
 			$Translatable[$sFieldName] = $sFieldType;

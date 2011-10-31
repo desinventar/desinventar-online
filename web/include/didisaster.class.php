@@ -83,7 +83,7 @@ class DIDisaster extends DIRecord
 			//$this->sFieldDef .= ',' . $sNewFields;
 			$this->createFields($this->sFieldKeyDef);
 			$this->createFields($this->sEEFieldDef);
-			foreach (split(',', $this->sEEFieldDef) as $sKey => $sValue)
+			foreach (preg_split('#,#', $this->sEEFieldDef) as $sKey => $sValue)
 			{
 				$this->EEFieldCount++;
 			}
@@ -253,9 +253,9 @@ class DIDisaster extends DIRecord
 	{
 		$iReturn = ERR_NO_ERROR;
 		// Calculate Values of Q Fields...
-		foreach (split(',',$this->sFieldQDef) as $sFieldQ)
+		foreach (preg_split('#,#',$this->sFieldQDef) as $sFieldQ)
 		{
-			$oItem = split('/', $sFieldQ);
+			$oItem = preg_split('#/#', $sFieldQ);
 			$sFieldQName = $oItem[0];
 			$sFieldName  = substr($sFieldQName, 0, -1);
 			$sFieldType  = $oItem[1];

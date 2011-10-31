@@ -50,7 +50,7 @@ class DIObject {
 		} else {
 			$obj = &$this->oField[$LangIsoCode];
 		}
-		$sFields = preg_split('/,/', $prmFieldDef);
+		$sFields = preg_split('#,#', $prmFieldDef);
 		foreach ($sFields as $sKey => $sValue) {
 			$oItem = preg_split('#/#', $sValue);
 			$sFieldName = $oItem[0];
