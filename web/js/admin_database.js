@@ -21,9 +21,11 @@ function onReadyAdminDatabase()
 			jQuery('#divAdminDatabaseList').hide();
 			jQuery('#divAdminDatabaseUpdate .RegionLabel').text(jQuery('.RegionLabel',this).html());
 			jQuery('#divAdminDatabaseUpdate .RegionId').text(jQuery('.RegionId',this).html());
-			jQuery('#divAdminDatabaseUpdate').show();
 			jQuery('.clsAdminDatabaseButton').show();
 			jQuery('#btnAdminDatabaseNew').hide();
+			jQuery('.clsAdminDatabase').hide();
+			jQuery('#divAdminDatabaseUpdate').show();
+
 			
 		}
 	});
