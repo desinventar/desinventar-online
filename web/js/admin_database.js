@@ -38,6 +38,7 @@ function onReadyAdminDatabase()
 			},
 			function(data)
 			{
+				jQuery('.clsAdminDatabase').hide();
 				jQuery('#divAdminDatabaseEdit').show();
 				jQuery('#frmRegionEdit_Cmd').val('cmdRegionUpdate');
 				jQuery('#frmRegionEdit_CountryIso').val(data.Region.CountryIso);
@@ -60,6 +61,16 @@ function onReadyAdminDatabase()
 			},
 			'json'
 		);
+	});
+
+	jQuery('#btnAdminDatabaseExport').click(function() {
+		jQuery('.clsAdminDatabase').hide();
+		jQuery('#divAdminDatabaseExport').show();
+	});
+
+	jQuery('#btnAdminDatabaseImport').click(function() {
+		jQuery('.clsAdminDatabase').hide();
+		jQuery('#divAdminDatabaseImport').show();
 	});
 
 	// Add New Region

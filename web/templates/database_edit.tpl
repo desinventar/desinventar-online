@@ -1,40 +1,80 @@
-{-config_load file="$lg.conf" section="di8_DBEdit"-}
-<div class="contentBlock" id="divDBEdit" style="display:none">
-	<p id="txtDBEditInfo"></p>
-	<form id="frmDBEdit">
-		<table>
+{-config_load file="$lg.conf" section="di8_region"-}
+<form id="frmRegionEdit">
+	<table class="grid">
 		<tr>
 			<td>
-				{-#msgDBEditRegionId#-} :
+				{-#tregcntlist#-}<b style="color:darkred;">*</b>
 			</td>
 			<td>
-				<input type="text" id="RegionId"    class="line fixw" size="40" /><br />
+				<select id="frmRegionEdit_CountryIso" name="Region[CountryIso]" class="fixw" tabindex="1">
+					<option value=""></option>
+				</select>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				{-#msgDBEDitRegionLabel#-} :
+				<span id="lblRegionId">RegionId</span>
 			</td>
 			<td>
-				<input type="text" id="RegionLabel" class="line fixw" size="80" /><br />
+				<input id="frmRegionEdit_RegionId" name="Region[RegionId]" type="text" maxlength="50" class="line fixw" tabindex="2" />
 			</td>
 		</tr>
 		<tr>
 			<td>
-				{-#msgDBEDitLangIsoCode#-} :
+				{-#tregnamlist#-}<b style="color:darkred;">*</b>
 			</td>
 			<td>
-				<span id="spanLangIsoCode"></span>
+				<input id="frmRegionEdit_RegionLabel" name="Region[RegionLabel]" type="text" maxlength="200" class="line fixw" tabindex="3" />
 			</td>
 		</tr>
 		<tr>
 			<td>
-				{-#msgDBEditCountryIso#-} :
+				{-$dic.DBLangIsoCode[0]-}<b style="color:darkred;">*</b>
 			</td>
 			<td>
-				<span id="spanCountryIso"></span>
+				<select id="frmRegionEdit_LangIsoCode" name="Region[LangIsoCode]" {-$ro-} class="line fixw" tabindex="4">
+				</select>
 			</td>
 		</tr>
-		</table>
-	</form>
-</div>
+		<tr>
+			<td>
+				{-#tregactlist#-}<b>*</b>
+			</td>
+			<td>
+				<input id="frmRegionEdit_RegionActive" name="" type="checkbox" checked tabindex="6" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{-#tregpublist#-}<b>*</b>
+			</td>
+			<td>
+				<input id="frmRegionEdit_RegionPublic" name="" type="checkbox" tabindex="7" />
+			</td>
+		</tr>
+		<!--
+		<tr>
+			<td>
+				{-#tregadmlist#-}<b style="color:darkred;">*</b>
+			</td>
+			<td>
+				<select id="RegionUserAdmin" name="RegionUserAdmin" class="fixw" tabindex="5">
+					<option value=""></option>
+					{-foreach name=usr key=key item=item from=$usr-}
+						<option value="{-$key-}">{-$item-}</option>
+					{-/foreach-}
+				</select>
+			</td>
+		</tr>
+		-->
+		<tr>
+			<td colspan="2" align="center">
+				<input id="frmRegionEdit_RegionStatus" type="hidden" name="Region[RegionStatus]" value="0" />
+				<input id="frmRegionEdit_Cmd"          type="hidden" name="cmd" />
+				<input id="frmRegionEdit_Submit"       type="submit" value="{-#bsave#-}"   class="line" tabindex="8" />
+				<input id="frmRegionEdit_Cancel"       type="reset"  value="{-#bcancel#-}" class="line" tabindex="9" />
+				
+			</td>
+		</tr>
+	</table>
+</form>
