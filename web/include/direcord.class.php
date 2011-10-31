@@ -39,7 +39,7 @@ class DIRecord extends DIObject
 	{
 		$i = 0;
 		$sQuery = '(';
-		foreach (preg_split('/,/', $this->sFieldKeyDef) as $sKey => $sValue)
+		foreach (preg_split('#,#', $this->sFieldKeyDef) as $sKey => $sValue)
 		{
 			$oItem = preg_split('#/#', $sValue);
 			$sFieldName = $oItem[0];
@@ -96,7 +96,7 @@ class DIRecord extends DIObject
 		$i = 0;
 		$sQueryFields = '';
 		$sQueryValues = '';
-		foreach (preg_split('/,/', $this->sFieldKeyDef) as $sKey => $sValue)
+		foreach (preg_split('#,#', $this->sFieldKeyDef) as $sKey => $sValue)
 		{
 			$oItem = preg_split('#/#', $sValue);
 			$sFieldName = $oItem[0];
@@ -150,7 +150,7 @@ class DIRecord extends DIObject
 		$sQuery = 'UPDATE ' . $sTableName . ' SET ';
 		if ($sFieldList != '')
 		{
-			foreach (preg_split('/,/', $sFieldList) as $sKey => $sValue)
+			foreach (preg_split('#,#', $sFieldList) as $sKey => $sValue)
 			{
 				$oItem = preg_split('#/#', $sValue);
 				$sFieldName = $oItem[0];
@@ -223,7 +223,7 @@ class DIRecord extends DIObject
 			$this->conn->commit();
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
-				$sFields = preg_split('/,/', $prmFieldList);
+				$sFields = preg_split('#,#', $prmFieldList);
 				foreach ($sFields as $sKey => $sValue)
 				{
 					$oItem = preg_split('#/#', $sValue);
@@ -387,7 +387,7 @@ class DIRecord extends DIObject
 	{
 		$sQuery = '(';
 		$i = 0;
-		$sFields = preg_split('/,/', $this->sFieldKeyDef);
+		$sFields = preg_split('#,#', $this->sFieldKeyDef);
 		foreach ($sFields as $sKey => $sValue)
 		{
 			$oItem = preg_split('#/#', $sValue);
@@ -528,7 +528,7 @@ class DIRecord extends DIObject
 				// Check if it's me !!
 				$bFound = true;
 				$i = 0;
-				$sFields = preg_split('/,/', $this->sFieldKeyDef);
+				$sFields = preg_split('#,#', $this->sFieldKeyDef);
 				foreach ($sFields as $sKey => $sValue)
 				{
 					if ($bFound)
