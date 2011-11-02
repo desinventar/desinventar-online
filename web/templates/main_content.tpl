@@ -9,7 +9,7 @@
 {-include file="region_list.tpl"-}
 
 <!-- divDatabaseBackup -->
-{-include file="database_backup.tpl"-}
+{-include file="database_export.tpl"-}
 
 <!-- divDatabaseImport -->
 {-include file="database_import.tpl"-}

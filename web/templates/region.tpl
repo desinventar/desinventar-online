@@ -66,7 +66,7 @@
 		{-include file="database_edit.tpl"-}
 	</div>
 	<div id="divAdminDatabaseExport" class="clsAdminDatabase" style="display:none;">
-		{-include file="database_backup.tpl"-}
+		{-include file="database_export.tpl"-}
 	</div>
 	<div id="divAdminDatabaseImport" class="clsAdminDatabase" style="display:none;">
 		{-include file="database_import.tpl"-}

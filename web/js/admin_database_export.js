@@ -3,7 +3,8 @@
  (c) 1998-2011 Corporacion OSSO
 */
 
-function onReadyDatabaseBackup() {
+function onReadyAdminDatabaseExport()
+{
 	jQuery('.DBBackup').hide();
 	jQuery('#txtDBBackupRegionLabel').text(jQuery('#desinventarRegionLabel').val());
 	jQuery('#divDBBackupParameters').show();
@@ -12,7 +13,7 @@ function onReadyDatabaseBackup() {
 		jQuery('#divDBBackupProgress').show();
 		jQuery.post(jQuery('#desinventarURL').val(),
 			{cmd      : 'doDatabaseBackup',
-			 RegionId : jQuery('#desinventarRegionId').val()
+			 RegionId : jQuery('#txtAdminDatabaseExport_RegionId').text()
 			},
 			function(data) {
 				var bOk = true;
@@ -48,4 +49,9 @@ function onReadyDatabaseBackup() {
 		jQuery('.DBBackup').hide();
 		jQuery('#divDBBackupParameters').show();		
 	});
+}
+
+function doAdminDatabaseExportSetup(RegionId)
+{
+	jQuery('#txtAdminDatabaseExport_RegionId').text(RegionId);
 }
