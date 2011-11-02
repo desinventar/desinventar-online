@@ -1,6 +1,6 @@
 {-config_load file="$lg.conf" section="di8_region"-}
 <h2>{-#ttname#-}</h2>
-<div id="divAdminDatabaseList">
+<div id="divAdminDatabaseList" style="display:none;">
 	<div class="dwin" style="width:100%;height:200px;">
 		<table id="tblDatabaseList" class="col">
 			<thead>
@@ -65,10 +65,10 @@
 	<div id="divAdminDatabaseEdit" class="clsAdminDatabase dwin" style="display:none">
 		{-include file="database_edit.tpl"-}
 	</div>
-	<div id="divAdminDatabaseExport" class="clsAdminDatabase">
+	<div id="divAdminDatabaseExport" class="clsAdminDatabase" style="display:none;">
 		{-include file="database_backup.tpl"-}
 	</div>
-	<div id="divAdminDatabaseImport" class="clsAdminDatabase">
+	<div id="divAdminDatabaseImport" class="clsAdminDatabase" style="display:none;">
 		{-include file="database_import.tpl"-}
 	</div>
 </div>
