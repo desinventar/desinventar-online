@@ -40,9 +40,10 @@
 	<script type="text/javascript" src="js/user.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/user_login.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/desconsultar.js?version={-$jsversion-}"></script>
-	<script type="text/javascript" src="js/database_backup.js?version={-$jsversion-}"></script>
-	<script type="text/javascript" src="js/database_import.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/admin_database.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="js/admin_database_edit.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="js/admin_database_export.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="js/admin_database_import.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/database_config.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/common.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="js/main.js?version={-$jsversion-}"></script>
@@ -64,8 +65,6 @@
 			onReadyDatacards();
 			onReadyData();
 			onReadyGraphic();
-			onReadyDatabaseBackup();
-			onReadyDatabaseImport();
 			onReadyAdminDatabase();
 			onReadyExtraEffects();
 			onReadyMain();		

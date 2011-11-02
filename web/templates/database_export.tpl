@@ -7,6 +7,7 @@
 	</td>
 	<td>
 		<b><span id="txtDBBackupRegionLabel"></span></b><br />
+		<span id="txtAdminDatabaseExport_RegionId"></span>
 	</td>
 </tr>
 <tr>

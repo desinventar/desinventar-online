@@ -6,6 +6,7 @@
 function onReadyAdminDatabase()
 {
 	onReadyAdminDatabaseEdit();
+	onReadyAdminDatabaseExport();
 
 	// Highlight row on mouseOver
 	jQuery('#tblDatabaseList tr').live({
@@ -34,6 +35,7 @@ function onReadyAdminDatabase()
 	});
 
 	jQuery('#btnAdminDatabaseExport').click(function() {
+		doAdminDatabaseExportSetup(jQuery('#divAdminDatabaseUpdate .RegionId').text());
 		jQuery('.clsAdminDatabase').hide();
 		jQuery('#divAdminDatabaseExport').show();
 	});
