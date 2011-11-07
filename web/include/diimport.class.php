@@ -72,6 +72,9 @@ class DIImport {
 					break;
 					case DI_DISASTER:
 						$o = new DIDisaster($this->us);
+						if  (($rowCount % 100) == 0) {
+							print $rowCount . "\n";
+						}
 						$iReturn = $o->importFromCSV($cols, $values);
 						if ($iReturn > 0) {
 							$bExistId = DIDisaster::existId($this->us, $o->get('DisasterId'));

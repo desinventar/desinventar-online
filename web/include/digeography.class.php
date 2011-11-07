@@ -237,9 +237,12 @@ class DIGeography extends DIRecord {
 		$this->set('GeographyLevel', $values[0]);
 		$this->set('GeographyCode',  $values[1]);
 		$this->set('GeographyName',  $values[2]);
-		if ($values[4] != '')
+		if (array_key_exists(4, $values))
 		{
-			$this->set('GeographyId', $values[4]);
+			if ($values[4] != '')
+			{
+				$this->set('GeographyId', $values[4]);
+			}
 		}
 		else
 		{
