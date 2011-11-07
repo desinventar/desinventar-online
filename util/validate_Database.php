@@ -8,7 +8,7 @@
 	require_once(BASE . '/include/diimport.class.php');
 	require_once(BASE . '/include/diregion.class.php');
 	
-	$RegionId = 'COL-CUNDINAMARCA';
+	$RegionId = 'COL-ANTIOQUIA';
 	$us->login('diadmin','di8');
 	$us->open($RegionId);
 	$iCount = 0;
@@ -70,7 +70,7 @@
 			}
 		}
 		if ( ($iCount > 0) && ($iCount % 100 == 0) ) {
-			printf('%-5d' . "\n", $iCount);
+			//printf('%-5d' . "\n", $iCount);
 		}
 		$iCount++;
 	} //while
