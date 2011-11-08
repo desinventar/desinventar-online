@@ -1,6 +1,6 @@
 {-*** REGISTER NEW USER - CONTENT SECTION ***-}
 {-config_load file="$lg.conf" section="di8_user"-}
-<link rel="stylesheet" href="css/desinventar.css?version={-$jsversion-}" type="text/css">
+<link rel="stylesheet" href="{-$desinventarURL-}/css/desinventar.css?version={-$jsversion-}" type="text/css">
 {-include file="jquery.tpl" -}
 <script type="text/javascript" src="{-$desinventarURL-}/include/md5.js"></script>
 <script type="text/javascript" src="{-$desinventarURL-}/js/jquery.snippets.js?version={-$jsversion-}"></script>
