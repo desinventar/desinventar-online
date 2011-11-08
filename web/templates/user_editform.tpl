@@ -8,7 +8,7 @@
 				</td>
 				<td>
 					<input type="text" id="txtUserId" name="User[UserId]" size="15" maxlength="15" class="line" />
-					{-* onBlur="updateList('chklogin', 'user.php', 'cmd=chklogin&UserId='+ $('UserId').value);" *-}
+					{-* onBlur="updateList('chklogin', jQuery('#desinventarURL').val() + '/user.php', 'cmd=chklogin&UserId='+ $('UserId').value);" *-}
 					<span id="chklogin" style="display:inline"></span>
 					<input type="hidden" id="txtUserPasswd" name="User[UserPasswd]" value="" />
 				</td>

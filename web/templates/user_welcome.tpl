@@ -4,8 +4,8 @@
 {-if $ctl_portalperms-}
 	<b>{-#tadminperms#-}: </b><br />
 	<ul class="">
-		<li><a href="javascript:void(null)" onclick="updateList('pagecontent', 'region.php', 'cmd=adminreg');">{-#mnuDatabaseAdmin#-}</a></li>
-		<li><a href="javascript:void(null)" onclick="updateList('pagecontent', 'user.php', 'cmd=adminusr');onReadyUserAdmin();">{-#mnuUserAdmin#-}</a></li>
+		<li><a href="javascript:void(null)" onclick="updateList('pagecontent', jQuery('#desinventarURL').val() + '/region.php', 'cmd=adminreg');">{-#mnuDatabaseAdmin#-}</a></li>
+		<li><a href="javascript:void(null)" onclick="updateList('pagecontent', jQuery('#desinventarURL').val() + '/user.php', 'cmd=adminusr');onReadyUserAdmin();">{-#mnuUserAdmin#-}</a></li>
 	</ul>
 	<br /><hr /><br />
 {-/if-}
@@ -16,7 +16,7 @@
 			<tr>
 				<td><b>{-#tadminof#-}</b>
 				</td>
-				<td><a href="javascript:void(null)" onclick="parent.window.location = 'index.php?r={-$key-}'">{-$item-}</a>
+				<td><a href="javascript:void(null)" onclick="parent.window.location = jQuery('#desinventarURL').val() + '/index.php?r={-$key-}'">{-$item-}</a>
 				</td>
 			</tr>
 		{-/foreach-}
@@ -26,7 +26,7 @@
 			<tr>
 				<td><b>{-#tobservof#-}</b>
 				</td>
-				<td><a href="javascript:void(null)" onclick="parent.window.location = 'index.php?r={-$key-}'">{-$item-}</a>
+				<td><a href="javascript:void(null)" onclick="parent.window.location = jQuery('#desinventarURL').val() + '/index.php?r={-$key-}'">{-$item-}</a>
 				</td>
 			</tr>
 		{-/foreach-}
@@ -36,7 +36,7 @@
 			<tr>
 				<td><b>{-#tsupervof#-}</b>
 				</td>
-				<td><a href="javascript:void(null)" onclick="parent.window.location = 'index.php?r={-$key-}'">{-$item-}</a>
+				<td><a href="javascript:void(null)" onclick="parent.window.location = jQuery('#desinventarURL').val() + '/index.php?r={-$key-}'">{-$item-}</a>
 				</td>
 			</tr>
 		{-/foreach-}
@@ -46,7 +46,7 @@
 			<tr>
 				<td><b>{-#tuserof#-}</b>
 				</td>
-				<td><a href="javascript:void(null)" onclick="parent.window.location = 'index.php?r={-$key-}'">{-$item-}</a>
+				<td><a href="javascript:void(null)" onclick="parent.window.location = jQuery('#desinventarURL').val() + '/index.php?r={-$key-}'">{-$item-}</a>
 				</td>
 			</tr>
 		{-/foreach-}

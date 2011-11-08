@@ -31,7 +31,7 @@
 			<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBEleCode[2]-}');">
 			{-$dic.DBEleCode[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBEleCode[1]-}</span></a><br />
 			<input id="aGeographyCode" name="data[GeographyCode]" type="text" {-$ro-} class="line" tabindex="1" style="width:500px;"
-				onBlur="updateList('geostatusmsg', 'geography.php', 
+				onBlur="updateList('geostatusmsg', jQuery('#desinventarURL').val() + '/geography.php', 
 				'r={-$reg-}&cmd=chkcode&GeographyId='+ $('aGeographyId').value + '&GeographyCode='+ $('aGeographyCode').value);"
 				onFocus="showtip('{-$dic.DBEleCode[2]-}');" />
 			<br /><br />
@@ -44,7 +44,7 @@
 			{-$dic.DBEleActive[0]-}<span>{-$dic.DBEleActive[1]-}</span></a>
 			<input id="aGeographyActive" name="data[GeographyActive]" type="checkbox" {-$ro-} checked
 				onFocus="showtip('{-$dic.DBEleActive[2]-}');" tabindex="3"
-				onClick="if (!this.checked) updateList('geostatusmsg', 'geography.php', 
+				onClick="if (!this.checked) updateList('geostatusmsg', jQuery('#desinventarURL').val() + '/geography.php', 
 					'r={-$reg-}&cmd=chkstatus&GeographyId='+ $('aGeographyId').value);" />
 			<br /><br />
 			<p align="center" style="width:500px;">

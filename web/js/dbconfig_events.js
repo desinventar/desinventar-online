@@ -56,8 +56,7 @@ function onReadyDBConfigEvents()
 		if (validForm == true)
 		{
 			var params = jQuery(this).serialize();
-			jQuery.post(
-				'events.php',
+			jQuery.post(jQuery('#desinventarURL').val() + '/events.php',
 				params, 
 				function(data)
 				{
@@ -65,13 +64,13 @@ function onReadyDBConfigEvents()
 					var opt = jQuery('#frmEventEdit #Predefined').val();
 					if (opt == "1")
 					{
-						updateList('lst_evepred', 'events.php', 'r=' + reg + '&cmd=list&predef=1&t=' + new Date().getTime());
+						updateList('lst_evepred', jQuery('#desinventarURL').val() + '/events.php', 'r=' + reg + '&cmd=list&predef=1&t=' + new Date().getTime());
 					}
 					else
 					{
-						updateList('lst_eveuser', 'events.php', 'r=' + reg + '&cmd=list&predef=0&t=' + new Date().getTime());
+						updateList('lst_eveuser', jQuery('#desinventarURL').val() + '/events.php', 'r=' + reg + '&cmd=list&predef=0&t=' + new Date().getTime());
 					}
-					updateList('qevelst', 'index.php', 'r='+ reg +'&cmd=evelst&t=' + new Date().getTime());
+					updateList('qevelst', jQuery('#desinventarURL').val() + '/index.php', 'r='+ reg +'&cmd=evelst&t=' + new Date().getTime());
 					jQuery('#frmEventEdit #Desc').removeAttr('readonly');
 					jQuery('#eventaddsect').hide();
 					jQuery('#btnEventEditAdd').show();

@@ -8,19 +8,19 @@
 					jQuery('#divRegionInfo').show();
 				break;
 				case 'mnuUserLogin':
-					//updateUserBar('user.php', '', '', '');
+					//updateUserBar(jQuery('#desinventarURL').val() + '/user.php', '', '', '');
 					usrw.show();
 				break;
 				case 'mnuUserLogout':
 					doUserLogout();
 				break;
 				case 'mnuUserEditAccount':
-					jQuery('#dbl').load('user.php?cmd=changepasswd',function() { onReadyUserChangePasswd('dbl-win'); });
+					jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=changepasswd',function() { onReadyUserChangePasswd('dbl-win'); });
 					dblw.show();
 				break;
 				{-foreach name=LanguageList key=key item=item from=$LanguageList-}
 					case '{-$key-}':
-						window.location = 'index.php?r={-$reg-}&lang={-$key-}';
+						window.location = jQuery('#desinventarURL').val() + '/index.php?r={-$reg-}&lang={-$key-}';
 					break;
 				{-/foreach-}
 				case 'mnuFileQuit':
@@ -45,7 +45,7 @@
 				break;
 				case 'mnuQueryNew':
 					// Just reload the current region window...(need a better solution!!)
-					window.location = 'index.php?r=' + RegionId;
+					window.location = jQuery('#desinventarURL').val() + '/index.php?r=' + RegionId;
 				break;
 				case 'menuQuerySave':
 					saveQuery();
@@ -72,7 +72,7 @@
 				case 'mnuDatacardInsertEdit':
 					jQuery('#cardsRecordNumber').val(0);
 					jQuery('#cardsRecordSource').val('');
-					jQuery.post('index.php',
+					jQuery.post(jQuery('#desinventarURL').val() + '/index.php',
 						{cmd      : 'getRegionRecordCount',
 						 RegionId : jQuery('#desinventarRegionId').val()
 						},
@@ -92,7 +92,7 @@
 					hideQueryDesign();
 					jQuery('.contentBlock').hide();
 					jQuery('#divDatacardsImport').show();
-					updateList('divDatacardsImport', 'import.php', 'r=' + RegionId);
+					updateList('divDatacardsImport', jQuery('#desinventarURL').val() + '/import.php', 'r=' + RegionId);
 				break;
 				case 'mnuDatabaseBackup':
 					hideQueryDesign();
@@ -119,8 +119,8 @@
 					updateDatabaseListByUser();
 				break;
 				case 'mnuUserAdmin':
-					//updateList('dbl', 'user.php', 'cmd=adminusr', 'onReadyUserAdmin');
-					jQuery('#dbl').load('user.php?cmd=adminusr',function() { onReadyUserAdmin(); });
+					//updateList('dbl', jQuery('#desinventarURL').val() + '/user.php', 'cmd=adminusr', 'onReadyUserAdmin');
+					jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=adminusr',function() { onReadyUserAdmin(); });
 					dblw.show();
 				break;
 				case 'mnuAdminDatabase':

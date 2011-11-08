@@ -96,7 +96,7 @@
 			<input id="Id" name="Info[CauseId]" type="hidden" />
 			{-$dic.DBCauPersonName[0]-}<b style="color:darkred;">*</b><br />
 			<input id="Name" name="Info[CauseName]" type="text" class="line" maxlength="40" style="width:500px;" tabindex="1" {-$ro-} 
-				onBlur="updateList('causestatusmsg', 'causes.php', 'r={-$reg-}&cmd=chkname&CauseId='+ $('aCauseId').value +'&CauseName='+ $('aCauseName').value);"
+				onBlur="updateList('causestatusmsg', jQuery('#desinventarURL').val() + '/causes.php', 'r={-$reg-}&cmd=chkname&CauseId='+ $('aCauseId').value +'&CauseName='+ $('aCauseName').value);"
 				onFocus="showtip('{-$dic.DBCauPersonName[2]-}');" />
 			<br /><br />
 			{-$dic.DBCauPersonDef[0]-}<b style="color:darkred;">*</b><br />

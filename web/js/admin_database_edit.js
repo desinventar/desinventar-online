@@ -12,7 +12,7 @@ function onReadyAdminDatabaseEdit()
 	jQuery('#frmRegionEdit_CountryIso').change(function() {
 		if (jQuery('#frmRegionEdit_Cmd').val() == 'cmdRegionCreate')
 		{
-			jQuery.post('index.php',
+			jQuery.post(jQuery('#desinventarURL').val() + '/index.php',
 				{cmd        : 'cmdRegionBuildRegionId',
 				 CountryIso : jQuery(this).val()
 				},
@@ -61,7 +61,7 @@ function onReadyAdminDatabaseEdit()
 						jQuery('#divDatabaseEditResult').html(data.Status + ' ' + data.RegionId);
 						// (jhcaiced) Change this for a method to update only the 
 						// affected row intead of loading all list again
-						updateList('dbl', 'region.php', 'cmd=adminreg');
+						updateList('dbl', jQuery('#desinventarURL').val() + '/region.php', 'cmd=adminreg');
 					}
 				},
 				'json'

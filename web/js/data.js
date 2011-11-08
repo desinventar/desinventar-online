@@ -73,7 +73,7 @@ function doDataDisplayPage(page)
 			var FieldList = jQuery('#prmDataFieldList').val();
 			
 			jQuery('#tblDataRows').html('<img src="' + jQuery('#desinventarURL').val() + '/loading.gif">');
-			jQuery.post('data.php',
+			jQuery.post(jQuery('#desinventarURL').val() + '/data.php',
 				{'r' : RegionId,
 				 'page': mypag,
 				 'RecordsPerPage' : RecordsPerPage,

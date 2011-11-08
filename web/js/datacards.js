@@ -50,7 +50,7 @@ function onReadyDatacards()
 		jQuery('#RegionId').val(jQuery('#desinventarRegionId').val());
 		displayDatacardStatusMsg('');
 		var params = 'RegionId=' + jQuery('#RegionId').val() + '&' + jQuery(this).serialize();
-		jQuery.post('cards.php',
+		jQuery.post(jQuery('#desinventarURL').val() + '/cards.php',
 			params,
 			function(data)
 			{
@@ -167,7 +167,7 @@ function onReadyDatacards()
 			{
 				PrevLevel = parseInt(LevelId) - 1;
 				GeographyParentId = jQuery('#GeographyItemId' + PrevLevel).text();
-				jQuery.get('cards.php',
+				jQuery.get(jQuery('#desinventarURL').val() + '/cards.php',
 					{'cmd'               : 'getGeographyItemsByLevel',
 					 'GeographyLevelId'  : LevelId,
 					 'GeographyParentId' : GeographyParentId,
@@ -425,7 +425,7 @@ function setgeo(k, prmGeoLevelId, desc, opc)
 	if (k.length >= 5)
 	{
 		jQuery(fld).val(k);
-		updateList(lev, 'cards.php', 'cmd=list' + '&GeographyId='+ k + op + '&r=' + RegionId);
+		updateList(lev, jQuery('#desinventarURL').val() + '/cards.php', 'cmd=list' + '&GeographyId='+ k + op + '&r=' + RegionId);
 	}
 	else if (k == '')
 	{
@@ -595,7 +595,7 @@ function requestDatacard(myCmd, myValue)
 	var RegionId=jQuery('#desinventarRegionId').val();
 	jQuery('#dostat').html(waiting);
 
-	jQuery.post('cards.php',
+	jQuery.post(jQuery('#desinventarURL').val() + '/cards.php',
 		{
 			cmd:myCmd,
 			value:myValue,
@@ -680,7 +680,7 @@ function doDatacardEdit()
 {
 	displayDatacardStatusMsg('');
 	RegionId = jQuery('#desinventarRegionId').val();
-	jQuery.post('cards.php',
+	jQuery.post(jQuery('#desinventarURL').val() + '/cards.php',
 		{
 			'cmd'       : 'chklocked',
 			'r'         : jQuery('#desinventarRegionId').val(),
@@ -779,7 +779,7 @@ function doDatacardSave()
 		else
 		{
 			jQuery('#DICard #Status').val('SAVING');
-			jQuery.post('cards.php',
+			jQuery.post(jQuery('#desinventarURL').val() + '/cards.php',
 				{
 					'cmd'            : 'existDisasterSerial',
 					'RegionId'       : jQuery('#desinventarRegionId').val(),
@@ -834,7 +834,7 @@ function doDatacardCancel()
 {
 	if (jQuery('#DICard #Status').val() == 'EDIT')
 	{
-		jQuery.post('cards.php',
+		jQuery.post(jQuery('#desinventarURL').val() + '/cards.php',
 			{
 				'cmd'        : 'chkrelease',
 				'r'          : jQuery('#desinventarRegionId').val(),
@@ -1010,7 +1010,7 @@ function setElementValue(formElement, value)
 
 function setDICardFromId(prmRegionId, prmDisasterId)
 {
-	jQuery.post('cards.php',
+	jQuery.post(jQuery('#desinventarURL').val() + '/cards.php',
 		{
 			'cmd' : 'getDatacard',
 			'RegionId' : prmRegionId,

@@ -55,8 +55,7 @@ function onReadyDBConfigCauses()
 		if (validForm == true)
 		{
 			var params = jQuery(this).serialize();
-			jQuery.post(
-				'causes.php',
+			jQuery.post(jQuery('#desinventarURL').val() + '/causes.php',
 				params, 
 				function(data)
 				{
@@ -64,13 +63,13 @@ function onReadyDBConfigCauses()
 					var opt = jQuery('#frmCauseEdit #Predefined').val();
 					if (opt == "1")
 					{
-						updateList('lst_caupred', 'causes.php', 'r=' + reg + '&cmd=list&predef=1&t=' + new Date().getTime());
+						updateList('lst_caupred', jQuery('#desinventarURL').val() + '/causes.php', 'r=' + reg + '&cmd=list&predef=1&t=' + new Date().getTime());
 					}
 					else
 					{
-						updateList('lst_cauuser', 'causes.php', 'r=' + reg + '&cmd=list&predef=0&t=' + new Date().getTime());
+						updateList('lst_cauuser', jQuery('#desinventarURL').val() + '/causes.php', 'r=' + reg + '&cmd=list&predef=0&t=' + new Date().getTime());
 					}
-					updateList('qevelst', 'index.php', 'r='+ reg +'&cmd=evelst&t=' + new Date().getTime());
+					updateList('qevelst', jQuery('#desinventarURL').val() + '/index.php', 'r='+ reg +'&cmd=evelst&t=' + new Date().getTime());
 					jQuery('#frmCauseEdit #Desc').removeAttr('readonly');
 					jQuery('#causeaddsect').hide();
 					jQuery('#btnCauseEditAdd').show();

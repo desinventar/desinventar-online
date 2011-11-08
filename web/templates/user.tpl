@@ -4,7 +4,7 @@
 <h2>{-#tuserprefer#-}</h2>
 <span id="userpastatusmsg" class="dlgmsg"></span><br />
 <form id="userpafrm" name="userpafrm" method="GET" 
-	action="javascript:var s=$('userpafrm').serialize(); sendData('','user.php', s, '');"
+	action="javascript:var s=$('userpafrm').serialize(); sendData('', jQuery('#desinventarURL').val() + '/user.php', s, '');"
 	onSubmit="javascript:var a=new Array('UserId', 'UserEMail', 'UserFullName', 'UserPasswd'); return(checkForm('userpafrm',a, '{-#errmsgfrmregist#-}'));">
 	<table>
 		<tr>
@@ -12,7 +12,7 @@
 			</td>
 			<td><input type="password" id="UserPasswd" name="UserPasswd" size="8" maxlength="20" class="line" />
 				<input type="button" value="Ok" class="line" onClick="$('userpaaddsect').style.display='block';
-					updateList('userpaaddsect', 'user.php', 'cmd=chkpasswd&UserPasswd='+ $('UserPasswd').value);" />
+					updateList('userpaaddsect', jQuery('#desinventarURL').val() + '/user.php', 'cmd=chkpasswd&UserPasswd='+ $('UserPasswd').value);" />
 			</td>
 		</tr>
 	</table>
@@ -29,7 +29,7 @@
 						</td>
 					{-else-}
 						<input type="text" id="UserId" name="UserId" size="15" maxlength="15" class="line"
-							onBlur="updateList('chklogin', 'user.php', 'cmd=chklogin&UserId='+ $('UserId').value);" />
+							onBlur="updateList('chklogin', jQuery('#desinventarURL').val() + '/user.php', 'cmd=chklogin&UserId='+ $('UserId').value);" />
 							<span id="chklogin" style="display:inline"></span>
 							<input type="hidden" id="UserPasswd" name="UserPasswd" value="" />
 						</td>
