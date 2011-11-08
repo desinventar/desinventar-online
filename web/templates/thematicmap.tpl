@@ -35,14 +35,14 @@
 						{-$rgl[0].regname-}
 					</div>
 					<hr />
-					<image src="images/ge_icon.png" /><a href="thematicmap.php?r={-$reg-}&cmd=getkml">{-#tgetgearth#-}</a>
+					<image src="{-$desinventarURL-}/images/ge_icon.png" /><a href="thematicmap.php?r={-$reg-}&cmd=getkml">{-#tgetgearth#-}</a>
 					<hr />
 					<img src="{-$legend-}" /><br />
 				</div>
 			</td>
 			<td valign="top">
 				<input type="text" id="MapTitle" name="MapTitle" size=110 />
-				<img id="linkRestoreMapTitle" border="0" src="images/reload.jpg"><br />
+				<img id="linkRestoreMapTitle" border="0" src="{-$desinventarURL-}/images/reload.jpg"><br />
 				<div id="map" class="dwin" style="width:700px; height:530px"></div>
 			</td>
 		</tr>
