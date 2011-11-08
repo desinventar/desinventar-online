@@ -82,7 +82,7 @@
 		switch(mod)
 		{
 			case "regionpa":
-				updateList('lst_regionpa', jQuery('#desinventarURL').val() + '/region.php', 'cmd=list');
+				//updateList('lst_regionpa', jQuery('#desinventarURL').val() + '/region.php', 'cmd=list');
 			break;
 			case "userpa":
 				updateList('lst_userpa', jQuery('#desinventarURL').val() + '/user.php', 'cmd=list');

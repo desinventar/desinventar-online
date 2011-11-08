@@ -16,9 +16,6 @@
 	{-include file="database_import.tpl"-}
 </div>
 
-<!-- divDatabaseEdit -->
-{-include file="database_edit.tpl"-}
-
 <!-- Import datacards-->
 <div class="contentBlock" id="divDatacardsImport" style="display:none;">
 </div>
