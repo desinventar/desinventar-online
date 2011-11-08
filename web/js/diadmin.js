@@ -6,7 +6,7 @@
 	var mod = "";
 	var opt = "";
 	var reg = "";
-	var waiting = "<img src='loading.gif'>";
+	var waiting = '<img src="' + jQuery('#desinventarURL').val() + '/loading.gif" />';
 
 	function uploadMsg(msg)
 	{
