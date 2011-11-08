@@ -15,7 +15,7 @@ function onReadyDBConfigGeography()
 		{
 			jQuery('#frmDBConfigGeographyEdit #RegionId').val(jQuery('#desinventarRegionId').val());
 			var params = jQuery(this).serialize();
-			jQuery.post('geography.php',
+			jQuery.post(jQuery('#desinventarURL').val() + '/geography.php',
 				params,
 				function(data)
 				{
@@ -25,14 +25,14 @@ function onReadyDBConfigGeography()
 						jQuery('#msgDBConfigGeographyUpdate').show();
 						jQuery('#geoaddsect').hide();
 						var RegionId = jQuery('#desinventarRegionId').val();
-						updateList('lst_ageo', 'geography.php', 'RegionId=' + RegionId +'&cmd=list&GeographyId=');
-						updateList('qgeolst', 'index.php', 'RegionId='+ RegionId +'&cmd=geolst');
+						updateList('lst_ageo', jQuery('#desinventarURL').val() + '/geography.php', 'RegionId=' + RegionId +'&cmd=list&GeographyId=');
+						updateList('qgeolst', jQuery('#desinventarURL').val() + '/index.php', 'RegionId='+ RegionId +'&cmd=geolst');
 					}
 					else
 					{
 						jQuery('#msgDBConfigGeographyError').text('Cannot save geography, error code : ' + data.Status).show();
 					}
-					//mod='geo'; sendData('{-$reg-}','geography.php', s, '');"
+					//mod='geo'; sendData('{-$reg-}', jQuery('#desinventarURL').val() + '/geography.php', s, '');"
 				},
 				'json'
 			);

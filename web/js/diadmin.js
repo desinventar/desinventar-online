@@ -82,10 +82,10 @@
 		switch(mod)
 		{
 			case "regionpa":
-				updateList('lst_regionpa', 'region.php', 'cmd=list');
+				updateList('lst_regionpa', jQuery('#desinventarURL').val() + '/region.php', 'cmd=list');
 			break;
 			case "userpa":
-				updateList('lst_userpa', 'user.php', 'cmd=list');
+				updateList('lst_userpa', jQuery('#desinventarURL').val() + '/user.php', 'cmd=list');
 			break;
 			case "role":
 				updateList('lst_role', jQuery('#desinventarURL').val() + '/info.php', 'r='+ reg +'&cmd=cmdDBInfoRoleList');
@@ -94,11 +94,11 @@
 				updateList('lst_log', jQuery('#desinventarURL').val() + '/info.php', 'r='+ reg +'&cmd=cmdDBInfoLogList');
 			break;
 			case "lev":
-				updateList('lst_lev', 'geolevel.php', 'r='+ reg +'&levcmd=list');
+				updateList('lst_lev', jQuery('#desinventarURL').val() + '/geolevel.php', 'r='+ reg +'&levcmd=list');
 			break;
 			case "geo":
-				updateList('lst_ageo', 'geography.php', 'r='+ reg +'&cmd=list&GeographyId=');
-				updateList('qgeolst', 'index.php', 'r='+ reg +'&cmd=geolst');
+				updateList('lst_ageo', jQuery('#desinventarURL').val() + '/geography.php', 'r='+ reg +'&cmd=list&GeographyId=');
+				updateList('qgeolst', jQuery('#desinventarURL').val() + '/index.php', 'r='+ reg +'&cmd=geolst');
 			break;
 			default:
 			break;
@@ -227,7 +227,7 @@
 			setLevGeo(v[0],v[1],v[2],v[3],'','','','geo');
 			$('aGeoParentId').value = v[0];
 			jQuery('#frmDBConfigGeographyEdit #Cmd').val('cmdGeographyUpdate');
-			updateList('alev' + l, 'geography.php', 'r='+ reg +'&cmd=list&GeographyId=' + v[0]);
+			updateList('alev' + l, jQuery('#desinventarURL').val() + '/geography.php', 'r='+ reg +'&cmd=list&GeographyId=' + v[0]);
 		}
 	} //function
 	
@@ -420,7 +420,7 @@
 		}
 		if (l < lev)
 		{
-			var lsAjax = new Ajax.Updater( div, 'cards.php',
+			var lsAjax = new Ajax.Updater( div, jQuery('#desinventarURL').val() + '/cards.php',
 				{
 					method: 'get', 
 					parameters: 'r='+ reg +'&cmd=list&GeographyId='+ geo + '&t=' + new Date().getTime(),
@@ -505,7 +505,7 @@
 			$('_D+FieldH').value = mystr;
 			combineForms('frmMainQuery', 'CD');
 			w.collapse();
-			$('frmMainQuery').action='data.php';
+			$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/data.php';
 			jQuery('#frmMainQuery').submit();
 			//hideMap();
 			return true;
@@ -550,7 +550,7 @@
 			}
 			combineForms('frmMainQuery', 'CM');
 			w.collapse(); // hide()
-			$('frmMainQuery').action='thematicmap.php';
+			$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/thematicmap.php';
 			jQuery('#frmMainQuery').submit();
 			//hideMap();
 			return true;
@@ -575,7 +575,7 @@
 		jQuery('#prmGraphCommand').val(cmd);
 		combineForms('frmMainQuery', 'CG');
 		w.collapse(); //hide()
-		$('frmMainQuery').action='graphic.php';
+		$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/graphic.php';
 		jQuery('#frmMainQuery').submit();
 		//hideMap();
 	}
@@ -604,7 +604,7 @@
 			$('_S+FieldH').value = mystr;
 			combineForms('frmMainQuery', 'CS');
 			w.collapse();//hide()
-			$('frmMainQuery').action='statistic.php';
+			$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/statistic.php';
 			jQuery('#frmMainQuery').submit();
 			//hideMap();
 			return true;
@@ -625,7 +625,7 @@
 		selectall('_S+Field[]');
 		combineForms('frmMainQuery', 'CS');
 		jQuery('#_CMD').val('savequery');
-		$('frmMainQuery').action='index.php?r=' + jQuery('#desinventarRegionId').val();
+		$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/index.php?r=' + jQuery('#desinventarRegionId').val();
 		jQuery('#frmMainQuery').submit();
 		return true;
 	}
@@ -714,7 +714,7 @@
 		{
 			// Find and fill childs
 			$('itree-' + gid).style.display = 'block';
-			updateList('itree-' + gid, 'index.php', 'r=' + jQuery('#desinventarRegionId').val() + '&cmd=glist&GeographyId=' + gid);
+			updateList('itree-' + gid, jQuery('#desinventarURL').val() + '/index.php', 'r=' + jQuery('#desinventarRegionId').val() + '&cmd=glist&GeographyId=' + gid);
 		}
 		else
 		{

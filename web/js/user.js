@@ -17,7 +17,7 @@ function onReadyUserChangePasswd(windowId) {
 		} else if (UserPasswd2 != UserPasswd3) {
 			updateUserChangePasswdMsg('#msgPasswdDoNotMatch');
 		} else {
-			jQuery.post("user.php?cmd=updatepasswd", 
+			jQuery.post(jQuery('#desinventarURL').val() + '/user.php?cmd=updatepasswd', 
 			    {'UserPasswd'  : hex_md5(UserPasswd),
 			     'UserPasswd2' : hex_md5(UserPasswd2)
 			    },
@@ -74,7 +74,7 @@ function onReadyUserAdmin() {
 	// When selecting a row, start editing data...
 	jQuery("#tblUserList tr").click(function() {
 		var UserId = jQuery(this).children("td:first").html();
-		jQuery.getJSON('user.php' + '?cmd=getUserInfo&UserId=' + UserId, function(data) {
+		jQuery.getJSON(jQuery('#desinventarURL').val() + '/user.php' + '?cmd=getUserInfo&UserId=' + UserId, function(data) {
 			jQuery("#txtUserId").attr('readonly','true');
 			jQuery("#txtUserId").val(data.UserId);
 			jQuery("#selCountryIso").val(data.CountryIso);
@@ -118,12 +118,12 @@ function onReadyUserAdmin() {
 				user['User[UserActive]'] = 'off';
 			}
 			// Send AJAX request to update information
-			jQuery.post('user.php', 
+			jQuery.post(jQuery('#desinventarURL').val() + '/user.php', 
 				user, 
 				function(data) {
 					if (data.Status > 0) {
 						// Reload user list on success
-						jQuery("#divUserList").load('user.php' + '?cmd=list', function(data) {
+						jQuery("#divUserList").load(jQuery('#desinventarURL').val() + '/user.php' + '?cmd=list', function(data) {
 							onReadyUserAdmin();
 						});
 					}

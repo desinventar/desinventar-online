@@ -18,7 +18,7 @@ function onReadyExtraEffects() {
 	
 	jQuery('#frmEEFieldEdit').unbind('submit').submit(function() {
 		//onSubmit="javascript: var a=new Array('EEFieldLabel','EEFieldDesc', 'EEFieldType'); return(checkForm('eeffrm',a, '{-#errmsgfrmeef#-}'));"	
-		//action="javascript: var s=$('eeffrm').serialize(); sendData('{-$reg-}', 'extraeffects.php', s, '');"
+		//action="javascript: var s=$('eeffrm').serialize(); sendData('{-$reg-}', jQuery('#desinventarURL').val() + '/extraeffects.php', s, '');"
 		var params = jQuery(this).serialize();
 		var bContinue = true;
 		if (bContinue) {
@@ -40,13 +40,13 @@ function onReadyExtraEffects() {
 			}
 		}
 		if (bContinue) {
-			jQuery.post('extraeffects.php',
+			jQuery.post(jQuery('#desinventarURL').val() + '/extraeffects.php',
 				params,
 				function(data) {
 					jQuery('.msgEEFieldStatus').hide();
 					if (data.Status == 'OK') {
 						jQuery('#msgEEFieldStatusOk').show();
-						updateList('lst_eef', 'extraeffects.php', 'cmd=cmdEEFieldList+&RegionId='+ jQuery('#desinventarRegionId').val());
+						updateList('lst_eef', jQuery('#desinventarURL').val() + '/extraeffects.php', 'cmd=cmdEEFieldList+&RegionId='+ jQuery('#desinventarRegionId').val());
 						jQuery('#extraeffaddsect').hide();
 					} else {
 						jQuery('#msgEEFieldStatusError').show();

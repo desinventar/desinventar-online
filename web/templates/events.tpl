@@ -96,7 +96,7 @@
 			<input id="Id" name="Info[EventId]" type="hidden" />
 			{-$dic.DBEvePersonName[0]-}<b style="color:darkred;">*</b><br />
 			<input id="Name" name="Info[EventName]" type="text" class="line" maxlength="40" style="width:500px;" tabindex="1" {-$ro-}
-				onBlur="updateList('eventstatusmsg', 'events.php', 'r={-$reg-}&cmd=chkname&EventId='+ $('aEventId').value +'&EventName='+ $('EventName').value);"
+				onBlur="updateList('eventstatusmsg', jQuery('#desinventarURL').val() + '/events.php', 'r={-$reg-}&cmd=chkname&EventId='+ $('aEventId').value +'&EventName='+ $('EventName').value);"
 				onFocus="showtip('{-$dic.DBEvePersonName[2]-}');" />
 			<br /><br />
 			{-$dic.DBEvePersonDef[0]-}<b style="color:darkred;">*</b><br />

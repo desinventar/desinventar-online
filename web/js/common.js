@@ -163,7 +163,7 @@ function updateDatabaseListByUser()
 					}
 					else
 					{
-						window.location = 'index.php?r=' + RegionId;
+						window.location = jQuery('#desinventarURL').val() + '/index.php?r=' + RegionId;
 					}
 					return false;
 				}); //bind

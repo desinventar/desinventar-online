@@ -16,6 +16,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([a-zA-Z0-9\-_]+)/?$                    index.php?RegionId=$1
 RewriteRule ^([a-zA-Z0-9\-_]+)/([a-zA-Z0-9\-_]+)/?$  index.php?RegionId=$1&cmd=$2
+#
 # Rewrite URLs of the form 'x' to the form 'index.php?q=x'.
 #RewriteCond %{REQUEST_URI} !=/favicon.ico
 #RewriteCond %{REQUEST_URI} !=/header.php

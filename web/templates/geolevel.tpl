@@ -35,13 +35,13 @@
 	<iframe name="ifcarto" id="ifcarto" frameborder="0" src="about:blank" style="height:30px; width:300px;"></iframe>
 	<br /><br />
 	<div id="levaddsect" style="display:none; width:600px;">
-		<form name="levfrm" id="levfrm" method="POST" action="geolevel.php" target="ifcarto" enctype="multipart/form-data"
+		<form name="levfrm" id="levfrm" method="POST" action="{-$desinventarURL-}/geolevel.php" target="ifcarto" enctype="multipart/form-data"
 			onSubmit="javascript: var a=new Array('GeoLevelName','GeoLevelDesc');
 			if(checkForm('levfrm',a, '{-#errmsgfrmlev#-}')) { $('levaddsect').style.display = 'none'; return(true); } else return(false)">
 			<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevName[2]-}')">
 			{-$dic.DBLevName[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBLevName[1]-}</span></a><br />
 			<input id="GeoLevelName" name="GeoLevelName" type="text" {-$ro-} tabindex="1" class="line" style="width:400px;"
-				onBlur="updateList('levstatusmsg', 'geolevel.php', 'r={-$reg-}&cmd=chkname&GeoLevelId='+ $('GeoLevelId').value +'&GeoLevelName='+ $('GeoLevelName').value);"
+				onBlur="updateList('levstatusmsg', jQuery('#desinventarURL').val() + '/geolevel.php', 'r={-$reg-}&cmd=chkname&GeoLevelId='+ $('GeoLevelId').value +'&GeoLevelName='+ $('GeoLevelName').value);"
 				onFocus="showtip('{-$dic.DBLevName[2]-}')" />
 			<br /><br />
 			<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevDesc[2]-}')">
@@ -89,14 +89,14 @@
 {-** INFO AND ERRORS MESSAGES **-}
 {-if $ctl_msginslev-}
 	<script type="text/javascript" language="javascript">
-	parent.updateList('lst_lev', 'geolevel.php', 'r={-$reg-}&cmd=list');
+	parent.updateList('lst_lev', jQuery('#desinventarURL').val() + '/geolevel.php', 'r={-$reg-}&cmd=list');
 	</script>
 	<span style="color:#42929d; font-size:8pt;">{-#msginslev#-}</span>
 {-elseif $ctl_errinslev-}
 	<span style="color:#42929d; font-size:8pt;">{-#terror#-}[{-$insstatlev-}]: {-#errinslev#-}</span>
 {-elseif $ctl_msgupdlev-}
 	<script type="text/javascript" language="javascript">
-	parent.updateList('lst_lev', 'geolevel.php', 'r={-$reg-}&cmd=list');
+	parent.updateList('lst_lev', jQuery('#desinventarURL').val() + '/geolevel.php', 'r={-$reg-}&cmd=list');
 	</script>
 	<span style="color:#42929d; font-size:8pt;">{-#msgupdlev#-}</span>
 {-elseif $ctl_errupdlev-}

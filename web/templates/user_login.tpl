@@ -34,6 +34,6 @@
 
 	<form id="uf" action="">
 		<!-- method="get" 
-		action="javascript:updateUserBar('user.php', 'login', $('userid').value, $('password').value);"> 
+		action="javascript:updateUserBar(jQuery('#desinventarURL').val() + '/user.php', 'login', $('userid').value, $('password').value);"> 
 		-->
 	</form>

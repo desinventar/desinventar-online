@@ -18,7 +18,7 @@ function onReadyUserLogin() {
 			if (desinventarURL == undefined) {
 				desinventarURL = '';
 			}
-			jQuery.post(desinventarURL + 'user.php',
+			jQuery.post(desinventarURL + '/user.php',
 				{'cmd'        : 'login',
 			     'UserId'     : UserId,
 			     'UserPasswd' : hex_md5(UserPasswd)
@@ -52,7 +52,7 @@ function doUserLogout() {
 	if (desinventarURL == undefined) {
 		desinventarURL = '';
 	}
-	jQuery.post(desinventarURL + 'user.php',
+	jQuery.post(desinventarURL + '/user.php',
 		{'cmd'        : 'logout'
 		},
 		function(data) {

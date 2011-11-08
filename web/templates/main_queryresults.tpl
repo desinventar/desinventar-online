@@ -45,7 +45,7 @@
 					<div id="usr">
 						{-include file="user_login.tpl"-}
 						<br />
-						<a href="javascript:void(null)" class="rememberpasswordlink" onclick="updateList('passlost', 'user.php', 'cmd=passlost');">{-#tpasslost#-}</a>
+						<a href="javascript:void(null)" class="rememberpasswordlink" onclick="updateList('passlost', jQuery('#desinventarURL').val() + '/user.php', 'cmd=passlost');">{-#tpasslost#-}</a>
 						<div id="passlost">
 						</div>
 					</div>
