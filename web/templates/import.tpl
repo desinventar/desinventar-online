@@ -6,7 +6,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
 	{-include file="jquery.tpl"-}
-	<script type="text/javascript" src="js/import.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="{-$desinventarURL-}/js/import.js?version={-$jsversion-}"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			onReadyImport();

@@ -7,13 +7,13 @@
 	<link rel="stylesheet" type="text/css" href="css/desinventar.css?version={-$jsversion-}" />
 	<link rel="stylesheet" type="text/css" href="css/datacards.css?version={-$jsversion-}" />
 	{-include file="jquery.tpl" -}
-	<script type="text/javascript" src="include/prototype.js"></script>
+	<script type="text/javascript" src="{-$desinventarURL-}/include/prototype.js"></script>
 	
-	<script type="text/javascript" src="external/swfupload/swfupload.js"></script>
-	<script type="text/javascript" src="external/jquery.swfupload.js"></script>
-	<script type="text/javascript" src="js/jquery.snippets.js?version={-$jsversion-}"></script>
-	<script type="text/javascript" src="js/database_import.js?version={-$jsversion-}"></script>
-	<script type="text/javascript" src="js/datacards.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="{-$desinventarURL-}/external/swfupload/swfupload.js"></script>
+	<script type="text/javascript" src="{-$desinventarURL-}/external/jquery.swfupload.js"></script>
+	<script type="text/javascript" src="{-$desinventarURL-}/js/jquery.snippets.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="{-$desinventarURL-}/js/database_import.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="{-$desinventarURL-}/js/datacards.js?version={-$jsversion-}"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			//onReadyDatabaseImport();
