@@ -4,8 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
-	<link rel="stylesheet" type="text/css" href="css/desinventar.css?version={-$jsversion-}" />
-	<link rel="stylesheet" type="text/css" href="css/datacards.css?version={-$jsversion-}" />
+	<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/desinventar.css?version={-$jsversion-}" />
+	<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/datacards.css?version={-$jsversion-}" />
 	{-include file="jquery.tpl" -}
 	<script type="text/javascript" src="{-$desinventarURL-}/include/prototype.js"></script>
 	
