@@ -88,10 +88,10 @@
 				updateList('lst_userpa', 'user.php', 'cmd=list');
 			break;
 			case "role":
-				updateList('lst_role', 'info.php', 'r='+ reg +'&cmd=cmdDBInfoRoleList');
+				updateList('lst_role', jQuery('#desinventarURL').val() + '/info.php', 'r='+ reg +'&cmd=cmdDBInfoRoleList');
 			break;
 			case "log":
-				updateList('lst_log', 'info.php', 'r='+ reg +'&cmd=cmdDBInfoLogList');
+				updateList('lst_log', jQuery('#desinventarURL').val() + '/info.php', 'r='+ reg +'&cmd=cmdDBInfoLogList');
 			break;
 			case "lev":
 				updateList('lst_lev', 'geolevel.php', 'r='+ reg +'&levcmd=list');

@@ -12,7 +12,7 @@
 	<td>
 		<fieldset style="padding:5px 5px 5px 5px;">
 		<!-- GENERAL REGION INFO SECTION -->
-		<form id="frmDatabaseInfo" name="infofrm" method="POST" action="info.php" target="ifinfo">
+		<form id="frmDatabaseInfo" name="infofrm" method="POST" action="{-$desinventarURL-}/info.php" target="ifinfo">
 		<table border="0" cellspacing="0" cellpadding="0">
 		<tr>
 		<td colspan="2">
@@ -137,7 +137,7 @@
 		<br />
 		<div id="roleaddsect" style="display:none">
 			<form name="rolefrm" id="rolefrm" method="GET" 
-				action="javascript: var s=$('rolefrm').serialize(); sendData('{-$reg-}', 'info.php', s, '');"
+				action="javascript: var s=$('rolefrm').serialize(); sendData('{-$reg-}', '{-$desinventarURL-}/info.php', s, '');"
 				onSubmit="javascript: var a=new Array('UserId','AuthAuxValue'); return(checkForm('rolefrm',a, '{-#errmsgfrmrol#-}'));">
 				<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBUserId[2]-}')">
 					{-$dic.DBUserId[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBUserId[1]-}</span></a><br />
@@ -212,7 +212,7 @@
 		<br />
 		<div id="logaddsect" style="display:none; width:280px;">
 			<form name="logfrm" id="logfrm" method="GET" 
-				action="javascript: var s=$('logfrm').serialize(); sendData('{-$reg-}', 'info.php', s, '');"
+				action="javascript: var s=$('logfrm').serialize(); sendData('{-$reg-}', '{-$desinventarURL-}/info.php', s, '');"
 				onSubmit="javascript: var a=new Array('DBLogType','DBLogNotes'); return(checkForm('logfrm',a, '{-#errmsgfrmlog#-}'));">
 				<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLogType[2]-}');">
 				{-$dic.DBLogType[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBLogType[1]-}</span></a><br>
