@@ -94,7 +94,6 @@
 			</td>
 		</tr>
 	</table>
-	<!-- divRegionInfo -->
 	{-include file="region_info.tpl"-}
 	<div id="dcr">
 	</div>
