@@ -110,7 +110,7 @@
 								<input id="DisasterSerial" name="DisasterSerial" type="text" size="15" 
 									class="line inputAlphaNumber" tabindex="{-$MyTabIndex-}" maxlength="50" onFocus="showtip('{-$LabelsDisaster.DisasterSerial[2]-}', '#d4baf6')" />
 								{-counter-}
-								<a href="#" id="linkDatacardSuggestSerial"><img src="images/reload.jpg" border="0" />
+								<a href="#" id="linkDatacardSuggestSerial"><img src="{-$desinventarURL-}/images/reload.jpg" border="0" />
 								</a>
 							</td>
 						</tr>
@@ -120,7 +120,7 @@
 			<!-- GEOGRAPHY SECTION -->
 			<tr>
 				<td width="30px" style="border:0px;" valign="top">
-					<img src="images/di_geotag.png" ext:qtip="<b>{-#mgeography#-}</b><br />{-$dmg.MetGuidegeography[2]-}" />
+					<img src="{-$desinventarURL-}/images/di_geotag.png" ext:qtip="<b>{-#mgeography#-}</b><br />{-$dmg.MetGuidegeography[2]-}" />
 				</td>
 				<td>
 					<table class="grid">
@@ -198,12 +198,12 @@
 			<tr>
 				<td width="30px" valign="top" style="border:0px;">
 					<a href="#" id="linkDatacardShowEffectsBasic">
-						<img id="efimg" src="images/di_efftag.png" border=0
+						<img id="efimg" src="{-$desinventarURL-}/images/di_efftag.png" border=0
 							ext:qtip="<b>{-#tbaseffects#-}</b><br />{-$dmg.MetGuidedatacards[2]-}" />
 					</a>
 					<br /><br />
 					<a href="#" id="linkDatacardShowEffectsAditional">
-						<img id="eeimg" src="images/di_eeftag.png" border=0 
+						<img id="eeimg" src="{-$desinventarURL-}/images/di_eeftag.png" border=0 
 							ext:qtip="<b>{-#textraeffect#-}</b><br />{-$dmg.MetGuideextraeffects[2]-}" />
 					</a>
 				</td>
@@ -342,7 +342,7 @@
 			<!-- BEGIN EVENT SECTION -->
 			<tr style="border:1px solid #ff0;">
 				<td width="30px" valign="top" style="border:0px;">
-					<img src="images/di_evetag.png" 
+					<img src="{-$desinventarURL-}/images/di_evetag.png" 
 					ext:qtip="<b>{-#mevents#-}</b><br />{-$dmg.MetGuideevents[2]-}" />
 				</td>
 				<td>
@@ -385,7 +385,7 @@
 			<!-- BEG CAUSE SECTION -->
 			<tr style="border:1px solid #ffffc0;">
 				<td width="30px" valign="top" style="border:0px;">
-					<img src="images/di_cautag.png" ext:qtip="<b>{-#mcauses#-}</b><br />{-$dmg.MetGuidecauses[2]-}" />
+					<img src="{-$desinventarURL-}/images/di_cautag.png" ext:qtip="<b>{-#mcauses#-}</b><br />{-$dmg.MetGuidecauses[2]-}" />
 				</td>
 				<td>
 					<table class="grid">

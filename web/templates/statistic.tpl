@@ -47,13 +47,13 @@
 						<table cellpadding=0 cellspacing=0 border=0>
 							<tr>
 								<td>
-									<a href="#" class="linkStatOrderColumn" altfield="{-$item-}" ordertype="ASC"><img src="images/asc.gif" border=0></a>
+									<a href="#" class="linkStatOrderColumn" altfield="{-$item-}" ordertype="ASC"><img src="{-$desinventarURL-}/images/asc.gif" border=0></a>
 								</td>
 								<td>
 									{-if $item =="DisasterId_"-}{-#trepnum#-}{-elseif $item != "DisasterId"-}{-$dk.$item-}{-/if-}
 								</td>
 								<td>
-									<a href="#" class="linkStatOrderColumn" altfield="{-$item-}" ordertype="DESC"><img src="images/desc.gif" border=0></a>
+									<a href="#" class="linkStatOrderColumn" altfield="{-$item-}" ordertype="DESC"><img src="{-$desinventarURL-}/images/desc.gif" border=0></a>
 								</td>
 							</tr>
 						</table>

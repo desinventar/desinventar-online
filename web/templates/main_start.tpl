@@ -10,7 +10,7 @@
 	<table border="0" cellpadding="0" cellspacing="0" style="border: thin solid;" bgcolor="#e2e2e0" >
 		<tr style="background:url(images/bgmain.png)">
 			<td width="400px">
-				<a href="index.php"><img src="images/di_logo1.png" border=0></a><br/>
+				<a href="index.php"><img src="{-$desinventarURL-}/images/di_logo1.png" border=0></a><br/>
 			</td>
 			<td height="100%" align="center">
 				{-#mlang#-}:

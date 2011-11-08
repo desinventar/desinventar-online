@@ -64,7 +64,7 @@
 					<div id="dlg">
 						<table border="0">
 							<tr>
-								<td><img src="images/di_logo.png">
+								<td><img src="{-$desinventarURL-}/images/di_logo.png">
 								</td>
 								<td><p style="font-size: 16pt;" align="center">DesInventar {-$desinventarVersion-}</p>
 								</td>
