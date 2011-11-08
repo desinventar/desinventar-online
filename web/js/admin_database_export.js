@@ -45,7 +45,7 @@ function onReadyAdminDatabaseExport()
 		window.open(url,'','');
 	});
 	
-	jQuery('#divDatabaseBackup').bind('DBBackupRestart', function() {
+	jQuery('#divDatabaseExport').bind('DBBackupRestart', function() {
 		jQuery('.DBBackup').hide();
 		jQuery('#divDBBackupParameters').show();		
 	});

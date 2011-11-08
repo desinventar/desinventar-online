@@ -97,8 +97,8 @@
 				case 'mnuDatabaseBackup':
 					hideQueryDesign();
 					jQuery('.contentBlock').hide();
-					jQuery('#divDatabaseBackup').trigger('DBBackupRestart');
-					jQuery('#divDatabaseBackup').show();
+					jQuery('#divDatabaseExport').trigger('DBBackupRestart');
+					jQuery('#divDatabaseExport').show();
 				break;
 				case 'mnuDatabaseImport':
 					hideQueryDesign();

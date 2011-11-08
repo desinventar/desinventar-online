@@ -8,11 +8,13 @@
 <!-- "divRegionList" -->
 {-include file="region_list.tpl"-}
 
-<!-- divDatabaseBackup -->
-{-include file="database_export.tpl"-}
+<div class="contentBlock" id="divDatabaseExport" style="display:none;">
+	{-include file="database_export.tpl"-}
+</div>
 
-<!-- divDatabaseImport -->
-{-include file="database_import.tpl"-}
+<div class="contentBlock" id="divDatabaseImport" style="display:none;">
+	{-include file="database_import.tpl"-}
+</div>
 
 <!-- divDatabaseEdit -->
 {-include file="database_edit.tpl"-}
