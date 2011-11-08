@@ -23,7 +23,7 @@ function onReadyMain()
 		{
 			jQuery('#divRegionInfo').hide();
 			jQuery('#dcr').show();
-			jQuery('#dcr').html('<img src="loading.gif">');
+			jQuery('#dcr').html('<img src="' + jQuery('#desinventarURL').val() + '/loading.gif">');
 			jQuery.post(myURL,
 				jQuery(this).serialize(),
 				function(data)
@@ -71,7 +71,7 @@ function onReadyMain()
 	jQuery('.classDBConfig_tabs').click(function() {
 		var me = jQuery(jQuery(this).attr('href'));
 		var cmd = jQuery(this).attr('cmd');
-		me.html('<img src="loading.gif" />');
+		me.html('<img src="' + jQuery('#desinventarURL').val() + '/loading.gif" />');
 		jQuery.post(
 			jQuery(this).attr('data'),
 			{

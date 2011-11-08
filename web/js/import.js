@@ -11,7 +11,7 @@ function onReadyImport() {
 function sendForm() {
 	var fr = document.getElementById('iframe2');
 	var im = document.getElementById('divDatacardsImport');
-	fr.src='loading.gif';
+	fr.src=jQuery('#desinventarURL').val() + '/loading.gif';
 	im.submit();
 }
 

@@ -72,7 +72,7 @@ function doDataDisplayPage(page)
 			var QueryDef = jQuery('#prmDataQueryDef').val();
 			var FieldList = jQuery('#prmDataFieldList').val();
 			
-			jQuery('#tblDataRows').html('<img src="loading.gif">');
+			jQuery('#tblDataRows').html('<img src="' + jQuery('#desinventarURL').val() + '/loading.gif">');
 			jQuery.post('data.php',
 				{'r' : RegionId,
 				 'page': mypag,

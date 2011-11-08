@@ -47,7 +47,7 @@ function doStatDisplayPage(page) {
 	jQuery('#StatCurPage').val(mypag);
 	var RecordsPerPage = jQuery('#prmStatRecordsPerPage').val();
 
-	jQuery('#tblStatRows').html('<img src="loading.gif">');
+	jQuery('#tblStatRows').html('<img src="' + jQuery('#desinventarURL').val() + '/loading.gif">');
 	jQuery.post('statistic.php',
 		{r : jQuery('#prmStatRegionId').val(),
 		 page : mypag,
@@ -63,7 +63,7 @@ function doStatDisplayPage(page) {
 } //function
 
 function doStatOrderByField(field, dir) {
-	jQuery('#tblStatRows').html('<img src="loading.gif">');
+	jQuery('#tblStatRows').html('<img src="' + jQuery('#desinventarURL').val() + '/loading.gif">');
 	jQuery.post('statistic.php',
 		{r  : jQuery('#prmStatRegionId').val(),
 		 page : $('StatCurPage').value,
