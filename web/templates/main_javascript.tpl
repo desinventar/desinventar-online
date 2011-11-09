@@ -94,7 +94,7 @@
 					jQuery('#divDatacardsImport').show();
 					updateList('divDatacardsImport', jQuery('#desinventarURL').val() + '/import.php', 'r=' + RegionId);
 				break;
-				case 'mnuDatabaseBackup':
+				case 'mnuDatabaseExport':
 					hideQueryDesign();
 					jQuery('.contentBlock').hide();
 					jQuery('#divDatabaseExport').trigger('DBBackupRestart');
@@ -275,18 +275,35 @@
 		var mcards = new Ext.menu.Menu({
 			id: 'cardsMenu',
 			items: [
-				
-				{id:'mnuDatacardInsertEdit', text:{-if $desinventarUserRoleValue >= 2-}'{-#mnuDatacardInsertEdit#-}'{-else-}'{-#mnuDatacardView#-}'{-/if-},	handler: onMenuItem  },
-				{-if $role == "SUPERVISOR" || $role == "ADMINREGION"-}
-					{id:'mnuDatacardImport', text: '{-#mnuDatacardImport#-}',	handler: onMenuItem  },
-					{id:'mnuDatabaseBackup', text: '{-#mnuDatabaseBackup#-}',	handler: onMenuItem  },
-				{-/if-}
-				{-if $role == "ADMINREGION"-}
-					{id:'mnuDatabaseConfig', text: '{-#mnuDatabaseConfig#-}',	handler: onMenuItem  },
-				{-/if-}
+				{id:'mnuDatacardView'      , text: '{-#mnuDatacardView#-}'      , handler: onMenuItem },
+				{id:'mnuDatacardInsertEdit', text: '{-#mnuDatacardInsertEdit#-}', handler: onMenuItem },
+				'-',
+				{id:'mnuDatacardImport', text: '{-#mnuDatacardImport#-}'    , handler: onMenuItem },
+				'-',
+				{id:'mnuDatabaseExport', text: '{-#mnuDatabaseExport#-}'    , handler: onMenuItem },
+				{id:'mnuDatabaseImport', text: '{-#mnuDatabaseImport#-}'    , handler: onMenuItem },
+				{id:'mnuDatabaseConfig', text: '{-#mnuDatabaseConfig#-}'    , handler: onMenuItem },
 				'-'
 			]
 		});
+		// Configure which options are visible
+		var UserRoleValue = parseInt(jQuery('#desinventarUserRoleValue').val());
+		//UserRoleValue = 2;
+		//console.log(UserRoleValue);
+		Ext.getCmp('mnuDatacardView').setVisible(false);
+		Ext.getCmp('mnuDatacardInsertEdit').setVisible(true);
+		if (UserRoleValue < 2) // Feeder/Supervisor/Admin
+		{
+			Ext.getCmp('mnuDatacardView').setVisible(true);
+			Ext.getCmp('mnuDatacardInsertEdit').setVisible(false);
+			Ext.getCmp('mnuDatacardImport').setVisible(false);
+			Ext.getCmp('mnuDatabaseExport').setVislble(false);
+		}
+		if (UserRoleValue < 4) // AdminRegion
+		{
+			Ext.getCmp('mnuDatabaseImport').setVisible(false);
+			Ext.getCmp('mnuDatabaseConfig').setVisible(false);
+		}
 		
 		var mbases = new Ext.menu.Menu({
 			id: 'basesMenu',
