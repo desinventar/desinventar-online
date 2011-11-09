@@ -1,6 +1,6 @@
 SQLITE=sqlite3
 
-all : base.db core.db desinventar.db lang langportal
+all : base.db core.db desinventar.db lang
 
 # Rebuild base.db database
 base.db : base.sql doc-db.csv event.csv cause.csv
