@@ -419,11 +419,11 @@ class UserSession {
 			$sQuery .= " WHERE UserId='" . $prmUserId . "'";
 		}
 		$sQuery .= " ORDER BY UserFullName";
+		fb($sQuery);
 		$sth = $this->q->core->prepare($sQuery);
 		try
 		{
 			$sth->execute();
-			$this->q->core->commit();
 			while ($row = $sth->fetch(PDO::FETCH_OBJ))
 			{
 				$myData[$row->UserId] = array ($row->UserEMail, $row->UserPasswd, $row->UserFullName, $row->Organization, 
@@ -432,7 +432,6 @@ class UserSession {
 		}
 		catch (Exception $e)
 		{
-			$this->q->core->rollBack();
 			showErrorMsg('ERROR getUserInfo : ' . $e->getMessage());
 		}
 		return $myData;
