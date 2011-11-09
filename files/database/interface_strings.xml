@@ -1574,8 +1574,8 @@
 			<Text LangIsoCode="fre">Voir les dossiers</Text>
 		</Message>
 		<Message id="mnuDatacardInsertEdit">
-			<Text LangIsoCode="eng">Insert</Text>
-			<Text LangIsoCode="spa">Ingreso</Text>
+			<Text LangIsoCode="eng">Insert/Edit</Text>
+			<Text LangIsoCode="spa">Ingresar/Editar</Text>
 			<Text LangIsoCode="por">Insert</Text>
 			<Text LangIsoCode="fre">Modifier les donées</Text>
 		</Message>
@@ -1591,11 +1591,17 @@
 			<Text LangIsoCode="por">Importação de formulários</Text>
 			<Text LangIsoCode="fre">Importation de carte de données</Text>
 		</Message>
-		<Message id="mnuDatabaseBackup">
-			<Text LangIsoCode="eng">Backup database</Text>
+		<Message id="mnuDatabaseExport">
+			<Text LangIsoCode="eng">Export database</Text>
 			<Text LangIsoCode="spa">Respaldar base de datos</Text>
-			<Text LangIsoCode="por">Backup database*</Text>
-			<Text LangIsoCode="fre">Garantir la base de données</Text>
+			<Text LangIsoCode="por">Exportação banco de dados</Text>
+			<Text LangIsoCode="fre">Exportation base de données </Text>
+		</Message>
+		<Message id="mnuDatabaseImport">
+			<Text LangIsoCode="eng">Import database</Text>
+			<Text LangIsoCode="spa">Importar base de datos</Text>
+			<Text LangIsoCode="por">Importação banco de dados</Text>
+			<Text LangIsoCode="fre">Importation base de données</Text>
 		</Message>
 		<Message id="mfile">
 			<Text LangIsoCode="eng">File</Text>
