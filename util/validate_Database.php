@@ -8,7 +8,7 @@
 	require_once(BASE . '/include/diimport.class.php');
 	require_once(BASE . '/include/diregion.class.php');
 	
-	$RegionId = 'COL-ANTIOQUIA';
+	$RegionId = 'VEN-CARABOBO';
 	$us->login('diadmin','di8');
 	$us->open($RegionId);
 	$iCount = 0;

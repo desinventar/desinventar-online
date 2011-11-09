@@ -18,11 +18,11 @@
 	//$r->copyEvents('eng');
 	//$r->copyCauses('eng');
 	$i = new DIImport($us);
-	$a = $i->importFromCSV('/tmp/DB_event.csv', DI_EVENT, true, 0);
+	//$a = $i->importFromCSV('/tmp/DB_event.csv', DI_EVENT, true, 0);
 	//$a = $i->importFromCSV('/tmp/DB_cause.csv', DI_CAUSE, true, 0);
 	//$a = $i->importFromCSV('/tmp/DB_geolevel.csv', DI_GEOLEVEL, true, 0);
 	//$a = $i->importFromCSV('/tmp/DB_geography.csv', DI_GEOGRAPHY, true, 0);
-	//$a = $i->importFromCSV('/tmp/DB_disaster.csv', DI_DISASTER, true, 0);
+	$a = $i->importFromCSV('/tmp/DB_disaster.csv', DI_DISASTER, true, 0);
 
 	//createEEFields($us, '/tmp/DB_eefield.csv','/tmp/DB_eedata.csv');
 	//importEEData($us,'/tmp/DB_eedata.csv');
