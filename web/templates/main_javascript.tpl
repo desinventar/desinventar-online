@@ -166,7 +166,7 @@
 	var usrw;
 	var dblw;
 	var dlgw;
-	// DI8 - Layout, buttons and internal windows - UI DesConsultar module
+	// Layout, buttons and internal windows - UI DesConsultar module
 	Ext.onReady(function() {
 		// Initialize User Login Form
 		onReadyUserLogin();
@@ -188,9 +188,12 @@
 			// When the user logouts, reload the current page...
 			 window.location.reload(false);
 		});
+
 		Ext.QuickTips.init();
+
 		// User functions Window
-		if (!usrw) {
+		if (!usrw)
+		{
 			usrw = new Ext.Window({
 				el:'usr-win', layout:'fit', x:300, y:100, width:500, height:300, 
 				closeAction:'hide', plain: true, animCollapse: false,
@@ -199,7 +202,8 @@
 		}
 		
 		// Search databases window
-		if (!dblw) {
+		if (!dblw)
+		{
 			dblw = new Ext.Window({
 				el:'dbl-win', layout:'fit', x:200, y:100, width:600, height:450, 
 				closeAction:'hide', plain: true, animCollapse: false,
@@ -208,7 +212,8 @@
 		}
 		
 		// Dialog window
-		if (!dlgw) {
+		if (!dlgw)
+		{
 			dlgw = new Ext.Window({
 				el:'dlg-win', layout:'fit', x:350, y:200, width:300, height:150, 
 				closeAction:'hide', plain: true, animCollapse: false,
@@ -217,7 +222,8 @@
 		}
 		
 		// DesInventar (input form) Window
-		if (!difw) {
+		if (!difw)
+		{
 			difw = new Ext.Window({
 				el:'divDatacardWindow', layout:'fit', 
 				x: 65, y: 0, width:960, height:638, 
@@ -319,7 +325,7 @@
 		{-/if-}
 		tb.add('-', {id: 'mdbs', text: '{-#mdatabases#-}',	menu: mbases });
 		tb.add('-', {id: 'mhlp', text: '{-#mhelp#-}',			menu: mhelp  });
-		tb.add('->',{id: 'mnuRegionInfo', text: '[{-$RegionLabel-}]', 		handler: onMenuItem });
+		tb.add('->',{id: 'mnuRegionInfoLabel', text: '[{-$RegionLabel-}]', 		handler: onMenuItem });
 		tb.add('->',{id: 'mnuHelpWebsite', text: '<img src="{-$desinventarURL-}/images/di_logo4.png" alt="" />', handler: onMenuItem });
 
 		// 2011-04-29 (jhcaiced) Fix for use of ExtJS in IE9 ?
@@ -382,7 +388,8 @@
 		// Data
 		var datw;
 		var datb = Ext.get('dat-btn');
-		if (datb != null) {
+		if (datb != null)
+		{
 			datb.on('click', function() {
 				if (validateQueryDefinition()) {
 					if (!datw) {
@@ -428,7 +435,8 @@
 		// Statistics
 		var stdw;
 		var stdb = Ext.get('std-btn');
-		if (stdb != null) {
+		if (stdb != null)
+		{
 			stdb.on('click', function() {
 				if (validateQueryDefinition()) {
 					if (!stdw) {
@@ -469,7 +477,8 @@
 		// Graphic
 		var grpw;
 		var grpb = Ext.get('grp-btn');
-		if (grpb != null) {
+		if (grpb != null)
+		{
 			grpb.on('click', function() {
 				if (validateQueryDefinition()) {
 					if (!grpw) {
@@ -508,7 +517,8 @@
 		var map; // Map Object
 		var mapw;
 		var mapb = Ext.get('map-btn');
-		if (mapb != null) {
+		if (mapb != null)
+		{
 			mapb.on('click', function() {
 				if (validateQueryDefinition()) {
 					if (!mapw) {
@@ -546,117 +556,131 @@
 				}
 			}); // Map
 		}
-		// quicktips
-		Ext.apply(
-			Ext.QuickTips.getQuickTip(), {
-				maxWidth: 200, minWidth: 100, showDelay: 50, trackMouse: true
-			});
-		});
-		
-		// end ExtJS object
 
-		function setTotalize(lnow, lnext) {
-			var sour = $(lnow);
-			var dest = $(lnext);
-			// clean dest list
-			for (var i = dest.length - 1; i>=0; i--) {
-				dest.remove(i);
-			}
-			for (var i=0; i < sour.length; i++) {
-				if (!sour[i].selected) {
-					var opt = document.createElement('option');
-					opt.value = sour[i].value;
-					opt.text = sour[i].text;
-					var pto = dest.options[i];
-					try {
-						dest.add(opt, pto);
-					} catch(ex) {
-						dest.add(opt, i);
-					}
-				}
-			} //for
-		} //function
-		
-		function setAdvQuery(value, ope) {
-			$('QueryCustom').value += value + ' ';
-			switch (ope) {
-				case 'text':
-					disab($('<'));
-					disab($('>'));
-					enab($('='));  $('=').value = "=''";
-					enab($('<>')); $('<>').value = "<>''";
-					enab($("LIKE '%%'"));
-					disab($('=-1')); disab($('=0')); disab($('=-2'));
-				break;
-				case 'date':
-					enab($('<')); $('<').value = "<''";
-					enab($('>')); $('>').value = ">''";
-					enab($('=')); $('=').value = "=''";
-					enab($('<>')); $('<>').value = "<>''";
-					enab($("LIKE '%%'"));
-					disab($('=-1')); disab($('=0')); disab($('=-2'));
-				break;
-				case 'number':
-					enab($('<')); $('<').value = "<";
-					enab($('>')); $('>').value = ">";
-					enab($('=')); $('=').value = "=";
-					enab($('<>'));$('<>').value = "<>";
-					disab($("LIKE '%%'"));
-					enab($('=-1')); enab($('=0')); enab($('=-2'));
-				break;
-				case 'boolean':
-					disab($('<'));
-					disab($('>'));
-					disab($('='));
-					disab($('<>'));
-					disab($("LIKE '%%'"));
-					enab($('=-1')); enab($('=0')); enab($('=-2'));
-				break;
-			} //switch
-		} //function
-		
-		function printRes() {
-			window.print();
+		// quicktips
+		Ext.apply(Ext.QuickTips.getQuickTip(), {maxWidth: 200, minWidth: 100, showDelay: 50, trackMouse: true});
+
+		// Hide Menu Items when no Region is Selected
+		if (jQuery('#desinventarRegionId').val() == '')
+		{
+			Ext.getCmp('mnuRegionInfo').setVisible(false);
 		}
-		
-		// Find all Effects fields enable by saved query
-		window.onload = function() {
-			// select optimal height in results frame
-			//varhgt = screen.height * 360 / 600;
-			//$('dcr').style = "height:"+ hgt + "px;"
-			{-foreach name=ef1 key=k item=i from=$ef1-}
-				{-assign var="ff" value="D_$k"-}
-				{-if $qd.$ff[0] != ''-}
-					enadisEff('{-$k-}', true);
-					showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
-				{-/if-}
-			{-/foreach-}
-			{-foreach name=sec key=k item=i from=$sec-}
-				{-assign var="sc" value="D_$k"-}
-				{-if $qd.$sc[0] != ''-}
-					{-foreach name=sc2 key=k2 item=i2 from=$i[3]-}
-						{-assign var="ff" value="D_$k2"-}
-						{-if $qd.$ff[0] != ''-}
-							enadisEff('{-$k2-}', true);
-							showeff('{-$qd.$ff[0]-}', 'x{-$k2-}', 'y{-$k2-}');
-						{-/if-}
-					{-/foreach-}
-					enadisEff('{-$k-}', true);
-				{-/if-}
-			{-/foreach-}
-			{-foreach name=ef3 key=k item=i from=$ef3-}
-				{-assign var="ff" value="D_$k"-}
-				{-if $qd.$ff[0] != ''-}
-					enadisEff('{-$k-}', true);
-					showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
-				{-/if-}
-			{-/foreach-}
-			{-foreach name=geol key=k item=i from=$geol-}
-				{-if $i[3]-}
-					setSelMap('{-$i[0]-}', '{-$k-}', true);
-				{-/if-}
-			{-/foreach-}
-		} //function
+	}); // Ext.onReady()
+	// end ExtJS object
+
+	function setTotalize(lnow, lnext)
+	{
+		var sour = $(lnow);
+		var dest = $(lnext);
+		// clean dest list
+		for (var i = dest.length - 1; i>=0; i--)
+		{
+			dest.remove(i);
+		}
+		for (var i=0; i < sour.length; i++)
+		{
+			if (!sour[i].selected)
+			{
+				var opt = document.createElement('option');
+				opt.value = sour[i].value;
+				opt.text = sour[i].text;
+				var pto = dest.options[i];
+				try
+				{
+					dest.add(opt, pto);
+				}
+				catch(ex)
+				{
+					dest.add(opt, i);
+				}
+			}
+		} //for
+	} //function
+	
+	function setAdvQuery(value, ope)
+	{
+		$('QueryCustom').value += value + ' ';
+		switch (ope)
+		{
+			case 'text':
+				disab($('<'));
+				disab($('>'));
+				enab($('='));  $('=').value = "=''";
+				enab($('<>')); $('<>').value = "<>''";
+				enab($("LIKE '%%'"));
+				disab($('=-1')); disab($('=0')); disab($('=-2'));
+			break;
+			case 'date':
+				enab($('<')); $('<').value = "<''";
+				enab($('>')); $('>').value = ">''";
+				enab($('=')); $('=').value = "=''";
+				enab($('<>')); $('<>').value = "<>''";
+				enab($("LIKE '%%'"));
+				disab($('=-1')); disab($('=0')); disab($('=-2'));
+			break;
+			case 'number':
+				enab($('<')); $('<').value = "<";
+				enab($('>')); $('>').value = ">";
+				enab($('=')); $('=').value = "=";
+				enab($('<>'));$('<>').value = "<>";
+				disab($("LIKE '%%'"));
+				enab($('=-1')); enab($('=0')); enab($('=-2'));
+			break;
+			case 'boolean':
+				disab($('<'));
+				disab($('>'));
+				disab($('='));
+				disab($('<>'));
+				disab($("LIKE '%%'"));
+				enab($('=-1')); enab($('=0')); enab($('=-2'));
+			break;
+		} //switch
+	} //function
+	
+	function printRes()
+	{
+		window.print();
+	}
+	
+	// Find all Effects fields enable by saved query
+	window.onload = function()
+	{
+		// select optimal height in results frame
+		//varhgt = screen.height * 360 / 600;
+		//$('dcr').style = "height:"+ hgt + "px;"
+		{-foreach name=ef1 key=k item=i from=$ef1-}
+			{-assign var="ff" value="D_$k"-}
+			{-if $qd.$ff[0] != ''-}
+				enadisEff('{-$k-}', true);
+				showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
+			{-/if-}
+		{-/foreach-}
+		{-foreach name=sec key=k item=i from=$sec-}
+			{-assign var="sc" value="D_$k"-}
+			{-if $qd.$sc[0] != ''-}
+				{-foreach name=sc2 key=k2 item=i2 from=$i[3]-}
+					{-assign var="ff" value="D_$k2"-}
+					{-if $qd.$ff[0] != ''-}
+						enadisEff('{-$k2-}', true);
+						showeff('{-$qd.$ff[0]-}', 'x{-$k2-}', 'y{-$k2-}');
+					{-/if-}
+				{-/foreach-}
+				enadisEff('{-$k-}', true);
+			{-/if-}
+		{-/foreach-}
+		{-foreach name=ef3 key=k item=i from=$ef3-}
+			{-assign var="ff" value="D_$k"-}
+			{-if $qd.$ff[0] != ''-}
+				enadisEff('{-$k-}', true);
+				showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
+			{-/if-}
+		{-/foreach-}
+		{-foreach name=geol key=k item=i from=$geol-}
+			{-if $i[3]-}
+				setSelMap('{-$i[0]-}', '{-$k-}', true);
+			{-/if-}
+		{-/foreach-}
+	} //function
 		
 		var geotree = new CheckTree('geotree');
 </script>
