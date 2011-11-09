@@ -20,7 +20,7 @@ function doKeepSessionAwake() {
 
 function doGetRegionInfo(RegionId)
 {
-	jQuery('#divRegionInfo #divRegionLogo').html('<img src="' + jQuery('#desinventarURL').val() + '/loading.gif" />');
+	jQuery('#divRegionInfo #divRegionLogo').html('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" />');
 	jQuery.post(jQuery('#desinventarURL').val(),
 		{
 		  cmd         : 'cmdGetRegionInfo', 

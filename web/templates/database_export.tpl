@@ -33,7 +33,7 @@
 <tr>
 	<td>
 		<div id="divDBBackupProgress" style="display:none;" class="DBBackup">
-			{-#msgDBBackupWaiting#-} &nbsp;&nbsp; <img src="{-$desinventarURL-}/loading.gif" />
+			{-#msgDBBackupWaiting#-} &nbsp;&nbsp; <img src="{-$desinventarURL-}/images/loading.gif" />
 		</div>
 		<br />
 	</td>
