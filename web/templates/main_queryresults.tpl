@@ -6,13 +6,13 @@
 			</td>
 			<td align="center">
 				<div id="ResultHeaderButtonToolbar">
-					<button id="dat-btn" class="rounded" ext:qtip="{-#tdatamsg#-}"><span>{-#bdata#-}</span></button>
+					<button id="btnViewData" class="rounded" ext:qtip="{-#tdatamsg#-}"><span>{-#bdata#-}</span></button>
 					{-include file="viewdata_parameters.tpl"-}
-					<button id="map-btn" class="rounded" ext:qtip="{-#tthematicmsg#-}"><span>{-#bthematic#-}</span></button>
+					<button id="btnViewMap" class="rounded" ext:qtip="{-#tthematicmsg#-}"><span>{-#bthematic#-}</span></button>
 					{-include file="thematicmap_parameters.tpl"-}
-					<button id="grp-btn" class="rounded" ext:qtip="{-#tgraphicmsg#-}"><span>{-#bgraphic#-}</span></button>
+					<button id="btnViewGraph" class="rounded" ext:qtip="{-#tgraphicmsg#-}"><span>{-#bgraphic#-}</span></button>
 					{-include file="graph_parameters.tpl"-}
-					<button id="std-btn" class="rounded" ext:qtip="{-#tstatisticmsg#-}"><span>{-#bstatistic#-}</span></button>
+					<button id="btnViewStd" class="rounded" ext:qtip="{-#tstatisticmsg#-}"><span>{-#bstatistic#-}</span></button>
 					{-include file="statistic_parameters.tpl"-}
 				</div>
 				<!-- Show XML query open window-->
