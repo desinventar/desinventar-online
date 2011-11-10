@@ -27,6 +27,7 @@
 							<input type="file" id="ofile" name="qry" onChange="$('openquery').submit();"/>
 						</form>
 					</div>
+					<span id="msgQueryOpenButtonClose" style="display:none;">{-#tclose#-}</span>
 				</div>
 				<!-- Show DesInventar (input data) window-->
 				<div id="divDatacardWindow" class="x-hidden">

@@ -13,7 +13,8 @@
 	<script type="text/javascript" src="{-$desinventarURL-}/external/prototype.js"></script>
 	<!-- jQuery -->
 	{-include file="jquery.tpl"-}
-	
+
+	<!--
 	<script type="text/javascript" src="{-$desinventarURL-}/external/listMan.js"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/external/md5.js"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/external/wd.js"></script>
@@ -52,9 +53,10 @@
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
 	{-*include file="maps_include.tpl"*-}
-	<!-- ExtJS -->
 	<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/external/checktree/checktree.css"/>
 	<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/accordion.css"/>
+	-->
+	<!-- ExtJS -->
 	<link rel="stylesheet" type="text/css" href="/extJS/resources/css/ext-all.css"/>
 	<link rel="stylesheet" type="text/css" href="/extJS/resources/css/xtheme-gray.css"/>
 	<script type="text/javascript" src="/extJS/adapter/ext/ext-base.js"></script>
@@ -62,12 +64,7 @@
 	{-include file="main_javascript.tpl"-}
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
-			onReadyDatacards();
-			onReadyData();
-			onReadyGraphic();
-			onReadyAdminDatabase();
-			onReadyExtraEffects();
-			onReadyMain();		
+			//onReadyMain();		
 		});
 	</script>
 </head>
@@ -85,21 +82,25 @@
 
 		<!-- Query Design -->
 		<div id="west">
-			{-include file="main_querydesign.tpl"-}
+			West Area
+			{-*include file="main_querydesign.tpl"*-}
 		</div>
 		
 		<!-- Central Content Area -->
 		<div id="container">
-			{-include file="main_content.tpl"-}
+			Content Area
+			{-*include file="main_content.tpl"*-}
 		</div>
 
 		<!-- Help Section -->
 		<div id="south">
-			{-include file="main_help.tpl"-}
+			South Area
+			{-*include file="main_help.tpl"*-}
 		</div>
 	</div>
 	
 	<!-- General App Information -->
 	{-include file="desinventarinfo.tpl"-}
+	{-include file="desinventarmenu.tpl"-}
 </body>
 </html>

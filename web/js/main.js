@@ -5,8 +5,29 @@
 function onReadyMain()
 {
 	onReadyCommon();
+	onReadyDatacards();
+	onReadyData();
+	onReadyGraphic();
+	onReadyAdminDatabase();
+	onReadyExtraEffects();
 	onReadyQueryDesign();
 	onReadyThematicMap();	
+
+	jQuery('body').bind('UserLoggedIn',function() {
+		Ext.getCmp('viewport').destroy();
+		jQuery('#loading').show();
+		jQuery('#loading-mask').show();
+		// When the user completes the login procedure, reload the current page...
+		 window.location.reload(false);
+	});
+
+	jQuery('body').bind('UserLoggedOut',function() {
+		Ext.getCmp('viewport').destroy();
+		jQuery('#loading').show();
+		jQuery('#loading-mask').show();
+		// When the user logouts, reload the current page...
+		 window.location.reload(false);
+	});
 	
 	jQuery('#frmMainQuery').submit(function() {
 		var myURL = jQuery(this).attr('action');

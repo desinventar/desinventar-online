@@ -1,4 +1,5 @@
 <!-- BEG DI8 QUERY FORM -->
+<span id="msgQueryDesignTitle" style="display:none;">{-#tsubtitle#-}</span>
 <form id="frmMainQuery" method="POST" action="" target="dcr">
 	<input type="hidden" id="_REG" name="_REG" value="{-$reg-}" />
 	<input type="hidden" id="_CMD" name="_CMD" />
