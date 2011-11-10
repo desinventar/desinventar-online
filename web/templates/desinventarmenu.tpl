@@ -14,21 +14,21 @@
 			<span id="mnuUserLanguage-{-$key-}">{-$item-}</span>
 			{-/foreach-}
 		<span id="mnuUserQuit">{-#mnuUserQuit#-}</span>
-	<span id="mnuMenuDatacards">{-#mdcsection#-}</span>
+	<span id="mnuMenuDatacards">{-#mnuMenuDatacards#-}</span>
 		<span id="mnuDatacardView">{-#mnuDatacardView#-}</span>
 		<span id="mnuDatacardInsertEdit">{-#mnuDatacardInsertEdit#-}</span>
 		<span id="mnuDatacardImport">{-#mnuDatacardImport#-}</span>
 		<span id="mnuDatabaseExport">{-#mnuDatabaseExport#-}</span>
 		<span id="mnuDatabaseImport">{-#mnuDatabaseImport#-}</span>
 		<span id="mnuDatabaseConfig">{-#mnuDatabaseConfig#-}</span>
-	<span id="mnuMenuDatabase">{-#mdatabases#-}</span>
-		<span id="mnuDatabaseFind">{-#mdbfind#-}</span>
-		<span id="mnuAdminUsers">{-#mnuUserAdmin#-}</span>
-		<span id="mnuAdminDatabases">{-#mnuAdminDatabase#-}</span>
-	<span id="mnuMenuHelp">{-#mhelp#-}</span>
-		<span id="mnuHelpWebsite">{-#mwebsite#-}</span>
-		<span id="mnuHelpMethodology">{-#hmoreinfo#-}</span>
-		<span id="mnuHelpDocumentation">{-#hotherdoc#-}</span>
-		<span id="mnuRegionInfo">{-#hdbinfo#-}</span>
-		<span id="mnuHelpAbout">{-#mabout#-}</span>
+	<span id="mnuMenuDatabase">{-#mnuMenuDatabase#-}</span>
+		<span id="mnuDatabaseFind">{-#mnuDatabaseFind#-}</span>
+		<span id="mnuAdminUsers">{-#mnuAdminUsers#-}</span>
+		<span id="mnuAdminDatabases">{-#mnuAdminDatabases#-}</span>
+	<span id="mnuMenuHelp">{-#mnuMenuHelp#-}</span>
+		<span id="mnuHelpWebsite">{-#mnuHelpWebsite#-}</span>
+		<span id="mnuHelpMethodology">{-#mnuHelpMethodology#-}</span>
+		<span id="mnuHelpDocumentation">{-#mnuHelpDocumentation#-}</span>
+		<span id="mnuHelpRegionInfo">{-#mnuHelpRegionInfo#-}</span>
+		<span id="mnuHelpAbout">{-#mnuHelpAbout#-}</span>
 </div>
