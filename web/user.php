@@ -64,7 +64,7 @@ switch ($cmd)
 		$UserPasswd = getParameter('UserPasswd');
 		if ($us->login($UserId, $UserPasswd) > 0)
 		{
-			$Answer['Status'] = 'OK';	// Login success
+			$Answer['Status'] = ERR_NO_ERROR;	// Login success
 			$Answer['UserId'] = $us->UserId;
 			$Answer['UserFullName'] = $us->getUserFullName();
 		}

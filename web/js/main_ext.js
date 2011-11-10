@@ -95,8 +95,7 @@ function onMenuItem(item) {
 		break;
 		case 'mnuUserLogin':
 		case 'mnuUserChangeLogin':
-			//updateUserBar(jQuery('#desinventarURL').val() + '/user.php', '', '', '');
-			Ext.getCmp('wndUserLogin').show();
+			doUserLoginShow();
 		break;
 		case 'mnuUserLogout':
 			doUserLogout();
