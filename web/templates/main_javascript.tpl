@@ -8,6 +8,7 @@
 					jQuery('#divRegionInfo').show();
 				break;
 				case 'mnuUserLogin':
+				case 'mnuUserChangeLogin':
 					//updateUserBar(jQuery('#desinventarURL').val() + '/user.php', '', '', '');
 					usrw.show();
 				break;
@@ -69,6 +70,7 @@
 					qryw.show(this);
 				break;
 				// Datacards Menu Items
+				case 'mnuDatacardView':
 				case 'mnuDatacardInsertEdit':
 					jQuery('#cardsRecordNumber').val(0);
 					jQuery('#cardsRecordSource').val('');
@@ -118,12 +120,12 @@
 					jQuery('.contentBlock').hide();
 					updateDatabaseListByUser();
 				break;
-				case 'mnuUserAdmin':
+				case 'mnuAdminUsers':
 					//updateList('dbl', jQuery('#desinventarURL').val() + '/user.php', 'cmd=adminusr', 'onReadyUserAdmin');
 					jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=adminusr',function() { onReadyUserAdmin(); });
 					dblw.show();
 				break;
-				case 'mnuAdminDatabase':
+				case 'mnuAdminDatabases':
 					jQuery('.contentBlock').hide();
 					jQuery('#divAdminDatabase').show();
 					doAdminDatabaseUpdateList();
@@ -237,28 +239,25 @@
 		}
 		
 		// Main menu
+		var mnuLang = new Ext.menu.Menu({
+			id: 'langSubMenu',
+			items:
+			[
+				{-foreach name=LanguageList key=key item=item from=$LanguageList-}
+				{id: '{-$key-}', text: '{-$item-}', handler: onMenuItem},
+				{-/foreach-}
+			]
+		});
+		
 		var muser = new Ext.menu.Menu({
 			id: 'userMenu',
 			items: [
-				{-if $desinventarUserId != ""-}
-					{id: 'mnuUserEditAccount', text: '{-#tconfigacc#-}', handler: onMenuItem },
-					{id: 'mnuUserLogout', text: '{-#tclosesess#-}', handler: onMenuItem }, 
-				{-else-}
-					{id: 'mnuUserLogin', text: '{-#benter#-}', handler: onMenuItem }, 
-				{-/if-}
-				'-',
-				{ text: '{-#mlang#-}',
-					menu: {
-						id: 'langSubMenu',
-						items: [
-							{-foreach name=LanguageList key=key item=item from=$LanguageList-}
-								{id: '{-$key-}', text: '{-$item-}', handler: onMenuItem},
-							{-/foreach-}
-							'-'
-						]
-					}
-				},
-				{id: 'mnuFileQuit',  text: '{-#mquit#-}', handler: onMenuItem  }
+				{id: 'mnuUserLogin'       , text: '{-#benter#-}'            , handler: onMenuItem }, 
+				{id: 'mnuUserChangeLogin' , text: '{-#mnuUserChangeLogin#-}', handler: onMenuItem, hidden: true },
+				{id: 'mnuUserEditAccount' , text: '{-#tconfigacc#-}'        , handler: onMenuItem, hidden: true },
+				{id: 'mnuUserLogout'      , text: '{-#tclosesess#-}'        , handler: onMenuItem, hidden: true }, 
+				{id: 'mnuUserLanguage'    , text: '{-#mlang#-}'             , menu: mnuLang },
+				{id: 'mnuFileQuit',  text: '{-#mquit#-}'                    , handler: onMenuItem  }
 			]
 		});
 		
@@ -276,46 +275,20 @@
 			id: 'cardsMenu',
 			items: [
 				{id:'mnuDatacardView'      , text: '{-#mnuDatacardView#-}'      , handler: onMenuItem },
-				{id:'mnuDatacardInsertEdit', text: '{-#mnuDatacardInsertEdit#-}', handler: onMenuItem },
-				'-',
-				{id:'mnuDatacardImport', text: '{-#mnuDatacardImport#-}'    , handler: onMenuItem },
-				'-',
-				{id:'mnuDatabaseExport', text: '{-#mnuDatabaseExport#-}'    , handler: onMenuItem },
-				{id:'mnuDatabaseImport', text: '{-#mnuDatabaseImport#-}'    , handler: onMenuItem },
-				{id:'mnuDatabaseConfig', text: '{-#mnuDatabaseConfig#-}'    , handler: onMenuItem },
-				'-'
+				{id:'mnuDatacardInsertEdit', text: '{-#mnuDatacardInsertEdit#-}', handler: onMenuItem, hidden: true },
+				{id:'mnuDatacardImport'    , text: '{-#mnuDatacardImport#-}'    , handler: onMenuItem, hidden: true },
+				{id:'mnuDatabaseExport'    , text: '{-#mnuDatabaseExport#-}'    , handler: onMenuItem, hidden: true },
+				{id:'mnuDatabaseImport'    , text: '{-#mnuDatabaseImport#-}'    , handler: onMenuItem, hidden: true },
+				{id:'mnuDatabaseConfig'    , text: '{-#mnuDatabaseConfig#-}'    , handler: onMenuItem, hidden: true }
 			]
 		});
-		// Configure which options are visible
-		var UserRoleValue = parseInt(jQuery('#desinventarUserRoleValue').val());
-		//UserRoleValue = 2;
-		//console.log(UserRoleValue);
-		Ext.getCmp('mnuDatacardView').setVisible(false);
-		Ext.getCmp('mnuDatacardInsertEdit').setVisible(true);
-		if (UserRoleValue < 2) // Feeder/Supervisor/Admin
-		{
-			Ext.getCmp('mnuDatacardView').setVisible(true);
-			Ext.getCmp('mnuDatacardInsertEdit').setVisible(false);
-			Ext.getCmp('mnuDatacardImport').setVisible(false);
-			Ext.getCmp('mnuDatabaseExport').setVislble(false);
-		}
-		if (UserRoleValue < 4) // AdminRegion
-		{
-			Ext.getCmp('mnuDatabaseImport').setVisible(false);
-			Ext.getCmp('mnuDatabaseConfig').setVisible(false);
-		}
 		
 		var mbases = new Ext.menu.Menu({
 			id: 'basesMenu',
 			items: [
-				{id:'mnuDatabaseFind', text: '{-#mdbfind#-}',	handler: onMenuItem  } //search Databases
-				{-if $desinventarUserId == "root"-}
-					, // Keep this coma inside the if block to prevent IE from going crazy when rending page...
-					{id:'mnuUserAdmin', text: '{-#mnuUserAdmin#-}',	handler: onMenuItem  }, //admin Users
-					{id:'mnuAdminDatabase', text: '{-#mnuAdminDatabase#-}',	handler: onMenuItem  }, //admin Databases
-					'-',
-					{id:'mnuDatabaseImport', text: '{-#mnuDatabaseImport#-}',	handler: onMenuItem  }
-				{-/if-}
+				{id:'mnuDatabaseFind'   , text: '{-#mdbfind#-}'          , handler: onMenuItem },
+				{id:'mnuAdminUsers'     , text: '{-#mnuUserAdmin#-}'     , handler: onMenuItem, hidden: true },
+				{id:'mnuAdminDatabases' , text: '{-#mnuAdminDatabase#-}' , handler: onMenuItem, hidden: true }
 			]
 		});
 		
@@ -323,27 +296,71 @@
 			id: 'helpMenu',
 			style: { overflow: 'visible' },
 			items: [
-				{id:'mnuHelpWebsite', text: '{-#mwebsite#-}',	handler: onMenuItem  },
-				{id:'mnuHelpMethodology', text: '{-#hmoreinfo#-}', handler: onMenuItem  },
+				{id:'mnuHelpWebsite'      , text: '{-#mwebsite#-}' , handler: onMenuItem  },
+				{id:'mnuHelpMethodology'  , text: '{-#hmoreinfo#-}', handler: onMenuItem  },
 				{id:'mnuHelpDocumentation', text: '{-#hotherdoc#-}', handler: onMenuItem  },
-				{id:'mnuRegionInfo', text: '{-#hdbinfo#-}', handler: onMenuItem  },
-				{id:'mnuHelpAbout', text: '{-#mabout#-}', handler: onMenuItem  }
+				{id:'mnuRegionInfo'       , text: '{-#hdbinfo#-}'  , handler: onMenuItem, hidden: true },
+				{id:'mnuHelpAbout'        , text: '{-#mabout#-}'   , handler: onMenuItem  }
 			]
 		});
 		
-		var tb = new Ext.Toolbar();
-		tb.render('toolbar');
-		tb.add('-', {id: 'musr', text: '{-#tuser#-}{-if $desinventarUserId != ""-}: {-$desinventarUserId-}{-/if-}', menu: muser });
-		{-if !$ctl_noregion-}
-		tb.add('-', {id: 'mqry', text: '{-#msearch#-}',		menu: mquery });
-		{-/if-}
-		{-if $desinventarRegionId != ""-}
-			tb.add('-', {id: 'minp', text: '{-#mdcsection#-}',	menu: mcards });
-		{-/if-}
-		tb.add('-', {id: 'mdbs', text: '{-#mdatabases#-}',	menu: mbases });
-		tb.add('-', {id: 'mhlp', text: '{-#mhelp#-}',			menu: mhelp  });
-		tb.add('->',{id: 'mnuRegionInfoLabel', text: '[{-$RegionLabel-}]', 		handler: onMenuItem });
-		tb.add('->',{id: 'mnuHelpWebsite', text: '<img src="{-$desinventarURL-}/images/di_logo4.png" alt="" />', handler: onMenuItem });
+		var tb = new Ext.Toolbar({
+			renderTo: 'toolbar',
+			items : [
+				{ id:'mnuUser'       , text:'{-#tuser#-}'     , menu: muser },
+				{ id:'mnuQuery'      , text:'{-#msearch#-}'   , menu: mquery, hidden: true },
+				{ id:'mnuCards'      , text:'{-#mdcsection#-}', menu: mcards, hidden: true },
+				{ id:'mnuDB'         , text:'{-#mdatabases#-}', menu: mbases},
+				{ id:'mnuHelp'       , text:'{-#mhelp#-}'     , menu: mhelp}
+			]
+		});
+		tb.add('->',{id: 'mnuRegionInfoLabel', text: '', handler: onMenuItem });
+		tb.add('->',{id: 'mnuHelpWebsite'    , text: '<img src="{-$desinventarURL-}/images/di_logo4.png" alt="" />', handler: onMenuItem });
+
+		// Add UserId to menu text when user is logged in
+		if (jQuery('#desinventarUserId').val() != '')
+		{
+			Ext.getCmp('mnuUser').setText(Ext.getCmp('mnuUser').getText() + ' : ' + jQuery('#desinventarUserId').val());
+			Ext.getCmp('mnuUserLogin').hide();
+			Ext.getCmp('mnuUserChangeLogin').show();
+			Ext.getCmp('mnuUserEditAccount').show();
+			Ext.getCmp('mnuUserLogout').show();
+		}
+
+		// Configure which options are visible using RoleValue
+		var UserRoleValue = parseInt(jQuery('#desinventarUserRoleValue').val());
+
+		if (UserRoleValue >= 5)
+		{
+			Ext.getCmp('mnuAdminUsers').show();
+			Ext.getCmp('mnuAdminDatabases').show();
+		}
+		
+		// Hide Menu items when no Region is Selected
+		if (jQuery('#desinventarRegionId').val() != '')
+		{
+			Ext.getCmp('mnuRegionInfo').show();
+			Ext.getCmp('mnuRegionInfoLabel').setText('[' + jQuery('#desinventarRegionLabel').val() + ']');
+			Ext.getCmp('mnuQuery').show();
+			Ext.getCmp('mnuCards').show();
+
+			// Feeder/Supervisor/Admin
+			if (UserRoleValue >= 2) 
+			{
+				// Edit datacards instead of only view them
+				Ext.getCmp('mnuDatacardView').hide();
+				Ext.getCmp('mnuDatacardInsertEdit').show();
+				// Enable other functions
+				Ext.getCmp('mnuDatacardImport').show();
+				Ext.getCmp('mnuDatabaseExport').show();
+				if (UserRoleValue >= 4)
+				{
+					Ext.getCmp('mnuDatabaseImport').show();
+					Ext.getCmp('mnuDatabaseConfig').show();
+				}
+			}
+			
+		} //if
 
 		// 2011-04-29 (jhcaiced) Fix for use of ExtJS in IE9 ?
 		if ((typeof Range !== "undefined") && !Range.prototype.createContextualFragment)
@@ -577,11 +594,6 @@
 		// quicktips
 		Ext.apply(Ext.QuickTips.getQuickTip(), {maxWidth: 200, minWidth: 100, showDelay: 50, trackMouse: true});
 
-		// Hide Menu Items when no Region is Selected
-		if (jQuery('#desinventarRegionId').val() == '')
-		{
-			Ext.getCmp('mnuRegionInfo').setVisible(false);
-		}
 	}); // Ext.onReady()
 	// end ExtJS object
 

@@ -6,8 +6,8 @@
 	<input type="hidden" id="desinventarVersion"       value="{-$desinventarVersion-}" />
 	<input type="hidden" id="desinventarUserId"        value="{-$desinventarUserId-}" /> 
 	<input type="hidden" id="desinventarUserFullName"  value="{-$desinventarUserFullName-}" />
-	<input type="hidden" id="desinventarUserRole"      value="{-$desinventarUserRole-}" />
-	<input type="hidden" id="desinventarUserRoleValue" value="{-$desinventarUserRoleValue-}" />
+	<input type="hidden" id="desinventarUserRole"      value="{-$desinventarUserRole|default:NONE-}" />
+	<input type="hidden" id="desinventarUserRoleValue" value="{-$desinventarUserRoleValue|default:0-}" />
 	<input type="hidden" id="desinventarModule"        value="{-$desinventarModule-}" />
 	<input type="hidden" id="desinventarRegionId"      value="{-$desinventarRegionId-}" />
 	<input type="hidden" id="desinventarRegionLabel"   value="{-$desinventarRegionLabel-}" />
