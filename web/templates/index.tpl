@@ -10,11 +10,11 @@
 	<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/desinventar.css?version={-$jsversion-}" />
 	<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/datacards.css?version={-$jsversion-}" />
 	<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/main.css?version={-$jsversion-}" />
-	<script type="text/javascript" src="{-$desinventarURL-}/external/prototype.js"></script>
 	<!-- jQuery -->
 	{-include file="jquery.tpl"-}
 
-	<!--
+	{-*include file="main_javascript.tpl"*-}
+
 	<script type="text/javascript" src="{-$desinventarURL-}/external/listMan.js"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/external/md5.js"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/external/wd.js"></script>
@@ -27,7 +27,6 @@
 	<script type="text/javascript" src="{-$desinventarURL-}/external/jquery.swfupload.js"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/external/Math.uuid.js"></script>
 
-	<script type="text/javascript" src="{-$desinventarURL-}/js/diadmin.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/js/datacards.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/js/extraeffects.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/js/dbconfig_geography.js?version={-$jsversion-}"></script>
@@ -47,24 +46,28 @@
 	<script type="text/javascript" src="{-$desinventarURL-}/js/admin_database_import.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/js/database_config.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/js/common.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="{-$desinventarURL-}/js/diadmin.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/js/main.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="{-$desinventarURL-}/js/main_ext.js?version={-$jsversion-}"></script>
 
 	<script type="text/javascript" src="http://api.maps.yahoo.com/ajaxymap?v=3.0&amp;appid=euzuro-openlayers"></script>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
-	{-*include file="maps_include.tpl"*-}
 	<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/external/checktree/checktree.css"/>
 	<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/accordion.css"/>
-	-->
+
 	<!-- ExtJS -->
+	<!-- Make sure prototype.js is loaded before ExtJS -->
+	<script type="text/javascript" src="{-$desinventarURL-}/external/prototype.js"></script>
 	<link rel="stylesheet" type="text/css" href="/extJS/resources/css/ext-all.css"/>
 	<link rel="stylesheet" type="text/css" href="/extJS/resources/css/xtheme-gray.css"/>
 	<script type="text/javascript" src="/extJS/adapter/ext/ext-base.js"></script>
 	<script type="text/javascript" src="/extJS/ext-all.js"></script>
-	{-include file="main_javascript.tpl"-}
+
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
-			//onReadyMain();		
+			onReadyMain();
+			onReadyExtJS();
 		});
 	</script>
 </head>
@@ -82,20 +85,17 @@
 
 		<!-- Query Design -->
 		<div id="west">
-			West Area
-			{-*include file="main_querydesign.tpl"*-}
+			{-include file="main_querydesign.tpl"-}
 		</div>
 		
 		<!-- Central Content Area -->
 		<div id="container">
-			Content Area
-			{-*include file="main_content.tpl"*-}
+			{-include file="main_content.tpl"-}
 		</div>
 
 		<!-- Help Section -->
 		<div id="south">
-			South Area
-			{-*include file="main_help.tpl"*-}
+			{-include file="main_help.tpl"-}
 		</div>
 	</div>
 	
