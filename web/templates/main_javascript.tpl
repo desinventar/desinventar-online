@@ -433,12 +433,12 @@
 							animCollapse: false,
 							items: new Ext.Panel({contentEl: 'dat-cfg', autoScroll: true }),
 							buttons: [
-								{text:'{-#tclear#-}',
+								{text: jQuery('#msgViewDataButtonClear').text(),
 									handler: function() {
 										$('CD').reset();
 										} //handler
 								},
-								{text:'{-#tsend#-}',
+								{text: jQuery('#msgViewDataButtonSend').text(),
 									handler: function() {
 										if (sendList("result")) {
 											$('DCRes').value = "D";
@@ -446,11 +446,11 @@
 											$('bsave').style.visibility = 'visible';
 											$('bprint').style.visibility = 'visible';
 										} else {
-											console.debug("{-#derrmsgfrm#-}");
+											console.debug('Error while executing function ViewData');
 										}
 									} //handler
 								},
-								{text:'{-#tclose#-}',
+								{text: jQuery('#msgViewDataButtonClose').text(),
 									handler: function() {
 										datw.hide();
 									} //handler
@@ -475,12 +475,12 @@
 							closeAction:'hide', plain: true, animCollapse: false,
 							items: new Ext.Panel({contentEl: 'std-cfg', autoScroll: true }),
 							buttons: [
-								{text:'{-#tclear#-}',
+								{text: jQuery('#msgViewStdButtonClear').text(),
 									handler: function() {
 										$('CS').reset();
 									}
 								},
-								{text:'{-#tsend#-}',
+								{text: jQuery('#msgViewStdButtonSend').text(),
 									handler: function() {
 										if (sendStatistic("result")) {
 											$('DCRes').value = "S";
@@ -488,11 +488,11 @@
 											$('bsave').style.visibility = 'visible';
 											$('bprint').style.visibility = 'visible';
 										} else {
-											console.debug("{-#serrmsgfrm#-}");
+											console.debug('Error while executing ViewStd function');
 										}
 									} //handler
 								},
-								{text:'{-#tclose#-}',
+								{text: jQuery('#msgViewStdButtonClose').text(),
 									handler: function() {
 										stdw.hide();
 									}
@@ -517,12 +517,12 @@
 							closeAction:'hide', plain: true, animCollapse: false,
 							items: new Ext.Panel({contentEl: 'grp-cfg', autoScroll: true }),
 							buttons: [
-								{text:'{-#tclear#-}',
+								{text: jQuery('#msgViewGraphButtonClear').text(),
 									handler: function() {
 										$('CG').reset();
 									}
 								},
-								{text:'{-#tsend#-}',
+								{text: jQuery('#msgViewGraphButtonSend').text(),
 									handler: function() {
 										sendGraphic('result');
 										$('DCRes').value = "G";
@@ -531,7 +531,7 @@
 										$('bprint').style.visibility = 'visible';
 									}
 								},
-								{text:'{-#tclose#-}',
+								{text: jQuery('#msgViewGraphButtonClose').text(),
 									handler: function() {
 										grpw.hide();
 									}
@@ -557,12 +557,12 @@
 							closeAction:'hide', plain: true, animCollapse: false,
 							items: new Ext.Panel({contentEl: 'map-cfg', autoScroll: true }),
 							buttons: [
-								{text:'{-#tclear#-}',
+								{text: jQuery('#msgViewMapButtonClear').text(),
 									handler: function() {
 										$('CM').reset();
 									}
 								},
-								{text:'{-#tsend#-}',
+								{text: jQuery('#msgViewMapButtonSend').text(),
 									handler: function() {
 										if (sendMap("result")) {
 											$('DCRes').value = "M";
@@ -570,11 +570,11 @@
 											$('bsave').style.visibility = 'visible';
 											$('bprint').style.visibility = 'visible';
 										} else {
-											console.debug("{-#serrmsgfrm#-}");
+											console.debug('Error while executing function ViewMap');
 										}
 									}
 								},
-								{text:'{-#tclose#-}',
+								{text: jQuery('#msgViewMapButtonClose').text(),
 									handler: function() {
 										mapw.hide();
 									}
