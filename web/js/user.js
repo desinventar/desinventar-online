@@ -39,8 +39,7 @@ function onReadyUserChangePasswd(windowId) {
 		if (windowId != '') {
 			jQuery(windowId).hide();
 		}
-		// 2010-01-26 (jhcaiced) This reference to dblw needs to be fixed !!! 
-		dblw.hide();
+		Ext.getCmp('wndDatabaseList').hide();
 		return(false);
 	});
 };

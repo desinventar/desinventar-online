@@ -11,7 +11,7 @@ function onReadyData() {
 		jQuery('#cardsRecordCount').val(jQuery('#prmDataPageRecords').val());
 		jQuery('#cardsRecordNumber').val(jQuery(this).attr('rowindex'));
 		setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId);
-		difw.show();
+		Ext.getCmp('wndDatacard').show();
 		return false;
 	});
 	
