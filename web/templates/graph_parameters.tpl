@@ -1,5 +1,8 @@
 <!-- BEGIN GRAPHIC PARAMETERS -->
 <div id="divGraphParameters" class="x-hidden">
+	<span id="msgViewGraphButtonClear" style="display:none;">{-#tclear#-}</span>
+	<span id="msgViewGraphButtonSend"  style="display:none;">{-#tsend#-}</span>
+	<span id="msgViewGraphButtonClose" style="display:none;">{-#tclose#-}</span>
 	<div class="x-window-header">{-#bgraphic#-}</div>
 	<div id="grp-cfg">
 		<form id="CG" method="POST">
