@@ -26,6 +26,7 @@ function onReadyExtJS()
 	}
 	doCreateMainMenu();
 	doCreateViewport();
+	doCreateDialogs();
 } //onReadyExtJS()
 
 function doCreateViewport()
@@ -95,14 +96,14 @@ function onMenuItem(item) {
 		case 'mnuUserLogin':
 		case 'mnuUserChangeLogin':
 			//updateUserBar(jQuery('#desinventarURL').val() + '/user.php', '', '', '');
-			usrw.show();
+			Ext.getCmp('wndUserLogin').show();
 		break;
 		case 'mnuUserLogout':
 			doUserLogout();
 		break;
 		case 'mnuUserEditAccount':
 			jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=changepasswd',function() { onReadyUserChangePasswd('dbl-win'); });
-			dblw.show();
+			Ext.getCmp('wndDatabaseList').show();
 		break;
 		case 'mnuFileQuit':
 			self.close();
@@ -161,11 +162,10 @@ function onMenuItem(item) {
 				function(data) {
 					jQuery('#cardsRecordNumber').val(0);
 					jQuery('#cardsRecordCount').val(data.RecordCount);
-					$('DICard').reset();	
-					//doDatacardClear();
+					$('DICard').reset();
 					jQuery('#divDatacardWindow').trigger('display');
 					doDatacardNavButtonsEnable();
-					difw.show();
+					Ext.getCmp('wndDatacard').show();
 				},
 				'json'
 			);
@@ -203,7 +203,7 @@ function onMenuItem(item) {
 		case 'mnuAdminUsers':
 			//updateList('dbl', jQuery('#desinventarURL').val() + '/user.php', 'cmd=adminusr', 'onReadyUserAdmin');
 			jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=adminusr',function() { onReadyUserAdmin(); });
-			dblw.show();
+			Ext.getCmp('wndDatabaseList').show();
 		break;
 		case 'mnuAdminDatabases':
 			jQuery('.contentBlock').hide();
@@ -212,7 +212,7 @@ function onMenuItem(item) {
 		break;
 		// help menu
 		case 'mnuHelpAbout':
-			dlgw.show();
+			Ext.getCmp('wndDialog').show();
 		break;
 		case 'mnuHelpWebsite':
 			window.open('http://www.desinventar.org', '', '');
@@ -366,3 +366,35 @@ function doCreateMainMenu()
 		
 	} //if
 } //doCreateMainMenu()
+
+function doCreateDialogs()
+{
+	// User Login Window
+	usrw = new Ext.Window({id:'wndUserLogin',
+		el:'usr-win', layout:'fit', x:300, y:100, width:500, height:300, 
+		closeAction:'hide', plain: true, animCollapse: false,
+		items: new Ext.Panel({ contentEl: 'usr', autoScroll: true })
+	});
+	// Database List - Database Search Window
+	dblw = new Ext.Window({id:'wndDatabaseList',
+		el:'dbl-win', layout:'fit', x:200, y:100, width:600, height:450, 
+		closeAction:'hide', plain: true, animCollapse: false,
+		items: new Ext.Panel({ contentEl: 'dbl', autoScroll: true })
+	});
+	dlgw = new Ext.Window({id:'wndDialog',
+		el:'dlg-win', layout:'fit', x:350, y:200, width:300, height:150, 
+		closeAction:'hide', plain: true, animCollapse: false,
+		items: new Ext.Panel({ contentEl: 'dlg', autoScroll: true })
+	});
+	// Datacard View/Edit Window
+	difw = new Ext.Window({id:'wndDatacard',
+		el:'divDatacardWindow', layout:'fit', 
+		x: 65, y: 0, width:960, height:638, 
+		closeAction:'hide', plain: true, animCollapse: false,
+		items: new Ext.Panel({ contentEl: 'dif-cfg', autoScroll: true })
+	});
+	difw.on('hide',function() {
+		jQuery('#divDatacardWindow').hide();
+		showtip('');					
+	});
+} //doCreateDialogs()

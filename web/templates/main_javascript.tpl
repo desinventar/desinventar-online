@@ -2,66 +2,12 @@
 	/*
 	var	w;
 	var	s;
-	var difw;
-	var usrw;
-	var dblw;
-	var dlgw;
 	*/
 
 	// Layout, buttons and internal windows - UI DesConsultar module
 	//Ext.onReady(function()
 	function initializeExt()
 	{
-
-
-		/*
-		// User functions Window
-		if (!usrw)
-		{
-			usrw = new Ext.Window({
-				el:'usr-win', layout:'fit', x:300, y:100, width:500, height:300, 
-				closeAction:'hide', plain: true, animCollapse: false,
-				items: new Ext.Panel({ contentEl: 'usr', autoScroll: true })
-			});
-		}
-		
-		// Search databases window
-		if (!dblw)
-		{
-			dblw = new Ext.Window({
-				el:'dbl-win', layout:'fit', x:200, y:100, width:600, height:450, 
-				closeAction:'hide', plain: true, animCollapse: false,
-				items: new Ext.Panel({ contentEl: 'dbl', autoScroll: true })
-			});
-		}
-		
-		// Dialog window
-		if (!dlgw)
-		{
-			dlgw = new Ext.Window({
-				el:'dlg-win', layout:'fit', x:350, y:200, width:300, height:150, 
-				closeAction:'hide', plain: true, animCollapse: false,
-				items: new Ext.Panel({ contentEl: 'dlg', autoScroll: true })
-			});
-		}
-		
-		// DesInventar (input form) Window
-		if (!difw)
-		{
-			difw = new Ext.Window({
-				el:'divDatacardWindow', layout:'fit', 
-				x: 65, y: 0, width:960, height:638, 
-				closeAction:'hide', plain: true, animCollapse: false,
-				items: new Ext.Panel({ contentEl: 'dif-cfg', autoScroll: true })
-			});
-			difw.on('hide',function() {
-				jQuery('#divDatacardWindow').hide();
-				showtip('');					
-			});
-		}
-		*/
-		
-
 		/*
 		// ==> Results Configuration Windows
 		// Data
