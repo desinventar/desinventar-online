@@ -38,6 +38,11 @@ if (!empty($RegionId))
 }
 $t->assign('desinventarRegionLabel', $RegionLabel);
 
+$desinventarUserRole = $us->getUserRole($RegionId);;
+$desinventarUserRoleValue = $us->getUserRoleValue($RegionId);
+$t->assign('desinventarUserRole', $desinventarUserRole);
+$t->assign('desinventarUserRoleValue', $desinventarUserRoleValue);
+
 // 2010-07-23 (jhcaiced) When uploaded file with SWFUpload is bigger than 
 // post__max_size in php.ini the script is called with emtpy POST/FILES 
 // parameters, here we try to detect that case and call the appropiate command.
@@ -452,8 +457,6 @@ switch ($cmd)
 					// Update UserSession with Current Language.
 					$us->update();
 					// Get UserRole
-					$role = $us->getUserRole($RegionId);
-					$roleValue = $us->getUserRoleValue($RegionId);
 					$r = new DIRegion($us, $RegionId);
 					$RegionStatus = (int)$r->get('RegionStatus');
 					$RegionPublic = $RegionStatus & 2;
@@ -464,7 +467,7 @@ switch ($cmd)
 					}
 					else
 					{
-						if ($roleValue > 0)
+						if ($desinventarRoleValue > 0)
 						{
 							$bShow = 1;
 						}
@@ -483,8 +486,8 @@ switch ($cmd)
 						$t->assign('reg', $RegionId);
 						//$t->assign('path', VAR_DIR);
 						
-						$t->assign('role', $role);
-						if (strlen($role) > 0)
+						$t->assign('role', $desinventarRole);
+						if (strlen($desinventarRole) > 0)
 						{
 							$t->assign('ctl_user', true);
 						}
@@ -634,8 +637,6 @@ switch ($cmd)
 
 						// DATACARDS
 						$t->assign('usr', $us->UserId);
-						$desinventarUserRole = $role;
-						$desinventarUserRoleValue = $roleValue;
 						// Validate if user has permission to access database
 						$dic = $us->q->queryLabelsFromGroup('DB', $lg);
 						switch ($desinventarUserRole)
@@ -688,8 +689,6 @@ switch ($cmd)
 						$EEFieldList = $us->q->getEEFieldList('True');
 						$t->assign('EEFieldList', $EEFieldList);
 						$t->assign('RegionId', $RegionId);
-						$t->assign('desinventarUserRole', $desinventarUserRole);
-						$t->assign('desinventarUserRoleValue', $desinventarUserRoleValue);
 						// DATACARDS END
 						
 						// BEGIN THEMATIC MAP
