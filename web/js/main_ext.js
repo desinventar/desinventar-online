@@ -293,7 +293,7 @@ function doCreateMainMenu()
 		items: [
 			{id:'mnuDatabaseFind'   , text: jQuery('#mnuDatabaseFind').text() , handler: onMenuItem },
 			{id:'mnuAdminUsers'     , text: jQuery('#mnuAdminUsers').text()   , handler: onMenuItem, hidden: true },
-			{id:'mnuAdminDatabases' , text: jQuery('#mnuAdminDatabase').text(), handler: onMenuItem, hidden: true }
+			{id:'mnuAdminDatabases' , text: jQuery('#mnuAdminDatabases').text(), handler: onMenuItem, hidden: true }
 		]
 	});
 
@@ -332,6 +332,7 @@ function doCreateMainMenu()
 
 	// Configure which options are visible using RoleValue
 	var UserRoleValue = parseInt(jQuery('#desinventarUserRoleValue').val());
+	console.log(UserRoleValue);
 
 	if (UserRoleValue >= 5)
 	{

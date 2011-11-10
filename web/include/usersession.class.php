@@ -473,35 +473,47 @@ class UserSession {
 	}
 
 	// Return Role for a Region
-	function getUserRole($prmRegionId='') {
-		if ($prmRegionId == '') {
+	function getUserRole($prmRegionId='')
+	{
+		if ($prmRegionId == '')
+		{
 			$prmRegionId = $this->RegionId;
 		}
-		$myAnswer = "";
-		$sQuery = "SELECT * FROM RegionAuth WHERE ";
-		if ($prmRegionId != '') {
-			$sQuery .= "((RegionId='') OR (RegionId='" . $prmRegionId . "'))";
-		} else {
-			$sQuery .= "(RegionId='')";
-		}
-		$sQuery .= " AND (UserId='" . $this->UserId . "') " .
-		           " AND AuthKey='ROLE'" . 
-		           " ORDER BY UserId,RegionId";
-		$sth = $this->q->core->prepare($sQuery);
-		$this->q->core->beginTransaction();
-		try
+		if ($this->UserId == 'root')
 		{
-			$sth->execute();
-			$this->q->core->commit();
-			while ($row = $sth->fetch(PDO::FETCH_OBJ))
+			$myAnswer = 'ADMINPORTAL';
+		}
+		else
+		{
+			$myAnswer = "";
+			$sQuery = "SELECT * FROM RegionAuth WHERE ";
+			if ($prmRegionId != '')
 			{
-				$myAnswer = $row->AuthAuxValue;
-			} // while
-		}
-		catch (Exception $e)
-		{
-			$this->q->core->rollBack();
-			showErrorMsg('ERROR getUserRole : ' . $e->getMessage());
+				$sQuery .= "((RegionId='') OR (RegionId='" . $prmRegionId . "'))";
+			}
+			else
+			{
+				$sQuery .= "(RegionId='')";
+			}
+			$sQuery .= " AND (UserId='" . $this->UserId . "') " .
+					   " AND AuthKey='ROLE'" . 
+					   " ORDER BY UserId,RegionId";
+			$sth = $this->q->core->prepare($sQuery);
+			$this->q->core->beginTransaction();
+			try
+			{
+				$sth->execute();
+				$this->q->core->commit();
+				while ($row = $sth->fetch(PDO::FETCH_OBJ))
+				{
+					$myAnswer = $row->AuthAuxValue;
+				} // while
+			}
+			catch (Exception $e)
+			{
+				$this->q->core->rollBack();
+				showErrorMsg('ERROR getUserRole : ' . $e->getMessage());
+			}
 		}
 		return $myAnswer;
 	} // function

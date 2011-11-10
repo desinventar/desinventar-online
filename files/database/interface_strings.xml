@@ -97,7 +97,7 @@
 			<Text LangIsoCode="por">Find*</Text>
 			<Text LangIsoCode="fre">Chercher</Text>
 		</Message>
-		<Message id="mnuAdminUser">
+		<Message id="mnuAdminUsers">
 			<Text LangIsoCode="eng">User management</Text>
 			<Text LangIsoCode="spa">Gestión de usuarios</Text>
 			<Text LangIsoCode="por">Gestão de usuários</Text>
