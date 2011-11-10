@@ -1,198 +1,195 @@
 <script type="text/javascript">
-		function onMenuItem(item) {
-			var RegionId = jQuery('#desinventarRegionId').val();
-			switch (item.id) {
-				case 'mnuRegionInfo':
-					jQuery('#dcr').hide();
-					doGetRegionInfo(jQuery('#desinventarRegionId').val());
-					jQuery('#divRegionInfo').show();
-				break;
-				case 'mnuUserLogin':
-				case 'mnuUserChangeLogin':
-					//updateUserBar(jQuery('#desinventarURL').val() + '/user.php', '', '', '');
-					usrw.show();
-				break;
-				case 'mnuUserLogout':
-					doUserLogout();
-				break;
-				case 'mnuUserEditAccount':
-					jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=changepasswd',function() { onReadyUserChangePasswd('dbl-win'); });
-					dblw.show();
-				break;
-				{-foreach name=LanguageList key=key item=item from=$LanguageList-}
-					case '{-$key-}':
-						window.location = jQuery('#desinventarURL').val() + '/index.php?r={-$reg-}&lang={-$key-}';
-					break;
-				{-/foreach-}
-				case 'mnuFileQuit':
-					self.close();
-				break;
-				// query menu
-				case 'menuQueryToggle':
-					w = Ext.getCmp('westm');
-					jQuery('.contentBlock').hide();
-					if (RegionId == '') {
-						jQuery('#divQueryResults').hide();
-						w.hide();
-					} else {
-						jQuery('#divQueryResults').show();
-						w.show();
-					}
-					if (w.isVisible()) {
-						w.collapse(); //hide()
-					} else {
-						w.expand(); //show()
-					}
-				break;
-				case 'mnuQueryNew':
-					// Just reload the current region window...(need a better solution!!)
-					window.location = jQuery('#desinventarURL').val() + '/index.php?r=' + RegionId;
-				break;
-				case 'menuQuerySave':
-					saveQuery();
-				break;
-				case 'mnuQueryOpen':
-					var qryw;
-					if (!qryw) {
-						qryw = new Ext.Window({
-							el:'qry-win',  layout:'fit',  width:300, height:200, 
-							closeAction:'hide', plain: true, animCollapse: false,
-							items: new Ext.Panel({
-							contentEl: 'qry-cfg', autoScroll: true }),
-							buttons: [{
-								text:'{-#tclose#-}',
-								handler: function() {
-									qryw.hide();
-								}
-							}]
-						});
-					}
-					qryw.show(this);
-				break;
-				// Datacards Menu Items
-				case 'mnuDatacardView':
-				case 'mnuDatacardInsertEdit':
-					jQuery('#cardsRecordNumber').val(0);
-					jQuery('#cardsRecordSource').val('');
-					jQuery.post(jQuery('#desinventarURL').val() + '/index.php',
-						{cmd      : 'getRegionRecordCount',
-						 RegionId : jQuery('#desinventarRegionId').val()
-						},
-						function(data) {
-							jQuery('#cardsRecordNumber').val(0);
-							jQuery('#cardsRecordCount').val(data.RecordCount);
-							$('DICard').reset();	
-							//doDatacardClear();
-							jQuery('#divDatacardWindow').trigger('display');
-							doDatacardNavButtonsEnable();
-							difw.show();
-						},
-						'json'
-					);
-				break;
-				case 'mnuDatacardImport':
-					hideQueryDesign();
-					jQuery('.contentBlock').hide();
-					jQuery('#divDatacardsImport').show();
-					updateList('divDatacardsImport', jQuery('#desinventarURL').val() + '/import.php', 'r=' + RegionId);
-				break;
-				case 'mnuDatabaseExport':
-					hideQueryDesign();
-					jQuery('.contentBlock').hide();
-					jQuery('#divDatabaseExport').trigger('DBBackupRestart');
-					jQuery('#divDatabaseExport').show();
-				break;
-				case 'mnuDatabaseImport':
-					hideQueryDesign();
-					jQuery('.contentBlock').hide();
-					jQuery('#divDatabaseImport').show();
-				break;
-				case 'mnuDatabaseConfig':
-					hideQueryDesign();
-					jQuery('.contentBlock').hide();
-					jQuery('#divDatabaseConfiguration').show();
-					jQuery('#tabDatabaseConfiguration').show();
-				break;
-				// databases menu
-				case 'mnuDatabaseFind':
-					// Show database list
-					hideQueryDesign();
-					jQuery('.contentBlock').hide();
-					updateDatabaseListByUser();
-				break;
-				case 'mnuAdminUsers':
-					//updateList('dbl', jQuery('#desinventarURL').val() + '/user.php', 'cmd=adminusr', 'onReadyUserAdmin');
-					jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=adminusr',function() { onReadyUserAdmin(); });
-					dblw.show();
-				break;
-				case 'mnuAdminDatabases':
-					jQuery('.contentBlock').hide();
-					jQuery('#divAdminDatabase').show();
-					doAdminDatabaseUpdateList();
-				break;
-				// help menu
-				case 'mnuHelpAbout':
-					dlgw.show();
-				break;
-				case 'mnuHelpWebsite':
-					window.open('http://www.desinventar.org', '', '');
-				break;
-				case 'mnuHelpMethodology':
-					var url = 'http://www.desinventar.org';
-					if (jQuery('#desinventarLang').val() == 'spa') {
-						url = url + '/es/metodologia';
-					} else {
-						url = url + '/en/methodology';
-					}
-					window.open(url, '', '');
-				break;
-				case 'mnuHelpDocumentation':
-					var url = 'http://www.desinventar.org/';
-					window.open(url, '', '');
-				break;
-			} //switch
-		} //function
-		
-		function hideQueryDesign() {
-			// Hide Query Design Panel
-			w = Ext.getCmp('westm');
-			if (w != undefined) {
-				w.hide();
-				w.collapse();
-			}
-		}
+	function onMenuItem(item) {
+		/*
+		var RegionId = jQuery('#desinventarRegionId').val();
+		switch (item.id) {
+			case 'mnuRegionInfo':
+				jQuery('#dcr').hide();
+				doGetRegionInfo(jQuery('#desinventarRegionId').val());
+				jQuery('#divRegionInfo').show();
+			break;
+			case 'mnuUserLogin':
+			case 'mnuUserChangeLogin':
+				//updateUserBar(jQuery('#desinventarURL').val() + '/user.php', '', '', '');
+				usrw.show();
+			break;
+			case 'mnuUserLogout':
+				doUserLogout();
+			break;
+			case 'mnuUserEditAccount':
+				jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=changepasswd',function() { onReadyUserChangePasswd('dbl-win'); });
+				dblw.show();
+			break;
+			case 'mnuFileQuit':
+				self.close();
+			break;
+			// query menu
+			case 'menuQueryToggle':
+				w = Ext.getCmp('westm');
+				jQuery('.contentBlock').hide();
+				if (RegionId == '') {
+					jQuery('#divQueryResults').hide();
+					w.hide();
+				} else {
+					jQuery('#divQueryResults').show();
+					w.show();
+				}
+				if (w.isVisible()) {
+					w.collapse(); //hide()
+				} else {
+					w.expand(); //show()
+				}
+			break;
+			case 'mnuQueryNew':
+				// Just reload the current region window...(need a better solution!!)
+				window.location = jQuery('#desinventarURL').val() + '/index.php?r=' + RegionId;
+			break;
+			case 'menuQuerySave':
+				saveQuery();
+			break;
+			case 'mnuQueryOpen':
+				var qryw;
+				if (!qryw) {
+					qryw = new Ext.Window({
+						el:'qry-win',  layout:'fit',  width:300, height:200, 
+						closeAction:'hide', plain: true, animCollapse: false,
+						items: new Ext.Panel({
+						contentEl: 'qry-cfg', autoScroll: true }),
+						buttons: [{
+							text: jQuery('#msgQueryOpenButtonClose').text(),
+							handler: function() {
+								qryw.hide();
+							}
+						}]
+					});
+				}
+				qryw.show(this);
+			break;
+			// Datacards Menu Items
+			case 'mnuDatacardView':
+			case 'mnuDatacardInsertEdit':
+				jQuery('#cardsRecordNumber').val(0);
+				jQuery('#cardsRecordSource').val('');
+				jQuery.post(jQuery('#desinventarURL').val() + '/index.php',
+					{cmd      : 'getRegionRecordCount',
+					 RegionId : jQuery('#desinventarRegionId').val()
+					},
+					function(data) {
+						jQuery('#cardsRecordNumber').val(0);
+						jQuery('#cardsRecordCount').val(data.RecordCount);
+						$('DICard').reset();	
+						//doDatacardClear();
+						jQuery('#divDatacardWindow').trigger('display');
+						doDatacardNavButtonsEnable();
+						difw.show();
+					},
+					'json'
+				);
+			break;
+			case 'mnuDatacardImport':
+				hideQueryDesign();
+				jQuery('.contentBlock').hide();
+				jQuery('#divDatacardsImport').show();
+				updateList('divDatacardsImport', jQuery('#desinventarURL').val() + '/import.php', 'r=' + RegionId);
+			break;
+			case 'mnuDatabaseExport':
+				hideQueryDesign();
+				jQuery('.contentBlock').hide();
+				jQuery('#divDatabaseExport').trigger('DBBackupRestart');
+				jQuery('#divDatabaseExport').show();
+			break;
+			case 'mnuDatabaseImport':
+				hideQueryDesign();
+				jQuery('.contentBlock').hide();
+				jQuery('#divDatabaseImport').show();
+			break;
+			case 'mnuDatabaseConfig':
+				hideQueryDesign();
+				jQuery('.contentBlock').hide();
+				jQuery('#divDatabaseConfiguration').show();
+				jQuery('#tabDatabaseConfiguration').show();
+			break;
+			// databases menu
+			case 'mnuDatabaseFind':
+				// Show database list
+				hideQueryDesign();
+				jQuery('.contentBlock').hide();
+				updateDatabaseListByUser();
+			break;
+			case 'mnuAdminUsers':
+				//updateList('dbl', jQuery('#desinventarURL').val() + '/user.php', 'cmd=adminusr', 'onReadyUserAdmin');
+				jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=adminusr',function() { onReadyUserAdmin(); });
+				dblw.show();
+			break;
+			case 'mnuAdminDatabases':
+				jQuery('.contentBlock').hide();
+				jQuery('#divAdminDatabase').show();
+				doAdminDatabaseUpdateList();
+			break;
+			// help menu
+			case 'mnuHelpAbout':
+				dlgw.show();
+			break;
+			case 'mnuHelpWebsite':
+				window.open('http://www.desinventar.org', '', '');
+			break;
+			case 'mnuHelpMethodology':
+				var url = 'http://www.desinventar.org';
+				if (jQuery('#desinventarLang').val() == 'spa') {
+					url = url + '/es/metodologia';
+				} else {
+					url = url + '/en/methodology';
+				}
+				window.open(url, '', '');
+			break;
+			case 'mnuHelpDocumentation':
+				var url = 'http://www.desinventar.org/';
+				window.open(url, '', '');
+			break;
+		} //switch
+		*/
+	} //onMenuItem
 
+	/*		
+	function hideQueryDesign()
+	{
+		// Hide Query Design Panel
+		w = Ext.getCmp('westm');
+		if (w != undefined)
+		{
+			w.hide();
+			w.collapse();
+		}
+	}
+	*/
+
+	/*
 	var	w;
 	var	s;
 	var difw;
 	var usrw;
 	var dblw;
 	var dlgw;
+	*/
+
 	// Layout, buttons and internal windows - UI DesConsultar module
-	Ext.onReady(function() {
-		// Initialize User Login Form
-		onReadyUserLogin();
-		jQuery('#loading').hide();
-		jQuery('#loading-mask').hide();
-		
-		jQuery('body').bind('UserLoggedIn',function() {
-			Ext.getCmp('viewport').destroy();
-			jQuery('#loading').show();
-			jQuery('#loading-mask').show();
-			// When the user completes the login procedure, reload the current page...
-			 window.location.reload(false);
-		});
-
-		jQuery('body').bind('UserLoggedOut',function() {
-			Ext.getCmp('viewport').destroy();
-			jQuery('#loading').show();
-			jQuery('#loading-mask').show();
-			// When the user logouts, reload the current page...
-			 window.location.reload(false);
-		});
-
+	Ext.onReady(function()
+	{
 		Ext.QuickTips.init();
 
+		// 2011-04-29 (jhcaiced) Fix for use of ExtJS in IE9 ?
+		if ((typeof Range !== "undefined") && !Range.prototype.createContextualFragment)
+		{
+			Range.prototype.createContextualFragment = function(html)
+			{
+				var frag = document.createDocumentFragment(), div = document.createElement("div");
+				frag.appendChild(div);
+				div.outerHTML = html;
+				return frag;
+			};
+		}
+
+		/*
 		// User functions Window
 		if (!usrw)
 		{
@@ -237,86 +234,83 @@
 				showtip('');					
 			});
 		}
+		*/
 		
 		// Main menu
-		var mnuLang = new Ext.menu.Menu({
-			id: 'langSubMenu',
-			items:
-			[
-				{-foreach name=LanguageList key=key item=item from=$LanguageList-}
-				{id: '{-$key-}', text: '{-$item-}', handler: onMenuItem},
-				{-/foreach-}
-			]
+		console.log('Building language menu');
+		var mnuLang = new Ext.menu.Menu({id: 'langSubMenu',items: []});
+		jQuery('[id|="mnuUserLanguage"]').each(function(index, Element) {
+			var LangIsoCode = jQuery(this).attr('id').substr(-3);
+			console.log(jQuery(this).text() + ' ' + LangIsoCode);
+			mnuLang.add({text: jQuery(this).text(), handler: function() {
+				window.location = jQuery('#desinventarURL').val() + '/index.php?r=' + jQuery('#desinventarRegionId').val() + '&lang=' + LangIsoCode;
+			}});
 		});
 		
 		var muser = new Ext.menu.Menu({
 			id: 'userMenu',
 			items: [
-				{id: 'mnuUserLogin'       , text: '{-#benter#-}'            , handler: onMenuItem }, 
-				{id: 'mnuUserChangeLogin' , text: '{-#mnuUserChangeLogin#-}', handler: onMenuItem, hidden: true },
-				{id: 'mnuUserEditAccount' , text: '{-#tconfigacc#-}'        , handler: onMenuItem, hidden: true },
-				{id: 'mnuUserLogout'      , text: '{-#tclosesess#-}'        , handler: onMenuItem, hidden: true }, 
-				{id: 'mnuUserLanguage'    , text: '{-#mlang#-}'             , menu: mnuLang },
-				{id: 'mnuFileQuit',  text: '{-#mquit#-}'                    , handler: onMenuItem  }
+				{id: 'mnuUserLogin'       , text: jQuery('#mnuUserLogin').text()      , handler: onMenuItem }, 
+				{id: 'mnuUserChangeLogin' , text: jQuery('#mnuUserChangeLogin').text(), handler: onMenuItem, hidden: true },
+				{id: 'mnuUserEditAccount' , text: jQuery('#mnuUserEditAccount').text(), handler: onMenuItem, hidden: true },
+				{id: 'mnuUserLogout'      , text: jQuery('#mnuUserLogout').text()     , handler: onMenuItem, hidden: true }, 
+				{id: 'mnuUserLanguage'    , text: jQuery('#mnuMenuUserLanguage').text()   , menu: mnuLang },
+				{id: 'mnuFileQuit'        , text: jQuery('#mnuUserQuit').text()       , handler: onMenuItem  }
 			]
 		});
 		
 		var mquery = new Ext.menu.Menu({
 			id: 'queryMenu',
 			items: [
-				{id:'menuQueryToggle', text: '{-#mgotoqd#-}'   , handler: onMenuItem  },
-				{id:'mnuQueryNew'    , text: '{-#mnewsearch#-}', handler: onMenuItem  },
-				{id:'menuQuerySave'  , text: '{-#msavequery#-}', handler: onMenuItem  },
-				{id:'mnuQueryOpen'   , text: '{-#mopenquery#-}', handler: onMenuItem  }
+				{id:'menuQueryToggle', text: jQuery('#mnuQueryToggle').text()    , handler: onMenuItem  },
+				{id:'mnuQueryNew'    , text: jQuery('#mnuQueryNew').text() , handler: onMenuItem  },
+				{id:'menuQuerySave'  , text: jQuery('#mnuQuerySave').text(), handler: onMenuItem  },
+				{id:'mnuQueryOpen'   , text: jQuery('#mnuQueryOpen').text(), handler: onMenuItem  }
 			]
 		});
-		
+
 		var mcards = new Ext.menu.Menu({
 			id: 'cardsMenu',
 			items: [
-				{id:'mnuDatacardView'      , text: '{-#mnuDatacardView#-}'      , handler: onMenuItem },
-				{id:'mnuDatacardInsertEdit', text: '{-#mnuDatacardInsertEdit#-}', handler: onMenuItem, hidden: true },
-				{id:'mnuDatacardImport'    , text: '{-#mnuDatacardImport#-}'    , handler: onMenuItem, hidden: true },
-				{id:'mnuDatabaseExport'    , text: '{-#mnuDatabaseExport#-}'    , handler: onMenuItem, hidden: true },
-				{id:'mnuDatabaseImport'    , text: '{-#mnuDatabaseImport#-}'    , handler: onMenuItem, hidden: true },
-				{id:'mnuDatabaseConfig'    , text: '{-#mnuDatabaseConfig#-}'    , handler: onMenuItem, hidden: true }
+				{id:'mnuDatacardView'      , text: jQuery('#mnuDatacardView').text()      , handler: onMenuItem },
+				{id:'mnuDatacardInsertEdit', text: jQuery('#mnuDatacardInsertEdit').text(), handler: onMenuItem, hidden: true },
+				{id:'mnuDatacardImport'    , text: jQuery('#mnuDatacardImport').text()    , handler: onMenuItem, hidden: true },
+				{id:'mnuDatabaseExport'    , text: jQuery('#mnuDatabaseExport').text()    , handler: onMenuItem, hidden: true },
+				{id:'mnuDatabaseImport'    , text: jQuery('#mnuDatabaseImport').text()    , handler: onMenuItem, hidden: true },
+				{id:'mnuDatabaseConfig'    , text: jQuery('#mnuDatabaseConfig').text()    , handler: onMenuItem, hidden: true }
 			]
 		});
-		
+
 		var mbases = new Ext.menu.Menu({
 			id: 'basesMenu',
 			items: [
-				{id:'mnuDatabaseFind'   , text: '{-#mdbfind#-}'          , handler: onMenuItem },
-				{id:'mnuAdminUsers'     , text: '{-#mnuUserAdmin#-}'     , handler: onMenuItem, hidden: true },
-				{id:'mnuAdminDatabases' , text: '{-#mnuAdminDatabase#-}' , handler: onMenuItem, hidden: true }
+				{id:'mnuDatabaseFind'   , text: jQuery('#mnuDatabaseFind').text() , handler: onMenuItem },
+				{id:'mnuAdminUsers'     , text: jQuery('#mnuAdminUsers').text()   , handler: onMenuItem, hidden: true },
+				{id:'mnuAdminDatabases' , text: jQuery('#mnuAdminDatabase').text(), handler: onMenuItem, hidden: true }
 			]
 		});
-		
+
 		var mhelp = new Ext.menu.Menu({
 			id: 'helpMenu',
 			style: { overflow: 'visible' },
 			items: [
-				{id:'mnuHelpWebsite'      , text: '{-#mwebsite#-}' , handler: onMenuItem  },
-				{id:'mnuHelpMethodology'  , text: '{-#hmoreinfo#-}', handler: onMenuItem  },
-				{id:'mnuHelpDocumentation', text: '{-#hotherdoc#-}', handler: onMenuItem  },
-				{id:'mnuRegionInfo'       , text: '{-#hdbinfo#-}'  , handler: onMenuItem, hidden: true },
-				{id:'mnuHelpAbout'        , text: '{-#mabout#-}'   , handler: onMenuItem  }
+				{id:'mnuHelpWebsite'      , text: jQuery('#mnuHelpWebsite').text()      , handler: onMenuItem  },
+				{id:'mnuHelpMethodology'  , text: jQuery('#mnuHelpMethodology').text()  , handler: onMenuItem  },
+				{id:'mnuHelpDocumentation', text: jQuery('#mnuHelpDocumentation').text(), handler: onMenuItem  },
+				{id:'mnuRegionInfo'       , text: jQuery('#mnuRegionInfo').text()       , handler: onMenuItem, hidden: true },
+				{id:'mnuHelpAbout'        , text: jQuery('#mnuHelpAbout').text()        , handler: onMenuItem  }
 			]
 		});
 		
-		var tb = new Ext.Toolbar({
-			renderTo: 'toolbar',
-			items : [
-				{ id:'mnuUser'       , text:'{-#tuser#-}'     , menu: muser },
-				{ id:'mnuQuery'      , text:'{-#msearch#-}'   , menu: mquery, hidden: true },
-				{ id:'mnuCards'      , text:'{-#mdcsection#-}', menu: mcards, hidden: true },
-				{ id:'mnuDB'         , text:'{-#mdatabases#-}', menu: mbases},
-				{ id:'mnuHelp'       , text:'{-#mhelp#-}'     , menu: mhelp}
-			]
-		});
+		var tb = new Ext.Toolbar({renderTo: 'toolbar', items : []});
+		tb.add({ id:'mnuUser'       , text: jQuery('#mnuMenuUser').text()     , menu: muser });
+		tb.add({ id:'mnuQuery'      , text: jQuery('#mnuMenuQuery').text()    , menu: mquery, hidden: true });
+		tb.add({ id:'mnuCards'      , text: jQuery('#mnuMenuDatacards').text(), menu: mcards, hidden: true });
+		tb.add({ id:'mnuDB'         , text: jQuery('#mnuMenuDatabase').text() , menu: mbases});
+		tb.add({ id:'mnuHelp'       , text: jQuery('#mnuMenuHelp').text()     , menu: mhelp});
 		tb.add('->',{id: 'mnuRegionInfoLabel', text: '', handler: onMenuItem });
-		tb.add('->',{id: 'mnuHelpWebsite'    , text: '<img src="{-$desinventarURL-}/images/di_logo4.png" alt="" />', handler: onMenuItem });
-
+		tb.add('->',{id: 'mnuHelpWebsite'    , text: '<img src="' + jQuery('#desinventarURL').val() + '/images/di_logo4.png" alt="" />',  handler: onMenuItem });
+		/*
 		// Add UserId to menu text when user is logged in
 		if (jQuery('#desinventarUserId').val() != '')
 		{
@@ -361,24 +355,42 @@
 			}
 			
 		} //if
+		*/
 
+		jQuery('#loading').hide();
+		jQuery('#loading-mask').hide();	
 
 		// layout
 		var viewport = new Ext.Viewport({
 			id:'viewport',
 			contentEl: 'divViewport',
 			layout:'border',
+			border: false,
 			items:[
 				{
 					region:'north',
 					height: 30,
-					contentEl: 'north'
+					border: false,
+					contentEl: 'north',
+					collapsible: false
+				},
+				{
+					region: 'west',
+					id: 'westm',
+					border: false,
+					split: false,
+					width: 350,
+					title: jQuery('#msgQueryDesignTitle').text(),
+					autoScroll: true,
+					margins:'0 2 0 0',
+					collapsible: true,
+					contentEl: 'west'
 				},
 				{
 					region: 'south',
 					id: 'southm',
 					split: false,
-					title: '{-#tmguidedef#-}',
+					title: jQuery('#msgHelpTitle').text(),
 					height: 80,
 					minSize: 100,
 					maxSize: 200,
@@ -391,18 +403,7 @@
 					id: 'centerm',
 					contentEl: 'container',
 					autoScroll: true
-				}),
-				{
-					region: 'west',
-					id: 'westm',
-					split: false,
-					width: 350,
-					title: '{-#tsubtitle#-}',
-					autoScroll: true,
-					margins:'0 2 0 0',
-					collapsible: true,
-					contentEl: 'west'
-				}
+				})
 			]
 		}); //viewport
 
@@ -411,7 +412,8 @@
 			Ext.getCmp('westm').hide();
 			viewport.doLayout();
 		}
-		
+
+		/*
 		// ==> Results Configuration Windows
 		// Data
 		var datw;
@@ -585,18 +587,7 @@
 			}); // Map
 		}
 
-		// 2011-04-29 (jhcaiced) Fix for use of ExtJS in IE9 ?
-		if ((typeof Range !== "undefined") && !Range.prototype.createContextualFragment)
-		{
-			Range.prototype.createContextualFragment = function(html)
-			{
-				var frag = document.createDocumentFragment(), div = document.createElement("div");
-				frag.appendChild(div);
-				div.outerHTML = html;
-				return frag;
-			};
-		}
-
+		*/
 		// quicktips
 		Ext.apply(Ext.QuickTips.getQuickTip(), {maxWidth: 200, minWidth: 100, showDelay: 50, trackMouse: true});
 
@@ -716,6 +707,5 @@
 			{-/if-}
 		{-/foreach-}
 	} //function
-		
-		var geotree = new CheckTree('geotree');
+	//var geotree = new CheckTree('geotree');
 </script>
