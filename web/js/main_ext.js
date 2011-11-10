@@ -88,7 +88,7 @@ function doCreateViewport()
 function onMenuItem(item) {
 	var RegionId = jQuery('#desinventarRegionId').val();
 	switch (item.id) {
-		case 'mnuRegionInfo':
+		case 'mnuHelpRegionInfo':
 			jQuery('#dcr').hide();
 			doGetRegionInfo(jQuery('#desinventarRegionId').val());
 			jQuery('#divRegionInfo').show();
@@ -304,7 +304,7 @@ function doCreateMainMenu()
 			{id:'mnuHelpWebsite'      , text: jQuery('#mnuHelpWebsite').text()      , handler: onMenuItem  },
 			{id:'mnuHelpMethodology'  , text: jQuery('#mnuHelpMethodology').text()  , handler: onMenuItem  },
 			{id:'mnuHelpDocumentation', text: jQuery('#mnuHelpDocumentation').text(), handler: onMenuItem  },
-			{id:'mnuRegionInfo'       , text: jQuery('#mnuRegionInfo').text()       , handler: onMenuItem, hidden: true },
+			{id:'mnuHelpRegionInfo'   , text: jQuery('#mnuHelpRegionInfo').text()   , handler: onMenuItem, hidden: true },
 			{id:'mnuHelpAbout'        , text: jQuery('#mnuHelpAbout').text()        , handler: onMenuItem  }
 		]
 	});
@@ -315,7 +315,7 @@ function doCreateMainMenu()
 	tb.add({ id:'mnuCards'      , text: jQuery('#mnuMenuDatacards').text(), menu: mcards, hidden: true });
 	tb.add({ id:'mnuDB'         , text: jQuery('#mnuMenuDatabase').text() , menu: mbases});
 	tb.add({ id:'mnuHelp'       , text: jQuery('#mnuMenuHelp').text()     , menu: mhelp});
-	tb.add('->',{id: 'mnuRegionInfoLabel', text: '', handler: onMenuItem });
+	tb.add('->',{id: 'mnuHelpRegionInfoLabel', text: '', handler: onMenuItem });
 	tb.add('->',{id: 'mnuHelpWebsite'    , text: '<img src="' + jQuery('#desinventarURL').val() + '/images/di_logo4.png" alt="" />',  handler: onMenuItem });
 
 	// Configure Menu using current RoleValue
@@ -342,8 +342,8 @@ function doCreateMainMenu()
 	// Hide Menu items when no Region is Selected
 	if (jQuery('#desinventarRegionId').val() != '')
 	{
-		Ext.getCmp('mnuRegionInfo').show();
-		Ext.getCmp('mnuRegionInfoLabel').setText('[' + jQuery('#desinventarRegionLabel').val() + ']');
+		Ext.getCmp('mnuHelpRegionInfo').show();
+		Ext.getCmp('mnuHelpRegionInfoLabel').setText('[' + jQuery('#desinventarRegionLabel').val() + ']');
 		Ext.getCmp('mnuQuery').show();
 		Ext.getCmp('mnuCards').show();
 

@@ -43,6 +43,108 @@
 			<Text LangIsoCode="por">Sair</Text>
 			<Text LangIsoCode="fre">Quitter</Text>
 		</Message>
+		<Message id="mnuMenuDatacards">
+			<Text LangIsoCode="eng">Data cards</Text>
+			<Text LangIsoCode="spa">Fichas</Text>
+			<Text LangIsoCode="por">Formulários</Text>
+			<Text LangIsoCode="fre">Carte de données</Text>
+		</Message>
+		<Message id="mnuDatacardView">
+			<Text LangIsoCode="eng">View Records</Text>
+			<Text LangIsoCode="spa">Ver ficha</Text>
+			<Text LangIsoCode="por">Ver registos</Text>
+			<Text LangIsoCode="fre">Voir les dossiers</Text>
+		</Message>
+		<Message id="mnuDatacardInsertEdit">
+			<Text LangIsoCode="eng">Insert/Edit</Text>
+			<Text LangIsoCode="spa">Ingresar/Editar</Text>
+			<Text LangIsoCode="por">Insert</Text>
+			<Text LangIsoCode="fre">Modifier les donées</Text>
+		</Message>
+		<Message id="mnuDatacardImport">
+			<Text LangIsoCode="eng">Import data cards</Text>
+			<Text LangIsoCode="spa">Importación de fichas</Text>
+			<Text LangIsoCode="por">Importação de formulários</Text>
+			<Text LangIsoCode="fre">Importation de carte de données</Text>
+		</Message>
+		<Message id="mnuDatabaseExport">
+			<Text LangIsoCode="eng">Export database</Text>
+			<Text LangIsoCode="spa">Respaldar base de datos</Text>
+			<Text LangIsoCode="por">Exportação banco de dados</Text>
+			<Text LangIsoCode="fre">Exportation base de données </Text>
+		</Message>
+		<Message id="mnuDatabaseImport">
+			<Text LangIsoCode="eng">Import database</Text>
+			<Text LangIsoCode="spa">Importar base de datos</Text>
+			<Text LangIsoCode="por">Importação banco de dados</Text>
+			<Text LangIsoCode="fre">Importation base de données</Text>
+		</Message>
+		<Message id="mnuDatabaseConfig">
+			<Text LangIsoCode="eng">Configuration</Text>
+			<Text LangIsoCode="spa">Configuración</Text>
+			<Text LangIsoCode="por">Configuração</Text>
+			<Text LangIsoCode="fre">Configuration</Text>
+		</Message>
+		<Message id="mnuMenuDatabase">
+			<Text LangIsoCode="eng">Databases</Text>
+			<Text LangIsoCode="spa">Bases de datos</Text>
+			<Text LangIsoCode="por">bancos de dados</Text>
+			<Text LangIsoCode="fre">Base de données</Text>
+		</Message>
+		<Message id="mnuDatabaseFind">
+			<Text LangIsoCode="eng">Find</Text>
+			<Text LangIsoCode="spa">Buscar</Text>
+			<Text LangIsoCode="por">Find*</Text>
+			<Text LangIsoCode="fre">Chercher</Text>
+		</Message>
+		<Message id="mnuAdminUser">
+			<Text LangIsoCode="eng">User management</Text>
+			<Text LangIsoCode="spa">Gestión de usuarios</Text>
+			<Text LangIsoCode="por">Gestão de usuários</Text>
+			<Text LangIsoCode="fre">Gestion des usagers</Text>
+		</Message>
+		<Message id="mnuAdminDatabases">
+			<Text LangIsoCode="eng">Database management</Text>
+			<Text LangIsoCode="spa">Gestión de bases de datos</Text>
+			<Text LangIsoCode="por">Gestão de bancos de dados</Text>
+			<Text LangIsoCode="fre">Gestion des bases de données</Text>
+		</Message>
+		<Message id="mnuMenuHelp">
+			<Text LangIsoCode="eng">Help</Text>
+			<Text LangIsoCode="spa">Ayuda</Text>
+			<Text LangIsoCode="por">Ajuda</Text>
+			<Text LangIsoCode="fre">Aide</Text>
+		</Message>
+		<Message id="mnuHelpWebsite">
+			<Text LangIsoCode="eng">Website of DesInventar</Text>
+			<Text LangIsoCode="spa">Sitio web DesInventar</Text>
+			<Text LangIsoCode="por">Website of DesInventar*</Text>
+			<Text LangIsoCode="fre">Site web DésInventer</Text>
+		</Message>
+		<Message id="mnuHelpMethodology">
+			<Text LangIsoCode="eng">Methodological guide</Text>
+			<Text LangIsoCode="spa">Guía metodológica</Text>
+			<Text LangIsoCode="por">Ver Guia metodológico</Text>
+			<Text LangIsoCode="fre">Guide méthodologique</Text>
+		</Message>
+		<Message id="mnuHelpDocumentation">
+			<Text LangIsoCode="eng">Software documentation</Text>
+			<Text LangIsoCode="spa">Documentación software</Text>
+			<Text LangIsoCode="por">Software documentation*</Text>
+			<Text LangIsoCode="fre">Documentation logiciel</Text>
+		</Message>
+		<Message id="mnuHelpRegionInfo">
+			<Text LangIsoCode="eng">Database information</Text>
+			<Text LangIsoCode="spa">Información base de datos</Text>
+			<Text LangIsoCode="por">Informação de banco</Text>
+			<Text LangIsoCode="fre">Information base de données</Text>
+		</Message>
+		<Message id="mnuHelpAbout">
+			<Text LangIsoCode="eng">About</Text>
+			<Text LangIsoCode="spa">Acerca de</Text>
+			<Text LangIsoCode="por">Acerca de</Text>
+			<Text LangIsoCode="fre">À propos de </Text>
+		</Message>
 		<Message id="tuser">
 			<Text LangIsoCode="eng">User</Text>
 			<Text LangIsoCode="spa">Usuario</Text>
@@ -199,23 +301,11 @@
 			<Text LangIsoCode="por">Permissões administrativas</Text>
 			<Text LangIsoCode="fre">Autorisations administratives</Text>
 		</Message>
-		<Message id="mnuAdminDatabase">
-			<Text LangIsoCode="eng">Database management</Text>
-			<Text LangIsoCode="spa">Gestión de bases de datos</Text>
-			<Text LangIsoCode="por">Gestão de bancos de dados</Text>
-			<Text LangIsoCode="fre">Gestion des bases de données</Text>
-		</Message>
 		<Message id="mnuDatabaseImport">
 			<Text LangIsoCode="eng">Import databases</Text>
 			<Text LangIsoCode="spa">Importar Bases de Datos</Text>
 			<Text LangIsoCode="por">Importação de banco de dados</Text>
 			<Text LangIsoCode="fre">Importation base de données</Text>
-		</Message>
-		<Message id="mnuUserAdmin">
-			<Text LangIsoCode="eng">User management</Text>
-			<Text LangIsoCode="spa">Gestión de usuarios</Text>
-			<Text LangIsoCode="por">Gestão de usuários</Text>
-			<Text LangIsoCode="fre">Gestion des usagers</Text>
 		</Message>
 		<Message id="tyourrol">
 			<Text LangIsoCode="eng">Your roles and databases are:</Text>
@@ -1597,42 +1687,6 @@
 			<Text LangIsoCode="por">Consolidados</Text>
 			<Text LangIsoCode="fre">seleccione una de las herramientas de análisis Datos</Text>
 		</Message>
-		<Message id="mnuDatacardView">
-			<Text LangIsoCode="eng">View Records</Text>
-			<Text LangIsoCode="spa">Ver ficha</Text>
-			<Text LangIsoCode="por">Ver registos</Text>
-			<Text LangIsoCode="fre">Voir les dossiers</Text>
-		</Message>
-		<Message id="mnuDatacardInsertEdit">
-			<Text LangIsoCode="eng">Insert/Edit</Text>
-			<Text LangIsoCode="spa">Ingresar/Editar</Text>
-			<Text LangIsoCode="por">Insert</Text>
-			<Text LangIsoCode="fre">Modifier les donées</Text>
-		</Message>
-		<Message id="mnuDatabaseConfig">
-			<Text LangIsoCode="eng">Configuration</Text>
-			<Text LangIsoCode="spa">Configuración</Text>
-			<Text LangIsoCode="por">Configuração</Text>
-			<Text LangIsoCode="fre">Configuration</Text>
-		</Message>
-		<Message id="mnuDatacardImport">
-			<Text LangIsoCode="eng">Import data cards</Text>
-			<Text LangIsoCode="spa">Importación de fichas</Text>
-			<Text LangIsoCode="por">Importação de formulários</Text>
-			<Text LangIsoCode="fre">Importation de carte de données</Text>
-		</Message>
-		<Message id="mnuDatabaseExport">
-			<Text LangIsoCode="eng">Export database</Text>
-			<Text LangIsoCode="spa">Respaldar base de datos</Text>
-			<Text LangIsoCode="por">Exportação banco de dados</Text>
-			<Text LangIsoCode="fre">Exportation base de données </Text>
-		</Message>
-		<Message id="mnuDatabaseImport">
-			<Text LangIsoCode="eng">Import database</Text>
-			<Text LangIsoCode="spa">Importar base de datos</Text>
-			<Text LangIsoCode="por">Importação banco de dados</Text>
-			<Text LangIsoCode="fre">Importation base de données</Text>
-		</Message>
 		<Message id="mfile">
 			<Text LangIsoCode="eng">File</Text>
 			<Text LangIsoCode="spa">Archivo</Text>
@@ -1675,48 +1729,6 @@
 			<Text LangIsoCode="por">Mostrar/Ocultar</Text>
 			<Text LangIsoCode="fre">Montrer/Cacher</Text>
 		</Message>
-		<Message id="mhelp">
-			<Text LangIsoCode="eng">Help</Text>
-			<Text LangIsoCode="spa">Ayuda</Text>
-			<Text LangIsoCode="por">Ajuda</Text>
-			<Text LangIsoCode="fre">Aide</Text>
-		</Message>
-		<Message id="hotherdoc">
-			<Text LangIsoCode="eng">Software documentation</Text>
-			<Text LangIsoCode="spa">Documentación software</Text>
-			<Text LangIsoCode="por">Software documentation*</Text>
-			<Text LangIsoCode="fre">Documentation logiciel</Text>
-		</Message>
-		<Message id="hdbinfo">
-			<Text LangIsoCode="eng">Database information</Text>
-			<Text LangIsoCode="spa">Información base de datos</Text>
-			<Text LangIsoCode="por">Informação de banco</Text>
-			<Text LangIsoCode="fre">Information base de données</Text>
-		</Message>
-		<Message id="mwebsite">
-			<Text LangIsoCode="eng">Website of DesInventar</Text>
-			<Text LangIsoCode="spa">Sitio web DesInventar</Text>
-			<Text LangIsoCode="por">Website of DesInventar*</Text>
-			<Text LangIsoCode="fre">Site web DésInventer</Text>
-		</Message>
-		<Message id="mabout">
-			<Text LangIsoCode="eng">About</Text>
-			<Text LangIsoCode="spa">Acerca de</Text>
-			<Text LangIsoCode="por">Acerca de</Text>
-			<Text LangIsoCode="fre">À propos de </Text>
-		</Message>
-		<Message id="mdatabases">
-			<Text LangIsoCode="eng">Databases</Text>
-			<Text LangIsoCode="spa">Bases de datos</Text>
-			<Text LangIsoCode="por">bancos de dados</Text>
-			<Text LangIsoCode="fre">Base de données</Text>
-		</Message>
-		<Message id="mdbfind">
-			<Text LangIsoCode="eng">Find</Text>
-			<Text LangIsoCode="spa">Buscar</Text>
-			<Text LangIsoCode="por">Find*</Text>
-			<Text LangIsoCode="fre">Chercher</Text>
-		</Message>
 		<Message id="mgeosection">
 			<Text LangIsoCode="eng">Geography</Text>
 			<Text LangIsoCode="spa">Geografía</Text>
@@ -1752,12 +1764,6 @@
 			<Text LangIsoCode="spa">Tipos de causas</Text>
 			<Text LangIsoCode="por">Tipos de causas</Text>
 			<Text LangIsoCode="fre">Types de causes</Text>
-		</Message>
-		<Message id="mdcsection">
-			<Text LangIsoCode="eng">Data cards</Text>
-			<Text LangIsoCode="spa">Fichas</Text>
-			<Text LangIsoCode="por">Formulários</Text>
-			<Text LangIsoCode="fre">Carte de données</Text>
 		</Message>
 		<Message id="madvsection">
 			<Text LangIsoCode="eng">Advanced query</Text>
@@ -2310,12 +2316,6 @@
 			<Text LangIsoCode="spa">Definición</Text>
 			<Text LangIsoCode="por">Definição</Text>
 			<Text LangIsoCode="fre">Définition</Text>
-		</Message>
-		<Message id="hmoreinfo">
-			<Text LangIsoCode="eng">Methodological guide</Text>
-			<Text LangIsoCode="spa">Guía metodológica</Text>
-			<Text LangIsoCode="por">Ver Guia metodológico</Text>
-			<Text LangIsoCode="fre">Guide méthodologique</Text>
 		</Message>
 		<Message id="tdescinfo">
 			<Text LangIsoCode="eng">Click on the field to see a description of the element</Text>
