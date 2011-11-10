@@ -1,6 +1,5 @@
 <script type="text/javascript">
 	function onMenuItem(item) {
-		/*
 		var RegionId = jQuery('#desinventarRegionId').val();
 		switch (item.id) {
 			case 'mnuRegionInfo':
@@ -147,10 +146,8 @@
 				window.open(url, '', '');
 			break;
 		} //switch
-		*/
 	} //onMenuItem
 
-	/*		
 	function hideQueryDesign()
 	{
 		// Hide Query Design Panel
@@ -161,7 +158,6 @@
 			w.collapse();
 		}
 	}
-	*/
 
 	/*
 	var	w;
@@ -237,11 +233,9 @@
 		*/
 		
 		// Main menu
-		console.log('Building language menu');
 		var mnuLang = new Ext.menu.Menu({id: 'langSubMenu',items: []});
 		jQuery('[id|="mnuUserLanguage"]').each(function(index, Element) {
 			var LangIsoCode = jQuery(this).attr('id').substr(-3);
-			console.log(jQuery(this).text() + ' ' + LangIsoCode);
 			mnuLang.add({text: jQuery(this).text(), handler: function() {
 				window.location = jQuery('#desinventarURL').val() + '/index.php?r=' + jQuery('#desinventarRegionId').val() + '&lang=' + LangIsoCode;
 			}});
