@@ -5,27 +5,38 @@
 
 function onReadyUserLogin() {
 	// hide all status messages on start
-	updateUserLoginMsg('');
+	doUserLoginUpdateMsg('');
 	
 	// submit form validation and process..
 	jQuery("#frmUserLogin").submit(function() {
 		var UserId     = jQuery('#fldUserId').val();
 		var UserPasswd = jQuery("#fldUserPasswd").val();
-		if (UserId == '' || UserPasswd == '') {
-			updateUserLoginMsg('#msgEmptyFields');
-		} else {
+
+		doUserLoginUpdateMsg('');
+
+		if (UserId == '' || UserPasswd == '')
+		{
+			doUserLoginUpdateMsg('#msgEmptyFields');
+		}
+		else
+		{
 			var desinventarURL = jQuery('#desinventarURL').val();
-			if (desinventarURL == undefined) {
+			if (desinventarURL == undefined)
+			{
 				desinventarURL = '';
 			}
 			jQuery.post(desinventarURL + '/user.php',
-				{'cmd'        : 'login',
-			     'UserId'     : UserId,
-			     'UserPasswd' : hex_md5(UserPasswd)
+				{
+					'cmd'        : 'login',
+					'UserId'     : UserId,
+					'UserPasswd' : hex_md5(UserPasswd)
 			    },
-			    function(data) {
-					if (data.Status == 'OK') {
-						updateUserLoginMsg("#msgUserLoggedIn");
+				function(data)
+				{
+					if (parseInt(data.Status) > 0)
+					{
+						console.log('Logged In as ' + data.UserId);
+						doUserLoginUpdateMsg("#msgUserLoggedIn");
 						// After login, clear passwd field
 						jQuery("#fldUserPasswd").val('');
 
@@ -35,30 +46,37 @@ function onReadyUserLogin() {
 
 						// Trigger Event and Update User Menu etc.
 						jQuery('body').trigger('UserLoggedIn');
-					} else {
-						updateUserLoginMsg("#msgInvalidPasswd");
+					}
+					else
+					{
+						doUserLoginUpdateMsg("#msgInvalidPasswd");
 					}
 				},
 				'json'
 			);
 		}
-		return(false);
+		return false;
 	});
-};
+} //onReadyUserLogin()
 
-function doUserLogout() {
+function doUserLogout()
+{
 	var Answer = 0;
 	desinventarURL = jQuery('#desinventarURL').val();
-	if (desinventarURL == undefined) {
+	if (desinventarURL == undefined)
+	{
 		desinventarURL = '';
 	}
 	jQuery.post(desinventarURL + '/user.php',
-		{'cmd'        : 'logout'
+		{
+			'cmd'        : 'logout'
 		},
-		function(data) {
-			if (data.Status == 'OK') {
+		function(data)
+		{
+			if (data.Status == 'OK')
+			{
 				Answer = 1;
-				updateUserLoginMsg("#msgUserLoggedOut");
+				doUserLoginUpdateMsg("#msgUserLoggedOut");
 				// After login, clear passwd field
 				jQuery('#fldUserId').val('');
 				jQuery('#fldUserPasswd').val('');
@@ -69,22 +87,33 @@ function doUserLogout() {
 				
 				// Trigger Event, used to update menu or reload page...
 				jQuery('body').trigger('UserLoggedOut');
-			} else {
-				updateUserLoginMsg("#msgInvalidLogout");
+			}
+			else
+			{
+				doUserLoginUpdateMsg("#msgInvalidLogout");
 				Answer = 0;
 			}
 		},
 		'json'
 	);
 	return Answer;
-}
-function updateUserLoginMsg(msgId) {
+} //doUserLogout()
+
+function doUserLoginUpdateMsg(msgId)
+{
 	// Hide all status Msgs (class="status")
 	jQuery(".status").hide();
-	if (msgId != '') {
+	if (msgId != '')
+	{
 		// Show specified message(s)
 		jQuery(msgId).show();
 	}
 	return(true);
-};
+} //doUserLoginUpdateMsg()
 
+function doUserLoginShow()
+{
+	doUserLoginUpdateMsg();
+	Ext.getCmp('wndUserLogin').show();
+	//updateUserBar(jQuery('#desinventarURL').val() + '/user.php', '', '', '');
+} //doUserLoginShow()

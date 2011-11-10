@@ -4,16 +4,16 @@
 		<span id="mnuQueryNew">{-#mnewsearch#-}</span>
 		<span id="mnuQuerySave">{-#msavequery#-}</span>
 		<span id="mnuQueryOpen">{-#mopenquery#-}</span>
-	<span id="mnuMenuUser">{-#tuser#-}</span>
-		<span id="mnuUserLogin">{-#benter#-}</span>
+	<span id="mnuMenuUser">{-#mnuMenuUser#-}</span>
+		<span id="mnuUserLogin">{-#mnuUserLogin#-}</span>
 		<span id="mnuUserChangeLogin">{-#mnuUserChangeLogin#-}</span>
-		<span id="mnuUserEditAccount">{-#tconfigacc#-}</span>
-		<span id="mnuUserLogout">{-#tclosesess#-}</span>
-		<span id="mnuMenuUserLanguage">{-#mlang#-}</span>
+		<span id="mnuUserEditAccount">{-#mnuUserEditAccount#-}</span>
+		<span id="mnuUserLogout">{-#mnuUserLogout#-}</span>
+		<span id="mnuMenuUserLanguage">{-#mnuMenuUserLanguage#-}</span>
 			{-foreach name=LanguageList key=key item=item from=$LanguageList-}
 			<span id="mnuUserLanguage-{-$key-}">{-$item-}</span>
 			{-/foreach-}
-		<span id="mnuUserQuit">{-#mquit#-}</span>
+		<span id="mnuUserQuit">{-#mnuUserQuit#-}</span>
 	<span id="mnuMenuDatacards">{-#mdcsection#-}</span>
 		<span id="mnuDatacardView">{-#mnuDatacardView#-}</span>
 		<span id="mnuDatacardInsertEdit">{-#mnuDatacardInsertEdit#-}</span>

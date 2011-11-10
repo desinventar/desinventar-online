@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <StringList>
 	<Group name="di8_user">
+		<Message id="mnuMenuUser">
+			<Text LangIsoCode="eng">User</Text>
+			<Text LangIsoCode="spa">Usuario</Text>
+			<Text LangIsoCode="por">Usuário</Text>
+			<Text LangIsoCode="fre">Utilisateur</Text>
+		</Message>
+		<Message id="mnuUserLogin">
+			<Text LangIsoCode="eng">Login</Text>
+			<Text LangIsoCode="spa">Ingresar</Text>
+			<Text LangIsoCode="por">Entrar</Text>
+			<Text LangIsoCode="fre">Se connecter</Text>
+		</Message>
+		<Message id="mnuUserChangeLogin">
+			<Text LangIsoCode="eng">Login with another account</Text>
+			<Text LangIsoCode="spa">Ingresar con otra cuenta</Text>
+			<Text LangIsoCode="por">Entrar com outra conta</Text>
+			<Text LangIsoCode="fre">Se connecter avec un autre compte</Text>
+		</Message>
+		<Message id="mnuUserEditAccount">
+			<Text LangIsoCode="eng">My Account</Text>
+			<Text LangIsoCode="spa">Mi cuenta</Text>
+			<Text LangIsoCode="por">Minha conta</Text>
+			<Text LangIsoCode="fre">Mon compte</Text>
+		</Message>
+		<Message id="mnuUserLogout">
+			<Text LangIsoCode="eng">Close session</Text>
+			<Text LangIsoCode="spa">Cerrar sesión</Text>
+			<Text LangIsoCode="por">Fechar sessão</Text>
+			<Text LangIsoCode="fre">Fermer la session</Text>
+		</Message>
+		<Message id="mnuMenuUserLanguage">
+			<Text LangIsoCode="eng">Language</Text>
+			<Text LangIsoCode="spa">Idioma</Text>
+			<Text LangIsoCode="por">Idioma</Text>
+			<Text LangIsoCode="fre">Langue</Text>
+		</Message>
+		<Message id="mnuUserQuit">
+			<Text LangIsoCode="eng">Quit</Text>
+			<Text LangIsoCode="spa">Salir</Text>
+			<Text LangIsoCode="por">Sair</Text>
+			<Text LangIsoCode="fre">Quitter</Text>
+		</Message>
 		<Message id="tuser">
 			<Text LangIsoCode="eng">User</Text>
 			<Text LangIsoCode="spa">Usuario</Text>
@@ -121,23 +163,11 @@
 			<Text LangIsoCode="por">Opções</Text>
 			<Text LangIsoCode="fre">Options</Text>
 		</Message>
-		<Message id="tclosesess">
-			<Text LangIsoCode="eng">Close session</Text>
-			<Text LangIsoCode="spa">Cerrar sesión</Text>
-			<Text LangIsoCode="por">Fechar sessão</Text>
-			<Text LangIsoCode="fre">Fermer la session</Text>
-		</Message>
 		<Message id="tmyregions">
 			<Text LangIsoCode="eng">My Databases</Text>
 			<Text LangIsoCode="spa">Mis bases</Text>
 			<Text LangIsoCode="por">Meus bancos</Text>
 			<Text LangIsoCode="fre">Mes bases</Text>
-		</Message>
-		<Message id="tconfigacc">
-			<Text LangIsoCode="eng">My Account</Text>
-			<Text LangIsoCode="spa">Mi cuenta</Text>
-			<Text LangIsoCode="por">Minha conta</Text>
-			<Text LangIsoCode="fre">Mon compte</Text>
 		</Message>
 		<Message id="thello">
 			<Text LangIsoCode="eng">Hi!</Text>
@@ -1645,12 +1675,6 @@
 			<Text LangIsoCode="por">Mostrar/Ocultar</Text>
 			<Text LangIsoCode="fre">Montrer/Cacher</Text>
 		</Message>
-		<Message id="mquit">
-			<Text LangIsoCode="eng">Quit</Text>
-			<Text LangIsoCode="spa">Salir</Text>
-			<Text LangIsoCode="por">Sair</Text>
-			<Text LangIsoCode="fre">Quitter</Text>
-		</Message>
 		<Message id="mhelp">
 			<Text LangIsoCode="eng">Help</Text>
 			<Text LangIsoCode="spa">Ayuda</Text>
@@ -1680,12 +1704,6 @@
 			<Text LangIsoCode="spa">Acerca de</Text>
 			<Text LangIsoCode="por">Acerca de</Text>
 			<Text LangIsoCode="fre">À propos de </Text>
-		</Message>
-		<Message id="mlang">
-			<Text LangIsoCode="eng">Language</Text>
-			<Text LangIsoCode="spa">Idioma</Text>
-			<Text LangIsoCode="por">Idioma</Text>
-			<Text LangIsoCode="fre">Langue</Text>
 		</Message>
 		<Message id="mdatabases">
 			<Text LangIsoCode="eng">Databases</Text>

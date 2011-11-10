@@ -5,6 +5,7 @@
 function onReadyMain()
 {
 	onReadyCommon();
+	onReadyUserLogin();
 	onReadyDatacards();
 	onReadyAdminDatabase();
 	onReadyExtraEffects();
