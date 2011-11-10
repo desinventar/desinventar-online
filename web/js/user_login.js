@@ -35,7 +35,6 @@ function onReadyUserLogin() {
 				{
 					if (parseInt(data.Status) > 0)
 					{
-						console.log('Logged In as ' + data.UserId);
 						doUserLoginUpdateMsg("#msgUserLoggedIn");
 						// After login, clear passwd field
 						jQuery("#fldUserPasswd").val('');
@@ -63,17 +62,13 @@ function doUserLogout()
 {
 	var Answer = 0;
 	desinventarURL = jQuery('#desinventarURL').val();
-	if (desinventarURL == undefined)
-	{
-		desinventarURL = '';
-	}
 	jQuery.post(desinventarURL + '/user.php',
 		{
 			'cmd'        : 'logout'
 		},
 		function(data)
 		{
-			if (data.Status == 'OK')
+			if (parseInt(data.Status) > 0)
 			{
 				Answer = 1;
 				doUserLoginUpdateMsg("#msgUserLoggedOut");
