@@ -3,7 +3,7 @@
  (c) 1998-2011 Corporacion OSSO
 */
 
-function onReadyQueryDesign()
+function onReadyQueryResults()
 {
 	jQuery('#queryBeginYear').blur(function() {
 		validateBeginYear();	
@@ -23,6 +23,19 @@ function onReadyQueryDesign()
 		jQuery('#fldQueryRecordStatus').val('PUBLISHED');
 		jQuery('#divQueryRecordStatus').hide();
 	}
+
+	jQuery('#btnViewData').click(function() {
+		Ext.getCmp('wndViewDataParams').show();
+	});
+	jQuery('#btnViewMap').click(function() {
+		Ext.getCmp('wndViewMapParams').show();
+	});
+	jQuery('#btnViewGraph').click(function() {
+		Ext.getCmp('wndViewGraphParams').show();
+	});
+	jQuery('#btnViewStd').click(function() {
+		Ext.getCmp('wndViewStdParams').show();
+	});
 }
 
 function validateQueryDefinition()
