@@ -362,17 +362,6 @@
 			
 		} //if
 
-		// 2011-04-29 (jhcaiced) Fix for use of ExtJS in IE9 ?
-		if ((typeof Range !== "undefined") && !Range.prototype.createContextualFragment)
-		{
-			Range.prototype.createContextualFragment = function(html)
-			{
-				var frag = document.createDocumentFragment(), div = document.createElement("div");
-				frag.appendChild(div);
-				div.outerHTML = html;
-				return frag;
-			};
-		}
 
 		// layout
 		var viewport = new Ext.Viewport({
@@ -380,11 +369,13 @@
 			contentEl: 'divViewport',
 			layout:'border',
 			items:[
-				{ region:'north',
+				{
+					region:'north',
 					height: 30,
 					contentEl: 'north'
 				},
-				{ region: 'south',
+				{
+					region: 'south',
 					id: 'southm',
 					split: false,
 					title: '{-#tmguidedef#-}',
@@ -398,25 +389,28 @@
 				new Ext.Panel({
 					region: 'center',
 					id: 'centerm',
-					//title: '{-#tsubtitle2#-}',
 					contentEl: 'container',
 					autoScroll: true
-				})
-				{-if !$ctl_noregion-}
-					,
-					{ region: 'west',
-						id: 'westm',
-						split: false,
-						width: 350,
-						title: '{-#tsubtitle#-}',
-						autoScroll: true,
-						margins:'0 2 0 0',
-						collapsible: true,
-						contentEl: 'west'
-					}
-				{-/if-}
+				}),
+				{
+					region: 'west',
+					id: 'westm',
+					split: false,
+					width: 350,
+					title: '{-#tsubtitle#-}',
+					autoScroll: true,
+					margins:'0 2 0 0',
+					collapsible: true,
+					contentEl: 'west'
+				}
 			]
 		}); //viewport
+
+		if (jQuery('#desinventarRegionId').val() == '')
+		{
+			Ext.getCmp('westm').hide();
+			viewport.doLayout();
+		}
 		
 		// ==> Results Configuration Windows
 		// Data
@@ -589,6 +583,18 @@
 					mapw.show(this);
 				}
 			}); // Map
+		}
+
+		// 2011-04-29 (jhcaiced) Fix for use of ExtJS in IE9 ?
+		if ((typeof Range !== "undefined") && !Range.prototype.createContextualFragment)
+		{
+			Range.prototype.createContextualFragment = function(html)
+			{
+				var frag = document.createDocumentFragment(), div = document.createElement("div");
+				frag.appendChild(div);
+				div.outerHTML = html;
+				return frag;
+			};
 		}
 
 		// quicktips

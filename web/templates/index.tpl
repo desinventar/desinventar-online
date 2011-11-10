@@ -92,7 +92,6 @@
 		<div id="container">
 			{-include file="main_content.tpl"-}
 		</div>
-		
 
 		<!-- Help Section -->
 		<div id="south">
