@@ -460,19 +460,19 @@ switch ($cmd)
 					$r = new DIRegion($us, $RegionId);
 					$RegionStatus = (int)$r->get('RegionStatus');
 					$RegionPublic = $RegionStatus & 2;
-					$bShow = 0;
-					if ($RegionPublic > 0)
+					$bCanShowDatabase = 0;
+					if ($desinventarUserRoleValue > 0)
 					{
-						$bShow = 1;
+						$bCanShowDatabase = 1;
 					}
 					else
 					{
-						if ($desinventarRoleValue > 0)
+						if ($RegionPublic > 0)
 						{
-							$bShow = 1;
+							$bCanShowDatabase = 1;
 						}
 					}
-					if ($bShow > 0)
+					if ($bCanShowDatabase > 0)
 					{
 						// Datacards
 						$t->assign('LabelsDisaster', $us->q->queryLabelsFromGroup('Disaster', $lg));
