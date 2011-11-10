@@ -79,7 +79,7 @@ switch ($cmd)
 	case 'logout':
 		// LOGOUT : Logut current user and show the login panel again
 		$us->logout();
-		print json_encode(array('Status' => 'OK'));
+		print json_encode(array('Status' => ERR_NO_ERROR));
 	break;
 	case 'passlost':
 		// PASSLOST: Allows to recover a user's password by sending 
