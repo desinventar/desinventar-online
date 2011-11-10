@@ -397,4 +397,126 @@ function doCreateDialogs()
 		jQuery('#divDatacardWindow').hide();
 		showtip('');					
 	});
+
+	datw = new Ext.Window({id:'wndViewDataParams',
+		el:'dat-win',
+		layout:'fit',
+		width:600,
+		height:400, 
+		closeAction:'hide',
+		plain: true,
+		animCollapse: false,
+		items: new Ext.Panel({contentEl: 'dat-cfg', autoScroll: true }),
+		buttons: [
+			{text: jQuery('#msgViewDataButtonClear').text(),
+				handler: function() {
+					$('CD').reset();
+					} //handler
+			},
+			{text: jQuery('#msgViewDataButtonSend').text(),
+				handler: function() {
+					if (sendList("result")) {
+						$('DCRes').value = "D";
+						datw.hide();
+						$('bsave').style.visibility = 'visible';
+						$('bprint').style.visibility = 'visible';
+					} else {
+						console.debug('Error while executing function ViewData');
+					}
+				} //handler
+			},
+			{text: jQuery('#msgViewDataButtonClose').text(),
+				handler: function() {
+					datw.hide();
+				} //handler
+			}
+		] //button
+	});
+
+	mapw = new Ext.Window({id:'wndViewMapParams',
+		el:'map-win',  layout:'fit',  width:650, height:400, 
+		closeAction:'hide', plain: true, animCollapse: false,
+		items: new Ext.Panel({contentEl: 'map-cfg', autoScroll: true }),
+		buttons: [
+			{text: jQuery('#msgViewMapButtonClear').text(),
+				handler: function() {
+					$('CM').reset();
+				}
+			},
+			{text: jQuery('#msgViewMapButtonSend').text(),
+				handler: function() {
+					if (sendMap("result")) {
+						$('DCRes').value = "M";
+						mapw.hide();
+						$('bsave').style.visibility = 'visible';
+						$('bprint').style.visibility = 'visible';
+					} else {
+						console.debug('Error while executing function ViewMap');
+					}
+				}
+			},
+			{text: jQuery('#msgViewMapButtonClose').text(),
+				handler: function() {
+					mapw.hide();
+				}
+			}
+		]
+	});
+
+	grpw = new Ext.Window({id:'wndViewGraphParams',
+		el:'divGraphParameters',  layout:'fit',  width:750, height:420, 
+		closeAction:'hide', plain: true, animCollapse: false,
+		items: new Ext.Panel({contentEl: 'grp-cfg', autoScroll: true }),
+		buttons: [
+			{text: jQuery('#msgViewGraphButtonClear').text(),
+				handler: function() {
+					$('CG').reset();
+				}
+			},
+			{text: jQuery('#msgViewGraphButtonSend').text(),
+				handler: function() {
+					sendGraphic('result');
+					$('DCRes').value = "G";
+					grpw.hide();
+					$('bsave').style.visibility = 'visible';
+					$('bprint').style.visibility = 'visible';
+				}
+			},
+			{text: jQuery('#msgViewGraphButtonClose').text(),
+				handler: function() {
+					grpw.hide();
+				}
+			}
+		]
+	});
+
+	stdw = new Ext.Window({id:'wndViewStdParams',
+		el:'std-win',  layout:'fit',  width:600, height:400, 
+		closeAction:'hide', plain: true, animCollapse: false,
+		items: new Ext.Panel({contentEl: 'std-cfg', autoScroll: true }),
+		buttons: [
+			{text: jQuery('#msgViewStdButtonClear').text(),
+				handler: function() {
+					$('CS').reset();
+				}
+			},
+			{text: jQuery('#msgViewStdButtonSend').text(),
+				handler: function() {
+					if (sendStatistic("result")) {
+						$('DCRes').value = "S";
+						stdw.hide();
+						$('bsave').style.visibility = 'visible';
+						$('bprint').style.visibility = 'visible';
+					} else {
+						console.debug('Error while executing ViewStd function');
+					}
+				} //handler
+			},
+			{text: jQuery('#msgViewStdButtonClose').text(),
+				handler: function() {
+					stdw.hide();
+				}
+			}
+		]
+	});
 } //doCreateDialogs()
