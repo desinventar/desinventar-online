@@ -1,5 +1,5 @@
 {-config_load file="$lang.conf" section="region"-}
-<div class="contentBlock" id="divRegionList">
+<div class="contentBlock" id="divRegionList" style="display:none;">
 	<span class="databaseListTitle">{-#txtAvailableDB#-}</span>
 	<br />
 	<span class="databaseTitle" id="title_COUNTRY"></span>
