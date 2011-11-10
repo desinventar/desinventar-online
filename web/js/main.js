@@ -6,11 +6,11 @@ function onReadyMain()
 {
 	onReadyCommon();
 	onReadyDatacards();
-	onReadyData();
-	onReadyGraphic();
 	onReadyAdminDatabase();
 	onReadyExtraEffects();
-	onReadyQueryDesign();
+	onReadyQueryResults();
+	onReadyData();
+	onReadyGraphic();
 	onReadyThematicMap();	
 
 	jQuery('body').bind('UserLoggedIn',function() {
