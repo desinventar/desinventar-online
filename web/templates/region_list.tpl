@@ -1,5 +1,4 @@
 {-config_load file="$lang.conf" section="region"-}
-<div class="contentBlock" id="divRegionList" style="display:none;">
 	<span class="databaseListTitle">{-#txtAvailableDB#-}</span>
 	<br />
 	<span class="databaseTitle" id="title_COUNTRY"></span>
@@ -14,4 +13,3 @@
 	<ul   class="databaseList"  id="list_OBSERVER"><li></li></ul>
 	<span class="databaseTitle" id="title_NONE">{-#txtRoleNONE#-}</span>
 	<ul   class="databaseList"  id="list_NONE"><li></li></ul>
-</div>

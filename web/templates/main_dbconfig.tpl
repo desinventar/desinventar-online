@@ -1,4 +1,3 @@
-<div class="contentBlock" id="divDatabaseConfiguration" style="display:none;">
 	<div id="DBConfig_tabs">
 		<ul>
 			<li><a class="classDBConfig_tabs" data="{-$desinventarURL-}/info.php"         cmd="cmdDBInfoEdit"      href="#DBConfig_tabs-1">{-#mreginfo#-}</a></li>
@@ -21,4 +20,3 @@
 		<div id="DBConfig_tabs-6">
 		</div>
 	</div>
-</div>
