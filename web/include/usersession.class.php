@@ -475,17 +475,18 @@ class UserSession {
 	// Return Role for a Region
 	function getUserRole($prmRegionId='')
 	{
+		$UserRole = 'NONE';
 		if ($prmRegionId == '')
 		{
 			$prmRegionId = $this->RegionId;
 		}
 		if ($this->UserId == 'root')
 		{
-			$myAnswer = 'ADMINPORTAL';
+			$UserRole = 'ADMINPORTAL';
 		}
 		else
 		{
-			$myAnswer = "";
+			$UserRole = 'NONE';
 			$sQuery = "SELECT * FROM RegionAuth WHERE ";
 			if ($prmRegionId != '')
 			{
@@ -506,7 +507,7 @@ class UserSession {
 				$this->q->core->commit();
 				while ($row = $sth->fetch(PDO::FETCH_OBJ))
 				{
-					$myAnswer = $row->AuthAuxValue;
+					$UserRole = $row->AuthAuxValue;
 				} // while
 			}
 			catch (Exception $e)
@@ -514,8 +515,17 @@ class UserSession {
 				$this->q->core->rollBack();
 				showErrorMsg('ERROR getUserRole : ' . $e->getMessage());
 			}
+			if ($UserRole == 'NONE')
+			{
+				$RegionStatus = $this->getDBInfoValue('RegionStatus');
+				$RegionPublic = $RegionStatus & 2;
+				if ($RegionPublic > 0)
+				{
+					$UserRole = 'OBSERVER';
+				}
+			}
 		}
-		return $myAnswer;
+		return $UserRole;
 	} // function
 	
 	// Get User Role as a Numeric Value, easier to compare

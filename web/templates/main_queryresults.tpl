@@ -1,4 +1,3 @@
-<div class="contentBlock" id="divQueryResults" style="display:block">
 	<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tr bgcolor="#bbbbbb">
 			<td width="200px">
@@ -98,4 +97,3 @@
 	{-include file="region_info.tpl"-}
 	<div id="dcr">
 	</div>
-</div> <!-- end div id=divQueryResults -->

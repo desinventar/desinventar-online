@@ -1,12 +1,21 @@
 <!-- divDatabaseHeader -->
-<!-- divDatabaseConfiguration - Database Configuration Parameters -->
-{-include file="main_dbconfig.tpl"-}
+<div class="contentBlock" id="divDatabasePrivate" style="display:none;">
+	{-include file="database_private.tpl"-}
+</div>
+
+<div class="contentBlock" id="divDatabaseConfiguration" style="display:none;">
+	{-include file="main_dbconfig.tpl"-}
+</div>
 
 <!-- divQueryResults - Results of queries -->
-{-include file="main_queryresults.tpl"-}
+<div class="contentBlock" id="divQueryResults" style="display:none;">
+	{-include file="main_queryresults.tpl"-}
+</div> <!-- end div id=divQueryResults -->
 
 <!-- "divRegionList" -->
-{-include file="region_list.tpl"-}
+<div class="contentBlock" id="divRegionList" style="display:none;">
+	{-include file="region_list.tpl"-}
+</div>
 
 <div class="contentBlock" id="divDatabaseExport" style="display:none;">
 	{-include file="database_export.tpl"-}

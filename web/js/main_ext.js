@@ -24,9 +24,9 @@ function onReadyExtJS()
 			return frag;
 		};
 	}
-	doCreateMainMenu();
+	doMainMenuCreate();
 	doViewportCreate();
-	doCreateDialogs();
+	doDialogsCreate();
 } //onReadyExtJS()
 
 function doViewportCreate()
@@ -78,10 +78,24 @@ function doViewportCreate()
 		]
 	}); //viewport
 
-	if (jQuery('#desinventarRegionId').val() == '')
+	var UserRoleValue = parseInt(jQuery('#desinventarUserRoleValue').val());
+	var RegionId = jQuery('#desinventarRegionId').val();
+	if ( (RegionId == '') || (UserRoleValue < 1) )
 	{
 		Ext.getCmp('westm').hide();
 		viewport.doLayout();
+	}
+	jQuery('.contentBlock').hide();
+	if (RegionId != '')
+	{
+		if (UserRoleValue > 0)
+		{
+			jQuery('#divQueryResults').show();
+		}
+		else
+		{
+			jQuery('#divDatabasePrivate').show();
+		}
 	}
 } // doViewportCreate()
 
@@ -276,7 +290,7 @@ function hideQueryDesign()
 	}
 } //hideQueryDesign()
 
-function doCreateMainMenu()
+function doMainMenuCreate()
 {
 	// Main menu
 	var mnuLang = new Ext.menu.Menu({id: 'langSubMenu',items: []});
@@ -400,7 +414,7 @@ function doCreateMainMenu()
 	} //if
 } //doCreateMainMenu()
 
-function doCreateDialogs()
+function doDialogsCreate()
 {
 	// User Login Window
 	usrw = new Ext.Window({id:'wndUserLogin',
