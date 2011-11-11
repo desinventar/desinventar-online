@@ -85,11 +85,17 @@ function doViewportCreate()
 		Ext.getCmp('westm').hide();
 		viewport.doLayout();
 	}
+
 	jQuery('.contentBlock').hide();
 	if (RegionId != '')
 	{
 		if (UserRoleValue > 0)
 		{
+			jQuery('#divQueryResults').show();
+			// Load Database Info and Show
+			doGetRegionInfo(jQuery('#desinventarRegionId').val());
+			jQuery('#divRegionInfo').show();
+			jQuery('#dcr').hide();
 			jQuery('#divQueryResults').show();
 		}
 		else
@@ -100,6 +106,8 @@ function doViewportCreate()
 	else
 	{
 		jQuery('#divRegionList').show();
+		// Show database list
+		updateDatabaseListByUser();
 	}
 } // doViewportCreate()
 
@@ -239,6 +247,7 @@ function onMenuItem(item) {
 		case 'mnuDatabaseConfig':
 			hideQueryDesign();
 			jQuery('.contentBlock').hide();
+			jQuery('.classDBConfig_tabs:first').click();
 			jQuery('#divDatabaseConfiguration').show();
 			jQuery('#tabDatabaseConfiguration').show();
 		break;

@@ -69,21 +69,6 @@ function onReadyMain()
 		}
 	});
 
-	jQuery('.contentBlock').hide();
-	if (jQuery('#desinventarRegionId').val() != '')
-	{
-		// Load Database Info and Show
-		doGetRegionInfo(jQuery('#desinventarRegionId').val());
-		jQuery('#divRegionInfo').show();
-		jQuery('#dcr').hide();
-		jQuery('#divQueryResults').show();
-	}
-	else
-	{
-		// Show database list
-		updateDatabaseListByUser();
-	}
-	
 	// Tabs for Database Configuration
 	jQuery('#DBConfig_tabs').tabs();
 	jQuery('.classDBConfig_tabs').click(function() {
@@ -117,5 +102,4 @@ function onReadyMain()
 			}
 		);
 	});
-	jQuery('.classDBConfig_tabs:first').click();
-}
+} //onReadyMain()
