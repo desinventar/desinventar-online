@@ -62,8 +62,10 @@ define('ERR_FILE_NOT_FOUND'   , -9);
 define('ERR_TABLE_LOCKED'     , -10);
 define('ERR_UPLOAD_FAILED'    , -11);
 define('ERR_NO_CONNECTION'    , -99);
-define('ERR_USER_DUPLICATE_ID', -100);
-define('ERR_WITH_WARNINGS'    , -101);
+define('ERR_USER_DUPLICATE_ID' , -100);
+define('ERR_WITH_WARNINGS'     , -101);
+define('ERR_LANGUAGE_NO_CHANGE', -120);
+define('ERR_LANGUAGE_INVALID'  , -121);
 
 // Graph Types
 define('GRAPH_HISTOGRAM_TEMPORAL'   , 0);

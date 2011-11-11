@@ -53,6 +53,31 @@ if ( (substr($_SERVER['CONTENT_TYPE'],0,19) == 'multipart/form-data') &&
 }
 switch ($cmd)
 {
+	case 'cmdUserLanguageChange':
+		$LangList = $us->q->loadLanguages(1);
+		$LangIsoCode = getParameter('LangIsoCode');
+		$answer = array();
+		$answer['Status'] = ERR_NO_ERROR;
+		if ($lg != $LangIsoCode)
+		{
+			if (array_key_exists($LangIsoCode, $LangList))
+			{
+				$us->setLangIsoCode($LangIsoCode);
+				$us->update();
+				$answer['Status'] = ERR_NO_ERROR;
+				$answer['LangIsoCode'] = $LangIsoCode;
+			}
+			else
+			{
+				$answer['Status'] = ERR_LANGUAGE_INVALID;
+			}
+		}
+		else
+		{
+			$answer['Status'] = ERR_LANGUAGE_NO_CHANGE;
+		}
+		echo json_encode($answer);
+	break;
 	case 'cmdAdminDatabaseGetList':
 		$answer['Status']     = ERR_NO_ERROR;
 		$answer['RegionList'] = $us->q->getRegionAdminList();
@@ -66,7 +91,6 @@ switch ($cmd)
 		echo json_encode($answer);
 	break;
 	case 'cmdAdminDB':
-		$t->assign('LanguageList', $us->q->loadLanguages(1));
 		$t->assign('CountryList', $us->q->getCountryList());
 		$t->assign('ctl_adminreg', true);
 		$t->assign('ctl_reglist', true);
