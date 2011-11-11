@@ -373,10 +373,13 @@ function doCreateMainMenu()
 	// Hide Menu items when no Region is Selected
 	if (jQuery('#desinventarRegionId').val() != '')
 	{
-		Ext.getCmp('mnuHelpRegionInfo').show();
 		Ext.getCmp('mnuHelpRegionInfoLabel').setText('[' + jQuery('#desinventarRegionLabel').val() + ']');
-		Ext.getCmp('mnuQuery').show();
-		Ext.getCmp('mnuCards').show();
+		if (UserRoleValue > 0)
+		{
+			Ext.getCmp('mnuHelpRegionInfo').show();
+			Ext.getCmp('mnuQuery').show();
+			Ext.getCmp('mnuCards').show();
+		}
 
 		// Feeder/Supervisor/Admin
 		if (UserRoleValue >= 2) 
