@@ -25,11 +25,11 @@ function onReadyExtJS()
 		};
 	}
 	doCreateMainMenu();
-	doCreateViewport();
+	doViewportCreate();
 	doCreateDialogs();
 } //onReadyExtJS()
 
-function doCreateViewport()
+function doViewportCreate()
 {
 	// layout
 	var viewport = new Ext.Viewport({
@@ -83,7 +83,14 @@ function doCreateViewport()
 		Ext.getCmp('westm').hide();
 		viewport.doLayout();
 	}
-} // doCreateViewport()
+} // doViewportCreate()
+
+function doViewportDestroy()
+{
+	Ext.getCmp('viewport').destroy();
+	jQuery('#loading').show();
+	jQuery('#loading-mask').show();
+}
 
 function onMenuItem(item) {
 	var RegionId = jQuery('#desinventarRegionId').val();
@@ -103,6 +110,31 @@ function onMenuItem(item) {
 		case 'mnuUserEditAccount':
 			jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=changepasswd',function() { onReadyUserChangePasswd('dbl-win'); });
 			Ext.getCmp('wndDatabaseList').show();
+		break;
+		case 'mnuUserLanguage-spa':
+		case 'mnuUserLanguage-eng':
+		case 'mnuUserLanguage-por':
+		case 'mnuUserLanguage-fre':
+			jQuery.post(
+				jQuery('#desinventarURL').val(),
+				{
+					cmd : 'cmdUserLanguageChange',
+					LangIsoCode : item.langisocode
+				},
+				function(data)
+				{
+					if (parseInt(data.Status) > 0)
+					{
+						doViewportDestroy();
+						window.location.reload(false);
+					}
+					else
+					{
+						console.error('cmdUserLanguageChange error : ' + data.Status + ' ' + item.langisocode);
+					}
+				},
+				'json'
+			);
 		break;
 		case 'mnuFileQuit':
 			self.close();
@@ -230,6 +262,7 @@ function onMenuItem(item) {
 			window.open(url, '', '');
 		break;
 	} //switch
+	return false;
 } //onMenuItem()
 
 function hideQueryDesign()
@@ -249,9 +282,7 @@ function doCreateMainMenu()
 	var mnuLang = new Ext.menu.Menu({id: 'langSubMenu',items: []});
 	jQuery('[id|="mnuUserLanguage"]').each(function(index, Element) {
 		var LangIsoCode = jQuery(this).attr('id').substr(-3);
-		mnuLang.add({text: jQuery(this).text(), handler: function() {
-			window.location = jQuery('#desinventarURL').val() + '/index.php?r=' + jQuery('#desinventarRegionId').val() + '&lang=' + LangIsoCode;
-		}});
+		mnuLang.add({id: jQuery(this).attr('id'), langisocode: LangIsoCode, text: jQuery(this).text(), handler: onMenuItem });
 	});
 	
 	var muser = new Ext.menu.Menu({
