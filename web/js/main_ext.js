@@ -97,6 +97,10 @@ function doViewportCreate()
 			jQuery('#divDatabasePrivate').show();
 		}
 	}
+	else
+	{
+		jQuery('#divRegionList').show();
+	}
 } // doViewportCreate()
 
 function doViewportDestroy()
