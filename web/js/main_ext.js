@@ -234,10 +234,15 @@ function onMenuItem(item) {
 			updateList('divDatacardsImport', jQuery('#desinventarURL').val() + '/import.php', 'r=' + RegionId);
 		break;
 		case 'mnuDatabaseExport':
+			Ext.getCmp('wndDatabaseExport').render();
+			Ext.getCmp('wndDatabaseExport').show();
+			Ext.getCmp('wndDatabaseExport').center();
+			/*
 			hideQueryDesign();
 			jQuery('.contentBlock').hide();
 			jQuery('#divDatabaseExport').trigger('DBBackupRestart');
 			jQuery('#divDatabaseExport').show();
+			*/
 		break;
 		case 'mnuDatabaseImport':
 			hideQueryDesign();
@@ -429,6 +434,31 @@ function doMainMenuCreate()
 
 function doDialogsCreate()
 {
+	var w;
+	// Database Export
+	w = new Ext.Window({id:'wndDatabaseExport', applyTo: 'divDatabaseExportWin',
+		layout:'fit', width:600, height:400, closeAction:'hide', plain: true,
+		animCollapse: false, items: new Ext.Panel({
+		contentEl: 'divDatabaseExportContent', autoScroll: true }),
+		buttons: [
+			{
+				text: jQuery('#msgViewDataButtonSend').text(),
+				handler: function()
+				{
+					alert('Database Export');
+					Ext.getCmp('wndDatabaseExport').hide();					
+				} //handler
+			},
+			{
+				text: jQuery('#msgViewDataButtonClose').text(),
+				handler: function()
+				{
+					Ext.getCmp('wndDatabaseExport').hide();
+				} //handler
+			}
+		] //button
+	});
+	
 	// User Login Window
 	usrw = new Ext.Window({id:'wndUserLogin',
 		el:'usr-win', layout:'fit', x:300, y:100, width:500, height:300, 

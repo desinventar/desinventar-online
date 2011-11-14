@@ -51,6 +51,7 @@ if ( (substr($_SERVER['CONTENT_TYPE'],0,19) == 'multipart/form-data') &&
 {
      $cmd = 'fileupload';
 }
+fb($cmd);
 switch ($cmd)
 {
 	case 'cmdUserLanguageChange':
@@ -90,6 +91,7 @@ switch ($cmd)
 		$answer['Region'] = $r->getRegionInfoCore();
 		echo json_encode($answer);
 	break;
+	case 'admin':
 	case 'cmdAdminDB':
 		$t->assign('CountryList', $us->q->getCountryList());
 		$t->assign('ctl_adminreg', true);
