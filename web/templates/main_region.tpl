@@ -16,8 +16,10 @@
 			jQuery(document).ready(function() {
 				onReadyAdminDatabase();
 				//doAdminDatabaseUpdateList();
-				doAdminDatabaseExportSetup(jQuery('#desinventarRegionId').val());
-				doAdminDatabaseExportAction();
+				jQuery('#btnDatabaseExport').click(function() {
+					doAdminDatabaseExportSetup(jQuery('#desinventarRegionId').val());
+					doAdminDatabaseExportAction();
+				});
 			});
 		</script>
 	</head>
@@ -27,5 +29,7 @@
 		{-*include file="region.tpl"*-}
 		{-include file="database_export.tpl"-}
 		{-include file="desinventarinfo.tpl"-}
+		<br />
+		<input type="button" id="btnDatabaseExport" value="Export" />
 	</body>
 </html>

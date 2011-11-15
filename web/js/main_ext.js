@@ -589,8 +589,10 @@ function doDialogsCreate()
 				text: jQuery('#msgViewDataButtonSend').text(),
 				handler: function()
 				{
-					doAdminDatabaseExportAction();
-					//Ext.getCmp('wndDatabaseExport').hide();					
+					if (parseInt(doAdminDatabaseExportAction() > 0)
+					{
+						Ext.getCmp('wndDatabaseExport').hide();
+					}
 				} //handler
 			},
 			{

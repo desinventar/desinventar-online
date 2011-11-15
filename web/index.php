@@ -379,7 +379,6 @@ switch ($cmd)
 			if ($iReturn > 0)
 			{
 				$answer['Status'] = ERR_NO_ERROR;
-				$answer['FileName'] = $FileName;
 				$answer['URL'     ] = $URL;
 			}
 			else
