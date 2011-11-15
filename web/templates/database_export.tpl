@@ -3,6 +3,8 @@
 	<span id="txtAdminDatabaseExportRegionLabel"></span>
 </h4>
 <br />
+<input type="button" id="divAdminDatabaseExportStart" value="Start" />
+<br />
 <div id="divAdminDatabaseExportProgress" style="display:none;" class="clsAdminDatabaseExport">
 	{-#msgAdminDatabaseExportWait#-} &nbsp;&nbsp; <img src="{-$desinventarURL-}/images/loading.gif" />
 </div>
