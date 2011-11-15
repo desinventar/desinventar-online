@@ -14,9 +14,18 @@
 					<button id="btnViewStd" class="rounded" ext:qtip="{-#tstatisticmsg#-}"><span>{-#bstatistic#-}</span></button>
 					{-include file="statistic_parameters.tpl"-}
 				</div>
+				<div id="divDatabaseExportWin" class="x-hidden">
+					<div class="x-window-header">
+						{-#mnuDatabaseExport#-}
+					</div>
+					<div id="divDatabaseExportContent">
+						{-include file="database_export.tpl"-}
+					</div>
+				</div>
 				<!-- Show XML query open window-->
 				<div id="qry-win" class="x-hidden">
-					<div class="x-window-header">{-#mopenquery#-}
+					<div class="x-window-header">
+						{-#mopenquery#-}
 					</div>
 					<div id="qry-cfg" style="text-align:center;">
 						<form id="openquery" enctype="multipart/form-data" action="index.php?r={-$reg-}" method="POST">
@@ -30,7 +39,8 @@
 				</div>
 				<!-- Show DesInventar (input data) window-->
 				<div id="divDatacardWindow" class="x-hidden">
-					<div class="x-window-header">{-#mdcsection#-} | {-$desinventarUserId-} - {-$role-}
+					<div class="x-window-header">
+						{-#mdcsection#-} | {-$desinventarUserId-} - {-$role-}
 					</div>
 					<div id="dif-cfg" style="text-align:center;">
 						<div name="dif" id="dif" frameborder="0" height="600px;" width="100%">
@@ -40,7 +50,8 @@
 				</div>
 				<!-- Show User login/logout window -->
 				<div id="usr-win" class="x-hidden">
-					<div class="x-window-header">{-$desinventarUserId-} - {-$role-}
+					<div class="x-window-header">
+						{-$desinventarUserId-} - {-$role-}
 					</div>
 					<div id="usr">
 						{-include file="user_login.tpl"-}
@@ -52,7 +63,8 @@
 				</div>
 				<!-- Show Database functions window -->
 				<div id="dbl-win" class="x-hidden">
-					<div class="x-window-header">{-$desinventarUserId-} - {-$role-}
+					<div class="x-window-header">
+						{-$desinventarUserId-} - {-$role-}
 					</div>
 					<div id="dbl">
 					</div>
