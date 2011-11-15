@@ -235,14 +235,7 @@ function onMenuItem(item) {
 		break;
 		case 'mnuDatabaseExport':
 			doAdminDatabaseExportSetup(jQuery('#desinventarRegionId').val());
-			console.log('Show');
 			Ext.getCmp('wndDatabaseExport').show();
-			/*
-			hideQueryDesign();
-			jQuery('.contentBlock').hide();
-			jQuery('#divDatabaseExport').trigger('DBBackupRestart');
-			jQuery('#divDatabaseExport').show();
-			*/
 		break;
 		case 'mnuDatabaseImport':
 			hideQueryDesign();

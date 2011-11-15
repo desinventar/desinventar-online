@@ -51,7 +51,6 @@ if ( (substr($_SERVER['CONTENT_TYPE'],0,19) == 'multipart/form-data') &&
 {
      $cmd = 'fileupload';
 }
-fb($cmd);
 switch ($cmd)
 {
 	case 'cmdUserLanguageChange':
@@ -371,26 +370,23 @@ switch ($cmd)
 		$t->display('graphparameters.tpl');
 	break;
 	case 'cmdDatabaseExport':
-		$RegionId = $us->RegionId;
-		$us->open($RegionId);
-		fb($RegionId);
-		$FileName = WWWDIR  . '/data/' . $SessionId . '/di8export_' . $RegionId . '.zip';
-		$URL      = WWWDATA . '/data/' . $SessionId . '/di8export_' . $RegionId . '.zip';
 		$answer = array('Status'   => ERR_UNKNOWN_ERROR);
-		$iReturn = DIRegion::createRegionBackup($us, $FileName);
-		//$iReturn = 1;
-		if ($iReturn > 0)
+		if ($desinventarUserRoleValue > ROLE_USER)
 		{
-			$answer['Status'] = ERR_NO_ERROR;
-			$answer['FileName'] = $FileName;
-			$answer['URL'     ] = $URL;
+			$FileName = WWWDIR  . '/data/' . $SessionId . '/di8export_' . $RegionId . '.zip';
+			$URL      = WWWDATA . '/data/' . $SessionId . '/di8export_' . $RegionId . '.zip';
+			$iReturn = DIRegion::createRegionBackup($us, $FileName);
+			if ($iReturn > 0)
+			{
+				$answer['Status'] = ERR_NO_ERROR;
+				$answer['FileName'] = $FileName;
+				$answer['URL'     ] = $URL;
+			}
+			else
+			{
+				$answer['Status'] = ERR_UNKNOWN_ERROR;
+			}
 		}
-		else
-		{
-			$answer['Status'] = ERR_UNKNOWN_ERROR;
-		}
-		fb($answer);
-		$us->close();
 		echo json_encode($answer);
 	break;
 	case 'savequery':
