@@ -372,12 +372,13 @@ switch ($cmd)
 	break;
 	case 'cmdDatabaseExport':
 		$RegionId = $us->RegionId;
+		$us->open($RegionId);
 		fb($RegionId);
 		$FileName = WWWDIR  . '/data/' . $SessionId . '/di8export_' . $RegionId . '.zip';
 		$URL      = WWWDATA . '/data/' . $SessionId . '/di8export_' . $RegionId . '.zip';
 		$answer = array('Status'   => ERR_UNKNOWN_ERROR);
-		//$iReturn = DIRegion::createRegionBackup($us, $FileName);
-		$iReturn = 1;
+		$iReturn = DIRegion::createRegionBackup($us, $FileName);
+		//$iReturn = 1;
 		if ($iReturn > 0)
 		{
 			$answer['Status'] = ERR_NO_ERROR;
@@ -389,6 +390,7 @@ switch ($cmd)
 			$answer['Status'] = ERR_UNKNOWN_ERROR;
 		}
 		fb($answer);
+		$us->close();
 		echo json_encode($answer);
 	break;
 	case 'savequery':

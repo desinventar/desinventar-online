@@ -435,33 +435,6 @@ function doMainMenuCreate()
 function doDialogsCreate()
 {
 	var w;
-	// Database Export
-	w = new Ext.Window({id:'wndDatabaseExport', 
-		el: 'divDatabaseExportWin', layout:'fit', 
-		width:600, height:400, 
-		closeAction:'hide', plain: true, animCollapse: false, 
-		items: new Ext.Panel({
-			contentEl: 'divDatabaseExportContent', autoScroll: true
-		}),
-		buttons: [
-			{
-				text: jQuery('#msgViewDataButtonSend').text(),
-				handler: function()
-				{
-					doAdminDatabaseExportAction();
-					//Ext.getCmp('wndDatabaseExport').hide();					
-				} //handler
-			},
-			{
-				text: jQuery('#msgViewDataButtonClose').text(),
-				handler: function()
-				{
-					Ext.getCmp('wndDatabaseExport').hide();
-				} //handler
-			}
-		] //button
-	});
-	
 	// User Login Window
 	usrw = new Ext.Window({id:'wndUserLogin',
 		el:'usr-win', layout:'fit', x:300, y:100, width:500, height:300, 
@@ -609,4 +582,32 @@ function doDialogsCreate()
 			}
 		]
 	});
+
+	// Database Export
+	w = new Ext.Window({id:'wndDatabaseExport', 
+		el: 'divDatabaseExportWin', layout:'fit', 
+		width:600, height:400, 
+		closeAction:'hide', plain: true, animCollapse: false, 
+		items: new Ext.Panel({
+			contentEl: 'divDatabaseExportContent', autoScroll: true
+		}),
+		buttons: [
+			{
+				text: jQuery('#msgViewDataButtonSend').text(),
+				handler: function()
+				{
+					doAdminDatabaseExportAction();
+					//Ext.getCmp('wndDatabaseExport').hide();					
+				} //handler
+			},
+			{
+				text: jQuery('#msgViewDataButtonClose').text(),
+				handler: function()
+				{
+					Ext.getCmp('wndDatabaseExport').hide();
+				} //handler
+			}
+		] //button
+	});
+	
 } //doCreateDialogs()

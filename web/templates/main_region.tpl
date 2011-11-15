@@ -15,14 +15,17 @@
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
 				onReadyAdminDatabase();
-				doAdminDatabaseUpdateList();
+				//doAdminDatabaseUpdateList();
+				doAdminDatabaseExportSetup(jQuery('#desinventarRegionId').val());
+				doAdminDatabaseExportAction();
 			});
 		</script>
 	</head>
 	<body>
 		DesInventar Database Admin
 		Version : {-$jsversion-}<br />
-		{-include file="region.tpl"-}
+		{-*include file="region.tpl"*-}
+		{-include file="database_export.tpl"-}
 		{-include file="desinventarinfo.tpl"-}
 	</body>
 </html>

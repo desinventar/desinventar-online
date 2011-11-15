@@ -2,7 +2,6 @@
 <table>
 	<tr>
 		<td rowspan="5" valign="top">
-			<img src="{-$desinventarURL-}/images/db_backup.png" />
 		</td>
 		<td>
 			<b><span id="txtDBBackupRegionLabel"></span></b><br />
@@ -13,9 +12,10 @@
 		<td>
 			<div id="divDBBackupResults" style="display:none;" class="DBBackup">
 				<p>{-#msgDBBackupComplete#-}</p>
-				<a id="linkDBBackupDownload" href="#"><img src="{-$desinventarURL-}/images/save-as-icon.png"></a><br />
+				<div style="text-align:center">
 				<input id="btnDBBackupDownload" type="button" class="line" value="Download" href="" />
 				<br />
+				</div>
 				<hr size="2" noshade />
 			</div>
 		</td>
