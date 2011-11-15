@@ -55,37 +55,33 @@ function onReadyAdminDatabaseExport()
 
 function doAdminDatabaseExportAction()
 {
-	var RegionId = jQuery('#txtAdminDatabaseExport_RegionId').text();
-	console.log('Action : ' + RegionId);
-	if (RegionId != '')
-	{
-		jQuery('.DBBackup').hide();
-		jQuery('#divDBBackupProgress').show();
-		jQuery.post(jQuery('#desinventarURL').val(),
+	jQuery('.DBBackup').hide();
+	jQuery('#divDBBackupProgress').show();
+	jQuery.post(jQuery('#desinventarURL').val(),
+		{
+			cmd      : 'cmdDatabaseExport',
+			RegionId : jQuery('#txtAdminDatabaseExport_RegionId').text()
+		},
+		function(data)
+		{
+			if (parseInt(data.Status) > 0)
 			{
-				cmd      : 'cmdDatabaseExport',
-				RegionId : jQuery('#txtAdminDatabaseExport_RegionId').text()
-			},
-			function(data)
+				jQuery('#linkDBBackupDownload').attr('href', data.URL);
+				jQuery('#btnDBBackupDownload').attr('href', data.URL);
+				jQuery('.DBBackup').hide();
+				jQuery('#divDBBackupResults').show();
+				jQuery('#divDBBackupParameters').show();		
+				//window.location = data.URL;
+			}
+			else
 			{
-				if (parseInt(data.Status) > 0)
-				{
-					jQuery('#linkDBBackupDownload').attr('href', data.URL);
-					jQuery('#btnDBBackupDownload').attr('href', data.URL);
-					jQuery('.DBBackup').hide();
-					jQuery('#divDBBackupResults').show();
-					jQuery('#divDBBackupParameters').show();		
-				}
-				else
-				{
-					jQuery('.DBBackup').hide();
-					jQuery('#divDBBackupErrors').show();
-					jQuery('#divDBBackupParameters').show();		
-				}
-			},
-			'json'
-		);
-	}
+				jQuery('.DBBackup').hide();
+				jQuery('#divDBBackupErrors').show();
+				jQuery('#divDBBackupParameters').show();		
+			}
+		},
+		'json'
+	);
 } //doAdminDatabaseExportAction
 
 function doAdminDatabaseExportSetup(prmRegionId)
