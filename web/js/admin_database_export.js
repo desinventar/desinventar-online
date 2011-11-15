@@ -5,58 +5,15 @@
 
 function onReadyAdminDatabaseExport()
 {
-	jQuery('.DBBackup').hide();
-	jQuery('#txtDBBackupRegionLabel').text(jQuery('#desinventarRegionLabel').val());
-	/*
-	jQuery('#divDBBackupParameters').show();
-	jQuery('#btnDBBackupDoBackup').click(function() {
-		jQuery('.DBBackup').hide();
-		jQuery('#divDBBackupProgress').show();
-		jQuery.post(jQuery('#desinventarURL').val(),
-			{cmd      : 'doDatabaseBackup',
-			 RegionId : jQuery('#txtAdminDatabaseExport_RegionId').text()
-			},
-			function(data) {
-				var bOk = true;
-				if (data == null) {
-					bOk = false;
-				} else {
-					if (data.Status != 'OK') {
-						$bOk = false;
-					}
-				}				
-				if (bOk) {
-					jQuery('#linkDBBackupDownload').attr('href', data.BackupURL);
-					jQuery('#btnDBBackupDownload').attr('href', data.BackupURL);
-					jQuery('.DBBackup').hide();
-					jQuery('#divDBBackupResults').show();
-					jQuery('#divDBBackupParameters').show();		
-				} else {
-					jQuery('.DBBackup').hide();
-					jQuery('#divDBBackupErrors').show();
-					jQuery('#divDBBackupParameters').show();		
-				}
-			},
-			'json'
-		);
-	});
-	
-	jQuery('#btnDBBackupDownload').click(function() {
-		var url = jQuery(this).attr('href');
-		window.open(url,'','');
-	});
-	
-	jQuery('#divDatabaseExport').bind('DBBackupRestart', function() {
-		jQuery('.DBBackup').hide();
-		jQuery('#divDBBackupParameters').show();		
-	});
-	*/
+	jQuery('clsDatabaseExport').hide();
+	jQuery('#txtDatabaseExportRegionLabel').text(jQuery('#desinventarRegionLabel').val());
 }
 
 function doAdminDatabaseExportAction()
 {
-	jQuery('.DBBackup').hide();
-	jQuery('#divDBBackupProgress').show();
+	var iAnswer = 0;
+	jQuery('clsDatabaseExport').hide();
+	jQuery('#divDatabaseExportProgress').show();
 	jQuery.post(jQuery('#desinventarURL').val(),
 		{
 			cmd      : 'cmdDatabaseExport',
@@ -64,20 +21,18 @@ function doAdminDatabaseExportAction()
 		},
 		function(data)
 		{
+			jQuery('clsAdminDatabaseExport').hide();
 			if (parseInt(data.Status) > 0)
 			{
-				jQuery('#linkDBBackupDownload').attr('href', data.URL);
-				jQuery('#btnDBBackupDownload').attr('href', data.URL);
-				jQuery('.DBBackup').hide();
-				jQuery('#divDBBackupResults').show();
-				jQuery('#divDBBackupParameters').show();		
-				//window.location = data.URL;
+				jQuery('#divAdminDatabaseExportResults').show();
+				iAnswer = 1;
+				// Open the backup file for download
+				window.location = data.URL;
 			}
 			else
 			{
-				jQuery('.DBBackup').hide();
-				jQuery('#divDBBackupErrors').show();
-				jQuery('#divDBBackupParameters').show();		
+				jQuery('#divAdminDatabaseExportError').show();
+				iAnswer = -1;
 			}
 		},
 		'json'
