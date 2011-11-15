@@ -39,9 +39,8 @@ function onReadyAdminDatabaseExport()
 
 function doAdminDatabaseExportAction()
 {
-	jQuery('#txtAdminDatabaseExportRegionLabel').hide();
 	jQuery('.clsAdminDatabaseExport').hide();
-	Ext.get('divAdminDatabaseExportProgress').show();
+	jQuery('#divAdminDatabaseExportProgress').show();
 	jQuery.post(jQuery('#desinventarURL').val(),
 		{
 			cmd      : 'cmdAdminDatabaseExport',

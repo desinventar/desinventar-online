@@ -236,6 +236,7 @@ function onMenuItem(item) {
 		case 'mnuDatabaseExport':
 			doAdminDatabaseExportSetup(jQuery('#desinventarRegionId').val());
 			Ext.getCmp('wndDatabaseExport').show();
+			//jQuery('#btnAdminDatabaseExportSend').trigger('click');
 		break;
 		case 'mnuDatabaseImport':
 			hideQueryDesign();
@@ -586,6 +587,7 @@ function doDialogsCreate()
 		}),
 		buttons: [
 			{
+				id: 'btnAdminDatabaseExportSend',
 				text: jQuery('#msgViewDataButtonSend').text(),
 				handler: function()
 				{
