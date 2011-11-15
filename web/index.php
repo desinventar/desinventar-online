@@ -370,21 +370,25 @@ switch ($cmd)
 	case 'getGraphParameters':
 		$t->display('graphparameters.tpl');
 	break;
-	case 'doDatabaseBackup':
-		$BackupFileName = WWWDIR  . '/data/' . $SessionId . '/di8backup_' . $RegionId . '.zip';
-		$BackupURL      = WWWDATA . '/data/' . $SessionId . '/di8backup_' . $RegionId . '.zip';
-		$answer = array('Status'   => 'ERROR');
-		$iReturn = DIRegion::createRegionBackup($us, $BackupFileName);
+	case 'cmdDatabaseExport':
+		$RegionId = $us->RegionId;
+		fb($RegionId);
+		$FileName = WWWDIR  . '/data/' . $SessionId . '/di8export_' . $RegionId . '.zip';
+		$URL      = WWWDATA . '/data/' . $SessionId . '/di8export_' . $RegionId . '.zip';
+		$answer = array('Status'   => ERR_UNKNOWN_ERROR);
+		//$iReturn = DIRegion::createRegionBackup($us, $FileName);
+		$iReturn = 1;
 		if ($iReturn > 0)
 		{
-			$answer['Status'] = 'OK';
-			$answer['BackupFileName'] = $BackupFileName;
-			$answer['BackupURL'     ] = $BackupURL;
+			$answer['Status'] = ERR_NO_ERROR;
+			$answer['FileName'] = $FileName;
+			$answer['URL'     ] = $URL;
 		}
 		else
 		{
-			$answer['Status'] = 'ERROR';
+			$answer['Status'] = ERR_UNKNOWN_ERROR;
 		}
+		fb($answer);
 		echo json_encode($answer);
 	break;
 	case 'savequery':
