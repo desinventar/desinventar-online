@@ -12,7 +12,7 @@ function onReadyAdminDatabaseExport()
 function doAdminDatabaseExportAction()
 {
 	var iAnswer = 0;
-	jQuery('clsDatabaseExport').hide();
+	jQuery('.clsDatabaseExport').hide();
 	jQuery('#divDatabaseExportProgress').show();
 	jQuery.post(jQuery('#desinventarURL').val(),
 		{
@@ -21,7 +21,7 @@ function doAdminDatabaseExportAction()
 		},
 		function(data)
 		{
-			jQuery('clsAdminDatabaseExport').hide();
+			jQuery('.clsAdminDatabaseExport').hide();
 			if (parseInt(data.Status) > 0)
 			{
 				jQuery('#divAdminDatabaseExportResults').show();
@@ -37,6 +37,7 @@ function doAdminDatabaseExportAction()
 		},
 		'json'
 	);
+	return iAnswer;
 } //doAdminDatabaseExportAction
 
 function doAdminDatabaseExportSetup(prmRegionId)
