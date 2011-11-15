@@ -1,7 +1,6 @@
 {-config_load file="$lg.conf" section="grpDatabaseExport"-}
 <h4>
 	<span id="txtDatabaseExportRegionLabel"></span>
-	Language : {-$lg-}
 </h4>
 <br />
 <div id="divAdminDatabaseExportProgress" style="display:none;" class="clsAdminDatabaseExport">
