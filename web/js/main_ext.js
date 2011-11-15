@@ -234,9 +234,9 @@ function onMenuItem(item) {
 			updateList('divDatacardsImport', jQuery('#desinventarURL').val() + '/import.php', 'r=' + RegionId);
 		break;
 		case 'mnuDatabaseExport':
-			Ext.getCmp('wndDatabaseExport').render();
+			doAdminDatabaseExportSetup(jQuery('#desinventarRegionId').val());
+			console.log('Show');
 			Ext.getCmp('wndDatabaseExport').show();
-			Ext.getCmp('wndDatabaseExport').center();
 			/*
 			hideQueryDesign();
 			jQuery('.contentBlock').hide();
@@ -438,7 +438,7 @@ function doDialogsCreate()
 	// Database Export
 	w = new Ext.Window({id:'wndDatabaseExport', 
 		el: 'divDatabaseExportWin', layout:'fit', 
-		x:100, y:100, width:600, height:400, 
+		width:600, height:400, 
 		closeAction:'hide', plain: true, animCollapse: false, 
 		items: new Ext.Panel({
 			contentEl: 'divDatabaseExportContent', autoScroll: true
@@ -448,8 +448,8 @@ function doDialogsCreate()
 				text: jQuery('#msgViewDataButtonSend').text(),
 				handler: function()
 				{
-					alert('Database Export');
-					Ext.getCmp('wndDatabaseExport').hide();					
+					doAdminDatabaseExportAction();
+					//Ext.getCmp('wndDatabaseExport').hide();					
 				} //handler
 			},
 			{

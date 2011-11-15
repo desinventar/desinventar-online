@@ -2853,12 +2853,6 @@
 		</Message>
 	</Group>
 	<Group name="di8_DBBackup">
-		<Message id="msgDBBackupTitle">
-			<Text LangIsoCode="eng">Create Region Backup</Text>
-			<Text LangIsoCode="spa">Realizar Copia de Seguridad</Text>
-			<Text LangIsoCode="por">Criar um backup do banco de dados</Text>
-			<Text LangIsoCode="fre">Créer des sauvegardes de bases</Text>
-		</Message>
 		<Message id="msgDBBackupComplete">
 			<Text LangIsoCode="eng">Backup has been created and can be downloaded now.</Text>
 			<Text LangIsoCode="spa">La copia ha sido realizada puede descargarla.</Text>
