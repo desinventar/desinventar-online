@@ -36,7 +36,7 @@
 					<input type="button" value="&larr;" onclick="moveOptions($('_D+Field[]'), $('_D+sel1[]'));" class="line" />
 				</td>
 				<td>
-					<b>{-#sviewfields#-}</b><br>
+					<b>{-#sviewfields#-}</b><br />
 					<select id="_D+Field[]" size="8" style="width:220px;" multiple class="line">
 						{-foreach name=sst key=key item=item from=$sda-}
 							{-if $item != "D.DisasterId"-}

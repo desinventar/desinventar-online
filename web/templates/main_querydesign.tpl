@@ -50,7 +50,7 @@
 		<dt>{-#mcausection#-}</dt>
 		<dd>
 			<input type="hidden" name="QueryCause[OP]" value="AND" />
-			<span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br>
+			<span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br />
 			<select id="qcaulst" name="D_CauseId[]" multiple style="width: 250px; height: 200px;" class="line">
 				{-include file="main_causelist.tpl"-}
 			</select>
@@ -91,7 +91,7 @@
 										<option class="small" value="="  {-if $qd.$ff[0] == '='-}selected{-/if-}>{-#teffequal#-}</option>
 										<option class="small" value="-3" {-if $qd.$ff[0] == '-3'-}selected{-/if-}>{-#teffbetween#-}</option>
 									</select>
-									<span id="x{-$key-}" style="display:none"><br>
+									<span id="x{-$key-}" style="display:none"><br />
 										<input type="text" id="{-$key-}[1]" name="D_{-$key-}[1]" size="3" class="line"
 											value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[1]-}{-else-}1{-/if-}" />
 									</span>

@@ -45,11 +45,11 @@
 			<input type="text" id="EEFieldLabel" name="EEField[EEFieldLabel]" {-$ro-} class="line clsValidateField" style="width:500px;"
 				tabindex="1" onFocus="showtip('{-$dic.DBEEFieldLabel[2]-}')" />
 			<br /><br />
-			{-$dic.DBEEFieldDesc[0]-}<b style="color:darkred;">*</b><br>
+			{-$dic.DBEEFieldDesc[0]-}<b style="color:darkred;">*</b><br />
 			<textarea id="EEFieldDesc" name="EEField[EEFieldDesc]" {-$ro-} style="width:500px;" class="clsValidateField"
 				tabindex="2" onFocus="showtip('{-$dic.DBEEFieldDesc[2]-}')"></textarea>
 			<br /><br />
-			{-$dic.DBEEFieldType[0]-}<b style="color:darkred;">*</b><br>
+			{-$dic.DBEEFieldType[0]-}<b style="color:darkred;">*</b><br />
 			<select id="EEFieldType" name="EEField[EEFieldType]" {-$ro-} class="line clsValidateField" style="width:500px;"
 				tabindex="3" onFocus="showtip('{-$dic.DBEEFieldType[2]-}');">
 				<option value=""></option>

@@ -56,7 +56,7 @@
 			<br />
 			<table>
 				<tr>
-					<td><b>{-#savailfields#-}</b><br>
+					<td><b>{-#savailfields#-}</b><br />
 						<select id="_S+sel1[]" size="6" style="width:220px;" multiple class="line">
 							{-foreach name=ef1 key=k item=i from=$ef1-}
 								<option value="D.{-$k-}|S|-1">{-#tauxhave#-} {-$i[0]-}</option>
@@ -86,7 +86,7 @@
 						<br /><br /><br />
 						<input type="button" value="&larr;" onclick="moveOptions($('_S+Field[]'), $('_S+sel1[]'));" class="line" />
 					</td>
-					<td><b>{-#sviewfields#-}</b><br>
+					<td><b>{-#sviewfields#-}</b><br />
 						<select id="_S+Field[]" size="6" style="width:220px;" multiple class="line">
 							{-foreach name=ef1 key=k item=i from=$ef1-}
 								<option value="D.{-$k-}Q|>|-1">{-$i[0]-}</option>

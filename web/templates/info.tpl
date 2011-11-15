@@ -215,7 +215,7 @@
 				action="javascript: var s=$('logfrm').serialize(); sendData('{-$reg-}', '{-$desinventarURL-}/info.php', s, '');"
 				onSubmit="javascript: var a=new Array('DBLogType','DBLogNotes'); return(checkForm('logfrm',a, '{-#errmsgfrmlog#-}'));">
 				<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLogType[2]-}');">
-				{-$dic.DBLogType[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBLogType[1]-}</span></a><br>
+				{-$dic.DBLogType[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBLogType[1]-}</span></a><br />
 				<select id="DBLogType" name="DBLogType" {-$ro-} onFocus="showtip('{-$dic.DBLogType[2]-}');" class="line fixw" tabindex="1">
 					<option value=""></option>
 					<option value="CREDIT" onMouseOver="showtip('{-$dic.DBLogCredits[2]-}');">{-$dic.DBLogCredits[0]-}</option>
