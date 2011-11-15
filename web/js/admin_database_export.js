@@ -60,7 +60,7 @@ function doAdminDatabaseExportAction()
 	jQuery.post(jQuery('#desinventarURL').val(),
 		{
 			cmd      : 'cmdDatabaseExport',
-			RegionId : jQuery('#txtAdminDatabaseExport_RegionId').text()
+			RegionId : jQuery('#desinventarRegionId').val()
 		},
 		function(data)
 		{
@@ -86,6 +86,5 @@ function doAdminDatabaseExportAction()
 
 function doAdminDatabaseExportSetup(prmRegionId)
 {
-	console.log('DatabaseExportSetup : ' + prmRegionId);
 	jQuery('#txtAdminDatabaseExport_RegionId').text(prmRegionId);
 } //doAdminDatabaseExportSetup
