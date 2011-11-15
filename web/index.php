@@ -369,7 +369,7 @@ switch ($cmd)
 	case 'getGraphParameters':
 		$t->display('graphparameters.tpl');
 	break;
-	case 'cmdDatabaseExport':
+	case 'cmdAdminDatabaseExport':
 		$answer = array('Status'   => ERR_UNKNOWN_ERROR);
 		if ($desinventarUserRoleValue > ROLE_USER)
 		{

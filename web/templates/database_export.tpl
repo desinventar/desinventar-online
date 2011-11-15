@@ -1,17 +1,17 @@
-{-config_load file="$lg.conf" section="grpDatabaseExport"-}
+{-config_load file="$lg.conf" section="grpAdminDatabaseExport"-}
 <h4>
-	<span id="txtDatabaseExportRegionLabel"></span>
+	<span id="txtAdminDatabaseExportRegionLabel"></span>
 </h4>
 <br />
 <div id="divAdminDatabaseExportProgress" style="display:none;" class="clsAdminDatabaseExport">
-	{-#msgDatabaseExportWai#-} &nbsp;&nbsp; <img src="{-$desinventarURL-}/images/loading.gif" />
+	{-#msgAdminDatabaseExportWait#-} &nbsp;&nbsp; <img src="{-$desinventarURL-}/images/loading.gif" />
 </div>
 <div id="divAdminDatabaseExportResults" style="display:none;" class="clsAdminDatabaseExport">
-	<p>{-#msgDatabaseExportComplete#-}</p>
+	<p>{-#msgAdminDatabaseExportComplete#-}</p>
 	<div style="text-align:center">
 	</div>
 	<hr size="2" noshade />
 </div>
 <div id="divAdminDatabaseExportError" style="display:none;" class="clsAdminDatabaseExport">
-	{-#msgDatabaseExportError#-}<br />
+	{-#msgAdminDatabaseExportError#-}<br />
 </div>
