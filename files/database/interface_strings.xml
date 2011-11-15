@@ -2852,20 +2852,20 @@
 			<Text LangIsoCode="fre">Démonstration cartes de données</Text>
 		</Message>
 	</Group>
-	<Group name="grpDatabaseExport">
-		<Message id="msgDatabaseExportComplete">
+	<Group name="grpAdminDatabaseExport">
+		<Message id="msgAdminDatabaseExportComplete">
 			<Text LangIsoCode="eng">Backup has been created and can be downloaded now.</Text>
 			<Text LangIsoCode="spa">La copia ha sido realizada puede descargarla.</Text>
 			<Text LangIsoCode="por">Backup foi criado e pode ser baixado agora.</Text>
 			<Text LangIsoCode="fre">Backup a été crée et peut être téléchargé dès maintenant.</Text>
 		</Message>
-		<Message id="msgDatabaseExportWait">
+		<Message id="msgAdminDatabaseExportWait">
 			<Text LangIsoCode="eng">Please wait while the backup is performed.</Text>
 			<Text LangIsoCode="spa">Por favor espere mientras se realiza la copia de seguridad.</Text>
 			<Text LangIsoCode="por">Por favor aguarde enquanto o backup é realizado</Text>
 			<Text LangIsoCode="fre">S&quot;il vous plaît patienter pendant que la sauvegarde est effectuée</Text>
 		</Message>
-		<Message id="msgDatabaseExportError">
+		<Message id="msgAdminDatabaseExportError">
 			<Text LangIsoCode="eng">There was and error while creating the backup</Text>
 			<Text LangIsoCode="spa">Se ha producido un error al crear la copia de seguridad.</Text>
 			<Text LangIsoCode="por">Houve um error ao criar o backup</Text>
