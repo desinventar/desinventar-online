@@ -17,13 +17,6 @@
 	{-include file="region_list.tpl"-}
 </div>
 
-<div id="divDatabaseExportWin" class="x-hidden">
-	<div class="x-window-header">{-#mnuDatabaseExport#-}</div>
-	<div id="divDatabaseExportContent">
-		{-include file="database_export.tpl"-}
-	</div>
-</div>
-
 <div class="contentBlock" id="divDatabaseImport" style="display:none;">
 	{-include file="database_import.tpl"-}
 </div>

@@ -436,10 +436,13 @@ function doDialogsCreate()
 {
 	var w;
 	// Database Export
-	w = new Ext.Window({id:'wndDatabaseExport', applyTo: 'divDatabaseExportWin',
-		layout:'fit', width:600, height:400, closeAction:'hide', plain: true,
-		animCollapse: false, items: new Ext.Panel({
-		contentEl: 'divDatabaseExportContent', autoScroll: true }),
+	w = new Ext.Window({id:'wndDatabaseExport', 
+		el: 'divDatabaseExportWin', layout:'fit', 
+		x:100, y:100, width:600, height:400, 
+		closeAction:'hide', plain: true, animCollapse: false, 
+		items: new Ext.Panel({
+			contentEl: 'divDatabaseExportContent', autoScroll: true
+		}),
 		buttons: [
 			{
 				text: jQuery('#msgViewDataButtonSend').text(),
@@ -465,6 +468,7 @@ function doDialogsCreate()
 		closeAction:'hide', plain: true, animCollapse: false,
 		items: new Ext.Panel({ contentEl: 'usr', autoScroll: true })
 	});
+
 	// Database List - Database Search Window
 	dblw = new Ext.Window({id:'wndDatabaseList',
 		el:'dbl-win', layout:'fit', x:200, y:100, width:600, height:450, 
@@ -488,14 +492,10 @@ function doDialogsCreate()
 		showtip('');					
 	});
 
-	datw = new Ext.Window({id:'wndViewDataParams',
-		el:'dat-win',
-		layout:'fit',
-		width:600,
-		height:400, 
-		closeAction:'hide',
-		plain: true,
-		animCollapse: false,
+	datw = new Ext.Window({id:'wndViewDataParams', 
+		el:'dat-win', layout:'fit',
+		width:600, height:400, 
+		closeAction:'hide', plain: true, animCollapse: false,
 		items: new Ext.Panel({contentEl: 'dat-cfg', autoScroll: true }),
 		buttons: [
 			{text: jQuery('#msgViewDataButtonClear').text(),
