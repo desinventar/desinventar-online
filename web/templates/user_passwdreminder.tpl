@@ -1,6 +1,6 @@
 {-*** PASSWORD RECOVERY - CONTENT SECTION ***-}
 {-config_load file="$lg.conf" section="di8_user"-}
-<h2>{-#tgetemailpass#-}</h2><br>
+<h2>{-#tgetemailpass#-}</h2><br />
 <span id="plostaddsect">{-#tmsgpasslost#-}</span>
 <span id="ploststatusmsg" class="dlgmsg"></span>
 <br /><br />

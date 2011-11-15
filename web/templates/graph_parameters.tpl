@@ -10,13 +10,13 @@
 			<tr valign="top">
 				<td colspan=3 align="center">
 					<b>{-#gopttitle#-}</b><input type="text" name="prmGraph[Title]" class="line fixw" />
-					<!--<b>{-#goptsubtit#-}</b><br>-->
+					<!--<b>{-#goptsubtit#-}</b><br />-->
 				</td>
 			</tr>
 			<tr valign="top">
 				<td id="tdGraphParamAxis1" align="right">
-					<u>{-#gveraxis#-} 1:</u><br>
-					<b><span help_tip="{-$dic.GraphField[2]-}">{-$dic.GraphField[0]-}</span></b><br>
+					<u>{-#gveraxis#-} 1:</u><br />
+					<b><span help_tip="{-$dic.GraphField[2]-}">{-$dic.GraphField[0]-}</span></b><br />
 					<select id="prmGraphField0" name="prmGraph[Field][0]" help_tip="{-$dic.GraphField[2]-}" class="line">
 						<option value="D.DisasterId||" selected>{-$dic.GraphDisasterId_[0]-}</option>
 					{-foreach name=ef1 key=k item=i from=$ef1-}

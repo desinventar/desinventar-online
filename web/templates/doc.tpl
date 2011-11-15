@@ -3,9 +3,9 @@
 {-if $ctl_page == 'index'-}
  {-if $ctl_module == 'start'-}
 	<h2>Bienvenido a DesInventar</h2>
-	Acceso a usuarios: <br>
-	Buscar bases de datos: <br>
-	Documentaci&oacute;n<br>
+	Acceso a usuarios: <br />
+	Buscar bases de datos: <br />
+	Documentaci&oacute;n<br />
  {-elseif $ctl_module == 'metguide'-}
 	<h3>{-#ttitle#-}</h3>
 	<li><a href="?m=MetGuide&p=intro" target="Contentframe">{-#tintro#-}</a></li>
@@ -25,7 +25,7 @@
 	<ul>
 	 <li><a href="portal.htm" target="Contentframe">{-#thlppordemo#-}</li>
 	</ul>
-	<br>
+	<br />
 	<li><a href="?m=DI8Info&p=moddi" target="Contentframe">{-#thlpdimod#-}</li>
 	<ul>
 	 <li><a href="region.htm" target="Contentframe">{-#thlpdemreg#-}</li>
@@ -34,7 +34,7 @@
 	 <li><a href="causas.htm" target="Contentframe">{-#thlpdemcau#-}</li>
 	 <li><a href="fichas1.htm" target="Contentframe">{-#thlpdemdc#-}</li>
 	</ul>
-	<br>
+	<br />
 	<li><a href="?m=DI8Info&p=moddc" target="Contentframe">{-#thlpdcmod#-}</li>
  {-/if-}
 {-**** MAIN FRAME SECTION ****-}
@@ -56,17 +56,17 @@
 	<p align="justify">{-$pagefull-}</p>
 	<hr>
  {-foreach name=eff key=key item=item from=$eff-}
- <b>{-$item[0]-}</b><br>{-$item[2]-}<br><hr>
+ <b>{-$item[0]-}</b><br />{-$item[2]-}<br /><hr>
  {-/foreach-}
  {-foreach name=sec key=key item=item from=$sec-}
- <b>{-$item[0]-}</b><br>{-$item[2]-}<br><hr>
+ <b>{-$item[0]-}</b><br />{-$item[2]-}<br /><hr>
  {-/foreach-}
- <br>
+ <br />
  {-foreach name=eve key=key item=item from=$eve-}
- <b>{-$item[0]-}</b><br>{-$item[1]-}<br><hr>
+ <b>{-$item[0]-}</b><br />{-$item[1]-}<br /><hr>
  {-/foreach-}
- <br>
+ <br />
  {-foreach name=eve key=key item=item from=$cau-}
- <b>{-$item[0]-}</b><br>{-$item[1]-}<br><hr>
+ <b>{-$item[0]-}</b><br />{-$item[1]-}<br /><hr>
  {-/foreach-}
 {-/if-}
