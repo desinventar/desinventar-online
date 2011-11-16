@@ -3,17 +3,13 @@
 	<span id="txtAdminDatabaseExportRegionLabel"></span>
 </h4>
 <br />
-<input type="button" id="divAdminDatabaseExportStart" value="Start" />
+<span id="divAdminDatabaseExportProgress" class="clsAdminDatabaseExport" style="display:none;">
+	{-#msgAdminDatabaseExportWait#-} &nbsp;&nbsp; <img src="{-$desinventarURL-}/images/loading.gif" alt="" />
+</span>
+<span id="divAdminDatabaseExportResults" class="clsAdminDatabaseExport" style="display:none;">
+	{-#msgAdminDatabaseExportComplete#-}
+</span>
+<span id="divAdminDatabaseExportError" class="clsAdminDatabaseExport" style="display:none;">
+	{-#msgAdminDatabaseExportError#-}
+</span>
 <br />
-<div id="divAdminDatabaseExportProgress" style="display:none;" class="clsAdminDatabaseExport">
-	{-#msgAdminDatabaseExportWait#-} &nbsp;&nbsp; <img src="{-$desinventarURL-}/images/loading.gif" />
-</div>
-<div id="divAdminDatabaseExportResults" style="display:none;" class="clsAdminDatabaseExport">
-	<p>{-#msgAdminDatabaseExportComplete#-}</p>
-	<div style="text-align:center">
-	</div>
-	<hr size="2" noshade />
-</div>
-<div id="divAdminDatabaseExportError" style="display:none;" class="clsAdminDatabaseExport">
-	{-#msgAdminDatabaseExportError#-}<br />
-</div>
