@@ -7,6 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/datacards.css?version={-$jsversion-}" />
 		<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/main.css?version={-$jsversion-}" />
 		{-include file="jquery.tpl"-}
+		{-include file="extjs.tpl"-}
 		<script type="text/javascript" src="{-$desinventarURL-}/js/jquery.snippets.js?version={-$jsversion-}"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/js/admin_database.js?version={-$jsversion-}"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/js/admin_database_edit.js?version={-$jsversion-}"></script>
@@ -17,7 +18,7 @@
 				onReadyAdminDatabase();
 				//doAdminDatabaseUpdateList();
 				jQuery('#btnDatabaseExport').click(function() {
-					doAdminDatabaseExportAction();
+					//doAdminDatabaseExportAction();
 				});
 			});
 		</script>
