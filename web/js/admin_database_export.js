@@ -22,47 +22,56 @@ function doAdminDatabaseExportCreate()
 			autoScroll: true
 		}),
 		buttons: [
-			{
+			/*{
 				id: 'btnAdminDatabaseExportSend',
 				text: jQuery('#msgAdminDatabaseExportButtonSend').text(),
 				handler: function()
 				{
-					jQuery('.clsAdminDatabaseExport').hide();
-					jQuery('#divAdminDatabaseExportProgress').show();
-					Ext.get('divDatabaseExportContent').repaint();
-					jQuery.post(jQuery('#desinventarURL').val(),
-						{
-							cmd      : 'cmdAdminDatabaseExport',
-							RegionId : jQuery('#desinventarRegionId').val()
-						},
-						function(data)
-						{
-							jQuery('.clsAdminDatabaseExport').hide();
-							if (parseInt(data.Status) > 0)
-							{
-								jQuery('#divAdminDatabaseExportResults').show();
-								// Hide Ext.Window
-								Ext.getCmp('wndDatabaseExport').hide();
-
-								// Open the backup file for download
-								//window.location = data.URL;
-							}
-							else
-							{
-								jQuery('#divAdminDatabaseExportError').show();
-							}
-						},
-						'json'
-					);
+					doAdminDatabaseExportAction();
 				} //handler
-			},
+			},*/
 			{
 				text: jQuery('#msgAdminDatabaseExportButtonClose').text(),
 				handler: function()
 				{
+					jQuery('#fldAdminDatabaseExportSave').val(0);
 					Ext.getCmp('wndDatabaseExport').hide();
 				} //handler
 			}
 		] //button
 	});
+	jQuery('#fldAdminDatabaseExportSave').val(1);
 } // doAdminDatabaseExportCreate()
+
+function doAdminDatabaseExportAction()
+{
+	jQuery('.clsAdminDatabaseExport').hide();
+	jQuery('#divAdminDatabaseExportProgress').show();
+	jQuery('#fldAdminDatabaseExportSave').val(1);
+	jQuery.post(jQuery('#desinventarURL').val(),
+		{
+			cmd      : 'cmdAdminDatabaseExport',
+			RegionId : jQuery('#desinventarRegionId').val()
+		},
+		function(data)
+		{
+			jQuery('.clsAdminDatabaseExport').hide();
+			if (parseInt(data.Status) > 0)
+			{
+				jQuery('#divAdminDatabaseExportResults').show();
+				// Hide Ext.Window
+				Ext.getCmp('wndDatabaseExport').hide();
+				if (parseInt(jQuery('#fldAdminDatabaseExportSave').val()) > 0)
+				{
+					// Open the backup file for download
+					window.location = data.URL;
+				}
+			}
+			else
+			{
+				jQuery('#divAdminDatabaseExportError').show();
+			}
+		},
+		'json'
+	);
+}

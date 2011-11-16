@@ -234,6 +234,7 @@ function onMenuItem(item) {
 			updateList('divDatacardsImport', jQuery('#desinventarURL').val() + '/import.php', 'r=' + RegionId);
 		break;
 		case 'mnuDatabaseExport':
+			jQuery('.clsAdminDatabaseExport').hide();
 			Ext.getCmp('wndDatabaseExport').show();
 		break;
 		case 'mnuDatabaseImport':
