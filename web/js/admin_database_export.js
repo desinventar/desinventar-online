@@ -35,6 +35,7 @@ function doAdminDatabaseExportCreate()
 				handler: function()
 				{
 					jQuery('#fldAdminDatabaseExportSave').val(0);
+					jQuery('#imgAdminDatabaseExportWait').attr('src','');
 					Ext.getCmp('wndDatabaseExport').hide();
 				} //handler
 			}
@@ -46,7 +47,13 @@ function doAdminDatabaseExportCreate()
 function doAdminDatabaseExportAction()
 {
 	jQuery('.clsAdminDatabaseExport').hide();
+	Ext.getCmp('wndDatabaseExport').show();
+	jQuery('.clsAdminDatabaseExport').hide();
 	jQuery('#divAdminDatabaseExportProgress').show();
+	
+	jQuery('#imgAdminDatabaseExportWait').attr('src', jQuery('#fldAdminDatabaseExportImage').val());
+	jQuery('#imgAdminDatabaseExportWait').show();
+	
 	jQuery('#fldAdminDatabaseExportSave').val(1);
 	jQuery.post(jQuery('#desinventarURL').val(),
 		{
@@ -59,6 +66,7 @@ function doAdminDatabaseExportAction()
 			if (parseInt(data.Status) > 0)
 			{
 				jQuery('#divAdminDatabaseExportResults').show();
+				jQuery('#imgAdminDatabaseExportWait').attr('src','').hide();
 				// Hide Ext.Window
 				Ext.getCmp('wndDatabaseExport').hide();
 				if (parseInt(jQuery('#fldAdminDatabaseExportSave').val()) > 0)
