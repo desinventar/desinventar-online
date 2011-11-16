@@ -17,7 +17,6 @@
 				onReadyAdminDatabase();
 				//doAdminDatabaseUpdateList();
 				jQuery('#btnDatabaseExport').click(function() {
-					doAdminDatabaseExportSetup(jQuery('#desinventarRegionId').val());
 					doAdminDatabaseExportAction();
 				});
 			});

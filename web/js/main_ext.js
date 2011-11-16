@@ -234,9 +234,7 @@ function onMenuItem(item) {
 			updateList('divDatacardsImport', jQuery('#desinventarURL').val() + '/import.php', 'r=' + RegionId);
 		break;
 		case 'mnuDatabaseExport':
-			doAdminDatabaseExportSetup(jQuery('#desinventarRegionId').val());
 			Ext.getCmp('wndDatabaseExport').show();
-			//jQuery('#btnAdminDatabaseExportSend').trigger('click');
 		break;
 		case 'mnuDatabaseImport':
 			hideQueryDesign();
@@ -430,36 +428,36 @@ function doDialogsCreate()
 {
 	var w;
 	// User Login Window
-	usrw = new Ext.Window({id:'wndUserLogin',
+	w = new Ext.Window({id:'wndUserLogin',
 		el:'usr-win', layout:'fit', x:300, y:100, width:500, height:300, 
 		closeAction:'hide', plain: true, animCollapse: false,
 		items: new Ext.Panel({ contentEl: 'usr', autoScroll: true })
 	});
 
 	// Database List - Database Search Window
-	dblw = new Ext.Window({id:'wndDatabaseList',
+	w = new Ext.Window({id:'wndDatabaseList',
 		el:'dbl-win', layout:'fit', x:200, y:100, width:600, height:450, 
 		closeAction:'hide', plain: true, animCollapse: false,
 		items: new Ext.Panel({ contentEl: 'dbl', autoScroll: true })
 	});
-	dlgw = new Ext.Window({id:'wndDialog',
+	w = new Ext.Window({id:'wndDialog',
 		el:'dlg-win', layout:'fit', x:350, y:200, width:300, height:150, 
 		closeAction:'hide', plain: true, animCollapse: false,
 		items: new Ext.Panel({ contentEl: 'dlg', autoScroll: true })
 	});
 	// Datacard View/Edit Window
-	difw = new Ext.Window({id:'wndDatacard',
+	w = new Ext.Window({id:'wndDatacard',
 		el:'divDatacardWindow', layout:'fit', 
 		x: 65, y: 0, width:960, height:638, 
 		closeAction:'hide', plain: true, animCollapse: false,
 		items: new Ext.Panel({ contentEl: 'dif-cfg', autoScroll: true })
 	});
-	difw.on('hide',function() {
+	w.on('hide',function() {
 		jQuery('#divDatacardWindow').hide();
 		showtip('');					
 	});
 
-	datw = new Ext.Window({id:'wndViewDataParams', 
+	w = new Ext.Window({id:'wndViewDataParams', 
 		el:'dat-win', layout:'fit',
 		width:600, height:400, 
 		closeAction:'hide', plain: true, animCollapse: false,
@@ -490,7 +488,7 @@ function doDialogsCreate()
 		] //button
 	});
 
-	mapw = new Ext.Window({id:'wndViewMapParams',
+	w = new Ext.Window({id:'wndViewMapParams',
 		el:'map-win',  layout:'fit',  width:650, height:400, 
 		closeAction:'hide', plain: true, animCollapse: false,
 		items: new Ext.Panel({contentEl: 'map-cfg', autoScroll: true }),
@@ -520,7 +518,7 @@ function doDialogsCreate()
 		]
 	});
 
-	grpw = new Ext.Window({id:'wndViewGraphParams',
+	w = new Ext.Window({id:'wndViewGraphParams',
 		el:'divGraphParameters',  layout:'fit',  width:750, height:420, 
 		closeAction:'hide', plain: true, animCollapse: false,
 		items: new Ext.Panel({contentEl: 'grp-cfg', autoScroll: true }),
@@ -547,7 +545,7 @@ function doDialogsCreate()
 		]
 	});
 
-	stdw = new Ext.Window({id:'wndViewStdParams',
+	w = new Ext.Window({id:'wndViewStdParams',
 		el:'std-win',  layout:'fit',  width:600, height:400, 
 		closeAction:'hide', plain: true, animCollapse: false,
 		items: new Ext.Panel({contentEl: 'std-cfg', autoScroll: true }),
@@ -581,9 +579,10 @@ function doDialogsCreate()
 	w = new Ext.Window({id:'wndDatabaseExport', 
 		el: 'divDatabaseExportWin', layout:'fit', 
 		width:400, height:200, modal:false,
-		closeAction:'hide', plain: true, animCollapse: false, 
+		closeAction:'hide', plain: false, animCollapse: false,
 		items: new Ext.Panel({
-			contentEl: 'divDatabaseExportContent', autoScroll: true
+			contentEl: 'divDatabaseExportContent',
+			autoScroll: true
 		}),
 		buttons: [
 			{
@@ -593,6 +592,7 @@ function doDialogsCreate()
 				{
 					jQuery('.clsAdminDatabaseExport').hide();
 					jQuery('#divAdminDatabaseExportProgress').show();
+					Ext.get('divDatabaseExportContent').repaint();
 					console.log('Show Progress...');
 					jQuery.post(jQuery('#desinventarURL').val(),
 						{
