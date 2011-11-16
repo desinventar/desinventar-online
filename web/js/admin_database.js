@@ -34,12 +34,6 @@ function onReadyAdminDatabase()
 		jQuery('#divAdminDatabaseEdit').show();
 	});
 
-	jQuery('#btnAdminDatabaseExport').click(function() {
-		doAdminDatabaseExportSetup(jQuery('#divAdminDatabaseUpdate .RegionId').text());
-		jQuery('.clsAdminDatabase').hide();
-		jQuery('#divAdminDatabaseExport').show();
-	});
-
 	jQuery('#btnAdminDatabaseImport').click(function() {
 		jQuery('.clsAdminDatabase').hide();
 		jQuery('#divAdminDatabaseImport').show();
