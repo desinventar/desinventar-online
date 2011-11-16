@@ -236,6 +236,7 @@ function onMenuItem(item) {
 		case 'mnuDatabaseExport':
 			jQuery('.clsAdminDatabaseExport').hide();
 			Ext.getCmp('wndDatabaseExport').show();
+			doAdminDatabaseExportAction();
 		break;
 		case 'mnuDatabaseImport':
 			hideQueryDesign();

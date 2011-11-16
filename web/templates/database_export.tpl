@@ -10,8 +10,8 @@
 		<br />
 		<span id="divAdminDatabaseExportProgress" class="clsAdminDatabaseExport" style="display:none;">
 			{-#msgAdminDatabaseExportWait#-} &nbsp;&nbsp;<br />
-			<img src="{-$desinventarURL-}/images/loading.gif" alt="" />
 		</span>
+		<img id="imgAdminDatabaseExportWait" alt="" src="" style="display:none;" />
 		<span id="divAdminDatabaseExportResults" class="clsAdminDatabaseExport" style="display:none;">
 			{-#msgAdminDatabaseExportComplete#-}
 		</span>
@@ -24,5 +24,6 @@
 <div style="display:none;">
 	<span id="msgAdminDatabaseExportButtonSend">{-#msgAdminDatabaseExportButtonSend#-}</span>
 	<span id="msgAdminDatabaseExportButtonClose">{-#msgAdminDatabaseExportButtonClose#-}</span>
-	<input type="hidden" id="fldAdminDatabaseExportSave" value="1" />
+	<input type="hidden" id="fldAdminDatabaseExportSave"  value="1" />
+	<input type="hidden" id="fldAdminDatabaseExportImage" value="{-$desinventarURL-}images/loading.gif" />
 </div>
