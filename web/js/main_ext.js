@@ -580,7 +580,7 @@ function doDialogsCreate()
 	// Database Export
 	w = new Ext.Window({id:'wndDatabaseExport', 
 		el: 'divDatabaseExportWin', layout:'fit', 
-		width:400, height:200, modal: true,
+		width:400, height:200, modal:false,
 		closeAction:'hide', plain: true, animCollapse: false, 
 		items: new Ext.Panel({
 			contentEl: 'divDatabaseExportContent', autoScroll: true
@@ -591,9 +591,9 @@ function doDialogsCreate()
 				text: jQuery('#msgViewDataButtonSend').text(),
 				handler: function()
 				{
-					Ext.get('divAdminDatabaseExportProgress').show();
-					//jQuery('.clsAdminDatabaseExport').hide();
-					//jQuery('#divAdminDatabaseExportProgress').show();
+					jQuery('.clsAdminDatabaseExport').hide();
+					jQuery('#divAdminDatabaseExportProgress').show();
+					console.log('Show Progress...');
 					jQuery.post(jQuery('#desinventarURL').val(),
 						{
 							cmd      : 'cmdAdminDatabaseExport',
@@ -602,6 +602,7 @@ function doDialogsCreate()
 						function(data)
 						{
 							jQuery('.clsAdminDatabaseExport').hide();
+							console.log('Show results...');
 							if (parseInt(data.Status) > 0)
 							{
 								jQuery('#divAdminDatabaseExportResults').show();
@@ -609,7 +610,7 @@ function doDialogsCreate()
 								Ext.getCmp('wndDatabaseExport').hide();
 
 								// Open the backup file for download
-								window.location = data.URL;
+								//window.location = data.URL;
 							}
 							else
 							{
