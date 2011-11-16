@@ -17,8 +17,10 @@
 			jQuery(document).ready(function() {
 				onReadyAdminDatabase();
 				//doAdminDatabaseUpdateList();
+				//doAdminDatabaseExportCreate();
 				jQuery('#btnDatabaseExport').click(function() {
-					//doAdminDatabaseExportAction();
+					jQuery('.clsAdminDatabaseExport').hide();
+					Ext.getCmp('wndDatabaseExport').show();
 				});
 			});
 		</script>
@@ -26,8 +28,9 @@
 	<body>
 		DesInventar Database Admin
 		Version : {-$jsversion-}<br />
-		{-*include file="region.tpl"*-}
+		Language : {-$lg-}<br />
 		{-include file="database_export.tpl"-}
+		{-include file="desinventarmenu.tpl"-}
 		{-include file="desinventarinfo.tpl"-}
 		<br />
 		<input type="button" id="btnDatabaseExport" value="Export" />

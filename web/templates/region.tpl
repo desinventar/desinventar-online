@@ -63,13 +63,10 @@
 	<a id="btnAdminDatabaseSelect" title="Select a new database from list">[Select another database]</a>
 
 	<div id="divAdminDatabaseEdit" class="clsAdminDatabase dwin" style="display:none">
-		{-include file="database_edit.tpl"-}
 	</div>
 	<div id="divAdminDatabaseExport" class="clsAdminDatabase" style="display:none;">
-		{-include file="database_export.tpl"-}
 	</div>
 	<div id="divAdminDatabaseImport" class="clsAdminDatabase" style="display:none;">
-		{-include file="database_import.tpl"-}
 	</div>
 </div>
 

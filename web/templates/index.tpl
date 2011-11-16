@@ -62,8 +62,8 @@
 	{-include file="extjs.tpl"-}
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
-			onReadyMain();
 			onReadyExtJS();
+			onReadyMain();
 		});
 	</script>
 </head>
