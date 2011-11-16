@@ -9,7 +9,8 @@
 		</h4>
 		<br />
 		<span id="divAdminDatabaseExportProgress" class="clsAdminDatabaseExport" style="display:none;">
-			{-#msgAdminDatabaseExportWait#-} &nbsp;&nbsp; <img src="{-$desinventarURL-}/images/loading.gif" alt="" />
+			{-#msgAdminDatabaseExportWait#-} &nbsp;&nbsp;<br />
+			<img src="{-$desinventarURL-}/images/loading.gif" alt="" />
 		</span>
 		<span id="divAdminDatabaseExportResults" class="clsAdminDatabaseExport" style="display:none;">
 			{-#msgAdminDatabaseExportComplete#-}
@@ -23,4 +24,5 @@
 <div style="display:none;">
 	<span id="msgAdminDatabaseExportButtonSend">{-#msgAdminDatabaseExportButtonSend#-}</span>
 	<span id="msgAdminDatabaseExportButtonClose">{-#msgAdminDatabaseExportButtonClose#-}</span>
+	<input type="hidden" id="fldAdminDatabaseExportSave" value="1" />
 </div>

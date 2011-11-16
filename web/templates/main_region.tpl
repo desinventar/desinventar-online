@@ -21,6 +21,7 @@
 				jQuery('#btnDatabaseExport').click(function() {
 					jQuery('.clsAdminDatabaseExport').hide();
 					Ext.getCmp('wndDatabaseExport').show();
+					doAdminDatabaseExportAction();
 				});
 			});
 		</script>

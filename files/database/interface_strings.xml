@@ -2860,16 +2860,16 @@
 			<Text LangIsoCode="fre">Télécharger base de données</Text>
 		</Message>
 		<Message id="msgAdminDatabaseExportComplete">
-			<Text LangIsoCode="eng">Backup has been created and can be downloaded now.</Text>
-			<Text LangIsoCode="spa">La copia ha sido realizada puede descargarla.</Text>
+			<Text LangIsoCode="eng">File has been created and can be downloaded now.</Text>
+			<Text LangIsoCode="spa">El archivo está creado y listo para descargar.</Text>
 			<Text LangIsoCode="por">Backup foi criado e pode ser baixado agora.</Text>
 			<Text LangIsoCode="fre">Backup a été crée et peut être téléchargé dès maintenant.</Text>
 		</Message>
 		<Message id="msgAdminDatabaseExportWait">
-			<Text LangIsoCode="eng">Please wait while the backup is performed.</Text>
-			<Text LangIsoCode="spa">Por favor espere mientras se realiza la copia de seguridad.</Text>
-			<Text LangIsoCode="por">Por favor aguarde enquanto o backup é realizado</Text>
-			<Text LangIsoCode="fre">S&quot;il vous plaît patienter pendant que la sauvegarde est effectuée</Text>
+			<Text LangIsoCode="eng">Please wait while the file is created. This can take several minutes depending of your internet connection and the database size.</Text>
+			<Text LangIsoCode="spa">Espere mientras el archivo es creado, esto puede tomar varios minutos dependiento de su conexión a internet y el tamaño del archivo.</Text>
+			<Text LangIsoCode="por">Por favor aguarde enquanto o arquivo é criado. Isto pode levar alguns minutos dependendo da sua conexão de internet eo tamanho do banco de dados.</Text>
+			<Text LangIsoCode="fre">S'il vous plaît patienter pendant que le fichier est créé. Cela peut prendre plusieurs minutes selon votre connexion internet et la taille de la base.</Text>
 		</Message>
 		<Message id="msgAdminDatabaseExportError">
 			<Text LangIsoCode="eng">There was and error while creating the backup</Text>
