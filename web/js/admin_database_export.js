@@ -82,4 +82,4 @@ function doAdminDatabaseExportAction()
 		},
 		'json'
 	);
-}
+} // doAdminDatabaseExportAction

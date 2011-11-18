@@ -23,9 +23,8 @@
 	<script type="text/javascript" src="{-$desinventarURL-}/external/combo-box.js"></script>
 
 	<script type="text/javascript" src="{-$desinventarURL-}/external/checktree/checktree.js"></script>
-	<script type="text/javascript" src="{-$desinventarURL-}/external/swfupload/swfupload.js"></script>
-	<script type="text/javascript" src="{-$desinventarURL-}/external/jquery.swfupload.js"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/external/Math.uuid.js"></script>
+	{-include file="swfupload.tpl"-}
 
 	<script type="text/javascript" src="{-$desinventarURL-}/js/datacards.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/js/extraeffects.js?version={-$jsversion-}"></script>

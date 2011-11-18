@@ -8,21 +8,23 @@
 		<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/main.css?version={-$jsversion-}" />
 		{-include file="jquery.tpl"-}
 		{-include file="extjs.tpl"-}
+		{-include file="swfupload.tpl"-}
 		<script type="text/javascript" src="{-$desinventarURL-}/js/jquery.snippets.js?version={-$jsversion-}"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/js/admin_database.js?version={-$jsversion-}"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/js/admin_database_edit.js?version={-$jsversion-}"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/js/admin_database_export.js?version={-$jsversion-}"></script>
-		<script type="text/javascript" src="{-$desinventarURL-}/js/admin_database_import.js?version={-$jsversion-}"></script>
+		<script type="text/javascript" src="{-$desinventarURL-}/js/admin_database_upload.js?version={-$jsversion-}"></script>
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
 				onReadyAdminDatabase();
 				//doAdminDatabaseUpdateList();
 				//doAdminDatabaseExportCreate();
 				jQuery('#btnDatabaseExport').click(function() {
-					jQuery('.clsAdminDatabaseExport').hide();
-					Ext.getCmp('wndDatabaseExport').show();
-					doAdminDatabaseExportAction();
+					jQuery('.clsAdminDatabaseUpload').hide();
+					Ext.getCmp('wndDatabaseUpload').show();
+					doAdminDatabaseUploadAction();
 				});
+				jQuery('#btnDatabaseExport').trigger('click');
 			});
 		</script>
 	</head>
@@ -30,7 +32,7 @@
 		DesInventar Database Admin
 		Version : {-$jsversion-}<br />
 		Language : {-$lg-}<br />
-		{-include file="database_export.tpl"-}
+		{-include file="database_upload_ext.tpl"-}
 		{-include file="desinventarmenu.tpl"-}
 		{-include file="desinventarinfo.tpl"-}
 		<br />
