@@ -9,6 +9,7 @@ function onReadyAdminDatabaseUpload()
 	jQuery('#divAdminDatabaseUploadParameters').hide();
 	doAdminDatabaseUploadStatusMsg('');
 
+	/*
 	// Create a SWFUpload instance and attach events...
 	jQuery('#divAdminDatabaseUploadControl').swfupload({
 		upload_url: jQuery('#desinventarURL').val(), //?cmd=fileupload', //'&t=' + new Date().getTime(),
@@ -76,6 +77,7 @@ function onReadyAdminDatabaseUpload()
 		// upload has completed, lets try the next one in the queue
 		jQuery(this).swfupload('startUpload');
 	});
+	*/
 	doAdminDatabaseUploadCreate();
 } //onReadyAdminDatabaseUpload
 

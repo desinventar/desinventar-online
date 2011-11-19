@@ -17,7 +17,7 @@
 	{-include file="region_list.tpl"-}
 </div>
 
-{-*include file="database_upload_ext.tpl"*-}
+{-include file="database_upload_ext.tpl"-}
 
 <!-- Import datacards-->
 <div class="contentBlock" id="divDatacardsImport" style="display:none;">
