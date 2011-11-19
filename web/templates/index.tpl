@@ -24,7 +24,6 @@
 
 	<script type="text/javascript" src="{-$desinventarURL-}/external/checktree/checktree.js"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/external/Math.uuid.js"></script>
-	{-include file="swfupload.tpl"-}
 
 	<script type="text/javascript" src="{-$desinventarURL-}/js/datacards.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/js/extraeffects.js?version={-$jsversion-}"></script>
@@ -49,6 +48,7 @@
 	<script type="text/javascript" src="{-$desinventarURL-}/js/main.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/js/main_ext.js?version={-$jsversion-}"></script>
 
+	<script type="text/javascript" src="/fileuploader/fileuploader.js"></script>
 	<script type="text/javascript" src="http://api.maps.yahoo.com/ajaxymap?v=3.0&amp;appid=euzuro-openlayers"></script>
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
