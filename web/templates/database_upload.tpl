@@ -11,8 +11,7 @@
 			{-#msgAdminDatabaseUploadFilename#-} :
 		</td>
 		<td colspan="2" valign="top">
-			<input type="text"   id="txtAdminDatabaseUploadFileName" value="" size="50"/>
-			<input id="btnAdminDatabaseUploadSelectFile" type="button" />
+			<input type="text"   id="txtAdminDatabaseUploadFilename" value="" size="50"/>
 		</td>
 	</tr>
 	<tr>
@@ -24,6 +23,7 @@
 				<div id="prgAdminDatabaseUploadProgressMark" style="width:0px;height:6px;background-color:#0000ff">
 				</div>
 			</div>
+			<span id="prgAdminDatabaseUploadPercent"></span>
 		</td>
 		<td>
 			<input type="button" id="btnAdminDatabaseUploadCancelUpload" class="bb2" value="{-#msgAdminDatabaseUploadCancel#-}" />
@@ -32,7 +32,7 @@
 	</table>
 </div>
 
-<div id="divFileUploaderControl" style="display:block;">
+<div id="divFileUploaderControl" style="display:none;">
 </div>
 
 <div id="divAdminDatabaseUploadStatusMsg">
@@ -42,6 +42,7 @@
 	<span class="clsAdminDatabaseUploadStatusMsg" id="msgAdminDatabaseUploadDBUpdated">{-#msgAdminDatabaseUploadDBUpdated#-}</span>
 	<span class="clsAdminDatabaseUploadStatusMsg" id="msgAdminDatabaseUploadUpdateError">{-#msgAdminDatabaseUploadUpdateError#-}</span>
 </div>
+
 <div id="divAdminDatabaseUploadParameters" style="display:none;">
 	<form id="frmAdminDatabaseUpload">
 		<input type="hidden" id="RegionId_Prev" value="" />

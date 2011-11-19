@@ -90,12 +90,15 @@ function doAdminDatabaseCreateUploader()
 		debug: true,
 		onSubmit: function(id, fileName)
 		{
-			console.log('upload start : ' + fileName);
+			jQuery('#txtAdminDatabaseUploadFilename').val(fileName);
 		},
 		onProgress: function(id, fileName, loaded, total)
 		{
-			console.log(loaded + '/' + total);
-			jQuery('#txtUploadProgress').text(loaded + '/' + total);
+			var maxWidth = jQuery('#prgAdminDatabaseUploadProgressBar').width();
+			var percent  = parseInt(loaded/total * 100);
+			var width    = parseInt(percent * maxWidth/100);
+			jQuery('#prgAdminDatabaseUploadProgressMark').css('width', width);
+			jQuery('#prgAdminDatabaseUploadPercent').text(percent + '%');
 		},
 		onComplete: function(id, fileName, responseJSON)
 		{
