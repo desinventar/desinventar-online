@@ -31,6 +31,10 @@
 	</tr>
 	</table>
 </div>
+
+<div id="divFileUploaderControl" style="display:block;">
+</div>
+
 <div id="divAdminDatabaseUploadStatusMsg">
 	<span class="clsAdminDatabaseUploadStatusMsg" id="msgAdminDatabaseUploadUploadOk">{-#msgAdminDatabaseUploadUploadOk#-}</span>
 	<span class="clsAdminDatabaseUploadStatusMsg" id="msgAdminDatabaseUploadUploadError">{-#msgAdminDatabaseUploadUploadError#-}</span>

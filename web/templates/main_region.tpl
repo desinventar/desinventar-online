@@ -8,7 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/main.css?version={-$jsversion-}" />
 		{-include file="jquery.tpl"-}
 		{-include file="extjs.tpl"-}
-		{-include file="swfupload.tpl"-}
+		<script type="text/javascript" src="/fileuploader/fileuploader.js"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/js/jquery.snippets.js?version={-$jsversion-}"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/js/admin_database.js?version={-$jsversion-}"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/js/admin_database_edit.js?version={-$jsversion-}"></script>

@@ -79,7 +79,36 @@ function onReadyAdminDatabaseUpload()
 	});
 	*/
 	doAdminDatabaseUploadCreate();
+	doAdminDatabaseCreateUploader();
 } //onReadyAdminDatabaseUpload
+
+function doAdminDatabaseCreateUploader()
+{
+	var uploader = new qq.FileUploader({
+		element: document.getElementById('divFileUploaderControl'),
+		action: 'upload.php',
+		debug: true,
+		onSubmit: function(id, fileName)
+		{
+			console.log('upload start : ' + fileName);
+		},
+		onProgress: function(id, fileName, loaded, total)
+		{
+			console.log(loaded + '/' + total);
+			jQuery('#txtUploadProgress').text(loaded + '/' + total);
+		},
+		onComplete: function(id, fileName, responseJSON)
+		{
+			console.log('upload complete : ' + fileName);
+		},
+		onCancel: function(id, fileName){},
+	});
+}
+
+function doAdminDatabaseUploadSelectFile()
+{
+	jQuery('#divFileUploaderControl input').trigger('click');
+}
 
 function doAdminDatabaseUploadStatusMsg(Id) {
 	jQuery('.clsAdminDatabaseUploadStatusMsg').hide();
@@ -104,8 +133,7 @@ function doAdminDatabaseUploadCreate()
 				text: 'Select File',
 				handler: function() 
 				{
-					jQuery('#divAdminDatabaseUploadControl').swfupload('selectFiles');
-					console.log('Select files ');
+					doAdminDatabaseUploadSelectFile();
 				}
 			},
 			{
