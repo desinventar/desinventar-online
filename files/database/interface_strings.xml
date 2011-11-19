@@ -301,11 +301,11 @@
 			<Text LangIsoCode="por">Permissões administrativas</Text>
 			<Text LangIsoCode="fre">Autorisations administratives</Text>
 		</Message>
-		<Message id="mnuDatabaseImport">
-			<Text LangIsoCode="eng">Import databases</Text>
-			<Text LangIsoCode="spa">Importar Bases de Datos</Text>
-			<Text LangIsoCode="por">Importação de banco de dados</Text>
-			<Text LangIsoCode="fre">Importation base de données</Text>
+		<Message id="mnuDatabaseUpload">
+			<Text LangIsoCode="eng">Upload database</Text>
+			<Text LangIsoCode="spa">Cargar base de datos</Text>
+			<Text LangIsoCode="por">Carregar banco de dados</Text>
+			<Text LangIsoCode="fre">Charger base de données</Text>
 		</Message>
 		<Message id="tyourrol">
 			<Text LangIsoCode="eng">Your roles and databases are:</Text>

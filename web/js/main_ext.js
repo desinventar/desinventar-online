@@ -238,10 +238,10 @@ function onMenuItem(item) {
 			Ext.getCmp('wndDatabaseExport').show();
 			doAdminDatabaseExportAction();
 		break;
-		case 'mnuDatabaseImport':
-			hideQueryDesign();
-			jQuery('.contentBlock').hide();
-			jQuery('#divDatabaseImport').show();
+		case 'mnuDatabaseUpload':
+			jQuery('.clsAdminDatabaseUpload').hide();
+			Ext.getCmp('wndDatabaseUpload').show();
+			doAdminDatabaseUploadAction();
 		break;
 		case 'mnuDatabaseConfig':
 			hideQueryDesign();
@@ -340,7 +340,7 @@ function doMainMenuCreate()
 			{id:'mnuDatacardInsertEdit', text: jQuery('#mnuDatacardInsertEdit').text(), handler: onMenuItem, hidden: true },
 			{id:'mnuDatacardImport'    , text: jQuery('#mnuDatacardImport').text()    , handler: onMenuItem, hidden: true },
 			{id:'mnuDatabaseExport'    , text: jQuery('#mnuDatabaseExport').text()    , handler: onMenuItem, hidden: true },
-			{id:'mnuDatabaseImport'    , text: jQuery('#mnuDatabaseImport').text()    , handler: onMenuItem, hidden: true },
+			{id:'mnuDatabaseUpload'    , text: jQuery('#mnuDatabaseUpload').text()    , handler: onMenuItem, hidden: true },
 			{id:'mnuDatabaseConfig'    , text: jQuery('#mnuDatabaseConfig').text()    , handler: onMenuItem, hidden: true }
 		]
 	});
@@ -418,7 +418,7 @@ function doMainMenuCreate()
 			Ext.getCmp('mnuDatabaseExport').show();
 			if (UserRoleValue >= 4)
 			{
-				Ext.getCmp('mnuDatabaseImport').show();
+				Ext.getCmp('mnuDatabaseUpload').show();
 				Ext.getCmp('mnuDatabaseConfig').show();
 			}
 		}

@@ -19,7 +19,7 @@
 		<span id="mnuDatacardInsertEdit">{-#mnuDatacardInsertEdit#-}</span>
 		<span id="mnuDatacardImport">{-#mnuDatacardImport#-}</span>
 		<span id="mnuDatabaseExport">{-#mnuDatabaseExport#-}</span>
-		<span id="mnuDatabaseImport">{-#mnuDatabaseImport#-}</span>
+		<span id="mnuDatabaseUpload">{-#mnuDatabaseUpload#-}</span>
 		<span id="mnuDatabaseConfig">{-#mnuDatabaseConfig#-}</span>
 	<span id="mnuMenuDatabase">{-#mnuMenuDatabase#-}</span>
 		<span id="mnuDatabaseFind">{-#mnuDatabaseFind#-}</span>
