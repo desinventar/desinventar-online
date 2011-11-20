@@ -86,7 +86,12 @@ function doAdminDatabaseCreateUploader()
 {
 	var uploader = new qq.FileUploader({
 		element: document.getElementById('divFileUploaderControl'),
-		action: 'upload.php',
+		action: jQuery('#desinventarURL').val(),
+		params:
+		{
+			cmd : 'fileupload',
+			RegionId : jQuery('#desinventarRegionId').val()
+		},
 		debug: true,
 		onSubmit: function(id, fileName)
 		{
