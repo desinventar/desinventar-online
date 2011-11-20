@@ -43,13 +43,10 @@ $desinventarUserRoleValue = $us->getUserRoleValue($RegionId);
 $t->assign('desinventarUserRole', $desinventarUserRole);
 $t->assign('desinventarUserRoleValue', $desinventarUserRoleValue);
 
-// 2010-07-23 (jhcaiced) When uploaded file with SWFUpload is bigger than 
-// post__max_size in php.ini the script is called with emtpy POST/FILES 
-// parameters, here we try to detect that case and call the appropiate command.
-if ( (substr($_SERVER['CONTENT_TYPE'],0,19) == 'multipart/form-data') &&
-     ($_SERVER['HTTP_USER_AGENT'] == 'Shockwave Flash') )
+// 2011-11-18 Use this to detect file uploads...
+if (getParameter('qqfile','') != '')
 {
-     $cmd = 'fileupload';
+	$cmd = 'fileupload';
 }
 switch ($cmd)
 {
@@ -194,26 +191,20 @@ switch ($cmd)
 		echo json_encode($answer);		
 	break;
 	case 'fileupload':
-		// This command is called directly by SWFUpload, so be aware that it runs 
-		// under his own session and cannot be debug in the browser.
-		$iReturn = ERR_NO_ERROR;
-		$answer = array('Filename' => '');
-		if ($iReturn > 0)
+		// list of valid extensions, ex. array("jpeg", "xml", "bmp")
+		$allowedExtensions = array('zip');
+		// max file size in bytes
+		$sizeLimit = 100 * 1024 * 1024;
+		require_once('include/fileuploader.php');
+		$uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+		$answer = $uploader->handleUpload('/tmp/');
+		fb($answer);
+		if ($answer['success'] == true)
 		{
-			if (! array_key_exists('Filedata', $_FILES))
-			{
-				// If $_FILES is empty, usually the PHP post_max_size parameter 
-				// needs configuration in php.ini
-				$iReturn = ERR_UPLOAD_FAILED;
-			}
-		}
-		
-		if ($iReturn > 0)
-		{
-			$answer['Filename'] = $_FILES['Filedata']['name'];
-			$FilenameOld = $_FILES['Filedata']['tmp_name'];
-			$Filename = TMP_DIR . '/di8file_' . $_POST['SessionId'] . '_' . $_FILES['Filedata']['name'];
-			rename($FilenameOld, $Filename);		
+			$answer['Status'] = ERR_NO_ERROR;
+
+			$Filename = '/tmp/' . getParameter('qqfile','');
+			fb($Filename);
 			// Open ZIP File, extract info.xml and return values...
 			$zip = new ZipArchive();
 			$res = $zip->open($Filename);
@@ -223,7 +214,7 @@ switch ($cmd)
 				$zip->close();
 				$r = new DIRegion($us, '', TMP_DIR . '/info.xml');
 				$info = array();
-				$info['RegionId']    = $r->get('RegionId');
+				$info['RegionId']    = $RegionId;
 				$info['RegionLabel'] = $r->get('RegionLabel');
 				$info['LangIsoCode'] = $r->get('LangIsoCode');
 				$info['CountryIso']  = $r->get('CountryIso');
@@ -232,26 +223,12 @@ switch ($cmd)
 			}
 			else
 			{
-				$iReturn = ERR_UNKNOWN_ERROR;
+				$answer['Status'] = ERR_UNKNOWN_ERROR;
 			}
 		}
-		$answer['Status'] = $iReturn;
-		// This command fileupload is called by swfupload directly so 
-		// this session can be removed...
-		$us->delete();
-		echo json_encode($answer);
-		// fb debug doesn't work in this code... why ?
-		//ob_start();
-		//print_r($answer);
-		//print_r($_GET);
-		//print_r($_POST);
-		//print_r($_FILES);
-		//print_r($_SERVER);
-		//$out = ob_get_contents();
-		//ob_end_clean();		
-		//$fp = fopen('/tmp/fileupload.log', 'w+');
-		//fwrite($fp, $out);
-		//fclose($fp);
+		fb($answer);
+		// to pass data through iframe you will need to encode all html tags
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
 	break;
 	case 'start':
 		$t->assign('lg', $lg);
