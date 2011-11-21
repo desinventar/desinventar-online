@@ -12,6 +12,7 @@
 		</td>
 		<td colspan="2" valign="top">
 			<input type="text"   id="txtAdminDatabaseUploadFilename" value="" size="50"/>
+			<input type="hidden" id="txtAdminDatabaseUploadId" value="" />
 		</td>
 	</tr>
 	<tr>
