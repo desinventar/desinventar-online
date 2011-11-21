@@ -11,6 +11,26 @@ function onReadyAdminDatabaseUpload()
 
 	doAdminDatabaseUploadCreate();
 	doAdminDatabaseCreateUploader();
+	jQuery('#btnAdminDatabaseUploadReplace').click(function() {
+		jQuery.post(jQuery('#desinventarURL').val(),
+		{
+			cmd: 'cmdDatabaseReplace',
+			filename : ''
+		},
+		function(data)
+		{
+			if (parseInt(data.Status) > 0)
+			{
+				
+			}
+		},
+		'json'
+	});
+
+	jQuery('#btnAdminDatabaseUploadReplace').click(function() {
+		doAdminDatabaseUploadReset();
+		jQuery('#divAdminDatabaseUploadParameters').hide();
+	});
 } //onReadyAdminDatabaseUpload
 
 function doAdminDatabaseCreateUploader()
@@ -96,7 +116,7 @@ function doAdminDatabaseUploadCreate()
 		}),
 		buttons: [
 			{
-				text: 'Select File',
+				text: jQuery('#msgAdminDatabaseUploadButtonChooseFile').text(),
 				handler: function() 
 				{
 					doAdminDatabaseUploadSelectFile();

@@ -44,12 +44,14 @@
 </div>
 
 <div id="divAdminDatabaseUploadParameters" style="display:none;">
-	<table>
+	<hr size="1" />
+	<h4>{-#msgAdminDatabaseUploadConfirmReplace#-}</h4><br />
+	<table width="100%">
 	<tr>
-		<td align="right">
+		<td align="right" width="50%">
 			{-#msgAdminDatabaseUploadRegionId#-} :
 		</td>
-		<td>
+		<td width="50%">
 			<span id="txtAdminDatabaseUploadRegionId"></span><br />
 		</td>
 	</tr>
@@ -78,14 +80,15 @@
 		</td>
 	</tr>
 	<tr>
-		<td colspan="2" align="right">
+		<td colspan="2" align="center">
 			<form id="frmAdminDatabaseUpload">
 				<input type="hidden" id="RegionId_Prev" value="" />
 				<input type="hidden" id="RegionLabel_Prev" value="" />
 				<input type="hidden" id="Filename" name="Filename" value="" />
 				<input type="hidden" id="DBExist" name="DBExist" value="" />
-				<input type="submit" id="btnAdminDatabaseUploadSubmit" class="line" value="Aceptar" />
-				<input type="button" id="btnAdminDatabaseUploadCancel" class="line" value="Cancelar" />
+				<br />
+				<input type="button" id="btnAdminDatabaseUploadReplace" class="line" value="{-#msgAdminDatabaseUploadButtonReplace#-}" />
+				<input type="button" id="btnAdminDatabaseUploadCancel" class="line" value="{-#msgAdminDatabaseUploadButtonCancel#-}"  />
 			</form>
 		</td>				
 	</tr>
