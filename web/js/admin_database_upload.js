@@ -84,6 +84,8 @@ function onReadyAdminDatabaseUpload()
 
 function doAdminDatabaseCreateUploader()
 {
+	doAdminDatabaseUploadReset();
+
 	var uploader = new qq.FileUploader({
 		element: document.getElementById('divFileUploaderControl'),
 		action: jQuery('#desinventarURL').val(),
@@ -96,6 +98,9 @@ function doAdminDatabaseCreateUploader()
 		onSubmit: function(id, fileName)
 		{
 			jQuery('#txtAdminDatabaseUploadFilename').val(fileName);
+			jQuery('#txtAdminDatabaseUploadId').val(id);
+			jQuery('#prgAdminDatabaseUploadProgressMark').css('width', '0px');
+			jQuery('#prgAdminDatabaseUploadPercent').text('');
 			jQuery('#btnAdminDatabaseUploadCancel').show();
 		},
 		onProgress: function(id, fileName, loaded, total)
@@ -110,8 +115,23 @@ function doAdminDatabaseCreateUploader()
 		{
 			jQuery('#btnAdminDatabaseUploadCancel').hide();
 		},
-		onCancel: function(id, fileName){},
+		onCancel: function(id, fileName)
+		{
+		},
 	});
+
+	jQuery('#btnAdminDatabaseUploadCancel').click(function() {
+		doAdminDatabaseUploadReset();
+		uploader.cancel(jQuery('#txtAdminDatabaseUploadId').val());
+	});
+}
+
+function doAdminDatabaseUploadReset()
+{
+	jQuery('#txtAdminDatabaseUploadFilename').val('');
+	jQuery('#prgAdminDatabaseUploadProgressMark').css('width', '0px');
+	jQuery('#prgAdminDatabaseUploadPercent').text('');
+	jQuery('#btnAdminDatabaseUploadCancel').hide();
 }
 
 function doAdminDatabaseUploadSelectFile()
