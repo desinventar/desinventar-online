@@ -9,40 +9,6 @@ function onReadyAdminDatabaseUpload()
 	jQuery('#divAdminDatabaseUploadParameters').hide();
 	doAdminDatabaseUploadStatusMsg('');
 
-	/*
-	.bind('uploadSuccess', function(event, file, serverData) {
-		jQuery('#btnAdminDatabaseUploadCancelUpload').hide();
-		var data = eval('(' + serverData + ')');
-		if (parseInt(data.Status) > 0) {
-			doAdminDatabaseUploadStatusMsg('msgAdminDatabaseUploadUploadOk');
-			jQuery('#frmAdminDatabaseUpload #Filename').val(data.Filename);
-			jQuery.each(data, function(index, value) {
-				if ( (value != null) && (typeof(value) == 'object') ) {
-					jQuery.each(value, function(index, value) {
-						jQuery('#frmAdminDatabaseUpload #' + index).val(value);
-					});
-					jQuery('#frmAdminDatabaseUpload #RegionId_Prev').val(value.RegionId);
-					jQuery('#frmAdminDatabaseUpload #RegionLabel_Prev').val(value.RegionLabel);
-				} else {
-				}
-			});
-			jQuery('#frmAdminDatabaseUpload #DBExist').val(data.DBExist);
-			if (parseInt(data.DBExist) < 1) {
-				jQuery('#spanAdminDatabaseUploadClone').show();
-				jQuery('#spanAdminDatabaseUploadUpdate').hide();
-				jQuery('#radioAdminDatabaseUploadOptionClone').attr('checked',true).trigger('change');
-			} else {
-				jQuery('#spanAdminDatabaseUploadClone').hide();
-				jQuery('#spanAdminDatabaseUploadUpdate').show();
-				jQuery('#radioAdminDatabaseUploadOptionUpdate').attr('checked',true).trigger('change');
-			}
-			jQuery('#divAdminDatabaseUploadParameters').show();
-		} else {
-			// Upload error (file size ?)
-			doAdminDatabaseUploadStatusMsg('msgAdminDatabaseUploadUploadError');
-		}
-	})
-	*/
 	doAdminDatabaseUploadCreate();
 	doAdminDatabaseCreateUploader();
 } //onReadyAdminDatabaseUpload
@@ -77,9 +43,14 @@ function doAdminDatabaseCreateUploader()
 			jQuery('#prgAdminDatabaseUploadProgressMark').css('width', width);
 			jQuery('#prgAdminDatabaseUploadPercent').text(percent + '%');
 		},
-		onComplete: function(id, fileName, responseJSON)
-		{
+		onComplete: function(id, fileName, data)
+		{~
 			jQuery('#btnAdminDatabaseUploadCancel').hide();
+			jQuery('#txtAdminDatabaseUploadRegionId').text(data.Info.RegionId);
+			jQuery('#txtAdminDatabaseUploadRegionLabel').text(data.Info.RegionLabel);
+			jQuery('#txtAdminDatabaseUploadLangIsoCode').text(data.Info.LangIsoCode);
+			jQuery('#txtAdminDatabaseUploadCountryIso').text(data.Info.CountryIso);
+			jQuery('#divAdminDatabaseUploadParameters').show();
 		},
 		onCancel: function(id, fileName)
 		{
@@ -104,7 +75,8 @@ function doAdminDatabaseUploadSelectFile()
 	jQuery('#divFileUploaderControl input').trigger('click');
 }
 
-function doAdminDatabaseUploadStatusMsg(Id) {
+function doAdminDatabaseUploadStatusMsg(Id)
+{
 	jQuery('.clsAdminDatabaseUploadStatusMsg').hide();
 	if (Id != '') {
 		jQuery('.clsAdminDatabaseUploadStatusMsg#' + Id).show();
