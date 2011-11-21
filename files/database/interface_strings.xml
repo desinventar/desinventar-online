@@ -2987,6 +2987,30 @@
 			<Text LangIsoCode="por">País</Text>
 			<Text LangIsoCode="fre">Pays</Text>
 		</Message>
+		<Message id="msgAdminDatabaseUploadConfirmReplace">
+			<Text LangIsoCode="eng">Confirm that you want to replace current database file</Text>
+			<Text LangIsoCode="spa">Confirme que desea reemplazar el archivo de base de datos actual</Text>
+			<Text LangIsoCode="por">Confirmar que deseja substituir o arquivo banco de dados atual</Text>
+			<Text LangIsoCode="fre">Confirmez que vous voulez remplacer le fichier base de données actuelle</Text>
+		</Message>
+		<Message id="msgAdminDatabaseUploadButtonReplace">
+			<Text LangIsoCode="eng">Generate</Text>
+			<Text LangIsoCode="spa">Generar</Text>
+			<Text LangIsoCode="por">Gerar</Text>
+			<Text LangIsoCode="fre">Générer</Text>
+		</Message>
+		<Message id="msgAdminDatabaseUploadButtonCancel">
+			<Text LangIsoCode="eng">Cancel</Text>
+			<Text LangIsoCode="spa">Cancelar</Text>
+			<Text LangIsoCode="por">Cancelar</Text>
+			<Text LangIsoCode="fre">Annuler</Text>
+		</Message>
+		<Message id="msgAdminDatabaseUploadButtonChooseFile">
+			<Text LangIsoCode="eng">Choose file</Text>
+			<Text LangIsoCode="spa">Elegir archivo..</Text>
+			<Text LangIsoCode="por">Escolha arquivo</Text>
+			<Text LangIsoCode="fre">Choisissez fichier</Text>
+		</Message>
 		<Message id="msgAdminDatabaseUploadButtonClose">
 			<Text LangIsoCode="eng">Close</Text>
 			<Text LangIsoCode="spa">Cerrar</Text>

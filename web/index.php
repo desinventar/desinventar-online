@@ -343,6 +343,10 @@ switch ($cmd)
 	case 'getGraphParameters':
 		$t->display('graphparameters.tpl');
 	break;
+	case 'cmdAdminDatabaseReplace':
+		$answer = array('Status' => ERR_NO_ERROR);
+		echo json_encode($answer);
+	break;
 	case 'cmdAdminDatabaseExport':
 		$answer = array('Status'   => ERR_UNKNOWN_ERROR);
 		if ($desinventarUserRoleValue > ROLE_USER)
