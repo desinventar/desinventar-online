@@ -198,13 +198,11 @@ switch ($cmd)
 		require_once('include/fileuploader.php');
 		$uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
 		$answer = $uploader->handleUpload('/tmp/');
-		fb($answer);
 		if ($answer['success'] == true)
 		{
 			$answer['Status'] = ERR_NO_ERROR;
 
 			$Filename = '/tmp/' . getParameter('qqfile','');
-			fb($Filename);
 			// Open ZIP File, extract info.xml and return values...
 			$zip = new ZipArchive();
 			$res = $zip->open($Filename);
@@ -226,7 +224,6 @@ switch ($cmd)
 				$answer['Status'] = ERR_UNKNOWN_ERROR;
 			}
 		}
-		fb($answer);
 		// to pass data through iframe you will need to encode all html tags
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
 	break;

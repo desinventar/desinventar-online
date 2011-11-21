@@ -5,7 +5,7 @@
 
 function onReadyAdminDatabaseUpload()
 {
-	jQuery('#btnAdminDatabaseUploadCancelUpload').hide();
+	jQuery('#btnAdminDatabaseUploadCancel').hide();
 	jQuery('#divAdminDatabaseUploadParameters').hide();
 	doAdminDatabaseUploadStatusMsg('');
 
@@ -92,10 +92,11 @@ function doAdminDatabaseCreateUploader()
 			cmd : 'fileupload',
 			RegionId : jQuery('#desinventarRegionId').val()
 		},
-		debug: true,
+		debug:false,
 		onSubmit: function(id, fileName)
 		{
 			jQuery('#txtAdminDatabaseUploadFilename').val(fileName);
+			jQuery('#btnAdminDatabaseUploadCancel').show();
 		},
 		onProgress: function(id, fileName, loaded, total)
 		{
@@ -107,7 +108,7 @@ function doAdminDatabaseCreateUploader()
 		},
 		onComplete: function(id, fileName, responseJSON)
 		{
-			console.log('upload complete : ' + fileName);
+			jQuery('#btnAdminDatabaseUploadCancel').hide();
 		},
 		onCancel: function(id, fileName){},
 	});

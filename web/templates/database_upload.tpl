@@ -26,7 +26,7 @@
 			<span id="prgAdminDatabaseUploadPercent"></span>
 		</td>
 		<td>
-			<input type="button" id="btnAdminDatabaseUploadCancelUpload" class="bb2" value="{-#msgAdminDatabaseUploadCancel#-}" />
+			<input type="button" id="btnAdminDatabaseUploadCancel" class="button line" value="{-#msgAdminDatabaseUploadCancel#-}" />
 		</td>
 	</tr>
 	</table>
