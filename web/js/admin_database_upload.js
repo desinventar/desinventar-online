@@ -79,6 +79,7 @@ function doAdminDatabaseCreateUploader()
 			jQuery('#txtAdminDatabaseUploadRegionLabel').text(data.Info.RegionLabel);
 			jQuery('#txtAdminDatabaseUploadLangIsoCode').text(data.Info.LangIsoCode);
 			jQuery('#txtAdminDatabaseUploadCountryIso').text(data.Info.CountryIso);
+			doAdminDatabaseUploadStatusMsg('');
 			jQuery('#divAdminDatabaseUploadParameters').show();
 		},
 		onCancel: function(id, fileName)
