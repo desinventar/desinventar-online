@@ -74,11 +74,10 @@
 	</tr>
 	<tr>
 		<td colspan="2" align="center">
-				<input type="hidden" id="txtAdminDatabaseUploadFilename" value="" />
-				<br />
-				<input type="button" id="btnAdminDatabaseUploadReplace" class="line" value="{-#msgAdminDatabaseUploadButtonReplace#-}" />
-				<input type="button" id="btnAdminDatabaseUploadReplaceCancel" class="line" value="{-#msgAdminDatabaseUploadButtonCancel#-}"  />
-			</form>
+			<input type="hidden" id="txtAdminDatabaseUploadFilename" value="" />
+			<br />
+			<input type="button" id="btnAdminDatabaseUploadReplace" class="line" value="{-#msgAdminDatabaseUploadButtonReplace#-}" />
+			<input type="button" id="btnAdminDatabaseUploadReplaceCancel" class="line" value="{-#msgAdminDatabaseUploadButtonCancel#-}"  />
 		</td>				
 	</tr>
 	</table>
