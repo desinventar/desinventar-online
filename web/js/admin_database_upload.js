@@ -40,8 +40,8 @@ function onReadyAdminDatabaseUpload()
 	jQuery('#btnAdminDatabaseUploadReplaceCancel').click(function() {
 		doAdminDatabaseUploadReset();
 		jQuery('#divAdminDatabaseUploadParameters').hide();
+		jQuery('#btnAdminDatabaseUploadChooseFile').show();
 	});
-
 
 } //onReadyAdminDatabaseUpload
 
@@ -93,7 +93,7 @@ function doAdminDatabaseCreateUploader()
 
 	jQuery('#btnAdminDatabaseUploadChooseFile').click(function() {
 		doAdminDatabaseUploadSelectFile();
-		jQuery(this).hide();
+		jQuery('#btnAdminDatabaseUploadChooseFile').hide();
 	});
 
 	jQuery('#btnAdminDatabaseUploadCancel').click(function() {
@@ -108,7 +108,7 @@ function doAdminDatabaseUploadReset()
 	jQuery('#prgAdminDatabaseUploadProgressMark').css('width', '0px');
 	jQuery('#prgAdminDatabaseUploadPercent').text('');
 	jQuery('#btnAdminDatabaseUploadCancel').hide();
-	jQuery('#btnAdminDatabaseUploadButtonChooseFile').show();
+	jQuery('#btnAdminDatabaseUploadChooseFile').show();
 }
 
 function doAdminDatabaseUploadSelectFile()
@@ -156,5 +156,4 @@ function doAdminDatabaseUploadAction()
 {
 	jQuery('.clsAdminDatabaseUpload').hide();
 	Ext.getCmp('wndDatabaseUpload').show();
-	//jQuery('#btnAdminDatabaseUploadChooseFile').trigger('click');
 } // doAdminDatabaseUploadAction
