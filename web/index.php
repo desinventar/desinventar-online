@@ -398,7 +398,7 @@ switch ($cmd)
 		$answer = array('Status'   => ERR_UNKNOWN_ERROR);
 		if ($desinventarUserRoleValue > ROLE_USER)
 		{
-			$ShortName = 'DesInventar_' . date('Ymd') . '_' . $RegionId . '.zip';
+			$ShortName = 'DesInventar_' . date('Y-m-d') . '_' . $RegionId . '.zip';
 			$FileName = WWWDIR  . '/data/' . $SessionId . '/' . $ShortName;
 			$URL      = WWWDATA . '/data/' . $SessionId . '/' . $ShortName;
 			$iReturn = DIRegion::createRegionBackup($us, $FileName);
