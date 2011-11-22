@@ -27,7 +27,8 @@
 			<span id="prgAdminDatabaseUploadPercent"></span>
 		</td>
 		<td>
-			<input type="button" id="btnAdminDatabaseUploadCancel" class="button line" value="{-#msgAdminDatabaseUploadCancel#-}" />
+			<input type="button" id="btnAdminDatabaseUploadCancel"     class="button line" value="{-#msgAdminDatabaseUploadCancel#-}" />
+			<input type="button" id="btnAdminDatabaseUploadChooseFile" class="button line" value="{-#msgAdminDatabaseUploadButtonChooseFile#-}" />
 		</td>
 	</tr>
 	</table>
@@ -84,6 +85,7 @@
 </div>
 
 <div id="divAdminDatabaseUploadStatusMsg">
+	<input type="hidden" id="msgAdminDatabaseUploadComplete" value="{-#msgAdminDatabaseUploadComplete#-}" />
 	<span class="clsAdminDatabaseUploadStatusMsg" id="msgAdminDatabaseUploadUpdateOk">{-#msgAdminDatabaseUploadUpdateOk#-}</span>
 	<span class="clsAdminDatabaseUploadStatusMsg" id="msgAdminDatabaseUploadUpdateError">{-#msgAdminDatabaseUploadUpdateError#-}</span>
 </div>

@@ -2951,6 +2951,12 @@
 			<Text LangIsoCode="por">País</Text>
 			<Text LangIsoCode="fre">Pays</Text>
 		</Message>
+		<Message id="msgAdminDatabaseUploadComplete">
+			<Text LangIsoCode="eng">Database updated correctly, browser's window will reload now to refresh data</Text>
+			<Text LangIsoCode="spa">Base de datos actualizada correctamente, la ventana del navegador se volverá a cargar ahora para actualizar los datos</Text>
+			<Text LangIsoCode="por">Banco de dados atualizado corretamente, a janela do navegador irá recarregar agora para atualizar dados</Text>
+			<Text LangIsoCode="fre">Base de données mis à jour correctement, la fenêtre du navigateur va recharger maintenant pour actualiser les données</Text>
+		</Message>
 		<Message id="msgAdminDatabaseUploadConfirmReplace">
 			<Text LangIsoCode="eng">Confirm that you want to replace current database file</Text>
 			<Text LangIsoCode="spa">Confirme que desea reemplazar el archivo de base de datos actual</Text>

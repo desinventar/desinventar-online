@@ -267,6 +267,7 @@ switch ($cmd)
 				$zip->extractTo($DBDir);
 				$zip->close();
 				$r = new DIRegion($us, $RegionId);
+				$r->set('RegionId', $RegionId);
 				$r->update();
 			}
 		}

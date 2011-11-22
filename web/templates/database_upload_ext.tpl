@@ -8,7 +8,6 @@
 	</div>
 </div>
 <div style="display:none;">
-	<span id="msgAdminDatabaseUploadButtonChooseFile">{-#msgAdminDatabaseUploadButtonChooseFile#-}</span>
 	<span id="msgAdminDatabaseUploadButtonClose">{-#msgAdminDatabaseUploadButtonClose#-}</span>
 	<input type="hidden" id="fldAdminDatabaseUploadSave"  value="1" />
 	<input type="hidden" id="fldAdminDatabaseUploadImage" value="{-$desinventarURL-}images/loading.gif" />
