@@ -46,7 +46,7 @@ $t->assign('desinventarUserRoleValue', $desinventarUserRoleValue);
 // 2011-11-18 Use this to detect file uploads...
 if (getParameter('qqfile','') != '')
 {
-	$cmd = 'fileupload';
+	$cmd = 'cmdDatabaseUpload';
 }
 switch ($cmd)
 {
@@ -157,7 +157,7 @@ switch ($cmd)
 		$answer['Status'] = $iReturn;
 		echo json_encode($answer);
 	break;
-	case 'dbzipimport' : 
+	case 'dbzipimport': 
 		$answer = array();
 		$iReturn = ERR_NO_ERROR;
 		if ($us->UserId != 'root')
@@ -190,42 +190,88 @@ switch ($cmd)
 		$answer['Status'] = $iReturn;
 		echo json_encode($answer);		
 	break;
-	case 'fileupload':
-		// list of valid extensions, ex. array("jpeg", "xml", "bmp")
-		$allowedExtensions = array('zip');
-		// max file size in bytes
-		$sizeLimit = 100 * 1024 * 1024;
-		require_once('include/fileuploader.php');
-		$uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
-		$answer = $uploader->handleUpload('/tmp/');
-		if ($answer['success'] == true)
+	case 'cmdDatabaseUpload':
+		$answer = array();
+		$answer['success'] = false;
+		$iReturn = ERR_NO_ERROR;
+		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
 		{
-			$answer['Status'] = ERR_NO_ERROR;
-
-			$Filename = '/tmp/' . getParameter('qqfile','');
-			// Open ZIP File, extract info.xml and return values...
-			$zip = new ZipArchive();
-			$res = $zip->open($Filename);
-			if ($res == TRUE)
+			$iReturn = ERR_ACCESS_DENIED;
+		}		
+		if ($iReturn > 0)
+		{
+			require_once('include/fileuploader.php');
+			$allowedExtensions = array('zip');
+			$sizeLimit = 100 * 1024 * 1024;
+			$OutDir = TMP_DIR . '/' . $us->sSessionId;
+			if (!is_dir($OutDir))
 			{
-				$zip->extractTo(TMP_DIR, 'info.xml');
-				$zip->close();
-				$r = new DIRegion($us, '', TMP_DIR . '/info.xml');
-				$info = array();
-				$info['RegionId']    = $RegionId;
-				$info['RegionLabel'] = $r->get('RegionLabel');
-				$info['LangIsoCode'] = $r->get('LangIsoCode');
-				$info['CountryIso']  = $r->get('CountryIso');
-				$answer['Info'] = $info;
-				$answer['DBExist'] = DIRegion::existRegion($us, $info['RegionId']);
+				mkdir($OutDir);
 			}
-			else
+			$uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+			$answer = $uploader->handleUpload($OutDir . '/');
+			if ($answer['success'] == true)
 			{
-				$answer['Status'] = ERR_UNKNOWN_ERROR;
+				$iReturn = ERR_NO_ERROR;
+
+				$Filename = getParameter('qqfile','');
+				// Open ZIP File, extract info.xml and return values...
+				$zip = new ZipArchive();
+				$res = $zip->open($OutDir . '/' . $Filename);
+				if ($res == TRUE)
+				{
+					$zip->extractTo($OutDir,'info.xml');
+					$zip->close();
+					$r = new DIRegion($us, '', $OutDir . '/info.xml');
+					$info = array();
+					$info['RegionId']    = $RegionId;
+					$info['RegionLabel'] = $r->get('RegionLabel');
+					$info['LangIsoCode'] = $r->get('LangIsoCode');
+					$info['CountryIso']  = $r->get('CountryIso');
+					$answer['Info'] = $info;
+					$answer['DBExist'] = DIRegion::existRegion($us, $info['RegionId']);
+					$answer['Filename'] = $Filename;
+				}
+				else
+				{
+					$iReturn = ERR_UNKNOWN_ERROR;
+				}
 			}
 		}
+		$answer['Status'] = $iReturn;
 		// to pass data through iframe you will need to encode all html tags
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
+	break;
+	case 'cmdDatabaseReplace':
+		$answer = array();
+		$iReturn = ERR_NO_ERROR;
+		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
+		{
+			$iReturn = ERR_ACCESS_DENIED;
+		}
+
+		if ($iReturn > 0)
+		{
+			$OutDir = TMP_DIR . '/' . $us->sSessionId;
+			$Filename = getParameter('Filename','');
+			// Open ZIP File, extract all files and return values...
+			$zip = new ZipArchive();
+			$res = $zip->open($OutDir . '/' . $Filename);
+			if ($res == FALSE)
+			{
+				$iReturn = ERR_UNKNOWN_ERROR;
+			}
+			if ($iReturn > 0)
+			{
+				$DBDir = $us->getDBDir();
+				$zip->extractTo($DBDir);
+				$zip->close();
+				$r = new DIRegion($us, $RegionId);
+				$r->update();
+			}
+		}
+		$answer['Status'] = $iReturn;
+		echo json_encode($answer);		
 	break;
 	case 'start':
 		$t->assign('lg', $lg);

@@ -36,13 +36,6 @@
 <div id="divFileUploaderControl" style="display:none;">
 </div>
 
-<div id="divAdminDatabaseUploadStatusMsg">
-	<span class="clsAdminDatabaseUploadStatusMsg" id="msgAdminDatabaseUploadUploadOk">{-#msgAdminDatabaseUploadUploadOk#-}</span>
-	<span class="clsAdminDatabaseUploadStatusMsg" id="msgAdminDatabaseUploadUploadError">{-#msgAdminDatabaseUploadUploadError#-}</span>
-	<span class="clsAdminDatabaseUploadStatusMsg" id="msgAdminDatabaseUploadFileError">{-#msgAdminDatabaseUploadFileError#-}</span>
-	<span class="clsAdminDatabaseUploadStatusMsg" id="msgAdminDatabaseUploadUpdateError">{-#msgAdminDatabaseUploadUpdateError#-}</span>
-</div>
-
 <div id="divAdminDatabaseUploadParameters" style="display:none;">
 	<hr size="1" />
 	<h4>{-#msgAdminDatabaseUploadConfirmReplace#-}</h4><br />
@@ -81,16 +74,17 @@
 	</tr>
 	<tr>
 		<td colspan="2" align="center">
-			<form id="frmAdminDatabaseUpload">
-				<input type="hidden" id="RegionId_Prev" value="" />
-				<input type="hidden" id="RegionLabel_Prev" value="" />
-				<input type="hidden" id="Filename" name="Filename" value="" />
-				<input type="hidden" id="DBExist" name="DBExist" value="" />
+				<input type="hidden" id="txtAdminDatabaseUploadFilename" value="" />
 				<br />
 				<input type="button" id="btnAdminDatabaseUploadReplace" class="line" value="{-#msgAdminDatabaseUploadButtonReplace#-}" />
-				<input type="button" id="btnAdminDatabaseUploadCancel" class="line" value="{-#msgAdminDatabaseUploadButtonCancel#-}"  />
+				<input type="button" id="btnAdminDatabaseUploadReplaceCancel" class="line" value="{-#msgAdminDatabaseUploadButtonCancel#-}"  />
 			</form>
 		</td>				
 	</tr>
 	</table>
+</div>
+
+<div id="divAdminDatabaseUploadStatusMsg">
+	<span class="clsAdminDatabaseUploadStatusMsg" id="msgAdminDatabaseUploadUpdateOk">{-#msgAdminDatabaseUploadUpdateOk#-}</span>
+	<span class="clsAdminDatabaseUploadStatusMsg" id="msgAdminDatabaseUploadUpdateError">{-#msgAdminDatabaseUploadUpdateError#-}</span>
 </div>

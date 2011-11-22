@@ -11,23 +11,31 @@ function onReadyAdminDatabaseUpload()
 
 	doAdminDatabaseUploadCreate();
 	doAdminDatabaseCreateUploader();
+
 	jQuery('#btnAdminDatabaseUploadReplace').click(function() {
 		jQuery.post(jQuery('#desinventarURL').val(),
 		{
 			cmd: 'cmdDatabaseReplace',
-			filename : ''
+			RegionId: jQuery('#desinventarRegionId').val(),
+			Filename: jQuery('#txtAdminDatabaseUploadFilename').val()
 		},
 		function(data)
 		{
 			if (parseInt(data.Status) > 0)
 			{
-				
+				jQuery('#divAdminDatabaseUploadParameters').hide();
+				doAdminDatabaseUploadStatusMsg('msgAdminDatabaseUploadUpdateOk');
+			}
+			else
+			{
+				doAdminDatabaseUploadStatusMsg('msgAdminDatabaseUploadUpdateError');
 			}
 		},
 		'json'
+		);
 	});
 
-	jQuery('#btnAdminDatabaseUploadReplace').click(function() {
+	jQuery('#btnAdminDatabaseUploadReplaceCancel').click(function() {
 		doAdminDatabaseUploadReset();
 		jQuery('#divAdminDatabaseUploadParameters').hide();
 	});
@@ -42,8 +50,8 @@ function doAdminDatabaseCreateUploader()
 		action: jQuery('#desinventarURL').val(),
 		params:
 		{
-			cmd : 'fileupload',
-			RegionId : jQuery('#desinventarRegionId').val()
+			cmd : 'cmdDatabaseUpload',
+			RegionId: jQuery('#desinventarRegionId').val()
 		},
 		debug:false,
 		multiple:false,
@@ -66,6 +74,7 @@ function doAdminDatabaseCreateUploader()
 		onComplete: function(id, fileName, data)
 		{~
 			jQuery('#btnAdminDatabaseUploadCancel').hide();
+			jQuery('#txtAdminDatabaseUploadFilename').val(data.Filename);
 			jQuery('#txtAdminDatabaseUploadRegionId').text(data.Info.RegionId);
 			jQuery('#txtAdminDatabaseUploadRegionLabel').text(data.Info.RegionLabel);
 			jQuery('#txtAdminDatabaseUploadLangIsoCode').text(data.Info.LangIsoCode);
@@ -98,7 +107,8 @@ function doAdminDatabaseUploadSelectFile()
 function doAdminDatabaseUploadStatusMsg(Id)
 {
 	jQuery('.clsAdminDatabaseUploadStatusMsg').hide();
-	if (Id != '') {
+	if (Id != '')
+	{
 		jQuery('.clsAdminDatabaseUploadStatusMsg#' + Id).show();
 	}
 } //function
