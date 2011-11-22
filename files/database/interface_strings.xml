@@ -2958,10 +2958,10 @@
 			<Text LangIsoCode="fre">Confirmez que vous voulez remplacer le fichier base de données actuelle</Text>
 		</Message>
 		<Message id="msgAdminDatabaseUploadButtonReplace">
-			<Text LangIsoCode="eng">Generate</Text>
-			<Text LangIsoCode="spa">Generar</Text>
-			<Text LangIsoCode="por">Gerar</Text>
-			<Text LangIsoCode="fre">Générer</Text>
+			<Text LangIsoCode="eng">Replace</Text>
+			<Text LangIsoCode="spa">Reemplazar</Text>
+			<Text LangIsoCode="por">Substituição</Text>
+			<Text LangIsoCode="fre">Remplacer</Text>
 		</Message>
 		<Message id="msgAdminDatabaseUploadButtonCancel">
 			<Text LangIsoCode="eng">Cancel</Text>
