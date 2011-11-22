@@ -168,7 +168,7 @@ switch ($cmd)
 		{
 			$RegionId = $_POST['RegionInfo']['RegionId'];
 			// Use the parameters to create a new database from zip file...
-			$Filename = TMP_DIR . '/di8file_' . $us->sSessionId . '_' . $_POST['RegionInfo']['Filename'];
+			$Filename = TMP_DIR . '/DesInventarFile_' . $us->sSessionId . '_' . $_POST['RegionInfo']['Filename'];
 			$iReturn = DIRegionDB::createRegionDBFromZip($us,
 			             $_POST['RegionInfo']['Mode'],
 			             $RegionId,
@@ -398,8 +398,9 @@ switch ($cmd)
 		$answer = array('Status'   => ERR_UNKNOWN_ERROR);
 		if ($desinventarUserRoleValue > ROLE_USER)
 		{
-			$FileName = WWWDIR  . '/data/' . $SessionId . '/di8export_' . $RegionId . '.zip';
-			$URL      = WWWDATA . '/data/' . $SessionId . '/di8export_' . $RegionId . '.zip';
+			$ShortName = 'DesInventar_' . date('Ymd') . '_' . $RegionId . '.zip';
+			$FileName = WWWDIR  . '/data/' . $SessionId . '/' . $ShortName;
+			$URL      = WWWDATA . '/data/' . $SessionId . '/' . $ShortName;
 			$iReturn = DIRegion::createRegionBackup($us, $FileName);
 			if ($iReturn > 0)
 			{
