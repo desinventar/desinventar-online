@@ -25,6 +25,7 @@ function onReadyAdminDatabaseUpload()
 			{
 				jQuery('#divAdminDatabaseUploadParameters').hide();
 				doAdminDatabaseUploadStatusMsg('msgAdminDatabaseUploadUpdateOk');
+				doWindowReload();
 			}
 			else
 			{

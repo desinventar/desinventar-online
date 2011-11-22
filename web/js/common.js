@@ -172,3 +172,12 @@ function updateDatabaseListByUser()
 		'json' //function
 	);
 }
+
+function doWindowReload()
+{
+	// Destroy viewport, the loading... message should stay.
+	doViewportDestroy();
+	// Reload document window
+	window.location.reload(false);
+}
+
