@@ -15,15 +15,11 @@ function onReadyMain()
 	onReadyThematicMap();	
 
 	jQuery('body').bind('UserLoggedIn',function() {
-		doViewportDestroy();
-		// When the user completes the login procedure, reload the current page...
-		 window.location.reload(false);
+		doWindowReload();
 	});
 
 	jQuery('body').bind('UserLoggedOut',function() {
-		doViewportDestroy();
-		// When the user logouts, reload the current page...
-		 window.location.reload(false);
+		doWindowReload();
 	});
 	
 	jQuery('#frmMainQuery').submit(function() {
@@ -103,3 +99,4 @@ function onReadyMain()
 		);
 	});
 } //onReadyMain()
+
