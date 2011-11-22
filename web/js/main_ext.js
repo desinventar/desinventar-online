@@ -239,8 +239,6 @@ function onMenuItem(item) {
 			doAdminDatabaseExportAction();
 		break;
 		case 'mnuDatabaseUpload':
-			jQuery('.clsAdminDatabaseUpload').hide();
-			Ext.getCmp('wndDatabaseUpload').show();
 			doAdminDatabaseUploadAction();
 		break;
 		case 'mnuDatabaseConfig':

@@ -25,6 +25,7 @@ function onReadyAdminDatabaseUpload()
 			{
 				jQuery('#divAdminDatabaseUploadParameters').hide();
 				doAdminDatabaseUploadStatusMsg('msgAdminDatabaseUploadUpdateOk');
+				alert(jQuery('#msgAdminDatabaseUploadComplete').val());
 				doWindowReload();
 			}
 			else
@@ -40,6 +41,8 @@ function onReadyAdminDatabaseUpload()
 		doAdminDatabaseUploadReset();
 		jQuery('#divAdminDatabaseUploadParameters').hide();
 	});
+
+
 } //onReadyAdminDatabaseUpload
 
 function doAdminDatabaseCreateUploader()
@@ -87,6 +90,12 @@ function doAdminDatabaseCreateUploader()
 		{
 		},
 	});
+
+	jQuery('#btnAdminDatabaseUploadChooseFile').click(function() {
+		doAdminDatabaseUploadSelectFile();
+		jQuery(this).hide();
+	});
+
 	jQuery('#btnAdminDatabaseUploadCancel').click(function() {
 		doAdminDatabaseUploadReset();
 		uploader.cancel(jQuery('#txtAdminDatabaseUploadId').val());
@@ -99,6 +108,7 @@ function doAdminDatabaseUploadReset()
 	jQuery('#prgAdminDatabaseUploadProgressMark').css('width', '0px');
 	jQuery('#prgAdminDatabaseUploadPercent').text('');
 	jQuery('#btnAdminDatabaseUploadCancel').hide();
+	jQuery('#btnAdminDatabaseUploadButtonChooseFile').show();
 }
 
 function doAdminDatabaseUploadSelectFile()
@@ -128,13 +138,6 @@ function doAdminDatabaseUploadCreate()
 		}),
 		buttons: [
 			{
-				text: jQuery('#msgAdminDatabaseUploadButtonChooseFile').text(),
-				handler: function() 
-				{
-					doAdminDatabaseUploadSelectFile();
-				}
-			},
-			{
 				text: jQuery('#msgAdminDatabaseUploadButtonClose').text(),
 				handler: function()
 				{
@@ -151,42 +154,7 @@ function doAdminDatabaseUploadCreate()
 
 function doAdminDatabaseUploadAction()
 {
-	/*
 	jQuery('.clsAdminDatabaseUpload').hide();
 	Ext.getCmp('wndDatabaseUpload').show();
-	jQuery('.clsAdminDatabaseUpload').hide();
-	jQuery('#divAdminDatabaseUploadProgress').show();
-	
-	jQuery('#imgAdminDatabaseUploadWait').attr('src', jQuery('#fldAdminDatabaseUploadImage').val());
-	jQuery('#imgAdminDatabaseUploadWait').show();
-	
-	jQuery('#fldAdminDatabaseUploadSave').val(1);
-	jQuery.post(jQuery('#desinventarURL').val(),
-		{
-			cmd      : 'cmdAdminDatabaseUpload',
-			RegionId : jQuery('#desinventarRegionId').val()
-		},
-		function(data)
-		{
-			jQuery('.clsAdminDatabaseUpload').hide();
-			if (parseInt(data.Status) > 0)
-			{
-				jQuery('#divAdminDatabaseUploadResults').show();
-				jQuery('#imgAdminDatabaseUploadWait').attr('src','').hide();
-				// Hide Ext.Window
-				Ext.getCmp('wndDatabaseUpload').hide();
-				if (parseInt(jQuery('#fldAdminDatabaseUploadSave').val()) > 0)
-				{
-					// Open the backup file for download
-					window.location = data.URL;
-				}
-			}
-			else
-			{
-				jQuery('#divAdminDatabaseUploadError').show();
-			}
-		},
-		'json'
-	);
-	*/
+	//jQuery('#btnAdminDatabaseUploadChooseFile').trigger('click');
 } // doAdminDatabaseUploadAction
