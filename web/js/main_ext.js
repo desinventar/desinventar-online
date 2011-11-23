@@ -472,9 +472,9 @@ function doDialogsCreate()
 				handler: function() {
 					if (sendList("result")) {
 						$('DCRes').value = "D";
-						datw.hide();
 						$('bsave').style.visibility = 'visible';
 						$('bprint').style.visibility = 'visible';
+						Ext.getCmp('wndViewDataParams').hide();
 					} else {
 						console.debug('Error while executing function ViewData');
 					}
@@ -482,7 +482,7 @@ function doDialogsCreate()
 			},
 			{text: jQuery('#msgViewDataButtonClose').text(),
 				handler: function() {
-					datw.hide();
+					Ext.getCmp('wndViewDataParams').hide();
 				} //handler
 			}
 		] //button
@@ -502,7 +502,7 @@ function doDialogsCreate()
 				handler: function() {
 					if (sendMap("result")) {
 						$('DCRes').value = "M";
-						mapw.hide();
+						Ext.getCmp('wndViewMapParams').hide();
 						$('bsave').style.visibility = 'visible';
 						$('bprint').style.visibility = 'visible';
 					} else {
@@ -512,7 +512,7 @@ function doDialogsCreate()
 			},
 			{text: jQuery('#msgViewMapButtonClose').text(),
 				handler: function() {
-					mapw.hide();
+					Ext.getCmp('wndViewMapParams').hide();
 				}
 			}
 		]
@@ -532,14 +532,14 @@ function doDialogsCreate()
 				handler: function() {
 					sendGraphic('result');
 					$('DCRes').value = "G";
-					grpw.hide();
+					Ext.getCmp('wndViewGraphParams').hide();
 					$('bsave').style.visibility = 'visible';
 					$('bprint').style.visibility = 'visible';
 				}
 			},
 			{text: jQuery('#msgViewGraphButtonClose').text(),
 				handler: function() {
-					grpw.hide();
+					Ext.getCmp('wndViewGraphParams').hide();
 				}
 			}
 		]
@@ -559,7 +559,7 @@ function doDialogsCreate()
 				handler: function() {
 					if (sendStatistic("result")) {
 						$('DCRes').value = "S";
-						stdw.hide();
+						Ext.getCmp('wndViewStdParams').hide();
 						$('bsave').style.visibility = 'visible';
 						$('bprint').style.visibility = 'visible';
 					} else {
@@ -569,7 +569,7 @@ function doDialogsCreate()
 			},
 			{text: jQuery('#msgViewStdButtonClose').text(),
 				handler: function() {
-					stdw.hide();
+					Ext.getCmp('wndViewStdParams').hide();
 				}
 			}
 		]
