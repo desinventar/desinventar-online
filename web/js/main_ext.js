@@ -419,6 +419,23 @@ function doDialogsCreate()
 		items: new Ext.Panel({ contentEl: 'usr', autoScroll: true })
 	});
 
+	// Query Open Window
+	w = new Ext.Window({id:'wndQueryOpen',
+		el:'qry-win', layout:'fit', width:300, height:200,
+		closeAction:'hide', plain: true, animCollapse: false,
+		items: new Ext.Panel({contentEl: 'qry-cfg', autoScroll: true }),
+		buttons:
+		[
+			{
+				text: jQuery('#msgQueryOpenButtonClose').text(),
+				handler: function()
+				{
+					Ext.getCmp('wndQueryOpen').hide();
+				}
+			}
+		]
+	});
+
 	// Database List - Database Search Window
 	w = new Ext.Window({id:'wndDatabaseList',
 		el:'dbl-win', layout:'fit', x:200, y:100, width:600, height:450, 
@@ -560,19 +577,5 @@ function doDialogsCreate()
 		]
 	});
 
-	w = new Ext.Window({id='wndQueryOpen',
-		el:'qry-win', layout:'fit', width:300, height:200,
-		closeAction:'hide', plain: true, animCollapse: false,
-		items: new Ext.Panel({contentEl: 'qry-cfg', autoScroll: true }),
-		buttons:
-		[
-			{
-				text: jQuery('#msgQueryOpenButtonClose').text(),
-				handler: function() {
-					Ext.getCmp('wndQueryOpen').hide();
-				}
-			}
-		]
-	});
 } //doDialogsCreate()
 
