@@ -13,8 +13,6 @@
 	<!-- jQuery -->
 	{-include file="jquery.tpl"-}
 
-	{-*include file="main_javascript.tpl"*-}
-
 	<script type="text/javascript" src="{-$desinventarURL-}/external/listMan.js"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/external/md5.js"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/external/wd.js"></script>
