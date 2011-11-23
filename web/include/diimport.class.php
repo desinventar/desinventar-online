@@ -6,19 +6,24 @@
 require_once('query.class.php');
 require_once('didisaster.class.php');
 
-class DIImport {
-	public function __construct($prmSessionId) {
+class DIImport
+{
+	public function __construct($prmSessionId)
+	{
 		$this->us = $prmSessionId;
 		$this->q = new Query($this->us->RegionId);
 	}
 	
-	public function validateFromCSV($FileName, $ObjectType) {
+	public function validateFromCSV($FileName, $ObjectType)
+	{
 		return $this->importFromCSV($FileName, $ObjectType, false);
 	}
 		
-	public function importFromCSV($FileName, $ObjectType, $doImport = true, $prmMaxLines) {
+	public function importFromCSV($FileName, $ObjectType, $doImport = true, $prmMaxLines, $prmHeaderLines=2)
+	{
 		$maxLines = 1000000;
-		if ($prmMaxLines > 0) {
+		if ($prmMaxLines > 0)
+		{
 			$maxLines = $prmMaxLines;
 		}
 		$FLogName = '/tmp/di8import_' . $this->us->sSessionId . '.csv';
@@ -26,11 +31,12 @@ class DIImport {
 		$cols = array();
 		$flog = fopen($FLogName,'w');
 		$fh = fopen($FileName, 'r');
-		// Version Line
-		$values = fgetcsv($fh, 0, ',');
-		// Column Header Line
-		$values = fgetcsv($fh, 0, ',');
-		$rowCount = 2;
+		$rowCount = 0;
+		while ($rowCount < $prmHeaderLines)
+		{
+			$values = fgetcsv($fh, 0, ',');
+			$rowCount++;
+		}
 		while ( (! feof($fh) ) && ($rowCount < $maxLines) ) {
 			$values = fgetcsv($fh, 0, ',');
 			$rowCount++;

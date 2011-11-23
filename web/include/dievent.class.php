@@ -4,8 +4,10 @@
  (c) 1998-2011 Corporacion OSSO
 */
 
-class DIEvent extends DIRecord {
-	public function __construct($prmSession) {
+class DIEvent extends DIRecord
+{
+	public function __construct($prmSession)
+	{
 		$this->sTableName   = "Event";
 		$this->sPermPrefix  = "EVENT";
 		$this->sFieldKeyDef = "EventId/STRING," .
@@ -102,13 +104,23 @@ class DIEvent extends DIRecord {
 		return $iReturn;
 	}
 
-	public function importFromCSV($cols, $values) {
+	public function importFromCSV($cols, $values)
+	{
 		$iReturn = parent::importFromCSV($cols, $values);
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			$this->set('EventName',  $values[1]);
 			$this->set('EventDesc',  $values[2]);
-			$EventId = self::getIdByName($this->session, $this->get('EventName'));
-			if ($EventId != '') {
+			if (isset($values[3]))
+			{
+				$EventId = $values[3];
+			}
+			else
+			{
+				$EventId = self::getIdByName($this->session, $this->get('EventName'));
+			}
+			if ($EventId != '')
+			{
 				$this->set('EventId', $EventId);
 				$this->load();
 			}

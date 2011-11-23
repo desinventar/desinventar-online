@@ -107,7 +107,14 @@ class DICause extends DIRecord {
 		$iReturn = parent::importFromCSV($cols, $values);
 		if ($iReturn > 0) {
 			$this->set('CauseName',  $values[1]);
-			$CauseId = self::getIdByName($this->session, $this->get('CauseName'));
+			if (isset($values[3]))
+			{
+				$CauseId = $values[3];
+			}
+			else
+			{
+				$CauseId = self::getIdByName($this->session, $this->get('CauseName'));
+			}
 			if ($CauseId != '') {
 				$this->set('CauseId', $CauseId);
 				$this->load();
