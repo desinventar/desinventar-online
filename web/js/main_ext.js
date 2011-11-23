@@ -190,22 +190,7 @@ function onMenuItem(item) {
 			saveQuery();
 		break;
 		case 'mnuQueryOpen':
-			var qryw;
-			if (!qryw) {
-				qryw = new Ext.Window({
-					el:'qry-win',  layout:'fit',  width:300, height:200, 
-					closeAction:'hide', plain: true, animCollapse: false,
-					items: new Ext.Panel({
-					contentEl: 'qry-cfg', autoScroll: true }),
-					buttons: [{
-						text: jQuery('#msgQueryOpenButtonClose').text(),
-						handler: function() {
-							qryw.hide();
-						}
-					}]
-				});
-			}
-			qryw.show(this);
+			Ext.getCmp('wndQueryOpen').show();
 		break;
 		// Datacards Menu Items
 		case 'mnuDatacardView':
@@ -575,5 +560,19 @@ function doDialogsCreate()
 		]
 	});
 
+	w = new Ext.Window({id='wndQueryOpen',
+		el:'qry-win', layout:'fit', width:300, height:200,
+		closeAction:'hide', plain: true, animCollapse: false,
+		items: new Ext.Panel({contentEl: 'qry-cfg', autoScroll: true }),
+		buttons:
+		[
+			{
+				text: jQuery('#msgQueryOpenButtonClose').text(),
+				handler: function() {
+					Ext.getCmp('wndQueryOpen').hide();
+				}
+			}
+		]
+	});
 } //doDialogsCreate()
 
