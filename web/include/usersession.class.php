@@ -419,7 +419,6 @@ class UserSession {
 			$sQuery .= " WHERE UserId='" . $prmUserId . "'";
 		}
 		$sQuery .= " ORDER BY UserFullName";
-		fb($sQuery);
 		$sth = $this->q->core->prepare($sQuery);
 		try
 		{
@@ -475,36 +474,52 @@ class UserSession {
 
 	// Return Role for a Region
 	function getUserRole($prmRegionId='') {
+		$UserRole = 'NONE';
 		if ($prmRegionId == '') {
 			$prmRegionId = $this->RegionId;
 		}
-		$myAnswer = "";
-		$sQuery = "SELECT * FROM RegionAuth WHERE ";
-		if ($prmRegionId != '') {
-			$sQuery .= "((RegionId='') OR (RegionId='" . $prmRegionId . "'))";
-		} else {
-			$sQuery .= "(RegionId='')";
-		}
-		$sQuery .= " AND (UserId='" . $this->UserId . "') " .
-		           " AND AuthKey='ROLE'" . 
-		           " ORDER BY UserId,RegionId";
-		$sth = $this->q->core->prepare($sQuery);
-		$this->q->core->beginTransaction();
-		try
+		if ($this->UserId == 'root')
 		{
-			$sth->execute();
-			$this->q->core->commit();
-			while ($row = $sth->fetch(PDO::FETCH_OBJ))
+			$UserRole = 'ADMINPORTAL';
+		}
+		else
+		{
+			$sQuery = "SELECT * FROM RegionAuth WHERE ";
+			if ($prmRegionId != '') {
+				$sQuery .= "((RegionId='') OR (RegionId='" . $prmRegionId . "'))";
+			} else {
+				$sQuery .= "(RegionId='')";
+			}
+			$sQuery .= " AND (UserId='" . $this->UserId . "') " .
+					   " AND AuthKey='ROLE'" . 
+					   " ORDER BY UserId,RegionId";
+			$sth = $this->q->core->prepare($sQuery);
+			$this->q->core->beginTransaction();
+			try
 			{
-				$myAnswer = $row->AuthAuxValue;
-			} // while
+				$sth->execute();
+				$this->q->core->commit();
+				while ($row = $sth->fetch(PDO::FETCH_OBJ))
+				{
+					$UserRole = $row->AuthAuxValue;
+				} // while
+			}
+			catch (Exception $e)
+			{
+				$this->q->core->rollBack();
+				showErrorMsg('ERROR getUserRole : ' . $e->getMessage());
+			}
+			if ($UserRole == 'NONE')
+			{
+				$RegionStatus = $this->getDBInfoValue('RegionStatus');
+				$RegionPublic = $RegionStatus & 2;
+				if ($RegionPublic > 0)
+				{
+					$UserRole = 'OBSERVER';
+				}
+			}
 		}
-		catch (Exception $e)
-		{
-			$this->q->core->rollBack();
-			showErrorMsg('ERROR getUserRole : ' . $e->getMessage());
-		}
-		return $myAnswer;
+		return $UserRole;
 	} // function
 	
 	// Get User Role as a Numeric Value, easier to compare
@@ -927,23 +942,36 @@ class UserSession {
 		$regionlist = array();
 
 		// Search for Public Databases and assign to (ROLE=NONE)
-		$query = "SELECT RegionId,CountryIso,RegionLabel FROM Region WHERE RegionStatus=3 AND "; 
-		if ($searchByCountry > 0)
+		$query = 'SELECT RegionId,CountryIso,RegionLabel FROM Region WHERE ';
+		if ($this->UserId != 'root')
 		{
-			$query .= "(CountryIso = '" . $prmQuery . "')";
+			$query .= 'RegionStatus=3';
+			$Role = 'NONE';
 		}
 		else
 		{
-			$query .= "(RegionId LIKE '%" . $prmQuery . "%' OR RegionLabel LIKE '%" . $prmQuery . "%')";
+			$query .= 'RegionStatus>0';
+			$Role = 'ADMINREGION';
 		}
-		$query .= " ORDER BY CountryIso,RegionLabel,RegionOrder";
+
+		if ($prmQuery != '')
+		{
+			if ($searchByCountry > 0)
+			{
+				$query .= ' AND (CountryIso = "' . $prmQuery . '")';
+			}
+			else
+			{
+				$query .= "(RegionId LIKE '%" . $prmQuery . "%' OR RegionLabel LIKE '%" . $prmQuery . "%')";
+			}
+		}
+		$query .= ' ORDER BY CountryIso,RegionLabel,RegionOrder';
 		foreach($this->q->core->query($query) as $row)
 		{
 			$regionlist[$row['RegionId']] = array('RegionLabel' => $row['RegionLabel'],
 			                                      'CountryIso'  => $row['CountryIso'],
-			                                      'Role' => 'NONE');
+			                                      'Role' => $Role);
 		}
-		
 		if ($searchByCountry <= 0)
 		{
 			// Add Regions with specific Roles
