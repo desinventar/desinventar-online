@@ -2988,7 +2988,7 @@
 			<Text LangIsoCode="fre">Fermer</Text>
 		</Message>
 	</Group>
-	<Group name="di8_DBEdit">
+	<Group name="grpDBEdit">
 		<Message id="msgDBEditRegionId">
 			<Text LangIsoCode="eng">Identification of areas</Text>
 			<Text LangIsoCode="spa">Identificador</Text>
