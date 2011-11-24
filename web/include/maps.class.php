@@ -37,7 +37,7 @@ class Maps {
 				$fp = DATADIR ."/database/". $reg . "/region.map";
 			} else {
 				// generate effects maps: type=filename | thematic=sessid
-				$fp = TMPM_DIR ."/di8ms_";
+				$fp = TMPM_DIR ."/map_";
 				$map .= $this->setLayerEff($us, $reg, $lev, $dl, $range, $info, $lbl, $prmTransparency);
 				if ($type == "THEMATIC") {
 					$fp .= "$reg-". session_id() . '_' . time() . '.map';
@@ -81,7 +81,7 @@ class Maps {
       HEADER "templates/imagemap_header.html"
       FOOTER "templates/imagemap_footer.html"';
     }
-    $fm = TEMP .'/di8ms_';
+    $fm = TEMP .'/map_';
 		if ($typ == "THEMATIC")
 		  $fm .= "$reg-". session_id() .".map";
     elseif (strlen($typ) > 0)
@@ -338,7 +338,7 @@ class Maps {
   }
   
 	function generateKML($us, $reg, $info) {
-		$fp = urlencode(TMPM_DIR ."/di8ms_$reg-". session_id() .".map");
+		$fp = urlencode(TMPM_DIR ."/map_$reg-". session_id() .".map");
 		$dinf = $us->q->getDBInfo($lg);
 		$regn = $dinf['RegionLabel|'];
 		$desc = $dinf['RegionDesc'];

@@ -26,8 +26,8 @@ class DIImport
 		{
 			$maxLines = $prmMaxLines;
 		}
-		$FLogName = '/tmp/di8import_' . $this->us->sSessionId . '.csv';
-		$FLogName = '/tmp/di8import.csv';
+		$FLogName = '/tmp/import_' . $this->us->sSessionId . '.csv';
+		$FLogName = '/tmp/import.csv';
 		$cols = array();
 		$flog = fopen($FLogName,'w');
 		$fh = fopen($FileName, 'r');

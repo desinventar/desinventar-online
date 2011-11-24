@@ -49,7 +49,7 @@ function form2user($val)
 	}
 	else
 	{
-		$dat['UserPasswd'] 		= 'di8welcome'; // default password
+		$dat['UserPasswd'] 		= 'desinventar'; // default password
 	}
 	return $dat;
 }
@@ -259,7 +259,7 @@ switch ($cmd)
 			if ($cmd == 'insert')
 			{
 				// set a Default passwd for new users...
-				$data['UserPasswd'] = md5('di8welcome');
+				$data['UserPasswd'] = md5('desinventar');
 			}
 			else
 			{
