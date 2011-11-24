@@ -20,13 +20,13 @@
 	<li><a href="?m=MetGuide&p=references" target="Contentframe">{-#treferences#-}</a></li>
  {-else-}
 	<h3>{-#thlptitle#-}</h3>
-	<li><a href="?m=DI8Info&p=intro" target="Contentframe">{-#thlpintro#-}</a></li>
-	<li><a href="?m=DI8Info&p=portal" target="Contentframe">{-#thlpportal#-}</li>
+	<li><a href="?m=DesInventarInfo&p=intro" target="Contentframe">{-#thlpintro#-}</a></li>
+	<li><a href="?m=DesInventarInfo&p=portal" target="Contentframe">{-#thlpportal#-}</li>
 	<ul>
 	 <li><a href="portal.htm" target="Contentframe">{-#thlppordemo#-}</li>
 	</ul>
 	<br />
-	<li><a href="?m=DI8Info&p=moddi" target="Contentframe">{-#thlpdimod#-}</li>
+	<li><a href="?m=DesInventarInfo&p=moddi" target="Contentframe">{-#thlpdimod#-}</li>
 	<ul>
 	 <li><a href="region.htm" target="Contentframe">{-#thlpdemreg#-}</li>
 	 <li><a href="geografia.htm" target="Contentframe">{-#thlpdemgeo#-}</li>
@@ -35,7 +35,7 @@
 	 <li><a href="fichas1.htm" target="Contentframe">{-#thlpdemdc#-}</li>
 	</ul>
 	<br />
-	<li><a href="?m=DI8Info&p=moddc" target="Contentframe">{-#thlpdcmod#-}</li>
+	<li><a href="?m=DesInventarInfo&p=moddc" target="Contentframe">{-#thlpdcmod#-}</li>
  {-/if-}
 {-**** MAIN FRAME SECTION ****-}
 {-elseif $ctl_page == 'main'-}

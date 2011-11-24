@@ -108,7 +108,6 @@ function showerror ($val) {
 	// Very Serious Errors inmediatly notify to Portal Administrator.. 
 	if ($val == ERR_NO_CONNECTION || $val == ERR_NO_DATABASE) {
 		$res .= " (Automatic notification is required)";
-		// SendMessage ("root@di..", "Severe DI8 Not connection", "Error: $res");
 	}
 	return $res;
 }

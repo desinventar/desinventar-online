@@ -297,7 +297,7 @@ if (isset($post['_M+cmd']))
 				$x = $wt - 2 - $x;
 				$y = $ht - imagesy($imgMapInfo) - 4;
 				imagettftext($im, $fontsize, 0, $x, $y, $black, $font,  $mapfooter);
-				header('Content-Disposition: attachment; filename=DI8_'. str_replace(' ', '', $rinf->get('RegionLabel')) .'_ThematicMap.png');
+				header('Content-Disposition: attachment; filename=DesInventar_'. str_replace(' ', '', $rinf->get('RegionLabel')) .'_ThematicMap.png');
 				imagepng($im);
 				imagedestroy($imap);
 				imagedestroy($imgMapLegend);
@@ -323,7 +323,7 @@ elseif (isset($get['cmd']) && $get['cmd'] == 'getkml')
 {
 	// Send KML file - GoogleEarth
 	header('Content-type: text/kml');
-	header('Content-Disposition: attachment; filename=DI8_'. str_replace(' ', '', $RegionId) .'_ThematicMap.kml');
+	header('Content-Disposition: attachment; filename=DesInventar_'. str_replace(' ', '', $RegionId) .'_ThematicMap.kml');
 	$m = new Maps($us, $RegionId, null, null, null, null, null, null, 'KML');
 	echo $m->printKML();
 	$fh = fopen('/tmp/map.kml','w+');
