@@ -1088,7 +1088,7 @@
 			<Text LangIsoCode="fre">Texte</Text>
 		</Message>
 	</Group>
-	<Group name="di8_import">
+	<Group name="grpAdminImport">
 		<Message id="ttitle">
 			<Text LangIsoCode="eng">CSV Files</Text>
 			<Text LangIsoCode="spa">Archivos CSV de Fichas:</Text>
