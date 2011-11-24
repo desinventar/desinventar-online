@@ -1132,7 +1132,7 @@
 			<Text LangIsoCode="fre">Générer</Text>
 		</Message>
 	</Group>
-	<Group name="di8_input">
+	<Group name="grpEditDatacard">
 		<Message id="ttitle">
 			<Text LangIsoCode="eng">DesInventar</Text>
 			<Text LangIsoCode="spa">DesInventar</Text>

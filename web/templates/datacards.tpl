@@ -1,4 +1,4 @@
-{-config_load file="$lg.conf" section="di8_input"-}
+{-config_load file="$lg.conf" section="grpEditDatacard"-}
 	<table width="900px" border="0" cellpadding="0" cellspacing="0" >
 		<tr valign="top">
 			<td align="left" width="45%">
