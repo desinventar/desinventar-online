@@ -1020,7 +1020,7 @@
 			<Text LangIsoCode="fre">La cause ne peut pas être désactivée car elle est déjà assignée</Text>
 		</Message>
 	</Group>
-	<Group name="di8_extraeffects">
+	<Group name="grpAdminExtraEffects">
 		<Message id="baddoption">
 			<Text LangIsoCode="eng">Add</Text>
 			<Text LangIsoCode="spa">Adicionar</Text>

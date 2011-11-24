@@ -1,4 +1,4 @@
-{-config_load file="$lg.conf" section="di8_extraeffects"-}
+{-config_load file="$lg.conf" section="grpAdminExtraEffects"-}
 {-** EXTRAEFFECTS: Interface to Edit ExtraEffects.. **-}
 {-if $ctl_admineef-}
 <!-- FIELDS -->
