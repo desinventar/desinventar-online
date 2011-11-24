@@ -32,7 +32,7 @@
 			{-$dic.DBEleCode[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBEleCode[1]-}</span></a><br />
 			<input id="aGeographyCode" name="data[GeographyCode]" type="text" {-$ro-} class="line" tabindex="1" style="width:500px;"
 				onBlur="updateList('geostatusmsg', 'geography.php', 
-				'r={-$reg-}&cmd=chkcode&GeographyId='+ $('aGeographyId').value + '&GeographyCode='+ $('aGeographyCode').value);"
+				'r={-$reg-}&cmd=chkcode&t=' + new Date().getTime() + '&GeographyId='+ $('aGeographyId').value + '&GeographyCode='+ $('aGeographyCode').value);"
 				onFocus="showtip('{-$dic.DBEleCode[2]-}');" />
 			<br /><br />
 			<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBEleName[2]-}');">
