@@ -464,6 +464,7 @@ switch ($cmd)
 						//$t->assign('path', VAR_DIR);
 						
 						$t->assign('role', $role);
+						$t->assign('roleValue', $roleValue);
 						if (strlen($role) > 0)
 						{
 							$t->assign('ctl_user', true);
