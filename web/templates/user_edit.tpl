@@ -1,5 +1,5 @@
 {-*** REGISTER NEW USER - CONTENT SECTION ***-}
-{-config_load file="$lg.conf" section="di8_user"-}
+{-config_load file="$lg.conf" section="grpMenuUser"-}
 <link rel="stylesheet" href="{-$desinventarURL-}/css/desinventar.css?version={-$jsversion-}" type="text/css">
 {-include file="jquery.tpl" -}
 <script type="text/javascript" src="{-$desinventarURL-}/external/md5.js"></script>

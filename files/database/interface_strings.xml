@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <StringList>
-	<Group name="di8_user">
+	<Group name="grpMenuUser">
 		<Message id="mnuMenuUser">
 			<Text LangIsoCode="eng">User</Text>
 			<Text LangIsoCode="spa">Usuario</Text>

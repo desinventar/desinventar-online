@@ -1,5 +1,5 @@
 {-config_load file="$lg.conf" section="di8_index"-}
-{-config_load file="$lg.conf" section="di8_user"-}
+{-config_load file="$lg.conf" section="grpMenuUser"-}
 {-config_load file="$lg.conf" section="querydef"-}
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
