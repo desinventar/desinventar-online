@@ -5,9 +5,9 @@
 */
 
 // 2009-09-16 (jhcaiced) Autoconfigure software directory
-if (! isset($_SERVER['DI8_WEB']))
+if (! isset($_SERVER['DESINVENTAR_WEB']))
 {
-	$_SERVER['DI8_WEB'] = dirname(dirname(__FILE__));
+	$_SERVER['DESINVENTAR_WEB'] = dirname(dirname(__FILE__));
 }
 
 // This is the version of the software
@@ -39,15 +39,15 @@ if (isset($_SERVER['HTTP_HOST']))
 		{
 			//dl( 'php_gd2.'.PHP_SHLIB_SUFFIX);
 		}
-		if (! isset($_SERVER['DI8_WEB']))
+		if (! isset($_SERVER['DESINVENTAR_WEB']))
 		{
-			$_SERVER['DI8_WEB'] = $Install_Dir . '/Apache/htdocs';
+			$_SERVER['DESINVENTAR_WEB'] = $Install_Dir . '/Apache/htdocs';
 		}
 		$Install_Dir = dirname($Install_Dir);
-		$_SERVER['DI8_WWWDIR'] = $Install_Dir . '/www';
-		$_SERVER['DI8_DATADIR'] = $Install_Dir . '/data';
-		$_SERVER['DI8_MAPDIR'] = $Install_Dir . '/data/worldmap';
-		$_SERVER['DI8_CACHEDIR'] = $Install_Dir . '/tmp';		
+		$_SERVER['DESINVENTAR_WWWDIR'] = $Install_Dir . '/www';
+		$_SERVER['DESINVENTAR_DATADIR'] = $Install_Dir . '/data';
+		$_SERVER['DESINVENTAR_MAPDIR'] = $Install_Dir . '/data/worldmap';
+		$_SERVER['DESINVENTAR_CACHEDIR'] = $Install_Dir . '/tmp';		
 	}
 	else
 	{
@@ -59,46 +59,46 @@ if (isset($_SERVER['HTTP_HOST']))
 		define('TEMP', '/tmp');
 		define('JPGRAPHDIR', '/usr/share/php/jpgraph');
 		define('FONTSET' , '/usr/share/fonts/liberation/fonts.txt');
-		if (! isset($_SERVER['DI8_WEB']))
+		if (! isset($_SERVER['DESINVENTAR_WEB']))
 		{
-			$_SERVER['DI8_WEB']      = '/usr/share/desinventar-8.2/web';
+			$_SERVER['DESINVENTAR_WEB']      = '/usr/share/desinventar-8.2/web';
 		}
-		$_SERVER['DI8_WWWDIR']   = '/var/www/desinventar-8.2';
-		if (! isset($_SERVER['DI8_DATADIR']))
+		$_SERVER['DESINVENTAR_WWWDIR']   = '/var/www/desinventar-8.2';
+		if (! isset($_SERVER['DESINVENTAR_DATADIR']))
 		{
-			$_SERVER['DI8_DATADIR']  = '/var/lib/desinventar-8.2';
+			$_SERVER['DESINVENTAR_DATADIR']  = '/var/lib/desinventar-8.2';
 		}
-		$_SERVER['DI8_MAPDIR'] = '/usr/share/desinventar-8.2/worldmap';
-		$_SERVER['DI8_CACHEDIR'] = '/var/cache/Smarty/desinventar';
+		$_SERVER['DESINVENTAR_MAPDIR'] = '/usr/share/desinventar-8.2/worldmap';
+		$_SERVER['DESINVENTAR_CACHEDIR'] = '/var/cache/Smarty/desinventar';
 	}
 }
 else
 {
 	// Running a Command Line Script
 	define('MODE', 'command');
-	if (! isset($_SERVER['DI8_WWWDIR']))
+	if (! isset($_SERVER['DESINVENTAR_WWWDIR']))
 	{
-		$_SERVER['DI8_WWWDIR']   = '/var/www/desinventar-8.2';
+		$_SERVER['DESINVENTAR_WWWDIR']   = '/var/www/desinventar-8.2';
 	}
-	if (! isset($_SERVER['DI8_DATADIR']))
+	if (! isset($_SERVER['DESINVENTAR_DATADIR']))
 	{
-		$_SERVER['DI8_DATADIR']  = '/var/lib/desinventar-8.2';
+		$_SERVER['DESINVENTAR_DATADIR']  = '/var/lib/desinventar-8.2';
 	}
-	$_SERVER['DI8_MAPDIR'] = '/usr/share/desinventar-8.2/worldmap';
-	if (! isset($_SERVER['DI8_CACHEDIR']))
+	$_SERVER['DESINVENTAR_MAPDIR'] = '/usr/share/desinventar-8.2/worldmap';
+	if (! isset($_SERVER['DESINVENTAR_CACHEDIR']))
 	{
-		$_SERVER['DI8_CACHEDIR'] = '/var/cache/Smarty/desinventar';
+		$_SERVER['DESINVENTAR_CACHEDIR'] = '/var/cache/Smarty/desinventar';
 	}
 	define('TEMP', '/tmp');
 }
-define('BASE'    , $_SERVER['DI8_WEB']);
-define('WWWDIR'  , $_SERVER['DI8_WWWDIR']);
+define('BASE'    , $_SERVER['DESINVENTAR_WEB']);
+define('WWWDIR'  , $_SERVER['DESINVENTAR_WWWDIR']);
 define('WWWDATA' , '/desinventar-8.2-data');
 define('WWWURL'  , '/');
-define('DATADIR' , $_SERVER['DI8_DATADIR']);
+define('DATADIR' , $_SERVER['DESINVENTAR_DATADIR']);
 define('DBDIR'   , DATADIR . '/database');
-define('MAPDIR'  , $_SERVER['DI8_MAPDIR']);
-define('CACHEDIR', $_SERVER['DI8_CACHEDIR']);
+define('MAPDIR'  , $_SERVER['DESINVENTAR_MAPDIR']);
+define('CACHEDIR', $_SERVER['DESINVENTAR_CACHEDIR']);
 define('VAR_DIR' , DATADIR);
 define('TMP_DIR' , TEMP);
 define('SMTY_DIR', CACHEDIR); // Smarty temp dir
@@ -194,30 +194,30 @@ if (MODE != 'command')
 	$t->assign('version'     , VERSION);
 	$t->assign('jsversion'   , JSVERSION);
 
-	// Configure DI8 (web) application location
+	// Configure DESINVENTAR (web) application location
 	$desinventarURL = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'],'/'));
-	if (isset($_SERVER['REDIRECT_DI8_URL']))
+	if (isset($_SERVER['REDIRECT_DESINVENTAR_URL']))
 	{
-		$_SERVER['DI8_URL'] = $_SERVER['REDIRECT_DI8_URL'];
+		$_SERVER['DESINVENTAR_URL'] = $_SERVER['REDIRECT_DESINVENTAR_URL'];
 	}
-	if (isset($_SERVER['DI8_URL']))
+	if (isset($_SERVER['DESINVENTAR_URL']))
 	{
-		$desinventarURL = $_SERVER['DI8_URL'];
+		$desinventarURL = $_SERVER['DESINVENTAR_URL'];
 	}
 	if (substr($desinventarURL, strlen($desinventarURL) - 1, 1) != '/')
 	{
 		$desinventarURL .= '/';
 	}
 
-	// Configure DI8 (portal) application location
+	// Configure DESINVENTAR (portal) application location
 	$desinventarURLPortal = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'],'/'));
-	if (isset($_SERVER['REDIRECT_DI8_PORTAL']))
+	if (isset($_SERVER['REDIRECT_DESINVENTAR_PORTAL']))
 	{
-		$_SERVER['DI8_PORTAL'] = $_SERVER['REDIRECT_DI8_PORTAL'];
+		$_SERVER['DESINVENTAR_PORTAL'] = $_SERVER['REDIRECT_DESINVENTAR_PORTAL'];
 	}
-	if (isset($_SERVER['DI8_PORTAL']))
+	if (isset($_SERVER['DESINVENTAR_PORTAL']))
 	{
-		$desinventarURLPortal = $_SERVER['DI8_PORTAL'];
+		$desinventarURLPortal = $_SERVER['DESINVENTAR_PORTAL'];
 	}
 	// Remove trailing slash in URL
 	if (substr($desinventarURLPortal, strlen($desinventarURLPortal) - 1, 1) == '/')

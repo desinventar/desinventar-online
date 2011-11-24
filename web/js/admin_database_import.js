@@ -17,7 +17,7 @@ function onReadyDatabaseImport() {
 	jQuery('#divDBImportControl').swfupload({
 		upload_url: jQuery('#desinventarURL').val() + '/index.php', //?cmd=fileupload', //'&t=' + new Date().getTime(),
 		post_params: {cmd : 'fileupload', 
-		              SessionId : ('' + document.cookie.match(/DI8SESSID=[^;]+/)).substr(10)
+		              SessionId : ('' + document.cookie.match(/DESINVENTAR_SESSID=[^;]+/)).substr(10)
 		             },
 		file_size_limit : "204800",
 		file_types : "*.*",

@@ -99,7 +99,7 @@ if (isset($post['page']) || isset($post['_D+cmd']))
 			// show export results
 			//header('Content-type: application/x-zip-compressed');
 			header('Content-type: text/x-csv');
-			header('Content-Disposition: attachment; filename=DI8_'. str_replace(' ', '', $RegionLabel) .'_Data.'. $export);
+			header('Content-Disposition: attachment; filename=DesInventar_'. str_replace(' ', '', $RegionLabel) .'_Data.'. $export);
 			//header('Content-Transfer-Encoding: binary');
 			// Limit 1000 results in export: few memory in PHP
 			$iRecordsPerPage = 1000;

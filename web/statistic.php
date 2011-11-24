@@ -153,7 +153,7 @@ if (isset($post['page']) || isset($post['_S+cmd']))
 			}
 			//header('Content-type: application/x-zip-compressed');
 			header('Content-type: text/x-csv');
-			header('Content-Disposition: attachment; filename=DI8_'. str_replace(' ', '', $RegionLabel) .'_Consolidate.'. $export);
+			header('Content-Disposition: attachment; filename=DesInventar_'. str_replace(' ', '', $RegionLabel) .'_Consolidate.'. $export);
 			//header('Content-Transfer-Encoding: binary');
 			// Limit 5000 results in export: few memory in PHP
 			$rxp 		= 5000;

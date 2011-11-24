@@ -10,7 +10,7 @@
 	}
 	else
 	{
-		$mod = 'DI8Info';
+		$mod = 'DesInventarInfo';
 	}
 	if (isset($_GET['p']))
 	{
@@ -34,9 +34,9 @@
 	}
 	$t->assign('ctl_page', $pag);
 	$t->assign('ctl_module', $mod);
-	if ($mod == 'DI8Info' && $pag == 'intro')
+	if ($mod == 'DesInventarInfo' && $pag == 'intro')
 	{
-		$show = $us->q->queryLabel('MainPage', 'DI8', $lg);
+		$show = $us->q->queryLabel('MainPage', 'DesInventar', $lg);
 	}
 	else
 	{

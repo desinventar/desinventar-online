@@ -217,7 +217,7 @@ if ($GraphCommand != '')
 		{
 			// Export Graph as a Image
 			header('Content-type: Image/png');
-			header('Content-Disposition: attachment; filename=DI8_'. str_replace(' ', '', $RegionLabel) .'_Graphic.png');
+			header('Content-Disposition: attachment; filename=DesInventar_'. str_replace(' ', '', $RegionLabel) .'_Graphic.png');
 			header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 			header('Last-Modified: '. gmdate('D, d M Y H:i:s') .' GMT');
 			header('Cache-Control: no-store, no-cache, must-revalidate');
