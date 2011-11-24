@@ -1,4 +1,4 @@
-{-config_load file="$lg.conf" section="di8_import"-}
+{-config_load file="$lg.conf" section="grpAdminImport"-}
 {-** IMPORT: Interface for import datacards into region. **-}
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
