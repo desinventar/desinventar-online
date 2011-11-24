@@ -458,7 +458,7 @@
 			<Text LangIsoCode="fre">Les champs doivent avoir une valeur</Text>
 		</Message>
 	</Group>
-	<Group name="di8_region">
+	<Group name="grpMenuRegion">
 		<Message id="ttname">
 			<Text LangIsoCode="eng">Database management</Text>
 			<Text LangIsoCode="spa">Gestión de base de datos</Text>

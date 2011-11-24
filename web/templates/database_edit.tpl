@@ -1,4 +1,4 @@
-{-config_load file="$lg.conf" section="di8_region"-}
+{-config_load file="$lg.conf" section="grpMenuRegion"-}
 <form id="frmRegionEdit">
 	<table class="grid">
 		<tr>
