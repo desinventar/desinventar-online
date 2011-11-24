@@ -1,4 +1,4 @@
-{-config_load file="$lg.conf" section="di8_user"-}
+{-config_load file="$lg.conf" section="grpMenuUser"-}
 {-*** USER INFO EDIT - CONTENT ***-}
 
 <h2>{-#tuserprefer#-}</h2>
