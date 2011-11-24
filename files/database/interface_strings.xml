@@ -780,7 +780,7 @@
 			<Text LangIsoCode="fre">Erreur dans la mise à jour du rôle de l&quot;usager</Text>
 		</Message>
 	</Group>
-	<Group name="di8_geography">
+	<Group name="grpAdminGeography">
 		<Message id="baddoption">
 			<Text LangIsoCode="eng">Add</Text>
 			<Text LangIsoCode="spa">Adicionar</Text>
