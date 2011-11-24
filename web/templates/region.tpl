@@ -1,4 +1,4 @@
-{-config_load file="$lg.conf" section="di8_region"-}
+{-config_load file="$lg.conf" section="grpMenuRegion"-}
 <h2>{-#ttname#-}</h2>
 <div id="divAdminDatabaseList" style="display:none;">
 	<div class="dwin" style="width:100%;height:200px;">
