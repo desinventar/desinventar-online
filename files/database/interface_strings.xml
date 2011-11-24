@@ -1602,7 +1602,7 @@
 			<Text LangIsoCode="fre">Record trouvé et chargé</Text>
 		</Message>
 	</Group>
-	<Group name="di8_index">
+	<Group name="grpMainStrings">
 		<Message id="twelcome">
 			<Text LangIsoCode="eng">Welcome</Text>
 			<Text LangIsoCode="spa">Bienvenido</Text>
