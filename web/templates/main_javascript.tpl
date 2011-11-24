@@ -270,11 +270,11 @@
 			items: [
 				
 				{id:'mnuDatacardInsertEdit', text:{-if $desinventarUserRoleValue >= 2-}'{-#mnuDatacardInsertEdit#-}'{-else-}'{-#mnuDatacardView#-}'{-/if-},	handler: onMenuItem  },
-				{-if $role == "SUPERVISOR" || $role == "ADMINREGION"-}
+				{-if $roleValue>=3-}
 					{id:'mnuDatacardImport', text: '{-#mnuDatacardImport#-}',	handler: onMenuItem  },
 					{id:'mnuDatabaseBackup', text: '{-#mnuDatabaseBackup#-}',	handler: onMenuItem  },
 				{-/if-}
-				{-if $role == "ADMINREGION"-}
+				{-if $roleValue>=4-}
 					{id:'mnuDatabaseConfig', text: '{-#mnuDatabaseConfig#-}',	handler: onMenuItem  },
 				{-/if-}
 				'-'
