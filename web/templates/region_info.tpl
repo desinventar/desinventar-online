@@ -1,4 +1,4 @@
-{-config_load file="$lg.conf" section="di8_index"-}
+{-config_load file="$lg.conf" section="grpMainStrings"-}
 {-config_load file="$lg.conf" section="grpMenuRegion"-}
 {-** REGIONINFO: Show Full Region Information **-}
 <div id="divRegionInfo" style="display:none;">
