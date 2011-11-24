@@ -268,6 +268,7 @@ switch ($cmd)
 				$zip->close();
 				$r = new DIRegion($us, $RegionId);
 				$r->set('RegionId', $RegionId);
+				$r->set('RegionLabel', $RegionLabel);
 				$r->update();
 			}
 		}
@@ -389,10 +390,6 @@ switch ($cmd)
 	break;
 	case 'getGraphParameters':
 		$t->display('graphparameters.tpl');
-	break;
-	case 'cmdAdminDatabaseReplace':
-		$answer = array('Status' => ERR_NO_ERROR);
-		echo json_encode($answer);
 	break;
 	case 'cmdAdminDatabaseExport':
 		$answer = array('Status'   => ERR_UNKNOWN_ERROR);
