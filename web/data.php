@@ -112,7 +112,7 @@ if (isset($post['page']) || isset($post['_D+cmd']))
 		if (!empty($export))
 		{
 			// Save results in CSVfile
-			$datpth = TEMP .'/di8data_'. session_id() .'.$export';
+			$datpth = TEMP .'/data_'. session_id() .'.$export';
 			$fp = fopen($datpth, 'w');
 			$pin = 0;
 			$pgt = $iNumberOfPages;

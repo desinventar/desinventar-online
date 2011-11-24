@@ -1,4 +1,4 @@
-{-config_load file="$lg.conf" section="di8_DBImport"-}
+{-config_load file="$lg.conf" section="grpAdminImport"-}
 <h2>{-#msgDBImportTitle#-}</h2>
 <div id="divDBImportControl">
 	<table border="0">

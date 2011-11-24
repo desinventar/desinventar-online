@@ -69,7 +69,7 @@ if (isset($_SERVER['HTTP_HOST']))
 			$_SERVER['DI8_DATADIR']  = '/var/lib/desinventar-8.2';
 		}
 		$_SERVER['DI8_MAPDIR'] = '/usr/share/desinventar-8.2/worldmap';
-		$_SERVER['DI8_CACHEDIR'] = '/var/cache/Smarty/di8';
+		$_SERVER['DI8_CACHEDIR'] = '/var/cache/Smarty/desinventar';
 	}
 }
 else
@@ -87,7 +87,7 @@ else
 	$_SERVER['DI8_MAPDIR'] = '/usr/share/desinventar-8.2/worldmap';
 	if (! isset($_SERVER['DI8_CACHEDIR']))
 	{
-		$_SERVER['DI8_CACHEDIR'] = '/var/cache/Smarty/di8';
+		$_SERVER['DI8_CACHEDIR'] = '/var/cache/Smarty/desinventar';
 	}
 	define('TEMP', '/tmp');
 }

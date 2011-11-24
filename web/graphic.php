@@ -90,8 +90,8 @@ if ($GraphCommand != '')
 	}
 	$post['prmGraph'] = $prmGraph;
 
-	$sImageURL  = WWWDATA . '/graphs/di8graphic_'. session_id() . '_' . time() . '.png';
-	$sImageFile = WWWDIR  . '/graphs/di8graphic_'. session_id() . '_' . time() . '.png';
+	$sImageURL  = WWWDATA . '/graphs/graph_'. session_id() . '_' . time() . '.png';
+	$sImageFile = WWWDIR  . '/graphs/graph_'. session_id() . '_' . time() . '.png';
 
 	// Process Configuration options to Graphic
 	$ele = array();
