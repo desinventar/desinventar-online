@@ -884,7 +884,7 @@
 			<Text LangIsoCode="fre">GÉOGRAPHIE: Remplissez tous les champs obligatoires et essayez de nouveau</Text>
 		</Message>
 	</Group>
-	<Group name="di8_events">
+	<Group name="grpAdminEvents">
 		<Message id="baddelem">
 			<Text LangIsoCode="eng">Add</Text>
 			<Text LangIsoCode="spa">Adicionar</Text>

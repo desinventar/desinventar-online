@@ -1,4 +1,4 @@
-{-config_load file="$lg.conf" section="di8_events"-}
+{-config_load file="$lg.conf" section="grpAdminEvents"-}
 {-** EVENTS: Interface to Edit Custom and Predefined events lists.. **-}
 {-if $ctl_show-}
 <?xml version="1.0" encoding="UTF-8" ?>
