@@ -5,7 +5,6 @@
 
 function onReadyAdminDatabaseUpload()
 {
-	jQuery('#btnAdminDatabaseUploadCancel').hide();
 	jQuery('#divAdminDatabaseUploadParameters').hide();
 	doAdminDatabaseUploadStatusMsg('');
 
@@ -40,7 +39,7 @@ function onReadyAdminDatabaseUpload()
 	jQuery('#btnAdminDatabaseUploadReplaceCancel').click(function() {
 		doAdminDatabaseUploadReset();
 		jQuery('#divAdminDatabaseUploadParameters').hide();
-		jQuery('#btnAdminDatabaseUploadChooseFile').show();
+		jQuery('#divFileUploaderControl .qq-upload-button-text').show();
 	});
 
 } //onReadyAdminDatabaseUpload
@@ -49,8 +48,8 @@ function doAdminDatabaseCreateUploader()
 {
 	doAdminDatabaseUploadReset();
 
-	var uploader = new qq.FileUploaderBasic({
-		button: document.getElementById('divFileUploaderControl'),
+	var uploader = new qq.FileUploader({
+		element: document.getElementById('divFileUploaderControl'),
 		action: jQuery('#desinventarURL').val(),
 		params:
 		{
@@ -65,6 +64,7 @@ function doAdminDatabaseCreateUploader()
 			jQuery('#txtAdminDatabaseUploadId').val(id);
 			jQuery('#prgAdminDatabaseUploadProgressMark').css('width', '0px');
 			jQuery('#prgAdminDatabaseUploadPercent').text('');
+			jQuery('#divFileUploaderControl .qq-upload-button-text').hide();
 			jQuery('#btnAdminDatabaseUploadCancel').show();
 		},
 		onProgress: function(id, fileName, loaded, total)
@@ -90,11 +90,8 @@ function doAdminDatabaseCreateUploader()
 		{
 		},
 	});
-
-	jQuery('#btnAdminDatabaseUploadChooseFile').click(function() {
-		doAdminDatabaseUploadSelectFile();
-		jQuery('#btnAdminDatabaseUploadChooseFile').hide();
-	});
+	jQuery('#divFileUploaderControl .qq-upload-button-text').html(jQuery('#msgAdminDatabaseUploadChooseFile').val());
+	jQuery('#divFileUploaderControl .qq-upload-list').hide();
 
 	jQuery('#btnAdminDatabaseUploadCancel').click(function() {
 		doAdminDatabaseUploadReset();
@@ -108,7 +105,7 @@ function doAdminDatabaseUploadReset()
 	jQuery('#prgAdminDatabaseUploadProgressMark').css('width', '0px');
 	jQuery('#prgAdminDatabaseUploadPercent').text('');
 	jQuery('#btnAdminDatabaseUploadCancel').hide();
-	jQuery('#btnAdminDatabaseUploadChooseFile').show();
+	jQuery('#divFileUploaderControl .qq-upload-button-text').show();
 }
 
 function doAdminDatabaseUploadSelectFile()

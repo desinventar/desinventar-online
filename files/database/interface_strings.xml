@@ -2975,7 +2975,7 @@
 			<Text LangIsoCode="por">Cancelar</Text>
 			<Text LangIsoCode="fre">Annuler</Text>
 		</Message>
-		<Message id="msgAdminDatabaseUploadButtonChooseFile">
+		<Message id="msgAdminDatabaseUploadChooseFile">
 			<Text LangIsoCode="eng">Choose file</Text>
 			<Text LangIsoCode="spa">Elegir archivo..</Text>
 			<Text LangIsoCode="por">Escolha arquivo</Text>

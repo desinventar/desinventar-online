@@ -111,13 +111,6 @@ function doViewportCreate()
 	}
 } // doViewportCreate()
 
-function doViewportDestroy()
-{
-	Ext.getCmp('viewport').destroy();
-	jQuery('#loading').show();
-	jQuery('#loading-mask').show();
-}
-
 function onMenuItem(item) {
 	var RegionId = jQuery('#desinventarRegionId').val();
 	switch (item.id) {
