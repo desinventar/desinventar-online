@@ -173,11 +173,3 @@ function updateDatabaseListByUser()
 	);
 }
 
-function doWindowReload()
-{
-	// Destroy viewport, the loading... message should stay.
-	doViewportDestroy();
-	// Reload document window
-	window.location.reload(false);
-}
-

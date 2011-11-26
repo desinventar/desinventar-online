@@ -100,3 +100,21 @@ function onReadyMain()
 	});
 } //onReadyMain()
 
+function doViewportDestroy()
+{
+	var viewport = Ext.getCmp('viewport');
+	if (viewport != undefined)
+	{
+		viewport.destroy();
+		jQuery('#loading').show();
+		jQuery('#loading-mask').show();
+	}
+} //doViewportDestroy
+
+function doWindowReload()
+{
+	// Destroy viewport, the loading... message should stay.
+	doViewportDestroy();
+	// Reload document window
+	window.location.reload(false);
+} //doWindowReload
