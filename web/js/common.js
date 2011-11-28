@@ -151,7 +151,7 @@ function updateDatabaseListByUser()
 				jQuery('.databaseList').empty();
 				jQuery.each(data.RegionList, function(RegionId, value) {
 					jQuery('#divRegionList #title_' + value.Role).show();
-					jQuery('#divRegionList #list_' + value.Role).show().append('<a href="#" id="' + RegionId + '" class="databaseLink">' + value.RegionLabel + '</a><br />');
+					jQuery('#divRegionList #list_' + value.Role).show().append('<a href="' + jQuery('#desinventarURL').val() + RegionId + '" id="' + RegionId + '" class="databaseLink">' + value.RegionLabel + '</a><br />');
 					iCount++;
 				});
 				
