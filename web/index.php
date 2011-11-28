@@ -214,30 +214,37 @@ switch ($cmd)
 			{
 				$iReturn = ERR_NO_ERROR;
 
-				$Filename = getParameter('qqfile','');
-				// Open ZIP File, extract info.xml and return values...
+				$Filename = $answer['filename'];
+				// Open ZIP File, extract info.xml and return values...				
 				$zip = new ZipArchive();
 				$res = $zip->open($OutDir . '/' . $Filename);
 				if ($res == TRUE)
 				{
 					$zip->extractTo($OutDir,'info.xml');
 					$zip->close();
-					$r = new DIRegion($us, '', $OutDir . '/info.xml');
-					$info = array();
-					$info['RegionId']    = $RegionId;
-					$info['RegionLabel'] = $r->get('RegionLabel');
-					$info['LangIsoCode'] = $r->get('LangIsoCode');
-					$info['CountryIso']  = $r->get('CountryIso');
-					$answer['Info'] = $info;
-					$answer['DBExist'] = DIRegion::existRegion($us, $info['RegionId']);
-					$answer['Filename'] = $Filename;
+					if (file_exists($OutDir . '/info.xml'))
+					{
+						$r = new DIRegion($us, '', $OutDir . '/info.xml');
+						$info = array();
+						$info['RegionId']    = $RegionId;
+						$info['RegionLabel'] = $r->get('RegionLabel');
+						$info['LangIsoCode'] = $r->get('LangIsoCode');
+						$info['CountryIso']  = $r->get('CountryIso');
+						$answer['Info'] = $info;
+						$answer['DBExist'] = DIRegion::existRegion($us, $info['RegionId']);
+						$answer['Filename'] = $Filename;
+					}
+					else
+					{
+						$answer['Status'] = ERR_UNKNOWN_ERROR;
+					}
 				}
 				else
 				{
 					$iReturn = ERR_UNKNOWN_ERROR;
 				}
-			}
-		}
+			} //if
+		} //if
 		$answer['Status'] = $iReturn;
 		// to pass data through iframe you will need to encode all html tags
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
