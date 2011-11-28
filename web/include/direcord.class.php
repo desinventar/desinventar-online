@@ -177,7 +177,7 @@ class DIRecord extends DIObject
 				}
 				else
 				{
-					print 'Unknown Type : $sFieldType ($sFieldName)<br>';
+					echo 'Unknown Type : $sFieldType ($sFieldName)<br>';
 				}
 				$sQuery .= $sQueryItem;
 				$i++;

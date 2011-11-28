@@ -362,7 +362,6 @@ class Maps {
 		} else {	
 			$EyeAltitude = intval($AreaY * 110000);
 		}
-		// print info in kml
 		$xml = 
 '<?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://earth.google.com/kml/2.2">

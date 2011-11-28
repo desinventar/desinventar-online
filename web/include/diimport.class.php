@@ -70,7 +70,7 @@ class DIImport
 							$answer = $o->insert();
 							if ($answer < 0) {
 								if ($o->status->hasError()) {
-									print $o->get('GeographyCode') . ' ' .
+									echo $o->get('GeographyCode') . ' ' .
 									      reset($o->status->error) . "\n";
 								}
 							}
@@ -79,7 +79,7 @@ class DIImport
 					case DI_DISASTER:
 						$o = new DIDisaster($this->us);
 						if  (($rowCount % 100) == 0) {
-							print $rowCount . "\n";
+							echo $rowCount . "\n";
 						}
 						$iReturn = $o->importFromCSV($cols, $values);
 						if ($iReturn > 0) {

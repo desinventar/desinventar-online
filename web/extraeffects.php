@@ -74,7 +74,7 @@ switch($cmd)
 			$answer['Status'] = 'ERROR';
 			$answer['ErrorMsg'] = showerror($stat);
 		}
-		print json_encode($answer);
+		echo json_encode($answer);
 	break;
 	case 'cmdEEFieldList':
 		// reload list from local SQLITE

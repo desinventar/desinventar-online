@@ -96,7 +96,7 @@ switch ($cmd)
 		$t->display('main_region.tpl');
 	break;
 	case 'getversion':
-		print VERSION;
+		echo VERSION;
 	break;
 	case 'cmdSessionAwake':
 		$iReturn = $us->awake();

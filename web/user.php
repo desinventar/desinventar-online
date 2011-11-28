@@ -68,7 +68,7 @@ switch ($cmd)
 			$Answer['UserId'] = $us->UserId;
 			$Answer['UserFullName'] = $us->getUserFullName();
 		}
-		print json_encode($Answer);
+		echo json_encode($Answer);
 	break;
 	case 'relogin':
 		// RELOGIN: Previous session exists, reconnect to the same session
@@ -79,7 +79,7 @@ switch ($cmd)
 	case 'logout':
 		// LOGOUT : Logut current user and show the login panel again
 		$us->logout();
-		print json_encode(array('Status' => ERR_NO_ERROR));
+		echo json_encode(array('Status' => ERR_NO_ERROR));
 	break;
 	case 'passlost':
 		// PASSLOST: Allows to recover a user's password by sending 
@@ -162,7 +162,7 @@ switch ($cmd)
 		if ($UserId != '')
 		{
 			$user = new DIUser($us, $UserId);
-			print json_encode($user->oField['info']);
+			echo json_encode($user->oField['info']);
 		}
 	break;
 	case 'adminusr':
@@ -175,7 +175,7 @@ switch ($cmd)
 		}
 		else
 		{
-			print 'ERROR';
+			echo 'ERROR';
 		}
 	break;
 	case 'chklogin':
@@ -186,7 +186,7 @@ switch ($cmd)
 		{
 			$Answer = 'YES';
 		}
-		print $Answer;
+		echo $Answer;
 	break;
 	case 'viewpref':
 		// PREFERENCES: View User Account Options
@@ -201,12 +201,12 @@ switch ($cmd)
 		// Check if password is correct (ask to dicore). if is OK show dialog to change it.
 		if ($us->validateUser($us->UserId, $_POST['UserPasswd'],true) == '')
 		{
-			print 'ERRORPASSWD';
+			echo 'ERRORPASSWD';
 		}
 		else
 		{
 			$us->updateUserPasswd($us->UserId, $_POST['UserPasswd2']);
-			print 'OK';
+			echo 'OK';
 		}
 	break;
 	case 'chkpasswd':
@@ -274,7 +274,7 @@ switch ($cmd)
 			$bReturn = $u->update();
 		}
 		$Answer = array('Status' => $bReturn);
-		print json_encode($Answer);
+		echo json_encode($Answer);
 	break;
 	case 'list':
 		// USERADMIN: reload list..

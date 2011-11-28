@@ -61,7 +61,7 @@ class DIStatus {
 		}
 		foreach($a as $k => $v) {
 			$line = sprintf('"%s","%s","%s","%s","%s"', $label,$line, $Id, $k, $v);
-			print $line . "\n";			
+			echo $line . "\n";			
 		}
 	}
 } //class

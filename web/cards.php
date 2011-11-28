@@ -17,7 +17,7 @@ if ($RegionId == '')
 // 2009-08-07 (jhcaiced) Validate if Database Exists...
 if (! file_exists($us->q->getDBFile($RegionId)))
 {
-	print '<h3>Requested Region not found<br />';
+	echo '<h3>Requested Region not found<br />';
 	exit();
 }
 
@@ -89,7 +89,7 @@ else
 		case 'existDisasterSerial':
 			$DisasterSerial = getParameter('DisasterSerial');
 			$answer = $us->existDisasterSerial($DisasterSerial);
-			print json_encode($answer);
+			echo json_encode($answer);
 		break;
 		case 'chklocked':
 			// check if datacard is locked by some user
@@ -105,7 +105,7 @@ else
 			{
 				$answer['DatacardStatus'] = 'BLOCKED';
 			}
-			print json_encode($answer);
+			echo json_encode($answer);
 		break;
 		case 'chkrelease':
 			$us->releaseDatacard($_GET['DisasterId']);

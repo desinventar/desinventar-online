@@ -48,7 +48,7 @@ function getParameter($prmName, $prmDefault='') {
 }
 
 function showDebugMsg($sMsg) {
-	print $sMsg . "<br />\n";
+	echo $sMsg . "<br />\n";
 }
 
 function createIfNotExistDirectory($sMyPath) {

@@ -52,7 +52,7 @@ class DIRegionInfo {
 				foreach($tree->childNodes as $node) {
 					$key = $node->nodeName;
 					$value = $node->nodeValue;
-					print $key . "\n";
+					echo $key . "\n";
 					$this->set($key, $value, $section);
 				}
 			} //foreach
@@ -65,7 +65,7 @@ class DIRegionInfo {
 				foreach($tree->childNodes as $node) {
 					$key = $node->nodeName;
 					$value = $node->nodeValue;
-					//print $node->nodeName . ' => ' . $node->nodeValue . "\n";
+					//echo $node->nodeName . ' => ' . $node->nodeValue . "\n";
 					if ($this->existField($key, $section)) {
 						$this->set($key, $value, $section);
 					}
