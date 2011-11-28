@@ -52,7 +52,7 @@ switch ($cmd)
 			$i = $o->update();
 		}
 		$answer['Status'] = $i;
-		print json_encode($answer);
+		echo json_encode($answer);
 	break;
 	case 'list':
 		$lev = $us->q->getNextLev($get['GeographyId']);

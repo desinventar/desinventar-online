@@ -13,7 +13,6 @@ function xml2array($contents, $get_attributes=1, $priority = 'tag') {
 	if(!$contents) return array();
 	
 	if(!function_exists('xml_parser_create')) {
-		//print "'xml_parser_create()' function not found!";
 		return array();
 	}
 		
