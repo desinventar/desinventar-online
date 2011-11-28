@@ -4,7 +4,6 @@
   (c) 1998-2011 Corporacion OSSO
 */
 
-//ob_start( 'ob_gzhandler' );
 require_once('include/loader.php');
 require_once('include/diregion.class.php');
 require_once('include/diregiondb.class.php');
