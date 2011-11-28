@@ -194,8 +194,7 @@ if (MODE != 'command')
 	$t->assign('version'     , VERSION);
 	$t->assign('jsversion'   , JSVERSION);
 
-	// Configure DESINVENTAR (web) application location
-	$desinventarURL = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'],'/'));
+	// Configure DESINVENTAR (web) application location	
 	if (isset($_SERVER['REDIRECT_DESINVENTAR_URL']))
 	{
 		$_SERVER['DESINVENTAR_URL'] = $_SERVER['REDIRECT_DESINVENTAR_URL'];
@@ -204,11 +203,21 @@ if (MODE != 'command')
 	{
 		$desinventarURL = $_SERVER['DESINVENTAR_URL'];
 	}
-	if (substr($desinventarURL, strlen($desinventarURL) - 1, 1) != '/')
-	{
-		$desinventarURL .= '/';
+	else
+	{		
+		$desinventarURL = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'],'/'));
+		if ($desinventarURL == '')
+		{
+			//$desinventarURL = $_SERVER['HTTP_HOST'];
+		}
+		else
+		{
+			if (substr($desinventarURL, strlen($desinventarURL) - 1, 1) != '/')
+			{
+				$desinventarURL .= '/';
+			}
+		}
 	}
-
 	// Configure DESINVENTAR (portal) application location
 	$desinventarURLPortal = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'],'/'));
 	if (isset($_SERVER['REDIRECT_DESINVENTAR_PORTAL']))
