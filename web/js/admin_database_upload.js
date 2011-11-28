@@ -61,25 +61,25 @@ function doAdminDatabaseCreateUploader()
 		},
 		debug:false,
 		multiple:false,
-		onSubmit: function(id, fileName)
+		onSubmit: function(id, Filename)
 		{
-			jQuery('#txtAdminDatabaseUploadFilename').val(fileName);
+			jQuery('#txtAdminDatabaseUploadFilename').val(Filename);
 			jQuery('#txtAdminDatabaseUploadId').val(id);
 			jQuery('#prgAdminDatabaseUploadProgressMark').css('width', '0px');
 			jQuery('#divFileUploaderControl .qq-upload-button-text').hide();
 			jQuery('#btnAdminDatabaseUploadCancel').show();
 		},
-		onProgress: function(id, fileName, loaded, total)
+		onProgress: function(id, Filename, loaded, total)
 		{
 			var maxWidth = jQuery('#prgAdminDatabaseUploadProgressBar').width();
 			var percent  = parseInt(loaded/total * 100);
 			var width    = parseInt(percent * maxWidth/100);
 			jQuery('#prgAdminDatabaseUploadProgressMark').css('width', width);
 		},
-		onComplete: function(id, fileName, data)
+		onComplete: function(id, Filename, data)
 		{
 			jQuery('#btnAdminDatabaseUploadCancel').hide();
-			jQuery('#txtAdminDatabaseUploadFilename').val(data.Filename);
+			jQuery('#txtAdminDatabaseUploadFilename').val(data.filename);
 			if (parseInt(data.Status)>0)
 			{
 				jQuery('#txtAdminDatabaseUploadRegionId').text(data.Info.RegionId);
@@ -94,7 +94,7 @@ function doAdminDatabaseCreateUploader()
 				doAdminDatabaseUploadStatusMsg('msgAdminDatabaseUploadErrorOnUpload');
 			}
 		},
-		onCancel: function(id, fileName)
+		onCancel: function(id, Filename)
 		{
 		},
 	});
