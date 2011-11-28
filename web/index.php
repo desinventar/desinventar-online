@@ -232,7 +232,6 @@ switch ($cmd)
 						$info['CountryIso']  = $r->get('CountryIso');
 						$answer['Info'] = $info;
 						$answer['DBExist'] = DIRegion::existRegion($us, $info['RegionId']);
-						$answer['Filename'] = $Filename;
 					}
 					else
 					{
