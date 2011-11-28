@@ -12,6 +12,8 @@ function onReadyAdminDatabaseUpload()
 	doAdminDatabaseCreateUploader();
 
 	jQuery('#btnAdminDatabaseUploadReplace').click(function() {
+		jQuery('#divAdminDatabaseUploadParameters').hide();
+		doAdminDatabaseUploadStatusMsg('msgAdminDatabaseUploadWaitForUpdate');
 		jQuery.post(jQuery('#desinventarURL').val(),
 		{
 			cmd: 'cmdDatabaseReplace',
@@ -20,6 +22,7 @@ function onReadyAdminDatabaseUpload()
 		},
 		function(data)
 		{
+			doAdminDatabaseUploadStatusMsg('');
 			if (parseInt(data.Status) > 0)
 			{
 				jQuery('#divAdminDatabaseUploadParameters').hide();

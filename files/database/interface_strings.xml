@@ -2934,10 +2934,16 @@
 			<Text LangIsoCode="fre">Erreur lors du téléchargement de fichiers</Text>
 		</Message>
 		<Message id="msgAdminDatabaseUploadUpdateError">
-			<Text LangIsoCode="eng">Database cannot be updated or created</Text>
+			<Text LangIsoCode="eng">Database cannot be updated or created/update</Text>
 			<Text LangIsoCode="spa">Base de datos no pudo se creada/actualizada</Text>
 			<Text LangIsoCode="por">Banco de dados não pode ser criado ou atualizado</Text>
 			<Text LangIsoCode="fre">Base de datos no pueden ser creados o actualizados</Text>
+		</Message>
+		<Message id="msgAdminDatabaseUploadWaitForUpdate">
+			<Text LangIsoCode="eng">Please wait while database is being updated...</Text>
+			<Text LangIsoCode="spa">Por favor espere mientras la base de datos se actualiza...</Text>
+			<Text LangIsoCode="por">Aguarde enquanto o banco de dados está sendo atualizado...</Text>
+			<Text LangIsoCode="fre">S'il vous plaît patienter pendant que base de données est mise à jour...</Text>
 		</Message>
 		<Message id="msgAdminDatabaseUploadRegionId">
 			<Text LangIsoCode="eng">Identifier</Text>
