@@ -86,5 +86,6 @@
 	<input type="hidden" id="msgAdminDatabaseUploadComplete"   value="{-#msgAdminDatabaseUploadComplete#-}" />
 	<input type="hidden" id="msgAdminDatabaseUploadChooseFile" value="{-#msgAdminDatabaseUploadChooseFile#-}" />
 	<span class="clsAdminDatabaseUploadStatusMsg" id="msgAdminDatabaseUploadUpdateOk">{-#msgAdminDatabaseUploadUpdateOk#-}</span>
+	<span class="clsAdminDatabaseUploadStatusMsg" id="msgAdminDatabaseUploadErrorOnUpload">{-#msgAdminDatabaseUploadErrorOnUpload#-}</span>
 	<span class="clsAdminDatabaseUploadStatusMsg" id="msgAdminDatabaseUploadUpdateError">{-#msgAdminDatabaseUploadUpdateError#-}</span>
 </div>
