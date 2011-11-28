@@ -76,15 +76,22 @@ function doAdminDatabaseCreateUploader()
 			jQuery('#prgAdminDatabaseUploadPercent').text(percent + '%');
 		},
 		onComplete: function(id, fileName, data)
-		{~
+		{
 			jQuery('#btnAdminDatabaseUploadCancel').hide();
 			jQuery('#txtAdminDatabaseUploadFilename').val(data.Filename);
-			jQuery('#txtAdminDatabaseUploadRegionId').text(data.Info.RegionId);
-			jQuery('#txtAdminDatabaseUploadRegionLabel').text(data.Info.RegionLabel);
-			jQuery('#txtAdminDatabaseUploadLangIsoCode').text(data.Info.LangIsoCode);
-			jQuery('#txtAdminDatabaseUploadCountryIso').text(data.Info.CountryIso);
-			doAdminDatabaseUploadStatusMsg('');
-			jQuery('#divAdminDatabaseUploadParameters').show();
+			if (parseInt(data.Status)>0)
+			{
+				jQuery('#txtAdminDatabaseUploadRegionId').text(data.Info.RegionId);
+				jQuery('#txtAdminDatabaseUploadRegionLabel').text(data.Info.RegionLabel);
+				jQuery('#txtAdminDatabaseUploadLangIsoCode').text(data.Info.LangIsoCode);
+				jQuery('#txtAdminDatabaseUploadCountryIso').text(data.Info.CountryIso);
+				doAdminDatabaseUploadStatusMsg('');
+				jQuery('#divAdminDatabaseUploadParameters').show();
+			}
+			else
+			{
+				doAdminDatabaseUploadStatusMsg('msgAdminDatabaseUploadErrorOnUpload');
+			}
 		},
 		onCancel: function(id, fileName)
 		{

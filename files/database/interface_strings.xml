@@ -2921,6 +2921,12 @@
 			<Text LangIsoCode="por">Banco de dados atualizado corretamente</Text>
 			<Text LangIsoCode="fre">Base de données mis à jour correctement</Text>
 		</Message>
+		<Message id="msgAdminDatabaseUploadErrorOnUpload">
+			<Text LangIsoCode="eng">Error while uploading file</Text>
+			<Text LangIsoCode="spa">Error al subir archivo</Text>
+			<Text LangIsoCode="por">Erro ao carregar arquivo</Text>
+			<Text LangIsoCode="fre">Erreur lors du téléchargement de fichiers</Text>
+		</Message>
 		<Message id="msgAdminDatabaseUploadUpdateError">
 			<Text LangIsoCode="eng">Database cannot be updated or created</Text>
 			<Text LangIsoCode="spa">Base de datos no pudo se creada/actualizada</Text>

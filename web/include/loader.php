@@ -12,10 +12,10 @@ if (! isset($_SERVER['DESINVENTAR_WEB']))
 
 // This is the version of the software
 define('MAJORVERSION', '2011');
-define('MINORVERSION', '331');
+define('MINORVERSION', '332');
 define('VERSION'     , MAJORVERSION . '.' . MINORVERSION);
 define('INTVERSION'  , '8.2.2.05');
-define('JSVERSION'   , '2011-11-27.01');
+define('JSVERSION'   , '2011-11-29.01');
 
 // 2009-07-22 (jhcaiced) Adapted Configuration and Startup for 
 // using with PHP Command Line 
@@ -56,7 +56,7 @@ if (isset($_SERVER['HTTP_HOST']))
 		define('ARCH', 'LINUX');
 		define('MAPSERV', 'mapserv');
 		define('SMARTYDIR', '/usr/share/php/Smarty');
-		define('TEMP', '/tmp');
+		define('TEMP', '/var/tmp/desinventar');
 		define('JPGRAPHDIR', '/usr/share/php/jpgraph');
 		define('FONTSET' , '/usr/share/fonts/liberation/fonts.txt');
 		if (! isset($_SERVER['DESINVENTAR_WEB']))
@@ -89,7 +89,7 @@ else
 	{
 		$_SERVER['DESINVENTAR_CACHEDIR'] = '/var/cache/Smarty/desinventar';
 	}
-	define('TEMP', '/tmp');
+	define('TEMP', '/var/tmp/desinventar');
 }
 define('BASE'    , $_SERVER['DESINVENTAR_WEB']);
 define('WWWDIR'  , $_SERVER['DESINVENTAR_WWWDIR']);
