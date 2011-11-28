@@ -68,6 +68,7 @@ function doAdminDatabaseCreateUploader()
 			jQuery('#prgAdminDatabaseUploadProgressMark').css('width', '0px');
 			jQuery('#divFileUploaderControl .qq-upload-button-text').hide();
 			jQuery('#btnAdminDatabaseUploadCancel').show();
+			doAdminDatabaseUploadStatusMsg('msgAdminDatabaseUploadWaitForUpdate');
 		},
 		onProgress: function(id, Filename, loaded, total)
 		{
@@ -78,6 +79,7 @@ function doAdminDatabaseCreateUploader()
 		},
 		onComplete: function(id, Filename, data)
 		{
+			doAdminDatabaseUploadStatusMsg('');
 			jQuery('#btnAdminDatabaseUploadCancel').hide();
 			jQuery('#txtAdminDatabaseUploadFilename').val(data.filename);
 			if (parseInt(data.Status)>0)
