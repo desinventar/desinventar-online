@@ -390,7 +390,7 @@ function doMainMenuCreate()
 			Ext.getCmp('mnuDatacardView').hide();
 			Ext.getCmp('mnuDatacardInsertEdit').show();
 			// Enable other functions
-			Ext.getCmp('mnuDatacardImport').show();
+			Ext.getCmp('mnuDatacardImport').hide(); // Disabled for now
 			Ext.getCmp('mnuDatabaseExport').show();
 			if (UserRoleValue >= 4)
 			{

@@ -63,7 +63,6 @@ function doAdminDatabaseCreateUploader()
 			jQuery('#txtAdminDatabaseUploadFilename').val(fileName);
 			jQuery('#txtAdminDatabaseUploadId').val(id);
 			jQuery('#prgAdminDatabaseUploadProgressMark').css('width', '0px');
-			jQuery('#prgAdminDatabaseUploadPercent').text('');
 			jQuery('#divFileUploaderControl .qq-upload-button-text').hide();
 			jQuery('#btnAdminDatabaseUploadCancel').show();
 		},
@@ -73,7 +72,6 @@ function doAdminDatabaseCreateUploader()
 			var percent  = parseInt(loaded/total * 100);
 			var width    = parseInt(percent * maxWidth/100);
 			jQuery('#prgAdminDatabaseUploadProgressMark').css('width', width);
-			jQuery('#prgAdminDatabaseUploadPercent').text(percent + '%');
 		},
 		onComplete: function(id, fileName, data)
 		{
@@ -110,7 +108,6 @@ function doAdminDatabaseUploadReset()
 {
 	jQuery('#txtAdminDatabaseUploadFilename').val('');
 	jQuery('#prgAdminDatabaseUploadProgressMark').css('width', '0px');
-	jQuery('#prgAdminDatabaseUploadPercent').text('');
 	jQuery('#btnAdminDatabaseUploadCancel').hide();
 	jQuery('#divFileUploaderControl .qq-upload-button-text').show();
 }
@@ -134,7 +131,7 @@ function doAdminDatabaseUploadCreate()
 	// Database Upload
 	var w = new Ext.Window({id:'wndDatabaseUpload', 
 		el: 'divDatabaseUploadWin', layout:'fit', 
-		width:600, height:400, modal:false,
+		width:600, height:330, modal:false,
 		closeAction:'hide', plain: false, animCollapse: false,
 		items: new Ext.Panel({
 			contentEl: 'divDatabaseUploadContent',
