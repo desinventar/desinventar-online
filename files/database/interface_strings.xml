@@ -1765,6 +1765,12 @@
 			<Text LangIsoCode="por">Tipos de causas</Text>
 			<Text LangIsoCode="fre">Types de causes</Text>
 		</Message>
+		<Message id="mdcsection">
+			<Text LangIsoCode="eng">Data cards</Text>
+			<Text LangIsoCode="spa">Fichas</Text>
+			<Text LangIsoCode="por">Formulários</Text>
+			<Text LangIsoCode="fre">Carte de données</Text>
+		</Message>
 		<Message id="madvsection">
 			<Text LangIsoCode="eng">Advanced query</Text>
 			<Text LangIsoCode="spa">Consulta avanzada</Text>
