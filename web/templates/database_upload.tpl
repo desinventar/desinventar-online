@@ -88,5 +88,6 @@
 		<span class="clsAdminDatabaseUploadStatusMsg" id="msgAdminDatabaseUploadUpdateOk">{-#msgAdminDatabaseUploadUpdateOk#-}</span>
 		<span class="clsAdminDatabaseUploadStatusMsg" id="msgAdminDatabaseUploadErrorOnUpload">{-#msgAdminDatabaseUploadErrorOnUpload#-}</span>
 		<span class="clsAdminDatabaseUploadStatusMsg" id="msgAdminDatabaseUploadUpdateError">{-#msgAdminDatabaseUploadUpdateError#-}</span>
+		<span class="clsAdminDatabaseUploadStatusMsg" id="msgAdminDatabaseUploadWaitForUpdate">{-#msgAdminDatabaseUploadWaitForUpdate#-}</span>
 	</div>
 </div>
