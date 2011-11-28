@@ -132,26 +132,31 @@
 		 */
 		function handleUpload($uploadDirectory, $replaceOldFile = FALSE)
 		{
+			$iReturn = 1;
+			$answer = array();
 			if (!is_writable($uploadDirectory))
 			{
-				return array('error' => "Server error. Upload directory isn't writable.");
+				$answer['error'] = "Server error. Upload directory isn't writable.";
+				$iReturn = -1;
 			}
 			
 			if (!$this->file)
 			{
-				return array('error' => 'No files were uploaded.');
+				$answer['error'] = 'No files were uploaded.';
+				$iReturn = -1;
 			}
 			
-			$size = $this->file->getSize();
-			
+			$size = $this->file->getSize();			
 			if ($size == 0)
 			{
-				return array('error' => 'File is empty');
+				$answer['error'] = 'File is empty';
+				$iReturn = -1;
 			}
 			
 			if ($size > $this->sizeLimit)
 			{
-				return array('error' => 'File is too large');
+				$answer['error'] = 'File is too large';
+				$iReturn = -1;
 			}
 			
 			$pathinfo = pathinfo($this->file->getName());
@@ -162,7 +167,8 @@
 			if($this->allowedExtensions && !in_array(strtolower($ext), $this->allowedExtensions))
 			{
 				$these = implode(', ', $this->allowedExtensions);
-				return array('error' => 'File has an invalid extension, it should be one of '. $these . '.');
+				$answer['error'] = 'File has an invalid extension, it should be one of '. $these . '.';
+				$iReturn = -1;
 			}
 			
 			if(!$replaceOldFile)
@@ -176,14 +182,15 @@
 			
 			if ($this->file->save($uploadDirectory . $filename . '.' . $ext))
 			{
-				return array('success'=>true);
+				$answer['filename'] = $filename . '.' . $ext;
+				$answer['success'] = true;
 			}
 			else
 			{
-				return array('error'=> 'Could not save uploaded file.' .
-					'The upload was cancelled, or server error encountered');
+				$answer['error'] = 'Could not save uploaded file.' .
+					'The upload was cancelled, or server error encountered';
 			}
-			
-		}    
+			return $answer;
+		} //function handleUpload
 	} //class
 </script>
