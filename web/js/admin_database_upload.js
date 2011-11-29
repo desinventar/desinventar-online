@@ -5,6 +5,7 @@
 
 function onReadyAdminDatabaseUpload()
 {
+	jQuery('#divAdminDatabaseUploadControl').show();
 	jQuery('#divAdminDatabaseUploadParameters').hide();
 	doAdminDatabaseUploadStatusMsg('');
 
@@ -41,6 +42,7 @@ function onReadyAdminDatabaseUpload()
 
 	jQuery('#btnAdminDatabaseUploadReplaceCancel').click(function() {
 		doAdminDatabaseUploadReset();
+		jQuery('#divAdminDatabaseUploadControl').show();
 		jQuery('#divAdminDatabaseUploadParameters').hide();
 		jQuery('#divFileUploaderControl .qq-upload-button-text').show();
 	});
@@ -89,6 +91,7 @@ function doAdminDatabaseCreateUploader()
 				jQuery('#txtAdminDatabaseUploadLangIsoCode').text(data.Info.LangIsoCode);
 				jQuery('#txtAdminDatabaseUploadCountryIso').text(data.Info.CountryIso);
 				doAdminDatabaseUploadStatusMsg('');
+				jQuery('#divAdminDatabaseUploadControl').hide();
 				jQuery('#divAdminDatabaseUploadParameters').show();
 			}
 			else
@@ -136,13 +139,14 @@ function doAdminDatabaseUploadCreate()
 	// Database Upload
 	var w = new Ext.Window({id:'wndDatabaseUpload', 
 		el: 'divDatabaseUploadWin', layout:'fit', 
-		width:600, height:330, modal:false,
+		width:400, height:200, modal:false,
 		closeAction:'hide', plain: false, animCollapse: false,
 		items: new Ext.Panel({
 			contentEl: 'divDatabaseUploadContent',
 			autoScroll: true
 		}),
 		buttons: [
+			/*
 			{
 				text: jQuery('#msgAdminDatabaseUploadButtonClose').text(),
 				handler: function()
@@ -152,6 +156,7 @@ function doAdminDatabaseUploadCreate()
 					Ext.getCmp('wndDatabaseUpload').hide();
 				} //handler
 			}
+			*/
 		] //button
 	});
 	jQuery('#fldAdminDatabaseUploadSave').val(1);

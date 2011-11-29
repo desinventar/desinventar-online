@@ -20,19 +20,18 @@
 				onReadyAdminDatabase();
 				//doAdminDatabaseUpdateList();
 				//doAdminDatabaseExportCreate();
-				jQuery('#btnDatabaseExport').click(function() {
-					// 2011-04-29 (jhcaiced) Fix for use of ExtJS in IE9 ?
-					if ((typeof Range !== "undefined") && !Range.prototype.createContextualFragment)
+				// 2011-04-29 (jhcaiced) Fix for use of ExtJS in IE9 ?
+				if ((typeof Range !== "undefined") && !Range.prototype.createContextualFragment)
+				{
+					Range.prototype.createContextualFragment = function(html)
 					{
-						Range.prototype.createContextualFragment = function(html)
-						{
-							var frag = document.createDocumentFragment(), div = document.createElement("div");
-							frag.appendChild(div);
-							div.outerHTML = html;
-							return frag;
-						};
-					}
-					
+						var frag = document.createDocumentFragment(), div = document.createElement("div");
+						frag.appendChild(div);
+						div.outerHTML = html;
+						return frag;
+					};
+				}
+				jQuery('#btnDatabaseExport').click(function() {					
 					jQuery('.clsAdminDatabaseUpload').hide();
 					Ext.getCmp('wndDatabaseUpload').show();
 					doAdminDatabaseUploadAction();

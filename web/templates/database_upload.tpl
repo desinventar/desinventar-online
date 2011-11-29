@@ -12,7 +12,7 @@
 				{-#msgAdminDatabaseUploadFilename#-} :
 			</td>
 			<td colspan="2" valign="top">
-				<input type="text"   id="txtAdminDatabaseUploadFilename" value="" size="50"/>
+				<input type="text"   id="txtAdminDatabaseUploadFilename" value="" size="35"/>
 				<input type="hidden" id="txtAdminDatabaseUploadId" value="" />
 			</td>
 		</tr>
@@ -36,11 +36,10 @@
 	</div>
 
 	<div id="divAdminDatabaseUploadParameters" style="display:none;">
-		<hr size="1" />
 		<h4>{-#msgAdminDatabaseUploadConfirmReplace#-}</h4><br />
 		<table width="100%">
 		<tr>
-			<td align="right" width="50%">
+			<td align="right" width="25%">
 				{-#msgAdminDatabaseUploadRegionId#-} :
 			</td>
 			<td width="50%">
@@ -88,6 +87,6 @@
 		<span class="clsAdminDatabaseUploadStatusMsg" id="msgAdminDatabaseUploadUpdateOk">{-#msgAdminDatabaseUploadUpdateOk#-}</span>
 		<span class="clsAdminDatabaseUploadStatusMsg" id="msgAdminDatabaseUploadErrorOnUpload">{-#msgAdminDatabaseUploadErrorOnUpload#-}</span>
 		<span class="clsAdminDatabaseUploadStatusMsg" id="msgAdminDatabaseUploadUpdateError">{-#msgAdminDatabaseUploadUpdateError#-}</span>
-		<span class="clsAdminDatabaseUploadStatusMsg" id="msgAdminDatabaseUploadWaitForUpdate">{-#msgAdminDatabaseUploadWaitForUpdate#-}<img src="{-$desinventarURL-}/images/loading2.gif" alt="" /></span>
+		<span class="clsAdminDatabaseUploadStatusMsg" id="msgAdminDatabaseUploadWaitForUpdate">{-#msgAdminDatabaseUploadWaitForUpdate#-}<img src="{-$desinventarURL-}/images/loading.gif" alt="" /></span>
 	</div>
 </div>
