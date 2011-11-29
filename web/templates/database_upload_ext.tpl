@@ -10,5 +10,5 @@
 <div style="display:none;">
 	<span id="msgAdminDatabaseUploadButtonClose">{-#msgAdminDatabaseUploadButtonClose#-}</span>
 	<input type="hidden" id="fldAdminDatabaseUploadSave"  value="1" />
-	<input type="hidden" id="fldAdminDatabaseUploadImage" value="{-$desinventarURL-}images/loading.gif" />
+	<input type="hidden" id="fldAdminDatabaseUploadImage" value="{-$desinventarURL-}/images/loading.gif" />
 </div>

@@ -206,6 +206,7 @@ if (MODE != 'command')
 	else
 	{		
 		$desinventarURL = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'],'/'));
+		/*
 		if ($desinventarURL == '')
 		{
 			//$desinventarURL = $_SERVER['HTTP_HOST'];
@@ -217,6 +218,7 @@ if (MODE != 'command')
 				$desinventarURL .= '/';
 			}
 		}
+		*/
 	}
 	// Configure DESINVENTAR (portal) application location
 	$desinventarURLPortal = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'],'/'));

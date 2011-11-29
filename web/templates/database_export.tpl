@@ -25,5 +25,5 @@
 	<span id="msgAdminDatabaseExportButtonSend">{-#msgAdminDatabaseExportButtonSend#-}</span>
 	<span id="msgAdminDatabaseExportButtonClose">{-#msgAdminDatabaseExportButtonClose#-}</span>
 	<input type="hidden" id="fldAdminDatabaseExportSave"  value="1" />
-	<input type="hidden" id="fldAdminDatabaseExportImage" value="{-$desinventarURL-}images/loading.gif" />
+	<input type="hidden" id="fldAdminDatabaseExportImage" value="{-$desinventarURL-}/images/loading.gif" />
 </div>
