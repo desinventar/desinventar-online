@@ -3,7 +3,7 @@
 	<div class="x-window-header">
 		{-#msgAdminDatabaseExportTitle#-}
 	</div>
-	<div id="divDatabaseExportContent">
+	<div id="divDatabaseExportContent" style="margin:10px;">
 		<h4>
 			<span id="txtAdminDatabaseExportRegionLabel"></span>
 		</h4>
