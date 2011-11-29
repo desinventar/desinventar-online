@@ -16,7 +16,7 @@
 			<tr>
 				<td><b>{-#tadminof#-}</b>
 				</td>
-				<td><a href="javascript:void(null)" onclick="parent.window.location = jQuery('#desinventarURL').val() + '/index.php?r={-$key-}'">{-$item-}</a>
+				<td><a href="javascript:void(null)" onclick="parent.window.location = jQuery('#desinventarURL').val() + '/?r={-$key-}'">{-$item-}</a>
 				</td>
 			</tr>
 		{-/foreach-}
@@ -26,7 +26,7 @@
 			<tr>
 				<td><b>{-#tobservof#-}</b>
 				</td>
-				<td><a href="javascript:void(null)" onclick="parent.window.location = jQuery('#desinventarURL').val() + '/index.php?r={-$key-}'">{-$item-}</a>
+				<td><a href="javascript:void(null)" onclick="parent.window.location = jQuery('#desinventarURL').val() + '/?r={-$key-}'">{-$item-}</a>
 				</td>
 			</tr>
 		{-/foreach-}
@@ -36,7 +36,7 @@
 			<tr>
 				<td><b>{-#tsupervof#-}</b>
 				</td>
-				<td><a href="javascript:void(null)" onclick="parent.window.location = jQuery('#desinventarURL').val() + '/index.php?r={-$key-}'">{-$item-}</a>
+				<td><a href="javascript:void(null)" onclick="parent.window.location = jQuery('#desinventarURL').val() + '/?r={-$key-}'">{-$item-}</a>
 				</td>
 			</tr>
 		{-/foreach-}
@@ -46,7 +46,7 @@
 			<tr>
 				<td><b>{-#tuserof#-}</b>
 				</td>
-				<td><a href="javascript:void(null)" onclick="parent.window.location = jQuery('#desinventarURL').val() + '/index.php?r={-$key-}'">{-$item-}</a>
+				<td><a href="javascript:void(null)" onclick="parent.window.location = jQuery('#desinventarURL').val() + '/?r={-$key-}'">{-$item-}</a>
 				</td>
 			</tr>
 		{-/foreach-}

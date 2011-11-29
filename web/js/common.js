@@ -10,7 +10,7 @@ function onReadyCommon()
 }
 
 function doKeepSessionAwake() {
-	jQuery.post(jQuery('#desinventarURL').val() + '/index.php',
+	jQuery.post(jQuery('#desinventarURL').val() + '/',
 		{cmd : 'cmdSessionAwake'},
 		function(data) {
 		},
@@ -20,8 +20,8 @@ function doKeepSessionAwake() {
 
 function doGetRegionInfo(RegionId)
 {
-	jQuery('#divRegionInfo #divRegionLogo').html('<img src="' + jQuery('#desinventarURL').val() + 'images/loading.gif" alt="" />');
-	jQuery.post(jQuery('#desinventarURL').val(),
+	jQuery('#divRegionInfo #divRegionLogo').html('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />');
+	jQuery.post(jQuery('#desinventarURL').val() + '/',
 		{
 		  cmd         : 'cmdGetRegionInfo', 
 		  RegionId    : RegionId,
@@ -32,7 +32,7 @@ function doGetRegionInfo(RegionId)
 			if (parseInt(data.Status)>0)
 			{
 				var i = data.RegionInfo;
-				jQuery('#divRegionInfo #divRegionLogo').html('<img src="' + jQuery('#desinventarURL').val() + '?cmd=getRegionLogo&RegionId=' + RegionId + '" alt="" />');
+				jQuery('#divRegionInfo #divRegionLogo').html('<img src="' + jQuery('#desinventarURL').val() + '/?cmd=getRegionLogo&RegionId=' + RegionId + '" alt="" />');
 				jQuery('#divRegionInfo #txtRegionLabel').text(i.RegionLabel);
 				jQuery('#divRegionInfo #txtRegionPeriod').text(i.PeriodBeginDate + ' - ' + i.PeriodEndDate);
 				jQuery('#divRegionInfo #txtRegionNumDatacards').text(i.NumDatacards);
@@ -74,8 +74,7 @@ function updateDatabaseList(CountryIsoCode,searchByCountry) {
 	jQuery('.databaseTitle').hide();
 	jQuery('.databaseList').hide();
 	jQuery("#divRegionList").hide();
-	var desinventarURL = jQuery('#desinventarURL').val();
-	jQuery.get(desinventarURL, 
+	jQuery.get(jQuery('#desinventarURL').val() + '/', 
 		{cmd: 'getCountryName', CountryIso : CountryIsoCode },
 		function(data) { 
 			jQuery("#divRegionList #title_COUNTRY").html('<h3>' + data.CountryName + '</h3>');
@@ -83,7 +82,7 @@ function updateDatabaseList(CountryIsoCode,searchByCountry) {
 		},
 		'jsonp'
 	);
-	jQuery.post(desinventarURL,
+	jQuery.post(jQuery('#desinventarURL').val() + '/',
 		{cmd: 'cmdSearchDB', 
 		 searchDBQuery: CountryIsoCode, 
 		 searchDBCountry : 1
@@ -127,15 +126,15 @@ function updateDatabaseListByUser()
 {
 	jQuery(".contentBlock").hide();
 	jQuery("#divRegionList").show();
-	var desinventarURL = jQuery('#desinventarURL').val();
 	// Hide everything at start...
 	jQuery('.databaseTitle').hide();
 	jQuery('.databaseList').hide();
-				
-	jQuery.post(desinventarURL,
-		{ cmd: 'cmdSearchDB', 
-		  searchDBQuery: '', 
-		  searchDBCountry : 0
+
+	jQuery.post(jQuery('#desinventarURL').val() + '/',
+		{
+			cmd: 'cmdSearchDB',
+			searchDBQuery: '', 
+			searchDBCountry : 0
 		},
 		function(data) {
 			if (data.Status == 'OK') {
@@ -151,7 +150,7 @@ function updateDatabaseListByUser()
 				jQuery('.databaseList').empty();
 				jQuery.each(data.RegionList, function(RegionId, value) {
 					jQuery('#divRegionList #title_' + value.Role).show();
-					jQuery('#divRegionList #list_' + value.Role).show().append('<a href="' + jQuery('#desinventarURL').val() + RegionId + '" id="' + RegionId + '" class="databaseLink">' + value.RegionLabel + '</a><br />');
+					jQuery('#divRegionList #list_' + value.Role).show().append('<a href="' + jQuery('#desinventarURL').val() + '/' + RegionId + '" id="' + RegionId + '" class="databaseLink">' + value.RegionLabel + '</a><br />');
 					iCount++;
 				});
 				
@@ -163,7 +162,7 @@ function updateDatabaseListByUser()
 					}
 					else
 					{
-						window.location = jQuery('#desinventarURL').val() + RegionId;
+						window.location = jQuery('#desinventarURL').val() + '/' + RegionId;
 					}
 					return false;
 				}); //bind

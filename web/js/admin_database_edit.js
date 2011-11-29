@@ -12,7 +12,7 @@ function onReadyAdminDatabaseEdit()
 	jQuery('#frmRegionEdit_CountryIso').change(function() {
 		if (jQuery('#frmRegionEdit_Cmd').val() == 'cmdRegionCreate')
 		{
-			jQuery.post(jQuery('#desinventarURL').val() + '/index.php',
+			jQuery.post(jQuery('#desinventarURL').val() + '/',
 				{cmd        : 'cmdRegionBuildRegionId',
 				 CountryIso : jQuery(this).val()
 				},
@@ -54,7 +54,7 @@ function onReadyAdminDatabaseEdit()
 		if (bContinue) {
 			jQuery('#frmRegionEdit :input').unhighlight();
 			jQuery.post(
-				jQuery('#desinventarURL').val(),
+				jQuery('#desinventarURL').val() + '/',
 				params, 
 				function(data) {
 					if (parseInt(data.Status) > 0) {
@@ -79,7 +79,7 @@ function doAdminDatabaseGetInfo(RegionId)
 {
 	// Load Information about database...
 	jQuery.post(
-		jQuery('#desinventarURL').val(),
+		jQuery('#desinventarURL').val() + '/',
 		{cmd      : 'cmdAdminDatabaseGetInfo',
 		 RegionId : RegionId
 		},

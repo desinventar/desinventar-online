@@ -22,7 +22,7 @@
 						{-#mopenquery#-}
 					</div>
 					<div id="qry-cfg" style="text-align:center;">
-						<form id="openquery" enctype="multipart/form-data" action="index.php?r={-$reg-}" method="POST">
+						<form id="openquery" enctype="multipart/form-data" action="{-$desinventarURL-}/?r={-$reg-}" method="POST">
 							<br /><br />
 							<input type="hidden" name="cmd" value="openquery" />
 							<input type="hidden" name="MAX_FILE_SIZE" value="100000" />

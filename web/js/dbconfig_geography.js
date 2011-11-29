@@ -26,13 +26,12 @@ function onReadyDBConfigGeography()
 						jQuery('#geoaddsect').hide();
 						var RegionId = jQuery('#desinventarRegionId').val();
 						updateList('lst_ageo', jQuery('#desinventarURL').val() + '/geography.php', 'RegionId=' + RegionId +'&cmd=list&GeographyId=');
-						updateList('qgeolst', jQuery('#desinventarURL').val() + '/index.php', 'RegionId='+ RegionId +'&cmd=geolst');
+						updateList('qgeolst', jQuery('#desinventarURL').val() + '/', 'RegionId='+ RegionId +'&cmd=geolst');
 					}
 					else
 					{
 						jQuery('#msgDBConfigGeographyError').text('Cannot save geography, error code : ' + data.Status).show();
 					}
-					//mod='geo'; sendData('{-$reg-}', jQuery('#desinventarURL').val() + '/geography.php', s, '');"
 				},
 				'json'
 			);

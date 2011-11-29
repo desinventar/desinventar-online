@@ -63,7 +63,7 @@ function onReadyAdminDatabase()
 function doAdminDatabaseUpdateList()
 {
 	jQuery.post(
-		jQuery('#desinventarURL').val(),
+		jQuery('#desinventarURL').val() + '/',
 		{
 			cmd:'cmdAdminDatabaseGetList'
 		},

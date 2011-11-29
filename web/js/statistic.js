@@ -47,7 +47,7 @@ function doStatDisplayPage(page) {
 	jQuery('#StatCurPage').val(mypag);
 	var RecordsPerPage = jQuery('#prmStatRecordsPerPage').val();
 
-	jQuery('#tblStatRows').html('<img src="' + jQuery('#desinventarURL').val() + 'images/loading.gif" alt="" />');
+	jQuery('#tblStatRows').html('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />');
 	jQuery.post(jQuery('#desinventarURL').val() + '/statistic.php',
 		{r : jQuery('#prmStatRegionId').val(),
 		 page : mypag,
@@ -63,7 +63,7 @@ function doStatDisplayPage(page) {
 } //function
 
 function doStatOrderByField(field, dir) {
-	jQuery('#tblStatRows').html('<img src="' + jQuery('#desinventarURL').val() + 'images/loading.gif" alt="" />');
+	jQuery('#tblStatRows').html('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />');
 	jQuery.post(jQuery('#desinventarURL').val() + '/statistic.php',
 		{r  : jQuery('#prmStatRegionId').val(),
 		 page : $('StatCurPage').value,
