@@ -29,7 +29,7 @@ function doAdminDatabaseExportCreate()
 				{
 					doAdminDatabaseExportAction();
 				} //handler
-			},*/
+			},
 			{
 				text: jQuery('#msgAdminDatabaseExportButtonClose').text(),
 				handler: function()
@@ -39,6 +39,7 @@ function doAdminDatabaseExportCreate()
 					Ext.getCmp('wndDatabaseExport').hide();
 				} //handler
 			}
+			*/
 		] //button
 	});
 	jQuery('#fldAdminDatabaseExportSave').val(1);
