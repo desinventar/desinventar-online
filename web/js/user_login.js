@@ -20,12 +20,7 @@ function onReadyUserLogin() {
 		}
 		else
 		{
-			var desinventarURL = jQuery('#desinventarURL').val();
-			if (desinventarURL == undefined)
-			{
-				desinventarURL = '';
-			}
-			jQuery.post(desinventarURL + '/user.php',
+			jQuery.post(jQuery('#desinventarURL').val() + '/user.php',
 				{
 					'cmd'        : 'login',
 					'UserId'     : UserId,
@@ -61,8 +56,7 @@ function onReadyUserLogin() {
 function doUserLogout()
 {
 	var Answer = 0;
-	desinventarURL = jQuery('#desinventarURL').val();
-	jQuery.post(desinventarURL + '/user.php',
+	jQuery.post(jQuery('#desinventarURL').val() + '/user.php',
 		{
 			'cmd'        : 'logout'
 		},

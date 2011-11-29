@@ -135,7 +135,7 @@ function onMenuItem(item) {
 		case 'mnuUserLanguage-por':
 		case 'mnuUserLanguage-fre':
 			jQuery.post(
-				jQuery('#desinventarURL').val(),
+				jQuery('#desinventarURL').val() + '/',
 				{
 					cmd : 'cmdUserLanguageChange',
 					LangIsoCode : item.langisocode
@@ -177,7 +177,7 @@ function onMenuItem(item) {
 		break;
 		case 'mnuQueryNew':
 			// Just reload the current region window...(need a better solution!!)
-			window.location = jQuery('#desinventarURL').val() + '/index.php?r=' + RegionId;
+			window.location = jQuery('#desinventarURL').val() + '/' + RegionId;
 		break;
 		case 'menuQuerySave':
 			saveQuery();
@@ -190,7 +190,7 @@ function onMenuItem(item) {
 		case 'mnuDatacardInsertEdit':
 			jQuery('#cardsRecordNumber').val(0);
 			jQuery('#cardsRecordSource').val('');
-			jQuery.post(jQuery('#desinventarURL').val() + '/index.php',
+			jQuery.post(jQuery('#desinventarURL').val() + '/',
 				{cmd      : 'getRegionRecordCount',
 				 RegionId : jQuery('#desinventarRegionId').val()
 				},

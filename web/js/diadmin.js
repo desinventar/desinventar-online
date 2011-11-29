@@ -6,7 +6,7 @@
 	var mod = "";
 	var opt = "";
 	var reg = "";
-	var waiting = '<img src="' + jQuery('#desinventarURL').val() + 'images/loading.gif" alt="" />';
+	var waiting = '<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />';
 
 	function uploadMsg(msg)
 	{
@@ -98,7 +98,7 @@
 			break;
 			case "geo":
 				updateList('lst_ageo', jQuery('#desinventarURL').val() + '/geography.php', 'r='+ reg +'&cmd=list&GeographyId=');
-				updateList('qgeolst', jQuery('#desinventarURL').val() + '/index.php', 'r='+ reg +'&cmd=geolst');
+				updateList('qgeolst', jQuery('#desinventarURL').val() + '/', 'r='+ reg +'&cmd=geolst');
 			break;
 			default:
 			break;
@@ -625,7 +625,7 @@
 		selectall('_S+Field[]');
 		combineForms('frmMainQuery', 'CS');
 		jQuery('#_CMD').val('savequery');
-		$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/index.php?r=' + jQuery('#desinventarRegionId').val();
+		$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/?r=' + jQuery('#desinventarRegionId').val();
 		jQuery('#frmMainQuery').submit();
 		return true;
 	}
@@ -714,7 +714,7 @@
 		{
 			// Find and fill childs
 			$('itree-' + gid).style.display = 'block';
-			updateList('itree-' + gid, jQuery('#desinventarURL').val() + '/index.php', 'r=' + jQuery('#desinventarRegionId').val() + '&cmd=glist&GeographyId=' + gid);
+			updateList('itree-' + gid, jQuery('#desinventarURL').val() + '/', 'r=' + jQuery('#desinventarRegionId').val() + '&cmd=glist&GeographyId=' + gid);
 		}
 		else
 		{

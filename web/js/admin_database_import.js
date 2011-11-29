@@ -15,7 +15,7 @@ function onReadyDatabaseImport() {
 
 	// Create a SWFUpload instance and attach events...
 	jQuery('#divDBImportControl').swfupload({
-		upload_url: jQuery('#desinventarURL').val() + '/index.php', //?cmd=fileupload', //'&t=' + new Date().getTime(),
+		upload_url: jQuery('#desinventarURL').val() + '/',
 		post_params: {cmd : 'fileupload', 
 		              SessionId : ('' + document.cookie.match(/DESINVENTAR_SESSID=[^;]+/)).substr(10)
 		             },
@@ -121,7 +121,7 @@ function onReadyDatabaseImport() {
 		jQuery('#frmDBImport input').attr('disabled',false);
 		jQuery('#frmDBImport select').attr('disabled', false);
 		
-		jQuery.post(jQuery('#desinventarURL').val() + '/index.php',
+		jQuery.post(jQuery('#desinventarURL').val() + '/',
 			{cmd : 'dbzipimport', 
 			 RegionInfo : jQuery('#frmDBImport').serializeObject()
 			},

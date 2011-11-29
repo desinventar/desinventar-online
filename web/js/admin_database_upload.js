@@ -14,7 +14,7 @@ function onReadyAdminDatabaseUpload()
 	jQuery('#btnAdminDatabaseUploadReplace').click(function() {
 		jQuery('#divAdminDatabaseUploadParameters').hide();
 		doAdminDatabaseUploadStatusMsg('msgAdminDatabaseUploadWaitForUpdate');
-		jQuery.post(jQuery('#desinventarURL').val(),
+		jQuery.post(jQuery('#desinventarURL').val() + '/',
 		{
 			cmd: 'cmdDatabaseReplace',
 			RegionId: jQuery('#desinventarRegionId').val(),
@@ -53,7 +53,7 @@ function doAdminDatabaseCreateUploader()
 
 	var uploader = new qq.FileUploader({
 		element: document.getElementById('divFileUploaderControl'),
-		action: jQuery('#desinventarURL').val(),
+		action: jQuery('#desinventarURL').val() + '/',
 		params:
 		{
 			cmd : 'cmdDatabaseUpload',

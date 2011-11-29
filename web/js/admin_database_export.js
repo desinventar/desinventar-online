@@ -55,7 +55,7 @@ function doAdminDatabaseExportAction()
 	jQuery('#imgAdminDatabaseExportWait').show();
 	
 	jQuery('#fldAdminDatabaseExportSave').val(1);
-	jQuery.post(jQuery('#desinventarURL').val(),
+	jQuery.post(jQuery('#desinventarURL').val() + '/',
 		{
 			cmd      : 'cmdAdminDatabaseExport',
 			RegionId : jQuery('#desinventarRegionId').val()

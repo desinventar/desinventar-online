@@ -4,7 +4,7 @@
 			<td width="100%">
 				<table width="100%">
 				<tr>
-					<td><a href="index.php?cmd=main"><img src="{-$desinventarURL-}/images/di_logo1.png" border="0"></a><br />
+					<td><a href="{-$desinventarURL-}/?cmd=main"><img src="{-$desinventarURL-}/images/di_logo1.png" border="0"></a><br />
 					</td>
 					<td>{-$desinventarVersion-}<br />
 					</td>

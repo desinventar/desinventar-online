@@ -70,7 +70,7 @@ function onReadyDBConfigEvents()
 					{
 						updateList('lst_eveuser', jQuery('#desinventarURL').val() + '/events.php', 'r=' + reg + '&cmd=list&predef=0&t=' + new Date().getTime());
 					}
-					updateList('qevelst', jQuery('#desinventarURL').val() + '/index.php', 'r='+ reg +'&cmd=evelst&t=' + new Date().getTime());
+					updateList('qevelst', jQuery('#desinventarURL').val() + '/', 'r='+ reg +'&cmd=evelst&t=' + new Date().getTime());
 					jQuery('#frmEventEdit #Desc').removeAttr('readonly');
 					jQuery('#eventaddsect').hide();
 					jQuery('#btnEventEditAdd').show();

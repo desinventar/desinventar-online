@@ -26,7 +26,7 @@ function onReadyDatabaseConfig()
 					{
 						updateList('lst_cauuser', jQuery('#desinventarURL').val() + '/causes.php', 'r='+ reg +'&cmd=list&predef=0&t=' + new Date().getTime());
 					}
-					updateList('qcaulst', jQuery('#desinventarURL').val() + '/index.php', 'r='+ reg +'&cmd=caulst&t=' + new Date().getTime());
+					updateList('qcaulst', jQuery('#desinventarURL').val() + '/', 'r='+ reg +'&cmd=caulst&t=' + new Date().getTime());
 					jQuery('#causeaddsect').hide();
 				}
 			);
