@@ -86,6 +86,19 @@ switch ($cmd)
 		$answer['Region'] = $r->getRegionInfoCore();
 		echo json_encode($answer);
 	break;
+	case 'cmdGetLocaleList':
+		$answer = array();
+		$answer['Status'] = ERR_UNKNOWN_ERROR;
+		if ($desinventarUserRoleValue >= ROLE_ADMINPORTAL)
+		{
+			$LanguageList = $us->q->loadLanguages(1);
+			$CountryList  = $us->q->getCountryList();
+			$answer['Status'] = ERR_NO_ERROR;
+			$answer['LanguageList'] = $LanguageList;
+			$answer['CountryList'] = $CountryList;
+		}
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
+	break;
 	case 'admin':
 	case 'cmdAdminDB':
 		$t->assign('CountryList', $us->q->getCountryList());
