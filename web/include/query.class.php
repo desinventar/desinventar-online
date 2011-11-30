@@ -921,7 +921,7 @@ class Query //extends PDO
 	function getCountryList()
 	{
 		$sQuery = "SELECT CountryIso, CountryName FROM Country ORDER BY CountryName";
-		$data = array();
+		$data = array('' => '');
 		foreach($this->base->query($sQuery) as $row)
 		{
 			$data[$row['CountryIso']] = $row['CountryName'];

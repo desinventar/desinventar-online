@@ -43,9 +43,13 @@ function doDatabaseCreateSetup()
 		{
 			if (parseInt(data.Status) > 0)
 			{
+				jQuery('#fldDatabaseEdit_LangIsoCode').empty();
 				jQuery.each(data.LanguageList, function(key, value) {
-					console.log(key + ' ' + value);
-					//jQuery('#frmDatabaseEdit_LangIsoCode').append('<option value="'+ key + '">' + value + '</option>');
+					jQuery('#fldDatabaseEdit_LangIsoCode').append(jQuery('<option>', { value : key }).text(value));
+				});
+				jQuery('#fldDatabaseEdit_CountryIso').empty();
+				jQuery.each(data.CountryList, function(key, value) {
+					jQuery('#fldDatabaseEdit_CountryIso').append(jQuery('<option>', { value: key }).text(value));
 				});
 				jQuery('#btnDatabaseCreateSend').show();
 			}
