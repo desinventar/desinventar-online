@@ -10,7 +10,7 @@ function onReadyAdminDatabaseEdit()
 	jQuery('#desinventarLanguageList option').clone().appendTo('#frmRegionEdit_LangIsoCode');
 
 	jQuery('#frmRegionEdit_CountryIso').change(function() {
-		if (jQuery('#frmRegionEdit_Cmd').val() == 'cmdRegionCreate')
+		if (jQuery('#frmRegionEdit_Cmd').val() == 'cmdDatabaseCreate')
 		{
 			jQuery.post(jQuery('#desinventarURL').val() + '/',
 				{cmd        : 'cmdRegionBuildRegionId',
@@ -27,7 +27,7 @@ function onReadyAdminDatabaseEdit()
 	});
 	
 	jQuery('#frmRegionEdit #lblRegionId').dblclick(function() {
-		if (jQuery('#frmRegionEdit_Cmd').val() == 'cmdRegionCreate')
+		if (jQuery('#frmRegionEdit_Cmd').val() == 'cmdDatabaseCreate')
 		{
 			jQuery('#frmRegionEdit_RegionId').removeAttr('disabled').focus();
 		}
@@ -85,7 +85,7 @@ function doAdminDatabaseGetInfo(RegionId)
 		},
 		function(data)
 		{
-			jQuery('#frmRegionEdit_Cmd').val('cmdRegionUpdate');
+			jQuery('#frmRegionEdit_Cmd').val('cmdDatabaseUpdate');
 			jQuery('#frmRegionEdit_CountryIso').val(data.Region.CountryIso);
 			jQuery('#frmRegionEdit_RegionId').val(data.Region.RegionId);
 			jQuery('#frmRegionEdit_RegionLabel').val(data.Region.RegionLabel);

@@ -105,6 +105,7 @@ define('SMTY_DIR', CACHEDIR); // Smarty temp dir
 define('TMPM_DIR', CACHEDIR); // Mapserver temp dir
 require_once(BASE . '/include/fb.php');
 require_once(BASE . '/include/usersession.class.php');
+require_once(BASE . '/include/date.class.php');
 require_once(BASE . '/include/diobject.class.php');
 require_once(BASE . '/include/diregion.class.php');
 require_once(BASE . '/include/direcord.class.php');

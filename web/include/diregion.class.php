@@ -97,7 +97,8 @@ class DIRegion extends DIObject {
 		return $iReturn;
 	}
 
-	public function createRegionDBDir() {
+	public function createRegionDBDir()
+	{
 		$prmRegionId = $this->get('RegionId');
 		// Create Directory for New Region
 		$DBDir = DBDIR . '/' . $prmRegionId;
@@ -106,7 +107,8 @@ class DIRegion extends DIObject {
 		}
 	}
 
-	public function insert() {
+	public function insert()
+	{
 		$iReturn = ERR_NO_ERROR;
 		$this->createRegionDBDir();
 		$this->saveToXML();
@@ -140,11 +142,14 @@ class DIRegion extends DIObject {
 	public function updateCore() {
 		// Update core.Region table using new data...
 		$sQuery = 'UPDATE Region SET ' .
-		 ' RegionLabel="' . $this->get('RegionLabel') . '",' .
-		 ' LangIsoCode="' . $this->get('LangIsoCode') . '",' .
-		 ' CountryIso="'  . $this->get('CountryIso') . '",' .
-		 ' RegionStatus=' . $this->get('RegionStatus') .
-		 ' WHERE RegionId="' . $this->get('RegionId') . '"';
+		 ' RegionLabel="'      . $this->get('RegionLabel') . '",' .
+		 ' LangIsoCode="'      . $this->get('LangIsoCode') . '",' .
+		 ' CountryIso="'       . $this->get('CountryIso') . '",' .
+		 ' RegionOrder='       . $this->get('RegionOrder') . ',' .
+		 ' RegionLastUpdate="' . $this->get('RegionLastUpdate') . '",' .
+		 ' IsCRegion='         . $this->get('IsCRegion') . ',' .
+		 ' IsVRegion='         . $this->get('IsVRegion') .
+		 ' WHERE RegionId="'   . $this->get('RegionId') . '"';
 		$iReturn = ERR_NO_ERROR;
 		$sth = $this->session->q->core->prepare($sQuery);
 		$this->session->q->core->beginTransaction();

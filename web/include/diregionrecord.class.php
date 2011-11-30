@@ -40,6 +40,8 @@ class DIRegionRecord extends DIRegion {
 		$this->addLanguageInfo('eng');
 		$this->set('PeriodBeginDate', '');
 		$this->set('PeriodEndDate', '');
+		$this->set('RegionOrder', 0);
+		$this->set('RegionLastUpdate', DIDate::now());
 
 		$prmRegionId = '';
 		$XMLFile = '';
@@ -106,9 +108,10 @@ class DIRegionRecord extends DIRegion {
 		return $Translatable;
 	}
 
-	public function insert() {
-		parent::insert();
-		return ERR_NO_ERROR;
+	public function insert()
+	{
+		$iReturn = parent::insert();
+		return $iReturn;
 	}
 
 	public function getLanguageList() {
