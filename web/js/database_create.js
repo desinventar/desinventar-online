@@ -42,6 +42,7 @@ function doDatabaseCreateSetup()
 				if (parseInt(data.Status) > 0)
 				{
 					jQuery('#fldDatabaseEdit_RegionId').val(data.RegionId);
+					jQuery('#txtDatabaseEdit_RegionId').text(data.RegionId);
 					var RegionLabel = jQuery('#fldDatabaseEdit_RegionLabel').val();
 					var Index = RegionLabel.indexOf('-');
 					if (Index > 0)
@@ -129,6 +130,7 @@ function doDatabaseCreatePopulateLists()
 				jQuery.each(data.LanguageList, function(key, value) {
 					jQuery('#fldDatabaseEdit_LangIsoCode').append(jQuery('<option>', { value : key }).text(value));
 				});
+				jQuery('#fldDatabaseEdit_RegionLabel').focus();
 				jQuery('#fldDatabaseEdit_LangIsoCode').val(jQuery('#desinventarLang').val());
 				jQuery('#fldDatabaseEdit_CountryIso').empty();
 				jQuery.each(data.CountryList, function(key, value) {
