@@ -13,7 +13,7 @@ function doDatabaseCreateSetup()
 	// Database Create
 	var w = new Ext.Window({id:'wndDatabaseCreate', 
 		el: 'divDatabaseCreateWin', layout:'fit', 
-		width:400, height:300, modal:false,
+		width:450, height:300, modal:false,
 		closeAction:'hide', plain: false, animCollapse: true,
 		items: new Ext.Panel({
 			contentEl: 'divDatabaseCreateContent',
@@ -28,11 +28,93 @@ function doDatabaseCreateSetup()
 		Ext.getCmp('wndDatabaseCreate').hide();
 	});
 
+
+	jQuery('#fldDatabaseEdit_RegionId').attr('readonly', true);
+
+	jQuery('#fldDatabaseEdit_CountryIso').change(function() {
+		jQuery.post(jQuery('#desinventarURL').val() + '/',
+			{
+				cmd        : 'cmdRegionBuildRegionId',
+				CountryIso : jQuery(this).val()
+			},
+			function(data)
+			{
+				if (parseInt(data.Status) > 0)
+				{
+					jQuery('#fldDatabaseEdit_RegionId').val(data.RegionId);
+					var RegionLabel = jQuery('#fldDatabaseEdit_RegionLabel').val();
+					var Index = RegionLabel.indexOf('-');
+					if (Index > 0)
+					{
+						RegionLabel = jQuery.trim(RegionLabel.substring(Index+1));
+					}
+					var CountryName = jQuery('#fldDatabaseEdit_CountryIso option[value="' + jQuery('#fldDatabaseEdit_CountryIso').val() + '"]').text();
+					jQuery('#fldDatabaseEdit_RegionLabel').val(CountryName + ' - ' + RegionLabel);
+				}
+			},
+			'json'
+		);
+	});
+
 	// Send Button - Validate data and send command to backend
 	jQuery('#btnDatabaseCreateSend').click(function() {
-		console.log('btnDatabaseCreateSend');
-	}).hide();
+		// Validate Fields
+		var bContinue = true;
+		var RegionStatus = jQuery('#fldDatabaseEdit_RegionStatus');
+		RegionStatus.val(0);
+		if (jQuery('#fldDatabaseEdit_RegionActive').attr('checked'))
+		{
+			RegionStatus.val(parseInt(RegionStatus.val()) | 1);
+		}
+		if (jQuery('#fldDatabaseEdit_RegionPublic').attr('checked'))
+		{
+			RegionStatus.val(parseInt(RegionStatus.val()) | 2);
+		}
+		jQuery('#fldDatabaseEdit_RegionId').removeAttr('disabled');
+		var params = jQuery('#frmDatabaseEdit').serializeObject();
+		jQuery('#fldDatabaseEdit_RegionId').attr('disabled','disabled');
+		console.log(RegionStatus.val());
+		if (bContinue)
+		{
+			/*
+			jQuery('#fldDatabaseEdit :input').unhighlight();
+			jQuery.post(
+				jQuery('#desinventarURL').val() + '/',
+				params, 
+				function(data) {
+					if (parseInt(data.Status) > 0) {
+						jQuery('#divDatabaseEditResult').html(data.Status + ' ' + data.RegionId);
+					}
+				},
+				'json'
+			);
+			*/
+		}
+		return false;
+	});
 
+	// Hide Send button until the combobox has been populated
+	jQuery('#btnDatabaseCreateSend').hide();
+} //doDatabaseCreateSetup()
+
+function doDatabaseCreateShow()
+{
+	// Clear fields in form
+	jQuery('#frmDatabaseEdit :input').each(function() {
+		jQuery(this).val('');
+	});
+	var iCount = jQuery('#fldDatabaseEdit_CountryIso option').length;
+	if (iCount < 2)
+	{
+		doDatabaseCreatePopulateLists();
+	} 
+	Ext.getCmp('wndDatabaseCreate').show();
+	jQuery('#fldDatabaseEdit_RegionLabel').focus();
+	jQuery('#fldDatabaseEdit_LangIsoCode').val(jQuery('#desinventarLang').val());
+} //doDatabaseCreateShow()
+
+function doDatabaseCreatePopulateLists()
+{
 	// async Populate CountryIso - LanguageList fields
 	jQuery.post(
 		jQuery('#desinventarURL').val() + '/',
@@ -47,6 +129,7 @@ function doDatabaseCreateSetup()
 				jQuery.each(data.LanguageList, function(key, value) {
 					jQuery('#fldDatabaseEdit_LangIsoCode').append(jQuery('<option>', { value : key }).text(value));
 				});
+				jQuery('#fldDatabaseEdit_LangIsoCode').val(jQuery('#desinventarLang').val());
 				jQuery('#fldDatabaseEdit_CountryIso').empty();
 				jQuery.each(data.CountryList, function(key, value) {
 					jQuery('#fldDatabaseEdit_CountryIso').append(jQuery('<option>', { value: key }).text(value));
@@ -55,14 +138,7 @@ function doDatabaseCreateSetup()
 			}
 		},
 		'json'
-	);			
-} //doDatabaseCreateSetup()
+	);
+} //doDatabaseCreatePopulateLists()
 
-function doDatabaseCreateShow()
-{
-	// Clear fields in form
-	jQuery('#frmDatabaseEdit :input').each(function() {
-		jQuery(this).val('');
-	});
-	Ext.getCmp('wndDatabaseCreate').show();
-} //doDatabaseCreateShow()
+
