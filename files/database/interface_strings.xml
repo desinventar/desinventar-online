@@ -2858,6 +2858,58 @@
 			<Text LangIsoCode="fre">Démonstration cartes de données</Text>
 		</Message>
 	</Group>
+	<Group name="grpDatabaseEdit">
+		<Message id="msgDatabaseEditCountryIso">
+			<Text LangIsoCode="eng">Country</Text>
+			<Text LangIsoCode="spa">País</Text>
+			<Text LangIsoCode="por">País</Text>
+			<Text LangIsoCode="fre">Pays</Text>
+		</Message>
+		<Message id="msgDatabaseEditRegionId">
+			<Text LangIsoCode="eng">Identifier</Text>
+			<Text LangIsoCode="spa">Identificador</Text>
+			<Text LangIsoCode="por">Identificador</Text>
+			<Text LangIsoCode="fre">Identificateur</Text>
+		</Message>
+		<Message id="msgDatabaseEditRegionLabel">
+			<Text LangIsoCode="eng">Name of database</Text>
+			<Text LangIsoCode="spa">Nombre base</Text>
+			<Text LangIsoCode="por">Nome banco</Text>
+			<Text LangIsoCode="fre">Nom de base</Text>
+		</Message>
+		<Message id="msgDatabaseEditLangIsoCode">
+			<Text LangIsoCode="eng">Language</Text>
+			<Text LangIsoCode="spa">Idioma</Text>
+			<Text LangIsoCode="por">Idioma</Text>
+			<Text LangIsoCode="fre">Langue</Text>
+		</Message>
+		<Message id="msgDatabaseEditRegionActive">
+			<Text LangIsoCode="eng">Active</Text>
+			<Text LangIsoCode="spa">Activo</Text>
+			<Text LangIsoCode="por">Ativo</Text>
+			<Text LangIsoCode="fre">Actif</Text>
+		</Message>
+		<Message id="msgDatabaseEditRegionPublic">
+			<Text LangIsoCode="eng">Public</Text>
+			<Text LangIsoCode="spa">Pública</Text>
+			<Text LangIsoCode="por">Pública</Text>
+			<Text LangIsoCode="fre">Publique</Text>
+		</Message>
+	</Group>
+	<Group name="grpDatabaseCreate">
+		<Message id="msgDatabaseCreateTitle">
+			<Text LangIsoCode="eng">Create new database</Text>
+			<Text LangIsoCode="spa">Crear nueva base de datos</Text>
+			<Text LangIsoCode="por">Criar novo banco de dados</Text>
+			<Text LangIsoCode="fre">Créer nouvelle base de données</Text>
+		</Message>
+		<Message id="msgDatabaseCreateMsg1">
+			<Text LangIsoCode="eng">Please fill the form data to create a new database</Text>
+			<Text LangIsoCode="spa">Por favor complete los datos del formulario para crear una nueva base de datos</Text>
+			<Text LangIsoCode="por">Por favor, preencha os dados do formulário para criar um novo banco de dados</Text>
+			<Text LangIsoCode="fre">S'il vous plaît remplir le formulaire de données pour créer une nouvelle base de données</Text>
+		</Message>
+	</Group>
 	<Group name="grpAdminDatabaseExport">
 		<Message id="msgAdminDatabaseExportTitle">
 			<Text LangIsoCode="eng">Download database</Text>

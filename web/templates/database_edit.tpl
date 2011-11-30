@@ -1,55 +1,55 @@
-{-config_load file="$lg.conf" section="grpMenuRegion"-}
-<form id="frmRegionEdit">
+{-config_load file="$lg.conf" section="grpDatabaseEdit"-}
+<form id="frmDatabaseEdit">
 	<table class="grid">
 		<tr>
 			<td>
-				{-#tregcntlist#-}<b style="color:darkred;">*</b>
+				{-#msgDatabaseEditCountryIso#-}<b style="color:darkred;">*</b>
 			</td>
 			<td>
-				<select id="frmRegionEdit_CountryIso" name="Region[CountryIso]" class="fixw" tabindex="1">
+				<select id="fldDatabaseEdit_CountryIso" name="Database[CountryIso]" class="fixw" tabindex="1">
 					<option value=""></option>
 				</select>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<span id="lblRegionId">RegionId</span>
+				<span id="lblDatabaseEdit_RegionId">{-#msgDatabaseEditRegionId#-}</span>
 			</td>
 			<td>
-				<input id="frmRegionEdit_RegionId" name="Region[RegionId]" type="text" maxlength="50" class="line fixw" tabindex="2" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				{-#tregnamlist#-}<b style="color:darkred;">*</b>
-			</td>
-			<td>
-				<input id="frmRegionEdit_RegionLabel" name="Region[RegionLabel]" type="text" maxlength="200" class="line fixw" tabindex="3" />
+				<input id="fldDatabaseEdit_RegionId" name="Database[RegionId]" type="text" maxlength="50" class="line fixw" tabindex="2" />
 			</td>
 		</tr>
 		<tr>
 			<td>
-				{-$dic.DBLangIsoCode[0]-}<b style="color:darkred;">*</b>
+				{-#msgDatabaseEditRegionLabel#-}<b style="color:darkred;">*</b>
 			</td>
 			<td>
-				<select id="frmRegionEdit_LangIsoCode" name="Region[LangIsoCode]" {-$ro-} class="line fixw" tabindex="4">
+				<input id="fldDatabaseEdit_RegionLabel" name="Database[RegionLabel]" type="text" maxlength="200" class="line fixw" tabindex="3" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{-#msgDatabaseEditLangIsoCode#-}<b style="color:darkred;">*</b>
+			</td>
+			<td>
+				<select id="fldDatabaseEdit_LangIsoCode" name="Database[LangIsoCode]" {-$ro-} class="line fixw" tabindex="4">
 				</select>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				{-#tregactlist#-}<b>*</b>
+				{-#msgDatabaseEditRegionActive#-}<b>*</b>
 			</td>
 			<td>
-				<input id="frmRegionEdit_RegionActive" name="" type="checkbox" checked tabindex="6" />
+				<input id="fldDatabaseEdit_RegionActive" name="" type="checkbox" checked tabindex="6" />
 			</td>
 		</tr>
 		<tr>
 			<td>
-				{-#tregpublist#-}<b>*</b>
+				{-#msgDatabaseEditRegionPublic#-}<b>*</b>
 			</td>
 			<td>
-				<input id="frmRegionEdit_RegionPublic" name="" type="checkbox" tabindex="7" />
+				<input id="fldDatabaseEdit_RegionPublic" name="" type="checkbox" tabindex="7" />
 			</td>
 		</tr>
 		<!--
@@ -69,11 +69,7 @@
 		-->
 		<tr>
 			<td colspan="2" align="center">
-				<input id="frmRegionEdit_RegionStatus" type="hidden" name="Region[RegionStatus]" value="0" />
-				<input id="frmRegionEdit_Cmd"          type="hidden" name="cmd" />
-				<input id="frmRegionEdit_Submit"       type="submit" value="{-#bsave#-}"   class="line" tabindex="8" />
-				<input id="frmRegionEdit_Cancel"       type="reset"  value="{-#bcancel#-}" class="line" tabindex="9" />
-				
+				<input id="fldDatabaseEdit_RegionStatus" type="hidden" name="Database[RegionStatus]" value="0" />
 			</td>
 		</tr>
 	</table>

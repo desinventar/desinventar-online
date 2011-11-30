@@ -15,9 +15,11 @@
 		<script type="text/javascript" src="{-$desinventarURL-}/js/admin_database_edit.js?version={-$jsversion-}"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/js/admin_database_export.js?version={-$jsversion-}"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/js/admin_database_upload.js?version={-$jsversion-}"></script>
+		<script type="text/javascript" src="{-$desinventarURL-}/js/database_create.js?version={-$jsversion-}"></script>
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
-				onReadyAdminDatabase();
+				//onReadyAdminDatabase();
+				onReadyDatabaseCreate();
 				//doAdminDatabaseUpdateList();
 				//doAdminDatabaseExportCreate();
 				// 2011-04-29 (jhcaiced) Fix for use of ExtJS in IE9 ?
@@ -31,12 +33,10 @@
 						return frag;
 					};
 				}
-				jQuery('#btnDatabaseExport').click(function() {					
-					jQuery('.clsAdminDatabaseUpload').hide();
-					Ext.getCmp('wndDatabaseUpload').show();
-					doAdminDatabaseUploadAction();
+				jQuery('#btnTest').click(function() {
+					Ext.getCmp('wndDatabaseCreate').show();
 				});
-				jQuery('#btnDatabaseExport').trigger('click');
+				jQuery('#btnTest').trigger('click');
 			});
 		</script>
 	</head>
@@ -44,10 +44,10 @@
 		DesInventar Database Admin
 		Version : {-$jsversion-}<br />
 		Language : {-$lg-}<br />
-		{-include file="database_upload_ext.tpl"-}
+		{-include file="database_create_ext.tpl"-}
 		{-include file="desinventarmenu.tpl"-}
 		{-include file="desinventarinfo.tpl"-}
 		<br />
-		<input type="button" id="btnDatabaseExport" value="Export" />
+		<input type="button" class="line" id="btnTest" value="Test" />
 	</body>
 </html>

@@ -49,7 +49,7 @@
 			</tbody>
 		</table>
 	</div>	
-	<input id="btnAdminDatabaseNew"    type="button" value="{-#baddoption#-}" style="display:none;" />
+	<input id="btnAdminDatabaseNew" type="button" value="{-#baddoption#-}" class="line" style="display:none;" />
 </div>
 
 <div id="divAdminDatabaseUpdate" style="display:none;">
