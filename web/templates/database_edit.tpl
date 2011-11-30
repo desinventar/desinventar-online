@@ -6,7 +6,8 @@
 				<span id="lblDatabaseEdit_RegionId">{-#msgDatabaseEditRegionId#-}</span>
 			</td>
 			<td>
-				<input id="fldDatabaseEdit_RegionId" name="Database[RegionId]" type="text" maxlength="50" class="line fixw" tabindex="1" />
+				<span  id="txtDatabaseEdit_RegionId"></span>
+				<input id="fldDatabaseEdit_RegionId" name="Database[RegionId]" type="hidden" maxlength="50" class="line fixw" tabindex="1" />
 			</td>
 		</tr>
 		<tr>
