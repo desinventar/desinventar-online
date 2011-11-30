@@ -47,7 +47,12 @@ function doDatabaseCreateSetup()
 					var Index = RegionLabel.indexOf('-');
 					if (Index > 0)
 					{
-						RegionLabel = jQuery.trim(RegionLabel.substring(Index+1));
+						RegionLabel = RegionLabel.substring(Index+1);
+					}
+					RegionLabel = jQuery.trim(RegionLabel);
+					if (RegionLabel == '')
+					{
+						RegionLabel = 'DesInventar ' + data.RegionId;
 					}
 					var CountryName = jQuery('#fldDatabaseEdit_CountryIso option[value="' + jQuery('#fldDatabaseEdit_CountryIso').val() + '"]').text();
 					jQuery('#fldDatabaseEdit_RegionLabel').val(CountryName + ' - ' + RegionLabel);
@@ -74,22 +79,25 @@ function doDatabaseCreateSetup()
 		jQuery('#fldDatabaseEdit_RegionId').removeAttr('disabled');
 		var params = jQuery('#frmDatabaseEdit').serializeObject();
 		jQuery('#fldDatabaseEdit_RegionId').attr('disabled','disabled');
-		console.log(RegionStatus.val());
 		if (bContinue)
 		{
-			/*
-			jQuery('#fldDatabaseEdit :input').unhighlight();
+			jQuery('#frmDatabaseEdit :input').unhighlight();
 			jQuery.post(
 				jQuery('#desinventarURL').val() + '/',
-				params, 
-				function(data) {
+				jQuery.extend(params,
+					{
+						cmd : 'cmdDatabaseCreate'
+					}
+				),
+				function(data)
+				{
 					if (parseInt(data.Status) > 0) {
+						console.log(data.Status);
 						jQuery('#divDatabaseEditResult').html(data.Status + ' ' + data.RegionId);
 					}
 				},
 				'json'
 			);
-			*/
 		}
 		return false;
 	});

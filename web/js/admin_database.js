@@ -44,7 +44,7 @@ function onReadyAdminDatabase()
 	jQuery('#btnAdminDatabaseNew').live('click', function() {
 		jQuery('#regionpaaddsect').show();
 		setRegionPA('','', '', '', '', true,false);
-		jQuery('#frmRegionEdit_Cmd').val('cmdRegionCreate');
+		jQuery('#frmRegionEdit_Cmd').val('cmdDatabaseCreate');
 	}).hide();
 
 	jQuery('.clsAdminDatabaseButton').hide();

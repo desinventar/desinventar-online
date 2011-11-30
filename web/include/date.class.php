@@ -73,5 +73,10 @@
 			}
 			return $value;
 		}
+		public static function now()
+		{
+			 $now = gmdate('c');
+			 return $now;			 
+		}
 	} //class
 </script>

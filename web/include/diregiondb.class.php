@@ -533,10 +533,12 @@ class DIRegionDB extends DIRegion
 
 	public function createRegionDB($prmGeoLevelName='')
 	{
+		fb('DIRegionDB::createRegionDB begin');
 		// Creates/Initialize the region database
 		$iReturn = ERR_NO_ERROR;
 		$prmRegionId = $this->get('RegionId');
-		// Create Directory for New Region
+
+		// Create Directory for New Region if do not already exists
 		$DBDir = DBDIR . '/' . $prmRegionId;
 		$DBFile = $DBDir . '/desinventar.db';
 		$this->session->q->dreg = null;
@@ -562,22 +564,16 @@ class DIRegionDB extends DIRegion
 		{
 			showErrorMsg('createRegionDB Error : ' . $e->getMessage());
 		}
+
 		$this->session->q->setDBConnection($this->get('RegionId'));
 		// Delete all database records
 		$this->clearRegionTables();
-		$this->set('RegionId', $prmRegionId);
 		if ($iReturn > 0)
 		{
 			// Copy Predefined Event/Cause Lists
 			$LangIsoCode = $this->get('LangIsoCode');
 			$this->copyEvents($LangIsoCode);
 			$this->copyCauses($LangIsoCode);
-		}
-
-		if ($iReturn > 0)
-		{
-			// Insert Data Into core.Region, create Info Table
-			//$this->insert();
 		}
 		if ($iReturn > 0)
 		{
@@ -586,6 +582,7 @@ class DIRegionDB extends DIRegion
 			{
 				$prmGeoLevelName = 'Level 0';
 			}
+			/*
 			$g = new DIGeoLevel($this->session, 0);
 			$g->set('GeoLevelName', $prmGeoLevelName);
 			$g->set('RegionId', $this->get('RegionId'));
@@ -601,7 +598,9 @@ class DIRegionDB extends DIRegion
 				$g->insert();
 				$c->insert();
 			}
+			*/
 		}
+		fb('DIRegionDB::createRegionDB end ' . $iReturn);
 		return $iReturn;
 	}
 

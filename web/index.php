@@ -123,51 +123,61 @@ switch ($cmd)
 		$answer['RegionId']   = DIRegion::buildRegionId($answer['CountryIso']);
 		echo json_encode($answer);
 	break;
-	case 'cmdRegionCreate':
-	case 'cmdRegionUpdate':
+	case 'cmdDatabaseCreate':
+	case 'cmdDatabaseUpdate':
+		$answer = array('Status' => ERR_NO_ERROR);
 		$iReturn = ERR_NO_ERROR;
-		if ($us->UserId != 'root')
+		if ($desinventarUserRoleValue < ROLE_ADMINPORTAL)
 		{
 			$iReturn = ERR_ACCESS_DENIED;
 		}
 		if ($iReturn > 0)
 		{
-			$RegionId = $_POST['Region']['RegionId'];
-			$RegionCmd = $_POST['Region']['cmd'];
-
+			$RegionId = $_POST['Database']['RegionId'];
 			$r = new DIRegionRecord($us, $RegionId);
-			$iReturn = $r->setFromArray($_POST['Region']);
+			$iReturn = $r->setFromArray($_POST['Database']);
+		}
+		if ($r->get('RegionId') == '')
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
 		}
 		if ($iReturn > 0)
 		{
-			if ($r->get('RegionId') == '')
-			{
-				$r->set('RegionId', DIRegion::buildRegionId($r->get('CountryIso')));
-			}
 			$RegionId = $r->get('RegionId');
-			if ($RegionCmd == 'cmdRegionCreate')
+			if ($cmd == 'cmdDatabaseCreate')
 			{
 				$iReturn = $r->insert();
 				$r2 = new DIRegionDB($us, $RegionId);
-				$r2->createRegionDB();
+				$i = $r2->createRegionDB();
 			}
 			else
 			{
 				$iReturn = $r->update();
 			}
 		}
+		/*
 		if ($iReturn > 0)
 		{
 			// Set Role ADMINREGION in RegionAuth: master for this region
 			$r->removeRegionUserAdmin();
-			$iReturn = $us->setUserRole($_POST['Region']['RegionUserAdmin'], 
-			                            $r->get('RegionId'),
-			                            'ADMINREGION');
-			$answer['RegionId'] = $r->get('RegionId');
+			if (isset($_POST['Database']['RegionUserAdmin']))
+			{
+				$RegionUserAdmin = $_POST['Database']['RegionUserAdmin'];
+			}
+			else
+			{
+				$RegionUserAdmin = $us->UserId;
+			}
+			$iReturn = $us->setUserRole($RegionUserAdmin, $r->get('RegionId'), 'ADMINREGION');
+			if ($iReturn > 0)
+			{
+				$answer['RegionId'] = $r->get('RegionId');
+			}
 		}
-		$answer = array();
+		*/
 		$answer['Status'] = $iReturn;
-		echo json_encode($answer);
+		fb($answer);
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
 	break;
 	case 'dbzipimport': 
 		$answer = array();
