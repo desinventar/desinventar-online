@@ -34,7 +34,7 @@
 					};
 				}
 				jQuery('#btnTest').click(function() {
-					Ext.getCmp('wndDatabaseCreate').show();
+					doDatabaseCreateShow();
 				});
 				jQuery('#btnTest').trigger('click');
 			});
