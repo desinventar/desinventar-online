@@ -385,6 +385,7 @@ switch ($cmd)
 		exit();
 	break;
 	case 'cmdDatabaseGetInfo':
+	case 'cmdGetRegionInfo':
 		$LangIsoCode = getParameter('LangIsoCode', $lg);
 		$answer = array();
 		$answer['Status'] = ERR_NO_ERROR;
