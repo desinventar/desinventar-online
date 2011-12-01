@@ -301,6 +301,12 @@
 			<Text LangIsoCode="por">Permissões administrativas</Text>
 			<Text LangIsoCode="fre">Autorisations administratives</Text>
 		</Message>
+		<Message id="mnuDatabaseCreate">
+			<Text LangIsoCode="eng">Create new database</Text>
+			<Text LangIsoCode="spa">Crear nueva base de datos</Text>
+			<Text LangIsoCode="por">Criar novo banco de dados</Text>
+			<Text LangIsoCode="fre">Créer nouvelle base de données</Text>
+		</Message>
 		<Message id="mnuDatabaseUpload">
 			<Text LangIsoCode="eng">Upload database</Text>
 			<Text LangIsoCode="spa">Cargar base de datos</Text>
@@ -2897,12 +2903,6 @@
 		</Message>
 	</Group>
 	<Group name="grpDatabaseCreate">
-		<Message id="msgDatabaseCreateTitle">
-			<Text LangIsoCode="eng">Create new database</Text>
-			<Text LangIsoCode="spa">Crear nueva base de datos</Text>
-			<Text LangIsoCode="por">Criar novo banco de dados</Text>
-			<Text LangIsoCode="fre">Créer nouvelle base de données</Text>
-		</Message>
 		<Message id="msgDatabaseCreateMsg1">
 			<Text LangIsoCode="eng">Please fill the form data to create a new database</Text>
 			<Text LangIsoCode="spa">Por favor complete los datos del formulario para crear una nueva base de datos</Text>
