@@ -14,7 +14,6 @@ if (! isset($_SERVER['DESINVENTAR_WEB']))
 define('MAJORVERSION', '2011');
 define('MINORVERSION', '335');
 define('VERSION'     , MAJORVERSION . '.' . MINORVERSION);
-define('INTVERSION'  , '8.2.2.05');
 define('JSVERSION'   , '2011-12-01.01');
 
 // 2009-07-22 (jhcaiced) Adapted Configuration and Startup for 
@@ -46,7 +45,7 @@ if (isset($_SERVER['HTTP_HOST']))
 		$Install_Dir = dirname($Install_Dir);
 		$_SERVER['DESINVENTAR_WWWDIR'] = $Install_Dir . '/www';
 		$_SERVER['DESINVENTAR_DATADIR'] = $Install_Dir . '/data';
-		$_SERVER['DESINVENTAR_MAPDIR'] = $Install_Dir . '/data/worldmap';
+		$_SERVER['DESINVENTAR_MAPDIR'] = $Install_Dir . '/files/worldmap';
 		$_SERVER['DESINVENTAR_CACHEDIR'] = $Install_Dir . '/tmp';		
 	}
 	else
@@ -61,14 +60,14 @@ if (isset($_SERVER['HTTP_HOST']))
 		define('FONTSET' , '/usr/share/fonts/liberation/fonts.txt');
 		if (! isset($_SERVER['DESINVENTAR_WEB']))
 		{
-			$_SERVER['DESINVENTAR_WEB']      = '/usr/share/desinventar-8.2/web';
+			$_SERVER['DESINVENTAR_WEB']      = '/usr/share/desinventar/web';
 		}
-		$_SERVER['DESINVENTAR_WWWDIR']   = '/var/www/desinventar-8.2';
+		$_SERVER['DESINVENTAR_WWWDIR']   = '/var/www/desinventar';
 		if (! isset($_SERVER['DESINVENTAR_DATADIR']))
 		{
-			$_SERVER['DESINVENTAR_DATADIR']  = '/var/lib/desinventar-8.2';
+			$_SERVER['DESINVENTAR_DATADIR']  = '/var/lib/desinventar';
 		}
-		$_SERVER['DESINVENTAR_MAPDIR'] = '/usr/share/desinventar-8.2/worldmap';
+		$_SERVER['DESINVENTAR_MAPDIR'] = '/usr/share/desinventar/worldmap';
 		$_SERVER['DESINVENTAR_CACHEDIR'] = '/var/cache/Smarty/desinventar';
 	}
 }
@@ -78,13 +77,13 @@ else
 	define('MODE', 'command');
 	if (! isset($_SERVER['DESINVENTAR_WWWDIR']))
 	{
-		$_SERVER['DESINVENTAR_WWWDIR']   = '/var/www/desinventar-8.2';
+		$_SERVER['DESINVENTAR_WWWDIR']   = '/var/www/desinventar';
 	}
 	if (! isset($_SERVER['DESINVENTAR_DATADIR']))
 	{
-		$_SERVER['DESINVENTAR_DATADIR']  = '/var/lib/desinventar-8.2';
+		$_SERVER['DESINVENTAR_DATADIR']  = '/var/lib/desinventar';
 	}
-	$_SERVER['DESINVENTAR_MAPDIR'] = '/usr/share/desinventar-8.2/worldmap';
+	$_SERVER['DESINVENTAR_MAPDIR'] = '/usr/share/desinventar/worldmap';
 	if (! isset($_SERVER['DESINVENTAR_CACHEDIR']))
 	{
 		$_SERVER['DESINVENTAR_CACHEDIR'] = '/var/cache/Smarty/desinventar';
@@ -93,7 +92,7 @@ else
 }
 define('BASE'    , $_SERVER['DESINVENTAR_WEB']);
 define('WWWDIR'  , $_SERVER['DESINVENTAR_WWWDIR']);
-define('WWWDATA' , '/desinventar-8.2-data');
+define('WWWDATA' , '/desinventar-data');
 define('WWWURL'  , '/');
 define('DATADIR' , $_SERVER['DESINVENTAR_DATADIR']);
 define('DBDIR'   , DATADIR . '/database');
