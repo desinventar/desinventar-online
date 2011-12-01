@@ -2903,11 +2903,41 @@
 		</Message>
 	</Group>
 	<Group name="grpDatabaseCreate">
+		<Message id="msgDatabaseCreateTitle">
+			<Text LangIsoCode="eng">Create new database</Text>
+			<Text LangIsoCode="spa">Crear nueva base de datos</Text>
+			<Text LangIsoCode="por">Criar novo banco de dados</Text>
+			<Text LangIsoCode="fre">Créer nouvelle base de données</Text>
+		</Message>
 		<Message id="msgDatabaseCreateMsg1">
 			<Text LangIsoCode="eng">Please fill the form data to create a new database</Text>
 			<Text LangIsoCode="spa">Por favor complete los datos del formulario para crear una nueva base de datos</Text>
 			<Text LangIsoCode="por">Por favor, preencha os dados do formulário para criar um novo banco de dados</Text>
 			<Text LangIsoCode="fre">S'il vous plaît remplir le formulaire de données pour créer une nouvelle base de données</Text>
+		</Message>
+		<Message id="msgDatabaseCreateSend">
+			<Text LangIsoCode="eng">Create</Text>
+			<Text LangIsoCode="spa">Crear</Text>
+			<Text LangIsoCode="por">Criar</Text>
+			<Text LangIsoCode="fre">Créer</Text>
+		</Message>
+		<Message id="msgDatabaseCreateCancel">
+			<Text LangIsoCode="eng">Cancel</Text>
+			<Text LangIsoCode="spa">Cancelar</Text>
+			<Text LangIsoCode="por">Cancelar</Text>
+			<Text LangIsoCode="fre">Annuler</Text>
+		</Message>
+		<Message id="msgDatabaseCreateOk">
+			<Text LangIsoCode="eng">Database created correctly, opening new database...</Text>
+			<Text LangIsoCode="spa">Base de datos creada correctamente, abriendo nueva base de datos...</Text>
+			<Text LangIsoCode="por">Banco de dados criado corretamente, abrindo nueva de base de datos</Text>
+			<Text LangIsoCode="fre">Base de données créée correctement, l'ouverture nouvelle base de données...</Text>
+		</Message>
+		<Message id="msgDatabaseCreateError">
+			<Text LangIsoCode="eng">There was an error while creating the database, please check the data and try again.</Text>
+			<Text LangIsoCode="spa">Hubo un error al crear la base de datos, por favor revise los datos e intente nuevamente</Text>
+			<Text LangIsoCode="por">Ocorreu um erro ao criar o banco de dados, por favor verifique os dados e tente novamente</Text>
+			<Text LangIsoCode="fre">Il y avait une erreur lors de la création de la base de données, s'il vous plaît vérifier les données et essayer de nouveau</Text>
 		</Message>
 	</Group>
 	<Group name="grpAdminDatabaseExport">

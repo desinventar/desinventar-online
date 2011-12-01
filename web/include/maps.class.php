@@ -17,7 +17,7 @@ class Maps {
 	   dl	: disasters list
 	   range: limits, legends and color
 	   info	: about map (WMS Metadata)
-	   lbl	: Label to print name, code or value..
+	   lbl	: Label to show name, code or value..
 	   trans : Transparency %
 	   type	: filename, THEMATIC, SELECT, KML
   */
