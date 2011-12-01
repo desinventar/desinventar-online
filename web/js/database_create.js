@@ -41,7 +41,6 @@ function doDatabaseCreateSetup()
 			{
 				if (parseInt(data.Status) > 0)
 				{
-					data.RegionId = 'DEMO';
 					jQuery('#fldDatabaseEdit_RegionId').val(data.RegionId);
 					jQuery('#txtDatabaseEdit_RegionId').text(data.RegionId);
 					var RegionLabel = jQuery('#fldDatabaseEdit_RegionLabel').val();
