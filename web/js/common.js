@@ -23,7 +23,7 @@ function doGetRegionInfo(RegionId)
 	jQuery('#divRegionInfo #divRegionLogo').html('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />');
 	jQuery.post(jQuery('#desinventarURL').val() + '/',
 		{
-		  cmd         : 'cmdGetRegionInfo', 
+		  cmd         : 'cmdDatabaseGetInfo', 
 		  RegionId    : RegionId,
 		  LangIsoCode : jQuery('#desinventarLang').val()
 		},
@@ -32,7 +32,7 @@ function doGetRegionInfo(RegionId)
 			if (parseInt(data.Status)>0)
 			{
 				var i = data.RegionInfo;
-				jQuery('#divRegionInfo #divRegionLogo').html('<img src="' + jQuery('#desinventarURL').val() + '/?cmd=getRegionLogo&RegionId=' + RegionId + '" alt="" />');
+				jQuery('#divRegionInfo #divRegionLogo').html('<img src="' + jQuery('#desinventarURL').val() + '/?cmd=cmdDatabaseGetLogo&RegionId=' + RegionId + '" alt="" />');
 				jQuery('#divRegionInfo #txtRegionLabel').text(i.RegionLabel);
 				jQuery('#divRegionInfo #txtRegionPeriod').text(i.PeriodBeginDate + ' - ' + i.PeriodEndDate);
 				jQuery('#divRegionInfo #txtRegionNumDatacards').text(i.NumDatacards);
