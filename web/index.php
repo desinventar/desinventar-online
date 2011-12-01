@@ -125,8 +125,8 @@ switch ($cmd)
 	break;
 	case 'cmdDatabaseCreate':
 	case 'cmdDatabaseUpdate':
-		$answer = array('Status' => ERR_NO_ERROR);
 		$iReturn = ERR_NO_ERROR;
+		$answer = array();
 		if ($desinventarUserRoleValue < ROLE_ADMINPORTAL)
 		{
 			$iReturn = ERR_ACCESS_DENIED;
@@ -155,7 +155,6 @@ switch ($cmd)
 				$iReturn = $r->update();
 			}
 		}
-		/*
 		if ($iReturn > 0)
 		{
 			// Set Role ADMINREGION in RegionAuth: master for this region
@@ -174,7 +173,6 @@ switch ($cmd)
 				$answer['RegionId'] = $r->get('RegionId');
 			}
 		}
-		*/
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
 	break;

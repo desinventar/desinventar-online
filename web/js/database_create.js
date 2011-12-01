@@ -41,6 +41,7 @@ function doDatabaseCreateSetup()
 			{
 				if (parseInt(data.Status) > 0)
 				{
+					data.RegionId = 'DEMO';
 					jQuery('#fldDatabaseEdit_RegionId').val(data.RegionId);
 					jQuery('#txtDatabaseEdit_RegionId').text(data.RegionId);
 					var RegionLabel = jQuery('#fldDatabaseEdit_RegionLabel').val();
@@ -64,6 +65,7 @@ function doDatabaseCreateSetup()
 
 	// Send Button - Validate data and send command to backend
 	jQuery('#btnDatabaseCreateSend').click(function() {
+		jQuery(this).attr('readonly', true);
 		// Validate Fields
 		var bContinue = true;
 		var RegionStatus = jQuery('#fldDatabaseEdit_RegionStatus');
@@ -91,9 +93,19 @@ function doDatabaseCreateSetup()
 				),
 				function(data)
 				{
-					if (parseInt(data.Status) > 0) {
-						console.log(data.Status);
-						jQuery('#divDatabaseEditResult').html(data.Status + ' ' + data.RegionId);
+					jQuery('.clsDatabaseCreateStatus').hide();
+					jQuery('#btnDatabaseCreateSend').attr('readonly', false);
+					if (parseInt(data.Status) > 0)
+					{
+						jQuery('#txtDatabaseCreateOk').show();
+						// Open database created after 2 seconds
+						setTimeout(function() {
+							window.location = jQuery('#desinventarURL').val() + '/' + data.RegionId;
+						}, 2000);
+					}
+					else
+					{
+						jQuery('#txtDatabaseCreateError').show();
 					}
 				},
 				'json'
@@ -108,6 +120,7 @@ function doDatabaseCreateSetup()
 
 function doDatabaseCreateShow()
 {
+	jQuery('.clsDatabaseCreateStatus').hide();
 	// Clear fields in form
 	jQuery('#frmDatabaseEdit :input').each(function() {
 		jQuery(this).val('');

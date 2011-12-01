@@ -48,7 +48,7 @@ define('STATUS_YES' , 1);
 define('STATUS_OK'  , 1);
 
 // Error Codes
-define('ERR_NO_ERROR'         , 1);
+define('ERR_NO_ERROR'         ,  1);
 define('ERR_DEFAULT_ERROR'    , -1);
 define('ERR_UNKNOWN_ERROR'    , -1);
 define('ERR_INVALID_COMMAND'  , -2);
