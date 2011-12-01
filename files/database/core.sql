@@ -78,7 +78,7 @@ SessionId VARCHAR(50),
 RegionId VARCHAR(50), 
 UserId VARCHAR(20), 
 Valid INTEGER, 
-LangIsoCode VARCHAR(3),
+LangIsoCode VARCHAR(3), 
 Start DATETIME, 
 LastUpdate DATETIME, 
 PRIMARY KEY('SessionId')
@@ -103,8 +103,7 @@ PRIMARY KEY('SessionId','Key')
 );
 
 /* Set initial values */
-INSERT INTO User VALUES ('root', 'root@localhost', '7af39c74ac6d9e68a4323440385cc1ff', 'Portal Administrator', '', '', '', '2008-01-01', '', 1);
+INSERT INTO User VALUES ('root', 'root@localhost', 'b20177d3f33274a6a12f5795058188c0', 'Portal Administrator', '', '', '', '2011-01-01', '', 1);
 INSERT INTO RegionAuth VALUES ('root', '', 'REGION', 5, '');
 INSERT INTO RegionAuth VALUES ('root', '', 'USER', 5, '');
 INSERT INTO RegionAuth VALUES ('root', '', 'ROLE', 0, 'ADMINPORTAL');
-
