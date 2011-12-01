@@ -374,7 +374,7 @@ switch ($cmd)
 				echo json_encode($answer);
 			}
 	break;
-	case 'getRegionLogo':
+	case 'cmdDatabaseGetLogo':
 		header('Content-type: Image/png');
 		$murl = VAR_DIR . '/database/'. $RegionId . '/logo.png';
 		if (!file_exists($murl))
@@ -384,7 +384,7 @@ switch ($cmd)
 		readfile($murl);
 		exit();
 	break;
-	case 'cmdGetRegionInfo':
+	case 'cmdDatabaseGetInfo':
 		$LangIsoCode = getParameter('LangIsoCode', $lg);
 		$answer = array();
 		$answer['Status'] = ERR_NO_ERROR;

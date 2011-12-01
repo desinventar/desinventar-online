@@ -200,51 +200,67 @@ class DIRegion extends DIObject
 		return $answer;
 	}
 
-	public function getDBInfo($prmLang='eng') {
+	public function getDBInfo($prmLang='eng')
+	{
 		$InfoSynopsis = trim($this->get('InfoSynopsis', $prmLang)) . '';
 		$isInfoEmpty =  strlen($InfoSynopsis) < 1;
-		if ($isInfoEmpty) {
+		if ($isInfoEmpty)
+		{
 			$prmLang = $this->get('LangIsoCode');
 		}
 		$a = array();
-		foreach(array('RegionId','RegionLabel', 'PeriodBeginDate','PeriodEndDate',
-		              'RegionLastUpdate') as $Field) {
+		foreach(array('RegionId','RegionLabel',
+		              'PeriodBeginDate','PeriodEndDate',
+		              'RegionLastUpdate') as $Field)
+		{
 			$a[$Field] = $this->get($Field);
 		}
+		$a['RegionLastUpdate'] = substr($a['RegionLastUpdate'],0,10);
 		$ll = $this->getLanguageList();
-		if (!array_key_exists($prmLang, $ll)) {
+		if (!array_key_exists($prmLang, $ll))
+		{
 			$prmLang = 'eng';
 		}
-		foreach(array('InfoGeneral','InfoCredits','InfoSources','InfoSynopsis') as $Field) {
+
+		foreach(array('InfoGeneral','InfoCredits','InfoSources','InfoSynopsis') as $Field)
+		{
 			$a[$Field] = strip_tags($this->get($Field, $prmLang));
 			$a[$Field] = preg_replace('/\n/','<br />', $a[$Field]);
-			//$a[$Field] = $this->get($Field, $prmLang);
 		}
-		$a['RegionLastUpdate'] = substr($a['RegionLastUpdate'],0,10);
 		
 		$this->session->open($this->get('RegionId'));
 
-		$Query = "SELECT MIN(DisasterBeginTime) AS MinDate, MAX(DisasterBeginTime) AS MaxDate FROM Disaster ".
-			"WHERE RecordStatus='PUBLISHED'";
-		foreach($this->session->q->dreg->query($Query) as $row) {
-			$MinDate = $row['MinDate'];
-			$MaxDate = $row['MaxDate'];
-		}
-		// 2010-01-21 (jhcaiced) Fix some weird cases in MinDate/MaxDate
-		if (substr($MinDate, 5, 2) == '00') {
-			$MinDate = substr($MinDate, 0, 4) . '-01-01';
-		}
-		if (substr($MaxDate, 5, 2) > '12') {
-			$MaxDate = substr($MaxDate, 0, 4) . '-12-31';
-		}
-		$a['DataMinDate'] = $MinDate;
-		$a['DataMaxDate'] = $MaxDate;
+		// Number of Datacards
+		$a['NumDatacards'] = $this->session->q->getNumDisasterByStatus('PUBLISHED');
 
-		// 2010-07-06 (jhcaiced) Manually Calculate RegionLastUpdate
-		$sQuery = "SELECT MAX(RecordUpdate) AS MAX FROM Disaster;";
-		foreach($this->session->q->dreg->query($sQuery) as $row) {
-			$a['RegionLastUpdate'] = substr($row['MAX'],0,10);
+		$DataMinDate = '';
+		$DataMaxDate = '';
+
+		if ($a['NumDatacards'] > 0)
+		{
+			$Query = "SELECT MIN(DisasterBeginTime) AS MinDate, MAX(DisasterBeginTime) AS MaxDate FROM Disaster ".
+				"WHERE RecordStatus='PUBLISHED'";
+			foreach($this->session->q->dreg->query($Query) as $row) {
+				$DataMinDate = $row['MinDate'];
+				$DataMaxDate = $row['MaxDate'];
+			}
+			// 2010-01-21 (jhcaiced) Fix some weird cases in MinDate/MaxDate
+			if (substr($DataMinDate, 5, 2) == '00') {
+				$DataMinDate = substr($DataMinDate, 0, 4) . '-01-01';
+			}
+			if (substr($DataMaxDate, 5, 2) > '12') {
+				$DataMaxDate = substr($DataMaxDate, 0, 4) . '-12-31';
+			}
+		
+			// 2010-07-06 (jhcaiced) Manually Calculate RegionLastUpdate
+			$sQuery = "SELECT MAX(RecordUpdate) AS MAX FROM Disaster;";
+			foreach($this->session->q->dreg->query($sQuery) as $row)
+			{	
+				$a['RegionLastUpdate'] = substr($row['MAX'],0,10);
+			}
 		}
+		$a['DataMinDate'] = $DataMinDate;
+		$a['DataMaxDate'] = $DataMaxDate;
 
 		if ($a['PeriodBeginDate'] == '')
 		{
@@ -254,7 +270,6 @@ class DIRegion extends DIObject
 		{
 			$a['PeriodEndDate'] = $a['DataMaxDate'];
 		}
-		$a['NumDatacards'] = $this->session->q->getNumDisasterByStatus('PUBLISHED');
 		return $a;
 	}
 	
