@@ -176,7 +176,6 @@ switch ($cmd)
 		}
 		*/
 		$answer['Status'] = $iReturn;
-		fb($answer);
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
 	break;
 	case 'dbzipimport': 
