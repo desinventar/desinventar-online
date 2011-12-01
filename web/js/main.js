@@ -4,6 +4,7 @@
 */
 function onReadyMain()
 {
+	onReadyDatabaseCreate();
 	onReadyCommon();
 	onReadyUserLogin();
 	onReadyDatacards();

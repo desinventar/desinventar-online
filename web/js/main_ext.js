@@ -233,6 +233,9 @@ function onMenuItem(item) {
 			jQuery('.contentBlock').hide();
 			updateDatabaseListByUser();
 		break;
+		case 'mnuDatabaseCreate':
+			doDatabaseCreateShow();
+		break;
 		case 'mnuAdminUsers':
 			//updateList('dbl', jQuery('#desinventarURL').val() + '/user.php', 'cmd=adminusr', 'onReadyUserAdmin');
 			jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=adminusr',function() { onReadyUserAdmin(); });
@@ -324,9 +327,10 @@ function doMainMenuCreate()
 	var mbases = new Ext.menu.Menu({
 		id: 'basesMenu',
 		items: [
-			{id:'mnuDatabaseFind'   , text: jQuery('#mnuDatabaseFind').text() , handler: onMenuItem },
-			{id:'mnuAdminUsers'     , text: jQuery('#mnuAdminUsers').text()   , handler: onMenuItem, hidden: true },
-			{id:'mnuAdminDatabases' , text: jQuery('#mnuAdminDatabases').text(), handler: onMenuItem, hidden: true }
+			{id:'mnuDatabaseFind'   , text: jQuery('#mnuDatabaseFind').text()   , handler: onMenuItem },
+			{id:'mnuDatabaseCreate' , text: jQuery('#mnuDatabaseCreate').text() , handler: onMenuItem, hidden: true },
+			{id:'mnuAdminUsers'     , text: jQuery('#mnuAdminUsers').text()     , handler: onMenuItem, hidden: true },
+			{id:'mnuAdminDatabases' , text: jQuery('#mnuAdminDatabases').text() , handler: onMenuItem, hidden: true }
 		]
 	});
 
@@ -369,7 +373,8 @@ function doMainMenuCreate()
 	if (UserRoleValue >= 5)
 	{
 		Ext.getCmp('mnuAdminUsers').show();
-		Ext.getCmp('mnuAdminDatabases').show();
+		Ext.getCmp('mnuDatabaseCreate').show();
+		//Ext.getCmp('mnuAdminDatabases').show();
 	}
 	
 	// Hide Menu items when no Region is Selected

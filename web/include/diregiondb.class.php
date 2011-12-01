@@ -533,7 +533,6 @@ class DIRegionDB extends DIRegion
 
 	public function createRegionDB($prmGeoLevelName='')
 	{
-		fb('DIRegionDB::createRegionDB begin');
 		// Creates/Initialize the region database
 		$iReturn = ERR_NO_ERROR;
 		$prmRegionId = $this->get('RegionId');
@@ -582,7 +581,7 @@ class DIRegionDB extends DIRegion
 			{
 				$prmGeoLevelName = 'Level 0';
 			}
-			/*
+			$this->session->open($this->get('RegionId'));
 			$g = new DIGeoLevel($this->session, 0);
 			$g->set('GeoLevelName', $prmGeoLevelName);
 			$g->set('RegionId', $this->get('RegionId'));
@@ -598,9 +597,7 @@ class DIRegionDB extends DIRegion
 				$g->insert();
 				$c->insert();
 			}
-			*/
 		}
-		fb('DIRegionDB::createRegionDB end ' . $iReturn);
 		return $iReturn;
 	}
 

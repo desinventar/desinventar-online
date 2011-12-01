@@ -15,7 +15,8 @@ class DIObject {
 	var $oField;
 	var $oFieldType;
 	
-	public function __construct($prmSession) {
+	public function __construct($prmSession)
+	{
 		$this->session = $prmSession;
 		$this->RegionId = $this->session->RegionId;
 		$num_args = func_num_args();

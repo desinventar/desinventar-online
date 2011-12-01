@@ -12,10 +12,10 @@ if (! isset($_SERVER['DESINVENTAR_WEB']))
 
 // This is the version of the software
 define('MAJORVERSION', '2011');
-define('MINORVERSION', '334');
+define('MINORVERSION', '335');
 define('VERSION'     , MAJORVERSION . '.' . MINORVERSION);
 define('INTVERSION'  , '8.2.2.05');
-define('JSVERSION'   , '2011-11-30.01');
+define('JSVERSION'   , '2011-12-01.01');
 
 // 2009-07-22 (jhcaiced) Adapted Configuration and Startup for 
 // using with PHP Command Line 
