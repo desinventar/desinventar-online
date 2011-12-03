@@ -101,7 +101,7 @@ function doAdminDatabaseCreateUploader()
 		},
 		onCancel: function(id, Filename)
 		{
-		},
+		}
 	});
 	jQuery('#divFileUploaderControl .qq-upload-button-text').html(jQuery('#msgAdminDatabaseUploadChooseFile').val());
 	jQuery('#divFileUploaderControl .qq-upload-list').hide();
