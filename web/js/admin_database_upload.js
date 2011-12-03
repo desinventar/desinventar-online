@@ -114,6 +114,7 @@ function doAdminDatabaseCreateUploader()
 
 function doAdminDatabaseUploadReset()
 {
+	doAdminDatabaseUploadStatusMsg('');
 	jQuery('#txtAdminDatabaseUploadFilename').val('');
 	jQuery('#prgAdminDatabaseUploadProgressMark').css('width', '0px');
 	jQuery('#btnAdminDatabaseUploadCancel').hide();
