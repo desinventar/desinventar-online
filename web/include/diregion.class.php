@@ -124,7 +124,8 @@ class DIRegion extends DIObject
 		return $iReturn;
 	}
 	
-	public function insertCore() {
+	public function insertCore()
+	{
 		$sQuery = 'INSERT INTO Region(RegionId) VALUES ("' . $this->get('RegionId') . '")';
 		$sth = $this->session->q->core->prepare($sQuery);
 		$this->session->q->core->beginTransaction();
@@ -139,15 +140,17 @@ class DIRegion extends DIObject
 			showErrorMsg('insertCore', $e);
 		}
 		$this->updateCore();
-	}
+	} //insertCore()
 
-	public function updateCore() {
+	public function updateCore()
+	{
 		// Update core.Region table using new data...
 		$sQuery = 'UPDATE Region SET ' .
 		 ' RegionLabel="'      . $this->get('RegionLabel') . '",' .
 		 ' LangIsoCode="'      . $this->get('LangIsoCode') . '",' .
 		 ' CountryIso="'       . $this->get('CountryIso') . '",' .
 		 ' RegionOrder='       . $this->get('RegionOrder') . ',' .
+		 ' RegionStatus='      . $this->get('RegionStatus') . ',' .
 		 ' RegionLastUpdate="' . $this->get('RegionLastUpdate') . '",' .
 		 ' IsCRegion='         . $this->get('IsCRegion') . ',' .
 		 ' IsVRegion='         . $this->get('IsVRegion') .
