@@ -107,7 +107,7 @@ function doViewportCreate()
 	{
 		jQuery('#divRegionList').show();
 		// Show database list
-		updateDatabaseListByUser();
+		doUpdateDatabaseListByUser();
 	}
 } // doViewportCreate()
 
@@ -231,7 +231,7 @@ function onMenuItem(item) {
 			// Show database list
 			hideQueryDesign();
 			jQuery('.contentBlock').hide();
-			updateDatabaseListByUser();
+			doUpdateDatabaseListByUser();
 		break;
 		case 'mnuDatabaseCreate':
 			doDatabaseCreateShow();

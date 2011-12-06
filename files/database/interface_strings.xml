@@ -3122,42 +3122,48 @@
 			<Text LangIsoCode="fre">Opérateur</Text>
 		</Message>
 	</Group>
-	<Group name="region">
-		<Message id="txtRoleADMINREGION">
+	<Group name="grpDatabaseFind">
+		<Message id="msgDatabaseFind_Title">
+			<Text LangIsoCode="eng">Available Disaster Inventories</Text>
+			<Text LangIsoCode="spa">Inventarios de Desastres disponibles</Text>
+			<Text LangIsoCode="por">Desastres inventários disponíveis</Text>
+			<Text LangIsoCode="fre">Inventaires de Désastres disponibles</Text>
+		</Message>
+		<Message id="msgDatabaseFind_NoDatabases">
+			<Text LangIsoCode="eng">There are no databases installed on this server</Text>
+			<Text LangIsoCode="spa">No hay bases de datos instaladas en este servidor</Text>
+			<Text LangIsoCode="por">Não existem bases de dados instalado no servidor</Text>
+			<Text LangIsoCode="fre">Il n'y a pas de bases de données installé sur ce serveur</Text>
+		</Message>
+		<Message id="msgDatabaseFind_RoleADMINREGION">
 			<Text LangIsoCode="eng">Manager</Text>
 			<Text LangIsoCode="spa">Administrador</Text>
 			<Text LangIsoCode="por">Administrador</Text>
 			<Text LangIsoCode="fre">Administrateur</Text>
 		</Message>
-		<Message id="txtRoleSUPERVISOR">
+		<Message id="msgDatabaseFind_RoleSUPERVISOR">
 			<Text LangIsoCode="eng">Supervisor</Text>
 			<Text LangIsoCode="spa">Supervisor</Text>
 			<Text LangIsoCode="por">Supervisor</Text>
 			<Text LangIsoCode="fre">Superviseur</Text>
 		</Message>
-		<Message id="txtRoleUSER">
+		<Message id="msgDatabaseFind_RoleUSER">
 			<Text LangIsoCode="eng">Feeder</Text>
 			<Text LangIsoCode="spa">Alimentador</Text>
 			<Text LangIsoCode="por">Alimentador</Text>
 			<Text LangIsoCode="fre">Alimentation</Text>
 		</Message>
-		<Message id="txtRoleOBSERVER">
+		<Message id="msgDatabaseFind_RoleOBSERVER">
 			<Text LangIsoCode="eng">Observer</Text>
 			<Text LangIsoCode="spa">Observador</Text>
 			<Text LangIsoCode="por">Observador</Text>
 			<Text LangIsoCode="fre">Observateur</Text>
 		</Message>
-		<Message id="txtRoleNONE">
+		<Message id="msgDatabaseFind_RoleNONE">
 			<Text LangIsoCode="eng">Public Databases</Text>
 			<Text LangIsoCode="spa">Bases Públicas</Text>
 			<Text LangIsoCode="por">Bases de datos públicas</Text>
 			<Text LangIsoCode="fre">Bases de données publiques</Text>
-		</Message>
-		<Message id="txtAvailableDB">
-			<Text LangIsoCode="eng">Available Disaster Inventories</Text>
-			<Text LangIsoCode="spa">Inventarios de Desastres disponibles</Text>
-			<Text LangIsoCode="por">Desastres inventários disponíveis</Text>
-			<Text LangIsoCode="fre">Inventaires de Désastres disponibles</Text>
 		</Message>
 	</Group>
 	<Group name="portal">
