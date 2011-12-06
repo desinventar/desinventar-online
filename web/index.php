@@ -346,18 +346,19 @@ switch ($cmd)
 			$RegionList = $reglst;
 		}
 		$RoleList = array();
-		$answer = array('Status'     => 'OK', 
-		                'RoleList'   => $RoleList,
-		                'RegionList' => $RegionList);
+		$answer = array(
+			'Status'        => ERR_NO_ERROR,
+			'NoOfDatabases' => count($RegionList),
+			'RoleList'      => $RoleList,
+			'RegionList'    => $RegionList
+		);
+		$answerstr = htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
 		if (isset($_GET['callback']))
 		{
 			// Enable support for JSONP requests...
-			echo $_GET['callback'] . '(' . json_encode($answer) . ')';
+			$answerstr = $_GET['callback'] . '(' . $answerstr . ')';
 		}
-		else
-		{
-			echo json_encode($answer);   
-		}
+		echo $answerstr;
 	break;
 	case 'getCountryName':
 			$CountryIso = getParameter('CountryIso','');
