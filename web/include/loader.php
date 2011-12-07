@@ -106,7 +106,6 @@ define('CACHEDIR', $_SERVER['DESINVENTAR_CACHEDIR']);
 define('VAR_DIR' , DATADIR);
 define('TMP_DIR' , TEMP);
 define('SMTY_DIR', CACHEDIR); // Smarty temp dir
-define('TMPM_DIR', CACHEDIR); // Mapserver temp dir
 require_once(BASE . '/include/fb.php');
 require_once(BASE . '/include/usersession.class.php');
 require_once(BASE . '/include/date.class.php');

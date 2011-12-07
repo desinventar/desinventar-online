@@ -6,7 +6,7 @@
 		<tr>
 			<td>
 				<div id="divRegionLogo">
-					<img src="{-$desinventarURL-}/images/di_logo2.png" />
+					<img src="{-$desinventarURL-}/images/desinventar_logo.png" />
 				</div>
 			</td>
 			<td>

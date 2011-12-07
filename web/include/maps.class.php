@@ -4,30 +4,33 @@
   (c) 1998-2011 Corporacion OSSO
 */
 
-class Maps {
-	public $fpath = "";
-	public $url = "";
-	public $kml = "";	
-	private $reg = "";
-	
+class Maps
+{
 	/* This class generate mapfile's mapserver
-	   q	: Region Object
-	   reg	: RegionUUID
-	   lev	: Level to generate effects
-	   dl	: disasters list
-	   range: limits, legends and color
-	   info	: about map (WMS Metadata)
-	   lbl	: Label to show name, code or value..
-	   trans : Transparency %
-	   type	: filename, THEMATIC, SELECT, KML
-  */
-	function Maps($us, $reg, $lev, $dl, $range, $info, $lbl, $prmTransparency, $type) {
+		q	: Region Object
+		reg	: RegionUUID
+		lev	: Level to generate effects
+		dl	: disasters list
+		range: limits, legends and color
+		info	: about map (WMS Metadata)
+		lbl	: Label to show name, code or value..
+		trans : Transparency %
+		type	: filename, THEMATIC, SELECT, KML
+		prmOptions : Hash with remaining options
+			URL => Complete URL for DesInventar App
+	*/
+	function Maps($us, $reg, $lev, $dl, $range, $info, $lbl, $prmTransparency, $type, $prmOptions = array())
+	{
+		$this->options = $prmOptions;
 		$this->url = "http://". $_SERVER['HTTP_HOST'] ."/cgi-bin/". MAPSERV ."?";
 		$this->reg = $reg;
 		$fp = "";
-		if ($type == "KML") {
+		if ($type == 'KML')
+		{
 			$this->kml = $this->generateKML($us, $reg, $info);
-		} else {
+		}
+		else
+		{
 			$map = "## DesInventar mapfile\n";
 			$map .= $this->setHeader($us, $reg, $info, $type);
 			$gl = $us->q->loadGeoLevels('', -1, true);
@@ -37,7 +40,7 @@ class Maps {
 				$fp = DATADIR ."/database/". $reg . "/region.map";
 			} else {
 				// generate effects maps: type=filename | thematic=sessid
-				$fp = TMPM_DIR ."/map_";
+				$fp = TMP_DIR ."/map_";
 				$map .= $this->setLayerEff($us, $reg, $lev, $dl, $range, $info, $lbl, $prmTransparency);
 				if ($type == "THEMATIC") {
 					$fp .= "$reg-". session_id() . '_' . time() . '.map';
@@ -63,7 +66,8 @@ class Maps {
 		return $this->fpath;
 	}
 	
-	function setHeader($us, $reg, $inf, $typ) {
+	function setHeader($us, $reg, $inf, $typ)
+	{
 		$x = 400;
 		$y = 550;
 		$map = 
@@ -76,20 +80,27 @@ class Maps {
 		IMAGECOLOR	255 255 255
 		PROJECTION	"proj=latlong" "ellps=WGS84" "datum=WGS84" END
 		WEB';
-    if ($typ == "SELECT") {
-      $map .= '
+		if ($typ == "SELECT")
+		{
+			$map .= '
       HEADER "templates/imagemap_header.html"
       FOOTER "templates/imagemap_footer.html"';
-    }
-    $fm = TEMP .'/map_';
+		}
+		$fm = TMP_DIR . '/map_';
 		if ($typ == "THEMATIC")
-		  $fm .= "$reg-". session_id() .".map";
-    elseif (strlen($typ) > 0)
-      $fm .= "$reg-$typ.map";
-    else
-      exit();
-    $map .= '
-			#IMAGEPATH		"'. str_replace('\\','/', TMPM_DIR) .'"
+		{
+			$fm .= $reg . '-'. session_id() . '.map';
+		}
+		elseif (strlen($typ) > 0)
+		{
+			$fm .= $reg . '-' . $typ . '.map';
+		}
+		else
+		{
+			exit();
+		}
+		$map .= '
+			#IMAGEPATH		"'. str_replace('\\','/', TMP_DIR) .'"
 			METADATA
 			  WMS_TITLE	"DesInventar Map of -'. $inf['TITLE'] .'-"
 			  WMS_ABSTRACT	"Level: '. $inf['LEVEL'] .'"
@@ -337,8 +348,9 @@ class Maps {
       return false;
   }
   
-	function generateKML($us, $reg, $info) {
-		$fp = urlencode(TMPM_DIR ."/map_$reg-". session_id() .".map");
+	function generateKML($us, $reg, $info)
+	{
+		$fp = urlencode(TMP_DIR . '/map_' . $reg . '-' . session_id() . '.map');
 		$dinf = $us->q->getDBInfo($lg);
 		$regn = $dinf['RegionLabel|'];
 		$desc = $dinf['RegionDesc'];
@@ -409,10 +421,10 @@ class Maps {
 		<rotationXY x="0.5" y="0.5" xunits="fraction" yunits="fraction"/>
 		<size x="0" y="0" xunits="pixels" yunits="pixels"/>
 	</ScreenOverlay>
-	<ScreenOverlay id="DILogo">
-		<name>&lt;a href=&quot;http://'. $_SERVER['HTTP_HOST'] .'/&quot;&gt;DesInventar Online&lt;/a&gt;</name>
+	<ScreenOverlay id="DesInventarLogo">
+		<name>DesInventar Project</name>
 		<Icon>
-			<href>http://'. $_SERVER['HTTP_HOST'] .'/images/di_logo2.png</href>
+			<href>' . $this->options['URL'] .'/images/desinventar_logo.png</href>
 		</Icon>
 		<overlayXY x="0" y="1" xunits="fraction" yunits="fraction"/>
 		<screenXY x="0.005" y="0.995" xunits="fraction" yunits="fraction"/>
@@ -424,7 +436,8 @@ class Maps {
 		return $xml;
 	} //function
 
-	function printKML() {
+	function printKML()
+	{
 		return $this->kml;
 	} //function
 } //class

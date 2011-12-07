@@ -59,7 +59,6 @@ if ($RegionId == '')
 
 $us->open($RegionId);
 fixPost($post);
-
 $dic = array();
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('MapOpt', $lg));
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
@@ -321,13 +320,19 @@ if (isset($post['_M+cmd']))
 }
 elseif (isset($get['cmd']) && $get['cmd'] == 'getkml')
 {
-	// Send KML file - GoogleEarth
+	$options = array();
+	$options['URL'] = 'http://' . $_SERVER['HTTP_HOST'] . $desinventarURL;
+	$m = new Maps($us, $RegionId, null, null, null, null, null, null, 'KML', $options);
+
+	// Send KML file to browser
 	header('Content-type: text/kml');
 	header('Content-Disposition: attachment; filename=DesInventar_'. str_replace(' ', '', $RegionId) .'_ThematicMap.kml');
-	$m = new Maps($us, $RegionId, null, null, null, null, null, null, 'KML');
 	echo $m->printKML();
-	$fh = fopen('/tmp/map.kml','w+');
+	/*
+	$filename = TMP_DIR . '/kmlmap' . $us->sSessionId .  '.kml';
+	$fh = fopen($filename,'w+');
 	fputs($fh, $m->printKML());
 	fclose($fh);
+	*/
 }
 </script>
