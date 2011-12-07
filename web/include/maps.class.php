@@ -19,6 +19,7 @@ class Maps
 		prmOptions : Hash with remaining options
 			URL => Complete URL for DesInventar App
 	*/
+
 	function Maps($us, $reg, $lev, $dl, $range, $info, $lbl, $prmTransparency, $type, $prmOptions = array())
 	{
 		$this->options = $prmOptions;
@@ -36,17 +37,25 @@ class Maps
 			$gl = $us->q->loadGeoLevels('', -1, true);
 			$map .= $this->setLayerAdm($gl, $reg, $type);
 			// mapfile and html template to interactive selection
-			if ($type == "SELECT") {
+			if ($type == "SELECT")
+			{
 				$fp = DATADIR ."/database/". $reg . "/region.map";
-			} else {
+			}
+			else
+			{
 				// generate effects maps: type=filename | thematic=sessid
 				$fp = TMP_DIR ."/map_";
 				$map .= $this->setLayerEff($us, $reg, $lev, $dl, $range, $info, $lbl, $prmTransparency);
-				if ($type == "THEMATIC") {
-					$fp .= "$reg-". session_id() . '_' . time() . '.map';
-				} elseif (strlen($type) > 0) {
-					$fp .= "$reg-$type.map";
-				} else {
+				if ($type == "THEMATIC")
+				{
+					$fp .= $reg . '-' . $us->sSessionId . '.map';
+				}
+				elseif (strlen($type) > 0)
+				{
+					$fp .= $reg . '-' . $type . '.map';
+				}
+				else
+				{
 					exit();
 				}
 			}
@@ -55,14 +64,16 @@ class Maps
 		}
 	}
 	
-	function makefile($fp, $map) {
+	function makefile($fp, $map)
+	{
 		$fh = fopen($fp, 'w') or die("Error setting file");
 		fwrite($fh, $map);
 		fclose($fh);
 		$this->fpath = $fp;
 	}
 	
-	public function filename() {
+	public function filename()
+	{
 		return $this->fpath;
 	}
 	
