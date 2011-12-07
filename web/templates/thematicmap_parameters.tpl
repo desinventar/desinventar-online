@@ -9,66 +9,86 @@
 			<table class="conf">
 				<tr valign="top">
 					<td>
-						<b>{-#mareaid#-}</b><br />
-						<select name="_M+Label" size="4" class="fixw line">
-							<option value="NAME">{-#mareashownam#-}</option>
-							<option value="CODE">{-#mareashowcod#-}</option>
-							<option value="VALUE">{-#mareashowval#-}</option>
-							<option value="NONE" selected>{-#mareanotshow#-}</option>
-						</select>
-						<br /><br />
-						<b>{-#mranlegcol#-}</b>&nbsp; &nbsp; &nbsp; &nbsp;
-						<!-- IE Not found.. -->
-						<input type="button" value="+" onclick="addRowToTable();" class="line" />
-						<input type="button" value="-" onclick="removeRowFromTable();" class="line" />
-						<br />
-						<input type="hidden" id="txtRangeLabel" value="{-#mbetween#-}" />
-						<table border="0" id="tbl_range" class="grid">
-							<thead>
-								<th colspan=2>{-#mrange#-}</th><th>{-#mlegend#-}</th><th>{-#mcolor#-}</th>
-							</thead>
-							<tbody id="range">
-							{-foreach name=rg key=k item=i from=$range-}
-								<tr class="clsMapRangeRow">
-									<td>{-$smarty.foreach.rg.iteration-}</td>
-									<td><input id="_M+limit[{-$smarty.foreach.rg.iteration-1-}]" 
-											   name="_M+limit[{-$smarty.foreach.rg.iteration-1-}]"
-											   type="text" class="line" size="5" value="{-$i[0]-}"
-											   onBlur="miv={-if $smarty.foreach.rg.iteration > 1-}parseInt($('_M+limit[{-$smarty.foreach.rg.iteration-2-}]').value)+1{-else-}1{-/if-}; $('_M+legend[{-$smarty.foreach.rg.iteration-1-}]').value='{-#mbetween#-} '+ miv +'- '+ this.value"
-										/>
-									</td>
-									<td><input id="_M+legend[{-$smarty.foreach.rg.iteration-1-}]" 
-											   name="_M+legend[{-$smarty.foreach.rg.iteration-1-}]"
-											   type="text" class="line" size="20" value="{-#mbetween#-} {-$i[1]-}" />
-									</td>
-									<td><input id="_M+ic[{-$smarty.foreach.rg.iteration-1-}]"
-											   type="text" class="line" size="3" value="" style="background:#{-$i[2]-};"
-											   onclick="showColorGrid2('_M+color[{-$smarty.foreach.rg.iteration-1-}]','_M+ic[{-$smarty.foreach.rg.iteration-1-}]');"
-										/>
-										<input type="hidden" id="_M+color[{-$smarty.foreach.rg.iteration-1-}]" name="_M+color[{-$smarty.foreach.rg.iteration-1-}]" value="{-$i[2]-}" />
-									</td>
-								</tr>
-							{-/foreach-}
-							</tbody>
-						</table>
-						<table border="0" width="100%">
+						<table>
 							<tr>
-								<td>{-#mcoltransp#-}
-									<select name="_M+Transparency" class="line">
-										<option value="10">10</option>
-										<option value="20">20</option>
-										<option value="30">30</option>
-										<option value="40">40</option>
-										<option value="50">50</option>
-										<option value="60">60</option>
-										<option value="70" selected>70</option>
-										<option value="80">80</option>
-										<option value="90">90</option>
-										<option value="100">100</option>
-									</select>%
+								<td>
+									<b>{-#mareaid#-}</b><br />
+									<select name="_M+Label" size="4" class="fixw line">
+										<option value="NAME">{-#mareashownam#-}</option>
+										<option value="CODE">{-#mareashowcod#-}</option>
+										<option value="VALUE">{-#mareashowval#-}</option>
+										<option value="NONE" selected>{-#mareanotshow#-}</option>
+									</select>
+									<br /><br />
 								</td>
-								<td align="right">
-									<input type="button" value="{-#mcolorgrad#-}" onClick="genColors();" class="line" />
+							</tr>
+							<tr>
+								<td valign="top">
+									<table>
+										<tr>
+											<td valign="top">
+												<b>{-#mranlegcol#-}</b>&nbsp; &nbsp; &nbsp; &nbsp;
+											</td>
+											<td valign="top">
+												<a class="button" onclick="addRowToTable();"><span>+</span></a>
+												<a class="button" onclick="removeRowFromTable();"><span>-</span></a>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<input type="hidden" id="txtRangeLabel" value="{-#mbetween#-}" />
+												<table border="0" id="tbl_range" class="grid">
+													<thead>
+														<th colspan=2>{-#mrange#-}</th><th>{-#mlegend#-}</th><th>{-#mcolor#-}</th>
+													</thead>
+													<tbody id="range">
+													{-foreach name=rg key=k item=i from=$range-}
+														<tr class="clsMapRangeRow">
+															<td>{-$smarty.foreach.rg.iteration-}</td>
+															<td><input id="_M+limit[{-$smarty.foreach.rg.iteration-1-}]" 
+																	   name="_M+limit[{-$smarty.foreach.rg.iteration-1-}]"
+																	   type="text" class="line" size="5" value="{-$i[0]-}"
+																	   onBlur="miv={-if $smarty.foreach.rg.iteration > 1-}parseInt($('_M+limit[{-$smarty.foreach.rg.iteration-2-}]').value)+1{-else-}1{-/if-}; $('_M+legend[{-$smarty.foreach.rg.iteration-1-}]').value='{-#mbetween#-} '+ miv +'- '+ this.value"
+																/>
+															</td>
+															<td><input id="_M+legend[{-$smarty.foreach.rg.iteration-1-}]" 
+																	   name="_M+legend[{-$smarty.foreach.rg.iteration-1-}]"
+																	   type="text" class="line" size="20" value="{-#mbetween#-} {-$i[1]-}" />
+															</td>
+															<td><input id="_M+ic[{-$smarty.foreach.rg.iteration-1-}]"
+																	   type="text" class="line" size="3" value="" style="background:#{-$i[2]-};"
+																	   onclick="showColorGrid2('_M+color[{-$smarty.foreach.rg.iteration-1-}]','_M+ic[{-$smarty.foreach.rg.iteration-1-}]');"
+																/>
+																<input type="hidden" id="_M+color[{-$smarty.foreach.rg.iteration-1-}]" name="_M+color[{-$smarty.foreach.rg.iteration-1-}]" value="{-$i[2]-}" />
+															</td>
+														</tr>
+													{-/foreach-}
+													</tbody>
+												</table>
+												<table border="0" width="100%">
+													<tr>
+														<td>{-#mcoltransp#-}
+															<select name="_M+Transparency" class="line">
+																<option value="10">10</option>
+																<option value="20">20</option>
+																<option value="30">30</option>
+																<option value="40">40</option>
+																<option value="50">50</option>
+																<option value="60">60</option>
+																<option value="70" selected>70</option>
+																<option value="80">80</option>
+																<option value="90">90</option>
+																<option value="100">100</option>
+															</select>%
+														</td>
+														<td align="right">
+															<a class="button" onClick="genColors();"><span>{-#mcolorgrad#-}</span></a>
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+									</table>
 								</td>
 							</tr>
 						</table>
