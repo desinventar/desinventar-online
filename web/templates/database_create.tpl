@@ -4,8 +4,8 @@
 	<br />
 	{-include file="database_edit.tpl"-}
 	<div class="center">
-		<a class="line" href="#" id="btnDatabaseCreateSend"><span>{-#msgDatabaseCreateSend#-}</span></a>
-		<a class="line" href="#" id="btnDatabaseCreateCancel"><span>{-#msgDatabaseCreateCancel#-}</span></a>
+		<a class="button" href="#" id="btnDatabaseCreateSend"><span>{-#msgDatabaseCreateSend#-}</span></a>
+		<a class="button" href="#" id="btnDatabaseCreateCancel"><span>{-#msgDatabaseCreateCancel#-}</span></a>
 	</div>
 	<div id="divDatabaseCreateStatus" align="center">
 		<br />
