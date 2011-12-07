@@ -13,6 +13,9 @@
 	<input type="hidden" id="desinventarRegionLabel"   value="{-$desinventarRegionLabel-}" />
 	<input type="hidden" id="desinventarHasInternet"   value="{-$desinventarHasInternet-}" />
 	<input type="hidden" id="desinventarOpenLayersURL" value="{-$desinventarOpenLayersURL-}" />
+
+	<input type="hidden" id="optionUseRemoteMaps"  value="{-$appOptions.UseRemoteMaps-}" />
+
 	<select id="desinventarLanguageList" style="display:none;">
 		{-if count($LanguageList) > 0-}
 			{-foreach name=LanguageList key=key item=item from=$LanguageList-}

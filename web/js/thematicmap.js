@@ -53,7 +53,7 @@ function createThematicMap()
 	map.addLayer(base);
 
 	// Add Remote Layers	
-	if (parseInt(jQuery('#desinventarHasInternet').val()) > 0)
+	if (parseInt(jQuery('#optionUseRemoteMaps').val()) > 0)
 	{
 		// Yahoo Maps Base Layer
 		var yahoo = new OpenLayers.Layer.Yahoo( "Yahoo Maps", { 'sphericalMercator': true });
