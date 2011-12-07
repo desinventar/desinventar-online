@@ -3,7 +3,7 @@
 	<h4>{-#msgDatabaseCreateMsg1#-}</h4>
 	<br />
 	{-include file="database_edit.tpl"-}
-	<div align="center">
+	<div class="center">
 		<a class="line" href="#" id="btnDatabaseCreateSend"><span>{-#msgDatabaseCreateSend#-}</span></a>
 		<a class="line" href="#" id="btnDatabaseCreateCancel"><span>{-#msgDatabaseCreateCancel#-}</span></a>
 	</div>
