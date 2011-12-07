@@ -32,6 +32,12 @@ li {
 	border-width:1px;
 	border-color:#BBBBBB;
 }
+
+a.line {
+	text-decoration:none;
+	padding:3px;
+}
+
 .qq-upload-button-text {
 	float: left;
 }
