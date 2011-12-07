@@ -88,7 +88,7 @@
 		</table>
 	</div>
 	<br />
-	<input id="btnCauseEditAdd" type="button" value="{-#baddelem#-}" class="line" />
+	<a class="button" id="btnCauseEditAdd"><span>{-#baddelem#-}</span></a>
 	<span id="causestatusmsg" class="dlgmsg"></span>
 	<br /><br />
 	<div id="causeaddsect" style="display:none">

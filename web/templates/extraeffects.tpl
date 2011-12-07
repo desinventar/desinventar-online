@@ -31,7 +31,7 @@
 		</table>
 	</div>
 	<br /><br />
-	<input id="btnEEFieldAdd" type="button" value="{-#baddoption#-}" class="line" />
+	<a class="button" id="btnEEFieldAdd"><span>{-#baddoption#-}</span></a>
 	<br />
 	<div id="divEEFieldStatusMsg">
 		<span class="msgEEFieldStatus" id="msgEEFieldStatusOk"    style="display:none;">{-#msgupdeef#-}</span>

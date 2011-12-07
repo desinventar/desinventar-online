@@ -49,16 +49,16 @@
 			</tbody>
 		</table>
 	</div>	
-	<input id="btnAdminDatabaseNew" type="button" value="{-#baddoption#-}" class="line" style="display:none;" />
+	<a class="button" id="btnAdminDatabaseNew" style="display:none;"><span>{-#baddoption#-}</span></a>
 </div>
 
 <div id="divAdminDatabaseUpdate" style="display:none;">
 	<h3><span class="RegionLabel"></span></h3>
 	<span class="RegionId"></span>
 	<br />
-	<input id="btnAdminDatabaseEdit"   class="clsAdminDatabaseButton" type="button" value="Edit" />
-	<input id="btnAdminDatabaseExport" class="clsAdminDatabaseButton" type="button" value="Export" />
-	<input id="btnAdminDatabaseImport" class="clsAdminDatabaseButton" type="button" value="Import" />
+	<a class="button,clsAdminDatabaseButton" id="btnAdminDatabaseEdit"><span>Edit</span></a>
+	<a class="button,clsAdminDatabaseButton" id="btnAdminDatabaseExport"><span>Export</span></a>
+	<a class="button,clsAdminDatabaseButton" id="btnAdminDatabaseImport"><span>Import</span></a>
 	<br />
 	<a id="btnAdminDatabaseSelect" title="Select a new database from list">[Select another database]</a>
 

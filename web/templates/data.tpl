@@ -24,10 +24,10 @@
 				<input type="text" id="DataCurPage" size="2" value="1" class="line"  />
 				&nbsp; {-#tnumof#-} &nbsp; {-$NumberOfPages-}
 				&nbsp;&nbsp;|&nbsp;&nbsp;
-				<input type="button" id="btnGridGotoFirstPage" value="<<" class="line" />
-				<input type="button" id="btnGridGotoPrevPage"  value="<"  class="line" />
-				<input type="button" id="btnGridGotoNextPage"  value=">"  class="line" />
-				<input type="button" id="btnGridGotoLastPage"  value=">>" class="line" />
+				<a class="button" id="btnGridGotoFirstPage"><span>&lt;&lt;</span></a>
+				<a class="button" id="btnGridGotoPrevPage"><span>&lt;</span></a>
+				<a class="button" id="btnGridGotoNextPage"><span>&gt;</span></a>
+				<a class="button" id="btnGridGotoLastPage"><span>&gt;&gt;</span></a>
 			</td>
 			<td align="center">
 				<span id="datstatusmsg" class="dlgmsg"></span>

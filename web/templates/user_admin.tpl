@@ -15,7 +15,7 @@
 </div> {-* divUserList *-}
 <div id="divUserStatus">
 	<br />
-	<input id="btnUserAdd" type="button" value="{-#baddoption#-}" class="line" />
+	<a class="button" id="btnUserAdd"><span>{-#baddoption#-}</span></a>
 	<br />
 	<span id="lblUserStatusMsg" class="dlgmsg"></span>
 	<br />

@@ -13,7 +13,7 @@
 		</td>
 		<td colspan="2" valign="top">
 			<input type="text"   id="txtDBImportFileName" value="" size="50"/>
-			<input id="btnDBImportSelectFile" type="button" />
+			<input type="button" id="btnDBImportSelectFile" />
 		</td>
 	</tr>
 	<tr>
@@ -27,7 +27,7 @@
 			</div>
 		</td>
 		<td>
-			<input type="button" id="btnDBImportCancelUpload" class="bb2" value="{-#msgDBImportCancel#-}" />
+			<a class="button" id="btnDBImportCancelUpload"><span>{-#msgDBImportCancel#-}</span></a>
 		</td>
 	</tr>
 	</table>
@@ -90,8 +90,8 @@
 		</tr>
 		<tr>
 			<td colspan="2" align="right">
-				<input type="submit" id="btnDBImportSubmit" class="line" value="Aceptar" />
-				<input type="button" id="btnDBImportCancel" class="line" value="Cancelar" />
+				<a class="button" id="btnDBImportSubmit"><span>Aceptar</span></a>
+				<a class="button" id="btnDBImportCancel"><span>Cancelar</span></a>
 			</td>				
 		</tr>
 		</table>

@@ -88,7 +88,7 @@
 		</table>
 	</div>
 	<br />
-	<input id="btnEventEditAdd" type="button" value="{-#baddelem#-}" class="line" />
+	<a class="button" id="btnEventEditAdd"><span>{-#baddelem#-}</span></a>
 	<span id="eventstatusmsg" class="dlgmsg"></span>
 	<br /><br />
 	<div id="eventaddsect" style="display:none">

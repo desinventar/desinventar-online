@@ -11,8 +11,7 @@
 			<td><b style="color:darkred;">{-#toldpassword#-}</b>
 			</td>
 			<td><input type="password" id="UserPasswd" name="UserPasswd" size="8" maxlength="20" class="line" />
-				<input type="button" value="Ok" class="line" onClick="$('userpaaddsect').style.display='block';
-					updateList('userpaaddsect', jQuery('#desinventarURL').val() + '/user.php', 'cmd=chkpasswd&UserPasswd='+ $('UserPasswd').value);" />
+				<a class="button" onClick="$('userpaaddsect').style.display='block'; updateList('userpaaddsect', jQuery('#desinventarURL').val() + '/user.php', 'cmd=chkpasswd&UserPasswd='+ $('UserPasswd').value);"><span>Ok</span></a>
 			</td>
 		</tr>
 	</table>

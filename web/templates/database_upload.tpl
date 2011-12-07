@@ -29,7 +29,7 @@
 			<td>
 				<div id="divFileUploaderControl" style="display:block;">
 				</div>
-				<input type="button" id="btnAdminDatabaseUploadCancel"     class="button line" value="{-#msgAdminDatabaseUploadCancel#-}" />
+				<a class="button" id="btnAdminDatabaseUploadCancel"><span>{-#msgAdminDatabaseUploadCancel#-}</span></a>
 			</td>
 		</tr>
 		</table>
@@ -74,8 +74,8 @@
 			<td colspan="2" align="center">
 				<input type="hidden" id="txtAdminDatabaseUploadFilename" value="" />
 				<br />
-				<input type="button" id="btnAdminDatabaseUploadReplace" class="line" value="{-#msgAdminDatabaseUploadButtonReplace#-}" />
-				<input type="button" id="btnAdminDatabaseUploadReplaceCancel" class="line" value="{-#msgAdminDatabaseUploadButtonCancel#-}"  />
+				<a class="button" id="btnAdminDatabaseUploadReplace"><span>{-#msgAdminDatabaseUploadButtonReplace#-}</span></a>
+				<a class="button" id="btnAdminDatabaseUploadReplaceCancel"><span>{-#msgAdminDatabaseUploadButtonCancel#-}</span></a>
 			</td>				
 		</tr>
 		</table>

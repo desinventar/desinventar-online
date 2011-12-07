@@ -48,6 +48,6 @@
 		{-include file="desinventarmenu.tpl"-}
 		{-include file="desinventarinfo.tpl"-}
 		<br />
-		<input type="button" class="line" id="btnTest" value="Test" />
+		<a class="button" id="btnTest"><span>Test</span></a>
 	</body>
 </html>
