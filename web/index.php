@@ -97,7 +97,7 @@ switch ($cmd)
 			$answer['LanguageList'] = $LanguageList;
 			$answer['CountryList'] = $CountryList;
 		}
-		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
 	case 'admin':
 	case 'cmdAdminDB':
