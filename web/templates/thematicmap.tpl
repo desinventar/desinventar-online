@@ -35,7 +35,7 @@
 						{-$rgl[0].regname-}
 					</div>
 					<hr />
-					<image src="{-$desinventarURL-}/images/ge_icon.png" /><a href="thematicmap.php?r={-$reg-}&cmd=getkml">{-#tgetgearth#-}</a>
+					<image src="{-$desinventarURL-}/images/ge_icon.png" /><a href="{-$desinventarURL-}/thematicmap.php?r={-$reg-}&cmd=getkml">{-#tgetgearth#-}</a>
 					<hr />
 					<img src="{-$legend-}" /><br />
 				</div>
