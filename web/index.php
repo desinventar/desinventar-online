@@ -236,13 +236,17 @@ switch ($cmd)
 			if ($answer['success'] == true)
 			{
 				$iReturn = ERR_NO_ERROR;
-
 				$Filename = $answer['filename'];
 				// Open ZIP File, extract info.xml and return values...				
 				$zip = new ZipArchive();
 				$res = $zip->open($OutDir . '/' . $Filename);
 				if ($res == TRUE)
 				{
+					// Delete existing info.xml file just in case...
+					if (file_exists($OutDir . '/info.xml'))
+					{
+						unlink($OutDir . '/info.xml');
+					}
 					$zip->extractTo($OutDir,'info.xml');
 					$zip->close();
 					if (file_exists($OutDir . '/info.xml'))
@@ -260,6 +264,11 @@ switch ($cmd)
 					{
 						$answer['Status'] = ERR_UNKNOWN_ERROR;
 					}
+					// Delete existing info.xml file just in case...
+					if (file_exists($OutDir . '/info.xml'))
+					{
+						unlink($OutDir . '/info.xml');
+					}
 				}
 				else
 				{
@@ -276,33 +285,40 @@ switch ($cmd)
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
 	break;
 	case 'cmdDatabaseReplace':
+	case 'cmdDatabaseReplaceCancel':
 		$answer = array();
 		$iReturn = ERR_NO_ERROR;
 		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
 		{
 			$iReturn = ERR_ACCESS_DENIED;
 		}
-
 		if ($iReturn > 0)
 		{
 			$OutDir = TMP_DIR . '/' . $us->sSessionId;
 			$Filename = getParameter('Filename','');
-			// Open ZIP File, extract all files and return values...
-			$zip = new ZipArchive();
-			$res = $zip->open($OutDir . '/' . $Filename);
-			if ($res == FALSE)
+			if ($cmd == 'cmdDatabaseReplace') 
 			{
-				$iReturn = ERR_UNKNOWN_ERROR;
+				// Open ZIP File, extract all files and return values...
+				$zip = new ZipArchive();
+				$res = $zip->open($OutDir . '/' . $Filename);
+				if ($res == FALSE)
+				{
+					$iReturn = ERR_UNKNOWN_ERROR;
+				}
+				if ($iReturn > 0)
+				{
+					$DBDir = $us->getDBDir();
+					$zip->extractTo($DBDir);
+					$zip->close();
+					$r = new DIRegion($us, $RegionId);
+					$r->set('RegionId', $RegionId);
+					$r->set('RegionLabel', $RegionLabel);
+					$r->update();
+				}
 			}
-			if ($iReturn > 0)
+			if (file_exists($OutDir . '/' . $Filename))
 			{
-				$DBDir = $us->getDBDir();
-				$zip->extractTo($DBDir);
-				$zip->close();
-				$r = new DIRegion($us, $RegionId);
-				$r->set('RegionId', $RegionId);
-				$r->set('RegionLabel', $RegionLabel);
-				$r->update();
+				unlink($OutDir . '/' . $Filename);
 			}
 		}
 		$answer['Status'] = $iReturn;

@@ -16,35 +16,47 @@ function onReadyAdminDatabaseUpload()
 		jQuery('#divAdminDatabaseUploadParameters').hide();
 		doAdminDatabaseUploadStatusMsg('msgAdminDatabaseUploadWaitForUpdate');
 		jQuery.post(jQuery('#desinventarURL').val() + '/',
-		{
-			cmd: 'cmdDatabaseReplace',
-			RegionId: jQuery('#desinventarRegionId').val(),
-			Filename: jQuery('#txtAdminDatabaseUploadFilename').val()
-		},
-		function(data)
-		{
-			doAdminDatabaseUploadStatusMsg('');
-			if (parseInt(data.Status) > 0)
 			{
-				jQuery('#divAdminDatabaseUploadParameters').hide();
-				doAdminDatabaseUploadStatusMsg('msgAdminDatabaseUploadUpdateOk');
-				alert(jQuery('#msgAdminDatabaseUploadComplete').val());
-				doWindowReload();
-			}
-			else
+				cmd: 'cmdDatabaseReplace',
+				RegionId: jQuery('#desinventarRegionId').val(),
+				Filename: jQuery('#txtAdminDatabaseUploadFilename').val()
+			},
+			function(data)
 			{
-				doAdminDatabaseUploadStatusMsg('msgAdminDatabaseUploadUpdateError');
-			}
-		},
-		'json'
+				doAdminDatabaseUploadStatusMsg('');
+				if (parseInt(data.Status) > 0)
+				{
+					jQuery('#divAdminDatabaseUploadParameters').hide();
+					doAdminDatabaseUploadStatusMsg('msgAdminDatabaseUploadUpdateOk');
+					alert(jQuery('#msgAdminDatabaseUploadComplete').val());
+					doWindowReload();
+				}
+				else
+				{
+					doAdminDatabaseUploadStatusMsg('msgAdminDatabaseUploadUpdateError');
+				}
+			},
+			'json'
 		);
 	});
 
 	jQuery('#btnAdminDatabaseUploadReplaceCancel').click(function() {
-		doAdminDatabaseUploadReset();
-		jQuery('#divAdminDatabaseUploadControl').show();
-		jQuery('#divAdminDatabaseUploadParameters').hide();
-		jQuery('#divFileUploaderControl .qq-upload-button-text').show();
+		jQuery.post(
+			jQuery('#desinventarURL').val() + '/',
+			{
+				cmd: 'cmdDatabaseReplaceCancel',
+				RegionId: jQuery('#desinventarRegionId').val(),
+				Filename: jQuery('#txtAdminDatabaseUploadFilename').val()
+			},
+			function(data)
+			{
+				doAdminDatabaseUploadReset();
+				jQuery('#divAdminDatabaseUploadControl').show();
+				jQuery('#divAdminDatabaseUploadParameters').hide();
+				jQuery('#divFileUploaderControl .qq-upload-button-text').show();
+			},
+			'json'
+		);				
 	});
 
 } //onReadyAdminDatabaseUpload
@@ -63,6 +75,7 @@ function doAdminDatabaseCreateUploader()
 		},
 		debug:false,
 		multiple:false,
+		allowedExtensions: ['zip'],
 		onSubmit: function(id, Filename)
 		{
 			jQuery('#txtAdminDatabaseUploadFilename').val(Filename);
