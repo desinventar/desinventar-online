@@ -97,6 +97,7 @@ function doAdminDatabaseCreateUploader()
 			else
 			{
 				doAdminDatabaseUploadStatusMsg('msgAdminDatabaseUploadErrorOnUpload');
+				doAdminDatabaseUploadReset();
 			}
 		},
 		onCancel: function(id, Filename)
