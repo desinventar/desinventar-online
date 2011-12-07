@@ -229,6 +229,10 @@ switch ($cmd)
 			}
 			$uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
 			$answer = $uploader->handleUpload($OutDir . '/');
+			if (isset($answer['error']))
+			{
+				$answer['success'] = false;
+			}
 			if ($answer['success'] == true)
 			{
 				$iReturn = ERR_NO_ERROR;
@@ -263,6 +267,10 @@ switch ($cmd)
 				}
 			} //if
 		} //if
+		if ($answer['success'] == false)
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
 		$answer['Status'] = $iReturn;
 		// to pass data through iframe you will need to encode all html tags
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
