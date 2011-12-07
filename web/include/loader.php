@@ -16,6 +16,9 @@ define('MINORVERSION', '340');
 define('VERSION'     , MAJORVERSION . '.' . MINORVERSION);
 define('JSVERSION'   , '2011-12-06.01');
 
+$appOptions = array();
+$appOptions['UseRemoteMaps'] = 1;
+
 // 2009-07-22 (jhcaiced) Adapted Configuration and Startup for 
 // using with PHP Command Line 
 if (isset($_SERVER['HTTP_HOST']))
@@ -47,6 +50,8 @@ if (isset($_SERVER['HTTP_HOST']))
 		$_SERVER['DESINVENTAR_DATADIR'] = $Install_Dir . '/data';
 		$_SERVER['DESINVENTAR_MAPDIR'] = $Install_Dir . '/files/worldmap';
 		$_SERVER['DESINVENTAR_CACHEDIR'] = $Install_Dir . '/tmp';		
+		// Disable Remote Maps by Default
+		$appOptions['UseRemoteMaps'] = 0;
 	}
 	else
 	{

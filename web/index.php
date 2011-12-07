@@ -41,7 +41,7 @@ $desinventarUserRole = $us->getUserRole($RegionId);;
 $desinventarUserRoleValue = $us->getUserRoleValue($RegionId);
 $t->assign('desinventarUserRole', $desinventarUserRole);
 $t->assign('desinventarUserRoleValue', $desinventarUserRoleValue);
-
+$t->assign('appOptions', $appOptions);
 // 2011-11-18 Use this to detect file uploads...
 if (getParameter('qqfile','') != '')
 {
