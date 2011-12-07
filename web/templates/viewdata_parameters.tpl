@@ -27,13 +27,13 @@
 							<option value="E.{-$key-}">{-$item[0]-}</option>
 						{-/foreach-}
 					</select><br />
-					<input type="button" value="{-#balls#-}" onclick="selectall('_D+sel1[]');" class="line" />
-					<input type="button" value="{-#bnone#-}" onclick="selectnone('_D+sel1[]');" class="line" />
+					<a class="button" onclick="selectall('_D+sel1[]');"><span>{-#balls#-}</span></a>
+					<a class="button" onclick="selectnone('_D+sel1[]');"><span>{-#bnone#-}</span></a>
 				</td>
 				<td align="center" valign="middle" style="width:20px;">
-					<input type="button" value="&rarr;" onclick="moveOptions($('_D+sel1[]'), $('_D+Field[]'));" class="line" />
+					<a class="button" onclick="moveOptions($('_D+sel1[]'), $('_D+Field[]'));"><span>&rarr;</span></a>
 					<br /><br /><br />
-					<input type="button" value="&larr;" onclick="moveOptions($('_D+Field[]'), $('_D+sel1[]'));" class="line" />
+					<a class="button" onclick="moveOptions($('_D+Field[]'), $('_D+sel1[]'));"><span>&larr;</span></a>
 				</td>
 				<td>
 					<b>{-#sviewfields#-}</b><br />
@@ -44,14 +44,16 @@
 							{-/if-}
 						{-/foreach-}
 					</select><br/>
-					<input type="button" value="{-#balls#-}" onclick="selectall('_D+Field[]');" class="line" />
-					<input type="button" value="{-#bnone#-}" onclick="selectnone('_D+Field[]');" class="line" />
+					<a class="button" onclick="selectall('_D+Field[]');"><span>{-#balls#-}</span></a>
+					<a class="button" onclick="selectnone('_D+Field[]');"><span>{-#bnone#-}</span></a>
 				</td>
 				<td style="width:20px;" align="center">
-					<input type="button" value="&uarr;&uarr;" onclick="top('_D+Field[]');" class="line" /><br/>
-					<input type="button" value="&uarr;" onclick="upone('_D+Field[]');" class="line" /><br/>
-					<input type="button" value="&darr;" onclick="downone('_D+Field[]');" class="line" /><br/>
-					<input type="button" value="&darr;&darr;" onclick="bottom('_D+Field[]');" class="line" /><br/>
+					<div class="center">
+						<a class="button" onclick="top('_D+Field[]');"    ><span>&uarr;&uarr;</span></a><br/>
+						<a class="button" onclick="upone('_D+Field[]');"  ><span>&uarr;</span></a><br/>
+						<a class="button" onclick="downone('_D+Field[]');"><span>&darr;</span></a><br/>
+						<a class="button" onclick="bottom('_D+Field[]');" ><span>&darr;&darr;</span></a><br/>
+					</div>
 				</td>
 			</tr>
 		</table>

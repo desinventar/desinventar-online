@@ -24,10 +24,10 @@
 				<input type="text" id="StatCurPage" size="2" value="1" class="line" />
 				&nbsp; {-#tnumof#-} &nbsp;{-$last-}
 				&nbsp;&nbsp;|&nbsp;&nbsp;
-				<input type="button" id="btnStatGotoFirstPage" value="<<" class="line" />
-				<input type="button" id="btnStatGotoPrevPage"  value="<"  class="line" />
-				<input type="button" id="btnStatGotoNextPage"  value=">"  class="line" />
-				<input type="button" id="btnStatGotoLastPage"  value=">>" class="line" />
+				<a class="button" id="btnStatGotoFirstPage"><span>&lt;&lt;</span></a>
+				<a class="button" id="btnStatGotoPrevPage"><span>&lt;</span></a>
+				<a class="button" id="btnStatGotoNextPage"><span>&gt;</span></a>
+				<a class="button" id="btnStatGotoLastPage"><span>&gt;&gt;</span></a>
 			</td>
 			<td align="center">
 				<span id="stdstatusmsg" class="dlgmsg"></span>

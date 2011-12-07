@@ -29,8 +29,7 @@
 		</table>
 	</div>
 	<br /><br />
-	<input id="add" type="button" value="{-#baddoption#-}" class="line"
-		onclick="setLevGeo('','','','','','','','lev'); $('cmd').value='insert';" />
+	<a class="button" id="add" onclick="setLevGeo('','','','','','','','lev'); $('cmd').value='insert';"><span>{-#baddoption#-}</span></a>		
 	<span id="levstatusmsg" class="dlgmsg"></span>
 	<iframe name="ifcarto" id="ifcarto" frameborder="0" src="about:blank" style="height:30px; width:300px;"></iframe>
 	<br /><br />

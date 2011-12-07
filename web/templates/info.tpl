@@ -132,7 +132,7 @@
 			</table>
 		</div>
 		<br />
-		<input id="add" type="button" value="{-#baddoption#-}" class="line" onclick="setRolLog('', '', 'role'); $('RoleCmd').value='cmdDBInfoRoleInsert';" />
+		<a class="button" id="add" onclick="setRolLog('', '', 'role'); $('RoleCmd').value='cmdDBInfoRoleInsert';"><span>{-#baddoption#-}</span></a>
 		<span id="rolestatusmsg" class="dlgmsg"></span>
 		<br />
 		<div id="roleaddsect" style="display:none">
@@ -207,7 +207,7 @@
 			</table>
 		</div>
 		<br />
-		<input id="add" type="button" value="{-#baddoption#-}" class="line" onclick="setRolLog('', '', 'log'); $('LogCmd').value='cmdDBInfoLogInsert';" />
+		<a class="button" id="add" onclick="setRolLog('', '', 'log'); $('LogCmd').value='cmdDBInfoLogInsert';"><span>{-#baddoption#-}</span></a>
 		<span id="logstatusmsg" class="dlgmsg"></span>
 		<br />
 		<div id="logaddsect" style="display:none; width:280px;">

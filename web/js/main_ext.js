@@ -459,7 +459,7 @@ function doDialogsCreate()
 
 	w = new Ext.Window({id:'wndViewDataParams', 
 		el:'dat-win', layout:'fit',
-		width:600, height:400, 
+		width:600, height:420, 
 		closeAction:'hide', plain: true, animCollapse: false,
 		items: new Ext.Panel({contentEl: 'dat-cfg', autoScroll: true }),
 		buttons: [
@@ -489,7 +489,7 @@ function doDialogsCreate()
 	});
 
 	w = new Ext.Window({id:'wndViewMapParams',
-		el:'map-win',  layout:'fit',  width:650, height:400, 
+		el:'map-win',  layout:'fit',  width:650, height:420, 
 		closeAction:'hide', plain: true, animCollapse: false,
 		items: new Ext.Panel({contentEl: 'map-cfg', autoScroll: true }),
 		buttons: [
@@ -546,7 +546,7 @@ function doDialogsCreate()
 	});
 
 	w = new Ext.Window({id:'wndViewStdParams',
-		el:'std-win',  layout:'fit',  width:600, height:400, 
+		el:'std-win',  layout:'fit',  width:600, height:420, 
 		closeAction:'hide', plain: true, animCollapse: false,
 		items: new Ext.Panel({contentEl: 'std-cfg', autoScroll: true }),
 		buttons: [
