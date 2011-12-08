@@ -104,11 +104,11 @@ switch ($cmd)
 		$answer['Status'] = ERR_UNKNOWN_ERROR;
 		if ($desinventarUserRoleValue >= ROLE_ADMINPORTAL)
 		{
-			$UserList = $us->getUserList();
-			$UserInfo = $us->getRegionUserAdminInfo();
+			$UserList  = $us->getUserList();
+			$UserAdmin = $us->getRegionUserAdminInfo();
 			$answer['Status'] = ERR_NO_ERROR;
 			$answer['UserList'] = $UserList;
-			$answer['UserAdmin'] = $UserInfo;
+			$answer['UserAdmin'] = $UserAdmin;
 		}
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
@@ -184,6 +184,25 @@ switch ($cmd)
 			if ($iReturn > 0)
 			{
 				$answer['RegionId'] = $r->get('RegionId');
+			}
+		}
+		$answer['Status'] = $iReturn;
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
+	break;
+	case 'cmdDatabaseSetUserAdmin':
+		$answer = array();
+		$iReturn = ERR_UNKNOWN_ERROR;
+		if ($desinventarUserRoleValue >= ROLE_ADMINPORTAL)
+		{
+			$UserId = getParameter('UserId', '');
+			if ($UserId != '')
+			{
+				$iReturn = $us->setUserRole($UserId, $us->RegionId, 'ADMINREGION');
+				if ($iReturn > 0)
+				{
+					$UserAdmin = $us->getRegionUserAdminInfo();
+					$answer['UserAdmin'] = $UserAdmin;
+				}
 			}
 		}
 		$answer['Status'] = $iReturn;
