@@ -2946,6 +2946,50 @@
 			<Text LangIsoCode="fre">Le formulaire contient des données incorrectes ou certains champs obligatoires sont vides, s'il vous plaît vérifier les données et essayer de nouveau.</Text>
 		</Message>
 	</Group>
+	<Group name="grpUserPermAdmin">
+		<Message id="msgUserPermAdminTitle">
+			<Text LangIsoCode="eng">Database Administrator</Text>
+			<Text LangIsoCode="spa">Administrador Base de Datos</Text>
+			<Text LangIsoCode="por">Administrador de banco de dados</Text>
+			<Text LangIsoCode="fre">Database Administrator</Text>
+		</Message>
+		<Message id="msgUserPermAdminMsg1">
+			<Text LangIsoCode="eng">Use this form to configure which user is the database administrator.</Text>
+			<Text LangIsoCode="spa">Utilice este formulario para configurar cual usuario es el administrador de la base</Text>
+			<Text LangIsoCode="por">Utilize este formulário para configurar qual o usuário é o administrador de banco de dados</Text>
+			<Text LangIsoCode="fre">Utilisez ce formulaire pour configurer l'utilisateur qui est l'administrateur de base</Text>
+		</Message>
+		<Message id="msgUserPermAdminSend">
+			<Text LangIsoCode="eng">Submit</Text>
+			<Text LangIsoCode="spa">Aceptar</Text>
+			<Text LangIsoCode="por">Submeter</Text>
+			<Text LangIsoCode="fre">Envoyer</Text>
+		</Message>
+		<Message id="msgUserPermAdminCancel">
+			<Text LangIsoCode="eng">Cancel</Text>
+			<Text LangIsoCode="spa">Cancelar</Text>
+			<Text LangIsoCode="por">Cancelar</Text>
+			<Text LangIsoCode="fre">Annuler</Text>
+		</Message>
+		<Message id="msgUserPermAdminOk">
+			<Text LangIsoCode="eng">Database created correctly, opening new database...</Text>
+			<Text LangIsoCode="spa">Base de datos creada correctamente, abriendo nueva base de datos...</Text>
+			<Text LangIsoCode="por">Banco de dados criado corretamente, abrindo nueva de base de datos</Text>
+			<Text LangIsoCode="fre">Base de données créée correctement, l'ouverture nouvelle base de données...</Text>
+		</Message>
+		<Message id="msgUserPermAdminError">
+			<Text LangIsoCode="eng">There was an error while creating the database, please check the data and try again.</Text>
+			<Text LangIsoCode="spa">Hubo un error al crear la base de datos, por favor revise los datos e intente nuevamente</Text>
+			<Text LangIsoCode="por">Ocorreu um erro ao criar o banco de dados, por favor verifique os dados e tente novamente</Text>
+			<Text LangIsoCode="fre">Il y avait une erreur lors de la création de la base de données, s'il vous plaît vérifier les données et essayer de nouveau</Text>
+		</Message>
+		<Message id="msgUserPermAdminFormError">
+			<Text LangIsoCode="eng">The form has invalid data or some required fields are empty, please verify the data and try again.</Text>
+			<Text LangIsoCode="spa">El formulario contiene datos no válidos o algunos campos obligatorios están vacíos, por favor verifique los datos e intente de nuevo.</Text>
+			<Text LangIsoCode="por">O formulário tem dados inválidos ou alguns campos obrigatórios estão vazios, por favor verifique os dados e tente novamente.</Text>
+			<Text LangIsoCode="fre">Le formulaire contient des données incorrectes ou certains champs obligatoires sont vides, s'il vous plaît vérifier les données et essayer de nouveau.</Text>
+		</Message>
+	</Group>
 	<Group name="grpAdminDatabaseExport">
 		<Message id="msgAdminDatabaseExportTitle">
 			<Text LangIsoCode="eng">Download database</Text>

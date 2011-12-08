@@ -99,6 +99,19 @@ switch ($cmd)
 		}
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
+	case 'cmdGetUserPermList':
+		$answer = array();
+		$answer['Status'] = ERR_UNKNOWN_ERROR;
+		if ($desinventarUserRoleValue >= ROLE_ADMINPORTAL)
+		{
+			$UserList = $us->getUserList();
+			$UserInfo = $us->getRegionUserAdminInfo();
+			$answer['Status'] = ERR_NO_ERROR;
+			$answer['UserList'] = $UserList;
+			$answer['UserAdmin'] = $UserInfo;
+		}
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
+	break;
 	case 'admin':
 	case 'cmdAdminDB':
 		$t->assign('CountryList', $us->q->getCountryList());
