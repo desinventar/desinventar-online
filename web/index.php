@@ -197,6 +197,8 @@ switch ($cmd)
 			$UserId = getParameter('UserId', '');
 			if ($UserId != '')
 			{
+				$r = new DIRegion($us, $RegionId);
+				$r->removeRegionUserAdmin();
 				$iReturn = $us->setUserRole($UserId, $us->RegionId, 'ADMINREGION');
 				if ($iReturn > 0)
 				{
