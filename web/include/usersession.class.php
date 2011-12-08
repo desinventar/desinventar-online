@@ -380,14 +380,27 @@ class UserSession {
 		return $myData;
 	} // function
 
-	// Return hash with all  users of a Region with a role
-	function getRegionRoleList($myregion) {
+	// Return hash with all users of a Region with a role
+	function getRegionRoleList($prmRegionId='', $prmRoleId='')
+	{
+		if ($prmRegionId == '')
+		{
+			$prmRegionId = $this->RegionId;
+		}
 		$myData = array();
-		$sQuery = "SELECT RegionAuth.*,Region.RegionLabel FROM RegionAuth,Region WHERE " .
-		  " (RegionAuth.RegionId = Region.RegionId) " .
-		  " AND (Region.RegionId='" . $myregion . "') " .
-		  " AND RegionAuth.AuthKey='ROLE' AND RegionAuth.AuthAuxValue != 'NONE'" .
-		  " ORDER BY RegionAuth.RegionId";
+		$sQuery = 'SELECT RegionAuth.*,Region.RegionLabel FROM RegionAuth,Region WHERE'  .
+			' (RegionAuth.RegionId = Region.RegionId)' .
+			' AND (Region.RegionId="' . $prmRegionId . '")' .
+			' AND RegionAuth.AuthKey="ROLE"';
+		if ($prmRoleId == '')
+		{
+			$sQuery .= ' AND RegionAuth.AuthAuxValue != "NONE"';
+		}
+		else
+		{
+			$sQuery .= ' AND RegionAuth.AuthAuxValue == "' . $prmRoleId . '"';
+		}
+		$sQuery .= ' ORDER BY RegionAuth.RegionId';
 		$sth = $this->q->core->prepare($sQuery);
 		$this->q->core->beginTransaction();
 		try
@@ -407,10 +420,25 @@ class UserSession {
 			showErrorMsg('getRegionRoleList Error : ' . $e->getMessage());
 		}
 		return $myData;
-	} // function
+	} // getRegionRoleList()
 
+	function getRegionUserAdminInfo($prmRegionId)
+	{
+		$UserInfo = array();
+		$RoleList = $this->getRegionRoleList($prmRegionId, 'ADMINREGION');
+		foreach($RoleList as $UserId => $UserRole)
+		{
+			$UserFullInfo = $this->getUserInfo($UserId);
+			foreach(array('UserId','UserFullName','UserEMail') as $key)
+			{
+				$UserInfo[$key] = $UserFullInfo[$UserId][$key];
+			}
+		}
+		return $UserInfo;
+	} // getRegionUserAdminInfo()
+	
 	// Get basic user info: user=>[email,pass,name,org,country,city,creadate,iplist,notes,active]
-	function getUserInfo ($prmUserId)
+	function getUserInfo($prmUserId)
 	{
 		$myData = array();
 		$sQuery = "SELECT * FROM User";
@@ -423,10 +451,22 @@ class UserSession {
 		try
 		{
 			$sth->execute();
-			while ($row = $sth->fetch(PDO::FETCH_OBJ))
+			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
-				$myData[$row->UserId] = array ($row->UserEMail, $row->UserPasswd, $row->UserFullName, $row->Organization, 
-					$row->CountryIso, $row->UserCity, $row->UserCreationDate, $row->UserNotes, $row->UserActive);
+				$myData[$row['UserId']] = array_merge(
+					array(
+						$row['UserEMail'], 
+						$row['UserPasswd'], 
+						$row['UserFullName'], 
+						$row['Organization'],
+						$row['CountryIso'],
+						$row['UserCity'],
+						$row['UserCreationDate'],
+						$row['UserNotes'],
+						$row['UserActive']
+					),
+					$row
+				);
 			}
 		}
 		catch (Exception $e)
@@ -890,7 +930,7 @@ class UserSession {
 		}
 	}
 	
-	public function getUsersList($prmUserId)
+	public function getUserList($prmUserId)
 	{
 		$list = array();
 		$sQuery = "SELECT * FROM User WHERE UserActive > 0 ";
@@ -912,7 +952,7 @@ class UserSession {
 		catch (Exception $e)
 		{
 			$this->q->core->rollBack();
-			showErrorMsg('ERROR getUsersList : ' . $e->getMessage());
+			showErrorMsg('ERROR getUserList : ' . $e->getMessage());
 		}
 		return $list;
 	}

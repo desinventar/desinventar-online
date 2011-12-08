@@ -16,10 +16,12 @@
 		<script type="text/javascript" src="{-$desinventarURL-}/js/admin_database_export.js?version={-$jsversion-}"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/js/admin_database_upload.js?version={-$jsversion-}"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/js/database_create.js?version={-$jsversion-}"></script>
+		<script type="text/javascript" src="{-$desinventarURL-}/js/userperm_admin.js?version={-$jsversion-}"></script>
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
 				//onReadyAdminDatabase();
-				onReadyDatabaseCreate();
+				//onReadyDatabaseCreate();
+				onReadyUserPermAdmin();
 				//doAdminDatabaseUpdateList();
 				//doAdminDatabaseExportCreate();
 				// 2011-04-29 (jhcaiced) Fix for use of ExtJS in IE9 ?
@@ -34,7 +36,7 @@
 					};
 				}
 				jQuery('#btnTest').click(function() {
-					doDatabaseCreateShow();
+					doUserPermAdminShow();
 				});
 				jQuery('#btnTest').trigger('click');
 			});
@@ -44,7 +46,7 @@
 		DesInventar Database Admin
 		Version : {-$jsversion-}<br />
 		Language : {-$lg-}<br />
-		{-include file="database_create_ext.tpl"-}
+		{-include file="userperm_admin_ext.tpl"-}
 		{-include file="desinventarmenu.tpl"-}
 		{-include file="desinventarinfo.tpl"-}
 		<br />

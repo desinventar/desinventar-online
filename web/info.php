@@ -120,7 +120,7 @@ switch($cmd)
 		$sett['PeriodBeginDate']= array($r->get('PeriodBeginDate'), 'DATE');
 		$sett['PeriodEndDate']	= array($r->get('PeriodEndDate'), 'DATE');
 		$t->assign('sett', $sett);
-		$UserList = $us->getUsersList('');
+		$UserList = $us->getUserList('');
 		$UserRoleList = $us->getRegionRoleList($RegionId);
 		$t->assign('usr', $UserList);
 		$t->assign('rol', $UserRoleList);

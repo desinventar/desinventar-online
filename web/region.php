@@ -59,10 +59,9 @@ switch ($cmd)
 	case 'adminreg':
 		// ADMINREG: Form to Create and assign regions
 		$t->assign('CountryList' , $us->q->getCountryList());
-		$t->assign('usr'         , $us->getUsersList(''));
+		$t->assign('usr'         , $us->getUserList(''));
 		$t->assign('LanguageList', $us->q->loadLanguages(1));
 		$t->assign('ctl_adminreg', true);
-		//$t->assign('RegionList'  , $us->q->getRegionAdminList());
 		$t->assign('ctl_reglist' , true);
 	break;
 	case 'list':

@@ -26,6 +26,7 @@ function doDatabaseCreateSetup()
 	// Cancel Button - Hide Window and do nothing
 	jQuery('#btnDatabaseCreateCancel').click(function() {
 		Ext.getCmp('wndDatabaseCreate').hide();
+		return false;
 	});
 
 
