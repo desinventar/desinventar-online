@@ -3155,6 +3155,12 @@
 			<Text LangIsoCode="por">Fechar</Text>
 			<Text LangIsoCode="fre">Fermer</Text>
 		</Message>
+		<Message id="msgAdminDatabaseUploadFileSpec">
+			<Text LangIsoCode="eng">File should have zip extension and must have been  downloaded from DesInventar Online</Text>
+			<Text LangIsoCode="spa">El archivo debe tener extensión .zip y haber sido descargado de DesInventar Online.</Text>
+			<Text LangIsoCode="por">Arquivo deve ter extensão zip e deve ter sido baixado DesInventar Online</Text>
+			<Text LangIsoCode="fre">Fichier doit avoir l'extension zip et doit avoir été téléchargé à partir DesInventar ligne</Text>
+		</Message>
 	</Group>
 	<Group name="grpDBEdit">
 		<Message id="msgDBEditRegionId">
