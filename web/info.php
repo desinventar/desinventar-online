@@ -122,6 +122,13 @@ switch($cmd)
 		$t->assign('sett', $sett);
 		$UserList = $us->getUserList('');
 		$UserRoleList = $us->getRegionRoleList($RegionId);
+		foreach($UserRoleList as $UserId => $UserRole)
+		{
+			if ($UserRole == 'ADMINREGION')
+			{
+				unset($UserRoleList[$UserId]);
+			}
+		}
 		$t->assign('usr', $UserList);
 		$t->assign('rol', $UserRoleList);
 		$t->assign('log', $us->q->getRegLogList());
