@@ -64,24 +64,25 @@ function doDatabaseCreateSetup()
 
 	// Send Button - Validate data and send command to backend
 	jQuery('#btnDatabaseCreateSend').click(function() {
-		jQuery(this).attr('readonly', true);
-		// Validate Fields
-		var bContinue = true;
-		var RegionStatus = jQuery('#fldDatabaseEdit_RegionStatus');
-		RegionStatus.val(0);
-		if (jQuery('#fldDatabaseEdit_RegionActive').attr('checked'))
+		var iReturn;
+		iReturn = doDatabaseCreateValidate();
+		if (iReturn > 0)
 		{
-			RegionStatus.val(parseInt(RegionStatus.val()) | 1);
-		}
-		if (jQuery('#fldDatabaseEdit_RegionPublic').attr('checked'))
-		{
-			RegionStatus.val(parseInt(RegionStatus.val()) | 2);
-		}
-		jQuery('#fldDatabaseEdit_RegionId').removeAttr('disabled');
-		var params = jQuery('#frmDatabaseEdit').serializeObject();
-		jQuery('#fldDatabaseEdit_RegionId').attr('disabled','disabled');
-		if (bContinue)
-		{
+			jQuery(this).attr('readonly', true);
+			var RegionStatus = jQuery('#fldDatabaseEdit_RegionStatus');
+			RegionStatus.val(0);
+			if (jQuery('#fldDatabaseEdit_RegionActive').attr('checked'))
+			{
+				RegionStatus.val(parseInt(RegionStatus.val()) | 1);
+			}
+			if (jQuery('#fldDatabaseEdit_RegionPublic').attr('checked'))
+			{
+				RegionStatus.val(parseInt(RegionStatus.val()) | 2);
+			}
+			jQuery('#fldDatabaseEdit_RegionId').removeAttr('disabled');
+			var params = jQuery('#frmDatabaseEdit').serializeObject();
+			jQuery('#fldDatabaseEdit_RegionId').attr('disabled','disabled');
+
 			jQuery('#frmDatabaseEdit :input').unhighlight();
 			jQuery.post(
 				jQuery('#desinventarURL').val() + '/',
@@ -110,6 +111,13 @@ function doDatabaseCreateSetup()
 				'json'
 			);
 		}
+		else
+		{
+			jQuery('#txtDatabaseCreateFormError').show();
+			setTimeout(function() {
+				jQuery('.clsDatabaseCreateStatus').hide();
+			}, 3000);
+		}
 		return false;
 	});
 
@@ -133,6 +141,21 @@ function doDatabaseCreateShow()
 	jQuery('#fldDatabaseEdit_RegionLabel').focus();
 	jQuery('#fldDatabaseEdit_LangIsoCode').val(jQuery('#desinventarLang').val());
 } //doDatabaseCreateShow()
+
+function doDatabaseCreateValidate()
+{
+	var iReturn = 1;
+	if ( (iReturn > 0) && (jQuery('#txtDatabaseEdit_RegionId').text() == '') )
+	{
+		iReturn = -1;
+	}
+	if ( (iReturn > 0) && (jQuery.trim(jQuery('#fldDatabaseEdit_RegionLabel').val()) == '') )
+	{
+		iReturn = -1;
+	}
+	iReturn = -1;
+	return iReturn;
+}
 
 function doDatabaseCreatePopulateLists()
 {

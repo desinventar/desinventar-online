@@ -2939,6 +2939,12 @@
 			<Text LangIsoCode="por">Ocorreu um erro ao criar o banco de dados, por favor verifique os dados e tente novamente</Text>
 			<Text LangIsoCode="fre">Il y avait une erreur lors de la création de la base de données, s'il vous plaît vérifier les données et essayer de nouveau</Text>
 		</Message>
+		<Message id="msgDatabaseCreateFormError">
+			<Text LangIsoCode="eng">The form has invalid data or some required fields are empty, please verify the data and try again.</Text>
+			<Text LangIsoCode="spa">El formulario contiene datos no válidos o algunos campos obligatorios están vacíos, por favor verifique los datos e intente de nuevo.</Text>
+			<Text LangIsoCode="por">O formulário tem dados inválidos ou alguns campos obrigatórios estão vazios, por favor verifique os dados e tente novamente.</Text>
+			<Text LangIsoCode="fre">Le formulaire contient des données incorrectes ou certains champs obligatoires sont vides, s'il vous plaît vérifier les données et essayer de nouveau.</Text>
+		</Message>
 	</Group>
 	<Group name="grpAdminDatabaseExport">
 		<Message id="msgAdminDatabaseExportTitle">

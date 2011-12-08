@@ -10,6 +10,7 @@
 	<div id="divDatabaseCreateStatus" align="center">
 		<br />
 		<h4>
+			<span class="clsDatabaseCreateStatus" id="txtDatabaseCreateFormError">{-#msgDatabaseCreateFormError#-}</span>
 			<span class="clsDatabaseCreateStatus" id="txtDatabaseCreateOk">{-#msgDatabaseCreateOk#-}</span>
 			<span class="clsDatabaseCreateStatus" id="txtDatabaseCreateError">{-#msgDatabaseCreateError#-}</span>
 		</h4>
