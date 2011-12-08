@@ -19,7 +19,7 @@
 		<script type="text/javascript" src="{-$desinventarURL-}/js/userperm_admin.js?version={-$jsversion-}"></script>
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
-				//onReadyAdminDatabase();
+				onReadyAdminDatabase();
 				//onReadyDatabaseCreate();
 				onReadyUserPermAdmin();
 				//doAdminDatabaseUpdateList();
@@ -39,6 +39,9 @@
 					doUserPermAdminShow();
 				});
 				jQuery('#btnTest').trigger('click');
+				// Initialize Ext.QuickTips
+				Ext.QuickTips.init();
+				Ext.apply(Ext.QuickTips.getQuickTip(), {maxWidth: 200, minWidth: 100, showDelay: 50, trackMouse: true});
 			});
 		</script>
 	</head>

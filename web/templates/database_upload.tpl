@@ -7,12 +7,12 @@
 				{-#msgAdminDatabaseUploadMsg1#-}
 			</td>
 		</tr>
-		<tr>
+		<tr >
 			<td align="right" valign="bottom">
-				{-#msgAdminDatabaseUploadFilename#-} :
+				<span ext:qtip="{-#msgAdminDatabaseUploadFileSpec#-}">{-#msgAdminDatabaseUploadFilename#-} :</span>
 			</td>
-			<td colspan="2" valign="top">
-				<input type="text"   id="txtAdminDatabaseUploadFilename" value="" size="35"/>
+			<td colspan="2" valign="top" ext:qtip="{-#msgAdminDatabaseUploadFileSpec#-}">
+				<input type="text"   id="txtAdminDatabaseUploadFilename" value="" size="35" ext:qtip="{-#msgAdminDatabaseUploadFileSpec#-}" />
 				<input type="hidden" id="txtAdminDatabaseUploadId" value="" />
 			</td>
 		</tr>
@@ -20,7 +20,7 @@
 			<td>
 				<br />
 			</td>
-			<td>
+			<td ext:qtip="{-#msgAdminDatabaseUploadFileSpec#-}">
 				<div id="prgAdminDatabaseUploadProgressBar" style="width:120px;height:6px;background-color:#dddddd">
 					<div id="prgAdminDatabaseUploadProgressMark" style="width:0px;height:6px;background-color:#0000ff">
 					</div>
