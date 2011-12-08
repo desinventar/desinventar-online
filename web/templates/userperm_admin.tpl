@@ -2,13 +2,13 @@
 <div style="margin:10px;">
 	<h4>{-#msgUserPermAdminMsg1#-}</h4>
 	<br />
-	<table>
+	<table width="100%">
 		<tr>
-			<td>
-				<b>Administrador Actual : </b>
+			<td valign="top">
+				<b>{-#msgUserPermAdminCurrentAdmin#-} : </b>
 			</td>
-			<td>
-				<span id="txtUserPermAdminCurrent"></span>
+			<td valign="top">
+				<p id="txtUserPermAdminCurrent"></p>
 			</td>
 		</tr>
 		<tr>
@@ -17,10 +17,10 @@
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<b>Nuevo Administrador : </b>
+			<td valign="top">
+				<b>{-#msgUserPermAdminNewAdmin#-} : </b>
 			</td>
-			<td>
+			<td valign="top">
 				<select id="fldUserPermAdmin_UserId">
 					<option></option>
 				</select>

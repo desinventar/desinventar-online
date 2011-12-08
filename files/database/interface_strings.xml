@@ -307,6 +307,12 @@
 			<Text LangIsoCode="por">Criar novo banco de dados</Text>
 			<Text LangIsoCode="fre">Créer nouvelle base de données</Text>
 		</Message>
+		<Message id="mnuDatabaseSetAdminUser">
+			<Text LangIsoCode="eng">Database Administrator</Text>
+			<Text LangIsoCode="spa">Administrador Base de Datos</Text>
+			<Text LangIsoCode="por">Administrador de banco de dados</Text>
+			<Text LangIsoCode="fre">Database Administrator</Text>
+		</Message>
 		<Message id="mnuDatabaseUpload">
 			<Text LangIsoCode="eng">Upload database</Text>
 			<Text LangIsoCode="spa">Cargar base de datos</Text>
@@ -2959,6 +2965,18 @@
 			<Text LangIsoCode="por">Utilize este formulário para configurar qual o usuário é o administrador de banco de dados</Text>
 			<Text LangIsoCode="fre">Utilisez ce formulaire pour configurer l'utilisateur qui est l'administrateur de base</Text>
 		</Message>
+		<Message id="msgUserPermAdminCurrentAdmin">
+			<Text LangIsoCode="eng">Current Administrator</Text>
+			<Text LangIsoCode="spa">Administrador Actual</Text>
+			<Text LangIsoCode="por">Administrador atual</Text>
+			<Text LangIsoCode="fre">Administrateur courant</Text>
+		</Message>
+		<Message id="msgUserPermAdminNewAdmin">
+			<Text LangIsoCode="eng">New Administrator</Text>
+			<Text LangIsoCode="spa">Nuevo Administrador</Text>
+			<Text LangIsoCode="por">Novo Administrador</Text>
+			<Text LangIsoCode="fre">Nouvelle administrateur</Text>
+		</Message>
 		<Message id="msgUserPermAdminSend">
 			<Text LangIsoCode="eng">Submit</Text>
 			<Text LangIsoCode="spa">Aceptar</Text>
@@ -2972,16 +2990,16 @@
 			<Text LangIsoCode="fre">Annuler</Text>
 		</Message>
 		<Message id="msgUserPermAdminOk">
-			<Text LangIsoCode="eng">Database created correctly, opening new database...</Text>
-			<Text LangIsoCode="spa">Base de datos creada correctamente, abriendo nueva base de datos...</Text>
-			<Text LangIsoCode="por">Banco de dados criado corretamente, abrindo nueva de base de datos</Text>
-			<Text LangIsoCode="fre">Base de données créée correctement, l'ouverture nouvelle base de données...</Text>
+			<Text LangIsoCode="eng">Database administrator updated successfully</Text>
+			<Text LangIsoCode="spa">Administrador de base de datos actualizado con éxito</Text>
+			<Text LangIsoCode="por">Administrador de banco de dados atualizado com sucesso</Text>
+			<Text LangIsoCode="fre">Administrateur de base de données à jour avec succès</Text>
 		</Message>
 		<Message id="msgUserPermAdminError">
-			<Text LangIsoCode="eng">There was an error while creating the database, please check the data and try again.</Text>
-			<Text LangIsoCode="spa">Hubo un error al crear la base de datos, por favor revise los datos e intente nuevamente</Text>
-			<Text LangIsoCode="por">Ocorreu um erro ao criar o banco de dados, por favor verifique os dados e tente novamente</Text>
-			<Text LangIsoCode="fre">Il y avait une erreur lors de la création de la base de données, s'il vous plaît vérifier les données et essayer de nouveau</Text>
+			<Text LangIsoCode="eng">Error while updating database administrator, please try again</Text>
+			<Text LangIsoCode="spa">Error al actualizar administrador de la base, por favor, intente de nuevo</Text>
+			<Text LangIsoCode="por">Erro ao atualizar administrador de banco de dados, por favor tente novamente</Text>
+			<Text LangIsoCode="fre">Erreur lors de la mise à jour administrateur de la base, s'il vous plaît essayez de nouveau</Text>
 		</Message>
 		<Message id="msgUserPermAdminFormError">
 			<Text LangIsoCode="eng">The form has invalid data or some required fields are empty, please verify the data and try again.</Text>

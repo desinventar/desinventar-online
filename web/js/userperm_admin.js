@@ -13,7 +13,7 @@ function doUserPermAdminSetup()
 	// Database Create
 	var w = new Ext.Window({id:'wndUserPermAdmin', 
 		el: 'divUserPermAdminWin', layout:'fit', 
-		width:400, height:250, modal:false,
+		width:500, height:250, modal:false,
 		closeAction:'hide', plain: false, animCollapse: true,
 		items: new Ext.Panel({
 			contentEl: 'divUserPermAdminContent',
@@ -44,11 +44,20 @@ function doUserPermAdminSetup()
 				},
 				function(data)
 				{
+					jQuery('.clsUserPermAdminStatus').hide();
 					if (parseInt(data.Status) > 0)
 					{
 						doUserPermAdminUpdateUserAdmin(data.UserAdmin);
 						jQuery('#btnUserPermAdminSend').attr('readonly', false);
+						jQuery('#txtUserPermAdminOk').show();
 					}
+					else
+					{
+						jQuery('#txtUserPermAdminError').show();
+					}
+					setTimeout(function() {
+						jQuery('.clsUserPermAdminStatus').hide();
+					}, 2500);
 				},
 				'json'
 			);
@@ -94,9 +103,9 @@ function doUserPermAdminUpdateUserAdmin(UserAdmin)
 	var txtUserAdmin = UserAdmin.UserFullName;
 	if (UserAdmin.UserEMail != '')
 	{	
-		txtUserAdmin = txtUserAdmin + '<' + UserAdmin.UserEMail + '>';
+		txtUserAdmin = txtUserAdmin + '<br />' + UserAdmin.UserEMail;
 	}
-	jQuery('#txtUserPermAdminCurrent').text(txtUserAdmin);
+	jQuery('#txtUserPermAdminCurrent').html(txtUserAdmin);
 }
 
 function doUserPermAdminPopulateLists()

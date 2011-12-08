@@ -41,6 +41,7 @@
 	<script type="text/javascript" src="{-$desinventarURL-}/js/admin_database_export.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/js/admin_database_upload.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/js/database_create.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="{-$desinventarURL-}/js/userperm_admin.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/js/database_config.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/js/common.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/js/diadmin.js?version={-$jsversion-}"></script>
