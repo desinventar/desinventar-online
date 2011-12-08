@@ -34,6 +34,24 @@ function doUserPermAdminSetup()
 		iReturn = doUserPermAdminValidate();
 		if (iReturn > 0)
 		{
+			jQuery('#btnUserPermAdminSend').attr('readonly', true);
+			jQuery.post(
+				jQuery('#desinventarURL').val() + '/',
+				{
+					cmd : 'cmdDatabaseSetUserAdmin',
+					RegionId : jQuery('#desinventarRegionId').val(),
+					UserId   : jQuery('#fldUserPermAdmin_UserId').val()
+				},
+				function(data)
+				{
+					if (parseInt(data.Status) > 0)
+					{
+						doUserPermAdminUpdateUserAdmin(data.UserAdmin);
+						jQuery('#btnUserPermAdminSend').attr('readonly', false);
+					}
+				},
+				'json'
+			);
 		}
 		else
 		{
@@ -53,12 +71,9 @@ function doUserPermAdminShow()
 {
 	jQuery('.clsUserPermAdminStatus').hide();
 
-	// If first time, populate data lists
-	var iCount = jQuery('#fldUserPermAdmin_UserId option').length;
-	if (iCount < 2)
-	{
-		doUserPermAdminPopulateLists();
-	} 
+	// In this windows, always update information
+	doUserPermAdminPopulateLists();
+
 	Ext.getCmp('wndUserPermAdmin').show();
 	jQuery('#fldUserPermAdmin_UserId').focus();
 } //doUserPermAdminShow()
@@ -71,6 +86,17 @@ function doUserPermAdminValidate()
 		iReturn = -1;
 	}
 	return iReturn;
+}
+
+function doUserPermAdminUpdateUserAdmin(UserAdmin)
+{
+	jQuery('#fldUserPermAdmin_UserId').val(UserAdmin.UserId);
+	var txtUserAdmin = UserAdmin.UserFullName;
+	if (UserAdmin.UserEMail != '')
+	{	
+		txtUserAdmin = txtUserAdmin + '<' + UserAdmin.UserEMail + '>';
+	}
+	jQuery('#txtUserPermAdminCurrent').text(txtUserAdmin);
 }
 
 function doUserPermAdminPopulateLists()
@@ -91,13 +117,7 @@ function doUserPermAdminPopulateLists()
 						jQuery('<option>', { value : key }).text(value)
 					);
 				});
-				jQuery('#fldUserPermAdmin_UserId').val(data.UserAdmin.UserId);
-				var UserAdmin = data.UserAdmin.UserFullName;
-				if (data.UserAdmin.UserEMail != '')
-				{	
-					UserAdmin = UserAdmin + '<' + data.UserAdmin.UserEMail + '>';
-				}
-				jQuery('#txtUserPermAdminCurrent').text(UserAdmin);
+				doUserPermAdminUpdateUserAdmin(data.UserAdmin);
 				jQuery('#btnUserPermAdminSend').show();
 			}
 		},
