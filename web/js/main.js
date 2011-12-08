@@ -5,6 +5,7 @@
 function onReadyMain()
 {
 	onReadyDatabaseCreate();
+	onReadyUserPermAdmin();
 	onReadyCommon();
 	onReadyUserLogin();
 	onReadyDatacards();

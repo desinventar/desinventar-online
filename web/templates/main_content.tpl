@@ -22,6 +22,9 @@
 <!-- Database Create -->
 {-include file="database_create_ext.tpl"-}
 
+<!-- Database set UserAdmin -->
+{-include file="userperm_admin_ext.tpl"-}
+
 <!-- Import datacards-->
 <div class="contentBlock" id="divDatacardsImport" style="display:none;">
 </div>

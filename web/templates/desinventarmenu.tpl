@@ -24,6 +24,7 @@
 	<span id="mnuMenuDatabase">{-#mnuMenuDatabase#-}</span>
 		<span id="mnuDatabaseFind">{-#mnuDatabaseFind#-}</span>
 		<span id="mnuDatabaseCreate">{-#mnuDatabaseCreate#-}</span>
+		<span id="mnuDatabaseSetAdminUser">{-#mnuDatabaseSetAdminUser#-}</span>
 		<span id="mnuAdminUsers">{-#mnuAdminUsers#-}</span>
 		<span id="mnuAdminDatabases">{-#mnuAdminDatabases#-}</span>
 	<span id="mnuMenuHelp">{-#mnuMenuHelp#-}</span>
