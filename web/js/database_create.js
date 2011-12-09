@@ -154,7 +154,6 @@ function doDatabaseCreateValidate()
 	{
 		iReturn = -1;
 	}
-	iReturn = -1;
 	return iReturn;
 }
 
