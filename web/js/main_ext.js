@@ -121,7 +121,6 @@ function onMenuItem(item) {
 		break;
 		case 'mnuUserLogin':
 		case 'mnuUserChangeLogin':
-			alert('Login Show');
 			doUserLoginShow();
 		break;
 		case 'mnuUserLogout':
