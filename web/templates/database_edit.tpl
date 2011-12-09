@@ -25,7 +25,7 @@
 				{-#msgDatabaseEditRegionLabel#-}<b style="color:darkred;">*</b>
 			</td>
 			<td>
-				<input id="fldDatabaseEdit_RegionLabel" name="Database[RegionLabel]" type="text" maxlength="200" class="line fixw" tabindex="2" />
+				<input id="fldDatabaseEdit_RegionLabel" name="Database[RegionLabel]" type="text" maxlength="200" class="line fixw" tabindex="3" />
 				<input id="fldDatabaseEdit_RegionLabelPrev" type="hidden" value="" />
 			</td>
 		</tr>
@@ -43,7 +43,7 @@
 				{-#msgDatabaseEditRegionActive#-}<b>*</b>
 			</td>
 			<td>
-				<input id="fldDatabaseEdit_RegionActive" name="" type="checkbox" checked tabindex="6" />
+				<input id="fldDatabaseEdit_RegionActive" name="" type="checkbox" checked tabindex="5" />
 			</td>
 		</tr>
 		<tr>
@@ -51,24 +51,9 @@
 				{-#msgDatabaseEditRegionPublic#-}<b>*</b>
 			</td>
 			<td>
-				<input id="fldDatabaseEdit_RegionPublic" name="" type="checkbox" tabindex="7" />
+				<input id="fldDatabaseEdit_RegionPublic" name="" type="checkbox" tabindex="6" />
 			</td>
 		</tr>
-		<!--
-		<tr>
-			<td>
-				{-#tregadmlist#-}<b style="color:darkred;">*</b>
-			</td>
-			<td>
-				<select id="RegionUserAdmin" name="RegionUserAdmin" class="fixw" tabindex="5">
-					<option value=""></option>
-					{-foreach name=usr key=key item=item from=$usr-}
-						<option value="{-$key-}">{-$item-}</option>
-					{-/foreach-}
-				</select>
-			</td>
-		</tr>
-		-->
 		<tr>
 			<td colspan="2" align="center">
 				<input id="fldDatabaseEdit_RegionStatus" type="hidden" name="Database[RegionStatus]" value="0" />
