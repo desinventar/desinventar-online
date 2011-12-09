@@ -33,7 +33,8 @@ function doDatabaseCreateSetup()
 	jQuery('#fldDatabaseEdit_RegionId').attr('readonly', true);
 
 	jQuery('#fldDatabaseEdit_CountryIso').change(function() {
-		jQuery.post(jQuery('#desinventarURL').val() + '/',
+		jQuery.post(
+			jQuery('#desinventarURL').val() + '/',
 			{
 				cmd        : 'cmdRegionBuildRegionId',
 				CountryIso : jQuery(this).val()
@@ -45,18 +46,15 @@ function doDatabaseCreateSetup()
 					jQuery('#fldDatabaseEdit_RegionId').val(data.RegionId);
 					jQuery('#txtDatabaseEdit_RegionId').text(data.RegionId);
 					var RegionLabel = jQuery('#fldDatabaseEdit_RegionLabel').val();
-					var Index = RegionLabel.indexOf('-');
-					if (Index > 0)
-					{
-						RegionLabel = RegionLabel.substring(Index+1);
-					}
 					RegionLabel = jQuery.trim(RegionLabel);
-					if (RegionLabel == '')
+					if ( (RegionLabel == '') ||
+					     (RegionLabel == jQuery('#fldDatabaseEdit_RegionLabelPrev').val()) )
 					{
-						RegionLabel = 'DesInventar ' + data.RegionId;
+						var CountryName = jQuery('#fldDatabaseEdit_CountryIso option[value="' + jQuery('#fldDatabaseEdit_CountryIso').val() + '"]').text();
+						RegionLabel = 'DesInventar ' + data.RegionId.substring(0,12) + ' - ' + CountryName;
+						jQuery('#fldDatabaseEdit_RegionLabel').val(RegionLabel);
 					}
-					var CountryName = jQuery('#fldDatabaseEdit_CountryIso option[value="' + jQuery('#fldDatabaseEdit_CountryIso').val() + '"]').text();
-					jQuery('#fldDatabaseEdit_RegionLabel').val(CountryName + ' - ' + RegionLabel);
+					jQuery('#fldDatabaseEdit_RegionLabelPrev').val(RegionLabel);
 				}
 			},
 			'json'
@@ -128,19 +126,25 @@ function doDatabaseCreateSetup()
 
 function doDatabaseCreateShow()
 {
-	jQuery('.clsDatabaseCreateStatus').hide();
-	// Clear fields in form
-	jQuery('#frmDatabaseEdit :input').each(function() {
-		jQuery(this).val('');
-	});
+	// Populate fields if neccesary
 	var iCount = jQuery('#fldDatabaseEdit_CountryIso option').length;
 	if (iCount < 2)
 	{
 		doDatabaseCreatePopulateLists();
 	} 
-	Ext.getCmp('wndDatabaseCreate').show();
-	jQuery('#fldDatabaseEdit_RegionLabel').focus();
+
+	// Set default values in form
+	jQuery('.clsDatabaseCreateStatus').hide();
+	jQuery('#frmDatabaseEdit_RegionId').val('');
+	jQuery('#frmDatabaseEdit_CountryIso').val('');
+	jQuery('#frmDatabaseEdit_RegionLabel').val('');
+	jQuery('#frmDatabaseEdit_RegionActive').attr('checked',true);
+	jQuery('#frmDatabaseEdit_RegionPublic').attr('checked',false);
 	jQuery('#fldDatabaseEdit_LangIsoCode').val(jQuery('#desinventarLang').val());
+
+	// Show form
+	Ext.getCmp('wndDatabaseCreate').show();
+	jQuery('#fldDatabaseEdit_CountryIso').focus();
 } //doDatabaseCreateShow()
 
 function doDatabaseCreateValidate()
@@ -180,6 +184,7 @@ function doDatabaseCreatePopulateLists()
 					jQuery('#fldDatabaseEdit_CountryIso').append(jQuery('<option>', { value: key }).text(value));
 				});
 				jQuery('#btnDatabaseCreateSend').show();
+				jQuery('#fldDatabaseEdit_CountryIso').focus();
 			}
 		},
 		'json'

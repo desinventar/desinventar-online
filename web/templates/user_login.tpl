@@ -22,7 +22,7 @@
 			</tr>
 			<tr>
 				<td align="right" colspan="2">
-					<input type="submit" value="{-#benter#-}" class="line" />&nbsp;&nbsp;
+					<a class="button" id="btnUserLoginSend"><span>{-#benter#-}</span></a>&nbsp;&nbsp;
 				</td>
 			</tr>
 		</table>

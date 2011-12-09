@@ -8,7 +8,12 @@ function onReadyUserLogin() {
 	doUserLoginUpdateMsg('');
 	
 	// submit form validation and process..
-	jQuery("#frmUserLogin").submit(function() {
+	jQuery("#btnUserLoginSend").click(function() {
+		jQuery('#frmUserLogin').trigger('submit');
+		return false;
+	});
+
+	jQuery('#frmUserLogin').submit(function() {
 		var UserId     = jQuery('#fldUserId').val();
 		var UserPasswd = jQuery("#fldUserPasswd").val();
 
@@ -104,5 +109,4 @@ function doUserLoginShow()
 {
 	doUserLoginUpdateMsg();
 	Ext.getCmp('wndUserLogin').show();
-	//updateUserBar(jQuery('#desinventarURL').val() + '/user.php', '', '', '');
 } //doUserLoginShow()

@@ -12,20 +12,21 @@
 		</tr>
 		<tr>
 			<td>
-				{-#msgDatabaseEditRegionLabel#-}<b style="color:darkred;">*</b>
-			</td>
-			<td>
-				<input id="fldDatabaseEdit_RegionLabel" name="Database[RegionLabel]" type="text" maxlength="200" class="line fixw" tabindex="2" />
-			</td>
-		</tr>
-		<tr>
-			<td>
 				{-#msgDatabaseEditCountryIso#-}<b style="color:darkred;">*</b>
 			</td>
 			<td>
 				<select id="fldDatabaseEdit_CountryIso" name="Database[CountryIso]" class="fixw" tabindex="2">
 					<option value=""></option>
 				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				{-#msgDatabaseEditRegionLabel#-}<b style="color:darkred;">*</b>
+			</td>
+			<td>
+				<input id="fldDatabaseEdit_RegionLabel" name="Database[RegionLabel]" type="text" maxlength="200" class="line fixw" tabindex="2" />
+				<input id="fldDatabaseEdit_RegionLabelPrev" type="hidden" value="" />
 			</td>
 		</tr>
 		<tr>
