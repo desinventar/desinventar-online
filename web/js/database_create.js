@@ -135,11 +135,12 @@ function doDatabaseCreateShow()
 
 	// Set default values in form
 	jQuery('.clsDatabaseCreateStatus').hide();
-	jQuery('#frmDatabaseEdit_RegionId').val('');
-	jQuery('#frmDatabaseEdit_CountryIso').val('');
-	jQuery('#frmDatabaseEdit_RegionLabel').val('');
-	jQuery('#frmDatabaseEdit_RegionActive').attr('checked',true);
-	jQuery('#frmDatabaseEdit_RegionPublic').attr('checked',false);
+	jQuery('#fldDatabaseEdit_RegionId').val('');
+	jQuery('#txtDatabaseEdit_RegionId').text('');
+	jQuery('#fldDatabaseEdit_CountryIso').val('');
+	jQuery('#fldDatabaseEdit_RegionLabel').val('');
+	jQuery('#fldDatabaseEdit_RegionActive').attr('checked',true);
+	jQuery('#fldDatabaseEdit_RegionPublic').attr('checked',false);
 	jQuery('#fldDatabaseEdit_LangIsoCode').val(jQuery('#desinventarLang').val());
 
 	// Show form
@@ -177,7 +178,6 @@ function doDatabaseCreatePopulateLists()
 				jQuery.each(data.LanguageList, function(key, value) {
 					jQuery('#fldDatabaseEdit_LangIsoCode').append(jQuery('<option>', { value : key }).text(value));
 				});
-				jQuery('#fldDatabaseEdit_RegionLabel').focus();
 				jQuery('#fldDatabaseEdit_LangIsoCode').val(jQuery('#desinventarLang').val());
 				jQuery('#fldDatabaseEdit_CountryIso').empty();
 				jQuery.each(data.CountryList, function(key, value) {
