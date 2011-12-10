@@ -326,7 +326,7 @@ function doMainMenuCreate()
 			{id:'mnuDatabaseCreate'       , text: jQuery('#mnuDatabaseCreate').text()       , handler: onMenuItem, hidden: true },
 			{id:'mnuDatabaseConfig'       , text: jQuery('#mnuDatabaseConfig').text()       , handler: onMenuItem, hidden: true },
 			{id:'mnuDatabaseSetAdminUser' , text: jQuery('#mnuDatabaseSetAdminUser').text() , handler: onMenuItem, hidden: true },
-			{id:'mnuDatabaseSelect'       , text: jQuery('#mnuDatabaseSelect').text()       , handler: onMenuItem },
+			{id:'mnuDatabaseSelect'       , text: jQuery('#mnuDatabaseSelect').text()       , handler: onMenuItem }
 		]
 	});
 
@@ -400,11 +400,13 @@ function doMainMenuCreate()
 			// Enable other functions
 			Ext.getCmp('mnuDatacardImport').hide(); // Disabled for now
 			Ext.getCmp('mnuDatabaseExport').show();
+
 			if (UserRoleValue >= 4)
 			{
 				Ext.getCmp('mnuDatabaseUpload').show();
 				Ext.getCmp('mnuDatabaseConfig').show();
 			}
+
 			if (UserRoleValue >= 5)
 			{
 				Ext.getCmp('mnuDatabaseSetAdminUser').show();
