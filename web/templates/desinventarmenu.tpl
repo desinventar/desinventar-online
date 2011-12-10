@@ -14,16 +14,15 @@
 			<span id="mnuUserLanguage-{-$key-}">{-$item-}</span>
 			{-/foreach-}
 		<span id="mnuUserQuit">{-#mnuUserQuit#-}</span>
-	<span id="mnuMenuDatacards">{-#mnuMenuDatacards#-}</span>
-		<span id="mnuDatacardView">{-#mnuDatacardView#-}</span>
-		<span id="mnuDatacardInsertEdit">{-#mnuDatacardInsertEdit#-}</span>
-		<span id="mnuDatacardImport">{-#mnuDatacardImport#-}</span>
+	<span id="mnuMenuDatabase">{-#mnuMenuDatabase#-}</span>
+		<span id="mnuDatabaseRecordView">{-#mnuDatabaseRecordView#-}</span>
+		<span id="mnuDatabaseRecordEdit">{-#mnuDatabaseRecordEdit#-}</span>
 		<span id="mnuDatabaseExport">{-#mnuDatabaseExport#-}</span>
 		<span id="mnuDatabaseUpload">{-#mnuDatabaseUpload#-}</span>
-		<span id="mnuDatabaseConfig">{-#mnuDatabaseConfig#-}</span>
-	<span id="mnuMenuDatabase">{-#mnuMenuDatabase#-}</span>
-		<span id="mnuDatabaseFind">{-#mnuDatabaseFind#-}</span>
 		<span id="mnuDatabaseCreate">{-#mnuDatabaseCreate#-}</span>
+		<span id="mnuDatabaseConfig">{-#mnuDatabaseConfig#-}</span>
+		<span id="mnuDatabaseSelect">{-#mnuDatabaseSelect#-}</span>
+		<span id="mnuDatacardImport">{-#mnuDatacardImport#-}</span>
 		<span id="mnuDatabaseSetAdminUser">{-#mnuDatabaseSetAdminUser#-}</span>
 		<span id="mnuAdminUsers">{-#mnuAdminUsers#-}</span>
 		<span id="mnuAdminDatabases">{-#mnuAdminDatabases#-}</span>
