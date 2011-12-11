@@ -3,33 +3,31 @@
 	<div id="divDatabaseUploadControl">
 		<table border="0">
 		<tr>
-			<td colspan="2">
+			<td colspan="2" title="{-#msgDatabaseUploadFileSpec#-}">
 				{-#msgDatabaseUploadMsg1#-}
 			</td>
 		</tr>
 		<tr >
-			<td align="right" valign="bottom">
-				<span ext:qtip="{-#msgDatabaseUploadFileSpec#-}">{-#msgDatabaseUploadFilename#-} :</span>
-			</td>
-			<td colspan="2" valign="top" ext:qtip="{-#msgDatabaseUploadFileSpec#-}">
-				<input type="text"   id="txtDatabaseUploadFilename" value="" size="35" ext:qtip="{-#msgDatabaseUploadFileSpec#-}" />
+			<td align="right" valign="bottom" title="{-#msgDatabaseUploadFileSpec#-}" >
+				<span style="display:none;">{-#msgDatabaseUploadFilename#-} :</span>
+				<input type="text"   id="txtDatabaseUploadFilename" value="" size="35" />
 				<input type="hidden" id="txtDatabaseUploadId" value="" />
+			</td>
+			<td valign="top">
+				<div id="divFileUploaderControl" style="display:block;">
+				</div>
+				<a class="button" id="btnDatabaseUploadCancel"><span>{-#msgDatabaseUploadCancel#-}</span></a>
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<br />
-			</td>
-			<td ext:qtip="{-#msgDatabaseUploadFileSpec#-}">
-				<div id="prgDatabaseUploadProgressBar" style="width:120px;height:6px;background-color:#dddddd">
-					<div id="prgDatabaseUploadProgressMark" style="width:0px;height:6px;background-color:#0000ff">
+			<td title="{-#msgDatabaseUploadFileSpec#-}">
+				<div id="prgDatabaseUploadProgressBar" style="width:100%;height:12px;background-color:#dddddd">
+					<div id="prgDatabaseUploadProgressMark" style="width:0px;height:12px;background-color:#0000ff">
 					</div>
 				</div>
 			</td>
 			<td>
-				<div id="divFileUploaderControl" style="display:block;">
-				</div>
-				<a class="button" id="btnDatabaseUploadCancel"><span>{-#msgDatabaseUploadCancel#-}</span></a>
+				<br />
 			</td>
 		</tr>
 		</table>
