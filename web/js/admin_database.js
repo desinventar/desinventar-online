@@ -7,7 +7,6 @@ function onReadyAdminDatabase()
 {
 	onReadyAdminDatabaseEdit();
 	onReadyAdminDatabaseExport();
-	onReadyAdminDatabaseUpload();
 
 	// Highlight row on mouseOver
 	jQuery('#tblDatabaseList tr').live({

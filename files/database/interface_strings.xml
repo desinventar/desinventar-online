@@ -3034,116 +3034,116 @@
 			<Text LangIsoCode="fre">Fermer</Text>
 		</Message>
 	</Group>
-	<Group name="grpAdminDatabaseUpload">
-		<Message id="msgAdminDatabaseUploadTitle">
+	<Group name="grpDatabaseUpload">
+		<Message id="msgDatabaseUploadTitle">
 			<Text LangIsoCode="eng">Upload database</Text>
 			<Text LangIsoCode="spa">Cargar base de datos</Text>
 			<Text LangIsoCode="por">Carregar banco de dados</Text>
 			<Text LangIsoCode="fre">Charger base de données</Text>
 		</Message>
-		<Message id="msgAdminDatabaseUploadMsg1">
+		<Message id="msgDatabaseUploadMsg1">
 			<Text LangIsoCode="eng">Please select the database backup file to import</Text>
 			<Text LangIsoCode="spa">Seleccione el archivo de copia de seguridad de base de datos para importar</Text>
 			<Text LangIsoCode="por">Por favor selecione o arquivo de backup do banco de dados de importação</Text>
 			<Text LangIsoCode="fre">S&quot;il vous plaît sélectionnez la sauvegarde de base de données de fichier à importer</Text>
 		</Message>
-		<Message id="msgAdminDatabaseUploadFilename">
+		<Message id="msgDatabaseUploadFilename">
 			<Text LangIsoCode="eng">Filename</Text>
 			<Text LangIsoCode="spa">Archivo</Text>
 			<Text LangIsoCode="por">Nome do arquivo</Text>
 			<Text LangIsoCode="fre">Nom du fichier</Text>
 		</Message>
-		<Message id="msgAdminDatabaseUploadCancel">
+		<Message id="msgDatabaseUploadCancel">
 			<Text LangIsoCode="eng">Cancel</Text>
 			<Text LangIsoCode="spa">Cancelar</Text>
 			<Text LangIsoCode="por">Cancelar</Text>
 			<Text LangIsoCode="fre">Annuler</Text>
 		</Message>
-		<Message id="msgAdminDatabaseUploadUpdateOk">
+		<Message id="msgDatabaseUploadUpdateOk">
 			<Text LangIsoCode="eng">Database updated correctly</Text>
 			<Text LangIsoCode="spa">Base de datos actualizada correctamente</Text>
 			<Text LangIsoCode="por">Banco de dados atualizado corretamente</Text>
 			<Text LangIsoCode="fre">Base de données mis à jour correctement</Text>
 		</Message>
-		<Message id="msgAdminDatabaseUploadErrorOnUpload">
+		<Message id="msgDatabaseUploadErrorOnUpload">
 			<Text LangIsoCode="eng">Error while uploading file</Text>
 			<Text LangIsoCode="spa">Error al subir archivo</Text>
 			<Text LangIsoCode="por">Erro ao carregar arquivo</Text>
 			<Text LangIsoCode="fre">Erreur lors du téléchargement de fichiers</Text>
 		</Message>
-		<Message id="msgAdminDatabaseUploadUpdateError">
+		<Message id="msgDatabaseUploadUpdateError">
 			<Text LangIsoCode="eng">Database cannot be updated or created/update</Text>
 			<Text LangIsoCode="spa">Base de datos no pudo se creada/actualizada</Text>
 			<Text LangIsoCode="por">Banco de dados não pode ser criado ou atualizado</Text>
 			<Text LangIsoCode="fre">Base de datos no pueden ser creados o actualizados</Text>
 		</Message>
-		<Message id="msgAdminDatabaseUploadWaitForUpdate">
+		<Message id="msgDatabaseUploadWaitForUpdate">
 			<Text LangIsoCode="eng">Please wait while database is being updated...</Text>
 			<Text LangIsoCode="spa">Por favor espere mientras la base de datos se actualiza...</Text>
 			<Text LangIsoCode="por">Aguarde enquanto o banco de dados está sendo atualizado...</Text>
 			<Text LangIsoCode="fre">S'il vous plaît patienter pendant que base de données est mise à jour...</Text>
 		</Message>
-		<Message id="msgAdminDatabaseUploadRegionId">
+		<Message id="msgDatabaseUploadRegionId">
 			<Text LangIsoCode="eng">Identifier</Text>
 			<Text LangIsoCode="spa">Identificador</Text>
 			<Text LangIsoCode="por">Identifier</Text>
 			<Text LangIsoCode="fre">Identifiant</Text>
 		</Message>
-		<Message id="msgAdminDatabaseUploadRegionLabel">
+		<Message id="msgDatabaseUploadRegionLabel">
 			<Text LangIsoCode="eng">Label</Text>
 			<Text LangIsoCode="spa">Etiqueta</Text>
 			<Text LangIsoCode="por">Etiqueta</Text>
 			<Text LangIsoCode="fre">Étiquette</Text>
 		</Message>
-		<Message id="msgAdminDatabaseUploadLangIsoCode">
+		<Message id="msgDatabaseUploadLangIsoCode">
 			<Text LangIsoCode="eng">Language</Text>
 			<Text LangIsoCode="spa">Idioma</Text>
 			<Text LangIsoCode="por">Limguagem</Text>
 			<Text LangIsoCode="fre">Langue</Text>
 		</Message>
-		<Message id="msgAdminDatabaseUploadCountryIso">
+		<Message id="msgDatabaseUploadCountryIso">
 			<Text LangIsoCode="eng">Country</Text>
 			<Text LangIsoCode="spa">País</Text>
 			<Text LangIsoCode="por">País</Text>
 			<Text LangIsoCode="fre">Pays</Text>
 		</Message>
-		<Message id="msgAdminDatabaseUploadComplete">
+		<Message id="msgDatabaseUploadComplete">
 			<Text LangIsoCode="eng">Database updated correctly, browser's window will reload now to refresh data</Text>
 			<Text LangIsoCode="spa">Base de datos actualizada correctamente, la ventana del navegador se volverá a cargar ahora para actualizar los datos</Text>
 			<Text LangIsoCode="por">Banco de dados atualizado corretamente, a janela do navegador irá recarregar agora para atualizar dados</Text>
 			<Text LangIsoCode="fre">Base de données mis à jour correctement, la fenêtre du navigateur va recharger maintenant pour actualiser les données</Text>
 		</Message>
-		<Message id="msgAdminDatabaseUploadConfirmReplace">
+		<Message id="msgDatabaseUploadConfirmReplace">
 			<Text LangIsoCode="eng">Confirm that you want to replace current database file</Text>
 			<Text LangIsoCode="spa">Confirme que desea reemplazar el archivo de base de datos actual</Text>
 			<Text LangIsoCode="por">Confirmar que deseja substituir o arquivo banco de dados atual</Text>
 			<Text LangIsoCode="fre">Confirmez que vous voulez remplacer le fichier base de données actuelle</Text>
 		</Message>
-		<Message id="msgAdminDatabaseUploadButtonReplace">
+		<Message id="msgDatabaseUploadButtonReplace">
 			<Text LangIsoCode="eng">Replace</Text>
 			<Text LangIsoCode="spa">Reemplazar</Text>
 			<Text LangIsoCode="por">Substituição</Text>
 			<Text LangIsoCode="fre">Remplacer</Text>
 		</Message>
-		<Message id="msgAdminDatabaseUploadButtonCancel">
+		<Message id="msgDatabaseUploadButtonCancel">
 			<Text LangIsoCode="eng">Cancel</Text>
 			<Text LangIsoCode="spa">Cancelar</Text>
 			<Text LangIsoCode="por">Cancelar</Text>
 			<Text LangIsoCode="fre">Annuler</Text>
 		</Message>
-		<Message id="msgAdminDatabaseUploadChooseFile">
+		<Message id="msgDatabaseUploadChooseFile">
 			<Text LangIsoCode="eng">Choose file</Text>
 			<Text LangIsoCode="spa">Elegir archivo..</Text>
 			<Text LangIsoCode="por">Escolha arquivo</Text>
 			<Text LangIsoCode="fre">Choisissez fichier</Text>
 		</Message>
-		<Message id="msgAdminDatabaseUploadButtonClose">
+		<Message id="msgDatabaseUploadButtonClose">
 			<Text LangIsoCode="eng">Close</Text>
 			<Text LangIsoCode="spa">Cerrar</Text>
 			<Text LangIsoCode="por">Fechar</Text>
 			<Text LangIsoCode="fre">Fermer</Text>
 		</Message>
-		<Message id="msgAdminDatabaseUploadFileSpec">
+		<Message id="msgDatabaseUploadFileSpec">
 			<Text LangIsoCode="eng">File should have zip extension and must have been  downloaded from DesInventar Online</Text>
 			<Text LangIsoCode="spa">El archivo debe tener extensión .zip y haber sido descargado de DesInventar Online.</Text>
 			<Text LangIsoCode="por">Arquivo deve ter extensão zip e deve ter sido baixado DesInventar Online</Text>

@@ -4,6 +4,7 @@
 */
 function onReadyMain()
 {
+	onReadyDatabaseUpload();
 	onReadyDatabaseCreate();
 	onReadyUserPermAdmin();
 	onReadyCommon();
