@@ -289,8 +289,8 @@ switch ($cmd)
 						$info = array();
 						$info['RegionId']    = $RegionId;
 						$info['RegionLabel'] = $r->get('RegionLabel');
-						$info['LangIsoCode'] = $r->get('LangIsoCode');
 						$info['CountryIso']  = $r->get('CountryIso');
+						$info['CountryName'] = $us->q->getCountryName($info['CountryIso']);
 						$answer['Info'] = $info;
 						$answer['DBExist'] = DIRegion::existRegion($us, $info['RegionId']);
 					}
