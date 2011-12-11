@@ -54,14 +54,6 @@
 		</tr>
 		<tr>
 			<td align="right">
-				{-#msgDatabaseUploadLangIsoCode#-} :
-			</td>
-			<td>
-				<span id="txtDatabaseUploadLangIsoCode"></span>
-			</td>
-		</tr>
-		<tr>
-			<td align="right">
 				{-#msgDatabaseUploadCountryIso#-} :
 			</td>
 			<td>
@@ -87,6 +79,7 @@
 		<span class="clsDatabaseUploadStatusMsg" id="msgDatabaseUploadUpdateOk">{-#msgDatabaseUploadUpdateOk#-}</span>
 		<span class="clsDatabaseUploadStatusMsg" id="msgDatabaseUploadErrorOnUpload">{-#msgDatabaseUploadErrorOnUpload#-}</span>
 		<span class="clsDatabaseUploadStatusMsg" id="msgDatabaseUploadUpdateError">{-#msgDatabaseUploadUpdateError#-}</span>
+		<span class="clsDatabaseUploadStatusMsg" id="msgDatabaseUploadWaitForUpload">{-#msgDatabaseUploadWaitForUpload#-}<img src="{-$desinventarURL-}/images/loading.gif" alt="" /></span>
 		<span class="clsDatabaseUploadStatusMsg" id="msgDatabaseUploadWaitForUpdate">{-#msgDatabaseUploadWaitForUpdate#-}<img src="{-$desinventarURL-}/images/loading.gif" alt="" /></span>
 	</div>
 </div>
