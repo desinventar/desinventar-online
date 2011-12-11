@@ -217,7 +217,7 @@ function onMenuItem(item) {
 			doAdminDatabaseExportAction();
 		break;
 		case 'mnuDatabaseUpload':
-			doAdminDatabaseUploadAction();
+			doDatabaseUploadShow();
 		break;
 		case 'mnuDatabaseConfig':
 			hideQueryDesign();
