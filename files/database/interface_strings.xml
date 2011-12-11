@@ -3042,10 +3042,10 @@
 			<Text LangIsoCode="fre">Charger base de données</Text>
 		</Message>
 		<Message id="msgDatabaseUploadMsg1">
-			<Text LangIsoCode="eng">Please select the database backup file to import</Text>
-			<Text LangIsoCode="spa">Seleccione el archivo de copia de seguridad de base de datos para importar</Text>
-			<Text LangIsoCode="por">Por favor selecione o arquivo de backup do banco de dados de importação</Text>
-			<Text LangIsoCode="fre">S&quot;il vous plaît sélectionnez la sauvegarde de base de données de fichier à importer</Text>
+			<Text LangIsoCode="eng">Select database to be uploaded</Text>
+			<Text LangIsoCode="spa">Seleccione la base de datos a subir</Text>
+			<Text LangIsoCode="por">Selecione banco de dados a serem enviados</Text>
+			<Text LangIsoCode="fre">Sélectionnez la base de données d'être téléchargées</Text>
 		</Message>
 		<Message id="msgDatabaseUploadFilename">
 			<Text LangIsoCode="eng">Filename</Text>
@@ -3077,6 +3077,12 @@
 			<Text LangIsoCode="por">Banco de dados não pode ser criado ou atualizado</Text>
 			<Text LangIsoCode="fre">Base de datos no pueden ser creados o actualizados</Text>
 		</Message>
+		<Message id="msgDatabaseUploadWaitForUpload">
+			<Text LangIsoCode="eng">The file is being copied</Text>
+			<Text LangIsoCode="spa">El archivo se está copiando</Text>
+			<Text LangIsoCode="por">O arquivo está sendo copiado</Text>
+			<Text LangIsoCode="fre">Le fichier est copié</Text>
+		</Message>
 		<Message id="msgDatabaseUploadWaitForUpdate">
 			<Text LangIsoCode="eng">Please wait while database is being updated...</Text>
 			<Text LangIsoCode="spa">Por favor espere mientras la base de datos se actualiza...</Text>
@@ -3090,16 +3096,10 @@
 			<Text LangIsoCode="fre">Identifiant</Text>
 		</Message>
 		<Message id="msgDatabaseUploadRegionLabel">
-			<Text LangIsoCode="eng">Label</Text>
-			<Text LangIsoCode="spa">Etiqueta</Text>
-			<Text LangIsoCode="por">Etiqueta</Text>
-			<Text LangIsoCode="fre">Étiquette</Text>
-		</Message>
-		<Message id="msgDatabaseUploadLangIsoCode">
-			<Text LangIsoCode="eng">Language</Text>
-			<Text LangIsoCode="spa">Idioma</Text>
-			<Text LangIsoCode="por">Limguagem</Text>
-			<Text LangIsoCode="fre">Langue</Text>
+			<Text LangIsoCode="eng">Name</Text>
+			<Text LangIsoCode="spa">Nombre</Text>
+			<Text LangIsoCode="por">Nome</Text>
+			<Text LangIsoCode="fre">Nom</Text>
 		</Message>
 		<Message id="msgDatabaseUploadCountryIso">
 			<Text LangIsoCode="eng">Country</Text>
@@ -3108,16 +3108,16 @@
 			<Text LangIsoCode="fre">Pays</Text>
 		</Message>
 		<Message id="msgDatabaseUploadComplete">
-			<Text LangIsoCode="eng">Database updated correctly, browser's window will reload now to refresh data</Text>
-			<Text LangIsoCode="spa">Base de datos actualizada correctamente, la ventana del navegador se volverá a cargar ahora para actualizar los datos</Text>
-			<Text LangIsoCode="por">Banco de dados atualizado corretamente, a janela do navegador irá recarregar agora para atualizar dados</Text>
-			<Text LangIsoCode="fre">Base de données mis à jour correctement, la fenêtre du navigateur va recharger maintenant pour actualiser les données</Text>
+			<Text LangIsoCode="eng">Database has been updated correctly, browser window will reload now with new data</Text>
+			<Text LangIsoCode="spa">La base de datos se actualizó correctamente, la ventana del navegador se cargará nuevamente con los nuevos datos</Text>
+			<Text LangIsoCode="por">Banco de dados foi atualizado corretamente, janela do navegador irá recarregar agora com novos dados</Text>
+			<Text LangIsoCode="fre">Base de données a été correctement mis à jour, fenêtre du navigateur va recharger maintenant avec de nouvelles données</Text>
 		</Message>
 		<Message id="msgDatabaseUploadConfirmReplace">
-			<Text LangIsoCode="eng">Confirm that you want to replace current database file</Text>
-			<Text LangIsoCode="spa">Confirme que desea reemplazar el archivo de base de datos actual</Text>
-			<Text LangIsoCode="por">Confirmar que deseja substituir o arquivo banco de dados atual</Text>
-			<Text LangIsoCode="fre">Confirmez que vous voulez remplacer le fichier base de données actuelle</Text>
+			<Text LangIsoCode="eng">Database will be replaced by the file:</Text>
+			<Text LangIsoCode="spa">La base de datos será reemplazada por el archivo:</Text>
+			<Text LangIsoCode="por">Banco de dados será substituído pelo arquivo:</Text>
+			<Text LangIsoCode="fre">Base de données sera remplacé par le fichier:</Text>
 		</Message>
 		<Message id="msgDatabaseUploadButtonReplace">
 			<Text LangIsoCode="eng">Replace</Text>
