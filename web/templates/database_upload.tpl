@@ -21,8 +21,8 @@
 		</tr>
 		<tr>
 			<td title="{-#msgDatabaseUploadFileSpec#-}">
-				<div id="prgDatabaseUploadProgressBar" style="width:100%;height:12px;background-color:#dddddd">
-					<div id="prgDatabaseUploadProgressMark" style="width:0px;height:12px;background-color:#0000ff">
+				<div id="prgDatabaseUploadProgressBar" style="width:100%;height:15px;background-color:#dddddd">
+					<div id="prgDatabaseUploadProgressMark" style="width:0px;height:15px;background-color:#3bb3c2">
 					</div>
 				</div>
 			</td>
