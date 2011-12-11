@@ -7,11 +7,16 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
 	<title>DesInventar Online Edition {-$majorversion-} | {-$RegionLabel-}</title>
+	<!-- jQuery -->
+	{-include file="jquery.tpl"-}
+	<!-- ExtJS -->
+	<!-- Make sure prototype.js is loaded before ExtJS -->
+	<script type="text/javascript" src="{-$desinventarURL-}/external/prototype.js"></script>
+	{-include file="extjs.tpl"-}
+
 	<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/desinventar.css?version={-$jsversion-}" />
 	<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/datacards.css?version={-$jsversion-}" />
 	<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/main.css?version={-$jsversion-}" />
-	<!-- jQuery -->
-	{-include file="jquery.tpl"-}
 
 	<script type="text/javascript" src="{-$desinventarURL-}/external/listMan.js"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/external/md5.js"></script>
@@ -56,10 +61,6 @@
 	<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/external/checktree/checktree.css"/>
 	<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/accordion.css"/>
 
-	<!-- ExtJS -->
-	<!-- Make sure prototype.js is loaded before ExtJS -->
-	<script type="text/javascript" src="{-$desinventarURL-}/external/prototype.js"></script>
-	{-include file="extjs.tpl"-}
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			onReadyExtJS();
