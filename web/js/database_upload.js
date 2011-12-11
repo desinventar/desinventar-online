@@ -104,6 +104,8 @@ function doAdminDatabaseCreateUploader()
 				jQuery('#txtDatabaseUploadRegionLabel').text(data.Info.RegionLabel);
 				jQuery('#txtDatabaseUploadLangIsoCode').text(data.Info.LangIsoCode);
 				jQuery('#txtDatabaseUploadCountryIso').text(data.Info.CountryIso + ' - ' + data.Info.CountryName);
+				jQuery('#txtDatabaseUploadRegionLastUpdate').text(data.Info.RegionLastUpdate);
+				jQuery('#txtDatabaseUploadNumberOfRecords').text(data.Info.NumberOfRecords);
 				doDatabaseUploadStatusMsg('');
 				jQuery('#divDatabaseUploadControl').hide();
 				jQuery('#divDatabaseUploadParameters').show();

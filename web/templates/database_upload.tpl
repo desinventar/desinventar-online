@@ -61,6 +61,22 @@
 			</td>
 		</tr>
 		<tr>
+			<td align="right">
+				{-#msgDatabaseUploadLastUpdate#-} :
+			</td>
+			<td>
+				<span id="txtDatabaseUploadRegionLastUpdate"></span>
+			</td>
+		</tr>
+		<tr>
+			<td align="right">
+				{-#msgDatabaseUploadNumberOfRecords#-} :
+			</td>
+			<td>
+				<span id="txtDatabaseUploadNumberOfRecords"></span>
+			</td>
+		</tr>
+		<tr>
 			<td colspan="2" align="center">
 				<div class="center">
 					<input type="hidden" id="txtDatabaseUploadFilename" value="" />

@@ -25,7 +25,8 @@ class DIRegion extends DIObject
 		                      'GeoLimitMaxY/DOUBLE,' .
 		                      'OptionOutOfRange/INTEGER,' .
 		                      'OptionLanguageList/STRING,' .
-		                      'OptionOldName/STRING';
+		                      'OptionOldName/STRING,' . 
+		                      'NumberOfRecords/INTEGER';
 		$this->sInfoTrans   = 'InfoCredits/STRING,' . 
 		                      'InfoGeneral/STRING,' .
 		                      'InfoSources/STRING,' .
@@ -371,38 +372,55 @@ class DIRegion extends DIObject
 		return $iReturn;
 	}
 	
-	public static function createRegionBackup($us,$OutFile) {
+	public function createRegionBackup($OutFile)
+	{
 		$iReturn = ERR_NO_ERROR;
-		if ($us->RegionId == '') {
+		$RegionId = $this->session->RegionId;
+		if ($RegionId == '')
+		{
 			$iReturn = ERR_UNKNOWN_ERROR;
 		}
 		
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
+			$this->set('NumberOfRecords', $this->session->getDisasterCount());
+			$this->update();
+
 			$DirName = dirname($OutFile);
-			if (! file_exists($DirName) ) {
-				if (! mkdir($DirName, 0777, true)) {
+			if (! file_exists($DirName) )
+			{
+				if (! mkdir($DirName, 0777, true))
+				{
 					$iReturn = ERR_UNKNOWN_ERROR;
 				}
 			}
 		}
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			unlink($OutFile);
 			$zip = new ZipArchive();
-			if ($zip->open($OutFile, ZIPARCHIVE::CREATE) != TRUE) {
+			if ($zip->open($OutFile, ZIPARCHIVE::CREATE) != TRUE)
+			{
 				$iReturn = ERR_UNKNOWN_ERROR;
-			} else {
-				$DBDir = $us->getDBDir();
+			}
+			else
+			{
+				$DBDir = $this->session->getDBDir();
 				// Build a list of files that goes into the zip file
 				$filelist = array('desinventar.db','info.xml');
 				$sQuery = "SELECT * FROM GeoCarto ORDER BY GeoLevelId";
-				foreach($us->q->dreg->query($sQuery) as $row) {
-					foreach(array('dbf','shp','shx') as $ext) {
+				foreach($this->session->q->dreg->query($sQuery) as $row)
+				{
+					foreach(array('dbf','shp','shx') as $ext)
+					{
 						array_push($filelist, $row['GeoLevelLayerFile'] . '.' . $ext);
 					}
 				}
 				// Add each file to the zip file
-				foreach($filelist as $file) {
-					if (file_exists($DBDir . '/' . $file) ) {
+				foreach($filelist as $file)
+				{
+					if (file_exists($DBDir . '/' . $file) )
+					{
 						$zip->addFile($DBDir . '/' . $file, $file);
 					}
 				}

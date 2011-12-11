@@ -855,59 +855,5 @@ class DIRegionDB extends DIRegion
 		$iAnswer = $g->getMaxGeoLevel();
 		return $iAnswer;
 	}
-
-	public static function createRegionBackup($us,$OutFile)
-	{
-		$iReturn = ERR_NO_ERROR;
-		if ($us->RegionId == '')
-		{
-			$iReturn = ERR_UNKNOWN_ERROR;
-		}
-		
-		if ($iReturn > 0)
-		{
-			$DirName = dirname($OutFile);
-			if (! file_exists($DirName) )
-			{
-				if (! mkdir($DirName, 0777, true))
-				{
-					$iReturn = ERR_UNKNOWN_ERROR;
-				}
-			}
-		}
-		if ($iReturn > 0)
-		{
-			unlink($OutFile);
-			$zip = new ZipArchive();
-			if ($zip->open($OutFile, ZIPARCHIVE::CREATE) != TRUE)
-			{
-				$iReturn = ERR_UNKNOWN_ERROR;
-			}
-			else
-			{
-				$DBDir = $us->getDBDir();
-				// Build a list of files that goes into the zip file
-				$filelist = array('desinventar.db','info.xml');
-				$sQuery = "SELECT * FROM GeoCarto ORDER BY GeoLevelId";
-				foreach ($us->q->dreg->query($sQuery) as $row)
-				{
-					foreach (array('dbf','shp','shx') as $ext)
-					{
-						array_push($filelist, $row['GeoLevelLayerFile'] . '.' . $ext);
-					}
-				}
-				// Add each file to the zip file
-				foreach ($filelist as $file)
-				{
-					if (file_exists($DBDir . '/' . $file) )
-					{
-						$zip->addFile($DBDir . '/' . $file, $file);
-					}
-				}
-			}
-			$zip->close();
-		}
-		return $iReturn;
-	}
 } //class
 </script>
