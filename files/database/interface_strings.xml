@@ -3107,6 +3107,18 @@
 			<Text LangIsoCode="por">País</Text>
 			<Text LangIsoCode="fre">Pays</Text>
 		</Message>
+		<Message id="msgDatabaseUploadLastUpdate">
+			<Text LangIsoCode="eng">Last Update</Text>
+			<Text LangIsoCode="spa">Última Actualización</Text>
+			<Text LangIsoCode="por">Última Atualização</Text>
+			<Text LangIsoCode="fre">Dernière mise à jour</Text>
+		</Message>
+		<Message id="msgDatabaseUploadNumberOfRecords">
+			<Text LangIsoCode="eng">Records</Text>
+			<Text LangIsoCode="spa">Registros</Text>
+			<Text LangIsoCode="por">Registros</Text>
+			<Text LangIsoCode="fre">Dossiers</Text>
+		</Message>
 		<Message id="msgDatabaseUploadComplete">
 			<Text LangIsoCode="eng">Database has been updated correctly, browser window will reload now with new data</Text>
 			<Text LangIsoCode="spa">La base de datos se actualizó correctamente, la ventana del navegador se cargará nuevamente con los nuevos datos</Text>

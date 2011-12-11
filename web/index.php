@@ -287,10 +287,12 @@ switch ($cmd)
 					{
 						$r = new DIRegion($us, '', $OutDir . '/info.xml');
 						$info = array();
-						$info['RegionId']    = $RegionId;
-						$info['RegionLabel'] = $r->get('RegionLabel');
-						$info['CountryIso']  = $r->get('CountryIso');
-						$info['CountryName'] = $us->q->getCountryName($info['CountryIso']);
+						$info['RegionId']         = $RegionId;
+						$info['RegionLabel']      = $r->get('RegionLabel');
+						$info['CountryIso']       = $r->get('CountryIso');
+						$info['CountryName']      = $us->q->getCountryName($info['CountryIso']);
+						$info['RegionLastUpdate'] = substr($r->get('RegionLastUpdate'), 0,10);
+						$info['NumberOfRecords']  = $r->get('NumberOfRecords');
 						$answer['Info'] = $info;
 						$answer['DBExist'] = DIRegion::existRegion($us, $info['RegionId']);
 					}
@@ -483,7 +485,8 @@ switch ($cmd)
 			$ShortName = 'DesInventar_' . date('Y-m-d') . '_' . $RegionId . '.zip';
 			$FileName = WWWDIR  . '/data/' . $SessionId . '/' . $ShortName;
 			$URL      = WWWDATA . '/data/' . $SessionId . '/' . $ShortName;
-			$iReturn = DIRegion::createRegionBackup($us, $FileName);
+			$r = new DIRegion($us);
+			$iReturn = $r->createRegionBackup($FileName);
 			if ($iReturn > 0)
 			{
 				$answer['Status'] = ERR_NO_ERROR;
