@@ -117,5 +117,6 @@ a.button:active span {
 	background-color: #e9f2ff;
 	border: 1px solid #8eaace;
 	border-radius: 3px;
-	box-shadow: 3px 3px 3px #888;
+	color: #333;
+	box-shadow: 3px 3px 3px #aaa;
 }
