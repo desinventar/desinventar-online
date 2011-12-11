@@ -7,6 +7,7 @@ function onReadyDatabaseUpload()
 {
 	jQuery('#divDatabaseUploadControl').show();
 	jQuery('#divDatabaseUploadParameters').hide();
+	jQuery('#txtDatabaseUploadFilename').attr('readonly',true);
 	doDatabaseUploadStatusMsg('');
 
 	doDatabaseUploadCreate();
