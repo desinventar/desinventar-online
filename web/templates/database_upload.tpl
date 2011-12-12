@@ -34,7 +34,7 @@
 	</div>
 
 	<div id="divDatabaseUploadParameters" style="display:none;">
-		<h4>{-#msgDatabaseUploadConfirmReplace#-}</h4><br />
+		<h4>{-#msgDatabaseUploadConfirmReplace#-}</h4>
 		<table width="100%">
 		<tr>
 			<td align="right" width="25%">
