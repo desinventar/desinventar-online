@@ -52,9 +52,6 @@ function onReadyDatabaseUpload()
 			function(data)
 			{
 				doDatabaseUploadReset();
-				jQuery('#divDatabaseUploadControl').show();
-				jQuery('#divDatabaseUploadParameters').hide();
-				jQuery('#divFileUploaderControl .qq-upload-button-text').show();
 			},
 			'json'
 		);				
@@ -136,6 +133,9 @@ function doDatabaseUploadReset()
 	jQuery('#prgDatabaseUploadProgressMark').css('width', '0px');
 	jQuery('#btnDatabaseUploadCancel').hide();
 	jQuery('#divFileUploaderControl .qq-upload-button-text').show();
+	jQuery('#divDatabaseUploadControl').show();
+	jQuery('#divDatabaseUploadParameters').hide();
+	jQuery('#divFileUploaderControl .qq-upload-button-text').show();
 }
 
 function doDatabaseUploadSelectFile()
@@ -158,25 +158,20 @@ function doDatabaseUploadCreate()
 	var w = new Ext.Window({id:'wndDatabaseUpload', 
 		el: 'divDatabaseUploadWin', layout:'fit', 
 		width:400, height:200, modal:false,
-		closeAction:'hide', plain: false, animCollapse: false,
+		plain: false, animCollapse: false,
+		closeAction: 'hide',
 		items: new Ext.Panel({
 			contentEl: 'divDatabaseUploadContent',
 			autoScroll: true
 		}),
-		buttons: [
-			/*
-			{
-				text: jQuery('#msgDatabaseUploadButtonClose').text(),
-				handler: function()
-				{
-					jQuery('#fldDatabaseUploadSave').val(0);
-					jQuery('#imgDatabaseUploadWait').attr('src','');
-					Ext.getCmp('wndDatabaseUpload').hide();
-				} //handler
-			}
-			*/
-		] //button
 	});
+	w.on('hide', function() {
+		if (jQuery('#txtDatabaseUploadFilename').val() != '')
+		{
+			jQuery('#btnDatabaseUploadReplaceCancel').trigger('click');
+		}
+	});
+	
 	jQuery('#fldDatabaseUploadSave').val(1);
 	jQuery('.clsDatabaseUploadStatusMsg').hide();
 } // doDatabaseUploadCreate()
@@ -184,5 +179,6 @@ function doDatabaseUploadCreate()
 function doDatabaseUploadShow()
 {
 	jQuery('.clsDatabaseUpload').hide();
+	doDatabaseUploadReset();
 	Ext.getCmp('wndDatabaseUpload').show();
 } // doDatabaseUploadAction
