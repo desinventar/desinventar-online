@@ -102,7 +102,12 @@ function doAdminDatabaseCreateUploader()
 				jQuery('#txtDatabaseUploadLangIsoCode').text(data.Info.LangIsoCode);
 				jQuery('#txtDatabaseUploadCountryIso').text(data.Info.CountryIso + ' - ' + data.Info.CountryName);
 				jQuery('#txtDatabaseUploadRegionLastUpdate').text(data.Info.RegionLastUpdate);
+				jQuery('#trDatabaseUploadNumberOfRecords').show();
 				jQuery('#txtDatabaseUploadNumberOfRecords').text(data.Info.NumberOfRecords);
+				if (data.Info.NumberOfRecords < 1)
+				{
+					jQuery('#trDatabaseUploadNumberOfRecords').hide();
+				}
 				doDatabaseUploadStatusMsg('');
 				jQuery('#divDatabaseUploadControl').hide();
 				jQuery('#divDatabaseUploadParameters').show();
