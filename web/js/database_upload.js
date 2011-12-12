@@ -109,13 +109,13 @@ function doAdminDatabaseCreateUploader()
 			}
 			else
 			{
-				doDatabaseUploadStatusMsg('msgDatabaseUploadErrorOnUpload');
 				doDatabaseUploadReset();
+				doDatabaseUploadStatusMsg('msgDatabaseUploadErrorOnUpload');
 			}
 		},
 		onCancel: function(id, Filename)
 		{
-		}
+		},
 	});
 	jQuery('#divFileUploaderControl .qq-upload-button-text').html(jQuery('#msgDatabaseUploadChooseFile').val());
 	jQuery('#divFileUploaderControl .qq-upload-list').hide();
