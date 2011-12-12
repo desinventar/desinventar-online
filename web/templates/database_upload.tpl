@@ -68,7 +68,7 @@
 				<span id="txtDatabaseUploadRegionLastUpdate"></span>
 			</td>
 		</tr>
-		<tr>
+		<tr id="trDatabaseUploadNumberOfRecords">
 			<td align="right">
 				{-#msgDatabaseUploadNumberOfRecords#-} :
 			</td>
