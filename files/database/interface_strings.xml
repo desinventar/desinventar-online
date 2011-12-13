@@ -61,6 +61,12 @@
 			<Text LangIsoCode="por">Inserir ou editar registros</Text>
 			<Text LangIsoCode="fre">Insérer ou modifier des enregistrements</Text>
 		</Message>
+		<Message id="mnuDatabaseRegionInfo">
+			<Text LangIsoCode="eng">Database information</Text>
+			<Text LangIsoCode="spa">Información base de datos</Text>
+			<Text LangIsoCode="por">Informação de banco</Text>
+			<Text LangIsoCode="fre">Information base de données</Text>
+		</Message>
 		<Message id="mnuDatabaseExport">
 			<Text LangIsoCode="eng">Download database</Text>
 			<Text LangIsoCode="spa">Descargar base de datos</Text>
@@ -126,12 +132,6 @@
 			<Text LangIsoCode="spa">Documentación software</Text>
 			<Text LangIsoCode="por">Software documentation*</Text>
 			<Text LangIsoCode="fre">Documentation logiciel</Text>
-		</Message>
-		<Message id="mnuHelpRegionInfo">
-			<Text LangIsoCode="eng">Database information</Text>
-			<Text LangIsoCode="spa">Información base de datos</Text>
-			<Text LangIsoCode="por">Informação de banco</Text>
-			<Text LangIsoCode="fre">Information base de données</Text>
 		</Message>
 		<Message id="mnuHelpAbout">
 			<Text LangIsoCode="eng">About</Text>
