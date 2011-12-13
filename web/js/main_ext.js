@@ -239,7 +239,7 @@ function onMenuItem(item) {
 		case 'mnuDatabaseSetAdminUser':
 			doUserPermAdminShow();
 		break;
-		case 'mnuAdminUsers':
+		case 'mnuUserAccountManagement':
 			//updateList('dbl', jQuery('#desinventarURL').val() + '/user.php', 'cmd=adminusr', 'onReadyUserAdmin');
 			jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=adminusr',function() { onReadyUserAdmin(); });
 			Ext.getCmp('wndDatabaseList').show();
@@ -296,13 +296,13 @@ function doMainMenuCreate()
 	var muser = new Ext.menu.Menu({
 		id: 'userMenu',
 		items: [
-			{id: 'mnuUserLogin'       , text: jQuery('#mnuUserLogin').text()       , handler: onMenuItem }, 
-			{id: 'mnuUserChangeLogin' , text: jQuery('#mnuUserChangeLogin').text() , handler: onMenuItem, hidden: true },
-			{id: 'mnuUserEditAccount' , text: jQuery('#mnuUserEditAccount').text() , handler: onMenuItem, hidden: true },
-			{id: 'mnuUserLogout'      , text: jQuery('#mnuUserLogout').text()      , handler: onMenuItem, hidden: true }, 
-			{id:'mnuAdminUsers'       , text: jQuery('#mnuAdminUsers').text()      , handler: onMenuItem, hidden: true },
-			{id: 'mnuUserLanguage'    , text: jQuery('#mnuMenuUserLanguage').text(), menu: mnuLang },
-			{id: 'mnuFileQuit'        , text: jQuery('#mnuUserQuit').text()        , handler: onMenuItem  }
+			{id: 'mnuUserLogin'           , text: jQuery('#mnuUserLogin').text()            , handler: onMenuItem }, 
+			{id: 'mnuUserChangeLogin'     , text: jQuery('#mnuUserChangeLogin').text()      , handler: onMenuItem, hidden: true },
+			{id: 'mnuUserEditAccount'     , text: jQuery('#mnuUserEditAccount').text()      , handler: onMenuItem, hidden: true },
+			{id: 'mnuUserLogout'          , text: jQuery('#mnuUserLogout').text()           , handler: onMenuItem, hidden: true }, 
+			{id:'mnuUserAccountManagement', text: jQuery('#mnuUserAccountManagement').text(), handler: onMenuItem, hidden: true },
+			{id: 'mnuUserLanguage'        , text: jQuery('#mnuMenuUserLanguage').text()     , menu: mnuLang },
+			{id: 'mnuFileQuit'            , text: jQuery('#mnuUserQuit').text()             , handler: onMenuItem  }
 		]
 	});
 	
@@ -375,7 +375,7 @@ function doMainMenuCreate()
 
 	if (UserRoleValue >= 5)
 	{
-		Ext.getCmp('mnuAdminUsers').show();
+		Ext.getCmp('mnuUserAccountManagement').show();
 		Ext.getCmp('mnuDatabaseCreate').show();
 		//Ext.getCmp('mnuAdminDatabases').show();
 	}

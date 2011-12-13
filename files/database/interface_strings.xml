@@ -31,6 +31,12 @@
 			<Text LangIsoCode="por">Fechar sessão</Text>
 			<Text LangIsoCode="fre">Fermer la session</Text>
 		</Message>
+		<Message id="mnuUserAccountManagement">
+			<Text LangIsoCode="eng">User's account management</Text>
+			<Text LangIsoCode="spa">Administración cuentas de usuario</Text>
+			<Text LangIsoCode="por">Gerenciamento da conta do usuário</Text>
+			<Text LangIsoCode="fre">Gestion de compte utilisateur</Text>
+		</Message>
 		<Message id="mnuMenuUserLanguage">
 			<Text LangIsoCode="eng">Language</Text>
 			<Text LangIsoCode="spa">Idioma</Text>
@@ -90,12 +96,6 @@
 			<Text LangIsoCode="spa">Seleccionar base de datos</Text>
 			<Text LangIsoCode="por">Selecione banco de dados</Text>
 			<Text LangIsoCode="fre">Sélectionnez la base de données</Text>
-		</Message>
-		<Message id="mnuAdminUsers">
-			<Text LangIsoCode="eng">User management</Text>
-			<Text LangIsoCode="spa">Gestión de usuarios</Text>
-			<Text LangIsoCode="por">Gestão de usuários</Text>
-			<Text LangIsoCode="fre">Gestion des usagers</Text>
 		</Message>
 		<Message id="mnuAdminDatabases">
 			<Text LangIsoCode="eng">Database management</Text>
