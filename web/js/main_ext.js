@@ -114,7 +114,7 @@ function doViewportCreate()
 function onMenuItem(item) {
 	var RegionId = jQuery('#desinventarRegionId').val();
 	switch (item.id) {
-		case 'mnuHelpRegionInfo':
+		case 'mnuDatabaseRegionInfo':
 			jQuery('#dcr').hide();
 			doGetRegionInfo(jQuery('#desinventarRegionId').val());
 			jQuery('#divRegionInfo').show();
@@ -321,6 +321,7 @@ function doMainMenuCreate()
 		items: [
 			{id:'mnuDatabaseRecordView'   , text: jQuery('#mnuDatabaseRecordView').text()   , handler: onMenuItem, hidden: true },
 			{id:'mnuDatabaseRecordEdit'   , text: jQuery('#mnuDatabaseRecordEdit').text()   , handler: onMenuItem, hidden: true },
+			{id:'mnuDatabaseRegionInfo'   , text: jQuery('#mnuDatabaseRegionInfo').text()   , handler: onMenuItem, hidden: true },
 			{id:'mnuDatabaseExport'       , text: jQuery('#mnuDatabaseExport').text()       , handler: onMenuItem, hidden: true },
 			{id:'mnuDatabaseUpload'       , text: jQuery('#mnuDatabaseUpload').text()       , handler: onMenuItem, hidden: true },
 			{id:'mnuDatabaseCreate'       , text: jQuery('#mnuDatabaseCreate').text()       , handler: onMenuItem, hidden: true },
@@ -342,11 +343,10 @@ function doMainMenuCreate()
 		id: 'helpMenu',
 		style: { overflow: 'visible' },
 		items: [
-			{id:'mnuHelpWebsite'      , text: jQuery('#mnuHelpWebsite').text()      , handler: onMenuItem  },
-			{id:'mnuHelpMethodology'  , text: jQuery('#mnuHelpMethodology').text()  , handler: onMenuItem  },
-			{id:'mnuHelpDocumentation', text: jQuery('#mnuHelpDocumentation').text(), handler: onMenuItem  },
-			{id:'mnuHelpRegionInfo'   , text: jQuery('#mnuHelpRegionInfo').text()   , handler: onMenuItem, hidden: true },
-			{id:'mnuHelpAbout'        , text: jQuery('#mnuHelpAbout').text()        , handler: onMenuItem  }
+			{id:'mnuHelpWebsite'       , text: jQuery('#mnuHelpWebsite').text()       , handler: onMenuItem  },
+			{id:'mnuHelpMethodology'   , text: jQuery('#mnuHelpMethodology').text()   , handler: onMenuItem  },
+			{id:'mnuHelpDocumentation' , text: jQuery('#mnuHelpDocumentation').text() , handler: onMenuItem  },
+			{id:'mnuHelpAbout'         , text: jQuery('#mnuHelpAbout').text()         , handler: onMenuItem  }
 		]
 	});
 	
@@ -355,7 +355,7 @@ function doMainMenuCreate()
 	tb.add({ id:'mnuQuery'      , text: jQuery('#mnuMenuQuery').text()    , menu: mquery, hidden: true });
 	tb.add({ id:'mnuCards'      , text: jQuery('#mnuMenuDatabase').text() , menu: mnuMenuDatabase, hidden: false });
 	tb.add({ id:'mnuHelp'       , text: jQuery('#mnuMenuHelp').text()     , menu: mhelp});
-	tb.add('->',{id: 'mnuHelpRegionInfoLabel', text: '', handler: onMenuItem });
+	tb.add('->',{id: 'mnuRegionLabel', text: '', handler: onMenuItem });
 	tb.add('->',{id: 'mnuHelpWebsite'    , text: '<img src="' + jQuery('#desinventarURL').val() + '/images/di_logo4.png" alt="" />',  handler: onMenuItem });
 
 	// Configure Menu using current RoleValue
@@ -383,10 +383,10 @@ function doMainMenuCreate()
 	// Show some menu items when a Region is Selected
 	if (jQuery('#desinventarRegionId').val() != '')
 	{
-		Ext.getCmp('mnuHelpRegionInfoLabel').setText('[' + jQuery('#desinventarRegionLabel').val() + ']');
+		Ext.getCmp('mnuRegionLabel').setText('[' + jQuery('#desinventarRegionLabel').val() + ']');
 		if (UserRoleValue > 0)
 		{
-			Ext.getCmp('mnuHelpRegionInfo').show();
+			Ext.getCmp('mnuDatabaseRegionInfo').show();
 			Ext.getCmp('mnuQuery').show();
 			Ext.getCmp('mnuDatabaseRecordView').show();
 		}

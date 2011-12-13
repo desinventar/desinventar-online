@@ -17,6 +17,7 @@
 	<span id="mnuMenuDatabase">{-#mnuMenuDatabase#-}</span>
 		<span id="mnuDatabaseRecordView">{-#mnuDatabaseRecordView#-}</span>
 		<span id="mnuDatabaseRecordEdit">{-#mnuDatabaseRecordEdit#-}</span>
+		<span id="mnuDatabaseRegionInfo">{-#mnuDatabaseRegionInfo#-}</span>
 		<span id="mnuDatabaseExport">{-#mnuDatabaseExport#-}</span>
 		<span id="mnuDatabaseUpload">{-#mnuDatabaseUpload#-}</span>
 		<span id="mnuDatabaseCreate">{-#mnuDatabaseCreate#-}</span>
@@ -30,6 +31,5 @@
 		<span id="mnuHelpWebsite">{-#mnuHelpWebsite#-}</span>
 		<span id="mnuHelpMethodology">{-#mnuHelpMethodology#-}</span>
 		<span id="mnuHelpDocumentation">{-#mnuHelpDocumentation#-}</span>
-		<span id="mnuHelpRegionInfo">{-#mnuHelpRegionInfo#-}</span>
 		<span id="mnuHelpAbout">{-#mnuHelpAbout#-}</span>
 </div>
