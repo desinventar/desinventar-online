@@ -37,14 +37,14 @@
 					};
 				}
 
-				//onReadyDatabaseCreate();
-				onReadyDatabaseUpload();
+				onReadyDatabaseCreate();
+				//onReadyDatabaseUpload();
 				//onReadyUserPermAdmin();
 				//doAdminDatabaseUpdateList();
 				//doAdminDatabaseExportCreate();
 
 				jQuery('#btnTest').click(function() {
-					doDatabaseUploadShow();
+					doDatabaseCreateShow();
 				});
 				jQuery('#btnTest').trigger('click');
 				// Initialize Ext.QuickTips
@@ -57,10 +57,10 @@
 		DesInventar Database Admin
 		Version : {-$jsversion-}<br />
 		Language : {-$lg-}<br />
-		{-include file="database_upload_ext.tpl"-}
-		{-include file="desinventarmenu.tpl"-}
-		{-include file="desinventarinfo.tpl"-}
 		<br />
 		<a class="button" id="btnTest"><span>Test</span></a>
+		{-include file="database_create_ext.tpl"-}
+
+		{-include file="desinventarinfo.tpl"-}
 	</body>
 </html>

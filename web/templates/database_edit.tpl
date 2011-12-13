@@ -1,18 +1,10 @@
 {-config_load file="$lg.conf" section="grpDatabaseEdit"-}
 <form id="frmDatabaseEdit">
+	<input id="fldDatabaseEdit_RegionId" name="Database[RegionId]" type="hidden" maxlength="50" class="line fixw" tabindex="1" />
 	<table class="grid">
 		<tr>
 			<td>
-				<span id="lblDatabaseEdit_RegionId">{-#msgDatabaseEditRegionId#-}</span>
-			</td>
-			<td>
-				<span  id="txtDatabaseEdit_RegionId"></span>
-				<input id="fldDatabaseEdit_RegionId" name="Database[RegionId]" type="hidden" maxlength="50" class="line fixw" tabindex="1" />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				{-#msgDatabaseEditCountryIso#-}<b style="color:darkred;">*</b>
+				{-#msgDatabaseEditCountryIso#-}
 			</td>
 			<td>
 				<select id="fldDatabaseEdit_CountryIso" name="Database[CountryIso]" class="fixw" tabindex="2">
@@ -22,7 +14,7 @@
 		</tr>
 		<tr>
 			<td>
-				{-#msgDatabaseEditRegionLabel#-}<b style="color:darkred;">*</b>
+				{-#msgDatabaseEditRegionLabel#-}
 			</td>
 			<td>
 				<input id="fldDatabaseEdit_RegionLabel" name="Database[RegionLabel]" type="text" maxlength="200" class="line fixw" tabindex="3" />
@@ -31,7 +23,7 @@
 		</tr>
 		<tr>
 			<td>
-				{-#msgDatabaseEditLangIsoCode#-}<b style="color:darkred;">*</b>
+				{-#msgDatabaseEditLangIsoCode#-}
 			</td>
 			<td>
 				<select id="fldDatabaseEdit_LangIsoCode" name="Database[LangIsoCode]" {-$ro-} class="line fixw" tabindex="4">
@@ -40,18 +32,18 @@
 		</tr>
 		<tr>
 			<td>
-				{-#msgDatabaseEditRegionActive#-}<b>*</b>
+				{-#msgDatabaseEditRegionActive#-}
 			</td>
 			<td>
-				<input id="fldDatabaseEdit_RegionActive" name="" type="checkbox" checked tabindex="5" />
+				<input id="fldDatabaseEdit_RegionActive" name="" type="checkbox" checked tabindex="5" title="{-#msgDatabaseEditRegionActiveTooltip#-}"/>
 			</td>
 		</tr>
 		<tr>
 			<td>
-				{-#msgDatabaseEditRegionPublic#-}<b>*</b>
+				{-#msgDatabaseEditRegionPublic#-}
 			</td>
 			<td>
-				<input id="fldDatabaseEdit_RegionPublic" name="" type="checkbox" tabindex="6" />
+				<input id="fldDatabaseEdit_RegionPublic" name="" type="checkbox" tabindex="6" title="{-#msgDatabaseEditRegionPublicTooltip#-}" />
 			</td>
 		</tr>
 		<tr>

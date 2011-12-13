@@ -44,7 +44,6 @@ function doDatabaseCreateSetup()
 				if (parseInt(data.Status) > 0)
 				{
 					jQuery('#fldDatabaseEdit_RegionId').val(data.RegionId);
-					jQuery('#txtDatabaseEdit_RegionId').text(data.RegionId);
 					var RegionLabel = jQuery('#fldDatabaseEdit_RegionLabel').val();
 					RegionLabel = jQuery.trim(RegionLabel);
 					if ( (RegionLabel == '') ||
@@ -97,10 +96,11 @@ function doDatabaseCreateSetup()
 					if (parseInt(data.Status) > 0)
 					{
 						jQuery('#txtDatabaseCreateOk').show();
-						// Open database created after 2 seconds
-						setTimeout(function() {
-							window.location = jQuery('#desinventarURL').val() + '/' + data.RegionId;
-						}, 2000);
+						jQuery('#txtDatabaseCreate_RegionId').text(jQuery('#fldDatabaseEdit_RegionId').val());
+						jQuery('#lnkDatabaseCreateDBURL').attr('href', jQuery('#desinventarURL').val() + '/' + jQuery('#txtDatabaseCreate_RegionId').text());
+						jQuery('#lnkDatabaseCreateOpenDB').attr('href', jQuery('#desinventarURL').val() + '/' + jQuery('#txtDatabaseCreate_RegionId').text());
+						jQuery('#divDatabaseCreateParams').hide();
+						jQuery('#divDatabaseCreateResult').show();
 					}
 					else
 					{
@@ -136,12 +136,14 @@ function doDatabaseCreateShow()
 	// Set default values in form
 	jQuery('.clsDatabaseCreateStatus').hide();
 	jQuery('#fldDatabaseEdit_RegionId').val('');
-	jQuery('#txtDatabaseEdit_RegionId').text('');
 	jQuery('#fldDatabaseEdit_CountryIso').val('');
 	jQuery('#fldDatabaseEdit_RegionLabel').val('');
 	jQuery('#fldDatabaseEdit_RegionActive').attr('checked',true);
 	jQuery('#fldDatabaseEdit_RegionPublic').attr('checked',false);
 	jQuery('#fldDatabaseEdit_LangIsoCode').val(jQuery('#desinventarLang').val());
+
+	jQuery('#divDatabaseCreateParams').show();
+	jQuery('#divDatabaseCreateResult').hide();
 
 	// Show form
 	Ext.getCmp('wndDatabaseCreate').show();
@@ -151,7 +153,7 @@ function doDatabaseCreateShow()
 function doDatabaseCreateValidate()
 {
 	var iReturn = 1;
-	if ( (iReturn > 0) && (jQuery('#txtDatabaseEdit_RegionId').text() == '') )
+	if ( (iReturn > 0) && (jQuery('#fldDatabaseEdit_RegionId').val() == '') )
 	{
 		iReturn = -1;
 	}

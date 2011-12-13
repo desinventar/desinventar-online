@@ -2895,6 +2895,18 @@
 			<Text LangIsoCode="por">Pública</Text>
 			<Text LangIsoCode="fre">Publique</Text>
 		</Message>
+		<Message id="msgDatabaseEditRegionActiveTooltip">
+			<Text LangIsoCode="eng">The database can be used and will be shown in the database list</Text>
+			<Text LangIsoCode="spa">La base de datos se pueden utilizar y se mostrará en el listado de bases de datos</Text>
+			<Text LangIsoCode="por">Banco de dados pode ser usado e será mostrado na lista de banco de dados</Text>
+			<Text LangIsoCode="fre">Base de données peut être utilisé et sera affiché dans la liste des bases de données</Text>
+		</Message>
+		<Message id="msgDatabaseEditRegionPublicTooltip">
+			<Text LangIsoCode="eng">Database can be used without requiring an account on the DesInventar server</Text>
+			<Text LangIsoCode="spa">Base de datos se puede utilizar sin necesidad de una cuenta en el servidor de DesInventar</Text>
+			<Text LangIsoCode="por">Banco de dados pode ser usado sem a necessidade de uma conta no servidor DesInventar</Text>
+			<Text LangIsoCode="fre">Base de données peuvent être utilisées sans nécessiter un compte sur le serveur DesInventar</Text>
+		</Message>
 	</Group>
 	<Group name="grpDatabaseCreate">
 		<Message id="msgDatabaseCreateTitle">
@@ -2902,12 +2914,6 @@
 			<Text LangIsoCode="spa">Crear nueva base de datos</Text>
 			<Text LangIsoCode="por">Criar novo banco de dados</Text>
 			<Text LangIsoCode="fre">Créer nouvelle base de données</Text>
-		</Message>
-		<Message id="msgDatabaseCreateMsg1">
-			<Text LangIsoCode="eng">Please fill the form data to create a new database</Text>
-			<Text LangIsoCode="spa">Por favor complete los datos del formulario para crear una nueva base de datos</Text>
-			<Text LangIsoCode="por">Por favor, preencha os dados do formulário para criar um novo banco de dados</Text>
-			<Text LangIsoCode="fre">S'il vous plaît remplir le formulaire de données pour créer une nouvelle base de données</Text>
 		</Message>
 		<Message id="msgDatabaseCreateSend">
 			<Text LangIsoCode="eng">Create</Text>
@@ -2938,6 +2944,30 @@
 			<Text LangIsoCode="spa">El formulario contiene datos no válidos o algunos campos obligatorios están vacíos, por favor verifique los datos e intente de nuevo.</Text>
 			<Text LangIsoCode="por">O formulário tem dados inválidos ou alguns campos obrigatórios estão vazios, por favor verifique os dados e tente novamente.</Text>
 			<Text LangIsoCode="fre">Le formulaire contient des données incorrectes ou certains champs obligatoires sont vides, s'il vous plaît vérifier les données et essayer de nouveau.</Text>
+		</Message>
+		<Message id="msgDatabaseCreateMsg1">
+			<Text LangIsoCode="eng">Database was created with identifier</Text>
+			<Text LangIsoCode="spa">Base de datos fue creada con el identificador</Text>
+			<Text LangIsoCode="por">Banco de dados foi criado com o identificador</Text>
+			<Text LangIsoCode="fre">Base de données a été créée avec l'identifiant</Text>
+		</Message>
+		<Message id="msgDatabaseCreateMsg2">
+			<Text LangIsoCode="eng">Now you must configure the database</Text>
+			<Text LangIsoCode="spa">Ahora debe configurar la base de datos</Text>
+			<Text LangIsoCode="por">Agora você deve configurar o banco de dados</Text>
+			<Text LangIsoCode="fre">Maintenant vous devez configurer la base de données</Text>
+		</Message>
+		<Message id="msgDatabaseCreateMsg3">
+			<Text LangIsoCode="eng">To do it choose the Set Up Database option in the Database menu</Text>
+			<Text LangIsoCode="spa">Para ello seleccione la opción Configuración de la base de datos en el menú Base de datos</Text>
+			<Text LangIsoCode="por">Para fazê-lo escolher a opção Set Up Banco de Dados no menu Banco de Dados</Text>
+			<Text LangIsoCode="fre">Pour ce faire il choisir l'option Configurer la base de données dans le menu Base de données</Text>
+		</Message>
+		<Message id="msgDatabaseCreateMsg4">
+			<Text LangIsoCode="eng">Open database</Text>
+			<Text LangIsoCode="spa">Abrir base de datos</Text>
+			<Text LangIsoCode="por">Abrir banco de dados</Text>
+			<Text LangIsoCode="fre">Ouvrir base de données</Text>
 		</Message>
 	</Group>
 	<Group name="grpUserPermAdmin">
