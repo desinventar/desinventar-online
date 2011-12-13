@@ -9,6 +9,7 @@
 		<span id="mnuUserChangeLogin">{-#mnuUserChangeLogin#-}</span>
 		<span id="mnuUserEditAccount">{-#mnuUserEditAccount#-}</span>
 		<span id="mnuUserLogout">{-#mnuUserLogout#-}</span>
+		<span id="mnuUserAccountManagement">{-#mnuUserAccountManagement#-}</span>
 		<span id="mnuMenuUserLanguage">{-#mnuMenuUserLanguage#-}</span>
 			{-foreach name=LanguageList key=key item=item from=$LanguageList-}
 			<span id="mnuUserLanguage-{-$key-}">{-$item-}</span>
@@ -25,7 +26,6 @@
 		<span id="mnuDatabaseSelect">{-#mnuDatabaseSelect#-}</span>
 		<span id="mnuDatacardImport">{-#mnuDatacardImport#-}</span>
 		<span id="mnuDatabaseSetAdminUser">{-#mnuDatabaseSetAdminUser#-}</span>
-		<span id="mnuAdminUsers">{-#mnuAdminUsers#-}</span>
 		<span id="mnuAdminDatabases">{-#mnuAdminDatabases#-}</span>
 	<span id="mnuMenuHelp">{-#mnuMenuHelp#-}</span>
 		<span id="mnuHelpWebsite">{-#mnuHelpWebsite#-}</span>
