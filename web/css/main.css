@@ -82,6 +82,13 @@ div.center {
 	display:table;
 	text-align:center;
 }
+div.right {
+	width:auto;
+	margin-left:auto;
+	margin-right:5px;
+	display:table;
+	text-align:right;
+}
 
 a.button {
 	background: transparent url('../images/bg_button_a.gif') no-repeat scroll top right;
