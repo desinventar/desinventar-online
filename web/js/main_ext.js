@@ -296,13 +296,13 @@ function doMainMenuCreate()
 	var muser = new Ext.menu.Menu({
 		id: 'userMenu',
 		items: [
-			{id: 'mnuUserLogin'           , text: jQuery('#mnuUserLogin').text()            , handler: onMenuItem }, 
-			{id: 'mnuUserChangeLogin'     , text: jQuery('#mnuUserChangeLogin').text()      , handler: onMenuItem, hidden: true },
-			{id: 'mnuUserEditAccount'     , text: jQuery('#mnuUserEditAccount').text()      , handler: onMenuItem, hidden: true },
-			{id: 'mnuUserLogout'          , text: jQuery('#mnuUserLogout').text()           , handler: onMenuItem, hidden: true }, 
-			{id:'mnuUserAccountManagement', text: jQuery('#mnuUserAccountManagement').text(), handler: onMenuItem, hidden: true },
-			{id: 'mnuUserLanguage'        , text: jQuery('#mnuMenuUserLanguage').text()     , menu: mnuLang },
-			{id: 'mnuFileQuit'            , text: jQuery('#mnuUserQuit').text()             , handler: onMenuItem  }
+			{id: 'mnuUserLogin'            , text: jQuery('#mnuUserLogin').text()            , handler: onMenuItem }, 
+			{id: 'mnuUserChangeLogin'      , text: jQuery('#mnuUserChangeLogin').text()      , handler: onMenuItem, hidden: true },
+			{id: 'mnuUserEditAccount'      , text: jQuery('#mnuUserEditAccount').text()      , handler: onMenuItem, hidden: true },
+			{id: 'mnuUserLogout'           , text: jQuery('#mnuUserLogout').text()           , handler: onMenuItem, hidden: true }, 
+			{id: 'mnuUserAccountManagement', text: jQuery('#mnuUserAccountManagement').text(), handler: onMenuItem, hidden: true },
+			{id: 'mnuUserLanguage'         , text: jQuery('#mnuMenuUserLanguage').text()     , menu: mnuLang },
+			{id: 'mnuFileQuit'             , text: jQuery('#mnuUserQuit').text()             , handler: onMenuItem  }
 		]
 	});
 	
