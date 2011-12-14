@@ -18,7 +18,6 @@
 			</td>
 			<td>
 				<input id="fldDatabaseEdit_RegionLabel" name="Database[RegionLabel]" type="text" maxlength="200" class="line fixw" tabindex="3" />
-				<input id="fldDatabaseEdit_RegionLabelPrev" type="hidden" value="" />
 			</td>
 		</tr>
 		<tr>

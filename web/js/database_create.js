@@ -44,16 +44,6 @@ function doDatabaseCreateSetup()
 				if (parseInt(data.Status) > 0)
 				{
 					jQuery('#fldDatabaseEdit_RegionId').val(data.RegionId);
-					var RegionLabel = jQuery('#fldDatabaseEdit_RegionLabel').val();
-					RegionLabel = jQuery.trim(RegionLabel);
-					if ( (RegionLabel == '') ||
-					     (RegionLabel == jQuery('#fldDatabaseEdit_RegionLabelPrev').val()) )
-					{
-						var CountryName = jQuery('#fldDatabaseEdit_CountryIso option[value="' + jQuery('#fldDatabaseEdit_CountryIso').val() + '"]').text();
-						RegionLabel = 'DesInventar ' + data.RegionId.substring(0,12) + ' - ' + CountryName;
-						jQuery('#fldDatabaseEdit_RegionLabel').val(RegionLabel);
-					}
-					jQuery('#fldDatabaseEdit_RegionLabelPrev').val(RegionLabel);
 				}
 			},
 			'json'
@@ -153,11 +143,11 @@ function doDatabaseCreateShow()
 function doDatabaseCreateValidate()
 {
 	var iReturn = 1;
-	if ( (iReturn > 0) && (jQuery('#fldDatabaseEdit_RegionId').val() == '') )
+	if ( (iReturn > 0) && (jQuery.trim(jQuery('#fldDatabaseEdit_RegionLabel').val()) == '') )
 	{
 		iReturn = -1;
 	}
-	if ( (iReturn > 0) && (jQuery.trim(jQuery('#fldDatabaseEdit_RegionLabel').val()) == '') )
+	if ( (iReturn > 0) && (jQuery('#fldDatabaseEdit_RegionId').val() == '') )
 	{
 		iReturn = -1;
 	}
