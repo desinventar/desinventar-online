@@ -120,7 +120,7 @@ function doAdminDatabaseCreateUploader()
 		},
 		onCancel: function(id, Filename)
 		{
-		},
+		}
 	});
 	jQuery('#divFileUploaderControl .qq-upload-button-text').html(jQuery('#msgDatabaseUploadChooseFile').val());
 	jQuery('#divFileUploaderControl .qq-upload-list').hide();
@@ -168,7 +168,7 @@ function doDatabaseUploadCreate()
 		items: new Ext.Panel({
 			contentEl: 'divDatabaseUploadContent',
 			autoScroll: true
-		}),
+		})
 	});
 	w.on('hide', function() {
 		if (jQuery('#txtDatabaseUploadFilename').val() != '')
