@@ -5830,7 +5830,11 @@ Form.EventObserver = Class.create(Abstract.EventObserver, {
   function pollDoScroll() {
     try { document.documentElement.doScroll('left'); }
     catch(e) {
-      timer = pollDoScroll.defer();
+      // 2011-12-14 (jhcaiced) Replace call to defer() for delay(0)
+      // there seems to be an issue between prototype and extJS
+      // https://groups.google.com/forum/#!topic/prototype-scriptaculous/m1_f8IW7YyQ
+      //timer = pollDoScroll.defer();
+      timer = pollDoScroll.delay(0);
       return;
     }
     fireContentLoadedEvent();
