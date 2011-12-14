@@ -29,11 +29,11 @@
 				</select>
 			</td>
 		</tr>
-		<tr>
+		<tr id="trDatabaseEdit_RegionActive">
 			<td>
 				{-#msgDatabaseEditRegionActive#-}
 			</td>
-			<td id="trDatabaseEdit_RegionActive">
+			<td>
 				<input id="fldDatabaseEdit_RegionActive" name="" type="checkbox" checked tabindex="5" title="{-#msgDatabaseEditRegionActiveTooltip#-}"/>
 			</td>
 		</tr>
