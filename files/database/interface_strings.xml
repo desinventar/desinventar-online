@@ -2902,10 +2902,10 @@
 			<Text LangIsoCode="fre">Base de données peut être utilisé et sera affiché dans la liste des bases de données</Text>
 		</Message>
 		<Message id="msgDatabaseEditRegionPublicTooltip">
-			<Text LangIsoCode="eng">Database can be used without requiring an account on the DesInventar server</Text>
-			<Text LangIsoCode="spa">Base de datos se puede utilizar sin necesidad de una cuenta en el servidor de DesInventar</Text>
-			<Text LangIsoCode="por">Banco de dados pode ser usado sem a necessidade de uma conta no servidor DesInventar</Text>
-			<Text LangIsoCode="fre">Base de données peuvent être utilisées sans nécessiter un compte sur le serveur DesInventar</Text>
+			<Text LangIsoCode="eng">To query database user does not need an account on server</Text>
+			<Text LangIsoCode="spa">Para consultar la base de datos de usuario no necesita una cuenta en el servidor</Text>
+			<Text LangIsoCode="por">Para consulta do banco de dados, usuário não precisa de uma conta no servidor</Text>
+			<Text LangIsoCode="fre">Pour interroger utilisateur de la base n'a pas besoin d'un compte sur le serveur</Text>
 		</Message>
 	</Group>
 	<Group name="grpDatabaseCreate">

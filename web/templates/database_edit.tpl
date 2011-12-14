@@ -33,7 +33,7 @@
 			<td>
 				{-#msgDatabaseEditRegionActive#-}
 			</td>
-			<td>
+			<td id="trDatabaseEdit_RegionActive">
 				<input id="fldDatabaseEdit_RegionActive" name="" type="checkbox" checked tabindex="5" title="{-#msgDatabaseEditRegionActiveTooltip#-}"/>
 			</td>
 		</tr>
