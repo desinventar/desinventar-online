@@ -129,6 +129,7 @@ function doDatabaseCreateShow()
 	jQuery('#fldDatabaseEdit_CountryIso').val('');
 	jQuery('#fldDatabaseEdit_RegionLabel').val('');
 	jQuery('#fldDatabaseEdit_RegionActive').attr('checked',true);
+	jQuery('#trDatabaseEdit_RegionActive').hide();
 	jQuery('#fldDatabaseEdit_RegionPublic').attr('checked',false);
 	jQuery('#fldDatabaseEdit_LangIsoCode').val(jQuery('#desinventarLang').val());
 
