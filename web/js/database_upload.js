@@ -14,7 +14,7 @@ function onReadyDatabaseUpload()
 	doAdminDatabaseCreateUploader();
 
 	jQuery('#btnDatabaseUploadReplace').click(function() {
-		jQuery('#divDatabaseUploadParameters').hide();
+		jQuery('.clsDatabaseUploadButtons').hide();
 		doDatabaseUploadStatusMsg('msgDatabaseUploadWaitForUpdate');
 		jQuery.post(jQuery('#desinventarURL').val() + '/',
 			{
@@ -34,6 +34,36 @@ function onReadyDatabaseUpload()
 				}
 				else
 				{
+					jQuery('.clsDatabaseUploadButtons').show();
+					doDatabaseUploadStatusMsg('msgDatabaseUploadUpdateError');
+				}
+			},
+			'json'
+		);
+	});
+
+	jQuery('#btnDatabaseUploadCopy').click(function() {
+		jQuery('.clsDatabaseUploadButtons').hide();
+		doDatabaseUploadStatusMsg('msgDatabaseUploadWaitForCopy');
+		jQuery.post(jQuery('#desinventarURL').val() + '/',
+			{
+				cmd: 'cmdDatabaseCopy',
+				RegionId: jQuery('#txtDatabaseUploadRegionId').text(),
+				Filename: jQuery('#txtDatabaseUploadFilename').val()
+			},
+			function(data)
+			{
+				doDatabaseUploadStatusMsg('');
+				if (parseInt(data.Status) > 0)
+				{
+					jQuery('#divDatabaseUploadParameters').hide();
+					doDatabaseUploadStatusMsg('msgDatabaseUploadUpdateOk');
+					alert(jQuery('#msgDatabaseUploadComplete').val());
+					doWindowReload();
+				}
+				else
+				{
+					jQuery('.clsDatabaseUploadButtons').show();
 					doDatabaseUploadStatusMsg('msgDatabaseUploadUpdateError');
 				}
 			},
@@ -98,6 +128,18 @@ function doAdminDatabaseCreateUploader()
 			jQuery('#txtDatabaseUploadFilename').val(data.filename);
 			if (parseInt(data.Status)>0)
 			{
+				jQuery('.clsDatabaseUploadType').hide();
+				var CurRegionId = jQuery('#desinventarRegionId').val();
+				if (CurRegionId != '') 
+				{
+					jQuery('#txtDatabaseUploadConfirmReplace').show();
+					jQuery('#btnDatabaseUploadReplace').show();
+				}
+				else
+				{
+					jQuery('#txtDatabaseUploadConfirmCopy').show();
+					jQuery('#btnDatabaseUploadCopy').show();
+				}
 				jQuery('#txtDatabaseUploadRegionId').text(data.Info.RegionId);
 				jQuery('#txtDatabaseUploadRegionLabel').text(data.Info.RegionLabel);
 				jQuery('#txtDatabaseUploadLangIsoCode').text(data.Info.LangIsoCode);

@@ -369,6 +369,7 @@ function doMainMenuCreate()
 		Ext.getCmp('mnuUserEditAccount').show();
 		Ext.getCmp('mnuUserLogout').show();
 		Ext.getCmp('mnuDatabaseCreate').show();
+		Ext.getCmp('mnuDatabaseUpload').show();
 	}
 
 	// Configure which options are visible using RoleValue
@@ -403,7 +404,6 @@ function doMainMenuCreate()
 
 			if (UserRoleValue >= 4)
 			{
-				Ext.getCmp('mnuDatabaseUpload').show();
 				Ext.getCmp('mnuDatabaseConfig').show();
 			}
 

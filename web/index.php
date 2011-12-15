@@ -269,7 +269,7 @@ switch ($cmd)
 		$answer = array();
 		$answer['success'] = false;
 		$iReturn = ERR_NO_ERROR;
-		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
+		if ($us->UserId == '')
 		{
 			$iReturn = ERR_ACCESS_DENIED;
 		}		
@@ -309,6 +309,18 @@ switch ($cmd)
 					{
 						$r = new DIRegion($us, '', $OutDir . '/info.xml');
 						$info = array();
+						// If no database is open, try to calculate RegionId
+						if ($RegionId == '')
+						{
+							if ($us->UserId == 'root')
+							{
+								$RegionId = $r->get('RegionId');
+							}
+							else
+							{
+								$RegionId = DIRegion::buildRegionId($r->get('CountryIso'));
+							}
+						}
 						$info['RegionId']         = $RegionId;
 						$info['RegionLabel']      = $r->get('RegionLabel');
 						$info['CountryIso']       = $r->get('CountryIso');
@@ -341,6 +353,12 @@ switch ($cmd)
 		$answer['Status'] = $iReturn;
 		// to pass data through iframe you will need to encode all html tags
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
+	break;
+	case 'cmdDatabaseCopy':
+		$answer = array();
+		$iReturn = ERR_UNKNOWN_ERROR;
+		$answer['Status'] = $iReturn;
+		echo json_encode($answer);		
 	break;
 	case 'cmdDatabaseReplace':
 	case 'cmdDatabaseReplaceCancel':
