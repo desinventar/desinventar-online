@@ -17,14 +17,13 @@
 		<script type="text/javascript" src="{-$desinventarURL-}/js/admin_database_export.js?version={-$jsversion-}"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/js/database_upload.js?version={-$jsversion-}"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/js/database_create.js?version={-$jsversion-}"></script>
+		<script type="text/javascript" src="{-$desinventarURL-}/js/admin_users.js?version={-$jsversion-}"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/js/userperm_admin.js?version={-$jsversion-}"></script>
 
 		<script type="text/javascript" src="/fileuploader/fileuploader.js"></script>
 
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
-				onReadyCommon();
-
 				// 2011-04-29 (jhcaiced) Fix for use of ExtJS in IE9 ?
 				if ((typeof Range !== "undefined") && !Range.prototype.createContextualFragment)
 				{
@@ -37,19 +36,22 @@
 					};
 				}
 
-				onReadyDatabaseCreate();
+				//onReadyCommon();
+
+				onReadyAdminUsers();
+				//onReadyDatabaseCreate();
 				//onReadyDatabaseUpload();
 				//onReadyUserPermAdmin();
 				//doAdminDatabaseUpdateList();
 				//doAdminDatabaseExportCreate();
 
 				jQuery('#btnTest').click(function() {
-					doDatabaseCreateShow();
+					doAdminUsersShow();
 				});
 				jQuery('#btnTest').trigger('click');
-				// Initialize Ext.QuickTips
-				Ext.QuickTips.init();
-				Ext.apply(Ext.QuickTips.getQuickTip(), {maxWidth: 200, minWidth: 100, showDelay: 50, trackMouse: true});
+				// Initialize Ext.QuickTip
+				//Ext.QuickTips.init();
+				//Ext.apply(Ext.QuickTips.getQuickTip(), {maxWidth: 200, minWidth: 100, showDelay: 50, trackMouse: true});
 			});
 		</script>
 	</head>
@@ -59,7 +61,7 @@
 		Language : {-$lg-}<br />
 		<br />
 		<a class="button" id="btnTest"><span>Test</span></a>
-		{-include file="database_create_ext.tpl"-}
+		{-include file="admin_users_ext.tpl"-}
 
 		{-include file="desinventarinfo.tpl"-}
 	</body>

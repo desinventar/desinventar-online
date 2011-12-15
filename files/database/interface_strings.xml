@@ -3026,6 +3026,14 @@
 			<Text LangIsoCode="fre">Le formulaire contient des données incorrectes ou certains champs obligatoires sont vides, s'il vous plaît vérifier les données et essayer de nouveau.</Text>
 		</Message>
 	</Group>
+	<Group name="grpAdminUsers">
+		<Message id="msgAdminUsersTitle">
+			<Text LangIsoCode="eng">User's Management</Text>
+			<Text LangIsoCode="spa">Administración de Usuarios</Text>
+			<Text LangIsoCode="por"></Text>
+			<Text LangIsoCode="fre"></Text>
+		</Message>
+	</Group>
 	<Group name="grpAdminDatabaseExport">
 		<Message id="msgAdminDatabaseExportTitle">
 			<Text LangIsoCode="eng">Download database</Text>
