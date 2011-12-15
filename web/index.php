@@ -114,6 +114,7 @@ switch ($cmd)
 	break;
 	case 'admin':
 	case 'cmdAdminDB':
+	case 'cmdAdminUsers':
 		$t->assign('CountryList', $us->q->getCountryList());
 		$t->assign('ctl_adminreg', true);
 		$t->assign('ctl_reglist', true);

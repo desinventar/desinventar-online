@@ -6,6 +6,7 @@ function onReadyMain()
 {
 	onReadyDatabaseUpload();
 	onReadyDatabaseCreate();
+	onReadyAdminUsers();
 	onReadyUserPermAdmin();
 	onReadyCommon();
 	onReadyUserLogin();
