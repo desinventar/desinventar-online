@@ -89,7 +89,7 @@ switch ($cmd)
 	case 'cmdGetLocaleList':
 		$answer = array();
 		$answer['Status'] = ERR_UNKNOWN_ERROR;
-		if ($desinventarUserRoleValue >= ROLE_ADMINPORTAL)
+		if ($us->UserId != '')
 		{
 			$LanguageList = $us->q->loadLanguages(1);
 			$CountryList  = $us->q->getCountryList();
@@ -137,6 +137,54 @@ switch ($cmd)
 		echo json_encode($answer);
 	break;
 	case 'cmdDatabaseCreate':
+		$iReturn = ERR_NO_ERROR;
+		$answer = array();
+		if ($us->UserId == '')
+		{
+			$iReturn = ERR_ACCESS_DENIED;
+		}
+		if ($iReturn > 0)
+		{
+			$RegionId = $_POST['Database']['RegionId'];
+			$r = new DIRegionRecord($us, $RegionId);
+			$iReturn = $r->setFromArray($_POST['Database']);
+			if ($r->get('RegionId') == '')
+			{
+				$iReturn = ERR_UNKNOWN_ERROR;
+			}
+		}
+		if ($iReturn > 0)
+		{
+			$RegionId = $r->get('RegionId');
+			if (DIRegion::existRegion($us, $RegionId) > 0)
+			{
+				// Database already exists
+				$iReturn = ERR_UNKNOWN_ERROR;
+			}
+			else
+			{
+				$iReturn = $r->insert();
+			}
+		}
+		if ($iReturn > 0)
+		{
+			// Set Role ADMINREGION in RegionAuth: master for this region
+			$r->removeRegionUserAdmin();
+			$RegionUserAdmin = $us->UserId;
+			$iReturn = $us->setUserRole($RegionUserAdmin, $r->get('RegionId'), 'ADMINREGION');
+		}
+		if ($iReturn > 0)
+		{
+			$r2 = new DIRegionDB($us, $RegionId);
+			$iReturn = $r2->createRegionDB();
+		}
+		if ($iReturn > 0)
+		{
+			$answer['RegionId'] = $r->get('RegionId');
+		}
+		$answer['Status'] = $iReturn;
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
+	break;
 	case 'cmdDatabaseUpdate':
 		$iReturn = ERR_NO_ERROR;
 		$answer = array();
@@ -149,42 +197,15 @@ switch ($cmd)
 			$RegionId = $_POST['Database']['RegionId'];
 			$r = new DIRegionRecord($us, $RegionId);
 			$iReturn = $r->setFromArray($_POST['Database']);
-		}
-		if ($r->get('RegionId') == '')
-		{
-			$iReturn = ERR_UNKNOWN_ERROR;
+			if ($r->get('RegionId') == '')
+			{
+				$iReturn = ERR_UNKNOWN_ERROR;
+			}
 		}
 		if ($iReturn > 0)
 		{
 			$RegionId = $r->get('RegionId');
-			if ($cmd == 'cmdDatabaseCreate')
-			{
-				$iReturn = $r->insert();
-				$r2 = new DIRegionDB($us, $RegionId);
-				$i = $r2->createRegionDB();
-			}
-			else
-			{
-				$iReturn = $r->update();
-			}
-		}
-		if ($iReturn > 0)
-		{
-			// Set Role ADMINREGION in RegionAuth: master for this region
-			$r->removeRegionUserAdmin();
-			if (isset($_POST['Database']['RegionUserAdmin']))
-			{
-				$RegionUserAdmin = $_POST['Database']['RegionUserAdmin'];
-			}
-			else
-			{
-				$RegionUserAdmin = $us->UserId;
-			}
-			$iReturn = $us->setUserRole($RegionUserAdmin, $r->get('RegionId'), 'ADMINREGION');
-			if ($iReturn > 0)
-			{
-				$answer['RegionId'] = $r->get('RegionId');
-			}
+			$iReturn = $r->update();
 		}
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
@@ -230,7 +251,7 @@ switch ($cmd)
 			if ($iReturn > 0)
 			{
 				$r = new DIRegion($us, $RegionId);
-				if (DIRegion::existRegion($us, $RegionId) == STATUS_NO)
+				if (DIRegion::existRegion($us, $RegionId) < 0)
 				{
 					$r->insert();
 				}

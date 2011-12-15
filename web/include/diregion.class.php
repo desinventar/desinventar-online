@@ -102,12 +102,15 @@ class DIRegion extends DIObject
 
 	public function createRegionDBDir()
 	{
-		$prmRegionId = $this->get('RegionId');
+		$answer = true;
+		$RegionId = $this->get('RegionId');
 		// Create Directory for New Region
-		$DBDir = DBDIR . '/' . $prmRegionId;
-		if (!file_exists($DBDir)) {
-			mkdir($DBDir);
+		$DBDir = DBDIR . '/' . $RegionId;
+		if (!file_exists($DBDir))
+		{
+			$answer = mkdir($DBDir);
 		}
+		return $answer;
 	}
 
 	public function insert()
@@ -556,18 +559,23 @@ class DIRegion extends DIObject
 		return $iReturn;
 	} //function
 
-	public static function existRegion($us, $prmRegionId) {
-		$iReturn = STATUS_NO;
+	public static function existRegion($us, $prmRegionId)
+	{
+		$iReturn = ERR_NO_DATABASE;
 		$sQuery = 'SELECT RegionId FROM Region WHERE RegionId="' . $prmRegionId . '"';
-		try {
-			foreach($us->q->core->query($sQuery) as $row) {
-				$iReturn = STATUS_YES;
+		try
+		{
+			foreach($us->q->core->query($sQuery) as $row)
+			{
+				$iReturn = ERR_NO_ERROR;
 			}
-		} catch (Exception $e) {
+		}
+		catch (Exception $e)
+		{
 			$iReturn = ERR_NO_DATABASE;
 		}
 		return $iReturn;
-	}
+	} //existRegion()
 	
 	public static function deleteRegion($us, $prmRegionId)
 	{
