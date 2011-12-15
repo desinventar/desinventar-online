@@ -34,7 +34,10 @@
 	</div>
 
 	<div id="divDatabaseUploadParameters" style="display:none;">
-		<h4>{-#msgDatabaseUploadConfirmReplace#-}</h4>
+		<h4>
+			<span class="clsDatabaseUploadType" id="txtDatabaseUploadConfirmReplace">{-#msgDatabaseUploadConfirmReplace#-}</span>
+			<span class="clsDatabaseUploadType" id="txtDatabaseUploadConfirmCopy">{-#msgDatabaseUploadConfirmCopy#-}</span>
+		</h4>
 		<table width="100%">
 		<tr>
 			<td align="right" width="25%">
@@ -81,21 +84,25 @@
 				<div class="center">
 					<input type="hidden" id="txtDatabaseUploadFilename" value="" />
 					<br />
-					<a class="button" id="btnDatabaseUploadReplace"><span>{-#msgDatabaseUploadButtonReplace#-}</span></a>
-					<a class="button" id="btnDatabaseUploadReplaceCancel"><span>{-#msgDatabaseUploadButtonCancel#-}</span></a>
+					<div class="clsDatabaseUploadButtons">
+						<a class="button clsDatabaseUploadType" id="btnDatabaseUploadCopy"><span>{-#msgDatabaseUploadButtonCopy#-}</span></a>
+						<a class="button clsDatabaseUploadType" id="btnDatabaseUploadReplace"><span>{-#msgDatabaseUploadButtonReplace#-}</span></a>
+						<a class="button" id="btnDatabaseUploadReplaceCancel"><span>{-#msgDatabaseUploadButtonCancel#-}</span></a>
+					</div>
 				</div>
 			</td>				
 		</tr>
 		</table>
 	</div>
 
-	<div id="divDatabaseUploadStatusMsg">
+	<div id="divDatabaseUploadStatusMsg" class="center">
 		<input type="hidden" id="msgDatabaseUploadComplete"   value="{-#msgDatabaseUploadComplete#-}" />
 		<input type="hidden" id="msgDatabaseUploadChooseFile" value="{-#msgDatabaseUploadChooseFile#-}" />
 		<span class="clsDatabaseUploadStatusMsg" id="msgDatabaseUploadUpdateOk">{-#msgDatabaseUploadUpdateOk#-}</span>
-		<span class="clsDatabaseUploadStatusMsg" id="msgDatabaseUploadErrorOnUpload">{-#msgDatabaseUploadErrorOnUpload#-}</span>
-		<span class="clsDatabaseUploadStatusMsg" id="msgDatabaseUploadUpdateError">{-#msgDatabaseUploadUpdateError#-}</span>
+		<span class="clsDatabaseUploadStatusMsg" id="msgDatabaseUploadErrorOnUpload"><b>{-#msgDatabaseUploadErrorOnUpload#-}</b></span>
+		<span class="clsDatabaseUploadStatusMsg" id="msgDatabaseUploadUpdateError"><b>{-#msgDatabaseUploadUpdateError#-}</b></span>
 		<span class="clsDatabaseUploadStatusMsg" id="msgDatabaseUploadWaitForUpload">{-#msgDatabaseUploadWaitForUpload#-}<img src="{-$desinventarURL-}/images/loading.gif" alt="" /></span>
 		<span class="clsDatabaseUploadStatusMsg" id="msgDatabaseUploadWaitForUpdate">{-#msgDatabaseUploadWaitForUpdate#-}<img src="{-$desinventarURL-}/images/loading.gif" alt="" /></span>
+		<span class="clsDatabaseUploadStatusMsg" id="msgDatabaseUploadWaitForCopy">{-#msgDatabaseUploadWaitForCopy#-}<img src="{-$desinventarURL-}/images/loading.gif" alt="" /></span>
 	</div>
 </div>

@@ -44,37 +44,51 @@ class DIRegion extends DIObject
 		$prmRegionId = '';
 		$XMLFile = '';
 		$num_args = func_num_args();
-		if ($num_args >= 2) {
+		if ($num_args >= 2)
+		{
 			// Load region if parameter was specified
 			$prmRegionId = func_get_arg(1);
-			if ($num_args >= 3) {
+			if ($num_args >= 3)
+			{
 				// Load Info from Specified XML File
 				$prmRegionId = '';
 				$XMLFile = func_get_arg(2);
 			}
-		} else {
+		}
+		else
+		{
 			// Try to load region from Current Session if no parameter was specified
-			if ( ($prmSession->RegionId != '') && ($prmSession->RegionId != 'core')) {
+			if ( ($prmSession->RegionId != '') && ($prmSession->RegionId != 'core'))
+			{
 				$prmRegionId = $prmSession->RegionId;
 			}
 		}
 		$iReturn = ERR_NO_ERROR;
-		if ($prmRegionId != '') {
+		if ($prmRegionId != '')
+		{
 			$this->set('RegionId', $prmRegionId);
 			$XMLFile = $this->getXMLFileName();
 		}
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			// Attempt to load from XML in Region directory...
-			if (file_exists($XMLFile)) {
+			if (file_exists($XMLFile))
+			{
 				// XML File Exists, load data...
 				$iReturn = $this->loadFromXML($XMLFile);
 				// Fix RegionId because in some files is wrong when copying data...
-				$this->set('RegionId', $prmRegionId);
-			} else {
+				if ($prmRegionId != '')
+				{
+					$this->set('RegionId', $prmRegionId);
+				}
+			}
+			else
+			{
 				$this->set('RegionLabel', $prmRegionId);
 			} //if
 		}
-		if ($this->get('OptionLanguageList') == '') {
+		if ($this->get('OptionLanguageList') == '')
+		{
 			$this->set('OptionLanguageList', $this->get('LangIsoCode'));
 		}
 	} // __construct
