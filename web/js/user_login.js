@@ -13,6 +13,14 @@ function onReadyUserLogin() {
 		return false;
 	});
 
+	jQuery('#fldUserPasswd').keypress(function(e) {
+		var code = (e.keyCode ? e.keyCode : e.which);
+		if (code == 13)
+		{
+			jQuery('#btnUserLoginSend').trigger('click');
+		}
+	});
+
 	jQuery('#frmUserLogin').submit(function() {
 		var UserId     = jQuery('#fldUserId').val();
 		var UserPasswd = jQuery("#fldUserPasswd").val();
