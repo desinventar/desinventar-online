@@ -78,6 +78,7 @@ function doAdminDatabaseCreateUploader()
 		{
 			jQuery('#txtDatabaseUploadFilename').val(Filename);
 			jQuery('#txtDatabaseUploadId').val(id);
+			jQuery('#prgDatabaseUploadProgressBar').show();
 			jQuery('#prgDatabaseUploadProgressMark').css('width', '0px');
 			jQuery('#divFileUploaderControl .qq-upload-button-text').hide();
 			jQuery('#btnDatabaseUploadCancel').show();
@@ -135,6 +136,7 @@ function doDatabaseUploadReset()
 {
 	doDatabaseUploadStatusMsg('');
 	jQuery('#txtDatabaseUploadFilename').val('');
+	jQuery('#prgDatabaseUploadProgressBar').hide();
 	jQuery('#prgDatabaseUploadProgressMark').css('width', '0px');
 	jQuery('#btnDatabaseUploadCancel').hide();
 	jQuery('#divFileUploaderControl .qq-upload-button-text').show();
