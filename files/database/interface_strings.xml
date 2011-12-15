@@ -2858,6 +2858,32 @@
 			<Text LangIsoCode="fre">Démonstration cartes de données</Text>
 		</Message>
 	</Group>
+	<Group name="grpUserEdit">
+		<Message id="msgUserEdit_UserId">
+			<Text LangIsoCode="eng">User</Text>
+			<Text LangIsoCode="spa">Usuario</Text>
+			<Text LangIsoCode="por">Usuário</Text>
+			<Text LangIsoCode="fre">Utilisateur</Text>
+		</Message>
+		<Message id="msgUserEdit_UserName">
+			<Text LangIsoCode="eng">Name</Text>
+			<Text LangIsoCode="spa">Nombre</Text>
+			<Text LangIsoCode="por">Nome</Text>
+			<Text LangIsoCode="fre">Nom</Text>
+		</Message>
+		<Message id="msgUserEdit_UserEmail">
+			<Text LangIsoCode="eng">E-mail</Text>
+			<Text LangIsoCode="spa">E-mail</Text>
+			<Text LangIsoCode="por">E-mail</Text>
+			<Text LangIsoCode="fre">E-mail</Text>
+		</Message>
+		<Message id="msgUserEdit_UserActive">
+			<Text LangIsoCode="eng">Active</Text>
+			<Text LangIsoCode="spa">Activo</Text>
+			<Text LangIsoCode="por">Ativo</Text>
+			<Text LangIsoCode="fre">Actif</Text>
+		</Message>
+	</Group>
 	<Group name="grpDatabaseEdit">
 		<Message id="msgDatabaseEditCountryIso">
 			<Text LangIsoCode="eng">Country</Text>
@@ -3027,11 +3053,17 @@
 		</Message>
 	</Group>
 	<Group name="grpAdminUsers">
-		<Message id="msgAdminUsersTitle">
+		<Message id="msgAdminUsers_Title">
 			<Text LangIsoCode="eng">User's Management</Text>
 			<Text LangIsoCode="spa">Administración de Usuarios</Text>
 			<Text LangIsoCode="por"></Text>
 			<Text LangIsoCode="fre"></Text>
+		</Message>
+		<Message id="msgAdminUsers_AddUser">
+			<Text LangIsoCode="eng">Add</Text>
+			<Text LangIsoCode="spa">Adicionar</Text>
+			<Text LangIsoCode="por">Adicionar</Text>
+			<Text LangIsoCode="fre">Ajouter</Text>
 		</Message>
 	</Group>
 	<Group name="grpAdminDatabaseExport">
