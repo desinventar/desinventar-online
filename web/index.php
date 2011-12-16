@@ -147,41 +147,11 @@ switch ($cmd)
 		if ($iReturn > 0)
 		{
 			$RegionId = $_POST['Database']['RegionId'];
-			$r = new DIRegionRecord($us, $RegionId);
-			$iReturn = $r->setFromArray($_POST['Database']);
-			if ($r->get('RegionId') == '')
-			{
-				$iReturn = ERR_UNKNOWN_ERROR;
-			}
+			$iReturn = doDatabaseCreate($us, $RegionId,$_POST['Database']);
 		}
 		if ($iReturn > 0)
 		{
-			$RegionId = $r->get('RegionId');
-			if (DIRegion::existRegion($us, $RegionId) > 0)
-			{
-				// Database already exists
-				$iReturn = ERR_UNKNOWN_ERROR;
-			}
-			else
-			{
-				$iReturn = $r->insert();
-			}
-		}
-		if ($iReturn > 0)
-		{
-			// Set Role ADMINREGION in RegionAuth: master for this region
-			$r->removeRegionUserAdmin();
-			$RegionUserAdmin = $us->UserId;
-			$iReturn = $us->setUserRole($RegionUserAdmin, $r->get('RegionId'), 'ADMINREGION');
-		}
-		if ($iReturn > 0)
-		{
-			$r2 = new DIRegionDB($us, $RegionId);
-			$iReturn = $r2->createRegionDB();
-		}
-		if ($iReturn > 0)
-		{
-			$answer['RegionId'] = $r->get('RegionId');
+			$answer['RegionId'] = $RegionId;
 		}
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
@@ -212,12 +182,51 @@ switch ($cmd)
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
 	break;
 	case 'cmdDatabaseCopy':
+		$iReturn = ERR_NO_ERROR;
 		$answer = array();
-		$iReturn = ERR_UNKNOWN_ERROR;
+		if ($us->UserId == '')
+		{
+			$iReturn = ERR_ACCESS_DENIED;
+		}
+		if ($iReturn > 0)
+		{
+			$RegionId = $_POST['RegionId'];
+			if (DIRegion::existRegion($us, $RegionId) < 0)
+			{
+				$iReturn = doDatabaseCreate($us, $RegionId, '');
+			}
+			$desinventarUserRole = $us->getUserRole($RegionId);;
+			$desinventarUserRoleValue = $us->getUserRoleValue($RegionId);
+		}
+		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
+		{
+			$iReturn = ERR_ACCESS_DENIED;
+		}
+		if ($iReturn > 0)
+		{
+			$iReturn = doDatabaseReplace($us, $RegionId, '', getParameter('Filename',''));
+		}
+		if ($iReturn > 0)
+		{
+			$answer['RegionId'] = $RegionId;
+		}
 		$answer['Status'] = $iReturn;
-		echo json_encode($answer);		
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
 	break;
 	case 'cmdDatabaseReplace':
+		$answer = array();
+		$iReturn = ERR_NO_ERROR;
+		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
+		{
+			$iReturn = ERR_ACCESS_DENIED;
+		}
+		if ($iReturn > 0)
+		{
+			$iReturn = doDatabaseReplace($us, $RegionId, $RegionLabel, getParameter('Filename',''));
+		}
+		$answer['Status'] = $iReturn;
+		echo json_encode($answer);
+	break;
 	case 'cmdDatabaseReplaceCancel':
 		$answer = array();
 		$iReturn = ERR_NO_ERROR;
@@ -229,26 +238,6 @@ switch ($cmd)
 		{
 			$OutDir = TMP_DIR . '/' . $us->sSessionId;
 			$Filename = getParameter('Filename','');
-			if ($cmd == 'cmdDatabaseReplace') 
-			{
-				// Open ZIP File, extract all files and return values...
-				$zip = new ZipArchive();
-				$res = $zip->open($OutDir . '/' . $Filename);
-				if ($res == FALSE)
-				{
-					$iReturn = ERR_UNKNOWN_ERROR;
-				}
-				if ($iReturn > 0)
-				{
-					$DBDir = $us->getDBDir();
-					$zip->extractTo($DBDir);
-					$zip->close();
-					$r = new DIRegion($us, $RegionId);
-					$r->set('RegionId', $RegionId);
-					$r->set('RegionLabel', $RegionLabel);
-					$r->update();
-				}
-			}
 			if (file_exists($OutDir . '/' . $Filename))
 			{
 				unlink($OutDir . '/' . $Filename);
@@ -890,4 +879,81 @@ switch ($cmd)
 		}
 	break;
 } //switch($cmd)
+
+function doDatabaseCreate($us,$prmRegionId,$prmRegionInfo)
+{
+	$iReturn = ERR_NO_ERROR;
+	if ($iReturn > 0)
+	{
+		$RegionId = $prmRegionId;
+		$r = new DIRegionRecord($us, $RegionId);
+		$iReturn = $r->setFromArray($prmRegionInfo);
+		if ($r->get('RegionId') == '')
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+	}
+	if ($iReturn > 0)
+	{
+		$RegionId = $r->get('RegionId');
+		if (DIRegion::existRegion($us, $RegionId) > 0)
+		{
+			// Database already exists
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		else
+		{
+			$iReturn = $r->insert();
+		}
+	}
+	if ($iReturn > 0)
+	{
+		// Set Role ADMINREGION in RegionAuth: master for this region
+		$r->removeRegionUserAdmin();
+		$RegionUserAdmin = $us->UserId;
+		$iReturn = $us->setUserRole($RegionUserAdmin, $r->get('RegionId'), 'ADMINREGION');
+	}
+	if ($iReturn > 0)
+	{
+		$r2 = new DIRegionDB($us, $RegionId);
+		$iReturn = $r2->createRegionDB();
+	}
+	return $iReturn;
+} // doDatabaseCreate()
+
+function doDatabaseReplace($us, $prmRegionId, $prmRegionLabel, $prmFilename)
+{
+	$iReturn = ERR_NO_ERROR;
+	$RegionId = $prmRegionId;
+	$RegionLabel = $prmRegionLabel;
+	$OutDir = TMP_DIR . '/' . $us->sSessionId;
+	$Filename = $prmFilename;
+	// Open ZIP File, extract all files and return values...
+	$zip = new ZipArchive();
+	$res = $zip->open($OutDir . '/' . $Filename);
+	if ($res == FALSE)
+	{
+		$iReturn = ERR_UNKNOWN_ERROR;
+	}
+	if ($iReturn > 0)
+	{
+		$DBDir = $us->getDBDir();
+		$zip->extractTo($DBDir);
+		$zip->close();
+
+		$r = new DIRegion($us, $RegionId);
+		$r->set('RegionId', $RegionId);
+		if ($RegionLabel != '')
+		{
+			$r->set('RegionLabel', $RegionLabel);
+		}
+		$r->update();
+	}
+	if (file_exists($OutDir . '/' . $Filename))
+	{
+		unlink($OutDir . '/' . $Filename);
+	}
+	return $iReturn;
+} //doDatabaseReplace()
+
 </script>

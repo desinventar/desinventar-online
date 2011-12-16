@@ -183,6 +183,7 @@ function doDatabaseUploadReset()
 	jQuery('#btnDatabaseUploadCancel').hide();
 	jQuery('#divFileUploaderControl .qq-upload-button-text').show();
 	jQuery('#divDatabaseUploadControl').show();
+	jQuery('.clsDatabaseUploadButtons').show();
 	jQuery('#divDatabaseUploadParameters').hide();
 	jQuery('#divFileUploaderControl .qq-upload-button-text').show();
 }
