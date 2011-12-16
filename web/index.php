@@ -211,6 +211,52 @@ switch ($cmd)
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
 	break;
+	case 'cmdDatabaseCopy':
+		$answer = array();
+		$iReturn = ERR_UNKNOWN_ERROR;
+		$answer['Status'] = $iReturn;
+		echo json_encode($answer);		
+	break;
+	case 'cmdDatabaseReplace':
+	case 'cmdDatabaseReplaceCancel':
+		$answer = array();
+		$iReturn = ERR_NO_ERROR;
+		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
+		{
+			$iReturn = ERR_ACCESS_DENIED;
+		}
+		if ($iReturn > 0)
+		{
+			$OutDir = TMP_DIR . '/' . $us->sSessionId;
+			$Filename = getParameter('Filename','');
+			if ($cmd == 'cmdDatabaseReplace') 
+			{
+				// Open ZIP File, extract all files and return values...
+				$zip = new ZipArchive();
+				$res = $zip->open($OutDir . '/' . $Filename);
+				if ($res == FALSE)
+				{
+					$iReturn = ERR_UNKNOWN_ERROR;
+				}
+				if ($iReturn > 0)
+				{
+					$DBDir = $us->getDBDir();
+					$zip->extractTo($DBDir);
+					$zip->close();
+					$r = new DIRegion($us, $RegionId);
+					$r->set('RegionId', $RegionId);
+					$r->set('RegionLabel', $RegionLabel);
+					$r->update();
+				}
+			}
+			if (file_exists($OutDir . '/' . $Filename))
+			{
+				unlink($OutDir . '/' . $Filename);
+			}
+		}
+		$answer['Status'] = $iReturn;
+		echo json_encode($answer);		
+	break;
 	case 'cmdDatabaseSetUserAdmin':
 		$answer = array();
 		$iReturn = ERR_UNKNOWN_ERROR;
@@ -353,52 +399,6 @@ switch ($cmd)
 		$answer['Status'] = $iReturn;
 		// to pass data through iframe you will need to encode all html tags
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
-	break;
-	case 'cmdDatabaseCopy':
-		$answer = array();
-		$iReturn = ERR_UNKNOWN_ERROR;
-		$answer['Status'] = $iReturn;
-		echo json_encode($answer);		
-	break;
-	case 'cmdDatabaseReplace':
-	case 'cmdDatabaseReplaceCancel':
-		$answer = array();
-		$iReturn = ERR_NO_ERROR;
-		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
-		{
-			$iReturn = ERR_ACCESS_DENIED;
-		}
-		if ($iReturn > 0)
-		{
-			$OutDir = TMP_DIR . '/' . $us->sSessionId;
-			$Filename = getParameter('Filename','');
-			if ($cmd == 'cmdDatabaseReplace') 
-			{
-				// Open ZIP File, extract all files and return values...
-				$zip = new ZipArchive();
-				$res = $zip->open($OutDir . '/' . $Filename);
-				if ($res == FALSE)
-				{
-					$iReturn = ERR_UNKNOWN_ERROR;
-				}
-				if ($iReturn > 0)
-				{
-					$DBDir = $us->getDBDir();
-					$zip->extractTo($DBDir);
-					$zip->close();
-					$r = new DIRegion($us, $RegionId);
-					$r->set('RegionId', $RegionId);
-					$r->set('RegionLabel', $RegionLabel);
-					$r->update();
-				}
-			}
-			if (file_exists($OutDir . '/' . $Filename))
-			{
-				unlink($OutDir . '/' . $Filename);
-			}
-		}
-		$answer['Status'] = $iReturn;
-		echo json_encode($answer);		
 	break;
 	case 'start':
 		$t->assign('lg', $lg);
