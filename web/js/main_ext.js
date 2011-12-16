@@ -113,10 +113,13 @@ function doViewportCreate()
 
 function onMenuItem(item) {
 	var RegionId = jQuery('#desinventarRegionId').val();
-	switch (item.id) {
+	switch (item.id)
+	{
 		case 'mnuDatabaseRegionInfo':
 			jQuery('#dcr').hide();
 			doGetRegionInfo(jQuery('#desinventarRegionId').val());
+			Ext.getCmp('westm').show();
+			Ext.getCmp('westm').expand();
 			jQuery('#divRegionInfo').show();
 		break;
 		case 'mnuUserLogin':
@@ -159,16 +162,22 @@ function onMenuItem(item) {
 		case 'menuQueryToggle':
 			w = Ext.getCmp('westm');
 			jQuery('.contentBlock').hide();
-			if (RegionId == '') {
+			if (RegionId == '')
+			{
 				jQuery('#divQueryResults').hide();
 				w.hide();
-			} else {
+			}
+			else
+			{
 				jQuery('#divQueryResults').show();
 				w.show();
 			}
-			if (w.isVisible()) {
+			if (w.isVisible())
+			{
 				w.collapse(); //hide()
-			} else {
+			}
+			else
+			{
 				w.expand(); //show()
 			}
 		break;
