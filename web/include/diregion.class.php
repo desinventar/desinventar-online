@@ -252,12 +252,12 @@ class DIRegion extends DIObject
 		$this->session->open($this->get('RegionId'));
 
 		// Number of Datacards
-		$a['NumDatacards'] = $this->session->q->getNumDisasterByStatus('PUBLISHED');
+		$a['NumberOfRecords'] = $this->session->q->getNumDisasterByStatus('');
 
 		$DataMinDate = '';
 		$DataMaxDate = '';
 
-		if ($a['NumDatacards'] > 0)
+		if ($a['NumberOfRecords'] > 0)
 		{
 			$Query = "SELECT MIN(DisasterBeginTime) AS MinDate, MAX(DisasterBeginTime) AS MaxDate FROM Disaster ".
 				"WHERE RecordStatus='PUBLISHED'";

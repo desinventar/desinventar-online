@@ -34,6 +34,8 @@ if (!empty($RegionId))
 	$us->open($RegionId);
 	$r = new DIRegion($us, $RegionId);
 	$RegionLabel = $r->getRegionInfoValue('RegionLabel');
+	$t->assign('desinventarCountryIso' , $r->get('CountryIso'));
+	$t->assign('desinventarCountryName', $us->q->getCountryName($r->get('CountryIso')));
 }
 $t->assign('desinventarRegionLabel', $RegionLabel);
 
@@ -362,7 +364,7 @@ switch ($cmd)
 						$info['CountryName']      = $us->q->getCountryName($info['CountryIso']);
 						$info['RegionLastUpdate'] = substr($r->get('RegionLastUpdate'), 0,10);
 						$info['NumberOfRecords']  = $r->get('NumberOfRecords');
-						$answer['Info'] = $info;
+						$answer['RegionInfo'] = $info;
 						$answer['DBExist'] = DIRegion::existRegion($us, $info['RegionId']);
 					}
 					else
@@ -483,12 +485,13 @@ switch ($cmd)
 		{
 			$r = new DIRegion($us, $RegionId);
 			$a = $r->getDBInfo($LangIsoCode);
+			$a['CountryIso']  = $r->get('CountryIso');
+			$a['CountryName'] = $us->q->getCountryName($r->get('CountryIso'));
 			$answer['RegionInfo'] = $a;
 		}
 		else
 		{
 			$answer['Status'] = ERR_NO_DATABASE;
-			$answer['RegionInfo'] = array();
 		}
 		if (isset($_GET['callback']))
 		{

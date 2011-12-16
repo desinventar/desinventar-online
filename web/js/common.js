@@ -38,7 +38,7 @@ function doGetRegionInfo(RegionId)
 				jQuery('#divRegionInfo #divRegionLogo').html('<img src="' + jQuery('#desinventarURL').val() + '/?cmd=cmdDatabaseGetLogo&RegionId=' + RegionId + '" alt="" />');
 				jQuery('#divRegionInfo #txtRegionLabel').text(i.RegionLabel);
 				jQuery('#divRegionInfo #txtRegionPeriod').text(i.PeriodBeginDate + ' - ' + i.PeriodEndDate);
-				jQuery('#divRegionInfo #txtRegionNumDatacards').text(i.NumDatacards);
+				jQuery('#divRegionInfo #txtRegionNumberOfRecords').text(i.NumberOfRecords);
 				jQuery('#divRegionInfo #txtRegionLastUpdate').text(i.RegionLastUpdate);
 
 				jQuery('#divRegionInfo #divInfoGeneral').hide();

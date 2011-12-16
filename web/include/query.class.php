@@ -880,7 +880,11 @@ class Query //extends PDO
 	// Get number of datacards by status: PUBLISHED, DRAFT, ..
 	public function getNumDisasterByStatus($status)
 	{
-		$sql = "SELECT COUNT(DisasterId) AS counter FROM Disaster WHERE RecordStatus='$status'";
+		$sql = 'SELECT COUNT(DisasterId) AS counter FROM Disaster';
+		if ($status != '')
+		{
+			$sql .= ' WHERE RecordStatus="' . $status . '"';
+		}
 		$dat = $this->getresult($sql);
 		return $dat['counter'];
 	}

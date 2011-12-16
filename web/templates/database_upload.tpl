@@ -35,6 +35,7 @@
 
 	<div id="divDatabaseUploadParameters" style="display:none;">
 		<h4>
+			<span class="clsDatabaseUploadType" id="txtDatabaseUploadConfirmStart">{-#msgDatabaseUploadConfirmStart#-}</span>
 			<span class="clsDatabaseUploadType" id="txtDatabaseUploadConfirmReplace">{-#msgDatabaseUploadConfirmReplace#-}</span>
 			<span class="clsDatabaseUploadType" id="txtDatabaseUploadConfirmCopy">{-#msgDatabaseUploadConfirmCopy#-}</span>
 		</h4>
@@ -82,9 +83,9 @@
 		<tr>
 			<td colspan="2" align="center">
 				<div class="center">
-					<input type="hidden" id="txtDatabaseUploadFilename" value="" />
 					<br />
 					<div class="clsDatabaseUploadButtons">
+						<a class="button clsDatabaseUploadType" id="btnDatabaseUploadStart"><span>{-#msgDatabaseUploadButtonStart#-}</span></a>
 						<a class="button clsDatabaseUploadType" id="btnDatabaseUploadCopy"><span>{-#msgDatabaseUploadButtonCopy#-}</span></a>
 						<a class="button clsDatabaseUploadType" id="btnDatabaseUploadReplace"><span>{-#msgDatabaseUploadButtonReplace#-}</span></a>
 						<a class="button" id="btnDatabaseUploadReplaceCancel"><span>{-#msgDatabaseUploadButtonCancel#-}</span></a>

@@ -13,6 +13,11 @@ function onReadyDatabaseUpload()
 	doDatabaseUploadCreate();
 	doAdminDatabaseCreateUploader();
 
+	jQuery('#btnDatabaseUploadStart').click(function() {
+		jQuery('#divDatabaseUploadParameters').hide();
+		jQuery('#divDatabaseUploadControl').show();
+	});
+
 	jQuery('#btnDatabaseUploadReplace').click(function() {
 		jQuery('.clsDatabaseUploadButtons').hide();
 		doDatabaseUploadStatusMsg('msgDatabaseUploadWaitForUpdate');
@@ -72,27 +77,33 @@ function onReadyDatabaseUpload()
 	});
 
 	jQuery('#btnDatabaseUploadReplaceCancel').click(function() {
-		jQuery.post(
-			jQuery('#desinventarURL').val() + '/',
-			{
-				cmd: 'cmdDatabaseReplaceCancel',
-				RegionId: jQuery('#desinventarRegionId').val(),
-				Filename: jQuery('#txtDatabaseUploadFilename').val()
-			},
-			function(data)
-			{
-				doDatabaseUploadReset();
-			},
-			'json'
-		);				
+		if (jQuery('#txtDatabaseUploadFilename').val() != '')
+		{
+			jQuery.post(
+				jQuery('#desinventarURL').val() + '/',
+				{
+					cmd: 'cmdDatabaseReplaceCancel',
+					RegionId: jQuery('#desinventarRegionId').val(),
+					Filename: jQuery('#txtDatabaseUploadFilename').val()
+				},
+				function(data)
+				{
+					doDatabaseUploadReset();
+					Ext.getCmp('wndDatabaseUpload').hide();
+				},
+				'json'
+			);
+		}
+		else
+		{
+			Ext.getCmp('wndDatabaseUpload').hide();
+		}
 	});
 
 } //onReadyDatabaseUpload
 
 function doAdminDatabaseCreateUploader()
 {
-	doDatabaseUploadReset();
-
 	var uploader = new qq.FileUploader({
 		element: document.getElementById('divFileUploaderControl'),
 		action: jQuery('#desinventarURL').val() + '/',
@@ -140,17 +151,7 @@ function doAdminDatabaseCreateUploader()
 					jQuery('#txtDatabaseUploadConfirmCopy').show();
 					jQuery('#btnDatabaseUploadCopy').show();
 				}
-				jQuery('#txtDatabaseUploadRegionId').text(data.Info.RegionId);
-				jQuery('#txtDatabaseUploadRegionLabel').text(data.Info.RegionLabel);
-				jQuery('#txtDatabaseUploadLangIsoCode').text(data.Info.LangIsoCode);
-				jQuery('#txtDatabaseUploadCountryIso').text(data.Info.CountryIso + ' - ' + data.Info.CountryName);
-				jQuery('#txtDatabaseUploadRegionLastUpdate').text(data.Info.RegionLastUpdate);
-				jQuery('#trDatabaseUploadNumberOfRecords').show();
-				jQuery('#txtDatabaseUploadNumberOfRecords').text(data.Info.NumberOfRecords);
-				if (data.Info.NumberOfRecords < 1)
-				{
-					jQuery('#trDatabaseUploadNumberOfRecords').hide();
-				}
+				doDatabaseUploadSetParameters(data.RegionInfo);
 				doDatabaseUploadStatusMsg('');
 				jQuery('#divDatabaseUploadControl').hide();
 				jQuery('#divDatabaseUploadParameters').show();
@@ -178,14 +179,62 @@ function doDatabaseUploadReset()
 {
 	doDatabaseUploadStatusMsg('');
 	jQuery('#txtDatabaseUploadFilename').val('');
+	jQuery('#txtDatabaseUploadRegionId').text('');
+	jQuery('#txtDatabaseUploadRegionLabel').text('');
+	jQuery('#txtDatabaseUploadCountryIso').text('');
+	jQuery('#txtDatabaseUploadRegionLastUpdate').text('');
+	jQuery('#txtDatabaseUploadNumberOfRecords').text('');
+	
 	jQuery('#prgDatabaseUploadProgressBar').hide();
 	jQuery('#prgDatabaseUploadProgressMark').css('width', '0px');
 	jQuery('#btnDatabaseUploadCancel').hide();
-	jQuery('#divFileUploaderControl .qq-upload-button-text').show();
-	jQuery('#divDatabaseUploadControl').show();
 	jQuery('.clsDatabaseUploadButtons').show();
-	jQuery('#divDatabaseUploadParameters').hide();
 	jQuery('#divFileUploaderControl .qq-upload-button-text').show();
+
+	jQuery('#divDatabaseUploadControl').hide();
+	jQuery('#divDatabaseUploadParameters').hide();
+
+	if (jQuery('#desinventarRegionId').val() == '')
+	{
+		jQuery('#divDatabaseUploadControl').show();
+	}
+	else
+	{
+		jQuery.post(
+			jQuery('#desinventarURL').val() + '/',
+			{
+				cmd      : 'cmdDatabaseGetInfo',
+				RegionId : jQuery('#desinventarRegionId').val()				
+			},
+			function(data)
+			{
+				if (parseInt(data.Status) > 0)
+				{
+					doDatabaseUploadSetParameters(data.RegionInfo);
+					jQuery('#divDatabaseUploadParameters').show();
+					jQuery('.clsDatabaseUploadType').hide();
+					jQuery('#txtDatabaseUploadConfirmStart').show();
+					jQuery('#btnDatabaseUploadStart').show();
+					jQuery('#btnDatabaseUploadReplaceCancel').show();
+				}
+			},
+			'json'
+		);
+	}
+}
+
+function doDatabaseUploadSetParameters(RegionInfo)
+{
+	jQuery('#txtDatabaseUploadRegionId').text(RegionInfo.RegionId);
+	jQuery('#txtDatabaseUploadRegionLabel').text(RegionInfo.RegionLabel);
+	jQuery('#txtDatabaseUploadCountryIso').text(RegionInfo.CountryIso + ' - ' + RegionInfo.CountryName);
+	jQuery('#txtDatabaseUploadRegionLastUpdate').text(RegionInfo.RegionLastUpdate);
+	jQuery('#trDatabaseUploadNumberOfRecords').show();
+	jQuery('#txtDatabaseUploadNumberOfRecords').text(RegionInfo.NumberOfRecords);
+	if (parseInt(RegionInfo.NumberOfRecords) < 1)
+	{
+		jQuery('#trDatabaseUploadNumberOfRecords').hide();
+	}
 }
 
 function doDatabaseUploadSelectFile()

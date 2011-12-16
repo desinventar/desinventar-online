@@ -25,7 +25,7 @@
 							{-#trepnum#-}:
 						</td>
 						<td>
-							<span id="txtRegionNumDatacards"></span><br />
+							<span id="txtRegionNumberOfRecords"></span><br />
 						</td>
 					</tr>
 					<tr>

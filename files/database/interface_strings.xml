@@ -3201,6 +3201,12 @@
 			<Text LangIsoCode="por">Banco de dados foi atualizado corretamente, janela do navegador irá recarregar agora com novos dados</Text>
 			<Text LangIsoCode="fre">Base de données a été correctement mis à jour, fenêtre du navigateur va recharger maintenant avec de nouvelles données</Text>
 		</Message>
+		<Message id="msgDatabaseUploadConfirmStart">
+			<Text LangIsoCode="eng">You are about to replace the content of the following database</Text>
+			<Text LangIsoCode="spa">Usted va a reemplazar el contenido de la base de datos</Text>
+			<Text LangIsoCode="por">Você está prestes a substituir o conteúdo do banco de dados</Text>
+			<Text LangIsoCode="fre">Vous êtes sur le point de remplacer le contenu de la base de données</Text>
+		</Message>
 		<Message id="msgDatabaseUploadConfirmReplace">
 			<Text LangIsoCode="eng">Current database will be replaced by the file:</Text>
 			<Text LangIsoCode="spa">La base de datos actual será reemplazada por el archivo:</Text>
@@ -3212,6 +3218,12 @@
 			<Text LangIsoCode="spa">El archivo a copiar es:</Text>
 			<Text LangIsoCode="por">O arquivo a ser copiado é</Text>
 			<Text LangIsoCode="fre">Le fichier à copier est</Text>
+		</Message>
+		<Message id="msgDatabaseUploadButtonStart">
+			<Text LangIsoCode="eng">Continue</Text>
+			<Text LangIsoCode="spa">Continuar</Text>
+			<Text LangIsoCode="por">Continuar</Text>
+			<Text LangIsoCode="fre">Continuer</Text>
 		</Message>
 		<Message id="msgDatabaseUploadButtonCopy">
 			<Text LangIsoCode="eng">Ok</Text>
