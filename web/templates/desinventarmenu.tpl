@@ -8,13 +8,12 @@
 		<span id="mnuUserLogin">{-#mnuUserLogin#-}</span>
 		<span id="mnuUserChangeLogin">{-#mnuUserChangeLogin#-}</span>
 		<span id="mnuUserEditAccount">{-#mnuUserEditAccount#-}</span>
-		<span id="mnuUserLogout">{-#mnuUserLogout#-}</span>
 		<span id="mnuUserAccountManagement">{-#mnuUserAccountManagement#-}</span>
 		<span id="mnuMenuUserLanguage">{-#mnuMenuUserLanguage#-}</span>
 			{-foreach name=LanguageList key=key item=item from=$LanguageList-}
 			<span id="mnuUserLanguage-{-$key-}">{-$item-}</span>
 			{-/foreach-}
-		<span id="mnuUserQuit">{-#mnuUserQuit#-}</span>
+		<span id="mnuUserLogout">{-#mnuUserLogout#-}</span>
 	<span id="mnuMenuDatabase">{-#mnuMenuDatabase#-}</span>
 		<span id="mnuDatabaseRecordView">{-#mnuDatabaseRecordView#-}</span>
 		<span id="mnuDatabaseRecordEdit">{-#mnuDatabaseRecordEdit#-}</span>
