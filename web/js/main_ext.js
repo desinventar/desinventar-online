@@ -155,9 +155,6 @@ function onMenuItem(item) {
 				'json'
 			);
 		break;
-		case 'mnuFileQuit':
-			self.close();
-		break;
 		// query menu
 		case 'menuQueryToggle':
 			w = Ext.getCmp('westm');
@@ -299,10 +296,9 @@ function doMainMenuCreate()
 			{id: 'mnuUserLogin'            , text: jQuery('#mnuUserLogin').text()            , handler: onMenuItem }, 
 			{id: 'mnuUserChangeLogin'      , text: jQuery('#mnuUserChangeLogin').text()      , handler: onMenuItem, hidden: true },
 			{id: 'mnuUserEditAccount'      , text: jQuery('#mnuUserEditAccount').text()      , handler: onMenuItem, hidden: true },
-			{id: 'mnuUserLogout'           , text: jQuery('#mnuUserLogout').text()           , handler: onMenuItem, hidden: true }, 
 			{id: 'mnuUserAccountManagement', text: jQuery('#mnuUserAccountManagement').text(), handler: onMenuItem, hidden: true },
 			{id: 'mnuUserLanguage'         , text: jQuery('#mnuMenuUserLanguage').text()     , menu: mnuLang },
-			{id: 'mnuFileQuit'             , text: jQuery('#mnuUserQuit').text()             , handler: onMenuItem  }
+			{id: 'mnuUserLogout'           , text: jQuery('#mnuUserLogout').text()           , handler: onMenuItem, hidden: true }
 		]
 	});
 	
