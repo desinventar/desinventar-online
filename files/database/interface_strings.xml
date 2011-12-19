@@ -97,6 +97,12 @@
 			<Text LangIsoCode="por">Selecione banco de dados</Text>
 			<Text LangIsoCode="fre">Sélectionnez la base de données</Text>
 		</Message>
+		<Message id="mnuDatabaseChange">
+			<Text LangIsoCode="eng">Change database</Text>
+			<Text LangIsoCode="spa">Cambiar base de datos</Text>
+			<Text LangIsoCode="por">Escolha outro banco de dados</Text>
+			<Text LangIsoCode="fre">Choisir une autre base de données</Text>
+		</Message>
 		<Message id="mnuAdminDatabases">
 			<Text LangIsoCode="eng">Database management</Text>
 			<Text LangIsoCode="spa">Gestión de bases de datos</Text>

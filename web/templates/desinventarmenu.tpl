@@ -23,6 +23,7 @@
 		<span id="mnuDatabaseCreate">{-#mnuDatabaseCreate#-}</span>
 		<span id="mnuDatabaseConfig">{-#mnuDatabaseConfig#-}</span>
 		<span id="mnuDatabaseSelect">{-#mnuDatabaseSelect#-}</span>
+		<span id="mnuDatabaseChange">{-#mnuDatabaseChange#-}</span>
 		<span id="mnuDatacardImport">{-#mnuDatacardImport#-}</span>
 		<span id="mnuDatabaseSetAdminUser">{-#mnuDatabaseSetAdminUser#-}</span>
 		<span id="mnuAdminDatabases">{-#mnuAdminDatabases#-}</span>
