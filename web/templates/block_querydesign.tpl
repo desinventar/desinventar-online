@@ -17,7 +17,7 @@
 			<div id="qgeolst" style="height: 280px;" class="dwin" ext:qtip="{-#thlpquery#-}">
 				{-assign var="maintree" value="true"-}
 				{-* Show Geography List *-}
-				{-include file="main_glist.tpl"-}
+				{-include file="block_glist.tpl"-}
 			</div>
 			
 			<b onMouseOver="showtip('{-$dis.DisasterSiteNotes[2]-}');">{-$dis.DisasterSiteNotes[0]-}</b>
@@ -33,7 +33,7 @@
 			<input type="hidden" name="QueryEvent[OP]" value="AND" />
 			<span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br />
 			<select id="qevelst" name="D_EventId[]" multiple style="width: 250px; height: 200px;" class="line">
-				{-include file="main_eventlist.tpl"-}
+				{-include file="block_eventlist.tpl"-}
 			</select>
 			<br /><br />
 			<b onMouseOver="showtip('{-$eve.EventDuration[2]-}');">{-$eve.EventDuration[0]-}</b><br />
@@ -51,7 +51,7 @@
 			<input type="hidden" name="QueryCause[OP]" value="AND" />
 			<span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br />
 			<select id="qcaulst" name="D_CauseId[]" multiple style="width: 250px; height: 200px;" class="line">
-				{-include file="main_causelist.tpl"-}
+				{-include file="block_causelist.tpl"-}
 			</select>
 			<br />
 			<b onMouseOver="showtip('{-$cau.CauseNotes[2]-}');">{-$cau.CauseNotes[0]-}</b>

@@ -123,6 +123,9 @@ switch ($cmd)
 		$t->assign('ctl_admregmess', true);
 		$t->display('main_region.tpl');
 	break;
+	case 'cmdDatabaseAdminUsers':
+		$t->display('main_region.tpl');
+	break;
 	case 'getversion':
 		echo VERSION;
 	break;
@@ -404,7 +407,7 @@ switch ($cmd)
 		{
 			$t->assign('option', 'cmd=main');
 		}
-		$t->display('main_start.tpl');
+		$t->display('block_start.tpl');
 	break;
 	case 'main':
 		// Direct access returns a list of public regions on this server
@@ -591,21 +594,21 @@ switch ($cmd)
 				case 'glist':
 					$t->assign('reg', $get['GeographyId']);
 					$t->assign('geol', $us->q->loadGeoChilds($get['GeographyId']));
-					$t->display('main_glist.tpl');
+					$t->display('block_glist.tpl');
 				break;
 				case 'geolst':
 					$t->assign('geol', $us->q->loadGeography(0));
-					$t->display('main_glist.tpl');
+					$t->display('block_glist.tpl');
 				break;
 				case 'caulst':
 					$t->assign('caupredl', $us->q->loadCauses('PREDEF', 'active', $lg));
 					$t->assign('cauuserl', $us->q->loadCauses('USER', 'active', $lg));
-					$t->display('main_causelist.tpl');
+					$t->display('block_causelist.tpl');
 				break;
 				case 'evelst':
 					$t->assign('evepredl', $us->q->loadEvents('PREDEF', 'active', $lg));
 					$t->assign('eveuserl', $us->q->loadEvents('USER', 'active', $lg));
-					$t->display('main_eventlist.tpl');
+					$t->display('block_eventlist.tpl');
 				break;
 				case 'test':
 					// DesInventarInfo
