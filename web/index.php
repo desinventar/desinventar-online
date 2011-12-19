@@ -88,6 +88,25 @@ switch ($cmd)
 		$answer['Region'] = $r->getRegionInfoCore();
 		echo json_encode($answer);
 	break;
+	case 'cmdDatabaseUsersGetList':
+		$answer = array();
+		$iReturn = ERR_NO_ERROR;
+		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($RegionId == '')
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($iReturn > 0)
+		{
+			$UserRoleList = $us->getRegionRoleList();
+			$answer['UserRoleList'] = $UserRoleList;
+		}
+		$answer['Status'] = $iReturn;
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
+	break;
 	case 'cmdGetLocaleList':
 		$answer = array();
 		$answer['Status'] = ERR_UNKNOWN_ERROR;
