@@ -1,45 +1,32 @@
+{-config_load file="$lg.conf" section="grpDatabaseUsers"-}
 <fieldset style="padding:5px 5px 5px 5px;">
 	<legend>
-		<b onMouseOver="showtip('{-$dic.DBPermissions[2]-}');">{-$dic.DBPermissions[0]-}</b>
+		<b title="{-$dic.DBPermissions[2]-}">{-#msgDatabaseUsers_Title#-}</b>
 	</legend>
-	<div class="dwin" style="width:280px; height:120px;">
+	<div class="dwin clsDatabaseUsersList">
 		<table width="100%" class="grid">
 			<thead>
 				<tr>
-					<td class="header" onMouseOver="showtip('{-$dic.DBUserId[2]-}');">
-						<b>{-$dic.DBUserId[0]-}</b>
+					<td class="header" title="{-$dic.DBUserId[2]-}">
+						<b>{-#msgDatabaseUsers_UserId#-}</b>
 					</td>
-					<td class="header" onMouseOver="showtip('{-$dic.DBRole[2]-}');">
-						<b>{-$dic.DBRole[0]-}</b>
+					<td class="header" title="{-$dic.DBRole[2]-}">
+						<b>{-#msgDatabaseUsers_UserRole#-}</b>
 					</td>
 				</tr>
 			</thead>
-			<tbody id="lst_role">
-				{-foreach name=rol key=key item=item from=$rol-}
-					{-if $usern != $key-}
-						<tr class="{-if ($smarty.foreach.rol.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}"
-							onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
-							onClick="setRolLog('{-$key-}','{-$item-}', 'role'); $('RoleCmd').value='cmdDBInfoRoleUpdate';">
-							<td>
-								{-$key-}
-							</td>
-							<td>
-								{-if $item == "NONE"-}			{-$dic.DBRoleNone[0]-}
-								{-elseif $item == "USER"-}		{-$dic.DBRoleUser[0]-}
-								{-elseif $item == "OBSERVER"-}	{-$dic.DBRoleObserver[0]-}
-								{-elseif $item == "SUPERVISOR"-}	{-$dic.DBRoleSupervisor[0]-}
-								{-/if-}
-							</td>
-						</tr>
-					{-/if-}
-				{-/foreach-}
+			<tbody id="tbodyDatabaseUsersList">
+				<tr style="display:none;">
+					<td class="UserId">
+					</td>
+					<td class="UserRole">
+					</td>
+				</tr>
 			</tbody>
 		</table>
 	</div>
 	<br />
-	<a class="button" id="add" onclick="setRolLog('', '', 'role'); $('RoleCmd').value='cmdDBInfoRoleInsert';"><span>{-#baddoption#-}</span></a>
-	<span id="rolestatusmsg" class="dlgmsg"></span>
-	<br />
+	<a class="button" id="btnDatabaseUsersAdd"><span>{-#msgDatabaseUsers_UserAdd#-}</span></a>
 	<div id="roleaddsect" style="display:none">
 		<form name="rolefrm" id="rolefrm" method="GET" 
 			action="javascript: var s=$('rolefrm').serialize(); sendData('{-$reg-}', '{-$desinventarURL-}/info.php', s, '');"

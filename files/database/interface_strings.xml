@@ -2890,6 +2890,32 @@
 			<Text LangIsoCode="fre">Actif</Text>
 		</Message>
 	</Group>
+	<Group name="grpDatabaseUsers">
+		<Message id="msgDatabaseUsers_Title">
+			<Text LangIsoCode="eng">Database permissions</Text>
+			<Text LangIsoCode="spa">Permisos base de datos</Text>
+			<Text LangIsoCode="por">Permissões de banco de dados</Text>
+			<Text LangIsoCode="fre">Autorisations de base</Text>
+		</Message>
+		<Message id="msgDatabaseUsers_UserId">
+			<Text LangIsoCode="eng">User</Text>
+			<Text LangIsoCode="spa">Usuario</Text>
+			<Text LangIsoCode="por">Usuário</Text>
+			<Text LangIsoCode="fre">Utilisateur</Text>
+		</Message>
+		<Message id="msgDatabaseUsers_UserRole">
+			<Text LangIsoCode="eng">Role</Text>
+			<Text LangIsoCode="spa">Rol</Text>
+			<Text LangIsoCode="por">Função</Text>
+			<Text LangIsoCode="fre">Rôle</Text>
+		</Message>
+		<Message id="msgDatabaseUsers_UserAdd">
+			<Text LangIsoCode="eng">Add</Text>
+			<Text LangIsoCode="spa">Adicionar</Text>
+			<Text LangIsoCode="por">Adicionar</Text>
+			<Text LangIsoCode="fre">Ajouter</Text>
+		</Message>
+	</Group>
 	<Group name="grpDatabaseEdit">
 		<Message id="msgDatabaseEditCountryIso">
 			<Text LangIsoCode="eng">Country</Text>
