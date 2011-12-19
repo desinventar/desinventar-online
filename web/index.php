@@ -124,7 +124,7 @@ switch ($cmd)
 		$t->display('main_region.tpl');
 	break;
 	case 'cmdDatabaseAdminUsers':
-		$t->display('main_region.tpl');
+		$t->display('main_database_users.tpl');
 	break;
 	case 'getversion':
 		echo VERSION;

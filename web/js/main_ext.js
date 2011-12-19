@@ -234,7 +234,7 @@ function onMenuItem(item) {
 		break;
 		// databases menu
 		case 'mnuDatabaseSelect':
-		case 'mnuDatabaseChange':
+		case 'mnuDatabaseSelectAnother':
 			// Show database list
 			hideQueryDesign();
 			jQuery('.contentBlock').hide();
@@ -334,7 +334,7 @@ function doMainMenuCreate()
 			{id:'mnuDatabaseConfig'       , text: jQuery('#mnuDatabaseConfig').text()       , handler: onMenuItem, hidden: true },
 			{id:'mnuDatabaseSetAdminUser' , text: jQuery('#mnuDatabaseSetAdminUser').text() , handler: onMenuItem, hidden: true },
 			{id:'mnuDatabaseSelect'       , text: jQuery('#mnuDatabaseSelect').text()       , handler: onMenuItem, hidden: true },
-			{id:'mnuDatabaseChange'       , text: jQuery('#mnuDatabaseChange').text()       , handler: onMenuItem, hidden: true }
+			{id:'mnuDatabaseSelectAnother', text: jQuery('#mnuDatabaseSelectAnother').text(), handler: onMenuItem, hidden: true }
 		]
 	});
 
@@ -391,7 +391,7 @@ function doMainMenuCreate()
 	// Show some menu items when a Region is Selected
 	if (jQuery('#desinventarRegionId').val() != '')
 	{
-		Ext.getCmp('mnuDatabaseChange').show();
+		Ext.getCmp('mnuDatabaseSelectAnother').show();
 		Ext.getCmp('mnuRegionLabel').setText('[' + jQuery('#desinventarRegionLabel').val() + ']');
 		if (UserRoleValue > 0)
 		{
