@@ -419,6 +419,16 @@ class UserSession {
 			$this->q->core->rollBack();
 			showErrorMsg('getRegionRoleList Error : ' . $e->getMessage());
 		}
+		if ($prmRoleId != 'ADMINREGION')
+		{
+			foreach($myData as $UserId => $UserRole)
+			{
+				if ($UserRole == 'ADMINREGION')
+				{
+					unset($myData[$UserId]);
+				}
+			}
+		}
 		return $myData;
 	} // getRegionRoleList()
 
