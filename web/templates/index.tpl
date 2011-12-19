@@ -83,17 +83,17 @@
 
 		<!-- Query Design -->
 		<div id="west">
-			{-include file="main_querydesign.tpl"-}
+			{-include file="block_querydesign.tpl"-}
 		</div>
 		
 		<!-- Central Content Area -->
 		<div id="container">
-			{-include file="main_content.tpl"-}
+			{-include file="block_content.tpl"-}
 		</div>
 
 		<!-- Help Section -->
 		<div id="south">
-			{-include file="main_help.tpl"-}
+			{-include file="block_help.tpl"-}
 		</div>
 	</div>
 	

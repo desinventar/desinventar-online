@@ -4,12 +4,12 @@
 </div>
 
 <div class="contentBlock" id="divDatabaseConfiguration" style="display:none;">
-	{-include file="main_dbconfig.tpl"-}
+	{-include file="block_dbconfig.tpl"-}
 </div>
 
 <!-- divQueryResults - Results of queries -->
 <div class="contentBlock" id="divQueryResults" style="display:none;">
-	{-include file="main_queryresults.tpl"-}
+	{-include file="block_queryresults.tpl"-}
 </div> <!-- end div id=divQueryResults -->
 
 <!-- "divRegionList" -->
