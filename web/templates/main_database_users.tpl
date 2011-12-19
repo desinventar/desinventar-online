@@ -28,7 +28,7 @@
 		</script>
 	</head>
 	<body>
-		{-include file="block_database_users.tpl"-}
+		{-include file="database_users.tpl"-}
 		{-include file="desinventarinfo.tpl"-}
 	</body>
 </html>
