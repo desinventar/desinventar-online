@@ -24,7 +24,6 @@ function doDatabaseUsersPopulateLists()
 					jQuery('.UserId', clonedRow).html(index);
 					jQuery('.UserRole', clonedRow).html(value);
 					jQuery('#tbodyDatabaseUsersList').append(clonedRow);
-					console.log(index);
 				});
 			}
 		},
