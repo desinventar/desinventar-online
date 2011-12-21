@@ -101,7 +101,9 @@ switch ($cmd)
 		}
 		if ($iReturn > 0)
 		{
+			$UserList = $us->getUserList();
 			$UserRoleList = $us->getRegionRoleList();
+			$answer['UserList'] = $UserList;
 			$answer['UserRoleList'] = $UserRoleList;
 		}
 		$answer['Status'] = $iReturn;
