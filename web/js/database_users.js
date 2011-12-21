@@ -19,6 +19,10 @@ function doDatabaseUsersPopulateLists()
 		{
 			if (parseInt(data.Status) > 0)
 			{
+				jQuery.each(data.UserList, function(key, value) {
+					jQuery('#fldDatabaseUsers_UserId').append(jQuery('<option>', { value : key }).text(value));
+				});
+				
 				jQuery.each(data.UserRoleList, function(index, value) {
 					var clonedRow = jQuery('#tbodyDatabaseUsersList tr:last').clone().show();
 					jQuery('.UserId', clonedRow).html(index);
