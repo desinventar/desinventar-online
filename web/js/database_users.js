@@ -5,6 +5,27 @@
 
 function onReadyDatabaseUsers()
 {
+	jQuery('#btnDatabaseUsers_Add').click(function() {
+		doDatabaseUsersReset();
+		jQuery('#divDatabaseUsers_Edit').show();
+	});
+
+	jQuery('#btnDatabaseUsers_Cancel').click(function() {
+		doDatabaseUsersReset();
+		jQuery('#divDatabaseUsers_Edit').hide();
+	});
+
+	jQuery('#tbodyDatabaseUsers_List').delegate('tr', 'click', function(e) {
+		jQuery('#fldDatabaseUsers_UserId').val(jQuery('.UserId', this).text());
+		jQuery('#fldDatabaseUsers_UserRole').val(jQuery('.UserRole', this).text());
+		jQuery('#divDatabaseUsers_Edit').show();
+	});
+}
+
+function doDatabaseUsersReset()
+{
+	jQuery('#fldDatabaseUsers_UserId').val('');
+	jQuery('#fldDatabaseusers_UserRole').val('');
 }
 
 function doDatabaseUsersPopulateLists()
@@ -24,11 +45,13 @@ function doDatabaseUsersPopulateLists()
 				});
 				
 				jQuery.each(data.UserRoleList, function(index, value) {
-					var clonedRow = jQuery('#tbodyDatabaseUsersList tr:last').clone().show();
+					var clonedRow = jQuery('#tbodyDatabaseUsers_List tr:last').clone().show();
 					jQuery('.UserId', clonedRow).html(index);
+					jQuery('.UserName', clonedRow).html(index);
 					jQuery('.UserRole', clonedRow).html(value);
-					jQuery('#tbodyDatabaseUsersList').append(clonedRow);
+					jQuery('#tbodyDatabaseUsers_List').append(clonedRow);
 				});
+				jQuery('#tblDatabaseUsers_List .UserId').hide();
 			}
 		},
 		'json'
