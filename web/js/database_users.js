@@ -44,12 +44,25 @@ function onReadyDatabaseUsers()
 		jQuery('#fldDatabaseUsers_UserRole').val(jQuery('.UserRole', this).text());
 		jQuery('#divDatabaseUsers_Edit').show();
 	});
+
+	jQuery('#fldDatabaseUsers_UserId').change(function() {
+		var UserId = jQuery(this).val();
+		jQuery('#fldDatabaseUsers_UserRole').val('');
+		jQuery('#tbodyDatabaseUsers_List tr').each(function(index, Element) {
+			if (jQuery('.UserId', this).text() == UserId)
+			{
+				jQuery('#fldDatabaseUsers_UserRole').val(jQuery('.UserRole', this).text());
+			}
+		});
+	});
 }
 
 function doDatabaseUsersReset()
 {
 	jQuery('#fldDatabaseUsers_UserId').val('');
 	jQuery('#fldDatabaseusers_UserRole').val('');
+	jQuery('#tblDatabaseUsers_List .UserId').hide();
+	jQuery('#tblDatabaseUsers_List .UserRole').hide();
 }
 
 function doDatabaseUsersPopulateUserRoleList(UserRoleList)
@@ -68,6 +81,7 @@ function doDatabaseUsersPopulateUserRoleList(UserRoleList)
 
 function doDatabaseUsersPopulateLists()
 {
+	doDatabaseUsersReset();
 	jQuery.post(
 		jQuery('#desinventarURL').val() + '/',
 		{
