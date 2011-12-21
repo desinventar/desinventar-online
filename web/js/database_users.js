@@ -10,6 +10,30 @@ function onReadyDatabaseUsers()
 		jQuery('#divDatabaseUsers_Edit').show();
 	});
 
+	jQuery('#btnDatabaseUsers_Save').click(function() {
+		//Validation
+		if (jQuery('#fldDatabaseUsers_UserId').val() == '')
+		{
+			// Error Message
+		}
+		jQuery.post(
+			jQuery('#desinventarURL').val() + '/',
+			{
+				cmd      : 'cmdDatabaseSetUserRole',
+				RegionId : jQuery('#desinventarRegionId').val()
+			},
+			function(data)
+			{
+				if (parseInt(data.Status) > 0)
+				{
+					doDatabaseUsersPopulateUserRoleList(data.UserRoleList);
+					jQuery('#divDatabaseUsers_Edit').hide();
+				}
+			},
+			'json'
+		);
+	});
+
 	jQuery('#btnDatabaseUsers_Cancel').click(function() {
 		doDatabaseUsersReset();
 		jQuery('#divDatabaseUsers_Edit').hide();
@@ -28,6 +52,20 @@ function doDatabaseUsersReset()
 	jQuery('#fldDatabaseusers_UserRole').val('');
 }
 
+function doDatabaseUsersPopulateUserRoleList(UserRoleList)
+{
+	jQuery.each(UserRoleList, function(index, value) {
+		var clonedRow = jQuery('#tbodyDatabaseUsers_List tr:last').clone().show();
+		jQuery('.UserId', clonedRow).html(index);
+		jQuery('.UserName', clonedRow).html(index);
+		jQuery('.UserRole', clonedRow).html(value);
+		jQuery('.UserRoleLabel', clonedRow).html(jQuery('#fldDatabaseUsers_UserRole option[value="' + value + '"]').text());
+		jQuery('#tbodyDatabaseUsers_List').append(clonedRow);
+	});
+	jQuery('#tblDatabaseUsers_List .UserId').hide();
+	jQuery('#tblDatabaseUsers_List .UserRole').hide();
+}
+
 function doDatabaseUsersPopulateLists()
 {
 	jQuery.post(
@@ -43,15 +81,7 @@ function doDatabaseUsersPopulateLists()
 				jQuery.each(data.UserList, function(key, value) {
 					jQuery('#fldDatabaseUsers_UserId').append(jQuery('<option>', { value : key }).text(value));
 				});
-				
-				jQuery.each(data.UserRoleList, function(index, value) {
-					var clonedRow = jQuery('#tbodyDatabaseUsers_List tr:last').clone().show();
-					jQuery('.UserId', clonedRow).html(index);
-					jQuery('.UserName', clonedRow).html(index);
-					jQuery('.UserRole', clonedRow).html(value);
-					jQuery('#tbodyDatabaseUsers_List').append(clonedRow);
-				});
-				jQuery('#tblDatabaseUsers_List .UserId').hide();
+				doDatabaseUsersPopulateUserRoleList(data.UserRoleList);				
 			}
 		},
 		'json'

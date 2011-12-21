@@ -16,6 +16,9 @@
 					<td class="header UserRole" title="{-$dic.DBRole[2]-}">
 						<b>{-#msgDatabaseUsers_UserRole#-}</b>
 					</td>
+					<td class="header UserRoleLabel" title="{-$dic.DBRole[2]-}">
+						<b>{-#msgDatabaseUsers_UserRole#-}</b>
+					</td>
 				</tr>
 			</thead>
 			<tbody id="tbodyDatabaseUsers_List">
@@ -25,6 +28,8 @@
 					<td class="UserName">
 					</td>
 					<td class="UserRole">
+					</td>
+					<td class="UserRoleLabel">
 					</td>
 				</tr>
 			</tbody>
