@@ -3,21 +3,26 @@
 	<legend>
 		<b title="{-$dic.DBPermissions[2]-}">{-#msgDatabaseUsers_Title#-}</b>
 	</legend>
-	<div class="dwin clsDatabaseUsersList">
-		<table width="100%" class="grid">
+	<div class="dwin clsDatabaseUsers_List">
+		<table width="100%" class="grid" id="tblDatabaseUsers_List">
 			<thead>
 				<tr>
-					<td class="header" title="{-$dic.DBUserId[2]-}">
+					<td class="header UserId" title="{-$dic.DBUserId[2]-}">
 						<b>{-#msgDatabaseUsers_UserId#-}</b>
 					</td>
-					<td class="header" title="{-$dic.DBRole[2]-}">
+					<td class="header UserName" title="{-$dic.DBUserId[2]-}">
+						<b>{-#msgDatabaseUsers_UserId#-}</b>
+					</td>
+					<td class="header UserRole" title="{-$dic.DBRole[2]-}">
 						<b>{-#msgDatabaseUsers_UserRole#-}</b>
 					</td>
 				</tr>
 			</thead>
-			<tbody id="tbodyDatabaseUsersList">
+			<tbody id="tbodyDatabaseUsers_List">
 				<tr style="display:none;">
 					<td class="UserId">
+					</td>
+					<td class="UserName">
 					</td>
 					<td class="UserRole">
 					</td>
@@ -26,10 +31,10 @@
 		</table>
 	</div>
 	<br />
-	<a class="button" id="btnDatabaseUsersAdd"><span>{-#msgDatabaseUsers_Add#-}</span></a>
+	<a class="button" id="btnDatabaseUsers_Add"><span>{-#msgDatabaseUsers_Add#-}</span></a>
 	<br />
 	
-	<div id="divDatabaseUsersEdit" style="display:block;max-width:400px;">
+	<div id="divDatabaseUsers_Edit" style="display:none;max-width:400px;">
 		<br />
 		{-#msgDatabaseUsers_UserId#-}<br />
 		<select id="fldDatabaseUsers_UserId" class="line fixw">
@@ -47,8 +52,8 @@
 		<br />
 		<br />
 		<div class="fixw center">
-			<a class="button"><span>{-#msgDatabaseUsers_Save#-}</span></a>
-			<a class="button"><span>{-#msgDatabaseUsers_Cancel#-}</span></a>
+			<a class="button" id="btnDatabaseUsers_Save"><span>{-#msgDatabaseUsers_Save#-}</span></a>
+			<a class="button" id="btnDatabaseUsers_Cancel"><span>{-#msgDatabaseUsers_Cancel#-}</span></a>
 		</div>
 	</div>
 </fieldset>
