@@ -6,6 +6,7 @@
 			<li><a class="classDBConfig_tabs" data="{-$desinventarURL-}/events.php"       cmd="cmdDBInfoEvent"     href="#DBConfig_tabs-4">{-#mevents#-}</a></li>
 			<li><a class="classDBConfig_tabs" data="{-$desinventarURL-}/causes.php"       cmd="cmdDBInfoCause"     href="#DBConfig_tabs-5">{-#mcauses#-}</a></li>
 			<li><a class="classDBConfig_tabs" data="{-$desinventarURL-}/extraeffects.php" cmd="cmdDBInfoEEField"   href="#DBConfig_tabs-6">{-#meeffects#-}</a></li>
+			<li><a class="classDBConfig_tabs" href="#DBConfig_DatabaseUsers" cmd="" >{-#msgDBConfig_RolesAndDiffusion#-}</a></li>
 		</ul>
 		<div id="DBConfig_tabs-1">
 		</div>
@@ -18,5 +19,8 @@
 		<div id="DBConfig_tabs-5">
 		</div>
 		<div id="DBConfig_tabs-6">
+		</div>
+		<div id="DBConfig_DatabaseUsers">
+			{-include file="database_users.tpl"-}
 		</div>
 	</div>

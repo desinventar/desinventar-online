@@ -388,7 +388,7 @@ class UserSession {
 			$prmRegionId = $this->RegionId;
 		}
 		$myData = array();
-		$sQuery = 'SELECT RegionAuth.*,Region.RegionLabel,User.UserFullName FROM RegionAuth,Region,User WHERE'  .
+		$sQuery = 'SELECT RegionAuth.*,Region.RegionLabel,User.UserFullName AS UserFullName FROM RegionAuth,Region,User WHERE'  .
 			' (RegionAuth.RegionId = Region.RegionId)' .
 			' AND (RegionAuth.UserId = User.UserId)' .
 			' AND (Region.RegionId="' . $prmRegionId . '")' .
@@ -414,7 +414,7 @@ class UserSession {
 				$sValue = array(
 					'UserId'   => $row['UserId'],
 					'UserRole' => $row['AuthAuxValue'],
-					'UserName' => $row['User.UserFullName']
+					'UserName' => $row['UserFullName']
 				);
 				$myData[$sKey] = $sValue;
 			} // while

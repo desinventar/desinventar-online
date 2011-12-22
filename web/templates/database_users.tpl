@@ -1,10 +1,7 @@
 {-config_load file="$lg.conf" section="grpDatabaseUsers"-}
-<fieldset style="padding:5px 5px 5px 5px;" class="clsDatabaseUsers_Options">
-	<legend>
-		<b>{-#msgDatabaseUsers_Title#-}</b>
-	</legend>
-
-	<b>{-#msgDatabaseUsers_TitleOptions#-}</b><br />
+<div class="clsDatabaseUsers">
+	<b>{-#msgDatabaseUsers_TitleOptions#-}</b>
+	<br />
 	<div class="line" style="padding:5px;">
 		<table>
 			<tr>
@@ -38,7 +35,8 @@
 		</div>
 	</div>
 	<br />
-	<b>{-#msgDatabaseUsers_TitleRoles#-}</b><br />
+	<b>{-#msgDatabaseUsers_TitleRoles#-}</b>
+	<br />
 	<div class="line">
 		<table width="100%" class="grid dwin" id="tblDatabaseUsers_List">
 			<thead>
@@ -102,4 +100,4 @@
 		<span class="clsDatabaseUsersStatus" id="txtDatabaseUsers_RoleListStatusOk">{-#msgDatabaseUsers_RoleListStatusOk#-}</span>
 		<span class="clsDatabaseUsersStatus" id="txtDatabaseUsers_RoleListStatusError">{-#msgDatabaseUsers_RoleListStatusError#-}</span>
 	</div>
-</fieldset>
+</div>
