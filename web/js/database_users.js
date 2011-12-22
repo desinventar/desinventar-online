@@ -19,8 +19,10 @@ function onReadyDatabaseUsers()
 		jQuery.post(
 			jQuery('#desinventarURL').val() + '/',
 			{
-				cmd      : 'cmdDatabaseSetUserRole',
-				RegionId : jQuery('#desinventarRegionId').val()
+				cmd      : 'cmdDatabaseUsersSetRole',
+				RegionId : jQuery('#desinventarRegionId').val(),
+				UserId   : jQuery('#fldDatabaseUsers_UserId').val(),
+				UserRole : jQuery('#fldDatabaseUsers_UserRole').val()
 			},
 			function(data)
 			{
@@ -67,6 +69,7 @@ function doDatabaseUsersReset()
 
 function doDatabaseUsersPopulateUserRoleList(UserRoleList)
 {
+	jQuery('#tbodyDatabaseUsers_List').find('tr:gt(0)').remove();
 	jQuery.each(UserRoleList, function(index, value) {
 		var clonedRow = jQuery('#tbodyDatabaseUsers_List tr:last').clone().show();
 		jQuery('.UserId', clonedRow).html(index);

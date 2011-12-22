@@ -621,8 +621,11 @@ class UserSession {
 
 		if ($iReturn > 0)
 		{
-			// Insert ROLE Permission First		
-			$this->setPerm($prmUserId, $prmRegionId, 'ROLE', 0, $prmRole);
+			// Insert ROLE Permission First
+			if ($prmRole <> 'NONE')
+			{
+				$this->setPerm($prmUserId, $prmRegionId, 'ROLE', 0, $prmRole);
+			}
 			switch($prmRole)
 			{
 				case 'ADMINREGION':

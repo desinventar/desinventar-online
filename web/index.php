@@ -109,6 +109,32 @@ switch ($cmd)
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
+	case 'cmdDatabaseUsersSetRole':
+		$answer = array();
+		$iReturn = ERR_NO_ERROR;
+		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($RegionId == '')
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($iReturn > 0)
+		{
+			$r = new DIRegion($us, $RegionId);
+			$UserId = getParameter('UserId','');
+			$UserRole = getParameter('UserRole', '');
+			$iReturn = $us->setUserRole($UserId, $us->RegionId, $UserRole);
+			if ($iReturn > 0)
+			{
+				$UserRoleList = $us->getRegionRoleList();
+				$answer['UserRoleList'] = $UserRoleList;
+			}
+		}		
+		$answer['Status'] = $iReturn;
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
+	break;
 	case 'cmdGetLocaleList':
 		$answer = array();
 		$answer['Status'] = ERR_UNKNOWN_ERROR;
