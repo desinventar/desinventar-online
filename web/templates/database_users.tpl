@@ -1,22 +1,53 @@
 {-config_load file="$lg.conf" section="grpDatabaseUsers"-}
-<fieldset style="padding:5px 5px 5px 5px;">
+<fieldset style="padding:5px 5px 5px 5px;" class="clsDatabaseUsers_Options">
 	<legend>
-		<b title="{-$dic.DBPermissions[2]-}">{-#msgDatabaseUsers_Title#-}</b>
+		<b>{-#msgDatabaseUsers_Title#-}</b>
 	</legend>
-	<div class="dwin clsDatabaseUsers_List">
-		<table width="100%" class="grid" id="tblDatabaseUsers_List">
+
+	<b>{-#msgDatabaseUsers_TitleOptions#-}</b><br />
+	<div class="line" style="padding:5px;">
+		<table>
+			<tr>
+				<td>
+					<span title="Region is Active">
+						<input type="checkbox" id="fldDatabaseUsers_RegionActive" />
+						<span id="txtDatabaseUsers_RegionActive">&nbsp;&nbsp;{-#msgDatabaseUsers_RegionActive#-}</span>
+						</span>
+						<br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span title="Region is Public">
+						<input type="checkbox" id="fldDatabaseUsers_RegionPublic" />
+						<span id="txtDatabaseUsers_RegionPublic">&nbsp;&nbsp;{-#msgDatabaseUsers_RegionPublic#-}</span>
+					</span>
+					<br />
+				</td>
+			</tr>
+		</table>
+		<div class="fixw center">
+			<a input type="hidden" id="fldDatabaseUsers_RegionStatus" value="0" />
+			<a class="button" id="btnDatabaseUsers_OptionsSave"><span>{-#msgDatabaseUsers_Save#-}</span></a>
+			<a class="button" id="btnDatabaseUsers_OptionsCancel"><span>{-#msgDatabaseUsers_Cancel#-}</span></a>
+		</div>
+	</div>
+	<br />
+	<b>{-#msgDatabaseUsers_TitleRoles#-}</b><br />
+	<div class="line">
+		<table width="100%" class="grid dwin" id="tblDatabaseUsers_List">
 			<thead>
 				<tr>
-					<td class="header UserId" title="{-$dic.DBUserId[2]-}">
+					<td class="header UserId">
 						<b>{-#msgDatabaseUsers_UserId#-}</b>
 					</td>
-					<td class="header UserName" title="{-$dic.DBUserId[2]-}">
+					<td class="header UserName">
 						<b>{-#msgDatabaseUsers_UserId#-}</b>
 					</td>
-					<td class="header UserRole" title="{-$dic.DBRole[2]-}">
+					<td class="header UserRole">
 						<b>{-#msgDatabaseUsers_UserRole#-}</b>
 					</td>
-					<td class="header UserRoleLabel" title="{-$dic.DBRole[2]-}">
+					<td class="header UserRoleLabel">
 						<b>{-#msgDatabaseUsers_UserRole#-}</b>
 					</td>
 				</tr>
@@ -38,8 +69,8 @@
 	<br />
 	<a class="button" id="btnDatabaseUsers_Add"><span>{-#msgDatabaseUsers_Add#-}</span></a>
 	<br />
-	
-	<div id="divDatabaseUsers_Edit" style="display:none;max-width:400px;">
+	<br />
+	<div id="divDatabaseUsers_Edit" style="display:none;" class="line">
 		<br />
 		{-#msgDatabaseUsers_UserId#-}<br />
 		<select id="fldDatabaseUsers_UserId" class="line fixw">
@@ -48,12 +79,11 @@
 		<br />
 		{-#msgDatabaseUsers_UserRole#-}<br />
 		<select id="fldDatabaseUsers_UserRole" class="line fixw">
-			<option value="NONE">None</option>
-			<option value="USER">User</option>
-			<option value="OBSERVER">Observer</option>
-			<option value="FEEDER">Feeder</option>
-			<option value="SUPERVISOR">Supervisor</option>
-			<option value="ADMINREGION">Administrador Región</option>
+			<option value="NONE">{-#msgDatabaseUsers_RoleNone#-}</option>
+			<option value="OBSERVER">{-#msgDatabaseUsers_RoleObserver#-}</option>
+			<option value="USER">{-#msgDatabaseUsers_RoleFeeder#-}</option>
+			<option value="SUPERVISOR">{-#msgDatabaseUsers_RoleSupervisor#-}</option>
+			<option value="ADMINREGION">{-#msgDatabaseUsers_RoleAdminRegion#-}</option>
 		</select>
 		<br />
 		<br />
@@ -63,5 +93,3 @@
 		</div>
 	</div>
 </fieldset>
-<br />
-<br />

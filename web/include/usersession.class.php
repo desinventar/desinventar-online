@@ -436,7 +436,6 @@ class UserSession {
 			}
 		}
 		*/
-		fb($myData);
 		return $myData;
 	} // getRegionRoleList()
 
