@@ -61,11 +61,13 @@ class DIRegionRecord extends DIRegion {
 			}
 		}
 		$iReturn = ERR_NO_ERROR;
-		if ($prmRegionId != '') {
+		if ($prmRegionId != '')
+		{
 			$this->set('RegionId', $prmRegionId);
 			$iReturn = $this->session->q->setDBConnection($prmRegionId);
 		}
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			$iReturn = $this->load();
 			if ($XMLFile != '') {
 				// Load Info from specified XML File

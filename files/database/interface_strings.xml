@@ -2892,10 +2892,34 @@
 	</Group>
 	<Group name="grpDatabaseUsers">
 		<Message id="msgDatabaseUsers_Title">
+			<Text LangIsoCode="eng">Roles and diffusion</Text>
+			<Text LangIsoCode="spa">Roles y difusión</Text>
+			<Text LangIsoCode="por">Roles e difusão</Text>
+			<Text LangIsoCode="fre">Rôles et diffusion</Text>
+		</Message>
+		<Message id="msgDatabaseUsers_TitleOptions">
+			<Text LangIsoCode="eng">Database options</Text>
+			<Text LangIsoCode="spa">Opciones base de datos</Text>
+			<Text LangIsoCode="por">Opções de banco de dados</Text>
+			<Text LangIsoCode="fre">Options base de donneés</Text>
+		</Message>
+		<Message id="msgDatabaseUsers_TitleRoles">
 			<Text LangIsoCode="eng">Database permissions</Text>
 			<Text LangIsoCode="spa">Permisos base de datos</Text>
 			<Text LangIsoCode="por">Permissões de banco de dados</Text>
 			<Text LangIsoCode="fre">Autorisations de base</Text>
+		</Message>
+		<Message id="msgDatabaseUsers_RegionActive">
+			<Text LangIsoCode="eng">Active</Text>
+			<Text LangIsoCode="spa">Activa</Text>
+			<Text LangIsoCode="por">Ativo</Text>
+			<Text LangIsoCode="fre">Actif</Text>
+		</Message>
+		<Message id="msgDatabaseUsers_RegionPublic">
+			<Text LangIsoCode="eng">Public</Text>
+			<Text LangIsoCode="spa">Pública</Text>
+			<Text LangIsoCode="por">Pública</Text>
+			<Text LangIsoCode="fre">Publique</Text>
 		</Message>
 		<Message id="msgDatabaseUsers_UserId">
 			<Text LangIsoCode="eng">User</Text>
@@ -2908,6 +2932,36 @@
 			<Text LangIsoCode="spa">Rol</Text>
 			<Text LangIsoCode="por">Função</Text>
 			<Text LangIsoCode="fre">Rôle</Text>
+		</Message>
+		<Message id="msgDatabaseUsers_RoleNone">
+			<Text LangIsoCode="eng">None</Text>
+			<Text LangIsoCode="spa">Ninguna</Text>
+			<Text LangIsoCode="por">Nenhuma</Text>
+			<Text LangIsoCode="fre">Néant</Text>
+		</Message>
+		<Message id="msgDatabaseUsers_RoleObserver">
+			<Text LangIsoCode="eng">Observer</Text>
+			<Text LangIsoCode="spa">Observador</Text>
+			<Text LangIsoCode="por">Observador</Text>
+			<Text LangIsoCode="fre">Observateur</Text>
+		</Message>
+		<Message id="msgDatabaseUsers_RoleFeeder">
+			<Text LangIsoCode="eng">Feeder</Text>
+			<Text LangIsoCode="spa">Alimentador</Text>
+			<Text LangIsoCode="por">Alimentador</Text>
+			<Text LangIsoCode="fre">Alimentation</Text>
+		</Message>
+		<Message id="msgDatabaseUsers_RoleSupervisor">
+			<Text LangIsoCode="eng">Supervisor</Text>
+			<Text LangIsoCode="spa">Supervisor</Text>
+			<Text LangIsoCode="por">Supervisor</Text>
+			<Text LangIsoCode="fre">Superviseur</Text>
+		</Message>
+		<Message id="msgDatabaseUsers_RoleAdminRegion">
+			<Text LangIsoCode="eng">Manager</Text>
+			<Text LangIsoCode="spa">Administrador</Text>
+			<Text LangIsoCode="por">Administrador</Text>
+			<Text LangIsoCode="fre">Administrateur</Text>
 		</Message>
 		<Message id="msgDatabaseUsers_Add">
 			<Text LangIsoCode="eng">Add</Text>

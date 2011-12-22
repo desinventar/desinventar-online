@@ -101,10 +101,13 @@ switch ($cmd)
 		}
 		if ($iReturn > 0)
 		{
-			$UserList = $us->getUserList();
+			$r = new DIRegion($us, $RegionId);
+			$info = array('RegionStatus' => $r->get('RegionStatus'));
+			$UserList     = $us->getUserList();
 			$UserRoleList = $us->getRegionRoleList();
-			$answer['UserList'] = $UserList;
+			$answer['UserList']     = $UserList;
 			$answer['UserRoleList'] = $UserRoleList;
+			$answer['RegionInfo']   = $info;
 		}
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
@@ -134,6 +137,24 @@ switch ($cmd)
 		}		
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
+	break;
+	case 'cmdDatabaseUsersUpdateOptions':
+		$iReturn = ERR_NO_ERROR;
+		$answer = array();
+		if ($desinventarUserRoleValue < ROLE_ADMINPORTAL)
+		{
+			$iReturn = ERR_ACCESS_DENIED;
+		}
+		if ($iReturn > 0)
+		{
+			$r = new DIRegion($us, $RegionId);
+			$r->set('RegionStatus', $_POST['RegionStatus']);
+			$iReturn = $r->update();
+			$info = array('RegionStatus' => $r->get('RegionStatus'));
+			$answer['RegionInfo'] = $info;
+		}
+		$answer['Status'] = $iReturn;
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
 	break;
 	case 'cmdGetLocaleList':
 		$answer = array();
@@ -217,7 +238,10 @@ switch ($cmd)
 		}
 		if ($iReturn > 0)
 		{
-			$RegionId = $_POST['Database']['RegionId'];
+			if ($RegionId == '')
+			{
+				$RegionId = $_POST['Database']['RegionId'];
+			}
 			$r = new DIRegionRecord($us, $RegionId);
 			$iReturn = $r->setFromArray($_POST['Database']);
 			if ($r->get('RegionId') == '')

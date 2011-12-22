@@ -5,6 +5,41 @@
 
 function onReadyDatabaseUsers()
 {
+	jQuery('#divDatabaseUsers_Edit').hide();
+	jQuery('#txtDatabaseUsers_RegionActive').click(function() {
+		jQuery('#fldDatabaseUsers_RegionActive').trigger('click');
+	});
+	jQuery('#txtDatabaseUsers_RegionPublic').click(function() {
+		jQuery('#fldDatabaseUsers_RegionPublic').trigger('click');
+	});
+
+	jQuery('#btnDatabaseUsers_OptionsSave').click(function() {
+		var RegionStatus = jQuery('#fldDatabaseUsers_RegionStatus');
+		RegionStatus.val(0);
+		if (jQuery('#fldDatabaseUsers_RegionActive').attr('checked')) {
+			RegionStatus.val(parseInt(RegionStatus.val()) | 1);
+		}
+		if (jQuery('#fldDatabaseUsers_RegionPublic').attr('checked')) {
+			RegionStatus.val(parseInt(RegionStatus.val()) | 2);
+		}
+		jQuery.post(
+			jQuery('#desinventarURL').val() + '/',
+			{
+				cmd          : 'cmdDatabaseUsersUpdateOptions',
+				RegionId     : jQuery('#desinventarRegionId').val(),
+				RegionStatus : jQuery('#fldDatabaseUsers_RegionStatus').val()
+			},
+			function(data)
+			{
+				if (parseInt(data.Status) > 0)
+				{
+					doDatabaseUsersUpdateOptions(data.RegionInfo);
+				}
+			},
+			'json'
+		);
+	});
+		
 	jQuery('#btnDatabaseUsers_Add').click(function() {
 		doDatabaseUsersReset();
 		jQuery('#divDatabaseUsers_Edit').show();
@@ -61,6 +96,8 @@ function onReadyDatabaseUsers()
 
 function doDatabaseUsersReset()
 {
+	jQuery('#fldDatabaseUsers_RegionActive').prop('checked', true);
+	jQuery('#fldDatabaseUsers_RegionPublic').prop('checked', true);	
 	jQuery('#fldDatabaseUsers_UserId').val('');
 	jQuery('#fldDatabaseusers_UserRole').val('');
 	jQuery('#tblDatabaseUsers_List .UserId').hide();
@@ -82,6 +119,21 @@ function doDatabaseUsersPopulateUserRoleList(UserRoleList)
 	jQuery('#tblDatabaseUsers_List .UserRole').hide();
 }
 
+function doDatabaseUsersUpdateOptions(RegionInfo)
+{
+	// RegionActive/RegionPublic are set based on RegionStatus value
+	jQuery('#fldDatabaseUsers_RegionActive').prop('checked', false);
+	if (parseInt(RegionInfo.RegionStatus) & 1)
+	{
+		jQuery('#fldDatabaseUsers_RegionActive').prop('checked', true);
+	}
+	jQuery('#fldDatabaseUsers_RegionPublic').prop('checked', false);
+	if (parseInt(RegionInfo.RegionStatus) & 2)
+	{
+		jQuery('#fldDatabaseUsers_RegionPublic').prop('checked', true);
+	}
+} //doDatabaseUsersUpdateOptions()
+
 function doDatabaseUsersPopulateLists()
 {
 	doDatabaseUsersReset();
@@ -95,6 +147,7 @@ function doDatabaseUsersPopulateLists()
 		{
 			if (parseInt(data.Status) > 0)
 			{
+				doDatabaseUsersUpdateOptions(data.RegionInfo);
 				jQuery.each(data.UserList, function(key, value) {
 					jQuery('#fldDatabaseUsers_UserId').append(jQuery('<option>', { value : key }).text(value));
 				});
