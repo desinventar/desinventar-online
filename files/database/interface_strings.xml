@@ -1819,6 +1819,12 @@
 			<Text LangIsoCode="por">Efeitos Adicionais</Text>
 			<Text LangIsoCode="fre">Effets additionnels</Text>
 		</Message>
+		<Message id="msgDBConfig_RolesAndDiffusion">
+			<Text LangIsoCode="eng">Roles and diffusion</Text>
+			<Text LangIsoCode="spa">Roles y difusión</Text>
+			<Text LangIsoCode="por">Roles e difusão</Text>
+			<Text LangIsoCode="fre">Rôles et diffusion</Text>
+		</Message>
 		<Message id="tmapnotavail">
 			<Text LangIsoCode="eng">Map unavailable</Text>
 			<Text LangIsoCode="spa">Mapa no disponible</Text>
@@ -2891,12 +2897,6 @@
 		</Message>
 	</Group>
 	<Group name="grpDatabaseUsers">
-		<Message id="msgDatabaseUsers_Title">
-			<Text LangIsoCode="eng">Roles and diffusion</Text>
-			<Text LangIsoCode="spa">Roles y difusión</Text>
-			<Text LangIsoCode="por">Roles e difusão</Text>
-			<Text LangIsoCode="fre">Rôles et diffusion</Text>
-		</Message>
 		<Message id="msgDatabaseUsers_TitleOptions">
 			<Text LangIsoCode="eng">Database options</Text>
 			<Text LangIsoCode="spa">Opciones base de datos</Text>

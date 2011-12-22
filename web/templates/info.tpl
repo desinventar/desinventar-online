@@ -87,6 +87,7 @@
 			</td>
 			<td>
 				<!-- PERMISSIONS -->
+				<!--
 				<fieldset style="padding:5px 5px 5px 5px;">
 				<legend>
 					<b onMouseOver="showtip('{-$dic.DBPermissions[2]-}');">{-$dic.DBPermissions[0]-}</b>
@@ -168,6 +169,7 @@
 				</div>
 				</fieldset>
 				<br /><br />
+				-->
 				<!-- LOG RECORDS -->
 				<fieldset style="padding:5px 5px 5px 5px;">
 					<legend>

@@ -6,6 +6,7 @@ function onReadyMain()
 {
 	onReadyDatabaseUpload();
 	onReadyDatabaseCreate();
+	onReadyDatabaseUsers();
 	onReadyAdminUsers();
 	onReadyUserPermAdmin();
 	onReadyCommon();
@@ -69,38 +70,50 @@ function onReadyMain()
 		}
 	});
 
+	jQuery('#DBConfig_DatabaseUsers').bind('show', function() {
+		doDatabaseUsersPopulateLists();
+	});
+	
 	// Tabs for Database Configuration
 	jQuery('#DBConfig_tabs').tabs();
 	jQuery('.classDBConfig_tabs').click(function() {
 		var me = jQuery(jQuery(this).attr('href'));
 		var cmd = jQuery(this).attr('cmd');
-		me.html('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />');
-		jQuery.post(
-			jQuery(this).attr('data'),
-			{
-				cmd      : cmd,
-				RegionId : jQuery('#desinventarRegionId').val(),
-				lang     : jQuery('#desinventarLang').val()
-			},
-			function(data)
-			{
-				me.html(data);
-				switch(cmd)
+		if (cmd == '')
+		{
+			jQuery(me).trigger('show');
+		}
+		else
+		{
+			me.html('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />');
+			jQuery.post(
+				jQuery(this).attr('data'),
 				{
-					case 'cmdDBInfoEvent':
-						onReadyDBConfigEvents();
-					break;
-					case 'cmdDBInfoCause':
-						onReadyDBConfigCauses();
-					break;
-					default:
-						onReadyDatabaseConfig();
-						onReadyExtraEffects();
-						onReadyDBConfigGeography();
-					break;
+					cmd      : cmd,
+					RegionId : jQuery('#desinventarRegionId').val(),
+					lang     : jQuery('#desinventarLang').val()
+				},
+				function(data)
+				{
+					me.html(data);
+					switch(cmd)
+					{
+						case 'cmdDBInfoEvent':
+							onReadyDBConfigEvents();
+						break;
+						case 'cmdDBInfoCause':
+							onReadyDBConfigCauses();
+						break;
+						default:
+							onReadyDatabaseConfig();
+							onReadyExtraEffects();
+							onReadyDBConfigGeography();
+						break;
+					}
 				}
-			}
-		);
+			);
+		}
+		return false;
 	});
 } //onReadyMain()
 
