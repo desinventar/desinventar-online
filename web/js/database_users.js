@@ -73,9 +73,9 @@ function doDatabaseUsersPopulateUserRoleList(UserRoleList)
 	jQuery.each(UserRoleList, function(index, value) {
 		var clonedRow = jQuery('#tbodyDatabaseUsers_List tr:last').clone().show();
 		jQuery('.UserId', clonedRow).html(index);
-		jQuery('.UserName', clonedRow).html(index);
-		jQuery('.UserRole', clonedRow).html(value);
-		jQuery('.UserRoleLabel', clonedRow).html(jQuery('#fldDatabaseUsers_UserRole option[value="' + value + '"]').text());
+		jQuery('.UserName', clonedRow).html(jQuery('#fldDatabaseUsers_UserId option[value="' + index + '"]').text());
+		jQuery('.UserRole', clonedRow).html(value.UserRole);
+		jQuery('.UserRoleLabel', clonedRow).html(jQuery('#fldDatabaseUsers_UserRole option[value="' + value.UserRole + '"]').text());
 		jQuery('#tbodyDatabaseUsers_List').append(clonedRow);
 	});
 	jQuery('#tblDatabaseUsers_List .UserId').hide();

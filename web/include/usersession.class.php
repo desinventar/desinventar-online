@@ -388,8 +388,9 @@ class UserSession {
 			$prmRegionId = $this->RegionId;
 		}
 		$myData = array();
-		$sQuery = 'SELECT RegionAuth.*,Region.RegionLabel FROM RegionAuth,Region WHERE'  .
+		$sQuery = 'SELECT RegionAuth.*,Region.RegionLabel,User.UserFullName FROM RegionAuth,Region,User WHERE'  .
 			' (RegionAuth.RegionId = Region.RegionId)' .
+			' AND (RegionAuth.UserId = User.UserId)' .
 			' AND (Region.RegionId="' . $prmRegionId . '")' .
 			' AND RegionAuth.AuthKey="ROLE"';
 		if ($prmRoleId == '')
@@ -400,7 +401,7 @@ class UserSession {
 		{
 			$sQuery .= ' AND RegionAuth.AuthAuxValue == "' . $prmRoleId . '"';
 		}
-		$sQuery .= ' ORDER BY RegionAuth.RegionId';
+		$sQuery .= ' ORDER BY RegionAuth.RegionId, User.UserFullName';
 		$sth = $this->q->core->prepare($sQuery);
 		$this->q->core->beginTransaction();
 		try
@@ -410,7 +411,11 @@ class UserSession {
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
 				$sKey = $row['UserId'];
-				$sValue = $row['AuthAuxValue'];
+				$sValue = array(
+					'UserId'   => $row['UserId'],
+					'UserRole' => $row['AuthAuxValue'],
+					'UserName' => $row['User.UserFullName']
+				);
 				$myData[$sKey] = $sValue;
 			} // while
 		}
@@ -419,16 +424,19 @@ class UserSession {
 			$this->q->core->rollBack();
 			showErrorMsg('getRegionRoleList Error : ' . $e->getMessage());
 		}
+		/*
 		if ($prmRoleId != 'ADMINREGION')
 		{
-			foreach($myData as $UserId => $UserRole)
+			foreach($myData as $UserId => $RoleInfo)
 			{
-				if ($UserRole == 'ADMINREGION')
+				if ($RoleInfo['UserRole'] == 'ADMINREGION')
 				{
 					unset($myData[$UserId]);
 				}
 			}
 		}
+		*/
+		fb($myData);
 		return $myData;
 	} // getRegionRoleList()
 
