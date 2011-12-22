@@ -31,6 +31,11 @@
 			<a class="button" id="btnDatabaseUsers_OptionsSave"><span>{-#msgDatabaseUsers_Save#-}</span></a>
 			<a class="button" id="btnDatabaseUsers_OptionsCancel"><span>{-#msgDatabaseUsers_Cancel#-}</span></a>
 		</div>
+		<div class="center">
+			<br />
+			<span class="clsDatabaseUsersStatus" id="txtDatabaseUsers_OptionsStatusOk">{-#msgDatabaseUsers_OptionsStatusOk#-}</span>
+			<span class="clsDatabaseUsersStatus" id="txtDatabaseUsers_OptionsStatusError">{-#msgDatabaseUsers_OptionsStatusError#-}</span>
+		</div>
 	</div>
 	<br />
 	<b>{-#msgDatabaseUsers_TitleRoles#-}</b><br />
@@ -91,5 +96,10 @@
 			<a class="button" id="btnDatabaseUsers_Save"><span>{-#msgDatabaseUsers_Save#-}</span></a>
 			<a class="button" id="btnDatabaseUsers_Cancel"><span>{-#msgDatabaseUsers_Cancel#-}</span></a>
 		</div>
+	</div>
+	<br />
+	<div class="center">
+		<span class="clsDatabaseUsersStatus" id="txtDatabaseUsers_RoleListStatusOk">{-#msgDatabaseUsers_RoleListStatusOk#-}</span>
+		<span class="clsDatabaseUsersStatus" id="txtDatabaseUsers_RoleListStatusError">{-#msgDatabaseUsers_RoleListStatusError#-}</span>
 	</div>
 </fieldset>

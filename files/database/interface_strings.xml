@@ -2981,6 +2981,30 @@
 			<Text LangIsoCode="por">Cancelar</Text>
 			<Text LangIsoCode="fre">Annuler</Text>
 		</Message>
+		<Message id="msgDatabaseUsers_OptionsStatusOk">
+			<Text LangIsoCode="eng">Database updated successfully!</Text>
+			<Text LangIsoCode="spa">Base actualizada exitosamente!</Text>
+			<Text LangIsoCode="por">Banco atualizado com sucesso!</Text>
+			<Text LangIsoCode="fre">Base mise à jour avec succès!</Text>
+		</Message>
+		<Message id="msgDatabaseUsers_OptionsStatusError">
+			<Text LangIsoCode="eng">Error updating database</Text>
+			<Text LangIsoCode="spa">Error actualizando la base</Text>
+			<Text LangIsoCode="por">Erro atualizando o banco</Text>
+			<Text LangIsoCode="fre">Erreur dans la mise à jour de la base</Text>
+		</Message>
+		<Message id="msgDatabaseUsers_RoleListStatusOk">
+			<Text LangIsoCode="eng">Database updated successfully!</Text>
+			<Text LangIsoCode="spa">Base actualizada exitosamente!</Text>
+			<Text LangIsoCode="por">Banco atualizado com sucesso!</Text>
+			<Text LangIsoCode="fre">Base mise à jour avec succès!</Text>
+		</Message>
+		<Message id="msgDatabaseUsers_RoleListStatusError">
+			<Text LangIsoCode="eng">Error updating database</Text>
+			<Text LangIsoCode="spa">Error actualizando la base</Text>
+			<Text LangIsoCode="por">Erro atualizando o banco</Text>
+			<Text LangIsoCode="fre">Erreur dans la mise à jour de la base</Text>
+		</Message>
 	</Group>
 	<Group name="grpDatabaseEdit">
 		<Message id="msgDatabaseEditCountryIso">
