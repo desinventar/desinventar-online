@@ -5,12 +5,20 @@
 
 function onReadyDatabaseUsers()
 {
+	jQuery('.clsDatabaseUsersStatus').hide();
 	jQuery('#divDatabaseUsers_Edit').hide();
+
 	jQuery('#txtDatabaseUsers_RegionActive').click(function() {
 		jQuery('#fldDatabaseUsers_RegionActive').trigger('click');
 	});
 	jQuery('#txtDatabaseUsers_RegionPublic').click(function() {
 		jQuery('#fldDatabaseUsers_RegionPublic').trigger('click');
+	});
+
+	jQuery('#btnDatabaseUsers_OptionsCancel').click(function() {
+		var RegionInfo = new Array();
+		RegionInfo.RegionStatus = jQuery('#fldDatabaseUsers_RegionStatus').val();
+		doDatabaseUsersUpdateOptions(RegionInfo);
 	});
 
 	jQuery('#btnDatabaseUsers_OptionsSave').click(function() {
@@ -31,10 +39,19 @@ function onReadyDatabaseUsers()
 			},
 			function(data)
 			{
+				jQuery('.clsDatabaseUsersStatus').hide();
 				if (parseInt(data.Status) > 0)
 				{
 					doDatabaseUsersUpdateOptions(data.RegionInfo);
+					jQuery('#txtDatabaseUsers_OptionsStatusOk').show();
 				}
+				else
+				{
+					jQuery('#txtDatabaseUsers_OptionsStatusError').show();
+				}
+				setTimeout(function() {
+					jQuery('.clsDatabaseUsersStatus').hide();
+				}, 3000);
 			},
 			'json'
 		);
@@ -61,11 +78,20 @@ function onReadyDatabaseUsers()
 			},
 			function(data)
 			{
+				jQuery('.clsDatabaseUsersStatus').hide();
 				if (parseInt(data.Status) > 0)
 				{
 					doDatabaseUsersPopulateUserRoleList(data.UserRoleList);
 					jQuery('#divDatabaseUsers_Edit').hide();
+					jQuery('#txtDatabaseUsers_RoleListStatusOk').show();
 				}
+				else
+				{
+					jQuery('#txtDatabaseUsers_RoleListStatusError').show();
+				}
+				setTimeout(function() {
+					jQuery('.clsDatabaseUsersStatus').hide();
+				}, 3000);
 			},
 			'json'
 		);
@@ -121,6 +147,7 @@ function doDatabaseUsersPopulateUserRoleList(UserRoleList)
 
 function doDatabaseUsersUpdateOptions(RegionInfo)
 {
+	jQuery('#fldDatabaseUsers_RegionStatus').val(RegionInfo.RegionStatus);
 	// RegionActive/RegionPublic are set based on RegionStatus value
 	jQuery('#fldDatabaseUsers_RegionActive').prop('checked', false);
 	if (parseInt(RegionInfo.RegionStatus) & 1)
