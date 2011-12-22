@@ -53,6 +53,7 @@
 			<option value="OBSERVER">Observer</option>
 			<option value="FEEDER">Feeder</option>
 			<option value="SUPERVISOR">Supervisor</option>
+			<option value="ADMINREGION">Administrador Región</option>
 		</select>
 		<br />
 		<br />
