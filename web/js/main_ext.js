@@ -243,9 +243,6 @@ function onMenuItem(item) {
 		case 'mnuDatabaseCreate':
 			doDatabaseCreateShow();
 		break;
-		case 'mnuDatabaseSetAdminUser':
-			doUserPermAdminShow();
-		break;
 		case 'mnuUserAccountManagement':
 			//updateList('dbl', jQuery('#desinventarURL').val() + '/user.php', 'cmd=adminusr', 'onReadyUserAdmin');
 			jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=adminusr',function() { onReadyUserAdmin(); });
@@ -332,7 +329,6 @@ function doMainMenuCreate()
 			{id:'mnuDatabaseUpload'       , text: jQuery('#mnuDatabaseUpload').text()       , handler: onMenuItem, hidden: true },
 			{id:'mnuDatabaseCreate'       , text: jQuery('#mnuDatabaseCreate').text()       , handler: onMenuItem, hidden: true },
 			{id:'mnuDatabaseConfig'       , text: jQuery('#mnuDatabaseConfig').text()       , handler: onMenuItem, hidden: true },
-			{id:'mnuDatabaseSetAdminUser' , text: jQuery('#mnuDatabaseSetAdminUser').text() , handler: onMenuItem, hidden: true },
 			{id:'mnuDatabaseSelect'       , text: jQuery('#mnuDatabaseSelect').text()       , handler: onMenuItem, hidden: true },
 			{id:'mnuDatabaseSelectAnother', text: jQuery('#mnuDatabaseSelectAnother').text(), handler: onMenuItem, hidden: true }
 		]
@@ -414,13 +410,7 @@ function doMainMenuCreate()
 			{
 				Ext.getCmp('mnuDatabaseConfig').show();
 			}
-
-			if (UserRoleValue >= 5)
-			{
-				Ext.getCmp('mnuDatabaseSetAdminUser').show();
-			}
-		}
-		
+		}		
 	}
 	else
 	{
