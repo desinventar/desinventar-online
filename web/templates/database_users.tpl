@@ -100,4 +100,5 @@
 		<span class="clsDatabaseUsersStatus" id="txtDatabaseUsers_RoleListStatusOk">{-#msgDatabaseUsers_RoleListStatusOk#-}</span>
 		<span class="clsDatabaseUsersStatus" id="txtDatabaseUsers_RoleListStatusError">{-#msgDatabaseUsers_RoleListStatusError#-}</span>
 	</div>
+	<span id="txtDatabaseUsers_ReloadNeeded" style="display:none;">{-#msgDatabaseUsers_ReloadNeeded#-}</span>
 </div>

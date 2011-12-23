@@ -84,6 +84,7 @@ function onReadyDatabaseUsers()
 					doDatabaseUsersPopulateUserRoleList(data.UserRoleList);
 					jQuery('#divDatabaseUsers_Edit').hide();
 					jQuery('#txtDatabaseUsers_RoleListStatusOk').show();
+					// Test if the window needs reloading
 				}
 				else
 				{
