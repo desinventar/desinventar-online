@@ -2915,11 +2915,23 @@
 			<Text LangIsoCode="por">Ativo</Text>
 			<Text LangIsoCode="fre">Actif</Text>
 		</Message>
+		<Message id="msgDatabaseUsers_RegionActiveTooltip">
+			<Text LangIsoCode="eng">Uncheck this option if you want to completely disable the access to this database</Text>
+			<Text LangIsoCode="spa">Desactive esta opción si desea deshabilitar completamente el acceso a esta base de datos</Text>
+			<Text LangIsoCode="por">Desmarque essa opção se você quiser desativar completamente o acesso a este banco de dados</Text>
+			<Text LangIsoCode="fre">Décochez cette option si vous voulez désactiver totalement l'accès à cette base de données</Text>
+		</Message>
 		<Message id="msgDatabaseUsers_RegionPublic">
 			<Text LangIsoCode="eng">Public</Text>
 			<Text LangIsoCode="spa">Pública</Text>
 			<Text LangIsoCode="por">Pública</Text>
 			<Text LangIsoCode="fre">Publique</Text>
+		</Message>
+		<Message id="msgDatabaseUsers_RegionPublicTooltip">
+			<Text LangIsoCode="eng">Uncheck the option to prevent anonymous users from accessing the database</Text>
+			<Text LangIsoCode="spa">Desactive la opción para evitar que los usuarios anónimos tengan acceso a la base de datos</Text>
+			<Text LangIsoCode="por">Desmarque a opção para impedir que usuários anônimos acessem o banco de dados</Text>
+			<Text LangIsoCode="fre">Décochez l'option pour empêcher les utilisateurs anonymes d'accéder à la base de données</Text>
 		</Message>
 		<Message id="msgDatabaseUsers_UserId">
 			<Text LangIsoCode="eng">User</Text>
