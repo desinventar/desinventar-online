@@ -67,35 +67,42 @@ function onReadyDatabaseUsers()
 		if (jQuery('#fldDatabaseUsers_UserId').val() == '')
 		{
 			// Error Message
-		}
-		jQuery.post(
-			jQuery('#desinventarURL').val() + '/',
-			{
-				cmd      : 'cmdDatabaseUsersSetRole',
-				RegionId : jQuery('#desinventarRegionId').val(),
-				UserId   : jQuery('#fldDatabaseUsers_UserId').val(),
-				UserRole : jQuery('#fldDatabaseUsers_UserRole').val()
-			},
-			function(data)
-			{
+			jQuery('.clsDatabaseUsersStatus').hide();
+			jQuery('#txtDatabaseUsers_RoleListEmptyFields').show();
+			setTimeout(function() {
 				jQuery('.clsDatabaseUsersStatus').hide();
-				if (parseInt(data.Status) > 0)
+			}, 3000);
+		}
+		else
+		{
+			jQuery.post(
+				jQuery('#desinventarURL').val() + '/',
 				{
-					doDatabaseUsersPopulateUserRoleList(data.UserRoleList);
-					jQuery('#divDatabaseUsers_Edit').hide();
-					jQuery('#txtDatabaseUsers_RoleListStatusOk').show();
-					// Test if the window needs reloading
-				}
-				else
+					cmd      : 'cmdDatabaseUsersSetRole',
+					RegionId : jQuery('#desinventarRegionId').val(),
+					UserId   : jQuery('#fldDatabaseUsers_UserId').val(),
+					UserRole : jQuery('#fldDatabaseUsers_UserRole').val()
+				},
+				function(data)
 				{
-					jQuery('#txtDatabaseUsers_RoleListStatusError').show();
-				}
-				setTimeout(function() {
 					jQuery('.clsDatabaseUsersStatus').hide();
-				}, 3000);
-			},
-			'json'
-		);
+					if (parseInt(data.Status) > 0)
+					{
+						doDatabaseUsersPopulateUserRoleList(data.UserRoleList);
+						jQuery('#divDatabaseUsers_Edit').hide();
+						jQuery('#txtDatabaseUsers_RoleListStatusOk').show();
+					}
+					else
+					{
+						jQuery('#txtDatabaseUsers_RoleListStatusError').show();
+					}
+					setTimeout(function() {
+						jQuery('.clsDatabaseUsersStatus').hide();
+					}, 3000);
+				},
+				'json'
+			);
+		}
 	});
 
 	jQuery('#btnDatabaseUsers_Cancel').click(function() {
@@ -135,12 +142,15 @@ function doDatabaseUsersPopulateUserRoleList(UserRoleList)
 {
 	jQuery('#tbodyDatabaseUsers_List').find('tr:gt(0)').remove();
 	jQuery.each(UserRoleList, function(index, value) {
-		var clonedRow = jQuery('#tbodyDatabaseUsers_List tr:last').clone().show();
-		jQuery('.UserId', clonedRow).html(index);
-		jQuery('.UserName', clonedRow).html(value.UserName);
-		jQuery('.UserRole', clonedRow).html(value.UserRole);
-		jQuery('.UserRoleLabel', clonedRow).html(jQuery('#fldDatabaseUsers_UserRole option[value="' + value.UserRole + '"]').text());
-		jQuery('#tbodyDatabaseUsers_List').append(clonedRow);
+		if (jQuery('#desinventarUserId').val() != index)
+		{
+			var clonedRow = jQuery('#tbodyDatabaseUsers_List tr:last').clone().show();
+			jQuery('.UserId', clonedRow).html(index);
+			jQuery('.UserName', clonedRow).html(value.UserName);
+			jQuery('.UserRole', clonedRow).html(value.UserRole);
+			jQuery('.UserRoleLabel', clonedRow).html(jQuery('#fldDatabaseUsers_UserRole option[value="' + value.UserRole + '"]').text());
+			jQuery('#tbodyDatabaseUsers_List').append(clonedRow);
+		}
 	});
 	jQuery('#tblDatabaseUsers_List .UserId').hide();
 	jQuery('#tblDatabaseUsers_List .UserRole').hide();

@@ -3005,11 +3005,11 @@
 			<Text LangIsoCode="por">Erro atualizando o banco</Text>
 			<Text LangIsoCode="fre">Erreur dans la mise à jour de la base</Text>
 		</Message>
-		<Message id="msgDatabaseUsers_ReloadNeeded">
-			<Text LangIsoCode="eng">Browser window will reload now in order to update data</Text>
-			<Text LangIsoCode="spa">La ventana del navegador se cargará nuevamente para actualizar los datos</Text>
-			<Text LangIsoCode="por">Janela do navegador irá recarregar agora com novos dados</Text>
-			<Text LangIsoCode="fre">Fenêtre du navigateur va recharger maintenant avec de nouvelles données</Text>
+		<Message id="msgDatabaseUsers_RoleListEmptyFields">
+			<Text LangIsoCode="eng">Fields cannot be empty</Text>
+			<Text LangIsoCode="spa">Los campos no pueden estar vacios</Text>
+			<Text LangIsoCode="por">Campos não pode ser vazio</Text>
+			<Text LangIsoCode="fre">Les champs ne peuvent pas être vide</Text>
 		</Message>
 	</Group>
 	<Group name="grpDatabaseEdit">
