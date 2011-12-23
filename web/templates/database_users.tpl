@@ -6,7 +6,7 @@
 		<table>
 			<tr>
 				<td>
-					<span title="Region is Active">
+					<span title="{-#msgDatabaseUsers_RegionActiveTooltip#-}">
 						<input type="checkbox" id="fldDatabaseUsers_RegionActive" />
 						<span id="txtDatabaseUsers_RegionActive">&nbsp;&nbsp;{-#msgDatabaseUsers_RegionActive#-}</span>
 						</span>
@@ -15,7 +15,7 @@
 			</tr>
 			<tr>
 				<td>
-					<span title="Region is Public">
+					<span title="{-#msgDatabaseUsers_RegionPublicTooltip#-}">
 						<input type="checkbox" id="fldDatabaseUsers_RegionPublic" />
 						<span id="txtDatabaseUsers_RegionPublic">&nbsp;&nbsp;{-#msgDatabaseUsers_RegionPublic#-}</span>
 					</span>
@@ -101,5 +101,4 @@
 		<span class="clsDatabaseUsersStatus" id="txtDatabaseUsers_RoleListStatusError">{-#msgDatabaseUsers_RoleListStatusError#-}</span>
 		<span class="clsDatabaseUsersStatus" id="txtDatabaseUsers_RoleListEmptyFields">{-#msgDatabaseUsers_RoleListEmptyFields#-}</span>
 	</div>
-	<span id="txtDatabaseUsers_RoleListReloadNeeded" style="display:none;">{-#msgDatabaseUsers_RoleListReloadNeeded#-}</span>
 </div>
