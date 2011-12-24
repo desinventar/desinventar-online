@@ -14,7 +14,7 @@
 
 <!-- "divRegionList" -->
 <div class="contentBlock" id="divRegionList" style="display:none;">
-	{-include file="region_list.tpl"-}
+	{-include file="database_list.tpl"-}
 </div>
 
 <!-- Database Upload -->
