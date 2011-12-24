@@ -236,9 +236,10 @@ function onMenuItem(item) {
 		case 'mnuDatabaseSelect':
 		case 'mnuDatabaseSelectAnother':
 			// Show database list
-			hideQueryDesign();
-			jQuery('.contentBlock').hide();
-			doUpdateDatabaseListByUser();
+			window.location =  jQuery('#desinventarURL').val() + '/';
+			//hideQueryDesign();
+			//jQuery('.contentBlock').hide();
+			//doUpdateDatabaseListByUser();
 		break;
 		case 'mnuDatabaseCreate':
 			doDatabaseCreateShow();
@@ -588,3 +589,65 @@ function doDialogsCreate()
 
 } //doDialogsCreate()
 
+function doUpdateDatabaseListByUser()
+{
+	jQuery(".contentBlock").hide();
+	jQuery("#divRegionList").show();
+	// Hide everything at start...
+	jQuery('.databaseTitle').hide();
+	jQuery('.databaseList').hide();
+
+	jQuery.post(jQuery('#desinventarURL').val() + '/',
+		{
+			cmd: 'cmdSearchDB',
+			searchDBQuery: '', 
+			searchDBCountry : 0
+		},
+		function(data)
+		{
+			if (parseInt(data.Status) > 0)
+			{
+				if (parseInt(data.NoOfDatabases) > 0)
+				{
+					jQuery('#divDatabaseFindList').show();
+					jQuery('#divDatabaseFindError').hide();
+					RegionByRole = new Array(5);
+					RegionByRole['ADMINREGION'] = new Array();
+					RegionByRole['SUPERVISOR'] = new Array();
+					RegionByRole['USER'] = new Array();
+					RegionByRole['OBSERVER'] = new Array();
+					RegionByRole['NONE'] = new Array();
+
+					$RoleList = new Array(5);
+					var iCount = 0;
+					jQuery('.databaseList').empty();
+					jQuery.each(data.RegionList, function(RegionId, value) {
+						console.log(RegionId + ' ' + value.Role);
+						jQuery('#divRegionList #title_' + value.Role).show();
+						jQuery('#divRegionList #list_' + value.Role).show().append('<a href="' + jQuery('#desinventarURL').val() + '/' + RegionId + '" id="' + RegionId + '" class="databaseLink">' + value.RegionLabel + '</a><br />');
+						iCount++;
+					});
+					
+					jQuery('.databaseLink').addClass("alt").unbind('click').click(function() {
+						RegionId = jQuery(this).attr('id');
+						if (jQuery('#desinventarPortalType').val() != '')
+						{
+							displayRegionInfo(RegionId);
+						}
+						else
+						{
+							window.location = jQuery('#desinventarURL').val() + '/' + RegionId;
+						}
+						return false;
+					}); //bind
+				}
+				else
+				{
+					jQuery('#divDatabaseFindList').hide();
+					jQuery('#divDatabaseFindError').show();
+				}
+			} //if
+		},
+		'json' //function
+	);
+} //updateDatabaseListByUser()
