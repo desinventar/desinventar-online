@@ -622,23 +622,10 @@ function doUpdateDatabaseListByUser()
 					var iCount = 0;
 					jQuery('.databaseList').empty();
 					jQuery.each(data.RegionList, function(RegionId, value) {
-						jQuery('#divRegionList #title_' + value.Role).show();
-						jQuery('#divRegionList #list_' + value.Role).show().append('<a href="' + jQuery('#desinventarURL').val() + '/' + RegionId + '" id="' + RegionId + '" class="databaseLink">' + value.RegionLabel + '</a><br />');
+						jQuery('#divDatabaseFindList #title_' + value.Role).show();
+						jQuery('#divDatabaseFindList #list_' + value.Role).show().append('<a href="' + jQuery('#desinventarURL').val() + '/' + RegionId + '" id="' + RegionId + '" class="databaseLink">' + value.RegionLabel + '</a><br />');
 						iCount++;
 					});
-					
-					jQuery('.databaseLink').addClass("alt").unbind('click').click(function() {
-						RegionId = jQuery(this).attr('id');
-						if (jQuery('#desinventarPortalType').val() != '')
-						{
-							displayRegionInfo(RegionId);
-						}
-						else
-						{
-							window.location = jQuery('#desinventarURL').val() + '/' + RegionId;
-						}
-						return false;
-					}); //bind
 				}
 				else
 				{
