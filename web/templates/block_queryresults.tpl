@@ -50,25 +50,6 @@
 					<div id="dbl">
 					</div>
 				</div>
-				<!-- Show Dialog window -->
-				<div id="dlg-win" class="x-hidden">
-					<div class="x-window-header">
-					</div>
-					<div id="dlg">
-						<table border="0">
-							<tr>
-								<td><img src="{-$desinventarURL-}/images/di_logo.png">
-								</td>
-								<td><p style="font-size: 16pt;" align="center">DesInventar {-$desinventarVersion-}</p>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2">{-#tabout#-}<hr />{-#tcopyright#-}
-								</td>
-							</tr>
-						</table>
-					</div>
-				</div>
 			</td>
 			<td>
 				<span id="frmwait"></span>
