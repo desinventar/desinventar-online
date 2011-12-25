@@ -4,13 +4,9 @@
 */
 function onReadyMain()
 {
-	onReadyDatabaseUpload();
-	onReadyDatabaseCreate();
 	onReadyDatabaseUsers();
 	onReadyAdminUsers();
 	onReadyUserPermAdmin();
-	onReadyCommon();
-	onReadyUserLogin();
 	onReadyDatacards();
 	onReadyAdminDatabase();
 	onReadyExtraEffects();
