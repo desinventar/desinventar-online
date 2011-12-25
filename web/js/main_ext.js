@@ -86,6 +86,11 @@ function doViewportCreate()
 		viewport.doLayout();
 	}
 
+	jQuery('body').bind('WindowReload',function() {
+		// Destroy viewport, the loading... message should stay.
+		doViewportDestroy();
+	});
+
 	jQuery('.contentBlock').hide();
 	if (RegionId != '')
 	{
@@ -110,6 +115,17 @@ function doViewportCreate()
 		doUpdateDatabaseListByUser();
 	}
 } // doViewportCreate()
+
+function doViewportDestroy()
+{
+	var viewport = Ext.getCmp('viewport');
+	if (viewport != undefined)
+	{
+		viewport.destroy();
+		jQuery('#loading').show();
+		jQuery('#loading-mask').show();
+	}
+} //doViewportDestroy
 
 function onMenuItem(item) {
 	var RegionId = jQuery('#desinventarRegionId').val();
