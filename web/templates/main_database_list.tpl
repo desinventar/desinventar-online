@@ -21,6 +21,7 @@
 
 		{-if $desinventarUserId != ''-}
 		<script type="text/javascript" src="/fileuploader/fileuploader.js"></script>
+		<script type="text/javascript" src="{-$desinventarURL-}/js/user_account.js?version={-$jsversion-}"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/js/database_upload.js?version={-$jsversion-}"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/js/database_create.js?version={-$jsversion-}"></script>
 		{-/if-}
@@ -33,6 +34,7 @@
 				onReadyUserLogin();
 				onReadyAboutDialog();
 				{-if $desinventarUserId != ''-}
+					onReadyUserAccount();
 					onReadyDatabaseUpload();
 					onReadyDatabaseCreate();
 				{-/if-}
@@ -62,6 +64,7 @@
 				{-include file="user_login_ext.tpl"-}
 				{-include file="database_list.tpl"-}
 				{-if $desinventarUserId != ''-}
+					{-include file="user_account_ext.tpl"-}
 					{-include file="database_upload_ext.tpl"-}
 					{-include file="database_create_ext.tpl"-}
 				{-/if-}
