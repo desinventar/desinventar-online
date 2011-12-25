@@ -163,8 +163,7 @@ function onMenuItem(item) {
 				{
 					if (parseInt(data.Status) > 0)
 					{
-						doViewportDestroy();
-						window.location.reload(false);
+						doWindowReload();
 					}
 					else
 					{
