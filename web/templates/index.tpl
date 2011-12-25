@@ -37,6 +37,7 @@
 	<script type="text/javascript" src="{-$desinventarURL-}/js/statistic.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/js/jquery.snippets.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/js/user.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="{-$desinventarURL-}/js/about_dialog.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/js/user_login.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/js/query_results.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/js/admin_database.js?version={-$jsversion-}"></script>
@@ -63,6 +64,7 @@
 
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
+			onReadyAboutDialog();
 			onReadyExtJS();
 			onReadyMain();
 		});
@@ -87,6 +89,7 @@
 		
 		<!-- Central Content Area -->
 		<div id="container">
+			{-include file="about_dialog_ext.tpl"-}
 			{-include file="block_content.tpl"-}
 		</div>
 
