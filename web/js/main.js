@@ -19,14 +19,6 @@ function onReadyMain()
 	onReadyGraphic();
 	onReadyThematicMap();	
 
-	jQuery('body').bind('UserLoggedIn',function() {
-		doWindowReload();
-	});
-
-	jQuery('body').bind('UserLoggedOut',function() {
-		doWindowReload();
-	});
-	
 	jQuery('#frmMainQuery').submit(function() {
 		var myURL = jQuery(this).attr('action');
 		var myCmd = jQuery('#prmQueryCommand').val();
@@ -116,13 +108,3 @@ function onReadyMain()
 		return false;
 	});
 } //onReadyMain()
-
-
-function doWindowReload()
-{
-	// Destroy viewport, the loading... message should stay.
-	jQuery('body').trigger('WindowReload');
-
-	// Reload document window
-	window.location.reload(false);
-} //doWindowReload

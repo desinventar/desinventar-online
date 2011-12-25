@@ -5,6 +5,18 @@
 
 function onReadyCommon()
 {
+	// 2011-04-29 (jhcaiced) Fix for use of ExtJS in IE9 ?
+	if ((typeof Range !== "undefined") && !Range.prototype.createContextualFragment)
+	{
+		Range.prototype.createContextualFragment = function(html)
+		{
+			var frag = document.createDocumentFragment(), div = document.createElement("div");
+			frag.appendChild(div);
+			div.outerHTML = html;
+			return frag;
+		};
+	}
+
 	// Initialize tooltip for elements with title attribute
 	jQuery('[title]').tooltip();
 
@@ -21,52 +33,11 @@ function doKeepSessionAwake() {
 	);
 }
 
-function doGetRegionInfo(RegionId)
+function doWindowReload()
 {
-	jQuery('#divRegionInfo #divRegionLogo').html('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />');
-	jQuery.post(jQuery('#desinventarURL').val() + '/',
-		{
-		  cmd         : 'cmdDatabaseGetInfo', 
-		  RegionId    : RegionId,
-		  LangIsoCode : jQuery('#desinventarLang').val()
-		},
-		function(data)
-		{
-			if (parseInt(data.Status)>0)
-			{
-				var i = data.RegionInfo;
-				jQuery('#divRegionInfo #divRegionLogo').html('<img src="' + jQuery('#desinventarURL').val() + '/?cmd=cmdDatabaseGetLogo&RegionId=' + RegionId + '" alt="" />');
-				jQuery('#divRegionInfo #txtRegionLabel').text(i.RegionLabel);
-				jQuery('#divRegionInfo #txtRegionPeriod').text(i.PeriodBeginDate + ' - ' + i.PeriodEndDate);
-				jQuery('#divRegionInfo #txtRegionNumberOfRecords').text(i.NumberOfRecords);
-				jQuery('#divRegionInfo #txtRegionLastUpdate').text(i.RegionLastUpdate);
+	// Destroy viewport, the loading... message should stay.
+	jQuery('body').trigger('WindowReload');
 
-				jQuery('#divRegionInfo #divInfoGeneral').hide();
-				if (i.InfoGeneral != '')
-				{
-					jQuery('#divRegionInfo #divInfoGeneral #Text').html(i.InfoGeneral);
-					jQuery('#divRegionInfo #divInfoGeneral').show();
-				}
-				jQuery('#divRegionInfo #divInfoCredits').hide();
-				if (i.InfoCredits != '')
-				{
-					jQuery('#divRegionInfo #divInfoCredits #Text').html(i.InfoCredits);
-					jQuery('#divRegionInfo #divInfoCredits').show();
-				}
-				jQuery('#divRegionInfo #divInfoSources').hide();
-				if (i.InfoSources != '')
-				{
-					jQuery('#divRegionInfo #divInfoSources #Text').html(i.InfoSources);
-					jQuery('#divRegionInfo #divInfoSources').show();
-				}
-				jQuery('#divRegionInfo #divInfoSynopsis').hide();
-				if (i.InfoSynopsis != '')
-				{
-					jQuery('#divRegionInfo #divInfoSynopsis #Text').html(i.InfoSynopsis);
-					jQuery('#divRegionInfo #divInfoSynopsis').show();
-				}
-			}
-		},
-		'json'
-	);
-}
+	// Reload document window
+	window.location.reload(false);
+} //doWindowReload

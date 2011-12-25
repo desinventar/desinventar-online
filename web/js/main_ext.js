@@ -437,14 +437,6 @@ function doMainMenuCreate()
 
 function doDialogsCreate()
 {
-	var w;
-	// User Login Window
-	w = new Ext.Window({id:'wndUserLogin',
-		el:'usr-win', layout:'fit', x:300, y:100, width:500, height:300, 
-		closeAction:'hide', plain: true, animCollapse: false,
-		items: new Ext.Panel({ contentEl: 'usr', autoScroll: true })
-	});
-
 	// Query Open Window
 	w = new Ext.Window({id:'wndQueryOpen',
 		el:'qry-win', layout:'fit', width:300, height:200,
@@ -653,3 +645,53 @@ function doUpdateDatabaseListByUser()
 		'json' //function
 	);
 } //updateDatabaseListByUser()
+
+function doGetRegionInfo(RegionId)
+{
+	jQuery('#divRegionInfo #divRegionLogo').html('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />');
+	jQuery.post(jQuery('#desinventarURL').val() + '/',
+		{
+		  cmd         : 'cmdDatabaseGetInfo', 
+		  RegionId    : RegionId,
+		  LangIsoCode : jQuery('#desinventarLang').val()
+		},
+		function(data)
+		{
+			if (parseInt(data.Status)>0)
+			{
+				var i = data.RegionInfo;
+				jQuery('#divRegionInfo #divRegionLogo').html('<img src="' + jQuery('#desinventarURL').val() + '/?cmd=cmdDatabaseGetLogo&RegionId=' + RegionId + '" alt="" />');
+				jQuery('#divRegionInfo #txtRegionLabel').text(i.RegionLabel);
+				jQuery('#divRegionInfo #txtRegionPeriod').text(i.PeriodBeginDate + ' - ' + i.PeriodEndDate);
+				jQuery('#divRegionInfo #txtRegionNumberOfRecords').text(i.NumberOfRecords);
+				jQuery('#divRegionInfo #txtRegionLastUpdate').text(i.RegionLastUpdate);
+
+				jQuery('#divRegionInfo #divInfoGeneral').hide();
+				if (i.InfoGeneral != '')
+				{
+					jQuery('#divRegionInfo #divInfoGeneral #Text').html(i.InfoGeneral);
+					jQuery('#divRegionInfo #divInfoGeneral').show();
+				}
+				jQuery('#divRegionInfo #divInfoCredits').hide();
+				if (i.InfoCredits != '')
+				{
+					jQuery('#divRegionInfo #divInfoCredits #Text').html(i.InfoCredits);
+					jQuery('#divRegionInfo #divInfoCredits').show();
+				}
+				jQuery('#divRegionInfo #divInfoSources').hide();
+				if (i.InfoSources != '')
+				{
+					jQuery('#divRegionInfo #divInfoSources #Text').html(i.InfoSources);
+					jQuery('#divRegionInfo #divInfoSources').show();
+				}
+				jQuery('#divRegionInfo #divInfoSynopsis').hide();
+				if (i.InfoSynopsis != '')
+				{
+					jQuery('#divRegionInfo #divInfoSynopsis #Text').html(i.InfoSynopsis);
+					jQuery('#divRegionInfo #divInfoSynopsis').show();
+				}
+			}
+		},
+		'json'
+	);
+} //doGetRegionInfo()
