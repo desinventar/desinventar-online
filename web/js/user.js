@@ -8,7 +8,7 @@ function onReadyUserChangePasswd(windowId) {
 	updateUserChangePasswdMsg('');
 	
 	// submit form validation and process..
-	jQuery("#frmUserChangePasswd").submit(function() {
+	jQuery("#frmUserAccountChangePasswd").submit(function() {
 		var UserPasswd = jQuery("#txtUserPasswd").val();
 		var UserPasswd2 = jQuery("#txtUserPasswd2").val();
 		var UserPasswd3 = jQuery("#txtUserPasswd3").val();
