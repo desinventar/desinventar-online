@@ -109,8 +109,9 @@ function doAdminDatabaseCreateUploader()
 		action: jQuery('#desinventarURL').val() + '/',
 		params:
 		{
-			cmd : 'cmdDatabaseUpload',
-			RegionId: jQuery('#desinventarRegionId').val()
+			cmd        : 'cmdDatabaseUpload',
+			UploadMode : jQuery('#fldDatabaseUploadMode').val(),
+			RegionId   : jQuery('#desinventarRegionId').val()
 		},
 		debug:false,
 		multiple:false,
@@ -140,16 +141,15 @@ function doAdminDatabaseCreateUploader()
 			if (parseInt(data.Status)>0)
 			{
 				jQuery('.clsDatabaseUploadType').hide();
-				var CurRegionId = jQuery('#desinventarRegionId').val();
-				if (CurRegionId != '') 
-				{
-					jQuery('#txtDatabaseUploadConfirmReplace').show();
-					jQuery('#btnDatabaseUploadReplace').show();
-				}
-				else
+				if (jQuery('#fldDatabaseUploadMode').val() == 'Copy')
 				{
 					jQuery('#txtDatabaseUploadConfirmCopy').show();
 					jQuery('#btnDatabaseUploadCopy').show();
+				}
+				else
+				{
+					jQuery('#txtDatabaseUploadConfirmReplace').show();
+					jQuery('#btnDatabaseUploadReplace').show();
 				}
 				doDatabaseUploadSetParameters(data.RegionInfo);
 				doDatabaseUploadStatusMsg('');
@@ -173,10 +173,11 @@ function doAdminDatabaseCreateUploader()
 		doDatabaseUploadReset();
 		uploader.cancel(jQuery('#txtDatabaseUploadId').val());
 	});
-}
+} //doAdminDatabaseCreateUploader()
 
 function doDatabaseUploadReset()
 {
+	doAdminDatabaseCreateUploader();
 	doDatabaseUploadStatusMsg('');
 	jQuery('#txtDatabaseUploadFilename').val('');
 	jQuery('#txtDatabaseUploadRegionId').text('');
@@ -194,7 +195,7 @@ function doDatabaseUploadReset()
 	jQuery('#divDatabaseUploadControl').hide();
 	jQuery('#divDatabaseUploadParameters').hide();
 
-	if (jQuery('#desinventarRegionId').val() == '')
+	if (jQuery('#fldDatabaseUploadMode').val() == 'Copy')
 	{
 		jQuery('#divDatabaseUploadControl').show();
 	}
@@ -256,7 +257,7 @@ function doDatabaseUploadCreate()
 	// Database Upload
 	var w = new Ext.Window({id:'wndDatabaseUpload', 
 		el: 'divDatabaseUploadWin', layout:'fit', 
-		width:400, height:200, modal:false,
+		width:400, height:220, modal:false,
 		plain: false, animCollapse: false,
 		closeAction: 'hide',
 		items: new Ext.Panel({
@@ -275,8 +276,17 @@ function doDatabaseUploadCreate()
 	jQuery('.clsDatabaseUploadStatusMsg').hide();
 } // doDatabaseUploadCreate()
 
-function doDatabaseUploadShow()
+function doDatabaseUploadShow(prmMode)
 {
+	jQuery('#fldDatabaseUploadMode').val(prmMode);
+	if (prmMode == 'Copy')
+	{
+		Ext.getCmp('wndDatabaseUpload').setTitle(jQuery('#mnuDatabaseCopy').text());
+	}
+	else
+	{
+		Ext.getCmp('wndDatabaseUpload').setTitle(jQuery('#mnuDatabaseReplace').text());
+	}
 	jQuery('.clsDatabaseUpload').hide();
 	doDatabaseUploadReset();
 	Ext.getCmp('wndDatabaseUpload').show();

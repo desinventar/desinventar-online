@@ -19,7 +19,8 @@
 		<span id="mnuDatabaseRecordEdit">{-#mnuDatabaseRecordEdit#-}</span>
 		<span id="mnuDatabaseRegionInfo">{-#mnuDatabaseRegionInfo#-}</span>
 		<span id="mnuDatabaseExport">{-#mnuDatabaseExport#-}</span>
-		<span id="mnuDatabaseUpload">{-#mnuDatabaseUpload#-}</span>
+		<span id="mnuDatabaseCopy">{-#mnuDatabaseCopy#-}</span>
+		<span id="mnuDatabaseReplace">{-#mnuDatabaseReplace#-}</span>
 		<span id="mnuDatabaseCreate">{-#mnuDatabaseCreate#-}</span>
 		<span id="mnuDatabaseConfig">{-#mnuDatabaseConfig#-}</span>
 		<span id="mnuDatabaseSelect">{-#mnuDatabaseSelect#-}</span>

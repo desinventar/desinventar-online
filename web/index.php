@@ -420,16 +420,17 @@ switch ($cmd)
 					{
 						$r = new DIRegion($us, '', $OutDir . '/info.xml');
 						$info = array();
+						$UploadMode = getParameter('UploadMode','');
 						// If no database is open, try to calculate RegionId
-						if ($RegionId == '')
+						if ($UploadMode == 'Copy')
 						{
-							if ($us->UserId == 'root')
+							if (DIRegion::existRegion($us, $r->get('RegionId')) > 0)
 							{
-								$RegionId = $r->get('RegionId');
+								$RegionId = DIRegion::buildRegionId($r->get('CountryIso'));
 							}
 							else
 							{
-								$RegionId = DIRegion::buildRegionId($r->get('CountryIso'));
+								$RegionId = $r->get('RegionId');
 							}
 						}
 						$info['RegionId']         = $RegionId;
