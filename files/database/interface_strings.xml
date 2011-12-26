@@ -2898,16 +2898,16 @@
 	</Group>
 	<Group name="grpDatabaseUsers">
 		<Message id="msgDatabaseUsers_TitleOptions">
-			<Text LangIsoCode="eng">Database options</Text>
-			<Text LangIsoCode="spa">Opciones base de datos</Text>
-			<Text LangIsoCode="por">Opções de banco de dados</Text>
-			<Text LangIsoCode="fre">Options base de donneés</Text>
+			<Text LangIsoCode="eng">Diffusion</Text>
+			<Text LangIsoCode="spa">Difusión</Text>
+			<Text LangIsoCode="por">Difusão</Text>
+			<Text LangIsoCode="fre">Diffusion</Text>
 		</Message>
 		<Message id="msgDatabaseUsers_TitleRoles">
-			<Text LangIsoCode="eng">Database permissions</Text>
-			<Text LangIsoCode="spa">Permisos base de datos</Text>
-			<Text LangIsoCode="por">Permissões de banco de dados</Text>
-			<Text LangIsoCode="fre">Autorisations de base</Text>
+			<Text LangIsoCode="eng">Roles</Text>
+			<Text LangIsoCode="spa">Roles</Text>
+			<Text LangIsoCode="por">Roles</Text>
+			<Text LangIsoCode="fre">Rôles</Text>
 		</Message>
 		<Message id="msgDatabaseUsers_RegionActive">
 			<Text LangIsoCode="eng">Active</Text>
