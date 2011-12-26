@@ -222,8 +222,11 @@ function onMenuItem(item) {
 			Ext.getCmp('wndDatabaseExport').show();
 			doAdminDatabaseExportAction();
 		break;
-		case 'mnuDatabaseUpload':
-			doDatabaseUploadShow();
+		case 'mnuDatabaseCopy':
+			doDatabaseUploadShow('Copy');
+		break;
+		case 'mnuDatabaseReplace':
+			doDatabaseUploadShow('Replace');
 		break;
 		case 'mnuDatabaseConfig':
 			hideQueryDesign();
@@ -326,7 +329,8 @@ function doMainMenuCreate()
 			{id:'mnuDatabaseRecordEdit'   , text: jQuery('#mnuDatabaseRecordEdit').text()   , handler: onMenuItem, hidden: true },
 			{id:'mnuDatabaseRegionInfo'   , text: jQuery('#mnuDatabaseRegionInfo').text()   , handler: onMenuItem, hidden: true },
 			{id:'mnuDatabaseExport'       , text: jQuery('#mnuDatabaseExport').text()       , handler: onMenuItem, hidden: true },
-			{id:'mnuDatabaseUpload'       , text: jQuery('#mnuDatabaseUpload').text()       , handler: onMenuItem, hidden: true },
+			{id:'mnuDatabaseCopy'         , text: jQuery('#mnuDatabaseCopy').text()         , handler: onMenuItem, hidden: true },
+			{id:'mnuDatabaseReplace'      , text: jQuery('#mnuDatabaseReplace').text()      , handler: onMenuItem, hidden: true },
 			{id:'mnuDatabaseCreate'       , text: jQuery('#mnuDatabaseCreate').text()       , handler: onMenuItem, hidden: true },
 			{id:'mnuDatabaseConfig'       , text: jQuery('#mnuDatabaseConfig').text()       , handler: onMenuItem, hidden: true },
 			{id:'mnuDatabaseSelect'       , text: jQuery('#mnuDatabaseSelect').text()       , handler: onMenuItem, hidden: true },
@@ -372,7 +376,7 @@ function doMainMenuCreate()
 		Ext.getCmp('mnuUserEditAccount').show();
 		Ext.getCmp('mnuUserLogout').show();
 		Ext.getCmp('mnuDatabaseCreate').show();
-		Ext.getCmp('mnuDatabaseUpload').show();
+		Ext.getCmp('mnuDatabaseCopy').show();
 	}
 
 	// Configure which options are visible using RoleValue
@@ -408,6 +412,7 @@ function doMainMenuCreate()
 
 			if (UserRoleValue >= 4)
 			{
+				Ext.getCmp('mnuDatabaseReplace').show();
 				Ext.getCmp('mnuDatabaseConfig').show();
 			}
 		}		

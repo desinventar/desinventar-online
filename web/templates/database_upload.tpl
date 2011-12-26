@@ -97,6 +97,7 @@
 	</div>
 
 	<div id="divDatabaseUploadStatusMsg" class="center">
+		<input type="hidden" id="fldDatabaseUploadMode" value="" />
 		<input type="hidden" id="msgDatabaseUploadComplete"   value="{-#msgDatabaseUploadComplete#-}" />
 		<input type="hidden" id="msgDatabaseUploadChooseFile" value="{-#msgDatabaseUploadChooseFile#-}" />
 		<span class="clsDatabaseUploadStatusMsg" id="msgDatabaseUploadUpdateOk">{-#msgDatabaseUploadUpdateOk#-}</span>
