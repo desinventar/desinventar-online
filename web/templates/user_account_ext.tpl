@@ -41,11 +41,6 @@
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
-						<br />
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2" align="center">
 						<span class="clsUserAccountChangePasswdStatus" id="msgUserAccountEmptyFields">{-#msgUserAccountEmptyFields#-}</span>
 						<span class="clsUserAccountChangePasswdStatus" id="msgUserAccountPasswdDoNotMatch">{-#msgUserAccountPasswdDoNotMatch#-}</span>
 						<span class="clsUserAccountChangePasswdStatus" id="msgUserAccountInvalidPasswd">{-#msgUserAccountInvalidPasswd#-}</span>
