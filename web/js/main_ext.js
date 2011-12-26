@@ -149,13 +149,9 @@ function onMenuItem(item) {
 			doUserAccountShow();
 		break;
 		case 'mnuUserAccountManagement':
-			jQuery('#divAdminUsersContent').load(jQuery('#desinventarURL').val() + '/user.php?cmd=adminusr',
-				function(responseText, textStatus, XMLHttpRequest)
-				{ 
-					onReadyUserAdmin();
-					doAdminUsersShow();
-				}
-			);
+			Ext.getCmp('wndAdminUsers').show();
+			//jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=adminusr',function() { onReadyUserAdmin(); });
+			//Ext.getCmp('wndDatabaseList').show();
 		break;
 		case 'mnuUserLanguage-spa':
 		case 'mnuUserLanguage-eng':
