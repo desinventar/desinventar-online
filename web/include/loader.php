@@ -12,7 +12,7 @@ if (! isset($_SERVER['DESINVENTAR_WEB']))
 
 // This is the version of the software
 define('MAJORVERSION', '2011');
-define('MINORVERSION', '360');
+define('MINORVERSION', '361');
 define('VERSION'     , MAJORVERSION . '.' . MINORVERSION);
 define('JSVERSION'   , '2011-12-26.01');
 
