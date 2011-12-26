@@ -146,7 +146,8 @@ function onMenuItem(item) {
 			doUserLogout();
 		break;
 		case 'mnuUserEditAccount':
-			doUserAccountShow();
+			jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=changepasswd',function() { onReadyUserChangePasswd('dbl-win'); });
+			Ext.getCmp('wndDatabaseList').show();
 		break;
 		case 'mnuUserLanguage-spa':
 		case 'mnuUserLanguage-eng':
