@@ -32,15 +32,12 @@ function onReadyUserAccount()
 			);
 		}
 	});
-	jQuery('#btnUserAccountChangePasswdCancel').click(function() {
-		Ext.getCmp('wndUserAccount').hide();
-	});
 }
 
 function doUserAccountCreate()
 {
 	var w = new Ext.Window({id:'wndUserAccount',
-		el:'divUserAccountWin', layout:'fit', x:200, y:100, width:400, height:170, 
+		el:'divUserAccountWin', layout:'fit', x:200, y:100, width:400, height:200, 
 		closeAction:'hide', plain: true, animCollapse: false,
 		items: new Ext.Panel({ contentEl: 'divUserAccountContent', autoScroll: true })
 	});
@@ -48,9 +45,6 @@ function doUserAccountCreate()
 
 function doUserAccountShow()
 {
-	jQuery('#fldUserAccountPasswd').val('');
-	jQuery('#fldUserAccountPasswd2').val('');
-	jQuery('#fldUserAccountPasswd3').val('');
 	Ext.getCmp('wndUserAccount').show();
 }
 
