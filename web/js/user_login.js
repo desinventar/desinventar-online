@@ -3,20 +3,7 @@
  (c) 1998-2011 Corporacion OSSO
 */
 
-function onReadyUserLogin()
-{
-	doUserLoginCreate();
-
-	// Attach events reload page when user login/logout occurs
-	jQuery('body').bind('UserLoggedIn',function() {
-		doWindowReload();
-	});
-
-	jQuery('body').bind('UserLoggedOut',function() {
-		doWindowReload();
-	});
-	
-
+function onReadyUserLogin() {
 	// hide all status messages on start
 	doUserLoginUpdateMsg('');
 	
@@ -131,14 +118,3 @@ function doUserLoginShow()
 	doUserLoginUpdateMsg();
 	Ext.getCmp('wndUserLogin').show();
 } //doUserLoginShow()
-
-function doUserLoginCreate()
-{
-	var w;
-	// User Login Window
-	w = new Ext.Window({id:'wndUserLogin',
-		el:'divUserLoginWin', layout:'fit', x:300, y:100, width:500, height:300, 
-		closeAction:'hide', plain: true, animCollapse: false,
-		items: new Ext.Panel({ contentEl: 'divUserLoginContent', autoScroll: true })
-	});
-}
