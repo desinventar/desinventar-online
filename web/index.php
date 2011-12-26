@@ -76,28 +76,6 @@ switch ($cmd)
 		}
 		echo json_encode($answer);
 	break;
-	case 'cmdUserAccountChangePasswd':
-		$answer = array();
-		$iReturn = ERR_NO_ERROR;
-		if ($us->UserId == '')
-		{
-			$iReturn = ERR_UNKNOWN_ERROR;
-		}
-		if ($iReturn > 0)
-		{
-			if ($us->validateUser($us->UserId, $_POST['OldPasswd']) == '')
-			{
-				$iReturn = ERR_UNKNOWN_ERROR;
-			}
-		}
-		if ($iReturn > 0)
-		{
-			$iReturn = $us->updateUserPasswd($us->UserId, $_POST['NewPasswd']);
-			
-		}
-		$answer['Status'] = $iReturn;
-		echo json_encode($answer);
-	break;
 	case 'cmdAdminDatabaseGetList':
 		$answer['Status']     = ERR_NO_ERROR;
 		$answer['RegionList'] = $us->q->getRegionAdminList();
