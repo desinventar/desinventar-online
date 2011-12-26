@@ -9,7 +9,7 @@ function doAdminUsersSetup()
 	// Database Create
 	var w = new Ext.Window({id:'wndAdminUsers', 
 		el: 'divAdminUsersWin', layout:'fit', 
-		width:650, height:450, modal:false,
+		width:600, height:300, modal:false,
 		closeAction:'hide', plain: false, animCollapse: true,
 		items: new Ext.Panel({
 			contentEl: 'divAdminUsersContent',
