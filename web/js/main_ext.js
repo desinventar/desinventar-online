@@ -271,7 +271,7 @@ function onMenuItem(item) {
 		break;
 		// help menu
 		case 'mnuHelpAbout':
-			Ext.getCmp('wndAboutDialog').show();
+			Ext.getCmp('wndDialog').show();
 		break;
 		case 'mnuHelpWebsite':
 			window.open('http://www.desinventar.org', '', '');
@@ -458,6 +458,11 @@ function doDialogsCreate()
 		el:'dbl-win', layout:'fit', x:200, y:100, width:600, height:450, 
 		closeAction:'hide', plain: true, animCollapse: false,
 		items: new Ext.Panel({ contentEl: 'dbl', autoScroll: true })
+	});
+	w = new Ext.Window({id:'wndDialog',
+		el:'dlg-win', layout:'fit', x:350, y:200, width:300, height:150, 
+		closeAction:'hide', plain: true, animCollapse: false,
+		items: new Ext.Panel({ contentEl: 'dlg', autoScroll: true })
 	});
 	// Datacard View/Edit Window
 	w = new Ext.Window({id:'wndDatacard',

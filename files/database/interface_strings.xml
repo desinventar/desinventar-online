@@ -1651,6 +1651,12 @@
 			<Text LangIsoCode="por">Início</Text>
 			<Text LangIsoCode="fre">Accueil</Text>
 		</Message>
+		<Message id="tcopyright">
+			<Text LangIsoCode="eng">(c) 1998-2011 Corporación OSSO - Colombia</Text>
+			<Text LangIsoCode="spa">(c) 1998-2011 Corporación OSSO - Colombia</Text>
+			<Text LangIsoCode="por">(c) 1998-2011 Corporación OSSO - Colombia</Text>
+			<Text LangIsoCode="fre">(c) 1998-2011 Corporación OSSO - Colombie</Text>
+		</Message>
 		<Message id="labelsoftwareversion">
 			<Text LangIsoCode="eng">Software Version</Text>
 			<Text LangIsoCode="spa">Versión de Software</Text>
@@ -2359,6 +2365,12 @@
 			<Text LangIsoCode="por">Formulários</Text>
 			<Text LangIsoCode="fre">Données</Text>
 		</Message>
+		<Message id="tabout">
+			<Text LangIsoCode="eng">E-Mail desinventar@desinventar.org</Text>
+			<Text LangIsoCode="spa">Correo electrónico: desinventar@desinventar.org</Text>
+			<Text LangIsoCode="por">Email: desinventar@desinventar.org</Text>
+			<Text LangIsoCode="fre">Courrier électronique: désinventer@désinventer.org</Text>
+		</Message>
 		<Message id="tserialmsg">
 			<Text LangIsoCode="eng">May include or exclude one or several serials. Serials should be separated by spaces.</Text>
 			<Text LangIsoCode="spa">Puede incluir o excluir uno o varios seriales. Los seriales debe separarlos por espacios</Text>
@@ -2856,20 +2868,6 @@
 			<Text LangIsoCode="spa">Demo Fichas</Text>
 			<Text LangIsoCode="por">Demo Formulários</Text>
 			<Text LangIsoCode="fre">Démonstration cartes de données</Text>
-		</Message>
-	</Group>
-	<Group name="grpAboutDialog">
-		<Message id="msgAboutDialogEMail">
-			<Text LangIsoCode="eng">E-Mail desinventar@desinventar.org</Text>
-			<Text LangIsoCode="spa">Correo electrónico: desinventar@desinventar.org</Text>
-			<Text LangIsoCode="por">Email: desinventar@desinventar.org</Text>
-			<Text LangIsoCode="fre">Courrier électronique: désinventer@désinventer.org</Text>
-		</Message>
-		<Message id="msgAboutDialogCopyright">
-			<Text LangIsoCode="eng">(c) 1998-2011 Corporación OSSO - Colombia</Text>
-			<Text LangIsoCode="spa">(c) 1998-2011 Corporación OSSO - Colombia</Text>
-			<Text LangIsoCode="por">(c) 1998-2011 Corporación OSSO - Colombia</Text>
-			<Text LangIsoCode="fre">(c) 1998-2011 Corporación OSSO - Colombie</Text>
 		</Message>
 	</Group>
 	<Group name="grpUserEdit">
