@@ -148,11 +148,6 @@ function onMenuItem(item) {
 		case 'mnuUserEditAccount':
 			doUserAccountShow();
 		break;
-		case 'mnuUserAccountManagement':
-			Ext.getCmp('wndAdminUsers').show();
-			//jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=adminusr',function() { onReadyUserAdmin(); });
-			//Ext.getCmp('wndDatabaseList').show();
-		break;
 		case 'mnuUserLanguage-spa':
 		case 'mnuUserLanguage-eng':
 		case 'mnuUserLanguage-por':
@@ -262,6 +257,11 @@ function onMenuItem(item) {
 		break;
 		case 'mnuDatabaseCreate':
 			doDatabaseCreateShow();
+		break;
+		case 'mnuUserAccountManagement':
+			//updateList('dbl', jQuery('#desinventarURL').val() + '/user.php', 'cmd=adminusr', 'onReadyUserAdmin');
+			jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=adminusr',function() { onReadyUserAdmin(); });
+			Ext.getCmp('wndDatabaseList').show();
 		break;
 		case 'mnuAdminDatabases':
 			jQuery('.contentBlock').hide();
