@@ -52,5 +52,4 @@
 		</div>
 		{-include file="desinventarinfo.tpl"-}
 		{-include file="desinventarmenu.tpl"-}
-	</body>
 </html>
