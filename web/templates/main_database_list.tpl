@@ -46,7 +46,7 @@
 			
 			<!-- Central Content Area -->
 			<div id="container">
-				{-include file="database_list.tpl"-}
+				{-include file="region_list.tpl"-}
 			</div>
 
 			<!-- Help Section -->
