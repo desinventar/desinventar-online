@@ -637,7 +637,6 @@ function doUpdateDatabaseListByUser()
 					jQuery('#divDatabaseFindList').hide();
 					jQuery('#divDatabaseFindError').show();
 				}
-				jQuery('#divDatabaseList').show();
 			} //if
 		},
 		'json' //function
