@@ -506,7 +506,7 @@ switch ($cmd)
 		// Direct access returns a list of public regions on this server
 		$t->assign('lg', $lg);
 		$t->assign('LanguageList', $us->q->loadLanguages(1));
-		$t->display('main_database_list.tpl');
+		$t->display('index.tpl'); //main_database_list.tpl
 	break;
 	case 'cmdSearchDB':
 	case 'searchdb':
