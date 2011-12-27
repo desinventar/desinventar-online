@@ -37,6 +37,9 @@
 					{-foreach name=eve key=key item=item from=$eveuserl-}
 						<tr class="{-if ($smarty.foreach.eve.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}" >
 							<td id="Id" style="display:none;">{-$key-}</td>
+
+
+
 							<td id="Predefined" style="display:none;">0</td>
 							<td id="Name">{-$item[0]-}</td>
 							<td id="Desc">{-$item[1]|truncate:150-}</td>
@@ -91,7 +94,7 @@
 	<a class="button" id="btnEventEditAdd"><span>{-#baddelem#-}</span></a>
 	<span id="eventstatusmsg" class="dlgmsg"></span>
 	<br /><br />
-	<div id="eventaddsect" style="display:none">
+	<div id="eventaddsect" style="display:none;width:600px;">
 		<form id="frmEventEdit" method="POST">
 			<input id="Id" name="Info[EventId]" type="hidden" />
 			{-$dic.DBEvePersonName[0]-}<b style="color:darkred;">*</b><br />
@@ -111,8 +114,10 @@
 			<p align="center" style="width:500px;">
 				<input id="RegionId" name="RegionId" type="hidden" value="{-$reg-}" />
 				<input id="cmd" name="cmd" type="hidden" />
-				<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="4" />
-				<input id="btnCancel" type="reset" value="{-#bcancel#-}" {-$ro-} class="line" />
+				<div class="center">
+					<a class="button" id="btnEventEditSend"   tabindex="4"><span>{-#bsave#-}</span></a>
+					<a class="button" id="btnEventEditCancel" tabindex="5"><span>{-#bcancel#-}</span></a>
+				</div>
 			</p>
 		</form>
 	</div>

@@ -44,7 +44,11 @@ function onReadyDBConfigEvents()
 		jQuery('#frmEventEdit #cmd').val('cmdEventInsert');
 	});
 
-	jQuery('#frmEventEdit #btnCancel').unbind('click').click(function() {
+	jQuery('#btnEventEditSend').unbind('click').click(function() {
+		jQuery('#frmEventEdit').trigger('submit');
+	});
+
+	jQuery('#btnEventEditCancel').unbind('click').click(function() {
 		jQuery('#eventaddsect').hide();
 		jQuery('#btnEventEditAdd').show();
 	});
