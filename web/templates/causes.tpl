@@ -14,10 +14,10 @@
 		<table id="tblCauseListUser" class="grid">
 			<thead>
 				<tr>
-					<td>
+					<td style="display:none;">
 						Id
 					</td>
-					<td>
+					<td style="display:none;">
 						Predefined
 					</td>
 					<td class="header" onMouseOver="showtip('{-$dic.DBCauPersonName[2]-}');">
@@ -36,8 +36,8 @@
 				{-if $ctl_caupers-}
 					{-foreach name=cau key=key item=item from=$cauuserl-}
 						<tr class="{-if ($smarty.foreach.cau.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}" >
-							<td id="Id">{-$key-}</td>
-							<td id="Predefined">0</td>
+							<td id="Id" style="display:none;">{-$key-}</td>
+							<td id="Predefined" style="display:none;">0</td>
 							<td id="Name">{-$item[0]-}</td>
 							<td id="Desc">{-$item[1]|truncate:150-}</td>
 							<td><input id="Active" type="checkbox" {-if ($item[2]==1)-} checked {-/if-} disabled /></td>
@@ -53,10 +53,10 @@
 		<table id="tblCauseListPredef" width="100%" class="grid">
 			<thead>
 				<tr>
-					<td>
+					<td style="display:none;">
 						Id
 					</td>
-					<td>
+					<td style="display:none;">
 						Predefined
 					</td>
 					<td class="header" onMouseOver="showtip('{-$dic.DBCauPredefName[2]-}');">
@@ -75,8 +75,8 @@
 				{-if $ctl_caupred-}
 					{-foreach name=cau key=key item=item from=$caupredl-}
 						<tr class="{-if ($smarty.foreach.cau.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}">
-							<td id="Id">{-$key-}</td>
-							<td id="Predefined">1</td>
+							<td id="Id" style="display:none;">{-$key-}</td>
+							<td id="Predefined" style="display:none;">1</td>
 							<td id="Name">{-$item[0]-}</td>
 							<td id="Desc">{-$item[1]|truncate:150-}</td>
 							<td><input id="Active" type="checkbox" {-if ($item[2]==1)-} checked {-/if-} disabled /></td>
@@ -91,7 +91,7 @@
 	<a class="button" id="btnCauseEditAdd"><span>{-#baddelem#-}</span></a>
 	<span id="causestatusmsg" class="dlgmsg"></span>
 	<br /><br />
-	<div id="causeaddsect" style="display:none">
+	<div id="causeaddsect" style="display:none;width:600px;">
 		<form id="frmCauseEdit">
 			<input id="Id" name="Info[CauseId]" type="hidden" />
 			{-$dic.DBCauPersonName[0]-}<b style="color:darkred;">*</b><br />
@@ -111,8 +111,10 @@
 			<p align="center" style="width:500px;">
 				<input id="r" name="r" type="hidden" value="{-$reg-}" />
 				<input id="cmd" name="cmd" type="hidden" value="" />
-				<input id="btnSubmit" type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="4" />
-				<input id="btnCancel" type="reset" value="{-#bcancel#-}" {-$ro-} class="line" />
+				<div class="center">
+					<a class="button" id="btnCauseEditSend" tabindex="4"><span>{-#bsave#-}</span></a>
+					<a class="button" id="btnCauseEditCancel" tabindex="5"><span>{-#bcancel#-}</span></a>
+				</div>
 			</p>
 		</form>
 	</div>

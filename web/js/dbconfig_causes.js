@@ -43,9 +43,12 @@ function onReadyDBConfigCauses()
 		jQuery('#frmCauseEdit #cmd').val('cmdCauseInsert');
 	});
 
-	jQuery('#frmCauseEdit #btnCancel').unbind('click').click(function() {
+	jQuery('#btnCauseEditCancel').unbind('click').click(function() {
 		jQuery('#causeaddsect').hide();
 		jQuery('#btnCauseEditAdd').show();
+	});
+	jQuery('#btnCauseEditSend').unbind('click').click(function() {
+		jQuery('#frmCauseEdit').trigger('submit');
 	});
 
 	jQuery('#frmCauseEdit').unbind('submit').submit(function()
