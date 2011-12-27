@@ -14,10 +14,10 @@
 		<table class="grid" id="tblEventListUser">
 			<thead>
 				<tr>
-					<td>
+					<td style="display:none;">
 						Id
 					</td>
-					<td>
+					<td style="display:none;">
 						Predefined
 					</td>
 					<td class="header" onMouseOver="showtip('{-$dic.DBEvePersonName[2]-}');">
@@ -36,8 +36,8 @@
 				{-if $ctl_evepers-}
 					{-foreach name=eve key=key item=item from=$eveuserl-}
 						<tr class="{-if ($smarty.foreach.eve.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}" >
-							<td id="Id">{-$key-}</td>
-							<td id="Predefined">0</td>
+							<td id="Id" style="display:none;">{-$key-}</td>
+							<td id="Predefined" style="display:none;">0</td>
 							<td id="Name">{-$item[0]-}</td>
 							<td id="Desc">{-$item[1]|truncate:150-}</td>
 							<td><input id="Active" type="checkbox" {-if ($item[2]==1)-} checked {-/if-} disabled /></td>
