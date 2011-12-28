@@ -120,6 +120,7 @@ function onMenuItem(item) {
 			doGetRegionInfo(jQuery('#desinventarRegionId').val());
 			Ext.getCmp('westm').show();
 			Ext.getCmp('westm').expand();
+			jQuery('.contentBlock').hide();
 			jQuery('#divRegionInfo').show();
 		break;
 		case 'mnuUserLogin':
