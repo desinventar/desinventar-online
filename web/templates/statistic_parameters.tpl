@@ -42,12 +42,11 @@
 						</select>
 					</td>
 					<td><b>{-$std.StatisticSecondlev[0]-}</b><br/>
-						<select id="_S+Secondlev" name="_S+Secondlev" size="8" style="width:180px;" class="line"
-							onChange="setTotalize('_S+Secondlev', '_S+Thirdlev');">
+						<select id="fldStatParam_SecondLev" name="_S+Secondlev" size="8" style="width:180px;" class="line" >
 						</select>
 					</td>
 					<td><b>{-$std.StatisticThirdlev[0]-}</b><br />
-						<select id="_S+Thirdlev" name="_S+Thirdlev" size="8" style="width:180px;" class="line">
+						<select id="fldStatParam_ThirdLev" name="_S+Thirdlev" size="8" style="width:180px;" class="line">
 						</select>
 					</td>
 				</tr>
