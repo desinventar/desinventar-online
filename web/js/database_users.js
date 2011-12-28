@@ -136,7 +136,11 @@ function onReadyDatabaseUsers()
 			}
 		});
 	});
-}
+	
+	jQuery('body').bind('cmdDatabaseUsersShow', function() {
+		doDatabaseUsersPopulateLists();
+	});
+} //onReadyDatabaseUsers()
 
 function doDatabaseUsersReset()
 {
