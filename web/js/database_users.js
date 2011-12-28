@@ -132,7 +132,7 @@ function onReadyDatabaseUsers()
 		jQuery('#tbodyDatabaseUsers_List tr').each(function(index, Element) {
 			if (jQuery('.UserId', this).text() == UserId)
 			{
-				jQuery('#fldDatabaseUsers_UserRole').val(jQuery('.UserRole', this).text());
+				jQuery(this).trigger('click');
 			}
 		});
 	});
