@@ -44,21 +44,24 @@
 													<tbody id="range">
 													{-foreach name=rg key=k item=i from=$range-}
 														<tr class="clsMapRangeRow">
-															<td>{-$smarty.foreach.rg.iteration-}</td>
-															<td><input id="_M+limit[{-$smarty.foreach.rg.iteration-1-}]" 
+															<td>
+																{-$smarty.foreach.rg.iteration-}
+															</td>
+															<td>
+																<input id="_M+limit[{-$smarty.foreach.rg.iteration-1-}]" 
 																	   name="_M+limit[{-$smarty.foreach.rg.iteration-1-}]"
 																	   type="text" class="line" size="5" value="{-$i[0]-}"
-																	   onBlur="miv={-if $smarty.foreach.rg.iteration > 1-}parseInt($('_M+limit[{-$smarty.foreach.rg.iteration-2-}]').value)+1{-else-}1{-/if-}; $('_M+legend[{-$smarty.foreach.rg.iteration-1-}]').value='{-#mbetween#-} '+ miv +'- '+ this.value"
-																/>
+																	   onBlur="miv={-if $smarty.foreach.rg.iteration > 1-}parseInt($('_M+limit[{-$smarty.foreach.rg.iteration-2-}]').value)+1{-else-}1{-/if-}; $('_M+legend[{-$smarty.foreach.rg.iteration-1-}]').value='{-#mbetween#-} '+ miv +'- '+ this.value"/>
 															</td>
-															<td><input id="_M+legend[{-$smarty.foreach.rg.iteration-1-}]" 
+															<td>
+																<input id="_M+legend[{-$smarty.foreach.rg.iteration-1-}]" 
 																	   name="_M+legend[{-$smarty.foreach.rg.iteration-1-}]"
 																	   type="text" class="line" size="20" value="{-#mbetween#-} {-$i[1]-}" />
 															</td>
-															<td><input id="_M+ic[{-$smarty.foreach.rg.iteration-1-}]"
+															<td>
+																<input id="_M+ic[{-$smarty.foreach.rg.iteration-1-}]"
 																	   type="text" class="line" size="3" value="" style="background:#{-$i[2]-};"
-																	   onclick="showColorGrid2('_M+color[{-$smarty.foreach.rg.iteration-1-}]','_M+ic[{-$smarty.foreach.rg.iteration-1-}]');"
-																/>
+																	   onclick="showColorGrid2('_M+color[{-$smarty.foreach.rg.iteration-1-}]','_M+ic[{-$smarty.foreach.rg.iteration-1-}]');" />
 																<input type="hidden" id="_M+color[{-$smarty.foreach.rg.iteration-1-}]" name="_M+color[{-$smarty.foreach.rg.iteration-1-}]" value="{-$i[2]-}" />
 															</td>
 														</tr>
