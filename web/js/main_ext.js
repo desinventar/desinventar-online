@@ -116,12 +116,13 @@ function onMenuItem(item) {
 	switch (item.id)
 	{
 		case 'mnuDatabaseRegionInfo':
+			jQuery('.contentBlock').hide();
+			jQuery('#divQueryResults').show();
 			jQuery('#dcr').hide();
+			jQuery('#divRegionInfo').show();
 			doGetRegionInfo(jQuery('#desinventarRegionId').val());
 			Ext.getCmp('westm').show();
 			Ext.getCmp('westm').expand();
-			jQuery('.contentBlock').hide();
-			jQuery('#divRegionInfo').show();
 		break;
 		case 'mnuUserLogin':
 		case 'mnuUserChangeLogin':

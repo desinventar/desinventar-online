@@ -16,11 +16,6 @@
 <div class="contentBlock" id="divRegionList" style="display:none;">
 	{-include file="region_list.tpl"-}
 </div>
-
-<div class="contentBlock" id="divRegionInfo" style="display:none;">
-	{-include file="region_info.tpl"-}
-</div>
-
 <!-- Database Upload -->
 {-include file="database_upload_ext.tpl"-}
 <!-- Database Create -->
