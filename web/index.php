@@ -88,6 +88,9 @@ switch ($cmd)
 		$answer['Region'] = $r->getRegionInfoCore();
 		echo json_encode($answer);
 	break;
+	case 'cmdDatabaseUsers':
+		$t->display('main_database_users.tpl');
+	break;
 	case 'cmdDatabaseUsersGetList':
 		$answer = array();
 		$iReturn = ERR_NO_ERROR;
@@ -191,8 +194,28 @@ switch ($cmd)
 		$t->assign('ctl_admregmess', true);
 		$t->display('main_region.tpl');
 	break;
-	case 'cmdDatabaseAdminUsers':
-		$t->display('main_database_users.tpl');
+	case 'cmdDatabaseGeolevels':
+		$t->display('main_database_geolevels.tpl');
+	break;
+	case 'cmdDatabaseGeolevelsGetList':
+		$answer = array();
+		$iReturn = ERR_NO_ERROR;
+		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($RegionId == '')
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($iReturn > 0)
+		{
+			$r = new DIRegion($us, $RegionId);
+			$GeolevelList = $r->getGeolevelList();
+			$answer['GeolevelList'] = $GeolevelList;
+		}
+		$answer['Status'] = $iReturn;
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
 	case 'getversion':
 		echo VERSION;

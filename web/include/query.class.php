@@ -693,7 +693,7 @@ class Query //extends PDO
 			}
 		}
 		return $data;
-	}
+	} //loadGeoLevels()
 
 	function getMaxGeoLev()
 	{
