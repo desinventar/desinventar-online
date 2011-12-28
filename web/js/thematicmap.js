@@ -193,7 +193,7 @@ function hexdec(hex) {
 
 function genColors() {
 	var tbl = $('tbl_range');
-	var cnt = tbl.rows.length - 1;
+	var cnt = tbl.rows.length - 2;
 	var a = $('_M+color[0]').value;
 	var z = $('_M+color['+ cnt +']').value;
 	var a1 = hexdec(a.substring(1,3));	var z1 = hexdec(z.substring(1,3));
@@ -202,7 +202,8 @@ function genColors() {
 	var m1 = ((z1 - a1) / cnt);
 	var m2 = ((z2 - a2) / cnt);
 	var m3 = ((z3 - a3) / cnt);
-	for (i=1; i <= cnt; i++) {
+	for (i=0; i <= cnt; i++)
+	{
 		h1 = dechex(a1 + (m1 * i));
 		h2 = dechex(a2 + (m2 * i));
 		h3 = dechex(a3 + (m3 * i));
