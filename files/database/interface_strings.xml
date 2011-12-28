@@ -2928,6 +2928,12 @@
 			<Text LangIsoCode="fre">Actif</Text>
 		</Message>
 		<Message id="msgDatabaseUsers_RegionActiveTooltip">
+			<Text LangIsoCode="eng">The database will be available in your database list</Text>
+			<Text LangIsoCode="spa">La base quedará disponible en su listado de bases</Text>
+			<Text LangIsoCode="por">O banco de dados estará disponível na sua lista de banco de dados</Text>
+			<Text LangIsoCode="fre">La base de données sera disponible dans votre liste de base de données</Text>
+		</Message>
+		<Message id="msgDatabaseUsers_RegionActiveTooltipOld">
 			<Text LangIsoCode="eng">Uncheck this option if you want to completely disable the access to this database</Text>
 			<Text LangIsoCode="spa">Desactive esta opción si desea deshabilitar completamente el acceso a esta base de datos</Text>
 			<Text LangIsoCode="por">Desmarque essa opção se você quiser desativar completamente o acesso a este banco de dados</Text>
@@ -2940,6 +2946,12 @@
 			<Text LangIsoCode="fre">Publique</Text>
 		</Message>
 		<Message id="msgDatabaseUsers_RegionPublicTooltip">
+			<Text LangIsoCode="eng">The database can be queried in DesInventar Online</Text>
+			<Text LangIsoCode="spa">La base de datos podrá ser consultada en DesInventar Online</Text>
+			<Text LangIsoCode="por">O banco de dados pode ser consultado em DesInventar Online</Text>
+			<Text LangIsoCode="fre">La base de données peut être interrogée dans DesInventar Online</Text>
+		</Message>
+		<Message id="msgDatabaseUsers_RegionPublicTooltipOld">
 			<Text LangIsoCode="eng">Uncheck the option to prevent anonymous users from accessing the database</Text>
 			<Text LangIsoCode="spa">Desactive la opción para evitar que los usuarios anónimos tengan acceso a la base de datos</Text>
 			<Text LangIsoCode="por">Desmarque a opção para impedir que usuários anônimos acessem o banco de dados</Text>
