@@ -142,7 +142,6 @@ switch ($cmd)
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
 	case 'cmdDatabaseUsersUpdateOptions':
-		fb($_POST);
 		$iReturn = ERR_NO_ERROR;
 		$answer = array();
 		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
