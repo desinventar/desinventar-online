@@ -15,7 +15,8 @@ RewriteRule ^admin/db[/]*$    index.php?cmd=cmdAdminDB
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([a-zA-Z0-9\-_]+)/?$                    index.php?RegionId=$1
-RewriteRule ^([a-zA-Z0-9\-_]+)/users[/]$             index.php?RegionId=$1&cmd=cmdDatabaseAdminUsers
+RewriteRule ^([a-zA-Z0-9\-_]+)/users[/]$             index.php?RegionId=$1&cmd=cmdDatabaseUsers
+RewriteRule ^([a-zA-Z0-9\-_]+)/geolevels[/]$         index.php?RegionId=$1&cmd=cmdDatabaseGeolevels
 RewriteRule ^([a-zA-Z0-9\-_]+)/([a-zA-Z0-9\-_]+)/?$  index.php?RegionId=$1&cmd=$2
 #
 # Rewrite URLs of the form 'x' to the form 'index.php?q=x'.

@@ -2908,6 +2908,32 @@
 			<Text LangIsoCode="fre">Actif</Text>
 		</Message>
 	</Group>
+	<Group name="grpDatabaseGeolevels">
+		<Message id="msgDatabaseGeolevels_Title">
+			<Text LangIsoCode="eng">Geographic levels</Text>
+			<Text LangIsoCode="spa">Niveles Geográficos</Text>
+			<Text LangIsoCode="por">Níveis Geográficos</Text>
+			<Text LangIsoCode="fre">Niveaux Géographiques</Text>
+		</Message>
+		<Message id="msgDatabaseGeolevels_Name">
+			<Text LangIsoCode="eng">Name</Text>
+			<Text LangIsoCode="spa">Nombre</Text>
+			<Text LangIsoCode="por">Nome</Text>
+			<Text LangIsoCode="fre">Nom</Text>
+		</Message>
+		<Message id="msgDatabaseGeolevels_Desc">
+			<Text LangIsoCode="eng">Description</Text>
+			<Text LangIsoCode="spa">Descripción</Text>
+			<Text LangIsoCode="por">Descrição</Text>
+			<Text LangIsoCode="fre">Description</Text>
+		</Message>
+		<Message id="msgDatabaseGeolevels_Add">
+			<Text LangIsoCode="eng">Add</Text>
+			<Text LangIsoCode="spa">Adicionar</Text>
+			<Text LangIsoCode="por">Adicionar</Text>
+			<Text LangIsoCode="fre">Ajouter</Text>
+		</Message>
+	</Group>
 	<Group name="grpDatabaseUsers">
 		<Message id="msgDatabaseUsers_TitleOptions">
 			<Text LangIsoCode="eng">Diffusion</Text>

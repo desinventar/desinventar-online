@@ -642,6 +642,24 @@ class DIRegion extends DIObject
 			$iReturn = ERR_UNKNOWN_ERROR;
 		}
 		return $iReturn;
-	}
+	} //removeRegionUserAdmin()
+
+	function getGeolevelList()
+	{
+		$answer = array();
+		$sQuery = 'SELECT GeoLevelId, GeoLevelName, GeoLevelDesc FROM GeoLevel ORDER BY GeoLevelId';
+		try
+		{
+			foreach($this->session->q->dreg->query($sQuery, PDO::FETCH_ASSOC) as $row)
+			{
+				$answer[$row['GeoLevelId']] = $row;
+			}
+		}
+		catch (Exception $e)
+		{
+			showErrorMsg('getGeolevelList : ' . $e->getMessage());
+		}		
+		return $answer;
+	} //loadGeoLevels()
 } //class
 </script>

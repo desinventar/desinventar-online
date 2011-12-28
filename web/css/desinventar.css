@@ -254,10 +254,10 @@ a:hover	{	color:#00008b; }
 
 .clsDatabaseUsers {
 	max-width:400px;
-	height:200px;
+	height:100%;
 }
 
-.clsDatabaseUsers {
-	max-width:400px;
+.clsDatabaseGeolevels {
+	max-width:600px;
 	height:100%;
 }
