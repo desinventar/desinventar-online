@@ -48,7 +48,7 @@ class Maps
 				$map .= $this->setLayerEff($us, $reg, $lev, $dl, $range, $info, $lbl, $prmTransparency);
 				if ($type == "THEMATIC")
 				{
-					$fp .= $reg . '-' . $us->sSessionId . '.map';
+					$fp .= $reg . '-' . $us->sSessionId . '_' . time() .  '.map';
 				}
 				elseif (strlen($type) > 0)
 				{
