@@ -2999,6 +2999,12 @@
 			<Text LangIsoCode="por">Administrador</Text>
 			<Text LangIsoCode="fre">Administrateur</Text>
 		</Message>
+		<Message id="msgDatabaseUsers_Edit">
+			<Text LangIsoCode="eng">Edit</Text>
+			<Text LangIsoCode="spa">Editar</Text>
+			<Text LangIsoCode="por">Atualizar</Text>
+			<Text LangIsoCode="fre">Éditer</Text>
+		</Message>
 		<Message id="msgDatabaseUsers_Add">
 			<Text LangIsoCode="eng">Add</Text>
 			<Text LangIsoCode="spa">Adicionar</Text>
@@ -3046,6 +3052,12 @@
 			<Text LangIsoCode="spa">Los campos no pueden estar vacios</Text>
 			<Text LangIsoCode="por">Campos não pode ser vazio</Text>
 			<Text LangIsoCode="fre">Les champs ne peuvent pas être vide</Text>
+		</Message>
+		<Message id="msgDatabaseUsers_RoleListCannotEditRole">
+			<Text LangIsoCode="eng">Sorry, you cannot edit your own role</Text>
+			<Text LangIsoCode="spa">Lo sentimos, no se puede editar su propio rol</Text>
+			<Text LangIsoCode="por">Desculpe, você não pode editar seu próprio papel</Text>
+			<Text LangIsoCode="fre">Désolé, vous ne pouvez pas éditer votre propre rôle</Text>
 		</Message>
 	</Group>
 	<Group name="grpDatabaseEdit">

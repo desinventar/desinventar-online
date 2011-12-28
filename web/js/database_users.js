@@ -57,7 +57,7 @@ function onReadyDatabaseUsers()
 		);
 	});
 		
-	jQuery('#btnDatabaseUsers_Add').click(function() {
+	jQuery('#btnDatabaseUsers_Edit').click(function() {
 		doDatabaseUsersReset();
 		jQuery('#divDatabaseUsers_Edit').show();
 	});
@@ -111,8 +111,18 @@ function onReadyDatabaseUsers()
 	});
 
 	jQuery('#tbodyDatabaseUsers_List').delegate('tr', 'click', function(e) {
-		jQuery('#fldDatabaseUsers_UserId').val(jQuery('.UserId', this).text());
+		var UserId = jQuery.trim(jQuery('.UserId', this).text());
+		jQuery('#fldDatabaseUsers_UserId').val(UserId);
 		jQuery('#fldDatabaseUsers_UserRole').val(jQuery('.UserRole', this).text());
+		jQuery('#fldDatabaseUsers_UserId').prop('disabled', false);
+		jQuery('#fldDatabaseUsers_UserRole').prop('disabled', false);
+		jQuery('#txtDatabaseUsers_RoleListCannotEditRole').hide();
+		if (jQuery('#desinventarUserId').val() == UserId)
+		{
+			jQuery('#fldDatabaseUsers_UserId').prop('disabled', true);
+			jQuery('#fldDatabaseUsers_UserRole').prop('disabled', true);
+			jQuery('#txtDatabaseUsers_RoleListCannotEditRole').show();
+		}
 		jQuery('#divDatabaseUsers_Edit').show();
 	});
 
@@ -134,23 +144,23 @@ function doDatabaseUsersReset()
 	jQuery('#fldDatabaseUsers_RegionPublic').prop('checked', true);	
 	jQuery('#fldDatabaseUsers_UserId').val('');
 	jQuery('#fldDatabaseusers_UserRole').val('');
+	jQuery('#fldDatabaseUsers_UserId').prop('disabled', false);
+	jQuery('#fldDatabaseUsers_UserRole').prop('disabled', false);
 	jQuery('#tblDatabaseUsers_List .UserId').hide();
 	jQuery('#tblDatabaseUsers_List .UserRole').hide();
+	jQuery('.clsDatabaseUsersStatus').hide();
 }
 
 function doDatabaseUsersPopulateUserRoleList(UserRoleList)
 {
 	jQuery('#tbodyDatabaseUsers_List').find('tr:gt(0)').remove();
 	jQuery.each(UserRoleList, function(index, value) {
-		if (jQuery('#desinventarUserId').val() != index)
-		{
-			var clonedRow = jQuery('#tbodyDatabaseUsers_List tr:last').clone().show();
-			jQuery('.UserId', clonedRow).html(index);
-			jQuery('.UserName', clonedRow).html(value.UserName);
-			jQuery('.UserRole', clonedRow).html(value.UserRole);
-			jQuery('.UserRoleLabel', clonedRow).html(jQuery('#fldDatabaseUsers_UserRole option[value="' + value.UserRole + '"]').text());
-			jQuery('#tbodyDatabaseUsers_List').append(clonedRow);
-		}
+		var clonedRow = jQuery('#tbodyDatabaseUsers_List tr:last').clone().show();
+		jQuery('.UserId', clonedRow).html(index);
+		jQuery('.UserName', clonedRow).html(value.UserName);
+		jQuery('.UserRole', clonedRow).html(value.UserRole);
+		jQuery('.UserRoleLabel', clonedRow).html(jQuery('#fldDatabaseUsers_UserRole option[value="' + value.UserRole + '"]').text());
+		jQuery('#tbodyDatabaseUsers_List').append(clonedRow);
 	});
 	jQuery('#tblDatabaseUsers_List .UserId').hide();
 	jQuery('#tblDatabaseUsers_List .UserRole').hide();
