@@ -364,11 +364,17 @@ function doMainMenuCreate()
 	tb.add({ id:'mnuQuery'      , text: jQuery('#mnuMenuQuery').text()    , menu: mquery, hidden: true });
 	tb.add({ id:'mnuCards'      , text: jQuery('#mnuMenuDatabase').text() , menu: mnuMenuDatabase, hidden: false });
 	tb.add({ id:'mnuHelp'       , text: jQuery('#mnuMenuHelp').text()     , menu: mhelp});
+	tb.add('->',{id: 'mnuWaiting'    , text: '<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />', hidden: true});
 	tb.add('->',{id: 'mnuRegionLabel', text: '', handler: onMenuItem });
 	tb.add('->',{id: 'mnuHelpWebsite'    , text: '<img src="' + jQuery('#desinventarURL').val() + '/images/di_logo4.png" alt="" />',  handler: onMenuItem });
 
-	// Configure Menu using current RoleValue
-	
+	// Attach main events to body
+	jQuery('body').bind('cmdMainWaitingShow', function() {
+		Ext.getCmp('mnuWaiting').show();
+	});
+	jQuery('body').bind('cmdMainWaitingHide', function() {
+		Ext.getCmp('mnuWaiting').hide();
+	});
 	// Add UserId to menu text when user is logged in
 	if (jQuery('#desinventarUserId').val() != '')
 	{
