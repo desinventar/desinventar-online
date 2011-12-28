@@ -70,7 +70,7 @@
 		</table>
 	</div>
 	<br />
-	<a class="button" id="btnDatabaseUsers_Add"><span>{-#msgDatabaseUsers_Add#-}</span></a>
+	<a class="button" id="btnDatabaseUsers_Edit"><span>{-#msgDatabaseUsers_Edit#-}</span></a>
 	<br />
 	<br />
 	<div id="divDatabaseUsers_Edit" style="display:none;" class="line">
@@ -100,5 +100,6 @@
 		<span class="clsDatabaseUsersStatus" id="txtDatabaseUsers_RoleListStatusOk">{-#msgDatabaseUsers_RoleListStatusOk#-}</span>
 		<span class="clsDatabaseUsersStatus" id="txtDatabaseUsers_RoleListStatusError">{-#msgDatabaseUsers_RoleListStatusError#-}</span>
 		<span class="clsDatabaseUsersStatus" id="txtDatabaseUsers_RoleListEmptyFields">{-#msgDatabaseUsers_RoleListEmptyFields#-}</span>
+		<span class="clsDatabaseUsersStatus" id="txtDatabaseUsers_RoleListCannotEditRole">{-#msgDatabaseUsers_RoleListCannotEditRole#-}</span>
 	</div>
 </div>
