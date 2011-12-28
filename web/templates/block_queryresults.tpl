@@ -100,5 +100,8 @@
 			</td>
 		</tr>
 	</table>
+	<div id="divRegionInfo" style="display:none;">
+		{-include file="region_info.tpl"-}
+	</div>
 	<div id="dcr">
 	</div>
