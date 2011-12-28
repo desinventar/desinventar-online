@@ -72,7 +72,7 @@ function onReadyMain()
 	});
 
 	jQuery('#DBConfig_DatabaseUsers').bind('show', function() {
-		doDatabaseUsersPopulateLists();
+		jQuery('body').trigger('cmdDatabaseUsersShow');
 	});
 	
 	// Tabs for Database Configuration
