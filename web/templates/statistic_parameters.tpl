@@ -30,8 +30,7 @@
 			<table>
 				<tr valign="top">
 					<td><b>{-$std.StatisticFirstlev[0]-}</b><br />
-						<select id="_S+Firstlev" name="_S+Firstlev" size="8" style="width:180px;" class="line" 
-							onChange="setTotalize('_S+Firstlev', '_S+Secondlev'); setTotalize('_S+Secondlev', '_S+Thirdlev');">
+						<select id="fldStatParam_FirstLev" name="_S+Firstlev" size="8" style="width:180px;" class="line" >
 							{-foreach name=glev key=k item=i from=$glev-}
 								{-assign var="ln" value="StatisticGeographyId_$k"-}
 								<option value="{-$k-}|D.GeographyId" {-if $smarty.foreach.glev.first-}selected{-/if-}>{-$std.$ln[0]-}</option>

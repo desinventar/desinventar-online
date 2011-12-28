@@ -18,6 +18,7 @@ function onReadyMain()
 	onReadyData();
 	onReadyGraphic();
 	onReadyThematicMap();	
+	onReadyStatParams();
 
 	jQuery('body').bind('UserLoggedIn',function() {
 		doWindowReload();

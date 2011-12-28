@@ -590,7 +590,7 @@
 		{
 			jQuery('#prmQueryCommand').val('cmdStatSave');
 		}
-		if ($('_S+Firstlev').value != "" && $('_S+Field[]').length > 0)
+		if ( jQuery('#fldStatParam_FirstLev').val() != "" && $('_S+Field[]').length > 0)
 		{
 			w = Ext.getCmp('westm');
 			$('_S+cmd').value = cmd;

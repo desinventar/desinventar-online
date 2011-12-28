@@ -30,6 +30,7 @@ function onReadyStatistic() {
 			return blockChars(event, jQuery(this).val(), 'integer:');
 		}
 	});
+
 } //function
 
 function doStatDisplayPage(page) {
