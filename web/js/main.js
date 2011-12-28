@@ -41,6 +41,7 @@ function onReadyMain()
 		}
 		else
 		{
+			jQuery('body').trigger('cmdMainWaitingShow');
 			jQuery('#divRegionInfo').hide();
 			jQuery('#dcr').show();
 			jQuery('#dcr').html('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />');
@@ -48,6 +49,7 @@ function onReadyMain()
 				jQuery(this).serialize(),
 				function(data)
 				{
+					jQuery('body').trigger('cmdMainWaitingHide');
 					jQuery('#dcr').html(data);
 					switch(myCmd)
 					{

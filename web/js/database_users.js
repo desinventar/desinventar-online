@@ -188,6 +188,7 @@ function doDatabaseUsersUpdateOptions(RegionInfo)
 
 function doDatabaseUsersPopulateLists()
 {
+	jQuery('body').trigger('cmdMainWaitingShow');
 	doDatabaseUsersReset();
 	jQuery.post(
 		jQuery('#desinventarURL').val() + '/',
@@ -205,8 +206,8 @@ function doDatabaseUsersPopulateLists()
 				});
 				doDatabaseUsersPopulateUserRoleList(data.UserRoleList);				
 			}
+			jQuery('body').trigger('cmdMainWaitingHide');
 		},
 		'json'
 	);
-}
-
+} //doDatabaseUsersPopulateLists()
