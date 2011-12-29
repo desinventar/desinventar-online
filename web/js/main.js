@@ -20,11 +20,11 @@ function onReadyMain()
 	onReadyThematicMap();	
 	onReadyStatParams();
 
-	jQuery('body').bind('UserLoggedIn',function() {
+	jQuery('body').on('UserLoggedIn',function() {
 		doWindowReload();
 	});
 
-	jQuery('body').bind('UserLoggedOut',function() {
+	jQuery('body').on('UserLoggedOut',function() {
 		doWindowReload();
 	});
 	
@@ -73,7 +73,7 @@ function onReadyMain()
 		}
 	});
 
-	jQuery('#DBConfig_DatabaseUsers').bind('show', function() {
+	jQuery('#DBConfig_DatabaseUsers').on('show', function() {
 		jQuery('body').trigger('cmdDatabaseUsersShow');
 	});
 	

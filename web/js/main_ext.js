@@ -369,10 +369,10 @@ function doMainMenuCreate()
 	tb.add('->',{id: 'mnuHelpWebsite'    , text: '<img src="' + jQuery('#desinventarURL').val() + '/images/di_logo4.png" alt="" />',  handler: onMenuItem });
 
 	// Attach main events to body
-	jQuery('body').bind('cmdMainWaitingShow', function() {
+	jQuery('body').on('cmdMainWaitingShow', function() {
 		Ext.getCmp('mnuWaiting').show();
 	});
-	jQuery('body').bind('cmdMainWaitingHide', function() {
+	jQuery('body').on('cmdMainWaitingHide', function() {
 		Ext.getCmp('mnuWaiting').hide();
 	});
 	// Add UserId to menu text when user is logged in
