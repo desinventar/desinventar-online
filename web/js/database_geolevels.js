@@ -17,7 +17,7 @@ function onReadyDatabaseGeolevels()
 	});
 
 	// Attach events to main page
-	jQuery('body').bind('cmdDatabaseGeolevelsShow', function() {
+	jQuery('body').on('cmdDatabaseGeolevelsShow', function() {
 		doDatabaseGeolevelsPopulateList();		
 	});
 } //onReadyDatabaseGeolevels()

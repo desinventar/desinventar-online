@@ -8,7 +8,7 @@ function onReadyDatacards()
 	jQuery('#divDatacardWindow').hide();
 	
 	// Initialize controls in form when it is displayed
-	jQuery('#divDatacardWindow').bind('display', function() {
+	jQuery('#divDatacardWindow').on('display', function() {
 		// Reset buttons
 		doDatacardClear();
 		// Hide StatusMessages
@@ -148,7 +148,7 @@ function onReadyDatacards()
 	});
 	
 	// Geography Levels/Items Functions...
-	jQuery('.GeoLevelSelect').bind('loadGeographyItems', function(event) {
+	jQuery('.GeoLevelSelect').on('loadGeographyItems', function(event) {
 		var mySelect = jQuery(this);
 		mySelect.trigger('clearGeographyItems');
 		var LevelId = parseInt(mySelect.attr('level'));
@@ -187,7 +187,7 @@ function onReadyDatacards()
 	});
 	
 	// Clear Geography Items from a Select Box
-	jQuery('.GeoLevelSelect').bind('clearGeographyItems', function(event) {
+	jQuery('.GeoLevelSelect').on('clearGeographyItems', function(event) {
 		var mySelect = jQuery(this);
 		var LevelId = parseInt(mySelect.attr('level'));
 		if (LevelId > 0)

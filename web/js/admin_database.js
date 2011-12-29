@@ -54,7 +54,7 @@ function onReadyAdminDatabase()
 		jQuery('#divAdminDatabaseList').show();
 	});
 
-	jQuery('#divAdminDatabaseUpdate').bind('evAdminDatabaseCancel', function() {
+	jQuery('#divAdminDatabaseUpdate').on('evAdminDatabaseCancel', function() {
 		jQuery('.clsAdminDatabase').hide();
 	});
 } //onReadyAdminDatabase()

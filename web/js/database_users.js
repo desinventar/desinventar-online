@@ -137,7 +137,7 @@ function onReadyDatabaseUsers()
 		});
 	});
 	
-	jQuery('body').bind('cmdDatabaseUsersShow', function() {
+	jQuery('body').on('cmdDatabaseUsersShow', function() {
 		doDatabaseUsersPopulateLists();
 	});
 } //onReadyDatabaseUsers()
