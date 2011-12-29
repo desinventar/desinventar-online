@@ -14,5 +14,6 @@ PHP Components
   http://corefonts.sourceforge.net/
 
 Javascript Components
+- jQuery >= 1.7
 - ExtJS (http://www.extjs.com/)
 - OpenLayers.org (http://www.openlayers.org/)
