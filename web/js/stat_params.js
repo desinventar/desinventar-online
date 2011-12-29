@@ -5,7 +5,6 @@
 function onReadyStatParams()
 {
 	jQuery('#fldStatParam_FirstLev').change(function() {
-		console.log('fldStatParam_FirstLev.change()');
 		setTotalize('fldStatParam_FirstLev', 'fldStatParam_SecondLev');
 		jQuery('#fldStatParam_ThirdLev').empty();
 	});
@@ -13,4 +12,4 @@ function onReadyStatParams()
 	jQuery('#fldStatParam_SecondLev').change(function() {
 		setTotalize('fldStatParam_SecondLev', 'fldStatParam_ThirdLev');
 	});
-}
+} //onReadyStatParams()
