@@ -205,6 +205,8 @@ class Query //extends PDO
 						{
 							$data[$EventId][0] = $data1[$EventId][0]; // Name
 							$data[$EventId][1] = $data1[$EventId][1]; // Desc
+							$data[$EventId]['EventName'] = $data1[$EventId]['EventName'];
+							$data[$EventId]['EventDesc'] = $data1[$EventId]['EventDesc'];
 						}
 					}
 				}
@@ -256,7 +258,7 @@ class Query //extends PDO
 
 	public function getBasicEventList($lg)
 	{
-		$sql = 'SELECT EventId, EventName,EventDesc,EventPredefined,RecordUpdate FROM Event ' .
+		$sql = 'SELECT EventId,EventName,EventDesc,EventActive,EventPredefined,RecordUpdate FROM Event ' .
 		       ' WHERE LangIsoCode="' . $lg . '" ORDER BY EventName';
 		$data = array();
 		$sth = $this->base->prepare($sql);
@@ -267,11 +269,9 @@ class Query //extends PDO
 			$this->base->commit();
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
-				$data[$row['EventId']] = array(0 => $row['EventName'], 
-				                               1 => $row['EventDesc'],
-				                               'EventPredefined' => $row['EventPredefined'],
-				                               'RecordUpdate' => $row['RecordUpdate']
-				                              );
+				$row = array_merge($row, array(0 => $row['EventName'], 
+				                               1 => $row['EventDesc']));
+				$data[$row['EventId']] = $row;
 			}
 		}
 		catch (Exception $e)
@@ -320,17 +320,15 @@ class Query //extends PDO
 		{
 			$sqls = "'1=1'"; // all
 		}
-		$sql = "SELECT * FROM Event WHERE ". $sqls ." AND ". $sqlt ." ORDER BY EventName";
+		$sql = "SELECT EventId,EventName,EventDesc,EventActive,EventPredefined,RecordUpdate FROM Event WHERE ". $sqls ." AND ". $sqlt ." ORDER BY EventName";
 		$data = array();
-		$res = $this->dreg->query($sql);
-		foreach($res as $row)
+		foreach($this->dreg->query($sql, PDO::FETCH_ASSOC) as $row)
 		{
-			$data[$row['EventId']] = array(0 => $row['EventName'],
+			$row = array_merge($row, array(0 => $row['EventName'],
 			                               1 => str2js($row['EventDesc']),
-			                               2 => $row['EventActive'],
-			                               'EventPredefined' => $row['EventPredefined'],
-			                               'RecordUpdate' => $row['RecordUpdate']
-			                              );
+			                               2 => $row['EventActive']
+			                              ));
+			$data[$row['EventId']] = $row;
 		}
 		return $data;
 	}

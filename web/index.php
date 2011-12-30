@@ -88,6 +88,32 @@ switch ($cmd)
 		$answer['Region'] = $r->getRegionInfoCore();
 		echo json_encode($answer);
 	break;
+	case 'cmdDatabaseEvents':
+		$t->assign('dic', $us->q->queryLabelsFromGroup('DB', $lg));
+		$t->display('main_database_events.tpl');
+	break;
+	case 'cmdDatabaseEventsGetList':
+		$answer = array();
+		$iReturn = ERR_NO_ERROR;
+		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($RegionId == '')
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($iReturn > 0)
+		{
+			$EventListDefault = $us->q->loadEvents('PREDEF', null, $lg);
+			$EventListCustom  = $us->q->loadEvents('USER', null, $lg);
+			fb($EventListCustom);
+			$answer['EventListDefault'] = $EventListDefault;
+			$answer['EventListCustom']  = $EventListCustom;
+		}
+		$answer['Status'] = $iReturn;
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
+	break;
 	case 'cmdDatabaseUsers':
 		$t->display('main_database_users.tpl');
 	break;
