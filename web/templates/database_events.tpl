@@ -25,11 +25,11 @@
 			</thead>
 			<tbody id="tbodyDatabaseEvents_EventListCustom">
 				<tr style="display:none;">
-					<td class="EventId"         style="display:none;"></td>
-					<td class="EventPredefined" style="display:none;"></td>
+					<td class="EventId"></td>
+					<td class="EventPredefined"></td>
 					<td class="EventName"></td>
 					<td class="EventDesc" style="width:70%;"></td>
-					<td class="EventActive" style="text-align:center;"><input type="checkbox" /></td>
+					<td class="EventActive" style="text-align:center;" valign="top"><input type="checkbox" disabled="disabled" /></td>
 				</tr>
 			</tbody>
 		</table>
