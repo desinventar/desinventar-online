@@ -82,22 +82,18 @@
 				title="{-$dic.DBEvePersonName[2]-}" />
 			<br /><br />
 			{-$dic.DBEvePersonDef[0]-}<b style="color:darkred;">*</b><br />
-			<textarea id="Desc" name="Info[EventDesc]" class="line" rows="2" style="width:500px;" tabindex="2" 
-				titele="{-$dic.DBEvePersonDef[2]-}" {-$ro-}></textarea>
+			<textarea id="fldDatabaseEvents_EventDesc" name="Event[EventDesc]" class="line" rows="2" style="width:500px;" tabindex="2" 
+				title="{-$dic.DBEvePersonDef[2]-}"></textarea>
 			<br /><br />
 			{-$dic.DBEveActive[0]-}
-			<input id="Active" name="Info[EventActive]" type="checkbox" {-$ro-} 
+			<input id="fldDatabaseEvents_EventActive" name="Event[EventActive]" type="checkbox" {-$ro-} 
 				title="{-$dic.DBEveActive[2]-}" tabindex="3" />
 			<br /><br />
-			<input id="Predefined" name="Info[EventPredefined]" type="hidden" />
-			<p align="center" style="width:500px;">
-				<input id="RegionId" name="RegionId" type="hidden" value="{-$reg-}" />
-				<input id="cmd" name="cmd" type="hidden" />
-				<div class="center">
-					<a class="button" id="btnEventEditSend"   tabindex="4"><span>{-#msgDatabaseEvents_Save#-}</span></a>
-					<a class="button" id="btnEventEditCancel" tabindex="5"><span>{-#msgDatabaseEvents_Cancel#-}</span></a>
-				</div>
-			</p>
+			<input id="fldDatabaseEvents_EventPredefined" name="Event[EventPredefined]" type="hidden" />
+			<div class="center">
+				<a class="button" id="btnEventEditSend"   tabindex="4"><span>{-#msgDatabaseEvents_Save#-}</span></a>
+				<a class="button" id="btnEventEditCancel" tabindex="5"><span>{-#msgDatabaseEvents_Cancel#-}</span></a>
+			</div>
 		</form>
 	</div>
 	<div>
