@@ -41,17 +41,16 @@ function onReadyDatabaseEvents()
 		jQuery('#fldDatabaseEvents_EventPredefined').val(0);
 	});
 
-	jQuery('#btnEventEditSend').unbind('click').click(function() {
+	jQuery('#btnDatabaseEvents_Save').click(function() {
 		jQuery('#frmDatabaseEvents_Edit').trigger('submit');
 	});
 
-	jQuery('#btnEventEditCancel').unbind('click').click(function() {
-		jQuery('#eventaddsect').hide();
-		jQuery('#btnEventEditAdd').show();
+	jQuery('#btnDatabaseEvents_Cancel').click(function() {
+		jQuery('#divDatabaseEvents_Edit').hide();
+		jQuery('#btnDatabaseEvents_Add').show();
 	});
 
-	jQuery('#frmDatabaseEvents_Edit').unbind('submit').submit(function()
-	{
+	jQuery('#frmDatabaseEvents_Edit').submit(function() {
 		jQuery('.clsDatabaseEventsStatus').hide();
 		var a = new Array('Name','Desc');
 		var validForm = checkForm('frmDatabaseEvents_Edit', a, ''); 

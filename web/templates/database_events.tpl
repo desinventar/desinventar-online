@@ -91,8 +91,8 @@
 			<br /><br />
 			<input id="fldDatabaseEvents_EventPredefined" name="Event[EventPredefined]" type="hidden" />
 			<div class="center">
-				<a class="button" id="btnEventEditSend"   tabindex="4"><span>{-#msgDatabaseEvents_Save#-}</span></a>
-				<a class="button" id="btnEventEditCancel" tabindex="5"><span>{-#msgDatabaseEvents_Cancel#-}</span></a>
+				<a class="button" id="btnDatabaseEvents_Save"   tabindex="4"><span>{-#msgDatabaseEvents_Save#-}</span></a>
+				<a class="button" id="btnDatabaseEvents_Cancel" tabindex="5"><span>{-#msgDatabaseEvents_Cancel#-}</span></a>
 			</div>
 		</form>
 	</div>
