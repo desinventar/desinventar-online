@@ -13,20 +13,23 @@ function onReadyDatabaseEvents()
 	jQuery('.clsDatabaseEventsStatus').hide();
 
 	jQuery('#tbodyDatabaseEvents_EventListCustom,#tbodyDatabaseEvents_EventListDefault').delegate('tr','click', function(event) {
-		jQuery('#fldDatabaseEvents_EventId').val(jQuery('.EventId',this).text());
-		jQuery('#fldDatabaseEvents_EventName').val(jQuery('.EventName',this).text());
-		jQuery('#fldDatabaseEvents_EventDesc').val(jQuery('.EventDesc',this).prop('title'));
-		jQuery('#fldDatabaseEvents_EventActive').prop('checked', jQuery('.EventActive :input',this).is(':checked'));
-		jQuery('#fldDatabaseEvents_EventPredefined').val(jQuery('.EventPredefined',this).text());
-
-		jQuery('#btnDatabaseEvents_Add').hide();
-		// In Predefined Events cannot edit Description
-		jQuery('#fldDatabaseEvents_EventDesc').prop('disabled', false);
-		if (parseInt(jQuery('#fldDatabaseEvents_EventPredefined').val()) > 0)
+		if (! jQuery('#divDatabaseEvents_Edit').is(':visible'))
 		{
-			jQuery('#fldDatabaseEvents_EventDesc').prop('disabled', true);
+			jQuery('#fldDatabaseEvents_EventId').val(jQuery('.EventId',this).text());
+			jQuery('#fldDatabaseEvents_EventName').val(jQuery('.EventName',this).text());
+			jQuery('#fldDatabaseEvents_EventDesc').val(jQuery('.EventDesc',this).prop('title'));
+			jQuery('#fldDatabaseEvents_EventActive').prop('checked', jQuery('.EventActive :input',this).is(':checked'));
+			jQuery('#fldDatabaseEvents_EventPredefined').val(jQuery('.EventPredefined',this).text());
+
+			jQuery('#btnDatabaseEvents_Add').hide();
+			// In Predefined Events cannot edit Description
+			jQuery('#fldDatabaseEvents_EventDesc').prop('disabled', false);
+			if (parseInt(jQuery('#fldDatabaseEvents_EventPredefined').val()) > 0)
+			{
+				jQuery('#fldDatabaseEvents_EventDesc').prop('disabled', true);
+			}
+			jQuery('#divDatabaseEvents_Edit').show();
 		}
-		jQuery('#divDatabaseEvents_Edit').show();
 	});
 
 	jQuery('#btnDatabaseEvents_Add').click(function() {
