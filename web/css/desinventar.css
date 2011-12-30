@@ -251,12 +251,14 @@ a:hover	{	color:#00008b; }
 	font:bold 11px Trebuchet MS, sans-serif; 
 	padding:0px 20px; 
 }
-
 .clsDatabaseUsers {
 	max-width:400px;
 	height:100%;
 }
-
+.clsDatabaseEvents {
+	max-width:600px;
+	height:100%;
+}
 .clsDatabaseGeolevels {
 	max-width:600px;
 	height:100%;

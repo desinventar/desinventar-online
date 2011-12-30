@@ -7,9 +7,11 @@ function onReadyMain()
 	onReadyDatabaseUpload();
 	onReadyDatabaseCreate();
 	onReadyDatabaseUsers();
+	onReadyDatabaseEvents();
 	onReadyAdminUsers();
 	onReadyUserPermAdmin();
 	onReadyCommon();
+	onReadyPrototype();
 	onReadyUserLogin();
 	onReadyDatacards();
 	onReadyAdminDatabase();
@@ -101,9 +103,6 @@ function onReadyMain()
 					me.html(data);
 					switch(cmd)
 					{
-						case 'cmdDBInfoEvent':
-							onReadyDBConfigEvents();
-						break;
 						case 'cmdDBInfoCause':
 							onReadyDBConfigCauses();
 						break;

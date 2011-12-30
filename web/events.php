@@ -161,5 +161,5 @@ switch ($cmd)
 	break;
 } // switch
 $t->assign('reg', $reg);
-$t->display('events.tpl');
+$t->display('database_events.tpl');
 </script>
