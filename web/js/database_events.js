@@ -14,28 +14,21 @@ function onReadyDatabaseEvents()
 	// Hide first two columns (EventId,EventPredefined)
 	jQuery('td:nth-child(1)','#tblEventListUser,#tblEventListPredef').hide();
 	jQuery('td:nth-child(2)','#tblEventListUser,#tblEventListPredef').hide();
-	
-	jQuery('#tblEventListUser,#tblEventListPredef').delegate('tr','mouseover', function(event) {
-		jQuery(this).addClass('highlight');
-	}).delegate('tr', 'mouseout', function(event) {
-		jQuery(this).removeClass('highlight');
-	});
 
-	jQuery('#tblEventListUser,#tblEventListPredef').delegate('tr','click', function(event) {
-		jQuery('#eventaddsect').show();
-		jQuery('#frmDatabaseEvents_Edit #Id').val(jQuery('#Id',this).text());
-		jQuery('#frmDatabaseEvents_Edit #Name').val(jQuery('#Name',this).text());
-		jQuery('#frmDatabaseEvents_Edit #Desc').val(jQuery('#Desc',this).text());
-		jQuery('#frmDatabaseEvents_Edit #Active').attr('checked', jQuery('#Active',this).is(':checked'));
-		jQuery('#frmDatabaseEvents_Edit #Predefined').val(jQuery('#Predefined',this).text());
-		jQuery('#frmDatabaseEvents_Edit #RegionId').val(jQuery('#desinventarRegionId').val());
-		jQuery('#frmDatabaseEvents_Edit #cmd').val('cmdEventUpdate');
+	jQuery('#tbodyDatabaseEvents_EventListCustom,#tbodyDatabaseEvents_EventListDefault').delegate('tr','click', function(event) {
+		jQuery('#fldDatabaseEvents_EventId').val(jQuery('.EventId',this).text());
+		jQuery('#fldDatabaseEvents_EventName').val(jQuery('.EventName',this).text());
+		jQuery('#fldDatabaseEvents_EventDesc').val(jQuery('.EventDesc',this).prop('title'));
+		jQuery('#fldDatabaseEvents_EventActive').prop('checked', jQuery('.EventActive :input',this).is(':checked'));
+		jQuery('#fldDatabaseEvents_EventPredefined').val(jQuery('.EventPredefined',this).text());
+
 		jQuery('#btnDatabaseEvents_Add').hide();
 		// In Predefined Events cannot edit Description
-		if (parseInt(jQuery('#frmDatabaseEvents_Edit #Predefined').val()) > 0)
+		if (parseInt(jQuery('#fldDatabaseEvents_EventPredefined').val()) > 0)
 		{
-			jQuery('#frmDatabaseEvents_Edit #Desc').attr('readonly', true);
+			jQuery('#fldDatabaseEvents_EventDesc').prop('readonly', true);
 		}
+		jQuery('#divDatabaseEvents_Edit').show();
 	});
 
 	jQuery('#btnDatabaseEvents_Add').click(function() {
@@ -122,6 +115,7 @@ function doDatabaseEventsPopulateList(tbodyId, EventList)
 		jQuery('.EventId', clonedRow).html(index);
 		jQuery('.EventName', clonedRow).html(value.EventName);
 		jQuery('.EventDesc', clonedRow).html(value.EventDesc.substring(0,150));
+		jQuery('.EventDesc', clonedRow).prop('title', value.EventDesc);
 		jQuery('.EventActive :input', clonedRow).prop('checked', value.EventActive>0);
 		jQuery('#' + tbodyId).append(clonedRow);
 	});

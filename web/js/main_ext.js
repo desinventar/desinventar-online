@@ -126,10 +126,10 @@ function onMenuItem(item) {
 		break;
 		case 'mnuUserLogin':
 		case 'mnuUserChangeLogin':
-			doUserLoginShow();
+			jQuery('body').trigger('cmdUserLoginShow');
 		break;
 		case 'mnuUserLogout':
-			doUserLogout();
+			jQuery('body').trigger('cmdUserLogout');
 		break;
 		case 'mnuUserEditAccount':
 			jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=changepasswd',function() { onReadyUserChangePasswd('dbl-win'); });

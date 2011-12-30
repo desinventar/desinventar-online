@@ -6,6 +6,14 @@
 function onReadyUserLogin() {
 	// hide all status messages on start
 	doUserLoginUpdateMsg('');
+
+	jQuery('body').on('cmdUserLoginShow', function() {
+		doUserLoginShow();
+	});
+
+	jQuery('body').on('cmdUserLogout', function() {
+		doUserLogout();
+	});
 	
 	// submit form validation and process..
 	jQuery("#btnUserLoginSend").click(function() {
