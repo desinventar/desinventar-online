@@ -106,19 +106,26 @@ function doDatabaseEventsPopulateLists()
 		{
 			if (parseInt(data.Status) > 0)
 			{
-				jQuery('#tbodyDatabaseEvents_List').find('tr:gt(0)').remove();
-				jQuery.each(UserRoleList, function(index, value) {
-					var clonedRow = jQuery('#tbodyDatabaseUsers_List tr:last').clone().show();
-					jQuery('.UserId', clonedRow).html(index);
-					jQuery('.UserName', clonedRow).html(value.UserName);
-					jQuery('.UserRole', clonedRow).html(value.UserRole);
-					jQuery('.UserRoleLabel', clonedRow).html(jQuery('#fldDatabaseUsers_UserRole option[value="' + value.UserRole + '"]').text());
-					jQuery('#tbodyDatabaseUsers_List').append(clonedRow);
-				});
-				jQuery('#tblDatabaseUsers_List .UserId').hide();
-				jQuery('#tblDatabaseUsers_List .UserRole').hide();
+				doDatabaseEventsPopulateList('tbodyDatabaseEvents_EventListCustom' , data.EventListCustom);
+				doDatabaseEventsPopulateList('tbodyDatabaseEvents_EventListDefault', data.EventListDefault);
 			}
 		},
 		'json'
 	);
-}
+} //doDatabaseEventsPopulateLists()
+
+function doDatabaseEventsPopulateList(tbodyId, EventList)
+{
+	jQuery('#' + tbodyId).find('tr:gt(0)').remove();
+	jQuery.each(EventList, function(index, value) {
+		var clonedRow = jQuery('#tbodyDatabaseEvents_EventListCustom tr:last').clone().show();
+		jQuery('.EventId', clonedRow).html(index);
+		jQuery('.EventName', clonedRow).html(value.EventName);
+		jQuery('.EventDesc', clonedRow).html(value.EventDesc.substring(0,150));
+		jQuery('.EventActive :input', clonedRow).prop('checked', value.EventActive>0);
+		jQuery('#' + tbodyId).append(clonedRow);
+	});
+	jQuery('#' + tbodyId + ' .EventId').hide();
+	jQuery('#' + tbodyId + ' .EventPredefined').hide();
+	jQuery('#' + tbodyId + ' tr:even').addClass('under');
+} //doDatabaseEventsPopulateList()
