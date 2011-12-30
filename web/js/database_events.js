@@ -11,9 +11,6 @@ function onReadyDatabaseEvents()
 	});
 
 	jQuery('.clsDatabaseEventsStatus').hide();
-	// Hide first two columns (EventId,EventPredefined)
-	jQuery('td:nth-child(1)','#tblEventListUser,#tblEventListPredef').hide();
-	jQuery('td:nth-child(2)','#tblEventListUser,#tblEventListPredef').hide();
 
 	jQuery('#tbodyDatabaseEvents_EventListCustom,#tbodyDatabaseEvents_EventListDefault').delegate('tr','click', function(event) {
 		jQuery('#fldDatabaseEvents_EventId').val(jQuery('.EventId',this).text());
@@ -112,6 +109,7 @@ function doDatabaseEventsPopulateList(tbodyId, EventList)
 	jQuery.each(EventList, function(index, value) {
 		var clonedRow = jQuery('#tbodyDatabaseEvents_EventListCustom tr:last').clone().show();
 		jQuery('.EventId', clonedRow).html(index);
+		jQuery('.EventPredefined',clonedRow).html(value.EventPredefined);
 		jQuery('.EventName', clonedRow).html(value.EventName);
 		jQuery('.EventDesc', clonedRow).html(value.EventDesc.substring(0,150));
 		jQuery('.EventDesc', clonedRow).prop('title', value.EventDesc);
