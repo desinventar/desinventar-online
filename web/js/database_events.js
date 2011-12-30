@@ -21,9 +21,10 @@ function onReadyDatabaseEvents()
 
 		jQuery('#btnDatabaseEvents_Add').hide();
 		// In Predefined Events cannot edit Description
+		jQuery('#fldDatabaseEvents_EventDesc').prop('disabled', false);
 		if (parseInt(jQuery('#fldDatabaseEvents_EventPredefined').val()) > 0)
 		{
-			jQuery('#fldDatabaseEvents_EventDesc').prop('readonly', true);
+			jQuery('#fldDatabaseEvents_EventDesc').prop('disabled', true);
 		}
 		jQuery('#divDatabaseEvents_Edit').show();
 	});
@@ -34,6 +35,7 @@ function onReadyDatabaseEvents()
 		jQuery('#fldDatabaseEvents_EventId').val('');
 		jQuery('#fldDatabaseEvents_EventName').val('');
 		jQuery('#fldDatabaseEvents_EventDesc').val('');
+		jQuery('#fldDatabaseEvents_EventDesc').prop('disabled', false);
 		jQuery('#fldDatabaseEvents_EventActive').prop('checked', true);
 		jQuery('#fldDatabaseEvents_EventPredefined').val(0);
 	});
