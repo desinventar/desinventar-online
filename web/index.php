@@ -107,7 +107,6 @@ switch ($cmd)
 		{
 			$EventListDefault = $us->q->loadEvents('PREDEF', null, $lg);
 			$EventListCustom  = $us->q->loadEvents('USER', null, $lg);
-			fb($EventListCustom);
 			$answer['EventListDefault'] = $EventListDefault;
 			$answer['EventListCustom']  = $EventListCustom;
 		}

@@ -2,8 +2,8 @@
 <div class="clsDatabaseEvents">
 	<b title="{-$dic.DBEvent[2]-}">{-#msgDatabaseEvents_CustomEventTitle#-}</b>
 	<br />
-	<div id="divDatabaseEvents_CustomEventList" class="dwin" style="width:100%; height:100px;">
-		<table class="grid" id="tblDatabaseEvents_CustomEventList">
+	<div id="divDatabaseEvents_EventListCustom" class="dwin" style="width:100%; height:100px;">
+		<table class="grid" id="tblDatabaseEvents_EventListCustom">
 			<thead>
 				<tr>
 					<td style="display:none;">
@@ -15,7 +15,7 @@
 					<td class="header" title="{-$dic.DBEvePersonName[2]-}">
 						<b>{-$dic.DBEvePersonName[0]-}</b>
 					</td>
-					<td class="header" title="{-$dic.DBEvePersonDef[2]-}">
+					<td class="header" title="{-$dic.DBEvePersonDef[2]-}" style="width:70%;">
 						<b>{-$dic.DBEvePersonDef[0]-}</b>
 					</td>
 					<td class="header" title="{-$dic.DBEveActive[2]-}">
@@ -23,20 +23,20 @@
 					</td>
 				</tr>
 			</thead>
-			<tbody id="tbodyDatabaseEvents_CustomEventList">
+			<tbody id="tbodyDatabaseEvents_EventListCustom">
 				<tr style="display:none;">
 					<td class="EventId"         style="display:none;"></td>
 					<td class="EventPredefined" style="display:none;"></td>
 					<td class="EventName"></td>
-					<td class="EventDesc"></td>
-					<td class="EventActive"><input type="checkbox" /></td>
+					<td class="EventDesc" style="width:70%;"></td>
+					<td class="EventActive" style="text-align:center;"><input type="checkbox" /></td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 	<br />
-	<div id="divDatabaseEvents_DefaultEventList" class="dwin" style="width:100%; height:100px;">
-		<table id="tblDatabaseEvents_DefaultEventList" width="100%" class="grid">
+	<div id="divDatabaseEvents_EventListDefault" class="dwin" style="width:100%; height:100px;">
+		<table id="tblDatabaseEvents_EventListDefault" width="100%" class="grid">
 			<thead>
 				<tr>
 					<td style="display:none;">
@@ -48,7 +48,7 @@
 					<td class="header" title="{-$dic.DBEvePredefName[2]-}">
 						<b>{-$dic.DBEvePredefName[0]-}</b>
 					</td>
-					<td class="header" title="{-$dic.DBEvePredefDef[2]-}">
+					<td class="header" title="{-$dic.DBEvePredefDef[2]-}" style="width:70%;">
 						<b>{-$dic.DBEvePredefDef[0]-}</b>
 					</td>
 					<td class="header" title="{-$dic.DBEveActive[2]-}">
@@ -56,12 +56,12 @@
 					</td>
 				</tr>
 			</thead>
-			<tbody id="tbodyDatabaseEvents_DefaultEventList">
+			<tbody id="tbodyDatabaseEvents_EventListDefault">
 				<tr style="display:none;">
 					<td class="EventId"></td>
 					<td class="EventPredefined"></td>
 					<td class="EventName"></td>
-					<td class="EventDesc"></td>
+					<td class="EventDesc" style="width:70%;"></td>
 					<td class="EventActive"><input type="checkbox" /></td>
 				</tr>
 			</tbody>
