@@ -757,16 +757,26 @@ function doDatacardSave()
 		}
 	}
 	
-	if (bContinue)
+	if (bContinue && jQuery('#GeographyId').val() == '')
 	{
-		// Validate GeographyId
-		if (jQuery('#GeographyId').val() == '')
-		{
-			displayDatacardStatusMsg('msgDatacardInvalidGeography');
-			jQuery('.GeoLevelSelect').highlight();
-			jQuery('#GeoLevel0').focus();
-			bContinue = false;
-		}
+		displayDatacardStatusMsg('msgDatacardInvalidGeography');
+		jQuery('.GeoLevelSelect').highlight();
+		jQuery('#GeoLevel0').focus();
+		bContinue = false;
+	}
+
+	jQuery('#DICard #EventId').unhighlight();
+	if (bContinue && jQuery('#DICard #EventId').val() == '')
+	{
+		jQuery('#DICard #EventId').highlight().focus();
+		bContinue = false;
+	}
+
+	jQuery('#DICard #CauseId').unhighlight();
+	if (bContinue && jQuery('#DICard #CauseId').val() == '')
+	{
+		jQuery('#DICard #CauseId').highlight().focus();
+		bContinue = false;
 	}
 	
 	// Use AJAX to save datacard
