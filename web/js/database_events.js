@@ -53,7 +53,15 @@ function onReadyDatabaseEvents()
 	});
 
 	jQuery('#frmDatabaseEvents_Edit').submit(function() {
+		var bContinue = true;
+		if (bContinue && jQuery('#fldDatabaseEvents_EventName').val() == '')
+		{
+			jQuery('#fldDatabaseEvents_EventName').highlight();
+			bContinue = false;
+		}
 		jQuery('.clsDatabaseEventsStatus').hide();
+		
+		/*
 		var a = new Array('Name','Desc');
 		var validForm = checkForm('frmDatabaseEvents_Edit', a, ''); 
 		if (validForm == true)
@@ -84,6 +92,7 @@ function onReadyDatabaseEvents()
 				}
 			);
 		}
+		*/
 		return false;
 	});
 } //onReadyDatabaseEvents()

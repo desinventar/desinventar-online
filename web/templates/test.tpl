@@ -11,7 +11,6 @@
 	
 	<script type="text/javascript" src="{-$desinventarURL-}/external/swfupload/swfupload.js"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/external/jquery.swfupload.js"></script>
-	<script type="text/javascript" src="{-$desinventarURL-}/js/jquery.snippets.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/js/database_import.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURL-}/js/datacards.js?version={-$jsversion-}"></script>
 	<script type="text/javascript">
