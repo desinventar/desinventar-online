@@ -6,7 +6,6 @@
 	var mod = "";
 	var opt = "";
 	var reg = "";
-	var waiting = '<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />';
 
 	function uploadMsg(msg)
 	{
@@ -68,7 +67,7 @@
 			onLoading: function(request)
 			{
 				window.style.cursor = "wait";
-				uploadMsg(waiting);
+				uploadMsg('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />');
 			},
 			onComplete: showResponse
 		} );
@@ -522,7 +521,6 @@
 		if ($('_M+Type').length > 0)
 		{
 			w = Ext.getCmp('westm');
-			//$('frmwait').innerHTML = waiting;
 			$('_M+cmd').value = cmd;
 			if (cmd == "export")
 			{
