@@ -57,10 +57,43 @@ function onReadyDatabaseEvents()
 		if (bContinue && jQuery('#fldDatabaseEvents_EventName').val() == '')
 		{
 			jQuery('#fldDatabaseEvents_EventName').highlight();
+			jQuery('#msgDatabaseEvents_ErrorEmtpyFields').show();
+			setTimeout(function () {
+				jQuery('#fldDatabaseEvents_EventName').unhighlight();
+				jQuery('.clsDatabaseEventsStatus').hide();
+			}, 2500);
 			bContinue = false;
 		}
-		jQuery('.clsDatabaseEventsStatus').hide();
-		
+
+		if (bContinue)
+		{
+			jQuery.post(
+				jQuery('#desinventarURL').val() + '/',
+				{
+					cmd      : 'cmdDatabaseEventsUpdate',
+					RegionId : jQuery('#desinventarRegionId').val(),
+					Event    : jQuery('#frmDatabaseEvents_Edit').serializeObject()
+				},
+				function(data)
+				{
+					if (parseInt(data.Status) > 0)
+					{
+						jQuery('#divDatabaseEvents_Edit').hide();
+						jQuery('#msgDatabaseEvents_UpdateOk').show();
+						doDatabaseEventsPopulateList('tbodyDatabaseEvents_EventListCustom' , data.EventListCustom);
+						doDatabaseEventsPopulateList('tbodyDatabaseEvents_EventListDefault', data.EventListDefault);
+					}
+					else
+					{
+						jQuery('#msgDatabaseEvents_UpdateError').show();
+					}					
+					setTimeout(function () {
+						jQuery('.clsDatabaseEventsStatus').hide();
+					}, 2500);
+				},
+				'json'
+			);
+		}		
 		/*
 		var a = new Array('Name','Desc');
 		var validForm = checkForm('frmDatabaseEvents_Edit', a, ''); 
