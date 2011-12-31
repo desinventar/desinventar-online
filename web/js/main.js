@@ -75,6 +75,10 @@ function onReadyMain()
 		}
 	});
 
+	jQuery('#DBConfig_DatabaseEvents').on('show', function() {
+		jQuery('body').trigger('cmdDatabaseEventsShow');
+	});
+
 	jQuery('#DBConfig_DatabaseUsers').on('show', function() {
 		jQuery('body').trigger('cmdDatabaseUsersShow');
 	});
