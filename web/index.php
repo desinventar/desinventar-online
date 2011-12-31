@@ -903,6 +903,7 @@ switch ($cmd)
 					$dic = array();
 					$dic = array_merge($dic, $us->q->queryLabelsFromGroup('MapOpt', $lg));
 					$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Graph', $lg));
+					$dic = array_merge($dic, $us->q->queryLabelsFromGroup('DB', $lg));
 					$dic = array_merge($dic, $ef1);
 					$dic = array_merge($dic, $ef2);
 					$dic = array_merge($dic, $ef3);

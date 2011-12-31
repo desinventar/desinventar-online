@@ -94,38 +94,6 @@ function onReadyDatabaseEvents()
 				'json'
 			);
 		}		
-		/*
-		var a = new Array('Name','Desc');
-		var validForm = checkForm('frmDatabaseEvents_Edit', a, ''); 
-		if (validForm == true)
-		{
-			var params = jQuery(this).serialize();
-			jQuery.post(jQuery('#desinventarURL').val() + '/events.php',
-				params, 
-				function(data)
-				{
-					var reg = jQuery('#desinventarRegionId').val();
-					var opt = jQuery('#frmDatabaseEvents_Edit #Predefined').val();
-					if (opt == "1")
-					{
-						updateList('lst_evepred', jQuery('#desinventarURL').val() + '/events.php', 'r=' + reg + '&cmd=list&predef=1&t=' + new Date().getTime());
-					}
-					else
-					{
-						updateList('lst_eveuser', jQuery('#desinventarURL').val() + '/events.php', 'r=' + reg + '&cmd=list&predef=0&t=' + new Date().getTime());
-					}
-					updateList('qevelst', jQuery('#desinventarURL').val() + '/', 'r='+ reg +'&cmd=evelst&t=' + new Date().getTime());
-					jQuery('#frmDatabaseEvents_Edit #Desc').removeAttr('readonly');
-					jQuery('#eventaddsect').hide();
-					jQuery('#btnEventEditAdd').show();
-					jQuery('#msgDatabaseEvents_Updated').show();
-					setTimeout(function() {
-						jQuery('.clsDatabaseEvents').hide();
-					}, 2500);
-				}
-			);
-		}
-		*/
 		return false;
 	});
 } //onReadyDatabaseEvents()
@@ -153,6 +121,7 @@ function doDatabaseEventsPopulateLists()
 function doDatabaseEventsPopulateList(tbodyId, EventList)
 {
 	jQuery('#' + tbodyId).find('tr:gt(0)').remove();
+	jQuery('#' + tbodyId).find('tr').removeClass('under');
 	jQuery.each(EventList, function(index, value) {
 		var clonedRow = jQuery('#tbodyDatabaseEvents_EventListCustom tr:last').clone().show();
 		jQuery('.EventId', clonedRow).html(index);
