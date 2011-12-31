@@ -113,6 +113,35 @@ switch ($cmd)
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
+	case 'cmdDatabaseEventsUpdate':
+		$answer = array();
+		$iReturn = ERR_NO_ERROR;
+		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($RegionId == '')
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($iReturn > 0)
+		{
+			$o = new DIEvent($us, $_POST['Event']['EventId']);
+			$o->setFromArray($_POST['Event']);
+			if ($o->get('EventId') == '')
+			{
+				$o->set('EventId', uuid());
+				$iReturn = $o->insert();
+			}
+			$iReturn = $o->update();
+			$EventListDefault = $us->q->loadEvents('PREDEF', null, $lg);
+			$EventListCustom  = $us->q->loadEvents('USER', null, $lg);
+			$answer['EventListDefault'] = $EventListDefault;
+			$answer['EventListCustom']  = $EventListCustom;
+		}
+		$answer['Status'] = $iReturn;
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');		
+	break;
 	case 'cmdDatabaseUsers':
 		$t->display('main_database_users.tpl');
 	break;
