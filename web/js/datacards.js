@@ -593,7 +593,7 @@ function requestDatacard(myCmd, myValue)
 {
 	var bReturn = true;
 	var RegionId=jQuery('#desinventarRegionId').val();
-	jQuery('#dostat').html(waiting);
+	jQuery('#dostat').html('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif' + '" alt="" />');
 
 	jQuery.post(jQuery('#desinventarURL').val() + '/cards.php',
 		{
