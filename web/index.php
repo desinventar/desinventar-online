@@ -134,10 +134,13 @@ switch ($cmd)
 				$iReturn = $o->insert();
 			}
 			$iReturn = $o->update();
-			$EventListDefault = $us->q->loadEvents('PREDEF', null, $lg);
-			$EventListCustom  = $us->q->loadEvents('USER', null, $lg);
-			$answer['EventListDefault'] = $EventListDefault;
-			$answer['EventListCustom']  = $EventListCustom;
+			if ($iReturn > 0)
+			{
+				$EventListDefault = $us->q->loadEvents('PREDEF', null, $lg);
+				$EventListCustom  = $us->q->loadEvents('USER', null, $lg);
+				$answer['EventListDefault'] = $EventListDefault;
+				$answer['EventListCustom']  = $EventListCustom;
+			}
 		}
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');		

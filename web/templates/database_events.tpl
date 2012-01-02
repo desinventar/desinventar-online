@@ -71,8 +71,6 @@
 	<div>
 	<a class="button" id="btnDatabaseEvents_Add"><span>{-#msgDatabaseEvents_Add#-}</span></a>
 	<br />
-		<span class="clsDatabaseEventsStatus" id="msgDatabaseEvents_InsertOk">{-#msgDatabaseEvents_InsertOk#-}</span>
-		<span class="clsDatabaseEventsStatus" id="msgDatabaseEvents_InsertError">{-#msgDatabaseEvents_InsertError#-}</span>
 		<span class="clsDatabaseEventsStatus" id="msgDatabaseEvents_UpdateOk">{-#msgDatabaseEvents_UpdateOk#-}</span>
 		<span class="clsDatabaseEventsStatus" id="msgDatabaseEvents_UpdateError">{-#msgDatabaseEvents_UpdateError#-}</span>
 		<span class="clsDatabaseEventsStatus" id="msgDatabaseEvents_ErrorEmtpyFields">{-#msgDatabaseEvents_ErrorEmptyFields#-}</span>
@@ -97,7 +95,8 @@
 							title="{-$dic.DBEvePersonDef[2]-}"></textarea>
 						<br /><br />
 						{-$dic.DBEveActive[0]-}
-						<input id="fldDatabaseEvents_EventActive" name="EventActive" type="checkbox" {-$ro-} 
+						<input id="fldDatabaseEvents_EventActive" name="EventActive" type="hidden" value="0" />
+						<input id="fldDatabaseEvents_EventActiveCheckbox" type="checkbox" 
 							title="{-$dic.DBEveActive[2]-}" tabindex="3" />
 					</td>
 				</tr>
