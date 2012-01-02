@@ -204,7 +204,7 @@
 					{-foreach name=eef key=key item=item from=$EEFieldList-}
 						<tr>
 							<td valign="top">
-								{-if $item[2] == "INTEGER" || $item[2] == "DOUBLE"-}
+								{-if $item[2] == "INTEGER" || $item[2] == "DOUBLE" || $item[2] == "CURRENCY" -}
 									<input type="checkbox" onFocus="showtip('{-$item[1]-}');" id="{-$key-}" 
 										onclick="enadisEff('{-$key-}', this.checked);" />
 									<label for="{-$key-}" onMouseOver="showtip('{-$item[1]-}');">{-$item[0]-}</label>
@@ -226,7 +226,7 @@
 										</span>
 									</span>
 								{-/if-}
-								{-if $item[2] == "TEXT"-}
+								{-if $item[2] == "TEXT" || $item[2] == "DATE" -}
 									{-$item[0]-}<br />
 									<input type="text" id="{-$key-}" name="EEFieldQuery[{-$key-}][Value]" style="width: 290px;" class="line"
 										onFocus="showtip('{-$item[1]-}');" /><br />
