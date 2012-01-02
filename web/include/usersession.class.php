@@ -1058,9 +1058,6 @@ class UserSession {
 			}			
 		}
 		$query .= ' ORDER BY CountryIso,RegionLabel,RegionOrder';
-		fb($prmQuery);
-		fb($searchByCountry);
-		fb($query);
 		foreach($this->q->core->query($query) as $row)
 		{
 			$regionlist[$row['RegionId']] = array('RegionLabel' => $row['RegionLabel'],
