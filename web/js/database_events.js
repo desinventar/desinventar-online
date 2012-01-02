@@ -18,7 +18,7 @@ function onReadyDatabaseEvents()
 			jQuery('#fldDatabaseEvents_EventId').val(jQuery('.EventId',this).text());
 			jQuery('#fldDatabaseEvents_EventName').val(jQuery('.EventName',this).text());
 			jQuery('#fldDatabaseEvents_EventDesc').val(jQuery('.EventDesc',this).prop('title'));
-			jQuery('#fldDatabaseEvents_EventActive').prop('checked', jQuery('.EventActive :input',this).is(':checked'));
+			jQuery('#fldDatabaseEvents_EventActiveCheckbox').prop('checked', jQuery('.EventActive :input',this).is(':checked')).change();
 			jQuery('#fldDatabaseEvents_EventPredefined').val(jQuery('.EventPredefined',this).text());
 
 			jQuery('#btnDatabaseEvents_Add').hide();
@@ -39,7 +39,7 @@ function onReadyDatabaseEvents()
 		jQuery('#fldDatabaseEvents_EventName').val('');
 		jQuery('#fldDatabaseEvents_EventDesc').val('');
 		jQuery('#fldDatabaseEvents_EventDesc').prop('disabled', false);
-		jQuery('#fldDatabaseEvents_EventActive').prop('checked', true);
+		jQuery('#fldDatabaseEvents_EventActiveCheckbox').prop('checked', true).change();
 		jQuery('#fldDatabaseEvents_EventPredefined').val(0);
 	});
 
@@ -50,6 +50,15 @@ function onReadyDatabaseEvents()
 	jQuery('#btnDatabaseEvents_Cancel').click(function() {
 		jQuery('#divDatabaseEvents_Edit').hide();
 		jQuery('#btnDatabaseEvents_Add').show();
+	});
+
+	jQuery('#fldDatabaseEvents_EventActiveCheckbox').change(function() {
+		var v = 0;
+		if (jQuery(this).is(':checked')) 
+		{
+			v = 1;
+		}
+		jQuery('#fldDatabaseEvents_EventActive').val(v);
 	});
 
 	jQuery('#frmDatabaseEvents_Edit').submit(function() {
@@ -85,7 +94,15 @@ function onReadyDatabaseEvents()
 					}
 					else
 					{
-						jQuery('#msgDatabaseEvents_UpdateError').show();
+						switch(data.Status)
+						{
+							case -15:
+								jQuery('#msgDatabaseEvents_ErrorCannotDelete').show();
+							break;
+							default:
+								jQuery('#msgDatabaseEvents_UpdateError').show();
+							break;
+						}
 					}					
 					setTimeout(function () {
 						jQuery('.clsDatabaseEventsStatus').hide();

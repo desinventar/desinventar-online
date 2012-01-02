@@ -927,18 +927,6 @@
 			<Text LangIsoCode="por">Cancelar</Text>
 			<Text LangIsoCode="fre">Annuler</Text>
 		</Message>
-		<Message id="msgDatabaseEvents_InsertOk">
-			<Text LangIsoCode="eng">Type of event created successfully!</Text>
-			<Text LangIsoCode="spa">Tipo de evento creado exitosamente</Text>
-			<Text LangIsoCode="por">Evento criado com sucesso!</Text>
-			<Text LangIsoCode="fre">Type d&quot;évènement créé avec succès</Text>
-		</Message>
-		<Message id="msgDatabaseEvents_InsertError">
-			<Text LangIsoCode="eng">Error entering Type of event</Text>
-			<Text LangIsoCode="spa">Error intentando ingresar Tipo de evento</Text>
-			<Text LangIsoCode="por">Erro tentando ingressar Evento</Text>
-			<Text LangIsoCode="fre">Erreur en essayant d&quot;introduire le Type d&quot;évènement </Text>
-		</Message>
 		<Message id="msgDatabaseEvents_UpdateOk">
 			<Text LangIsoCode="eng">Type of event updated successfully!</Text>
 			<Text LangIsoCode="spa">Tipo de evento actualizado exitosamente</Text>
@@ -964,10 +952,10 @@
 			<Text LangIsoCode="fre">Impossibilité d&quot;utiliser le nom de event car il existe déjà</Text>
 		</Message>
 		<Message id="msgDatabaseEvents_ErrorCannotDelete">
-			<Text LangIsoCode="eng">Unable to deactivate type of event because it has been assigned.</Text>
-			<Text LangIsoCode="spa">Tipo de evento no se puede desactivar porque se encuentra asignado</Text>
-			<Text LangIsoCode="por">Evento não foi possível desativar porque está atribuída</Text>
-			<Text LangIsoCode="fre">Le event ne peut pas être désactivée car elle est déjà assignée</Text>
+			<Text LangIsoCode="eng">Unable to deactivate type of event because it has been assigned to one or more datacards.</Text>
+			<Text LangIsoCode="spa">Tipo de evento no se puede desactivar porque se encuentra asignado a una o varias fichas.</Text>
+			<Text LangIsoCode="por">Evento não foi possível desativar porque está atribuída a um ou mais registros</Text>
+			<Text LangIsoCode="fre">Le event ne peut pas être désactivée car il a été affecté à un ou plusieurs enregistrements</Text>
 		</Message>
 	</Group>
 	<Group name="grpAdminCauses">
