@@ -937,6 +937,32 @@ class UserSession {
 		return $RegionList;
 	}
 
+	public function searchCountryList()
+	{
+		$sQuery = 'SELECT DISTINCT CountryIso FROM Region WHERE RegionStatus=3 AND CountryIso<>""';
+		$CountryList = array();
+		$Index = 0;
+		$List = '';
+		foreach($this->q->core->query($sQuery) as $row)
+		{
+			if ($Index > 0)
+			{
+				$List .= ',';
+			}
+			$List .= '"' . $row['CountryIso'] . '"';
+			$Index++;
+		}
+		$sQuery = 'SELECT CountryIso,CountryName FROM Country WHERE CountryIso IN (' . $List . ')';
+		$Index = 0;
+		foreach($this->q->base->query($sQuery) as $row)
+		{
+			$CountryList[$Index]['CountryIso']  = $row['CountryIso'];
+			$CountryList[$Index]['CountryName'] = $row['CountryName'];
+			$Index++;
+		}
+		return $CountryList;
+	}
+
 	public function searchDB($prmQuery, $searchByCountry)
 	{
 		$regionlist = array();
