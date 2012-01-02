@@ -1664,10 +1664,10 @@
 			<Text LangIsoCode="fre">Accueil</Text>
 		</Message>
 		<Message id="tcopyright">
-			<Text LangIsoCode="eng">(c) 1998-2011 Corporación OSSO - Colombia</Text>
-			<Text LangIsoCode="spa">(c) 1998-2011 Corporación OSSO - Colombia</Text>
-			<Text LangIsoCode="por">(c) 1998-2011 Corporación OSSO - Colombia</Text>
-			<Text LangIsoCode="fre">(c) 1998-2011 Corporación OSSO - Colombie</Text>
+			<Text LangIsoCode="eng">(c) 1998-2012 Corporación OSSO - Colombia</Text>
+			<Text LangIsoCode="spa">(c) 1998-2012 Corporación OSSO - Colombia</Text>
+			<Text LangIsoCode="por">(c) 1998-2012 Corporación OSSO - Colombia</Text>
+			<Text LangIsoCode="fre">(c) 1998-2012 Corporación OSSO - Colombie</Text>
 		</Message>
 		<Message id="labelsoftwareversion">
 			<Text LangIsoCode="eng">Software Version</Text>
@@ -3730,10 +3730,10 @@
 			<Text LangIsoCode="fre">Pacifique Sud</Text>
 		</Message>
 		<Message id="tcopyright">
-			<Text LangIsoCode="eng">(c) 1998-2011 Corporación OSSO - Colombia</Text>
-			<Text LangIsoCode="spa">(c) 1998-2011 Corporación OSSO - Colombia</Text>
-			<Text LangIsoCode="por">(c) 1998-2011 Corporação OSSO - Colômbia</Text>
-			<Text LangIsoCode="fre">(c) 1998-2011 Corporación OSSO - Colombia</Text>
+			<Text LangIsoCode="eng">(c) 1998-2012 Corporación OSSO - Colombia</Text>
+			<Text LangIsoCode="spa">(c) 1998-2012 Corporación OSSO - Colombia</Text>
+			<Text LangIsoCode="por">(c) 1998-2012 Corporação OSSO - Colômbia</Text>
+			<Text LangIsoCode="fre">(c) 1998-2012 Corporación OSSO - Colombia</Text>
 		</Message>
 		<Message id="tcountryARG">
 			<Text LangIsoCode="eng">Argentina</Text>
