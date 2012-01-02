@@ -1046,18 +1046,21 @@ class UserSession {
 			$Role = 'ADMINREGION';
 		}
 
-		if ($searchByCountry != '')
+		if ($prmQuery != '')
 		{
-			$query .= ' AND (CountryIso = "' . $searchByCountry . '")';
-		}
-		else
-		{
-			if ($prmQuery != '')
+			if ($searchByCountry > 0)
+			{
+				$query .= ' AND (CountryIso = "' . $prmQuery . '")';
+			}
+			else
 			{
 				$query .= "(RegionId LIKE '%" . $prmQuery . "%' OR RegionLabel LIKE '%" . $prmQuery . "%')";
-			}
+			}			
 		}
 		$query .= ' ORDER BY CountryIso,RegionLabel,RegionOrder';
+		fb($prmQuery);
+		fb($searchByCountry);
+		fb($query);
 		foreach($this->q->core->query($query) as $row)
 		{
 			$regionlist[$row['RegionId']] = array('RegionLabel' => $row['RegionLabel'],
