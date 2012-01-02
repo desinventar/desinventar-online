@@ -567,6 +567,19 @@ switch ($cmd)
 		$t->assign('ctl_noregion', true);
 		$t->display('index.tpl');
 	break;
+	case 'cmdSearchCountryList':
+		$answer = array();
+		$CountryList = $us->searchCountryList();
+		$answer['Status'] = 'OK';
+		$answer['CountryList'] = $CountryList;
+		$answerstr = htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
+		if (isset($_GET['callback']))
+		{
+			// Enable support for JSONP requests...
+			$answerstr = $_GET['callback'] . '(' . $answerstr . ')';
+		}
+		echo $answerstr;
+	break;
 	case 'cmdSearchDB':
 	case 'searchdb':
 		$searchDBQuery   = getParameter('searchDBQuery', getParameter('searchdbquery', ''));
