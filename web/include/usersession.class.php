@@ -980,13 +980,13 @@ class UserSession {
 			$Role = 'ADMINREGION';
 		}
 
-		if ($prmQuery != '')
+		if ($searchByCountry != '')
 		{
-			if ($searchByCountry > 0)
-			{
-				$query .= ' AND (CountryIso = "' . $prmQuery . '")';
-			}
-			else
+			$query .= ' AND (CountryIso = "' . $searchByCountry . '")';
+		}
+		else
+		{
+			if ($prmQuery != '')
 			{
 				$query .= "(RegionId LIKE '%" . $prmQuery . "%' OR RegionLabel LIKE '%" . $prmQuery . "%')";
 			}
