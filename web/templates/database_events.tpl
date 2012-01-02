@@ -87,7 +87,6 @@
 						{-$dic.DBEvePersonName[0]-}<b style="color:darkred;">*</b>
 						<br />
 						<input id="fldDatabaseEvents_EventName" name="EventName" type="text" class="line" maxlength="40" style="width:500px;" tabindex="1"
-							onBlur="updateList('eventstatusmsg', jQuery('#desinventarURL').val() + '/events.php', 'r={-$reg-}&cmd=chkname&EventId='+ $('aEventId').value +'&EventName='+ $('EventName').value);"
 							title="{-$dic.DBEvePersonName[2]-}" />
 						<br /><br />
 						{-$dic.DBEvePersonDef[0]-}<b style="color:darkred;">*</b><br />

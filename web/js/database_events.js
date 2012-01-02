@@ -63,7 +63,7 @@ function onReadyDatabaseEvents()
 
 	jQuery('#frmDatabaseEvents_Edit').submit(function() {
 		var bContinue = true;
-		if (bContinue && jQuery('#fldDatabaseEvents_EventName').val() == '')
+		if (bContinue && jQuery.trim(jQuery('#fldDatabaseEvents_EventName').val()) == '')
 		{
 			jQuery('#fldDatabaseEvents_EventName').highlight();
 			jQuery('#msgDatabaseEvents_ErrorEmtpyFields').show();
