@@ -477,14 +477,14 @@ function doDialogsCreate()
 	// User Login Window
 	w = new Ext.Window({id:'wndUserLogin',
 		el:'usr-win', layout:'fit', x:300, y:100, width:500, height:300, 
-		closeAction:'hide', plain: true, animCollapse: false,
+		closeAction:'hide', plain: true, animCollapse: false, constrainHeader: true,
 		items: new Ext.Panel({ contentEl: 'usr', autoScroll: true })
 	});
 
 	// Query Open Window
 	w = new Ext.Window({id:'wndQueryOpen',
 		el:'qry-win', layout:'fit', width:300, height:200,
-		closeAction:'hide', plain: true, animCollapse: false,
+		closeAction:'hide', plain: true, animCollapse: false, constrainHeader: true,
 		items: new Ext.Panel({contentEl: 'qry-cfg', autoScroll: true }),
 		buttons:
 		[
@@ -501,12 +501,12 @@ function doDialogsCreate()
 	// Database List - Database Search Window
 	w = new Ext.Window({id:'wndDatabaseList',
 		el:'dbl-win', layout:'fit', x:200, y:100, width:600, height:450, 
-		closeAction:'hide', plain: true, animCollapse: false,
+		closeAction:'hide', plain: true, animCollapse: false, constrainHeader: true,
 		items: new Ext.Panel({ contentEl: 'dbl', autoScroll: true })
 	});
 	w = new Ext.Window({id:'wndDialog',
 		el:'dlg-win', layout:'fit', x:350, y:200, width:300, height:150, 
-		closeAction:'hide', plain: true, animCollapse: false,
+		closeAction:'hide', plain: true, animCollapse: false, constrainHeader: true,
 		items: new Ext.Panel({ contentEl: 'dlg', autoScroll: true })
 	});
 	// Datacard View/Edit Window
@@ -528,7 +528,7 @@ function doDialogsCreate()
 	w = new Ext.Window({id:'wndViewDataParams', 
 		el:'dat-win', layout:'fit',
 		width:600, height:420, 
-		closeAction:'hide', plain: true, animCollapse: false,
+		closeAction:'hide', plain: true, animCollapse: false, constrainHeader: true,
 		items: new Ext.Panel({contentEl: 'dat-cfg', autoScroll: true }),
 		buttons: [
 			{text: jQuery('#msgViewDataButtonClear').text(),
@@ -558,7 +558,7 @@ function doDialogsCreate()
 
 	w = new Ext.Window({id:'wndViewMapParams',
 		el:'map-win',  layout:'fit',  width:650, height:420, 
-		closeAction:'hide', plain: true, animCollapse: false,
+		closeAction:'hide', plain: true, animCollapse: false, constrainHeader: true,
 		items: new Ext.Panel({contentEl: 'map-cfg', autoScroll: true }),
 		buttons: [
 			{text: jQuery('#msgViewMapButtonClear').text(),
@@ -588,7 +588,7 @@ function doDialogsCreate()
 
 	w = new Ext.Window({id:'wndViewGraphParams',
 		el:'divGraphParameters',  layout:'fit',  width:750, height:420, 
-		closeAction:'hide', plain: true, animCollapse: false,
+		closeAction:'hide', plain: true, animCollapse: false, constrainHeader: true,
 		items: new Ext.Panel({contentEl: 'grp-cfg', autoScroll: true }),
 		buttons: [
 			{text: jQuery('#msgViewGraphButtonClear').text(),
@@ -615,7 +615,7 @@ function doDialogsCreate()
 
 	w = new Ext.Window({id:'wndViewStdParams',
 		el:'std-win',  layout:'fit',  width:600, height:420, 
-		closeAction:'hide', plain: true, animCollapse: false,
+		closeAction:'hide', plain: true, animCollapse: false, constrainHeader: true,
 		items: new Ext.Panel({contentEl: 'std-cfg', autoScroll: true }),
 		buttons: [
 			{text: jQuery('#msgViewStdButtonClear').text(),

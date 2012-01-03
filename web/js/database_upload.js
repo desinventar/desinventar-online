@@ -257,7 +257,7 @@ function doDatabaseUploadCreate()
 	// Database Upload
 	var w = new Ext.Window({id:'wndDatabaseUpload', 
 		el: 'divDatabaseUploadWin', layout:'fit', 
-		width:400, height:220, modal:false,
+		width:400, height:220, modal:false, constrainHeader: true,
 		plain: false, animCollapse: false,
 		closeAction: 'hide',
 		items: new Ext.Panel({

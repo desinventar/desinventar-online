@@ -14,7 +14,7 @@ function doUserPermAdminSetup()
 	var w = new Ext.Window({id:'wndUserPermAdmin', 
 		el: 'divUserPermAdminWin', layout:'fit', 
 		width:500, height:250, modal:false,
-		closeAction:'hide', plain: false, animCollapse: true,
+		closeAction:'hide', plain: false, animCollapse: true, constrainHeader: true,
 		items: new Ext.Panel({
 			contentEl: 'divUserPermAdminContent',
 			autoScroll: true

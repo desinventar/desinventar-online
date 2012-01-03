@@ -15,7 +15,7 @@ function doAdminDatabaseExportCreate()
 	// Database Export
 	var w = new Ext.Window({id:'wndDatabaseExport', 
 		el: 'divDatabaseExportWin', layout:'fit', 
-		width:400, height:200, modal:false,
+		width:400, height:200, modal:false, constrainHeader: true,
 		closeAction:'hide', plain: false, animCollapse: false,
 		items: new Ext.Panel({
 			contentEl: 'divDatabaseExportContent',
