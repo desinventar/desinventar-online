@@ -474,7 +474,7 @@ function doDialogsCreate()
 		el:'divDatacardWindow', layout:'fit', 
 		x: 65, y: 0, width:960, height:638, 
 		closeAction:'hide', plain: true, animCollapse: false,
-		items: new Ext.Panel({ contentEl: 'dif-cfg', autoScroll: true })
+		items: new Ext.Panel({ contentEl: 'divDatacardContent', autoScroll: true })
 	});
 	w.on('hide',function() {
 		jQuery('#divDatacardWindow').hide();
