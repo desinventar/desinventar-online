@@ -9,7 +9,7 @@
 								position:absolute; left:10px; top:500px; overflow:auto; }
 	</style>
 
-	<table class="grid" height="100%">
+	<table class="grid" style="height:100%;">
 		<tr>
 			<td>
 				{-$mapfilename-}
