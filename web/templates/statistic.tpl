@@ -1,7 +1,7 @@
 {-config_load file="$lg.conf" section="dc_statistic"-}
 {-config_load file="$lg.conf" section="dc_qdetails"-}
 {-if $ctl_showres-}
-	<table width="920px" class="grid">
+	<table width="920" class="grid">
 		<tr>
 			<td colspan="3">
 				<div class="dwin" style="height:40px;">
@@ -37,7 +37,7 @@
 			</td>
 		</tr>
 	</table>
-	<table width="930px" height="95%" class="col">
+	<table width="930" height="95%" class="col">
 		<thead>
 			<tr>
 				<th class="header">{-#trow#-}

@@ -9,7 +9,7 @@
 <body>
 	<table border="0" cellpadding="0" cellspacing="0" style="border: thin solid;" bgcolor="#e2e2e0" >
 		<tr style="background:url(images/bgmain.png)">
-			<td width="400px">
+			<td width="400">
 				<a href="{-$desinventarURL-}"><img src="{-$desinventarURL-}/images/di_logo1.png" border=0></a><br/>
 			</td>
 			<td height="100%" align="center">
@@ -42,7 +42,7 @@
 								onClick="window.open('http://www.desinventar.org', '', '');">{-#mwebsite#-}</a><br />
 						</td>
 						<td>
-							<iframe id="idoc" name="idoc" frameborder="0" height="510px;" width="750px"></iframe>
+							<iframe id="idoc" name="idoc" frameborder="0" height="510px;" width="750"></iframe>
 						</td>
 					</tr>
 				</table>
