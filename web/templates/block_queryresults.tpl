@@ -5,13 +5,13 @@
 			</td>
 			<td align="center">
 				<div id="ResultHeaderButtonToolbar">
-					<button id="btnViewData" class="rounded" ext:qtip="{-#tdatamsg#-}"><span>{-#bdata#-}</span></button>
+					<button id="btnViewData" class="rounded" title="{-#tdatamsg#-}"><span>{-#bdata#-}</span></button>
 					{-include file="viewdata_parameters.tpl"-}
-					<button id="btnViewMap" class="rounded" ext:qtip="{-#tthematicmsg#-}"><span>{-#bthematic#-}</span></button>
+					<button id="btnViewMap" class="rounded" title="{-#tthematicmsg#-}"><span>{-#bthematic#-}</span></button>
 					{-include file="thematicmap_parameters.tpl"-}
-					<button id="btnViewGraph" class="rounded" ext:qtip="{-#tgraphicmsg#-}"><span>{-#bgraphic#-}</span></button>
+					<button id="btnViewGraph" class="rounded" title="{-#tgraphicmsg#-}"><span>{-#bgraphic#-}</span></button>
 					{-include file="graph_parameters.tpl"-}
-					<button id="btnViewStd" class="rounded" ext:qtip="{-#tstatisticmsg#-}"><span>{-#bstatistic#-}</span></button>
+					<button id="btnViewStd" class="rounded" title="{-#tstatisticmsg#-}"><span>{-#bstatistic#-}</span></button>
 					{-include file="statistic_parameters.tpl"-}
 				</div>
 				<!-- Database Export Window -->
@@ -84,7 +84,7 @@
 				<input id="DCRes" type="hidden" value="" />
 				<input id="bsave" type="button" class="bb bsave"   style="visibility: hidden;"
 					onMouseOver="if($('DCRes').value == 'D' || $('DCRes').value == 'S') $('saveopt').style.display='block';"
-					onClick="saveRes('export', '');" ext:qtip="{-#bsavemsg#-}" />
+					onClick="saveRes('export', '');" title="{-#bsavemsg#-}" />
 				<span id="saveopt" style="position:absolute; display: none" 
 					onMouseOver="$('saveopt').style.display='block';" onMouseOut="setTimeout('$(\'saveopt\').style.display=\'none\';', 2000);">
 					<input type="button" value="xls" class="bb line" onClick="saveRes('export', 'xls')" /> | 
@@ -92,7 +92,7 @@
 				</span>
 				&nbsp;&nbsp;
 				<input id="bprint" type="button" class="bb bprint" style="visibility: hidden;"	
-					onClick="printRes();" ext:qtip="{-#bprintmsg#-}" />&nbsp;&nbsp;
+					onClick="printRes();" title="{-#bprintmsg#-}" />&nbsp;&nbsp;
 			</td>
 		</tr>
 	</table>
