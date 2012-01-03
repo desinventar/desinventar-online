@@ -69,7 +69,7 @@
 					</select>
 				</td>
 				<td id="tdGraphParamCenter" align="center">
-					<table border="1" width="100%" height="100%">
+					<table border="1" style="width:100%;height:100%;">
 					<tr valign="center">
 						<td align="center">
 							<select id="prmGraphKind" name="prmGraph[Kind]" size="3"
@@ -141,7 +141,7 @@
 			<tr>
 				<td></td>
 				<td>
-					<table border=0 height="100%">
+					<table border=0 style="height:100%;">
 					<tr>
 						<td colspan="2" align="center">
 							<p><u>{-#ghoraxis#-}:</u></p>

@@ -12,7 +12,7 @@
 			<td width="400">
 				<a href="{-$desinventarURL-}"><img src="{-$desinventarURL-}/images/di_logo1.png" border=0></a><br/>
 			</td>
-			<td height="100%" align="center">
+			<td style="height:100%;" align="center">
 				{-#mlang#-}:
 				<select onChange="window.location=jQuery('#desinventarURL').val() + '/?lang='+ this.value;">
 				{-foreach name=LanguageList key=key item=item from=$LanguageList-}
@@ -42,7 +42,7 @@
 								onClick="window.open('http://www.desinventar.org', '', '');">{-#mwebsite#-}</a><br />
 						</td>
 						<td>
-							<iframe id="idoc" name="idoc" frameborder="0" height="510px;" width="750"></iframe>
+							<iframe id="idoc" name="idoc" frameborder="0" style="height:510px;width:750px;"></iframe>
 						</td>
 					</tr>
 				</table>

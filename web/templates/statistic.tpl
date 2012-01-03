@@ -37,7 +37,7 @@
 			</td>
 		</tr>
 	</table>
-	<table width="930" height="95%" class="col">
+	<table style="width:930px;height:95%;" class="col">
 		<thead>
 			<tr>
 				<th class="header">{-#trow#-}
