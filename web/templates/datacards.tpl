@@ -5,7 +5,7 @@
 			<input type="button" id="btnDatacardNew"    class="DatacardCmdButton bb bnew"    title="{-#tnewtitle#-}: {-#tnewdesc#-}" />
 			<input type="button" id="btnDatacardEdit"   class="DatacardCmdButton bb bupd"    title="{-#tupdtitle#-}: {-#tupddesc#-}" />
 			<input type="button" id="btnDatacardSave"   class="DatacardCmdButton bb bsave"   title="{-#tsavtitle#-}: {-#tsavdesc#-}" />
-			<input type="button" id="btnDatacardCancel" class="DatacardCmdButton bb bcancel" title~="{-#tcantitle#-}: {-#tcandesc#-}" />
+			<input type="button" id="btnDatacardCancel" class="DatacardCmdButton bb bcancel" title="{-#tcantitle#-}: {-#tcandesc#-}" />
 			<span  class="DatacardCmdButton"> &nbsp;&nbsp;|&nbsp;&nbsp;</span>
 			<input type="button" id="btnDatacardPrint"  class="DatacardCmdButton bb bprint"  title="{-#mprint#-}" />
 			&nbsp;&nbsp;|&nbsp;&nbsp;
@@ -74,7 +74,7 @@
 			<td style="border-color:#000000;">
 				<table class="grid">
 					<tr valign="top">
-						<td title="{-$LabelsDisaster.DisasterBeginTime[1]-}" />
+						<td title="{-$LabelsDisaster.DisasterBeginTime[1]-}">
 							{-$LabelsDisaster.DisasterBeginTime[0]-}<b style="color:darkred;">*</b><br />
 							<input id="DisasterBeginTime0" name="DisasterBeginTime[0]" style="width:36px;" type="text"
 								class="line inputInteger" tabindex="{-$MyTabIndex-}" maxlength="4" onFocus="showtip('{-$LabelsDisaster.DisasterBeginTime[2]-}', '#d4baf6')" />
@@ -86,7 +86,7 @@
 								class="line inputInteger" tabindex="{-$MyTabIndex-}"  maxlength="2" onFocus="showtip('{-$LabelsDisaster.DisasterBeginTime[2]-}', '#d4baf6')" />
 							{-counter-}
 						</td>
-						<td title="{-$LabelsDisaster.DisasterSource[1]-}" />
+						<td title="{-$LabelsDisaster.DisasterSource[1]-}" >
 							{-$LabelsDisaster.DisasterSource[0]-}<b style="color:darkred;">*</b><br />
 							<input id="DisasterSource" name="DisasterSource" type="text" size="50"
 								class="line inputText" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsDisaster.DisasterSource[2]-}', '#d4baf6')" />
@@ -105,7 +105,7 @@
 							</select>
 							{-counter-}
 						</td>
-						<td title="{-$LabelsDisaster.DisasterSerial[1]-}" />
+						<td title="{-$LabelsDisaster.DisasterSerial[1]-}" >
 							{-$LabelsDisaster.DisasterSerial[0]-}<b style="color:darkred;">*<br />
 							<input id="DisasterSerial" name="DisasterSerial" type="text" size="15" 
 								class="line inputAlphaNumber" tabindex="{-$MyTabIndex-}" maxlength="50" onFocus="showtip('{-$LabelsDisaster.DisasterSerial[2]-}', '#d4baf6')" />
@@ -166,7 +166,7 @@
 								</tr>
 							</table>
 						</td>
-						<td title="{-$LabelsDisaster.DisasterSiteNotes[1]-}" />
+						<td title="{-$LabelsDisaster.DisasterSiteNotes[1]-}">
 							{-$LabelsDisaster.DisasterSiteNotes[0]-}<br />
 							<textarea id="DisasterSiteNotes" name="DisasterSiteNotes" style="height: 40px;" cols="25" maxlength="512"
 								class="inputText" tabindex="{-$MyTabIndex-}" 
@@ -247,7 +247,8 @@
 											<!-- BEGIN Table Sectors -->
 											{-foreach name=sec key=key item=item from=$sec-}
 												<tr>
-													<td align="right"><span title="{-$item[1]-}">{-$item[0]-}</span>
+													<td align="right">
+														<span title="{-$item[1]-}">{-$item[0]-}</span>
 													</td>
 													<td>
 														<select id="{-$key-}" name="{-$key-}" style="width:120px;" 
