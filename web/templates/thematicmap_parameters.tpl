@@ -2,7 +2,9 @@
 	<span id="msgViewMapButtonClear" style="display:none;">{-#tclear#-}</span>
 	<span id="msgViewMapButtonSend"  style="display:none;">{-#tsend#-}</span>
 	<span id="msgViewMapButtonClose" style="display:none;">{-#tclose#-}</span>
-	<div class="x-window-header">{-#bthematic#-}</div>
+	<div class="x-window-header">
+		{-#msgViewMap#-}
+	</div>
 	<div id="map-cfg">
 		<div id="colorpicker201" class="colorpicker201"></div>
 		<form id="CM" method="post">

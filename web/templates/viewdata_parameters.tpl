@@ -2,7 +2,8 @@
 	<span id="msgViewDataButtonClear" style="display:none;">{-#tclear#-}</span>
 	<span id="msgViewDataButtonSend"  style="display:none;">{-#tsend#-}</span>
 	<span id="msgViewDataButtonClose" style="display:none;">{-#tclose#-}</span>
-<div class="x-window-header">{-#bdata#-}
+<div class="x-window-header">
+	{-#msgViewData#-}
 </div>
 <div id="dat-cfg">
 	<form id="CD" method="post" action="">

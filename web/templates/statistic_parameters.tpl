@@ -2,7 +2,9 @@
 	<span id="msgViewStdButtonClear" style="display:none;">{-#tclear#-}</span>
 	<span id="msgViewStdButtonSend"  style="display:none;">{-#tsend#-}</span>
 	<span id="msgViewStdButtonClose" style="display:none;">{-#tclose#-}</span>
-	<div class="x-window-header">{-#bstatistic#-}</div>
+	<div class="x-window-header">
+		{-#msgViewStd#-}
+	</div>
 	<div id="std-cfg">
 		<form id="CS" method="post">
 			<table border="0" width="100%">

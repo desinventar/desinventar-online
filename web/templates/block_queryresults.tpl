@@ -5,13 +5,13 @@
 			</td>
 			<td align="center">
 				<div id="ResultHeaderButtonToolbar">
-					<button id="btnViewData" class="rounded" title="{-#tdatamsg#-}"><span>{-#bdata#-}</span></button>
+					<button id="btnViewData" class="rounded" title="{-#msgViewDataTooltip#-}"><span>{-#msgViewData#-}</span></button>
 					{-include file="viewdata_parameters.tpl"-}
-					<button id="btnViewMap" class="rounded" title="{-#tthematicmsg#-}"><span>{-#bthematic#-}</span></button>
+					<button id="btnViewMap" class="rounded" title="{-#msgViewMapTooltip#-}"><span>{-#msgViewMap#-}</span></button>
 					{-include file="thematicmap_parameters.tpl"-}
-					<button id="btnViewGraph" class="rounded" title="{-#tgraphicmsg#-}"><span>{-#bgraphic#-}</span></button>
+					<button id="btnViewGraph" class="rounded" title="{-#msgViewGraphTooltip#-}"><span>{-#msgViewGraph#-}</span></button>
 					{-include file="graph_parameters.tpl"-}
-					<button id="btnViewStd" class="rounded" title="{-#tstatisticmsg#-}"><span>{-#bstatistic#-}</span></button>
+					<button id="btnViewStd" class="rounded" title="{-#msgViewStdTooltip#-}"><span>{-#msgViewStd#-}</span></button>
 					{-include file="statistic_parameters.tpl"-}
 				</div>
 				<!-- Database Export Window -->
