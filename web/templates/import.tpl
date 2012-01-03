@@ -17,7 +17,7 @@
 	<div class="divImport" id="divImportSelectFile">
 		{-* Show select CSV file interface *-}
 		<p class="fixw">
-			<form id="import" method="POST" action="import.php" target="importres" enctype="multipart/form-data">
+			<form id="import" method="post" action="import.php" target="importres" enctype="multipart/form-data">
 				<input type="hidden" name="_REG" value="{-$RegionId-}" />
 				<input type="hidden" name="cmd" value="upload" />
 				<input type="hidden" name="diobj" value="5" />
@@ -30,7 +30,7 @@
 		<br />
 		<iframe name="importres" id="importres" frameborder="1" src="about:blank" style="height:400px; width:830px;"></iframe>
 		{-* Show import interface to assign specific fields *-}
-		<form method="POST" action="import.php">
+		<form method="post" action="import.php">
 			<input type="hidden" name="cmd" value="import" />
 			<input type="hidden" name="FileName" value="{-$FileName-}" />
 			<input type="submit" value="{-#tsend#-}" class="line" />

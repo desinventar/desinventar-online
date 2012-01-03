@@ -12,7 +12,7 @@
 			<td>
 				<fieldset style="padding:5px 5px 5px 5px;">
 					<!-- GENERAL REGION INFO SECTION -->
-					<form id="frmDatabaseInfo" name="infofrm" method="POST" action="{-$desinventarURL-}/info.php" target="ifinfo">
+					<form id="frmDatabaseInfo" name="infofrm" method="post" action="{-$desinventarURL-}/info.php" target="ifinfo">
 					
 						<table border="0" cellspacing="0" cellpadding="0">
 							<tr>

@@ -34,7 +34,7 @@
 	<iframe name="ifcarto" id="ifcarto" frameborder="0" src="about:blank" style="height:30px; width:300px;"></iframe>
 	<br /><br />
 	<div id="levaddsect" style="display:none; width:600px;">
-		<form name="levfrm" id="levfrm" method="POST" action="{-$desinventarURL-}/geolevel.php" target="ifcarto" enctype="multipart/form-data"
+		<form name="levfrm" id="levfrm" method="post" action="{-$desinventarURL-}/geolevel.php" target="ifcarto" enctype="multipart/form-data"
 			onSubmit="javascript: var a=new Array('GeoLevelName','GeoLevelDesc');
 			if(checkForm('levfrm',a, '{-#errmsgfrmlev#-}')) { $('levaddsect').style.display = 'none'; return(true); } else return(false)">
 			<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevName[2]-}')">

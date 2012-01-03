@@ -22,7 +22,7 @@
 						{-#mopenquery#-}
 					</div>
 					<div id="qry-cfg" style="text-align:center;">
-						<form id="openquery" enctype="multipart/form-data" action="{-$desinventarURL-}/?r={-$reg-}" method="POST">
+						<form id="openquery" enctype="multipart/form-data" action="{-$desinventarURL-}/?r={-$reg-}" method="post">
 							<br /><br />
 							<input type="hidden" name="cmd" value="openquery" />
 							<input type="hidden" name="MAX_FILE_SIZE" value="100000" />
@@ -63,13 +63,16 @@
 					<div id="dlg">
 						<table border="0">
 							<tr>
-								<td><img src="{-$desinventarURL-}/images/di_logo.png">
+								<td>
+									<img src="{-$desinventarURL-}/images/di_logo.png" />
 								</td>
-								<td><p style="font-size: 16pt;" align="center">DesInventar {-$desinventarVersion-}</p>
+								<td>
+									<p style="font-size: 16pt;" align="center">DesInventar {-$desinventarVersion-}</p>
 								</td>
 							</tr>
 							<tr>
-								<td colspan="2">{-#tabout#-}<hr />{-#tcopyright#-}
+								<td colspan="2">
+									{-#tabout#-}<hr />{-#tcopyright#-}
 								</td>
 							</tr>
 						</table>

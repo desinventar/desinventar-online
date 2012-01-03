@@ -27,7 +27,7 @@
 		<br />
 	</div>
 	<div id="geoaddsect" style="display:none; width:100%;">
-		<form id="frmDBConfigGeographyEdit" method="POST" action="" >
+		<form id="frmDBConfigGeographyEdit" method="post" action="" >
 			<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBEleCode[2]-}');">
 			{-$dic.DBEleCode[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBEleCode[1]-}</span></a><br />
 			<input id="aGeographyCode" name="data[GeographyCode]" type="text" {-$ro-} class="line" tabindex="1" style="width:500px;"
@@ -60,7 +60,7 @@
 	</div>
 	<!--
 	<hr /><br />
-	<form method="POST" action="import.php" target="ifgeo" enctype="multipart/form-data">
+	<form method="post" action="import.php" target="ifgeo" enctype="multipart/form-data">
 		<input type="hidden" name="r" value="{-$reg-}" />
 		<input type="hidden" name="cmd" value="upload" />
 		<input type="hidden" name="diobj" value="4" />

@@ -5,7 +5,7 @@
 	<div class="x-window-header">{-#bthematic#-}</div>
 	<div id="map-cfg">
 		<div id="colorpicker201" class="colorpicker201"></div>
-		<form id="CM" method="POST">
+		<form id="CM" method="post">
 			<table class="conf">
 				<tr valign="top">
 					<td>
