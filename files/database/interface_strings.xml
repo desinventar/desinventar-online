@@ -151,6 +151,18 @@
 			<Text LangIsoCode="por">Substituir banco de dados</Text>
 			<Text LangIsoCode="fre">Remplacer base de données</Text>
 		</Message>
+		<Message id="mnuDatabaseCreate">
+			<Text LangIsoCode="eng">Create new database</Text>
+			<Text LangIsoCode="spa">Crear nueva base de datos</Text>
+			<Text LangIsoCode="por">Criar novo banco de dados</Text>
+			<Text LangIsoCode="fre">Créer nouvelle base de données</Text>
+		</Message>
+		<Message id="mnuDatabaseSetAdminUser">
+			<Text LangIsoCode="eng">Database Administrator</Text>
+			<Text LangIsoCode="spa">Administrador Base de Datos</Text>
+			<Text LangIsoCode="por">Administrador de banco de dados</Text>
+			<Text LangIsoCode="fre">Database Administrator</Text>
+		</Message>
 		<Message id="mnuDatabaseConfig">
 			<Text LangIsoCode="eng">Setup database</Text>
 			<Text LangIsoCode="spa">Configurar base de datos</Text>
@@ -368,18 +380,6 @@
 			<Text LangIsoCode="spa">Permisos administrativos</Text>
 			<Text LangIsoCode="por">Permissões administrativas</Text>
 			<Text LangIsoCode="fre">Autorisations administratives</Text>
-		</Message>
-		<Message id="mnuDatabaseCreate">
-			<Text LangIsoCode="eng">Create new database</Text>
-			<Text LangIsoCode="spa">Crear nueva base de datos</Text>
-			<Text LangIsoCode="por">Criar novo banco de dados</Text>
-			<Text LangIsoCode="fre">Créer nouvelle base de données</Text>
-		</Message>
-		<Message id="mnuDatabaseSetAdminUser">
-			<Text LangIsoCode="eng">Database Administrator</Text>
-			<Text LangIsoCode="spa">Administrador Base de Datos</Text>
-			<Text LangIsoCode="por">Administrador de banco de dados</Text>
-			<Text LangIsoCode="fre">Database Administrator</Text>
 		</Message>
 		<Message id="tyourrol">
 			<Text LangIsoCode="eng">Your roles and databases are:</Text>
