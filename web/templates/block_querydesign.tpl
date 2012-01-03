@@ -14,7 +14,7 @@
 			{-foreach name=glev key=k item=i from=$glev-}
 				<span class="dlgmsg" onMouseOver="showtip('{-$i[1]-}');">{-$i[0]-}</span> |
 			{-/foreach-}
-			<div id="qgeolst" style="height: 280px;" class="dwin" ext:qtip="{-#thlpquery#-}">
+			<div id="qgeolst" style="height: 280px;" class="dwin" title="{-#thlpquery#-}">
 				{-assign var="maintree" value="true"-}
 				{-* Show Geography List *-}
 				{-include file="block_glist.tpl"-}
@@ -305,7 +305,7 @@
 		
 		<!-- BEGIN CUSTOMQUERY SECTION -->
 		<dt>{-#madvsection#-}</dt>
-		<dd alignt="left">
+		<dd align="left">
 			<textarea id="QueryCustom" name="QueryCustom" style="width:300px; height:45px;" 
 				class="inputText" onFocus="showtip('');">{-$qd.QueryCustom-}</textarea>
 			<br />
