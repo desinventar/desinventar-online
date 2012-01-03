@@ -31,17 +31,10 @@
 					</div>
 					<span id="msgQueryOpenButtonClose" style="display:none;">{-#tclose#-}</span>
 				</div>
+
 				<!-- Show DesInventar (input data) window-->
-				<div id="divDatacardWindow" class="x-hidden">
-					<div class="x-window-header">
-						{-#mdcsection#-} | {-$desinventarUserId-} - {-$role-}
-					</div>
-					<div id="dif-cfg" style="text-align:center;">
-						<div name="dif" id="dif" frameborder="0" height="600px;" width="100%">
-							{-include file="datacards.tpl"-}
-						</div>
-					</div>
-				</div>
+				{-include file="datacards_ext.tpl"-}
+
 				<!-- Show User login/logout window -->
 				<div id="usr-win" class="x-hidden">
 					<div class="x-window-header">

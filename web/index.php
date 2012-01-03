@@ -88,6 +88,10 @@ switch ($cmd)
 		$answer['Region'] = $r->getRegionInfoCore();
 		echo json_encode($answer);
 	break;
+	case 'cmdDatacards':
+		//$t->assign('dic', $us->q->queryLabelsFromGroup('DB', $lg));
+		$t->display('main_datacards.tpl');
+	break;
 	case 'cmdDatabaseEvents':
 		$t->assign('dic', $us->q->queryLabelsFromGroup('DB', $lg));
 		$t->display('main_database_events.tpl');
