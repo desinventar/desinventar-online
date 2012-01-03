@@ -13,7 +13,7 @@ function doDatabaseCreateSetup()
 	// Database Create
 	var w = new Ext.Window({id:'wndDatabaseCreate', 
 		el: 'divDatabaseCreateWin', layout:'fit', 
-		width:450, height:300, modal:false,
+		width:450, height:300, modal:false, constrainHeader: true,
 		closeAction:'hide', plain: false, animCollapse: true,
 		items: new Ext.Panel({
 			contentEl: 'divDatabaseCreateContent',
