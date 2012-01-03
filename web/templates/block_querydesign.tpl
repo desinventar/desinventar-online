@@ -217,12 +217,12 @@
 											<option class="small" value="=">{-#teffequal#-}</option>
 											<option class="small" value="-3">{-#teffbetween#-}</option>
 										</select>
-										<input type="hidden" name="EEFieldQuery[{-$key-}][Type]" value="{-$item[2]-}">
+										<input type="hidden" name="EEFieldQuery[{-$key-}][Type]" value="{-$item[2]-}" />
 										<span id="x{-$key-}" style="display:none"><br />
 											<input type="text" id="{-$key-}[1]" name="EEFieldQuery[{-$key-}][Value1]" size="3" value="1" class="line" />
 										</span>
 										<span id="y{-$key-}" style="display:none">
-											{-#tand#-} <input type="text" id="{-$key-}[2]" name="EEFieldQuery[{-$key-}][Value2]" size="3" value="10" class="line">
+											{-#tand#-} <input type="text" id="{-$key-}[2]" name="EEFieldQuery[{-$key-}][Value2]" size="3" value="10" class="line" />
 										</span>
 									</span>
 								{-/if-}
@@ -230,7 +230,7 @@
 									{-$item[0]-}<br />
 									<input type="text" id="{-$key-}" name="EEFieldQuery[{-$key-}][Value]" style="width: 290px;" class="line"
 										onFocus="showtip('{-$item[1]-}');" /><br />
-									<input type="hidden" name="EEFieldQuery[{-$key-}][Type]" value="{-$item[2]-}">
+									<input type="hidden" name="EEFieldQuery[{-$key-}][Type]" value="{-$item[2]-}" />
 								{-/if-}
 							</td>
 						</tr>

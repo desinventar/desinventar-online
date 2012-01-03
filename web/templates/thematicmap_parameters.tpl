@@ -39,7 +39,17 @@
 												<input type="hidden" id="txtRangeLabel" value="{-#mbetween#-}" />
 												<table border="0" id="tbl_range" class="grid">
 													<thead>
-														<th colspan=2>{-#mrange#-}</th><th>{-#mlegend#-}</th><th>{-#mcolor#-}</th>
+														<tr>
+															<th colspan=2>
+																{-#mrange#-}
+															</th>
+															<th>
+																{-#mlegend#-}
+															</th>
+															<th>
+																{-#mcolor#-}
+															</th>
+														</tr>
 													</thead>
 													<tbody id="range">
 													{-foreach name=rg key=k item=i from=$range-}

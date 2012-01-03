@@ -165,7 +165,7 @@
 					</tr>
 					<tr>
 						<td>
-							<b help_tip="{-$dic.GraphPeriod[2]-}">{-$dic.GraphPeriod[0]-}
+							<b help_tip="{-$dic.GraphPeriod[2]-}">{-$dic.GraphPeriod[0]-}</b>
 						</td>
 						<td>
 							<select id="prmGraphPeriod" name="prmGraph[Period]" class="line" help_tip="{-$dic.GraphPeriod[2]-}">
