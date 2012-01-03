@@ -87,6 +87,11 @@
 	</script>
 </head>
 <body>
+	<div id="divMapHeader"></div>
+	<div id="loading-mask"></div>
+	<div id="loading">
+		<div class="loading-indicator">Loading...</div>
+	</div>
 	<div id="divViewport">
 		<!-- Top Menu Area - Toolbar -->
 		<div id="north">
