@@ -1869,53 +1869,53 @@
 			<Text LangIsoCode="por">Para imprimir o resultado na tela</Text>
 			<Text LangIsoCode="fre">Pour imprimer le résultat sur l&quot;écran</Text>
 		</Message>
-		<Message id="bdata">
+		<Message id="msgViewData">
 			<Text LangIsoCode="eng">Data cards</Text>
 			<Text LangIsoCode="spa">Fichas</Text>
 			<Text LangIsoCode="por">Formulários</Text>
 			<Text LangIsoCode="fre">Carte de données</Text>
 		</Message>
-		<Message id="tdatamsg">
+		<Message id="msgViewDataTooltip">
 			<Text LangIsoCode="eng">To visualise records in a table format</Text>
 			<Text LangIsoCode="spa">Para visualizar las fichas en un tabla.</Text>
 			<Text LangIsoCode="por">Para visualizar os formulários numa tabela</Text>
 			<Text LangIsoCode="fre">Pour afficher les cartes de données sur un tableau</Text>
 		</Message>
-		<Message id="bthematic">
+		<Message id="msgViewMap">
 			<Text LangIsoCode="eng">Maps</Text>
 			<Text LangIsoCode="spa">Mapas</Text>
 			<Text LangIsoCode="por">Mapas</Text>
 			<Text LangIsoCode="fre">Cartes</Text>
 		</Message>
-		<Message id="tthematicmsg">
+		<Message id="msgViewMapTooltip">
 			<Text LangIsoCode="eng">To create thematic maps of effects</Text>
 			<Text LangIsoCode="spa">Para realizar mapas temáticos de los efectos.</Text>
 			<Text LangIsoCode="por">Para realizar mapas temáticos dos efeitos</Text>
 			<Text LangIsoCode="fre">Pour réaliser des cartes thématiques des effets</Text>
 		</Message>
-		<Message id="bgraphic">
+		<Message id="msgViewGraph">
 			<Text LangIsoCode="eng">Graphs</Text>
 			<Text LangIsoCode="spa">Gráficos</Text>
 			<Text LangIsoCode="por">Gráficos</Text>
 			<Text LangIsoCode="fre">Graphiques</Text>
 		</Message>
-		<Message id="tgraphicmsg">
+		<Message id="msgViewGraphTooltip">
 			<Text LangIsoCode="eng">Represents data in histograms and comparative graphs</Text>
 			<Text LangIsoCode="spa">Representa los datos en histogramas y gráficos comparativos.</Text>
 			<Text LangIsoCode="por">Representa os dados em histogramas e gráficos comparativos</Text>
 			<Text LangIsoCode="fre">Représente les données sur des histogrames et des graphiques comparatifs</Text>
 		</Message>
-		<Message id="bstatistic">
+		<Message id="msgViewStd">
 			<Text LangIsoCode="eng">Consolidated</Text>
 			<Text LangIsoCode="spa">Consolidados</Text>
 			<Text LangIsoCode="por">Consolidados</Text>
 			<Text LangIsoCode="fre">Consolidés</Text>
 		</Message>
-		<Message id="tstatisticmsg">
-			<Text LangIsoCode="eng">Tipos de eventos</Text>
-			<Text LangIsoCode="spa">Totaliza las variables de efectos y fichas según niveles de totalización: p. ej. Años</Text>
-			<Text LangIsoCode="por">Niveles geográficos.</Text>
-			<Text LangIsoCode="fre">Tipos de eventos</Text>
+		<Message id="msgViewStdTooltip">
+			<Text LangIsoCode="eng">Totalize effects by using different levels of agrupation</Text>
+			<Text LangIsoCode="spa">Totaliza los efectos mediante el uso de los diferentes niveles de agrupación</Text>
+			<Text LangIsoCode="por">Totalizam efeitos usando diferentes níveis de agrupation</Text>
+			<Text LangIsoCode="fre">Totalize effets en utilisant les différents niveaux de agrupation</Text>
 		</Message>
 		<Message id="gopttitle">
 			<Text LangIsoCode="eng">Title</Text>
