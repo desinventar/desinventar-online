@@ -22,8 +22,9 @@
 			console.log('MenuItem : ' + item.id);
 		}
 		jQuery(document).ready(function() {
-			doViewportCreate();
-			doMainMenuCreate();
+			onReadyExtJS();
+			//doViewportCreate();
+			//doMainMenuCreate();
 			/*
 			var tb = new Ext.Toolbar();
 			var menu = new Ext.menu.Menu({
