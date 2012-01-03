@@ -25,7 +25,9 @@ function onReadyExtJS()
 		};
 	}
 	doMainMenuCreate();
+	doMainMenuShow();
 	doViewportCreate();
+	doViewportShow();
 	doDialogsCreate();
 } //onReadyExtJS()
 
@@ -78,12 +80,15 @@ function doViewportCreate()
 		]
 	}); //viewport
 
+} // doViewportCreate()
+
+function doViewportShow() {
 	var UserRoleValue = parseInt(jQuery('#desinventarUserRoleValue').val());
 	var RegionId = jQuery('#desinventarRegionId').val();
 	if ( (RegionId == '') || (UserRoleValue < 1) )
 	{
 		Ext.getCmp('westm').hide();
-		viewport.doLayout();
+		Ext.getCmp('viewport').doLayout();
 	}
 
 	jQuery('.contentBlock').hide();
@@ -109,7 +114,31 @@ function doViewportCreate()
 		// Show database list
 		doUpdateDatabaseListByUser();
 	}
-} // doViewportCreate()
+}
+
+function doMainChangeLanguage(LangIsoCode)
+{
+	jQuery.post(
+		jQuery('#desinventarURL').val() + '/',
+		{
+			cmd : 'cmdUserLanguageChange',
+			LangIsoCode : LangIsoCode
+		},
+		function(data)
+		{
+			if (parseInt(data.Status) > 0)
+			{
+				doViewportDestroy();
+				window.location.reload(false);
+			}
+			else
+			{
+				console.error('cmdUserLanguageChange error : ' + data.Status + ' ' + item.langisocode);
+			}
+		},
+		'json'
+	);
+} //doMainChangeLanguage()
 
 function onMenuItem(item) {
 	var RegionId = jQuery('#desinventarRegionId').val();
@@ -135,30 +164,17 @@ function onMenuItem(item) {
 			jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=changepasswd',function() { onReadyUserChangePasswd('dbl-win'); });
 			Ext.getCmp('wndDatabaseList').show();
 		break;
-		case 'mnuUserLanguage-spa':
-		case 'mnuUserLanguage-eng':
-		case 'mnuUserLanguage-por':
-		case 'mnuUserLanguage-fre':
-			jQuery.post(
-				jQuery('#desinventarURL').val() + '/',
-				{
-					cmd : 'cmdUserLanguageChange',
-					LangIsoCode : item.langisocode
-				},
-				function(data)
-				{
-					if (parseInt(data.Status) > 0)
-					{
-						doViewportDestroy();
-						window.location.reload(false);
-					}
-					else
-					{
-						console.error('cmdUserLanguageChange error : ' + data.Status + ' ' + item.langisocode);
-					}
-				},
-				'json'
-			);
+		case 'mnuUserLanguageEnglish':
+			doMainChangeLanguage('eng');
+		break;
+		case 'mnuUserLanguageSpanish':
+			doMainChangeLanguage('spa');
+		break;
+		case 'mnuUserLanguagePortuguese':
+			doMainChangeLanguage('por');
+		break;
+		case 'mnuUserLanguageFrench':
+			doMainChangeLanguage('fre');
 		break;
 		// query menu
 		case 'menuQueryToggle':
@@ -296,10 +312,14 @@ function hideQueryDesign()
 function doMainMenuCreate()
 {
 	// Main menu
-	var mnuLang = new Ext.menu.Menu({id: 'langSubMenu',items: []});
-	jQuery('[id|="mnuUserLanguage"]').each(function(index, Element) {
-		var LangIsoCode = jQuery(this).attr('id').substr(-3);
-		mnuLang.add({id: jQuery(this).attr('id'), langisocode: LangIsoCode, text: jQuery(this).text(), handler: onMenuItem });
+	var mnuLang = new Ext.menu.Menu({
+		id: 'langSubMenu',
+		items: [
+			{id:'mnuUserLanguageEnglish'   , text: jQuery('#mnuUserLanguageEnglish').text()   , handler: onMenuItem },
+			{id:'mnuUserLanguageSpanish'   , text: jQuery('#mnuUserLanguageSpanish').text()   , handler: onMenuItem },
+			{id:'mnuUserLanguagePortuguese', text: jQuery('#mnuUserLanguagePortuguese').text(), handler: onMenuItem },
+			{id:'mnuUserLanguageFrench'    , text: jQuery('#mnuUserLanguageFrench').text()    , handler: onMenuItem }
+		]
 	});
 	
 	var muser = new Ext.menu.Menu({
@@ -325,23 +345,23 @@ function doMainMenuCreate()
 	});
 
 	var mnuMenuDatabase = new Ext.menu.Menu({
-		id: 'cardsMenu',
+		id: 'databaseMenu',
 		items: [
-			{id:'mnuDatabaseRecordView'   , text: jQuery('#mnuDatabaseRecordView').text()   , handler: onMenuItem, hidden: true },
-			{id:'mnuDatabaseRecordEdit'   , text: jQuery('#mnuDatabaseRecordEdit').text()   , handler: onMenuItem, hidden: true },
-			{id:'mnuDatabaseRegionInfo'   , text: jQuery('#mnuDatabaseRegionInfo').text()   , handler: onMenuItem, hidden: true },
-			{id:'mnuDatabaseExport'       , text: jQuery('#mnuDatabaseExport').text()       , handler: onMenuItem, hidden: true },
-			{id:'mnuDatabaseCopy'         , text: jQuery('#mnuDatabaseCopy').text()         , handler: onMenuItem, hidden: true },
-			{id:'mnuDatabaseReplace'      , text: jQuery('#mnuDatabaseReplace').text()      , handler: onMenuItem, hidden: true },
-			{id:'mnuDatabaseCreate'       , text: jQuery('#mnuDatabaseCreate').text()       , handler: onMenuItem, hidden: true },
-			{id:'mnuDatabaseConfig'       , text: jQuery('#mnuDatabaseConfig').text()       , handler: onMenuItem, hidden: true },
-			{id:'mnuDatabaseSelect'       , text: jQuery('#mnuDatabaseSelect').text()       , handler: onMenuItem, hidden: true },
-			{id:'mnuDatabaseSelectAnother', text: jQuery('#mnuDatabaseSelectAnother').text(), handler: onMenuItem, hidden: true }
+			{id:'mnuDatabaseRecordView'   , text: jQuery('#mnuDatabaseRecordView').text()   , handler: onMenuItem, hidden: true  },
+			{id:'mnuDatabaseRecordEdit'   , text: jQuery('#mnuDatabaseRecordEdit').text()   , handler: onMenuItem, hidden: true  },
+			{id:'mnuDatabaseRegionInfo'   , text: jQuery('#mnuDatabaseRegionInfo').text()   , handler: onMenuItem, hidden: true  },
+			{id:'mnuDatabaseExport'       , text: jQuery('#mnuDatabaseExport').text()       , handler: onMenuItem, hidden: true  },
+			{id:'mnuDatabaseCopy'         , text: jQuery('#mnuDatabaseCopy').text()         , handler: onMenuItem, hidden: true  },
+			{id:'mnuDatabaseReplace'      , text: jQuery('#mnuDatabaseReplace').text()      , handler: onMenuItem, hidden: true  },
+			{id:'mnuDatabaseCreate'       , text: jQuery('#mnuDatabaseCreate').text()       , handler: onMenuItem, hidden: true  },
+			{id:'mnuDatabaseConfig'       , text: jQuery('#mnuDatabaseConfig').text()       , handler: onMenuItem, hidden: true  },
+			{id:'mnuDatabaseSelect'       , text: jQuery('#mnuDatabaseSelect').text()       , handler: onMenuItem, hidden: false },
+			{id:'mnuDatabaseSelectAnother', text: jQuery('#mnuDatabaseSelectAnother').text(), handler: onMenuItem, hidden: true  }
 		]
 	});
 
 	var mbases = new Ext.menu.Menu({
-		id: 'basesMenu',
+		id: 'cardsMenu',
 		items: [
 			{id:'mnuDatacardImport'       , text: jQuery('#mnuDatacardImport').text()    , handler: onMenuItem, hidden: true },
 			{id:'mnuAdminDatabases'       , text: jQuery('#mnuAdminDatabases').text() , handler: onMenuItem, hidden: true }
@@ -375,6 +395,10 @@ function doMainMenuCreate()
 	jQuery('body').on('cmdMainWaitingHide', function() {
 		Ext.getCmp('mnuWaiting').hide();
 	});
+} //doCreateMainMenu()
+
+function doMainMenuShow()
+{
 	// Add UserId to menu text when user is logged in
 	if (jQuery('#desinventarUserId').val() != '')
 	{
@@ -399,6 +423,7 @@ function doMainMenuCreate()
 	// Show some menu items when a Region is Selected
 	if (jQuery('#desinventarRegionId').val() != '')
 	{
+		Ext.getCmp('mnuDatabaseSelect').hide();
 		Ext.getCmp('mnuDatabaseSelectAnother').show();
 		Ext.getCmp('mnuRegionLabel').setText('[' + jQuery('#desinventarRegionLabel').val() + ']');
 		if (UserRoleValue > 0)
@@ -428,8 +453,9 @@ function doMainMenuCreate()
 	else
 	{
 		Ext.getCmp('mnuDatabaseSelect').show();
+		Ext.getCmp('mnuDatabaseSelectAnother').hide();
 	}
-} //doCreateMainMenu()
+}
 
 function doDialogsCreate()
 {

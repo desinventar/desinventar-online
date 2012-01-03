@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <StringList>
-	<Group name="grpMenuUser">
+	<Group name="grpMainMenu">
 		<Message id="mnuMenuUser">
 			<Text LangIsoCode="eng">User</Text>
 			<Text LangIsoCode="spa">Usuario</Text>
@@ -25,12 +25,6 @@
 			<Text LangIsoCode="por">Minha conta</Text>
 			<Text LangIsoCode="fre">Mon compte</Text>
 		</Message>
-		<Message id="mnuUserLogout">
-			<Text LangIsoCode="eng">Close session</Text>
-			<Text LangIsoCode="spa">Cerrar sesión</Text>
-			<Text LangIsoCode="por">Fechar sessão</Text>
-			<Text LangIsoCode="fre">Fermer la session</Text>
-		</Message>
 		<Message id="mnuUserAccountManagement">
 			<Text LangIsoCode="eng">User's account management</Text>
 			<Text LangIsoCode="spa">Administración cuentas de usuario</Text>
@@ -43,11 +37,71 @@
 			<Text LangIsoCode="por">Idioma</Text>
 			<Text LangIsoCode="fre">Langue</Text>
 		</Message>
+		<Message id="mnuMenuUserLanguageEnglish">
+			<Text LangIsoCode="eng">English</Text>
+			<Text LangIsoCode="spa">Inglés/English</Text>
+			<Text LangIsoCode="por">Inglês/English</Text>
+			<Text LangIsoCode="fre">Anglaise/English</Text>
+		</Message>
+		<Message id="mnuMenuUserLanguageSpanish">
+			<Text LangIsoCode="eng">Spanish/Español</Text>
+			<Text LangIsoCode="spa">Español</Text>
+			<Text LangIsoCode="por">Espanhol/Español</Text>
+			<Text LangIsoCode="fre">Espagnole/Español</Text>
+		</Message>
+		<Message id="mnuMenuUserLanguagePortuguese">
+			<Text LangIsoCode="eng">Portuguese/Português</Text>
+			<Text LangIsoCode="spa">Portugués/Português</Text>
+			<Text LangIsoCode="por">Português</Text>
+			<Text LangIsoCode="fre">Portugaise/Português</Text>
+		</Message>
+		<Message id="mnuMenuUserLanguageFrench">
+			<Text LangIsoCode="eng">French/Française</Text>
+			<Text LangIsoCode="spa">Francés/Française</Text>
+			<Text LangIsoCode="por">Francês/Française</Text>
+			<Text LangIsoCode="fre">Française</Text>
+		</Message>
+		<Message id="mnuUserLogout">
+			<Text LangIsoCode="eng">Close session</Text>
+			<Text LangIsoCode="spa">Cerrar sesión</Text>
+			<Text LangIsoCode="por">Fechar sessão</Text>
+			<Text LangIsoCode="fre">Fermer la session</Text>
+		</Message>
 		<Message id="mnuUserQuit">
 			<Text LangIsoCode="eng">Quit</Text>
 			<Text LangIsoCode="spa">Salir</Text>
 			<Text LangIsoCode="por">Sair</Text>
 			<Text LangIsoCode="fre">Quitter</Text>
+		</Message>
+		<Message id="mnuQuery">
+			<Text LangIsoCode="eng">Queries</Text>
+			<Text LangIsoCode="spa">Consultas</Text>
+			<Text LangIsoCode="por">Consultas</Text>
+			<Text LangIsoCode="fre">Consultations</Text>
+		</Message>
+		<Message id="mnuQueryToggle">
+			<Text LangIsoCode="eng">Show/Hide</Text>
+			<Text LangIsoCode="spa">Mostrar/Ocultar</Text>
+			<Text LangIsoCode="por">Mostrar/Ocultar</Text>
+			<Text LangIsoCode="fre">Montrer/Cacher</Text>
+		</Message>
+		<Message id="mnuQueryNew">
+			<Text LangIsoCode="eng">New</Text>
+			<Text LangIsoCode="spa">Nueva</Text>
+			<Text LangIsoCode="por">Nova</Text>
+			<Text LangIsoCode="fre">Nouvelle</Text>
+		</Message>
+		<Message id="mnuQuerySave">
+			<Text LangIsoCode="eng">Save file</Text>
+			<Text LangIsoCode="spa">Guardar</Text>
+			<Text LangIsoCode="por">Save file</Text>
+			<Text LangIsoCode="fre">Enregistrer</Text>
+		</Message>
+		<Message id="mnuQueryOpen">
+			<Text LangIsoCode="eng">Open file</Text>
+			<Text LangIsoCode="spa">Abrir</Text>
+			<Text LangIsoCode="por">Open file</Text>
+			<Text LangIsoCode="fre">Ouvrir</Text>
 		</Message>
 		<Message id="mnuMenuDatabase">
 			<Text LangIsoCode="eng">Database</Text>
@@ -157,6 +211,8 @@
 			<Text LangIsoCode="por">Acerca de</Text>
 			<Text LangIsoCode="fre">À propos de </Text>
 		</Message>
+	</Group>
+	<Group name="grpMenuUser">
 		<Message id="tuser">
 			<Text LangIsoCode="eng">User</Text>
 			<Text LangIsoCode="spa">Usuario</Text>
@@ -1704,36 +1760,6 @@
 			<Text LangIsoCode="spa">Imprimir</Text>
 			<Text LangIsoCode="por">Imprimir</Text>
 			<Text LangIsoCode="fre">Imprimer</Text>
-		</Message>
-		<Message id="msearch">
-			<Text LangIsoCode="eng">Queries</Text>
-			<Text LangIsoCode="spa">Consultas</Text>
-			<Text LangIsoCode="por">Consultas</Text>
-			<Text LangIsoCode="fre">Consultations</Text>
-		</Message>
-		<Message id="mnewsearch">
-			<Text LangIsoCode="eng">New</Text>
-			<Text LangIsoCode="spa">Nueva</Text>
-			<Text LangIsoCode="por">Nova</Text>
-			<Text LangIsoCode="fre">Nouvelle</Text>
-		</Message>
-		<Message id="msavequery">
-			<Text LangIsoCode="eng">Save file</Text>
-			<Text LangIsoCode="spa">Guardar</Text>
-			<Text LangIsoCode="por">Save file</Text>
-			<Text LangIsoCode="fre">Enregistrer</Text>
-		</Message>
-		<Message id="mopenquery">
-			<Text LangIsoCode="eng">Open file</Text>
-			<Text LangIsoCode="spa">Abrir</Text>
-			<Text LangIsoCode="por">Open file</Text>
-			<Text LangIsoCode="fre">Ouvrir</Text>
-		</Message>
-		<Message id="mgotoqd">
-			<Text LangIsoCode="eng">Show/Hide</Text>
-			<Text LangIsoCode="spa">Mostrar/Ocultar</Text>
-			<Text LangIsoCode="por">Mostrar/Ocultar</Text>
-			<Text LangIsoCode="fre">Montrer/Cacher</Text>
 		</Message>
 		<Message id="mgeosection">
 			<Text LangIsoCode="eng">Geography</Text>

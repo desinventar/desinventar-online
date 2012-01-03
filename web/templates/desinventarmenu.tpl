@@ -1,19 +1,21 @@
+{-config_load file="$lg.conf" section="grpMainMenu"-}
 <div id="divMainMenu" style="display:none;">
-	<span id="mnuMenuQuery">{-#msearch#-}</span>
-		<span id="mnuQueryToggle">{-#mgotoqd#-}</span>
-		<span id="mnuQueryNew">{-#mnewsearch#-}</span>
-		<span id="mnuQuerySave">{-#msavequery#-}</span>
-		<span id="mnuQueryOpen">{-#mopenquery#-}</span>
 	<span id="mnuMenuUser">{-#mnuMenuUser#-}</span>
 		<span id="mnuUserLogin">{-#mnuUserLogin#-}</span>
 		<span id="mnuUserChangeLogin">{-#mnuUserChangeLogin#-}</span>
 		<span id="mnuUserEditAccount">{-#mnuUserEditAccount#-}</span>
 		<span id="mnuUserAccountManagement">{-#mnuUserAccountManagement#-}</span>
 		<span id="mnuMenuUserLanguage">{-#mnuMenuUserLanguage#-}</span>
-			{-foreach name=LanguageList key=key item=item from=$LanguageList-}
-			<span id="mnuUserLanguage-{-$key-}">{-$item-}</span>
-			{-/foreach-}
+			<span id="mnuUserLanguageEnglish">{-#mnuMenuUserLanguageEnglish#-}</span>
+			<span id="mnuUserLanguageSpanish">{-#mnuMenuUserLanguageSpanish#-}</span>
+			<span id="mnuUserLanguagePortuguese">{-#mnuMenuUserLanguagePortuguese#-}</span>
+			<span id="mnuUserLanguageFrench">{-#mnuMenuUserLanguageFrench#-}</span>
 		<span id="mnuUserLogout">{-#mnuUserLogout#-}</span>
+	<span id="mnuMenuQuery">{-#mnuQuery#-}</span>
+		<span id="mnuQueryToggle">{-#mnuQueryToggle#-}</span>
+		<span id="mnuQueryNew">{-#mnuQueryNew#-}</span>
+		<span id="mnuQuerySave">{-#mnuQuerySave#-}</span>
+		<span id="mnuQueryOpen">{-#mnuQueryOpen#-}</span>
 	<span id="mnuMenuDatabase">{-#mnuMenuDatabase#-}</span>
 		<span id="mnuDatabaseRecordView">{-#mnuDatabaseRecordView#-}</span>
 		<span id="mnuDatabaseRecordEdit">{-#mnuDatabaseRecordEdit#-}</span>
