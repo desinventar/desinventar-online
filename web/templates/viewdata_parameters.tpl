@@ -5,7 +5,7 @@
 <div class="x-window-header">{-#bdata#-}
 </div>
 <div id="dat-cfg">
-	<form id="CD" method="post">
+	<form id="CD" method="post" action="">
 		{-#sresxpage#-}
 		<select id="_D+SQL_LIMIT" name="_D+SQL_LIMIT" class="line">
 			<option value="20">20</option>
