@@ -3,7 +3,7 @@
 		{-#mdcsection#-} | {-$desinventarUserId-} - {-$role-}
 	</div>
 	<div id="divDatacardContent" style="text-align:center;">
-		<div height="600px;" width="100%">
+		<div style="width:900px;height:590px;margin:4px;">
 			{-include file="datacards.tpl"-}
 		</div>
 	</div>
