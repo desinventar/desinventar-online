@@ -7,7 +7,7 @@
 	</div>
 	<div id="map-cfg">
 		<div id="colorpicker201" class="colorpicker201"></div>
-		<form id="CM" method="post">
+		<form id="CM" method="post" action="">
 			<table class="conf">
 				<tr valign="top">
 					<td>

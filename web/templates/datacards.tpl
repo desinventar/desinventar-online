@@ -148,7 +148,7 @@
 													{-$GeoLevel.GeoLevelId-} - {-$GeoLevel.GeoLevelName-}<br />
 												</td>
 												<td>
-													<select id="GeoLevel{-$key-}" level="{-$key-}" tabindex="{-$MyTabIndex-}" autoComplete="true" style="width:180px; background-Color:#eee;" 
+													<select id="GeoLevel{-$key-}" level="{-$key-}" tabindex="{-$MyTabIndex-}" style="width:180px; background-Color:#eee;" 
 														class="GeoLevelSelect line" onFocus="showtip('{-$LabelsDisaster.GeographyId[2]-}', '#d4baf6')">
 														<option></option>
 														{-if $key == 0-}
@@ -375,7 +375,7 @@
 						</td>
 						<td title="{-$LabelsEvent.EventNotes[1]-}">
 							{-$LabelsEvent.EventNotes[0]-}<br />
-							<input type="texto" id="EventNotes" name="EventNotes" style="width: 350px;" 
+							<input type="text" id="EventNotes" name="EventNotes" style="width: 350px;" 
 								class="line inputText" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsEvent.EventNotes[2]-}', 'lightblue')" />
 							{-counter-}
 						</td>

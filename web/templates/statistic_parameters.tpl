@@ -6,7 +6,7 @@
 		{-#msgViewStd#-}
 	</div>
 	<div id="std-cfg">
-		<form id="CS" method="post">
+		<form id="CS" method="post" action="">
 			<table border="0" width="100%">
 				<tr>
 					<td>{-#sresxpage#-}

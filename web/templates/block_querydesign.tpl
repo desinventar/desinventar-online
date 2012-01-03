@@ -305,7 +305,7 @@
 		
 		<!-- BEGIN CUSTOMQUERY SECTION -->
 		<dt>{-#madvsection#-}</dt>
-		<dd align="left">
+		<dd>
 			<textarea id="QueryCustom" name="QueryCustom" style="width:300px; height:45px;" 
 				class="inputText" onFocus="showtip('');">{-$qd.QueryCustom-}</textarea>
 			<br />
