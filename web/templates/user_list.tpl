@@ -1,7 +1,7 @@
 {-config_load file="$lg.conf" section="grpMenuUser"-}
 <h2>{-#tuserprefer#-}</h2>
 <br />
-<table id="tblUserList" width="550px;" height="180px" class="col dwin">
+<table id="tblUserList" width="550" height="180" class="col dwin">
 <thead>
 	<tr>
 		<th class="header"><b>{-#tuser#-}</b></th>

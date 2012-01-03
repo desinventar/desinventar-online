@@ -43,7 +43,7 @@
 			<td valign="top">
 				<input type="text" id="MapTitle" name="MapTitle" size=110 />
 				<img id="linkRestoreMapTitle" border="0" src="{-$desinventarURL-}/images/reload.jpg"><br />
-				<div id="map" class="dwin" style="width:700px; height:530px"></div>
+				<div id="map" class="dwin" style="width:700px;height:530px;"></div>
 			</td>
 		</tr>
 	</table>

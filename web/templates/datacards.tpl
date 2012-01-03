@@ -68,7 +68,7 @@
 	<table border="1" cellspacing="8" width="100%">
 		<!-- DATACARD INFORMATION SECTION -->
 		<tr>
-			<td width="30px" style="border:0px;" valign="top">
+			<td width="30" style="border:0px;" valign="top">
 				&nbsp;
 			</td>
 			<td style="border-color:#000000;">
@@ -119,7 +119,7 @@
 		</tr>
 		<!-- GEOGRAPHY SECTION -->
 		<tr>
-			<td width="30px" style="border:0px;" valign="top">
+			<td width="30" style="border:0px;" valign="top">
 				<img src="{-$desinventarURL-}/images/di_geotag.png" title="<b>{-#mgeography#-}</b><br />{-$dmg.MetGuidegeography[2]-}" />
 			</td>
 			<td>
@@ -196,7 +196,7 @@
 		</tr>
 		<!-- EFFECTS SECTION--> 
 		<tr>
-			<td width="30px" valign="top" style="border:0px;">
+			<td width="30" valign="top" style="border:0px;">
 				<a href="#" id="linkDatacardShowEffectsBasic">
 					<img id="efimg" src="{-$desinventarURL-}/images/di_efftag.png" border=0
 						title="<b>{-#tbaseffects#-}</b><br />{-$dmg.MetGuidedatacards[2]-}" />
@@ -213,7 +213,7 @@
 				<table class="grid">
 					<tr valign="top">
 						<td>
-							<b align="left">{-#teffects#-}</b><br />
+							<b>{-#teffects#-}</b><br />
 							<table width="100%" class="grid">
 								<!-- BEGIN Table Effects over People-->
 								{-foreach name=ef1 key=key item=item from=$ef1-}
@@ -238,7 +238,7 @@
 							<table>
 								<tr>
 									<td colspan="2" valign="top">
-										<b align="center">{-#tsectors#-}</b><br />
+										<b>{-#tsectors#-}</b><br />
 									</td>
 								</tr>
 								<tr>
@@ -280,7 +280,7 @@
 							</table>
 						</td>
 						<td valign="top">
-							<b align="right">{-#tlosses#-}</b><br />
+							<b>{-#tlosses#-}</b><br />
 							<!-- BEGIN Table Effects over Affected -->
 							{-foreach name=ef3 key=key item=item from=$ef3-}
 								<span title="{-$item[1]-}">
@@ -342,7 +342,7 @@
 		</tr>
 		<!-- BEGIN EVENT SECTION -->
 		<tr style="border:1px solid #ff0;">
-			<td width="30px" valign="top" style="border:0px;">
+			<td width="30" valign="top" style="border:0px;">
 				<img src="{-$desinventarURL-}/images/di_evetag.png" 
 				title="<b>{-#mevents#-}</b><br />{-$dmg.MetGuideevents[2]-}" />
 			</td>
@@ -385,7 +385,7 @@
 		</tr>
 		<!-- BEG CAUSE SECTION -->
 		<tr style="border:1px solid #ffffc0;">
-			<td width="30px" valign="top" style="border:0px;">
+			<td width="30" valign="top" style="border:0px;">
 				<img src="{-$desinventarURL-}/images/di_cautag.png" title="<b>{-#mcauses#-}</b><br />{-$dmg.MetGuidecauses[2]-}" />
 			</td>
 			<td>
