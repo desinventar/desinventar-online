@@ -40,7 +40,7 @@
 	</div>
 	<br /><br />
 	<div id="extraeffaddsect" style="display:none; width:600px;">
-		<form name="eeffrm" id="frmEEFieldEdit" method="POST">
+		<form name="eeffrm" id="frmEEFieldEdit" method="post">
 			{-$dic.DBEEFieldLabel[0]-}<b style="color:darkred;">*</b><br />
 			<input type="text" id="EEFieldLabel" name="EEField[EEFieldLabel]" {-$ro-} class="line clsValidateField" style="width:500px;"
 				tabindex="1" onFocus="showtip('{-$dic.DBEEFieldLabel[2]-}')" />

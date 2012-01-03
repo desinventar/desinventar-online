@@ -39,7 +39,8 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2"><hr>
+			<td colspan="2">
+				<hr />
 				<table border=0 style="width:100%; font-family:Lucida Grande, Verdana; font-size:10px;">
 					<tr>
 						<td>

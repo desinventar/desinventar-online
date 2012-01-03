@@ -56,7 +56,7 @@
 		</td>
 	</tr>
 </table>
-<form id="DICard" action="cards.php" method="POST" target="dic">
+<form id="DICard" action="cards.php" method="post" target="dic">
 	<input type="hidden" id="DisasterId"         name="DisasterId" value="" />
 	<input type="hidden" id="RecordAuthor"       name="RecordAuthor" value="" />
 	<input type="hidden" id="RecordCreation"     name="RecordCreation" />
@@ -105,8 +105,8 @@
 							</select>
 							{-counter-}
 						</td>
-						<td title="{-$LabelsDisaster.DisasterSerial[1]-}" >
-							{-$LabelsDisaster.DisasterSerial[0]-}<b style="color:darkred;">*<br />
+						<td title="{-$LabelsDisaster.DisasterSerial[1]-}">
+							{-$LabelsDisaster.DisasterSerial[0]-}<b style="color:darkred;">*</b><br />
 							<input id="DisasterSerial" name="DisasterSerial" type="text" size="15" 
 								class="line inputAlphaNumber" tabindex="{-$MyTabIndex-}" maxlength="50" onFocus="showtip('{-$LabelsDisaster.DisasterSerial[2]-}', '#d4baf6')" />
 							{-counter-}
@@ -174,10 +174,10 @@
 							{-counter-}
 						</td>
 						<td>
-							<span title="{-$LabelsDisaster.DisasterLatitude[1]-}" />
-							{-$LabelsDisaster.DisasterLatitude[0]-}<br />
-							<input id="DisasterLatitude" name="DisasterLatitude" type="text" size="10" maxlength="10"
-								class="line inputDouble" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsDisaster.DisasterLatitude[2]-}', '#d4baf6')" />
+							<span title="{-$LabelsDisaster.DisasterLatitude[1]-}">
+								{-$LabelsDisaster.DisasterLatitude[0]-}<br />
+								<input id="DisasterLatitude" name="DisasterLatitude" type="text" size="10" maxlength="10"
+									class="line inputDouble" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsDisaster.DisasterLatitude[2]-}', '#d4baf6')" />
 							</span>
 							{-counter-}
 							<br />

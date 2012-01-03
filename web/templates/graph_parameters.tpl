@@ -5,7 +5,7 @@
 	<span id="msgViewGraphButtonClose" style="display:none;">{-#tclose#-}</span>
 	<div class="x-window-header">{-#bgraphic#-}</div>
 	<div id="grp-cfg">
-		<form id="CG" method="POST">
+		<form id="CG" method="post">
 			<table class="conf" cellpadding=1 cellspacing=1>
 			<tr valign="top">
 				<td colspan=3 align="center">

@@ -4,7 +4,7 @@
 	<span id="msgViewStdButtonClose" style="display:none;">{-#tclose#-}</span>
 	<div class="x-window-header">{-#bstatistic#-}</div>
 	<div id="std-cfg">
-		<form id="CS" method="POST">
+		<form id="CS" method="post">
 			<table border="0" width="100%">
 				<tr>
 					<td>{-#sresxpage#-}
