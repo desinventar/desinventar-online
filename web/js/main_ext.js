@@ -9,10 +9,6 @@ function onReadyExtJS()
 	jQuery('#loading').hide();
 	jQuery('#loading-mask').hide();	
 
-	// Initialize Ext.QuickTips
-	Ext.QuickTips.init();
-	Ext.apply(Ext.QuickTips.getQuickTip(), {maxWidth: 200, minWidth: 100, showDelay: 50, trackMouse: true});
-
 	// 2011-04-29 (jhcaiced) Fix for use of ExtJS in IE9 ?
 	if ((typeof Range !== "undefined") && !Range.prototype.createContextualFragment)
 	{
