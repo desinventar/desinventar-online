@@ -11,7 +11,7 @@
 		<span id="divAdminDatabaseExportProgress" class="clsAdminDatabaseExport" style="display:none;">
 			{-#msgAdminDatabaseExportWait#-} &nbsp;&nbsp;<br />
 		</span>
-		<img id="imgAdminDatabaseExportWait" alt="" src="" style="display:none;" />
+		<img id="imgAdminDatabaseExportWait" alt="" src="{-$desinventarURL-}/images/loading.gif" style="display:none;" />
 		<span id="divAdminDatabaseExportResults" class="clsAdminDatabaseExport" style="display:none;">
 			{-#msgAdminDatabaseExportComplete#-}
 		</span>

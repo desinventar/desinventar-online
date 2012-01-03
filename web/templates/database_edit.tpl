@@ -1,5 +1,5 @@
 {-config_load file="$lg.conf" section="grpDatabaseEdit"-}
-<form id="frmDatabaseEdit">
+<form id="frmDatabaseEdit" action="">
 	<input id="fldDatabaseEdit_RegionId" name="Database[RegionId]" type="hidden" maxlength="50" class="line fixw" tabindex="1" />
 	<table class="grid">
 		<tr>
@@ -34,7 +34,7 @@
 				{-#msgDatabaseEditRegionActive#-}
 			</td>
 			<td>
-				<input id="fldDatabaseEdit_RegionActive" name="" type="checkbox" checked tabindex="5" title="{-#msgDatabaseEditRegionActiveTooltip#-}"/>
+				<input id="fldDatabaseEdit_RegionActive" type="checkbox" checked tabindex="5" title="{-#msgDatabaseEditRegionActiveTooltip#-}"/>
 			</td>
 		</tr>
 		<tr>
@@ -42,7 +42,7 @@
 				{-#msgDatabaseEditRegionPublic#-}
 			</td>
 			<td>
-				<input id="fldDatabaseEdit_RegionPublic" name="" type="checkbox" tabindex="6" title="{-#msgDatabaseEditRegionPublicTooltip#-}" />
+				<input id="fldDatabaseEdit_RegionPublic" type="checkbox" tabindex="6" title="{-#msgDatabaseEditRegionPublicTooltip#-}" />
 			</td>
 		</tr>
 		<tr>
