@@ -140,7 +140,8 @@ function doMainChangeLanguage(LangIsoCode)
 	);
 } //doMainChangeLanguage()
 
-function onMenuItem(item) {
+function doMainMenuHandler(item)
+{
 	var RegionId = jQuery('#desinventarRegionId').val();
 	switch (item.id)
 	{
@@ -214,11 +215,14 @@ function onMenuItem(item) {
 		case 'mnuDatabaseRecordEdit':
 			jQuery('#cardsRecordNumber').val(0);
 			jQuery('#cardsRecordSource').val('');
-			jQuery.post(jQuery('#desinventarURL').val() + '/',
-				{cmd      : 'getRegionRecordCount',
-				 RegionId : jQuery('#desinventarRegionId').val()
+			jQuery.post(
+				jQuery('#desinventarURL').val() + '/',
+				{
+					cmd      : 'getRegionRecordCount',
+					RegionId : jQuery('#desinventarRegionId').val()
 				},
-				function(data) {
+				function(data)
+				{
 					jQuery('#cardsRecordNumber').val(0);
 					jQuery('#cardsRecordCount').val(data.RecordCount);
 					$('DICard').reset();
@@ -283,9 +287,12 @@ function onMenuItem(item) {
 		break;
 		case 'mnuHelpMethodology':
 			var url = 'http://www.desinventar.org';
-			if (jQuery('#desinventarLang').val() == 'spa') {
+			if (jQuery('#desinventarLang').val() == 'spa')
+			{
 				url = url + '/es/metodologia';
-			} else {
+			}
+			else
+			{
 				url = url + '/en/methodology';
 			}
 			window.open(url, '', '');
@@ -296,7 +303,7 @@ function onMenuItem(item) {
 		break;
 	} //switch
 	return false;
-} //onMenuItem()
+} //doMainMenuHandler()
 
 function hideQueryDesign()
 {
@@ -315,56 +322,56 @@ function doMainMenuCreate()
 	var mnuLang = new Ext.menu.Menu({
 		id: 'langSubMenu',
 		items: [
-			{id:'mnuUserLanguageEnglish'   , text: jQuery('#mnuUserLanguageEnglish').text()   , handler: onMenuItem },
-			{id:'mnuUserLanguageSpanish'   , text: jQuery('#mnuUserLanguageSpanish').text()   , handler: onMenuItem },
-			{id:'mnuUserLanguagePortuguese', text: jQuery('#mnuUserLanguagePortuguese').text(), handler: onMenuItem },
-			{id:'mnuUserLanguageFrench'    , text: jQuery('#mnuUserLanguageFrench').text()    , handler: onMenuItem }
+			{id:'mnuUserLanguageEnglish'   , text: jQuery('#mnuUserLanguageEnglish').text()   , handler: doMainMenuHandler },
+			{id:'mnuUserLanguageSpanish'   , text: jQuery('#mnuUserLanguageSpanish').text()   , handler: doMainMenuHandler },
+			{id:'mnuUserLanguagePortuguese', text: jQuery('#mnuUserLanguagePortuguese').text(), handler: doMainMenuHandler },
+			{id:'mnuUserLanguageFrench'    , text: jQuery('#mnuUserLanguageFrench').text()    , handler: doMainMenuHandler }
 		]
 	});
 	
 	var muser = new Ext.menu.Menu({
 		id: 'userMenu',
 		items: [
-			{id: 'mnuUserLogin'            , text: jQuery('#mnuUserLogin').text()            , handler: onMenuItem }, 
-			{id: 'mnuUserChangeLogin'      , text: jQuery('#mnuUserChangeLogin').text()      , handler: onMenuItem, hidden: true },
-			{id: 'mnuUserEditAccount'      , text: jQuery('#mnuUserEditAccount').text()      , handler: onMenuItem, hidden: true },
-			{id: 'mnuUserAccountManagement', text: jQuery('#mnuUserAccountManagement').text(), handler: onMenuItem, hidden: true },
+			{id: 'mnuUserLogin'            , text: jQuery('#mnuUserLogin').text()            , handler: doMainMenuHandler }, 
+			{id: 'mnuUserChangeLogin'      , text: jQuery('#mnuUserChangeLogin').text()      , handler: doMainMenuHandler, hidden: true },
+			{id: 'mnuUserEditAccount'      , text: jQuery('#mnuUserEditAccount').text()      , handler: doMainMenuHandler, hidden: true },
+			{id: 'mnuUserAccountManagement', text: jQuery('#mnuUserAccountManagement').text(), handler: doMainMenuHandler, hidden: true },
 			{id: 'mnuUserLanguage'         , text: jQuery('#mnuMenuUserLanguage').text()     , menu: mnuLang },
-			{id: 'mnuUserLogout'           , text: jQuery('#mnuUserLogout').text()           , handler: onMenuItem, hidden: true }
+			{id: 'mnuUserLogout'           , text: jQuery('#mnuUserLogout').text()           , handler: doMainMenuHandler, hidden: true }
 		]
 	});
 	
 	var mquery = new Ext.menu.Menu({
 		id: 'queryMenu',
 		items: [
-			{id:'menuQueryToggle', text: jQuery('#mnuQueryToggle').text(), handler: onMenuItem  },
-			{id:'mnuQueryNew'    , text: jQuery('#mnuQueryNew').text()   , handler: onMenuItem  },
-			{id:'menuQuerySave'  , text: jQuery('#mnuQuerySave').text()  , handler: onMenuItem  },
-			{id:'mnuQueryOpen'   , text: jQuery('#mnuQueryOpen').text()  , handler: onMenuItem  }
+			{id:'menuQueryToggle', text: jQuery('#mnuQueryToggle').text(), handler: doMainMenuHandler  },
+			{id:'mnuQueryNew'    , text: jQuery('#mnuQueryNew').text()   , handler: doMainMenuHandler  },
+			{id:'menuQuerySave'  , text: jQuery('#mnuQuerySave').text()  , handler: doMainMenuHandler  },
+			{id:'mnuQueryOpen'   , text: jQuery('#mnuQueryOpen').text()  , handler: doMainMenuHandler  }
 		]
 	});
 
 	var mnuMenuDatabase = new Ext.menu.Menu({
 		id: 'databaseMenu',
 		items: [
-			{id:'mnuDatabaseRecordView'   , text: jQuery('#mnuDatabaseRecordView').text()   , handler: onMenuItem, hidden: true  },
-			{id:'mnuDatabaseRecordEdit'   , text: jQuery('#mnuDatabaseRecordEdit').text()   , handler: onMenuItem, hidden: true  },
-			{id:'mnuDatabaseRegionInfo'   , text: jQuery('#mnuDatabaseRegionInfo').text()   , handler: onMenuItem, hidden: true  },
-			{id:'mnuDatabaseExport'       , text: jQuery('#mnuDatabaseExport').text()       , handler: onMenuItem, hidden: true  },
-			{id:'mnuDatabaseCopy'         , text: jQuery('#mnuDatabaseCopy').text()         , handler: onMenuItem, hidden: true  },
-			{id:'mnuDatabaseReplace'      , text: jQuery('#mnuDatabaseReplace').text()      , handler: onMenuItem, hidden: true  },
-			{id:'mnuDatabaseCreate'       , text: jQuery('#mnuDatabaseCreate').text()       , handler: onMenuItem, hidden: true  },
-			{id:'mnuDatabaseConfig'       , text: jQuery('#mnuDatabaseConfig').text()       , handler: onMenuItem, hidden: true  },
-			{id:'mnuDatabaseSelect'       , text: jQuery('#mnuDatabaseSelect').text()       , handler: onMenuItem, hidden: false },
-			{id:'mnuDatabaseSelectAnother', text: jQuery('#mnuDatabaseSelectAnother').text(), handler: onMenuItem, hidden: true  }
+			{id:'mnuDatabaseRecordView'   , text: jQuery('#mnuDatabaseRecordView').text()   , handler: doMainMenuHandler, hidden: true  },
+			{id:'mnuDatabaseRecordEdit'   , text: jQuery('#mnuDatabaseRecordEdit').text()   , handler: doMainMenuHandler, hidden: true  },
+			{id:'mnuDatabaseRegionInfo'   , text: jQuery('#mnuDatabaseRegionInfo').text()   , handler: doMainMenuHandler, hidden: true  },
+			{id:'mnuDatabaseExport'       , text: jQuery('#mnuDatabaseExport').text()       , handler: doMainMenuHandler, hidden: true  },
+			{id:'mnuDatabaseCopy'         , text: jQuery('#mnuDatabaseCopy').text()         , handler: doMainMenuHandler, hidden: true  },
+			{id:'mnuDatabaseReplace'      , text: jQuery('#mnuDatabaseReplace').text()      , handler: doMainMenuHandler, hidden: true  },
+			{id:'mnuDatabaseCreate'       , text: jQuery('#mnuDatabaseCreate').text()       , handler: doMainMenuHandler, hidden: true  },
+			{id:'mnuDatabaseConfig'       , text: jQuery('#mnuDatabaseConfig').text()       , handler: doMainMenuHandler, hidden: true  },
+			{id:'mnuDatabaseSelect'       , text: jQuery('#mnuDatabaseSelect').text()       , handler: doMainMenuHandler, hidden: false },
+			{id:'mnuDatabaseSelectAnother', text: jQuery('#mnuDatabaseSelectAnother').text(), handler: doMainMenuHandler, hidden: true  }
 		]
 	});
 
 	var mbases = new Ext.menu.Menu({
 		id: 'cardsMenu',
 		items: [
-			{id:'mnuDatacardImport'       , text: jQuery('#mnuDatacardImport').text()    , handler: onMenuItem, hidden: true },
-			{id:'mnuAdminDatabases'       , text: jQuery('#mnuAdminDatabases').text() , handler: onMenuItem, hidden: true }
+			{id:'mnuDatacardImport'       , text: jQuery('#mnuDatacardImport').text()    , handler: doMainMenuHandler, hidden: true },
+			{id:'mnuAdminDatabases'       , text: jQuery('#mnuAdminDatabases').text() , handler: doMainMenuHandler, hidden: true }
 		]
 	});
 
@@ -372,10 +379,10 @@ function doMainMenuCreate()
 		id: 'helpMenu',
 		style: { overflow: 'visible' },
 		items: [
-			{id:'mnuHelpWebsite'       , text: jQuery('#mnuHelpWebsite').text()       , handler: onMenuItem  },
-			{id:'mnuHelpMethodology'   , text: jQuery('#mnuHelpMethodology').text()   , handler: onMenuItem  },
-			{id:'mnuHelpDocumentation' , text: jQuery('#mnuHelpDocumentation').text() , handler: onMenuItem  },
-			{id:'mnuHelpAbout'         , text: jQuery('#mnuHelpAbout').text()         , handler: onMenuItem  }
+			{id:'mnuHelpWebsite'       , text: jQuery('#mnuHelpWebsite').text()       , handler: doMainMenuHandler  },
+			{id:'mnuHelpMethodology'   , text: jQuery('#mnuHelpMethodology').text()   , handler: doMainMenuHandler  },
+			{id:'mnuHelpDocumentation' , text: jQuery('#mnuHelpDocumentation').text() , handler: doMainMenuHandler  },
+			{id:'mnuHelpAbout'         , text: jQuery('#mnuHelpAbout').text()         , handler: doMainMenuHandler  }
 		]
 	});
 	
@@ -385,8 +392,8 @@ function doMainMenuCreate()
 	tb.add({ id:'mnuCards'      , text: jQuery('#mnuMenuDatabase').text() , menu: mnuMenuDatabase, hidden: false });
 	tb.add({ id:'mnuHelp'       , text: jQuery('#mnuMenuHelp').text()     , menu: mhelp});
 	tb.add('->',{id: 'mnuWaiting'    , text: '<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />', hidden: true});
-	tb.add('->',{id: 'mnuRegionLabel', text: '', handler: onMenuItem });
-	tb.add('->',{id: 'mnuHelpWebsite', text: '<img src="' + jQuery('#desinventarURL').val() + '/images/di_logo4.png" alt="" />',  handler: onMenuItem });
+	tb.add('->',{id: 'mnuRegionLabel', text: '', handler: doMainMenuHandler });
+	tb.add('->',{id: 'mnuHelpWebsite', text: '<img src="' + jQuery('#desinventarURL').val() + '/images/di_logo4.png" alt="" />',  handler: doMainMenuHandler });
 
 	// Attach main events to body
 	jQuery('body').on('cmdMainWaitingShow', function() {
