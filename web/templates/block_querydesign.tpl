@@ -31,7 +31,7 @@
 		<dt>{-#mevesection#-}</dt>
 		<dd>
 			<input type="hidden" name="QueryEvent[OP]" value="AND" />
-			<span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br />
+			<span class="dlgmsg" title="{-#thlpquery#-}">{-#tcntclick#-}</span><br />
 			<select id="qevelst" name="D_EventId[]" multiple style="width: 250px; height: 200px;" class="line">
 				{-include file="block_eventlist.tpl"-}
 			</select>
@@ -49,7 +49,7 @@
 		<dt>{-#mcausection#-}</dt>
 		<dd>
 			<input type="hidden" name="QueryCause[OP]" value="AND" />
-			<span class="dlgmsg" ext:qtip="{-#thlpquery#-}">{-#tcntclick#-}</span><br />
+			<span class="dlgmsg" title="{-#thlpquery#-}">{-#tcntclick#-}</span><br />
 			<select id="qcaulst" name="D_CauseId[]" multiple style="width: 250px; height: 200px;" class="line">
 				{-include file="block_causelist.tpl"-}
 			</select>
@@ -70,7 +70,7 @@
 			</select>
 			</p>
 			<b>{-#ttitegp#-}</b><br />
-			<div style="height: 100px;" class="dwin" ext:qtip="{-#thlpquery#-}">
+			<div style="height: 100px;" class="dwin" title="{-#thlpquery#-}">
 				<table border="0" cellpadding="0" cellspacing="0">
 					{-foreach name=ef1 key=key item=item from=$ef1-}
 						{-assign var="ff" value="D_$key"-}
