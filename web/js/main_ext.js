@@ -516,9 +516,13 @@ function doDialogsCreate()
 	// Datacard View/Edit Window
 	w = new Ext.Window({id:'wndDatacard',
 		el:'divDatacardWindow', layout:'fit', 
-		x: 65, y: 0, width:960, height:638, 
-		closeAction:'hide', plain: true, animCollapse: false,
+		width:960, height:638, //x: 65, y: 0, 
+		closeAction:'hide', plain: true, animCollapse: false, constrainHeader: true,
 		items: new Ext.Panel({ contentEl: 'divDatacardContent', autoScroll: true })
+	});
+	w.on('show', function() {
+		var w = Ext.getCmp('wndDatacard');
+		w.center();
 	});
 	w.on('hide',function() {
 		jQuery('#divDatacardWindow').hide();
