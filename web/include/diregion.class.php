@@ -647,7 +647,7 @@ class DIRegion extends DIObject
 	function getGeolevelList()
 	{
 		$answer = array();
-		$sQuery = 'SELECT GeoLevelId, GeoLevelName, GeoLevelDesc FROM GeoLevel ORDER BY GeoLevelId';
+		$sQuery = 'SELECT GeoLevelId,GeoLevelName,GeoLevelDesc,GeoLevelActive FROM GeoLevel ORDER BY GeoLevelId';
 		try
 		{
 			foreach($this->session->q->dreg->query($sQuery, PDO::FETCH_ASSOC) as $row)

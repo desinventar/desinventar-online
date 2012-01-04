@@ -3,19 +3,19 @@
 <div class="clsDatabaseGeolevels">
 	<b>{-#msgDatabaseGeolevels_Title#-}</b><br />
 	<div class="dwin" style="width:100%;height:100px;">
-		<table class="grid">
+		<table id="tblGeoLevels_List" class="grid">
 			<thead>
 				<tr>
-					<td class="header" style="display:none;">
+					<td class="header GeoLevelId" style="display:none;">
 						<b>Id</b>
 					</td>
-					<td class="header width40">
-						<b>{-#msgDatabaseGeolevels_GeoLelvelName#-}</b>
+					<td class="header GeoLevelName">
+						<b>{-#msgDatabaseGeolevels_GeoLevelName#-}</b>
 					</td>
-					<td class="header">
+					<td class="header GeoLevelDesc">
 						<b>{-#msgDatabaseGeolevels_GeoLevelDesc#-}</b>
 					</td>
-					<td class="header">
+					<td class="header GeoLevelActive">
 						<b>{-#msgDatabaseGeolevels_GeoLevelActive#-}</b>
 					</td>
 				</tr>
@@ -24,12 +24,12 @@
 				<tr style="display:none;">
 					<td class="GeoLevelId" style="display:none;">
 					</td>
-					<td class="GeoLevelName width40">
+					<td class="GeoLevelName">
 					</td>
 					<td class="GeoLevelDesc">
 					</td>
 					<td class="GeoLevelActive">
-						<input type="checkbox" />						
+						<input type="checkbox" disabled="disabled" />						
 					</td>
 				</tr>
 			</tbody>
@@ -38,18 +38,23 @@
 	<br />
 	<a class="button" id="btnDatabaseGeolevels_Add"><span>{-#msgDatabaseGeolevels_Add#-}</span></a>
 	<br /><br />
-	<div style="display:block; width:100%;">
-		<form id="frmDatabaseGeolevelsEdit">
+	<div id="divDatabaseGeolevels_Edit" style="display:none; width:100%;">
+		<form id="frmDatabaseGeolevels_Edit">
 			{-#msgDatabaseGeolevels_GeoLevelName#-}<b style="color:darkred;">*</b>
 			<br />
-			<input id="fldDatabaseGeolevels_GeoLevelName" name="GeoLevel[GeoLevelName]" 
+			<input id="fldDatabaseGeolevels_GeoLevelName" name="GeoLevelName" 
 				type="text" tabindex="1" class="line" style="width:400px;" />
 			<br /><br />
 			{-#msgDatabaseGeolevels_GeoLevelDesc#-}<b style="color:darkred;">*</b>
 			<br />
-			<textarea id="fldDatabaseGeolevels_GeoLevelDesc" name="GeoLevel[GeoLevelDesc]"
+			<textarea id="fldDatabaseGeolevels_GeoLevelDesc" name="GeoLevelDesc"
 				tabindex="2" style="width:400px;"></textarea>
 			<br />
+			<input id="fldDatabaseGeolevels_GeoLevelActive" name="GeoLevelActive" type="hidden" value="0" />
+			{-#msgDatabaseGeolevels_GeoLevelActive#-}
+			<input id="fldDatabaseGeolevels_GeoLevelActiveCheckbox" type="checkbox" tabindex="3" />
+			<br />
+
 			<div class="center">
 				<a class="button" id="btnDatabaseGeolevels_Save"><span>Save</span></a>
 				<a class="button" id="btnDatabaseGeolevels_Cancel"><span>Cancel</span></a>
