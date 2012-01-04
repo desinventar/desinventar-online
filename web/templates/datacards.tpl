@@ -120,7 +120,9 @@
 		<!-- GEOGRAPHY SECTION -->
 		<tr>
 			<td width="30" style="border:0px;" valign="top">
-				<img src="{-$desinventarURL-}/images/di_geotag.png" title="<b>{-#mgeography#-}</b><br />{-$dmg.MetGuidegeography[2]-}" />
+				<span title="<b>{-#mgeography#-}</b><br />{-$dmg.MetGuidegeography[2]-}">
+					<img src="{-$desinventarURL-}/images/di_geotag.png" />
+				</span>
 			</td>
 			<td>
 				<table class="grid">
@@ -198,13 +200,15 @@
 		<tr>
 			<td width="30" valign="top" style="border:0px;">
 				<a href="#" id="linkDatacardShowEffectsBasic">
-					<img id="efimg" src="{-$desinventarURL-}/images/di_efftag.png" border=0
-						title="<b>{-#tbaseffects#-}</b><br />{-$dmg.MetGuidedatacards[2]-}" />
+					<span title="<b>{-#tbaseffects#-}</b><br />{-$dmg.MetGuidedatacards[2]-}">
+						<img id="efimg" src="{-$desinventarURL-}/images/di_efftag.png" />
+					</span>
 				</a>
 				<br /><br />
 				<a href="#" id="linkDatacardShowEffectsAditional">
-					<img id="eeimg" src="{-$desinventarURL-}/images/di_eeftag.png" border=0 
-						title="<b>{-#textraeffect#-}</b><br />{-$dmg.MetGuideextraeffects[2]-}" />
+					<span title="<b>{-#textraeffect#-}</b><br />{-$dmg.MetGuideextraeffects[2]-}">
+						<img id="eeimg" src="{-$desinventarURL-}/images/di_eeftag.png" />
+					</span>
 				</a>
 			</td>
 			<td valign="top">
@@ -343,8 +347,9 @@
 		<!-- BEGIN EVENT SECTION -->
 		<tr style="border:1px solid #ff0;">
 			<td width="30" valign="top" style="border:0px;">
-				<img src="{-$desinventarURL-}/images/di_evetag.png" 
-				title="<b>{-#mevents#-}</b><br />{-$dmg.MetGuideevents[2]-}" />
+				<span title="<b>{-#mevents#-}</b><br />{-$dmg.MetGuideevents[2]-}">
+					<img src="{-$desinventarURL-}/images/di_evetag.png" />
+				</span>
 			</td>
 			<td>
 				<table class="grid">
@@ -386,7 +391,9 @@
 		<!-- BEG CAUSE SECTION -->
 		<tr style="border:1px solid #ffffc0;">
 			<td width="30" valign="top" style="border:0px;">
-				<img src="{-$desinventarURL-}/images/di_cautag.png" title="<b>{-#mcauses#-}</b><br />{-$dmg.MetGuidecauses[2]-}" />
+				<span title="<b>{-#mcauses#-}</b><br />{-$dmg.MetGuidecauses[2]-}">
+					<img src="{-$desinventarURL-}/images/di_cautag.png" />
+				</span>
 			</td>
 			<td>
 				<table class="grid">

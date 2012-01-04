@@ -127,4 +127,5 @@ a.button:active span {
 	color: #444;
 	box-shadow: 3px 3px 3px #aaa;
 	padding: 3px;
+	max-width: 250px;
 }
