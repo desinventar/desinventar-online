@@ -2922,36 +2922,48 @@
 			<Text LangIsoCode="fre">Actif</Text>
 		</Message>
 	</Group>
-	<Group name="grpDatabaseGeolevels">
-		<Message id="msgDatabaseGeolevels_Title">
+	<Group name="grpGeolevels">
+		<Message id="msgGeolevels_Title">
 			<Text LangIsoCode="eng">Geographic levels</Text>
 			<Text LangIsoCode="spa">Niveles Geográficos</Text>
 			<Text LangIsoCode="por">Níveis Geográficos</Text>
 			<Text LangIsoCode="fre">Niveaux Géographiques</Text>
 		</Message>
-		<Message id="msgDatabaseGeolevels_GeoLevelName">
+		<Message id="msgGeolevels_GeoLevelName">
 			<Text LangIsoCode="eng">Name</Text>
 			<Text LangIsoCode="spa">Nombre</Text>
 			<Text LangIsoCode="por">Nome</Text>
 			<Text LangIsoCode="fre">Nom</Text>
 		</Message>
-		<Message id="msgDatabaseGeolevels_GeoLevelDesc">
+		<Message id="msgGeolevels_GeoLevelDesc">
 			<Text LangIsoCode="eng">Description</Text>
 			<Text LangIsoCode="spa">Descripción</Text>
 			<Text LangIsoCode="por">Descrição</Text>
 			<Text LangIsoCode="fre">Description</Text>
 		</Message>
-		<Message id="msgDatabaseGeolevels_GeoLevelActive">
+		<Message id="msgGeolevels_GeoLevelActive">
 			<Text LangIsoCode="eng">Active</Text>
 			<Text LangIsoCode="spa">Activo</Text>
 			<Text LangIsoCode="por">Ativo</Text>
 			<Text LangIsoCode="fre">Actif</Text>
 		</Message>
-		<Message id="msgDatabaseGeolevels_Add">
+		<Message id="msgGeolevels_Add">
 			<Text LangIsoCode="eng">Add</Text>
 			<Text LangIsoCode="spa">Adicionar</Text>
 			<Text LangIsoCode="por">Adicionar</Text>
 			<Text LangIsoCode="fre">Ajouter</Text>
+		</Message>
+		<Message id="msgGeolevels_UpdateOk">
+			<Text LangIsoCode="eng">Record updated successfully!</Text>
+			<Text LangIsoCode="spa">Registro actualizado exitosamente</Text>
+			<Text LangIsoCode="por">Registro atualizado com sucesso</Text>
+			<Text LangIsoCode="fre">Fiche mise à jour avec succès</Text>
+		</Message>
+		<Message id="msgGeolevels_UpdateError">
+			<Text LangIsoCode="eng">Error while updating record</Text>
+			<Text LangIsoCode="spa">Error actualizando registro</Text>
+			<Text LangIsoCode="por">Erro ao atualizar registro</Text>
+			<Text LangIsoCode="fre">Erreur lors de la mise à jour d'enregistrement</Text>
 		</Message>
 	</Group>
 	<Group name="grpDatabaseUsers">

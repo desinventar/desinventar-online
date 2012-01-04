@@ -255,10 +255,10 @@ switch ($cmd)
 		$t->assign('ctl_admregmess', true);
 		$t->display('main_region.tpl');
 	break;
-	case 'cmdDatabaseGeolevels':
+	case 'cmdGeolevels':
 		$t->display('main_database_geolevels.tpl');
 	break;
-	case 'cmdDatabaseGeolevelsGetList':
+	case 'cmdGeolevelsGetList':
 		$answer = array();
 		$iReturn = ERR_NO_ERROR;
 		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
@@ -272,12 +272,42 @@ switch ($cmd)
 		if ($iReturn > 0)
 		{
 			$r = new DIRegion($us, $RegionId);
-			$GeolevelList = $r->getGeolevelList();
-			$answer['GeolevelList'] = $GeolevelList;
+			$GeolevelsList = $r->getGeolevelList();
+			$answer['GeolevelsList'] = $GeolevelsList;
 		}
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
+	case 'cmdGeolevelsUpdate':
+		$answer = array();
+		$iReturn = ERR_NO_ERROR;
+		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($RegionId == '')
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($iReturn > 0)
+		{
+			$o = new DIGeoLevel($us, $_POST['GeoLevel']['GeoLevelId']);
+			$o->setFromArray($_POST['GeoLevel']);
+			if ($o->get('GeoLevelId') < 0)
+			{
+				$o->set('GeoLevelId', $o->getMaxGeoLevel() + 1);
+				$iReturn = $o->insert();
+			}
+			$iReturn = $o->update();
+			if ($iReturn > 0)
+			{
+				$r = new DIRegion($us, $RegionId);
+				$GeolevelsList = $r->getGeolevelList();
+				$answer['GeolevelsList'] = $GeolevelsList;
+			}
+		}
+		$answer['Status'] = $iReturn;
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');		
 	case 'getversion':
 		echo VERSION;
 	break;
