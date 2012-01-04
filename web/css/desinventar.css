@@ -90,10 +90,12 @@ a.info:visited	{ color: #333333;  }
 .dlgmsg     { color:#42929d; text-align:right; font-size:8pt; }
 .datacardStatusMsg { text-align:left; color:#dbab28; }
 .disabled 	{ background-color: #cccccc; }
-
 .dwin {
 	overflow: auto; padding:0px; margin: 0px; border-style:solid;
 	border-width:1px; border-color:#BBBBBB;
+}
+b.required {
+	color: darkred;	
 }
 a.RegionListItem { text-decoration: none; }
 table.grid {
@@ -261,13 +263,28 @@ a:hover	{	color:#00008b; }
 	height:100%;
 }
 .clsGeolevels {
+	width:100%;
+	height:100%;
+}
+#divGeolevels_List {
+	max-width:600px;
+	heigh:100px;
+}
+#tblGeolevels_List td.GeoLevelDesc {
+	width:40%;
+}
+#tblGeolevels_List td.GeoLevelActive {
+	text-align     :center;
+	vertical-align : text-top;
+}
+#divGeolevels_Status {
+	max-width:600px;
+}
+#divGeolevels_Edit {
+	width:auto;
 	max-width:600px;
 	height:100%;
 }
-#tblGeoLevels_List td.GeoLevelDesc {
-	width:40%;
-}
-#tblGeoLevels_List td.GeoLevelActive {
-	text-align     :center;
-	vertical-align : text-top;
+#frmGeolevels_Edit .GeoLevelName,.GeoLevelDesc {
+	width:400px;
 }
