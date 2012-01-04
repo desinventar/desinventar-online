@@ -3,7 +3,7 @@
 <div class="clsGeolevels">
 	<b>{-#msgGeolevels_Title#-}</b><br />
 	<div class="dwin" style="width:100%;height:100px;">
-		<table id="tblGeoLevels_List" class="grid">
+		<table id="tblGeolevels_List" class="grid">
 			<thead>
 				<tr>
 					<td class="header GeoLevelId">
@@ -59,7 +59,7 @@
 			<br />
 
 			<input id="fldGeolevels_GeoLevelActive" name="GeoLevelActive" type="hidden" value="0" />
-			{-#msgGeolevels_GeoLevelActive#-}
+			<span id="txtGeolevels_GeoLevelActive">{-#msgGeolevels_GeoLevelActive#-}</span>
 			<input id="fldGeolevels_GeoLevelActiveCheckbox" type="checkbox" tabindex="3" />
 			<br />
 
@@ -67,8 +67,7 @@
 				<a class="button" id="btnGeolevels_Save"><span>Save</span></a>
 				<a class="button" id="btnGeolevels_Cancel"><span>Cancel</span></a>
 			</div>
-			<hr />
-			<table class="grid">
+			<table class="grid" style="display:none;">
 				<tr>
 				<td>
 					<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevLayerFile[2]-}')">

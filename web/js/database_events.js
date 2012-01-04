@@ -76,6 +76,7 @@ function onReadyDatabaseEvents()
 
 		if (bContinue)
 		{
+			jQuery('body').trigger('cmdMainWaitingShow');
 			jQuery.post(
 				jQuery('#desinventarURL').val() + '/',
 				{
@@ -85,6 +86,7 @@ function onReadyDatabaseEvents()
 				},
 				function(data)
 				{
+					jQuery('body').trigger('cmdMainWaitingHide');
 					if (parseInt(data.Status) > 0)
 					{
 						jQuery('#divDatabaseEvents_Edit').hide();
@@ -117,6 +119,7 @@ function onReadyDatabaseEvents()
 
 function doDatabaseEventsPopulateLists()
 {
+	jQuery('body').trigger('cmdMainWaitingShow');
 	jQuery.post(
 		jQuery('#desinventarURL').val() + '/',
 		{
@@ -130,6 +133,7 @@ function doDatabaseEventsPopulateLists()
 				doDatabaseEventsPopulateList('tbodyDatabaseEvents_EventListCustom' , data.EventListCustom);
 				doDatabaseEventsPopulateList('tbodyDatabaseEvents_EventListDefault', data.EventListDefault);
 			}
+			jQuery('body').trigger('cmdMainWaitingHide');
 		},
 		'json'
 	);

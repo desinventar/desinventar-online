@@ -11,7 +11,8 @@ function onReadyGeolevels()
 			jQuery('#fldGeolevels_GeoLevelId').val(jQuery('.GeoLevelId',this).text());
 			jQuery('#fldGeolevels_GeoLevelName').val(jQuery('.GeoLevelName',this).text());
 			jQuery('#fldGeolevels_GeoLevelDesc').val(jQuery('.GeoLevelDesc',this).prop('title'));
-			jQuery('#fldGeolevels_GeoLevelActiveCheckbox').prop('checked', jQuery('.GeoLevelActive :input',this).is(':checked')).change();
+			jQuery('#txtGeolevels_GeoLevelActive').hide();
+			jQuery('#fldGeolevels_GeoLevelActiveCheckbox').prop('checked', jQuery('.GeoLevelActive :input',this).is(':checked')).change().hide();
 			jQuery('#btnGeolevels_Add').hide();
 			jQuery('#divGeolevels_Edit').show();
 		}
@@ -22,7 +23,8 @@ function onReadyGeolevels()
 		jQuery('#fldGeolevels_GeoLevelId').val('-1');
 		jQuery('#fldGeolevels_GeoLevelName').val('');
 		jQuery('#fldGeolevels_GeoLevelDesc').val('');
-		jQuery('#fldGeolevels_GeoLevelActiveCheckbox').prop('checked', true).change();
+		jQuery('#txtGeolevels_GeoLevelActive').hide();
+		jQuery('#fldGeolevels_GeoLevelActiveCheckbox').prop('checked', true).change().hide();
 	});
 
 	jQuery('#btnGeolevels_Save').click(function() {
@@ -58,6 +60,7 @@ function onReadyGeolevels()
 
 		if (bContinue)
 		{
+			jQuery('body').trigger('cmdMainWaitingShow');
 			jQuery.post(
 				jQuery('#desinventarURL').val() + '/',
 				{
@@ -67,18 +70,20 @@ function onReadyGeolevels()
 				},
 				function(data)
 				{
+					jQuery('body').trigger('cmdMainWaitingHide');
 					if (parseInt(data.Status) > 0)
 					{
 						jQuery('#divGeolevels_Edit').hide();
+						jQuery('#btnGeolevels_Add').show();
 						jQuery('#msgGeolevels_UpdateOk').show();
-						doGeoLevelsPopulateList(data.GeolevelsList);
+						doGeolevelsPopulateList(data.GeolevelsList);
 					}
 					else
 					{
 						jQuery('#msgGeolevels_UpdateError').show();
 					}					
 					setTimeout(function () {
-						jQuery('.clsGeoLevelsStatus').hide();
+						jQuery('.clsGeolevelsStatus').hide();
 					}, 2500);
 				},
 				'json'
@@ -89,6 +94,7 @@ function onReadyGeolevels()
 
 	// Attach events to main page
 	jQuery('body').on('cmdGeolevelsShow', function() {
+		jQuery('body').trigger('cmdMainWaitingShow');
 		jQuery('.clsGeolevelsStatus').hide();
 		jQuery.post(
 			jQuery('#desinventarURL').val() + '/',
@@ -98,6 +104,7 @@ function onReadyGeolevels()
 			},
 			function(data)
 			{
+				jQuery('body').trigger('cmdMainWaitingHide');
 				if (parseInt(data.Status) > 0)
 				{
 					doGeolevelsPopulateList(data.GeolevelsList);
@@ -122,6 +129,7 @@ function doGeolevelsPopulateList(GeolevelsList)
 		jQuery('#tbodyGeolevels_List').append(clonedRow);
 	});
 	jQuery('#tblGeolevels_List .GeoLevelId').hide();
+	jQuery('#tblGeolevels_List .GeoLevelActive').hide();
 	jQuery('#tbodyGeolevels_List tr:even').addClass('under');
 } //doGeolevelsPopulateList()
 
