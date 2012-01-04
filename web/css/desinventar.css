@@ -27,7 +27,8 @@ li {
 }
 .line, .qq-upload-button-text {
 	font-family:arial,tahoma,helvetica,cursive; 
-	font-size:11px; color:#000000; background-color:#FFFFFF; 
+	font-size:11px; color:#000000;
+	background-color:#FFFFFF; 
 	border-style:solid;
 	border-width:1px;
 	border-color:#BBBBBB;
@@ -263,6 +264,10 @@ a:hover	{	color:#00008b; }
 	max-width:600px;
 	height:100%;
 }
-.width40 {
+#tblGeoLevels_List td.GeoLevelDesc {
 	width:40%;
+}
+#tblGeoLevels_List td.GeoLevelActive {
+	text-align     :center;
+	vertical-align : text-top;
 }
