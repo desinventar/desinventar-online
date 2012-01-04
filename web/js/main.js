@@ -7,6 +7,7 @@ function onReadyMain()
 	onReadyDatabaseUpload();
 	onReadyDatabaseCreate();
 	onReadyDatabaseUsers();
+	onReadyGeolevels();
 	onReadyDatabaseEvents();
 	onReadyAdminUsers();
 	onReadyUserPermAdmin();
@@ -75,11 +76,15 @@ function onReadyMain()
 		}
 	});
 
-	jQuery('#DBConfig_DatabaseEvents').on('show', function() {
+	jQuery('#DBConfig_Geolevels').on('show', function() {
+		jQuery('body').trigger('cmdGeolevelsShow');
+	});
+
+	jQuery('#DBConfig_Events').on('show', function() {
 		jQuery('body').trigger('cmdDatabaseEventsShow');
 	});
 
-	jQuery('#DBConfig_DatabaseUsers').on('show', function() {
+	jQuery('#DBConfig_Users').on('show', function() {
 		jQuery('body').trigger('cmdDatabaseUsersShow');
 	});
 	
@@ -96,7 +101,7 @@ function onReadyMain()
 		{
 			me.html('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />');
 			jQuery.post(
-				jQuery(this).attr('data'),
+				jQuery(this).data('url'),
 				{
 					cmd      : cmd,
 					RegionId : jQuery('#desinventarRegionId').val(),

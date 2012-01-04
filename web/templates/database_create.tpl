@@ -25,9 +25,9 @@
 		{-#msgDatabaseCreateMsg2#-}<br />
 		<ul>
 			<li>- {-#mreginfo#-}</li>
-			<li>- {-#mgeolevel#-}</li>
+			<li>- {-#msgDBConfig_Geolevels#-}</li>
 			<li>- {-#mgeography#-}</li>
-			<li>- {-#mevents#-}</li>
+			<li>- {-#msgDBConfig_Events#-}</li>
 			<li>- {-#mcauses#-}</li>
 			<li>- {-#meeffects#-}</li>
 		</ul>

@@ -1815,7 +1815,7 @@
 			<Text LangIsoCode="por">Formulário técnico</Text>
 			<Text LangIsoCode="fre">Fiche technique</Text>
 		</Message>
-		<Message id="mgeolevel">
+		<Message id="msgDBConfig_Geolevels">
 			<Text LangIsoCode="eng">Geographic levels</Text>
 			<Text LangIsoCode="spa">Niveles Geográficos</Text>
 			<Text LangIsoCode="por">Níveis Geográficos</Text>

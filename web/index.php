@@ -308,6 +308,7 @@ switch ($cmd)
 		}
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');		
+	break;
 	case 'getversion':
 		echo VERSION;
 	break;
