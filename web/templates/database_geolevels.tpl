@@ -3,17 +3,20 @@
 <div class="clsDatabaseGeolevels">
 	<b>{-#msgDatabaseGeolevels_Title#-}</b><br />
 	<div class="dwin" style="width:100%;height:100px;">
-		<table width="100%" class="grid">
+		<table class="grid">
 			<thead>
 				<tr>
 					<td class="header" style="display:none;">
 						<b>Id</b>
 					</td>
-					<td class="header" width="40%">
-						<b>{-#msgDatabaseGeolevels_GeoLevelName#-}</b>
+					<td class="header width40">
+						<b>{-#msgDatabaseGeolevels_GeoLelvelName#-}</b>
 					</td>
 					<td class="header">
 						<b>{-#msgDatabaseGeolevels_GeoLevelDesc#-}</b>
+					</td>
+					<td class="header">
+						<b>{-#msgDatabaseGeolevels_GeoLevelActive#-}</b>
 					</td>
 				</tr>
 			</thead>
@@ -21,9 +24,12 @@
 				<tr style="display:none;">
 					<td class="GeoLevelId" style="display:none;">
 					</td>
-					<td class="GeoLevelName" width="40%">
+					<td class="GeoLevelName width40">
 					</td>
 					<td class="GeoLevelDesc">
+					</td>
+					<td class="GeoLevelActive">
+						<input type="checkbox" />						
 					</td>
 				</tr>
 			</tbody>
@@ -49,7 +55,7 @@
 				<a class="button" id="btnDatabaseGeolevels_Cancel"><span>Cancel</span></a>
 			</div>
 			<hr />
-			<table border="0" width="100%">
+			<table class="grid">
 				<tr>
 				<td>
 					<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevLayerFile[2]-}')">
@@ -72,13 +78,15 @@
 				</td>
 				</tr>
 				<tr>
-				<td colspan="2" align="center">
-					<input id="_REG" name="_REG" value="{-$reg-}" type="hidden" />
-					<input id="GeoLevelId" name="GeoLevelId" type="hidden" />
-					<input id="cmd" name="cmd" type="hidden" /><br />
-					<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="8" />
-					<input type="reset" value="{-#bcancel#-}" class="line" 
-						onClick="$('levaddsect').style.display='none'; mod='lev'; uploadMsg('');" {-$ro-} />
+				<td colspan="2">
+					<div class="center">
+						<input id="_REG" name="_REG" value="{-$reg-}" type="hidden" />
+						<input id="GeoLevelId" name="GeoLevelId" type="hidden" />
+						<input id="cmd" name="cmd" type="hidden" /><br />
+						<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="8" />
+						<input type="reset" value="{-#bcancel#-}" class="line" 
+							onClick="$('levaddsect').style.display='none'; mod='lev'; uploadMsg('');" {-$ro-} />
+					</div>
 				</td>
 				</tr>
 			</table>
