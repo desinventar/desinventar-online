@@ -196,7 +196,7 @@
 						</td>
 						<td>
 							<select id="prmGraphTypeComparative" name="prmGraphTypeComparative" class="line" help_tip="{-$dic.GraphType[2]-}">
-								<option value="0" disabled></option>
+								<option value="" disabled></option>
 								<option value="{-$smarty.const.GRAPH_COMPARATIVE_EVENT-}">{-$dic.GraphComByEvents[0]-}</option>
 								<option value="{-$smarty.const.GRAPH_COMPARATIVE_CAUSE-}">{-$dic.GraphComByCauses[0]-}</option>
 								{-assign var='IndexOffset' value="200"-}

@@ -93,7 +93,15 @@ function onReadyGraphic() {
 	});
 
 	jQuery('#prmGraphKind').change(function() {
-		comp = parseInt(jQuery('#prmGraphTypeComparative').val());
+		comp = jQuery('#prmGraphTypeComparative').val();
+		if (comp != '')
+		{
+			comp = parseInt(comp);
+		}
+		else
+		{
+			comp = 0;
+		}
 		var kind = jQuery(this).val();
 		if (comp > 0)
 		{
