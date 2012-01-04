@@ -2,7 +2,7 @@
 {-config_load file="$lg.conf" section="grpGeolevels"-}
 <div class="clsGeolevels">
 	<b>{-#msgGeolevels_Title#-}</b><br />
-	<div class="dwin" style="width:100%;height:100px;">
+	<div id="divGeolevels_List" class="dwin">
 		<table id="tblGeolevels_List" class="grid">
 			<thead>
 				<tr>
@@ -21,7 +21,7 @@
 				</tr>
 			</thead>
 			<tbody id="tbodyGeolevels_List">
-				<tr style="display:none;">
+				<tr>
 					<td class="GeoLevelId">
 					</td>
 					<td class="GeoLevelName">
@@ -35,37 +35,37 @@
 			</tbody>
 		</table>
 	</div>
-	<br />
-	<a class="button" id="btnGeolevels_Add"><span>{-#msgGeolevels_Add#-}</span></a>
-	<br /><br />
-	<div class="center">
-		<span class="clsGeolevelsStatus" id="msgGeolevels_UpdateOk">{-#msgGeolevels_UpdateOk#-}</span>
-		<span class="clsGeolevelsStatus" id="msgGeolevels_UpdateError">{-#msgGeolevels_UpdateError#-}</span>		
+	<div id="divGeolevels_Status">
+		<br />
+		<a class="button" id="btnGeolevels_Add"><span>{-#msgGeolevels_Add#-}</span></a>
+		<br /><br />
+		<div class="center">
+			<span class="clsGeolevelsStatus" id="msgGeolevels_UpdateOk">{-#msgGeolevels_UpdateOk#-}</span>
+			<span class="clsGeolevelsStatus" id="msgGeolevels_UpdateError">{-#msgGeolevels_UpdateError#-}</span>		
+		</div>
 	</div>
 	<div id="divGeolevels_Edit">
 		<form id="frmGeolevels_Edit">
-			<input id="fldGeolevels_GeoLevelId" name="GeoLevelId" type="hidden" value="-1" />
+			<input class="GeoLevelId" name="GeoLevelId" type="hidden" value="-1" />
 
-			{-#msgGeolevels_GeoLevelName#-}<b style="color:darkred;">*</b>
+			{-#msgGeolevels_GeoLevelName#-}<b class="required">*</b>
 			<br />
-			<input id="fldGeolevels_GeoLevelName" name="GeoLevelName" 
-				type="text" tabindex="1" class="line" style="width:400px;" />
+			<input class="GeoLevelName line" name="GeoLevelName" type="text" tabindex="1" />
 			<br /><br />
 
-			{-#msgGeolevels_GeoLevelDesc#-}<b style="color:darkred;">*</b>
+			{-#msgGeolevels_GeoLevelDesc#-}<b class="required">*</b>
 			<br />
-			<textarea id="fldGeolevels_GeoLevelDesc" name="GeoLevelDesc"
-				tabindex="2" style="width:400px;"></textarea>
+			<textarea class="GeoLevelDesc" name="GeoLevelDesc" tabindex="2"></textarea>
 			<br />
 
-			<input id="fldGeolevels_GeoLevelActive" name="GeoLevelActive" type="hidden" value="0" />
-			<span id="txtGeolevels_GeoLevelActive">{-#msgGeolevels_GeoLevelActive#-}</span>
-			<input id="fldGeolevels_GeoLevelActiveCheckbox" type="checkbox" tabindex="3" />
+			<input class="GeoLevelActive" name="GeoLevelActive" type="hidden" value="1" />
+			<span class="GeoLevelActiveLabel">{-#msgGeolevels_GeoLevelActive#-}</span>
+			<input class="GeoLevelActiveCheckbox" type="checkbox" tabindex="3" />
 			<br />
 
 			<div class="center">
-				<a class="button" id="btnGeolevels_Save"><span>Save</span></a>
-				<a class="button" id="btnGeolevels_Cancel"><span>Cancel</span></a>
+				<a class="button btnSave"><span>{-#msgGeolevels_Save#-}</span></a>
+				<a class="button btnCancel"><span>{-#msgGeolevels_Cancel#-}</span></a>
 			</div>
 			<table class="grid" style="display:none;">
 				<tr>

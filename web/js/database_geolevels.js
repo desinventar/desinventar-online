@@ -8,11 +8,11 @@ function onReadyGeolevels()
 	jQuery('#tbodyGeolevels_List').delegate('tr', 'click', function(e) {
 		if (! jQuery('#divGeolevels_Edit').is(':visible'))
 		{
-			jQuery('#fldGeolevels_GeoLevelId').val(jQuery('.GeoLevelId',this).text());
-			jQuery('#fldGeolevels_GeoLevelName').val(jQuery('.GeoLevelName',this).text());
-			jQuery('#fldGeolevels_GeoLevelDesc').val(jQuery('.GeoLevelDesc',this).prop('title'));
-			jQuery('#txtGeolevels_GeoLevelActive').hide();
-			jQuery('#fldGeolevels_GeoLevelActiveCheckbox').prop('checked', jQuery('.GeoLevelActive :input',this).is(':checked')).change().hide();
+			jQuery('#frmGeolevels_Edit .GeoLevelId').val(jQuery('.GeoLevelId',this).text());
+			jQuery('#frmGeolevels_Edit .GeoLevelName').val(jQuery('.GeoLevelName',this).text());
+			jQuery('#frmGeolevels_Edit .GeoLevelDesc').val(jQuery('.GeoLevelDesc',this).prop('title'));
+			jQuery('#frmGeolevels_Edit .GeoLevelActiveLabel').hide();
+			jQuery('#frmGeolevels_Edit .GeoLevelActiveCheckbox').prop('checked', jQuery('.GeoLevelActive :input',this).is(':checked')).change().hide();
 			jQuery('#btnGeolevels_Add').hide();
 			jQuery('#divGeolevels_Edit').show();
 		}
@@ -20,39 +20,39 @@ function onReadyGeolevels()
 	jQuery('#btnGeolevels_Add').click(function() {
 		jQuery('#divGeolevels_Edit').show();
 		jQuery(this).hide();
-		jQuery('#fldGeolevels_GeoLevelId').val('-1');
-		jQuery('#fldGeolevels_GeoLevelName').val('');
-		jQuery('#fldGeolevels_GeoLevelDesc').val('');
-		jQuery('#txtGeolevels_GeoLevelActive').hide();
-		jQuery('#fldGeolevels_GeoLevelActiveCheckbox').prop('checked', true).change().hide();
+		jQuery('#frmGeolevels_Edit .GeoLevelId').val('-1');
+		jQuery('#frmGeolevels_Edit .GeoLevelName').val('');
+		jQuery('#frmGeolevels_Edit .GeoLevelDesc').val('');
+		jQuery('#frmGeolevels_Edit .GeoLevelActiveLabel').hide();
+		jQuery('#frmGeolevels_Edit .GeoLevelActiveCheckbox').prop('checked', true).change().hide();
 	});
 
-	jQuery('#btnGeolevels_Save').click(function() {
+	jQuery('#frmGeolevels_Edit .btnSave').click(function() {
 		jQuery('#frmGeolevels_Edit').trigger('submit');
 	});
 
-	jQuery('#btnGeolevels_Cancel').click(function() {
+	jQuery('#frmGeolevels_Edit .btnCancel').click(function() {
 		jQuery('#divGeolevels_Edit').hide();
 		jQuery('#btnGeolevels_Add').show();
 	});
 
-	jQuery('#fldGeolevels_GeoLevelActiveCheckbox').change(function() {
+	jQuery('#frmGeolevels_Edit .GeoLevelActiveCheckbox').change(function() {
 		var v = 0;
 		if (jQuery(this).is(':checked')) 
 		{
 			v = 1;
 		}
-		jQuery('#fldGeolevels_GeoLevelActive').val(v);
+		jQuery('#frmGeolevels_Edit .GeoLevelActive').val(v);
 	});
 
 	jQuery('#frmGeolevels_Edit').submit(function() {
 		var bContinue = true;
-		if (bContinue && jQuery.trim(jQuery('#fldGeolevels_GeoLevelName').val()) == '')
+		if (bContinue && jQuery.trim(jQuery('#frmGeolevels_Edit .GeoLevelName').val()) == '')
 		{
-			jQuery('#fldGeolevels_GeoLevelName').highlight();
+			jQuery('#frmGeolevels_Edit .GeoLevelName').highlight();
 			jQuery('#msgGeolevels_ErrorEmtpyFields').show();
 			setTimeout(function () {
-				jQuery('#fldGeolevels_GeoLevelName').unhighlight();
+				jQuery('#frmGeolevels_Edit .GeoLevelName').unhighlight();
 				jQuery('.clsGeolevelsStatus').hide();
 			}, 2500);
 			bContinue = false;
@@ -119,6 +119,8 @@ function doGeolevelsPopulateList(GeolevelsList)
 {
 	jQuery('#divGeolevels_Edit').hide();
 	jQuery('#tbodyGeolevels_List').find('tr:gt(0)').remove();
+	jQuery('#tbodyGeolevels_List').find('tr:first').hide();
+	jQuery('#tbodyGeolevels_List').find('tr').removeClass('under');
 	jQuery.each(GeolevelsList, function(index, value) {
 		var clonedRow = jQuery('#tbodyGeolevels_List tr:last').clone().show();
 		jQuery('.GeoLevelId', clonedRow).html(index);

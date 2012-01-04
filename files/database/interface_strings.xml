@@ -2953,6 +2953,18 @@
 			<Text LangIsoCode="por">Adicionar</Text>
 			<Text LangIsoCode="fre">Ajouter</Text>
 		</Message>
+		<Message id="msgGeolevels_Save">
+			<Text LangIsoCode="eng">Save</Text>
+			<Text LangIsoCode="spa">Guardar</Text>
+			<Text LangIsoCode="por">Salvar</Text>
+			<Text LangIsoCode="fre">Enregistrer</Text>
+		</Message>
+		<Message id="msgGeolevels_Cancel">
+			<Text LangIsoCode="eng">Cancel</Text>
+			<Text LangIsoCode="spa">Cancelar</Text>
+			<Text LangIsoCode="por">Cancelar</Text>
+			<Text LangIsoCode="fre">Annuler</Text>
+		</Message>
 		<Message id="msgGeolevels_UpdateOk">
 			<Text LangIsoCode="eng">Record updated successfully!</Text>
 			<Text LangIsoCode="spa">Registro actualizado exitosamente</Text>
