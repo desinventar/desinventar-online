@@ -25,9 +25,18 @@ function onReadyGraphic() {
 	});
 
 	jQuery('#prmGraphField1').change(function() {
-		enab($('prmGraphScale1'));
-		enab($('prmGraphData1'));
-		enab($('prmGraphMode1'));
+		if (jQuery(this).val() != '')
+		{
+			enab($('prmGraphScale1'));
+			enab($('prmGraphData1'));
+			enab($('prmGraphMode1'));
+		}
+		else
+		{
+			disab($('prmGraphScale1'));
+			disab($('prmGraphData1'));
+			disab($('prmGraphMode1'));
+		}
 	});
 	
 	jQuery('#prmGraphTypeHistogram').change(function() {
@@ -40,12 +49,15 @@ function onReadyGraphic() {
 		$('prmGraphPeriod').value = 'YEAR';
 		enab($('prmGraphStat'));
 		jQuery('#prmGraphScale0').enable();
-		if (grp > 0) {
+		if (grp > 0)
+		{
 			disabAxis2();
 			jQuery('#prmGraphMode0').val('NORMAL');
 			disab($('prmGraphModeCummulative0'));
 			enab($('prmGraphModeStacked0'));
-		} else {
+		}
+		else
+		{
 			enabAxis2();
 			jQuery('#prmGraphMode0').val('NORMAL');
 			enab($('prmGraphModeCummulative0'));
@@ -81,9 +93,10 @@ function onReadyGraphic() {
 	});
 
 	jQuery('#prmGraphKind').change(function() {
-		comp = $('prmGraphTypeComparative').value;
+		comp = parseInt(jQuery('#prmGraphTypeComparative').val());
 		var kind = jQuery(this).val();
-		if (comp > 0) {
+		if (comp > 0)
+		{
 			if (kind != 'PIE')
 			{
 				disab($('_G+D_perc'));
@@ -97,14 +110,15 @@ function onReadyGraphic() {
 				enab($('_G+D_perc'));
 			}
 		}
-		if ( (kind == 'BAR' || kind == 'LINE' || kind == 'PIE') &&
-		     (comp < 200) 
-		   ) {
+		if ( (kind == 'BAR' || kind == 'LINE' || kind == 'PIE') && (comp < 200) )
+		{
 			 enabAxis2();
 			 enab($('prmGraphModeCummulative0'));
 			 disab($('prmGraphModeStacked0'));
 			 jQuery('#prmGraphScale0').enable();
-		} else {
+		}
+		else
+		{
 			disabAxis2();
 			disab($('prmGraphModeCummulative0'));
 			jQuery('#prmGraphScale0').disable();
@@ -120,14 +134,16 @@ function onReadyGraphic() {
 	jQuery('#prmGraphTypeHistogram').val('D.DisasterBeginTime').trigger('change');
 } // onReadyGraphic()
 
-function disabAxis2() {
+function disabAxis2()
+{
 	jQuery('#divVerticalAxis2').hide();
 	jQuery('#prmGraphField1').val('');
-}
+} //disabAxis2()
 
-function enabAxis2() {
+function enabAxis2()
+{
 	jQuery('#divVerticalAxis2').show();
-	jQuery('#prmGraphField1').val('');
+	//jQuery('#prmGraphField1').val('');
 }
 
 
