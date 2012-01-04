@@ -2929,17 +2929,23 @@
 			<Text LangIsoCode="por">Níveis Geográficos</Text>
 			<Text LangIsoCode="fre">Niveaux Géographiques</Text>
 		</Message>
-		<Message id="msgDatabaseGeolevels_Name">
+		<Message id="msgDatabaseGeolevels_GeoLevelName">
 			<Text LangIsoCode="eng">Name</Text>
 			<Text LangIsoCode="spa">Nombre</Text>
 			<Text LangIsoCode="por">Nome</Text>
 			<Text LangIsoCode="fre">Nom</Text>
 		</Message>
-		<Message id="msgDatabaseGeolevels_Desc">
+		<Message id="msgDatabaseGeolevels_GeoLevelDesc">
 			<Text LangIsoCode="eng">Description</Text>
 			<Text LangIsoCode="spa">Descripción</Text>
 			<Text LangIsoCode="por">Descrição</Text>
 			<Text LangIsoCode="fre">Description</Text>
+		</Message>
+		<Message id="msgDatabaseGeolevels_GeoLevelActive">
+			<Text LangIsoCode="eng">Active</Text>
+			<Text LangIsoCode="spa">Activo</Text>
+			<Text LangIsoCode="por">Ativo</Text>
+			<Text LangIsoCode="fre">Actif</Text>
 		</Message>
 		<Message id="msgDatabaseGeolevels_Add">
 			<Text LangIsoCode="eng">Add</Text>
