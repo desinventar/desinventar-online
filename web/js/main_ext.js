@@ -136,18 +136,6 @@ function doMainChangeLanguage(LangIsoCode)
 	);
 } //doMainChangeLanguage()
 
-
-function doMainMenuHandler2(item) 
-{
-	console.log('MenuItem : ' + item.id);
-	switch(item.id)
-	{
-		case 'mnuHelpAbout':
-			Ext.getCmp('wndDialog').show();
-		break;
-	}
-}
-
 function doMainMenuHandler(item)
 {
 	var RegionId = jQuery('#desinventarRegionId').val();
