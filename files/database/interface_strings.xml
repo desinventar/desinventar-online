@@ -1711,6 +1711,42 @@
 			<Text LangIsoCode="por">Longitude</Text>
 			<Text LangIsoCode="fre">Longitude</Text>
 		</Message>
+		<Message id="msgDatacard_EventName">
+			<Text LangIsoCode="eng">Type of event</Text>
+			<Text LangIsoCode="spa">Tipo de evento</Text>
+			<Text LangIsoCode="por">Tipo de evento</Text>
+			<Text LangIsoCode="fre">Type d'évènement</Text>
+		</Message>
+		<Message id="msgDatacard_EventMagnitude">
+			<Text LangIsoCode="eng">Magnitude</Text>
+			<Text LangIsoCode="spa">Magnitud</Text>
+			<Text LangIsoCode="por">Magnitude</Text>
+			<Text LangIsoCode="fre">Ampleur</Text>
+		</Message>
+		<Message id="msgDatacard_EventDuration">
+			<Text LangIsoCode="eng">Duration</Text>
+			<Text LangIsoCode="spa">Duración</Text>
+			<Text LangIsoCode="por">Duração</Text>
+			<Text LangIsoCode="fre">Durée</Text>
+		</Message>
+		<Message id="msgDatacard_EventNotes">
+			<Text LangIsoCode="eng">Observations about the event</Text>
+			<Text LangIsoCode="spa">Observaciones de evento</Text>
+			<Text LangIsoCode="por">Observações de evento</Text>
+			<Text LangIsoCode="fre">Observation sur l'événement</Text>
+		</Message>
+		<Message id="msgDatacard_CauseName">
+			<Text LangIsoCode="eng">Type of cause</Text>
+			<Text LangIsoCode="spa">Tipo de causa</Text>
+			<Text LangIsoCode="por">Tipo de causa</Text>
+			<Text LangIsoCode="fre">Type de cause</Text>
+		</Message>
+		<Message id="msgDatacard_CauseNotes">
+			<Text LangIsoCode="eng">Observations about the cause</Text>
+			<Text LangIsoCode="spa">Observaciones de causa</Text>
+			<Text LangIsoCode="por">Observações de causa</Text>
+			<Text LangIsoCode="fre">Observations sur la cause</Text>
+		</Message>
 	</Group>
 	<Group name="grpMainStrings">
 		<Message id="twelcome">
