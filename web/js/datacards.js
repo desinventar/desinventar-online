@@ -351,7 +351,7 @@ function onReadyDatacards()
 		return false;
 	});
 
-	// Datatacard Find function 
+	// Datatacard Find 
 	jQuery('#txtDatacardFind').keydown(function(event) {
 		if(event.keyCode == 13)
 		{
@@ -363,7 +363,6 @@ function onReadyDatacards()
 		doDatacardFind();
 	});
 
-	
 	// Switch between Basic and Additional Effects
 	jQuery('#linkDatacardShowEffectsBasic').click(function() {
 		jQuery('#divDatacardEffectsBasic').show();
@@ -376,7 +375,27 @@ function onReadyDatacards()
 		jQuery('#divDatacardEffectsAdditional').show();
 		return false;
 	});
+	// Attach events to main body
+	jQuery('body').on('cmdDatacardShow', function() {
+		doDatacardShow();
+	});
+	jQuery('#divDatacard .tblGeography tr:first').hide();
 } //onReadyDatacards()
+
+function doDatacardShow()
+{
+	//GeoLevel
+	jQuery('.tblGeography tr:gt(0)').remove();
+	jQuery('.tblGeography tr:first').hide();
+	var GeolevelsList = jQuery('body').data('GeolevelsList');
+	jQuery.each(GeolevelsList, function(index, value) {
+		var clonedRow = jQuery('.tblGeography tr:last').clone().show();
+		jQuery('.GeoLevelId', clonedRow).text(index);
+		jQuery('.GeoLevelName', clonedRow).text(value.GeoLevelName);
+		jQuery('select', clonedRow).attr('id', 'GeoLevel' + index).attr('level', index);
+		jQuery('.tblGeography').append(clonedRow);
+	});	
+} //doDatacardShow();
 
 function displayDatacardStatusMsg(msgId)
 {

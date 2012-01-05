@@ -288,3 +288,7 @@ a:hover	{	color:#00008b; }
 #frmGeolevels_Edit .GeoLevelName,.GeoLevelDesc {
 	width:400px;
 }
+#divDatacard .GeographyId {
+	width:180px;
+	background-color:#eee;
+}

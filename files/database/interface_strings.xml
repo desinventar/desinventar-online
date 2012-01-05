@@ -1194,7 +1194,7 @@
 			<Text LangIsoCode="fre">Générer</Text>
 		</Message>
 	</Group>
-	<Group name="grpEditDatacard">
+	<Group name="grpDatacard">
 		<Message id="ttitle">
 			<Text LangIsoCode="eng">DesInventar</Text>
 			<Text LangIsoCode="spa">DesInventar</Text>
@@ -1662,6 +1662,54 @@
 			<Text LangIsoCode="spa">Ficha encontrada y cargada</Text>
 			<Text LangIsoCode="por">Registro encontrado e carregado</Text>
 			<Text LangIsoCode="fre">Record trouvé et chargé</Text>
+		</Message>
+		<Message id="msgDatacard_DisasterBeginTime">
+			<Text LangIsoCode="eng">Start date</Text>
+			<Text LangIsoCode="spa">Fecha Inicio</Text>
+			<Text LangIsoCode="por">Data de início</Text>
+			<Text LangIsoCode="fre">Date de début</Text>
+		</Message>
+		<Message id="msgDatacard_DisasterSource">
+			<Text LangIsoCode="eng">Sources</Text>
+			<Text LangIsoCode="spa">Fuentes</Text>
+			<Text LangIsoCode="por">Fontes></Text>
+			<Text LangIsoCode="fre">Sources</Text>
+		</Message>
+		<Message id="msgDatacard_RecordStatus">
+			<Text LangIsoCode="eng">Status</Text>
+			<Text LangIsoCode="spa">Estado</Text>
+			<Text LangIsoCode="por">Estado</Text>
+			<Text LangIsoCode="fre">État</Text>
+		</Message>
+		<Message id="msgDatacard_DisasterSerial">
+			<Text LangIsoCode="eng">Serial</Text>
+			<Text LangIsoCode="spa">Serial</Text>
+			<Text LangIsoCode="por">Serial</Text>
+			<Text LangIsoCode="fre">Série</Text>
+		</Message>
+		<Message id="msgDatacard_DisasterGeographyId">
+			<Text LangIsoCode="eng">Geography</Text>
+			<Text LangIsoCode="spa">Geografía</Text>
+			<Text LangIsoCode="por">Geografia</Text>
+			<Text LangIsoCode="fre">Géographie</Text>
+		</Message>
+		<Message id="msgDatacard_DisasterSiteNotes">
+			<Text LangIsoCode="eng">Place</Text>
+			<Text LangIsoCode="spa">Sitio</Text>
+			<Text LangIsoCode="por">Local</Text>
+			<Text LangIsoCode="fre">Lieu</Text>
+		</Message>
+		<Message id="msgDatacard_DisasterLatitude">
+			<Text LangIsoCode="eng">Latitude</Text>
+			<Text LangIsoCode="spa">Latitud</Text>
+			<Text LangIsoCode="por">Latitude</Text>
+			<Text LangIsoCode="fre">Latitude</Text>
+		</Message>
+		<Message id="msgDatacard_DisasterLongitude">
+			<Text LangIsoCode="eng">Longitude</Text>
+			<Text LangIsoCode="spa">Longitud</Text>
+			<Text LangIsoCode="por">Longitude</Text>
+			<Text LangIsoCode="fre">Longitude</Text>
 		</Message>
 	</Group>
 	<Group name="grpMainStrings">

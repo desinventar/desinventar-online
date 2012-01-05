@@ -34,17 +34,14 @@
 						if (parseInt(data.Status) > 0)
 						{
 							jQuery('body').data('GeolevelsList', data.GeolevelsList);
-							var g = jQuery('body').data('GeolevelsList');
-							jQuery.each(g, function(index, value) {
-								console.log(index + ' ' + value.GeoLevelName);
-							});
+
+							onReadyCommon();
+							onReadyDatacards();
+							jQuery('body').trigger('cmdDatacardShow');
 						}
 					},
 					'json'
 				);
-				onReadyCommon();
-				onReadyDatacards();
-				//jQuery('body').trigger('cmdDatabaseEventsShow');
 			});
 		</script>
 	</head>
