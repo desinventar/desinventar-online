@@ -415,12 +415,15 @@ function showtip(tip, clr)
 	try
 	{
 		var d = parent.document.getElementById('_DIDesc');
-		d.style.backgroundColor = clr;
-		d.value = tip;
+		if (d != null)
+		{
+			d.style.backgroundColor = clr;
+			d.value = tip;
+		}
 	}
 	catch(err)
 	{
-	};
+	}
 }
 
 // Display Geography in form and search; k=geoid, l=0, desc='', opc=''

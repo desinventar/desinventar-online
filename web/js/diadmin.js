@@ -643,8 +643,11 @@
 	function showtip(tip)
 	{
 		var d = parent.document.getElementById('_DIDesc');
-		d.style.backgroundColor = '#ffffff';
-		d.value = tip;
+		if (d != null)
+		{
+			d.style.backgroundColor = '#ffffff';
+			d.value = tip;
+		}
 	}
 	
 	// Effects options
