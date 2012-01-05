@@ -248,6 +248,8 @@ class Query //extends PDO
 						{
 							$data[$CauseId][0] = $data1[$CauseId][0]; // Name
 							$data[$CauseId][1] = $data1[$CauseId][1]; // Desc
+							$data[$CauseId]['CauseName'] = $data1[$CauseId]['CauseName']; // Name
+							$data[$CauseId]['CauseDesc'] = $data1[$CauseId]['CauseDesc']; // Desc
 						}
 					}
 				} //foreach
@@ -292,8 +294,10 @@ class Query //extends PDO
 		{
 			$data[$row['CauseId']] = array(0 => $row['CauseName'],
 			                               1 => $row['CauseDesc'],
+			                               'CauseName'       => $row['CauseName'],
+			                               'CauseDesc'       => $row['CauseDesc'],
 			                               'CausePredefined' => $row['CausePredefined'],
-			                               'RecordUpdate' => $row['RecordUpdate']);
+			                               'RecordUpdate'    => $row['RecordUpdate']);
 		}
 		return $data;
 	}
@@ -365,6 +369,9 @@ class Query //extends PDO
 			$data[$row['CauseId']] = array(0 => $row['CauseName'], 
 			                               1 => str2js($row['CauseDesc']),
 			                               2 => $row['CauseActive'],
+			                               'CauseName' => $row['CauseName'],
+			                               'CauseDesc' => $row['CauseDesc'],
+			                               'CauseActive' => $row['CauseActive'],
 			                               'CausePredefined' => $row['CausePredefined'],
 			                               'RecordUpdate' => $row['RecordUpdate']);
 		} //foreach

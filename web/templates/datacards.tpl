@@ -369,8 +369,8 @@
 						<tr valign="top">
 							<td title="{-$LabelsEvent.EventName[1]-}">
 								{-#msgDatacard_EventName#-}<b class="required">*</b><br />
-								<select id="EventId" name="EventId" style='width: 180px;' tabindex="{-$MyTabIndex-}"
-									class="line" onFocus="showtip('{-$LabelsEvent.EventName[2]-}', 'lightblue')">
+								<select class="EventId line" id="EventId" name="EventId"  tabindex="{-$MyTabIndex-}"
+									onFocus="showtip('{-$LabelsEvent.EventName[2]-}', 'lightblue')">
 									<option value=""></option>
 									{-foreach name=eln key=key item=item from=$EventList-}
 										<option value="{-$key-}" onKeyPress="showtip('{-$item[1]-}', 'lightblue')" 
@@ -413,8 +413,8 @@
 						<tr>
 							<td title="{-$LabelsCause.CauseName[1]-}">
 								{-#msgDatacard_CauseName#-}<b class="required">*</b><br />
-								<select id="CauseId" name="CauseId" style='width: 180px;' class="line" 
-									tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsCause.CauseName[2]-}', '#ffffc0')">
+								<select class="CauseId line" id="CauseId" name="CauseId" tabindex="{-$MyTabIndex-}"
+									onFocus="showtip('{-$LabelsCause.CauseName[2]-}', '#ffffc0')">
 									<option value=""></option>
 									{-foreach name=cln key=key item=item from=$CauseList-}
 										<option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}', '#ffffc0')">{-$item[0]-}</option>

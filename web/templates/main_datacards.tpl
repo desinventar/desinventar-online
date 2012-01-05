@@ -34,6 +34,8 @@
 						if (parseInt(data.Status) > 0)
 						{
 							jQuery('body').data('GeolevelsList', data.GeolevelsList);
+							jQuery('body').data('EventList', data.EventList);
+							jQuery('body').data('CauseList', data.CauseList);
 
 							onReadyCommon();
 							onReadyDatacards();

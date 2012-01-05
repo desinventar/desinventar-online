@@ -292,3 +292,9 @@ a:hover	{	color:#00008b; }
 	width:180px;
 	background-color:#eee;
 }
+#divDatacard .EventId {
+	width:180px;
+}
+#divDatacard .CauseId {
+	width:180px;
+}
