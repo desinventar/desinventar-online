@@ -262,20 +262,11 @@ class Graphic
 				$this->g->xaxis->SetTitlemargin($XAxisTitleMargin);
 				$this->g->xaxis->title->SetFont(FF_ARIAL, FS_NORMAL);
 				$this->g->xaxis->SetTickLabels($XAxisLabels);
-				$this->g->xaxis->SetFont(FF_COURIER,FS_NORMAL, 8);
+				$this->g->xaxis->SetFont(FF_ARIAL,FS_NORMAL, 8);
 				$this->g->xaxis->SetLabelAngle(90);
-				// Use a cuadratic equation to get this margin according to maxlength of Labels
-				$MaxLen = 1;
-				foreach($XAxisLabels as $Label)
-				{
-					if (strlen($Label) > $MaxLen)
-					{
-						$MaxLen = strlen($Label);
-					}
-				}
-				$XAxisLabelMargin = ceil( (0.0031 * $MaxLen * $MaxLen) + (0.5396 * $MaxLen) + 3.907);
+				$XAxisLabelMargin = $this->getTextArrayMaxWidth($XAxisLabels);
 				$this->g->xaxis->SetLabelMargin($XAxisLabelMargin);
-				$this->g->xaxis->SetLabelAlign('center','top');
+				$this->g->xaxis->SetLabelAlign('center','bottom');
 				// 2009-02-03 (jhcaiced) Try to avoid overlapping labels in XAxis
 				// by calculating the interval of the labels
 				$iNumPoints = count($val);		
@@ -837,20 +828,30 @@ class Graphic
 
 	public function getSeriesMaxLen($DataKey)
 	{	
-		//$myFont = 'arial.ttf';
-		$myFont = 'cour.ttf';
-		$MaxLen = 0;
-		foreach($this->data[$DataKey] as $AxisValue)
+		$MaxWidth = $this->getTextArrayMaxWidth($this->data[$DataKey]);
+		return $MaxWidth;
+	}
+
+	public function getTextArrayMaxWidth($TextArray)
+	{
+		$MaxWidth = 0;
+		foreach($TextArray as $Text)
 		{
-			//$Len = strlen($AxisValue);
-			$bbox = imagettfbbox(10, $Angle, $myFont, $AxisValue);
-			$Len = $bbox[2] - $bbox[0];
-			if ($Len > $MaxLen)
+			$Width = $this->getTextWidth($Text);
+			if ($Width > $MaxWidth)
 			{
-				$MaxLen = $Len;
+				$MaxWidth = $Width;
 			}
 		} //foreach
-		return $MaxLen;
+		return $MaxWidth;
+	}
+	
+	public function getTextWidth($Text)
+	{
+		$myFont = 'arial.ttf';
+		$bbox = imagettfbbox(10, 0, $myFont, $Text);
+		$Width = $bbox[2] - $bbox[0];
+		return $Width;
 	}
 } // end class
 
