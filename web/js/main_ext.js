@@ -579,13 +579,18 @@ function doDialogsCreate()
 		closeAction:'hide', plain: true, animCollapse: false, constrainHeader: true,
 		items: new Ext.Panel({contentEl: 'grp-cfg', autoScroll: true }),
 		buttons: [
-			{text: jQuery('#msgViewGraphButtonClear').text(),
-				handler: function() {
+			{
+				text: jQuery('#msgViewGraphButtonClear').text(),
+				handler: function()
+				{
 					$('CG').reset();
+					jQuery('#prmGraphTypeHistogram').change();
 				}
 			},
-			{text: jQuery('#msgViewGraphButtonSend').text(),
-				handler: function() {
+			{
+				text: jQuery('#msgViewGraphButtonSend').text(),
+				handler: function()
+				{
 					sendGraphic('result');
 					$('DCRes').value = "G";
 					Ext.getCmp('wndViewGraphParams').hide();
@@ -593,8 +598,10 @@ function doDialogsCreate()
 					$('bprint').style.visibility = 'visible';
 				}
 			},
-			{text: jQuery('#msgViewGraphButtonClose').text(),
-				handler: function() {
+			{
+				text: jQuery('#msgViewGraphButtonClose').text(),
+				handler: function()
+				{
 					Ext.getCmp('wndViewGraphParams').hide();
 				}
 			}
