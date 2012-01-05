@@ -385,8 +385,8 @@ function onReadyDatacards()
 function doDatacardShow()
 {
 	//GeoLevel
-	jQuery('.tblGeography tr:gt(0)').remove();
-	jQuery('.tblGeography tr:first').hide();
+	jQuery('#divDatacard .tblGeography tr:gt(0)').remove();
+	jQuery('#divDatacard .tblGeography tr:first').hide();
 	var GeolevelsList = jQuery('body').data('GeolevelsList');
 	jQuery.each(GeolevelsList, function(index, value) {
 		var clonedRow = jQuery('.tblGeography tr:last').clone().show();
@@ -394,7 +394,19 @@ function doDatacardShow()
 		jQuery('.GeoLevelName', clonedRow).text(value.GeoLevelName);
 		jQuery('select', clonedRow).attr('id', 'GeoLevel' + index).attr('level', index);
 		jQuery('.tblGeography').append(clonedRow);
-	});	
+	});
+
+	jQuery('#divDatacard .EventId').empty();
+	jQuery('#divDatacard .EventId').append(jQuery('<option>', { value : '' }).text(''));
+	jQuery.each(jQuery('body').data('EventList'), function(index, value) {
+		jQuery('#divDatacard .EventId').append(jQuery('<option>', { value : index }).text(value.EventName));
+	});
+
+	jQuery('#divDatacard .CauseId').empty();
+	jQuery('#divDatacard .CauseId').append(jQuery('<option>', { value : '' }).text(''));
+	jQuery.each(jQuery('body').data('CauseList'), function(index, value) {
+		jQuery('#divDatacard .CauseId').append(jQuery('<option>', { value : index }).text(value.CauseName));
+	});
 } //doDatacardShow();
 
 function displayDatacardStatusMsg(msgId)

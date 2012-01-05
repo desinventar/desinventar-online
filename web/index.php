@@ -267,6 +267,11 @@ switch ($cmd)
 			$r = new DIRegion($us, $RegionId);
 			$GeolevelsList = $r->getGeolevelList();
 			$answer['GeolevelsList'] = $GeolevelsList;
+			$EventList     = $us->q->loadEvents(null, 'active', $lg);
+			$answer['EventList'] = $EventList;
+			$CauseList     = $us->q->loadCauses(null, 'active', $lg);
+			fb($CauseList);
+			$answer['CauseList'] = $CauseList;
 		}
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
