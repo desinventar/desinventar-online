@@ -368,7 +368,7 @@
 					<table class="grid">
 						<tr valign="top">
 							<td title="{-$LabelsEvent.EventName[1]-}">
-								{-$LabelsEvent.EventName[0]-}<b class="required">*</b><br />
+								{-#msgDatacard_EventName#-}<b class="required">*</b><br />
 								<select id="EventId" name="EventId" style='width: 180px;' tabindex="{-$MyTabIndex-}"
 									class="line" onFocus="showtip('{-$LabelsEvent.EventName[2]-}', 'lightblue')">
 									<option value=""></option>
@@ -380,19 +380,19 @@
 								{-counter-}
 							</td>
 							<td title="{-$LabelsEvent.EventMagnitude[1]-}">
-								{-$LabelsEvent.EventMagnitude[0]-}<br />
+								{-#msgDatacard_EventMagnitude#-}<br />
 								<input id="EventMagnitude" name="EventMagnitude" type="text" size="5" 
 									class="line inputText" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsEvent.EventMagnitude[2]-}', 'lightblue')" />
 								{-counter-}
 							</td>
 							<td title="{-$LabelsEvent.EventDuration[1]-}">
-								{-$LabelsEvent.EventDuration[0]-}<br />
+								{-#msgDatacard_EventDuration#-}<br />
 								<input id="EventDuration" name="EventDuration" type="text" size="5" maxlength="8"
 									class="line inputInteger" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsEvent.EventDuration[2]-}', 'lightblue')" />
 								{-counter-}
 							</td>
 							<td title="{-$LabelsEvent.EventNotes[1]-}">
-								{-$LabelsEvent.EventNotes[0]-}<br />
+								{-#msgDatacard_EventNotes#-}<br />
 								<input type="text" id="EventNotes" name="EventNotes" style="width: 350px;" 
 									class="line inputText" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsEvent.EventNotes[2]-}', 'lightblue')" />
 								{-counter-}
@@ -412,7 +412,7 @@
 					<table class="grid">
 						<tr>
 							<td title="{-$LabelsCause.CauseName[1]-}">
-								{-$LabelsCause.CauseName[0]-}<b class="required">*</b><br />
+								{-#msgDatacard_CauseName#-}<b class="required">*</b><br />
 								<select id="CauseId" name="CauseId" style='width: 180px;' class="line" 
 									tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsCause.CauseName[2]-}', '#ffffc0')">
 									<option value=""></option>
@@ -423,7 +423,7 @@
 								{-counter-}
 							</td>
 							<td title="{-$LabelsCause.CauseNotes[1]-}">
-								{-$LabelsCause.CauseNotes[0]-}<br />
+								{-#msgDatacard_CauseNotes#-}<br />
 								<input type="text" id="CauseNotes" name="CauseNotes" style="width: 450px;" 
 									class="line inputText" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsCause.CauseNotes[2]-}', '#ffffc0')" />
 								{-counter-}
