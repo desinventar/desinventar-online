@@ -96,7 +96,7 @@ class Graphic
 			{
 				$val[$kk] = $this->completeTimeSeries($opc, $ii, $prmSession);
 			} //foreach
-			$lbl = array_keys($val[$kk]);
+			$XAxisLabels = array_keys($val[$kk]);
 			$acol = count(array_unique($this->data[$sY2AxisLabel]));
 		}
 		else
@@ -131,7 +131,7 @@ class Graphic
 				arsort($val, SORT_NUMERIC);
 				reset($val);
 			}
-			$lbl = array_keys($val);
+			$XAxisLabels = array_keys($val);
 		}
 		// Cummulative Graph : Add Values in Graph
 		if ($gType == 'TEMPO')
@@ -171,7 +171,6 @@ class Graphic
 			} //if
 		} //if
 		// Choose presentation options, borders, intervals
-		$itv = 1;				// no interval
 		$ImgMarginLeft   = 50;
 		$ImgMarginTop    = 30;
 		$ImgMarginRight  = 20;
@@ -257,13 +256,36 @@ class Graphic
 			{
 				$this->g->SetScale($opc['prmGraph']['Scale'][0]); // textint, textlog
 				$this->g->xgrid->Show(true,true);
+
+				// Horizontal XAxis Setup
 				$this->g->xaxis->SetTitle($sXAxisLabel, 'middle');
 				$this->g->xaxis->SetTitlemargin($XAxisTitleMargin);
 				$this->g->xaxis->title->SetFont(FF_ARIAL, FS_NORMAL);
-				$this->g->xaxis->SetTickLabels($lbl);
-				$this->g->xaxis->SetFont(FF_ARIAL,FS_NORMAL, 8);
-				$this->g->xaxis->SetTextLabelInterval($itv);
+				$this->g->xaxis->SetTickLabels($XAxisLabels);
+				$this->g->xaxis->SetFont(FF_COURIER,FS_NORMAL, 8);
 				$this->g->xaxis->SetLabelAngle(90);
+				// Use a cuadratic equation to get this margin according to maxlength of Labels
+				$MaxLen = 1;
+				foreach($XAxisLabels as $Label)
+				{
+					if (strlen($Label) > $MaxLen)
+					{
+						$MaxLen = strlen($Label);
+					}
+				}
+				$XAxisLabelMargin = ceil( (0.0031 * $MaxLen * $MaxLen) + (0.5396 * $MaxLen) + 3.907);
+				$this->g->xaxis->SetLabelMargin($XAxisLabelMargin);
+				$this->g->xaxis->SetLabelAlign('center','top');
+				// 2009-02-03 (jhcaiced) Try to avoid overlapping labels in XAxis
+				// by calculating the interval of the labels
+				$iNumPoints = count($val);		
+				$iInterval = ($iNumPoints * 10) / $wx;
+				if ($iInterval < 1)
+				{
+					$iInterval = 1;
+				}
+				$this->g->xaxis->SetTextLabelInterval($iInterval);
+
 				$this->g->ygrid->Show(true,true);
 				$this->g->yaxis->SetTitle($sY1AxisLabel, 'middle');
 				$this->g->yaxis->SetTitlemargin($Y1AxisTitleMargin);
@@ -289,18 +311,6 @@ class Graphic
 					}
 		        }
 			} // if G+Scale
-		}
-		// 2009-02-03 (jhcaiced) Try to avoid overlapping labels in XAxis
-		// by calculating the interval of the labels
-		$iNumPoints = count($val);		
-		$iInterval = ($iNumPoints * 14) / $wx;
-		if ($iInterval < 1)
-		{
-			$iInterval = 1;
-		}
-		if ($gType != 'PIE')
-		{
-			$this->g->xaxis->SetTextLabelInterval($iInterval);
 		}
 		// Other options graphic
 		$this->g->img->SetMargin($ImgMarginLeft,$ImgMarginRight,$ImgMarginTop,$ImgMarginBottom);
@@ -827,7 +837,8 @@ class Graphic
 
 	public function getSeriesMaxLen($DataKey)
 	{	
-		$myFont = 'arial.ttf';
+		//$myFont = 'arial.ttf';
+		$myFont = 'cour.ttf';
 		$MaxLen = 0;
 		foreach($this->data[$DataKey] as $AxisValue)
 		{
