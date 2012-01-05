@@ -23,6 +23,25 @@
 						return frag;
 					};
 				}
+				jQuery.post(
+					jQuery('#desinventarURL').val() + '/',
+					{
+						cmd      : 'cmdDatabaseLoadData',
+						RegionId : jQuery('#desinventarRegionId').val()
+					},
+					function(data)
+					{
+						if (parseInt(data.Status) > 0)
+						{
+							jQuery('body').data('GeolevelsList', data.GeolevelsList);
+							var g = jQuery('body').data('GeolevelsList');
+							jQuery.each(g, function(index, value) {
+								console.log(index + ' ' + value.GeoLevelName);
+							});
+						}
+					},
+					'json'
+				);
 				onReadyCommon();
 				onReadyDatacards();
 				//jQuery('body').trigger('cmdDatabaseEventsShow');
