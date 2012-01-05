@@ -270,8 +270,9 @@ switch ($cmd)
 			$EventList     = $us->q->loadEvents(null, 'active', $lg);
 			$answer['EventList'] = $EventList;
 			$CauseList     = $us->q->loadCauses(null, 'active', $lg);
-			fb($CauseList);
 			$answer['CauseList'] = $CauseList;
+			$RecordCount = $us->getDisasterCount();
+			$answer['RecordCount'] = $RecordCount;
 		}
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');

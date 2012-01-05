@@ -214,16 +214,22 @@ function doMainMenuHandler(item)
 			jQuery.post(
 				jQuery('#desinventarURL').val() + '/',
 				{
-					cmd      : 'getRegionRecordCount',
+					cmd      : 'cmdDatabaseLoadData',
 					RegionId : jQuery('#desinventarRegionId').val()
 				},
 				function(data)
 				{
+					jQuery('body').data('GeolevelsList', data.GeolevelsList);
+					jQuery('body').data('EventList', data.EventList);
+					jQuery('body').data('CauseList', data.CauseList);
+					jQuery('body').data('RecordCount', data.RecordCount);
+
 					jQuery('#cardsRecordNumber').val(0);
 					jQuery('#cardsRecordCount').val(data.RecordCount);
 					$('DICard').reset();
 					jQuery('#divDatacardWindow').trigger('display');
 					doDatacardNavButtonsEnable();
+					jQuery('body').trigger('doDatacardShow');
 					Ext.getCmp('wndDatacard').show();
 				},
 				'json'
