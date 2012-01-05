@@ -255,6 +255,22 @@ switch ($cmd)
 		$t->assign('ctl_admregmess', true);
 		$t->display('main_region.tpl');
 	break;
+	case 'cmdDatabaseLoadData':
+		$answer = array();
+		$iReturn = ERR_NO_ERROR;
+		if ($RegionId == '')
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($iReturn > 0)
+		{
+			$r = new DIRegion($us, $RegionId);
+			$GeolevelsList = $r->getGeolevelList();
+			$answer['GeolevelsList'] = $GeolevelsList;
+		}
+		$answer['Status'] = $iReturn;
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
+	break;
 	case 'cmdGeolevels':
 		$t->display('main_database_geolevels.tpl');
 	break;
