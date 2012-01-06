@@ -384,7 +384,7 @@ function doDatacardShow()
 		var clonedRow = jQuery('.tblGeography tr:last').clone().show();
 		jQuery('.GeoLevelId', clonedRow).text(index);
 		jQuery('.GeoLevelName', clonedRow).text(value.GeoLevelName);
-		jQuery('select', clonedRow).attr('id', 'GeoLevel' + index).attr('level', index);
+		jQuery('select', clonedRow).attr('id', 'GeoLevel' + index).attr('level', index).data('GeoLevelId', index);
 		jQuery('.tblGeography').append(clonedRow);
 	});
 
@@ -1125,10 +1125,14 @@ function setDICard(prmRegionId, arr)
 	jQuery(myForm).find('#PrevDisasterSerial').val(jQuery(myForm).find('#DisasterSerial').val());
 
 	//Set GeographyItem info into hidden fields
+	jQuery('#divDatacard .tblGeography .GeographyId').empty();
 	jQuery(myForm).find('.GeographyItemInfo').text('');
 	jQuery(arr['GeographyItems']).each(function(key, value) {
 		jQuery(myForm).find('#GeographyItemId' + key).text(value['GeographyId']);
 		jQuery(myForm).find('#GeographyItemValue' + key).text(value['GeographyName']);
+		var mySelect = jQuery('#divDatacard .tblGeography #GeoLevel' + key);
+		mySelect.empty();
+		mySelect.append(jQuery('<option>', { value : value.GeographyId }).text(value.GeographyName));
 	});
 	
 	// Load Select Boxes with Geography Info
