@@ -6,7 +6,7 @@
 function onReadyData() {
 	jQuery('.linkGridGotoCard').click(function() {
 		var DisasterId = jQuery(this).attr('DisasterId');
-		jQuery('#divDatacardWindow').trigger('display');
+		jQuery('body').trigger('cmdDatacardShow');
 		jQuery('#cardsRecordSource').val('data');
 		jQuery('#cardsRecordCount').val(jQuery('#prmDataPageRecords').val());
 		jQuery('#cardsRecordNumber').val(jQuery(this).attr('rowindex'));
