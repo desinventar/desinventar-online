@@ -642,7 +642,7 @@
 	
 	function showtip(tip)
 	{
-		var d = parent.document.getElementById('_DIDesc');
+		var d = parent.document.getElementById('txtHelpArea');
 		if (d != null)
 		{
 			d.style.backgroundColor = '#ffffff';
