@@ -257,20 +257,6 @@
 		$(a_field_id).focus();
 	}
 
-	function checkForm(prmForm, prmFieldList, errmsg)
-	{
-		var bReturn = true;
-		jQuery.each(prmFieldList, function(index, value) {
-			var selector = '#' + prmForm + ' #' + value;
-			if (jQuery(selector).val().length < 1)
-			{
-				jQuery(selector).highlight();
-				bReturn = false;
-			} //if
-		}); //.each
-		return bReturn;
-	} //function
-
 	function getForm(fobj)
 	{
 		var str = '';
