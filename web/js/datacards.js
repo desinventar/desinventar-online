@@ -735,8 +735,8 @@ function doDatacardEdit()
 	RegionId = jQuery('#desinventarRegionId').val();
 	jQuery.post(jQuery('#desinventarURL').val() + '/cards.php',
 		{
-			'cmd'       : 'chklocked',
-			'r'         : jQuery('#desinventarRegionId').val(),
+			'cmd'        : 'chklocked',
+			'r'          : jQuery('#desinventarRegionId').val(),
 			'DisasterId' : jQuery('#DisasterId').val()
 		},
 		function(data)
@@ -759,7 +759,7 @@ function doDatacardEdit()
 		},
 		'json'
 	);
-}
+} //doDatacardEdit()
 
 function doDatacardSave()
 {
