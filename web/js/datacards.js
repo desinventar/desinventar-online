@@ -383,11 +383,11 @@ function doDatacardShow()
 		var clonedRow = jQuery('#divDatacard .tblGeography tr:last').clone().show();
 		jQuery('.GeoLevelId', clonedRow).text(index);
 		jQuery('.GeoLevelName', clonedRow).text(value.GeoLevelName);
-		jQuery('select', clonedRow).attr('id', 'GeoLevel' + index).attr('level', index).attr('GeographyLevel', index);
+		jQuery('select', clonedRow).attr('id', 'GeoLevel' + index).attr('level', index).data('GeographyLevel', index);
 		jQuery('.tblGeography').append(clonedRow);
 	});
 	
-	var FirstRow = jQuery('#divDatacard .tblGeography select[GeographyLevel=0]');
+	var FirstRow = jQuery('#divDatacard .tblGeography select:data("GeographyLevel=0")');
 	FirstRow.empty();
 	FirstRow.append(jQuery('<option>', { value : '' }).text(''));
 	jQuery.each(jQuery('body').data('GeographyList'), function(index, value) {
@@ -1131,7 +1131,7 @@ function setDICard(prmRegionId, arr)
 	jQuery(myForm).find('#PrevDisasterSerial').val(jQuery(myForm).find('#DisasterSerial').val());
 
 	//Set GeographyItem info into hidden fields
-	jQuery('#divDatacard .tblGeography .GeographyId').is('[data-GeographyLevelId>0]').empty();
+	jQuery('#divDatacard .tblGeography .GeographyId select:data("GeographyLevel>0")').empty();
 	jQuery(myForm).find('.GeographyItemInfo').text('');
 	jQuery(arr['GeographyItems']).each(function(key, value) {
 		jQuery(myForm).find('#GeographyItemId' + key).text(value['GeographyId']);
@@ -1143,13 +1143,12 @@ function setDICard(prmRegionId, arr)
 		}
 		else			
 		{
-			mySelect.empty();
 			mySelect.append(jQuery('<option>', { value : value.GeographyId }).text(value.GeographyName));
 		}
 	});
 	
 	// Load Select Boxes with Geography Info
-	jQuery(myForm).find('.GeoLevelSelect').trigger({type: 'loadGeographyItems', ReadOnly: true});
+	//jQuery(myForm).find('.GeoLevelSelect').trigger({type: 'loadGeographyItems', ReadOnly: true});
 	
 	// Enable Edit Button according to Role
 	if (jQuery('#desinventarUserRoleValue').val() >= 2)

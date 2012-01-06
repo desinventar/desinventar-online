@@ -8,6 +8,8 @@
 -->
 <script type="text/javascript" src="/jquery/dimensions/jquery.dimensions.min.js"></script>
 <script type="text/javascript" src="/jquery/tooltip/jquery.tooltip.min.js"></script>
+<script type="text/javascript" src="/jquery/jquery.stringQuery.js"></script>
+<script type="text/javascript" src="/jquery/jquery.dataSelector.js"></script>
 <script type="text/javascript">
 	jQuery.noConflict();
 </script>
