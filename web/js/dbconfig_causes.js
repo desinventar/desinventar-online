@@ -9,13 +9,13 @@ function onReadyDBConfigCauses()
 	jQuery('td:nth-child(1)','#tblCauseListUser,#tblCauseListPredef').hide();
 	jQuery('td:nth-child(2)','#tblCauseListUser,#tblCauseListPredef').hide();
 
-	jQuery('#tblCauseListUser,#tblCauseListPredef').delegate('tr','mouseover', function(event) {
-		jQuery(this).addClass('highlight');
-	}).delegate('tr', 'mouseout', function(event) {
+	jQuery('#tblCauseListUser,#tblCauseListPredef').on('mouseover', 'tr', function(event) {
+			jQuery(this).addClass('highlight');
+	}).on('mouseout', 'tr', function(event) {
 		jQuery(this).removeClass('highlight');
 	});
 
-	jQuery('#tblCauseListUser,#tblCauseListPredef').delegate('tr','click', function(event) {
+	jQuery('#tblCauseListUser,#tblCauseListPredef').on('click', 'tr', function(event) {
 		jQuery('#causeaddsect').show();
 		jQuery('#frmCauseEdit #Id').val(jQuery('#Id',this).text());
 		jQuery('#frmCauseEdit #Name').val(jQuery('#Name',this).text());

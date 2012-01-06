@@ -12,7 +12,7 @@ function onReadyDatabaseEvents()
 
 	jQuery('.clsDatabaseEventsStatus').hide();
 
-	jQuery('#tbodyDatabaseEvents_EventListCustom,#tbodyDatabaseEvents_EventListDefault').delegate('tr','click', function(event) {
+	jQuery('#tbodyDatabaseEvents_EventListCustom,#tbodyDatabaseEvents_EventListDefault').on('click', 'tr', function(event) {
 		if (! jQuery('#divDatabaseEvents_Edit').is(':visible'))
 		{
 			jQuery('#fldDatabaseEvents_EventId').val(jQuery('.EventId',this).text());
