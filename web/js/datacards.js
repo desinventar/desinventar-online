@@ -891,7 +891,7 @@ function doDatacardSave()
 			);
 		}
 	}
-}
+} //doDatacardSave()
 
 function doDatacardCancel()
 {
@@ -933,7 +933,7 @@ function doDatacardCancel()
 		doDatacardNavButtonsEnable();
 		jQuery('#DICard #Status').val('');
 	}
-}
+} //doDatacardCancel()
 
 function doDatacardGotoFirst()
 {
@@ -953,7 +953,7 @@ function doDatacardGotoFirst()
 	{
 		disenabutton($('btnDatacardEdit'), false);
 	}
-}
+} //doDatacardGotoFirst()
 
 function doDatacardGotoLast()
 {
@@ -973,7 +973,7 @@ function doDatacardGotoLast()
 	{
 		disenabutton($('btnDatacardEdit'), false);
 	}
-}
+} //doDatacardGotoLast()
 
 function doDatacardGotoPrev()
 {
@@ -1001,7 +1001,7 @@ function doDatacardGotoPrev()
 	{
 		disenabutton($('btnDatacardEdit'), false);
 	}
-}
+} //doDatacardGotoPrev()
 
 function doDatacardGotoNext()
 {
@@ -1029,7 +1029,7 @@ function doDatacardGotoNext()
 	{
 		disenabutton($('btnDatacardEdit'), false);
 	}
-}
+} //doDatacardGotoNext()
 
 function doDatacardSuggestSerial()
 {
@@ -1037,8 +1037,7 @@ function doDatacardSuggestSerial()
 	{
 		requestDatacard('getNextSerial', jQuery('#DisasterBeginTime0').val());
 	}
-}
-
+} //doDatacardSuggestSerial()
 
 // SET DATACARD FORM
 function setElementValue(formElement, value)
@@ -1069,7 +1068,7 @@ function setElementValue(formElement, value)
 			formElement.value = value; 
 		break;
 	}
-}
+} //setElementValue()
 
 function setDICardFromId(prmRegionId, prmDisasterId)
 {
@@ -1098,7 +1097,7 @@ function setDICardFromId(prmRegionId, prmDisasterId)
 		'json'
 	);
 	return false;
-}
+} //setDICardFromId()
 
 function setDICard(prmRegionId, arr)
 {
@@ -1143,4 +1142,4 @@ function setDICard(prmRegionId, arr)
 	{
 		disenabutton($('btnDatacardEdit'), false);
 	}
-}
+} //setDICard
