@@ -111,7 +111,7 @@
 								<input id="DisasterSerial" name="DisasterSerial" type="text" size="15" 
 									class="line inputAlphaNumber" tabindex="{-$MyTabIndex-}" maxlength="50" onFocus="showtip('{-$LabelsDisaster.DisasterSerial[2]-}', '#d4baf6')" />
 								{-counter-}
-								<a href="#" id="linkDatacardSuggestSerial"><img src="{-$desinventarURL-}/images/reload.jpg" border="0" />
+								<a href="#" id="linkDatacardSuggestSerial"><img src="{-$desinventarURL-}/images/reload.jpg" alt="" />
 								</a>
 							</td>
 						</tr>
@@ -151,7 +151,7 @@
 													</td>
 													<td>
 														<select class="GeographyId GeoLevelSelect line" 
-															id="GeoLevel{-$key-}" level="{-$key-}" tabindex="{-$MyTabIndex-}"
+															id="GeoLevel" level="" tabindex="{-$MyTabIndex-}"
 															onFocus="showtip('{-$LabelsDisaster.GeographyId[2]-}', '#d4baf6')" disabled>
 															<option></option>
 														</select>
