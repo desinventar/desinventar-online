@@ -147,12 +147,10 @@
 											<table class="tblGeography">
 												<tr>
 													<td>
-														<span class="GeoLevelId">{-$GeoLevel.GeoLevelId-}</span> - <span class="GeoLevelName">{-$GeoLevel.GeoLevelName-}</span><br />
+														<span class="GeoLevelId"></span> - <span class="GeoLevelName"></span><br />
 													</td>
 													<td>
-														<select class="GeographyId GeoLevelSelect line" 
-															id="GeoLevel" level="" tabindex="{-$MyTabIndex-}"
-															onFocus="showtip('{-$LabelsDisaster.GeographyId[2]-}', '#d4baf6')" disabled>
+														<select class="GeographyId GeoLevelSelect line" id="GeoLevel" level="" tabindex="{-$MyTabIndex-}" disabled>
 															<option></option>
 														</select>
 													</td>
