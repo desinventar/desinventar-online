@@ -6,7 +6,6 @@
 function onReadyDatacards()
 {
 	jQuery('#divDatacardWindow').hide();
-	
 
 	// Limit length of text area fields using a maxlength attribute...	
 	jQuery('#DICard textarea').keyup(function() {
@@ -381,19 +380,18 @@ function doDatacardShow()
 	jQuery('#divDatacard .tblGeography tr:first').hide();
 	var GeolevelsList = jQuery('body').data('GeolevelsList');
 	jQuery.each(GeolevelsList, function(index, value) {
-		var clonedRow = jQuery('.tblGeography tr:last').clone().show();
+		var clonedRow = jQuery('#divDatacard .tblGeography tr:last').clone().show();
 		jQuery('.GeoLevelId', clonedRow).text(index);
 		jQuery('.GeoLevelName', clonedRow).text(value.GeoLevelName);
-		jQuery('select', clonedRow).attr('id', 'GeoLevel' + index).attr('level', index).data('GeographyLevelId', index);
-		if (parseInt(index) == 0)
-		{
-			jQuery('select', clonedRow).empty();
-			jQuery('select', clonedRow).append(jQuery('<option>', { value : '' }).text(''));
-			jQuery.each(jQuery('body').data('GeographyList'), function(index, value) {
-				jQuery('select', clonedRow).append(jQuery('<option>', { value : index }).text(value.GeographyName));
-			});
-		}
+		jQuery('select', clonedRow).attr('id', 'GeoLevel' + index).attr('level', index).attr('GeographyLevel', index);
 		jQuery('.tblGeography').append(clonedRow);
+	});
+	
+	var FirstRow = jQuery('#divDatacard .tblGeography select[GeographyLevel=0]');
+	FirstRow.empty();
+	FirstRow.append(jQuery('<option>', { value : '' }).text(''));
+	jQuery.each(jQuery('body').data('GeographyList'), function(index, value) {
+		FirstRow.append(jQuery('<option>', { value : index }).text(value.GeographyName));
 	});
 
 	jQuery('#divDatacard .EventId').empty();
