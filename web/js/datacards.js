@@ -7,31 +7,6 @@ function onReadyDatacards()
 {
 	jQuery('#divDatacardWindow').hide();
 	
-	// Initialize controls in form when it is displayed
-	jQuery('#divDatacardWindow').on('display', function() {
-		// Reset buttons
-		doDatacardClear();
-		// Hide StatusMessages
-		displayDatacardStatusMsg('');
-		jQuery('#divDatacardStatusMsg').show();
-		// Hide window's parameters
-		jQuery('#divDatacardParameter').hide();
-		jQuery('#divRecordNavigationInfo').hide();
-		
-		DisableEnableForm($('DICard'), true);
-		changeOptions();
-
-		// Start with Basic Effects show
-		jQuery('#linkDatacardShowEffectsBasic').trigger('click');
-		
-		//Show Command Buttons only for Role>=USER
-		jQuery('.DatacardCmdButton').hide();
-		jQuery('#btnDatacardPrint').show();
-		if (parseInt(jQuery('#desinventarUserRoleValue').val()) >= 2) {
-			jQuery('.DatacardCmdButton').show();
-			displayDatacardStatusMsg('msgDatacardStartNew');
-		}
-	});
 
 	// Limit length of text area fields using a maxlength attribute...	
 	jQuery('#DICard textarea').keyup(function() {
@@ -424,6 +399,35 @@ function doDatacardShow()
 	jQuery.each(jQuery('body').data('CauseList'), function(index, value) {
 		jQuery('#divDatacard .CauseId').append(jQuery('<option>', { value : index }).text(value.CauseName).data('tooltip',value.CauseDesc));
 	});
+
+	jQuery('#divDatacard #cardsRecordNumber').val(0);
+	jQuery('#divDatacard #cardsRecordCount').val(jQuery('body').data('RecordCount'));
+
+	// Initialize controls in form when it is displayed
+	// Reset buttons
+	doDatacardClear();
+	// Hide StatusMessages
+	displayDatacardStatusMsg('');
+	jQuery('#divDatacardStatusMsg').show();
+	// Hide window's parameters
+	jQuery('#divDatacardParameter').hide();
+	jQuery('#divRecordNavigationInfo').hide();
+	
+	DisableEnableForm($('DICard'), true);
+	changeOptions();
+
+	// Start with Basic Effects show
+	jQuery('#linkDatacardShowEffectsBasic').trigger('click');
+	
+	//Show Command Buttons only for Role>=USER
+	jQuery('.DatacardCmdButton').hide();
+	jQuery('#btnDatacardPrint').show();
+	if (parseInt(jQuery('#desinventarUserRoleValue').val()) >= 2)
+	{
+		jQuery('.DatacardCmdButton').show();
+		displayDatacardStatusMsg('msgDatacardStartNew');
+	}
+	doDatacardNavButtonsEnable();
 } //doDatacardShow();
 
 function displayDatacardStatusMsg(msgId)

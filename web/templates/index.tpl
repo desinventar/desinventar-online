@@ -9,8 +9,6 @@
 	<!-- jQuery -->
 	{-include file="jquery.tpl"-}
 	<!-- ExtJS -->
-	<!-- Make sure prototype.js is loaded before ExtJS -->
-	<script type="text/javascript" src="{-$desinventarURL-}/external/prototype.js"></script>
 	{-include file="extjs.tpl"-}
 
 	<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/desinventar.css?version={-$jsversion-}" />

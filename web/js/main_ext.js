@@ -224,11 +224,6 @@ function doMainMenuHandler(item)
 					jQuery('body').data('CauseList', data.CauseList);
 					jQuery('body').data('RecordCount', data.RecordCount);
 
-					jQuery('#cardsRecordNumber').val(0);
-					jQuery('#cardsRecordCount').val(data.RecordCount);
-					$('DICard').reset();
-					jQuery('#divDatacardWindow').trigger('display');
-					doDatacardNavButtonsEnable();
 					jQuery('body').trigger('doDatacardShow');
 					Ext.getCmp('wndDatacard').show();
 				},
