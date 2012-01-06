@@ -273,6 +273,8 @@ switch ($cmd)
 			$answer['CauseList'] = $CauseList;
 			$RecordCount = $us->getDisasterCount();
 			$answer['RecordCount'] = $RecordCount;
+			$GeographyList = $us->getGeographyItemsByLevel(0, '');
+			$answer['GeographyList'] = $GeographyList;
 		}
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
@@ -1076,8 +1078,8 @@ switch ($cmd)
 					$t->assign('levmax', $us->q->getMaxGeoLev());
 					$t->assign('levname', $us->q->loadGeoLevById($lev));
 					$t->assign('geol', $us->q->loadGeography($lev));
-					$gItems = $us->getGeographyItemsByLevel(0, '');
-					$t->assign('GeoLevelItems', $gItems);
+					$GeoLevelItems = $us->getGeographyItemsByLevel(0, '');
+					$t->assign('GeoLevelItems', $GeoLevelItems);
 					$t->assign('EventList', $us->q->loadEvents(null, 'active', $lg));
 					$t->assign('CauseList', $us->q->loadCauses(null, 'active', $lg));
 					$EEFieldList = $us->q->getEEFieldList('True');

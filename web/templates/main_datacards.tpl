@@ -37,6 +37,7 @@
 							jQuery('body').data('EventList', data.EventList);
 							jQuery('body').data('CauseList', data.CauseList);
 							jQuery('body').data('RecordCount', data.RecordCount);
+							jQuery('body').data('GeographyList', data.GeographyList);
 
 							onReadyCommon();
 							onReadyDatacards();
