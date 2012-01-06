@@ -1195,30 +1195,36 @@ class UserSession {
 	}
 	
 	// Return an array with the subcomponents of a GeographyId item...
-	function getGeographyItemsById($prmGeographyId) {
+	function getGeographyItemsById($prmGeographyId)
+	{
 		$gItems = array();
-		for($iLevel = 0; $iLevel < strlen($prmGeographyId)/5; $iLevel++) {
+		for($iLevel = 0; $iLevel < strlen($prmGeographyId)/5; $iLevel++)
+		{
 			$gId = substr($prmGeographyId, 0, ($iLevel+1)*5);
 			$sQuery = 'SELECT GeographyId, GeographyName FROM Geography WHERE GeographyId="' . $gId . '"';
-			foreach($this->q->dreg->query($sQuery) as $row) {
+			foreach($this->q->dreg->query($sQuery) as $row)
+			{
 				$gItems[$iLevel] = $row;
 			}
 		} //for
 		return $gItems;
-	}
+	} //getGeographyItemsById()
 	
-	function getGeographyItemsByLevel($prmGeographyLevel, $prmGeographyParentId) {
+	function getGeographyItemsByLevel($prmGeographyLevel, $prmGeographyParentId)
+	{
 		$gItems = array();
 		$sQuery = 'SELECT GeographyId,GeographyName FROM Geography WHERE GeographyActive=1 AND GeographyLevel=' . $prmGeographyLevel;
-		if ($prmGeographyLevel > 0) {
+		if ($prmGeographyLevel > 0)
+		{
 			$sQuery .= ' AND SUBSTR(GeographyId,1,' . ($prmGeographyLevel*5) . ')="' . $prmGeographyParentId . '"';
 		}
 		$sQuery .= ' ORDER BY GeographyName';
-		foreach($this->q->dreg->query($sQuery) as $row) {
-			array_push($gItems, $row);
+		foreach($this->q->dreg->query($sQuery, PDO::FETCH_ASSOC) as $row)
+		{
+			$gItems[$row['GeographyId']] = $row;
 		} //foreach
 		return $gItems;
-	}
+	} //getGeographyItemsByLevel()
 
 	public function getDBDir() {
 		$DBDir = '';

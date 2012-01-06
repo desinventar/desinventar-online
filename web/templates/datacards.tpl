@@ -157,25 +157,6 @@
 														</select>
 													</td>
 												</tr>
-											{-foreach key=key item=GeoLevel from=$GeoLevelList name=GeoLevelList-}
-												<tr>
-													<td>
-														<span class="GeoLevelId">{-$GeoLevel.GeoLevelId-}</span> - <span class="GeoLevelName">{-$GeoLevel.GeoLevelName-}</span><br />
-													</td>
-													<td>
-														<select id="GeoLevel{-$key-}" level="{-$key-}" tabindex="{-$MyTabIndex-}" style="width:180px; background-Color:#eee;" 
-															class="GeoLevelSelect line" onFocus="showtip('{-$LabelsDisaster.GeographyId[2]-}', '#d4baf6')">
-															<option></option>
-															{-if $key == 0-}
-																{-foreach key=GeographyKey item=GeographyItem from=$GeoLevelItems-}
-																		<option value="{-$GeographyItem.GeographyId-}">{-$GeographyItem.GeographyName-}</option>
-																{-/foreach-}
-															{-/if-}
-														</select>
-														{-counter-}
-													</td>
-												</tr>
-											{-/foreach-}
 											</table>
 										</td>
 									</tr>

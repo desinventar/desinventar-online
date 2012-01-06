@@ -59,8 +59,8 @@ else
 			$t->display('cards_geolist.tpl');
 		break;
 		case 'getGeographyItemsByLevel':
-			$gItems = $us->getGeographyItemsByLevel(getParameter('GeographyLevelId',''),getParameter('GeographyParentId', ''));
-			echo json_encode($gItems);
+			$GeographyList = $us->getGeographyItemsByLevel(getParameter('GeographyLevelId',''),getParameter('GeographyParentId', ''));
+			echo json_encode($GeographyList);
 		break;
 		case 'getNextSerial':
 			$ser = $us->q->getNextDisasterSerial($value);
