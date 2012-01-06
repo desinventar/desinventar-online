@@ -428,6 +428,12 @@ function doDatacardShow()
 		displayDatacardStatusMsg('msgDatacardStartNew');
 	}
 	doDatacardNavButtonsEnable();
+
+	var w = Ext.getCmp('wndDatacard');
+	if (w != undefined)
+	{
+		w.show();
+	}
 } //doDatacardShow();
 
 function displayDatacardStatusMsg(msgId)

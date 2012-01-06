@@ -224,8 +224,7 @@ function doMainMenuHandler(item)
 					jQuery('body').data('CauseList', data.CauseList);
 					jQuery('body').data('RecordCount', data.RecordCount);
 
-					jQuery('body').trigger('doDatacardShow');
-					Ext.getCmp('wndDatacard').show();
+					jQuery('body').trigger('cmdDatacardShow');
 				},
 				'json'
 			);
@@ -504,10 +503,6 @@ function doDialogsCreate()
 		width:960, height:638, //x: 65, y: 0, 
 		closeAction:'hide', plain: true, animCollapse: false, constrainHeader: true,
 		items: new Ext.Panel({ contentEl: 'divDatacardContent', autoScroll: true })
-	});
-	w.on('show', function() {
-		var w = Ext.getCmp('wndDatacard');
-		w.center();
 	});
 	w.on('hide',function() {
 		jQuery('#divDatacardWindow').hide();
