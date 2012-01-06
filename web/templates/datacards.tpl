@@ -122,7 +122,7 @@
 			<tr>
 				<td width="30" style="border:0px;" valign="top">
 					<span title="<b>{-#mgeography#-}</b><br />{-$dmg.MetGuidegeography[2]-}">
-						<img src="{-$desinventarURL-}/images/di_geotag.png" />
+						<img src="{-$desinventarURL-}/images/di_geotag.png" alt="" />
 					</span>
 				</td>
 				<td>
@@ -214,13 +214,13 @@
 				<td width="30" valign="top" style="border:0px;">
 					<a href="#" id="linkDatacardShowEffectsBasic">
 						<span title="<b>{-#tbaseffects#-}</b><br />{-$dmg.MetGuidedatacards[2]-}">
-							<img id="efimg" src="{-$desinventarURL-}/images/di_efftag.png" />
+							<img id="efimg" src="{-$desinventarURL-}/images/di_efftag.png" alt="" />
 						</span>
 					</a>
 					<br /><br />
 					<a href="#" id="linkDatacardShowEffectsAditional">
 						<span title="<b>{-#textraeffect#-}</b><br />{-$dmg.MetGuideextraeffects[2]-}">
-							<img id="eeimg" src="{-$desinventarURL-}/images/di_eeftag.png" />
+							<img id="eeimg" src="{-$desinventarURL-}/images/di_eeftag.png" alt="" />
 						</span>
 					</a>
 				</td>
@@ -361,7 +361,7 @@
 			<tr style="border:1px solid #ff0;">
 				<td width="30" valign="top" style="border:0px;">
 					<span title="<b>{-#mevents#-}</b><br />{-$dmg.MetGuideevents[2]-}">
-						<img src="{-$desinventarURL-}/images/di_evetag.png" />
+						<img src="{-$desinventarURL-}/images/di_evetag.png" alt="" />
 					</span>
 				</td>
 				<td>
@@ -369,13 +369,8 @@
 						<tr valign="top">
 							<td title="{-$LabelsEvent.EventName[1]-}">
 								{-#msgDatacard_EventName#-}<b class="required">*</b><br />
-								<select class="EventId line" id="EventId" name="EventId"  tabindex="{-$MyTabIndex-}"
-									onFocus="showtip('{-$LabelsEvent.EventName[2]-}', 'lightblue')">
+								<select class="EventId line" id="EventId" name="EventId"  tabindex="{-$MyTabIndex-}">
 									<option value=""></option>
-									{-foreach name=eln key=key item=item from=$EventList-}
-										<option value="{-$key-}" onKeyPress="showtip('{-$item[1]-}', 'lightblue')" 
-											onMouseOver="showtip('{-$item[1]-}', 'lightblue')">{-$item[0]-}</option>
-									{-/foreach-}
 								</select>
 								{-counter-}
 							</td>
@@ -405,7 +400,7 @@
 			<tr style="border:1px solid #ffffc0;">
 				<td width="30" valign="top" style="border:0px;">
 					<span title="<b>{-#mcauses#-}</b><br />{-$dmg.MetGuidecauses[2]-}">
-						<img src="{-$desinventarURL-}/images/di_cautag.png" />
+						<img src="{-$desinventarURL-}/images/di_cautag.png" alt="" />
 					</span>
 				</td>
 				<td>
@@ -413,12 +408,8 @@
 						<tr>
 							<td title="{-$LabelsCause.CauseName[1]-}">
 								{-#msgDatacard_CauseName#-}<b class="required">*</b><br />
-								<select class="CauseId line" id="CauseId" name="CauseId" tabindex="{-$MyTabIndex-}"
-									onFocus="showtip('{-$LabelsCause.CauseName[2]-}', '#ffffc0')">
+								<select class="CauseId line" id="CauseId" name="CauseId" tabindex="{-$MyTabIndex-}">
 									<option value=""></option>
-									{-foreach name=cln key=key item=item from=$CauseList-}
-										<option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}', '#ffffc0')">{-$item[0]-}</option>
-									{-/foreach-}
 								</select>
 								{-counter-}
 							</td>

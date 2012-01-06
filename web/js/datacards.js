@@ -375,10 +375,27 @@ function onReadyDatacards()
 		jQuery('#divDatacardEffectsAdditional').show();
 		return false;
 	});
+
+	jQuery('#divDatacard .EventId').on('mouseenter', 'option', function() {
+		showtip(jQuery(this).data('tooltip'), 'lightblue');
+	});
+	jQuery('#divDatacard .EventId').mouseleave(function() {
+		showtip('', '#fff');
+	});
+
+	jQuery('#divDatacard .CauseId').on('mouseenter', 'option', function() {
+		showtip(jQuery(this).data('tooltip'), '#ffffc0');
+	});
+	jQuery('#divDatacard .CauseId').mouseleave(function() {
+		showtip('', '#fff');
+	});
+
 	// Attach events to main body
 	jQuery('body').on('cmdDatacardShow', function() {
 		doDatacardShow();
 	});
+
+	//Initialize components
 	jQuery('#divDatacard .tblGeography tr:first').hide();
 } //onReadyDatacards()
 
@@ -399,13 +416,13 @@ function doDatacardShow()
 	jQuery('#divDatacard .EventId').empty();
 	jQuery('#divDatacard .EventId').append(jQuery('<option>', { value : '' }).text(''));
 	jQuery.each(jQuery('body').data('EventList'), function(index, value) {
-		jQuery('#divDatacard .EventId').append(jQuery('<option>', { value : index }).text(value.EventName));
+		jQuery('#divDatacard .EventId').append(jQuery('<option>', { value : index }).text(value.EventName).data('tooltip',value.EventDesc));
 	});
 
 	jQuery('#divDatacard .CauseId').empty();
 	jQuery('#divDatacard .CauseId').append(jQuery('<option>', { value : '' }).text(''));
 	jQuery.each(jQuery('body').data('CauseList'), function(index, value) {
-		jQuery('#divDatacard .CauseId').append(jQuery('<option>', { value : index }).text(value.CauseName));
+		jQuery('#divDatacard .CauseId').append(jQuery('<option>', { value : index }).text(value.CauseName).data('tooltip',value.CauseDesc));
 	});
 } //doDatacardShow();
 
@@ -424,18 +441,7 @@ var mod = "di";
 
 function showtip(tip, clr)
 {
-	try
-	{
-		var d = parent.document.getElementById('_DIDesc');
-		if (d != null)
-		{
-			d.style.backgroundColor = clr;
-			d.value = tip;
-		}
-	}
-	catch(err)
-	{
-	}
+	jQuery('#txtHelpArea').val(tip).css('background-color', clr);
 }
 
 // Display Geography in form and search; k=geoid, l=0, desc='', opc=''

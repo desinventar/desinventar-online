@@ -51,5 +51,6 @@
 	<body>
 		{-include file="datacards.tpl"-}
 		{-include file="desinventarinfo.tpl"-}
+		{-include file="block_help.tpl"-}
 	</body>
 </html>
