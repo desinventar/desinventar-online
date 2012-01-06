@@ -110,7 +110,7 @@ function onReadyDatabaseUsers()
 		jQuery('#divDatabaseUsers_Edit').hide();
 	});
 
-	jQuery('#tbodyDatabaseUsers_List').delegate('tr', 'click', function(e) {
+	jQuery('#tbodyDatabaseUsers_List').on('click', 'tr', function(e) {
 		var UserId = jQuery.trim(jQuery('.UserId', this).text());
 		jQuery('#fldDatabaseUsers_UserId').val(UserId);
 		jQuery('#fldDatabaseUsers_UserRole').val(jQuery('.UserRole', this).text());

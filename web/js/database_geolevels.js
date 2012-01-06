@@ -5,7 +5,7 @@
 
 function onReadyGeolevels()
 {
-	jQuery('#tbodyGeolevels_List').delegate('tr', 'click', function(e) {
+	jQuery('#tbodyGeolevels_List').on('click', 'tr', function(e) {
 		if (! jQuery('#divGeolevels_Edit').is(':visible'))
 		{
 			jQuery('#frmGeolevels_Edit .GeoLevelId').val(jQuery('.GeoLevelId',this).text());
