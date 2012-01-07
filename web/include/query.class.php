@@ -226,7 +226,7 @@ class Query //extends PDO
 		else
 		{
 			$data = $this->getRegionCauseList($type, $status, $LangIsoCode);
-			if ($type == 'PREDEF') 
+			if ($type != 'USER') 
 			{
 				// Attempt to translate the list to the requested language using 
 				// data from base.Cause table
