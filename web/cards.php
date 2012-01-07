@@ -58,10 +58,6 @@ else
 			$t->assign('opc', isset($_GET['opc']) ? $_GET['opc'] : '');
 			$t->display('cards_geolist.tpl');
 		break;
-		case 'getGeographyItemsByLevel':
-			$GeographyList = $us->getGeographyItemsByLevel(getParameter('GeographyLevelId',''),getParameter('GeographyParentId', ''));
-			echo json_encode($GeographyList);
-		break;
 		case 'getNextSerial':
 			$ser = $us->q->getNextDisasterSerial($value);
 			echo json_encode(array('Status' => 'OK', 'DisasterSerial' => $ser));

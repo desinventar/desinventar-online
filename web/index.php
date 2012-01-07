@@ -1089,8 +1089,6 @@ switch ($cmd)
 					$t->assign('levmax', $us->q->getMaxGeoLev());
 					$t->assign('levname', $us->q->loadGeoLevById($lev));
 					$t->assign('geol', $us->q->loadGeography($lev));
-					$GeoLevelItems = $us->getGeographyItemsByLevel(0, '');
-					$t->assign('GeoLevelItems', $GeoLevelItems);
 					$t->assign('EventList', $us->q->loadEvents(null, 'active', $lg));
 					$t->assign('CauseList', $us->q->loadCauses(null, 'active', $lg));
 					$EEFieldList = $us->q->getEEFieldList('True');
