@@ -37,6 +37,13 @@
 							jQuery('body').data('EventList', data.EventList);
 							jQuery('body').data('CauseList', data.CauseList);
 							jQuery('body').data('RecordCount', data.RecordCount);
+							var dataItems = jQuery('body').data();
+							jQuery.each(dataItems, function(index, value) {
+								if (index.substr(0,13) === 'GeographyList')
+								{
+									jQuery('body').removeData(index);
+								}
+							});
 							jQuery('body').data('GeographyList', data.GeographyList);
 
 							onReadyCommon();
