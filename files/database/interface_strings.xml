@@ -2719,8 +2719,8 @@
 			<Text LangIsoCode="por">Páginas:</Text>
 			<Text LangIsoCode="fre">Pages:</Text>
 		</Message>
-		<Message id="tnumof">
-			<Text LangIsoCode="eng">From</Text>
+		<Message id="msgData_PageOf">
+			<Text LangIsoCode="eng">of</Text>
 			<Text LangIsoCode="spa">de</Text>
 			<Text LangIsoCode="por">de</Text>
 			<Text LangIsoCode="fre">de</Text>
@@ -2815,8 +2815,8 @@
 			<Text LangIsoCode="por">Páginas:</Text>
 			<Text LangIsoCode="fre">Pages:</Text>
 		</Message>
-		<Message id="tnumof">
-			<Text LangIsoCode="eng">From</Text>
+		<Message id="msgStatistic_PageOf">
+			<Text LangIsoCode="eng">of</Text>
 			<Text LangIsoCode="spa">de</Text>
 			<Text LangIsoCode="por">de</Text>
 			<Text LangIsoCode="fre">de</Text>
