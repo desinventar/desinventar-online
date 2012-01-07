@@ -183,7 +183,7 @@ class Query //extends PDO
 		{
 			// This is the data from the Region Database...
 			$data = $this->getRegionEventList($type, $status, $LangIsoCode);
-			if ($type == 'PREDEF') 
+			if ($type != 'USER') 
 			{
 				// Attempt to translate the list to the requested language using 
 				// data from base.Event table
