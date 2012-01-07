@@ -22,7 +22,7 @@
 			<td>
 				{-#tpage#-}
 				<input type="text" id="StatCurPage" size="2" value="1" class="line" />
-				&nbsp; {-#tnumof#-} &nbsp;{-$last-}
+				&nbsp; {-#msgStatistic_PageOf#-} &nbsp;{-$last-}
 				&nbsp;&nbsp;|&nbsp;&nbsp;
 				<a class="button" id="btnStatGotoFirstPage"><span>&lt;&lt;</span></a>
 				<a class="button" id="btnStatGotoPrevPage"><span>&lt;</span></a>

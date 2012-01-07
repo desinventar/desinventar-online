@@ -22,7 +22,7 @@
 			<td>
 				{-#tpage#-}
 				<input type="text" id="DataCurPage" size="2" value="1" class="line"  />
-				&nbsp; {-#tnumof#-} &nbsp; {-$NumberOfPages-}
+				&nbsp; {-#msgData_PageOf#-} &nbsp; {-$NumberOfPages-}
 				&nbsp;&nbsp;|&nbsp;&nbsp;
 				<a class="button" id="btnGridGotoFirstPage"><span>&lt;&lt;</span></a>
 				<a class="button" id="btnGridGotoPrevPage"><span>&lt;</span></a>
