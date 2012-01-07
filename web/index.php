@@ -92,6 +92,17 @@ switch ($cmd)
 		//$t->assign('dic', $us->q->queryLabelsFromGroup('DB', $lg));
 		$t->display('main_datacards.tpl');
 	break;
+	case 'cmdGeographyGetItemsByLevel':
+		$answer = array();
+		$iReturn = ERR_NO_ERROR;
+		$GeographyLevel  = getParameter('GeographyLevel','');
+		$GeographyParent = getParameter('GeographyParent', '');
+		$GeographyList = array();
+		$GeographyList = $us->getGeographyItemsByLevel($GeographyLevel,$GeographyParent);
+		$answer['GeographyList'] = $GeographyList;
+		$answer['Status'] = $iReturn;
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
+	break;
 	case 'cmdDatabaseEvents':
 		$t->assign('dic', $us->q->queryLabelsFromGroup('DB', $lg));
 		$t->display('main_database_events.tpl');

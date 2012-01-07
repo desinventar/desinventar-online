@@ -150,7 +150,7 @@
 														<span class="GeoLevelId"></span> - <span class="GeoLevelName"></span><br />
 													</td>
 													<td>
-														<select class="GeographyId GeoLevelSelect line" id="GeoLevel" level="" tabindex="{-$MyTabIndex-}" disabled>
+														<select class="GeoLevelSelect line" id="GeoLevel" tabindex="{-$MyTabIndex-}" disabled>
 															<option></option>
 														</select>
 													</td>
