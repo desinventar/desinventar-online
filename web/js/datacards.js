@@ -129,7 +129,6 @@ function onReadyDatacards()
 		var GeographyParentId = myGeographyId.substr(0, myGeographyId.length - 5);
 		var GeoLevelCount = jQuery('.GeoLevelSelect').size() - 1;
 
-		console.log(GeographyLevel + ' ' + myGeographyId + ' ' + jQuery('#divDatacard #GeographyId').val());
 		if (jQuery(this).val() == '')
 		{
 			var PrevGeographyLevel = GeographyLevel - 1;
@@ -148,36 +147,39 @@ function onReadyDatacards()
 		}
 		else
 		{
-			GeographyId = jQuery(this).val();
-			var GeographyList = jQuery('body').data('GeographyList-' + GeographyId);
-			
-			if (GeographyList === undefined)
+			if (NextGeographyLevel < GeoLevelCount)
 			{
-				// Load GeographyList using POST
-				jQuery.post(
-					jQuery('#desinventarURL').val() + '/',
-					{
-						'cmd'             : 'cmdGeographyGetItemsByLevel',
-						'RegionId'        : jQuery('#desinventarRegionId').val(),
-						'GeographyLevel'  : NextGeographyLevel,
-						'GeographyParent' : myGeographyId
-					},
-					function(data)
-					{
-						if (parseInt(data.Status) > 0)
+				GeographyId = jQuery(this).val();
+				var GeographyList = jQuery('body').data('GeographyList-' + GeographyId);
+							
+				if (GeographyList === undefined)
+				{
+					// Load GeographyList using POST
+					jQuery.post(
+						jQuery('#desinventarURL').val() + '/',
 						{
-							// Store result for later use from cache
-							jQuery('body').data('GeographyList-' + GeographyId, data.GeographyList);
-							doUpdateGeoLevelSelect(NextGeographyLevel, data.GeographyList);
-						}
-					},
-					'json'
-				);
-			}
-			else
-			{
-				//Reuse GeographyList from cache.
-				doUpdateGeoLevelSelect(NextGeographyLevel, GeographyList);
+							'cmd'             : 'cmdGeographyGetItemsByLevel',
+							'RegionId'        : jQuery('#desinventarRegionId').val(),
+							'GeographyLevel'  : NextGeographyLevel,
+							'GeographyParent' : myGeographyId
+						},
+						function(data)
+						{
+							if (parseInt(data.Status) > 0)
+							{
+								// Store result for later use from cache
+								jQuery('body').data('GeographyList-' + GeographyId, data.GeographyList);
+								doUpdateGeoLevelSelect(NextGeographyLevel, data.GeographyList);
+							}
+						},
+						'json'
+					);
+				}
+				else
+				{
+					//Reuse GeographyList from cache.
+					doUpdateGeoLevelSelect(NextGeographyLevel, GeographyList);
+				}
 			}
 		}
 		jQuery('#divDatacard #GeographyId').val(myGeographyId);
