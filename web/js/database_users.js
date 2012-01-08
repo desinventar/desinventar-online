@@ -99,7 +99,8 @@ function onReadyDatabaseUsers()
 			} //if
 
 			// If trying to assign a new AdminRegion confirm the change
-			if (jQuery('#desinventarUserId').val() != jQuery('#frmUsers .UserId').val())
+			if ( (jQuery('#desinventarUserId').val() != 'root') && 
+			     (jQuery('#desinventarUserId').val() != jQuery('#frmUsers .UserId').val()) )
 			{
 				if (jQuery('#frmUsers .UserRole').val() == 'ADMINREGION')
 				{
