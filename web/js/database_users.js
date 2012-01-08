@@ -95,9 +95,17 @@ function onReadyDatabaseUsers()
 					}, 2500);
 				}
 			}
+
+			// If trying to assign a new AdminRegion confirm the change
+			if (jQuery('#frmUsers .UserRole').val() == 'ADMINREGION')
+			{
+			}
 			//Ext.MessageBox.confirm('Confirm','Are you sure you want to do that ?', doDatabaseUsersSaveRole);
 			//Ext.MessageBox.confirm('Confirm','Are you sure you want to do that ?', doDatabaseUsersSaveRole);
-			//jQuery('#frmUsers').trigger('submit');
+			if (bContinue)
+			{
+				jQuery('#frmUsers').trigger('submit');
+			}
 		} //if
 	});
 
