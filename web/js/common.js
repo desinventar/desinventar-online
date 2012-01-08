@@ -7,6 +7,16 @@ function onReadyCommon()
 {
 	// Initialize tooltip for elements with title attribute
 	jQuery('[title]').tooltip();
+
+	jQuery(window).unload(function() {
+		doViewportDestroy();
+	});
+	jQuery('body').on('cmdWindowReload', function() {
+		// Destroy viewport, the loading... message should stay.
+		doViewportDestroy();
+		// Reload document window
+		window.location.reload(false);
+	});
 } //onReadyCommon()
 
 function onReadyPrototype()
@@ -89,3 +99,14 @@ function checkForm(prmForm, prmFieldList, errmsg)
 	}); //.each
 	return bReturn;
 } //function
+
+function doViewportDestroy()
+{
+	var viewport = Ext.getCmp('viewport');
+	if (viewport != undefined)
+	{
+		viewport.destroy();
+		jQuery('#loading').show();
+		jQuery('#loading-mask').show();
+	}
+} //doViewportDestroy
