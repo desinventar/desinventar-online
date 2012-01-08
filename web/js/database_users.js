@@ -62,6 +62,11 @@ function onReadyDatabaseUsers()
 		jQuery('#divDatabaseUsers_Edit').show();
 	});
 
+	jQuery('#frmUsers .btnCancel').click(function() {
+		doDatabaseUsersReset();
+		jQuery('#divDatabaseUsers_Edit').hide();
+	});
+
 	jQuery('#frmUsers .btnSave').click(function() {
 		var bContinue = true;
 		//Validation
@@ -77,41 +82,52 @@ function onReadyDatabaseUsers()
 		} //if
 		if (bContinue)
 		{
-			//var bConfirm = false;
-			//Ext.MessageBox.confirm('Confirm','Are you sure you want to do that ?', doDatabaseUsersSaveRole);
-			jQuery.post(
-				jQuery('#desinventarURL').val() + '/',
+			// User cannot remove his/her own AdminRegion permission
+			if (jQuery('#frmUsers .UserId').val() == jQuery('#desinventarUserId').val())
+			{
+				if ( (jQuery('#frmUsers .UserRolePrev').val() == 'ADMINREGION') &&
+				     (jQuery('#frmUsers .UserRolePrev').val() != jQuery('#frmUsers .UserRole').val()) )
 				{
-					cmd      : 'cmdDatabaseUsersSetRole',
-					RegionId : jQuery('#desinventarRegionId').val(),
-					UserId   : jQuery('#frmUsers .UserId').val(),
-					UserRole : jQuery('#frmUsers .UserRole').val()
-				},
-				function(data)
-				{
-					jQuery('.clsDatabaseUsersStatus').hide();
-					if (parseInt(data.Status) > 0)
-					{
-						doDatabaseUsersPopulateUserRoleList(data.UserRoleList);
-						jQuery('#divDatabaseUsers_Edit').hide();
-						jQuery('#txtDatabaseUsers_RoleListStatusOk').show();
-					}
-					else
-					{
-						jQuery('#txtDatabaseUsers_RoleListStatusError').show();
-					}
+					jQuery('#txtDatabaseUsers_RoleListCannotRemoveAdminRole').show();	
 					setTimeout(function() {
-						jQuery('.clsDatabaseUsersStatus').hide();
-					}, 3000);
-				},
-				'json'
-			);
+						jQuery('#txtDatabaseUsers_RoleListCannotRemoveAdminRole').hide();
+					}, 2500);
+				}
+			}
+			//Ext.MessageBox.confirm('Confirm','Are you sure you want to do that ?', doDatabaseUsersSaveRole);
+			//Ext.MessageBox.confirm('Confirm','Are you sure you want to do that ?', doDatabaseUsersSaveRole);
+			//jQuery('#frmUsers').trigger('submit');
 		} //if
 	});
 
-	jQuery('#frmUsers .btnCancel').click(function() {
-		doDatabaseUsersReset();
-		jQuery('#divDatabaseUsers_Edit').hide();
+	jQuery('#frmUsers').submit(function() {
+		jQuery.post(
+			jQuery('#desinventarURL').val() + '/',
+			{
+				cmd      : 'cmdDatabaseUsersSetRole',
+				RegionId : jQuery('#desinventarRegionId').val(),
+				UserId   : jQuery('#frmUsers .UserId').val(),
+				UserRole : jQuery('#frmUsers .UserRole').val()
+			},
+			function(data)
+			{
+				jQuery('.clsDatabaseUsersStatus').hide();
+				if (parseInt(data.Status) > 0)
+				{
+					doDatabaseUsersPopulateUserRoleList(data.UserRoleList);
+					jQuery('#divDatabaseUsers_Edit').hide();
+					jQuery('#txtDatabaseUsers_RoleListStatusOk').show();
+				}
+				else
+				{
+					jQuery('#txtDatabaseUsers_RoleListStatusError').show();
+				}
+				setTimeout(function() {
+					jQuery('.clsDatabaseUsersStatus').hide();
+				}, 3000);
+			},
+			'json'
+		);
 	});
 
 	jQuery('#tbodyDatabaseUsers_List').on('click', 'tr', function(e) {
@@ -122,13 +138,7 @@ function onReadyDatabaseUsers()
 		jQuery('#frmUsers .UserId').prop('disabled', false);
 		jQuery('#frmUsers .UserRole').prop('disabled', false);
 		
-		jQuery('#txtDatabaseUsers_RoleListCannotEditRole').hide();
-		if (jQuery('#desinventarUserId').val() == UserId)
-		{
-			jQuery('#fldDatabaseUsers_UserId').prop('disabled', true);
-			jQuery('#fldDatabaseUsers_UserRole').prop('disabled', true);
-			jQuery('#txtDatabaseUsers_RoleListCannotEditRole').show();
-		}
+		jQuery('#txtDatabaseUsers_RoleListCannotRemoveAdminRole').hide();
 		jQuery('#divDatabaseUsers_Edit').show();
 	});
 
