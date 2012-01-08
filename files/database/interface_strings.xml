@@ -3213,6 +3213,42 @@
 			<Text LangIsoCode="por">Desculpe, você não pode remover o seu papel como gestor</Text>
 			<Text LangIsoCode="fre">Désolé, vous ne pouvez pas supprimer votre rôle en tant que gestionnaire</Text>
 		</Message>
+		<Message id="msgDatabaseUsers_ConfirmManagerTitle">
+			<Text LangIsoCode="eng">Confirm</Text>
+			<Text LangIsoCode="spa">Confirmar</Text>
+			<Text LangIsoCode="por">Confirmar</Text>
+			<Text LangIsoCode="fre">Confirmer</Text>
+		</Message>
+		<Message id="msgDatabaseUsers_ConfirmManagerPrompt1">
+			<Text LangIsoCode="eng">Do you want to transfer the manager role from</Text>
+			<Text LangIsoCode="spa">Quieres transferir la función de administrador de</Text>
+			<Text LangIsoCode="por">Você deseja transferir a função de gerente de</Text>
+			<Text LangIsoCode="fre">Voulez-vous transférer le rôle de gestionnaire du</Text>
+		</Message>
+		<Message id="msgDatabaseUsers_ConfirmManagerPrompt2">
+			<Text LangIsoCode="eng">to</Text>
+			<Text LangIsoCode="spa">a</Text>
+			<Text LangIsoCode="por">para</Text>
+			<Text LangIsoCode="fre">à</Text>
+		</Message>
+		<Message id="msgDatabaseUsers_ConfirmManagerPrompt3">
+			<Text LangIsoCode="eng">Application page will reload after this change</Text>
+			<Text LangIsoCode="spa">La página de la aplicación se volverá a cargar después de este cambio</Text>
+			<Text LangIsoCode="por">Página do aplicativo irá recarregar após essa alteração</Text>
+			<Text LangIsoCode="fre">Page d'application se rechargera après ce changement</Text>
+		</Message>
+		<Message id="msgDatabaseUsers_Yes">
+			<Text LangIsoCode="eng">Ok</Text>
+			<Text LangIsoCode="spa">Aceptar</Text>
+			<Text LangIsoCode="por">Submeter</Text>
+			<Text LangIsoCode="fre">Envoyer</Text>
+		</Message>
+		<Message id="msgDatabaseUsers_No">
+			<Text LangIsoCode="eng">Cancel</Text>
+			<Text LangIsoCode="spa">Cancelar</Text>
+			<Text LangIsoCode="por">Cancelar</Text>
+			<Text LangIsoCode="fre">Annuler</Text>
+		</Message>
 	</Group>
 	<Group name="grpDatabaseEdit">
 		<Message id="msgDatabaseEditCountryIso">
@@ -3561,17 +3597,17 @@
 			<Text LangIsoCode="por">Submeter</Text>
 			<Text LangIsoCode="fre">Envoyer</Text>
 		</Message>
-		<Message id="msgDatabaseUploadButtonReplace">
-			<Text LangIsoCode="eng">Replace</Text>
-			<Text LangIsoCode="spa">Reemplazar</Text>
-			<Text LangIsoCode="por">Substituição</Text>
-			<Text LangIsoCode="fre">Remplacer</Text>
-		</Message>
 		<Message id="msgDatabaseUploadButtonCancel">
 			<Text LangIsoCode="eng">Cancel</Text>
 			<Text LangIsoCode="spa">Cancelar</Text>
 			<Text LangIsoCode="por">Cancelar</Text>
 			<Text LangIsoCode="fre">Annuler</Text>
+		</Message>
+		<Message id="msgDatabaseUploadButtonReplace">
+			<Text LangIsoCode="eng">Replace</Text>
+			<Text LangIsoCode="spa">Reemplazar</Text>
+			<Text LangIsoCode="por">Substituição</Text>
+			<Text LangIsoCode="fre">Remplacer</Text>
 		</Message>
 		<Message id="msgDatabaseUploadChooseFile">
 			<Text LangIsoCode="eng">Choose file</Text>

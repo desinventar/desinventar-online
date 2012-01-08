@@ -82,6 +82,7 @@ function onReadyDatabaseUsers()
 		} //if
 		if (bContinue)
 		{
+			jQuery('#frmUsers').data('ReloadPageAfter', false);
 			// User cannot remove his/her own AdminRegion permission
 			if (jQuery('#frmUsers .UserId').val() == jQuery('#desinventarUserId').val())
 			{
@@ -98,10 +99,51 @@ function onReadyDatabaseUsers()
 			} //if
 
 			// If trying to assign a new AdminRegion confirm the change
-			if (jQuery('#frmUsers .UserRole').val() == 'ADMINREGION')
+			if (jQuery('#desinventarUserId').val() != jQuery('#frmUsers .UserId').val())
 			{
-			}
-			//Ext.MessageBox.confirm('Confirm','Are you sure you want to do that ?', doDatabaseUsersSaveRole);
+				if (jQuery('#frmUsers .UserRole').val() == 'ADMINREGION')
+				{
+					bContinue = false;
+					sAdminNew     = jQuery('#frmUsers .UserId option[value="' + jQuery('#frmUsers .UserId').val() + '"]').text();
+
+					var sAdminCurrent = '';
+					jQuery('#tbodyDatabaseUsers_List tr:gt(0)').each(function() {
+						if (jQuery('.UserRole', this).text() == 'ADMINREGION')
+						{
+							sAdminCurrent = jQuery('.UserName', this).text();
+						}
+					});
+
+					sConfirmMsg = jQuery('#msgDatabaseUsers_ConfirmManagerPrompt1').text() + ' ' + 
+					              sAdminCurrent + ' ' + 
+					              jQuery('#msgDatabaseUsers_ConfirmManagerPrompt2').text() + ' ' + 
+					              sAdminNew + ' ? ' +
+					              '(' + jQuery('#msgDatabaseUsers_ConfirmManagerPrompt3').text() + ')';
+					Ext.Msg.show({
+						title   : jQuery('#msgDatabaseUsers_ConfirmManagerTitle').text(),
+						msg     : sConfirmMsg,
+						buttons :
+						{
+							ok    : jQuery('#msgDatabaseUsers_Yes').text(),
+							cancel: jQuery('#msgDatabaseUsers_No').text()
+						},
+						fn : function(whichButton)
+						{
+							if (whichButton == 'ok')
+							{
+								jQuery('#frmUsers').data('ReloadPageAfter', true);
+								jQuery('#frmUsers').trigger('submit');
+							}
+							/*
+							else
+							{
+								jQuery('#frmUsers .UserRole').val(jQuery('#frmUsers .UserRolePrev').val());
+							}
+							*/
+						} //function
+					});
+				} //if
+			} //if
 			//Ext.MessageBox.confirm('Confirm','Are you sure you want to do that ?', doDatabaseUsersSaveRole);
 			if (bContinue)
 			{
@@ -135,6 +177,11 @@ function onReadyDatabaseUsers()
 				setTimeout(function() {
 					jQuery('.clsDatabaseUsersStatus').hide();
 				}, 3000);
+				var ReloadPageAfter = jQuery('#frmUsers').data('ReloadPageAfter');
+				if (ReloadPageAfter)
+				{
+					window.location.reload(false);
+				}				
 			},
 			'json'
 		);
@@ -169,11 +216,6 @@ function onReadyDatabaseUsers()
 	});
 } //onReadyDatabaseUsers()
 
-function doDatabaseUsersSaveRole(btn)
-{
-	console.log(btn);
-}
-
 function doDatabaseUsersReset()
 {
 	jQuery('#frmDiffusion .RegionActive').prop('checked', true);
@@ -202,6 +244,14 @@ function doDatabaseUsersPopulateUserRoleList(UserRoleList)
 	});
 	jQuery('#tblDatabaseUsers_List .UserId').hide();
 	jQuery('#tblDatabaseUsers_List .UserRole').hide();
+
+	var sAdminCurrent = '';
+	jQuery('#tbodyDatabaseUsers_List tr:gt(0)').each(function() {
+		if (jQuery('.UserRole', this).text() == 'ADMINREGION')
+		{
+			sAdminCurrent = jQuery('.UserName', this).text();
+		}
+	});
 } //doDatabaseUsersPopulateUserRoleList()
 
 function doDatabaseUsersUpdateOptions(RegionInfo)

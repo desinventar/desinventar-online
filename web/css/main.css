@@ -109,6 +109,9 @@ div.right {
 	display:table;
 	text-align:right;
 }
+div.hidden {
+	display:none;
+}
 
 a.button {
 	background: transparent url('../images/bg_button_a.gif') no-repeat scroll top right;

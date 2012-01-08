@@ -107,4 +107,12 @@
 		<span class="clsDatabaseUsersStatus" id="txtDatabaseUsers_RoleListEmptyFields">{-#msgDatabaseUsers_RoleListEmptyFields#-}</span>
 		<span class="clsDatabaseUsersStatus" id="txtDatabaseUsers_RoleListCannotRemoveAdminRole">{-#msgDatabaseUsers_RoleListCannotRemoveAdminRole#-}</span>
 	</div>
+	<div class="hidden">
+		<span id="msgDatabaseUsers_ConfirmManagerTitle">{-#msgDatabaseUsers_ConfirmManagerTitle#-}</span>
+		<span id="msgDatabaseUsers_ConfirmManagerPrompt1">{-#msgDatabaseUsers_ConfirmManagerPrompt1#-}</span>
+		<span id="msgDatabaseUsers_ConfirmManagerPrompt2">{-#msgDatabaseUsers_ConfirmManagerPrompt2#-}</span>
+		<span id="msgDatabaseUsers_ConfirmManagerPrompt3">{-#msgDatabaseUsers_ConfirmManagerPrompt3#-}</span>
+		<span id="msgDatabaseUsers_Yes">{-#msgDatabaseUsers_Yes#-}</span>
+		<span id="msgDatabaseUsers_No">{-#msgDatabaseUsers_No#-}</span>
+	</div>
 </div>
