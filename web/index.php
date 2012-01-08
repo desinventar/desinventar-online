@@ -203,6 +203,10 @@ switch ($cmd)
 			$r = new DIRegion($us, $RegionId);
 			$UserId = getParameter('UserId','');
 			$UserRole = getParameter('UserRole', '');
+			if ($UserRole == 'ADMINREGION')
+			{
+				$r->removeRegionUserAdmin();
+			}
 			$iReturn = $us->setUserRole($UserId, $us->RegionId, $UserRole);
 			if ($iReturn > 0)
 			{
