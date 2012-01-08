@@ -94,7 +94,7 @@ function onReadyDatabaseUsers()
 						jQuery('#txtDatabaseUsers_RoleListCannotRemoveAdminRole').hide();
 					}, 2500);
 				}
-			}
+			} //if
 
 			// If trying to assign a new AdminRegion confirm the change
 			if (jQuery('#frmUsers .UserRole').val() == 'ADMINREGION')
@@ -137,6 +137,7 @@ function onReadyDatabaseUsers()
 			},
 			'json'
 		);
+		return false;
 	});
 
 	jQuery('#tbodyDatabaseUsers_List').on('click', 'tr', function(e) {
