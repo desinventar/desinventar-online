@@ -35,7 +35,7 @@ function onReadyDatabaseUpload()
 					jQuery('#divDatabaseUploadParameters').hide();
 					doDatabaseUploadStatusMsg('msgDatabaseUploadUpdateOk');
 					alert(jQuery('#msgDatabaseUploadComplete').val());
-					doWindowReload();
+					jQuery('body').trigger('cmdWindowReload');
 				}
 				else
 				{
@@ -64,7 +64,7 @@ function onReadyDatabaseUpload()
 					jQuery('#divDatabaseUploadParameters').hide();
 					doDatabaseUploadStatusMsg('msgDatabaseUploadUpdateOk');
 					alert(jQuery('#msgDatabaseUploadComplete').val());
-					doWindowReload();
+					jQuery('body').trigger('cmdWindowReload');
 				}
 				else
 				{

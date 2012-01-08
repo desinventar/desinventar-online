@@ -124,8 +124,7 @@ function doMainChangeLanguage(LangIsoCode)
 		{
 			if (parseInt(data.Status) > 0)
 			{
-				doViewportDestroy();
-				window.location.reload(false);
+				jQuery('body').trigger('cmdWindowReload');
 			}
 			else
 			{
