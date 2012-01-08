@@ -88,6 +88,7 @@ function onReadyDatabaseUsers()
 				if ( (jQuery('#frmUsers .UserRolePrev').val() == 'ADMINREGION') &&
 				     (jQuery('#frmUsers .UserRolePrev').val() != jQuery('#frmUsers .UserRole').val()) )
 				{
+					bContinue = false;
 					jQuery('#txtDatabaseUsers_RoleListCannotRemoveAdminRole').show();	
 					setTimeout(function() {
 						jQuery('#txtDatabaseUsers_RoleListCannotRemoveAdminRole').hide();
