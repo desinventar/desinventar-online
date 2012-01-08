@@ -105,6 +105,6 @@
 		<span class="clsDatabaseUsersStatus" id="txtDatabaseUsers_RoleListStatusOk">{-#msgDatabaseUsers_RoleListStatusOk#-}</span>
 		<span class="clsDatabaseUsersStatus" id="txtDatabaseUsers_RoleListStatusError">{-#msgDatabaseUsers_RoleListStatusError#-}</span>
 		<span class="clsDatabaseUsersStatus" id="txtDatabaseUsers_RoleListEmptyFields">{-#msgDatabaseUsers_RoleListEmptyFields#-}</span>
-		<span class="clsDatabaseUsersStatus" id="txtDatabaseUsers_RoleListCannotEditRole">{-#msgDatabaseUsers_RoleListCannotEditRole#-}</span>
+		<span class="clsDatabaseUsersStatus" id="txtDatabaseUsers_RoleListCannotRemoveAdminRole">{-#msgDatabaseUsers_RoleListCannotRemoveAdminRole#-}</span>
 	</div>
 </div>

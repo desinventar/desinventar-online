@@ -3207,11 +3207,11 @@
 			<Text LangIsoCode="por">Campos não pode ser vazio</Text>
 			<Text LangIsoCode="fre">Les champs ne peuvent pas être vide</Text>
 		</Message>
-		<Message id="msgDatabaseUsers_RoleListCannotEditRole">
-			<Text LangIsoCode="eng">Sorry, you cannot edit your own role</Text>
-			<Text LangIsoCode="spa">Lo sentimos, no se puede editar su propio rol</Text>
-			<Text LangIsoCode="por">Desculpe, você não pode editar seu próprio papel</Text>
-			<Text LangIsoCode="fre">Désolé, vous ne pouvez pas éditer votre propre rôle</Text>
+		<Message id="msgDatabaseUsers_RoleListCannotRemoveAdminRole">
+			<Text LangIsoCode="eng">Sorry, you cannot remove your role as manager</Text>
+			<Text LangIsoCode="spa">Lo sentimos, no se puede quitar su función como administrador</Text>
+			<Text LangIsoCode="por">Desculpe, você não pode remover o seu papel como gestor</Text>
+			<Text LangIsoCode="fre">Désolé, vous ne pouvez pas supprimer votre rôle en tant que gestionnaire</Text>
 		</Message>
 	</Group>
 	<Group name="grpDatabaseEdit">
