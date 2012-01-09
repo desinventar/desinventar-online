@@ -13,6 +13,10 @@
 		<span id="mnuUserLogout">{-#mnuUserLogout#-}</span>
 	<span id="mnuDesConsultar">{-#mnuDesConsultar#-}</span>
 		<span id="mnuDesConsultarQueryDesign">{-#mnuDesConsultarQueryDesign#-}</span>
+		<span id="mnuDesConsultarViewData">{-#mnuDesConsultarViewData#-}</span>
+		<span id="mnuDesConsultarViewMap">{-#mnuDesConsultarViewMap#-}</span>
+		<span id="mnuDesConsultarViewGraph">{-#mnuDesConsultarViewGraph#-}</span>
+		<span id="mnuDesConsultarViewStd">{-#mnuDesConsultarViewStd#-}</span>
 	<span id="mnuMenuQuery">{-#mnuQuery#-}</span>
 		<span id="mnuQueryNew">{-#mnuQueryNew#-}</span>
 		<span id="mnuQuerySave">{-#mnuQuerySave#-}</span>
