@@ -85,6 +85,30 @@
 			<Text LangIsoCode="por">Esquematização de consulta</Text>
 			<Text LangIsoCode="fre">Dessin de consultation</Text>
 		</Message>
+		<Message id="mnuDesConsultarViewData">
+			<Text LangIsoCode="eng">Data cards</Text>
+			<Text LangIsoCode="spa">Fichas</Text>
+			<Text LangIsoCode="por">Formulários</Text>
+			<Text LangIsoCode="fre">Carte de données</Text>
+		</Message>
+		<Message id="mnuDesConsultarViewMap">
+			<Text LangIsoCode="eng">Maps</Text>
+			<Text LangIsoCode="spa">Mapas</Text>
+			<Text LangIsoCode="por">Mapas</Text>
+			<Text LangIsoCode="fre">Cartes</Text>
+		</Message>
+		<Message id="mnuDesConsultarViewGraph">
+			<Text LangIsoCode="eng">Graphs</Text>
+			<Text LangIsoCode="spa">Gráficos</Text>
+			<Text LangIsoCode="por">Gráficos</Text>
+			<Text LangIsoCode="fre">Graphiques</Text>
+		</Message>
+		<Message id="mnuDesConsultarViewStd">
+			<Text LangIsoCode="eng">Consolidated</Text>
+			<Text LangIsoCode="spa">Consolidados</Text>
+			<Text LangIsoCode="por">Consolidados</Text>
+			<Text LangIsoCode="fre">Consolidés</Text>
+		</Message>
 		<Message id="mnuQuery">
 			<Text LangIsoCode="eng">Queries</Text>
 			<Text LangIsoCode="spa">Consultas</Text>

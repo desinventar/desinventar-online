@@ -169,7 +169,7 @@ function doMainMenuHandler(item)
 		case 'mnuUserLanguageFrench':
 			doMainChangeLanguage('fre');
 		break;
-		// query menu
+		// DesConsultar Menu Options
 		case 'mnuDesConsultarQueryDesign':
 			w = Ext.getCmp('westm');
 			jQuery('.contentBlock').hide();
@@ -191,6 +191,15 @@ function doMainMenuHandler(item)
 			{
 				w.expand(); //show()
 			}
+		break;
+		case 'mnuDesConsultarViewData':
+			jQuery('body').trigger('cmdViewDataParams');
+		break;
+		case 'mnuDesConsultarViewMap':
+		break;
+		case 'mnuDesConsultarViewGraph':
+		break;
+		case 'mnuDesConsultarViewStd':
 		break;
 		case 'mnuQueryNew':
 			// Just reload the current region window...(need a better solution!!)
@@ -341,7 +350,11 @@ function doMainMenuCreate()
 
 	var mnuDesConsultar = new Ext.menu.Menu({
 		id: 'mnuDesConsultar', items: [
-			{id:'mnuDesConsultarQueryDesign', text: jQuery('#mnuDesConsultarQueryDesign').text(), handler: doMainMenuHandler }
+			{id:'mnuDesConsultarQueryDesign', text: jQuery('#mnuDesConsultarQueryDesign').text(), handler: doMainMenuHandler },
+			{id:'mnuDesConsultarViewData'   , text: jQuery('#mnuDesConsultarViewData').text()   , handler: doMainMenuHandler },
+			{id:'mnuDesConsultarViewMap'    , text: jQuery('#mnuDesConsultarViewMap').text()    , handler: doMainMenuHandler },
+			{id:'mnuDesConsultarViewGraph'  , text: jQuery('#mnuDesConsultarViewGraph').text()  , handler: doMainMenuHandler },
+			{id:'mnuDesConsultarViewStd'    , text: jQuery('#mnuDesConsultarViewStd').text()    , handler: doMainMenuHandler }
 		]
 	});
 	
@@ -517,10 +530,10 @@ function doDialogsCreate()
 	});
 
 	w = new Ext.Window({id:'wndViewDataParams', 
-		el:'dat-win', layout:'fit',
+		el:'divViewDataParamsWindow', layout:'fit',
 		width:600, height:420, 
 		closeAction:'hide', plain: true, animCollapse: false, constrainHeader: true,
-		items: new Ext.Panel({contentEl: 'dat-cfg', autoScroll: true }),
+		items: new Ext.Panel({contentEl: 'divViewDataParamsContent', autoScroll: true }),
 		buttons: [
 			{text: jQuery('#msgViewDataButtonClear').text(),
 				handler: function() {

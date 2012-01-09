@@ -25,7 +25,7 @@ function onReadyQueryResults()
 	}
 
 	jQuery('#btnViewData').click(function() {
-		Ext.getCmp('wndViewDataParams').show();
+		jQuery('body').trigger('cmdViewDataParams');
 	});
 	jQuery('#btnViewMap').click(function() {
 		Ext.getCmp('wndViewMapParams').show();
