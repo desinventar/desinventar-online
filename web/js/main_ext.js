@@ -196,10 +196,13 @@ function doMainMenuHandler(item)
 			jQuery('body').trigger('cmdViewDataParams');
 		break;
 		case 'mnuDesConsultarViewMap':
+			jQuery('body').trigger('cmdViewMapParams');
 		break;
 		case 'mnuDesConsultarViewGraph':
+			jQuery('body').trigger('cmdViewGraphParams');
 		break;
 		case 'mnuDesConsultarViewStd':
+			jQuery('body').trigger('cmdViewStdParams');
 		break;
 		case 'mnuQueryNew':
 			// Just reload the current region window...(need a better solution!!)

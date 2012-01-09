@@ -31,6 +31,9 @@ function onReadyStatistic() {
 		}
 	});
 
+	jQuery('body').on('cmdViewStdParams', function() {
+		Ext.getCmp('wndViewStdParams').show();
+	});
 } //function
 
 function doStatDisplayPage(page) {

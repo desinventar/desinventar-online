@@ -28,15 +28,15 @@ function onReadyQueryResults()
 		jQuery('body').trigger('cmdViewDataParams');
 	});
 	jQuery('#btnViewMap').click(function() {
-		Ext.getCmp('wndViewMapParams').show();
+		jQuery('body').trigger('cmdViewMapParams');
 	});
 	jQuery('#btnViewGraph').click(function() {
-		Ext.getCmp('wndViewGraphParams').show();
+		jQuery('body').trigger('cmdViewGraphParams');
 	});
 	jQuery('#btnViewStd').click(function() {
-		Ext.getCmp('wndViewStdParams').show();
+		jQuery('body').trigger('cmdViewStdParams');
 	});
-}
+} //onReadyQueryResults()
 
 function validateQueryDefinition()
 {
