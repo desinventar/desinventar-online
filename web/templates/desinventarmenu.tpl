@@ -11,8 +11,9 @@
 			<span id="mnuUserLanguagePortuguese">{-#mnuMenuUserLanguagePortuguese#-}</span>
 			<span id="mnuUserLanguageFrench">{-#mnuMenuUserLanguageFrench#-}</span>
 		<span id="mnuUserLogout">{-#mnuUserLogout#-}</span>
+	<span id="mnuDesConsultar">{-#mnuDesConsultar#-}</span>
+		<span id="mnuDesConsultarQueryDesign">{-#mnuDesConsultarQueryDesign#-}</span>
 	<span id="mnuMenuQuery">{-#mnuQuery#-}</span>
-		<span id="mnuQueryToggle">{-#mnuQueryToggle#-}</span>
 		<span id="mnuQueryNew">{-#mnuQueryNew#-}</span>
 		<span id="mnuQuerySave">{-#mnuQuerySave#-}</span>
 		<span id="mnuQueryOpen">{-#mnuQueryOpen#-}</span>

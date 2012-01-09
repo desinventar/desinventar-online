@@ -73,17 +73,23 @@
 			<Text LangIsoCode="por">Sair</Text>
 			<Text LangIsoCode="fre">Quitter</Text>
 		</Message>
+		<Message id="mnuDesConsultar">
+			<Text LangIsoCode="eng">DesConsultar</Text>
+			<Text LangIsoCode="spa">DesConsultar</Text>
+			<Text LangIsoCode="por">DesConsultar</Text>
+			<Text LangIsoCode="fre">DesConsultar</Text>
+		</Message>
+		<Message id="mnuDesConsultarQueryDesign">
+			<Text LangIsoCode="eng">Query design</Text>
+			<Text LangIsoCode="spa">Diseño de consulta</Text>
+			<Text LangIsoCode="por">Esquematização de consulta</Text>
+			<Text LangIsoCode="fre">Dessin de consultation</Text>
+		</Message>
 		<Message id="mnuQuery">
 			<Text LangIsoCode="eng">Queries</Text>
 			<Text LangIsoCode="spa">Consultas</Text>
 			<Text LangIsoCode="por">Consultas</Text>
 			<Text LangIsoCode="fre">Consultations</Text>
-		</Message>
-		<Message id="mnuQueryToggle">
-			<Text LangIsoCode="eng">Show/Hide</Text>
-			<Text LangIsoCode="spa">Mostrar/Ocultar</Text>
-			<Text LangIsoCode="por">Mostrar/Ocultar</Text>
-			<Text LangIsoCode="fre">Montrer/Cacher</Text>
 		</Message>
 		<Message id="mnuQueryNew">
 			<Text LangIsoCode="eng">New</Text>
