@@ -1,9 +1,6 @@
 	<table border="0" cellpadding="0" cellspacing="0" width="100%">
 		<tr bgcolor="#bbbbbb">
-			<td width="200">
-				<div id="ResultHeaderText"><b>{-#tsubtitle2#-} &rarr;</b></div>
-			</td>
-			<td align="center">
+			<td>
 				<div id="ResultHeaderButtonToolbar">
 					<button id="btnViewData" class="rounded" title="{-#msgViewDataTooltip#-}"><span>{-#msgViewData#-}</span></button>
 					{-include file="viewdata_parameters.tpl"-}
