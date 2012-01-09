@@ -42,6 +42,10 @@ function onReadyData() {
 	
 	// Set Number of Records in Current Displayed Page
 	jQuery('#prmDataPageRecords').val(jQuery('#tblDataRows tr').size());
+
+	jQuery('body').on('cmdViewDataParams', function() {
+		Ext.getCmp('wndViewDataParams').show();
+	});
 }
 
 function doDataDisplayPage(page)

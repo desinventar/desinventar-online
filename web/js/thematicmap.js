@@ -8,6 +8,9 @@ var map = null;
 
 function onReadyThematicMap()
 {
+	jQuery('body').on('cmdViewMapParams', function() {
+		Ext.getCmp('wndViewMapParams').show();
+	});
 	//createThematicMap();
 } //onReadyThematicMap()
 
