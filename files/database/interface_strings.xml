@@ -85,6 +85,12 @@
 			<Text LangIsoCode="por">Esquematização de consulta</Text>
 			<Text LangIsoCode="fre">Dessin de consultation</Text>
 		</Message>
+		<Message id="mnuDesConsultarRegionInfo">
+			<Text LangIsoCode="eng">Database information</Text>
+			<Text LangIsoCode="spa">Información base de datos</Text>
+			<Text LangIsoCode="por">Informação de banco</Text>
+			<Text LangIsoCode="fre">Information base de données</Text>
+		</Message>
 		<Message id="mnuDesConsultarViewData">
 			<Text LangIsoCode="eng">Data cards</Text>
 			<Text LangIsoCode="spa">Fichas</Text>
@@ -150,12 +156,6 @@
 			<Text LangIsoCode="spa">Ingresar/Editar registros</Text>
 			<Text LangIsoCode="por">Inserir ou editar registros</Text>
 			<Text LangIsoCode="fre">Insérer ou modifier des enregistrements</Text>
-		</Message>
-		<Message id="mnuDatabaseRegionInfo">
-			<Text LangIsoCode="eng">Database information</Text>
-			<Text LangIsoCode="spa">Información base de datos</Text>
-			<Text LangIsoCode="por">Informação de banco</Text>
-			<Text LangIsoCode="fre">Information base de données</Text>
 		</Message>
 		<Message id="mnuDatabaseExport">
 			<Text LangIsoCode="eng">Download database</Text>

@@ -137,15 +137,6 @@ function doMainMenuHandler(item)
 	var RegionId = jQuery('#desinventarRegionId').val();
 	switch (item.id)
 	{
-		case 'mnuDatabaseRegionInfo':
-			jQuery('.contentBlock').hide();
-			jQuery('#divQueryResults').show();
-			jQuery('#dcr').hide();
-			jQuery('#divRegionInfo').show();
-			doGetRegionInfo(jQuery('#desinventarRegionId').val());
-			Ext.getCmp('westm').collapse();
-			Ext.getCmp('westm').hide();
-		break;
 		case 'mnuUserLogin':
 		case 'mnuUserChangeLogin':
 			jQuery('body').trigger('cmdUserLoginShow');
@@ -191,6 +182,15 @@ function doMainMenuHandler(item)
 			{
 				w.expand(); //show()
 			}
+		break;
+		case 'mnuDesConsultarRegionInfo':
+			jQuery('.contentBlock').hide();
+			jQuery('#divQueryResults').show();
+			jQuery('#dcr').hide();
+			jQuery('#divRegionInfo').show();
+			doGetRegionInfo(jQuery('#desinventarRegionId').val());
+			Ext.getCmp('westm').collapse();
+			Ext.getCmp('westm').hide();
 		break;
 		case 'mnuDesConsultarViewData':
 			jQuery('body').trigger('cmdViewDataParams');
@@ -362,6 +362,7 @@ function doMainMenuCreate()
 	var mnuDesConsultar = new Ext.menu.Menu({
 		id: 'mnuDesConsultar', items: [
 			{id:'mnuDesConsultarQueryDesign', text: jQuery('#mnuDesConsultarQueryDesign').text(), handler: doMainMenuHandler },
+			{id:'mnuDesConsultarRegionInfo' , text: jQuery('#mnuDesConsultarRegionInfo').text() , handler: doMainMenuHandler },
 			{id:'mnuDesConsultarViewData'   , text: jQuery('#mnuDesConsultarViewData').text()   , handler: doMainMenuHandler },
 			{id:'mnuDesConsultarViewMap'    , text: jQuery('#mnuDesConsultarViewMap').text()    , handler: doMainMenuHandler },
 			{id:'mnuDesConsultarViewGraph'  , text: jQuery('#mnuDesConsultarViewGraph').text()  , handler: doMainMenuHandler },
@@ -375,7 +376,6 @@ function doMainMenuCreate()
 		items: [
 			{id:'mnuDatabaseRecordView'   , text: jQuery('#mnuDatabaseRecordView').text()   , handler: doMainMenuHandler, hidden: true  },
 			{id:'mnuDatabaseRecordEdit'   , text: jQuery('#mnuDatabaseRecordEdit').text()   , handler: doMainMenuHandler, hidden: true  },
-			{id:'mnuDatabaseRegionInfo'   , text: jQuery('#mnuDatabaseRegionInfo').text()   , handler: doMainMenuHandler, hidden: true  },
 			{id:'mnuDatabaseExport'       , text: jQuery('#mnuDatabaseExport').text()       , handler: doMainMenuHandler, hidden: true  },
 			{id:'mnuDatabaseCopy'         , text: jQuery('#mnuDatabaseCopy').text()         , handler: doMainMenuHandler, hidden: true  },
 			{id:'mnuDatabaseReplace'      , text: jQuery('#mnuDatabaseReplace').text()      , handler: doMainMenuHandler, hidden: true  },
@@ -454,7 +454,6 @@ function doMainMenuShow()
 		Ext.getCmp('mnuRegionLabel').setText('[' + jQuery('#desinventarRegionLabel').val() + ']');
 		if (UserRoleValue > 0)
 		{
-			Ext.getCmp('mnuDatabaseRegionInfo').show();
 			Ext.getCmp('mnuDesConsultar').show();
 			Ext.getCmp('mnuDatabaseRecordView').show();
 		}
