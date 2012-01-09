@@ -13,6 +13,7 @@
 		<span id="mnuUserLogout">{-#mnuUserLogout#-}</span>
 	<span id="mnuDesConsultar">{-#mnuDesConsultar#-}</span>
 		<span id="mnuDesConsultarQueryDesign">{-#mnuDesConsultarQueryDesign#-}</span>
+		<span id="mnuDesConsultarRegionInfo">{-#mnuDesConsultarRegionInfo#-}</span>
 		<span id="mnuDesConsultarViewData">{-#mnuDesConsultarViewData#-}</span>
 		<span id="mnuDesConsultarViewMap">{-#mnuDesConsultarViewMap#-}</span>
 		<span id="mnuDesConsultarViewGraph">{-#mnuDesConsultarViewGraph#-}</span>
@@ -24,7 +25,6 @@
 	<span id="mnuMenuDatabase">{-#mnuMenuDatabase#-}</span>
 		<span id="mnuDatabaseRecordView">{-#mnuDatabaseRecordView#-}</span>
 		<span id="mnuDatabaseRecordEdit">{-#mnuDatabaseRecordEdit#-}</span>
-		<span id="mnuDatabaseRegionInfo">{-#mnuDatabaseRegionInfo#-}</span>
 		<span id="mnuDatabaseExport">{-#mnuDatabaseExport#-}</span>
 		<span id="mnuDatabaseCopy">{-#mnuDatabaseCopy#-}</span>
 		<span id="mnuDatabaseReplace">{-#mnuDatabaseReplace#-}</span>
