@@ -109,29 +109,29 @@
 			<Text LangIsoCode="por">Consolidados</Text>
 			<Text LangIsoCode="fre">Consolidés</Text>
 		</Message>
-		<Message id="mnuQuery">
+		<Message id="mnuDesConsultarQuery">
 			<Text LangIsoCode="eng">Queries</Text>
 			<Text LangIsoCode="spa">Consultas</Text>
 			<Text LangIsoCode="por">Consultas</Text>
-			<Text LangIsoCode="fre">Consultations</Text>
+			<Text LangIsoCode="fre">Requête</Text>
 		</Message>
-		<Message id="mnuQueryNew">
-			<Text LangIsoCode="eng">New</Text>
-			<Text LangIsoCode="spa">Nueva</Text>
-			<Text LangIsoCode="por">Nova</Text>
-			<Text LangIsoCode="fre">Nouvelle</Text>
+		<Message id="mnuDesConsultarQueryNew">
+			<Text LangIsoCode="eng">New query</Text>
+			<Text LangIsoCode="spa">Nueva consulta</Text>
+			<Text LangIsoCode="por">Nova consulta</Text>
+			<Text LangIsoCode="fre">Nouvelle requête</Text>
 		</Message>
-		<Message id="mnuQuerySave">
-			<Text LangIsoCode="eng">Save file</Text>
-			<Text LangIsoCode="spa">Guardar</Text>
-			<Text LangIsoCode="por">Save file</Text>
-			<Text LangIsoCode="fre">Enregistrer</Text>
+		<Message id="mnuDesConsultarQuerySave">
+			<Text LangIsoCode="eng">Save query</Text>
+			<Text LangIsoCode="spa">Guardar consulta</Text>
+			<Text LangIsoCode="por">Salvar consulta</Text>
+			<Text LangIsoCode="fre">Enregistrer la requête</Text>
 		</Message>
-		<Message id="mnuQueryOpen">
-			<Text LangIsoCode="eng">Open file</Text>
-			<Text LangIsoCode="spa">Abrir</Text>
-			<Text LangIsoCode="por">Open file</Text>
-			<Text LangIsoCode="fre">Ouvrir</Text>
+		<Message id="mnuDesConsultarQueryOpen">
+			<Text LangIsoCode="eng">Open query</Text>
+			<Text LangIsoCode="spa">Abrir consulta</Text>
+			<Text LangIsoCode="por">Abrir consulta</Text>
+			<Text LangIsoCode="fre">Ouvrez requête</Text>
 		</Message>
 		<Message id="mnuMenuDatabase">
 			<Text LangIsoCode="eng">Database</Text>

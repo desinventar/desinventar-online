@@ -204,14 +204,14 @@ function doMainMenuHandler(item)
 		case 'mnuDesConsultarViewStd':
 			jQuery('body').trigger('cmdViewStdParams');
 		break;
-		case 'mnuQueryNew':
+		case 'mnuDesConsultarQueryNew':
 			// Just reload the current region window...(need a better solution!!)
 			window.location = jQuery('#desinventarURL').val() + '/' + RegionId;
 		break;
-		case 'menuQuerySave':
+		case 'mnuDesConsultarQuerySave':
 			saveQuery();
 		break;
-		case 'mnuQueryOpen':
+		case 'mnuDesConsultarQueryOpen':
 			Ext.getCmp('wndQueryOpen').show();
 		break;
 		// Datacards Menu Items
@@ -351,24 +351,25 @@ function doMainMenuCreate()
 		]
 	});
 
+	var mnuDesConsultarQuery = new Ext.menu.Menu({
+		id: 'mnuDesConsultarQuery', items: [
+			{id:'mnuDesConsultarQueryNew'  , text: jQuery('#mnuDesConsultarQueryNew').text()   , handler: doMainMenuHandler  },
+			{id:'mnuDesConsultarQuerySave' , text: jQuery('#mnuDesConsultarQuerySave').text()  , handler: doMainMenuHandler  },
+			{id:'mnuDesConsultarQueryOpen' , text: jQuery('#mnuDesConsultarQueryOpen').text()  , handler: doMainMenuHandler  }
+		]
+	});
+
 	var mnuDesConsultar = new Ext.menu.Menu({
 		id: 'mnuDesConsultar', items: [
 			{id:'mnuDesConsultarQueryDesign', text: jQuery('#mnuDesConsultarQueryDesign').text(), handler: doMainMenuHandler },
 			{id:'mnuDesConsultarViewData'   , text: jQuery('#mnuDesConsultarViewData').text()   , handler: doMainMenuHandler },
 			{id:'mnuDesConsultarViewMap'    , text: jQuery('#mnuDesConsultarViewMap').text()    , handler: doMainMenuHandler },
 			{id:'mnuDesConsultarViewGraph'  , text: jQuery('#mnuDesConsultarViewGraph').text()  , handler: doMainMenuHandler },
-			{id:'mnuDesConsultarViewStd'    , text: jQuery('#mnuDesConsultarViewStd').text()    , handler: doMainMenuHandler }
+			{id:'mnuDesConsultarViewStd'    , text: jQuery('#mnuDesConsultarViewStd').text()    , handler: doMainMenuHandler },
+			{id:'mnuDesConsultarQuery'      , text: jQuery('#mnuDesConsultarQuery').text()      , menu: mnuDesConsultarQuery }
 		]
 	});
 	
-	var mquery = new Ext.menu.Menu({
-		id: 'queryMenu', items: [
-			{id:'mnuQueryNew'    , text: jQuery('#mnuQueryNew').text()   , handler: doMainMenuHandler  },
-			{id:'menuQuerySave'  , text: jQuery('#mnuQuerySave').text()  , handler: doMainMenuHandler  },
-			{id:'mnuQueryOpen'   , text: jQuery('#mnuQueryOpen').text()  , handler: doMainMenuHandler  }
-		]
-	});
-
 	var mnuMenuDatabase = new Ext.menu.Menu({
 		id: 'databaseMenu',
 		items: [
