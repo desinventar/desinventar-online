@@ -140,6 +140,10 @@ function onReadyGraphic() {
 	// Initialize Controls on Load
 	jQuery('#prmGraphTypeComparative').val('').trigger('change');
 	jQuery('#prmGraphTypeHistogram').val('D.DisasterBeginTime').trigger('change');
+
+	jQuery('body').on('cmdViewGraphParams', function() {
+		Ext.getCmp('wndViewGraphParams').show();
+	});
 } // onReadyGraphic()
 
 function disabAxis2()
