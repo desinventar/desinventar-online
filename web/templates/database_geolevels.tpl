@@ -81,7 +81,7 @@
 						<input class="GeoLevelId" name="GeoLevelId" type="hidden" value="-1" />
 						<table border="0" width="100%">
 							<tr>
-								<td align="right">
+								<td>
 									SHP File
 								</td>
 								<td valign="top">
