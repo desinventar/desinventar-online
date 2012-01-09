@@ -44,63 +44,77 @@
 			<span class="clsGeolevelsStatus" id="msgGeolevels_UpdateError">{-#msgGeolevels_UpdateError#-}</span>		
 		</div>
 	</div>
-	<div id="divGeolevels_Edit">
-		<form id="frmGeolevels_Edit">
-			<input class="GeoLevelId" name="GeoLevelId" type="hidden" value="-1" />
+	<table>
+		<tr>
+			<td valign="top" class="line">
+				<div id="divGeolevels_Edit">
+					<form id="frmGeolevels_Edit">
+						<h4>{-#msgGeolevels_GeoLevelSubtitle#-}</h4>
+						<input class="GeoLevelId" name="GeoLevelId" type="hidden" value="-1" />
 
-			{-#msgGeolevels_GeoLevelName#-}<b class="required">*</b>
-			<br />
-			<input class="GeoLevelName line" name="GeoLevelName" type="text" tabindex="1" />
-			<br /><br />
+						{-#msgGeolevels_GeoLevelName#-}<b class="required">*</b>
+						<br />
+						<input class="GeoLevelName line" name="GeoLevelName" type="text" tabindex="1" />
+						<br /><br />
 
-			{-#msgGeolevels_GeoLevelDesc#-}<b class="required">*</b>
-			<br />
-			<textarea class="GeoLevelDesc" name="GeoLevelDesc" tabindex="2"></textarea>
-			<br />
+						{-#msgGeolevels_GeoLevelDesc#-}<b class="required">*</b>
+						<br />
+						<textarea class="GeoLevelDesc" name="GeoLevelDesc" tabindex="2"></textarea>
+						<br />
 
-			<input class="GeoLevelActive" name="GeoLevelActive" type="hidden" value="1" />
-			<span class="GeoLevelActiveLabel">{-#msgGeolevels_GeoLevelActive#-}</span>
-			<input class="GeoLevelActiveCheckbox" type="checkbox" tabindex="3" />
-			<br />
+						<input class="GeoLevelActive" name="GeoLevelActive" type="hidden" value="1" />
+						<span class="GeoLevelActiveLabel">{-#msgGeolevels_GeoLevelActive#-}</span>
+						<input class="GeoLevelActiveCheckbox" type="checkbox" tabindex="3" />
+						<br />
 
-			<div class="center">
-				<a class="button btnSave"><span>{-#msgGeolevels_Save#-}</span></a>
-				<a class="button btnCancel"><span>{-#msgGeolevels_Cancel#-}</span></a>
-			</div>
-			<table class="grid" style="display:none;">
-				<tr>
-				<td>
-					<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevLayerFile[2]-}')">
-					{-$dic.DBLevLayerFile[0]-}<span>{-$dic.DBLevLayerFile[1]-}</span></a>
-					<input id="GeoLevelLayerFile" name="GeoLevelLayerFile" type="hidden" /><br />
-					DBF File <input name="GeoLevelFileDBF" type="file" {-$ro-} tabindex="3" /><br />
-					SHP File <input name="GeoLevelFileSHP" type="file" {-$ro-} tabindex="4" /><br />
-					SHX File <input name="GeoLevelFileSHX" type="file" {-$ro-} tabindex="5" />
-				</td>
-				<td>
-					<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevLayerCode[2]-}')">
-					{-$dic.DBLevLayerCode[0]-}<span>{-$dic.DBLevLayerCode[1]-}</span></a><br />
-					<input id="GeoLevelLayerCode" name="GeoLevelLayerCode" type="text" {-$ro-} class="line" style="width:150px;"
-	   					tabindex="6" onFocus="showtip('{-$dic.DBLevColCode[2]-}')" />
-					<br /><br />
-					<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevLayerName[2]-}')">
-					{-$dic.DBLevLayerName[0]-}<span>{-$dic.DBLevLayerName[1]-}</span></a><br />
-					<input id="GeoLevelLayerName" name="GeoLevelLayerName" type="text" {-$ro-} class="line" style="width:150px;"
-						tabindex="7" onFocus="showtip('{-$dic.DBLevLayerName[2]-}')" />
-				</td>
-				</tr>
-				<tr>
-				<td colspan="2">
-					<div class="center">
-						<input id="_REG" name="_REG" value="{-$reg-}" type="hidden" />
-						<input id="cmd" name="cmd" type="hidden" /><br />
-						<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="8" />
-						<input type="reset" value="{-#bcancel#-}" class="line" 
-							onClick="$('levaddsect').style.display='none'; mod='lev'; uploadMsg('');" {-$ro-} />
-					</div>
-				</td>
-				</tr>
-			</table>
-		</form>
+						<div class="center">
+							<a class="button btnSave"><span>{-#msgGeolevels_Save#-}</span></a>
+							<a class="button btnCancel"><span>{-#msgGeolevels_Cancel#-}</span></a>
+						</div>
+					</form>
+				</div>
+			</td>
+			<td valign="top" class="line">
+				<div id="divGeocarto_Edit" class="hidden" style="width:100%;min-width:400px;">
+					<form id="frmGeocarto">
+						<h4>{-#msgGeolevels_GeoCartoSubtitle#-}</h4>
+						<input class="GeoLevelId" name="GeoLevelId" type="hidden" value="-1" />
+						<table border="0" width="100%">
+							<tr>
+								<td align="right">
+									SHP File
+								</td>
+								<td valign="top">
+									<span class="Filename" data-ext="shp" style="width:100%;"></span>
+									<br />
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<div class="ProgressBar" style="width:100%;height:15px;background-color:#dddddd">
+										<div class="ProgressMark" style="width:0px;height:15px;background-color:#3bb3c2">
+										</div>
+									</div>
+								</td>
+								<td>
+									<br />
+								</td>
+							</tr>
+							<tr>
+								<td valign="top" colspan="2" style="width:100%;">
+									<input type="hidden" class="UploadId" value="" />
+									<div id="divGeolevels_FileUploaderControl" style="display:block;">
+									</div>
+									<a class="button btnUploadCancel"><span>{-#msgGeolevels_UploadCancel#-}</span></a>
+								</td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</td>
+		</tr>
+	</table>
+	<div class="hidden">
+		<span id="msgGeolevels_UploadChooseFile">{-#msgGeolevels_UploadChooseFile#-}</span>
 	</div>
 </div>

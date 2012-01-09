@@ -7,6 +7,9 @@
 		{-include file="extjs.tpl"-}
 		<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/desinventar.css?version={-$jsversion-}" />
 		<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/main.css?version={-$jsversion-}" />
+
+		<script type="text/javascript" src="/fileuploader/fileuploader.js"></script>
+
 		<script type="text/javascript" src="{-$desinventarURL-}/js/common.js?version={-$jsversion-}"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/js/database_geolevels.js?version={-$jsversion-}"></script>
 

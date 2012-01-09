@@ -5,17 +5,18 @@
 
 function onReadyGeolevels()
 {
+	doGeolevelsUploaderCreate();
+
 	jQuery('#tbodyGeolevels_List').on('click', 'tr', function(e) {
-		if (! jQuery('#divGeolevels_Edit').is(':visible'))
-		{
-			jQuery('#frmGeolevels_Edit .GeoLevelId').val(jQuery('.GeoLevelId',this).text());
-			jQuery('#frmGeolevels_Edit .GeoLevelName').val(jQuery('.GeoLevelName',this).text());
-			jQuery('#frmGeolevels_Edit .GeoLevelDesc').val(jQuery('.GeoLevelDesc',this).prop('title'));
-			jQuery('#frmGeolevels_Edit .GeoLevelActiveLabel').hide();
-			jQuery('#frmGeolevels_Edit .GeoLevelActiveCheckbox').prop('checked', jQuery('.GeoLevelActive :input',this).is(':checked')).change().hide();
-			jQuery('#btnGeolevels_Add').hide();
-			jQuery('#divGeolevels_Edit').show();
-		}
+		jQuery('#frmGeolevels_Edit .GeoLevelId').val(jQuery('.GeoLevelId',this).text());
+		jQuery('#frmGeolevels_Edit .GeoLevelName').val(jQuery('.GeoLevelName',this).text());
+		jQuery('#frmGeolevels_Edit .GeoLevelDesc').val(jQuery('.GeoLevelDesc',this).prop('title'));
+		jQuery('#frmGeolevels_Edit .GeoLevelActiveLabel').hide();
+		jQuery('#frmGeolevels_Edit .GeoLevelActiveCheckbox').prop('checked', jQuery('.GeoLevelActive :input',this).is(':checked')).change().hide();
+		jQuery('#divGeolevels_Edit').show();
+		jQuery('#btnGeolevels_Add').hide();
+		jQuery('#frmGeocarto .GeoLevelId').val(jQuery('.GeoLevelId',this).text());
+		jQuery('#divGeocarto_Edit').show();
 	});
 	jQuery('#btnGeolevels_Add').click(function() {
 		jQuery('#divGeolevels_Edit').show();
@@ -33,6 +34,7 @@ function onReadyGeolevels()
 
 	jQuery('#frmGeolevels_Edit .btnCancel').click(function() {
 		jQuery('#divGeolevels_Edit').hide();
+		jQuery('#divGeocarto_Edit').hide();
 		jQuery('#btnGeolevels_Add').show();
 	});
 
@@ -135,3 +137,68 @@ function doGeolevelsPopulateList(GeolevelsList)
 	jQuery('#tbodyGeolevels_List tr:even').addClass('under');
 } //doGeolevelsPopulateList()
 
+function doGeolevelsUploaderCreate()
+{
+	var uploader = new qq.FileUploader({
+		element: document.getElementById('divGeolevels_FileUploaderControl'),
+		action: jQuery('#desinventarURL').val() + '/',
+		params:
+		{
+			cmd        : 'cmdGeolevelsCartographyUpload',
+			RegionId   : jQuery('#desinventarRegionId').val(),
+			UploadExt  : jQuery('#frmGeocarto .FileExt').val(),
+			GeoLevelId : jQuery('#frmGeocarto .GeoLevelId').val()
+		},
+		debug:false,
+		multiple:false,
+		allowedExtensions: ['shp','shx','dbf'],
+		onSubmit: function(id, Filename)
+		{
+			jQuery('#frmGeocarto .Filename').text(Filename);
+
+			jQuery('#frmGeocarto .UploadId').val(id);
+			jQuery('#frmGeocarto .ProgressBar').show();
+			jQuery('#frmGeocarto .ProgressMark').css('width', '0px');
+			jQuery('#divGeolevels_FileUploaderControl .qq-upload-button-text').hide();
+			jQuery('#frmGeocarto .btnUploadCancel').show();
+			//doDatabaseUploadStatusMsg('msgDatabaseUploadWaitForUpload');
+		},
+		onProgress: function(id, Filename, loaded, total)
+		{
+			var maxWidth = jQuery('#frmGeocarto .ProgressBar').width();
+			var percent  = parseInt(loaded/total * 100);
+			var width    = parseInt(percent * maxWidth/100);
+			jQuery('#frmGeocarto .ProgressMark').css('width', width);
+		},
+		onComplete: function(id, Filename, data)
+		{
+			doGeolevelsUploaderReset();
+			jQuery('#frmGeocarto .Filename').text(data.filename);
+			if (parseInt(data.Status)>0)
+			{
+			}
+			else
+			{
+				//doDatabaseUploadStatusMsg('msgDatabaseUploadErrorOnUpload');
+			}
+		},
+		onCancel: function(id, Filename)
+		{
+		}
+	});
+	jQuery('#divGeolevels_FileUploaderControl .qq-upload-button-text').html(jQuery('#msgGeolevels_UploadChooseFile').text());
+	jQuery('#divGeolevels_FileUploaderControl .qq-upload-list').hide();
+
+	jQuery('#frmGeocarto .btnUploadCancel').click(function() {
+		//doDatabaseUploadReset();
+		uploader.cancel(jQuery('#frmGeocarto .UploadId').val());
+	});
+} //doGeolevelsUploaderCreate()
+
+function doGeolevelsUploaderReset()
+{
+	jQuery('#frmGeocarto .ProgressBar').hide();
+	jQuery('#frmGeocarto .ProgressMark').css('width', '0px');
+	jQuery('#frmGeocarto .UploadCancel').hide();
+	jQuery('#divGeolevels_FileUploaderControl .qq-upload-button-text').show();
+} //doGeolevelsUplaoderReset()
