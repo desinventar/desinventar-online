@@ -17,10 +17,10 @@
 		<span id="mnuDesConsultarViewMap">{-#mnuDesConsultarViewMap#-}</span>
 		<span id="mnuDesConsultarViewGraph">{-#mnuDesConsultarViewGraph#-}</span>
 		<span id="mnuDesConsultarViewStd">{-#mnuDesConsultarViewStd#-}</span>
-	<span id="mnuMenuQuery">{-#mnuQuery#-}</span>
-		<span id="mnuQueryNew">{-#mnuQueryNew#-}</span>
-		<span id="mnuQuerySave">{-#mnuQuerySave#-}</span>
-		<span id="mnuQueryOpen">{-#mnuQueryOpen#-}</span>
+		<span id="mnuDesConsultarQuery">{-#mnuDesConsultarQuery#-}</span>
+			<span id="mnuDesConsultarQueryNew">{-#mnuDesConsultarQueryNew#-}</span>
+			<span id="mnuDesConsultarQuerySave">{-#mnuDesConsultarQuerySave#-}</span>
+			<span id="mnuDesConsultarQueryOpen">{-#mnuDesConsultarQueryOpen#-}</span>
 	<span id="mnuMenuDatabase">{-#mnuMenuDatabase#-}</span>
 		<span id="mnuDatabaseRecordView">{-#mnuDatabaseRecordView#-}</span>
 		<span id="mnuDatabaseRecordEdit">{-#mnuDatabaseRecordEdit#-}</span>
