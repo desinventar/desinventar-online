@@ -250,7 +250,7 @@ function doMainMenuHandler(item)
 			jQuery('#divDatacardsImport').show();
 			updateList('divDatacardsImport', jQuery('#desinventarURL').val() + '/import.php', 'r=' + RegionId);
 		break;
-		case 'mnuDatabaseExport':
+		case 'mnuDatabaseDownload':
 			jQuery('.clsAdminDatabaseExport').hide();
 			Ext.getCmp('wndDatabaseExport').show();
 			doAdminDatabaseExportAction();
@@ -378,10 +378,10 @@ function doMainMenuCreate()
 		]
 	});
 	
-	var mnuMenuDatabase = new Ext.menu.Menu({
+	var mnuDatabase = new Ext.menu.Menu({
 		id: 'databaseMenu',
 		items: [
-			{id:'mnuDatabaseExport'       , text: jQuery('#mnuDatabaseExport').text()       , handler: doMainMenuHandler, hidden: true  },
+			{id:'mnuDatabaseDownload'     , text: jQuery('#mnuDatabaseDownload').text()     , handler: doMainMenuHandler, hidden: true  },
 			{id:'mnuDatabaseCopy'         , text: jQuery('#mnuDatabaseCopy').text()         , handler: doMainMenuHandler, hidden: true  },
 			{id:'mnuDatabaseReplace'      , text: jQuery('#mnuDatabaseReplace').text()      , handler: doMainMenuHandler, hidden: true  },
 			{id:'mnuDatabaseCreate'       , text: jQuery('#mnuDatabaseCreate').text()       , handler: doMainMenuHandler, hidden: true  },
@@ -414,7 +414,7 @@ function doMainMenuCreate()
 	tb.add({ id:'mnuUser'            , text: jQuery('#mnuMenuUser').text()     , menu: muser });
 	tb.add({ id:'mnuDesConsultar'    , text: jQuery('#mnuDesConsultar').text() , menu: mnuDesConsultar, hidden: true  });
 	tb.add({ id:'mnuDatacard'        , text: jQuery('#mnuDatacard').text()     , menu: mnuDatacard    , hidden: true });
-	tb.add({ id:'mnuCards'           , text: jQuery('#mnuMenuDatabase').text() , menu: mnuMenuDatabase, hidden: false });
+	tb.add({ id:'mnuDatabase'        , text: jQuery('#mnuDatabase').text()     , menu: mnuDatabase    , hidden: false });
 	tb.add({ id:'mnuHelp'            , text: jQuery('#mnuMenuHelp').text()     , menu: mhelp});
 	tb.add('->',{id: 'mnuWaiting'    , text: '<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />', hidden: true});
 	tb.add('->',{id: 'mnuRegionLabel', text: '', handler: doMainMenuHandler });
@@ -474,7 +474,7 @@ function doMainMenuShow()
 			Ext.getCmp('mnuDatacardEdit').show();
 			// Enable other functions
 			Ext.getCmp('mnuDatacardImport').hide(); // Disabled for now
-			Ext.getCmp('mnuDatabaseExport').show();
+			Ext.getCmp('mnuDatabaseDownload').show();
 
 			if (UserRoleValue >= 4)
 			{

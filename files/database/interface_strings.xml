@@ -163,71 +163,59 @@
 			<Text LangIsoCode="por">Importação de formulários</Text>
 			<Text LangIsoCode="fre">Importation de carte de données</Text>
 		</Message>
-		<Message id="mnuMenuDatabase">
+		<Message id="mnuDatabase">
 			<Text LangIsoCode="eng">Database</Text>
 			<Text LangIsoCode="spa">Base de datos</Text>
 			<Text LangIsoCode="por">Banco de dados</Text>
 			<Text LangIsoCode="fre">Base de données</Text>
 		</Message>
-		<Message id="mnuDatabaseExport">
-			<Text LangIsoCode="eng">Download database</Text>
-			<Text LangIsoCode="spa">Descargar base de datos</Text>
-			<Text LangIsoCode="por">Baixe banco de dados</Text>
-			<Text LangIsoCode="fre">Télécharger base de données</Text>
+		<Message id="mnuDatabaseDownload">
+			<Text LangIsoCode="eng">Download</Text>
+			<Text LangIsoCode="spa">Descargar</Text>
+			<Text LangIsoCode="por">Baixar</Text>
+			<Text LangIsoCode="fre">Télécharger</Text>
 		</Message>
 		<Message id="mnuDatabaseUpload">
-			<Text LangIsoCode="eng">Upload database</Text>
-			<Text LangIsoCode="spa">Cargar base de datos</Text>
-			<Text LangIsoCode="por">Carregar banco de dados</Text>
-			<Text LangIsoCode="fre">Charger base de données</Text>
+			<Text LangIsoCode="eng">Upload</Text>
+			<Text LangIsoCode="spa">Subir</Text>
+			<Text LangIsoCode="por">Carregar</Text>
+			<Text LangIsoCode="fre">Charger</Text>
 		</Message>
 		<Message id="mnuDatabaseCopy">
-			<Text LangIsoCode="eng">Copy database</Text>
-			<Text LangIsoCode="spa">Copiar base de datos</Text>
-			<Text LangIsoCode="por">Copiar um banco de dados</Text>
-			<Text LangIsoCode="fre">Copie une base de données</Text>
+			<Text LangIsoCode="eng">Copy</Text>
+			<Text LangIsoCode="spa">Copiar</Text>
+			<Text LangIsoCode="por">Copiar</Text>
+			<Text LangIsoCode="fre">Copie</Text>
 		</Message>
 		<Message id="mnuDatabaseReplace">
-			<Text LangIsoCode="eng">Replace database</Text>
-			<Text LangIsoCode="spa">Reemplazar base de datos</Text>
-			<Text LangIsoCode="por">Substituir banco de dados</Text>
-			<Text LangIsoCode="fre">Remplacer base de données</Text>
+			<Text LangIsoCode="eng">Replace</Text>
+			<Text LangIsoCode="spa">Reemplazar</Text>
+			<Text LangIsoCode="por">Substituir</Text>
+			<Text LangIsoCode="fre">Remplacer</Text>
 		</Message>
 		<Message id="mnuDatabaseCreate">
-			<Text LangIsoCode="eng">Create new database</Text>
-			<Text LangIsoCode="spa">Crear nueva base de datos</Text>
-			<Text LangIsoCode="por">Criar novo banco de dados</Text>
-			<Text LangIsoCode="fre">Créer nouvelle base de données</Text>
-		</Message>
-		<Message id="mnuDatabaseSetAdminUser">
-			<Text LangIsoCode="eng">Database Administrator</Text>
-			<Text LangIsoCode="spa">Administrador Base de Datos</Text>
-			<Text LangIsoCode="por">Administrador de banco de dados</Text>
-			<Text LangIsoCode="fre">Database Administrator</Text>
+			<Text LangIsoCode="eng">Create</Text>
+			<Text LangIsoCode="spa">Crear</Text>
+			<Text LangIsoCode="por">Criar</Text>
+			<Text LangIsoCode="fre">Créer</Text>
 		</Message>
 		<Message id="mnuDatabaseConfig">
-			<Text LangIsoCode="eng">Setup database</Text>
-			<Text LangIsoCode="spa">Configurar base de datos</Text>
-			<Text LangIsoCode="por">Configuração banco de dados</Text>
-			<Text LangIsoCode="fre">Configuration base de données</Text>
+			<Text LangIsoCode="eng">Setup</Text>
+			<Text LangIsoCode="spa">Configurar</Text>
+			<Text LangIsoCode="por">Configure</Text>
+			<Text LangIsoCode="fre">Configurer</Text>
 		</Message>
 		<Message id="mnuDatabaseSelect">
-			<Text LangIsoCode="eng">Select database</Text>
-			<Text LangIsoCode="spa">Seleccionar base de datos</Text>
-			<Text LangIsoCode="por">Selecione banco de dados</Text>
-			<Text LangIsoCode="fre">Sélectionnez la base de données</Text>
+			<Text LangIsoCode="eng">Select</Text>
+			<Text LangIsoCode="spa">Seleccionar</Text>
+			<Text LangIsoCode="por">Selecione</Text>
+			<Text LangIsoCode="fre">Sélectionnez</Text>
 		</Message>
 		<Message id="mnuDatabaseSelectAnother">
-			<Text LangIsoCode="eng">Select another database</Text>
-			<Text LangIsoCode="spa">Elegir otra base de datos</Text>
-			<Text LangIsoCode="por">Escolha outro banco de dados</Text>
-			<Text LangIsoCode="fre">Choisir une autre base de données</Text>
-		</Message>
-		<Message id="mnuAdminDatabases">
-			<Text LangIsoCode="eng">Database management</Text>
-			<Text LangIsoCode="spa">Gestión de bases de datos</Text>
-			<Text LangIsoCode="por">Gestão de bancos de dados</Text>
-			<Text LangIsoCode="fre">Gestion des bases de données</Text>
+			<Text LangIsoCode="eng">Select another</Text>
+			<Text LangIsoCode="spa">Elegir otra</Text>
+			<Text LangIsoCode="por">Escolha outro</Text>
+			<Text LangIsoCode="fre">Choisir autre</Text>
 		</Message>
 		<Message id="mnuMenuHelp">
 			<Text LangIsoCode="eng">Help</Text>
