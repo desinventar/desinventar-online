@@ -93,9 +93,6 @@ function doViewportShow() {
 		if (UserRoleValue > 0)
 		{
 			jQuery('#divQueryResults').show();
-			// Load Database Info and Show
-			doGetRegionInfo(jQuery('#desinventarRegionId').val());
-			jQuery('#divRegionInfo').show();
 			jQuery('#dcr').hide();
 			jQuery('#divQueryResults').show();
 		}
@@ -146,8 +143,8 @@ function doMainMenuHandler(item)
 			jQuery('#dcr').hide();
 			jQuery('#divRegionInfo').show();
 			doGetRegionInfo(jQuery('#desinventarRegionId').val());
-			Ext.getCmp('westm').show();
-			Ext.getCmp('westm').expand();
+			Ext.getCmp('westm').collapse();
+			Ext.getCmp('westm').hide();
 		break;
 		case 'mnuUserLogin':
 		case 'mnuUserChangeLogin':
