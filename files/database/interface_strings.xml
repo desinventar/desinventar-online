@@ -3037,6 +3037,12 @@
 			<Text LangIsoCode="por">Adicionar</Text>
 			<Text LangIsoCode="fre">Ajouter</Text>
 		</Message>
+		<Message id="msgGeolevels_GeoLevelSubtitle">
+			<Text LangIsoCode="eng">Geography level</Text>
+			<Text LangIsoCode="spa">Nivel geográfico</Text>
+			<Text LangIsoCode="por">Nível de geografia</Text>
+			<Text LangIsoCode="fre">Niveau de géographie</Text>
+		</Message>
 		<Message id="msgGeolevels_Save">
 			<Text LangIsoCode="eng">Save</Text>
 			<Text LangIsoCode="spa">Guardar</Text>
@@ -3060,6 +3066,24 @@
 			<Text LangIsoCode="spa">Error actualizando registro</Text>
 			<Text LangIsoCode="por">Erro ao atualizar registro</Text>
 			<Text LangIsoCode="fre">Erreur lors de la mise à jour d'enregistrement</Text>
+		</Message>
+		<Message id="msgGeolevels_GeoCartoSubtitle">
+			<Text LangIsoCode="eng">Cartography</Text>
+			<Text LangIsoCode="spa">Cartografía</Text>
+			<Text LangIsoCode="por">Cartografia</Text>
+			<Text LangIsoCode="fre">Cartographie</Text>
+		</Message>
+		<Message id="msgGeolevels_UploadChooseFile">
+			<Text LangIsoCode="eng">Choose file</Text>
+			<Text LangIsoCode="spa">Elegir archivo..</Text>
+			<Text LangIsoCode="por">Escolha arquivo</Text>
+			<Text LangIsoCode="fre">Choisissez fichier</Text>
+		</Message>
+		<Message id="msgGeolevels_UploadCancel">
+			<Text LangIsoCode="eng">Cancel</Text>
+			<Text LangIsoCode="spa">Cancelar</Text>
+			<Text LangIsoCode="por">Cancelar</Text>
+			<Text LangIsoCode="fre">Annuler</Text>
 		</Message>
 	</Group>
 	<Group name="grpDatabaseUsers">
