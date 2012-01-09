@@ -170,7 +170,7 @@ function doMainMenuHandler(item)
 			doMainChangeLanguage('fre');
 		break;
 		// query menu
-		case 'menuQueryToggle':
+		case 'mnuDesConsultarQueryDesign':
 			w = Ext.getCmp('westm');
 			jQuery('.contentBlock').hide();
 			if (RegionId == '')
@@ -338,11 +338,15 @@ function doMainMenuCreate()
 			{id: 'mnuUserLogout'           , text: jQuery('#mnuUserLogout').text()           , handler: doMainMenuHandler, hidden: true }
 		]
 	});
+
+	var mnuDesConsultar = new Ext.menu.Menu({
+		id: 'mnuDesConsultar', items: [
+			{id:'mnuDesConsultarQueryDesign', text: jQuery('#mnuDesConsultarQueryDesign').text(), handler: doMainMenuHandler }
+		]
+	});
 	
 	var mquery = new Ext.menu.Menu({
-		id: 'queryMenu',
-		items: [
-			{id:'menuQueryToggle', text: jQuery('#mnuQueryToggle').text(), handler: doMainMenuHandler  },
+		id: 'queryMenu', items: [
 			{id:'mnuQueryNew'    , text: jQuery('#mnuQueryNew').text()   , handler: doMainMenuHandler  },
 			{id:'menuQuerySave'  , text: jQuery('#mnuQuerySave').text()  , handler: doMainMenuHandler  },
 			{id:'mnuQueryOpen'   , text: jQuery('#mnuQueryOpen').text()  , handler: doMainMenuHandler  }
@@ -385,10 +389,10 @@ function doMainMenuCreate()
 	});
 	
 	var tb = new Ext.Toolbar({renderTo: 'toolbar', items : [] });
-	tb.add({ id:'mnuUser'       , text: jQuery('#mnuMenuUser').text()     , menu: muser });
-	tb.add({ id:'mnuQuery'      , text: jQuery('#mnuMenuQuery').text()    , menu: mquery, hidden: true });
-	tb.add({ id:'mnuCards'      , text: jQuery('#mnuMenuDatabase').text() , menu: mnuMenuDatabase, hidden: false });
-	tb.add({ id:'mnuHelp'       , text: jQuery('#mnuMenuHelp').text()     , menu: mhelp});
+	tb.add({ id:'mnuUser'            , text: jQuery('#mnuMenuUser').text()     , menu: muser });
+	tb.add({ id:'mnuDesConsultar'    , text: jQuery('#mnuDesConsultar').text() , menu: mnuDesConsultar, hidden: true  });
+	tb.add({ id:'mnuCards'           , text: jQuery('#mnuMenuDatabase').text() , menu: mnuMenuDatabase, hidden: false });
+	tb.add({ id:'mnuHelp'            , text: jQuery('#mnuMenuHelp').text()     , menu: mhelp});
 	tb.add('->',{id: 'mnuWaiting'    , text: '<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />', hidden: true});
 	tb.add('->',{id: 'mnuRegionLabel', text: '', handler: doMainMenuHandler });
 	tb.add('->',{id: 'mnuHelpWebsite', text: '<img src="' + jQuery('#desinventarURL').val() + '/images/di_logo4.png" alt="" />',  handler: doMainMenuHandler });
@@ -434,7 +438,7 @@ function doMainMenuShow()
 		if (UserRoleValue > 0)
 		{
 			Ext.getCmp('mnuDatabaseRegionInfo').show();
-			Ext.getCmp('mnuQuery').show();
+			Ext.getCmp('mnuDesConsultar').show();
 			Ext.getCmp('mnuDatabaseRecordView').show();
 		}
 
