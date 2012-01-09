@@ -22,9 +22,11 @@
 			<span id="mnuDesConsultarQueryNew">{-#mnuDesConsultarQueryNew#-}</span>
 			<span id="mnuDesConsultarQuerySave">{-#mnuDesConsultarQuerySave#-}</span>
 			<span id="mnuDesConsultarQueryOpen">{-#mnuDesConsultarQueryOpen#-}</span>
+	<span id="mnuDatacard">{-#mnuDatacard#-}</span>
+		<span id="mnuDatacardView">{-#mnuDatacardView#-}</span>
+		<span id="mnuDatacardEdit">{-#mnuDatacardEdit#-}</span>
+		<span id="mnuDatacardImport">{-#mnuDatacardImport#-}</span>
 	<span id="mnuMenuDatabase">{-#mnuMenuDatabase#-}</span>
-		<span id="mnuDatabaseRecordView">{-#mnuDatabaseRecordView#-}</span>
-		<span id="mnuDatabaseRecordEdit">{-#mnuDatabaseRecordEdit#-}</span>
 		<span id="mnuDatabaseExport">{-#mnuDatabaseExport#-}</span>
 		<span id="mnuDatabaseCopy">{-#mnuDatabaseCopy#-}</span>
 		<span id="mnuDatabaseReplace">{-#mnuDatabaseReplace#-}</span>
@@ -32,7 +34,6 @@
 		<span id="mnuDatabaseConfig">{-#mnuDatabaseConfig#-}</span>
 		<span id="mnuDatabaseSelect">{-#mnuDatabaseSelect#-}</span>
 		<span id="mnuDatabaseSelectAnother">{-#mnuDatabaseSelectAnother#-}</span>
-		<span id="mnuDatacardImport">{-#mnuDatacardImport#-}</span>
 		<span id="mnuDatabaseSetAdminUser">{-#mnuDatabaseSetAdminUser#-}</span>
 		<span id="mnuAdminDatabases">{-#mnuAdminDatabases#-}</span>
 	<span id="mnuMenuHelp">{-#mnuMenuHelp#-}</span>

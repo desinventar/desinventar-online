@@ -139,23 +139,35 @@
 			<Text LangIsoCode="por">Abrir consulta</Text>
 			<Text LangIsoCode="fre">Ouvrez requête</Text>
 		</Message>
-		<Message id="mnuMenuDatabase">
-			<Text LangIsoCode="eng">Database</Text>
-			<Text LangIsoCode="spa">Base de datos</Text>
-			<Text LangIsoCode="por">Banco de dados</Text>
-			<Text LangIsoCode="fre">Base de données</Text>
+		<Message id="mnuDatacard">
+			<Text LangIsoCode="eng">Data cards</Text>
+			<Text LangIsoCode="spa">Fichas</Text>
+			<Text LangIsoCode="por">Registros</Text>
+			<Text LangIsoCode="fre">Enregistrements</Text>
 		</Message>
-		<Message id="mnuDatabaseRecordView">
+		<Message id="mnuDatacardView">
 			<Text LangIsoCode="eng">View records</Text>
 			<Text LangIsoCode="spa">Ver registros</Text>
 			<Text LangIsoCode="por">Ver os registros</Text>
 			<Text LangIsoCode="fre">Voir les dossiers</Text>
 		</Message>
-		<Message id="mnuDatabaseRecordEdit">
+		<Message id="mnuDatacardEdit">
 			<Text LangIsoCode="eng">Insert/Edit records</Text>
 			<Text LangIsoCode="spa">Ingresar/Editar registros</Text>
 			<Text LangIsoCode="por">Inserir ou editar registros</Text>
 			<Text LangIsoCode="fre">Insérer ou modifier des enregistrements</Text>
+		</Message>
+		<Message id="mnuDatacardImport">
+			<Text LangIsoCode="eng">Import data cards</Text>
+			<Text LangIsoCode="spa">Importación de fichas</Text>
+			<Text LangIsoCode="por">Importação de formulários</Text>
+			<Text LangIsoCode="fre">Importation de carte de données</Text>
+		</Message>
+		<Message id="mnuMenuDatabase">
+			<Text LangIsoCode="eng">Database</Text>
+			<Text LangIsoCode="spa">Base de datos</Text>
+			<Text LangIsoCode="por">Banco de dados</Text>
+			<Text LangIsoCode="fre">Base de données</Text>
 		</Message>
 		<Message id="mnuDatabaseExport">
 			<Text LangIsoCode="eng">Download database</Text>
@@ -216,12 +228,6 @@
 			<Text LangIsoCode="spa">Gestión de bases de datos</Text>
 			<Text LangIsoCode="por">Gestão de bancos de dados</Text>
 			<Text LangIsoCode="fre">Gestion des bases de données</Text>
-		</Message>
-		<Message id="mnuDatacardImport">
-			<Text LangIsoCode="eng">Import data cards</Text>
-			<Text LangIsoCode="spa">Importación de fichas</Text>
-			<Text LangIsoCode="por">Importação de formulários</Text>
-			<Text LangIsoCode="fre">Importation de carte de données</Text>
 		</Message>
 		<Message id="mnuMenuHelp">
 			<Text LangIsoCode="eng">Help</Text>
