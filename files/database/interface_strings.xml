@@ -1669,6 +1669,12 @@
 			<Text LangIsoCode="por">Gravar sem efeitos não podem ser salvos</Text>
 			<Text LangIsoCode="fre">Record sans effets ne peuvent pas être sauvés</Text>
 		</Message>
+		<Message id="msgDatacardOutsideOfPeriod">
+			<Text LangIsoCode="eng">Disaster's begin date is out of database period</Text>
+			<Text LangIsoCode="spa">Fecha de inicio del desastre está fuera del periodo de la base de datos</Text>
+			<Text LangIsoCode="por">Data desastre começam está fora do período base de dados</Text>
+			<Text LangIsoCode="fre">Date de commence de catastrophe est hors de la période de base de données</Text>
+		</Message>
 		<Message id="msgDatacardNetworkError">
 			<Text LangIsoCode="eng">Network error; please try again.</Text>
 			<Text LangIsoCode="spa">Error de red; por favor intente nuevamente.</Text>
