@@ -184,6 +184,7 @@ class DIDisaster extends DIRecord
 		{
 			$iReturn = $this->validateNotNull(-56, 'DisasterSource');
 			$iReturn = $this->validateEffects(-61, 1);
+			$iReturn = $this->validateDisasterBeginTime(-62);
 		}
 		else
 		{
@@ -192,7 +193,40 @@ class DIDisaster extends DIRecord
 		}
 		return $iReturn;
 	}
-	
+
+	public function validateDisasterBeginTime($ErrCode)
+	{
+		$r = new DIRegion($this->session, $this->RegionId);
+		$PeriodBeginDate   = trim($r->get('PeriodBeginDate'));
+		$PeriodEndDate     = trim($r->get('PeriodEndDate'));
+		$DisasterBeginTime = $this->get('DisasterBeginTime');
+
+		$iReturn = ERR_NO_ERROR;
+		if ($iReturn > 0)
+		{
+			if ($PeriodBeginDate != '')
+			{
+				if ($DisasterBeginTime < $PeriodBeginDate)
+				{
+					$iReturn = $ErrCode;
+				}
+			}
+		}
+
+		if ($iReturn > 0)
+		{
+			if ($PeriodEndDate != '')
+			{
+				$PeriodEndDate = DIDate::doCeil($PeriodEndDate);
+				if ($DisasterBeginTime > $PeriodEndDate)
+				{
+					$iReturn = $ErrCode;
+				}
+			}
+		}
+		return $iReturn;
+	} //validateDisasterBeginTime()
+		
 	public function validateEffects($ErrCode, $isError)
 	{
 		$bFound = -1;
