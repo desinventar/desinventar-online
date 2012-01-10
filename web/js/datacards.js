@@ -21,11 +21,10 @@ function onReadyDatacards()
 	jQuery('#DICard').unbind('submit').submit(function() {
 		jQuery('#DatacardCommand').val(jQuery('#_CMD').val());
 		jQuery('#RecordAuthor').val(jQuery('#desinventarUserId').val());
-		jQuery('#RegionId').val(jQuery('#desinventarRegionId').val());
 		displayDatacardStatusMsg('');
-		var params = 'RegionId=' + jQuery('#RegionId').val() + '&' + jQuery(this).serialize();
+		var params = jQuery(this).serializeObject();
 		jQuery.post(jQuery('#desinventarURL').val() + '/cards.php',
-			params,
+			jQuery.extend(params, { RegionId : jQuery('#desinventarRegionId').val() }),
 			function(data)
 			{
 				if (data.Status == 'OK')
@@ -71,6 +70,9 @@ function onReadyDatacards()
 						case -61:
 							displayDatacardStatusMsg('msgDatacardWithoutEffects');
 						break;
+						case -62:
+							displayDatacardStatusMsg('msgDatacardOutsideOfPeriod');
+						break;
 						default:
 							jQuery('#msgDatacardCustom').text(data.StatusMsg);
 							displayDatacardStatusMsg('msgDatacardCustom');
@@ -78,6 +80,9 @@ function onReadyDatacards()
 					}
 				}
 				// clear Help text area
+				setTimeout(function() {
+					displayDatacardStatusMsg('');
+				}, 2500);
 				showtip('','#ffffff');
 			},
 			'json'
