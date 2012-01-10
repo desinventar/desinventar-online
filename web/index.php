@@ -1,11 +1,10 @@
 <script language="php">
 /*
   DesInventar - http://www.desinventar.org
-  (c) 1998-2011 Corporacion OSSO
+  (c) 1998-2012 Corporacion OSSO
 */
 
 require_once('include/loader.php');
-exit();
 require_once('include/diregion.class.php');
 require_once('include/diregiondb.class.php');
 require_once('include/diregionrecord.class.php');
