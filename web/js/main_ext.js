@@ -164,24 +164,9 @@ function doMainMenuHandler(item)
 		case 'mnuDesConsultarQueryDesign':
 			w = Ext.getCmp('westm');
 			jQuery('.contentBlock').hide();
-			if (RegionId == '')
-			{
-				jQuery('#divQueryResults').hide();
-				w.hide();
-			}
-			else
-			{
-				jQuery('#divQueryResults').show();
-				w.show();
-			}
-			if (w.isVisible())
-			{
-				w.collapse(); //hide()
-			}
-			else
-			{
-				w.expand(); //show()
-			}
+			jQuery('#divQueryResults').show();
+			w.show();
+			w.expand();
 		break;
 		case 'mnuDesConsultarRegionInfo':
 			jQuery('.contentBlock').hide();
