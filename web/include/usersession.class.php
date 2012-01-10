@@ -1,7 +1,7 @@
 <script language="php">
 /*
   DesInventar - http://www.desinventar.org
- (c) 1998-2011 Corporacion OSSO
+ (c) 1998-2012 Corporacion OSSO
 */
 
 define('ROLE_NONE'       , 0);
@@ -24,6 +24,8 @@ class UserSession {
 		$this->UserRole          = '';
 		$this->UserRoleValue     = ROLE_NONE;
 		$this->q = new Query();
+		$this->config = array();
+		$this->config['AutoLogin'] = 0;
 		$num_args = func_num_args();
 		if ($num_args > 0) {
 			if (func_get_arg(0) != '') {  
@@ -133,7 +135,36 @@ class UserSession {
 			showErrorMsg($e->getMessage());
 		}
 		return $iReturn;
-	}
+	} //setUser()
+
+	public function doUserAutoLoginCheck()
+	{
+		$iReturn = ERR_DEFAULT_ERROR;
+		if ($this->UserId == '')
+		{
+			$clientAddr = trim($_SERVER['REMOTE_ADDR']);
+			$addrList = '127.0.0.1';
+			$addrList2 = $_SERVER['DESINVENTAR_AUTOLOGIN_ADDRLIST'];
+			$addrList2 = preg_replace('/ +/',',', $addrList2);
+			$addrList2 = preg_replace('/,+/',',', $addrList2);
+			$addrList = explode(',', $addrList . ',' . $addrList2);
+			$bAutoLogin = in_array($clientAddr, $addrList);			
+			if ($bAutoLogin)
+			{
+				$iReturn = ERR_NO_ERROR;
+			}
+		}
+		return $iReturn;
+	} //doUserAutoLoginCheck()
+
+	public function doUserAutoLogin()
+	{
+		$iReturn = ERR_NO_ERROR;
+		$UserId = 'root';
+		$this->setUser($UserId);
+		$this->config['AutoLogin'] = 1;
+		return $iReturn;
+	} //doUserAutoLogin()
 	
 	public function setLangIsoCode($prmLangIsoCode) 
 	{

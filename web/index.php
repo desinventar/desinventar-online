@@ -5,6 +5,7 @@
 */
 
 require_once('include/loader.php');
+exit();
 require_once('include/diregion.class.php');
 require_once('include/diregiondb.class.php');
 require_once('include/diregionrecord.class.php');
