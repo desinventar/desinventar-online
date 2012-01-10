@@ -5,8 +5,6 @@
 */
 require_once(BASE . '/include/distatus.class.php');
 class DIObject {
-	var $session = null;
-	var $RegionId  = '';
 	var $sFieldKeyDef = '';
 	var $sFieldDef = '';
 	var $status = null;
@@ -17,7 +15,7 @@ class DIObject {
 	
 	public function __construct($prmSession)
 	{
-		$this->session = $prmSession;
+		$this->session  = $prmSession;
 		$this->RegionId = $this->session->RegionId;
 		$num_args = func_num_args();
 		if ($num_args >= 1) {
