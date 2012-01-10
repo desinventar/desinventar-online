@@ -8,9 +8,6 @@ function onReadyCommon()
 	// Initialize tooltip for elements with title attribute
 	jQuery('[title]').tooltip();
 
-	jQuery(window).unload(function() {
-		doViewportDestroy();
-	});
 	jQuery('body').on('cmdWindowReload', function() {
 		// Destroy viewport, the loading... message should stay.
 		doViewportDestroy();
