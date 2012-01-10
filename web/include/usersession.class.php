@@ -135,22 +135,27 @@ class UserSession {
 			showErrorMsg($e->getMessage());
 		}
 		return $iReturn;
-	}
+	} //setUser()
 
 	public function doUserAutoLoginCheck()
 	{
 		$iReturn = ERR_DEFAULT_ERROR;
-		if ($us->UserId == '')
+		if ($this->UserId == '')
 		{
 			$clientAddr = trim($_SERVER['REMOTE_ADDR']);
-			$bAutoLogin = in_array($clientAddr, array('127.0.0.1'));
+			$addrList = '127.0.0.1';
+			$addrList2 = $_SERVER['DESINVENTAR_AUTOLOGIN_ADDRLIST'];
+			$addrList2 = preg_replace('/ +/',',', $addrList2);
+			$addrList2 = preg_replace('/,+/',',', $addrList2);
+			$addrList = explode(',', $addrList . ',' . $addrList2);
+			$bAutoLogin = in_array($clientAddr, $addrList);			
 			if ($bAutoLogin)
 			{
 				$iReturn = ERR_NO_ERROR;
 			}
 		}
 		return $iReturn;
-	}
+	} //doUserAutoLoginCheck()
 
 	public function doUserAutoLogin()
 	{
