@@ -144,10 +144,21 @@ class UserSession {
 		{
 			$clientAddr = trim($_SERVER['REMOTE_ADDR']);
 			$addrList = '127.0.0.1';
-			$addrList2 = $_SERVER['DESINVENTAR_AUTOLOGIN_ADDRLIST'];
+			$addrList2 = '';
+			if (isset($_SERVER['DESINVENTAR_AUTOLOGIN_ADDRLIST']))
+			{
+				$addrList2 = $_SERVER['DESINVENTAR_AUTOLOGIN_ADDRLIST'];
+			}
 			$addrList2 = preg_replace('/ +/',',', $addrList2);
 			$addrList2 = preg_replace('/,+/',',', $addrList2);
 			$addrList = explode(',', $addrList . ',' . $addrList2);
+			foreach($addrList as $key => $addr)
+			{
+				if ($addr == '')
+				{
+					unset($addrList[$key]);
+				}
+			}//foreach
 			$bAutoLogin = in_array($clientAddr, $addrList);			
 			if ($bAutoLogin)
 			{
