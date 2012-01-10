@@ -139,6 +139,13 @@ if (MODE != 'command')
 // 2009-01-15 (jhcaiced) Start by create/recover the session 
 // information, even for anonymous users
 $us = new UserSession($SessionId);
+if ($us->UserId == '')
+{
+	if ($us->doUserAutoLoginCheck() > 0)
+	{
+		$us->doUserAutoLogin();
+	}	
+}
 $us->awake();
 
 if (MODE != 'command')
