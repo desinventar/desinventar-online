@@ -13,7 +13,6 @@
 		<span id="mnuUserLogout">{-#mnuUserLogout#-}</span>
 	<span id="mnuQuery">{-#mnuQuery#-}</span>
 		<span id="mnuQueryViewDesign">{-#mnuQueryViewDesign#-}</span>
-		<span id="mnuQueryRegionInfo">{-#mnuQueryRegionInfo#-}</span>
 		<span id="mnuQueryViewData">{-#mnuQueryViewData#-}</span>
 		<span id="mnuQueryViewMap">{-#mnuQueryViewMap#-}</span>
 		<span id="mnuQueryViewGraph">{-#mnuQueryViewGraph#-}</span>
@@ -22,6 +21,9 @@
 			<span id="mnuQueryOptionNew">{-#mnuQueryOptionNew#-}</span>
 			<span id="mnuQueryOptionSave">{-#mnuQueryOptionSave#-}</span>
 			<span id="mnuQueryOptionOpen">{-#mnuQueryOptionOpen#-}</span>
+		<span id="mnuQueryRegionInfo">{-#mnuQueryRegionInfo#-}</span>
+		<span id="mnuQuerySelectDatabase">{-#mnuQuerySelectDatabase#-}</span>
+		<span id="mnuQuerySelectAnotherDatabase">{-#mnuQuerySelectAnotherDatabase#-}</span>
 	<span id="mnuDatacard">{-#mnuDatacard#-}</span>
 		<span id="mnuDatacardView">{-#mnuDatacardView#-}</span>
 		<span id="mnuDatacardEdit">{-#mnuDatacardEdit#-}</span>
@@ -33,8 +35,6 @@
 			<span id="mnuDatabaseReplace">{-#mnuDatabaseReplace#-}</span>
 		<span id="mnuDatabaseCreate">{-#mnuDatabaseCreate#-}</span>
 		<span id="mnuDatabaseConfig">{-#mnuDatabaseConfig#-}</span>
-		<span id="mnuDatabaseSelect">{-#mnuDatabaseSelect#-}</span>
-		<span id="mnuDatabaseSelectAnother">{-#mnuDatabaseSelectAnother#-}</span>
 	<span id="mnuMenuHelp">{-#mnuMenuHelp#-}</span>
 		<span id="mnuHelpWebsite">{-#mnuHelpWebsite#-}</span>
 		<span id="mnuHelpMethodology">{-#mnuHelpMethodology#-}</span>
