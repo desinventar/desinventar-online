@@ -74,10 +74,10 @@
 			<Text LangIsoCode="fre">Quitter</Text>
 		</Message>
 		<Message id="mnuDesConsultar">
-			<Text LangIsoCode="eng">DesConsultar</Text>
-			<Text LangIsoCode="spa">DesConsultar</Text>
-			<Text LangIsoCode="por">DesConsultar</Text>
-			<Text LangIsoCode="fre">DesConsultar</Text>
+			<Text LangIsoCode="eng">Queries</Text>
+			<Text LangIsoCode="spa">Consultas</Text>
+			<Text LangIsoCode="por">Consultas</Text>
+			<Text LangIsoCode="fre">Requête</Text>
 		</Message>
 		<Message id="mnuDesConsultarQueryDesign">
 			<Text LangIsoCode="eng">Query design</Text>
@@ -116,10 +116,10 @@
 			<Text LangIsoCode="fre">Consolidés</Text>
 		</Message>
 		<Message id="mnuDesConsultarQuery">
-			<Text LangIsoCode="eng">Queries</Text>
-			<Text LangIsoCode="spa">Consultas</Text>
-			<Text LangIsoCode="por">Consultas</Text>
-			<Text LangIsoCode="fre">Requête</Text>
+			<Text LangIsoCode="eng">Options</Text>
+			<Text LangIsoCode="spa">Opciones</Text>
+			<Text LangIsoCode="por">Opções</Text>
+			<Text LangIsoCode="fre">Les options</Text>
 		</Message>
 		<Message id="mnuDesConsultarQueryNew">
 			<Text LangIsoCode="eng">New query</Text>
