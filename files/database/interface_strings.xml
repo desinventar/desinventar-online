@@ -205,17 +205,17 @@
 			<Text LangIsoCode="por">Configure</Text>
 			<Text LangIsoCode="fre">Configurer</Text>
 		</Message>
-		<Message id="mnuDatabaseSelect">
-			<Text LangIsoCode="eng">Select</Text>
-			<Text LangIsoCode="spa">Seleccionar</Text>
-			<Text LangIsoCode="por">Selecione</Text>
-			<Text LangIsoCode="fre">Sélectionnez</Text>
+		<Message id="mnuQuerySelectDatabase">
+			<Text LangIsoCode="eng">Select database</Text>
+			<Text LangIsoCode="spa">Seleccionar base de datos</Text>
+			<Text LangIsoCode="por">Selecione banco de dados</Text>
+			<Text LangIsoCode="fre">Sélectionnez base de données</Text>
 		</Message>
-		<Message id="mnuDatabaseSelectAnother">
-			<Text LangIsoCode="eng">Select another</Text>
-			<Text LangIsoCode="spa">Elegir otra</Text>
-			<Text LangIsoCode="por">Escolha outro</Text>
-			<Text LangIsoCode="fre">Choisir autre</Text>
+		<Message id="mnuQuerySelectAnotherDatabase">
+			<Text LangIsoCode="eng">Select another database</Text>
+			<Text LangIsoCode="spa">Elegir otra base de datos</Text>
+			<Text LangIsoCode="por">Escolha outro banco de dados</Text>
+			<Text LangIsoCode="fre">Choisir autre base de données</Text>
 		</Message>
 		<Message id="mnuMenuHelp">
 			<Text LangIsoCode="eng">Help</Text>
