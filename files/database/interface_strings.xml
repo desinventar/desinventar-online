@@ -19,11 +19,11 @@
 			<Text LangIsoCode="por">Entrar com outra conta</Text>
 			<Text LangIsoCode="fre">Se connecter avec un autre compte</Text>
 		</Message>
-		<Message id="mnuUserEditAccount">
-			<Text LangIsoCode="eng">My Account</Text>
-			<Text LangIsoCode="spa">Mi cuenta</Text>
-			<Text LangIsoCode="por">Minha conta</Text>
-			<Text LangIsoCode="fre">Mon compte</Text>
+		<Message id="mnuUserChangePasswd">
+			<Text LangIsoCode="eng">Change password</Text>
+			<Text LangIsoCode="spa">Cambiar contraseña</Text>
+			<Text LangIsoCode="por">Alterar a senha</Text>
+			<Text LangIsoCode="fre">Le changement de mot de passe</Text>
 		</Message>
 		<Message id="mnuUserAccountManagement">
 			<Text LangIsoCode="eng">User's account management</Text>

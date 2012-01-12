@@ -144,7 +144,7 @@ function doMainMenuHandler(item)
 		case 'mnuUserLogout':
 			jQuery('body').trigger('cmdUserLogout');
 		break;
-		case 'mnuUserEditAccount':
+		case 'mnuUserChangePasswd':
 			jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=changepasswd',function() { onReadyUserChangePasswd('dbl-win'); });
 			Ext.getCmp('wndDatabaseList').show();
 		break;
@@ -329,7 +329,7 @@ function doMainMenuCreate()
 		items: [
 			{id: 'mnuUserLogin'            , text: jQuery('#mnuUserLogin').text()            , handler: doMainMenuHandler }, 
 			{id: 'mnuUserChangeLogin'      , text: jQuery('#mnuUserChangeLogin').text()      , handler: doMainMenuHandler, hidden: true },
-			{id: 'mnuUserEditAccount'      , text: jQuery('#mnuUserEditAccount').text()      , handler: doMainMenuHandler, hidden: true },
+			{id: 'mnuUserChangePasswd'     , text: jQuery('#mnuUserChangePasswd').text()     , handler: doMainMenuHandler, hidden: true },
 			{id: 'mnuUserAccountManagement', text: jQuery('#mnuUserAccountManagement').text(), handler: doMainMenuHandler, hidden: true },
 			{id: 'mnuUserLanguage'         , text: jQuery('#mnuMenuUserLanguage').text()     , menu: mnuLang },
 			{id: 'mnuUserLogout'           , text: jQuery('#mnuUserLogout').text()           , handler: doMainMenuHandler, hidden: true }
@@ -422,7 +422,7 @@ function doMainMenuShow()
 		Ext.getCmp('mnuUser').setText(Ext.getCmp('mnuUser').getText() + ' : ' + jQuery('#desinventarUserId').val());
 		Ext.getCmp('mnuUserLogin').hide();
 		Ext.getCmp('mnuUserChangeLogin').show();
-		Ext.getCmp('mnuUserEditAccount').show();
+		Ext.getCmp('mnuUserChangePasswd').show();
 		Ext.getCmp('mnuUserLogout').show();
 		Ext.getCmp('mnuDatabaseCreate').show();
 		Ext.getCmp('mnuDatabaseCopy').show();
