@@ -3,7 +3,7 @@
 	<span id="mnuMenuUser">{-#mnuMenuUser#-}</span>
 		<span id="mnuUserLogin">{-#mnuUserLogin#-}</span>
 		<span id="mnuUserChangeLogin">{-#mnuUserChangeLogin#-}</span>
-		<span id="mnuUserEditAccount">{-#mnuUserEditAccount#-}</span>
+		<span id="mnuUserChangePasswd">{-#mnuUserChangePasswd#-}</span>
 		<span id="mnuUserAccountManagement">{-#mnuUserAccountManagement#-}</span>
 		<span id="mnuMenuUserLanguage">{-#mnuMenuUserLanguage#-}</span>
 			<span id="mnuUserLanguageEnglish">{-#mnuMenuUserLanguageEnglish#-}</span>
