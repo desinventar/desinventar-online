@@ -146,16 +146,16 @@
 			<Text LangIsoCode="fre">Enregistrements</Text>
 		</Message>
 		<Message id="mnuDatacardView">
-			<Text LangIsoCode="eng">View records</Text>
-			<Text LangIsoCode="spa">Ver registros</Text>
-			<Text LangIsoCode="por">Ver os registros</Text>
-			<Text LangIsoCode="fre">Voir les dossiers</Text>
+			<Text LangIsoCode="eng">View data cards</Text>
+			<Text LangIsoCode="spa">Ver fichas</Text>
+			<Text LangIsoCode="por">Ver os formulários</Text>
+			<Text LangIsoCode="fre">Voir le carte de données</Text>
 		</Message>
 		<Message id="mnuDatacardEdit">
-			<Text LangIsoCode="eng">Insert/Edit records</Text>
-			<Text LangIsoCode="spa">Ingresar/Editar registros</Text>
-			<Text LangIsoCode="por">Inserir ou editar registros</Text>
-			<Text LangIsoCode="fre">Insérer ou modifier des enregistrements</Text>
+			<Text LangIsoCode="eng">Insert/Edit data cards</Text>
+			<Text LangIsoCode="spa">Ingresar/Editar fichas</Text>
+			<Text LangIsoCode="por">Inserir ou editar formulários</Text>
+			<Text LangIsoCode="fre">Insérer ou modifier de carte de données</Text>
 		</Message>
 		<Message id="mnuDatacardImport">
 			<Text LangIsoCode="eng">Import data cards</Text>
