@@ -1984,10 +1984,10 @@
 			<Text LangIsoCode="fre">Pour imprimer le résultat sur l&quot;écran</Text>
 		</Message>
 		<Message id="msgViewData">
-			<Text LangIsoCode="eng">Data cards</Text>
-			<Text LangIsoCode="spa">Fichas</Text>
-			<Text LangIsoCode="por">Formulários</Text>
-			<Text LangIsoCode="fre">Carte de données</Text>
+			<Text LangIsoCode="eng">View data cards</Text>
+			<Text LangIsoCode="spa">Ver fichas</Text>
+			<Text LangIsoCode="por">Ver formulários</Text>
+			<Text LangIsoCode="fre">Voir les cartes de données</Text>
 		</Message>
 		<Message id="msgViewDataTooltip">
 			<Text LangIsoCode="eng">To visualise records in a table format</Text>
