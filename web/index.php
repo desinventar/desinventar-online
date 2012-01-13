@@ -120,8 +120,8 @@ switch ($cmd)
 		}
 		if ($iReturn > 0)
 		{
-			$EventListDefault = $us->q->loadEvents('PREDEF', null, $lg);
-			$EventListCustom  = $us->q->loadEvents('USER', null, $lg);
+			$EventListDefault = $us->q->loadEvents('PREDEF', null, $lg, false);
+			$EventListCustom  = $us->q->loadEvents('USER', null, $lg, false);
 			$answer['EventListDefault'] = $EventListDefault;
 			$answer['EventListCustom']  = $EventListCustom;
 		}
@@ -151,8 +151,8 @@ switch ($cmd)
 			$iReturn = $o->update();
 			if ($iReturn > 0)
 			{
-				$EventListDefault = $us->q->loadEvents('PREDEF', null, $lg);
-				$EventListCustom  = $us->q->loadEvents('USER', null, $lg);
+				$EventListDefault = $us->q->loadEvents('PREDEF', null, $lg, false);
+				$EventListCustom  = $us->q->loadEvents('USER', null, $lg, false);
 				$answer['EventListDefault'] = $EventListDefault;
 				$answer['EventListCustom']  = $EventListCustom;
 			}
