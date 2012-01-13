@@ -80,6 +80,7 @@ switch($cmd)
 	case 'cmdCauseUpdate':
 		if ($us->UserRoleValue >= ROLE_ADMINREGION)
 		{
+			$o = new DICause($us, $info['CauseId']);
 			$info = $_POST['Info'];
 			if (! isset($info['CauseActive']))
 			{
@@ -87,9 +88,11 @@ switch($cmd)
 			}
 			if ($info['CausePredefined'] > 0)
 			{
-				$info['CausePredefined'] = 2; // Predefined but Localized
+				if ($o->get('CauseName') != $info['CauseName'])
+				{
+					$info['CausePredefined'] = 2; // Predefined but Localized
+				}
 			}
-			$o = new DICause($us, $info['CauseId']);
 			$o->setFromArray($info);
 			$i = $o->update();
 			showResult($i, $t);
