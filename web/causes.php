@@ -101,12 +101,12 @@ switch($cmd)
 		if ($prmType == '1')
 		{
 			$t->assign('ctl_caupred', true);
-			$t->assign('caupredl', $us->q->loadCauses('PREDEF', null, $lg));
+			$t->assign('caupredl', $us->q->loadCauses('PREDEF', null, $lg, false));
 		}
 		else
 		{
 			$t->assign('ctl_caupers', true);
-			$t->assign('cauuserl', $us->q->loadCauses('USER', null, $lg));
+			$t->assign('cauuserl', $us->q->loadCauses('USER', null, $lg, false));
 		}
 		break;
 	case 'chkname':
@@ -133,9 +133,9 @@ switch($cmd)
 			$t->assign('ro', 'disabled');
 		$t->assign('ctl_show', true);
 		$t->assign('ctl_caupred', true);
-		$t->assign('caupredl', $us->q->loadCauses('PREDEF', null, $lg));
+		$t->assign('caupredl', $us->q->loadCauses('PREDEF', null, $lg, false));
 		$t->assign('ctl_caupers', true);
-		$t->assign('cauuserl', $us->q->loadCauses('USER', null, $lg));
+		$t->assign('cauuserl', $us->q->loadCauses('USER', null, $lg, false));
 	break;
 	default:
 	break;
