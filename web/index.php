@@ -39,7 +39,7 @@ if (!empty($RegionId))
 }
 $t->assign('desinventarRegionLabel', $RegionLabel);
 
-$desinventarUserRole = $us->getUserRole($RegionId);;
+$desinventarUserRole = $us->getUserRole($RegionId);
 $desinventarUserRoleValue = $us->getUserRoleValue($RegionId);
 $t->assign('desinventarUserRole', $desinventarUserRole);
 $t->assign('desinventarUserRoleValue', $desinventarUserRoleValue);
@@ -51,6 +51,37 @@ if (getParameter('qqfile','') != '')
 }
 switch ($cmd)
 {
+	case 'cmdUserLogin':
+		$iReturn = ERR_DEFAULT_ERROR;
+		$answer = array();
+		$UserId = getParameter('UserId');
+		$UserPasswd = getParameter('UserPasswd');
+		if ($us->login($UserId, $UserPasswd) > 0)
+		{
+			$iReturn = ERR_NO_ERROR;	// Login success
+			$user = array();
+			$user['Id']        = $us->UserId;
+			$user['FullName']  = $us->getUserFullName();
+			$user['Role']      = $us->getUserRole($RegionId);
+			$user['RoleValue'] = $us->getUserRoleValue($RegionId);
+			$answer['User'] = $user;
+		}
+		$answer['Status'] = $iReturn;
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
+	break;
+	case 'cmdUserLogout':
+		$iReturn = $us->logout();
+		$user = array();
+		$user['Id']        = '';
+		$user['FullName']  = '';
+		$user['Role']      = '';
+		$user['RoleValue'] = 0;
+
+		$answer = array();
+		$answer['Status'] = $iReturn;
+		$answer['User']   = $user;
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
+	break;
 	case 'cmdUserLanguageChange':
 		$LangList = $us->q->loadLanguages(1);
 		$LangIsoCode = getParameter('LangIsoCode');

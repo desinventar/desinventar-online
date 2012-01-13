@@ -25,8 +25,8 @@
 		<span id="mnuQuerySelectDatabase"        class="item clsMenuAlwaysOn">{-#mnuQuerySelectDatabase#-}</span>
 		<span id="mnuQuerySelectAnotherDatabase" class="item clsMenuAlwaysOn">{-#mnuQuerySelectAnotherDatabase#-}</span>
 	<span id="mnuDatacard" class="menu">{-#mnuDatacard#-}</span>
-		<span id="mnuDatacardView"               class="item clsMenuWithRegion">{-#mnuDatacardView#-}</span>
-		<span id="mnuDatacardEdit"               class="item clsMenuWithRegion">{-#mnuDatacardEdit#-}</span>
+		<span id="mnuDatacardView"               class="item">{-#mnuDatacardView#-}</span>
+		<span id="mnuDatacardEdit"               class="item">{-#mnuDatacardEdit#-}</span>
 	<span id="mnuDatabase" class="menu">{-#mnuDatabase#-}</span>
 		<span id="mnuDatabaseDownload"           class="item"                  >{-#mnuDatabaseDownload#-}</span>
 		<span id="mnuDatabaseUpload"             class="menu clsMenuAlwaysOn"  >{-#mnuDatabaseUpload#-}</span>
