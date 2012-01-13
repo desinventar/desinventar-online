@@ -26,6 +26,7 @@ function onReadyDatabaseEvents()
 			jQuery('#fldDatabaseEvents_EventDesc').prop('disabled', false);
 			if (parseInt(jQuery('#fldDatabaseEvents_EventPredefined').val()) > 0)
 			{
+				jQuery('#fldDatabaseEvents_EventPredefined').val(2);
 				jQuery('#fldDatabaseEvents_EventDesc').prop('disabled', true);
 			}
 			jQuery('#divDatabaseEvents_Edit').show();
