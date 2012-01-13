@@ -213,7 +213,7 @@
 		</Message>
 		<Message id="mnuQuerySelectAnotherDatabase">
 			<Text LangIsoCode="eng">Select another database</Text>
-			<Text LangIsoCode="spa">Elegir otra base de datos</Text>
+			<Text LangIsoCode="spa">Seleccionar otra base de datos</Text>
 			<Text LangIsoCode="por">Escolha outro banco de dados</Text>
 			<Text LangIsoCode="fre">Choisir autre base de données</Text>
 		</Message>
