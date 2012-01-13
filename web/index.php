@@ -282,9 +282,9 @@ switch ($cmd)
 			$r = new DIRegion($us, $RegionId);
 			$GeolevelsList = $r->getGeolevelList();
 			$answer['GeolevelsList'] = $GeolevelsList;
-			$EventList     = $us->q->loadEvents(null, 'active', $lg);
+			$EventList     = $us->q->loadEvents('ALL', 'active', $lg);
 			$answer['EventList'] = $EventList;
-			$CauseList     = $us->q->loadCauses(null, 'active', $lg);
+			$CauseList     = $us->q->loadCauses('ALL', 'active', $lg);
 			$answer['CauseList'] = $CauseList;
 			$RecordCount = $us->getDisasterCount();
 			$answer['RecordCount'] = $RecordCount;
@@ -1093,8 +1093,8 @@ switch ($cmd)
 					$t->assign('levmax', $us->q->getMaxGeoLev());
 					$t->assign('levname', $us->q->loadGeoLevById($lev));
 					$t->assign('geol', $us->q->loadGeography($lev));
-					$t->assign('EventList', $us->q->loadEvents(null, 'active', $lg));
-					$t->assign('CauseList', $us->q->loadCauses(null, 'active', $lg));
+					$t->assign('EventList', $us->q->loadEvents('ALL', 'active', $lg));
+					$t->assign('CauseList', $us->q->loadCauses('ALL', 'active', $lg));
 					$EEFieldList = $us->q->getEEFieldList('True');
 					$t->assign('EEFieldList', $EEFieldList);
 					$t->assign('RegionId', $RegionId);
