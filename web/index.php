@@ -141,8 +141,16 @@ switch ($cmd)
 		}
 		if ($iReturn > 0)
 		{
-			$o = new DIEvent($us, $_POST['Event']['EventId']);
-			$o->setFromArray($_POST['Event']);
+			$info = $_POST['Event'];
+			$o = new DIEvent($us, $info['EventId']);
+			if ($info['EventPredefined'] > 0)
+			{
+				if ($o->get('EventName') != $info['EventName'])
+				{
+					$info['EventPredefined'] = 2;
+				}
+			}
+			$o->setFromArray($info);
 			if ($o->get('EventId') == '')
 			{
 				$o->set('EventId', uuid());
