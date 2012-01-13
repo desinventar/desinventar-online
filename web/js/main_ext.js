@@ -403,8 +403,9 @@ function doMainMenuCreate()
 	tb.add({ id:'mnuDatabase'        , text: jQuery('#mnuDatabase').text(), menu: mnuDatabase });
 	tb.add({ id:'mnuHelp'            , text: jQuery('#mnuHelp').text()    , menu: mnuHelp     });
 	tb.add('->',{id: 'mnuWaiting'    , text: '<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />', hidden: true });
-	tb.add('->',{id: 'mnuRegionLabel'     , text: '', handler: doMainMenuHandler });
-	tb.add('->',{id: 'mnuHelpWebsiteLabel', text: '<img src="' + jQuery('#desinventarURL').val() + '/images/di_logo4.png" alt="" />',  handler: doMainMenuHandler });
+	tb.add('->',{id: 'mnuUserLabel'       , text: '' });
+	tb.add('->',{id: 'mnuRegionLabel'     , text: '' });
+	tb.add('->',{id: 'mnuHelpWebsiteLabel', text: '<img src="' + jQuery('#desinventarURL').val() + '/images/di_logo4.png" alt="" />' });
 
 	// Attach main events to body
 	jQuery('body').on('cmdMainWaitingShow', function() {
@@ -412,6 +413,9 @@ function doMainMenuCreate()
 	});
 	jQuery('body').on('cmdMainWaitingHide', function() {
 		Ext.getCmp('mnuWaiting').hide();
+	});
+	jQuery('body').on('cmdMainMenuUpdate', function() {
+		doMainMenuShow();
 	});
 } //doCreateMainMenu()
 
@@ -425,6 +429,7 @@ function doMainMenuShow()
 	jQuery('#divMainMenu span.clsMenuAlwaysOn').each(function() {
 		Ext.getCmp(jQuery(this).attr('id')).enable();
 	});
+	Ext.getCmp('mnuUserLabel').setText('');
 	
 	// Enable menu items when a User is logged in
 	if (jQuery('#desinventarUserId').val() == '')
@@ -440,9 +445,9 @@ function doMainMenuShow()
 		jQuery('#divMainMenu span.clsMenuWithUser').each(function() {
 			Ext.getCmp(jQuery(this).attr('id')).enable();
 		});
-		Ext.getCmp('mnuUser').setText(Ext.getCmp('mnuUser').getText() + ' : ' + jQuery('#desinventarUserId').val());
 		Ext.getCmp('mnuUserLogin').hide();
 		Ext.getCmp('mnuUserChangeLogin').show();
+		Ext.getCmp('mnuUserLabel').setText('[' + jQuery('#desinventarUserId').val() + '/' + jQuery('#desinventarUserRole').val() + ']');
 	}
 
 	// Configure which options are visible using RoleValue

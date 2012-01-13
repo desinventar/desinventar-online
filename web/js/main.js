@@ -23,14 +23,6 @@ function onReadyMain()
 	onReadyThematicMap();	
 	onReadyStatParams();
 
-	jQuery('body').on('UserLoggedIn',function() {
-		jQuery('body').trigger('cmdWindowReload');
-	});
-
-	jQuery('body').on('UserLoggedOut',function() {
-		jQuery('body').trigger('cmdWindowReload');
-	});
-	
 	jQuery('#frmMainQuery').submit(function() {
 		var myURL = jQuery(this).attr('action');
 		var myCmd = jQuery('#prmQueryCommand').val();
