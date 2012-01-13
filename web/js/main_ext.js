@@ -403,7 +403,6 @@ function doMainMenuCreate()
 	tb.add({ id:'mnuDatabase'        , text: jQuery('#mnuDatabase').text(), menu: mnuDatabase });
 	tb.add({ id:'mnuHelp'            , text: jQuery('#mnuHelp').text()    , menu: mnuHelp     });
 	tb.add('->',{id: 'mnuWaiting'    , text: '<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />', hidden: true });
-	tb.add('->',{id: 'mnuUserLabel'       , text: '' });
 	tb.add('->',{id: 'mnuRegionLabel'     , text: '' });
 	tb.add('->',{id: 'mnuHelpWebsiteLabel', text: '<img src="' + jQuery('#desinventarURL').val() + '/images/di_logo4.png" alt="" />' });
 
@@ -429,7 +428,7 @@ function doMainMenuShow()
 	jQuery('#divMainMenu span.clsMenuAlwaysOn').each(function() {
 		Ext.getCmp(jQuery(this).attr('id')).enable();
 	});
-	Ext.getCmp('mnuUserLabel').setText('');
+	Ext.getCmp('mnuUser').setText(jQuery('#mnuUser').text());
 	
 	// Enable menu items when a User is logged in
 	if (jQuery('#desinventarUserId').val() == '')
@@ -447,7 +446,7 @@ function doMainMenuShow()
 		});
 		Ext.getCmp('mnuUserLogin').hide();
 		Ext.getCmp('mnuUserChangeLogin').show();
-		Ext.getCmp('mnuUserLabel').setText('[' + jQuery('#desinventarUserId').val() + '/' + jQuery('#desinventarUserRole').val() + ']');
+		Ext.getCmp('mnuUser').setText(jQuery('#mnuUser').text() + ' : ' + jQuery('#desinventarUserId').val() + '/' + jQuery('#desinventarUserRole').val());
 	}
 
 	// Configure which options are visible using RoleValue
