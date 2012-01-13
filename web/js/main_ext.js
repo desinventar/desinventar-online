@@ -448,8 +448,10 @@ function doMainMenuShow()
 	// Configure which options are visible using RoleValue
 	var UserRoleValue = parseInt(jQuery('#desinventarUserRoleValue').val());
 
+	Ext.getCmp('mnuUserAccountManagement').hide();
 	if (UserRoleValue >= 5)
 	{
+		Ext.getCmp('mnuUserAccountManagement').show();
 		Ext.getCmp('mnuUserAccountManagement').enable();
 	}
 	
@@ -472,13 +474,13 @@ function doMainMenuShow()
 			Ext.getCmp(jQuery(this).attr('id')).enable();
 		});
 
+		Ext.getCmp('mnuDatabaseReplace').hide();
+		Ext.getCmp('mnuDatabaseConfig').hide();
 		if (UserRoleValue > 0)
 		{
 			Ext.getCmp('mnuDatacardView').show();
 			Ext.getCmp('mnuDatacardEdit').hide();
 		}
-
-		// Feeder/Supervisor/Admin
 		if (UserRoleValue >= 2) 
 		{
 			// Edit datacards instead of only view them
@@ -489,7 +491,9 @@ function doMainMenuShow()
 
 			if (UserRoleValue >= 4)
 			{
+				Ext.getCmp('mnuDatabaseReplace').show();
 				Ext.getCmp('mnuDatabaseReplace').enable();
+				Ext.getCmp('mnuDatabaseConfig').show();
 				Ext.getCmp('mnuDatabaseConfig').enable();
 			}
 		}		
