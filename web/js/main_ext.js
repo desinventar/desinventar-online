@@ -454,6 +454,9 @@ function doMainMenuShow()
 		Ext.getCmp('mnuUserAccountManagement').show();
 		Ext.getCmp('mnuUserAccountManagement').enable();
 	}
+
+	Ext.getCmp('mnuDatabaseReplace').hide();
+	Ext.getCmp('mnuDatabaseConfig').hide();
 	
 	// Show some menu items when a Region is Selected
 	if (jQuery('#desinventarRegionId').val() == '')
@@ -474,8 +477,6 @@ function doMainMenuShow()
 			Ext.getCmp(jQuery(this).attr('id')).enable();
 		});
 
-		Ext.getCmp('mnuDatabaseReplace').hide();
-		Ext.getCmp('mnuDatabaseConfig').hide();
 		if (UserRoleValue > 0)
 		{
 			Ext.getCmp('mnuDatacardView').show();
