@@ -442,7 +442,6 @@ function doMainMenuShow()
 	// Configure which options are visible using RoleValue
 	var UserRoleValue = parseInt(jQuery('#desinventarUserRoleValue').val());
 
-	console.log(UserRoleValue);
 	if (UserRoleValue >= 5)
 	{
 		Ext.getCmp('mnuUserAccountManagement').enable();
