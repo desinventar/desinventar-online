@@ -75,7 +75,10 @@ function doViewportCreate()
 			})
 		]
 	}); //viewport
-
+	Ext.getCmp('westm').on('expand', function() {
+		jQuery('.contentBlock').hide();
+		jQuery('#divQueryResults').show();
+	});
 } // doViewportCreate()
 
 function doViewportShow() {
@@ -175,7 +178,7 @@ function doMainMenuHandler(item)
 			jQuery('#divRegionInfo').show();
 			doGetRegionInfo(jQuery('#desinventarRegionId').val());
 			Ext.getCmp('westm').collapse();
-			Ext.getCmp('westm').hide();
+			//Ext.getCmp('westm').hide();
 		break;
 		case 'mnuQueryViewData':
 			jQuery('body').trigger('cmdViewDataParams');
