@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <StringList>
 	<Group name="grpMainMenu">
-		<Message id="mnuMenuUser">
+		<Message id="mnuUser">
 			<Text LangIsoCode="eng">User</Text>
 			<Text LangIsoCode="spa">Usuario</Text>
 			<Text LangIsoCode="por">Usuário</Text>
@@ -31,31 +31,31 @@
 			<Text LangIsoCode="por">Gerenciamento da conta do usuário</Text>
 			<Text LangIsoCode="fre">Gestion de compte utilisateur</Text>
 		</Message>
-		<Message id="mnuMenuUserLanguage">
+		<Message id="mnuUserLanguage">
 			<Text LangIsoCode="eng">Language</Text>
 			<Text LangIsoCode="spa">Idioma</Text>
 			<Text LangIsoCode="por">Idioma</Text>
 			<Text LangIsoCode="fre">Langue</Text>
 		</Message>
-		<Message id="mnuMenuUserLanguageEnglish">
+		<Message id="mnuUserLanguageEnglish">
 			<Text LangIsoCode="eng">English</Text>
 			<Text LangIsoCode="spa">Inglés/English</Text>
 			<Text LangIsoCode="por">Inglês/English</Text>
 			<Text LangIsoCode="fre">Anglaise/English</Text>
 		</Message>
-		<Message id="mnuMenuUserLanguageSpanish">
+		<Message id="mnuUserLanguageSpanish">
 			<Text LangIsoCode="eng">Spanish/Español</Text>
 			<Text LangIsoCode="spa">Español</Text>
 			<Text LangIsoCode="por">Espanhol/Español</Text>
 			<Text LangIsoCode="fre">Espagnole/Español</Text>
 		</Message>
-		<Message id="mnuMenuUserLanguagePortuguese">
+		<Message id="mnuUserLanguagePortuguese">
 			<Text LangIsoCode="eng">Portuguese/Português</Text>
 			<Text LangIsoCode="spa">Portugués/Português</Text>
 			<Text LangIsoCode="por">Português</Text>
 			<Text LangIsoCode="fre">Portugaise/Português</Text>
 		</Message>
-		<Message id="mnuMenuUserLanguageFrench">
+		<Message id="mnuUserLanguageFrench">
 			<Text LangIsoCode="eng">French/Française</Text>
 			<Text LangIsoCode="spa">Francés/Française</Text>
 			<Text LangIsoCode="por">Francês/Française</Text>
@@ -217,7 +217,7 @@
 			<Text LangIsoCode="por">Escolha outro banco de dados</Text>
 			<Text LangIsoCode="fre">Choisir autre base de données</Text>
 		</Message>
-		<Message id="mnuMenuHelp">
+		<Message id="mnuHelp">
 			<Text LangIsoCode="eng">Help</Text>
 			<Text LangIsoCode="spa">Ayuda</Text>
 			<Text LangIsoCode="por">Ajuda</Text>
