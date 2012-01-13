@@ -329,8 +329,8 @@ function doMainMenuCreate()
 		items: [
 			{id: 'mnuUserLogin'            , text: jQuery('#mnuUserLogin').text()            , handler: doMainMenuHandler }, 
 			{id: 'mnuUserChangeLogin'      , text: jQuery('#mnuUserChangeLogin').text()      , handler: doMainMenuHandler, hidden: true },
-			{id: 'mnuUserChangePasswd'     , text: jQuery('#mnuUserChangePasswd').text()     , handler: doMainMenuHandler, hidden: true },
-			{id: 'mnuUserAccountManagement', text: jQuery('#mnuUserAccountManagement').text(), handler: doMainMenuHandler, hidden: true },
+			{id: 'mnuUserChangePasswd'     , text: jQuery('#mnuUserChangePasswd').text()     , handler: doMainMenuHandler, disabled: true },
+			{id: 'mnuUserAccountManagement', text: jQuery('#mnuUserAccountManagement').text(), handler: doMainMenuHandler, disabled: true },
 			{id: 'mnuUserLanguage'         , text: jQuery('#mnuMenuUserLanguage').text()     , menu: mnuLang },
 			{id: 'mnuUserLogout'           , text: jQuery('#mnuUserLogout').text()           , handler: doMainMenuHandler, hidden: true }
 		]
@@ -422,7 +422,7 @@ function doMainMenuShow()
 		Ext.getCmp('mnuUser').setText(Ext.getCmp('mnuUser').getText() + ' : ' + jQuery('#desinventarUserId').val());
 		Ext.getCmp('mnuUserLogin').hide();
 		Ext.getCmp('mnuUserChangeLogin').show();
-		Ext.getCmp('mnuUserChangePasswd').show();
+		Ext.getCmp('mnuUserChangePasswd').enable();
 		Ext.getCmp('mnuUserLogout').show();
 		Ext.getCmp('mnuDatabaseCreate').show();
 		Ext.getCmp('mnuDatabaseCopy').show();
@@ -433,7 +433,7 @@ function doMainMenuShow()
 
 	if (UserRoleValue >= 5)
 	{
-		Ext.getCmp('mnuUserAccountManagement').show();
+		Ext.getCmp('mnuUserAccountManagement').enable();
 		//Ext.getCmp('mnuAdminDatabases').show();
 	}
 	
@@ -473,7 +473,7 @@ function doMainMenuShow()
 		Ext.getCmp('mnuQuerySelectDatabase').show();
 		Ext.getCmp('mnuQuerySelectAnotherDatabase').hide();
 	}
-}
+} //doMainMenuShow()
 
 function doDialogsCreate()
 {
