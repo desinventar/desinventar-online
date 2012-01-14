@@ -1,4 +1,6 @@
 <!-- divDatabaseHeader -->
+<div class="contentBlock" id="divLoading">
+</div>
 <div class="contentBlock" id="divDatabasePrivate" style="display:none;">
 	{-include file="database_private.tpl"-}
 </div>
