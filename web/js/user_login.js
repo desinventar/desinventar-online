@@ -54,7 +54,7 @@ function onReadyUserLogin()
 			jQuery.post(jQuery('#desinventarURL').val() + '/',
 				{
 					'cmd'        : 'cmdUserLogin',
-					'RegionId'   : jQuery('desinventarRegionId').val(),
+					'RegionId'   : jQuery('#desinventarRegionId').val(),
 					'UserId'     : UserId,
 					'UserPasswd' : hex_md5(UserPasswd)
 			    },
