@@ -81,7 +81,8 @@ function doViewportCreate()
 	});
 } // doViewportCreate()
 
-function doViewportShow() {
+function doViewportShow()
+{
 	var UserRoleValue = parseInt(jQuery('#desinventarUserRoleValue').val());
 	var RegionId = jQuery('#desinventarRegionId').val();
 	if ( (RegionId == '') || (UserRoleValue < 1) )
@@ -110,7 +111,7 @@ function doViewportShow() {
 		// Show database list
 		doUpdateDatabaseListByUser();
 	}
-}
+} //doViewportShow()
 
 function doMainChangeLanguage(LangIsoCode)
 {
@@ -415,6 +416,7 @@ function doMainMenuCreate()
 	});
 	jQuery('body').on('cmdMainMenuUpdate', function() {
 		doMainMenuShow();
+		doViewportShow();
 	});
 } //doCreateMainMenu()
 
@@ -428,7 +430,7 @@ function doMainMenuShow()
 	jQuery('#divMainMenu span.clsMenuAlwaysOn').each(function() {
 		Ext.getCmp(jQuery(this).attr('id')).enable();
 	});
-	Ext.getCmp('mnuUser').setText(jQuery('#mnuUser').text());
+	Ext.getCmp('mnuUser').setText(jQuery('span#mnuUser').text());
 	
 	// Enable menu items when a User is logged in
 	if (jQuery('#desinventarUserId').val() == '')
@@ -446,7 +448,7 @@ function doMainMenuShow()
 		});
 		Ext.getCmp('mnuUserLogin').hide();
 		Ext.getCmp('mnuUserChangeLogin').show();
-		Ext.getCmp('mnuUser').setText(jQuery('#mnuUser').text() + ' : ' + jQuery('#desinventarUserId').val() + '/' + jQuery('#desinventarUserRole').val());
+		Ext.getCmp('mnuUser').setText(jQuery('span#mnuUser').text() + ' : ' + jQuery('#desinventarUserId').val() + '/' + jQuery('#desinventarUserRole').val());
 	}
 
 	// Configure which options are visible using RoleValue
