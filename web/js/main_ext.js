@@ -371,8 +371,8 @@ function doMainMenuCreate()
 
 	var mnuDatabaseUpload = new Ext.menu.Menu({
 		id: 'mnuDatabaseUpload', items: [
-			{id:'mnuDatabaseCopy'         , text: jQuery('#mnuDatabaseCopy').text()         , handler: doMainMenuHandler },
-			{id:'mnuDatabaseReplace'      , text: jQuery('#mnuDatabaseReplace').text()      , handler: doMainMenuHandler }
+			{id:'mnuDatabaseCopy'   , text: jQuery('#mnuDatabaseCopy').text()   , handler: doMainMenuHandler },
+			{id:'mnuDatabaseReplace', text: jQuery('#mnuDatabaseReplace').text(), handler: doMainMenuHandler }
 		]
 	});
 	
@@ -463,15 +463,15 @@ function doMainMenuShow()
 
 	Ext.getCmp('mnuDatabaseReplace').hide();
 	Ext.getCmp('mnuDatabaseConfig').hide();
+
+	Ext.getCmp('mnuDatacardView').show();
+	Ext.getCmp('mnuDatacardEdit').hide();
 	
 	// Show some menu items when a Region is Selected
 	if (jQuery('#desinventarRegionId').val() == '')
 	{
 		Ext.getCmp('mnuQuerySelectDatabase').show();
 		Ext.getCmp('mnuQuerySelectAnotherDatabase').hide();
-
-		Ext.getCmp('mnuDatacardView').show();
-		Ext.getCmp('mnuDatacardEdit').hide();
 	}
 	else
 	{
@@ -479,13 +479,13 @@ function doMainMenuShow()
 		Ext.getCmp('mnuQuerySelectAnotherDatabase').show();
 		Ext.getCmp('mnuRegionLabel').setText('[' + jQuery('#desinventarRegionLabel').val() + ']');
 
-		jQuery('#divMainMenu span.clsMenuWithRegion').each(function() {
-			Ext.getCmp(jQuery(this).attr('id')).enable();
-		});
-
 		if (UserRoleValue > 0)
 		{
+			jQuery('#divMainMenu span.clsMenuWithRegion').each(function() {
+				Ext.getCmp(jQuery(this).attr('id')).enable();
+			});
 			Ext.getCmp('mnuDatacardView').show();
+			Ext.getCmp('mnuDatacardView').enable();
 			Ext.getCmp('mnuDatacardEdit').hide();
 		}
 		if (UserRoleValue >= 2) 
@@ -493,6 +493,7 @@ function doMainMenuShow()
 			// Edit datacards instead of only view them
 			Ext.getCmp('mnuDatacardView').hide();
 			Ext.getCmp('mnuDatacardEdit').show();
+			Ext.getCmp('mnuDatacardEdit').enable();
 			// Enable other functions
 			Ext.getCmp('mnuDatabaseDownload').enable();
 
