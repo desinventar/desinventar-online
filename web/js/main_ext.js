@@ -78,6 +78,7 @@ function doViewportCreate()
 	Ext.getCmp('westm').on('expand', function() {
 		jQuery('.contentBlock').hide();
 		jQuery('#divQueryResults').show();
+		jQuery('#dcr').hide();
 	});
 } // doViewportCreate()
 
@@ -96,9 +97,11 @@ function doViewportShow()
 	{
 		if (UserRoleValue > 0)
 		{
+			Ext.getCmp('westm').show();
 			jQuery('#divQueryResults').show();
 			jQuery('#dcr').hide();
-			jQuery('#divQueryResults').show();
+			Ext.getCmp('westm').expand();
+			Ext.getCmp('viewport').doLayout();
 		}
 		else
 		{
@@ -166,9 +169,9 @@ function doMainMenuHandler(item)
 		break;
 		// DesConsultar Menu Options
 		case 'mnuQueryViewDesign':
-			w = Ext.getCmp('westm');
 			jQuery('.contentBlock').hide();
 			jQuery('#divQueryResults').show();
+			w = Ext.getCmp('westm');
 			w.show();
 			w.expand();
 		break;
@@ -179,7 +182,6 @@ function doMainMenuHandler(item)
 			jQuery('#divRegionInfo').show();
 			doGetRegionInfo(jQuery('#desinventarRegionId').val());
 			Ext.getCmp('westm').collapse();
-			//Ext.getCmp('westm').hide();
 		break;
 		case 'mnuQueryViewData':
 			jQuery('body').trigger('cmdViewDataParams');
@@ -310,7 +312,6 @@ function hideQueryDesign()
 	w = Ext.getCmp('westm');
 	if (w != undefined)
 	{
-		w.hide();
 		w.collapse();
 	}
 } //hideQueryDesign()
