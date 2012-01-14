@@ -453,7 +453,7 @@ function doMainMenuShow()
 		});
 		Ext.getCmp('mnuUserLogin').hide();
 		Ext.getCmp('mnuUserChangeLogin').show();
-		Ext.getCmp('mnuUser').setText(jQuery('span#mnuUser').text() + ' : ' + jQuery('#desinventarUserId').val() + '/' + jQuery('#desinventarUserRole').val());
+		Ext.getCmp('mnuUser').setText(jQuery('span#mnuUser').text() + ' : ' + jQuery('#desinventarUserId').val());
 	}
 
 	// Configure which options are visible using RoleValue
