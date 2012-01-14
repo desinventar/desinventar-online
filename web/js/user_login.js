@@ -3,7 +3,8 @@
  (c) 1998-2011 Corporacion OSSO
 */
 
-function onReadyUserLogin() {
+function onReadyUserLogin()
+{
 	// hide all status messages on start
 	doUserLoginUpdateMsg('');
 
@@ -14,6 +15,15 @@ function onReadyUserLogin() {
 	jQuery('body').on('cmdUserLogout', function() {
 		doUserLogout();
 	});
+
+	jQuery('body').on('UserLoggedIn',function() {
+		jQuery('body').trigger('cmdWindowReload');
+	});
+
+	jQuery('body').on('UserLoggedOut',function() {
+		jQuery('body').trigger('cmdWindowReload');
+	});
+	
 	
 	// submit form validation and process..
 	jQuery("#btnUserLoginSend").click(function() {
@@ -41,9 +51,10 @@ function onReadyUserLogin() {
 		}
 		else
 		{
-			jQuery.post(jQuery('#desinventarURL').val() + '/user.php',
+			jQuery.post(jQuery('#desinventarURL').val() + '/',
 				{
-					'cmd'        : 'login',
+					'cmd'        : 'cmdUserLogin',
+					'RegionId'   : jQuery('#desinventarRegionId').val(),
 					'UserId'     : UserId,
 					'UserPasswd' : hex_md5(UserPasswd)
 			    },
@@ -56,11 +67,11 @@ function onReadyUserLogin() {
 						jQuery("#fldUserPasswd").val('');
 
 						// Update UserInfo Fields...
-						jQuery('#desinventarUserId').val(data.UserId);
-						jQuery('#desinventarUserFullName').val(data.UserFullName);
+						doUserUpdateInfo(data.User);
 
+						Ext.getCmp('wndUserLogin').hide();
 						// Trigger Event and Update User Menu etc.
-						jQuery('body').trigger('UserLoggedIn');
+						jQuery('body').trigger('cmdMainMenuUpdate');
 					}
 					else
 					{
@@ -74,39 +85,40 @@ function onReadyUserLogin() {
 	});
 } //onReadyUserLogin()
 
+function doUserUpdateInfo(User)
+{
+	jQuery('#desinventarUserId').val(User.Id);
+	jQuery('#desinventarUserFullName').val(User.FullName);
+	jQuery('#desinventarUserRole').val(User.Role);
+	jQuery('#desinventarUserRoleValue').val(User.RoleValue);
+}
+
 function doUserLogout()
 {
-	var Answer = 0;
-	jQuery.post(jQuery('#desinventarURL').val() + '/user.php',
+	jQuery.post(
+		jQuery('#desinventarURL').val() + '/',
 		{
-			'cmd'        : 'logout'
+			'cmd'        : 'cmdUserLogout'
 		},
 		function(data)
 		{
 			if (parseInt(data.Status) > 0)
 			{
-				Answer = 1;
 				doUserLoginUpdateMsg("#msgUserLoggedOut");
 				// After login, clear passwd field
 				jQuery('#fldUserId').val('');
 				jQuery('#fldUserPasswd').val('');
-				
-				// Update UserInfo Fields...
-				jQuery('#desinventarUserId').val('');
-				jQuery('#desinventarUserFullName').val('');
-				
+				doUserUpdateInfo(data.User);
 				// Trigger Event, used to update menu or reload page...
-				jQuery('body').trigger('UserLoggedOut');
+				jQuery('body').trigger('cmdMainMenuUpdate');
 			}
 			else
 			{
 				doUserLoginUpdateMsg("#msgInvalidLogout");
-				Answer = 0;
 			}
 		},
 		'json'
 	);
-	return Answer;
 } //doUserLogout()
 
 function doUserLoginUpdateMsg(msgId)
