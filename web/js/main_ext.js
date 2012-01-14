@@ -43,7 +43,7 @@ function doViewportCreate()
 				contentEl: 'north',
 				collapsible: false
 			},
-			{
+			new Ext.Panel({
 				region: 'west',
 				id: 'westm',
 				border: false,
@@ -55,7 +55,7 @@ function doViewportCreate()
 				margins:'0 2 0 0',
 				collapsible: true,
 				contentEl: 'west'
-			},
+			}),
 			{
 				region: 'south',
 				id: 'southm',
