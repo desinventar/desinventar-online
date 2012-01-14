@@ -47,7 +47,7 @@ function doViewportCreate()
 				region: 'west',
 				id: 'westm',
 				border: false,
-				split: true,
+				split: false,
 				layout: 'fit',
 				width: 350,
 				title: jQuery('#msgQueryDesignTitle').text(),
@@ -99,6 +99,7 @@ function doViewportShow()
 		if (UserRoleValue > 0)
 		{
 			Ext.getCmp('westm').show();
+			Ext.getCmp('centerm').show();
 			jQuery('#divQueryResults').show();
 			jQuery('#dcr').hide();
 			Ext.getCmp('westm').expand();
@@ -172,9 +173,8 @@ function doMainMenuHandler(item)
 		case 'mnuQueryViewDesign':
 			jQuery('.contentBlock').hide();
 			jQuery('#divQueryResults').show();
-			w = Ext.getCmp('westm');
-			w.show();
-			w.expand();
+			Ext.getCmp('westm').show();
+			Ext.getCmp('westm').expand();
 		break;
 		case 'mnuQueryRegionInfo':
 			jQuery('.contentBlock').hide();
@@ -310,11 +310,7 @@ function doMainMenuHandler(item)
 function hideQueryDesign()
 {
 	// Hide Query Design Panel
-	w = Ext.getCmp('westm');
-	if (w != undefined)
-	{
-		w.collapse();
-	}
+	Ext.getCmp('westm').collapse();
 } //hideQueryDesign()
 
 function doMainMenuCreate()
