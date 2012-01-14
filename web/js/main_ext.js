@@ -413,8 +413,17 @@ function doMainMenuCreate()
 		Ext.getCmp('mnuWaiting').hide();
 	});
 	jQuery('body').on('cmdMainMenuUpdate', function() {
-		doMainMenuShow();
-		doViewportShow();
+		jQuery('#loading-mask').show();
+		jQuery('#loading').show();
+		Ext.getCmp('viewport').hide();
+		setTimeout(function() {
+			// Hide Loading div...
+			jQuery('#loading').hide();
+			jQuery('#loading-mask').hide();
+			Ext.getCmp('viewport').show();
+			doMainMenuShow();
+			doViewportShow();
+		}, 2000);
 	});
 } //doCreateMainMenu()
 
