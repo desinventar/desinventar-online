@@ -12,18 +12,21 @@ function onReadyQueryResults()
 		validateEndYear();
 	});
 
-	// 2011-02-05 (jhcaiced) Configure RecordStatus field
-	if (jQuery('#desinventarUserRoleValue').val() > 0)
-	{
-		jQuery('#fldQueryRecordStatus').val(['PUBLISHED','READY']);
-		jQuery('#divQueryRecordStatus').show();
-	}
-	else
-	{
-		jQuery('#fldQueryRecordStatus').val('PUBLISHED');
-		jQuery('#divQueryRecordStatus').hide();
-	}
-
+	jQuery('body').on('cmdMainQueryUpdate', function() {
+		// 2011-02-05 (jhcaiced) Configure RecordStatus field
+		if ( (jQuery('#desinventarUserId').val() != '') &&
+		     (jQuery('#desinventarUserRoleValue').val() > 1) )
+		{
+			jQuery('#fldQueryRecordStatus').val(['PUBLISHED','READY']);
+			jQuery('#divQueryRecordStatus').show();
+		}
+		else
+		{
+			jQuery('#fldQueryRecordStatus').val(['PUBLISHED']);
+			jQuery('#divQueryRecordStatus').hide();
+		}
+	});
+	
 	jQuery('#btnViewData').click(function() {
 		jQuery('body').trigger('cmdViewDataParams');
 	});
@@ -36,13 +39,14 @@ function onReadyQueryResults()
 	jQuery('#btnViewStd').click(function() {
 		jQuery('body').trigger('cmdViewStdParams');
 	});
+	jQuery('body').trigger('cmdMainQueryUpdate');
 } //onReadyQueryResults()
 
 function validateQueryDefinition()
 {
 	var iReturn = 1;
 	return iReturn;
-};
+} //validateQueryDefinition()
 
 function validateBeginYear()
 {
@@ -52,7 +56,7 @@ function validateBeginYear()
 	{
 		jQuery("#queryBeginYear").val(prmQueryMinYear);
 	}
-}
+} //validateBeginYear()
 
 function validateEndYear()
 {
@@ -62,4 +66,4 @@ function validateEndYear()
 	{
 		jQuery("#queryEndYear").val(prmQueryMaxYear);
 	}
-}
+} //validateEndYear()

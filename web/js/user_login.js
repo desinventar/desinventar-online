@@ -71,7 +71,7 @@ function onReadyUserLogin()
 
 						Ext.getCmp('wndUserLogin').hide();
 						// Trigger Event and Update User Menu etc.
-						jQuery('body').trigger('cmdMainMenuUpdate');
+						jQuery('body').trigger('cmdMainWindowUpdate');
 					}
 					else
 					{
@@ -98,7 +98,8 @@ function doUserLogout()
 	jQuery.post(
 		jQuery('#desinventarURL').val() + '/',
 		{
-			'cmd'        : 'cmdUserLogout'
+			'cmd'        : 'cmdUserLogout',
+			'RegionId'   : jQuery('#desinventarRegionId').val()
 		},
 		function(data)
 		{
@@ -110,7 +111,7 @@ function doUserLogout()
 				jQuery('#fldUserPasswd').val('');
 				doUserUpdateInfo(data.User);
 				// Trigger Event, used to update menu or reload page...
-				jQuery('body').trigger('cmdMainMenuUpdate');
+				jQuery('body').trigger('cmdMainWindowUpdate');
 			}
 			else
 			{

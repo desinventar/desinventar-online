@@ -20,11 +20,11 @@ function onReadyExtJS()
 			return frag;
 		};
 	}
-	doMainMenuCreate();
-	doMainMenuShow();
-	doViewportCreate();
-	doViewportShow();
 	doDialogsCreate();
+	doMainMenuCreate();
+	doViewportCreate();
+	jQuery('body').trigger('cmdMainMenuUpdate');
+	doViewportShow();
 } //onReadyExtJS()
 
 function doViewportCreate()
@@ -412,20 +412,26 @@ function doMainMenuCreate()
 	jQuery('body').on('cmdMainWaitingHide', function() {
 		Ext.getCmp('mnuWaiting').hide();
 	});
+
 	jQuery('body').on('cmdMainMenuUpdate', function() {
+		doMainMenuUpdate();
+	});
+
+	jQuery('body').on('cmdMainWindowUpdate', function() {
 		Ext.getCmp('westm').collapse();
 		Ext.getCmp('westm').hide();
 		jQuery('.contentBlock').hide();
 		jQuery('#divLoading').show();
 		setTimeout(function()
 		{
-			doMainMenuShow();
 			doViewportShow();
+			jQuery('body').trigger('cmdMainMenuUpdate');
+			jQuery('body').trigger('cmdMainQueryUpdate');
 		}, 2000);
 	});
 } //doCreateMainMenu()
 
-function doMainMenuShow()
+function doMainMenuUpdate()
 {
 	jQuery('#divMainMenu span.item').each(function() {
 		Ext.getCmp(jQuery(this).attr('id')).disable();
@@ -511,7 +517,7 @@ function doMainMenuShow()
 			}
 		}		
 	}
-} //doMainMenuShow()
+} //doMainMenuUpdate()
 
 function doDialogsCreate()
 {
@@ -578,8 +584,8 @@ function doDialogsCreate()
 				handler: function() {
 					if (sendList("result")) {
 						$('DCRes').value = "D";
-						$('bsave').style.visibility = 'visible';
-						$('bprint').style.visibility = 'visible';
+						$('btnResultSave').style.visibility = 'visible';
+						$('btnResultPrint').style.visibility = 'visible';
 						Ext.getCmp('wndViewDataParams').hide();
 					} else {
 						console.debug('Error while executing function ViewData');
@@ -609,8 +615,8 @@ function doDialogsCreate()
 					if (sendMap("result")) {
 						$('DCRes').value = "M";
 						Ext.getCmp('wndViewMapParams').hide();
-						$('bsave').style.visibility = 'visible';
-						$('bprint').style.visibility = 'visible';
+						$('btnResultSave').style.visibility = 'visible';
+						$('btnResultPrint').style.visibility = 'visible';
 					} else {
 						console.debug('Error while executing function ViewMap');
 					}
@@ -644,8 +650,8 @@ function doDialogsCreate()
 					sendGraphic('result');
 					$('DCRes').value = "G";
 					Ext.getCmp('wndViewGraphParams').hide();
-					$('bsave').style.visibility = 'visible';
-					$('bprint').style.visibility = 'visible';
+					$('btnResultSave').style.visibility = 'visible';
+					$('btnResultPrint').style.visibility = 'visible';
 				}
 			},
 			{
@@ -673,8 +679,8 @@ function doDialogsCreate()
 					if (sendStatistic("result")) {
 						$('DCRes').value = "S";
 						Ext.getCmp('wndViewStdParams').hide();
-						$('bsave').style.visibility = 'visible';
-						$('bprint').style.visibility = 'visible';
+						$('btnResultSave').style.visibility = 'visible';
+						$('btnResultPrint').style.visibility = 'visible';
 					} else {
 						console.debug('Error while executing ViewStd function');
 					}

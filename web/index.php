@@ -74,8 +74,8 @@ switch ($cmd)
 		$user = array();
 		$user['Id']        = '';
 		$user['FullName']  = '';
-		$user['Role']      = '';
-		$user['RoleValue'] = 0;
+		$user['Role']      = $us->getUserRole($RegionId);
+		$user['RoleValue'] = $us->getUserRoleValue($RegionId);
 
 		$answer = array();
 		$answer['Status'] = $iReturn;
