@@ -39,6 +39,19 @@ function onReadyQueryResults()
 	jQuery('#btnViewStd').click(function() {
 		jQuery('body').trigger('cmdViewStdParams');
 	});
+
+	jQuery('body').on('cmdQueryResultsButtonShow', function() {
+		jQuery('#btnResultSave').show();
+		jQuery('#btnResultPrint').show();
+		jQuery('body').trigger('cmdMainMenuResultButtonsEnable');
+	});
+	jQuery('body').on('cmdQueryResultsButtonHide', function() {
+		jQuery('#btnResultSave').hide();
+		jQuery('#btnResultPrint').hide();
+		jQuery('body').trigger('cmdMainMenuResultButtonsDisable');
+	});
+
+	// Initialize code
 	jQuery('body').trigger('cmdMainQueryUpdate');
 } //onReadyQueryResults()
 
