@@ -123,6 +123,10 @@ div.hidden {
 	display:none;
 }
 
+.hidden {
+	display:none;
+}
+
 a.button {
 	background: transparent url('../images/bg_button_a.gif') no-repeat scroll top right;
 	color: #444;
