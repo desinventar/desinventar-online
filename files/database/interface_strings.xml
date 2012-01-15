@@ -1995,13 +1995,13 @@
 			<Text LangIsoCode="por">Mapa não disponível</Text>
 			<Text LangIsoCode="fre">Carte non disponible</Text>
 		</Message>
-		<Message id="bsavemsg">
+		<Message id="msgResultSaveTooltip">
 			<Text LangIsoCode="eng">Enables you to save the displayed results (tables and images)</Text>
 			<Text LangIsoCode="spa">Le permite guardar el resultado desplegado (tablas e imágenes).</Text>
 			<Text LangIsoCode="por">Permite Salvar o resultado obtido (tabelas e imagens).</Text>
 			<Text LangIsoCode="fre">Vous permet d&quot;enregistrer le résultat déployé (tableaux et images)</Text>
 		</Message>
-		<Message id="bprintmsg">
+		<Message id="msgResultPrintTooltip">
 			<Text LangIsoCode="eng">Screen print result</Text>
 			<Text LangIsoCode="spa">Para imprimir el resultado en pantalla.</Text>
 			<Text LangIsoCode="por">Para imprimir o resultado na tela</Text>
