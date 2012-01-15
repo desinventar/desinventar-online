@@ -41,7 +41,6 @@ function onReadyQueryResults()
 	});
 
 	jQuery('body').on('cmdQueryResultsButtonHide', function() {
-		console.log('cmdQueryResultsButtonHide');
 		jQuery('#btnResultSave').hide();
 		jQuery('#btnResultPrint').hide();
 	});
