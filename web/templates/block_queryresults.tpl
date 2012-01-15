@@ -85,7 +85,7 @@
 				<span id="btnResultSaveOptions" class="hidden" 
 					onMouseOver="$('btnResultSaveOptions').style.display='block';" onMouseOut="setTimeout('$(\'btnResultSaveOptions\').style.display=\'none\';', 2000);">
 					<input type="button" id="btnResultSaveXLS" value="xls" class="bb line" onClick="saveRes('export', 'xls')" /> | 
-					<input type="button" id="btnResultSaveXLS" value="csv" class="bb line" onClick="saveRes('export', 'csv')" />
+					<input type="button" id="btnResultSaveCSV" value="csv" class="bb line" onClick="saveRes('export', 'csv')" />
 				</span>
 				&nbsp;&nbsp;
 				<input id="btnResultPrint" type="button" class="bb bprint hidden"	
