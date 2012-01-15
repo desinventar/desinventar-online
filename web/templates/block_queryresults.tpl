@@ -79,16 +79,16 @@
 			<td>
 				<span id="frmwait"></span>
 				<input id="DCRes" type="hidden" value="" />
-				<input id="btnResultSave" type="button" class="bb bsave" style="visibility: hidden;"
+				<input id="btnResultSave" type="button" class="bb bsave hidden"
 					onMouseOver="if($('DCRes').value == 'D' || $('DCRes').value == 'S') $('btnResultSaveOptions').style.display='block';"
 					onClick="saveRes('export', '');" title="{-#bsavemsg#-}" />
-				<span id="btnResultSaveOptions" style="position:absolute; display: none" 
+				<span id="btnResultSaveOptions" class="hidden" 
 					onMouseOver="$('btnResultSaveOptions').style.display='block';" onMouseOut="setTimeout('$(\'btnResultSaveOptions\').style.display=\'none\';', 2000);">
-					<input type="button" value="xls" class="bb line" onClick="saveRes('export', 'xls')" /> | 
-					<input type="button" value="csv" class="bb line" onClick="saveRes('export', 'csv')" />
+					<input type="button" id="btnResultSaveXLS" value="xls" class="bb line" onClick="saveRes('export', 'xls')" /> | 
+					<input type="button" id="btnResultSaveXLS" value="csv" class="bb line" onClick="saveRes('export', 'csv')" />
 				</span>
 				&nbsp;&nbsp;
-				<input id="btnResultPrint" type="button" class="bb bprint" style="visibility: hidden;"	
+				<input id="btnResultPrint" type="button" class="bb bprint hidden"	
 					onClick="printRes();" title="{-#bprintmsg#-}" />&nbsp;&nbsp;
 			</td>
 		</tr>
