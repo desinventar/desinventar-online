@@ -39,6 +39,14 @@ function onReadyQueryResults()
 	jQuery('#btnViewStd').click(function() {
 		jQuery('body').trigger('cmdViewStdParams');
 	});
+
+	jQuery('body').on('cmdQueryResultsButtonHide', function() {
+		console.log('cmdQueryResultsButtonHide');
+		jQuery('#btnResultSave').hide();
+		jQuery('#btnResultPrint').hide();
+	});
+
+	// Initialize code
 	jQuery('body').trigger('cmdMainQueryUpdate');
 } //onReadyQueryResults()
 
