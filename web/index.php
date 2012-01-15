@@ -301,6 +301,7 @@ switch ($cmd)
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
 	case 'admin':
+	case 'cmdAdminMain':
 	case 'cmdAdminDB':
 	case 'cmdAdminUsers':
 		$t->assign('CountryList', $us->q->getCountryList());
