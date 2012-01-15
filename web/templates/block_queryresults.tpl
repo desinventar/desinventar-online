@@ -79,7 +79,7 @@
 			<td>
 				<span id="frmwait"></span>
 				<input id="DCRes" type="hidden" value="" />
-				<input id="btnResultSave" type="button" class="bb bsave"   style="visibility: hidden;"
+				<input id="btnResultSave" type="button" class="bb bsave" style="visibility: hidden;"
 					onMouseOver="if($('DCRes').value == 'D' || $('DCRes').value == 'S') $('btnResultSaveOptions').style.display='block';"
 					onClick="saveRes('export', '');" title="{-#bsavemsg#-}" />
 				<span id="btnResultSaveOptions" style="position:absolute; display: none" 

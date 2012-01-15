@@ -20,11 +20,11 @@ function onReadyExtJS()
 			return frag;
 		};
 	}
-	doMainMenuCreate();
-	doMainMenuShow();
-	doViewportCreate();
-	doViewportShow();
 	doDialogsCreate();
+	doMainMenuCreate();
+	doViewportCreate();
+	jQuery('body').trigger('cmdMainMenuUpdate');
+	doViewportShow();
 } //onReadyExtJS()
 
 function doViewportCreate()
@@ -412,20 +412,26 @@ function doMainMenuCreate()
 	jQuery('body').on('cmdMainWaitingHide', function() {
 		Ext.getCmp('mnuWaiting').hide();
 	});
+
 	jQuery('body').on('cmdMainMenuUpdate', function() {
+		doMainMenuUpdate();
+	});
+
+	jQuery('body').on('cmdMainWindowUpdate', function() {
 		Ext.getCmp('westm').collapse();
 		Ext.getCmp('westm').hide();
 		jQuery('.contentBlock').hide();
 		jQuery('#divLoading').show();
 		setTimeout(function()
 		{
-			doMainMenuShow();
 			doViewportShow();
+			jQuery('body').trigger('cmdMainMenuUpdate');
+			jQuery('body').trigger('cmdMainQueryUpdate');
 		}, 2000);
 	});
 } //doCreateMainMenu()
 
-function doMainMenuShow()
+function doMainMenuUpdate()
 {
 	jQuery('#divMainMenu span.item').each(function() {
 		Ext.getCmp(jQuery(this).attr('id')).disable();
@@ -511,7 +517,7 @@ function doMainMenuShow()
 			}
 		}		
 	}
-} //doMainMenuShow()
+} //doMainMenuUpdate()
 
 function doDialogsCreate()
 {
