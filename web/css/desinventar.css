@@ -301,3 +301,6 @@ a:hover	{	color:#00008b; }
 .ext-el-mask {
 	background-color: #eeeeee;
 }
+#btnResultSaveOptions {
+	position:absolute;
+}
