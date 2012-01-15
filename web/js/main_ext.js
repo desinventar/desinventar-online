@@ -79,6 +79,7 @@ function doViewportCreate()
 	Ext.getCmp('westm').on('expand', function() {
 		jQuery('.contentBlock').hide();
 		jQuery('#divQueryResults').show();
+		jQuery('body').trigger('cmdQueryResultsButtonHide');
 		jQuery('#dcr').hide();
 	});
 } // doViewportCreate()
@@ -101,6 +102,7 @@ function doViewportShow()
 			Ext.getCmp('westm').show();
 			Ext.getCmp('centerm').show();
 			jQuery('#divQueryResults').show();
+			jQuery('body').trigger('cmdQueryResultsButtonHide');
 			jQuery('#dcr').hide();
 			Ext.getCmp('westm').expand();
 			Ext.getCmp('viewport').doLayout();

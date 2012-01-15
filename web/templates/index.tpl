@@ -63,8 +63,8 @@
 
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
-			onReadyExtJS();
 			onReadyMain();
+			onReadyExtJS();
 		});
 	</script>
 </head>
