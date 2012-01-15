@@ -40,6 +40,10 @@ function onReadyQueryResults()
 		jQuery('body').trigger('cmdViewStdParams');
 	});
 
+	jQuery('body').on('cmdQueryResultsButtonShow', function() {
+		jQuery('#btnResultSave').show();
+		jQuery('#btnResultPrint').show();
+	});
 	jQuery('body').on('cmdQueryResultsButtonHide', function() {
 		jQuery('#btnResultSave').hide();
 		jQuery('#btnResultPrint').hide();

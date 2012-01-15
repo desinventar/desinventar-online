@@ -577,25 +577,33 @@ function doDialogsCreate()
 		closeAction:'hide', plain: true, animCollapse: false, constrainHeader: true,
 		items: new Ext.Panel({contentEl: 'divViewDataParamsContent', autoScroll: true }),
 		buttons: [
-			{text: jQuery('#msgViewDataButtonClear').text(),
-				handler: function() {
+			{
+				text: jQuery('#msgViewDataButtonClear').text(),
+				handler: function()
+				{
 					$('CD').reset();
-					} //handler
+				} //handler
 			},
-			{text: jQuery('#msgViewDataButtonSend').text(),
-				handler: function() {
-					if (sendList("result")) {
+			{
+				text: jQuery('#msgViewDataButtonSend').text(),
+				handler: function()
+				{
+					if (sendList("result"))
+					{
 						$('DCRes').value = "D";
-						jQuery('#btnResultSave').show();
-						jQuery('#btnResultPrint').show();
+						jQuery('body').trigger('cmdQueryResultsButtonShow');
 						Ext.getCmp('wndViewDataParams').hide();
-					} else {
+					}
+					else
+					{
 						console.debug('Error while executing function ViewData');
 					}
 				} //handler
 			},
-			{text: jQuery('#msgViewDataButtonClose').text(),
-				handler: function() {
+			{
+				text: jQuery('#msgViewDataButtonClose').text(),
+				handler: function()
+				{
 					Ext.getCmp('wndViewDataParams').hide();
 				} //handler
 			}
@@ -607,25 +615,33 @@ function doDialogsCreate()
 		closeAction:'hide', plain: true, animCollapse: false, constrainHeader: true,
 		items: new Ext.Panel({contentEl: 'map-cfg', autoScroll: true }),
 		buttons: [
-			{text: jQuery('#msgViewMapButtonClear').text(),
-				handler: function() {
+			{
+				text: jQuery('#msgViewMapButtonClear').text(),
+				handler: function()
+				{
 					$('CM').reset();
 				}
 			},
-			{text: jQuery('#msgViewMapButtonSend').text(),
-				handler: function() {
-					if (sendMap("result")) {
+			{
+				text: jQuery('#msgViewMapButtonSend').text(),
+				handler: function()
+				{
+					if (sendMap("result"))
+					{
 						$('DCRes').value = "M";
 						Ext.getCmp('wndViewMapParams').hide();
-						jQuery('#btnResultSave').show();
-						jQuery('#btnResultPrint').show();
-					} else {
+						jQuery('body').trigger('cmdQueryResultsButtonShow');
+					}
+					else
+					{
 						console.debug('Error while executing function ViewMap');
 					}
 				}
 			},
-			{text: jQuery('#msgViewMapButtonClose').text(),
-				handler: function() {
+			{
+				text: jQuery('#msgViewMapButtonClose').text(),
+				handler: function()
+				{
 					Ext.getCmp('wndViewMapParams').hide();
 				}
 			}
@@ -652,8 +668,7 @@ function doDialogsCreate()
 					sendGraphic('result');
 					$('DCRes').value = "G";
 					Ext.getCmp('wndViewGraphParams').hide();
-					jQuery('#btnResultSave').show();
-					jQuery('#btnResultPrint').show();
+					jQuery('body').trigger('cmdQueryResultsButtonShow');
 				}
 			},
 			{
@@ -671,25 +686,33 @@ function doDialogsCreate()
 		closeAction:'hide', plain: true, animCollapse: false, constrainHeader: true,
 		items: new Ext.Panel({contentEl: 'std-cfg', autoScroll: true }),
 		buttons: [
-			{text: jQuery('#msgViewStdButtonClear').text(),
-				handler: function() {
+			{
+				text: jQuery('#msgViewStdButtonClear').text(),
+				handler: function()
+				{
 					$('CS').reset();
 				}
 			},
-			{text: jQuery('#msgViewStdButtonSend').text(),
-				handler: function() {
-					if (sendStatistic("result")) {
+			{
+				text: jQuery('#msgViewStdButtonSend').text(),
+				handler: function()
+				{
+					if (sendStatistic("result"))
+					{
 						$('DCRes').value = "S";
 						Ext.getCmp('wndViewStdParams').hide();
-						jQuery('#btnResultSave').show();
-						jQuery('#btnResultPrint').show();
-					} else {
+						jQuery('body').trigger('cmdQueryResultsButtonShow');
+					}
+					else
+					{
 						console.debug('Error while executing ViewStd function');
 					}
 				} //handler
 			},
-			{text: jQuery('#msgViewStdButtonClose').text(),
-				handler: function() {
+			{
+				text: jQuery('#msgViewStdButtonClose').text(),
+				handler: function()
+				{
 					Ext.getCmp('wndViewStdParams').hide();
 				}
 			}
