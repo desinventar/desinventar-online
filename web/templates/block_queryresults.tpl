@@ -33,18 +33,8 @@
 			{-include file="datacards_ext.tpl"-}
 
 			<!-- Show User login/logout window -->
-			<div id="usr-win" class="x-hidden">
-				<div class="x-window-header">
-					{-$desinventarUserId-} - {-$role-}
-				</div>
-				<div id="usr">
-					{-include file="user_login.tpl"-}
-					<br />
-					<a href="javascript:void(null)" class="rememberpasswordlink" onclick="updateList('passlost', jQuery('#desinventarURL').val() + '/user.php', 'cmd=passlost');">{-#tpasslost#-}</a>
-					<div id="passlost">
-					</div>
-				</div>
-			</div>
+			{-include file="user_login_ext.tpl"-}
+
 			<!-- Show Database functions window -->
 			<div id="dbl-win" class="x-hidden">
 				<div class="x-window-header">
