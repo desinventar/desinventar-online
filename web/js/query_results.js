@@ -51,6 +51,32 @@ function onReadyQueryResults()
 		jQuery('body').trigger('cmdMainMenuResultButtonsDisable');
 	});
 
+	jQuery('#btnResultSave').click(function() {
+		saveRes('export', '');
+	}).mouseover(function() {
+		if (jQuery('#DCRes').val() == 'D' || jQuery('#DCRes').val() == 'S')
+		{
+			jQuery('#btnResultSaveOptions').show();
+		}
+	});
+	jQuery('#btnResultSaveOptions').mouseover(function() {
+		jQuery('#btnResultSaveOptions').hide();
+	}).mouseout(function() {
+		setTimeout(function() {
+			jQuery('#btnResultSaveOptions').hide();
+		}, 1500);
+	});
+
+	jQuery('#btnResultSaveXLS').click(function() {
+		saveRes('export', 'xls');
+	});
+	jQuery('#btnResultSaveCSV').click(function() {
+		saveRes('export', 'csv');
+	});
+	jQuery('#btnResultPrint').click(function() {
+		printRes();
+	});
+
 	// Initialize code
 	jQuery('body').trigger('cmdMainQueryUpdate');
 } //onReadyQueryResults()
