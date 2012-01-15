@@ -178,14 +178,6 @@ function doMainMenuHandler(item)
 			Ext.getCmp('westm').show();
 			Ext.getCmp('westm').expand();
 		break;
-		case 'mnuQueryRegionInfo':
-			jQuery('.contentBlock').hide();
-			jQuery('#divQueryResults').show();
-			jQuery('#dcr').hide();
-			jQuery('#divRegionInfo').show();
-			doGetRegionInfo(jQuery('#desinventarRegionId').val());
-			Ext.getCmp('westm').collapse();
-		break;
 		case 'mnuQueryViewData':
 			jQuery('body').trigger('cmdViewDataParams');
 		break;
@@ -207,6 +199,33 @@ function doMainMenuHandler(item)
 		break;
 		case 'mnuQueryOptionOpen':
 			Ext.getCmp('wndQueryOpen').show();
+		break;
+		case 'mnuQueryResultSave':
+			jQuery('#btnResultSave').trigger('click');
+		break;
+		case 'mnuQueryResultSaveXLS':
+			jQuery('#btnResultSaveXLS').trigger('click');
+		break;
+		case 'mnuQueryResultSaveCSV':
+			jQuery('#btnResultSaveCSV').trigger('click');
+		break;
+		case 'mnuQueryResultPrint':
+			jQuery('#btnResultPrint').trigger('click');
+		break;
+		case 'mnuQueryRegionInfo':
+			jQuery('.contentBlock').hide();
+			jQuery('#divQueryResults').show();
+			jQuery('#dcr').hide();
+			jQuery('#divRegionInfo').show();
+			doGetRegionInfo(jQuery('#desinventarRegionId').val());
+			Ext.getCmp('westm').collapse();
+		break;
+		case 'mnuQuerySelectDatabase':
+		case 'mnuQuerySelectAnotherDatabase':
+			// Show database list
+			hideQueryDesign();
+			jQuery('.contentBlock').hide();
+			doUpdateDatabaseListByUser();
 		break;
 		// Datacards Menu Items
 		case 'mnuDatacardView':
@@ -261,14 +280,6 @@ function doMainMenuHandler(item)
 			jQuery('.classDBConfig_tabs:first').click();
 			jQuery('#divDatabaseConfiguration').show();
 			jQuery('#tabDatabaseConfiguration').show();
-		break;
-		// databases menu
-		case 'mnuQuerySelectDatabase':
-		case 'mnuQuerySelectAnotherDatabase':
-			// Show database list
-			hideQueryDesign();
-			jQuery('.contentBlock').hide();
-			doUpdateDatabaseListByUser();
 		break;
 		case 'mnuDatabaseCreate':
 			doDatabaseCreateShow();
@@ -356,6 +367,10 @@ function doMainMenuCreate()
 			{id:'mnuQueryViewGraph'            , text: jQuery('span#mnuQueryViewGraph').text()            , handler: doMainMenuHandler },
 			{id:'mnuQueryViewStd'              , text: jQuery('span#mnuQueryViewStd').text()              , handler: doMainMenuHandler },
 			{id:'mnuQueryOption'               , text: jQuery('span#mnuQueryOption').text()               , menu: mnuQueryOption },
+			{id:'mnuQueryResultSave'           , text: jQuery('span#mnuQueryResultSave').text()           , handler: doMainMenuHandler },
+			{id:'mnuQueryResultSaveXLS'        , text: jQuery('span#mnuQueryResultSaveXLS').text()        , handler: doMainMenuHandler },
+			{id:'mnuQueryResultSaveCSV'        , text: jQuery('span#mnuQueryResultSaveCSV').text()        , handler: doMainMenuHandler },
+			{id:'mnuQueryResultPrint'          , text: jQuery('span#mnuQueryResultPrint').text()          , handler: doMainMenuHandler },
 			{id:'mnuQueryRegionInfo'           , text: jQuery('span#mnuQueryRegionInfo').text()           , handler: doMainMenuHandler },
 			{id:'mnuQuerySelectDatabase'       , text: jQuery('span#mnuQuerySelectDatabase').text()       , handler: doMainMenuHandler },
 			{id:'mnuQuerySelectAnotherDatabase', text: jQuery('span#mnuQuerySelectAnotherDatabase').text(), handler: doMainMenuHandler }
@@ -418,7 +433,31 @@ function doMainMenuCreate()
 	jQuery('body').on('cmdMainMenuUpdate', function() {
 		doMainMenuUpdate();
 	});
-
+	jQuery('body').on('cmdMainMenuResultButtonsEnable', function() {
+		if (jQuery('#DCRes').val() == 'D' || jQuery('#DCRes').val() == 'S')
+		{
+			Ext.getCmp('mnuQueryResultSave').hide();
+			Ext.getCmp('mnuQueryResultSaveXLS').show();
+			Ext.getCmp('mnuQueryResultSaveXLS').enable();
+			Ext.getCmp('mnuQueryResultSaveCSV').show();
+			Ext.getCmp('mnuQueryResultSaveCSV').enable();
+		}
+		else
+		{
+			Ext.getCmp('mnuQueryResultSave').show();
+			Ext.getCmp('mnuQueryResultSave').enable();
+			Ext.getCmp('mnuQueryResultSaveXLS').hide();
+			Ext.getCmp('mnuQueryResultSaveCSV').hide();
+		}
+		Ext.getCmp('mnuQueryResultPrint').show();
+		Ext.getCmp('mnuQueryResultPrint').enable();
+	});
+	jQuery('body').on('cmdMainMenuResultButtonsDisable', function() {
+		Ext.getCmp('mnuQueryResultSave').hide();
+		Ext.getCmp('mnuQueryResultSaveXLS').hide();
+		Ext.getCmp('mnuQueryResultSaveCSV').hide();
+		Ext.getCmp('mnuQueryResultPrint').hide();
+	});
 	jQuery('body').on('cmdMainWindowUpdate', function() {
 		Ext.getCmp('westm').collapse();
 		Ext.getCmp('westm').hide();
@@ -436,7 +475,11 @@ function doMainMenuCreate()
 function doMainMenuUpdate()
 {
 	jQuery('#divMainMenu span.item').each(function() {
-		Ext.getCmp(jQuery(this).attr('id')).disable();
+		var w = Ext.getCmp(jQuery(this).attr('id'));
+		if (w != undefined)
+		{
+			w.disable();
+		}
 	});
 
 	// Menu items that are always enabled
@@ -519,6 +562,7 @@ function doMainMenuUpdate()
 			}
 		}		
 	}
+	jQuery('body').trigger('cmdMainMenuResultButtonsDisable');
 } //doMainMenuUpdate()
 
 function doDialogsCreate()
