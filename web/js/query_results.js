@@ -62,7 +62,7 @@ function onReadyQueryResults()
 	jQuery('#btnResultSaveOptions').mouseover(function() {
 		jQuery('#btnResultSaveOptions').hide();
 	}).mouseout(function() {
-		setTimeout(function {
+		setTimeout(function() {
 			jQuery('#btnResultSaveOptions').hide();
 		}, 1500);
 	});

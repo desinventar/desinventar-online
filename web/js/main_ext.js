@@ -568,13 +568,6 @@ function doMainMenuUpdate()
 function doDialogsCreate()
 {
 	var w;
-	// User Login Window
-	w = new Ext.Window({id:'wndUserLogin',
-		el:'usr-win', layout:'fit', x:300, y:100, width:500, height:300, 
-		closeAction:'hide', plain: true, animCollapse: false, constrainHeader: true,
-		items: new Ext.Panel({ contentEl: 'usr', autoScroll: true })
-	});
-
 	// Query Open Window
 	w = new Ext.Window({id:'wndQueryOpen',
 		el:'qry-win', layout:'fit', width:300, height:200,
