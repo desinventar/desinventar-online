@@ -16,6 +16,8 @@ function onReadyGeolevels()
 		jQuery('#divGeolevels_Edit').show();
 		jQuery('#btnGeolevels_Add').hide();
 		jQuery('#frmGeocarto .GeoLevelId').val(jQuery('.GeoLevelId',this).text());
+		jQuery('#frmGeocarto .GeoLevelLayerCode').val(jQuery('.GeoLevelLayerCode', this).text());
+		jQuery('#frmGeocarto .GeoLevelLayerName').val(jQuery('.GeoLevelLayerName', this).text());
 		jQuery('#divGeocarto_Edit').show();
 	});
 	jQuery('#btnGeolevels_Add').click(function() {
