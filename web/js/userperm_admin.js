@@ -121,6 +121,7 @@ function doUserPermAdminPopulateLists()
 		{
 			if (parseInt(data.Status) > 0)
 			{
+				jQuery('#fldUserPermAdmin_UserId').empty();
 				jQuery.each(data.UserList, function(key, value) {
 					jQuery('#fldUserPermAdmin_UserId').append(
 						jQuery('<option>', { value : key }).text(value)
