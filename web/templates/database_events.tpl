@@ -69,8 +69,9 @@
 	</div>
 	<br />
 	<div>
-	<a class="button" id="btnDatabaseEvents_Add"><span>{-#msgDatabaseEvents_Add#-}</span></a>
-	<br />
+		<a class="button" id="btnDatabaseEvents_Add"><span>{-#msgDatabaseEvents_Add#-}</span></a>
+		<br />
+		<br />
 		<span class="clsDatabaseEventsStatus" id="msgDatabaseEvents_UpdateOk">{-#msgDatabaseEvents_UpdateOk#-}</span>
 		<span class="clsDatabaseEventsStatus" id="msgDatabaseEvents_UpdateError">{-#msgDatabaseEvents_UpdateError#-}</span>
 		<span class="clsDatabaseEventsStatus" id="msgDatabaseEvents_ErrorEmtpyFields">{-#msgDatabaseEvents_ErrorEmptyFields#-}</span>
