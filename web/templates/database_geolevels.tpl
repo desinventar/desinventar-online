@@ -18,6 +18,12 @@
 					<td class="header GeoLevelActive">
 						<b>{-#msgGeolevels_GeoLevelActive#-}</b>
 					</td>
+					<td class="header GeoLevelLayerFile">
+					</td>
+					<td class="header GeoLevelLayerCode">
+					</td>
+					<td class="header GeoLevelLayerName">
+					</td>
 				</tr>
 			</thead>
 			<tbody id="tbodyGeolevels_List">
@@ -30,6 +36,12 @@
 					</td>
 					<td class="GeoLevelActive">
 						<input type="checkbox" disabled="disabled" />						
+					</td>
+					<td class="GeoLevelLayerFile">
+					</td>
+					<td class="GeoLevelLayerCode">
+					</td>
+					<td class="GeoLevelLayerName">
 					</td>
 				</tr>
 			</tbody>
