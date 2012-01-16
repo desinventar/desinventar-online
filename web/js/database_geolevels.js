@@ -16,7 +16,6 @@ function onReadyGeolevels()
 		jQuery('#divGeolevels_Edit').show();
 		jQuery('#btnGeolevels_Add').hide();
 		jQuery('#frmGeocarto .GeoLevelId').val(jQuery('.GeoLevelId',this).text());
-		console.log(jQuery('.GeoLevelId',this).text());
 		jQuery('#frmGeocarto .GeoLevelLayerCode').val(jQuery('.GeoLevelLayerCode', this).text());
 		jQuery('#frmGeocarto .GeoLevelLayerName').val(jQuery('.GeoLevelLayerName', this).text());
 		jQuery('#divGeocarto_Edit').show();
@@ -148,57 +147,66 @@ function doGeolevelsPopulateList(GeolevelsList)
 
 function doGeolevelsUploaderCreate()
 {
-	var uploader = new qq.FileUploader({
-		element: document.getElementById('FileUploaderControl_SHP'),
-		action: jQuery('#desinventarURL').val() + '/',
-		params:
-		{
-			cmd        : 'cmdGeocartoUpload',
-			RegionId   : jQuery('#desinventarRegionId').val(),
-			UploadExt  : jQuery('#frmGeocarto .FileExt').val(),
-			GeoLevelId : jQuery('#frmGeocarto .GeoLevelId').val()
-		},
-		debug:false,
-		multiple:false,
-		allowedExtensions: ['shp','shx','dbf'],
-		onSubmit: function(id, Filename)
-		{
-			jQuery('#frmGeocarto .UploadId_SHP').val(id);
-			jQuery('#frmGeocarto .ProgressBar').show();
-			jQuery('#frmGeocarto .ProgressMark').css('width', '0px');
-			jQuery('#divGeolevels_FileUploaderControl .qq-upload-button-text').hide();
-			jQuery('#frmGeocarto .btnUploadCancel').show();
-		},
-		onProgress: function(id, Filename, loaded, total)
-		{
-			var maxWidth = jQuery('#frmGeocarto .ProgressBar').width();
-			var percent  = parseInt(loaded/total * 100);
-			var width    = parseInt(percent * maxWidth/100);
-			jQuery('#frmGeocarto .ProgressMark').css('width', width);
-		},
-		onComplete: function(id, Filename, data)
-		{
-			doGeolevelsUploaderReset();
-			jQuery('#frmGeocarto .Filename_SHP').text(data.filename);
-			if (parseInt(data.Status)>0)
+	jQuery('#frmGeocarto tr.FileUploader').each(function() {
+		var fileExt = jQuery(this).data('ext');
+		var fileUploaderControlId = jQuery(this).find('.FileUploaderControl').attr('id');
+		console.log(fileExt + ' ' + fileUploaderControlId);
+		var uploader = new qq.FileUploader({
+			element: document.getElementById(fileUploaderControlId),
+			action: jQuery('#desinventarURL').val() + '/',
+			params:
+			{
+				cmd        : 'cmdGeocartoUpload',
+				RegionId   : jQuery('#desinventarRegionId').val(),
+				UploadExt  : fileExt,
+				GeoLevelId : jQuery('#frmGeocarto .GeoLevelId').val()
+			},
+			debug:false,
+			multiple:false,
+			allowedExtensions: [fileExt],
+			onSubmit: function(id, Filename)
+			{
+				var ext = this.allowedExtensions[0];
+				var row = jQuery('#frmGeocarto tr:data("ext=' + ext + '")');
+				jQuery('.UploadId', row).val(id);
+				jQuery('#frmGeocarto .ProgressBar').show();
+				jQuery('#frmGeocarto .ProgressMark').css('width', '0px');
+				jQuery('.FileUploaderControl .qq-upload-button-text', this).hide();
+				jQuery('#frmGeocarto .btnUploadCancel').show();
+			},
+			onProgress: function(id, Filename, loaded, total)
+			{
+				var maxWidth = jQuery('#frmGeocarto .ProgressBar').width();
+				var percent  = parseInt(loaded/total * 100);
+				var width    = parseInt(percent * maxWidth/100);
+				jQuery('#frmGeocarto .ProgressMark').css('width', width);
+			},
+			onComplete: function(id, Filename, data)
+			{
+				var ext = this.allowedExtensions[0];
+				var row = jQuery('#frmGeocarto tr:data("ext=' + ext + '")');
+				doGeolevelsUploaderReset();
+				jQuery('.Filename', row).text(data.filename);
+				if (parseInt(data.Status)>0)
+				{
+				}
+				else
+				{
+					//doDatabaseUploadStatusMsg('msgDatabaseUploadErrorOnUpload');
+				}
+			},
+			onCancel: function(id, Filename)
 			{
 			}
-			else
-			{
-				//doDatabaseUploadStatusMsg('msgDatabaseUploadErrorOnUpload');
-			}
-		},
-		onCancel: function(id, Filename)
-		{
-		}
+		});
 	});
 	jQuery('#frmGeocarto .FileUploaderControl .qq-upload-button-text').html(jQuery('#msgGeolevels_UploadChooseFile').text());
 	jQuery('#frmGeocarto .FileUploaderControl .qq-upload-list').hide();
-
 	jQuery('#frmGeocarto .btnUploadCancel').click(function() {
-		//doDatabaseUploadReset();
-		uploader.cancel(jQuery('#frmGeocarto .UploadId').val());
-	});
+		jQuery('#frmGeocarto .UploadId').each(function() {
+			uploader.cancel(jQuery(this).val());
+		});
+	}).hide();
 } //doGeolevelsUploaderCreate()
 
 function doGeolevelsUploaderReset()

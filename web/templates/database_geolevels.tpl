@@ -108,17 +108,48 @@
 									<input class="GeoLevelLayerName" name="GeoLevelLayerName" type="text" size="30" value="" /><br />
 								</td>
 							</tr>
-							<tr>
+							<tr class="FileUploader" data-ext="dbf">
 								<td>
-									SHP File
+									DBF File
 								</td>
-								<td valign="top" style="width:100%;">
-									<span class="Filename_SHP" data-ext="shp" style="width:100%;"></span>
+								<td valign="top" style="width:80%;">
+									<span class="Filename_DBF Filename" style="width:100%;"></span>
+									<input type="hidden" class="Filename" name="Filename_DBF" value="" />
 									<br />
 								</td>
 								<td>
-									<input type="hidden" class="UploadId_SHP" value="" />
+									<input type="hidden" class="UploadId_SHP UploadId" value="" />
+									<div id="FileUploaderControl_DBF" class="FileUploaderControl" style="display:block;">
+									</div>
+								</td>
+							</tr>
+							<tr class="FileUploader" data-ext="shp">
+								<td>
+									SHP File
+								</td>
+								<td valign="top" style="width:80%;">
+									<span class="Filename_SHP Filename" style="width:100%;"></span>
+									<input type="hidden" class="Filename" name="Filename_SHP" value="" />
+									<br />
+								</td>
+								<td>
+									<input type="hidden" class="UploadId_SHP UploadId" value="" />
 									<div id="FileUploaderControl_SHP" class="FileUploaderControl" style="display:block;">
+									</div>
+								</td>
+							</tr>
+							<tr class="FileUploader" data-ext="shx">
+								<td>
+									SHX File
+								</td>
+								<td valign="top" style="width:80%;">
+									<span class="Filename_SHX Filename" style="width:100%;"></span>
+									<input type="hidden" class="Filename" name="Filename_SHX" value="" />
+									<br />
+								</td>
+								<td>
+									<input type="hidden" class="UploadId_SHX UploadId" value="" />
+									<div id="FileUploaderControl_SHX" class="FileUploaderControl" style="display:block;">
 									</div>
 								</td>
 							</tr>
