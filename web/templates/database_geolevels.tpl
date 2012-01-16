@@ -91,6 +91,8 @@
 					<form id="frmGeocarto">
 						<h4>{-#msgGeolevels_GeoCartoSubtitle#-}</h4>
 						<input class="GeoLevelId" name="GeoLevelId" type="hidden" value="-1" />
+						Code : <input class="GeoLevelLayerCode" name="GeoLevelLayerCode" type="text" size="30" value="" /><br />
+						Name : <input class="GeoLevelLayerName" name="GeoLevelLayerName" type="text" size="30" value="" /><br />
 						<table border="0" width="100%">
 							<tr>
 								<td>
