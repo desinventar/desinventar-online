@@ -286,6 +286,7 @@ function doDatabaseUsersPopulateLists()
 			if (parseInt(data.Status) > 0)
 			{
 				doDatabaseUsersUpdateOptions(data.RegionInfo);
+				jQuery('#frmUsers .UserId').empty();
 				jQuery.each(data.UserList, function(key, value) {
 					jQuery('#frmUsers .UserId').append(jQuery('<option>', { value : key }).text(value));
 				});
