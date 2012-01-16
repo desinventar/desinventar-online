@@ -90,6 +90,7 @@ function onReadyDatabaseEvents()
 					if (parseInt(data.Status) > 0)
 					{
 						jQuery('#divDatabaseEvents_Edit').hide();
+						jQuery('#btnDatabaseEvents_Add').show();
 						jQuery('#msgDatabaseEvents_UpdateOk').show();
 						doDatabaseEventsPopulateList('tbodyDatabaseEvents_EventListCustom' , data.EventListCustom);
 						doDatabaseEventsPopulateList('tbodyDatabaseEvents_EventListDefault', data.EventListDefault);
