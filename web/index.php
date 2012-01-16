@@ -571,12 +571,42 @@ switch ($cmd)
 		echo json_encode($answer);		
 	break;
 	case 'cmdGeocartoUpload':
-		fb('cmdGeocartoUpload');
-		$iReturn = ERR_NO_ERROR;
 		$answer = array();
-		$answer['Status'] = ERR_NO_ERROR;
-		$answer['success'] = true;
-		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);		
+		$answer['success'] = false;
+		$iReturn = ERR_NO_ERROR;
+		if ($us->UserId == '')
+		{
+			$iReturn = ERR_ACCESS_DENIED;
+		}
+		if ($iReturn > 0)
+		{
+			require_once('include/fileuploader.php');
+			$allowedExtensions = array('dbf','shp','shx');
+			$sizeLimit = 100 * 1024 * 1024;
+			$OutDir = TMP_DIR . '/' . $us->sSessionId;
+			if (!is_dir($OutDir))
+			{
+				mkdir($OutDir);
+			}
+			$uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+			$answer = $uploader->handleUpload($OutDir . '/');
+			if (isset($answer['error']))
+			{
+				$answer['success'] = false;
+			}
+			if ($answer['success'] == true)
+			{
+				$iReturn = ERR_NO_ERROR;
+				$Filename = $answer['filename'];
+			} //if
+		} //if
+		if ($answer['success'] == false)
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		$answer['Status'] = $iReturn;
+		// to pass data through iframe you will need to encode all html tags
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
 	break;
 	case 'cmdDatabaseUpload':
 		$answer = array();
