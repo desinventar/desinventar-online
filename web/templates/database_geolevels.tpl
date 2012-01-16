@@ -91,34 +91,49 @@
 					<form id="frmGeocarto">
 						<h4>{-#msgGeolevels_GeoCartoSubtitle#-}</h4>
 						<input class="GeoLevelId" name="GeoLevelId" type="hidden" value="-1" />
-						Code : <input class="GeoLevelLayerCode" name="GeoLevelLayerCode" type="text" size="30" value="" /><br />
-						Name : <input class="GeoLevelLayerName" name="GeoLevelLayerName" type="text" size="30" value="" /><br />
 						<table border="0" width="100%">
+							<tr>
+								<td>
+									Code
+								</td>
+								<td colspan="2">
+									<input class="GeoLevelLayerCode" name="GeoLevelLayerCode" type="text" size="30" value="" /><br />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Name
+								</td>
+								<td colspan="2">
+									<input class="GeoLevelLayerName" name="GeoLevelLayerName" type="text" size="30" value="" /><br />
+								</td>
+							</tr>
 							<tr>
 								<td>
 									SHP File
 								</td>
-								<td valign="top">
-									<span class="Filename" data-ext="shp" style="width:100%;"></span>
+								<td valign="top" style="width:100%;">
+									<span class="Filename_SHP" data-ext="shp" style="width:100%;"></span>
 									<br />
+								</td>
+								<td>
+									<input type="hidden" class="UploadId_SHP" value="" />
+									<div id="FileUploaderControl_SHP" class="FileUploaderControl" style="display:block;">
+									</div>
 								</td>
 							</tr>
 							<tr>
-								<td colspan="2">
+								<td colspan="3">
 									<div class="ProgressBar" style="width:100%;height:15px;background-color:#dddddd">
 										<div class="ProgressMark" style="width:0px;height:15px;background-color:#3bb3c2">
 										</div>
 									</div>
 								</td>
-								<td>
-									<br />
-								</td>
 							</tr>
 							<tr>
-								<td valign="top" colspan="2" style="width:100%;">
-									<input type="hidden" class="UploadId" value="" />
-									<div id="divGeolevels_FileUploaderControl" style="display:block;">
-									</div>
+								<td colspan="2">
+								</td>
+								<td valign="top">
 									<a class="button btnUploadCancel"><span>{-#msgGeolevels_UploadCancel#-}</span></a>
 								</td>
 							</tr>

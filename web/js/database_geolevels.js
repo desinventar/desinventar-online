@@ -16,6 +16,7 @@ function onReadyGeolevels()
 		jQuery('#divGeolevels_Edit').show();
 		jQuery('#btnGeolevels_Add').hide();
 		jQuery('#frmGeocarto .GeoLevelId').val(jQuery('.GeoLevelId',this).text());
+		console.log(jQuery('.GeoLevelId',this).text());
 		jQuery('#frmGeocarto .GeoLevelLayerCode').val(jQuery('.GeoLevelLayerCode', this).text());
 		jQuery('#frmGeocarto .GeoLevelLayerName').val(jQuery('.GeoLevelLayerName', this).text());
 		jQuery('#divGeocarto_Edit').show();
@@ -148,11 +149,11 @@ function doGeolevelsPopulateList(GeolevelsList)
 function doGeolevelsUploaderCreate()
 {
 	var uploader = new qq.FileUploader({
-		element: document.getElementById('divGeolevels_FileUploaderControl'),
+		element: document.getElementById('FileUploaderControl_SHP'),
 		action: jQuery('#desinventarURL').val() + '/',
 		params:
 		{
-			cmd        : 'cmdGeolevelsCartographyUpload',
+			cmd        : 'cmdGeocartoUpload',
 			RegionId   : jQuery('#desinventarRegionId').val(),
 			UploadExt  : jQuery('#frmGeocarto .FileExt').val(),
 			GeoLevelId : jQuery('#frmGeocarto .GeoLevelId').val()
@@ -162,14 +163,11 @@ function doGeolevelsUploaderCreate()
 		allowedExtensions: ['shp','shx','dbf'],
 		onSubmit: function(id, Filename)
 		{
-			jQuery('#frmGeocarto .Filename').text(Filename);
-
-			jQuery('#frmGeocarto .UploadId').val(id);
+			jQuery('#frmGeocarto .UploadId_SHP').val(id);
 			jQuery('#frmGeocarto .ProgressBar').show();
 			jQuery('#frmGeocarto .ProgressMark').css('width', '0px');
 			jQuery('#divGeolevels_FileUploaderControl .qq-upload-button-text').hide();
 			jQuery('#frmGeocarto .btnUploadCancel').show();
-			//doDatabaseUploadStatusMsg('msgDatabaseUploadWaitForUpload');
 		},
 		onProgress: function(id, Filename, loaded, total)
 		{
@@ -181,7 +179,7 @@ function doGeolevelsUploaderCreate()
 		onComplete: function(id, Filename, data)
 		{
 			doGeolevelsUploaderReset();
-			jQuery('#frmGeocarto .Filename').text(data.filename);
+			jQuery('#frmGeocarto .Filename_SHP').text(data.filename);
 			if (parseInt(data.Status)>0)
 			{
 			}
@@ -194,8 +192,8 @@ function doGeolevelsUploaderCreate()
 		{
 		}
 	});
-	jQuery('#divGeolevels_FileUploaderControl .qq-upload-button-text').html(jQuery('#msgGeolevels_UploadChooseFile').text());
-	jQuery('#divGeolevels_FileUploaderControl .qq-upload-list').hide();
+	jQuery('#frmGeocarto .FileUploaderControl .qq-upload-button-text').html(jQuery('#msgGeolevels_UploadChooseFile').text());
+	jQuery('#frmGeocarto .FileUploaderControl .qq-upload-list').hide();
 
 	jQuery('#frmGeocarto .btnUploadCancel').click(function() {
 		//doDatabaseUploadReset();
