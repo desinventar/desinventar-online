@@ -130,10 +130,16 @@ function doGeolevelsPopulateList(GeolevelsList)
 		jQuery('.GeoLevelDesc', clonedRow).html(value.GeoLevelDesc.substring(0,150));
 		jQuery('.GeoLevelDesc', clonedRow).prop('title', value.GeoLevelDesc);
 		jQuery('.GeoLevelActive :input', clonedRow).prop('checked', value.GeoLevelActive>0);
+		jQuery('.GeoLevelLayerFile', clonedRow).html(value.GeoLevelLayerFile);
+		jQuery('.GeoLevelLayerCode', clonedRow).html(value.GeoLevelLayerCode);
+		jQuery('.GeoLevelLayerName', clonedRow).html(value.GeoLevelLayerName);
 		jQuery('#tbodyGeolevels_List').append(clonedRow);
 	});
 	jQuery('#tblGeolevels_List .GeoLevelId').hide();
 	jQuery('#tblGeolevels_List .GeoLevelActive').hide();
+	jQuery('#tblGeolevels_List .GeoLevelLayerFile').hide();
+	jQuery('#tblGeolevels_List .GeoLevelLayerCode').hide();
+	jQuery('#tblGeolevels_List .GeoLevelLayerName').hide();
 	jQuery('#tbodyGeolevels_List tr:even').addClass('under');
 } //doGeolevelsPopulateList()
 

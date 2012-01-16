@@ -647,18 +647,26 @@ class DIRegion extends DIObject
 	function getGeolevelList()
 	{
 		$answer = array();
-		$sQuery = 'SELECT GeoLevelId,GeoLevelName,GeoLevelDesc,GeoLevelActive FROM GeoLevel ORDER BY GeoLevelId';
 		try
 		{
+			$sQuery = 'SELECT GeoLevelId,GeoLevelName,GeoLevelDesc,GeoLevelActive FROM GeoLevel ORDER BY GeoLevelId';
 			foreach($this->session->q->dreg->query($sQuery, PDO::FETCH_ASSOC) as $row)
 			{
 				$answer[$row['GeoLevelId']] = $row;
+			}
+			$sQuery = 'SELECT GeoLevelId,GeoLevelLayerFile,GeoLevelLayerCode,GeoLevelLayerName FROM Geocarto ORDER BY GeoLevelId';
+			foreach($this->session->q->dreg->query($sQuery, PDO::FETCH_ASSOC) as $row)
+			{
+				if (isset($answer[$row['GeoLevelId']]))
+				{
+					$answer[$row['GeoLevelId']] = array_merge($answer[$row['GeoLevelId']], $row);
+				}
 			}
 		}
 		catch (Exception $e)
 		{
 			showErrorMsg('getGeolevelList : ' . $e->getMessage());
-		}		
+		}
 		return $answer;
 	} //loadGeoLevels()
 } //class
