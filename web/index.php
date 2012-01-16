@@ -47,7 +47,7 @@ $t->assign('appOptions', $appOptions);
 // 2011-11-18 Use this to detect file uploads...
 if (getParameter('qqfile','') != '')
 {
-	$cmd = 'cmdDatabaseUpload';
+	//$cmd = 'cmdDatabaseUpload';
 }
 switch ($cmd)
 {
@@ -569,6 +569,14 @@ switch ($cmd)
 		}
 		$answer['Status'] = $iReturn;
 		echo json_encode($answer);		
+	break;
+	case 'cmdGeocartoUpload':
+		fb('cmdGeocartoUpload');
+		$iReturn = ERR_NO_ERROR;
+		$answer = array();
+		$answer['Status'] = ERR_NO_ERROR;
+		$answer['success'] = true;
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);		
 	break;
 	case 'cmdDatabaseUpload':
 		$answer = array();
