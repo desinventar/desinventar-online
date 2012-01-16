@@ -1,7 +1,7 @@
 <script language="php">
 /*
  DesInventar - http://www.desinventar.org
- (c) 1998-2011 Corporacion OSSO
+ (c) 1998-2012 Corporacion OSSO
 */
 
 class DIDisaster extends DIRecord
@@ -183,16 +183,11 @@ class DIDisaster extends DIRecord
 		if ($bStrict2 > 0)
 		{
 			$iReturn = $this->validateNotNull(-56, 'DisasterSource');
-			$iReturn = $this->validateEffects(-61, 1);
-			$iReturn = $this->validateDisasterBeginTime(-62);
-		}
-		else
-		{
-			//$iReturn = $this->validateNotNull(-56, 'DisasterSource',WARNING);
-			//$iReturn = $this->validateEffects(-61, 0);
+			if ($iReturn > 0) { $iReturn = $this->validateEffects(-61, 1);        }
+			if ($iReturn > 0) { $iReturn = $this->validateDisasterBeginTime(-62); }
 		}
 		return $iReturn;
-	}
+	} //validateUpdate()
 
 	public function validateDisasterBeginTime($ErrCode)
 	{
@@ -281,7 +276,7 @@ class DIDisaster extends DIRecord
 			}
 		}
 		return $iReturn;
-	}
+	} //validateEffects()
 	
 	public function update($withValidate = 1, $bStrict = 1)
 	{
