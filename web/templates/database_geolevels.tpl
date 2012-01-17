@@ -77,12 +77,12 @@
 			<td valign="top" class="line">
 				<div id="divGeocarto_Edit" class="hidden" style="width:100%;min-width:400px;">
 					<form id="frmGeocarto">
-						<h4>{-#msgGeolevels_GeoCartoSubtitle#-}</h4>
+						<h4>{-#msgGeocarto_Subtitle#-}</h4>
 						<input class="GeoLevelId" name="GeoLevelId" type="hidden" value="-1" />
 						<table border="0" width="100%">
 							<tr>
 								<td>
-									Code
+									{-#msgGeocarto_Code#-}
 								</td>
 								<td colspan="2">
 									<input class="GeoLevelLayerCode" name="GeoLevelLayerCode" type="text" size="30" value="" /><br />
@@ -90,7 +90,7 @@
 							</tr>
 							<tr>
 								<td>
-									Name
+									{-#msgGeocarto_Name#-}
 								</td>
 								<td colspan="2">
 									<input class="GeoLevelLayerName" name="GeoLevelLayerName" type="text" size="30" value="" /><br />
@@ -98,10 +98,10 @@
 							</tr>
 							<tr class="FileUploader" data-ext="dbf">
 								<td>
-									DBF File
+									{-#msgGeocarto_File#-} (DBF)
 								</td>
 								<td valign="top" style="width:50%;">
-									<span class="Filename_DBF uploaded" style="width:100%;">Uploaded</span>
+									<span class="Filename_DBF uploaded" style="width:100%;"></span>
 									<input type="hidden" class="filename" name="filename[DBF]" value="" />
 									<br />
 								</td>
@@ -113,10 +113,10 @@
 							</tr>
 							<tr class="FileUploader" data-ext="shp">
 								<td>
-									SHP File
+									{-#msgGeocarto_File#-} (SHP)
 								</td>
 								<td valign="top" style="width:50%;">
-									<span class="Filename_SHP uploaded" style="width:100%;">Uploaded</span>
+									<span class="Filename_SHP uploaded" style="width:100%;"></span>
 									<input type="hidden" class="filename" name="filename[SHP]" value="" />
 									<br />
 								</td>
@@ -128,10 +128,10 @@
 							</tr>
 							<tr class="FileUploader" data-ext="shx">
 								<td>
-									SHX File
+									{-#msgGeocarto_File#-} (SHX)
 								</td>
 								<td valign="top" style="width:50%;">
-									<span class="Filename_SHX uploaded" style="width:100%;">Uploaded</span>
+									<span class="Filename_SHX uploaded" style="width:100%;"></span>
 									<input type="hidden" class="filename" name="filename[SHX]" value="" />
 									<br />
 								</td>
@@ -163,12 +163,12 @@
 						</div>
 						<br />
 						<div class="center">
-							<span class="status statusUploadOk">File uploaded successfully<br /></span>
-							<span class="status statusUploadError">Error while uploading file<br /></span>
-							<span class="status statusUpdateOk">Cartography updated successfully<br /></span>
-							<span class="status statusUpdateError">Error while updating cartography<br /></span>
-							<span class="status statusMissingFiles">All files need to be uploaded (DBF,SHP,SHX)<br /></span>
-							<span class="status statusRequiredFields">Required field(s) cannot be empty<br/></span>
+							<span class="status statusUploadOk">{-#msgGeocarto_UploadOk#-}<br /></span>
+							<span class="status statusUploadError">{-#msgGeocarto_UploadError#-}<br /></span>
+							<span class="status statusUpdateOk">{-#msgGeocarto_UpdateOk#-}<br /></span>
+							<span class="status statusUpdateError">{-#msgGeocarto_UpdateError#-}<br /></span>
+							<span class="status statusMissingFiles">{-#msgGeocarto_MissingFiles#-} (DBF,SHP,SHX)<br /></span>
+							<span class="status statusRequiredFields">{-#msgGeocarto_RequiredFields#-}<br/></span>
 						</div>
 					</form>
 				</div>

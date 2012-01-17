@@ -3121,11 +3121,65 @@
 			<Text LangIsoCode="por">Erro ao atualizar registro</Text>
 			<Text LangIsoCode="fre">Erreur lors de la mise à jour d'enregistrement</Text>
 		</Message>
-		<Message id="msgGeolevels_GeoCartoSubtitle">
+		<Message id="msgGeocarto_Subtitle">
 			<Text LangIsoCode="eng">Cartography</Text>
 			<Text LangIsoCode="spa">Cartografía</Text>
 			<Text LangIsoCode="por">Cartografia</Text>
 			<Text LangIsoCode="fre">Cartographie</Text>
+		</Message>
+		<Message id="msgGeocarto_Code">
+			<Text LangIsoCode="eng">Code</Text>
+			<Text LangIsoCode="spa">Código</Text>
+			<Text LangIsoCode="por">Código</Text>
+			<Text LangIsoCode="fre">Code de</Text>
+		</Message>
+		<Message id="msgGeocarto_Name">
+			<Text LangIsoCode="eng">Name</Text>
+			<Text LangIsoCode="spa">Nombre</Text>
+			<Text LangIsoCode="por">Nome</Text>
+			<Text LangIsoCode="fre">Nom</Text>
+		</Message>
+		<Message id="msgGeocarto_File">
+			<Text LangIsoCode="eng">File</Text>
+			<Text LangIsoCode="spa">Archivo</Text>
+			<Text LangIsoCode="por">Arquivo</Text>
+			<Text LangIsoCode="fre">Fichier</Text>
+		</Message>
+		<Message id="msgGeocarto_UploadOk">
+			<Text LangIsoCode="eng">File uploaded successfully</Text>
+			<Text LangIsoCode="spa">Archivo subido con éxito</Text>
+			<Text LangIsoCode="por">Arquivo enviado com sucesso</Text>
+			<Text LangIsoCode="fre">Fichier téléchargé avec succès</Text>
+		</Message>
+		<Message id="msgGeocarto_UploadError">
+			<Text LangIsoCode="eng">Error while uploading file</Text>
+			<Text LangIsoCode="spa">Error al subir archivo</Text>
+			<Text LangIsoCode="por">Erro ao carregar arquivo</Text>
+			<Text LangIsoCode="fre">Erreur lors du téléchargement de fichiers</Text>
+		</Message>
+		<Message id="msgGeocarto_UpdateOk">
+			<Text LangIsoCode="eng">Cartography updated successfully</Text>
+			<Text LangIsoCode="spa">Cartografía actualizada con éxito</Text>
+			<Text LangIsoCode="por">Cartografia actualizada com sucesso</Text>
+			<Text LangIsoCode="fre">Cartographie à jour avec succès</Text>
+		</Message>
+		<Message id="msgGeocarto_UpdateError">
+			<Text LangIsoCode="eng">Error while updating cartography</Text>
+			<Text LangIsoCode="spa">Error al actualizar la cartografía</Text>
+			<Text LangIsoCode="por">Erro ao atualizar a cartografia</Text>
+			<Text LangIsoCode="fre">Erreur lors de la mise à jour de cartographie</Text>
+		</Message>
+		<Message id="msgGeocarto_MissingFiles">
+			<Text LangIsoCode="eng">All files need to be uploaded before saving</Text>
+			<Text LangIsoCode="spa">Todos los archivos deben ser subidos antes de guardar</Text>
+			<Text LangIsoCode="por">Todos os arquivos precisam ser carregados antes de salvar</Text>
+			<Text LangIsoCode="fre">Tous les fichiers doivent être téléchargés avant d'enregistrer</Text>
+		</Message>
+		<Message id="msgGeocarto_RequiredFields">
+			<Text LangIsoCode="eng">Required fields cannot be empty</Text>
+			<Text LangIsoCode="spa">Los campos obligatorios no pueden estar vacíos</Text>
+			<Text LangIsoCode="por">Os campos obrigatórios não pode ser vazio</Text>
+			<Text LangIsoCode="fre">Les champs obligatoires ne peut pas être vide</Text>
 		</Message>
 		<Message id="msgGeolevels_UploadChooseFile">
 			<Text LangIsoCode="eng">Choose file</Text>
