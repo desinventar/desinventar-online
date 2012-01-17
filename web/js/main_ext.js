@@ -90,8 +90,8 @@ function doViewportShow()
 	var RegionId = jQuery('#desinventarRegionId').val();
 	if ( (RegionId == '') || (UserRoleValue < 1) )
 	{
-		Ext.getCmp('westm').hide();
-		Ext.getCmp('viewport').doLayout();
+		Ext.getCmp('westm').collapse();
+		jQuery('#westm-xcollapsed').hide();
 	}
 
 	jQuery('.contentBlock').hide();
@@ -99,7 +99,8 @@ function doViewportShow()
 	{
 		if (UserRoleValue > 0)
 		{
-			Ext.getCmp('westm').show();
+			jQuery('#westm-xcollapsed').show();
+			Ext.getCmp('westm').expand();
 			Ext.getCmp('centerm').show();
 			jQuery('#divQueryResults').show();
 			jQuery('body').trigger('cmdQueryResultsButtonHide');
@@ -460,11 +461,15 @@ function doMainMenuCreate()
 	});
 	jQuery('body').on('cmdMainWindowUpdate', function() {
 		Ext.getCmp('westm').collapse();
-		Ext.getCmp('westm').hide();
+		jQuery('#westm-xcollapsed').hide();
 		jQuery('.contentBlock').hide();
 		jQuery('#divLoading').show();
 		setTimeout(function()
 		{
+			jQuery('#westm-xcollapsed').show();
+			Ext.getCmp('westm').expand();
+			jQuery('.contentBlock').hide();
+			jQuery('#divLoading').hide();
 			doViewportShow();
 			jQuery('body').trigger('cmdMainMenuUpdate');
 			jQuery('body').trigger('cmdMainQueryUpdate');
