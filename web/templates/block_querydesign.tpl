@@ -1,3 +1,4 @@
+<div id="divQueryDesign">
 <span id="msgQueryDesignTitle" style="display:none;">{-#tsubtitle#-}</span>
 <form id="frmMainQuery" method="post" action="" target="dcr">
 	<input type="hidden" id="_REG" name="_REG" value="{-$reg-}" />
@@ -378,3 +379,4 @@
 		<!-- BEGIN CUSTOMQUERY SECTION -->
 	</dl>
 </form> <!-- id="DC" -->
+</div>

@@ -477,7 +477,6 @@
 		}
 		if ($('_D+Field[]').length > 0)
 		{
-			w = Ext.getCmp('westm');
 			$('_D+cmd').value = cmd;
 			selectall('_D+Field[]');
 			var ob = $('_D+Field[]');
@@ -489,7 +488,7 @@
 			mystr += "D.DisasterId";
 			$('_D+FieldH').value = mystr;
 			combineForms('frmMainQuery', 'CD');
-			w.collapse();
+			Ext.getCmp('westm').collapse();
 			$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/data.php';
 			jQuery('#frmMainQuery').submit();
 			//hideMap();
@@ -506,7 +505,6 @@
 		jQuery('#prmQueryCommand').val('cmdMapShow');
 		if ($('_M+Type').length > 0)
 		{
-			w = Ext.getCmp('westm');
 			$('_M+cmd').value = cmd;
 			if (cmd == "export")
 			{
@@ -528,12 +526,11 @@
 				}
 				$('_M+extent').value = [extent.left,extent.bottom,extent.right,extent.top].join(',');
 				$('_M+layers').value = activelayers;
-				//myMap = window.parent.frames['dcr'].document.getElementById('MapTitle');
 				myMap = jQuery('#MapTitle');
 				$('_M+title').value = myMap.val();
 			}
 			combineForms('frmMainQuery', 'CM');
-			w.collapse(); // hide()
+			Ext.getCmp('westm').collapse();
 			$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/thematicmap.php';
 			jQuery('#frmMainQuery').submit();
 			//hideMap();
@@ -555,10 +552,9 @@
 		{
 			jQuery('#prmQueryCommand').val('cmdGraphSave');
 		}
-		w = Ext.getCmp('westm');
 		jQuery('#prmGraphCommand').val(cmd);
 		combineForms('frmMainQuery', 'CG');
-		w.collapse(); //hide()
+		Ext.getCmp('westm').collapse();
 		$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/graphic.php';
 		jQuery('#frmMainQuery').submit();
 		//hideMap();
@@ -576,7 +572,6 @@
 		}
 		if ( jQuery('#fldStatParam_FirstLev').val() != "" && $('_S+Field[]').length > 0)
 		{
-			w = Ext.getCmp('westm');
 			$('_S+cmd').value = cmd;
 			selectall('_S+Field[]');
 			var ob = $('_S+Field[]');
@@ -587,7 +582,7 @@
 			}
 			$('_S+FieldH').value = mystr;
 			combineForms('frmMainQuery', 'CS');
-			w.collapse();//hide()
+			Ext.getCmp('westm').collapse();
 			$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/statistic.php';
 			jQuery('#frmMainQuery').submit();
 			//hideMap();

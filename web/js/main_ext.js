@@ -54,7 +54,7 @@ function doViewportCreate()
 				autoScroll: true,
 				margins:'0 2 0 0',
 				collapsible: true,
-				contentEl: 'west'
+				contentEl: 'divWestPanel'
 			}),
 			{
 				region: 'south',
