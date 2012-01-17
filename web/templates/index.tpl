@@ -81,7 +81,7 @@
 		</div>
 
 		<!-- Query Design -->
-		<div id="west">
+		<div id="divWestPanel">
 			{-include file="block_querydesign.tpl"-}
 		</div>
 		
