@@ -18,12 +18,6 @@
 					<td class="header GeoLevelActive">
 						<b>{-#msgGeolevels_GeoLevelActive#-}</b>
 					</td>
-					<td class="header GeoLevelLayerFile">
-					</td>
-					<td class="header GeoLevelLayerCode">
-					</td>
-					<td class="header GeoLevelLayerName">
-					</td>
 				</tr>
 			</thead>
 			<tbody id="tbodyGeolevels_List">
@@ -36,12 +30,6 @@
 					</td>
 					<td class="GeoLevelActive">
 						<input type="checkbox" disabled="disabled" />						
-					</td>
-					<td class="GeoLevelLayerFile">
-					</td>
-					<td class="GeoLevelLayerCode">
-					</td>
-					<td class="GeoLevelLayerName">
 					</td>
 				</tr>
 			</tbody>
@@ -112,9 +100,9 @@
 								<td>
 									DBF File
 								</td>
-								<td valign="top" style="width:80%;">
-									<span class="Filename_DBF Filename" style="width:100%;"></span>
-									<input type="hidden" class="Filename" name="Filename_DBF" value="" />
+								<td valign="top" style="width:50%;">
+									<span class="Filename_DBF uploaded" style="width:100%;">Uploaded</span>
+									<input type="hidden" class="filename" name="filename[DBF]" value="" />
 									<br />
 								</td>
 								<td>
@@ -127,9 +115,9 @@
 								<td>
 									SHP File
 								</td>
-								<td valign="top" style="width:80%;">
-									<span class="Filename_SHP Filename" style="width:100%;"></span>
-									<input type="hidden" class="Filename" name="Filename_SHP" value="" />
+								<td valign="top" style="width:50%;">
+									<span class="Filename_SHP uploaded" style="width:100%;">Uploaded</span>
+									<input type="hidden" class="filename" name="filename[SHP]" value="" />
 									<br />
 								</td>
 								<td>
@@ -142,9 +130,9 @@
 								<td>
 									SHX File
 								</td>
-								<td valign="top" style="width:80%;">
-									<span class="Filename_SHX Filename" style="width:100%;"></span>
-									<input type="hidden" class="Filename" name="Filename_SHX" value="" />
+								<td valign="top" style="width:50%;">
+									<span class="Filename_SHX uploaded" style="width:100%;">Uploaded</span>
+									<input type="hidden" class="filename" name="filename[SHX]" value="" />
 									<br />
 								</td>
 								<td>
@@ -169,6 +157,19 @@
 								</td>
 							</tr>
 						</table>
+						<div class="center">
+							<a class="button btnSave"><span>{-#msgGeolevels_Save#-}</span></a>
+							<a class="button btnCancel"><span>{-#msgGeolevels_Cancel#-}</span></a>
+						</div>
+						<br />
+						<div class="center">
+							<span class="status statusUploadOk">File uploaded successfully<br /></span>
+							<span class="status statusUploadError">Error while uploading file<br /></span>
+							<span class="status statusUpdateOk">Cartography updated successfully<br /></span>
+							<span class="status statusUpdateError">Error while updating cartography<br /></span>
+							<span class="status statusMissingFiles">All files need to be uploaded (DBF,SHP,SHX)<br /></span>
+							<span class="status statusRequiredFields">Required field(s) cannot be empty<br/></span>
+						</div>
 					</form>
 				</div>
 			</td>

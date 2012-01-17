@@ -277,6 +277,12 @@ class UserSession {
 		return $iReturn;
 	} // delete()
 
+	public function getRegionDir($prmRegionId)
+	{
+		$DBDir = VAR_DIR . '/database/' . $prmRegionId;
+		return $DBDir;
+	}
+	
 	// Associate a RegionId with the session
 	public function open($prmRegionId, $prmDBFile = '') {
 		$iReturn = ERR_NO_ERROR;

@@ -570,6 +570,49 @@ switch ($cmd)
 		$answer['Status'] = $iReturn;
 		echo json_encode($answer);		
 	break;
+	case 'cmdGeocartoUpdate':
+		$answer = array();
+		$iReturn = ERR_NO_ERROR;
+		if ($us->UserId == '')
+		{
+			$iReturn = ERR_ACCESS_DENIED;
+		}
+		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($iReturn > 0)
+		{
+			$GeoLevelId = $_POST['GeoLevelId'];
+			$GeoLevelLayerFile = 'geocarto' . sprintf('%02d', $GeoLevelId);
+			$SrcDir = TMP_DIR . '/' . $us->sSessionId;
+			$OutDir = $us->getRegionDir($RegionId);
+			foreach($_POST['filename'] as $ext => $filename)
+			{
+				$srcFile = $SrcDir . '/' . $filename;
+				$dstFile = $OutDir . '/' . $GeoLevelLayerFile . '.' . strtolower($ext);;
+				if (file_exists($srcFile))
+				{
+					copy($srcFile, $dstFile);
+				}
+			}
+			$o = new DIGeoCarto($us, $GeoLevelId);
+			$o->set('GeoLevelLayerFile', $GeoLevelLayerFile);
+			$o->set('GeoLevelLayerCode', $_POST['GeoLevelLayerCode']);
+			$o->set('GeoLevelLayerName', $_POST['GeoLevelLayerName']);
+			if ($o->exist() > 0)
+			{
+				$o->update();
+			}
+			else
+			{
+				$o->insert();
+			}
+		}
+		$answer['Status'] = $iReturn;
+		// to pass data through iframe you will need to encode all html tags
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
+	break;
 	case 'cmdGeocartoUpload':
 		$answer = array();
 		$answer['success'] = false;
@@ -577,6 +620,10 @@ switch ($cmd)
 		if ($us->UserId == '')
 		{
 			$iReturn = ERR_ACCESS_DENIED;
+		}
+		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
 		}
 		if ($iReturn > 0)
 		{
@@ -597,7 +644,8 @@ switch ($cmd)
 			if ($answer['success'] == true)
 			{
 				$iReturn = ERR_NO_ERROR;
-				$Filename = $answer['filename'];
+				$filename = $answer['filename'];
+				$answer['filename_orig'] = getParameter('qqfile','');
 			} //if
 		} //if
 		if ($answer['success'] == false)

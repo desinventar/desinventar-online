@@ -16,8 +16,8 @@ function onReadyGeolevels()
 		jQuery('#divGeolevels_Edit').show();
 		jQuery('#btnGeolevels_Add').hide();
 		jQuery('#frmGeocarto .GeoLevelId').val(jQuery('.GeoLevelId',this).text());
-		jQuery('#frmGeocarto .GeoLevelLayerCode').val(jQuery('.GeoLevelLayerCode', this).text());
-		jQuery('#frmGeocarto .GeoLevelLayerName').val(jQuery('.GeoLevelLayerName', this).text());
+		jQuery('#frmGeocarto .GeoLevelLayerCode').val('');
+		jQuery('#frmGeocarto .GeoLevelLayerName').val('');
 		jQuery('#divGeocarto_Edit').show();
 	});
 	jQuery('#btnGeolevels_Add').click(function() {
@@ -132,16 +132,10 @@ function doGeolevelsPopulateList(GeolevelsList)
 		jQuery('.GeoLevelDesc', clonedRow).html(value.GeoLevelDesc.substring(0,150));
 		jQuery('.GeoLevelDesc', clonedRow).prop('title', value.GeoLevelDesc);
 		jQuery('.GeoLevelActive :input', clonedRow).prop('checked', value.GeoLevelActive>0);
-		jQuery('.GeoLevelLayerFile', clonedRow).html(value.GeoLevelLayerFile);
-		jQuery('.GeoLevelLayerCode', clonedRow).html(value.GeoLevelLayerCode);
-		jQuery('.GeoLevelLayerName', clonedRow).html(value.GeoLevelLayerName);
 		jQuery('#tbodyGeolevels_List').append(clonedRow);
 	});
 	jQuery('#tblGeolevels_List .GeoLevelId').hide();
 	jQuery('#tblGeolevels_List .GeoLevelActive').hide();
-	jQuery('#tblGeolevels_List .GeoLevelLayerFile').hide();
-	jQuery('#tblGeolevels_List .GeoLevelLayerCode').hide();
-	jQuery('#tblGeolevels_List .GeoLevelLayerName').hide();
 	jQuery('#tbodyGeolevels_List tr:even').addClass('under');
 } //doGeolevelsPopulateList()
 
@@ -150,7 +144,6 @@ function doGeolevelsUploaderCreate()
 	jQuery('#frmGeocarto tr.FileUploader').each(function() {
 		var fileExt = jQuery(this).data('ext');
 		var fileUploaderControlId = jQuery(this).find('.FileUploaderControl').attr('id');
-		console.log(fileExt + ' ' + fileUploaderControlId);
 		var uploader = new qq.FileUploader({
 			element: document.getElementById(fileUploaderControlId),
 			action: jQuery('#desinventarURL').val() + '/',
@@ -169,6 +162,7 @@ function doGeolevelsUploaderCreate()
 				var ext = this.allowedExtensions[0];
 				var row = jQuery('#frmGeocarto tr:data("ext=' + ext + '")');
 				jQuery('.UploadId', row).val(id);
+				jQuery('.uploaded', row).hide();
 				jQuery('#frmGeocarto .ProgressBar').show();
 				jQuery('#frmGeocarto .ProgressMark').css('width', '0px');
 				jQuery('.FileUploaderControl .qq-upload-button-text', this).hide();
@@ -186,17 +180,28 @@ function doGeolevelsUploaderCreate()
 				var ext = this.allowedExtensions[0];
 				var row = jQuery('#frmGeocarto tr:data("ext=' + ext + '")');
 				doGeolevelsUploaderReset();
-				jQuery('.Filename', row).text(data.filename);
+				jQuery('#frmGeocarto .status').hide();
+				jQuery('#frmGeocarto .btnUploadCancel').hide();
 				if (parseInt(data.Status)>0)
 				{
+					jQuery('.filename', row).val(data.filename);
+					jQuery('.uploaded', row).text(data.filename_orig).show();
+					jQuery('#frmGeocarto .statusuploadOk').show();
+					setTimeout(function() {
+						jQuery('#frmGeocarto .status').hide();
+					}, 2000);
 				}
 				else
 				{
-					//doDatabaseUploadStatusMsg('msgDatabaseUploadErrorOnUpload');
+					jQuery('#frmGeocarto .statusUploadError').show();
+					setTimeout(function() {
+						jQuery('#frmGeocarto .status').hide();
+					}, 2000);
 				}
 			},
 			onCancel: function(id, Filename)
 			{
+				doGeolevelsUploaderReset();
 			}
 		});
 	});
@@ -207,6 +212,76 @@ function doGeolevelsUploaderCreate()
 			uploader.cancel(jQuery(this).val());
 		});
 	}).hide();
+	jQuery('#frmGeocarto .uploaded').hide();
+	jQuery('#frmGeocarto .status').hide();
+	jQuery('#frmGeocarto .btnCancel').click(function() {
+		jQuery('#frmGeocarto .Filename').val('');
+		jQuery('#frmGeocarto .uploaded').hide();
+	});
+	jQuery('#frmGeocarto .btnSave').click(function() {
+		jQuery('#frmGeocarto').trigger('submit');
+	});
+	jQuery('#frmGeocarto').submit(function() {
+		var bContinue = true;
+		jQuery('#frmGeocarto .filename').each(function() {
+			if (jQuery(this).val() == '')
+			{
+				bContinue = false;
+			}
+		});
+		if (bContinue == false)
+		{
+			jQuery('#frmGeocarto .statusMissingFiles').show();
+		}
+
+		if (jQuery('#frmGeocarto .GeoLevelLayerCode').val() == '')
+		{
+			jQuery('#frmGeocarto .GeoLevelLayerCode').highlight();
+			jQuery('#frmGeocarto .statusRequiredFields').show();
+		}
+
+		if (jQuery('#frmGeocarto .GeoLevelLayerName').val() == '')
+		{
+			jQuery('#frmGeocarto .GeoLevelLayerName').highlight();
+			jQuery('#frmGeocarto .statusRequiredFields').show();
+		}
+
+		if (bContinue)
+		{
+			jQuery.post(
+				jQuery('#desinventarURL').val() + '/',
+				jQuery.extend(jQuery(this).serializeObject(),
+				{
+					cmd : 'cmdGeocartoUpdate',
+					RegionId : jQuery('#desinventarRegionId').val()
+				}),
+				function(data)
+				{
+					if (parseInt(data.Status) > 0)
+					{
+						jQuery('#frmGeocarto .statusUpdateOk').show();
+					}
+					else
+					{
+						jQuery('#frmGeocarto .statusUpdateError').show();
+					}
+					setTimeout(function() {
+						jQuery('#frmGeocarto .status').hide();
+					}, 3000);
+				},
+				'json'
+			);
+		}
+		else
+		{
+			setTimeout(function() {
+				jQuery('#frmGeocarto .status').hide();
+				jQuery('#frmGeocarto .GeoLevelLayerCode').unhighlight();
+				jQuery('#frmGeocarto .GeoLevelLayerName').unhighlight();
+			}, 2500);
+		}
+		return false;
+	});
 } //doGeolevelsUploaderCreate()
 
 function doGeolevelsUploaderReset()
