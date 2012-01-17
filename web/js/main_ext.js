@@ -84,6 +84,10 @@ function doViewportCreate()
 	}
 	Ext.extend(DesInventar.viewport, Ext.Viewport, {});
 	var viewport = new DesInventar.viewport();
+	if (jQuery('#desinventarRegionId').val() == '')
+	{
+		Ext.getCmp('westm').hide();
+	}
 	viewport.show();
 
 	Ext.getCmp('westm').on('expand', function() {
@@ -186,7 +190,6 @@ function doMainMenuHandler(item)
 		case 'mnuQueryViewDesign':
 			jQuery('.contentBlock').hide();
 			jQuery('#divQueryResults').show();
-			Ext.getCmp('westm').show();
 			Ext.getCmp('westm').expand();
 		break;
 		case 'mnuQueryViewData':
