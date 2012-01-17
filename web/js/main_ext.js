@@ -5,6 +5,9 @@
 */
 function onReadyExtJS()
 {
+	Ext.BLANK_IMAGE_URL = '/extJS/resources/images/default/s.gif';
+	Ext.ns('DesInventar');
+
 	// Hide Loading div...
 	jQuery('#loading').hide();
 	jQuery('#loading-mask').hide();	
@@ -29,53 +32,60 @@ function onReadyExtJS()
 
 function doViewportCreate()
 {
-	// layout
-	var viewport = new Ext.Viewport({
-		id:'viewport',
-		contentEl: 'divViewport',
-		layout:'border',
-		border: false,
-		items:[
-			{
-				region:'north',
-				height: 30,
-				border: false,
-				contentEl: 'north',
-				collapsible: false
-			},
-			new Ext.Panel({
-				region: 'west',
-				id: 'westm',
-				border: false,
-				split: false,
-				layout: 'fit',
-				width: 350,
-				title: jQuery('#msgQueryDesignTitle').text(),
-				autoScroll: true,
-				margins:'0 2 0 0',
-				collapsible: true,
-				contentEl: 'divWestPanel'
-			}),
-			{
-				region: 'south',
-				id: 'southm',
-				split: false,
-				title: jQuery('#msgHelpTitle').text(),
-				height: 80,
-				minSize: 100,
-				maxSize: 200,
-				margins: '0 0 0 0',
-				contentEl: 'south',
-				collapsible: true
-			},
-			new Ext.Panel({
-				region: 'center',
-				id: 'centerm',
-				contentEl: 'container',
-				autoScroll: true
-			})
-		]
-	}); //viewport
+	DesInventar.viewport = function(config) {
+		var base_config = {
+			id:'viewport',
+			contentEl: 'divViewport',
+			layout:'border',
+			border: false,
+			items:[
+				{
+					region:'north',
+					height: 30,
+					border: false,
+					contentEl: 'north',
+					collapsible: false
+				},
+				new Ext.Panel({
+					region: 'west',
+					id: 'westm',
+					border: false,
+					split: false,
+					layout: 'fit',
+					width: 350,
+					title: jQuery('#msgQueryDesignTitle').text(),
+					autoScroll: true,
+					margins:'0 2 0 0',
+					collapsible: true,
+					contentEl: 'divWestPanel'
+				}),
+				{
+					region: 'south',
+					id: 'southm',
+					split: false,
+					title: jQuery('#msgHelpTitle').text(),
+					height: 80,
+					minSize: 100,
+					maxSize: 200,
+					margins: '0 0 0 0',
+					contentEl: 'south',
+					collapsible: true
+				},
+				new Ext.Panel({
+					region: 'center',
+					id: 'centerm',
+					contentEl: 'container',
+					autoScroll: true
+				})
+			]
+		};
+		Ext.apply(base_config,config);
+		DesInventar.viewport.superclass.constructor.call(this, base_config);
+	}
+	Ext.extend(DesInventar.viewport, Ext.Viewport, {});
+	var viewport = new DesInventar.viewport();
+	viewport.show();
+
 	Ext.getCmp('westm').on('expand', function() {
 		jQuery('.contentBlock').hide();
 		jQuery('#divQueryResults').show();
