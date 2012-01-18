@@ -488,13 +488,6 @@ function doMainMenuCreate()
 		jQuery('#divLoading').show();
 		setTimeout(function()
 		{
-			/*
-			if (jQuery('#desinventarRegionId').val() != '')
-			{
-				console.log('debug expand 2');
-				Ext.getCmp('westm').expand();
-			}
-			*/
 			jQuery('body').trigger('cmdMainMenuUpdate');
 			if (jQuery('#desinventarRegionId').val() != '')
 			{
