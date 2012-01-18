@@ -1960,6 +1960,16 @@
 			<Text LangIsoCode="fre">Niveaux Géographiques</Text>
 		</Message>
 		<Message id="msgGeolevels_Tooltip">
+			<Text LangIsoCode="eng"></Text>
+			<Text LangIsoCode="spa"> 
+				Niveles geográficos: cada país o región está dividido en niveles
+				geográficos que corresponde a los niveles administrativos.  Por
+				ejemplo Colombia tiene dos niveles: en el primero están los
+				departamentos y en el segundo están los municipios.
+			</Text>
+			<Text LangIsoCode="por"></Text> <Text LangIsoCode="fre"></Text>
+		</Message>
+		<Message id="msgGeolevels_HelpText">
 			<Text LangIsoCode="eng">
 				In order to understand and use the geography in DesInventar; two
 				basic concepts should be kept in mind: the resolution; which
@@ -2009,6 +2019,17 @@
 			<Text LangIsoCode="spa">Unidades Geográficas</Text>
 			<Text LangIsoCode="por">Unidades Geográficas</Text>
 			<Text LangIsoCode="fre">Unités Géographiques</Text>
+		</Message>
+		<Message id="msgGeography_Tooltip">
+			<Text LangIsoCode="eng"></Text>
+			<Text LangIsoCode="spa">
+				Unidades geográficas. Para cada uno de los niveles
+				geográficos ingresados, se deben ingresar todas las unidades geográficas o
+				administrativas que lo componen.  Por ejemplo, en Colombia en el nivel 1 se
+				ingresan los nombres y códigos de los 33 departamentos que lo componen.
+			</Text>
+			<Text LangIsoCode="por"></Text>
+			<Text LangIsoCode="fre"></Text>
 		</Message>
 		<Message id="msgDBConfig_Events">
 			<Text LangIsoCode="eng">Types of events</Text>
