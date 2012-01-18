@@ -1,1 +1,2 @@
-You don't have permissions to use this database
+{-config_load file="$lg.conf" section="grpMainStrings"-}
+{-#msgMain_NoPerms#-}

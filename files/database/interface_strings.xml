@@ -1827,6 +1827,12 @@
 			<Text LangIsoCode="por">Não há bancos de dados disponíveis no momento</Text>
 			<Text LangIsoCode="fre">Il n&quot;y a pas de bases de données disponibles pour l&quot;instant</Text>
 		</Message>
+		<Message id="msgMain_NoPerms">
+			<Text LangIsoCode="eng">You don't have permissions to use this database</Text>
+			<Text LangIsoCode="spa">Usted no tiene permisos para usar esta base de datos</Text>
+			<Text LangIsoCode="por">Você não tem permissões para usar esta base de dados</Text>
+			<Text LangIsoCode="fre">Vous n'avez pas les permissions d'utiliser cette base de données</Text>
+		</Message>
 		<Message id="tmoreinfo">
 			<Text LangIsoCode="eng">More information</Text>
 			<Text LangIsoCode="spa">Mas información</Text>
