@@ -107,3 +107,16 @@ function doViewportDestroy()
 		jQuery('#loading-mask').show();
 	}
 } //doViewportDestroy
+
+function showtip(prmText)  //prmText, prmColor
+{
+	if (prmText != undefined)
+	{
+		var sColor = '#ffffff';
+		if (arguments.length > 1)
+		{
+			sColor = arguments[1];
+		}
+		jQuery('#txtHelpArea').val(prmText).css('background-color', sColor);
+	}
+}
