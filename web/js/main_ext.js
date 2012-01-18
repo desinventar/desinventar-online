@@ -50,46 +50,47 @@ function doViewportCreate()
 			DesInventar.WestPanel.superclass.initComponent.call(this);
 		}
 	});
-	DesInventar.viewport = function(config) {
-		var base_config = {
-			id:'viewport',
-			contentEl: 'divViewport',
-			layout:'border',
-			border: false,
-			items:[
-				{
-					region:'north',
-					height: 30,
-					border: false,
-					contentEl: 'north',
-					collapsible: false
-				},
-				new DesInventar.WestPanel({id:'westm', collapsible: true}),
-				{
-					region: 'south',
-					id: 'southm',
-					split: false,
-					title: jQuery('#msgHelpTitle').text(),
-					height: 80,
-					minSize: 100,
-					maxSize: 200,
-					margins: '0 0 0 0',
-					contentEl: 'south',
-					collapsible: true
-				},
-				new Ext.Panel({
-					region: 'center',
-					id: 'centerm',
-					contentEl: 'container',
-					autoScroll: true
-				})
-			]
-		};
-		Ext.apply(base_config,config);
-		DesInventar.viewport.superclass.constructor.call(this, base_config);
-	}
-	Ext.extend(DesInventar.viewport, Ext.Viewport, {});
-	var viewport = new DesInventar.viewport();
+	DesInventar.Viewport = Ext.extend(Ext.Viewport, {
+		initComponent: function() {
+			var config = {
+				contentEl: 'divViewport',
+				layout:'border',
+				border: false,
+				items:[
+					{
+						region:'north',
+						height: 30,
+						border: false,
+						contentEl: 'north',
+						collapsible: false
+					},
+					new DesInventar.WestPanel({id:'westm', collapsible: true}),
+					{
+						region: 'south',
+						id: 'southm',
+						split: false,
+						title: jQuery('#msgHelpTitle').text(),
+						height: 80,
+						minSize: 100,
+						maxSize: 200,
+						margins: '0 0 0 0',
+						contentEl: 'south',
+						collapsible: true
+					},
+					new Ext.Panel({
+						region: 'center',
+						id: 'centerm',
+						contentEl: 'container',
+						autoScroll: true
+					})
+				]
+			};
+			Ext.apply(this, config);
+			Ext.apply(this.initialConfig, config);
+			DesInventar.Viewport.superclass.initComponent.call(this);
+		}
+	});
+	var viewport = new DesInventar.Viewport({id:'viewport'});
 	if (jQuery('#desinventarRegionId').val() == '')
 	{
 		Ext.getCmp('westm').hide();
