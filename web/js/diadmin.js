@@ -621,16 +621,6 @@
 		field.className = "";
 	}
 	
-	function showtip(tip)
-	{
-		var d = parent.document.getElementById('txtHelpArea');
-		if (d != null)
-		{
-			d.style.backgroundColor = '#ffffff';
-			d.value = tip;
-		}
-	}
-	
 	// Effects options
 	function showeff(val, x, y)
 	{

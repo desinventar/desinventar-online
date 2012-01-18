@@ -456,14 +456,6 @@ function displayDatacardStatusMsg(msgId)
 
 var mod = "di";
 
-function showtip(tip, clr)
-{
-	if (tip != undefined)
-	{
-		jQuery('#txtHelpArea').val(tip).css('background-color', clr);
-	}
-}
-
 // Display Geography in form and search; k=geoid, l=0, desc='', opc=''
 function setgeo(k, prmGeoLevelId, desc, opc)
 {
