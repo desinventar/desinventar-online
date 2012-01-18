@@ -49,8 +49,8 @@ function onReadyUserAccount()
 			    	jQuery('.status', form).hide();
 			    	if (parseInt(data.Status) > 0)
 			    	{
-						jQuery('#msgPasswdUpdated', form).show();
 						doUserAccountReset();
+						jQuery('#msgPasswdUpdated', form).show();
 					}
 					else
 					{
@@ -99,7 +99,7 @@ function onReadyUserAccount()
 
 function doUserAccountReset()
 {
-	var form = jQuery(this);
+	var form = jQuery('form.UserChangePasswd');
 	jQuery('.status', form).hide();
 	jQuery('.UserPasswd', form).val('');
 	jQuery('.UserPasswd2', form).val('');
