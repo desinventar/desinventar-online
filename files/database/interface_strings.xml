@@ -1959,6 +1959,51 @@
 			<Text LangIsoCode="por">Níveis Geográficos</Text>
 			<Text LangIsoCode="fre">Niveaux Géographiques</Text>
 		</Message>
+		<Message id="msgGeolevels_Tooltip">
+			<Text LangIsoCode="eng">
+				In order to understand and use the geography in DesInventar; two
+				basic concepts should be kept in mind: the resolution; which
+				corresponds to the level of spatial detail with which the data
+				should be registered; and which should be the same for all
+				records in the database; and the hierarchy of zoning or
+				geographic levels; which implies that the highest zoning level
+				(that of the least resolution) includes subordinate levels;
+				until you arrive at the chosen level as a resolution in the
+				database.
+			</Text>
+			<Text LangIsoCode="spa">
+				Para el manejo de la geografía en DesInventar se requiere tener
+				en cuenta dos conceptos básicos: la resolución; que corresponde
+				al nivel de detalle espacial al cual se desea registrar los
+				datos; que debe ser la misma para todas las fichas de la base de
+				datos; y la jerarquía de las zonificaciones o de los niveles
+				geográficos; que implica que el nivel superior de zonificación
+				(el de menor resolución) incluye niveles subordinados; hasta
+				llegar al nivel escogido como resolución de la base de datos.
+			</Text>
+			<Text LangIsoCode="por">
+				Para o manejo da geografia em DesInventar é preciso levar em
+				consideração dois conceitos básicos: a resolução; que
+				corresponde ao nível de detalhe espacial no qual se deseja
+				registrar os dados; que deve ser a mesma para todos os
+				formulários do banco de dados; e a hierarquia das zonificações
+				ou dos níveis geográficos; a qual implica que o nível superior
+				de zonificação (o de menor resolução) inclui níveis
+				subordinados; até atingir o nível escolhido como resolução do
+				banco de dados.
+			</Text>
+			<Text LangIsoCode="fre">
+				In order to understand and use the geography in DesInventar;
+				two basic concepts should be kept in mind: the resolution; which
+				corresponds to the level of spatial detail with which the data
+				should be registered; and which should be the same for all
+				records in the database; and the hierarchy of zoning or
+				geographic levels; which implies that the highest zoning level
+				(that of the least resolution) includes subordinate levels;
+				until you arrive at the chosen level as a resolution in the
+				database.
+			</Text>
+		</Message>
 		<Message id="mgeography">
 			<Text LangIsoCode="eng">Geographic units</Text>
 			<Text LangIsoCode="spa">Unidades Geográficas</Text>

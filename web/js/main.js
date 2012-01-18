@@ -84,6 +84,7 @@ function onReadyMain()
 	jQuery('#DBConfig_tabs').tabs();
 	jQuery('.classDBConfig_tabs').click(function() {
 		var me = jQuery(jQuery(this).attr('href'));
+		showtip(me.find('.tooltip').text());
 		var cmd = jQuery(this).attr('cmd');
 		if (cmd == '')
 		{
@@ -91,7 +92,7 @@ function onReadyMain()
 		}
 		else
 		{
-			me.html('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />');
+			me.find('.content').html('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />');
 			jQuery.post(
 				jQuery(this).data('url'),
 				{
@@ -101,7 +102,7 @@ function onReadyMain()
 				},
 				function(data)
 				{
-					me.html(data);
+					me.find('.content').html(data);
 					switch(cmd)
 					{
 						case 'cmdDBInfoCause':
