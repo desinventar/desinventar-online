@@ -304,3 +304,6 @@ a:hover	{	color:#00008b; }
 #btnResultSaveOptions {
 	position:absolute;
 }
+div.UserChangePasswd {
+	max-width:400px;	
+}

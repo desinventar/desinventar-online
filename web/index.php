@@ -82,6 +82,33 @@ switch ($cmd)
 		$answer['User']   = $user;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
+	case 'cmdUserAccount':
+		$t->display('main_user_account.tpl');
+	break;
+	case 'cmdUserPasswdUpdate':
+		$answer = array();
+		$iReturn = ERR_NO_ERROR;
+		$UserId = getParameter('UserId');
+		if ($UserId != $us->UserId)
+		{
+			$iReturn = ERR_DEFAULT_ERROR;
+		}
+		if ($iReturn > 0)
+		{
+			$UserPasswd = getParameter('UserPasswd', '');
+			$UserPasswd2 = getParameter('UserPasswd2', '');
+			if ($us->validateUser($us->UserId, $_POST['UserPasswd'],true) != '')
+			{
+				$us->updateUserPasswd($us->UserId, $_POST['UserPasswd2']);
+			}
+			else
+			{
+				$iReturn = ERR_DEFAULT_ERROR;
+			}
+		}
+		$answer['Status'] = $iReturn;
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
+	break;
 	case 'cmdUserLanguageChange':
 		$LangList = $us->q->loadLanguages(1);
 		$LangIsoCode = getParameter('LangIsoCode');

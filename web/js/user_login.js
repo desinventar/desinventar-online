@@ -24,8 +24,6 @@ function onReadyUserLogin()
 		jQuery('body').trigger('cmdWindowReload');
 	});
 	
-	
-	// submit form validation and process..
 	jQuery("#btnUserLoginSend").click(function() {
 		jQuery('#frmUserLogin').trigger('submit');
 		return false;
