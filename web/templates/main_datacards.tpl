@@ -12,6 +12,7 @@
 
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
+				onReadyCommon();
 				// 2011-04-29 (jhcaiced) Fix for use of ExtJS in IE9 ?
 				if ((typeof Range !== "undefined") && !Range.prototype.createContextualFragment)
 				{

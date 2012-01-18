@@ -975,22 +975,6 @@ switch ($cmd)
 					$t->assign('eveuserl', $us->q->loadEvents('USER', 'active', $lg));
 					$t->display('block_eventlist.tpl');
 				break;
-				case 'test':
-					// DesInventarInfo
-					$t->assign('LanguageList', $us->q->loadLanguages(1));
-					$t->assign('CountryList', $us->q->getCountryList());
-					
-					// Datacards
-					$t->assign('LabelsDisaster', $us->q->queryLabelsFromGroup('Disaster', $lg));
-					$t->assign('LabelsRecord1', $us->q->queryLabelsFromGroup('Record|1', $lg));
-					$t->assign('LabelsEvent', $us->q->queryLabelsFromGroup('Event', $lg));
-					$t->assign('LabelsCause', $us->q->queryLabelsFromGroup('Cause', $lg));
-
-					// Query Design
-					$t->assign('rc2', $us->q->queryLabelsFromGroup('Record|2', $lg));
-
-					$t->display('test.tpl');
-				break;
 				default:
 					// Update UserSession with Current Language.
 					$us->update();
