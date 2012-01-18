@@ -32,6 +32,24 @@ function onReadyExtJS()
 
 function doViewportCreate()
 {
+	DesInventar.WestPanel = Ext.extend(Ext.Panel, {
+		initComponent: function() {
+			var config = {
+				region: 'west',
+				border: false,
+				split: false,
+				layout: 'fit',
+				width: 350,
+				title: jQuery('#msgQueryDesignTitle').text(),
+				autoScroll: true,
+				margins:'0 2 0 0',
+				contentEl: 'divWestPanel'
+			};
+			Ext.apply(this, config);
+			Ext.apply(this.initialConfig, config);
+			DesInventar.WestPanel.superclass.initComponent.call(this);
+		}
+	});
 	DesInventar.viewport = function(config) {
 		var base_config = {
 			id:'viewport',
@@ -46,19 +64,7 @@ function doViewportCreate()
 					contentEl: 'north',
 					collapsible: false
 				},
-				new Ext.Panel({
-					region: 'west',
-					id: 'westm',
-					border: false,
-					split: false,
-					layout: 'fit',
-					width: 350,
-					title: jQuery('#msgQueryDesignTitle').text(),
-					autoScroll: true,
-					margins:'0 2 0 0',
-					collapsible: true,
-					contentEl: 'divWestPanel'
-				}),
+				new DesInventar.WestPanel({id:'westm', collapsible: true}),
 				{
 					region: 'south',
 					id: 'southm',
