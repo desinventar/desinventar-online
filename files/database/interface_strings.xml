@@ -188,10 +188,10 @@
 			<Text LangIsoCode="fre">Voir le carte de données</Text>
 		</Message>
 		<Message id="mnuDatacardEdit">
-			<Text LangIsoCode="eng">Insert/Edit data cards</Text>
-			<Text LangIsoCode="spa">Ingresar/Editar fichas</Text>
-			<Text LangIsoCode="por">Inserir ou editar formulários</Text>
-			<Text LangIsoCode="fre">Insérer ou modifier de carte de données</Text>
+			<Text LangIsoCode="eng">Create/edit data cards</Text>
+			<Text LangIsoCode="spa">Crear/editar fichas</Text>
+			<Text LangIsoCode="por">Criar/editar formulários</Text>
+			<Text LangIsoCode="fre">Créer/modifier de carte de données</Text>
 		</Message>
 		<Message id="mnuDatacardImport">
 			<Text LangIsoCode="eng">Import data cards</Text>
