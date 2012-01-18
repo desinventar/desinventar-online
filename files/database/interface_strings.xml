@@ -3542,16 +3542,28 @@
 			<Text LangIsoCode="fre">Base de données a été créée avec l'identifiant</Text>
 		</Message>
 		<Message id="msgDatabaseCreateMsg2">
-			<Text LangIsoCode="eng">Now you must configure the database</Text>
-			<Text LangIsoCode="spa">Ahora debe configurar la base de datos</Text>
-			<Text LangIsoCode="por">Agora você deve configurar o banco de dados</Text>
-			<Text LangIsoCode="fre">Maintenant vous devez configurer la base de données</Text>
+			<Text LangIsoCode="eng">Now you must configure the database using Set Up Database option in the Database menu. The following items are mandatory</Text>
+			<Text LangIsoCode="spa">Ahora debe configurar la base de datos usando la opción Configuración de la base de datos en el menú Base de datos, Los siguientes elementos son obligatorios</Text>
+			<Text LangIsoCode="por">Agora você deve configurar o banco de dados utilização a opção Set Up Banco de Dados no menu Banco de Dados, Os seguintes itens são obrigatórios</Text>
+			<Text LangIsoCode="fre">Maintenant vous devez configurer la base de données aide l'option Configurer la base de données dans le menu Base de données, Les éléments suivants sont obligatoires</Text>
+		</Message>
+		<Message id="msgDatabaseCreateMsg2A">
+			<Text LangIsoCode="eng">Create the Geographic levels</Text>
+			<Text LangIsoCode="spa">Crear los niveles geográficos</Text>
+			<Text LangIsoCode="por">Criar os níveis geográficos</Text>
+			<Text LangIsoCode="fre">Créer des niveaux géographiques</Text>
+		</Message>
+		<Message id="msgDatabaseCreateMsg2B">
+			<Text LangIsoCode="eng">Insert the geographic units at each level</Text>
+			<Text LangIsoCode="spa">Ingresar las unidades geográficas en cada nivel</Text>
+			<Text LangIsoCode="por">Inserir as unidades geográficas em cada nível</Text>
+			<Text LangIsoCode="fre">Insérez les unités géographiques à chaque niveau</Text>
 		</Message>
 		<Message id="msgDatabaseCreateMsg3">
-			<Text LangIsoCode="eng">To do it choose the Set Up Database option in the Database menu</Text>
-			<Text LangIsoCode="spa">Para ello seleccione la opción Configuración de la base de datos en el menú Base de datos</Text>
-			<Text LangIsoCode="por">Para fazê-lo escolher a opção Set Up Banco de Dados no menu Banco de Dados</Text>
-			<Text LangIsoCode="fre">Pour ce faire il choisir l'option Configurer la base de données dans le menu Base de données</Text>
+			<Text LangIsoCode="eng">Optionally the database can be personalized with the following options</Text>
+			<Text LangIsoCode="spa">Opcionalmente, la base de datos se puede personalizar con las siguientes opciones</Text>
+			<Text LangIsoCode="por">Opcionalmente, o banco de dados pode ser personalizado com as seguintes opções</Text>
+			<Text LangIsoCode="fre">En option, la base de données peuvent être personnalisées avec les options suivantes</Text>
 		</Message>
 		<Message id="msgDatabaseCreateMsg4">
 			<Text LangIsoCode="eng">Ok</Text>

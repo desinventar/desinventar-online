@@ -24,15 +24,16 @@
 		<br />
 		{-#msgDatabaseCreateMsg2#-}<br />
 		<ul>
+			<li>- {-#msgDatabaseCreateMsg2A#-}</li>
+			<li>- {-#msgDatabaseCreateMsg2B#-}</li>
+		</ul>
+		{-#msgDatabaseCreateMsg3#-}</br />
+		<ul>
 			<li>- {-#mreginfo#-}</li>
-			<li>- {-#msgDBConfig_Geolevels#-}</li>
-			<li>- {-#mgeography#-}</li>
 			<li>- {-#msgDBConfig_Events#-}</li>
 			<li>- {-#mcauses#-}</li>
 			<li>- {-#meeffects#-}</li>
 		</ul>
-		<br />
-		{-#msgDatabaseCreateMsg3#-}
 		<br />
 		<br />
 		<div class="right">
