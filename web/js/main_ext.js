@@ -90,8 +90,11 @@ function doViewportCreate()
 		viewport.doLayout();
 	}
 	viewport.show();
-
+	Ext.getCmp('westm').on('collapse', function() {
+		console.log('westm.collapse');
+	});
 	Ext.getCmp('westm').on('expand', function() {
+		console.log('westm.expand');
 		jQuery('.contentBlock').hide();
 		jQuery('#divQueryResults').show();
 		jQuery('body').trigger('cmdQueryResultsButtonHide');
@@ -112,7 +115,6 @@ function doViewportShow()
 		{
 			jQuery('#westm-xcollapsed').show();
 			Ext.getCmp('westm').expand();
-			Ext.getCmp('centerm').show();
 			jQuery('#divQueryResults').show();
 			jQuery('body').trigger('cmdQueryResultsButtonHide');
 			jQuery('#dcr').hide();
