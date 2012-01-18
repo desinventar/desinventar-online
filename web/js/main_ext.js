@@ -91,11 +91,6 @@ function doViewportCreate()
 		}
 	});
 	var viewport = new DesInventar.Viewport({id:'viewport'});
-	if (jQuery('#desinventarRegionId').val() == '')
-	{
-		Ext.getCmp('westm').hide();
-		viewport.doLayout();
-	}
 	viewport.show();
 	Ext.getCmp('westm').on('collapse', function() {
 		console.log('westm.collapse');
@@ -135,6 +130,8 @@ function doViewportShow()
 	else
 	{
 		console.log('Region List shown');
+		Ext.getCmp('westm').hide();
+		Ext.getCmp('viewport').doLayout();
 		jQuery('#divRegionList').show();
 		doUpdateDatabaseListByUser();
 	}
