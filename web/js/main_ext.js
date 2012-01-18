@@ -92,11 +92,7 @@ function doViewportCreate()
 	});
 	var viewport = new DesInventar.Viewport({id:'viewport'});
 	viewport.show();
-	Ext.getCmp('westm').on('collapse', function() {
-		console.log('westm.collapse');
-	});
 	Ext.getCmp('westm').on('expand', function() {
-		console.log('westm.expand');
 		jQuery('.contentBlock').hide();
 		jQuery('#divQueryResults').show();
 		jQuery('body').trigger('cmdQueryResultsButtonHide');
@@ -113,8 +109,6 @@ function doViewportShow()
 	{
 		if (UserRoleValue > 0)
 		{
-			console.log('Database show');
-			console.log('debug expand 0');
 			Ext.getCmp('westm').show();
 			Ext.getCmp('westm').expand();
 			jQuery('#divQueryResults').show();
@@ -123,7 +117,6 @@ function doViewportShow()
 		}
 		else
 		{
-			console.log('Database is Private');
 			Ext.getCmp('westm').hide();
 			Ext.getCmp('viewport').doLayout();
 			jQuery('#divDatabasePrivate').show();
@@ -131,7 +124,6 @@ function doViewportShow()
 	}
 	else
 	{
-		console.log('Region List shown');
 		Ext.getCmp('westm').hide();
 		Ext.getCmp('viewport').doLayout();
 		jQuery('#divRegionList').show();
@@ -196,7 +188,6 @@ function doMainMenuHandler(item)
 			{
 				jQuery('.contentBlock').hide();
 				jQuery('#divQueryResults').show();
-				console.log('debug expand 1');
 				Ext.getCmp('westm').expand();
 			}
 		break;
