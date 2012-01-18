@@ -111,11 +111,11 @@ function doViewportShow()
 	jQuery('.contentBlock').hide();
 	if (RegionId != '')
 	{
-		Ext.getCmp('westm').collapse();
 		if (UserRoleValue > 0)
 		{
 			console.log('Database show');
 			console.log('debug expand 0');
+			Ext.getCmp('westm').show();
 			Ext.getCmp('westm').expand();
 			jQuery('#divQueryResults').show();
 			jQuery('body').trigger('cmdQueryResultsButtonHide');
@@ -124,6 +124,8 @@ function doViewportShow()
 		else
 		{
 			console.log('Database is Private');
+			Ext.getCmp('westm').hide();
+			Ext.getCmp('viewport').doLayout();
 			jQuery('#divDatabasePrivate').show();
 		}
 	}
