@@ -84,7 +84,7 @@ function onReadyMain()
 	jQuery('#DBConfig_tabs').tabs();
 	jQuery('.classDBConfig_tabs').click(function() {
 		var me = jQuery(jQuery(this).attr('href'));
-		showtip(me.find('.tooltip').text());
+		showtip(me.find('.helptext').text());
 		var cmd = jQuery(this).attr('cmd');
 		if (cmd == '')
 		{
