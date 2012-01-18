@@ -213,7 +213,7 @@
 		</Message>
 		<Message id="mnuDatabaseUpload">
 			<Text LangIsoCode="eng">Upload</Text>
-			<Text LangIsoCode="spa">Subir</Text>
+			<Text LangIsoCode="spa">Cargar</Text>
 			<Text LangIsoCode="por">Carregar</Text>
 			<Text LangIsoCode="fre">Charger</Text>
 		</Message>
@@ -3219,7 +3219,7 @@
 		</Message>
 		<Message id="msgGeocarto_UploadError">
 			<Text LangIsoCode="eng">Error while uploading file</Text>
-			<Text LangIsoCode="spa">Error al subir archivo</Text>
+			<Text LangIsoCode="spa">Error al cargar archivo</Text>
 			<Text LangIsoCode="por">Erro ao carregar arquivo</Text>
 			<Text LangIsoCode="fre">Erreur lors du téléchargement de fichiers</Text>
 		</Message>
@@ -3677,7 +3677,7 @@
 		</Message>
 		<Message id="msgDatabaseUploadMsg1">
 			<Text LangIsoCode="eng">Select database to be uploaded</Text>
-			<Text LangIsoCode="spa">Seleccione la base de datos a subir</Text>
+			<Text LangIsoCode="spa">Seleccione la base de datos a cargar</Text>
 			<Text LangIsoCode="por">Selecione banco de dados a serem enviados</Text>
 			<Text LangIsoCode="fre">Sélectionnez la base de données d'être téléchargées</Text>
 		</Message>
@@ -3701,7 +3701,7 @@
 		</Message>
 		<Message id="msgDatabaseUploadErrorOnUpload">
 			<Text LangIsoCode="eng">Error while uploading file</Text>
-			<Text LangIsoCode="spa">Error al subir archivo</Text>
+			<Text LangIsoCode="spa">Error al cargar el archivo</Text>
 			<Text LangIsoCode="por">Erro ao carregar arquivo</Text>
 			<Text LangIsoCode="fre">Erreur lors du téléchargement de fichiers</Text>
 		</Message>
