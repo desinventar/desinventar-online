@@ -25,8 +25,8 @@ function onReadyExtJS()
 	}
 	doDialogsCreate();
 	doMainMenuCreate();
-	doViewportCreate();
 	jQuery('body').trigger('cmdMainMenuUpdate');
+	doViewportCreate();
 	doViewportShow();
 } //onReadyExtJS()
 
@@ -87,6 +87,7 @@ function doViewportCreate()
 	if (jQuery('#desinventarRegionId').val() == '')
 	{
 		Ext.getCmp('westm').hide();
+		viewport.doLayout();
 	}
 	viewport.show();
 
@@ -102,15 +103,11 @@ function doViewportShow()
 {
 	var UserRoleValue = parseInt(jQuery('#desinventarUserRoleValue').val());
 	var RegionId = jQuery('#desinventarRegionId').val();
-	if ( (RegionId == '') || (UserRoleValue < 1) )
-	{
-		Ext.getCmp('westm').collapse();
-		jQuery('#westm-xcollapsed').hide();
-	}
-
 	jQuery('.contentBlock').hide();
 	if (RegionId != '')
 	{
+		Ext.getCmp('westm').collapse();
+		jQuery('#westm-xcollapsed').hide();
 		if (UserRoleValue > 0)
 		{
 			jQuery('#westm-xcollapsed').show();
@@ -119,7 +116,6 @@ function doViewportShow()
 			jQuery('#divQueryResults').show();
 			jQuery('body').trigger('cmdQueryResultsButtonHide');
 			jQuery('#dcr').hide();
-			Ext.getCmp('westm').expand();
 			Ext.getCmp('viewport').doLayout();
 		}
 		else
@@ -130,7 +126,6 @@ function doViewportShow()
 	else
 	{
 		jQuery('#divRegionList').show();
-		// Show database list
 		doUpdateDatabaseListByUser();
 	}
 } //doViewportShow()
@@ -188,9 +183,12 @@ function doMainMenuHandler(item)
 		break;
 		// DesConsultar Menu Options
 		case 'mnuQueryViewDesign':
-			jQuery('.contentBlock').hide();
-			jQuery('#divQueryResults').show();
-			Ext.getCmp('westm').expand();
+			if (jQuery('#desinventarRegionId').val() != '')
+			{
+				jQuery('.contentBlock').hide();
+				jQuery('#divQueryResults').show();
+				Ext.getCmp('westm').expand();
+			}
 		break;
 		case 'mnuQueryViewData':
 			jQuery('body').trigger('cmdViewDataParams');
@@ -299,7 +297,6 @@ function doMainMenuHandler(item)
 			doDatabaseCreateShow();
 		break;
 		case 'mnuUserAccountManagement':
-			//updateList('dbl', jQuery('#desinventarURL').val() + '/user.php', 'cmd=adminusr', 'onReadyUserAdmin');
 			jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=adminusr',function() { onReadyUserAdmin(); });
 			Ext.getCmp('wndDatabaseList').show();
 		break;
@@ -308,7 +305,6 @@ function doMainMenuHandler(item)
 			jQuery('#divAdminDatabase').show();
 			doAdminDatabaseUpdateList();
 		break;
-		// help menu
 		case 'mnuHelpAbout':
 			Ext.getCmp('wndDialog').show();
 		break;
@@ -473,19 +469,28 @@ function doMainMenuCreate()
 		Ext.getCmp('mnuQueryResultPrint').hide();
 	});
 	jQuery('body').on('cmdMainWindowUpdate', function() {
-		Ext.getCmp('westm').collapse();
-		jQuery('#westm-xcollapsed').hide();
+		if (jQuery('#desinventarRegionId').val() != '')
+		{
+			Ext.getCmp('westm').collapse();
+			jQuery('#westm-xcollapsed').hide();
+		}
 		jQuery('.contentBlock').hide();
 		jQuery('#divLoading').show();
 		setTimeout(function()
 		{
-			jQuery('#westm-xcollapsed').show();
-			Ext.getCmp('westm').expand();
+			if (jQuery('#desinventarRegionId').val() != '')
+			{
+				jQuery('#westm-xcollapsed').show();
+				Ext.getCmp('westm').expand();
+			}
+			jQuery('body').trigger('cmdMainMenuUpdate');
+			if (jQuery('#desinventarRegionId').val() != '')
+			{
+				jQuery('body').trigger('cmdMainQueryUpdate');
+			}
 			jQuery('.contentBlock').hide();
 			jQuery('#divLoading').hide();
 			doViewportShow();
-			jQuery('body').trigger('cmdMainMenuUpdate');
-			jQuery('body').trigger('cmdMainQueryUpdate');
 		}, 2000);
 	});
 } //doCreateMainMenu()
