@@ -117,11 +117,11 @@ function doViewportShow()
 	if (RegionId != '')
 	{
 		Ext.getCmp('westm').collapse();
-		jQuery('#westm-xcollapsed').hide();
+		//jQuery('#westm-xcollapsed').hide();
 		if (UserRoleValue > 0)
 		{
 			console.log('Database show');
-			jQuery('#westm-xcollapsed').show();
+			//jQuery('#westm-xcollapsed').show();
 			console.log('debug expand 0');
 			Ext.getCmp('westm').expand();
 			jQuery('#divQueryResults').show();
@@ -486,7 +486,7 @@ function doMainMenuCreate()
 		if (jQuery('#desinventarRegionId').val() != '')
 		{
 			Ext.getCmp('westm').collapse();
-			jQuery('#westm-xcollapsed').hide();
+			//jQuery('#westm-xcollapsed').hide();
 		}
 		jQuery('.contentBlock').hide();
 		jQuery('#divLoading').show();
@@ -494,7 +494,7 @@ function doMainMenuCreate()
 		{
 			if (jQuery('#desinventarRegionId').val() != '')
 			{
-				jQuery('#westm-xcollapsed').show();
+				//jQuery('#westm-xcollapsed').show();
 				console.log('debug expand 2');
 				Ext.getCmp('westm').expand();
 			}
