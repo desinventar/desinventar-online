@@ -26,10 +26,10 @@
 			<Text LangIsoCode="fre">Le changement de mot de passe</Text>
 		</Message>
 		<Message id="mnuUserAccountManagement">
-			<Text LangIsoCode="eng">User's account management</Text>
-			<Text LangIsoCode="spa">Administración cuentas de usuario</Text>
-			<Text LangIsoCode="por">Gerenciamento da conta do usuário</Text>
-			<Text LangIsoCode="fre">Gestion de compte utilisateur</Text>
+			<Text LangIsoCode="eng">Create/Edit User accounts</Text>
+			<Text LangIsoCode="spa">Crear/Editar cuentas de usuario</Text>
+			<Text LangIsoCode="por">Criar/editar contas de usuário</Text>
+			<Text LangIsoCode="fre">Créer/modifier des comptes utilisateur</Text>
 		</Message>
 		<Message id="mnuUserLanguage">
 			<Text LangIsoCode="eng">Language</Text>
