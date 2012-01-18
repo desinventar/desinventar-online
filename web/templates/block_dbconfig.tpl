@@ -9,20 +9,45 @@
 			<li><a class="classDBConfig_tabs" href="#DBConfig_Users"     cmd=""                                                                  >{-#msgDBConfig_RolesAndDiffusion#-}</a></li>
 		</ul>
 		<div id="DBConfig_tabs-1">
+			<div class="tooltip hidden">
+			</div>
+			<div class="content">
+			</div>
 		</div>
 		<div id="DBConfig_Geolevels">
-			{-include file="database_geolevels.tpl"-}
+			<div class="tooltip hidden">{-#msgGeolevels_Tooltip#-}</div>
+			<div class="content">
+				{-include file="database_geolevels.tpl"-}
+			</div>
 		</div>
 		<div id="DBConfig_tabs-3">
+			<div class="tooltip hidden">{-#msgGeolevels_Tooltip#-}</div>
+			<div class="content">
+			</div>
 		</div>
 		<div id="DBConfig_Events">
-			{-include file="database_events.tpl"-}
+			<div class="tooltip hidden"></div>
+			<div class="content">
+				{-include file="database_events.tpl"-}
+			</div>
 		</div>
 		<div id="DBConfig_tabs-5">
+			<div class="tooltip hidden">
+			</div>
+			<div class="content">
+			</div>
 		</div>
 		<div id="DBConfig_tabs-6">
+			<div class="tooltip hidden">
+			</div>
+			<div class="content">
+			</div>
 		</div>
 		<div id="DBConfig_Users">
-			{-include file="database_users.tpl"-}
+			<div class="tooltip hidden">
+			</div>
+			<div class="content">
+				{-include file="database_users.tpl"-}
+			</div>
 		</div>
 	</div>
