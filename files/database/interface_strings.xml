@@ -3488,10 +3488,10 @@
 			<Text LangIsoCode="fre">Pour ce faire il choisir l'option Configurer la base de données dans le menu Base de données</Text>
 		</Message>
 		<Message id="msgDatabaseCreateMsg4">
-			<Text LangIsoCode="eng">Open database</Text>
-			<Text LangIsoCode="spa">Abrir base de datos</Text>
-			<Text LangIsoCode="por">Abrir banco de dados</Text>
-			<Text LangIsoCode="fre">Ouvrir base de données</Text>
+			<Text LangIsoCode="eng">Ok</Text>
+			<Text LangIsoCode="spa">Aceptar</Text>
+			<Text LangIsoCode="por">Submeter</Text>
+			<Text LangIsoCode="fre">Envoyer</Text>
 		</Message>
 	</Group>
 	<Group name="grpUserPermAdmin">
