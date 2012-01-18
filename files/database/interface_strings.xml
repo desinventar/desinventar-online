@@ -218,10 +218,10 @@
 			<Text LangIsoCode="fre">Charger</Text>
 		</Message>
 		<Message id="mnuDatabaseCopy">
-			<Text LangIsoCode="eng">Copy</Text>
-			<Text LangIsoCode="spa">Copiar</Text>
-			<Text LangIsoCode="por">Copiar</Text>
-			<Text LangIsoCode="fre">Copie</Text>
+			<Text LangIsoCode="eng">New</Text>
+			<Text LangIsoCode="spa">Nueva</Text>
+			<Text LangIsoCode="por">Nova</Text>
+			<Text LangIsoCode="fre">Nouvelle</Text>
 		</Message>
 		<Message id="mnuDatabaseReplace">
 			<Text LangIsoCode="eng">Replace</Text>
