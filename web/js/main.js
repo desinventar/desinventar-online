@@ -14,6 +14,7 @@ function onReadyMain()
 	onReadyCommon();
 	onReadyPrototype();
 	onReadyUserLogin();
+	onReadyUserAccount();
 	onReadyDatacards();
 	onReadyAdminDatabase();
 	onReadyExtraEffects();

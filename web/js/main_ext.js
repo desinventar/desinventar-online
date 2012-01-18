@@ -167,8 +167,7 @@ function doMainMenuHandler(item)
 			jQuery('body').trigger('cmdUserLogout');
 		break;
 		case 'mnuUserChangePasswd':
-			jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=changepasswd',function() { onReadyUserChangePasswd('dbl-win'); });
-			Ext.getCmp('wndDatabaseList').show();
+			jQuery('body').trigger('cmdUserAccountShow');
 		break;
 		case 'mnuUserLanguageEnglish':
 			doMainChangeLanguage('eng');

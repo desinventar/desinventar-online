@@ -34,6 +34,8 @@
 
 			<!-- Show User login/logout window -->
 			{-include file="user_login_ext.tpl"-}
+			<!-- User Account Edit Window -->
+			{-include file="user_account_ext.tpl"-}
 
 			<!-- Show Database functions window -->
 			<div id="dbl-win" class="x-hidden">
