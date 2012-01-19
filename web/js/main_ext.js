@@ -93,10 +93,7 @@ function doViewportCreate()
 	var viewport = new DesInventar.Viewport({id:'viewport'});
 	viewport.show();
 	Ext.getCmp('westm').on('expand', function() {
-		jQuery('.contentBlock').hide();
-		jQuery('#divQueryResults').show();
-		jQuery('body').trigger('cmdQueryResultsButtonHide');
-		jQuery('#dcr').hide();
+		jQuery('#divRegionInfo').hide();
 	});
 } // doViewportCreate()
 
