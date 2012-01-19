@@ -1,6 +1,6 @@
 /*
  DesInventar - http://www.desinventar.org
- (c) 1998-2011 Corporacion OSSO
+ (c) 1998-2012 Corporacion OSSO
 */
 //2011-02-19 (jhcaiced) Do not remove this line, initialize map=null 
 // to avoid an error with IE and the maps

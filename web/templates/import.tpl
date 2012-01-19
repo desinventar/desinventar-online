@@ -23,7 +23,7 @@
 				<input type="hidden" name="_REG" value="{-$RegionId-}" />
 				<input type="hidden" name="cmd" value="upload" />
 				<input type="hidden" name="diobj" value="5" />
-				<input type="file" id="ieff" name="desinv" class="fixw" {-$ro-} /> <!--  onChange="sendForm();"-->
+				<input type="file" id="ieff" name="desinv" class="fixw" /> <!--  onChange="sendForm();"-->
 				<input type="submit" value="Ok" />
 			</form>
 		</p>

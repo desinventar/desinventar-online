@@ -1,7 +1,7 @@
 <script language="php">
 /*
   DesInventar - http://www.desinventar.org  
-  (c) 1998-2011 Corporacion OSSO
+  (c) 1998-2012 Corporacion OSSO
 */
 
 require_once('include/loader.php');
@@ -91,11 +91,6 @@ switch($cmd)
 	break;
 	case 'cmdDBInfoEdit':
 		$UserRole = $us->getUserRole($RegionId);
-		// DISPLAY REGION INFO
-		if ($UserRole == 'OBSERVER')
-		{
-			$t->assign('ro', 'disabled');
-		}
 		$r = new DIRegion($us, $RegionId);
 		$lang = array();
 		$lang[0] = $r->get('LangIsoCode');

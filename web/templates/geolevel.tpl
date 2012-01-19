@@ -39,13 +39,13 @@
 			if(checkForm('levfrm',a, '{-#errmsgfrmlev#-}')) { $('levaddsect').style.display = 'none'; return(true); } else return(false)">
 			<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevName[2]-}')">
 			{-$dic.DBLevName[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBLevName[1]-}</span></a><br />
-			<input id="GeoLevelName" name="GeoLevelName" type="text" {-$ro-} tabindex="1" class="line" style="width:400px;"
+			<input id="GeoLevelName" name="GeoLevelName" type="text"  tabindex="1" class="line" style="width:400px;"
 				onBlur="updateList('levstatusmsg', jQuery('#desinventarURL').val() + '/geolevel.php', 'r={-$reg-}&cmd=chkname&GeoLevelId='+ $('GeoLevelId').value +'&GeoLevelName='+ $('GeoLevelName').value);"
 				onFocus="showtip('{-$dic.DBLevName[2]-}')" />
 			<br /><br />
 			<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevDesc[2]-}')">
 			{-$dic.DBLevDesc[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBLevDesc[1]-}</span></a><br />
-			<textarea id="GeoLevelDesc" name="GeoLevelDesc" {-$ro-} tabindex="2" style="width:500px;"
+			<textarea id="GeoLevelDesc" name="GeoLevelDesc"  tabindex="2" style="width:500px;"
 					onFocus="showtip('{-$dic.DBLevDesc[2]-}')"></textarea>
 			<hr />
 			<table border="0" width="100%">
@@ -54,19 +54,19 @@
 					<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevLayerFile[2]-}')">
 					{-$dic.DBLevLayerFile[0]-}<span>{-$dic.DBLevLayerFile[1]-}</span></a>
 					<input id="GeoLevelLayerFile" name="GeoLevelLayerFile" type="hidden" /><br />
-					DBF File <input name="GeoLevelFileDBF" type="file" {-$ro-} tabindex="3" /><br />
-					SHP File <input name="GeoLevelFileSHP" type="file" {-$ro-} tabindex="4" /><br />
-					SHX File <input name="GeoLevelFileSHX" type="file" {-$ro-} tabindex="5" />
+					DBF File <input name="GeoLevelFileDBF" type="file"  tabindex="3" /><br />
+					SHP File <input name="GeoLevelFileSHP" type="file" tabindex="4" /><br />
+					SHX File <input name="GeoLevelFileSHX" type="file" tabindex="5" />
 				</td>
 				<td>
 					<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevLayerCode[2]-}')">
 					{-$dic.DBLevLayerCode[0]-}<span>{-$dic.DBLevLayerCode[1]-}</span></a><br />
-					<input id="GeoLevelLayerCode" name="GeoLevelLayerCode" type="text" {-$ro-} class="line" style="width:150px;"
+					<input id="GeoLevelLayerCode" name="GeoLevelLayerCode" type="text" class="line" style="width:150px;"
 	   					tabindex="6" onFocus="showtip('{-$dic.DBLevColCode[2]-}')" />
 					<br /><br />
 					<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLevLayerName[2]-}')">
 					{-$dic.DBLevLayerName[0]-}<span>{-$dic.DBLevLayerName[1]-}</span></a><br />
-					<input id="GeoLevelLayerName" name="GeoLevelLayerName" type="text" {-$ro-} class="line" style="width:150px;"
+					<input id="GeoLevelLayerName" name="GeoLevelLayerName" type="text" class="line" style="width:150px;"
 						tabindex="7" onFocus="showtip('{-$dic.DBLevLayerName[2]-}')" />
 				</td>
 				</tr>
@@ -75,9 +75,9 @@
 					<input id="_REG" name="_REG" value="{-$reg-}" type="hidden" />
 					<input id="GeoLevelId" name="GeoLevelId" type="hidden" />
 					<input id="cmd" name="cmd" type="hidden" /><br />
-					<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="8" />
+					<input type="submit" value="{-#bsave#-}" class="line" tabindex="8" />
 					<input type="reset" value="{-#bcancel#-}" class="line" 
-						onClick="$('levaddsect').style.display='none'; mod='lev'; uploadMsg('');" {-$ro-} />
+						onClick="$('levaddsect').style.display='none'; mod='lev'; uploadMsg('');" />
 				</td>
 				</tr>
 			</table>

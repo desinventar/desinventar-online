@@ -1,7 +1,7 @@
 <script language="php">
 /*
  DesInventar - http://www.desinventar.org
- (c) 1998-2011 Corporacion OSSO
+ (c) 1998-2012 Corporacion OSSO
 */
 
 require_once('include/loader.php');
@@ -84,10 +84,6 @@ switch ($cmd)
 		$t->assign('geol', $geol);
 		$t->assign('ctl_geolist', true);
 		$urol = $us->getUserRole($reg);
-		if ($urol == 'OBSERVER')
-		{
-			$t->assign('ro', 'disabled');
-		}
 	break;
 	default: 
 	break;

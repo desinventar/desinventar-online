@@ -1,7 +1,7 @@
 <script language="php">
 /*
  DesInventar - http://www.desinventar.org
- (c) 1998-2011 Corporacion OSSO
+ (c) 1998-2012 Corporacion OSSO
 */
 
 require_once('include/loader.php');
@@ -129,10 +129,6 @@ switch ($cmd)
 		$t->assign('ctl_admingeo', true);
 		$t->assign('ctl_levlist', true);
 		$t->assign('levl', $us->q->loadGeoLevels('', -1, false));
-		if ($us->getUserRole($RegionId) == 'OBSERVER')
-		{
-			$t->assign('ro', 'disabled');
-		}
 	break;
 	default:
 	break;

@@ -35,7 +35,7 @@
 														</td>
 														<td>
 															{-if $item[1] == "TEXT"-}
-																<textarea id="RegionInfo[{-$LangIsoCode-}][{-$key-}]" name="RegionInfo[{-$LangIsoCode-}][{-$key-}]" {-$ro-} style="width:350px; height:30px;" tabindex="{-$tabind-}"
+																<textarea id="RegionInfo[{-$LangIsoCode-}][{-$key-}]" name="RegionInfo[{-$LangIsoCode-}][{-$key-}]"  style="width:350px; height:30px;" tabindex="{-$tabind-}"
 																	onFocus="showtip('{-$dic.$inf[2]-}')">{-$item[0]-}</textarea>
 															{-elseif $item[1] == "VARCHAR"-}
 																<input id="RegionInfo[{-$LangIsoCode-}][{-$key-}]" name="RegionInfo[{-$LangIsoCode-}][{-$key-}]" type="text" class="line" style="width:350px;" 
@@ -73,8 +73,8 @@
 									<br />
 									<input name="_REG" type="hidden" value="{-$reg-}" />
 									<input id="_infocmd" name="cmd" value="cmdDBInfoUpdate" type="hidden" />
-									<input type="submit" value="{-#bsave#-}" {-$ro-} class="line"/>
-									<input type="reset" value="{-#bcancel#-}" {-$ro-} onclick="mod='info'; uploadMsg('');" class="line" />
+									<input type="submit" value="{-#bsave#-}"  class="line"/>
+									<input type="reset" value="{-#bcancel#-}"  onclick="mod='info'; uploadMsg('');" class="line" />
 									<br />
 									<iframe name="ifinfo" id="ifinfo" frameborder="0" src="about:blank" style="height:30px; width:350px;"></iframe>
 								</td>
@@ -139,7 +139,7 @@
 							<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLogType[2]-}');">
 							{-$dic.DBLogType[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBLogType[1]-}</span></a>
 							<br />
-							<select id="DBLogType" name="DBLogType" {-$ro-} onFocus="showtip('{-$dic.DBLogType[2]-}');" class="line fixw" tabindex="1">
+							<select id="DBLogType" name="DBLogType"  onFocus="showtip('{-$dic.DBLogType[2]-}');" class="line fixw" tabindex="1">
 								<option value=""></option>
 								<option value="CREDIT" onMouseOver="showtip('{-$dic.DBLogCredits[2]-}');">{-$dic.DBLogCredits[0]-}</option>
 								<option value="METHODOLOGY" onMouseOver="showtip('{-$dic.DBLogMethodology[2]-}');">{-$dic.DBLogMethodology[0]-}</option>
@@ -151,16 +151,16 @@
 							<br />
 							<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLogNote[2]-}');">
 							{-$dic.DBLogNote[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBLogNote[1]-}</span></a><br />
-							<textarea id="DBLogNotes" name="DBLogNotes" cols="22" {-$ro-} class="fixw" tabindex="2" 
+							<textarea id="DBLogNotes" name="DBLogNotes" cols="22"  class="fixw" tabindex="2" 
 								onFocus="showtip('{-$dic.DBLogNote[2]-}');"></textarea>
 							<br /><br />
 							<p align="center" class="fixw">
 								<input name="r" type="hidden" value="{-$reg-}" />
 								<input id="DBLogDate" name="DBLogDate" type="hidden" />
 								<input id="LogCmd" name="cmd" type="hidden" />
-								<input type="submit" value="{-#bsave#-}" {-$ro-} class="line" tabindex="3" />
+								<input type="submit" value="{-#bsave#-}"  class="line" tabindex="3" />
 								<input type="reset" value="{-#bcancel#-}" class="line"
-									onClick="$('logaddsect').style.display='none'; mod='log'; uploadMsg('');" {-$ro-} />
+									onClick="$('logaddsect').style.display='none'; mod='log'; uploadMsg('');"  />
 							</p>
 						</form>
 					</div>

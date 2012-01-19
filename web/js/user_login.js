@@ -1,6 +1,6 @@
 /*
  DesInventar - http://www.desinventar.org
- (c) 1998-2011 Corporacion OSSO
+ (c) 1998-2012 Corporacion OSSO
 */
 
 function onReadyUserLogin()

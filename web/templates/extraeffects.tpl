@@ -42,15 +42,15 @@
 	<div id="extraeffaddsect" style="display:none; width:600px;">
 		<form name="eeffrm" id="frmEEFieldEdit" method="post">
 			{-$dic.DBEEFieldLabel[0]-}<b style="color:darkred;">*</b><br />
-			<input type="text" id="EEFieldLabel" name="EEField[EEFieldLabel]" {-$ro-} class="line clsValidateField" style="width:500px;"
+			<input type="text" id="EEFieldLabel" name="EEField[EEFieldLabel]" class="line clsValidateField" style="width:500px;"
 				tabindex="1" onFocus="showtip('{-$dic.DBEEFieldLabel[2]-}')" />
 			<br /><br />
 			{-$dic.DBEEFieldDesc[0]-}<b style="color:darkred;">*</b><br />
-			<textarea id="EEFieldDesc" name="EEField[EEFieldDesc]" {-$ro-} style="width:500px;" class="clsValidateField"
+			<textarea id="EEFieldDesc" name="EEField[EEFieldDesc]" style="width:500px;" class="clsValidateField"
 				tabindex="2" onFocus="showtip('{-$dic.DBEEFieldDesc[2]-}')"></textarea>
 			<br /><br />
 			{-$dic.DBEEFieldType[0]-}<b style="color:darkred;">*</b><br />
-			<select id="EEFieldType" name="EEField[EEFieldType]" {-$ro-} class="line clsValidateField" style="width:500px;"
+			<select id="EEFieldType" name="EEField[EEFieldType]" class="line clsValidateField" style="width:500px;"
 				tabindex="3" onFocus="showtip('{-$dic.DBEEFieldType[2]-}');">
 				<option value=""></option>
 				<option value="INTEGER">{-#typeinteger#-}</option>
@@ -60,11 +60,11 @@
 			</select>
 			<br /><br />
 			{-$dic.DBEEFieldActive[0]-}
-			<input type="checkbox" id="EEFieldActive" name="EEField[EEFieldActive]" {-$ro-}
+			<input type="checkbox" id="EEFieldActive" name="EEField[EEFieldActive]"
 				tabindex="4" onFocus="showtip('{-$dic.DBEEFieldActive[2]-}')" />
 			<br /><br />
 			{-$dic.DBEEFieldPublic[0]-}
-			<input type="checkbox" id="EEFieldPublic" name="EEField[EEFieldPublic]" {-$ro-}
+			<input type="checkbox" id="EEFieldPublic" name="EEField[EEFieldPublic]"
 				tabindex="5" onFocus="showtip('{-$dic.DBEEFieldPublic[2]-}')" />
 			<br /> <br />
 			<p align="center" style="width:500px;">
@@ -72,8 +72,8 @@
 				<input id="EEFieldSize" name="EEField[EEFieldSize]" value="100" type="hidden" />
 				<input id="EEFieldId" name="EEField[EEFieldId]" type="hidden" />
 				<input id="EEFieldCmd" name="cmd" type="hidden" />
-				<input type="submit" value="{-#bsave#-}"   {-$ro-} class="line" tabindex="6" />
-				<input type="reset"  value="{-#bcancel#-}" {-$ro-} class="line" tabindex="7" id="btnEEFieldReset" />
+				<input type="submit" value="{-#bsave#-}"   class="line" tabindex="6" />
+				<input type="reset"  value="{-#bcancel#-}" class="line" tabindex="7" id="btnEEFieldReset" />
 			</p>
 		</form>
 	</div>
