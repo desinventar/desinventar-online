@@ -8,6 +8,10 @@ require_once('include/loader.php');
 require_once('include/diregion.class.php');
 require_once('include/graphic.class.php');
 
+$iLength = Graphic::getTextWidth('DEMO TEXT',10);
+fb($iLength);
+exit();
+
 $RegionId = getParameter('_REG','');
 if ($RegionId == '')
 {
