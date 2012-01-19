@@ -854,8 +854,8 @@ class Graphic
 	{
 		$myFont = 'arial.ttf';
 		if (isset($_SERVER['WINDIR']))
-		{
-			$myFont = 'C:\Windows\fonts\arial.ttf';
+		{			
+			$myFont = $_SERVER['WINDIR'] . '\fonts\arial.ttf';
 		}
 		$bbox = imagettfbbox($prmFontSize, 0, $myFont, $prmText);
 		$Width = $bbox[2] - $bbox[0];
