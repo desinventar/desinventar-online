@@ -92,6 +92,7 @@ function doViewportCreate()
 	});
 	var viewport = new DesInventar.Viewport({id:'viewport'});
 	viewport.show();
+	jQuery('#westm .x-panel-header-text').attr('title', jQuery('#msgQueryDesignTooltip').text());
 	Ext.getCmp('westm').on('expand', function() {
 		jQuery('#divRegionInfo').hide();
 	});
