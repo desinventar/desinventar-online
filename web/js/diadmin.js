@@ -625,13 +625,7 @@
 		combineForms('frmMainQuery', 'CS');
 		jQuery('#_CMD').val('savequery');
 		$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/?r=' + jQuery('#desinventarRegionId').val();
-		/*
-		jQuery('#frmMainQuery').attr('target','dcr');
-		if (cmd != 'result')
-		{
-			jQuery('#frmMainQuery').attr('target', 'iframeDownload');
-		}
-		*/
+		jQuery('#frmMainQuery').attr('target', 'iframeDownload');
 		jQuery('#frmMainQuery').submit();
 		return true;
 	}
