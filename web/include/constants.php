@@ -2,7 +2,7 @@
 /*
  **********************************************
  DesInventar - http://www.desinventar.org  
- (c) 1998-2011 Corporación OSSO
+ (c) 1998-2012 Corporación OSSO
  **********************************************
 */
 define('CONST_REGIONACTIVE', 1);

@@ -25,7 +25,7 @@
 				{-#msgDatabaseEditLangIsoCode#-}
 			</td>
 			<td>
-				<select id="fldDatabaseEdit_LangIsoCode" name="Database[LangIsoCode]" {-$ro-} class="line fixw" tabindex="4">
+				<select id="fldDatabaseEdit_LangIsoCode" name="Database[LangIsoCode]" class="line fixw" tabindex="4">
 				</select>
 			</td>
 		</tr>

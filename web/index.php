@@ -1195,7 +1195,6 @@ switch ($cmd)
 						break;
 						case 'OBSERVER':
 							$t->assign('showconfig', true);
-							$t->assign('ro', 'disabled');
 							$dicrole = $dic['DBRoleObserver'][0];
 						break;
 						case 'SUPERVISOR':

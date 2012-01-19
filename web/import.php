@@ -1,7 +1,7 @@
 <script language="php">
 /*
  DesInventar - http://www.desinventar.org
- (c) 1998-2011 Corporacion OSSO
+ (c) 1998-2012 Corporacion OSSO
 */
 
 require_once('include/loader.php');
@@ -160,10 +160,6 @@ else
 {
 	// show upload form
 	$urol = $us->getUserRole($RegionId);
-	if ($urol == 'OBSERVER')
-	{
-		$t->assign('ro', 'disabled');
-	}
 	$t->assign('ctl_show', true);
 }
 
