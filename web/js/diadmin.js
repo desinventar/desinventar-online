@@ -1,6 +1,6 @@
 /*
  DesInventar - http://www.desinventar.org
- (c) 1998-2011 Corporacion OSSO
+ (c) 1998-2012 Corporacion OSSO
 */
 
 	var mod = "";
@@ -490,6 +490,11 @@
 			combineForms('frmMainQuery', 'CD');
 			Ext.getCmp('westm').collapse();
 			$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/data.php';
+			jQuery('#frmMainQuery').attr('target','dcr');
+			if (cmd != 'result')
+			{
+				jQuery('#frmMainQuery').attr('target', 'iframeDownload');
+			}
 			jQuery('#frmMainQuery').submit();
 			//hideMap();
 			return true;
@@ -532,6 +537,11 @@
 			combineForms('frmMainQuery', 'CM');
 			Ext.getCmp('westm').collapse();
 			$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/thematicmap.php';
+			jQuery('#frmMainQuery').attr('target','dcr');
+			if (cmd != 'result')
+			{
+				jQuery('#frmMainQuery').attr('target', 'iframeDownload');
+			}
 			jQuery('#frmMainQuery').submit();
 			//hideMap();
 			return true;
@@ -556,6 +566,11 @@
 		combineForms('frmMainQuery', 'CG');
 		Ext.getCmp('westm').collapse();
 		$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/graphic.php';
+		jQuery('#frmMainQuery').attr('target','dcr');
+		if (cmd != 'result')
+		{
+			jQuery('#frmMainQuery').attr('target', 'iframeDownload');
+		}
 		jQuery('#frmMainQuery').submit();
 		//hideMap();
 	}
@@ -584,6 +599,11 @@
 			combineForms('frmMainQuery', 'CS');
 			Ext.getCmp('westm').collapse();
 			$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/statistic.php';
+			jQuery('#frmMainQuery').attr('target','dcr');
+			if (cmd != 'result')
+			{
+				jQuery('#frmMainQuery').attr('target', 'iframeDownload');
+			}
 			jQuery('#frmMainQuery').submit();
 			//hideMap();
 			return true;
@@ -605,6 +625,13 @@
 		combineForms('frmMainQuery', 'CS');
 		jQuery('#_CMD').val('savequery');
 		$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/?r=' + jQuery('#desinventarRegionId').val();
+		/*
+		jQuery('#frmMainQuery').attr('target','dcr');
+		if (cmd != 'result')
+		{
+			jQuery('#frmMainQuery').attr('target', 'iframeDownload');
+		}
+		*/
 		jQuery('#frmMainQuery').submit();
 		return true;
 	}
