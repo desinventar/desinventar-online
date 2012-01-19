@@ -2662,10 +2662,10 @@
 			<Text LangIsoCode="fre">Format AAAA MM DD</Text>
 		</Message>
 		<Message id="thlpquery">
-			<Text LangIsoCode="eng">significa que consultará toda la base de datos</Text>
-			<Text LangIsoCode="spa">Si no selecciona nada</Text>
-			<Text LangIsoCode="por">If you do not select any option</Text>
-			<Text LangIsoCode="fre">significa que consultará toda la base de datos</Text>
+			<Text LangIsoCode="eng">If no option is selected the entire database will be queried</Text>
+			<Text LangIsoCode="spa">Si no selecciona nada se consultará toda la base de datos</Text>
+			<Text LangIsoCode="por">Se nenhuma opção é selecionada, o banco de dados inteiro será consultado</Text>
+			<Text LangIsoCode="fre">Si aucune option n'est choisie la base de données entière sera interrogé</Text>
 		</Message>
 		<Message id="teffhav">
 			<Text LangIsoCode="eng">There were</Text>

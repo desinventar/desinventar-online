@@ -1,5 +1,6 @@
 <div id="divQueryDesign">
-<span id="msgQueryDesignTitle" style="display:none;">{-#tsubtitle#-}</span>
+<span id="msgQueryDesignTitle" class="hidden">{-#tsubtitle#-}</span>
+<span id="msgQueryDesignTooltip" class="hidden">{-#thlpquery#-}</span>
 <form id="frmMainQuery" method="post" action="" target="dcr">
 	<input type="hidden" id="_REG" name="_REG" value="{-$reg-}" />
 	<input type="hidden" id="_CMD" name="_CMD" />
@@ -15,7 +16,7 @@
 			{-foreach name=glev key=k item=i from=$glev-}
 				<span class="dlgmsg" onMouseOver="showtip('{-$i[1]-}');">{-$i[0]-}</span> |
 			{-/foreach-}
-			<div id="qgeolst" style="height: 280px;" class="dwin" title="{-#thlpquery#-}">
+			<div id="qgeolst" style="height: 280px;" class="dwin">
 				{-assign var="maintree" value="true"-}
 				{-* Show Geography List *-}
 				{-include file="block_glist.tpl"-}
@@ -32,7 +33,7 @@
 		<dt>{-#mevesection#-}</dt>
 		<dd>
 			<input type="hidden" name="QueryEvent[OP]" value="AND" />
-			<span class="dlgmsg" title="{-#thlpquery#-}">{-#tcntclick#-}</span><br />
+			<span class="dlgmsg">{-#tcntclick#-}</span><br />
 			<select id="qevelst" name="D_EventId[]" multiple style="width: 250px; height: 200px;" class="line">
 				{-include file="block_eventlist.tpl"-}
 			</select>
@@ -50,7 +51,7 @@
 		<dt>{-#mcausection#-}</dt>
 		<dd>
 			<input type="hidden" name="QueryCause[OP]" value="AND" />
-			<span class="dlgmsg" title="{-#thlpquery#-}">{-#tcntclick#-}</span><br />
+			<span class="dlgmsg">{-#tcntclick#-}</span><br />
 			<select id="qcaulst" name="D_CauseId[]" multiple style="width: 250px; height: 200px;" class="line">
 				{-include file="block_causelist.tpl"-}
 			</select>
@@ -71,7 +72,7 @@
 			</select>
 			</p>
 			<b>{-#ttitegp#-}</b><br />
-			<div style="height: 100px;" class="dwin" title="{-#thlpquery#-}">
+			<div style="height: 100px;" class="dwin">
 				<table border="0" cellpadding="0" cellspacing="0">
 					{-foreach name=ef1 key=key item=item from=$ef1-}
 						{-assign var="ff" value="D_$key"-}
