@@ -841,7 +841,7 @@ class Graphic
 		$MaxWidth = 0;
 		foreach($prmTextArray as $Text)
 		{
-			$Width = $this->getTextWidth($Text, $prmFontSize);
+			$Width = self::getTextWidth($Text, $prmFontSize);
 			if ($Width > $MaxWidth)
 			{
 				$MaxWidth = $Width;
@@ -850,7 +850,7 @@ class Graphic
 		return $MaxWidth;
 	}
 	
-	public function getTextWidth($prmText, $prmFontSize)
+	public static function getTextWidth($prmText, $prmFontSize)
 	{
 		$myFont = 'arial.ttf';
 		$bbox = imagettfbbox($prmFontSize, 0, $myFont, $prmText);
