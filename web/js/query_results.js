@@ -52,26 +52,37 @@ function onReadyQueryResults()
 	});
 
 	jQuery('#btnResultSave').click(function() {
-		saveRes('export', '');
+		if (jQuery('#DCRes').val() == 'M' || jQuery('#DCRes').val() == 'G')
+		{
+			saveRes('export', '');
+		}
 	}).mouseover(function() {
 		if (jQuery('#DCRes').val() == 'D' || jQuery('#DCRes').val() == 'S')
 		{
 			jQuery('#btnResultSaveOptions').show();
+			jQuery('#btnResultShow').val(1);
 		}
-	});
-	jQuery('#btnResultSaveOptions').mouseover(function() {
-		jQuery('#btnResultSaveOptions').hide();
 	}).mouseout(function() {
+		jQuery('#btnResultShow').val('');
+	});
+	jQuery('#btnResultSaveOptions').mouseout(function() {
 		setTimeout(function() {
-			jQuery('#btnResultSaveOptions').hide();
-		}, 1500);
+			if (jQuery('#btnResultShow').val() != '')
+			{
+				jQuery('#btnResultSaveOptions').hide();
+			}
+		}, 4000);
 	});
 
 	jQuery('#btnResultSaveXLS').click(function() {
 		saveRes('export', 'xls');
+	}).mouseover(function() {
+		jQuery('#btnResultShow').val(1);
 	});
 	jQuery('#btnResultSaveCSV').click(function() {
 		saveRes('export', 'csv');
+	}).mouseover(function() {
+		jQuery('#btnResultShow').val(1);
 	});
 	jQuery('#btnResultPrint').click(function() {
 		printRes();
