@@ -378,6 +378,42 @@ function doDatacardShow()
 	jQuery('#divDatacard .tblGeography tr:gt(0)').remove();
 	jQuery('#divDatacard .tblGeography tr:first').hide();
 	var GeolevelsList = jQuery('body').data('GeolevelsList');
+	if (GeolevelsList == undefined)
+	{
+		jQuery.post(
+			jQuery('#desinventarURL').val() + '/',
+			{
+				cmd      : 'cmdDatabaseLoadData',
+				RegionId : jQuery('#desinventarRegionId').val()
+			},
+			function(data)
+			{
+				jQuery('body').data('GeolevelsList', data.GeolevelsList);
+				jQuery('body').data('EventList', data.EventList);
+				jQuery('body').data('CauseList', data.CauseList);
+				jQuery('body').data('RecordCount', data.RecordCount);
+				var dataItems = jQuery('body').data();
+				jQuery.each(dataItems, function(index, value) {
+					if (index.substr(0,13) === 'GeographyList')
+					{
+						jQuery('body').removeData(index);
+					}
+				});
+				jQuery('body').data('GeographyList', data.GeographyList);
+				doDatacardUpdateDisplay();
+			},
+			'json'
+		);
+	}
+	else
+	{
+		doDatacardUpdateDisplay();
+	}
+} //doDatacardShow()
+
+function doDatacardUpdateDisplay()
+{	
+	var GeolevelsList = jQuery('body').data('GeolevelsList');
 	if (GeolevelsList != undefined)
 	{
 		jQuery.each(GeolevelsList, function(index, value) {
@@ -454,7 +490,7 @@ function doDatacardShow()
 	{
 		w.show();
 	}
-} //doDatacardShow();
+} //doDatacardUpdateDisplay();
 
 function displayDatacardStatusMsg(msgId)
 {
