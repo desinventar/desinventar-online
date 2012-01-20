@@ -3771,11 +3771,17 @@
 			<Text LangIsoCode="por">Registros</Text>
 			<Text LangIsoCode="fre">Dossiers</Text>
 		</Message>
-		<Message id="msgDatabaseUploadComplete">
-			<Text LangIsoCode="eng">Database has been updated correctly, browser window will reload now with new data</Text>
-			<Text LangIsoCode="spa">La base de datos se actualizó correctamente, la ventana del navegador se cargará nuevamente con los nuevos datos</Text>
-			<Text LangIsoCode="por">Banco de dados foi atualizado corretamente, janela do navegador irá recarregar agora com novos dados</Text>
-			<Text LangIsoCode="fre">Base de données a été correctement mis à jour, fenêtre du navigateur va recharger maintenant avec de nouvelles données</Text>
+		<Message id="msgDatabaseUploadCopyComplete">
+			<Text LangIsoCode="eng">Database was copied correctly</Text>
+			<Text LangIsoCode="spa">La base de datos se copió correctamente</Text>
+			<Text LangIsoCode="por">Banco de dados foi copiado corretamente</Text>
+			<Text LangIsoCode="fre">Base de données a été copié correctement</Text>
+		</Message>
+		<Message id="msgDatabaseUploadReplaceComplete">
+			<Text LangIsoCode="eng">Database was updated correctly</Text>
+			<Text LangIsoCode="spa">La base de datos se actualizó correctamente</Text>
+			<Text LangIsoCode="por">Banco de dados foi atualizado corretamente</Text>
+			<Text LangIsoCode="fre">Base de données a été correctement mis à jour</Text>
 		</Message>
 		<Message id="msgDatabaseUploadConfirmStart">
 			<Text LangIsoCode="eng">You are about to replace the content of the following database</Text>
