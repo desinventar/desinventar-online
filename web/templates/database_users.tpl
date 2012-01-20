@@ -7,18 +7,18 @@
 			<table>
 				<tr>
 					<td>
-						<span title="{-#msgDatabaseUsers_RegionActiveTooltip#-}">
+						<span>
 							<input class="RegionActive" type="checkbox" />
-							<span class="RegionActiveText">&nbsp;&nbsp;{-#msgDatabaseUsers_RegionActive#-}</span>
+							<span class="RegionActiveText">&nbsp;{-#msgDatabaseUsers_RegionActiveTooltip#-}</span>
 							</span>
 							<br />
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<span title="{-#msgDatabaseUsers_RegionPublicTooltip#-}">
+						<span>
 							<input class="RegionPublic" type="checkbox" />
-							<span class="RegionPublicText">&nbsp;&nbsp;{-#msgDatabaseUsers_RegionPublic#-}</span>
+							<span class="RegionPublicText">&nbsp;{-#msgDatabaseUsers_RegionPublicTooltip#-}</span>
 						</span>
 						<br />
 					</td>
