@@ -161,7 +161,7 @@ function doMainMenuHandler(item)
 		case 'mnuUserChangeLogin':
 			jQuery('body').trigger('cmdUserLoginShow');
 		break;
-		case 'mnuUserLogout':
+		case 'mnuFileLogout':
 			jQuery('body').trigger('cmdUserLogout');
 		break;
 		case 'mnuUserChangePasswd':
@@ -222,7 +222,7 @@ function doMainMenuHandler(item)
 		case 'mnuQueryResultPrint':
 			jQuery('#btnResultPrint').trigger('click');
 		break;
-		case 'mnuQueryRegionInfo':
+		case 'mnuFileInfo':
 			jQuery('.contentBlock').hide();
 			jQuery('#divQueryResults').show();
 			jQuery('#dcr').hide();
@@ -230,8 +230,8 @@ function doMainMenuHandler(item)
 			doGetRegionInfo(jQuery('#desinventarRegionId').val());
 			Ext.getCmp('westm').collapse();
 		break;
-		case 'mnuQuerySelectDatabase':
-		case 'mnuQuerySelectAnotherDatabase':
+		case 'mnuFileOpen':
+		case 'mnuFileOpenAnother':
 			// Show database list
 			hideQueryDesign();
 			jQuery('.contentBlock').hide();
@@ -250,25 +250,25 @@ function doMainMenuHandler(item)
 			jQuery('#divDatacardsImport').show();
 			updateList('divDatacardsImport', jQuery('#desinventarURL').val() + '/import.php', 'r=' + RegionId);
 		break;
-		case 'mnuDatabaseDownload':
+		case 'mnuFileDownload':
 			jQuery('.clsAdminDatabaseExport').hide();
 			Ext.getCmp('wndDatabaseExport').show();
 			doAdminDatabaseExportAction();
 		break;
-		case 'mnuDatabaseCopy':
+		case 'mnuFileCopy':
 			doDatabaseUploadShow('Copy');
 		break;
-		case 'mnuDatabaseReplace':
+		case 'mnuFileReplace':
 			doDatabaseUploadShow('Replace');
 		break;
-		case 'mnuDatabaseConfig':
+		case 'mnuFileSetup':
 			hideQueryDesign();
 			jQuery('.contentBlock').hide();
 			jQuery('.classDBConfig_tabs:first').click();
 			jQuery('#divDatabaseConfiguration').show();
 			jQuery('#tabDatabaseConfiguration').show();
 		break;
-		case 'mnuDatabaseCreate':
+		case 'mnuFileCreate':
 			doDatabaseCreateShow();
 		break;
 		case 'mnuUserAccountManagement':
@@ -313,14 +313,36 @@ function hideQueryDesign()
 
 function doMainMenuCreate()
 {
+	var mnuFileUpload = new Ext.menu.Menu({
+		id: 'mnuFileUpload', items: [
+			{id:'mnuFileCopy'   , text: jQuery('span#mnuFileCopy').text()   , handler: doMainMenuHandler },
+			{id:'mnuFileReplace', text: jQuery('span#mnuFileReplace').text(), handler: doMainMenuHandler }
+		]
+	});
+
 	// Main menu
-	var mnuUserLanguage = new Ext.menu.Menu({
-		id: 'mnuUserLanguage',
+	var mnuFileLanguage = new Ext.menu.Menu({
+		id: 'mnuFileLanguage',
 		items: [
-			{id:'mnuUserLanguageEnglish'   , text: jQuery('span#mnuUserLanguageEnglish').text()   , handler: doMainMenuHandler },
-			{id:'mnuUserLanguageSpanish'   , text: jQuery('span#mnuUserLanguageSpanish').text()   , handler: doMainMenuHandler },
-			{id:'mnuUserLanguagePortuguese', text: jQuery('span#mnuUserLanguagePortuguese').text(), handler: doMainMenuHandler },
-			{id:'mnuUserLanguageFrench'    , text: jQuery('span#mnuUserLanguageFrench').text()    , handler: doMainMenuHandler }
+			{id:'mnuFileLanguageEnglish'   , text: jQuery('span#mnuFileLanguageEnglish').text()   , handler: doMainMenuHandler },
+			{id:'mnuFileLanguageSpanish'   , text: jQuery('span#mnuFileLanguageSpanish').text()   , handler: doMainMenuHandler },
+			{id:'mnuFileLanguagePortuguese', text: jQuery('span#mnuFileLanguagePortuguese').text(), handler: doMainMenuHandler },
+			{id:'mnuFileLanguageFrench'    , text: jQuery('span#mnuFileLanguageFrench').text()    , handler: doMainMenuHandler }
+		]
+	});
+	
+	var mnuFile = new Ext.menu.Menu({
+		id: 'mnuFile',
+		items: [
+			{id:'mnuFileCreate'     , text: jQuery('span#mnuFileCreate').text()     , handler: doMainMenuHandler },
+			{id:'mnuFileOpen'       , text: jQuery('span#mnuFileOpen').text()       , handler: doMainMenuHandler },
+			{id:'mnuFileOpenAnother', text: jQuery('span#mnuFileOpenAnother').text(), handler: doMainMenuHandler },
+			{id:'mnuFileDownload'   , text: jQuery('span#mnuFileDownload').text()   , handler: doMainMenuHandler },
+			{id:'mnuFileUpload'     , text: jQuery('span#mnuFileUpload').text()     , menu: mnuFileUpload        },
+			{id:'mnuFileInfo'       , text: jQuery('span#mnuFileInfo').text()       , handler: doMainMenuHandler },
+			{id:'mnuFileSetup'      , text: jQuery('span#mnuFileSetup').text()      , handler: doMainMenuHandler },
+			{id:'mnuFileLanguage'   , text: jQuery('span#mnuFileLanguage').text()   , menu: mnuFileLanguage      },
+			{id:'mnuFileLogout'     , text: jQuery('span#mnuFileLogout').text()     , handler: doMainMenuHandler }
 		]
 	});
 	
@@ -330,9 +352,7 @@ function doMainMenuCreate()
 			{id: 'mnuUserLogin'            , text: jQuery('span#mnuUserLogin').text()            , handler: doMainMenuHandler }, 
 			{id: 'mnuUserChangeLogin'      , text: jQuery('span#mnuUserChangeLogin').text()      , handler: doMainMenuHandler },
 			{id: 'mnuUserChangePasswd'     , text: jQuery('span#mnuUserChangePasswd').text()     , handler: doMainMenuHandler },
-			{id: 'mnuUserAccountManagement', text: jQuery('span#mnuUserAccountManagement').text(), handler: doMainMenuHandler },
-			{id: 'mnuUserLanguage'         , text: jQuery('span#mnuUserLanguage').text()         , menu: mnuUserLanguage      },
-			{id: 'mnuUserLogout'           , text: jQuery('span#mnuUserLogout').text()           , handler: doMainMenuHandler }
+			{id: 'mnuUserAccountManagement', text: jQuery('span#mnuUserAccountManagement').text(), handler: doMainMenuHandler }
 		]
 	});
 
@@ -351,14 +371,11 @@ function doMainMenuCreate()
 			{id:'mnuQueryViewMap'              , text: jQuery('span#mnuQueryViewMap').text()              , handler: doMainMenuHandler },
 			{id:'mnuQueryViewGraph'            , text: jQuery('span#mnuQueryViewGraph').text()            , handler: doMainMenuHandler },
 			{id:'mnuQueryViewStd'              , text: jQuery('span#mnuQueryViewStd').text()              , handler: doMainMenuHandler },
-			{id:'mnuQueryOption'               , text: jQuery('span#mnuQueryOption').text()               , menu: mnuQueryOption },
+			{id:'mnuQueryOption'               , text: jQuery('span#mnuQueryOption').text()               , menu: mnuQueryOption       },
 			{id:'mnuQueryResultSave'           , text: jQuery('span#mnuQueryResultSave').text()           , handler: doMainMenuHandler },
 			{id:'mnuQueryResultSaveXLS'        , text: jQuery('span#mnuQueryResultSaveXLS').text()        , handler: doMainMenuHandler },
 			{id:'mnuQueryResultSaveCSV'        , text: jQuery('span#mnuQueryResultSaveCSV').text()        , handler: doMainMenuHandler },
-			{id:'mnuQueryResultPrint'          , text: jQuery('span#mnuQueryResultPrint').text()          , handler: doMainMenuHandler },
-			{id:'mnuQueryRegionInfo'           , text: jQuery('span#mnuQueryRegionInfo').text()           , handler: doMainMenuHandler },
-			{id:'mnuQuerySelectDatabase'       , text: jQuery('span#mnuQuerySelectDatabase').text()       , handler: doMainMenuHandler },
-			{id:'mnuQuerySelectAnotherDatabase', text: jQuery('span#mnuQuerySelectAnotherDatabase').text(), handler: doMainMenuHandler }
+			{id:'mnuQueryResultPrint'          , text: jQuery('span#mnuQueryResultPrint').text()          , handler: doMainMenuHandler }
 		]
 	});
 
@@ -369,22 +386,6 @@ function doMainMenuCreate()
 		]
 	});
 
-	var mnuDatabaseUpload = new Ext.menu.Menu({
-		id: 'mnuDatabaseUpload', items: [
-			{id:'mnuDatabaseCopy'   , text: jQuery('span#mnuDatabaseCopy').text()   , handler: doMainMenuHandler },
-			{id:'mnuDatabaseReplace', text: jQuery('span#mnuDatabaseReplace').text(), handler: doMainMenuHandler }
-		]
-	});
-	
-	var mnuDatabase = new Ext.menu.Menu({
-		id: 'mnuDatabase',
-		items: [
-			{id:'mnuDatabaseDownload', text: jQuery('span#mnuDatabaseDownload').text(), handler: doMainMenuHandler },
-			{id:'mnuDatabaseUpload'  , text: jQuery('span#mnuDatabaseUpload').text()  , menu: mnuDatabaseUpload    },
-			{id:'mnuDatabaseCreate'  , text: jQuery('span#mnuDatabaseCreate').text()  , handler: doMainMenuHandler },
-			{id:'mnuDatabaseConfig'  , text: jQuery('span#mnuDatabaseConfig').text()  , handler: doMainMenuHandler }
-		]
-	});
 
 	var mnuHelp = new Ext.menu.Menu({
 		id   : 'mnuHelp',
@@ -398,12 +399,12 @@ function doMainMenuCreate()
 	});
 	
 	var tb = new Ext.Toolbar({renderTo: 'toolbar', items : [] });
-	tb.add({ id:'mnuUser'            , text: jQuery('span#mnuUser').text()    , menu: mnuUser     });
-	tb.add({ id:'mnuQuery'           , text: jQuery('span#mnuQuery').text()   , menu: mnuQuery    });
-	tb.add({ id:'mnuDatacard'        , text: jQuery('span#mnuDatacard').text(), menu: mnuDatacard });
-	tb.add({ id:'mnuDatabase'        , text: jQuery('span#mnuDatabase').text(), menu: mnuDatabase });
-	tb.add({ id:'mnuHelp'            , text: jQuery('span#mnuHelp').text()    , menu: mnuHelp     });
-	tb.add('->',{id: 'mnuWaiting'    , text: '<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />', hidden: true });
+	tb.add({ id:'mnuFile'     , text: jQuery('span#mnuFile').text()    , menu: mnuFile     });
+	tb.add({ id:'mnuUser'     , text: jQuery('span#mnuUser').text()    , menu: mnuUser     });
+	tb.add({ id:'mnuQuery'    , text: jQuery('span#mnuQuery').text()   , menu: mnuQuery    });
+	tb.add({ id:'mnuDatacard' , text: jQuery('span#mnuDatacard').text(), menu: mnuDatacard });
+	tb.add({ id:'mnuHelp'     , text: jQuery('span#mnuHelp').text()    , menu: mnuHelp     });
+	tb.add('->',{id: 'mnuWaiting'         , text: '<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />', hidden: true });
 	tb.add('->',{id: 'mnuRegionLabel'     , text: '' });
 	tb.add('->',{id: 'mnuHelpWebsiteLabel', text: '<img src="' + jQuery('#desinventarURL').val() + '/images/di_logo4.png" alt="" />' });
 
@@ -511,8 +512,8 @@ function doMainMenuUpdate()
 		Ext.getCmp('mnuUserAccountManagement').enable();
 	}
 
-	Ext.getCmp('mnuDatabaseReplace').hide();
-	Ext.getCmp('mnuDatabaseConfig').hide();
+	Ext.getCmp('mnuFileReplace').hide();
+	Ext.getCmp('mnuFileSetup').hide();
 
 	Ext.getCmp('mnuDatacardView').show();
 	Ext.getCmp('mnuDatacardEdit').hide();
@@ -520,13 +521,13 @@ function doMainMenuUpdate()
 	// Show some menu items when a Region is Selected
 	if (jQuery('#desinventarRegionId').val() == '')
 	{
-		Ext.getCmp('mnuQuerySelectDatabase').show();
-		Ext.getCmp('mnuQuerySelectAnotherDatabase').hide();
+		Ext.getCmp('mnuFileOpen').show();
+		Ext.getCmp('mnuFileOpenAnother').hide();
 	}
 	else
 	{
-		Ext.getCmp('mnuQuerySelectDatabase').hide();
-		Ext.getCmp('mnuQuerySelectAnotherDatabase').show();
+		Ext.getCmp('mnuFileOpen').hide();
+		Ext.getCmp('mnuFileOpenAnother').show();
 		Ext.getCmp('mnuRegionLabel').setText('[' + jQuery('#desinventarRegionLabel').val() + ']');
 
 		if (UserRoleValue > 0)
@@ -545,14 +546,14 @@ function doMainMenuUpdate()
 			Ext.getCmp('mnuDatacardEdit').show();
 			Ext.getCmp('mnuDatacardEdit').enable();
 			// Enable other functions
-			Ext.getCmp('mnuDatabaseDownload').enable();
+			Ext.getCmp('mnuFileDownload').enable();
 
 			if (UserRoleValue >= 4)
 			{
-				Ext.getCmp('mnuDatabaseReplace').show();
-				Ext.getCmp('mnuDatabaseReplace').enable();
-				Ext.getCmp('mnuDatabaseConfig').show();
-				Ext.getCmp('mnuDatabaseConfig').enable();
+				Ext.getCmp('mnuFileReplace').show();
+				Ext.getCmp('mnuFileReplace').enable();
+				Ext.getCmp('mnuFileSetup').show();
+				Ext.getCmp('mnuFileSetup').enable();
 			}
 		}		
 	}

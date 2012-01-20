@@ -31,42 +31,6 @@
 			<Text LangIsoCode="por">Criar/editar contas de usuário</Text>
 			<Text LangIsoCode="fre">Créer/modifier des comptes utilisateur</Text>
 		</Message>
-		<Message id="mnuUserLanguage">
-			<Text LangIsoCode="eng">Language</Text>
-			<Text LangIsoCode="spa">Idioma</Text>
-			<Text LangIsoCode="por">Idioma</Text>
-			<Text LangIsoCode="fre">Langue</Text>
-		</Message>
-		<Message id="mnuUserLanguageEnglish">
-			<Text LangIsoCode="eng">English</Text>
-			<Text LangIsoCode="spa">Inglés/English</Text>
-			<Text LangIsoCode="por">Inglês/English</Text>
-			<Text LangIsoCode="fre">Anglaise/English</Text>
-		</Message>
-		<Message id="mnuUserLanguageSpanish">
-			<Text LangIsoCode="eng">Spanish/Español</Text>
-			<Text LangIsoCode="spa">Español</Text>
-			<Text LangIsoCode="por">Espanhol/Español</Text>
-			<Text LangIsoCode="fre">Espagnole/Español</Text>
-		</Message>
-		<Message id="mnuUserLanguagePortuguese">
-			<Text LangIsoCode="eng">Portuguese/Português</Text>
-			<Text LangIsoCode="spa">Portugués/Português</Text>
-			<Text LangIsoCode="por">Português</Text>
-			<Text LangIsoCode="fre">Portugaise/Português</Text>
-		</Message>
-		<Message id="mnuUserLanguageFrench">
-			<Text LangIsoCode="eng">French/Française</Text>
-			<Text LangIsoCode="spa">Francés/Française</Text>
-			<Text LangIsoCode="por">Francês/Française</Text>
-			<Text LangIsoCode="fre">Française</Text>
-		</Message>
-		<Message id="mnuUserLogout">
-			<Text LangIsoCode="eng">Close session</Text>
-			<Text LangIsoCode="spa">Cerrar sesión</Text>
-			<Text LangIsoCode="por">Fechar sessão</Text>
-			<Text LangIsoCode="fre">Fermer la session</Text>
-		</Message>
 		<Message id="mnuUserQuit">
 			<Text LangIsoCode="eng">Quit</Text>
 			<Text LangIsoCode="spa">Salir</Text>
@@ -157,24 +121,6 @@
 			<Text LangIsoCode="por">Imprimir</Text>
 			<Text LangIsoCode="fre">Imprimer</Text>
 		</Message>
-		<Message id="mnuQueryRegionInfo">
-			<Text LangIsoCode="eng">Database information</Text>
-			<Text LangIsoCode="spa">Información base de datos</Text>
-			<Text LangIsoCode="por">Informação de banco</Text>
-			<Text LangIsoCode="fre">Information base de données</Text>
-		</Message>
-		<Message id="mnuQuerySelectDatabase">
-			<Text LangIsoCode="eng">Select database</Text>
-			<Text LangIsoCode="spa">Seleccionar base de datos</Text>
-			<Text LangIsoCode="por">Selecione banco de dados</Text>
-			<Text LangIsoCode="fre">Sélectionnez base de données</Text>
-		</Message>
-		<Message id="mnuQuerySelectAnotherDatabase">
-			<Text LangIsoCode="eng">Select another database</Text>
-			<Text LangIsoCode="spa">Seleccionar otra base de datos</Text>
-			<Text LangIsoCode="por">Escolha outro banco de dados</Text>
-			<Text LangIsoCode="fre">Choisir autre base de données</Text>
-		</Message>
 		<Message id="mnuDatacard">
 			<Text LangIsoCode="eng">Data cards</Text>
 			<Text LangIsoCode="spa">Fichas</Text>
@@ -199,47 +145,101 @@
 			<Text LangIsoCode="por">Importação de formulários</Text>
 			<Text LangIsoCode="fre">Importation de carte de données</Text>
 		</Message>
-		<Message id="mnuDatabase">
-			<Text LangIsoCode="eng">Database</Text>
-			<Text LangIsoCode="spa">Base de datos</Text>
-			<Text LangIsoCode="por">Banco de dados</Text>
-			<Text LangIsoCode="fre">Base de données</Text>
+		<Message id="mnuFile">
+			<Text LangIsoCode="eng">File</Text>
+			<Text LangIsoCode="spa">Archivo</Text>
+			<Text LangIsoCode="por">Arquivo</Text>
+			<Text LangIsoCode="fre">Fichier</Text>
 		</Message>
-		<Message id="mnuDatabaseDownload">
+		<Message id="mnuFileCreate">
+			<Text LangIsoCode="eng">Create database</Text>
+			<Text LangIsoCode="spa">Crear base de datos</Text>
+			<Text LangIsoCode="por">Criar banco de dados</Text>
+			<Text LangIsoCode="fre">Créer base de données</Text>
+		</Message>
+		<Message id="mnuFileOpen">
+			<Text LangIsoCode="eng">Open database</Text>
+			<Text LangIsoCode="spa">Abrir base de datos</Text>
+			<Text LangIsoCode="por">Abrir banco de dados</Text>
+			<Text LangIsoCode="fre">Ouvrez base de données</Text>
+		</Message>
+		<Message id="mnuFileOpenAnother">
+			<Text LangIsoCode="eng">Select another database</Text>
+			<Text LangIsoCode="spa">Abrir otra base de datos</Text>
+			<Text LangIsoCode="por">Abrir outro banco de dados</Text>
+			<Text LangIsoCode="fre">Ouvrez une autre base de données</Text>
+		</Message>
+		<Message id="mnuFileDownload">
 			<Text LangIsoCode="eng">Download</Text>
 			<Text LangIsoCode="spa">Descargar</Text>
 			<Text LangIsoCode="por">Baixar</Text>
 			<Text LangIsoCode="fre">Télécharger</Text>
 		</Message>
-		<Message id="mnuDatabaseUpload">
+		<Message id="mnuFileUpload">
 			<Text LangIsoCode="eng">Upload</Text>
 			<Text LangIsoCode="spa">Cargar</Text>
 			<Text LangIsoCode="por">Carregar</Text>
 			<Text LangIsoCode="fre">Charger</Text>
 		</Message>
-		<Message id="mnuDatabaseCopy">
+		<Message id="mnuFileCopy">
 			<Text LangIsoCode="eng">New</Text>
 			<Text LangIsoCode="spa">Nueva</Text>
 			<Text LangIsoCode="por">Nova</Text>
 			<Text LangIsoCode="fre">Nouvelle</Text>
 		</Message>
-		<Message id="mnuDatabaseReplace">
+		<Message id="mnuFileReplace">
 			<Text LangIsoCode="eng">Replace</Text>
 			<Text LangIsoCode="spa">Reemplazar</Text>
 			<Text LangIsoCode="por">Substituir</Text>
 			<Text LangIsoCode="fre">Remplacer</Text>
 		</Message>
-		<Message id="mnuDatabaseCreate">
-			<Text LangIsoCode="eng">Create</Text>
-			<Text LangIsoCode="spa">Crear</Text>
-			<Text LangIsoCode="por">Criar</Text>
-			<Text LangIsoCode="fre">Créer</Text>
+		<Message id="mnuFileInfo">
+			<Text LangIsoCode="eng">Database description</Text>
+			<Text LangIsoCode="spa">Descripción de la base de datos</Text>
+			<Text LangIsoCode="por">Descrição do banco de dados</Text>
+			<Text LangIsoCode="fre">Description de base de données</Text>
 		</Message>
-		<Message id="mnuDatabaseConfig">
+		<Message id="mnuFileSetup">
 			<Text LangIsoCode="eng">Setup</Text>
 			<Text LangIsoCode="spa">Configurar</Text>
 			<Text LangIsoCode="por">Configure</Text>
 			<Text LangIsoCode="fre">Configurer</Text>
+		</Message>
+		<Message id="mnuFileLanguage">
+			<Text LangIsoCode="eng">Language</Text>
+			<Text LangIsoCode="spa">Idioma</Text>
+			<Text LangIsoCode="por">Idioma</Text>
+			<Text LangIsoCode="fre">Langue</Text>
+		</Message>
+		<Message id="mnuFileLanguageEnglish">
+			<Text LangIsoCode="eng">English</Text>
+			<Text LangIsoCode="spa">Inglés/English</Text>
+			<Text LangIsoCode="por">Inglês/English</Text>
+			<Text LangIsoCode="fre">Anglaise/English</Text>
+		</Message>
+		<Message id="mnuFileLanguageSpanish">
+			<Text LangIsoCode="eng">Spanish/Español</Text>
+			<Text LangIsoCode="spa">Español</Text>
+			<Text LangIsoCode="por">Espanhol/Español</Text>
+			<Text LangIsoCode="fre">Espagnole/Español</Text>
+		</Message>
+		<Message id="mnuFileLanguagePortuguese">
+			<Text LangIsoCode="eng">Portuguese/Português</Text>
+			<Text LangIsoCode="spa">Portugués/Português</Text>
+			<Text LangIsoCode="por">Português</Text>
+			<Text LangIsoCode="fre">Portugaise/Português</Text>
+		</Message>
+		<Message id="mnuFileLanguageFrench">
+			<Text LangIsoCode="eng">French/Française</Text>
+			<Text LangIsoCode="spa">Francés/Française</Text>
+			<Text LangIsoCode="por">Francês/Française</Text>
+			<Text LangIsoCode="fre">Française</Text>
+		</Message>
+		<Message id="mnuFileLogout">
+			<Text LangIsoCode="eng">Close session</Text>
+			<Text LangIsoCode="spa">Cerrar sesión</Text>
+			<Text LangIsoCode="por">Fechar sessão</Text>
+			<Text LangIsoCode="fre">Fermer la session</Text>
 		</Message>
 		<Message id="mnuHelp">
 			<Text LangIsoCode="eng">Help</Text>
