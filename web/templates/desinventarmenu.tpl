@@ -3,13 +3,11 @@
 	<span id="mnuFile"                           class="menu">{-#mnuFile#-}</span>
 		<span id="mnuFileCreate"                 class="item clsMenuWithUser"  >{-#mnuFileCreate#-}</span>
 		<span id="mnuFileOpen"                   class="item clsMenuAlwaysOn"  >{-#mnuFileOpen#-}</span>
-		<span id="mnuFileOpenAnother"            class="item clsMenuAlwaysOn"  >{-#mnuFileOpenAnother#-}</span>
 		<span id="mnuFileDownload"               class="item"                  >{-#mnuFileDownload#-}</span>
 		<span id="mnuFileUpload"                 class="menu clsMenuAlwaysOn"  >{-#mnuFileUpload#-}</span>
 			<span id="mnuFileCopy"               class="item clsMenuWithUser"  >{-#mnuFileCopy#-}</span>
 			<span id="mnuFileReplace"            class="item"                  >{-#mnuFileReplace#-}</span>
 		<span id="mnuFileInfo"                   class="item clsMenuWithRegion">{-#mnuFileInfo#-}</span>
-		<span id="mnuFileSetup"                  class="item"                  >{-#mnuFileSetup#-}</span>
 		<span id="mnuFileLanguage"               class="menu clsMenuAlwaysOn"  >{-#mnuFileLanguage#-}</span>
 			<span id="mnuFileLanguageEnglish"    class="item clsMenuAlwaysOn"  >{-#mnuFileLanguageEnglish#-}</span>
 			<span id="mnuFileLanguageSpanish"    class="item clsMenuAlwaysOn"  >{-#mnuFileLanguageSpanish#-}</span>
@@ -39,6 +37,7 @@
 	<span id="mnuDatacard" class="menu">{-#mnuDatacard#-}</span>
 		<span id="mnuDatacardView"               class="item">{-#mnuDatacardView#-}</span>
 		<span id="mnuDatacardEdit"               class="item">{-#mnuDatacardEdit#-}</span>
+		<span id="mnuDatacardSetup"              class="item">{-#mnuDatacardSetup#-}</span>
 	<span id="mnuHelp"                           class="menu">{-#mnuHelp#-}</span>
 		<span id="mnuHelpWebsite"                class="item clsMenuAlwaysOn">{-#mnuHelpWebsite#-}</span>
 		<span id="mnuHelpMethodology"            class="item clsMenuAlwaysOn">{-#mnuHelpMethodology#-}</span>
