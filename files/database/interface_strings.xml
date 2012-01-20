@@ -2050,10 +2050,10 @@
 			<Text LangIsoCode="fre">Effets additionnels</Text>
 		</Message>
 		<Message id="msgDBConfig_RolesAndDiffusion">
-			<Text LangIsoCode="eng">Roles and diffusion</Text>
-			<Text LangIsoCode="spa">Roles y difusión</Text>
-			<Text LangIsoCode="por">Roles e difusão</Text>
-			<Text LangIsoCode="fre">Rôles et diffusion</Text>
+			<Text LangIsoCode="eng">Diffusion and roles</Text>
+			<Text LangIsoCode="spa">Difusión y roles</Text>
+			<Text LangIsoCode="por">Difusão e roles</Text>
+			<Text LangIsoCode="fre">Diffusion et rôles</Text>
 		</Message>
 		<Message id="tmapnotavail">
 			<Text LangIsoCode="eng">Map unavailable</Text>
@@ -3262,16 +3262,16 @@
 	</Group>
 	<Group name="grpDatabaseUsers">
 		<Message id="msgDatabaseUsers_TitleOptions">
-			<Text LangIsoCode="eng">Diffusion</Text>
-			<Text LangIsoCode="spa">Difusión</Text>
-			<Text LangIsoCode="por">Difusão</Text>
-			<Text LangIsoCode="fre">Diffusion</Text>
+			<Text LangIsoCode="eng">Diffusion of database</Text>
+			<Text LangIsoCode="spa">Difusión de la base de datos</Text>
+			<Text LangIsoCode="por">Difusão de banco de dados</Text>
+			<Text LangIsoCode="fre">Diffusion de la base de données</Text>
 		</Message>
 		<Message id="msgDatabaseUsers_TitleRoles">
-			<Text LangIsoCode="eng">Roles</Text>
-			<Text LangIsoCode="spa">Roles</Text>
-			<Text LangIsoCode="por">Roles</Text>
-			<Text LangIsoCode="fre">Rôles</Text>
+			<Text LangIsoCode="eng">User roles</Text>
+			<Text LangIsoCode="spa">Roles de usuario</Text>
+			<Text LangIsoCode="por">Papéis de usuário</Text>
+			<Text LangIsoCode="fre">Les rôles des utilisateurs</Text>
 		</Message>
 		<Message id="msgDatabaseUsers_RegionActive">
 			<Text LangIsoCode="eng">Active</Text>
