@@ -3298,10 +3298,10 @@
 			<Text LangIsoCode="fre">Publique</Text>
 		</Message>
 		<Message id="msgDatabaseUsers_RegionPublicTooltip">
-			<Text LangIsoCode="eng">The database can be queried in DesInventar Online</Text>
-			<Text LangIsoCode="spa">La base de datos podrá ser consultada en DesInventar Online</Text>
-			<Text LangIsoCode="por">O banco de dados pode ser consultado em DesInventar Online</Text>
-			<Text LangIsoCode="fre">La base de données peut être interrogée dans DesInventar Online</Text>
+			<Text LangIsoCode="eng">Check this option to allow public queries to the database</Text>
+			<Text LangIsoCode="spa">Marque esta opcion para habilitar la consulta pública de la base</Text>
+			<Text LangIsoCode="por">Marque esta opção para permitir consultas públicas ao banco de dados</Text>
+			<Text LangIsoCode="fre">Cochez cette option pour autoriser les requêtes du public à la base</Text>
 		</Message>
 		<Message id="msgDatabaseUsers_RegionPublicTooltipOld">
 			<Text LangIsoCode="eng">Uncheck the option to prevent anonymous users from accessing the database</Text>
