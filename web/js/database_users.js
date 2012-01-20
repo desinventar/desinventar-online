@@ -57,7 +57,7 @@ function onReadyDatabaseUsers()
 		);
 	});
 		
-	jQuery('#btnDatabaseUsers_Edit').click(function() {
+	jQuery('#btnDatabaseUsers_Add').click(function() {
 		doDatabaseUsersReset();
 		jQuery('#divDatabaseUsers_Edit').show();
 	});
