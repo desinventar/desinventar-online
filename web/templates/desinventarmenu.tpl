@@ -27,14 +27,15 @@
 		<span id="mnuQueryViewMap"               class="item clsMenuWithRegion">{-#mnuQueryViewMap#-}</span>
 		<span id="mnuQueryViewGraph"             class="item clsMenuWithRegion">{-#mnuQueryViewGraph#-}</span>
 		<span id="mnuQueryViewStd"               class="item clsMenuWithRegion">{-#mnuQueryViewStd#-}</span>
+		<span id="mnuQueryResultSave"            class="item">{-#mnuQueryResultSave#-}</span>
+		<span id="mnuQueryResultSaveAs"            class="item">{-#mnuQueryResultSaveAs#-}</span>
+			<span id="mnuQueryResultSaveAsXLS"         class="item">{-#mnuQueryResultSaveAsXLS#-}</span>
+			<span id="mnuQueryResultSaveAsCSV"         class="item">{-#mnuQueryResultSaveAsCSV#-}</span>
+		<span id="mnuQueryResultPrint"           class="item">{-#mnuQueryResultPrint#-}</span>
 		<span id="mnuQueryOption"                class="menu clsMenuWithRegion">{-#mnuQueryOption#-}</span>
 			<span id="mnuQueryOptionNew"         class="item clsMenuWithRegion">{-#mnuQueryOptionNew#-}</span>
 			<span id="mnuQueryOptionSave"        class="item clsMenuWithRegion">{-#mnuQueryOptionSave#-}</span>
 			<span id="mnuQueryOptionOpen"        class="item clsMenuWithRegion">{-#mnuQueryOptionOpen#-}</span>
-		<span id="mnuQueryResultSave"            class="item">{-#mnuQueryResultSave#-}</span>
-		<span id="mnuQueryResultSaveXLS"         class="item">{-#mnuQueryResultSaveXLS#-}</span>
-		<span id="mnuQueryResultSaveCSV"         class="item">{-#mnuQueryResultSaveCSV#-}</span>
-		<span id="mnuQueryResultPrint"           class="item">{-#mnuQueryResultPrint#-}</span>
 	<span id="mnuDatacard" class="menu">{-#mnuDatacard#-}</span>
 		<span id="mnuDatacardView"               class="item">{-#mnuDatacardView#-}</span>
 		<span id="mnuDatacardEdit"               class="item">{-#mnuDatacardEdit#-}</span>
