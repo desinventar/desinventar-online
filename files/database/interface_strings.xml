@@ -193,13 +193,19 @@
 			<Text LangIsoCode="por">Salvar</Text>
 			<Text LangIsoCode="fre">Enregistrer</Text>
 		</Message>
-		<Message id="mnuQueryResultSaveXLS">
+		<Message id="mnuQueryResultSaveAs">
+			<Text LangIsoCode="eng">Save as</Text>
+			<Text LangIsoCode="spa">Guardar como</Text>
+			<Text LangIsoCode="por">Salvar como</Text>
+			<Text LangIsoCode="fre">Enregistrer en</Text>
+		</Message>
+		<Message id="mnuQueryResultSaveAsXLS">
 			<Text LangIsoCode="eng">Save as Excel file</Text>
 			<Text LangIsoCode="spa">Guardar como archivo de Excel</Text>
 			<Text LangIsoCode="por">Salvar como arquivo Excel</Text>
 			<Text LangIsoCode="fre">Enregistrer en tant que fichier Excel</Text>
 		</Message>
-		<Message id="mnuQueryResultSaveCSV">
+		<Message id="mnuQueryResultSaveAsCSV">
 			<Text LangIsoCode="eng">Save as CSV file</Text>
 			<Text LangIsoCode="spa">Guardar como archivo CSV</Text>
 			<Text LangIsoCode="por">Salvar como arquivo CSV</Text>

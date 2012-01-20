@@ -213,10 +213,10 @@ function doMainMenuHandler(item)
 		case 'mnuQueryResultSave':
 			jQuery('#btnResultSave').trigger('click');
 		break;
-		case 'mnuQueryResultSaveXLS':
+		case 'mnuQueryResultSaveAsXLS':
 			jQuery('#btnResultSaveXLS').trigger('click');
 		break;
-		case 'mnuQueryResultSaveCSV':
+		case 'mnuQueryResultSaveAsCSV':
 			jQuery('#btnResultSaveCSV').trigger('click');
 		break;
 		case 'mnuQueryResultPrint':
@@ -364,6 +364,13 @@ function doMainMenuCreate()
 		]
 	});
 
+	var mnuQueryResultSaveAs = new Ext.menu.Menu({
+		id: 'mnuQueryResultSaveAs', items: [
+			{id:'mnuQueryResultSaveAsXLS', text: jQuery('span#mnuQueryResultSaveAsXLS').text(), handler: doMainMenuHandler },
+			{id:'mnuQueryResultSaveAsCSV', text: jQuery('span#mnuQueryResultSaveAsCSV').text(), handler: doMainMenuHandler }
+		]
+	});
+
 	var mnuQuery = new Ext.menu.Menu({
 		id: 'mnuQuery', items: [
 			{id:'mnuQueryViewDesign'           , text: jQuery('span#mnuQueryViewDesign').text()           , handler: doMainMenuHandler },
@@ -371,11 +378,10 @@ function doMainMenuCreate()
 			{id:'mnuQueryViewMap'              , text: jQuery('span#mnuQueryViewMap').text()              , handler: doMainMenuHandler },
 			{id:'mnuQueryViewGraph'            , text: jQuery('span#mnuQueryViewGraph').text()            , handler: doMainMenuHandler },
 			{id:'mnuQueryViewStd'              , text: jQuery('span#mnuQueryViewStd').text()              , handler: doMainMenuHandler },
-			{id:'mnuQueryOption'               , text: jQuery('span#mnuQueryOption').text()               , menu: mnuQueryOption       },
 			{id:'mnuQueryResultSave'           , text: jQuery('span#mnuQueryResultSave').text()           , handler: doMainMenuHandler },
-			{id:'mnuQueryResultSaveXLS'        , text: jQuery('span#mnuQueryResultSaveXLS').text()        , handler: doMainMenuHandler },
-			{id:'mnuQueryResultSaveCSV'        , text: jQuery('span#mnuQueryResultSaveCSV').text()        , handler: doMainMenuHandler },
-			{id:'mnuQueryResultPrint'          , text: jQuery('span#mnuQueryResultPrint').text()          , handler: doMainMenuHandler }
+			{id:'mnuQueryResultSaveAs'         , text: jQuery('span#mnuQueryResultSaveAs').text()         , menu: mnuQueryResultSaveAs },
+			{id:'mnuQueryResultPrint'          , text: jQuery('span#mnuQueryResultPrint').text()          , handler: doMainMenuHandler },
+			{id:'mnuQueryOption'               , text: jQuery('span#mnuQueryOption').text()               , menu: mnuQueryOption       }
 		]
 	});
 
@@ -391,9 +397,9 @@ function doMainMenuCreate()
 		id   : 'mnuHelp',
 		style: { overflow: 'visible' },
 		items: [
-			{id:'mnuHelpWebsite'       , text: jQuery('span#mnuHelpWebsite').text()       , handler: doMainMenuHandler },
-			{id:'mnuHelpMethodology'   , text: jQuery('span#mnuHelpMethodology').text()   , handler: doMainMenuHandler },
 			{id:'mnuHelpDocumentation' , text: jQuery('span#mnuHelpDocumentation').text() , handler: doMainMenuHandler },
+			{id:'mnuHelpMethodology'   , text: jQuery('span#mnuHelpMethodology').text()   , handler: doMainMenuHandler },
+			{id:'mnuHelpWebsite'       , text: jQuery('span#mnuHelpWebsite').text()       , handler: doMainMenuHandler },
 			{id:'mnuHelpAbout'         , text: jQuery('span#mnuHelpAbout').text()         , handler: doMainMenuHandler }
 		]
 	});
@@ -423,25 +429,29 @@ function doMainMenuCreate()
 		if (jQuery('#DCRes').val() == 'D' || jQuery('#DCRes').val() == 'S')
 		{
 			Ext.getCmp('mnuQueryResultSave').hide();
-			Ext.getCmp('mnuQueryResultSaveXLS').show();
-			Ext.getCmp('mnuQueryResultSaveXLS').enable();
-			Ext.getCmp('mnuQueryResultSaveCSV').show();
-			Ext.getCmp('mnuQueryResultSaveCSV').enable();
+			Ext.getCmp('mnuQueryResultSaveAs').show();
+			Ext.getCmp('mnuQueryResultSaveAs').enable();
+			Ext.getCmp('mnuQueryResultSaveAsXLS').show();
+			Ext.getCmp('mnuQueryResultSaveAsXLS').enable();
+			Ext.getCmp('mnuQueryResultSaveAsCSV').show();
+			Ext.getCmp('mnuQueryResultSaveAsCSV').enable();
 		}
 		else
 		{
 			Ext.getCmp('mnuQueryResultSave').show();
 			Ext.getCmp('mnuQueryResultSave').enable();
-			Ext.getCmp('mnuQueryResultSaveXLS').hide();
-			Ext.getCmp('mnuQueryResultSaveCSV').hide();
+			Ext.getCmp('mnuQueryResultSaveAs').hide();			
+			Ext.getCmp('mnuQueryResultSaveAsXLS').hide();
+			Ext.getCmp('mnuQueryResultSaveAsCSV').hide();
 		}
 		Ext.getCmp('mnuQueryResultPrint').show();
 		Ext.getCmp('mnuQueryResultPrint').enable();
 	});
 	jQuery('body').on('cmdMainMenuResultButtonsDisable', function() {
 		Ext.getCmp('mnuQueryResultSave').hide();
-		Ext.getCmp('mnuQueryResultSaveXLS').hide();
-		Ext.getCmp('mnuQueryResultSaveCSV').hide();
+		Ext.getCmp('mnuQueryResultSaveAs').hide();
+		Ext.getCmp('mnuQueryResultSaveAsXLS').hide();
+		Ext.getCmp('mnuQueryResultSaveAsCSV').hide();
 		Ext.getCmp('mnuQueryResultPrint').hide();
 	});
 	jQuery('body').on('cmdMainWindowUpdate', function() {
