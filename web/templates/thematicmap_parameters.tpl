@@ -32,8 +32,10 @@
 												<b>{-#mranlegcol#-}</b>&nbsp; &nbsp; &nbsp; &nbsp;
 											</td>
 											<td valign="top">
-												<a class="button" onclick="addRowToTable();"><span>+</span></a>
-												<a class="button" onclick="removeRowFromTable();"><span>-</span></a>
+												<!--
+												<a class="button hidden" onclick="addRowToTable();"><span>+</span></a>
+												<a class="button hidden" onclick="removeRowFromTable();"><span>-</span></a>
+												-->
 											</td>
 										</tr>
 										<tr>
