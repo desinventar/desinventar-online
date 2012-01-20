@@ -56,7 +56,8 @@
 				);
 				*/
 				onReadyDatacards();
-				jQuery('body').trigger('cmdDatacardShow');				
+				jQuery('body').trigger('cmdDatacardShow');
+				setDICardFromId('MLI-DISASTER', '1099aec5-5cb7-4b82-a141-7b7bef45d202');
 			});
 		</script>
 	</head>
