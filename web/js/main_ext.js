@@ -167,16 +167,16 @@ function doMainMenuHandler(item)
 		case 'mnuUserChangePasswd':
 			jQuery('body').trigger('cmdUserAccountShow');
 		break;
-		case 'mnuUserLanguageEnglish':
+		case 'mnuFileLanguageEnglish':
 			doMainChangeLanguage('eng');
 		break;
-		case 'mnuUserLanguageSpanish':
+		case 'mnuFileLanguageSpanish':
 			doMainChangeLanguage('spa');
 		break;
-		case 'mnuUserLanguagePortuguese':
+		case 'mnuFileLanguagePortuguese':
 			doMainChangeLanguage('por');
 		break;
-		case 'mnuUserLanguageFrench':
+		case 'mnuFileLanguageFrench':
 			doMainChangeLanguage('fre');
 		break;
 		// DesConsultar Menu Options
