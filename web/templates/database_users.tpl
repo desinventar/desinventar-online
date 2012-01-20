@@ -72,7 +72,7 @@
 		</table>
 	</div>
 	<br />
-	<a class="button" id="btnDatabaseUsers_Edit"><span>{-#msgDatabaseUsers_Edit#-}</span></a>
+	<a class="button" id="btnDatabaseUsers_Add"><span>{-#msgDatabaseUsers_Add#-}</span></a>
 	<br />
 	<br />
 	<div id="divDatabaseUsers_Edit" style="display:none;" class="line">
