@@ -200,4 +200,14 @@ function padNumber($prmValue, $prmLength) {
 	return $value;
 }
 
+function getFont($prmFontName)
+{
+	$font = $prmFontName;
+	if (isset($_SERVER['WINDIR']))
+	{
+		$font = $_SERVER['WINDIR'] . '/fonts/' + $prmFontName;
+	}
+	return $font;
+}	
+
 </script>
