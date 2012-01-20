@@ -192,7 +192,8 @@ function rrmdir($dir) {
 	} //if
 }  //function
 
-function padNumber($prmValue, $prmLength) {
+function padNumber($prmValue, $prmLength)
+{
 	$value = $prmValue;
 	while(strlen($value) < $prmLength) {
 		$value = '0' . $value;
@@ -205,9 +206,9 @@ function getFont($prmFontName)
 	$font = $prmFontName;
 	if (isset($_SERVER['WINDIR']))
 	{
-		$font = $_SERVER['WINDIR'] . '/fonts/' + $prmFontName;
+		$font = $_SERVER['WINDIR'] . '/fonts/' . $prmFontName;
 	}
 	return $font;
-}	
+} //getFont()
 
 </script>

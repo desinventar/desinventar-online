@@ -213,7 +213,7 @@ if (isset($post['_M+cmd']))
 		$item = $txtMapTitle;
 		$bbox = imagettfbbox(11, 0, $font, $item);
 		$x = ($width - ($bbox[2] - $bbox[0]) )/2;
-		imagettftext($imgMapTitle, 11, 0, $x, 13, $black, 'arialbi', $item);
+		imagettftext($imgMapTitle, 11, 0, $x, 13, $black, $font, $item);
 		
 		// Map Info Image
 		$fontsize = 10;
@@ -229,7 +229,7 @@ if (isset($post['_M+cmd']))
 		{
 			if ( ($key != 'TITLE') && ($key != 'TITLE2') && ($key != 'NumberOfRecords') )
 			{
-				imagettftext($imgMapInfo, 10, 0, 0, ($sy + 2) * ($y + 1), $black, 'arial', $item);
+				imagettftext($imgMapInfo, 10, 0, 0, ($sy + 2) * ($y + 1), $black, getFont('arial.ttf'), $item);
 				$y++;
 			}
 		}
