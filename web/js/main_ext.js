@@ -231,7 +231,6 @@ function doMainMenuHandler(item)
 			Ext.getCmp('westm').collapse();
 		break;
 		case 'mnuFileOpen':
-		case 'mnuFileOpenAnother':
 			// Show database list
 			hideQueryDesign();
 			jQuery('.contentBlock').hide();
@@ -261,7 +260,7 @@ function doMainMenuHandler(item)
 		case 'mnuFileReplace':
 			doDatabaseUploadShow('Replace');
 		break;
-		case 'mnuFileSetup':
+		case 'mnuDatacardSetup':
 			hideQueryDesign();
 			jQuery('.contentBlock').hide();
 			jQuery('.classDBConfig_tabs:first').click();
@@ -336,11 +335,10 @@ function doMainMenuCreate()
 		items: [
 			{id:'mnuFileCreate'     , text: jQuery('span#mnuFileCreate').text()     , handler: doMainMenuHandler },
 			{id:'mnuFileOpen'       , text: jQuery('span#mnuFileOpen').text()       , handler: doMainMenuHandler },
-			{id:'mnuFileOpenAnother', text: jQuery('span#mnuFileOpenAnother').text(), handler: doMainMenuHandler },
 			{id:'mnuFileDownload'   , text: jQuery('span#mnuFileDownload').text()   , handler: doMainMenuHandler },
 			{id:'mnuFileUpload'     , text: jQuery('span#mnuFileUpload').text()     , menu: mnuFileUpload        },
+			'-',
 			{id:'mnuFileInfo'       , text: jQuery('span#mnuFileInfo').text()       , handler: doMainMenuHandler },
-			{id:'mnuFileSetup'      , text: jQuery('span#mnuFileSetup').text()      , handler: doMainMenuHandler },
 			{id:'mnuFileLanguage'   , text: jQuery('span#mnuFileLanguage').text()   , menu: mnuFileLanguage      },
 			{id:'mnuFileLogout'     , text: jQuery('span#mnuFileLogout').text()     , handler: doMainMenuHandler }
 		]
@@ -378,6 +376,7 @@ function doMainMenuCreate()
 			{id:'mnuQueryViewMap'              , text: jQuery('span#mnuQueryViewMap').text()              , handler: doMainMenuHandler },
 			{id:'mnuQueryViewGraph'            , text: jQuery('span#mnuQueryViewGraph').text()            , handler: doMainMenuHandler },
 			{id:'mnuQueryViewStd'              , text: jQuery('span#mnuQueryViewStd').text()              , handler: doMainMenuHandler },
+			'-',
 			{id:'mnuQueryResultSave'           , text: jQuery('span#mnuQueryResultSave').text()           , handler: doMainMenuHandler },
 			{id:'mnuQueryResultSaveAs'         , text: jQuery('span#mnuQueryResultSaveAs').text()         , menu: mnuQueryResultSaveAs },
 			{id:'mnuQueryResultPrint'          , text: jQuery('span#mnuQueryResultPrint').text()          , handler: doMainMenuHandler },
@@ -387,8 +386,9 @@ function doMainMenuCreate()
 
 	var mnuDatacard = new Ext.menu.Menu({
 		id: 'mnuDatacard', items: [
-			{id:'mnuDatacardView', text: jQuery('span#mnuDatacardView').text(), handler: doMainMenuHandler },
-			{id:'mnuDatacardEdit', text: jQuery('span#mnuDatacardEdit').text(), handler: doMainMenuHandler }
+			{id:'mnuDatacardView' , text: jQuery('span#mnuDatacardView').text() , handler: doMainMenuHandler },
+			{id:'mnuDatacardEdit' , text: jQuery('span#mnuDatacardEdit').text() , handler: doMainMenuHandler },
+			{id:'mnuDatacardSetup', text: jQuery('span#mnuDatacardSetup').text(), handler: doMainMenuHandler }
 		]
 	});
 
@@ -399,7 +399,9 @@ function doMainMenuCreate()
 		items: [
 			{id:'mnuHelpDocumentation' , text: jQuery('span#mnuHelpDocumentation').text() , handler: doMainMenuHandler },
 			{id:'mnuHelpMethodology'   , text: jQuery('span#mnuHelpMethodology').text()   , handler: doMainMenuHandler },
+			'-',
 			{id:'mnuHelpWebsite'       , text: jQuery('span#mnuHelpWebsite').text()       , handler: doMainMenuHandler },
+			'-',
 			{id:'mnuHelpAbout'         , text: jQuery('span#mnuHelpAbout').text()         , handler: doMainMenuHandler }
 		]
 	});
@@ -523,7 +525,7 @@ function doMainMenuUpdate()
 	}
 
 	Ext.getCmp('mnuFileReplace').hide();
-	Ext.getCmp('mnuFileSetup').hide();
+	Ext.getCmp('mnuDatacardSetup').hide();
 
 	Ext.getCmp('mnuDatacardView').show();
 	Ext.getCmp('mnuDatacardEdit').hide();
@@ -531,13 +533,9 @@ function doMainMenuUpdate()
 	// Show some menu items when a Region is Selected
 	if (jQuery('#desinventarRegionId').val() == '')
 	{
-		Ext.getCmp('mnuFileOpen').show();
-		Ext.getCmp('mnuFileOpenAnother').hide();
 	}
 	else
 	{
-		Ext.getCmp('mnuFileOpen').hide();
-		Ext.getCmp('mnuFileOpenAnother').show();
 		Ext.getCmp('mnuRegionLabel').setText('[' + jQuery('#desinventarRegionLabel').val() + ']');
 
 		if (UserRoleValue > 0)
@@ -562,8 +560,8 @@ function doMainMenuUpdate()
 			{
 				Ext.getCmp('mnuFileReplace').show();
 				Ext.getCmp('mnuFileReplace').enable();
-				Ext.getCmp('mnuFileSetup').show();
-				Ext.getCmp('mnuFileSetup').enable();
+				Ext.getCmp('mnuDatacardSetup').show();
+				Ext.getCmp('mnuDatacardSetup').enable();
 			}
 		}		
 	}
