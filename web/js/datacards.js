@@ -125,7 +125,7 @@ function onReadyDatacards()
 			}
 		}
 	});
-	
+
 	// Enable loading of geographic levels when editing...
 	jQuery('#divDatacard .tblGeography').on('change', '.GeoLevelSelect', function() {
 		var GeographyLevel = parseInt(jQuery(this).data('GeographyLevel'));
@@ -246,7 +246,6 @@ function onReadyDatacards()
 	jQuery('.inputAlphaNumber').keydown(function(event) {
 		return blockChars(event, jQuery(this).val(), 'alphanumber:');
 	});
-	
 	
 	// Datacard New/Edit/Save Commands
 	jQuery('#btnDatacardNew').click(function() {
@@ -379,33 +378,47 @@ function doDatacardShow()
 	jQuery('#divDatacard .tblGeography tr:gt(0)').remove();
 	jQuery('#divDatacard .tblGeography tr:first').hide();
 	var GeolevelsList = jQuery('body').data('GeolevelsList');
-	jQuery.each(GeolevelsList, function(index, value) {
-		var clonedRow = jQuery('#divDatacard .tblGeography tr:last').clone().show();
-		jQuery('.GeoLevelId', clonedRow).text(index);
-		jQuery('.GeoLevelName', clonedRow).text(value.GeoLevelName);
-		jQuery('select', clonedRow).attr('id', 'GeoLevel' + index).attr('level', index).data('GeographyLevel', index);
-		jQuery('.tblGeography').append(clonedRow);
-	});
-	
+	if (GeolevelsList != undefined)
+	{
+		jQuery.each(GeolevelsList, function(index, value) {
+			var clonedRow = jQuery('#divDatacard .tblGeography tr:last').clone().show();
+			jQuery('.GeoLevelId', clonedRow).text(index);
+			jQuery('.GeoLevelName', clonedRow).text(value.GeoLevelName);
+			jQuery('select', clonedRow).attr('id', 'GeoLevel' + index).attr('level', index).data('GeographyLevel', index);
+			jQuery('.tblGeography').append(clonedRow);
+		});
+	}
+
 	var FirstRow = jQuery('#divDatacard .tblGeography select:data("GeographyLevel=0")');
 	FirstRow.empty();
 	FirstRow.append(jQuery('<option>', { value : '' }).text(''));
-	jQuery.each(jQuery('body').data('GeographyList'), function(index, value) {
-		FirstRow.append(jQuery('<option>', { value : index }).text(value.GeographyName));
-	});
+	GeographyList = jQuery('body').data('GeographyList');
+	if (GeographyList != undefined)
+	{
+		jQuery.each(GeographyList, function(index, value) {
+			FirstRow.append(jQuery('<option>', { value : index }).text(value.GeographyName));
+		});
+	}
 
 	jQuery('#divDatacard .EventId').empty();
 	jQuery('#divDatacard .EventId').append(jQuery('<option>', { value : '' }).text(''));
-	jQuery.each(jQuery('body').data('EventList'), function(index, value) {
-		jQuery('#divDatacard .EventId').append(jQuery('<option>', { value : index }).text(value.EventName).data('tooltip',value.EventDesc));
-	});
+	EventList = jQuery('body').data('EventList');
+	if (EventList != undefined)
+	{
+		jQuery.each(EventList, function(index, value) {
+			jQuery('#divDatacard .EventId').append(jQuery('<option>', { value : index }).text(value.EventName).data('tooltip',value.EventDesc));
+		});
+	}
 
 	jQuery('#divDatacard .CauseId').empty();
 	jQuery('#divDatacard .CauseId').append(jQuery('<option>', { value : '' }).text(''));
-	jQuery.each(jQuery('body').data('CauseList'), function(index, value) {
-		jQuery('#divDatacard .CauseId').append(jQuery('<option>', { value : index }).text(value.CauseName).data('tooltip',value.CauseDesc));
-	});
-
+	CauseList = jQuery('body').data('CauseList');
+	if (CauseList != undefined)
+	{
+		jQuery.each(CauseList, function(index, value) {
+			jQuery('#divDatacard .CauseId').append(jQuery('<option>', { value : index }).text(value.CauseName).data('tooltip',value.CauseDesc));
+		});
+	}
 
 	jQuery('#divDatacard #cardsRecordNumber').val(0);
 	jQuery('#divDatacard #cardsRecordCount').val(jQuery('body').data('RecordCount'));
