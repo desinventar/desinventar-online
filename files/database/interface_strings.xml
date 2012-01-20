@@ -1304,10 +1304,10 @@
 			<Text LangIsoCode="fre">Enregistrer la carte de données</Text>
 		</Message>
 		<Message id="tsavdesc">
-			<Text LangIsoCode="eng">recuerde incluir los campos obligatorios</Text>
-			<Text LangIsoCode="spa">Guarde un registro en la base de datos</Text>
-			<Text LangIsoCode="por">Save register in the database. Remember to include all obligatory fields.</Text>
-			<Text LangIsoCode="fre">recuerde incluir los campos obligatorios</Text>
+			<Text LangIsoCode="eng">Save record to database, remember to include all mandatory fields</Text>
+			<Text LangIsoCode="spa">Guardar el registro a la base de datos, recuerde incluir todos los campos obligatorios</Text>
+			<Text LangIsoCode="por">Salvar registro no banco de dados, lembre-se de incluir todos os campos obrigatórios</Text>
+			<Text LangIsoCode="fre">Enregistrer enregistrer sur base de données, n'oubliez pas d'inclure tous les champs obligatoires</Text>
 		</Message>
 		<Message id="bcancel">
 			<Text LangIsoCode="eng">Cancel</Text>
