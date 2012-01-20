@@ -227,7 +227,8 @@ if (isset($post['_M+cmd']))
 		$y = 0;
 		foreach($infoTranslated as $key => $item)
 		{
-			if ( ($key != 'TITLE') && ($key != 'TITLE2') )
+			fb($key . ' => ' . $item);
+			if ( ($key != 'TITLE') && ($key != 'TITLE2') && ($key != 'NumberOfRecords') )
 			{
 				imagettftext($imgMapInfo, 10, 0, 0, ($sy + 2) * ($y + 1), $black, 'arial', $item);
 				$y++;
