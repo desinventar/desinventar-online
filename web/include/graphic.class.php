@@ -852,12 +852,8 @@ class Graphic
 	
 	public static function getTextWidth($prmText, $prmFontSize)
 	{
-		$myFont = 'arial.ttf';
-		if (isset($_SERVER['WINDIR']))
-		{			
-			$myFont = $_SERVER['WINDIR'] . '\fonts\arial.ttf';
-		}
-		$bbox = imagettfbbox($prmFontSize, 0, $myFont, $prmText);
+		$font = getFont('arial.ttf');
+		$bbox = imagettfbbox($prmFontSize, 0, $font, $prmText);
 		$Width = $bbox[2] - $bbox[0];
 		return $Width;
 	}

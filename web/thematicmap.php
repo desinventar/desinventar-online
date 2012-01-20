@@ -200,7 +200,7 @@ if (isset($post['_M+cmd']))
 				$infoTranslated[$key] = $title . ': ' . $value;
 			}
 		}
-		$font = 'arialbi';
+		$font = getFont('arialbi.ttf');
 		
 		// Map Title Image
 		$width  = 1000; //$sx * $ImageCols;
@@ -227,7 +227,6 @@ if (isset($post['_M+cmd']))
 		$y = 0;
 		foreach($infoTranslated as $key => $item)
 		{
-			fb($key . ' => ' . $item);
 			if ( ($key != 'TITLE') && ($key != 'TITLE2') && ($key != 'NumberOfRecords') )
 			{
 				imagettftext($imgMapInfo, 10, 0, 0, ($sy + 2) * ($y + 1), $black, 'arial', $item);
