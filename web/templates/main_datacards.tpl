@@ -24,6 +24,7 @@
 						return frag;
 					};
 				}
+				/*
 				jQuery.post(
 					jQuery('#desinventarURL').val() + '/',
 					{
@@ -47,13 +48,15 @@
 							});
 							jQuery('body').data('GeographyList', data.GeographyList);
 
-							onReadyCommon();
 							onReadyDatacards();
 							jQuery('body').trigger('cmdDatacardShow');
 						}
 					},
 					'json'
 				);
+				*/
+				onReadyDatacards();
+				jQuery('body').trigger('cmdDatacardShow');				
 			});
 		</script>
 	</head>
