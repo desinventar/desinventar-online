@@ -263,6 +263,7 @@ a:hover	{	color:#00008b; }
 	height:100%;
 }
 .clsGeolevels {
+	max-width:600px;
 	width:100%;
 	height:100%;
 }
