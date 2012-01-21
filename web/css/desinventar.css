@@ -285,8 +285,9 @@ a:hover	{	color:#00008b; }
 	max-width:600px;
 	height:100%;
 }
-#frmGeolevels_Edit .GeoLevelName,.GeoLevelDesc {
+#frmGeolevel .GeoLevelName,.GeoLevelDesc {
 	width:400px;
+	margin:3px;
 }
 #divDatacard .GeoLevelSelect {
 	width:180px;
