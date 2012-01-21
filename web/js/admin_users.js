@@ -1,5 +1,3 @@
 function onReadyAdminUsers()
 {
 } //onReadyAdminUsers()
-
-} //doAdminUsersSetup()
