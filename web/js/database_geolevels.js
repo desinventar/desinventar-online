@@ -102,7 +102,7 @@ function onReadyGeolevels()
 				{
 					cmd      : 'cmdGeolevelsUpdate',
 					RegionId : jQuery('#desinventarRegionId').val(),
-					GeoLevel : jQuery('#frmGeolevel').serializeObject()
+					GeoLevel : jQuery('#frmGeolevel').toObject()
 				},
 				function(data)
 				{
