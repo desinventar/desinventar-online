@@ -61,7 +61,7 @@ function onReadyUserLogin()
 					if (parseInt(data.Status) > 0)
 					{
 						doUserLoginUpdateMsg("#msgUserLoggedIn");
-						// After login, clear passwd field
+						jQuery('#fldUserId').val('');
 						jQuery("#fldUserPasswd").val('');
 
 						// Update UserInfo Fields...
@@ -147,5 +147,7 @@ function doUserLoginUpdateMsg(msgId)
 function doUserLoginShow()
 {
 	doUserLoginUpdateMsg();
+	jQuery('#fldUserId').val('');
+	jQuery('#fldUserPasswd').val('');
 	Ext.getCmp('wndUserLogin').show();
 } //doUserLoginShow()
