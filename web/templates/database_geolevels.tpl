@@ -35,7 +35,7 @@
 			</tbody>
 		</table>
 	</div>
-	<div id="divGeolevels_Status">
+	<div>
 		<br />
 		<a class="button" id="btnGeolevels_Add"><span>{-#msgGeolevels_Add#-}</span></a>
 		<br /><br />
@@ -148,18 +148,18 @@
 							<a class="button btnCancel"><span>{-#msgGeolevels_Cancel#-}</span></a>
 						</div>
 						<br />
-						<div class="center">
-							<span class="status statusUploadOk">{-#msgGeocarto_UploadOk#-}<br /></span>
-							<span class="status statusUploadError">{-#msgGeocarto_UploadError#-}<br /></span>
-							<span class="status statusUpdateOk">{-#msgGeocarto_UpdateOk#-}<br /></span>
-							<span class="status statusUpdateError">{-#msgGeocarto_UpdateError#-}<br /></span>
-							<span class="status statusMissingFiles">{-#msgGeocarto_MissingFiles#-} (DBF,SHP,SHX)<br /></span>
-							<span class="status statusRequiredFields">{-#msgGeocarto_RequiredFields#-}<br/></span>
-						</div>
 					</form>
 				</td>
 			</tr>
 		</table>
+	</div>
+	<div class="status center">
+		<span class="status hidden statusUploadOk">{-#msgGeocarto_UploadOk#-}<br /></span>
+		<span class="status hidden statusUploadError">{-#msgGeocarto_UploadError#-}<br /></span>
+		<span class="status hidden statusUpdateOk">{-#msgGeolevels_UpdateOk#-}<br /></span>
+		<span class="status hidden statusUpdateError">{-#msgGeolvels_UpdateError#-}<br /></span>
+		<span class="status hidden statusMissingFiles">{-#msgGeocarto_MissingFiles#-} (DBF,SHP,SHX)<br /></span>
+		<span class="status hidden statusRequiredFields">{-#msgGeocarto_RequiredFields#-}<br/></span>
 	</div>
 	<div class="hidden">
 		<span id="msgGeolevels_UploadChooseFile">{-#msgGeolevels_UploadChooseFile#-}</span>
