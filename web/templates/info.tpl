@@ -87,6 +87,7 @@
 			</td>
 			<td>
 				<!-- LOG RECORDS -->
+				<!--
 				<fieldset style="padding:5px 5px 5px 5px;">
 					<legend>
 						<b onMouseOver="showtip('{-$dic.DBLog[2]-}');">{-$dic.DBLog[0]-}</b>
@@ -165,6 +166,7 @@
 						</form>
 					</div>
 				</fieldset>
+				-->
 			</td>
 		</tr>
 	</table>
