@@ -1156,10 +1156,10 @@
 			<Text LangIsoCode="fre">Champ d&quot;effets mis à jour avec succès</Text>
 		</Message>
 		<Message id="errupdeef">
-			<Text LangIsoCode="eng">Unable to update effect field</Text>
-			<Text LangIsoCode="spa">No se pudo actualizar el campo de efectos</Text>
-			<Text LangIsoCode="por">Não foi possível atualizar o campo de efeitos</Text>
-			<Text LangIsoCode="fre">Impossibilité de mise à jour du champ d&quot;effets</Text>
+			<Text LangIsoCode="eng">Unable to update, there is a field with the same name</Text>
+			<Text LangIsoCode="spa">No se pudo crear. ya existe un campo con ese nombre</Text>
+			<Text LangIsoCode="por">Não é possível atualizar, existe um campo com o mesmo nome</Text>
+			<Text LangIsoCode="fre">Impossible de mettre à jour, il ya un champ avec le même nom</Text>
 		</Message>
 		<Message id="errmsgfrmeef">
 			<Text LangIsoCode="eng">EFFECTS: Fill in all required fields and try again.</Text>
