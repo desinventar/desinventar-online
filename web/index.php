@@ -337,6 +337,16 @@ switch ($cmd)
 		$t->display('main_region.tpl');
 	break;
 	case 'cmdAdminUsers':
+		$iReturn = ERR_NO_ERROR;
+		if ($desinventarUserRoleValue < ROLE_ADMINPORTAL)
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($iReturn > 0)
+		{
+			$t->assign('cnt', $us->q->getCountryList());
+			$t->assign('usrpa', $us->getUserInfo(''));
+		}
 		$t->display('main_admin_users.tpl');
 	break;
 	case 'cmdDatabaseLoadData':
