@@ -385,9 +385,7 @@ switch ($cmd)
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
 	case 'cmdGeolevelsUpdate':
-		fb($_POST);
 		$GeoLevel = $_POST['GeoLevel'];
-		fb($GeoLevel);
 		$answer = array();
 		$iReturn = ERR_NO_ERROR;
 		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
@@ -412,7 +410,6 @@ switch ($cmd)
 				$iReturn = $o->insert();
 			}
 		}
-		fb('Geocarto update : ' . $iReturn);
 		if ($iReturn > 0)
 		{
 			$GeoLevelId = $GeoLevel['GeoLevelId'];
@@ -430,7 +427,6 @@ switch ($cmd)
 					copy($srcFile, $dstFile);
 				}
 			}
-			fb('UpdateCarto : ' . $bUpdateCarto);
 			if ($bUpdateCarto > 0)
 			{
 				$o = new DIGeoCarto($us, $GeoLevelId);

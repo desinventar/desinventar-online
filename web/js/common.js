@@ -45,20 +45,16 @@ jQuery.fn.serializeObject = function()
 	var o = {};
 	var a = this.serializeArray();
 	jQuery.each(a, function() {
-		console.log(this.name);
 		if (o[this.name])
 		{
-			console.log('    debug 1');
 			if (!o[this.name].push)
 			{
-				console.log('     debug 1A');
 				o[this.name] = [o[this.name]];
 			}
 			o[this.name].push(this.value || '');
 		}
 		else
 		{
-			console.log('     debug 2');
 			o[this.name] = this.value || '';
 		}
 	});
