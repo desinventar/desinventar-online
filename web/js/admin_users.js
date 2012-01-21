@@ -76,9 +76,62 @@ function onReadyAdminUsers()
 function doAdminUsersReset()
 {
 	// Start with Edit form hidden
-	jQuery("#divUserEdit").hide();
+	jQuery('#divAdminUsers #divUserEdit').hide();
 	// Create table stripes
-	jQuery("#tblUserList tr:odd").addClass("normal");
-	jQuery("#tblUserList tr:even").addClass("under");
-	jQuery("#txtUserId").removeAttr('readonly');
+	jQuery('#divAdminUsers #tblUserList tr:odd').addClass('normal');
+	jQuery('#divAdminUsers #tblUserList tr:even').addClass('under');
+	jQuery('#divAdminUsers #txtUserId').removeAttr('readonly');
+}
+
+function UserEditFormUpdateStatus(value) {
+	jQuery('#divAdminUsers .UserEditFormStatus').hide();
+	MsgId = '';
+	switch(value) {
+		case  1:
+			MsgId = 'UserEditFormStatusOk';
+		break;
+		case -1:
+			MsgId = 'UserEditFormStatusError';
+		break;
+		case -100:
+			MsgId = 'UserEditFormStatusDuplicateId';
+		break;
+		case -101:
+			MsgId = 'UserEditFormStatusEmptyId';
+		break;
+	}
+	if (MsgId != '') {
+		jQuery('#divAdminUsers #' + MsgId).show();
+	}
+}
+
+function validateUserEditForm()
+{
+	var bReturn = 1;
+	jQuery('#divAdminUsers #txtUserId').unhighlight();
+	if (jQuery('#divAdminUsers #txtUserId').val() == '') {
+		bReturn = -101;
+		jQuery('#divAdminUsers #txtUserId').highlight();
+	}
+	jQuery('#divAdminUsers #txtUserFullName').unhighlight();
+	if (jQuery('#divAdminUsers #txtUserFullName').val() == '') {
+		bReturn = -101;
+		jQuery('#divAdminUsers #txtUserFullName').highlight();
+	}
+	jQuery('#divAdminUsers #txtUserEMail').unhighlight();
+	if (jQuery('#divAdminUsers #txtUserEMail').val() == '') {
+		bReturn = -101;
+		jQuery('#divAdminUsers #txtUserEMail').highlight();
+	}
+	UserEditFormUpdateStatus(bReturn);
+	return bReturn;		
+}
+
+function clearUserEditForm() {
+	jQuery('#divAdminUsers #txtUserId').val('');
+	jQuery('#divAdminUsers #selCountryIso').val('');
+	jQuery('#divAdminUsers #txtUserEMail').val('');
+	jQuery('#divAdminUsers #txtUserFullName').val('');
+	jQuery('#divAdminUsers #txtUserCity').val('');
+	jQuery('#divAdminUsers #chkUserActive').attr('checked', '');
 }
