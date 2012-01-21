@@ -60,7 +60,8 @@ function onReadyAdminUsers()
 				function(data) {
 					if (data.Status > 0) {
 						// Reload user list on success
-						jQuery('#divAdminUsers #divUserList').load(jQuery('#desinventarURL').val() + '/user.php' + '?cmd=list', function(data) {
+						jQuery('#divAdminUsers #lst_userpa').load(jQuery('#desinventarURL').val() + '/user.php' + '?cmd=list', function(data) {
+							doAdminUsersReset();
 						});
 					}
 					UserEditFormUpdateStatus(data.Status);
