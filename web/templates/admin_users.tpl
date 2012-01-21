@@ -1,10 +1,24 @@
-{-*** REGISTER NEW USER - CONTENT SECTION ***-}
 {-config_load file="$lg.conf" section="grpMenuUser"-}
 {-config_load file="$lg.conf" section="grpAdminUsers"-}
 <div id="divAdminUsers">
 	<div id="divUserList">
-		{-include file="user_list.tpl" -}
-	</div> {-* divUserList *-}
+		<h2>{-#tuserprefer#-}</h2>
+		<div class="dwin" style="width:550px;height:180px;">
+			<table id="tblUserList">
+				<thead>
+					<tr>
+						<th class="header"><b>{-#tuser#-}</b></th>
+						<th class="header"><b>{-#tname#-}</b></th>
+						<th class="header"><b>{-#temail#-}</b></th>
+						<th class="header"><b>{-#tactive#-}</b></th>
+					</tr>
+				</thead>
+				<tbody id="lst_userpa">
+					{-include file="user_list.tpl"-}
+				</tbody>
+			</table>
+		</div>
+	</div>
 	<div id="divUserStatus">
 		<br />
 		<a class="button" id="btnUserAdd"><span>{-#baddoption#-}</span></a>
@@ -21,7 +35,6 @@
 					</td>
 					<td>
 						<input type="text" id="txtUserId" name="User[UserId]" size="15" maxlength="15" class="line" />
-						{-* onBlur="updateList('chklogin', jQuery('#desinventarURL').val() + '/user.php', 'cmd=chklogin&UserId='+ $('UserId').value);" *-}
 						<span id="chklogin" style="display:inline"></span>
 						<input type="hidden" id="txtUserPasswd" name="User[UserPasswd]" value="" />
 					</td>
@@ -85,5 +98,5 @@
 			<span class="UserEditFormStatus" id="UserEditFormStatusDuplicateId">{-#msgUserEditFormStatusDuplicateId#-}</span>
 			<span class="UserEditFormStatus" id="UserEditFormStatusEmptyFields">{-#msgUserEditFormStatusEmptyFields#-}</span>
 		</div>
-	</div> {-* divUserEdit *-}
+	</div>
 </div>
