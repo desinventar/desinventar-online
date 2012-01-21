@@ -88,7 +88,7 @@
 								</td>
 								<td valign="top" style="width:50%;">
 									<span class="Filename_DBF uploaded" style="width:100%;"></span>
-									<input type="hidden" class="filename" name="filename[DBF]" value="" />
+									<input type="hidden" class="filename" name="filename.DBF" value="" />
 									<br />
 								</td>
 								<td>
@@ -103,7 +103,7 @@
 								</td>
 								<td valign="top" style="width:50%;">
 									<span class="Filename_SHP uploaded" style="width:100%;"></span>
-									<input type="hidden" class="filename" name="filename[SHP]" value="" />
+									<input type="hidden" class="filename" name="filename.SHP" value="" />
 									<br />
 								</td>
 								<td>
@@ -118,7 +118,7 @@
 								</td>
 								<td valign="top" style="width:50%;">
 									<span class="Filename_SHX uploaded" style="width:100%;"></span>
-									<input type="hidden" class="filename" name="filename[SHX]" value="" />
+									<input type="hidden" class="filename" name="filename.SHX" value="" />
 									<br />
 								</td>
 								<td>
