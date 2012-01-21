@@ -223,12 +223,12 @@ class DIRegion extends DIObject
 
 	public function getDBInfo($prmLang='eng')
 	{
-		$InfoSynopsis = trim($this->get('InfoSynopsis', $prmLang)) . '';
-		$isInfoEmpty =  strlen($InfoSynopsis) < 1;
-		if ($isInfoEmpty)
+		$ll = $this->getLanguageList();
+		if (!array_key_exists($prmLang, $ll))
 		{
-			$prmLang = $this->get('LangIsoCode');
+			$prmLang = 'eng';
 		}
+
 		$a = array();
 		foreach(array('RegionId','RegionLabel',
 		              'PeriodBeginDate','PeriodEndDate',
@@ -237,15 +237,15 @@ class DIRegion extends DIObject
 			$a[$Field] = $this->get($Field);
 		}
 		$a['RegionLastUpdate'] = substr($a['RegionLastUpdate'],0,10);
-		$ll = $this->getLanguageList();
-		if (!array_key_exists($prmLang, $ll))
-		{
-			$prmLang = 'eng';
-		}
 
 		foreach(array('InfoGeneral','InfoCredits','InfoSources','InfoSynopsis') as $Field)
 		{
-			$a[$Field] = strip_tags($this->get($Field, $prmLang));
+			$value = $this->get($Field, $prmLang);
+			if ($value == '') 
+			{
+				$value = $this->get($Field, $this->get('LangIsoCode'));
+			}
+			$a[$Field] = strip_tags($value);
 			$a[$Field] = preg_replace('/\n/','<br />', $a[$Field]);
 		}
 		

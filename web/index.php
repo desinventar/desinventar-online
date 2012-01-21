@@ -879,10 +879,16 @@ switch ($cmd)
 	break;
 	case 'cmdDatabaseGetInfo':
 	case 'cmdGetRegionInfo':
-		$LangIsoCode = getParameter('LangIsoCode', $lg);
 		$answer = array();
-		$answer['Status'] = ERR_NO_ERROR;
-		if (isset($RegionId) && $RegionId != '')
+		$iReturn = ERR_NO_ERROR;
+		$LangIsoCode = getParameter('LangIsoCode', $lg);
+		
+		if ($RegionId == '')
+		{
+			$iReturn = ERR_NO_DATABASE;
+		}
+		
+		if ($iReturn > 0)
 		{
 			$r = new DIRegion($us, $RegionId);
 			$a = $r->getDBInfo($LangIsoCode);
@@ -890,10 +896,7 @@ switch ($cmd)
 			$a['CountryName'] = $us->q->getCountryName($r->get('CountryIso'));
 			$answer['RegionInfo'] = $a;
 		}
-		else
-		{
-			$answer['Status'] = ERR_NO_DATABASE;
-		}
+		$answer['Status'] = $iReturn;
 		if (isset($_GET['callback']))
 		{
 			// Enable support for JSONP requests...
