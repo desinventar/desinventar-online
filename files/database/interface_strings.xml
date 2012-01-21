@@ -3199,11 +3199,23 @@
 			<Text LangIsoCode="por">Coluna de código</Text>
 			<Text LangIsoCode="fre">Colonne de code</Text>
 		</Message>
+		<Message id="msgGeocarto_CodeTooltip">
+			<Text LangIsoCode="eng">This is the name of the column with the identification code for the geographic units (i.e. Code or Id)</Text>
+			<Text LangIsoCode="spa">Corresponde al nombre de la columna donde aparecen los códigos de las unidades geográficas del nivel respectivo. Por ejemplo Identifcador o Código.</Text>
+			<Text LangIsoCode="por">Este é o nome da coluna com o código de identificação para as unidades geográficas (ie Código ou Id)</Text>
+			<Text LangIsoCode="fre">C'est le nom de la colonne avec le code d'identification pour les unités géographiques (code soit ou Id)</Text>
+		</Message>
 		<Message id="msgGeocarto_Name">
 			<Text LangIsoCode="eng">Column of name</Text>
 			<Text LangIsoCode="spa">Columna de nombre</Text>
 			<Text LangIsoCode="por">Coluna de nome</Text>
 			<Text LangIsoCode="fre">Colonne de nom</Text>
+		</Message>
+		<Message id="msgGeocarto_NameTooltip">
+			<Text LangIsoCode="eng">This is the name of the column with the descriptive name of the geographic units (i.e. Name)</Text>
+			<Text LangIsoCode="spa">Corresponde al nombre de la columna donde aparecen los nombres de las unidades geográficas del nivel respectivo. Por ejemplo Nombre.</Text>
+			<Text LangIsoCode="por">Este é o nome da coluna com o nome descritivo das unidades geográficas (ie Nome)</Text>
+			<Text LangIsoCode="fre">C'est le nom de la colonne avec le nom descriptif des unités géographiques (nom)</Text>
 		</Message>
 		<Message id="msgGeocarto_File">
 			<Text LangIsoCode="eng">File</Text>

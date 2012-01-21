@@ -40,7 +40,7 @@
 		<a class="button" id="btnGeolevels_Add"><span>{-#msgGeolevels_Add#-}</span></a>
 		<br /><br />
 	</div>
-	<div id="divGeolevels_Edit">
+	<div id="divGeolevels_Edit" class="hidden">
 		<table>
 			<tr>
 				<td valign="top" class="line">
@@ -68,7 +68,7 @@
 						<table border="0" width="100%">
 							<tr>
 								<td>
-									{-#msgGeocarto_Code#-}
+									<span title="{-#msgGeocarto_CodeTooltip#-}">{-#msgGeocarto_Code#-}</span>
 								</td>
 								<td colspan="2">
 									<input class="GeoLevelLayerCode" name="GeoLevelLayerCode" type="text" size="30" value="" /><br />
@@ -76,7 +76,7 @@
 							</tr>
 							<tr>
 								<td>
-									{-#msgGeocarto_Name#-}
+									<span title="{-#msgGeocarto_NameTooltip#-}">{-#msgGeocarto_Name#-}</span>
 								</td>
 								<td colspan="2">
 									<input class="GeoLevelLayerName" name="GeoLevelLayerName" type="text" size="30" value="" /><br />
