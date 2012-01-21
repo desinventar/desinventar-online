@@ -171,7 +171,7 @@ switch ($cmd)
 		{
 			$t->assign('cnt', $us->q->getCountryList());
 			$t->assign('usrpa', $us->getUserInfo(''));
-			$t->display('user_admin.tpl');
+			$t->display('admin_users.tpl');
 		}
 		else
 		{
