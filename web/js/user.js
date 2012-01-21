@@ -42,7 +42,7 @@ function onReadyUserChangePasswd(windowId) {
 		Ext.getCmp('wndDatabaseList').hide();
 		return(false);
 	});
-};
+}
 
 function updateUserChangePasswdMsg(msgId) {
 	// Hide all status Msgs (class="status")
@@ -53,87 +53,7 @@ function updateUserChangePasswdMsg(msgId) {
 		jQuery(msgId).show();
 	}
 	return(true);
-};
-
-function onReadyUserAdmin() {
-	// Start with Edit form hidden
-	jQuery("#divUserEdit").hide();
-	// Create table stripes
-	jQuery("#tblUserList tr:odd").addClass("normal");
-	jQuery("#tblUserList tr:even").addClass("under");
-	// Change background color of row under mouse
-	jQuery("#tblUserList tr").mouseover(function() {
-		jQuery(this).addClass('highlight');
-	});
-	jQuery("#tblUserList tr").mouseout(function() {
-		jQuery(this).removeClass('highlight');
-	});
-	jQuery("#txtUserId").removeAttr('readonly');
-	
-	// When selecting a row, start editing data...
-	jQuery("#tblUserList tr").click(function() {
-		var UserId = jQuery(this).children("td:first").html();
-		jQuery.getJSON(jQuery('#desinventarURL').val() + '/user.php' + '?cmd=getUserInfo&UserId=' + UserId, function(data) {
-			jQuery("#txtUserId").attr('readonly','true');
-			jQuery("#txtUserId").val(data.UserId);
-			jQuery("#selCountryIso").val(data.CountryIso);
-			jQuery("#txtUserEMail").val(data.UserEMail);
-			jQuery("#txtUserFullName").val(data.UserFullName);
-			jQuery("#txtUserCity").val(data.UserCity);
-			jQuery("#chkUserActive").attr('checked', data.UserActive);
-			jQuery("#txtUserEditCmd").val('update');
-		});
-		UserEditFormUpdateStatus('');
-		jQuery("#divUserEdit").show();
-	});
-
-	// Add new User...
-	jQuery("#btnUserAdd").click(function() {
-		clearUserEditForm();
-		jQuery("#txtUserId").removeAttr('readonly');
-		jQuery("#txtUserEditCmd").val('insert');
-		UserEditFormUpdateStatus('');
-		jQuery("#divUserEdit").show();
-	});
-
-	// Cancel Edit, hide form
-	jQuery("#btnUserEditCancel").unbind('click').click(function() {
-		jQuery("#divUserEdit").hide();
-	});
-
-	// Submit - Finish edit, validate form and send data...
-	jQuery('#frmUserEdit').unbind('submit').submit(function() {
-		UserEditFormUpdateStatus('');
-		// validate Form
-		var bReturn = validateUserEditForm();
-		if (bReturn > 0) {
-			// Remove the readonly attribute, this way the data is sent to processing
-			jQuery("#txtUserId").removeAttr('readonly');
-			// Create an object with the information to send
-			var user = jQuery("#frmUserEdit").serializeObject();
-			// Checkboxes not selected are not passed by default to server, so we need
-			// to checkout and set a value here.
-			if (! jQuery("#chkUserActive").attr('checked')) {
-				user['User[UserActive]'] = 'off';
-			}
-			// Send AJAX request to update information
-			jQuery.post(jQuery('#desinventarURL').val() + '/user.php', 
-				user, 
-				function(data) {
-					if (data.Status > 0) {
-						// Reload user list on success
-						jQuery("#divUserList").load(jQuery('#desinventarURL').val() + '/user.php' + '?cmd=list', function(data) {
-							onReadyUserAdmin();
-						});
-					}
-					UserEditFormUpdateStatus(data.Status);
-				},
-				'json'
-			);
-		}
-		return false;
-	}); //submit
-};
+}
 
 function UserEditFormUpdateStatus(value) {
 	jQuery('.UserEditFormStatus').hide();
@@ -176,7 +96,7 @@ function validateUserEditForm() {
 	}
 	UserEditFormUpdateStatus(bReturn);
 	return bReturn;		
-};
+}
 
 function clearUserEditForm() {
 	jQuery("#txtUserId").val('');
@@ -185,5 +105,4 @@ function clearUserEditForm() {
 	jQuery("#txtUserFullName").val('');
 	jQuery("#txtUserCity").val('');
 	jQuery("#chkUserActive").attr('checked', '');
-};
-
+}

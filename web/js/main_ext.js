@@ -271,7 +271,7 @@ function doMainMenuHandler(item)
 			doDatabaseCreateShow();
 		break;
 		case 'mnuUserAccountManagement':
-			jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=adminusr',function() { onReadyUserAdmin(); });
+			jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=adminusr');
 			Ext.getCmp('wndDatabaseList').show();
 		break;
 		case 'mnuAdminDatabases':
