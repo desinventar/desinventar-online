@@ -12,7 +12,7 @@
 		<span id="lblUserStatusMsg" class="dlgmsg"></span>
 		<br />
 	</div>
-	<div id="divUserEdit" style="display:none">
+	<div id="divUserEdit" class="hidden">
 		<form id="frmUserEdit" name="userpafrm">
 			<table class="grid">
 				<tr>
