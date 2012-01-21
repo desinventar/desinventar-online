@@ -309,3 +309,6 @@ a:hover	{	color:#00008b; }
 div.UserChangePasswd {
 	max-width:400px;	
 }
+#divAdminUsers #divUserList {
+	height:400px;
+}
