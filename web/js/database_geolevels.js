@@ -17,6 +17,7 @@ function onReadyGeolevels()
 		jQuery('#btnGeolevels_Add').hide();
 		jQuery('#frmGeolevel .GeoLevelLayerCode').val('');
 		jQuery('#frmGeolevel .GeoLevelLayerName').val('');
+		jQuery('#frmGeolevel .filename').val('');
 		jQuery('#frmGeolevel .uploaded').text('');
 	}).on('mouseover', 'tr', function(event) {
 			jQuery(this).addClass('highlight');
@@ -129,6 +130,7 @@ function onReadyGeolevels()
 		{
 			setTimeout(function() {
 				jQuery('#frmGeolevel .status').hide();
+				jQuery('#frmGeolevel .GeoLevelName').unhighlight();
 				jQuery('#frmGeolevel .GeoLevelLayerCode').unhighlight();
 				jQuery('#frmGeolevel .GeoLevelLayerName').unhighlight();
 			}, 2500);
