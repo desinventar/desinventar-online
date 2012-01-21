@@ -82,6 +82,3 @@ function doAdminUsersReset()
 	jQuery("#tblUserList tr:even").addClass("under");
 	jQuery("#txtUserId").removeAttr('readonly');
 }
-
-function onReadyUserAdmin() {
-} //onReadyUserAdmin()
