@@ -3128,22 +3128,22 @@
 	</Group>
 	<Group name="grpGeolevels">
 		<Message id="msgGeolevels_Title">
-			<Text LangIsoCode="eng">Geographic levels</Text>
-			<Text LangIsoCode="spa">Niveles Geográficos</Text>
-			<Text LangIsoCode="por">Níveis Geográficos</Text>
-			<Text LangIsoCode="fre">Niveaux Géographiques</Text>
+			<Text LangIsoCode="eng">Geographic levels and map</Text>
+			<Text LangIsoCode="spa">Niveles geográficos y mapa</Text>
+			<Text LangIsoCode="por">Níveis geográficos e mapa</Text>
+			<Text LangIsoCode="fre">Niveaux géographiques et la carte</Text>
 		</Message>
 		<Message id="msgGeolevels_GeoLevelName">
-			<Text LangIsoCode="eng">Name</Text>
-			<Text LangIsoCode="spa">Nombre</Text>
-			<Text LangIsoCode="por">Nome</Text>
-			<Text LangIsoCode="fre">Nom</Text>
+			<Text LangIsoCode="eng">Name of level</Text>
+			<Text LangIsoCode="spa">Nombre del nivel</Text>
+			<Text LangIsoCode="por">Nome de nível</Text>
+			<Text LangIsoCode="fre">Nom du niveau</Text>
 		</Message>
 		<Message id="msgGeolevels_GeoLevelDesc">
-			<Text LangIsoCode="eng">Description</Text>
-			<Text LangIsoCode="spa">Descripción</Text>
-			<Text LangIsoCode="por">Descrição</Text>
-			<Text LangIsoCode="fre">Description</Text>
+			<Text LangIsoCode="eng">Description of level</Text>
+			<Text LangIsoCode="spa">Descripción del nivel</Text>
+			<Text LangIsoCode="por">Descrição de nível</Text>
+			<Text LangIsoCode="fre">Description du niveau</Text>
 		</Message>
 		<Message id="msgGeolevels_GeoLevelActive">
 			<Text LangIsoCode="eng">Active</Text>
@@ -3194,16 +3194,16 @@
 			<Text LangIsoCode="fre">Cartographie</Text>
 		</Message>
 		<Message id="msgGeocarto_Code">
-			<Text LangIsoCode="eng">Code</Text>
-			<Text LangIsoCode="spa">Código</Text>
-			<Text LangIsoCode="por">Código</Text>
-			<Text LangIsoCode="fre">Code de</Text>
+			<Text LangIsoCode="eng">Column of code</Text>
+			<Text LangIsoCode="spa">Columna de código</Text>
+			<Text LangIsoCode="por">Coluna de código</Text>
+			<Text LangIsoCode="fre">Colonne de code</Text>
 		</Message>
 		<Message id="msgGeocarto_Name">
-			<Text LangIsoCode="eng">Name</Text>
-			<Text LangIsoCode="spa">Nombre</Text>
-			<Text LangIsoCode="por">Nome</Text>
-			<Text LangIsoCode="fre">Nom</Text>
+			<Text LangIsoCode="eng">Column of name</Text>
+			<Text LangIsoCode="spa">Columna de nombre</Text>
+			<Text LangIsoCode="por">Coluna de nome</Text>
+			<Text LangIsoCode="fre">Colonne de nom</Text>
 		</Message>
 		<Message id="msgGeocarto_File">
 			<Text LangIsoCode="eng">File</Text>

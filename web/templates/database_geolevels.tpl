@@ -39,16 +39,12 @@
 		<br />
 		<a class="button" id="btnGeolevels_Add"><span>{-#msgGeolevels_Add#-}</span></a>
 		<br /><br />
-		<div class="center">
-			<span class="clsGeolevelsStatus" id="msgGeolevels_UpdateOk">{-#msgGeolevels_UpdateOk#-}</span>
-			<span class="clsGeolevelsStatus" id="msgGeolevels_UpdateError">{-#msgGeolevels_UpdateError#-}</span>		
-		</div>
 	</div>
-	<table>
-		<tr>
-			<td valign="top" class="line">
-				<div id="divGeolevels_Edit">
-					<form id="frmGeolevels_Edit">
+	<div id="divGeolevels_Edit">
+		<table>
+			<tr>
+				<td valign="top" class="line">
+					<form id="frmGeolevel">
 						<h4>{-#msgGeolevels_GeoLevelSubtitle#-}</h4>
 						<input class="GeoLevelId" name="GeoLevelId" type="hidden" value="-1" />
 
@@ -65,20 +61,10 @@
 						<input class="GeoLevelActive" name="GeoLevelActive" type="hidden" value="1" />
 						<span class="GeoLevelActiveLabel">{-#msgGeolevels_GeoLevelActive#-}</span>
 						<input class="GeoLevelActiveCheckbox" type="checkbox" tabindex="3" />
+
 						<br />
 
-						<div class="center">
-							<a class="button btnSave"><span>{-#msgGeolevels_Save#-}</span></a>
-							<a class="button btnCancel"><span>{-#msgGeolevels_Cancel#-}</span></a>
-						</div>
-					</form>
-				</div>
-			</td>
-			<td valign="top" class="line">
-				<div id="divGeocarto_Edit" class="hidden" style="width:100%;min-width:400px;">
-					<form id="frmGeocarto">
 						<h4>{-#msgGeocarto_Subtitle#-}</h4>
-						<input class="GeoLevelId" name="GeoLevelId" type="hidden" value="-1" />
 						<table border="0" width="100%">
 							<tr>
 								<td>
@@ -171,10 +157,10 @@
 							<span class="status statusRequiredFields">{-#msgGeocarto_RequiredFields#-}<br/></span>
 						</div>
 					</form>
-				</div>
-			</td>
-		</tr>
-	</table>
+				</td>
+			</tr>
+		</table>
+	</div>
 	<div class="hidden">
 		<span id="msgGeolevels_UploadChooseFile">{-#msgGeolevels_UploadChooseFile#-}</span>
 	</div>

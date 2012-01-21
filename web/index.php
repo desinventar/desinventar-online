@@ -385,6 +385,9 @@ switch ($cmd)
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
 	case 'cmdGeolevelsUpdate':
+		fb($_POST);
+		$GeoLevel = $_POST['GeoLevel'];
+		fb($GeoLevel);
 		$answer = array();
 		$iReturn = ERR_NO_ERROR;
 		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
@@ -397,20 +400,58 @@ switch ($cmd)
 		}
 		if ($iReturn > 0)
 		{
-			$o = new DIGeoLevel($us, $_POST['GeoLevel']['GeoLevelId']);
-			$o->setFromArray($_POST['GeoLevel']);
-			if ($o->get('GeoLevelId') < 0)
+			$o = new DIGeoLevel($us, $GeoLevel['GeoLevelId']);
+			$o->setFromArray($GeoLevel);
+			if ($o->exist() > 0)
+			{
+				$iReturn = $o->update();
+			}
+			else
 			{
 				$o->set('GeoLevelId', $o->getMaxGeoLevel() + 1);
 				$iReturn = $o->insert();
 			}
-			$iReturn = $o->update();
-			if ($iReturn > 0)
+		}
+		fb('Geocarto update : ' . $iReturn);
+		if ($iReturn > 0)
+		{
+			$GeoLevelId = $GeoLevel['GeoLevelId'];
+			$GeoLevelLayerFile = 'geocarto' . sprintf('%02d', $GeoLevelId);
+			$SrcDir = TMP_DIR . '/' . $us->sSessionId;
+			$OutDir = $us->getRegionDir($RegionId);
+			$bUpdateCarto = 0;
+			foreach($GeoLevel['filename'] as $ext => $filename)
 			{
-				$r = new DIRegion($us, $RegionId);
-				$GeolevelsList = $r->getGeolevelList();
-				$answer['GeolevelsList'] = $GeolevelsList;
+				$bUpdateCarto = 1;
+				$srcFile = $SrcDir . '/' . $filename;
+				$dstFile = $OutDir . '/' . $GeoLevelLayerFile . '.' . strtolower($ext);;
+				if (file_exists($srcFile))
+				{
+					copy($srcFile, $dstFile);
+				}
 			}
+			fb('UpdateCarto : ' . $bUpdateCarto);
+			if ($bUpdateCarto > 0)
+			{
+				$o = new DIGeoCarto($us, $GeoLevelId);
+				$o->set('GeoLevelLayerFile', $GeoLevelLayerFile);
+				$o->set('GeoLevelLayerCode', $GeoLevel['GeoLevelLayerCode']);
+				$o->set('GeoLevelLayerName', $GeoLevel['GeoLevelLayerName']);
+				if ($o->exist() > 0)
+				{
+					$o->update();
+				}
+				else
+				{
+					$o->insert();
+				}
+			}
+		}
+		if ($iReturn > 0)
+		{
+			$r = new DIRegion($us, $RegionId);
+			$GeolevelsList = $r->getGeolevelList();
+			$answer['GeolevelsList'] = $GeolevelsList;
 		}
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');		
@@ -596,49 +637,6 @@ switch ($cmd)
 		}
 		$answer['Status'] = $iReturn;
 		echo json_encode($answer);		
-	break;
-	case 'cmdGeocartoUpdate':
-		$answer = array();
-		$iReturn = ERR_NO_ERROR;
-		if ($us->UserId == '')
-		{
-			$iReturn = ERR_ACCESS_DENIED;
-		}
-		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
-		{
-			$iReturn = ERR_UNKNOWN_ERROR;
-		}
-		if ($iReturn > 0)
-		{
-			$GeoLevelId = $_POST['GeoLevelId'];
-			$GeoLevelLayerFile = 'geocarto' . sprintf('%02d', $GeoLevelId);
-			$SrcDir = TMP_DIR . '/' . $us->sSessionId;
-			$OutDir = $us->getRegionDir($RegionId);
-			foreach($_POST['filename'] as $ext => $filename)
-			{
-				$srcFile = $SrcDir . '/' . $filename;
-				$dstFile = $OutDir . '/' . $GeoLevelLayerFile . '.' . strtolower($ext);;
-				if (file_exists($srcFile))
-				{
-					copy($srcFile, $dstFile);
-				}
-			}
-			$o = new DIGeoCarto($us, $GeoLevelId);
-			$o->set('GeoLevelLayerFile', $GeoLevelLayerFile);
-			$o->set('GeoLevelLayerCode', $_POST['GeoLevelLayerCode']);
-			$o->set('GeoLevelLayerName', $_POST['GeoLevelLayerName']);
-			if ($o->exist() > 0)
-			{
-				$o->update();
-			}
-			else
-			{
-				$o->insert();
-			}
-		}
-		$answer['Status'] = $iReturn;
-		// to pass data through iframe you will need to encode all html tags
-		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
 	break;
 	case 'cmdGeocartoUpload':
 		$answer = array();

@@ -10,6 +10,7 @@
 
 		<script type="text/javascript" src="/fileuploader/fileuploader.js"></script>
 
+		<script type="text/javascript" src="{-$desinventarURL-}/external/json2.js"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/js/common.js?version={-$jsversion-}"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/js/database_geolevels.js?version={-$jsversion-}"></script>
 
