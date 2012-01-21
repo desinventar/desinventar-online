@@ -7,31 +7,31 @@ function onReadyAdminUsers()
 	}).on('click', '#divAdminUsers #tblUserList tr', function() {
 		var UserId = jQuery(this).children("td:first").html();
 		jQuery.getJSON(jQuery('#desinventarURL').val() + '/user.php' + '?cmd=getUserInfo&UserId=' + UserId, function(data) {
-			jQuery("#txtUserId").attr('readonly','true');
-			jQuery("#txtUserId").val(data.UserId);
-			jQuery("#selCountryIso").val(data.CountryIso);
-			jQuery("#txtUserEMail").val(data.UserEMail);
-			jQuery("#txtUserFullName").val(data.UserFullName);
-			jQuery("#txtUserCity").val(data.UserCity);
-			jQuery("#chkUserActive").attr('checked', data.UserActive);
-			jQuery("#txtUserEditCmd").val('update');
+			jQuery('#divAdminUsers #txtUserId').attr('readonly','true');
+			jQuery('#divAdminUsers #txtUserId').val(data.UserId);
+			jQuery('#divAdminUsers #selCountryIso').val(data.CountryIso);
+			jQuery('#divAdminUsers #txtUserEMail').val(data.UserEMail);
+			jQuery('#divAdminUsers #txtUserFullName').val(data.UserFullName);
+			jQuery('#divAdminUsers #txtUserCity').val(data.UserCity);
+			jQuery('#divAdminUsers #chkUserActive').attr('checked', data.UserActive);
+			jQuery('#divAdminUsers #txtUserEditCmd').val('update');
 		});
 		UserEditFormUpdateStatus('');
-		jQuery("#divUserEdit").show();
+		jQuery('#divAdminUsers #divUserEdit').show();
 	});
 
 	// Add new User...
 	jQuery('body').on('click', '#divAdminUsers #btnUserAdd', function() {
 		clearUserEditForm();
-		jQuery("#txtUserId").removeAttr('readonly');
-		jQuery("#txtUserEditCmd").val('insert');
+		jQuery('#divAdminUsers #txtUserId').removeAttr('readonly');
+		jQuery('#divAdminUsers #txtUserEditCmd').val('insert');
 		UserEditFormUpdateStatus('');
-		jQuery("#divUserEdit").show();
+		jQuery('#divAdminUsers #divUserEdit').show();
 	});
 
 	// Cancel Edit, hide form
 	jQuery('body').on('click', '#divAdminUsers #btnUserEditCancel', function() {
-		jQuery("#divUserEdit").hide();
+		jQuery('#divAdminUsers #divUserEdit').hide();
 	});
 
 	// Cancel Edit, hide form
@@ -46,12 +46,12 @@ function onReadyAdminUsers()
 		var bReturn = validateUserEditForm();
 		if (bReturn > 0) {
 			// Remove the readonly attribute, this way the data is sent to processing
-			jQuery("#txtUserId").removeAttr('readonly');
+			jQuery('#divAdminUsers #txtUserId').removeAttr('readonly');
 			// Create an object with the information to send
-			var user = jQuery("#frmUserEdit").serializeObject();
+			var user = jQuery('#divAdminUsers #frmUserEdit').serializeObject();
 			// Checkboxes not selected are not passed by default to server, so we need
 			// to checkout and set a value here.
-			if (! jQuery("#chkUserActive").attr('checked')) {
+			if (! jQuery('#divAdminUsers #chkUserActive').attr('checked')) {
 				user['User[UserActive]'] = 'off';
 			}
 			// Send AJAX request to update information
@@ -60,7 +60,7 @@ function onReadyAdminUsers()
 				function(data) {
 					if (data.Status > 0) {
 						// Reload user list on success
-						jQuery("#divUserList").load(jQuery('#desinventarURL').val() + '/user.php' + '?cmd=list', function(data) {
+						jQuery('#divAdminUsers #divUserList').load(jQuery('#desinventarURL').val() + '/user.php' + '?cmd=list', function(data) {
 						});
 					}
 					UserEditFormUpdateStatus(data.Status);
