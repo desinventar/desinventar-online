@@ -100,62 +100,6 @@ switch ($cmd)
 			$t->display('user_passwdreminder.tpl');
 		}
 	break;
-	// WELCOME: Shows default window when user's login was sucessfull
-	case 'welcome':
-		// Shows the list of databases available for each user.
-		if ($us->UserId != '')
-		{
-			$t->assign('fullname', $us->getUserFullName());
-			// Enable access only Valid Role
-			$rol1 = $us->getUserRole('');
-			if ($rol1 == 'ADMINPORTAL')
-			{
-				$t->assign('ctl_portalperms', true);
-			}
-			// Find regions where user has permissions
-			//$role = $us->getUserRole('_ALL_');
-			$role  = $us->getUserRoleList();
-			$radm = array();
-			$robs = array();
-			$rusr = array();
-			$rsup = array();
-			$hrole = false;
-			foreach ($role as $k=>$v)
-			{
-				$RegionId    = $k;
-				$sRole        = $v['Role'];
-				$sRegionLabel = $v['RegionLabel'];
-				$hrole = true;
-				switch ($sRole)
-				{
-					case 'ADMINREGION':		$radm[$RegionId] = $sRegionLabel;
-					break;
-					case 'USER':			$rusr[$RegionId] = $sRegionLabel;
-					break;
-					case 'SUPERVISOR':		$rsup[$RegionId] = $sRegionLabel;
-					break;
-					case 'OBSERVER':		$obs[$RegionId] = $sRegionLabel;
-					break;
-					default:				$hrole = false;
-					break;
-				}
-			} // foreach
-			if ($hrole)
-			{
-				$t->assign('ctl_showreg', true);
-			}
-			$t->assign('radm', $radm);//empty($radm) ? false : $radm);
-			$t->assign('rusr', $rusr);//empty($rusr) ? false : $rusr);
-			$t->assign('rsup', $rsup);//empty($rsup) ? false : $rsup);
-			$t->assign('robs', $robs);//empty($robs) ? false : $robs);
-			$t->display('user_welcome.tpl');
-		}
-		else
-		{
-			// Error logging user, send to password lost form
-			$t->display('user_passwdreminder.tpl');
-		}
-	break; // end WELCOME
 	case 'getUserInfo':
 		$user = null;
 		$UserId = getParameter('UserId', '');
