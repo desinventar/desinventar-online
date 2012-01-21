@@ -330,12 +330,14 @@ switch ($cmd)
 	case 'admin':
 	case 'cmdAdminMain':
 	case 'cmdAdminDB':
-	case 'cmdAdminUsers':
 		$t->assign('CountryList', $us->q->getCountryList());
 		$t->assign('ctl_adminreg', true);
 		$t->assign('ctl_reglist', true);
 		$t->assign('ctl_admregmess', true);
 		$t->display('main_region.tpl');
+	break;
+	case 'cmdAdminUsers':
+		$t->display('main_admin_users.tpl');
 	break;
 	case 'cmdDatabaseLoadData':
 		$answer = array();
