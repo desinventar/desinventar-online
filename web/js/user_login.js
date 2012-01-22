@@ -60,7 +60,7 @@ function onReadyUserLogin()
 				{
 					if (parseInt(data.Status) > 0)
 					{
-						doUserLoginUpdateMsg("#msgUserLoggedIn");
+						doUserLoginUpdateMsg('#msgUserLoggedIn');
 						jQuery('#fldUserId').val('');
 						jQuery("#fldUserPasswd").val('');
 
@@ -135,11 +135,11 @@ function doUserLogout()
 function doUserLoginUpdateMsg(msgId)
 {
 	// Hide all status Msgs (class="status")
-	jQuery(".status").hide();
+	jQuery('div.UserLogin .status').hide();
 	if (msgId != '')
 	{
 		// Show specified message(s)
-		jQuery(msgId).show();
+		jQuery('div.UserLogin ' + msgId).show();
 	}
 	return(true);
 } //doUserLoginUpdateMsg()
