@@ -1415,7 +1415,7 @@
 			<Text LangIsoCode="eng">Types of events</Text>
 			<Text LangIsoCode="spa">Tipo de eventos</Text>
 			<Text LangIsoCode="por">Tipos de eventos</Text>
-			<Text LangIsoCode="fre">Types d&quot;évènements</Text>
+			<Text LangIsoCode="fre">Types d'évènements</Text>
 		</Message>
 		<Message id="mcauses">
 			<Text LangIsoCode="eng">Types of causes</Text>
