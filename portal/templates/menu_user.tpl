@@ -4,7 +4,7 @@
 		<td width="100%">
 			<div id="divUserIsLoggedOut">
 				<a href="#" id="linkShowUserLogin" class="menuLink">{-#msgUserAccess#-}</a>
-				{-include file="../../web/templates/user_login.tpl" confdir="../../web/conf/"-}						
+				{-include file="../../web/templates/user_login.tpl" confdir="../../web/conf/"-}
 			</div>
 			<a href="#" id="linkUserRegionList" class="menuLink">{-#msgRegionList#-}</a><br />
 			<div id="divUserIsLoggedIn">
