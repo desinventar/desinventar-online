@@ -83,9 +83,9 @@
 		</td>
 	</tr>
 </table>
-<div id="divRegionInfo" class="contentBlock" style="display:none;">
-	{-include file="region_info.tpl"-}
-</div>
+<!-- divRegionInfo -->
+{-include file="region_info.tpl"-}
+
 <div id="dcr">
 </div>
 <iframe class="hidden" name="iframeDownload">

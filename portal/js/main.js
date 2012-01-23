@@ -81,7 +81,7 @@ function onReadyPortal() {
 		jQuery('#lstUserLogin').hide();
 		jQuery('#divUserIsLoggedIn').show();
 		jQuery('#divUserIsLoggedOut').hide();
-		updateDatabaseListByUser();
+		doUpdateDatabaseListByUser();
 		jQuery('body').trigger('UserUpdateInfo');
 	});
 
@@ -113,7 +113,7 @@ function onReadyPortal() {
 	});
 
 	jQuery('#linkUserRegionList').click(function() {
-		updateDatabaseListByUser();
+		doUpdateDatabaseListByUser();
 		return false;
 	});
 	

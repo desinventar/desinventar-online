@@ -1,6 +1,6 @@
 {-config_load file="$lg.conf" section="grpMainStrings"-}
 {-config_load file="$lg.conf" section="grpMenuRegion"-}
-{-** REGIONINFO: Show Full Region Information **-}
+<div id="divRegionInfo" class="contentBlock" style="display:none;">
 	<table border="0">
 		<tr>
 			<td>
@@ -69,3 +69,4 @@
 			</td>
 		</tr>
 	</table>
+</div>
