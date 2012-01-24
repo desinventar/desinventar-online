@@ -280,6 +280,11 @@ class Graphic
 					$iInterval = 1;
 				}
 				$this->g->xaxis->SetTextLabelInterval($iInterval);
+				
+				if (isset($opc['prmGraph']['FieldLabel'][0]))
+				{
+					$sY1AxisLabel = $opc['prmGraph']['FieldLabel'][0];
+				}
 
 				$this->g->ygrid->Show(true,true);
 				$this->g->yaxis->SetTitle($sY1AxisLabel, 'middle');
@@ -293,6 +298,10 @@ class Graphic
 				}
 		        if (isset($opc['prmGraph']['Scale'][1]) && ($gType == '2TEMPO' || $gType == '2COMPAR'))
 		        {
+					if (isset($opc['prmGraph']['FieldLabel'][1]))
+					{
+						$sY2AxisLabel = $opc['prmGraph']['FieldLabel'][1];
+					}
 					$this->g->SetY2Scale($opc['prmGraph']['Scale'][1]);	// int, log
 					$this->g->y2grid->Show(true,true);
 					$this->g->y2axis->SetTitle($sY2AxisLabel, 'middle');
