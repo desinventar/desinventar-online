@@ -82,7 +82,6 @@ switch ($cmd)
 			$answer['User'] = $user;
 		}
 		$answer['Status'] = $iReturn;
-		fb($answer);
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
 	case 'cmdUserLogout':
