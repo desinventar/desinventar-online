@@ -28,10 +28,10 @@ li {
 .line, .qq-upload-button-text {
 	font-family:arial,tahoma,helvetica,cursive; 
 	font-size:11px; color:#000000;
-	background-color:#FFFFFF; 
+	background-color:#ffffff; 
 	border-style:solid;
 	border-width:1px;
-	border-color:#BBBBBB;
+	border-color:#bbbbbb;
 }
 
 a.line {
@@ -44,40 +44,40 @@ a.line {
 }
 .CustomQueryListItem {
 	font-family:arial,tahoma,helvetica,cursive; 
-	font-size:11px; color:#000000; background-color:#FFFFFF; 
-	border-style:none; border-width:1px; border-color:#BBBBBB;
+	font-size:11px; color:#000000; background-color:#ffffff; 
+	border-style:none; border-width:1px; border-color:#bbbbbb;
 }
 input.btn {
 	font-family:arial,tahoma,helvetica,cursive; 
-	font-size:14px; color:#000000; background-color:#BBBBBB; }
+	font-size:14px; color:#000000; background-color:#bbbbbb; }
 input.bb:hover { 
 	border-color: #900; background: #fff; color: #600; border-right:2px solid #900; border-bottom:2px solid #900}
 input.bb:active { 
 	border-color: red; background: #fff; color: red; }
 input.medium {
 	font-family:arial,tahoma,helvetica,cursive; font-size:12px; 
-	color:#000000; background-color:#FFFFFF; border-style:solid; 
-	border-width:1px; border-color:#BBBBBB; }
+	color:#000000; background-color:#ffffff; border-style:solid; 
+	border-width:1px; border-color:#bbbbbb; }
 select   {
 	font-family:arial,tahoma,helvetica,cursive; font-size:11px; 
-	color:#000000; background-color:#FFFFFF; border-style:solid; 
+	color:#000000; background-color:#ffffff; border-style:solid; 
 	border-width:1px; }
 select.small  {
 	font-family:arial,tahoma,helvetica,cursive; font-size:10px; 
-	color:#000000; background-color:#FFFFFF; border-style:solid; 
+	color:#000000; background-color:#ffffff; border-style:solid; 
 	border-width:1px; }
 option  {
 	font-family:arial,tahoma,helvetica,cursive; font-size:11px; 
-	color:#000000; background-color:#FFFFFF; border-style:none; 
-	border-width:1px; border-color:#BBBBBB; }
+	color:#000000; background-color:#ffffff; border-style:none; 
+	border-width:1px; border-color:#bbbbbb; }
 option.small {
 	font-family:arial,tahoma,helvetica,cursive; font-size:10px; 
-	color:#000000; background-color:#FFFFFF; border-style:none; 
-	border-width:1px; border-color:#BBBBBB; }
+	color:#000000; background-color:#ffffff; border-style:none; 
+	border-width:1px; border-color:#bbbbbb; }
 textarea {
 	font-family:arial,tahoma,helvetica,cursive; font-size:11px; 
-	color:#000000; background-color:#FFFFFF; border-style:solid; 
-	border-width:1px; border-color:#BBBBBB; }
+	color:#000000; background-color:#ffffff; border-style:solid; 
+	border-width:1px; border-color:#bbbbbb; }
 a.info        { position:relative; z-index:24; text-decoration:none; }
 a.info:hover  { z-index:25; }
 a.info span   { display: none; }
@@ -92,7 +92,7 @@ a.info:visited	{ color: #333333;  }
 .disabled 	{ background-color: #cccccc; }
 .dwin {
 	overflow: auto; padding:0px; margin: 0px; border-style:solid;
-	border-width:1px; border-color:#BBBBBB;
+	border-width:1px; border-color:#bbbbbb;
 }
 b.required {
 	color: darkred;	
@@ -129,12 +129,12 @@ table.col {
 }
 
 .header     { 
- color: #FFFFFF; 
+ color: #ffffff; 
  background-color: #AAAAAA;
 }
 
 .normal     { 
- background-color: #FFFFFF; 
+ background-color: #ffffff; 
 }
 
 .under      {
@@ -169,11 +169,11 @@ table.conf { border: 15px solid #fff; width: 100%; height: 100%; }
 }
 input.sub {
 	font-family:arial,tahoma,helvetica,cursive; font-size:11px; 
-	font-weight:bolder; color:#000000; background-color:#FFFFFF; 
-	border-style:solid; border-width:1px; border-color:#FFFFFF; width: 120px; 
+	font-weight:bolder; color:#000000; background-color:#ffffff; 
+	border-style:solid; border-width:1px; border-color:#ffffff; width: 120px; 
 }
-disabled {
-	background-color: #eee;
+disabled, .disabled {
+	background-color: #ddd;
 }
 enabled {
 	background-color: #fff;
