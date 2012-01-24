@@ -812,10 +812,12 @@ switch ($cmd)
 	case 'main':
 		// Direct access returns a list of public regions on this server
 		$t->assign('lg', $lg);
-		$t->assign('LanguageList', $us->q->loadLanguages(1));
-		$t->assign('CountryList', $us->q->getCountryList());
-		$t->assign('regionlist', $us->listDB());
-		$t->assign('ctl_noregion', true);
+		$LanguageList = $us->q->loadLanguages(1);
+		$CountryList = $us->q->getCountryList();
+		$RegionList = $us->listDB();
+		$t->assign('LanguageList', $LanguageList);
+		$t->assign('CountryList' , $CountryList);
+		$t->assign('regionlist'  , $RegionList);
 		$t->display('index.tpl');
 	break;
 	case 'cmdSearchCountryList':
