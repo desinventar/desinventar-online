@@ -7,14 +7,19 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" href="{-$desinventarURLPortal-}/css/portal.css?version={-$jsversion-}" type="text/css" />
 	<link rel="stylesheet" href="{-$desinventarURL-}/css/desinventar.css?version={-$jsversion-}" type="text/css" />
+
 	{-include file="../../web/templates/jquery.tpl" confdir="../../web/conf/"-}
-	<script type="text/javascript" src="{-$desinventarURL-}/include/prototype.js"></script>
-	<script type="text/javascript" src="{-$desinventarURL-}/include/menu.js"></script>
-	<script type="text/javascript" src="{-$desinventarURL-}/include/md5.js"></script>
-	<script type="text/javascript" src="{-$desinventarURL-}/js/user_login.js?version={-$jsversion-}"></script>
+
+	<script type="text/javascript" src="{-$desinventarURL-}/external/prototype.js"></script>
+	<script type="text/javascript" src="{-$desinventarURL-}/external/menu.js"></script>
+	<script type="text/javascript" src="{-$desinventarURL-}/external/md5.js"></script>
+
 	<link type="text/css" rel="stylesheet" href="{-$desinventarURL-}/include/clickmenu/clickmenu.css" />
 	<script type="text/javascript" src="{-$desinventarURL-}/include/clickmenu/jquery.clickmenu.js"></script>
+
 	<script type="text/javascript" src="{-$desinventarURL-}/js/common.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="{-$desinventarURL-}/js/dboperations.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="{-$desinventarURL-}/js/user_login.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURLPortal-}/js/main.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" language="javascript">
 		jQuery(document).ready(function() {

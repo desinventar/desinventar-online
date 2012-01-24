@@ -85,7 +85,9 @@
 			<table width="80%">
 				<tr>
 					<td>
-						{-$dic.DBEvePersonName[0]-}<b style="color:darkred;">*</b>
+						<span class="Predefined">{-#msgEvents_Predefined#-}</span>
+						<span class="Custom">{-#msgEvents_Custom#-}</span>
+						<b style="color:darkred;">*</b>
 						<br />
 						<input id="fldDatabaseEvents_EventName" name="EventName" type="text" class="line" maxlength="40" style="width:500px;" tabindex="1"
 							title="{-$dic.DBEvePersonName[2]-}" />

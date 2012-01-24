@@ -88,11 +88,17 @@ function onReadyUserLogin()
 function doUserLoginCreate()
 {
 	// User Login Window
-	var w = new Ext.Window({id:'wndUserLogin',
-		el:'divUserLoginWindow', layout:'fit', x:300, y:100, width:500, height:300, 
-		closeAction:'hide', plain: true, animCollapse: false, constrainHeader: true,
-		items: new Ext.Panel({ contentEl: 'divUserLoginContent', autoScroll: true })
-	});
+	try
+	{
+		var w = new Ext.Window({id:'wndUserLogin',
+			el:'divUserLoginWindow', layout:'fit', x:300, y:100, width:500, height:300, 
+			closeAction:'hide', plain: true, animCollapse: false, constrainHeader: true,
+			items: new Ext.Panel({ contentEl: 'divUserLoginContent', autoScroll: true })
+		});
+	}
+	catch (e)
+	{
+	}
 } //doUserLoginCreate()
 
 function doUserUpdateInfo(User)
