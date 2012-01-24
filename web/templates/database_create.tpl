@@ -22,12 +22,12 @@
 		{-#msgDatabaseCreateMsg1#-} <a id="lnkDatabaseCreateDBURL" href="#"><span id="txtDatabaseCreate_RegionId"></span></a>
 		<br />
 		<br />
-		{-#msgDatabaseCreateMsg2#-}<br />
+		{-#msgDatabaseCreateMsg2#-}:<br />
 		<ul>
 			<li>- {-#msgDatabaseCreateMsg2A#-}</li>
 			<li>- {-#msgDatabaseCreateMsg2B#-}</li>
 		</ul>
-		{-#msgDatabaseCreateMsg3#-}</br />
+		{-#msgDatabaseCreateMsg3#-}:</br />
 		<ul>
 			<li>- {-#mreginfo#-}</li>
 			<li>- {-#msgDBConfig_Events#-}</li>
