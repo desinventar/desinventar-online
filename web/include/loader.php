@@ -64,16 +64,20 @@ if (isset($_SERVER['HTTP_HOST']))
 		{
 			$distro = strtolower(exec('/usr/bin/lsb_release -s -i'));
 		}
+		$_SERVER['DISTRO'] = $distro;
+
+		$_SERVER['DESINVENTAR_CACHEDIR'] = '/var/cache/Smarty/desinventar';
 		switch($distro)
 		{
 			case 'debian':
 				//smarty3 package location
 				define('SMARTYDIR', '/usr/share/php/smarty3');
+				$_SERVER['DESINVENTAR_CACHEDIR'] = '/var/cache/smarty3/desinventar';
 			break;
 			default:
 				define('SMARTYDIR', '/usr/share/php/Smarty');
 			break;
-		}		
+		}
 		define('JPGRAPHDIR', '/usr/share/php/jpgraph');
 		define('FONTSET' , '/usr/share/fonts/liberation/fonts.txt');
 		define('TEMP', '/var/tmp/desinventar');
@@ -87,7 +91,6 @@ if (isset($_SERVER['HTTP_HOST']))
 			$_SERVER['DESINVENTAR_DATADIR']  = '/var/lib/desinventar';
 		}
 		$_SERVER['DESINVENTAR_MAPDIR'] = '/usr/share/desinventar/worldmap';
-		$_SERVER['DESINVENTAR_CACHEDIR'] = '/var/cache/Smarty/desinventar';
 	}
 }
 else
