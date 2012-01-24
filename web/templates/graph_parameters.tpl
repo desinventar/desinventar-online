@@ -7,7 +7,7 @@
 		{-#msgViewGraph#-}
 	</div>
 	<div id="grp-cfg">
-		<form id="CG" method="post" action="">
+		<form id="frmGraphParams" method="post" action="">
 			<table class="conf" cellpadding=1 cellspacing=1>
 			<tr valign="top">
 				<td colspan=3 align="center">
@@ -19,6 +19,7 @@
 				<td id="tdGraphParamAxis1" align="right">
 					<u>{-#gveraxis#-} 1:</u><br />
 					<b><span help_tip="{-$dic.GraphField[2]-}">{-$dic.GraphField[0]-}</span></b><br />
+					<input id="prmGraphFieldLabel0" name="prmGraph[FieldLabel][0]" type="hidden" value="" />
 					<select id="prmGraphField0" name="prmGraph[Field][0]" help_tip="{-$dic.GraphField[2]-}" class="line">
 						<option value="D.DisasterId||" selected>{-$dic.GraphDisasterId_[0]-}</option>
 					{-foreach name=ef1 key=k item=i from=$ef1-}
@@ -91,6 +92,7 @@
 					<div id="divVerticalAxis2">
 						<u>{-#gveraxis#-} 2:</u><br />
 						<b help_tip="{-$dic.GraphField[2]-}">{-$dic.GraphField[0]-}</b><br />
+						<input id="prmGraphFieldLabel1" type="hidden" name="prmGraph[FieldLabel][1]" value="" />
 						<select id="prmGraphField1" name="prmGraph[Field][1]" size="1" help_tip="{-$dic.GraphField[2]-}"
 							 class="line">
 							<option value="" selected></option>
