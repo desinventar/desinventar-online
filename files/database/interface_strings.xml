@@ -3309,35 +3309,23 @@
 			<Text LangIsoCode="por">Ativo</Text>
 			<Text LangIsoCode="fre">Actif</Text>
 		</Message>
-		<Message id="msgDatabaseUsers_RegionActiveTooltip">
-			<Text LangIsoCode="eng">The database will be available in your database list</Text>
-			<Text LangIsoCode="spa">La base quedará disponible en su listado de bases</Text>
-			<Text LangIsoCode="por">O banco de dados estará disponível na sua lista de banco de dados</Text>
-			<Text LangIsoCode="fre">La base de données sera disponible dans votre liste de base de données</Text>
-		</Message>
-		<Message id="msgDatabaseUsers_RegionActiveTooltipOld">
-			<Text LangIsoCode="eng">Uncheck this option if you want to completely disable the access to this database</Text>
-			<Text LangIsoCode="spa">Desactive esta opción si desea deshabilitar completamente el acceso a esta base de datos</Text>
-			<Text LangIsoCode="por">Desmarque essa opção se você quiser desativar completamente o acesso a este banco de dados</Text>
-			<Text LangIsoCode="fre">Décochez cette option si vous voulez désactiver totalement l'accès à cette base de données</Text>
-		</Message>
 		<Message id="msgDatabaseUsers_RegionPublic">
 			<Text LangIsoCode="eng">Public</Text>
 			<Text LangIsoCode="spa">Pública</Text>
 			<Text LangIsoCode="por">Pública</Text>
 			<Text LangIsoCode="fre">Publique</Text>
 		</Message>
+		<Message id="msgDatabaseUsers_RegionActiveTooltip">
+			<Text LangIsoCode="eng">The database will be available in your database list</Text>
+			<Text LangIsoCode="spa">La base quedará disponible en su listado de bases</Text>
+			<Text LangIsoCode="por">O banco de dados estará disponível na sua lista de banco de dados</Text>
+			<Text LangIsoCode="fre">La base de données sera disponible dans votre liste de base de données</Text>
+		</Message>
 		<Message id="msgDatabaseUsers_RegionPublicTooltip">
 			<Text LangIsoCode="eng">Check this option to allow public queries to the database</Text>
 			<Text LangIsoCode="spa">Marque esta opcion para habilitar la consulta pública de la base</Text>
 			<Text LangIsoCode="por">Marque esta opção para permitir consultas públicas ao banco de dados</Text>
 			<Text LangIsoCode="fre">Cochez cette option pour autoriser les requêtes du public à la base</Text>
-		</Message>
-		<Message id="msgDatabaseUsers_RegionPublicTooltipOld">
-			<Text LangIsoCode="eng">Uncheck the option to prevent anonymous users from accessing the database</Text>
-			<Text LangIsoCode="spa">Desactive la opción para evitar que los usuarios anónimos tengan acceso a la base de datos</Text>
-			<Text LangIsoCode="por">Desmarque a opção para impedir que usuários anônimos acessem o banco de dados</Text>
-			<Text LangIsoCode="fre">Décochez l'option pour empêcher les utilisateurs anonymes d'accéder à la base de données</Text>
 		</Message>
 		<Message id="msgDatabaseUsers_UserId">
 			<Text LangIsoCode="eng">User</Text>
@@ -3516,16 +3504,16 @@
 			<Text LangIsoCode="fre">Publique</Text>
 		</Message>
 		<Message id="msgDatabaseEditRegionActiveTooltip">
-			<Text LangIsoCode="eng">The database can be used and will be shown in the database list</Text>
-			<Text LangIsoCode="spa">La base de datos se pueden utilizar y se mostrará en el listado de bases de datos</Text>
-			<Text LangIsoCode="por">Banco de dados pode ser usado e será mostrado na lista de banco de dados</Text>
-			<Text LangIsoCode="fre">Base de données peut être utilisé et sera affiché dans la liste des bases de données</Text>
+			<Text LangIsoCode="eng">The database will be available in your database list</Text>
+			<Text LangIsoCode="spa">La base quedará disponible en su listado de bases</Text>
+			<Text LangIsoCode="por">O banco de dados estará disponível na sua lista de banco de dados</Text>
+			<Text LangIsoCode="fre">La base de données sera disponible dans votre liste de base de données</Text>
 		</Message>
 		<Message id="msgDatabaseEditRegionPublicTooltip">
-			<Text LangIsoCode="eng">To query database user does not need an account on server</Text>
-			<Text LangIsoCode="spa">Para consultar la base de datos de usuario no necesita una cuenta en el servidor</Text>
-			<Text LangIsoCode="por">Para consulta do banco de dados, usuário não precisa de uma conta no servidor</Text>
-			<Text LangIsoCode="fre">Pour interroger utilisateur de la base n'a pas besoin d'un compte sur le serveur</Text>
+			<Text LangIsoCode="eng">Check this option to allow public queries to the database</Text>
+			<Text LangIsoCode="spa">Marque esta opcion para habilitar la consulta pública de la base</Text>
+			<Text LangIsoCode="por">Marque esta opção para permitir consultas públicas ao banco de dados</Text>
+			<Text LangIsoCode="fre">Cochez cette option pour autoriser les requêtes du public à la base</Text>
 		</Message>
 	</Group>
 	<Group name="grpDatabaseCreate">
