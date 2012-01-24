@@ -59,10 +59,24 @@ if (isset($_SERVER['HTTP_HOST']))
 		define('MODE', 'online');
 		define('ARCH', 'LINUX');
 		define('MAPSERV', 'mapserv');
-		define('SMARTYDIR', '/usr/share/php/Smarty');
-		define('TEMP', '/var/tmp/desinventar');
+		$distro = 'linux';
+		if (file_exists('/usr/bin/lsb_release'))
+		{
+			$distro = strtolower(exec('/usr/bin/lsb_release -s -i'));
+		}
+		switch($distro)
+		{
+			case 'debian':
+				//smarty3 package location
+				define('SMARTYDIR', '/usr/share/php/smarty3');
+			break;
+			default:
+				define('SMARTYDIR', '/usr/share/php/Smarty');
+			break;
+		}		
 		define('JPGRAPHDIR', '/usr/share/php/jpgraph');
 		define('FONTSET' , '/usr/share/fonts/liberation/fonts.txt');
+		define('TEMP', '/var/tmp/desinventar');
 		if (! isset($_SERVER['DESINVENTAR_WEB']))
 		{
 			$_SERVER['DESINVENTAR_WEB']      = '/usr/share/desinventar/web';
@@ -140,7 +154,6 @@ if (MODE != 'command')
 // information, even for anonymous users
 $us = new UserSession($SessionId);
 $us->awake();
-
 if (MODE != 'command')
 {
 	error_reporting(E_ALL && ~E_NOTICE);
@@ -154,7 +167,7 @@ if (MODE != 'command')
 	// Smarty configuration
 	require_once(SMARTYDIR . '/Smarty.class.php');
 	$t = new Smarty();
-	$t->debugging       = false;
+	$t->debugging       = true;
 	$t->config_dir      = $confdir;
 	$t->template_dir    = $templatedir;
 	$t->compile_dir     = SMTY_DIR;
