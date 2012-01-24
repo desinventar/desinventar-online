@@ -26,12 +26,14 @@ function onReadyDatabaseEvents()
 			jQuery('#divDatabaseEvents_Edit span.Custom').hide();
 			jQuery('#divDatabaseEvents_Edit span.Predefined').show();
 			jQuery('#fldDatabaseEvents_EventDesc').prop('disabled', true);
+			jQuery('#fldDatabaseEvents_EventDesc').addClass('disabled');
 		}
 		else
 		{
 			jQuery('#divDatabaseEvents_Edit span.Custom').show();
 			jQuery('#divDatabaseEvents_Edit span.Predefined').hide();
 			jQuery('#fldDatabaseEvents_EventDesc').prop('disabled', false);
+			jQuery('#fldDatabaseEvents_EventDesc').removeClass('disabled');
 		}
 		jQuery('#divDatabaseEvents_Edit').show();
 	}).on('mouseover', 'tr', function(event) {
