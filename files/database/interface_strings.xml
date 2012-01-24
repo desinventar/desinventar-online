@@ -3578,10 +3578,10 @@
 			<Text LangIsoCode="fre">Insérez les unités géographiques à chaque niveau</Text>
 		</Message>
 		<Message id="msgDatabaseCreateMsg3">
-			<Text LangIsoCode="eng">Optionally the database can be personalized with the following options</Text>
-			<Text LangIsoCode="spa">Opcionalmente, la base de datos se puede personalizar con las siguientes opciones</Text>
-			<Text LangIsoCode="por">Opcionalmente, o banco de dados pode ser personalizado com as seguintes opções</Text>
-			<Text LangIsoCode="fre">En option, la base de données peuvent être personnalisées avec les options suivantes</Text>
+			<Text LangIsoCode="eng">The database can be personalized with the following options</Text>
+			<Text LangIsoCode="spa">La base de datos se puede personalizar con las siguientes opciones</Text>
+			<Text LangIsoCode="por">O banco de dados pode ser personalizado com as seguintes opções</Text>
+			<Text LangIsoCode="fre">La base de données peuvent être personnalisées avec les options suivantes</Text>
 		</Message>
 		<Message id="msgDatabaseCreateMsg4">
 			<Text LangIsoCode="eng">Ok</Text>
