@@ -1002,6 +1002,18 @@
 	</Group>
 	<Group name="grpDatabaseEvents">
 		<Message id="msgDatabaseEvents_CustomEventTitle">
+			<Text LangIsoCode="eng">Types of events</Text>
+			<Text LangIsoCode="spa">Tipo de eventos</Text>
+			<Text LangIsoCode="por">Tipos de eventos</Text>
+			<Text LangIsoCode="fre">Types d'évènements</Text>
+		</Message>
+		<Message id="msgEvents_Predefined">
+			<Text LangIsoCode="eng">Predefined event</Text>
+			<Text LangIsoCode="spa">Evento predefinido</Text>
+			<Text LangIsoCode="por">Evento predefinido</Text>
+			<Text LangIsoCode="fre">Événement prédéfini</Text>
+		</Message>
+		<Message id="msgEvents_Custom">
 			<Text LangIsoCode="eng">Personalised event</Text>
 			<Text LangIsoCode="spa">Evento personalizado</Text>
 			<Text LangIsoCode="por">Evento personalizado</Text>
