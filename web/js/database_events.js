@@ -12,7 +12,6 @@ function onReadyDatabaseEvents()
 
 	jQuery('.clsDatabaseEventsStatus').hide();
 
-	
 	jQuery('#tbodyDatabaseEvents_EventListCustom,#tbodyDatabaseEvents_EventListDefault').on('click', 'tr', function(event) {
 		jQuery('#fldDatabaseEvents_EventId').val(jQuery('.EventId',this).text());
 		jQuery('#fldDatabaseEvents_EventName').val(jQuery('.EventName',this).text());
@@ -21,20 +20,7 @@ function onReadyDatabaseEvents()
 		jQuery('#fldDatabaseEvents_EventPredefined').val(jQuery('.EventPredefined',this).text());
 
 		jQuery('#btnDatabaseEvents_Add').hide();
-		if (parseInt(jQuery('#fldDatabaseEvents_EventPredefined').val()) > 0)
-		{
-			jQuery('#divDatabaseEvents_Edit span.Custom').hide();
-			jQuery('#divDatabaseEvents_Edit span.Predefined').show();
-			jQuery('#fldDatabaseEvents_EventDesc').prop('disabled', true);
-			jQuery('#fldDatabaseEvents_EventDesc').addClass('disabled');
-		}
-		else
-		{
-			jQuery('#divDatabaseEvents_Edit span.Custom').show();
-			jQuery('#divDatabaseEvents_Edit span.Predefined').hide();
-			jQuery('#fldDatabaseEvents_EventDesc').prop('disabled', false);
-			jQuery('#fldDatabaseEvents_EventDesc').removeClass('disabled');
-		}
+		doEventsFormSetup();
 		jQuery('#divDatabaseEvents_Edit').show();
 	}).on('mouseover', 'tr', function(event) {
 			jQuery(this).addClass('highlight');
@@ -52,6 +38,7 @@ function onReadyDatabaseEvents()
 		jQuery('#fldDatabaseEvents_EventDesc').prop('disabled', false);
 		jQuery('#fldDatabaseEvents_EventActiveCheckbox').prop('checked', true).change();
 		jQuery('#fldDatabaseEvents_EventPredefined').val(0);
+		doEventsFormSetup();
 	});
 
 	jQuery('#btnDatabaseEvents_Save').click(function() {
@@ -128,6 +115,24 @@ function onReadyDatabaseEvents()
 		return false;
 	});
 } //onReadyDatabaseEvents()
+
+function doEventsFormSetup()
+{
+	if (parseInt(jQuery('#fldDatabaseEvents_EventPredefined').val()) > 0)
+	{
+		jQuery('#divDatabaseEvents_Edit span.Custom').hide();
+		jQuery('#divDatabaseEvents_Edit span.Predefined').show();
+		jQuery('#fldDatabaseEvents_EventDesc').prop('disabled', true);
+		jQuery('#fldDatabaseEvents_EventDesc').addClass('disabled');
+	}
+	else
+	{
+		jQuery('#divDatabaseEvents_Edit span.Custom').show();
+		jQuery('#divDatabaseEvents_Edit span.Predefined').hide();
+		jQuery('#fldDatabaseEvents_EventDesc').prop('disabled', false);
+		jQuery('#fldDatabaseEvents_EventDesc').removeClass('disabled');
+	}
+}
 
 function doDatabaseEventsPopulateLists()
 {
