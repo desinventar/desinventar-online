@@ -563,6 +563,7 @@
 			jQuery('#prmQueryCommand').val('cmdGraphSave');
 		}
 		jQuery('#prmGraphCommand').val(cmd);
+		jQuery('#frmGraphParams input.TendencyLabel0').val(jQuery('#frmGraphParams #prmGraphTendency0 option:selected').text());
 		jQuery('#frmGraphParams #prmGraphFieldLabel0').val(jQuery('#frmGraphParams #prmGraphField0 option:selected').text());
 		jQuery('#frmGraphParams #prmGraphFieldLabel1').val(jQuery('#frmGraphParams #prmGraphField1 option:selected').text());
 		
