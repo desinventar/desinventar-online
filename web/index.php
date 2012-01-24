@@ -69,6 +69,21 @@ switch ($cmd)
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
+	case 'cmdUserGetInfo':
+		$iReturn = ERR_DEFAULT_ERROR;
+		$answer = array();
+		$UserId = $us->UserId;
+		if ($UserId != '')
+		{
+			$iReturn = ERR_NO_ERROR;	// Login success
+			$user = array();
+			$user['Id']        = $us->UserId;
+			$user['FullName']  = $us->getUserFullName();
+			$answer['User'] = $user;
+		}
+		$answer['Status'] = $iReturn;
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
+	break;
 	case 'cmdUserLogout':
 		$iReturn = $us->logout();
 		$user = array();
