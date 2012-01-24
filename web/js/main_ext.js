@@ -699,7 +699,7 @@ function doDialogsCreate()
 				text: jQuery('#msgViewGraphButtonClear').text(),
 				handler: function()
 				{
-					$('CG').reset();
+					$('frmGraphParams').reset();
 					jQuery('#prmGraphTypeHistogram').change();
 				}
 			},

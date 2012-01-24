@@ -563,10 +563,14 @@
 			jQuery('#prmQueryCommand').val('cmdGraphSave');
 		}
 		jQuery('#prmGraphCommand').val(cmd);
-		combineForms('frmMainQuery', 'CG');
+		jQuery('#frmGraphParams #prmGraphFieldLabel0').val(jQuery('#frmGraphParams #prmGraphField0 option:selected').text());
+		jQuery('#frmGraphParams #prmGraphFieldLabel1').val(jQuery('#frmGraphParams #prmGraphField1 option:selected').text());
+		
+		combineForms('frmMainQuery', 'frmGraphParams');
 		Ext.getCmp('westm').collapse();
 		$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/graphic.php';
 		jQuery('#frmMainQuery').attr('target','dcr');
+
 		if (cmd != 'result')
 		{
 			jQuery('#frmMainQuery').attr('target', 'iframeDownload');
@@ -620,7 +624,7 @@
 		selectall('_D+Field[]');
 		combineForms('frmMainQuery', 'CD');
 		combineForms('frmMainQuery', 'CM');
-		combineForms('frmMainQuery', 'CG');
+		combineForms('frmMainQuery', 'frmGraphParams');
 		selectall('_S+Field[]');
 		combineForms('frmMainQuery', 'CS');
 		jQuery('#_CMD').val('savequery');

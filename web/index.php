@@ -47,7 +47,7 @@ $t->assign('appOptions', $appOptions);
 // 2011-11-18 Use this to detect file uploads...
 if (getParameter('qqfile','') != '')
 {
-	$cmd = 'cmdDatabaseUpload';
+	//$cmd = 'cmdDatabaseUpload';
 }
 switch ($cmd)
 {
