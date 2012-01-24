@@ -18,6 +18,13 @@
 					<td class="header GeoLevelActive">
 						<b>{-#msgGeolevels_GeoLevelActive#-}</b>
 					</td>
+					<td class="header center HasMap">
+						{-#msgGeolevels_HasMap#-}
+					</td>
+					<td class="header GeoLevelLayerCode hidden">
+					</td>
+					<td class="header GeoLevelLayerName hidden">
+					</td>
 				</tr>
 			</thead>
 			<tbody id="tbodyGeolevels_List">
@@ -30,6 +37,13 @@
 					</td>
 					<td class="GeoLevelActive">
 						<input type="checkbox" disabled="disabled" />						
+					</td>
+					<td class="HasMap">
+						<input type="checkbox" disabled="disabled" />						
+					</td>
+					<td class="GeoLevelLayerCode hidden">
+					</td>
+					<td class="GeoLevelLayerName hidden">
 					</td>
 				</tr>
 			</tbody>

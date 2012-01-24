@@ -274,7 +274,7 @@ a:hover	{	color:#00008b; }
 #tblGeolevels_List td.GeoLevelDesc {
 	width:40%;
 }
-#tblGeolevels_List td.GeoLevelActive {
+#tblGeolevels_List td.GeoLevelActive,td.HasMap {
 	text-align     :center;
 	vertical-align : text-top;
 }
