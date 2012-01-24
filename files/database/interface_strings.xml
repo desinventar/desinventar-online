@@ -3157,6 +3157,12 @@
 			<Text LangIsoCode="por">Descrição de nível</Text>
 			<Text LangIsoCode="fre">Description du niveau</Text>
 		</Message>
+		<Message id="msgGeolevels_HasMap">
+			<Text LangIsoCode="eng">Map</Text>
+			<Text LangIsoCode="spa">Mapa</Text>
+			<Text LangIsoCode="por">Mapa</Text>
+			<Text LangIsoCode="fre">Carte</Text>
+		</Message>
 		<Message id="msgGeolevels_GeoLevelActive">
 			<Text LangIsoCode="eng">Active</Text>
 			<Text LangIsoCode="spa">Activo</Text>

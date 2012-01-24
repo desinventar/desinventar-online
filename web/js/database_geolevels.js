@@ -173,6 +173,7 @@ function doGeolevelsPopulateList(GeolevelsList)
 		jQuery('.GeoLevelDesc', clonedRow).html(value.GeoLevelDesc.substring(0,150));
 		jQuery('.GeoLevelDesc', clonedRow).prop('title', value.GeoLevelDesc);
 		jQuery('.GeoLevelActive :input', clonedRow).prop('checked', value.GeoLevelActive>0);
+		jQuery('.HasMap :input', clonedRow).prop('checked', value.GeoLevelLayerFile != '');
 		jQuery('#tbodyGeolevels_List').append(clonedRow);
 	});
 	jQuery('#tblGeolevels_List .GeoLevelId').hide();
