@@ -211,12 +211,6 @@
 			<Text LangIsoCode="por">Entrada de dados</Text>
 			<Text LangIsoCode="fre">La saisie des données</Text>
 		</Message>
-		<Message id="mnuDatacardView">
-			<Text LangIsoCode="eng">View data cards</Text>
-			<Text LangIsoCode="spa">Ver fichas</Text>
-			<Text LangIsoCode="por">Ver os formulários</Text>
-			<Text LangIsoCode="fre">Voir le carte de données</Text>
-		</Message>
 		<Message id="mnuDatacardEdit">
 			<Text LangIsoCode="eng">Create/edit data cards</Text>
 			<Text LangIsoCode="spa">Crear/editar fichas</Text>

@@ -237,7 +237,6 @@ function doMainMenuHandler(item)
 			doUpdateDatabaseListByUser();
 		break;
 		// Datacards Menu Items
-		case 'mnuDatacardView':
 		case 'mnuDatacardEdit':
 			jQuery('#cardsRecordNumber').val(0);
 			jQuery('#cardsRecordSource').val('');
@@ -388,7 +387,6 @@ function doMainMenuCreate()
 
 	var mnuDatacard = new Ext.menu.Menu({
 		id: 'mnuDatacard', items: [
-			{id:'mnuDatacardView' , text: jQuery('span#mnuDatacardView').text() , handler: doMainMenuHandler },
 			{id:'mnuDatacardEdit' , text: jQuery('span#mnuDatacardEdit').text() , handler: doMainMenuHandler },
 			{id:'mnuDatacardSetup', text: jQuery('span#mnuDatacardSetup').text(), handler: doMainMenuHandler }
 		]
@@ -529,7 +527,6 @@ function doMainMenuUpdate()
 	Ext.getCmp('mnuFileReplace').hide();
 	Ext.getCmp('mnuDatacardSetup').hide();
 
-	Ext.getCmp('mnuDatacardView').show();
 	Ext.getCmp('mnuDatacardEdit').hide();
 	
 	// Show some menu items when a Region is Selected
@@ -545,14 +542,11 @@ function doMainMenuUpdate()
 			jQuery('#divMainMenu span.clsMenuWithRegion').each(function() {
 				Ext.getCmp(jQuery(this).attr('id')).enable();
 			});
-			Ext.getCmp('mnuDatacardView').show();
-			Ext.getCmp('mnuDatacardView').enable();
 			Ext.getCmp('mnuDatacardEdit').hide();
 		}
 		if (UserRoleValue >= 2) 
 		{
 			// Edit datacards instead of only view them
-			Ext.getCmp('mnuDatacardView').hide();
 			Ext.getCmp('mnuDatacardEdit').show();
 			Ext.getCmp('mnuDatacardEdit').enable();
 			// Enable other functions

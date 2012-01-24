@@ -35,7 +35,6 @@
 			<span id="mnuQueryOptionSave"        class="item clsMenuWithRegion">{-#mnuQueryOptionSave#-}</span>
 			<span id="mnuQueryOptionOpen"        class="item clsMenuWithRegion">{-#mnuQueryOptionOpen#-}</span>
 	<span id="mnuDatacard" class="menu">{-#mnuDatacard#-}</span>
-		<span id="mnuDatacardView"               class="item">{-#mnuDatacardView#-}</span>
 		<span id="mnuDatacardEdit"               class="item">{-#mnuDatacardEdit#-}</span>
 		<span id="mnuDatacardSetup"              class="item">{-#mnuDatacardSetup#-}</span>
 	<span id="mnuHelp"                           class="menu">{-#mnuHelp#-}</span>
