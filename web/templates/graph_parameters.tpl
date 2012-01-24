@@ -64,6 +64,7 @@
 					</select>
 					<br />
 					<b>{-#gtendline#-}</b><br/>
+					<input class="TendencyLabel0" name="prmGraph[TendencyLabel][0]" type="hidden" value="" />
 					<select id="prmGraphTendency0" name="prmGraph[Tendency][0]" class="line">
 						<option value="" selected></option>
 						<option value="LINREG">{-#glinearreg#-}</option>

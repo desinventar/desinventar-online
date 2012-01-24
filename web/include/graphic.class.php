@@ -419,7 +419,7 @@ class Graphic
 							$n++;
 						}
 						$ylr = $this->line($opc, $linreg, 'dashed');
-						$ylr->SetLegend('Linear Regression');
+						$ylr->SetLegend($opc['prmGraph']['TendencyLabel'][0]);
 						$m[] = $ylr;
 					}
 				}
