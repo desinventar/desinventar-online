@@ -493,10 +493,10 @@ function doMainMenuUpdate()
 	});
 	Ext.getCmp('mnuUser').setText(jQuery('span#mnuUser').text());
 	
+	Ext.getCmp('mnuDatacard').hide();
 	// Enable menu items when a User is logged in
 	if (jQuery('#desinventarUserId').val() == '')
 	{
-		Ext.getCmp('mnuDatacard').hide();
 		jQuery('#divMainMenu span.clsMenuWithoutUser').each(function() {
 			Ext.getCmp(jQuery(this).attr('id')).enable();
 		});
@@ -505,7 +505,6 @@ function doMainMenuUpdate()
 	}
 	else
 	{
-		Ext.getCmp('mnuDatacard').show();
 		jQuery('#divMainMenu span.clsMenuWithUser').each(function() {
 			Ext.getCmp(jQuery(this).attr('id')).enable();
 		});
@@ -535,6 +534,10 @@ function doMainMenuUpdate()
 	}
 	else
 	{
+		if (jQuery('#desinventarUserId').val() != '')
+		{
+			Ext.getCmp('mnuDatacard').show();
+		}
 		Ext.getCmp('mnuRegionLabel').setText('[' + jQuery('#desinventarRegionLabel').val() + ']');
 
 		if (UserRoleValue > 0)
