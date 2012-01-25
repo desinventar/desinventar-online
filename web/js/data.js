@@ -10,7 +10,6 @@ function onReadyData() {
 		var DisasterId = jQuery(this).attr('DisasterId');
 		var RecordNumber = jQuery(this).attr('rowindex');
 		var RecordCount = jQuery('#prmDataPageRecords').val();
-		console.log('data.js : ' + RecordNumber + '/' +  RecordCount);
 		jQuery('body').trigger('cmdDatacardGoto', [DisasterId, RecordNumber, RecordCount]);
 		return false;
 	});
