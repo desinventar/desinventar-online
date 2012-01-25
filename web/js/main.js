@@ -128,7 +128,6 @@ function onReadyMain()
 
 function doDatabaseLoadData()
 {
-	console.log('doDatabaseLoadData');
 	jQuery.post(
 		jQuery('#desinventarURL').val() + '/',
 		{

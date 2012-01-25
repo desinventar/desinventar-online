@@ -6,12 +6,12 @@
 function onReadyData() {
 	jQuery('body').on('click', '.linkGridGotoCard', function() {
 		jQuery('#cardsRecordSource').val('data');
-		jQuery('#cardsRecordCount').val(jQuery('#prmDataPageRecords').val());
-		jQuery('#cardsRecordNumber').val(jQuery(this).attr('rowindex'));
-		//console.log(jQuery('#cardsRecordNumber').val() + '/' + jQuery('#cardsRecordCount').val());
 		jQuery('body').trigger('cmdDatacardShow');
 		var DisasterId = jQuery(this).attr('DisasterId');
-		jQuery('body').trigger('cmdDatacardGoto', DisasterId);
+		var RecordNumber = jQuery(this).attr('rowindex');
+		var RecordCount = jQuery('#prmDataPageRecords').val();
+		console.log('data.js : ' + RecordNumber + '/' +  RecordCount);
+		jQuery('body').trigger('cmdDatacardGoto', [DisasterId, RecordNumber, RecordCount]);
 		return false;
 	});
 	
