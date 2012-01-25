@@ -5,18 +5,18 @@
 
 function onReadyData() {
 	jQuery('body').on('click', '.linkGridGotoCard', function() {
-		var DisasterId = jQuery(this).attr('DisasterId');
-		jQuery('body').trigger('cmdDatacardShow');
 		jQuery('#cardsRecordSource').val('data');
 		jQuery('#cardsRecordCount').val(jQuery('#prmDataPageRecords').val());
 		jQuery('#cardsRecordNumber').val(jQuery(this).attr('rowindex'));
-		setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId);
-		Ext.getCmp('wndDatacard').show();
+		//console.log(jQuery('#cardsRecordNumber').val() + '/' + jQuery('#cardsRecordCount').val());
+		jQuery('body').trigger('cmdDatacardShow');
+		var DisasterId = jQuery(this).attr('DisasterId');
+		jQuery('body').trigger('cmdDatacardGoto', DisasterId);
 		return false;
 	});
 	
 	// Page Number Fields
-	jQuery('#DataCurPage').keydown(function(event) {
+	jQuery('body').on('keydown', '#DataCurPage', function(event) {
 		if(event.keyCode == 13) {
 			doDataDisplayPage(jQuery(this).val());
 		} else {
@@ -25,16 +25,16 @@ function onReadyData() {
 	});
 	
 	// Navigation Buttons
-	jQuery('#btnGridGotoFirstPage').click(function() {
+	jQuery('body').on('click', '#btnGridGotoFirstPage', function() {
 		doDataDisplayPage(1);
 	});
-	jQuery('#btnGridGotoPrevPage').click(function() {
+	jQuery('body').on('click', '#btnGridGotoPrevPage', function() {
 		doDataDisplayPage('prev');
 	});
-	jQuery('#btnGridGotoNextPage').click(function() {
+	jQuery('body').on('click', '#btnGridGotoNextPage', function() {
 		doDataDisplayPage('next');
 	});
-	jQuery('#btnGridGotoLastPage').click(function() {
+	jQuery('body').on('click', '#btnGridGotoLastPage', function() {
 		doDataDisplayPage(jQuery('#prmDataPageCount').val());
 	});
 
@@ -46,14 +46,14 @@ function onReadyData() {
 	});
 	jQuery('body').trigger('cmdViewDataUpdate');
 
-}
+} //onReadyData()
 
 function doDataUpdate()
 {
 	jQuery('#tblDataRows tr:even').addClass('under');
 	// Set Number of Records in Current Displayed Page
 	jQuery('#prmDataPageRecords').val(jQuery('#tblDataRows tr').size());
-}
+} //doDataUpdate();
 
 function doDataDisplayPage(page)
 {
@@ -104,5 +104,5 @@ function doDataDisplayPage(page)
 			);
 		}
 	}
-} //function
+} //doDataDisplayPage()
 

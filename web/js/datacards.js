@@ -351,6 +351,10 @@ function onReadyDatacards()
 		doDatacardShow();
 	});
 
+	jQuery('body').on('cmdDatacardGoto', function(event, DisasterId) {
+		console.log('cmdDatacardGoto : ' + DisasterId);
+		setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId);
+	});
 	//Initialize components
 	jQuery('#divDatacard .tblGeography tr:first').hide();
 } //onReadyDatacards()
@@ -374,40 +378,44 @@ function doUpdateGeoLevelSelect(prmGeographyLevel, prmGeographyList)
 
 function doDatacardShow()
 {
-	//GeoLevel
-	jQuery('#divDatacard .tblGeography tr:gt(0)').remove();
-	jQuery('#divDatacard .tblGeography tr:first').hide();
-	var GeolevelsList = jQuery('body').data('GeolevelsList');
-	if (GeolevelsList == undefined)
+	if (jQuery('#divDatacard').is(':hidden'))
 	{
-		jQuery.post(
-			jQuery('#desinventarURL').val() + '/',
-			{
-				cmd      : 'cmdDatabaseLoadData',
-				RegionId : jQuery('#desinventarRegionId').val()
-			},
-			function(data)
-			{
-				jQuery('body').data('GeolevelsList', data.GeolevelsList);
-				jQuery('body').data('EventList', data.EventList);
-				jQuery('body').data('CauseList', data.CauseList);
-				jQuery('body').data('RecordCount', data.RecordCount);
-				var dataItems = jQuery('body').data();
-				jQuery.each(dataItems, function(index, value) {
-					if (index.substr(0,13) === 'GeographyList')
-					{
-						jQuery('body').removeData(index);
-					}
-				});
-				jQuery('body').data('GeographyList', data.GeographyList);
-				doDatacardUpdateDisplay();
-			},
-			'json'
-		);
-	}
-	else
-	{
-		doDatacardUpdateDisplay();
+		//GeoLevel
+		jQuery('#divDatacard .tblGeography tr:gt(0)').remove();
+		jQuery('#divDatacard .tblGeography tr:first').hide();
+		var GeolevelsList = jQuery('body').data('GeolevelsList');
+		if (GeolevelsList == undefined)
+		{
+			jQuery.post(
+				jQuery('#desinventarURL').val() + '/',
+				{
+					cmd      : 'cmdDatabaseLoadData',
+					RegionId : jQuery('#desinventarRegionId').val()
+				},
+				function(data)
+				{
+					jQuery('body').data('GeolevelsList', data.GeolevelsList);
+					jQuery('body').data('EventList', data.EventList);
+					jQuery('body').data('CauseList', data.CauseList);
+					jQuery('body').data('RecordCount', data.RecordCount);
+					var dataItems = jQuery('body').data();
+					jQuery.each(dataItems, function(index, value) {
+						if (index.substr(0,13) === 'GeographyList')
+						{
+							jQuery('body').removeData(index);
+						}
+					});
+					jQuery('body').data('GeographyList', data.GeographyList);
+					doDatacardUpdateDisplay();
+				},
+				'json'
+			);
+		}
+		else
+		{
+			console.log('doDatacardShow : data already loaded');
+			doDatacardUpdateDisplay();
+		}
 	}
 } //doDatacardShow()
 
@@ -1129,6 +1137,7 @@ function setDICardFromId(prmRegionId, prmDisasterId)
 		},
 		function(data)
 		{
+			console.log(jQuery('#cardsRecordNumber').val() + '/' + jQuery('#cardsRecordCount').val());
 			setDICard(prmRegionId, data);
 			jQuery('#divRecordNavigationInfo').hide();
 			var RecordNumber = parseInt(jQuery('#cardsRecordNumber').val());
