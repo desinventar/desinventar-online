@@ -50,7 +50,7 @@ function onReadyMain()
 					switch(myCmd)
 					{
 						case 'cmdGridShow':
-							onReadyData();
+							jQuery('body').trigger('cmdViewDataUpdate');
 						break;
 						case 'cmdMapShow':
 							createThematicMap();
