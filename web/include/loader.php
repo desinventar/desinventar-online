@@ -72,12 +72,10 @@ if (isset($_SERVER['HTTP_HOST']))
 				//smarty3 package location
 				define('SMARTYDIR', '/usr/share/php/smarty3');
 				$_SERVER['DESINVENTAR_CACHEDIR'] = '/var/cache/smarty3/desinventar';
-				define('JS_URL', '/javascript');
 			break;
 			default:
 				define('SMARTYDIR', '/usr/share/php/Smarty');
 				$_SERVER['DESINVENTAR_CACHEDIR'] = '/var/cache/Smarty/desinventar';
-				define('JS_URL', '');
 			break;
 		}
 		define('JPGRAPHDIR', '/usr/share/php/jpgraph');
@@ -215,7 +213,6 @@ if (MODE != 'command')
 	$t->assign('majorversion', MAJORVERSION);
 	$t->assign('version'     , VERSION);
 	$t->assign('jsversion'   , JSVERSION);
-	$t->assign('js_url'      , JS_URL);
 
 	// Configure DESINVENTAR (web) application location	
 	if (isset($_SERVER['REDIRECT_DESINVENTAR_URL']))
