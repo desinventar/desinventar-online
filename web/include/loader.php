@@ -172,7 +172,7 @@ if (MODE != 'command')
 	// Smarty configuration
 	require_once(SMARTYDIR . '/Smarty.class.php');
 	$t = new Smarty();
-	$t->debugging       = true;
+	$t->debugging       = false;
 	$t->config_dir      = $confdir;
 	$t->template_dir    = $templatedir;
 	$t->compile_dir     = SMTY_DIR;
