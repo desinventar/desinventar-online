@@ -120,5 +120,36 @@ function onReadyMain()
 		}
 		return false;
 	});
+	jQuery('body').on('cmdDatabaseLoadData', function() {
+		doDatabaseLoadData();
+	});
+	jQuery('body').trigger('cmdDatabaseLoadData');
 } //onReadyMain()
 
+function doDatabaseLoadData()
+{
+	console.log('doDatabaseLoadData');
+	jQuery.post(
+		jQuery('#desinventarURL').val() + '/',
+		{
+			cmd      : 'cmdDatabaseLoadData',
+			RegionId : jQuery('#desinventarRegionId').val()
+		},
+		function(data)
+		{
+			jQuery('body').data('GeolevelsList', data.GeolevelsList);
+			jQuery('body').data('EventList', data.EventList);
+			jQuery('body').data('CauseList', data.CauseList);
+			jQuery('body').data('RecordCount', data.RecordCount);
+			var dataItems = jQuery('body').data();
+			jQuery.each(dataItems, function(index, value) {
+				if (index.substr(0,13) === 'GeographyList')
+				{
+					jQuery('body').removeData(index);
+				}
+			});
+			jQuery('body').data('GeographyList', data.GeographyList);
+		},
+		'json'
+	);
+} //doDatabaseLoadData()
