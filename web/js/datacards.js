@@ -351,9 +351,9 @@ function onReadyDatacards()
 		doDatacardShow();
 	});
 
-	jQuery('body').on('cmdDatacardGoto', function(event, DisasterId) {
-		console.log('cmdDatacardGoto : ' + DisasterId);
-		setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId);
+	jQuery('body').on('cmdDatacardGoto', function(event, prmDisasterId, prmRecordNumber, prmRecordCount) {
+		console.log(prmRecordNumber + '/' +  prmRecordCount);
+		setDICardFromId(jQuery('#desinventarRegionId').val(), prmDisasterId, prmRecordNumber, prmRecordCount);
 	});
 	//Initialize components
 	jQuery('#divDatacard .tblGeography tr:first').hide();
@@ -413,7 +413,6 @@ function doDatacardShow()
 		}
 		else
 		{
-			console.log('doDatacardShow : data already loaded');
 			doDatacardUpdateDisplay();
 		}
 	}
@@ -724,10 +723,8 @@ function requestDatacard(myCmd, myValue)
 				displayDatacardStatusMsg('');
 				if (data.DisasterId != '')
 				{
-					jQuery('#cardsRecordNumber').val(data.RecordNumber);
-					jQuery('#cardsRecordCount').val(data.RecordCount);
 					jQuery('#cardsRecordSource').val('');
-					valid = setDICardFromId(RegionId, data.DisasterId);
+					valid = setDICardFromId(RegionId, data.DisasterId, data.RecordNumber, data.RecordCount);
 					
 					if (jQuery('#desinventarUserRoleValue').val() >= 2)
 					{
@@ -967,7 +964,7 @@ function doDatacardCancel()
 				// clear Help text area
 				showtip('','#ffffff');
 
-				valid = setDICardFromId(jQuery('#desinventarRegionId').val(), jQuery('#DisasterId').val());
+				valid = setDICardFromId(jQuery('#desinventarRegionId').val(), jQuery('#DisasterId').val(), jQuery('#cardsRecordNumber').val(), jQuery('#cardsRecordCount').val());
 				if (jQuery('#desinventarUserRoleValue').val() >= 2)
 				{
 					disenabutton($('btnDatacardEdit'), false);
@@ -999,8 +996,7 @@ function doDatacardGotoFirst()
 	{
 		var RecordNumber = 1;
 		var DisasterId = jQuery('.linkGridGotoCard[rowindex=' + RecordNumber + ']').attr('DisasterId');
-		jQuery('#cardsRecordNumber').val(RecordNumber);
-		valid = setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId);
+		valid = setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId, RecordNumber, jQuery('#cardsRecordCount').val());
 	}
 	else
 	{
@@ -1019,8 +1015,7 @@ function doDatacardGotoLast()
 	{
 		var RecordCount = parseInt(jQuery('#cardsRecordCount').val());
 		var DisasterId = jQuery('.linkGridGotoCard[rowindex=' + RecordCount + ']').attr('DisasterId');
-		jQuery('#cardsRecordNumber').val(RecordCount);
-		valid = setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId);
+		valid = setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId, RecordCount, RecordCount);
 	}
 	else
 	{
@@ -1042,8 +1037,7 @@ function doDatacardGotoPrev()
 		{
 			RecordNumber--;
 			var DisasterId = jQuery('.linkGridGotoCard[rowindex=' + RecordNumber + ']').attr('DisasterId');
-			jQuery('#cardsRecordNumber').val(RecordNumber);
-			valid = setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId);
+			valid = setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId, RecordNumber, jQuery('#cardsRecordCount').val());
 		}
 	}
 	else
@@ -1070,8 +1064,7 @@ function doDatacardGotoNext()
 		{
 			RecordNumber = RecordNumber + 1;
 			var DisasterId = jQuery('.linkGridGotoCard[rowindex=' + RecordNumber + ']').attr('DisasterId');
-			jQuery('#cardsRecordNumber').val(RecordNumber);
-			valid = setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId);
+			valid = setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId, RecordNumber, jQuery('#cardsRecordCount').val());
 		}
 	}
 	else
@@ -1127,13 +1120,15 @@ function setElementValue(formElement, value)
 	}
 } //setElementValue()
 
-function setDICardFromId(prmRegionId, prmDisasterId)
+function setDICardFromId(prmRegionId, prmDisasterId, prmRecordNumber, prmRecordCount)
 {
+	jQuery('#cardsRecordNumber').val(prmRecordNumber);
+	jQuery('#cardsRecordCount').val(prmRecordCount);
 	jQuery.post(jQuery('#desinventarURL').val() + '/cards.php',
 		{
-			'cmd' : 'getDatacard',
-			'RegionId' : prmRegionId,
-			'DisasterId' : prmDisasterId
+			'cmd'       : 'getDatacard',
+			'RegionId'  : prmRegionId,
+			'DisasterId': prmDisasterId
 		},
 		function(data)
 		{
