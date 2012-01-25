@@ -104,67 +104,69 @@ function onReadyDatabaseUpload()
 
 function doAdminDatabaseCreateUploader()
 {
-	var uploader = new qq.FileUploader({
-		element: document.getElementById('divFileUploaderControl'),
-		action: jQuery('#desinventarURL').val() + '/',
-		params:
-		{
-			cmd        : 'cmdDatabaseUpload',
-			UploadMode : jQuery('#fldDatabaseUploadMode').val(),
-			RegionId   : jQuery('#desinventarRegionId').val()
-		},
-		debug:false,
-		multiple:false,
-		allowedExtensions: ['zip'],
-		onSubmit: function(id, Filename)
-		{
-			jQuery('#txtDatabaseUploadFilename').val(Filename);
-			jQuery('#txtDatabaseUploadId').val(id);
-			jQuery('#prgDatabaseUploadProgressBar').show();
-			jQuery('#prgDatabaseUploadProgressMark').css('width', '0px');
-			jQuery('#divFileUploaderControl .qq-upload-button-text').hide();
-			jQuery('#btnDatabaseUploadCancel').show();
-			doDatabaseUploadStatusMsg('msgDatabaseUploadWaitForUpload');
-		},
-		onProgress: function(id, Filename, loaded, total)
-		{
-			var maxWidth = jQuery('#prgDatabaseUploadProgressBar').width();
-			var percent  = parseInt(loaded/total * 100);
-			var width    = parseInt(percent * maxWidth/100);
-			jQuery('#prgDatabaseUploadProgressMark').css('width', width);
-		},
-		onComplete: function(id, Filename, data)
-		{
-			doDatabaseUploadStatusMsg('');
-			jQuery('#btnDatabaseUploadCancel').hide();
-			jQuery('#txtDatabaseUploadFilename').val(data.filename);
-			if (parseInt(data.Status)>0)
+	jQuery('#divFileUploaderControl').each(function() {
+		var uploader = new qq.FileUploader({
+			element: document.getElementById(jQuery(this).attr('id')),
+			action: jQuery('#desinventarURL').val() + '/',
+			params:
 			{
-				jQuery('.clsDatabaseUploadType').hide();
-				if (jQuery('#fldDatabaseUploadMode').val() == 'Copy')
+				cmd        : 'cmdDatabaseUpload',
+				UploadMode : jQuery('#fldDatabaseUploadMode').val(),
+				RegionId   : jQuery('#desinventarRegionId').val()
+			},
+			debug:false,
+			multiple:false,
+			allowedExtensions: ['zip'],
+			onSubmit: function(id, Filename)
+			{
+				jQuery('#txtDatabaseUploadFilename').val(Filename);
+				jQuery('#txtDatabaseUploadId').val(id);
+				jQuery('#prgDatabaseUploadProgressBar').show();
+				jQuery('#prgDatabaseUploadProgressMark').css('width', '0px');
+				jQuery('#divFileUploaderControl .qq-upload-button-text').hide();
+				jQuery('#btnDatabaseUploadCancel').show();
+				doDatabaseUploadStatusMsg('msgDatabaseUploadWaitForUpload');
+			},
+			onProgress: function(id, Filename, loaded, total)
+			{
+				var maxWidth = jQuery('#prgDatabaseUploadProgressBar').width();
+				var percent  = parseInt(loaded/total * 100);
+				var width    = parseInt(percent * maxWidth/100);
+				jQuery('#prgDatabaseUploadProgressMark').css('width', width);
+			},
+			onComplete: function(id, Filename, data)
+			{
+				doDatabaseUploadStatusMsg('');
+				jQuery('#btnDatabaseUploadCancel').hide();
+				jQuery('#txtDatabaseUploadFilename').val(data.filename);
+				if (parseInt(data.Status)>0)
 				{
-					jQuery('#txtDatabaseUploadConfirmCopy').show();
-					jQuery('#btnDatabaseUploadCopy').show();
+					jQuery('.clsDatabaseUploadType').hide();
+					if (jQuery('#fldDatabaseUploadMode').val() == 'Copy')
+					{
+						jQuery('#txtDatabaseUploadConfirmCopy').show();
+						jQuery('#btnDatabaseUploadCopy').show();
+					}
+					else
+					{
+						jQuery('#txtDatabaseUploadConfirmReplace').show();
+						jQuery('#btnDatabaseUploadReplace').show();
+					}
+					doDatabaseUploadSetParameters(data.RegionInfo);
+					doDatabaseUploadStatusMsg('');
+					jQuery('#divDatabaseUploadControl').hide();
+					jQuery('#divDatabaseUploadParameters').show();
 				}
 				else
 				{
-					jQuery('#txtDatabaseUploadConfirmReplace').show();
-					jQuery('#btnDatabaseUploadReplace').show();
+					doDatabaseUploadReset();
+					doDatabaseUploadStatusMsg('msgDatabaseUploadErrorOnUpload');
 				}
-				doDatabaseUploadSetParameters(data.RegionInfo);
-				doDatabaseUploadStatusMsg('');
-				jQuery('#divDatabaseUploadControl').hide();
-				jQuery('#divDatabaseUploadParameters').show();
-			}
-			else
+			},
+			onCancel: function(id, Filename)
 			{
-				doDatabaseUploadReset();
-				doDatabaseUploadStatusMsg('msgDatabaseUploadErrorOnUpload');
 			}
-		},
-		onCancel: function(id, Filename)
-		{
-		}
+		});
 	});
 	jQuery('#divFileUploaderControl .qq-upload-button-text').html(jQuery('#msgDatabaseUploadChooseFile').val());
 	jQuery('#divFileUploaderControl .qq-upload-list').hide();

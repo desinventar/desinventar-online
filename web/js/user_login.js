@@ -88,17 +88,13 @@ function onReadyUserLogin()
 function doUserLoginCreate()
 {
 	// User Login Window
-	try
-	{
+	jQuery('#divUserLoginWindow').each(function() {
 		var w = new Ext.Window({id:'wndUserLogin',
 			el:'divUserLoginWindow', layout:'fit', x:300, y:100, width:500, height:300, 
 			closeAction:'hide', plain: true, animCollapse: false, constrainHeader: true,
 			items: new Ext.Panel({ contentEl: 'divUserLoginContent', autoScroll: true })
 		});
-	}
-	catch (e)
-	{
-	}
+	});
 } //doUserLoginCreate()
 
 function doUserUpdateInfo(User)
@@ -155,5 +151,9 @@ function doUserLoginShow()
 	doUserLoginUpdateMsg();
 	jQuery('#fldUserId').val('');
 	jQuery('#fldUserPasswd').val('');
-	Ext.getCmp('wndUserLogin').show();
+	var w = Ext.getCmp('wndUserLogin');
+	if (w != undefined)
+	{
+		w.show();
+	}
 } //doUserLoginShow()

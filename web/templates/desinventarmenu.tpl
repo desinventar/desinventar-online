@@ -4,11 +4,11 @@
 		<span id="mnuFileCreate"                 class="item clsMenuWithUser"  >{-#mnuFileCreate#-}</span>
 		<span id="mnuFileOpen"                   class="item clsMenuAlwaysOn"  >{-#mnuFileOpen#-}</span>
 		<span id="mnuFileDownload"               class="item"                  >{-#mnuFileDownload#-}</span>
-		<span id="mnuFileUpload"                 class="menu clsMenuAlwaysOn"  >{-#mnuFileUpload#-}</span>
-			<span id="mnuFileCopy"               class="item clsMenuWithUser"  >{-#mnuFileCopy#-}</span>
-			<span id="mnuFileReplace"            class="item"                  >{-#mnuFileReplace#-}</span>
+		<span id="mnuFileUpload"                 class="submenu clsMenuAlwaysOn"  >{-#mnuFileUpload#-}</span>
+			<span id="mnuFileUploadCopy"         class="item clsMenuWithUser"  >{-#mnuFileUploadCopy#-}</span>
+			<span id="mnuFileUploadReplace"      class="item"                  >{-#mnuFileUploadReplace#-}</span>
 		<span id="mnuFileInfo"                   class="item clsMenuWithRegion">{-#mnuFileInfo#-}</span>
-		<span id="mnuFileLanguage"               class="menu clsMenuAlwaysOn"  >{-#mnuFileLanguage#-}</span>
+		<span id="mnuFileLanguage"               class="submenu clsMenuAlwaysOn"  >{-#mnuFileLanguage#-}</span>
 			<span id="mnuFileLanguageEnglish"    class="item clsMenuAlwaysOn"  >{-#mnuFileLanguageEnglish#-}</span>
 			<span id="mnuFileLanguageSpanish"    class="item clsMenuAlwaysOn"  >{-#mnuFileLanguageSpanish#-}</span>
 			<span id="mnuFileLanguagePortuguese" class="item clsMenuAlwaysOn"  >{-#mnuFileLanguagePortuguese#-}</span>
@@ -26,15 +26,15 @@
 		<span id="mnuQueryViewGraph"             class="item clsMenuWithRegion">{-#mnuQueryViewGraph#-}</span>
 		<span id="mnuQueryViewStd"               class="item clsMenuWithRegion">{-#mnuQueryViewStd#-}</span>
 		<span id="mnuQueryResultSave"            class="item">{-#mnuQueryResultSave#-}</span>
-		<span id="mnuQueryResultSaveAs"            class="item">{-#mnuQueryResultSaveAs#-}</span>
-			<span id="mnuQueryResultSaveAsXLS"         class="item">{-#mnuQueryResultSaveAsXLS#-}</span>
-			<span id="mnuQueryResultSaveAsCSV"         class="item">{-#mnuQueryResultSaveAsCSV#-}</span>
+		<span id="mnuQueryResultSaveAs"          class="submenu">{-#mnuQueryResultSaveAs#-}</span>
+			<span id="mnuQueryResultSaveAsXLS"   class="item">{-#mnuQueryResultSaveAsXLS#-}</span>
+			<span id="mnuQueryResultSaveAsCSV"   class="item">{-#mnuQueryResultSaveAsCSV#-}</span>
 		<span id="mnuQueryResultPrint"           class="item">{-#mnuQueryResultPrint#-}</span>
-		<span id="mnuQueryOption"                class="menu clsMenuWithRegion">{-#mnuQueryOption#-}</span>
+		<span id="mnuQueryOption"                class="submenu clsMenuWithRegion">{-#mnuQueryOption#-}</span>
 			<span id="mnuQueryOptionNew"         class="item clsMenuWithRegion">{-#mnuQueryOptionNew#-}</span>
 			<span id="mnuQueryOptionSave"        class="item clsMenuWithRegion">{-#mnuQueryOptionSave#-}</span>
 			<span id="mnuQueryOptionOpen"        class="item clsMenuWithRegion">{-#mnuQueryOptionOpen#-}</span>
-	<span id="mnuDatacard" class="menu">{-#mnuDatacard#-}</span>
+	<span id="mnuDatacard"                       class="menu">{-#mnuDatacard#-}</span>
 		<span id="mnuDatacardEdit"               class="item">{-#mnuDatacardEdit#-}</span>
 		<span id="mnuDatacardSetup"              class="item">{-#mnuDatacardSetup#-}</span>
 	<span id="mnuHelp"                           class="menu">{-#mnuHelp#-}</span>
