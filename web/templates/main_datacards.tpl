@@ -24,40 +24,8 @@
 						return frag;
 					};
 				}
-				/*
-				jQuery.post(
-					jQuery('#desinventarURL').val() + '/',
-					{
-						cmd      : 'cmdDatabaseLoadData',
-						RegionId : jQuery('#desinventarRegionId').val()
-					},
-					function(data)
-					{
-						if (parseInt(data.Status) > 0)
-						{
-							jQuery('body').data('GeolevelsList', data.GeolevelsList);
-							jQuery('body').data('EventList', data.EventList);
-							jQuery('body').data('CauseList', data.CauseList);
-							jQuery('body').data('RecordCount', data.RecordCount);
-							var dataItems = jQuery('body').data();
-							jQuery.each(dataItems, function(index, value) {
-								if (index.substr(0,13) === 'GeographyList')
-								{
-									jQuery('body').removeData(index);
-								}
-							});
-							jQuery('body').data('GeographyList', data.GeographyList);
-
-							onReadyDatacards();
-							jQuery('body').trigger('cmdDatacardShow');
-						}
-					},
-					'json'
-				);
-				*/
 				onReadyDatacards();
 				jQuery('body').trigger('cmdDatacardShow');
-				setDICardFromId('MLI-DISASTER', '1099aec5-5cb7-4b82-a141-7b7bef45d202');
 			});
 		</script>
 	</head>
