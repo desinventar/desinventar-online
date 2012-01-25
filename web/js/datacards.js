@@ -352,7 +352,6 @@ function onReadyDatacards()
 	});
 
 	jQuery('body').on('cmdDatacardGoto', function(event, prmDisasterId, prmRecordNumber, prmRecordCount) {
-		console.log(prmRecordNumber + '/' +  prmRecordCount);
 		setDICardFromId(jQuery('#desinventarRegionId').val(), prmDisasterId, prmRecordNumber, prmRecordCount);
 	});
 	//Initialize components
@@ -1132,7 +1131,6 @@ function setDICardFromId(prmRegionId, prmDisasterId, prmRecordNumber, prmRecordC
 		},
 		function(data)
 		{
-			console.log(jQuery('#cardsRecordNumber').val() + '/' + jQuery('#cardsRecordCount').val());
 			setDICard(prmRegionId, data);
 			jQuery('#divRecordNavigationInfo').hide();
 			var RecordNumber = parseInt(jQuery('#cardsRecordNumber').val());
