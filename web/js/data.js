@@ -4,7 +4,7 @@
 */
 
 function onReadyData() {
-	jQuery('.linkGridGotoCard').click(function() {
+	jQuery('body').on('click', '.linkGridGotoCard', function() {
 		var DisasterId = jQuery(this).attr('DisasterId');
 		jQuery('body').trigger('cmdDatacardShow');
 		jQuery('#cardsRecordSource').val('data');
@@ -38,14 +38,21 @@ function onReadyData() {
 		doDataDisplayPage(jQuery('#prmDataPageCount').val());
 	});
 
-	jQuery('#tblDataRows tr:even').addClass('under');
-	
-	// Set Number of Records in Current Displayed Page
-	jQuery('#prmDataPageRecords').val(jQuery('#tblDataRows tr').size());
-
 	jQuery('body').on('cmdViewDataParams', function() {
 		Ext.getCmp('wndViewDataParams').show();
 	});
+	jQuery('body').on('cmdViewDataUpdate', function() {
+		doDataUpdate();
+	});
+	jQuery('body').trigger('cmdViewDataUpdate');
+
+}
+
+function doDataUpdate()
+{
+	jQuery('#tblDataRows tr:even').addClass('under');
+	// Set Number of Records in Current Displayed Page
+	jQuery('#prmDataPageRecords').val(jQuery('#tblDataRows tr').size());
 }
 
 function doDataDisplayPage(page)
@@ -88,7 +95,7 @@ function doDataDisplayPage(page)
 				{
 					jQuery('#tblDataRows').html(data);
 					// Reload the jQuery functions on the new DOM elements...
-					onReadyData();
+					doDataUpdate();
 					jQuery('#prmDataPageNumber').val(mypag);
 					// Set Number of Records in Current Displayed Page
 					jQuery('#prmDataPageRecords').val(jQuery('#tblDataRows tr').size());
