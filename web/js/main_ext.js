@@ -253,10 +253,10 @@ function doMainMenuHandler(item)
 			Ext.getCmp('wndDatabaseExport').show();
 			doAdminDatabaseExportAction();
 		break;
-		case 'mnuFileCopy':
+		case 'mnuFileUploadCopy':
 			doDatabaseUploadShow('Copy');
 		break;
-		case 'mnuFileReplace':
+		case 'mnuFileUploadReplace':
 			doDatabaseUploadShow('Replace');
 		break;
 		case 'mnuDatacardSetup':
@@ -315,8 +315,8 @@ function doMainMenuCreate()
 {
 	var mnuFileUpload = new Ext.menu.Menu({
 		id: 'mnuFileUpload', items: [
-			{id:'mnuFileCopy'   , text: jQuery('span#mnuFileCopy').text()   , handler: doMainMenuHandler },
-			{id:'mnuFileReplace', text: jQuery('span#mnuFileReplace').text(), handler: doMainMenuHandler }
+			{id:'mnuFileUploadCopy'   , text: jQuery('span#mnuFileUploadCopy').text()   , handler: doMainMenuHandler },
+			{id:'mnuFileUploadReplace', text: jQuery('span#mnuFileUploadReplace').text(), handler: doMainMenuHandler }
 		]
 	});
 
@@ -477,7 +477,7 @@ function doMainMenuCreate()
 	});
 } //doCreateMainMenu()
 
-function doMainMenuUpdate()
+function doMainMenuDisable()
 {
 	jQuery('#divMainMenu span.item').each(function() {
 		var w = Ext.getCmp(jQuery(this).attr('id'));
@@ -486,6 +486,18 @@ function doMainMenuUpdate()
 			w.disable();
 		}
 	});
+	jQuery('#divMainMenu span.submenu').each(function() {
+		var w = Ext.getCmp(jQuery(this).attr('id'));
+		if (w != undefined)
+		{
+			w.disable();
+		}
+	});
+}
+
+function doMainMenuUpdate()
+{
+	doMainMenuDisable();
 
 	// Menu items that are always enabled
 	jQuery('#divMainMenu span.clsMenuAlwaysOn').each(function() {
@@ -523,7 +535,7 @@ function doMainMenuUpdate()
 		Ext.getCmp('mnuUserAccountManagement').enable();
 	}
 
-	Ext.getCmp('mnuFileReplace').hide();
+	Ext.getCmp('mnuFileUploadReplace').hide();
 	Ext.getCmp('mnuDatacardSetup').hide();
 
 	Ext.getCmp('mnuDatacardEdit').hide();
@@ -557,8 +569,8 @@ function doMainMenuUpdate()
 
 			if (UserRoleValue >= 4)
 			{
-				Ext.getCmp('mnuFileReplace').show();
-				Ext.getCmp('mnuFileReplace').enable();
+				Ext.getCmp('mnuFileUploadReplace').show();
+				Ext.getCmp('mnuFileUploadReplace').enable();
 				Ext.getCmp('mnuDatacardSetup').show();
 				Ext.getCmp('mnuDatacardSetup').enable();
 			}

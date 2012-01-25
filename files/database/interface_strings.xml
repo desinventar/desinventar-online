@@ -31,13 +31,13 @@
 			<Text LangIsoCode="por">Carregar</Text>
 			<Text LangIsoCode="fre">Charger</Text>
 		</Message>
-		<Message id="mnuFileCopy">
+		<Message id="mnuFileUploadCopy">
 			<Text LangIsoCode="eng">New</Text>
 			<Text LangIsoCode="spa">Nueva</Text>
 			<Text LangIsoCode="por">Nova</Text>
 			<Text LangIsoCode="fre">Nouvelle</Text>
 		</Message>
-		<Message id="mnuFileReplace">
+		<Message id="mnuFileUploadReplace">
 			<Text LangIsoCode="eng">Replace</Text>
 			<Text LangIsoCode="spa">Reemplazar</Text>
 			<Text LangIsoCode="por">Substituir</Text>
