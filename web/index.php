@@ -45,15 +45,18 @@ $t->assign('desinventarUserRole', $desinventarUserRole);
 $t->assign('desinventarUserRoleValue', $desinventarUserRoleValue);
 $t->assign('appOptions', $appOptions);
 
-ob_start();
-var_dump($_FILES);
-var_dump($_POST);
-var_dump($_GET);
-$fh = fopen(TEMP . '/php.log', 'a');
-fputs($fh, ob_get_contents());
-fputs($fh, '--------------------------------------------' . "\n");
-fclose($fh);
-ob_end_clean();
+/*
+	// Write a debug log of parameters passed
+	ob_start();
+	var_dump($_FILES);
+	var_dump($_POST);
+	var_dump($_GET);
+	$fh = fopen(TEMP . '/php.log', 'a');
+	fputs($fh, ob_get_contents());
+	fputs($fh, '--------------------------------------------' . "\n");
+	fclose($fh);
+	ob_end_clean();
+*/
 
 switch ($cmd)
 {
