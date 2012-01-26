@@ -44,11 +44,17 @@ $desinventarUserRoleValue = $us->getUserRoleValue($RegionId);
 $t->assign('desinventarUserRole', $desinventarUserRole);
 $t->assign('desinventarUserRoleValue', $desinventarUserRoleValue);
 $t->assign('appOptions', $appOptions);
-// 2011-11-18 Use this to detect file uploads...
-if (getParameter('qqfile','') != '')
-{
-	//$cmd = 'cmdDatabaseUpload';
-}
+
+ob_start();
+var_dump($_FILES);
+var_dump($_POST);
+var_dump($_GET);
+$fh = fopen(TEMP . '/php.log', 'a');
+fputs($fh, ob_get_contents());
+fputs($fh, '--------------------------------------------' . "\n");
+fclose($fh);
+ob_end_clean();
+
 switch ($cmd)
 {
 	case 'cmdUserLogin':
