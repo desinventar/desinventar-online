@@ -413,6 +413,7 @@ switch ($cmd)
 	break;
 	case 'cmdGeolevelsUpdate':
 		$GeoLevel = $_POST['GeoLevel'];
+		$GeoLevelId = $GeoLevel['GeoLevelId'];
 		$answer = array();
 		$iReturn = ERR_NO_ERROR;
 		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
@@ -425,7 +426,7 @@ switch ($cmd)
 		}
 		if ($iReturn > 0)
 		{
-			$o = new DIGeoLevel($us, $GeoLevel['GeoLevelId']);
+			$o = new DIGeoLevel($us, $GeoLevelId);
 			$o->setFromArray($GeoLevel);
 			if ($o->exist() > 0)
 			{
@@ -433,33 +434,40 @@ switch ($cmd)
 			}
 			else
 			{
-				$o->set('GeoLevelId', $o->getMaxGeoLevel() + 1);
+				$GeoLevelId = $o->getMaxGeoLevel() + 1;
+				$o->set('GeoLevelId', $GeoLevelId);
 				$iReturn = $o->insert();
 			}
 		}
 		if ($iReturn > 0)
 		{
-			$GeoLevelId = $GeoLevel['GeoLevelId'];
-			$GeoLevelLayerFile = 'geocarto' . sprintf('%02d', $GeoLevelId);
-			$SrcDir = TMP_DIR . '/' . $us->sSessionId;
-			$OutDir = $us->getRegionDir($RegionId);
-			$bUpdateCarto = 0;
-			foreach($GeoLevel['filename'] as $ext => $filename)
+			$o = new DIGeoCarto($us, $GeoLevelId);
+			if (isset($GeoLevel['GeoLevelLayerCode']))
 			{
-				$bUpdateCarto = 1;
-				$srcFile = $SrcDir . '/' . $filename;
-				$dstFile = $OutDir . '/' . $GeoLevelLayerFile . '.' . strtolower($ext);;
-				if (file_exists($srcFile))
-				{
-					copy($srcFile, $dstFile);
-				}
-			}
-			if ($bUpdateCarto > 0)
-			{
-				$o = new DIGeoCarto($us, $GeoLevelId);
-				$o->set('GeoLevelLayerFile', $GeoLevelLayerFile);
 				$o->set('GeoLevelLayerCode', $GeoLevel['GeoLevelLayerCode']);
-				$o->set('GeoLevelLayerName', $GeoLevel['GeoLevelLayerName']);
+			}
+			if (isset($GeoLevel['GeoLevelLayerName']))
+			{
+				$o->set('GeoLevelLayerName', $GeoLevel['GeoLevelLayerName']);				
+			}
+			if (isset($GeoLevel['filename']))
+			{
+				$GeoLevelLayerFile = 'geocarto' . sprintf('%02d', $GeoLevelId);
+				$SrcDir = TMP_DIR . '/' . $us->sSessionId;
+				$OutDir = $us->getRegionDir($RegionId);
+				foreach($GeoLevel['filename'] as $ext => $filename)
+				{
+					$srcFile = $SrcDir . '/' . $filename;
+					$dstFile = $OutDir . '/' . $GeoLevelLayerFile . '.' . strtolower($ext);;
+					if (file_exists($srcFile))
+					{
+						copy($srcFile, $dstFile);
+					}
+				}
+				$o->set('GeoLevelLayerFile', $GeoLevelLayerFile);
+			}
+			if ($o->get('GeoLevelLayerFile') != '')
+			{
 				if ($o->exist() > 0)
 				{
 					$o->update();
