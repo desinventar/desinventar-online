@@ -223,6 +223,12 @@
 			<Text LangIsoCode="por">Configure</Text>
 			<Text LangIsoCode="fre">Configurer</Text>
 		</Message>
+		<Message id="mnuDatacardSetupEnd">
+			<Text LangIsoCode="eng">Finalize setup</Text>
+			<Text LangIsoCode="spa">Finalizar la configuración</Text>
+			<Text LangIsoCode="por">Finalize a configuração</Text>
+			<Text LangIsoCode="fre">Finaliser la configuration</Text>
+		</Message>
 		<Message id="mnuDatacardImport">
 			<Text LangIsoCode="eng">Import data cards</Text>
 			<Text LangIsoCode="spa">Importación de fichas</Text>
