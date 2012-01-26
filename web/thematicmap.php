@@ -72,7 +72,8 @@ if (isset($post['_M+cmd']))
 	$sqc = $us->q->genSQLSelectCount($qd);
 	$c	 = $us->q->getresult($sqc);
 	$NumberOfRecords = $c['counter'];
-	
+
+	$t->assign('ctl_showres', false);
 	if ($NumberOfRecords > 0)
 	{
 		// Assign ranges
@@ -244,9 +245,11 @@ if (isset($post['_M+cmd']))
 		$sLegendURL = '/cgi-bin/'. MAPSERV .'?map=' . rawurlencode($mapfile) . '&SERVICE=WMS&VERSION=1.1.1'.
 					'&REQUEST=getlegendgraphic&LAYER='. substr($myly, 0, 12) .'&FORMAT=image/png' . '&t=' . $timestamp;
 		$t->assign('legend', $sLegendURL);	
+		$t->assign('ctl_showres', true);
 		// 2009-09-10 (jhcaiced) Replace backslash chars to slash, when passing data to mapserver
 		if ($post['_M+cmd'] == 'export')
 		{
+			$t->assign('ctl_showres', false);
 			$w = 1000;
 			$h = 756;
 			$size = '1000756';
@@ -303,18 +306,10 @@ if (isset($post['_M+cmd']))
 				imagedestroy($im);
 			}
 		}
-		else
-		{
-			$t->assign('ctl_showres', true);
-		}
 		imagedestroy($imgMapInfo);
 		$t->assign('reg', $RegionId);
 		$t->assign('basemap', $worldmap);
 		$t->assign('mps', MAPSERV);
-	}
-	else
-	{
-		$t->assign('ctl_showres', false);
 	}
 	$t->display('thematicmap.tpl');
 }
