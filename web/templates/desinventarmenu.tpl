@@ -37,6 +37,7 @@
 	<span id="mnuDatacard"                       class="menu">{-#mnuDatacard#-}</span>
 		<span id="mnuDatacardEdit"               class="item">{-#mnuDatacardEdit#-}</span>
 		<span id="mnuDatacardSetup"              class="item">{-#mnuDatacardSetup#-}</span>
+		<span id="mnuDatacardSetupEnd"           class="item">{-#mnuDatacardSetupEnd#-}</span>
 	<span id="mnuHelp"                           class="menu">{-#mnuHelp#-}</span>
 		<span id="mnuHelpWebsite"                class="item clsMenuAlwaysOn">{-#mnuHelpWebsite#-}</span>
 		<span id="mnuHelpMethodology"            class="item clsMenuAlwaysOn">{-#mnuHelpMethodology#-}</span>

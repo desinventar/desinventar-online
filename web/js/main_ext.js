@@ -261,10 +261,22 @@ function doMainMenuHandler(item)
 		break;
 		case 'mnuDatacardSetup':
 			hideQueryDesign();
+			doMainMenuToggle(false);
+			Ext.getCmp('mnuDatacard').enable();
+			Ext.getCmp('mnuDatacardEdit').hide();
+			Ext.getCmp('mnuDatacardSetup').hide();
+			Ext.getCmp('mnuDatacardSetupEnd').show();
+			Ext.getCmp('mnuDatacardSetupEnd').enable();
 			jQuery('.contentBlock').hide();
 			jQuery('.classDBConfig_tabs:first').click();
 			jQuery('#divDatabaseConfiguration').show();
 			jQuery('#tabDatabaseConfiguration').show();
+		break;
+		case 'mnuDatacardSetupEnd':
+			doMainMenuToggle(true);
+			doMainMenuUpdate();
+			jQuery('body').trigger('cmdDatabaseLoadData');
+			doViewportShow();
 		break;
 		case 'mnuFileCreate':
 			doDatabaseCreateShow();
@@ -387,8 +399,9 @@ function doMainMenuCreate()
 
 	var mnuDatacard = new Ext.menu.Menu({
 		id: 'mnuDatacard', items: [
-			{id:'mnuDatacardEdit' , text: jQuery('span#mnuDatacardEdit').text() , handler: doMainMenuHandler },
-			{id:'mnuDatacardSetup', text: jQuery('span#mnuDatacardSetup').text(), handler: doMainMenuHandler }
+			{id:'mnuDatacardEdit'    , text: jQuery('span#mnuDatacardEdit').text()    , handler: doMainMenuHandler },
+			{id:'mnuDatacardSetup'   , text: jQuery('span#mnuDatacardSetup').text()   , handler: doMainMenuHandler },
+			{id:'mnuDatacardSetupEnd', text: jQuery('span#mnuDatacardSetupEnd').text(), handler: doMainMenuHandler }
 		]
 	});
 
@@ -477,6 +490,24 @@ function doMainMenuCreate()
 	});
 } //doCreateMainMenu()
 
+function doMainMenuToggle(bEnable)
+{
+	jQuery('#divMainMenu span.menu').each(function() {
+		var w = Ext.getCmp(jQuery(this).attr('id'));
+		if (w != undefined)
+		{
+			if (bEnable)
+			{
+				w.enable();
+			}
+			else
+			{
+				w.disable();
+			}
+		}
+	});
+}
+
 function doMainMenuDisable()
 {
 	jQuery('#divMainMenu span.item').each(function() {
@@ -493,7 +524,7 @@ function doMainMenuDisable()
 			w.disable();
 		}
 	});
-}
+} //doMainMenuDisable()
 
 function doMainMenuUpdate()
 {
@@ -537,6 +568,7 @@ function doMainMenuUpdate()
 
 	Ext.getCmp('mnuFileUploadReplace').hide();
 	Ext.getCmp('mnuDatacardSetup').hide();
+	Ext.getCmp('mnuDatacardSetupEnd').hide();
 
 	Ext.getCmp('mnuDatacardEdit').hide();
 	
