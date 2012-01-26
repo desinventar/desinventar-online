@@ -4,8 +4,10 @@
 */
 
 function onReadyData() {
+	jQuery('body').on('click', '.ViewData', function() {
+		jQuery(this).toggleClass('highlight');
+	});
 	jQuery('body').on('click', '.linkGridGotoCard', function() {
-		jQuery('#cardsRecordSource').val('data');
 		jQuery('body').trigger('cmdDatacardShow');
 		var DisasterId = jQuery(this).attr('DisasterId');
 		var RecordNumber = jQuery(this).attr('rowindex');

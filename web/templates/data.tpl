@@ -56,8 +56,7 @@
 {-*** SHOW RESULT LIST: PAGING ***-}
 {-if $ctl_dislist-}
 			{-foreach name=dl key=key item=item from=$dislist-}
-				<tr class="normal" 
-					onClick="Element.addClassName(this, 'highlight');" ondblClick="Element.removeClassName(this, 'highlight');">
+				<tr class="ViewData">
 					<td>
 						<a href="#" class="linkGridGotoCard" 
 							disasterid="{-$item.DisasterId-}"
