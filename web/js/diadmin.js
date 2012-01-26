@@ -19,7 +19,6 @@
 	function updateList(div, url, pars, callback)
 	{
 		jQuery('#' + div).load(url, pars, function(response, status, xhr) {
-			onReadyDatabaseAdmin();
 			// Hide first two columns (EventId,EventPredefined)
 			jQuery('td:nth-child(1)','#tblEventListUser,#tblEventListPredef').hide();
 			jQuery('td:nth-child(2)','#tblEventListUser,#tblEventListPredef').hide();
