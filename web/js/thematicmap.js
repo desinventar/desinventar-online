@@ -49,10 +49,12 @@ function createThematicMap()
 	
 	// WMS Local Base Map
 	mapServer = jQuery('#prmMapServer').val();
-	var base = new OpenLayers.Layer.WMS("Local BaseMap",
-		"/cgi-bin/" + mapServer + "?", 
-		{ map:jQuery('#prmMapBase').val(), layers:'base', 'transparent':false, 'format':'png' },
-		{'isBaseLayer':true });
+	var base = new OpenLayers.Layer.WMS(
+		'Local BaseMap',
+		jQuery('#desinventarURL').val() + '/mapserver.php',
+		{ },
+		{ isBaseLayer:true }
+	);
 	map.addLayer(base);
 
 	// Add Remote Layers	
