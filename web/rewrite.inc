@@ -8,10 +8,12 @@ RewriteRule ^.*\.xml$ - [F]
 # Special Commands by URL
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^wms[/]*$                        mapserver.php
-RewriteRule ^wms/worldmap/$                  mapserver.php
-RewriteRule ^wms/([a-zA-Z0-9\-\._]+)/$       mapserver.php?MAPID=$1&LAYERS=effects [QSA]
-RewriteRule ^wms/([a-zA-Z0-9\-\._]+)/(.+)/$  mapserver.php?MAPID=$1&LAYERS=$2 [QSA]
+RewriteRule ^kml/([a-zA-Z0-9\-\._]+)/$        thematicmap.php?cmd=getkml
+RewriteRule ^wms[/]*$                         mapserver.php
+RewriteRule ^wms/worldmap/$                   mapserver.php
+RewriteRule ^wms/([a-zA-Z0-9\-\._]+)/$        mapserver.php?MAPID=$1&LAYERS=effects [QSA]
+RewriteRule ^wms/([a-zA-Z0-9\-\._]+)/legend/$ mapserver.php?MAPID=$1&LAYER=effects&REQUEST=getlegendgraphic [QSA]
+RewriteRule ^wms/([a-zA-Z0-9\-\._]+)/(.+)/$   mapserver.php?MAPID=$1&LAYERS=$2 [QSA]
 RewriteRule ^admin[/]*$       index.php?cmd=cmdAdminMain
 RewriteRule ^admin/users[/]*$ index.php?cmd=cmdAdminUsers
 RewriteRule ^admin/db[/]*$    index.php?cmd=cmdAdminDB

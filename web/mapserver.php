@@ -1,6 +1,20 @@
 <script language="php">
 	require_once('include/loader.php');
 	$options = $_GET;
+
+	if (! isset($options['SERVICE']))
+	{
+		$options['SERVICE'] = 'WMS';
+	}
+	if (! isset($options['VERSION']))
+	{
+		$options['VERSION'] = '1.1.1';
+	}
+	if (! isset($options['FORMAT']))
+	{
+		$options['FORMAT'] = 'image/png';
+	}
+	
 	if (isset($options['MAPID']))
 	{
 		$options['MAP'] = TMP_DIR .'/map_' . $options['MAPID'] . '.map';

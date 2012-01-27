@@ -25,12 +25,19 @@ class Maps
 		$this->options = array('Id' => time());
 		$this->options = array_merge($this->options, $prmOptions);
 
-		$this->url = "http://". $_SERVER['HTTP_HOST'] ."/cgi-bin/". MAPSERV ."?";
+		$this->url = $this->options['URL'] . '/wms/' . $this->options['Id'];
 		$this->reg = $reg;
 		$fp = "";
 		if ($type == 'KML')
 		{
 			$this->kml = $this->generateKML($us, $reg, $info);
+			/*
+			$sFilename = TMP_DIR . '/map_' $this->options['Id'] . '.map';
+			fb($sFilename);
+			$fh = fopen($sFilename, 'w+');
+			fputs($fh, $this->kml);
+			fclose($fh);
+			*/
 		}
 		else
 		{
@@ -119,7 +126,7 @@ class Maps
 			  WMS_ABSTRACT	"Level: '. $inf['LEVEL'] .'"
 			  WMS_EXTENT	"'. $inf['EXTENT'] .'"
 			  WMS_TIMEEXTENT	"'. $inf['BEG'] ."/". $inf['END'] .'/P5M"
-			  WMS_ONLINERESOURCE	"'. $this->url .'map="
+			  WMS_ONLINERESOURCE	"'. $this->url .'/"
 			  WMS_SRS	"EPSG:4326 EPSG:900913"
 			END
 		END
@@ -363,7 +370,6 @@ class Maps
   
 	function generateKML($us, $reg, $info)
 	{
-		$fp = urlencode(TMP_DIR . '/map_' . $reg . '-' . session_id() . '.map');
 		$dinf = $us->q->getDBInfo($lg);
 		$regn = $dinf['RegionLabel|'];
 		$desc = $dinf['RegionDesc'];
@@ -411,7 +417,7 @@ class Maps
 		<name>DesInventar '. $regn .'</name>
 		<open>1</open>
 		<Icon>
-			<href>'. $this->url . 'MAP='. $fp .'&amp;LAYERS=effects&amp;SERVICE=WMS&amp;SRS=EPSG%3A4326&amp;REQUEST=GetMap&amp;HEIGHT=600&amp;STYLES=default,default&amp;WIDTH=800&amp;VERSION=1.1.1&amp;TRANSPARENT=true&amp;LEGEND=true&amp;FORMAT=image/png</href>
+			<href>'. $this->url . '/effects/&amp;SERVICE=WMS&amp;SRS=EPSG%3A4326&amp;REQUEST=GetMap&amp;HEIGHT=600&amp;STYLES=default,default&amp;WIDTH=800&amp;VERSION=1.1.1&amp;TRANSPARENT=true&amp;LEGEND=true&amp;FORMAT=image/png</href>
 			<viewRefreshMode>onStop</viewRefreshMode>
 			<viewRefreshTime>1</viewRefreshTime>
 			<viewBoundScale>1</viewBoundScale>
@@ -427,7 +433,7 @@ class Maps
 	<ScreenOverlay id="NWILEGEND">
 		<name>Leyenda</name>
 		<Icon>
-			<href>'. $this->url .'MAP='. $fp .'&amp;SERVICE=WMS&amp;VERSION=1.1.1&amp;REQUEST=getlegendgraphic&amp;LAYER=effects&amp;FORMAT=image/png</href>
+			<href>'. $this->url .'/legend/</href>
 		</Icon>
 		<overlayXY x="0" y="0" xunits="fraction" yunits="fraction"/>
 		<screenXY x="0.005" y="0.02" xunits="fraction" yunits="fraction"/>
