@@ -97,8 +97,13 @@ if (isset($post['_M+cmd']))
 		//$gitem = $us->q->getGeoCartoItems();
 		// generate map
 		$dl = $us->q->prepareList($dislist, 'MAPS');
+
+		$MapId = time() . '.' . sprintf('%04d', rand(0, 9999));
+		$MapOptions['Id'] = $MapId;
+		$t->assign('prmMapId', $MapId);
+
 		// MAPS Query, RegionId, Level, datalist, ranges, dbinfo, label, maptype
-		$m = new Maps($us, $RegionId, $lev[0], $dl, $range, $info, $post['_M+Label'], $post['_M+Transparency'], 'THEMATIC');	
+		$m = new Maps($us, $RegionId, $lev[0], $dl, $range, $info, $post['_M+Label'], $post['_M+Transparency'], 'THEMATIC', $MapOptions);
 		$rinf = new DIRegion($us);
 		$info['RECORDS'] = showStandardNumber($NumberOfRecords);
 		$rgl[0]['regname'] = $rinf->get('RegionLabel');
