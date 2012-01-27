@@ -250,10 +250,6 @@ if (isset($post['_M+cmd']))
 		$worldmap = str_replace('\\','/', MAPDIR . '/world_adm0.map');
 		$timestamp = microtime(true);
 		$sLegendURL = $options['URL'] . '/wms/' . $options['Id'] . '/legend/';
-		/*
-		$sLegendURL = '/cgi-bin/'. MAPSERV .'?map=' . rawurlencode($mapfile) . '&SERVICE=WMS&VERSION=1.1.1'.
-					'&REQUEST=getlegendgraphic&LAYER='. substr($myly, 0, 12) .'&FORMAT=image/png' . '&t=' . $timestamp;
-		*/
 		$t->assign('legend', $sLegendURL);	
 		$t->assign('ctl_showres', true);
 		// 2009-09-10 (jhcaiced) Replace backslash chars to slash, when passing data to mapserver
@@ -263,6 +259,17 @@ if (isset($post['_M+cmd']))
 			$w = 1000;
 			$h = 756;
 			$size = '1000756';
+			/*
+			$base = $options['URL'] . '/wms/worldmap/' . 
+				'?REQUEST=getmap&STYLES=&SRS=EPSG:900913&BBOX='. $post['_M+extent'] .
+				'&WIDTH='. $w .'&HEIGHT='. $h .'&FORMAT=image/png';
+			$bf = file_get_contents($base);
+			$url1 = $options['URL'] . '/wms/' . $options['Id'] . '/' . 
+				'?layers='. $post['_M+layers'] .'&REQUEST=getmap&STYLES=&SRS=EPSG:900913'.
+				'&BBOX='. $post['_M+extent'].'&WIDTH='. $w .'&HEIGHT='. $h .'&FORMAT=image/png';
+			$mf = file_get_contents($url1);
+			*/
+
 			$base = '/cgi-bin/'. MAPSERV .'?map='. rawurlencode($worldmap) . '&SERVICE=WMS&VERSION=1.1.1'.
 				'&layers=base&REQUEST=getmap&STYLES=&SRS=EPSG:900913&BBOX='. $post['_M+extent'].
 				'&WIDTH='. $w .'&HEIGHT='. $h .'&FORMAT=image/png' . '&t=' . $timestamp;
