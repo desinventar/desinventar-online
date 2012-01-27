@@ -71,7 +71,7 @@ class Maps
 			$map .= $this->setFooter();
 			$this->makefile($fp, $map);
 		}
-	}
+	} //constructor
 	
 	function makefile($fp, $map)
 	{
@@ -100,14 +100,14 @@ class Maps
 		IMAGECOLOR	255 255 255
 		PROJECTION	"proj=latlong" "ellps=WGS84" "datum=WGS84" END
 		WEB';
-		if ($typ == "SELECT")
+		if ($typ == 'SELECT')
 		{
 			$map .= '
-      HEADER "templates/imagemap_header.html"
-      FOOTER "templates/imagemap_footer.html"';
+				HEADER "templates/imagemap_header.html"
+				FOOTER "templates/imagemap_footer.html"';
 		}
 		$fm = TMP_DIR . '/map_';
-		if ($typ == "THEMATIC")
+		if ($typ == 'THEMATIC')
 		{
 			$fm .= $reg . '-'. session_id() . '.map';
 		}
@@ -156,20 +156,25 @@ class Maps
 		return $map;
 	}
 	
-	function setFooter() {
+	function setFooter()
+	{
 		return '
 	END # MAP';
 	}
 
 	// Generate all Admin layers 
-	function setLayerAdm($gl, $reg, $typ) {
+	function setLayerAdm($gl, $reg, $typ)
+	{
 		$map = "";
 		$type = "POLYGON";
 		$col = 50;
-		foreach ($gl as $k=>$i) {
-			foreach ($i[2] as $ly) {
+		foreach ($gl as $k=>$i)
+		{
+			foreach ($i[2] as $ly)
+			{
 				$lp = VAR_DIR . '/database/' . $reg ."/". $ly[1];
-				if ($this->testLayer($lp, $ly[2], $ly[3])) {
+				if ($this->testLayer($lp, $ly[2], $ly[3]))
+				{
 					$map .= '
     LAYER
       NAME		"'. $ly[0] .'admin0'. $k .'"
@@ -181,7 +186,8 @@ class Maps
 	  CLASSITEM		"'. $ly[2] .'"
 	  LABELITEM		"'. $ly[3] .'"';
 					// Selection map used in Query Design
-					if ($typ == "SELECT") {
+					if ($typ == "SELECT")
+					{
 						$tm = "templates/imagemap_". $reg ."_". $k .".html";
 						$map .= '
       CLASS
@@ -211,7 +217,8 @@ class Maps
 		return $map;
 	}
 	
-	function makeImagemapTemplate($code, $name, $tm) {
+	function makeImagemapTemplate($code, $name, $tm)
+	{
 		/*
 		$data = '
   <area shape="poly" coords="[shpxy precision=0 proj=image]"
@@ -226,17 +233,21 @@ class Maps
 	}
 	
 	// Generate standard layer with query results
-	function setLayerEff($us, $reg, $lev, $dl, $range, $inf, $lbl, $prmTransparency) {
+	function setLayerEff($us, $reg, $lev, $dl, $range, $inf, $lbl, $prmTransparency)
+	{
 		$gl = $us->q->loadGeoLevels('', $lev, true);
 		$map = "";
-		foreach ($gl[$lev][2] as $ly) {
+		foreach ($gl[$lev][2] as $ly)
+		{
 			$data = $ly[1];
 			$code = $ly[2];
 			$name = $ly[3];
 			$lp = VAR_DIR . '/database/' . $reg ."/". $data;
-			if ($this->testLayer($lp, $code, $name)) {
+			if ($this->testLayer($lp, $code, $name))
+			{
 				// cvreg isn't set in regular base.. in vregion select region on match
-				if (!isset($dl['CVReg']) || in_array($ly[0], array_unique($dl['CVReg']))) {
+				if (!isset($dl['CVReg']) || in_array($ly[0], array_unique($dl['CVReg'])))
+				{
 					$map .= '
     LAYER
 		NAME	"'. $ly[0] .'effects"
@@ -258,17 +269,25 @@ class Maps
 					$vl = $this->classify($ly[0], $dl, $range);
 					$shwlab = 'TEXT ""';
 					if ($lbl == "NAME")
+					{
 						$shwlab = '';
+					}
 					// Generate classes with effects..
-					foreach ($vl as $k=>$i) {
+					foreach ($vl as $k=>$i)
+					{
 						if ($lbl == "CODE")
+						{
 							$shwlab = 'TEXT "'. $k .'"';
+						}
 						elseif ($lbl == "VALUE")
+						{
 							$shwlab = 'TEXT "'. $i[2] .'"';
+						}
 						$map .= '
 		CLASS ';
 						//Set names only in match elements -> use in normal Region
-						if (!empty($i[0]) && !isset($dl['CVReg'])) {
+						if (!empty($i[0]) && !isset($dl['CVReg']))
+						{
 							$map .= '
 				NAME "'. $i[0] .'"';
 						}
@@ -283,8 +302,10 @@ class Maps
 		END';
 					} // foreach $vl
 					// Generate classes with names and colors of ranges -> valid to CRegions
-					if (isset($dl['CVReg'])) {
-						foreach ($range as $rk=>$ri) {
+					if (isset($dl['CVReg']))
+					{
+						foreach ($range as $rk=>$ri)
+						{
 							// Define a Expression to not show others polygons...
 							$map .= '
 		CLASS
@@ -317,57 +338,66 @@ class Maps
 	}
 
 	// Set RGB color array according to user's defined ranges..
-	function classify($pfx, $dl, $range) {
+	function classify($pfx, $dl, $range)
+	{
 		$vl = array();
 		$ky = array_keys($dl); // [0]CVReg, [1]DisasterGeography, [2]EffectVar
 		$h = 0;
-		if ($pfx == '') {	// isn't VRegion
+		if ($pfx == '')
+		{
+			// isn't VRegion
 			$geo = 0;
 			$eff = 1;
 		}
-		else {
+		else
+		{
 			$geo = 1;
 			$eff = 2;
 		}
-		if (!empty($dl)) {
-			foreach ($dl[$ky[$geo]] as $k=>$i) {
-				if (!isset($dl['CVReg']) || $dl['CVReg'][$k] == $pfx) {
+		if (!empty($dl))
+		{
+			foreach ($dl[$ky[$geo]] as $k=>$i)
+			{
+				if (!isset($dl['CVReg']) || $dl['CVReg'][$k] == $pfx)
+				{
 					$li = 0;
 					$assigned = false;
 					$val = $dl[$ky[$eff]][$k];
-					for ($j=0; $j < count($range) && !$assigned; $j++) {
+					for ($j=0; $j < count($range) && !$assigned; $j++)
+					{
 						$ls = $range[$j][0];
 						//echo "$i :: li: $li < val: $val < ls: $ls = ";
-						if ($li <= $val && $val <= $ls) {
+						if ($li <= $val && $val <= $ls)
+						{
 							$assigned = true;
 							$vl[$i] = array($range[$j][1], $range[$j][2], $val);
 							$range[$j][1] = "";
 						}
 						else
+						{
 							$li = $ls + 1;
-						//echo "<br>";
+						}
 					}
-					//echo "<hr>";
 				}
 			}
 		}
 		return $vl;
 	}
 
-  function genColor() {
-  	$v1 = rand(0, 255);
-    $v2 = rand(0, 255);
-    $v3 = rand(0, 255);
-    return $v1 ." ". $v2 ." ". $v3;
-  }
+	function genColor()
+	{
+		$v1 = rand(0, 255);
+		$v2 = rand(0, 255);
+		$v3 = rand(0, 255);
+		return $v1 . ' '  . $v2 . ' ' . $v3;
+	} //genColor()
 
-  function testLayer($lp, $code, $name) {
-    if (testMap($lp) && !empty($code) && !empty($name))
-      return true;
-    else
-      return false;
-  }
-  
+	function testLayer($lp, $code, $name)
+	{
+		$bReturn = testMap($lp) && !empty($code) && !empty($name);
+		return $bReturn;
+	}
+
 	function generateKML($us, $reg, $info)
 	{
 		$dinf = $us->q->getDBInfo($lg);
@@ -388,9 +418,12 @@ class Maps
 		$AreaX = abs($MaxX - $MinX);
 		$AreaY = abs($MaxY - $MinY);
 		$EyeAltitude = 300000;
-		if ($AreaX > $AreaY) {
+		if ($AreaX > $AreaY)
+		{
 			$EyeAltitude = intval($AreaX * 110000);
-		} else {	
+		}
+		else
+		{
 			$EyeAltitude = intval($AreaY * 110000);
 		}
 		$xml = 
@@ -399,12 +432,17 @@ class Maps
 <Folder>
 	<name>DesInventar</name>
 	<open>1</open>
-	<description><![CDATA[<body style="background-color: #FFFFFF">
-<p><font face="Arial, Helvetica, sans-serif">
-<font color="#008080" face="Arial, Helvetica, sans-serif">DesInventar</font>
-<p><font face="Arial, Helvetica, sans-serif">
-<b>Base de datos '. $regn .'</b><br><br>'. $desc . '</font></p>
-</body>]]></description>
+	<Description>
+		<![CDATA[<body style="background-color: #ffffff">
+			<p>
+				<font color="#008080" face="Arial, Helvetica, sans-serif">DesInventar</font>
+			</p>
+			<p>
+				<font face="Arial, Helvetica, sans-serif">
+				<b>Base de datos '. $regn .'</b><br /><br />'. $desc . '</font>
+			</p>
+		</body>]]>
+	</Description>
 	<LookAt>
 		<longitude>'. $lon .'</longitude>
 		<latitude>'. $lat .'</latitude>
