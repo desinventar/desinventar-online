@@ -1,19 +1,34 @@
 <script language="php">
-	require_once('/usr/share/pear/FirePHPCore/fb.php');
-	$queryString = '';
-
-	$_GET['MAP']         = '/usr/share/desinventar-8.2/worldmap/worldmap.map';
-	$_GET['LAYERS']      = 'base';
-	$_GET['TRANSPARENT'] = 'false';
-	fb($_GET['FORMAT']);
-	foreach($_GET as $key => $value)
+	require_once('include/loader.php');
+	$options = $_GET;
+	if (isset($options['MAPID']))
 	{
-		if ($queryString != '') {
+		$options['MAP'] = TMP_DIR .'/map_' . $options['MAPID'] . '.map';
+		$options['TRANSPARENT'] = 'true';
+		unset($options['MAPID']);
+	}
+	else
+	{
+		$options['MAPID'] = 'worldmap';
+	}
+	
+	if ($options['MAPID'] == 'worldmap')
+	{
+		$options['MAP']         = MAPDIR . '/worldmap.map';
+		$options['LAYERS']      = 'base';
+		$options['TRANSPARENT'] = 'false';
+	}
+
+	$queryString = '';
+	foreach($options as $key => $value)
+	{
+		if ($queryString != '')
+		{
 			$queryString .= '&';
 		}
 		$queryString .= $key . '=' . urlencode($value);
 	}
-	$url = 'http://127.0.0.1/cgi-bin/mapserv' . '?' . $queryString;
-	header('Content-type: ' . $_GET['FORMAT']);
+	$url = 'http://127.0.0.1/cgi-bin/' . MAPSERV . '?' . $queryString;
+	header('Content-type: ' . $options['FORMAT']);
 	echo file_get_contents($url);
 </script>

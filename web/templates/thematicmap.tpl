@@ -51,6 +51,7 @@
 	</table>
 	<div style="display:none;">
 		<input type="hidden" id="prmMapRegionId" value="{-$reg-}"/>
+		<input type="hidden" id="prmMapId"       value="{-$prmMapId-}"/>
 		<input type="hidden" id="prmMapLat"      value="{-$lat-}"/>
 		<input type="hidden" id="prmMapLon"      value="{-$lon-}"/>
 		<input type="hidden" id="prmMapZoom"     value="{-$zoom-}"/>

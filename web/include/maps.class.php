@@ -22,7 +22,9 @@ class Maps
 
 	function Maps($us, $reg, $lev, $dl, $range, $info, $lbl, $prmTransparency, $type, $prmOptions = array())
 	{
-		$this->options = $prmOptions;
+		$this->options = array('Id' => time());
+		$this->options = array_merge($this->options, $prmOptions);
+
 		$this->url = "http://". $_SERVER['HTTP_HOST'] ."/cgi-bin/". MAPSERV ."?";
 		$this->reg = $reg;
 		$fp = "";
@@ -48,7 +50,7 @@ class Maps
 				$map .= $this->setLayerEff($us, $reg, $lev, $dl, $range, $info, $lbl, $prmTransparency);
 				if ($type == "THEMATIC")
 				{
-					$fp .= $reg . '-' . $us->sSessionId . '_' . time() .  '.map';
+					$fp .= $this->options['Id'] .  '.map';
 				}
 				elseif (strlen($type) > 0)
 				{

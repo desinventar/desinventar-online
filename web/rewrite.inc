@@ -8,6 +8,10 @@ RewriteRule ^.*\.xml$ - [F]
 # Special Commands by URL
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^wms[/]*$                        mapserver.php
+RewriteRule ^wms/worldmap/$                  mapserver.php
+RewriteRule ^wms/([a-zA-Z0-9\-\._]+)/$       mapserver.php?MAPID=$1&LAYERS=effects [QSA]
+RewriteRule ^wms/([a-zA-Z0-9\-\._]+)/(.+)/$  mapserver.php?MAPID=$1&LAYERS=$2 [QSA]
 RewriteRule ^admin[/]*$       index.php?cmd=cmdAdminMain
 RewriteRule ^admin/users[/]*$ index.php?cmd=cmdAdminUsers
 RewriteRule ^admin/db[/]*$    index.php?cmd=cmdAdminDB
