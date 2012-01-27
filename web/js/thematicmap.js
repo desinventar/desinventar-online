@@ -88,7 +88,7 @@ function createThematicMap()
 			'/cgi-bin/' + jQuery('#prmMapServer').val() + '?',
 			{map         : MapFile,
 			 transparent : true,
-			 format      : 'png',
+			 format      : 'jpeg',
 			 layers      : LayerName
 			},
 			{isBaseLayer :false
@@ -101,7 +101,7 @@ function createThematicMap()
 				'/cgi-bin/' + jQuery('#prmMapServer').val() + "?", 
 				{map         : MapFile,
 				 transparent : true,
-				 format      : 'png',
+				 format      : 'jpeg',
 				 layers      : jQuery(this).find(':eq(1)').text().trim()
 				},
 				{isBaseLayer : false}
@@ -239,7 +239,7 @@ function genColors() {
 	// 2009-07-11 (jhcaiced) This layer doesn't work with Spherical Mercator projection (????)
 	var bk2 = new OpenLayers.Layer.WMS("GRDP - Population 2007",
 		"http://metafunctions.grid.unep.ch/cgi-bin/mapserv",
-		{ map:'/www/preview/previewims/etc/preview_ims.map', 'transparent':true, 'format':'png', 
+		{ map:'/www/preview/previewims/etc/preview_ims.map', 'transparent':true, 'format':'jpeg', 
 			 'sphericalMercator': true, layers:'popdens'},
 		{'isBaseLayer':true});
 	bk2.setVisibility(false);
@@ -249,7 +249,7 @@ function genColors() {
 	/* Metacarta Base Layers			
 	// 2009-02-06 (jhcaiced) Metacarta Satellite doesn't work with Spherical Mercator, this needs to be fixed !!
 	var met2 = new OpenLayers.Layer.WMS("** Metacarta Satellite",
-			"http://labs.metacarta.com/wms-c/Basic.py", {layers:'satellite', 'transparent':true, 'format':'png' },
+			"http://labs.metacarta.com/wms-c/Basic.py", {layers:'satellite', 'transparent':true, 'format':'jpeg' },
 			{'isBaseLayer':true });
 	met2.setVisibility(false);
 	map.addLayer(met2);
@@ -263,12 +263,12 @@ function genColors() {
 	map.addControl(new OpenLayers.Control.EditingToolbar(vlayer));
 	var pegeo = new OpenLayers.Layer.WMS("** Geología Perú",
 			"http://per.geosemantica.net/services/mapserv.exe?MAP=2c1bc078-13e6-4734-863a-5636442a2e30_wms.map", 
-			{'layers':'geoutm_shp', 'transparent':true, 'format':'png' }, {'isBaseLayer':false});
+			{'layers':'geoutm_shp', 'transparent':true, 'format':'jpeg' }, {'isBaseLayer':false});
 	pegeo.setVisibility(false);
 	map.addLayer(pegeo);
 	var cosis = new OpenLayers.Layer.WMS("** Amenaza Sísmica Colombia",
 			"http://col.geosemantica.net/services/mapserv.exe?map=8ec9a29a-f170-4023-9fe0-bf3d38c5ee2e.map",
-			{'layers':'aisacel_1_shp', 'transparent':true, 'format':'png' }, {'isBaseLayer':false});
+			{'layers':'aisacel_1_shp', 'transparent':true, 'format':'jpeg' }, {'isBaseLayer':false});
 	cosis.setVisibility(false);
 	map.addLayer(cosis);
 	var queryTarget = $('queryOut');
