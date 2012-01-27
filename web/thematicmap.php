@@ -64,6 +64,8 @@ $dic = array_merge($dic, $us->q->queryLabelsFromGroup('MapOpt', $lg));
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Sector', $lg));
 
+$options = array();
+$options['URL'] = 'http://' . $_SERVER['HTTP_HOST'] . $desinventarURL;
 if (isset($post['_M+cmd']))
 {
 	// Process QueryDesign Fields and count results
@@ -99,11 +101,11 @@ if (isset($post['_M+cmd']))
 		$dl = $us->q->prepareList($dislist, 'MAPS');
 
 		$MapId = time() . '.' . sprintf('%04d', rand(0, 9999));
-		$MapOptions['Id'] = $MapId;
+		$options['Id'] = $MapId;
 		$t->assign('prmMapId', $MapId);
 
 		// MAPS Query, RegionId, Level, datalist, ranges, dbinfo, label, maptype
-		$m = new Maps($us, $RegionId, $lev[0], $dl, $range, $info, $post['_M+Label'], $post['_M+Transparency'], 'THEMATIC', $MapOptions);
+		$m = new Maps($us, $RegionId, $lev[0], $dl, $range, $info, $post['_M+Label'], $post['_M+Transparency'], 'THEMATIC', $options);
 		$rinf = new DIRegion($us);
 		$info['RECORDS'] = showStandardNumber($NumberOfRecords);
 		$rgl[0]['regname'] = $rinf->get('RegionLabel');
@@ -245,11 +247,13 @@ if (isset($post['_M+cmd']))
 		//$t->assign('mapinfoimg', WWWDATA . '/' . $MapInfoImg);
 		
 		$mapfile = str_replace('\\', '/', $m->filename());
-		fb($mapfile);
 		$worldmap = str_replace('\\','/', MAPDIR . '/world_adm0.map');
 		$timestamp = microtime(true);
+		$sLegendURL = $options['URL'] . '/wms/' . $options['Id'] . '/legend/';
+		/*
 		$sLegendURL = '/cgi-bin/'. MAPSERV .'?map=' . rawurlencode($mapfile) . '&SERVICE=WMS&VERSION=1.1.1'.
 					'&REQUEST=getlegendgraphic&LAYER='. substr($myly, 0, 12) .'&FORMAT=image/png' . '&t=' . $timestamp;
+		*/
 		$t->assign('legend', $sLegendURL);	
 		$t->assign('ctl_showres', true);
 		// 2009-09-10 (jhcaiced) Replace backslash chars to slash, when passing data to mapserver
@@ -321,8 +325,6 @@ if (isset($post['_M+cmd']))
 }
 elseif (isset($get['cmd']) && $get['cmd'] == 'getkml')
 {
-	$options = array();
-	$options['URL'] = 'http://' . $_SERVER['HTTP_HOST'] . $desinventarURL;
 	$m = new Maps($us, $RegionId, null, null, null, null, null, null, 'KML', $options);
 
 	// Send KML file to browser
