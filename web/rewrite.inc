@@ -8,7 +8,7 @@ RewriteRule ^.*\.xml$ - [F]
 # Special Commands by URL
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^kml/([a-zA-Z0-9\-\._]+)/$        thematicmap.php?cmd=getkml
+RewriteRule ^kml/([a-zA-Z0-9\-\._]+)/$        thematicmap.php?cmd=getkml&MAPID=$1
 RewriteRule ^wms[/]*$                         mapserver.php
 RewriteRule ^wms/worldmap/$                   mapserver.php
 RewriteRule ^wms/([a-zA-Z0-9\-\._]+)/$        mapserver.php?MAPID=$1&LAYERS=effects [QSA]

@@ -27,12 +27,19 @@ class Maps
 
 		$this->url = $this->options['URL'] . '/wms/' . $this->options['Id'];
 		$this->reg = $reg;
-		$fp = "";
+
+		$this->kml = $this->generateKML($us, $reg, $info);
+		$sFilename = TMP_DIR . '/map_' . $this->options['Id'] . '.kml';
+		$fh = fopen($sFilename, 'w+');
+		fputs($fh, $this->kml);
+		fclose($fh);
+
+		$fp = '';
 		if ($type == 'KML')
 		{
 			$this->kml = $this->generateKML($us, $reg, $info);
 			/*
-			$sFilename = TMP_DIR . '/map_' $this->options['Id'] . '.map';
+			$sFilename = TMP_DIR . '/map_' $this->options['Id'] . '.kml';
 			fb($sFilename);
 			$fh = fopen($sFilename, 'w+');
 			fputs($fh, $this->kml);
@@ -455,7 +462,7 @@ class Maps
 		<name>DesInventar '. $regn .'</name>
 		<open>1</open>
 		<Icon>
-			<href>'. $this->url . '/effects/&amp;SERVICE=WMS&amp;SRS=EPSG%3A4326&amp;REQUEST=GetMap&amp;HEIGHT=600&amp;STYLES=default,default&amp;WIDTH=800&amp;VERSION=1.1.1&amp;TRANSPARENT=true&amp;LEGEND=true&amp;FORMAT=image/png</href>
+			<href>'. $this->url . '/effects/?SRS=EPSG%3A4326&amp;HEIGHT=600&amp;STYLES=default,default&amp;WIDTH=800&amp;VERSION=1.1.1&amp;TRANSPARENT=true&amp;LEGEND=true&amp;FORMAT=image/png</href>
 			<viewRefreshMode>onStop</viewRefreshMode>
 			<viewRefreshTime>1</viewRefreshTime>
 			<viewBoundScale>1</viewBoundScale>

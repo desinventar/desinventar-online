@@ -76,7 +76,6 @@
 		</script>
 	</head>
 	<body>
-		<div id="divMapHeader"></div>
 		<div id="loading-mask"></div>
 		<div id="loading">
 			<div class="loading-indicator">Loading...</div>

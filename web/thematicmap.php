@@ -8,66 +8,25 @@ require_once('include/loader.php');
 require_once('include/maps.class.php');
 require_once('include/diregion.class.php');
 
-function hex2dec($col)
-{
-	$h = str_split(substr($col, -6), 2);
-	return hexdec($h[0]) . ' ' . hexdec($h[1]) . ' ' . hexdec($h[2]);
-}
-
-// set hash with limits, legends and colors
-function setRanges($opc)
-{
-	$lim = $opc['_M+limit'];
-	$leg = $opc['_M+legend'];
-	$col = $opc['_M+color'];
-	$lmx = '10000000';
-	$maxr = false;
-	// First range is No data
-	$range[0] = array(0, '= 0', '255 255 255');
-	// generate range hash with limit, legend and color
-	for ($j = 0; $j < count($lim); $j++)
-	{
-		if (isset($lim[$j]))
-		{
-			if ($lim[$j] != '')
-			{
-				$range[$j+1] = array($lim[$j], $leg[$j], hex2dec($col[$j]));
-			}
-			else
-			{
-				$range[$j+1] = array($lmx, $leg[$j], hex2dec($col[$j]));
-				$maxr = true;
-			}
-		}
-	}
-	// if not assigned, set last range between last number and infinit
-	if (!$maxr)
-	{
-		$range[$j+1] = array($lmx, (int)$lim[$j-1] + 1 . ' -> ', '30 30 30');
-	}
-	return $range;
-}
-
 $post = $_POST;
 $get = $_GET;
-
-$RegionId = getParameter('_REG',getParameter('r',''));
-if ($RegionId == '')
-{
-	exit();
-}
-
-$us->open($RegionId);
-fixPost($post);
-$dic = array();
-$dic = array_merge($dic, $us->q->queryLabelsFromGroup('MapOpt', $lg));
-$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
-$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Sector', $lg));
 
 $options = array();
 $options['URL'] = 'http://' . $_SERVER['HTTP_HOST'] . $desinventarURL;
 if (isset($post['_M+cmd']))
 {
+	$RegionId = getParameter('_REG',getParameter('r',''));
+	if ($RegionId == '')
+	{
+		exit();
+	}
+
+	$us->open($RegionId);
+	fixPost($post);
+	$dic = array();
+	$dic = array_merge($dic, $us->q->queryLabelsFromGroup('MapOpt', $lg));
+	$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
+	$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Sector', $lg));
 	// Process QueryDesign Fields and count results
 	$qd	= $us->q->genSQLWhereDesconsultar($post);
 	$dic = array_merge($dic, $us->q->getEEFieldList('True'));
@@ -332,17 +291,60 @@ if (isset($post['_M+cmd']))
 }
 elseif (isset($get['cmd']) && $get['cmd'] == 'getkml')
 {
-	$m = new Maps($us, $RegionId, null, null, null, null, null, null, 'KML', $options);
-
-	// Send KML file to browser
-	header('Content-type: text/kml');
-	header('Content-Disposition: attachment; filename=DesInventar_'. str_replace(' ', '', $RegionId) .'_ThematicMap.kml');
-	echo $m->printKML();
-	/*
-	$filename = TMP_DIR . '/kmlmap' . $us->sSessionId .  '.kml';
-	$fh = fopen($filename,'w+');
-	fputs($fh, $m->printKML());
-	fclose($fh);
-	*/
+	$MapId = getParameter('MAPID', '');
+	fb('KML : ' . $MapId);
+	if ($MapId != '')
+	{
+		$sFilename = TMP_DIR . '/map_' . $MapId . '.kml';
+		fb($sFilename);
+		if (file_exists($sFilename))
+		{
+			// Send KML file to browser
+			header('Content-type: text/kml');
+			header('Content-Disposition: attachment; filename=DesInventar_'. str_replace(' ', '', $RegionId) .'_ThematicMap.kml');
+			echo file_get_contents($sFilename);
+		}
+	}
 }
+
+function hex2dec($col)
+{
+	$h = str_split(substr($col, -6), 2);
+	return hexdec($h[0]) . ' ' . hexdec($h[1]) . ' ' . hexdec($h[2]);
+}
+
+// set hash with limits, legends and colors
+function setRanges($opc)
+{
+	$lim = $opc['_M+limit'];
+	$leg = $opc['_M+legend'];
+	$col = $opc['_M+color'];
+	$lmx = '10000000';
+	$maxr = false;
+	// First range is No data
+	$range[0] = array(0, '= 0', '255 255 255');
+	// generate range hash with limit, legend and color
+	for ($j = 0; $j < count($lim); $j++)
+	{
+		if (isset($lim[$j]))
+		{
+			if ($lim[$j] != '')
+			{
+				$range[$j+1] = array($lim[$j], $leg[$j], hex2dec($col[$j]));
+			}
+			else
+			{
+				$range[$j+1] = array($lmx, $leg[$j], hex2dec($col[$j]));
+				$maxr = true;
+			}
+		}
+	}
+	// if not assigned, set last range between last number and infinit
+	if (!$maxr)
+	{
+		$range[$j+1] = array($lmx, (int)$lim[$j-1] + 1 . ' -> ', '30 30 30');
+	}
+	return $range;
+}
+
 </script>
