@@ -296,12 +296,11 @@ elseif (isset($get['cmd']) && $get['cmd'] == 'getkml')
 	if ($MapId != '')
 	{
 		$sFilename = TMP_DIR . '/map_' . $MapId . '.kml';
-		fb($sFilename);
 		if (file_exists($sFilename))
 		{
-			// Send KML file to browser
+			$sOutFilename = 'DesInventar_ThematicMap_' . $MapId . '.kml';
 			header('Content-type: text/kml');
-			header('Content-Disposition: attachment; filename=DesInventar_'. str_replace(' ', '', $RegionId) .'_ThematicMap.kml');
+			header('Content-Disposition: attachment; filename=' . $sOutFilename);
 			echo file_get_contents($sFilename);
 		}
 	}
