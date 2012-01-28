@@ -14,6 +14,10 @@
 	{
 		$options['FORMAT'] = 'image/png';
 	}
+	if (! isset($options['REQUEST']))
+	{
+		$options['REQUEST'] = 'GetMap';
+	}
 	
 	if (isset($options['MAPID']))
 	{

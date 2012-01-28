@@ -33,11 +33,11 @@
 						{-/foreach-}
 						{-$rgl[0].regname-}
 					</div>
+					<div class="GoogleEarth">
+						<hr />
+						<image src="{-$desinventarURL-}/images/ge_icon.png" /><a href="{-$desinventarURL-}/kml/{-$prmMapId-}/">{-#tgetgearth#-}</a>
+					</div>
 					<hr />
-					<!--
-					<image src="{-$desinventarURL-}/images/ge_icon.png" /><a href="{-$desinventarURL-}/kml/{-$prmMapId-}/">{-#tgetgearth#-}</a>
-					<hr />
-					-->
 					<img src="{-$legend-}" /><br />
 				</div>
 			</td>
