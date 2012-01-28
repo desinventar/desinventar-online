@@ -2,7 +2,6 @@
 {-config_load file="$lg.conf" section="dc_qdetails"-}
 {-**** SHOW RESULTS ****-}
 {-if $ctl_showres-}
-	{-include file="maps_include.tpl"-}
 	<style type="text/css">
 		#map {	width: 100%; height: 100%; border: 1px solid black; }
 		#queryOut {	width:800px; height: 200px; border: 1px solid black;
