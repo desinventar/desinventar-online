@@ -28,65 +28,29 @@ class Maps
 		$this->url = $this->options['URL'] . '/wms/' . $this->options['Id'];
 		$this->reg = $reg;
 
+		// Always generate the KML file along with the MAP file for later use
 		$this->kml = $this->generateKML($us, $reg, $info);
 		$sFilename = TMP_DIR . '/map_' . $this->options['Id'] . '.kml';
 		$fh = fopen($sFilename, 'w+');
 		fputs($fh, $this->kml);
 		fclose($fh);
 
-		$fp = '';
-		if ($type == 'KML')
-		{
-			$this->kml = $this->generateKML($us, $reg, $info);
-			/*
-			$sFilename = TMP_DIR . '/map_' $this->options['Id'] . '.kml';
-			fb($sFilename);
-			$fh = fopen($sFilename, 'w+');
-			fputs($fh, $this->kml);
-			fclose($fh);
-			*/
-		}
-		else
+		if ($type == 'THEMATIC')
 		{
 			$map = "## DesInventar mapfile\n";
 			$map .= $this->setHeader($us, $reg, $info, $type);
 			$gl = $us->q->loadGeoLevels('', -1, true);
 			$map .= $this->setLayerAdm($gl, $reg, $type);
-			// mapfile and html template to interactive selection
-			if ($type == "SELECT")
-			{
-				$fp = DATADIR ."/database/". $reg . "/region.map";
-			}
-			else
-			{
-				// generate effects maps: type=filename | thematic=sessid
-				$fp = TMP_DIR ."/map_";
-				$map .= $this->setLayerEff($us, $reg, $lev, $dl, $range, $info, $lbl, $prmTransparency);
-				if ($type == "THEMATIC")
-				{
-					$fp .= $this->options['Id'] .  '.map';
-				}
-				elseif (strlen($type) > 0)
-				{
-					$fp .= $reg . '-' . $type . '.map';
-				}
-				else
-				{
-					exit();
-				}
-			}
+			$map .= $this->setLayerEff($us, $reg, $lev, $dl, $range, $info, $lbl, $prmTransparency);
 			$map .= $this->setFooter();
-			$this->makefile($fp, $map);
+
+			$sFilename = TMP_DIR . '/map_' . $this->options['Id'] .  '.map';
+			$this->fpath = $sFilename;
+			$fh = fopen($sFilename, 'w');
+			fwrite($fh, $map);
+			fclose($fh);
 		}
 	} //constructor
-	
-	function makefile($fp, $map)
-	{
-		$fh = fopen($fp, 'w') or die("Error setting file");
-		fwrite($fh, $map);
-		fclose($fh);
-		$this->fpath = $fp;
-	}
 	
 	public function filename()
 	{

@@ -201,10 +201,6 @@ if (isset($post['_M+cmd']))
 			}
 		}
 
-		//$MapInfoImg = 'mapinfo_' . session_id() . '_' . rand(0, 50000) . '.jpg';
-		//imagejpeg($imgMapInfo, WWWDIR . '/' . $MapInfoImg, 100);
-		//$t->assign('mapinfoimg', WWWDATA . '/' . $MapInfoImg);
-		
 		$mapfile = str_replace('\\', '/', $m->filename());
 		$worldmap = str_replace('\\','/', MAPDIR . '/world_adm0.map');
 		$timestamp = microtime(true);
@@ -292,7 +288,6 @@ if (isset($post['_M+cmd']))
 elseif (isset($get['cmd']) && $get['cmd'] == 'getkml')
 {
 	$MapId = getParameter('MAPID', '');
-	fb('KML : ' . $MapId);
 	if ($MapId != '')
 	{
 		$sFilename = TMP_DIR . '/map_' . $MapId . '.kml';
@@ -345,5 +340,4 @@ function setRanges($opc)
 	}
 	return $range;
 }
-
 </script>
