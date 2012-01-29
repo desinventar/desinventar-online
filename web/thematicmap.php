@@ -136,75 +136,6 @@ switch($cmd)
 			$t->assign('MapNumberOfRecords', $NumberOfRecords);
 			$t->assign('qdet', $us->q->getQueryDetails($dic, $post));
 			
-			// 2010-05-12 (jhcaiced) Create an image for the Map Title and Description...
-			// Process array to calculate some parameters...
-			$mapinfodic = $us->q->queryLabelsFromGroup('MapInfo', $lg);
-			$infoTranslated = array();
-			$info2 = $info;
-			
-			$txtMapTitle = '';
-			$txtMapVariable = '';
-			
-			// Manually Processed Data
-			foreach($info2 as $key => $value)
-			{
-				$value = trim($value);
-				$info2[$key] = $value;
-			}
-			if ($info2['TITLE'] != '')
-			{
-				$value = $info2['TITLE'];
-				$title = $mapinfodic['MapInfoTITLE'][0];
-				//$txtMapTitle = $title . ' ' . strtolower($value);
-				$txtMapTitle = $post['_M+title'];
-				$txtMapVariable = $value;
-				unset($info2['TITLE']);
-			}
-
-			$ImageRows = 0;
-			foreach($info2 as $key => $value)
-			{
-				$info2[$key] = $value;
-				if ($value != '')
-				{ 
-					$ImageRows++;
-					$title = $mapinfodic['MapInfo' . $key][0];
-					$infoTranslated[$key] = $title . ': ' . $value;
-				}
-			}
-			$font = getFont('arialbi.ttf');
-			
-			// Map Title Image
-			$width  = 1000; //$sx * $ImageCols;
-			$height = 20;
-			$imgTitle = imagecreatetruecolor($width, $height);
-			$white = imagecolorallocate($imgTitle, 255,255,255);
-			$black = imagecolorallocate($imgTitle, 0,0,0);
-			imagefill($imgTitle, 0,0, $white);
-
-			$item = $txtMapTitle;
-			$bbox = imagettfbbox(11, 0, $font, $item);
-			$x = ($width - ($bbox[2] - $bbox[0]) )/2;
-			imagettftext($imgTitle, 11, 0, $x, 13, $black, $font, $item);
-			
-			// Map Info Image
-			$fontsize = 10;
-			$sy = $fontsize;
-			$height = ($sy + 2) * $ImageRows + 2;
-			$imgInfo = imagecreatetruecolor($width, $height);
-			$white = imagecolorallocate($imgInfo, 255,255,255);
-			$black = imagecolorallocate($imgInfo, 0,0,0);
-			imagefill($imgInfo, 0,0, $white);
-			
-			$y = 0;
-			foreach($infoTranslated as $key => $item)
-			{
-				if ( ($key != 'TITLE') && ($key != 'TITLE2') && ($key != 'NumberOfRecords') )
-				{
-					imagettftext($imgInfo, 10, 0, 0, ($sy + 2) * ($y + 1), $black, getFont('arial.ttf'), $item);
-					$y++;
-				}
-			}
 
 			$mapfile = str_replace('\\', '/', $m->filename());
 			$worldmap = str_replace('\\','/', MAPDIR . '/world_adm0.map');
@@ -212,7 +143,6 @@ switch($cmd)
 			$sLegendURL = $options['URL'] . '/wms/' . $options['Id'] . '/legend/';
 			$t->assign('legend', $sLegendURL);	
 			$t->assign('ctl_showres', true);
-			imagedestroy($imgInfo);
 			$t->assign('reg', $RegionId);
 			$t->assign('basemap', $worldmap);
 			$t->assign('mps', MAPSERV);
@@ -242,10 +172,29 @@ switch($cmd)
 		$options['LegendTitle'] = getParameter('_M+legendtitle', getParameter('legendtitle', ''));
 		fb($options);
 
+		$iAllWidth = 1000;
+		$iAllHeight = 760;
+
+		$font = getFont('arialbi.ttf');
+		// Map Title Image
+		$iTitleLeft   = 0;
+		$iTitleTop    = 0;
+		$iTitleWidth  = $iAllWidth;
+		$iTitleHeight = 20;
+		$imgTitle = imagecreatetruecolor($iTitleWidth, $iTitleHeight);
+		$white = imagecolorallocate($imgTitle, 255,255,255);
+		$black = imagecolorallocate($imgTitle, 0,0,0);
+		imagefill($imgTitle, 0,0, $white);
+		$item = $options['Title'];
+		fb($item);
+		$bbox = imagettfbbox(11, 0, $font, $item);
+		$iTitleMarginX = (imagesx($imgTitle) - ($bbox[2] - $bbox[0]) )/2;
+		imagettftext($imgTitle, 11, 0, $iTitleMarginX, 13, $black, $font, $item);
+
 		$iBaseLeft   = 0;
-		$iBaseTop    = 0;
-		$iBaseWidth  = 1000;
-		$iBaseHeight = 756;
+		$iBaseTop    = 0 + $iTitleHeight;
+		$iBaseWidth  = $iAllWidth;
+		$iBaseHeight = $iAllHeight - $iTitleHeight;
 		$sBaseUrl = $options['URL'] . '/wms/worldmap/' . '?SRS=EPSG:900913' .
 			'&BBOX='. $options['Extent'] . '&WIDTH='. $iBaseWidth .'&HEIGHT='. $iBaseHeight;
 		$imgBase = imagecreatefromstring(file_get_contents($sBaseUrl));
@@ -261,9 +210,6 @@ switch($cmd)
 		$imgMap = imagecreatefromstring(file_get_contents($sMapUrl));
 		//	'?layers='. $post['_M+layers'] 
 		
-		$iAllWidth  = $iBaseWidth;
-		$iAllHeight = $iBaseHeight;
-
 		// Download and include legend
 		$sLegendURL = $options['URL'] . '/wms/' . $options['Id'] . '/legend/';
 		$imgTmp = imagecreatefromstring(file_get_contents($sLegendURL));
@@ -277,6 +223,62 @@ switch($cmd)
 
 		/*
 		// Include MapInfo Image (Title, Query Info etc.)
+		// 2010-05-12 (jhcaiced) Create an image for the Map Title and Description...
+		// Process array to calculate some parameters...
+		$mapinfodic = $us->q->queryLabelsFromGroup('MapInfo', $lg);
+		$infoTranslated = array();
+		$info2 = $info;
+		
+		$txtMapTitle = '';
+		$txtMapVariable = '';
+		
+		// Manually Processed Data
+		foreach($info2 as $key => $value)
+		{
+			$value = trim($value);
+			$info2[$key] = $value;
+		}
+		if ($info2['TITLE'] != '')
+		{
+			$value = $info2['TITLE'];
+			$title = $mapinfodic['MapInfoTITLE'][0];
+			//$txtMapTitle = $title . ' ' . strtolower($value);
+			$txtMapTitle = $post['_M+title'];
+			$txtMapVariable = $value;
+			unset($info2['TITLE']);
+		}
+
+		$ImageRows = 0;
+		foreach($info2 as $key => $value)
+		{
+			$info2[$key] = $value;
+			if ($value != '')
+			{ 
+				$ImageRows++;
+				$title = $mapinfodic['MapInfo' . $key][0];
+				$infoTranslated[$key] = $title . ': ' . $value;
+			}
+		}
+		
+		// Map Info Image
+		$fontsize = 10;
+		$sy = $fontsize;
+		$height = ($sy + 2) * $ImageRows + 2;
+		$imgInfo = imagecreatetruecolor($width, $height);
+		$white = imagecolorallocate($imgInfo, 255,255,255);
+		$black = imagecolorallocate($imgInfo, 0,0,0);
+		imagefill($imgInfo, 0,0, $white);
+		
+		$y = 0;
+		foreach($infoTranslated as $key => $item)
+		{
+			if ( ($key != 'TITLE') && ($key != 'TITLE2') && ($key != 'NumberOfRecords') )
+			{
+				imagettftext($imgInfo, 10, 0, 0, ($sy + 2) * ($y + 1), $black, getFont('arial.ttf'), $item);
+				$y++;
+			}
+		}
+		imagedestroy($imgInfo);
 		$iAllWidth = imagesx($imgMap);
 		$iAllHeight = imagesy($imgMap) + imagesy($imgTitle) + imagesy($imgInfo);
 		imagecopy($imgAll, $imgTitle, 0, 0, 0, 0, imagesx($imgTitle), imagesy($imgTitle));
@@ -285,7 +287,6 @@ switch($cmd)
 		// 2010-05-18 (jhcaiced) Draw a gray rectangle around the image...
 		imagerectangle($imgAll, 0, imagesy($imgTitle), $iAllWidth - 1, $iAllHeight - imagesy($imgInfo), imagecolorallocate($im,192,192,192));
 		
-		//imagecopy($imgAll, $imgLegend, $iMapWidth+1, $iMapHeight - imagesy($imgLegend), 0, 0, imagesx($imgLegend), imagesy($imgLegend));
 		$mapfooter = trim('http://www.desinventar.org/' . ' - ' . $rinf->get('RegionLabel'));
 		$font = 'arial';
 		$fontsize = 10;
@@ -294,14 +295,14 @@ switch($cmd)
 		$x = $iAllWidth - 2 - $x;
 		$y = $iAllHeight - imagesy($imgInfo) - 4;
 		imagettftext($imgAll, $fontsize, 0, $x, $y, $black, $font,  $mapfooter);
-		imagedestroy($imgLegend);
 		*/
 
 		// Create and assembly final image
 		$imgAll = imagecreatetruecolor($iAllWidth, $iAllHeight);
 		imagefilledrectangle($imgAll, 0, 0, $iAllWidth - 1, $iAllHeight - 1, imagecolorallocate($imgAll,192,192,192));
-		imagecopy($imgAll, $imgBase, $iBaseLeft, $iBaseTop, 0, 0, $iBaseWidth, $iBaseHeight);
-		imagecopy($imgAll, $imgMap , $iMapLeft , $iMapTop , 0, 0, $iMapWidth , $iMapHeight );
+		imagecopy($imgAll, $imgTitle, $iTitleLeft, $iTitleTop, 0, 0, $iBaseWidth, $iBaseHeight);
+		imagecopy($imgAll, $imgBase , $iBaseLeft , $iBaseTop , 0, 0, $iBaseWidth, $iBaseHeight);
+		imagecopy($imgAll, $imgMap  , $iMapLeft  , $iMapTop  , 0, 0, $iMapWidth , $iMapHeight );
 
 		$iLegendLeft = 5;
 		$iLegendTop  = $iMapTop + $iMapHeight - (imagesy($imgLegend) + 5);
@@ -314,8 +315,10 @@ switch($cmd)
 		
 		//Free memory
 		imagedestroy($imgAll);
+		imagedestroy($imgTitle);
 		imagedestroy($imgBase);
 		imagedestroy($imgMap);
+		imagedestroy($imgLegend);
 	break;
 } //switch
 
