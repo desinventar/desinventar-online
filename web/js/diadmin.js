@@ -530,6 +530,7 @@
 				}
 				$('_M+extent').value = [extent.left,extent.bottom,extent.right,extent.top].join(',');
 				$('_M+layers').value = activelayers;
+				$('_M+mapid').value = jQuery('#prmMapId').val();
 				myMap = jQuery('#MapTitle');
 				$('_M+title').value = myMap.val();
 			}

@@ -235,8 +235,9 @@ switch($cmd)
 	break;
 	case 'export':
 		// Save image of an already created map
-		$options['Id'] = getParameter('MAPID', '');
+		$options['Id']     = getParameter('_M+mapid', getParameter('mapid', ''));
 		$options['Extent'] = getParameter('_M+extent', getParameter('extent', ''));
+		fb($options);
 
 		$iBaseLeft   = 0;
 		$iBaseTop    = 0;
