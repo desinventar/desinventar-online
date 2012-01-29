@@ -234,9 +234,12 @@ switch($cmd)
 		}
 	break;
 	case 'export':
+		fb($_POST);
 		// Save image of an already created map
-		$options['Id']     = getParameter('_M+mapid', getParameter('mapid', ''));
-		$options['Extent'] = getParameter('_M+extent', getParameter('extent', ''));
+		$options['Id']          = getParameter('_M+mapid' , getParameter('mapid' , ''));
+		$options['Extent']      = getParameter('_M+extent', getParameter('extent', ''));
+		$options['Title']       = getParameter('_M+title' , getParameter('title' , ''));
+		$options['LegendTitle'] = getParameter('_M+legendtitle', getParameter('legendtitle', ''));
 		fb($options);
 
 		$iBaseLeft   = 0;
@@ -260,23 +263,23 @@ switch($cmd)
 		
 		$iAllWidth  = $iBaseWidth;
 		$iAllHeight = $iBaseHeight;
-		/*
+
 		// Download and include legend
-		$lf = file_get_contents('http://'. $_SERVER['HTTP_HOST'] . $sLegendURL);
-		$imgTmp = imagecreatefromstring($lf);
+		$sLegendURL = $options['URL'] . '/wms/' . $options['Id'] . '/legend/';
+		$imgTmp = imagecreatefromstring(file_get_contents($sLegendURL));
 		$fontsize = 11;
-		$sx = imagesx($imgTmp);
-		$sy = imagesy($imgTmp) + $fontsize + 2;
-		$imgLegend = imagecreatetruecolor($sx, $sy);
+		$iLegendWidth = imagesx($imgTmp);
+		$iLegendHeight = imagesy($imgTmp) + $fontsize + 2;
+		$imgLegend = imagecreatetruecolor($iLegendWidth, $iLegendHeight);
 		imagefill($imgLegend, 0,0, imagecolorallocate($imgLegend, 255,255,255));
 		imagecopy($imgLegend, $imgTmp, 0, $fontsize + 2, 0, 0, imagesx($imgTmp), imagesy($imgTmp));
-		imagettftext($imgLegend, 10, 0, 4, 2 + $fontsize, imagecolorallocate($imgLegend,0, 0, 89), 'arialbi',  $txtMapVariable);
+		imagettftext($imgLegend, 10, 0, 4, 2 + $fontsize, imagecolorallocate($imgLegend,0, 0, 89), 'arialbi',  $options['LegendTitle']);
 
+		/*
 		// Include MapInfo Image (Title, Query Info etc.)
 		$iAllWidth = imagesx($imgMap);
 		$iAllHeight = imagesy($imgMap) + imagesy($imgTitle) + imagesy($imgInfo);
 		imagecopy($imgAll, $imgTitle, 0, 0, 0, 0, imagesx($imgTitle), imagesy($imgTitle));
-		imagecopy($imgAll, $imgLegend, 5, ($iMapHeight + imagesy($imgTitle)) - (imagesy($imgLegend) + 5), 0, 0, imagesx($imgLegend), imagesy($imgLegend));
 		imagecopy($imgAll, $imgInfo, 0, $iAllHeight - imagesy($imgInfo), 0, 0, imagesx($imgInfo), imagesy($imgInfo));
 		
 		// 2010-05-18 (jhcaiced) Draw a gray rectangle around the image...
@@ -299,6 +302,11 @@ switch($cmd)
 		imagefilledrectangle($imgAll, 0, 0, $iAllWidth - 1, $iAllHeight - 1, imagecolorallocate($imgAll,192,192,192));
 		imagecopy($imgAll, $imgBase, $iBaseLeft, $iBaseTop, 0, 0, $iBaseWidth, $iBaseHeight);
 		imagecopy($imgAll, $imgMap , $iMapLeft , $iMapTop , 0, 0, $iMapWidth , $iMapHeight );
+
+		$iLegendLeft = 5;
+		$iLegendTop  = $iMapTop + $iMapHeight - (imagesy($imgLegend) + 5);
+		imagecopy($imgAll, $imgLegend, $iLegendLeft, $iLegendTop, 0, 0, imagesx($imgLegend), imagesy($imgLegend));
+
 		$sOutFilename = 'DesInventar_ThematicMap_' . $options['Id'] . '.png';
 		//header('Content-Disposition: attachment; filename= '. $sOutFilename);
 		header('Content-Type: image/png');
