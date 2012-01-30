@@ -206,7 +206,7 @@ switch($cmd)
 		$fontsize = 10;
 		$iInfoRows = count($options['info']);
 		$iInfoWidth  = $iAllWidth;
-		$iInfoHeight = ($fontsize + 1) * $iInfoRows + 2;
+		$iInfoHeight = ($fontsize + 2) * $iInfoRows + 2;
 		$imgInfo = imagecreatetruecolor($iInfoWidth, $iInfoHeight);
 		$white = imagecolorallocate($imgInfo, 255,255,255);
 		$black = imagecolorallocate($imgInfo, 0,0,0);
@@ -214,14 +214,12 @@ switch($cmd)
 		$iCount = 0;
 		foreach($options['info'] as $key => $value)
 		{
-			$label = $key . ' : ' . $value;
-			imagettftext($imgInfo, 10, 0, 0, ($fontsize + 1) * ($iCount + 1), $black, getFont('arial.ttf'), $label);
+			imagettftext($imgInfo, 10, 0, 0, ($fontsize + 2) * ($iCount + 1), $black, getFont('arial.ttf'), $value);
 			$iCount++;
 		}
 		$iInfoTop    = $iAllHeight - imagesy($imgInfo);
 		$iInfoLeft   = 0;
 		imagecopy($imgAll, $imgInfo, $iInfoLeft, $iInfoTop, 0, 0, $iInfoWidth, $iInfoHeight);
-		
 
 		$iBaseLeft   = 0;
 		$iBaseTop    = 0 + $iTitleHeight;
@@ -259,30 +257,21 @@ switch($cmd)
 		$iLegendTop  = $iMapTop + $iMapHeight - (imagesy($imgLegend) + 5);
 		imagecopy($imgAll, $imgLegend, $iLegendLeft, $iLegendTop, 0, 0, imagesx($imgLegend), imagesy($imgLegend));
 
-
-		/*
-		$iAllWidth = imagesx($imgMap);
-		$iAllHeight = imagesy($imgMap) + imagesy($imgTitle) + imagesy($imgInfo);
-		imagecopy($imgAll, $imgTitle, 0, 0, 0, 0, imagesx($imgTitle), imagesy($imgTitle));
-		imagecopy($imgAll, $imgInfo, 0, $iAllHeight - imagesy($imgInfo), 0, 0, imagesx($imgInfo), imagesy($imgInfo));
+		$gray = imagecolorallocate($imgAll,192,192,192);
+		imagerectangle($imgAll, $iBaseLeft, $iBaseTop, $iAllWidth - 1, $iBaseTop + $iBaseHeight, $gray);
 		
-		// 2010-05-18 (jhcaiced) Draw a gray rectangle around the image...
-		imagerectangle($imgAll, 0, imagesy($imgTitle), $iAllWidth - 1, $iAllHeight - imagesy($imgInfo), imagecolorallocate($im,192,192,192));
-		
-		$mapfooter = trim('http://www.desinventar.org/' . ' - ' . $rinf->get('RegionLabel'));
+		$mapfooter = trim('http://www.desinventar.org/' . ' - ' . $options['RegionLabel']);
 		$font = 'arial';
 		$fontsize = 10;
 		$bbox = imagettfbbox($fontsize, 0, $font, $mapfooter);
 		$x = $bbox[2] - $bbox[0];
 		$x = $iAllWidth - 2 - $x;
-		$y = $iAllHeight - imagesy($imgInfo) - 4;
+		$y = $iBaseTop + $iBaseHeight - 2;
 		imagettftext($imgAll, $fontsize, 0, $x, $y, $black, $font,  $mapfooter);
-		*/
-
 
 		$sOutFilename = 'DesInventar_ThematicMap_' . $options['id'] . '.png';
+		header('Content-Type: image/png');
 		header('Content-Disposition: attachment; filename= '. $sOutFilename);
-		//header('Content-Type: image/png');
 		imagepng($imgAll);
 		
 		//Free memory
