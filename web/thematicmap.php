@@ -260,8 +260,7 @@ switch($cmd)
 		$gray = imagecolorallocate($imgAll,192,192,192);
 		imagerectangle($imgAll, $iBaseLeft, $iBaseTop, $iAllWidth - 1, $iBaseTop + $iBaseHeight, $gray);
 		
-		$mapfooter = trim('http://www.desinventar.org/' . ' - ' . $options['RegionLabel']);
-		$font = 'arial';
+		$mapfooter = trim('http://www.desinventar.org/' . ' - ' . $options['regionlabel']);
 		$fontsize = 10;
 		$bbox = imagettfbbox($fontsize, 0, $font, $mapfooter);
 		$x = $bbox[2] - $bbox[0];

@@ -67,6 +67,7 @@
 			<input type="hidden" class="Layers"      name="options[layers]"      value="" />
 			<input type="hidden" class="Id"          name="options[id]"          value="{-$prmMapId-}" />
 			<input type="hidden" class="Title"       name="options[title]"       value="" />
+			<input type="hidden" class="RegionLabel" name="options[regionlabel]" value="{-$rgl[0].regname-}" />
 			<input type="hidden" class="LegendTitle" name="options[legendtitle]" value="{-$rgl[0].info.TITLE-}" />
 			<input type="hidden" class="Level"       name="options[info][level]" value="{-#msgViewMap_Level#-} : {-$rgl[0].info.LEVEL-}" />
 			<input type="hidden" class="Begin"       name="options[info][begin]" value="{-#msgViewMap_From#-} : {-$rgl[0].info.BEG-}"   />
