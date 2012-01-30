@@ -3678,38 +3678,38 @@
 			<Text LangIsoCode="fre">Ajouter</Text>
 		</Message>
 	</Group>
-	<Group name="grpAdminDatabaseExport">
-		<Message id="msgAdminDatabaseExportTitle">
+	<Group name="grpDatabaseExport">
+		<Message id="msgDatabaseExportTitle">
 			<Text LangIsoCode="eng">Download database</Text>
 			<Text LangIsoCode="spa">Descargar base de datos</Text>
 			<Text LangIsoCode="por">Baixe banco de dados</Text>
 			<Text LangIsoCode="fre">Télécharger base de données</Text>
 		</Message>
-		<Message id="msgAdminDatabaseExportComplete">
+		<Message id="msgDatabaseExportComplete">
 			<Text LangIsoCode="eng">File has been created and can be downloaded now.</Text>
 			<Text LangIsoCode="spa">El archivo está creado y listo para descargar.</Text>
 			<Text LangIsoCode="por">Backup foi criado e pode ser baixado agora.</Text>
 			<Text LangIsoCode="fre">Backup a été crée et peut être téléchargé dès maintenant.</Text>
 		</Message>
-		<Message id="msgAdminDatabaseExportWait">
+		<Message id="msgDatabaseExportWait">
 			<Text LangIsoCode="eng">Please wait while the file is created. This can take several minutes depending of your internet connection and the database size.</Text>
 			<Text LangIsoCode="spa">Espere mientras el archivo es creado, esto puede tomar varios minutos dependiendo de su conexión a internet y el tamaño del archivo.</Text>
 			<Text LangIsoCode="por">Por favor aguarde enquanto o arquivo é criado. Isto pode levar alguns minutos dependendo da sua conexão de internet eo tamanho do banco de dados.</Text>
 			<Text LangIsoCode="fre">S'il vous plaît patienter pendant que le fichier est créé. Cela peut prendre plusieurs minutes selon votre connexion internet et la taille de la base.</Text>
 		</Message>
-		<Message id="msgAdminDatabaseExportError">
+		<Message id="msgDatabaseExportError">
 			<Text LangIsoCode="eng">There was and error while creating the backup</Text>
 			<Text LangIsoCode="spa">Se ha producido un error al crear la copia de seguridad.</Text>
 			<Text LangIsoCode="por">Houve um error ao criar o backup</Text>
 			<Text LangIsoCode="fre">Il ya eu une erreur lors de la création de la sauvegarde</Text>
 		</Message>
-		<Message id="msgAdminDatabaseExportButtonSend">
+		<Message id="msgDatabaseExportButtonSend">
 			<Text LangIsoCode="eng">Generate</Text>
 			<Text LangIsoCode="spa">Importar</Text>
 			<Text LangIsoCode="por">Gerar</Text>
 			<Text LangIsoCode="fre">Générer</Text>
 		</Message>
-		<Message id="msgAdminDatabaseExportButtonClose">
+		<Message id="msgDatabaseExportButtonClose">
 			<Text LangIsoCode="eng">Close</Text>
 			<Text LangIsoCode="spa">Cerrar</Text>
 			<Text LangIsoCode="por">Fechar</Text>
