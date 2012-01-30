@@ -25,12 +25,12 @@ class Maps
 		$this->options = array('Id' => time());
 		$this->options = array_merge($this->options, $prmOptions);
 
-		$this->url = $this->options['URL'] . '/wms/' . $this->options['Id'];
+		$this->url = $this->options['url'] . '/wms/' . $this->options['id'];
 		$this->reg = $reg;
 
 		// Always generate the KML file along with the MAP file for later use
 		$this->kml = $this->generateKML($us, $reg, $info);
-		$sFilename = TMP_DIR . '/map_' . $this->options['Id'] . '.kml';
+		$sFilename = TMP_DIR . '/map_' . $this->options['id'] . '.kml';
 		$fh = fopen($sFilename, 'w+');
 		fputs($fh, $this->kml);
 		fclose($fh);
@@ -44,7 +44,7 @@ class Maps
 			$map .= $this->setLayerEff($us, $reg, $lev, $dl, $range, $info, $lbl, $prmTransparency);
 			$map .= $this->setFooter();
 
-			$sFilename = TMP_DIR . '/map_' . $this->options['Id'] .  '.map';
+			$sFilename = TMP_DIR . '/map_' . $this->options['id'] .  '.map';
 			$this->fpath = $sFilename;
 			$fh = fopen($sFilename, 'w');
 			fwrite($fh, $map);
@@ -452,7 +452,7 @@ class Maps
 	<ScreenOverlay id="DesInventarLogo">
 		<name>DesInventar Project</name>
 		<Icon>
-			<href>' . $this->options['URL'] .'/images/desinventar_logo.png</href>
+			<href>' . $this->options['url'] .'/images/desinventar_logo.png</href>
 		</Icon>
 		<overlayXY x="0" y="1" xunits="fraction" yunits="fraction"/>
 		<screenXY x="0.005" y="0.995" xunits="fraction" yunits="fraction"/>

@@ -71,7 +71,7 @@ switch($cmd)
 			// generate map
 			$dl = $us->q->prepareList($dislist, 'MAPS');
 
-			$MapId = time() . '.' . sprintf('%04d', rand(0, 9999));
+			$MapId = time() . '-' . sprintf('%04d', rand(0, 9999));
 			$options['id'] = $MapId;
 			$t->assign('prmMapId', $MapId);
 
@@ -177,8 +177,6 @@ switch($cmd)
 		{
 			$options[$key] = $value;
 		}
-
-		fb($options);
 
 		$iAllWidth = 1000;
 		$iAllHeight = 760;
