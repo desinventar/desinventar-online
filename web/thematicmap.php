@@ -183,6 +183,11 @@ switch($cmd)
 		$iAllWidth = 1000;
 		$iAllHeight = 760;
 
+		// Create and assembly final image
+		$imgAll = imagecreatetruecolor($iAllWidth, $iAllHeight);
+		imagefilledrectangle($imgAll, 0, 0, $iAllWidth - 1, $iAllHeight - 1, imagecolorallocate($imgAll,192,192,192));
+
+
 		$font = getFont('arialbi.ttf');
 		// Map Title Image
 		$iTitleLeft   = 0;
@@ -197,14 +202,37 @@ switch($cmd)
 		$bbox = imagettfbbox(11, 0, $font, $item);
 		$iTitleMarginX = (imagesx($imgTitle) - ($bbox[2] - $bbox[0]) )/2;
 		imagettftext($imgTitle, 11, 0, $iTitleMarginX, 13, $black, $font, $item);
+		imagecopy($imgAll, $imgTitle, $iTitleLeft, $iTitleTop, 0, 0, $iTitleWidth, $iTitleHeight);
+
+		// MapInfo Image - Query Info
+		$fontsize = 10;
+		$iInfoRows = count($options['info']);
+		$iInfoWidth  = $iAllWidth;
+		$iInfoHeight = ($fontsize + 1) * $iInfoRows + 2;
+		$imgInfo = imagecreatetruecolor($iInfoWidth, $iInfoHeight);
+		$white = imagecolorallocate($imgInfo, 255,255,255);
+		$black = imagecolorallocate($imgInfo, 0,0,0);
+		imagefill($imgInfo, 0,0, $white);
+		$iCount = 0;
+		foreach($options['info'] as $key => $value)
+		{
+			$label = $key . ' : ' . $value;
+			imagettftext($imgInfo, 10, 0, 0, ($fontsize + 1) * ($iCount + 1), $black, getFont('arial.ttf'), $label);
+			$iCount++;
+		}
+		$iInfoTop    = $iAllHeight - imagesy($imgInfo);
+		$iInfoLeft   = 0;
+		imagecopy($imgAll, $imgInfo, $iInfoLeft, $iInfoTop, 0, 0, $iInfoWidth, $iInfoHeight);
+		
 
 		$iBaseLeft   = 0;
 		$iBaseTop    = 0 + $iTitleHeight;
 		$iBaseWidth  = $iAllWidth;
-		$iBaseHeight = $iAllHeight - $iTitleHeight;
+		$iBaseHeight = $iAllHeight - $iTitleHeight - $iInfoHeight;
 		$sBaseUrl = $options['url'] . '/wms/worldmap/' . '?SRS=EPSG:900913' .
 			'&BBOX='. $options['extent'] . '&WIDTH='. $iBaseWidth .'&HEIGHT='. $iBaseHeight;
 		$imgBase = imagecreatefromstring(file_get_contents($sBaseUrl));
+		imagecopy($imgAll, $imgBase , $iBaseLeft , $iBaseTop , 0, 0, $iBaseWidth, $iBaseHeight);
 
 		$iMapLeft    = $iBaseLeft;
 		$iMapTop     = $iBaseTop;
@@ -216,6 +244,7 @@ switch($cmd)
 			'&LAYERS=' . $sMapLayers;
 		$imgMap = imagecreatefromstring(file_get_contents($sMapUrl));
 		//	'?layers='. $post['_M+layers'] 
+		imagecopy($imgAll, $imgMap  , $iMapLeft  , $iMapTop  , 0, 0, $iMapWidth , $iMapHeight );
 		
 		// Download and include legend
 		$sLegendURL = $options['url'] . '/wms/' . $options['id'] . '/legend/';
@@ -228,41 +257,12 @@ switch($cmd)
 		imagecopy($imgLegend, $imgTmp, 0, $fontsize + 2, 0, 0, imagesx($imgTmp), imagesy($imgTmp));
 		imagettftext($imgLegend, 10, 0, 4, 2 + $fontsize, imagecolorallocate($imgLegend,0, 0, 89), 'arialbi',  $options['legendtitle']);
 
+		$iLegendLeft = 5;
+		$iLegendTop  = $iMapTop + $iMapHeight - (imagesy($imgLegend) + 5);
+		imagecopy($imgAll, $imgLegend, $iLegendLeft, $iLegendTop, 0, 0, imagesx($imgLegend), imagesy($imgLegend));
+
+
 		/*
-		// Include MapInfo Image (Title, Query Info etc.)
-		// 2010-05-12 (jhcaiced) Create an image for the Map Title and Description...
-		// Process array to calculate some parameters...
-		$ImageRows = 0;
-		foreach($info2 as $key => $value)
-		{
-			$info2[$key] = $value;
-			if ($value != '')
-			{ 
-				$ImageRows++;
-				$title = $mapinfodic['MapInfo' . $key][0];
-				$infoTranslated[$key] = $title . ': ' . $value;
-			}
-		}
-		
-		// Map Info Image
-		$fontsize = 10;
-		$sy = $fontsize;
-		$height = ($sy + 2) * $ImageRows + 2;
-		$imgInfo = imagecreatetruecolor($width, $height);
-		$white = imagecolorallocate($imgInfo, 255,255,255);
-		$black = imagecolorallocate($imgInfo, 0,0,0);
-		imagefill($imgInfo, 0,0, $white);
-		
-		$y = 0;
-		foreach($infoTranslated as $key => $item)
-		{
-			if ( ($key != 'TITLE') && ($key != 'TITLE2') && ($key != 'NumberOfRecords') )
-			{
-				imagettftext($imgInfo, 10, 0, 0, ($sy + 2) * ($y + 1), $black, getFont('arial.ttf'), $item);
-				$y++;
-			}
-		}
-		imagedestroy($imgInfo);
 		$iAllWidth = imagesx($imgMap);
 		$iAllHeight = imagesy($imgMap) + imagesy($imgTitle) + imagesy($imgInfo);
 		imagecopy($imgAll, $imgTitle, 0, 0, 0, 0, imagesx($imgTitle), imagesy($imgTitle));
@@ -281,16 +281,6 @@ switch($cmd)
 		imagettftext($imgAll, $fontsize, 0, $x, $y, $black, $font,  $mapfooter);
 		*/
 
-		// Create and assembly final image
-		$imgAll = imagecreatetruecolor($iAllWidth, $iAllHeight);
-		imagefilledrectangle($imgAll, 0, 0, $iAllWidth - 1, $iAllHeight - 1, imagecolorallocate($imgAll,192,192,192));
-		imagecopy($imgAll, $imgTitle, $iTitleLeft, $iTitleTop, 0, 0, $iBaseWidth, $iBaseHeight);
-		imagecopy($imgAll, $imgBase , $iBaseLeft , $iBaseTop , 0, 0, $iBaseWidth, $iBaseHeight);
-		imagecopy($imgAll, $imgMap  , $iMapLeft  , $iMapTop  , 0, 0, $iMapWidth , $iMapHeight );
-
-		$iLegendLeft = 5;
-		$iLegendTop  = $iMapTop + $iMapHeight - (imagesy($imgLegend) + 5);
-		imagecopy($imgAll, $imgLegend, $iLegendLeft, $iLegendTop, 0, 0, imagesx($imgLegend), imagesy($imgLegend));
 
 		$sOutFilename = 'DesInventar_ThematicMap_' . $options['id'] . '.png';
 		header('Content-Disposition: attachment; filename= '. $sOutFilename);
@@ -303,6 +293,7 @@ switch($cmd)
 		imagedestroy($imgBase);
 		imagedestroy($imgMap);
 		imagedestroy($imgLegend);
+		imagedestroy($imgInfo);
 	break;
 } //switch
 
