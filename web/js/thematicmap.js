@@ -87,7 +87,8 @@ function createThematicMap()
 			'DesInventar/' + jQuery(this).find(':eq(0)').text(),
 			jQuery('#desinventarURL').val() + '/wms/' + jQuery('#prmMapId').val() + '/effects/',
 			{
-				format      : 'png',
+				format : 'png',
+				layers : 'effects'
 			},
 			{
 				isBaseLayer :false
@@ -95,11 +96,13 @@ function createThematicMap()
 		);
 		map.addLayer(layer);
 		jQuery('#MapAdminLayers div').each(function() {
+			var layername = jQuery(this).find(':eq(1)').text().trim();
 			var layer = new OpenLayers.Layer.WMS(
 				jQuery(this).find(':eq(0)').text(),
-				jQuery('#desinventarURL').val() + '/wms/' + jQuery('#prmMapId').val() + '/' + jQuery(this).find(':eq(1)').text().trim() + '/',
+				jQuery('#desinventarURL').val() + '/wms/' + jQuery('#prmMapId').val() + '/' + layername + '/',
 				{
-					format      : 'png',
+					format : 'png',
+					layers : layername
 				},
 				{
 					isBaseLayer : false

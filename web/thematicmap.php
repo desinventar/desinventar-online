@@ -234,13 +234,14 @@ switch($cmd)
 		$iMapTop     = $iBaseTop;
 		$iMapWidth   = $iBaseWidth;
 		$iMapHeight  = $iBaseHeight;
-		$sMapLayers  = 'effects';  // Must read POST parameter
-		$sMapUrl = $options['url'] . '/wms/' . $options['id'] . '/?SRS=EPSG:900913' . 
-			'&BBOX='. $options['extent'] .'&WIDTH='. $iMapWidth .'&HEIGHT='. $iMapHeight .
-			'&LAYERS=' . $sMapLayers;
-		$imgMap = imagecreatefromstring(file_get_contents($sMapUrl));
-		//	'?layers='. $post['_M+layers'] 
-		imagecopy($imgAll, $imgMap  , $iMapLeft  , $iMapTop  , 0, 0, $iMapWidth , $iMapHeight );
+		if ($options['layers'] != '')
+		{
+			$sMapUrl = $options['url'] . '/wms/' . $options['id'] . '/?SRS=EPSG:900913' . 
+				'&BBOX='. $options['extent'] .'&WIDTH='. $iMapWidth .'&HEIGHT='. $iMapHeight .
+				'&LAYERS=' . $options['layers'];
+			$imgMap = imagecreatefromstring(file_get_contents($sMapUrl));
+			imagecopy($imgAll, $imgMap  , $iMapLeft  , $iMapTop  , 0, 0, $iMapWidth , $iMapHeight );
+		}
 		
 		// Download and include legend
 		$sLegendURL = $options['url'] . '/wms/' . $options['id'] . '/legend/';
