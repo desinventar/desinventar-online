@@ -2925,6 +2925,12 @@
 			<Text LangIsoCode="por">Até</Text>
 			<Text LangIsoCode="fre">Jusqu'à</Text>
 		</Message>
+		<Message id="msgViewMap_Records">
+			<Text LangIsoCode="eng">Records</Text>
+			<Text LangIsoCode="spa">Fichas</Text>
+			<Text LangIsoCode="por">Formulários</Text>
+			<Text LangIsoCode="fre">Données</Text>
+		</Message>
 	</Group>
 	<Group name="dc_graphic">
 		<Message id="ttitle">

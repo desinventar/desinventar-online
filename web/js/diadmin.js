@@ -513,12 +513,12 @@
 			if (cmd == "export")
 			{
 				jQuery('#prmQueryCommand').val('cmdMapSave');
+
 				// to export image save layers and extend..
 				var dcr = document.getElementById('dcr');
 				var mm = map;
 				//var mm = dcr.map;
 				var extent = mm.getExtent();
-				//extent.transform(mm.prj1, mm.prj2);
 				var layers = mm.layers;
 				var activelayers = [];
 				for (i in layers)
