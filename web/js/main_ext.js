@@ -251,7 +251,7 @@ function doMainMenuHandler(item)
 		case 'mnuFileDownload':
 			jQuery('.clsAdminDatabaseExport').hide();
 			Ext.getCmp('wndDatabaseExport').show();
-			doAdminDatabaseExportAction();
+			jQuery('body').trigger('cmdDatabaseExport');
 		break;
 		case 'mnuFileUploadCopy':
 			doDatabaseUploadShow('Copy');
