@@ -177,12 +177,6 @@ switch($cmd)
 		{
 			$options[$key] = $value;
 		}
-		/*
-		$options['Id']          = getParameter('_M+mapid' , getParameter('mapid' , ''));
-		$options['Extent']      = getParameter('_M+extent', getParameter('extent', ''));
-		$options['Title']       = getParameter('_M+title' , getParameter('title' , ''));
-		$options['LegendTitle'] = getParameter('_M+legendtitle', getParameter('legendtitle', ''));
-		*/
 
 		fb($options);
 
@@ -238,29 +232,6 @@ switch($cmd)
 		// Include MapInfo Image (Title, Query Info etc.)
 		// 2010-05-12 (jhcaiced) Create an image for the Map Title and Description...
 		// Process array to calculate some parameters...
-		$mapinfodic = $us->q->queryLabelsFromGroup('MapInfo', $lg);
-		$infoTranslated = array();
-		$info2 = $info;
-		
-		$txtMapTitle = '';
-		$txtMapVariable = '';
-		
-		// Manually Processed Data
-		foreach($info2 as $key => $value)
-		{
-			$value = trim($value);
-			$info2[$key] = $value;
-		}
-		if ($info2['TITLE'] != '')
-		{
-			$value = $info2['TITLE'];
-			$title = $mapinfodic['MapInfoTITLE'][0];
-			//$txtMapTitle = $title . ' ' . strtolower($value);
-			$txtMapTitle = $post['_M+title'];
-			$txtMapVariable = $value;
-			unset($info2['TITLE']);
-		}
-
 		$ImageRows = 0;
 		foreach($info2 as $key => $value)
 		{
