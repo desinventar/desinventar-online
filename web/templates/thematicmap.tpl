@@ -20,7 +20,7 @@
 					<p align="right">{-#trepnum#-}: {-$MapNumberOfRecords-}</p>
 					<hr />
 					<h4 id="defaultMapTitle">{-#tmapof#-} {-$rgl[0].info.TITLE-}</h4>
-					<div align="justify" class="QueryInfo dwin" style="height:250px;">{-#lev#-}: {-$rgl[0].info.LEVEL-}; 
+					<div align="justify" class="QueryInfo dwin" style="height:250px;">{-#msgViewMap_Level#-}: {-$rgl[0].info.LEVEL-}; 
 						{-foreach key=k item=i from=$rgl[0].info-}
 							{-if $k == "GEO"-}<i>{-#geo#-}:</i> {-$i-}; {-/if-}
 							{-if $k == "EVE"-}<i>{-#eve#-}:</i> {-$i-}; {-/if-}
@@ -68,9 +68,9 @@
 			<input type="hidden" class="Id"          name="options[id]"          value="{-$prmMapId-}" />
 			<input type="hidden" class="Title"       name="options[title]"       value="" />
 			<input type="hidden" class="LegendTitle" name="options[legendtitle]" value="{-$rgl[0].info.TITLE-}" />
-			<input type="hidden" class="Level"       name="options[info][level]" value="{-$rgl[0].info.LEVEL-}" />
-			<input type="hidden" class="Begin"       name="options[info][begin]" value="{-$rgl[0].info.BEG-}"   />
-			<input type="hidden" class="End"         name="options[info][end]"   value="{-$rgl[0].info.END-}"   />
+			<input type="hidden" class="Level"       name="options[info][level]" value="{-#msgViewMap_Level#-} : {-$rgl[0].info.LEVEL-}" />
+			<input type="hidden" class="Begin"       name="options[info][begin]" value="{-#msgViewMap_From#-} : {-$rgl[0].info.BEG-}"   />
+			<input type="hidden" class="End"         name="options[info][end]"   value="{-#msgViewMap_Until#-} : {-$rgl[0].info.END-}"   />
 		</form>
 	</div>
 	<div id="MapEffectLayers" style="display:none;">

@@ -2901,17 +2901,29 @@
 			<Text LangIsoCode="por">Ver em GoogleEarth</Text>
 			<Text LangIsoCode="fre">Voir dans GoogleEarth</Text>
 		</Message>
-		<Message id="lev">
-			<Text LangIsoCode="eng">Level</Text>
-			<Text LangIsoCode="spa">Nivel</Text>
-			<Text LangIsoCode="por">Nível</Text>
-			<Text LangIsoCode="fre">Niveau</Text>
-		</Message>
 		<Message id="msgMapNoData">
 			<Text LangIsoCode="eng">No data</Text>
 			<Text LangIsoCode="spa">Sin datos</Text>
 			<Text LangIsoCode="por">Sem dados</Text>
 			<Text LangIsoCode="fre">Sans aucune donnée</Text>
+		</Message>
+		<Message id="msgViewMap_Level">
+			<Text LangIsoCode="eng">Level</Text>
+			<Text LangIsoCode="spa">Nivel</Text>
+			<Text LangIsoCode="por">Nível</Text>
+			<Text LangIsoCode="fre">Niveau</Text>
+		</Message>
+		<Message id="msgViewMap_From">
+			<Text LangIsoCode="eng">Since</Text>
+			<Text LangIsoCode="spa">Desde</Text>
+			<Text LangIsoCode="por">Desde</Text>
+			<Text LangIsoCode="fre">Depuis</Text>
+		</Message>
+		<Message id="msgViewMap_Until">
+			<Text LangIsoCode="eng">Until</Text>
+			<Text LangIsoCode="spa">Hasta</Text>
+			<Text LangIsoCode="por">Até</Text>
+			<Text LangIsoCode="fre">Jusqu'à</Text>
 		</Message>
 	</Group>
 	<Group name="dc_graphic">
