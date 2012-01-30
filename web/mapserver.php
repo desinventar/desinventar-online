@@ -50,7 +50,13 @@
 		}
 		$queryString .= $key . '=' . urlencode($value);
 	}
-	$url = 'http://127.0.0.1/cgi-bin/' . MAPSERV . '?' . $queryString;
+	$url = 'http://' . $_SERVER['HTTP_HOST'];
+	if ($_SERVER['HTTP_PORT'] != 80)
+	{
+		$url .= ':' . $_SERVER['HTTP_PORT'];
+	}
+	$url .= '/cgi-bin/' . MAPSERV . '?' . $queryString;
+	//$url = 'http://127.0.0.1/cgi-bin/' . MAPSERV . '?' . $queryString;
 	header('Content-type: ' . $options['FORMAT']);
 	echo file_get_contents($url);
 </script>

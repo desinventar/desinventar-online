@@ -11,7 +11,14 @@ require_once('include/diregion.class.php');
 $post = $_POST;
 $get = $_GET;
 $options = array();
-$options['URL'] = 'http://' . $_SERVER['HTTP_HOST'] . $desinventarURL;
+$url = 'http://' . $_SERVER['HTTP_HOST'];
+if ($_SERVER['HTTP_PORT'] != 80)
+{
+	$url .= ':' . $_SERVER['HTTP_PORT'];
+}
+$url .= $desinventarURL;
+$options['url'] = $url;
+
 $cmd = getParameter('_M+cmd', getParameter('cmd', ''));
 if ($cmd == '')
 {
@@ -65,7 +72,7 @@ switch($cmd)
 			$dl = $us->q->prepareList($dislist, 'MAPS');
 
 			$MapId = time() . '.' . sprintf('%04d', rand(0, 9999));
-			$options['Id'] = $MapId;
+			$options['id'] = $MapId;
 			$t->assign('prmMapId', $MapId);
 
 			// MAPS Query, RegionId, Level, datalist, ranges, dbinfo, label, maptype
@@ -140,7 +147,7 @@ switch($cmd)
 			$mapfile = str_replace('\\', '/', $m->filename());
 			$worldmap = str_replace('\\','/', MAPDIR . '/world_adm0.map');
 			$timestamp = microtime(true);
-			$sLegendURL = $options['URL'] . '/wms/' . $options['Id'] . '/legend/';
+			$sLegendURL = $options['url'] . '/wms/' . $options['id'] . '/legend/';
 			$t->assign('legend', $sLegendURL);	
 			$t->assign('ctl_showres', true);
 			$t->assign('reg', $RegionId);
@@ -164,12 +171,19 @@ switch($cmd)
 		}
 	break;
 	case 'export':
-		fb($_POST);
 		// Save image of an already created map
+		$options = array_merge($options, $_POST['options']);
+		foreach($_GET as $key => $value)
+		{
+			$options[$key] = $value;
+		}
+		/*
 		$options['Id']          = getParameter('_M+mapid' , getParameter('mapid' , ''));
 		$options['Extent']      = getParameter('_M+extent', getParameter('extent', ''));
 		$options['Title']       = getParameter('_M+title' , getParameter('title' , ''));
 		$options['LegendTitle'] = getParameter('_M+legendtitle', getParameter('legendtitle', ''));
+		*/
+
 		fb($options);
 
 		$iAllWidth = 1000;
@@ -185,8 +199,7 @@ switch($cmd)
 		$white = imagecolorallocate($imgTitle, 255,255,255);
 		$black = imagecolorallocate($imgTitle, 0,0,0);
 		imagefill($imgTitle, 0,0, $white);
-		$item = $options['Title'];
-		fb($item);
+		$item = $options['title'];
 		$bbox = imagettfbbox(11, 0, $font, $item);
 		$iTitleMarginX = (imagesx($imgTitle) - ($bbox[2] - $bbox[0]) )/2;
 		imagettftext($imgTitle, 11, 0, $iTitleMarginX, 13, $black, $font, $item);
@@ -195,8 +208,8 @@ switch($cmd)
 		$iBaseTop    = 0 + $iTitleHeight;
 		$iBaseWidth  = $iAllWidth;
 		$iBaseHeight = $iAllHeight - $iTitleHeight;
-		$sBaseUrl = $options['URL'] . '/wms/worldmap/' . '?SRS=EPSG:900913' .
-			'&BBOX='. $options['Extent'] . '&WIDTH='. $iBaseWidth .'&HEIGHT='. $iBaseHeight;
+		$sBaseUrl = $options['url'] . '/wms/worldmap/' . '?SRS=EPSG:900913' .
+			'&BBOX='. $options['extent'] . '&WIDTH='. $iBaseWidth .'&HEIGHT='. $iBaseHeight;
 		$imgBase = imagecreatefromstring(file_get_contents($sBaseUrl));
 
 		$iMapLeft    = $iBaseLeft;
@@ -204,14 +217,14 @@ switch($cmd)
 		$iMapWidth   = $iBaseWidth;
 		$iMapHeight  = $iBaseHeight;
 		$sMapLayers  = 'effects';  // Must read POST parameter
-		$sMapUrl = $options['URL'] . '/wms/' . $options['Id'] . '/?SRS=EPSG:900913' . 
-			'&BBOX='. $options['Extent'] .'&WIDTH='. $iMapWidth .'&HEIGHT='. $iMapHeight .
+		$sMapUrl = $options['url'] . '/wms/' . $options['id'] . '/?SRS=EPSG:900913' . 
+			'&BBOX='. $options['extent'] .'&WIDTH='. $iMapWidth .'&HEIGHT='. $iMapHeight .
 			'&LAYERS=' . $sMapLayers;
 		$imgMap = imagecreatefromstring(file_get_contents($sMapUrl));
 		//	'?layers='. $post['_M+layers'] 
 		
 		// Download and include legend
-		$sLegendURL = $options['URL'] . '/wms/' . $options['Id'] . '/legend/';
+		$sLegendURL = $options['url'] . '/wms/' . $options['id'] . '/legend/';
 		$imgTmp = imagecreatefromstring(file_get_contents($sLegendURL));
 		$fontsize = 11;
 		$iLegendWidth = imagesx($imgTmp);
@@ -219,7 +232,7 @@ switch($cmd)
 		$imgLegend = imagecreatetruecolor($iLegendWidth, $iLegendHeight);
 		imagefill($imgLegend, 0,0, imagecolorallocate($imgLegend, 255,255,255));
 		imagecopy($imgLegend, $imgTmp, 0, $fontsize + 2, 0, 0, imagesx($imgTmp), imagesy($imgTmp));
-		imagettftext($imgLegend, 10, 0, 4, 2 + $fontsize, imagecolorallocate($imgLegend,0, 0, 89), 'arialbi',  $options['LegendTitle']);
+		imagettftext($imgLegend, 10, 0, 4, 2 + $fontsize, imagecolorallocate($imgLegend,0, 0, 89), 'arialbi',  $options['legendtitle']);
 
 		/*
 		// Include MapInfo Image (Title, Query Info etc.)
@@ -308,9 +321,9 @@ switch($cmd)
 		$iLegendTop  = $iMapTop + $iMapHeight - (imagesy($imgLegend) + 5);
 		imagecopy($imgAll, $imgLegend, $iLegendLeft, $iLegendTop, 0, 0, imagesx($imgLegend), imagesy($imgLegend));
 
-		$sOutFilename = 'DesInventar_ThematicMap_' . $options['Id'] . '.png';
-		//header('Content-Disposition: attachment; filename= '. $sOutFilename);
-		header('Content-Type: image/png');
+		$sOutFilename = 'DesInventar_ThematicMap_' . $options['id'] . '.png';
+		header('Content-Disposition: attachment; filename= '. $sOutFilename);
+		//header('Content-Type: image/png');
 		imagepng($imgAll);
 		
 		//Free memory

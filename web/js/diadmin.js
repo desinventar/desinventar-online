@@ -528,23 +528,28 @@
 						activelayers[activelayers.length] = layers[i].params['LAYERS'];
 					}
 				}
-				$('_M+extent').value = [extent.left,extent.bottom,extent.right,extent.top].join(',');
-				$('_M+layers').value = activelayers;
-				$('_M+mapid').value = jQuery('#prmMapId').val();
-				$('_M+legendtitle').value = jQuery('#prmMapVarTitle').val();
-				myMap = jQuery('#MapTitle');
-				$('_M+title').value = myMap.val();
+				
+				jQuery('form.MapSave').attr('action', jQuery('#desinventarURL').val() + '/thematicmap.php');
+				jQuery('form.MapSave').attr('target', 'iframeDownload');
+				jQuery('form.MapSave input.Extent').val([extent.left,extent.bottom,extent.right,extent.top].join(','));
+				jQuery('form.MapSave input.Layers').val(activelayers);
+				jQuery('form.MapSave input.Id').val(jQuery('#prmMapId').val());
+				jQuery('form.MapSave input.Title').val(jQuery('#MapTitle').val());
+				jQuery('form.MapSave').trigger('submit');
 			}
-			combineForms('frmMainQuery', 'CM');
-			Ext.getCmp('westm').collapse();
-			$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/thematicmap.php';
-			jQuery('#frmMainQuery').attr('target','dcr');
-			if (cmd != 'result')
+			else
 			{
-				jQuery('#frmMainQuery').attr('target', 'iframeDownload');
+				combineForms('frmMainQuery', 'CM');
+				Ext.getCmp('westm').collapse();
+				$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/thematicmap.php';
+				jQuery('#frmMainQuery').attr('target','dcr');
+				if (cmd != 'result')
+				{
+					jQuery('#frmMainQuery').attr('target', 'iframeDownload');
+				}
+				jQuery('#frmMainQuery').submit();
+				//hideMap();
 			}
-			jQuery('#frmMainQuery').submit();
-			//hideMap();
 			return true;
 		}
 		else

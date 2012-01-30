@@ -20,7 +20,7 @@
 					<p align="right">{-#trepnum#-}: {-$MapNumberOfRecords-}</p>
 					<hr />
 					<h4 id="defaultMapTitle">{-#tmapof#-} {-$rgl[0].info.TITLE-}</h4>
-					<div align="justify" class="dwin" style="height:250px;">{-#lev#-}: {-$rgl[0].info.LEVEL-}; 
+					<div align="justify" class="QueryInfo dwin" style="height:250px;">{-#lev#-}: {-$rgl[0].info.LEVEL-}; 
 						{-foreach key=k item=i from=$rgl[0].info-}
 							{-if $k == "GEO"-}<i>{-#geo#-}:</i> {-$i-}; {-/if-}
 							{-if $k == "EVE"-}<i>{-#eve#-}:</i> {-$i-}; {-/if-}
@@ -32,7 +32,7 @@
 							{-if $k == "SER"-}<i>{-#ser#-}:</i> {-$i-}; {-/if-}
 						{-/foreach-}
 						{-$rgl[0].regname-}
-					</div>
+					</div>					
 					<div class="GoogleEarth">
 						<hr />
 						<image src="{-$desinventarURL-}/images/ge_icon.png" /><a href="{-$desinventarURL-}/kml/{-$prmMapId-}/">{-#tgetgearth#-}</a>
@@ -61,6 +61,17 @@
 		<input type="hidden" id="prmMapMaxY"     value="{-$maxy-}"/>
 		<input type="hidden" id="prmMapServer"   value="{-$mps-}"/>
 		<input type="hidden" id="prmMapBase"     value="{-$basemap-}"/>
+		<form class="MapSave" method="post" action="">
+			<input type="hidden" class="Cmd"         name="cmd"                  value="export" />
+			<input type="hidden" class="Extent"      name="options[extent]"      value="" />
+			<input type="hidden" class="Layers"      name="options[layers]"      value="" />
+			<input type="hidden" class="Id"          name="options[id]"          value="{-$prmMapId-}" />
+			<input type="hidden" class="Title"       name="options[title]"       value="" />
+			<input type="hidden" class="LegendTitle" name="options[legendtitle]" value="{-$rgl[0].info.TITLE-}" />
+			<input type="hidden" class="Level"       name="options[info][level]" value="{-$rgl[0].info.LEVEL-}" />
+			<input type="hidden" class="Begin"       name="options[info][begin]" value="{-$rgl[0].info.BEG-}"   />
+			<input type="hidden" class="End"         name="options[info][end]"   value="{-$rgl[0].info.END-}"   />
+		</form>
 	</div>
 	<div id="MapEffectLayers" style="display:none;">
 		{-foreach name=rgl key=k item=i from=$rgl-}
