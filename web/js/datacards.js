@@ -92,21 +92,10 @@ function onReadyDatacards()
 	
 	// Process combobox/input fields in effects
 	jQuery('.clsEffectNumeric').jec({
-		maxLength: 3,
+		maxLength: 12,
 		acceptedKeys : [48,49,50,51,52,53,54,55,56,57,58]
 	});
-	/*
-	jQuery('.clsEffectNumeric').keypress(function(event) {
-		edit(event);
-	});
-	jQuery('.clsEffectNumeric').blur(function(event) {
-		this.editing=false;
-		if(parseInt(this.value) == 0)
-		{  
-			this.value = '0';
-		}
-	});
-	*/
+
 	// Enable/Disable related EffectSector fields based on value of other fields...	
 	jQuery('.clsEffectDouble').blur(function(event) {
 		var altField = jQuery(this).attr('altField');
