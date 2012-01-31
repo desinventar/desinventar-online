@@ -18,6 +18,7 @@
 		<script type="text/javascript" src="{-$desinventarURL-}/external/form2js.js"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/external/js2form.js"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/external/jquery.toObject.js"></script>
+		<script type="text/javascript" src="{-$desinventarURL-}/external/jquery.jec-1.3.3.js"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/external/listMan.js"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/external/md5.js"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/external/wd.js"></script>
