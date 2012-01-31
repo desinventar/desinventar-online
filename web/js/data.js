@@ -52,6 +52,9 @@ function onReadyData() {
 function doDataUpdate()
 {
 	jQuery('#tblDataRows tr:even').addClass('under');
+	jQuery('.GridCellNumber').each(function() {
+		jQuery(this).html(jQuery(this).html().replace(/\s/g,'&nbsp;'));
+	});
 	// Set Number of Records in Current Displayed Page
 	jQuery('#prmDataPageRecords').val(jQuery('#tblDataRows tr').size());
 } //doDataUpdate();
