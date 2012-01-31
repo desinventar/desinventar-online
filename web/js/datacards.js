@@ -88,7 +88,7 @@ function onReadyDatacards()
 	
 	// Process combobox/input fields in effects
 	jQuery('.clsEffectNumeric').jec({
-		maxLength: 12,
+		maxLength: 15,
 		acceptedKeys : [48,49,50,51,52,53,54,55,56,57,58]
 	});
 
