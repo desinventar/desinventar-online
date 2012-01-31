@@ -79,10 +79,6 @@ function onReadyDatacards()
 						break;
 					}
 				}
-				// clear Help text area
-				setTimeout(function() {
-					displayDatacardStatusMsg('');
-				}, 2500);
 				showtip('','#ffffff');
 			},
 			'json'

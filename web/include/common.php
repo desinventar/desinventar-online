@@ -163,14 +163,20 @@ function generatePasswd($length=6,$level=2){
 
 // Process a number, adding a space to separate each triplet
 // according to standard scientific representation.
-function showStandardNumber($value) {
+function showStandardNumber($value)
+{
 	$v = trim($value);
 	$s = '';
-	$m = strlen($v)%3;
-	for($i=0; $i<strlen($v); $i++) {	
+	$m = strlen($v)%3 - 1;
+	if ($m < 0) { $m = 2; }
+	for($i=0; $i<strlen($v); $i++)
+	{	
 		$s .= $v[$i];
-		if (($i%3) == ($m - 1)) {
+		$m--;
+		if ($m < 0)
+		{
 			$s .= ' ';
+			$m = 2;
 		}
 	}
 	return $s;
