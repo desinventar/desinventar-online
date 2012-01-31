@@ -91,6 +91,11 @@ function onReadyDatacards()
 	});
 	
 	// Process combobox/input fields in effects
+	jQuery('.clsEffectNumeric').jec({
+		maxLength: 3,
+		acceptedKeys : [48,49,50,51,52,53,54,55,56,57,58]
+	});
+	/*
 	jQuery('.clsEffectNumeric').keypress(function(event) {
 		edit(event);
 	});
@@ -101,7 +106,7 @@ function onReadyDatacards()
 			this.value = '0';
 		}
 	});
-
+	*/
 	// Enable/Disable related EffectSector fields based on value of other fields...	
 	jQuery('.clsEffectDouble').blur(function(event) {
 		var altField = jQuery(this).attr('altField');
