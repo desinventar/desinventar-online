@@ -8,15 +8,15 @@ require_once('include/diregion.class.php');
 
 $post = $_POST;
 
-$reg = getParameter('_REG', getParameter('r',''));
+$RegionId = getParameter('_REG', getParameter('r',''));
 
-if ($reg == '')
+if ($RegionId == '')
 {
 	exit();
 }
 
-$us->open($reg);
-$r = new DIRegion($us, $reg);
+$us->open($RegionId);
+$r = new DIRegion($us, $RegionId);
 $RegionLabel = $r->getRegionInfoValue('RegionLabel');
 fixPost($post);
 
@@ -30,7 +30,7 @@ $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Statistic', $lg));
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Sector', $lg));
 $dic = array_merge($dic, $us->q->getEEFieldList('True'));
-$t->assign('reg', $reg);
+$t->assign('RegionId', $RegionId);
 $t->assign('RegionLabel', $RegionLabel);
 
 // Data Options Interface

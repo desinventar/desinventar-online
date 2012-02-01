@@ -100,7 +100,7 @@
 		</tbody>
 	</table>
 	<div style="display:none;">
-		<input type="hidden" id="prmStatRegionId"       value="{-$reg-}"  />
+		<input type="hidden" id="prmStatRegionId"       value="{-$RegionId-}"  />
 		<input type="hidden" id="prmStatRecordsPerPage" value="{-$rxp-}"  />
 		<input type="hidden" id="prmStatNumberOfPages"  value="{-$last-}" />
 		<input type="hidden" id="prmStatQueryDef"       value="{-$sql-}"  />
