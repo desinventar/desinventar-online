@@ -24,7 +24,6 @@
 		<script type="text/javascript" src="{-$desinventarURL-}/external/wd.js"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/external/accordion.js"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/external/palette.js"></script>
-		<script type="text/javascript" src="{-$desinventarURL-}/external/combo-box.js"></script>
 
 		<script type="text/javascript" src="{-$desinventarURL-}/external/checktree/checktree.js"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/external/Math.uuid.js"></script>

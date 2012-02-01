@@ -23,7 +23,6 @@
 							{-foreach name=sst1 key=key item=item from=$sda1-}
 								<option value="D.{-$item-}">{-$dc2.$item[0]-}</option>
 							{-/foreach-}
-							<option disabled>---</option>
 							{-foreach name=sst2 key=key item=item from=$EEFieldList-}
 								<option value="E.{-$key-}">{-$item[0]-}</option>
 							{-/foreach-}
