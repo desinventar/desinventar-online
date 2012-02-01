@@ -62,19 +62,7 @@ if (isset($post['page']) || isset($post['_S+cmd']))
 		$tot 	= $c['counter'];
 		$geo	= $post['_S+showgeo'];
 		// Reuse calculate SQL values in all pages; calculate limits in pages
-		$levg = array();
-		if (isset($post['_S+Firstlev']) && !empty($post['_S+Firstlev']))
-		{
-			$levg[] = $post['_S+Firstlev'];
-		}
-		if (isset($post['_S+Secondlev']) && !empty($post['_S+Secondlev']))
-		{
-			$levg[] = $post['_S+Secondlev'];
-		}
-		if (isset($post['_S+Thirdlev']) && !empty($post['_S+Thirdlev']))
-		{
-			$levg[] = $post['_S+Thirdlev'];
-		}
+		$levg = $post['options']['group'];
 		$opc['Group'] = $levg;
 		$field = explode(',', $post['_S+Field']);
 		$opc['Field'] = $field;
