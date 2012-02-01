@@ -3578,7 +3578,7 @@
 			<Text LangIsoCode="fre">Base de données a été créée avec l'identifiant</Text>
 		</Message>
 		<Message id="msgDatabaseCreateMsg2">
-			<Text LangIsoCode="eng">Now you must configure the database using Set Up Database option in the Data entry menu. The following items are mandatory</Text>
+			<Text LangIsoCode="eng">Now you must configure the database using Set Up Database option in the Data entry menu, The following items are mandatory</Text>
 			<Text LangIsoCode="spa">Ahora debe configurar la base de datos usando la opción Configuración de la base de datos en el menú Entrada de datos, Los siguientes elementos son obligatorios</Text>
 			<Text LangIsoCode="por">Agora você deve configurar o banco de dados utilização a opção Set Up Banco de Dados no menu Entrada de Dados, Os seguintes itens são obrigatórios</Text>
 			<Text LangIsoCode="fre">Maintenant vous devez configurer la base de données aide l'option Configurer la base de données dans le menu saisie des données, Les éléments suivants sont obligatoires</Text>
