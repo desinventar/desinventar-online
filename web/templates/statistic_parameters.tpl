@@ -92,7 +92,8 @@
 						<a class="button" onclick="moveOptions($('_S+Field[]'), $('_S+sel1[]'));"><span>&larr;</span></a>
 					</td>
 					<td><b>{-#sviewfields#-}</b><br />
-						<select id="_S+Field[]" size="6" style="width:220px;" multiple class="line">
+						<input type="hidden" id="_S+FieldH" name="_S+Field" value="" />
+						<select id="_S+Field[]" name="options[field]" size="6" style="width:220px;" multiple class="line">
 							{-foreach name=ef1 key=k item=i from=$ef1-}
 								<option value="D.{-$k-}Q|>|-1">{-$i[0]-}</option>
 							{-/foreach-}
@@ -109,7 +110,6 @@
 					</td>
 				</tr>
 			</table>
-			<input type="hidden" id="_S+FieldH" name="_S+Field" value="" />
 			<input type="hidden" id="_S+cmd" name="_S+cmd" value="result" />
 			<input type="hidden" id="_S+saveopt" name="_S+saveopt" value="" />
 		</form>
