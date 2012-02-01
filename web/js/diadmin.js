@@ -596,17 +596,17 @@
 		{
 			jQuery('#prmQueryCommand').val('cmdStatSave');
 		}
-		if ( jQuery('#fldStatParam_FirstLev').val() != "" && $('_S+Field[]').length > 0)
+		if ( jQuery('#fldStatParam_FirstLev').val() != "" && $('fldStatField').length > 0)
 		{
 			$('_S+cmd').value = cmd;
-			selectall('_S+Field[]');
-			var ob = $('_S+Field[]');
+			selectall('fldStatField');
+			var ob = $('fldStatField');
 			var mystr = "D.DisasterId||";
 			for (i=0; i < ob.length; i++)
 			{
 				mystr += "," + ob[i].value;
 			}
-			$('_S+FieldH').value = mystr;
+			$('_S+Field').value = mystr;
 			jQuery('#frmStatParams td.StatGroup').each(function() {
 				jQuery('input', this).val(jQuery('select option:selected',this).text());
 			});
@@ -635,7 +635,7 @@
 		combineForms('frmMainQuery', 'CD');
 		combineForms('frmMainQuery', 'CM');
 		combineForms('frmMainQuery', 'frmGraphParams');
-		selectall('_S+Field[]');
+		selectall('fldStatField');
 		combineForms('frmMainQuery', 'frmStatParams');
 		jQuery('#_CMD').val('savequery');
 		$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/?r=' + jQuery('#desinventarRegionId').val();
