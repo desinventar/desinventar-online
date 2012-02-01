@@ -3952,9 +3952,9 @@
 			<Text LangIsoCode="fre">Observateur</Text>
 		</Message>
 		<Message id="msgDatabaseFind_RoleNONE">
-			<Text LangIsoCode="eng">Public Databases</Text>
-			<Text LangIsoCode="spa">Bases Públicas</Text>
-			<Text LangIsoCode="por">Bases de datos públicas</Text>
+			<Text LangIsoCode="eng">Public databases</Text>
+			<Text LangIsoCode="spa">Bases de datos públicas</Text>
+			<Text LangIsoCode="por">Bases de dados públicas</Text>
 			<Text LangIsoCode="fre">Bases de données publiques</Text>
 		</Message>
 	</Group>
