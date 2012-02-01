@@ -773,7 +773,7 @@ function doDialogsCreate()
 				text: jQuery('#msgViewStdButtonClear').text(),
 				handler: function()
 				{
-					$('CS').reset();
+					$('frmStatParams').reset();
 				}
 			},
 			{
