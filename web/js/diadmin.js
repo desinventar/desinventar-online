@@ -607,10 +607,9 @@
 				mystr += "," + ob[i].value;
 			}
 			$('_S+FieldH').value = mystr;
-			jQuery('#frmStatParams input.FirstlevLabel').val(jQuery('#frmStatParams select.Firstlev option:selected').text());
-			jQuery('#frmStatParams input.SecondlevLabel').val(jQuery('#frmStatParams select.Secondlev option:selected').text());
-			jQuery('#frmStatParams input.ThirdlevLabel').val(jQuery('#frmStatParams select.Thirdlev option:selected').text());
-			
+			jQuery('#frmStatParams td.StatGroup').each(function() {
+				jQuery('input', this).val(jQuery('select option:selected',this).text());
+			});
 			combineForms('frmMainQuery', 'frmStatParams');
 			Ext.getCmp('westm').collapse();
 			$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/statistic.php';

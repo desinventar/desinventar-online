@@ -33,8 +33,8 @@
 				<tr valign="top">
 					<td class="StatGroup">
 						<b>{-$std.StatisticFirstlev[0]-}</b><br />
-						<input type="hidden" class="FirstlevLabel" name="options[FirstlevLabel]" value="" />
-						<select class="Firstlev line" id="fldStatParam_FirstLev" name="options[group][]" size="8" style="width:180px;"  >
+						<input class="label" type="hidden" name="options[grouplabel][0]" value="" />
+						<select class="value line" id="fldStatParam_FirstLev" name="options[group][0]" size="8" style="width:180px;"  >
 							{-foreach name=glev key=k item=i from=$glev-}
 								{-assign var="ln" value="StatisticGeographyId_$k"-}
 								<option value="{-$k-}|D.GeographyId" {-if $smarty.foreach.glev.first-}selected{-/if-}>{-$std.$ln[0]-}</option>
@@ -47,14 +47,14 @@
 					</td>
 					<td class="StatGroup">
 						<b>{-$std.StatisticSecondlev[0]-}</b><br/>
-						<input type="hidden" class="SecondlevLabel" name="options[SecondlevLabel]" value="" />
-						<select class="Secondlev line" id="fldStatParam_SecondLev" name="options[group][]" size="8" style="width:180px;" >
+						<input class="label" type="hidden" name="options[grouplabel][1]" value="" />
+						<select class="value line" id="fldStatParam_SecondLev" name="options[group][1]" size="8" style="width:180px;" >
 						</select>
 					</td>
 					<td class="StatGroup">
 						<b>{-$std.StatisticThirdlev[0]-}</b><br />
-						<input type="hidden" class="ThirdlevLabel" name="options[ThirdlevLabel]" value="" />
-						<select class="Thirdlev line" id="fldStatParam_ThirdLev" name="options[group][]" size="8" style="width:180px;">
+						<input class="label" type="hidden" name="options[grouplabel][2]" value="" />
+						<select class="value line" id="fldStatParam_ThirdLev" name="options[group][2]" size="8" style="width:180px;">
 						</select>
 					</td>
 				</tr>
