@@ -65,6 +65,7 @@ if (isset($post['page']) || isset($post['_S+cmd']))
 		$levg = $post['options']['group'];
 		$opc['Group'] = $levg;
 		$field = explode(',', $post['_S+Field']);
+		fb($field);
 		$opc['Field'] = $field;
 		$sql = $us->q->genSQLProcess($qd, $opc);
 		$cou = $us->q->getnumrows($sql);
