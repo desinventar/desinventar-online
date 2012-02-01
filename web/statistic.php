@@ -32,7 +32,7 @@ $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Sector', $lg));
 $dic = array_merge($dic, $us->q->getEEFieldList('True'));
 $t->assign('RegionId', $RegionId);
 $t->assign('RegionLabel', $RegionLabel);
-
+fb($post);
 // Data Options Interface
 if (isset($post['page']) || isset($post['_S+cmd']))
 {

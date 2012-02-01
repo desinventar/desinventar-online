@@ -607,7 +607,11 @@
 				mystr += "," + ob[i].value;
 			}
 			$('_S+FieldH').value = mystr;
-			combineForms('frmMainQuery', 'CS');
+			jQuery('#frmStatParams input.FirstlevLabel').val(jQuery('#frmStatParams select.Firstlev option:selected').text());
+			jQuery('#frmStatParams input.SecondlevLabel').val(jQuery('#frmStatParams select.Secondlev option:selected').text());
+			jQuery('#frmStatParams input.ThirdlevLabel').val(jQuery('#frmStatParams select.Thirdlev option:selected').text());
+			
+			combineForms('frmMainQuery', 'frmStatParams');
 			Ext.getCmp('westm').collapse();
 			$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/statistic.php';
 			jQuery('#frmMainQuery').attr('target','dcr');
@@ -633,7 +637,7 @@
 		combineForms('frmMainQuery', 'CM');
 		combineForms('frmMainQuery', 'frmGraphParams');
 		selectall('_S+Field[]');
-		combineForms('frmMainQuery', 'CS');
+		combineForms('frmMainQuery', 'frmStatParams');
 		jQuery('#_CMD').val('savequery');
 		$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/?r=' + jQuery('#desinventarRegionId').val();
 		jQuery('#frmMainQuery').attr('target', 'iframeDownload');
