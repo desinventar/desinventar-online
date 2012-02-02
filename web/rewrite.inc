@@ -20,13 +20,13 @@ RewriteRule ^admin/db[/]*$    index.php?cmd=cmdAdminDB
 #
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^([a-zA-Z0-9\-_]+)/?$                    index.php?RegionId=$1
+RewriteRule ^([a-zA-Z0-9\-_]+)/?$                    index.php?RegionId=$1 [QSA]
 RewriteRule ^([a-zA-Z0-9\-_]+)/datacards[/]$         index.php?RegionId=$1&cmd=cmdDatacards
 RewriteRule ^([a-zA-Z0-9\-_]+)/events[/]$            index.php?RegionId=$1&cmd=cmdDatabaseEvents
 RewriteRule ^([a-zA-Z0-9\-_]+)/users[/]$             index.php?RegionId=$1&cmd=cmdDatabaseUsers
 RewriteRule ^([a-zA-Z0-9\-_]+)/user/account[/]$      index.php?RegionId=$1&cmd=cmdUserAccount
 RewriteRule ^([a-zA-Z0-9\-_]+)/geolevels[/]$         index.php?RegionId=$1&cmd=cmdGeolevels
-RewriteRule ^([a-zA-Z0-9\-_]+)/([a-zA-Z0-9\-_]+)/?$  index.php?RegionId=$1&cmd=$2
+RewriteRule ^([a-zA-Z0-9\-_]+)/([a-zA-Z0-9\-_]+)/?$  index.php?RegionId=$1&cmd=$2 [QSA]
 #
 # Rewrite URLs of the form 'x' to the form 'index.php?q=x'.
 #RewriteCond %{REQUEST_URI} !=/favicon.ico

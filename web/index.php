@@ -59,6 +59,10 @@ $t->assign('appOptions', $appOptions);
 
 switch ($cmd)
 {
+	case 'test':
+		$ydb = $us->getDateRange();
+		print_r($ydb);
+	break;
 	case 'cmdUserLogin':
 		$iReturn = ERR_DEFAULT_ERROR;
 		$answer = array();
