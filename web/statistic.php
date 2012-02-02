@@ -63,7 +63,7 @@ if (isset($post['page']) || isset($post['_S+cmd']))
 		// Reuse calculate SQL values in all pages; calculate limits in pages
 		$levg = $post['options']['group'];
 		$opc['Group'] = $levg;
-		$field = explode(',', $post['_S+Field']);
+		$field = explode(',', $post['options']['field']);
 		$opc['Field'] = $field;
 		$sql = $us->q->genSQLProcess($qd, $opc);
 		$cou = $us->q->getnumrows($sql);

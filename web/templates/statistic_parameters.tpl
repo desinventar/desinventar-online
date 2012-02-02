@@ -87,26 +87,27 @@
 						<a class="button" onclick="selectnone('_S+sel1[]');"><span>{-#bnone#-}</span></a>
 					</td>
 					<td align="center" valign="middle" style="width:20px;">
-						<a class="button" onclick="moveOptions($('_S+sel1[]'), $('fldStatField'));"><span>&rarr;</span></a>
+						<a class="button" onclick="moveOptions($('_S+sel1[]'), $('fldStatFieldSelect'));"><span>&rarr;</span></a>
 						<br /><br /><br />
-						<a class="button" onclick="moveOptions($('fldStatField'), $('_S+sel1[]'));"><span>&larr;</span></a>
+						<a class="button" onclick="moveOptions($('fldStatFieldSelect'), $('_S+sel1[]'));"><span>&larr;</span></a>
 					</td>
 					<td><b>{-#sviewfields#-}</b><br />
-						<input type="hidden" id="_S+Field" name="_S+Field" value="" />
-						<select id="fldStatField" name="options[field][]" size="6" style="width:220px;" multiple="multiple" class="line">
+						<input type="hidden" id="fldStatField" name="options[field]" value="" />
+						<input type="hidden" id="fldStatFieldLabel" name="options[fieldlabel]" value="" />
+						<select id="fldStatFieldSelect" size="6" style="width:220px;" multiple="multiple" class="line">
 							{-foreach name=ef1 key=k item=i from=$ef1-}
 								<option value="D.{-$k-}Q|>|-1">{-$i[0]-}</option>
 							{-/foreach-}
 						</select>
 						<br />
-						<a class="button" onclick="selectall('fldStatField');"><span>{-#balls#-}</span></a>
-						<a class="button" onclick="selectnone('fldStatField');"><span>{-#bnone#-}</span></a>
+						<a class="button" onclick="selectall('fldStatFieldSelect');"><span>{-#balls#-}</span></a>
+						<a class="button" onclick="selectnone('fldStatFieldSelect');"><span>{-#bnone#-}</span></a>
 					</td>
 					<td style="width:20px;" align="center">
-						<a class="button" onclick="top('fldStatField');"><span>&uArr;</span></a><br />
-						<a class="button" onclick="upone('fldStatField');"><span>&uarr;</span></a><br />
-						<a class="button" onclick="downone('fldStatField');"><span>&darr;</span></a><br />
-						<a class="button" onclick="bottom('fldStatField');"><span>&dArr;</span></a><br />
+						<a class="button" onclick="top('fldStatFieldSelect');"><span>&uArr;</span></a><br />
+						<a class="button" onclick="upone('fldStatFieldSelect');"><span>&uarr;</span></a><br />
+						<a class="button" onclick="downone('fldStatFieldSelect');"><span>&darr;</span></a><br />
+						<a class="button" onclick="bottom('fldStatFieldSelect');"><span>&dArr;</span></a><br />
 					</td>
 				</tr>
 			</table>
