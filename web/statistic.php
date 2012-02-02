@@ -184,6 +184,24 @@ if (isset($post['page']) || isset($post['_S+cmd']))
 				// Set translation in headers
 				$lb = '';
 				$sel = array_keys($dislist[0]);
+				$options = $post['options'];
+				$labels = array();
+				foreach($options['group'] as $key => $value)
+				{
+					if ($value != '')
+					{
+						array_push($labels, $options['grouplabel'][$key]);
+					}
+				}
+				$labels = array_merge($labels, explode(',', $options['fieldlabel']));
+				$iCount = 0;
+				foreach($sel as $kk=>$ii)
+				{
+					$dk[$ii] = $labels[$iCount];
+					$iCount++;
+				}
+				/*
+				// This is the old method for getting the columns translated
 				foreach ($sel as $kk=>$ii)
 				{
 					$i2 = substr($ii, 2);
@@ -208,15 +226,20 @@ if (isset($post['page']) || isset($post['_S+cmd']))
 					{
 						$dk[$ii] = $ii;		// no traduction..
 					}
+				}
+				*/
+				if (!empty($export))
+				{
 					$ColumnSeparator = "\t";
 					if ($export == 'csv')
 					{
 						$ColumnSeparator = ',';
 					}
-					$lb .= '"'. $dk[$ii] .'"' . $ColumnSeparator;
-				}
-				if (!empty($export))
-				{
+					$lb = '';
+					foreach($dk as $ii => $value)
+					{
+						$lb .= '"'. $value .'"' . $ColumnSeparator;
+					}
 					fwrite($fp, $lb ."\n");
 				}
 			}
@@ -228,7 +251,6 @@ if (isset($post['page']) || isset($post['_S+cmd']))
 		if (!empty($export))
 		{
 			fclose($fp);
-			//$sto = system('zip -q $stdpth.zip $stdpth.csv');
 			flush();
 			readfile($stdpth);
 			exit;

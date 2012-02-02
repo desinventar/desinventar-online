@@ -599,14 +599,16 @@
 		if ( jQuery('#fldStatParam_FirstLev').val() != "" && $('fldStatFieldSelect').length > 0)
 		{
 			$('_S+cmd').value = cmd;
-			selectall('fldStatFieldSelect');
-			var ob = $('fldStatFieldSelect');
-			var mystr = "D.DisasterId||";
-			for (i=0; i < ob.length; i++)
-			{
-				mystr += "," + ob[i].value;
-			}
-			$('fldStatField').value = mystr;
+			//selectall('fldStatFieldSelect');
+			var field      = 'D.DisasterId||';
+			var fieldlabel = jQuery('#txtStatRecords').text();
+			jQuery('#fldStatFieldSelect option').each(function() {
+				field      += ',' + jQuery(this).val();
+				fieldlabel += ',' + jQuery(this).text();
+			});
+			jQuery('#fldStatField').val(field);
+			jQuery('#fldStatFieldLabel').val(fieldlabel);
+			
 			jQuery('#frmStatParams td.StatGroup').each(function() {
 				jQuery('input', this).val(jQuery('select option:selected',this).text());
 			});
