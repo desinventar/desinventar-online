@@ -114,5 +114,8 @@
 			<input type="hidden" id="_S+cmd" name="_S+cmd" value="result" />
 			<input type="hidden" id="_S+saveopt" name="_S+saveopt" value="" />
 		</form>
+		<div class="hidden">
+			<span id="txtStatRecords">{-#trepnum#-}</span>
+		</div>
 	</div>
 </div>
