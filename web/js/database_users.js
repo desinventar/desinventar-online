@@ -118,8 +118,8 @@ function onReadyDatabaseUsers()
 					sConfirmMsg = jQuery('#msgDatabaseUsers_ConfirmManagerPrompt1').text() + ' ' + 
 					              sAdminCurrent + ' ' + 
 					              jQuery('#msgDatabaseUsers_ConfirmManagerPrompt2').text() + ' ' + 
-					              sAdminNew + ' ? ' +
-					              '(' + jQuery('#msgDatabaseUsers_ConfirmManagerPrompt3').text() + ')';
+					              sAdminNew + ' ?';
+					              //jQuery('#msgDatabaseUsers_ConfirmManagerPrompt3').text();
 					Ext.Msg.show({
 						title   : jQuery('#msgDatabaseUsers_ConfirmManagerTitle').text(),
 						msg     : sConfirmMsg,

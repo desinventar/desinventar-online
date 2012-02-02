@@ -3455,7 +3455,7 @@
 		</Message>
 		<Message id="msgDatabaseUsers_ConfirmManagerPrompt1">
 			<Text LangIsoCode="eng">Do you want to transfer the manager role from</Text>
-			<Text LangIsoCode="spa">Quieres transferir la función de administrador de</Text>
+			<Text LangIsoCode="spa">¿ Quiere transferir la función de administrador de</Text>
 			<Text LangIsoCode="por">Você deseja transferir a função de gerente de</Text>
 			<Text LangIsoCode="fre">Voulez-vous transférer le rôle de gestionnaire du</Text>
 		</Message>
