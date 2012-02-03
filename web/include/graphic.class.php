@@ -172,7 +172,7 @@ class Graphic
 		} //if
 		// Choose presentation options, borders, intervals
 		$ImgMarginLeft   = 50;
-		$ImgMarginTop    = 30;
+		$ImgMarginTop    =  8;
 		$ImgMarginRight  = 20;
 		$ImgMarginBottom = 85;
 		// calculate graphic size
@@ -218,20 +218,24 @@ class Graphic
 				if ($gType != 'XTEMPO')
 				{
 					// Return the width in pixels of the max value in series
-					$Y2AxisLabelLen = $this->getSeriesMaxLen($sY2AxisLabel);
+					$Y2AxisLabelLen = $this->getSeriesMaxLen($sY2AxisLabel) + 10;
 					$Y2AxisTitleMargin = $Y2AxisLabelLen + 15;
-					$ImgMarginRight = 30;
+					$ImgMarginRight = 0;
 					$ImgMarginRight += $Y2AxisTitleMargin;
-					
+
 					// Legend Box
-					$MaxLen = strlen($this->data[$sY1AxisLabel]);
-					$Len = strlen($this->data[$sY2AxisLabel]);
-					if ($Len > $MaxLen)
+					$iLen = $this->getTextWidth($sY1AxisLabel, 10);
+					$iLegendBoxWidth = $iLen;
+					$iLen = $this->getTextWidth($sY2AxisLabel, 10);
+					if ($iLen > $iLegendBoxWidth)
 					{
-						$MaxLen = $Len;
+						$iLegendBoxWidth = $iLen;
 					}
-					$LegendBoxWidth = $MaxLen * 10 + 80;
-					$ImgMarginRight += $LegendBoxWidth;
+					$iLegendBoxWidth += 40;
+					if ($iLegendBoxWidth > $ImgMarginRight)
+					{
+						$ImgMarginRight += $iLegendBoxWidth;
+					}
 				}
 				else
 				{
@@ -318,9 +322,9 @@ class Graphic
 		}
 		// Other options graphic
 		$this->g->img->SetMargin($ImgMarginLeft,$ImgMarginRight,$ImgMarginTop,$ImgMarginBottom);
-		$this->g->legend->SetAbsPos(5,5,'right','top');
-		//$this->g->legend->Pos(0.0, 0.1);
+		$this->g->legend->SetAbsPos(0, 0,'right','top');
 		$this->g->legend->SetFont(FF_ARIAL, FS_NORMAL, 10);
+		//$this->g->legend->Hide();
 		$this->g->SetFrame(false);
 		$title = wordwrap($opc['prmGraph']['Title'], 80);
 		$subti = wordwrap($opc['prmGraph']['SubTitle'], 100);
@@ -685,7 +689,7 @@ class Graphic
 	}
                                                                                         
 	// Setting a PIE graphic
-	function pie ($opc, $axi, $pal)
+	function pie($opc, $axi, $pal)
 	{
 		if ($opc['prmGraph']['Feel'] == '3D')
 		{
@@ -712,7 +716,7 @@ class Graphic
 	}
   
 	// Setting a Bar Graphic
-	function bar ($opc, $axi, $color)
+	function bar($opc, $axi, $color)
 	{
 		$b = new BarPlot(array_values($axi));
 		// normal histogram..
@@ -745,7 +749,7 @@ class Graphic
 	{
 		$i = 0;
 		$lab = array_keys($val);
-		foreach ($val as $k=>$ele)
+		foreach($val as $k=>$ele)
 		{
 			$bar = $this->bar($opc, $ele, $pal[$i]);
 			$bar->SetLegend($lab[$i]);
@@ -765,7 +769,7 @@ class Graphic
 	}
 
 	// Setting a Line graphic
-	function line ($opc, $val, $col)
+	function line($opc, $val, $col)
 	{
 		$l = new LinePlot(array_values($val));
 		if ($col == 'dashed')
@@ -781,7 +785,7 @@ class Graphic
 	}
 
 	// Setting a Multiline graphic
-	function multiline ($opc, $val, $pal)
+	function multiline($opc, $val, $pal)
 	{
 		$i = 0;
 		$lab = array_keys($val);
@@ -804,7 +808,7 @@ class Graphic
 	}
 
 	// Generate colors from database attrib-color or generate fix palette..
-	function genPalette ($cnt, $mode, $evl, $qy)
+	function genPalette($cnt, $mode, $evl, $qy)
 	{
 		$pal = array();
 		if ($mode == DI_EVENT || $mode == DI_CAUSE)
