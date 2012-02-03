@@ -55,6 +55,7 @@ function onReadyGraphic() {
 			jQuery('#prmGraphMode0').val('NORMAL');
 			disab($('prmGraphModeCummulative0'));
 			enab($('prmGraphModeStacked0'));
+			enab($('prmGraphModeStacked1'));
 		}
 		else
 		{
@@ -62,8 +63,10 @@ function onReadyGraphic() {
 			jQuery('#prmGraphMode0').val('NORMAL');
 			enab($('prmGraphModeCummulative0'));
 			disab($('prmGraphModeStacked0'));
+			disab($('prmGraphModeStacked1'));
 		}
 		disab($('_G+D_perc'));
+		disab($('_G+D_perc2'));
 		if (jQuery('#prmGraphTypeComparative').val() != '') {
 			jQuery('#prmGraphTypeComparative').val('');
 		}
@@ -85,7 +88,9 @@ function onReadyGraphic() {
 		jQuery('#prmGraphMode0').val('NORMAL');
 		disab($('prmGraphModeCummulative0'));
 		disab($('prmGraphModeStacked0'));
+		disab($('prmGraphModeStacked1'));
 		enab($('_G+D_perc'));
+		enab($('_G+D_perc2'));
 		if (jQuery('#prmGraphTypeHistogram').val() != '') {
 			jQuery('#prmGraphTypeHistogram').val('');
 		}
@@ -108,6 +113,7 @@ function onReadyGraphic() {
 			if (kind != 'PIE')
 			{
 				disab($('_G+D_perc'));
+				disab($('_G+D_perc2'));
 				if (jQuery('#prmGraphData0').val() == 'PERCENT')
 				{	
 					jQuery('#prmGraphData0').val('NONE');
@@ -116,6 +122,7 @@ function onReadyGraphic() {
 			else
 			{
 				enab($('_G+D_perc'));
+				enab($('_G+D_perc2'));
 			}
 		}
 		if ( (kind == 'BAR' || kind == 'LINE' || kind == 'PIE') && (comp < 200) )
@@ -123,6 +130,7 @@ function onReadyGraphic() {
 			 enabAxis2();
 			 enab($('prmGraphModeCummulative0'));
 			 disab($('prmGraphModeStacked0'));
+			 disab($('prmGraphModeStacked1'));
 			 jQuery('#prmGraphScale0').enable();
 		}
 		else
