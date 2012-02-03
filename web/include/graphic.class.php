@@ -331,7 +331,7 @@ class Graphic
 
 		// Other graph options
 		$this->g->img->SetMargin($ImgMarginLeft,$ImgMarginRight,$ImgMarginTop,$ImgMarginBottom);
-		$this->g->SetFrame(true); // Draws a gray background and solid border
+		$this->g->SetFrame(false); // Draws a gray background and solid border
 		
 		// LegendBox Position and Options
 		$this->g->legend->SetFont(FF_ARIAL, FS_NORMAL, 10);
