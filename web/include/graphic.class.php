@@ -278,7 +278,7 @@ class Graphic
 				// 2009-02-03 (jhcaiced) Try to avoid overlapping labels in XAxis
 				// by calculating the interval of the labels
 				$iNumPoints = count($val);		
-				$iInterval = ($iNumPoints * 12) / $wx;
+				$iInterval = ceil(($iNumPoints * 12) / $wx);
 				if ($iInterval < 1)
 				{
 					$iInterval = 1;
