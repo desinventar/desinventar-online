@@ -278,7 +278,8 @@ class Graphic
 				// 2009-02-03 (jhcaiced) Try to avoid overlapping labels in XAxis
 				// by calculating the interval of the labels
 				$iNumPoints = count($val);		
-				$iInterval = ceil(($iNumPoints * 12) / $wx);
+				$iInterval = $iNumPoints * 12) / $wx;
+				$iInterval = ceil($iInterval);
 				if ($iInterval < 1)
 				{
 					$iInterval = 1;
@@ -320,17 +321,31 @@ class Graphic
 		        }
 			} // if G+Scale
 		}
-		// Other options graphic
+
+		// Title and Subtitle of Graph
+		$sTitle    = wordwrap($opc['prmGraph']['Title'], 60);
+		$sSubTitle = wordwrap($opc['prmGraph']['SubTitle'], 60);
+		$this->g->title->Set($sTitle);
+		$this->g->subtitle->Set($sSubTitle);
+		$this->g->title->SetFont(FF_ARIAL,FS_NORMAL, 11);
+
+		// Other graph options
 		$this->g->img->SetMargin($ImgMarginLeft,$ImgMarginRight,$ImgMarginTop,$ImgMarginBottom);
-		$this->g->legend->SetAbsPos(0, 0,'right','top');
+		$this->g->SetFrame(true); // Draws a gray background and solid border
+		
+		// LegendBox Position and Options
 		$this->g->legend->SetFont(FF_ARIAL, FS_NORMAL, 10);
+		if ($kind == 'PIE')
+		{
+		}
+		else
+		{
+			$iLegendRight = 4;
+			$iLegendTop   = 4;
+			$this->g->legend->SetAbsPos($iLegendRight, $iLegendTop, 'right', 'top');
+		}
 		//$this->g->legend->Hide();
-		$this->g->SetFrame(false);
-		$title = wordwrap($opc['prmGraph']['Title'], 80);
-		$subti = wordwrap($opc['prmGraph']['SubTitle'], 100);
-		$this->g->title->Set($title);
-		$this->g->subtitle->Set($subti);
-		$this->g->title->SetFont(FF_ARIAL,FS_NORMAL, 12);
+
 		// Get color palette..
 		if (substr_count($opc['prmGraph']['VarList'], 'Event') > 0)
 		{
