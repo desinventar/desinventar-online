@@ -400,7 +400,23 @@ class Graphic
 				{
 					$zp = $this->bar($opc, $zo, '');
 					$y1 = $this->bar($opc, $val1, 'darkblue');
+					if ($opc['prmGraph']['Data'][0] == 'VALUE')
+					{
+						$y1->value->SetFont(FF_ARIAL, FS_NORMAL, 8);
+						$y1->value->SetFormat('%d');
+						$y1->value->SetAngle(90);
+						$y1->value->SetColor('black','darkred');
+						$y1->value->Show();
+					}
 					$y2 = $this->bar($opc, $val2, 'darkred');
+					if ($opc['prmGraph']['Data'][1] == 'VALUE')
+					{
+						$y2->value->SetFont(FF_ARIAL, FS_NORMAL, 8);
+						$y2->value->SetFormat('%d');
+						$y2->value->SetAngle(90);
+						$y2->value->SetColor('black','darkred');
+						$y2->value->Show();
+					}
 					$y1->SetLegend($sY1AxisLabel);
 					$y2->SetLegend($sY2AxisLabel);
 					$y1p = new GroupBarPlot(array($y1, $zp));
