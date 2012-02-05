@@ -617,16 +617,24 @@ class Graphic
   
 	function completeWeekSeries($dateini, $dateend, $iYear, &$val)
 	{
-		$iWeekIni =  1;
-		$sDate = sprintf('%04d-12-31', $iYear);
-		$iWeekEnd = $this->getWeekOfYear($sDate);
-		if ($iYear == substr($dateini, 0, 4))
+		if ($this->sStat == 'WEEK')
 		{
-			$iWeekIni = $this->getWeekOfYear($dateini);
+			$iWeekIni = 1;
+			$iWeekEnd = 52;
 		}
-		if ($iYear == substr($dateend, 0, 4))
+		else
 		{
-			$iWeekEnd = $this->getWeekOfYear($dateend);
+			$iWeekIni =  1;
+			$sDate = sprintf('%04d-12-31', $iYear);
+			$iWeekEnd = $this->getWeekOfYear($sDate);
+			if ($iYear == substr($dateini, 0, 4))
+			{
+				$iWeekIni = $this->getWeekOfYear($dateini);
+			}
+			if ($iYear == substr($dateend, 0, 4))
+			{
+				$iWeekEnd = $this->getWeekOfYear($dateend);
+			}
 		}
 		for ($iWeek = $iWeekIni; $iWeek <= $iWeekEnd; $iWeek++)
 		{
