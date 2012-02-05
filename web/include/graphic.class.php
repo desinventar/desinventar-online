@@ -133,6 +133,11 @@ class Graphic
 			}
 			$XAxisLabels = array_keys($val);
 		}
+		if ($this->sStat == 'MONTH')
+		{
+			//$XAxisLabels = array('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
+			$XAxisLabels = explode(',', $opc['prmGraph']['MonthNames']);
+		}
 		// Cummulative Graph : Add Values in Graph
 		if ($gType == 'TEMPO')
 		{
