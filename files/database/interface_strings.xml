@@ -4332,4 +4332,78 @@
 			<Text LangIsoCode="fre">Version</Text>
 		</Message>
 	</Group>
+	<Group name="grpGraphParams">
+		<Message id="msgMonth_01">
+			<Text LangIsoCode="eng">Jan</Text>
+			<Text LangIsoCode="spa">Ene</Text>
+			<Text LangIsoCode="por">Jan</Text>
+			<Text LangIsoCode="fre">Janv</Text>
+		</Message>
+		<Message id="msgMonth_02">
+			<Text LangIsoCode="eng">Feb</Text>
+			<Text LangIsoCode="spa">Feb</Text>
+			<Text LangIsoCode="por">Fev</Text>
+			<Text LangIsoCode="fre">Févr</Text>
+		</Message>
+		<Message id="msgMonth_03">
+			<Text LangIsoCode="eng">Mar</Text>
+			<Text LangIsoCode="spa">Mar</Text>
+			<Text LangIsoCode="por">Março</Text>
+			<Text LangIsoCode="fre">Mars</Text>
+		</Message>
+		<Message id="msgMonth_04">
+			<Text LangIsoCode="eng">Apr</Text>
+			<Text LangIsoCode="spa">Abr</Text>
+			<Text LangIsoCode="por">Abril</Text>
+			<Text LangIsoCode="fre">Avril</Text>
+		</Message>
+		<Message id="msgMonth_05">
+			<Text LangIsoCode="eng">May</Text>
+			<Text LangIsoCode="spa">May</Text>
+			<Text LangIsoCode="por">Maio</Text>
+			<Text LangIsoCode="fre">Mai</Text>
+		</Message>
+		<Message id="msgMonth_06">
+			<Text LangIsoCode="eng">June</Text>
+			<Text LangIsoCode="spa">Jun</Text>
+			<Text LangIsoCode="por">Junho</Text>
+			<Text LangIsoCode="fre">Juin</Text>
+		</Message>
+		<Message id="msgMonth_07">
+			<Text LangIsoCode="eng">July</Text>
+			<Text LangIsoCode="spa">Jul</Text>
+			<Text LangIsoCode="por">Julho</Text>
+			<Text LangIsoCode="fre">Juil</Text>
+		</Message>
+		<Message id="msgMonth_08">
+			<Text LangIsoCode="eng">Aug</Text>
+			<Text LangIsoCode="spa">Ago</Text>
+			<Text LangIsoCode="por">Agosto</Text>
+			<Text LangIsoCode="fre">Août</Text>
+		</Message>
+		<Message id="msgMonth_09">
+			<Text LangIsoCode="eng">Sept</Text>
+			<Text LangIsoCode="spa">Sep</Text>
+			<Text LangIsoCode="por">Set</Text>
+			<Text LangIsoCode="fre">Sept</Text>
+		</Message>
+		<Message id="msgMonth_10">
+			<Text LangIsoCode="eng">Oct</Text>
+			<Text LangIsoCode="spa">Oct</Text>
+			<Text LangIsoCode="por">Out</Text>
+			<Text LangIsoCode="fre">Oct</Text>
+		</Message>
+		<Message id="msgMonth_11">
+			<Text LangIsoCode="eng">Nov</Text>
+			<Text LangIsoCode="spa">Nov</Text>
+			<Text LangIsoCode="por">Nov</Text>
+			<Text LangIsoCode="fre">Nov</Text>
+		</Message>
+		<Message id="msgMonth_12">
+			<Text LangIsoCode="eng">Dec</Text>
+			<Text LangIsoCode="spa">Dic</Text>
+			<Text LangIsoCode="por">Dez</Text>
+			<Text LangIsoCode="fre">Déc</Text>
+		</Message>
+	</Group>
 </StringList>

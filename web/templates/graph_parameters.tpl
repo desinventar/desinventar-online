@@ -1,3 +1,4 @@
+{-config_load file="$lg.conf" section="grpGraphParams"-}
 <!-- BEGIN GRAPHIC PARAMETERS -->
 <div id="divGraphParameters" class="x-hidden">
 	<span id="msgViewGraphButtonClear" style="display:none;">{-#tclear#-}</span>
@@ -215,9 +216,10 @@
 				<td></td>
 			</tr>
 			</table>
-			<input type="hidden" id="prmGraphCommand" name="prmGraph[Command]"  value="result" />
-			<input type="hidden" id="prmGraphType"    name="prmGraph[Type]"     value="" />
-			<input type="hidden" id="prmGraphSubType" name="prmGraph[SubType]" value="D.DisasterBeginTime" />
+			<input type="hidden" id="prmGraphCommand"    name="prmGraph[Command]"  value="result" />
+			<input type="hidden" id="prmGraphType"       name="prmGraph[Type]"     value="" />
+			<input type="hidden" id="prmGraphSubType"    name="prmGraph[SubType]" value="D.DisasterBeginTime" />
+			<input type="hidden" id="prmGraphMonthNames" name="prmGraph[MonthNames]" value="{-#msgMonth_01#-},{-#msgMonth_02#-},{-#msgMonth_03#-},{-#msgMonth_04#-},{-#msgMonth_05#-},{-#msgMonth_06#-},{-#msgMonth_07#-},{-#msgMonth_08#-},{-#msgMonth_09#-},{-#msgMonth_10#-},{-#msgMonth_11#-},{-#msgMonth_12#-}" />
 		</form>
 	</div>
 </div>
