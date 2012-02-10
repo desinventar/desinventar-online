@@ -191,7 +191,7 @@ function doGeolevelsUploaderCreate()
 			action: jQuery('#desinventarURL').val() + '/',
 			params:
 			{
-				cmd        : 'cmdGeocartoUpload',
+				cmd        : 'cmdGeolevelsUpload',
 				RegionId   : jQuery('#desinventarRegionId').val(),
 				UploadExt  : fileExt,
 				GeoLevelId : jQuery('#frmGeolevel .GeoLevelId').val()

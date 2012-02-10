@@ -7,6 +7,7 @@ require_once('include/loader.php');
 require_once('include/diregion.class.php');
 require_once('include/diregiondb.class.php');
 require_once('include/diregionrecord.class.php');
+require_once('include/geography_operations.php');
 
 $post = $_POST;
 $get  = $_GET;
@@ -492,12 +493,59 @@ switch ($cmd)
 		}
 		if ($iReturn > 0)
 		{
+		}
+
+		if ($iReturn > 0)
+		{
 			$r = new DIRegion($us, $RegionId);
 			$GeolevelsList = $r->getGeolevelList();
 			$answer['GeolevelsList'] = $GeolevelsList;
 		}
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');		
+	break;
+	case 'cmdGeolevelsUpload':
+		$answer = array();
+		$answer['success'] = false;
+		$iReturn = ERR_NO_ERROR;
+		if ($us->UserId == '')
+		{
+			$iReturn = ERR_ACCESS_DENIED;
+		}
+		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($iReturn > 0)
+		{
+			require_once('include/fileuploader.php');
+			$allowedExtensions = array('dbf','shp','shx');
+			$sizeLimit = 100 * 1024 * 1024;
+			$OutDir = TMP_DIR . '/' . $us->sSessionId;
+			if (!is_dir($OutDir))
+			{
+				mkdir($OutDir);
+			}
+			$uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
+			$answer = $uploader->handleUpload($OutDir . '/');
+			if (isset($answer['error']))
+			{
+				$answer['success'] = false;
+			}
+			if ($answer['success'] == true)
+			{
+				$iReturn = ERR_NO_ERROR;
+				$filename = $answer['filename'];
+				$answer['filename_orig'] = getParameter('qqfile','');
+			} //if
+		} //if
+		if ($answer['success'] == false)
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		$answer['Status'] = $iReturn;
+		// to pass data through iframe you will need to encode all html tags
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
 	break;
 	case 'getversion':
 		echo VERSION;
@@ -680,49 +728,6 @@ switch ($cmd)
 		}
 		$answer['Status'] = $iReturn;
 		echo json_encode($answer);		
-	break;
-	case 'cmdGeocartoUpload':
-		$answer = array();
-		$answer['success'] = false;
-		$iReturn = ERR_NO_ERROR;
-		if ($us->UserId == '')
-		{
-			$iReturn = ERR_ACCESS_DENIED;
-		}
-		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
-		{
-			$iReturn = ERR_UNKNOWN_ERROR;
-		}
-		if ($iReturn > 0)
-		{
-			require_once('include/fileuploader.php');
-			$allowedExtensions = array('dbf','shp','shx');
-			$sizeLimit = 100 * 1024 * 1024;
-			$OutDir = TMP_DIR . '/' . $us->sSessionId;
-			if (!is_dir($OutDir))
-			{
-				mkdir($OutDir);
-			}
-			$uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
-			$answer = $uploader->handleUpload($OutDir . '/');
-			if (isset($answer['error']))
-			{
-				$answer['success'] = false;
-			}
-			if ($answer['success'] == true)
-			{
-				$iReturn = ERR_NO_ERROR;
-				$filename = $answer['filename'];
-				$answer['filename_orig'] = getParameter('qqfile','');
-			} //if
-		} //if
-		if ($answer['success'] == false)
-		{
-			$iReturn = ERR_UNKNOWN_ERROR;
-		}
-		$answer['Status'] = $iReturn;
-		// to pass data through iframe you will need to encode all html tags
-		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
 	break;
 	case 'cmdDatabaseUpload':
 		$answer = array();
