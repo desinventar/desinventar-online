@@ -3295,6 +3295,13 @@
 			<Text LangIsoCode="por">Os campos obrigatórios não pode ser vazio</Text>
 			<Text LangIsoCode="fre">Les champs obligatoires ne peut pas être vide</Text>
 		</Message>
+		<Message id="msgGeocarto_CreatingGeography">
+			<Text LangIsoCode="eng">Creating geography elements</Text>
+			<Text LangIsoCode="spa">Creando elementos de geografía</Text>
+			<Text LangIsoCode="por">Criando elementos de geografia</Text>
+			<Text LangIsoCode="fre">Création d'éléments de géographie</Text>
+		</Message>
+		
 		<Message id="msgGeolevels_UploadChooseFile">
 			<Text LangIsoCode="eng">Choose file</Text>
 			<Text LangIsoCode="spa">Elegir archivo..</Text>

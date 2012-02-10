@@ -123,6 +123,8 @@ function onReadyGeolevels()
 					//If empty geography items, create from DBF
 					if (parseInt(data.GeographyItemsCount) == 0)
 					{
+						jQuery('div.status span.status').hide();
+						jQuery('div.status span.statusCreatingGeography').show();
 						jQuery.post(
 							jQuery('#desinventarURL').val() + '/',
 							{
@@ -132,13 +134,21 @@ function onReadyGeolevels()
 							},
 							function(data)
 							{
+								jQuery('div.status span.statusCreatingGeography').hide();
+								jQuery('div.status .statusUpdateOk').show();
+								setTimeout(function () {
+									jQuery('div.status span.status').hide();
+								}, 3000);
 							},
 							'json'
 						);
-					} //if
-					setTimeout(function () {
-						jQuery('div.status .status').hide();
-					}, 2500);
+					}
+					else
+					{
+						setTimeout(function () {
+							jQuery('div.status span.status').hide();
+						}, 2500);
+					}
 				},
 				'json'
 			);
