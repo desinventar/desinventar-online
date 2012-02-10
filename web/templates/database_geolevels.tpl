@@ -180,9 +180,10 @@
 		<span class="status hidden statusUploadOk">{-#msgGeocarto_UploadOk#-}<br /></span>
 		<span class="status hidden statusUploadError">{-#msgGeocarto_UploadError#-}<br /></span>
 		<span class="status hidden statusUpdateOk">{-#msgGeolevels_UpdateOk#-}<br /></span>
-		<span class="status hidden statusUpdateError">{-#msgGeolvels_UpdateError#-}<br /></span>
+		<span class="status hidden statusUpdateError">{-#msgGeolevels_UpdateError#-}<br /></span>
 		<span class="status hidden statusMissingFiles">{-#msgGeocarto_MissingFiles#-} (DBF,SHP,SHX)<br /></span>
 		<span class="status hidden statusRequiredFields">{-#msgGeocarto_RequiredFields#-}<br/></span>
+		<span class="status hidden statusCreatingGeography">{-#msgGeocarto_CreatingGeography#-} <img src="{-$desinventarURL-}/images/loading.gif" alt="" /><br /></span>
 	</div>
 	<div class="hidden">
 		<span id="msgGeolevels_UploadChooseFile">{-#msgGeolevels_UploadChooseFile#-}</span>

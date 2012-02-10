@@ -5,6 +5,7 @@
 */
 function import_geography_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $prmCode, $prmName, $prmParentCode)
 {
+	fb(func_get_args());
 	$iReturn = ERR_NO_ERROR;
 	if (! file_exists($prmFilename))
 	{	
@@ -38,6 +39,7 @@ function import_geography_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 				$o = new DIGeography($prmSession);
 				$o->set('GeographyName', $geography_name);
 				$o->set('GeographyCode', $geography_code);
+				$o->set('GeographyLevel', $prmGeoLevelId);
 				$o->setGeographyId($parent_id);
 				$r = $o->insert();
 				$geography_id = $o->get('GeographyId');
