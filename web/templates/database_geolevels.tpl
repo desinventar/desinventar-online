@@ -92,19 +92,20 @@
 							<tr>
 								<td>
 									<span title="{-#msgGeocarto_CodeTooltip#-}">{-#msgGeocarto_Code#-}</span>
-								</td>
-								<td colspan="2">
+									<br />
 									<input class="GeoLevelLayerCode" name="GeoLevelLayerCode" type="text" size="30" value="" /><br />
 								</td>
 							</tr>
 							<tr>
 								<td>
 									<span title="{-#msgGeocarto_NameTooltip#-}">{-#msgGeocarto_Name#-}</span>
-								</td>
-								<td colspan="2">
+									<br />
 									<input class="GeoLevelLayerName" name="GeoLevelLayerName" type="text" size="30" value="" /><br />
 								</td>
 							</tr>
+						</table>
+						<br />
+						<table border="0" width="100%">
 							<tr class="FileUploader" data-ext="dbf">
 								<td>
 									{-#msgGeocarto_File#-} (DBF)
