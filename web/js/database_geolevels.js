@@ -205,7 +205,7 @@ function doGeolevelsPopulateList(GeolevelsList)
 		jQuery('.GeoLevelLayerFile', clonedRow).html(value.GeoLevelLayerFile);
 		jQuery('.GeoLevelLayerCode', clonedRow).html(value.GeoLevelLayerCode);
 		jQuery('.GeoLevelLayerName', clonedRow).html(value.GeoLevelLayerName);
-		jQuery('.GeolevelLayerParentCode', clonedRow).html(GeoLevelLayerParentCode);
+		jQuery('.GeoLevelLayerParentCode', clonedRow).html(GeoLevelLayerParentCode);
 		GeoLevelLayerParentCode = value.GeoLevelLayerCode;
 		jQuery('#tbodyGeolevels_List').append(clonedRow);
 	});

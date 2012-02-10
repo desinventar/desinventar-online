@@ -5,7 +5,6 @@
 */
 function import_geography_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $prmCode, $prmName, $prmParentCode)
 {
-	fb(func_get_args());
 	$iReturn = ERR_NO_ERROR;
 	if (! file_exists($prmFilename))
 	{	
