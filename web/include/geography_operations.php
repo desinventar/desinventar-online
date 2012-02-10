@@ -41,7 +41,6 @@ function import_geography_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 				$o->setGeographyId($parent_id);
 				$r = $o->insert();
 				$geography_id = $o->get('GeographyId');
-				printf('%3d %-10s %-10s %-20s %-20s %-20s %d' . "\n", $i, $geography_code, $parent_code, $geography_name, $parent_id, $geography_id, $r);
 			}
 		}
 		dbase_close($dbf);
@@ -49,4 +48,14 @@ function import_geography_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 	return $iReturn;
 } //doImportGeographyFromDBF
 
+function get_geography_items_count($conn, $prmGeoLevelId)
+{
+	$query = 'SELECT COUNT(*) AS C FROM Geography WHERE GeographyLevel=' . $prmGeoLevelId;
+	$count = 0;
+	foreach($conn->query($query, PDO::FETCH_ASSOC) as $row)
+	{
+		$count = $row['C'];
+	}
+	return $count;
+}
 </script>

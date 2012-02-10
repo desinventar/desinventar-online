@@ -21,9 +21,13 @@
 					<td class="header center HasMap">
 						{-#msgGeolevels_HasMap#-}
 					</td>
+					<td class="header GeoLevelLayerFile hidden">
+					</td>
 					<td class="header GeoLevelLayerCode hidden">
 					</td>
 					<td class="header GeoLevelLayerName hidden">
+					</td>
+					<td class="header GeoLevelLayerParentCode hidden">
 					</td>
 				</tr>
 			</thead>
@@ -41,9 +45,13 @@
 					<td class="HasMap">
 						<input type="checkbox" disabled="disabled" />						
 					</td>
+					<td class="GeoLevelLayerFile hidden">
+					</td>
 					<td class="GeoLevelLayerCode hidden">
 					</td>
 					<td class="GeoLevelLayerName hidden">
+					</td>
+					<td class="GeoLevelLayerParentCode hidden">
 					</td>
 				</tr>
 			</tbody>
@@ -61,6 +69,7 @@
 					<form id="frmGeolevel">
 						<h4>{-#msgGeolevels_GeoLevelSubtitle#-}</h4>
 						<input class="GeoLevelId" name="GeoLevelId" type="hidden" value="-1" />
+						<input class="GeoLevelLayerParentCode" name="GeoLevelLayerParentCode" type="hidden" value="" />
 
 						{-#msgGeolevels_GeoLevelName#-}<b class="required">*</b>
 						<br />

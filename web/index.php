@@ -493,16 +493,39 @@ switch ($cmd)
 		}
 		if ($iReturn > 0)
 		{
-		}
-
-		if ($iReturn > 0)
-		{
+			$geography_items_count = get_geography_items_count($us->q->dreg, $GeoLevelId);
+			$answer['GeographyItemsCount'] = $geography_items_count;
 			$r = new DIRegion($us, $RegionId);
 			$GeolevelsList = $r->getGeolevelList();
 			$answer['GeolevelsList'] = $GeolevelsList;
 		}
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');		
+	break;
+	case 'cmdGeolevelsImportGeography':
+		$answer = array();
+		$iReturn = ERR_NO_ERROR;
+		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($RegionId == '')
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($iReturn > 0)
+		{
+			$GeoLevel = $_POST['GeoLevel'];
+			$GeoLevelId = $GeoLevel['GeoLevelId'];
+			$File  = 'geocarto' . sprintf('%02d', $GeoLevelId) . '.dbf';
+			$DBDir = $us->getRegionDir($RegionId);
+			import_geography_from_dbf($us, $GeoLevelId, $DBDir . '/' . $File, 
+				$GeoLevel['GeoLevelLayerCode'],
+				$GeoLevel['GeoLevelLayerName'],
+				$GeoLevel['GeoLevelLayerParentCode']);
+		}
+		$answer['Status'] = $iReturn;
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
 	case 'cmdGeolevelsUpload':
 		$answer = array();

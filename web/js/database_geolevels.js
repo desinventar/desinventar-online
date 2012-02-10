@@ -15,8 +15,9 @@ function onReadyGeolevels()
 		jQuery('#frmGeolevel .GeoLevelActiveCheckbox').prop('checked', jQuery('.GeoLevelActive :input',this).is(':checked')).change().hide();
 		jQuery('#divGeolevels_Edit').show();
 		jQuery('#btnGeolevels_Add').hide();
-		jQuery('#frmGeolevel .GeoLevelLayerCode').val('');
-		jQuery('#frmGeolevel .GeoLevelLayerName').val('');
+		jQuery('#frmGeolevel .GeoLevelLayerCode').val(jQuery('.GeoLevelLayerCode', this).text());
+		jQuery('#frmGeolevel .GeoLevelLayerName').val(jQuery('.GeoLevelLayerName', this).text());
+		jQuery('#frmGeolevel .GeoLevelLayerParentCode').val(jQuery('.GeoLevelLayerParentCode', this).text());
 		jQuery('#frmGeolevel .filename').val('');
 		jQuery('#frmGeolevel .uploaded').text('');
 	}).on('mouseover', 'tr', function(event) {
@@ -119,6 +120,22 @@ function onReadyGeolevels()
 					{
 						jQuery('div.status .statusUpdateError').show();
 					}					
+					//If empty geography items, create from DBF
+					if (parseInt(data.GeographyItemsCount) == 0)
+					{
+						jQuery.post(
+							jQuery('#desinventarURL').val() + '/',
+							{
+								cmd           : 'cmdGeolevelsImportGeography',
+								RegionId      : jQuery('#desinventarRegionId').val(),
+								GeoLevel      : jQuery('#frmGeolevel').toObject()
+							},
+							function(data)
+							{
+							},
+							'json'
+						);
+					} //if
 					setTimeout(function () {
 						jQuery('div.status .status').hide();
 					}, 2500);
@@ -166,6 +183,7 @@ function doGeolevelsPopulateList(GeolevelsList)
 	jQuery('#tbodyGeolevels_List').find('tr:gt(0)').remove();
 	jQuery('#tbodyGeolevels_List').find('tr:first').hide();
 	jQuery('#tbodyGeolevels_List').find('tr').removeClass('under');
+	var GeoLevelLayerParentCode = '';
 	jQuery.each(GeolevelsList, function(index, value) {
 		var clonedRow = jQuery('#tbodyGeolevels_List tr:last').clone().show();
 		jQuery('.GeoLevelId', clonedRow).html(index);
@@ -174,6 +192,11 @@ function doGeolevelsPopulateList(GeolevelsList)
 		jQuery('.GeoLevelDesc', clonedRow).prop('title', value.GeoLevelDesc);
 		jQuery('.GeoLevelActive :input', clonedRow).prop('checked', value.GeoLevelActive>0);
 		jQuery('.HasMap :input', clonedRow).prop('checked', value.GeoLevelLayerFile != '');
+		jQuery('.GeoLevelLayerFile', clonedRow).html(value.GeoLevelLayerFile);
+		jQuery('.GeoLevelLayerCode', clonedRow).html(value.GeoLevelLayerCode);
+		jQuery('.GeoLevelLayerName', clonedRow).html(value.GeoLevelLayerName);
+		jQuery('.GeolevelLayerParentCode', clonedRow).html(GeoLevelLayerParentCode);
+		GeoLevelLayerParentCode = value.GeoLevelLayerCode;
 		jQuery('#tbodyGeolevels_List').append(clonedRow);
 	});
 	jQuery('#tblGeolevels_List .GeoLevelId').hide();
