@@ -3,7 +3,6 @@
  DesInventar - http://www.desinventar.org
  (c) 1998-2012 Corporacion OSSO
 */
-
 class DIGeography extends DIRecord {
 	public function __construct($prmSession) {
 		$this->sTableName   = "Geography";
@@ -312,7 +311,8 @@ class DIGeography extends DIRecord {
 			}
 		}
 		return $iReturn;
-	}
+	} //moveNodeTo()
+
 } //class
 
 </script>
