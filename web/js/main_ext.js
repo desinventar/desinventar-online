@@ -62,7 +62,8 @@ function doViewportCreate()
 						height: 30,
 						border: false,
 						contentEl: 'north',
-						collapsible: false
+						collapsible: false,
+						tbar: new DesInventar.Toolbar({id:'toolbar', MenuHandler: doMainMenuHandler})
 					},
 					new DesInventar.WestPanel({id:'westm', collapsible: true}),
 					{
@@ -154,8 +155,9 @@ function doMainChangeLanguage(LangIsoCode)
 
 function doMainMenuHandler(item)
 {
+	console.log(item.itemid);
 	var RegionId = jQuery('#desinventarRegionId').val();
-	switch (item.id)
+	switch (item.itemid)
 	{
 		case 'mnuUserLogin':
 		case 'mnuUserChangeLogin':
@@ -406,6 +408,21 @@ function doMainMenuCreate()
 			'-',
 			{id:'mnuHelpAbout'         , text: jQuery('span#mnuHelpAbout').text()         , handler: doMainMenuHandler }
 		]
+	});
+
+	DesInventar.Toolbar = Ext.extend(Ext.Toolbar, {
+		initComponent: function() {
+			var config = {
+				overflow: 'visible',
+				MenuHandler : function() {},
+				items: [
+					{ itemid:'mnuDemo', text: 'Demo', handler: this.MenuHandler }
+				]				
+			};
+			Ext.apply(this, config);
+			Ext.apply(this.initialConfig, config);
+			DesInventar.Toolbar.superclass.initComponent.call(this);
+		}
 	});
 	
 	var tb = new Ext.Toolbar({renderTo: 'toolbar', items : [] });
