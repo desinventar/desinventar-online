@@ -414,7 +414,6 @@ function doMainMenuCreate()
 		initComponent: function() {
 			var config = {
 				overflow: 'visible',
-				MenuHandler : function() {},
 				items: [
 					{ itemid:'mnuDemo', text: 'Demo', handler: this.MenuHandler }
 				]				
@@ -422,6 +421,24 @@ function doMainMenuCreate()
 			Ext.apply(this, config);
 			Ext.apply(this.initialConfig, config);
 			DesInventar.Toolbar.superclass.initComponent.call(this);
+			this.initializeToolbar();
+		},
+		initializeToolbar: function()
+		{
+			var mnuHelp = new Ext.menu.Menu({
+				id   : 'mnuHelp',
+				style: { overflow: 'visible' },
+				items: [
+					{itemid:'mnuHelpDocumentation' , text: jQuery('span#mnuHelpDocumentation').text() , handler: this.MenuHandler },
+					{itemid:'mnuHelpMethodology'   , text: jQuery('span#mnuHelpMethodology').text()   , handler: this.MenuHandler },
+					'-',
+					{itemid:'mnuHelpWebsite'       , text: jQuery('span#mnuHelpWebsite').text()       , handler: this.MenuHandler },
+					'-',
+					{itemid:'mnuHelpAbout'         , text: jQuery('span#mnuHelpAbout').text()         , handler: this.MenuHandler }
+				]
+			});
+			this.add({itemid:'mnuText', text:'Menu 2', handler: this.MenuHandler});
+			this.add({itemid:'mnuHelp', text: jQuery('span#mnuHelp').text(), menu: mnuHelp});
 		}
 	});
 	
