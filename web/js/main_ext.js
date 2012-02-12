@@ -424,9 +424,11 @@ function doMainMenuCreate()
 			this.add({itemid:'mnuQuery'    , text: jQuery('span#mnuQuery').text()   , menu: mnuQuery    });
 			this.add({itemid:'mnuDatacard' , text: jQuery('span#mnuDatacard').text(), menu: mnuDatacard });
 			this.add({itemid:'mnuHelp'     , text: jQuery('span#mnuHelp').text()    , menu: mnuHelp     });
-			this.add('->',{itemid: 'mnuWaiting'         , text: '<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />', hidden: true });
-			this.add('->',{itemid: 'mnuRegionLabel'     , text: '' });
+			
+			// This elements appear on reverse order on screen (?)
 			this.add('->',{itemid: 'mnuHelpWebsiteLabel', text: '<img src="' + jQuery('#desinventarURL').val() + '/images/di_logo4.png" alt="" />' });
+			this.add('->',{itemid: 'mnuRegionLabel'     , text: '' });
+			this.add('->',{itemid: 'mnuWaiting'         , text: '<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />', hidden: true });
 		}
 	});
 
