@@ -388,27 +388,7 @@ function doMainMenuCreate()
 		]
 	});
 
-	var mnuDatacard = new Ext.menu.Menu({
-		id: 'mnuDatacard', items: [
-			{id:'mnuDatacardView' , text: jQuery('span#mnuDatacardView').text() , handler: doMainMenuHandler },
-			{id:'mnuDatacardEdit' , text: jQuery('span#mnuDatacardEdit').text() , handler: doMainMenuHandler },
-			{id:'mnuDatacardSetup', text: jQuery('span#mnuDatacardSetup').text(), handler: doMainMenuHandler }
-		]
-	});
 
-
-	var mnuHelp = new Ext.menu.Menu({
-		id   : 'mnuHelp',
-		style: { overflow: 'visible' },
-		items: [
-			{id:'mnuHelpDocumentation' , text: jQuery('span#mnuHelpDocumentation').text() , handler: doMainMenuHandler },
-			{id:'mnuHelpMethodology'   , text: jQuery('span#mnuHelpMethodology').text()   , handler: doMainMenuHandler },
-			'-',
-			{id:'mnuHelpWebsite'       , text: jQuery('span#mnuHelpWebsite').text()       , handler: doMainMenuHandler },
-			'-',
-			{id:'mnuHelpAbout'         , text: jQuery('span#mnuHelpAbout').text()         , handler: doMainMenuHandler }
-		]
-	});
 
 	DesInventar.Toolbar = Ext.extend(Ext.Toolbar, {
 		initComponent: function() {
@@ -425,6 +405,13 @@ function doMainMenuCreate()
 		},
 		initializeToolbar: function()
 		{
+			var mnuDatacard = new Ext.menu.Menu({
+				id: 'mnuDatacard', items: [
+					{itemid:'mnuDatacardView' , text: jQuery('span#mnuDatacardView').text() , handler: this.MenuHandler },
+					{itemid:'mnuDatacardEdit' , text: jQuery('span#mnuDatacardEdit').text() , handler: this.MenuHandler },
+					{itemid:'mnuDatacardSetup', text: jQuery('span#mnuDatacardSetup').text(), handler: this.MenuHandler }
+				]
+			});
 			var mnuHelp = new Ext.menu.Menu({
 				id   : 'mnuHelp',
 				style: { overflow: 'visible' },
@@ -438,10 +425,12 @@ function doMainMenuCreate()
 				]
 			});
 			this.add({itemid:'mnuText', text:'Menu 2', handler: this.MenuHandler});
+			this.add({itemid:'mnuDatacard' , text: jQuery('span#mnuDatacard').text(), menu: mnuDatacard });
 			this.add({itemid:'mnuHelp', text: jQuery('span#mnuHelp').text(), menu: mnuHelp});
 		}
 	});
-	
+
+	/*
 	var tb = new Ext.Toolbar({renderTo: 'toolbar', items : [] });
 	tb.add({ id:'mnuFile'     , text: jQuery('span#mnuFile').text()    , menu: mnuFile     });
 	tb.add({ id:'mnuUser'     , text: jQuery('span#mnuUser').text()    , menu: mnuUser     });
@@ -451,6 +440,7 @@ function doMainMenuCreate()
 	tb.add('->',{id: 'mnuWaiting'         , text: '<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />', hidden: true });
 	tb.add('->',{id: 'mnuRegionLabel'     , text: '' });
 	tb.add('->',{id: 'mnuHelpWebsiteLabel', text: '<img src="' + jQuery('#desinventarURL').val() + '/images/di_logo4.png" alt="" />' });
+	*/
 
 	// Attach main events to body
 	jQuery('body').on('cmdMainWaitingShow', function() {
@@ -461,7 +451,7 @@ function doMainMenuCreate()
 	});
 
 	jQuery('body').on('cmdMainMenuUpdate', function() {
-		doMainMenuUpdate();
+		//doMainMenuUpdate(); //ENABLE
 	});
 	jQuery('body').on('cmdMainMenuResultButtonsEnable', function() {
 		if (jQuery('#DCRes').val() == 'D' || jQuery('#DCRes').val() == 'S')
