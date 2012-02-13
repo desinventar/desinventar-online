@@ -25,8 +25,8 @@ function onReadyExtJS()
 	}
 	doDialogsCreate();
 	doMainMenuCreate();
-	jQuery('body').trigger('cmdMainMenuUpdate');
 	doViewportCreate();
+	jQuery('body').trigger('cmdMainMenuUpdate');
 	doViewportShow();
 } //onReadyExtJS()
 
