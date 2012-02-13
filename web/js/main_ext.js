@@ -501,9 +501,9 @@ function doMainMenuCreate()
 
 function doMainMenuUpdate()
 {
-	/*
 	jQuery('#divMainMenu span.item').each(function() {
-		var w = Ext.getCmp(jQuery(this).attr('id'));
+		var id = jQuery(this).attr('id').replace('msg','mnu');
+		var w = Ext.getCmp(id);
 		if (w != undefined)
 		{
 			w.disable();
@@ -512,7 +512,7 @@ function doMainMenuUpdate()
 
 	// Menu items that are always enabled
 	jQuery('#divMainMenu span.clsMenuAlwaysOn').each(function() {
-		Ext.getCmp(jQuery(this).attr('id')).enable();
+		Ext.getCmp(jQuery(this).attr('id').replace('msg','mnu')).enable();
 	});
 	Ext.getCmp('mnuUser').setText(jQuery('span#msgUser').text());
 	
@@ -521,7 +521,7 @@ function doMainMenuUpdate()
 	{
 		Ext.getCmp('mnuDatacard').hide();
 		jQuery('#divMainMenu span.clsMenuWithoutUser').each(function() {
-			Ext.getCmp(jQuery(this).attr('id')).enable();
+			Ext.getCmp(jQuery(this).attr('id').replace('msg','mnu')).enable();
 		});
 		Ext.getCmp('mnuUserLogin').show();
 		Ext.getCmp('mnuUserChangeLogin').hide();
@@ -530,7 +530,7 @@ function doMainMenuUpdate()
 	{
 		Ext.getCmp('mnuDatacard').show();
 		jQuery('#divMainMenu span.clsMenuWithUser').each(function() {
-			Ext.getCmp(jQuery(this).attr('id')).enable();
+			Ext.getCmp(jQuery(this).attr('id').replace('msg','mnu')).enable();
 		});
 		Ext.getCmp('mnuUserLogin').hide();
 		Ext.getCmp('mnuUserChangeLogin').show();
@@ -564,7 +564,7 @@ function doMainMenuUpdate()
 		if (UserRoleValue > 0)
 		{
 			jQuery('#divMainMenu span.clsMenuWithRegion').each(function() {
-				Ext.getCmp(jQuery(this).attr('id')).enable();
+				Ext.getCmp(jQuery(this).attr('id').replace('msg','mnu')).enable();
 			});
 			Ext.getCmp('mnuDatacardView').show();
 			Ext.getCmp('mnuDatacardView').enable();
@@ -589,7 +589,6 @@ function doMainMenuUpdate()
 		}		
 	}
 	jQuery('body').trigger('cmdMainMenuResultButtonsDisable');
-	*/
 } //doMainMenuUpdate()
 
 function doDialogsCreate()
