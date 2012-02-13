@@ -25,8 +25,9 @@ function onReadyExtJS()
 	}
 	doDialogsCreate();
 	doMainMenuCreate();
-	jQuery('body').trigger('cmdMainMenuUpdate');
 	doViewportCreate();
+	jQuery('body').trigger('cmdMainMenuUpdate');
+	jQuery('body').trigger('cmdMainWaitingHide');
 	doViewportShow();
 } //onReadyExtJS()
 
@@ -155,9 +156,18 @@ function doMainChangeLanguage(LangIsoCode)
 
 function doMainMenuHandler(item)
 {
-	console.log(item.itemid);
+	var menuCmd = '';
+	if (item.itemid != undefined)
+	{
+		menuCmd = item.itemid;
+	}
+	if (item.id != undefined)
+	{
+		menuCmd = item.id;
+	}
+	console.log(menuCmd);
 	var RegionId = jQuery('#desinventarRegionId').val();
-	switch (item.itemid)
+	switch (menuCmd)
 	{
 		case 'mnuUserLogin':
 		case 'mnuUserChangeLogin':
@@ -341,103 +351,99 @@ function doMainMenuCreate()
 		initializeToolbar: function()
 		{
 			var mnuFileUpload = new Ext.menu.Menu({
-				id: 'mnuFileUpload', items: [
-					{itemid:'mnuFileCopy'   , text: jQuery('span#mnuFileCopy').text()   , handler: this.MenuHandler },
-					{itemid:'mnuFileReplace', text: jQuery('span#mnuFileReplace').text(), handler: this.MenuHandler }
+				items: [
+					{id:'mnuFileCopy'   , text: jQuery('span#msgFileCopy').text()   , handler: this.MenuHandler },
+					{id:'mnuFileReplace', text: jQuery('span#msgFileReplace').text(), handler: this.MenuHandler }
 				]
 			});
 			var mnuFileLanguage = new Ext.menu.Menu({
-				id: 'mnuFileLanguage',
 				items: [
-					{itemid:'mnuFileLanguageEnglish'   , text: jQuery('span#mnuFileLanguageEnglish').text()   , handler: this.MenuHandler },
-					{itemid:'mnuFileLanguageSpanish'   , text: jQuery('span#mnuFileLanguageSpanish').text()   , handler: this.MenuHandler },
-					{itemid:'mnuFileLanguagePortuguese', text: jQuery('span#mnuFileLanguagePortuguese').text(), handler: this.MenuHandler },
-					{itemid:'mnuFileLanguageFrench'    , text: jQuery('span#mnuFileLanguageFrench').text()    , handler: this.MenuHandler }
+					{id:'mnuFileLanguageEnglish'   , text: jQuery('span#msgFileLanguageEnglish').text()   , handler: this.MenuHandler },
+					{id:'mnuFileLanguageSpanish'   , text: jQuery('span#msgFileLanguageSpanish').text()   , handler: this.MenuHandler },
+					{id:'mnuFileLanguagePortuguese', text: jQuery('span#msgFileLanguagePortuguese').text(), handler: this.MenuHandler },
+					{id:'mnuFileLanguageFrench'    , text: jQuery('span#msgFileLanguageFrench').text()    , handler: this.MenuHandler }
 				]
 			});
 			
 			var mnuFile = new Ext.menu.Menu({
-				id: 'mnuFile',
 				items: [
-					{itemid:'mnuFileCreate'     , text: jQuery('span#mnuFileCreate').text()     , handler: this.MenuHandler },
-					{itemid:'mnuFileOpen'       , text: jQuery('span#mnuFileOpen').text()       , handler: this.MenuHandler },
-					{itemid:'mnuFileDownload'   , text: jQuery('span#mnuFileDownload').text()   , handler: this.MenuHandler },
-					{itemid:'mnuFileUpload'     , text: jQuery('span#mnuFileUpload').text()     , menu: mnuFileUpload       },
+					{id:'mnuFileCreate'     , text: jQuery('span#msgFileCreate').text()     , handler: this.MenuHandler },
+					{id:'mnuFileOpen'       , text: jQuery('span#msgFileOpen').text()       , handler: this.MenuHandler },
+					{id:'mnuFileDownload'   , text: jQuery('span#msgFileDownload').text()   , handler: this.MenuHandler },
+					{id:'mnuFileUpload'     , text: jQuery('span#msgFileUpload').text()     , menu: mnuFileUpload        },
 					'-',
-					{itemid:'mnuFileInfo'       , text: jQuery('span#mnuFileInfo').text()       , handler: this.MenuHandler },
-					{itemid:'mnuFileLanguage'   , text: jQuery('span#mnuFileLanguage').text()   , menu: mnuFileLanguage     },
-					{itemid:'mnuFileLogout'     , text: jQuery('span#mnuFileLogout').text()     , handler: this.MenuHandler }
+					{id:'mnuFileInfo'       , text: jQuery('span#msgFileInfo').text()       , handler: this.MenuHandler },
+					{id:'mnuFileLanguage'   , text: jQuery('span#msgFileLanguage').text()   , menu: mnuFileLanguage      },
+					{id:'mnuFileLogout'     , text: jQuery('span#msgFileLogout').text()     , handler: this.MenuHandler }
 				]
 			});
 			
 			var mnuUser = new Ext.menu.Menu({
-				id: 'mnuUser',
 				items: [
-					{itemid: 'mnuUserLogin'            , text: jQuery('span#mnuUserLogin').text()            , handler: this.MenuHandler }, 
-					{itemid: 'mnuUserChangeLogin'      , text: jQuery('span#mnuUserChangeLogin').text()      , handler: this.MenuHandler },
-					{itemid: 'mnuUserChangePasswd'     , text: jQuery('span#mnuUserChangePasswd').text()     , handler: this.MenuHandler },
-					{itemid: 'mnuUserAccountManagement', text: jQuery('span#mnuUserAccountManagement').text(), handler: this.MenuHandler }
+					{id: 'mnuUserLogin'            , text: jQuery('span#msgUserLogin').text()            , handler: this.MenuHandler }, 
+					{id: 'mnuUserChangeLogin'      , text: jQuery('span#msgUserChangeLogin').text()      , handler: this.MenuHandler },
+					{id: 'mnuUserChangePasswd'     , text: jQuery('span#msgUserChangePasswd').text()     , handler: this.MenuHandler },
+					{id: 'mnuUserAccountManagement', text: jQuery('span#msgUserAccountManagement').text(), handler: this.MenuHandler }
 				]
 			});
 
 			var mnuQueryOption = new Ext.menu.Menu({
-				id: 'mnuQueryOption', items: [
-					{itemid:'mnuQueryOptionNew'  , text: jQuery('span#mnuQueryOptionNew').text() , handler: this.MenuHandler },
-					{itemid:'mnuQueryOptionSave' , text: jQuery('span#mnuQueryOptionSave').text(), handler: this.MenuHandler },
-					{itemid:'mnuQueryOptionOpen' , text: jQuery('span#mnuQueryOptionOpen').text(), handler: this.MenuHandler }
+				items: [
+					{id:'mnuQueryOptionNew'  , text: jQuery('span#msgQueryOptionNew').text() , handler: this.MenuHandler },
+					{id:'mnuQueryOptionSave' , text: jQuery('span#msgQueryOptionSave').text(), handler: this.MenuHandler },
+					{id:'mnuQueryOptionOpen' , text: jQuery('span#msgQueryOptionOpen').text(), handler: this.MenuHandler }
 				]
 			});
 
 			var mnuQueryResultSaveAs = new Ext.menu.Menu({
-				id: 'mnuQueryResultSaveAs', items: [
-					{itemid:'mnuQueryResultSaveAsXLS', text: jQuery('span#mnuQueryResultSaveAsXLS').text(), handler: this.MenuHandler },
-					{itemid:'mnuQueryResultSaveAsCSV', text: jQuery('span#mnuQueryResultSaveAsCSV').text(), handler: this.MenuHandler }
+				items: [
+					{id:'mnuQueryResultSaveAsXLS', text: jQuery('span#msgQueryResultSaveAsXLS').text(), handler: this.MenuHandler },
+					{id:'mnuQueryResultSaveAsCSV', text: jQuery('span#msgQueryResultSaveAsCSV').text(), handler: this.MenuHandler }
 				]
 			});
 
 			var mnuQuery = new Ext.menu.Menu({
-				id: 'mnuQuery', items: [
-					{itemid:'mnuQueryViewDesign'           , text: jQuery('span#mnuQueryViewDesign').text()           , handler: this.MenuHandler },
-					{itemid:'mnuQueryViewData'             , text: jQuery('span#mnuQueryViewData').text()             , handler: this.MenuHandler },
-					{itemid:'mnuQueryViewMap'              , text: jQuery('span#mnuQueryViewMap').text()              , handler: this.MenuHandler },
-					{itemid:'mnuQueryViewGraph'            , text: jQuery('span#mnuQueryViewGraph').text()            , handler: this.MenuHandler },
-					{itemid:'mnuQueryViewStd'              , text: jQuery('span#mnuQueryViewStd').text()              , handler: this.MenuHandler },
+				items: [
+					{id:'mnuQueryViewDesign'           , text: jQuery('span#msgQueryViewDesign').text()           , handler: this.MenuHandler },
+					{id:'mnuQueryViewData'             , text: jQuery('span#msgQueryViewData').text()             , handler: this.MenuHandler },
+					{id:'mnuQueryViewMap'              , text: jQuery('span#msgQueryViewMap').text()              , handler: this.MenuHandler },
+					{id:'mnuQueryViewGraph'            , text: jQuery('span#msgQueryViewGraph').text()            , handler: this.MenuHandler },
+					{id:'mnuQueryViewStd'              , text: jQuery('span#msgQueryViewStd').text()              , handler: this.MenuHandler },
 					'-',
-					{itemid:'mnuQueryResultSave'           , text: jQuery('span#mnuQueryResultSave').text()           , handler: this.MenuHandler },
-					{itemid:'mnuQueryResultSaveAs'         , text: jQuery('span#mnuQueryResultSaveAs').text()         , menu: mnuQueryResultSaveAs },
-					{itemid:'mnuQueryResultPrint'          , text: jQuery('span#mnuQueryResultPrint').text()          , handler: this.MenuHandler },
-					{itemid:'mnuQueryOption'               , text: jQuery('span#mnuQueryOption').text()               , menu: mnuQueryOption       }
+					{id:'mnuQueryResultSave'           , text: jQuery('span#msgQueryResultSave').text()           , handler: this.MenuHandler },
+					{id:'mnuQueryResultSaveAs'         , text: jQuery('span#msgQueryResultSaveAs').text()         , menu: mnuQueryResultSaveAs },
+					{id:'mnuQueryResultPrint'          , text: jQuery('span#msgQueryResultPrint').text()          , handler: this.MenuHandler },
+					{id:'mnuQueryOption'               , text: jQuery('span#msgQueryOption').text()               , menu: mnuQueryOption       }
 				]
 			});
 			var mnuDatacard = new Ext.menu.Menu({
-				id: 'mnuDatacard', items: [
-					{itemid:'mnuDatacardEdit'    , text: jQuery('span#mnuDatacardEdit').text()    , handler: this.MenuHandler },
-					{itemid:'mnuDatacardSetup'   , text: jQuery('span#mnuDatacardSetup').text()   , handler: this.MenuHandler },
-					{itemid:'mnuDatacardSetupEnd', text: jQuery('span#mnuDatacardSetupEnd').text(), handler: this.MenuHandler }
+				items: [
+					{id:'mnuDatacardEdit'    , text: jQuery('span#msgDatacardEdit').text()    , handler: this.MenuHandler },
+					{id:'mnuDatacardSetup'   , text: jQuery('span#msgDatacardSetup').text()   , handler: this.MenuHandler },
+					{id:'mnuDatacardSetupEnd', text: jQuery('span#msgDatacardSetupEnd').text(), handler: this.MenuHandler }
 				]
 			});
 			var mnuHelp = new Ext.menu.Menu({
-				id   : 'mnuHelp',
 				style: { overflow: 'visible' },
 				items: [
-					{itemid:'mnuHelpDocumentation' , text: jQuery('span#mnuHelpDocumentation').text() , handler: this.MenuHandler },
-					{itemid:'mnuHelpMethodology'   , text: jQuery('span#mnuHelpMethodology').text()   , handler: this.MenuHandler },
+					{id:'mnuHelpDocumentation' , text: jQuery('span#msgHelpDocumentation').text() , handler: this.MenuHandler },
+					{id:'mnuHelpMethodology'   , text: jQuery('span#msgHelpMethodology').text()   , handler: this.MenuHandler },
 					'-',
-					{itemid:'mnuHelpWebsite'       , text: jQuery('span#mnuHelpWebsite').text()       , handler: this.MenuHandler },
+					{id:'mnuHelpWebsite'       , text: jQuery('span#msgHelpWebsite').text()       , handler: this.MenuHandler },
 					'-',
-					{itemid:'mnuHelpAbout'         , text: jQuery('span#mnuHelpAbout').text()         , handler: this.MenuHandler }
+					{id:'mnuHelpAbout'         , text: jQuery('span#msgHelpAbout').text()         , handler: this.MenuHandler }
 				]
 			});
-			this.add({itemid:'mnuFile'     , text: jQuery('span#mnuFile').text()    , menu: mnuFile     });
-			this.add({itemid:'mnuUser'     , text: jQuery('span#mnuUser').text()    , menu: mnuUser     });
-			this.add({itemid:'mnuQuery'    , text: jQuery('span#mnuQuery').text()   , menu: mnuQuery    });
-			this.add({itemid:'mnuDatacard' , text: jQuery('span#mnuDatacard').text(), menu: mnuDatacard });
-			this.add({itemid:'mnuHelp'     , text: jQuery('span#mnuHelp').text()    , menu: mnuHelp     });
+			this.add({id:'mnuFile'     , text: jQuery('span#msgFile').text()    , menu: mnuFile     });
+			this.add({id:'mnuUser'     , text: jQuery('span#msgUser').text()    , menu: mnuUser     });
+			this.add({id:'mnuQuery'    , text: jQuery('span#msgQuery').text()   , menu: mnuQuery    });
+			this.add({id:'mnuDatacard' , text: jQuery('span#msgDatacard').text(), menu: mnuDatacard });
+			this.add({id:'mnuHelp'     , text: jQuery('span#msgHelp').text()    , menu: mnuHelp     });
 			
 			// This elements appear on reverse order on screen (?)
-			this.add('->',{itemid: 'mnuHelpWebsiteLabel', text: '<img src="' + jQuery('#desinventarURL').val() + '/images/di_logo4.png" alt="" />' });
-			this.add('->',{itemid: 'mnuRegionLabel'     , text: '' });
-			this.add('->',{itemid: 'mnuWaiting'         , text: '<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />', hidden: true });
+			this.add('->',{id: 'mnuHelpWebsiteLabel', text: '<img src="' + jQuery('#desinventarURL').val() + '/images/di_logo4.png" alt="" />' });
+			this.add('->',{id: 'mnuRegionLabel'     , text: '' });
+			this.add('->',{id: 'mnuWaiting'         , text: '<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />', hidden: true });
 		}
 	});
 
@@ -450,7 +456,7 @@ function doMainMenuCreate()
 	});
 
 	jQuery('body').on('cmdMainMenuUpdate', function() {
-		//doMainMenuUpdate(); //ENABLE
+		doMainMenuUpdate();
 	});
 	jQuery('body').on('cmdMainMenuResultButtonsEnable', function() {
 		if (jQuery('#DCRes').val() == 'D' || jQuery('#DCRes').val() == 'S')
@@ -523,7 +529,8 @@ function doMainMenuToggle(bEnable)
 function doMainMenuDisable()
 {
 	jQuery('#divMainMenu span.item').each(function() {
-		var w = Ext.getCmp(jQuery(this).attr('id'));
+		var id = jQuery(this).attr('id').replace('msg','mnu');
+		var w = Ext.getCmp(id);
 		if (w != undefined)
 		{
 			w.disable();
@@ -544,16 +551,16 @@ function doMainMenuUpdate()
 
 	// Menu items that are always enabled
 	jQuery('#divMainMenu span.clsMenuAlwaysOn').each(function() {
-		Ext.getCmp(jQuery(this).attr('id')).enable();
+		Ext.getCmp(jQuery(this).attr('id').replace('msg','mnu')).enable();
 	});
-	Ext.getCmp('mnuUser').setText(jQuery('span#mnuUser').text());
+	Ext.getCmp('mnuUser').setText(jQuery('span#msgUser').text());
 	
 	Ext.getCmp('mnuDatacard').hide();
 	// Enable menu items when a User is logged in
 	if (jQuery('#desinventarUserId').val() == '')
 	{
 		jQuery('#divMainMenu span.clsMenuWithoutUser').each(function() {
-			Ext.getCmp(jQuery(this).attr('id')).enable();
+			Ext.getCmp(jQuery(this).attr('id').replace('msg','mnu')).enable();
 		});
 		Ext.getCmp('mnuUserLogin').show();
 		Ext.getCmp('mnuUserChangeLogin').hide();
@@ -561,11 +568,11 @@ function doMainMenuUpdate()
 	else
 	{
 		jQuery('#divMainMenu span.clsMenuWithUser').each(function() {
-			Ext.getCmp(jQuery(this).attr('id')).enable();
+			Ext.getCmp(jQuery(this).attr('id').replace('msg','mnu')).enable();
 		});
 		Ext.getCmp('mnuUserLogin').hide();
 		Ext.getCmp('mnuUserChangeLogin').show();
-		Ext.getCmp('mnuUser').setText(jQuery('span#mnuUser').text() + ' : ' + jQuery('#desinventarUserId').val());
+		Ext.getCmp('mnuUser').setText(jQuery('span#msgUser').text() + ' : ' + jQuery('#desinventarUserId').val());
 	}
 
 	// Configure which options are visible using RoleValue
@@ -599,7 +606,7 @@ function doMainMenuUpdate()
 		if (UserRoleValue > 0)
 		{
 			jQuery('#divMainMenu span.clsMenuWithRegion').each(function() {
-				Ext.getCmp(jQuery(this).attr('id')).enable();
+				Ext.getCmp(jQuery(this).attr('id').replace('msg','mnu')).enable();
 			});
 			Ext.getCmp('mnuDatacardEdit').hide();
 		}
