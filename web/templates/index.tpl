@@ -85,7 +85,6 @@
 			<div id="north">
 				<div id="toolbar"></div>
 			</div>
-
 			<!-- Query Design -->
 			<div id="divWestPanel">
 				{-include file="block_querydesign.tpl"-}
