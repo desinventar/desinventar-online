@@ -27,6 +27,7 @@ function onReadyExtJS()
 	doMainMenuCreate();
 	doViewportCreate();
 	jQuery('body').trigger('cmdMainMenuUpdate');
+	jQuery('body').trigger('cmdMainWaitingHide');
 	doViewportShow();
 } //onReadyExtJS()
 
@@ -426,9 +427,9 @@ function doMainMenuCreate()
 			this.add({itemid:'mnuHelp'     , text: jQuery('span#mnuHelp').text()    , menu: mnuHelp     });
 			
 			// This elements appear on reverse order on screen (?)
-			this.add('->',{itemid: 'mnuHelpWebsiteLabel', text: '<img src="' + jQuery('#desinventarURL').val() + '/images/di_logo4.png" alt="" />' });
-			this.add('->',{itemid: 'mnuRegionLabel'     , text: '' });
-			this.add('->',{itemid: 'mnuWaiting'         , text: '<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />', hidden: true });
+			this.add('->',{id: 'mnuHelpWebsiteLabel', text: '<img src="' + jQuery('#desinventarURL').val() + '/images/di_logo4.png" alt="" />' });
+			this.add('->',{id: 'mnuRegionLabel'     , text: '' });
+			this.add('->',{id: 'mnuWaiting'         , text: '<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />', hidden: true });
 		}
 	});
 
