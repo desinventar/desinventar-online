@@ -433,7 +433,8 @@ function doMainMenuCreate()
 			// This elements appear on reverse order on screen (?)
 			this.add('->',{id: 'mnuHelpWebsiteLabel', text: '<img src="' + jQuery('#desinventarURL').val() + '/images/di_logo4.png" alt="" />' });
 			this.add('->',{id: 'mnuRegionLabel'     , text: '' });
-			this.add('->',{id: 'mnuWaiting'         , text: '<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />', hidden: true });
+			//this.add('->',{id: 'mnuWaiting'         , text: '<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />', hidden: true });
+			this.add('->',{id: 'mnuWaiting'         , text: '' });
 		}
 	});
 
