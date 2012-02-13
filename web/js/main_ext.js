@@ -441,7 +441,7 @@ function doMainMenuCreate()
 	});
 
 	jQuery('body').on('cmdMainMenuUpdate', function() {
-		//doMainMenuUpdate(); //ENABLE
+		doMainMenuUpdate();
 	});
 	jQuery('body').on('cmdMainMenuResultButtonsEnable', function() {
 		if (jQuery('#DCRes').val() == 'D' || jQuery('#DCRes').val() == 'S')
@@ -495,6 +495,7 @@ function doMainMenuCreate()
 
 function doMainMenuUpdate()
 {
+	/*
 	jQuery('#divMainMenu span.item').each(function() {
 		var w = Ext.getCmp(jQuery(this).attr('id'));
 		if (w != undefined)
@@ -582,6 +583,7 @@ function doMainMenuUpdate()
 		}		
 	}
 	jQuery('body').trigger('cmdMainMenuResultButtonsDisable');
+	*/
 } //doMainMenuUpdate()
 
 function doDialogsCreate()
