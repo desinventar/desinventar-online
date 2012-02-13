@@ -67,7 +67,7 @@
 
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
-			//onReadyMain();
+			onReadyMain();
 			onReadyExtJS();
 		});
 	</script>
@@ -86,17 +86,17 @@
 
 		<!-- Query Design -->
 		<div id="divWestPanel">
-			{-*include file="block_querydesign.tpl"*-}
+			{-include file="block_querydesign.tpl"-}
 		</div>
 		
 		<!-- Central Content Area -->
 		<div id="container" style="heigth:100%;">
-			{-*include file="block_content.tpl"*-}
+			{-include file="block_content.tpl"-}
 		</div>
 
 		<!-- Help Section -->
 		<div id="south">
-			{-*include file="block_help.tpl"*-}
+			{-include file="block_help.tpl"-}
 		</div>
 	</div>
 	
