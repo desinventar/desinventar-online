@@ -165,7 +165,6 @@ function doMainMenuHandler(item)
 	{
 		menuCmd = item.id;
 	}
-	console.log(menuCmd);
 	var RegionId = jQuery('#desinventarRegionId').val();
 	switch (menuCmd)
 	{
