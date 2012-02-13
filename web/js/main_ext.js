@@ -352,8 +352,8 @@ function doMainMenuCreate()
 		{
 			var mnuFileUpload = new Ext.menu.Menu({
 				items: [
-					{id:'mnuFileCopy'   , text: jQuery('span#msgFileCopy').text()   , handler: this.MenuHandler },
-					{id:'mnuFileReplace', text: jQuery('span#msgFileReplace').text(), handler: this.MenuHandler }
+					{id:'mnuFileUploadCopy'   , text: jQuery('span#msgFileUploadCopy').text()   , handler: this.MenuHandler },
+					{id:'mnuFileUploadReplace', text: jQuery('span#msgFileUploadReplace').text(), handler: this.MenuHandler }
 				]
 			});
 			var mnuFileLanguage = new Ext.menu.Menu({
@@ -370,10 +370,10 @@ function doMainMenuCreate()
 					{id:'mnuFileCreate'     , text: jQuery('span#msgFileCreate').text()     , handler: this.MenuHandler },
 					{id:'mnuFileOpen'       , text: jQuery('span#msgFileOpen').text()       , handler: this.MenuHandler },
 					{id:'mnuFileDownload'   , text: jQuery('span#msgFileDownload').text()   , handler: this.MenuHandler },
-					{id:'mnuFileUpload'     , text: jQuery('span#msgFileUpload').text()     , menu: mnuFileUpload        },
+					{id:'mnuFileUpload'     , text: jQuery('span#msgFileUpload').text()     , menu: mnuFileUpload       },
 					'-',
 					{id:'mnuFileInfo'       , text: jQuery('span#msgFileInfo').text()       , handler: this.MenuHandler },
-					{id:'mnuFileLanguage'   , text: jQuery('span#msgFileLanguage').text()   , menu: mnuFileLanguage      },
+					{id:'mnuFileLanguage'   , text: jQuery('span#msgFileLanguage').text()   , menu: mnuFileLanguage     },
 					{id:'mnuFileLogout'     , text: jQuery('span#msgFileLogout').text()     , handler: this.MenuHandler }
 				]
 			});
