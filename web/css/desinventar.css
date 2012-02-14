@@ -121,6 +121,7 @@ table.col {
 .GridCellText {
 	border-right: thin solid #ccc; text-align: left;
 	font-size:11px;
+	max-width:200px;
 }
 
 .RegionInfoTitle {
