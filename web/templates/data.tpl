@@ -72,10 +72,10 @@
 										class="GridCellNumber"
 									{-/if-}>
 									{-if $i=="EffectNotes" || $i=="EffectOtherLosses" || $i=="EventNotes" || $i=="CauseNotes"-}
-										<div class="dwin" style="width:200px; height: 40px;">{-$item[$i]-}
+										<div style="height: 40px;">{-$item[$i]-}
 										</div>
 									{-elseif $i=="DisasterSource" || $i=="DisasterSiteNotes"-}
-										<div class="dwin" style="width:150px; height: 40px;">{-$item[$i]-}
+										<div style="height: 40px;">{-$item[$i]-}
 										</div>
 									{-elseif $item[$i] == -1-}
 										<input type="checkbox" checked disabled />
