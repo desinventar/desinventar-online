@@ -284,10 +284,13 @@ function doMainMenuHandler(item)
 			jQuery('#tabDatabaseConfiguration').show();
 		break;
 		case 'mnuDatacardSetupEnd':
+			jQuery('body').trigger('cmdWindowReload');
+			/*
 			doMainMenuToggle(true);
 			doMainMenuUpdate();
 			jQuery('body').trigger('cmdDatabaseLoadData');
 			doViewportShow();
+			*/
 		break;
 		case 'mnuFileCreate':
 			doDatabaseCreateShow();
@@ -511,7 +514,7 @@ function doMainMenuCreate()
 function doMainMenuToggle(bEnable)
 {
 	jQuery('#divMainMenu span.menu').each(function() {
-		var w = Ext.getCmp(jQuery(this).attr('id'));
+		var w = Ext.getCmp(jQuery(this).attr('id').replace('msg','mnu'));
 		if (w != undefined)
 		{
 			if (bEnable)
@@ -537,7 +540,7 @@ function doMainMenuDisable()
 		}
 	});
 	jQuery('#divMainMenu span.submenu').each(function() {
-		var w = Ext.getCmp(jQuery(this).attr('id'));
+		var w = Ext.getCmp(jQuery(this).attr('id').replace('msg','mnu'));
 		if (w != undefined)
 		{
 			w.disable();
