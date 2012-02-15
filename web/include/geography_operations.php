@@ -54,7 +54,7 @@ function import_geography_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 	return $iReturn;
 } //import_geography_from_dbf
 
-function get_geography_fields($prmFilename)
+function get_dbf_fields($prmFilename)
 {
 	$dbf = dbase_open($prmFilename, 'r');
 	$header = dbase_get_header_info($dbf);

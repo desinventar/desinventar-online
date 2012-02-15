@@ -92,21 +92,27 @@
 								<td>
 									<span title="{-#msgGeocarto_NameTooltip#-}">{-#msgGeocarto_Name#-}</span>
 									<br />
-									<input class="GeoLevelLayerName" name="GeoLevelLayerName" type="text" size="30" value="" /><br />
+									<select class="GeoLevelLayerName" name="GeoLevelLayerName">
+										<option value="">---</option>
+									</select>
 								</td>
 							</tr>
 							<tr>
 								<td>
 									<span title="{-#msgGeocarto_CodeTooltip#-}">{-#msgGeocarto_Code#-}</span>
 									<br />
-									<input class="GeoLevelLayerCode" name="GeoLevelLayerCode" type="text" size="30" value="" /><br />
+									<select class="GeoLevelLayerCode" name="GeoLevelLayerCode">
+										<option value="">---</option>
+									</select>
 								</td>
 							</tr>
 							<tr>
 								<td>
 									<span title="-#msgGeocarto_ParentCodeTooltip#-}">{-#msgGeocarto_ParentCode#-}</span>
 									<br />
-									<input class="GeoLevelLayerParentCode" name="GeoLevelLayerParentCode" type="text" size="30" value="" /><br />
+									<select class="GeoLevelLayerParentCode" name="GeoLevelLayerParentCode">
+										<option value="">---</option>
+									</select>
 								</td>
 							</tr>
 						</table>

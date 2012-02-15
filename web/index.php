@@ -560,6 +560,12 @@ switch ($cmd)
 				$iReturn = ERR_NO_ERROR;
 				$filename = $answer['filename'];
 				$answer['filename_orig'] = getParameter('qqfile','');
+	
+				$path_info = pathinfo($filename);
+				if (strtolower($path_info['extension']) == 'dbf')
+				{
+					$answer['DBFFields'] = get_dbf_fields($OutDir . '/' . $filename);
+				}
 			} //if
 		} //if
 		if ($answer['success'] == false)
