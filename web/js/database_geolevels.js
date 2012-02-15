@@ -201,7 +201,8 @@ function doGeolevelsPopulateList(GeolevelsList)
 		jQuery('.GeoLevelDesc', clonedRow).html(value.GeoLevelDesc.substring(0,150));
 		jQuery('.GeoLevelDesc', clonedRow).prop('title', value.GeoLevelDesc);
 		jQuery('.GeoLevelActive :input', clonedRow).prop('checked', value.GeoLevelActive>0);
-		jQuery('.HasMap :input', clonedRow).prop('checked', value.GeoLevelLayerFile != '');
+		var HasMap = ((value.GeoLevelLayerFile != undefined) && (value.GeoLevelLayerFile != ''));
+		jQuery('.HasMap :input', clonedRow).prop('checked', HasMap);
 		jQuery('.GeoLevelLayerFile', clonedRow).html(value.GeoLevelLayerFile);
 		jQuery('.GeoLevelLayerCode', clonedRow).html(value.GeoLevelLayerCode);
 		jQuery('.GeoLevelLayerName', clonedRow).html(value.GeoLevelLayerName);
