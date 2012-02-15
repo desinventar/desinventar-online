@@ -12,6 +12,7 @@ function import_geography_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 	}
 	if ($iReturn > 0)
 	{
+		$item_count = 0;
 		$parent_cache = array();
 		$dbf = dbase_open($prmFilename, 'r');
 		for($i = 1; $i <= dbase_numrecords($dbf); $i++)
@@ -42,6 +43,7 @@ function import_geography_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 				$o->setGeographyId($parent_id);
 				$r = $o->insert();
 				$geography_id = $o->get('GeographyId');
+				$item_count++;
 			}
 		}
 		dbase_close($dbf);

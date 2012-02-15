@@ -69,7 +69,7 @@
 					<form id="frmGeolevel">
 						<h4>{-#msgGeolevels_GeoLevelSubtitle#-}</h4>
 						<input class="GeoLevelId" name="GeoLevelId" type="hidden" value="-1" />
-						<input class="GeoLevelLayerParentCode" name="GeoLevelLayerParentCode" type="hidden" value="" />
+						<input class="GeoLevelLayerParentCode" name="GeoLevel[GeoLevelLayerParentCode]" type="hidden" value="" />
 
 						{-#msgGeolevels_GeoLevelName#-}<b class="required">*</b>
 						<br />
