@@ -3241,6 +3241,18 @@
 			<Text LangIsoCode="por">Este é o nome da coluna com o código de identificação para as unidades geográficas (ie Código ou Id)</Text>
 			<Text LangIsoCode="fre">C'est le nom de la colonne avec le code d'identification pour les unités géographiques (code soit ou Id)</Text>
 		</Message>
+		<Message id="msgGeocarto_ParentCode">
+			<Text LangIsoCode="eng">Column of parent code</Text>
+			<Text LangIsoCode="spa">Columna de código padre</Text>
+			<Text LangIsoCode="por">Coluna de códigos pai</Text>
+			<Text LangIsoCode="fre">Colonne de code parent</Text>
+		</Message>
+		<Message id="msgGeocarto_ParentCodeTooltip">
+			<Text LangIsoCode="eng"></Text>
+			<Text LangIsoCode="spa"></Text>
+			<Text LangIsoCode="por"></Text>
+			<Text LangIsoCode="fre"></Text>
+		</Message>
 		<Message id="msgGeocarto_Name">
 			<Text LangIsoCode="eng">Column of name</Text>
 			<Text LangIsoCode="spa">Columna de nombre</Text>

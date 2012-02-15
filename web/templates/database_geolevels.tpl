@@ -69,7 +69,6 @@
 					<form id="frmGeolevel">
 						<h4>{-#msgGeolevels_GeoLevelSubtitle#-}</h4>
 						<input class="GeoLevelId" name="GeoLevelId" type="hidden" value="-1" />
-						<input class="GeoLevelLayerParentCode" name="GeoLevelLayerParentCode]" type="hidden" value="" />
 
 						{-#msgGeolevels_GeoLevelName#-}<b class="required">*</b>
 						<br />
@@ -91,6 +90,13 @@
 						<table border="0" width="100%">
 							<tr>
 								<td>
+									<span title="{-#msgGeocarto_NameTooltip#-}">{-#msgGeocarto_Name#-}</span>
+									<br />
+									<input class="GeoLevelLayerName" name="GeoLevelLayerName" type="text" size="30" value="" /><br />
+								</td>
+							</tr>
+							<tr>
+								<td>
 									<span title="{-#msgGeocarto_CodeTooltip#-}">{-#msgGeocarto_Code#-}</span>
 									<br />
 									<input class="GeoLevelLayerCode" name="GeoLevelLayerCode" type="text" size="30" value="" /><br />
@@ -98,9 +104,9 @@
 							</tr>
 							<tr>
 								<td>
-									<span title="{-#msgGeocarto_NameTooltip#-}">{-#msgGeocarto_Name#-}</span>
+									<span title="-#msgGeocarto_ParentCodeTooltip#-}">{-#msgGeocarto_ParentCode#-}</span>
 									<br />
-									<input class="GeoLevelLayerName" name="GeoLevelLayerName" type="text" size="30" value="" /><br />
+									<input class="GeoLevelLayerParentCode" name="GeoLevelLayerParentCode" type="text" size="30" value="" /><br />
 								</td>
 							</tr>
 						</table>

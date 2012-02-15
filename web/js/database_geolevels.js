@@ -15,9 +15,9 @@ function onReadyGeolevels()
 		jQuery('#frmGeolevel .GeoLevelActiveCheckbox').prop('checked', jQuery('.GeoLevelActive :input',this).is(':checked')).change().hide();
 		jQuery('#divGeolevels_Edit').show();
 		jQuery('#btnGeolevels_Add').hide();
-		jQuery('#frmGeolevel .GeoLevelLayerCode').val(jQuery('.GeoLevelLayerCode', this).text());
-		jQuery('#frmGeolevel .GeoLevelLayerName').val(jQuery('.GeoLevelLayerName', this).text());
-		jQuery('#frmGeolevel .GeoLevelLayerParentCode').val(jQuery('.GeoLevelLayerParentCode', this).text());
+		jQuery('#frmGeolevel .GeoLevelLayerName').val('');
+		jQuery('#frmGeolevel .GeoLevelLayerCode').val('');
+		jQuery('#frmGeolevel .GeoLevelLayerParentCode').val('');
 		jQuery('#frmGeolevel .filename').val('');
 		jQuery('#frmGeolevel .uploaded').text('');
 	}).on('mouseover', 'tr', function(event) {
@@ -61,6 +61,11 @@ function onReadyGeolevels()
 		jQuery(':input', this).each(function() {
 			jQuery(this).val(jQuery.trim(jQuery(this).val()));
 		});
+
+		jQuery('#frmGeolevel .GeoLevelLayerCode').val(jQuery('#frmGeolevel .GeoLevelLayerCode').val().toUpperCase());
+		jQuery('#frmGeolevel .GeoLevelLayerParentCode').val(jQuery('#frmGeolevel .GeoLevelLayerParentCode').val().toUpperCase());
+		jQuery('#frmGeolevel .GeoLevelLayerName').val(jQuery('#frmGeolevel .GeoLevelLayerName').val().toUpperCase());
+
 		if (bContinue && jQuery.trim(jQuery('#frmGeolevel .GeoLevelName').val()) == '')
 		{
 			jQuery('#frmGeolevel .GeoLevelName').highlight();
@@ -196,7 +201,6 @@ function doGeolevelsPopulateList(GeolevelsList)
 	jQuery('#tbodyGeolevels_List').find('tr:gt(0)').remove();
 	jQuery('#tbodyGeolevels_List').find('tr:first').hide();
 	jQuery('#tbodyGeolevels_List').find('tr').removeClass('under');
-	var GeoLevelLayerParentCode = '';
 	jQuery.each(GeolevelsList, function(index, value) {
 		var clonedRow = jQuery('#tbodyGeolevels_List tr:last').clone().show();
 		jQuery('.GeoLevelId', clonedRow).html(index);
@@ -207,9 +211,6 @@ function doGeolevelsPopulateList(GeolevelsList)
 		var HasMap = ((value.GeoLevelLayerFile != undefined) && (value.GeoLevelLayerFile != ''));
 		jQuery('.HasMap :input', clonedRow).prop('checked', HasMap);
 		jQuery('.GeoLevelLayerFile', clonedRow).html(value.GeoLevelLayerFile);
-		jQuery('.GeoLevelLayerCode', clonedRow).html(value.GeoLevelLayerCode);
-		jQuery('.GeoLevelLayerName', clonedRow).html(value.GeoLevelLayerName);
-		jQuery('.GeoLevelLayerParentCode', clonedRow).html(GeoLevelLayerParentCode);
 		GeoLevelLayerParentCode = value.GeoLevelLayerCode;
 		jQuery('#tbodyGeolevels_List').append(clonedRow);
 	});
