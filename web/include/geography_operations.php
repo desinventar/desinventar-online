@@ -43,13 +43,16 @@ function import_geography_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 				$o->setGeographyId($parent_id);
 				$r = $o->insert();
 				$geography_id = $o->get('GeographyId');
-				$item_count++;
+				if ($r > 0)
+				{
+					$item_count++;
+				}
 			}
 		}
 		dbase_close($dbf);
 	}
 	return $iReturn;
-} //doImportGeographyFromDBF
+} //import_geography_from_dbf
 
 function get_geography_items_count($conn, $prmGeoLevelId)
 {
