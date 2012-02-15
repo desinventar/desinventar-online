@@ -14,6 +14,7 @@ function onReadyGeolevels()
 		jQuery('#frmGeolevel .GeoLevelActiveLabel').hide();
 		jQuery('#frmGeolevel .GeoLevelActiveCheckbox').prop('checked', jQuery('.GeoLevelActive :input',this).is(':checked')).change().hide();
 		jQuery('#divGeolevels_Edit').show();
+		jQuery('#divGeolevels_Edit .GeocartoEdit').show();
 		jQuery('#btnGeolevels_Add').hide();
 		jQuery('#frmGeolevel .GeoLevelLayerName').val('');
 		jQuery('#frmGeolevel .GeoLevelLayerCode').val('');
@@ -28,12 +29,20 @@ function onReadyGeolevels()
 
 	jQuery('#btnGeolevels_Add').click(function() {
 		jQuery('#divGeolevels_Edit').show();
+
+		jQuery('#divGeolevels_Edit .GeocartoEdit').hide();
+		jQuery('#frmGeolevel .GeoLevelLayerName').val('');
+		jQuery('#frmGeolevel .GeoLevelLayerCode').val('');
+		jQuery('#frmGeolevel .GeoLevelLayerParentCode').val('');
+		jQuery('#frmGeolevel .filename').val('');
+		
 		jQuery(this).hide();
 		jQuery('#frmGeolevel .GeoLevelId').val('-1');
 		jQuery('#frmGeolevel .GeoLevelName').val('');
 		jQuery('#frmGeolevel .GeoLevelDesc').val('');
 		jQuery('#frmGeolevel .GeoLevelActiveLabel').hide();
 		jQuery('#frmGeolevel .GeoLevelActiveCheckbox').prop('checked', true).change().hide();
+		
 	});
 
 	jQuery('#frmGeolevel .btnSave').click(function() {
