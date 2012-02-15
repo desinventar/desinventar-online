@@ -219,6 +219,15 @@ function doGeolevelsPopulateList(GeolevelsList)
 	jQuery('#tbodyGeolevels_List tr:even').addClass('under');
 } //doGeolevelsPopulateList()
 
+function doGeolevelsPopulateFieldList(prmSelector, prmValues)
+{
+	jQuery(prmSelector).empty();
+	jQuery(prmSelector).append(jQuery('<option>', { value : '' }).text('--'));
+	jQuery.each(prmValues, function(key, value) {
+		jQuery(prmSelector).append(jQuery('<option>', { value : value }).text(value));
+	});
+}
+
 function doGeolevelsUploaderCreate()
 {
 	jQuery('#frmGeolevel tr.FileUploader').each(function() {
@@ -267,6 +276,12 @@ function doGeolevelsUploaderCreate()
 					jQuery('.filename', row).val(data.filename);
 					jQuery('.uploaded', row).text(data.filename_orig).show();
 					jQuery('div.status .statusuploadOk').show();
+					if (data.DBFFields != undefined)
+					{
+						doGeolevelsPopulateFieldList('#frmGeolevel .GeoLevelLayerName', data.DBFFields);
+						doGeolevelsPopulateFieldList('#frmGeolevel .GeoLevelLayerCode', data.DBFFields);
+						doGeolevelsPopulateFieldList('#frmGeolevel .GeoLevelLayerParentCode', data.DBFFields);
+					}
 					setTimeout(function() {
 						jQuery('div.status .status').hide();
 					}, 2000);
