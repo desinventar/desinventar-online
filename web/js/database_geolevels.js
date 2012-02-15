@@ -58,6 +58,9 @@ function onReadyGeolevels()
 
 	jQuery('#frmGeolevel').submit(function() {
 		var bContinue = true;
+		jQuery(':input', this).each(function() {
+			jQuery(this).val(jQuery.trim(jQuery(this).val()));
+		});
 		if (bContinue && jQuery.trim(jQuery('#frmGeolevel .GeoLevelName').val()) == '')
 		{
 			jQuery('#frmGeolevel .GeoLevelName').highlight();
@@ -119,7 +122,7 @@ function onReadyGeolevels()
 					else
 					{
 						jQuery('div.status .statusUpdateError').show();
-					}					
+					}
 					//If empty geography items, create from DBF
 					if (parseInt(data.GeographyItemsCount) == 0)
 					{
