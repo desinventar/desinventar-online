@@ -4,7 +4,7 @@
  (c) 1998-2012 Corporacion OSSO
 */
 function import_geography_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $prmCode, $prmName, $prmParentCode)
-{
+{	
 	$iReturn = ERR_NO_ERROR;
 	if (! file_exists($prmFilename))
 	{	
@@ -53,6 +53,19 @@ function import_geography_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 	}
 	return $iReturn;
 } //import_geography_from_dbf
+
+function get_geography_fields($prmFilename)
+{
+	$dbf = dbase_open($prmFilename, 'r');
+	$header = dbase_get_header_info($dbf);
+	$field_list = array();
+	foreach($header as $field)
+	{
+		$field_list[] = $field['name'];
+	}
+	dbase_close($dbf);
+	return $field_list;
+}
 
 function get_geography_items_count($conn, $prmGeoLevelId)
 {
