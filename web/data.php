@@ -194,6 +194,16 @@ if (isset($post['page']) || isset($post['_D+cmd']))
 			$t->assign('dislist', $dl);
 			$t->assign('ctl_dislist', true);
 		} //else
+		$data_header = array();
+		foreach($sel as $key => $field_id)
+		{
+			
+			$data_header[$key] = array(
+				'field' => $field_id,
+				'label' => $dk[$field_id]
+			);
+		}
+		$t->assign('data_header', $data_header);
 	} //if
 } //if
 $time_end = microtime_float();
