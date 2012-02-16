@@ -73,6 +73,7 @@ button {
 	height: 24px;
 	line-height: 24px;
 	width: auto;
+	overflow:visible;
 }
 button.rounded {
 	background: transparent url(../images/bright_off.png ) no-repeat scroll right top;
