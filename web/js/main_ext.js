@@ -44,11 +44,26 @@ function doViewportCreate()
 				title: jQuery('#msgQueryDesignTitle').text(),
 				autoScroll: true,
 				margins:'0 2 0 0',
-				contentEl: 'divWestPanel'
+				contentEl: 'divWestPanel',
+				lockedPanel: false,
+				listeners: {
+					'beforecollapse': function() {
+						return ! this.lockedPanel;
+					},
+					'beforeexpand': function() {
+						return ! this.lockedPanel;
+					}
+				}
 			};
 			Ext.apply(this, config);
 			Ext.apply(this.initialConfig, config);
 			DesInventar.WestPanel.superclass.initComponent.call(this);
+		},
+		lockPanel: function() {
+			this.lockedPanel = true;
+		},
+		unlockPanel: function() {
+			this.lockedPanel = false;
 		}
 	});
 	DesInventar.Viewport = Ext.extend(Ext.Viewport, {
@@ -272,6 +287,7 @@ function doMainMenuHandler(item)
 		break;
 		case 'mnuDatacardSetup':
 			hideQueryDesign();
+			Ext.getCmp('westm').lockPanel();
 			doMainMenuToggle(false);
 			Ext.getCmp('mnuDatacard').enable();
 			Ext.getCmp('mnuDatacardEdit').hide();
@@ -284,6 +300,7 @@ function doMainMenuHandler(item)
 			jQuery('#tabDatabaseConfiguration').show();
 		break;
 		case 'mnuDatacardSetupEnd':
+			Ext.getCmp('westm').unlockPanel();
 			jQuery('body').trigger('cmdWindowReload');
 			/*
 			doMainMenuToggle(true);
