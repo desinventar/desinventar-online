@@ -88,36 +88,6 @@
 						<div class="GeocartoEdit">
 							<h4>{-#msgGeocarto_Subtitle#-}</h4>
 							<table border="0" width="100%">
-								<tr>
-									<td>
-										<span title="{-#msgGeocarto_NameTooltip#-}">{-#msgGeocarto_Name#-}</span>
-										<br />
-										<select class="GeoLevelLayerName" name="GeoLevelLayerName">
-											<option value="">---</option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<span title="{-#msgGeocarto_CodeTooltip#-}">{-#msgGeocarto_Code#-}</span>
-										<br />
-										<select class="GeoLevelLayerCode" name="GeoLevelLayerCode">
-											<option value="">---</option>
-										</select>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<span title="-#msgGeocarto_ParentCodeTooltip#-}">{-#msgGeocarto_ParentCode#-}</span>
-										<br />
-										<select class="GeoLevelLayerParentCode" name="GeoLevelLayerParentCode">
-											<option value="">---</option>
-										</select>
-									</td>
-								</tr>
-							</table>
-							<br />
-							<table border="0" width="100%">
 								<tr class="FileUploader" data-ext="dbf">
 									<td>
 										{-#msgGeocarto_File#-} (DBF)
@@ -179,6 +149,39 @@
 									</td>
 								</tr>
 							</table>
+							<table border="0" width="100%">
+								<tr>
+									<td>
+										<span title="{-#msgGeocarto_NameTooltip#-}">{-#msgGeocarto_Name#-}</span>
+									</td>
+									<td>
+										<select class="GeoLevelLayerName" name="GeoLevelLayerName">
+											<option value="">---</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<span title="{-#msgGeocarto_CodeTooltip#-}">{-#msgGeocarto_Code#-}</span>
+									</td>
+									<td>
+										<select class="GeoLevelLayerCode" name="GeoLevelLayerCode">
+											<option value="">---</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<span title="{-#msgGeocarto_ParentCodeTooltip#-}">{-#msgGeocarto_ParentCode#-}</span>
+									</td>
+									<td>
+										<select class="GeoLevelLayerParentCode" name="GeoLevelLayerParentCode">
+											<option value="">---</option>
+										</select>
+									</td>
+								</tr>
+							</table>
+							<br />
 						</div>
 						<div class="center">
 							<a class="button btnSave"><span>{-#msgGeolevels_Save#-}</span></a>
