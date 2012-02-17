@@ -52,11 +52,21 @@ function doViewportCreate()
 					},
 					'beforeexpand': function() {
 						return ! this.lockedPanel;
+					},
+					'expand': function() {
+						this.setTitle(this.deftitle);
+						this.setWidth(this.defwidth);
+					},
+					'collapse':function() {
+						this.setWidth(0);
+						this.setTitle('');
 					}
 				}
 			};
 			Ext.apply(this, config);
 			Ext.apply(this.initialConfig, config);
+			this.defwidth = this.width;
+			this.deftitle = this.title;
 			DesInventar.WestPanel.superclass.initComponent.call(this);
 		},
 		lockPanel: function() {
