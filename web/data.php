@@ -197,10 +197,20 @@ if (isset($post['page']) || isset($post['_D+cmd']))
 		$data_header = array();
 		foreach($sel as $key => $field_id)
 		{
-			
+			$field_type = 'NUMBER';
+			if (in_array($field_id, array(
+				'DisasterSerial', 'DisasterBeginTime',
+				'EventName', 'GeographyFQName', 
+				'DisasterSiteNotes', 'DisasterSource',
+				'EffectNotes', 'EffectOtherLosses', 
+				'CauseName', 'CauseNotes')))
+			{
+				$field_type = 'TEXT';
+			}
 			$data_header[$key] = array(
 				'field' => $field_id,
-				'label' => $dk[$field_id]
+				'label' => $dk[$field_id],
+				'type'  => $field_type
 			);
 		}
 		$t->assign('data_header', $data_header);
