@@ -447,7 +447,15 @@ switch ($cmd)
 			}
 			else
 			{
-				$GeoLevelId = $o->getMaxGeoLevel() + 1;
+				$GeoLevelId = $o->getMaxGeoLevel();
+				if ($GeoLevelId < 0)
+				{
+					$GeoLevelId = 0;
+				}
+				else
+				{
+					$GeoLevelId = $GeoLevelId + 1;
+				}
 				$o->set('GeoLevelId', $GeoLevelId);
 				$iReturn = $o->insert();
 			}
