@@ -5,15 +5,15 @@
 		<tr>
 			<td colspan="3">
 				<div style="height:40px;" class="dwin">
-					{-foreach key=k item=i from=$qdet-}
-						{-if $k == "GEO"-}<b>{-#geo#-}:</b> {-$i-}; {-/if-}
-						{-if $k == "EVE"-}<b>{-#eve#-}:</b> {-$i-}; {-/if-}
-						{-if $k == "CAU"-}<b>{-#cau#-}:</b> {-$i-}; {-/if-}
-						{-if $k == "EFF"-}<b>{-#eff#-}:</b> {-$i-}; {-/if-}
-						{-if $k == "BEG"-}<b>{-#beg#-}:</b> {-$i-}; {-/if-}
-						{-if $k == "END"-}<b>{-#end#-}:</b> {-$i-}; {-/if-}
-						{-if $k == "SOU"-}<b>{-#sou#-}:</b> {-$i-}; {-/if-}
-						{-if $k == "SER"-}<b>{-#ser#-}:</b> {-$i-}; {-/if-}
+					{-foreach $qdet as $key => $value-}
+						{-if $key == "GEO"-}<b>{-#geo#-}:</b> {-$value-}; {-/if-}
+						{-if $key == "EVE"-}<b>{-#eve#-}:</b> {-$value-}; {-/if-}
+						{-if $key == "CAU"-}<b>{-#cau#-}:</b> {-$value-}; {-/if-}
+						{-if $key == "EFF"-}<b>{-#eff#-}:</b> {-$value-}; {-/if-}
+						{-if $key == "BEG"-}<b>{-#beg#-}:</b> {-$value-}; {-/if-}
+						{-if $key == "END"-}<b>{-#end#-}:</b> {-$value-}; {-/if-}
+						{-if $key == "SOU"-}<b>{-#sou#-}:</b> {-$value-}; {-/if-}
+						{-if $key == "SER"-}<b>{-#ser#-}:</b> {-$value-}; {-/if-}
 					{-/foreach-}
 				</div>
 			</td>
@@ -41,13 +41,12 @@
 		<thead>
 			<tr>
 				<th class="header">{-#trow#-}</th>
-				{-foreach name=sel key=key item=item from=$sel-}
-					{-strip-}
-						{-if $item != "DisasterId"-}
-							<th class="header">{-$dk.$item-}
-							</th>
-						{-/if-}
-					{-/strip-}
+				{-foreach $data_header as $header-}
+					{-if $item != "DisasterId"-}
+						<th class="header">
+							{-$header.label-}
+						</th>
+					{-/if-}
 				{-/foreach-}
 			</tr>
 		</thead>
@@ -55,33 +54,33 @@
 {-/if-}
 {-*** SHOW RESULT LIST: PAGING ***-}
 {-if $ctl_dislist-}
-			{-foreach name=dl key=key item=item from=$dislist-}
+			{-foreach $dislist as $row-}
 				<tr class="ViewData">
 					<td>
 						<a href="#" class="linkGridGotoCard" 
-							disasterid="{-$item.DisasterId-}"
-							rowindex="{-$smarty.foreach.dl.iteration-}">{-$offset+$smarty.foreach.dl.iteration-}</a>
+							disasterid="{-$row.DisasterId-}"
+							rowindex="{-$row@iteration-}">{-$offset+$row@iteration-}</a>
 					</td>
-					{-foreach name=sel key=k item=i from=$sel-}
+					{-foreach $sel as $field_id-}
 						{-strip-}
-							{-if $i != "DisasterId"-}
-								<td {-if $i=="DisasterSerial" || $i=="DisasterBeginTime" || $i=="EventName" || $i=="GeographyFQName" || 
-								         $i=="DisasterSiteNotes" || $i=="DisasterSource" || $i=="EffectNotes" || $i=="EffectOtherLosses" || $i=="CauseName" || $i=="CauseNotes"-}
+							{-if $field_id != "DisasterId"-}
+								<td {-if $field_id=="DisasterSerial" || $field_id=="DisasterBeginTime" || $field_id=="EventName" || $field_id=="GeographyFQName" || 
+								         $field_id=="DisasterSiteNotes" || $field_id=="DisasterSource" || $field_id=="EffectNotes" || $field_id=="EffectOtherLosses" || $field_id=="CauseName" || $field_id=="CauseNotes"-}
 								         class="GridCellText"
 									{-else-}
 										class="GridCellNumber"
 									{-/if-}>
-									{-if $i=="EffectNotes" || $i=="EffectOtherLosses" || $i=="EventNotes" || $i=="CauseNotes"-}
-										<div class="dwin" style="width:200px; height: 40px;">{-$item[$i]-}
+									{-if $field_id=="EffectNotes" || $field_id=="EffectOtherLosses" || $field_id=="EventNotes" || $field_id=="CauseNotes"-}
+										<div class="dwin" style="width:200px; height: 40px;">{-$row[$field_id]-}
 										</div>
-									{-elseif $i=="DisasterSource" || $i=="DisasterSiteNotes"-}
-										<div class="dwin" style="width:150px; height: 40px;">{-$item[$i]-}
+									{-elseif $field_id=="DisasterSource" || $field_id=="DisasterSiteNotes"-}
+										<div class="dwin" style="width:150px; height: 40px;">{-$row[$field_id]-}
 										</div>
-									{-elseif $item[$i] == -1-}
+									{-elseif $row[$field_id] == -1-}
 										<input type="checkbox" checked disabled />
-									{-elseif $item[$i] == -2-}?
+									{-elseif $row[$field_id] == -2-}?
 									{-else-}
-										{-$item[$i]-}
+										{-$row[$field_id]-}
 									{-/if-}
 								</td>
 							{-/if-}
@@ -101,17 +100,5 @@
 		<input type="hidden" id="prmDataPageCount"   value="{-$NumberOfPages-}"  />
 		<input type="hidden" id="prmDataQueryDef"    value="{-$sql-}"            />
 		<input type="hidden" id="prmDataFieldList"   value="{-$fld-}"            />
-	</div>
-	<div id="divDataQueryDetails" style="display:none;">
-		{-foreach key=k item=i from=$qdet-}
-			{-if $k == "GEO"-}<b>{-#geo#-}:</b> {-$i-}; {-/if-}
-			{-if $k == "EVE"-}<b>{-#eve#-}:</b> {-$i-}; {-/if-}
-			{-if $k == "CAU"-}<b>{-#cau#-}:</b> {-$i-}; {-/if-}
-			{-if $k == "EFF"-}<b>{-#eff#-}:</b> {-$i-}; {-/if-}
-			{-if $k == "BEG"-}<b>{-#beg#-}:</b> {-$i-}; {-/if-}
-			{-if $k == "END"-}<b>{-#end#-}:</b> {-$i-}; {-/if-}
-			{-if $k == "SOU"-}<b>{-#sou#-}:</b> {-$i-}; {-/if-}
-			{-if $k == "SER"-}<b>{-#ser#-}:</b> {-$i-}; {-/if-}
-		{-/foreach-}
 	</div>
 {-/if-}
