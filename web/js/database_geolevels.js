@@ -30,7 +30,7 @@ function onReadyGeolevels()
 	jQuery('#btnGeolevels_Add').click(function() {
 		jQuery('#divGeolevels_Edit').show();
 
-		jQuery('#divGeolevels_Edit .GeocartoEdit').hide();
+		//jQuery('#divGeolevels_Edit .GeocartoEdit').hide();
 		jQuery('#frmGeolevel .GeoLevelLayerName').val('');
 		jQuery('#frmGeolevel .GeoLevelLayerCode').val('');
 		jQuery('#frmGeolevel .GeoLevelLayerParentCode').val('');
@@ -128,43 +128,45 @@ function onReadyGeolevels()
 					jQuery('body').trigger('cmdMainWaitingHide');
 					if (parseInt(data.Status) > 0)
 					{
+						jQuery('#frmGeolevel .GeoLevelId').val(data.GeoLevelId);
 						jQuery('#divGeolevels_Edit').hide();
 						jQuery('#btnGeolevels_Add').show();
 						jQuery('div.status .statusUpdateOk').show();
 						doGeolevelsPopulateList(data.GeolevelsList);
+
+						//If empty geography items, create from DBF
+						if (parseInt(data.GeographyItemsCount) == 0)
+						{
+							jQuery('div.status span.status').hide();
+							jQuery('div.status span.statusCreatingGeography').show();
+							jQuery.post(
+								jQuery('#desinventarURL').val() + '/',
+								{
+									cmd           : 'cmdGeolevelsImportGeography',
+									RegionId      : jQuery('#desinventarRegionId').val(),
+									GeoLevel      : jQuery('#frmGeolevel').toObject()
+								},
+								function(data)
+								{
+									jQuery('div.status span.statusCreatingGeography').hide();
+									jQuery('div.status .statusUpdateOk').show();
+									setTimeout(function () {
+										jQuery('div.status span.status').hide();
+									}, 3000);
+								},
+								'json'
+							);
+						}
+						else
+						{
+							setTimeout(function () {
+								jQuery('div.status span.status').hide();
+							}, 2500);
+						}
 					}
 					else
 					{
 						jQuery('div.status .statusUpdateError').show();
-					}
-					//If empty geography items, create from DBF
-					if (parseInt(data.GeographyItemsCount) == 0)
-					{
-						jQuery('div.status span.status').hide();
-						jQuery('div.status span.statusCreatingGeography').show();
-						jQuery.post(
-							jQuery('#desinventarURL').val() + '/',
-							{
-								cmd           : 'cmdGeolevelsImportGeography',
-								RegionId      : jQuery('#desinventarRegionId').val(),
-								GeoLevel      : jQuery('#frmGeolevel').toObject()
-							},
-							function(data)
-							{
-								jQuery('div.status span.statusCreatingGeography').hide();
-								jQuery('div.status .statusUpdateOk').show();
-								setTimeout(function () {
-									jQuery('div.status span.status').hide();
-								}, 3000);
-							},
-							'json'
-						);
-					}
-					else
-					{
-						setTimeout(function () {
-							jQuery('div.status span.status').hide();
-						}, 2500);
 					}
 				},
 				'json'
