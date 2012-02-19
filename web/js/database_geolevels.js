@@ -251,8 +251,7 @@ function doGeolevelsUploaderCreate()
 			{
 				cmd        : 'cmdGeolevelsUpload',
 				RegionId   : jQuery('#desinventarRegionId').val(),
-				UploadExt  : fileExt,
-				GeoLevelId : jQuery('#frmGeolevel .GeoLevelId').val()
+				UploadExt  : fileExt
 			},
 			debug:false,
 			multiple:false,
