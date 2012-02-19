@@ -444,51 +444,52 @@ switch ($cmd)
 			if ($o->exist() > 0)
 			{
 				$iReturn = $o->update();
-				if ($iReturn > 0)
-				{
-					$o = new DIGeoCarto($us, $GeoLevelId);
-					if (isset($GeoLevel['GeoLevelLayerCode']))
-					{
-						$o->set('GeoLevelLayerCode', $GeoLevel['GeoLevelLayerCode']);
-					}
-					if (isset($GeoLevel['GeoLevelLayerName']))
-					{
-						$o->set('GeoLevelLayerName', $GeoLevel['GeoLevelLayerName']);				
-					}
-					if (isset($GeoLevel['filename']))
-					{
-						$GeoLevelLayerFile = 'geocarto' . sprintf('%02d', $GeoLevelId);
-						$SrcDir = TMP_DIR . '/' . $us->sSessionId;
-						$OutDir = $us->getRegionDir($RegionId);
-						foreach($GeoLevel['filename'] as $ext => $filename)
-						{
-							$srcFile = $SrcDir . '/' . $filename;
-							$dstFile = $OutDir . '/' . $GeoLevelLayerFile . '.' . strtolower($ext);;
-							if (file_exists($srcFile))
-							{
-								copy($srcFile, $dstFile);
-							}
-						}
-						$o->set('GeoLevelLayerFile', $GeoLevelLayerFile);
-					}
-					if ($o->get('GeoLevelLayerFile') != '')
-					{
-						if ($o->exist() > 0)
-						{
-							$o->update();
-						}
-						else
-						{
-							$o->insert();
-						}
-					}
-				}
 			}
 			else
 			{
 				$GeoLevelId = $o->getMaxGeoLevel() + 1;
 				$o->set('GeoLevelId', $GeoLevelId);
 				$iReturn = $o->insert();
+			}
+			if ($iReturn > 0)
+			{
+				$o = new DIGeoCarto($us, $GeoLevelId);
+				if (isset($GeoLevel['GeoLevelLayerCode']))
+				{
+					$o->set('GeoLevelLayerCode', $GeoLevel['GeoLevelLayerCode']);
+				}
+				if (isset($GeoLevel['GeoLevelLayerName']))
+				{
+					$o->set('GeoLevelLayerName', $GeoLevel['GeoLevelLayerName']);				
+				}
+				if (isset($GeoLevel['filename']))
+				{
+					$GeoLevelLayerFile = 'geocarto' . sprintf('%02d', $GeoLevelId);
+					$SrcDir = TMP_DIR . '/' . $us->sSessionId;
+					$OutDir = $us->getRegionDir($RegionId);
+					foreach($GeoLevel['filename'] as $ext => $filename)
+					{
+						$srcFile = $SrcDir . '/' . $filename;
+						$dstFile = $OutDir . '/' . $GeoLevelLayerFile . '.' . strtolower($ext);;
+						if (file_exists($srcFile))
+						{
+							copy($srcFile, $dstFile);
+						}
+					}
+					$o->set('GeoLevelLayerFile', $GeoLevelLayerFile);
+					$answer['GeoLevelLayerFile'] = $GeoLevelLayerFile;
+				}
+				if ($o->get('GeoLevelLayerFile') != '')
+				{
+					if ($o->exist() > 0)
+					{
+						$o->update();
+					}
+					else
+					{
+						$o->insert();
+					}
+				}
 			}
 		}
 		$answer['GeoLevelId'] = $GeoLevelId;
