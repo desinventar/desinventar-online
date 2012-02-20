@@ -72,28 +72,37 @@
 									{-/if-}
 								</td>
 							{-else-}
+								{-$cellClass=""-}
 								{-if $field_id=="DisasterSerial" || $field_id=="DisasterBeginTime" || $field_id=="EventName" || $field_id=="GeographyFQName" || 
 									 $field_id=="DisasterSiteNotes" || $field_id=="DisasterSource" || $field_id=="EffectNotes" || $field_id=="EffectOtherLosses" || $field_id=="CauseName" || $field_id=="CauseNotes"-}
-									<td class="GridCellText">
+								 	{-$cellClass="GridCellText"-}
 								{-else-}
-									<td class="GridCellNumber center">
+									{-$cellClass="GridCellNumber"-}
 								{-/if-}
-										{-if $field_id=="EffectNotes" || $field_id=="EffectOtherLosses" || $field_id=="EventNotes" || $field_id=="CauseNotes"-}
+									{-if $field_id=="EffectNotes" || $field_id=="EffectOtherLosses" || $field_id=="EventNotes" || $field_id=="CauseNotes"-}
+										<td class="{-$cellClass-}">
 											<div class="dwin" style="width:200px; height: 40px;">{-$row[$field_id]-}
 											</div>
-										{-elseif $field_id=="DisasterSource" || $field_id=="DisasterSiteNotes"-}
+										</td>
+									{-elseif $field_id=="DisasterSource" || $field_id=="DisasterSiteNotes"-}
+										<td class="{-$cellClass-}">
 											<div class="dwin" style="width:150px; height: 40px;">
 												{-$row[$field_id]-}
 											</div>
-										{-elseif $row[$field_id]==-1-}
+										</td>
+									{-elseif $row[$field_id]==-1-}
+										<td class="center">
 											<div>
 												<input type="checkbox" disabled="disabled" checked="checked" />
 											</div>
-										{-elseif $row[$field_id]==-2-}?
-										{-else-}
+										</td>
+									{-elseif $row[$field_id]==-2-}?
+									{-else-}
+										<td class="{-$cellClass-}">
 											<div>{-$row[$field_id]-}</div>
-										{-/if-}
-									</td>
+										</td>
+									{-/if-}
+								</td>
 							{-/if-}
 						{-/if-}
 					{-/foreach-}
