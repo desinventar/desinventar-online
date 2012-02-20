@@ -7,6 +7,7 @@ function onReadyData() {
 	jQuery('body').on('click', '.ViewData', function() {
 		jQuery(this).toggleClass('highlight');
 	});
+
 	jQuery('body').on('click', '.linkGridGotoCard', function() {
 		jQuery('body').trigger('cmdDatacardShow');
 		var DisasterId = jQuery(this).attr('DisasterId');
