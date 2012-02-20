@@ -49,25 +49,19 @@ function doViewportCreate()
 				//collapseMode:'mini',
 				floatable: false,
 				listeners: {
-					'hide': function() {
-						console.log('hide');
-					},
-					'show': function() {
-						console.log('show');
-					},
 					'beforecollapse': function() {
-						console.log('beforecollapse : ' + this.lockedPanel + ' ' + this.floatable);
+						//console.log('beforecollapse : ' + this.lockedPanel + ' ' + this.floatable);
 						return ! this.lockedPanel;
 					},
 					'beforeexpand': function() {
-						console.log('beforeexpand : ' + this.lockedPanel + ' ' + this.floatable);
+						//console.log('beforeexpand : ' + this.lockedPanel + ' ' + this.floatable);
 						return ! this.lockedPanel;
 					},
 					'expand': function() {
-						console.log('expand : ' + this.lockedPanel + ' ' + this.floatable);
+						//console.log('expand : ' + this.lockedPanel + ' ' + this.floatable);
 					},
 					'collapse':function() {
-						console.log('collapse : ' + this.lockedPanel + ' ' + this.floatable);
+						//console.log('collapse : ' + this.lockedPanel + ' ' + this.floatable);
 					}
 				}
 			};
