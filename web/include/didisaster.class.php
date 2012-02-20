@@ -33,7 +33,7 @@ class DIDisaster extends DIRecord
 		                      
 		                      'CauseId/STRING,' .
 		                      'CauseNotes/STRING';
-		$this->sEffectDef    ='EffectPeopleDead/INTEGER,' .
+		$this->sEffectDef1   ='EffectPeopleDead/INTEGER,' .
 		                      'EffectPeopleMissing/INTEGER,' .
 		                      'EffectPeopleInjured/INTEGER,' .
 		                      'EffectPeopleHarmed/INTEGER,' .
@@ -41,19 +41,8 @@ class DIDisaster extends DIRecord
 		                      'EffectPeopleEvacuated/INTEGER,' .
 		                      'EffectPeopleRelocated/INTEGER,' .		                      
 		                      'EffectHousesDestroyed/INTEGER,' .
-		                      'EffectHousesAffected/INTEGER,' .
-		                      
-		                      'EffectLossesValueLocal/DOUBLE,' .
-		                      'EffectLossesValueUSD/DOUBLE,' .
-		                      'EffectRoads/DOUBLE,' .
-		                      'EffectFarmingAndForest/DOUBLE,' .
-		                      'EffectLiveStock/INTEGER,' .
-		                      'EffectEducationCenters/INTEGER,' .
-		                      'EffectMedicalCenters/INTEGER,' .
-		                      'EffectOtherLosses/STRING,' .
-		                      'EffectNotes/STRING,' .
-		                      
-		                      'SectorTransport/INTEGER,' .
+		                      'EffectHousesAffected/INTEGER';
+		$this->sEffectSector ='SectorTransport/INTEGER,' .
 		                      'SectorCommunications/INTEGER,' .
 		                      'SectorRelief/INTEGER,' .
 		                      'SectorAgricultural/INTEGER,' .
@@ -64,6 +53,15 @@ class DIDisaster extends DIRecord
 		                      'SectorIndustry/INTEGER,' .
 		                      'SectorHealth/INTEGER,' .
 		                      'SectorOther/INTEGER';
+		$this->sEffectDef2   ='EffectLossesValueLocal/DOUBLE,' .
+		                      'EffectLossesValueUSD/DOUBLE,' .
+		                      'EffectRoads/DOUBLE,' .
+		                      'EffectFarmingAndForest/DOUBLE,' .
+		                      'EffectLiveStock/INTEGER,' .
+		                      'EffectEducationCenters/INTEGER,' .
+		                      'EffectMedicalCenters/INTEGER,' .
+		                      'EffectOtherLosses/STRING,' .
+		                      'EffectNotes/STRING';		                      
 		$this->sFieldQDef =   'EffectPeopleDeadQ/INTEGER,' .
 		                      'EffectPeopleMissingQ/INTEGER,' .
 		                      'EffectPeopleInjuredQ/INTEGER,' .
@@ -73,7 +71,8 @@ class DIDisaster extends DIRecord
 		                      'EffectPeopleRelocatedQ/INTEGER,' .		                      
 		                      'EffectHousesDestroyedQ/INTEGER,' .
 		                      'EffectHousesAffectedQ/INTEGER';
-		$this->sFieldDef .= ',' . $this->sEffectDef;	
+		$this->sEffectDef = $this->sEffectDef1 . ',' . $this->sEffectSector . ',' . $this->sEffectDef2;
+		$this->sFieldDef .= ',' . $this->sEffectDef;
 		$this->sFieldDef .= ',' . $this->sFieldQDef;
 		parent::__construct($prmSession);
 		$this->sEEFieldDef  = $this->buildEEFieldDef();
