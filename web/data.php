@@ -194,6 +194,7 @@ if (isset($post['page']) || isset($post['_D+cmd']))
 			$t->assign('dislist', $dl);
 			$t->assign('ctl_dislist', true);
 		} //else
+		$sectorFields = DIDisaster::getEffectSectorFields();
 		$data_header = array();
 		foreach($sel as $key => $field_id)
 		{
@@ -207,8 +208,7 @@ if (isset($post['page']) || isset($post['_D+cmd']))
 			{
 				$field_type = 'TEXT';
 			}
-			if (in_array($field_id, array(
-				'SectorSewerage','SectorWaterSupply')))
+			if (in_array($field_id, $sectorFields))
 			{
 				$field_type = 'CHECKBOX';
 			}
