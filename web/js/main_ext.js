@@ -46,20 +46,28 @@ function doViewportCreate()
 				margins:'0 2 0 0',
 				contentEl: 'divWestPanel',
 				lockedPanel: false,
+				//collapseMode:'mini',
+				floatable: false,
 				listeners: {
+					'hide': function() {
+						console.log('hide');
+					},
+					'show': function() {
+						console.log('show');
+					},
 					'beforecollapse': function() {
+						console.log('beforecollapse : ' + this.lockedPanel + ' ' + this.floatable);
 						return ! this.lockedPanel;
 					},
 					'beforeexpand': function() {
+						console.log('beforeexpand : ' + this.lockedPanel + ' ' + this.floatable);
 						return ! this.lockedPanel;
 					},
 					'expand': function() {
-						this.setTitle(this.deftitle);
-						this.setWidth(this.defwidth);
+						console.log('expand : ' + this.lockedPanel + ' ' + this.floatable);
 					},
 					'collapse':function() {
-						this.setWidth(0);
-						this.setTitle('');
+						console.log('collapse : ' + this.lockedPanel + ' ' + this.floatable);
 					}
 				}
 			};
@@ -70,9 +78,11 @@ function doViewportCreate()
 			DesInventar.WestPanel.superclass.initComponent.call(this);
 		},
 		lockPanel: function() {
+			this.floatable = false;
 			this.lockedPanel = true;
 		},
 		unlockPanel: function() {
+			this.floatable = true;
 			this.lockedPanel = false;
 		}
 	});
@@ -154,6 +164,8 @@ function doViewportShow()
 		jQuery('#divRegionList').show();
 		doUpdateDatabaseListByUser();
 	}
+	//Ext.getCmp('westm').collapse();
+	//Ext.getCmp('westm').lockPanel();
 } //doViewportShow()
 
 function doMainChangeLanguage(LangIsoCode)
