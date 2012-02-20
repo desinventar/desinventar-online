@@ -208,7 +208,7 @@ if (isset($post['page']) || isset($post['_D+cmd']))
 				$field_type = 'TEXT';
 			}
 			if (in_array($field_id, array(
-				'SectorSewerage')))
+				'SectorSewerage','SectorWaterSupply')))
 			{
 				$field_type = 'CHECKBOX';
 			}
@@ -219,8 +219,6 @@ if (isset($post['page']) || isset($post['_D+cmd']))
 			);
 		}
 		$t->assign('data_header', $data_header);
-		fb($data_header);
-		fb($dl);
 	} //if
 } //if
 $time_end = microtime_float();

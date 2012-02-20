@@ -62,10 +62,14 @@
 							rowindex="{-$row@iteration-}">{-$offset+$row@iteration-}</a>
 					</td>
 					{-foreach $sel as $field_id-}
-						<td>
 						{-if $data_header[$field_id].type=='CHECKBOX'-}
-							<input type="checkbox" disabled="disabled" data-value="{-$row[$field_id]-}" /><br />
-						</td>
+							<td class="center middle">
+								{-if $row[$field_id]!=0-}
+									<input type="checkbox" disabled="disabled" checked="checked" />
+								{-else-}
+									<input type="checkbox" disabled="disabled" />
+								{-/if-}
+							</td>
 						{-else-} 
 							{-strip-}
 							{-if $field_id != "DisasterId"-}
