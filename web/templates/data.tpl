@@ -62,38 +62,39 @@
 							rowindex="{-$row@iteration-}">{-$offset+$row@iteration-}</a>
 					</td>
 					{-foreach $sel as $field_id-}
-						{-if $data_header[$field_id].type=='CHECKBOX'-}
-							<td class="center middle">
-								{-if $row[$field_id]!=0-}
-									<input type="checkbox" disabled="disabled" checked="checked" />
-								{-else-}
-									<input type="checkbox" disabled="disabled" />
-								{-/if-}
-							</td>
-						{-else-} 
-							{-strip-}
-							{-if $field_id != "DisasterId"-}
-								<td {-if $field_id=="DisasterSerial" || $field_id=="DisasterBeginTime" || $field_id=="EventName" || $field_id=="GeographyFQName" || 
-								         $field_id=="DisasterSiteNotes" || $field_id=="DisasterSource" || $field_id=="EffectNotes" || $field_id=="EffectOtherLosses" || $field_id=="CauseName" || $field_id=="CauseNotes"-}
-								         class="GridCellText"
-									{-else-}
-										class="GridCellNumber"
-									{-/if-}>
-									{-if $field_id=="EffectNotes" || $field_id=="EffectOtherLosses" || $field_id=="EventNotes" || $field_id=="CauseNotes"-}
-										<div class="dwin" style="width:200px; height: 40px;">{-$row[$field_id]-}
-										</div>
-									{-elseif $field_id=="DisasterSource" || $field_id=="DisasterSiteNotes"-}
-										<div class="dwin" style="width:150px; height: 40px;">{-$row[$field_id]-}
-										</div>
-									{-elseif $row[$field_id] == -1-}
+						{-if $field_id != "DisasterId"-}
+							{-if $data_header[$field_id].type=='CHECKBOX'-}
+								<td class="center middle">
+									{-if $row[$field_id]!=0-}
 										<input type="checkbox" disabled="disabled" checked="checked" />
-									{-elseif $row[$field_id] == -2-}?
 									{-else-}
-										{-$row[$field_id]-}
+										<input type="checkbox" disabled="disabled" />
 									{-/if-}
 								</td>
+							{-else-}
+								{-if $field_id=="DisasterSerial" || $field_id=="DisasterBeginTime" || $field_id=="EventName" || $field_id=="GeographyFQName" || 
+									 $field_id=="DisasterSiteNotes" || $field_id=="DisasterSource" || $field_id=="EffectNotes" || $field_id=="EffectOtherLosses" || $field_id=="CauseName" || $field_id=="CauseNotes"-}
+									<td class="GridCellText">
+								{-else-}
+									<td class="GridCellNumber center">
+								{-/if-}
+										{-if $field_id=="EffectNotes" || $field_id=="EffectOtherLosses" || $field_id=="EventNotes" || $field_id=="CauseNotes"-}
+											<div class="dwin" style="width:200px; height: 40px;">{-$row[$field_id]-}
+											</div>
+										{-elseif $field_id=="DisasterSource" || $field_id=="DisasterSiteNotes"-}
+											<div class="dwin" style="width:150px; height: 40px;">
+												{-$row[$field_id]-}
+											</div>
+										{-elseif $row[$field_id]==-1-}
+											<div>
+												<input type="checkbox" disabled="disabled" checked="checked" />
+											</div>
+										{-elseif $row[$field_id]==-2-}?
+										{-else-}
+											<div>{-$row[$field_id]-}</div>
+										{-/if-}
+									</td>
 							{-/if-}
-							{-/strip-}
 						{-/if-}
 					{-/foreach-}
 				</tr>
