@@ -64,7 +64,7 @@ function onReadyDatabaseUpload()
 					jQuery('#divDatabaseUploadParameters').hide();
 					doDatabaseUploadStatusMsg('msgDatabaseUploadUpdateOk');
 					alert(jQuery('#msgDatabaseUploadCopyComplete').val());
-					jQuery('body').trigger('cmdWindowReload');
+					window.location = jQuery('#desinventarURL').val() + '/' + jQuery('#txtDatabaseUploadRegionId').text();
 				}
 				else
 				{
