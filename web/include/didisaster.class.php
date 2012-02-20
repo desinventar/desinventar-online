@@ -6,6 +6,7 @@
 
 class DIDisaster extends DIRecord
 {
+	const effect_sector = 'SectorTransport/INTEGER,SectorCommunications/INTEGER,SectorRelief/INTEGER,SectorAgricultural/INTEGER,SectorWaterSupply/INTEGER,SectorSewerage/INTEGER,SectorEducation/INTEGER,SectorPower/INTEGER,SectorIndustry/INTEGER,SectorHealth/INTEGER,SectorOther/INTEGER';
 	public function __construct($prmSession)
 	{
 		$this->sTableName   = 'Disaster';
@@ -42,17 +43,6 @@ class DIDisaster extends DIRecord
 		                      'EffectPeopleRelocated/INTEGER,' .		                      
 		                      'EffectHousesDestroyed/INTEGER,' .
 		                      'EffectHousesAffected/INTEGER';
-		$this->sEffectSector ='SectorTransport/INTEGER,' .
-		                      'SectorCommunications/INTEGER,' .
-		                      'SectorRelief/INTEGER,' .
-		                      'SectorAgricultural/INTEGER,' .
-		                      'SectorWaterSupply/INTEGER,' .
-		                      'SectorSewerage/INTEGER,' .
-		                      'SectorEducation/INTEGER,' .
-		                      'SectorPower/INTEGER,' .
-		                      'SectorIndustry/INTEGER,' .
-		                      'SectorHealth/INTEGER,' .
-		                      'SectorOther/INTEGER';
 		$this->sEffectDef2   ='EffectLossesValueLocal/DOUBLE,' .
 		                      'EffectLossesValueUSD/DOUBLE,' .
 		                      'EffectRoads/DOUBLE,' .
@@ -71,7 +61,7 @@ class DIDisaster extends DIRecord
 		                      'EffectPeopleRelocatedQ/INTEGER,' .		                      
 		                      'EffectHousesDestroyedQ/INTEGER,' .
 		                      'EffectHousesAffectedQ/INTEGER';
-		$this->sEffectDef = $this->sEffectDef1 . ',' . $this->sEffectSector . ',' . $this->sEffectDef2;
+		$this->sEffectDef = $this->sEffectDef1 . ',' . self::effect_sector . ',' . $this->sEffectDef2;
 		$this->sFieldDef .= ',' . $this->sEffectDef;
 		$this->sFieldDef .= ',' . $this->sFieldQDef;
 		parent::__construct($prmSession);
@@ -422,6 +412,16 @@ class DIDisaster extends DIRecord
 			$iReturn = ERR_NO_ERROR;
 		}
 		return $iReturn;
+	}
+	public static function getEffectSectorFields()
+	{
+		$list = array();
+		foreach(explode(',', self::effect_sector) as $field)
+		{
+			$a = explode('/', $field);
+			$list[] = $a[0];
+		}
+		return $list;
 	}
 } //class
 
