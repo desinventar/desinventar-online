@@ -46,7 +46,6 @@ function doViewportCreate()
 				margins:'0 2 0 0',
 				contentEl: 'divWestPanel',
 				lockedPanel: false,
-				collapseMode:'mini',
 				floatable: false,
 				listeners: {
 					'beforecollapse': function() {
@@ -100,7 +99,6 @@ function doViewportCreate()
 						region: 'south',
 						id: 'southm',
 						split: false,
-						collapseMode:'mini',
 						title: jQuery('#msgHelpTitle').text(),
 						height: 80,
 						minSize: 100,
