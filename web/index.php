@@ -27,7 +27,6 @@ if ($cmd == '' && $RegionId == '')
 {
 	$cmd = 'main';
 }
-// Default Template Values
 $t->assign('desinventarRegionId', $RegionId);
 if (!empty($RegionId))
 {
@@ -46,7 +45,7 @@ $t->assign('desinventarUserRoleValue', $desinventarUserRoleValue);
 $t->assign('appOptions', $appOptions);
 
 /*
-	// Write a debug log of parameters passed
+	# Write a debug log of parameters passed
 	ob_start();
 	var_dump($_FILES);
 	var_dump($_POST);
@@ -71,7 +70,7 @@ switch ($cmd)
 		$UserPasswd = getParameter('UserPasswd');
 		if ($us->login($UserId, $UserPasswd) > 0)
 		{
-			$iReturn = ERR_NO_ERROR;	// Login success
+			$iReturn = ERR_NO_ERROR;	# Login success
 			$user = array();
 			$user['Id']        = $us->UserId;
 			$user['FullName']  = $us->getUserFullName();
@@ -88,7 +87,7 @@ switch ($cmd)
 		$UserId = $us->UserId;
 		if ($UserId != '')
 		{
-			$iReturn = ERR_NO_ERROR;	// Login success
+			$iReturn = ERR_NO_ERROR;	# Login success
 			$user = array();
 			$user['Id']        = $us->UserId;
 			$user['FullName']  = $us->getUserFullName();
@@ -175,7 +174,7 @@ switch ($cmd)
 		echo json_encode($answer);
 	break;
 	case 'cmdDatacards':
-		//$t->assign('dic', $us->q->queryLabelsFromGroup('DB', $lg));
+		#$t->assign('dic', $us->q->queryLabelsFromGroup('DB', $lg));
 		$t->display('main_datacards.tpl');
 	break;
 	case 'cmdGeographyGetItemsByLevel':
@@ -576,14 +575,14 @@ switch ($cmd)
 				{
 					$answer['DBFFields'] = get_dbf_fields($OutDir . '/' . $filename);
 				}
-			} //if
-		} //if
+			} #if
+		} #if
 		if ($answer['success'] == false)
 		{
 			$iReturn = ERR_UNKNOWN_ERROR;
 		}
 		$answer['Status'] = $iReturn;
-		// to pass data through iframe you will need to encode all html tags
+		# to pass data through iframe you will need to encode all html tags
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
 	break;
 	case 'getversion':
@@ -659,9 +658,11 @@ switch ($cmd)
 		if ($iReturn > 0)
 		{
 			$RegionId = $_POST['RegionId'];
+			$RegionLabel = $_POST['RegionLabel'];
 			if (DIRegion::existRegion($us, $RegionId) < 0)
 			{
 				$iReturn = doDatabaseCreate($us, $RegionId, '');
+				$us->open($RegionId);
 			}
 			$desinventarUserRole = $us->getUserRole($RegionId);;
 			$desinventarUserRoleValue = $us->getUserRoleValue($RegionId);
@@ -672,7 +673,7 @@ switch ($cmd)
 		}
 		if ($iReturn > 0)
 		{
-			$iReturn = doDatabaseReplace($us, $RegionId, '', getParameter('Filename',''));
+			$iReturn = doDatabaseReplace($us, $RegionId, $RegionLabel, getParameter('Filename',''));
 		}
 		if ($iReturn > 0)
 		{
@@ -690,7 +691,7 @@ switch ($cmd)
 		}
 		if ($iReturn > 0)
 		{
-			$iReturn = doDatabaseReplace($us, $RegionId, $RegionLabel, getParameter('Filename',''));
+			$iReturn = doDatabaseReplace($us, $RegionId, '', getParameter('Filename',''));
 		}
 		$answer['Status'] = $iReturn;
 		echo json_encode($answer);
@@ -745,7 +746,7 @@ switch ($cmd)
 		if ($iReturn > 0)
 		{
 			$RegionId = $_POST['RegionInfo']['RegionId'];
-			// Use the parameters to create a new database from zip file...
+			# Use the parameters to create a new database from zip file...
 			$Filename = TMP_DIR . '/DesInventarFile_' . $us->sSessionId . '_' . $_POST['RegionInfo']['Filename'];
 			$iReturn = DIRegionDB::createRegionDBFromZip($us,
 			             $_POST['RegionInfo']['Mode'],
@@ -796,12 +797,12 @@ switch ($cmd)
 			{
 				$iReturn = ERR_NO_ERROR;
 				$Filename = $answer['filename'];
-				// Open ZIP File, extract info.xml and return values...				
+				# Open ZIP File, extract info.xml and return values...				
 				$zip = new ZipArchive();
 				$res = $zip->open($OutDir . '/' . $Filename);
 				if ($res == TRUE)
 				{
-					// Delete existing info.xml file just in case...
+					# Delete existing info.xml file just in case...
 					if (file_exists($OutDir . '/info.xml'))
 					{
 						unlink($OutDir . '/info.xml');
@@ -813,7 +814,7 @@ switch ($cmd)
 						$r = new DIRegion($us, '', $OutDir . '/info.xml');
 						$info = array();
 						$UploadMode = getParameter('UploadMode','');
-						// If no database is open, try to calculate RegionId
+						# If no database is open, try to calculate RegionId
 						if ($UploadMode == 'Copy')
 						{
 							if (DIRegion::existRegion($us, $r->get('RegionId')) > 0)
@@ -838,7 +839,7 @@ switch ($cmd)
 					{
 						$answer['Status'] = ERR_UNKNOWN_ERROR;
 					}
-					// Delete existing info.xml file just in case...
+					# Delete existing info.xml file just in case...
 					if (file_exists($OutDir . '/info.xml'))
 					{
 						unlink($OutDir . '/info.xml');
@@ -848,21 +849,21 @@ switch ($cmd)
 				{
 					$iReturn = ERR_UNKNOWN_ERROR;
 				}
-			} //if
-		} //if
+			} #if
+		} #if
 		if ($answer['success'] == false)
 		{
 			$iReturn = ERR_UNKNOWN_ERROR;
 		}
 		$answer['Status'] = $iReturn;
-		// to pass data through iframe you will need to encode all html tags
+		# to pass data through iframe you will need to encode all html tags
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
 	break;
 	case 'start':
 		$t->assign('lg', $lg);
 		$t->assign('LanguageList', $us->q->loadLanguages(1));
 		$listdb = $us->listDB();
-		// unique database, choose than
+		# unique database, choose than
 		if (count($listdb) == 1)
 		{
 			$t->assign('option', 'r='. key($listdb));
@@ -874,7 +875,7 @@ switch ($cmd)
 		$t->display('block_start.tpl');
 	break;
 	case 'main':
-		// Direct access returns a list of public regions on this server
+		# Direct access returns a list of public regions on this server
 		$t->assign('lg', $lg);
 		$LanguageList = $us->q->loadLanguages(1);
 		$CountryList = $us->q->getCountryList();
@@ -892,7 +893,7 @@ switch ($cmd)
 		$answerstr = htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
 		if (isset($_GET['callback']))
 		{
-			// Enable support for JSONP requests...
+			# Enable support for JSONP requests...
 			$answerstr = $_GET['callback'] . '(' . $answerstr . ')';
 		}
 		echo $answerstr;
@@ -928,7 +929,7 @@ switch ($cmd)
 		$answerstr = htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
 		if (isset($_GET['callback']))
 		{
-			// Enable support for JSONP requests...
+			# Enable support for JSONP requests...
 			$answerstr = $_GET['callback'] . '(' . $answerstr . ')';
 		}
 		echo $answerstr;
@@ -940,7 +941,7 @@ switch ($cmd)
 			                'CountryName' => $CountryName);
 			if (isset($_GET['callback']))
 			{
-				// Enable support for JSONP requests...
+				# Enable support for JSONP requests...
 				echo $_GET['callback'] . '(' . json_encode($answer) . ')';
 			}
 			else
@@ -980,7 +981,7 @@ switch ($cmd)
 		$answer['Status'] = $iReturn;
 		if (isset($_GET['callback']))
 		{
-			// Enable support for JSONP requests...
+			# Enable support for JSONP requests...
 			echo $_GET['callback'] . '(' . json_encode($answer) . ')';
 		}
 		else
@@ -1018,9 +1019,9 @@ switch ($cmd)
 	break;
 	case 'savequery':
 	case 'cmdQuerySave':
-		// Save XML file query
+		# Save XML file query
 		fixPost($post);
-		// Do not save _CMD...
+		# Do not save _CMD...
 		unset($post['_CMD']);
 		header('Content-type: text/xml');
 		header('Content-Disposition: attachment; filename=Query_' . str_replace(' ', '', $RegionId) . '.xml');
@@ -1029,10 +1030,10 @@ switch ($cmd)
 		exit();
 	break;
 	default:
-		// Open XML file query
+		# Open XML file query
 		if (isset($_FILES['qry']))
 		{
-			// Open file, decode and assign saved query..
+			# Open file, decode and assign saved query..
 			$myfile = $_FILES['qry']['tmp_name'];
 			$handle = fopen($myfile, 'r');
 			$cq = fread($handle, filesize($myfile));
@@ -1055,16 +1056,16 @@ switch ($cmd)
 		{
 			$RegionId = $get['r'];
 		}
-		// 2009-08-07 (jhcaiced) Validate if Database Exists...
+		# 2009-08-07 (jhcaiced) Validate if Database Exists...
 		if (!empty($RegionId) && file_exists($us->q->getDBFile($RegionId)))
 		{
-			// Accessing a region with some operation
+			# Accessing a region with some operation
 			$us->open($RegionId);
 			if (isset($get['lang']) && !empty($get['lang']))
 			{
 				$_SESSION['lang'] = $get['lang'];
 			}
-			// Direct access returns a list of public regions on this server
+			# Direct access returns a list of public regions on this server
 			$t->assign('LanguageList', $us->q->loadLanguages(1));
 			$t->assign('CountryList', $us->q->getCountryList());
 			switch ($get['cmd'])
@@ -1093,9 +1094,9 @@ switch ($cmd)
 					$t->display('block_eventlist.tpl');
 				break;
 				default:
-					// Update UserSession with Current Language.
+					# Update UserSession with Current Language.
 					$us->update();
-					// Get UserRole
+					# Get UserRole
 					$r = new DIRegion($us, $RegionId);
 					$RegionStatus = (int)$r->get('RegionStatus');
 					$RegionPublic = $RegionStatus & 2;
@@ -1111,17 +1112,17 @@ switch ($cmd)
 							$bCanShowDatabase = 1;
 						}
 					}
-					// Datacards
+					# Datacards
 					$t->assign('LabelsDisaster', $us->q->queryLabelsFromGroup('Disaster', $lg));
 					$t->assign('LabelsRecord1', $us->q->queryLabelsFromGroup('Record|1', $lg));
 					$t->assign('LabelsEvent', $us->q->queryLabelsFromGroup('Event', $lg));
 					$t->assign('LabelsCause', $us->q->queryLabelsFromGroup('Cause', $lg));
 
-					// Query Design
+					# Query Design
 					$t->assign('rc2', $us->q->queryLabelsFromGroup('Record|2', $lg));
 					
 					$t->assign('reg', $RegionId);
-					//$t->assign('path', VAR_DIR);
+					#$t->assign('path', VAR_DIR);
 					
 					$t->assign('role', $desinventarRole);
 					if (strlen($desinventarRole) > 0)
@@ -1132,15 +1133,15 @@ switch ($cmd)
 					{
 						$t->assign('ctl_user', false);
 					}
-					// Set selection map
+					# Set selection map
 					$t->assign('RegionLabel', $RegionLabel);
 					$t->assign('ctl_showmap', true);
-					// get range of dates
+					# get range of dates
 					$ydb = $us->getDateRange();
 					$t->assign('yini', substr($ydb[0], 0, 4));
 					$t->assign('yend', substr($ydb[1], 0, 4));
 
-					// Load default list of Geography, Event, Cause
+					# Load default list of Geography, Event, Cause
 					$geol = $us->q->loadGeography(0);
 					$glev = $us->q->loadGeoLevels('', -1, false);
 					$evepredl = $us->q->loadEvents('PREDEF', 'active', $lg);
@@ -1148,7 +1149,7 @@ switch ($cmd)
 					$caupredl = $us->q->loadCauses('PREDEF', 'active', $lg);
 					$cauuserl = $us->q->loadCauses('USER', 'active', $lg);
 
-					// In Saved Queries set true in Geo, Events, Causes selected..
+					# In Saved Queries set true in Geo, Events, Causes selected..
 					if (isset($qd['D_GeographyId']))
 					{
 						$gtree = $us->q->buildGeoTree('', 0, $us->q->getMaxGeoLev(), $qd['D_GeographyId']);
@@ -1185,37 +1186,37 @@ switch ($cmd)
 							}
 						}
 					}
-					// List of elements: Geography, GLevels, Events, Causes..
+					# List of elements: Geography, GLevels, Events, Causes..
 					$t->assign('geol', $geol);
 					$t->assign('glev', $glev);
 					$t->assign('evepredl', $evepredl);
 					$t->assign('eveuserl', $eveuserl);
 					$t->assign('caupredl', $caupredl);
 					$t->assign('cauuserl', $cauuserl);
-					// Query words and phrases in dictionary..
+					# Query words and phrases in dictionary..
 					$ef1 = $us->q->queryLabelsFromGroup('Effect|People', $lg);
 					$ef2 = $us->q->queryLabelsFromGroup('Effect|Affected', $lg);
 					$ef3 = $us->q->queryLabelsFromGroup('Effect|Economic', $lg);
 					$ef4 = $us->q->queryLabelsFromGroup('Effect|More', $lg);
 					$sec = $us->q->queryLabelsFromGroup('Sector', $lg);
-					// Add some fields to customize lists ??
-					//$ef1['EffectFarmingAndForest'] = $ef2['EffectFarmingAndForest'];
-					//$ef1['EffectLiveStock'] = $ef2['EffectLiveStock'];
-					//$ef1['EffectRoads'] = $ef2['EffectRoads'];
-					//$ef1['EffectEducationCenters'] = $ef2['EffectEducationCenters'];
-					//$ef1['EffectMedicalCenters'] = $ef2['EffectMedicalCenters'];
+					# Add some fields to customize lists ??
+					#$ef1['EffectFarmingAndForest'] = $ef2['EffectFarmingAndForest'];
+					#$ef1['EffectLiveStock'] = $ef2['EffectLiveStock'];
+					#$ef1['EffectRoads'] = $ef2['EffectRoads'];
+					#$ef1['EffectEducationCenters'] = $ef2['EffectEducationCenters'];
+					#$ef1['EffectMedicalCenters'] = $ef2['EffectMedicalCenters'];
 
-					$sec['SectorTransport'][3] 		= null; //array('EffectRoads' => $ef2['EffectRoads'][0]);
+					$sec['SectorTransport'][3] 		= null; #array('EffectRoads' => $ef2['EffectRoads'][0]);
 					$sec['SectorCommunications'][3] = null;
 					$sec['SectorRelief'][3] 		= null;
-					$sec['SectorAgricultural'][3] 	= null; //array('EffectFarmingAndForest' => $ef2['EffectFarmingAndForest'][0],
-															//'EffectLiveStock' => $ef2['EffectLiveStock'][0]);
+					$sec['SectorAgricultural'][3] 	= null; #array('EffectFarmingAndForest' => $ef2['EffectFarmingAndForest'][0],
+															#'EffectLiveStock' => $ef2['EffectLiveStock'][0]);
 					$sec['SectorWaterSupply'][3] 	= null;
 					$sec['SectorSewerage'][3]		= null;
-					$sec['SectorEducation'][3]		= null; //array('EffectEducationCenters' => $ef2['EffectEducationCenters'][0]);
+					$sec['SectorEducation'][3]		= null; #array('EffectEducationCenters' => $ef2['EffectEducationCenters'][0]);
 					$sec['SectorPower'][3]			= null;
 					$sec['SectorIndustry'][3]		= null;
-					$sec['SectorHealth'][3]			= null; //array('EffectMedicalCenters' => $ef2['EffectMedicalCenters'][0]);
+					$sec['SectorHealth'][3]			= null; #array('EffectMedicalCenters' => $ef2['EffectMedicalCenters'][0]);
 					$sec['SectorOther'][3]			= null;
 					$dic = array();
 					$dic = array_merge($dic, $us->q->queryLabelsFromGroup('MapOpt', $lg));
@@ -1231,7 +1232,7 @@ switch ($cmd)
 					$t->assign('ef3', $ef3);
 					$t->assign('ef4', $ef4);
 					$t->assign('sec', $sec);
-					// DATA
+					# DATA
 					$dc2 = array();
 					$dc2 = array_merge($dc2, $us->q->queryLabelsFromGroup('Disaster', $lg));
 					$dc2 = array_merge($dc2, $us->q->queryLabelsFromGroup('Record|2', $lg));
@@ -1252,8 +1253,8 @@ switch ($cmd)
 					$sda = explode(',', $fld);
 					$t->assign('sda', $sda);
 					$sda1 = explode(',', 'GeographyCode,DisasterLatitude,DisasterLongitude,RecordAuthor,RecordCreation,RecordUpdate,EventNotes');
-					$t->assign('sda1', $sda1);	// array_diff_key($dc2, array_flip($sda))
-					// MAPS
+					$t->assign('sda1', $sda1);	# array_diff_key($dc2, array_flip($sda))
+					# MAPS
 					$mgl = $us->q->loadGeoLevels('', -1, true);
 					$t->assign('mgel', $mgl);
 					$range[] = array(     10, '1 - 10'          , 'ffff99');
@@ -1264,7 +1265,7 @@ switch ($cmd)
 					$range[] = array(1000000, '100001 - 1000000', '660000');
 					$range[] = array(''     , '1000001 ->'      , '000000');
 					$t->assign('range', $range);
-					// STATISTIC
+					# STATISTIC
 					$st = array();
 					foreach ($us->q->loadGeoLevels('', -1, false) as $k=>$i)
 						$st['StatisticGeographyId_'. $k] = array($i[0], $i[1]);
@@ -1273,9 +1274,9 @@ switch ($cmd)
 					$std = array_merge($std, $st);
 					$t->assign('std', $std);
 
-					// DATACARDS
+					# DATACARDS
 					$t->assign('usr', $us->UserId);
-					// Validate if user has permission to access database
+					# Validate if user has permission to access database
 					$dic = $us->q->queryLabelsFromGroup('DB', $lg);
 					switch ($desinventarUserRole)
 					{
@@ -1310,7 +1311,7 @@ switch ($cmd)
 					$t->assign('sc3', $sc3);
 					$t->assign('dmg', $us->q->queryLabelsFromGroup('MetGuide', $lg));
 					
-					// Geography Levels
+					# Geography Levels
 					$GeoLevelList = $us->getGeoLevels();
 					$t->assign('GeoLevelList', $GeoLevelList);
 					
@@ -1324,31 +1325,31 @@ switch ($cmd)
 					$EEFieldList = $us->q->getEEFieldList('True');
 					$t->assign('EEFieldList', $EEFieldList);
 					$t->assign('RegionId', $RegionId);
-					// DATACARDS END
+					# DATACARDS END
 					
-					// BEGIN THEMATIC MAP
-					// 2010-01-18 (jhcaiced) Windows machines doesn't use remote servers
+					# BEGIN THEMATIC MAP
+					# 2010-01-18 (jhcaiced) Windows machines doesn't use remote servers
 					if (isset($_SERVER['WINDIR']))
 					{
 						$desinventarHasInternet = 0;
 					}
 					else
 					{
-						// Linux machines are assumed to be connected to internet
+						# Linux machines are assumed to be connected to internet
 						$desinventarHasInternet = 1;
-						//if (!fsockopen('www.google.com',80))
-						//{
-						//	$desinventarHasInternet = 0;
-						//}
+						#if (!fsockopen('www.google.com',80))
+						#{
+						#	$desinventarHasInternet = 0;
+						#}
 					}
 					$t->assign('desinventarHasInternet', $desinventarHasInternet);
 					$t->assign('configfile', $lg . '.conf');
 					$t->display('index.tpl');
 				break;
-			} // switch
+			} # switch
 		}
 	break;
-} //switch($cmd)
+} #switch($cmd)
 
 function doDatabaseCreate($us,$prmRegionId,$prmRegionInfo)
 {
@@ -1368,7 +1369,7 @@ function doDatabaseCreate($us,$prmRegionId,$prmRegionInfo)
 		$RegionId = $r->get('RegionId');
 		if (DIRegion::existRegion($us, $RegionId) > 0)
 		{
-			// Database already exists
+			# Database already exists
 			$iReturn = ERR_UNKNOWN_ERROR;
 		}
 		else
@@ -1378,7 +1379,7 @@ function doDatabaseCreate($us,$prmRegionId,$prmRegionInfo)
 	}
 	if ($iReturn > 0)
 	{
-		// Set Role ADMINREGION in RegionAuth: master for this region
+		# Set Role ADMINREGION in RegionAuth: master for this region
 		$r->removeRegionUserAdmin();
 		$RegionUserAdmin = $us->UserId;
 		$iReturn = $us->setUserRole($RegionUserAdmin, $r->get('RegionId'), 'ADMINREGION');
@@ -1389,7 +1390,7 @@ function doDatabaseCreate($us,$prmRegionId,$prmRegionInfo)
 		$iReturn = $r2->createRegionDB();
 	}
 	return $iReturn;
-} // doDatabaseCreate()
+} # doDatabaseCreate()
 
 function doDatabaseReplace($us, $prmRegionId, $prmRegionLabel, $prmFilename)
 {
@@ -1397,33 +1398,41 @@ function doDatabaseReplace($us, $prmRegionId, $prmRegionLabel, $prmFilename)
 	$RegionId = $prmRegionId;
 	$RegionLabel = $prmRegionLabel;
 	$OutDir = TMP_DIR . '/' . $us->sSessionId;
-	$Filename = $prmFilename;
-	// Open ZIP File, extract all files and return values...
-	$zip = new ZipArchive();
-	$res = $zip->open($OutDir . '/' . $Filename);
-	if ($res == FALSE)
+	$filename = $OutDir . '/' . $prmFilename;
+	if (! file_exists($filename))
 	{
-		$iReturn = ERR_UNKNOWN_ERROR;
+		$iReturn = ERR_DEFAULT_ERROR;
 	}
+	
 	if ($iReturn > 0)
 	{
-		$DBDir = $us->getDBDir();
-		$zip->extractTo($DBDir);
-		$zip->close();
-
-		$r = new DIRegion($us, $RegionId);
-		$r->set('RegionId', $RegionId);
-		if ($RegionLabel != '')
+		# Open ZIP File, extract all files and return values...
+		$zip = new ZipArchive();
+		$res = $zip->open($filename);
+		if ($res == FALSE)
 		{
-			$r->set('RegionLabel', $RegionLabel);
+			$iReturn = ERR_UNKNOWN_ERROR;
 		}
-		$r->update();
+		if ($iReturn > 0)
+		{
+			$DBDir = $us->getDBDir();
+			$zip->extractTo($DBDir);
+			$zip->close();
+
+			$r = new DIRegion($us, $RegionId);
+			$r->set('RegionId', $RegionId);
+			if ($RegionLabel != '')
+			{
+				$r->set('RegionLabel', $RegionLabel);
+			}
+			$r->update();
+		}
 	}
-	if (file_exists($OutDir . '/' . $Filename))
+	if (file_exists($filename))
 	{
-		unlink($OutDir . '/' . $Filename);
+		unlink($filename);
 	}
 	return $iReturn;
-} //doDatabaseReplace()
+} #doDatabaseReplace()
 
 </script>

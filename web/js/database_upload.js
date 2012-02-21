@@ -52,9 +52,10 @@ function onReadyDatabaseUpload()
 		doDatabaseUploadStatusMsg('msgDatabaseUploadWaitForCopy');
 		jQuery.post(jQuery('#desinventarURL').val() + '/',
 			{
-				cmd: 'cmdDatabaseCopy',
-				RegionId: jQuery('#txtDatabaseUploadRegionId').text(),
-				Filename: jQuery('#txtDatabaseUploadFilename').val()
+				cmd        : 'cmdDatabaseCopy',
+				RegionId   : jQuery('#txtDatabaseUploadRegionId').text(),
+				RegionLabel: jQuery('#txtDatabaseUploadRegionLabel').text(),
+				Filename   : jQuery('#txtDatabaseUploadFilename').val()
 			},
 			function(data)
 			{
