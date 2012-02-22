@@ -189,14 +189,8 @@
 			$('aGeographyId').value = key;
 			$('aGeographyCode').value = val;
 			$('aGeographyName').value = val2;
-			if (val3 == "1")
-			{
-				$('aGeographyActive').checked = true;
-			}
-			else
-			{
-				$('aGeographyActive').checked = false;
-			}
+			jQuery('#frmDBConfigGeographyEdit .GeographyActive').val(parseInt(val3));
+			jQuery('#frmDBConfigGeographyEdit .GeographyActiveCheckbox').prop('checked', parseInt(jQuery('#frmDBConfigGeographyEdit .GeographyActive').val()) > 0);
 		}
 	}
 
