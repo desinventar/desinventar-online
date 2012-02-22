@@ -1121,6 +1121,10 @@ function setDICardFromId(prmRegionId, prmDisasterId, prmRecordNumber, prmRecordC
 		},
 		function(data)
 		{
+			jQuery('#DICard .clsEffectNumeric').each(function() {
+				console.log(jQuery(this).attr('id') + ' ' + data[jQuery(this).attr('id')]);
+				jQuery(this).jecValue(data[jQuery(this).attr('id')]);
+			});
 			setDICard(prmRegionId, data);
 			jQuery('#divRecordNavigationInfo').hide();
 			var RecordNumber = parseInt(jQuery('#cardsRecordNumber').val());
