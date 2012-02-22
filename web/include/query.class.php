@@ -611,19 +611,28 @@ class Query //extends PDO
 		return null;
 	}
 
-	function loadGeography($level)
+	function loadGeography($level, $prmOnlyActive = true)
 	{
-		if (!is_numeric($level) && $level >= 0)
-		{
-			return null;
-		}
-		$sql = "SELECT * FROM Geography WHERE GeographyLevel=" . $level . 
-			" AND GeographyId NOT LIKE '%00000' ORDER BY GeographyName";
 		$data = array();
-		$res = $this->dreg->query($sql);
-		foreach($res as $row)
+		$continue = ERR_NO_ERROR;
+		if (!is_numeric($level) || $level < 0)
 		{
-			$data[$row['GeographyId']] = array($row['GeographyCode'], str2js($row['GeographyName']), $row['GeographyActive']);
+			$continue = ERR_DEFAULT_ERROR;
+		}
+		if ($continue)
+		{
+			$sql = 'SELECT * FROM Geography WHERE GeographyLevel="' . $level . '"' .
+			       ' AND GeographyId NOT LIKE "%00000"';
+			if ($prmOnlyActive == true)
+			{
+				$sql .= ' AND GeographyActive>0 ';
+			}
+			$sql .= ' ORDER BY GeographyName';			
+			$res = $this->dreg->query($sql);
+			foreach($res as $row)
+			{
+				$data[$row['GeographyId']] = array($row['GeographyCode'], str2js($row['GeographyName']), $row['GeographyActive']);
+			}
 		}
 		return $data;
 	}

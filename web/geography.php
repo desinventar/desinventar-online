@@ -77,7 +77,7 @@ switch ($cmd)
 		$lev = 0;
 		$levmax = $us->q->getMaxGeoLev();
 		$levname = $us->q->loadGeoLevById($lev);
-		$geol = $us->q->loadGeography($lev);
+		$geol = $us->q->loadGeography($lev, GEOGRAPHY_ALL);
 		$t->assign('lev', $lev);
 		$t->assign('levmax', $levmax);
 		$t->assign('levname', $levname);
