@@ -637,12 +637,17 @@ class Query //extends PDO
 		return $data;
 	}
 
-	function loadGeoChilds($geoid)
+	function loadGeoChilds($geoid, $prmOnlyActive = true)
 	{
+		$data = array();
 		$level = $this->getNextLev($geoid);
 		$sql = "SELECT * FROM Geography WHERE GeographyId LIKE '". $geoid .
-			"%' AND GeographyLevel=" . $level . " ORDER BY GeographyName";
-		$data = array();
+			"%' AND GeographyLevel=" . $level;
+		if ($prmOnlyActive == true)
+		{
+			$sql .= ' AND GeographyActive>0 ';
+		}
+		$sql .= ' ORDER BY GeographyName';
 		$res = $this->dreg->query($sql);
 		foreach($res as $row)
 		{

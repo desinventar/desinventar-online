@@ -50,7 +50,7 @@ else
 			$lev = $us->q->getNextLev($_GET['GeographyId']);
 			$levmax = $us->q->getMaxGeoLev();
 			$levname = $us->q->loadGeoLevById($lev);
-			$geol = $us->q->loadGeoChilds($_GET['GeographyId']);
+			$geol = $us->q->loadGeoChilds($_GET['GeographyId'], GEOGRAPHY_ONLY_ACTIVE);
 			$t->assign('lev', $lev);
 			$t->assign('levmax', $levmax);
 			$t->assign('levname', $levname);
