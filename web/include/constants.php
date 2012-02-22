@@ -76,4 +76,6 @@ define('GRAPH_COMPARATIVE_EVENT'    , 3);
 define('GRAPH_COMPARATIVE_CAUSE'    , 4);
 define('GRAPH_COMPARATIVE_GEOGRAPHY', 200);
 
+define('GEOGRAPHY_ONLY_ACTIVE', true);
+define('GEOGRAPHY_ALL', false);
 </script>
