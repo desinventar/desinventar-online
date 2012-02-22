@@ -1076,7 +1076,7 @@ switch ($cmd)
 				break;
 				case 'glist':
 					$t->assign('reg', $get['GeographyId']);
-					$t->assign('geol', $us->q->loadGeoChilds($get['GeographyId']));
+					$t->assign('geol', $us->q->loadGeoChilds($get['GeographyId']), GEOGRAPHY_ONLY_ACTIVE);
 					$t->display('block_glist.tpl');
 				break;
 				case 'geolst':
