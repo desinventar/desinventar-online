@@ -759,6 +759,10 @@ function doDatacardClear()
 	jQuery('#DisasterBeginTime1').val('');
 	jQuery('#DisasterBeginTime2').val('');
 	jQuery('#cardsRecordNumber').val(0);
+	jQuery('#DICard .clsEffectNumeric').each(function() {
+		jQuery(this).jecValue('');
+		jQuery(this).val(0);
+	});
 }
 
 function doDatacardNew()
