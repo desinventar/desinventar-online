@@ -1203,7 +1203,7 @@ class UserSession {
 	public function getDisasterCount()
 	{
 		$iCount = 0;
-		$sQuery = "SELECT COUNT(DisasterId) AS C FROM Disaster";
+		$sQuery = 'SELECT COUNT(DisasterId) AS C FROM Disaster WHERE DisasterSerial<>""';
 		foreach($this->q->dreg->query($sQuery) as $row)
 		{
 			$iCount = $row['C'];
@@ -1215,7 +1215,7 @@ class UserSession {
 	{
 		$DisasterId = '';
 		$prmRecord--;
-		$sQuery = "SELECT DisasterId FROM Disaster ORDER BY DisasterBeginTime,DisasterSerial LIMIT " . $prmRecord . ",1";
+		$sQuery = 'SELECT DisasterId FROM Disaster WHERE DisasterSerial<>"" ORDER BY DisasterBeginTime,DisasterSerial LIMIT ' . $prmRecord . ',1';
 		foreach($this->q->dreg->query($sQuery) as $row)
 		{
 			$DisasterId = $row['DisasterId'];
