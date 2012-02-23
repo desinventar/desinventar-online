@@ -832,7 +832,7 @@ function doDatacardNew()
 function doDatacardEdit()
 {
 	displayDatacardStatusMsg('');
-	RegionId = jQuery('#desinventarRegionId').val();
+	var RegionId = jQuery('#desinventarRegionId').val();
 	jQuery.post(jQuery('#desinventarURL').val() + '/cards.php',
 		{
 			'cmd'        : 'chklocked',
