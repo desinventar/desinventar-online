@@ -45,24 +45,7 @@ function doViewportCreate()
 				autoScroll: true,
 				margins:'0 2 0 0',
 				contentEl: 'divWestPanel',
-				lockedPanel: false,
-				floatable: true,
-				listeners: {
-					'beforecollapse': function() {
-						//console.log('beforecollapse : ' + this.lockedPanel + ' ' + this.floatable);
-						return ! this.lockedPanel;
-					},
-					'beforeexpand': function() {
-						//console.log('beforeexpand : ' + this.lockedPanel + ' ' + this.floatable);
-						return ! this.lockedPanel;
-					},
-					'expand': function() {
-						//console.log('expand : ' + this.lockedPanel + ' ' + this.floatable);
-					},
-					'collapse':function() {
-						//console.log('collapse : ' + this.lockedPanel + ' ' + this.floatable);
-					}
-				}
+				floatable: true
 			};
 			Ext.apply(this, config);
 			Ext.apply(this.initialConfig, config);
@@ -70,14 +53,6 @@ function doViewportCreate()
 			this.deftitle = this.title;
 			DesInventar.WestPanel.superclass.initComponent.call(this);
 		},
-		lockPanel: function() {
-			this.floatable = false;
-			this.lockedPanel = true;
-		},
-		unlockPanel: function() {
-			this.floatable = true;
-			this.lockedPanel = false;
-		}
 	});
 	DesInventar.Viewport = Ext.extend(Ext.Viewport, {
 		initComponent: function() {
@@ -157,8 +132,6 @@ function doViewportShow()
 		jQuery('#divRegionList').show();
 		doUpdateDatabaseListByUser();
 	}
-	//Ext.getCmp('westm').collapse();
-	//Ext.getCmp('westm').lockPanel();
 } //doViewportShow()
 
 function doMainChangeLanguage(LangIsoCode)
@@ -302,7 +275,6 @@ function doMainMenuHandler(item)
 		break;
 		case 'mnuDatacardSetup':
 			hideQueryDesign();
-			Ext.getCmp('westm').lockPanel();
 			doMainMenuToggle(false);
 			Ext.getCmp('mnuDatacard').enable();
 			Ext.getCmp('mnuDatacardEdit').hide();
@@ -315,7 +287,6 @@ function doMainMenuHandler(item)
 			jQuery('#tabDatabaseConfiguration').show();
 		break;
 		case 'mnuDatacardSetupEnd':
-			Ext.getCmp('westm').unlockPanel();
 			jQuery('body').trigger('cmdWindowReload');
 			/*
 			doMainMenuToggle(true);
