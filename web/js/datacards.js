@@ -91,6 +91,11 @@ function onReadyDatacards()
 		maxLength: 15,
 		focusONewOption: true,
 		acceptedKeys : [48,49,50,51,52,53,54,55,56,57,58]
+	}).blur(function() {
+		if (jQuery(this).val() == '')
+		{
+			jQuery(this).val(0);
+		}
 	});
 
 	// Enable/Disable related EffectSector fields based on value of other fields...	
