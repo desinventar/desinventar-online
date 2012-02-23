@@ -56,6 +56,18 @@ function onReadyGeolevels()
 		jQuery('#btnGeolevels_Add').show();
 	});
 
+	jQuery('#frmGeolevel .OptionImportGeographyCheckbox').change(function(event) {
+		var v = 0;
+		if (jQuery(this).is(':checked'))
+		{
+			v = 1;
+		}
+		jQuery('#frmGeolevel .OptionImportGeography').val(v);
+	});
+	jQuery('#frmGeolevel .OptionImportGeographyText').click(function() {
+		jQuery('#frmGeolevel .OptionImportGeographyCheckbox').prop('checked', !jQuery('#frmGeolevel .OptionImportGeographyCheckbox').prop('checked')).change();
+	});
+
 	jQuery('#frmGeolevel .GeoLevelActiveCheckbox').change(function() {
 		var v = 0;
 		if (jQuery(this).is(':checked')) 
@@ -134,35 +146,25 @@ function onReadyGeolevels()
 						jQuery('div.status .statusUpdateOk').show();
 						doGeolevelsPopulateList(data.GeolevelsList);
 
-						//If empty geography items, create from DBF
-						if (parseInt(data.GeographyItemsCount) == 0)
-						{
-							jQuery('div.status span.status').hide();
-							jQuery('div.status span.statusCreatingGeography').show();
-							jQuery.post(
-								jQuery('#desinventarURL').val() + '/',
-								{
-									cmd           : 'cmdGeolevelsImportGeography',
-									RegionId      : jQuery('#desinventarRegionId').val(),
-									GeoLevel      : jQuery('#frmGeolevel').toObject()
-								},
-								function(data)
-								{
-									jQuery('div.status span.statusCreatingGeography').hide();
-									jQuery('div.status .statusUpdateOk').show();
-									setTimeout(function () {
-										jQuery('div.status span.status').hide();
-									}, 3000);
-								},
-								'json'
-							);
-						}
-						else
-						{
-							setTimeout(function () {
-								jQuery('div.status span.status').hide();
-							}, 2500);
-						}
+						jQuery('div.status span.status').hide();
+						jQuery('div.status span.statusCreatingGeography').show();
+						jQuery.post(
+							jQuery('#desinventarURL').val() + '/',
+							{
+								cmd           : 'cmdGeolevelsImportGeography',
+								RegionId      : jQuery('#desinventarRegionId').val(),
+								GeoLevel      : jQuery('#frmGeolevel').toObject()
+							},
+							function(data)
+							{
+								jQuery('div.status span.statusCreatingGeography').hide();
+								jQuery('div.status .statusUpdateOk').show();
+								setTimeout(function () {
+									jQuery('div.status span.status').hide();
+								}, 3000);
+							},
+							'json'
+						);
 					}
 					else
 					{

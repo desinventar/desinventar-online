@@ -180,6 +180,16 @@
 										</select>
 									</td>
 								</tr>
+								<tr>
+									<td colspan="2" class="center">
+										<br />
+										<input class="OptionImportGeography" name="option.ImportGeography" type="hidden" value="0" />
+										<input class="OptionImportGeographyCheckbox" type="checkbox" />
+										<span  class="OptionImportGeographyText" title="{-#msgGeocarto_ImportGeographyTooltip#-}">
+											{-#msgGeocarto_ImportGeography#-}
+										</span>
+									</td>
+								</tr>
 							</table>
 							<br />
 						</div>

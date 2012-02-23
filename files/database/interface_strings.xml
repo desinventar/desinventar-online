@@ -3265,6 +3265,18 @@
 			<Text LangIsoCode="por">Este é o nome da coluna com o nome descritivo das unidades geográficas (ie Nome)</Text>
 			<Text LangIsoCode="fre">C'est le nom de la colonne avec le nom descriptif des unités géographiques (nom)</Text>
 		</Message>
+		<Message id="msgGeocarto_ImportGeography">
+			<Text LangIsoCode="eng">Create geography units</Text>
+			<Text LangIsoCode="spa">Crear unidades de geografía</Text>
+			<Text LangIsoCode="por">Criar unidades de geografia</Text>
+			<Text LangIsoCode="fre">Créer des unités géographiques</Text>
+		</Message>
+		<Message id="msgGeocarto_ImportGeographyTooltip">
+			<Text LangIsoCode="eng">Use this option to force the creation of geography units for this level, any existing units will be deleted.</Text>
+			<Text LangIsoCode="spa">Utilice esta opción para forzar la creación de unidades de la geografía de este nivel, las unidades existentes serán eliminadas.</Text>
+			<Text LangIsoCode="por">Utilize esta opção para forçar a criação de unidades de geografia para este nível, todas as unidades existentes serão apagados.</Text>
+			<Text LangIsoCode="fre">Utilisez cette option pour forcer la création d'unités de la géographie à ce niveau, toutes les unités existantes seront supprimées.</Text>
+		</Message>
 		<Message id="msgGeocarto_File">
 			<Text LangIsoCode="eng">File</Text>
 			<Text LangIsoCode="spa">Archivo</Text>
