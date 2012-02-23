@@ -3,7 +3,15 @@
  DesInventar - http://www.desinventar.org
  (c) 1998-2012 Corporacion OSSO
 */
-function import_geography_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $prmCode, $prmName, $prmParentCode)
+function geography_delete_items($prmConn, $prmGeoLevelId)
+{
+	$answer = ERR_NO_ERROR;
+	$query = 'DELETE FROM Geography WHERE GeographyLevel>=' . $prmGeoLevelId;
+	$prmConn->query($query);
+	return $answer;
+}
+
+function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $prmCode, $prmName, $prmParentCode)
 {	
 	$iReturn = ERR_NO_ERROR;
 	if (! file_exists($prmFilename))
@@ -67,7 +75,7 @@ function get_dbf_fields($prmFilename)
 	return $field_list;
 }
 
-function get_geography_items_count($conn, $prmGeoLevelId)
+function geography_get_items_count($conn, $prmGeoLevelId)
 {
 	$query = 'SELECT COUNT(*) AS C FROM Geography WHERE GeographyLevel=' . $prmGeoLevelId;
 	$count = 0;

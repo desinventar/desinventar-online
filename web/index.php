@@ -502,7 +502,7 @@ switch ($cmd)
 		$answer['GeoLevelId'] = $GeoLevelId;
 		if ($iReturn > 0)
 		{
-			$geography_items_count = get_geography_items_count($us->q->dreg, $GeoLevelId);
+			$geography_items_count = geography_get_items_count($us->q->dreg, $GeoLevelId);
 			$answer['GeographyItemsCount'] = $geography_items_count;
 			$r = new DIRegion($us, $RegionId);
 			$GeolevelsList = $r->getGeolevelList();
@@ -526,12 +526,27 @@ switch ($cmd)
 		{
 			$GeoLevel = $_POST['GeoLevel'];
 			$GeoLevelId = $GeoLevel['GeoLevelId'];
-			$File  = 'geocarto' . sprintf('%02d', $GeoLevelId) . '.dbf';
-			$DBDir = $us->getRegionDir($RegionId);
-			import_geography_from_dbf($us, $GeoLevelId, $DBDir . '/' . $File, 
-				$GeoLevel['GeoLevelLayerCode'],
-				$GeoLevel['GeoLevelLayerName'],
-				$GeoLevel['GeoLevelLayerParentCode']);
+			$geography_items_count = geography_get_items_count($us->q->dreg, $GeoLevelId);
+			if ($GeoLevel['option']['ImportGeography'] < 1)
+			{
+				if ($geography_items_count < 1)
+				{
+					$GeoLevel['option']['ImportGeography'] = 1;
+				}
+			}
+			if ($GeoLevel['option']['ImportGeography'] > 0)
+			{
+				if ($geography_items_count > 0)
+				{
+					geography_delete_items($us->q->dreg, $GeoLevelId);
+				}
+				$File  = 'geocarto' . sprintf('%02d', $GeoLevelId) . '.dbf';
+				$DBDir = $us->getRegionDir($RegionId);
+				geography_import_from_dbf($us, $GeoLevelId, $DBDir . '/' . $File, 
+					$GeoLevel['GeoLevelLayerCode'],
+					$GeoLevel['GeoLevelLayerName'],
+					$GeoLevel['GeoLevelLayerParentCode']);
+			}
 		}
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
