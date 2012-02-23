@@ -96,7 +96,10 @@
 												<input type="checkbox" disabled="disabled" checked="checked" />
 											</div>
 										</td>
-									{-elseif $row[$field_id]==-2-}?
+									{-elseif $row[$field_id]==-2-}
+										<td class="center">
+											?
+										</td>
 									{-else-}
 										<td class="{-$cellClass-}">
 											<div>{-$row[$field_id]-}</div>
