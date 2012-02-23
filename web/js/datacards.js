@@ -90,8 +90,6 @@ function onReadyDatacards()
 	jQuery('.clsEffectNumeric').jec({
 		maxLength: 15,
 		focusONewOption: true,
-		blinkingCursor: true,
-        blinkingCursorInterval: 500,
 		acceptedKeys : [48,49,50,51,52,53,54,55,56,57,58]
 	});
 

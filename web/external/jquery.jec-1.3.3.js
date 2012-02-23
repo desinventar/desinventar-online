@@ -103,6 +103,7 @@ valueIsEditable, which*/
                         activeCombobox = $(this);
                         $.jECTimer = setInterval($.jEC.handleCursor, opt.blinkingCursorInterval);
                     }
+                    Combobox.focusedState($(this), true);
                 },
 
                 // blur event handler
@@ -114,6 +115,7 @@ valueIsEditable, which*/
                         activeCombobox = undefined;
                         Combobox.clearCursor($(this));
                     }
+                    Combobox.focusedState($(this), false);
                     Combobox.openedState($(this), false);
                 },
 
@@ -128,6 +130,7 @@ valueIsEditable, which*/
                     switch (keyCode) {
                     case 8:  // backspace
                     case 46: // delete
+						Combobox.focusedState(jQuery(this), false);
                         option = $(this).find('option.' + pluginClass);
                         if (option.val().length >= 1) {
                             value = option.text().substring(0, option.text().length - 1);
@@ -153,6 +156,7 @@ valueIsEditable, which*/
                         // handle special keys
                         $.each(specialKeys, function (i, val) {
 							if (keyCode === val && keyCode === lastKeyCode) {
+								Combobox.focusedState(jQuery(this), false);
                                 exit = true;
                             }
                         });
@@ -164,10 +168,18 @@ valueIsEditable, which*/
 
                             if ($.inArray(keyCode, opt.acceptedKeys) !== -1) {
                                 option = $(this).find('option.' + pluginClass);
-                                text = option.text();
-
-                                if (text.length < opt.maxLength) {
+                                if (Combobox.focusedState(jQuery(this)))
+                                {
+                                	text = '';
+                                	Combobox.focusedState(jQuery(this), false);
+								}
+								else
+								{
+									text = option.text();
+								}
+								if (text.length < opt.maxLength) {
                                     value = text + String.fromCharCode(getKeyCode(event));
+                                    console.log(value);
                                     option.val(value).text(value);
                                 }
 
@@ -794,6 +806,10 @@ valueIsEditable, which*/
 
                 cursorState: function (elem, state) {
                     return elem.data('jecCursorState', state);
+                },
+
+                focusedState: function (elem, state) {
+                    return elem.data('jecFocusedState', state);
                 },
 
                 openedState: function (elem, state) {
