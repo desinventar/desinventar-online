@@ -125,3 +125,92 @@ function showtip(prmText)  //prmText, prmColor
 		jQuery('#txtHelpArea').val(prmText).css('background-color', sColor);
 	}
 }
+
+// Block characters according to type
+function blockChars(e, value, type)
+{
+	var key = window.event ? e.keyCode : e.which;
+
+	// 2010-08-19 (jhcaiced) Accept values in numeric keypad
+	if (key >= 96 && key <= 105)
+	{
+		key = key - 48;
+	}
+	var keychar = String.fromCharCode(key);
+	if (key == 190 || key == 110 || key == 188) { keychar = '.'; }
+	var opt = type.split(":"); // 0=type; 1=minlength; 2=minval-maxval
+		// Accept keys: backspace, tab, shift, ctrl, insert, delete
+		//        pagedown, pageup, rows
+	var spckey = (key==8 || key==9 || key==17 || key==20 ||
+				  key==45 || key==46 || (key>=33 && key<=40) || key==0);
+	var chk = true;
+	var val = true; // validate characters
+		// Check max length
+	if (value.length >= parseInt(opt[1]))
+	{
+		var len = false;
+	}
+	else
+	{
+		var len = true;
+	}
+	// Check datatype
+	switch (opt[0])
+	{
+		case "date" :
+			reg = /^\d{4}-\d{0,2}-\d{0,2}$/;
+			chk = reg.test(keychar);
+		break;
+		case "alphanumber" :
+			reg = /^[a-z]|[A-Z]|[0-9]|[-_+.]+/; 
+			chk = reg.test(keychar);
+			break;
+		case "integer" :
+			reg = /\d/;
+			chk = reg.test(keychar);
+			break;
+		case "double" :
+			reg = /^[-+]?[0-9]|[.]+$/;
+			chk = reg.test(keychar);
+			break;
+		default:;
+	}
+	// Block special characters: (like !@#$%^&'*" etc)
+	val = !(key == 92 || key == 13 || key == 16)
+  return (val && ((chk && len) || spckey));
+}
+
+function onlyText(e)
+{
+	var keynum;
+	var keychar;
+	var numcheck;
+	if(window.event)
+	{ // IE
+		keynum = e.keyCode;
+	}
+	else if(e.which)
+	{ // Netscape/Firefox/Opera
+		keynum = e.which;
+	}
+	keychar = String.fromCharCode(keynum);
+	numcheck = /\d/;
+	return !numcheck.test(keychar);
+}
+
+function onlyNumber(e)
+{
+	var keynum;
+	var keychar;
+	if(window.event)
+	{ // IE
+		keynum = e.keyCode;
+	}
+	else if(e.which)
+	{ // Netscape/Firefox/Opera
+		keynum = e.which;
+	}
+	if (e.keyCode < 48 || e.keyCode > 57)
+		return false;
+	return true;
+}
