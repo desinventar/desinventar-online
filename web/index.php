@@ -174,7 +174,16 @@ switch ($cmd)
 		echo json_encode($answer);
 	break;
 	case 'cmdDatacards':
-		#$t->assign('dic', $us->q->queryLabelsFromGroup('DB', $lg));
+		$ef1 = $us->q->queryLabelsFromGroup('Effect|People', $lg);
+		$ef2 = $us->q->queryLabelsFromGroup('Effect|Affected', $lg);
+		$ef3 = $us->q->queryLabelsFromGroup('Effect|Economic', $lg);
+		$ef4 = $us->q->queryLabelsFromGroup('Effect|More', $lg);
+		$sec = $us->q->queryLabelsFromGroup('Sector', $lg);
+		$t->assign('ef1', $ef1);
+		$t->assign('ef2', $ef2);
+		$t->assign('ef3', $ef3);
+		$t->assign('ef4', $ef4);
+		$t->assign('sec', $sec);
 		$t->display('main_datacards.tpl');
 	break;
 	case 'cmdGeographyGetItemsByLevel':
