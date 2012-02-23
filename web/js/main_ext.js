@@ -46,7 +46,7 @@ function doViewportCreate()
 				margins:'0 2 0 0',
 				contentEl: 'divWestPanel',
 				lockedPanel: false,
-				floatable: false,
+				floatable: true,
 				listeners: {
 					'beforecollapse': function() {
 						//console.log('beforecollapse : ' + this.lockedPanel + ' ' + this.floatable);
