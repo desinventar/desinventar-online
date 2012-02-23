@@ -179,7 +179,6 @@ valueIsEditable, which*/
 								}
 								if (text.length < opt.maxLength) {
                                     value = text + String.fromCharCode(getKeyCode(event));
-                                    console.log(value);
                                     option.val(value).text(value);
                                 }
 
