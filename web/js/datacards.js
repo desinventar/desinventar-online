@@ -237,7 +237,7 @@ function onReadyDatacards()
 		var value_orig = jQuery(this).val();
 		var value = value_orig.replace(',','.');
 		value = parseFloat(value);
-		if (value == NaN)
+		if (isNaN(value))
 		{
 			value = 0;
 		}
