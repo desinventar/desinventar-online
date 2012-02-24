@@ -1807,6 +1807,12 @@
 			<Text LangIsoCode="por">Observações de causa</Text>
 			<Text LangIsoCode="fre">Observations sur la cause</Text>
 		</Message>
+		<Message id="msgDatacard_InputDoubleTooltip">
+			<Text LangIsoCode="eng">Floating number, use dot as decimal separator</Text>
+			<Text LangIsoCode="spa">Número de coma flotante, utilice punto como separador decimal</Text>
+			<Text LangIsoCode="por">Número flutuante, usar ponto como separador decimal</Text>
+			<Text LangIsoCode="fre">Nombre à virgule flottante, utilisez point comme séparateur décimal</Text>
+		</Message>
 	</Group>
 	<Group name="grpMainStrings">
 		<Message id="twelcome">
