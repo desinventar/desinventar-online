@@ -1675,6 +1675,12 @@
 			<Text LangIsoCode="por">Valor do campo Serial já existe; o registro não pode ser salva</Text>
 			<Text LangIsoCode="fre">Valeur du champ de série existe déjà; record ne peut être sauvé</Text>
 		</Message>
+		<Message id="msgDatacardInvalidNumber">
+			<Text LangIsoCode="eng">Invalid number format, use dot as decimal separator</Text>
+			<Text LangIsoCode="spa">Formato de número inválido, use el punto como separador decimal</Text>
+			<Text LangIsoCode="por">Inválido formato do número, utilize ponto como separador decimal</Text>
+			<Text LangIsoCode="fre">Blancs format de nombre, utilisez point comme séparateur décimal</Text>
+		</Message>
 		<Message id="msgDatacardInvalidStatus">
 			<Text LangIsoCode="eng">Cannot save datacard with this status.</Text>
 			<Text LangIsoCode="spa">No puede guardar ficha con este estado.</Text>

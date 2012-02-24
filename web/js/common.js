@@ -70,6 +70,7 @@ jQuery.fn.unhighlight = function() {
 	if (jQuery(this).attr('old-bg-color') != '') {
 		jQuery(this).css('background-color', jQuery(this).attr('old-bg-color'));
 	}
+	jQuery(this).attr('old-bg-color', jQuery(this).css('background-color'));
 }
 
 jQuery.fn.disable = function() {

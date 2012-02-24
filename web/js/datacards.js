@@ -234,18 +234,19 @@ function onReadyDatacards()
 	jQuery('.inputDouble').keydown(function(event) {
 		return blockChars(event, jQuery(this).val(), 'double:' + jQuery(this).attr('MaxLength'));
 	}).blur(function() {
-		var value_orig = jQuery(this).val();
-		var value = value_orig.replace(',','.');
-		value = parseFloat(value);
-		if (isNaN(value))
+		/*
+		var answer = validateInputDouble(jQuery(this).val());
+		if (answer > 0)
 		{
-			value = 0;
+			jQuery(this).unhighlight();
 		}
-		if (value == '')
+		else
 		{
-			value = 0;
+			jQuery(this).highlight();
+			jQuery(this).focus();
 		}
-		jQuery(this).val(value);
+		*/
+		return false;
 	});
 
 	jQuery('.inputText').keydown(function(event) {
@@ -880,6 +881,28 @@ function doDatacardSave()
 
 	if (bContinue)
 	{
+		var error_count = 0;
+		jQuery('#DICard .inputDouble').each(function() {
+			var answer = validateInputDouble(jQuery(this).val());
+			if (answer > 0)
+			{
+				jQuery(this).unhighlight();
+			}
+			else
+			{
+				jQuery(this).highlight().focus();
+				error_count++;
+			}
+		});
+		if (error_count > 0)
+		{
+			bContinue = false;
+			displayDatacardStatusMsg('msgDatacardInvalidNumber');
+		}
+	}	
+
+	if (bContinue)
+	{
 		// Validate Record Status
 		if (jQuery('#RecordStatus').val() == '')
 		{
@@ -940,7 +963,7 @@ function doDatacardSave()
 		jQuery('#DICard #CauseId').highlight().focus();
 		bContinue = false;
 	}
-	
+
 	// Use AJAX to save datacard
 	if (bContinue)
 	{
@@ -1260,6 +1283,35 @@ function setDICard(prmRegionId, arr)
 	}
 } //setDICard
 
+function validateInputDouble(prmValue)
+{
+	var answer = 1;
+	var value = prmValue;
+	if (isNaN(value))
+	{
+		answer = 0;
+	}
+	if (value == '')
+	{
+		answer = 0;
+	}
+	if (answer > 0)
+	{
+		if (occurrences(value, ',') > 0)
+		{
+			answer = 0;
+		}
+	}
+	if (answer > 0)
+	{
+		if (occurrences(value, '.') > 1)
+		{
+			answer = 0;
+		}
+	}
+	return(answer);
+}
+
 function occurrences(string, substring)
 {
 	var n=0;
@@ -1279,4 +1331,3 @@ function occurrences(string, substring)
 	}
 	return(n);
 }
-                                            
