@@ -109,15 +109,20 @@ class DIGeography extends DIRecord {
 		return $GeographyId;
 	}
 	
-	public function setGeographyId($prmMyParentId) {
-		$iReturn = 1;
-		$GeographyId = $this->buildGeographyId($prmMyParentId);
-		if ($GeographyId == '') { $iReturn = -1; }
-		if ($iReturn > 0) {
-			$this->set('GeographyId', $GeographyId);
+	public function setGeographyId($prmMyParentId)
+	{
+		$answer = ERR_NO_ERROR;
+		$geography_id = $this->buildGeographyId($prmMyParentId);
+		if ($geography_id == '')
+		{
+			$answer = ERR_DEFAULT_ERROR;
+		}
+		if ($answer > 0)
+		{
+			$this->set('GeographyId', $geography_id);
 			$this->setGeographyLevel();
 		}
-		return $iReturn;
+		return $answer;
 	}
 	
 	public function setGeographyLevel() {
