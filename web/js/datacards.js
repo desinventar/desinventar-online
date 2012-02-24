@@ -409,7 +409,7 @@ function onReadyDatacards()
 	});
 	//Initialize components
 	jQuery('#divDatacard .tblGeography tr:first').hide();
-	jQuery('#DICard :input').unhighlight();
+	//jQuery('#DICard :input').unhighlight();
 } //onReadyDatacards()
 
 function doUpdateGeoLevelSelect(prmGeographyLevel, prmGeographyList)
@@ -887,7 +887,9 @@ function doDatacardSave()
 			var answer = validateInputDouble(jQuery(this).val());
 			if (answer > 0)
 			{
-				jQuery(this).unhighlight();
+				if (jQuery(this).attr('old-bg-color') != '') {
+					jQuery(this).unhighlight();
+				}
 			}
 			else
 			{
