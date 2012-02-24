@@ -234,10 +234,18 @@ function onReadyDatacards()
 	jQuery('.inputDouble').keydown(function(event) {
 		return blockChars(event, jQuery(this).val(), 'double:' + jQuery(this).attr('MaxLength'));
 	}).blur(function() {
-		if (jQuery.trim(jQuery(this).val()) == '')
+		var value_orig = jQuery(this).val();
+		var value = value_orig.replace(',','.');
+		value = parseFloat(value);
+		if (value == NaN)
 		{
-			jQuery(this).val(0);
+			value = 0;
 		}
+		if (value == '')
+		{
+			value = 0;
+		}
+		jQuery(this).val(value);
 	});
 
 	jQuery('.inputText').keydown(function(event) {
