@@ -35,7 +35,13 @@
 			<input type="hidden" name="QueryEvent[OP]" value="AND" />
 			<span class="dlgmsg">{-#tcntclick#-}</span><br />
 			<select id="qevelst" name="D_EventId[]" multiple style="width: 250px; height: 200px;" class="line">
-				{-include file="block_eventlist.tpl"-}
+				{-foreach name=eve key=key item=item from=$evepredl-}
+					<option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
+				{-/foreach-}
+					<option disabled>----</option>
+				{-foreach name=eve key=key item=item from=$eveuserl-}
+					<option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
+				{-/foreach-}
 			</select>
 			<br /><br />
 			<b onMouseOver="showtip('{-$eve.EventDuration[2]-}');">{-$eve.EventDuration[0]-}</b><br />

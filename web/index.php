@@ -1112,11 +1112,6 @@ switch ($cmd)
 					$t->assign('cauuserl', $us->q->loadCauses('USER', 'active', $lg));
 					$t->display('block_causelist.tpl');
 				break;
-				case 'evelst':
-					$t->assign('evepredl', $us->q->loadEvents('PREDEF', 'active', $lg));
-					$t->assign('eveuserl', $us->q->loadEvents('USER', 'active', $lg));
-					$t->display('block_eventlist.tpl');
-				break;
 				default:
 					# Update UserSession with Current Language.
 					$us->update();
