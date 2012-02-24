@@ -409,6 +409,7 @@ function onReadyDatacards()
 	});
 	//Initialize components
 	jQuery('#divDatacard .tblGeography tr:first').hide();
+	jQuery('#DICard :input').unhighlight();
 } //onReadyDatacards()
 
 function doUpdateGeoLevelSelect(prmGeographyLevel, prmGeographyList)
