@@ -12,7 +12,7 @@ function geography_delete_items($prmConn, $prmGeoLevelId)
 }
 
 function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $prmCode, $prmName, $prmParentCode)
-{	
+{
 	$iReturn = ERR_NO_ERROR;
 	if (! file_exists($prmFilename))
 	{	
@@ -20,6 +20,12 @@ function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 	}
 	if ($iReturn > 0)
 	{
+		$geo_list = array();
+		$query = 'SELECT GeographyId,GeographyCode FROM Geography WHERE GeographyLevel=' . $prmGeoLevelId . ' ORDER BY GeographyId';
+		foreach($prmSession->q->dreg->query($query,PDO::FETCH_ASSOC) as $row)
+		{
+			$geo_list[$row['GeographyCode']] = $row['GeographyId'];
+		}
 		$item_count = 0;
 		$parent_cache = array();
 		$dbf = dbase_open($prmFilename, 'r');
@@ -30,33 +36,50 @@ function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 			{
 				$geography_code       = $row[$prmCode];
 				$geography_name       = iconv('windows-1252', 'utf-8', $row[$prmName]);
-				$parent_code = '';
-				if ($prmParentCode != '')
+				$geography_id = '';
+				if (isset($geo_list[$geography_code]))
 				{
-					$parent_code = $row[$prmParentCode];
-				}
-				if (isset($parent_cache[$parent_code]))
-				{
-					$parent_id = $parent_cache[$parent_code];
+					$geography_id = $geo_list[$geography_code];
 				}
 				else
 				{
-					$parent_id = DIGeography::getIdByCode($prmSession, $parent_code);
-					$parent_cache[$parent_code] = $parent_id;
+					$parent_code = '';
+					if ($prmParentCode != '')
+					{
+						$parent_code = $row[$prmParentCode];
+					}
+					if (isset($parent_cache[$parent_code]))
+					{
+						$parent_id = $parent_cache[$parent_code];
+					}
+					else
+					{
+						$parent_id = DIGeography::getIdByCode($prmSession, $parent_code);
+						$parent_cache[$parent_code] = $parent_id;
+					}
 				}
-				$o = new DIGeography($prmSession);
+				$o = new DIGeography($prmSession, $geography_id);
 				$o->set('GeographyName', $geography_name);
 				$o->set('GeographyCode', $geography_code);
 				$o->set('GeographyLevel', $prmGeoLevelId);
-				$o->setGeographyId($parent_id);
-				$r = $o->insert();
-				$geography_id = $o->get('GeographyId');
+				if ($geography_id == '')
+				{
+					$o->setGeographyId($parent_id);
+					$r = $o->insert();
+					fb('insert : ' . $r);
+				}
+				else
+				{
+					$r = $o->update();
+					fb('update : ' . $r);
+				}
 				if ($r > 0)
 				{
 					$item_count++;
 				}
 			}
-		}
+		} #for
+		fb($item_count);
 		dbase_close($dbf);
 	}
 	return $iReturn;
