@@ -5,6 +5,10 @@
 
 function onReadyGeography()
 {
+	jQuery('div.Geography select.GeographyListHeader').change(function() {
+		console.log('select change : ' + jQuery(this).data('GeoLevelId'));
+	});
+
 	jQuery('body').on('cmdGeographyLoad', function() {
 		jQuery.post(
 			jQuery('#desinventarURL').val() + '/',
@@ -18,8 +22,8 @@ function onReadyGeography()
 					jQuery('span.title', clonedCell).text(value.GeoLevelName);
 					jQuery('select', clonedCell).data('GeoLevelId', key);
 					jQuery('div.GeographyListHeader table tr').append(clonedCell);
-					console.log(key + ' ' + value.GeoLevelId + ' ' + value.GeoLevelName);
 				});
+				jQuery('div.Geography select.GeographyListHeader').change();
 			},
 			'json'
 		);

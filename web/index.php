@@ -430,7 +430,6 @@ switch ($cmd)
 			$answer['GeolevelsList'] = $GeolevelsList;
 		}
 		$answer['Status'] = $iReturn;
-		fb($answer);
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
 	case 'cmdGeolevels':

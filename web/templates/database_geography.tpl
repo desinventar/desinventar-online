@@ -6,7 +6,7 @@
 			<tr>
 				<td style="display:none;">
 					<span class="title"></span><br />
-					<select class="GeographyList" style="width:120px;">
+					<select class="GeographyListHeader" style="width:120px;" data-GeoLevelId="">
 						<option></option>
 					</select>
 				</td>
