@@ -24,8 +24,13 @@ function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 		$query = 'SELECT GeographyId,GeographyCode FROM Geography WHERE GeographyLevel=' . $prmGeoLevelId . ' ORDER BY GeographyId';
 		foreach($prmSession->q->dreg->query($query,PDO::FETCH_ASSOC) as $row)
 		{
-			$geo_list[$row['GeographyCode']] = $row['GeographyId'];
+			$geo_list[$row['GeographyCode']] = array('id' => $row['GeographyId'],'updated' => 0);
 		}
+
+		# Set default value GeographyActive=1 for elements in this level
+		$query = 'UPDATE Geography SET GeographyActive=1 WHERE GeographyActive>0 AND GeographyLevel=' . $prmGeoLevelId;
+		$prmSession->q->dreg->query($query);
+
 		$item_count = 0;
 		$parent_cache = array();
 		$dbf = dbase_open($prmFilename, 'r');
@@ -37,9 +42,10 @@ function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 				$geography_code       = $row[$prmCode];
 				$geography_name       = iconv('windows-1252', 'utf-8', $row[$prmName]);
 				$geography_id = '';
-				if (isset($geo_list[$geography_code]))
+				if (isset($geo_list[$geography_code]['id']))
 				{
-					$geography_id = $geo_list[$geography_code];
+					$geography_id = $geo_list[$geography_code]['id'];
+					$geo_list[$geography_code]['updated'] = 1;
 				}
 				else
 				{
@@ -65,13 +71,12 @@ function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 				if ($geography_id == '')
 				{
 					$o->setGeographyId($parent_id);
+					$o->set('GeographyActive',2);
 					$r = $o->insert();
-					fb('insert : ' . $r);
 				}
 				else
 				{
 					$r = $o->update();
-					fb('update : ' . $r);
 				}
 				if ($r > 0)
 				{
@@ -79,11 +84,20 @@ function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 				}
 			}
 		} #for
-		fb($item_count);
 		dbase_close($dbf);
+		# Search the elements that are not found in the new shape file and
+		# mark them for revision
+		foreach($geo_list as $key => $value)
+		{
+			if ($value['updated'] < 1)
+			{
+				$query = 'UPDATE Geography SET GeographyActive=3 WHERE GeographyId LIKE "' . $value['id'] . '%"';
+				$prmSession->q->dreg->query($query);
+			}
+		}
 	}
 	return $iReturn;
-} //import_geography_from_dbf
+} #import_geography_from_dbf
 
 function get_dbf_fields($prmFilename)
 {
