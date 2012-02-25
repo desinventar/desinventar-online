@@ -897,6 +897,54 @@
 		</Message>
 	</Group>
 	<Group name="grpAdminGeography">
+		<Message id="msgGeography_Title">
+			<Text LangIsoCode="eng">Geography Units</Text>
+			<Text LangIsoCode="spa">Unidades Geográficas</Text>
+			<Text LangIsoCode="por">Unidades de Geografia</Text>
+			<Text LangIsoCode="fre">Unités Géographie</Text>
+		</Message>
+		<Message id="msgGeography_Edit">
+			<Text LangIsoCode="eng">Edit</Text>
+			<Text LangIsoCode="spa">Editar</Text>
+			<Text LangIsoCode="por">Atualizar</Text>
+			<Text LangIsoCode="fre">Éditer</Text>
+		</Message>
+		<Message id="msgGeography_Code">
+			<Text LangIsoCode="eng">Code</Text>
+			<Text LangIsoCode="spa">Código</Text>
+			<Text LangIsoCode="por">Código</Text>
+			<Text LangIsoCode="fre">Code</Text>
+		</Message>
+		<Message id="msgGeography_Name">
+			<Text LangIsoCode="eng">Name</Text>
+			<Text LangIsoCode="spa">Nombre</Text>
+			<Text LangIsoCode="por">Nome</Text>
+			<Text LangIsoCode="fre">Nom</Text>
+		</Message>
+		<Message id="msgGeography_Active">
+			<Text LangIsoCode="eng">Active</Text>
+			<Text LangIsoCode="spa">Activo</Text>
+			<Text LangIsoCode="por">Ativo</Text>
+			<Text LangIsoCode="fre">Actif</Text>
+		</Message>
+		<Message id="msgGeography_Status">
+			<Text LangIsoCode="eng">Status</Text>
+			<Text LangIsoCode="spa">Estado</Text>
+			<Text LangIsoCode="por">Estado</Text>
+			<Text LangIsoCode="fre">État</Text>
+		</Message>
+		<Message id="msgGeography_Save">
+			<Text LangIsoCode="eng">Save</Text>
+			<Text LangIsoCode="spa">Guardar</Text>
+			<Text LangIsoCode="por">Salvar</Text>
+			<Text LangIsoCode="fre">Enregistrer</Text>
+		</Message>
+		<Message id="msgGeography_Cancel">
+			<Text LangIsoCode="eng">Cancel</Text>
+			<Text LangIsoCode="spa">Cancelar</Text>
+			<Text LangIsoCode="por">Cancelar</Text>
+			<Text LangIsoCode="fre">Annuler</Text>
+		</Message>
 		<Message id="baddoption">
 			<Text LangIsoCode="eng">Add</Text>
 			<Text LangIsoCode="spa">Adicionar</Text>

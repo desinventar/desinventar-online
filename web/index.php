@@ -409,6 +409,30 @@ switch ($cmd)
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
+	case 'cmdGeography':
+		$t->display('main_database_geography.tpl');
+	break;
+	case 'cmdGeographyGetList':
+		$answer = array();
+		$iReturn = ERR_NO_ERROR;
+		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($RegionId == '')
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($iReturn > 0)
+		{
+			$r = new DIRegion($us, $RegionId);
+			$GeolevelsList = $r->getGeolevelList();
+			$answer['GeolevelsList'] = $GeolevelsList;
+		}
+		$answer['Status'] = $iReturn;
+		fb($answer);
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
+	break;
 	case 'cmdGeolevels':
 		$t->display('main_database_geolevels.tpl');
 	break;
