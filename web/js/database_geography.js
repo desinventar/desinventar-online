@@ -23,7 +23,7 @@ function onReadyGeography()
 					jQuery('select', clonedCell).data('GeoLevelId', key);
 					jQuery('div.GeographyListHeader table tr').append(clonedCell);
 				});
-				jQuery('div.Geography select.GeographyListHeader').change();
+				jQuery('div.Geography select.GeographyListHeader:data("GeoLevelId=0")').change();
 			},
 			'json'
 		);
