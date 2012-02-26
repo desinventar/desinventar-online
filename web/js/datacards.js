@@ -409,7 +409,6 @@ function onReadyDatacards()
 	});
 	//Initialize components
 	jQuery('#divDatacard .tblGeography tr:first').hide();
-	//jQuery('#DICard :input').unhighlight();
 } //onReadyDatacards()
 
 function doUpdateGeoLevelSelect(prmGeographyLevel, prmGeographyList)
@@ -919,12 +918,15 @@ function doDatacardSave()
 	{
 		if (jQuery('#RecordStatus').val() == 'PUBLISHED')
 		{
+			jQuery('#DICard #DisasterSource').unhighlight();
+			jQuery('#DICard #RecordStatus').unhighlight();
 			var DisasterSource = jQuery('#DICard #DisasterSource').val();
 			DisasterSource = jQuery.trim(DisasterSource);
 			if (DisasterSource == '')
 			{
 				displayDatacardStatusMsg('msgDatacardWithoutSource');
-				jQuery('#RecordStatus').highlight().focus();
+				jQuery('#DICard #DisasterSource').highlight().focus();
+				jQuery('#DICard #RecordStatus').highlight();
 				bContinue = false;
 			}
 		}

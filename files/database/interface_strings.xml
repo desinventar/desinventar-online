@@ -1736,10 +1736,10 @@
 			<Text LangIsoCode="fre">Impossible d&quot;enregister carte de données avec ce statut</Text>
 		</Message>
 		<Message id="msgDatacardWithoutSource">
-			<Text LangIsoCode="eng">Datacard without source information cannot be published.</Text>
-			<Text LangIsoCode="spa">Ficha sin fuente no puede ser publicada.</Text>
-			<Text LangIsoCode="por">Datacard sem informação de origem não pode ser publicado.</Text>
-			<Text LangIsoCode="fre">Datacard sans source d&quot;information ne peut pas être publié</Text>
+			<Text LangIsoCode="eng">Datacard without source information cannot be published, fill in the source, or save it as draft</Text>
+			<Text LangIsoCode="spa">Ficha sin fuente no puede ser publicada, ingrese la fuente o guardela como borrador.</Text>
+			<Text LangIsoCode="por">Datacard sem informação de origem não pode ser publicado, preencha a fonte, ou salvá-lo como projecto</Text>
+			<Text LangIsoCode="fre">Datacard sans source d&quot;information ne peut pas être publié, remplissez la source, ou l'enregistrer en tant que projet</Text>
 		</Message>
 		<Message id="msgDatacardInvalidGeography">
 			<Text LangIsoCode="eng">Geography has not been selected</Text>
