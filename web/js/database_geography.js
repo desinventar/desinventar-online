@@ -24,7 +24,25 @@ function onReadyGeography()
 		jQuery('.GeographyName'  , form).val(jQuery('.GeographyName'  , this).text());
 		jQuery('.GeographyActive', form).val(jQuery('.GeographyActive', this).text());
 		jQuery('.GeographyActiveCheckbox',form).prop('checked', parseInt(jQuery('.GeographyActive',this).text()) > 0);
+		jQuery('div.Geography div.Add').hide();
 		jQuery('div.Geography div.Edit').show();
+	});
+
+	jQuery('div.Geography a.Add').click(function() {
+		jQuery('div.Geography div.Add').hide();
+		jQuery('div.Geography div.Edit').show();
+	});
+
+	jQuery('div.Geography a.Cancel').click(function() {
+		jQuery('div.Geography div.Add').show();
+		jQuery('div.Geography div.Edit').hide();
+	});
+	jQuery('div.Geography a.Save').click(function() {
+		jQuery('div.Geography form.Edit').submit();
+	});
+	jQuery('div.Geography form.Edit').submit(function() {
+		console.log('save');
+		return false;
 	});
 
 	jQuery('body').on('cmdGeographyLoad', function() {

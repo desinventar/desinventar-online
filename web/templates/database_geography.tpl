@@ -13,7 +13,7 @@
 			</tr>
 		</table>
 	</div>
-	<div class="GeographyList line" style="height:200px;">
+	<div class="List line" style="height:200px;overflow:auto;">
 		<table class="GeographyList" class="grid">
 			<thead>
 				<tr>
@@ -53,7 +53,12 @@
 			</tbody>
 		</table>
 	</div>
+	<div class="Add">
+		<br />
+		<a class="button Add"><span>{-#msgGeography_Add#-}</span></a>
+	</div>
 	<div class="Edit" style="display:block; width:500px;">
+		<br />
 		<h3>{-#msgGeography_Edit#-}</h3>
 		<form class="Edit" method="post" action="">
 			{-#msgGeography_Code#-}<b style="color:darkred;">*</b>
@@ -75,8 +80,8 @@
 			<input class="GeographyId" name="GeographyId" type="hidden" value="" />
 			<input class="GeoParentId" name="GeoParentId" type="hidden" value="" />
 			<div class="center">
-				<a class="button"><span>{-#msgGeography_Save#-}</span></a>
-				<a class="button"><span>{-#msgGeography_Cancel#-}</span></a>
+				<a class="button Save"><span>{-#msgGeography_Save#-}</span></a>
+				<a class="button Cancel"><span>{-#msgGeography_Cancel#-}</span></a>
 			</p>
 		</form>
 	</div>

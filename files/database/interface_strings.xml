@@ -951,6 +951,12 @@
 			<Text LangIsoCode="por">Estado</Text>
 			<Text LangIsoCode="fre">État</Text>
 		</Message>
+		<Message id="msgGeography_Add">
+			<Text LangIsoCode="eng">Add</Text>
+			<Text LangIsoCode="spa">Adicionar</Text>
+			<Text LangIsoCode="por">Adicionar</Text>
+			<Text LangIsoCode="fre">Ajouter</Text>
+		</Message>
 		<Message id="msgGeography_Save">
 			<Text LangIsoCode="eng">Save</Text>
 			<Text LangIsoCode="spa">Guardar</Text>
