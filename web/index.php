@@ -435,6 +435,49 @@ switch ($cmd)
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
+	case 'cmdGeographyUpdate':
+		fb($_POST);
+		$Geography = $_POST['Geography'];
+		$answer = array();
+		$iReturn = ERR_NO_ERROR;
+		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($RegionId == '')
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($iReturn > 0)
+		{
+			$geography_id = $Geography['GeographyId'];
+			$o = new DIGeography($us, $geography_id);
+			$o->setFromArray($Geography);
+			/*
+			if ($o->exist() > 0)
+			{
+				$iReturn = $o->update();
+			}
+			else
+			{
+				$GeoLevelId = $o->getMaxGeoLevel();
+				if ($GeoLevelId < 0)
+				{
+					$GeoLevelId = 0;
+				}
+				else
+				{
+					$GeoLevelId = $GeoLevelId + 1;
+				}
+				$o->set('GeoLevelId', $GeoLevelId);
+				$iReturn = $o->insert();
+			}
+			*/
+		}
+		$answer['Status'] = $iReturn;
+		fb($answer);
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');		
+	break;
 	case 'cmdGeolevels':
 		$t->display('main_database_geolevels.tpl');
 	break;

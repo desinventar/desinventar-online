@@ -41,7 +41,42 @@ function onReadyGeography()
 		jQuery('div.Geography form.Edit').submit();
 	});
 	jQuery('div.Geography form.Edit').submit(function() {
-		console.log('save');
+		var bContinue = 1;
+		var w = '';
+		if (bContinue > 0)
+		{
+			w = jQuery('div.Geography form.Edit input.GeographyCode');
+			if (w.val() == '')
+			{
+				w.highlight();			
+			}
+		}
+		if (bContinue > 0)
+		{
+			w = jQuery('div.Geography form.Edit input.GeographyName');
+			if (w.val() == '')
+			{
+				w.highlight();
+			}
+		}
+		if (bContinue > 0)
+		{
+			jQuery.post(
+				jQuery('#desinventarURL').val() + '/',
+				{
+					cmd: 'cmdGeographyUpdate',
+					RegionId : jQuery('#desinventarRegionId').val(),
+					Geography : jQuery('div.Geography form.Edit').toObject()
+				},
+				function(data)
+				{
+					if (parseInt(data.Status) > 0)
+					{
+					}
+				},
+				'json'
+			);
+		}
 		return false;
 	});
 
