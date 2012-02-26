@@ -13,6 +13,18 @@ function onReadyGeography()
 	jQuery('table.GeographyList').on('dblclick','tr', function() {
 		var geography_id = jQuery('.GeographyId', this).text();
 		jQuery('div.Geography select.GeographyListHeader:data("GeoLevelId=' + jQuery('.GeographyLevel', this).text() + '")').val(geography_id).change();
+	}).on('mouseover', 'tr', function(event) {
+		jQuery(this).addClass('highlight');
+	}).on('mouseout', 'tr', function(event) {
+		jQuery(this).removeClass('highlight');
+	}).on('click', 'tr', function(event) {
+		var form = jQuery('div.Geography form.Edit');
+		jQuery('.GeographyId'    , form).val(jQuery('.GeographyId'    , this).text());
+		jQuery('.GeographyCode'  , form).val(jQuery('.GeographyCode'  , this).text());
+		jQuery('.GeographyName'  , form).val(jQuery('.GeographyName'  , this).text());
+		jQuery('.GeographyActive', form).val(jQuery('.GeographyActive', this).text());
+		jQuery('.GeographyActiveCheckbox',form).prop('checked', parseInt(jQuery('.GeographyActive',this).text()) > 0);
+		jQuery('div.Geography div.Edit').show();
 	});
 
 	jQuery('body').on('cmdGeographyLoad', function() {
@@ -85,10 +97,11 @@ function populate_geography_list(prmGeographyId)
 				{
 					select.enable();
 				}
-				//jQuery('table.GeographyList td.GeographyLevel').hide();
-				//jQuery('table.GeographyList td.GeographyActive').hide();
+				jQuery('table.GeographyList td.GeographyLevel').hide();
+				jQuery('table.GeographyList td.GeographyActive').hide();
 				jQuery('table.GeographyList tr').removeClass('under');
 				jQuery('table.GeographyList tr:even').addClass('under');
+				jQuery('div.Geography div.Edit').hide();
 			}
 		},
 		'json'
