@@ -12,7 +12,7 @@ function onReadyGeography()
 
 	jQuery('table.GeographyList').on('dblclick','tr', function() {
 		var geography_id = jQuery('.GeographyId', this).text();
-			
+		jQuery('div.Geography select.GeographyListHeader:data("GeoLevelId=' + jQuery('.GeographyLevel', this).text() + '")').val(geography_id).change();
 	});
 
 	jQuery('body').on('cmdGeographyLoad', function() {
@@ -41,7 +41,10 @@ function onReadyGeography()
 			'json'
 		);
 	});
-}
+
+	// Initialize
+	jQuery('div.Geography div.Edit').hide();
+} //onReadyGeography()
 
 function populate_geography_list(prmGeographyId)
 {
