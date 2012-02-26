@@ -63,7 +63,7 @@ function populate_geography_list(prmGeographyId)
 				jQuery('.GeographyCode'  ,clonedRow).html(value.GeographyCode);
 				jQuery('.GeographyName'  ,clonedRow).html(value.GeographyName);
 				jQuery('.GeographyActive',clonedRow).html(value.GeographyActive);
-				jQuery('.GeographyStatus',clonedRow).html(value.GeographyActive);
+				jQuery('.GeographyStatus',clonedRow).html(jQuery('select.GeographyStatusText option[value="' + value.GeographyActive + '"]').text());
 				jQuery('table.GeographyList tbody').append(clonedRow);
 			});
 			if (parseInt(data.GeographyListCount) > 0)
@@ -71,6 +71,8 @@ function populate_geography_list(prmGeographyId)
 				select.enable();
 			}
 			//jQuery('table.GeographyList td.GeographyLevel').hide();
+			//jQuery('table.GeographyList td.GeographyActive').hide();
+			jQuery('table.GeographyList tr').removeClass('under');
 			jQuery('table.GeographyList tr:even').addClass('under');
 		},
 		'json'
