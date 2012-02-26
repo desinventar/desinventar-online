@@ -627,11 +627,15 @@ class Query //extends PDO
 			{
 				$sql .= ' AND GeographyActive>0 ';
 			}
-			$sql .= ' ORDER BY GeographyName';			
-			$res = $this->dreg->query($sql);
+			$sql .= ' ORDER BY GeographyName';
+			$res = $this->dreg->query($sql, PDO::FETCH_ASSOC);
 			foreach($res as $row)
 			{
-				$data[$row['GeographyId']] = array($row['GeographyCode'], str2js($row['GeographyName']), $row['GeographyActive']);
+				$data[$row['GeographyId']] = array_merge($row, array(
+					0 => $row['GeographyCode'],
+					1 => str2js($row['GeographyName']),
+					2 => $row['GeographyActive']
+				));
 			}
 		}
 		return $data;
@@ -648,10 +652,10 @@ class Query //extends PDO
 			$sql .= ' AND GeographyActive>0 ';
 		}
 		$sql .= ' ORDER BY GeographyName';
-		$res = $this->dreg->query($sql);
+		$res = $this->dreg->query($sql, PDO::FETCH_ASSOC);
 		foreach($res as $row)
 		{
-			$data[$row['GeographyId']] = array($row['GeographyCode'], $row['GeographyName'], $row['GeographyActive']);
+			$data[$row['GeographyId']] = array_merge($row, array($row['GeographyCode'], $row['GeographyName'], $row['GeographyActive']));
 		}
 		return $data;
 	}
