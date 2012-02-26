@@ -315,3 +315,7 @@ a:hover	{	color:#00008b; }
 div.UserChangePasswd {
 	max-width:400px;	
 }
+table.GeographyList {
+	width:100%;
+	max-width:600px;
+}

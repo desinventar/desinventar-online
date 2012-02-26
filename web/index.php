@@ -425,9 +425,9 @@ switch ($cmd)
 		}
 		if ($iReturn > 0)
 		{
-			$r = new DIRegion($us, $RegionId);
-			$GeolevelsList = $r->getGeolevelList();
-			$answer['GeolevelsList'] = $GeolevelsList;
+			$geolevel_id = getParameter('GeoLevelId','');
+			$geography_list = $us->q->loadGeography($geolevel_id, GEOGRAPHY_ALL);
+			$answer['GeographyList'] = $geography_list;
 		}
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
