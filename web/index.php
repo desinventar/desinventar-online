@@ -425,10 +425,13 @@ switch ($cmd)
 		}
 		if ($iReturn > 0)
 		{
-			$geolevel_id = getParameter('GeoLevelId','');
-			$geography_list = $us->q->loadGeography($geolevel_id, GEOGRAPHY_ALL);
+			$geography_id = getParameter('GeographyId','');
+			//$geography_list = $us->q->loadGeography($geolevel_id, GEOGRAPHY_ALL);
+			$geography_list = $us->q->loadGeoChilds($geography_id, GEOGRAPHY_ALL);
 			$answer['GeographyList'] = $geography_list;
+			$answer['GeographyListCount'] = count($geography_list);
 		}
+		$answer['GeoLevelId'] = $us->q->getNextLev($geography_id);
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;

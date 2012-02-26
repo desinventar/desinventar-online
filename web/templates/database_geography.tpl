@@ -2,7 +2,7 @@
 <div class="Geography" style="width:100%;max-width:600px;">
 	<h3>{-#msgGeography_Title#-}</h3>
 	<div class="GeographyListHeader">
-		<table>
+		<table class="GeographyListHeader">
 			<tr>
 				<td style="display:none;">
 					<span class="title"></span><br />
@@ -20,6 +20,9 @@
 					<td class="GeographyId">
 						Id
 					</td>					
+					<td class="GeographyLevel">
+						GeographyLevel
+					</td>
 					<td class="GeographyCode">
 						{-#msgGeography_Code#-}
 					</td>
