@@ -56,9 +56,16 @@ function populate_geography_list(prmGeographyId)
 		{
 			if (parseInt(data.Status) > 0)
 			{
+				jQuery('select.GeographyListHeader').each(function() {
+					if (parseInt(jQuery(this).data('GeoLevelId')) > data.GeoLevelId)
+					{
+						jQuery(this).val(jQuery('option:first', this).val());
+						jQuery(this).disable();
+					}
+				});
 				var select = jQuery('div.Geography select.GeographyListHeader:data("GeoLevelId=' + data.GeoLevelId + '")');
 				select.empty();
-				select.append(jQuery('<option>', { value : '' }).text('--'));
+				select.append(jQuery('<option>', { value : prmGeographyId }).text('--'));
 				jQuery('table.GeographyList tbody tr').remove();
 				jQuery.each(data.GeographyList, function(key, value) {
 					select.append(jQuery('<option>', { value : key }).text(value.GeographyName));
