@@ -80,4 +80,12 @@
 			</p>
 		</form>
 	</div>
+	<div class="hidden">
+		<select class="GeographyStatusText">
+			<option value="0">{-#msgGeography_Inactive#-}</option>
+			<option value="1">{-#msgGeography_Active#-}</option>
+			<option value="2">{-#msgGeography_New#-}</option>
+			<option value="3">{-#msgGeography_Check#-}</option>
+		</select>
+	</div>
 </div>

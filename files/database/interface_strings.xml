@@ -927,6 +927,24 @@
 			<Text LangIsoCode="por">Ativo</Text>
 			<Text LangIsoCode="fre">Actif</Text>
 		</Message>
+		<Message id="msgGeography_Inactive">
+			<Text LangIsoCode="eng">Inactive</Text>
+			<Text LangIsoCode="spa">Desactivado</Text>
+			<Text LangIsoCode="por">Inativo</Text>
+			<Text LangIsoCode="fre">Inactif</Text>
+		</Message>
+		<Message id="msgGeography_New">
+			<Text LangIsoCode="eng">New</Text>
+			<Text LangIsoCode="spa">Nuevo</Text>
+			<Text LangIsoCode="por">Novo</Text>
+			<Text LangIsoCode="fre">Nouveau</Text>
+		</Message>
+		<Message id="msgGeography_Check">
+			<Text LangIsoCode="eng">Check</Text>
+			<Text LangIsoCode="spa">Revisar</Text>
+			<Text LangIsoCode="por">Verificar</Text>
+			<Text LangIsoCode="fre">Vérifier</Text>
+		</Message>
 		<Message id="msgGeography_Status">
 			<Text LangIsoCode="eng">Status</Text>
 			<Text LangIsoCode="spa">Estado</Text>
