@@ -14,10 +14,10 @@
 		</table>
 	</div>
 	<div class="GeographyList line" style="height:200px;">
-		<table class="grid">
+		<table class="GeographyList" class="grid">
 			<thead>
 				<tr>
-					<td class="Id">
+					<td class="GeographyId">
 						Id
 					</td>					
 					<td class="GeographyCode">
