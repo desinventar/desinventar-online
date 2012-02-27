@@ -89,12 +89,34 @@ function onReadyGeography()
 				},
 				function(data)
 				{
+					jQuery('div.Geography div.Status span').hide();
 					if (parseInt(data.Status) > 0)
 					{
 						populate_geography_list(data.GeographyList,data.GeographyListCount);
-						jQuery('div.Geography div.Add').show();
-						jQuery('div.Geography div.Edit').hide();
+						jQuery('div.Geography div.Status span.Ok').show();
+						setTimeout(function() {
+							jQuery('div.Geography div.Status span').hide();
+							jQuery('div.Geography div.Add').show();
+							jQuery('div.Geography div.Edit').hide();
+						}, 2000);
 					}
+					switch(parseInt(data.Status))
+					{
+						case 1:
+						break;
+						case -44:
+							jQuery('div.Geography div.Status span.DuplicatedCode').show();
+						break;
+						case -48:
+							jQuery('div.Geography div.Status span.WithDatacards').show();
+						break;
+						default:
+							jQuery('div.Geography div.Status span.Error').show();
+						break;
+					}
+					setTimeout(function() {
+						jQuery('div.Geography div.Status span').hide();
+					}, 4000);
 				},
 				'json'
 			);
@@ -136,6 +158,7 @@ function onReadyGeography()
 	// Initialize
 	jQuery('div.Geography div.Add').show();
 	jQuery('div.Geography div.Edit').hide();
+	jQuery('div.Geography div.Status span').hide();
 } //onReadyGeography()
 
 function populate_geography_list(prmGeographyList,prmGeographyListCount)

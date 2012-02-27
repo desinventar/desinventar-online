@@ -83,6 +83,14 @@
 				<a class="button Cancel"><span>{-#msgGeography_Cancel#-}</span></a>
 			</p>
 		</form>
+		<div class="Status center" style="width:100%;">
+			<br />
+			<br />
+			<span class="Ok">{-#msgGeography_StatusOk#-}</span>
+			<span class="DuplicatedCode">{-#msgGeography_StatusDuplicatedCode#-}</span>
+			<span class="WithDatacards">{-#msgGeography_StatusWithDatacards#-}</span>
+			<span class="Error">{-#msgGeography_StatusError#-}</span>
+		</div>
 	</div>
 	<div class="hidden">
 		<input class="ParentId" type="hidden" value="" />
