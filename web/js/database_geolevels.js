@@ -20,7 +20,7 @@ function onReadyGeolevels()
 		jQuery('#frmGeolevel .GeoLevelLayerCode').val('');
 		jQuery('#frmGeolevel .GeoLevelLayerParentCode').val('');
 		jQuery('#frmGeolevel tr.FileUploader input.filename').val('');
-		jQuery('#frmGeolevel tr.FileUploader span.uploaded').text('');
+		jQuery('#frmGeolevel tr.FileUploader span.uploaded').text('').show();
 	}).on('mouseover', 'tr', function(event) {
 			jQuery(this).addClass('highlight');
 	}).on('mouseout', 'tr', function(event) {
