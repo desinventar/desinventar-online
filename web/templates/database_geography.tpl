@@ -2,7 +2,7 @@
 <div class="Geography" style="width:100%;max-width:600px;">
 	<h3>{-#msgGeography_Title#-}</h3>
 	<div class="GeographyListHeader">
-		<span>{-#msgGeography_Header1#-}
+		<span class="helptext">{-#msgGeography_Header1#-}</span>
 		<table class="GeographyListHeader">
 			<tr>
 				<td style="display:none;">
@@ -14,46 +14,48 @@
 			</tr>
 		</table>
 	</div>
-	<div class="List line" style="height:200px;overflow:auto;">
-		<span>{-#msgGeography_Header2#-}
-		<table class="GeographyList" class="grid">
-			<thead>
-				<tr>
-					<td class="GeographyId">
-						Id
-					</td>
-					<td class="GeographyLevel">
-						GeographyLevel
-					</td>
-					<td class="GeographyCode">
-						{-#msgGeography_Code#-}
-					</td>
-					<td class="GeographyName">
-						{-#msgGeography_Name#-}
-					</td>
-					<td class="GeographyActive">
-						{-#msgGeography_Active#-}
-					</td>
-					<td class="GeographyStatus">
-						{-#msgGeography_Status#-}
-					</td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr class="hidden">
-					<td class="Id">
-					</td>					
-					<td class="GeographyCode">
-					</td>
-					<td class="GeographyName">
-					</td>
-					<td class="GeographyActive">
-					</td>
-					<td class="GeographyStatus">
-					</td>
-				</tr>
-			</tbody>
-		</table>
+	<div>
+		<span class="helptext">{-#msgGeography_Header2#-}</span>
+		<div class="List line" style="height:200px;overflow:auto;">
+			<table class="GeographyList" class="grid">
+				<thead>
+					<tr>
+						<td class="GeographyId">
+							Id
+						</td>
+						<td class="GeographyLevel">
+							GeographyLevel
+						</td>
+						<td class="GeographyCode">
+							{-#msgGeography_Code#-}
+						</td>
+						<td class="GeographyName">
+							{-#msgGeography_Name#-}
+						</td>
+						<td class="GeographyActive">
+							{-#msgGeography_Active#-}
+						</td>
+						<td class="GeographyStatus">
+							{-#msgGeography_Status#-}
+						</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="hidden">
+						<td class="Id">
+						</td>					
+						<td class="GeographyCode">
+						</td>
+						<td class="GeographyName">
+						</td>
+						<td class="GeographyActive">
+						</td>
+						<td class="GeographyStatus">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 	<div class="Add">
 		<br />

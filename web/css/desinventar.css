@@ -326,3 +326,6 @@ table.GeographyList {
 table.GeographyList thead td {
 	border: solid 1px;
 }
+.helptext {
+	color:#42929d;
+}
