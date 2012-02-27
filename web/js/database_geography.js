@@ -28,6 +28,15 @@ function onReadyGeography()
 		jQuery('div.Geography div.Edit').show();
 	});
 
+	jQuery('div.Geography form.Edit input.GeographytActiveCheckbox').change(function() {
+		var v = 0;
+		if (jQuery(this).is(':checked')) 
+		{
+			v = 1;
+		}
+		jQuery('div.Geography form.Edit input.GeographyActive').val(v);
+	});
+
 	jQuery('div.Geography a.Add').click(function() {
 		jQuery('div.Geography form.Edit').each(function() {
 			this.reset();
