@@ -29,7 +29,7 @@
 				}
 				onReadyCommon();
 				onReadyGeography();
-				jQuery('body').trigger('cmdGeographyLoad');
+				jQuery('body').trigger('cmdGeographyShow');
 			});
 		</script>
 	</head>

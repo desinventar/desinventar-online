@@ -7,6 +7,7 @@ function onReadyMain()
 	onReadyDatabaseUpload();
 	onReadyDatabaseCreate();
 	onReadyDatabaseUsers();
+	onReadyGeography();
 	onReadyGeolevels();
 	onReadyDatabaseEvents();
 	onReadyAdminUsers();
@@ -72,6 +73,9 @@ function onReadyMain()
 	jQuery('#DBConfig_Geolevels').on('show', function() {
 		jQuery('body').trigger('cmdGeolevelsShow');
 	});
+	jQuery('#DBConfig_Geography').on('show', function() {
+		jQuery('body').trigger('cmdGeographyShow');
+	});
 
 	jQuery('#DBConfig_Events').on('show', function() {
 		jQuery('body').trigger('cmdDatabaseEventsShow');
@@ -112,7 +116,6 @@ function onReadyMain()
 						default:
 							onReadyDatabaseConfig();
 							onReadyExtraEffects();
-							onReadyDBConfigGeography();
 						break;
 					}
 				}

@@ -74,7 +74,7 @@
 			
 			{-#msgGeography_Active#-}
 			<input class="GeographyActive" type="hidden" name="GeographyActive" value="1" />
-			<input class="GeographyActiveCheckbox" type="checkbox" tabindex="3" />
+			<input class="GeographyActiveCheckbox" type="checkbox" tabindex="3" checked="checked" />
 			<br />
 			<br />
 			<input class="GeographyId" name="GeographyId" type="hidden" value="" />

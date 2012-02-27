@@ -92,7 +92,7 @@ function onReadyGeography()
 		return false;
 	});
 
-	jQuery('body').on('cmdGeographyLoad', function() {
+	jQuery('body').on('cmdGeographyShow', function() {
 		jQuery.post(
 			jQuery('#desinventarURL').val() + '/',
 			{
@@ -102,6 +102,7 @@ function onReadyGeography()
 			function(data) {
 				if (parseInt(data.Status) > 0)
 				{
+					jQuery('div.GeographyListHeader table tr td:not(:first)').remove();
 					jQuery.each(data.GeolevelsList, function(key, value) {
 						if (key < parseInt(data.GeolevelsList.length - 1))
 						{
@@ -123,6 +124,7 @@ function onReadyGeography()
 	});
 
 	// Initialize
+	jQuery('div.Geography div.Add').show();
 	jQuery('div.Geography div.Edit').hide();
 } //onReadyGeography()
 
@@ -178,6 +180,7 @@ function load_geography_list(prmGeographyId)
 				jQuery('div.Geography input.ParentId').val(prmGeographyId);
 				jQuery('div.Geography input.GeoLevelId').val(data.GeoLevelId);
 				populate_geography_list(data.GeographyList,data.GeographyListCount);
+				jQuery('div.Geography div.Add').show();
 				jQuery('div.Geography div.Edit').hide();
 			}
 		},
