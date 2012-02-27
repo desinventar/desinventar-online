@@ -435,6 +435,7 @@ switch ($cmd)
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
 	case 'cmdGeographyUpdate':
+		fb($_POST);
 		$Geography = $_POST['Geography'];
 		$answer = array();
 		$iReturn = ERR_NO_ERROR;
