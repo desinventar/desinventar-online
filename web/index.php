@@ -426,7 +426,6 @@ switch ($cmd)
 		if ($iReturn > 0)
 		{
 			$geography_id = getParameter('GeographyId','');
-			//$geography_list = $us->q->loadGeography($geolevel_id, GEOGRAPHY_ALL);
 			$geography_list = $us->q->loadGeoChilds($geography_id, GEOGRAPHY_ALL);
 			$answer['GeographyList'] = $geography_list;
 			$answer['GeographyListCount'] = count($geography_list);
@@ -436,7 +435,6 @@ switch ($cmd)
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
 	case 'cmdGeographyUpdate':
-		fb($_POST);
 		$Geography = $_POST['Geography'];
 		$answer = array();
 		$iReturn = ERR_NO_ERROR;
@@ -453,29 +451,25 @@ switch ($cmd)
 			$geography_id = $Geography['GeographyId'];
 			$o = new DIGeography($us, $geography_id);
 			$o->setFromArray($Geography);
-			/*
-			if ($o->exist() > 0)
+			if ($geography_id == '')
 			{
-				$iReturn = $o->update();
+				$parent_id = getParameter('ParentId','');
+				$o->setGeographyId($parent_id);
+				$iReturn = $o->insert();
 			}
 			else
 			{
-				$GeoLevelId = $o->getMaxGeoLevel();
-				if ($GeoLevelId < 0)
-				{
-					$GeoLevelId = 0;
-				}
-				else
-				{
-					$GeoLevelId = $GeoLevelId + 1;
-				}
-				$o->set('GeoLevelId', $GeoLevelId);
-				$iReturn = $o->insert();
+				$iReturn = $o->update();
 			}
-			*/
+		}
+		if ($iReturn > 0)
+		{
+			$geography_id = $parent_id;
+			$geography_list = $us->q->loadGeoChilds($geography_id, GEOGRAPHY_ALL);
+			$answer['GeographyList'] = $geography_list;
+			$answer['GeographyListCount'] = count($geography_list);
 		}
 		$answer['Status'] = $iReturn;
-		fb($answer);
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');		
 	break;
 	case 'cmdGeolevels':
