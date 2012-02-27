@@ -2,6 +2,7 @@
 <div class="Geography" style="width:100%;max-width:600px;">
 	<h3>{-#msgGeography_Title#-}</h3>
 	<div class="GeographyListHeader">
+		<span>{-#msgGeography_Header1#-}
 		<table class="GeographyListHeader">
 			<tr>
 				<td style="display:none;">
@@ -14,6 +15,7 @@
 		</table>
 	</div>
 	<div class="List line" style="height:200px;overflow:auto;">
+		<span>{-#msgGeography_Header2#-}
 		<table class="GeographyList" class="grid">
 			<thead>
 				<tr>

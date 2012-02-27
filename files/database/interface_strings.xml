@@ -903,6 +903,18 @@
 			<Text LangIsoCode="por">Unidades de Geografia</Text>
 			<Text LangIsoCode="fre">Unités Géographie</Text>
 		</Message>
+		<Message id="msgGeography_Header1">
+			<Text LangIsoCode="eng">Select the level to add or edit a geography units</Text>
+			<Text LangIsoCode="spa">Seleccione el nivel donde desea agregar o editar una unidad.</Text>
+			<Text LangIsoCode="por">Selecione o nível para adicionar ou editar uma unidade de geografia</Text>
+			<Text LangIsoCode="fre">Sélectionnez le niveau pour ajouter ou modifier une unité de la géographie</Text>
+		</Message>
+		<Message id="msgGeography_Header2">
+			<Text LangIsoCode="eng">Click on a row to edit the geography unit</Text>
+			<Text LangIsoCode="spa">Haga click para editar una unidad.</Text>
+			<Text LangIsoCode="por">Clique em uma linha para editar a unidade de geografia</Text>
+			<Text LangIsoCode="fre">Cliquez sur une ligne pour modifier l'unité de la géographie</Text>
+		</Message>
 		<Message id="msgGeography_Edit">
 			<Text LangIsoCode="eng">Edit</Text>
 			<Text LangIsoCode="spa">Editar</Text>

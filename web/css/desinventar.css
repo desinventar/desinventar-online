@@ -319,8 +319,10 @@ div.GeographyListHeader {
 	margin-top: 10px;
 	margin-bottom:10px;
 }
-
 table.GeographyList {
 	width:100%;
 	max-width:600px;
+}
+table.GeographyList thead td {
+	border: solid 1px;
 }
