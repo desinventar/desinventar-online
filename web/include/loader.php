@@ -14,7 +14,7 @@ if (! isset($_SERVER['DESINVENTAR_WEB']))
 define('MAJORVERSION', '2012');
 define('MINORVERSION', '057');
 define('VERSION'     , MAJORVERSION . '.' . MINORVERSION);
-define('JSVERSION'   , '2012-02-26.04');
+define('JSVERSION'   , '2012-02-26.05');
 
 $appOptions = array();
 $appOptions['UseRemoteMaps'] = 1;
