@@ -103,11 +103,14 @@ function onReadyGeography()
 				if (parseInt(data.Status) > 0)
 				{
 					jQuery.each(data.GeolevelsList, function(key, value) {
-						var clonedCell = jQuery('div.GeographyListHeader table tr td:last').clone().show();
-						jQuery('span.title', clonedCell).text(value.GeoLevelName);
-						jQuery('select', clonedCell).data('GeoLevelId', key);
-						jQuery('div.GeographyListHeader table tr').append(clonedCell);
-						var select = jQuery('div.Geography select.GeographyListHeader:data("GeoLevelId=' + value.GeoLevelId + '")').disable();
+						if (key < parseInt(data.GeolevelsList.length - 1))
+						{
+							var clonedCell = jQuery('div.GeographyListHeader table tr td:last').clone().show();
+							jQuery('span.title', clonedCell).text(value.GeoLevelName);
+							jQuery('select', clonedCell).data('GeoLevelId', key);
+							jQuery('div.GeographyListHeader table tr').append(clonedCell);
+							var select = jQuery('div.Geography select.GeographyListHeader:data("GeoLevelId=' + value.GeoLevelId + '")').disable();
+						}
 					});
 					if (data.GeolevelsList.length > 0)
 					{
