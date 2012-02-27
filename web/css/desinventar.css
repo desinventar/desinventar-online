@@ -315,6 +315,11 @@ a:hover	{	color:#00008b; }
 div.UserChangePasswd {
 	max-width:400px;	
 }
+div.GeographyListHeader {
+	margin-top: 10px;
+	margin-bottom:10px;
+}
+
 table.GeographyList {
 	width:100%;
 	max-width:600px;
