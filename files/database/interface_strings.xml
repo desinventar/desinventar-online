@@ -1071,6 +1071,30 @@
 			<Text LangIsoCode="por">GEOGRAFIA: Preencha todos os campos requeridos e tente novamente</Text>
 			<Text LangIsoCode="fre">GÉOGRAPHIE: Remplissez tous les champs obligatoires et essayez de nouveau</Text>
 		</Message>
+		<Message id="msgGeography_StatusOk">
+			<Text LangIsoCode="eng">Geography updated successfully!</Text>
+			<Text LangIsoCode="spa">Geografía actualizada exitosamente!</Text>
+			<Text LangIsoCode="por">Geografia atualizada com sucesso!</Text>
+			<Text LangIsoCode="fre">Géographie mise à jour avec succès!</Text>
+		</Message>
+		<Message id="msgGeography_StatusDuplicatedCode">
+			<Text LangIsoCode="eng">Geography code already exists</Text>
+			<Text LangIsoCode="spa">Código de geografía ya existe</Text>
+			<Text LangIsoCode="por">Geografia código já existe</Text>
+			<Text LangIsoCode="fre">Code géographie existe déjà</Text>
+		</Message>
+		<Message id="msgGeography_StatusWithDatacards">
+			<Text LangIsoCode="eng">Cannot disable geography units with datacards assigned</Text>
+			<Text LangIsoCode="spa">No se puede deshabilitar las unidades de geografía con ficha asignadas</Text>
+			<Text LangIsoCode="por">Não é possível desativar unidades de geografia com cartões de dados atribuídos</Text>
+			<Text LangIsoCode="fre">Impossible de désactiver des unités géographiques avec des cartes de données affectés</Text>
+		</Message>
+		<Message id="msgGeography_StatusError">
+			<Text LangIsoCode="eng">Error saving changes to geography</Text>
+			<Text LangIsoCode="spa">Error al guardar cambios a la geografía</Text>
+			<Text LangIsoCode="por">Erro mudanças de poupança para a geografia</Text>
+			<Text LangIsoCode="fre">L'enregistrement des modifications d'erreur à la géographie</Text>
+		</Message>
 	</Group>
 	<Group name="grpDatabaseEvents">
 		<Message id="msgDatabaseEvents_CustomEventTitle">
