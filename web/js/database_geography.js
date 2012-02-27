@@ -23,12 +23,12 @@ function onReadyGeography()
 		jQuery('.GeographyCode'  , form).val(jQuery('.GeographyCode'  , this).text());
 		jQuery('.GeographyName'  , form).val(jQuery('.GeographyName'  , this).text());
 		jQuery('.GeographyActive', form).val(jQuery('.GeographyActive', this).text());
-		jQuery('.GeographyActiveCheckbox',form).prop('checked', parseInt(jQuery('.GeographyActive',this).text()) > 0);
+		jQuery('.GeographyActiveCheckbox',form).prop('checked', parseInt(jQuery('.GeographyActive',this).text()) > 0).change();
 		jQuery('div.Geography div.Add').hide();
 		jQuery('div.Geography div.Edit').show();
 	});
 
-	jQuery('div.Geography form.Edit input.GeographytActiveCheckbox').change(function() {
+	jQuery('div.Geography form.Edit input.GeographyActiveCheckbox').change(function() {
 		var v = 0;
 		if (jQuery(this).is(':checked')) 
 		{
@@ -41,6 +41,7 @@ function onReadyGeography()
 		jQuery('div.Geography form.Edit').each(function() {
 			this.reset();
 		});
+		jQuery('div.Geography form.Edit input.GeographyActiveCheckbox').change();
 		jQuery('div.Geography div.Add').hide();
 		jQuery('div.Geography div.Edit').show();
 	});
