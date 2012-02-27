@@ -7,7 +7,7 @@ function onReadyGeography()
 {
 	jQuery('div.GeographyListHeader').on('change','select', function() {
 		var geography_id = jQuery(this).val();
-		populate_geography_list(geography_id);
+		load_geography_list(geography_id);
 	});
 
 	jQuery('table.GeographyList').on('dblclick','tr', function() {
@@ -29,17 +29,25 @@ function onReadyGeography()
 	});
 
 	jQuery('div.Geography a.Add').click(function() {
+		jQuery('div.Geography form.Edit').each(function() {
+			this.reset();
+		});
 		jQuery('div.Geography div.Add').hide();
 		jQuery('div.Geography div.Edit').show();
 	});
 
 	jQuery('div.Geography a.Cancel').click(function() {
+		jQuery('div.Geography form.Edit').each(function() {
+			this.reset();
+		});
 		jQuery('div.Geography div.Add').show();
 		jQuery('div.Geography div.Edit').hide();
 	});
+
 	jQuery('div.Geography a.Save').click(function() {
 		jQuery('div.Geography form.Edit').submit();
 	});
+
 	jQuery('div.Geography form.Edit').submit(function() {
 		var bContinue = 1;
 		var w = '';
@@ -64,14 +72,18 @@ function onReadyGeography()
 			jQuery.post(
 				jQuery('#desinventarURL').val() + '/',
 				{
-					cmd: 'cmdGeographyUpdate',
-					RegionId : jQuery('#desinventarRegionId').val(),
-					Geography : jQuery('div.Geography form.Edit').toObject()
+					cmd       : 'cmdGeographyUpdate',
+					RegionId  : jQuery('#desinventarRegionId').val(),
+					Geography : jQuery('div.Geography form.Edit').toObject(),
+					ParentId  : jQuery('div.Geography input.ParentId').val()
 				},
 				function(data)
 				{
 					if (parseInt(data.Status) > 0)
 					{
+						populate_geography_list(data.GeographyList,data.GeographyListCount);
+						jQuery('div.Geography div.Add').show();
+						jQuery('div.Geography div.Edit').hide();
 					}
 				},
 				'json'
@@ -99,7 +111,7 @@ function onReadyGeography()
 					});
 					if (data.GeolevelsList.length > 0)
 					{
-						populate_geography_list('');
+						load_geography_list('');
 					}
 				}
 			},
@@ -111,7 +123,43 @@ function onReadyGeography()
 	jQuery('div.Geography div.Edit').hide();
 } //onReadyGeography()
 
-function populate_geography_list(prmGeographyId)
+function populate_geography_list(prmGeographyList,prmGeographyListCount)
+{
+	var prmGeoLevelId = jQuery('div.Geography input.GeoLevelId').val();
+	var prmParentId = jQuery('div.Geography input.ParentId').val();
+	jQuery('select.GeographyListHeader').each(function() {
+		if (parseInt(jQuery(this).data('GeoLevelId')) > prmGeoLevelId)
+		{
+			jQuery(this).val(jQuery('option:first', this).val());
+			jQuery(this).disable();
+		}
+	});
+	var select = jQuery('div.Geography select.GeographyListHeader:data("GeoLevelId=' + prmGeoLevelId + '")');
+	select.empty();
+	select.append(jQuery('<option>', { value : prmParentId }).text('--'));
+	jQuery('table.GeographyList tbody tr').remove();
+	jQuery.each(prmGeographyList, function(key, value) {
+		select.append(jQuery('<option>', { value : key }).text(value.GeographyName));
+		var clonedRow = jQuery('table.GeographyList thead tr:first').clone();
+		jQuery('.GeographyId'    ,clonedRow).html(value.GeographyId);
+		jQuery('.GeographyLevel' ,clonedRow).html(value.GeographyLevel);
+		jQuery('.GeographyCode'  ,clonedRow).html(value.GeographyCode);
+		jQuery('.GeographyName'  ,clonedRow).html(value.GeographyName);
+		jQuery('.GeographyActive',clonedRow).html(value.GeographyActive);
+		jQuery('.GeographyStatus',clonedRow).html(jQuery('select.GeographyStatusText option[value="' + value.GeographyActive + '"]').text());
+		jQuery('table.GeographyList tbody').append(clonedRow);
+	});
+	if (parseInt(prmGeographyListCount) > 0)
+	{
+		select.enable();
+	}
+	jQuery('table.GeographyList td.GeographyLevel').hide();
+	jQuery('table.GeographyList td.GeographyActive').hide();
+	jQuery('table.GeographyList tr').removeClass('under');
+	jQuery('table.GeographyList tr:even').addClass('under');
+}
+
+function load_geography_list(prmGeographyId)
 {
 	jQuery.post(
 		jQuery('#desinventarURL').val() + '/',
@@ -124,36 +172,9 @@ function populate_geography_list(prmGeographyId)
 		{
 			if (parseInt(data.Status) > 0)
 			{
-				jQuery('select.GeographyListHeader').each(function() {
-					if (parseInt(jQuery(this).data('GeoLevelId')) > data.GeoLevelId)
-					{
-						jQuery(this).val(jQuery('option:first', this).val());
-						jQuery(this).disable();
-					}
-				});
-				var select = jQuery('div.Geography select.GeographyListHeader:data("GeoLevelId=' + data.GeoLevelId + '")');
-				select.empty();
-				select.append(jQuery('<option>', { value : prmGeographyId }).text('--'));
-				jQuery('table.GeographyList tbody tr').remove();
-				jQuery.each(data.GeographyList, function(key, value) {
-					select.append(jQuery('<option>', { value : key }).text(value.GeographyName));
-					var clonedRow = jQuery('table.GeographyList thead tr:first').clone();
-					jQuery('.GeographyId'    ,clonedRow).html(value.GeographyId);
-					jQuery('.GeographyLevel' ,clonedRow).html(value.GeographyLevel);
-					jQuery('.GeographyCode'  ,clonedRow).html(value.GeographyCode);
-					jQuery('.GeographyName'  ,clonedRow).html(value.GeographyName);
-					jQuery('.GeographyActive',clonedRow).html(value.GeographyActive);
-					jQuery('.GeographyStatus',clonedRow).html(jQuery('select.GeographyStatusText option[value="' + value.GeographyActive + '"]').text());
-					jQuery('table.GeographyList tbody').append(clonedRow);
-				});
-				if (parseInt(data.GeographyListCount) > 0)
-				{
-					select.enable();
-				}
-				jQuery('table.GeographyList td.GeographyLevel').hide();
-				jQuery('table.GeographyList td.GeographyActive').hide();
-				jQuery('table.GeographyList tr').removeClass('under');
-				jQuery('table.GeographyList tr:even').addClass('under');
+				jQuery('div.Geography input.ParentId').val(prmGeographyId);
+				jQuery('div.Geography input.GeoLevelId').val(data.GeoLevelId);
+				populate_geography_list(data.GeographyList,data.GeographyListCount);
 				jQuery('div.Geography div.Edit').hide();
 			}
 		},

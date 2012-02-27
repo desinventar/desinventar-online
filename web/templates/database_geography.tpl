@@ -19,7 +19,7 @@
 				<tr>
 					<td class="GeographyId">
 						Id
-					</td>					
+					</td>
 					<td class="GeographyLevel">
 						GeographyLevel
 					</td>
@@ -78,7 +78,6 @@
 			<br />
 			<br />
 			<input class="GeographyId" name="GeographyId" type="hidden" value="" />
-			<input class="GeoParentId" name="GeoParentId" type="hidden" value="" />
 			<div class="center">
 				<a class="button Save"><span>{-#msgGeography_Save#-}</span></a>
 				<a class="button Cancel"><span>{-#msgGeography_Cancel#-}</span></a>
@@ -86,6 +85,8 @@
 		</form>
 	</div>
 	<div class="hidden">
+		<input class="ParentId" type="hidden" value="" />
+		<input class="GeoLevelId" type="hidden" value="0" />
 		<select class="GeographyStatusText">
 			<option value="0">{-#msgGeography_Inactive#-}</option>
 			<option value="1">{-#msgGeography_Active#-}</option>
