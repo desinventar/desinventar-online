@@ -315,15 +315,15 @@ a:hover	{	color:#00008b; }
 div.UserChangePasswd {
 	max-width:400px;	
 }
-div.GeographyListHeader {
+div.Geography div.ListHeader {
 	margin-top: 10px;
 	margin-bottom:10px;
 }
-table.GeographyList {
+div.Geography table.List {
 	width:100%;
 	max-width:600px;
 }
-table.GeographyList thead td {
+div.Geography table.List thead td {
 	border: solid 1px;
 }
 .helptext {

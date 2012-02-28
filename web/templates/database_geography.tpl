@@ -1,13 +1,13 @@
 {-config_load file="$lg.conf" section="grpAdminGeography"-}
 <div class="Geography" style="width:100%;max-width:600px;">
 	<h3>{-#msgGeography_Title#-}</h3>
-	<div class="GeographyListHeader">
+	<div class="ListHeader">
 		<span class="helptext">{-#msgGeography_Header1#-}</span>
-		<table class="GeographyListHeader">
+		<table class="ListHeader">
 			<tr>
-				<td style="display:none;">
+				<td class="ListHeader" style="display:none;">
 					<span class="title"></span><br />
-					<select class="GeographyListHeader" style="width:120px;" data-GeoLevelId="">
+					<select class="ListHeader" style="width:120px;">
 						<option></option>
 					</select>
 				</td>
@@ -17,7 +17,7 @@
 	<div>
 		<span class="helptext">{-#msgGeography_Header2#-}</span>
 		<div class="List line" style="height:200px;overflow:auto;">
-			<table class="GeographyList" class="grid">
+			<table class="List" class="grid">
 				<thead>
 					<tr>
 						<td class="GeographyId">
