@@ -10,9 +10,11 @@ function onReadyGeography()
 		load_geography_list(geography_id);
 	});
 
-	jQuery('table.GeographyList').on('dblclick','tr', function() {
+	jQuery('table.GeographyList tbody').on('dblclick','tr', function() {
+		/*
 		var geography_id = jQuery('.GeographyId', this).text();
 		jQuery('div.Geography select.GeographyListHeader:data("GeoLevelId=' + jQuery('.GeographyLevel', this).text() + '")').val(geography_id).change();
+		*/
 	}).on('mouseover', 'tr', function(event) {
 		jQuery(this).addClass('highlight');
 	}).on('mouseout', 'tr', function(event) {
