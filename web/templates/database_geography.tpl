@@ -60,6 +60,7 @@
 	<div class="Add">
 		<br />
 		<a class="button Add"><span>{-#msgGeography_Add#-}</span></a>
+		<br />
 	</div>
 	<div class="Edit" style="display:block; width:500px;">
 		<br />
