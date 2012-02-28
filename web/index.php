@@ -436,6 +436,7 @@ switch ($cmd)
 	break;
 	case 'cmdGeographyUpdate':
 		$Geography = $_POST['Geography'];
+		$parent_id = getParameter('ParentId','');
 		$answer = array();
 		$iReturn = ERR_NO_ERROR;
 		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
@@ -453,7 +454,6 @@ switch ($cmd)
 			$o->setFromArray($Geography);
 			if ($geography_id == '')
 			{
-				$parent_id = getParameter('ParentId','');
 				$o->setGeographyId($parent_id);
 				$iReturn = $o->insert();
 			}
@@ -464,8 +464,7 @@ switch ($cmd)
 		}
 		if ($iReturn > 0)
 		{
-			$geography_id = $parent_id;
-			$geography_list = $us->q->loadGeoChilds($geography_id, GEOGRAPHY_ALL);
+			$geography_list = $us->q->loadGeoChilds($parent_id, GEOGRAPHY_ALL);
 			$answer['GeographyList'] = $geography_list;
 			$answer['GeographyListCount'] = count($geography_list);
 		}
