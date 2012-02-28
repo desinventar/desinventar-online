@@ -85,7 +85,7 @@
 			<div class="center">
 				<a class="button Save"><span>{-#msgGeography_Save#-}</span></a>
 				<a class="button Cancel"><span>{-#msgGeography_Cancel#-}</span></a>
-			</p>
+			</div>
 		</form>
 		<div class="Status center" style="width:100%;">
 			<br />
