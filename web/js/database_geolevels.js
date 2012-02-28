@@ -34,7 +34,8 @@ function onReadyGeolevels()
 		jQuery('#frmGeolevel .GeoLevelLayerName').val('');
 		jQuery('#frmGeolevel .GeoLevelLayerCode').val('');
 		jQuery('#frmGeolevel .GeoLevelLayerParentCode').val('');
-		jQuery('#frmGeolevel .filename').val('');
+		jQuery('#frmGeolevel tr.FileUploader input.filename').val('');
+		jQuery('#frmGeolevel tr.FileUploader span.uploaded').text('').show();
 		
 		jQuery(this).hide();
 		jQuery('#frmGeolevel .GeoLevelId').val('-1');
