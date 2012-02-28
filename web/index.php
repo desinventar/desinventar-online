@@ -608,10 +608,6 @@ switch ($cmd)
 			}
 			if ($GeoLevel['option']['ImportGeography'] > 0)
 			{
-				if ($geography_items_count > 0)
-				{
-					geography_delete_items($us->q->dreg, $GeoLevelId);
-				}
 				$File  = 'geocarto' . sprintf('%02d', $GeoLevelId) . '.dbf';
 				$DBDir = $us->getRegionDir($RegionId);
 				geography_import_from_dbf($us, $GeoLevelId, $DBDir . '/' . $File, 
