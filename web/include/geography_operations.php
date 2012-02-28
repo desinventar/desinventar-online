@@ -71,7 +71,14 @@ function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 				if ($geography_id == '')
 				{
 					$o->setGeographyId($parent_id);
-					$o->set('GeographyActive',2);
+					if (count($geo_list) > 0)
+					{
+						$o->set('GeographyActive',2);
+					}
+					else
+					{
+						$o->set('GeographyActive',1);
+					}
 					$r = $o->insert();
 				}
 				else
