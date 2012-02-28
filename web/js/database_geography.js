@@ -176,7 +176,7 @@ function populate_geography_list(prmGeographyList,prmGeographyListCount)
 	});
 	var select = jQuery('div.Geography select.GeographyListHeader:data("GeoLevelId=' + prmGeoLevelId + '")');
 	select.empty();
-	select.append(jQuery('<option>', { value : prmParentId }).text('--'));
+	select.append(jQuery('<option>', { value : prmParentId }).text(jQuery('div.Geography span.All').text()));
 	jQuery('table.GeographyList tbody tr').remove();
 	jQuery.each(prmGeographyList, function(key, value) {
 		select.append(jQuery('<option>', { value : key }).text(value.GeographyName));

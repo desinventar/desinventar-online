@@ -915,6 +915,12 @@
 			<Text LangIsoCode="por">Clique em uma linha para editar a unidade de geografia</Text>
 			<Text LangIsoCode="fre">Cliquez sur une ligne pour modifier l'unité de la géographie</Text>
 		</Message>
+		<Message id="msgGeography_All">
+			<Text LangIsoCode="eng">All</Text>
+			<Text LangIsoCode="spa">Todos</Text>
+			<Text LangIsoCode="por">Todos</Text>
+			<Text LangIsoCode="fre">Tous</Text>
+		</Message>
 		<Message id="msgGeography_Edit">
 			<Text LangIsoCode="eng">Edit</Text>
 			<Text LangIsoCode="spa">Editar</Text>
