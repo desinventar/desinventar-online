@@ -7,7 +7,8 @@ function onReadyGeography()
 {
 	jQuery('div.Geography').on('change','select.ListHeader', function() {
 		var geography_id = jQuery(this).val();
-		load_geography_list(geography_id);
+		var geolevel_id = jQuery(this).data('GeoLevelId');
+		load_geography_list(geography_id, geolevel_id);
 	});
 
 	jQuery('div.Geography table.List tbody').on('dblclick','tr', function() {
@@ -150,7 +151,7 @@ function onReadyGeography()
 					});
 					if (data.GeolevelsList.length > 0)
 					{
-						load_geography_list('');
+						jQuery('div.Geography select.ListHeader:first').change();
 					}
 				}
 			},
@@ -198,9 +199,9 @@ function populate_geography_list(prmGeographyList,prmGeographyListCount)
 	jQuery('div.Geography table.List td.GeographyActive').hide();
 	jQuery('div.Geography table.List tr').removeClass('under');
 	jQuery('div.Geography table.List tr:even').addClass('under');
-}
+} //populate_geography_list
 
-function load_geography_list(prmGeographyId)
+function load_geography_list(prmGeographyId, prmGeoLevelId)
 {
 	jQuery.post(
 		jQuery('#desinventarURL').val() + '/',
@@ -222,4 +223,4 @@ function load_geography_list(prmGeographyId)
 		},
 		'json'
 	);
-}
+} //load_geography_list()
