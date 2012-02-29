@@ -169,7 +169,7 @@
 				{-assign var="ff" value="D_$k"-}
 				<div class="EffectLossesValue">
 					<input type="checkbox" onFocus="showtip('{-$i[2]-}');" id="{-$k-}"
-						onclick="enadisEff('{-$k-}', this.checked);" {-if $qd.$ff[0] != ''-}checked{-/if-} />
+						 {-if $qd.$ff[0] != ''-}checked{-/if-} />
 					<label for="{-$k-}" onMouseOver="showtip('{-$i[2]-}');">{-$i[0]-}</label>
 					<span id="o{-$k-}" style="display:none">
 						<select id="{-$k-}[0]" name="D_{-$k-}[0]" onChange="showeff(this.value, 'x{-$k-}', 'y{-$k-}');" class="small line" disabled>
