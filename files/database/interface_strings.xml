@@ -3916,6 +3916,12 @@
 			<Text LangIsoCode="por">Banco de dados atualizado corretamente</Text>
 			<Text LangIsoCode="fre">Base de données mis à jour correctement</Text>
 		</Message>
+		<Message id="msgDatabaseUploadErrorNoInfo">
+			<Text LangIsoCode="eng">Uploaded file doesn't appear to be a DesInventar database</Text>
+			<Text LangIsoCode="spa">El archivo cargado no parece ser una base de datos DesInventar</Text>
+			<Text LangIsoCode="por">Uploaded file doesn't appear to be a DesInventar database</Text>
+			<Text LangIsoCode="fre">Uploaded file doesn't appear to be a DesInventar database</Text>
+		</Message>
 		<Message id="msgDatabaseUploadErrorOnUpload">
 			<Text LangIsoCode="eng">Error while uploading file</Text>
 			<Text LangIsoCode="spa">Error al cargar el archivo</Text>
