@@ -144,15 +144,12 @@ function onReadyGeography()
 				{
 					jQuery('div.Geography table.ListHeader tr td:not(:first)').remove();
 					jQuery.each(data.GeolevelsList, function(key, value) {
-						if (key < parseInt(data.GeolevelsList.length - 1))
-						{
-							var clonedCell = jQuery('div.Geography table.ListHeader tr td:last').clone().show();
-							jQuery(clonedCell).data('GeoLevelId', key);
-							jQuery('span.title', clonedCell).text(value.GeoLevelName);
-							jQuery('select', clonedCell).data('GeoLevelId', key);
-							jQuery('div.Geography table.ListHeader tr').append(clonedCell);
-							var select = jQuery('div.Geography select.ListHeader:data("GeoLevelId=' + value.GeoLevelId + '")').disable();
-						}
+						var clonedCell = jQuery('div.Geography table.ListHeader tr td:last').clone().show();
+						jQuery(clonedCell).data('GeoLevelId', key);
+						jQuery('span.title', clonedCell).text(parseInt(key + 1) + ' - ' + value.GeoLevelName);
+						jQuery('select', clonedCell).data('GeoLevelId', key);
+						jQuery('div.Geography table.ListHeader tr').append(clonedCell);
+						jQuery('div.Geography select.ListHeader:data("GeoLevelId=' + value.GeoLevelId + '")').disable();
 					});
 					if (data.GeolevelsList.length > 0)
 					{
