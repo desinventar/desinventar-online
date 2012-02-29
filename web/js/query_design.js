@@ -5,4 +5,7 @@
 
 function onReadyQueryDesign()
 {
+	jQuery('div.QueryDesign div.EffectLossesValue input').click(function() {
+		enadisEff(jQuery(this).attr('id'), jQuery(this).prop('checked'));
+	});
 } //onReadyQueryDesign()
