@@ -50,7 +50,6 @@ function onReadyGeography()
 	});
 
 	jQuery('div.Geography a.Export').click(function() {
-		console.log('export');
 		var form = jQuery('div.Geography form.Export');
 		jQuery('div.Geography form.Export').submit();
 	});
@@ -169,6 +168,19 @@ function onReadyGeography()
 	jQuery('div.Geography div.Add').show();
 	jQuery('div.Geography div.Edit').hide();
 	jQuery('div.Geography div.Status span').hide();
+
+	// Initialize labels for csv geography export	
+	var labels = '';
+	var count = 0;
+	jQuery('div.Geography table.List thead td').each(function() {
+		if (count > 0)
+		{
+			labels = labels + ',';
+		}
+		labels = labels + '"' + jQuery(this).text().trim() + '"';
+		count++;
+	});
+	jQuery('div.Geography form.Export input.Labels').val(labels);
 } //onReadyGeography()
 
 function populate_geography_list(prmGeographyList,prmGeographyListCount)

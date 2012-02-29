@@ -129,4 +129,21 @@ function geography_get_items_count($conn, $prmGeoLevelId)
 	}
 	return $count;
 }
+
+function geography_export_to_csv($conn)
+{
+	$query = 'SELECT * FROM Geography ORDER BY GeographyId';
+	$csv = '';
+	foreach($conn->query($query, PDO::FETCH_ASSOC) as $row)
+	{
+		$csv .= sprintf('%d,"%s","%s","%s",%d' . "\n",
+			$row['GeographyLevel'],
+			$row['GeographyId'],
+			$row['GeographyCode'],
+			$row['GeographyName'],
+			$row['GeographyActive']
+		);
+	}
+	return $csv;
+}
 </script>

@@ -472,8 +472,33 @@ switch ($cmd)
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');		
 	break;
 	case 'cmdGeographyExport':
-		fb($_POST);
-		echo "OK";
+		$answer = array();
+		$iReturn = ERR_NO_ERROR;
+		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($RegionId == '')
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($iReturn > 0)
+		{
+			header('Content-type: text/x-csv');
+			header('Content-Disposition: attachment; filename=DesInventar_' . $RegionId . '_Geography.csv');
+			$labels = '';
+			if (isset($_POST['Labels']))
+			{
+				$labels = $_POST['Labels'];
+			}
+			echo $labels . "\n";
+			echo geography_export_to_csv($us->q->dreg);
+		}
+		else
+		{
+			$answer['Status'] = $iReturn;
+			echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');		
+		}
 	break;
 	case 'cmdGeolevels':
 		$t->display('main_database_geolevels.tpl');
