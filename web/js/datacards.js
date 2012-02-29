@@ -873,17 +873,18 @@ function doDatacardEdit()
 
 function doDatacardSave()
 {
-	var bContinue = true;
+	var bContinue = 1;
 	var cmd = jQuery('#_CMD').val();
 	var DisasterSerial = jQuery('#DisasterSerial').val();
 	var PrevDisasterSerial = jQuery('#PrevDisasterSerial').val();
 	var Status = jQuery('#DICard #Status').val();
 
-	if (bContinue)
+	if (bContinue > 0)
 	{
 		var error_count = 0;
+		var answer = 1;
 		jQuery('#DICard .inputDouble').each(function() {
-			var answer = validateInputDouble(jQuery(this).val());
+			answer = validateInputDouble(jQuery(this).val());
 			if (answer > 0)
 			{
 				if (jQuery(this).attr('old-bg-color') != '') {
@@ -892,29 +893,29 @@ function doDatacardSave()
 			}
 			else
 			{
-				jQuery(this).highlight().focus();
+				jQuery(this).highlight();
 				error_count++;
 			}
 		});
 		if (error_count > 0)
 		{
-			bContinue = false;
+			bContinue = 0;
 			displayDatacardStatusMsg('msgDatacardInvalidNumber');
 		}
 	}	
 
-	if (bContinue)
+	if (bContinue > 0)
 	{
 		// Validate Record Status
 		if (jQuery('#RecordStatus').val() == '')
 		{
 			displayDatacardStatusMsg('msgDatacardInvalidStatus');
 			jQuery('#RecordStatus').highlight().focus();
-			bContinue = false;
+			bContinue = 0;
 		}
 	}
 	
-	if (bContinue)
+	if (bContinue > 0)
 	{
 		if (jQuery('#RecordStatus').val() == 'PUBLISHED')
 		{
@@ -927,12 +928,12 @@ function doDatacardSave()
 				displayDatacardStatusMsg('msgDatacardWithoutSource');
 				jQuery('#DICard #DisasterSource').highlight().focus();
 				jQuery('#DICard #RecordStatus').highlight();
-				bContinue = false;
+				bContinue = 0;
 			}
 		}
 	}
 	
-	if (bContinue)
+	if (bContinue > 0)
 	{
 		// Validate Record Status
 		if ( (jQuery('#RecordStatus').val() == 'PUBLISHED') ||
@@ -942,35 +943,35 @@ function doDatacardSave()
 			{
 				displayDatacardStatusMsg('msgDatacardInvalidStatus');
 				jQuery('#RecordStatus').highlight().focus();
-				bContinue = false;
+				bContinue = 0;
 			}
 		}
 	}
 	
-	if (bContinue && jQuery('#GeographyId').val() == '')
+	if ( (bContinue > 0) && (jQuery('#GeographyId').val() == '') )
 	{
 		displayDatacardStatusMsg('msgDatacardInvalidGeography');
 		jQuery('.GeoLevelSelect').highlight();
 		jQuery('#GeoLevel0').focus();
-		bContinue = false;
+		bContinue = 0;
 	}
 
 	jQuery('#DICard #EventId').unhighlight();
-	if (bContinue && jQuery('#DICard #EventId').val() == '')
+	if ( (bContinue > 0) && (jQuery('#DICard #EventId').val() == '') )
 	{
 		jQuery('#DICard #EventId').highlight().focus();
-		bContinue = false;
+		bContinue = 0;
 	}
 
 	jQuery('#DICard #CauseId').unhighlight();
-	if (bContinue && jQuery('#DICard #CauseId').val() == '')
+	if ( (bContinue > 0) && (jQuery('#DICard #CauseId').val() == '') )
 	{
 		jQuery('#DICard #CauseId').highlight().focus();
-		bContinue = false;
+		bContinue = 0;
 	}
 
 	// Use AJAX to save datacard
-	if (bContinue)
+	if (bContinue > 0)
 	{
 		if (jQuery('#DICard #Status').val() == 'SAVING')
 		{
@@ -987,27 +988,27 @@ function doDatacardSave()
 				},
 				function(data)
 				{
-					bContinue = true;
+					bContinue = 1;
 					if ( (cmd == 'insertDICard') && (data.DisasterSerial != '') )
 					{
 						// Serial of new datacard already exists...
-						bContinue = false;
+						bContinue = 0;
 					}
 					if (cmd == 'updateDICard')
 					{
 						if ( (DisasterSerial != PrevDisasterSerial) && (data.DisasterSerial != '') )
 						{
 							// Edited Serial exists in database...
-							bContinue = false;
+							bContinue = 0;
 						}
 					}
-					if (bContinue == false)
+					if (bContinue < 1)
 					{
 						displayDatacardStatusMsg('msgDatacardDuplicatedSerial');
 						jQuery('#DICard #Status').val(Status);
 						jQuery('#DICard #DisasterSerial').highlight().focus();
 					}
-					if (bContinue)
+					if (bContinue > 0)
 					{
 						//'DisasterSource', 
 						var fl = new Array('DisasterSerial', 'DisasterBeginTime0', 
