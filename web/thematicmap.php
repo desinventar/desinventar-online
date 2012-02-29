@@ -12,10 +12,6 @@ $post = $_POST;
 $get = $_GET;
 $options = array();
 $url = 'http://' . $_SERVER['HTTP_HOST'];
-if ($_SERVER['SERVER_PORT'] != 80)
-{
-	$url .= ':' . $_SERVER['SERVER_PORT'];
-}
 $url .= $desinventarURL;
 $options['url'] = $url;
 
