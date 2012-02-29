@@ -21,26 +21,6 @@ function onReadyQueryDesign()
 			jQuery('span.minvalue',parent).disable();
 			jQuery('span.maxvalue',parent).disable();
 		}
-		/*
-		enadisEff(jQuery(this).attr('id'), jQuery(this).prop('checked'));
-		function enadisEff(id, chk)
-		{
-			if (chk)
-			{
-				$('o'+ id).style.display = 'inline';
-				enab($(id +'[0]'));
-				enab($(id +'[1]'));
-				enab($(id +'[2]'));
-			}
-			else
-			{
-				$('o'+ id).style.display = 'none';
-				disab($(id +'[0]'));
-				disab($(id +'[1]'));
-				disab($(id +'[2]'));
-			}
-		}
-		*/
 	}).focus(function() {
 		showtip(jQuery(this).data('help'));
 	});
