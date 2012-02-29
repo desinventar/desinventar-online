@@ -74,7 +74,7 @@ if (isset($post['page']) || isset($post['_D+cmd']))
 			$export = '';
 			$iRecordsPerPage = $post['_D+SQL_LIMIT'];
 			// Set values to paging list
-			$iNumberOfPages = (int) (($iNumberOfRecords / $iRecordsPerPage) + 1);
+			$iNumberOfPages = (int)($iNumberOfRecords / $iRecordsPerPage);
 			// Smarty assign SQL values
 			$t->assign('sql', base64_encode($sql));
 			$t->assign('fld', $fld);
