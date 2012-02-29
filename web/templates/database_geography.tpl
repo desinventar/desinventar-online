@@ -11,6 +11,7 @@
 					<form class="Export" action="{-$desinventarURL-}/" method="post" target="iframeDownload">
 						<input class="cmd"      name="cmd"      type="hidden" value="cmdGeographyExport" />
 						<input class="RegionId" name="RegionId" type="hidden" value="{-$desinventarRegionId-}" />
+						<input class="Labels"   name="Labels"   type="hiden"  value="Id" />
 					</form>
 				</div>					
 			</td>			
@@ -35,11 +36,11 @@
 			<table class="List" class="grid">
 				<thead>
 					<tr>
-						<td class="GeographyId">
-							Id
-						</td>
 						<td class="GeographyLevel">
 							GeographyLevel
+						</td>
+						<td class="GeographyId">
+							Id
 						</td>
 						<td class="GeographyCode">
 							{-#msgGeography_Code#-}
