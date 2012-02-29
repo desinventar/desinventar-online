@@ -952,7 +952,7 @@ switch ($cmd)
 					}
 					else
 					{
-						$iReturn = ERR_UNKNOWN_ERROR;
+						$iReturn = ERR_INVALID_ZIPFILE; //-130
 					}
 					# Delete existing info.xml file just in case...
 					if (file_exists($OutDir . '/info.xml'))

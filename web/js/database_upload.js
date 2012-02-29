@@ -89,7 +89,7 @@ function onReadyDatabaseUpload()
 				},
 				function(data)
 				{
-					doDatabaseUploadReset();
+					doDatabaseUploadReset(false);
 					Ext.getCmp('wndDatabaseUpload').hide();
 				},
 				'json'
@@ -160,8 +160,15 @@ function doAdminDatabaseCreateUploader()
 				}
 				else
 				{
-					doDatabaseUploadReset();
-					doDatabaseUploadStatusMsg('msgDatabaseUploadErrorOnUpload');
+					doDatabaseUploadReset(false);
+					switch(parseInt(data.Status)) {
+						case -130: //ERR_INVALID_ZIPFILE
+							doDatabaseUploadStatusMsg('msgDatabaseUploadErrorNoInfo');
+						break;
+						default:
+							doDatabaseUploadStatusMsg('msgDatabaseUploadErrorOnUpload');
+						break;
+					}
 				}
 			},
 			onCancel: function(id, Filename)
@@ -173,12 +180,12 @@ function doAdminDatabaseCreateUploader()
 	jQuery('#divFileUploaderControl .qq-upload-list').hide();
 
 	jQuery('#btnDatabaseUploadCancel').click(function() {
-		doDatabaseUploadReset();
+		doDatabaseUploadReset(true);
 		uploader.cancel(jQuery('#txtDatabaseUploadId').val());
 	});
 } //doAdminDatabaseCreateUploader()
 
-function doDatabaseUploadReset()
+function doDatabaseUploadReset(prmShowRegionInfo)
 {
 	doAdminDatabaseCreateUploader();
 	doDatabaseUploadStatusMsg('');
@@ -198,7 +205,7 @@ function doDatabaseUploadReset()
 	jQuery('#divDatabaseUploadControl').hide();
 	jQuery('#divDatabaseUploadParameters').hide();
 
-	if (jQuery('#fldDatabaseUploadMode').val() == 'Copy')
+	if ( (jQuery('#fldDatabaseUploadMode').val() == 'Copy') || (prmShowRegionInfo == false) )
 	{
 		jQuery('#divDatabaseUploadControl').show();
 	}
@@ -291,6 +298,6 @@ function doDatabaseUploadShow(prmMode)
 		Ext.getCmp('wndDatabaseUpload').setTitle(jQuery('#mnuDatabaseReplace').text());
 	}
 	jQuery('.clsDatabaseUpload').hide();
-	doDatabaseUploadReset();
+	doDatabaseUploadReset(true);
 	Ext.getCmp('wndDatabaseUpload').show();
 } // doDatabaseUploadAction
