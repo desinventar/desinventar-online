@@ -7,6 +7,7 @@ function onReadyMain()
 	onReadyDatabaseUpload();
 	onReadyDatabaseCreate();
 	onReadyDatabaseUsers();
+	onReadyQueryDesign();
 	onReadyGeography();
 	onReadyGeolevels();
 	onReadyDatabaseEvents();
