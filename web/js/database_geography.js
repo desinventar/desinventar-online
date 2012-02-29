@@ -151,6 +151,7 @@ function onReadyGeography()
 						jQuery('div.Geography table.ListHeader tr').append(clonedCell);
 						jQuery('div.Geography select.ListHeader:data("GeoLevelId=' + value.GeoLevelId + '")').disable();
 					});
+					jQuery('div.Geography input.GeoLevelCount').val(data.GeolevelsList.length);
 					if (data.GeolevelsList.length > 0)
 					{
 						jQuery('div.Geography select.ListHeader:first').change();
@@ -182,8 +183,9 @@ function onReadyGeography()
 
 function populate_geography_list(prmGeographyList,prmGeographyListCount)
 {
-	var prmGeoLevelId = jQuery('div.Geography input.GeoLevelId').val();
+	var prmGeoLevelId = parseInt(jQuery('div.Geography input.GeoLevelId').val());
 	var prmParentId = jQuery('div.Geography input.ParentId').val();
+	var geolevel_count = parseInt(jQuery('div.Geography input.GeoLevelCount').val()) - 1;
 	jQuery('div.Geography select.ListHeader').each(function() {
 		if (parseInt(jQuery(this).data('GeoLevelId')) > prmGeoLevelId)
 		{
@@ -196,7 +198,10 @@ function populate_geography_list(prmGeographyList,prmGeographyListCount)
 	select.append(jQuery('<option>', { value : prmParentId }).text(jQuery('div.Geography span.All').text()));
 	jQuery('div.Geography table.List tbody tr').remove();
 	jQuery.each(prmGeographyList, function(key, value) {
-		select.append(jQuery('<option>', { value : key }).text(value.GeographyName));
+		if (prmGeoLevelId < geolevel_count)
+		{
+			select.append(jQuery('<option>', { value : key }).text(value.GeographyName));
+		}
 		var clonedRow = jQuery('div.Geography table.List thead tr:first').clone();
 		jQuery('.GeographyId'    ,clonedRow).html(value.GeographyId);
 		jQuery('.GeographyLevel' ,clonedRow).html(value.GeographyLevel);
@@ -206,7 +211,7 @@ function populate_geography_list(prmGeographyList,prmGeographyListCount)
 		jQuery('.GeographyStatus',clonedRow).html(jQuery('select.GeographyStatusText option[value="' + value.GeographyActive + '"]').text());
 		jQuery('div.Geography table.List tbody').append(clonedRow);
 	});
-	if (parseInt(prmGeographyListCount) > 0)
+	if (jQuery('option',select).size() > 1)
 	{
 		select.enable();
 	}

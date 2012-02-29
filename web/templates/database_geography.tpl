@@ -116,6 +116,7 @@
 	<div class="hidden">
 		<input class="ParentId" type="hidden" value="" />
 		<input class="GeoLevelId" type="hidden" value="0" />
+		<input class="GeoLevelCount" type="hidden" value="0" />
 		<span class="All">{-#msgGeography_All#-}</span>
 		<select class="GeographyStatusText">
 			<option value="0">{-#msgGeography_Inactive#-}</option>
