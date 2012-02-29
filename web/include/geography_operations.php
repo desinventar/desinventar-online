@@ -24,7 +24,13 @@ function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 		$query = 'SELECT GeographyId,GeographyCode FROM Geography WHERE GeographyLevel=' . $prmGeoLevelId . ' ORDER BY GeographyId';
 		foreach($prmSession->q->dreg->query($query,PDO::FETCH_ASSOC) as $row)
 		{
-			$geo_list[$row['GeographyCode']] = array('id' => $row['GeographyId'],'updated' => 0);
+			if ($row['GeographyId'] != '')
+			{
+				$geo_list[$row['GeographyCode']] = array(
+					'id' => $row['GeographyId'],
+					'updated' => 0
+				);
+			}
 		}
 
 		# Set default value GeographyActive=1 for elements in this level
@@ -39,8 +45,8 @@ function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 			$row = dbase_get_record_with_names($dbf, $i);
 			if ($row['deleted'] == 0)
 			{
-				$geography_code       = $row[$prmCode];
-				$geography_name       = iconv('windows-1252', 'utf-8', $row[$prmName]);
+				$geography_code = $row[$prmCode];
+				$geography_name = iconv('windows-1252', 'utf-8', $row[$prmName]);
 				$geography_id = '';
 				if (isset($geo_list[$geography_code]['id']))
 				{
@@ -71,6 +77,8 @@ function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 				if ($geography_id == '')
 				{
 					$o->setGeographyId($parent_id);
+					$geography_id = $o->get('GeographyId');
+					$o->setGeographyFQName();
 					if (count($geo_list) > 0)
 					{
 						$o->set('GeographyActive',2);
@@ -85,6 +93,13 @@ function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 				{
 					$r = $o->update();
 				}
+				/*
+				printf("%-15s %-10s %4d %2d %-25s %-30s \n", 
+					$geography_id, $geography_code, 
+					$o->get('GeographyActive'), $r,
+					$geography_name, $o->get('GeographyFQName')
+				);
+				*/
 				if ($r > 0)
 				{
 					$item_count++;
