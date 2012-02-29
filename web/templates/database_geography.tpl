@@ -6,7 +6,7 @@
 				<h3>{-#msgGeography_Title#-}</h3>
 			</td>
 			<td class="right">
-				<a class="button Export"><span>Export</span></a>
+				<a class="button Export" title="{-#msgGeography_ExportTooltip#-}"><span>{-#msgGeography_Export#-}</span></a>
 				<div class="hidden">
 					<form class="Export" action="{-$desinventarURL-}/" method="post" target="iframeDownload">
 						<input class="cmd"      name="cmd"      type="hidden" value="cmdGeographyExport" />
