@@ -471,6 +471,10 @@ switch ($cmd)
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');		
 	break;
+	case 'cmdGeographyExport':
+		fb($_POST);
+		echo "OK";
+	break;
 	case 'cmdGeolevels':
 		$t->display('main_database_geolevels.tpl');
 	break;

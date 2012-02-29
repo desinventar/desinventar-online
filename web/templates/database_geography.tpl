@@ -1,6 +1,21 @@
 {-config_load file="$lg.conf" section="grpAdminGeography"-}
 <div class="Geography" style="width:100%;max-width:600px;">
-	<h3>{-#msgGeography_Title#-}</h3>
+	<table style="width:100%;">
+		<tr>
+			<td style="width:100%;">
+				<h3>{-#msgGeography_Title#-}</h3>
+			</td>
+			<td class="right">
+				<a class="button Export"><span>Export</span></a>
+				<div class="hidden">
+					<form class="Export" action="{-$desinventarURL-}/" method="post" target="iframeDownload">
+						<input class="cmd"      name="cmd"      type="hidden" value="cmdGeographyExport" />
+						<input class="RegionId" name="RegionId" type="hidden" value="{-$desinventarRegionId-}" />
+					</form>
+				</div>					
+			</td>			
+		</tr>
+	</table>
 	<div class="ListHeader">
 		<span class="helptext">{-#msgGeography_Header1#-}</span>
 		<table class="ListHeader">

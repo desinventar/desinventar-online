@@ -49,6 +49,12 @@ function onReadyGeography()
 		jQuery('div.Geography div.Edit').show();
 	});
 
+	jQuery('div.Geography a.Export').click(function() {
+		console.log('export');
+		var form = jQuery('div.Geography form.Export');
+		jQuery('div.Geography form.Export').submit();
+	});
+
 	jQuery('div.Geography a.Cancel').click(function() {
 		jQuery('div.Geography form.Edit').each(function() {
 			this.reset();
