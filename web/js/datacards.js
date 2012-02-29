@@ -359,35 +359,35 @@ function onReadyDatacards()
 	// Dependency between fields
 	jQuery('#DICard').on('blur','#EffectRoads', function() {
 		var v = jQuery.trim(jQuery(this).val());
-		if ( (v != '') && (parseInt(v) > 0) )
+		if ( (v != '') && (parseFloat(v) > 0) )
 		{
 			jQuery('#DICard #SectorTransport').val(-1);
 		}
 	});
 	jQuery('#DICard').on('blur','#EffectFarmingAndForest', function() {
 		var v = jQuery.trim(jQuery(this).val());
-		if ( (v != '') && (parseInt(v) > 0) )
+		if ( (v != '') && (parseFloat(v) > 0) )
 		{
 			jQuery('#DICard #SectorAgricultural').val(-1);
 		}
 	});
 	jQuery('#DICard').on('blur','#EffectLiveStock', function() {
 		var v = jQuery.trim(jQuery(this).val());
-		if ( (v != '') && (parseInt(v) > 0) )
+		if ( (v != '') && (parseFloat(v) > 0) )
 		{
 			jQuery('#DICard #SectorAgricultural').val(-1);
 		}
 	});
 	jQuery('#DICard').on('blur','#EffectEducationCenters', function() {
 		var v = jQuery.trim(jQuery(this).val());
-		if ( (v != '') && (parseInt(v) > 0) )
+		if ( (v != '') && (parseFloat(v) > 0) )
 		{
 			jQuery('#DICard #SectorEducation').val(-1);
 		}
 	});
 	jQuery('#DICard').on('blur','#EffectMedicalCenters', function() {
 		var v = jQuery.trim(jQuery(this).val());
-		if ( (v != '') && (parseInt(v) > 0) )
+		if ( (v != '') && (parseFloat(v) > 0) )
 		{
 			jQuery('#DICard #SectorHealth').val(-1);
 		}
