@@ -969,6 +969,18 @@
 			<Text LangIsoCode="por">Estado</Text>
 			<Text LangIsoCode="fre">État</Text>
 		</Message>
+		<Message id="msgGeography_Export">
+			<Text LangIsoCode="eng">Export</Text>
+			<Text LangIsoCode="spa">Exportar</Text>
+			<Text LangIsoCode="por">Exportar</Text>
+			<Text LangIsoCode="fre">Exporter</Text>
+		</Message>
+		<Message id="msgGeography_ExportTooltip">
+			<Text LangIsoCode="eng">Export geography as CSV file</Text>
+			<Text LangIsoCode="spa">Exportar geografía como archivo CSV</Text>
+			<Text LangIsoCode="por">Exportar geografia como arquivo CSV</Text>
+			<Text LangIsoCode="fre">Exporter la géographie en tant que fichier CSV</Text>
+		</Message>
 		<Message id="msgGeography_Add">
 			<Text LangIsoCode="eng">Add</Text>
 			<Text LangIsoCode="spa">Adicionar</Text>
