@@ -168,22 +168,20 @@
 			{-foreach name=ef3 key=k item=i from=$ef3-}
 				{-assign var="ff" value="D_$k"-}
 				<div class="EffectLossesValue">
-					<input type="checkbox" onFocus="showtip('{-$i[2]-}');" id="{-$k-}"
-						 {-if $qd.$ff[0] != ''-}checked{-/if-} />
+					<input type="checkbox" data-help="{-$i[2]-}" id="{-$k-}" check="{-if $qd.$ff[0] != ''-}checked{-/if-}" />
 					<label for="{-$k-}" onMouseOver="showtip('{-$i[2]-}');">{-$i[0]-}</label>
-					<span id="o{-$k-}" style="display:none">
-						<select id="{-$k-}[0]" name="D_{-$k-}[0]" onChange="showeff(this.value, 'x{-$k-}', 'y{-$k-}');" class="small line" disabled>
-							<option class="small" value=" "></option>
+					<span class="options" id="o{-$k-}" style="display:none">
+						<select class="operator" id="{-$k-}[0]" name="D_{-$k-}[0]" onChange="showeff(this.value, 'x{-$k-}', 'y{-$k-}');" class="small line" disabled>
 							<option class="small" value=">=" {-if $qd.$ff[0] == '>='-}selected{-/if-}>{-#teffmajor#-}</option>
 							<option class="small" value="<=" {-if $qd.$ff[0] == '<='-}selected{-/if-}>{-#teffminor#-}</option>
 							<option class="small" value="="  {-if $qd.$ff[0] == '='-}selected{-/if-}>{-#teffequal#-}</option>
 							<option class="small" value="-3" {-if $qd.$ff[0] == '-3'-}selected{-/if-}>{-#teffbetween#-}</option>
 						</select>
-						<span id="x{-$k-}" style="display:none"><br />
+						<span class="minvalue" id="x{-$k-}" style="display:none"><br />
 							<input type="text" id="{-$k-}[1]" name="D_{-$k-}[1]" size="5" class="line"
 								value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[1]-}{-else-}1{-/if-}" />
 						</span>
-						<span id="y{-$k-}" style="display:none">{-#tand#-}
+						<span class="maxvalue" id="y{-$k-}" style="display:none">{-#tand#-}
 							<input type="text" id="{-$k-}[2]" name="D_{-$k-}[2]" size="5" class="line" 
 								value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}" />
 						</span>
