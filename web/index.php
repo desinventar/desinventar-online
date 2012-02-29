@@ -140,33 +140,36 @@ switch ($cmd)
 		$LangList = $us->q->loadLanguages(1);
 		$LangIsoCode = getParameter('LangIsoCode');
 		$answer = array();
-		$answer['Status'] = ERR_NO_ERROR;
+		$iReturn = ERR_NO_ERROR;
 		if ($lg != $LangIsoCode)
 		{
 			if (array_key_exists($LangIsoCode, $LangList))
 			{
 				$us->setLangIsoCode($LangIsoCode);
 				$us->update();
-				$answer['Status'] = ERR_NO_ERROR;
+				$iReturn = ERR_NO_ERROR;
 				$answer['LangIsoCode'] = $LangIsoCode;
 			}
 			else
 			{
-				$answer['Status'] = ERR_LANGUAGE_INVALID;
+				$iReturn = ERR_LANGUAGE_INVALID;
 			}
 		}
 		else
 		{
-			$answer['Status'] = ERR_LANGUAGE_NO_CHANGE;
+			$iReturn = ERR_LANGUAGE_NO_CHANGE;
 		}
+		$answer['Status'] = $iReturn;
 		echo json_encode($answer);
 	break;
 	case 'cmdAdminDatabaseGetList':
+		$answer = array();
 		$answer['Status']     = ERR_NO_ERROR;
 		$answer['RegionList'] = $us->q->getRegionAdminList();
 		echo json_encode($answer);
 	break;
 	case 'cmdAdminDatabaseGetInfo':
+		$answer = array();
 		$RegionId = getParameter('RegionId', '');
 		$r = new DIRegion($us, $RegionId);
 		$answer['Status'] = ERR_NO_ERROR;
@@ -338,29 +341,31 @@ switch ($cmd)
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
 	break;
 	case 'cmdGetLocaleList':
-		$answer = array();
-		$answer['Status'] = ERR_UNKNOWN_ERROR;
+		$answer = array();		
+		$iReturn = ERR_UNKNOWN_ERROR;
 		if ($us->UserId != '')
 		{
 			$LanguageList = $us->q->loadLanguages(1);
 			$CountryList  = $us->q->getCountryList();
-			$answer['Status'] = ERR_NO_ERROR;
+			$iReturn = ERR_NO_ERROR;
 			$answer['LanguageList'] = $LanguageList;
 			$answer['CountryList'] = $CountryList;
 		}
+		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
 	case 'cmdGetUserPermList':
 		$answer = array();
-		$answer['Status'] = ERR_UNKNOWN_ERROR;
+		$iReturn = ERR_UNKNOWN_ERROR;
 		if ($desinventarUserRoleValue >= ROLE_ADMINPORTAL)
 		{
 			$UserList  = $us->getUserList();
 			$UserAdmin = $us->getRegionUserAdminInfo();
-			$answer['Status'] = ERR_NO_ERROR;
+			$iReturn = ERR_NO_ERROR;
 			$answer['UserList'] = $UserList;
 			$answer['UserAdmin'] = $UserAdmin;
 		}
+		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
 	case 'admin':
@@ -693,7 +698,6 @@ switch ($cmd)
 			$iReturn = ERR_UNKNOWN_ERROR;
 		}
 		$answer['Status'] = $iReturn;
-		# to pass data through iframe you will need to encode all html tags
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
 	break;
 	case 'getversion':
@@ -948,7 +952,7 @@ switch ($cmd)
 					}
 					else
 					{
-						$answer['Status'] = ERR_UNKNOWN_ERROR;
+						$iReturn = ERR_UNKNOWN_ERROR;
 					}
 					# Delete existing info.xml file just in case...
 					if (file_exists($OutDir . '/info.xml'))
@@ -967,7 +971,6 @@ switch ($cmd)
 			$iReturn = ERR_UNKNOWN_ERROR;
 		}
 		$answer['Status'] = $iReturn;
-		# to pass data through iframe you will need to encode all html tags
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
 	break;
 	case 'start':
