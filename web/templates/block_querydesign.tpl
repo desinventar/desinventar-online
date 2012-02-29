@@ -1,4 +1,4 @@
-<div id="divQueryDesign">
+<div class="QueryDesign">
 <span id="msgQueryDesignTitle" class="hidden">{-#tsubtitle#-}</span>
 <span id="msgQueryDesignTooltip" class="hidden">{-#thlpquery#-}</span>
 <form id="frmMainQuery" method="post" action="" target="dcr">
@@ -167,28 +167,30 @@
 			<b>{-#ttitloss#-}</b><br />
 			{-foreach name=ef3 key=k item=i from=$ef3-}
 				{-assign var="ff" value="D_$k"-}
-				<input type="checkbox" onFocus="showtip('{-$i[2]-}');" id="{-$k-}"
-					onclick="enadisEff('{-$k-}', this.checked);" {-if $qd.$ff[0] != ''-}checked{-/if-} />
-				<label for="{-$k-}" onMouseOver="showtip('{-$i[2]-}');">{-$i[0]-}</label>
-				<span id="o{-$k-}" style="display:none">
-					<select id="{-$k-}[0]" name="D_{-$k-}[0]" onChange="showeff(this.value, 'x{-$k-}', 'y{-$k-}');" class="small line" disabled>
-						<option class="small" value=" "></option>
-						<option class="small" value=">=" {-if $qd.$ff[0] == '>='-}selected{-/if-}>{-#teffmajor#-}</option>
-						<option class="small" value="<=" {-if $qd.$ff[0] == '<='-}selected{-/if-}>{-#teffminor#-}</option>
-						<option class="small" value="="  {-if $qd.$ff[0] == '='-}selected{-/if-}>{-#teffequal#-}</option>
-						<option class="small" value="-3" {-if $qd.$ff[0] == '-3'-}selected{-/if-}>{-#teffbetween#-}</option>
-					</select>
-					<span id="x{-$k-}" style="display:none"><br />
-						<input type="text" id="{-$k-}[1]" name="D_{-$k-}[1]" size="5" class="line"
-							value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[1]-}{-else-}1{-/if-}" />
+				<div class="EffectLossesValue">
+					<input type="checkbox" onFocus="showtip('{-$i[2]-}');" id="{-$k-}"
+						onclick="enadisEff('{-$k-}', this.checked);" {-if $qd.$ff[0] != ''-}checked{-/if-} />
+					<label for="{-$k-}" onMouseOver="showtip('{-$i[2]-}');">{-$i[0]-}</label>
+					<span id="o{-$k-}" style="display:none">
+						<select id="{-$k-}[0]" name="D_{-$k-}[0]" onChange="showeff(this.value, 'x{-$k-}', 'y{-$k-}');" class="small line" disabled>
+							<option class="small" value=" "></option>
+							<option class="small" value=">=" {-if $qd.$ff[0] == '>='-}selected{-/if-}>{-#teffmajor#-}</option>
+							<option class="small" value="<=" {-if $qd.$ff[0] == '<='-}selected{-/if-}>{-#teffminor#-}</option>
+							<option class="small" value="="  {-if $qd.$ff[0] == '='-}selected{-/if-}>{-#teffequal#-}</option>
+							<option class="small" value="-3" {-if $qd.$ff[0] == '-3'-}selected{-/if-}>{-#teffbetween#-}</option>
+						</select>
+						<span id="x{-$k-}" style="display:none"><br />
+							<input type="text" id="{-$k-}[1]" name="D_{-$k-}[1]" size="5" class="line"
+								value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[1]-}{-else-}1{-/if-}" />
+						</span>
+						<span id="y{-$k-}" style="display:none">{-#tand#-}
+							<input type="text" id="{-$k-}[2]" name="D_{-$k-}[2]" size="5" class="line" 
+								value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}" />
+						</span>
 					</span>
-					<span id="y{-$k-}" style="display:none">{-#tand#-}
-						<input type="text" id="{-$k-}[2]" name="D_{-$k-}[2]" size="5" class="line" 
-							value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}" />
-					</span>
-				</span>
-				<br />
+				</div>
 			{-/foreach-}
+			<br />
 			{-foreach name=ef4 key=k item=i from=$ef4-}
 				{-assign var="ff" value="D_$k"-}
 				<b onMouseOver="showtip('{-$i[2]-}');">{-$i[0]-}</b><br />
