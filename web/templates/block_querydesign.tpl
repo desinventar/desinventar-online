@@ -17,7 +17,7 @@
 				<table>
 					<tr>
 						<td style="display:none;">
-							<span class="dlgmsg"></span> |
+							<span class="dlgmsg withHelp"></span> |
 						</td>
 					</tr>
 				</table>
