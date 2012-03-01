@@ -46,7 +46,7 @@ function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 			if ($row['deleted'] == 0)
 			{
 				$geography_code = $row[$prmCode];
-				$geography_name = iconv('windows-1252', 'utf-8', $row[$prmName]);
+				$geography_name = utf8_encode($row[$prmName]);
 				$geography_id = '';
 				if (isset($geo_list[$geography_code]['id']))
 				{
@@ -93,13 +93,6 @@ function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 				{
 					$r = $o->update();
 				}
-				/*
-				printf("%-15s %-10s %4d %2d %-25s %-30s \n", 
-					$geography_id, $geography_code, 
-					$o->get('GeographyActive'), $r,
-					$geography_name, $o->get('GeographyFQName')
-				);
-				*/
 				if ($r > 0)
 				{
 					$item_count++;
@@ -121,15 +114,76 @@ function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 	return $iReturn;
 } #import_geography_from_dbf
 
-function get_dbf_fields($prmFilename)
+function geography_update_dbf_record($prmDBFFile, $prmFieldCode, $prmFieldName, $prmGeographyCode, $prmGeographyName)
 {
-	$dbf = dbase_open($prmFilename, 'r');
+	$answer = 1;
+
+	if (! file_exists($prmDBFFile) )
+	{
+		$answer = 0;
+	}
+	if ($answer > 0)
+	{
+		$dbf = dbase_open($prmDBFFile, 2);
+
+		$field_list = geography_get_fields_from_dbf($dbf);
+		$field_code = array_search($prmFieldCode, $field_list);
+		if (false === $field_code)
+		{	
+			$answer = 0;
+		}
+		if ($answer > 0)
+		{
+			$field_name = array_search($prmFieldName, $field_list);
+			if (false === $field_name)
+			{
+				$answer = 0;
+			}
+		}
+	}
+	if ($answer > 0)
+	{
+		$i = 0;
+		$count = dbase_numrecords($dbf);
+		$bContinue = 1;
+		$answer = 0;
+		while($bContinue > 0)
+		{
+			$row = dbase_get_record($dbf, $i);
+			if ($row[$field_code] == $prmGeographyCode)
+			{
+				$row[$field_name] = utf8_decode($prmGeographyName);
+				unset($row['deleted']);
+				dbase_replace_record($dbf, $row, $i);
+				$row = dbase_get_record($dbf, $i);
+				$answer = 1;
+			}
+			$i++;
+			if ($i > $count)
+			{
+				$bContinue = 0;
+			}
+		}
+		dbase_close($dbf);
+	}
+	return $answer;
+}
+
+function geography_get_fields_from_dbf($dbf)
+{
 	$header = dbase_get_header_info($dbf);
 	$field_list = array();
 	foreach($header as $field)
 	{
 		$field_list[] = $field['name'];
 	}
+	return $field_list;
+}
+
+function geography_get_fields_from_dbffile($prmFilename)
+{
+	$dbf = dbase_open($prmFilename, 'r');
+	$field_list = geography_get_fields_from_dbf($dbf);
 	dbase_close($dbf);
 	return $field_list;
 }
