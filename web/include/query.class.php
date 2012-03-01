@@ -2082,9 +2082,11 @@ class Query //extends PDO
 				}
 				$dictlabel .= $row['lbn'];
 				$dictio[$dictlabel] = array(
-				$row['DictTranslation'],//utf8_encode($row['DicTranslation']), 
-				$row['DictTechHelp'],//utf8_encode($row['DicTechHelp']),
-				$row['DictBasDesc'], $row['DictFullDesc']);
+					$row['DictTranslation'],
+					$row['DictTechHelp'],
+					$row['DictBasDesc'],
+					$row['DictFullDesc']
+				);
 			} // foreach
 		}
 		catch (Exception $e)
