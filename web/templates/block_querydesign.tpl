@@ -277,41 +277,52 @@
 		<dt>{-#mdcsection#-}</dt>
 		<dd class="default">
 			<div style="height: 250px;">
-				<b onMouseOver="showtip('{-$dis.DisasterBeginTime[2]-}');">{-#tdate#-}</b>
-				<span class="dlgmsg">{-#tdateformat#-}</span><br />
+				<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}">{-#msgQueryDesign_DateRange#-}</span>
+				<span class="dlgmsg withHelpOver" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}">{-#msgQueryDesign_DateFormat#-}</span><br />
 				<table border="0">
 					<tr>
-						<td><b>{-#ttitsince#-}:</b></td>
 						<td>
-							<input type="text" id="queryBeginYear" name="D_DisasterBeginTime[]" size=4 maxlength=4 class="line" 
+							<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}">{-#ttitsince#-}:</span>
+						</td>
+						<td>
+							<input class="line withHelpFocus" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}"
+								type="text" id="queryBeginYear" name="D_DisasterBeginTime[]" size="4" maxlength="4" 
 								value="{-if $qd.D_DisasterBeginTime[0] != ''-}{-$qd.D_DisasterBeginTime[0]-}{-else-}{-$yini-}{-/if-}" />
-							<input type="text" id="queryBeginMonth" name="D_DisasterBeginTime[]" size=2 maxlength=2 class="line"
+							<input class="line withHelpFocus" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}" 
+								type="text" id="queryBeginMonth" name="D_DisasterBeginTime[]" size="2" maxlength="2"
 								value="{-$qd.D_DisasterBeginTime[1]-}" />
-							<input type="text" id="queryBeginDay" name="D_DisasterBeginTime[]" size=2 maxlength=2 class="line"
+							<input class="line withHelpFocus" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}" 
+								type="text" id="queryBeginDay" name="D_DisasterBeginTime[]" size="2" maxlength="2"
 								value="{-$qd.D_DisasterBeginTime[2]-}" />
 						</td>
 					</tr>
 					<tr>
-						<td><b>{-#ttituntil#-}:</b></td>
 						<td>
-							<input type="text" id="queryEndYear" name="D_DisasterEndTime[]" size=4 maxlength=4 class="line" 
+							<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}">{-#ttituntil#-}:</span>
+						</td>
+						<td>
+							<input class="line withHelpFocus" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}" 
+								type="text" id="queryEndYear" name="D_DisasterEndTime[]" size="4" maxlength="4"
 								value="{-if $qd.D_DisasterEndTime[0] != ''-}{-$qd.D_DisasterEndTime[0]-}{-else-}{-$yend-}{-/if-}" />
-							<input type="text" id="queryEndMonth" name="D_DisasterEndTime[]" size=2 maxlength=2 class="line"
+							<input class="line withHelpFocus" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}"
+								type="text" id="queryEndMonth" name="D_DisasterEndTime[]" size="2" maxlength="2"
 								value="{-$qd.D_DisasterEndTime[1]-}" />
-							<input type="text" id="queryEndDay" name="D_DisasterEndTime[]" size=2 maxlength=2 class="line"
+							<input class="line withHelpFocus" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}" 
+								type="text" id="queryEndDay" name="D_DisasterEndTime[]" size="2" maxlength="2"
 								value="{-$qd.D_DisasterEndTime[2]-}" />
 						</td>
 					</tr>
 				</table>
 				<br />
-				<b onMouseOver="showtip('{-$dis.DisasterSource[2]-}');">{-$dis.DisasterSource[0]-}</b>
+				<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_DisasterSource_Helptext#-}">{-#msgDatacard_DisasterSource#-}</span>
+				<br />
 				<select name="D_DisasterSource[0]" class="dlgmsg small line">
 					<option class="small" value="AND" {-if $qd.D_DisasterSource[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
 					<option class="small" value="OR"  {-if $qd.D_DisasterSource[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
 				</select>
 				<br />
 				<textarea id="txtDisasterSource" name="D_DisasterSource[1]" style="width:220px; height:40px;" 
-					class="inputText" onFocus="showtip('{-$dis.DisasterSource[2]-}');">{-$qd.D_DisasterSource[1]-}</textarea>
+					class="inputText withHelpFocus" data-help="{-#msgDatacard_DisasterSource_Helptext#-}">{-$qd.D_DisasterSource[1]-}</textarea>
 				<br />
 				<div id="divQueryRecordStatus">
 					<b onMouseOver="showtip('');">{-#tdcstatus#-}</b><br />
