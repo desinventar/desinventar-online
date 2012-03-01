@@ -472,7 +472,7 @@ switch ($cmd)
 				if ($geography_name_old != $o->get('GeographyName'))
 				{
 					$g = new DIGeocarto($us, $o->get('GeographyLevel'));
-					$iReturn = geography_update_dbf_record(
+					geography_update_dbf_record(
 						$g->getDBFFilename(),
 						$g->get('GeoLevelLayerCode'),
 						$g->get('GeoLevelLayerName'),
