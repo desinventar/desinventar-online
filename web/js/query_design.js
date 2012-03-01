@@ -46,10 +46,25 @@ function onReadyQueryDesign()
 		});
 		jQuery('div.QueryDesign select.Event').empty();
 		jQuery.each(jQuery('body').data('EventList'), function(key, value) {
-			var option = jQuery('<option>', { value : value.EventId }).text(value.EventName);
-			option.data('help', value.EventDesc);
-			option.addClass('withHelpOver');
-			jQuery('div.QueryDesign select.Event').append(option);
+			if (parseInt(value.EventPredefined) > 0)
+			{
+				var option = jQuery('<option>', { value : value.EventId }).text(value.EventName);
+				option.data('help', value.EventDesc);
+				option.addClass('withHelpOver');
+				jQuery('div.QueryDesign select.Event').append(option);
+			}
+		});
+		var option = jQuery('<option>', { value : '' }).text('---');
+		option.attr('disabled','disabled');
+		jQuery('div.QueryDesign select.Event').append(option);
+		jQuery.each(jQuery('body').data('EventList'), function(key, value) {
+			if (parseInt(value.EventPredefined) < 1)
+			{
+				var option = jQuery('<option>', { value : value.EventId }).text(value.EventName);
+				option.data('help', value.EventDesc);
+				option.addClass('withHelpOver');
+				jQuery('div.QueryDesign select.Event').append(option);
+			}
 		});		
 	});
 } //onReadyQueryDesign()
