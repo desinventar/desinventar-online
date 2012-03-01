@@ -456,6 +456,7 @@ switch ($cmd)
 		{
 			$geography_id = $Geography['GeographyId'];
 			$o = new DIGeography($us, $geography_id);
+			$geography_name_old = $o->get('GeographyName');
 			$o->setFromArray($Geography);
 			if ($geography_id == '')
 			{
@@ -468,14 +469,17 @@ switch ($cmd)
 			}
 			if ($iReturn > 0)
 			{
-				$g = new DIGeocarto($us, $o->get('GeographyLevel'));
-				$iReturn = geography_update_dbf_record(
-					$g->getDBFFilename(),
-					$g->get('GeoLevelLayerCode'),
-					$g->get('GeoLevelLayerName'),
-					$o->get('GeographyCode'),
-					$o->get('GeographyName')
-				);
+				if ($geography_name_old != $o->get('GeographyName'))
+				{
+					$g = new DIGeocarto($us, $o->get('GeographyLevel'));
+					$iReturn = geography_update_dbf_record(
+						$g->getDBFFilename(),
+						$g->get('GeoLevelLayerCode'),
+						$g->get('GeoLevelLayerName'),
+						$o->get('GeographyCode'),
+						$o->get('GeographyName')
+					);
+				}
 			}
 		}
 		if ($iReturn > 0)
