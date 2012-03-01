@@ -142,6 +142,9 @@ function doDatabaseLoadData()
 			},
 			function(data)
 			{
+				// Initialize data-* components for body
+				jQuery('body').data('RegionId', data.RegionId);
+				jQuery('body').data('params', data.params);
 				jQuery('body').data('GeolevelsList', data.GeolevelsList);
 				jQuery('body').data('EventList', data.EventList);
 				jQuery('body').data('CauseList', data.CauseList);
@@ -154,6 +157,8 @@ function doDatabaseLoadData()
 					}
 				});
 				jQuery('body').data('GeographyList', data.GeographyList);
+				// Trigger event on mainblock components to update them
+				jQuery('.mainblock').trigger('cmdUpdate');
 			},
 			'json'
 		);

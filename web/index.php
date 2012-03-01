@@ -400,6 +400,8 @@ switch ($cmd)
 		if ($iReturn > 0)
 		{
 			$r = new DIRegion($us, $RegionId);
+			$answer['RegionId'] = $RegionId;
+
 			$GeolevelsList = $r->getGeolevelList();
 			$answer['GeolevelsList'] = $GeolevelsList;
 			$EventList     = $us->q->loadEvents('ALL', 'active', $lg);
@@ -410,6 +412,14 @@ switch ($cmd)
 			$answer['RecordCount'] = $RecordCount;
 			$GeographyList = $us->getGeographyItemsByLevel(0, '');
 			$answer['GeographyList'] = $GeographyList;
+			$params = array();
+			
+			# Get range of dates for Query Design
+			$ydb = $us->getDateRange();
+			$params['MinYear'] = substr($ydb[0], 0, 4);
+			$params['MaxYear'] = substr($ydb[1], 0, 4);
+			
+			$answer['params'] = $params;
 		}
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');

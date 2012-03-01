@@ -24,4 +24,11 @@ function onReadyQueryDesign()
 	}).focus(function() {
 		showtip(jQuery(this).data('help'));
 	});
+	jQuery('div.QueryDesign').on('cmdUpdate', function() {
+		console.log('div.QueryDesign => cmdUpdate');
+		var params = jQuery('body').data('params');
+		jQuery('input.RegionId', this).val(jQuery('body').data('RegionId'));
+		jQuery('input.MinYear' , this).val(params.MinYear);
+		jQuery('input.MaxYear' , this).val(params.MaxYear);
+	});
 } //onReadyQueryDesign()
