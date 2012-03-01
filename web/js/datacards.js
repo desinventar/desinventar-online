@@ -818,14 +818,21 @@ function doDatacardClear()
 	jQuery('#DisasterId').val();
 	$('DICard').reset();
 	jQuery('#_CMD').val('insertDICard');
-	jQuery('#DisasterBeginTime0').val('');
-	jQuery('#DisasterBeginTime1').val('');
-	jQuery('#DisasterBeginTime2').val('');
 	jQuery('#cardsRecordNumber').val(0);
 	jQuery('#DICard .clsEffectNumeric').each(function() {
 		jQuery(this).jecValue('');
 		jQuery(this).val(0);
 	});
+	jQuery('#DICard .inputDouble').each(function() {
+		jQuery(this).val(0);
+	});
+	jQuery('#DICard .inputInteger').each(function() {
+		jQuery(this).val(0);
+	});
+	jQuery('#DICard #DisasterBeginTime0').val('');
+	jQuery('#DICard #DisasterBeginTime1').val('');
+	jQuery('#DICard #DisasterBeginTime2').val('');
+	jQuery('#DICard #EventDuration').val(0);
 }
 
 function doDatacardNew()

@@ -326,7 +326,7 @@
 									{-/if-}
 									<input type="text" id="{-$key-}" name="{-$key-}" size="30"
 										class="line {-$inputClass-}" tabindex="{-$MyTabIndex-}"
-										onFocus="showtip('{-$item[1]-}', '#f1bd41')" />
+										onFocus="showtip('{-$item[1]-}', '#f1bd41')" value="0" />
 									{-counter-}
 								</td>
 							{-if ($smarty.foreach.eefl.iteration ) % 3 == 0-}
