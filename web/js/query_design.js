@@ -44,5 +44,12 @@ function onReadyQueryDesign()
 			jQuery('span',clone).data('help', value.GeoLevelDesc);
 			jQuery('div.QueryDesign div.GeolevelsHeader table tr').append(clone);
 		});
+		jQuery('div.QueryDesign select.Event').empty();
+		jQuery.each(jQuery('body').data('EventList'), function(key, value) {
+			var option = jQuery('<option>', { value : value.EventId }).text(value.EventName);
+			option.data('help', value.EventDesc);
+			option.addClass('withHelpOver');
+			jQuery('div.QueryDesign select.Event').append(option);
+		});		
 	});
 } //onReadyQueryDesign()
