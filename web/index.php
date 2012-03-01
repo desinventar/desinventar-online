@@ -689,7 +689,7 @@ switch ($cmd)
 				$path_info = pathinfo($filename);
 				if (strtolower($path_info['extension']) == 'dbf')
 				{
-					$answer['DBFFields'] = get_dbf_fields($OutDir . '/' . $filename);
+					$answer['DBFFields'] = geography_get_fields_from_dbffile($OutDir . '/' . $filename);
 				}
 			} #if
 		} #if
