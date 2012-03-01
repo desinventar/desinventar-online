@@ -466,6 +466,17 @@ switch ($cmd)
 			{
 				$iReturn = $o->update();
 			}
+			if ($iReturn > 0)
+			{
+				$g = new DIGeocarto($us, $o->get('GeographyLevel'));
+				$iReturn = geography_update_dbf_record(
+					$g->getDBFFilename(),
+					$g->get('GeoLevelLayerCode'),
+					$g->get('GeoLevelLayerName'),
+					$o->get('GeographyCode'),
+					$o->get('GeographyName')
+				);
+			}
 		}
 		if ($iReturn > 0)
 		{

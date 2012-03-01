@@ -32,6 +32,11 @@ class DIGeoCarto extends DIRecord {
 		}
 	} // __construct
 
+	public function getDBFFilename()
+	{
+		$filename = VAR_DIR . '/database/' . $this->RegionId . '/' . $this->get('GeoLevelLayerFile') . '.dbf';
+		return $filename;
+	}
 } //class
 
 </script>
