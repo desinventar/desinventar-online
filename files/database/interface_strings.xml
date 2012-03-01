@@ -1807,11 +1807,17 @@
 			<Text LangIsoCode="por">Inválido formato do número, utilize ponto como separador decimal</Text>
 			<Text LangIsoCode="fre">Blancs format de nombre, utilisez point comme séparateur décimal</Text>
 		</Message>
+		<Message id="msgDatacard_WithoutStatus">
+			<Text LangIsoCode="eng">Cannot save datacard without state.</Text>
+			<Text LangIsoCode="spa">No puede guardar ficha sin estado.</Text>
+			<Text LangIsoCode="por">Não é possível salvar datacard sem estado</Text>
+			<Text LangIsoCode="fre">Impossible d'enregistrer la carte de données sans état</Text>
+		</Message>
 		<Message id="msgDatacardInvalidStatus">
-			<Text LangIsoCode="eng">Cannot save datacard with this status.</Text>
-			<Text LangIsoCode="spa">No puede guardar ficha con este estado.</Text>
-			<Text LangIsoCode="por">Não é possível salvar datacard com este estatuto</Text>
-			<Text LangIsoCode="fre">Impossible d&quot;enregister carte de données avec ce statut</Text>
+			<Text LangIsoCode="eng">Not enough permissions to save data card with this state</Text>
+			<Text LangIsoCode="spa">No hay suficientes permisos para guardar la ficha con este estado</Text>
+			<Text LangIsoCode="por">Nem suficientes permissões para salvar cartão de dados com este estado</Text>
+			<Text LangIsoCode="fre">Pas assez de permissions pour enregistrer la carte de données avec cet état</Text>
 		</Message>
 		<Message id="msgDatacardWithoutSource">
 			<Text LangIsoCode="eng">Datacard without source information cannot be published, fill in the source, or save it as draft</Text>
