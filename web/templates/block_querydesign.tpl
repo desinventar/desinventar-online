@@ -204,12 +204,22 @@
 				</div>
 			{-/foreach-}
 			<br />
+			<span class="fieldLabel withHelpOver"  data-help="{-#msgDatacard_EffectOtherLosses_Helptext#-}" title="{-#msgDatacard_EffectOtherLosses_Tooltip#-}">{-#msgDatacard_EffectOtherLosses#-}</span>
+			<br />
+			<input class="fixw line withHelpFocus" data-help="{-#msgDatacard_EffectOtherLosses_Helptext#-}" type="text" id="EffectOtherLosses" name="D_EffectOtherLosses"  value="{-$qd.EffectOtherLosses[1]-}"/>
+			<br />
+			<span class="fieldLabel withHelpOver"  data-help="{-#msgDatacard_EffectNotes_Helptext#-}" title="{-#msgDatacard_EffectNotes_Tooltip#-}">{-#msgDatacard_EffectNotes#-}</span>
+			<br />
+			<input class="fixw line withHelpFocus" data-help="{-#msgDatacard_EffectNotes_Helptext#-}" type="text" id="EffectNotes" name="D_EffectNotes"  value="{-$qd.EffectNotes[1]-}"/>
+			<br />
+			<!--
 			{-foreach name=ef4 key=k item=i from=$ef4-}
 				{-assign var="ff" value="D_$k"-}
 				<b onMouseOver="showtip('{-$i[2]-}');">{-$i[0]-}</b><br />
 				<input type="text" id="{-$k-}" name="D_{-$k-}" class="fixw line" value="{-$qd.$ff[1]-}" onFocus="showtip('{-$i[2]-}');" />
 				<br />
 			{-/foreach-}
+			-->
 		</dd>
 		<!-- END QUERY EFFECTS SECTION -->
 		
