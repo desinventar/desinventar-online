@@ -1,12 +1,12 @@
-<div class="QueryDesign">
+<div class="QueryDesign mainblock">
 <span id="msgQueryDesignTitle" class="hidden">{-#tsubtitle#-}</span>
 <span id="msgQueryDesignTooltip" class="hidden">{-#thlpquery#-}</span>
-<form id="frmMainQuery" method="post" action="" target="dcr">
-	<input type="hidden" id="_REG" name="_REG" value="{-$reg-}" />
+<form class="QueryDesign" id="frmMainQuery" method="post" action="" target="dcr">
+	<input type="hidden" class="RegionId" id="_REG" name="_REG" value="" />
+	<input type="hidden" class="MinYear"  id="prmQueryMinYear" name="prmQuery[ConstMinYear]" value="" />
+	<input type="hidden" class="MaxYear"  id="prmQueryMaxYear" name="prmQuery[ConstMaxYear]" value="" />
 	<input type="hidden" id="_CMD" name="_CMD" />
 	<input type="hidden" id="prmQueryCommand"      name="prmQuery[Command]"      value="DEFAULT" />
-	<input type="hidden" id="prmQueryMinYear" name="prmQuery[ConstMinYear]" value="{-$yini-}" />
-	<input type="hidden" id="prmQueryMaxYear" name="prmQuery[ConstMaxYear]" value="{-$yend-}" />
 	<dl class="accordion">
 		<!-- BEGIN GEOGRAPHY SECTION -->
 		<!-- Select from Map testing ... 'selectionmap.php' -->
