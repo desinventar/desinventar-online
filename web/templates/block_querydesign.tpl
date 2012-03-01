@@ -17,7 +17,7 @@
 				<table>
 					<tr>
 						<td style="display:none;">
-							<span class="dlgmsg withHelp"></span> |
+							<span class="dlgmsg withHelpOver"></span> |
 						</td>
 					</tr>
 				</table>
@@ -28,11 +28,11 @@
 				{-include file="block_glist.tpl"-}
 			</div>
 			
-			<b onMouseOver="showtip('{-$dis.DisasterSiteNotes[2]-}');">{-$dis.DisasterSiteNotes[0]-}</b>
-			<input type="hidden" name="D_DisasterSiteNotes[0]" />
+			<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_DisasterSiteNotes_Tooltip#-}">{-#msgDatacard_DisasterSiteNotes#-}</span>
 			<br/>
-			<textarea id="DisasterSiteNotes" name="D_DisasterSiteNotes[1]" style="width:220px; height: 40px;"
-				class="inputText" onFocus="showtip('{-$dis.DisasterSiteNotes[2]-}');">{-$qd.D_DisasterSiteNotes[1]-}</textarea>
+			<input type="hidden" name="D_DisasterSiteNotes[0]" />
+			<textarea class="inputText withHelpFocus" id="DisasterSiteNotes" name="D_DisasterSiteNotes[1]" style="width:220px; height: 40px;"
+				data-help="{-#msgDatacard_DisasterSiteNotes_Tooltip#-}">{-$qd.D_DisasterSiteNotes[1]-}</textarea>
 		</dd>
 		
 		<!-- BEGIN EVENT SECTION -->

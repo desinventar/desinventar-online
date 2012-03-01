@@ -1,3 +1,4 @@
+{-config_load file="$lg.conf" section="grpDatacard"-}
 {-config_load file="$lg.conf" section="grpMainStrings"-}
 {-config_load file="$lg.conf" section="grpMenuUser"-}
 {-config_load file="$lg.conf" section="querydef"-}
