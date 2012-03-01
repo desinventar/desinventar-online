@@ -914,17 +914,17 @@ function doDatacardSave()
 	if (bContinue > 0)
 	{
 		// Validate Record Status
-		if (jQuery('#RecordStatus').val() == '')
+		if (jQuery('#DICard #RecordStatus').val() == '')
 		{
-			displayDatacardStatusMsg('msgDatacardInvalidStatus');
-			jQuery('#RecordStatus').highlight().focus();
+			displayDatacardStatusMsg('msgDatacardWithoutStatus');
+			jQuery('#DICard #RecordStatus').highlight().focus();
 			bContinue = 0;
 		}
 	}
 	
 	if (bContinue > 0)
 	{
-		if (jQuery('#RecordStatus').val() == 'PUBLISHED')
+		if (jQuery('#DICard #RecordStatus').val() == 'PUBLISHED')
 		{
 			jQuery('#DICard #DisasterSource').unhighlight();
 			jQuery('#DICard #RecordStatus').unhighlight();
@@ -943,13 +943,13 @@ function doDatacardSave()
 	if (bContinue > 0)
 	{
 		// Validate Record Status
-		if ( (jQuery('#RecordStatus').val() == 'PUBLISHED') ||
-		     (jQuery('#RecordStatus').val() == 'DELETED'  ) )
+		if ( (jQuery('#DICard #RecordStatus').val() == 'PUBLISHED') ||
+		     (jQuery('#DICard #RecordStatus').val() == 'DELETED'  ) )
 		{
 			if (jQuery('#desinventarUserRoleValue').val() <= 2)
 			{
 				displayDatacardStatusMsg('msgDatacardInvalidStatus');
-				jQuery('#RecordStatus').highlight().focus();
+				jQuery('#DICard #RecordStatus').highlight().focus();
 				bContinue = 0;
 			}
 		}

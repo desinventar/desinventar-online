@@ -29,6 +29,7 @@
 					<span class="datacardStatusMsg" id="msgDatacardFound">{-#msgDatacardFound#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardNotFound">{-#msgDatacardNotFound#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardInvalidNumber">{-#msgDatacardInvalidNumber#-}</span>
+					<span class="datacardStatusMsg" id="msgDatacardWithoutStatus">{-#msgDatacardWithoutStatus#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardInvalidStatus">{-#msgDatacardInvalidStatus#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardWithoutSource">{-#msgDatacardWithoutSource#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardInvalidGeography">{-#msgDatacardInvalidGeography#-}</span>
