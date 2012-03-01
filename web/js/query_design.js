@@ -44,6 +44,7 @@ function onReadyQueryDesign()
 			jQuery('span',clone).data('help', value.GeoLevelDesc);
 			jQuery('div.QueryDesign div.GeolevelsHeader table tr').append(clone);
 		});
+		// Load Event List
 		jQuery('div.QueryDesign select.Event').empty();
 		jQuery.each(jQuery('body').data('EventList'), function(key, value) {
 			if (parseInt(value.EventPredefined) > 0)
@@ -64,6 +65,30 @@ function onReadyQueryDesign()
 				option.data('help', value.EventDesc);
 				option.addClass('withHelpOver');
 				jQuery('div.QueryDesign select.Event').append(option);
+			}
+		});		
+
+		// Load Cause List
+		jQuery('div.QueryDesign select.Cause').empty();
+		jQuery.each(jQuery('body').data('CauseList'), function(key, value) {
+			if (parseInt(value.CausePredefined) > 0)
+			{
+				var option = jQuery('<option>', { value : value.CauseId }).text(value.CauseName);
+				option.data('help', value.CauseDesc);
+				option.addClass('withHelpOver');
+				jQuery('div.QueryDesign select.Cause').append(option);
+			}
+		});
+		var option = jQuery('<option>', { value : '' }).text('---');
+		option.attr('disabled','disabled');
+		jQuery('div.QueryDesign select.Cause').append(option);
+		jQuery.each(jQuery('body').data('CauseList'), function(key, value) {
+			if (parseInt(value.CausePredefined) < 1)
+			{
+				var option = jQuery('<option>', { value : value.CauseId }).text(value.CauseName);
+				option.data('help', value.CauseDesc);
+				option.addClass('withHelpOver');
+				jQuery('div.QueryDesign select.Cause').append(option);
 			}
 		});		
 	});
