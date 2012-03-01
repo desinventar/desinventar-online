@@ -2625,6 +2625,12 @@
 			<Text LangIsoCode="por">Limpar</Text>
 			<Text LangIsoCode="fre">Nettoyer</Text>
 		</Message>
+		<Message id="msgViewStd_EventDuration">
+			<Text LangIsoCode="eng">Event Duration</Text>
+			<Text LangIsoCode="spa">Duración del evento</Text>
+			<Text LangIsoCode="por">Duração do evento</Text>
+			<Text LangIsoCode="fre">Durée de l'événement</Text>
+		</Message>
 		<Message id="tand">
 			<Text LangIsoCode="eng">and</Text>
 			<Text LangIsoCode="spa">y</Text>
