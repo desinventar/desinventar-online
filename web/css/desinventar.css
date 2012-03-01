@@ -329,3 +329,6 @@ div.Geography table.List thead td {
 .helptext {
 	color:#42929d;
 }
+div.QueryDesign .fieldLabel {
+	font-weight:bold;	
+}

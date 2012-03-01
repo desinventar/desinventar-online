@@ -1891,6 +1891,20 @@
 			<Text LangIsoCode="por">Local</Text>
 			<Text LangIsoCode="fre">Lieu</Text>
 		</Message>
+		<Message id="msgDatacard_DisasterSiteNotes_Tooltip">
+			<Text LangIsoCode="eng">
+				Specific place in which the disaster occurred. If the Place name is the same as the lowest of the geographic levels reported; it is not necessary to re-input this. In the case of rural disasters; Place can be a location; a village; a river; a territory which covers various geographic units; a farm or country house; a geographic accident; etc. In the case of urban disasters; Place should include the address and/or neighbourhood.
+			</Text>
+			<Text LangIsoCode="spa">
+				Lugar específico donde ocurrió el desastre. Si el sitio corresponde con el último de los niveles geográficos reportados; no es necesario volver a digitarlo. El sitio puede ser una localidad; una vereda; un río; un territorio que cubre varias unidades geográficas; una finca o hacienda; un paraje; un lugar; una aldea; un accidente geográfico; etc.; en el caso de desastres en areas rurales; y en el caso de desastres urbanos; la dirección y/o el barrio.
+			</Text>
+			<Text LangIsoCode="por">
+				Lugar específico onde ocorreu um desastre. No caso de desastres em áreas rurais; este pode ser uma localidade; um povoado; um rio; um território que cobre várias unidades geográficas; um sítio ou fazenda; um parador; uma aldeia; um acidente geográfico; etc. Em desastres dentro de áreas urbanas o local corresponde ao endereço e/ou bairro. Se o local corresponde ao último dos níveis geográficos inseridos não é necessário digitá-lo novamente.
+			</Text>
+			<Text LangIsoCode="fre">
+				Specific place in which the disaster occurred. If the Place name is the same as the lowest of the geographic levels reported; it is not necessary to re-input this. In the case of rural disasters; Place can be a location; a village; a river; a territory which covers various geographic units; a farm or country house; a geographic accident; etc. In the case of urban disasters; Place should include the address and/or neighbourhood. If the Place name is the same as the lowest of the geographic levels reported; it is not necessary to re-input this. In the case of rural disasters; Place can be a location; a village; a river; a territory which covers various geographic units; a farm or country house; a geographic accident; etc. In the case of urban disasters; Place should include the address and/or neighbourhood.
+			</Text>
+		</Message>
 		<Message id="msgDatacard_DisasterLatitude">
 			<Text LangIsoCode="eng">Latitude</Text>
 			<Text LangIsoCode="spa">Latitud</Text>

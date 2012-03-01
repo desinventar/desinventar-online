@@ -25,7 +25,9 @@ function onReadyQueryDesign()
 		showtip(jQuery(this).data('help'));
 	});
 
-	jQuery('div.QueryDesign').on('mouseover','.withHelp',function() {
+	jQuery('div.QueryDesign').on('mouseover','.withHelpOver',function() {
+		showtip(jQuery(this).data('help'));
+	}).on('focus','.withHelpFocus',function() {
 		showtip(jQuery(this).data('help'));
 	});
 	
