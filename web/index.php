@@ -405,7 +405,6 @@ switch ($cmd)
 			$GeolevelsList = $r->getGeolevelList();
 			$answer['GeolevelsList'] = $GeolevelsList;
 			$EventList     = $us->q->loadEvents('ALL', 'active', $lg);
-			fb($EventList);
 			$answer['EventList'] = $EventList;
 			$CauseList     = $us->q->loadCauses('ALL', 'active', $lg);
 			$answer['CauseList'] = $CauseList;
