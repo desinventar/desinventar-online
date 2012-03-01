@@ -1,3 +1,4 @@
+{-config_load file="$lg.conf" section="grpMainStrings"-}
 <div id="std-win" class="x-hidden">
 	<span id="msgViewStdButtonClear" style="display:none;">{-#tclear#-}</span>
 	<span id="msgViewStdButtonSend"  style="display:none;">{-#tsend#-}</span>
@@ -81,6 +82,7 @@
 									<option value="E.{-$k-}|>|-1">{-$i[0]-}</option>
 								{-/if-}
 							{-/foreach-}
+							<option value="D.EventDuration|S|-1">{-#msgViewStd_EventDuration#-}</option>
 						</select>
 						<br />
 						<a class="button" onclick="selectall('_S+sel1[]');"><span>{-#balls#-}</span></a>
