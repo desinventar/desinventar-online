@@ -16,10 +16,16 @@
 				$query = sprintf('INSERT INTO LabelGroup VALUES ("%s","%s","%s","%s","%s","%s","%s");', 
 					$i,$a[0],$a[1],$a[2], $now,$now,$now);
 				print $query . "\n";
-				$langlist = array('spa','eng','fre','por');
+				$langlist = array('eng','spa','por','fre');
 				$Index = 3; // First column with language information
-				foreach($langlist as $Lang) {
-					$query = sprintf('INSERT INTO Dictionary VALUES ("%s","%s","%s","%s","%s","%s","%s","%s","%s");',$i,$Lang,$a[$Index],escapeQuotes($a[$Index+4]),escapeQuotes($a[$Index+8]),escapeQuotes($a[$Index+12]),$now,$now,$now);
+				foreach($langlist as $Lang)
+				{
+					$query = sprintf('INSERT INTO Dictionary VALUES ("%s","%s","%s","%s","%s","%s","%s","%s","%s");',
+						$i, $Lang, $a[$Index],
+						escapeQuotes($a[$Index+4]),
+						escapeQuotes($a[$Index+8]),
+						escapeQuotes($a[$Index+12]),
+						$now,$now,$now);
 					print $query . "\n";
 					$Index++;
 				} //foreach
