@@ -332,3 +332,6 @@ div.Geography table.List thead td {
 div.QueryDesign .fieldLabel {
 	font-weight:bold;	
 }
+div.QueryDesign select.Event {
+	max-width:400px;
+}
