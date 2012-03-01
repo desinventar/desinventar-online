@@ -1897,6 +1897,18 @@
 			<Text LangIsoCode="por">Serial</Text>
 			<Text LangIsoCode="fre">Série</Text>
 		</Message>
+		<Message id="msgDatacard_DisasterSerial_Tooltip">
+			<Text LangIsoCode="eng">No duplicates. Max 40 characters</Text>
+			<Text LangIsoCode="spa">No duplicado Max 40 caracteres</Text>
+			<Text LangIsoCode="por">Não duplicado Max 40 caracteres</Text>
+			<Text LangIsoCode="fre">No duplicates. Max 40 characters</Text>
+		</Message>
+		<Message id="msgDatacard_DisasterSerial_Helptext">
+			<Text LangIsoCode="eng">Number which identifies each record. Symbols/Acronyms/Abbreviations  or codes may be used. Use of sequential numbering is recommended. Letters; dashes and other characters may be used. The identifier or Serial number is unique for every record.</Text>
+			<Text LangIsoCode="spa">Número que identifica cada ficha. Se puede utilizar una sigla o un código; se recomienda asignar números secuenciales. Se pueden incluir letras; guiones y otros caracteres. El identificador o Número serial es único para cada Ficha.</Text>
+			<Text LangIsoCode="por">Número que identifica cada formulário. Pode-se utilizar uma sigla ou um código. Recomenda-se designar números seqüenciais. Podem-se incluir letras; roteiros ou outros caracteres. O identificador ou número serial é único para cada formulário.</Text>
+			<Text LangIsoCode="fre">Number which identifies each record. Symbols/Acronyms/Abbreviations  or codes may be used. Use of sequential numbering is recommended. Letters; dashes and other characters may be used. The identifier or Serial number is unique for every record.</Text>
+		</Message>
 		<Message id="msgDatacard_DisasterGeographyId">
 			<Text LangIsoCode="eng">Geography</Text>
 			<Text LangIsoCode="spa">Geografía</Text>

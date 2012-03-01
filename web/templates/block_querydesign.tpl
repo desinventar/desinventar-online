@@ -325,7 +325,8 @@
 					class="inputText withHelpFocus" data-help="{-#msgDatacard_DisasterSource_Helptext#-}">{-$qd.D_DisasterSource[1]-}</textarea>
 				<br />
 				<div id="divQueryRecordStatus">
-					<b onMouseOver="showtip('');">{-#tdcstatus#-}</b><br />
+					<span class="fieldLabel">{-#tdcstatus#-}</span>
+					<br />
 					<select id="fldQueryRecordStatus" name="D_RecordStatus[]" multiple class="fixw line">
 						<option value="PUBLISHED" selected>{-#tdcpublished#-}</option>
 						<option value="READY"     selected>{-#tdcready#-}    </option>
@@ -335,14 +336,15 @@
 					</select>
 				<br />
 				</div>
-				<b onMouseOver="showtip('{-#tserialmsg#-}');">{-#tserial#-}</b>
+				<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_DisasterSerial_Helptext#-}">{-#tserial#-}</span>
 				<select name="D_DisasterSerial[0]" class="small line">
 					<option class="small" value=""  {-if $qd.D_DisasterSerial[0] == ''-}selected{-/if-}>{-#tonly#-}</option>
 					<option class="small" value="NOT" {-if $qd.D_DisasterSerial[0] == 'NOT'-}selected{-/if-}>{-#texclude#-}</option>
 					<option class="small" value="INCLUDE" {-if $qd.D_DisasterSerial[0] == 'INCLUDE'-}selected{-/if-}>{-#tinclude#-}</option>
 				</select>
 				<br />
-				<input type="text" name="D_DisasterSerial[1]" class="line fixw" value="{-$qd.D_DisasterSerial[1]-}" />
+				<input  class="line fixw withHelpFocus" data-help="{-#msgDatacard_DisasterSerial_Helptext#-}" 
+					type="text" name="D_DisasterSerial[1]" value="{-$qd.D_DisasterSerial[1]-}" />
 			</div>
 		</dd>
 		<!-- END DATETIME SECTION -->
