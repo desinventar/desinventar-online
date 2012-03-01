@@ -93,7 +93,7 @@
 			
 			<!-- Central Content Area -->
 			<div id="container" style="heigth:100%;">
-				{-include file="block_content.tpl"-}
+				{-*include file="block_content.tpl"*-}
 			</div>
 
 			<!-- Help Section -->
