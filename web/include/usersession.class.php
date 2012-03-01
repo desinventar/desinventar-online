@@ -1203,7 +1203,7 @@ class UserSession {
 	public function getDisasterCount()
 	{
 		$iCount = 0;
-		$sQuery = 'SELECT COUNT(DisasterId) AS C FROM Disaster WHERE DisasterSerial<>""';
+		$sQuery = 'SELECT COUNT(DisasterId) AS C FROM Disaster WHERE DisasterSerial<>"" AND RecordStatus<>"DELETED"';
 		foreach($this->q->dreg->query($sQuery) as $row)
 		{
 			$iCount = $row['C'];
