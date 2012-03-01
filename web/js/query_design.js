@@ -24,6 +24,11 @@ function onReadyQueryDesign()
 	}).focus(function() {
 		showtip(jQuery(this).data('help'));
 	});
+
+	jQuery('div.QueryDesign').on('mouseover','.withHelp',function() {
+		showtip(jQuery(this).data('help'));
+	});
+	
 	jQuery('div.QueryDesign').on('cmdUpdate', function() {
 		var params = jQuery('body').data('params');
 		jQuery('input.RegionId', this).val(jQuery('body').data('RegionId'));
@@ -34,7 +39,7 @@ function onReadyQueryDesign()
 		jQuery.each(geolevel_list, function(key, value) {
 			var clone = jQuery('div.QueryDesign div.GeolevelsHeader table tr td:last').clone().show();
 			jQuery('span',clone).text(value.GeoLevelName);
-			jQuery('span',clone).attr('title', value.GeoLevelDesc);
+			jQuery('span',clone).data('help', value.GeoLevelDesc);
 			jQuery('div.QueryDesign div.GeolevelsHeader table tr').append(clone);
 		});
 	});
