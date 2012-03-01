@@ -1891,7 +1891,7 @@
 			<Text LangIsoCode="por">Local</Text>
 			<Text LangIsoCode="fre">Lieu</Text>
 		</Message>
-		<Message id="msgDatacard_DisasterSiteNotes_Tooltip">
+		<Message id="msgDatacard_DisasterSiteNotes_Helptext">
 			<Text LangIsoCode="eng">Specific place in which the disaster occurred. If the Place name is the same as the lowest of the geographic levels reported; it is not necessary to re-input this. In the case of rural disasters; Place can be a location; a village; a river; a territory which covers various geographic units; a farm or country house; a geographic accident; etc. In the case of urban disasters; Place should include the address and/or neighbourhood.</Text>
 			<Text LangIsoCode="spa">Lugar específico donde ocurrió el desastre. Si el sitio corresponde con el último de los niveles geográficos reportados; no es necesario volver a digitarlo. El sitio puede ser una localidad; una vereda; un río; un territorio que cubre varias unidades geográficas; una finca o hacienda; un paraje; un lugar; una aldea; un accidente geográfico; etc.; en el caso de desastres en areas rurales; y en el caso de desastres urbanos; la dirección y/o el barrio.</Text>
 			<Text LangIsoCode="por">Lugar específico onde ocorreu um desastre. No caso de desastres em áreas rurais; este pode ser uma localidade; um povoado; um rio; um território que cobre várias unidades geográficas; um sítio ou fazenda; um parador; uma aldeia; um acidente geográfico; etc. Em desastres dentro de áreas urbanas o local corresponde ao endereço e/ou bairro. Se o local corresponde ao último dos níveis geográficos inseridos não é necessário digitá-lo novamente.</Text>
@@ -1927,7 +1927,7 @@
 			<Text LangIsoCode="por">Duração</Text>
 			<Text LangIsoCode="fre">Durée</Text>
 		</Message>
-		<Message id="msgDatacard_EventDuration_Tooltip">
+		<Message id="msgDatacard_EventDuration_Helptext">
 			<Text LangIsoCode="eng">The number of days an Event lasted. The majority of events may last a few minutes (ie; earthquakes; landslides; flashfloods) or hours (ie; flooding or fires). Events such as droughts or prolonged flooding may last months.</Text>
 			<Text LangIsoCode="spa">Número de días que duró el evento. La mayoría de los eventos pueden durar algunos minutos (i. e. sismos; deslizamientos súbitos) u horas (i. e. inundaciones o incendios). Eventos como sequías o inundaciones prolongadas pueden durar meses.</Text>
 			<Text LangIsoCode="por">Número de dias de duração do evento. A maioria dos eventos pode durar alguns minutos (por exemplo; sismos ou escorregamentos súbitos) ou horas (exemplo inundações ou incêndios). Eventos como secas ou inundações prolongadas podem durar meses.</Text>
@@ -1939,7 +1939,7 @@
 			<Text LangIsoCode="por">Observações de evento</Text>
 			<Text LangIsoCode="fre">Observation sur l'événement</Text>
 		</Message>
-		<Message id="msgDatacard_EventNotes_Tooltip">
+		<Message id="msgDatacard_EventNotes_Helptext">
 			<Text LangIsoCode="eng">A brief description of the occurrence of the event. In the case of chain events or simultaneous events; these should also be included in the description.</Text>
 			<Text LangIsoCode="spa">Descripción corta de la ocurrecia del evento. En el caso de eventos en cadena; eventos simultáneos incluye descripción de lo ocurrido.</Text>
 			<Text LangIsoCode="por">Descrição sucinta da ocorrência do evento. Nos casos de eventos em cadeia ou eventos simultâneos; incluir a descrição do ocorrido.</Text>
@@ -1956,6 +1956,12 @@
 			<Text LangIsoCode="spa">Observaciones de causa</Text>
 			<Text LangIsoCode="por">Observações de causa</Text>
 			<Text LangIsoCode="fre">Observations sur la cause</Text>
+		</Message>
+		<Message id="msgDatacard_CauseNotes_Helptext">
+			<Text LangIsoCode="eng">A brief annotation of the relationship between the cause and the event. This field is a very important in terms of analysis of the database because here would be described those causes which complement or contextualise the one registered in the field Cause.</Text>
+			<Text LangIsoCode="spa">Anotación breve de las relaciones ente la causa y el evento. Es un campo muy importante para los análisis de la base de datos pues en este se pueden describir aquellas causas que complementan o contextualizan la registrada en el campo Causa.</Text>
+			<Text LangIsoCode="por">Anotação breve das relações entre a causa e o evento. É um campo muito importante para as análises do banco de dados porque neste pode-se descrever as causas que complementam ou contextualizam a registrada no campo Causa</Text>
+			<Text LangIsoCode="fre">A brief annotation of the relationship between the cause and the event. This field is a very important in terms of analysis of the database because here would be described those causes which complement or contextualise the one registered in the field Cause.</Text>
 		</Message>
 		<Message id="msgDatacard_InputDoubleTooltip">
 			<Text LangIsoCode="eng">Floating number, use dot as decimal separator</Text>

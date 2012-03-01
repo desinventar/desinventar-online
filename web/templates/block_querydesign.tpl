@@ -28,11 +28,11 @@
 				{-include file="block_glist.tpl"-}
 			</div>
 			
-			<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_DisasterSiteNotes_Tooltip#-}">{-#msgDatacard_DisasterSiteNotes#-}</span>
+			<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_DisasterSiteNotes_Helptext#-}">{-#msgDatacard_DisasterSiteNotes#-}</span>
 			<br/>
 			<input type="hidden" name="D_DisasterSiteNotes[0]" />
 			<textarea class="inputText withHelpFocus" id="DisasterSiteNotes" name="D_DisasterSiteNotes[1]" style="width:220px; height: 40px;"
-				data-help="{-#msgDatacard_DisasterSiteNotes_Tooltip#-}">{-$qd.D_DisasterSiteNotes[1]-}</textarea>
+				data-help="{-#msgDatacard_DisasterSiteNotes_Helptext#-}">{-$qd.D_DisasterSiteNotes[1]-}</textarea>
 		</dd>
 		
 		<!-- BEGIN EVENT SECTION -->
@@ -41,7 +41,7 @@
 			<input type="hidden" name="QueryEvent[OP]" value="AND" />
 			<span class="dlgmsg">{-#tcntclick#-}</span>
 			<br />
-			<select class="Event" id="qevelst" name="D_EventId[]" multiple style="width:100%; height: 200px;" class="line">
+			<select class="Event line" id="qevelst" name="D_EventId[]" multiple style="width:100%; height: 200px;">
 				{-foreach name=eve key=key item=item from=$evepredl-}
 					<option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
 				{-/foreach-}
@@ -51,15 +51,15 @@
 				{-/foreach-}
 			</select>
 			<br /><br />
-			<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_EventDuration_Tooltip#-}">{-#msgDatacard_EventDuration#-}</span>
+			<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_EventDuration_Helptext#-}">{-#msgDatacard_EventDuration#-}</span>
 			<br />
 			<input id="EventDuration" name="D_EventDuration" type="text" class="line fixw withHelpFocus"
-				data-help="{-#msgDatacard_EventDuration_Tooltip#-}" value="{-$qd.D_EventDuration-}" />
+				data-help="{-#msgDatacard_EventDuration_Helptext#-}" value="{-$qd.D_EventDuration-}" />
 			<br />
-			<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_EventNotes_Tooltip#-}">{-#msgDatacard_EventNotes#-}</span>
+			<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_EventNotes_Helptext#-}">{-#msgDatacard_EventNotes#-}</span>
 			<br />
 			<textarea id="EventNotes" name="D_EventNotes[1]" style="width:250px; height:40px;"
-				class="inputText withHelpFocus" data-help="{-#msgDatacard_EventNotes_Tooltip#-}">{-$qd.D_EventNotes[1]-}</textarea>
+				class="inputText withHelpFocus" data-help="{-#msgDatacard_EventNotes_Helptext#-}">{-$qd.D_EventNotes[1]-}</textarea>
 		</dd>
 			
 		<!-- BEGIN CAUSE SECTION -->
@@ -67,14 +67,20 @@
 		<dd>
 			<input type="hidden" name="QueryCause[OP]" value="AND" />
 			<span class="dlgmsg">{-#tcntclick#-}</span><br />
-			<select id="qcaulst" name="D_CauseId[]" multiple style="width: 250px; height: 200px;" class="line">
-				{-include file="block_causelist.tpl"-}
+			<select class="Cause line" id="qcaulst" name="D_CauseId[]" multiple style="width: 250px; height: 200px;">
+				{-foreach name=cau key=key item=item from=$caupredl-}
+					<option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
+				{-/foreach-}
+					<option disabled>----</option>
+				{-foreach name=mycau key=key item=item from=$cauuserl-}
+					<option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
+				{-/foreach-}
 			</select>
 			<br />
-			<b onMouseOver="showtip('{-$cau.CauseNotes[2]-}');">{-$cau.CauseNotes[0]-}</b>
+			<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_CauseNotes_Helptext#-}">{-#msgDatacard_CauseNotes#-}</span>
 			<br />
 			<textarea name="D_CauseNotes[1]" style="width:250px; height: 40px;"
-				class="inputText" onFocus="showtip('{-$cau.CauseNotes[2]-}');">{-$qd.D_CauseNotes[1]-}</textarea>
+				class="inputText withHelpFocus" data-help="{-#msgDatacard_CauseNotes_Helptext#-}">{-$qd.D_CauseNotes[1]-}</textarea>
 		</dd>
 		
 		<!-- BEGIN QUERY EFFECTS SECTION -->
