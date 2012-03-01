@@ -25,10 +25,17 @@ function onReadyQueryDesign()
 		showtip(jQuery(this).data('help'));
 	});
 	jQuery('div.QueryDesign').on('cmdUpdate', function() {
-		console.log('div.QueryDesign => cmdUpdate');
 		var params = jQuery('body').data('params');
 		jQuery('input.RegionId', this).val(jQuery('body').data('RegionId'));
 		jQuery('input.MinYear' , this).val(params.MinYear);
 		jQuery('input.MaxYear' , this).val(params.MaxYear);
+		var geolevel_list = jQuery('body').data('GeolevelsList');
+		jQuery('div.QueryDesign div.GeolevelsHeader table tr td:gt(0)').remove();
+		jQuery.each(geolevel_list, function(key, value) {
+			var clone = jQuery('div.QueryDesign div.GeolevelsHeader table tr td:last').clone().show();
+			jQuery('span',clone).text(value.GeoLevelName);
+			jQuery('span',clone).attr('title', value.GeoLevelDesc);
+			jQuery('div.QueryDesign div.GeolevelsHeader table tr').append(clone);
+		});
 	});
 } //onReadyQueryDesign()

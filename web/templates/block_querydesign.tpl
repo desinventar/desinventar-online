@@ -13,9 +13,15 @@
 		<dt>{-#mgeosection#-}</dt>
 		<dd>
 			<input type="hidden" name="QueryGeography[OP]" value="AND" />
-			{-foreach name=glev key=k item=i from=$glev-}
-				<span class="dlgmsg" onMouseOver="showtip('{-$i[1]-}');">{-$i[0]-}</span> |
-			{-/foreach-}
+			<div class="GeolevelsHeader">
+				<table>
+					<tr>
+						<td style="display:none;">
+							<span class="dlgmsg"></span> |
+						</td>
+					</tr>
+				</table>
+			</div>
 			<div id="qgeolst" style="height: 280px;" class="dwin">
 				{-assign var="maintree" value="true"-}
 				{-* Show Geography List *-}
