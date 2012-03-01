@@ -41,7 +41,7 @@
 			<input type="hidden" name="QueryEvent[OP]" value="AND" />
 			<span class="dlgmsg">{-#tcntclick#-}</span>
 			<br />
-			<select class="Event" id="qevelst" name="D_EventId[]" multiple style="width: 250px; height: 200px;" class="line">
+			<select class="Event" id="qevelst" name="D_EventId[]" multiple style="width:100%; height: 200px;" class="line">
 				{-foreach name=eve key=key item=item from=$evepredl-}
 					<option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
 				{-/foreach-}
@@ -51,13 +51,15 @@
 				{-/foreach-}
 			</select>
 			<br /><br />
-			<b onMouseOver="showtip('{-$eve.EventDuration[2]-}');">{-$eve.EventDuration[0]-}</b><br />
-			<input id="EventDuration" name="D_EventDuration" type="text" class="line fixw"
-				onFocus="showtip('{-$eve.EventDuration[2]-}');" value="{-$qd.D_EventDuration-}" />
+			<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_EventDuration_Tooltip#-}">{-#msgDatacard_EventDuration#-}</span>
 			<br />
-			<b onMouseOver="showtip('{-$eve.EventNotes[2]-}');">{-$eve.EventNotes[0]-}</b>
+			<input id="EventDuration" name="D_EventDuration" type="text" class="line fixw withHelpFocus"
+				data-help="{-#msgDatacard_EventDuration_Tooltip#-}" value="{-$qd.D_EventDuration-}" />
+			<br />
+			<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_EventNotes_Tooltip#-}">{-#msgDatacard_EventNotes#-}</span>
+			<br />
 			<textarea id="EventNotes" name="D_EventNotes[1]" style="width:250px; height:40px;"
-				class="inputText" onFocus="showtip('{-$eve.EventNotes[2]-}');">{-$qd.D_EventNotes[1]-}</textarea>
+				class="inputText withHelpFocus" data-help="{-#msgDatacard_EventNotes_Tooltip#-}">{-$qd.D_EventNotes[1]-}</textarea>
 		</dd>
 			
 		<!-- BEGIN CAUSE SECTION -->
