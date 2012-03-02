@@ -1127,7 +1127,7 @@ switch ($cmd)
 	break;
 	case 'cmdDatabaseExport':
 		$answer = array('Status'   => ERR_UNKNOWN_ERROR);
-		if ($desinventarUserRoleValue > ROLE_USER)
+		if ($desinventarUserRoleValue > ROLE_NONE)
 		{
 			$ShortName = 'DesInventar_' . date('Y-m-d') . '_' . $RegionId . '.zip';
 			$FileName = WWWDIR  . '/data/' . $SessionId . '/' . $ShortName;
