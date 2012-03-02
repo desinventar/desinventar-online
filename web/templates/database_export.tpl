@@ -1,29 +1,29 @@
-{-config_load file="$lg.conf" section="grpAdminDatabaseExport"-}
+{-config_load file="$lg.conf" section="grpDatabaseExport"-}
 <div id="divDatabaseExportWin" class="x-hidden">
 	<div class="x-window-header">
-		{-#msgAdminDatabaseExportTitle#-}
+		{-#msgDatabaseExportTitle#-}
 	</div>
 	<div id="divDatabaseExportContent" style="margin:10px;">
 		<h4>
-			<span id="txtAdminDatabaseExportRegionLabel"></span>
+			<span id="txtDatabaseExportRegionLabel"></span>
 		</h4>
 		<br />
-		<span id="divAdminDatabaseExportProgress" class="clsAdminDatabaseExport" style="display:none;">
-			{-#msgAdminDatabaseExportWait#-} &nbsp;&nbsp;<br />
+		<span id="divDatabaseExportProgress" class="clsDatabaseExport" style="display:none;">
+			{-#msgDatabaseExportWait#-} &nbsp;&nbsp;<br />
 		</span>
-		<img id="imgAdminDatabaseExportWait" alt="" src="{-$desinventarURL-}/images/loading.gif" style="display:none;" />
-		<span id="divAdminDatabaseExportResults" class="clsAdminDatabaseExport" style="display:none;">
-			{-#msgAdminDatabaseExportComplete#-}
+		<img id="imgDatabaseExportWait" alt="" src="{-$desinventarURL-}/images/loading.gif" style="display:none;" />
+		<span id="divDatabaseExportResults" class="clsDatabaseExport" style="display:none;">
+			{-#msgDatabaseExportComplete#-}
 		</span>
-		<span id="divAdminDatabaseExportError" class="clsAdminDatabaseExport" style="display:none;">
-			{-#msgAdminDatabaseExportError#-}
+		<span id="divDatabaseExportError" class="clsDatabaseExport" style="display:none;">
+			{-#msgDatabaseExportError#-}
 		</span>
 		<br />
 	</div>
 </div>
 <div style="display:none;">
-	<span id="msgAdminDatabaseExportButtonSend">{-#msgAdminDatabaseExportButtonSend#-}</span>
-	<span id="msgAdminDatabaseExportButtonClose">{-#msgAdminDatabaseExportButtonClose#-}</span>
-	<input type="hidden" id="fldAdminDatabaseExportSave"  value="1" />
-	<input type="hidden" id="fldAdminDatabaseExportImage" value="{-$desinventarURL-}/images/loading.gif" />
+	<span id="msgDatabaseExportButtonSend">{-#msgDatabaseExportButtonSend#-}</span>
+	<span id="msgDatabaseExportButtonClose">{-#msgDatabaseExportButtonClose#-}</span>
+	<input type="hidden" id="fldDatabaseExportSave"  value="1" />
+	<input type="hidden" id="fldDatabaseExportImage" value="{-$desinventarURL-}/images/loading.gif" />
 </div>

@@ -42,7 +42,8 @@
 			<br /><br />
 			<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBEleActive[2]-}');">
 			{-$dic.DBEleActive[0]-}<span>{-$dic.DBEleActive[1]-}</span></a>
-			<input id="aGeographyActive" name="data[GeographyActive]" type="checkbox" checked
+			<input class="GeographyActive" type="hidden" name="data[GeographyActive]" value="0" />
+			<input class="GeographyActiveCheckbox" type="checkbox" checked
 				onFocus="showtip('{-$dic.DBEleActive[2]-}');" tabindex="3"
 				onClick="if (!this.checked) updateList('geostatusmsg', jQuery('#desinventarURL').val() + '/geography.php', 
 					'r={-$reg-}&cmd=chkstatus&GeographyId='+ $('aGeographyId').value);" />

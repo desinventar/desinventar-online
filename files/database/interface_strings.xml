@@ -31,13 +31,13 @@
 			<Text LangIsoCode="por">Carregar</Text>
 			<Text LangIsoCode="fre">Charger</Text>
 		</Message>
-		<Message id="mnuFileCopy">
+		<Message id="mnuFileUploadCopy">
 			<Text LangIsoCode="eng">New</Text>
 			<Text LangIsoCode="spa">Nueva</Text>
 			<Text LangIsoCode="por">Nova</Text>
 			<Text LangIsoCode="fre">Nouvelle</Text>
 		</Message>
-		<Message id="mnuFileReplace">
+		<Message id="mnuFileUploadReplace">
 			<Text LangIsoCode="eng">Replace</Text>
 			<Text LangIsoCode="spa">Reemplazar</Text>
 			<Text LangIsoCode="por">Substituir</Text>
@@ -211,12 +211,6 @@
 			<Text LangIsoCode="por">Entrada de dados</Text>
 			<Text LangIsoCode="fre">La saisie des données</Text>
 		</Message>
-		<Message id="mnuDatacardView">
-			<Text LangIsoCode="eng">View data cards</Text>
-			<Text LangIsoCode="spa">Ver fichas</Text>
-			<Text LangIsoCode="por">Ver os formulários</Text>
-			<Text LangIsoCode="fre">Voir le carte de données</Text>
-		</Message>
 		<Message id="mnuDatacardEdit">
 			<Text LangIsoCode="eng">Create/edit data cards</Text>
 			<Text LangIsoCode="spa">Crear/editar fichas</Text>
@@ -228,6 +222,12 @@
 			<Text LangIsoCode="spa">Configurar</Text>
 			<Text LangIsoCode="por">Configure</Text>
 			<Text LangIsoCode="fre">Configurer</Text>
+		</Message>
+		<Message id="mnuDatacardSetupEnd">
+			<Text LangIsoCode="eng">Finalize setup</Text>
+			<Text LangIsoCode="spa">Finalizar la configuración</Text>
+			<Text LangIsoCode="por">Finalize a configuração</Text>
+			<Text LangIsoCode="fre">Finaliser la configuration</Text>
 		</Message>
 		<Message id="mnuDatacardImport">
 			<Text LangIsoCode="eng">Import data cards</Text>
@@ -897,6 +897,108 @@
 		</Message>
 	</Group>
 	<Group name="grpAdminGeography">
+		<Message id="msgGeography_Title">
+			<Text LangIsoCode="eng">Geography Units</Text>
+			<Text LangIsoCode="spa">Unidades Geográficas</Text>
+			<Text LangIsoCode="por">Unidades de Geografia</Text>
+			<Text LangIsoCode="fre">Unités Géographie</Text>
+		</Message>
+		<Message id="msgGeography_Header1">
+			<Text LangIsoCode="eng">Select the level to add or edit a geography units</Text>
+			<Text LangIsoCode="spa">Seleccione el nivel donde desea agregar o editar una unidad.</Text>
+			<Text LangIsoCode="por">Selecione o nível para adicionar ou editar uma unidade de geografia</Text>
+			<Text LangIsoCode="fre">Sélectionnez le niveau pour ajouter ou modifier une unité de la géographie</Text>
+		</Message>
+		<Message id="msgGeography_Header2">
+			<Text LangIsoCode="eng">Click on a row to edit the geography unit</Text>
+			<Text LangIsoCode="spa">Haga click para editar una unidad.</Text>
+			<Text LangIsoCode="por">Clique em uma linha para editar a unidade de geografia</Text>
+			<Text LangIsoCode="fre">Cliquez sur une ligne pour modifier l'unité de la géographie</Text>
+		</Message>
+		<Message id="msgGeography_All">
+			<Text LangIsoCode="eng">All</Text>
+			<Text LangIsoCode="spa">Todos</Text>
+			<Text LangIsoCode="por">Todos</Text>
+			<Text LangIsoCode="fre">Tous</Text>
+		</Message>
+		<Message id="msgGeography_Edit">
+			<Text LangIsoCode="eng">Edit</Text>
+			<Text LangIsoCode="spa">Editar</Text>
+			<Text LangIsoCode="por">Atualizar</Text>
+			<Text LangIsoCode="fre">Éditer</Text>
+		</Message>
+		<Message id="msgGeography_Code">
+			<Text LangIsoCode="eng">Code</Text>
+			<Text LangIsoCode="spa">Código</Text>
+			<Text LangIsoCode="por">Código</Text>
+			<Text LangIsoCode="fre">Code</Text>
+		</Message>
+		<Message id="msgGeography_Name">
+			<Text LangIsoCode="eng">Name</Text>
+			<Text LangIsoCode="spa">Nombre</Text>
+			<Text LangIsoCode="por">Nome</Text>
+			<Text LangIsoCode="fre">Nom</Text>
+		</Message>
+		<Message id="msgGeography_Active">
+			<Text LangIsoCode="eng">Active</Text>
+			<Text LangIsoCode="spa">Activo</Text>
+			<Text LangIsoCode="por">Ativo</Text>
+			<Text LangIsoCode="fre">Actif</Text>
+		</Message>
+		<Message id="msgGeography_Inactive">
+			<Text LangIsoCode="eng">Inactive</Text>
+			<Text LangIsoCode="spa">Desactivado</Text>
+			<Text LangIsoCode="por">Inativo</Text>
+			<Text LangIsoCode="fre">Inactif</Text>
+		</Message>
+		<Message id="msgGeography_New">
+			<Text LangIsoCode="eng">New</Text>
+			<Text LangIsoCode="spa">Nuevo</Text>
+			<Text LangIsoCode="por">Novo</Text>
+			<Text LangIsoCode="fre">Nouveau</Text>
+		</Message>
+		<Message id="msgGeography_Check">
+			<Text LangIsoCode="eng">Check</Text>
+			<Text LangIsoCode="spa">Revisar</Text>
+			<Text LangIsoCode="por">Verificar</Text>
+			<Text LangIsoCode="fre">Vérifier</Text>
+		</Message>
+		<Message id="msgGeography_Status">
+			<Text LangIsoCode="eng">Status</Text>
+			<Text LangIsoCode="spa">Estado</Text>
+			<Text LangIsoCode="por">Estado</Text>
+			<Text LangIsoCode="fre">État</Text>
+		</Message>
+		<Message id="msgGeography_Export">
+			<Text LangIsoCode="eng">Export</Text>
+			<Text LangIsoCode="spa">Exportar</Text>
+			<Text LangIsoCode="por">Exportar</Text>
+			<Text LangIsoCode="fre">Exporter</Text>
+		</Message>
+		<Message id="msgGeography_ExportTooltip">
+			<Text LangIsoCode="eng">Export geography as CSV file</Text>
+			<Text LangIsoCode="spa">Exportar geografía como archivo CSV</Text>
+			<Text LangIsoCode="por">Exportar geografia como arquivo CSV</Text>
+			<Text LangIsoCode="fre">Exporter la géographie en tant que fichier CSV</Text>
+		</Message>
+		<Message id="msgGeography_Add">
+			<Text LangIsoCode="eng">Add</Text>
+			<Text LangIsoCode="spa">Adicionar</Text>
+			<Text LangIsoCode="por">Adicionar</Text>
+			<Text LangIsoCode="fre">Ajouter</Text>
+		</Message>
+		<Message id="msgGeography_Save">
+			<Text LangIsoCode="eng">Save</Text>
+			<Text LangIsoCode="spa">Guardar</Text>
+			<Text LangIsoCode="por">Salvar</Text>
+			<Text LangIsoCode="fre">Enregistrer</Text>
+		</Message>
+		<Message id="msgGeography_Cancel">
+			<Text LangIsoCode="eng">Cancel</Text>
+			<Text LangIsoCode="spa">Cancelar</Text>
+			<Text LangIsoCode="por">Cancelar</Text>
+			<Text LangIsoCode="fre">Annuler</Text>
+		</Message>
 		<Message id="baddoption">
 			<Text LangIsoCode="eng">Add</Text>
 			<Text LangIsoCode="spa">Adicionar</Text>
@@ -999,9 +1101,45 @@
 			<Text LangIsoCode="por">GEOGRAFIA: Preencha todos os campos requeridos e tente novamente</Text>
 			<Text LangIsoCode="fre">GÉOGRAPHIE: Remplissez tous les champs obligatoires et essayez de nouveau</Text>
 		</Message>
+		<Message id="msgGeography_StatusOk">
+			<Text LangIsoCode="eng">Geography updated successfully!</Text>
+			<Text LangIsoCode="spa">Geografía actualizada exitosamente!</Text>
+			<Text LangIsoCode="por">Geografia atualizada com sucesso!</Text>
+			<Text LangIsoCode="fre">Géographie mise à jour avec succès!</Text>
+		</Message>
+		<Message id="msgGeography_StatusDuplicatedCode">
+			<Text LangIsoCode="eng">Geography code already exists</Text>
+			<Text LangIsoCode="spa">Código de geografía ya existe</Text>
+			<Text LangIsoCode="por">Geografia código já existe</Text>
+			<Text LangIsoCode="fre">Code géographie existe déjà</Text>
+		</Message>
+		<Message id="msgGeography_StatusWithDatacards">
+			<Text LangIsoCode="eng">Cannot disable geography units with datacards assigned</Text>
+			<Text LangIsoCode="spa">No se puede deshabilitar las unidades de geografía con ficha asignadas</Text>
+			<Text LangIsoCode="por">Não é possível desativar unidades de geografia com cartões de dados atribuídos</Text>
+			<Text LangIsoCode="fre">Impossible de désactiver des unités géographiques avec des cartes de données affectés</Text>
+		</Message>
+		<Message id="msgGeography_StatusError">
+			<Text LangIsoCode="eng">Error saving changes to geography</Text>
+			<Text LangIsoCode="spa">Error al guardar cambios a la geografía</Text>
+			<Text LangIsoCode="por">Erro mudanças de poupança para a geografia</Text>
+			<Text LangIsoCode="fre">L'enregistrement des modifications d'erreur à la géographie</Text>
+		</Message>
 	</Group>
 	<Group name="grpDatabaseEvents">
 		<Message id="msgDatabaseEvents_CustomEventTitle">
+			<Text LangIsoCode="eng">Types of events</Text>
+			<Text LangIsoCode="spa">Tipo de eventos</Text>
+			<Text LangIsoCode="por">Tipos de eventos</Text>
+			<Text LangIsoCode="fre">Types d'évènements</Text>
+		</Message>
+		<Message id="msgEvents_Predefined">
+			<Text LangIsoCode="eng">Predefined event</Text>
+			<Text LangIsoCode="spa">Evento predefinido</Text>
+			<Text LangIsoCode="por">Evento predefinido</Text>
+			<Text LangIsoCode="fre">Événement prédéfini</Text>
+		</Message>
+		<Message id="msgEvents_Custom">
 			<Text LangIsoCode="eng">Personalised event</Text>
 			<Text LangIsoCode="spa">Evento personalizado</Text>
 			<Text LangIsoCode="por">Evento personalizado</Text>
@@ -1663,17 +1801,29 @@
 			<Text LangIsoCode="por">Valor do campo Serial já existe; o registro não pode ser salva</Text>
 			<Text LangIsoCode="fre">Valeur du champ de série existe déjà; record ne peut être sauvé</Text>
 		</Message>
+		<Message id="msgDatacardInvalidNumber">
+			<Text LangIsoCode="eng">Invalid number format, use dot as decimal separator</Text>
+			<Text LangIsoCode="spa">Formato de número inválido, use el punto como separador decimal</Text>
+			<Text LangIsoCode="por">Inválido formato do número, utilize ponto como separador decimal</Text>
+			<Text LangIsoCode="fre">Blancs format de nombre, utilisez point comme séparateur décimal</Text>
+		</Message>
+		<Message id="msgDatacard_WithoutStatus">
+			<Text LangIsoCode="eng">Cannot save datacard without state.</Text>
+			<Text LangIsoCode="spa">No puede guardar ficha sin estado.</Text>
+			<Text LangIsoCode="por">Não é possível salvar datacard sem estado</Text>
+			<Text LangIsoCode="fre">Impossible d'enregistrer la carte de données sans état</Text>
+		</Message>
 		<Message id="msgDatacardInvalidStatus">
-			<Text LangIsoCode="eng">Cannot save datacard with this status.</Text>
-			<Text LangIsoCode="spa">No puede guardar ficha con este estado.</Text>
-			<Text LangIsoCode="por">Não é possível salvar datacard com este estatuto</Text>
-			<Text LangIsoCode="fre">Impossible d&quot;enregister carte de données avec ce statut</Text>
+			<Text LangIsoCode="eng">Not enough permissions to save data card with this state</Text>
+			<Text LangIsoCode="spa">No hay suficientes permisos para guardar la ficha con este estado</Text>
+			<Text LangIsoCode="por">Nem suficientes permissões para salvar cartão de dados com este estado</Text>
+			<Text LangIsoCode="fre">Pas assez de permissions pour enregistrer la carte de données avec cet état</Text>
 		</Message>
 		<Message id="msgDatacardWithoutSource">
-			<Text LangIsoCode="eng">Datacard without source information cannot be published.</Text>
-			<Text LangIsoCode="spa">Ficha sin fuente no puede ser publicada.</Text>
-			<Text LangIsoCode="por">Datacard sem informação de origem não pode ser publicado.</Text>
-			<Text LangIsoCode="fre">Datacard sans source d&quot;information ne peut pas être publié</Text>
+			<Text LangIsoCode="eng">Datacard without source information cannot be published, fill in the source, or save it as draft</Text>
+			<Text LangIsoCode="spa">Ficha sin fuente no puede ser publicada, ingrese la fuente o guardela como borrador.</Text>
+			<Text LangIsoCode="por">Datacard sem informação de origem não pode ser publicado, preencha a fonte, ou salvá-lo como projecto</Text>
+			<Text LangIsoCode="fre">Datacard sans source d&quot;information ne peut pas être publié, remplissez la source, ou l'enregistrer en tant que projet</Text>
 		</Message>
 		<Message id="msgDatacardInvalidGeography">
 			<Text LangIsoCode="eng">Geography has not been selected</Text>
@@ -1794,6 +1944,12 @@
 			<Text LangIsoCode="spa">Observaciones de causa</Text>
 			<Text LangIsoCode="por">Observações de causa</Text>
 			<Text LangIsoCode="fre">Observations sur la cause</Text>
+		</Message>
+		<Message id="msgDatacard_InputDoubleTooltip">
+			<Text LangIsoCode="eng">Floating number, use dot as decimal separator</Text>
+			<Text LangIsoCode="spa">Número de coma flotante, utilice punto como separador decimal</Text>
+			<Text LangIsoCode="por">Número flutuante, usar ponto como separador decimal</Text>
+			<Text LangIsoCode="fre">Nombre à virgule flottante, utilisez point comme séparateur décimal</Text>
 		</Message>
 	</Group>
 	<Group name="grpMainStrings">
@@ -2475,6 +2631,12 @@
 			<Text LangIsoCode="por">Limpar</Text>
 			<Text LangIsoCode="fre">Nettoyer</Text>
 		</Message>
+		<Message id="msgViewStd_EventDuration">
+			<Text LangIsoCode="eng">Event Duration</Text>
+			<Text LangIsoCode="spa">Duración del evento</Text>
+			<Text LangIsoCode="por">Duração do evento</Text>
+			<Text LangIsoCode="fre">Durée de l'événement</Text>
+		</Message>
 		<Message id="tand">
 			<Text LangIsoCode="eng">and</Text>
 			<Text LangIsoCode="spa">y</Text>
@@ -2889,17 +3051,35 @@
 			<Text LangIsoCode="por">Ver em GoogleEarth</Text>
 			<Text LangIsoCode="fre">Voir dans GoogleEarth</Text>
 		</Message>
-		<Message id="lev">
-			<Text LangIsoCode="eng">Level</Text>
-			<Text LangIsoCode="spa">Nivel</Text>
-			<Text LangIsoCode="por">Nível</Text>
-			<Text LangIsoCode="fre">Niveau</Text>
-		</Message>
 		<Message id="msgMapNoData">
 			<Text LangIsoCode="eng">No data</Text>
 			<Text LangIsoCode="spa">Sin datos</Text>
 			<Text LangIsoCode="por">Sem dados</Text>
 			<Text LangIsoCode="fre">Sans aucune donnée</Text>
+		</Message>
+		<Message id="msgViewMap_Level">
+			<Text LangIsoCode="eng">Level</Text>
+			<Text LangIsoCode="spa">Nivel</Text>
+			<Text LangIsoCode="por">Nível</Text>
+			<Text LangIsoCode="fre">Niveau</Text>
+		</Message>
+		<Message id="msgViewMap_From">
+			<Text LangIsoCode="eng">Since</Text>
+			<Text LangIsoCode="spa">Desde</Text>
+			<Text LangIsoCode="por">Desde</Text>
+			<Text LangIsoCode="fre">Depuis</Text>
+		</Message>
+		<Message id="msgViewMap_Until">
+			<Text LangIsoCode="eng">Until</Text>
+			<Text LangIsoCode="spa">Hasta</Text>
+			<Text LangIsoCode="por">Até</Text>
+			<Text LangIsoCode="fre">Jusqu'à</Text>
+		</Message>
+		<Message id="msgViewMap_Records">
+			<Text LangIsoCode="eng">Records</Text>
+			<Text LangIsoCode="spa">Fichas</Text>
+			<Text LangIsoCode="por">Formulários</Text>
+			<Text LangIsoCode="fre">Données</Text>
 		</Message>
 	</Group>
 	<Group name="dc_graphic">
@@ -3145,6 +3325,12 @@
 			<Text LangIsoCode="por">Descrição de nível</Text>
 			<Text LangIsoCode="fre">Description du niveau</Text>
 		</Message>
+		<Message id="msgGeolevels_HasMap">
+			<Text LangIsoCode="eng">Map</Text>
+			<Text LangIsoCode="spa">Mapa</Text>
+			<Text LangIsoCode="por">Mapa</Text>
+			<Text LangIsoCode="fre">Carte</Text>
+		</Message>
 		<Message id="msgGeolevels_GeoLevelActive">
 			<Text LangIsoCode="eng">Active</Text>
 			<Text LangIsoCode="spa">Activo</Text>
@@ -3205,6 +3391,18 @@
 			<Text LangIsoCode="por">Este é o nome da coluna com o código de identificação para as unidades geográficas (ie Código ou Id)</Text>
 			<Text LangIsoCode="fre">C'est le nom de la colonne avec le code d'identification pour les unités géographiques (code soit ou Id)</Text>
 		</Message>
+		<Message id="msgGeocarto_ParentCode">
+			<Text LangIsoCode="eng">Column of parent code</Text>
+			<Text LangIsoCode="spa">Columna de código padre</Text>
+			<Text LangIsoCode="por">Coluna de códigos pai</Text>
+			<Text LangIsoCode="fre">Colonne de code parent</Text>
+		</Message>
+		<Message id="msgGeocarto_ParentCodeTooltip">
+			<Text LangIsoCode="eng"></Text>
+			<Text LangIsoCode="spa"></Text>
+			<Text LangIsoCode="por"></Text>
+			<Text LangIsoCode="fre"></Text>
+		</Message>
 		<Message id="msgGeocarto_Name">
 			<Text LangIsoCode="eng">Column of name</Text>
 			<Text LangIsoCode="spa">Columna de nombre</Text>
@@ -3216,6 +3414,18 @@
 			<Text LangIsoCode="spa">Corresponde al nombre de la columna donde aparecen los nombres de las unidades geográficas del nivel respectivo. Por ejemplo Nombre.</Text>
 			<Text LangIsoCode="por">Este é o nome da coluna com o nome descritivo das unidades geográficas (ie Nome)</Text>
 			<Text LangIsoCode="fre">C'est le nom de la colonne avec le nom descriptif des unités géographiques (nom)</Text>
+		</Message>
+		<Message id="msgGeocarto_ImportGeography">
+			<Text LangIsoCode="eng">Create geography units</Text>
+			<Text LangIsoCode="spa">Crear unidades de geografía</Text>
+			<Text LangIsoCode="por">Criar unidades de geografia</Text>
+			<Text LangIsoCode="fre">Créer des unités géographiques</Text>
+		</Message>
+		<Message id="msgGeocarto_ImportGeographyTooltip">
+			<Text LangIsoCode="eng">Use this option to force the creation of geography units for this level, any existing units will be deleted.</Text>
+			<Text LangIsoCode="spa">Utilice esta opción para forzar la creación de unidades de la geografía de este nivel, las unidades existentes serán eliminadas.</Text>
+			<Text LangIsoCode="por">Utilize esta opção para forçar a criação de unidades de geografia para este nível, todas as unidades existentes serão apagados.</Text>
+			<Text LangIsoCode="fre">Utilisez cette option pour forcer la création d'unités de la géographie à ce niveau, toutes les unités existantes seront supprimées.</Text>
 		</Message>
 		<Message id="msgGeocarto_File">
 			<Text LangIsoCode="eng">File</Text>
@@ -3259,6 +3469,13 @@
 			<Text LangIsoCode="por">Os campos obrigatórios não pode ser vazio</Text>
 			<Text LangIsoCode="fre">Les champs obligatoires ne peut pas être vide</Text>
 		</Message>
+		<Message id="msgGeocarto_CreatingGeography">
+			<Text LangIsoCode="eng">Creating geography elements</Text>
+			<Text LangIsoCode="spa">Creando elementos de geografía</Text>
+			<Text LangIsoCode="por">Criando elementos de geografia</Text>
+			<Text LangIsoCode="fre">Création d'éléments de géographie</Text>
+		</Message>
+		
 		<Message id="msgGeolevels_UploadChooseFile">
 			<Text LangIsoCode="eng">Choose file</Text>
 			<Text LangIsoCode="spa">Elegir archivo..</Text>
@@ -3291,35 +3508,23 @@
 			<Text LangIsoCode="por">Ativo</Text>
 			<Text LangIsoCode="fre">Actif</Text>
 		</Message>
-		<Message id="msgDatabaseUsers_RegionActiveTooltip">
-			<Text LangIsoCode="eng">The database will be available in your database list</Text>
-			<Text LangIsoCode="spa">La base quedará disponible en su listado de bases</Text>
-			<Text LangIsoCode="por">O banco de dados estará disponível na sua lista de banco de dados</Text>
-			<Text LangIsoCode="fre">La base de données sera disponible dans votre liste de base de données</Text>
-		</Message>
-		<Message id="msgDatabaseUsers_RegionActiveTooltipOld">
-			<Text LangIsoCode="eng">Uncheck this option if you want to completely disable the access to this database</Text>
-			<Text LangIsoCode="spa">Desactive esta opción si desea deshabilitar completamente el acceso a esta base de datos</Text>
-			<Text LangIsoCode="por">Desmarque essa opção se você quiser desativar completamente o acesso a este banco de dados</Text>
-			<Text LangIsoCode="fre">Décochez cette option si vous voulez désactiver totalement l'accès à cette base de données</Text>
-		</Message>
 		<Message id="msgDatabaseUsers_RegionPublic">
 			<Text LangIsoCode="eng">Public</Text>
 			<Text LangIsoCode="spa">Pública</Text>
 			<Text LangIsoCode="por">Pública</Text>
 			<Text LangIsoCode="fre">Publique</Text>
 		</Message>
+		<Message id="msgDatabaseUsers_RegionActiveTooltip">
+			<Text LangIsoCode="eng">The database will be available in your database list</Text>
+			<Text LangIsoCode="spa">La base quedará disponible en su listado de bases</Text>
+			<Text LangIsoCode="por">O banco de dados estará disponível na sua lista de banco de dados</Text>
+			<Text LangIsoCode="fre">La base de données sera disponible dans votre liste de base de données</Text>
+		</Message>
 		<Message id="msgDatabaseUsers_RegionPublicTooltip">
 			<Text LangIsoCode="eng">Check this option to allow public queries to the database</Text>
 			<Text LangIsoCode="spa">Marque esta opcion para habilitar la consulta pública de la base</Text>
 			<Text LangIsoCode="por">Marque esta opção para permitir consultas públicas ao banco de dados</Text>
 			<Text LangIsoCode="fre">Cochez cette option pour autoriser les requêtes du public à la base</Text>
-		</Message>
-		<Message id="msgDatabaseUsers_RegionPublicTooltipOld">
-			<Text LangIsoCode="eng">Uncheck the option to prevent anonymous users from accessing the database</Text>
-			<Text LangIsoCode="spa">Desactive la opción para evitar que los usuarios anónimos tengan acceso a la base de datos</Text>
-			<Text LangIsoCode="por">Desmarque a opção para impedir que usuários anônimos acessem o banco de dados</Text>
-			<Text LangIsoCode="fre">Décochez l'option pour empêcher les utilisateurs anonymes d'accéder à la base de données</Text>
 		</Message>
 		<Message id="msgDatabaseUsers_UserId">
 			<Text LangIsoCode="eng">User</Text>
@@ -3431,7 +3636,7 @@
 		</Message>
 		<Message id="msgDatabaseUsers_ConfirmManagerPrompt1">
 			<Text LangIsoCode="eng">Do you want to transfer the manager role from</Text>
-			<Text LangIsoCode="spa">Quieres transferir la función de administrador de</Text>
+			<Text LangIsoCode="spa">¿ Quiere transferir la función de administrador de</Text>
 			<Text LangIsoCode="por">Você deseja transferir a função de gerente de</Text>
 			<Text LangIsoCode="fre">Voulez-vous transférer le rôle de gestionnaire du</Text>
 		</Message>
@@ -3498,16 +3703,16 @@
 			<Text LangIsoCode="fre">Publique</Text>
 		</Message>
 		<Message id="msgDatabaseEditRegionActiveTooltip">
-			<Text LangIsoCode="eng">The database can be used and will be shown in the database list</Text>
-			<Text LangIsoCode="spa">La base de datos se pueden utilizar y se mostrará en el listado de bases de datos</Text>
-			<Text LangIsoCode="por">Banco de dados pode ser usado e será mostrado na lista de banco de dados</Text>
-			<Text LangIsoCode="fre">Base de données peut être utilisé et sera affiché dans la liste des bases de données</Text>
+			<Text LangIsoCode="eng">The database will be available in your database list</Text>
+			<Text LangIsoCode="spa">La base quedará disponible en su listado de bases</Text>
+			<Text LangIsoCode="por">O banco de dados estará disponível na sua lista de banco de dados</Text>
+			<Text LangIsoCode="fre">La base de données sera disponible dans votre liste de base de données</Text>
 		</Message>
 		<Message id="msgDatabaseEditRegionPublicTooltip">
-			<Text LangIsoCode="eng">To query database user does not need an account on server</Text>
-			<Text LangIsoCode="spa">Para consultar la base de datos de usuario no necesita una cuenta en el servidor</Text>
-			<Text LangIsoCode="por">Para consulta do banco de dados, usuário não precisa de uma conta no servidor</Text>
-			<Text LangIsoCode="fre">Pour interroger utilisateur de la base n'a pas besoin d'un compte sur le serveur</Text>
+			<Text LangIsoCode="eng">Check this option to allow public queries to the database</Text>
+			<Text LangIsoCode="spa">Marque esta opcion para habilitar la consulta pública de la base</Text>
+			<Text LangIsoCode="por">Marque esta opção para permitir consultas públicas ao banco de dados</Text>
+			<Text LangIsoCode="fre">Cochez cette option pour autoriser les requêtes du public à la base</Text>
 		</Message>
 	</Group>
 	<Group name="grpDatabaseCreate">
@@ -3554,7 +3759,7 @@
 			<Text LangIsoCode="fre">Base de données a été créée avec l'identifiant</Text>
 		</Message>
 		<Message id="msgDatabaseCreateMsg2">
-			<Text LangIsoCode="eng">Now you must configure the database using Set Up Database option in the Data entry menu. The following items are mandatory</Text>
+			<Text LangIsoCode="eng">Now you must configure the database using Set Up Database option in the Data entry menu, The following items are mandatory</Text>
 			<Text LangIsoCode="spa">Ahora debe configurar la base de datos usando la opción Configuración de la base de datos en el menú Entrada de datos, Los siguientes elementos son obligatorios</Text>
 			<Text LangIsoCode="por">Agora você deve configurar o banco de dados utilização a opção Set Up Banco de Dados no menu Entrada de Dados, Os seguintes itens são obrigatórios</Text>
 			<Text LangIsoCode="fre">Maintenant vous devez configurer la base de données aide l'option Configurer la base de données dans le menu saisie des données, Les éléments suivants sont obligatoires</Text>
@@ -3572,10 +3777,10 @@
 			<Text LangIsoCode="fre">Insérez les unités géographiques à chaque niveau</Text>
 		</Message>
 		<Message id="msgDatabaseCreateMsg3">
-			<Text LangIsoCode="eng">Optionally the database can be personalized with the following options</Text>
-			<Text LangIsoCode="spa">Opcionalmente, la base de datos se puede personalizar con las siguientes opciones</Text>
-			<Text LangIsoCode="por">Opcionalmente, o banco de dados pode ser personalizado com as seguintes opções</Text>
-			<Text LangIsoCode="fre">En option, la base de données peuvent être personnalisées avec les options suivantes</Text>
+			<Text LangIsoCode="eng">The database can be personalized with the following options</Text>
+			<Text LangIsoCode="spa">La base de datos se puede personalizar con las siguientes opciones</Text>
+			<Text LangIsoCode="por">O banco de dados pode ser personalizado com as seguintes opções</Text>
+			<Text LangIsoCode="fre">La base de données peuvent être personnalisées avec les options suivantes</Text>
 		</Message>
 		<Message id="msgDatabaseCreateMsg4">
 			<Text LangIsoCode="eng">Ok</Text>
@@ -3654,38 +3859,38 @@
 			<Text LangIsoCode="fre">Ajouter</Text>
 		</Message>
 	</Group>
-	<Group name="grpAdminDatabaseExport">
-		<Message id="msgAdminDatabaseExportTitle">
+	<Group name="grpDatabaseExport">
+		<Message id="msgDatabaseExportTitle">
 			<Text LangIsoCode="eng">Download database</Text>
 			<Text LangIsoCode="spa">Descargar base de datos</Text>
 			<Text LangIsoCode="por">Baixe banco de dados</Text>
 			<Text LangIsoCode="fre">Télécharger base de données</Text>
 		</Message>
-		<Message id="msgAdminDatabaseExportComplete">
+		<Message id="msgDatabaseExportComplete">
 			<Text LangIsoCode="eng">File has been created and can be downloaded now.</Text>
 			<Text LangIsoCode="spa">El archivo está creado y listo para descargar.</Text>
 			<Text LangIsoCode="por">Backup foi criado e pode ser baixado agora.</Text>
 			<Text LangIsoCode="fre">Backup a été crée et peut être téléchargé dès maintenant.</Text>
 		</Message>
-		<Message id="msgAdminDatabaseExportWait">
+		<Message id="msgDatabaseExportWait">
 			<Text LangIsoCode="eng">Please wait while the file is created. This can take several minutes depending of your internet connection and the database size.</Text>
 			<Text LangIsoCode="spa">Espere mientras el archivo es creado, esto puede tomar varios minutos dependiendo de su conexión a internet y el tamaño del archivo.</Text>
 			<Text LangIsoCode="por">Por favor aguarde enquanto o arquivo é criado. Isto pode levar alguns minutos dependendo da sua conexão de internet eo tamanho do banco de dados.</Text>
 			<Text LangIsoCode="fre">S'il vous plaît patienter pendant que le fichier est créé. Cela peut prendre plusieurs minutes selon votre connexion internet et la taille de la base.</Text>
 		</Message>
-		<Message id="msgAdminDatabaseExportError">
+		<Message id="msgDatabaseExportError">
 			<Text LangIsoCode="eng">There was and error while creating the backup</Text>
 			<Text LangIsoCode="spa">Se ha producido un error al crear la copia de seguridad.</Text>
 			<Text LangIsoCode="por">Houve um error ao criar o backup</Text>
 			<Text LangIsoCode="fre">Il ya eu une erreur lors de la création de la sauvegarde</Text>
 		</Message>
-		<Message id="msgAdminDatabaseExportButtonSend">
+		<Message id="msgDatabaseExportButtonSend">
 			<Text LangIsoCode="eng">Generate</Text>
 			<Text LangIsoCode="spa">Importar</Text>
 			<Text LangIsoCode="por">Gerar</Text>
 			<Text LangIsoCode="fre">Générer</Text>
 		</Message>
-		<Message id="msgAdminDatabaseExportButtonClose">
+		<Message id="msgDatabaseExportButtonClose">
 			<Text LangIsoCode="eng">Close</Text>
 			<Text LangIsoCode="spa">Cerrar</Text>
 			<Text LangIsoCode="por">Fechar</Text>
@@ -3722,6 +3927,12 @@
 			<Text LangIsoCode="spa">Base de datos actualizada correctamente</Text>
 			<Text LangIsoCode="por">Banco de dados atualizado corretamente</Text>
 			<Text LangIsoCode="fre">Base de données mis à jour correctement</Text>
+		</Message>
+		<Message id="msgDatabaseUploadErrorNoInfo">
+			<Text LangIsoCode="eng">Uploaded file doesn't appear to be a DesInventar database</Text>
+			<Text LangIsoCode="spa">El archivo cargado no parece ser una base de datos DesInventar</Text>
+			<Text LangIsoCode="por">Uploaded file doesn't appear to be a DesInventar database</Text>
+			<Text LangIsoCode="fre">Uploaded file doesn't appear to be a DesInventar database</Text>
 		</Message>
 		<Message id="msgDatabaseUploadErrorOnUpload">
 			<Text LangIsoCode="eng">Error while uploading file</Text>
@@ -3928,9 +4139,9 @@
 			<Text LangIsoCode="fre">Observateur</Text>
 		</Message>
 		<Message id="msgDatabaseFind_RoleNONE">
-			<Text LangIsoCode="eng">Public Databases</Text>
-			<Text LangIsoCode="spa">Bases Públicas</Text>
-			<Text LangIsoCode="por">Bases de datos públicas</Text>
+			<Text LangIsoCode="eng">Public databases</Text>
+			<Text LangIsoCode="spa">Bases de datos públicas</Text>
+			<Text LangIsoCode="por">Bases de dados públicas</Text>
 			<Text LangIsoCode="fre">Bases de données publiques</Text>
 		</Message>
 	</Group>
@@ -4306,6 +4517,80 @@
 			<Text LangIsoCode="spa">Versión</Text>
 			<Text LangIsoCode="por">Versão</Text>
 			<Text LangIsoCode="fre">Version</Text>
+		</Message>
+	</Group>
+	<Group name="grpGraphParams">
+		<Message id="msgMonth_01">
+			<Text LangIsoCode="eng">Jan</Text>
+			<Text LangIsoCode="spa">Ene</Text>
+			<Text LangIsoCode="por">Jan</Text>
+			<Text LangIsoCode="fre">Janv</Text>
+		</Message>
+		<Message id="msgMonth_02">
+			<Text LangIsoCode="eng">Feb</Text>
+			<Text LangIsoCode="spa">Feb</Text>
+			<Text LangIsoCode="por">Fev</Text>
+			<Text LangIsoCode="fre">Févr</Text>
+		</Message>
+		<Message id="msgMonth_03">
+			<Text LangIsoCode="eng">Mar</Text>
+			<Text LangIsoCode="spa">Mar</Text>
+			<Text LangIsoCode="por">Março</Text>
+			<Text LangIsoCode="fre">Mars</Text>
+		</Message>
+		<Message id="msgMonth_04">
+			<Text LangIsoCode="eng">Apr</Text>
+			<Text LangIsoCode="spa">Abr</Text>
+			<Text LangIsoCode="por">Abril</Text>
+			<Text LangIsoCode="fre">Avril</Text>
+		</Message>
+		<Message id="msgMonth_05">
+			<Text LangIsoCode="eng">May</Text>
+			<Text LangIsoCode="spa">May</Text>
+			<Text LangIsoCode="por">Maio</Text>
+			<Text LangIsoCode="fre">Mai</Text>
+		</Message>
+		<Message id="msgMonth_06">
+			<Text LangIsoCode="eng">June</Text>
+			<Text LangIsoCode="spa">Jun</Text>
+			<Text LangIsoCode="por">Junho</Text>
+			<Text LangIsoCode="fre">Juin</Text>
+		</Message>
+		<Message id="msgMonth_07">
+			<Text LangIsoCode="eng">July</Text>
+			<Text LangIsoCode="spa">Jul</Text>
+			<Text LangIsoCode="por">Julho</Text>
+			<Text LangIsoCode="fre">Juil</Text>
+		</Message>
+		<Message id="msgMonth_08">
+			<Text LangIsoCode="eng">Aug</Text>
+			<Text LangIsoCode="spa">Ago</Text>
+			<Text LangIsoCode="por">Agosto</Text>
+			<Text LangIsoCode="fre">Août</Text>
+		</Message>
+		<Message id="msgMonth_09">
+			<Text LangIsoCode="eng">Sept</Text>
+			<Text LangIsoCode="spa">Sep</Text>
+			<Text LangIsoCode="por">Set</Text>
+			<Text LangIsoCode="fre">Sept</Text>
+		</Message>
+		<Message id="msgMonth_10">
+			<Text LangIsoCode="eng">Oct</Text>
+			<Text LangIsoCode="spa">Oct</Text>
+			<Text LangIsoCode="por">Out</Text>
+			<Text LangIsoCode="fre">Oct</Text>
+		</Message>
+		<Message id="msgMonth_11">
+			<Text LangIsoCode="eng">Nov</Text>
+			<Text LangIsoCode="spa">Nov</Text>
+			<Text LangIsoCode="por">Nov</Text>
+			<Text LangIsoCode="fre">Nov</Text>
+		</Message>
+		<Message id="msgMonth_12">
+			<Text LangIsoCode="eng">Dec</Text>
+			<Text LangIsoCode="spa">Dic</Text>
+			<Text LangIsoCode="por">Dez</Text>
+			<Text LangIsoCode="fre">Déc</Text>
 		</Message>
 	</Group>
 </StringList>

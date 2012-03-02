@@ -118,8 +118,8 @@ function onReadyDatabaseUsers()
 					sConfirmMsg = jQuery('#msgDatabaseUsers_ConfirmManagerPrompt1').text() + ' ' + 
 					              sAdminCurrent + ' ' + 
 					              jQuery('#msgDatabaseUsers_ConfirmManagerPrompt2').text() + ' ' + 
-					              sAdminNew + ' ? ' +
-					              '(' + jQuery('#msgDatabaseUsers_ConfirmManagerPrompt3').text() + ')';
+					              sAdminNew + ' ?';
+					              //jQuery('#msgDatabaseUsers_ConfirmManagerPrompt3').text();
 					Ext.Msg.show({
 						title   : jQuery('#msgDatabaseUsers_ConfirmManagerTitle').text(),
 						msg     : sConfirmMsg,
@@ -199,6 +199,10 @@ function onReadyDatabaseUsers()
 		
 		jQuery('#txtDatabaseUsers_RoleListCannotRemoveAdminRole').hide();
 		jQuery('#divDatabaseUsers_Edit').show();
+	}).on('mouseover', 'tr', function(event) {
+			jQuery(this).addClass('highlight');
+	}).on('mouseout', 'tr', function(event) {
+		jQuery(this).removeClass('highlight');
 	});
 
 	jQuery('#frmUsers .UserId').change(function() {
@@ -253,6 +257,7 @@ function doDatabaseUsersPopulateUserRoleList(UserRoleList)
 			sAdminCurrent = jQuery('.UserName', this).text();
 		}
 	});
+	jQuery('#tbodyDatabaseUsers_List tr:even').addClass('under');
 } //doDatabaseUsersPopulateUserRoleList()
 
 function doDatabaseUsersUpdateOptions(RegionInfo)

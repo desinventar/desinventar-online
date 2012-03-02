@@ -19,7 +19,6 @@
 	function updateList(div, url, pars, callback)
 	{
 		jQuery('#' + div).load(url, pars, function(response, status, xhr) {
-			onReadyDatabaseAdmin();
 			// Hide first two columns (EventId,EventPredefined)
 			jQuery('td:nth-child(1)','#tblEventListUser,#tblEventListPredef').hide();
 			jQuery('td:nth-child(2)','#tblEventListUser,#tblEventListPredef').hide();
@@ -190,14 +189,8 @@
 			$('aGeographyId').value = key;
 			$('aGeographyCode').value = val;
 			$('aGeographyName').value = val2;
-			if (val3 == "1")
-			{
-				$('aGeographyActive').checked = true;
-			}
-			else
-			{
-				$('aGeographyActive').checked = false;
-			}
+			jQuery('#frmDBConfigGeographyEdit .GeographyActive').val(parseInt(val3));
+			jQuery('#frmDBConfigGeographyEdit .GeographyActiveCheckbox').prop('checked', parseInt(jQuery('#frmDBConfigGeographyEdit .GeographyActive').val()) > 0);
 		}
 	}
 
@@ -295,96 +288,6 @@
 		return str;  
 	}
 
-	// Block characters according to type
-	function blockChars(e, value, type)
-	{
-		var key = window.event ? e.keyCode : e.which;
-
-		// 2010-08-19 (jhcaiced) Accept values in numeric keypad
-		if (key >= 96 && key <= 105)
-		{
-			key = key - 48;
-		}
-		var keychar = String.fromCharCode(key);
-		if (key == 190 || key == 110 || key == 188) { keychar = '.'; }
-		var opt = type.split(":"); // 0=type; 1=minlength; 2=minval-maxval
-			// Accept keys: backspace, tab, shift, ctrl, insert, delete
-			//        pagedown, pageup, rows
-		var spckey = (key==8 || key==9 || key==17 || key==20 ||
-		              key==45 || key==46 || (key>=33 && key<=40) || key==0);
-		var chk = true;
-		var val = true; // validate characters
-			// Check max length
-		if (value.length >= parseInt(opt[1]))
-		{
-			var len = false;
-		}
-		else
-		{
-			var len = true;
-		}
-		// Check datatype
-		switch (opt[0])
-		{
-			case "date" :
-				reg = /^\d{4}-\d{0,2}-\d{0,2}$/;
-				chk = reg.test(keychar);
-			break;
-			case "alphanumber" :
-				reg = /^[a-z]|[A-Z]|[0-9]|[-_+.]+/; 
-				chk = reg.test(keychar);
-				break;
-			case "integer" :
-				reg = /\d/;
-				chk = reg.test(keychar);
-				break;
-			case "double" :
-				reg = /^[-+]?[0-9]|[.]+$/;
-				chk = reg.test(keychar);
-				break;
-			default:;
-		}
-		// Block special characters: (like !@#$%^&'*" etc)
-		val = !(key == 92 || key == 13 || key == 16)
-	  return (val && ((chk && len) || spckey));
-	}
-
-	function onlyText(e)
-	{
-		var keynum;
-		var keychar;
-		var numcheck;
-		if(window.event)
-		{ // IE
-			keynum = e.keyCode;
-		}
-		else if(e.which)
-		{ // Netscape/Firefox/Opera
-			keynum = e.which;
-		}
-		keychar = String.fromCharCode(keynum);
-		numcheck = /\d/;
-		return !numcheck.test(keychar);
-	}
-
-	function onlyNumber(e)
-	{
-		var keynum;
-		var keychar;
-		if(window.event)
-		{ // IE
-			keynum = e.keyCode;
-		}
-		else if(e.which)
-		{ // Netscape/Firefox/Opera
-			keynum = e.which;
-		}
-		if (e.keyCode < 48 || e.keyCode > 57)
-			return false;
-		return true;
-	}
-
-	
 	function getGeoItems(reg, geoid, l, lev, src)
 	{
 		if (src == "DATA")
@@ -514,12 +417,12 @@
 			if (cmd == "export")
 			{
 				jQuery('#prmQueryCommand').val('cmdMapSave');
+
 				// to export image save layers and extend..
 				var dcr = document.getElementById('dcr');
 				var mm = map;
 				//var mm = dcr.map;
 				var extent = mm.getExtent();
-				//extent.transform(mm.prj1, mm.prj2);
 				var layers = mm.layers;
 				var activelayers = [];
 				for (i in layers)
@@ -529,21 +432,28 @@
 						activelayers[activelayers.length] = layers[i].params['LAYERS'];
 					}
 				}
-				$('_M+extent').value = [extent.left,extent.bottom,extent.right,extent.top].join(',');
-				$('_M+layers').value = activelayers;
-				myMap = jQuery('#MapTitle');
-				$('_M+title').value = myMap.val();
+				
+				jQuery('form.MapSave').attr('action', jQuery('#desinventarURL').val() + '/thematicmap.php');
+				jQuery('form.MapSave').attr('target', 'iframeDownload');
+				jQuery('form.MapSave input.Extent').val([extent.left,extent.bottom,extent.right,extent.top].join(','));
+				jQuery('form.MapSave input.Layers').val(activelayers);
+				jQuery('form.MapSave input.Id').val(jQuery('#prmMapId').val());
+				jQuery('form.MapSave input.Title').val(jQuery('#MapTitle').val());
+				jQuery('form.MapSave').trigger('submit');
 			}
-			combineForms('frmMainQuery', 'CM');
-			Ext.getCmp('westm').collapse();
-			$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/thematicmap.php';
-			jQuery('#frmMainQuery').attr('target','dcr');
-			if (cmd != 'result')
+			else
 			{
-				jQuery('#frmMainQuery').attr('target', 'iframeDownload');
+				combineForms('frmMainQuery', 'CM');
+				Ext.getCmp('westm').collapse();
+				$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/thematicmap.php';
+				jQuery('#frmMainQuery').attr('target','dcr');
+				if (cmd != 'result')
+				{
+					jQuery('#frmMainQuery').attr('target', 'iframeDownload');
+				}
+				jQuery('#frmMainQuery').submit();
+				//hideMap();
 			}
-			jQuery('#frmMainQuery').submit();
-			//hideMap();
 			return true;
 		}
 		else
@@ -563,10 +473,15 @@
 			jQuery('#prmQueryCommand').val('cmdGraphSave');
 		}
 		jQuery('#prmGraphCommand').val(cmd);
-		combineForms('frmMainQuery', 'CG');
+		jQuery('#frmGraphParams input.TendencyLabel0').val(jQuery('#frmGraphParams #prmGraphTendency0 option:selected').text());
+		jQuery('#frmGraphParams #prmGraphFieldLabel0').val(jQuery('#frmGraphParams #prmGraphField0 option:selected').text());
+		jQuery('#frmGraphParams #prmGraphFieldLabel1').val(jQuery('#frmGraphParams #prmGraphField1 option:selected').text());
+		
+		combineForms('frmMainQuery', 'frmGraphParams');
 		Ext.getCmp('westm').collapse();
 		$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/graphic.php';
 		jQuery('#frmMainQuery').attr('target','dcr');
+
 		if (cmd != 'result')
 		{
 			jQuery('#frmMainQuery').attr('target', 'iframeDownload');
@@ -585,18 +500,23 @@
 		{
 			jQuery('#prmQueryCommand').val('cmdStatSave');
 		}
-		if ( jQuery('#fldStatParam_FirstLev').val() != "" && $('_S+Field[]').length > 0)
+		if ( jQuery('#fldStatParam_FirstLev').val() != "" && $('fldStatFieldSelect').length > 0)
 		{
 			$('_S+cmd').value = cmd;
-			selectall('_S+Field[]');
-			var ob = $('_S+Field[]');
-			var mystr = "D.DisasterId||";
-			for (i=0; i < ob.length; i++)
-			{
-				mystr += "," + ob[i].value;
-			}
-			$('_S+FieldH').value = mystr;
-			combineForms('frmMainQuery', 'CS');
+			//selectall('fldStatFieldSelect');
+			var field      = 'D.DisasterId||';
+			var fieldlabel = jQuery('#txtStatRecords').text();
+			jQuery('#fldStatFieldSelect option').each(function() {
+				field      += ',' + jQuery(this).val();
+				fieldlabel += ',' + jQuery(this).text();
+			});
+			jQuery('#fldStatField').val(field);
+			jQuery('#fldStatFieldLabel').val(fieldlabel);
+			
+			jQuery('#frmStatParams td.StatGroup').each(function() {
+				jQuery('input', this).val(jQuery('select option:selected',this).text());
+			});
+			combineForms('frmMainQuery', 'frmStatParams');
 			Ext.getCmp('westm').collapse();
 			$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/statistic.php';
 			jQuery('#frmMainQuery').attr('target','dcr');
@@ -620,9 +540,9 @@
 		selectall('_D+Field[]');
 		combineForms('frmMainQuery', 'CD');
 		combineForms('frmMainQuery', 'CM');
-		combineForms('frmMainQuery', 'CG');
-		selectall('_S+Field[]');
-		combineForms('frmMainQuery', 'CS');
+		combineForms('frmMainQuery', 'frmGraphParams');
+		selectall('fldStatFieldSelect');
+		combineForms('frmMainQuery', 'frmStatParams');
 		jQuery('#_CMD').val('savequery');
 		$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/?r=' + jQuery('#desinventarRegionId').val();
 		jQuery('#frmMainQuery').attr('target', 'iframeDownload');

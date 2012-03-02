@@ -74,7 +74,7 @@ if (isset($post['page']) || isset($post['_D+cmd']))
 			$export = '';
 			$iRecordsPerPage = $post['_D+SQL_LIMIT'];
 			// Set values to paging list
-			$iNumberOfPages = (int) (($iNumberOfRecords / $iRecordsPerPage) + 1);
+			$iNumberOfPages = (int)($iNumberOfRecords / $iRecordsPerPage);
 			// Smarty assign SQL values
 			$t->assign('sql', base64_encode($sql));
 			$t->assign('fld', $fld);
@@ -194,6 +194,31 @@ if (isset($post['page']) || isset($post['_D+cmd']))
 			$t->assign('dislist', $dl);
 			$t->assign('ctl_dislist', true);
 		} //else
+		$sectorFields = DIDisaster::getEffectSectorFields();
+		$data_header = array();
+		foreach($sel as $key => $field_id)
+		{
+			$field_type = 'NUMBER';
+			if (in_array($field_id, array(
+				'DisasterSerial', 'DisasterBeginTime',
+				'EventName', 'GeographyFQName', 
+				'DisasterSiteNotes', 'DisasterSource',
+				'EffectNotes', 'EffectOtherLosses', 
+				'CauseName', 'CauseNotes')))
+			{
+				$field_type = 'TEXT';
+			}
+			if (in_array($field_id, $sectorFields))
+			{
+				$field_type = 'CHECKBOX';
+			}
+			$data_header[$field_id] = array(
+				'field' => $field_id,
+				'label' => $dk[$field_id],
+				'type'  => $field_type
+			);
+		}
+		$t->assign('data_header', $data_header);
 	} //if
 } //if
 $time_end = microtime_float();

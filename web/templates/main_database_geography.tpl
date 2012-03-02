@@ -7,13 +7,15 @@
 		{-include file="extjs.tpl"-}
 		<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/desinventar.css?version={-$jsversion-}" />
 		<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/main.css?version={-$jsversion-}" />
+
+		<script type="text/javascript" src="{-$desinventarURL-}/external/form2js.js"></script>
+		<script type="text/javascript" src="{-$desinventarURL-}/external/jquery.toObject.js"></script>
+
 		<script type="text/javascript" src="{-$desinventarURL-}/js/common.js?version={-$jsversion-}"></script>
-		<script type="text/javascript" src="{-$desinventarURL-}/js/datacards.js?version={-$jsversion-}"></script>
-		<script type="text/javascript" src="{-$desinventarURL-}/external/jquery.jec-1.3.3.js"></script>
+		<script type="text/javascript" src="{-$desinventarURL-}/js/database_geography.js?version={-$jsversion-}"></script>
 
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
-				onReadyCommon();
 				// 2011-04-29 (jhcaiced) Fix for use of ExtJS in IE9 ?
 				if ((typeof Range !== "undefined") && !Range.prototype.createContextualFragment)
 				{
@@ -25,14 +27,14 @@
 						return frag;
 					};
 				}
-				onReadyDatacards();
-				jQuery('body').trigger('cmdDatacardShow');
+				onReadyCommon();
+				onReadyGeography();
+				jQuery('body').trigger('cmdGeographyShow');
 			});
 		</script>
 	</head>
 	<body>
-		{-include file="datacards.tpl"-}
+		{-include file="database_geography.tpl"-}
 		{-include file="desinventarinfo.tpl"-}
-		{-include file="block_help.tpl"-}
 	</body>
 </html>

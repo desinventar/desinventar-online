@@ -18,6 +18,17 @@
 					<td class="header GeoLevelActive">
 						<b>{-#msgGeolevels_GeoLevelActive#-}</b>
 					</td>
+					<td class="header center HasMap">
+						{-#msgGeolevels_HasMap#-}
+					</td>
+					<td class="header GeoLevelLayerFile hidden">
+					</td>
+					<td class="header GeoLevelLayerCode hidden">
+					</td>
+					<td class="header GeoLevelLayerName hidden">
+					</td>
+					<td class="header GeoLevelLayerParentCode hidden">
+					</td>
 				</tr>
 			</thead>
 			<tbody id="tbodyGeolevels_List">
@@ -30,6 +41,17 @@
 					</td>
 					<td class="GeoLevelActive">
 						<input type="checkbox" disabled="disabled" />						
+					</td>
+					<td class="HasMap">
+						<input type="checkbox" disabled="disabled" />						
+					</td>
+					<td class="GeoLevelLayerFile hidden">
+					</td>
+					<td class="GeoLevelLayerCode hidden">
+					</td>
+					<td class="GeoLevelLayerName hidden">
+					</td>
+					<td class="GeoLevelLayerParentCode hidden">
 					</td>
 				</tr>
 			</tbody>
@@ -63,86 +85,114 @@
 						<input class="GeoLevelActiveCheckbox" type="checkbox" tabindex="3" />
 
 						<br />
-
-						<h4>{-#msgGeocarto_Subtitle#-}</h4>
-						<table border="0" width="100%">
-							<tr>
-								<td>
-									<span title="{-#msgGeocarto_CodeTooltip#-}">{-#msgGeocarto_Code#-}</span>
-								</td>
-								<td colspan="2">
-									<input class="GeoLevelLayerCode" name="GeoLevelLayerCode" type="text" size="30" value="" /><br />
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<span title="{-#msgGeocarto_NameTooltip#-}">{-#msgGeocarto_Name#-}</span>
-								</td>
-								<td colspan="2">
-									<input class="GeoLevelLayerName" name="GeoLevelLayerName" type="text" size="30" value="" /><br />
-								</td>
-							</tr>
-							<tr class="FileUploader" data-ext="dbf">
-								<td>
-									{-#msgGeocarto_File#-} (DBF)
-								</td>
-								<td valign="top" style="width:50%;">
-									<span class="Filename_DBF uploaded" style="width:100%;"></span>
-									<input type="hidden" class="filename" name="filename.DBF" value="" />
-									<br />
-								</td>
-								<td>
-									<input type="hidden" class="UploadId_SHP UploadId" value="" />
-									<div id="FileUploaderControl_DBF" class="FileUploaderControl" style="display:block;">
-									</div>
-								</td>
-							</tr>
-							<tr class="FileUploader" data-ext="shp">
-								<td>
-									{-#msgGeocarto_File#-} (SHP)
-								</td>
-								<td valign="top" style="width:50%;">
-									<span class="Filename_SHP uploaded" style="width:100%;"></span>
-									<input type="hidden" class="filename" name="filename.SHP" value="" />
-									<br />
-								</td>
-								<td>
-									<input type="hidden" class="UploadId_SHP UploadId" value="" />
-									<div id="FileUploaderControl_SHP" class="FileUploaderControl" style="display:block;">
-									</div>
-								</td>
-							</tr>
-							<tr class="FileUploader" data-ext="shx">
-								<td>
-									{-#msgGeocarto_File#-} (SHX)
-								</td>
-								<td valign="top" style="width:50%;">
-									<span class="Filename_SHX uploaded" style="width:100%;"></span>
-									<input type="hidden" class="filename" name="filename.SHX" value="" />
-									<br />
-								</td>
-								<td>
-									<input type="hidden" class="UploadId_SHX UploadId" value="" />
-									<div id="FileUploaderControl_SHX" class="FileUploaderControl" style="display:block;">
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="3">
-									<div class="ProgressBar" style="width:100%;height:15px;background-color:#dddddd">
-										<div class="ProgressMark" style="width:0px;height:15px;background-color:#3bb3c2">
+						<div class="GeocartoEdit">
+							<h4>{-#msgGeocarto_Subtitle#-}</h4>
+							<table border="0" width="100%">
+								<tr class="FileUploader" data-ext="dbf">
+									<td>
+										{-#msgGeocarto_File#-} (DBF)
+									</td>
+									<td valign="top" style="width:50%;">
+										<span class="Filename_DBF uploaded" style="width:100%;"></span>
+										<input type="hidden" class="filename" name="filename.DBF" value="" />
+										<br />
+									</td>
+									<td>
+										<input type="hidden" class="UploadId_SHP UploadId" value="" />
+										<div id="FileUploaderControl_DBF" class="FileUploaderControl" style="display:block;">
 										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2">
-								</td>
-								<td valign="top">
-									<a class="button btnUploadCancel"><span>{-#msgGeolevels_UploadCancel#-}</span></a>
-								</td>
-							</tr>
-						</table>
+									</td>
+								</tr>
+								<tr class="FileUploader" data-ext="shp">
+									<td>
+										{-#msgGeocarto_File#-} (SHP)
+									</td>
+									<td valign="top" style="width:50%;">
+										<span class="Filename_SHP uploaded" style="width:100%;"></span>
+										<input type="hidden" class="filename" name="filename.SHP" value="" />
+										<br />
+									</td>
+									<td>
+										<input type="hidden" class="UploadId_SHP UploadId" value="" />
+										<div id="FileUploaderControl_SHP" class="FileUploaderControl" style="display:block;">
+										</div>
+									</td>
+								</tr>
+								<tr class="FileUploader" data-ext="shx">
+									<td>
+										{-#msgGeocarto_File#-} (SHX)
+									</td>
+									<td valign="top" style="width:50%;">
+										<span class="Filename_SHX uploaded" style="width:100%;"></span>
+										<input type="hidden" class="filename" name="filename.SHX" value="" />
+										<br />
+									</td>
+									<td>
+										<input type="hidden" class="UploadId_SHX UploadId" value="" />
+										<div id="FileUploaderControl_SHX" class="FileUploaderControl" style="display:block;">
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="3">
+										<div class="ProgressBar" style="width:100%;height:15px;background-color:#dddddd">
+											<div class="ProgressMark" style="width:0px;height:15px;background-color:#3bb3c2">
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+									</td>
+									<td valign="top">
+										<a class="button btnUploadCancel"><span>{-#msgGeolevels_UploadCancel#-}</span></a>
+									</td>
+								</tr>
+							</table>
+							<table border="0" width="100%">
+								<tr>
+									<td>
+										<span title="{-#msgGeocarto_NameTooltip#-}">{-#msgGeocarto_Name#-}</span>
+									</td>
+									<td>
+										<select class="GeoLevelLayerName" name="GeoLevelLayerName">
+											<option value="">---</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<span title="{-#msgGeocarto_CodeTooltip#-}">{-#msgGeocarto_Code#-}</span>
+									</td>
+									<td>
+										<select class="GeoLevelLayerCode" name="GeoLevelLayerCode">
+											<option value="">---</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<span title="{-#msgGeocarto_ParentCodeTooltip#-}">{-#msgGeocarto_ParentCode#-}</span>
+									</td>
+									<td>
+										<select class="GeoLevelLayerParentCode" name="GeoLevelLayerParentCode">
+											<option value="">---</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2" class="center">
+										<br />
+										<input class="OptionImportGeography" name="option.ImportGeography" type="hidden" value="0" />
+										<input class="OptionImportGeographyCheckbox" type="checkbox" />
+										<span  class="OptionImportGeographyText" title="{-#msgGeocarto_ImportGeographyTooltip#-}">
+											{-#msgGeocarto_ImportGeography#-}
+										</span>
+									</td>
+								</tr>
+							</table>
+							<br />
+						</div>
 						<div class="center">
 							<a class="button btnSave"><span>{-#msgGeolevels_Save#-}</span></a>
 							<a class="button btnCancel"><span>{-#msgGeolevels_Cancel#-}</span></a>
@@ -157,9 +207,10 @@
 		<span class="status hidden statusUploadOk">{-#msgGeocarto_UploadOk#-}<br /></span>
 		<span class="status hidden statusUploadError">{-#msgGeocarto_UploadError#-}<br /></span>
 		<span class="status hidden statusUpdateOk">{-#msgGeolevels_UpdateOk#-}<br /></span>
-		<span class="status hidden statusUpdateError">{-#msgGeolvels_UpdateError#-}<br /></span>
+		<span class="status hidden statusUpdateError">{-#msgGeolevels_UpdateError#-}<br /></span>
 		<span class="status hidden statusMissingFiles">{-#msgGeocarto_MissingFiles#-} (DBF,SHP,SHX)<br /></span>
 		<span class="status hidden statusRequiredFields">{-#msgGeocarto_RequiredFields#-}<br/></span>
+		<span class="status hidden statusCreatingGeography">{-#msgGeocarto_CreatingGeography#-} <img src="{-$desinventarURL-}/images/loading.gif" alt="" /><br /></span>
 	</div>
 	<div class="hidden">
 		<span id="msgGeolevels_UploadChooseFile">{-#msgGeolevels_UploadChooseFile#-}</span>

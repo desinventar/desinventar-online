@@ -59,7 +59,7 @@ switch ($cmd)
 		$t->assign('lev', $lev);
 		$t->assign('levmax', $us->q->getMaxGeoLev());
 		$t->assign('levname', $us->q->loadGeoLevById($lev));
-		$t->assign('geol', $us->q->loadGeoChilds($get['GeographyId']));
+		$t->assign('geol', $us->q->loadGeoChilds($get['GeographyId']), GEOGRAPHY_ALL);
 		$t->assign('ctl_geolist', true);
 	break;
 	case 'chkcode':
@@ -77,7 +77,7 @@ switch ($cmd)
 		$lev = 0;
 		$levmax = $us->q->getMaxGeoLev();
 		$levname = $us->q->loadGeoLevById($lev);
-		$geol = $us->q->loadGeography($lev);
+		$geol = $us->q->loadGeography($lev, GEOGRAPHY_ALL);
 		$t->assign('lev', $lev);
 		$t->assign('levmax', $levmax);
 		$t->assign('levname', $levname);

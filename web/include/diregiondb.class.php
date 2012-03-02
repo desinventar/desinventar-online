@@ -619,25 +619,24 @@ class DIRegionDB extends DIRegion
 		if ($iReturn > 0)
 		{
 			// Calculate Name of GeoLevel 0
-			if ($prmGeoLevelName == '')
+			if ($prmGeoLevelName != '')
 			{
-				$prmGeoLevelName = 'Level 0';
-			}
-			$this->session->open($this->get('RegionId'));
-			$g = new DIGeoLevel($this->session, 0);
-			$g->set('GeoLevelName', $prmGeoLevelName);
-			$g->set('RegionId', $this->get('RegionId'));
-			$c = new DIGeoCarto($this->session);
-			$c->set('GeoLevelId', 0);
-			if ($g->exist() > 0)
-			{
-				$g->update();
-				$c->update();
-			}
-			else
-			{
-				$g->insert();
-				$c->insert();
+				$this->session->open($this->get('RegionId'));
+				$g = new DIGeoLevel($this->session, 0);
+				$g->set('GeoLevelName', $prmGeoLevelName);
+				$g->set('RegionId', $this->get('RegionId'));
+				$c = new DIGeoCarto($this->session);
+				$c->set('GeoLevelId', 0);
+				if ($g->exist() > 0)
+				{
+					$g->update();
+					$c->update();
+				}
+				else
+				{
+					$g->insert();
+					$c->insert();
+				}
 			}
 		}
 		return $iReturn;

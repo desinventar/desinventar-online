@@ -28,6 +28,8 @@
 					<span class="datacardStatusMsg" id="msgDatacardFieldsError">{-#errmsgfrm#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardFound">{-#msgDatacardFound#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardNotFound">{-#msgDatacardNotFound#-}</span>
+					<span class="datacardStatusMsg" id="msgDatacardInvalidNumber">{-#msgDatacardInvalidNumber#-}</span>
+					<span class="datacardStatusMsg" id="msgDatacardWithoutStatus">{-#msgDatacardWithoutStatus#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardInvalidStatus">{-#msgDatacardInvalidStatus#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardWithoutSource">{-#msgDatacardWithoutSource#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardInvalidGeography">{-#msgDatacardInvalidGeography#-}</span>
@@ -169,17 +171,17 @@
 								{-counter-}
 							</td>
 							<td>
-								<span title="{-$LabelsDisaster.DisasterLatitude[1]-}">
+								<span title="{-#msgDatacard_InputDoubleTooltip#-}">
 									{-#msgDatacard_DisasterLatitude#-}<br />
-									<input id="DisasterLatitude" name="DisasterLatitude" type="text" size="10" maxlength="10"
+									<input id="DisasterLatitude" name="DisasterLatitude" type="text" size="10" maxlength="10" value="0.0"
 										class="line inputDouble" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsDisaster.DisasterLatitude[2]-}', '#d4baf6')" />
 								</span>
 								{-counter-}
 								<br />
-								<span title="{-$LabelsDisaster.DisasterLongitude[1]-}">
+								<span title="{-#msgDatacard_InputDoubleTooltip#-}">
 									{-#msgDatacard_DisasterLongitude#-}
 									<br />
-									<input id="DisasterLongitude" name="DisasterLongitude" type="text" size="10" maxlength="10" 
+									<input id="DisasterLongitude" name="DisasterLongitude" type="text" size="10" maxlength="10" value="0.0"
 										class="line inputDouble" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsDisaster.DisasterLongitude[2]-}', '#d4baf6')" />
 								</span>
 								{-counter-}
@@ -263,7 +265,7 @@
 										<td valign="top">
 											<!-- BEGIN Table Effects over $$ -->
 											{-foreach name=ef2 key=key item=item from=$ef2-}
-												<span title="{-$item[1]-}">
+												<span title="{-#msgDatacard_InputDoubleTooltip#-}">
 													{-$item[0]-}<br />
 													<input id="{-$key-}" name="{-$key-}" type="text" size="11" maxlength="15"
 														class="line inputDouble" tabindex="{-$MyTabIndex-}" value="0" 
@@ -280,7 +282,7 @@
 								<b>{-#tlosses#-}</b><br />
 								<!-- BEGIN Table Effects over Affected -->
 								{-foreach name=ef3 key=key item=item from=$ef3-}
-									<span title="{-$item[1]-}">
+									<span title="{-#msgDatacard_InputDoubleTooltip#-}">
 										{-$item[0]-}<br />
 										<input id="{-$key-}" name="{-$key-}" type="text" size="7" maxlength="10" altfield="{-$sc3[$key]-}"
 											class="line inputDouble clsEffectDouble" tabindex="{-$MyTabIndex-}" value="0" onFocus="showtip('{-$item[2]-}', '#f1bd41')" />
@@ -325,7 +327,7 @@
 									{-/if-}
 									<input type="text" id="{-$key-}" name="{-$key-}" size="30"
 										class="line {-$inputClass-}" tabindex="{-$MyTabIndex-}"
-										onFocus="showtip('{-$item[1]-}', '#f1bd41')" />
+										onFocus="showtip('{-$item[1]-}', '#f1bd41')" value="0" />
 									{-counter-}
 								</td>
 							{-if ($smarty.foreach.eefl.iteration ) % 3 == 0-}

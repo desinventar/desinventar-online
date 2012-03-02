@@ -6,6 +6,7 @@
 
 class DIDisaster extends DIRecord
 {
+	const effect_sector = 'SectorTransport/INTEGER,SectorCommunications/INTEGER,SectorRelief/INTEGER,SectorAgricultural/INTEGER,SectorWaterSupply/INTEGER,SectorSewerage/INTEGER,SectorEducation/INTEGER,SectorPower/INTEGER,SectorIndustry/INTEGER,SectorHealth/INTEGER,SectorOther/INTEGER';
 	public function __construct($prmSession)
 	{
 		$this->sTableName   = 'Disaster';
@@ -33,7 +34,7 @@ class DIDisaster extends DIRecord
 		                      
 		                      'CauseId/STRING,' .
 		                      'CauseNotes/STRING';
-		$this->sEffectDef    ='EffectPeopleDead/INTEGER,' .
+		$this->sEffectDef1   ='EffectPeopleDead/INTEGER,' .
 		                      'EffectPeopleMissing/INTEGER,' .
 		                      'EffectPeopleInjured/INTEGER,' .
 		                      'EffectPeopleHarmed/INTEGER,' .
@@ -41,9 +42,8 @@ class DIDisaster extends DIRecord
 		                      'EffectPeopleEvacuated/INTEGER,' .
 		                      'EffectPeopleRelocated/INTEGER,' .		                      
 		                      'EffectHousesDestroyed/INTEGER,' .
-		                      'EffectHousesAffected/INTEGER,' .
-		                      
-		                      'EffectLossesValueLocal/DOUBLE,' .
+		                      'EffectHousesAffected/INTEGER';
+		$this->sEffectDef2   ='EffectLossesValueLocal/DOUBLE,' .
 		                      'EffectLossesValueUSD/DOUBLE,' .
 		                      'EffectRoads/DOUBLE,' .
 		                      'EffectFarmingAndForest/DOUBLE,' .
@@ -51,19 +51,7 @@ class DIDisaster extends DIRecord
 		                      'EffectEducationCenters/INTEGER,' .
 		                      'EffectMedicalCenters/INTEGER,' .
 		                      'EffectOtherLosses/STRING,' .
-		                      'EffectNotes/STRING,' .
-		                      
-		                      'SectorTransport/INTEGER,' .
-		                      'SectorCommunications/INTEGER,' .
-		                      'SectorRelief/INTEGER,' .
-		                      'SectorAgricultural/INTEGER,' .
-		                      'SectorWaterSupply/INTEGER,' .
-		                      'SectorSewerage/INTEGER,' .
-		                      'SectorEducation/INTEGER,' .
-		                      'SectorPower/INTEGER,' .
-		                      'SectorIndustry/INTEGER,' .
-		                      'SectorHealth/INTEGER,' .
-		                      'SectorOther/INTEGER';
+		                      'EffectNotes/STRING';		                      
 		$this->sFieldQDef =   'EffectPeopleDeadQ/INTEGER,' .
 		                      'EffectPeopleMissingQ/INTEGER,' .
 		                      'EffectPeopleInjuredQ/INTEGER,' .
@@ -73,7 +61,8 @@ class DIDisaster extends DIRecord
 		                      'EffectPeopleRelocatedQ/INTEGER,' .		                      
 		                      'EffectHousesDestroyedQ/INTEGER,' .
 		                      'EffectHousesAffectedQ/INTEGER';
-		$this->sFieldDef .= ',' . $this->sEffectDef;	
+		$this->sEffectDef = $this->sEffectDef1 . ',' . self::effect_sector . ',' . $this->sEffectDef2;
+		$this->sFieldDef .= ',' . $this->sEffectDef;
 		$this->sFieldDef .= ',' . $this->sFieldQDef;
 		parent::__construct($prmSession);
 		$this->sEEFieldDef  = $this->buildEEFieldDef();
@@ -423,6 +412,16 @@ class DIDisaster extends DIRecord
 			$iReturn = ERR_NO_ERROR;
 		}
 		return $iReturn;
+	}
+	public static function getEffectSectorFields()
+	{
+		$list = array();
+		foreach(explode(',', self::effect_sector) as $field)
+		{
+			$a = explode('/', $field);
+			$list[] = $a[0];
+		}
+		return $list;
 	}
 } //class
 

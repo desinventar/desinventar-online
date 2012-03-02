@@ -44,12 +44,15 @@ function doViewportCreate()
 				title: jQuery('#msgQueryDesignTitle').text(),
 				autoScroll: true,
 				margins:'0 2 0 0',
-				contentEl: 'divWestPanel'
+				contentEl: 'divWestPanel',
+				floatable: true
 			};
 			Ext.apply(this, config);
 			Ext.apply(this.initialConfig, config);
+			this.defwidth = this.width;
+			this.deftitle = this.title;
 			DesInventar.WestPanel.superclass.initComponent.call(this);
-		}
+		},
 	});
 	DesInventar.Viewport = Ext.extend(Ext.Viewport, {
 		initComponent: function() {
@@ -248,7 +251,6 @@ function doMainMenuHandler(item)
 			doUpdateDatabaseListByUser();
 		break;
 		// Datacards Menu Items
-		case 'mnuDatacardView':
 		case 'mnuDatacardEdit':
 			jQuery('#cardsRecordNumber').val(0);
 			jQuery('#cardsRecordSource').val('');
@@ -263,20 +265,35 @@ function doMainMenuHandler(item)
 		case 'mnuFileDownload':
 			jQuery('.clsAdminDatabaseExport').hide();
 			Ext.getCmp('wndDatabaseExport').show();
-			doAdminDatabaseExportAction();
+			jQuery('body').trigger('cmdDatabaseExport');
 		break;
-		case 'mnuFileCopy':
+		case 'mnuFileUploadCopy':
 			doDatabaseUploadShow('Copy');
 		break;
-		case 'mnuFileReplace':
+		case 'mnuFileUploadReplace':
 			doDatabaseUploadShow('Replace');
 		break;
 		case 'mnuDatacardSetup':
 			hideQueryDesign();
+			doMainMenuToggle(false);
+			Ext.getCmp('mnuDatacard').enable();
+			Ext.getCmp('mnuDatacardEdit').hide();
+			Ext.getCmp('mnuDatacardSetup').hide();
+			Ext.getCmp('mnuDatacardSetupEnd').show();
+			Ext.getCmp('mnuDatacardSetupEnd').enable();
 			jQuery('.contentBlock').hide();
 			jQuery('.classDBConfig_tabs:first').click();
 			jQuery('#divDatabaseConfiguration').show();
 			jQuery('#tabDatabaseConfiguration').show();
+		break;
+		case 'mnuDatacardSetupEnd':
+			jQuery('body').trigger('cmdWindowReload');
+			/*
+			doMainMenuToggle(true);
+			doMainMenuUpdate();
+			jQuery('body').trigger('cmdDatabaseLoadData');
+			doViewportShow();
+			*/
 		break;
 		case 'mnuFileCreate':
 			doDatabaseCreateShow();
@@ -340,12 +357,10 @@ function doMainMenuCreate()
 		{
 			var mnuFileUpload = new Ext.menu.Menu({
 				items: [
-					{id:'mnuFileCopy'   , text: jQuery('span#msgFileCopy').text()   , handler: this.MenuHandler },
-					{id:'mnuFileReplace', text: jQuery('span#msgFileReplace').text(), handler: this.MenuHandler }
+					{id:'mnuFileUploadCopy'   , text: jQuery('span#msgFileUploadCopy').text()   , handler: this.MenuHandler },
+					{id:'mnuFileUploadReplace', text: jQuery('span#msgFileUploadReplace').text(), handler: this.MenuHandler }
 				]
 			});
-
-			// Main menu
 			var mnuFileLanguage = new Ext.menu.Menu({
 				items: [
 					{id:'mnuFileLanguageEnglish'   , text: jQuery('span#msgFileLanguageEnglish').text()   , handler: this.MenuHandler },
@@ -360,10 +375,10 @@ function doMainMenuCreate()
 					{id:'mnuFileCreate'     , text: jQuery('span#msgFileCreate').text()     , handler: this.MenuHandler },
 					{id:'mnuFileOpen'       , text: jQuery('span#msgFileOpen').text()       , handler: this.MenuHandler },
 					{id:'mnuFileDownload'   , text: jQuery('span#msgFileDownload').text()   , handler: this.MenuHandler },
-					{id:'mnuFileUpload'     , text: jQuery('span#msgFileUpload').text()     , menu: mnuFileUpload        },
+					{id:'mnuFileUpload'     , text: jQuery('span#msgFileUpload').text()     , menu: mnuFileUpload       },
 					'-',
 					{id:'mnuFileInfo'       , text: jQuery('span#msgFileInfo').text()       , handler: this.MenuHandler },
-					{id:'mnuFileLanguage'   , text: jQuery('span#msgFileLanguage').text()   , menu: mnuFileLanguage      },
+					{id:'mnuFileLanguage'   , text: jQuery('span#msgFileLanguage').text()   , menu: mnuFileLanguage     },
 					{id:'mnuFileLogout'     , text: jQuery('span#msgFileLogout').text()     , handler: this.MenuHandler }
 				]
 			});
@@ -408,9 +423,9 @@ function doMainMenuCreate()
 			});
 			var mnuDatacard = new Ext.menu.Menu({
 				items: [
-					{id:'mnuDatacardView' , text: jQuery('span#msgDatacardView').text() , handler: this.MenuHandler },
-					{id:'mnuDatacardEdit' , text: jQuery('span#msgDatacardEdit').text() , handler: this.MenuHandler },
-					{id:'mnuDatacardSetup', text: jQuery('span#msgDatacardSetup').text(), handler: this.MenuHandler }
+					{id:'mnuDatacardEdit'    , text: jQuery('span#msgDatacardEdit').text()    , handler: this.MenuHandler },
+					{id:'mnuDatacardSetup'   , text: jQuery('span#msgDatacardSetup').text()   , handler: this.MenuHandler },
+					{id:'mnuDatacardSetupEnd', text: jQuery('span#msgDatacardSetupEnd').text(), handler: this.MenuHandler }
 				]
 			});
 			var mnuHelp = new Ext.menu.Menu({
@@ -499,7 +514,25 @@ function doMainMenuCreate()
 	});
 } //doCreateMainMenu()
 
-function doMainMenuUpdate()
+function doMainMenuToggle(bEnable)
+{
+	jQuery('#divMainMenu span.menu').each(function() {
+		var w = Ext.getCmp(jQuery(this).attr('id').replace('msg','mnu'));
+		if (w != undefined)
+		{
+			if (bEnable)
+			{
+				w.enable();
+			}
+			else
+			{
+				w.disable();
+			}
+		}
+	});
+}
+
+function doMainMenuDisable()
 {
 	jQuery('#divMainMenu span.item').each(function() {
 		var id = jQuery(this).attr('id').replace('msg','mnu');
@@ -509,6 +542,18 @@ function doMainMenuUpdate()
 			w.disable();
 		}
 	});
+	jQuery('#divMainMenu span.submenu').each(function() {
+		var w = Ext.getCmp(jQuery(this).attr('id').replace('msg','mnu'));
+		if (w != undefined)
+		{
+			w.disable();
+		}
+	});
+} //doMainMenuDisable()
+
+function doMainMenuUpdate()
+{
+	doMainMenuDisable();
 
 	// Menu items that are always enabled
 	jQuery('#divMainMenu span.clsMenuAlwaysOn').each(function() {
@@ -516,10 +561,10 @@ function doMainMenuUpdate()
 	});
 	Ext.getCmp('mnuUser').setText(jQuery('span#msgUser').text());
 	
+	Ext.getCmp('mnuDatacard').hide();
 	// Enable menu items when a User is logged in
 	if (jQuery('#desinventarUserId').val() == '')
 	{
-		Ext.getCmp('mnuDatacard').hide();
 		jQuery('#divMainMenu span.clsMenuWithoutUser').each(function() {
 			Ext.getCmp(jQuery(this).attr('id').replace('msg','mnu')).enable();
 		});
@@ -528,7 +573,6 @@ function doMainMenuUpdate()
 	}
 	else
 	{
-		Ext.getCmp('mnuDatacard').show();
 		jQuery('#divMainMenu span.clsMenuWithUser').each(function() {
 			Ext.getCmp(jQuery(this).attr('id').replace('msg','mnu')).enable();
 		});
@@ -547,10 +591,10 @@ function doMainMenuUpdate()
 		Ext.getCmp('mnuUserAccountManagement').enable();
 	}
 
-	Ext.getCmp('mnuFileReplace').hide();
+	Ext.getCmp('mnuFileUploadReplace').hide();
 	Ext.getCmp('mnuDatacardSetup').hide();
+	Ext.getCmp('mnuDatacardSetupEnd').hide();
 
-	Ext.getCmp('mnuDatacardView').show();
 	Ext.getCmp('mnuDatacardEdit').hide();
 	
 	// Show some menu items when a Region is Selected
@@ -559,6 +603,10 @@ function doMainMenuUpdate()
 	}
 	else
 	{
+		if (jQuery('#desinventarUserId').val() != '')
+		{
+			Ext.getCmp('mnuDatacard').show();
+		}
 		Ext.getCmp('mnuRegionLabel').setText('[' + jQuery('#desinventarRegionLabel').val() + ']');
 
 		if (UserRoleValue > 0)
@@ -566,23 +614,21 @@ function doMainMenuUpdate()
 			jQuery('#divMainMenu span.clsMenuWithRegion').each(function() {
 				Ext.getCmp(jQuery(this).attr('id').replace('msg','mnu')).enable();
 			});
-			Ext.getCmp('mnuDatacardView').show();
-			Ext.getCmp('mnuDatacardView').enable();
 			Ext.getCmp('mnuDatacardEdit').hide();
+
+			//2012-03-01 Bug #55 -  Enable download function for any user that can view the database
+			Ext.getCmp('mnuFileDownload').enable();
 		}
 		if (UserRoleValue >= 2) 
 		{
 			// Edit datacards instead of only view them
-			Ext.getCmp('mnuDatacardView').hide();
 			Ext.getCmp('mnuDatacardEdit').show();
 			Ext.getCmp('mnuDatacardEdit').enable();
-			// Enable other functions
-			Ext.getCmp('mnuFileDownload').enable();
 
 			if (UserRoleValue >= 4)
 			{
-				Ext.getCmp('mnuFileReplace').show();
-				Ext.getCmp('mnuFileReplace').enable();
+				Ext.getCmp('mnuFileUploadReplace').show();
+				Ext.getCmp('mnuFileUploadReplace').enable();
 				Ext.getCmp('mnuDatacardSetup').show();
 				Ext.getCmp('mnuDatacardSetup').enable();
 			}
@@ -720,7 +766,7 @@ function doDialogsCreate()
 				text: jQuery('#msgViewGraphButtonClear').text(),
 				handler: function()
 				{
-					$('CG').reset();
+					$('frmGraphParams').reset();
 					jQuery('#prmGraphTypeHistogram').change();
 				}
 			},
@@ -753,7 +799,7 @@ function doDialogsCreate()
 				text: jQuery('#msgViewStdButtonClear').text(),
 				handler: function()
 				{
-					$('CS').reset();
+					$('frmStatParams').reset();
 				}
 			},
 			{
@@ -784,114 +830,4 @@ function doDialogsCreate()
 
 } //doDialogsCreate()
 
-function doGetRegionInfo(RegionId)
-{
-	jQuery('#divRegionInfo #divRegionLogo').html('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />');
-	jQuery.post(jQuery('#desinventarURL').val() + '/',
-		{
-		  cmd         : 'cmdDatabaseGetInfo', 
-		  RegionId    : RegionId,
-		  LangIsoCode : jQuery('#desinventarLang').val()
-		},
-		function(data)
-		{
-			if (parseInt(data.Status)>0)
-			{
-				var i = data.RegionInfo;
-				jQuery('#divRegionInfo #divRegionLogo').html('<img src="' + jQuery('#desinventarURL').val() + '/?cmd=cmdDatabaseGetLogo&RegionId=' + RegionId + '" alt="" />');
-				jQuery('#divRegionInfo #txtRegionLabel').text(i.RegionLabel);
-				jQuery('#divRegionInfo #txtRegionPeriod').text(i.PeriodBeginDate + ' - ' + i.PeriodEndDate);
-				jQuery('#divRegionInfo #txtRegionNumberOfRecords').text(i.NumberOfRecords);
-				jQuery('#divRegionInfo #txtRegionLastUpdate').text(i.RegionLastUpdate);
 
-				jQuery('#divRegionInfo #divInfoGeneral').hide();
-				if (i.InfoGeneral != '')
-				{
-					jQuery('#divRegionInfo #divInfoGeneral #Text').html(i.InfoGeneral);
-					jQuery('#divRegionInfo #divInfoGeneral').show();
-				}
-				jQuery('#divRegionInfo #divInfoCredits').hide();
-				if (i.InfoCredits != '')
-				{
-					jQuery('#divRegionInfo #divInfoCredits #Text').html(i.InfoCredits);
-					jQuery('#divRegionInfo #divInfoCredits').show();
-				}
-				jQuery('#divRegionInfo #divInfoSources').hide();
-				if (i.InfoSources != '')
-				{
-					jQuery('#divRegionInfo #divInfoSources #Text').html(i.InfoSources);
-					jQuery('#divRegionInfo #divInfoSources').show();
-				}
-				jQuery('#divRegionInfo #divInfoSynopsis').hide();
-				if (i.InfoSynopsis != '')
-				{
-					jQuery('#divRegionInfo #divInfoSynopsis #Text').html(i.InfoSynopsis);
-					jQuery('#divRegionInfo #divInfoSynopsis').show();
-				}
-			}
-		},
-		'json'
-	);
-} //doGetRegionInfo()
-
-function doUpdateDatabaseListByUser()
-{
-	jQuery(".contentBlock").hide();
-	jQuery("#divRegionList").show();
-	// Hide everything at start...
-	jQuery('.databaseTitle').hide();
-	jQuery('.databaseList').hide();
-
-	jQuery.post(jQuery('#desinventarURL').val() + '/',
-		{
-			cmd: 'cmdSearchDB',
-			searchDBQuery: '', 
-			searchDBCountry : 0
-		},
-		function(data)
-		{
-			if (parseInt(data.Status) > 0)
-			{
-				if (parseInt(data.NoOfDatabases) > 0)
-				{
-					jQuery('#divDatabaseFindList').show();
-					jQuery('#divDatabaseFindError').hide();
-					RegionByRole = new Array(5);
-					RegionByRole['ADMINREGION'] = new Array();
-					RegionByRole['SUPERVISOR'] = new Array();
-					RegionByRole['USER'] = new Array();
-					RegionByRole['OBSERVER'] = new Array();
-					RegionByRole['NONE'] = new Array();
-
-					$RoleList = new Array(5);
-					var iCount = 0;
-					jQuery('.databaseList').empty();
-					jQuery.each(data.RegionList, function(RegionId, value) {
-						jQuery('#divRegionList #title_' + value.Role).show();
-						jQuery('#divRegionList #list_' + value.Role).show().append('<a href="' + jQuery('#desinventarURL').val() + '/' + RegionId + '" id="' + RegionId + '" class="databaseLink">' + value.RegionLabel + '</a><br />');
-						iCount++;
-					});
-					
-					jQuery('.databaseLink').addClass("alt").unbind('click').click(function() {
-						RegionId = jQuery(this).attr('id');
-						if (jQuery('#desinventarPortalType').val() != '')
-						{
-							displayRegionInfo(RegionId);
-						}
-						else
-						{
-							window.location = jQuery('#desinventarURL').val() + '/' + RegionId;
-						}
-						return false;
-					}); //bind
-				}
-				else
-				{
-					jQuery('#divDatabaseFindList').hide();
-					jQuery('#divDatabaseFindError').show();
-				}
-			} //if
-		},
-		'json' //function
-	);
-} //doUpdateDatabaseListByUser()

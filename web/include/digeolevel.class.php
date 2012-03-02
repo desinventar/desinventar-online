@@ -36,13 +36,13 @@ class DIGeoLevel extends DIRecord {
 		}
 	} // __construct
 
-	public function getMaxGeoLevel() {
-		$iMaxVal = 0;
-		$sQuery = "SELECT MAX(GeoLevelId) AS MAXVAL FROM GeoLevel WHERE LangIsoCode='" . $this->get('LangIsoCode') . "'";
-		if ($result = $this->q->dreg->query($sQuery)) {
-			while ($row = $result->fetch(PDO::FETCH_OBJ)) {
-				$iMaxVal = $row->MAXVAL;
-			}
+	public function getMaxGeoLevel()
+	{
+		$iMaxVal = -1;
+		$sQuery = 'SELECT GeoLevelId FROM GeoLevel WHERE LangIsoCode="' . $this->get('LangIsoCode') . '" ORDER BY GeoLevelId';
+		foreach($this->q->dreg->query($sQuery, PDO::FETCH_ASSOC) as $row)
+		{
+			$iMaxVal = $row['GeoLevelId'];
 		}
 		return $iMaxVal;
 	} // function
