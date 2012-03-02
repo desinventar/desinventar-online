@@ -329,3 +329,7 @@ div.Geography table.List thead td {
 .helptext {
 	color:#42929d;
 }
+.nowrap {
+	white-space: nowrap;
+}
+
