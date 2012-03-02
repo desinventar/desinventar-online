@@ -615,14 +615,15 @@ function doMainMenuUpdate()
 				Ext.getCmp(jQuery(this).attr('id').replace('msg','mnu')).enable();
 			});
 			Ext.getCmp('mnuDatacardEdit').hide();
+
+			//2012-03-01 Bug #55 -  Enable download function for any user that can view the database
+			Ext.getCmp('mnuFileDownload').enable();
 		}
 		if (UserRoleValue >= 2) 
 		{
 			// Edit datacards instead of only view them
 			Ext.getCmp('mnuDatacardEdit').show();
 			Ext.getCmp('mnuDatacardEdit').enable();
-			// Enable other functions
-			Ext.getCmp('mnuFileDownload').enable();
 
 			if (UserRoleValue >= 4)
 			{

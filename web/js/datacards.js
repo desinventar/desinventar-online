@@ -818,14 +818,21 @@ function doDatacardClear()
 	jQuery('#DisasterId').val();
 	$('DICard').reset();
 	jQuery('#_CMD').val('insertDICard');
-	jQuery('#DisasterBeginTime0').val('');
-	jQuery('#DisasterBeginTime1').val('');
-	jQuery('#DisasterBeginTime2').val('');
 	jQuery('#cardsRecordNumber').val(0);
 	jQuery('#DICard .clsEffectNumeric').each(function() {
 		jQuery(this).jecValue('');
 		jQuery(this).val(0);
 	});
+	jQuery('#DICard .inputDouble').each(function() {
+		jQuery(this).val(0);
+	});
+	jQuery('#DICard .inputInteger').each(function() {
+		jQuery(this).val(0);
+	});
+	jQuery('#DICard #DisasterBeginTime0').val('');
+	jQuery('#DICard #DisasterBeginTime1').val('');
+	jQuery('#DICard #DisasterBeginTime2').val('');
+	jQuery('#DICard #EventDuration').val(0);
 }
 
 function doDatacardNew()
@@ -907,17 +914,17 @@ function doDatacardSave()
 	if (bContinue > 0)
 	{
 		// Validate Record Status
-		if (jQuery('#RecordStatus').val() == '')
+		if (jQuery('#DICard #RecordStatus').val() == '')
 		{
-			displayDatacardStatusMsg('msgDatacardInvalidStatus');
-			jQuery('#RecordStatus').highlight().focus();
+			displayDatacardStatusMsg('msgDatacardWithoutStatus');
+			jQuery('#DICard #RecordStatus').highlight().focus();
 			bContinue = 0;
 		}
 	}
 	
 	if (bContinue > 0)
 	{
-		if (jQuery('#RecordStatus').val() == 'PUBLISHED')
+		if (jQuery('#DICard #RecordStatus').val() == 'PUBLISHED')
 		{
 			jQuery('#DICard #DisasterSource').unhighlight();
 			jQuery('#DICard #RecordStatus').unhighlight();
@@ -936,13 +943,13 @@ function doDatacardSave()
 	if (bContinue > 0)
 	{
 		// Validate Record Status
-		if ( (jQuery('#RecordStatus').val() == 'PUBLISHED') ||
-		     (jQuery('#RecordStatus').val() == 'DELETED'  ) )
+		if ( (jQuery('#DICard #RecordStatus').val() == 'PUBLISHED') ||
+		     (jQuery('#DICard #RecordStatus').val() == 'DELETED'  ) )
 		{
 			if (jQuery('#desinventarUserRoleValue').val() <= 2)
 			{
 				displayDatacardStatusMsg('msgDatacardInvalidStatus');
-				jQuery('#RecordStatus').highlight().focus();
+				jQuery('#DICard #RecordStatus').highlight().focus();
 				bContinue = 0;
 			}
 		}
