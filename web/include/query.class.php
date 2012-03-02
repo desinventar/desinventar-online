@@ -611,33 +611,51 @@ class Query //extends PDO
 		return null;
 	}
 
-	function loadGeography($level)
+	function loadGeography($level, $prmOnlyActive = true)
 	{
-		if (!is_numeric($level) && $level >= 0)
-		{
-			return null;
-		}
-		$sql = "SELECT * FROM Geography WHERE GeographyLevel=" . $level . 
-			" AND GeographyId NOT LIKE '%00000' ORDER BY GeographyName";
 		$data = array();
-		$res = $this->dreg->query($sql);
-		foreach($res as $row)
+		$continue = ERR_NO_ERROR;
+		if (!is_numeric($level) || $level < 0)
 		{
-			$data[$row['GeographyId']] = array($row['GeographyCode'], str2js($row['GeographyName']), $row['GeographyActive']);
+			$continue = ERR_DEFAULT_ERROR;
+		}
+		if ($continue)
+		{
+			$sql = 'SELECT * FROM Geography WHERE GeographyLevel="' . $level . '"' .
+			       ' AND GeographyId NOT LIKE "%00000"';
+			if ($prmOnlyActive == true)
+			{
+				$sql .= ' AND GeographyActive>0 ';
+			}
+			$sql .= ' ORDER BY GeographyName';
+			$res = $this->dreg->query($sql, PDO::FETCH_ASSOC);
+			foreach($res as $row)
+			{
+				$data[$row['GeographyId']] = array_merge($row, array(
+					0 => $row['GeographyCode'],
+					1 => str2js($row['GeographyName']),
+					2 => $row['GeographyActive']
+				));
+			}
 		}
 		return $data;
 	}
 
-	function loadGeoChilds($geoid)
+	function loadGeoChilds($geoid, $prmOnlyActive = true)
 	{
+		$data = array();
 		$level = $this->getNextLev($geoid);
 		$sql = "SELECT * FROM Geography WHERE GeographyId LIKE '". $geoid .
-			"%' AND GeographyLevel=" . $level . " ORDER BY GeographyName";
-		$data = array();
-		$res = $this->dreg->query($sql);
+			"%' AND GeographyLevel=" . $level;
+		if ($prmOnlyActive == true)
+		{
+			$sql .= ' AND GeographyActive>0 ';
+		}
+		$sql .= ' ORDER BY GeographyName';
+		$res = $this->dreg->query($sql, PDO::FETCH_ASSOC);
 		foreach($res as $row)
 		{
-			$data[$row['GeographyId']] = array($row['GeographyCode'], $row['GeographyName'], $row['GeographyActive']);
+			$data[$row['GeographyId']] = array_merge($row, array($row['GeographyCode'], $row['GeographyName'], $row['GeographyActive']));
 		}
 		return $data;
 	}

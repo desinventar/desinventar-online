@@ -5,8 +5,8 @@
 		<span id="msgFileOpen"                   class="item clsMenuAlwaysOn"  >{-#mnuFileOpen#-}</span>
 		<span id="msgFileDownload"               class="item"                  >{-#mnuFileDownload#-}</span>
 		<span id="msgFileUpload"                 class="menu clsMenuAlwaysOn"  >{-#mnuFileUpload#-}</span>
-			<span id="msgFileCopy"               class="item clsMenuWithUser"  >{-#mnuFileCopy#-}</span>
-			<span id="msgFileReplace"            class="item"                  >{-#mnuFileReplace#-}</span>
+			<span id="msgFileUploadCopy"         class="item clsMenuWithUser"  >{-#mnuFileUploadCopy#-}</span>
+			<span id="msgFileUploadReplace"      class="item"                  >{-#mnuFileUploadReplace#-}</span>
 		<span id="msgFileInfo"                   class="item clsMenuWithRegion">{-#mnuFileInfo#-}</span>
 		<span id="msgFileLanguage"               class="menu clsMenuAlwaysOn"  >{-#mnuFileLanguage#-}</span>
 			<span id="msgFileLanguageEnglish"    class="item clsMenuAlwaysOn"  >{-#mnuFileLanguageEnglish#-}</span>
@@ -35,9 +35,9 @@
 			<span id="msgQueryOptionSave"        class="item clsMenuWithRegion">{-#mnuQueryOptionSave#-}</span>
 			<span id="msgQueryOptionOpen"        class="item clsMenuWithRegion">{-#mnuQueryOptionOpen#-}</span>
 	<span id="msgDatacard" class="menu">{-#mnuDatacard#-}</span>
-		<span id="msgDatacardView"               class="item">{-#mnuDatacardView#-}</span>
 		<span id="msgDatacardEdit"               class="item">{-#mnuDatacardEdit#-}</span>
 		<span id="msgDatacardSetup"              class="item">{-#mnuDatacardSetup#-}</span>
+		<span id="msgDatacardSetupEnd"           class="item">{-#mnuDatacardSetupEnd#-}</span>
 	<span id="msgHelp"                           class="menu">{-#mnuHelp#-}</span>
 		<span id="msgHelpWebsite"                class="item clsMenuAlwaysOn">{-#mnuHelpWebsite#-}</span>
 		<span id="msgHelpMethodology"            class="item clsMenuAlwaysOn">{-#mnuHelpMethodology#-}</span>

@@ -52,9 +52,10 @@ function onReadyDatabaseUpload()
 		doDatabaseUploadStatusMsg('msgDatabaseUploadWaitForCopy');
 		jQuery.post(jQuery('#desinventarURL').val() + '/',
 			{
-				cmd: 'cmdDatabaseCopy',
-				RegionId: jQuery('#txtDatabaseUploadRegionId').text(),
-				Filename: jQuery('#txtDatabaseUploadFilename').val()
+				cmd        : 'cmdDatabaseCopy',
+				RegionId   : jQuery('#txtDatabaseUploadRegionId').text(),
+				RegionLabel: jQuery('#txtDatabaseUploadRegionLabel').text(),
+				Filename   : jQuery('#txtDatabaseUploadFilename').val()
 			},
 			function(data)
 			{
@@ -64,7 +65,7 @@ function onReadyDatabaseUpload()
 					jQuery('#divDatabaseUploadParameters').hide();
 					doDatabaseUploadStatusMsg('msgDatabaseUploadUpdateOk');
 					alert(jQuery('#msgDatabaseUploadCopyComplete').val());
-					jQuery('body').trigger('cmdWindowReload');
+					window.location = jQuery('#desinventarURL').val() + '/' + jQuery('#txtDatabaseUploadRegionId').text();
 				}
 				else
 				{
@@ -88,7 +89,7 @@ function onReadyDatabaseUpload()
 				},
 				function(data)
 				{
-					doDatabaseUploadReset();
+					doDatabaseUploadReset(false);
 					Ext.getCmp('wndDatabaseUpload').hide();
 				},
 				'json'
@@ -104,78 +105,87 @@ function onReadyDatabaseUpload()
 
 function doAdminDatabaseCreateUploader()
 {
-	var uploader = new qq.FileUploader({
-		element: document.getElementById('divFileUploaderControl'),
-		action: jQuery('#desinventarURL').val() + '/',
-		params:
-		{
-			cmd        : 'cmdDatabaseUpload',
-			UploadMode : jQuery('#fldDatabaseUploadMode').val(),
-			RegionId   : jQuery('#desinventarRegionId').val()
-		},
-		debug:false,
-		multiple:false,
-		allowedExtensions: ['zip'],
-		onSubmit: function(id, Filename)
-		{
-			jQuery('#txtDatabaseUploadFilename').val(Filename);
-			jQuery('#txtDatabaseUploadId').val(id);
-			jQuery('#prgDatabaseUploadProgressBar').show();
-			jQuery('#prgDatabaseUploadProgressMark').css('width', '0px');
-			jQuery('#divFileUploaderControl .qq-upload-button-text').hide();
-			jQuery('#btnDatabaseUploadCancel').show();
-			doDatabaseUploadStatusMsg('msgDatabaseUploadWaitForUpload');
-		},
-		onProgress: function(id, Filename, loaded, total)
-		{
-			var maxWidth = jQuery('#prgDatabaseUploadProgressBar').width();
-			var percent  = parseInt(loaded/total * 100);
-			var width    = parseInt(percent * maxWidth/100);
-			jQuery('#prgDatabaseUploadProgressMark').css('width', width);
-		},
-		onComplete: function(id, Filename, data)
-		{
-			doDatabaseUploadStatusMsg('');
-			jQuery('#btnDatabaseUploadCancel').hide();
-			jQuery('#txtDatabaseUploadFilename').val(data.filename);
-			if (parseInt(data.Status)>0)
+	jQuery('#divFileUploaderControl').each(function() {
+		var uploader = new qq.FileUploader({
+			element: document.getElementById(jQuery(this).attr('id')),
+			action: jQuery('#desinventarURL').val() + '/',
+			params:
 			{
-				jQuery('.clsDatabaseUploadType').hide();
-				if (jQuery('#fldDatabaseUploadMode').val() == 'Copy')
+				cmd        : 'cmdDatabaseUpload',
+				UploadMode : jQuery('#fldDatabaseUploadMode').val(),
+				RegionId   : jQuery('#desinventarRegionId').val()
+			},
+			debug:false,
+			multiple:false,
+			allowedExtensions: ['zip'],
+			onSubmit: function(id, Filename)
+			{
+				jQuery('#txtDatabaseUploadFilename').val(Filename);
+				jQuery('#txtDatabaseUploadId').val(id);
+				jQuery('#prgDatabaseUploadProgressBar').show();
+				jQuery('#prgDatabaseUploadProgressMark').css('width', '0px');
+				jQuery('#divFileUploaderControl .qq-upload-button-text').hide();
+				jQuery('#btnDatabaseUploadCancel').show();
+				doDatabaseUploadStatusMsg('msgDatabaseUploadWaitForUpload');
+			},
+			onProgress: function(id, Filename, loaded, total)
+			{
+				var maxWidth = jQuery('#prgDatabaseUploadProgressBar').width();
+				var percent  = parseInt(loaded/total * 100);
+				var width    = parseInt(percent * maxWidth/100);
+				jQuery('#prgDatabaseUploadProgressMark').css('width', width);
+			},
+			onComplete: function(id, Filename, data)
+			{
+				doDatabaseUploadStatusMsg('');
+				jQuery('#btnDatabaseUploadCancel').hide();
+				jQuery('#txtDatabaseUploadFilename').val(data.filename);
+				if (parseInt(data.Status)>0)
 				{
-					jQuery('#txtDatabaseUploadConfirmCopy').show();
-					jQuery('#btnDatabaseUploadCopy').show();
+					jQuery('.clsDatabaseUploadType').hide();
+					if (jQuery('#fldDatabaseUploadMode').val() == 'Copy')
+					{
+						jQuery('#txtDatabaseUploadConfirmCopy').show();
+						jQuery('#btnDatabaseUploadCopy').show();
+					}
+					else
+					{
+						jQuery('#txtDatabaseUploadConfirmReplace').show();
+						jQuery('#btnDatabaseUploadReplace').show();
+					}
+					doDatabaseUploadSetParameters(data.RegionInfo);
+					doDatabaseUploadStatusMsg('');
+					jQuery('#divDatabaseUploadControl').hide();
+					jQuery('#divDatabaseUploadParameters').show();
 				}
 				else
 				{
-					jQuery('#txtDatabaseUploadConfirmReplace').show();
-					jQuery('#btnDatabaseUploadReplace').show();
+					doDatabaseUploadReset(false);
+					switch(parseInt(data.Status)) {
+						case -130: //ERR_INVALID_ZIPFILE
+							doDatabaseUploadStatusMsg('msgDatabaseUploadErrorNoInfo');
+						break;
+						default:
+							doDatabaseUploadStatusMsg('msgDatabaseUploadErrorOnUpload');
+						break;
+					}
 				}
-				doDatabaseUploadSetParameters(data.RegionInfo);
-				doDatabaseUploadStatusMsg('');
-				jQuery('#divDatabaseUploadControl').hide();
-				jQuery('#divDatabaseUploadParameters').show();
-			}
-			else
+			},
+			onCancel: function(id, Filename)
 			{
-				doDatabaseUploadReset();
-				doDatabaseUploadStatusMsg('msgDatabaseUploadErrorOnUpload');
 			}
-		},
-		onCancel: function(id, Filename)
-		{
-		}
+		});
 	});
 	jQuery('#divFileUploaderControl .qq-upload-button-text').html(jQuery('#msgDatabaseUploadChooseFile').val());
 	jQuery('#divFileUploaderControl .qq-upload-list').hide();
 
 	jQuery('#btnDatabaseUploadCancel').click(function() {
-		doDatabaseUploadReset();
+		doDatabaseUploadReset(true);
 		uploader.cancel(jQuery('#txtDatabaseUploadId').val());
 	});
 } //doAdminDatabaseCreateUploader()
 
-function doDatabaseUploadReset()
+function doDatabaseUploadReset(prmShowRegionInfo)
 {
 	doAdminDatabaseCreateUploader();
 	doDatabaseUploadStatusMsg('');
@@ -195,7 +205,7 @@ function doDatabaseUploadReset()
 	jQuery('#divDatabaseUploadControl').hide();
 	jQuery('#divDatabaseUploadParameters').hide();
 
-	if (jQuery('#fldDatabaseUploadMode').val() == 'Copy')
+	if ( (jQuery('#fldDatabaseUploadMode').val() == 'Copy') || (prmShowRegionInfo == false) )
 	{
 		jQuery('#divDatabaseUploadControl').show();
 	}
@@ -288,6 +298,6 @@ function doDatabaseUploadShow(prmMode)
 		Ext.getCmp('wndDatabaseUpload').setTitle(jQuery('#mnuDatabaseReplace').text());
 	}
 	jQuery('.clsDatabaseUpload').hide();
-	doDatabaseUploadReset();
+	doDatabaseUploadReset(true);
 	Ext.getCmp('wndDatabaseUpload').show();
 } // doDatabaseUploadAction

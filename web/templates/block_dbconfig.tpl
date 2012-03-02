@@ -7,7 +7,7 @@
 				<a class="classDBConfig_tabs" href="#DBConfig_Geolevels" cmd="">{-#msgDBConfig_Geolevels#-}</a>
 			</li>
 			<li title="{-#msgGeography_Tooltip#-}">
-				<a class="classDBConfig_tabs" href="#DBConfig_tabs-3" cmd="cmdDBInfoGeography" data-url="{-$desinventarURL-}/geography.php">{-#mgeography#-}</a>
+				<a class="classDBConfig_tabs" href="#DBConfig_Geography" cmd="">{-#mgeography#-}</a>
 			</li>
 			<li>
 				<a class="classDBConfig_tabs" href="#DBConfig_Events" cmd="" >{-#msgDBConfig_Events#-}</a>
@@ -34,9 +34,10 @@
 				{-include file="database_geolevels.tpl"-}
 			</div>
 		</div>
-		<div id="DBConfig_tabs-3">
+		<div id="DBConfig_Geography">
 			<div class="helptext hidden">{-#msgGeolevels_HelpText#-}</div>
 			<div class="content">
+				{-include file="database_geography.tpl"-}
 			</div>
 		</div>
 		<div id="DBConfig_Events">

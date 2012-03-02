@@ -7,6 +7,8 @@ function onReadyMain()
 	onReadyDatabaseUpload();
 	onReadyDatabaseCreate();
 	onReadyDatabaseUsers();
+	onReadyQueryDesign();
+	onReadyGeography();
 	onReadyGeolevels();
 	onReadyDatabaseEvents();
 	onReadyAdminUsers();
@@ -50,7 +52,7 @@ function onReadyMain()
 					switch(myCmd)
 					{
 						case 'cmdGridShow':
-							onReadyData();
+							jQuery('body').trigger('cmdViewDataUpdate');
 						break;
 						case 'cmdMapShow':
 							createThematicMap();
@@ -71,6 +73,9 @@ function onReadyMain()
 
 	jQuery('#DBConfig_Geolevels').on('show', function() {
 		jQuery('body').trigger('cmdGeolevelsShow');
+	});
+	jQuery('#DBConfig_Geography').on('show', function() {
+		jQuery('body').trigger('cmdGeographyShow');
 	});
 
 	jQuery('#DBConfig_Events').on('show', function() {
@@ -112,7 +117,6 @@ function onReadyMain()
 						default:
 							onReadyDatabaseConfig();
 							onReadyExtraEffects();
-							onReadyDBConfigGeography();
 						break;
 					}
 				}
@@ -120,5 +124,38 @@ function onReadyMain()
 		}
 		return false;
 	});
+	jQuery('body').on('cmdDatabaseLoadData', function() {
+		doDatabaseLoadData();
+	});
+	jQuery('body').trigger('cmdDatabaseLoadData');
 } //onReadyMain()
 
+function doDatabaseLoadData()
+{
+	if (jQuery('#desinventarRegionId').val() != '')
+	{
+		jQuery.post(
+			jQuery('#desinventarURL').val() + '/',
+			{
+				cmd      : 'cmdDatabaseLoadData',
+				RegionId : jQuery('#desinventarRegionId').val()
+			},
+			function(data)
+			{
+				jQuery('body').data('GeolevelsList', data.GeolevelsList);
+				jQuery('body').data('EventList', data.EventList);
+				jQuery('body').data('CauseList', data.CauseList);
+				jQuery('body').data('RecordCount', data.RecordCount);
+				var dataItems = jQuery('body').data();
+				jQuery.each(dataItems, function(index, value) {
+					if (index.substr(0,13) === 'GeographyList')
+					{
+						jQuery('body').removeData(index);
+					}
+				});
+				jQuery('body').data('GeographyList', data.GeographyList);
+			},
+			'json'
+		);
+	}
+} //doDatabaseLoadData()

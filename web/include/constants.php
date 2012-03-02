@@ -66,6 +66,7 @@ define('ERR_USER_DUPLICATE_ID' , -100);
 define('ERR_WITH_WARNINGS'     , -101);
 define('ERR_LANGUAGE_NO_CHANGE', -120);
 define('ERR_LANGUAGE_INVALID'  , -121);
+define('ERR_INVALID_ZIPFILE'   , -130);
 
 // Graph Types
 define('GRAPH_HISTOGRAM_TEMPORAL'   , 0);
@@ -76,4 +77,6 @@ define('GRAPH_COMPARATIVE_EVENT'    , 3);
 define('GRAPH_COMPARATIVE_CAUSE'    , 4);
 define('GRAPH_COMPARATIVE_GEOGRAPHY', 200);
 
+define('GEOGRAPHY_ONLY_ACTIVE', true);
+define('GEOGRAPHY_ALL', false);
 </script>

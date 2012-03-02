@@ -40,7 +40,8 @@
 	<table style="width:930px;height:95%;" class="col">
 		<thead>
 			<tr>
-				<th class="header">{-#trow#-}
+				<th class="header">
+					{-#trow#-}
 				</th>
 				{-foreach name=sel key=key item=item from=$sel-}
 					<th class="header">
@@ -50,7 +51,7 @@
 									<a href="#" class="linkStatOrderColumn" altfield="{-$item-}" ordertype="ASC"><img src="{-$desinventarURL-}/images/asc.gif" border=0></a>
 								</td>
 								<td>
-									{-if $item =="DisasterId_"-}{-#trepnum#-}{-elseif $item != "DisasterId"-}{-$dk.$item-}{-/if-}
+									{-$dk.$item-}
 								</td>
 								<td>
 									<a href="#" class="linkStatOrderColumn" altfield="{-$item-}" ordertype="DESC"><img src="{-$desinventarURL-}/images/desc.gif" border=0></a>
@@ -100,7 +101,7 @@
 		</tbody>
 	</table>
 	<div style="display:none;">
-		<input type="hidden" id="prmStatRegionId"       value="{-$reg-}"  />
+		<input type="hidden" id="prmStatRegionId"       value="{-$RegionId-}"  />
 		<input type="hidden" id="prmStatRecordsPerPage" value="{-$rxp-}"  />
 		<input type="hidden" id="prmStatNumberOfPages"  value="{-$last-}" />
 		<input type="hidden" id="prmStatQueryDef"       value="{-$sql-}"  />

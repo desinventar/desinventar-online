@@ -2,7 +2,6 @@
 {-config_load file="$lg.conf" section="dc_qdetails"-}
 {-**** SHOW RESULTS ****-}
 {-if $ctl_showres-}
-	{-include file="maps_include.tpl"-}
 	<style type="text/css">
 		#map {	width: 100%; height: 100%; border: 1px solid black; }
 		#queryOut {	width:800px; height: 200px; border: 1px solid black;
@@ -21,7 +20,7 @@
 					<p align="right">{-#trepnum#-}: {-$MapNumberOfRecords-}</p>
 					<hr />
 					<h4 id="defaultMapTitle">{-#tmapof#-} {-$rgl[0].info.TITLE-}</h4>
-					<div align="justify" class="dwin" style="height:250px;">{-#lev#-}: {-$rgl[0].info.LEVEL-}; 
+					<div align="justify" class="QueryInfo dwin" style="height:250px;">{-#msgViewMap_Level#-}: {-$rgl[0].info.LEVEL-}; 
 						{-foreach key=k item=i from=$rgl[0].info-}
 							{-if $k == "GEO"-}<i>{-#geo#-}:</i> {-$i-}; {-/if-}
 							{-if $k == "EVE"-}<i>{-#eve#-}:</i> {-$i-}; {-/if-}
@@ -33,12 +32,12 @@
 							{-if $k == "SER"-}<i>{-#ser#-}:</i> {-$i-}; {-/if-}
 						{-/foreach-}
 						{-$rgl[0].regname-}
+					</div>					
+					<div class="GoogleEarth">
+						<hr />
+						<image src="{-$desinventarURL-}/images/ge_icon.png" /><a href="{-$desinventarURL-}/kml/{-$prmMapId-}/">{-#tgetgearth#-}</a>
 					</div>
 					<hr />
-					<!--
-					<image src="{-$desinventarURL-}/images/ge_icon.png" /><a href="{-$desinventarURL-}/thematicmap.php?r={-$reg-}&cmd=getkml">{-#tgetgearth#-}</a>
-					<hr />
-					-->
 					<img src="{-$legend-}" /><br />
 				</div>
 			</td>
@@ -51,6 +50,8 @@
 	</table>
 	<div style="display:none;">
 		<input type="hidden" id="prmMapRegionId" value="{-$reg-}"/>
+		<input type="hidden" id="prmMapId"       value="{-$prmMapId-}"/>
+		<input type="hidden" id="prmMapVarTitle" value="{-$rgl[0].info.TITLE-}" />
 		<input type="hidden" id="prmMapLat"      value="{-$lat-}"/>
 		<input type="hidden" id="prmMapLon"      value="{-$lon-}"/>
 		<input type="hidden" id="prmMapZoom"     value="{-$zoom-}"/>
@@ -60,6 +61,19 @@
 		<input type="hidden" id="prmMapMaxY"     value="{-$maxy-}"/>
 		<input type="hidden" id="prmMapServer"   value="{-$mps-}"/>
 		<input type="hidden" id="prmMapBase"     value="{-$basemap-}"/>
+		<form class="MapSave" method="post" action="">
+			<input type="hidden" class="Cmd"         name="cmd"                  value="export" />
+			<input type="hidden" class="Extent"      name="options[extent]"      value="" />
+			<input type="hidden" class="Layers"      name="options[layers]"      value="" />
+			<input type="hidden" class="Id"          name="options[id]"          value="{-$prmMapId-}" />
+			<input type="hidden" class="Title"       name="options[title]"       value="" />
+			<input type="hidden" class="RegionLabel" name="options[regionlabel]" value="{-$rgl[0].regname-}" />
+			<input type="hidden" class="LegendTitle" name="options[legendtitle]" value="{-$rgl[0].info.TITLE-}" />
+			<input type="hidden" class="Level"       name="options[info][level]"   value="{-#msgViewMap_Level#-} : {-$rgl[0].info.LEVEL-}"     />
+			<input type="hidden" class="Begin"       name="options[info][begin]"   value="{-#msgViewMap_From#-} : {-$rgl[0].info.BEG-}"        />
+			<input type="hidden" class="End"         name="options[info][end]"     value="{-#msgViewMap_Until#-} : {-$rgl[0].info.END-}"       />
+			<input type="hidden" class="Records"     name="options[info][records]" value="{-#msgViewMap_Records#-} : {-$rgl[0].info.RECORDS-}" />
+		</form>
 	</div>
 	<div id="MapEffectLayers" style="display:none;">
 		{-foreach name=rgl key=k item=i from=$rgl-}

@@ -14,6 +14,11 @@ function onReadyDBConfigGeography()
 		if (bContinue)
 		{
 			jQuery('#frmDBConfigGeographyEdit #RegionId').val(jQuery('#desinventarRegionId').val());
+			jQuery('#frmDBConfigGeographyEdit .GeographyActive').val(0);
+			if (jQuery('#frmDBConfigGeographyEdit .GeographyActiveCheckbox').is(':checked'))
+			{
+				jQuery('#frmDBConfigGeographyEdit .GeographyActive').val(1);
+			}
 			var params = jQuery(this).serialize();
 			jQuery.post(jQuery('#desinventarURL').val() + '/geography.php',
 				params,

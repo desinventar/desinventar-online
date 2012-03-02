@@ -7,7 +7,6 @@
 require_once('include/loader.php');
 require_once('include/diregion.class.php');
 require_once('include/graphic.class.php');
-
 $RegionId = getParameter('_REG','');
 if ($RegionId == '')
 {

@@ -133,6 +133,11 @@ class Graphic
 			}
 			$XAxisLabels = array_keys($val);
 		}
+		if ($this->sStat == 'MONTH')
+		{
+			//$XAxisLabels = array('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
+			$XAxisLabels = explode(',', $opc['prmGraph']['MonthNames']);
+		}
 		// Cummulative Graph : Add Values in Graph
 		if ($gType == 'TEMPO')
 		{
@@ -172,7 +177,7 @@ class Graphic
 		} //if
 		// Choose presentation options, borders, intervals
 		$ImgMarginLeft   = 50;
-		$ImgMarginTop    = 30;
+		$ImgMarginTop    =  8;
 		$ImgMarginRight  = 20;
 		$ImgMarginBottom = 85;
 		// calculate graphic size
@@ -218,20 +223,24 @@ class Graphic
 				if ($gType != 'XTEMPO')
 				{
 					// Return the width in pixels of the max value in series
-					$Y2AxisLabelLen = $this->getSeriesMaxLen($sY2AxisLabel);
+					$Y2AxisLabelLen = $this->getSeriesMaxLen($sY2AxisLabel) + 10;
 					$Y2AxisTitleMargin = $Y2AxisLabelLen + 15;
-					$ImgMarginRight = 30;
+					$ImgMarginRight = 0;
 					$ImgMarginRight += $Y2AxisTitleMargin;
-					
+
 					// Legend Box
-					$MaxLen = strlen($this->data[$sY1AxisLabel]);
-					$Len = strlen($this->data[$sY2AxisLabel]);
-					if ($Len > $MaxLen)
+					$iLen = $this->getTextWidth($sY1AxisLabel, 10);
+					$iLegendBoxWidth = $iLen;
+					$iLen = $this->getTextWidth($sY2AxisLabel, 10);
+					if ($iLen > $iLegendBoxWidth)
 					{
-						$MaxLen = $Len;
+						$iLegendBoxWidth = $iLen;
 					}
-					$LegendBoxWidth = $MaxLen * 10 + 80;
-					$ImgMarginRight += $LegendBoxWidth;
+					$iLegendBoxWidth += 40;
+					if ($iLegendBoxWidth > $ImgMarginRight)
+					{
+						$ImgMarginRight += $iLegendBoxWidth;
+					}
 				}
 				else
 				{
@@ -275,11 +284,17 @@ class Graphic
 				// by calculating the interval of the labels
 				$iNumPoints = count($val);		
 				$iInterval = ($iNumPoints * 12) / $wx;
+				$iInterval = ceil($iInterval);
 				if ($iInterval < 1)
 				{
 					$iInterval = 1;
 				}
 				$this->g->xaxis->SetTextLabelInterval($iInterval);
+				
+				if (isset($opc['prmGraph']['FieldLabel'][0]))
+				{
+					$sY1AxisLabel = $opc['prmGraph']['FieldLabel'][0];
+				}
 
 				$this->g->ygrid->Show(true,true);
 				$this->g->yaxis->SetTitle($sY1AxisLabel, 'middle');
@@ -293,6 +308,10 @@ class Graphic
 				}
 		        if (isset($opc['prmGraph']['Scale'][1]) && ($gType == '2TEMPO' || $gType == '2COMPAR'))
 		        {
+					if (isset($opc['prmGraph']['FieldLabel'][1]))
+					{
+						$sY2AxisLabel = $opc['prmGraph']['FieldLabel'][1];
+					}
 					$this->g->SetY2Scale($opc['prmGraph']['Scale'][1]);	// int, log
 					$this->g->y2grid->Show(true,true);
 					$this->g->y2axis->SetTitle($sY2AxisLabel, 'middle');
@@ -307,17 +326,31 @@ class Graphic
 		        }
 			} // if G+Scale
 		}
-		// Other options graphic
+
+		// Title and Subtitle of Graph
+		$sTitle    = wordwrap($opc['prmGraph']['Title'], 60);
+		$sSubTitle = wordwrap($opc['prmGraph']['SubTitle'], 60);
+		$this->g->title->Set($sTitle);
+		$this->g->subtitle->Set($sSubTitle);
+		$this->g->title->SetFont(FF_ARIAL,FS_NORMAL, 11);
+
+		// Other graph options
 		$this->g->img->SetMargin($ImgMarginLeft,$ImgMarginRight,$ImgMarginTop,$ImgMarginBottom);
-		$this->g->legend->SetAbsPos(5,5,'right','top');
-		//$this->g->legend->Pos(0.0, 0.1);
+		$this->g->SetFrame(false); // Draws a gray background and solid border
+		
+		// LegendBox Position and Options
 		$this->g->legend->SetFont(FF_ARIAL, FS_NORMAL, 10);
-		$this->g->SetFrame(false);
-		$title = wordwrap($opc['prmGraph']['Title'], 80);
-		$subti = wordwrap($opc['prmGraph']['SubTitle'], 100);
-		$this->g->title->Set($title);
-		$this->g->subtitle->Set($subti);
-		$this->g->title->SetFont(FF_ARIAL,FS_NORMAL, 12);
+		if ($kind == 'PIE')
+		{
+		}
+		else
+		{
+			$iLegendRight = 4;
+			$iLegendTop   = 4;
+			$this->g->legend->SetAbsPos($iLegendRight, $iLegendTop, 'right', 'top');
+		}
+		//$this->g->legend->Hide();
+
 		// Get color palette..
 		if (substr_count($opc['prmGraph']['VarList'], 'Event') > 0)
 		{
@@ -372,7 +405,23 @@ class Graphic
 				{
 					$zp = $this->bar($opc, $zo, '');
 					$y1 = $this->bar($opc, $val1, 'darkblue');
+					if ($opc['prmGraph']['Data'][0] == 'VALUE')
+					{
+						$y1->value->SetFont(FF_ARIAL, FS_NORMAL, 8);
+						$y1->value->SetFormat('%d');
+						$y1->value->SetAngle(90);
+						$y1->value->SetColor('black','darkred');
+						$y1->value->Show();
+					}
 					$y2 = $this->bar($opc, $val2, 'darkred');
+					if ($opc['prmGraph']['Data'][1] == 'VALUE')
+					{
+						$y2->value->SetFont(FF_ARIAL, FS_NORMAL, 8);
+						$y2->value->SetFormat('%d');
+						$y2->value->SetAngle(90);
+						$y2->value->SetColor('black','darkred');
+						$y2->value->Show();
+					}
 					$y1->SetLegend($sY1AxisLabel);
 					$y2->SetLegend($sY2AxisLabel);
 					$y1p = new GroupBarPlot(array($y1, $zp));
@@ -410,7 +459,7 @@ class Graphic
 							$n++;
 						}
 						$ylr = $this->line($opc, $linreg, 'dashed');
-						$ylr->SetLegend('Linear Regression');
+						$ylr->SetLegend($opc['prmGraph']['TendencyLabel'][0]);
 						$m[] = $ylr;
 					}
 				}
@@ -573,16 +622,24 @@ class Graphic
   
 	function completeWeekSeries($dateini, $dateend, $iYear, &$val)
 	{
-		$iWeekIni =  1;
-		$sDate = sprintf('%04d-12-31', $iYear);
-		$iWeekEnd = $this->getWeekOfYear($sDate);
-		if ($iYear == substr($dateini, 0, 4))
+		if ($this->sStat == 'WEEK')
 		{
-			$iWeekIni = $this->getWeekOfYear($dateini);
+			$iWeekIni = 1;
+			$iWeekEnd = 52;
 		}
-		if ($iYear == substr($dateend, 0, 4))
+		else
 		{
-			$iWeekEnd = $this->getWeekOfYear($dateend);
+			$iWeekIni =  1;
+			$sDate = sprintf('%04d-12-31', $iYear);
+			$iWeekEnd = $this->getWeekOfYear($sDate);
+			if ($iYear == substr($dateini, 0, 4))
+			{
+				$iWeekIni = $this->getWeekOfYear($dateini);
+			}
+			if ($iYear == substr($dateend, 0, 4))
+			{
+				$iWeekEnd = $this->getWeekOfYear($dateend);
+			}
 		}
 		for ($iWeek = $iWeekIni; $iWeek <= $iWeekEnd; $iWeek++)
 		{
@@ -676,7 +733,7 @@ class Graphic
 	}
                                                                                         
 	// Setting a PIE graphic
-	function pie ($opc, $axi, $pal)
+	function pie($opc, $axi, $pal)
 	{
 		if ($opc['prmGraph']['Feel'] == '3D')
 		{
@@ -703,7 +760,7 @@ class Graphic
 	}
   
 	// Setting a Bar Graphic
-	function bar ($opc, $axi, $color)
+	function bar($opc, $axi, $color)
 	{
 		$b = new BarPlot(array_values($axi));
 		// normal histogram..
@@ -736,7 +793,7 @@ class Graphic
 	{
 		$i = 0;
 		$lab = array_keys($val);
-		foreach ($val as $k=>$ele)
+		foreach($val as $k=>$ele)
 		{
 			$bar = $this->bar($opc, $ele, $pal[$i]);
 			$bar->SetLegend($lab[$i]);
@@ -756,7 +813,7 @@ class Graphic
 	}
 
 	// Setting a Line graphic
-	function line ($opc, $val, $col)
+	function line($opc, $val, $col)
 	{
 		$l = new LinePlot(array_values($val));
 		if ($col == 'dashed')
@@ -772,7 +829,7 @@ class Graphic
 	}
 
 	// Setting a Multiline graphic
-	function multiline ($opc, $val, $pal)
+	function multiline($opc, $val, $pal)
 	{
 		$i = 0;
 		$lab = array_keys($val);
@@ -795,7 +852,7 @@ class Graphic
 	}
 
 	// Generate colors from database attrib-color or generate fix palette..
-	function genPalette ($cnt, $mode, $evl, $qy)
+	function genPalette($cnt, $mode, $evl, $qy)
 	{
 		$pal = array();
 		if ($mode == DI_EVENT || $mode == DI_CAUSE)

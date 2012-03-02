@@ -153,7 +153,7 @@
 "Graph","DisasterBeginTime_DAY","23","Días","Days","Jours","Dias"," "," "," "," "," "," "," "," "," "," "," "," "
 "Graph","DisasterBeginTime_YMONTH","24","Año-Mes","Year-Month","Siècles","Séculos"," "," "," "," "," "," "," "," "," "," "," "," "
 "Graph","DisasterBeginTime_YWEEK","25","Año-Semana","Year-Week","XX","Qüinqüênios"," "," "," "," "," "," "," "," "," "," "," "," "
-"Graph","DisasterBeginTime_YDAY","26","Año -Día","Year-Day","Décennies","Décadas"," "," "," "," "," "," "," "," "," "," "," "," "
+"Graph","DisasterBeginTime_YDAY","26","Año-Mes-Día","Year-Month-Day","Années-Mois-Jours","Anos-Meses-Dias"," "," "," "," "," "," "," "," "," "," "," "," "
 "Graph","Month01","1","ene","jan","Janvier","jan"," "," "," "," "," "," "," "," "," "," "," "," "
 "Graph","Month02","2","feb","feb","Février","fev"," "," "," "," "," "," "," "," "," "," "," "," "
 "Graph","Month03","3","mar","mar","Mars","mar"," "," "," "," "," "," "," "," "," "," "," "," "

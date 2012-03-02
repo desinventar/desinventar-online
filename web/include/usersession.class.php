@@ -1203,7 +1203,7 @@ class UserSession {
 	public function getDisasterCount()
 	{
 		$iCount = 0;
-		$sQuery = "SELECT COUNT(DisasterId) AS C FROM Disaster";
+		$sQuery = 'SELECT COUNT(DisasterId) AS C FROM Disaster WHERE DisasterSerial<>"" AND RecordStatus<>"DELETED"';
 		foreach($this->q->dreg->query($sQuery) as $row)
 		{
 			$iCount = $row['C'];
@@ -1215,7 +1215,7 @@ class UserSession {
 	{
 		$DisasterId = '';
 		$prmRecord--;
-		$sQuery = "SELECT DisasterId FROM Disaster ORDER BY DisasterBeginTime,DisasterSerial LIMIT " . $prmRecord . ",1";
+		$sQuery = 'SELECT DisasterId FROM Disaster WHERE DisasterSerial<>"" ORDER BY DisasterBeginTime,DisasterSerial LIMIT ' . $prmRecord . ',1';
 		foreach($this->q->dreg->query($sQuery) as $row)
 		{
 			$DisasterId = $row['DisasterId'];
@@ -1292,39 +1292,48 @@ class UserSession {
 		return $sReturn;
 	}
 
-	public function getDateRange() {
-		$Role = $this->getUserRole();
+	public function getDateRange()
+	{
 		$StatusList = 'PUBLISHED';
-		if ($Role == 'ADMINREGION') { $StatusList = 'PUBLISHED READY DRAFT TRASH'; }
-		if ($Role == 'SUPERVISOR' ) { $StatusList = 'PUBLISHED READY DRAFT TRASH'; }
-		if ($Role == 'USER'       ) { $StatusList = 'PUBLISHED READY DRAFT'; }
-		if ($Role == 'OBSERVER'   ) { $StatusList = 'PUBLISHED READY DRAFT'; }
-
+		if ($this->UserRoleValue >= 2)
+		{
+			$StatusList = 'PUBLISHED READY DRAFT';
+		}
+		if ($this->UserRoleValue >= 4)
+		{
+			$StatusList = 'PUBLISHED READY DRAFT TRASH';
+		}
+		
 		$res = array();
 		$datemin = $this->getDBInfoValue('PeriodBeginDate');
 		$datemax = $this->getDBInfoValue('PeriodEndDate');
-		if (($datemin == '') || ($datemax == '')) {
+		if (($datemin == '') || ($datemax == ''))
+		{
 			$bFirst = true;
 			$statusQuery = '';
-			foreach(explode(' ',$StatusList) as $status) {
-				if (! $bFirst) {
+			foreach(explode(' ',$StatusList) as $status)
+			{
+				if (! $bFirst)
+				{
 					$statusQuery .= ',';
 				}
 				$statusQuery .= '"' . $status . '"';
 				$bFirst = false;
 			}
 			$statusQuery = 'RecordStatus IN (' . $statusQuery . ')';
-			$sql = "SELECT MIN(DisasterBeginTime) AS datemin, MAX(DisasterBeginTime) AS datemax FROM Disaster ".
-			"WHERE " . $statusQuery;
-			$r2 = $this->q->getresult($sql);
-			if ($datemin == '' ) { $datemin = $r2['datemin']; }
-			if ($datemax == '' ) { $datemax = $r2['datemax']; }
+			$sQuery = 'SELECT MIN(DisasterBeginTime) AS datemin, MAX(DisasterBeginTime) AS datemax FROM Disaster '.
+				'WHERE (DisasterBeginTime<>"") AND ' . $statusQuery;
+			foreach($this->q->dreg->query($sQuery, PDO::FETCH_ASSOC) as $row)
+			{
+				if ($datemin == '' ) { $datemin = $row['datemin']; }
+				if ($datemax == '' ) { $datemax = $row['datemax']; }
+			}
 		}
+		if ($datemin == '') { $datemin = date('Y-m-d'); }
+		if ($datemax == '') { $datemax = date('Y-m-d'); }
+		if ($datemin > $datemax) { $datemin = $datemax; }
 		$res[0] = substr($datemin, 0, 10);
 		$res[1] = substr($datemax, 0, 10);
-		
-		if (! $res[0]) { $res[0] = date('Y-m-d'); }
-		if (! $res[1]) { $res[1] = date('Y-m-d'); }
 		return $res;
 	} //function
 } //class

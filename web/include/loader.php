@@ -12,9 +12,9 @@ if (! isset($_SERVER['DESINVENTAR_WEB']))
 
 // This is the version of the software
 define('MAJORVERSION', '2012');
-define('MINORVERSION', '021.01');
+define('MINORVERSION', '059.05');
 define('VERSION'     , MAJORVERSION . '.' . MINORVERSION);
-define('JSVERSION'   , '2012-01-21.01');
+define('JSVERSION'   , '2012-02-28.05.03');
 
 $appOptions = array();
 $appOptions['UseRemoteMaps'] = 1;
@@ -59,10 +59,28 @@ if (isset($_SERVER['HTTP_HOST']))
 		define('MODE', 'online');
 		define('ARCH', 'LINUX');
 		define('MAPSERV', 'mapserv');
-		define('SMARTYDIR', '/usr/share/php/Smarty');
-		define('TEMP', '/var/tmp/desinventar');
+		$distro = 'linux';
+		if (file_exists('/usr/bin/lsb_release'))
+		{
+			$distro = strtolower(exec('/usr/bin/lsb_release -s -i'));
+		}
+		$_SERVER['DISTRO'] = $distro;
+
+		switch($distro)
+		{
+			case 'debian':
+				//smarty3 package location
+				define('SMARTYDIR', '/usr/share/php/smarty3');
+				$_SERVER['DESINVENTAR_CACHEDIR'] = '/var/cache/smarty3/desinventar';
+			break;
+			default:
+				define('SMARTYDIR', '/usr/share/php/Smarty');
+				$_SERVER['DESINVENTAR_CACHEDIR'] = '/var/cache/Smarty/desinventar';
+			break;
+		}
 		define('JPGRAPHDIR', '/usr/share/php/jpgraph');
 		define('FONTSET' , '/usr/share/fonts/liberation/fonts.txt');
+		define('TEMP', '/var/tmp/desinventar');
 		if (! isset($_SERVER['DESINVENTAR_WEB']))
 		{
 			$_SERVER['DESINVENTAR_WEB']      = '/usr/share/desinventar/web';
@@ -73,7 +91,6 @@ if (isset($_SERVER['HTTP_HOST']))
 			$_SERVER['DESINVENTAR_DATADIR']  = '/var/lib/desinventar';
 		}
 		$_SERVER['DESINVENTAR_MAPDIR'] = '/usr/share/desinventar/worldmap';
-		$_SERVER['DESINVENTAR_CACHEDIR'] = '/var/cache/Smarty/desinventar';
 	}
 }
 else
@@ -140,7 +157,6 @@ if (MODE != 'command')
 // information, even for anonymous users
 $us = new UserSession($SessionId);
 $us->awake();
-
 if (MODE != 'command')
 {
 	error_reporting(E_ALL && ~E_NOTICE);

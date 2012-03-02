@@ -49,10 +49,12 @@ function createThematicMap()
 	
 	// WMS Local Base Map
 	mapServer = jQuery('#prmMapServer').val();
-	var base = new OpenLayers.Layer.WMS("Local BaseMap",
-		"/cgi-bin/" + mapServer + "?", 
-		{ map:jQuery('#prmMapBase').val(), layers:'base', 'transparent':false, 'format':'png' },
-		{'isBaseLayer':true });
+	var base = new OpenLayers.Layer.WMS(
+		'Local BaseMap',
+		jQuery('#desinventarURL').val() + '/wms/',
+		{ },
+		{ isBaseLayer:true }
+	);
 	map.addLayer(base);
 
 	// Add Remote Layers	
@@ -83,26 +85,28 @@ function createThematicMap()
 		var LayerName = jQuery(this).find(':eq(2)').text().trim();
 		var layer = new OpenLayers.Layer.WMS(
 			'DesInventar/' + jQuery(this).find(':eq(0)').text(),
-			'/cgi-bin/' + jQuery('#prmMapServer').val() + '?',
-			{map         : MapFile,
-			 transparent : true,
-			 format      : 'png',
-			 layers      : LayerName
+			jQuery('#desinventarURL').val() + '/wms/' + jQuery('#prmMapId').val() + '/effects/',
+			{
+				format : 'png',
+				layers : 'effects'
 			},
-			{isBaseLayer :false
+			{
+				isBaseLayer :false
 			}
 		);
 		map.addLayer(layer);
 		jQuery('#MapAdminLayers div').each(function() {
+			var layername = jQuery(this).find(':eq(1)').text().trim();
 			var layer = new OpenLayers.Layer.WMS(
 				jQuery(this).find(':eq(0)').text(),
-				'/cgi-bin/' + jQuery('#prmMapServer').val() + "?", 
-				{map         : MapFile,
-				 transparent : true,
-				 format      : 'png',
-				 layers      : jQuery(this).find(':eq(1)').text().trim()
+				jQuery('#desinventarURL').val() + '/wms/' + jQuery('#prmMapId').val() + '/' + layername + '/',
+				{
+					format : 'png',
+					layers : layername
 				},
-				{isBaseLayer : false}
+				{
+					isBaseLayer : false
+				}
 			);
 			layer.setVisibility(false);
 			map.addLayer(layer);

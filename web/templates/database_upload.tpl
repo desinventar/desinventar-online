@@ -103,6 +103,7 @@
 		<input type="hidden" id="msgDatabaseUploadChooseFile" value="{-#msgDatabaseUploadChooseFile#-}" />
 		<span class="clsDatabaseUploadStatusMsg" id="msgDatabaseUploadUpdateOk">{-#msgDatabaseUploadUpdateOk#-}</span>
 		<span class="clsDatabaseUploadStatusMsg" id="msgDatabaseUploadErrorOnUpload"><b>{-#msgDatabaseUploadErrorOnUpload#-}</b></span>
+		<span class="clsDatabaseUploadStatusMsg" id="msgDatabaseUploadErrorNoInfo"><b>{-#msgDatabaseUploadErrorNoInfo#-}</b></span>
 		<span class="clsDatabaseUploadStatusMsg" id="msgDatabaseUploadUpdateError"><b>{-#msgDatabaseUploadUpdateError#-}</b></span>
 		<span class="clsDatabaseUploadStatusMsg" id="msgDatabaseUploadWaitForUpload">{-#msgDatabaseUploadWaitForUpload#-}<img src="{-$desinventarURL-}/images/loading.gif" alt="" /></span>
 		<span class="clsDatabaseUploadStatusMsg" id="msgDatabaseUploadWaitForUpdate">{-#msgDatabaseUploadWaitForUpdate#-}<img src="{-$desinventarURL-}/images/loading.gif" alt="" /></span>

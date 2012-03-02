@@ -8,6 +8,15 @@ if (isset($_SERVER["HTTP_HOST"])) {
 	} else {
 		// Running on a Linux Server
 		$FBCore = '/usr/share/pear/FirePHPCore/fb.php';
+		if (isset($_SERVER['DISTRO']))
+		{
+			switch($_SERVER['DISTRO'])
+			{
+				case 'debian':
+					$FBCore = '/usr/share/php/PEAR/FirePHPCore/fb.php';
+				break;
+			}
+		}
 	}
 
 	if (file_exists($FBCore)) {

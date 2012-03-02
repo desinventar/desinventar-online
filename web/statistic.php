@@ -8,15 +8,15 @@ require_once('include/diregion.class.php');
 
 $post = $_POST;
 
-$reg = getParameter('_REG', getParameter('r',''));
+$RegionId = getParameter('_REG', getParameter('r',''));
 
-if ($reg == '')
+if ($RegionId == '')
 {
 	exit();
 }
 
-$us->open($reg);
-$r = new DIRegion($us, $reg);
+$us->open($RegionId);
+$r = new DIRegion($us, $RegionId);
 $RegionLabel = $r->getRegionInfoValue('RegionLabel');
 fixPost($post);
 
@@ -30,9 +30,8 @@ $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Statistic', $lg));
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
 $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Sector', $lg));
 $dic = array_merge($dic, $us->q->getEEFieldList('True'));
-$t->assign('reg', $reg);
+$t->assign('RegionId', $RegionId);
 $t->assign('RegionLabel', $RegionLabel);
-
 // Data Options Interface
 if (isset($post['page']) || isset($post['_S+cmd']))
 {
@@ -62,21 +61,9 @@ if (isset($post['page']) || isset($post['_S+cmd']))
 		$tot 	= $c['counter'];
 		$geo	= $post['_S+showgeo'];
 		// Reuse calculate SQL values in all pages; calculate limits in pages
-		$levg = array();
-		if (isset($post['_S+Firstlev']) && !empty($post['_S+Firstlev']))
-		{
-			$levg[] = $post['_S+Firstlev'];
-		}
-		if (isset($post['_S+Secondlev']) && !empty($post['_S+Secondlev']))
-		{
-			$levg[] = $post['_S+Secondlev'];
-		}
-		if (isset($post['_S+Thirdlev']) && !empty($post['_S+Thirdlev']))
-		{
-			$levg[] = $post['_S+Thirdlev'];
-		}
+		$levg = $post['options']['group'];
 		$opc['Group'] = $levg;
-		$field = explode(',', $post['_S+Field']);
+		$field = explode(',', $post['options']['field']);
 		$opc['Field'] = $field;
 		$sql = $us->q->genSQLProcess($qd, $opc);
 		$cou = $us->q->getnumrows($sql);
@@ -197,6 +184,24 @@ if (isset($post['page']) || isset($post['_S+cmd']))
 				// Set translation in headers
 				$lb = '';
 				$sel = array_keys($dislist[0]);
+				$options = $post['options'];
+				$labels = array();
+				foreach($options['group'] as $key => $value)
+				{
+					if ($value != '')
+					{
+						array_push($labels, $options['grouplabel'][$key]);
+					}
+				}
+				$labels = array_merge($labels, explode(',', $options['fieldlabel']));
+				$iCount = 0;
+				foreach($sel as $kk=>$ii)
+				{
+					$dk[$ii] = $labels[$iCount];
+					$iCount++;
+				}
+				/*
+				// This is the old method for getting the columns translated
 				foreach ($sel as $kk=>$ii)
 				{
 					$i2 = substr($ii, 2);
@@ -221,15 +226,20 @@ if (isset($post['page']) || isset($post['_S+cmd']))
 					{
 						$dk[$ii] = $ii;		// no traduction..
 					}
+				}
+				*/
+				if (!empty($export))
+				{
 					$ColumnSeparator = "\t";
 					if ($export == 'csv')
 					{
 						$ColumnSeparator = ',';
 					}
-					$lb .= '"'. $dk[$ii] .'"' . $ColumnSeparator;
-				}
-				if (!empty($export))
-				{
+					$lb = '';
+					foreach($dk as $ii => $value)
+					{
+						$lb .= '"'. $value .'"' . $ColumnSeparator;
+					}
 					fwrite($fp, $lb ."\n");
 				}
 			}
@@ -241,7 +251,6 @@ if (isset($post['page']) || isset($post['_S+cmd']))
 		if (!empty($export))
 		{
 			fclose($fp);
-			//$sto = system('zip -q $stdpth.zip $stdpth.csv');
 			flush();
 			readfile($stdpth);
 			exit;

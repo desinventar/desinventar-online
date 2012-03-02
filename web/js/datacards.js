@@ -79,10 +79,6 @@ function onReadyDatacards()
 						break;
 					}
 				}
-				// clear Help text area
-				setTimeout(function() {
-					displayDatacardStatusMsg('');
-				}, 2500);
 				showtip('','#ffffff');
 			},
 			'json'
@@ -91,14 +87,14 @@ function onReadyDatacards()
 	});
 	
 	// Process combobox/input fields in effects
-	jQuery('.clsEffectNumeric').keypress(function(event) {
-		edit(event);
-	});
-	jQuery('.clsEffectNumeric').blur(function(event) {
-		this.editing=false;
-		if(parseInt(this.value) == 0)
-		{  
-			this.value = '0';
+	jQuery('.clsEffectNumeric').jec({
+		maxLength: 15,
+		focusONewOption: true,
+		acceptedKeys : [48,49,50,51,52,53,54,55,56,57,58]
+	}).blur(function() {
+		if (jQuery(this).val() == '')
+		{
+			jQuery(this).val(0);
 		}
 	});
 
@@ -237,6 +233,20 @@ function onReadyDatacards()
 
 	jQuery('.inputDouble').keydown(function(event) {
 		return blockChars(event, jQuery(this).val(), 'double:' + jQuery(this).attr('MaxLength'));
+	}).blur(function() {
+		/*
+		var answer = validateInputDouble(jQuery(this).val());
+		if (answer > 0)
+		{
+			jQuery(this).unhighlight();
+		}
+		else
+		{
+			jQuery(this).highlight();
+			jQuery(this).focus();
+		}
+		*/
+		return false;
 	});
 
 	jQuery('.inputText').keydown(function(event) {
@@ -346,11 +356,57 @@ function onReadyDatacards()
 		showtip('', '#fff');
 	});
 
+	// Dependency between fields
+	jQuery('#DICard').on('blur','#EffectRoads', function() {
+		var v = jQuery.trim(jQuery(this).val());
+		if ( (v != '') && (parseFloat(v) > 0) )
+		{
+			jQuery('#DICard #SectorTransport').val(-1);
+		}
+	});
+	jQuery('#DICard').on('blur','#EffectFarmingAndForest', function() {
+		var v = jQuery.trim(jQuery(this).val());
+		if ( (v != '') && (parseFloat(v) > 0) )
+		{
+			jQuery('#DICard #SectorAgricultural').val(-1);
+		}
+	});
+	jQuery('#DICard').on('blur','#EffectLiveStock', function() {
+		var v = jQuery.trim(jQuery(this).val());
+		if ( (v != '') && (parseFloat(v) > 0) )
+		{
+			jQuery('#DICard #SectorAgricultural').val(-1);
+		}
+	});
+	jQuery('#DICard').on('blur','#EffectEducationCenters', function() {
+		var v = jQuery.trim(jQuery(this).val());
+		if ( (v != '') && (parseFloat(v) > 0) )
+		{
+			jQuery('#DICard #SectorEducation').val(-1);
+		}
+	});
+	jQuery('#DICard').on('blur','#EffectMedicalCenters', function() {
+		var v = jQuery.trim(jQuery(this).val());
+		if ( (v != '') && (parseFloat(v) > 0) )
+		{
+			jQuery('#DICard #SectorHealth').val(-1);
+		}
+	});
+	jQuery('#DICard').on('blur','#EffectOtherLosses', function() {
+		if (jQuery.trim(jQuery(this).val()) != '')
+		{
+			jQuery('#DICard #SectorOther').val(-1);
+		}
+	});
+
 	// Attach events to main body
 	jQuery('body').on('cmdDatacardShow', function() {
 		doDatacardShow();
 	});
 
+	jQuery('body').on('cmdDatacardGoto', function(event, prmDisasterId, prmRecordNumber, prmRecordCount) {
+		setDICardFromId(jQuery('#desinventarRegionId').val(), prmDisasterId, prmRecordNumber, prmRecordCount);
+	});
 	//Initialize components
 	jQuery('#divDatacard .tblGeography tr:first').hide();
 } //onReadyDatacards()
@@ -374,40 +430,43 @@ function doUpdateGeoLevelSelect(prmGeographyLevel, prmGeographyList)
 
 function doDatacardShow()
 {
-	//GeoLevel
-	jQuery('#divDatacard .tblGeography tr:gt(0)').remove();
-	jQuery('#divDatacard .tblGeography tr:first').hide();
-	var GeolevelsList = jQuery('body').data('GeolevelsList');
-	if (GeolevelsList == undefined)
+	if (jQuery('#divDatacard').is(':hidden'))
 	{
-		jQuery.post(
-			jQuery('#desinventarURL').val() + '/',
-			{
-				cmd      : 'cmdDatabaseLoadData',
-				RegionId : jQuery('#desinventarRegionId').val()
-			},
-			function(data)
-			{
-				jQuery('body').data('GeolevelsList', data.GeolevelsList);
-				jQuery('body').data('EventList', data.EventList);
-				jQuery('body').data('CauseList', data.CauseList);
-				jQuery('body').data('RecordCount', data.RecordCount);
-				var dataItems = jQuery('body').data();
-				jQuery.each(dataItems, function(index, value) {
-					if (index.substr(0,13) === 'GeographyList')
-					{
-						jQuery('body').removeData(index);
-					}
-				});
-				jQuery('body').data('GeographyList', data.GeographyList);
-				doDatacardUpdateDisplay();
-			},
-			'json'
-		);
-	}
-	else
-	{
-		doDatacardUpdateDisplay();
+		//GeoLevel
+		jQuery('#divDatacard .tblGeography tr:gt(0)').remove();
+		jQuery('#divDatacard .tblGeography tr:first').hide();
+		var GeolevelsList = jQuery('body').data('GeolevelsList');
+		if (GeolevelsList == undefined)
+		{
+			jQuery.post(
+				jQuery('#desinventarURL').val() + '/',
+				{
+					cmd      : 'cmdDatabaseLoadData',
+					RegionId : jQuery('#desinventarRegionId').val()
+				},
+				function(data)
+				{
+					jQuery('body').data('GeolevelsList', data.GeolevelsList);
+					jQuery('body').data('EventList', data.EventList);
+					jQuery('body').data('CauseList', data.CauseList);
+					jQuery('body').data('RecordCount', data.RecordCount);
+					var dataItems = jQuery('body').data();
+					jQuery.each(dataItems, function(index, value) {
+						if (index.substr(0,13) === 'GeographyList')
+						{
+							jQuery('body').removeData(index);
+						}
+					});
+					jQuery('body').data('GeographyList', data.GeographyList);
+					doDatacardUpdateDisplay();
+				},
+				'json'
+			);
+		}
+		else
+		{
+			doDatacardUpdateDisplay();
+		}
 	}
 } //doDatacardShow()
 
@@ -716,10 +775,8 @@ function requestDatacard(myCmd, myValue)
 				displayDatacardStatusMsg('');
 				if (data.DisasterId != '')
 				{
-					jQuery('#cardsRecordNumber').val(data.RecordNumber);
-					jQuery('#cardsRecordCount').val(data.RecordCount);
 					jQuery('#cardsRecordSource').val('');
-					valid = setDICardFromId(RegionId, data.DisasterId);
+					valid = setDICardFromId(RegionId, data.DisasterId, data.RecordNumber, data.RecordCount);
 					
 					if (jQuery('#desinventarUserRoleValue').val() >= 2)
 					{
@@ -761,10 +818,21 @@ function doDatacardClear()
 	jQuery('#DisasterId').val();
 	$('DICard').reset();
 	jQuery('#_CMD').val('insertDICard');
-	jQuery('#DisasterBeginTime0').val('');
-	jQuery('#DisasterBeginTime1').val('');
-	jQuery('#DisasterBeginTime2').val('');
 	jQuery('#cardsRecordNumber').val(0);
+	jQuery('#DICard .clsEffectNumeric').each(function() {
+		jQuery(this).jecValue('');
+		jQuery(this).val(0);
+	});
+	jQuery('#DICard .inputDouble').each(function() {
+		jQuery(this).val(0);
+	});
+	jQuery('#DICard .inputInteger').each(function() {
+		jQuery(this).val(0);
+	});
+	jQuery('#DICard #DisasterBeginTime0').val('');
+	jQuery('#DICard #DisasterBeginTime1').val('');
+	jQuery('#DICard #DisasterBeginTime2').val('');
+	jQuery('#DICard #EventDuration').val(0);
 }
 
 function doDatacardNew()
@@ -780,7 +848,7 @@ function doDatacardNew()
 function doDatacardEdit()
 {
 	displayDatacardStatusMsg('');
-	RegionId = jQuery('#desinventarRegionId').val();
+	var RegionId = jQuery('#desinventarRegionId').val();
 	jQuery.post(jQuery('#desinventarURL').val() + '/cards.php',
 		{
 			'cmd'        : 'chklocked',
@@ -812,77 +880,105 @@ function doDatacardEdit()
 
 function doDatacardSave()
 {
-	var bContinue = true;
+	var bContinue = 1;
 	var cmd = jQuery('#_CMD').val();
 	var DisasterSerial = jQuery('#DisasterSerial').val();
 	var PrevDisasterSerial = jQuery('#PrevDisasterSerial').val();
 	var Status = jQuery('#DICard #Status').val();
 
-	if (bContinue)
+	if (bContinue > 0)
+	{
+		var error_count = 0;
+		var answer = 1;
+		jQuery('#DICard .inputDouble').each(function() {
+			answer = validateInputDouble(jQuery(this).val());
+			if (answer > 0)
+			{
+				if (jQuery(this).attr('old-bg-color') != '') {
+					jQuery(this).unhighlight();
+				}
+			}
+			else
+			{
+				jQuery(this).highlight();
+				error_count++;
+			}
+		});
+		if (error_count > 0)
+		{
+			bContinue = 0;
+			displayDatacardStatusMsg('msgDatacardInvalidNumber');
+		}
+	}	
+
+	if (bContinue > 0)
 	{
 		// Validate Record Status
-		if (jQuery('#RecordStatus').val() == '')
+		if (jQuery('#DICard #RecordStatus').val() == '')
 		{
-			displayDatacardStatusMsg('msgDatacardInvalidStatus');
-			jQuery('#RecordStatus').highlight().focus();
-			bContinue = false;
+			displayDatacardStatusMsg('msgDatacardWithoutStatus');
+			jQuery('#DICard #RecordStatus').highlight().focus();
+			bContinue = 0;
 		}
 	}
 	
-	if (bContinue)
+	if (bContinue > 0)
 	{
-		if (jQuery('#RecordStatus').val() == 'PUBLISHED')
+		if (jQuery('#DICard #RecordStatus').val() == 'PUBLISHED')
 		{
+			jQuery('#DICard #DisasterSource').unhighlight();
+			jQuery('#DICard #RecordStatus').unhighlight();
 			var DisasterSource = jQuery('#DICard #DisasterSource').val();
 			DisasterSource = jQuery.trim(DisasterSource);
 			if (DisasterSource == '')
 			{
 				displayDatacardStatusMsg('msgDatacardWithoutSource');
-				jQuery('#RecordStatus').highlight().focus();
-				bContinue = false;
+				jQuery('#DICard #DisasterSource').highlight().focus();
+				jQuery('#DICard #RecordStatus').highlight();
+				bContinue = 0;
 			}
 		}
 	}
 	
-	if (bContinue)
+	if (bContinue > 0)
 	{
 		// Validate Record Status
-		if ( (jQuery('#RecordStatus').val() == 'PUBLISHED') ||
-		     (jQuery('#RecordStatus').val() == 'DELETED'  ) )
+		if ( (jQuery('#DICard #RecordStatus').val() == 'PUBLISHED') ||
+		     (jQuery('#DICard #RecordStatus').val() == 'DELETED'  ) )
 		{
 			if (jQuery('#desinventarUserRoleValue').val() <= 2)
 			{
 				displayDatacardStatusMsg('msgDatacardInvalidStatus');
-				jQuery('#RecordStatus').highlight().focus();
-				bContinue = false;
+				jQuery('#DICard #RecordStatus').highlight().focus();
+				bContinue = 0;
 			}
 		}
 	}
 	
-	if (bContinue && jQuery('#GeographyId').val() == '')
+	if ( (bContinue > 0) && (jQuery('#GeographyId').val() == '') )
 	{
 		displayDatacardStatusMsg('msgDatacardInvalidGeography');
 		jQuery('.GeoLevelSelect').highlight();
 		jQuery('#GeoLevel0').focus();
-		bContinue = false;
+		bContinue = 0;
 	}
 
 	jQuery('#DICard #EventId').unhighlight();
-	if (bContinue && jQuery('#DICard #EventId').val() == '')
+	if ( (bContinue > 0) && (jQuery('#DICard #EventId').val() == '') )
 	{
 		jQuery('#DICard #EventId').highlight().focus();
-		bContinue = false;
+		bContinue = 0;
 	}
 
 	jQuery('#DICard #CauseId').unhighlight();
-	if (bContinue && jQuery('#DICard #CauseId').val() == '')
+	if ( (bContinue > 0) && (jQuery('#DICard #CauseId').val() == '') )
 	{
 		jQuery('#DICard #CauseId').highlight().focus();
-		bContinue = false;
+		bContinue = 0;
 	}
-	
+
 	// Use AJAX to save datacard
-	if (bContinue)
+	if (bContinue > 0)
 	{
 		if (jQuery('#DICard #Status').val() == 'SAVING')
 		{
@@ -899,27 +995,27 @@ function doDatacardSave()
 				},
 				function(data)
 				{
-					bContinue = true;
+					bContinue = 1;
 					if ( (cmd == 'insertDICard') && (data.DisasterSerial != '') )
 					{
 						// Serial of new datacard already exists...
-						bContinue = false;
+						bContinue = 0;
 					}
 					if (cmd == 'updateDICard')
 					{
 						if ( (DisasterSerial != PrevDisasterSerial) && (data.DisasterSerial != '') )
 						{
 							// Edited Serial exists in database...
-							bContinue = false;
+							bContinue = 0;
 						}
 					}
-					if (bContinue == false)
+					if (bContinue < 1)
 					{
 						displayDatacardStatusMsg('msgDatacardDuplicatedSerial');
 						jQuery('#DICard #Status').val(Status);
 						jQuery('#DICard #DisasterSerial').highlight().focus();
 					}
-					if (bContinue)
+					if (bContinue > 0)
 					{
 						//'DisasterSource', 
 						var fl = new Array('DisasterSerial', 'DisasterBeginTime0', 
@@ -959,7 +1055,7 @@ function doDatacardCancel()
 				// clear Help text area
 				showtip('','#ffffff');
 
-				valid = setDICardFromId(jQuery('#desinventarRegionId').val(), jQuery('#DisasterId').val());
+				valid = setDICardFromId(jQuery('#desinventarRegionId').val(), jQuery('#DisasterId').val(), jQuery('#cardsRecordNumber').val(), jQuery('#cardsRecordCount').val());
 				if (jQuery('#desinventarUserRoleValue').val() >= 2)
 				{
 					disenabutton($('btnDatacardEdit'), false);
@@ -991,8 +1087,7 @@ function doDatacardGotoFirst()
 	{
 		var RecordNumber = 1;
 		var DisasterId = jQuery('.linkGridGotoCard[rowindex=' + RecordNumber + ']').attr('DisasterId');
-		jQuery('#cardsRecordNumber').val(RecordNumber);
-		valid = setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId);
+		valid = setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId, RecordNumber, jQuery('#cardsRecordCount').val());
 	}
 	else
 	{
@@ -1011,8 +1106,7 @@ function doDatacardGotoLast()
 	{
 		var RecordCount = parseInt(jQuery('#cardsRecordCount').val());
 		var DisasterId = jQuery('.linkGridGotoCard[rowindex=' + RecordCount + ']').attr('DisasterId');
-		jQuery('#cardsRecordNumber').val(RecordCount);
-		valid = setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId);
+		valid = setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId, RecordCount, RecordCount);
 	}
 	else
 	{
@@ -1034,8 +1128,7 @@ function doDatacardGotoPrev()
 		{
 			RecordNumber--;
 			var DisasterId = jQuery('.linkGridGotoCard[rowindex=' + RecordNumber + ']').attr('DisasterId');
-			jQuery('#cardsRecordNumber').val(RecordNumber);
-			valid = setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId);
+			valid = setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId, RecordNumber, jQuery('#cardsRecordCount').val());
 		}
 	}
 	else
@@ -1062,8 +1155,7 @@ function doDatacardGotoNext()
 		{
 			RecordNumber = RecordNumber + 1;
 			var DisasterId = jQuery('.linkGridGotoCard[rowindex=' + RecordNumber + ']').attr('DisasterId');
-			jQuery('#cardsRecordNumber').val(RecordNumber);
-			valid = setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId);
+			valid = setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId, RecordNumber, jQuery('#cardsRecordCount').val());
 		}
 	}
 	else
@@ -1119,16 +1211,21 @@ function setElementValue(formElement, value)
 	}
 } //setElementValue()
 
-function setDICardFromId(prmRegionId, prmDisasterId)
+function setDICardFromId(prmRegionId, prmDisasterId, prmRecordNumber, prmRecordCount)
 {
+	jQuery('#cardsRecordNumber').val(prmRecordNumber);
+	jQuery('#cardsRecordCount').val(prmRecordCount);
 	jQuery.post(jQuery('#desinventarURL').val() + '/cards.php',
 		{
-			'cmd' : 'getDatacard',
-			'RegionId' : prmRegionId,
-			'DisasterId' : prmDisasterId
+			'cmd'       : 'getDatacard',
+			'RegionId'  : prmRegionId,
+			'DisasterId': prmDisasterId
 		},
 		function(data)
 		{
+			jQuery('#DICard .clsEffectNumeric').each(function() {
+				jQuery(this).jecValue(data[jQuery(this).attr('id')]);
+			});
 			setDICard(prmRegionId, data);
 			jQuery('#divRecordNavigationInfo').hide();
 			var RecordNumber = parseInt(jQuery('#cardsRecordNumber').val());
@@ -1198,3 +1295,52 @@ function setDICard(prmRegionId, arr)
 		disenabutton($('btnDatacardEdit'), false);
 	}
 } //setDICard
+
+function validateInputDouble(prmValue)
+{
+	var answer = 1;
+	var value = prmValue;
+	if (isNaN(value))
+	{
+		answer = 0;
+	}
+	if (value == '')
+	{
+		answer = 0;
+	}
+	if (answer > 0)
+	{
+		if (occurrences(value, ',') > 0)
+		{
+			answer = 0;
+		}
+	}
+	if (answer > 0)
+	{
+		if (occurrences(value, '.') > 1)
+		{
+			answer = 0;
+		}
+	}
+	return(answer);
+}
+
+function occurrences(string, substring)
+{
+	var n=0;
+	var pos=0;
+	while(true)
+	{
+		pos=string.indexOf(substring,pos);
+		if (pos!=-1)
+		{
+			n++;
+			pos+=substring.length;
+		}
+		else
+		{
+			break;
+		}
+	}
+	return(n);
+}

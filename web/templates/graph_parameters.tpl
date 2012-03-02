@@ -1,3 +1,4 @@
+{-config_load file="$lg.conf" section="grpGraphParams"-}
 <!-- BEGIN GRAPHIC PARAMETERS -->
 <div id="divGraphParameters" class="x-hidden">
 	<span id="msgViewGraphButtonClear" style="display:none;">{-#tclear#-}</span>
@@ -7,7 +8,7 @@
 		{-#msgViewGraph#-}
 	</div>
 	<div id="grp-cfg">
-		<form id="CG" method="post" action="">
+		<form id="frmGraphParams" method="post" action="">
 			<table class="conf" cellpadding=1 cellspacing=1>
 			<tr valign="top">
 				<td colspan=3 align="center">
@@ -19,6 +20,7 @@
 				<td id="tdGraphParamAxis1" align="right">
 					<u>{-#gveraxis#-} 1:</u><br />
 					<b><span help_tip="{-$dic.GraphField[2]-}">{-$dic.GraphField[0]-}</span></b><br />
+					<input id="prmGraphFieldLabel0" name="prmGraph[FieldLabel][0]" type="hidden" value="" />
 					<select id="prmGraphField0" name="prmGraph[Field][0]" help_tip="{-$dic.GraphField[2]-}" class="line">
 						<option value="D.DisasterId||" selected>{-$dic.GraphDisasterId_[0]-}</option>
 					{-foreach name=ef1 key=k item=i from=$ef1-}
@@ -63,6 +65,7 @@
 					</select>
 					<br />
 					<b>{-#gtendline#-}</b><br/>
+					<input class="TendencyLabel0" name="prmGraph[TendencyLabel][0]" type="hidden" value="" />
 					<select id="prmGraphTendency0" name="prmGraph[Tendency][0]" class="line">
 						<option value="" selected></option>
 						<option value="LINREG">{-#glinearreg#-}</option>
@@ -91,6 +94,7 @@
 					<div id="divVerticalAxis2">
 						<u>{-#gveraxis#-} 2:</u><br />
 						<b help_tip="{-$dic.GraphField[2]-}">{-$dic.GraphField[0]-}</b><br />
+						<input id="prmGraphFieldLabel1" type="hidden" name="prmGraph[FieldLabel][1]" value="" />
 						<select id="prmGraphField1" name="prmGraph[Field][1]" size="1" help_tip="{-$dic.GraphField[2]-}"
 							 class="line">
 							<option value="" selected></option>
@@ -212,9 +216,10 @@
 				<td></td>
 			</tr>
 			</table>
-			<input type="hidden" id="prmGraphCommand" name="prmGraph[Command]"  value="result" />
-			<input type="hidden" id="prmGraphType"    name="prmGraph[Type]"     value="" />
-			<input type="hidden" id="prmGraphSubType" name="prmGraph[SubType]" value="D.DisasterBeginTime" />
+			<input type="hidden" id="prmGraphCommand"    name="prmGraph[Command]"  value="result" />
+			<input type="hidden" id="prmGraphType"       name="prmGraph[Type]"     value="" />
+			<input type="hidden" id="prmGraphSubType"    name="prmGraph[SubType]" value="D.DisasterBeginTime" />
+			<input type="hidden" id="prmGraphMonthNames" name="prmGraph[MonthNames]" value="{-#msgMonth_01#-},{-#msgMonth_02#-},{-#msgMonth_03#-},{-#msgMonth_04#-},{-#msgMonth_05#-},{-#msgMonth_06#-},{-#msgMonth_07#-},{-#msgMonth_08#-},{-#msgMonth_09#-},{-#msgMonth_10#-},{-#msgMonth_11#-},{-#msgMonth_12#-}" />
 		</form>
 	</div>
 </div>
