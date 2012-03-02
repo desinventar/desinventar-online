@@ -29,6 +29,7 @@
 					<span class="datacardStatusMsg" id="msgDatacardFound">{-#msgDatacardFound#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardNotFound">{-#msgDatacardNotFound#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardInvalidNumber">{-#msgDatacardInvalidNumber#-}</span>
+					<span class="datacardStatusMsg" id="msgDatacardWithoutStatus">{-#msgDatacardWithoutStatus#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardInvalidStatus">{-#msgDatacardInvalidStatus#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardWithoutSource">{-#msgDatacardWithoutSource#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardInvalidGeography">{-#msgDatacardInvalidGeography#-}</span>
@@ -326,7 +327,7 @@
 									{-/if-}
 									<input type="text" id="{-$key-}" name="{-$key-}" size="30"
 										class="line {-$inputClass-}" tabindex="{-$MyTabIndex-}"
-										onFocus="showtip('{-$item[1]-}', '#f1bd41')" />
+										onFocus="showtip('{-$item[1]-}', '#f1bd41')" value="0" />
 									{-counter-}
 								</td>
 							{-if ($smarty.foreach.eefl.iteration ) % 3 == 0-}
