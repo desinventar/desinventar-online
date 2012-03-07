@@ -73,7 +73,9 @@
 								</td>
 							{-else-}
 								{-$cellClass=""-}
-								{-if $field_id=="DisasterSerial" || $field_id=="DisasterBeginTime" || $field_id=="EventName" || $field_id=="GeographyFQName" || 
+								{-if $field_id=="DisasterSerial" || $field_id=="DisasterBeginTime"-}
+									{-$cellClass="GridCellText nowrap"-}
+								{-elseif $field_id=="EventName" || $field_id=="GeographyFQName" || 
 									 $field_id=="DisasterSiteNotes" || $field_id=="DisasterSource" || $field_id=="EffectNotes" || $field_id=="EffectOtherLosses" || $field_id=="CauseName" || $field_id=="CauseNotes"-}
 								 	{-$cellClass="GridCellText"-}
 								{-else-}

@@ -468,6 +468,17 @@ function doDatacardShow()
 			doDatacardUpdateDisplay();
 		}
 	}
+	var UserRoleValue = jQuery('#desinventarUserRoleValue').val();
+	if (UserRoleValue <= 2)
+	{
+		jQuery('#DICard select.RecordStatus option[value="PUBLISHED"]').disable();
+		jQuery('#DICard select.RecordStatus option[value="DELETED"]').disable();
+	}
+	else
+	{
+		jQuery('#DICard select.RecordStatus option[value="PUBLISHED"]').enable();
+		jQuery('#DICard select.RecordStatus option[value="DELETED"]').enable();
+	}
 } //doDatacardShow()
 
 function doDatacardUpdateDisplay()
