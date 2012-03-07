@@ -99,7 +99,7 @@
 							<td>
 								{-#msgDatacard_RecordStatus#-}<b class="required">*</b><br />
 								<select name="RecordStatus" id="RecordStatus"  title="{-$LabelsRecord1.RecordStatus[1]-}"
-									class="line" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsRecord1.RecordStatus[1]-}', '')">
+									class="line RecordStatus" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsRecord1.RecordStatus[1]-}', '')">
 									<option value=""></option>
 									<option value="PUBLISHED">{-#tstatpublished#-}</option>
 									<option value="READY"    >{-#tstatready#-}</option>

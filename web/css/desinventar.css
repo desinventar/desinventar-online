@@ -335,3 +335,6 @@ div.QueryDesign .fieldLabel {
 div.QueryDesign select.Event {
 	max-width:400px;
 }
+.nowrap {
+	white-space: nowrap;
+}
