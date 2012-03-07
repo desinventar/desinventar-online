@@ -112,6 +112,20 @@ else
 	}
 	define('TEMP', '/var/tmp/desinventar');
 }
+
+// DesInventar Mode
+// normal (production, cache enabled etc.)
+// devel  (development, no cache, etc.)
+$desinventarMode = 'normal';
+if (isset($_SERVER['REDIRECT_DESINVENTAR_MODE']))
+{
+	$_SERVER['DESINVENTAR_MODE'] = $_SERVER['REDIRECT_DESINVENTAR_MODE'];
+}
+if (isset($_SERVER['DESINVENTAR_MODE']))
+{
+	$desinventarMode = $_SERVER['DESINVENTAR_MODE'];
+}
+
 define('BASE'    , $_SERVER['DESINVENTAR_WEB']);
 define('WWWDIR'  , $_SERVER['DESINVENTAR_WWWDIR']);
 define('WWWDATA' , '/desinventar-data');
@@ -257,6 +271,7 @@ if (MODE != 'command')
 	}
 	
 	// General Information (common to portal/app)
+	$t->assign('desinventarMode'        , $desinventarMode);
 	$t->assign('desinventarURL'         , $desinventarURL);
 	$t->assign('desinventarURLPortal'   , $desinventarURLPortal);
 	$t->assign('desinventarVersion'     , VERSION);

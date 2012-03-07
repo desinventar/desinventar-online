@@ -28,8 +28,11 @@
 		<script type="text/javascript" src="{-$desinventarURL-}/external/Math.uuid.js"></script>
 
 		<script type="text/javascript" src="/fileuploader/fileuploader.js"></script>
-		<script type="text/javascript" src="{-$desinventarURL-}/js/desinventar-all.js?version={-$jsversion-}"></script>
-		{-*include file="js.tpl"*-}
+		{-if $desinventarMode=='normal'-}
+			<script type="text/javascript" src="{-$desinventarURL-}/js/desinventar-all.js?version={-$jsversion-}"></script>
+		{-else-}
+			{-include file="js.tpl"-}
+		{-/if-}
 
 		{-include file="maps_include.tpl"-}
 		{-if $appOptions.UseRemoteMaps > 0-}
