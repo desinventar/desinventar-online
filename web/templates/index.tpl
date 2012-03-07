@@ -11,7 +11,7 @@
 		<!-- ExtJS -->
 		{-include file="extjs.tpl"-}
 
-		<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/desinventar.css?version={-$jsversion-}" />
+		<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/{-$jsversion-}/desinventar.css" />
 
 		<script type="text/javascript" src="{-$desinventarURL-}/external/json2.js"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/external/form2js.js"></script>
@@ -28,7 +28,7 @@
 
 		<script type="text/javascript" src="/fileuploader/fileuploader.js"></script>
 		{-if $desinventarMode=='normal'-}
-			<script type="text/javascript" src="{-$desinventarURL-}/js/desinventar-all.js?version={-$jsversion-}"></script>
+			<script type="text/javascript" src="{-$desinventarURL-}/js/{-$jsversion-}/desinventar-all.js"></script>
 		{-else-}
 			{-include file="js.tpl"-}
 		{-/if-}

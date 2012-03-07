@@ -17,6 +17,8 @@ RewriteRule ^wms/([a-zA-Z0-9\-\._]+)/(.+)/$   mapserver.php?MAPID=$1&LAYERS=$2 [
 RewriteRule ^admin[/]*$       index.php?cmd=cmdAdminMain
 RewriteRule ^admin/users[/]*$ index.php?cmd=cmdAdminUsers
 RewriteRule ^admin/db[/]*$    index.php?cmd=cmdAdminDB
+RewriteRule ^js/(.*)/(.*).js  js/$2.js
+RewriteRule ^css/(.*)/(.*).css  css/$2.css
 #
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
