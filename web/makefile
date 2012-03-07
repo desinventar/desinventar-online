@@ -1,7 +1,7 @@
-all : desinventar-all.js
+all : desinventar.js
 
-desinventar-all.js : js/*.js
-	cd js && rm desinventar-all.js && (cat *.js > desinventar-all.js)
+desinventar.js : js/*.js
+	cd js && rm desinventar.js && (cat *.js > desinventar.js)
 
 %.js %.css:
 	@
