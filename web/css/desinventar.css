@@ -1,29 +1,29 @@
 .bnew {
-	background-image: url(../../images/newicon.png) !important;
+	background-image: url(../images/newicon.png) !important;
 	background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
 }
 .bupd {
-	background-image: url(../../images/updateicon.png) !important;
+	background-image: url(../images/updateicon.png) !important;
 	background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
 }
 .bcancel {
-	background-image: url(../../images/cancelicon.png) !important; 
+	background-image: url(../images/cancelicon.png) !important; 
 	background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
 }
 .bclear {
-	background-image: url(../../images/cleanicon.png) !important; 
+	background-image: url(../images/cleanicon.png) !important; 
 	background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
 }
 .bfind {
-	background-image: url(../../images/findicon.png) !important;
+	background-image: url(../images/findicon.png) !important;
 	background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
 }
 .bsave {
-	background-image: url(../../images/saveicon.png) !important;
+	background-image: url(../images/saveicon.png) !important;
 	background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
 }
 .bprint {
-	background-image: url(../../images/printicon.png) !important;
+	background-image: url(../images/printicon.png) !important;
 	background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
 }
 #loading-mask {
@@ -45,7 +45,7 @@
   margin:   -35px 0 0 -30px;
 }
 #loading .loading-indicator {
-  background: url(../../images/loading.gif) no-repeat;
+  background: url(../images/loading.gif) no-repeat;
   color:      #555;
   font:       bold 13px tahoma,arial,helvetica;
   padding:    8px 42px;
@@ -61,7 +61,7 @@
 	width:100%;
 	height:100%;
 	background-color:white;
-	background: url(../../images/loading.gif) center center no-repeat;
+	background: url(../images/loading.gif) center center no-repeat;
 }
 
 button {
@@ -76,7 +76,7 @@ button {
 	overflow:visible;
 }
 button.rounded {
-	background: transparent url(../../images/bright_off.png ) no-repeat scroll right top;
+	background: transparent url(../images/bright_off.png ) no-repeat scroll right top;
 	clear: left;
 }
 button span {
@@ -88,13 +88,13 @@ button span {
 	line-height: 24px;
 }
 button.rounded span {
-	background: transparent url(../../images/bleft_off.png ) no-repeat scroll left top;
+	background: transparent url(../images/bleft_off.png ) no-repeat scroll left top;
 }
 button.rounded:hover {
-	background: transparent url(../../images/bright_on.png ) no-repeat scroll right top;
+	background: transparent url(../images/bright_on.png ) no-repeat scroll right top;
 }
 button.rounded:hover span {
-	background: transparent url(../../images/bleft_on.png ) no-repeat scroll left top;
+	background: transparent url(../images/bleft_on.png ) no-repeat scroll left top;
 }
 button::-moz-focus-inner {
 	border: none;
@@ -137,7 +137,7 @@ div.hidden {
 }
 
 a.button {
-	background: transparent url('../../images/bg_button_a.gif') no-repeat scroll top right;
+	background: transparent url('../images/bg_button_a.gif') no-repeat scroll top right;
 	color: #444;
 	display: block;
 	float: left;
@@ -149,7 +149,7 @@ a.button {
 }
 
 a.button span {
-	background: transparent url('../../images/bg_button_span.gif') no-repeat;
+	background: transparent url('../images/bg_button_span.gif') no-repeat;
 	display: block;
 	line-height: 14px;
 	padding: 5px 0 5px 18px;
