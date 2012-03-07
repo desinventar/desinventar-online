@@ -1,3 +1,180 @@
+.bnew {
+	background-image: url(../images/newicon.png) !important;
+	background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
+}
+.bupd {
+	background-image: url(../images/updateicon.png) !important;
+	background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
+}
+.bcancel {
+	background-image: url(../images/cancelicon.png) !important; 
+	background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
+}
+.bclear {
+	background-image: url(../images/cleanicon.png) !important; 
+	background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
+}
+.bfind {
+	background-image: url(../images/findicon.png) !important;
+	background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
+}
+.bsave {
+	background-image: url(../images/saveicon.png) !important;
+	background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
+}
+.bprint {
+	background-image: url(../images/printicon.png) !important;
+	background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
+}
+#loading-mask {
+  position: absolute;
+  left:     0;
+  top:      0;
+  width:    100%;
+  height:   100%;
+  z-index:  20000;
+  background-color: white;
+}
+#loading {
+  position: absolute;
+  left:     50%;
+  top:      50%;
+  padding:  2px;
+  z-index:  20001;
+  height:   auto;
+  margin:   -35px 0 0 -30px;
+}
+#loading .loading-indicator {
+  background: url(../images/loading.gif) no-repeat;
+  color:      #555;
+  font:       bold 13px tahoma,arial,helvetica;
+  padding:    8px 42px;
+  margin:     0;
+  text-align: center;
+  height:     auto;
+}
+
+#divLoading {
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	background-color:white;
+	background: url(../images/loading.gif) center center no-repeat;
+}
+
+button {
+	border: 0 none;
+	cursor: pointer;
+	font-family:arial,tahoma,helvetica,cursive; font-size:12px; 
+	padding: 0 15px 0 0;
+	text-align: center;
+	height: 24px;
+	line-height: 24px;
+	width: auto;
+	overflow:visible;
+}
+button.rounded {
+	background: transparent url(../images/bright_off.png ) no-repeat scroll right top;
+	clear: left;
+}
+button span {
+	display: block;
+	padding: 0 0 0 10px;
+	position: relative;
+	white-space: nowrap;
+	height: 24px;
+	line-height: 24px;
+}
+button.rounded span {
+	background: transparent url(../images/bleft_off.png ) no-repeat scroll left top;
+}
+button.rounded:hover {
+	background: transparent url(../images/bright_on.png ) no-repeat scroll right top;
+}
+button.rounded:hover span {
+	background: transparent url(../images/bleft_on.png ) no-repeat scroll left top;
+}
+button::-moz-focus-inner {
+	border: none;
+}
+
+/* Stylish CSS Buttons */
+//.clear { /* generic container (i.e. div) for floating buttons */
+//	overflow: hidden;
+//	width: 100%;
+//}
+td.center {
+	text-align:center;
+}
+td.top {
+	vertical-align: top;
+}
+td.middle {
+	vertical-align: middle;
+}
+div.center {
+	width:auto;
+	margin-left:auto;
+	margin-right:auto;
+	display:table;
+	text-align:center;
+}
+div.right {
+	width:auto;
+	margin-left:auto;
+	margin-right:5px;
+	display:table;
+	text-align:right;
+}
+div.hidden {
+	display:none;
+}
+
+.hidden {
+	display:none;
+}
+
+a.button {
+	background: transparent url('../images/bg_button_a.gif') no-repeat scroll top right;
+	color: #444;
+	display: block;
+	float: left;
+	font: normal 11px arial, sans-serif;
+	height: 24px;
+	margin-right: 6px;
+	padding-right: 18px; /* sliding doors padding */
+	text-decoration: none;
+}
+
+a.button span {
+	background: transparent url('../images/bg_button_span.gif') no-repeat;
+	display: block;
+	line-height: 14px;
+	padding: 5px 0 5px 18px;
+} 
+
+a.button:active {
+	background-position: bottom right;
+	color: #000;
+	outline: none; /* hide dotted outline in Firefox */
+}
+
+a.button:active span {
+	background-position: bottom left;
+	padding: 6px 0 4px 18px; /* push text down 1px */
+}
+#tooltip {
+	z-index: 15000;
+	background-color: #e9f2ff;
+	border: 1px solid #8eaace;
+	border-radius: 3px;
+	color: #444;
+	box-shadow: 3px 3px 3px #aaa;
+	padding: 3px;
+	max-width: 250px;
+}
 body {
 	/* direction: rtl; */
 	font-family:arial,tahoma,helvetica,cursive;
