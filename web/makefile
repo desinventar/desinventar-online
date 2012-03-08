@@ -9,10 +9,10 @@ JQUERY_SCRIPTS=\
 all : desinventar.js jquery.desinventar.js
 
 desinventar.js : js/*.js
-	cd js && rm -f desinventar.js && (cat *.js > desinventar.js)
+	cd js && (cat *.js > ../scripts/desinventar.js)
 
 jquery.desinventar.js : 
-	cd js && rm -f jquery.desinventar.js && (cat $(JQUERY_SCRIPTS) > jquery.desinventar.js)
+	cd js && (cat $(JQUERY_SCRIPTS) > ../scripts/jquery.desinventar.js)
 	
 %.js %.css:
 	@
