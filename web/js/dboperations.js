@@ -29,10 +29,15 @@ function doUpdateDatabaseListByUser()
 
 					$RoleList = new Array(5);
 					var iCount = 0;
-					jQuery('.databaseList').empty();
+					jQuery('.databaseList').each(function() {
+						jQuery('li:gt(0)', this).remove();
+					});
 					jQuery.each(data.RegionList, function(RegionId, value) {
 						jQuery('#divRegionList #title_' + value.Role).show();
-						jQuery('#divRegionList #list_' + value.Role).show().append('<a href="' + jQuery('#desinventarURL').val() + '/' + RegionId + '" id="' + RegionId + '" class="databaseLink">' + value.RegionLabel + '</a><br />');
+						var list = jQuery('#divRegionList #list_' + value.Role).show();
+						var item = jQuery('li:last', list).clone().show();
+						item.html('<a href="' + jQuery('#desinventarURL').val() + '/' + RegionId + '" id="' + RegionId + '" class="databaseLink">' + value.RegionLabel + '</a><br />');
+						list.append(item);
 						iCount++;
 					});
 					
