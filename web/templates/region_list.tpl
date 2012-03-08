@@ -5,8 +5,7 @@
 	<div id="divDatabaseFindList">
 		<span class="databaseTitle" id="title_COUNTRY"></span>
 		<ul   class="databaseList"  id="list_COUNTRY">
-			<li>
-			</li>
+			<li></li>
 		</ul>
 		<span class="databaseTitle" id="title_ADMINREGION">{-#msgDatabaseFind_RoleADMINREGION#-}</span>
 		<ul   class="databaseList"  id="list_ADMINREGION">
@@ -32,6 +31,18 @@
 		<ul   class="databaseList"  id="list_NONE">
 			<li>
 			</li>
+			<table>
+				<tr>
+					<td class="RegionId hidden">
+					</td>
+					<td>
+						<a class="RegionLink" href=""><span class="RegionLabel"></span></a>
+					</td>
+					<td class="RegionDelete hidden">
+						Delete
+					</td>
+				</tr>
+			</table>
 		</ul>
 	</div>
 	<div id="divDatabaseFindError" style="display:none;margin:20px;">
