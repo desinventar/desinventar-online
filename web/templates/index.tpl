@@ -6,6 +6,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<title>DesInventar Online Edition {-$majorversion-} | {-$RegionLabel-}</title>
+		<script type="text/javascript" src="{-$desinventarURL-}/scripts/prototype.js"></script>
 		<!-- jQuery -->
 		{-include file="jquery.tpl"-}
 		<!-- ExtJS -->
@@ -14,23 +15,10 @@
 		<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/desinventar-{-$jsversion-}.css" />
 
 		<script type="text/javascript" src="/fileuploader/fileuploader.js"></script>
-		<script type="text/javascript" src="{-$desinventarURL-}/scripts/prototype.js"></script>
 		{-if $desinventarMode=='normal'-}
 			<script type="text/javascript" src="{-$desinventarURL-}/scripts/other-{-$jsversion-}.js"></script>
 			<script type="text/javascript" src="{-$desinventarURL-}/scripts/desinventar-{-$jsversion-}.js"></script>
 		{-else-}
-			<script type="text/javascript" src="{-$desinventarURL-}/external/json2.js"></script>
-			<script type="text/javascript" src="{-$desinventarURL-}/external/form2js.js"></script>
-			<script type="text/javascript" src="{-$desinventarURL-}/external/js2form.js"></script>
-			<script type="text/javascript" src="{-$desinventarURL-}/external/jquery.toObject.js"></script>
-			<script type="text/javascript" src="{-$desinventarURL-}/external/jquery.jec-1.3.3.js"></script>
-			<script type="text/javascript" src="{-$desinventarURL-}/external/listMan.js"></script>
-			<script type="text/javascript" src="{-$desinventarURL-}/external/md5.js"></script>
-			<script type="text/javascript" src="{-$desinventarURL-}/external/wd.js"></script>
-			<script type="text/javascript" src="{-$desinventarURL-}/external/accordion.js"></script>
-			<script type="text/javascript" src="{-$desinventarURL-}/external/palette.js"></script>
-			<script type="text/javascript" src="{-$desinventarURL-}/external/checktree/checktree.js"></script>
-			<script type="text/javascript" src="{-$desinventarURL-}/external/Math.uuid.js"></script>
 			{-include file="js.tpl"-}
 		{-/if-}
 
