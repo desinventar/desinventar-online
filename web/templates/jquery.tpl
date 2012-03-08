@@ -9,7 +9,7 @@
 <script type="text/javascript" src="/jquery/jquery.stringQuery.js"></script>
 <script type="text/javascript" src="/jquery/jquery.dataSelector.js"></script>
 -->
-<script type="text/javascript" src="{-$desinventarURL-}/js/jquery.desinventar-{-$jsversion-}.js"></script>
+<script type="text/javascript" src="{-$desinventarURL-}/scripts/jquery.desinventar-{-$jsversion-}.js"></script>
 <script type="text/javascript">
 	jQuery.noConflict();
 </script>

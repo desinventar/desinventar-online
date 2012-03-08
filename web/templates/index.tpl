@@ -28,7 +28,7 @@
 
 		<script type="text/javascript" src="/fileuploader/fileuploader.js"></script>
 		{-if $desinventarMode=='normal'-}
-			<script type="text/javascript" src="{-$desinventarURL-}/js/desinventar-{-$jsversion-}.js"></script>
+			<script type="text/javascript" src="{-$desinventarURL-}/scripts/desinventar-{-$jsversion-}.js"></script>
 		{-else-}
 			{-include file="js.tpl"-}
 		{-/if-}
