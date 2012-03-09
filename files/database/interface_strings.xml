@@ -4151,6 +4151,44 @@
 			<Text LangIsoCode="fre">Effacer</Text>
 		</Message>
 	</Group>
+	<Group name="grpDatabaseDelete">
+		<Message id="msgDatabaseDelete_Title">
+			<Text LangIsoCode="eng">Delete</Text>
+			<Text LangIsoCode="spa">Eliminar</Text>
+			<Text LangIsoCode="por">Excluir</Text>
+			<Text LangIsoCode="fre">Effacer</Text>
+		</Message>
+		<Message id="msgDatabaseDelete_Subtitle">
+			<Text LangIsoCode="eng">You are about to permanently delete the following database</Text>
+			<Text LangIsoCode="spa"></Text>
+			<Text LangIsoCode="por"></Text>
+			<Text LangIsoCode="fre"></Text>
+		</Message>
+		<Message id="msgDatabaseDelete_RegionId">
+			<Text LangIsoCode="eng">Id</Text>
+			<Text LangIsoCode="spa">Id</Text>
+			<Text LangIsoCode="por">Id</Text>
+			<Text LangIsoCode="fre">Id</Text>
+		</Message>
+		<Message id="msgDatabaseDelete_RegionLabel">
+			<Text LangIsoCode="eng">Label</Text>
+			<Text LangIsoCode="spa">Nombre</Text>
+			<Text LangIsoCode="por">Nom</Text>
+			<Text LangIsoCode="fre">Nome</Text>
+		</Message>
+		<Message id="msgDatabaseDelete_Ok">
+			<Text LangIsoCode="eng">Ok</Text>
+			<Text LangIsoCode="spa">Aceptar</Text>
+			<Text LangIsoCode="por">Ok</Text>
+			<Text LangIsoCode="fre">Ok</Text>
+		</Message>
+		<Message id="msgDatabaseDelete_Cancel">
+			<Text LangIsoCode="eng">Cancel</Text>
+			<Text LangIsoCode="spa">Cancelar</Text>
+			<Text LangIsoCode="por">Cancel</Text>
+			<Text LangIsoCode="fre">Cancel</Text>
+		</Message>
+	</Group>
 	<Group name="portal">
 		<Message id="di_slogan">
 			<Text LangIsoCode="eng">Inventory system of the effects of disasters</Text>

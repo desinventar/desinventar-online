@@ -54,6 +54,7 @@
 			
 			<!-- Central Content Area -->
 			<div id="container" style="heigth:100%;">
+				{-include file="database_delete_ext.tpl"-}
 				{-include file="block_content.tpl"-}
 			</div>
 
