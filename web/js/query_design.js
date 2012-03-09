@@ -30,6 +30,16 @@ function onReadyQueryDesign()
 	}).on('focus','.withHelpFocus',function() {
 		showtip(jQuery(this).data('help'));
 	});
+
+	jQuery('div.QueryDesign div.GeographyList').on('click','li.item',function(event) {
+		console.log('Geography select : ' + jQuery(this).data('GeographyId'));
+		var checkbox = jQuery('input:checkbox', this);
+		checkbox.prop('checked', !checkbox.prop('checked'));
+		event.preventDefault();
+	}).on('click','li.item input:checkbox',function(event) {
+		jQuery(this).prop('checked', !jQuery(this).prop('checked'));
+		console.log('click on checkbox');
+	});
 	
 	jQuery('div.QueryDesign').on('cmdUpdate', function() {
 		var params = jQuery('body').data('params');
@@ -43,6 +53,16 @@ function onReadyQueryDesign()
 			jQuery('span',clone).text(value.GeoLevelName);
 			jQuery('span',clone).data('help', value.GeoLevelDesc);
 			jQuery('div.QueryDesign div.GeolevelsHeader table tr').append(clone);
+		});
+		// Load Geography List
+		var geography_list = jQuery('div.QueryDesign div.GeographyList ul.mainlist');
+		geography_list.find('li:gt(0)').remove();
+		geography_list.find('li').hide();
+		jQuery.each(jQuery('body').data('GeographyList'), function(key, value) {
+			var item = geography_list.find('li:last').clone().show();
+			jQuery('span.label', item).html(value.GeographyName);
+			jQuery(item).data('GeographyId', key);
+			geography_list.append(item);
 		});
 		// Load Event List
 		jQuery('div.QueryDesign select.Event').empty();
