@@ -33,6 +33,9 @@ function onReadyDatabaseList()
 				else
 				{
 					jQuery('div.DatabaseDelete span.StatusError').show();
+					setTimeout(function() {
+						jQuery('div.DatabaseDelete span.status').hide();
+					}, 3000);
 				}
 			},
 			'json'

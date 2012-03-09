@@ -5,7 +5,6 @@
 	</div>
 	<div id="divDatabaseDeleteContent">
 		<div class="DatabaseDelete">
-			<br />
 			{-#msgDatabaseDelete_Subtitle#-}<br />
 			<table class="center">
 				<tr>
@@ -25,7 +24,6 @@
 					</td>
 				</tr>
 			</table>
-			<br />
 			<div class="center status">
 				<span class="status StatusOk">{-#msgDatabaseDelete_StatusOk#-}</span>
 				<span class="status StatusError">{-#msgDatabaseDelete_StatusError#-}</span>

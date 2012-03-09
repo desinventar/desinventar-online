@@ -854,6 +854,7 @@ switch ($cmd)
 		}
 		if ($iReturn > 0)
 		{
+			$iReturn = ERR_UNKNOWN_ERROR;
 		}
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
