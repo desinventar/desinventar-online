@@ -3881,25 +3881,20 @@ function doUpdateDatabaseListByUser()
 
 					$RoleList = new Array(5);
 					var iCount = 0;
-					jQuery('.databaseList').empty();
+					jQuery('.databaseList').each(function() {
+						jQuery('table tr:gt(0)', this).remove();
+					});
 					jQuery.each(data.RegionList, function(RegionId, value) {
 						jQuery('#divRegionList #title_' + value.Role).show();
-						jQuery('#divRegionList #list_' + value.Role).show().append('<a href="' + jQuery('#desinventarURL').val() + '/' + RegionId + '" id="' + RegionId + '" class="databaseLink">' + value.RegionLabel + '</a><br />');
+						jQuery('#divRegionList #list_' + value.Role).show();
+						var list = jQuery('#divRegionList #list_' + value.Role + ' table').show();
+						var item = jQuery('tr:last', list).clone().show();
+						jQuery('td.RegionId', item).text(RegionId);
+						jQuery('td span.RegionLabel', item).text(value.RegionLabel);
+						jQuery('td a.RegionLink', item).attr('href', jQuery('#desinventarURL').val() + '/' + RegionId + '/');
+						list.append(item);
 						iCount++;
 					});
-					
-					jQuery('.databaseLink').addClass("alt").unbind('click').click(function() {
-						RegionId = jQuery(this).attr('id');
-						if (jQuery('#desinventarPortalType').val() != '')
-						{
-							displayRegionInfo(RegionId);
-						}
-						else
-						{
-							window.location = jQuery('#desinventarURL').val() + '/' + RegionId;
-						}
-						return false;
-					}); //bind
 				}
 				else
 				{
@@ -3963,69 +3958,6 @@ function doGetRegionInfo(RegionId)
 		'json'
 	);
 } //doGetRegionInfo()
-
-function updateDatabaseList(CountryIsoCode,searchByCountry) {
-	jQuery(".contentBlock").hide();
-	// Hide everything at start...
-	jQuery('.databaseTitle').hide();
-	jQuery('.databaseList').hide();
-	jQuery("#divRegionList").hide();
-	jQuery.get(
-		jQuery('#desinventarURL').val() + '/', 
-		{
-			cmd: 'getCountryName',
-			CountryIso : CountryIsoCode
-		},
-		function(data)
-		{ 
-			jQuery("#divRegionList #title_COUNTRY").html('<h3>' + data.CountryName + '</h3>');
-			jQuery("#divRegionList").show();
-		},
-		'jsonp'
-	);
-	jQuery.post(
-		jQuery('#desinventarURL').val() + '/',
-		{
-			cmd: 'cmdSearchDB', 
-			searchDBQuery: CountryIsoCode, 
-			searchDBCountry : 1
-		},
-		function(data)
-		{
-			if (parseInt(data.Status) > 0)
-			{
-				var iCount = 0;
-				var RegionId = '';
-
-				// Hide everything at start...
-				jQuery('.databaseTitle').hide();
-				jQuery('.databaseList').hide();
-
-				var jList = jQuery("#divRegionList #list_COUNTRY");
-				var myRegionId = '';
-				jList.empty();
-				jQuery.each(data.RegionList, function(RegionId, value) {
-					iCount++;
-					jList.append('<a href="#" id="' + RegionId + '" class="databaseLink">' + value.RegionLabel + '</a><br />');
-					myRegionId = RegionId;
-				}); // each
-				if (iCount == 1) {	
-					// If only one region is in list, show directly info instead of list
-					displayRegionInfo(myRegionId);
-				} else {
-					jQuery('#divRegionList #title_COUNTRY').show();
-					jQuery('#divRegionList #list_COUNTRY').show();
-					jQuery('.databaseLink').addClass("alt").unbind('click').click(function() {
-						RegionId = jQuery(this).attr('id');
-						displayRegionInfo(RegionId);
-						return false;
-					}); //bind
-				}
-			}
-		}, //function
-		'json'
-	);
-};
 /*
  DesInventar - http://www.desinventar.org
  (c) 1998-2012 Corporacion OSSO

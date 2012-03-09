@@ -432,7 +432,7 @@ a:hover	{	color:#00008b; }
 	color:#202020; letter-spacing:-1px; 
 	padding:0px 10px; 
 }
-.databaseLink {
+td a.RegionLink {
 	text-decoration:none; 
 	font:bold 11px Trebuchet MS, sans-serif; 
 	padding:0px 20px; 
