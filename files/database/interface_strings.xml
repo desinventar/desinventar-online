@@ -4153,58 +4153,58 @@
 	</Group>
 	<Group name="grpDatabaseDelete">
 		<Message id="msgDatabaseDelete_Title">
-			<Text LangIsoCode="eng">Delete</Text>
-			<Text LangIsoCode="spa">Eliminar</Text>
-			<Text LangIsoCode="por">Excluir</Text>
-			<Text LangIsoCode="fre">Effacer</Text>
+			<Text LangIsoCode="eng">Delete database</Text>
+			<Text LangIsoCode="spa">Eliminar base de datos</Text>
+			<Text LangIsoCode="por">Excluir banco de dados</Text>
+			<Text LangIsoCode="fre">Supprimer la base de données</Text>
 		</Message>
 		<Message id="msgDatabaseDelete_Subtitle">
-			<Text LangIsoCode="eng">You are about to permanently delete the following database</Text>
-			<Text LangIsoCode="spa"></Text>
-			<Text LangIsoCode="por"></Text>
-			<Text LangIsoCode="fre"></Text>
+			<Text LangIsoCode="eng">You are about to delete the following database</Text>
+			<Text LangIsoCode="spa">Usted está a punto de eliminar la base de datos</Text>
+			<Text LangIsoCode="por">Você está prestes a excluir da base de dados seguinte</Text>
+			<Text LangIsoCode="fre">Vous êtes sur le point de supprimer la base de données suivant</Text>
 		</Message>
 		<Message id="msgDatabaseDelete_RegionId">
-			<Text LangIsoCode="eng">Id</Text>
-			<Text LangIsoCode="spa">Id</Text>
-			<Text LangIsoCode="por">Id</Text>
-			<Text LangIsoCode="fre">Id</Text>
+			<Text LangIsoCode="eng">Identifier</Text>
+			<Text LangIsoCode="spa">Identificador</Text>
+			<Text LangIsoCode="por">Identificador</Text>
+			<Text LangIsoCode="fre">Identificateur</Text>
 		</Message>
 		<Message id="msgDatabaseDelete_RegionLabel">
-			<Text LangIsoCode="eng">Label</Text>
+			<Text LangIsoCode="eng">Name</Text>
 			<Text LangIsoCode="spa">Nombre</Text>
-			<Text LangIsoCode="por">Nom</Text>
-			<Text LangIsoCode="fre">Nome</Text>
+			<Text LangIsoCode="por">Nome</Text>
+			<Text LangIsoCode="fre">Nom</Text>
 		</Message>
 		<Message id="msgDatabaseDelete_Ok">
 			<Text LangIsoCode="eng">Ok</Text>
 			<Text LangIsoCode="spa">Aceptar</Text>
-			<Text LangIsoCode="por">Ok</Text>
-			<Text LangIsoCode="fre">Ok</Text>
+			<Text LangIsoCode="por">Aceitar</Text>
+			<Text LangIsoCode="fre">Accepter</Text>
 		</Message>
 		<Message id="msgDatabaseDelete_Cancel">
 			<Text LangIsoCode="eng">Cancel</Text>
 			<Text LangIsoCode="spa">Cancelar</Text>
-			<Text LangIsoCode="por">Cancel</Text>
-			<Text LangIsoCode="fre">Cancel</Text>
+			<Text LangIsoCode="por">Cancelar</Text>
+			<Text LangIsoCode="fre">Annuler</Text>
 		</Message>
 		<Message id="msgDatabaseDelete_Close">
 			<Text LangIsoCode="eng">Close</Text>
 			<Text LangIsoCode="spa">Cerrar</Text>
-			<Text LangIsoCode="por">Close</Text>
-			<Text LangIsoCode="fre">Close</Text>
+			<Text LangIsoCode="por">Fechar</Text>
+			<Text LangIsoCode="fre">Fermer</Text>
 		</Message>
 		<Message id="msgDatabaseDelete_StatusOk">
-			<Text LangIsoCode="eng">Database has been successfully deleted</Text>
-			<Text LangIsoCode="spa"></Text>
-			<Text LangIsoCode="por"></Text>
-			<Text LangIsoCode="fre"></Text>
+			<Text LangIsoCode="eng">Database has been deleted</Text>
+			<Text LangIsoCode="spa">Se ha borrado la base de datos</Text>
+			<Text LangIsoCode="por">Banco de dados tenha sido excluído</Text>
+			<Text LangIsoCode="fre">Base de données a été supprimé</Text>
 		</Message>
 		<Message id="msgDatabaseDelete_StatusError">
-			<Text LangIsoCode="eng">There was an error while attempting to delete the database</Text>
-			<Text LangIsoCode="spa"></Text>
-			<Text LangIsoCode="por"></Text>
-			<Text LangIsoCode="fre"></Text>
+			<Text LangIsoCode="eng">There was an error while deleting the database</Text>
+			<Text LangIsoCode="spa">Hubo un error al eliminar la base de datos</Text>
+			<Text LangIsoCode="por">Ocorreu um erro ao excluir o banco de dados</Text>
+			<Text LangIsoCode="fre">Il y avait une erreur lors de la suppression de la base de données</Text>
 		</Message>
 	</Group>
 	<Group name="portal">
