@@ -4,46 +4,83 @@
 	<br />
 	<div id="divDatabaseFindList">
 		<span class="databaseTitle" id="title_COUNTRY"></span>
-		<ul   class="databaseList"  id="list_COUNTRY">
-			<li></li>
-		</ul>
+		<table class="databaseList"  id="list_COUNTRY">
+ 			<tr>
+				<td class="RegionId hidden">
+				</td>
+				<td>
+					<a class="RegionLink" href=""><span class="RegionLabel"></span></a>
+				</td>
+				<td class="RegionDelete hidden">
+					Delete
+				</td>
+			</tr>
+		</table>
 		<span class="databaseTitle" id="title_ADMINREGION">{-#msgDatabaseFind_RoleADMINREGION#-}</span>
-		<ul   class="databaseList"  id="list_ADMINREGION">
-			<li>
-			</li>
-		</ul>
+		<table class="databaseList"  id="list_ADMINREGION">
+			<tr>
+				<td class="RegionId hidden">
+				</td>
+				<td>
+					<a class="RegionLink" href=""><span class="RegionLabel"></span></a>
+				</td>
+				<td class="RegionDelete hidden">
+					Delete
+				</td>
+			</tr>
+		</table>
 		<span class="databaseTitle" id="title_SUPERVISOR">{-#msgDatabaseFind_RoleSUPERVISOR#-}</span>
-		<ul   class="databaseList"  id="list_SUPERVISOR">
-			<li>
-			</li>
-		</ul>
+		<table class="databaseList"  id="list_SUPERVISOR">
+			<tr>
+				<td class="RegionId hidden">
+				</td>
+				<td>
+					<a class="RegionLink" href=""><span class="RegionLabel"></span></a>
+				</td>
+				<td class="RegionDelete hidden">
+					Delete
+				</td>
+			</tr>
+		</table>
 		<span class="databaseTitle" id="title_USER">{-#msgDatabaseFind_RoleUSER#-}</span>
-		<ul   class="databaseList"  id="list_USER">
-			<li>
-			</li>
-		</ul>
+		<table class="databaseList"  id="list_USER">
+			<tr>
+				<td class="RegionId hidden">
+				</td>
+				<td>
+					<a class="RegionLink" href=""><span class="RegionLabel"></span></a>
+				</td>
+				<td class="RegionDelete hidden">
+					Delete
+				</td>
+			</tr>
+		</table>
 		<span class="databaseTitle" id="title_OBSERVER">{-#msgDatabaseFind_RoleOBSERVER#-}</span>
-		<ul   class="databaseList"  id="list_OBSERVER">
-			<li>
-			</li>
-		</ul>
+		<table class="databaseList"  id="list_OBSERVER">
+			<tr>
+				<td class="RegionId hidden">
+				</td>
+				<td>
+					<a class="RegionLink" href=""><span class="RegionLabel"></span></a>
+				</td>
+				<td class="RegionDelete hidden">
+					Delete
+				</td>
+			</tr>
+		</table>
 		<span class="databaseTitle" id="title_NONE">{-#msgDatabaseFind_RoleNONE#-}</span>
-		<ul   class="databaseList"  id="list_NONE">
-			<li>
-			</li>
-			<table>
-				<tr>
-					<td class="RegionId hidden">
-					</td>
-					<td>
-						<a class="RegionLink" href=""><span class="RegionLabel"></span></a>
-					</td>
-					<td class="RegionDelete hidden">
-						Delete
-					</td>
-				</tr>
-			</table>
-		</ul>
+		<table class="databaseList"  id="list_NONE">
+			<tr>
+				<td class="RegionId hidden">
+				</td>
+				<td>
+					<a class="RegionLink" href=""><span class="RegionLabel"></span></a>
+				</td>
+				<td class="RegionDelete hidden">
+					Delete
+				</td>
+			</tr>
+		</table>
 	</div>
 	<div id="divDatabaseFindError" style="display:none;margin:20px;">
 		<h3>{-#msgDatabaseFind_NoDatabases#-}</h3>
