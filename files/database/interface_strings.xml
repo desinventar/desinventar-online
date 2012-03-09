@@ -4188,6 +4188,24 @@
 			<Text LangIsoCode="por">Cancel</Text>
 			<Text LangIsoCode="fre">Cancel</Text>
 		</Message>
+		<Message id="msgDatabaseDelete_Close">
+			<Text LangIsoCode="eng">Close</Text>
+			<Text LangIsoCode="spa">Cerrar</Text>
+			<Text LangIsoCode="por">Close</Text>
+			<Text LangIsoCode="fre">Close</Text>
+		</Message>
+		<Message id="msgDatabaseDelete_StatusOk">
+			<Text LangIsoCode="eng">Database has been successfully deleted</Text>
+			<Text LangIsoCode="spa"></Text>
+			<Text LangIsoCode="por"></Text>
+			<Text LangIsoCode="fre"></Text>
+		</Message>
+		<Message id="msgDatabaseDelete_StatusError">
+			<Text LangIsoCode="eng">There was an error while attempting to delete the database</Text>
+			<Text LangIsoCode="spa"></Text>
+			<Text LangIsoCode="por"></Text>
+			<Text LangIsoCode="fre"></Text>
+		</Message>
 	</Group>
 	<Group name="portal">
 		<Message id="di_slogan">

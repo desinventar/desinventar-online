@@ -845,6 +845,19 @@ switch ($cmd)
 		$answer['Status'] = $iReturn;
 		echo json_encode($answer);		
 	break;
+	case 'cmdDatabaseDelete':
+		$answer = array();
+		$iReturn = ERR_NO_ERROR;
+		if ($desinventarUserRoleValue < ROLE_ADMINPORTAL)
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($iReturn > 0)
+		{
+		}
+		$answer['Status'] = $iReturn;
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
+	break;
 	case 'cmdDatabaseSetUserAdmin':
 		$answer = array();
 		$iReturn = ERR_UNKNOWN_ERROR;
