@@ -1642,13 +1642,6 @@ function doGeolevelsUploaderReset()
 	jQuery('#frmGeolevel .UploadCancel').hide();
 	jQuery('#divGeolevels_FileUploaderControl .qq-upload-button-text').show();
 } //doGeolevelsUplaoderReset()
-onReadyDatabaseList()
-{
-	jQuery('#divDatabaseRegionList table.databaseList').on('mouseover','td.RegionDelete', function() {
-	}).on('mouseout','td.RegionDelete', function() {
-	});
-} //onReadyDatabaseList
-
 /*
  DesInventar - http://www.desinventar.org
  (c) 1998-2012 Corporacion OSSO
