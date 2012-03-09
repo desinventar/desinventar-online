@@ -3890,6 +3890,7 @@ function doUpdateDatabaseListByUser()
 					var iCount = 0;
 					jQuery('#divDatabaseFindList table.databaseList').each(function() {
 						jQuery('tr:gt(0)', this).remove();
+						jQuery('tr', this).hide();
 					});
 					jQuery.each(data.RegionList, function(RegionId, value) {
 						jQuery('#divRegionList #title_' + value.Role).show();
@@ -3899,13 +3900,13 @@ function doUpdateDatabaseListByUser()
 						jQuery('td.RegionId', item).text(RegionId);
 						jQuery('td span.RegionLabel', item).text(value.RegionLabel);
 						jQuery('td a.RegionLink', item).attr('href', jQuery('#desinventarURL').val() + '/' + RegionId + '/');
-						if (value.RoleValue >= 4)
-						{
-							//jQuery('td.RegionDelete', item).show();
-						}
 						list.append(item);
 						iCount++;
 					});
+					if (jQuery('#desinventarUserRoleValue').val() >= 5)
+					{
+						jQuery('#divDatabaseFindList td.RegionDelete').show();
+					}
 				}
 				else
 				{
@@ -5809,6 +5810,7 @@ function doDialogsCreate()
 */
 function onReadyMain()
 {
+	onReadyDatabaseList();
 	onReadyDatabaseUpload();
 	onReadyDatabaseCreate();
 	onReadyDatabaseUsers();
