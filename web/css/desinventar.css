@@ -509,4 +509,17 @@ div.Geography table.List thead td {
 .nowrap {
 	white-space: nowrap;
 }
-
+.bold {
+	font-weight:bold;	
+}
+div.DatabaseDelete {
+	margin:10px;
+}
+div.DatabaseDelete div.status {
+	margin-top:10px;
+	margin-bottom:10px;
+}
+div.DatabaseDelete div.buttons {
+	margin-top:10px;
+	margin-bottom:10px;
+}

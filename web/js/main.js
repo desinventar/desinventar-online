@@ -4,6 +4,7 @@
 */
 function onReadyMain()
 {
+	onReadyDatabaseList();
 	onReadyDatabaseUpload();
 	onReadyDatabaseCreate();
 	onReadyDatabaseUsers();

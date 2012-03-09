@@ -3,19 +3,6 @@
 	<span class="databaseListTitle">{-#msgDatabaseFind_Title#-}</span>
 	<br />
 	<div id="divDatabaseFindList">
-		<span class="databaseTitle" id="title_COUNTRY"></span>
-		<table class="databaseList"  id="list_COUNTRY">
- 			<tr>
-				<td class="RegionId hidden">
-				</td>
-				<td>
-					<a class="RegionLink" href=""><span class="RegionLabel"></span></a>
-				</td>
-				<td class="RegionDelete hidden">
-					Delete
-				</td>
-			</tr>
-		</table>
 		<span class="databaseTitle" id="title_ADMINREGION">{-#msgDatabaseFind_RoleADMINREGION#-}</span>
 		<table class="databaseList"  id="list_ADMINREGION">
 			<tr>
@@ -25,7 +12,7 @@
 					<a class="RegionLink" href=""><span class="RegionLabel"></span></a>
 				</td>
 				<td class="RegionDelete hidden">
-					Delete
+					<a href="">[{-#msgDatabaseFind_Delete#-}]</a>
 				</td>
 			</tr>
 		</table>
@@ -38,7 +25,7 @@
 					<a class="RegionLink" href=""><span class="RegionLabel"></span></a>
 				</td>
 				<td class="RegionDelete hidden">
-					Delete
+					<a href="">[{-#msgDatabaseFind_Delete#-}]</a>
 				</td>
 			</tr>
 		</table>
@@ -51,7 +38,7 @@
 					<a class="RegionLink" href=""><span class="RegionLabel"></span></a>
 				</td>
 				<td class="RegionDelete hidden">
-					Delete
+					<a href="">[{-#msgDatabaseFind_Delete#-}]</a>
 				</td>
 			</tr>
 		</table>
@@ -64,7 +51,7 @@
 					<a class="RegionLink" href=""><span class="RegionLabel"></span></a>
 				</td>
 				<td class="RegionDelete hidden">
-					Delete
+					<a href="">[{-#msgDatabaseFind_Delete#-}]</a>
 				</td>
 			</tr>
 		</table>
@@ -77,7 +64,7 @@
 					<a class="RegionLink" href=""><span class="RegionLabel"></span></a>
 				</td>
 				<td class="RegionDelete hidden">
-					Delete
+					<a href="">[{-#msgDatabaseFind_Delete#-}]</a>
 				</td>
 			</tr>
 		</table>
