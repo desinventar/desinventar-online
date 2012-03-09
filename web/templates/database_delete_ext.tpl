@@ -34,6 +34,9 @@
 				<a class="button buttonCancel"><span>{-#msgDatabaseDelete_Cancel#-}</span></a>
 				<a class="button buttonClose"><span>{-#msgDatabaseDelete_Close#-}</span></a>
 			</div>
+			<div class="hidden">
+				<input class="HasDeleted" type="hidden" value="" />
+			</div>
 		</div>
 	</div>
 </div>
