@@ -4238,6 +4238,68 @@
 			<Text LangIsoCode="por">Bases de dados públicas</Text>
 			<Text LangIsoCode="fre">Bases de données publiques</Text>
 		</Message>
+		<Message id="msgDatabaseFind_Delete">
+			<Text LangIsoCode="eng">Delete</Text>
+			<Text LangIsoCode="spa">Eliminar</Text>
+			<Text LangIsoCode="por">Excluir</Text>
+			<Text LangIsoCode="fre">Effacer</Text>
+		</Message>
+	</Group>
+	<Group name="grpDatabaseDelete">
+		<Message id="msgDatabaseDelete_Title">
+			<Text LangIsoCode="eng">Delete</Text>
+			<Text LangIsoCode="spa">Eliminar</Text>
+			<Text LangIsoCode="por">Excluir</Text>
+			<Text LangIsoCode="fre">Effacer</Text>
+		</Message>
+		<Message id="msgDatabaseDelete_Subtitle">
+			<Text LangIsoCode="eng">You are about to permanently delete the following database</Text>
+			<Text LangIsoCode="spa"></Text>
+			<Text LangIsoCode="por"></Text>
+			<Text LangIsoCode="fre"></Text>
+		</Message>
+		<Message id="msgDatabaseDelete_RegionId">
+			<Text LangIsoCode="eng">Id</Text>
+			<Text LangIsoCode="spa">Id</Text>
+			<Text LangIsoCode="por">Id</Text>
+			<Text LangIsoCode="fre">Id</Text>
+		</Message>
+		<Message id="msgDatabaseDelete_RegionLabel">
+			<Text LangIsoCode="eng">Label</Text>
+			<Text LangIsoCode="spa">Nombre</Text>
+			<Text LangIsoCode="por">Nom</Text>
+			<Text LangIsoCode="fre">Nome</Text>
+		</Message>
+		<Message id="msgDatabaseDelete_Ok">
+			<Text LangIsoCode="eng">Ok</Text>
+			<Text LangIsoCode="spa">Aceptar</Text>
+			<Text LangIsoCode="por">Ok</Text>
+			<Text LangIsoCode="fre">Ok</Text>
+		</Message>
+		<Message id="msgDatabaseDelete_Cancel">
+			<Text LangIsoCode="eng">Cancel</Text>
+			<Text LangIsoCode="spa">Cancelar</Text>
+			<Text LangIsoCode="por">Cancel</Text>
+			<Text LangIsoCode="fre">Cancel</Text>
+		</Message>
+		<Message id="msgDatabaseDelete_Close">
+			<Text LangIsoCode="eng">Close</Text>
+			<Text LangIsoCode="spa">Cerrar</Text>
+			<Text LangIsoCode="por">Close</Text>
+			<Text LangIsoCode="fre">Close</Text>
+		</Message>
+		<Message id="msgDatabaseDelete_StatusOk">
+			<Text LangIsoCode="eng">Database has been successfully deleted</Text>
+			<Text LangIsoCode="spa"></Text>
+			<Text LangIsoCode="por"></Text>
+			<Text LangIsoCode="fre"></Text>
+		</Message>
+		<Message id="msgDatabaseDelete_StatusError">
+			<Text LangIsoCode="eng">There was an error while attempting to delete the database</Text>
+			<Text LangIsoCode="spa"></Text>
+			<Text LangIsoCode="por"></Text>
+			<Text LangIsoCode="fre"></Text>
+		</Message>
 	</Group>
 	<Group name="portal">
 		<Message id="di_slogan">
