@@ -632,17 +632,23 @@ class UserSession {
 		}
 		return $UserRole;
 	} // function
-	
+
+	function convertRoleToRoleValue($prmRole)
+	{
+		$NumRole = ROLE_NONE;
+		if ($prmRole == 'NONE')        { $NumRole = ROLE_NONE;        }
+		if ($prmRole == 'OBSERVER')    { $NumRole = ROLE_OBSERVER;    }
+		if ($prmRole == 'USER')        { $NumRole = ROLE_USER;        }
+		if ($prmRole == 'SUPERVISOR')  { $NumRole = ROLE_SUPERVISOR;  }
+		if ($prmRole == 'ADMINREGION') { $NumRole = ROLE_ADMINREGION; }
+		if ($prmRole == 'ADMINPORTAL') { $NumRole = ROLE_ADMINPORTAL; }
+		return $NumRole;
+	}
+		
 	// Get User Role as a Numeric Value, easier to compare
 	function getUserRoleValue($prmRegionId = '') {
 		$Role = $this->getUserRole($prmRegionId);
-		$NumRole = ROLE_NONE;
-		if ($Role == 'NONE')        { $NumRole = ROLE_NONE;        }
-		if ($Role == 'OBSERVER')    { $NumRole = ROLE_OBSERVER;    }
-		if ($Role == 'USER')        { $NumRole = ROLE_USER;        }
-		if ($Role == 'SUPERVISOR')  { $NumRole = ROLE_SUPERVISOR;  }
-		if ($Role == 'ADMINREGION') { $NumRole = ROLE_ADMINREGION; }
-		if ($Role == 'ADMINPORTAL') { $NumRole = ROLE_ADMINPORTAL; }
+		$NumRole = $this->convertRoleToRoleValue($Role);
 		return $NumRole;
 	}
 	
@@ -1118,9 +1124,12 @@ class UserSession {
 			$query = "select R.RegionId,R.CountryIso,R.RegionLabel,RA.AuthAuxValue from Region R,RegionAuth RA where R.RegionId=RA.RegionId AND RA.AuthKey='ROLE' AND RA.UserId='" . $this->UserId . "' ORDER BY R.CountryIso,R.RegionLabel;";
 			foreach($this->q->core->query($query) as $row)
 			{
-				$regionlist[$row['RegionId']] = array('RegionLabel' => $row['RegionLabel'],
-				                                      'CountryIso'  => $row['CountryIso'],
-				                                      'Role' => $row['AuthAuxValue']);
+				$regionlist[$row['RegionId']] = array(
+					'RegionLabel' => $row['RegionLabel'],
+					'CountryIso'  => $row['CountryIso'],
+					'Role' => $row['AuthAuxValue'],
+					'RoleValue' => $this->convertRoleToRoleValue($row['AuthAuxValue'])
+				);
 			}
 		}
 		return $regionlist;
