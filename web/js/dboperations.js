@@ -44,6 +44,7 @@ function doUpdateDatabaseListByUser()
 						list.append(item);
 						iCount++;
 					});
+					jQuery('#divDatabaseFindList td.RegionDelete').hide();
 					if (jQuery('#desinventarUserRoleValue').val() >= 5)
 					{
 						jQuery('#divDatabaseFindList td.RegionDelete').show();
