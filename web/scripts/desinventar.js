@@ -1708,7 +1708,9 @@ function doDatabaseDeleteCreate()
 			autoScroll: true
 		})
 	});
-
+	w.on('hide', function() {
+		doUpdateDatabaseListByUser();
+	});
 } // doDatabaseUploadCreate()
 
 function doDatabaseDeleteShow()
