@@ -4144,6 +4144,12 @@
 			<Text LangIsoCode="por">Bases de dados públicas</Text>
 			<Text LangIsoCode="fre">Bases de données publiques</Text>
 		</Message>
+		<Message id="msgDatabaseFind_Delete">
+			<Text LangIsoCode="eng">Delete</Text>
+			<Text LangIsoCode="spa">Eliminar</Text>
+			<Text LangIsoCode="por">Excluir</Text>
+			<Text LangIsoCode="fre">Effacer</Text>
+		</Message>
 	</Group>
 	<Group name="portal">
 		<Message id="di_slogan">
