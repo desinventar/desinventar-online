@@ -42,13 +42,6 @@
 			<span class="dlgmsg">{-#tcntclick#-}</span>
 			<br />
 			<select class="Event line" id="qevelst" name="D_EventId[]" multiple style="width:100%; height: 200px;">
-				{-foreach name=eve key=key item=item from=$evepredl-}
-					<option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
-				{-/foreach-}
-					<option disabled>----</option>
-				{-foreach name=eve key=key item=item from=$eveuserl-}
-					<option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
-				{-/foreach-}
 			</select>
 			<br /><br />
 			<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_EventDuration_Helptext#-}">{-#msgDatacard_EventDuration#-}</span>
@@ -68,13 +61,6 @@
 			<input type="hidden" name="QueryCause[OP]" value="AND" />
 			<span class="dlgmsg">{-#tcntclick#-}</span><br />
 			<select class="Cause line" id="qcaulst" name="D_CauseId[]" multiple style="width: 250px; height: 200px;">
-				{-foreach name=cau key=key item=item from=$caupredl-}
-					<option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
-				{-/foreach-}
-					<option disabled>----</option>
-				{-foreach name=mycau key=key item=item from=$cauuserl-}
-					<option value="{-$key-}" onMouseOver="showtip('{-$item[1]-}');" {-if $item[3]-}selected{-/if-}>{-$item[0]-}</option>
-				{-/foreach-}
 			</select>
 			<br />
 			<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_CauseNotes_Helptext#-}">{-#msgDatacard_CauseNotes#-}</span>
