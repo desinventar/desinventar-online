@@ -26,9 +26,15 @@
 				</tr>
 			</table>
 			<br />
-			<div class="center">
-				<a class="button Ok"><span>{-#msgDatabaseDelete_Ok#-}</span></a>
-				<a class="button Cancel"><span>{-#msgDatabaseDelete_Cancel#-}</span></a>
+			<div class="center status">
+				<span class="status StatusOk">{-#msgDatabaseDelete_StatusOk#-}</span>
+				<span class="status StatusError">{-#msgDatabaseDelete_StatusError#-}</span>
+				<br />
+			</div>
+			<div class="center buttons">
+				<a class="button buttonOk"><span>{-#msgDatabaseDelete_Ok#-}</span></a>
+				<a class="button buttonCancel"><span>{-#msgDatabaseDelete_Cancel#-}</span></a>
+				<a class="button buttonClose"><span>{-#msgDatabaseDelete_Close#-}</span></a>
 			</div>
 		</div>
 	</div>
