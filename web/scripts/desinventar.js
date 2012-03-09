@@ -1642,10 +1642,13 @@ function doGeolevelsUploaderReset()
 	jQuery('#frmGeolevel .UploadCancel').hide();
 	jQuery('#divGeolevels_FileUploaderControl .qq-upload-button-text').show();
 } //doGeolevelsUplaoderReset()
-onReadyDatabaseList()
+function onReadyDatabaseList()
 {
+	console.log('onReadyDatabaseList');
 	jQuery('#divDatabaseRegionList table.databaseList').on('mouseover','td.RegionDelete', function() {
+		jQuery(this).parent().highlight();
 	}).on('mouseout','td.RegionDelete', function() {
+		jQuery(this).parent().unhighlight();
 	});
 } //onReadyDatabaseList
 
