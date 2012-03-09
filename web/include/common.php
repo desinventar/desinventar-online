@@ -182,21 +182,29 @@ function showStandardNumber($value)
 	return $s;
 }
 
-function rrmdir($dir) {
-	if (is_dir($dir)) {
+function rrmdir($dir)
+{
+	if (is_dir($dir))
+	{
 		$objects = scandir($dir);
-		foreach ($objects as $object) {
-			if ($object != "." && $object != "..") {
+		foreach ($objects as $object)
+		{
+			if ($object != "." && $object != "..")
+			{
 				if (filetype($dir."/".$object) == "dir")
+				{
 					rrmdir($dir."/".$object);
+				}
 				else
+				{
 					unlink($dir."/".$object);
+				}
 			}
 		}
 		reset($objects);
 		rmdir($dir);
-	} //if
-}  //function
+	} #if
+}  #rrmdir()
 
 function padNumber($prmValue, $prmLength)
 {
@@ -215,6 +223,6 @@ function getFont($prmFontName)
 		$font = $_SERVER['WINDIR'] . '/fonts/' . $prmFontName;
 	}
 	return $font;
-} //getFont()
+} #getFont()
 
 </script>

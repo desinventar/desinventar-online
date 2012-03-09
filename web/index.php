@@ -8,6 +8,7 @@ require_once('include/diregion.class.php');
 require_once('include/diregiondb.class.php');
 require_once('include/diregionrecord.class.php');
 require_once('include/geography_operations.php');
+require_once('include/database_operations.php');
 
 $post = $_POST;
 $get  = $_GET;
@@ -854,7 +855,7 @@ switch ($cmd)
 		}
 		if ($iReturn > 0)
 		{
-			$iReturn = ERR_UNKNOWN_ERROR;
+			$iReturn = database_delete($us->q->core, $RegionId);
 		}
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
