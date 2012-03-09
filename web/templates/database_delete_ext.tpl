@@ -5,7 +5,7 @@
 	</div>
 	<div id="divDatabaseDeleteContent">
 		<div class="DatabaseDelete">
-			{-#msgDatabaseDelete_Subtitle#-}<br />
+			{-#msgDatabaseDelete_Subtitle#-} :<br />
 			<table class="center">
 				<tr>
 					<td>
