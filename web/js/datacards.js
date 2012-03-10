@@ -136,6 +136,7 @@ function onReadyDatacards()
 			var mySelect = jQuery('#divDatacard .tblGeography #GeoLevel' + i);
 			mySelect.empty();
 			mySelect.append(jQuery('<option>', { value : '' }).text(''));
+			mySelect.disable();
 		}
 
 		if (jQuery(this).val() == '')
@@ -414,9 +415,14 @@ function updateGeoLevelSelect(prmGeographyId, prmWithChilds)
 	}
 	else
 	{
-		//Reuse GeographyList from cache.
-		var GeographyLevel = prmGeographyId.length/5;
-		doUpdateGeoLevelSelect(GeographyLevel, GeographyList);
+		// Enable sublevels and reuse data from local cache
+		var GeoLevelCount = prmGeographyId.length/5 + 1;
+		for(var GeographyLevel = 1; GeographyLevel < GeoLevelCount; GeographyLevel++)
+		{
+			var GeographyParent = prmGeographyId.substr(0, GeographyLevel * 5);
+			var myGeographyList = jQuery('body').data('GeographyList-' + GeographyParent);
+			doUpdateGeoLevelSelect(GeographyLevel, myGeographyList);
+		}
 	}
 }
 
@@ -432,9 +438,9 @@ function doUpdateGeoLevelSelect(prmGeographyLevel, prmGeographyList)
 	mySelect.val(myPrevValue);
 	if (myPrevValue != '')
 	{
-		//mySelect.trigger('change');
 		myGeographyId = myPrevValue;
 	}
+	mySelect.enable();
 } //doUpdateGeoLevelSelect()
 
 function doDatacardShow()
@@ -846,12 +852,23 @@ function doDatacardClear()
 
 function doDatacardNew()
 {
+
 	DisableEnableForm($('DICard'), false);
 	jQuery('#DisasterBeginTime0').focus();
 	displayDatacardStatusMsg('msgDatacardFill');
 	changeOptions('btnDatacardNew');
 	jQuery('#divRecordNavigationInfo').hide();
 	jQuery('#DICard #Status').val('NEW');
+
+	// Clear values of following sublevels
+	var GeoLevelCount = jQuery('.GeoLevelSelect').size() - 1;
+	for(var i = 1; i < GeoLevelCount; i++)
+	{
+		var mySelect = jQuery('#divDatacard .tblGeography #GeoLevel' + i);
+		mySelect.empty();
+		mySelect.append(jQuery('<option>', { value : '' }).text(''));
+		mySelect.disable();
+	}
 }
 
 function doDatacardEdit()
@@ -874,6 +891,14 @@ function doDatacardEdit()
 				jQuery('#_CMD').val('updateDICard');
 				displayDatacardStatusMsg('msgDatacardFill');
 				changeOptions('btnDatacardEdit');
+
+				// Clear values of following sublevels
+				var GeoLevelCount = jQuery('.GeoLevelSelect').size() - 1;
+				for(var i = 1; i < GeoLevelCount; i++)
+				{
+					var mySelect = jQuery('#divDatacard .tblGeography #GeoLevel' + i);
+					mySelect.disable();
+				}
 				updateGeoLevelSelect(jQuery('#DICard #GeographyId').val(), true);
 				jQuery('#DICard #Status').val('EDIT');
 			}
