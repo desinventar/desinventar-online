@@ -130,6 +130,14 @@ function onReadyDatacards()
 		var GeographyParentId = myGeographyId.substr(0, myGeographyId.length - 5);
 		var GeoLevelCount = jQuery('.GeoLevelSelect').size() - 1;
 
+		// Clear values of following sublevels
+		for(var i = NextGeographyLevel; i < GeoLevelCount; i++)
+		{
+			var mySelect = jQuery('#divDatacard .tblGeography #GeoLevel' + i);
+			mySelect.empty();
+			mySelect.append(jQuery('<option>', { value : '' }).text(''));
+		}
+
 		if (jQuery(this).val() == '')
 		{
 			var PrevGeographyLevel = GeographyLevel - 1;
@@ -137,23 +145,17 @@ function onReadyDatacards()
 			if (PrevGeographyLevel >= 0)
 			{
 				myGeographyId = jQuery('#divDatacard .tblGeography #GeoLevel' + PrevGeographyLevel).val();
-			}
-			// Clear values of following sublevels
-			for(var i = NextGeographyLevel; i < GeoLevelCount; i++)
-			{
-				var mySelect = jQuery('#divDatacard .tblGeography #GeoLevel' + i);
-				mySelect.empty();
-				mySelect.append(jQuery('<option>', { value : '' }).text(''));
+				jQuery('#divDatacard #GeographyId').val(myGeographyId);
 			}
 		}
 		else
 		{
+			jQuery('#divDatacard #GeographyId').val(myGeographyId);
 			if (NextGeographyLevel < GeoLevelCount)
 			{
-				updateGeoLevelSelect(jQuery(this).val(), false);
+				updateGeoLevelSelect(jQuery(this).val(), true);
 			}
 		}
-		jQuery('#divDatacard #GeographyId').val(myGeographyId);
 		jQuery(this).focus();
 	});	
 
@@ -402,7 +404,6 @@ function updateGeoLevelSelect(prmGeographyId, prmWithChilds)
 					jQuery.each(data.GeographyList, function(key, value) {
 						// Store result for later use from cache
 						var NextGeographyLevel = parseInt(key.length)/5;
-						console.log(NextGeographyLevel + ' ' + key);
 						jQuery('body').data('GeographyList-' + key, value);
 						doUpdateGeoLevelSelect(NextGeographyLevel, value);
 					});
@@ -414,7 +415,8 @@ function updateGeoLevelSelect(prmGeographyId, prmWithChilds)
 	else
 	{
 		//Reuse GeographyList from cache.
-		//doUpdateGeoLevelSelect(NextGeographyLevel, GeographyList);
+		var GeographyLevel = prmGeographyId.length/5;
+		doUpdateGeoLevelSelect(GeographyLevel, GeographyList);
 	}
 }
 
@@ -430,7 +432,7 @@ function doUpdateGeoLevelSelect(prmGeographyLevel, prmGeographyList)
 	mySelect.val(myPrevValue);
 	if (myPrevValue != '')
 	{
-		mySelect.trigger('change');
+		//mySelect.trigger('change');
 		myGeographyId = myPrevValue;
 	}
 } //doUpdateGeoLevelSelect()
@@ -873,8 +875,6 @@ function doDatacardEdit()
 				displayDatacardStatusMsg('msgDatacardFill');
 				changeOptions('btnDatacardEdit');
 				updateGeoLevelSelect(jQuery('#DICard #GeographyId').val(), true);
-				jQuery('#GeoLevel0').trigger('change');
-				//jQuery('.GeoLevelSelect').trigger({type : 'loadGeographyItems', ReadOnly : false});
 				jQuery('#DICard #Status').val('EDIT');
 			}
 			else
