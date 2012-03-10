@@ -194,7 +194,7 @@ switch ($cmd)
 		$iReturn = ERR_NO_ERROR;
 		$GeographyId = getParameter('GeographyId','');
 		$GeographyList = array();
-		for($level = 1; $level < strlen($GeographyId)/5; $level++)
+		for($level = 1; $level < strlen($GeographyId)/5 + 1; $level++)
 		{
 			$GeographyParent = substr($GeographyId, 0, $level * 5);
 			$GeographyLevel  = $level;
