@@ -31,14 +31,13 @@ function onReadyQueryDesign()
 		showtip(jQuery(this).data('help'));
 	});
 
-	jQuery('div.QueryDesign div.GeographyList').on('click','li.item',function(event) {
+	jQuery('div.QueryDesign div.GeographyList').on('click', 'li.item input:checkbox', function(event) {
+		console.log('click on checkbox : ' + jQuery(this).prop('checked'));
+		jQuery(this).trigger('GeographyUpdate');
+	}).on('click','li.item span.label', function(event) {
+		jQuery(this).parent().find('input:checkbox').trigger('click');
+	}).on('GeographyUpdate', 'li.item', function(event) {
 		console.log('Geography select : ' + jQuery(this).data('GeographyId'));
-		var checkbox = jQuery('input:checkbox', this);
-		checkbox.prop('checked', !checkbox.prop('checked'));
-		event.preventDefault();
-	}).on('click','li.item input:checkbox',function(event) {
-		jQuery(this).prop('checked', !jQuery(this).prop('checked'));
-		console.log('click on checkbox');
 	});
 	
 	jQuery('div.QueryDesign').on('cmdUpdate', function() {
