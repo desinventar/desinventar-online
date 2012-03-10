@@ -190,6 +190,21 @@ switch ($cmd)
 		$t->assign('sec', $sec);
 		$t->display('main_datacards.tpl');
 	break;
+	case 'cmdGeographyGetItemsById':
+		$answer = array();
+		$iReturn = ERR_NO_ERROR;
+		$GeographyId = getParameter('GeographyId','');
+		$GeographyList = array();
+		for($level = 1; $level < strlen($GeographyId)/5 + 1; $level++)
+		{
+			$GeographyParent = substr($GeographyId, 0, $level * 5);
+			$GeographyLevel  = $level;
+			$GeographyList[$GeographyParent] = $us->getGeographyItemsByLevel($GeographyLevel,$GeographyParent);
+		}
+		$answer['GeographyList'] = $GeographyList;
+		$answer['Status'] = $iReturn;
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
+	break;
 	case 'cmdGeographyGetItemsByLevel':
 		$answer = array();
 		$iReturn = ERR_NO_ERROR;
