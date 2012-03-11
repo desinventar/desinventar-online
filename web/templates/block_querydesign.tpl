@@ -82,29 +82,31 @@
 			</select>
 			</p>
 			<b>{-#ttitegp#-}</b><br />
-			<div style="height: 100px;" class="dwin">
-				<table class="EffectPeople" border="0" cellpadding="0" cellspacing="0">
+			<div class="EffectPeopleList dwin" style="height: 100px;">
+				<table class="EffectPeopleList" border="0" cellpadding="0" cellspacing="0">
 					<tr class="hidden">
 						<td valign="top">
-							<input class="checkbox" type="checkbox" />
-							<span class="label"></span>
-							<span class="options hidden">
-								<select class="operator" name="value[0]" class="small line">
-									<option class="small" value="-1">{-#teffhav#-}</option>
-									<option class="small" value="0" >{-#teffhavnot#-}</option>
-									<option class="small" value="-2">{-#teffdontknow#-}</option>
-									<option class="small" value=">=">{-#teffmajor#-}</option>
-									<option class="small" value="<=">{-#teffminor#-}</option>
-									<option class="small" value="=" >{-#teffequal#-}</option>
-									<option class="small" value="-3">{-#teffbetween#-}</option>
-								</select>
-								<span class="firstvalue hidden">
-									<input class="line" type="text" name="value[1]" size="3" value="" />
+							<div class="EffectPeople" data-field="">
+								<input class="checkbox" type="checkbox" />
+								<span class="label"></span>
+								<span class="options hidden">
+									<select class="operator" name="value[0]" class="small line">
+										<option class="small" value="-1">{-#teffhav#-}</option>
+										<option class="small" value="0" >{-#teffhavnot#-}</option>
+										<option class="small" value="-2">{-#teffdontknow#-}</option>
+										<option class="small" value=">=">{-#teffmajor#-}</option>
+										<option class="small" value="<=">{-#teffminor#-}</option>
+										<option class="small" value="=" >{-#teffequal#-}</option>
+										<option class="small" value="-3">{-#teffbetween#-}</option>
+									</select>
+									<span class="firstvalue hidden">
+										<input class="line" type="text" name="value[1]" size="3" value="" />
+									</span>
+									<span class="lastvalue hidden">{-#tand#-}
+										<input class="line" type="text" name="value[2]" size="3" value="" />
+									</span>
 								</span>
-								<span class="lastvalue hidden">{-#tand#-}
-									<input class="line" type="text" name="value[2]" size="3" value="" />
-								</span>
-							</span>
+							</div>
 						</td>
 					</tr>
 					<!--

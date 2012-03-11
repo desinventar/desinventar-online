@@ -1362,7 +1362,6 @@ switch ($cmd)
 					$t->assign('cauuserl', $cauuserl);
 					# Query words and phrases in dictionary..
 					$ef1 = $us->q->queryLabelsFromGroup('Effect|People', $lg);
-					fb($ef1);
 					$ef2 = $us->q->queryLabelsFromGroup('Effect|Affected', $lg);
 					$ef3 = $us->q->queryLabelsFromGroup('Effect|Economic', $lg);
 					$ef4 = $us->q->queryLabelsFromGroup('Effect|More', $lg);
