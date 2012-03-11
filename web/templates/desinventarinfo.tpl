@@ -1,4 +1,4 @@
-<div id="desinventarInfo" style="display:none;">
+<div id="desinventarInfo" class="desinventarInfo" style="display:none;">
 	<input type="hidden" id="desinventarURL"             value="{-$desinventarURL-}" />
 	<input type="hidden" id="desinventarURLPortal"       value="{-$desinventarURLPortal-}" />
 	<input type="hidden" id="desinventarPortalType"      value="{-$desinventarPortalType-}" />
@@ -41,4 +41,14 @@
 			<option></option>
 		{-/if-}		
 	</select>
+	<div class="EffectList hidden">
+		{-foreach $ef1 as $key => $value-}
+			<div class="EffectPeople" data-field="{-$key-}">
+				<span class="field">{-$key-}</span>
+				<span class="label">{-$value[0]-}</span>
+				<span class="tooltip">{-$value[1]-}</span>
+				<span class="helptext">{-$value[2]-}</span>
+			</div>
+		{-/foreach-}
+	</div>
 </div>
