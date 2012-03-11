@@ -93,6 +93,23 @@ function onReadyQueryDesign()
 		}
 		event.stopPropagation();
 	});
+
+	jQuery('div.QueryDesign div.EffectPeopleList table.EffectPeopleList').on('click', 'input:checkbox', function(event) {
+		jQuery(this).trigger('EffectUpdate');
+	}).on('click','span.label', function(event) {
+		var checkbox = jQuery(this).parent().find('input:checkbox');
+		checkbox.prop('checked', !checkbox.prop('checked'));
+		jQuery(this).trigger('EffectUpdate');
+	}).on('EffectUpdate', 'td div', function(event) {
+		if (jQuery('input:checkbox',this).prop('checked'))
+		{
+			jQuery('span.options', this).show();
+		}
+		else
+		{
+			jQuery('span.options',this).hide();
+		}		
+	});
 	
 	jQuery('div.QueryDesign').on('cmdUpdate', function() {
 		var params = jQuery('body').data('params');
@@ -165,12 +182,12 @@ function onReadyQueryDesign()
 			}
 		});
 		// Load EffectPeople List (ef1)
-		var effect_list = jQuery('div.QueryDesign table.EffectPeople');
+		var effect_list = jQuery('div.QueryDesign table.EffectPeopleList');
 		effect_list.find('tr:gt(0)').remove();
 		jQuery('div.desinventarInfo div.EffectList div.EffectPeople').each(function() {
 			var clone = effect_list.find('tr:first').clone().show();
 			jQuery('span.label', clone).text(jQuery('span.label',this).text());
-			console.log(jQuery(this).data('field'));
+			jQuery('div.EffectPeople',clone).data('field', jQuery(this).data('field'));
 			effect_list.append(clone);
 		});
 	});
