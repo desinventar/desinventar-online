@@ -35,51 +35,55 @@ function onReadyQueryDesign()
 		jQuery(this).trigger('GeographyUpdate');
 	}).on('click','li.item span.label', function(event) {
 		jQuery(this).parent().find('input:checkbox').trigger('click');
+		jQuery(this).trigger('GeographyUpdate');
 	}).on('GeographyUpdate', 'li.item', function(event) {
 		var GeographyId = jQuery(this).data('GeographyId');
 		var GeographyLevel = jQuery(this).data('GeographyLevel');
-		GeographyList = jQuery('body').data('GeographyList-' + GeographyId);
 		var item = jQuery(this);
 		jQuery('ul.list li', item).remove();
-		if (GeographyList == undefined) 
+		var isChecked = jQuery('input:checkbox',this).prop('checked');
+		
+		if (isChecked)
 		{
-			console.log('from server : ' + GeographyId);
-			jQuery.post(
-				jQuery('#desinventarURL').val() + '/',
-				{
-					cmd         : 'cmdGeographyGetItemsById',
-					RegionId    : jQuery('#desinventarRegionId').val(),
-					GeographyId : GeographyId
-				},
-				function(data)
-				{
-					if (parseInt(data.Status) > 0)
+			GeographyList = jQuery('body').data('GeographyList-' + GeographyId);
+			if (GeographyList == undefined) 
+			{
+				jQuery.post(
+					jQuery('#desinventarURL').val() + '/',
 					{
-						jQuery.each(data.GeographyList, function(key, value) {
-							jQuery('body').data('GeographyList' + key, value);
-						});
-						jQuery.each(data.GeographyList[GeographyId], function(key, value) {
-							var clone = jQuery('div.QueryDesign div.GeographyList ul.mainlist li.item:first').clone().show();
-							clone.data('GeographyId', key);
-							clone.data('GeographyLevel', GeographyLevel + 1);
-							jQuery('span.label',clone).text(value.GeographyName);							
-							jQuery('ul.list:first',item).append(clone);
-						});
-					}
-				},
-				'json'
-			);
-		}
-		else
-		{
-			console.log('from cache : ' + GeographyId);
-			jQuery.each(GeographyList, function(key, value) {
-				var clone = jQuery('div.QueryDesign div.GeographyList ul.mainlist li.item:first').clone().show();
-				clone.data('GeographyId', key);
-				clone.data('GeographyLevel', GeographyLevel + 1);
-				jQuery('span.label',clone).text(value.GeographyName);							
-				jQuery('ul.list:first',item).append(clone);
-			});
+						cmd         : 'cmdGeographyGetItemsById',
+						RegionId    : jQuery('#desinventarRegionId').val(),
+						GeographyId : GeographyId
+					},
+					function(data)
+					{
+						if (parseInt(data.Status) > 0)
+						{
+							jQuery.each(data.GeographyList, function(key, value) {
+								jQuery('body').data('GeographyList' + key, value);
+							});
+							jQuery.each(data.GeographyList[GeographyId], function(key, value) {
+								var clone = jQuery('div.QueryDesign div.GeographyList ul.mainlist li.item:first').clone().show();
+								clone.data('GeographyId', key);
+								clone.data('GeographyLevel', GeographyLevel + 1);
+								jQuery('span.label',clone).text(value.GeographyName);							
+								jQuery('ul.list:first',item).append(clone);
+							});
+						}
+					},
+					'json'
+				);
+			}
+			else
+			{
+				jQuery.each(GeographyList, function(key, value) {
+					var clone = jQuery('div.QueryDesign div.GeographyList ul.mainlist li.item:first').clone().show();
+					clone.data('GeographyId', key);
+					clone.data('GeographyLevel', GeographyLevel + 1);
+					jQuery('span.label',clone).text(value.GeographyName);							
+					jQuery('ul.list:first',item).append(clone);
+				});
+			}
 		}
 		event.stopPropagation();
 	});
