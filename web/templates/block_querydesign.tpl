@@ -35,7 +35,7 @@
 			<br/>
 			<input type="hidden" name="D_DisasterSiteNotes[0]" />
 			<textarea class="inputText withHelpFocus" id="DisasterSiteNotes" name="D_DisasterSiteNotes[1]" style="width:220px; height: 40px;"
-				data-help="{-#msgDatacard_DisasterSiteNotes_Helptext#-}">{-$qd.D_DisasterSiteNotes[1]-}</textarea>
+				data-help="{-#msgDatacard_DisasterSiteNotes_Helptext#-}"></textarea>
 		</dd>
 		
 		<!-- BEGIN EVENT SECTION -->
@@ -50,12 +50,12 @@
 			<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_EventDuration_Helptext#-}">{-#msgDatacard_EventDuration#-}</span>
 			<br />
 			<input id="EventDuration" name="D_EventDuration" type="text" class="line fixw withHelpFocus"
-				data-help="{-#msgDatacard_EventDuration_Helptext#-}" value="{-$qd.D_EventDuration-}" />
+				data-help="{-#msgDatacard_EventDuration_Helptext#-}" value="" />
 			<br />
 			<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_EventNotes_Helptext#-}">{-#msgDatacard_EventNotes#-}</span>
 			<br />
 			<textarea id="EventNotes" name="D_EventNotes[1]" style="width:250px; height:40px;"
-				class="inputText withHelpFocus" data-help="{-#msgDatacard_EventNotes_Helptext#-}">{-$qd.D_EventNotes[1]-}</textarea>
+				class="inputText withHelpFocus" data-help="{-#msgDatacard_EventNotes_Helptext#-}"></textarea>
 		</dd>
 			
 		<!-- BEGIN CAUSE SECTION -->
@@ -69,7 +69,7 @@
 			<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_CauseNotes_Helptext#-}">{-#msgDatacard_CauseNotes#-}</span>
 			<br />
 			<textarea name="D_CauseNotes[1]" style="width:250px; height: 40px;"
-				class="inputText withHelpFocus" data-help="{-#msgDatacard_CauseNotes_Helptext#-}">{-$qd.D_CauseNotes[1]-}</textarea>
+				class="inputText withHelpFocus" data-help="{-#msgDatacard_CauseNotes_Helptext#-}"></textarea>
 		</dd>
 		
 		<!-- BEGIN QUERY EFFECTS SECTION -->
