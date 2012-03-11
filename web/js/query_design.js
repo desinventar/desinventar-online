@@ -141,7 +141,6 @@ function onReadyQueryDesign()
 				jQuery('div.QueryDesign select.Event').append(option);
 			}
 		});		
-
 		// Load Cause List
 		jQuery('div.QueryDesign select.Cause').empty();
 		jQuery.each(jQuery('body').data('CauseList'), function(key, value) {
@@ -164,6 +163,15 @@ function onReadyQueryDesign()
 				option.addClass('withHelpOver');
 				jQuery('div.QueryDesign select.Cause').append(option);
 			}
-		});		
+		});
+		// Load EffectPeople List (ef1)
+		var effect_list = jQuery('div.QueryDesign table.EffectPeople');
+		effect_list.find('tr:gt(0)').remove();
+		jQuery('div.desinventarInfo div.EffectList div.EffectPeople').each(function() {
+			var clone = effect_list.find('tr:first').clone().show();
+			jQuery('span.label', clone).text(jQuery('span.label',this).text());
+			console.log(jQuery(this).data('field'));
+			effect_list.append(clone);
+		});
 	});
 } //onReadyQueryDesign()
