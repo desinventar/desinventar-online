@@ -22,8 +22,8 @@
 					</tr>
 				</table>
 			</div>
-			<div class="GeographyList" style="height:280px;" class="dwin">
-				<ul class="list mainlist checktree">
+			<div id="qgeolst" class="GeographyList" style="height:280px;" class="dwin">
+				<ul id="tree-geotree" class="list mainlist checktree">
 					<li class="item">
 						<input class="checkbox" type="checkbox" name="D_GeographyId[]" value="" />
 						<span class="label"></span>
@@ -31,21 +31,6 @@
 					</li>
 				</ul>
 			</div>
-			<div id="qgeolst" style="height: 280px;" class="dwin">
-				<ul id="tree-geotree" class="checktree">
-				<!--
-				{-foreach $geol as $key => $item-}
-					<li id="show-{-$key-}">
-						<input type="checkbox" id="{-$key-}" name="D_GeographyId[]" value="{-$key-}"
-							onClick="setSelMap('{-$item[0]-}', '{-$key-}', this.checked);" {-if $item[3]-}checked{-/if-} />
-						<label for="{-$key-}">{-$item[1]-}</label>
-						<span id="itree-{-$key-}" class="count"></span>
-					</li>
-				{-/foreach-}
-				-->
-				</ul>
-			</div>
-			
 			<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_DisasterSiteNotes_Helptext#-}">{-#msgDatacard_DisasterSiteNotes#-}</span>
 			<br/>
 			<input type="hidden" name="D_DisasterSiteNotes[0]" />
