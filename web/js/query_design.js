@@ -55,7 +55,6 @@ function onReadyQueryDesign()
 					if (parseInt(data.Status) > 0)
 					{
 						jQuery.each(data.GeographyList[GeographyId], function(key, value) {
-							console.log(key + ' ' + value.GeographyName);
 							var clone = jQuery('div.QueryDesign div.GeographyList ul.mainlist li.item:first').clone().show();
 							clone.data('GeographyId', key);
 							clone.data('GeographyLevel', GeographyLevel + 1);
@@ -70,7 +69,7 @@ function onReadyQueryDesign()
 		else
 		{
 		}
-		console.log('Geography select : ' + jQuery(this).data('GeographyId'));
+		event.stopPropagation();
 	});
 	
 	jQuery('div.QueryDesign').on('cmdUpdate', function() {
