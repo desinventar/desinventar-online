@@ -22,7 +22,7 @@
 					</tr>
 				</table>
 			</div>
-			<div id="qgeolst" class="GeographyList" style="height:280px;" class="dwin">
+			<div id="qgeolst" class="GeographyList dwin" style="height:280px;overflow:auto;">
 				<ul id="tree-geotree" class="list mainlist checktree">
 					<li class="item">
 						<input class="checkbox" type="checkbox" name="D_GeographyId[]" value="" />
