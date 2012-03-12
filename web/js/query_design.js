@@ -197,11 +197,10 @@ function onReadyQueryDesign()
 		var effect_list = jQuery('div.QueryDesign table.EffectPeopleList');
 		effect_list.find('tr:gt(0)').remove();
 		jQuery('div.desinventarInfo div.EffectList div.EffectPeople').each(function() {
-			var clone = effect_list.find('tr:first td div').clone().show();
+			var clone = jQuery('tr:last', effect_list).clone().show();
 			jQuery('span.label', clone).text(jQuery('span.label',this).text());
 			jQuery('div.EffectPeople',clone).data('field', jQuery(this).data('field'));
-			effect_list.append('<tr><td></td></tr>');
-			effect_list.find('tr:last td').append(clone);
+			effect_list.append(clone);
 		});
 	});
 } //onReadyQueryDesign()
