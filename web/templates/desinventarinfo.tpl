@@ -43,7 +43,15 @@
 	</select>
 	<div class="EffectList hidden">
 		{-foreach $ef1 as $key => $value-}
-			<div class="EffectPeople" data-field="{-$key-}">
+			<div class="EffectPeople Effect" data-field="{-$key-}">
+				<span class="field">{-$key-}</span>
+				<span class="label">{-$value[0]-}</span>
+				<span class="tooltip">{-$value[1]-}</span>
+				<span class="helptext">{-$value[2]-}</span>
+			</div>
+		{-/foreach-}
+		{-foreach $sec as $key => $value-}
+			<div class="EffectSector Effect" data-field="{-$key-}">
 				<span class="field">{-$key-}</span>
 				<span class="label">{-$value[0]-}</span>
 				<span class="tooltip">{-$value[1]-}</span>

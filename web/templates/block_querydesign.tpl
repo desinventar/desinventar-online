@@ -83,11 +83,11 @@
 			</p>
 			<b>{-#ttitegp#-}</b><br />
 			<div class="EffectPeopleList dwin" style="height: 100px;">
-				<table class="EffectPeopleList" border="0" cellpadding="0" cellspacing="0">
+				<table class="EffectPeopleList EffectList">
 					<tr style="display:none;">
-						<td>
+						<td valign="top">
 							<div class="EffectPeople" data-field="">
-								<input class="checkbox" type="checkbox" />
+								<input class="checkbox" type="checkbox" value="" />
 								<span class="label"></span>
 								<span class="options hidden">
 									<select class="operator" name="value[0]" class="small line">
@@ -116,48 +116,21 @@
 			<!-- SECTORS -->
 			<b>{-#ttiteis#-}</b><br />
 			<div style="height: 80px;" class="dwin">
-				<table border="0" cellpadding="0" cellspacing="0">
-					{-foreach name=sec key=key item=item from=$sec-}
-						{-assign var="ff" value="D_$key"-}
-						<tr>
-							<td valign="top">
-								<input type="checkbox" onFocus="showtip('{-$item[2]-}');" id="{-$key-}"
-									onclick="{-foreach name=sc2 key=k item=i from=$item[3]-}enadisEff('{-$k-}', this.checked);{-/foreach-}enadisEff('{-$key-}', this.checked);"
-									{-if $qd.$ff[0] != ''-}checked{-/if-} />
-								<label for="{-$key-}" onMouseOver="showtip('{-$item[2]-}');">{-$item[0]-}</label>
-								<span id="o{-$key-}" style="display:none">
-									<select id="{-$key-}[0]" name="D_{-$key-}[0]" class="small line" disabled>
-										<option class="small" value="-1" selected>{-#teffhav#-}</option>
-										<option class="small" value="0"  {-if $qd.$ff[0] == '0'-}selected{-/if-}>{-#teffhavnot#-}</option>
-										<option class="small" value="-2" {-if $qd.$ff[0] == '-2'-}selected{-/if-}>{-#teffdontknow#-}</option>
+				<table class="EffectSectorList EffectList">
+					<tr style="display:none;">
+						<td valign="top">
+							<div class="EffectSector" data-field="">
+								<input class="checkbox" type="checkbox" value="" />
+								<span class="label"></span>
+								<span class="options hidden">
+									<select class="operator small line" name="value[0]">
+										<option class="small" value="-1">{-#teffhav#-}</option>
+										<option class="small" value="0" >{-#teffhavnot#-}</option>
+										<option class="small" value="-2">{-#teffdontknow#-}</option>
 									</select>
-									{-foreach name=sc2 key=k item=i from=$item[3]-}
-										{-assign var="ff" value="D_$k"-}
-										<span id="o{-$k-}" style="display:none">
-											<br />{-$i-}
-											<select id="{-$k-}[0]" name="D_{-$k-}[0]" onChange="showeff(this.value, 'x{-$k-}', 'y{-$k-}');" 
-												class="small line" disabled>
-												<option class="small" value=" "></option>
-												<option class="small" value=">=" {-if $qd.$ff[0] == '>='-}selected{-/if-}>{-#teffmajor#-}</option>
-												<option class="small" value="<=" {-if $qd.$ff[0] == '<='-}selected{-/if-}>{-#teffminor#-}</option>
-												<option class="small" value="="  {-if $qd.$ff[0] == '='-}selected{-/if-}>{-#teffequal#-}</option>
-												<option class="small" value="-3" {-if $qd.$ff[0] == '-3'-}selected{-/if-}>{-#teffbetween#-}</option>
-											</select>
-											<span id="x{-$k-}" style="display:none">
-												<input type="text" id="{-$k-}[1]" name="D_{-$k-}[1]" size="3" class="line"
-													value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[1]-}{-else-}1{-/if-}" />
-											</span>
-											<span id="y{-$k-}" style="display:none">{-#tand#-}
-												<input type="text" id="{-$k-}[2]" name="D_{-$k-}[2]" size="3" class="line"
-													value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}" />
-											</span>
-											<br />
-										</span>
-									{-/foreach-}
 								</span>
 							</td>
 						</tr>
-					{-/foreach-}
 				</table>
 			</div>
 			<br />
