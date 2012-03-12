@@ -115,18 +115,24 @@ function onReadyQueryDesign()
 		if (jQuery('input:checkbox',this).prop('checked'))
 		{
 			jQuery('span.options', this).show();
+			jQuery('select.operator',this).enable().change();
 		}
 		else
 		{
 			jQuery('span.options',this).hide();
+			jQuery('select.operator',this).disable().change();
 		}		
 	}).on('HideValues', 'td div', function(event) {
 		jQuery('span.firstvalue', this).hide();
+		jQuery('span.firstvalue input',this).disable();
 		jQuery('span.lastvalue', this).hide();
+		jQuery('span.lastvalue input',this).disable();
 	}).on('ShowFirstValue', 'td div', function(event) {
 		jQuery('span.firstvalue', this).show();
+		jQuery('span.firstvalue input',this).enable();
 	}).on('ShowLastValue', 'td div', function(event) {
 		jQuery('span.lastvalue', this).show();
+		jQuery('span.lastvalue input', this).enable();
 	});
 	
 	jQuery('div.QueryDesign').on('cmdUpdate', function() {
@@ -204,7 +210,11 @@ function onReadyQueryDesign()
 		var effect_list = jQuery('div.QueryDesign table.EffectPeopleList');
 		effect_list.find('tr:gt(0)').remove();
 		jQuery('div.desinventarInfo div.EffectList div.EffectPeople').each(function() {
+			var field = jQuery('span.field', this).text();
 			var clone = jQuery('tr:last', effect_list).clone().show();
+			jQuery('select.operator', clone).attr('name', 'D_' + field + '[0]').disable();
+			jQuery('span.firstvalue input', clone).attr('name', 'D_' + field + '[1]');
+			jQuery('span.lastvalue input', clone).attr('name', 'D_' + field + '[2]').disable();
 			jQuery('span.label', clone).text(jQuery('span.label',this).text());
 			jQuery('div.EffectPeople',clone).data('field', jQuery(this).data('field'));
 			effect_list.append(clone);

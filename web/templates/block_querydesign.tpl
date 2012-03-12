@@ -99,10 +99,10 @@
 										<option class="small" value="=" >{-#teffequal#-}</option>
 										<option class="small" value="-3">{-#teffbetween#-}</option>
 									</select>
-									<span class="firstvalue hidden">
+									<span class="firstvalue">
 										<input class="line" type="text" name="value[1]" size="3" value="" />
 									</span>
-									<span class="lastvalue hidden">{-#tand#-}
+									<span class="lastvalue">{-#tand#-}
 										<input class="line" type="text" name="value[2]" size="3" value="" />
 									</span>
 								</span>
