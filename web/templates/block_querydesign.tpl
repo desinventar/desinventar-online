@@ -84,8 +84,8 @@
 			<b>{-#ttitegp#-}</b><br />
 			<div class="EffectPeopleList dwin" style="height: 100px;">
 				<table class="EffectPeopleList" border="0" cellpadding="0" cellspacing="0">
-					<tr class="hidden">
-						<td valign="top">
+					<tr style="display:none;">
+						<td>
 							<div class="EffectPeople" data-field="">
 								<input class="checkbox" type="checkbox" />
 								<span class="label"></span>
