@@ -52,7 +52,7 @@ function doViewportCreate()
 			this.defwidth = this.width;
 			this.deftitle = this.title;
 			DesInventar.WestPanel.superclass.initComponent.call(this);
-		},
+		}
 	});
 	DesInventar.Viewport = Ext.extend(Ext.Viewport, {
 		initComponent: function() {
