@@ -190,7 +190,7 @@ if (MODE != 'command')
 	$t->compile_dir     = SMTY_DIR;
 	$t->left_delimiter  = '{-';
 	$t->right_delimiter = '-}';
-	$t->force_compile   = false;
+	$t->force_compile   = true;
 	$t->cache_dir = SMTY_DIR;
 	$t->setCaching(Smarty::CACHING_LIFETIME_CURRENT);
 	$t->cache_lifetime  = 3600;

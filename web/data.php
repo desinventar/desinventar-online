@@ -6,7 +6,7 @@
 require_once('include/loader.php');
 require_once('include/diregion.class.php');
 $post = $_POST;
-
+fb($_POST);
 $RegionId = getParameter('RegionId', getParameter('_REG', getParameter('r','')));
 if ($RegionId == '')
 {
@@ -58,8 +58,10 @@ if (isset($post['page']) || isset($post['_D+cmd']))
 		// Process results with default options
 		$qd  = $us->q->genSQLWhereDesconsultar($post);
 		$sqc = $us->q->genSQLSelectCount($qd);
+		fb($sqc);
 		$c	 = $us->q->getresult($sqc);
 		$iNumberOfRecords = $c['counter'];
+		fb($iNumberOfRecords);
 		// Reuse calculate SQL values in all pages; calculate limits in pages
 		$levg = array();
 		$fld = $post['_D+Field'];
