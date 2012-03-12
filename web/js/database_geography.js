@@ -44,6 +44,8 @@ function onReadyGeography()
 		jQuery('div.Geography form.Edit').each(function() {
 			this.reset();
 		});
+		jQuery('div.Geography form.Edit input.GeographyId').val('');
+		
 		jQuery('div.Geography form.Edit input.GeographyActiveCheckbox').change();
 		jQuery('div.Geography div.Add').hide();
 		jQuery('div.Geography div.Edit').show();
