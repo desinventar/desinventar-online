@@ -148,6 +148,7 @@ function onReadyQueryDesign()
 		geography_list.find('li').hide();
 		jQuery.each(jQuery('body').data('GeographyList'), function(key, value) {
 			var item = geography_list.find('li:last').clone().show();
+			jQuery('input:checkbox', item).attr('value', key);
 			jQuery('span.label', item).html(value.GeographyName);
 			jQuery(item).data('GeographyId', key);
 			jQuery(item).data('GeographyLevel', 0);
