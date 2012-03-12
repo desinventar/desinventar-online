@@ -102,14 +102,13 @@ function onReadyQueryDesign()
 		jQuery(this).trigger('EffectUpdate');
 	}).on('change','select.operator', function(event) {
 		var value = jQuery(this).val();
-		jQuery('span.firstvalue', jQuery(this).parent()).hide();
-		jQuery('span.lastvalue', jQuery(this).parent()).hide();
+		jQuery(this).trigger('HideValues');
 		if ((value == '>=') || (value == '<=') || (value == '=') || (value == '-3') )
 		{
-			jQuery('span.firstvalue', jQuery(this).parent()).show();
+			jQuery(this).trigger('ShowFirstValue');
 			if (value == '-3')
 			{
-				jQuery('span.lastvalue', jQuery(this).parent()).show();
+				jQuery(this).trigger('ShowLastValue');
 			}
 		}
 	}).on('EffectUpdate', 'td div', function(event) {
@@ -121,6 +120,13 @@ function onReadyQueryDesign()
 		{
 			jQuery('span.options',this).hide();
 		}		
+	}).on('HideValues', 'td div', function(event) {
+		jQuery('span.firstvalue', this).hide();
+		jQuery('span.lastvalue', this).hide();
+	}).on('ShowFirstValue', 'td div', function(event) {
+		jQuery('span.firstvalue', this).show();
+	}).on('ShowLastValue', 'td div', function(event) {
+		jQuery('span.lastvalue', this).show();
 	});
 	
 	jQuery('div.QueryDesign').on('cmdUpdate', function() {
