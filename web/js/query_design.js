@@ -100,6 +100,18 @@ function onReadyQueryDesign()
 		var checkbox = jQuery(this).parent().find('input:checkbox');
 		checkbox.prop('checked', !checkbox.prop('checked'));
 		jQuery(this).trigger('EffectUpdate');
+	}).on('change','select.operator', function(event) {
+		var value = jQuery(this).val();
+		jQuery('span.firstvalue', jQuery(this).parent()).hide();
+		jQuery('span.lastvalue', jQuery(this).parent()).hide();
+		if ((value == '>=') || (value == '<=') || (value == '=') || (value == '-3') )
+		{
+			jQuery('span.firstvalue', jQuery(this).parent()).show();
+			if (value == '-3')
+			{
+				jQuery('span.lastvalue', jQuery(this).parent()).show();
+			}
+		}
 	}).on('EffectUpdate', 'td div', function(event) {
 		if (jQuery('input:checkbox',this).prop('checked'))
 		{
