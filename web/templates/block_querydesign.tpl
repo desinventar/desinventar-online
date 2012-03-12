@@ -109,38 +109,6 @@
 							</div>
 						</td>
 					</tr>
-					<!--
-					{-foreach name=ef1 key=key item=item from=$ef1-}
-						{-assign var="ff" value="D_$key"-}
-						<tr>
-							<td valign="top">
-								<input type="checkbox" onFocus="showtip('{-$item[2]-}');" id="{-$key-}"
-									onclick="enadisEff('{-$key-}', this.checked);" {-if $qd.$ff[0] != ''-}checked{-/if-} />
-								<label for="{-$key-}" onMouseOver="showtip('{-$item[2]-}');">{-$item[0]-}</label>
-								<span id="o{-$key-}" style="display:none">
-									<select id="{-$key-}[0]" name="D_{-$key-}[0]" class="small line" disabled
-										onChange="showeff(this.value, 'x{-$key-}', 'y{-$key-}');">
-										<option class="small" value="-1" {-if $qd.$ff[0] == '-1'-}selected{-/if-}>{-#teffhav#-}</option>
-										<option class="small" value="0"  {-if $qd.$ff[0] == '0'-}selected{-/if-}>{-#teffhavnot#-}</option>
-										<option class="small" value="-2" {-if $qd.$ff[0] == '-2'-}selected{-/if-}>{-#teffdontknow#-}</option>
-										<option class="small" value=">=" {-if $qd.$ff[0] == '>='-}selected{-/if-}>{-#teffmajor#-}</option>
-										<option class="small" value="<=" {-if $qd.$ff[0] == '<='-}selected{-/if-}>{-#teffminor#-}</option>
-										<option class="small" value="="  {-if $qd.$ff[0] == '='-}selected{-/if-}>{-#teffequal#-}</option>
-										<option class="small" value="-3" {-if $qd.$ff[0] == '-3'-}selected{-/if-}>{-#teffbetween#-}</option>
-									</select>
-									<span id="x{-$key-}" style="display:none"><br />
-										<input type="text" id="{-$key-}[1]" name="D_{-$key-}[1]" size="3" class="line"
-											value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[1]-}{-else-}1{-/if-}" />
-									</span>
-									<span id="y{-$key-}" style="display:none">{-#tand#-}
-										<input type="text" id="{-$key-}[2]" name="D_{-$key-}[2]" size="3" class="line"
-											value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}" />
-									</span>
-								</span>
-							</td>
-						</tr>
-					{-/foreach-}
-					-->
 				</table>
 			</div>
 			<br />
