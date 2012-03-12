@@ -4640,14 +4640,20 @@ function doGetRegionInfo(RegionId)
 
 	function disab(field)
 	{
-		field.disabled = true;
-		field.className = "disabled";
+		if (field != null)
+		{
+			field.disabled = true;
+			field.className = "disabled";
+		}
 	}
 	
 	function enab(field)
 	{
-		field.disabled = false;
-		field.className = "";
+		if (field != null)
+		{
+			field.disabled = false;
+			field.className = "";
+		}
 	}
 	
 	// Effects options
@@ -5141,7 +5147,7 @@ function doViewportCreate()
 			this.defwidth = this.width;
 			this.deftitle = this.title;
 			DesInventar.WestPanel.superclass.initComponent.call(this);
-		},
+		}
 	});
 	DesInventar.Viewport = Ext.extend(Ext.Viewport, {
 		initComponent: function() {
