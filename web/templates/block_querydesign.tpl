@@ -170,14 +170,6 @@
 			<br />
 			<input class="fixw line withHelpFocus" data-help="{-#msgDatacard_EffectNotes_Helptext#-}" type="text" id="EffectNotes" name="D_EffectNotes"  value="{-$qd.EffectNotes[1]-}"/>
 			<br />
-			<!--
-			{-foreach name=ef4 key=k item=i from=$ef4-}
-				{-assign var="ff" value="D_$k"-}
-				<b onMouseOver="showtip('{-$i[2]-}');">{-$i[0]-}</b><br />
-				<input type="text" id="{-$k-}" name="D_{-$k-}" class="fixw line" value="{-$qd.$ff[1]-}" onFocus="showtip('{-$i[2]-}');" />
-				<br />
-			{-/foreach-}
-			-->
 		</dd>
 		<!-- END QUERY EFFECTS SECTION -->
 		
@@ -191,41 +183,37 @@
 			</select>
 			</p>
 			<div style="height: 300px;" class="dwin">
-				<table border=0 cellpadding=0 cellspacing=0>
-					{-foreach name=eef key=key item=item from=$EEFieldList-}
-						<tr>
-							<td valign="top">
-								{-if $item[2] == "INTEGER" || $item[2] == "DOUBLE" || $item[2] == "CURRENCY" -}
-									<input type="checkbox" onFocus="showtip('{-$item[1]-}');" id="{-$key-}" 
-										onclick="enadisEff('{-$key-}', this.checked);" />
-									<label for="{-$key-}" onMouseOver="showtip('{-$item[1]-}');">{-$item[0]-}</label>
-									<span id="o{-$key-}" style="display:none">
-										<select id="{-$key-}[0]" name="EEFieldQuery[{-$key-}][Operator]" onChange="showeff(this.value, 'x{-$key-}', 'y{-$key-}');" 
-											class="small" disabled>
-											<option class="small" value=""></option>
-											<option class="small" value=">=">{-#teffmajor#-}</option>
-											<option class="small" value="<=">{-#teffminor#-}</option>
-											<option class="small" value="=">{-#teffequal#-}</option>
-											<option class="small" value="-3">{-#teffbetween#-}</option>
-										</select>
-										<input type="hidden" name="EEFieldQuery[{-$key-}][Type]" value="{-$item[2]-}" />
-										<span id="x{-$key-}" style="display:none"><br />
-											<input type="text" id="{-$key-}[1]" name="EEFieldQuery[{-$key-}][Value1]" size="3" value="1" class="line" />
-										</span>
-										<span id="y{-$key-}" style="display:none">
-											{-#tand#-} <input type="text" id="{-$key-}[2]" name="EEFieldQuery[{-$key-}][Value2]" size="3" value="10" class="line" />
-										</span>
+				<table class="EffectAdditional EffectList">
+					<tr style="display:none;">
+						<td valign="top">
+							<div class="EffectAdditional EffectNumeric">
+								<input class="checkbox" type="checkbox" />
+								<span class="label"></span>
+								<span class="options hidden">
+									<select class="operator small line" name="value[0]">
+										<option class="small" value=""></option>
+										<option class="small" value=">=">{-#teffmajor#-}</option>
+										<option class="small" value="<=">{-#teffminor#-}</option>
+										<option class="small" value="=">{-#teffequal#-}</option>
+										<option class="small" value="-3">{-#teffbetween#-}</option>
+									</select>
+									<input type="hidden" name="value[Type]" value="" />
+									<span class="firstvalue">
+										<input class="line" type="text" name="value[1]" size="3" value="1" />
 									</span>
-								{-/if-}
-								{-if $item[2] == "TEXT" || $item[2] == "DATE" -}
-									{-$item[0]-}<br />
-									<input type="text" id="{-$key-}" name="EEFieldQuery[{-$key-}][Value]" style="width: 290px;" class="line"
-										onFocus="showtip('{-$item[1]-}');" /><br />
-									<input type="hidden" name="EEFieldQuery[{-$key-}][Type]" value="{-$item[2]-}" />
-								{-/if-}
-							</td>
-						</tr>
-					{-/foreach-}
+									<span class="lastvalue">{-#tand#-}
+										<input class="line" type="text" name="value[2]" size="3" value="10" />
+									</span>
+								</span>
+							<div>
+							<div class="EffectAdditional EffectText">
+								<span class="label"></span><br />
+								<input class="line" type="text" name="value[Text]" style="width: 290px;" />
+								<br />
+								<input type="hidden" name="value[Type]" value="" />
+							</div>
+						</td>
+					</tr>
 				</table>
 			</div>
 		</dd>
