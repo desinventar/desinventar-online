@@ -66,5 +66,13 @@
 				<span class="helptext">{-$value[2]-}</span>
 			</div>
 		{-/foreach-}
+		{-foreach $ef4 as $key => $value-}
+			<div class="EffectOther Effect" data-field="{-$key-}">
+				<span class="field">{-$key-}</span>
+				<span class="label">{-$value[0]-}</span>
+				<span class="tooltip">{-$value[1]-}</span>
+				<span class="helptext">{-$value[2]-}</span>
+			</div>
+		{-/foreach-}
 	</div>
 </div>

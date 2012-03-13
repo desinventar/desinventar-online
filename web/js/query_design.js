@@ -267,12 +267,53 @@ function onReadyQueryDesign()
 		// Load QueryCustom field list
 		var field_list = jQuery('div.QueryDesign table.QueryCustom div.list');
 		field_list.find('div:gt(0)').remove();
+		jQuery('div.QueryDesign table.QueryCustom div.defaultlist span').each(function() {
+			var field = jQuery(this).data('field');
+			var clone = jQuery('div:last', field_list).clone().show();
+			jQuery(clone).data('field', field);
+			jQuery(clone).data('type', jQuery(this).data('type'));
+			jQuery('input', clone).attr('value', jQuery(this).text());
+			field_list.append(clone);
+		});
 		jQuery('div.desinventarInfo div.EffectList div.EffectPeople').each(function() {
 			var field = jQuery('span.field', this).text();
 			var clone = jQuery('div:last', field_list).clone().show();
 			jQuery(clone).data('field', jQuery(this).data('field'));
 			jQuery(clone).data('type', 'number');
 			jQuery('input', clone).attr('value', jQuery('span.label',this).text());
+			field_list.append(clone);
+		});
+		jQuery('div.desinventarInfo div.EffectList div.EffectSector').each(function() {
+			var field = jQuery('span.field', this).text();
+			var clone = jQuery('div:last', field_list).clone().show();
+			jQuery(clone).data('field', jQuery(this).data('field'));
+			jQuery(clone).data('type', 'boolean');
+			jQuery('input', clone).attr('value', jQuery('span.label',this).text());
+			field_list.append(clone);
+		});
+		jQuery('div.desinventarInfo div.EffectList div.EffectLoss').each(function() {
+			var field = jQuery('span.field', this).text();
+			var clone = jQuery('div:last', field_list).clone().show();
+			jQuery(clone).data('field', jQuery(this).data('field'));
+			jQuery(clone).data('type', 'number');
+			jQuery('input', clone).attr('value', jQuery('span.label',this).text());
+			field_list.append(clone);
+		});
+		jQuery('div.desinventarInfo div.EffectList div.EffectOther').each(function() {
+			var field = jQuery('span.field', this).text();
+			var clone = jQuery('div:last', field_list).clone().show();
+			jQuery(clone).data('field', jQuery(this).data('field'));
+			jQuery(clone).data('type', 'text');
+			jQuery('input', clone).attr('value', jQuery('span.label',this).text());
+			field_list.append(clone);
+		});
+		jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
+			var field = key;
+			var type = value[2];
+			var clone = jQuery('div:last', field_list).clone().show();
+			jQuery(clone).data('field', field);
+			jQuery(clone).data('type', 'text');
+			jQuery('input', clone).attr('value', value[0]);
 			field_list.append(clone);
 		});
 		
