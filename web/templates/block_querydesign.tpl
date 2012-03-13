@@ -183,34 +183,36 @@
 			</select>
 			</p>
 			<div style="height: 300px;" class="dwin">
-				<table class="EffectAdditional EffectList">
+				<table class="EffectAdditionalList EffectList">
 					<tr style="display:none;">
 						<td valign="top">
-							<div class="EffectAdditional EffectNumeric">
-								<input class="checkbox" type="checkbox" />
-								<span class="label"></span>
-								<span class="options hidden">
-									<select class="operator small line" name="value[0]">
-										<option class="small" value=""></option>
-										<option class="small" value=">=">{-#teffmajor#-}</option>
-										<option class="small" value="<=">{-#teffminor#-}</option>
-										<option class="small" value="=">{-#teffequal#-}</option>
-										<option class="small" value="-3">{-#teffbetween#-}</option>
-									</select>
-									<input type="hidden" name="value[Type]" value="" />
-									<span class="firstvalue">
-										<input class="line" type="text" name="value[1]" size="3" value="1" />
+							<div class="EffectAdditional">
+								<input class="type" type="hidden" name="value[Type]" value="" />
+								<div class="Effect EffectNumeric">
+									<input class="checkbox" type="checkbox" />
+									<span class="label"></span>
+									<span class="options hidden">
+										<select class="operator small line" name="value[0]">
+											<option class="small" value=""></option>
+											<option class="small" value=">=">{-#teffmajor#-}</option>
+											<option class="small" value="<=">{-#teffminor#-}</option>
+											<option class="small" value="=">{-#teffequal#-}</option>
+											<option class="small" value="-3">{-#teffbetween#-}</option>
+										</select>
+										<input type="hidden" name="value[Type]" value="" />
+										<span class="firstvalue">
+											<input class="line" type="text" name="value[1]" size="3" value="1" />
+										</span>
+										<span class="lastvalue">{-#tand#-}
+											<input class="line" type="text" name="value[2]" size="3" value="10" />
+										</span>
 									</span>
-									<span class="lastvalue">{-#tand#-}
-										<input class="line" type="text" name="value[2]" size="3" value="10" />
-									</span>
-								</span>
-							<div>
-							<div class="EffectAdditional EffectText">
-								<span class="label"></span><br />
-								<input class="line" type="text" name="value[Text]" style="width: 290px;" />
-								<br />
-								<input type="hidden" name="value[Type]" value="" />
+								<div>
+								<div class="Effect EffectText">
+									<span class="label"></span><br />
+									<input class="text line" type="text" name="value[Text]" style="width: 290px;" />
+									<br />
+								</div>
 							</div>
 						</td>
 					</tr>

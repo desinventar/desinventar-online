@@ -223,5 +223,46 @@ function onReadyQueryDesign()
 			jQuery('div.EffectLoss',clone).data('field', jQuery(this).data('field'));
 			effect_list.append(clone);
 		});
+		// Load EffectAdditional List (EEFieldList)
+		var effect_list = jQuery('div.QueryDesign table.EffectAdditionalList');
+		effect_list.find('tr:gt(0)').remove();
+		jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
+			console.log(key + ' ' + value[0]);
+			var field = key;
+			var type = value[2];
+			var clone = jQuery('tr:last', effect_list).clone().show();
+			jQuery('div.Effect', clone).hide();
+			switch(type)
+			{
+				case 'INTEGER':
+				case 'DOUBLE':
+				case 'CURRENCY':
+					jQuery('select.operator'      , clone).attr('name', 'EEFieldQuery[' + field + '][0]').disable();
+					jQuery('span.firstvalue input', clone).attr('name', 'EEFieldQuery[' + field + '][1]');
+					jQuery('span.lastvalue input' , clone).attr('name', 'EEFieldQuery[' + field + '][2]').disable();
+					jQuery('div.EffectNumeric', clone).show();
+				break;
+				case 'TEXT':
+					jQuery('input.text', clone).attr('name', 'EEFieldQuery[' + field + '][Text]');
+					jQuery('div.EffectText', clone).show();
+				case 'DATE':
+				break;
+			}
+			jQuery('input.type', clone).attr('name', 'EEFieldQuery[' + field + '][Type]');
+			
+			jQuery('span.label', clone).text(value[0]);
+			jQuery('div.EffectAdditional',clone).data('field', jQuery(this).data('field'));
+			effect_list.append(clone);
+		});
+		/*
+		jQuery('div.desinventarInfo div.EffectList div.EffectAdditional').each(function() {
+			var field = jQuery('span.field', this).text();
+			var clone = jQuery('tr:last', effect_list).clone().show();
+			jQuery('select.operator', clone).attr('name', 'D_' + field + '[0]').disable();
+			jQuery('span.label', clone).text(jQuery('span.label',this).text());
+			jQuery('div.EffectLoss',clone).data('field', jQuery(this).data('field'));
+			effect_list.append(clone);
+		});
+		*/
 	});
 } //onReadyQueryDesign()
