@@ -428,8 +428,11 @@ switch ($cmd)
 			$answer['RecordCount'] = $RecordCount;
 			$GeographyList = $us->getGeographyItemsByLevel(0, '');
 			$answer['GeographyList'] = $GeographyList;
-			$params = array();
+
+			$EEFieldList = $us->q->getEEFieldList('True');
+			$answer['EEFieldList'] = $EEFieldList;
 			
+			$params = array();			
 			# Get range of dates for Query Design
 			$ydb = $us->getDateRange();
 			$params['MinYear'] = substr($ydb[0], 0, 4);
