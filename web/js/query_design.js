@@ -117,10 +117,11 @@ function onReadyQueryDesign()
 	
 	jQuery('div.QueryDesign').on('cmdUpdate', function() {
 		var params = jQuery('body').data('params');
+
+		// Initialize fields
 		jQuery('input.RegionId', this).val(jQuery('body').data('RegionId'));
 		jQuery('input.MinYear' , this).val(params.MinYear);
 		jQuery('input.MaxYear' , this).val(params.MaxYear);
-
 		jQuery('input.queryBeginYear', this).val(params.MinYear);
 		jQuery('input.queryEndYear', this).val(params.MaxYear);
 
