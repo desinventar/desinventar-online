@@ -120,6 +120,11 @@ function onReadyQueryDesign()
 		jQuery('input.RegionId', this).val(jQuery('body').data('RegionId'));
 		jQuery('input.MinYear' , this).val(params.MinYear);
 		jQuery('input.MaxYear' , this).val(params.MaxYear);
+
+		jQuery('input.queryBeginYear', this).val(params.MinYear);
+		jQuery('input.queryEndYear', this).val(params.MaxYear);
+
+		// Load Geolevels List
 		var geolevel_list = jQuery('body').data('GeolevelsList');
 		jQuery('div.QueryDesign div.GeolevelsHeader table tr td:gt(0)').remove();
 		jQuery.each(geolevel_list, function(key, value) {
@@ -242,27 +247,18 @@ function onReadyQueryDesign()
 					jQuery('span.lastvalue input' , clone).attr('name', 'EEFieldQuery[' + field + '][2]').disable();
 					jQuery('div.EffectNumeric', clone).show();
 				break;
+				case 'STRING':
 				case 'TEXT':
+				case 'DATE':
 					jQuery('input.text', clone).attr('name', 'EEFieldQuery[' + field + '][Text]');
 					jQuery('div.EffectText', clone).show();
-				case 'DATE':
 				break;
 			}
 			jQuery('input.type', clone).attr('name', 'EEFieldQuery[' + field + '][Type]');
-			
+			jQuery('input.type', clone).attr('value', type);
 			jQuery('span.label', clone).text(value[0]);
-			jQuery('div.EffectAdditional',clone).data('field', jQuery(this).data('field'));
+			jQuery('div.EffectAdditional',clone).data('field', field);
 			effect_list.append(clone);
 		});
-		/*
-		jQuery('div.desinventarInfo div.EffectList div.EffectAdditional').each(function() {
-			var field = jQuery('span.field', this).text();
-			var clone = jQuery('tr:last', effect_list).clone().show();
-			jQuery('select.operator', clone).attr('name', 'D_' + field + '[0]').disable();
-			jQuery('span.label', clone).text(jQuery('span.label',this).text());
-			jQuery('div.EffectLoss',clone).data('field', jQuery(this).data('field'));
-			effect_list.append(clone);
-		});
-		*/
 	});
 } //onReadyQueryDesign()
