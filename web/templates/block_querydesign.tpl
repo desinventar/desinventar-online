@@ -316,27 +316,18 @@
 							<input type="button" class="CustomQueryListItem" value="{-$rc2.RecordAuthor[0]-}" onClick="setAdvQuery('RecordAuthor', 'text')" /><br />
 							<input type="button" class="CustomQueryListItem" value="{-$rc2.RecordCreation[0]-}" onClick="setAdvQuery('RecordCreation','date')" /><br />
 							<input type="button" class="CustomQueryListItem" value="{-$rc2.RecordUpdate[0]-}" onClick="setAdvQuery('RecordUpdate','date')" /><br />
-							<hr />
-							{-foreach name=ef1 key=key item=item from=$ef1-}
-								<input type="button" class="CustomQueryListItem" value="{-$item[0]-}" onClick="setAdvQuery('{-$key-}','number')" /><br />
-							{-/foreach-}
-							<hr />
-							{-foreach name=sec key=key item=item from=$sec-}
-								<input type="button" class="CustomQueryListItem" value="{-$item[0]-}" onClick="setAdvQuery('{-$key-}','boolean')" /><br />
-							{-/foreach-}
-							<hr />
-							{-foreach name=ef3 key=key item=item from=$ef3-}
-								<input type="button" class="CustomQueryListItem" value="{-$item[0]-}" onClick="setAdvQuery('{-$key-}','number')" /><br />
-							{-/foreach-}
-							<hr />
-							{-foreach name=ef4 key=key item=item from=$ef4-}
-								<input type="button" class="CustomQueryListItem" value="{-$item[0]-}" onClick="setAdvQuery('{-$key-}','text')" /><br />
-							{-/foreach-}
-							<hr />
-							{-foreach name=eef key=key item=item from=$EEFieldList-}
-								<input type="button" class="CustomQueryListItem" value="{-$item[0]-}" onClick="setAdvQuery('{-$key-}','date')" /><br />
-							{-/foreach-}
 							-->
+						</div>
+						<div class="defaultlist hidden">
+							<span data-field="DisasterSerial"    data-type="text"></span>
+							<span data-field="DisasterBeginTime" data-type="date"></span>
+							<span data-field="DisasterSiteNotes" data-type="text"></span>
+							<span data-field="EventDuration"     data-type="text"></span>
+							<span data-field="EventNotes"        data-type="text"></span>
+							<span data-field="CauseNotes"        data-type="text"></span>
+							<span data-field="RecordAuthor"      data-type="text"></span>
+							<span data-field="RecordCreation"    data-type="date"></span>
+							<span data-field="RecordUpdate"      data-type="date"></span>
 						</div>
 					</td>
 					<td align="center">
