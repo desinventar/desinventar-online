@@ -137,29 +137,30 @@
 			
 			<!-- Losses -->
 			<b>{-#ttitloss#-}</b><br />
-			{-foreach name=ef3 key=k item=i from=$ef3-}
-				{-assign var="ff" value="D_$k"-}
-				<div class="EffectLossesValue">
-					<input type="checkbox" data-help="{-$i[2]-}" id="{-$k-}" check="{-if $qd.$ff[0] != ''-}checked{-/if-}" />
-					<label for="{-$k-}" onMouseOver="showtip('{-$i[2]-}');">{-$i[0]-}</label>
-					<span class="options" id="o{-$k-}" style="display:none">
-						<select class="operator" id="{-$k-}[0]" name="D_{-$k-}[0]" onChange="showeff(this.value, 'x{-$k-}', 'y{-$k-}');" class="small line" disabled>
-							<option class="small" value=">=" {-if $qd.$ff[0] == '>='-}selected{-/if-}>{-#teffmajor#-}</option>
-							<option class="small" value="<=" {-if $qd.$ff[0] == '<='-}selected{-/if-}>{-#teffminor#-}</option>
-							<option class="small" value="="  {-if $qd.$ff[0] == '='-}selected{-/if-}>{-#teffequal#-}</option>
-							<option class="small" value="-3" {-if $qd.$ff[0] == '-3'-}selected{-/if-}>{-#teffbetween#-}</option>
-						</select>
-						<span class="minvalue" id="x{-$k-}" style="display:none"><br />
-							<input type="text" id="{-$k-}[1]" name="D_{-$k-}[1]" size="5" class="line"
-								value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[1]-}{-else-}1{-/if-}" />
-						</span>
-						<span class="maxvalue" id="y{-$k-}" style="display:none">{-#tand#-}
-							<input type="text" id="{-$k-}[2]" name="D_{-$k-}[2]" size="5" class="line" 
-								value="{-if $qd.$ff[1] != ''-}{-$qd.$ff[2]-}{-else-}10{-/if-}" />
-						</span>
-					</span>
-				</div>
-			{-/foreach-}
+				<table class="EffectLossesList EffectList">
+					<tr style="display:none;">
+						<td valign="top">
+							<div class="EffectLoss" data-field="">
+								<input class="checkbox" type="checkbox" value="" />
+								<span class="label"></span>
+								<span class="options hidden">
+									<select class="operator small line" name="value[0]">
+										<option class="small" value=">=">{-#teffmajor#-}</option>
+										<option class="small" value="<=">{-#teffminor#-}</option>
+										<option class="small" value="=" >{-#teffequal#-}</option>
+										<option class="small" value="-3">{-#teffbetween#-}</option>
+									</select>
+									<span class="firstvalue">
+										<input class="line" type="text" name="value[1]" size="5" value="" />
+									</span>
+									<span class="lastvalue">{-#tand#-}
+										<input class="line" type="text" name="value[2]" size="5" value="" />
+									</span>
+								</span>
+							</div>
+						</td>
+					</tr>
+				</table>
 			<br />
 			<span class="fieldLabel withHelpOver"  data-help="{-#msgDatacard_EffectOtherLosses_Helptext#-}" title="{-#msgDatacard_EffectOtherLosses_Tooltip#-}">{-#msgDatacard_EffectOtherLosses#-}</span>
 			<br />

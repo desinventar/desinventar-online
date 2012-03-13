@@ -5,26 +5,6 @@
 
 function onReadyQueryDesign()
 {
-	jQuery('div.QueryDesign div.EffectLossesValue input').click(function() {
-		parent = jQuery(this).parent();
-		if (jQuery(this).prop('checked'))
-		{
-			jQuery('span.options', parent).show();
-			jQuery('select.operator',parent).enable().change();
-			jQuery('span.minvalue',parent).enable();
-			jQuery('span.maxvalue',parent).enable();
-		}
-		else
-		{
-			jQuery('span.options', parent).hide();
-			jQuery('select.operator',parent).disable().change();
-			jQuery('span.minvalue',parent).disable();
-			jQuery('span.maxvalue',parent).disable();
-		}
-	}).focus(function() {
-		showtip(jQuery(this).data('help'));
-	});
-
 	jQuery('div.QueryDesign').on('mouseover','.withHelpOver',function() {
 		showtip(jQuery(this).data('help'));
 	}).on('focus','.withHelpFocus',function() {
@@ -229,6 +209,18 @@ function onReadyQueryDesign()
 			jQuery('select.operator', clone).attr('name', 'D_' + field + '[0]').disable();
 			jQuery('span.label', clone).text(jQuery('span.label',this).text());
 			jQuery('div.EffectSector',clone).data('field', jQuery(this).data('field'));
+			effect_list.append(clone);
+		});
+
+		// Load EffectLoss List (ef3)
+		var effect_list = jQuery('div.QueryDesign table.EffectLossesList');
+		effect_list.find('tr:gt(0)').remove();
+		jQuery('div.desinventarInfo div.EffectList div.EffectLoss').each(function() {
+			var field = jQuery('span.field', this).text();
+			var clone = jQuery('tr:last', effect_list).clone().show();
+			jQuery('select.operator', clone).attr('name', 'D_' + field + '[0]').disable();
+			jQuery('span.label', clone).text(jQuery('span.label',this).text());
+			jQuery('div.EffectLoss',clone).data('field', jQuery(this).data('field'));
 			effect_list.append(clone);
 		});
 	});
