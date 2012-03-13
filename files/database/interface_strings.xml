@@ -2045,6 +2045,24 @@
 			Conforme à seqüência de campos do Formulário Básico; recomenda-se utilizar as seguintes chaves para as observações: (deve-se digitar a chave e em seguida a observação correspondente): R. Desabrigados; T. Transporte; Vd. Residências destruídas; Ac. Aqueduto; Va. Residências afetadas; En. Energia; V. Estradas; I. Indústria; A. Agricultura; Al. Esgoto; P. Pecuária; C. Comunicações; S. Saúde; Ma. Magnitude; Ed. Educação; Fe. Data do fim de um evento de período comprido; Vp. Valor das perdas.
 			In accordance; with the sequence of fields in the Basic Record; it is recommended to use the following codes for observations (first type the code and then the corresponding observation): R. Relocated; T. Transport; Vd. Homes destroyed; Ac. Aqueduct; Va. Homes Affected; En. Energy; V. Routes; I. Industry; A. Agriculture; Al. Sewerage; P. Fishing; C. Communications; S. Health; Ma. Magnitude; Ed. Education; Fe. Date of the end of an event which covers a long period. Vp. Loss Value.</Text>
 		</Message>
+		<Message id="msgDatacard_RecordAuthor">
+			<Text LangIsoCode="eng">Author</Text>
+			<Text LangIsoCode="spa">Autor</Text>
+			<Text LangIsoCode="por">Autor</Text>
+			<Text LangIsoCode="fre">Auteur</Text>
+		</Message>
+		<Message id="msgDatacard_RecordCreation">
+			<Text LangIsoCode="eng">Creation date</Text>
+			<Text LangIsoCode="spa">Fecha creación</Text>
+			<Text LangIsoCode="por">Data de criação</Text>
+			<Text LangIsoCode="fre">Date de création</Text>
+		</Message>
+		<Message id="msgDatacard_RecordUpdate">
+			<Text LangIsoCode="eng">Updated</Text>
+			<Text LangIsoCode="spa">Fecha actualización</Text>
+			<Text LangIsoCode="por">Data de atualização</Text>
+			<Text LangIsoCode="fre">Mise à jour</Text>
+		</Message>
 	</Group>
 	<Group name="grpMainStrings">
 		<Message id="twelcome">

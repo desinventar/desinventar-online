@@ -306,28 +306,17 @@
 								<input type="button" class="CustomQueryListItem" value="" />
 								<br />
 							</div>
-							<!--
-							<input type="button" class="CustomQueryListItem" value="{-$dis.DisasterSerial[0]-}" onClick="setAdvQuery('DisasterSerial', 'text')" /><br />
-							<input type="button" class="CustomQueryListItem" value="{-$dis.DisasterBeginTime[0]-}" onClick="setAdvQuery('DisasterBeginTime', 'date')" /><br />
-							<input type="button" class="CustomQueryListItem" value="{-$dis.DisasterSiteNotes[0]-}" onClick="setAdvQuery('DisasterSiteNotes', 'text')" /><br />
-							<input type="button" class="CustomQueryListItem" value="{-$eve.EventDuration[0]-}" onClick="setAdvQuery('EventDuration', 'text')" /><br />
-							<input type="button" class="CustomQueryListItem" value="{-$eve.EventNotes[0]-}" onClick="setAdvQuery('EventNotes', 'text')" /><br />
-							<input type="button" class="CustomQueryListItem" value="{-$cau.CauseNotes[0]-}" onClick="setAdvQuery('CauseNotes', 'text')" /><br />
-							<input type="button" class="CustomQueryListItem" value="{-$rc2.RecordAuthor[0]-}" onClick="setAdvQuery('RecordAuthor', 'text')" /><br />
-							<input type="button" class="CustomQueryListItem" value="{-$rc2.RecordCreation[0]-}" onClick="setAdvQuery('RecordCreation','date')" /><br />
-							<input type="button" class="CustomQueryListItem" value="{-$rc2.RecordUpdate[0]-}" onClick="setAdvQuery('RecordUpdate','date')" /><br />
-							-->
 						</div>
 						<div class="defaultlist hidden">
-							<span data-field="DisasterSerial"    data-type="text"></span>
-							<span data-field="DisasterBeginTime" data-type="date"></span>
-							<span data-field="DisasterSiteNotes" data-type="text"></span>
-							<span data-field="EventDuration"     data-type="text"></span>
-							<span data-field="EventNotes"        data-type="text"></span>
-							<span data-field="CauseNotes"        data-type="text"></span>
-							<span data-field="RecordAuthor"      data-type="text"></span>
-							<span data-field="RecordCreation"    data-type="date"></span>
-							<span data-field="RecordUpdate"      data-type="date"></span>
+							<span data-field="DisasterSerial"    data-type="text">{-#msgDatacard_DisasterSerial#-}</span>
+							<span data-field="DisasterBeginTime" data-type="date">{-#msgDatacard_DisasterBeginTime#-}</span>
+							<span data-field="DisasterSiteNotes" data-type="text">{-#msgDatacard_DisasterSiteNotes#-}</span>
+							<span data-field="EventDuration"     data-type="text">{-#msgDatacard_EventDuration#-}</span>
+							<span data-field="EventNotes"        data-type="text">{-#msgDatacard_EventNotes#-}</span>
+							<span data-field="CauseNotes"        data-type="text">{-#msgDatacard_CauseNotes#-}</span>
+							<span data-field="RecordAuthor"      data-type="text">{-#msgDatacard_RecordAuthor#-}</span>
+							<span data-field="RecordCreation"    data-type="date">{-#msgDatacard_RecordCreation#-}</span>
+							<span data-field="RecordUpdate"      data-type="date">{-#msgDatacard_RecordUpdate#-}</span>
 						</div>
 					</td>
 					<td align="center">
