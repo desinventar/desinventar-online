@@ -114,6 +114,10 @@ function onReadyQueryDesign()
 		jQuery('span.lastvalue', this).show();
 		jQuery('span.lastvalue input', this).enable();
 	});
+
+	jQuery('div.QueryDesign').on('click', 'table.QueryCustom div.field', function(event) {
+		setAdvQuery(jQuery(this).data('field'), jQuery(this).data('type'));
+	});
 	
 	jQuery('div.QueryDesign').on('cmdUpdate', function() {
 		var params = jQuery('body').data('params');
@@ -233,7 +237,6 @@ function onReadyQueryDesign()
 		var effect_list = jQuery('div.QueryDesign table.EffectAdditionalList');
 		effect_list.find('tr:gt(0)').remove();
 		jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
-			console.log(key + ' ' + value[0]);
 			var field = key;
 			var type = value[2];
 			var clone = jQuery('tr:last', effect_list).clone().show();
@@ -261,5 +264,17 @@ function onReadyQueryDesign()
 			jQuery('div.EffectAdditional',clone).data('field', field);
 			effect_list.append(clone);
 		});
+		// Load QueryCustom field list
+		var field_list = jQuery('div.QueryDesign table.QueryCustom div.list');
+		field_list.find('div:gt(0)').remove();
+		jQuery('div.desinventarInfo div.EffectList div.EffectPeople').each(function() {
+			var field = jQuery('span.field', this).text();
+			var clone = jQuery('div:last', field_list).clone().show();
+			jQuery(clone).data('field', jQuery(this).data('field'));
+			jQuery(clone).data('type', 'number');
+			jQuery('input', clone).attr('value', jQuery('span.label',this).text());
+			field_list.append(clone);
+		});
+		
 	});
 } //onReadyQueryDesign()

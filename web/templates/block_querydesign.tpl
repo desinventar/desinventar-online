@@ -298,10 +298,15 @@
 			<br />
 			<span class="dlgmsg">{-#tadvqryhelp#-}</span>
 			<br />
-			<table border="0" width="100%">
+			<table class="QueryCustom" border="0" width="100%">
 				<tr valign="top">
 					<td>
-						<div style="height:180px;" class="dwin">
+						<div class="list dwin" style="height:180px;">
+							<div class="field" data-field="" data-type="" style="display:none;">
+								<input type="button" class="CustomQueryListItem" value="" />
+								<br />
+							</div>
+							<!--
 							<input type="button" class="CustomQueryListItem" value="{-$dis.DisasterSerial[0]-}" onClick="setAdvQuery('DisasterSerial', 'text')" /><br />
 							<input type="button" class="CustomQueryListItem" value="{-$dis.DisasterBeginTime[0]-}" onClick="setAdvQuery('DisasterBeginTime', 'date')" /><br />
 							<input type="button" class="CustomQueryListItem" value="{-$dis.DisasterSiteNotes[0]-}" onClick="setAdvQuery('DisasterSiteNotes', 'text')" /><br />
@@ -331,6 +336,7 @@
 							{-foreach name=eef key=key item=item from=$EEFieldList-}
 								<input type="button" class="CustomQueryListItem" value="{-$item[0]-}" onClick="setAdvQuery('{-$key-}','date')" /><br />
 							{-/foreach-}
+							-->
 						</div>
 					</td>
 					<td align="center">
