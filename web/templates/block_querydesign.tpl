@@ -77,8 +77,8 @@
 		<dd>
 			<p align="right">{-#msgOperator#-}
 			<select name="QueryEffect[OP]" class="dlgmsg small line">
-				<option class="small" value="AND" {-if $qd.QueryEffect[OP] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-				<option class="small" value="OR"  {-if $qd.QueryEffect[OP] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
+				<option class="small" value="AND">{-#tand#-}</option>
+				<option class="small" value="OR" >{-#tor#-}</option>
 			</select>
 			</p>
 			<b>{-#ttitegp#-}</b><br />
@@ -164,11 +164,11 @@
 			<br />
 			<span class="fieldLabel withHelpOver"  data-help="{-#msgDatacard_EffectOtherLosses_Helptext#-}" title="{-#msgDatacard_EffectOtherLosses_Tooltip#-}">{-#msgDatacard_EffectOtherLosses#-}</span>
 			<br />
-			<input class="fixw line withHelpFocus" data-help="{-#msgDatacard_EffectOtherLosses_Helptext#-}" type="text" id="EffectOtherLosses" name="D_EffectOtherLosses"  value="{-$qd.EffectOtherLosses[1]-}"/>
+			<input class="fixw line withHelpFocus" data-help="{-#msgDatacard_EffectOtherLosses_Helptext#-}" type="text" id="EffectOtherLosses" name="D_EffectOtherLosses"  value="" />
 			<br />
 			<span class="fieldLabel withHelpOver"  data-help="{-#msgDatacard_EffectNotes_Helptext#-}" title="{-#msgDatacard_EffectNotes_Tooltip#-}">{-#msgDatacard_EffectNotes#-}</span>
 			<br />
-			<input class="fixw line withHelpFocus" data-help="{-#msgDatacard_EffectNotes_Helptext#-}" type="text" id="EffectNotes" name="D_EffectNotes"  value="{-$qd.EffectNotes[1]-}"/>
+			<input class="fixw line withHelpFocus" data-help="{-#msgDatacard_EffectNotes_Helptext#-}" type="text" id="EffectNotes" name="D_EffectNotes"  value="" />
 			<br />
 		</dd>
 		<!-- END QUERY EFFECTS SECTION -->
@@ -178,15 +178,15 @@
 		<dd>
 			<p align="right">{-#msgOperator#-}
 			<select name="QueryEEField[OP]" class="dlgmsg small line">
-				<option class="small" value="AND" {-if $qd.QueryEEField[OP] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-				<option class="small" value="OR"  {-if $qd.QueryEEField[OP] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
+				<option class="small" value="AND">{-#tand#-}</option>
+				<option class="small" value="OR" >{-#tor#-}</option>
 			</select>
 			</p>
 			<div style="height: 300px;" class="dwin">
 				<table class="EffectAdditionalList EffectList">
 					<tr style="display:none;">
 						<td valign="top">
-							<div class="EffectAdditional">
+							<div class="EffectAdditional" data-field="">
 								<input class="type" type="hidden" name="value[Type]" value="" />
 								<div class="Effect EffectNumeric">
 									<input class="checkbox" type="checkbox" />
@@ -207,11 +207,10 @@
 											<input class="line" type="text" name="value[2]" size="3" value="10" />
 										</span>
 									</span>
-								<div>
+								</div>
 								<div class="Effect EffectText">
 									<span class="label"></span><br />
 									<input class="text line" type="text" name="value[Text]" style="width: 290px;" />
-									<br />
 								</div>
 							</div>
 						</td>
@@ -233,15 +232,12 @@
 							<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}">{-#ttitsince#-}:</span>
 						</td>
 						<td>
-							<input class="line withHelpFocus" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}"
-								type="text" id="queryBeginYear" name="D_DisasterBeginTime[]" size="4" maxlength="4" 
-								value="{-if $qd.D_DisasterBeginTime[0] != ''-}{-$qd.D_DisasterBeginTime[0]-}{-else-}{-$yini-}{-/if-}" />
+							<input class="line withHelpFocus queryBeginYear" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}"
+								type="text" id="queryBeginYear" name="D_DisasterBeginTime[]" size="4" maxlength="4" value="" />
 							<input class="line withHelpFocus" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}" 
-								type="text" id="queryBeginMonth" name="D_DisasterBeginTime[]" size="2" maxlength="2"
-								value="{-$qd.D_DisasterBeginTime[1]-}" />
+								type="text" id="queryBeginMonth" name="D_DisasterBeginTime[]" size="2" maxlength="2" value="" />
 							<input class="line withHelpFocus" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}" 
-								type="text" id="queryBeginDay" name="D_DisasterBeginTime[]" size="2" maxlength="2"
-								value="{-$qd.D_DisasterBeginTime[2]-}" />
+								type="text" id="queryBeginDay" name="D_DisasterBeginTime[]" size="2" maxlength="2" value="" />
 						</td>
 					</tr>
 					<tr>
@@ -249,15 +245,12 @@
 							<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}">{-#ttituntil#-}:</span>
 						</td>
 						<td>
-							<input class="line withHelpFocus" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}" 
-								type="text" id="queryEndYear" name="D_DisasterEndTime[]" size="4" maxlength="4"
-								value="{-if $qd.D_DisasterEndTime[0] != ''-}{-$qd.D_DisasterEndTime[0]-}{-else-}{-$yend-}{-/if-}" />
+							<input class="line withHelpFocus queryEndYear" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}" 
+								type="text" id="queryEndYear" name="D_DisasterEndTime[]" size="4" maxlength="4" value="" />
 							<input class="line withHelpFocus" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}"
-								type="text" id="queryEndMonth" name="D_DisasterEndTime[]" size="2" maxlength="2"
-								value="{-$qd.D_DisasterEndTime[1]-}" />
+								type="text" id="queryEndMonth" name="D_DisasterEndTime[]" size="2" maxlength="2" value="" />
 							<input class="line withHelpFocus" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}" 
-								type="text" id="queryEndDay" name="D_DisasterEndTime[]" size="2" maxlength="2"
-								value="{-$qd.D_DisasterEndTime[2]-}" />
+								type="text" id="queryEndDay" name="D_DisasterEndTime[]" size="2" maxlength="2" value="" />
 						</td>
 					</tr>
 				</table>
@@ -265,12 +258,12 @@
 				<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_DisasterSource_Helptext#-}">{-#msgDatacard_DisasterSource#-}</span>
 				<br />
 				<select name="D_DisasterSource[0]" class="dlgmsg small line">
-					<option class="small" value="AND" {-if $qd.D_DisasterSource[0] == 'AND'-}selected{-/if-}>{-#tand#-}</option>
-					<option class="small" value="OR"  {-if $qd.D_DisasterSource[0] == 'OR'-}selected{-/if-}>{-#tor#-}</option>
+					<option class="small" value="AND">{-#tand#-}</option>
+					<option class="small" value="OR" >{-#tor#-}</option>
 				</select>
 				<br />
 				<textarea id="txtDisasterSource" name="D_DisasterSource[1]" style="width:220px; height:40px;" 
-					class="inputText withHelpFocus" data-help="{-#msgDatacard_DisasterSource_Helptext#-}">{-$qd.D_DisasterSource[1]-}</textarea>
+					class="inputText withHelpFocus" data-help="{-#msgDatacard_DisasterSource_Helptext#-}"></textarea>
 				<br />
 				<div id="divQueryRecordStatus">
 					<span class="fieldLabel">{-#tdcstatus#-}</span>
@@ -286,13 +279,13 @@
 				</div>
 				<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_DisasterSerial_Helptext#-}">{-#tserial#-}</span>
 				<select name="D_DisasterSerial[0]" class="small line">
-					<option class="small" value=""  {-if $qd.D_DisasterSerial[0] == ''-}selected{-/if-}>{-#tonly#-}</option>
-					<option class="small" value="NOT" {-if $qd.D_DisasterSerial[0] == 'NOT'-}selected{-/if-}>{-#texclude#-}</option>
-					<option class="small" value="INCLUDE" {-if $qd.D_DisasterSerial[0] == 'INCLUDE'-}selected{-/if-}>{-#tinclude#-}</option>
+					<option class="small" value=""       >{-#tonly#-}</option>
+					<option class="small" value="NOT"    >{-#texclude#-}</option>
+					<option class="small" value="INCLUDE">{-#tinclude#-}</option>
 				</select>
 				<br />
 				<input  class="line fixw withHelpFocus" data-help="{-#msgDatacard_DisasterSerial_Helptext#-}" 
-					type="text" name="D_DisasterSerial[1]" value="{-$qd.D_DisasterSerial[1]-}" />
+					type="text" name="D_DisasterSerial[1]" value="" />
 			</div>
 		</dd>
 		<!-- END DATETIME SECTION -->
@@ -300,8 +293,8 @@
 		<!-- BEGIN CUSTOMQUERY SECTION -->
 		<dt>{-#madvsection#-}</dt>
 		<dd>
-			<textarea id="QueryCustom" name="QueryCustom" style="width:300px; height:45px;" 
-				class="inputText" onFocus="showtip('');">{-$qd.QueryCustom-}</textarea>
+			<textarea id="QueryCustom" name="QueryCustom" 
+				style="width:300px; height:45px;" class="inputText"></textarea>
 			<br />
 			<span class="dlgmsg">{-#tadvqryhelp#-}</span>
 			<br />
