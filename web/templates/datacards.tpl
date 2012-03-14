@@ -138,13 +138,6 @@
 											<b>{-#msgDatacard_DisasterGeographyId#-}</b><b class="required">*</b>
 											<br />
 											<input id="GeographyId" name="GeographyId" type="hidden" size="25" />
-											<div style="display:none;">
-											<br />
-											{-foreach key=key item=GeoLevel from=$GeoLevelList name=GeoLevelList-}
-												<span class="GeographyItemInfo" id="GeographyItemId{-$GeoLevel.GeoLevelId-}">GeographyItem{-$GeoLevel.GeoLevelId-}</span>
-												<span class="GeographyItemInfo" id="GeographyItemValue{-$GeoLevel.GeoLevelId-}">GeographyItem{-$GeoLevel.GeoLevelId-}</span><br />
-											{-/foreach-}
-											</div>
 										</td>
 										<td valign="top" title="{-$LabelsDisaster.DisasterGeographyId[1]-}">
 											<table class="tblGeography">

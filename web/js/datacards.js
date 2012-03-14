@@ -1315,10 +1315,7 @@ function setDICard(prmRegionId, arr)
 
 	//Set GeographyItem info into hidden fields
 	jQuery('#divDatacard .tblGeography select:gt(1)').empty().disable();
-	jQuery(myForm).find('.GeographyItemInfo').text('');
 	jQuery(arr['GeographyItems']).each(function(key, value) {
-		jQuery(myForm).find('#GeographyItemId' + key).text(value['GeographyId']);
-		jQuery(myForm).find('#GeographyItemValue' + key).text(value['GeographyName']);
 		var mySelect = jQuery('#divDatacard .tblGeography #GeoLevel' + key);
 		if (parseInt(key) == 0)
 		{
