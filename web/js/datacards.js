@@ -403,6 +403,7 @@ function doDatacardInitialize()
 		var clone = jQuery('tr:last', effect_list).clone().show();
 		jQuery('span.label'  , clone).text(label);
 		jQuery('span.label'  , clone).attr('title', jQuery('span.tooltip', this).text());
+		jQuery('select.value', clone).attr('id', field);
 		jQuery('select.value', clone).attr('name', field);
 		jQuery('select.value', clone).data('helptext', jQuery('span.helptext', this).text());
 		effect_list.append(clone);
@@ -805,7 +806,6 @@ function requestDatacard(myCmd, myValue)
 	var bReturn = true;
 	var RegionId=jQuery('#desinventarRegionId').val();
 	jQuery('#dostat').html('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif' + '" alt="" />');
-
 	jQuery.post(jQuery('#desinventarURL').val() + '/cards.php',
 		{
 			cmd:myCmd,
@@ -814,6 +814,7 @@ function requestDatacard(myCmd, myValue)
 		},
 		function(data)
 		{
+			jQuery('#dostat').html('');
 			if (myCmd == 'getNextSerial')
 			{
 				if (data.DisasterSerial.length >= 5)
@@ -828,7 +829,6 @@ function requestDatacard(myCmd, myValue)
 				{
 					jQuery('#cardsRecordSource').val('');
 					valid = setDICardFromId(RegionId, data.DisasterId, data.RecordNumber, data.RecordCount);
-					
 					if (jQuery('#desinventarUserRoleValue').val() >= 2)
 					{
 						disenabutton($('btnDatacardEdit'), false);
@@ -1152,16 +1152,7 @@ function doDatacardCancel()
 function doDatacardGotoFirst()
 {
 	displayDatacardStatusMsg('');
-	if (jQuery('#cardsRecordSource').val() == 'data')
-	{
-		var RecordNumber = 1;
-		var DisasterId = jQuery('.linkGridGotoCard[rowindex=' + RecordNumber + ']').attr('DisasterId');
-		valid = setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId, RecordNumber, jQuery('#cardsRecordCount').val());
-	}
-	else
-	{
-		bFound = requestDatacard('getDisasterIdFirst', jQuery('#DisasterId').val());
-	}
+	bFound = requestDatacard('getDisasterIdFirst', jQuery('#DisasterId').val());
 	if (jQuery('#desinventarUserRoleValue').val() >= 2)
 	{
 		disenabutton($('btnDatacardEdit'), false);
@@ -1319,7 +1310,7 @@ function setDICard(prmRegionId, arr)
 	var diform = null;
 	var myForm = null;
 	diform = $('DICard');
-	myForm = jQuery(diform);
+	myForm = jQuery('div.Datacard');
 	
 	var objElems = diform.elements; // DICard is DesInventar form..
 	for (i=0; i < objElems.length; i++)
@@ -1336,7 +1327,7 @@ function setDICard(prmRegionId, arr)
 		}
 	}
 
-	jQuery(myForm).find('#PrevDisasterSerial').val(jQuery(myForm).find('#DisasterSerial').val());
+	jQuery('#PrevDisasterSerial', myForm).val(jQuery('#DisasterSerial', myForm).val());
 
 	//Set GeographyItem info into hidden fields
 	jQuery('#divDatacard .tblGeography select:gt(1)').empty().disable();
