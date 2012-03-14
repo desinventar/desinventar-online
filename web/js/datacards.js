@@ -1340,8 +1340,10 @@ function setDICard(prmRegionId, arr)
 		}
 		else
 		{
-			varName = jQuery(myForm).find('#' + objElems[i].id).attr('name');
-			setElementValue(objElems[i], arr[varName]);
+			varName = objElems[i].id;
+			//varName = jQuery(myForm).find('#' + objElems[i].id).attr('name');
+			console.log(varName);
+			//setElementValue(objElems[i], arr[varName]);
 		}
 	}
 
@@ -1360,9 +1362,6 @@ function setDICard(prmRegionId, arr)
 			mySelect.append(jQuery('<option>', { value : value.GeographyId }).text(value.GeographyName));
 		}
 	});
-	
-	// Load Select Boxes with Geography Info
-	//jQuery(myForm).find('.GeoLevelSelect').trigger({type: 'loadGeographyItems', ReadOnly: true});
 	
 	// Enable Edit Button according to Role
 	if (jQuery('#desinventarUserRoleValue').val() >= 2)
