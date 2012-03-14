@@ -2349,6 +2349,11 @@ function onReadyDatacards()
 {
 	jQuery('#divDatacardWindow').hide();
 
+	jQuery('div.Datacard').on('cmdInitialize', function() {
+		doDatacardInitialize();
+		return false;
+	});
+
 	// Limit length of text area fields using a maxlength attribute...	
 	jQuery('#DICard textarea').keyup(function() {
 		var maxlength = parseInt(jQuery(this).attr('maxlength'));
@@ -2724,7 +2729,27 @@ function onReadyDatacards()
 	});
 	//Initialize components
 	jQuery('#divDatacard .tblGeography tr:first').hide();
+	jQuery('div.Datacard table.EffectPeopleList').on('focus','select.value', function(event) {
+		showtip(jQuery(this).data('helptext'), '#f1bd41');
+	});
 } //onReadyDatacards()
+
+function doDatacardInitialize()
+{
+	// Load EffectPeople List (ef1)
+	var effect_list = jQuery('div.Datacard table.EffectPeopleList');
+	effect_list.find('tr:gt(0)').remove();
+	jQuery('div.desinventarInfo div.EffectList div.EffectPeople').each(function() {
+		var field = jQuery('span.field', this).text();
+		var label = jQuery('span.label',this).text();
+		var clone = jQuery('tr:last', effect_list).clone().show();
+		jQuery('span.label'  , clone).text(label);
+		jQuery('span.label'  , clone).attr('title', jQuery('span.tooltip', this).text());
+		jQuery('select.value', clone).attr('name', field);
+		jQuery('select.value', clone).data('helptext', jQuery('span.helptext', this).text());
+		effect_list.append(clone);
+	});
+} //doDatacardInitialize()
 
 function updateGeoLevelSelect(prmGeographyId, prmWithChilds)
 {
@@ -3657,10 +3682,7 @@ function setDICard(prmRegionId, arr)
 
 	//Set GeographyItem info into hidden fields
 	jQuery('#divDatacard .tblGeography select:gt(1)').empty().disable();
-	jQuery(myForm).find('.GeographyItemInfo').text('');
 	jQuery(arr['GeographyItems']).each(function(key, value) {
-		jQuery(myForm).find('#GeographyItemId' + key).text(value['GeographyId']);
-		jQuery(myForm).find('#GeographyItemValue' + key).text(value['GeographyName']);
 		var mySelect = jQuery('#divDatacard .tblGeography #GeoLevel' + key);
 		if (parseInt(key) == 0)
 		{
@@ -6091,7 +6113,7 @@ function doDatabaseLoadData()
 				});
 				jQuery('body').data('GeographyList', data.GeographyList);
 				// Trigger event on mainblock components to update them
-				jQuery('.mainblock').trigger('cmdUpdate');
+				jQuery('.mainblock').trigger('cmdInitialize');
 				// Info
 				jQuery('#desinventarLang').val(data.params.LangIsoCode);
 				jQuery('#desinventarRegionId').val(data.params.RegionId);
@@ -6223,7 +6245,7 @@ function onReadyQueryDesign()
 		setAdvQuery(jQuery(this).data('field'), jQuery(this).data('type'));
 	});
 	
-	jQuery('div.QueryDesign').on('cmdUpdate', function() {
+	jQuery('div.QueryDesign').on('cmdInitialize', function() {
 		var params = jQuery('body').data('params');
 
 		// Initialize fields
