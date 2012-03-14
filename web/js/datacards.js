@@ -387,11 +387,13 @@ function onReadyDatacards()
 	});
 	//Initialize components
 	jQuery('#divDatacard .tblGeography tr:first').hide();
+	jQuery('div.Datacard table.EffectPeopleList').on('focus','select.value', function(event) {
+		showtip(jQuery(this).data('helptext'), '#f1bd41');
+	});
 } //onReadyDatacards()
 
 function doDatacardInitialize()
 {
-	console.log('datacard initialize');
 	// Load EffectPeople List (ef1)
 	var effect_list = jQuery('div.Datacard table.EffectPeopleList');
 	effect_list.find('tr:gt(0)').remove();
@@ -402,6 +404,7 @@ function doDatacardInitialize()
 		jQuery('span.label'  , clone).text(label);
 		jQuery('span.label'  , clone).attr('title', jQuery('span.tooltip', this).text());
 		jQuery('select.value', clone).attr('name', field);
+		jQuery('select.value', clone).data('helptext', jQuery('span.helptext', this).text());
 		effect_list.append(clone);
 	});
 } //doDatacardInitialize()
