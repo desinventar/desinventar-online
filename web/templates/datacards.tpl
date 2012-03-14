@@ -230,24 +230,20 @@
 									</tr>
 									<tr>
 										<td valign="top">
-											<table width="100%" class="grid">
+											<table class="EffectSectorList grid" width="100%">
 												<!-- BEGIN Table Sectors -->
-												{-foreach name=sec key=key item=item from=$sec-}
-													<tr>
-														<td align="right">
-															<span title="{-$item[1]-}">{-$item[0]-}</span>
-														</td>
-														<td>
-															<select id="{-$key-}" name="{-$key-}" style="width:120px;" 
-																class="line clsEffectSector" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$item[2]-}', '#f1bd41')">
-																<option class="small" value="-1">{-#teffhav#-}</option>
-																<option class="small" value="0" selected>{-#teffhavnot#-}</option>
-																<option class="small" value="-2">{-#teffdontknow#-}</option>
-															</select>
-														</td>
-													</tr>
-													{-counter-}
-												{-/foreach-}
+												<tr style="display:none;">
+													<td align="right">
+														<span class="label" title=""></span>
+													</td>
+													<td>
+														<select class="value line clsEffectSector" id="" name="" style="width:120px;">
+															<option class="small" value="-1">{-#teffhav#-}</option>
+															<option class="small" value="0" selected="selected">{-#teffhavnot#-}</option>
+															<option class="small" value="-2">{-#teffdontknow#-}</option>
+														</select>
+													</td>
+												</tr>
 											</table>
 										</td>
 										<td valign="top">
