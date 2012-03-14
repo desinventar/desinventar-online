@@ -212,8 +212,7 @@
 											<span class="label" title=""></span>
 										</td>
 										<td>
-											<select class="value" name="fieldname" data-helptext=""
-												class="line clsEffectNumeric" tabindex="{-$MyTabIndex-}" style="width:120px;" onFocus="showtip('{-$item[2]-}', '#f1bd41');" >
+											<select class="value line clsEffectNumeric" name="fieldname" data-helptext="" style="width:120px;" >
 												<option class="small" value="-1">{-#teffhav#-}</option>
 												<option class="small" value="0" selected>{-#teffhavnot#-}</option>
 												<option class="small" value="-2">{-#teffdontknow#-}</option>
