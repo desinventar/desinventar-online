@@ -119,7 +119,7 @@ function onReadyQueryDesign()
 		setAdvQuery(jQuery(this).data('field'), jQuery(this).data('type'));
 	});
 	
-	jQuery('div.QueryDesign').on('cmdUpdate', function() {
+	jQuery('div.QueryDesign').on('cmdInitialize', function() {
 		var params = jQuery('body').data('params');
 
 		// Initialize fields
