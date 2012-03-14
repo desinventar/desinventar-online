@@ -161,7 +161,7 @@ function doDatabaseLoadData()
 				});
 				jQuery('body').data('GeographyList', data.GeographyList);
 				// Trigger event on mainblock components to update them
-				jQuery('.mainblock').trigger('cmdUpdate');
+				jQuery('.mainblock').trigger('cmdInitialize');
 				// Info
 				jQuery('#desinventarLang').val(data.params.LangIsoCode);
 				jQuery('#desinventarRegionId').val(data.params.RegionId);

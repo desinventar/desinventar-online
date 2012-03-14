@@ -1,5 +1,5 @@
 {-config_load file="$lg.conf" section="grpDatacard"-}
-<div id="divDatacard">
+<div id="divDatacard" class="Datacard mainblock">
 	<table width="100%" border="0" cellpadding="0" cellspacing="0" >
 		<tr valign="top">
 			<td align="left" width="45%">
@@ -206,24 +206,20 @@
 						<tr valign="top">
 							<td>
 								<b>{-#teffects#-}</b><br />
-								<table width="100%" class="grid">
-									<!-- BEGIN Table Effects over People-->
-									{-foreach name=ef1 key=key item=item from=$ef1-}
-										<tr>
-											<td align="right">
-												<span title="{-$item[1]-}">{-$item[0]-}</span>
-											</td>
-											<td>
-												<select id="{-$key-}" name="{-$key-}" 
-													class="line clsEffectNumeric" tabindex="{-$MyTabIndex-}" style="width:120px;" onFocus="showtip('{-$item[2]-}', '#f1bd41');" >
-													<option class="small" value="-1">{-#teffhav#-}</option>
-													<option class="small" value="0" selected>{-#teffhavnot#-}</option>
-													<option class="small" value="-2">{-#teffdontknow#-}</option>
-												</select>
-											</td>
-										</tr>
-										{-counter-}
-									{-/foreach-}
+								<table class="EffectPeopleList grid" width="100%">
+									<tr style="display:none;">
+										<td align="right">
+											<span class="label" title=""></span>
+										</td>
+										<td>
+											<select class="value" name="fieldname" data-helptext=""
+												class="line clsEffectNumeric" tabindex="{-$MyTabIndex-}" style="width:120px;" onFocus="showtip('{-$item[2]-}', '#f1bd41');" >
+												<option class="small" value="-1">{-#teffhav#-}</option>
+												<option class="small" value="0" selected>{-#teffhavnot#-}</option>
+												<option class="small" value="-2">{-#teffdontknow#-}</option>
+											</select>
+										</td>
+									</tr>
 								</table> 
 							</td>
 							<td>
