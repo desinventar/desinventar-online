@@ -272,6 +272,7 @@ if (MODE != 'command')
 	}
 	
 	// General Information (common to portal/app)
+	fb($desinventarMode);
 	$t->assign('desinventarMode'        , $desinventarMode);
 	$t->assign('desinventarURL'         , $desinventarURL);
 	$t->assign('desinventarURLPortal'   , $desinventarURLPortal);
