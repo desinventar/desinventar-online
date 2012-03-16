@@ -1340,10 +1340,11 @@ function setDICard(prmRegionId, arr)
 		}
 		else
 		{
-			varName = objElems[i].id;
-			//varName = jQuery(myForm).find('#' + objElems[i].id).attr('name');
-			console.log(varName);
-			//setElementValue(objElems[i], arr[varName]);
+			if (objElems[i].id != '')
+			{
+				varName = jQuery(myForm).find('#' + objElems[i].id).attr('name');
+				setElementValue(objElems[i], arr[varName]);
+			}
 		}
 	}
 
