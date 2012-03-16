@@ -200,128 +200,136 @@
 					</a>
 				</td>
 				<td valign="top">
-					<div class="divDatacardEffects" id="divDatacardEffectsBasic">
-					<!-- BEG BASIC EFFECTS -->
-					<table class="grid">
-						<tr valign="top">
-							<td>
-								<b>{-#teffects#-}</b><br />
-								<table class="EffectList EffectListPeople grid" width="100%">
-									<tr style="display:none;">
-										<td align="right">
-											<span class="label" title=""></span>
-										</td>
-										<td>
-											<select class="value line clsEffectNumeric" id="fieldname" name="fieldname" data-helptext="" style="width:120px;" >
-												<option class="small" value="-1">{-#teffhav#-}</option>
-												<option class="small" value="0" selected>{-#teffhavnot#-}</option>
-												<option class="small" value="-2">{-#teffdontknow#-}</option>
-											</select>
-										</td>
-									</tr>
-								</table> 
-							</td>
-							<td>
-								<table>
-									<tr>
-										<td colspan="2" valign="top">
-											<b>{-#tsectors#-}</b><br />
-										</td>
-									</tr>
-									<tr>
-										<td valign="top">
-											<!-- BEGIN Table Sectors -->
-											<table class="EffectList EffectListSector grid" width="100%">
-												<tr style="display:none;">
-													<td align="right">
-														<span class="label" title=""></span>
-													</td>
-													<td>
-														<select class="value line clsEffectSector" id="" name="" style="width:120px;">
-															<option class="small" value="-1">{-#teffhav#-}</option>
-															<option class="small" value="0" selected="selected">{-#teffhavnot#-}</option>
-															<option class="small" value="-2">{-#teffdontknow#-}</option>
-														</select>
-													</td>
-												</tr>
-											</table>
-										</td>
-										<td valign="top">
-											<!-- BEGIN Table Effects over $$ -->
-											<table class="EffectList EffectListLosses1 grid">
-												<tr style="display:none;">
-													<td valign="top">
-														<span class="label" title="{-#msgDatacard_InputDoubleTooltip#-}"></span>
-														<br />
-														<input class="value line inputDouble" id="" name="" type="text" size="11" maxlength="15" value="0" />
-													</td>
-												</tr>
-											</table>
-										</td>
-									</tr>
-								</table>
-							</td>
-							<td valign="top">
-								<b>{-#tlosses#-}</b><br />
-								<!-- BEGIN Table Effects over Affected -->
-								<table class="EffectList EffectListLosses2 grid">
-									<tr class="EffectLossesValueLocal">
-										<td>
-											<span class="label" title="{-#msgDatacard_InputDoubleTooltip#-}"></span>
-											<br />
-											<input class="value line inputDouble clsEffectDouble"  type="text" size="11" maxlength="15" value="0"
-												id="EffectLossesValueLocal" name="EffectLossesValueLocal" />
-										</td>
-									</tr>
-									<tr class="EffectLossesValueUSD">
-										<td>
-											<span class="label" title="{-#msgDatacard_InputDoubleTooltip#-}"></span>
-											<br />
-											<input class="value line inputDouble clsEffectDouble" type="text" size="11" maxlength="15" value="0"
-												id="EffectLossesValueUSD" name="EffectLossesValueUSD" />
-										</td>
-									</tr>
-								</table>
-								<table class="EffectList EffectListOther grid">
-									<tr class="EffectOtherLosses">
-										<td>
-											<span class="label" title=""></span>
-											<br />
-											<textarea class="value inputText"  maxlength="2048" cols="25" style="height:30px;"
-												id="EffectOtherLosses" name="EffectOtherLosses"></textarea>
-										</td>
-									</tr>
-									<tr class="EffectNotes">
-										<td>
-											<span class="label" title=""></span>
-											<br />
-											<textarea class="value inputText"  maxlength="2048" cols="25" style="height:70px;"
-												id="EffectNotes" name="EffectNotes"></textarea>
-										</td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-					</table>
-					</div>
-					<!-- BEG EXTRA EFFECTS FIELDS -->
-					<div class="divDatacardEffects" id="divDatacardEffectsAdditional" style="display:none;">
-						<table class="EffectListAdditional grid">
-							<tr style="display:none;">
+					<div class="dwin" style="height:300px;">
+						<div class="divDatacardEffects" id="divDatacardEffectsBasic">
+						<!-- BEG BASIC EFFECTS -->
+						<table class="grid">
+							<tr valign="top">
 								<td>
-									<span class="label"></span>
-									<br />
-									<input class="value line inputText" type="text"
-										 id="" name="" size="30" value="" />
-									<input class="value line inputInteger" type="text"
-										 id="" name="" size="30" value="0" />
-									<input class="value line inputDouble" type="text"
-										 id="" name="" size="30" value="0" />
+									<b>{-#teffects#-}</b><br />
+									<table class="EffectList EffectListPeople grid" width="100%">
+										<tr style="display:none;">
+											<td align="right">
+												<span class="label" title=""></span>
+											</td>
+											<td>
+												<select class="value line clsEffectNumeric" id="fieldname" name="fieldname" data-helptext="" style="width:120px;" >
+													<option class="small" value="-1">{-#teffhav#-}</option>
+													<option class="small" value="0" selected>{-#teffhavnot#-}</option>
+													<option class="small" value="-2">{-#teffdontknow#-}</option>
+												</select>
+											</td>
+										</tr>
+									</table> 
+								</td>
+								<td>
+									<table>
+										<tr>
+											<td colspan="2" valign="top">
+												<b>{-#tsectors#-}</b><br />
+											</td>
+										</tr>
+										<tr>
+											<td valign="top">
+												<!-- BEGIN Table Sectors -->
+												<table class="EffectList EffectListSector grid" width="100%">
+													<tr style="display:none;">
+														<td align="right">
+															<span class="label" title=""></span>
+														</td>
+														<td>
+															<select class="value line clsEffectSector" id="" name="" style="width:120px;">
+																<option class="small" value="-1">{-#teffhav#-}</option>
+																<option class="small" value="0" selected="selected">{-#teffhavnot#-}</option>
+																<option class="small" value="-2">{-#teffdontknow#-}</option>
+															</select>
+														</td>
+													</tr>
+												</table>
+											</td>
+											<td valign="top">
+												<!-- BEGIN Table Effects over $$ -->
+												<table class="EffectList EffectListLosses1 grid">
+													<tr style="display:none;">
+														<td valign="top">
+															<span class="label" title="{-#msgDatacard_InputDoubleTooltip#-}"></span>
+															<br />
+															<input class="value line inputDouble" id="" name="" type="text" size="11" maxlength="15" value="0" />
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+									</table>
+								</td>
+								<td valign="top">
+									<b>{-#tlosses#-}</b><br />
+									<!-- BEGIN Table Effects over Affected -->
+									<table class="EffectList EffectListLosses2 grid">
+										<tr class="EffectLossesValueLocal">
+											<td>
+												<span class="label" title="{-#msgDatacard_InputDoubleTooltip#-}"></span>
+												<br />
+												<input class="value line inputDouble clsEffectDouble"  type="text" size="11" maxlength="15" value="0"
+													id="EffectLossesValueLocal" name="EffectLossesValueLocal" />
+											</td>
+										</tr>
+										<tr class="EffectLossesValueUSD">
+											<td>
+												<span class="label" title="{-#msgDatacard_InputDoubleTooltip#-}"></span>
+												<br />
+												<input class="value line inputDouble clsEffectDouble" type="text" size="11" maxlength="15" value="0"
+													id="EffectLossesValueUSD" name="EffectLossesValueUSD" />
+											</td>
+										</tr>
+									</table>
+									<table class="EffectList EffectListOther grid">
+										<tr class="EffectOtherLosses">
+											<td>
+												<span class="label" title=""></span>
+												<br />
+												<textarea class="value inputText"  maxlength="2048" cols="25" style="height:30px;"
+													id="EffectOtherLosses" name="EffectOtherLosses"></textarea>
+											</td>
+										</tr>
+										<tr class="EffectNotes">
+											<td>
+												<span class="label" title=""></span>
+												<br />
+												<textarea class="value inputText"  maxlength="2048" cols="25" style="height:70px;"
+													id="EffectNotes" name="EffectNotes"></textarea>
+											</td>
+										</tr>
+									</table>
 								</td>
 							</tr>
 						</table>
+						</div>
+						<!-- BEG EXTRA EFFECTS FIELDS -->
+						<div class="divDatacardEffects dwin" id="divDatacardEffectsAdditional" style="display:none;">
+							<table class="EffectListAdditional grid">
+								<tr>
+									<td>
+										<div class="EffectAdditional" style="display:none;">
+											<span class="label"></span>
+											<br />
+											<input class="value line inputText" type="text"
+												 id="" name="" size="30" value="" />
+											<input class="value line inputInteger" type="text"
+												 id="" name="" size="30" value="0" />
+											<input class="value line inputDouble" type="text"
+												 id="" name="" size="30" value="0" />
+										</div>
+									</td>
+									<td>
+									</td>
+									<td>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<!-- END EXTRA EFFECTS FIELDS -->
 					</div>
-					<!-- END EXTRA EFFECTS FIELDS -->
 				</td>
 			</tr>
 			<!-- BEGIN EVENT SECTION -->
