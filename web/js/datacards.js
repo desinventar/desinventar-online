@@ -440,6 +440,22 @@ function doDatacardInitialize()
 		jQuery('input.value', clone).data('helptext', jQuery('span.helptext', this).text());
 		effect_list.append(clone);
 	});
+	// EffectLosses2 List (ef3)
+	jQuery('div.desinventarInfo div.EffectList div.EffectLosses2').each(function() {
+		var fieldname = jQuery(this).data('field');
+		var field = jQuery('div.Datacard table.EffectListLosses2 tr.' + fieldname);
+		jQuery('span.label' , field).text(jQuery('span.label', this).text());
+		jQuery('input.value', field).data('helptext', jQuery('span.helptext',this).text());
+	});	
+	// EffectOther List (ef4)
+	jQuery('div.desinventarInfo div.EffectList div.EffectOther').each(function() {
+		var fieldname = jQuery(this).data('field');
+		console.log(fieldname);
+		var field = jQuery('div.Datacard table.EffectListOther tr.' + fieldname);
+		jQuery('span.label' , field).text(jQuery('span.label', this).text());
+		jQuery('span.label' , field).attr('title', jQuery('span.tooltip', this).text());
+		jQuery('input.value', field).data('helptext', jQuery('span.helptext',this).text());
+	});	
 } //doDatacardInitialize()
 
 function updateGeoLevelSelect(prmGeographyId, prmWithChilds)

@@ -248,7 +248,7 @@
 										</td>
 										<td valign="top">
 											<!-- BEGIN Table Effects over $$ -->
-											<table class="EffectList EffectListLosses1 grid" width="100%">
+											<table class="EffectList EffectListLosses1 grid">
 												<tr style="display:none;">
 													<td valign="top">
 														<span class="label" title="{-#msgDatacard_InputDoubleTooltip#-}"></span>
@@ -264,24 +264,42 @@
 							<td valign="top">
 								<b>{-#tlosses#-}</b><br />
 								<!-- BEGIN Table Effects over Affected -->
-								{-foreach name=ef3 key=key item=item from=$ef3-}
-									<span title="{-#msgDatacard_InputDoubleTooltip#-}">
-										{-$item[0]-}<br />
-										<input id="{-$key-}" name="{-$key-}" type="text" size="7" maxlength="10" altfield="{-$sc3[$key]-}"
-											class="line inputDouble clsEffectDouble" tabindex="{-$MyTabIndex-}" value="0" onFocus="showtip('{-$item[2]-}', '#f1bd41')" />
-										{-counter-}
-									</span>
-									<br />
-								{-/foreach-}
-								{-foreach name=ef4 key=key item=item from=$ef4-}
-									<span title="{-$item[1]-}">
-										{-$item[0]-}<br />
-										<textarea id="{-$key-}" name="{-$key-}" maxlength="2048" cols="25" style="height: {-if $key=='EffectNotes'-}70{-else-}30{-/if-}px;"
-											class="inputText" onFocus="showtip('{-$item[2]-}', '#f1bd41')" tabindex="{-$MyTabIndex-}"></textarea>
-										{-counter-}
-									</span>
-									<br />
-								{-/foreach-}
+								<table class="EffectList EffectListLosses2 grid">
+									<tr class="EffectLossesValueLocal">
+										<td>
+											<span class="label" title="{-#msgDatacard_InputDoubleTooltip#-}"></span>
+											<br />
+											<input class="value line inputDouble clsEffectDouble"  type="text" size="11" maxlength="15" value="0"
+												id="EffectLossesValueLocal" name="EffectLossesValueLocal" />
+										</td>
+									</tr>
+									<tr class="EffectLossesValueUSD">
+										<td>
+											<span class="label" title="{-#msgDatacard_InputDoubleTooltip#-}"></span>
+											<br />
+											<input class="value line inputDouble clsEffectDouble" type="text" size="11" maxlength="15" value="0"
+												id="EffectLossesValueUSD" name="EffectLossesValueUSD" />
+										</td>
+									</tr>
+								</table>
+								<table class="EffectList EffectListOther grid">
+									<tr class="EffectOtherLosses">
+										<td>
+											<span class="label" title=""></span>
+											<br />
+											<textarea class="value inputText"  maxlength="2048" cols="25" style="height:30px;"
+												id="EffectOtherLosses" name="EffectOtherLosses"></textarea>
+										</td>
+									</tr>
+									<tr class="EffectNotes">
+										<td>
+											<span class="label" title=""></span>
+											<br />
+											<textarea class="value inputText"  maxlength="2048" cols="25" style="height:70px;"
+												id="EffectNotes" name="EffectNotes"></textarea>
+										</td>
+									</tr>
+								</table>
 							</td>
 						</tr>
 					</table>
