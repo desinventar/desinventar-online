@@ -462,15 +462,31 @@ function doDatacardInitialize()
 	jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
 		var field = key;
 		var label = value[0];
-		var tooltip = value[2];
+		var tooltip = value[1];
 		var type = value[2];
-		console.log(field + ' ' + type);
+
 		var clone = jQuery('tr:last', effect_list).clone().show();
-		jQuery('span.label'  , clone).text(label);
-		jQuery('span.label'  , clone).attr('title', tooltip);
-		jQuery('input.value', clone).attr('id', field);
-		jQuery('input.value', clone).attr('name', field);
-		jQuery('input.value', clone).data('helptext', tooltip);
+		jQuery('span.label' , clone).text(label);
+		jQuery('span.label' , clone).attr('title', tooltip);
+		jQuery('input.value',clone).hide();
+		var className='inputText';
+		switch(type)
+		{
+			case 'INTEGER':
+				className='inputInteger';
+			break;
+			case 'CURRENCY':
+			case 'DOUBLE':
+				className='inputDouble';
+			break;
+			default:
+				className='inputText';
+			break;			
+		}
+		jQuery('input.' + className, clone).show();
+		jQuery('input.' + className, clone).attr('id', field);
+		jQuery('input.' + className, clone).attr('name', field);
+		jQuery('input.' + className, clone).data('helptext', tooltip);
 		effect_list.append(clone);
 	});
 } //doDatacardInitialize()
