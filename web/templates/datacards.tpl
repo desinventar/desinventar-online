@@ -306,36 +306,20 @@
 					</div>
 					<!-- BEG EXTRA EFFECTS FIELDS -->
 					<div class="divDatacardEffects" id="divDatacardEffectsAdditional" style="display:none;">
-					<table class="grid">
-						<tr>
-							<td>
-								<br />
-							</td>
-						</tr>
-						{-foreach name=eefl key=key item=item from=$EEFieldList-}
-							{-if ($smarty.foreach.eefl.iteration - 1) % 3 == 0-}
-								<tr>
-							{-/if-}
-								<td title="{-$item[1]-}">
-									{-$item[0]-}<br />
-									
-									{-assign var="inputClass" value="inputText"-}
-									{-if $item[2] == "INTEGER"-} 
-										{-assign var="inputClass" value="inputInteger"-}
-									{-/if-}
-									{-if $item[2] == "CURRENCY"-} 
-										{-assign var="inputClass" value="inputDouble"-}
-									{-/if-}
-									<input type="text" id="{-$key-}" name="{-$key-}" size="30"
-										class="line {-$inputClass-}" tabindex="{-$MyTabIndex-}"
-										onFocus="showtip('{-$item[1]-}', '#f1bd41')" value="0" />
-									{-counter-}
+						<table class="EffectListAdditional grid">
+							<tr style="display:none;">
+								<td>
+									<span class="label"></span>
+									<br />
+									<input class="value line inputText" type="text"
+										 id="" name="" size="30" value="0" />
+									<input class="value line inputInteger" type="text"
+										 id="" name="" size="30" value="0" />
+									<input class="value line inputDouble" type="text"
+										 id="" name="" size="30" value="0" />
 								</td>
-							{-if ($smarty.foreach.eefl.iteration ) % 3 == 0-}
-								</tr>
-							{-/if-}
-						{-/foreach-}
-					</table>
+							</tr>
+						</table>
 					</div>
 					<!-- END EXTRA EFFECTS FIELDS -->
 				</td>
