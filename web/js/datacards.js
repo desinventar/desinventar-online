@@ -458,14 +458,16 @@ function doDatacardInitialize()
 	
 	// Additional Effect List (EEFieldList);	
 	var effect_list = jQuery('div.Datacard table.EffectListAdditional');
-	effect_list.find('tr:gt(0)').remove();
+	effect_list.find('div.EffectAdditional:gt(0)').remove();
+	var column = 0;
+	var max_column = 3;
 	jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
 		var field = key;
 		var label = value[0];
 		var tooltip = value[1];
 		var type = value[2];
 
-		var clone = jQuery('tr:last', effect_list).clone().show();
+		var clone = jQuery('div.EffectAdditional:last', effect_list).clone().show();
 		jQuery('span.label' , clone).text(label);
 		jQuery('span.label' , clone).attr('title', tooltip);
 		jQuery('input.value',clone).hide();
@@ -487,7 +489,8 @@ function doDatacardInitialize()
 		jQuery('input.' + className, clone).attr('id', field);
 		jQuery('input.' + className, clone).attr('name', field);
 		jQuery('input.' + className, clone).data('helptext', tooltip);
-		effect_list.append(clone);
+		column = (column + 1) % max_column;
+		jQuery('tr:last td:eq(' + column + ')',effect_list).append(clone);
 	});
 } //doDatacardInitialize()
 
