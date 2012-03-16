@@ -58,6 +58,14 @@
 				<span class="helptext">{-$value[2]-}</span>
 			</div>
 		{-/foreach-}
+		{-foreach $ef2 as $key => $value-}
+			<div class="EffectLosses1 Effect" data-field="{-$key-}">
+				<span class="field">{-$key-}</span>
+				<span class="label">{-$value[0]-}</span>
+				<span class="tooltip">{-$value[1]-}</span>
+				<span class="helptext">{-$value[2]-}</span>
+			</div>
+		{-/foreach-}
 		{-foreach $ef3 as $key => $value-}
 			<div class="EffectLoss Effect" data-field="{-$key-}">
 				<span class="field">{-$key-}</span>
