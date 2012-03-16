@@ -43,7 +43,7 @@
 	</select>
 	<div class="EffectList hidden">
 		{-foreach $ef1 as $key => $value-}
-			<div class="EffectPeople Effect" data-field="{-$key-}">
+			<div class="EffectPeople Effect {-$key-}" data-field="{-$key-}">
 				<span class="field">{-$key-}</span>
 				<span class="label">{-$value[0]-}</span>
 				<span class="tooltip">{-$value[1]-}</span>
@@ -51,7 +51,7 @@
 			</div>
 		{-/foreach-}
 		{-foreach $sec as $key => $value-}
-			<div class="EffectSector Effect" data-field="{-$key-}">
+			<div class="EffectSector Effect {-$key-}" data-field="{-$key-}">
 				<span class="field">{-$key-}</span>
 				<span class="label">{-$value[0]-}</span>
 				<span class="tooltip">{-$value[1]-}</span>
@@ -59,7 +59,7 @@
 			</div>
 		{-/foreach-}
 		{-foreach $ef2 as $key => $value-}
-			<div class="EffectLosses1 Effect" data-field="{-$key-}">
+			<div class="EffectLosses1 Effect {-$key-}" data-field="{-$key-}">
 				<span class="field">{-$key-}</span>
 				<span class="label">{-$value[0]-}</span>
 				<span class="tooltip">{-$value[1]-}</span>
@@ -67,7 +67,7 @@
 			</div>
 		{-/foreach-}
 		{-foreach $ef3 as $key => $value-}
-			<div class="EffectLosses2 Effect" data-field="{-$key-}">
+			<div class="EffectLosses2 Effect {-$key-}" data-field="{-$key-}">
 				<span class="field">{-$key-}</span>
 				<span class="label">{-$value[0]-}</span>
 				<span class="tooltip">{-$value[1]-}</span>
@@ -75,7 +75,7 @@
 			</div>
 		{-/foreach-}
 		{-foreach $ef4 as $key => $value-}
-			<div class="EffectOther Effect" data-field="{-$key-}">
+			<div class="EffectOther Effect {-$key-}" data-field="{-$key-}">
 				<span class="field">{-$key-}</span>
 				<span class="label">{-$value[0]-}</span>
 				<span class="tooltip">{-$value[1]-}</span>
