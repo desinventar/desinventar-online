@@ -222,15 +222,15 @@ function onReadyQueryDesign()
 			effect_list.append(clone);
 		});
 
-		// Load EffectLoss List (ef3)
-		var effect_list = jQuery('div.QueryDesign table.EffectLossesList');
+		// Load EffectLosses2 List (ef3)
+		var effect_list = jQuery('div.QueryDesign table.EffectListLosses2');
 		effect_list.find('tr:gt(0)').remove();
-		jQuery('div.desinventarInfo div.EffectList div.EffectLoss').each(function() {
+		jQuery('div.desinventarInfo div.EffectList div.EffectLosses2').each(function() {
 			var field = jQuery('span.field', this).text();
 			var clone = jQuery('tr:last', effect_list).clone().show();
 			jQuery('select.operator', clone).attr('name', 'D_' + field + '[0]').disable();
 			jQuery('span.label', clone).text(jQuery('span.label',this).text());
-			jQuery('div.EffectLoss',clone).data('field', jQuery(this).data('field'));
+			jQuery('div.EffectLosses2',clone).data('field', jQuery(this).data('field'));
 			effect_list.append(clone);
 		});
 		// Load EffectAdditional List (EEFieldList)
@@ -291,7 +291,7 @@ function onReadyQueryDesign()
 			jQuery('input', clone).attr('value', jQuery('span.label',this).text());
 			field_list.append(clone);
 		});
-		jQuery('div.desinventarInfo div.EffectList div.EffectLoss').each(function() {
+		jQuery('div.desinventarInfo div.EffectList div.EffectLosses2').each(function() {
 			var field = jQuery('span.field', this).text();
 			var clone = jQuery('div:last', field_list).clone().show();
 			jQuery(clone).data('field', jQuery(this).data('field'));

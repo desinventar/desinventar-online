@@ -137,10 +137,10 @@
 			
 			<!-- Losses -->
 			<b>{-#ttitloss#-}</b><br />
-				<table class="EffectLossesList EffectList">
+				<table class="EffectListLosses2 EffectList">
 					<tr style="display:none;">
 						<td valign="top">
-							<div class="EffectLoss" data-field="">
+							<div class="EffectLosses2" data-field="">
 								<input class="checkbox" type="checkbox" value="" />
 								<span class="label"></span>
 								<span class="options hidden">
