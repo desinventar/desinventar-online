@@ -387,10 +387,9 @@ function onReadyDatacards()
 	});
 	//Initialize components
 	jQuery('#divDatacard .tblGeography tr:first').hide();
-	jQuery('div.Datacard table.EffectPeopleList').on('focus','select.value', function(event) {
+	jQuery('div.Datacard table.EffectList').on('focus','select.value', function(event) {
 		showtip(jQuery(this).data('helptext'), '#f1bd41');
-	});
-	jQuery('div.Datacard table.EffectSectorList').on('focus','select.value', function(event) {
+	}).on('focus','input.value', function(event) {
 		showtip(jQuery(this).data('helptext'), '#f1bd41');
 	});
 } //onReadyDatacards()
@@ -398,7 +397,7 @@ function onReadyDatacards()
 function doDatacardInitialize()
 {
 	// Load EffectPeople List (ef1)
-	var effect_list = jQuery('div.Datacard table.EffectPeopleList');
+	var effect_list = jQuery('div.Datacard table.EffectListPeople');
 	effect_list.find('tr:gt(0)').remove();
 	jQuery('div.desinventarInfo div.EffectList div.EffectPeople').each(function() {
 		var field = jQuery('span.field', this).text();
@@ -413,7 +412,7 @@ function doDatacardInitialize()
 	});
 
 	// Load EffectSector List (sec)
-	var effect_list = jQuery('div.Datacard table.EffectSectorList');
+	var effect_list = jQuery('div.Datacard table.EffectListSector');
 	effect_list.find('tr:gt(0)').remove();
 	jQuery('div.desinventarInfo div.EffectList div.EffectSector').each(function() {
 		var field = jQuery('span.field', this).text();
@@ -424,6 +423,21 @@ function doDatacardInitialize()
 		jQuery('select.value', clone).attr('id', field);
 		jQuery('select.value', clone).attr('name', field);
 		jQuery('select.value', clone).data('helptext', jQuery('span.helptext', this).text());
+		effect_list.append(clone);
+	});
+
+	// Load EffectLosses List (ef2)
+	var effect_list = jQuery('div.Datacard table.EffectListLosses1');
+	effect_list.find('tr:gt(0)').remove();
+	jQuery('div.desinventarInfo div.EffectList div.EffectLosses1').each(function() {
+		var field = jQuery('span.field', this).text();
+		var label = jQuery('span.label',this).text();
+		var clone = jQuery('tr:last', effect_list).clone().show();
+		jQuery('span.label'  , clone).text(label);
+		jQuery('span.label'  , clone).attr('title', jQuery('span.tooltip', this).text());
+		jQuery('input.value', clone).attr('id', field);
+		jQuery('input.value', clone).attr('name', field);
+		jQuery('input.value', clone).data('helptext', jQuery('span.helptext', this).text());
 		effect_list.append(clone);
 	});
 } //doDatacardInitialize()

@@ -206,7 +206,7 @@
 						<tr valign="top">
 							<td>
 								<b>{-#teffects#-}</b><br />
-								<table class="EffectPeopleList grid" width="100%">
+								<table class="EffectList EffectListPeople grid" width="100%">
 									<tr style="display:none;">
 										<td align="right">
 											<span class="label" title=""></span>
@@ -230,8 +230,8 @@
 									</tr>
 									<tr>
 										<td valign="top">
-											<table class="EffectSectorList grid" width="100%">
-												<!-- BEGIN Table Sectors -->
+											<!-- BEGIN Table Sectors -->
+											<table class="EffectList EffectListSector grid" width="100%">
 												<tr style="display:none;">
 													<td align="right">
 														<span class="label" title=""></span>
@@ -248,16 +248,15 @@
 										</td>
 										<td valign="top">
 											<!-- BEGIN Table Effects over $$ -->
-											{-foreach name=ef2 key=key item=item from=$ef2-}
-												<span title="{-#msgDatacard_InputDoubleTooltip#-}">
-													{-$item[0]-}<br />
-													<input id="{-$key-}" name="{-$key-}" type="text" size="11" maxlength="15"
-														class="line inputDouble" tabindex="{-$MyTabIndex-}" value="0" 
-														onFocus="showtip('{-$item[2]-}', '#f1bd41');" />
-												</span>
-												<br />
-												{-counter-}
-											{-/foreach-}
+											<table class="EffectList EffectListLosses1 grid" width="100%">
+												<tr style="display:none;">
+													<td valign="top">
+														<span class="label" title="{-#msgDatacard_InputDoubleTooltip#-}"></span>
+														<br />
+														<input class="value line inputDouble" id="" name="" type="text" size="11" maxlength="15" value="0" />
+													</td>
+												</tr>
+											</table>
 										</td>
 									</tr>
 								</table>
