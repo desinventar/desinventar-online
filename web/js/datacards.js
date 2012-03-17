@@ -485,6 +485,7 @@ function doDatacardInitialize()
 				className='inputText';
 			break;			
 		}
+		jQuery('input', clone).attr('id','').attr('name','');
 		jQuery('input.' + className, clone).show();
 		jQuery('input.' + className, clone).attr('id', field);
 		jQuery('input.' + className, clone).attr('name', field);
