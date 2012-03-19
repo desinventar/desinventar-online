@@ -1058,7 +1058,8 @@ switch ($cmd)
 		$t->assign('LanguageList', $LanguageList);
 		$t->assign('CountryList' , $CountryList);
 		$t->assign('regionlist'  , $RegionList);
-		$t->display('index.tpl');
+		$template = 'index-' . $lg . '.tpl';
+		$t->display($template);
 	break;
 	case 'cmdSearchCountryList':
 		$answer = array();
@@ -1514,7 +1515,8 @@ switch ($cmd)
 					}
 					$t->assign('desinventarHasInternet', $desinventarHasInternet);
 					$t->assign('configfile', $lg . '.conf');
-					$t->display('index.tpl');
+					$template = 'index-' . $lg . '.tpl';
+					$t->display($template);
 				break;
 			} # switch
 		}
