@@ -2729,7 +2729,9 @@ function onReadyDatacards()
 	});
 	//Initialize components
 	jQuery('#divDatacard .tblGeography tr:first').hide();
-	jQuery('div.Datacard table.EffectPeopleList').on('focus','select.value', function(event) {
+	jQuery('div.Datacard table.EffectList').on('focus','select.value', function(event) {
+		showtip(jQuery(this).data('helptext'), '#f1bd41');
+	}).on('focus','input.value', function(event) {
 		showtip(jQuery(this).data('helptext'), '#f1bd41');
 	});
 } //onReadyDatacards()
@@ -2737,7 +2739,7 @@ function onReadyDatacards()
 function doDatacardInitialize()
 {
 	// Load EffectPeople List (ef1)
-	var effect_list = jQuery('div.Datacard table.EffectPeopleList');
+	var effect_list = jQuery('div.Datacard table.EffectListPeople');
 	effect_list.find('tr:gt(0)').remove();
 	jQuery('div.desinventarInfo div.EffectList div.EffectPeople').each(function() {
 		var field = jQuery('span.field', this).text();
@@ -2745,9 +2747,93 @@ function doDatacardInitialize()
 		var clone = jQuery('tr:last', effect_list).clone().show();
 		jQuery('span.label'  , clone).text(label);
 		jQuery('span.label'  , clone).attr('title', jQuery('span.tooltip', this).text());
+		jQuery('select.value', clone).attr('id', field);
 		jQuery('select.value', clone).attr('name', field);
 		jQuery('select.value', clone).data('helptext', jQuery('span.helptext', this).text());
 		effect_list.append(clone);
+	});
+
+	// Load EffectSector List (sec)
+	var effect_list = jQuery('div.Datacard table.EffectListSector');
+	effect_list.find('tr:gt(0)').remove();
+	jQuery('div.desinventarInfo div.EffectList div.EffectSector').each(function() {
+		var field = jQuery('span.field', this).text();
+		var label = jQuery('span.label',this).text();
+		var clone = jQuery('tr:last', effect_list).clone().show();
+		jQuery('span.label'  , clone).text(label);
+		jQuery('span.label'  , clone).attr('title', jQuery('span.tooltip', this).text());
+		jQuery('select.value', clone).attr('id', field);
+		jQuery('select.value', clone).attr('name', field);
+		jQuery('select.value', clone).data('helptext', jQuery('span.helptext', this).text());
+		effect_list.append(clone);
+	});
+
+	// Load EffectLosses List (ef2)
+	var effect_list = jQuery('div.Datacard table.EffectListLosses1');
+	effect_list.find('tr:gt(0)').remove();
+	jQuery('div.desinventarInfo div.EffectList div.EffectLosses1').each(function() {
+		var field = jQuery('span.field', this).text();
+		var label = jQuery('span.label',this).text();
+		var clone = jQuery('tr:last', effect_list).clone().show();
+		jQuery('span.label'  , clone).text(label);
+		jQuery('span.label'  , clone).attr('title', jQuery('span.tooltip', this).text());
+		jQuery('input.value', clone).attr('id', field);
+		jQuery('input.value', clone).attr('name', field);
+		jQuery('input.value', clone).data('helptext', jQuery('span.helptext', this).text());
+		effect_list.append(clone);
+	});
+	// EffectLosses2 List (ef3)
+	jQuery('div.desinventarInfo div.EffectList div.EffectLosses2').each(function() {
+		var fieldname = jQuery(this).data('field');
+		var field = jQuery('div.Datacard table.EffectListLosses2 tr.' + fieldname);
+		jQuery('span.label' , field).text(jQuery('span.label', this).text());
+		jQuery('input.value', field).data('helptext', jQuery('span.helptext',this).text());
+	});	
+	// EffectOther List (ef4)
+	jQuery('div.desinventarInfo div.EffectList div.EffectOther').each(function() {
+		var fieldname = jQuery(this).data('field');
+		var field = jQuery('div.Datacard table.EffectListOther tr.' + fieldname);
+		jQuery('span.label' , field).text(jQuery('span.label', this).text());
+		jQuery('span.label' , field).attr('title', jQuery('span.tooltip', this).text());
+		jQuery('input.value', field).data('helptext', jQuery('span.helptext',this).text());
+	});
+	
+	// Additional Effect List (EEFieldList);	
+	var effect_list = jQuery('div.Datacard table.EffectListAdditional');
+	effect_list.find('div.EffectAdditional:gt(0)').remove();
+	var column = 0;
+	var max_column = 3;
+	jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
+		var field = key;
+		var label = value[0];
+		var tooltip = value[1];
+		var type = value[2];
+
+		var clone = jQuery('div.EffectAdditional:last', effect_list).clone().show();
+		jQuery('span.label' , clone).text(label);
+		jQuery('span.label' , clone).attr('title', tooltip);
+		jQuery('input.value',clone).hide();
+		var className='inputText';
+		switch(type)
+		{
+			case 'INTEGER':
+				className='inputInteger';
+			break;
+			case 'CURRENCY':
+			case 'DOUBLE':
+				className='inputDouble';
+			break;
+			default:
+				className='inputText';
+			break;			
+		}
+		jQuery('input', clone).attr('id','').attr('name','');
+		jQuery('input.' + className, clone).show();
+		jQuery('input.' + className, clone).attr('id', field);
+		jQuery('input.' + className, clone).attr('name', field);
+		jQuery('input.' + className, clone).data('helptext', tooltip);
+		column = (column + 1) % max_column;
+		jQuery('tr:last td:eq(' + column + ')',effect_list).append(clone);
 	});
 } //doDatacardInitialize()
 
@@ -3147,7 +3233,6 @@ function requestDatacard(myCmd, myValue)
 	var bReturn = true;
 	var RegionId=jQuery('#desinventarRegionId').val();
 	jQuery('#dostat').html('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif' + '" alt="" />');
-
 	jQuery.post(jQuery('#desinventarURL').val() + '/cards.php',
 		{
 			cmd:myCmd,
@@ -3156,6 +3241,7 @@ function requestDatacard(myCmd, myValue)
 		},
 		function(data)
 		{
+			jQuery('#dostat').html('');
 			if (myCmd == 'getNextSerial')
 			{
 				if (data.DisasterSerial.length >= 5)
@@ -3170,7 +3256,6 @@ function requestDatacard(myCmd, myValue)
 				{
 					jQuery('#cardsRecordSource').val('');
 					valid = setDICardFromId(RegionId, data.DisasterId, data.RecordNumber, data.RecordCount);
-					
 					if (jQuery('#desinventarUserRoleValue').val() >= 2)
 					{
 						disenabutton($('btnDatacardEdit'), false);
@@ -3494,16 +3579,7 @@ function doDatacardCancel()
 function doDatacardGotoFirst()
 {
 	displayDatacardStatusMsg('');
-	if (jQuery('#cardsRecordSource').val() == 'data')
-	{
-		var RecordNumber = 1;
-		var DisasterId = jQuery('.linkGridGotoCard[rowindex=' + RecordNumber + ']').attr('DisasterId');
-		valid = setDICardFromId(jQuery('#desinventarRegionId').val(), DisasterId, RecordNumber, jQuery('#cardsRecordCount').val());
-	}
-	else
-	{
-		bFound = requestDatacard('getDisasterIdFirst', jQuery('#DisasterId').val());
-	}
+	bFound = requestDatacard('getDisasterIdFirst', jQuery('#DisasterId').val());
 	if (jQuery('#desinventarUserRoleValue').val() >= 2)
 	{
 		disenabutton($('btnDatacardEdit'), false);
@@ -3661,7 +3737,7 @@ function setDICard(prmRegionId, arr)
 	var diform = null;
 	var myForm = null;
 	diform = $('DICard');
-	myForm = jQuery(diform);
+	myForm = jQuery('div.Datacard');
 	
 	var objElems = diform.elements; // DICard is DesInventar form..
 	for (i=0; i < objElems.length; i++)
@@ -3673,12 +3749,15 @@ function setDICard(prmRegionId, arr)
 		}
 		else
 		{
-			varName = jQuery(myForm).find('#' + objElems[i].id).attr('name');
-			setElementValue(objElems[i], arr[varName]);
+			if (objElems[i].id != '')
+			{
+				varName = jQuery(myForm).find('#' + objElems[i].id).attr('name');
+				setElementValue(objElems[i], arr[varName]);
+			}
 		}
 	}
 
-	jQuery(myForm).find('#PrevDisasterSerial').val(jQuery(myForm).find('#DisasterSerial').val());
+	jQuery('#PrevDisasterSerial', myForm).val(jQuery('#DisasterSerial', myForm).val());
 
 	//Set GeographyItem info into hidden fields
 	jQuery('#divDatacard .tblGeography select:gt(1)').empty().disable();
@@ -3693,9 +3772,6 @@ function setDICard(prmRegionId, arr)
 			mySelect.append(jQuery('<option>', { value : value.GeographyId }).text(value.GeographyName));
 		}
 	});
-	
-	// Load Select Boxes with Geography Info
-	//jQuery(myForm).find('.GeoLevelSelect').trigger({type: 'loadGeographyItems', ReadOnly: true});
 	
 	// Enable Edit Button according to Role
 	if (jQuery('#desinventarUserRoleValue').val() >= 2)
@@ -6348,15 +6424,15 @@ function onReadyQueryDesign()
 			effect_list.append(clone);
 		});
 
-		// Load EffectLoss List (ef3)
-		var effect_list = jQuery('div.QueryDesign table.EffectLossesList');
+		// Load EffectLosses2 List (ef3)
+		var effect_list = jQuery('div.QueryDesign table.EffectListLosses2');
 		effect_list.find('tr:gt(0)').remove();
-		jQuery('div.desinventarInfo div.EffectList div.EffectLoss').each(function() {
+		jQuery('div.desinventarInfo div.EffectList div.EffectLosses2').each(function() {
 			var field = jQuery('span.field', this).text();
 			var clone = jQuery('tr:last', effect_list).clone().show();
 			jQuery('select.operator', clone).attr('name', 'D_' + field + '[0]').disable();
 			jQuery('span.label', clone).text(jQuery('span.label',this).text());
-			jQuery('div.EffectLoss',clone).data('field', jQuery(this).data('field'));
+			jQuery('div.EffectLosses2',clone).data('field', jQuery(this).data('field'));
 			effect_list.append(clone);
 		});
 		// Load EffectAdditional List (EEFieldList)
@@ -6417,7 +6493,7 @@ function onReadyQueryDesign()
 			jQuery('input', clone).attr('value', jQuery('span.label',this).text());
 			field_list.append(clone);
 		});
-		jQuery('div.desinventarInfo div.EffectList div.EffectLoss').each(function() {
+		jQuery('div.desinventarInfo div.EffectList div.EffectLosses2').each(function() {
 			var field = jQuery('span.field', this).text();
 			var clone = jQuery('div:last', field_list).clone().show();
 			jQuery(clone).data('field', jQuery(this).data('field'));

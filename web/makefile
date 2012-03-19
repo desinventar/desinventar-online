@@ -4,7 +4,8 @@ JQUERY_SCRIPTS=\
 	/usr/share/jquery/tooltip/jquery.tooltip.min.js \
 	/usr/share/jquery/dimensions/jquery.dimensions.js \
 	/usr/share/jquery/jquery.stringQuery.js \
-	/usr/share/jquery/jquery.dataSelector.js
+	/usr/share/jquery/jquery.dataSelector.js \
+	/usr/share/jquery/jquery.ba-bbq.min.js
 
 JS_SCRIPTS=\
 	json2.js \
