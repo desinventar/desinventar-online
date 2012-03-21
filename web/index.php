@@ -466,7 +466,8 @@ switch ($cmd)
 		}
 		if ($iReturn > 0)
 		{
-			$t->assign('cnt', $us->q->getCountryList());
+			$CountryList = $us->q->getCountryList();
+			$t->assign('CountryList', $CountryList);
 			$t->assign('usrpa', $us->getUserInfo(''));
 		}
 		$t->display('main_admin_users.tpl');

@@ -72,6 +72,10 @@ function onReadyAdminUsers()
 		return false;
 	}); //submit
 	doAdminUsersReset();
+	// Populate Country List
+	jQuery('#desinventarCountryList option').each(function() {
+		jQuery('#selCountryIso').append(jQuery('<option>', { value : jQuery(this).attr('value') }).text(jQuery(this).text()));
+	});
 } //onReadyAdminUsers()
 
 function doAdminUsersReset()
