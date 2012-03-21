@@ -22,10 +22,11 @@
 		}
 		if ($pag == 'events')
 		{
-			$t->assign('eve', $us->q->loadEvents('BASE', null, $lg));
+			$t->assign('eve', $us->q->loadEvents('BASE', null, $lg, $us->RegionLangIsoCode));
 		}
-		if ($pag == 'causes') {
-			$t->assign('cau', $us->q->loadCauses('BASE', null, $lg));
+		if ($pag == 'causes')
+		{
+			$t->assign('cau', $us->q->loadCauses('BASE', null, $lg, $us->RegionLangIsoCode));
 		}
 	}
 	else
