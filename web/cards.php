@@ -46,18 +46,6 @@ else
 	// Commands in GET mode: lists, checkings..
 	switch ($cmd)
 	{
-		case 'list':
-			$lev = $us->q->getNextLev($_GET['GeographyId']);
-			$levmax = $us->q->getMaxGeoLev();
-			$levname = $us->q->loadGeoLevById($lev);
-			$geol = $us->q->loadGeoChilds($_GET['GeographyId'], GEOGRAPHY_ONLY_ACTIVE);
-			$t->assign('lev', $lev);
-			$t->assign('levmax', $levmax);
-			$t->assign('levname', $levname);
-			$t->assign('geol', $geol);
-			$t->assign('opc', isset($_GET['opc']) ? $_GET['opc'] : '');
-			$t->display('cards_geolist.tpl');
-		break;
 		case 'getNextSerial':
 			$ser = $us->q->getNextDisasterSerial($value);
 			echo json_encode(array('Status' => 'OK', 'DisasterSerial' => $ser));

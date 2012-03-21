@@ -701,38 +701,6 @@ function displayDatacardStatusMsg(msgId)
 
 var mod = "di";
 
-// Display Geography in form and search; k=geoid, l=0, desc='', opc=''
-function setgeo(k, prmGeoLevelId, desc, opc)
-{
-	var RegionId = jQuery('#desinventarRegionId').val();
-	if (opc == "search")
-	{
-		var fld = '_GeographyId';
-		var lev = '_lev' + prmGeoLevelId;
-		var op = '&opc='+ opc;
-	}
-	else
-	{
-		var fld = 'GeographyId';
-		var lev = 'lev'+ prmGeoLevelId;
-		var op = '';
-	}
-	fld = '#DICard #' + fld;
-	lev = '#DICard #' + lev;
-	if (k.length >= 5)
-	{
-		jQuery(fld).val(k);
-		updateList(lev, jQuery('#desinventarURL').val() + '/cards.php', 'cmd=list' + '&GeographyId='+ k + op + '&r=' + RegionId);
-	}
-	else if (k == '')
-	{
-		showtip(desc, '#d4baf6');
-		val = jQuery(fld).val();
-		jQuery(fld).val(val.substr(0, val.length - 5));
-		jQuery(lev).html('');
-	}
-}
-
 function DisableEnableForm(xForm, disab)
 {
 	if (xForm != null)
