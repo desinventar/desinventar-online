@@ -142,7 +142,6 @@ switch ($cmd)
 			echo 'OK';
 		}
 	break;
-	break;
 	// USERADMIN: update selected user..
 	case 'insert':
 	case 'update':
