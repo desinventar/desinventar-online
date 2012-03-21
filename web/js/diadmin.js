@@ -94,10 +94,6 @@
 			case "lev":
 				updateList('lst_lev', jQuery('#desinventarURL').val() + '/geolevel.php', 'r='+ reg +'&levcmd=list');
 			break;
-			case "geo":
-				updateList('lst_ageo', jQuery('#desinventarURL').val() + '/geography.php', 'r='+ reg +'&cmd=list&GeographyId=');
-				updateList('qgeolst', jQuery('#desinventarURL').val() + '/', 'r='+ reg +'&cmd=geolst');
-			break;
 			default:
 			break;
 		}
@@ -172,7 +168,7 @@
 		}
 	}
 	
-	function setLevGeo (key, val, val2, val3, ly1, ly2, ly3, module)
+	function setLevGeo(key, val, val2, val3, ly1, ly2, ly3, module)
 	{
 		mod = module;
 		$(mod + 'addsect').style.display = 'block';
@@ -189,8 +185,6 @@
 			$('aGeographyId').value = key;
 			$('aGeographyCode').value = val;
 			$('aGeographyName').value = val2;
-			jQuery('#frmDBConfigGeographyEdit .GeographyActive').val(parseInt(val3));
-			jQuery('#frmDBConfigGeographyEdit .GeographyActiveCheckbox').prop('checked', parseInt(jQuery('#frmDBConfigGeographyEdit .GeographyActive').val()) > 0);
 		}
 	}
 
@@ -207,7 +201,6 @@
 			{
 				$('aGeoParentId').value = '';
 			}
-			jQuery('#frmDBConfigGeographyEdit #Cmd').val('cmdGeographyInsert');
 			$('alev' + l).style.display = "none";
 		}
 		else if (v[0] == -2)
@@ -218,7 +211,6 @@
 		{
 			setLevGeo(v[0],v[1],v[2],v[3],'','','','geo');
 			$('aGeoParentId').value = v[0];
-			jQuery('#frmDBConfigGeographyEdit #Cmd').val('cmdGeographyUpdate');
 			updateList('alev' + l, jQuery('#desinventarURL').val() + '/geography.php', 'r='+ reg +'&cmd=list&GeographyId=' + v[0]);
 		}
 	} //function
@@ -627,22 +619,6 @@
 		}
 	}
 	
-	function setSelMap(code, gid, opc)
-	{
-		if (opc)
-		{
-			// Find and fill childs
-			$('itree-' + gid).style.display = 'block';
-			updateList('itree-' + gid, jQuery('#desinventarURL').val() + '/', 'r=' + jQuery('#desinventarRegionId').val() + '&cmd=glist&GeographyId=' + gid);
-		}
-		else
-		{
-			// clean childs first
-			$('itree-' + gid).innerHTML = '';
-			$('itree-' + gid).style.display = 'none';
-		}
-	}
-
 	function setAdvQuery(value, ope)
 	{
 		$('QueryCustom').value += value + ' ';
