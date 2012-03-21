@@ -104,12 +104,12 @@ switch($cmd)
 		if ($prmType == '1')
 		{
 			$t->assign('ctl_caupred', true);
-			$t->assign('caupredl', $us->q->loadCauses('PREDEF', null, $lg, false));
+			$t->assign('caupredl', $us->q->loadCauses('PREDEF', null, $lg, $us->RegionLangIsoCode, false));
 		}
 		else
 		{
 			$t->assign('ctl_caupers', true);
-			$t->assign('cauuserl', $us->q->loadCauses('USER', null, $lg, false));
+			$t->assign('cauuserl', $us->q->loadCauses('USER', null, $lg, $us->RegionLangIsoCode, false));
 		}
 		break;
 	case 'chkname':
@@ -133,12 +133,14 @@ switch($cmd)
 		$t->assign('dic', $us->q->queryLabelsFromGroup('DB', $lg));
 		$urol = $us->getUserRole($RegionId);
 		if ($urol == 'OBSERVER')
+		{
 			$t->assign('ro', 'disabled');
+		}
 		$t->assign('ctl_show', true);
 		$t->assign('ctl_caupred', true);
-		$t->assign('caupredl', $us->q->loadCauses('PREDEF', null, $lg, false));
+		$t->assign('caupredl', $us->q->loadCauses('PREDEF', null, $lg, $us->RegionLangIsoCode, false));
 		$t->assign('ctl_caupers', true);
-		$t->assign('cauuserl', $us->q->loadCauses('USER', null, $lg, false));
+		$t->assign('cauuserl', $us->q->loadCauses('USER', null, $lg, $us->RegionLangIsoCode, false));
 	break;
 	default:
 	break;

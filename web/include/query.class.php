@@ -172,7 +172,7 @@ class Query //extends PDO
 		return count($rst);
 	}
 
-	function loadEvents($type, $status, $LangIsoCode, $withTranslate = true)
+	function loadEvents($type, $status, $LangIsoCode, $RegionLangIsoCode, $withTranslate = true)
 	{
 		$data = array();
 		if ($type == 'BASE')
@@ -190,7 +190,6 @@ class Query //extends PDO
 					// Attempt to translate the list to the requested language using 
 					// data from base.Event table
 					$data1 = $this->getBasicEventList($LangIsoCode);
-					$RegionLangIsoCode = $this->getDBInfoValue('LangIsoCode');
 					foreach($data as $EventId => $EventData)
 					{
 						if (array_key_exists($EventId, $data1))
@@ -219,7 +218,7 @@ class Query //extends PDO
 	}
 
 	// active : active, inactive  | types : predef, user | empty == all
-	function loadCauses($type, $status, $LangIsoCode, $withTranslate=true)
+	function loadCauses($type, $status, $LangIsoCode, $RegionLangIsoCode, $withTranslate=true)
 	{
 		$data = array();
 		if ($type == 'BASE')
@@ -236,7 +235,6 @@ class Query //extends PDO
 					// Attempt to translate the list to the requested language using 
 					// data from base.Cause table
 					$data1 = $this->getBasicCauseList($LangIsoCode);
-					$RegionLangIsoCode = $this->getDBInfoValue('LangIsoCode');
 					foreach($data as $CauseId => $CauseData)
 					{
 						if (array_key_exists($CauseId, $data1))
