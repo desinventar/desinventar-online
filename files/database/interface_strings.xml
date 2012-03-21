@@ -1194,72 +1194,72 @@
 			<Text LangIsoCode="fre">Le event ne peut pas être désactivée car il a été affecté à un ou plusieurs enregistrements</Text>
 		</Message>
 	</Group>
-	<Group name="grpAdminCauses">
-		<Message id="baddelem">
+	<Group name="grpDatabaseCauses">
+		<Message id="msgDatabaseCauses_CustomCauseTitle">
+			<Text LangIsoCode="eng">Types of causes</Text>
+			<Text LangIsoCode="spa">Tipos de causas</Text>
+			<Text LangIsoCode="por">Tipos de causas</Text>
+			<Text LangIsoCode="fre">Types d'causes</Text>
+		</Message>
+		<Message id="msgCauses_Predefined">
+			<Text LangIsoCode="eng">Predefined cause</Text>
+			<Text LangIsoCode="spa">Causa predefinido</Text>
+			<Text LangIsoCode="por">Causa predefinido</Text>
+			<Text LangIsoCode="fre">Cause prédéfini</Text>
+		</Message>
+		<Message id="msgCauses_Custom">
+			<Text LangIsoCode="eng">Personalised cause</Text>
+			<Text LangIsoCode="spa">Causa personalizada</Text>
+			<Text LangIsoCode="por">Causa personalizada</Text>
+			<Text LangIsoCode="fre">Cause personnalisé</Text>
+		</Message>
+		<Message id="msgDatabaseCauses_Add">
 			<Text LangIsoCode="eng">Add</Text>
 			<Text LangIsoCode="spa">Adicionar</Text>
 			<Text LangIsoCode="por">Adicionar</Text>
 			<Text LangIsoCode="fre">Ajouter</Text>
 		</Message>
-		<Message id="bsave">
+		<Message id="msgDatabaseCauses_Save">
 			<Text LangIsoCode="eng">Save</Text>
 			<Text LangIsoCode="spa">Guardar</Text>
 			<Text LangIsoCode="por">Salvar</Text>
 			<Text LangIsoCode="fre">Enregistrer</Text>
 		</Message>
-		<Message id="bcancel">
+		<Message id="msgDatabaseCauses_Cancel">
 			<Text LangIsoCode="eng">Cancel</Text>
 			<Text LangIsoCode="spa">Cancelar</Text>
 			<Text LangIsoCode="por">Cancelar</Text>
 			<Text LangIsoCode="fre">Annuler</Text>
 		</Message>
-		<Message id="terror">
-			<Text LangIsoCode="eng">Error</Text>
-			<Text LangIsoCode="spa">Error</Text>
-			<Text LangIsoCode="por">Erro</Text>
-			<Text LangIsoCode="fre">Erreur</Text>
-		</Message>
-		<Message id="msginscau">
-			<Text LangIsoCode="eng">Type of cause created successfully!</Text>
-			<Text LangIsoCode="spa">Causa creada exitosamente</Text>
-			<Text LangIsoCode="por">Causa criada com sucesso!</Text>
-			<Text LangIsoCode="fre">Cause créée avec succès</Text>
-		</Message>
-		<Message id="errinscau">
-			<Text LangIsoCode="eng">Error entering Type of cause</Text>
-			<Text LangIsoCode="spa">Error ingresando Causa</Text>
-			<Text LangIsoCode="por">Erro ingressando Causa</Text>
-			<Text LangIsoCode="fre">Erreur en introduisant la cause</Text>
-		</Message>
-		<Message id="msgupdcau">
+		<Message id="msgDatabaseCauses_UpdateOk">
 			<Text LangIsoCode="eng">Type of cause updated successfully!</Text>
 			<Text LangIsoCode="spa">Causa actualizada exitosamente</Text>
 			<Text LangIsoCode="por">Causa atualizada com sucesso!</Text>
-			<Text LangIsoCode="fre">Cause mise à jour avec succès</Text>
+			<Text LangIsoCode="fre">Type d&quot;cause mis à jour avec succès</Text>
 		</Message>
-		<Message id="errupdcau">
-			<Text LangIsoCode="eng">Error updating Type of cause</Text>
-			<Text LangIsoCode="spa">Error actualizando Causa</Text>
-			<Text LangIsoCode="por">Erro atualizando Causa</Text>
-			<Text LangIsoCode="fre">Erreur dans la mise à jour de la Cause</Text>
+		<Message id="msgDatabaseCauses_UpdateError">
+			<Text LangIsoCode="eng">Error updating type of cause</Text>
+			<Text LangIsoCode="spa">Error actualizando Tipo de causa</Text>
+			<Text LangIsoCode="por">Erro atualizando causa</Text>
+			<Text LangIsoCode="fre">Erreur dans la mise à jour du Type d&quot;cause</Text>
 		</Message>
-		<Message id="errmsgfrm">
+		<Message id="msgDatabaseCauses_ErrorEmptyFields">
 			<Text LangIsoCode="eng">Register all fields in the RECORD DESINVENTAR. Fill in all required fields and try again.</Text>
-			<Text LangIsoCode="spa">CAUSA: Llene todos los campos requeridos e intente nuevamente.</Text>
+			<Text LangIsoCode="spa">TIPO de EVENTO: Llene todos los campos requeridos e intente nuevamente.</Text>
 			<Text LangIsoCode="por">Registre todos os campos do FORMULÁRIO DESINVENTAR. Preencha todos os campos requeridos e tente de novo</Text>
 			<Text LangIsoCode="fre">Enregistrez tous les champs de la CARTE DE DONNÉES DÉSINVENTER. Remplissez tous les champs obligatoires et essayez de nouveau</Text>
 		</Message>
-		<Message id="errchkname">
-			<Text LangIsoCode="eng">Unable to use type of cause name because it already exists.</Text>
-			<Text LangIsoCode="spa">Nombre de causa no se puede utilizar porque ya existe</Text>
-			<Text LangIsoCode="por">Nome de causa não foi possível utilizar porque já existe</Text>
-			<Text LangIsoCode="fre">Impossibilité d&quot;utiliser le nom de cause car il existe déjà</Text>
+		<Message id="msgDatabaseUsers_ErrorDuplicateName">
+			<Text LangIsoCode="eng">Unable to use type of event name because it already exists.</Text>
+			<Text LangIsoCode="spa">Nombre de tipo de evento no se puede utilizar porque ya existe</Text>
+			<Text LangIsoCode="por">Nome de evento não foi possível utilizar porque já existe</Text>
+			<Text LangIsoCode="fre">Impossibilité d&quot;utiliser le nom de event car il existe déjà</Text>
 		</Message>
-		<Message id="errchkstatus">
-			<Text LangIsoCode="eng">Unable to deactivate type of cause because it has been assigned.</Text>
-			<Text LangIsoCode="spa">Causa no se puede desactivar porque se encuentra asignada</Text>
-			<Text LangIsoCode="por">Causa não foi possível desativar porque está atribuída</Text>
-			<Text LangIsoCode="fre">La cause ne peut pas être désactivée car elle est déjà assignée</Text>
+		<Message id="msgDatabaseCauses_ErrorCannotDelete">
+			<Text LangIsoCode="eng">Unable to deactivate type of event because it has been assigned to one or more datacards.</Text>
+			<Text LangIsoCode="spa">Tipo de evento no se puede desactivar porque se encuentra asignado a una o varias fichas.</Text>
+			<Text LangIsoCode="por">Evento não foi possível desativar porque está atribuída a um ou mais registros</Text>
+			<Text LangIsoCode="fre">Le event ne peut pas être désactivée car il a été affecté à un ou plusieurs enregistrements</Text>
 		</Message>
 	</Group>
 	<Group name="grpAdminExtraEffects">

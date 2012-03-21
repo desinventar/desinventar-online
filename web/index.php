@@ -281,6 +281,71 @@ switch ($cmd)
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');		
 	break;
+	case 'cmdDatabaseCauses':
+		$t->assign('dic', $us->q->queryLabelsFromGroup('DB', $lg));
+		$t->display('main_database_causes.tpl');
+	break;
+	case 'cmdDatabaseCausesGetList':
+		$answer = array();
+		$iReturn = ERR_NO_ERROR;
+		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($RegionId == '')
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($iReturn > 0)
+		{
+			$CauseListDefault = $us->q->loadCauses('PREDEF', null, $lg, $us->RegionLangIsoCode, false);
+			$CauseListCustom  = $us->q->loadCauses('USER', null, $lg, $us->RegionLangIsoCode, false);
+			$answer['CauseListDefault'] = $CauseListDefault;
+			$answer['CauseListCustom']  = $CauseListCustom;
+		}
+		$answer['Status'] = $iReturn;
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
+	break;
+	case 'cmdDatabaseCausesUpdate':
+		$answer = array();
+		$iReturn = ERR_NO_ERROR;
+		if ($desinventarUserRoleValue < ROLE_ADMINREGION)
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($RegionId == '')
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($iReturn > 0)
+		{
+			$info = $_POST['Cause'];
+			$o = new DICause($us, $info['CauseId']);
+			if ($info['CausePredefined'] > 0)
+			{
+				if ($o->get('CauseName') != $info['CauseName'])
+				{
+					$info['CausePredefined'] = 2;
+				}
+			}
+			$o->setFromArray($info);
+			if ($o->get('CauseId') == '')
+			{
+				$o->set('CauseId', uuid());
+				$iReturn = $o->insert();
+			}
+			$iReturn = $o->update();
+			if ($iReturn > 0)
+			{
+				$CauseListDefault = $us->q->loadCauses('PREDEF', null, $lg, $us->RegionLangIsoCode, false);
+				$CauseListCustom  = $us->q->loadCauses('USER', null, $lg, $us->RegionLangIsoCode, false);
+				$answer['CauseListDefault'] = $CauseListDefault;
+				$answer['CauseListCustom']  = $CauseListCustom;
+			}
+		}
+		$answer['Status'] = $iReturn;
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');		
+	break;
 	case 'cmdDatabaseUsers':
 		$t->display('main_database_users.tpl');
 	break;
