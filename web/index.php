@@ -468,7 +468,6 @@ switch ($cmd)
 		{
 			$CountryList = $us->q->getCountryList();
 			$t->assign('CountryList', $CountryList);
-			$t->assign('usrpa', $us->getUserInfo(''));
 		}
 		$t->display('main_admin_users.tpl');
 	break;
