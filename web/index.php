@@ -1250,15 +1250,6 @@ switch ($cmd)
 					$code = $us->q->getObjectNameById($get['GeoCode'], 'GEOCODE');
 					echo $code;
 				break;
-				case 'glist':
-					$t->assign('reg', $get['GeographyId']);
-					$t->assign('geol', $us->q->loadGeoChilds($get['GeographyId']), GEOGRAPHY_ONLY_ACTIVE);
-					$t->display('block_glist.tpl');
-				break;
-				case 'geolst':
-					$t->assign('geol', $us->q->loadGeography(0));
-					$t->display('block_glist.tpl');
-				break;
 				case 'caulst':
 					$t->assign('caupredl', $us->q->loadCauses('PREDEF', 'active', $lg, $us->RegionLangIsoCode));
 					$t->assign('cauuserl', $us->q->loadCauses('USER', 'active', $lg, $us->RegionLangIsoCode));

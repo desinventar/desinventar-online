@@ -103,11 +103,6 @@
 				showeff('{-$qd.$ff[0]-}', 'x{-$k-}', 'y{-$k-}');
 			{-/if-}
 		{-/foreach-}
-		{-foreach name=geol key=k item=i from=$geol-}
-			{-if $i[3]-}
-				setSelMap('{-$i[0]-}', '{-$k-}', true);
-			{-/if-}
-		{-/foreach-}
 	} //function
 	//var geotree = new CheckTree('geotree');
 </script>
