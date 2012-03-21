@@ -91,5 +91,11 @@
 				<span class="label">{-$dc2.$item[0]-}</span>
 			</div>
 		{-/foreach-}		
+		{-foreach $sda as $key => $item-}
+			<div class="ViewParamFieldShow">
+				<span class="field">{-$item-}</span>
+				<span class="label">{-$dc2.$item[0]-}</span>
+			</div>
+		{-/foreach-}
 	</div>
 </div>
