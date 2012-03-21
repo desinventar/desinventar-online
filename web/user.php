@@ -70,12 +70,6 @@ switch ($cmd)
 		}
 		echo json_encode($Answer);
 	break;
-	case 'relogin':
-		// RELOGIN: Previous session exists, reconnect to the same session
-		$t->assign('user', $us->UserId);
-		// Success: User is logged
-		$t->display('user_mainpage.tpl');
-	break;
 	case 'logout':
 		// LOGOUT : Logut current user and show the login panel again
 		$us->logout();
@@ -132,11 +126,6 @@ switch ($cmd)
 		}
 		echo $Answer;
 	break;
-	case 'viewpref':
-		// PREFERENCES: View User Account Options
-		$t->assign('usri', form2user($us->getUserInfo($us->UserId)));
-		$t->display('user.tpl');
-	break;
 	case 'changepasswd':
 		$t->assign('UserId', $us->UserId);
 		$t->display('user_changepasswd.tpl');
@@ -151,21 +140,6 @@ switch ($cmd)
 		{
 			$us->updateUserPasswd($us->UserId, $_POST['UserPasswd2']);
 			echo 'OK';
-		}
-	break;
-	case 'chkpasswd':
-		// Check if password is correct (ask to dicore). if is OK show dialog to change it.
-		if ($us->validateUser($us->UserId, $_GET['UserPasswd']) != '')
-		{
-			$t->assign('ctl_chkpasswd', true);
-			$t->assign('usri', form2user($us->getUserInfo($us->UserId)));
-			$t->display('user.tpl');
-		}
-		else
-		{
-			$t->assign('ctl_msgupdate', true);
-			$t->assign('errbadpass', true);
-			$t->display('user_errorupdate.tpl');
 		}
 	break;
 	break;
