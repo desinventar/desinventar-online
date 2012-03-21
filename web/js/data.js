@@ -48,6 +48,18 @@ function onReadyData() {
 	});
 	jQuery('body').trigger('cmdViewDataUpdate');
 
+	// Initialize
+	var field_list = jQuery('div.ViewDataParams select.FieldsAvailable');
+	field_list.find('option').remove();
+	jQuery('div.ViewParamFields div.ViewParamFieldAvailable').each(function() {
+		field_list.append(jQuery('<option>', { value : 'D.' + jQuery('span.field',this).text() }).text(jQuery('span.label',this).text()));
+	});
+	var f = jQuery('body').data('EEFieldList');
+	console.log(f.length);
+	//jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
+		//console.log(key);
+		//field_list.append(jQuery('<option>', { value : 'D.' + key }).text(key));
+	//});
 } //onReadyData()
 
 function doDataUpdate()
