@@ -233,8 +233,8 @@ switch ($cmd)
 		}
 		if ($iReturn > 0)
 		{
-			$EventListDefault = $us->q->loadEvents('PREDEF', null, $lg, false);
-			$EventListCustom  = $us->q->loadEvents('USER', null, $lg, false);
+			$EventListDefault = $us->q->loadEvents('PREDEF', null, $lg, $us->RegionLangIsoCode, false);
+			$EventListCustom  = $us->q->loadEvents('USER', null, $lg, $us->RegionLangIsoCode, false);
 			$answer['EventListDefault'] = $EventListDefault;
 			$answer['EventListCustom']  = $EventListCustom;
 		}
@@ -272,8 +272,8 @@ switch ($cmd)
 			$iReturn = $o->update();
 			if ($iReturn > 0)
 			{
-				$EventListDefault = $us->q->loadEvents('PREDEF', null, $lg, false);
-				$EventListCustom  = $us->q->loadEvents('USER', null, $lg, false);
+				$EventListDefault = $us->q->loadEvents('PREDEF', null, $lg, $us->RegionLangIsoCode, false);
+				$EventListCustom  = $us->q->loadEvents('USER', null, $lg, $us->RegionLangIsoCode, false);
 				$answer['EventListDefault'] = $EventListDefault;
 				$answer['EventListCustom']  = $EventListCustom;
 			}
@@ -418,9 +418,9 @@ switch ($cmd)
 			$r = new DIRegion($us, $RegionId);
 			$GeolevelsList = $r->getGeolevelList();
 			$answer['GeolevelsList'] = $GeolevelsList;
-			$EventList     = $us->q->loadEvents('ALL', 'active', $lg);
+			$EventList     = $us->q->loadEvents('ALL', 'active', $lg, $us->RegionLangIsoCode);
 			$answer['EventList'] = $EventList;
-			$CauseList     = $us->q->loadCauses('ALL', 'active', $lg);
+			$CauseList     = $us->q->loadCauses('ALL', 'active', $lg, $us->RegionLangIsoCode);
 			$answer['CauseList'] = $CauseList;
 			$RecordCount = $us->getDisasterCount();
 			$answer['RecordCount'] = $RecordCount;
@@ -1243,8 +1243,8 @@ switch ($cmd)
 					$t->display('block_glist.tpl');
 				break;
 				case 'caulst':
-					$t->assign('caupredl', $us->q->loadCauses('PREDEF', 'active', $lg));
-					$t->assign('cauuserl', $us->q->loadCauses('USER', 'active', $lg));
+					$t->assign('caupredl', $us->q->loadCauses('PREDEF', 'active', $lg, $us->RegionLangIsoCode));
+					$t->assign('cauuserl', $us->q->loadCauses('USER', 'active', $lg, $us->RegionLangIsoCode));
 					$t->display('block_causelist.tpl');
 				break;
 				default:
@@ -1298,10 +1298,10 @@ switch ($cmd)
 					# Load default list of Geography, Event, Cause
 					$geol = $us->q->loadGeography(0);
 					$glev = $us->q->loadGeoLevels('', -1, false);
-					$evepredl = $us->q->loadEvents('PREDEF', 'active', $lg);
-					$eveuserl = $us->q->loadEvents('USER', 'active', $lg);
-					$caupredl = $us->q->loadCauses('PREDEF', 'active', $lg);
-					$cauuserl = $us->q->loadCauses('USER', 'active', $lg);
+					$evepredl = $us->q->loadEvents('PREDEF', 'active', $lg, $us->RegionLangIsoCode);
+					$eveuserl = $us->q->loadEvents('USER', 'active', $lg, $us->RegionLangIsoCode);
+					$caupredl = $us->q->loadCauses('PREDEF', 'active', $lg, $us->RegionLangIsoCode);
+					$cauuserl = $us->q->loadCauses('USER', 'active', $lg, $us->RegionLangIsoCode);
 
 					# In Saved Queries set true in Geo, Events, Causes selected..
 					if (isset($qd['D_GeographyId']))
@@ -1474,8 +1474,8 @@ switch ($cmd)
 					$t->assign('levmax', $us->q->getMaxGeoLev());
 					$t->assign('levname', $us->q->loadGeoLevById($lev));
 					$t->assign('geol', $us->q->loadGeography($lev));
-					$t->assign('EventList', $us->q->loadEvents('ALL', 'active', $lg));
-					$t->assign('CauseList', $us->q->loadCauses('ALL', 'active', $lg));
+					$t->assign('EventList', $us->q->loadEvents('ALL', 'active', $lg, $us->RegionLangIsoCode));
+					$t->assign('CauseList', $us->q->loadCauses('ALL', 'active', $lg, $us->RegionLangIsoCode));
 					$EEFieldList = $us->q->getEEFieldList('True');
 					$t->assign('EEFieldList', $EEFieldList);
 					$t->assign('RegionId', $RegionId);
