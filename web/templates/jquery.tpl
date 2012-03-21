@@ -5,7 +5,9 @@
 {-else-}
 	<script type="text/javascript" src="/jquery/jquery.js"></script>
 	<script type="text/javascript" src="/jquery/ui/jquery-ui.min.js"></script>
+	<!--
 	<script type="text/javascript" src="/jquery/bgiframe/jquery.bgiframe.js"></script>
+	-->
 	<script type="text/javascript" src="/jquery/dimensions/jquery.dimensions.min.js"></script>
 	<script type="text/javascript" src="/jquery/tooltip/jquery.tooltip.min.js"></script>
 	<script type="text/javascript" src="/jquery/jquery.stringQuery.js"></script>

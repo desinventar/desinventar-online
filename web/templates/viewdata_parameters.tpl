@@ -5,7 +5,7 @@
 	<div class="x-window-header">
 		{-#msgViewData#-}
 	</div>
-	<div id="divViewDataParamsContent">
+	<div id="divViewDataParamsContent" class="ViewDataParams">
 		<form id="CD" method="post" action="">
 			{-#sresxpage#-}
 			<select id="_D+SQL_LIMIT" name="_D+SQL_LIMIT" class="line">
@@ -19,13 +19,8 @@
 				<tr>
 					<td>
 						<b>{-#savailfields#-}</b><br />
-						<select id="_D+sel1[]" size="8" style="width:220px;" multiple class="line">
-							{-foreach name=sst1 key=key item=item from=$sda1-}
-								<option value="D.{-$item-}">{-$dc2.$item[0]-}</option>
-							{-/foreach-}
-							{-foreach name=sst2 key=key item=item from=$EEFieldList-}
-								<option value="E.{-$key-}">{-$item[0]-}</option>
-							{-/foreach-}
+						<select class="FieldsAvailable line" id="_D+sel1[]" size="8" style="width:220px;" multiple="multiple">
+							<option></option>
 						</select><br />
 						<a class="button" onclick="selectall('_D+sel1[]');"><span>{-#balls#-}</span></a>
 						<a class="button" onclick="selectnone('_D+sel1[]');"><span>{-#bnone#-}</span></a>
