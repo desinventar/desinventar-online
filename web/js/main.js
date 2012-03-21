@@ -12,6 +12,7 @@ function onReadyMain()
 	onReadyGeography();
 	onReadyGeolevels();
 	onReadyDatabaseEvents();
+	onReadyDatabaseCauses();
 	onReadyAdminUsers();
 	onReadyUserPermAdmin();
 	onReadyCommon();
@@ -81,6 +82,10 @@ function onReadyMain()
 
 	jQuery('#DBConfig_Events').on('show', function() {
 		jQuery('body').trigger('cmdDatabaseEventsShow');
+	});
+
+	jQuery('#DBConfig_Causes').on('show', function() {
+		jQuery('body').trigger('cmdDatabaseCausesShow');
 	});
 
 	jQuery('#DBConfig_Users').on('show', function() {

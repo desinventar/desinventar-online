@@ -582,6 +582,183 @@ function onlyNumber(e)
  (c) 1998-2012 Corporacion OSSO
 */
 
+
+function onReadyDatabaseCauses()
+{
+	//Attach main events
+	jQuery('body').on('cmdDatabaseCausesShow', function() {
+		doDatabaseCausesPopulateLists();
+	});
+
+	jQuery('.clsDatabaseCausesStatus').hide();
+
+	jQuery('#tbodyDatabaseCauses_CauseListCustom,#tbodyDatabaseCauses_CauseListDefault').on('click', 'tr', function(event) {
+		jQuery('#fldDatabaseCauses_CauseId').val(jQuery('.CauseId',this).text());
+		jQuery('#fldDatabaseCauses_CauseName').val(jQuery('.CauseName',this).text());
+		jQuery('#fldDatabaseCauses_CauseDesc').val(jQuery('.CauseDesc',this).prop('title'));
+		jQuery('#fldDatabaseCauses_CauseActiveCheckbox').prop('checked', jQuery('.CauseActive :input',this).is(':checked')).change();
+		jQuery('#fldDatabaseCauses_CausePredefined').val(jQuery('.CausePredefined',this).text());
+
+		jQuery('#btnDatabaseCauses_Add').hide();
+		doCausesFormSetup();
+		jQuery('#divDatabaseCauses_Edit').show();
+	}).on('mouseover', 'tr', function(event) {
+			jQuery(this).addClass('highlight');
+	}).on('mouseout', 'tr', function(event) {
+		jQuery(this).removeClass('highlight');
+	});
+
+
+	jQuery('#btnDatabaseCauses_Add').click(function() {
+		jQuery('#divDatabaseCauses_Edit').show();
+		jQuery(this).hide();
+		jQuery('#fldDatabaseCauses_CauseId').val('');
+		jQuery('#fldDatabaseCauses_CauseName').val('');
+		jQuery('#fldDatabaseCauses_CauseDesc').val('');
+		jQuery('#fldDatabaseCauses_CauseDesc').prop('disabled', false);
+		jQuery('#fldDatabaseCauses_CauseActiveCheckbox').prop('checked', true).change();
+		jQuery('#fldDatabaseCauses_CausePredefined').val(0);
+		doCausesFormSetup();
+	});
+
+	jQuery('#btnDatabaseCauses_Save').click(function() {
+		jQuery('#frmDatabaseCauses_Edit').trigger('submit');
+	});
+
+	jQuery('#btnDatabaseCauses_Cancel').click(function() {
+		jQuery('#divDatabaseCauses_Edit').hide();
+		jQuery('#btnDatabaseCauses_Add').show();
+	});
+
+	jQuery('#fldDatabaseCauses_CauseActiveCheckbox').change(function() {
+		var v = 0;
+		if (jQuery(this).is(':checked')) 
+		{
+			v = 1;
+		}
+		jQuery('#fldDatabaseCauses_CauseActive').val(v);
+	});
+
+	jQuery('#frmDatabaseCauses_Edit').submit(function() {
+		var bContinue = true;
+		if (bContinue && jQuery.trim(jQuery('#fldDatabaseCauses_CauseName').val()) == '')
+		{
+			jQuery('#fldDatabaseCauses_CauseName').highlight();
+			jQuery('#msgDatabaseCauses_ErrorEmtpyFields').show();
+			setTimeout(function () {
+				jQuery('#fldDatabaseCauses_CauseName').unhighlight();
+				jQuery('.clsDatabaseCausesStatus').hide();
+			}, 2500);
+			bContinue = false;
+		}
+
+		if (bContinue)
+		{
+			jQuery('body').trigger('cmdMainWaitingShow');
+			jQuery.post(
+				jQuery('#desinventarURL').val() + '/',
+				{
+					cmd      : 'cmdDatabaseCausesUpdate',
+					RegionId : jQuery('#desinventarRegionId').val(),
+					Cause    : jQuery('#frmDatabaseCauses_Edit').serializeObject()
+				},
+				function(data)
+				{
+					jQuery('body').trigger('cmdMainWaitingHide');
+					if (parseInt(data.Status) > 0)
+					{
+						jQuery('#divDatabaseCauses_Edit').hide();
+						jQuery('#btnDatabaseCauses_Add').show();
+						jQuery('#msgDatabaseCauses_UpdateOk').show();
+						doDatabaseCausesPopulateList('tbodyDatabaseCauses_CauseListCustom' , data.CauseListCustom);
+						doDatabaseCausesPopulateList('tbodyDatabaseCauses_CauseListDefault', data.CauseListDefault);
+					}
+					else
+					{
+						switch(data.Status)
+						{
+							case -15:
+								jQuery('#msgDatabaseCauses_ErrorCannotDelete').show();
+							break;
+							default:
+								jQuery('#msgDatabaseCauses_UpdateError').show();
+							break;
+						}
+					}					
+					setTimeout(function () {
+						jQuery('.clsDatabaseCausesStatus').hide();
+					}, 2500);
+				},
+				'json'
+			);
+		}		
+		return false;
+	});
+} //onReadyDatabaseCauses()
+
+function doCausesFormSetup()
+{
+	if (parseInt(jQuery('#fldDatabaseCauses_CausePredefined').val()) > 0)
+	{
+		jQuery('#divDatabaseCauses_Edit span.Custom').hide();
+		jQuery('#divDatabaseCauses_Edit span.Predefined').show();
+		jQuery('#fldDatabaseCauses_CauseDesc').prop('disabled', true);
+		jQuery('#fldDatabaseCauses_CauseDesc').addClass('disabled');
+	}
+	else
+	{
+		jQuery('#divDatabaseCauses_Edit span.Custom').show();
+		jQuery('#divDatabaseCauses_Edit span.Predefined').hide();
+		jQuery('#fldDatabaseCauses_CauseDesc').prop('disabled', false);
+		jQuery('#fldDatabaseCauses_CauseDesc').removeClass('disabled');
+	}
+}
+
+function doDatabaseCausesPopulateLists()
+{
+	jQuery('body').trigger('cmdMainWaitingShow');
+	jQuery.post(
+		jQuery('#desinventarURL').val() + '/',
+		{
+			cmd : 'cmdDatabaseCausesGetList',
+			RegionId : jQuery('#desinventarRegionId').val()
+		},
+		function(data)
+		{
+			if (parseInt(data.Status) > 0)
+			{
+				doDatabaseCausesPopulateList('tbodyDatabaseCauses_CauseListCustom' , data.CauseListCustom);
+				doDatabaseCausesPopulateList('tbodyDatabaseCauses_CauseListDefault', data.CauseListDefault);
+			}
+			jQuery('body').trigger('cmdMainWaitingHide');
+		},
+		'json'
+	);
+} //doDatabaseCausesPopulateLists()
+
+function doDatabaseCausesPopulateList(tbodyId, CauseList)
+{
+	jQuery('#' + tbodyId).find('tr:gt(0)').remove();
+	jQuery('#' + tbodyId).find('tr').removeClass('under');
+	jQuery.each(CauseList, function(index, value) {
+		var clonedRow = jQuery('#tbodyDatabaseCauses_CauseListCustom tr:last').clone().show();
+		jQuery('.CauseId', clonedRow).html(index);
+		jQuery('.CausePredefined',clonedRow).html(value.CausePredefined);
+		jQuery('.CauseName', clonedRow).html(value.CauseName);
+		jQuery('.CauseDesc', clonedRow).html(value.CauseDesc.substring(0,150));
+		jQuery('.CauseDesc', clonedRow).prop('title', value.CauseDesc);
+		jQuery('.CauseActive :input', clonedRow).prop('checked', value.CauseActive>0);
+		jQuery('#' + tbodyId).append(clonedRow);
+	});
+	jQuery('#' + tbodyId + ' .CauseId').hide();
+	jQuery('#' + tbodyId + ' .CausePredefined').hide();
+	jQuery('#' + tbodyId + ' tr:even').addClass('under');
+} //doDatabaseCausesPopulateList()
+/*
+ DesInventar - http://www.desinventar.org
+ (c) 1998-2012 Corporacion OSSO
+*/
+
 function onReadyDatabaseConfig()
 {
 	jQuery('#frmCauseEdit').unbind('submit').submit(function() {
@@ -4026,53 +4203,7 @@ function onReadyDBConfigCauses()
 	});
 	
 }
-	/*
- DesInventar - http://www.desinventar.org
- (c) 1998-2012 Corporacion OSSO
-*/
-
-function onReadyDBConfigGeography()
-{
-	jQuery('.clsDBConfigGeographyStatus').hide();
-
-	jQuery('#frmDBConfigGeographyEdit').unbind('submit').submit(function() {
-		var bContinue = true;
-		var a = new Array('aGeographyCode','aGeographyName');
-		bContinue = checkForm('frmDBConfigGeographyEdit', a, 'Required fields are missing');
-		if (bContinue)
-		{
-			jQuery('#frmDBConfigGeographyEdit #RegionId').val(jQuery('#desinventarRegionId').val());
-			jQuery('#frmDBConfigGeographyEdit .GeographyActive').val(0);
-			if (jQuery('#frmDBConfigGeographyEdit .GeographyActiveCheckbox').is(':checked'))
-			{
-				jQuery('#frmDBConfigGeographyEdit .GeographyActive').val(1);
-			}
-			var params = jQuery(this).serialize();
-			jQuery.post(jQuery('#desinventarURL').val() + '/geography.php',
-				params,
-				function(data)
-				{
-					jQuery('.clsDBConfigGeographyStatus').hide();
-					if (parseInt(data.Status) > 0)
-					{
-						jQuery('#msgDBConfigGeographyUpdate').show();
-						jQuery('#geoaddsect').hide();
-						var RegionId = jQuery('#desinventarRegionId').val();
-						updateList('lst_ageo', jQuery('#desinventarURL').val() + '/geography.php', 'RegionId=' + RegionId +'&cmd=list&GeographyId=');
-						updateList('qgeolst', jQuery('#desinventarURL').val() + '/', 'RegionId='+ RegionId +'&cmd=geolst');
-					}
-					else
-					{
-						jQuery('#msgDBConfigGeographyError').text('Cannot save geography, error code : ' + data.Status).show();
-					}
-				},
-				'json'
-			);
-		}
-		return false;
-	});
-}
-function doUpdateDatabaseListByUser()
+	function doUpdateDatabaseListByUser()
 {
 	jQuery(".contentBlock").hide();
 	jQuery("#divRegionList").show();
@@ -4282,10 +4413,6 @@ function doGetRegionInfo(RegionId)
 			case "lev":
 				updateList('lst_lev', jQuery('#desinventarURL').val() + '/geolevel.php', 'r='+ reg +'&levcmd=list');
 			break;
-			case "geo":
-				updateList('lst_ageo', jQuery('#desinventarURL').val() + '/geography.php', 'r='+ reg +'&cmd=list&GeographyId=');
-				updateList('qgeolst', jQuery('#desinventarURL').val() + '/', 'r='+ reg +'&cmd=geolst');
-			break;
 			default:
 			break;
 		}
@@ -4360,7 +4487,7 @@ function doGetRegionInfo(RegionId)
 		}
 	}
 	
-	function setLevGeo (key, val, val2, val3, ly1, ly2, ly3, module)
+	function setLevGeo(key, val, val2, val3, ly1, ly2, ly3, module)
 	{
 		mod = module;
 		$(mod + 'addsect').style.display = 'block';
@@ -4377,8 +4504,6 @@ function doGetRegionInfo(RegionId)
 			$('aGeographyId').value = key;
 			$('aGeographyCode').value = val;
 			$('aGeographyName').value = val2;
-			jQuery('#frmDBConfigGeographyEdit .GeographyActive').val(parseInt(val3));
-			jQuery('#frmDBConfigGeographyEdit .GeographyActiveCheckbox').prop('checked', parseInt(jQuery('#frmDBConfigGeographyEdit .GeographyActive').val()) > 0);
 		}
 	}
 
@@ -4395,7 +4520,6 @@ function doGetRegionInfo(RegionId)
 			{
 				$('aGeoParentId').value = '';
 			}
-			jQuery('#frmDBConfigGeographyEdit #Cmd').val('cmdGeographyInsert');
 			$('alev' + l).style.display = "none";
 		}
 		else if (v[0] == -2)
@@ -4406,7 +4530,6 @@ function doGetRegionInfo(RegionId)
 		{
 			setLevGeo(v[0],v[1],v[2],v[3],'','','','geo');
 			$('aGeoParentId').value = v[0];
-			jQuery('#frmDBConfigGeographyEdit #Cmd').val('cmdGeographyUpdate');
 			updateList('alev' + l, jQuery('#desinventarURL').val() + '/geography.php', 'r='+ reg +'&cmd=list&GeographyId=' + v[0]);
 		}
 	} //function
@@ -4815,22 +4938,6 @@ function doGetRegionInfo(RegionId)
 		}
 	}
 	
-	function setSelMap(code, gid, opc)
-	{
-		if (opc)
-		{
-			// Find and fill childs
-			$('itree-' + gid).style.display = 'block';
-			updateList('itree-' + gid, jQuery('#desinventarURL').val() + '/', 'r=' + jQuery('#desinventarRegionId').val() + '&cmd=glist&GeographyId=' + gid);
-		}
-		else
-		{
-			// clean childs first
-			$('itree-' + gid).innerHTML = '';
-			$('itree-' + gid).style.display = 'none';
-		}
-	}
-
 	function setAdvQuery(value, ope)
 	{
 		$('QueryCustom').value += value + ' ';
@@ -6040,6 +6147,7 @@ function onReadyMain()
 	onReadyGeography();
 	onReadyGeolevels();
 	onReadyDatabaseEvents();
+	onReadyDatabaseCauses();
 	onReadyAdminUsers();
 	onReadyUserPermAdmin();
 	onReadyCommon();
@@ -6109,6 +6217,10 @@ function onReadyMain()
 
 	jQuery('#DBConfig_Events').on('show', function() {
 		jQuery('body').trigger('cmdDatabaseEventsShow');
+	});
+
+	jQuery('#DBConfig_Causes').on('show', function() {
+		jQuery('body').trigger('cmdDatabaseCausesShow');
 	});
 
 	jQuery('#DBConfig_Users').on('show', function() {

@@ -13,7 +13,7 @@
 				<a class="classDBConfig_tabs" href="#DBConfig_Events" cmd="" >{-#msgDBConfig_Events#-}</a>
 			</li>
 			<li>
-				<a class="classDBConfig_tabs" href="#DBConfig_tabs-5" cmd="cmdDBInfoCause" data-url="{-$desinventarURL-}/causes.php">{-#mcauses#-}</a>
+				<a class="classDBConfig_tabs" href="#DBConfig_Causes" cmd="" >{-#mcauses#-}</a>
 			</li>
 			<li>
 				<a class="classDBConfig_tabs" href="#DBConfig_tabs-6" cmd="cmdDBInfoEEField" data-url="{-$desinventarURL-}/extraeffects.php">{-#meeffects#-}</a>
@@ -44,6 +44,12 @@
 			<div class="helptext hidden"></div>
 			<div class="content">
 				{-include file="database_events.tpl"-}
+			</div>
+		</div>
+		<div id="DBConfig_Causes">
+			<div class="helptext hidden"></div>
+			<div class="content">
+				{-include file="database_causes.tpl"-}
 			</div>
 		</div>
 		<div id="DBConfig_tabs-5">
