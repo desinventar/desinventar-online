@@ -121,7 +121,6 @@ function onReadyMain()
 							onReadyDBConfigCauses();
 						break;
 						default:
-							onReadyDatabaseConfig();
 							onReadyExtraEffects();
 						break;
 					}
