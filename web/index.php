@@ -1100,21 +1100,6 @@ switch ($cmd)
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
 	break;
-	case 'start':
-		$t->assign('lg', $lg);
-		$t->assign('LanguageList', $us->q->loadLanguages(1));
-		$listdb = $us->listDB();
-		# unique database, choose than
-		if (count($listdb) == 1)
-		{
-			$t->assign('option', 'r='. key($listdb));
-		}
-		else
-		{
-			$t->assign('option', 'cmd=main');
-		}
-		$t->display('block_start.tpl');
-	break;
 	case 'main':
 		# Direct access returns a list of public regions on this server
 		$t->assign('lg', $lg);
