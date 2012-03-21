@@ -49,18 +49,28 @@ function onReadyData() {
 	jQuery('body').trigger('cmdViewDataUpdate');
 
 	// Initialize
+	jQuery('div.ViewDataParams').on('cmdInitialize', function() {
+		doDataInitialize();
+	});
+} //onReadyData()
+
+function doDataInitialize()
+{
 	var field_list = jQuery('div.ViewDataParams select.FieldsAvailable');
 	field_list.find('option').remove();
 	jQuery('div.ViewParamFields div.ViewParamFieldAvailable').each(function() {
 		field_list.append(jQuery('<option>', { value : 'D.' + jQuery('span.field',this).text() }).text(jQuery('span.label',this).text()));
 	});
-	var f = jQuery('body').data('EEFieldList');
-	console.log(f.length);
-	//jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
-		//console.log(key);
-		//field_list.append(jQuery('<option>', { value : 'D.' + key }).text(key));
-	//});
-} //onReadyData()
+	jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
+		field_list.append(jQuery('<option>', { value : 'D.' + key }).text(value[0]));
+	});
+
+	var field_list = jQuery('div.ViewDataParams select.FieldsShow');
+	field_list.find('option').remove();
+	jQuery('div.ViewParamFields div.ViewParamFieldShow').each(function() {
+		field_list.append(jQuery('<option>', { value : 'D.' + jQuery('span.field',this).text() }).text(jQuery('span.label',this).text()));
+	});
+}
 
 function doDataUpdate()
 {

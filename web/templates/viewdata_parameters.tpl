@@ -5,7 +5,7 @@
 	<div class="x-window-header">
 		{-#msgViewData#-}
 	</div>
-	<div id="divViewDataParamsContent" class="ViewDataParams">
+	<div id="divViewDataParamsContent" class="ViewDataParams mainblock">
 		<form id="CD" method="post" action="">
 			{-#sresxpage#-}
 			<select id="_D+SQL_LIMIT" name="_D+SQL_LIMIT" class="line">
@@ -32,12 +32,8 @@
 					</td>
 					<td>
 						<b>{-#sviewfields#-}</b><br />
-						<select id="_D+Field[]" size="8" style="width:220px;" multiple class="line">
-							{-foreach name=sst key=key item=item from=$sda-}
-								{-if $item != "D.DisasterId"-}
-									<option value="D.{-$item-}">{-$dc2.$item[0]-}</option>
-								{-/if-}
-							{-/foreach-}
+						<select class="FieldsShow line" id="_D+Field[]" size="8" style="width:220px;" multiple="multiple">
+							<option></option>
 						</select><br/>
 						<a class="button" onclick="selectall('_D+Field[]');"><span>{-#balls#-}</span></a>
 						<a class="button" onclick="selectnone('_D+Field[]');"><span>{-#bnone#-}</span></a>
