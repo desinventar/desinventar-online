@@ -25,11 +25,12 @@
 			{-include file="user_account_ext.tpl"-}
 
 			<!-- Show Database functions window -->
-			<div id="dbl-win" class="x-hidden">
+			<div id="divAdminUsersWin" class="x-hidden">
 				<div class="x-window-header">
 					{-$desinventarUserId-} - {-$role-}
 				</div>
-				<div id="dbl">
+				<div id="divAdminUsersContent">
+					{-include file="admin_users.tpl"-}
 				</div>
 			</div>
 			<!-- Show Dialog window -->

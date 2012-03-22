@@ -103,19 +103,6 @@ switch ($cmd)
 			echo json_encode($user->oField['info']);
 		}
 	break;
-	case 'adminusr':
-		// USERADMIN: Register new user form, only for AdminPortal
-		if ($us->UserId == 'root')
-		{
-			$t->assign('cnt', $us->q->getCountryList());
-			$t->assign('usrpa', $us->getUserInfo(''));
-			$t->display('admin_users.tpl');
-		}
-		else
-		{
-			echo 'ERROR';
-		}
-	break;
 	case 'chklogin':
 		$UserId = getParameter('UserId');
 		// USERADMIN: check if UserId exists...
@@ -192,11 +179,6 @@ switch ($cmd)
 		}
 		$Answer = array('Status' => $bReturn);
 		echo json_encode($Answer);
-	break;
-	case 'list':
-		// USERADMIN: reload list..
-		$t->assign('usrpa', $us->getUserInfo(''));
-		$t->display('user_list.tpl');
 	break;
 	default:
 		// View login window

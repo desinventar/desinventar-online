@@ -299,10 +299,8 @@ function doMainMenuHandler(item)
 			doDatabaseCreateShow();
 		break;
 		case 'mnuUserAccountManagement':
-			jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=adminusr', function() {
-				doAdminUsersReset();
-			});
-			Ext.getCmp('wndDatabaseList').show();
+			jQuery('div.AdminUsers').trigger('cmdLoadData');
+			Ext.getCmp('wndAdminUsers').show();
 		break;
 		case 'mnuAdminDatabases':
 			jQuery('.contentBlock').hide();
@@ -658,10 +656,10 @@ function doDialogsCreate()
 	});
 
 	// Database List - Database Search Window
-	w = new Ext.Window({id:'wndDatabaseList',
-		el:'dbl-win', layout:'fit', x:200, y:100, width:600, height:450, 
+	w = new Ext.Window({id:'wndAdminUsers',
+		el:'divAdminUsersWin', layout:'fit', x:200, y:100, width:600, height:450, 
 		closeAction:'hide', plain: true, animCollapse: false, constrainHeader: true,
-		items: new Ext.Panel({ contentEl: 'dbl', autoScroll: true })
+		items: new Ext.Panel({ contentEl: 'divAdminUsersContent', autoScroll: true })
 	});
 	w = new Ext.Window({id:'wndDialog',
 		el:'dlg-win', layout:'fit', x:350, y:200, width:300, height:150, 

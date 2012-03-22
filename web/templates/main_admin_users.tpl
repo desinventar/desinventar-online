@@ -25,6 +25,7 @@
 				}
 				onReadyCommon();
 				onReadyAdminUsers();
+				jQuery('div.AdminUsers').trigger('cmdLoadData');
 			});
 		</script>
 	</head>
