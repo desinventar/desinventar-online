@@ -1,11 +1,11 @@
 function onReadyAdminUsers()
 {
-	jQuery('body').on('mouseover', '#divAdminUsers #tblUserList tr', function() {
+	jQuery('div.AdminUsers table.UserList tbody').on('mouseover', 'tr', function() {
 		jQuery(this).addClass('highlight');
-	}).on('mouseout', '#divAdminUsers #tblUserList tr', function() {
+	}).on('mouseout', 'tr', function() {
 		jQuery(this).removeClass('highlight');
-	}).on('click', '#divAdminUsers #tblUserList tr', function() {
-		var UserId = jQuery(this).children("td:first").html();
+	}).on('click', 'tr', function() {
+		var UserId = jQuery('.UserId', this).text();
 		jQuery.getJSON(jQuery('#desinventarURL').val() + '/user.php' + '?cmd=getUserInfo&UserId=' + UserId, function(data) {
 			jQuery('#divAdminUsers #txtUserId').attr('readonly','true');
 			jQuery('#divAdminUsers #txtUserId').val(data.UserId);
@@ -58,11 +58,10 @@ function onReadyAdminUsers()
 			jQuery.post(jQuery('#desinventarURL').val() + '/user.php', 
 				user, 
 				function(data) {
-					if (data.Status > 0) {
+					if (parseInt(data.Status) > 0)
+					{
 						// Reload user list on success
-						jQuery('#divAdminUsers #lst_userpa').load(jQuery('#desinventarURL').val() + '/user.php' + '?cmd=list', function(data) {
-							doAdminUsersReset();
-						});
+						jQuery('div.AdminUsers').trigger('cmdLoadData');
 					}
 					UserEditFormUpdateStatus(data.Status);
 				},
