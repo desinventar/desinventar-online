@@ -1,10 +1,10 @@
 {-config_load file="$lg.conf" section="grpMenuUser"-}
 {-config_load file="$lg.conf" section="grpAdminUsers"-}
-<div id="divAdminUsers">
+<div id="divAdminUsers" class="AdminUsers">
 	<div id="divUserList">
 		<h2>{-#tuserprefer#-}</h2>
 		<div class="dwin" style="width:550px;height:180px;">
-			<table id="tblUserList">
+			<table id="tblUserList" class="UserList">
 				<thead>
 					<tr>
 						<th class="header"><b>{-#tuser#-}</b></th>
@@ -14,7 +14,21 @@
 					</tr>
 				</thead>
 				<tbody id="lst_userpa">
-					{-include file="user_list.tpl"-}
+						<tr style="display:none;">
+							<td>
+								<span class="UserId" id="UserId"></span>
+							</td>
+							<td>
+								<span class="UserFullName"></span>
+							</td>
+							<td>
+								<span class="UserEMail"></span>
+							</td>
+							<td>
+								<span class="UserActive hidden"></span>
+								<input class="UserActiveCheckbox" type="checkbox" disabled="disabled" />
+							</td>
+						</tr>
 				</tbody>
 			</table>
 		</div>

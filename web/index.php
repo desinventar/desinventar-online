@@ -472,6 +472,21 @@ switch ($cmd)
 		}
 		$t->display('main_admin_users.tpl');
 	break;
+	case 'cmdAdminUsersGetList':
+		$answer = array();
+		$iReturn = ERR_NO_ERROR;
+		if ($desinventarUserRoleValue < ROLE_ADMINPORTAL)
+		{
+			$iReturn = ERR_UNKNOWN_ERROR;
+		}
+		if ($iReturn > 0)
+		{
+			$UserList = $us->getUserInfo('');
+			$answer['UserList'] = $UserList;
+		}
+		$answer['Status'] = $iReturn;
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
+	break;
 	case 'cmdDatabaseLoadData':
 		$answer = array();
 		$iReturn = ERR_NO_ERROR;

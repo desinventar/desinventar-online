@@ -76,6 +76,34 @@ function onReadyAdminUsers()
 	jQuery('#desinventarCountryList option').each(function() {
 		jQuery('#selCountryIso').append(jQuery('<option>', { value : jQuery(this).attr('value') }).text(jQuery(this).text()));
 	});
+	
+	jQuery('div.AdminUsers').on('cmdLoadData', function(event) {
+		jQuery.post(
+			jQuery('#desinventarURL').val() + '/',
+			{
+				cmd : 'cmdAdminUsersGetList'
+			},
+			function(data)
+			{
+				if (parseInt(data.Status) > 0)
+				{
+					var user_list = jQuery('div.AdminUsers table.UserList tbody');
+					user_list.find('tr:gt(0)').remove();
+					jQuery.each(data.UserList, function(key, value) {
+						var clone = jQuery('tr:first', user_list).clone().show();
+						jQuery('.UserId'            , clone).text(value.UserId);
+						jQuery('.UserFullName'      ,clone).text(value.UserFullName);
+						jQuery('.UserEMail'         ,clone).text(value.UserEMail);
+						jQuery('.UserActive'        ,clone).text(value.UserActive);
+						jQuery('.UserActiveCheckbox',clone).prop('checked', parseInt(value.UserActive)==1);						
+						user_list.append(clone);
+					});
+				}
+				doAdminUsersReset();
+			},
+			'json'
+		);
+	});
 } //onReadyAdminUsers()
 
 function doAdminUsersReset()
