@@ -19,12 +19,51 @@ function onReadyThematicMap()
 
 function doViewMapParamsInitialize()
 {
+	// Level of Representation
 	var geolevel_list = jQuery('div.ViewMapParams select.Geolevel');
 	geolevel_list.find('option').remove();
 	jQuery.each(jQuery('body').data('GeolevelsList'), function(key, value) {
 		geolevel_list.append(jQuery('<option>', { value: value.GeoLevelId + '|D.GeographyId|' }).text(value.GeoLevelName));
 	});
 	geolevel_list.val(jQuery('option:first', geolevel_list).val());
+
+	// Variable to be represented
+	var field_list = jQuery('div.ViewMapParams select.Field');
+	field_list.find('option').remove();
+	field_list.append(jQuery('<option>', { value: 'D.DisasterId||' }).text(jQuery('#RepNumLabel').text()));
+	// EffectPeople (ef1)
+	jQuery('div.desinventarInfo div.EffectList div.EffectPeople').each(function() {
+		var field = jQuery('span.field', this).text();
+		var label = jQuery('span.label',this).text();
+		field_list.append(jQuery('<option>', { value: 'D.' + field + 'Q|>|-1' }).text(label));
+		field_list.append(jQuery('<option>', { value: 'D.' + field + '|=|-1' }).text(jQuery('#AuxHaveLabel').text() + ' ' + label));
+	});	
+	// EffectLosses1 List (ef2)
+	jQuery('div.desinventarInfo div.EffectList div.EffectLosses1').each(function() {
+		var field = jQuery('span.field', this).text();
+		var label = jQuery('span.label',this).text();
+		field_list.append(jQuery('<option>', { value: 'D.' + field + '|>|-1' }).text(label));
+	});
+	// EffectLosses2 List (ef3)
+	jQuery('div.desinventarInfo div.EffectList div.EffectLosses2').each(function() {
+		var field = jQuery('span.field', this).text();
+		var label = jQuery('span.label',this).text();
+		field_list.append(jQuery('<option>', { value: 'D.' + field + '|>|-1' }).text(label));
+	});	
+	// EffectSector (sec)
+	jQuery('div.desinventarInfo div.EffectList div.EffectSector').each(function() {
+		var field = jQuery('span.field', this).text();
+		var label = jQuery('span.label',this).text();
+		field_list.append(jQuery('<option>', { value: 'D.' + field + '|=|-1' }).text(jQuery('#AuxAffectLabel').text() + ' ' + label));
+	});
+	field_list.append(jQuery('<option>', { value: '', disabled:'disabled'}).text('---'));
+	// EEFieldList
+	jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
+		var field = key;
+		var label = value[0];
+		field_list.append(jQuery('<option>', { value: 'D.' + field + '|>|-1' }).text(label));
+	});
+	field_list.val(jQuery('option:first', field_list).val());
 }
 
 function createThematicMap()
