@@ -222,12 +222,12 @@ function setRegionPA(prmRegionId, prmCountryIso, prmRegionLabel,
 }
 function onReadyAdminUsers()
 {
-	jQuery('body').on('mouseover', '#divAdminUsers #tblUserList tr', function() {
+	jQuery('div.AdminUsers table.UserList tbody').on('mouseover', 'tr', function() {
 		jQuery(this).addClass('highlight');
-	}).on('mouseout', '#divAdminUsers #tblUserList tr', function() {
+	}).on('mouseout', 'tr', function() {
 		jQuery(this).removeClass('highlight');
-	}).on('click', '#divAdminUsers #tblUserList tr', function() {
-		var UserId = jQuery(this).children("td:first").html();
+	}).on('click', 'tr', function() {
+		var UserId = jQuery('.UserId', this).text();
 		jQuery.getJSON(jQuery('#desinventarURL').val() + '/user.php' + '?cmd=getUserInfo&UserId=' + UserId, function(data) {
 			jQuery('#divAdminUsers #txtUserId').attr('readonly','true');
 			jQuery('#divAdminUsers #txtUserId').val(data.UserId);
@@ -280,11 +280,10 @@ function onReadyAdminUsers()
 			jQuery.post(jQuery('#desinventarURL').val() + '/user.php', 
 				user, 
 				function(data) {
-					if (data.Status > 0) {
+					if (parseInt(data.Status) > 0)
+					{
 						// Reload user list on success
-						jQuery('#divAdminUsers #lst_userpa').load(jQuery('#desinventarURL').val() + '/user.php' + '?cmd=list', function(data) {
-							doAdminUsersReset();
-						});
+						jQuery('div.AdminUsers').trigger('cmdLoadData');
 					}
 					UserEditFormUpdateStatus(data.Status);
 				},
@@ -297,6 +296,34 @@ function onReadyAdminUsers()
 	// Populate Country List
 	jQuery('#desinventarCountryList option').each(function() {
 		jQuery('#selCountryIso').append(jQuery('<option>', { value : jQuery(this).attr('value') }).text(jQuery(this).text()));
+	});
+	
+	jQuery('div.AdminUsers').on('cmdLoadData', function(event) {
+		jQuery.post(
+			jQuery('#desinventarURL').val() + '/',
+			{
+				cmd : 'cmdAdminUsersGetList'
+			},
+			function(data)
+			{
+				if (parseInt(data.Status) > 0)
+				{
+					var user_list = jQuery('div.AdminUsers table.UserList tbody');
+					user_list.find('tr:gt(0)').remove();
+					jQuery.each(data.UserList, function(key, value) {
+						var clone = jQuery('tr:first', user_list).clone().show();
+						jQuery('.UserId'            , clone).text(value.UserId);
+						jQuery('.UserFullName'      ,clone).text(value.UserFullName);
+						jQuery('.UserEMail'         ,clone).text(value.UserEMail);
+						jQuery('.UserActive'        ,clone).text(value.UserActive);
+						jQuery('.UserActiveCheckbox',clone).prop('checked', parseInt(value.UserActive)==1);						
+						user_list.append(clone);
+					});
+				}
+				doAdminUsersReset();
+			},
+			'json'
+		);
 	});
 } //onReadyAdminUsers()
 
@@ -3991,7 +4018,29 @@ function onReadyData() {
 	});
 	jQuery('body').trigger('cmdViewDataUpdate');
 
+	// Initialize
+	jQuery('div.ViewDataParams').on('cmdInitialize', function() {
+		doDataInitialize();
+	});
 } //onReadyData()
+
+function doDataInitialize()
+{
+	var field_list = jQuery('div.ViewDataParams select.FieldsAvailable');
+	field_list.find('option').remove();
+	jQuery('div.ViewParamFields div.ViewParamFieldAvailable').each(function() {
+		field_list.append(jQuery('<option>', { value : 'D.' + jQuery('span.field',this).text() }).text(jQuery('span.label',this).text()));
+	});
+	jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
+		field_list.append(jQuery('<option>', { value : 'D.' + key }).text(value[0]));
+	});
+
+	var field_list = jQuery('div.ViewDataParams select.FieldsShow');
+	field_list.find('option').remove();
+	jQuery('div.ViewParamFields div.ViewParamFieldShow').each(function() {
+		field_list.append(jQuery('<option>', { value : 'D.' + jQuery('span.field',this).text() }).text(jQuery('span.label',this).text()));
+	});
+}
 
 function doDataUpdate()
 {
@@ -4220,54 +4269,6 @@ function doGetRegionInfo(RegionId)
 			}
 		);
 	} //function
-
-	function sendData(r, url, pars, val)
-	{
-		reg = r;
-		opt = val;
-		if (mod != "")
-		{
-			$(mod + 'addsect').style.display = 'none';
-		}
-		pars = pars + '&t=' + new Date().getTime();
-		var myAjax = new Ajax.Request( url,
-		{
-			method: 'get', parameters: pars,
-			onLoading: function(request)
-			{
-				window.style.cursor = "wait";
-				uploadMsg('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />');
-			},
-			onComplete: showResponse
-		} );
-	} //function
-
-	function showResponse(originalRequest)
-	{
-		var newData = originalRequest.responseText;
-		var reg = jQuery('#desinventarRegionId').val();
-		uploadMsg(newData);
-		switch(mod)
-		{
-			case "regionpa":
-				//updateList('lst_regionpa', jQuery('#desinventarURL').val() + '/region.php', 'cmd=list');
-			break;
-			case "userpa":
-				updateList('lst_userpa', jQuery('#desinventarURL').val() + '/user.php', 'cmd=list');
-			break;
-			case "role":
-				updateList('lst_role', jQuery('#desinventarURL').val() + '/info.php', 'r='+ reg +'&cmd=cmdDBInfoRoleList');
-			break;
-			case "log":
-				updateList('lst_log', jQuery('#desinventarURL').val() + '/info.php', 'r='+ reg +'&cmd=cmdDBInfoLogList');
-			break;
-			case "lev":
-				updateList('lst_lev', jQuery('#desinventarURL').val() + '/geolevel.php', 'r='+ reg +'&levcmd=list');
-			break;
-			default:
-			break;
-		}
-	}
 
 	function setEveCau(id, name, desc, active, is_pred, module)
 	{
@@ -4853,8 +4854,6 @@ function onReadyExtraEffects() {
 	});
 	
 	jQuery('#frmEEFieldEdit').unbind('submit').submit(function() {
-		//onSubmit="javascript: var a=new Array('EEFieldLabel','EEFieldDesc', 'EEFieldType'); return(checkForm('eeffrm',a, '{-#errmsgfrmeef#-}'));"	
-		//action="javascript: var s=$('eeffrm').serialize(); sendData('{-$reg-}', jQuery('#desinventarURL').val() + '/extraeffects.php', s, '');"
 		var params = jQuery(this).serialize();
 		var bContinue = true;
 		if (bContinue) {
@@ -5452,10 +5451,8 @@ function doMainMenuHandler(item)
 			doDatabaseCreateShow();
 		break;
 		case 'mnuUserAccountManagement':
-			jQuery('#dbl').load(jQuery('#desinventarURL').val() + '/user.php?cmd=adminusr', function() {
-				doAdminUsersReset();
-			});
-			Ext.getCmp('wndDatabaseList').show();
+			jQuery('div.AdminUsers').trigger('cmdLoadData');
+			Ext.getCmp('wndAdminUsers').show();
 		break;
 		case 'mnuAdminDatabases':
 			jQuery('.contentBlock').hide();
@@ -5811,10 +5808,10 @@ function doDialogsCreate()
 	});
 
 	// Database List - Database Search Window
-	w = new Ext.Window({id:'wndDatabaseList',
-		el:'dbl-win', layout:'fit', x:200, y:100, width:600, height:450, 
+	w = new Ext.Window({id:'wndAdminUsers',
+		el:'divAdminUsersWin', layout:'fit', x:200, y:100, width:600, height:450, 
 		closeAction:'hide', plain: true, animCollapse: false, constrainHeader: true,
-		items: new Ext.Panel({ contentEl: 'dbl', autoScroll: true })
+		items: new Ext.Panel({ contentEl: 'divAdminUsersContent', autoScroll: true })
 	});
 	w = new Ext.Window({id:'wndDialog',
 		el:'dlg-win', layout:'fit', x:350, y:200, width:300, height:150, 
