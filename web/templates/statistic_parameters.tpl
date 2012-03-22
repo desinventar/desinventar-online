@@ -35,16 +35,13 @@
 					<td class="StatGroup">
 						<b>{-$std.StatisticFirstlev[0]-}</b><br />
 						<input class="label" type="hidden" name="options[grouplabel][0]" value="" />
-						<select class="GeolevelFirst value line" id="fldStatParam_FirstLev" name="options[group][0]" size="8" style="width:180px;"  >
-							{-foreach name=glev key=k item=i from=$glev-}
-								{-assign var="ln" value="StatisticGeographyId_$k"-}
-								<option value="{-$k-}|D.GeographyId" {-if $smarty.foreach.glev.first-}selected{-/if-}>{-$std.$ln[0]-}</option>
-							{-/foreach-}
-							<option value="|D.EventId">{-$std.StatisticEventName[0]-}</option>
-							<option value="YEAR|D.DisasterBeginTime">{-$std.StatisticDisasterBeginTime_YEAR[0]-}</option>
-							<option value="MONTH|D.DisasterBeginTime">{-$std.StatisticDisasterBeginTime_MONTH[0]-}</option>
-							<option value="|D.CauseId">{-$std.StatisticCauseName[0]-}</option>
+						<select class="StatlevelFirst value line" id="fldStatParam_FirstLev" name="options[group][0]" size="8" style="width:180px;"  >
+							<option></option>
 						</select>
+						<span id="ViewStatParamsLabelEvent" class="hidden">{-$std.StatisticEventName[0]-}</span>
+						<span id="ViewStatParamsLabelYear"  class="hidden">{-$std.StatisticDisasterBeginTime_YEAR[0]-}</span>
+						<span id="ViewStatParamsLabelMonth" class="hidden">{-$std.StatisticDisasterBeginTime_MONTH[0]-}</span>
+						<span id="ViewStatParamsLabelCause" class="hidden">{-$std.StatisticCauseName[0]-}</span>
 					</td>
 					<td class="StatGroup">
 						<b>{-$std.StatisticSecondlev[0]-}</b><br/>
