@@ -5,7 +5,7 @@
 	<div class="x-window-header">
 		{-#msgViewMap#-}
 	</div>
-	<div id="map-cfg">
+	<div id="map-cfg" class="ViewMapParams mainblock">
 		<div id="colorpicker201" class="colorpicker201"></div>
 		<form id="CM" method="post" action="">
 			<table class="conf">
@@ -112,10 +112,8 @@
 					</td>
 					<td>
 						<b>{-#mrepreselev#-}</b><br />
-						<select id="_M+Type" name="_M+Type" size="3" class="fixw line">
-							{-foreach name=mgel key=k item=i from=$mgel-}
-								<option value="{-$k-}|D.GeographyId|" {-if $smarty.foreach.mgel.iteration==1-}selected{-/if-}>{-$i[0]-}</option>
-							{-/foreach-}
+						<select  class="Geolevel fixw line" id="_M+Type" name="_M+Type" size="3">
+							<option></option>
 						</select>
 						<br /><br />
 						<b>{-#mviewfields#-}</b><br />
