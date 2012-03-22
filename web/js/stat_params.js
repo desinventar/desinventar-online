@@ -25,4 +25,14 @@ function onReadyStatParams()
 
 function doViewStatParamsInitialize()
 {
-}
+	var statlevel_list = jQuery('div.ViewStatParams select.StatlevelFirst');
+	statlevel_list.find('option').remove();
+	jQuery.each(jQuery('body').data('GeolevelsList'), function(key, value) {
+		statlevel_list.append(jQuery('<option>', { value: value.GeoLevelId + '|D.GeographyId' }).text(value.GeoLevelName));
+	});
+	statlevel_list.append(jQuery('<option>', { value : '|D.EventId'}).text(jQuery('#ViewStatParamsLabelEvent').text()));
+	statlevel_list.append(jQuery('<option>', { value : 'YEAR|D.DisasterBeginTime'}).text(jQuery('#ViewStatParamsLabelYear').text()));
+	statlevel_list.append(jQuery('<option>', { value : 'MONTH|D.DisasterBeginTime'}).text(jQuery('#ViewStatParamsLabelMonth').text()));
+	statlevel_list.append(jQuery('<option>', { value : '|D.CauseId'}).text(jQuery('#ViewStatParamsLabelCause').text()));
+	statlevel_list.val(jQuery('option:first', statlevel_list).val());
+} //doViewStatParamsInitialize()
