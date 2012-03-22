@@ -11,8 +11,21 @@ function onReadyThematicMap()
 	jQuery('body').on('cmdViewMapParams', function() {
 		Ext.getCmp('wndViewMapParams').show();
 	});
-	//createThematicMap();
+	//Initialize
+	jQuery('div.ViewMapParams').on('cmdInitialize', function(event) {
+		doViewMapParamsInitialize();
+	});
 } //onReadyThematicMap()
+
+function doViewMapParamsInitialize()
+{
+	var geolevel_list = jQuery('div.ViewMapParams select.Geolevel');
+	geolevel_list.find('option').remove();
+	jQuery.each(jQuery('body').data('GeolevelsList'), function(key, value) {
+		geolevel_list.append(jQuery('<option>', { value: value.GeoLevelId + '|D.GeographyId|' }).text(value.GeoLevelName));
+	});
+	geolevel_list.val(jQuery('option:first', geolevel_list).val());
+}
 
 function createThematicMap()
 {

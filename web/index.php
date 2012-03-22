@@ -1478,8 +1478,6 @@ switch ($cmd)
 					$sda1 = explode(',', 'GeographyCode,DisasterLatitude,DisasterLongitude,RecordAuthor,RecordCreation,RecordUpdate,EventNotes');
 					$t->assign('sda1', $sda1);	# array_diff_key($dc2, array_flip($sda))
 					# MAPS
-					$mgl = $us->q->loadGeoLevels('', -1, true);
-					$t->assign('mgel', $mgl);
 					$range[] = array(     10, '1 - 10'          , 'ffff99');
 					$range[] = array(    100, '11 - 100'        , 'ffff00');
 					$range[] = array(   1000, '101 - 1000'      , 'ffcc00');
