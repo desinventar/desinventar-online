@@ -51,54 +51,6 @@
 		);
 	} //function
 
-	function sendData(r, url, pars, val)
-	{
-		reg = r;
-		opt = val;
-		if (mod != "")
-		{
-			$(mod + 'addsect').style.display = 'none';
-		}
-		pars = pars + '&t=' + new Date().getTime();
-		var myAjax = new Ajax.Request( url,
-		{
-			method: 'get', parameters: pars,
-			onLoading: function(request)
-			{
-				window.style.cursor = "wait";
-				uploadMsg('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />');
-			},
-			onComplete: showResponse
-		} );
-	} //function
-
-	function showResponse(originalRequest)
-	{
-		var newData = originalRequest.responseText;
-		var reg = jQuery('#desinventarRegionId').val();
-		uploadMsg(newData);
-		switch(mod)
-		{
-			case "regionpa":
-				//updateList('lst_regionpa', jQuery('#desinventarURL').val() + '/region.php', 'cmd=list');
-			break;
-			case "userpa":
-				updateList('lst_userpa', jQuery('#desinventarURL').val() + '/user.php', 'cmd=list');
-			break;
-			case "role":
-				updateList('lst_role', jQuery('#desinventarURL').val() + '/info.php', 'r='+ reg +'&cmd=cmdDBInfoRoleList');
-			break;
-			case "log":
-				updateList('lst_log', jQuery('#desinventarURL').val() + '/info.php', 'r='+ reg +'&cmd=cmdDBInfoLogList');
-			break;
-			case "lev":
-				updateList('lst_lev', jQuery('#desinventarURL').val() + '/geolevel.php', 'r='+ reg +'&levcmd=list');
-			break;
-			default:
-			break;
-		}
-	}
-
 	function setEveCau(id, name, desc, active, is_pred, module)
 	{
 		mod = module;

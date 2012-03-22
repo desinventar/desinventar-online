@@ -17,8 +17,6 @@ function onReadyExtraEffects() {
 	});
 	
 	jQuery('#frmEEFieldEdit').unbind('submit').submit(function() {
-		//onSubmit="javascript: var a=new Array('EEFieldLabel','EEFieldDesc', 'EEFieldType'); return(checkForm('eeffrm',a, '{-#errmsgfrmeef#-}'));"	
-		//action="javascript: var s=$('eeffrm').serialize(); sendData('{-$reg-}', jQuery('#desinventarURL').val() + '/extraeffects.php', s, '');"
 		var params = jQuery(this).serialize();
 		var bContinue = true;
 		if (bContinue) {
