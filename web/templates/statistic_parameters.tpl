@@ -60,26 +60,14 @@
 			<br />
 			<table>
 				<tr>
-					<td><b>{-#savailfields#-}</b><br />
-						<select id="_S+sel1[]" size="6" style="width:220px;" multiple class="line">
-							{-foreach name=ef1 key=k item=i from=$ef1-}
-								<option value="D.{-$k-}|S|-1">{-#tauxhave#-} {-$i[0]-}</option>
-							{-/foreach-}
-							{-foreach name=ef2 key=k item=i from=$ef2-}
-								<option value="D.{-$k-}|>|-1">{-$i[0]-}</option>
-							{-/foreach-}
-							{-foreach name=ef3 key=k item=i from=$ef3-}
-								<option value="D.{-$k-}|>|-1">{-$i[0]-}</option>
-							{-/foreach-}
-							{-foreach name=ef3 key=k item=i from=$sec-}
-								<option value="D.{-$k-}|S|-1">{-#tauxaffect#-} {-$i[0]-}</option>
-							{-/foreach-}
-							{-foreach name=eef key=k item=i from=$EEFieldList-}
-								{-if $i[2] == "INTEGER" || $i[2] == "DOUBLE"-}
-									<option value="E.{-$k-}|>|-1">{-$i[0]-}</option>
-								{-/if-}
-							{-/foreach-}
-							<option value="D.EventDuration|S|-1">{-#msgViewStd_EventDuration#-}</option>
+					<td>
+						<b>{-#savailfields#-}</b>
+						<span id="StatLabelAuxHave"       class="hidden">{-#tauxhave#-}</span>
+						<span id="StatLabelAuxAffect"     class="hidden">{-#tauxaffect#-}</span>
+						<span id="StatLabelEventDuration" class="hidden">{-#msgViewStd_EventDuration#-}</span>
+						<br />
+						<select class="FieldsAvailable line" id="_S+sel1[]" size="6" style="width:220px;" multiple="multiple">
+							<option></option>
 						</select>
 						<br />
 						<a class="button" onclick="selectall('_S+sel1[]');"><span>{-#balls#-}</span></a>
@@ -93,10 +81,8 @@
 					<td><b>{-#sviewfields#-}</b><br />
 						<input type="hidden" id="fldStatField" name="options[field]" value="" />
 						<input type="hidden" id="fldStatFieldLabel" name="options[fieldlabel]" value="" />
-						<select id="fldStatFieldSelect" size="6" style="width:220px;" multiple="multiple" class="line">
-							{-foreach name=ef1 key=k item=i from=$ef1-}
-								<option value="D.{-$k-}Q|>|-1">{-$i[0]-}</option>
-							{-/foreach-}
+						<select class="FieldsShow line" id="fldStatFieldSelect" size="6" style="width:220px;" multiple="multiple">
+							<option></option>
 						</select>
 						<br />
 						<a class="button" onclick="selectall('fldStatFieldSelect');"><span>{-#balls#-}</span></a>
