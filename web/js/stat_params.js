@@ -17,4 +17,12 @@ function onReadyStatParams()
 		Ext.getCmp('wndViewStdParams').show();
 		jQuery('#fldStatParam_FirstLev').trigger('change');
 	});
+
+	jQuery('div.ViewStatParams').on('cmdInitialize', function(event) {
+		doViewStatParamsInitialize();
+	});
 } //onReadyStatParams()
+
+function doViewStatParamsInitialize()
+{
+}

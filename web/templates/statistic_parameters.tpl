@@ -6,7 +6,7 @@
 	<div class="x-window-header">
 		{-#msgViewStd#-}
 	</div>
-	<div id="std-cfg">
+	<div id="std-cfg" class="ViewStatParams mainblock">
 		<form id="frmStatParams" method="post" action="">
 			<table border="0" width="100%">
 				<tr>
@@ -35,7 +35,7 @@
 					<td class="StatGroup">
 						<b>{-$std.StatisticFirstlev[0]-}</b><br />
 						<input class="label" type="hidden" name="options[grouplabel][0]" value="" />
-						<select class="value line" id="fldStatParam_FirstLev" name="options[group][0]" size="8" style="width:180px;"  >
+						<select class="GeolevelFirst value line" id="fldStatParam_FirstLev" name="options[group][0]" size="8" style="width:180px;"  >
 							{-foreach name=glev key=k item=i from=$glev-}
 								{-assign var="ln" value="StatisticGeographyId_$k"-}
 								<option value="{-$k-}|D.GeographyId" {-if $smarty.foreach.glev.first-}selected{-/if-}>{-$std.$ln[0]-}</option>
