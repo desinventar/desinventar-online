@@ -152,7 +152,16 @@ function onReadyGraphic() {
 	jQuery('body').on('cmdViewGraphParams', function() {
 		Ext.getCmp('wndViewGraphParams').show();
 	});
+
+	jQuery('div.ViewGraphParams').on('cmdInitialize', function(event) {
+		doViewGraphParamsInitialize();
+	});
 } // onReadyGraphic()
+
+function doViewGraphParamsInitialize()
+{
+	
+} //doViewGraphParamsInitialize()
 
 function disabAxis2()
 {
