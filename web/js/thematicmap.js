@@ -61,7 +61,7 @@ function doViewMapParamsInitialize()
 	jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
 		var field = key;
 		var label = value[0];
-		field_list.append(jQuery('<option>', { value: 'D.' + field + '|>|-1' }).text(label));
+		field_list.append(jQuery('<option>', { value: 'E.' + field + '|>|-1' }).text(label));
 	});
 	field_list.val(jQuery('option:first', field_list).val());
 }
