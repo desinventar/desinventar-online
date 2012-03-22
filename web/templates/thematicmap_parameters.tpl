@@ -116,28 +116,13 @@
 							<option></option>
 						</select>
 						<br /><br />
-						<b>{-#mviewfields#-}</b><br />
-						<select id="_M+Field" name="_M+Field" size="8" class="fixw line">
-							<option value="D.DisasterId||" selected>{-#trepnum#-}</option>
-							{-foreach name=ef1 key=k item=i from=$ef1-}
-								<option value="D.{-$k-}Q|>|-1">{-$i[0]-}</option>
-								<option value="D.{-$k-}|=|-1">{-#tauxhave#-} {-$i[0]-}</option>
-							{-/foreach-}
-							{-foreach name=ef2 key=k item=i from=$ef2-}
-								<option value="D.{-$k-}|>|-1">{-$i[0]-}</option>
-							{-/foreach-}
-							{-foreach name=ef3 key=k item=i from=$ef3-}
-								<option value="D.{-$k-}|>|-1">{-$i[0]-}</option>
-							{-/foreach-}
-							{-foreach name=ef3 key=k item=i from=$sec-}
-								<option value="D.{-$k-}|=|-1">{-#tauxaffect#-} {-$i[0]-}</option>
-							{-/foreach-}
-							<option disabled>---</option>
-							{-foreach name=eef key=k item=i from=$EEFieldList-}
-								{-if $i[2] == "INTEGER" || $i[2] == "DOUBLE"-}
-									<option value="E.{-$k-}|>|-1">{-$i[0]-}</option>
-								{-/if-}
-							{-/foreach-}
+						<b>{-#mviewfields#-}</b>
+						<span id="AuxHaveLabel" class="hidden">{-#tauxhave#-}</span>
+						<span id="AuxAffectLabel" class="hidden">{-#tauxaffect#-}</span>
+						<span id="RepNumLabel" class="hidden">{-#trepnum#-}</span>
+						<br />
+						<select class="Field fixw line" id="_M+Field" name="_M+Field" size="8">
+							<option></option>
 						</select>
 						<input type="hidden" id="_M+cmd" name="_M+cmd" value="result" />
 						<input type="hidden" id="_M+mapid"  name="_M+mapid" value="" />
