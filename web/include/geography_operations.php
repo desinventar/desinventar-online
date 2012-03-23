@@ -114,7 +114,7 @@ function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 	return $iReturn;
 } #import_geography_from_dbf
 
-function geography_update_dbf_record($prmDBFFile, $prmFieldCode, $prmFieldName, $prmGeographyCode, $prmGeographyName)
+function geography_update_dbf_record($prmDBFFile, $prmFieldCode, $prmFieldName, $prmGeographyCode, $prmGeographyName, $prmNewGeographyCode='')
 {
 	$answer = 1;
 
@@ -150,9 +150,17 @@ function geography_update_dbf_record($prmDBFFile, $prmFieldCode, $prmFieldName, 
 		while($bContinue > 0)
 		{
 			$row = dbase_get_record($dbf, $i);
-			if ($row[$field_code] == $prmGeographyCode)
+			if (trim($row[$field_code]) == $prmGeographyCode)
 			{
 				$row[$field_name] = utf8_decode($prmGeographyName);
+				if ($prmNewGeographyCode != '')
+				{
+					$row[$field_code] = trim($prmNewGeographyCode);
+				}
+				else
+				{
+					$row[$field_code] = trim($row[$field_code]);
+				}
 				unset($row['deleted']);
 				dbase_replace_record($dbf, $row, $i);
 				$row = dbase_get_record($dbf, $i);
