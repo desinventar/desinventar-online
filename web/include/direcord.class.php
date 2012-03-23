@@ -354,6 +354,20 @@ class DIRecord extends DIObject
 		return $iReturn;
 	} // function
 
+	public function save()
+	{
+		$iReturn = ERR_NO_ERROR;
+		if ($this->exist() > 0)
+		{
+			$iReturn = $this->update();
+		}
+		else
+		{
+			$iReturn = $this->insert();
+		}
+		return $iReturn;
+	}
+
 	public function delete($withValidate = true, $bStrict = true)
 	{
 		$iReturn = ERR_NO_ERROR;
