@@ -124,6 +124,8 @@ function onReadyQueryDesign()
 
 		// Initialize fields
 		jQuery('input.RegionId', this).val(jQuery('body').data('RegionId'));
+		console.log(jQuery('#desinventarRegionId').val());
+		console.log(params.MinYear + ' ' + params.MaxYear);
 		jQuery('input.MinYear' , this).val(params.MinYear);
 		jQuery('input.MaxYear' , this).val(params.MaxYear);
 		jQuery('input.queryBeginYear', this).val(params.MinYear);

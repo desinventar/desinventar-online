@@ -35,6 +35,19 @@
 			jQuery(document).ready(function() {
 				onReadyMain();
 				onReadyExtJS();
+				jQuery(window).bind('hashchange', function(e) {
+					var url = jQuery.param.fragment();
+					var options = url.split('/');
+					switch(options[0])
+					{
+						default:
+							console.log('Open database : ' + options[0]);
+							jQuery('#desinventarRegionId').val(options[0]);
+							jQuery('body').trigger('cmdDatabaseLoadData');
+						break;
+					}
+				});
+				jQuery(window).trigger('hashchange');
 			});
 		</script>
 	</head>
