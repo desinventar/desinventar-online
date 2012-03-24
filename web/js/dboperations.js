@@ -40,7 +40,7 @@ function doUpdateDatabaseListByUser()
 						var item = jQuery('tr:last', list).clone().show();
 						jQuery('td.RegionId', item).text(RegionId);
 						jQuery('td span.RegionLabel', item).text(value.RegionLabel);
-						jQuery('td a.RegionLink', item).attr('href', jQuery('#desinventarURL').val() + '/' + RegionId + '/');
+						jQuery('td a.RegionLink', item).attr('href', jQuery('#desinventarURL').val() + '/#' + RegionId + '/');
 						list.append(item);
 						iCount++;
 					});
