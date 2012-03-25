@@ -156,6 +156,11 @@ function doDatabaseLoadData()
 				jQuery('body').data('EEFieldList', data.EEFieldList);
 				jQuery('body').data('RecordCount', data.RecordCount);
 
+				//Compatibility with old methods
+				console.log(data.params.UserRoleValue);
+				jQuery('#desinventarUserRole').val(data.params.UserRole);
+				jQuery('#desinventarUserRoleValue').val(data.params.UserRoleValue);
+				
 				var dataItems = jQuery('body').data();
 				jQuery.each(dataItems, function(index, value) {
 					if (index.substr(0,13) === 'GeographyList')
@@ -171,6 +176,8 @@ function doDatabaseLoadData()
 				jQuery('#desinventarRegionId').val(data.params.RegionId);
 				jQuery('#desinventarRegionLabel').val(data.params.RegionLabel);
 				jQuery('#desinventarNumberOfRecords').val(data.RecordCount);
+
+				doViewportShow();
 			},
 			'json'
 		);
