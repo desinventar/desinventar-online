@@ -26,9 +26,6 @@ function onReadyExtJS()
 	doDialogsCreate();
 	doMainMenuCreate();
 	doViewportCreate();
-	jQuery('body').trigger('cmdMainMenuUpdate');
-	jQuery('body').trigger('cmdMainWaitingHide');
-	doViewportShow();
 } //onReadyExtJS()
 
 function doViewportCreate()
@@ -105,14 +102,17 @@ function doViewportCreate()
 
 function doViewportShow()
 {
+	jQuery('body').trigger('cmdMainMenuUpdate');
+	jQuery('body').trigger('cmdMainWaitingHide');
 	var UserRoleValue = parseInt(jQuery('#desinventarUserRoleValue').val());
 	var RegionId = jQuery('#desinventarRegionId').val();
+	console.log('doViewportShow : ' + RegionId + ' ' + UserRoleValue);
 	jQuery('.contentBlock').hide();
 	if (RegionId != '')
 	{
 		if (UserRoleValue > 0)
 		{
-			Ext.getCmp('westm').show();
+			//Ext.getCmp('westm').show();
 			Ext.getCmp('westm').expand();
 			jQuery('#divQueryResults').show();
 			jQuery('body').trigger('cmdQueryResultsButtonHide');
@@ -120,14 +120,15 @@ function doViewportShow()
 		}
 		else
 		{
-			Ext.getCmp('westm').hide();
+			//Ext.getCmp('westm').hide();
 			Ext.getCmp('viewport').doLayout();
 			jQuery('#divDatabasePrivate').show();
 		}
 	}
 	else
 	{
-		Ext.getCmp('westm').hide();
+		Ext.getCmp('westm').collapse();
+		//Ext.getCmp('westm').hide();
 		Ext.getCmp('viewport').doLayout();
 		jQuery('#divRegionList').show();
 		doUpdateDatabaseListByUser();
@@ -245,10 +246,13 @@ function doMainMenuHandler(item)
 			Ext.getCmp('westm').collapse();
 		break;
 		case 'mnuFileOpen':
+			window.location.hash = '';
+			/*
 			// Show database list
 			hideQueryDesign();
 			jQuery('.contentBlock').hide();
 			doUpdateDatabaseListByUser();
+			*/
 		break;
 		// Datacards Menu Items
 		case 'mnuDatacardEdit':
@@ -288,12 +292,6 @@ function doMainMenuHandler(item)
 		break;
 		case 'mnuDatacardSetupEnd':
 			jQuery('body').trigger('cmdWindowReload');
-			/*
-			doMainMenuToggle(true);
-			doMainMenuUpdate();
-			jQuery('body').trigger('cmdDatabaseLoadData');
-			doViewportShow();
-			*/
 		break;
 		case 'mnuFileCreate':
 			doDatabaseCreateShow();

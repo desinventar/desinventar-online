@@ -516,11 +516,13 @@ switch ($cmd)
 			$params = array();			
 			# Get range of dates for Query Design
 			$ydb = $us->getDateRange();
-			$params['MinYear'] = substr($ydb[0], 0, 4);
-			$params['MaxYear'] = substr($ydb[1], 0, 4);
-			$params['LangIsoCode'] = $lg;
-			$params['RegionId'] = $RegionId;
-			$params['RegionLabel'] = $RegionLabel;
+			$params['MinYear']       = substr($ydb[0], 0, 4);
+			$params['MaxYear']       = substr($ydb[1], 0, 4);
+			$params['LangIsoCode']   = $lg;
+			$params['RegionId']      = $RegionId;
+			$params['RegionLabel']   = $RegionLabel;
+			$params['UserRole']      = $desinventarUserRole;
+			$params['UserRoleValue'] = $desinventarUserRoleValue;
 			
 			$answer['params'] = $params;
 		}
