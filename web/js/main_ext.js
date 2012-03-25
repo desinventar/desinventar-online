@@ -42,7 +42,7 @@ function doViewportCreate()
 				autoScroll: true,
 				margins:'0 2 0 0',
 				contentEl: 'divWestPanel',
-				floatable: false
+				floatable: true
 			};
 			Ext.apply(this, config);
 			Ext.apply(this.initialConfig, config);
