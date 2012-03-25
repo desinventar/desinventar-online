@@ -1,4 +1,8 @@
 <div id="desinventarInfo" class="desinventarInfo" style="display:none;">
+	<div lass="hidden">
+		<span class="title">DesInventar {-$majorversion-}</span>
+		<span class="region_list">{-#msgDatabaseFind_Title#-}</span>
+	</div>
 	<div class="desinventarParams" style="display:none;">
 		<input type="hidden" id="desinventarURL"             value="{-$desinventarURL-}" />
 		<input type="hidden" id="desinventarURLPortal"       value="{-$desinventarURLPortal-}" />

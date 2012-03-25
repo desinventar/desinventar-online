@@ -106,9 +106,13 @@ function doViewportShow()
 	jQuery('body').trigger('cmdMainWaitingHide');
 	var UserRoleValue = parseInt(jQuery('#desinventarUserRoleValue').val());
 	var RegionId = jQuery('#desinventarRegionId').val();
+
+	var title = jQuery('div.desinventarInfo span.title').text();
+
 	jQuery('.contentBlock').hide();
 	if (RegionId != '')
 	{
+		title = title + ' | ' + jQuery('#desinventarRegionLabel').val();
 		if (UserRoleValue > 0)
 		{
 			Ext.getCmp('westm').show();
@@ -125,10 +129,12 @@ function doViewportShow()
 	}
 	else
 	{
+		title = title + ' | ' + jQuery('div.desinventarInfo span.region_list').text();
 		Ext.getCmp('westm').hide();
 		jQuery('#divRegionList').show();
 		doUpdateDatabaseListByUser();
 	}
+	jQuery(document).attr('title',title);
 	Ext.getCmp('viewport').doLayout();
 } //doViewportShow()
 
