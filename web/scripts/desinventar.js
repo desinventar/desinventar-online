@@ -5187,9 +5187,6 @@ function onReadyExtJS()
 	doDialogsCreate();
 	doMainMenuCreate();
 	doViewportCreate();
-	jQuery('body').trigger('cmdMainMenuUpdate');
-	jQuery('body').trigger('cmdMainWaitingHide');
-	doViewportShow();
 } //onReadyExtJS()
 
 function doViewportCreate()
@@ -5206,7 +5203,7 @@ function doViewportCreate()
 				autoScroll: true,
 				margins:'0 2 0 0',
 				contentEl: 'divWestPanel',
-				floatable: true
+				floatable: false
 			};
 			Ext.apply(this, config);
 			Ext.apply(this.initialConfig, config);
@@ -5266,6 +5263,8 @@ function doViewportCreate()
 
 function doViewportShow()
 {
+	jQuery('body').trigger('cmdMainMenuUpdate');
+	jQuery('body').trigger('cmdMainWaitingHide');
 	var UserRoleValue = parseInt(jQuery('#desinventarUserRoleValue').val());
 	var RegionId = jQuery('#desinventarRegionId').val();
 	jQuery('.contentBlock').hide();
@@ -5282,17 +5281,16 @@ function doViewportShow()
 		else
 		{
 			Ext.getCmp('westm').hide();
-			Ext.getCmp('viewport').doLayout();
 			jQuery('#divDatabasePrivate').show();
 		}
 	}
 	else
 	{
 		Ext.getCmp('westm').hide();
-		Ext.getCmp('viewport').doLayout();
 		jQuery('#divRegionList').show();
 		doUpdateDatabaseListByUser();
 	}
+	Ext.getCmp('viewport').doLayout();
 } //doViewportShow()
 
 function doMainChangeLanguage(LangIsoCode)
@@ -5406,10 +5404,13 @@ function doMainMenuHandler(item)
 			Ext.getCmp('westm').collapse();
 		break;
 		case 'mnuFileOpen':
+			window.location.hash = '';
+			/*
 			// Show database list
 			hideQueryDesign();
 			jQuery('.contentBlock').hide();
 			doUpdateDatabaseListByUser();
+			*/
 		break;
 		// Datacards Menu Items
 		case 'mnuDatacardEdit':
@@ -5449,12 +5450,6 @@ function doMainMenuHandler(item)
 		break;
 		case 'mnuDatacardSetupEnd':
 			jQuery('body').trigger('cmdWindowReload');
-			/*
-			doMainMenuToggle(true);
-			doMainMenuUpdate();
-			jQuery('body').trigger('cmdDatabaseLoadData');
-			doViewportShow();
-			*/
 		break;
 		case 'mnuFileCreate':
 			doDatabaseCreateShow();
@@ -6148,6 +6143,10 @@ function doDatabaseLoadData()
 				jQuery('body').data('EEFieldList', data.EEFieldList);
 				jQuery('body').data('RecordCount', data.RecordCount);
 
+				//Compatibility with old methods
+				jQuery('#desinventarUserRole').val(data.params.UserRole);
+				jQuery('#desinventarUserRoleValue').val(data.params.UserRoleValue);
+				
 				var dataItems = jQuery('body').data();
 				jQuery.each(dataItems, function(index, value) {
 					if (index.substr(0,13) === 'GeographyList')
@@ -6163,6 +6162,8 @@ function doDatabaseLoadData()
 				jQuery('#desinventarRegionId').val(data.params.RegionId);
 				jQuery('#desinventarRegionLabel').val(data.params.RegionLabel);
 				jQuery('#desinventarNumberOfRecords').val(data.RecordCount);
+
+				doViewportShow();
 			},
 			'json'
 		);
@@ -6294,8 +6295,6 @@ function onReadyQueryDesign()
 
 		// Initialize fields
 		jQuery('input.RegionId', this).val(jQuery('body').data('RegionId'));
-		console.log(jQuery('#desinventarRegionId').val());
-		console.log(params.MinYear + ' ' + params.MaxYear);
 		jQuery('input.MinYear' , this).val(params.MinYear);
 		jQuery('input.MaxYear' , this).val(params.MaxYear);
 		jQuery('input.queryBeginYear', this).val(params.MinYear);

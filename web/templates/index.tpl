@@ -37,9 +37,7 @@
 				onReadyExtJS();
 				jQuery(window).bind('hashchange', function(e) {
 					var url = jQuery.param.fragment();
-					console.log('URL : ' + url);
 					var options = url.split('/');
-					console.log(options.length);
 					switch(options[0])
 					{
 						case '':
@@ -48,7 +46,6 @@
 							doViewportShow();
 						break;
 						default:
-							console.log('Open database : ' + options[0]);
 							jQuery('#desinventarRegionId').val(options[0]);
 							jQuery('body').trigger('cmdDatabaseLoadData');
 						break;
