@@ -2,11 +2,12 @@
 {-config_load file="$lg.conf" section="grpMainStrings"-}
 {-config_load file="$lg.conf" section="grpMenuUser"-}
 {-config_load file="$lg.conf" section="querydef"-}
+{-config_load file="$lang.conf" section="grpDatabaseFind"-}
 <!DOCTYPE HTML>
 <html>
 	<head>
 		<meta charset="UTF-8" />
-		<title>DesInventar Online Edition {-$majorversion-} | {-$RegionLabel-}</title>
+		<title>DesInventar</title>
 		<script type="text/javascript" src="{-$desinventarURL-}/scripts/prototype.js"></script>
 		<!-- jQuery -->
 		{-include file="jquery.tpl"-}
@@ -46,7 +47,8 @@
 							doViewportShow();
 						break;
 						default:
-							jQuery('#desinventarRegionId').val(options[0]);
+							var RegionId = options[0];
+							jQuery('#desinventarRegionId').val(RegionId);
 							jQuery('body').trigger('cmdDatabaseLoadData');
 						break;
 					}
