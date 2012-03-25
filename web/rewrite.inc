@@ -22,7 +22,7 @@ RewriteRule ^css/(.*)-(.*).css  css/$1.css [L]
 #
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^([a-zA-Z0-9\-_]+)/?$                    index.php?RegionId=$1 [QSA]
+RewriteRule ^([a-zA-Z0-9\-_]+)/?$                    #$1 [NC,NE,R=302]
 RewriteRule ^([a-zA-Z0-9\-_]+)/datacards[/]$         index.php?RegionId=$1&cmd=cmdDatacards
 RewriteRule ^([a-zA-Z0-9\-_]+)/events[/]$            index.php?RegionId=$1&cmd=cmdDatabaseEvents
 RewriteRule ^([a-zA-Z0-9\-_]+)/causes[/]$            index.php?RegionId=$1&cmd=cmdDatabaseCauses
