@@ -150,6 +150,7 @@ switch($cmd)
 			$t->assign('basemap', $worldmap);
 			$t->assign('mps', MAPSERV);
 		}
+		$t->force_compile   = true; # Force this template to always compile
 		$t->display('thematicmap.tpl');
 	break;
 	case 'getkml':

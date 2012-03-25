@@ -235,6 +235,7 @@ if ($GraphCommand != '')
 	}
 } //if
 
+$t->force_compile   = true; # Force this template to always compile
 $t->display('graphic.tpl');
 
 </script>

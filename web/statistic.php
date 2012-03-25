@@ -265,6 +265,7 @@ if (isset($post['page']) || isset($post['_S+cmd']))
 		}
 	}
 }
+$t->force_compile   = true; # Force this template to always compile
 $t->display('statistic.tpl');
 
 </script>
