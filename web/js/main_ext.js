@@ -559,8 +559,7 @@ function doMainMenuUpdate()
 		Ext.getCmp(jQuery(this).attr('id').replace('msg','mnu')).enable();
 	});
 	Ext.getCmp('mnuUser').setText(jQuery('span#msgUser').text());
-	
-	Ext.getCmp('mnuDatacard').hide();
+
 	// Enable menu items when a User is logged in
 	if (jQuery('#desinventarUserId').val() == '')
 	{
@@ -583,17 +582,21 @@ function doMainMenuUpdate()
 	// Configure which options are visible using RoleValue
 	var UserRoleValue = parseInt(jQuery('#desinventarUserRoleValue').val());
 
-	Ext.getCmp('mnuUserAccountManagement').hide();
 	if (UserRoleValue >= 5)
 	{
 		Ext.getCmp('mnuUserAccountManagement').show();
 		Ext.getCmp('mnuUserAccountManagement').enable();
 	}
+	else
+	{
+		Ext.getCmp('mnuUserAccountManagement').hide();
+	}
 
 	Ext.getCmp('mnuFileUploadReplace').hide();
+
+	Ext.getCmp('mnuDatacard').hide();
 	Ext.getCmp('mnuDatacardSetup').hide();
 	Ext.getCmp('mnuDatacardSetupEnd').hide();
-
 	Ext.getCmp('mnuDatacardEdit').hide();
 	
 	// Show some menu items when a Region is Selected
@@ -602,12 +605,7 @@ function doMainMenuUpdate()
 	}
 	else
 	{
-		if (jQuery('#desinventarUserId').val() != '')
-		{
-			Ext.getCmp('mnuDatacard').show();
-		}
 		Ext.getCmp('mnuRegionLabel').setText('[' + jQuery('#desinventarRegionLabel').val() + ']');
-
 		if (UserRoleValue > 0)
 		{
 			jQuery('#divMainMenu span.clsMenuWithRegion').each(function() {
@@ -621,6 +619,7 @@ function doMainMenuUpdate()
 		if (UserRoleValue >= 2) 
 		{
 			// Edit datacards instead of only view them
+			Ext.getCmp('mnuDatacard').show();
 			Ext.getCmp('mnuDatacardEdit').show();
 			Ext.getCmp('mnuDatacardEdit').enable();
 

@@ -520,6 +520,8 @@ switch ($cmd)
 			$params['LangIsoCode']   = $lg;
 			$params['RegionId']      = $RegionId;
 			$params['RegionLabel']   = $RegionLabel;
+			$params['UserId']        = $us->UserId;
+			$params['UserFullName']  = $us->getUserFullName();
 			$params['UserRole']      = $desinventarUserRole;
 			$params['UserRoleValue'] = $desinventarUserRoleValue;
 			

@@ -157,6 +157,8 @@ function doDatabaseLoadData()
 				jQuery('body').data('RecordCount', data.RecordCount);
 
 				//Compatibility with old methods
+				jQuery('#desinventarUserId').val(data.params.UserId);
+				jQuery('#desinventarUserFullName').val(data.params.UserFullName);
 				jQuery('#desinventarUserRole').val(data.params.UserRole);
 				jQuery('#desinventarUserRoleValue').val(data.params.UserRoleValue);
 				
