@@ -226,5 +226,6 @@ if (isset($post['page']) || isset($post['_D+cmd']))
 } //if
 $time_end = microtime_float();
 $t->assign('time', $time_end - $time_start);
+$t->force_compile   = true; # Force this template to always compile
 $t->display('data.tpl');
 </script>
