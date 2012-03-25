@@ -42,7 +42,7 @@ function doViewportCreate()
 				autoScroll: true,
 				margins:'0 2 0 0',
 				contentEl: 'divWestPanel',
-				floatable: true
+				floatable: false
 			};
 			Ext.apply(this, config);
 			Ext.apply(this.initialConfig, config);
@@ -106,13 +106,12 @@ function doViewportShow()
 	jQuery('body').trigger('cmdMainWaitingHide');
 	var UserRoleValue = parseInt(jQuery('#desinventarUserRoleValue').val());
 	var RegionId = jQuery('#desinventarRegionId').val();
-	console.log('doViewportShow : ' + RegionId + ' ' + UserRoleValue);
 	jQuery('.contentBlock').hide();
 	if (RegionId != '')
 	{
 		if (UserRoleValue > 0)
 		{
-			//Ext.getCmp('westm').show();
+			Ext.getCmp('westm').show();
 			Ext.getCmp('westm').expand();
 			jQuery('#divQueryResults').show();
 			jQuery('body').trigger('cmdQueryResultsButtonHide');
@@ -120,19 +119,17 @@ function doViewportShow()
 		}
 		else
 		{
-			//Ext.getCmp('westm').hide();
-			Ext.getCmp('viewport').doLayout();
+			Ext.getCmp('westm').hide();
 			jQuery('#divDatabasePrivate').show();
 		}
 	}
 	else
 	{
-		Ext.getCmp('westm').collapse();
-		//Ext.getCmp('westm').hide();
-		Ext.getCmp('viewport').doLayout();
+		Ext.getCmp('westm').hide();
 		jQuery('#divRegionList').show();
 		doUpdateDatabaseListByUser();
 	}
+	Ext.getCmp('viewport').doLayout();
 } //doViewportShow()
 
 function doMainChangeLanguage(LangIsoCode)
