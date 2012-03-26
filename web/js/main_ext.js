@@ -113,10 +113,8 @@ function doViewportShow()
 	if (RegionId != '')
 	{
 		title = title + ' | ' + jQuery('#desinventarRegionLabel').val();
-		console.log(UserRoleValue);
 		if (UserRoleValue > 0)
 		{
-			console.log('westm show');
 			Ext.getCmp('westm').show();
 			Ext.getCmp('viewport').doLayout();
 			Ext.getCmp('westm').expand();
@@ -134,7 +132,6 @@ function doViewportShow()
 	}
 	else
 	{
-		console.log('westm hide');
 		title = title + ' | ' + jQuery('div.desinventarInfo span.region_list').text();
 		Ext.getCmp('westm').hide();
 		Ext.getCmp('viewport').doLayout();
