@@ -113,9 +113,12 @@ function doViewportShow()
 	if (RegionId != '')
 	{
 		title = title + ' | ' + jQuery('#desinventarRegionLabel').val();
+		console.log(UserRoleValue);
 		if (UserRoleValue > 0)
 		{
+			console.log('westm show');
 			Ext.getCmp('westm').show();
+			Ext.getCmp('viewport').doLayout();
 			Ext.getCmp('westm').expand();
 			jQuery('#divQueryResults').show();
 			jQuery('body').trigger('cmdQueryResultsButtonHide');
@@ -124,18 +127,22 @@ function doViewportShow()
 		else
 		{
 			Ext.getCmp('westm').hide();
+			Ext.getCmp('viewport').doLayout();
+			Ext.getCmp('westm').collapse();
 			jQuery('#divDatabasePrivate').show();
 		}
 	}
 	else
 	{
+		console.log('westm hide');
 		title = title + ' | ' + jQuery('div.desinventarInfo span.region_list').text();
 		Ext.getCmp('westm').hide();
+		Ext.getCmp('viewport').doLayout();
+		Ext.getCmp('westm').collapse();
 		jQuery('#divRegionList').show();
 		doUpdateDatabaseListByUser();
 	}
 	jQuery(document).attr('title',title);
-	Ext.getCmp('viewport').doLayout();
 } //doViewportShow()
 
 function doMainChangeLanguage(LangIsoCode)

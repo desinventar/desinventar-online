@@ -335,6 +335,7 @@
 			mystr += "D.DisasterId";
 			$('_D+FieldH').value = mystr;
 			combineForms('frmMainQuery', 'CD');
+			Ext.getCmp('westm').show();
 			Ext.getCmp('westm').collapse();
 			$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/data.php';
 			jQuery('#frmMainQuery').attr('target','dcr');
@@ -388,6 +389,7 @@
 			else
 			{
 				combineForms('frmMainQuery', 'CM');
+				Ext.getCmp('westm').show();
 				Ext.getCmp('westm').collapse();
 				$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/thematicmap.php';
 				jQuery('#frmMainQuery').attr('target','dcr');
@@ -422,6 +424,7 @@
 		jQuery('#frmGraphParams #prmGraphFieldLabel1').val(jQuery('#frmGraphParams #prmGraphField1 option:selected').text());
 		
 		combineForms('frmMainQuery', 'frmGraphParams');
+		Ext.getCmp('westm').show();
 		Ext.getCmp('westm').collapse();
 		$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/graphic.php';
 		jQuery('#frmMainQuery').attr('target','dcr');
@@ -461,6 +464,7 @@
 				jQuery('input', this).val(jQuery('select option:selected',this).text());
 			});
 			combineForms('frmMainQuery', 'frmStatParams');
+			Ext.getcmp('westm').show();
 			Ext.getCmp('westm').collapse();
 			$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/statistic.php';
 			jQuery('#frmMainQuery').attr('target','dcr');

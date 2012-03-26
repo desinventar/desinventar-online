@@ -4554,6 +4554,7 @@ function doGetRegionInfo(RegionId)
 			mystr += "D.DisasterId";
 			$('_D+FieldH').value = mystr;
 			combineForms('frmMainQuery', 'CD');
+			Ext.getCmp('westm').show();
 			Ext.getCmp('westm').collapse();
 			$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/data.php';
 			jQuery('#frmMainQuery').attr('target','dcr');
@@ -4607,6 +4608,7 @@ function doGetRegionInfo(RegionId)
 			else
 			{
 				combineForms('frmMainQuery', 'CM');
+				Ext.getCmp('westm').show();
 				Ext.getCmp('westm').collapse();
 				$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/thematicmap.php';
 				jQuery('#frmMainQuery').attr('target','dcr');
@@ -4641,6 +4643,7 @@ function doGetRegionInfo(RegionId)
 		jQuery('#frmGraphParams #prmGraphFieldLabel1').val(jQuery('#frmGraphParams #prmGraphField1 option:selected').text());
 		
 		combineForms('frmMainQuery', 'frmGraphParams');
+		Ext.getCmp('westm').show();
 		Ext.getCmp('westm').collapse();
 		$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/graphic.php';
 		jQuery('#frmMainQuery').attr('target','dcr');
@@ -4680,6 +4683,7 @@ function doGetRegionInfo(RegionId)
 				jQuery('input', this).val(jQuery('select option:selected',this).text());
 			});
 			combineForms('frmMainQuery', 'frmStatParams');
+			Ext.getcmp('westm').show();
 			Ext.getCmp('westm').collapse();
 			$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/statistic.php';
 			jQuery('#frmMainQuery').attr('target','dcr');
@@ -5274,9 +5278,12 @@ function doViewportShow()
 	if (RegionId != '')
 	{
 		title = title + ' | ' + jQuery('#desinventarRegionLabel').val();
+		console.log(UserRoleValue);
 		if (UserRoleValue > 0)
 		{
+			console.log('westm show');
 			Ext.getCmp('westm').show();
+			Ext.getCmp('viewport').doLayout();
 			Ext.getCmp('westm').expand();
 			jQuery('#divQueryResults').show();
 			jQuery('body').trigger('cmdQueryResultsButtonHide');
@@ -5285,18 +5292,22 @@ function doViewportShow()
 		else
 		{
 			Ext.getCmp('westm').hide();
+			Ext.getCmp('viewport').doLayout();
+			Ext.getCmp('westm').collapse();
 			jQuery('#divDatabasePrivate').show();
 		}
 	}
 	else
 	{
+		console.log('westm hide');
 		title = title + ' | ' + jQuery('div.desinventarInfo span.region_list').text();
 		Ext.getCmp('westm').hide();
+		Ext.getCmp('viewport').doLayout();
+		Ext.getCmp('westm').collapse();
 		jQuery('#divRegionList').show();
 		doUpdateDatabaseListByUser();
 	}
 	jQuery(document).attr('title',title);
-	Ext.getCmp('viewport').doLayout();
 } //doViewportShow()
 
 function doMainChangeLanguage(LangIsoCode)
