@@ -464,7 +464,7 @@
 				jQuery('input', this).val(jQuery('select option:selected',this).text());
 			});
 			combineForms('frmMainQuery', 'frmStatParams');
-			Ext.getcmp('westm').show();
+			Ext.getCmp('westm').show();
 			Ext.getCmp('westm').collapse();
 			$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/statistic.php';
 			jQuery('#frmMainQuery').attr('target','dcr');
