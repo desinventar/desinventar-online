@@ -5459,6 +5459,8 @@ function doMainMenuHandler(item)
 			jQuery('#tabDatabaseConfiguration').show();
 		break;
 		case 'mnuDatacardSetupEnd':
+			doMainMenuToggle(true);
+			jQuery('body').trigger('cmdMainMenuUpdate');
 			jQuery('body').trigger('cmdDatabaseLoadData');
 		break;
 		case 'mnuFileCreate':
