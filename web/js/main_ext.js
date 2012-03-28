@@ -126,7 +126,6 @@ function doViewportShow()
 		{
 			Ext.getCmp('westm').hide();
 			Ext.getCmp('viewport').doLayout();
-			Ext.getCmp('westm').collapse();
 			jQuery('#divDatabasePrivate').show();
 		}
 	}
@@ -135,7 +134,6 @@ function doViewportShow()
 		title = title + ' | ' + jQuery('div.desinventarInfo span.region_list').text();
 		Ext.getCmp('westm').hide();
 		Ext.getCmp('viewport').doLayout();
-		Ext.getCmp('westm').collapse();
 		jQuery('#divRegionList').show();
 		doUpdateDatabaseListByUser();
 	}
