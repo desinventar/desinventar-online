@@ -296,9 +296,12 @@ table.col {
 }
 
 .GridCellText {
-	border-right: thin solid #ccc; text-align: left;
+	border-right: thin solid #ccc;
+	text-align: left;
 	font-size:11px;
 	max-width:200px;
+	overflow-x:hidden;
+	overflow-y:auto;
 }
 
 .RegionInfoTitle {

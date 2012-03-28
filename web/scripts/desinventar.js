@@ -5459,7 +5459,7 @@ function doMainMenuHandler(item)
 			jQuery('#tabDatabaseConfiguration').show();
 		break;
 		case 'mnuDatacardSetupEnd':
-			jQuery('body').trigger('cmdWindowReload');
+			jQuery('body').trigger('cmdMainWindowUpdate');
 		break;
 		case 'mnuFileCreate':
 			doDatabaseCreateShow();
