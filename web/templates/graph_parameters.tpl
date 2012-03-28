@@ -156,16 +156,13 @@
 							<b>{-#ghistogram#-}</b>
 						</td>
 						<td>
-							<select id="prmGraphTypeHistogram" name="prmGraphTypeHistogram" class="line" help_tip="{-$dic.GraphType[2]-}">
+							<span class="HistogramByGeography hidden">{-$dic.GraphHisGeoTemporal[0]-}</span>
+							<select class="TypeHistogram line" id="prmGraphTypeHistogram" name="prmGraphTypeHistogram"  help_tip="{-$dic.GraphType[2]-}">
 								<option value="" disabled></option>
 								<option value="{-$smarty.const.GRAPH_HISTOGRAM_TEMPORAL-}">{-$dic.GraphHisTemporal[0]-}</option>
 								<option value="{-$smarty.const.GRAPH_HISTOGRAM_EVENT-}">{-$dic.GraphHisEveTemporal[0]-}</option>
 								<option value="{-$smarty.const.GRAPH_HISTOGRAM_CAUSE-}">{-$dic.GraphHisCauTemporal[0]-}</option>
-								{-assign var='IndexOffset' value="100"-}
-								{-foreach name=glev key=k item=i from=$glev-}
-									{-assign var='GeoLevel' value="`$IndexOffset+$k`"-}
-									<option value="{-$GeoLevel-}">{-$i[0]-} {-$dic.GraphHisGeoTemporal[0]-}</option>
-								{-/foreach-}
+								<option class="Geolevel" value="100">Level0/Temporal</option>
 							</select>
 						</td>
 					</tr>
@@ -199,15 +196,12 @@
 							<b>{-#gcomparative#-}</b>
 						</td>
 						<td>
-							<select id="prmGraphTypeComparative" name="prmGraphTypeComparative" class="line" help_tip="{-$dic.GraphType[2]-}">
+							<span class="ComparativeByGeography hidden">{-$dic.GraphComByGeography[0]-}</span>
+							<select class="TypeComparative line" id="prmGraphTypeComparative" name="prmGraphTypeComparative" help_tip="{-$dic.GraphType[2]-}">
 								<option value="" disabled></option>
 								<option value="{-$smarty.const.GRAPH_COMPARATIVE_EVENT-}">{-$dic.GraphComByEvents[0]-}</option>
 								<option value="{-$smarty.const.GRAPH_COMPARATIVE_CAUSE-}">{-$dic.GraphComByCauses[0]-}</option>
-								{-assign var='IndexOffset' value="200"-}
-								{-foreach name=glev key=k item=i from=$glev-}
-									{-assign var='GeoLevel' value="`$IndexOffset+$k`"-}
-								<option value="{-$GeoLevel-}">{-$dic.GraphComByGeography[0]-} {-$i[0]-}</option>
-								{-/foreach-}
+								<option class="Geolevel">Comparative by Geography Level0</option>
 							</select>
 						</td>
 					</tr>

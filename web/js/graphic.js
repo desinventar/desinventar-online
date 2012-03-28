@@ -160,7 +160,25 @@ function onReadyGraphic() {
 
 function doViewGraphParamsInitialize()
 {
-	
+	// GraphTypeHistogram - By Geolevels
+	var geolevel_list = jQuery('body').data('GeolevelsList');
+	var select = jQuery('div.ViewGraphParams select.TypeHistogram');
+	jQuery(select).find('option.Geolevel').remove();
+	jQuery.each(geolevel_list, function(key, value) {
+		var clone = jQuery('<option>', {value: 100 + parseInt(value.GeoLevelId)}).text(value.GeoLevelName + jQuery('div.ViewGraphParams span.HistogramByGeography').text());
+		jQuery(clone).addClass('Geolevel');
+		jQuery(select).append(clone);
+	});
+
+	// GraphTypeComparative - By Geolevels
+	var geolevel_list = jQuery('body').data('GeolevelsList');
+	var select = jQuery('div.ViewGraphParams select.TypeComparative');
+	jQuery(select).find('option.Geolevel').remove();
+	jQuery.each(geolevel_list, function(key, value) {
+		var clone = jQuery('<option>', {value: 200 + parseInt(value.GeoLevelId)}).text(jQuery('div.ViewGraphParams span.ComparativeByGeography').text() + ' ' + value.GeoLevelName);
+		jQuery(clone).addClass('Geolevel');
+		jQuery(select).append(clone);
+	});
 } //doViewGraphParamsInitialize()
 
 function disabAxis2()
