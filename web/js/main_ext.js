@@ -296,7 +296,7 @@ function doMainMenuHandler(item)
 			jQuery('#tabDatabaseConfiguration').show();
 		break;
 		case 'mnuDatacardSetupEnd':
-			jQuery('body').trigger('cmdMainWindowUpdate');
+			jQuery('body').trigger('cmdDatabaseLoadData');
 		break;
 		case 'mnuFileCreate':
 			doDatabaseCreateShow();
