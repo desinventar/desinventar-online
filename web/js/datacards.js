@@ -91,18 +91,6 @@ function onReadyDatacards()
 		return false;
 	});
 	
-	// Process combobox/input fields in effects
-	jQuery('.clsEffectNumeric').jec({
-		maxLength: 15,
-		focusONewOption: true,
-		acceptedKeys : [48,49,50,51,52,53,54,55,56,57,58]
-	}).blur(function() {
-		if (jQuery(this).val() == '')
-		{
-			jQuery(this).val(0);
-		}
-	});
-
 	// Enable/Disable related EffectSector fields based on value of other fields...	
 	jQuery('.clsEffectDouble').blur(function(event) {
 		var altField = jQuery(this).attr('altField');
@@ -408,6 +396,16 @@ function doDatacardInitialize()
 		jQuery('select.value', clone).attr('id', field);
 		jQuery('select.value', clone).attr('name', field);
 		jQuery('select.value', clone).data('helptext', jQuery('span.helptext', this).text());
+		jQuery('select.value', clone).jec({
+			maxLength: 15,
+			focusONewOption: true,
+			acceptedKeys : [48,49,50,51,52,53,54,55,56,57,58]
+		}).blur(function() {
+			if (jQuery(this).val() == '')
+			{
+				jQuery(this).val(0);
+			}
+		});
 		effect_list.append(clone);
 	});
 
