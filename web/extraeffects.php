@@ -80,6 +80,7 @@ switch($cmd)
 		// reload list from local SQLITE
 		$t->assign('eef', $us->q->getEEFieldList(''));
 		$t->assign('ctl_eeflist', true);
+		$t->force_compile   = true; # Force this template to always compile		
 		$t->display('extraeffects.tpl');
 	break;
 	default:
@@ -90,6 +91,7 @@ switch($cmd)
 		$eef =  $us->q->getEEFieldList('');
 		$t->assign('eef', $eef);
 		$t->assign('ctl_eeflist', true);
+		$t->force_compile   = true; # Force this template to always compile		
 		$t->display('extraeffects.tpl');
 	break;
 } //switch
