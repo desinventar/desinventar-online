@@ -6431,6 +6431,8 @@ function onReadyQueryDesign()
 			var field = jQuery('span.field', this).text();
 			var clone = jQuery('tr:last', effect_list).clone().show();
 			jQuery('select.operator', clone).attr('name', 'D_' + field + '[0]').disable();
+			jQuery('span.firstvalue input', clone).attr('name', 'D_' + field + '[1]');
+			jQuery('span.lastvalue input', clone).attr('name', 'D_' + field + '[2]').disable();
 			jQuery('span.label', clone).text(jQuery('span.label',this).text());
 			jQuery('div.EffectLosses2',clone).data('field', jQuery(this).data('field'));
 			effect_list.append(clone);
