@@ -62,7 +62,7 @@ function doDataInitialize()
 		field_list.append(jQuery('<option>', { value : 'D.' + jQuery('span.field',this).text() }).text(jQuery('span.label',this).text()));
 	});
 	jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
-		field_list.append(jQuery('<option>', { value : 'D.' + key }).text(value[0]));
+		field_list.append(jQuery('<option>', { value : 'E.' + key }).text(value[0]));
 	});
 
 	var field_list = jQuery('div.ViewDataParams select.FieldsShow');
