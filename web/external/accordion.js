@@ -207,7 +207,7 @@ ui_accordion["mouseover"] = function (e,dt,doExpand)
 	else
 	{
 		e =  getEvent(e);
-		if (e.target != undefined)
+		if (e != null)
 		{
 			el =  getObjByClass(e.target,"dt","",2) ;
 		}
