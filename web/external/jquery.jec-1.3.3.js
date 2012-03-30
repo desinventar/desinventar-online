@@ -104,6 +104,7 @@ valueIsEditable, which*/
                         $.jECTimer = setInterval($.jEC.handleCursor, opt.blinkingCursorInterval);
                     }
                     Combobox.focusedState($(this), true);
+                    $(this).data('jecFirstChar', true);
                 },
 
                 // blur event handler
@@ -117,6 +118,7 @@ valueIsEditable, which*/
                     }
                     Combobox.focusedState($(this), false);
                     Combobox.openedState($(this), false);
+                    $(this).data('jecFirstChar', false);
                 },
 
                 // keydown event handler
@@ -130,7 +132,7 @@ valueIsEditable, which*/
                     switch (keyCode) {
                     case 8:  // backspace
                     case 46: // delete
-						Combobox.focusedState(jQuery(this), false);
+						Combobox.focusedState($(this), false);
                         option = $(this).find('option.' + pluginClass);
                         if (option.val().length >= 1) {
                             value = option.text().substring(0, option.text().length - 1);
@@ -148,7 +150,6 @@ valueIsEditable, which*/
                 keyPress: function (event) {
                     var keyCode = getKeyCode(event), opt = options[Combobox.getId($(this))],
                         option, value, specialKeys, exit = false, text;
-
                     Combobox.clearCursor($(this));
                     if (keyCode !== 9 && keyCode !== 13 && keyCode !== 27) {
                         // special keys codes
@@ -156,7 +157,7 @@ valueIsEditable, which*/
                         // handle special keys
                         $.each(specialKeys, function (i, val) {
 							if (keyCode === val && keyCode === lastKeyCode) {
-								Combobox.focusedState(jQuery(this), false);
+								Combobox.focusedState($(this), false);
                                 exit = true;
                             }
                         });
@@ -168,10 +169,11 @@ valueIsEditable, which*/
 
                             if ($.inArray(keyCode, opt.acceptedKeys) !== -1) {
                                 option = $(this).find('option.' + pluginClass);
-                                if (Combobox.focusedState(jQuery(this)))
+                                if ($(this).data('jecFirstChar'))
                                 {
                                 	text = '';
-                                	Combobox.focusedState(jQuery(this), false);
+                                	Combobox.focusedState($(this), false);
+                                	$(this).data('jecFirstChar', false);
 								}
 								else
 								{
@@ -808,8 +810,7 @@ valueIsEditable, which*/
                 },
 
                 focusedState: function (elem, state) {
-                	console.log('focusedState : ' + state);
-                    return elem.data('jecFocusedState', state);
+               		return $(elem).data('jecFocusedState', state);
                 },
 
                 openedState: function (elem, state) {
