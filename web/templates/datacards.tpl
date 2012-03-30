@@ -208,18 +208,20 @@
 								<td>
 									<b>{-#teffects#-}</b><br />
 									<table class="EffectList EffectListPeople grid" width="100%">
-										<tr style="display:none;">
-											<td align="right">
-												<span class="label" title=""></span>
-											</td>
-											<td>
-												<select class="value line" id="fieldname" name="fieldname" data-helptext="" style="width:120px;" >
-													<option class="small" value="-1">{-#teffhav#-}</option>
-													<option class="small" value="0" selected>{-#teffhavnot#-}</option>
-													<option class="small" value="-2">{-#teffdontknow#-}</option>
-												</select>
-											</td>
-										</tr>
+										{-foreach $ef1 as $key => $value-}
+											<tr>
+												<td align="right">
+													<span class="label" title="">{-$value[0]-}</span>
+												</td>
+												<td>
+													<select class="value line clsEffectNumeric" id="{-$key-}" name="{-$key-}" data-helptext="{-$value[2]-}" style="width:120px;" >
+														<option class="small" value="-1">{-#teffhav#-}</option>
+														<option class="small" value="0" selected>{-#teffhavnot#-}</option>
+														<option class="small" value="-2">{-#teffdontknow#-}</option>
+													</select>
+												</td>
+											</tr>
+										{-/foreach-}
 									</table> 
 								</td>
 								<td>
