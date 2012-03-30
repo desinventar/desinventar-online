@@ -711,7 +711,6 @@ valueIsEditable, which*/
                         } else if (typeof value === 'string' || typeof value === 'number') {
                             // set value
                             return $(this).filter(':editable').each(function () {
-			                	console.log('jecValue set : ' + jQuery(this).attr('id') + ' = ' + value);
                                 var option = $(this).find('option.' + pluginClass);
                                 option.val(value).text(value);
                                 if (typeof setFocus !== 'boolean' || setFocus) {
