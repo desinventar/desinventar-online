@@ -2899,28 +2899,14 @@ function onReadyDatacards()
 function doDatacardInitialize()
 {
 	// Load EffectPeople List (ef1)
-	var effect_list = jQuery('div.Datacard table.EffectListPeople');
-	effect_list.find('tr:gt(0)').remove();
-	jQuery('div.desinventarInfo div.EffectList div.EffectPeople').each(function() {
-		var field = jQuery('span.field', this).text();
-		var label = jQuery('span.label',this).text();
-		var clone = jQuery('tr:last', effect_list).clone().show();
-		jQuery('span.label'  , clone).text(label);
-		jQuery('span.label'  , clone).attr('title', jQuery('span.tooltip', this).text());
-		jQuery('select.value', clone).attr('id', field);
-		jQuery('select.value', clone).attr('name', field);
-		jQuery('select.value', clone).data('helptext', jQuery('span.helptext', this).text());
-		jQuery('select.value', clone).jec({
-			maxLength: 15,
-			focusONewOption: true,
-			acceptedKeys : [48,49,50,51,52,53,54,55,56,57,58]
-		}).blur(function() {
-			if (jQuery(this).val() == '')
-			{
-				jQuery(this).val(0);
-			}
-		});
-		effect_list.append(clone);
+	jQuery('div.Datacard table.EffectListPeople select.value').jec({
+		maxLength: 15,
+		acceptedKeys : [48,49,50,51,52,53,54,55,56,57,58]
+	}).blur(function() {
+		if (jQuery(this).val() == '')
+		{
+			jQuery(this).val(0);
+		}
 	});
 
 	// Load EffectSector List (sec)
@@ -3435,9 +3421,9 @@ function doDatacardClear()
 	$('DICard').reset();
 	jQuery('#_CMD').val('insertDICard');
 	jQuery('#cardsRecordNumber').val(0);
-	jQuery('#DICard .clsEffectNumeric').each(function() {
-		jQuery(this).jecValue('');
+	jQuery('div.Datacard table.EffectListPeople .clsEffectNumeric').each(function() {
 		jQuery(this).val(0);
+		jQuery(this).jecValue('',false);
 	});
 	jQuery('#DICard .inputDouble').each(function() {
 		jQuery(this).val(0);
@@ -3849,7 +3835,7 @@ function setDICardFromId(prmRegionId, prmDisasterId, prmRecordNumber, prmRecordC
 		function(data)
 		{
 			jQuery('#DICard .clsEffectNumeric').each(function() {
-				jQuery(this).jecValue(data[jQuery(this).attr('id')]);
+				jQuery(this).jecValue(data[jQuery(this).attr('id')], true);
 			});
 			setDICard(prmRegionId, data);
 			jQuery('#divRecordNavigationInfo').hide();
@@ -5204,6 +5190,11 @@ function onReadyExtJS()
 			return frag;
 		};
 	}
+
+	jQuery('body').on('cmdViewportShow', function(event) {
+		doViewportShow();
+	});
+
 	doDialogsCreate();
 	doMainMenuCreate();
 	doViewportCreate();
@@ -6148,7 +6139,27 @@ function onReadyMain()
 	jQuery('body').on('cmdDatabaseLoadData', function() {
 		doDatabaseLoadData();
 	});
-	jQuery('body').trigger('cmdDatabaseLoadData');
+
+	//jQuery('body').trigger('cmdDatabaseLoadData');
+	jQuery(window).bind('hashchange', function(e) {
+		var url = jQuery.param.fragment();
+		console.log(url);
+		var options = url.split('/');
+		switch(options[0])
+		{
+			case '':
+				//Nothing to do
+				jQuery('#desinventarRegionId').val('');
+				jQuery('body').trigger('cmdViewportShow');
+			break;
+			default:
+				var RegionId = options[0];
+				jQuery('#desinventarRegionId').val(RegionId);
+				jQuery('body').trigger('cmdDatabaseLoadData');
+			break;
+		}
+	});
+	jQuery(window).trigger('hashchange');
 } //onReadyMain()
 
 function doDatabaseLoadData()
@@ -6194,7 +6205,7 @@ function doDatabaseLoadData()
 				jQuery('#desinventarRegionLabel').val(data.params.RegionLabel);
 				jQuery('#desinventarNumberOfRecords').val(data.RecordCount);
 
-				doViewportShow();
+				jQuery('body').trigger('cmdViewportShow');
 			},
 			'json'
 		);
