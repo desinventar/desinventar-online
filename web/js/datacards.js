@@ -1336,7 +1336,7 @@ function setDICardFromId(prmRegionId, prmDisasterId, prmRecordNumber, prmRecordC
 		{
 			console.log('EffectPeopleDead : ' + data['EffectPeopleDead']);
 			jQuery('#DICard .clsEffectNumeric').each(function() {
-				jQuery(this).jecValue(data[jQuery(this).attr('id')]);
+				jQuery(this).jecValue(data[jQuery(this).attr('id')], true);
 			});
 			setDICard(prmRegionId, data);
 			jQuery('#divRecordNavigationInfo').hide();
