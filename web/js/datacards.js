@@ -395,21 +395,6 @@ function doDatacardInitialize()
 		}
 	});
 
-	// Load EffectSector List (sec)
-	var effect_list = jQuery('div.Datacard table.EffectListSector');
-	effect_list.find('tr:gt(0)').remove();
-	jQuery('div.desinventarInfo div.EffectList div.EffectSector').each(function() {
-		var field = jQuery('span.field', this).text();
-		var label = jQuery('span.label',this).text();
-		var clone = jQuery('tr:last', effect_list).clone().show();
-		jQuery('span.label'  , clone).text(label);
-		jQuery('span.label'  , clone).attr('title', jQuery('span.tooltip', this).text());
-		jQuery('select.value', clone).attr('id', field);
-		jQuery('select.value', clone).attr('name', field);
-		jQuery('select.value', clone).data('helptext', jQuery('span.helptext', this).text());
-		effect_list.append(clone);
-	});
-
 	// Load EffectLosses List (ef2)
 	var effect_list = jQuery('div.Datacard table.EffectListLosses1');
 	effect_list.find('tr:gt(0)').remove();
@@ -911,6 +896,10 @@ function doDatacardClear()
 		jQuery(this).val(0);
 		jQuery(this).jecValue('',false);
 	});
+	jQuery('div.Datacard select.clsEffectSector').each(function() {
+		jQuery(this).val(0); // There weren't by default
+	});
+
 	jQuery('#DICard .inputDouble').each(function() {
 		jQuery(this).val(0);
 	});
@@ -1183,6 +1172,13 @@ function doDatacardCancel()
 		displayDatacardStatusMsg('msgDatacardStartNew');
 		doDatacardNavButtonsEnable();
 		jQuery('#DICard #Status').val('');
+	}
+	if (jQuery('div.Datacard #DisasterId').val() == '')
+	{
+		jQuery('div.Datacard select.clsEffectSector').each(function() {
+			console.log(jQuery(this).attr('id') + ' ' + jQuery(this).val());
+			jQuery(this).val(0);
+		});
 	}
 } //doDatacardCancel()
 
