@@ -23,6 +23,11 @@ function onReadyExtJS()
 			return frag;
 		};
 	}
+
+	jQuery('body').on('cmdViewportShow', function(event) {
+		doViewportShow();
+	});
+
 	doDialogsCreate();
 	doMainMenuCreate();
 	doViewportCreate();

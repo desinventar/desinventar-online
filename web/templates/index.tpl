@@ -34,26 +34,8 @@
 
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
-				onReadyMain();
 				onReadyExtJS();
-				jQuery(window).bind('hashchange', function(e) {
-					var url = jQuery.param.fragment();
-					var options = url.split('/');
-					switch(options[0])
-					{
-						case '':
-							//Nothing to do
-							jQuery('#desinventarRegionId').val('');
-							doViewportShow();
-						break;
-						default:
-							var RegionId = options[0];
-							jQuery('#desinventarRegionId').val(RegionId);
-							jQuery('body').trigger('cmdDatabaseLoadData');
-						break;
-					}
-				});
-				jQuery(window).trigger('hashchange');
+				onReadyMain();
 			});
 		</script>
 	</head>
