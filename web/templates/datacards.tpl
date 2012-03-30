@@ -213,7 +213,7 @@
 												<span class="label" title=""></span>
 											</td>
 											<td>
-												<select class="value line clsEffectNumeric" id="fieldname" name="fieldname" data-helptext="" style="width:120px;" >
+												<select class="value line" id="fieldname" name="fieldname" data-helptext="" style="width:120px;" >
 													<option class="small" value="-1">{-#teffhav#-}</option>
 													<option class="small" value="0" selected>{-#teffhavnot#-}</option>
 													<option class="small" value="-2">{-#teffdontknow#-}</option>
