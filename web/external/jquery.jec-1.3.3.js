@@ -704,6 +704,7 @@ valueIsEditable, which*/
 
                 // gets or sets editable option's value
                 value: function (value, setFocus) {
+                	console.log('jecValue : ' + value);
                     if ($(this).filter(':editable').length > 0) {
                         if (value === null || value === undefined) {
                             // get value

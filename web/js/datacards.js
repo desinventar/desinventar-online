@@ -396,6 +396,7 @@ function doDatacardInitialize()
 		jQuery('select.value', clone).attr('id', field);
 		jQuery('select.value', clone).attr('name', field);
 		jQuery('select.value', clone).data('helptext', jQuery('span.helptext', this).text());
+		jQuery('select.value', clone).addClass('clsEffectNumeric');
 		jQuery('select.value', clone).jec({
 			maxLength: 15,
 			acceptedKeys : [48,49,50,51,52,53,54,55,56,57,58]
@@ -922,7 +923,6 @@ function doDatacardClear()
 	jQuery('#cardsRecordNumber').val(0);
 	jQuery('#DICard .clsEffectNumeric').each(function() {
 		jQuery(this).jecValue('');
-		jQuery(this).val(0);
 	});
 	jQuery('#DICard .inputDouble').each(function() {
 		jQuery(this).val(0);
