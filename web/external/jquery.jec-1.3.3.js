@@ -808,6 +808,7 @@ valueIsEditable, which*/
                 },
 
                 focusedState: function (elem, state) {
+                	console.log('focusedState : ' + state);
                     return elem.data('jecFocusedState', state);
                 },
 
