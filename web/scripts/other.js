@@ -3383,7 +3383,10 @@ ui_accordion["mouseover"] = function (e,dt,doExpand)
 	else
 	{
 		e =  getEvent(e);
-		el =  getObjByClass(e.target,"dt","",2) ;
+		if (e != null)
+		{
+			el =  getObjByClass(e.target,"dt","",2) ;
+		}
 	}
 
 	if (el && el.parentNode && hasClass(el.parentNode,"accordion"))
