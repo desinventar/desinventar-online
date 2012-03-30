@@ -398,7 +398,6 @@ function doDatacardInitialize()
 		jQuery('select.value', clone).data('helptext', jQuery('span.helptext', this).text());
 		jQuery('select.value', clone).jec({
 			maxLength: 15,
-			focusONewOption: true,
 			acceptedKeys : [48,49,50,51,52,53,54,55,56,57,58]
 		}).blur(function() {
 			if (jQuery(this).val() == '')
@@ -1334,6 +1333,7 @@ function setDICardFromId(prmRegionId, prmDisasterId, prmRecordNumber, prmRecordC
 		},
 		function(data)
 		{
+			console.log('EffectPeopleDead : ' + data['EffectPeopleDead']);
 			jQuery('#DICard .clsEffectNumeric').each(function() {
 				jQuery(this).jecValue(data[jQuery(this).attr('id')]);
 			});
