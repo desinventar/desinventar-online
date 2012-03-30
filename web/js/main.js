@@ -136,7 +136,6 @@ function onReadyMain()
 	//jQuery('body').trigger('cmdDatabaseLoadData');
 	jQuery(window).bind('hashchange', function(e) {
 		var url = jQuery.param.fragment();
-		console.log(url);
 		var options = url.split('/');
 		switch(options[0])
 		{
