@@ -132,7 +132,27 @@ function onReadyMain()
 	jQuery('body').on('cmdDatabaseLoadData', function() {
 		doDatabaseLoadData();
 	});
-	jQuery('body').trigger('cmdDatabaseLoadData');
+
+	//jQuery('body').trigger('cmdDatabaseLoadData');
+	jQuery(window).bind('hashchange', function(e) {
+		var url = jQuery.param.fragment();
+		console.log(url);
+		var options = url.split('/');
+		switch(options[0])
+		{
+			case '':
+				//Nothing to do
+				jQuery('#desinventarRegionId').val('');
+				jQuery('body').trigger('cmdViewportShow');
+			break;
+			default:
+				var RegionId = options[0];
+				jQuery('#desinventarRegionId').val(RegionId);
+				jQuery('body').trigger('cmdDatabaseLoadData');
+			break;
+		}
+	});
+	jQuery(window).trigger('hashchange');
 } //onReadyMain()
 
 function doDatabaseLoadData()
@@ -178,7 +198,7 @@ function doDatabaseLoadData()
 				jQuery('#desinventarRegionLabel').val(data.params.RegionLabel);
 				jQuery('#desinventarNumberOfRecords').val(data.RecordCount);
 
-				doViewportShow();
+				jQuery('body').trigger('cmdViewportShow');
 			},
 			'json'
 		);
