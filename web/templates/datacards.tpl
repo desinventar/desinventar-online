@@ -211,7 +211,7 @@
 										{-foreach $ef1 as $key => $value-}
 											<tr>
 												<td align="right">
-													<span class="label" title="">{-$value[0]-}</span>
+													<span class="label" title="{-$value[1]-}">{-$value[0]-}</span>
 												</td>
 												<td>
 													<select class="value line clsEffectNumeric" id="{-$key-}" name="{-$key-}" data-helptext="{-$value[2]-}" style="width:120px;" >
@@ -235,18 +235,20 @@
 											<td valign="top">
 												<!-- BEGIN Table Sectors -->
 												<table class="EffectList EffectListSector grid" width="100%">
-													<tr style="display:none;">
-														<td align="right">
-															<span class="label" title=""></span>
-														</td>
-														<td>
-															<select class="value line clsEffectSector" id="" name="" style="width:120px;">
-																<option class="small" value="-1">{-#teffhav#-}</option>
-																<option class="small" value="0" selected="selected">{-#teffhavnot#-}</option>
-																<option class="small" value="-2">{-#teffdontknow#-}</option>
-															</select>
-														</td>
-													</tr>
+													{-foreach $sec as $key => $value -}
+														<tr>
+															<td align="right">
+																<span class="label" title="{-$value[1]-}">{-$value[0]-}</span>
+															</td>
+															<td>
+																<select class="value line clsEffectSector" id="{-$key-}" name="{-$key-}" data-helptext="{-$value[2]-}" style="width:120px;">
+																	<option class="small" value="-1">{-#teffhav#-}</option>
+																	<option class="small" value="0" selected>{-#teffhavnot#-}</option>
+																	<option class="small" value="-2">{-#teffdontknow#-}</option>
+																</select>
+															</td>
+														</tr>
+													{-/foreach-}
 												</table>
 											</td>
 											<td valign="top">
