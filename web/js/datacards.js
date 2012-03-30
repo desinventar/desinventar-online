@@ -921,8 +921,9 @@ function doDatacardClear()
 	$('DICard').reset();
 	jQuery('#_CMD').val('insertDICard');
 	jQuery('#cardsRecordNumber').val(0);
-	jQuery('#DICard .clsEffectNumeric').each(function() {
-		jQuery(this).jecValue('');
+	jQuery('div.Datacard table.EffectListPeople .clsEffectNumeric').each(function() {
+		jQuery(this).val(0);
+		jQuery(this).jecValue('',false);
 	});
 	jQuery('#DICard .inputDouble').each(function() {
 		jQuery(this).val(0);
