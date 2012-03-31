@@ -3677,7 +3677,6 @@ function doDatacardCancel()
 	if (jQuery('div.Datacard #DisasterId').val() == '')
 	{
 		jQuery('div.Datacard select.clsEffectSector').each(function() {
-			console.log(jQuery(this).attr('id') + ' ' + jQuery(this).val());
 			jQuery(this).val(0);
 		});
 	}
@@ -6123,7 +6122,6 @@ function onReadyMain()
 		doDatabaseLoadData();
 	});
 
-	//jQuery('body').trigger('cmdDatabaseLoadData');
 	jQuery(window).bind('hashchange', function(e) {
 		var url = jQuery.param.fragment();
 		var options = url.split('/');
@@ -6870,7 +6868,10 @@ function doViewMapParamsInitialize()
 	var geolevel_list = jQuery('div.ViewMapParams select.Geolevel');
 	geolevel_list.find('option').remove();
 	jQuery.each(jQuery('body').data('GeolevelsList'), function(key, value) {
-		geolevel_list.append(jQuery('<option>', { value: value.GeoLevelId + '|D.GeographyId|' }).text(value.GeoLevelName));
+		if (value.GeoLevelLayerFile != '')
+		{
+			geolevel_list.append(jQuery('<option>', { value: value.GeoLevelId + '|D.GeographyId|' }).text(value.GeoLevelName));
+		}
 	});
 	geolevel_list.val(jQuery('option:first', geolevel_list).val());
 
@@ -6987,7 +6988,7 @@ function createThematicMap()
 			jQuery('#desinventarURL').val() + '/wms/' + jQuery('#prmMapId').val() + '/effects/',
 			{
 				format : 'png',
-				layers : 'effects'
+				layers : LayerName
 			},
 			{
 				isBaseLayer :false

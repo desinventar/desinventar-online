@@ -113,10 +113,12 @@ switch($cmd)
 						$myly .= $it .'effects,';
 					}
 					$myly = substr($myly, 0, -1);
+					$sLegendLayer='LAYER=' . reset(explode(',',$myly));
 				}
 				else
 				{
 					$myly = 'effects';
+					$sLegendLayer = 'LAYER=' . $myly;
 				}
 				$rgl[0]['ly1'] = $myly;
 				$rgl[0]['lv'] = $lev[0];
@@ -143,7 +145,8 @@ switch($cmd)
 			$mapfile = str_replace('\\', '/', $m->filename());
 			$worldmap = str_replace('\\','/', MAPDIR . '/world_adm0.map');
 			$timestamp = microtime(true);
-			$sLegendURL = $options['url'] . '/wms/' . $options['id'] . '/legend/';
+
+			$sLegendURL = $options['url'] . '/wms/' . $options['id'] . '/legend/?' . $sLegendLayer;
 			$t->assign('legend', $sLegendURL);	
 			$t->assign('ctl_showres', true);
 			$t->assign('reg', $RegionId);

@@ -23,7 +23,10 @@ function doViewMapParamsInitialize()
 	var geolevel_list = jQuery('div.ViewMapParams select.Geolevel');
 	geolevel_list.find('option').remove();
 	jQuery.each(jQuery('body').data('GeolevelsList'), function(key, value) {
-		geolevel_list.append(jQuery('<option>', { value: value.GeoLevelId + '|D.GeographyId|' }).text(value.GeoLevelName));
+		if (value.GeoLevelLayerFile != '')
+		{
+			geolevel_list.append(jQuery('<option>', { value: value.GeoLevelId + '|D.GeographyId|' }).text(value.GeoLevelName));
+		}
 	});
 	geolevel_list.val(jQuery('option:first', geolevel_list).val());
 
@@ -140,7 +143,7 @@ function createThematicMap()
 			jQuery('#desinventarURL').val() + '/wms/' + jQuery('#prmMapId').val() + '/effects/',
 			{
 				format : 'png',
-				layers : 'effects'
+				layers : LayerName
 			},
 			{
 				isBaseLayer :false

@@ -718,7 +718,7 @@ class Query //extends PDO
 					);
 				}
 			}
-			if ($mapping)
+			if ($mapping > 0)
 			{
 				$bAdd = count($lay);
 			}
