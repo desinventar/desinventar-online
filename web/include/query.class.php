@@ -667,57 +667,70 @@ class Query //extends PDO
 	//prefix: string with prefix used in VRegions
 	//level: integer of level, return only data of this level. -1 to all
 	//mapping: only levels with files assigned in database, shp - dbf..
-	function loadGeoLevels($prefix, $lev, $mapping)
+	function loadGeoLevels($prefix = '', $lev, $mapping)
 	{
+		$sqlev  = 'SELECT GeoLevelId, GeoLevelName, GeoLevelDesc FROM GeoLevel ';
 		if ($lev >= 0)
 		{
-			$olev = "GeoLevelId = $lev ";
+			$sqlev .= ' WHERE GeoLevelId=' . $lev . ' ';
 		}
-		else
+		$sqlev .= 'ORDER BY GeoLevelId';
+
+		$sqcar  = 'SELECT GeographyId, GeoLevelId, GeoLevelLayerFile, GeoLevelLayerCode, GeoLevelLayerName FROM GeoCarto ';
+		$WhereSQL = '';
+		if ($lev >= 0)
 		{
-			$olev = "1=1 ";
+			$WhereSQL .= 'GeoLevelId=' . $lev . ' ';
 		}
-		$sqlev = "SELECT GeoLevelId, GeoLevelName, GeoLevelDesc FROM GeoLevel WHERE $olev ORDER BY GeoLevelId";
-		if (!empty($prefix))
+		if (strlen($prefix) > 0)
 		{
-			$opre = "GeographyId = '$prefix' ";
+			if ($WhereSQL != '') { $WhereSQL .= ' AND '; }
+			$WhereSQL .= 'GeographyId="' . $prefix . '" ';
 		}
-		else
+		if ($mapping > 0)
 		{
-			$opre = "1=1 ";
+			if ($WhereSQL != '') { $WhereSQL .= ' AND '; }
+			$WhereSQL .= '(GeoLevelLayerFile != "" AND GeoLevelLayerCode != "" AND GeoLevelLayerName != "") ';
 		}
-		if ($mapping)
+		if (strlen($WhereSQL) > 0)
 		{
-			$omap = "GeoLevelLayerFile != '' AND GeoLevelLayerCode != '' AND GeoLevelLayerName != '' ";
+			$sqcar .= ' WHERE ' . $WhereSQL . ' ';
 		}
-		else
-		{
-			$omap = "1=1 ";
-		}
-		$sqcar = "SELECT GeographyId, GeoLevelId, GeoLevelLayerFile, GeoLevelLayerCode, GeoLevelLayerName ".
-				"FROM GeoCarto WHERE $olev AND $opre AND $omap ORDER BY GeoLevelId";
+		$sqcar .= ' ORDER BY GeoLevelId';
+
 		$data = array();
 		$rcar = $this->getassoc($sqcar);
 		$rlev = $this->dreg->query($sqlev);
 		foreach($rlev as $row)
 		{
 			$lay = array();
+			$bAdd = 1;
+
 			foreach ($rcar as $car)
 			{
 				if ($car['GeoLevelId'] == $row['GeoLevelId'])
 				{
-					$lay[] = array($car['GeographyId'], $car['GeoLevelLayerFile'], $car['GeoLevelLayerCode'], $car['GeoLevelLayerName']);
+					$lay[] = array(
+						$car['GeographyId'],
+						$car['GeoLevelLayerFile'],
+						$car['GeoLevelLayerCode'],
+						$car['GeoLevelLayerName']
+					);
 				}
 			}
-			$bAdd = true;
 			if ($mapping)
 			{
-				$bAdd = !empty($lay);
+				$bAdd = count($lay);
 			}
-			if ($bAdd)
+			if ($bAdd > 0)
 			{
-				$data[$row['GeoLevelId']] = array(str2js($row['GeoLevelName']), str2js($row['GeoLevelDesc']), $lay);
+				$data[$row['GeoLevelId']] = array(
+					$row['GeoLevelName'],
+					$row['GeoLevelDesc'],
+					$lay
+				);
 			}
+
 		}
 		return $data;
 	} //loadGeoLevels()
