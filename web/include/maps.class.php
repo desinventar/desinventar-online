@@ -207,7 +207,7 @@ class Maps
 	function setLayerEff($us, $reg, $lev, $dl, $range, $inf, $lbl, $prmTransparency)
 	{
 		$gl = $us->q->loadGeoLevels('', $lev, true);
-		$map = "";
+		$map = '';
 		foreach ($gl[$lev][2] as $ly)
 		{
 			$data = $ly[1];
@@ -285,20 +285,6 @@ class Maps
 		END';
 						}
 					}
-					/* Generate null class
-					if ($lbl == "VALUE")
-						$shwlab = 'TEXT "0"';
-					$map .= '
-		  CLASS
-		    NAME "No data"
-        EXPRESSION (length("['. $code .']") > 0)
-#		    STYLE OUTLINECOLOR 255 255 255 END 
-  			'. $shwlab .'
-  			LABEL
-		      TYPE TRUETYPE		FONT "arial"		SIZE 6	
-		      COLOR	0 0 89 		POSITION CC			PARTIALS FALSE	BUFFER 4
-        END
-      END';*/
 					$map .= '
 	END # LAYER
 ';

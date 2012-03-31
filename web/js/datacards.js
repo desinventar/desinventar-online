@@ -1163,7 +1163,6 @@ function doDatacardCancel()
 	if (jQuery('div.Datacard #DisasterId').val() == '')
 	{
 		jQuery('div.Datacard select.clsEffectSector').each(function() {
-			console.log(jQuery(this).attr('id') + ' ' + jQuery(this).val());
 			jQuery(this).val(0);
 		});
 	}
