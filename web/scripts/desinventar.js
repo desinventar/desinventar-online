@@ -6868,7 +6868,7 @@ function doViewMapParamsInitialize()
 	var geolevel_list = jQuery('div.ViewMapParams select.Geolevel');
 	geolevel_list.find('option').remove();
 	jQuery.each(jQuery('body').data('GeolevelsList'), function(key, value) {
-		if (value.GeoLevelLayerFile != '')
+		if (parseInt(value.HasMap) > 0)
 		{
 			geolevel_list.append(jQuery('<option>', { value: value.GeoLevelId + '|D.GeographyId|' }).text(value.GeoLevelName));
 		}

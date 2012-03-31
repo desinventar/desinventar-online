@@ -652,14 +652,41 @@ class DIRegion extends DIObject
 			$sQuery = 'SELECT GeoLevelId,GeoLevelName,GeoLevelDesc,GeoLevelActive FROM GeoLevel ORDER BY GeoLevelId';
 			foreach($this->session->q->dreg->query($sQuery, PDO::FETCH_ASSOC) as $row)
 			{
-				$answer[$row['GeoLevelId']] = $row;
+				$GeoLevelId = $row['GeoLevelId'];
+				$answer[$GeoLevelId] = $row;
 			}
 			$sQuery = 'SELECT GeoLevelId,GeoLevelLayerFile,GeoLevelLayerCode,GeoLevelLayerName FROM Geocarto ORDER BY GeoLevelId';
 			foreach($this->session->q->dreg->query($sQuery, PDO::FETCH_ASSOC) as $row)
 			{
-				if (isset($answer[$row['GeoLevelId']]))
+				$GeoLevelId = $row['GeoLevelId'];
+				if (isset($answer[$GeoLevelId]))
 				{
-					$answer[$row['GeoLevelId']] = array_merge($answer[$row['GeoLevelId']], $row);
+					$answer[$GeoLevelId] = array_merge($answer[$GeoLevelId], $row);
+					$answer[$GeoLevelId]['HasMap'] = 1;
+				}
+			}
+			# Validate each level to see if maps can be done
+			$sQuery = 'SELECT DISTINCT GeographyId FROM Geocarto WHERE GeographyId<>""';
+			$geography_list = array();
+			foreach($this->session->q->dreg->query($sQuery) as $row)
+			{
+				$geography_list[] = $row['GeographyId'];
+			}
+			$iSize = count($geography_list);
+			if ($iSize > 0)
+			{
+				foreach($answer as $GeoLevelId => $GeoLevel)
+				{
+					$sQuery = 'SELECT COUNT(*) AS C FROM Geocarto WHERE GeoLevelId=' . $GeoLevelId . ' AND GeoLevelLayerFile<>""';
+					$iCount = 0;
+					foreach($this->session->q->dreg->query($sQuery) as $row)
+					{
+						$iCount = $row['C'];
+					}
+					if ($iCount < $iSize)
+					{
+						$answer[$GeoLevelId]['HasMap'] = 0;
+					}
 				}
 			}
 		}
