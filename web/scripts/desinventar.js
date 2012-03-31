@@ -2872,11 +2872,17 @@ function onReadyDatacards()
 			jQuery('#DICard #SectorHealth').val(-1);
 		}
 	});
+	jQuery('div.Datacard .inputText').on('blur',function() {
+		jQuery(this).val(jQuery(this).val().replace(/\n/,' '));
+	});
+	
 	jQuery('#DICard').on('blur','#EffectOtherLosses', function() {
+		jQuery(this).val(jQuery(this).val().replace(/\n/,' '));
 		if (jQuery.trim(jQuery(this).val()) != '')
 		{
 			jQuery('#DICard #SectorOther').val(-1);
 		}
+		
 	});
 
 	// Attach events to main body
