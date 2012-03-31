@@ -2909,20 +2909,6 @@ function doDatacardInitialize()
 		}
 	});
 
-	// Load EffectLosses List (ef2)
-	var effect_list = jQuery('div.Datacard table.EffectListLosses1');
-	effect_list.find('tr:gt(0)').remove();
-	jQuery('div.desinventarInfo div.EffectList div.EffectLosses1').each(function() {
-		var field = jQuery('span.field', this).text();
-		var label = jQuery('span.label',this).text();
-		var clone = jQuery('tr:last', effect_list).clone().show();
-		jQuery('span.label'  , clone).text(label);
-		jQuery('span.label'  , clone).attr('title', jQuery('span.tooltip', this).text());
-		jQuery('input.value', clone).attr('id', field);
-		jQuery('input.value', clone).attr('name', field);
-		jQuery('input.value', clone).data('helptext', jQuery('span.helptext', this).text());
-		effect_list.append(clone);
-	});
 	// EffectLosses2 List (ef3)
 	jQuery('div.desinventarInfo div.EffectList div.EffectLosses2').each(function() {
 		var fieldname = jQuery(this).data('field');
@@ -2930,6 +2916,7 @@ function doDatacardInitialize()
 		jQuery('span.label' , field).text(jQuery('span.label', this).text());
 		jQuery('input.value', field).data('helptext', jQuery('span.helptext',this).text());
 	});	
+
 	// EffectOther List (ef4)
 	jQuery('div.desinventarInfo div.EffectList div.EffectOther').each(function() {
 		var fieldname = jQuery(this).data('field');
