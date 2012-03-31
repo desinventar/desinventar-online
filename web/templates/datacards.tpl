@@ -254,13 +254,15 @@
 											<td valign="top">
 												<!-- BEGIN Table Effects over $$ -->
 												<table class="EffectList EffectListLosses1 grid">
-													<tr style="display:none;">
-														<td valign="top">
-															<span class="label" title="{-#msgDatacard_InputDoubleTooltip#-}"></span>
-															<br />
-															<input class="value line inputDouble" id="" name="" type="text" size="11" maxlength="15" value="0" />
-														</td>
-													</tr>
+													{-foreach $ef2 as $key => $value -}
+														<tr>
+															<td valign="top">
+																<span class="label" title="{-#msgDatacard_InputDoubleTooltip#-}">{-$value[0]-}</span>
+																<br />
+																<input class="value line inputDouble" id="{-$key-}" name="{-$key-}" type="text" size="11" maxlength="15" value="0" data-helptext="{-$value[2]-}" />
+															</td>
+														</tr>
+													{-/foreach-}
 												</table>
 											</td>
 										</tr>
