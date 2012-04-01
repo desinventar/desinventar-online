@@ -173,5 +173,5 @@ function doDatabaseCausesPopulateList(tbodyId, CauseList)
 	});
 	jQuery('#' + tbodyId + ' .CauseId').hide();
 	jQuery('#' + tbodyId + ' .CausePredefined').hide();
-	jQuery('#' + tbodyId + ' tr:even').addClass('under');
+	jQuery('#' + tbodyId + ' tr:odd').addClass('under');
 } //doDatabaseCausesPopulateList()
