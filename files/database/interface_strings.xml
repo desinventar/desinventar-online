@@ -1772,10 +1772,10 @@
 			<Text LangIsoCode="fre">Carte de données mise à jour avec succès</Text>
 		</Message>
 		<Message id="tdconuse">
-			<Text LangIsoCode="eng">por favor intente despues..</Text>
+			<Text LangIsoCode="eng">Datacard is being edited by another user</Text>
 			<Text LangIsoCode="spa">La ficha está siendo editada por otro usuario</Text>
-			<Text LangIsoCode="por">Data card is been edited by other user</Text>
-			<Text LangIsoCode="fre">por favor intente despues..</Text>
+			<Text LangIsoCode="por">Cartão de dados está sendo editado por outro usuário</Text>
+			<Text LangIsoCode="fre">Carte de données est en cours de modification par un autre utilisateur</Text>
 		</Message>
 		<Message id="teffhav">
 			<Text LangIsoCode="eng">There were</Text>
