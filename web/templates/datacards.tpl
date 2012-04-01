@@ -20,7 +20,7 @@
 				<input type="button" id="btnDatacardFind" class="DatacardCmdFind bb bfind" title="{-#tooltipDatacardFind#-}" />
 			</td>
 			<td align="right" width="55%" colspan="2">
-				<div id="divDatacardStatusMsg" style="display:none;">
+				<div id="divDatacardStatusMsg" class="status" style="display:none;">
 					<span class="datacardStatusMsg" id="msgDatacardDuplicatedSerial">{-#msgDatacardDuplicatedSerial#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardStartNew">{-#tmsgnewcard#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardFill">{-#tmsgnewcardfill#-}</span>

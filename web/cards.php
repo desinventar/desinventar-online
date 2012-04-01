@@ -14,6 +14,9 @@ if ($RegionId == '')
 	exit(0);
 }
 
+$desinventarUserRole = $us->getUserRole($RegionId);
+$desinventarUserRoleValue = $us->getUserRoleValue($RegionId);
+
 // 2009-08-07 (jhcaiced) Validate if Database Exists...
 if (! file_exists($us->q->getDBFile($RegionId)))
 {
@@ -76,20 +79,30 @@ else
 			echo json_encode($answer);
 		break;
 		case 'chklocked':
-			// check if datacard is locked by some user
-			$answer = array('Status' => 'OK','DatacardStatus' => '');
-			$reserv = $us->isDatacardLocked($_GET['DisasterId']);
-			if ($reserv == '')
-			{
-				// reserve datacard
-				$us->lockDatacard($_GET['DisasterId']);
-				$answer['DatacardStatus'] = 'RESERVED';
+			$DisasterId = getParameter('DisasterId','');
+			$answer = array();
+			$iReturn = ERR_NO_ERROR; if ($desinventarUserRoleValue <
+			ROLE_USER) {
+				$iReturn = ERR_DEFAULT_ERROR;
 			}
-			else
+			if ($iReturn > 0)
 			{
-				$answer['DatacardStatus'] = 'BLOCKED';
+				// check if datacard is locked by some user
+				$answer['DisasterId'] = $DisasterId;
+				$reserv = $us->isDatacardLocked($DisasterId);
+				if ($reserv == '')
+				{
+					// reserve datacard
+					$us->lockDatacard($DisasterId);
+					$answer['DatacardStatus'] = 'RESERVED';
+				}
+				else
+				{
+					$answer['DatacardStatus'] = 'BLOCKED';
+				}
 			}
-			echo json_encode($answer);
+			$answer['Status'] = $iReturn;
+			echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 		break;
 		case 'chkrelease':
 			$us->releaseDatacard($_GET['DisasterId']);
