@@ -930,10 +930,10 @@ function doDatacardEdit()
 {
 	displayDatacardStatusMsg('');
 	var RegionId = jQuery('#desinventarRegionId').val();
-	jQuery.post(jQuery('#desinventarURL').val() + '/cards.php',
+	jQuery.post(jQuery('#desinventarURL').val() + '/',
 		{
-			'cmd'        : 'chklocked',
-			'r'          : jQuery('#desinventarRegionId').val(),
+			'cmd'        : 'cmdDatacardLock',
+			'RegionId'   : jQuery('#desinventarRegionId').val(),
 			'DisasterId' : jQuery('#DisasterId').val()
 		},
 		function(data)
@@ -1132,8 +1132,8 @@ function doDatacardCancel()
 	{
 		jQuery.post(jQuery('#desinventarURL').val() + '/cards.php',
 			{
-				'cmd'        : 'chkrelease',
-				'r'          : jQuery('#desinventarRegionId').val(),
+				'cmd'        : 'cmdDatacardRelease',
+				'RegionId'   : jQuery('#desinventarRegionId').val(),
 				'DisasterId' : jQuery('#DisasterId').val()
 			},
 			function(data)

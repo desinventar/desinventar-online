@@ -189,6 +189,35 @@ switch ($cmd)
 		$t->assign('sec', $sec);
 		$t->display('main_datacards.tpl');
 	break;
+	case 'cmdDatacardLock':
+		$DisasterId = getParameter('DisasterId','');
+		$answer = array();
+		$iReturn = ERR_NO_ERROR; if ($desinventarUserRoleValue <
+		ROLE_USER) {
+			$iReturn = ERR_DEFAULT_ERROR;
+		}
+		if ($iReturn > 0)
+		{
+			// check if datacard is locked by some user
+			$answer['DisasterId'] = $DisasterId;
+			$reserv = $us->isDatacardLocked($DisasterId);
+			if ($reserv == '')
+			{
+				// reserve datacard
+				$us->lockDatacard($DisasterId);
+				$answer['DatacardStatus'] = 'RESERVED';
+			}
+			else
+			{
+				$answer['DatacardStatus'] = 'BLOCKED';
+			}
+		}
+		$answer['Status'] = $iReturn;
+		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
+	break;
+	case 'cmdDatacardRelease':
+		$us->releaseDatacard($_GET['DisasterId']);
+	break;
 	case 'cmdGeographyGetItemsById':
 		$answer = array();
 		$iReturn = ERR_NO_ERROR;
