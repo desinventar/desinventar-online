@@ -11,22 +11,6 @@ function onReadyQueryResults()
 	jQuery('#queryEndYear').blur(function() {
 		validateEndYear();
 	});
-
-	jQuery('body').on('cmdMainQueryUpdate', function() {
-		// 2011-02-05 (jhcaiced) Configure RecordStatus field
-		if ( (jQuery('#desinventarUserId').val() != '') &&
-		     (jQuery('#desinventarUserRoleValue').val() > 1) )
-		{
-			jQuery('#fldQueryRecordStatus').val(['PUBLISHED','READY']);
-			jQuery('#divQueryRecordStatus').show();
-		}
-		else
-		{
-			jQuery('#fldQueryRecordStatus').val(['PUBLISHED']);
-			jQuery('#divQueryRecordStatus').hide();
-		}
-	});
-	
 	jQuery('#btnViewData').click(function() {
 		jQuery('body').trigger('cmdViewDataParams');
 	});
