@@ -553,7 +553,6 @@ switch ($cmd)
 			$params['UserFullName']  = $us->getUserFullName();
 			$params['UserRole']      = $desinventarUserRole;
 			$params['UserRoleValue'] = $desinventarUserRoleValue;
-			
 			$answer['params'] = $params;
 		}
 		$answer['Status'] = $iReturn;

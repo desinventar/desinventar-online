@@ -118,6 +118,21 @@ function onReadyQueryDesign()
 	jQuery('div.QueryDesign').on('click', 'table.QueryCustom div.field', function(event) {
 		setAdvQuery(jQuery(this).data('field'), jQuery(this).data('type'));
 	});
+
+	jQuery('body').on('cmdMainQueryUpdate', function() {
+		// 2011-02-05 (jhcaiced) Configure RecordStatus field
+		if ( (jQuery('#desinventarUserId').val() != '') &&
+		     (jQuery('#desinventarUserRoleValue').val() > 1) )
+		{
+			jQuery('#fldQueryRecordStatus').val(['PUBLISHED','READY']);
+			jQuery('#divQueryRecordStatus').show();
+		}
+		else
+		{
+			jQuery('#fldQueryRecordStatus').val(['PUBLISHED']);
+			jQuery('#divQueryRecordStatus').hide();
+		}
+	});
 	
 	jQuery('div.QueryDesign').on('cmdInitialize', function() {
 		var params = jQuery('body').data('params');
@@ -318,6 +333,6 @@ function onReadyQueryDesign()
 			jQuery('input', clone).attr('value', value[0]);
 			field_list.append(clone);
 		});
-		
+		jQuery('body').trigger('cmdMainQueryUpdate');
 	});
 } //onReadyQueryDesign()
