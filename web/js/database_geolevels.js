@@ -3,9 +3,13 @@
  (c) 1998-2012 Corporacion OSSO
 */
 
+var geolevels_uploader = [];
+
 function onReadyGeolevels()
 {
-	doGeolevelsUploaderCreate();
+	jQuery('div.Geolevels').on('cmdInitialize', function(event) {
+		doGeolevelsUploaderCreate();
+	});
 
 	jQuery('#tbodyGeolevels_List').on('click', 'tr', function(e) {
 		jQuery('#frmGeolevel .GeoLevelId').val(jQuery('.GeoLevelId',this).text());
@@ -246,6 +250,10 @@ function doGeolevelsPopulateFieldList(prmSelector, prmValues)
 
 function doGeolevelsUploaderCreate()
 {
+	jQuery.each(geolevels_uploader, function(key, value) {
+		delete geolevels_uploader[key];
+	});
+	
 	jQuery('#frmGeolevel tr.FileUploader').each(function() {
 		var fileExt = jQuery(this).data('ext');
 		var fileUploaderControlId = jQuery(this).find('.FileUploaderControl').attr('id');
@@ -314,6 +322,7 @@ function doGeolevelsUploaderCreate()
 				doGeolevelsUploaderReset();
 			}
 		});
+		geolevels_uploader.push(uploader);
 	});
 	jQuery('#frmGeolevel .FileUploaderControl .qq-upload-button-text').html(jQuery('#msgGeolevels_UploadChooseFile').text());
 	jQuery('#frmGeolevel .FileUploaderControl .qq-upload-list').hide();

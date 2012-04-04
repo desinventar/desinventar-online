@@ -1,5 +1,5 @@
 {-config_load file="$lg.conf" section="grpDatabaseUpload"-}
-<div style="margin:10px;">
+<div class="DatabaseUpload mainblock" style="margin:10px;">
 	<div id="divDatabaseUploadControl">
 		<table border="0">
 		<tr>
