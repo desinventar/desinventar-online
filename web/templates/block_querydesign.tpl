@@ -221,7 +221,7 @@
 		<!-- END EEField Section -->
 		
 		<!-- BEGIN DATETIME SECTION -->
-		<dt>{-#mdcsection#-}</dt>
+		<dt class="QueryDatacard">{-#mdcsection#-}</dt>
 		<dd class="default">
 			<div style="height: 250px;">
 				<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}">{-#msgQueryDesign_DateRange#-}</span>
