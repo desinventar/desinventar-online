@@ -32,11 +32,13 @@ function onReadyAdminDatabase()
 		var RegionId = jQuery('#divAdminDatabaseUpdate .RegionId').text();
 		doAdminDatabaseGetInfo(RegionId);
 		jQuery('#divAdminDatabaseEdit').show();
+		return false;
 	});
 
 	jQuery('#btnAdminDatabaseImport').click(function() {
 		jQuery('.clsAdminDatabase').hide();
 		jQuery('#divAdminDatabaseImport').show();
+		return false;
 	});
 
 	// Add New Region

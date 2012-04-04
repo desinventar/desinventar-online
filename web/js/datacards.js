@@ -294,6 +294,7 @@ function onReadyDatacards()
 	
 	jQuery('#btnDatacardFind').click(function() {
 		doDatacardFind();
+		return false;
 	});
 
 	// Switch between Basic and Additional Effects

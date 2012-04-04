@@ -16,6 +16,7 @@ function onReadyDatabaseUpload()
 	jQuery('#btnDatabaseUploadStart').click(function() {
 		jQuery('#divDatabaseUploadParameters').hide();
 		jQuery('#divDatabaseUploadControl').show();
+		return false;
 	});
 
 	jQuery('#btnDatabaseUploadReplace').click(function() {
@@ -45,6 +46,7 @@ function onReadyDatabaseUpload()
 			},
 			'json'
 		);
+		return false;
 	});
 
 	jQuery('#btnDatabaseUploadCopy').click(function() {
@@ -75,6 +77,7 @@ function onReadyDatabaseUpload()
 			},
 			'json'
 		);
+		return false;
 	});
 
 	jQuery('#btnDatabaseUploadReplaceCancel').click(function() {
@@ -99,6 +102,7 @@ function onReadyDatabaseUpload()
 		{
 			Ext.getCmp('wndDatabaseUpload').hide();
 		}
+		return false;
 	});
 
 } //onReadyDatabaseUpload
@@ -182,6 +186,7 @@ function doAdminDatabaseCreateUploader()
 	jQuery('#btnDatabaseUploadCancel').click(function() {
 		doDatabaseUploadReset(true);
 		uploader.cancel(jQuery('#txtDatabaseUploadId').val());
+		return false;
 	});
 } //doAdminDatabaseCreateUploader()
 

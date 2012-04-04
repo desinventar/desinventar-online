@@ -10,15 +10,18 @@ function onReadyDatabaseUsers()
 
 	jQuery('#frmDiffusion .RegionActiveText').click(function() {
 		jQuery('#frmDiffusion .RegionActive').trigger('click');
+		return false;
 	});
 	jQuery('#frmDiffusion .RegionPublicText').click(function() {
 		jQuery('#frmDiffusion .RegionPublic').trigger('click');
+		return false;
 	});
 
 	jQuery('#frmDiffusion .btnCancel').click(function() {
 		var RegionInfo = new Array();
 		RegionInfo.RegionStatus = jQuery('#fldDatabaseUsers_RegionStatus').val();
 		doDatabaseUsersUpdateOptions(RegionInfo);
+		return false;
 	});
 
 	jQuery('#frmDiffusion .btnSave').click(function() {
@@ -55,16 +58,19 @@ function onReadyDatabaseUsers()
 			},
 			'json'
 		);
+		return false;
 	});
 		
 	jQuery('#btnDatabaseUsers_Add').click(function() {
 		doDatabaseUsersReset();
 		jQuery('#divDatabaseUsers_Edit').show();
+		return false;
 	});
 
 	jQuery('#frmUsers .btnCancel').click(function() {
 		doDatabaseUsersReset();
 		jQuery('#divDatabaseUsers_Edit').hide();
+		return false;
 	});
 
 	jQuery('#frmUsers .btnSave').click(function() {
@@ -151,6 +157,7 @@ function onReadyDatabaseUsers()
 				jQuery('#frmUsers').trigger('submit');
 			}
 		} //if
+		return false;
 	});
 
 	jQuery('#frmUsers').submit(function() {

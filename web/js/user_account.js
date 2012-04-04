@@ -9,10 +9,12 @@ function onReadyUserAccount()
 
 	jQuery('form.UserChangePasswd .btnSubmit').click(function() {
 		jQuery('form.UserChangePasswd').trigger('submit');
+		return false;
 	});
 	
 	jQuery('form.UserChangePasswd .btnCancel').click(function() {
 		jQuery('body').trigger('cmdUserAccountHide');
+		return false;
 	});
 
 	jQuery('form.UserChangePasswd').submit(function() {

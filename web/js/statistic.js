@@ -6,15 +6,19 @@ function onReadyStatistic()
 {
 	jQuery('#btnStatGotoFirstPage').click(function() {
 		doStatDisplayPage(1);
+		return false;
 	});
 	jQuery('#btnStatGotoPrevPage').click(function() {
 		doStatDisplayPage('prev');
+		return false;
 	});
 	jQuery('#btnStatGotoNextPage').click(function() {
 		doStatDisplayPage('next');
+		return false;
 	});
 	jQuery('#btnStatGotoLastPage').click(function() {
 		doStatDisplayPage(jQuery('#prmStatNumberOfPages').val());
+		return false;
 	});
 	
 	jQuery('.linkStatOrderColumn').click(function() {
