@@ -6534,6 +6534,7 @@ function onReadyQueryDesign()
 			field_list.append(clone);
 		});
 		jQuery('body').trigger('cmdMainQueryUpdate');
+		jQuery('div.QueryDesign dt.QueryDatacard').trigger('mousedown');
 	});
 } //onReadyQueryDesign()
 /*

@@ -12,9 +12,9 @@ if (! isset($_SERVER['DESINVENTAR_WEB']))
 
 // This is the version of the software
 define('MAJORVERSION', '2012');
-define('MINORVERSION', '085.019');
+define('MINORVERSION', '085.020');
 define('VERSION'     , MAJORVERSION . '.' . MINORVERSION);
-define('JSVERSION'   , '2012-03-25.019');
+define('JSVERSION'   , '2012-03-25.020');
 
 $appOptions = array();
 $appOptions['UseRemoteMaps'] = 1;
