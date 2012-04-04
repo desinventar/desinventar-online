@@ -296,7 +296,7 @@ function doMainMenuHandler(item)
 			Ext.getCmp('mnuDatacardSetupEnd').show();
 			Ext.getCmp('mnuDatacardSetupEnd').enable();
 			jQuery('.contentBlock').hide();
-			jQuery('.classDBConfig_tabs:first').click();
+			jQuery('.classDBConfig_tabs:first').trigger('click');
 			jQuery('#divDatabaseConfiguration').show();
 			jQuery('#tabDatabaseConfiguration').show();
 		break;

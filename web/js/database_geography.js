@@ -49,11 +49,13 @@ function onReadyGeography()
 		jQuery('div.Geography form.Edit input.GeographyActiveCheckbox').change();
 		jQuery('div.Geography div.Add').hide();
 		jQuery('div.Geography div.Edit').show();
+		return false;
 	});
 
 	jQuery('div.Geography a.Export').click(function() {
 		var form = jQuery('div.Geography form.Export');
 		jQuery('div.Geography form.Export').submit();
+		return false;
 	});
 
 	jQuery('div.Geography a.Cancel').click(function() {
@@ -62,10 +64,12 @@ function onReadyGeography()
 		});
 		jQuery('div.Geography div.Add').show();
 		jQuery('div.Geography div.Edit').hide();
+		return false;
 	});
 
 	jQuery('div.Geography a.Save').click(function() {
 		jQuery('div.Geography form.Edit').submit();
+		return false;
 	});
 
 	jQuery('div.Geography form.Edit').submit(function() {

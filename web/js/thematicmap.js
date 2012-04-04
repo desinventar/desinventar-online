@@ -185,6 +185,7 @@ function createThematicMap()
 	jQuery('#MapTitle').val(jQuery('#defaultMapTitle').text());
 	jQuery('#linkRestoreMapTitle').click(function() {
 		jQuery('#MapTitle').val(jQuery('#defaultMapTitle').text());
+		return false;
 	});
 }
 

@@ -13,15 +13,19 @@ function onReadyQueryResults()
 	});
 	jQuery('#btnViewData').click(function() {
 		jQuery('body').trigger('cmdViewDataParams');
+		return false;
 	});
 	jQuery('#btnViewMap').click(function() {
 		jQuery('body').trigger('cmdViewMapParams');
+		return false;
 	});
 	jQuery('#btnViewGraph').click(function() {
 		jQuery('body').trigger('cmdViewGraphParams');
+		return false;
 	});
 	jQuery('#btnViewStd').click(function() {
 		jQuery('body').trigger('cmdViewStdParams');
+		return false;
 	});
 
 	jQuery('body').on('cmdQueryResultsButtonShow', function() {
@@ -46,6 +50,7 @@ function onReadyQueryResults()
 			jQuery('#btnResultSaveOptions').show();
 			jQuery('#btnResultShow').val(1);
 		}
+		return false;
 	}).mouseout(function() {
 		jQuery('#btnResultShow').val('');
 	});
@@ -60,16 +65,19 @@ function onReadyQueryResults()
 
 	jQuery('#btnResultSaveXLS').click(function() {
 		saveRes('export', 'xls');
+		return false;
 	}).mouseover(function() {
 		jQuery('#btnResultShow').val(1);
 	});
 	jQuery('#btnResultSaveCSV').click(function() {
 		saveRes('export', 'csv');
+		return false;
 	}).mouseover(function() {
 		jQuery('#btnResultShow').val(1);
 	});
 	jQuery('#btnResultPrint').click(function() {
 		printRes();
+		return false;
 	});
 
 	// Initialize code

@@ -30,7 +30,6 @@ function onReadyGeolevels()
 	jQuery('#btnGeolevels_Add').click(function() {
 		jQuery('#divGeolevels_Edit').show();
 
-		//jQuery('#divGeolevels_Edit .GeocartoEdit').hide();
 		jQuery('#frmGeolevel .GeoLevelLayerName').val('');
 		jQuery('#frmGeolevel .GeoLevelLayerCode').val('');
 		jQuery('#frmGeolevel .GeoLevelLayerParentCode').val('');
@@ -43,11 +42,12 @@ function onReadyGeolevels()
 		jQuery('#frmGeolevel .GeoLevelDesc').val('');
 		jQuery('#frmGeolevel .GeoLevelActiveLabel').hide();
 		jQuery('#frmGeolevel .GeoLevelActiveCheckbox').prop('checked', true).change().hide();
-		
+		return false;
 	});
 
 	jQuery('#frmGeolevel .btnSave').click(function() {
 		jQuery('#frmGeolevel').trigger('submit');
+		return false;
 	});
 
 	jQuery('#frmGeolevel .btnCancel').click(function() {
@@ -55,6 +55,7 @@ function onReadyGeolevels()
 		jQuery('#frmGeolevel .uploaded').hide();
 		jQuery('#divGeolevels_Edit').hide();
 		jQuery('#btnGeolevels_Add').show();
+		return false;
 	});
 
 	jQuery('#frmGeolevel .OptionImportGeographyCheckbox').change(function(event) {
@@ -67,6 +68,7 @@ function onReadyGeolevels()
 	});
 	jQuery('#frmGeolevel .OptionImportGeographyText').click(function() {
 		jQuery('#frmGeolevel .OptionImportGeographyCheckbox').prop('checked', !jQuery('#frmGeolevel .OptionImportGeographyCheckbox').prop('checked')).change();
+		return false;
 	});
 
 	jQuery('#frmGeolevel .GeoLevelActiveCheckbox').change(function() {
@@ -319,6 +321,7 @@ function doGeolevelsUploaderCreate()
 		jQuery('#frmGeolevel .UploadId').each(function() {
 			uploader.cancel(jQuery(this).val());
 		});
+		return false;
 	}).hide();
 	jQuery('#frmGeolevel .uploaded').hide();
 	jQuery('div.status .status').hide();

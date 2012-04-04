@@ -31,6 +31,7 @@ function onReadyAdminDatabaseEdit()
 		{
 			jQuery('#frmRegionEdit_RegionId').removeAttr('disabled').focus();
 		}
+		return false;
 	});
 	
 	jQuery('#frmRegionEdit').submit(function() {
@@ -72,6 +73,7 @@ function onReadyAdminDatabaseEdit()
 
 	jQuery('#frmRegionEdit_Cancel').click(function() {
 		jQuery(this).trigger('evAdminDatabaseCancel');
+		return false;
 	});
 } //onReadyAdminDatabaseEdit()
 

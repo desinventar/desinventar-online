@@ -9,11 +9,13 @@ function onReadyExtraEffects() {
 	jQuery('#btnEEFieldAdd').unbind('click').click(function() {
 		setExtraEff('','','','','','','');
 		jQuery('#EEFieldCmd').val('cmdEEFieldInsert');
+		return false;
 	});	
 
 	jQuery('#btnEEFieldReset').unbind('click').click(function() {
 		jQuery('#extraeffaddsect').hide();
 		uploadMsg('');
+		return false;
 	});
 	
 	jQuery('#frmEEFieldEdit').unbind('submit').submit(function() {

@@ -40,15 +40,18 @@ function onReadyDatabaseCauses()
 		jQuery('#fldDatabaseCauses_CauseActiveCheckbox').prop('checked', true).change();
 		jQuery('#fldDatabaseCauses_CausePredefined').val(0);
 		doCausesFormSetup();
+		return false;
 	});
 
 	jQuery('#btnDatabaseCauses_Save').click(function() {
 		jQuery('#frmDatabaseCauses_Edit').trigger('submit');
+		return false;
 	});
 
 	jQuery('#btnDatabaseCauses_Cancel').click(function() {
 		jQuery('#divDatabaseCauses_Edit').hide();
 		jQuery('#btnDatabaseCauses_Add').show();
+		return false;
 	});
 
 	jQuery('#fldDatabaseCauses_CauseActiveCheckbox').change(function() {

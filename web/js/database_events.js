@@ -39,15 +39,18 @@ function onReadyDatabaseEvents()
 		jQuery('#fldDatabaseEvents_EventActiveCheckbox').prop('checked', true).change();
 		jQuery('#fldDatabaseEvents_EventPredefined').val(0);
 		doEventsFormSetup();
+		return false;
 	});
 
 	jQuery('#btnDatabaseEvents_Save').click(function() {
 		jQuery('#frmDatabaseEvents_Edit').trigger('submit');
+		return false;
 	});
 
 	jQuery('#btnDatabaseEvents_Cancel').click(function() {
 		jQuery('#divDatabaseEvents_Edit').hide();
 		jQuery('#btnDatabaseEvents_Add').show();
+		return false;
 	});
 
 	jQuery('#fldDatabaseEvents_EventActiveCheckbox').change(function() {
