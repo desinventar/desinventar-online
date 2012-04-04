@@ -31,6 +31,7 @@ function onReadyAdminDatabaseEdit()
 		{
 			jQuery('#frmRegionEdit_RegionId').removeAttr('disabled').focus();
 		}
+		return false;
 	});
 	
 	jQuery('#frmRegionEdit').submit(function() {
@@ -72,6 +73,7 @@ function onReadyAdminDatabaseEdit()
 
 	jQuery('#frmRegionEdit_Cancel').click(function() {
 		jQuery(this).trigger('evAdminDatabaseCancel');
+		return false;
 	});
 } //onReadyAdminDatabaseEdit()
 
@@ -141,11 +143,13 @@ function onReadyAdminDatabase()
 		var RegionId = jQuery('#divAdminDatabaseUpdate .RegionId').text();
 		doAdminDatabaseGetInfo(RegionId);
 		jQuery('#divAdminDatabaseEdit').show();
+		return false;
 	});
 
 	jQuery('#btnAdminDatabaseImport').click(function() {
 		jQuery('.clsAdminDatabase').hide();
 		jQuery('#divAdminDatabaseImport').show();
+		return false;
 	});
 
 	// Add New Region
@@ -650,15 +654,18 @@ function onReadyDatabaseCauses()
 		jQuery('#fldDatabaseCauses_CauseActiveCheckbox').prop('checked', true).change();
 		jQuery('#fldDatabaseCauses_CausePredefined').val(0);
 		doCausesFormSetup();
+		return false;
 	});
 
 	jQuery('#btnDatabaseCauses_Save').click(function() {
 		jQuery('#frmDatabaseCauses_Edit').trigger('submit');
+		return false;
 	});
 
 	jQuery('#btnDatabaseCauses_Cancel').click(function() {
 		jQuery('#divDatabaseCauses_Edit').hide();
 		jQuery('#btnDatabaseCauses_Add').show();
+		return false;
 	});
 
 	jQuery('#fldDatabaseCauses_CauseActiveCheckbox').change(function() {
@@ -1013,15 +1020,18 @@ function onReadyDatabaseEvents()
 		jQuery('#fldDatabaseEvents_EventActiveCheckbox').prop('checked', true).change();
 		jQuery('#fldDatabaseEvents_EventPredefined').val(0);
 		doEventsFormSetup();
+		return false;
 	});
 
 	jQuery('#btnDatabaseEvents_Save').click(function() {
 		jQuery('#frmDatabaseEvents_Edit').trigger('submit');
+		return false;
 	});
 
 	jQuery('#btnDatabaseEvents_Cancel').click(function() {
 		jQuery('#divDatabaseEvents_Edit').hide();
 		jQuery('#btnDatabaseEvents_Add').show();
+		return false;
 	});
 
 	jQuery('#fldDatabaseEvents_EventActiveCheckbox').change(function() {
@@ -1286,11 +1296,13 @@ function onReadyGeography()
 		jQuery('div.Geography form.Edit input.GeographyActiveCheckbox').change();
 		jQuery('div.Geography div.Add').hide();
 		jQuery('div.Geography div.Edit').show();
+		return false;
 	});
 
 	jQuery('div.Geography a.Export').click(function() {
 		var form = jQuery('div.Geography form.Export');
 		jQuery('div.Geography form.Export').submit();
+		return false;
 	});
 
 	jQuery('div.Geography a.Cancel').click(function() {
@@ -1299,10 +1311,12 @@ function onReadyGeography()
 		});
 		jQuery('div.Geography div.Add').show();
 		jQuery('div.Geography div.Edit').hide();
+		return false;
 	});
 
 	jQuery('div.Geography a.Save').click(function() {
 		jQuery('div.Geography form.Edit').submit();
+		return false;
 	});
 
 	jQuery('div.Geography form.Edit').submit(function() {
@@ -1515,7 +1529,6 @@ function onReadyGeolevels()
 	jQuery('#btnGeolevels_Add').click(function() {
 		jQuery('#divGeolevels_Edit').show();
 
-		//jQuery('#divGeolevels_Edit .GeocartoEdit').hide();
 		jQuery('#frmGeolevel .GeoLevelLayerName').val('');
 		jQuery('#frmGeolevel .GeoLevelLayerCode').val('');
 		jQuery('#frmGeolevel .GeoLevelLayerParentCode').val('');
@@ -1528,11 +1541,12 @@ function onReadyGeolevels()
 		jQuery('#frmGeolevel .GeoLevelDesc').val('');
 		jQuery('#frmGeolevel .GeoLevelActiveLabel').hide();
 		jQuery('#frmGeolevel .GeoLevelActiveCheckbox').prop('checked', true).change().hide();
-		
+		return false;
 	});
 
 	jQuery('#frmGeolevel .btnSave').click(function() {
 		jQuery('#frmGeolevel').trigger('submit');
+		return false;
 	});
 
 	jQuery('#frmGeolevel .btnCancel').click(function() {
@@ -1540,6 +1554,7 @@ function onReadyGeolevels()
 		jQuery('#frmGeolevel .uploaded').hide();
 		jQuery('#divGeolevels_Edit').hide();
 		jQuery('#btnGeolevels_Add').show();
+		return false;
 	});
 
 	jQuery('#frmGeolevel .OptionImportGeographyCheckbox').change(function(event) {
@@ -1552,6 +1567,7 @@ function onReadyGeolevels()
 	});
 	jQuery('#frmGeolevel .OptionImportGeographyText').click(function() {
 		jQuery('#frmGeolevel .OptionImportGeographyCheckbox').prop('checked', !jQuery('#frmGeolevel .OptionImportGeographyCheckbox').prop('checked')).change();
+		return false;
 	});
 
 	jQuery('#frmGeolevel .GeoLevelActiveCheckbox').change(function() {
@@ -1804,6 +1820,7 @@ function doGeolevelsUploaderCreate()
 		jQuery('#frmGeolevel .UploadId').each(function() {
 			uploader.cancel(jQuery(this).val());
 		});
+		return false;
 	}).hide();
 	jQuery('#frmGeolevel .uploaded').hide();
 	jQuery('div.status .status').hide();
@@ -1923,6 +1940,7 @@ function onReadyDatabaseUpload()
 	jQuery('#btnDatabaseUploadStart').click(function() {
 		jQuery('#divDatabaseUploadParameters').hide();
 		jQuery('#divDatabaseUploadControl').show();
+		return false;
 	});
 
 	jQuery('#btnDatabaseUploadReplace').click(function() {
@@ -1952,6 +1970,7 @@ function onReadyDatabaseUpload()
 			},
 			'json'
 		);
+		return false;
 	});
 
 	jQuery('#btnDatabaseUploadCopy').click(function() {
@@ -1982,6 +2001,7 @@ function onReadyDatabaseUpload()
 			},
 			'json'
 		);
+		return false;
 	});
 
 	jQuery('#btnDatabaseUploadReplaceCancel').click(function() {
@@ -2006,6 +2026,7 @@ function onReadyDatabaseUpload()
 		{
 			Ext.getCmp('wndDatabaseUpload').hide();
 		}
+		return false;
 	});
 
 } //onReadyDatabaseUpload
@@ -2089,6 +2110,7 @@ function doAdminDatabaseCreateUploader()
 	jQuery('#btnDatabaseUploadCancel').click(function() {
 		doDatabaseUploadReset(true);
 		uploader.cancel(jQuery('#txtDatabaseUploadId').val());
+		return false;
 	});
 } //doAdminDatabaseCreateUploader()
 
@@ -2220,15 +2242,18 @@ function onReadyDatabaseUsers()
 
 	jQuery('#frmDiffusion .RegionActiveText').click(function() {
 		jQuery('#frmDiffusion .RegionActive').trigger('click');
+		return false;
 	});
 	jQuery('#frmDiffusion .RegionPublicText').click(function() {
 		jQuery('#frmDiffusion .RegionPublic').trigger('click');
+		return false;
 	});
 
 	jQuery('#frmDiffusion .btnCancel').click(function() {
 		var RegionInfo = new Array();
 		RegionInfo.RegionStatus = jQuery('#fldDatabaseUsers_RegionStatus').val();
 		doDatabaseUsersUpdateOptions(RegionInfo);
+		return false;
 	});
 
 	jQuery('#frmDiffusion .btnSave').click(function() {
@@ -2265,16 +2290,19 @@ function onReadyDatabaseUsers()
 			},
 			'json'
 		);
+		return false;
 	});
 		
 	jQuery('#btnDatabaseUsers_Add').click(function() {
 		doDatabaseUsersReset();
 		jQuery('#divDatabaseUsers_Edit').show();
+		return false;
 	});
 
 	jQuery('#frmUsers .btnCancel').click(function() {
 		doDatabaseUsersReset();
 		jQuery('#divDatabaseUsers_Edit').hide();
+		return false;
 	});
 
 	jQuery('#frmUsers .btnSave').click(function() {
@@ -2361,6 +2389,7 @@ function onReadyDatabaseUsers()
 				jQuery('#frmUsers').trigger('submit');
 			}
 		} //if
+		return false;
 	});
 
 	jQuery('#frmUsers').submit(function() {
@@ -2808,6 +2837,7 @@ function onReadyDatacards()
 	
 	jQuery('#btnDatacardFind').click(function() {
 		doDatacardFind();
+		return false;
 	});
 
 	// Switch between Basic and Additional Effects
@@ -4823,11 +4853,13 @@ function onReadyExtraEffects() {
 	jQuery('#btnEEFieldAdd').unbind('click').click(function() {
 		setExtraEff('','','','','','','');
 		jQuery('#EEFieldCmd').val('cmdEEFieldInsert');
+		return false;
 	});	
 
 	jQuery('#btnEEFieldReset').unbind('click').click(function() {
 		jQuery('#extraeffaddsect').hide();
 		uploadMsg('');
+		return false;
 	});
 	
 	jQuery('#frmEEFieldEdit').unbind('submit').submit(function() {
@@ -5452,7 +5484,7 @@ function doMainMenuHandler(item)
 			Ext.getCmp('mnuDatacardSetupEnd').show();
 			Ext.getCmp('mnuDatacardSetupEnd').enable();
 			jQuery('.contentBlock').hide();
-			jQuery('.classDBConfig_tabs:first').click();
+			jQuery('.classDBConfig_tabs:first').trigger('click');
 			jQuery('#divDatabaseConfiguration').show();
 			jQuery('#tabDatabaseConfiguration').show();
 		break;
@@ -6552,15 +6584,19 @@ function onReadyQueryResults()
 	});
 	jQuery('#btnViewData').click(function() {
 		jQuery('body').trigger('cmdViewDataParams');
+		return false;
 	});
 	jQuery('#btnViewMap').click(function() {
 		jQuery('body').trigger('cmdViewMapParams');
+		return false;
 	});
 	jQuery('#btnViewGraph').click(function() {
 		jQuery('body').trigger('cmdViewGraphParams');
+		return false;
 	});
 	jQuery('#btnViewStd').click(function() {
 		jQuery('body').trigger('cmdViewStdParams');
+		return false;
 	});
 
 	jQuery('body').on('cmdQueryResultsButtonShow', function() {
@@ -6585,6 +6621,7 @@ function onReadyQueryResults()
 			jQuery('#btnResultSaveOptions').show();
 			jQuery('#btnResultShow').val(1);
 		}
+		return false;
 	}).mouseout(function() {
 		jQuery('#btnResultShow').val('');
 	});
@@ -6599,16 +6636,19 @@ function onReadyQueryResults()
 
 	jQuery('#btnResultSaveXLS').click(function() {
 		saveRes('export', 'xls');
+		return false;
 	}).mouseover(function() {
 		jQuery('#btnResultShow').val(1);
 	});
 	jQuery('#btnResultSaveCSV').click(function() {
 		saveRes('export', 'csv');
+		return false;
 	}).mouseover(function() {
 		jQuery('#btnResultShow').val(1);
 	});
 	jQuery('#btnResultPrint').click(function() {
 		printRes();
+		return false;
 	});
 
 	// Initialize code
@@ -6648,15 +6688,19 @@ function onReadyStatistic()
 {
 	jQuery('#btnStatGotoFirstPage').click(function() {
 		doStatDisplayPage(1);
+		return false;
 	});
 	jQuery('#btnStatGotoPrevPage').click(function() {
 		doStatDisplayPage('prev');
+		return false;
 	});
 	jQuery('#btnStatGotoNextPage').click(function() {
 		doStatDisplayPage('next');
+		return false;
 	});
 	jQuery('#btnStatGotoLastPage').click(function() {
 		doStatDisplayPage(jQuery('#prmStatNumberOfPages').val());
+		return false;
 	});
 	
 	jQuery('.linkStatOrderColumn').click(function() {
@@ -7037,6 +7081,7 @@ function createThematicMap()
 	jQuery('#MapTitle').val(jQuery('#defaultMapTitle').text());
 	jQuery('#linkRestoreMapTitle').click(function() {
 		jQuery('#MapTitle').val(jQuery('#defaultMapTitle').text());
+		return false;
 	});
 }
 
@@ -7197,10 +7242,12 @@ function onReadyUserAccount()
 
 	jQuery('form.UserChangePasswd .btnSubmit').click(function() {
 		jQuery('form.UserChangePasswd').trigger('submit');
+		return false;
 	});
 	
 	jQuery('form.UserChangePasswd .btnCancel').click(function() {
 		jQuery('body').trigger('cmdUserAccountHide');
+		return false;
 	});
 
 	jQuery('form.UserChangePasswd').submit(function() {
