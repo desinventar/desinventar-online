@@ -1502,9 +1502,13 @@ function load_geography_list(prmGeographyId, prmGeoLevelId)
  (c) 1998-2012 Corporacion OSSO
 */
 
+var geolevels_uploader = [];
+
 function onReadyGeolevels()
 {
-	doGeolevelsUploaderCreate();
+	jQuery('div.Geolevels').on('cmdInitialize', function(event) {
+		doGeolevelsUploaderCreate();
+	});
 
 	jQuery('#tbodyGeolevels_List').on('click', 'tr', function(e) {
 		jQuery('#frmGeolevel .GeoLevelId').val(jQuery('.GeoLevelId',this).text());
@@ -1745,6 +1749,10 @@ function doGeolevelsPopulateFieldList(prmSelector, prmValues)
 
 function doGeolevelsUploaderCreate()
 {
+	jQuery.each(geolevels_uploader, function(key, value) {
+		delete geolevels_uploader[key];
+	});
+	
 	jQuery('#frmGeolevel tr.FileUploader').each(function() {
 		var fileExt = jQuery(this).data('ext');
 		var fileUploaderControlId = jQuery(this).find('.FileUploaderControl').attr('id');
@@ -1813,6 +1821,7 @@ function doGeolevelsUploaderCreate()
 				doGeolevelsUploaderReset();
 			}
 		});
+		geolevels_uploader.push(uploader);
 	});
 	jQuery('#frmGeolevel .FileUploaderControl .qq-upload-button-text').html(jQuery('#msgGeolevels_UploadChooseFile').text());
 	jQuery('#frmGeolevel .FileUploaderControl .qq-upload-list').hide();
@@ -1926,6 +1935,7 @@ function doDatabaseDeleteShow()
  DesInventar - http://www.desinventar.org
  (c) 1998-2012 Corporacion OSSO
 */
+var database_uploader = [];
 
 function onReadyDatabaseUpload()
 {
@@ -1935,7 +1945,10 @@ function onReadyDatabaseUpload()
 	doDatabaseUploadStatusMsg('');
 
 	doDatabaseUploadCreate();
-	doAdminDatabaseCreateUploader();
+
+	jQuery('div.DatabaseUpload').on('cmdInitialize', function(event) {
+		doAdminDatabaseCreateUploader();
+	});
 
 	jQuery('#btnDatabaseUploadStart').click(function() {
 		jQuery('#divDatabaseUploadParameters').hide();
@@ -2033,6 +2046,9 @@ function onReadyDatabaseUpload()
 
 function doAdminDatabaseCreateUploader()
 {
+	jQuery.each(database_uploader, function(key, value) {
+		delete database_uploader[key];
+	});
 	jQuery('#divFileUploaderControl').each(function() {
 		var uploader = new qq.FileUploader({
 			element: document.getElementById(jQuery(this).attr('id')),
@@ -2103,11 +2119,12 @@ function doAdminDatabaseCreateUploader()
 			{
 			}
 		});
+		database_uploader.push(uploader);
 	});
 	jQuery('#divFileUploaderControl .qq-upload-button-text').html(jQuery('#msgDatabaseUploadChooseFile').val());
 	jQuery('#divFileUploaderControl .qq-upload-list').hide();
 
-	jQuery('#btnDatabaseUploadCancel').click(function() {
+	jQuery('#btnDatabaseUploadCancel').unbind('click').click(function() {
 		doDatabaseUploadReset(true);
 		uploader.cancel(jQuery('#txtDatabaseUploadId').val());
 		return false;

@@ -2,6 +2,7 @@
  DesInventar - http://www.desinventar.org
  (c) 1998-2012 Corporacion OSSO
 */
+var database_uploader = [];
 
 function onReadyDatabaseUpload()
 {
@@ -11,7 +12,10 @@ function onReadyDatabaseUpload()
 	doDatabaseUploadStatusMsg('');
 
 	doDatabaseUploadCreate();
-	doAdminDatabaseCreateUploader();
+
+	jQuery('div.DatabaseUpload').on('cmdInitialize', function(event) {
+		doAdminDatabaseCreateUploader();
+	});
 
 	jQuery('#btnDatabaseUploadStart').click(function() {
 		jQuery('#divDatabaseUploadParameters').hide();
@@ -109,6 +113,9 @@ function onReadyDatabaseUpload()
 
 function doAdminDatabaseCreateUploader()
 {
+	jQuery.each(database_uploader, function(key, value) {
+		delete database_uploader[key];
+	});
 	jQuery('#divFileUploaderControl').each(function() {
 		var uploader = new qq.FileUploader({
 			element: document.getElementById(jQuery(this).attr('id')),
@@ -179,11 +186,12 @@ function doAdminDatabaseCreateUploader()
 			{
 			}
 		});
+		database_uploader.push(uploader);
 	});
 	jQuery('#divFileUploaderControl .qq-upload-button-text').html(jQuery('#msgDatabaseUploadChooseFile').val());
 	jQuery('#divFileUploaderControl .qq-upload-list').hide();
 
-	jQuery('#btnDatabaseUploadCancel').click(function() {
+	jQuery('#btnDatabaseUploadCancel').unbind('click').click(function() {
 		doDatabaseUploadReset(true);
 		uploader.cancel(jQuery('#txtDatabaseUploadId').val());
 		return false;
