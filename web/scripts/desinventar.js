@@ -2695,7 +2695,7 @@ function onReadyDatacards()
 	});
 
 	// Button for suggesting serial of datacard or restoring initial Serial when editing...
-	jQuery('#linkDatacardSuggestSerial').unbind('click').click(function() {
+	jQuery('div.Datacard #linkDatacardSuggestSerial').on('click', function(event) {
 		if (jQuery('#DICard #Status').val() == 'NEW')
 		{
 			doDatacardSuggestSerial();
@@ -2704,6 +2704,7 @@ function onReadyDatacards()
 		{
 			jQuery('#DisasterSerial').val(jQuery('#PrevDisasterSerial').val());
 		}
+		return false;
 	});
 
 	// Apply some validation for several types of input fields
