@@ -304,6 +304,7 @@ class UserSession {
 		if ($iReturn > 0) {
 			$this->awake();
 			$this->q->setDBConnection($prmRegionId, $DBFile);
+			$this->conn = $this->q->dreg;
 			$this->RegionId = $prmRegionId;
 			$this->UserRole = $this->getUserRole($prmRegionId);
 			$this->UserRoleValue = $this->getUserRoleValue($prmRegionId);

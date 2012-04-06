@@ -228,7 +228,7 @@ class DIRecord extends DIObject
 				{
 					$oItem = preg_split('#/#', $sValue);
 					$sFieldName = $oItem[0];
-					$sFieldType = $oItem[1];
+					#$sFieldType = $oItem[1];
 					if (array_key_exists($sFieldName, $row))
 					{
 						$this->set($sFieldName, $row[$sFieldName]);
@@ -259,6 +259,7 @@ class DIRecord extends DIObject
 	public function insert($withValidate=1, $bStrict=1)
 	{
 		$iReturn = ERR_NO_ERROR;
+		$this->status->clear();
 		$bValidate = $withValidate;
 		if ($withValidate > 0)
 		{
@@ -339,6 +340,7 @@ class DIRecord extends DIObject
 	public function update($withValidate=1, $bStrict=1)
 	{
 		$iReturn = ERR_NO_ERROR;
+		$this->status->clear();
 		if ($withValidate > 0)
 		{
 			$iReturn = $this->validateUpdate($bStrict);

@@ -213,55 +213,58 @@ class DIDisaster extends DIRecord
 		
 	public function validateEffects($ErrCode, $isError)
 	{
-		$bFound = -1;
 		$iReturn = ERR_NO_ERROR;
-		$sFieldList = $this->sEffectDef;
-		if ($this->sEEFieldDef != '')
+		if ($this->get('RecordStatus') == 'PUBLISHED')
 		{
-			$sFieldList .= ',' . $this->sEEFieldDef;
-		}
-		foreach (preg_split('#,#', $sFieldList) as $sField)
-		{
-			$oItem = preg_split('#/#', $sField);
-			$sFieldName  = $oItem[0];
-			$sFieldType  = $oItem[1];
-			if ($sFieldName != 'EffectNotes')
+			$bFound = -1;
+			$sFieldList = $this->sEffectDef;
+			if ($this->sEEFieldDef != '')
 			{
-				switch($sFieldType)
+				$sFieldList .= ',' . $this->sEEFieldDef;
+			}
+			foreach (preg_split('#,#', $sFieldList) as $sField)
+			{
+				$oItem = preg_split('#/#', $sField);
+				$sFieldName  = $oItem[0];
+				$sFieldType  = $oItem[1];
+				if ($sFieldName != 'EffectNotes')
 				{
-					case 'STRING':
-					case 'DATE':
-						if (trim($this->get($sFieldName)) != '')
-						{
-							$bFound = 1;
-						}
-					break;
-					case 'INTEGER':
-						if ( ($this->get($sFieldName) > 0) || ($this->get($sFieldName) == -1) )
-						{
-							$bFound = 1;
-						}
-					break;
-					case 'CURRENCY':
-					case 'DOUBLE':
-						if ($this->get($sFieldName) > 0)
-						{
-							$bFound = 1;
-						}
-					break;
-				} //switch
-			}
-		} //foreach
-		if ($bFound < 0)
-		{
-			$iReturn = $ErrCode;
-			if ($isError > 0)
+					switch($sFieldType)
+					{
+						case 'STRING':
+						case 'DATE':
+							if (trim($this->get($sFieldName)) != '')
+							{
+								$bFound = 1;
+							}
+						break;
+						case 'INTEGER':
+							if ( ($this->get($sFieldName) > 0) || ($this->get($sFieldName) == -1) )
+							{
+								$bFound = 1;
+							}
+						break;
+						case 'CURRENCY':
+						case 'DOUBLE':
+							if ($this->get($sFieldName) > 0)
+							{
+								$bFound = 1;
+							}
+						break;
+					} //switch
+				}
+			} //foreach
+			if ($bFound < 0)
 			{
-				$this->status->addMsg($iReturn, ' Datacard without effects', false);
-			}
-			else
-			{
-				$this->status->addMsg($iReturn, ' Datacard without effects', true);
+				$iReturn = $ErrCode;
+				if ($isError > 0)
+				{
+					$this->status->addMsg($iReturn, ' Datacard without effects', false);
+				}
+				else
+				{
+					$this->status->addMsg($iReturn, ' Datacard without effects', true);
+				}
 			}
 		}
 		return $iReturn;
