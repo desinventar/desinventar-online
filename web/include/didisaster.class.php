@@ -175,6 +175,10 @@ class DIDisaster extends DIRecord
 			if ($iReturn > 0) { $iReturn = $this->validateEffects(-61, 1);        }
 			if ($iReturn > 0) { $iReturn = $this->validateDisasterBeginTime(-62); }
 		}
+		if (count($this->status->error))
+		{
+			$iReturn = ERR_DEFAULT_ERROR;
+		}
 		return $iReturn;
 	} //validateUpdate()
 
