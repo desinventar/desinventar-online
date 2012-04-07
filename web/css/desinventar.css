@@ -304,12 +304,12 @@ table.col {
 	overflow-y:auto;
 }
 
-.RegionInfoTitle {
+div.RegionInfo .title {
 	font-family:arial,tahoma,helvetica,cursive;
 	font-weight:bold;
 	font-size:12px;
 }
-.RegionInfoText {
+div.RegionInfo .text {
 	font-family:arial,tahoma,helvetica,cursive;
 	font-size:11px;
 }

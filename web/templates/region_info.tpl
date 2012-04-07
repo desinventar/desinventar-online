@@ -1,6 +1,6 @@
 {-config_load file="$lg.conf" section="grpMainStrings"-}
 {-config_load file="$lg.conf" section="grpMenuRegion"-}
-<div id="divRegionInfo" class="contentBlock" style="display:none;">
+<div id="divRegionInfo" class="RegionInfo contentBlock" style="display:none;">
 	<table border="0">
 		<tr>
 			<td>
@@ -44,24 +44,29 @@
 				<table border=0 style="width:100%; font-family:Lucida Grande, Verdana; font-size:10px;">
 					<tr>
 						<td>
-							<div id="divInfoGeneral">
-								<span class="RegionInfoTitle" id="Title">{-#msgInfoGeneral#-}</span><br />
-								<span class="RegionInfoText"  id="Text"></span><br />
+							<div class="InfoGeneral">
+								<span class="title">{-#msgInfoGeneral#-}</span>
+								<br />
+								<span class="text"></span><br />
 								<br />
 							</div>
-							<div id="divInfoCredits">
-								<span class="RegionInfoTitle" id="Title">{-#msgInfoCredits#-}</span><br />
-								<span class="RegionInfoText"  id="Text"></span><br />
+							<div class="InfoCredits">
+								<span class="title">{-#msgInfoCredits#-}</span>
+								<br />
+								<span class="text"></span>
+								<br />
 								<br />
 							</div>
-							<div id="divInfoSources">
-								<span class="RegionInfoTitle" id="Title">{-#msgInfoSources#-}</span><br />
-								<span class="RegionInfoText"  id="Text"></span><br />
+							<div class="InfoSources">
+								<span class="title">{-#msgInfoSources#-}</span>
+								<br />
+								<span class="text"></span><br />
 								<br />
 							</div>
-							<div id="divInfoSynopsis">
-								<span class="RegionInfoTitle" id="Title">{-#msgInfoSynopsis#-}</span><br />
-								<span class="RegionInfoText"  id="Text"></span><br />
+							<div class="InfoSynopsis">
+								<span class="title">{-#msgInfoSynopsis#-}</span>
+								<br />
+								<span class="text"></span><br />
 							</div>
 						</td>
 					</tr>
