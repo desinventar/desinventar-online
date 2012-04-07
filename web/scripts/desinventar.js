@@ -4208,29 +4208,29 @@ function doGetRegionInfo(RegionId)
 				jQuery('#divRegionInfo #txtRegionNumberOfRecords').text(i.NumberOfRecords);
 				jQuery('#divRegionInfo #txtRegionLastUpdate').text(i.RegionLastUpdate);
 
-				jQuery('#divRegionInfo #divInfoGeneral').hide();
+				jQuery('div.RegionInfo div.InfoGeneral').hide();
 				if (i.InfoGeneral != '')
 				{
-					jQuery('#divRegionInfo #divInfoGeneral #Text').html(i.InfoGeneral);
-					jQuery('#divRegionInfo #divInfoGeneral').show();
+					jQuery('div.RegionInfo div.InfoGeneral span.text').html(i.InfoGeneral);
+					jQuery('div.RegionInfo div.InfoGeneral').show();
 				}
-				jQuery('#divRegionInfo #divInfoCredits').hide();
+				jQuery('div.RegionInfo div.InfoCredits').hide();
 				if (i.InfoCredits != '')
 				{
-					jQuery('#divRegionInfo #divInfoCredits #Text').html(i.InfoCredits);
-					jQuery('#divRegionInfo #divInfoCredits').show();
+					jQuery('div.RegionInfo div.InfoCredits span.text').html(i.InfoCredits);
+					jQuery('div.RegionInfo div.InfoCredits').show();
 				}
-				jQuery('#divRegionInfo #divInfoSources').hide();
+				jQuery('div.RegionInfo div.InfoSources').hide();
 				if (i.InfoSources != '')
 				{
-					jQuery('#divRegionInfo #divInfoSources #Text').html(i.InfoSources);
-					jQuery('#divRegionInfo #divInfoSources').show();
+					jQuery('div.RegionInfo div.InfoSources span.text').html(i.InfoSources);
+					jQuery('div.RegionInfo div.InfoSources').show();
 				}
-				jQuery('#divRegionInfo #divInfoSynopsis').hide();
+				jQuery('div.RegionInfo div.InfoSynopsis').hide();
 				if (i.InfoSynopsis != '')
 				{
-					jQuery('#divRegionInfo #divInfoSynopsis #Text').html(i.InfoSynopsis);
-					jQuery('#divRegionInfo #divInfoSynopsis').show();
+					jQuery('div.RegionInfo div.InfoSynopsis span.text').html(i.InfoSynopsis);
+					jQuery('div.RegionInfo div.InfoSynopsis').show();
 				}
 			}
 		},
@@ -6385,6 +6385,8 @@ function onReadyQueryDesign()
 	
 	jQuery('div.QueryDesign').on('cmdInitialize', function() {
 		var params = jQuery('body').data('params');
+
+		jQuery('div.QueryDesign input:text,textarea').val('');
 
 		// Initialize fields
 		jQuery('input.RegionId', this).val(jQuery('body').data('RegionId'));
