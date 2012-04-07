@@ -137,6 +137,8 @@ function onReadyQueryDesign()
 	jQuery('div.QueryDesign').on('cmdInitialize', function() {
 		var params = jQuery('body').data('params');
 
+		jQuery('div.QueryDesign input:text,textarea').val('');
+
 		// Initialize fields
 		jQuery('input.RegionId', this).val(jQuery('body').data('RegionId'));
 		jQuery('input.MinYear' , this).val(params.MinYear);
