@@ -624,7 +624,7 @@ class Graphic
 	{
 		if ($this->sStat == 'WEEK')
 		{
-			$iWeekIni = 1;
+			$iWeekIni = 0; # Bug #95 - This was 1 
 			$iWeekEnd = 52;
 		}
 		else
