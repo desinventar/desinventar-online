@@ -20,7 +20,7 @@ class Graphic
 	var $data;
 	/* opc [kind:BAR,LINE,PIE Opc:Title,etc] data:Matrix
 	   data[0] == X, data[1] = Y1,  .. */
-	public function Graphic ($prmSession, $opc, $prmData)
+	public function Graphic($prmSession, $opc, $prmData)
 	{
 		$this->data = $prmData;
 		$kind = $opc['prmGraph']['Kind'];
@@ -95,7 +95,11 @@ class Graphic
 			foreach ($tvl as $kk=>$ii)
 			{
 				$val[$kk] = $this->completeTimeSeries($opc, $ii, $prmSession);
-			} //foreach
+				if ($this->sStat == 'MONTH')
+				{
+					unset($val[$kk]['00']);
+				}
+			} #foreach
 			$XAxisLabels = array_keys($val[$kk]);
 			$acol = count(array_unique($this->data[$sY2AxisLabel]));
 		}
@@ -125,7 +129,8 @@ class Graphic
 			if ($gType == 'TEMPO' || $gType == '2TEMPO')
 			{
 				$val = $this->completeTimeSeries($opc, $val, $prmSession);
-			} elseif ($gType == 'PIE')
+			}
+			elseif ($gType == 'PIE')
 			{
 				// In Pie Graphs must order the values
 				arsort($val, SORT_NUMERIC);
@@ -624,8 +629,8 @@ class Graphic
 	{
 		if ($this->sStat == 'WEEK')
 		{
-			$iWeekIni = 0; # Bug #95 - This was 1 
-			$iWeekEnd = 52;
+			$iWeekIni = 0; 
+			$iWeekEnd = 53;
 		}
 		else
 		{
