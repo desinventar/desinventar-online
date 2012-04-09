@@ -9,6 +9,7 @@ require_once('include/diregiondb.class.php');
 require_once('include/diregionrecord.class.php');
 require_once('include/geography_operations.php');
 require_once('include/database_operations.php');
+require_once('include/query_operations.php');
 
 $post = $_POST;
 $get  = $_GET;
@@ -554,9 +555,16 @@ switch ($cmd)
 			$params['UserRole']      = $desinventarUserRole;
 			$params['UserRoleValue'] = $desinventarUserRoleValue;
 			$answer['params'] = $params;
+
+			# Demo Query Open
+			#$query_design = file_get_contents('/tmp/query_2.0_geography.xml');
+			#$query_design = preg_replace('/\n/','', $query_design);
+			#$query_design = preg_replace('/\t/','', $query_design);
+			#$answer['query_design'] = $query_design;
 		}
 		$answer['Status'] = $iReturn;
-		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
+		echo json_encode($answer);
+		#echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
 	case 'cmdGeography':
 		$t->display('main_database_geography.tpl');
@@ -1299,12 +1307,27 @@ switch ($cmd)
 		header('Content-type: text/xml');
 		header('Content-Disposition: attachment; filename=Query_' . str_replace(' ', '', $RegionId) . '.xml');
 		echo '<?xml version="1.0" encoding="UTF-8"?>'. "\n";
-		echo '<DesInventar version="' . VERSION . '">' . "\n";
-		echo '	<DIQuery version="1.0">' . base64_encode(serialize($post)) . '</DIQuery>' . "\n";
-		echo '</DesInventar>';
-		exit();
+		echo '<desinventar version="' . VERSION . '">' . "\n";
+		echo '	<diquery><version>1.1</version><value>' . base64_encode(serialize($post)) . '</value></diquery>' . "\n";
+		echo '</desinventar>' . "\n";
 	break;
 	case 'cmdQueryOpen':
+		$xml_filename = '/tmp/query_1.0_geography.xml';
+		$xml_string = file_get_contents($xml_filename);
+		# Attempt to read as 1.0 query version (malformed XML)		
+		$pos = query_is_v1($xml_string);
+		if ($pos > 0)
+		{
+			$diquery = query_read_v1($xml_string);
+			fb($diquery);
+		}
+		else
+		{
+			# Read diquery version=2.0 XML format
+			$xml_doc = new SimpleXMLElement($xml_string);
+		}
+	break;
+	case 'cmdQueryOpen2':
 		# Open XML file query
 		if (isset($_FILES['qry']))
 		{
@@ -1481,6 +1504,8 @@ switch ($cmd)
 		$t->display($template);
 	break;
 } #switch($cmd)
+
+exit();
 
 function doDatabaseCreate($us,$prmRegionId,$prmRegionInfo)
 {
