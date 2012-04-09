@@ -1299,7 +1299,9 @@ switch ($cmd)
 		header('Content-type: text/xml');
 		header('Content-Disposition: attachment; filename=Query_' . str_replace(' ', '', $RegionId) . '.xml');
 		echo '<?xml version="1.0" encoding="UTF-8"?>'. "\n";
-		echo '<DIQuery />' . base64_encode(serialize($post));
+		echo '<DesInventar version="' . VERSION . '">' . "\n";
+		echo '	<DIQuery version="1.0">' . base64_encode(serialize($post)) . '</DIQuery>' . "\n";
+		echo '</DesInventar>';
 		exit();
 	break;
 	case 'cmdQueryOpen':
