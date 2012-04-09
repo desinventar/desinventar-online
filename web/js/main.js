@@ -188,15 +188,27 @@ function doDatabaseLoadData()
 					}
 				});
 				jQuery('body').data('GeographyList', data.GeographyList);
-				// Trigger event on mainblock components to update them
-				jQuery('.mainblock').trigger('cmdInitialize');
 				// Info
 				jQuery('#desinventarLang').val(data.params.LangIsoCode);
 				jQuery('#desinventarRegionId').val(data.params.RegionId);
 				jQuery('#desinventarRegionLabel').val(data.params.RegionLabel);
 				jQuery('#desinventarNumberOfRecords').val(data.RecordCount);
-
+				
+				// Trigger event on mainblock components to update them
+				jQuery('.mainblock').trigger('cmdInitialize');
+				// Trigger ViewportShow
 				jQuery('body').trigger('cmdViewportShow');
+				/*
+				console.log('loadData');
+				console.log(data.query_design);
+				var query_design = jQuery.parseXML(data.query_design);
+				jQuery(query_design).find('geography_id').each(function() {
+					var geography_id = jQuery(this).text();
+					jQuery('div.QueryDesign div.GeographyList li.item input:checkbox[value="' + geography_id + '"]').trigger('click');
+					console.log(geography_id);
+				});
+				console.log('endLoadData');
+				*/
 			},
 			'json'
 		);
