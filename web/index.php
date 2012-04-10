@@ -1312,7 +1312,8 @@ switch ($cmd)
 		echo '</desinventar>' . "\n";
 	break;
 	case 'cmdQueryOpen':
-		$xml_filename = '/tmp/query_1.0_geography.xml';
+		$xml_filename = BASE . '/test/query_2.0_geography.xml';
+		fb($xml_filename);
 		$xml_string = file_get_contents($xml_filename);
 		# Attempt to read as 1.0 query version (malformed XML)		
 		$pos = query_is_v1($xml_string);
@@ -1321,10 +1322,10 @@ switch ($cmd)
 			$diquery = query_read_v1($xml_string);
 			fb($diquery);
 		}
-		else
+		elseif (query_is_v2($xml_string) > 0)
 		{
 			# Read diquery version=2.0 XML format
-			$xml_doc = new SimpleXMLElement($xml_string);
+			#$xml_doc = new SimpleXMLElement($xml_string);
 		}
 	break;
 	case 'cmdQueryOpen2':
