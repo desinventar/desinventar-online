@@ -1328,10 +1328,14 @@ switch ($cmd)
 			$iReturn = query_is_v2($xml_string);
 			if ($iReturn > 0)
 			{
-				# Read diquery version=2.0 XML format
-				#$xml_doc = new SimpleXMLElement($xml_string);
+				$query = query_convert_v2_to_v1($xml_string);
+				$qd  = $us->q->genSQLWhereDesconsultar($query);
+				$sqc = $us->q->genSQLSelectCount($qd);
+				fb($sqc);
+				$c	 = $us->q->getresult($sqc);
+				$iNumberOfRecords = $c['counter'];
+				fb('NumberOfRecords : ' . $iNumberOfRecords);
 			}
-			fb($iReturn);
 		}
 	break;
 	case 'cmdQueryOpen2':

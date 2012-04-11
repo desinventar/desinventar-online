@@ -25,7 +25,7 @@ function query_is_v2($xml_string)
 	try
 	{
 		$xml_doc = new SimpleXMLElement($xml_string);
-		$xml_query = reset($xml_doc->xpath('query_design'));
+		$xml_query = reset($xml_doc->xpath('query'));
 		if ($xml_query == '')
 		{
 			$iReturn = -2; # Valid XML but no query_design element
@@ -48,8 +48,31 @@ function query_read_v1($xml_string)
 	return $query;
 }
 
-function query_convert_v1_to_v2()
+function query_convert_v2_to_v1($xml_string)
 {
+	$query = array();
+	$xml_doc = new SimpleXMLElement($xml_string);
+	$xml_query = reset($xml_doc->xpath('query'));
+	fb($xml_query);
+	$a = array();
+	foreach($xml_query->xpath('geography/id') as $id)
+	{
+		$a[] = query_trim($id);
+	}
+	$query['D_GeographyId'] = $a;
+	$query['QueryGeography']['OP'] = 'AND';
+	$query['D_DisasterSiteNotes'][0] = 'AND';
+	$query['D_DisasterSiteNotes'][1] = query_trim(reset($xml_query->xpath('disaster_site_notes')));
+	fb($query);
+	return $query;
 } #query_convert_v1_to_v2()
 
+function query_trim($value)
+{
+	$value = (string) $value;
+	$value = preg_replace('/\n/','', $value);
+	$value = preg_replace('/\t/','', $value);
+	$value = trim($value);
+	return $value;
+}
 </script>
