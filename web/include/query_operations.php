@@ -25,7 +25,11 @@ function query_is_v2($xml_string)
 	try
 	{
 		$xml_doc = new SimpleXMLElement($xml_string);
-		fb('query v2 loaded');
+		$xml_query = reset($xml_doc->xpath('query_design'));
+		if ($xml_query == '')
+		{
+			$iReturn = -2; # Valid XML but no query_design element
+		}
 	}
 	catch (Exception $e)
 	{

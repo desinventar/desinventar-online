@@ -1312,20 +1312,26 @@ switch ($cmd)
 		echo '</desinventar>' . "\n";
 	break;
 	case 'cmdQueryOpen':
+		$answer = array();
+		$iReturn = ERR_NO_ERROR;
 		$xml_filename = BASE . '/test/query_2.0_geography.xml';
-		fb($xml_filename);
 		$xml_string = file_get_contents($xml_filename);
+
 		# Attempt to read as 1.0 query version (malformed XML)		
-		$pos = query_is_v1($xml_string);
-		if ($pos > 0)
+		$iReturn = query_is_v1($xml_string);
+		if ($iReturn > 0)
 		{
 			$diquery = query_read_v1($xml_string);
-			fb($diquery);
 		}
-		elseif (query_is_v2($xml_string) > 0)
+		else
 		{
-			# Read diquery version=2.0 XML format
-			#$xml_doc = new SimpleXMLElement($xml_string);
+			$iReturn = query_is_v2($xml_string);
+			if ($iReturn > 0)
+			{
+				# Read diquery version=2.0 XML format
+				#$xml_doc = new SimpleXMLElement($xml_string);
+			}
+			fb($iReturn);
 		}
 	break;
 	case 'cmdQueryOpen2':
