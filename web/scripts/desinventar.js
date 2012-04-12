@@ -824,8 +824,6 @@ function doDatabaseCreateSetup()
 	});
 
 
-	jQuery('#fldDatabaseEdit_RegionId').attr('readonly', true);
-
 	jQuery('#fldDatabaseEdit_CountryIso').change(function() {
 		jQuery.post(
 			jQuery('#desinventarURL').val() + '/',
@@ -861,9 +859,9 @@ function doDatabaseCreateSetup()
 			{
 				RegionStatus.val(parseInt(RegionStatus.val()) | 2);
 			}
-			jQuery('#fldDatabaseEdit_RegionId').removeAttr('disabled');
+			jQuery('#fldDatabaseEdit_RegionId').prop('disabled', false);
 			var params = jQuery('#frmDatabaseEdit').serializeObject();
-			jQuery('#fldDatabaseEdit_RegionId').attr('disabled','disabled');
+			jQuery('#fldDatabaseEdit_RegionId').prop('disabled', true);
 
 			jQuery('#frmDatabaseEdit :input').unhighlight();
 			jQuery.post(
@@ -903,6 +901,25 @@ function doDatabaseCreateSetup()
 		}
 		return false;
 	});
+
+	jQuery('div.DatabaseEdit input.RegionId').prop('disabled', true).hide();
+	jQuery('div.DatabaseEdit').on('dblclick', function(event) {
+		if (jQuery('#desinventarUserRoleValue').val() >= 5)
+		{
+			var input = jQuery('div.DatabaseEdit input.RegionId');
+			if (input.is(':visible'))
+			{
+				input.hide();
+			}
+			else
+			{
+				input.show();
+				input.prop('disabled', false);
+			}
+		}
+	});
+
+
 
 	// Hide Send button until the combobox has been populated
 	jQuery('#btnDatabaseCreateSend').hide();
@@ -6233,15 +6250,27 @@ function doDatabaseLoadData()
 					}
 				});
 				jQuery('body').data('GeographyList', data.GeographyList);
-				// Trigger event on mainblock components to update them
-				jQuery('.mainblock').trigger('cmdInitialize');
 				// Info
 				jQuery('#desinventarLang').val(data.params.LangIsoCode);
 				jQuery('#desinventarRegionId').val(data.params.RegionId);
 				jQuery('#desinventarRegionLabel').val(data.params.RegionLabel);
 				jQuery('#desinventarNumberOfRecords').val(data.RecordCount);
-
+				
+				// Trigger event on mainblock components to update them
+				jQuery('.mainblock').trigger('cmdInitialize');
+				// Trigger ViewportShow
 				jQuery('body').trigger('cmdViewportShow');
+				/*
+				console.log('loadData');
+				console.log(data.query_design);
+				var query_design = jQuery.parseXML(data.query_design);
+				jQuery(query_design).find('geography_id').each(function() {
+					var geography_id = jQuery(this).text();
+					jQuery('div.QueryDesign div.GeographyList li.item input:checkbox[value="' + geography_id + '"]').trigger('click');
+					console.log(geography_id);
+				});
+				console.log('endLoadData');
+				*/
 			},
 			'json'
 		);
