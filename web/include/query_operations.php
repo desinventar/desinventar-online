@@ -61,8 +61,28 @@ function query_convert_v2_to_v1($xml_string)
 	}
 	$query['D_GeographyId'] = $a;
 	$query['QueryGeography']['OP'] = 'AND';
-	$query['D_DisasterSiteNotes'][0] = 'AND';
+	$query['D_DisasterSiteNotes'][0] = '';
 	$query['D_DisasterSiteNotes'][1] = query_trim(reset($xml_query->xpath('disaster_site_notes')));
+
+	$a = array();
+	foreach($xml_query->xpath('event/id') as $id)
+	{
+		$a[] = query_trim($id);
+	}
+	$query['QueryEvent']['OP'] = 'AND';
+	$query['D_EventId'] = $a;
+	$query['D_EventDuration'] = query_trim(reset($xml_query->xpath('event/duration')));
+	$query['D_EventNotes'][1] = query_trim(reset($xml_query->xpath('event/notes')));
+
+	$a = array();
+	foreach($xml_query->xpath('cause/id') as $id)
+	{
+		$a[] = query_trim($id);
+	}
+	$query['QueryCause']['OP'] = 'AND';
+	$query['D_CauseId'] = $a;
+	$query['D_CauseNotes'][1] = query_trim(reset($xml_query->xpath('cause/notes')));
+
 	fb($query);
 	return $query;
 } #query_convert_v1_to_v2()
