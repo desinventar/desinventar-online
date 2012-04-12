@@ -30,8 +30,6 @@ function doDatabaseCreateSetup()
 	});
 
 
-	jQuery('#fldDatabaseEdit_RegionId').attr('readonly', true);
-
 	jQuery('#fldDatabaseEdit_CountryIso').change(function() {
 		jQuery.post(
 			jQuery('#desinventarURL').val() + '/',
@@ -67,9 +65,9 @@ function doDatabaseCreateSetup()
 			{
 				RegionStatus.val(parseInt(RegionStatus.val()) | 2);
 			}
-			jQuery('#fldDatabaseEdit_RegionId').removeAttr('disabled');
+			jQuery('#fldDatabaseEdit_RegionId').prop('disabled', false);
 			var params = jQuery('#frmDatabaseEdit').serializeObject();
-			jQuery('#fldDatabaseEdit_RegionId').attr('disabled','disabled');
+			jQuery('#fldDatabaseEdit_RegionId').prop('disabled', true);
 
 			jQuery('#frmDatabaseEdit :input').unhighlight();
 			jQuery.post(
@@ -109,6 +107,25 @@ function doDatabaseCreateSetup()
 		}
 		return false;
 	});
+
+	jQuery('div.DatabaseEdit input.RegionId').prop('disabled', true).hide();
+	jQuery('div.DatabaseEdit').on('dblclick', function(event) {
+		if (jQuery('#desinventarUserRoleValue').val() >= 5)
+		{
+			var input = jQuery('div.DatabaseEdit input.RegionId');
+			if (input.is(':visible'))
+			{
+				input.hide();
+			}
+			else
+			{
+				input.show();
+				input.prop('disabled', false);
+			}
+		}
+	});
+
+
 
 	// Hide Send button until the combobox has been populated
 	jQuery('#btnDatabaseCreateSend').hide();
