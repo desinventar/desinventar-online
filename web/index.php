@@ -1319,7 +1319,6 @@ switch ($cmd)
 		if ($pos > 0)
 		{
 			$diquery = query_read_v1($xml_string);
-			fb($diquery);
 		}
 		else
 		{
