@@ -12,7 +12,9 @@ function loadCSV($ocsv)
 	$handle = fopen($ocsv, 'r');
 	$res = array();
 	while (($data = fgetcsv($handle, 100, ',')) !== FALSE)
+	{
 		$res[] = array($data[0], $data[1], $data[2], $data[3], $data[4]);
+	}
 	fclose($handle);
 	return $res;
 }

@@ -12,8 +12,12 @@ function getRAPermList($lst)
 {
 	$dat = array();
 	foreach ($lst as $k=>$v)
+	{
 		if ($v=='NONE' || $v=='USER' || $v=='OBSERVER' || $v=='SUPERVISOR')
+		{
 			$dat[$k] = $v;
+		}
+	}
 	return $dat;
 }
 $get = $_POST;
