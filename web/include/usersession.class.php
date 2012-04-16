@@ -11,9 +11,11 @@ define('ROLE_SUPERVISOR' , 3);
 define('ROLE_ADMINREGION', 4);
 define('ROLE_ADMINPORTAL', 5);
 
-class UserSession {
+class UserSession
+{
 
-	public function __construct() {
+	public function __construct()
+	{
 		$this->sSessionId = session_id();
 		$this->UserId            = '';
 		$this->LangIsoCode       = '';
@@ -27,8 +29,10 @@ class UserSession {
 		$this->config = array();
 		$this->config['AutoLogin'] = 0;
 		$num_args = func_num_args();
-		if ($num_args > 0) {
-			if (func_get_arg(0) != '') {  
+		if ($num_args > 0)
+		{
+			if (func_get_arg(0) != '')
+			{  
 				$this->sSessionId = func_get_arg(0);
 			}
 		}
@@ -36,16 +40,19 @@ class UserSession {
 	} //constructor
 	
 	// Read Session Information from Database
-	public function load($prmSessionId) {
+	public function load($prmSessionId)
+	{
 		$iReturn = ERR_UNKNOWN_ERROR;
 		$sQuery = 'SELECT * FROM UserSession WHERE SessionId=:SessionId';
 		$sth = $this->q->core->prepare($sQuery);
 		$this->q->core->beginTransaction();
-		try {
+		try
+		{
 			$sth->bindParam(':SessionId', $prmSessionId, PDO::PARAM_STR);
 			$sth->execute();
 			$this->q->core->commit();
-			while($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+			while($row = $sth->fetch(PDO::FETCH_ASSOC))
+			{
 				$this->sSessionId  = $row['SessionId'];
 				$this->UserId      = $row['UserId'];
 				$this->LangIsoCode = $row['LangIsoCode'];
@@ -53,19 +60,23 @@ class UserSession {
 				$this->dLastUpdate = $row['LastUpdate'];
 				$iReturn = ERR_NO_ERROR;
 			} //while
-		} catch (Exception $e) {
+		}
+		catch (Exception $e)
+		{
 			$this->q->core->rollBack();
 			showErrorMsg($e->getMessage());
 		}
 		// If session doesn't exist in database, insert record
-		if ($iReturn < 0) {
+		if ($iReturn < 0)
+		{
 			$this->insert();
 		}
 		return $iReturn;	
 	} // function
 
 	// Set LastUpdate field of Session so it will not expire...
-	public function awake() {
+	public function awake()
+	{
 		$iReturn = ERR_NO_ERROR;
 		$PrevTime = $this->dLastUpdate;
 		$CurTime  = gmdate('c');
@@ -75,7 +86,8 @@ class UserSession {
 		// without using this session (Bug # 277)
 		$Interval = strtotime($CurTime) - strtotime($PrevTime);
 		// 60 * 30 = 1800 (30 minutes)
-		if ($Interval > 1800) {
+		if ($Interval > 1800)
+		{
 			$this->close();
 			$this->logout();
 		}
@@ -84,7 +96,8 @@ class UserSession {
 		$sQuery2 = 'UPDATE UserLockList SET LastUpdate=:LastUpdate WHERE SessionId=:SessionId';
 		$sth2 = $this->q->core->prepare($sQuery2);
 		$this->q->core->beginTransaction();
-		try {
+		try
+		{
 			$sth1->bindParam(':SessionId', $this->sSessionId, PDO::PARAM_STR);
 			$sth1->bindParam(':LastUpdate', $this->dLastUpdate, PDO::PARAM_STR);
 			$sth1->execute();
@@ -101,26 +114,31 @@ class UserSession {
 		return $iReturn;
 	}
 
-	public function login($prmUserId, $prmUserPasswd) {
+	public function login($prmUserId, $prmUserPasswd)
+	{
 		$iReturn = ERR_DEFAULT_ERROR;
 		$UserId = $this->validateUser($prmUserId, $prmUserPasswd);
-		if ($UserId != '') {
+		if ($UserId != '')
+		{
 			$iReturn = $this->setUser($UserId);
 		}
 		return $iReturn;
 	}
 
-	public function logout() {
+	public function logout()
+	{
 		return $this->setUser('');
 	}
 
-	public function setUser($prmUserId) {
+	public function setUser($prmUserId)
+	{
 		$iReturn = ERR_DEFAULT_ERROR;
 		$sQuery = 'UPDATE UserSession SET UserId=:UserId ' . 
 		          'WHERE SessionId=:SessionId';
 		$sth = $this->q->core->prepare($sQuery);
 		$this->q->core->beginTransaction();
-		try {
+		try
+		{
 			if ($sth->execute(array(':UserId'    => $prmUserId,
 			                    ':SessionId' => $this->sSessionId)))
 			{
@@ -184,13 +202,15 @@ class UserSession {
 
 	// Start a Session by creating a record in the database
 	// this could be an anonymous or authenticated session
-	public function insert() {
+	public function insert()
+	{
 		$iReturn = ERR_DEFAULT_ERROR;
 		$sQuery = 'INSERT INTO UserSession (SessionId,RegionId,UserId,Valid,LangIsoCode,Start,LastUpdate) ' .
 		          ' VALUES (:SessionId,:RegionId,:UserId,:Valid,:LangIsoCode,:Start,:LastUpdate)';
 		$sth = $this->q->core->prepare($sQuery);
 		$this->q->core->beginTransaction();
-		try {
+		try
+		{
 			$sth->bindParam(':SessionId'  , $this->sSessionId, PDO::PARAM_STR);
 			$sth->bindValue(':RegionId'   , '', PDO::PARAM_STR);
 			$sth->bindParam(':UserId'     , $this->UserId, PDO::PARAM_STR);
@@ -213,7 +233,8 @@ class UserSession {
 	} // insert()
 
 	// Update information about this session in database
-	public function update() {
+	public function update()
+	{
 		$iReturn = ERR_DEFAULT_ERROR;
 		// Always update this field...
 		$this->dLastUpdate = gmdate('c');
@@ -284,7 +305,8 @@ class UserSession {
 	}
 	
 	// Associate a RegionId with the session
-	public function open($prmRegionId, $prmDBFile = '') {
+	public function open($prmRegionId, $prmDBFile = '')
+	{
 		$iReturn = ERR_NO_ERROR;
 		$this->clearLocks();
 		
@@ -293,15 +315,20 @@ class UserSession {
 		$this->UserRoleValue = ROLE_NONE;
 		
 		$DBDir = VAR_DIR . '/database/' . $prmRegionId;
-		if ($prmDBFile == '') {
+		if ($prmDBFile == '')
+		{
 			$DBFile = $DBDir . '/desinventar.db';
-		} else {
+		}
+		else
+		{
 			$DBFile = $DBDir . '/' . $prmDBFile;
 		}
-		if (! file_exists($DBFile)) {
+		if (! file_exists($DBFile))
+		{
 			$iReturn = ERR_NO_DATABASE;
 		}		
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			$this->awake();
 			$this->q->setDBConnection($prmRegionId, $DBFile);
 			$this->conn = $this->q->dreg;
@@ -313,20 +340,24 @@ class UserSession {
 		return $iReturn;
 	} // open()
 
-	public function close($prmRegionId = '') {
+	public function close($prmRegionId = '')
+	{
 		return $this->open('');
 	} // close()
 
 	// Validate a user/passwd pair against database
-	public function validateUser($prmUserId, $prmUserPasswd, $withCrypt=true) {
+	public function validateUser($prmUserId, $prmUserPasswd, $withCrypt=true)
+	{
 		$UserId = '';
-		if (! $withCrypt) {
+		if (! $withCrypt)
+		{
 			$prmUserPasswd = md5($prmUserPasswd);
 		}
 		$sQuery = 'SELECT * FROM User WHERE (UserId=:UserId OR UserNotes LIKE :UserNotes) AND UserPasswd=:UserPasswd';
 		$sth = $this->q->core->prepare($sQuery);
 		$this->q->core->beginTransaction();
-		try {
+		try
+		{
 			$sth->bindParam(':UserId', $prmUserId, PDO::PARAM_STR);
 			$sth->bindValue(':UserNotes', '%(UserName=' . $prmUserId. ')%', PDO::PARAM_STR);
 			$sth->bindParam(':UserPasswd', $prmUserPasswd, PDO::PARAM_STR);
@@ -336,14 +367,17 @@ class UserSession {
 			{
 				$UserId = $row['UserId'];
 			}
-		} catch (Exception $e) {
+		}
+		catch (Exception $e)
+		{
 			$this->q->core->rollBack();
 			showErrorMsg($e->getMessage());
 		} // catch
 		return $UserId;
 	} // valiteUser
 	
-	public function getUserFullName() {
+	public function getUserFullName()
+	{
 		$sUserFullName = "";
 		$sQuery = "SELECT * FROM User WHERE UserId='" . $this->UserId . "'";
 		$sth = $this->q->core->prepare($sQuery);
@@ -365,15 +399,18 @@ class UserSession {
 		return $sUserFullName;
 	}
 	
-	public function getAllPermsByUser() {
+	public function getAllPermsByUser()
+	{
 		return $this->getAllPermsGeneric($this->UserId, "");
 	}
 
-	private function getAllPermsGeneric($prmUserId, $prmRegionId) {
+	private function getAllPermsGeneric($prmUserId, $prmRegionId)
+	{
 		$myPerms = array();
 		$sQuery = "SELECT * FROM RegionAuth WHERE " .
 		  "((UserId='" . $prmUserId . "') OR (UserId='')) ";
-		if ($prmRegionId != "") {
+		if ($prmRegionId != "")
+		{
 			$sQuery .= " AND " . "((RegionId='" . $prmRegionId . "') OR (RegionId='')) ";
 		}
 		$sQuery = $sQuery + " ORDER BY AuthKey,AuthValue";
@@ -400,7 +437,8 @@ class UserSession {
 	}
 
 	// Return hash with all regions where the user has a role
-	function getUserRoleList() {
+	function getUserRoleList()
+	{
 		$myData = array();
 		$sQuery = "SELECT RegionAuth.*,Region.RegionLabel FROM RegionAuth,Region WHERE " .
 			" (RegionAuth.RegionId = Region.RegionId) " .
@@ -543,7 +581,8 @@ class UserSession {
 	}
 	
 	// Send a Password Reminder to an E-mail
-	function sendPasswdReminder($prmEMail) {
+	function sendPasswdReminder($prmEMail)
+	{
 		$myAnswer = '';
 		$sQuery = "SELECT * FROM User WHERE (UserEMail='" . $prmEMail . "') ";
 		$sth = $this->q->core->prepare($sQuery);
@@ -647,7 +686,8 @@ class UserSession {
 	}
 		
 	// Get User Role as a Numeric Value, easier to compare
-	function getUserRoleValue($prmRegionId = '') {
+	function getUserRoleValue($prmRegionId = '')
+	{
 		$Role = $this->getUserRole($prmRegionId);
 		$NumRole = $this->convertRoleToRoleValue($Role);
 		return $NumRole;
@@ -660,7 +700,8 @@ class UserSession {
 		{
 			$iReturn = ERR_DEFAULT_ERROR;
 		}
-		if ($prmRegionId == '') {
+		if ($prmRegionId == '')
+		{
 			$iReturn = ERR_DEFAULT_ERROR;
 		}
 		if ($iReturn > 0)
@@ -1009,7 +1050,8 @@ class UserSession {
 	{
 		$list = array();
 		$sQuery = "SELECT * FROM User WHERE UserActive > 0 ";
-		if ($prmUserId != '') {
+		if ($prmUserId != '')
+		{
 			$sQuery .= " AND UserId='" . $prmUserId . "'";
 		}
 		$sQuery .= " ORDER BY UserFullName";
@@ -1032,7 +1074,8 @@ class UserSession {
 		return $list;
 	}
 	
-	public function chkPasswd ($passwd) {
+	public function chkPasswd ($passwd)
+	{
 		return true;
 	}
 
@@ -1156,7 +1199,8 @@ class UserSession {
 	{
 		$Record = $prmRecord;
 		$RecordCount = $this->getDisasterCount();
-		if ($Record > 1) {
+		if ($Record > 1)
+		{
 			$Record--;
 		}
 		$DisasterId = $this->getDisasterIdFromRecordNumber($Record);
@@ -1233,20 +1277,24 @@ class UserSession {
 		return $DisasterId;
 	}
 
-	public function existDisasterSerial($prmDisasterSerial) {
+	public function existDisasterSerial($prmDisasterSerial)
+	{
 		$Answer = '';
 		$sQuery = "SELECT DisasterSerial FROM Disaster WHERE DisasterSerial = '". $prmDisasterSerial."'";
-		foreach($this->q->dreg->query($sQuery) as $row) {
+		foreach($this->q->dreg->query($sQuery) as $row)
+		{
 			$Answer = $row['DisasterSerial'];
 		}
 		return array('Status' => 'OK', 'DisasterSerial' => $Answer);
 	}
 
 	// Return a small list with the information about levels in database
-	function getGeoLevels() {
+	function getGeoLevels()
+	{
 		$sQuery = "SELECT GeoLevelId, GeoLevelName FROM GeoLevel WHERE GeoLevelActive=1 ORDER BY GeoLevelId";
 		$GeoLevels = array();
-		foreach ($this->q->dreg->query($sQuery) as $row) {
+		foreach ($this->q->dreg->query($sQuery) as $row)
+		{
 			array_push($GeoLevels, $row);
 		}
 		return $GeoLevels;
@@ -1284,18 +1332,22 @@ class UserSession {
 		return $gItems;
 	} //getGeographyItemsByLevel()
 
-	public function getDBDir() {
+	public function getDBDir()
+	{
 		$DBDir = '';
-		if ($this->RegionId != '') {
+		if ($this->RegionId != '')
+		{
 			$DBDir = CONST_DBREGIONDIR . '/' . $this->RegionId;
 		}
 		return $DBDir;
 	}
 
 	// Read an specific InfoKey value from the table
-	function getDBInfoValue($prmInfoKey) {
+	function getDBInfoValue($prmInfoKey)
+	{
 		$sReturn = '';
-		if ($this->RegionId != 'core') {
+		if ($this->RegionId != 'core')
+		{
 			$r = new DIRegion($this, $this->RegionId);
 			$sReturn = $r->getRegionInfoValue($prmInfoKey);
 		}
@@ -1341,7 +1393,7 @@ class UserSession {
 		}
 		if ($datemin == '') { $datemin = date('Y-m-d'); }
 		if ($datemax == '') { $datemax = date('Y-m-d'); }
-		if ($datemin > $datemax) { $datemin = $datemax; }
+		if ($datemin > $datemax) {  $datemin = $datemax; }
 		$res[0] = substr($datemin, 0, 10);
 		$res[1] = substr($datemax, 0, 10);
 		return $res;
