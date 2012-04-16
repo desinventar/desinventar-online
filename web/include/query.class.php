@@ -19,9 +19,13 @@ class Query //extends PDO
 			// Open core.db - Users, Regions, Auths.. 
 			$dbc = CONST_DBCORE;
 			if (file_exists($dbc))
+			{
 				$this->core = new PDO('sqlite:' . $dbc);
+			}
 			else
+			{
 				$this->rebuildCore($dbc); // Rebuild data from directory..
+			}
 
 			// Open base.db - DI's Basic database
 			$dbb = CONST_DBBASE;
@@ -684,12 +688,18 @@ class Query //extends PDO
 		}
 		if (strlen($prefix) > 0)
 		{
-			if ($WhereSQL != '') { $WhereSQL .= ' AND '; }
+			if ($WhereSQL != '')
+			{
+				$WhereSQL .= ' AND ';
+			}
 			$WhereSQL .= 'GeographyId="' . $prefix . '" ';
 		}
 		if ($mapping > 0)
 		{
-			if ($WhereSQL != '') { $WhereSQL .= ' AND '; }
+			if ($WhereSQL != '')
+			{
+				$WhereSQL .= ' AND ';
+			}
 			$WhereSQL .= '(GeoLevelLayerFile != "" AND GeoLevelLayerCode != "" AND GeoLevelLayerName != "") ';
 		}
 		if (strlen($WhereSQL) > 0)
