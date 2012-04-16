@@ -27,57 +27,69 @@ class DIEvent extends DIRecord
 		$this->set("EventActive", 1);
 		$this->set("EventId", uuid());
 		$num_args = func_num_args();
-		if ($num_args >= 2) {
+		if ($num_args >= 2)
+		{
 			$prmEventId = func_get_arg(1);
 			$this->set('EventId', $prmEventId);
 			$this->load();
-			if ($num_args >= 3) {
+			if ($num_args >= 3)
+			{
 				$prmEventName = func_get_arg(2);
 				$this->set('EventName', $prmEventName);
 			}
 		}
 	} // __construct
 	
-	public static function getIdByName($session, $prmEventName) {
+	public static function getIdByName($session, $prmEventName)
+	{
 		$EventId = '';
 		$sQuery = "SELECT * FROM Event " .
 		  " WHERE (EventId       LIKE '"  . $prmEventName . "' OR " .
 		  "        EventName     LIKE '"  . $prmEventName . "' OR " .
 		  "        EventKeyWords LIKE '%" . $prmEventName . ";%')";
-		foreach($session->q->dreg->query($sQuery) as $row) {
+		foreach($session->q->dreg->query($sQuery) as $row)
+		{
 			$EventId = $row['EventId'];
 		} // foreach
 		return $EventId;
 	} // function
 
-	public static function loadByName($session, $prmEventName) {
+	public static function loadByName($session, $prmEventName)
+	{
 		$EventId = self::getIdByName($session, $prmEventName);
 		$e = new self($session, $prmEventName);
 		return $e;
-	} //function
+	} #function
 	
-	public function getDeleteQuery() {
+	public function getDeleteQuery()
+	{
 		$sQuery = "UPDATE " . $this->getTableName() . " SET EventActive=0" .
 		  " WHERE " . $this->getWhereSubQuery();
 		return $sQuery;
 	}
 
-	public function validateCreate() {
+	public function validateCreate()
+	{
 		$iReturn = 1;
 		$iReturn = $this->validateNotNull(-11, 'EventId');
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			$iReturn = $this->validatePrimaryKey(-12);
 		}
 		return $iReturn;
 	}
 
-	public function validateUpdate() {
+	public function validateUpdate()
+	{
 		$iReturn = ERR_NO_ERROR;
 		$iReturn = $this->validateNotNull(-13, 'EventName');
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			$iReturn = $this->validateUnique(-14, 'EventName', true);
-			if ($iReturn > 0) {
-				if ($this->get('EventActive') == 0) {
+			if ($iReturn > 0)
+			{
+				if ($this->get('EventActive') == 0)
+				{
 					$iReturn = $this->validateNoDatacards(-15);
 				}
 			}
@@ -85,20 +97,24 @@ class DIEvent extends DIRecord
 		return $iReturn;
 	}
 	
-	public function validateNoDatacards($ErrCode) {
+	public function validateNoDatacards($ErrCode)
+	{
 		$iReturn = ERR_NO_ERROR;
 		$Count = 0;
 		$Query = "SELECT COUNT(DisasterId) AS COUNT FROM Disaster WHERE EventId='" . $this->get('EventId') . "'";
-		foreach($this->q->dreg->query($Query) as $row) {
+		foreach($this->q->dreg->query($Query) as $row)
+		{
 			$Count = $row['COUNT'];
 		}
-		if ($Count > 0) {
+		if ($Count > 0)
+		{
 			$iReturn = $ErrCode;
 		}
 		return $iReturn;
 	}
 
-	public function validateDelete() {
+	public function validateDelete()
+	{
 		$iReturn = ERR_NO_ERROR;
 		$iReturn = $this->validateNoDatacards(-15);
 		return $iReturn;
@@ -124,13 +140,14 @@ class DIEvent extends DIRecord
 				$this->set('EventId', $EventId);
 				$this->load();
 			}
-			if ( $this->status->hasError() || $this->status->hasWarning() ) {
+			if ( $this->status->hasError() || $this->status->hasWarning() )
+			{
 				$iReturn = ERR_UNKNOWN_ERROR;
 			}
 			$this->status->status = $iReturn;
 		}
 		return $iReturn;
-	} //function
-}
+	} #function
+} #class
 
 </script>
