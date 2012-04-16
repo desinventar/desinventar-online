@@ -31,6 +31,7 @@ RewriteRule ^([a-zA-Z0-9\-_]+)/user/account[/]$      index.php?RegionId=$1&cmd=c
 RewriteRule ^([a-zA-Z0-9\-_]+)/geolevels[/]$         index.php?RegionId=$1&cmd=cmdGeolevels
 RewriteRule ^([a-zA-Z0-9\-_]+)/geography[/]$         index.php?RegionId=$1&cmd=cmdGeography
 RewriteRule ^([a-zA-Z0-9\-_]+)/queryopen[/]$         index.php?RegionId=$1&cmd=cmdQueryOpen
+RewriteRule ^([a-zA-Z0-9\-_]+)/profiles[/]$          index.php?RegionId=$1&cmd=cmdProfiles
 RewriteRule ^([a-zA-Z0-9\-_]+)/([a-zA-Z0-9\-_]+)/?$  index.php?RegionId=$1&cmd=$2 [QSA]
 #
 # Rewrite URLs of the form 'x' to the form 'index.php?q=x'.
