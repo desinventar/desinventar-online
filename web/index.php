@@ -1298,6 +1298,10 @@ switch ($cmd)
 		}
 		echo json_encode($answer);
 	break;
+	case 'cmdProfiles':
+		$answer = array();
+		echo json_encode($answer);
+	break;
 	case 'savequery':
 	case 'cmdQuerySave':
 		# Save XML file query
