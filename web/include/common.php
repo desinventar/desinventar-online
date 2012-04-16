@@ -4,95 +4,141 @@
  (c) 1998-2012 Corporacion OSSO
 */
 
-function getBrowserClientLanguage() {
+function getBrowserClientLanguage()
+{
 	// 2009-08-13 (jhcaiced) Try to detect the interface language 
 	// for the user based on the information sent by the browser...
 	$LangStr = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
 	$IsoLang = '';
-	foreach(preg_split('#,#',$LangStr) as $LangItem) {
-		if ($IsoLang == '') {
+	foreach(preg_split('#,#',$LangStr) as $LangItem)
+	{
+		if ($IsoLang == '')
+		{
 			$Index = strpos($LangItem, ';'); 
-			if ($Index == '') { $Index = strlen($LangItem); }
+			if ($Index == '')
+			{
+				$Index = strlen($LangItem);
+			}
 			$LangItem = substr($LangItem, 0, $Index);
 			$Index = strpos($LangItem, '-'); 
-			if ($Index == '') { $Index = strlen($LangItem); }
+			if ($Index == '')
+			{
+				$Index = strlen($LangItem);
+			}
 			$LangItem = substr($LangItem, 0, $Index);
-			switch($LangItem) {
-			case 'en':
-				$IsoLang = 'eng';
-				break;
-			case 'es':
-				$IsoLang = 'spa';
-				break;
-			case 'pt':
-				$IsoLang = 'por';
-				break;
+			switch($LangItem)
+			{
+				case 'en':
+					$IsoLang = 'eng';
+					break;
+				case 'es':
+					$IsoLang = 'spa';
+					break;
+				case 'pt':
+					$IsoLang = 'por';
+					break;
 			} //switch
 		} //if
 	} //foreach
 		
 	// Default Case
-	if ($IsoLang == '') { $IsoLang = 'eng'; }
+	if ($IsoLang == '')
+	{
+		$IsoLang = 'eng';
+	}
 	return $IsoLang;
 } // function
 
-function getParameter($prmName, $prmDefault='') {
+function getParameter($prmName, $prmDefault='')
+{
 	$prmValue = $prmDefault;
-	if (isset($_GET[$prmName])) {
+	if (isset($_GET[$prmName]))
+	{
 		$prmValue = $_GET[$prmName];
-	} elseif (isset($_POST[$prmName])) {
+	}
+	elseif (isset($_POST[$prmName]))
+	{
 		$prmValue = $_POST[$prmName];
 	}
 	$prmValue = trim($prmValue);
 	return $prmValue;
 }
 
-function showDebugMsg($sMsg) {
+function showDebugMsg($sMsg)
+{
 	echo $sMsg . "<br />\n";
 }
 
-function createIfNotExistDirectory($sMyPath) {
-	if (!file_exists($sMyPath)) {
+function createIfNotExistDirectory($sMyPath)
+{
+	if (!file_exists($sMyPath))
+	{
 		error_reporting(E_ALL & ~E_WARNING);
 		mkdir($sMyPath);
 		error_reporting(E_ALL);
 	}
 }
 
-function testMap($laypath) {
+function testMap($laypath)
+{
+	$iReturn = false;
 	if (file_exists($laypath .".shp") && file_exists($laypath .".dbf"))
-		return true;
-	return false;
+	{
+		$iReturn = true;
+	}
+	return $iReturn;
 }
 
 // Check if session is of a user..
-function checkUserSess() {
+function checkUserSess()
+{
+	$iReturn = false;
 	// NOTE: need a function checkSession in dicore
-	if (isset($us->UserId) && isset($us->sSessionId) &&
-			strlen($us->sSessionId) > 0)
+	if ( (isset($us->UserId)) && 
+	     (isset($us->sSessionId)) &&
+	     (strlen($us->sSessionId) > 0) )
+	{
 		if (strlen($us->UserId) > 0)
-			return true;
-	return false;
+		{
+			$iReturn = true;
+		}
+	}
+	return $iReturn;
 }
 
 // Check if session is of anonymous
-function checkAnonSess() {
-	if (isset($us->UserId) && isset($us->sSessionId) &&
-			strlen($us->sSessionId) > 0)
+function checkAnonSess()
+{
+	$iReturn = false;
+	if ( (isset($us->UserId)) && 
+	     (isset($us->sSessionId)) &&
+	     (strlen($us->sSessionId) > 0) )
+	{
 		if (strlen($us->UserId) == 0)
-			return true;
-	return false;
+		{
+			$iReturn = true;
+		}
+	}
+	return $iReturn;
 }
 
-function iserror ($val) {
+function iserror ($val)
+{
+	$iReturn = false;
 	if (is_numeric($val))
+	{
 		if ($val <= 0)
-			return true;
-	return false;
+		{
+			$iReturn = true;
+		}
+	}
+	return $iReturn;
 }
 	
-function showerror ($val) {
-	switch ($val) {
+function showerror ($val)
+{
+	switch ($val)
+	{
 		case ERR_UNKNOWN_ERROR:     $error = "Desconocido"; break;
 		case ERR_INVALID_COMMAND:   $error = "Comando inv&aacute;lido"; break;
 		case ERR_OBJECT_EXISTS:     $error = "Objeto ya existe"; break;
@@ -106,14 +152,16 @@ function showerror ($val) {
 	}
 	$res = "Error: $error";
 	// Very Serious Errors inmediatly notify to Portal Administrator.. 
-	if ($val == ERR_NO_CONNECTION || $val == ERR_NO_DATABASE) {
+	if ($val == ERR_NO_CONNECTION || $val == ERR_NO_DATABASE)
+	{
 		$res .= " (Automatic notification is required)";
 	}
 	return $res;
 }
 
 // To prevent display errors with strings containing cr,lf,quotes etc. remove them
-function str2js($str) {
+function str2js($str)
+{
 	$str2 = ereg_replace("[\r\n]", " \\n\\\n", $str);
 	$str2 = ereg_replace('"', '-', $str2);
 	$str2 = ereg_replace("'", "-", $str2);
@@ -123,25 +171,30 @@ function str2js($str) {
 }
 
 // Pseudo-random UUID according to RFC 4122 
-function uuid() {
+function uuid()
+{
 	return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
 			mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), 
 			mt_rand( 0, 0x0fff ) | 0x4000, mt_rand( 0, 0x3fff ) | 0x8000,
 			mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ) );
 }
 
-function fixPost($post) {
-	if (isset($post['QueryCustom'])) {
+function fixPost($post)
+{
+	if (isset($post['QueryCustom']))
+	{
 		$post['QueryCustom'] = stripslashes($post['QueryCustom']);
 	}
 }
 
-function microtime_float() {
+function microtime_float()
+{
     list($usec, $sec) = explode(" ", microtime());
     return ((float)$usec + (float)$sec);
 }
 
-function generatePasswd($length=6,$level=2){
+function generatePasswd($length=6,$level=2)
+{
 	list($usec, $sec) = explode(' ', microtime());
 	srand((float) $sec + ((float) $usec * 100000));
 	$validchars[1] = "0123456789abcdfghjkmnpqrstvwxyz";
@@ -150,10 +203,12 @@ function generatePasswd($length=6,$level=2){
 	
 	$password  = "";
 	$counter   = 0;
-	while ($counter < $length) {
+	while ($counter < $length)
+	{
 		$actChar = substr($validchars[$level], rand(0, strlen($validchars[$level])-1), 1);
 		// All character must be different
-		if (!strstr($password, $actChar)) {
+		if (!strstr($password, $actChar))
+		{
 			$password .= $actChar;
 			$counter++;
 		} //if
@@ -168,7 +223,10 @@ function showStandardNumber($value)
 	$v = trim($value);
 	$s = '';
 	$m = strlen($v)%3 - 1;
-	if ($m < 0) { $m = 2; }
+	if ($m < 0)
+	{
+		$m = 2;
+	}
 	for($i=0; $i<strlen($v); $i++)
 	{	
 		$s .= $v[$i];
@@ -209,7 +267,8 @@ function rrmdir($dir)
 function padNumber($prmValue, $prmLength)
 {
 	$value = $prmValue;
-	while(strlen($value) < $prmLength) {
+	while(strlen($value) < $prmLength)
+	{
 		$value = '0' . $value;
 	}
 	return $value;

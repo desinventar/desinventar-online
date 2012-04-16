@@ -93,14 +93,17 @@ class DIRegion extends DIObject
 		}
 	} // __construct
 	
-	public function addLanguageInfo($LangIsoCode) {
+	public function addLanguageInfo($LangIsoCode)
+	{
 		$this->createFields($this->sInfoTrans, $LangIsoCode);
 	}
 	
-	public function getTranslatableFields() {
+	public function getTranslatableFields()
+	{
 		// 2009-07-28 (jhcaiced) Build an array with translatable fields
 		$Translatable = array();
-		foreach (preg_split('#,#', $this->sInfoTrans) as $sItem) {
+		foreach (preg_split('#,#', $this->sInfoTrans) as $sItem)
+		{
 			$oItem = preg_split('#/#', $sItem);
 			$sFieldName = $oItem[0];
 			$sFieldType = $oItem[1];
@@ -109,7 +112,8 @@ class DIRegion extends DIObject
 		return $Translatable;
 	}
 
-	public function load() {
+	public function load()
+	{
 		$iReturn = ERR_NO_ERROR;
 		return $iReturn;
 	}
@@ -136,7 +140,8 @@ class DIRegion extends DIObject
 		return $iReturn;
 	}
 	
-	public function update() {
+	public function update()
+	{
 		$iReturn = $this->saveToXML();
 		$this->updateCore();
 		return $iReturn;
@@ -189,20 +194,24 @@ class DIRegion extends DIObject
 		return $iReturn;
 	}
 	
-	public function getLanguageList() {
+	public function getLanguageList()
+	{
 		$LangIsoCode = $this->get('LangIsoCode');
 		$ll = array('eng'=>'eng');
-		if ($LangIsoCode != 'eng') {
+		if ($LangIsoCode != 'eng')
+		{
 			$ll[$LangIsoCode] = $LangIsoCode;
 		}
 		return $ll;
 	}
 
 	// Read an specific InfoKey value from the table
-	public function getRegionInfoValue($prmInfoKey, $LangIsoCode='') {
+	public function getRegionInfoValue($prmInfoKey, $LangIsoCode='')
+	{
 		$sReturn = '';
 		$sReturn = $this->get($prmInfoKey);
-		if ($sReturn == '') {
+		if ($sReturn == '')
+		{
 			$sReturn = $this->get($prmInfoKey, $LangIsoCode);
 		}
 		return $sReturn;
@@ -261,15 +270,18 @@ class DIRegion extends DIObject
 		{
 			$Query = "SELECT MIN(DisasterBeginTime) AS MinDate, MAX(DisasterBeginTime) AS MaxDate FROM Disaster ".
 				"WHERE RecordStatus='PUBLISHED'";
-			foreach($this->session->q->dreg->query($Query) as $row) {
+			foreach($this->session->q->dreg->query($Query) as $row)
+			{
 				$DataMinDate = $row['MinDate'];
 				$DataMaxDate = $row['MaxDate'];
 			}
 			// 2010-01-21 (jhcaiced) Fix some weird cases in MinDate/MaxDate
-			if (substr($DataMinDate, 5, 2) == '00') {
+			if (substr($DataMinDate, 5, 2) == '00')
+			{
 				$DataMinDate = substr($DataMinDate, 0, 4) . '-01-01';
 			}
-			if (substr($DataMaxDate, 5, 2) > '12') {
+			if (substr($DataMaxDate, 5, 2) > '12')
+			{
 				$DataMaxDate = substr($DataMaxDate, 0, 4) . '-12-31';
 			}
 		
@@ -294,16 +306,19 @@ class DIRegion extends DIObject
 		return $a;
 	}
 	
-	public function updateMapArea() {
+	public function updateMapArea()
+	{
 		$iReturn = ERR_NO_ERROR;
 		$IsCRegion = $this->get('IsCRegion');
-		if ($IsCRegion > 0) {
+		if ($IsCRegion > 0)
+		{
 			$iReturn = ERR_NO_ERROR;
 			$MinX = 180; $MaxX = -180;
 			$MinY =  90; $MaxY = -90;
 			// Use information about each RegionItem to Calcule the Map Area
 			$Query = "SELECT * FROM RegionItem WHERE RegionId='" . $this->get('RegionId') . "'";
-			foreach ($this->q->core->query($Query) as $row) {
+			foreach ($this->q->core->query($Query) as $row)
+			{
 				$RegionItemId = $row['RegionItem'];
 				$r = new DIRegion($this->session, $RegionItemId);
 				$ItemMinX = $r->getRegionInfoValue('GeoLimitMinX');
@@ -317,7 +332,8 @@ class DIRegion extends DIObject
 				$r = null;
 			} //foreach
 			$this->q->setDBConnection($this->get('RegionId'));
-			if ($iReturn > 0) {
+			if ($iReturn > 0)
+			{
 				$this->set('GeoLimitMinX', $MinX);
 				$this->set('GeoLimitMaxX', $MaxX);
 				$this->set('GeoLimitMinY', $MinY);
@@ -327,9 +343,11 @@ class DIRegion extends DIObject
 		} //if
 	} //updateMapArea
 	
-	public static function buildRegionId($prmCountryIso) {
+	public static function buildRegionId($prmCountryIso)
+	{
 		$RegionId = '';
-		if ($prmCountryIso == '') {
+		if ($prmCountryIso == '')
+		{
 			$prmCountryIso = 'DESINV';
 		}
 		$prmTimestamp = date('YmdHis', time());
@@ -337,41 +355,54 @@ class DIRegion extends DIObject
 		return $RegionId;
 	} //buildRegionId
 	
-	public function setActive($prmValue) {
+	public function setActive($prmValue)
+	{
 		return $this->setBit($prmValue, CONST_REGIONACTIVE);
 	}
 
-	public function setPublic($prmValue) {
+	public function setPublic($prmValue)
+	{
 		return $this->setBit($prmValue, CONST_REGIONPUBLIC);
 	}
 
-	public function setBit($prmValue, $prmBit) {
+	public function setBit($prmValue, $prmBit)
+	{
 		$Value = (int)$this->get('RegionStatus');
-		if ($prmValue > 0) {
+		if ($prmValue > 0)
+		{
 			$Value = $Value | $prmBit;
-		} else {
+		}
+		else
+		{
 			$Value = $Value & ~$prmBit;
 		}
 		$this->set('RegionStatus', $Value);
 	}
 	
-	public static function renameRegion($oldRegionId, $newRegionId) {
+	public static function renameRegion($oldRegionId, $newRegionId)
+	{
 		
 	}
 	
-	public static function createRegionEntryFromDir($us, $dir, $reglabel) {
+	public static function createRegionEntryFromDir($us, $dir, $reglabel)
+	{
 		$iReturn = ERR_NO_ERROR;
 		$regexist = $us->q->checkExistsRegion($dir);
 		$regexist = 0;
 		$difile = CONST_DBREGIONDIR . '/' . $dir ."/desinventar.db";
-		if (strlen($dir) >= 4 && file_exists($difile) && !$regexist) {
-			if ($us->q->setDBConnection($dir)) {
+		if (strlen($dir) >= 4 && file_exists($difile) && !$regexist)
+		{
+			if ($us->q->setDBConnection($dir))
+			{
 				$data['RegionUserAdmin'] = "root";
-				foreach($us->q->dreg->query("SELECT InfoKey, InfoValue FROM Info", PDO::FETCH_ASSOC) as $row) {
+				foreach($us->q->dreg->query("SELECT InfoKey, InfoValue FROM Info", PDO::FETCH_ASSOC) as $row)
+				{
 					if ($row['InfoKey'] == "RegionId" || $row['InfoKey'] == "RegionLabel" || $row['InfoKey'] == "LangIsoCode " || 
 						$row['InfoKey'] == "CountryIso" || $row['InfoKey'] == "RegionOrder" || $row['InfoKey'] == "RegionStatus" || 
 						$row['InfoKey'] == "IsCRegion" || $row['InfoKey'] == "IsVRegion")
-							$data[$row['InfoKey']] = $row['InfoValue'];
+					{
+						$data[$row['InfoKey']] = $row['InfoValue'];
+					}
 				}
 				$data['RegionId'] = $dir;
 				if (!empty($reglabel))
@@ -379,7 +410,8 @@ class DIRegion extends DIObject
 				$r = new DIRegion($us, $data['RegionId']);
 				$r->setFromArray($data);
 				$iReturn = $r->insert();
-				if (!iserror($iReturn)) {
+				if (!iserror($iReturn))
+				{
 					$rol = $us->setUserRole($_POST['RegionInfo']['RegionUserAdmin'], 
 					                        $_POST['RegionInfo']['RegionId'],
 					                        'ADMINREGION');
@@ -447,7 +479,8 @@ class DIRegion extends DIObject
 		return $iReturn;
 	}
 	
-	public function toXML() {
+	public function toXML()
+	{
 		$iReturn = ERR_NO_ERROR;
 		$doc = new DomDocument('1.0','UTF-8');
 		$root = $doc->createElement('RegionInfo');
@@ -455,16 +488,21 @@ class DIRegion extends DIObject
 		$root->setAttribute('Version', '1.0');
 		
 		// General Info and Translations of Descriptions
-		foreach(array_keys($this->oField) as $section) {
-			if ($section == 'info') {
+		foreach(array_keys($this->oField) as $section)
+		{
+			if ($section == 'info')
+			{
 				$occ = $doc->createElement('General');
 				$occ = $root->appendChild($occ);
-			} else {
+			}
+			else
+			{
 				$occ = $doc->createElement('Description');
 				$occ = $root->appendChild($occ);
 				$occ->setAttribute('LangIsoCode', $section);
 			} 
-			foreach($this->oField[$section] as $key => $value) {
+			foreach($this->oField[$section] as $key => $value)
+			{
 				$child = $doc->createElement($key);
 				$child = $occ->appendChild($child);
 				$value = $doc->createTextNode($value);
@@ -477,94 +515,122 @@ class DIRegion extends DIObject
 		$sQuery = "SELECT * FROM GeoCarto ORDER BY GeoLevelId";
 		$occ = $doc->createElement('GeoCarto');
 		$occ = $root->appendChild($occ);
-		try {
-			foreach($this->session->q->dreg->query($sQuery) as $row) {
+		try
+		{
+			foreach($this->session->q->dreg->query($sQuery) as $row)
+			{
 				$level = $doc->createElement('GeoCartoItem');
 				$level = $occ->appendChild($level);
 				$level->setAttribute('GeoLevelId', $row['GeoLevelId']);
 				$level->setAttribute('LangIsoCode', $row['LangIsoCode']);
-				foreach(array('GeoLevelLayerFile','GeoLevelLayerName','GeoLevelLayerCode') as $field) {
+				foreach(array('GeoLevelLayerFile','GeoLevelLayerName','GeoLevelLayerCode') as $field)
+				{
 					$child = $doc->createElement($field);
 					$child = $level->appendChild($child);
 					$value = $doc->createTextNode($row[$field]);
 					$value = $child->appendChild($value);
 				} //foreach
 			} //foreach
-		} catch (Exception $e) {
+		}
+		catch (Exception $e)
+		{
 			$iReturn = ERR_NO_ERROR;
 		}
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			// Save to String...
 			$xml = $doc->saveXML();
-		} else {
+		}
+		else
+		{
 			$xml = '';
 		}
 		return $xml;
 	}
 	
-	public function getXMLFileName() {
+	public function getXMLFileName()
+	{
 		$filename = DBDIR . '/' . $this->get('RegionId') . '/info.xml';
 		return $filename;
 	}
 	
-	public function saveToXML($XMLFile='') {
+	public function saveToXML($XMLFile='')
+	{
 		$iReturn = ERR_NO_ERROR;
-		if ($XMLFile == '') {
+		if ($XMLFile == '')
+		{
 			$XMLFile = $this->getXMLFileName();
 		}
 		$xml = $this->toXML();
-		if ($xml != '') {
+		if ($xml != '')
+		{
 			$fh = fopen($XMLFile, 'w');
 			fwrite($fh, $this->toXML());
 			fclose($fh);
-		} else {
+		}
+		else
+		{
 			$iReturn = ERR_UNKNOWN_ERROR;
 		}
 		return $iReturn;
 	}
 	
-	public function loadFromXML($XMLFile = '') {
+	public function loadFromXML($XMLFile = '')
+	{
 		$iReturn = ERR_NO_ERROR;
-		if ($XMLFile == '') {
+		if ($XMLFile == '')
+		{
 			$XMLFile = $this->getXMLFileName();
 		}
-		if (! file_exists($XMLFile) ) {
+		if (! file_exists($XMLFile) )
+		{
 			$iReturn = ERR_UNKNOWN_ERROR;
 		}
 		
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			$doc = new DomDocument('1.0','UTF-8');
-			try {
+			try
+			{
 				$doc->load($XMLFile);
-			} catch (Exception $e) {
+			}
+			catch (Exception $e)
+			{
 				showErrorMsg($e->getCode() . ' ' . $e->getMessage());
 			}
-			foreach($doc->getElementsByTagName('General') as $tree) {
+			foreach($doc->getElementsByTagName('General') as $tree)
+			{
 				$section = 'info';
-				foreach($tree->childNodes as $node) {
+				foreach($tree->childNodes as $node)
+				{
 					$key = $node->nodeName;
 					$value = str_replace("\n",'', $node->nodeValue);
 					$value = str_replace("\r",'', $value);
-					if ($this->existField($key, $section)) {
+					if ($this->existField($key, $section))
+					{
 						$this->set($key, $value, $section);
 					}
 				}
 			} //foreach
 
 			$LangIsoCode = $this->get('LangIsoCode');
-			if ($LangIsoCode != 'eng') {
+			if ($LangIsoCode != 'eng')
+			{
 				$this->addLanguageInfo($LangIsoCode);
 			}
 
 			// Add Translated Information
-			foreach($doc->getElementsByTagName('Description') as $tree) {
+			foreach($doc->getElementsByTagName('Description') as $tree)
+			{
 				$LangIsoCode = $tree->getAttribute('LangIsoCode');
 				$section = $LangIsoCode;
 				$this->addLanguageInfo($section);
-				foreach($tree->childNodes as $node) {
+				foreach($tree->childNodes as $node)
+				{
 					$key = $node->nodeName;
 					$value = $node->nodeValue;
-					if ($this->existField($key, $section)) {
+					if ($this->existField($key, $section))
+					{
 						$this->set($key, $value, $section);
 					}
 				}

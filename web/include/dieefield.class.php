@@ -4,8 +4,10 @@
  (c) 1998-2012 Corporacion OSSO
 */
 
-class DIEEField extends DIRecord {
-	public function __construct($prmSession) {
+class DIEEField extends DIRecord
+{
+	public function __construct($prmSession)
+	{
 		$this->sTableName   = "EEField";
 		$this->sPermPrefix  = "EEFIELD";
 		$this->sFieldKeyDef = "EEFieldId/STRING";
@@ -26,27 +28,32 @@ class DIEEField extends DIRecord {
 		$this->set('EEFieldStatus', 3);
 		$this->set('EEFieldType', 'TEXT');
 		$this->set('EEFieldSize', 50);
-		if ($num_args >= 2) {
+		if ($num_args >= 2)
+		{
 			$prmEEFieldId = func_get_arg(1);
-			if ($prmEEFieldId != '') {
+			if ($prmEEFieldId != '')
+			{
 				$this->set('EEFieldId', $prmEEFieldId);
 			}
 			$this->load();
 		}
 	} // __construct
 
-	public function getMaxEEFieldId() {
+	public function getMaxEEFieldId()
+	{
 		$iMaxVal = 0;
 		$sQuery = "SELECT EEFieldId FROM " . $this->getTableName() . " ORDER BY EEFieldId DESC LIMIT 1";
 		$EEFieldId = 'EEF000';
-		foreach($this->q->dreg->query($sQuery) as $row) {
+		foreach($this->q->dreg->query($sQuery) as $row)
+		{
 			$EEFieldId = $row['EEFieldId'];
 		}
 		$iMaxVal = (int)substr($EEFieldId, 3);
 		return $iMaxVal;
 	} // function
 	
-	public function getNextEEFieldId() {
+	public function getNextEEFieldId()
+	{
 		$v = $this->getMaxEEFieldId();
 		$FieldName = "EEF" . $this->padNumber($v + 1, 3);
 		return $FieldName;
@@ -92,7 +99,7 @@ class DIEEField extends DIRecord {
 			$this->q->dreg->query($Query);
 		}
 		return $iReturn;
-	} //function
+	} #function
 
 	public function validateCreate($bStrict)
 	{
@@ -104,19 +111,20 @@ class DIEEField extends DIRecord {
 		}
 		
 		return $iReturn;
-	} //function
+	} #function
 
 	public function validateUpdate($bStrict)
 	{
 		$oReturn = parent::validateUpdate($bStrict);
 		$iReturn = ERR_NO_ERROR;
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			$iReturn = $this->validateUnique(-83, 'EEFieldLabel', true);
 		}
 		//$oReturn['Status'] = $iReturn;
 		$oReturn = $iReturn;
 		return $oReturn;
-	} //function
-} //class
+	} #function
+} #class
 
 </script>

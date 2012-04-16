@@ -130,7 +130,8 @@ class DIRegionDB extends DIRegion
 	{
 		$iReturn = ERR_NO_ERROR;
 		$query = "SELECT * FROM Sync WHERE SyncTable='Disaster'";
-		if ($prmRegionItemId != '') {
+		if ($prmRegionItemId != '')
+		{
 			$query .= "AND SyncURL LIKE '%" . $prmRegionItemId . "%'";
 		}
 		$list = array();
@@ -896,5 +897,5 @@ class DIRegionDB extends DIRegion
 		$iAnswer = $g->getMaxGeoLevel();
 		return $iAnswer;
 	}
-} //class
+} #class
 </script>

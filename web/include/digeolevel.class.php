@@ -4,8 +4,10 @@
  (c) 1998-2012 Corporacion OSSO
 */
 
-class DIGeoLevel extends DIRecord {
-	public function __construct($prmSession) {
+class DIGeoLevel extends DIRecord
+{
+	public function __construct($prmSession)
+	{
 		$this->sTableName   = "GeoLevel";
 		$this->sPermPrefix  = "GEOLEVEL";
 		$this->sFieldKeyDef = "GeoLevelId/INTEGER," .
@@ -21,14 +23,17 @@ class DIGeoLevel extends DIRecord {
 		$this->set("GeoLevelActive", 1);
 
 		$num_args = func_num_args();
-		if ($num_args >= 2) {
+		if ($num_args >= 2)
+		{
 			$prmGeoLevelId = func_get_arg(1);
 			$this->set('GeoLevelId', $prmGeoLevelId);
-			if ($num_args >= 3) {
+			if ($num_args >= 3)
+			{
 				$prmLangIsoCode = func_get_arg(2);
 				$this->set('LangIsoCode', $prmLangIsoCode);
 			}
-			if ($num_args >= 4) {
+			if ($num_args >= 4)
+			{
 				$prmGeoLevelName = func_get_arg(3);
 				$this->set('GeoLevelName', $prmGeoLevelName);
 			}
@@ -47,30 +52,36 @@ class DIGeoLevel extends DIRecord {
 		return $iMaxVal;
 	} // function
 
-	public function validateCreate() {
+	public function validateCreate()
+	{
 		$iReturn = 1;
 		$iReturn = $this->validateNotNull(-31, 'GeoLevelId');
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			$iReturn = $this->validatePrimaryKey(-32);
 		}
 		return $iReturn;
 	}
 
-	public function validateUpdate($bStrict) {
+	public function validateUpdate($bStrict)
+	{
 		$iReturn = parent::validateUpdate($bStrict);
 		$iReturn = $this->validateNotNull(-33, 'GeoLevelName');
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			$iReturn = $this->validateUnique(-34, 'GeoLevelName', true);
 		}
 		$this->status->status = $iReturn;
 		return $iReturn;
 	}
 
-	public function importFromCSV($cols, $values) {
+	public function importFromCSV($cols, $values)
+	{
 		$iReturn = parent::importFromCSV($cols, $values);
 		$this->set('GeoLevelId', $values[0]);
 		$this->set('GeoLevelName', $values[1]);
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			$this->status->status = $iReturn;
 		}
 		return $iReturn;

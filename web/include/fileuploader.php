@@ -15,7 +15,8 @@
 			$realSize = stream_copy_to_stream($input, $temp);
 			fclose($input);
 			
-			if ($realSize != $this->getSize()){            
+			if ($realSize != $this->getSize())
+			{            
 				return false;
 			}
 			
@@ -119,7 +120,8 @@
 		{
 			$val = trim($str);
 			$last = strtolower($str[strlen($str)-1]);
-			switch($last) {
+			switch($last)
+			{
 				case 'g': $val *= 1024;
 				case 'm': $val *= 1024;
 				case 'k': $val *= 1024;        
