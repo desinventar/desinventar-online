@@ -4,8 +4,10 @@
  (c) 1998-2012 Corporacion OSSO
 */
 
-class DISync extends DIRecord {
-	public function __construct($prmSession) {
+class DISync extends DIRecord
+{
+	public function __construct($prmSession)
+	{
 		$this->sTableName   = "Sync";
 		$this->sPermPrefix  = "ADMIN";
 		$this->sFieldKeyDef = "SyncId/STRING";
@@ -18,14 +20,16 @@ class DISync extends DIRecord {
 		parent::__construct($prmSession);
 		$this->set('SyncId', uuid());
 		$num_args = func_num_args();
-		if ($num_args >= 2) {
+		if ($num_args >= 2)
+		{
 			$prmSyncId = func_get_arg(1);
-			if ($prmSyncId != '') {
+			if ($prmSyncId != '')
+			{
 				$this->set('SyncId', $prmSyncId);
 				$this->load();
 			}
 		}
-	} // __construct
-}
+	} #__construct
+} #class
 
 </script>
