@@ -4,8 +4,10 @@
  (c) 1998-2012 Corporacion OSSO
 */
 
-class DIUser extends DIRecord {
-	public function __construct($prmSession) {
+class DIUser extends DIRecord
+{
+	public function __construct($prmSession)
+	{
 		$this->sTableName   = "User";
 		$this->sPermPrefix  = "ADMIN";
 		$this->sFieldKeyDef = "UserId/STRING";
@@ -21,21 +23,24 @@ class DIUser extends DIRecord {
 		parent::__construct($prmSession);
 		$num_args = func_num_args();
 		$this->setConnection("core");
-		if ($num_args >= 2) {
+		if ($num_args >= 2)
+		{
 			$prmUserId = func_get_arg(1);
-			if ($prmUserId != '') {
+			if ($prmUserId != '')
+			{
 				$this->set('UserId', $prmUserId);
 				$this->load();
 			}
 		}
 	} // __construct
 	
-	public function getSelectQuery() {
+	public function getSelectQuery()
+	{
 		$query = parent::getSelectQuery();
 		$query .= " OR (UserNotes LIKE '%(UserName=" . $this->get('UserId') . ")%')";
 		return $query;
 	}
 
-} //class
+} #class
 
 </script>

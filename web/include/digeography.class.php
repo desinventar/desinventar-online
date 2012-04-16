@@ -3,8 +3,10 @@
  DesInventar - http://www.desinventar.org
  (c) 1998-2012 Corporacion OSSO
 */
-class DIGeography extends DIRecord {
-	public function __construct($prmSession) {
+class DIGeography extends DIRecord
+{
+	public function __construct($prmSession)
+	{
 		$this->sTableName   = "Geography";
 		$this->sPermPrefix  = "GEOGRAPHY";
 		$this->sFieldKeyDef = "GeographyId/STRING," .
@@ -20,11 +22,13 @@ class DIGeography extends DIRecord {
 		                      "RecordUpdate/DATETIME";
 		parent::__construct($prmSession);
 		$num_args = func_num_args();
-		if ($num_args >= 2) {
+		if ($num_args >= 2)
+		{
 			$prmGeographyId = func_get_arg(1);
 			$this->set('GeographyId', $prmGeographyId);
 			$this->setGeographyLevel();
-			if ($num_args >= 3) {
+			if ($num_args >= 3)
+			{
 				$prmLangIsoCode = func_get_arg(2);
 				$this->set('LangIsoCode', $prmLangIsoCode);
 			} //if
@@ -32,76 +36,90 @@ class DIGeography extends DIRecord {
 		} //if
 	} // __construct
 
-	public static function existId($prmSession, $prmGeographyId) {
+	public static function existId($prmSession, $prmGeographyId)
+	{
 		$bFound = 0;
 		$LangIsoCode = $prmSession->q->getDBInfoValue('LangIsoCode');
 		$Query= "SELECT * FROM Geography WHERE GeographyId='" . $prmGeographyId . "' " . 
 		        " AND LangIsoCode='" . $LangIsoCode . "'";
-		foreach($prmSession->q->dreg->query($Query) as $row) {
+		foreach($prmSession->q->dreg->query($Query) as $row)
+		{
 			$bFound = 1;
 		}
 		return $bFound;
 	}
 	
-	public static function getNameById($prmSession, $prmGeographyId) {
+	public static function getNameById($prmSession, $prmGeographyId)
+	{
 		$GeographyName = '';
 		$LangIsoCode = $prmSession->getDBInfoValue('LangIsoCode');
 		$Query= "SELECT * FROM Geography WHERE GeographyId='" . $prmGeographyId . "' " . 
 		        " AND LangIsoCode='" . $LangIsoCode . "'";
-		foreach($prmSession->q->dreg->query($Query) as $row) {
+		foreach($prmSession->q->dreg->query($Query) as $row)
+		{
 			$GeographyName = $row['GeographyName'];
 		}
 		return $GeographyName;
 	}
 		
-	public static function getIdByCode($prmSession, $prmGeographyCode) {
+	public static function getIdByCode($prmSession, $prmGeographyCode)
+	{
 		$GeographyId = '';
 		$LangIsoCode = $prmSession->getDBInfoValue('LangIsoCode');
 		$sQuery= "SELECT * FROM Geography WHERE GeographyCode='" . $prmGeographyCode . "' " . 
 		         " AND LangIsoCode='" . $LangIsoCode . "'";
-		foreach($prmSession->q->dreg->query($sQuery) as $row) {
+		foreach($prmSession->q->dreg->query($sQuery) as $row)
+		{
 			$GeographyId = $row['GeographyId'];
 		}
 		return $GeographyId;
 	}
 	
-	public static function loadByCode($prmSession, $prmGeographyCode) {
+	public static function loadByCode($prmSession, $prmGeographyCode)
+	{
 		$g = null;
 		$GeographyId = self::getIdByCode($prmSession, $prmGeographyCode);
 		$g = new self($prmSession, $GeographyId);
 		return $g;
 	}
 	
-	public static function getIdByName($prmSession, $prmGeographyName, $prmParentId) {
+	public static function getIdByName($prmSession, $prmGeographyName, $prmParentId)
+	{
 		$GeographyId = '';
 		$LangIsoCode = $prmSession->getDBInfoValue('LangIsoCode');
 		$Query= 'SELECT * FROM Geography WHERE GeographyName LIKE "' . $prmGeographyName . '" ' . 
 		        ' AND LangIsoCode="' . $LangIsoCode . '"';
-		if ($prmParentId != '') {
+		if ($prmParentId != '')
+		{
 			$MinGeographyLevel = strlen($prmParentId)/5 - 1;
 			$Query .= ' AND GeographyId LIKE "' . $prmParentId . '%" AND GeographyLevel > ' . $MinGeographyLevel;
 		}
 		$Query .= ' ORDER BY GeographyLevel DESC';
-		foreach($prmSession->q->dreg->query($Query) as $row) {
+		foreach($prmSession->q->dreg->query($Query) as $row)
+		{
 			$GeographyId = $row['GeographyId'];
 		}
 		return $GeographyId;
 	}
 	
-	public static function loadByName($prmSession, $prmGeographyName, $prmParentId) {
+	public static function loadByName($prmSession, $prmGeographyName, $prmParentId)
+	{
 		$g = null;
 		$GeographyId = self::getIdByName($prmSession, $prmGeographyName, $prmParentId);
-		if ($GeographyId != '') {
+		if ($GeographyId != '')
+		{
 			$g = new self($prmSession, $GeographyId);
 		}
 		return $g;
 	}
 
-	public function buildGeographyId($prmMyParentId) {
+	public function buildGeographyId($prmMyParentId)
+	{
 		$iGeographyLevel = strlen($prmMyParentId)/5;
 		$sQuery = "SELECT * FROM Geography WHERE GeographyId LIKE '" . $prmMyParentId . "%' AND LENGTH(GeographyId)=" . ($iGeographyLevel + 1) * 5;
 		$TmpStr = '';
-		foreach($this->q->dreg->query($sQuery) as $row) {
+		foreach($this->q->dreg->query($sQuery) as $row)
+		{
 			$TmpStr = substr($row['GeographyId'], $iGeographyLevel * 5, 5);
 		}
 		$TmpStr = $this->padNumber((int)$TmpStr + 1, 5);
@@ -125,15 +143,18 @@ class DIGeography extends DIRecord {
 		return $answer;
 	}
 	
-	public function setGeographyLevel() {
+	public function setGeographyLevel()
+	{
 		$iGeographyLevel = (strlen($this->get('GeographyId'))/5) - 1;
 		$this->set('GeographyLevel', $iGeographyLevel);
 	}
 
-	public function buildGeographyFQName() {
+	public function buildGeographyFQName()
+	{
 		$FQName = $this->get('GeographyName');
 		$GeographyLevel = $this->get('GeographyLevel');
-		if ($GeographyLevel > 0) {
+		if ($GeographyLevel > 0)
+		{
 			$ParentId = substr($this->get('GeographyId'), 0, $GeographyLevel*5);
 			$g = new DIGeography($this->session, $ParentId);
 			$FQName = $g->get('GeographyFQName') . '/' . $FQName;
@@ -141,17 +162,20 @@ class DIGeography extends DIRecord {
 		return $FQName;
 	}
 	
-	public function setGeographyFQName() {
+	public function setGeographyFQName()
+	{
 		$FQName = $this->buildGeographyFQName();
 		$this->set('GeographyFQName', $FQName);
 	}
 	
-	public function saveGeographyFQName() {
+	public function saveGeographyFQName()
+	{
 		$this->set('GeographyFQName', $this->buildGeographyFQName());
 		$query = "UPDATE Geography SET GeographyFQName=" . '"' . $this->get('GeographyFQName') . '"' . " WHERE GeographyId='" . $this->get('GeographyId') . "'";
 		$this->q->dreg->query($query);
 		$query = "SELECT * FROM Geography WHERE GeographyId LIKE '" . $this->get('GeographyId') . "%' AND GeographyLevel =" . ((int)$this->get('GeographyLevel') + 1) . " ORDER BY GeographyLevel,GeographyId;";
-		foreach($this->q->dreg->query($query) as $row) {
+		foreach($this->q->dreg->query($query) as $row)
+		{
 			$g = new DIGeography($this->session, $row['GeographyId']);
 			$g->saveGeographyFQName();
 		} //foreach
@@ -236,7 +260,8 @@ class DIGeography extends DIRecord {
 		return $iReturn;
 	}
 	
-	public function importFromCSV($cols, $values) {
+	public function importFromCSV($cols, $values)
+	{
 		$iReturn = parent::importFromCSV($cols, $values);
 		$this->set('GeographyLevel', $values[0]);
 		$this->set('GeographyCode',  $values[1]);
@@ -253,17 +278,22 @@ class DIGeography extends DIRecord {
 			$ParentCode = $values[3];
 			$GeographyId = '';
 			$p = self::loadByCode($this->session, $this->get('GeographyCode'));
-			if (! is_null($p)) {
+			if (! is_null($p))
+			{
 				$GeographyId = $p->get('GeographyId');
 			}
-			if ($GeographyId != '') {
+			if ($GeographyId != '')
+			{
 				// This Geography Code Already Exists, return error
 				$oReturn['Error'][] = -1;
-			} else {
+			}
+			else
+			{
 				// Try to locate a parent for this item
 				$ParentGeographyId = '';
 				$p = self::loadByCode($this->session, $ParentCode);
-				if (! is_null($p)) {
+				if (! is_null($p))
+				{
 					$ParentGeographyId = $p->get('GeographyId');
 				}
 				$this->setGeographyId($ParentGeographyId);
@@ -273,33 +303,45 @@ class DIGeography extends DIRecord {
 		return $iReturn;
 	}
 	
-	public static function moveNodeTo($prmSession,$prmGeographyIdPrefix,$prmNewGeographyIdPrefix,$prmGeographyCodePrefix,$prmNewGeographyCodePrefix,$withChildren) {
+	public static function moveNodeTo($prmSession,$prmGeographyIdPrefix,
+	                                  $prmNewGeographyIdPrefix,$prmGeographyCodePrefix,
+	                                  $prmNewGeographyCodePrefix,$withChildren)
+	{
 		/* Move geography to a different parent node, updates 
 		   GeographyId and associated Disaster records
 		*/		
 		$iReturn = ERR_NO_ERROR;
-		if ($iReturn > 0) {
-			if ($withChildren) {
+		if ($iReturn > 0)
+		{
+			if ($withChildren)
+			{
 				$Query = "SELECT * FROM Geography WHERE GeographyId LIKE '" . $prmGeographyIdPrefix . "%'";
-			} else {
+			}
+			else
+			{
 				$Query = "SELECT * FROM Geography WHERE GeographyId='" . $prmGeographyIdPrefix . "'";
 			}
-			foreach($prmSession->q->dreg->query($Query) as $row) {
+			foreach($prmSession->q->dreg->query($Query) as $row)
+			{
 				$GeographyId = $row['GeographyId'];
 				$newGeographyId = $GeographyId;
 				
-				if ($prmNewGeographyIdPrefix != '') {
+				if ($prmNewGeographyIdPrefix != '')
+				{
 					$newGeographyId = $prmNewGeographyIdPrefix . substr($GeographyId,strlen($prmNewGeographyIdPrefix));
 				
 					// New Id must not exist in database...
 					$bExist = self::existId($prmSession, $newGeographyId);
-					if ($bExist) {
+					if ($bExist)
+					{
 						$iReturn = ERR_UNKNOWN_ERROR;
 					}
 				}
-				if ($iReturn > 0) {
+				if ($iReturn > 0)
+				{
 					$g = new DIGeography($prmSession, $GeographyId);
-					if ($GeographyId != $newGeographyId) {
+					if ($GeographyId != $newGeographyId)
+					{
 						$Query = "UPDATE Geography SET GeographyId='" . $newGeographyId . "' WHERE GeographyId='" . $GeographyId . "'";
 						$prmSession->q->dreg->query($Query);
 						$Query = "UPDATE Disaster SET GeographyId='" . $newGeographyId . "' WHERE GeographyId='" . $GeographyId . "'";

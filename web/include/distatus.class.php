@@ -87,5 +87,5 @@ class DIStatus
 			echo $line . "\n";			
 		}
 	}
-} //class
+} #class
 </script>
