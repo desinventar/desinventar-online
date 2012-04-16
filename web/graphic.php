@@ -107,7 +107,8 @@ if ($GraphCommand != '')
 			{
 				$ele[] = $prmGraph['Period'] .'|'. $itm;
 			}
-		} elseif (substr($itm, 2, 11) == 'GeographyId')
+		}
+		elseif (substr($itm, 2, 11) == 'GeographyId')
 		{
 			$gl = explode('_', $itm);
 			$ele[] = $gl[1] .'|'. $gl[0];// '0|$itm'; 
