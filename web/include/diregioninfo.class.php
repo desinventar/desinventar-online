@@ -4,8 +4,10 @@
  (c) 1998-2012 Corporacion OSSO
 */
 
-class DIRegionInfo {
-	public function __construct($prmRegionId='',$prmXMLFile='') {
+class DIRegionInfo
+{
+	public function __construct($prmRegionId='',$prmXMLFile='')
+	{
 		$this->info = array('Info'        => array(),
 		                    'Description' => array(),
 		                    'GeoCarto'    => array()
@@ -13,43 +15,55 @@ class DIRegionInfo {
 		$this->RegionId = '';
 		$this->XMLFile = '';
 		$num_args = func_num_args();
-		if ($num_args >= 1) {
+		if ($num_args >= 1)
+		{
 			$this->RegionId = $prmRegionId;
-			if ($this->RegionId != '') {
+			if ($this->RegionId != '')
+			{
 				$this->XMLFile = $this->getRegionXMLFileName();
 			}
-			if ($num_args >= 2) {
+			if ($num_args >= 2)
+			{
 				$this->XMLFile = $prmXMLFile;
 			}
 		}			
 	} //__construct
 	
-	public function set($key, $value, $section='') {
-		if ($section == '') {
+	public function set($key, $value, $section='')
+	{
+		if ($section == '')
+		{
 			$section = 'Info';
 		}
 		$this->info[$section][$key] = $value;
 	}
 
-	public function getRegionXMLFileName() {
+	public function getRegionXMLFileName()
+	{
 		$filename = DBDIR . '/' . $this->RegionId . '/info.xml';
 		return $filename;
 	}
 
-	public function loadFromXML($prmXMLFile = '') {
+	public function loadFromXML($prmXMLFile = '')
+	{
 		$iReturn = ERR_NO_ERROR;
-		if ($prmXMLFile == '') {
+		if ($prmXMLFile == '')
+		{
 			$prmXMLFile = $this->XMLFile;
 		}
-		if (! file_exists($prmXMLFile) ) {
+		if (! file_exists($prmXMLFile) )
+		{
 			$iReturn = ERR_UNKNOWN_ERROR;
 		}
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			$doc = new DomDocument('1.0','UTF-8');
 			$doc->load($prmXMLFile);
-			foreach($doc->getElementsByTagName('General') as $tree) {
+			foreach($doc->getElementsByTagName('General') as $tree)
+			{
 				$section = 'Info';
-				foreach($tree->childNodes as $node) {
+				foreach($tree->childNodes as $node)
+				{
 					$key = $node->nodeName;
 					$value = $node->nodeValue;
 					echo $key . "\n";
@@ -58,15 +72,18 @@ class DIRegionInfo {
 			} //foreach
 			/*
 			// Add Translated Information
-			foreach($doc->getElementsByTagName('Description') as $tree) {
+			foreach($doc->getElementsByTagName('Description') as $tree)
+			{
 				$LangIsoCode = $tree->getAttribute('LangIsoCode');
 				$section = $LangIsoCode;
 				$this->addLanguageInfo($section);
-				foreach($tree->childNodes as $node) {
+				foreach($tree->childNodes as $node)
+				{
 					$key = $node->nodeName;
 					$value = $node->nodeValue;
 					//echo $node->nodeName . ' => ' . $node->nodeValue . "\n";
-					if ($this->existField($key, $section)) {
+					if ($this->existField($key, $section))
+					{
 						$this->set($key, $value, $section);
 					}
 				}
@@ -76,7 +93,8 @@ class DIRegionInfo {
 		return $iReturn;
 	} //function
 
-	public function toXML() {
+	public function toXML()
+	{
 		$iReturn = ERR_NO_ERROR;
 		$doc = new DomDocument('1.0','UTF-8');
 		$root = $doc->createElement('RegionInfo');
@@ -84,16 +102,21 @@ class DIRegionInfo {
 		$root->setAttribute('Version', '1.0');
 		
 		// General Info and Translations of Descriptions
-		foreach(array_keys($this->oField) as $section) {
-			if ($section == 'info') {
+		foreach(array_keys($this->oField) as $section)
+		{
+			if ($section == 'info')
+			{
 				$occ = $doc->createElement('General');
 				$occ = $root->appendChild($occ);
-			} else {
+			}
+			else
+			{
 				$occ = $doc->createElement('Description');
 				$occ = $root->appendChild($occ);
 				$occ->setAttribute('LangIsoCode', $section);
 			} 
-			foreach($this->oField[$section] as $key => $value) {
+			foreach($this->oField[$section] as $key => $value)
+			{
 				$child = $doc->createElement($key);
 				$child = $occ->appendChild($child);
 				$value = $doc->createTextNode($value);
@@ -106,42 +129,55 @@ class DIRegionInfo {
 		$sQuery = "SELECT * FROM GeoCarto ORDER BY GeoLevelId";
 		$occ = $doc->createElement('GeoCarto');
 		$occ = $root->appendChild($occ);
-		try {
-			foreach($this->q->dreg->query($sQuery) as $row) {
+		try
+		{
+			foreach($this->q->dreg->query($sQuery) as $row)
+			{
 				$level = $doc->createElement('GeoCartoItem');
 				$level = $occ->appendChild($level);
 				$level->setAttribute('GeoLevelId', $row['GeoLevelId']);
 				$level->setAttribute('LangIsoCode', $row['LangIsoCode']);
-				foreach(array('GeoLevelLayerFile','GeoLevelLayerName','GeoLevelLayerCode') as $field) {
+				foreach(array('GeoLevelLayerFile','GeoLevelLayerName','GeoLevelLayerCode') as $field)
+				{
 					$child = $doc->createElement($field);
 					$child = $level->appendChild($child);
 					$value = $doc->createTextNode($row[$field]);
 					$value = $child->appendChild($value);
 				} //foreach
 			} //foreach
-		} catch (Exception $e) {
+		}
+		catch (Exception $e)
+		{
 			$iReturn = ERR_UNKNOWN_ERROR;
 		}
-		if ($iReturn > 0) {
+		if ($iReturn > 0)
+		{
 			// Save to String...
 			$xml = $doc->saveXML();
-		} else {
+		}
+		else
+		{
 			$xml = '';
 		}
 		return $xml;
 	}
 	
-	public function saveToXML($filename='') {
+	public function saveToXML($filename='')
+	{
 		$iReturn = ERR_NO_ERROR;
-		if ($filename == '') {
+		if ($filename == '')
+		{
 			$filename = $this->getXMLFileName();
 		}
 		$xml = $this->toXML();
-		if ($xml != '') {
+		if ($xml != '')
+		{
 			$fh = fopen($filename, 'w');
 			fwrite($fh, $this->toXML());
 			fclose($fh);
-		} else {
+		}
+		else
+		{
 			$iReturn = ERR_UNKNOWN_ERROR;
 		}
 		return $iReturn;
