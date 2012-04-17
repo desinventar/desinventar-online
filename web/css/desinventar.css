@@ -452,10 +452,6 @@ td a.RegionLink {
 	max-width:400px;
 	height:100%;
 }
-.clsDatabaseEvents {
-	max-width:600px;
-	height:100%;
-}
 .clsGeolevels {
 	max-width:600px;
 	width:100%;
@@ -578,4 +574,18 @@ p.right {
 }
 table.QueryCustom {
 	width:100%;
+}
+div.DatabaseEvents {
+	max-width:600px;
+	height:100%;
+}
+div.DatabaseEvents table.Edit {
+	width:80%;
+}
+div.DatabaseCauses {
+	max-width:600px;
+	height:100%;
+}
+div.DatabaseCauses table.Edit {
+	width:80%;
 }
