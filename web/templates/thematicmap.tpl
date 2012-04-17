@@ -61,7 +61,7 @@
 		<input type="hidden" id="prmMapMaxY"     value="{-$maxy-}"/>
 		<input type="hidden" id="prmMapServer"   value="{-$mps-}"/>
 		<input type="hidden" id="prmMapBase"     value="{-$basemap-}"/>
-		<form class="MapSave" method="post" action="">
+		<form class="MapSave" method="post" action="#">
 			<input type="hidden" class="Cmd"         name="cmd"                  value="export" />
 			<input type="hidden" class="Extent"      name="options[extent]"      value="" />
 			<input type="hidden" class="Layers"      name="options[layers]"      value="" />

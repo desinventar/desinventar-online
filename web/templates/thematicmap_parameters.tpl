@@ -7,7 +7,7 @@
 	</div>
 	<div id="map-cfg" class="ViewMapParams mainblock">
 		<div id="colorpicker201" class="colorpicker201"></div>
-		<form id="CM" method="post" action="">
+		<form id="CM" method="post" action="#">
 			<table class="conf">
 				<tr class="top">
 					<td>

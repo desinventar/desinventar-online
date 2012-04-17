@@ -81,7 +81,7 @@
 	<div class="Edit" style="display:block; width:500px;">
 		<br />
 		<h3>{-#msgGeography_Edit#-}</h3>
-		<form class="Edit" method="post" action="">
+		<form class="Edit" method="post" action="#">
 			{-#msgGeography_Code#-}<b style="color:darkred;">*</b>
 			<input class="GeographyCode" name="GeographyCode" type="text" 
 				class="line" tabindex="1" style="width:400px;" />

@@ -6,7 +6,7 @@
 		{-#msgViewData#-}
 	</div>
 	<div id="divViewDataParamsContent" class="ViewDataParams mainblock">
-		<form id="CD" method="post" action="">
+		<form id="CD" method="post" action="#">
 			{-#sresxpage#-}
 			<select id="_D+SQL_LIMIT" name="_D+SQL_LIMIT" class="line">
 				<option value="20">20</option>
