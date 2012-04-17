@@ -6,23 +6,33 @@
 		<table class="center" style="margin-top:1px;">
 			<tr>
 				<td class="right">
-					{-#tuser#-}
+					<div class="right">
+						{-#tuser#-}
+					</div>
 				</td>
 				<td>
-					<input type="text" id="fldUserId" name="userid" value="" size="10" class="f" />
+					<div class="left">
+						<input type="text" id="fldUserId" name="userid" value="" size="10" class="f" />
+					</div>
 				</td>
 			</tr>
 			<tr>
 				<td class="right">
-					{-#tpassword#-}
+					<div class="right">
+						{-#tpassword#-}
+					</div>
 				</td>
 				<td>
-					<input type="password" name="password" id="fldUserPasswd" value="" size="8" class="f" />
+					<div class="left">
+						<input type="password" name="password" id="fldUserPasswd" value="" size="10" class="f" />
+					</div>
 				</td>
 			</tr>
 			<tr>
 				<td class="right" colspan="2">
-					<a class="button" id="btnUserLoginSend"><span>{-#benter#-}</span></a>&nbsp;&nbsp;
+					<br />
+					<a class="button Send"  ><span>{-#benter#-}</span></a>&nbsp;&nbsp;
+					<a class="button Cancel"><span>{-#bcancel#-}</span></a>&nbsp;&nbsp;
 				</td>
 			</tr>
 		</table>

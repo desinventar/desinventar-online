@@ -7445,16 +7445,23 @@ function onReadyUserLogin()
 		jQuery('body').trigger('cmdWindowReload');
 	});
 	
-	jQuery("#btnUserLoginSend").click(function() {
+	jQuery('div.UserLogin').on('click', 'a.Send', function(e) {
 		jQuery('#frmUserLogin').trigger('submit');
-		return false;
+		e.stopPropagation();
+	}).on('click', 'a.Cancel', function(e) {
+		var w = Ext.getCmp('wndUserLogin');
+		if (w != undefined) 
+		{
+			w.hide();
+		}
+		e.stopPropagation();
 	});
 
 	jQuery('#fldUserPasswd').keypress(function(e) {
 		var code = (e.keyCode ? e.keyCode : e.which);
 		if (code == 13)
 		{
-			jQuery('#btnUserLoginSend').trigger('click');
+			jQuery('div.UserLogin a.Send').trigger('click');
 		}
 	});
 
