@@ -25,7 +25,7 @@
 				</tr>
 			</table>
 			<div class="fixw center">
-				<a input class="RegionStatus" type="hidden" value="0" />
+				<input class="RegionStatus" type="hidden" value="0" />
 				<a class="button btnSave"><span>{-#msgDatabaseUsers_Save#-}</span></a>
 				<a class="button btnCancel"><span>{-#msgDatabaseUsers_Cancel#-}</span></a>
 			</div>
