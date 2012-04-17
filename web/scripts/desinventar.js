@@ -625,7 +625,7 @@ function onReadyDatabaseCauses()
 		doDatabaseCausesPopulateLists();
 	});
 
-	jQuery('.clsDatabaseCausesStatus').hide();
+	jQuery('div.DatabaseCauses span.status').hide();
 
 	jQuery('#tbodyDatabaseCauses_CauseListCustom,#tbodyDatabaseCauses_CauseListDefault').on('click', 'tr', function(event) {
 		jQuery('#fldDatabaseCauses_CauseId').val(jQuery('.CauseId',this).text());
@@ -685,7 +685,7 @@ function onReadyDatabaseCauses()
 			jQuery('#msgDatabaseCauses_ErrorEmtpyFields').show();
 			setTimeout(function () {
 				jQuery('#fldDatabaseCauses_CauseName').unhighlight();
-				jQuery('.clsDatabaseCausesStatus').hide();
+				jQuery('div.DatabaseCauses span.status').hide();
 			}, 2500);
 			bContinue = false;
 		}
@@ -724,7 +724,7 @@ function onReadyDatabaseCauses()
 						}
 					}					
 					setTimeout(function () {
-						jQuery('.clsDatabaseCausesStatus').hide();
+						jQuery('div.DatabaseCauses span.status').hide();
 					}, 2500);
 				},
 				'json'
@@ -1008,7 +1008,7 @@ function onReadyDatabaseEvents()
 		doDatabaseEventsPopulateLists();
 	});
 
-	jQuery('.clsDatabaseEventsStatus').hide();
+	jQuery('div.DatabaseEvents span.status').hide();
 
 	jQuery('#tbodyDatabaseEvents_EventListCustom,#tbodyDatabaseEvents_EventListDefault').on('click', 'tr', function(event) {
 		jQuery('#fldDatabaseEvents_EventId').val(jQuery('.EventId',this).text());
@@ -1068,7 +1068,7 @@ function onReadyDatabaseEvents()
 			jQuery('#msgDatabaseEvents_ErrorEmtpyFields').show();
 			setTimeout(function () {
 				jQuery('#fldDatabaseEvents_EventName').unhighlight();
-				jQuery('.clsDatabaseEventsStatus').hide();
+				jQuery('div.DatabaseEvents span.status').hide();
 			}, 2500);
 			bContinue = false;
 		}
@@ -1107,7 +1107,7 @@ function onReadyDatabaseEvents()
 						}
 					}					
 					setTimeout(function () {
-						jQuery('.clsDatabaseEventsStatus').hide();
+						jQuery('div.DatabaseEvents span.status').hide();
 					}, 2500);
 				},
 				'json'
@@ -2601,7 +2601,6 @@ function onReadyDatacards()
 	});
 
 	jQuery('#DICard').unbind('submit').submit(function() {
-		jQuery('#DatacardCommand').val(jQuery('#_CMD').val());
 		jQuery('#RecordAuthor').val(jQuery('#desinventarUserId').val());
 		displayDatacardStatusMsg('');
 		var params = jQuery(this).serializeObject();
@@ -2732,7 +2731,7 @@ function onReadyDatacards()
 
 	// Validation of DisasterBeginTime and Suggest Serial for New Datacards
 	jQuery('#DisasterBeginTime0').blur(function() {
-		cmd = jQuery('#_CMD').val();
+		cmd = jQuery('#DatacardCommand').val();
 		if (cmd == 'insertDICard')
 		{
 			doDatacardSuggestSerial();
@@ -3462,7 +3461,7 @@ function doDatacardClear()
 {
 	jQuery('#DisasterId').val();
 	$('DICard').reset();
-	jQuery('#_CMD').val('insertDICard');
+	jQuery('#DatacardCommand').val('insertDICard');
 	jQuery('#cardsRecordNumber').val(0);
 	jQuery('div.Datacard table.EffectListPeople .clsEffectNumeric').each(function() {
 		jQuery(this).val(0);
@@ -3522,7 +3521,7 @@ function doDatacardEdit()
 				DisableEnableForm($('DICard'), false);
 				jQuery('#PrevDisasterSerial').val(jQuery('#DisasterSerial').val());
 				jQuery('#DisasterBeginTime0').focus();
-				jQuery('#_CMD').val('updateDICard');
+				jQuery('#DatacardCommand').val('updateDICard');
 				displayDatacardStatusMsg('msgDatacardFill');
 				changeOptions('btnDatacardEdit');
 
@@ -3548,7 +3547,7 @@ function doDatacardEdit()
 function doDatacardSave()
 {
 	var bContinue = 1;
-	var cmd = jQuery('#_CMD').val();
+	var cmd = jQuery('#DatacardCommand').val();
 	var DisasterSerial = jQuery('#DisasterSerial').val();
 	var PrevDisasterSerial = jQuery('#PrevDisasterSerial').val();
 	var Status = jQuery('#DICard #Status').val();
@@ -4442,8 +4441,6 @@ function doGetRegionInfo(RegionId)
 			$('UserActive').checked = false;
 		}
 	}
-
-	var winopt = 'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no';
 
 	function setfocus(a_field_id)
 	{
@@ -7305,19 +7302,19 @@ function genColors() {
 
 function onReadyUserAccount()
 {
-	jQuery('form.UserChangePasswd .status').hide();
+	jQuery('div.UserAccount .status').hide();
 
-	jQuery('form.UserChangePasswd .btnSubmit').click(function() {
-		jQuery('form.UserChangePasswd').trigger('submit');
+	jQuery('div.UserAccount .btnSubmit').click(function() {
+		jQuery('div.UserAccount').trigger('submit');
 		return false;
 	});
 	
-	jQuery('form.UserChangePasswd .btnCancel').click(function() {
+	jQuery('div.UserAccount .btnCancel').click(function() {
 		jQuery('body').trigger('cmdUserAccountHide');
 		return false;
 	});
 
-	jQuery('form.UserChangePasswd').submit(function() {
+	jQuery('div.UserAccount').submit(function() {
 		var form = jQuery(this);
 		var UserPasswd = jQuery('.UserPasswd', form).val();
 		var UserPasswd2 = jQuery('.UserPasswd2', form).val();
@@ -7326,13 +7323,13 @@ function onReadyUserAccount()
 		jQuery('.status', form).hide();
 		if (UserPasswd == '' || UserPasswd2 == '' || UserPasswd3 == '')
 		{
-			jQuery('#msgEmptyFields', form).show();
+			jQuery('div.UserAccount span.msgEmptyFields').show();
 			bContinue = false;
 		}
 		
 		if (bContinue && (UserPasswd2 != UserPasswd3) )
 		{
-			jQuery('#msgPasswdDoNotMatch', form).show();
+			jQuery('div.UserAccount span.msgPasswdDoNotMatch').show();
 			bContinue = false;
 		}
 		
@@ -7352,11 +7349,11 @@ function onReadyUserAccount()
 			    	if (parseInt(data.Status) > 0)
 			    	{
 						doUserAccountReset();
-						jQuery('#msgPasswdUpdated', form).show();
+						jQuery('div.UserAccount span.msgPasswdUpdated').show();
 					}
 					else
 					{
-						jQuery('#msgInvalidPasswd', form).show();
+						jQuery('div.UserAccount span.msgInvalidPasswd').show();
 					}
 					setTimeout(function() {
 						jQuery('.status',form).hide();
@@ -7401,11 +7398,11 @@ function onReadyUserAccount()
 
 function doUserAccountReset()
 {
-	var form = jQuery('form.UserChangePasswd');
-	jQuery('.status', form).hide();
-	jQuery('.UserPasswd', form).val('');
-	jQuery('.UserPasswd2', form).val('');
-	jQuery('.UserPasswd3', form).val('');
+	var div = jQuery('div.UserAccount');
+	jQuery('.status', div).hide();
+	jQuery('.UserPasswd', div).val('');
+	jQuery('.UserPasswd2', div).val('');
+	jQuery('.UserPasswd3', div).val('');
 }
 
 function doUserAccountCreate()
@@ -7469,7 +7466,7 @@ function onReadyUserLogin()
 
 		if (UserId == '' || UserPasswd == '')
 		{
-			doUserLoginUpdateMsg('#msgEmptyFields');
+			doUserLoginUpdateMsg('msgEmptyFields');
 		}
 		else
 		{
@@ -7484,7 +7481,7 @@ function onReadyUserLogin()
 				{
 					if (parseInt(data.Status) > 0)
 					{
-						doUserLoginUpdateMsg('#msgUserLoggedIn');
+						doUserLoginUpdateMsg('msgUserLoggedIn');
 						jQuery('#fldUserId').val('');
 						jQuery("#fldUserPasswd").val('');
 
@@ -7497,7 +7494,7 @@ function onReadyUserLogin()
 					}
 					else
 					{
-						doUserLoginUpdateMsg("#msgInvalidPasswd");
+						doUserLoginUpdateMsg('msgInvalidPasswd');
 					}
 				},
 				'json'
@@ -7541,7 +7538,7 @@ function doUserLogout()
 		{
 			if (parseInt(data.Status) > 0)
 			{
-				doUserLoginUpdateMsg("#msgUserLoggedOut");
+				doUserLoginUpdateMsg('msgUserLoggedOut');
 				// After login, clear passwd field
 				jQuery('#fldUserId').val('');
 				jQuery('#fldUserPasswd').val('');
@@ -7551,21 +7548,21 @@ function doUserLogout()
 			}
 			else
 			{
-				doUserLoginUpdateMsg("#msgInvalidLogout");
+				doUserLoginUpdateMsg('msgInvalidLogout');
 			}
 		},
 		'json'
 	);
 } //doUserLogout()
 
-function doUserLoginUpdateMsg(msgId)
+function doUserLoginUpdateMsg(classId)
 {
 	// Hide all status Msgs (class="status")
-	jQuery('div.UserLogin .status').hide();
-	if (msgId != '')
+	jQuery('div.UserLogin span.status').hide();
+	if (classId != '')
 	{
 		// Show specified message(s)
-		jQuery('div.UserLogin ' + msgId).show();
+		jQuery('div.UserLogin span.' + classId).show();
 	}
 	return(true);
 } //doUserLoginUpdateMsg()
