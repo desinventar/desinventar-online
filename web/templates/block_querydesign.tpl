@@ -294,60 +294,54 @@
 		<!-- BEGIN CUSTOMQUERY SECTION -->
 		<dt>{-#madvsection#-}</dt>
 		<dd>
-			<textarea id="QueryCustom" name="QueryCustom" 
-				style="width:300px; height:45px;" class="inputText"></textarea>
-			<br />
-			<span class="dlgmsg">{-#tadvqryhelp#-}</span>
-			<br />
-			<table class="QueryCustom">
-				<tr class="top">
-					<td>
-						<div class="list dwin" style="height:180px;">
-							<div class="field" data-field="" data-type="" style="display:none;">
-								<input type="button" class="ListItem" value="Q" />
-								<br />
+			<div class="QueryCustom">
+				<textarea id="QueryCustom" name="QueryCustom" class="inputText QueryCustom"
+					style="width:300px; height:45px;" ></textarea>
+				<br />
+				<span class="dlgmsg">{-#tadvqryhelp#-}</span>
+				<br />
+				<table class="QueryCustom">
+					<tr class="top">
+						<td>
+							<div class="list dwin" style="height:180px;">
+								<div class="field" data-field="" data-type="" style="display:none;">
+									<input type="button" class="ListItem" value="Q" />
+									<br />
+								</div>
 							</div>
-						</div>
-						<div class="defaultlist hidden">
-							<span data-field="DisasterSerial"    data-type="text">{-#msgDatacard_DisasterSerial#-}</span>
-							<span data-field="DisasterBeginTime" data-type="date">{-#msgDatacard_DisasterBeginTime#-}</span>
-							<span data-field="DisasterSiteNotes" data-type="text">{-#msgDatacard_DisasterSiteNotes#-}</span>
-							<span data-field="EventDuration"     data-type="text">{-#msgDatacard_EventDuration#-}</span>
-							<span data-field="EventNotes"        data-type="text">{-#msgDatacard_EventNotes#-}</span>
-							<span data-field="CauseNotes"        data-type="text">{-#msgDatacard_CauseNotes#-}</span>
-							<span data-field="RecordAuthor"      data-type="text">{-#msgDatacard_RecordAuthor#-}</span>
-							<span data-field="RecordCreation"    data-type="date">{-#msgDatacard_RecordCreation#-}</span>
-							<span data-field="RecordUpdate"      data-type="date">{-#msgDatacard_RecordUpdate#-}</span>
-						</div>
-					</td>
-					<td class="center">
-						<input type="button" id="<" value="<" class="disabled" disabled 
-							onClick="$('QueryCustom').value += this.value; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqlessthan#-}');" />
-						<input type="button" id=">" value=">" class="disabled" disabled 
-							onClick="$('QueryCustom').value += this.value; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqgreathan#-}');" />
-						<input type="button" id="=" value="=" class="disabled" disabled 
-							onClick="$('QueryCustom').value += this.value; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqequalto#-}');" />
-						<br />
-						<input type="button" id="<>" value="<>" class="disabled" disabled 
-							onClick="$('QueryCustom').value += this.value; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqnoteqto#-}');" />
-						<input type="button" id="LIKE '%%'" value="{-#tlike#-}" class="disabled" disabled 
-							onClick="$('QueryCustom').value += this.id; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqlike#-}');" />
-						<input type="button" id="=-1" value="{-#teffhav#-}" class="disabled" disabled 
-							onClick="$('QueryCustom').value += this.id; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqwere#-}');" />
-						<input type="button" id="=0" value="{-#teffhavnot#-}" class="disabled" disabled 
-							onClick="$('QueryCustom').value += this.id; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqwerent#-}');" />
-						<input type="button" id="=-2" value="{-#teffdontknow#-}" class="disabled" disabled 
-							onClick="$('QueryCustom').value += this.id; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqdntknow#-}');" />
-						<br />
-						<input type="button" value=" (" onClick="$('QueryCustom').value += this.value;" />
-						<input type="button" value=") " onClick="$('QueryCustom').value += this.value;" />
-						<input type="button" value=" AND " onClick="$('QueryCustom').value += this.value;" onMouseOver="showtip('{-#taqandopt#-}')" />
-						<input type="button" value=" OR " onClick="$('QueryCustom').value += this.value;" onMouseOver="showtip('{-#taqoropt#-}')" />
-						<br /><br />
-						<input type="button" value="{-#tclear#-}" onClick="$('QueryCustom').value = '';" />
-					</td>
-				</tr>
-			</table>
+							<div class="defaultlist hidden">
+								<span data-field="DisasterSerial"    data-type="text">{-#msgDatacard_DisasterSerial#-}</span>
+								<span data-field="DisasterBeginTime" data-type="date">{-#msgDatacard_DisasterBeginTime#-}</span>
+								<span data-field="DisasterSiteNotes" data-type="text">{-#msgDatacard_DisasterSiteNotes#-}</span>
+								<span data-field="EventDuration"     data-type="text">{-#msgDatacard_EventDuration#-}</span>
+								<span data-field="EventNotes"        data-type="text">{-#msgDatacard_EventNotes#-}</span>
+								<span data-field="CauseNotes"        data-type="text">{-#msgDatacard_CauseNotes#-}</span>
+								<span data-field="RecordAuthor"      data-type="text">{-#msgDatacard_RecordAuthor#-}</span>
+								<span data-field="RecordCreation"    data-type="date">{-#msgDatacard_RecordCreation#-}</span>
+								<span data-field="RecordUpdate"      data-type="date">{-#msgDatacard_RecordUpdate#-}</span>
+							</div>
+						</td>
+						<td class="center">
+							<input type="button" value="<" class="withHelpOver" data-sql="<" data-help="{-#taqlessthan#-}" />
+							<input type="button" value=">" class="withHelpOver" data-sql=">" data-help="{-#taqgreathan#-}" />
+							<input type="button" value="=" class="withHelpOver" data-sql="=" data-help="{-#taqequalto#-}"  />
+							<br />
+							<input type="button" value="<>" class="withHelpOver" data-sql="<>" data-help="{-#taqnoteqto#-}" />
+							<input type="button" value="{-#tlike#-}" class="withHelpOver" data-sql="LIKE '%%'" data-help="{-#taqlike#-}" />
+							<input type="button" value="{-#teffhav#-}" class="withHelpOver" data-sql="=-1" data-help="{-#taqwere#-}" />
+							<input type="button" value="{-#teffhavnot#-}" class="withHelpOver" data-sql="=0" data-help="{-#taqwerent#-}" />
+							<input type="button" value="{-#teffdontknow#-}" class="withHelpOver" data-sql="=-2" data-help="{-#taqdntknow#-}" />
+							<br />
+							<input type="button" value=" (" data-sql=" (" />
+							<input type="button" value=") " data-sql=") " />
+							<input type="button" value=" AND " class="withHelpOver" data-sql=" AND " data-help="{-#taqandopt#-}" />
+							<input type="button" value=" OR "  class="withHelpOver" data-sql=" OR "  data-help="{-#taqoropt#-}"  />
+							<br /><br />
+							<input type="button" value="{-#tclear#-}" class="clear" />
+						</td>
+					</tr>
+				</table>
+			</div>
 		</dd>
 		<!-- BEGIN CUSTOMQUERY SECTION -->
 	</dl>
