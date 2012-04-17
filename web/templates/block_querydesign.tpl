@@ -34,7 +34,7 @@
 			<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_DisasterSiteNotes_Helptext#-}">{-#msgDatacard_DisasterSiteNotes#-}</span>
 			<br/>
 			<input type="hidden" name="D_DisasterSiteNotes[0]" />
-			<textarea class="inputText withHelpFocus" id="DisasterSiteNotes" name="D_DisasterSiteNotes[1]" style="width:220px; height: 40px;"
+			<textarea class="inputText withHelpFocus" name="D_DisasterSiteNotes[1]" style="width:220px; height: 40px;"
 				data-help="{-#msgDatacard_DisasterSiteNotes_Helptext#-}"></textarea>
 		</dd>
 		
@@ -49,12 +49,12 @@
 			<br /><br />
 			<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_EventDuration_Helptext#-}">{-#msgDatacard_EventDuration#-}</span>
 			<br />
-			<input id="EventDuration" name="D_EventDuration" type="text" class="line fixw withHelpFocus"
+			<input name="D_EventDuration" type="text" class="line fixw withHelpFocus"
 				data-help="{-#msgDatacard_EventDuration_Helptext#-}" value="" />
 			<br />
 			<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_EventNotes_Helptext#-}">{-#msgDatacard_EventNotes#-}</span>
 			<br />
-			<textarea id="EventNotes" name="D_EventNotes[1]" style="width:250px; height:40px;"
+			<textarea name="D_EventNotes[1]" style="width:250px; height:40px;"
 				class="inputText withHelpFocus" data-help="{-#msgDatacard_EventNotes_Helptext#-}"></textarea>
 		</dd>
 			
@@ -165,11 +165,11 @@
 			<br />
 			<span class="fieldLabel withHelpOver"  data-help="{-#msgDatacard_EffectOtherLosses_Helptext#-}" title="{-#msgDatacard_EffectOtherLosses_Tooltip#-}">{-#msgDatacard_EffectOtherLosses#-}</span>
 			<br />
-			<input class="fixw line withHelpFocus" data-help="{-#msgDatacard_EffectOtherLosses_Helptext#-}" type="text" id="EffectOtherLosses" name="D_EffectOtherLosses"  value="" />
+			<input class="fixw line withHelpFocus" data-help="{-#msgDatacard_EffectOtherLosses_Helptext#-}" type="text" name="D_EffectOtherLosses"  value="" />
 			<br />
 			<span class="fieldLabel withHelpOver"  data-help="{-#msgDatacard_EffectNotes_Helptext#-}" title="{-#msgDatacard_EffectNotes_Tooltip#-}">{-#msgDatacard_EffectNotes#-}</span>
 			<br />
-			<input class="fixw line withHelpFocus" data-help="{-#msgDatacard_EffectNotes_Helptext#-}" type="text" id="EffectNotes" name="D_EffectNotes"  value="" />
+			<input class="fixw line withHelpFocus" data-help="{-#msgDatacard_EffectNotes_Helptext#-}" type="text" name="D_EffectNotes"  value="" />
 			<br />
 		</dd>
 		<!-- END QUERY EFFECTS SECTION -->
