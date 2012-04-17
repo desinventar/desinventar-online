@@ -24,7 +24,6 @@ function onReadyDatacards()
 	});
 
 	jQuery('#DICard').unbind('submit').submit(function() {
-		jQuery('#DatacardCommand').val(jQuery('#_CMD').val());
 		jQuery('#RecordAuthor').val(jQuery('#desinventarUserId').val());
 		displayDatacardStatusMsg('');
 		var params = jQuery(this).serializeObject();
@@ -155,7 +154,7 @@ function onReadyDatacards()
 
 	// Validation of DisasterBeginTime and Suggest Serial for New Datacards
 	jQuery('#DisasterBeginTime0').blur(function() {
-		cmd = jQuery('#_CMD').val();
+		cmd = jQuery('#DatacardCommand').val();
 		if (cmd == 'insertDICard')
 		{
 			doDatacardSuggestSerial();
@@ -885,7 +884,7 @@ function doDatacardClear()
 {
 	jQuery('#DisasterId').val();
 	$('DICard').reset();
-	jQuery('#_CMD').val('insertDICard');
+	jQuery('#DatacardCommand').val('insertDICard');
 	jQuery('#cardsRecordNumber').val(0);
 	jQuery('div.Datacard table.EffectListPeople .clsEffectNumeric').each(function() {
 		jQuery(this).val(0);
@@ -945,7 +944,7 @@ function doDatacardEdit()
 				DisableEnableForm($('DICard'), false);
 				jQuery('#PrevDisasterSerial').val(jQuery('#DisasterSerial').val());
 				jQuery('#DisasterBeginTime0').focus();
-				jQuery('#_CMD').val('updateDICard');
+				jQuery('#DatacardCommand').val('updateDICard');
 				displayDatacardStatusMsg('msgDatacardFill');
 				changeOptions('btnDatacardEdit');
 
@@ -971,7 +970,7 @@ function doDatacardEdit()
 function doDatacardSave()
 {
 	var bContinue = 1;
-	var cmd = jQuery('#_CMD').val();
+	var cmd = jQuery('#DatacardCommand').val();
 	var DisasterSerial = jQuery('#DisasterSerial').val();
 	var PrevDisasterSerial = jQuery('#PrevDisasterSerial').val();
 	var Status = jQuery('#DICard #Status').val();
