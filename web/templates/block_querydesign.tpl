@@ -299,12 +299,12 @@
 			<br />
 			<span class="dlgmsg">{-#tadvqryhelp#-}</span>
 			<br />
-			<table class="QueryCustom" width="100%">
+			<table class="QueryCustom">
 				<tr class="top">
 					<td>
 						<div class="list dwin" style="height:180px;">
 							<div class="field" data-field="" data-type="" style="display:none;">
-								<input type="button" class="CustomQueryListItem" value="" />
+								<input type="button" class="ListItem" value="Q" />
 								<br />
 							</div>
 						</div>
@@ -320,7 +320,7 @@
 							<span data-field="RecordUpdate"      data-type="date">{-#msgDatacard_RecordUpdate#-}</span>
 						</div>
 					</td>
-					<td align="center">
+					<td class="center">
 						<input type="button" id="<" value="<" class="disabled" disabled 
 							onClick="$('QueryCustom').value += this.value; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqlessthan#-}');" />
 						<input type="button" id=">" value=">" class="disabled" disabled 

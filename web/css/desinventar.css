@@ -219,7 +219,7 @@ a.line {
 .qq-upload-button-text {
 	float: left;
 }
-.CustomQueryListItem {
+table.QueryCustom .ListItem {
 	font-family:arial,tahoma,helvetica,cursive; 
 	font-size:11px; color:#000000; background-color:#ffffff; 
 	border-style:none; border-width:1px; border-color:#bbbbbb;
@@ -567,4 +567,7 @@ dl.accordion dd.default{height:auto;display:block;}
 dl.accordion dd.default_close{display:none;}
 p.right {
 	text-align: right;
+}
+table.QueryCustom {
+	width:100%;
 }
