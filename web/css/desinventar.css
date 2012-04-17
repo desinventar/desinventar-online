@@ -601,3 +601,7 @@ div.Datacard .headerLeft {
 div.Datacard .headerRight {
 	width:55%;
 }
+div.Datacard .columnLeft {
+	width:30px;
+	border:0px;
+}
