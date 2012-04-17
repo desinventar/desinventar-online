@@ -137,7 +137,7 @@
 										<td class="top" title="{-$LabelsDisaster.DisasterGeographyId[1]-}">
 											<b>{-#msgDatacard_DisasterGeographyId#-}</b><b class="required">*</b>
 											<br />
-											<input id="GeographyId" name="GeographyId" type="hidden" size="25" />
+											<input id="GeographyId" name="GeographyId" type="hidden" />
 										</td>
 										<td class="top" title="{-$LabelsDisaster.DisasterGeographyId[1]-}">
 											<table class="tblGeography">
