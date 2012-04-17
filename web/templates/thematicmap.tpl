@@ -17,7 +17,7 @@
 		<tr>
 			<td valign="top">
 				<div class="dwin" style="width:250px;">
-					<p align="right">{-#trepnum#-}: {-$MapNumberOfRecords-}</p>
+					<p class="right">{-#trepnum#-}: {-$MapNumberOfRecords-}</p>
 					<hr />
 					<h4 id="defaultMapTitle">{-#tmapof#-} {-$rgl[0].info.TITLE-}</h4>
 					<div align="justify" class="QueryInfo dwin" style="height:250px;">{-#msgViewMap_Level#-}: {-$rgl[0].info.LEVEL-}; 

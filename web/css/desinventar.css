@@ -565,3 +565,6 @@ dl.accordion dt.expanding
 dl.accordion dd{margin:0;padding:0;border:solid 1px #aaaaaa;border-bottom:inset 3px #aaaaaa;padding:6px;line-height:1.4;overflow:auto;}
 dl.accordion dd.default{height:auto;display:block;}
 dl.accordion dd.default_close{display:none;}
+p.right {
+	text-align: right;
+}

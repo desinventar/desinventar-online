@@ -75,7 +75,7 @@
 		<!-- BEGIN QUERY EFFECTS SECTION -->
 		<dt>{-#meffsection#-}</dt>
 		<dd>
-			<p align="right">{-#msgOperator#-}
+			<p class="right">{-#msgOperator#-}
 			<select name="QueryEffect[OP]" class="dlgmsg small line">
 				<option class="small" value="AND">{-#tand#-}</option>
 				<option class="small" value="OR" >{-#tor#-}</option>
@@ -177,7 +177,7 @@
 		<!-- Begin EEField Section -->
 		<dt>{-#mextsection#-}</dt>
 		<dd>
-			<p align="right">{-#msgOperator#-}
+			<p class="right">{-#msgOperator#-}
 			<select name="QueryEEField[OP]" class="dlgmsg small line">
 				<option class="small" value="AND">{-#tand#-}</option>
 				<option class="small" value="OR" >{-#tor#-}</option>
