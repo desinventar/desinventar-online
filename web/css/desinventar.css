@@ -105,8 +105,14 @@ button::-moz-focus-inner {
 //	overflow: hidden;
 //	width: 100%;
 //}
+td.left {
+	text-align:left;
+}
 td.center {
 	text-align:center;
+}
+td.right {
+	text-align:right;
 }
 td.top {
 	vertical-align: top;
@@ -219,11 +225,6 @@ a.line {
 .qq-upload-button-text {
 	float: left;
 }
-.CustomQueryListItem {
-	font-family:arial,tahoma,helvetica,cursive; 
-	font-size:11px; color:#000000; background-color:#ffffff; 
-	border-style:none; border-width:1px; border-color:#bbbbbb;
-}
 input.btn {
 	font-family:arial,tahoma,helvetica,cursive; 
 	font-size:14px; color:#000000; background-color:#bbbbbb; }
@@ -279,10 +280,17 @@ table.grid {
 	font-family:Lucida Grande, Verdana;
 	font-size:11px; width:100%; border: 0px solid #ccc;
 }
-
 table.col {
 	font-family:Lucida Grande, Verdana;
 	overflow: auto; font-size:11px; border: thin solid;
+}
+table.width100 {
+	width:100%;
+}
+table.QueryCustom .ListItem {
+	font-family:arial,tahoma,helvetica,cursive; 
+	font-size:11px; color:#000000; background-color:#ffffff; 
+	border-style:none; border-width:1px; border-color:#bbbbbb;
 }
 
 .GridCellNumber {
@@ -444,10 +452,6 @@ td a.RegionLink {
 	max-width:400px;
 	height:100%;
 }
-.clsDatabaseEvents {
-	max-width:600px;
-	height:100%;
-}
 .clsGeolevels {
 	max-width:600px;
 	width:100%;
@@ -565,3 +569,48 @@ dl.accordion dt.expanding
 dl.accordion dd{margin:0;padding:0;border:solid 1px #aaaaaa;border-bottom:inset 3px #aaaaaa;padding:6px;line-height:1.4;overflow:auto;}
 dl.accordion dd.default{height:auto;display:block;}
 dl.accordion dd.default_close{display:none;}
+p.right {
+	text-align: right;
+}
+table.QueryCustom {
+	width:100%;
+}
+div.DatabaseEvents {
+	max-width:600px;
+	height:100%;
+}
+div.DatabaseEvents table.Edit {
+	width:80%;
+}
+div.DatabaseCauses {
+	max-width:600px;
+	height:100%;
+}
+div.DatabaseCauses table.Edit {
+	width:80%;
+}
+div.DatabaseUpload td.label {
+	width:25%;
+}
+div.DatabaseUpload td.value {
+	width:50%;
+}
+div.Datacard .headerLeft {
+	width:45%;
+}
+div.Datacard .headerRight {
+	width:55%;
+}
+div.Datacard .columnLeft {
+	width:30px;
+	border:0px;
+	margin-right:10px;
+}
+div.Datacard table.Datacard {
+	border: 1px solid #bbbbbb;
+	border-radius:3px;
+	width:100%;
+}
+div.Results .header {
+	background:#bbbbbb;
+}

@@ -11,7 +11,7 @@
 					<form class="Export" action="{-$desinventarURL-}/" method="post" target="iframeDownload">
 						<input class="cmd"      name="cmd"      type="hidden" value="cmdGeographyExport" />
 						<input class="RegionId" name="RegionId" type="hidden" value="{-$desinventarRegionId-}" />
-						<input class="Labels"   name="Labels"   type="hiden"  value="Id" />
+						<input class="Labels"   name="Labels"   type="hidden"  value="Id" />
 					</form>
 				</div>					
 			</td>			
@@ -33,7 +33,7 @@
 	<div>
 		<span class="helptext">{-#msgGeography_Header2#-}</span>
 		<div class="List line" style="height:200px;overflow:auto;">
-			<table class="List" class="grid">
+			<table class="List grid">
 				<thead>
 					<tr>
 						<td class="GeographyLevel">
@@ -58,6 +58,8 @@
 				</thead>
 				<tbody>
 					<tr class="hidden">
+						<td class="GeographyLevel">
+						</td>
 						<td class="Id">
 						</td>					
 						<td class="GeographyCode">
@@ -81,15 +83,13 @@
 	<div class="Edit" style="display:block; width:500px;">
 		<br />
 		<h3>{-#msgGeography_Edit#-}</h3>
-		<form class="Edit" method="post" action="">
+		<form class="Edit" method="post" action="#">
 			{-#msgGeography_Code#-}<b style="color:darkred;">*</b>
-			<input class="GeographyCode" name="GeographyCode" type="text" 
-				class="line" tabindex="1" style="width:400px;" />
+			<input class="GeographyCode line" name="GeographyCode" type="text" tabindex="1" style="width:400px;" />
 			<br />
 			<br />
 			{-#msgGeography_Name#-}<b style="color:darkred;">*</b>
-			<input class="GeographyName" name="GeographyName" type="text"
-				class="line" tabindex="2" style="width:400px;" />
+			<input class="GeographyName line" name="GeographyName" type="text" tabindex="2" style="width:400px;" />
 			<br />
 			<br />
 			

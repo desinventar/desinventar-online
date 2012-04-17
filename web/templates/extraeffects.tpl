@@ -4,7 +4,7 @@
 <!-- FIELDS -->
 	<b onMouseOver="showtip('{-$dic.DBExtraEffect[2]-}');">{-$dic.DBExtraEffect[0]-}</b><br />
 	<div class="dwin" style="width:600px; height:120px;">
-		<table width="100%" class="grid">
+		<table class="width100 grid">
 			<thead>
 				<tr>
 					<td class="header" onMouseOver="showtip('{-$dic.DBEEFieldLabel[2]-}');">
@@ -67,7 +67,7 @@
 			<input type="checkbox" id="EEFieldPublic" name="EEField[EEFieldPublic]"
 				tabindex="5" onFocus="showtip('{-$dic.DBEEFieldPublic[2]-}')" />
 			<br /> <br />
-			<p align="center" style="width:500px;">
+			<p class="center" style="width:500px;">
 				<input id="RegionId" name="RegionId" type="hidden" value="{-$reg-}" />
 				<input id="EEFieldSize" name="EEField[EEFieldSize]" value="100" type="hidden" />
 				<input id="EEFieldId" name="EEField[EEFieldId]" type="hidden" />

@@ -13,8 +13,8 @@
 			{-if $k == "SER"-}<b>{-#ser#-}:</b> {-$i-}; {-/if-}
 		{-/foreach-}
 	</div>
-	<p align="right">{-#trepnum#-}: {-$NumRecords-}</p>
-	<img src="{-$image-}" border="0">
+	<p class="right">{-#trepnum#-}: {-$NumRecords-}</p>
+	<img src="{-$image-}">
 {-else-}
 	{-#tnodata#-}
 {-/if-}

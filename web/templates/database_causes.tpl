@@ -1,5 +1,5 @@
 {-config_load file="$lg.conf" section="grpDatabaseCauses"-}
-<div class="clsDatabaseCauses">
+<div class="DatabaseCauses">
 	<b title="{-$dic.DBCause[2]-}">{-#msgDatabaseCauses_CustomCauseTitle#-}</b>
 	<br />
 	<div id="divDatabaseCauses_CauseListCustom" class="dwin" style="width:100%; height:100px;">
@@ -29,14 +29,14 @@
 					<td class="CausePredefined"></td>
 					<td class="CauseName"></td>
 					<td class="CauseDesc" style="width:70%;"></td>
-					<td class="CauseActive" style="text-align:center;" valign="top"><input type="checkbox" disabled="disabled" /></td>
+					<td class="CauseActive top center"><input type="checkbox" disabled="disabled" /></td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 	<br />
 	<div id="divDatabaseCauses_CauseListDefault" class="dwin" style="width:100%; height:100px;">
-		<table id="tblDatabaseCauses_CauseListDefault" width="100%" class="grid">
+		<table id="tblDatabaseCauses_CauseListDefault" class="width100 grid">
 			<thead>
 				<tr>
 					<td style="display:none;">
@@ -72,17 +72,17 @@
 		<a class="button" id="btnDatabaseCauses_Add"><span>{-#msgDatabaseCauses_Add#-}</span></a>
 		<br />
 		<br />
-		<span class="clsDatabaseCausesStatus" id="msgDatabaseCauses_UpdateOk">{-#msgDatabaseCauses_UpdateOk#-}</span>
-		<span class="clsDatabaseCausesStatus" id="msgDatabaseCauses_UpdateError">{-#msgDatabaseCauses_UpdateError#-}</span>
-		<span class="clsDatabaseCausesStatus" id="msgDatabaseCauses_ErrorEmtpyFields">{-#msgDatabaseCauses_ErrorEmptyFields#-}</span>
-		<span class="clsDatabaseCausesStatus" id="msgDatabaseCauses_ErrorDuplicateName">{-#msgDatabaseCauses_ErrorDuplicateName#-}</span>
-		<span class="clsDatabaseCausesStatus" id="msgDatabaseCauses_ErrorCannotDelete">{-#msgDatabaseCauses_ErrorCannotDelete#-}</span>
+		<span class="status" id="msgDatabaseCauses_UpdateOk">{-#msgDatabaseCauses_UpdateOk#-}</span>
+		<span class="status" id="msgDatabaseCauses_UpdateError">{-#msgDatabaseCauses_UpdateError#-}</span>
+		<span class="status" id="msgDatabaseCauses_ErrorEmtpyFields">{-#msgDatabaseCauses_ErrorEmptyFields#-}</span>
+		<span class="status" id="msgDatabaseCauses_ErrorDuplicateName">{-#msgDatabaseCauses_ErrorDuplicateName#-}</span>
+		<span class="status" id="msgDatabaseCauses_ErrorCannotDelete">{-#msgDatabaseCauses_ErrorCannotDelete#-}</span>
 		<br />
 	</div>
 	<br />
 	<div id="divDatabaseCauses_Edit" style="display:none;width:500px;">
-		<form id="frmDatabaseCauses_Edit" action="">
-			<table width="80%">
+		<form id="frmDatabaseCauses_Edit" action="#">
+			<table class="Edit">
 				<tr>
 					<td>
 						<span class="Predefined">{-#msgCauses_Predefined#-}</span>

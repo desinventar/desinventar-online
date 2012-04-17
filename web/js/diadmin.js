@@ -187,8 +187,6 @@
 		}
 	}
 
-	var winopt = 'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,resizable=no,scrollbars=no,status=no,toolbar=no';
-
 	function setfocus(a_field_id)
 	{
 		$(a_field_id).focus();

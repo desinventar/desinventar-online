@@ -21,6 +21,7 @@
 			foreach($xp2->query('Group[@name="' . $GroupName . '"]/Message[@id="' . $Message . '"]/Text[@LangIsoCode="' . $LangIsoCode . '"]') as $node)
 			{
 				$value = $node->nodeValue;
+				$value = preg_replace('/"/', '\'', $value);
 				$value = preg_replace('/\n/', ' ', $value);
 				$value = preg_replace('/\t/', ' ', $value);
 				$value = preg_replace('/ +/', ' ', $value);
