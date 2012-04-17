@@ -1,5 +1,5 @@
 {-config_load file="$lg.conf" section="grpDatacard"-}
-<table width="100%">
+<table class="width100">
 	<tr>
 		<td style="font-family:arial,tahoma,helvetica,cursive; font-size:11px; color:#dbab28;">
 			{-if $statusmsg == 'duplicate'-}<b>{-#tdcerror#-}:</b> {-#tdisererr#-}

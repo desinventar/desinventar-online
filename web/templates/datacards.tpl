@@ -69,7 +69,7 @@
 		<input type="hidden" id="DatacardCommand"    name="DatacardCommand" value="" />
 		<input type="hidden" id="Status"             name="Status" value="" />
 		{-counter assign="MyTabIndex" start="1"-}
-		<table border="1" cellspacing="8" width="100%">
+		<table border="1" cellspacing="8" class="width100">
 			<!-- DATACARD INFORMATION SECTION -->
 			<tr>
 				<td width="30" style="border:0px;" class="top">
@@ -207,7 +207,7 @@
 							<tr class="top">
 								<td>
 									<b>{-#teffects#-}</b><br />
-									<table class="EffectList EffectListPeople grid" width="100%">
+									<table class="EffectList EffectListPeople grid width100">
 										{-foreach $ef1 as $key => $value-}
 											<tr>
 												<td class="right">
@@ -234,7 +234,7 @@
 										<tr>
 											<td class="top">
 												<!-- BEGIN Table Sectors -->
-												<table class="EffectList EffectListSector grid" width="100%">
+												<table class="EffectList EffectListSector grid width100">
 													{-foreach $sec as $key => $value -}
 														<tr>
 															<td class="right">

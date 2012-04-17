@@ -93,7 +93,7 @@
 						<b onMouseOver="showtip('{-$dic.DBLog[2]-}');">{-$dic.DBLog[0]-}</b>
 					</legend>
 					<div class="dwin" style="width:280px; height:120px;">
-						<table width="100%" class="grid">
+						<table class="width100 grid">
 							<thead>
 								<tr>
 									<td class="header" onMouseOver="showtip('{-$dic.DBLogType[2]-}');">

@@ -40,7 +40,7 @@
 	<b>{-#msgDatabaseUsers_TitleRoles#-}</b>
 	<br />
 	<div class="line">
-		<table width="100%" class="grid dwin" id="tblDatabaseUsers_List">
+		<table class="width100 grid dwin" id="tblDatabaseUsers_List">
 			<thead>
 				<tr>
 					<td class="header UserId">

@@ -36,7 +36,7 @@
 	</div>
 	<br />
 	<div id="divDatabaseCauses_CauseListDefault" class="dwin" style="width:100%; height:100px;">
-		<table id="tblDatabaseCauses_CauseListDefault" width="100%" class="grid">
+		<table id="tblDatabaseCauses_CauseListDefault" class="width100 grid">
 			<thead>
 				<tr>
 					<td style="display:none;">

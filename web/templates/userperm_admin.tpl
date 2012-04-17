@@ -2,7 +2,7 @@
 <div style="margin:10px;">
 	<h4>{-#msgUserPermAdminMsg1#-}</h4>
 	<br />
-	<table width="100%">
+	<table class="width100">
 		<tr>
 			<td class="top">
 				<b>{-#msgUserPermAdminCurrentAdmin#-} : </b>
