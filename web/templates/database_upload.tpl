@@ -41,10 +41,10 @@
 		</h4>
 		<table class="width100">
 		<tr>
-			<td class="right" width="25%">
+			<td class="right label">
 				{-#msgDatabaseUploadRegionId#-} :
 			</td>
-			<td width="50%">
+			<td class="left value">
 				<span id="txtDatabaseUploadRegionId"></span><br />
 			</td>
 		</tr>

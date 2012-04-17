@@ -589,3 +589,9 @@ div.DatabaseCauses {
 div.DatabaseCauses table.Edit {
 	width:80%;
 }
+div.DatabaseUpload td.label {
+	width:25%;
+}
+div.DatabaseUpload td.value {
+	width:50%;
+}
