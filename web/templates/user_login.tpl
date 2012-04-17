@@ -29,7 +29,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="right" colspan="2">
+				<td class="center" colspan="2">
 					<br />
 					<a class="button Send"  ><span>{-#benter#-}</span></a>&nbsp;&nbsp;
 					<a class="button Cancel"><span>{-#bcancel#-}</span></a>&nbsp;&nbsp;
