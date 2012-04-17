@@ -2,7 +2,7 @@
 <div id="divDatacard" class="Datacard mainblock">
 	<table style="width:100%;">
 		<tr>
-			<td class="top left" width="45%">
+			<td class="top left headerLeft">
 				<input type="button" id="btnDatacardNew"    class="DatacardCmdButton bb bnew"    title="{-#tnewtitle#-}: {-#tnewdesc#-}" value=" "    />
 				<input type="button" id="btnDatacardEdit"   class="DatacardCmdButton bb bupd"    title="{-#tupdtitle#-}: {-#tupddesc#-}" value=" "   />
 				<input type="button" id="btnDatacardSave"   class="DatacardCmdButton bb bsave"   title="{-#tsavtitle#-}: {-#tsavdesc#-}" value=" "   />
@@ -19,7 +19,7 @@
 				<input type="text"   id="txtDatacardFind" class="DatacardCmdFind line" style="width:60px;" />
 				<input type="button" id="btnDatacardFind" class="DatacardCmdFind bb bfind" title="{-#tooltipDatacardFind#-}" value=" " />
 			</td>
-			<td class="top right" width="55%" colspan="2">
+			<td class="top right headerRight" colspan="2">
 				<div id="divDatacardStatusMsg" class="status" style="display:none;">
 					<span class="datacardStatusMsg" id="msgDatacardDuplicatedSerial">{-#msgDatacardDuplicatedSerial#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardStartNew">{-#tmsgnewcard#-}</span>
