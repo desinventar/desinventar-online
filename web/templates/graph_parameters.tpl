@@ -10,13 +10,13 @@
 	<div id="grp-cfg" class="ViewGraphParams mainblock">
 		<form id="frmGraphParams" method="post" action="">
 			<table class="conf" cellpadding=1 cellspacing=1>
-			<tr valign="top">
+			<tr class="top">
 				<td colspan=3 align="center">
 					<b>{-#gopttitle#-}</b><input type="text" name="prmGraph[Title]" class="line fixw" />
 					<!--<b>{-#goptsubtit#-}</b><br />-->
 				</td>
 			</tr>
-			<tr valign="top">
+			<tr class="top">
 				<td id="tdGraphParamAxis1" align="right">
 					<u>{-#gveraxis#-} 1:</u><br />
 					<b><span help_tip="{-$dic.GraphField[2]-}">{-$dic.GraphField[0]-}</span></b><br />
@@ -73,7 +73,7 @@
 				</td>
 				<td id="tdGraphParamCenter" align="center">
 					<table border="1" style="width:100%;height:100%;">
-					<tr valign="center">
+					<tr class="middle">
 						<td align="center">
 							<select id="prmGraphKind" name="prmGraph[Kind]" size="3"
 								help_tip="{-$dic.GraphKind[2]-}" class="line">

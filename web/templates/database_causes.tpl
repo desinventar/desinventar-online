@@ -29,7 +29,7 @@
 					<td class="CausePredefined"></td>
 					<td class="CauseName"></td>
 					<td class="CauseDesc" style="width:70%;"></td>
-					<td class="CauseActive" style="text-align:center;" valign="top"><input type="checkbox" disabled="disabled" /></td>
+					<td class="CauseActive top center"><input type="checkbox" disabled="disabled" /></td>
 				</tr>
 			</tbody>
 		</table>

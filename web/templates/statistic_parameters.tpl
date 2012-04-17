@@ -31,7 +31,7 @@
 			<b>{-#stotallevels#-}</b>
 			<br />
 			<table>
-				<tr valign="top">
+				<tr class="top">
 					<td class="StatGroup">
 						<b>{-$std.StatisticFirstlev[0]-}</b><br />
 						<input class="label" type="hidden" name="options[grouplabel][0]" value="" />
@@ -73,7 +73,7 @@
 						<a class="button" onclick="selectall('_S+sel1[]');"><span>{-#balls#-}</span></a>
 						<a class="button" onclick="selectnone('_S+sel1[]');"><span>{-#bnone#-}</span></a>
 					</td>
-					<td align="center" valign="middle" style="width:20px;">
+					<td class="middle center" style="width:20px;">
 						<a class="button" onclick="moveOptions($('_S+sel1[]'), $('fldStatFieldSelect'));"><span>&rarr;</span></a>
 						<br /><br /><br />
 						<a class="button" onclick="moveOptions($('fldStatFieldSelect'), $('_S+sel1[]'));"><span>&larr;</span></a>

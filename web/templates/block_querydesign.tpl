@@ -85,7 +85,7 @@
 			<div class="EffectPeopleList dwin" style="height: 100px;">
 				<table class="EffectPeopleList EffectList">
 					<tr style="display:none;">
-						<td valign="top">
+						<td class="top">
 							<div class="EffectPeople" data-field="">
 								<input class="checkbox" type="checkbox" value="" />
 								<span class="label"></span>
@@ -118,7 +118,7 @@
 			<div style="height: 80px;" class="dwin">
 				<table class="EffectSectorList EffectList">
 					<tr style="display:none;">
-						<td valign="top">
+						<td class="top">
 							<div class="EffectSector" data-field="">
 								<input class="checkbox" type="checkbox" value="" />
 								<span class="label"></span>
@@ -140,7 +140,7 @@
 			<b>{-#ttitloss#-}</b><br />
 				<table class="EffectListLosses2 EffectList">
 					<tr style="display:none;">
-						<td valign="top">
+						<td class="top">
 							<div class="EffectLosses2" data-field="">
 								<input class="checkbox" type="checkbox" value="" />
 								<span class="label"></span>
@@ -186,7 +186,7 @@
 			<div style="height: 300px;" class="dwin">
 				<table class="EffectAdditionalList EffectList">
 					<tr style="display:none;">
-						<td valign="top">
+						<td class="top">
 							<div class="EffectAdditional" data-field="">
 								<input class="type" type="hidden" name="value[Type]" value="" />
 								<div class="Effect EffectNumeric">
@@ -300,7 +300,7 @@
 			<span class="dlgmsg">{-#tadvqryhelp#-}</span>
 			<br />
 			<table class="QueryCustom" width="100%">
-				<tr valign="top">
+				<tr class="top">
 					<td>
 						<div class="list dwin" style="height:180px;">
 							<div class="field" data-field="" data-type="" style="display:none;">
