@@ -595,3 +595,9 @@ div.DatabaseUpload td.label {
 div.DatabaseUpload td.value {
 	width:50%;
 }
+div.Datacard .headerLeft {
+	width:45%;
+}
+div.Datacard .headerRight {
+	width:55%;
+}
