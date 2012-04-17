@@ -1,5 +1,5 @@
 {-config_load file="$lang.conf" section="grpDatabaseFind"-}
-<div class="contentBlock" id="divRegionList" class="hidden">
+<div class="contentBlock hidden" id="divRegionList">
 	<span class="databaseListTitle">{-#msgDatabaseFind_Title#-}</span>
 	<br />
 	<div id="divDatabaseFindList">
