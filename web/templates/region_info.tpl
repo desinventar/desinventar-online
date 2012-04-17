@@ -1,7 +1,7 @@
 {-config_load file="$lg.conf" section="grpMainStrings"-}
 {-config_load file="$lg.conf" section="grpMenuRegion"-}
 <div id="divRegionInfo" class="RegionInfo contentBlock" style="display:none;">
-	<table border="0">
+	<table>
 		<tr>
 			<td>
 				<div id="divRegionLogo">
@@ -41,7 +41,7 @@
 		<tr>
 			<td colspan="2">
 				<hr />
-				<table border=0 style="width:100%; font-family:Lucida Grande, Verdana; font-size:10px;">
+				<table style="width:100%; font-family:Lucida Grande, Verdana; font-size:10px;">
 					<tr>
 						<td>
 							<div class="InfoGeneral">

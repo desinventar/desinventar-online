@@ -45,16 +45,16 @@
 				</th>
 				{-foreach name=sel key=key item=item from=$sel-}
 					<th class="header">
-						<table cellpadding=0 cellspacing=0 border=0>
+						<table>
 							<tr>
 								<td>
-									<a href="#" class="linkStatOrderColumn" altfield="{-$item-}" ordertype="ASC"><img src="{-$desinventarURL-}/images/asc.gif" border=0></a>
+									<a href="#" class="linkStatOrderColumn" altfield="{-$item-}" ordertype="ASC"><img src="{-$desinventarURL-}/images/asc.gif"></a>
 								</td>
 								<td>
 									{-$dk.$item-}
 								</td>
 								<td>
-									<a href="#" class="linkStatOrderColumn" altfield="{-$item-}" ordertype="DESC"><img src="{-$desinventarURL-}/images/desc.gif" border=0></a>
+									<a href="#" class="linkStatOrderColumn" altfield="{-$item-}" ordertype="DESC"><img src="{-$desinventarURL-}/images/desc.gif"></a>
 								</td>
 							</tr>
 						</table>

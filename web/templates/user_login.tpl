@@ -3,7 +3,7 @@
 <div class="UserLogin">
 	<form id="frmUserLogin" method="post" action="">
 		<br />
-		<table border="0" align="center" style="margin-top:1px;">
+		<table align="center" style="margin-top:1px;">
 			<tr>
 				<td align="right">
 					{-#tuser#-}

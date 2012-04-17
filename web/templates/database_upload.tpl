@@ -1,7 +1,7 @@
 {-config_load file="$lg.conf" section="grpDatabaseUpload"-}
 <div class="DatabaseUpload mainblock" style="margin:10px;">
 	<div id="divDatabaseUploadControl">
-		<table border="0">
+		<table>
 		<tr>
 			<td colspan="2" title="{-#msgDatabaseUploadFileSpec#-}">
 				{-#msgDatabaseUploadMsg1#-}

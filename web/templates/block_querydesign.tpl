@@ -1,7 +1,7 @@
 <div class="QueryDesign mainblock">
 <span id="msgQueryDesignTitle" class="hidden">{-#tsubtitle#-}</span>
 <span id="msgQueryDesignTooltip" class="hidden">{-#thlpquery#-}</span>
-<form class="QueryDesign" id="frmMainQuery" method="post" action="" target="dcr">
+<form class="QueryDesign" id="frmMainQuery" method="post" action="#" target="dcr">
 	<input type="hidden" class="RegionId" id="_REG" name="_REG" value="" />
 	<input type="hidden" class="MinYear"  id="prmQueryMinYear" name="prmQuery[ConstMinYear]" value="" />
 	<input type="hidden" class="MaxYear"  id="prmQueryMaxYear" name="prmQuery[ConstMaxYear]" value="" />
@@ -90,7 +90,7 @@
 								<input class="checkbox" type="checkbox" value="" />
 								<span class="label"></span>
 								<span class="options hidden">
-									<select class="operator" name="value[0]" class="small line">
+									<select class="operator small line" name="value[0]">
 										<option class="small" value="-1">{-#teffhav#-}</option>
 										<option class="small" value="0" >{-#teffhavnot#-}</option>
 										<option class="small" value="-2">{-#teffdontknow#-}</option>
@@ -129,8 +129,9 @@
 										<option class="small" value="-2">{-#teffdontknow#-}</option>
 									</select>
 								</span>
-							</td>
-						</tr>
+							</div>
+						</td>
+					</tr>
 				</table>
 			</div>
 			<br />
@@ -226,7 +227,7 @@
 			<div style="height: 250px;">
 				<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}">{-#msgQueryDesign_DateRange#-}</span>
 				<span class="dlgmsg withHelpOver" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}">{-#msgQueryDesign_DateFormat#-}</span><br />
-				<table border="0">
+				<table>
 					<tr>
 						<td>
 							<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}">{-#ttitsince#-}:</span>
@@ -298,7 +299,7 @@
 			<br />
 			<span class="dlgmsg">{-#tadvqryhelp#-}</span>
 			<br />
-			<table class="QueryCustom" border="0" width="100%">
+			<table class="QueryCustom" width="100%">
 				<tr valign="top">
 					<td>
 						<div class="list dwin" style="height:180px;">

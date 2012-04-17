@@ -145,7 +145,7 @@
 			<tr>
 				<td></td>
 				<td>
-					<table border=0 style="height:100%;">
+					<table style="height:100%;">
 					<tr>
 						<td colspan="2" align="center">
 							<p><u>{-#ghoraxis#-}:</u></p>

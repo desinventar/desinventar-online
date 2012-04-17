@@ -41,7 +41,7 @@
 										<tr>
 											<td colspan="2">
 												<input type="hidden" id="txtRangeLabel" value="{-#mbetween#-}" />
-												<table border="0" id="tbl_range" class="grid">
+												<table id="tbl_range" class="grid">
 													<thead>
 														<tr>
 															<th colspan=2>
@@ -82,7 +82,7 @@
 													{-/foreach-}
 													</tbody>
 												</table>
-												<table border="0" width="100%">
+												<table width="100%">
 													<tr>
 														<td>{-#mcoltransp#-}
 															<select name="_M+Transparency" class="line">
