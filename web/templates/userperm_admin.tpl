@@ -2,12 +2,12 @@
 <div style="margin:10px;">
 	<h4>{-#msgUserPermAdminMsg1#-}</h4>
 	<br />
-	<table width="100%">
+	<table class="width100">
 		<tr>
-			<td valign="top">
+			<td class="top">
 				<b>{-#msgUserPermAdminCurrentAdmin#-} : </b>
 			</td>
-			<td valign="top">
+			<td class="top">
 				<p id="txtUserPermAdminCurrent"></p>
 			</td>
 		</tr>
@@ -17,10 +17,10 @@
 			</td>
 		</tr>
 		<tr>
-			<td valign="top">
+			<td class="top">
 				<b>{-#msgUserPermAdminNewAdmin#-} : </b>
 			</td>
-			<td valign="top">
+			<td class="top">
 				<select id="fldUserPermAdmin_UserId">
 					<option></option>
 				</select>
@@ -32,7 +32,7 @@
 		<a class="button" href="#" id="btnUserPermAdminSend"><span>{-#msgUserPermAdminSend#-}</span></a>
 		<a class="button" href="#" id="btnUserPermAdminCancel"><span>{-#msgUserPermAdminCancel#-}</span></a>
 	</div>
-	<div id="divUserPermAdminStatus" align="center">
+	<div id="divUserPermAdminStatus" class="center">
 		<br />
 		<h4>
 			<span class="clsUserPermAdminStatus" id="txtUserPermAdminFormError">{-#msgUserPermAdminFormError#-}</span>

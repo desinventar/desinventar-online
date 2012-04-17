@@ -1,7 +1,7 @@
 {-config_load file="$lg.conf" section="dc_statistic"-}
 {-config_load file="$lg.conf" section="dc_qdetails"-}
 {-if $ctl_showres-}
-	<table width="920" class="grid">
+	<table class="width100 grid">
 		<tr>
 			<td colspan="3">
 				<div class="dwin" style="height:40px;">
@@ -29,10 +29,10 @@
 				<a class="button" id="btnStatGotoNextPage"><span>&gt;</span></a>
 				<a class="button" id="btnStatGotoLastPage"><span>&gt;&gt;</span></a>
 			</td>
-			<td align="center">
+			<td class="center">
 				<span id="stdstatusmsg" class="dlgmsg"></span>
 			</td>
-			<td align="right">
+			<td class="right">
 				{-#tsumnum#-}: {-$cou-} | {-#trepnum#-}: {-$tot-}
 			</td>
 		</tr>
@@ -45,16 +45,16 @@
 				</th>
 				{-foreach name=sel key=key item=item from=$sel-}
 					<th class="header">
-						<table cellpadding=0 cellspacing=0 border=0>
+						<table>
 							<tr>
 								<td>
-									<a href="#" class="linkStatOrderColumn" altfield="{-$item-}" ordertype="ASC"><img src="{-$desinventarURL-}/images/asc.gif" border=0></a>
+									<a href="#" class="linkStatOrderColumn" altfield="{-$item-}" ordertype="ASC"><img src="{-$desinventarURL-}/images/asc.gif"></a>
 								</td>
 								<td>
 									{-$dk.$item-}
 								</td>
 								<td>
-									<a href="#" class="linkStatOrderColumn" altfield="{-$item-}" ordertype="DESC"><img src="{-$desinventarURL-}/images/desc.gif" border=0></a>
+									<a href="#" class="linkStatOrderColumn" altfield="{-$item-}" ordertype="DESC"><img src="{-$desinventarURL-}/images/desc.gif"></a>
 								</td>
 							</tr>
 						</table>

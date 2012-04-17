@@ -15,12 +15,12 @@
 			</td>
 		</tr>
 		<tr>
-			<td valign="top">
+			<td class="top">
 				<div class="dwin" style="width:250px;">
-					<p align="right">{-#trepnum#-}: {-$MapNumberOfRecords-}</p>
+					<p class="right">{-#trepnum#-}: {-$MapNumberOfRecords-}</p>
 					<hr />
 					<h4 id="defaultMapTitle">{-#tmapof#-} {-$rgl[0].info.TITLE-}</h4>
-					<div align="justify" class="QueryInfo dwin" style="height:250px;">{-#msgViewMap_Level#-}: {-$rgl[0].info.LEVEL-}; 
+					<div class="justify" class="QueryInfo dwin" style="height:250px;">{-#msgViewMap_Level#-}: {-$rgl[0].info.LEVEL-}; 
 						{-foreach key=k item=i from=$rgl[0].info-}
 							{-if $k == "GEO"-}<i>{-#geo#-}:</i> {-$i-}; {-/if-}
 							{-if $k == "EVE"-}<i>{-#eve#-}:</i> {-$i-}; {-/if-}
@@ -41,9 +41,9 @@
 					<img src="{-$legend-}" /><br />
 				</div>
 			</td>
-			<td valign="top">
+			<td class="top">
 				<input type="text" id="MapTitle" name="MapTitle" size=110 />
-				<img id="linkRestoreMapTitle" border="0" src="{-$desinventarURL-}/images/reload.jpg"><br />
+				<img id="linkRestoreMapTitle" src="{-$desinventarURL-}/images/reload.jpg"><br />
 				<div id="map" class="dwin" style="width:700px;height:530px;"></div>
 			</td>
 		</tr>
@@ -61,7 +61,7 @@
 		<input type="hidden" id="prmMapMaxY"     value="{-$maxy-}"/>
 		<input type="hidden" id="prmMapServer"   value="{-$mps-}"/>
 		<input type="hidden" id="prmMapBase"     value="{-$basemap-}"/>
-		<form class="MapSave" method="post" action="">
+		<form class="MapSave" method="post" action="#">
 			<input type="hidden" class="Cmd"         name="cmd"                  value="export" />
 			<input type="hidden" class="Extent"      name="options[extent]"      value="" />
 			<input type="hidden" class="Layers"      name="options[layers]"      value="" />

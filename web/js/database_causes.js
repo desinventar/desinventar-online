@@ -11,7 +11,7 @@ function onReadyDatabaseCauses()
 		doDatabaseCausesPopulateLists();
 	});
 
-	jQuery('.clsDatabaseCausesStatus').hide();
+	jQuery('div.DatabaseCauses span.status').hide();
 
 	jQuery('#tbodyDatabaseCauses_CauseListCustom,#tbodyDatabaseCauses_CauseListDefault').on('click', 'tr', function(event) {
 		jQuery('#fldDatabaseCauses_CauseId').val(jQuery('.CauseId',this).text());
@@ -71,7 +71,7 @@ function onReadyDatabaseCauses()
 			jQuery('#msgDatabaseCauses_ErrorEmtpyFields').show();
 			setTimeout(function () {
 				jQuery('#fldDatabaseCauses_CauseName').unhighlight();
-				jQuery('.clsDatabaseCausesStatus').hide();
+				jQuery('div.DatabaseCauses span.status').hide();
 			}, 2500);
 			bContinue = false;
 		}
@@ -110,7 +110,7 @@ function onReadyDatabaseCauses()
 						}
 					}					
 					setTimeout(function () {
-						jQuery('.clsDatabaseCausesStatus').hide();
+						jQuery('div.DatabaseCauses span.status').hide();
 					}, 2500);
 				},
 				'json'

@@ -7,9 +7,9 @@
 	</div>
 	<div id="map-cfg" class="ViewMapParams mainblock">
 		<div id="colorpicker201" class="colorpicker201"></div>
-		<form id="CM" method="post" action="">
+		<form id="CM" method="post" action="#">
 			<table class="conf">
-				<tr valign="top">
+				<tr class="top">
 					<td>
 						<table>
 							<tr>
@@ -25,13 +25,13 @@
 								</td>
 							</tr>
 							<tr>
-								<td valign="top">
+								<td class="top">
 									<table>
 										<tr>
-											<td valign="top">
+											<td class="top">
 												<b>{-#mranlegcol#-}</b>&nbsp; &nbsp; &nbsp; &nbsp;
 											</td>
-											<td valign="top">
+											<td class="top">
 												<!--
 												<a class="button hidden" onclick="addRowToTable();"><span>+</span></a>
 												<a class="button hidden" onclick="removeRowFromTable();"><span>-</span></a>
@@ -41,7 +41,7 @@
 										<tr>
 											<td colspan="2">
 												<input type="hidden" id="txtRangeLabel" value="{-#mbetween#-}" />
-												<table border="0" id="tbl_range" class="grid">
+												<table id="tbl_range" class="grid">
 													<thead>
 														<tr>
 															<th colspan=2>
@@ -82,7 +82,7 @@
 													{-/foreach-}
 													</tbody>
 												</table>
-												<table border="0" width="100%">
+												<table class="width100">
 													<tr>
 														<td>{-#mcoltransp#-}
 															<select name="_M+Transparency" class="line">
@@ -98,7 +98,7 @@
 																<option value="100">100</option>
 															</select>%
 														</td>
-														<td align="right">
+														<td class="right">
 															<a class="button" onClick="genColors();"><span>{-#mcolorgrad#-}</span></a>
 														</td>
 													</tr>

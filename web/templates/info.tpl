@@ -7,14 +7,14 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
 </head>
 <body>
-	<table border="0">
-		<tr valign="top">
+	<table>
+		<tr class="top">
 			<td>
 				<fieldset style="padding:5px 5px 5px 5px;">
 					<!-- GENERAL REGION INFO SECTION -->
 					<form id="frmDatabaseInfo" name="infofrm" method="post" action="{-$desinventarURL-}/info.php" target="ifinfo">
 					
-						<table border="0" cellspacing="0" cellpadding="0">
+						<table>
 							<tr>
 								<td colspan="2">
 									{-foreach name=info key=LangIsoCode item=RegionFields from=$info-}
@@ -24,12 +24,12 @@
 												$('inf{-$LangIsoCode-}').style.display='none'; else $('inf{-$LangIsoCode-}').style.display='block';">
 												<b onMouseOver="showtip('{-$dic.DBRegion[2]-}');">{-$dic.DBRegion[0]-} {-$LangIsoCode-}</b></a>
 											</legend>
-											<table id="inf{-$LangIsoCode-}" border="0" style="display:{-if ($smarty.foreach.info.iteration) == 1-}block{-else-}none{-/if-};">
+											<table id="inf{-$LangIsoCode-}" style="display:{-if ($smarty.foreach.info.iteration) == 1-}block{-else-}none{-/if-};">
 												{-foreach name=iitt key=key item=item from=$RegionFields-}
 													{-assign var="inf" value="DB$key"-}
 													{-assign var="tabind" value="`$tabind+1`"-}
 													<tr>
-														<td align="right">
+														<td class="right">
 															<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.$inf[2]-}')">
 															<b style="color:darkred;">{-$dic.$inf[0]-}</b><span>{-$dic.$inf[1]-}</span></a>
 														</td>
@@ -53,7 +53,7 @@
 								{-assign var="inf" value="DB$key"-}
 								{-assign var="tabind" value="`$tabind+1`"-}
 								<tr>
-									<td align="right">
+									<td class="right">
 										<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.$inf[2]-}')">
 										<b style="color:darkred;">{-$dic.$inf[0]-}</b><span>{-$dic.$inf[1]-}</span></a>
 									</td>
@@ -69,7 +69,7 @@
 								</tr>
 							{-/foreach-}
 							<tr>
-								<td colspan="2" align="center">
+								<td colspan="2" class="center">
 									<br />
 									<input name="_REG" type="hidden" value="{-$reg-}" />
 									<input id="_infocmd" name="cmd" value="cmdDBInfoUpdate" type="hidden" />
@@ -93,7 +93,7 @@
 						<b onMouseOver="showtip('{-$dic.DBLog[2]-}');">{-$dic.DBLog[0]-}</b>
 					</legend>
 					<div class="dwin" style="width:280px; height:120px;">
-						<table width="100%" class="grid">
+						<table class="width100 grid">
 							<thead>
 								<tr>
 									<td class="header" onMouseOver="showtip('{-$dic.DBLogType[2]-}');">
@@ -155,7 +155,7 @@
 							<textarea id="DBLogNotes" name="DBLogNotes" cols="22"  class="fixw" tabindex="2" 
 								onFocus="showtip('{-$dic.DBLogNote[2]-}');"></textarea>
 							<br /><br />
-							<p align="center" class="fixw">
+							<p class="center fixw">
 								<input name="r" type="hidden" value="{-$reg-}" />
 								<input id="DBLogDate" name="DBLogDate" type="hidden" />
 								<input id="LogCmd" name="cmd" type="hidden" />

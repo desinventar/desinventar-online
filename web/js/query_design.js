@@ -11,6 +11,23 @@ function onReadyQueryDesign()
 		showtip(jQuery(this).data('help'));
 	});
 
+	jQuery('div.QueryDesign').on('click','div.QueryCustom :button.clear', function(e) {
+		var query = jQuery('div.QueryDesign textarea.QueryCustom');
+		query.val('');
+		e.stopPropagation();
+		return false;
+	}).on('click','div.QueryCustom :button', function(e) {
+		var query = jQuery('div.QueryDesign textarea.QueryCustom');
+		var sql = jQuery(this).data('sql');
+		if (sql == undefined)
+		{
+			sql = '';
+		}
+		query.val(query.val() + sql);
+		query.focus();
+		e.stopPropagation();
+	});
+
 	jQuery('div.QueryDesign div.GeographyList').on('click', 'li.item input:checkbox', function(event) {
 		jQuery(this).trigger('GeographyUpdate');
 	}).on('click','li.item span.label', function(event) {

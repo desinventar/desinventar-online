@@ -1,19 +1,19 @@
 {-config_load file="$lg.conf" section="grpDatabaseUpload"-}
 <div class="DatabaseUpload mainblock" style="margin:10px;">
 	<div id="divDatabaseUploadControl">
-		<table border="0">
+		<table>
 		<tr>
 			<td colspan="2" title="{-#msgDatabaseUploadFileSpec#-}">
 				{-#msgDatabaseUploadMsg1#-}
 			</td>
 		</tr>
 		<tr >
-			<td align="right" valign="bottom" title="{-#msgDatabaseUploadFileSpec#-}" >
+			<td class="bottom right" title="{-#msgDatabaseUploadFileSpec#-}" >
 				<span style="display:none;">{-#msgDatabaseUploadFilename#-} :</span>
 				<input type="text"   id="txtDatabaseUploadFilename" value="" size="35" />
 				<input type="hidden" id="txtDatabaseUploadId" value="" />
 			</td>
-			<td valign="top">
+			<td class="top">
 				<div id="divFileUploaderControl" style="display:block;">
 				</div>
 				<a class="button" id="btnDatabaseUploadCancel"><span>{-#msgDatabaseUploadCancel#-}</span></a>
@@ -39,17 +39,17 @@
 			<span class="clsDatabaseUploadType" id="txtDatabaseUploadConfirmReplace">{-#msgDatabaseUploadConfirmReplace#-}</span>
 			<span class="clsDatabaseUploadType" id="txtDatabaseUploadConfirmCopy">{-#msgDatabaseUploadConfirmCopy#-}</span>
 		</h4>
-		<table width="100%">
+		<table class="width100">
 		<tr>
-			<td align="right" width="25%">
+			<td class="right label">
 				{-#msgDatabaseUploadRegionId#-} :
 			</td>
-			<td width="50%">
+			<td class="left value">
 				<span id="txtDatabaseUploadRegionId"></span><br />
 			</td>
 		</tr>
 		<tr>
-			<td align="right">
+			<td class="right">
 				{-#msgDatabaseUploadRegionLabel#-} :
 			</td>
 			<td>
@@ -57,7 +57,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td align="right">
+			<td class="right">
 				{-#msgDatabaseUploadCountryIso#-} :
 			</td>
 			<td>
@@ -65,7 +65,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td align="right">
+			<td class="right">
 				{-#msgDatabaseUploadLastUpdate#-} :
 			</td>
 			<td>
@@ -73,7 +73,7 @@
 			</td>
 		</tr>
 		<tr id="trDatabaseUploadNumberOfRecords">
-			<td align="right">
+			<td class="right">
 				{-#msgDatabaseUploadNumberOfRecords#-} :
 			</td>
 			<td>
@@ -81,7 +81,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2" align="center">
+			<td colspan="2" class="center">
 				<div class="center">
 					<br />
 					<div class="clsDatabaseUploadButtons">

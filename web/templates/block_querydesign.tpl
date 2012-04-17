@@ -1,7 +1,7 @@
 <div class="QueryDesign mainblock">
 <span id="msgQueryDesignTitle" class="hidden">{-#tsubtitle#-}</span>
 <span id="msgQueryDesignTooltip" class="hidden">{-#thlpquery#-}</span>
-<form class="QueryDesign" id="frmMainQuery" method="post" action="" target="dcr">
+<form class="QueryDesign" id="frmMainQuery" method="post" action="#" target="dcr">
 	<input type="hidden" class="RegionId" id="_REG" name="_REG" value="" />
 	<input type="hidden" class="MinYear"  id="prmQueryMinYear" name="prmQuery[ConstMinYear]" value="" />
 	<input type="hidden" class="MaxYear"  id="prmQueryMaxYear" name="prmQuery[ConstMaxYear]" value="" />
@@ -34,7 +34,7 @@
 			<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_DisasterSiteNotes_Helptext#-}">{-#msgDatacard_DisasterSiteNotes#-}</span>
 			<br/>
 			<input type="hidden" name="D_DisasterSiteNotes[0]" />
-			<textarea class="inputText withHelpFocus" id="DisasterSiteNotes" name="D_DisasterSiteNotes[1]" style="width:220px; height: 40px;"
+			<textarea class="inputText withHelpFocus" name="D_DisasterSiteNotes[1]" style="width:220px; height: 40px;"
 				data-help="{-#msgDatacard_DisasterSiteNotes_Helptext#-}"></textarea>
 		</dd>
 		
@@ -49,12 +49,12 @@
 			<br /><br />
 			<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_EventDuration_Helptext#-}">{-#msgDatacard_EventDuration#-}</span>
 			<br />
-			<input id="EventDuration" name="D_EventDuration" type="text" class="line fixw withHelpFocus"
+			<input name="D_EventDuration" type="text" class="line fixw withHelpFocus"
 				data-help="{-#msgDatacard_EventDuration_Helptext#-}" value="" />
 			<br />
 			<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_EventNotes_Helptext#-}">{-#msgDatacard_EventNotes#-}</span>
 			<br />
-			<textarea id="EventNotes" name="D_EventNotes[1]" style="width:250px; height:40px;"
+			<textarea name="D_EventNotes[1]" style="width:250px; height:40px;"
 				class="inputText withHelpFocus" data-help="{-#msgDatacard_EventNotes_Helptext#-}"></textarea>
 		</dd>
 			
@@ -75,7 +75,7 @@
 		<!-- BEGIN QUERY EFFECTS SECTION -->
 		<dt>{-#meffsection#-}</dt>
 		<dd>
-			<p align="right">{-#msgOperator#-}
+			<p class="right">{-#msgOperator#-}
 			<select name="QueryEffect[OP]" class="dlgmsg small line">
 				<option class="small" value="AND">{-#tand#-}</option>
 				<option class="small" value="OR" >{-#tor#-}</option>
@@ -85,12 +85,12 @@
 			<div class="EffectPeopleList dwin" style="height: 100px;">
 				<table class="EffectPeopleList EffectList">
 					<tr style="display:none;">
-						<td valign="top">
+						<td class="top">
 							<div class="EffectPeople" data-field="">
 								<input class="checkbox" type="checkbox" value="" />
 								<span class="label"></span>
 								<span class="options hidden">
-									<select class="operator" name="value[0]" class="small line">
+									<select class="operator small line" name="value[0]">
 										<option class="small" value="-1">{-#teffhav#-}</option>
 										<option class="small" value="0" >{-#teffhavnot#-}</option>
 										<option class="small" value="-2">{-#teffdontknow#-}</option>
@@ -118,7 +118,7 @@
 			<div style="height: 80px;" class="dwin">
 				<table class="EffectSectorList EffectList">
 					<tr style="display:none;">
-						<td valign="top">
+						<td class="top">
 							<div class="EffectSector" data-field="">
 								<input class="checkbox" type="checkbox" value="" />
 								<span class="label"></span>
@@ -129,8 +129,9 @@
 										<option class="small" value="-2">{-#teffdontknow#-}</option>
 									</select>
 								</span>
-							</td>
-						</tr>
+							</div>
+						</td>
+					</tr>
 				</table>
 			</div>
 			<br />
@@ -139,7 +140,7 @@
 			<b>{-#ttitloss#-}</b><br />
 				<table class="EffectListLosses2 EffectList">
 					<tr style="display:none;">
-						<td valign="top">
+						<td class="top">
 							<div class="EffectLosses2" data-field="">
 								<input class="checkbox" type="checkbox" value="" />
 								<span class="label"></span>
@@ -164,11 +165,11 @@
 			<br />
 			<span class="fieldLabel withHelpOver"  data-help="{-#msgDatacard_EffectOtherLosses_Helptext#-}" title="{-#msgDatacard_EffectOtherLosses_Tooltip#-}">{-#msgDatacard_EffectOtherLosses#-}</span>
 			<br />
-			<input class="fixw line withHelpFocus" data-help="{-#msgDatacard_EffectOtherLosses_Helptext#-}" type="text" id="EffectOtherLosses" name="D_EffectOtherLosses"  value="" />
+			<input class="fixw line withHelpFocus" data-help="{-#msgDatacard_EffectOtherLosses_Helptext#-}" type="text" name="D_EffectOtherLosses"  value="" />
 			<br />
 			<span class="fieldLabel withHelpOver"  data-help="{-#msgDatacard_EffectNotes_Helptext#-}" title="{-#msgDatacard_EffectNotes_Tooltip#-}">{-#msgDatacard_EffectNotes#-}</span>
 			<br />
-			<input class="fixw line withHelpFocus" data-help="{-#msgDatacard_EffectNotes_Helptext#-}" type="text" id="EffectNotes" name="D_EffectNotes"  value="" />
+			<input class="fixw line withHelpFocus" data-help="{-#msgDatacard_EffectNotes_Helptext#-}" type="text" name="D_EffectNotes"  value="" />
 			<br />
 		</dd>
 		<!-- END QUERY EFFECTS SECTION -->
@@ -176,7 +177,7 @@
 		<!-- Begin EEField Section -->
 		<dt>{-#mextsection#-}</dt>
 		<dd>
-			<p align="right">{-#msgOperator#-}
+			<p class="right">{-#msgOperator#-}
 			<select name="QueryEEField[OP]" class="dlgmsg small line">
 				<option class="small" value="AND">{-#tand#-}</option>
 				<option class="small" value="OR" >{-#tor#-}</option>
@@ -185,7 +186,7 @@
 			<div style="height: 300px;" class="dwin">
 				<table class="EffectAdditionalList EffectList">
 					<tr style="display:none;">
-						<td valign="top">
+						<td class="top">
 							<div class="EffectAdditional" data-field="">
 								<input class="type" type="hidden" name="value[Type]" value="" />
 								<div class="Effect EffectNumeric">
@@ -226,7 +227,7 @@
 			<div style="height: 250px;">
 				<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}">{-#msgQueryDesign_DateRange#-}</span>
 				<span class="dlgmsg withHelpOver" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}">{-#msgQueryDesign_DateFormat#-}</span><br />
-				<table border="0">
+				<table>
 					<tr>
 						<td>
 							<span class="fieldLabel withHelpOver" data-help="{-#msgDatacard_DisasterBeginTime_Helptext#-}">{-#ttitsince#-}:</span>
@@ -293,60 +294,54 @@
 		<!-- BEGIN CUSTOMQUERY SECTION -->
 		<dt>{-#madvsection#-}</dt>
 		<dd>
-			<textarea id="QueryCustom" name="QueryCustom" 
-				style="width:300px; height:45px;" class="inputText"></textarea>
-			<br />
-			<span class="dlgmsg">{-#tadvqryhelp#-}</span>
-			<br />
-			<table class="QueryCustom" border="0" width="100%">
-				<tr valign="top">
-					<td>
-						<div class="list dwin" style="height:180px;">
-							<div class="field" data-field="" data-type="" style="display:none;">
-								<input type="button" class="CustomQueryListItem" value="" />
-								<br />
+			<div class="QueryCustom">
+				<textarea id="QueryCustom" name="QueryCustom" class="inputText QueryCustom"
+					style="width:300px; height:45px;" ></textarea>
+				<br />
+				<span class="dlgmsg">{-#tadvqryhelp#-}</span>
+				<br />
+				<table class="QueryCustom">
+					<tr class="top">
+						<td>
+							<div class="list dwin" style="height:180px;">
+								<div class="field" data-field="" data-type="" style="display:none;">
+									<input type="button" class="ListItem" value="Q" />
+									<br />
+								</div>
 							</div>
-						</div>
-						<div class="defaultlist hidden">
-							<span data-field="DisasterSerial"    data-type="text">{-#msgDatacard_DisasterSerial#-}</span>
-							<span data-field="DisasterBeginTime" data-type="date">{-#msgDatacard_DisasterBeginTime#-}</span>
-							<span data-field="DisasterSiteNotes" data-type="text">{-#msgDatacard_DisasterSiteNotes#-}</span>
-							<span data-field="EventDuration"     data-type="text">{-#msgDatacard_EventDuration#-}</span>
-							<span data-field="EventNotes"        data-type="text">{-#msgDatacard_EventNotes#-}</span>
-							<span data-field="CauseNotes"        data-type="text">{-#msgDatacard_CauseNotes#-}</span>
-							<span data-field="RecordAuthor"      data-type="text">{-#msgDatacard_RecordAuthor#-}</span>
-							<span data-field="RecordCreation"    data-type="date">{-#msgDatacard_RecordCreation#-}</span>
-							<span data-field="RecordUpdate"      data-type="date">{-#msgDatacard_RecordUpdate#-}</span>
-						</div>
-					</td>
-					<td align="center">
-						<input type="button" id="<" value="<" class="disabled" disabled 
-							onClick="$('QueryCustom').value += this.value; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqlessthan#-}');" />
-						<input type="button" id=">" value=">" class="disabled" disabled 
-							onClick="$('QueryCustom').value += this.value; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqgreathan#-}');" />
-						<input type="button" id="=" value="=" class="disabled" disabled 
-							onClick="$('QueryCustom').value += this.value; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqequalto#-}');" />
-						<br />
-						<input type="button" id="<>" value="<>" class="disabled" disabled 
-							onClick="$('QueryCustom').value += this.value; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqnoteqto#-}');" />
-						<input type="button" id="LIKE '%%'" value="{-#tlike#-}" class="disabled" disabled 
-							onClick="$('QueryCustom').value += this.id; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqlike#-}');" />
-						<input type="button" id="=-1" value="{-#teffhav#-}" class="disabled" disabled 
-							onClick="$('QueryCustom').value += this.id; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqwere#-}');" />
-						<input type="button" id="=0" value="{-#teffhavnot#-}" class="disabled" disabled 
-							onClick="$('QueryCustom').value += this.id; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqwerent#-}');" />
-						<input type="button" id="=-2" value="{-#teffdontknow#-}" class="disabled" disabled 
-							onClick="$('QueryCustom').value += this.id; $('QueryCustom').focus();" onMouseOver="showtip('{-#taqdntknow#-}');" />
-						<br />
-						<input type="button" value=" (" onClick="$('QueryCustom').value += this.value;" />
-						<input type="button" value=") " onClick="$('QueryCustom').value += this.value;" />
-						<input type="button" value=" AND " onClick="$('QueryCustom').value += this.value;" onMouseOver="showtip('{-#taqandopt#-}')" />
-						<input type="button" value=" OR " onClick="$('QueryCustom').value += this.value;" onMouseOver="showtip('{-#taqoropt#-}')" />
-						<br /><br />
-						<input type="button" value="{-#tclear#-}" onClick="$('QueryCustom').value = '';" />
-					</td>
-				</tr>
-			</table>
+							<div class="defaultlist hidden">
+								<span data-field="DisasterSerial"    data-type="text">{-#msgDatacard_DisasterSerial#-}</span>
+								<span data-field="DisasterBeginTime" data-type="date">{-#msgDatacard_DisasterBeginTime#-}</span>
+								<span data-field="DisasterSiteNotes" data-type="text">{-#msgDatacard_DisasterSiteNotes#-}</span>
+								<span data-field="EventDuration"     data-type="text">{-#msgDatacard_EventDuration#-}</span>
+								<span data-field="EventNotes"        data-type="text">{-#msgDatacard_EventNotes#-}</span>
+								<span data-field="CauseNotes"        data-type="text">{-#msgDatacard_CauseNotes#-}</span>
+								<span data-field="RecordAuthor"      data-type="text">{-#msgDatacard_RecordAuthor#-}</span>
+								<span data-field="RecordCreation"    data-type="date">{-#msgDatacard_RecordCreation#-}</span>
+								<span data-field="RecordUpdate"      data-type="date">{-#msgDatacard_RecordUpdate#-}</span>
+							</div>
+						</td>
+						<td class="center">
+							<input type="button" value="<" class="withHelpOver" data-sql="<" data-help="{-#taqlessthan#-}" />
+							<input type="button" value=">" class="withHelpOver" data-sql=">" data-help="{-#taqgreathan#-}" />
+							<input type="button" value="=" class="withHelpOver" data-sql="=" data-help="{-#taqequalto#-}"  />
+							<br />
+							<input type="button" value="<>" class="withHelpOver" data-sql="<>" data-help="{-#taqnoteqto#-}" />
+							<input type="button" value="{-#tlike#-}" class="withHelpOver" data-sql="LIKE '%%'" data-help="{-#taqlike#-}" />
+							<input type="button" value="{-#teffhav#-}" class="withHelpOver" data-sql="=-1" data-help="{-#taqwere#-}" />
+							<input type="button" value="{-#teffhavnot#-}" class="withHelpOver" data-sql="=0" data-help="{-#taqwerent#-}" />
+							<input type="button" value="{-#teffdontknow#-}" class="withHelpOver" data-sql="=-2" data-help="{-#taqdntknow#-}" />
+							<br />
+							<input type="button" value=" (" data-sql=" (" />
+							<input type="button" value=") " data-sql=") " />
+							<input type="button" value=" AND " class="withHelpOver" data-sql=" AND " data-help="{-#taqandopt#-}" />
+							<input type="button" value=" OR "  class="withHelpOver" data-sql=" OR "  data-help="{-#taqoropt#-}"  />
+							<br /><br />
+							<input type="button" value="{-#tclear#-}" class="clear" />
+						</td>
+					</tr>
+				</table>
+			</div>
 		</dd>
 		<!-- BEGIN CUSTOMQUERY SECTION -->
 	</dl>

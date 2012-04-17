@@ -2,7 +2,7 @@
 	<div class="x-window-header">
 		{-#mopenquery#-}
 	</div>
-	<div id="qry-cfg" style="text-align:center;">
+	<div id="qry-cfg" class="center">
 		<form id="openquery" enctype="multipart/form-data" action="{-$desinventarURL-}/?r={-$reg-}" method="post">
 			<br /><br />
 			<input type="hidden" name="cmd" value="openquery" />

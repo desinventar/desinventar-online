@@ -7,8 +7,8 @@
 		{-#msgViewStd#-}
 	</div>
 	<div id="std-cfg" class="ViewStatParams mainblock">
-		<form id="frmStatParams" method="post" action="">
-			<table border="0" width="100%">
+		<form id="frmStatParams" method="post" action="#">
+			<table>
 				<tr>
 					<td>{-#sresxpage#-}
 						<select id="_S+SQL_LIMIT" name="_S+SQL_LIMIT" class="line">
@@ -31,7 +31,7 @@
 			<b>{-#stotallevels#-}</b>
 			<br />
 			<table>
-				<tr valign="top">
+				<tr class="top">
 					<td class="StatGroup">
 						<b>{-$std.StatisticFirstlev[0]-}</b><br />
 						<input class="label" type="hidden" name="options[grouplabel][0]" value="" />
@@ -73,7 +73,7 @@
 						<a class="button" onclick="selectall('_S+sel1[]');"><span>{-#balls#-}</span></a>
 						<a class="button" onclick="selectnone('_S+sel1[]');"><span>{-#bnone#-}</span></a>
 					</td>
-					<td align="center" valign="middle" style="width:20px;">
+					<td class="middle center" style="width:20px;">
 						<a class="button" onclick="moveOptions($('_S+sel1[]'), $('fldStatFieldSelect'));"><span>&rarr;</span></a>
 						<br /><br /><br />
 						<a class="button" onclick="moveOptions($('fldStatFieldSelect'), $('_S+sel1[]'));"><span>&larr;</span></a>
@@ -88,7 +88,7 @@
 						<a class="button" onclick="selectall('fldStatFieldSelect');"><span>{-#balls#-}</span></a>
 						<a class="button" onclick="selectnone('fldStatFieldSelect');"><span>{-#bnone#-}</span></a>
 					</td>
-					<td style="width:20px;" align="center">
+					<td style="width:20px;" class="center">
 						<a class="button" onclick="top('fldStatFieldSelect');"><span>&uArr;</span></a><br />
 						<a class="button" onclick="upone('fldStatFieldSelect');"><span>&uarr;</span></a><br />
 						<a class="button" onclick="downone('fldStatFieldSelect');"><span>&darr;</span></a><br />
