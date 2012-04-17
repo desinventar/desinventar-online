@@ -69,7 +69,7 @@
 		<input type="hidden" id="DatacardCommand"    name="DatacardCommand" value="" />
 		<input type="hidden" id="Status"             name="Status" value="" />
 		{-counter assign="MyTabIndex" start="1"-}
-		<table border="1" cellspacing="8" class="width100">
+		<table border="1" class="Datacard">
 			<!-- DATACARD INFORMATION SECTION -->
 			<tr>
 				<td class="top columnLeft">
