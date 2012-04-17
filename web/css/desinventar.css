@@ -604,6 +604,12 @@ div.Datacard .headerRight {
 div.Datacard .columnLeft {
 	width:30px;
 	border:0px;
+	margin-right:10px;
+}
+div.Datacard table.Datacard {
+	border: 1px solid #bbbbbb;
+	border-radius:3px;
+	width:100%;
 }
 div.Results .header {
 	background:#bbbbbb;
