@@ -1,6 +1,6 @@
 {-config_load file="$lg.conf" section="grpDatacard"-}
 <div id="divDatacard" class="Datacard mainblock">
-	<table style="width:100%;">
+	<table class="width100">
 		<tr>
 			<td class="top left headerLeft">
 				<input type="button" id="btnDatacardNew"    class="DatacardCmdButton bb bnew"    title="{-#tnewtitle#-}: {-#tnewdesc#-}" value=" "    />
@@ -72,7 +72,7 @@
 		<table border="1" cellspacing="8" class="width100">
 			<!-- DATACARD INFORMATION SECTION -->
 			<tr>
-				<td width="30" style="border:0px;" class="top">
+				<td class="top columnLeft">
 					&nbsp;
 				</td>
 				<td style="border-color:#000000;">
@@ -123,7 +123,7 @@
 			</tr>
 			<!-- GEOGRAPHY SECTION -->
 			<tr>
-				<td width="30" style="border:0px;" class="top">
+				<td class="top columnLeft">
 					<span title="<b>{-#mgeography#-}</b><br />{-$dmg.MetGuidegeography[2]-}">
 						<img src="{-$desinventarURL-}/images/di_geotag.png" alt="" />
 					</span>
@@ -186,7 +186,7 @@
 			</tr>
 			<!-- EFFECTS SECTION--> 
 			<tr>
-				<td width="30" class="top" style="border:0px;">
+				<td class="top columnLeft">
 					<a href="#" id="linkDatacardShowEffectsBasic">
 						<span title="<b>{-#tbaseffects#-}</b><br />{-$dmg.MetGuidedatacards[2]-}">
 							<img id="efimg" src="{-$desinventarURL-}/images/di_efftag.png" alt="" />
@@ -337,7 +337,7 @@
 			</tr>
 			<!-- BEGIN EVENT SECTION -->
 			<tr style="border:1px solid #ff0;">
-				<td width="30" class="top" style="border:0px;">
+				<td class="top columnLeft">
 					<span title="<b>{-#mevents#-}</b><br />{-$dmg.MetGuideevents[2]-}">
 						<img src="{-$desinventarURL-}/images/di_evetag.png" alt="" />
 					</span>
@@ -376,7 +376,7 @@
 			</tr>
 			<!-- BEG CAUSE SECTION -->
 			<tr style="border:1px solid #ffffc0;">
-				<td width="30" class="top" style="border:0px;">
+				<td class="top columnLeft">
 					<span title="<b>{-#mcauses#-}</b><br />{-$dmg.MetGuidecauses[2]-}">
 						<img src="{-$desinventarURL-}/images/di_cautag.png" alt="" />
 					</span>
