@@ -33,7 +33,7 @@
 	<div>
 		<span class="helptext">{-#msgGeography_Header2#-}</span>
 		<div class="List line" style="height:200px;overflow:auto;">
-			<table class="List" class="grid">
+			<table class="List grid">
 				<thead>
 					<tr>
 						<td class="GeographyLevel">
