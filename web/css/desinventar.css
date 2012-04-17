@@ -605,3 +605,6 @@ div.Datacard .columnLeft {
 	width:30px;
 	border:0px;
 }
+div.Results .header {
+	background:#bbbbbb;
+}
