@@ -140,9 +140,11 @@ function onReadyGraphic() {
 			jQuery('#prmGraphScale0').disable();
 		}
 	});
-	
-	jQuery('[help_tip]').mouseover(function() {
-		showtip(jQuery(this).attr('help_tip'));
+
+	jQuery('div.ViewGraphParams').on('mouseover','select', function() {
+		showtip(jQuery(this).data('helptext'));
+	}).on('mouseover','b', function() {
+		showtip(jQuery(this).data('helptext'));
 	});
 
 	// Initialize Controls on Load
