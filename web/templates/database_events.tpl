@@ -36,7 +36,7 @@
 	</div>
 	<br />
 	<div id="divDatabaseEvents_EventListDefault" class="dwin" style="width:100%; height:100px;">
-		<table id="tblDatabaseEvents_EventListDefault" width="100%" class="grid">
+		<table id="tblDatabaseEvents_EventListDefault" class="width100 grid">
 			<thead>
 				<tr>
 					<td style="display:none;">

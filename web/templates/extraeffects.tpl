@@ -4,7 +4,7 @@
 <!-- FIELDS -->
 	<b onMouseOver="showtip('{-$dic.DBExtraEffect[2]-}');">{-$dic.DBExtraEffect[0]-}</b><br />
 	<div class="dwin" style="width:600px; height:120px;">
-		<table width="100%" class="grid">
+		<table class="width100 grid">
 			<thead>
 				<tr>
 					<td class="header" onMouseOver="showtip('{-$dic.DBEEFieldLabel[2]-}');">

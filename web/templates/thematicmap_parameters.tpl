@@ -82,7 +82,7 @@
 													{-/foreach-}
 													</tbody>
 												</table>
-												<table width="100%">
+												<table class="width100">
 													<tr>
 														<td>{-#mcoltransp#-}
 															<select name="_M+Transparency" class="line">

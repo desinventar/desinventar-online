@@ -87,7 +87,7 @@
 						<br />
 						<div class="GeocartoEdit">
 							<h4>{-#msgGeocarto_Subtitle#-}</h4>
-							<table width="100%">
+							<table class="width100">
 								<tr class="FileUploader" data-ext="dbf">
 									<td>
 										{-#msgGeocarto_File#-} (DBF)
@@ -149,7 +149,7 @@
 									</td>
 								</tr>
 							</table>
-							<table width="100%">
+							<table class="width100">
 								<tr>
 									<td>
 										<span title="{-#msgGeocarto_NameTooltip#-}">{-#msgGeocarto_Name#-}</span>

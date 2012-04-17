@@ -1,4 +1,4 @@
-<table width="100%">
+<table class="width100">
 	<tr bgcolor="#bbbbbb">
 		<td>
 			<div id="ResultHeaderButtonToolbar">

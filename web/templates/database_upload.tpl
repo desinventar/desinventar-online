@@ -39,7 +39,7 @@
 			<span class="clsDatabaseUploadType" id="txtDatabaseUploadConfirmReplace">{-#msgDatabaseUploadConfirmReplace#-}</span>
 			<span class="clsDatabaseUploadType" id="txtDatabaseUploadConfirmCopy">{-#msgDatabaseUploadConfirmCopy#-}</span>
 		</h4>
-		<table width="100%">
+		<table class="width100">
 		<tr>
 			<td class="right" width="25%">
 				{-#msgDatabaseUploadRegionId#-} :
