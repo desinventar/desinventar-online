@@ -27,7 +27,7 @@
 			<li>- {-#msgDatabaseCreateMsg2A#-}</li>
 			<li>- {-#msgDatabaseCreateMsg2B#-}</li>
 		</ul>
-		{-#msgDatabaseCreateMsg3#-}:</br />
+		{-#msgDatabaseCreateMsg3#-}:<br />
 		<ul>
 			<li>- {-#mreginfo#-}</li>
 			<li>- {-#msgDBConfig_Events#-}</li>
