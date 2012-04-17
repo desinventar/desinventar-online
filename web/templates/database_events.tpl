@@ -1,5 +1,5 @@
 {-config_load file="$lg.conf" section="grpDatabaseEvents"-}
-<div class="clsDatabaseEvents">
+<div class="DatabaseEvents">
 	<b title="{-$dic.DBEvent[2]-}">{-#msgDatabaseEvents_CustomEventTitle#-}</b>
 	<br />
 	<div id="divDatabaseEvents_EventListCustom" class="dwin" style="width:100%; height:100px;">
@@ -72,17 +72,17 @@
 		<a class="button" id="btnDatabaseEvents_Add"><span>{-#msgDatabaseEvents_Add#-}</span></a>
 		<br />
 		<br />
-		<span class="clsDatabaseEventsStatus" id="msgDatabaseEvents_UpdateOk">{-#msgDatabaseEvents_UpdateOk#-}</span>
-		<span class="clsDatabaseEventsStatus" id="msgDatabaseEvents_UpdateError">{-#msgDatabaseEvents_UpdateError#-}</span>
-		<span class="clsDatabaseEventsStatus" id="msgDatabaseEvents_ErrorEmtpyFields">{-#msgDatabaseEvents_ErrorEmptyFields#-}</span>
-		<span class="clsDatabaseEventsStatus" id="msgDatabaseEvents_ErrorDuplicateName">{-#msgDatabaseEvents_ErrorDuplicateName#-}</span>
-		<span class="clsDatabaseEventsStatus" id="msgDatabaseEvents_ErrorCannotDelete">{-#msgDatabaseEvents_ErrorCannotDelete#-}</span>
+		<span class="status" id="msgDatabaseEvents_UpdateOk">{-#msgDatabaseEvents_UpdateOk#-}</span>
+		<span class="status" id="msgDatabaseEvents_UpdateError">{-#msgDatabaseEvents_UpdateError#-}</span>
+		<span class="status" id="msgDatabaseEvents_ErrorEmtpyFields">{-#msgDatabaseEvents_ErrorEmptyFields#-}</span>
+		<span class="status" id="msgDatabaseEvents_ErrorDuplicateName">{-#msgDatabaseEvents_ErrorDuplicateName#-}</span>
+		<span class="status" id="msgDatabaseEvents_ErrorCannotDelete">{-#msgDatabaseEvents_ErrorCannotDelete#-}</span>
 		<br />
 	</div>
 	<br />
 	<div id="divDatabaseEvents_Edit" style="display:none;width:500px;">
 		<form id="frmDatabaseEvents_Edit" action="#">
-			<table width="80%">
+			<table class="Edit">
 				<tr>
 					<td>
 						<span class="Predefined">{-#msgEvents_Predefined#-}</span>

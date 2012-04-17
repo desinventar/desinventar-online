@@ -10,7 +10,7 @@ function onReadyDatabaseEvents()
 		doDatabaseEventsPopulateLists();
 	});
 
-	jQuery('.clsDatabaseEventsStatus').hide();
+	jQuery('div.DatabaseEvents span.status').hide();
 
 	jQuery('#tbodyDatabaseEvents_EventListCustom,#tbodyDatabaseEvents_EventListDefault').on('click', 'tr', function(event) {
 		jQuery('#fldDatabaseEvents_EventId').val(jQuery('.EventId',this).text());
@@ -70,7 +70,7 @@ function onReadyDatabaseEvents()
 			jQuery('#msgDatabaseEvents_ErrorEmtpyFields').show();
 			setTimeout(function () {
 				jQuery('#fldDatabaseEvents_EventName').unhighlight();
-				jQuery('.clsDatabaseEventsStatus').hide();
+				jQuery('div.DatabaseEvents span.status').hide();
 			}, 2500);
 			bContinue = false;
 		}
@@ -109,7 +109,7 @@ function onReadyDatabaseEvents()
 						}
 					}					
 					setTimeout(function () {
-						jQuery('.clsDatabaseEventsStatus').hide();
+						jQuery('div.DatabaseEvents span.status').hide();
 					}, 2500);
 				},
 				'json'
