@@ -4,10 +4,10 @@
 	<br />
 	<table width="100%">
 		<tr>
-			<td valign="top">
+			<td class="top">
 				<b>{-#msgUserPermAdminCurrentAdmin#-} : </b>
 			</td>
-			<td valign="top">
+			<td class="top">
 				<p id="txtUserPermAdminCurrent"></p>
 			</td>
 		</tr>
@@ -17,10 +17,10 @@
 			</td>
 		</tr>
 		<tr>
-			<td valign="top">
+			<td class="top">
 				<b>{-#msgUserPermAdminNewAdmin#-} : </b>
 			</td>
-			<td valign="top">
+			<td class="top">
 				<select id="fldUserPermAdmin_UserId">
 					<option></option>
 				</select>

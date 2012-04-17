@@ -65,7 +65,7 @@
 	<div id="divGeolevels_Edit" class="hidden">
 		<table>
 			<tr>
-				<td valign="top" class="line">
+				<td class="top line">
 					<form id="frmGeolevel">
 						<h4>{-#msgGeolevels_GeoLevelSubtitle#-}</h4>
 						<input class="GeoLevelId" name="GeoLevelId" type="hidden" value="-1" />
@@ -92,7 +92,7 @@
 									<td>
 										{-#msgGeocarto_File#-} (DBF)
 									</td>
-									<td valign="top" style="width:50%;">
+									<td class="top" style="width:50%;">
 										<span class="Filename_DBF uploaded" style="width:100%;"></span>
 										<input type="hidden" class="filename" name="filename.DBF" value="" />
 										<br />
@@ -107,7 +107,7 @@
 									<td>
 										{-#msgGeocarto_File#-} (SHP)
 									</td>
-									<td valign="top" style="width:50%;">
+									<td class="top" style="width:50%;">
 										<span class="Filename_SHP uploaded" style="width:100%;"></span>
 										<input type="hidden" class="filename" name="filename.SHP" value="" />
 										<br />
@@ -122,7 +122,7 @@
 									<td>
 										{-#msgGeocarto_File#-} (SHX)
 									</td>
-									<td valign="top" style="width:50%;">
+									<td class="top" style="width:50%;">
 										<span class="Filename_SHX uploaded" style="width:100%;"></span>
 										<input type="hidden" class="filename" name="filename.SHX" value="" />
 										<br />
@@ -144,7 +144,7 @@
 								<tr>
 									<td colspan="2">
 									</td>
-									<td valign="top">
+									<td class="top">
 										<a class="button btnUploadCancel"><span>{-#msgGeolevels_UploadCancel#-}</span></a>
 									</td>
 								</tr>

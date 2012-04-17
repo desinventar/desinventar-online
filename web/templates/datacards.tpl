@@ -1,8 +1,8 @@
 {-config_load file="$lg.conf" section="grpDatacard"-}
 <div id="divDatacard" class="Datacard mainblock">
 	<table style="width:100%;">
-		<tr valign="top">
-			<td align="left" width="45%">
+		<tr>
+			<td class="top" align="left" width="45%">
 				<input type="button" id="btnDatacardNew"    class="DatacardCmdButton bb bnew"    title="{-#tnewtitle#-}: {-#tnewdesc#-}" />
 				<input type="button" id="btnDatacardEdit"   class="DatacardCmdButton bb bupd"    title="{-#tupdtitle#-}: {-#tupddesc#-}" />
 				<input type="button" id="btnDatacardSave"   class="DatacardCmdButton bb bsave"   title="{-#tsavtitle#-}: {-#tsavdesc#-}" />
@@ -19,7 +19,7 @@
 				<input type="text"   id="txtDatacardFind" class="DatacardCmdFind line" style="width:60px;" />
 				<input type="button" id="btnDatacardFind" class="DatacardCmdFind bb bfind" title="{-#tooltipDatacardFind#-}" />
 			</td>
-			<td align="right" width="55%" colspan="2">
+			<td class="top" align="right" width="55%" colspan="2">
 				<div id="divDatacardStatusMsg" class="status" style="display:none;">
 					<span class="datacardStatusMsg" id="msgDatacardDuplicatedSerial">{-#msgDatacardDuplicatedSerial#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardStartNew">{-#tmsgnewcard#-}</span>
@@ -48,12 +48,12 @@
 				<span class="dlgmsg" id="distatusmsg"></span>
 				<span class="dlgmsg" id="dostat"></span>
 			</td>
-			<td align="left" valign="top">
+			<td align="left" class="top">
 				<div id="divRecordStat" style="display:none;">
 					{-#tstatpublished#-} <span id="RecordPublished"></span>, {-#tstatready#-} <span id="RecordReady"></span><br />
 				</div>
 			</td>
-			<td align="right" valign="top">
+			<td align="right" class="top">
 				<div id="divRecordNavigationInfo" style="display:none;">
 					<span id="RecordNumber"></span>/<span id="RecordCount"></span><br />
 				</div>
@@ -72,12 +72,12 @@
 		<table border="1" cellspacing="8" width="100%">
 			<!-- DATACARD INFORMATION SECTION -->
 			<tr>
-				<td width="30" style="border:0px;" valign="top">
+				<td width="30" style="border:0px;" class="top">
 					&nbsp;
 				</td>
 				<td style="border-color:#000000;">
 					<table class="grid">
-						<tr valign="top">
+						<tr class="top">
 							<td title="{-$LabelsDisaster.DisasterBeginTime[1]-}">
 								{-#msgDatacard_DisasterBeginTime#-}<b class="required">*</b><br />
 								<input id="DisasterBeginTime0" name="DisasterBeginTime[0]" style="width:36px;" type="text"
@@ -123,23 +123,23 @@
 			</tr>
 			<!-- GEOGRAPHY SECTION -->
 			<tr>
-				<td width="30" style="border:0px;" valign="top">
+				<td width="30" style="border:0px;" class="top">
 					<span title="<b>{-#mgeography#-}</b><br />{-$dmg.MetGuidegeography[2]-}">
 						<img src="{-$desinventarURL-}/images/di_geotag.png" alt="" />
 					</span>
 				</td>
 				<td>
 					<table class="grid">
-						<tr valign="top">
+						<tr class="top">
 							<td >
 								<table>
 									<tr>
-										<td valign="top" title="{-$LabelsDisaster.DisasterGeographyId[1]-}">
+										<td class="top" title="{-$LabelsDisaster.DisasterGeographyId[1]-}">
 											<b>{-#msgDatacard_DisasterGeographyId#-}</b><b class="required">*</b>
 											<br />
 											<input id="GeographyId" name="GeographyId" type="hidden" size="25" />
 										</td>
-										<td valign="top" title="{-$LabelsDisaster.DisasterGeographyId[1]-}">
+										<td class="top" title="{-$LabelsDisaster.DisasterGeographyId[1]-}">
 											<table class="tblGeography">
 												<tr>
 													<td>
@@ -186,7 +186,7 @@
 			</tr>
 			<!-- EFFECTS SECTION--> 
 			<tr>
-				<td width="30" valign="top" style="border:0px;">
+				<td width="30" class="top" style="border:0px;">
 					<a href="#" id="linkDatacardShowEffectsBasic">
 						<span title="<b>{-#tbaseffects#-}</b><br />{-$dmg.MetGuidedatacards[2]-}">
 							<img id="efimg" src="{-$desinventarURL-}/images/di_efftag.png" alt="" />
@@ -199,12 +199,12 @@
 						</span>
 					</a>
 				</td>
-				<td valign="top">
+				<td class="top">
 					<div class="dwin" style="height:300px;">
 						<div class="divDatacardEffects" id="divDatacardEffectsBasic">
 						<!-- BEG BASIC EFFECTS -->
 						<table class="grid">
-							<tr valign="top">
+							<tr class="top">
 								<td>
 									<b>{-#teffects#-}</b><br />
 									<table class="EffectList EffectListPeople grid" width="100%">
@@ -227,12 +227,12 @@
 								<td>
 									<table>
 										<tr>
-											<td colspan="2" valign="top">
+											<td colspan="2" class="top">
 												<b>{-#tsectors#-}</b><br />
 											</td>
 										</tr>
 										<tr>
-											<td valign="top">
+											<td class="top">
 												<!-- BEGIN Table Sectors -->
 												<table class="EffectList EffectListSector grid" width="100%">
 													{-foreach $sec as $key => $value -}
@@ -251,12 +251,12 @@
 													{-/foreach-}
 												</table>
 											</td>
-											<td valign="top">
+											<td class="top">
 												<!-- BEGIN Table Effects over $$ -->
 												<table class="EffectList EffectListLosses1 grid">
 													{-foreach $ef2 as $key => $value -}
 														<tr>
-															<td valign="top">
+															<td class="top">
 																<span class="label" title="{-#msgDatacard_InputDoubleTooltip#-}">{-$value[0]-}</span>
 																<br />
 																<input class="value line inputDouble" id="{-$key-}" name="{-$key-}" type="text" size="11" maxlength="15" value="0" data-helptext="{-$value[2]-}" />
@@ -268,7 +268,7 @@
 										</tr>
 									</table>
 								</td>
-								<td valign="top">
+								<td class="top">
 									<b>{-#tlosses#-}</b><br />
 									<!-- BEGIN Table Effects over Affected -->
 									<table class="EffectList EffectListLosses2 grid">
@@ -340,14 +340,14 @@
 			</tr>
 			<!-- BEGIN EVENT SECTION -->
 			<tr style="border:1px solid #ff0;">
-				<td width="30" valign="top" style="border:0px;">
+				<td width="30" class="top" style="border:0px;">
 					<span title="<b>{-#mevents#-}</b><br />{-$dmg.MetGuideevents[2]-}">
 						<img src="{-$desinventarURL-}/images/di_evetag.png" alt="" />
 					</span>
 				</td>
 				<td>
 					<table class="grid">
-						<tr valign="top">
+						<tr class="top">
 							<td title="{-$LabelsEvent.EventName[1]-}">
 								{-#msgDatacard_EventName#-}<b class="required">*</b><br />
 								<select class="EventId line" id="EventId" name="EventId"  tabindex="{-$MyTabIndex-}">
@@ -379,7 +379,7 @@
 			</tr>
 			<!-- BEG CAUSE SECTION -->
 			<tr style="border:1px solid #ffffc0;">
-				<td width="30" valign="top" style="border:0px;">
+				<td width="30" class="top" style="border:0px;">
 					<span title="<b>{-#mcauses#-}</b><br />{-$dmg.MetGuidecauses[2]-}">
 						<img src="{-$desinventarURL-}/images/di_cautag.png" alt="" />
 					</span>

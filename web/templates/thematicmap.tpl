@@ -15,7 +15,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td valign="top">
+			<td class="top">
 				<div class="dwin" style="width:250px;">
 					<p class="right">{-#trepnum#-}: {-$MapNumberOfRecords-}</p>
 					<hr />
@@ -41,7 +41,7 @@
 					<img src="{-$legend-}" /><br />
 				</div>
 			</td>
-			<td valign="top">
+			<td class="top">
 				<input type="text" id="MapTitle" name="MapTitle" size=110 />
 				<img id="linkRestoreMapTitle" src="{-$desinventarURL-}/images/reload.jpg"><br />
 				<div id="map" class="dwin" style="width:700px;height:530px;"></div>

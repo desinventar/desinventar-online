@@ -8,12 +8,12 @@
 			</td>
 		</tr>
 		<tr >
-			<td align="right" valign="bottom" title="{-#msgDatabaseUploadFileSpec#-}" >
+			<td align="right" class="bottom" title="{-#msgDatabaseUploadFileSpec#-}" >
 				<span style="display:none;">{-#msgDatabaseUploadFilename#-} :</span>
 				<input type="text"   id="txtDatabaseUploadFilename" value="" size="35" />
 				<input type="hidden" id="txtDatabaseUploadId" value="" />
 			</td>
-			<td valign="top">
+			<td class="top">
 				<div id="divFileUploaderControl" style="display:block;">
 				</div>
 				<a class="button" id="btnDatabaseUploadCancel"><span>{-#msgDatabaseUploadCancel#-}</span></a>

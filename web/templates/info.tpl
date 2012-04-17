@@ -8,7 +8,7 @@
 </head>
 <body>
 	<table>
-		<tr valign="top">
+		<tr class="top">
 			<td>
 				<fieldset style="padding:5px 5px 5px 5px;">
 					<!-- GENERAL REGION INFO SECTION -->

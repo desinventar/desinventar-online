@@ -29,7 +29,7 @@
 					<td class="EventPredefined"></td>
 					<td class="EventName"></td>
 					<td class="EventDesc" style="width:70%;"></td>
-					<td class="EventActive" style="text-align:center;" valign="top"><input type="checkbox" disabled="disabled" /></td>
+					<td class="EventActive top center"><input type="checkbox" disabled="disabled" /></td>
 				</tr>
 			</tbody>
 		</table>
