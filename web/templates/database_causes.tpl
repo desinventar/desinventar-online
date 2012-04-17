@@ -81,7 +81,7 @@
 	</div>
 	<br />
 	<div id="divDatabaseCauses_Edit" style="display:none;width:500px;">
-		<form id="frmDatabaseCauses_Edit" action="">
+		<form id="frmDatabaseCauses_Edit" action="#">
 			<table width="80%">
 				<tr>
 					<td>

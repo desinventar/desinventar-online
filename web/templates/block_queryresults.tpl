@@ -41,7 +41,7 @@
 					<table>
 						<tr>
 							<td>
-								<img src="{-$desinventarURL-}/images/di_logo.png" />
+								<img src="{-$desinventarURL-}/images/di_logo.png" alt="" />
 							</td>
 							<td>
 								<p style="font-size: 16pt;" class="center">DesInventar {-$desinventarVersion-}</p>

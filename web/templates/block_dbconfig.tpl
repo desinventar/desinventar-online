@@ -1,7 +1,7 @@
 	<div id="DBConfig_tabs">
 		<ul>
 			<li><a class="classDBConfig_tabs" href="#DBConfig_tabs-1"
-				cmd="cmdDBInfoEdit" data-url="{-$desinventarURL-}/info.php">{-#mreginfo#-}</a>
+				data-cmd="cmdDBInfoEdit" data-url="{-$desinventarURL-}/info.php">{-#mreginfo#-}</a>
 			</li>
 			<li title="{-#msgGeolevels_Tooltip#-}">
 				<a class="classDBConfig_tabs" href="#DBConfig_Geolevels">{-#msgDBConfig_Geolevels#-}</a>
@@ -16,7 +16,7 @@
 				<a class="classDBConfig_tabs" href="#DBConfig_Causes">{-#mcauses#-}</a>
 			</li>
 			<li>
-				<a class="classDBConfig_tabs" href="#DBConfig_tabs-6" cmd="cmdDBInfoEEField" data-url="{-$desinventarURL-}/extraeffects.php">{-#meeffects#-}</a>
+				<a class="classDBConfig_tabs" href="#DBConfig_tabs-6" data-cmd="cmdDBInfoEEField" data-url="{-$desinventarURL-}/extraeffects.php">{-#meeffects#-}</a>
 			</li>
 			<li>
 				<a class="classDBConfig_tabs" href="#DBConfig_Users">{-#msgDBConfig_RolesAndDiffusion#-}</a>

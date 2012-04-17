@@ -7,7 +7,7 @@
 		{-#msgViewStd#-}
 	</div>
 	<div id="std-cfg" class="ViewStatParams mainblock">
-		<form id="frmStatParams" method="post" action="">
+		<form id="frmStatParams" method="post" action="#">
 			<table>
 				<tr>
 					<td>{-#sresxpage#-}

@@ -6159,7 +6159,7 @@ function onReadyMain()
 	jQuery('.classDBConfig_tabs').click(function() {
 		var me = jQuery(jQuery(this).attr('href'));
 		showtip(me.find('.helptext').text());
-		var cmd = jQuery(this).attr('cmd');
+		var cmd = jQuery(this).data('cmd');
 		if (cmd == '')
 		{
 			jQuery(me).trigger('show');

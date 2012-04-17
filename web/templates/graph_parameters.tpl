@@ -8,7 +8,7 @@
 		{-#msgViewGraph#-}
 	</div>
 	<div id="grp-cfg" class="ViewGraphParams mainblock">
-		<form id="frmGraphParams" method="post" action="">
+		<form id="frmGraphParams" method="post" action="#">
 			<table class="conf" cellpadding=1 cellspacing=1>
 			<tr class="top">
 				<td colspan=3 class="center">
