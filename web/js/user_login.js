@@ -45,7 +45,7 @@ function onReadyUserLogin()
 
 		if (UserId == '' || UserPasswd == '')
 		{
-			doUserLoginUpdateMsg('#msgEmptyFields');
+			doUserLoginUpdateMsg('msgEmptyFields');
 		}
 		else
 		{
@@ -60,7 +60,7 @@ function onReadyUserLogin()
 				{
 					if (parseInt(data.Status) > 0)
 					{
-						doUserLoginUpdateMsg('#msgUserLoggedIn');
+						doUserLoginUpdateMsg('msgUserLoggedIn');
 						jQuery('#fldUserId').val('');
 						jQuery("#fldUserPasswd").val('');
 
@@ -73,7 +73,7 @@ function onReadyUserLogin()
 					}
 					else
 					{
-						doUserLoginUpdateMsg("#msgInvalidPasswd");
+						doUserLoginUpdateMsg('msgInvalidPasswd');
 					}
 				},
 				'json'
@@ -117,7 +117,7 @@ function doUserLogout()
 		{
 			if (parseInt(data.Status) > 0)
 			{
-				doUserLoginUpdateMsg("#msgUserLoggedOut");
+				doUserLoginUpdateMsg('msgUserLoggedOut');
 				// After login, clear passwd field
 				jQuery('#fldUserId').val('');
 				jQuery('#fldUserPasswd').val('');
@@ -127,21 +127,21 @@ function doUserLogout()
 			}
 			else
 			{
-				doUserLoginUpdateMsg("#msgInvalidLogout");
+				doUserLoginUpdateMsg('msgInvalidLogout');
 			}
 		},
 		'json'
 	);
 } //doUserLogout()
 
-function doUserLoginUpdateMsg(msgId)
+function doUserLoginUpdateMsg(classId)
 {
 	// Hide all status Msgs (class="status")
-	jQuery('div.UserLogin .status').hide();
-	if (msgId != '')
+	jQuery('div.UserLogin span.status').hide();
+	if (classId != '')
 	{
 		// Show specified message(s)
-		jQuery('div.UserLogin ' + msgId).show();
+		jQuery('div.UserLogin span.' + classId).show();
 	}
 	return(true);
 } //doUserLoginUpdateMsg()
