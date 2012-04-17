@@ -3,12 +3,12 @@
 	<table style="width:100%;">
 		<tr>
 			<td class="top left" width="45%">
-				<input type="button" id="btnDatacardNew"    class="DatacardCmdButton bb bnew"    title="{-#tnewtitle#-}: {-#tnewdesc#-}" />
-				<input type="button" id="btnDatacardEdit"   class="DatacardCmdButton bb bupd"    title="{-#tupdtitle#-}: {-#tupddesc#-}" />
-				<input type="button" id="btnDatacardSave"   class="DatacardCmdButton bb bsave"   title="{-#tsavtitle#-}: {-#tsavdesc#-}" />
-				<input type="button" id="btnDatacardCancel" class="DatacardCmdButton bb bcancel" title="{-#tcantitle#-}: {-#tcandesc#-}" />
+				<input type="button" id="btnDatacardNew"    class="DatacardCmdButton bb bnew"    title="{-#tnewtitle#-}: {-#tnewdesc#-}" value=" "    />
+				<input type="button" id="btnDatacardEdit"   class="DatacardCmdButton bb bupd"    title="{-#tupdtitle#-}: {-#tupddesc#-}" value=" "   />
+				<input type="button" id="btnDatacardSave"   class="DatacardCmdButton bb bsave"   title="{-#tsavtitle#-}: {-#tsavdesc#-}" value=" "   />
+				<input type="button" id="btnDatacardCancel" class="DatacardCmdButton bb bcancel" title="{-#tcantitle#-}: {-#tcandesc#-}" value=" " />
 				<span  class="DatacardCmdButton"> &nbsp;&nbsp;|&nbsp;&nbsp;</span>
-				<input type="button" id="btnDatacardPrint"  class="DatacardCmdButton bb bprint"  title="{-#mprint#-}" />
+				<input type="button" id="btnDatacardPrint"  class="DatacardCmdButton bb bprint"  title="{-#mprint#-}" value=" " />
 				&nbsp;&nbsp;|&nbsp;&nbsp;
 				<input type="button" id="btnDatacardGotoFirst" class="DatacardNavButton bb line" value="<<" title="{-#bfirst#-}" />
 				<input type="button" id="btnDatacardGotoPrev"  class="DatacardNavButton bb line" value="<"  title="{-#bprev#-}"  />
@@ -17,7 +17,7 @@
 				&nbsp;&nbsp;|&nbsp;&nbsp;
 				{-#msgDatacardSerialFind#-}
 				<input type="text"   id="txtDatacardFind" class="DatacardCmdFind line" style="width:60px;" />
-				<input type="button" id="btnDatacardFind" class="DatacardCmdFind bb bfind" title="{-#tooltipDatacardFind#-}" />
+				<input type="button" id="btnDatacardFind" class="DatacardCmdFind bb bfind" title="{-#tooltipDatacardFind#-}" value=" " />
 			</td>
 			<td class="top right" width="55%" colspan="2">
 				<div id="divDatacardStatusMsg" class="status" style="display:none;">
