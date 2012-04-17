@@ -8,7 +8,7 @@
 	</div>
 	<div id="std-cfg" class="ViewStatParams mainblock">
 		<form id="frmStatParams" method="post" action="">
-			<table border="0" width="100%">
+			<table>
 				<tr>
 					<td>{-#sresxpage#-}
 						<select id="_S+SQL_LIMIT" name="_S+SQL_LIMIT" class="line">

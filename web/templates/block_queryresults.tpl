@@ -1,4 +1,4 @@
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<table width="100%">
 	<tr bgcolor="#bbbbbb">
 		<td>
 			<div id="ResultHeaderButtonToolbar">
@@ -38,7 +38,7 @@
 				<div class="x-window-header">
 				</div>
 				<div id="dlg">
-					<table border="0">
+					<table>
 						<tr>
 							<td>
 								<img src="{-$desinventarURL-}/images/di_logo.png" />

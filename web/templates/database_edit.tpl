@@ -1,6 +1,6 @@
 {-config_load file="$lg.conf" section="grpDatabaseEdit"-}
 <div class="DatabaseEdit">
-	<form id="frmDatabaseEdit" class="DatabaseEdit" action="">
+	<form id="frmDatabaseEdit" class="DatabaseEdit" action="#">
 		<table class="grid">
 			<tr>
 				<td>

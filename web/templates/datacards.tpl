@@ -1,6 +1,6 @@
 {-config_load file="$lg.conf" section="grpDatacard"-}
 <div id="divDatacard" class="Datacard mainblock">
-	<table width="100%" border="0" cellpadding="0" cellspacing="0" >
+	<table style="width:100%;">
 		<tr valign="top">
 			<td align="left" width="45%">
 				<input type="button" id="btnDatacardNew"    class="DatacardCmdButton bb bnew"    title="{-#tnewtitle#-}: {-#tnewdesc#-}" />

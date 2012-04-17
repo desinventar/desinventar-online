@@ -7,14 +7,14 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
 </head>
 <body>
-	<table border="0">
+	<table>
 		<tr valign="top">
 			<td>
 				<fieldset style="padding:5px 5px 5px 5px;">
 					<!-- GENERAL REGION INFO SECTION -->
 					<form id="frmDatabaseInfo" name="infofrm" method="post" action="{-$desinventarURL-}/info.php" target="ifinfo">
 					
-						<table border="0" cellspacing="0" cellpadding="0">
+						<table>
 							<tr>
 								<td colspan="2">
 									{-foreach name=info key=LangIsoCode item=RegionFields from=$info-}
@@ -24,7 +24,7 @@
 												$('inf{-$LangIsoCode-}').style.display='none'; else $('inf{-$LangIsoCode-}').style.display='block';">
 												<b onMouseOver="showtip('{-$dic.DBRegion[2]-}');">{-$dic.DBRegion[0]-} {-$LangIsoCode-}</b></a>
 											</legend>
-											<table id="inf{-$LangIsoCode-}" border="0" style="display:{-if ($smarty.foreach.info.iteration) == 1-}block{-else-}none{-/if-};">
+											<table id="inf{-$LangIsoCode-}" style="display:{-if ($smarty.foreach.info.iteration) == 1-}block{-else-}none{-/if-};">
 												{-foreach name=iitt key=key item=item from=$RegionFields-}
 													{-assign var="inf" value="DB$key"-}
 													{-assign var="tabind" value="`$tabind+1`"-}

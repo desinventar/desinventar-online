@@ -37,7 +37,7 @@
 			<input type="hidden" name="FileName" value="{-$FileName-}" />
 			<input type="submit" value="{-#tsend#-}" class="line" />
 			<br />
-			<table border="1" style="font-size: 11px;">
+			<table style="font-size: 11px;">
 			<tr>
 				{-foreach name=fld key=k item=i from=$fld-}
 					{-assign var="nxt" value="`$smarty.foreach.fld.iteration+1`"-}
@@ -66,7 +66,7 @@
 		{-* Show import results *-}
 		<br />
 		{-#tfound1#-} {-$msg.ErrorCount-} {-#tfound2#-}<br />
-		<table style="font-size:11px;" border="1" width="100%">
+		<table style="font-size:11px;">
 			<tr>
 				<td>
 					{-#tfile#-}

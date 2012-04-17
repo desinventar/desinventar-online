@@ -14,7 +14,7 @@
 		{-/foreach-}
 	</div>
 	<p align="right">{-#trepnum#-}: {-$NumRecords-}</p>
-	<img src="{-$image-}" border="0">
+	<img src="{-$image-}">
 {-else-}
 	{-#tnodata#-}
 {-/if-}
