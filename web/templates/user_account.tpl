@@ -1,5 +1,5 @@
 {-config_load file="$lg.conf" section="grpMenuUser"-}
-<div id="divUserAccount">
+<div id="divUserAccount" class="UserAccount">
 	<div class="UserChangePasswd">
 		<form class="UserChangePasswd">
 			<table class="grid">
@@ -38,10 +38,10 @@
 				<tr>
 					<td colspan="2">
 						<div class="center">
-							<span class="status" id="msgEmptyFields">{-#erremptyfields#-}</span>
-							<span class="status" id="msgPasswdDoNotMatch">{-#errnomatch#-}</span>
-							<span class="status" id="msgInvalidPasswd">{-#errbadpasswd#-}</span>
-							<span class="status" id="msgPasswdUpdated">{-#msgupdatesucc#-}</span>
+							<span class="status msgEmptyFields">{-#erremptyfields#-}</span>
+							<span class="status msgPasswdDoNotMatch">{-#errnomatch#-}</span>
+							<span class="status msgInvalidPasswd">{-#errbadpasswd#-}</span>
+							<span class="status msgPasswdUpdated">{-#msgupdatesucc#-}</span>
 						</div>
 					</td>
 				</tr>

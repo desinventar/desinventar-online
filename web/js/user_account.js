@@ -5,19 +5,19 @@
 
 function onReadyUserAccount()
 {
-	jQuery('form.UserChangePasswd .status').hide();
+	jQuery('div.UserAccount .status').hide();
 
-	jQuery('form.UserChangePasswd .btnSubmit').click(function() {
-		jQuery('form.UserChangePasswd').trigger('submit');
+	jQuery('div.UserAccount .btnSubmit').click(function() {
+		jQuery('div.UserAccount').trigger('submit');
 		return false;
 	});
 	
-	jQuery('form.UserChangePasswd .btnCancel').click(function() {
+	jQuery('div.UserAccount .btnCancel').click(function() {
 		jQuery('body').trigger('cmdUserAccountHide');
 		return false;
 	});
 
-	jQuery('form.UserChangePasswd').submit(function() {
+	jQuery('div.UserAccount').submit(function() {
 		var form = jQuery(this);
 		var UserPasswd = jQuery('.UserPasswd', form).val();
 		var UserPasswd2 = jQuery('.UserPasswd2', form).val();
@@ -26,13 +26,13 @@ function onReadyUserAccount()
 		jQuery('.status', form).hide();
 		if (UserPasswd == '' || UserPasswd2 == '' || UserPasswd3 == '')
 		{
-			jQuery('#msgEmptyFields', form).show();
+			jQuery('div.UserAccount span.msgEmptyFields').show();
 			bContinue = false;
 		}
 		
 		if (bContinue && (UserPasswd2 != UserPasswd3) )
 		{
-			jQuery('#msgPasswdDoNotMatch', form).show();
+			jQuery('div.UserAccount span.msgPasswdDoNotMatch').show();
 			bContinue = false;
 		}
 		
@@ -52,11 +52,11 @@ function onReadyUserAccount()
 			    	if (parseInt(data.Status) > 0)
 			    	{
 						doUserAccountReset();
-						jQuery('#msgPasswdUpdated', form).show();
+						jQuery('div.UserAccount span.msgPasswdUpdated').show();
 					}
 					else
 					{
-						jQuery('#msgInvalidPasswd', form).show();
+						jQuery('div.UserAccount span.msgInvalidPasswd').show();
 					}
 					setTimeout(function() {
 						jQuery('.status',form).hide();
@@ -101,11 +101,11 @@ function onReadyUserAccount()
 
 function doUserAccountReset()
 {
-	var form = jQuery('form.UserChangePasswd');
-	jQuery('.status', form).hide();
-	jQuery('.UserPasswd', form).val('');
-	jQuery('.UserPasswd2', form).val('');
-	jQuery('.UserPasswd3', form).val('');
+	var div = jQuery('div.UserAccount');
+	jQuery('.status', div).hide();
+	jQuery('.UserPasswd', div).val('');
+	jQuery('.UserPasswd2', div).val('');
+	jQuery('.UserPasswd3', div).val('');
 }
 
 function doUserAccountCreate()

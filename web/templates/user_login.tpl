@@ -28,9 +28,9 @@
 		</table>
 	</form>
 	<div class="center">
-		<span id="msgEmptyFields"   class="status">{-#msgEmptyFields#-}</span>
-		<span id="msgUserLoggedIn"  class="status">{-#msgUserLoggedIn#-}</span>
-		<span id="msgInvalidPasswd" class="status">{-#msgInvalidPasswd#-}</span>
+		<span class="status msgEmptyFields">{-#msgEmptyFields#-}</span>
+		<span class="status msgUserLoggedIn">{-#msgUserLoggedIn#-}</span>
+		<span class="status msgInvalidPasswd">{-#msgInvalidPasswd#-}</span>
 	</div>
 	<form id="uf" action="#">
 		<!-- method="get" 
