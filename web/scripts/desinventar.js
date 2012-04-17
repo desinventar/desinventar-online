@@ -5828,12 +5828,10 @@ function doMainMenuUpdate()
 	Ext.getCmp('mnuDatacardSetup').hide();
 	Ext.getCmp('mnuDatacardSetupEnd').hide();
 	Ext.getCmp('mnuDatacardEdit').hide();
-	
+
+	Ext.getCmp('mnuRegionLabel').setText('');
 	// Show some menu items when a Region is Selected
-	if (jQuery('#desinventarRegionId').val() == '')
-	{
-	}
-	else
+	if (jQuery('#desinventarRegionId').val() != '')
 	{
 		Ext.getCmp('mnuRegionLabel').setText('[' + jQuery('#desinventarRegionLabel').val() + ']');
 		if (UserRoleValue > 0)
