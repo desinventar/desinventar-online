@@ -25,7 +25,7 @@
 						<a class="button" onclick="selectall('_D+sel1[]');"><span>{-#balls#-}</span></a>
 						<a class="button" onclick="selectnone('_D+sel1[]');"><span>{-#bnone#-}</span></a>
 					</td>
-					<td align="center" valign="middle" style="width:20px;">
+					<td class="center middle" style="width:20px;">
 						<a class="button" onclick="moveOptions($('_D+sel1[]'), $('_D+Field[]'));"><span>&rarr;</span></a>
 						<br /><br /><br />
 						<a class="button" onclick="moveOptions($('_D+Field[]'), $('_D+sel1[]'));"><span>&larr;</span></a>
@@ -38,7 +38,7 @@
 						<a class="button" onclick="selectall('_D+Field[]');"><span>{-#balls#-}</span></a>
 						<a class="button" onclick="selectnone('_D+Field[]');"><span>{-#bnone#-}</span></a>
 					</td>
-					<td style="width:20px;" align="center">
+					<td style="width:20px;" class="center">
 						<div class="center">
 							<a class="button" onclick="top('_D+Field[]');"    ><span>&uarr;&uarr;</span></a><br/>
 							<a class="button" onclick="upone('_D+Field[]');"  ><span>&uarr;</span></a><br/>

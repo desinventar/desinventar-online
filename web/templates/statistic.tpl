@@ -29,10 +29,10 @@
 				<a class="button" id="btnStatGotoNextPage"><span>&gt;</span></a>
 				<a class="button" id="btnStatGotoLastPage"><span>&gt;&gt;</span></a>
 			</td>
-			<td align="center">
+			<td class="center">
 				<span id="stdstatusmsg" class="dlgmsg"></span>
 			</td>
-			<td align="right">
+			<td class="right">
 				{-#tsumnum#-}: {-$cou-} | {-#trepnum#-}: {-$tot-}
 			</td>
 		</tr>

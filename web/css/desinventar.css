@@ -105,8 +105,14 @@ button::-moz-focus-inner {
 //	overflow: hidden;
 //	width: 100%;
 //}
+td.left {
+	text-align:left;
+}
 td.center {
 	text-align:center;
+}
+td.right {
+	text-align:right;
 }
 td.top {
 	vertical-align: top;

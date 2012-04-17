@@ -8,7 +8,7 @@
 			</td>
 		</tr>
 		<tr >
-			<td align="right" class="bottom" title="{-#msgDatabaseUploadFileSpec#-}" >
+			<td class="bottom right" title="{-#msgDatabaseUploadFileSpec#-}" >
 				<span style="display:none;">{-#msgDatabaseUploadFilename#-} :</span>
 				<input type="text"   id="txtDatabaseUploadFilename" value="" size="35" />
 				<input type="hidden" id="txtDatabaseUploadId" value="" />
@@ -41,7 +41,7 @@
 		</h4>
 		<table width="100%">
 		<tr>
-			<td align="right" width="25%">
+			<td class="right" width="25%">
 				{-#msgDatabaseUploadRegionId#-} :
 			</td>
 			<td width="50%">
@@ -49,7 +49,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td align="right">
+			<td class="right">
 				{-#msgDatabaseUploadRegionLabel#-} :
 			</td>
 			<td>
@@ -57,7 +57,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td align="right">
+			<td class="right">
 				{-#msgDatabaseUploadCountryIso#-} :
 			</td>
 			<td>
@@ -65,7 +65,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td align="right">
+			<td class="right">
 				{-#msgDatabaseUploadLastUpdate#-} :
 			</td>
 			<td>
@@ -73,7 +73,7 @@
 			</td>
 		</tr>
 		<tr id="trDatabaseUploadNumberOfRecords">
-			<td align="right">
+			<td class="right">
 				{-#msgDatabaseUploadNumberOfRecords#-} :
 			</td>
 			<td>
@@ -81,7 +81,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2" align="center">
+			<td colspan="2" class="center">
 				<div class="center">
 					<br />
 					<div class="clsDatabaseUploadButtons">

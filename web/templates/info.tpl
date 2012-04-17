@@ -29,7 +29,7 @@
 													{-assign var="inf" value="DB$key"-}
 													{-assign var="tabind" value="`$tabind+1`"-}
 													<tr>
-														<td align="right">
+														<td class="right">
 															<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.$inf[2]-}')">
 															<b style="color:darkred;">{-$dic.$inf[0]-}</b><span>{-$dic.$inf[1]-}</span></a>
 														</td>
@@ -53,7 +53,7 @@
 								{-assign var="inf" value="DB$key"-}
 								{-assign var="tabind" value="`$tabind+1`"-}
 								<tr>
-									<td align="right">
+									<td class="right">
 										<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.$inf[2]-}')">
 										<b style="color:darkred;">{-$dic.$inf[0]-}</b><span>{-$dic.$inf[1]-}</span></a>
 									</td>
@@ -69,7 +69,7 @@
 								</tr>
 							{-/foreach-}
 							<tr>
-								<td colspan="2" align="center">
+								<td colspan="2" class="center">
 									<br />
 									<input name="_REG" type="hidden" value="{-$reg-}" />
 									<input id="_infocmd" name="cmd" value="cmdDBInfoUpdate" type="hidden" />
@@ -155,7 +155,7 @@
 							<textarea id="DBLogNotes" name="DBLogNotes" cols="22"  class="fixw" tabindex="2" 
 								onFocus="showtip('{-$dic.DBLogNote[2]-}');"></textarea>
 							<br /><br />
-							<p align="center" class="fixw">
+							<p class="center fixw">
 								<input name="r" type="hidden" value="{-$reg-}" />
 								<input id="DBLogDate" name="DBLogDate" type="hidden" />
 								<input id="LogCmd" name="cmd" type="hidden" />

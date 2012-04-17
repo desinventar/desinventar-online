@@ -3,9 +3,9 @@
 <div class="UserLogin">
 	<form id="frmUserLogin" method="post" action="">
 		<br />
-		<table align="center" style="margin-top:1px;">
+		<table class="center" style="margin-top:1px;">
 			<tr>
-				<td align="right">
+				<td class="right">
 					{-#tuser#-}
 				</td>
 				<td>
@@ -13,7 +13,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td align="right">
+				<td class="right">
 					{-#tpassword#-}
 				</td>
 				<td>
@@ -21,7 +21,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td align="right" colspan="2">
+				<td class="right" colspan="2">
 					<a class="button" id="btnUserLoginSend"><span>{-#benter#-}</span></a>&nbsp;&nbsp;
 				</td>
 			</tr>

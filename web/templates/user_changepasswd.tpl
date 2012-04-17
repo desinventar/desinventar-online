@@ -38,14 +38,14 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center">
+				<td colspan="2" class="center">
 					<input type="hidden" id="txtUserId" value="{-$UserId-}" />
 					<input type="submit" id="btnUserEditSubmit" value="{-#bsave#-}" class="line" />
 					<input type="reset"  id="btnUserEditCancel" value="{-#bcancel#-}" class="line" />
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center">
+				<td colspan="2" class="center">
 					<div id="divUserChangePasswdMsg" style="display:none">
 						<span class="status" id="msgEmptyFields">{-#erremptyfields#-}</span>
 						<span class="status" id="msgPasswdDoNotMatch">{-#errnomatch#-}</span>

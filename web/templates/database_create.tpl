@@ -9,7 +9,7 @@
 			<a class="button" href="#" id="btnDatabaseCreateSend"><span>{-#msgDatabaseCreateSend#-}</span></a>
 			<a class="button" href="#" id="btnDatabaseCreateCancel"><span>{-#msgDatabaseCreateCancel#-}</span></a>
 		</div>
-		<div id="divDatabaseCreateStatus" align="center">
+		<div id="divDatabaseCreateStatus" class="center">
 			<br />
 			<h4>
 				<span class="clsDatabaseCreateStatus" id="txtDatabaseCreateFormError">{-#msgDatabaseCreateFormError#-}</span>

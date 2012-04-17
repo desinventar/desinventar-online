@@ -11,13 +11,13 @@
 		<form id="frmGraphParams" method="post" action="">
 			<table class="conf" cellpadding=1 cellspacing=1>
 			<tr class="top">
-				<td colspan=3 align="center">
+				<td colspan=3 class="center">
 					<b>{-#gopttitle#-}</b><input type="text" name="prmGraph[Title]" class="line fixw" />
 					<!--<b>{-#goptsubtit#-}</b><br />-->
 				</td>
 			</tr>
 			<tr class="top">
-				<td id="tdGraphParamAxis1" align="right">
+				<td id="tdGraphParamAxis1" class="right">
 					<u>{-#gveraxis#-} 1:</u><br />
 					<b><span help_tip="{-$dic.GraphField[2]-}">{-$dic.GraphField[0]-}</span></b><br />
 					<input id="prmGraphFieldLabel0" name="prmGraph[FieldLabel][0]" type="hidden" value="" />
@@ -71,10 +71,10 @@
 						<option value="LINREG">{-#glinearreg#-}</option>
 					</select>
 				</td>
-				<td id="tdGraphParamCenter" align="center">
+				<td id="tdGraphParamCenter" class="center">
 					<table border="1" style="width:100%;height:100%;">
 					<tr class="middle">
-						<td align="center">
+						<td class="center">
 							<select id="prmGraphKind" name="prmGraph[Kind]" size="3"
 								help_tip="{-$dic.GraphKind[2]-}" class="line">
 								<option value="BAR" selected>{-#gkndbars#-}</option>
@@ -147,7 +147,7 @@
 				<td>
 					<table style="height:100%;">
 					<tr>
-						<td colspan="2" align="center">
+						<td colspan="2" class="center">
 							<p><u>{-#ghoraxis#-}:</u></p>
 						</td>
 					</tr>

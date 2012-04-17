@@ -29,10 +29,10 @@
 				<a class="button" id="btnGridGotoNextPage"><span>&gt;</span></a>
 				<a class="button" id="btnGridGotoLastPage"><span>&gt;&gt;</span></a>
 			</td>
-			<td align="center">
+			<td class="center">
 				<span id="datstatusmsg" class="dlgmsg"></span>
 			</td>
-			<td align="right">
+			<td class="right">
 				{-#trepnum#-}: {-$tot-}
 			</td>
 		</tr>
