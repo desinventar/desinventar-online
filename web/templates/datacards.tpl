@@ -319,12 +319,9 @@
 										<div class="EffectAdditional" style="display:none;">
 											<span class="label"></span>
 											<br />
-											<input class="value line inputText" type="text"
-												 id="" name="" size="30" value="" />
-											<input class="value line inputInteger" type="text"
-												 id="" name="" size="30" value="0" />
-											<input class="value line inputDouble" type="text"
-												 id="" name="" size="30" value="0" />
+											<input class="value line inputText"    type="text" size="30" value="" />
+											<input class="value line inputInteger" type="text" size="30" value="0" />
+											<input class="value line inputDouble"  type="text" size="30" value="0" />
 										</div>
 									</td>
 									<td>
