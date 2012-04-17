@@ -59,14 +59,14 @@
 		<td>
 			<span id="frmwait"></span>
 			<input id="DCRes" type="hidden" value="" />
-			<input id="btnResultSave" type="button" class="bb bsave hidden" title="{-#msgResultSaveTooltip#-}" value="Save" />
+			<input id="btnResultSave" type="button" class="bb bsave hidden" title="{-#msgResultSaveTooltip#-}" value=" " />
 			<div id="btnResultSaveOptions" class="hidden">
 				<input type="button" id="btnResultSaveXLS" value="xls" class="bb line" /> | 
 				<input type="button" id="btnResultSaveCSV" value="csv" class="bb line" />
 				<input type="hidden" id="btnResultShow" value="" />
 			</div>
 			&nbsp;
-			<input id="btnResultPrint" type="button" class="bb bprint hidden" title="{-#msgResultPrintTooltip#-}" value="Print" />
+			<input id="btnResultPrint" type="button" class="bb bprint hidden" title="{-#msgResultPrintTooltip#-}" value=" " />
 			&nbsp;
 		</td>
 	</tr>
