@@ -2,7 +2,7 @@
 <div id="divDatacard" class="Datacard mainblock">
 	<table style="width:100%;">
 		<tr>
-			<td class="top" align="left" width="45%">
+			<td class="top left" width="45%">
 				<input type="button" id="btnDatacardNew"    class="DatacardCmdButton bb bnew"    title="{-#tnewtitle#-}: {-#tnewdesc#-}" />
 				<input type="button" id="btnDatacardEdit"   class="DatacardCmdButton bb bupd"    title="{-#tupdtitle#-}: {-#tupddesc#-}" />
 				<input type="button" id="btnDatacardSave"   class="DatacardCmdButton bb bsave"   title="{-#tsavtitle#-}: {-#tsavdesc#-}" />
@@ -19,7 +19,7 @@
 				<input type="text"   id="txtDatacardFind" class="DatacardCmdFind line" style="width:60px;" />
 				<input type="button" id="btnDatacardFind" class="DatacardCmdFind bb bfind" title="{-#tooltipDatacardFind#-}" />
 			</td>
-			<td class="top" align="right" width="55%" colspan="2">
+			<td class="top right" width="55%" colspan="2">
 				<div id="divDatacardStatusMsg" class="status" style="display:none;">
 					<span class="datacardStatusMsg" id="msgDatacardDuplicatedSerial">{-#msgDatacardDuplicatedSerial#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardStartNew">{-#tmsgnewcard#-}</span>
@@ -44,16 +44,16 @@
 			</td>
 		</tr>
 		<tr>
-			<td align="left">
+			<td class="left">
 				<span class="dlgmsg" id="distatusmsg"></span>
 				<span class="dlgmsg" id="dostat"></span>
 			</td>
-			<td align="left" class="top">
+			<td class="top left">
 				<div id="divRecordStat" style="display:none;">
 					{-#tstatpublished#-} <span id="RecordPublished"></span>, {-#tstatready#-} <span id="RecordReady"></span><br />
 				</div>
 			</td>
-			<td align="right" class="top">
+			<td class="top right">
 				<div id="divRecordNavigationInfo" style="display:none;">
 					<span id="RecordNumber"></span>/<span id="RecordCount"></span><br />
 				</div>
@@ -210,7 +210,7 @@
 									<table class="EffectList EffectListPeople grid" width="100%">
 										{-foreach $ef1 as $key => $value-}
 											<tr>
-												<td align="right">
+												<td class="right">
 													<span class="label" title="{-$value[1]-}">{-$value[0]-}</span>
 												</td>
 												<td>
@@ -237,7 +237,7 @@
 												<table class="EffectList EffectListSector grid" width="100%">
 													{-foreach $sec as $key => $value -}
 														<tr>
-															<td align="right">
+															<td class="right">
 																<span class="label" title="{-$value[1]-}">{-$value[0]-}</span>
 															</td>
 															<td>

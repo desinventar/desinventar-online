@@ -88,7 +88,7 @@
 						<a class="button" onclick="selectall('fldStatFieldSelect');"><span>{-#balls#-}</span></a>
 						<a class="button" onclick="selectnone('fldStatFieldSelect');"><span>{-#bnone#-}</span></a>
 					</td>
-					<td style="width:20px;" align="center">
+					<td style="width:20px;" class="center">
 						<a class="button" onclick="top('fldStatFieldSelect');"><span>&uArr;</span></a><br />
 						<a class="button" onclick="upone('fldStatFieldSelect');"><span>&uarr;</span></a><br />
 						<a class="button" onclick="downone('fldStatFieldSelect');"><span>&darr;</span></a><br />

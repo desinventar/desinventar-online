@@ -53,7 +53,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center">
+				<td colspan="2" class="center">
 					<input id="fldDatabaseEdit_RegionStatus" type="hidden" name="Database[RegionStatus]" value="0" />
 				</td>
 			</tr>

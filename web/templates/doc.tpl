@@ -52,8 +52,8 @@
  {-if $title-}
 	<h4>{-$pagetitle-}</h4>
  {-/if-}
-	<p align="justify"><i>{-$pagedesc-}</i></p>
-	<p align="justify">{-$pagefull-}</p>
+	<p class="justify"><i>{-$pagedesc-}</i></p>
+	<p class="justify">{-$pagefull-}</p>
 	<hr />
  {-foreach name=eff key=key item=item from=$eff-}
  <b>{-$item[0]-}</b><br />{-$item[2]-}<br /><hr />

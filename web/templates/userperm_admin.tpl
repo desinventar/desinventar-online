@@ -32,7 +32,7 @@
 		<a class="button" href="#" id="btnUserPermAdminSend"><span>{-#msgUserPermAdminSend#-}</span></a>
 		<a class="button" href="#" id="btnUserPermAdminCancel"><span>{-#msgUserPermAdminCancel#-}</span></a>
 	</div>
-	<div id="divUserPermAdminStatus" align="center">
+	<div id="divUserPermAdminStatus" class="center">
 		<br />
 		<h4>
 			<span class="clsUserPermAdminStatus" id="txtUserPermAdminFormError">{-#msgUserPermAdminFormError#-}</span>

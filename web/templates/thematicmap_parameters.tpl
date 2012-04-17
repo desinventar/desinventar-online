@@ -98,7 +98,7 @@
 																<option value="100">100</option>
 															</select>%
 														</td>
-														<td align="right">
+														<td class="right">
 															<a class="button" onClick="genColors();"><span>{-#mcolorgrad#-}</span></a>
 														</td>
 													</tr>

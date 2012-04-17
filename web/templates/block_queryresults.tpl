@@ -44,7 +44,7 @@
 								<img src="{-$desinventarURL-}/images/di_logo.png" />
 							</td>
 							<td>
-								<p style="font-size: 16pt;" align="center">DesInventar {-$desinventarVersion-}</p>
+								<p style="font-size: 16pt;" class="center">DesInventar {-$desinventarVersion-}</p>
 							</td>
 						</tr>
 						<tr>

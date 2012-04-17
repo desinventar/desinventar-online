@@ -20,7 +20,7 @@
 					<p class="right">{-#trepnum#-}: {-$MapNumberOfRecords-}</p>
 					<hr />
 					<h4 id="defaultMapTitle">{-#tmapof#-} {-$rgl[0].info.TITLE-}</h4>
-					<div align="justify" class="QueryInfo dwin" style="height:250px;">{-#msgViewMap_Level#-}: {-$rgl[0].info.LEVEL-}; 
+					<div class="justify" class="QueryInfo dwin" style="height:250px;">{-#msgViewMap_Level#-}: {-$rgl[0].info.LEVEL-}; 
 						{-foreach key=k item=i from=$rgl[0].info-}
 							{-if $k == "GEO"-}<i>{-#geo#-}:</i> {-$i-}; {-/if-}
 							{-if $k == "EVE"-}<i>{-#eve#-}:</i> {-$i-}; {-/if-}
