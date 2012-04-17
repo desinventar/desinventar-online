@@ -614,3 +614,9 @@ div.Datacard table.Datacard {
 div.Results .header {
 	background:#bbbbbb;
 }
+div.UserLogin {
+	margin-left:auto;
+	margin-right:auto;
+	width:300px;
+	text-align:center;
+}
