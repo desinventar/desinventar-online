@@ -5108,9 +5108,11 @@ function onReadyGraphic() {
 			jQuery('#prmGraphScale0').disable();
 		}
 	});
-	
-	jQuery('[help_tip]').mouseover(function() {
-		showtip(jQuery(this).attr('help_tip'));
+
+	jQuery('div.ViewGraphParams').on('mouseover','select', function() {
+		showtip(jQuery(this).data('helptext'));
+	}).on('mouseover','b', function() {
+		showtip(jQuery(this).data('helptext'));
 	});
 
 	// Initialize Controls on Load
@@ -6287,6 +6289,23 @@ function onReadyQueryDesign()
 		showtip(jQuery(this).data('help'));
 	}).on('focus','.withHelpFocus',function() {
 		showtip(jQuery(this).data('help'));
+	});
+
+	jQuery('div.QueryDesign').on('click','div.QueryCustom :button.clear', function(e) {
+		var query = jQuery('div.QueryDesign textarea.QueryCustom');
+		query.val('');
+		e.stopPropagation();
+		return false;
+	}).on('click','div.QueryCustom :button', function(e) {
+		var query = jQuery('div.QueryDesign textarea.QueryCustom');
+		var sql = jQuery(this).data('sql');
+		if (sql == undefined)
+		{
+			sql = '';
+		}
+		query.val(query.val() + sql);
+		query.focus();
+		e.stopPropagation();
 	});
 
 	jQuery('div.QueryDesign div.GeographyList').on('click', 'li.item input:checkbox', function(event) {
