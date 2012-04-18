@@ -1318,7 +1318,8 @@ function onReadyGeography()
 
 	jQuery('div.Geography a.Export').click(function() {
 		var form = jQuery('div.Geography form.Export');
-		jQuery('div.Geography form.Export').submit();
+		jQuery('input.RegionId', form).val(jQuery('#desinventarRegionId').val());		
+		jQuery('div.Geography form.Export').trigger('submit');
 		return false;
 	});
 
