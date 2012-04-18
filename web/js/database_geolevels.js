@@ -207,6 +207,8 @@ function onReadyGeolevels()
 				jQuery('body').trigger('cmdMainWaitingHide');
 				if (parseInt(data.Status) > 0)
 				{
+					jQuery('#divGeolevels_Edit').hide();
+					jQuery('#btnGeolevels_Add').show();
 					doGeolevelsPopulateList(data.GeolevelsList);
 				}
 			},
