@@ -53,7 +53,6 @@ function query_convert_v2_to_v1($xml_string)
 	$query = array();
 	$xml_doc = new SimpleXMLElement($xml_string);
 	$xml_query = reset($xml_doc->xpath('query'));
-	fb($xml_query);
 	$a = array();
 	foreach($xml_query->xpath('geography/id') as $id)
 	{
@@ -83,7 +82,6 @@ function query_convert_v2_to_v1($xml_string)
 	$query['D_CauseId'] = $a;
 	$query['D_CauseNotes'][1] = query_trim(reset($xml_query->xpath('cause/notes')));
 
-	fb($query);
 	return $query;
 } #query_convert_v1_to_v2()
 

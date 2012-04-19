@@ -1335,10 +1335,8 @@ switch ($cmd)
 				$query = query_convert_v2_to_v1($xml_string);
 				$qd  = $us->q->genSQLWhereDesconsultar($query);
 				$sqc = $us->q->genSQLSelectCount($qd);
-				fb($sqc);
 				$c	 = $us->q->getresult($sqc);
 				$iNumberOfRecords = $c['counter'];
-				fb('NumberOfRecords : ' . $iNumberOfRecords);
 			}
 		}
 	break;
