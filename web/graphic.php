@@ -206,6 +206,8 @@ if ($GraphCommand != '')
 			}
 			$gl[$dk] = $i;
 		}
+
+		$post['DateRange'] = $us->getDateRange($post['D_RecordStatus']);
 		// Construct Graphic Object and Show Page
 		$g = new Graphic($us, $post, $gl);
 		// Wrote graphic to file

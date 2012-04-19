@@ -5,7 +5,6 @@
 */
 require_once('include/loader.php');
 require_once('include/diregion.class.php');
-fb($_POST);
 $post = $_POST;
 $RegionId = getParameter('RegionId', getParameter('_REG', getParameter('r','')));
 if ($RegionId == '')
