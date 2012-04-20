@@ -1372,7 +1372,7 @@ switch ($cmd)
 	case 'cmdGraphSave':
 		require_once('include/graphic.class.php');
 		require_once('include/diresult.class.php');
-		require_once('include/digraphic.class.php');
+		require_once('include/digraph.class.php');
 		$post = $_POST;
 		fixPost($post);
 		$post['General']['LangIsoCode'] = $lg;
