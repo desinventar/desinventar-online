@@ -1375,8 +1375,9 @@ switch ($cmd)
 
 		$graph = new DIGraphXML($us, $xml_string);
 		$graph->execute();
-		$answer = array();
-		echo json_encode($answer);
+		echo '<img src="' . $graph->output['ImageURL'] . '" />';
+		#$answer = array();
+		#echo json_encode($answer);
 	break;
 	case 'cmdGraphShow':
 	case 'cmdGraphSave':
@@ -1386,7 +1387,6 @@ switch ($cmd)
 		$post = $_POST;
 		fixPost($post);
 		$post['General']['LangIsoCode'] = $lg;
-		fb($post);
 		$graph = new DIGraph($us, $post);
 		$graph->execute();
 
