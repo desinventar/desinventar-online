@@ -1373,6 +1373,7 @@ switch ($cmd)
 		fixPost($post);
 		$post['General']['LangIsoCode'] = $lg;
 
+		$xml_string = file_get_contents('../samples/query.xml');
 		$graph = new DIGraphXML($us, $xml_string);
 		$graph->execute();
 		echo '<img src="' . $graph->output['ImageURL'] . '" />';

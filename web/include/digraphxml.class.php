@@ -8,8 +8,7 @@ class DIGraphXML extends DIGraph
 {
 	public function __construct($prmSession, $prmXML)
 	{
-		#$xml_doc = new SimpleXMLElement($prmXML);
-		$options = array();
+		$options = query_convert_v2_to_v1($prmXML);
 		parent::__construct($prmSession, $options);
 	} #__construct()
 } #class

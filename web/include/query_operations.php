@@ -53,6 +53,28 @@ function query_convert_v2_to_v1($xml_string)
 	$query = array();
 	$xml_doc = new SimpleXMLElement($xml_string);
 	$xml_query = reset($xml_doc->xpath('query'));
+	$period_start = query_trim(reset($xml_query->xpath('period/start')));
+	$period_end   = query_trim(reset($xml_query->xpath('period/end')));
+	if ($period_start != '')
+	{
+		$query['D_DisasterBeginTime'][0] = substr($period_start, 0, 4);
+		$query['D_DisasterBeginTime'][1] = substr($period_start, 5, 2);
+		$query['D_DisasterBeginTime'][2] = substr($period_start, 8, 2);
+	}
+
+	if ($period_end != '')
+	{
+		$query['D_DisasterEndTime'][0] = substr($period_end, 0, 4);
+		$query['D_DisasterEndTime'][1] = substr($period_end, 5, 2);
+		$query['D_DisasterEndTime'][2] = substr($period_end, 8, 2);
+	}
+	$a = array();
+	foreach($xml_query->xpath('status/value') as $status)
+	{
+		$a[] = query_trim($status);
+	}
+	$query['D_RecordStatus'] = $a;
+
 	$a = array();
 	foreach($xml_query->xpath('geography/id') as $id)
 	{
