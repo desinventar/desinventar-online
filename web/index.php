@@ -1298,10 +1298,6 @@ switch ($cmd)
 		}
 		echo json_encode($answer);
 	break;
-	case 'cmdProfiles':
-		$answer = array();
-		echo json_encode($answer);
-	break;
 	case 'savequery':
 	case 'cmdQuerySave':
 		# Save XML file query
@@ -1368,6 +1364,20 @@ switch ($cmd)
 			$RegionId = $get['r'];
 		}
 	break;
+	case 'cmdProfiles':
+		require_once('include/graphic.class.php');
+		require_once('include/diresult.class.php');
+		require_once('include/digraph.class.php');
+		require_once('include/digraphxml.class.php');
+		$post = $_POST;
+		fixPost($post);
+		$post['General']['LangIsoCode'] = $lg;
+
+		$graph = new DIGraphXML($us, $xml_string);
+		$graph->execute();
+		$answer = array();
+		echo json_encode($answer);
+	break;
 	case 'cmdGraphShow':
 	case 'cmdGraphSave':
 		require_once('include/graphic.class.php');
@@ -1376,6 +1386,7 @@ switch ($cmd)
 		$post = $_POST;
 		fixPost($post);
 		$post['General']['LangIsoCode'] = $lg;
+		fb($post);
 		$graph = new DIGraph($us, $post);
 		$graph->execute();
 
