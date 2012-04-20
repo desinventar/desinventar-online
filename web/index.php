@@ -1369,21 +1369,38 @@ switch ($cmd)
 		}
 	break;
 	case 'cmdGraphShow':
+	case 'cmdGraphSave':
 		require_once('include/graphic.class.php');
 		require_once('include/diresult.class.php');
 		require_once('include/digraphic.class.php');
 		$post = $_POST;
 		fixPost($post);
+		$post['General']['LangIsoCode'] = $lg;
 		$graph = new DIGraph($us, $post);
 		$graph->execute();
 
-		$t->assign('RegionLabel', $RegionLabel);
-		$t->assign('NumRecords', $graph->output['NumRecords']);
-		$t->assign('qdet'      , $graph->output['QueryDetails']);
-		$t->assign('image'     , $graph->output['ImageURL']);
-		$t->assign('ctl_showres', true);
-		$t->force_compile   = true; # Force this template to always compile
-		$t->display('graphic.tpl');
+		if ($cmd == 'cmdGraphShow')
+		{
+			$t->assign('RegionLabel', $RegionLabel);
+			$t->assign('NumRecords', $graph->output['NumRecords']);
+			$t->assign('qdet'      , $graph->output['QueryDetails']);
+			$t->assign('image'     , $graph->output['ImageURL']);
+			$t->assign('ctl_showres', true);
+			$t->force_compile   = true; # Force this template to always compile
+			$t->display('graphic.tpl');
+		}
+		else
+		{
+			# Save Graph as Image
+			header('Content-type: Image/png');
+			header('Content-Disposition: attachment; filename=DesInventar_'. str_replace(' ', '', $RegionLabel) .'_Graphic.png');
+			header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+			header('Last-Modified: '. gmdate('D, d M Y H:i:s') .' GMT');
+			header('Cache-Control: no-store, no-cache, must-revalidate');
+			header('Cache-Control: post-check=0, pre-check:0', false);
+			header('Pragma: no-cache');
+			readfile($graph->output['ImageFile']);
+		}
 	break;
 	default:
 		# Direct access returns a list of public regions on this server
