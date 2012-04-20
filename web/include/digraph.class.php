@@ -6,24 +6,36 @@
 
 class DIGraph extends DIResult
 {
+	private $options_default = array(
+		'General' => array(
+			'LangIsoCode' => 'eng'
+		),
+		'Graph' => array(
+			'Title' => ''
+		)
+	);
 	public function __construct($prmSession, $prmOptions)
 	{
+		fb($this->options_default);
 		parent::__construct($prmSession);
 		$this->session = $prmSession;
-		$this->options = $prmOptions;
+		$prmOptions['Graph'] = $prmOptions['prmGraph'];
+		unset($prmOptions['prmGraph']);
+		$this->options = array_merge($this->options_default, $prmOptions);
+		fb($this->options);
 	} #__construct()
 
 	public function preProcessData()
 	{
-		foreach($this->options['prmGraph']['Field'] as $key => $value)
+		foreach($this->options['Graph']['Field'] as $key => $value)
 		{
 			if ($value == '')
 			{
-				unset($this->options['prmGraph']['Field'][$key]);
-				unset($this->options['prmGraph']['Scale'][$key]);
-				unset($this->options['prmGraph']['Data'][$key]);
-				unset($this->options['prmGraph']['Mode'][$key]);
-				unset($this->options['prmGraph']['Tendency'][$key]);
+				unset($this->options['Graph']['Field'][$key]);
+				unset($this->options['Graph']['Scale'][$key]);
+				unset($this->options['Graph']['Data'][$key]);
+				unset($this->options['Graph']['Mode'][$key]);
+				unset($this->options['Graph']['Tendency'][$key]);
 			}
 		}
 	} #preProcessData()
@@ -47,7 +59,7 @@ class DIGraph extends DIResult
 		$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
 		$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Sector', $lg));
 		$dic = array_merge($dic, $us->q->getEEFieldList('True'));
-		$prmGraph = $options['prmGraph'];
+		$prmGraph = $options['Graph'];
 
 		# Process QueryDesign Fields and count results
 		$qd  = $us->q->genSQLWhereDesconsultar($options);
@@ -90,7 +102,7 @@ class DIGraph extends DIResult
 		{
 			$prmGraph['VarList'] = $prmGraph['SubType'];
 		}
-		$options['prmGraph'] = $prmGraph;
+		$options['Graph'] = $prmGraph;
 
 		$sImageURL  = WWWDATA . '/graphs/graph_'. session_id() . '_' . time() . '.png';
 		$sImageFile = WWWDIR  . '/graphs/graph_'. session_id() . '_' . time() . '.png';

@@ -23,6 +23,7 @@ class Graphic
 	public function Graphic($prmSession, $opc, $prmData)
 	{
 		$this->data = $prmData;
+		$opc['prmGraph'] = $opc['Graph'];
 		$kind = $opc['prmGraph']['Kind'];
 		// Get Label Information
 		$oLabels     = array_keys($this->data);
