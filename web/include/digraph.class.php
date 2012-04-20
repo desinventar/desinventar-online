@@ -11,7 +11,20 @@ class DIGraph extends DIResult
 			'LangIsoCode' => 'eng'
 		),
 		'Graph' => array(
-			'Title' => ''
+			'Type'          => 'HISTOGRAM',
+			'SubType'       => 0,
+			'Title'         => '',
+			'Kind'          => 'BAR',
+			'Feel'          => '3D',
+			'Period'        => 'YEAR',
+			'Stat'          => '',
+			'Tendency'      => '',
+			'TendencyLabel' => '',
+			'FieldLabel'    => array('Number of records'),
+			'Field'         => array('D.DisasterId||'),
+			'Scale'         => array('textint'),
+			'Data'          => array('NONE'),
+			'Mode'          => array('NORMAL')
 		)
 	);
 	public function __construct($prmSession, $prmOptions)
@@ -19,8 +32,11 @@ class DIGraph extends DIResult
 		fb($this->options_default);
 		parent::__construct($prmSession);
 		$this->session = $prmSession;
-		$prmOptions['Graph'] = $prmOptions['prmGraph'];
-		unset($prmOptions['prmGraph']);
+		if (isset($prmOptions['prmGraph']))
+		{
+			$prmOptions['Graph'] = $prmOptions['prmGraph'];
+			unset($prmOptions['prmGraph']);
+		}
 		$this->options = array_merge($this->options_default, $prmOptions);
 		fb($this->options);
 	} #__construct()
