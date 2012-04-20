@@ -29,7 +29,6 @@ class DIGraph extends DIResult
 	);
 	public function __construct($prmSession, $prmOptions)
 	{
-		fb($this->options_default);
 		parent::__construct($prmSession);
 		$this->session = $prmSession;
 		if (isset($prmOptions['prmGraph']))
@@ -38,7 +37,6 @@ class DIGraph extends DIResult
 			unset($prmOptions['prmGraph']);
 		}
 		$this->options = array_merge($this->options_default, $prmOptions);
-		fb($this->options);
 	} #__construct()
 
 	public function preProcessData()
