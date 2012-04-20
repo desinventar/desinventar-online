@@ -424,7 +424,7 @@
 		combineForms('frmMainQuery', 'frmGraphParams');
 		Ext.getCmp('westm').show();
 		Ext.getCmp('westm').collapse();
-		$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/graphic.php';
+		$('frmMainQuery').action=jQuery('#desinventarURL').val() + '/';
 		jQuery('#frmMainQuery').attr('target','dcr');
 
 		if (cmd != 'result')
