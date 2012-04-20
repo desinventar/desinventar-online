@@ -176,32 +176,5 @@ class DIGraph extends DIResult
 			$this->output['ImageFile']   = $sImageFile;
 		} #if
 	} #execute()
-
-	public function save()
-	{
-		if ($NumRecords > 0)
-		{
-			if ($GraphCommand == 'export')
-			{
-				# Export Graph as a Image
-				header('Content-type: Image/png');
-				header('Content-Disposition: attachment; filename=DesInventar_'. str_replace(' ', '', $RegionLabel) .'_Graphic.png');
-				header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-				header('Last-Modified: '. gmdate('D, d M Y H:i:s') .' GMT');
-				header('Cache-Control: no-store, no-cache, must-revalidate');
-				header('Cache-Control: post-check=0, pre-check:0', false);
-				header('Pragma: no-cache');
-				readfile($sImageFile);
-				exit();
-			}
-			else
-			{
-				# Display Graph in Browser
-				$t->assign('qdet', $us->q->getQueryDetails($dic, $options));
-				$t->assign('image', $sImageURL . '?'. rand(1,3000));
-				$t->assign('ctl_showres', true);
-			} 
-		} #if
-	} #execute()
 } #class
 </script>
