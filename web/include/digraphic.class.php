@@ -41,6 +41,7 @@ class DIGraph extends DIResult
 			$st['GraphGeographyId_'. $k] = array($i[0], $i[1]);
 		}
 
+		$lg = $options['General']['LangIsoCode'];
 		$dic = array_merge(array(), $st);
 		$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Graph', $lg));
 		$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
@@ -172,6 +173,7 @@ class DIGraph extends DIResult
 			$this->output['NumRecords']  = $NumRecords;
 			$this->output['QueryDetail'] = $us->q->getQueryDetails($dic, $options);
 			$this->output['ImageURL']    = $sImageURL . '?'. rand(1,3000);
+			$this->output['ImageFile']   = $sImageFile;
 		} #if
 	} #execute()
 
