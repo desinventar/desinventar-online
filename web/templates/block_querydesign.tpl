@@ -6,7 +6,7 @@
 	<input type="hidden" class="MinYear"  id="prmQueryMinYear" name="prmQuery[ConstMinYear]" value="" />
 	<input type="hidden" class="MaxYear"  id="prmQueryMaxYear" name="prmQuery[ConstMaxYear]" value="" />
 	<input type="hidden" id="_CMD" name="_CMD" />
-	<input type="hidden" id="prmQueryCommand"      name="prmQuery[Command]"      value="DEFAULT" />
+	<input type="hidden" id="prmQueryCommand" name="prmQueryCommand" value="DEFAULT" />
 	<dl class="accordion">
 		<!-- BEGIN GEOGRAPHY SECTION -->
 		<!-- Select from Map testing ... 'selectionmap.php' -->

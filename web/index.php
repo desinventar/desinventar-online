@@ -14,7 +14,7 @@ require_once('include/query_operations.php');
 $post = $_POST;
 $get  = $_GET;
 
-$cmd = getParameter('cmd', getParameter('_CMD',''));
+$cmd = getParameter('cmd', getParameter('prmQueryCommand', getParameter('_CMD','')));
 if ($cmd == '')
 {
 	if (isset($_POST['prmQuery']['Command']))
@@ -1367,6 +1367,23 @@ switch ($cmd)
 		{
 			$RegionId = $get['r'];
 		}
+	break;
+	case 'cmdGraphShow':
+		require_once('include/graphic.class.php');
+		require_once('include/diresult.class.php');
+		require_once('include/digraphic.class.php');
+		$post = $_POST;
+		fixPost($post);
+		$graph = new DIGraph($us, $post);
+		$graph->execute();
+
+		$t->assign('RegionLabel', $RegionLabel);
+		$t->assign('NumRecords', $graph->output['NumRecords']);
+		$t->assign('qdet'      , $graph->output['QueryDetails']);
+		$t->assign('image'     , $graph->output['ImageURL']);
+		$t->assign('ctl_showres', true);
+		$t->force_compile   = true; # Force this template to always compile
+		$t->display('graphic.tpl');
 	break;
 	default:
 		# Direct access returns a list of public regions on this server
