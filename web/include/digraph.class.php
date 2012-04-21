@@ -6,45 +6,32 @@
 
 class DIGraph extends DIResult
 {
-	private $options_default = array(
-		'General' => array(
-			'LangIsoCode' => 'eng'
-		),
-		'Graph' => array(
-			'Type'          => 'HISTOGRAM',
-			'SubType'       => 0,
-			'Title'         => '',
-			'Kind'          => 'BAR',
-			'Feel'          => '3D',
-			'Period'        => 'YEAR',
-			'Stat'          => '',
-			'Tendency'      => '',
-			'TendencyLabel' => '',
-			'FieldLabel'    => array('Number of records'),
-			'Field'         => array('D.DisasterId||'),
-			'Scale'         => array('textint'),
-			'Data'          => array('NONE'),
-			'Mode'          => array('NORMAL')
-		)
+	private $options_default_graph = array(
+		'Type'          => 'HISTOGRAM',
+		'SubType'       => 0,
+		'Title'         => '',
+		'Kind'          => 'BAR',
+		'Feel'          => '3D',
+		'Period'        => 'YEAR',
+		'Stat'          => '',
+		'Tendency'      => '',
+		'TendencyLabel' => '',
+		'FieldLabel'    => array('Number of records'),
+		'Field'         => array('D.DisasterId||'),
+		'Scale'         => array('textint'),
+		'Data'          => array('NONE'),
+		'Mode'          => array('NORMAL')
 	);
 
 	public function __construct($prmSession, $prmOptions)
 	{
-		parent::__construct($prmSession);
-		$this->session = $prmSession;
 		if (isset($prmOptions['prmGraph']))
 		{
 			$prmOptions['Graph'] = $prmOptions['prmGraph'];
 			unset($prmOptions['prmGraph']);
 		}
-		if (! isset($prmOptions['General']['LangIsoCode']))
-		{
-			$prmOptions['General']['LangIsoCode'] = $prmSession->LangIsoCode;
-		}
-		$this->options = $this->options_default;
-		$this->options = array_merge($this->options, $prmOptions);
-		$this->options['Graph']   = array_merge($this->options_default['Graph'], $prmOptions['Graph']);
-		$this->options['General'] = array_merge($this->options_default['General'], $prmOptions['General']);
+		parent::__construct($prmSession, $prmOptions);
+		$this->options['Graph']   = array_merge($this->options_default_graph, $prmOptions['Graph']);
 	} #__construct()
 
 	public function preProcessData()
@@ -75,7 +62,7 @@ class DIGraph extends DIResult
 			$st['GraphGeographyId_'. $k] = array($i[0], $i[1]);
 		}
 
-		$lg = $options['General']['LangIsoCode'];
+		$lg = $options['Common']['LangIsoCode'];
 		$dic = array_merge(array(), $st);
 		$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Graph', $lg));
 		$dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
