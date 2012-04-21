@@ -27,6 +27,7 @@ class DIGraph extends DIResult
 			'Mode'          => array('NORMAL')
 		)
 	);
+
 	public function __construct($prmSession, $prmOptions)
 	{
 		parent::__construct($prmSession);
@@ -36,7 +37,14 @@ class DIGraph extends DIResult
 			$prmOptions['Graph'] = $prmOptions['prmGraph'];
 			unset($prmOptions['prmGraph']);
 		}
-		$this->options = array_merge($this->options_default, $prmOptions);
+		if (! isset($prmOptions['General']['LangIsoCode']))
+		{
+			$prmOptions['General']['LangIsoCode'] = $prmSession->LangIsoCode;
+		}
+		$this->options = $this->options_default;
+		$this->options = array_merge($this->options, $prmOptions);
+		$this->options['Graph']   = array_merge($this->options_default['Graph'], $prmOptions['Graph']);
+		$this->options['General'] = array_merge($this->options_default['General'], $prmOptions['General']);
 	} #__construct()
 
 	public function preProcessData()

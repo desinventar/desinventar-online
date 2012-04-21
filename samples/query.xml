@@ -16,6 +16,12 @@
 		</status>
 	</query>
 	<graph>
+		<type>
+			HISTOGRAM
+		</type>
+		<subtype>
+			2
+		</subtype>
 	</graph>
 </desinventar>
 

@@ -6,7 +6,7 @@
 
 class DIResult
 {
-	public function __construct()
+	public function __construct($prmSession, $prmOptions)
 	{
 	} #__construct()
 } #class
