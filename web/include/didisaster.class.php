@@ -177,7 +177,7 @@ class DIDisaster extends DIRecord
 		}
 		if (count($this->status->error))
 		{
-			$iReturn = ERR_DEFAULT_ERROR;
+			$iReturn = reset(array_keys($this->status->error));
 		}
 		return $iReturn;
 	} //validateUpdate()
