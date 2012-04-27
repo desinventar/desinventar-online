@@ -2978,8 +2978,14 @@ function doDatacardInitialize()
 	// Load EffectPeople List (ef1)
 	jQuery('div.Datacard table.EffectListPeople select.value').jec({
 		maxLength: 15,
-		acceptedKeys : [48,49,50,51,52,53,54,55,56,57,58]
 	}).blur(function() {
+		var value = parseInt(jQuery(this).jecValue());
+		if ((isNaN(value)) || (value<0))
+		{
+			value = 0;
+		}
+		jQuery(this).jecValue(value);
+		jQuery(this).val(value);
 		if (jQuery(this).val() == '')
 		{
 			jQuery(this).val(0);
