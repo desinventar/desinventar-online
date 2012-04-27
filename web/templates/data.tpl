@@ -65,10 +65,14 @@
 						{-if $field_id != "DisasterId"-}
 							{-if $data_header[$field_id].type=='CHECKBOX'-}
 								<td class="center middle">
-									{-if $row[$field_id]!=0-}
+									{-if $row[$field_id]==-1-}
 										<input type="checkbox" disabled="disabled" checked="checked" />
-									{-else-}
+									{-elseif $row[$field_id]==0-}
 										<input type="checkbox" disabled="disabled" />
+									{-elseif $row[$field_id]==-2-}
+										?
+									{-else-}
+										<br />
 									{-/if-}
 								</td>
 							{-else-}
