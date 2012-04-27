@@ -201,6 +201,10 @@ function onReadyDatacards()
 	jQuery('.inputDouble').keydown(function(event) {
 		return blockChars(event, jQuery(this).val(), 'double:' + jQuery(this).attr('MaxLength'));
 	}).blur(function() {
+		if (jQuery.trim(jQuery(this).val() == ''))
+		{
+			jQuery(this).val(0);
+		}
 		/*
 		var answer = validateInputDouble(jQuery(this).val());
 		if (answer > 0)
