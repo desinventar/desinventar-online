@@ -15,7 +15,7 @@ define('MAJORVERSION', '2012');
 define('MINORVERSION', '05.096.10');
 define('RELEASEDATE' , '2012-04-27');
 define('VERSION'     , MAJORVERSION . '.' . MINORVERSION);
-define('JSVERSION'   , VERSION . '.' . RELEASE);
+define('JSVERSION'   , VERSION);
 
 $appOptions = array();
 $appOptions['UseRemoteMaps'] = 1;
