@@ -21,17 +21,6 @@ class DIGeoLevel extends DIRecord
 	{
 		$this->sTableName   = "GeoLevel";
 		$this->sPermPrefix  = "GEOLEVEL";
-		/*
-		$this->sFieldKeyDef = "GeoLevelId/INTEGER," .
-		                      "LangIsoCode/STRING";
-		$this->sFieldDef    = "RegionId/STRING," .
-		                      "GeoLevelName/STRING," .
-		                      "GeoLevelDesc/STRING," .  
-		                      "GeoLevelActive/INTEGER," .
-		                      "RecordCreation/DATETIME," .
-		                      "RecordSync/DATETIME," .
-		                      "RecordUpdate/DATETIME";
-		*/
 		parent::__construct($prmSession);
 		$this->set("GeoLevelActive", 1);
 
