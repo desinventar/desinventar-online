@@ -5,7 +5,7 @@
 
 	$us = new UserSession();
 	
-	$o = new DIGeoLevel($us);
+	$o = new DIGeoCarto($us);
 	echo $o->getCreateTable() . "\n";
 	print_r($o->oField);
 	

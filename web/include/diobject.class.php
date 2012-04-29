@@ -55,9 +55,9 @@ class DIObject
 		{
 			$sFieldKeyDef = '';
 			$sFieldDef = '';
-			foreach(static::$def as $field)
+			foreach(static::$def as $field_name => $field)
 			{
-				$field_new = $field['name'] . '/' . $field['type'];
+				$field_new = $field_name . '/' . $field['type'];
 				if (isset($field['pk']))
 				{
 					if ($sFieldKeyDef != '') { $sFieldKeyDef .= ','; }

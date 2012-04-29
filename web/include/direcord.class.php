@@ -34,6 +34,43 @@ class DIRecord extends DIObject
 	{
 		return $this->sTableName;
 	}
+
+	public function getCreateTable()
+	{
+		$pk = '';
+		$query = '';
+		foreach(static::$def as $field_name => $field)
+		{
+			if ($query != '') { $query .=', '; }
+			$query .= $field_name;
+			$type = $field['type'];
+			if ($type == 'VARCHAR')
+			{
+				$type .= '(' . $field['size'] . ')';
+			}
+			$query .= ' '. $type;
+			if (isset($field['default']))
+			{
+				$query .= ' DEFAULT ';
+				if ($field['type'] == 'VARCHAR') { $query.= "'"; }
+				$query .= $field['default'];
+				if ($field['type'] == 'VARCHAR') { $query.= "'"; }
+			}
+			if (isset($field['pk']))
+			{
+				if ($pk != '') { $pk .= ','; }
+				$pk .= $field_name;
+			}
+		}
+		$query = 'CREATE TABLE ' . $this->sTableName . ' (' . $query;
+		if ($pk != '')
+		{
+			$query .= ', PRIMARY KEY(' . $pk . ')';
+		}
+		$query .= ')';
+		return $query;
+	} #getCreateTable
+
 	
 	public function getWhereSubQuery()
 	{

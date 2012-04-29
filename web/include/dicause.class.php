@@ -6,10 +6,25 @@
 
 class DICause extends DIRecord
 {
+	protected static $def = array(
+		'CauseId' => array('type' => 'VARCHAR', 'size' => 50, 'pk' => 1),
+		'LangIsoCode' => array('type' => 'VARCHAR', 'size' => 3, 'pk' => 1),
+		'RegionId' => array('type' => 'VARCHAR', 'size' => 50),
+		'CauseName' => array('type' => 'VARCHAR', 'size' => 50),
+		'CauseDesc' => array('type' => 'TEXT'),
+		'CauseActive' => array('type' => 'INTEGER', 'default' => 1),
+		'CausePredefined' => array('type' => 'INTEGER', 'default' => 0),
+		'CauseRGBColor' => array('type' => 'VARCHAR', 'size' => 10),
+		'CauseKeyWords' => array('type' => 'TEXT'),
+		'RecordCreation' => array('type' => 'DATETIME'),
+		'RecordSync' => array('type' => 'DATETIME'),
+		'RecordUpdate' => array('type' => 'DATETIME')
+	);
 	public function __construct($prmSession)
 	{
 		$this->sTableName   = "Cause";
 		$this->sPermPrefix  = "CAUSE";
+		/*
 		$this->sFieldKeyDef = "CauseId/STRING," .
 		                      "LangIsoCode/STRING";
 		$this->sFieldDef    = "RegionId/STRING," . 
@@ -22,6 +37,7 @@ class DICause extends DIRecord
 		                      "RecordCreation/DATETIME," .
 		                      "RecordSync/DATETIME," .
 		                      "RecordUpdate/DATETIME";
+		*/
 		parent::__construct($prmSession);
 		$this->set("CausePredefined", 0);
 		$this->set("CauseActive", 1);
