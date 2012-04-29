@@ -6,6 +6,7 @@
 require_once(BASE . '/include/distatus.class.php');
 class DIObject
 {
+	public static $def = array();
 	var $sFieldKeyDef = '';
 	var $sFieldDef = '';
 	var $status = null;
@@ -31,6 +32,7 @@ class DIObject
 		$this->oField = array();
 		$this->oField['info'] = array();
 		$this->oFieldType=array();
+		$this->initializeFields();
 		$this->createFields($this->sFieldKeyDef);
 		$this->createFields($this->sFieldDef);
 		$this->set('RegionId', $this->session->RegionId);
@@ -47,6 +49,31 @@ class DIObject
 		$this->status = new DIStatus();
 	} // constructor
 	
+	public function initializeFields($LangIsoCode='')
+	{
+		if (count(static::$def) > 0)
+		{
+			$sFieldKeyDef = '';
+			$sFieldDef = '';
+			foreach(static::$def as $field)
+			{
+				$field_new = $field['name'] . '/' . $field['type'];
+				if (isset($field['pk']))
+				{
+					if ($sFieldKeyDef != '') { $sFieldKeyDef .= ','; }
+					$sFieldKeyDef .= $field_new;
+				}
+				else
+				{
+					if ($sFieldDef != '') { $sFieldDef .= ','; }
+					$sFieldDef .= $field_new;
+				}
+			}
+			$this->sFieldKeyDef = $sFieldKeyDef;
+			$this->sFieldDef = $sFieldDef;
+		}
+	} // function
+
 	public function createFields($prmFieldDef, $LangIsoCode='')
 	{
 		if ($LangIsoCode == '')
@@ -65,6 +92,7 @@ class DIObject
 			$sFieldType = $oItem[1];
 			$this->oFieldType[$sFieldName] = $sFieldType;
 			if ($sFieldType == 'STRING')   { $obj[$sFieldName] = '';  }
+			if ($sFieldType == 'VARCHAR')  { $obj[$sFieldName] = '';  }
 			if ($sFieldType == 'TEXT')     { $obj[$sFieldName] = '';  }
 			if ($sFieldType == 'DATETIME') { $obj[$sFieldName] = '';  }
 			if ($sFieldType == 'DATE')     { $obj[$sFieldName] = '';  }

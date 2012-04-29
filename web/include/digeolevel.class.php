@@ -6,10 +6,56 @@
 
 class DIGeoLevel extends DIRecord
 {
+	public static $def = array(
+		array(
+			'name' => 'GeoLevelId',
+			'type' => 'INTEGER',
+			'pk' => 1
+		),
+		array(
+			'name' => 'LangIsoCode',
+			'type' => 'VARCHAR',
+			'size' => 3,
+			'pk' => 1
+		),
+		array(
+			'name' => 'RegionId',
+			'type' => 'VARCHAR',
+			'size' => 50
+		),
+		array(
+			'name' => 'GeoLevelName',
+			'type' => 'VARCHAR',
+			'size' => 50,
+			'default' => '---'
+		),
+		array(
+			'name' => 'GeoLevelDesc',
+			'type' => 'TEXT'
+		),
+		array(
+			'name' => 'GeoLevelActive',
+			'type' => 'INTEGER',
+			'default' => 0
+		),
+		array(
+			'name' => 'RecordCreation',
+			'type' => 'DATETIME'
+		),
+		array(
+			'name' => 'RecordSync',
+			'type' => 'DATETIME'
+		),
+		array(
+			'name' => 'RecordUpdate',
+			'type' => 'DATETIME'
+		)
+	);
 	public function __construct($prmSession)
 	{
 		$this->sTableName   = "GeoLevel";
 		$this->sPermPrefix  = "GEOLEVEL";
+		/*
 		$this->sFieldKeyDef = "GeoLevelId/INTEGER," .
 		                      "LangIsoCode/STRING";
 		$this->sFieldDef    = "RegionId/STRING," .
@@ -19,6 +65,7 @@ class DIGeoLevel extends DIRecord
 		                      "RecordCreation/DATETIME," .
 		                      "RecordSync/DATETIME," .
 		                      "RecordUpdate/DATETIME";
+		*/
 		parent::__construct($prmSession);
 		$this->set("GeoLevelActive", 1);
 
@@ -40,6 +87,42 @@ class DIGeoLevel extends DIRecord
 			$this->load();
 		}
 	} // __construct
+
+	public function getCreateTable()
+	{
+		$pk = '';
+		$query = '';
+		foreach(static::$def as $field)
+		{
+			if ($query != '') { $query .=', '; }
+			$query .= $field['name'];
+			$type = $field['type'];
+			if ($type == 'VARCHAR')
+			{
+				$type .= '(' . $field['size'] . ')';
+			}
+			$query .= ' '. $type;
+			if (isset($field['default']))
+			{
+				$query .= ' DEFAULT ';
+				if ($field['type'] == 'VARCHAR') { $query.= "'"; }
+				$query .= $field['default'];
+				if ($field['type'] == 'VARCHAR') { $query.= "'"; }
+			}
+			if (isset($field['pk']))
+			{
+				if ($pk != '') { $pk .= ','; }
+				$pk .= $field['name'];
+			}
+		}
+		$query = 'CREATE TABLE ' . $this->sTableName . ' (' . $query;
+		if ($pk != '')
+		{
+			$query .= ', PRIMARY KEY(' . $pk . ')';
+		}
+		$query .= ')';
+		return $query;
+	} #getCreateTable
 
 	public function getMaxGeoLevel()
 	{
