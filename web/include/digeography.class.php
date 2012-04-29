@@ -5,21 +5,23 @@
 */
 class DIGeography extends DIRecord
 {
+	protected static $def = array(
+		'GeographyId' => array('type' => 'VARCHAR', 'size' => 100, 'pk' =>1),
+		'LangIsoCode' => array('type' => 'VARCHAR', 'size' => 3, 'pk' => 1),
+		'RegionId' => array('type' => 'VARCHAR', 'size' => 50),
+		'GeographyCode' => array('type' => 'VARCHAR', 'size' => 100, 'default' => '---'),
+		'GeographyName' => array('type' => 'VARCHAR', 'size' => 200, 'default' => '---'),
+		'GeographyFQName' => array('type' => 'VARCHAR', 'size' => 250, 'default' => '---'),
+		'GeographyLevel' => array('type' => 'INTEGER', 'default' => -1),
+		'GeographyActive' => array('type' => 'INTEGER', 'default' => -1),
+		'RecordCreation' => array('type' => 'DATETIME'),
+		'RecordSync' => array('type' => 'DATETIME'),
+		'RecordUpdate' => array('type' => 'DATETIME')
+	);
 	public function __construct($prmSession)
 	{
 		$this->sTableName   = "Geography";
 		$this->sPermPrefix  = "GEOGRAPHY";
-		$this->sFieldKeyDef = "GeographyId/STRING," .
-		                      "LangIsoCode/STRING";
-		$this->sFieldDef    = "RegionId/STRING," .
-		                      "GeographyCode/STRING," .
-		                      "GeographyName/STRING," .
-		                      "GeographyFQName/STRING," . 
-		                      "GeographyLevel/INTEGER," .
-		                      "GeographyActive/BOOLEAN," .
-		                      "RecordCreation/DATETIME," .
-		                      "RecordSync/DATETIME," . 
-		                      "RecordUpdate/DATETIME";
 		parent::__construct($prmSession);
 		$num_args = func_num_args();
 		if ($num_args >= 2)

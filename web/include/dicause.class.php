@@ -24,20 +24,6 @@ class DICause extends DIRecord
 	{
 		$this->sTableName   = "Cause";
 		$this->sPermPrefix  = "CAUSE";
-		/*
-		$this->sFieldKeyDef = "CauseId/STRING," .
-		                      "LangIsoCode/STRING";
-		$this->sFieldDef    = "RegionId/STRING," . 
-		                      "CauseName/STRING," .
-		                      "CauseDesc/STRING," .
-		                      "CauseActive/BOOLEAN," .  
-		                      "CausePredefined/INTEGER," .
-		                      "CauseRGBColor/STRING," .
-		                      "CauseKeyWords/STRING," .
-		                      "RecordCreation/DATETIME," .
-		                      "RecordSync/DATETIME," .
-		                      "RecordUpdate/DATETIME";
-		*/
 		parent::__construct($prmSession);
 		$this->set("CausePredefined", 0);
 		$this->set("CauseActive", 1);

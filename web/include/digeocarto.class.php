@@ -9,7 +9,7 @@ class DIGeoCarto extends DIRecord
 	protected static $def = array(
 		'GeographyId' => array('type' => 'VARCHAR', 'size' => 100, 'pk' => 1),
 		'GeoLevelId' => array('type' => 'INTEGER', 'pk' => 1),
-		'LangIsoCode' => array('type' => 'VARCHAR', 'size' => 3),
+		'LangIsoCode' => array('type' => 'VARCHAR', 'size' => 3, 'pk' => 1),
 		'RegionId' => array('type' => 'VARCHAR', 'size' => 50),
 		'GeoLevelLayerFile' => array('type' => 'VARCHAR', 'size' => 50),
 		'GeoLevelLayerName' => array('type' => 'VARCHAR', 'size' => 50),
@@ -22,16 +22,6 @@ class DIGeoCarto extends DIRecord
 	{
 		$this->sTableName   = "GeoCarto";
 		$this->sPermPrefix  = "GEOLEVEL";
-		$this->sFieldKeyDef = "GeoLevelId/INTEGER," .
-		                      "GeographyId/STRING," .
-		                      "LangIsoCode/STRING";
-		$this->sFieldDef    = "RegionId/STRING," .
-		                      "GeoLevelLayerFile/STRING," .
-		                      "GeoLevelLayerName/STRING," .
-		                      "GeoLevelLayerCode/STRING," .
-		                      "RecordCreation/DATETIME," .
-		                      "RecordSync/DATETIME," .
-		                      "RecordUpdate/DATETIME";
 		parent::__construct($prmSession);
 
 		$num_args = func_num_args();
