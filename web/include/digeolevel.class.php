@@ -6,7 +6,7 @@
 
 class DIGeoLevel extends DIRecord
 {
-	public static $def = array(
+	protected static $def = array(
 		array(
 			'name' => 'GeoLevelId',
 			'type' => 'INTEGER',
