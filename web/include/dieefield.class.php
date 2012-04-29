@@ -6,6 +6,20 @@
 
 class DIEEField extends DIRecord
 {
+	protected static $def = array(
+		'EEFieldId' => array('type' => 'VARCHAR', 'size' => 30, 'pk' => 1),
+		'RegionId' => array('type' => 'VARCHAR', 'size' => 50),
+		'EEGroupId' => array('type' => 'VARCHAR', 'size' => 30),
+		'EEFieldLabel' => array('type' => 'VARCHAR', 'size' => 30),
+		'EEFieldDesc' => array('type' => 'TEXT'),
+		'EEFieldType' => array('type' => 'VARCHAR', 'size' => 20),
+		'EEFieldSize' => array('type' => 'INTEGER'),
+		'EEFieldOrder' => array('type' => 'INTEGER'),
+		'EEFieldStatus' => array('type' => 'INTEGER'),
+		'RecordCreation' => array('type' => 'DATETIME'),
+		'RecordSync' => array('type' => 'DATETIME'),
+		'RecordUpdate' => array('type' => 'DATETIME')
+	);
 	public function __construct($prmSession)
 	{
 		$this->sTableName   = "EEField";
