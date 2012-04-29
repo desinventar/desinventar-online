@@ -6,7 +6,7 @@
 require_once(BASE . '/include/distatus.class.php');
 class DIObject
 {
-	public static $def = array();
+	protected static $def = array();
 	var $sFieldKeyDef = '';
 	var $sFieldDef = '';
 	var $status = null;
