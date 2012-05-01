@@ -6,22 +6,24 @@
 
 class DIEvent extends DIRecord
 {
+	protected static $def = array(
+		'EventId' => array('type' => 'VARCHAR', 'size' => 50, 'pk' => 1),
+		'LangIsoCode' => array('type' => 'VARCHAR', 'size' => 3, 'pk' => 1),
+		'RegionId' => array('type' => 'VARCHAR', 'size' => 50),
+		'EventName' => array('type' => 'VARCHAR', 'size' => 50),
+		'EventDesc' => array('type' => 'TEXT'),
+		'EventActive' => array('type' => 'INTEGER', 'default' => 1),
+		'EventPredefined' => array('type' => 'INTEGER', 'default' => 0),
+		'EventRGBColor' => array('type' => 'VARCHAR', 'size' => 10),
+		'EventKeyWords' => array('type' => 'TEXT'),
+		'RecordCreation' => array('type' => 'DATETIME'),
+		'RecordSync' => array('type' => 'DATETIME'),
+		'RecordUpdate' => array('type' => 'DATETIME')
+	);
 	public function __construct($prmSession)
 	{
 		$this->sTableName   = "Event";
 		$this->sPermPrefix  = "EVENT";
-		$this->sFieldKeyDef = "EventId/STRING," .
-		                      "LangIsoCode/STRING";
-		$this->sFieldDef    = "RegionId/STRING," . 
-		                      "EventName/STRING," .
-		                      "EventDesc/STRING," .
-		                      "EventActive/BOOLEAN," .  
-		                      "EventPredefined/INTEGER," .
-		                      "EventRGBColor/STRING," .
-		                      "EventKeyWords/STRING," .
-		                      "RecordCreation/DATETIME," .
-		                      "RecordSync/DATETIME," .
-		                      "RecordUpdate/DATETIME";
 		parent::__construct($prmSession);
 		$this->set("EventPredefined", 0);
 		$this->set("EventActive", 1);
