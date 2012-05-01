@@ -6,19 +6,21 @@
 
 class DIGeoLevel extends DIRecord
 {
+	protected static $def = array(
+		'GeoLevelId' => array('type' => 'INTEGER', 'pk' => 1),
+		'LangIsoCode' => array('type' => 'VARCHAR', 'size' => 3, 'pk' => 1),
+		'RegionId' => array('type' => 'VARCHAR', 'size' => 50),
+		'GeoLevelName' => array('type' => 'VARCHAR', 'size' => 50, 'default' => '---'),
+		'GeoLevelDesc' => array('type' => 'TEXT'),
+		'GeoLevelActive' => array('type' => 'INTEGER', 'default' => 0),
+		'RecordCreation' => array('type' => 'DATETIME'),
+		'RecordSync' => array('type' => 'DATETIME'),
+		'RecordUpdate' => array('type' => 'DATETIME')
+	);
 	public function __construct($prmSession)
 	{
 		$this->sTableName   = "GeoLevel";
 		$this->sPermPrefix  = "GEOLEVEL";
-		$this->sFieldKeyDef = "GeoLevelId/INTEGER," .
-		                      "LangIsoCode/STRING";
-		$this->sFieldDef    = "RegionId/STRING," .
-		                      "GeoLevelName/STRING," .
-		                      "GeoLevelDesc/STRING," .  
-		                      "GeoLevelActive/INTEGER," .
-		                      "RecordCreation/DATETIME," .
-		                      "RecordSync/DATETIME," .
-		                      "RecordUpdate/DATETIME";
 		parent::__construct($prmSession);
 		$this->set("GeoLevelActive", 1);
 
