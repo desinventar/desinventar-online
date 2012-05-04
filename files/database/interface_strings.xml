@@ -2414,10 +2414,10 @@
 			<Text LangIsoCode="fre">Comparatif</Text>
 		</Message>
 		<Message id="gseaday">
-			<Text LangIsoCode="eng">Days</Text>
-			<Text LangIsoCode="spa">Días</Text>
-			<Text LangIsoCode="por">Dias</Text>
-			<Text LangIsoCode="fre">Jours</Text>
+			<Text LangIsoCode="eng">Daily</Text>
+			<Text LangIsoCode="spa">Diario</Text>
+			<Text LangIsoCode="por">Diário</Text>
+			<Text LangIsoCode="fre">Quotidien</Text>
 		</Message>
 		<Message id="gtendline">
 			<Text LangIsoCode="eng">Tendence line</Text>
@@ -2438,16 +2438,16 @@
 			<Text LangIsoCode="fre">Histogramme multiannuel</Text>
 		</Message>
 		<Message id="gseaweek">
-			<Text LangIsoCode="eng">Weeks</Text>
-			<Text LangIsoCode="spa">Semanas</Text>
-			<Text LangIsoCode="por">Semanas</Text>
-			<Text LangIsoCode="fre">Semaines</Text>
+			<Text LangIsoCode="eng">Weekly</Text>
+			<Text LangIsoCode="spa">Semanal</Text>
+			<Text LangIsoCode="por">Semanal</Text>
+			<Text LangIsoCode="fre">Hebdomadaire</Text>
 		</Message>
 		<Message id="gseamonth">
-			<Text LangIsoCode="eng">Months</Text>
-			<Text LangIsoCode="spa">Meses</Text>
-			<Text LangIsoCode="por">Meses</Text>
-			<Text LangIsoCode="fre">Mois</Text>
+			<Text LangIsoCode="eng">Monthly</Text>
+			<Text LangIsoCode="spa">Mensual</Text>
+			<Text LangIsoCode="por">Mensal</Text>
+			<Text LangIsoCode="fre">Mensuel</Text>
 		</Message>
 		<Message id="gperannual">
 			<Text LangIsoCode="eng">Yearly</Text>
