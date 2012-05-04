@@ -92,7 +92,7 @@
 						<input id="fldDatabaseEvents_EventName" name="EventName" type="text" class="line" maxlength="40" style="width:500px;" tabindex="1"
 							title="{-$dic.DBEvePersonName[2]-}" />
 						<br /><br />
-						{-$dic.DBEvePersonDef[0]-}<b style="color:darkred;">*</b><br />
+						{-$dic.DBEvePersonDef[0]-}<br />
 						<textarea id="fldDatabaseEvents_EventDesc" name="EventDesc" class="line" rows="4" style="width:500px;" tabindex="2" 
 							title="{-$dic.DBEvePersonDef[2]-}"></textarea>
 						<br /><br />
