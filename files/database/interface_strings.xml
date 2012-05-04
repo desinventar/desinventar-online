@@ -2697,7 +2697,7 @@
 		</Message>
 		<Message id="txtOrderByGeographyEventDate">
 			<Text LangIsoCode="eng">Geography/Event/Date</Text>
-			<Text LangIsoCode="spa">Geografía/Event/Fecha</Text>
+			<Text LangIsoCode="spa">Geografía/Evento/Fecha</Text>
 			<Text LangIsoCode="por">Geografía/Evento/Data</Text>
 			<Text LangIsoCode="fre">Géographie/Événement/Date</Text>
 		</Message>
