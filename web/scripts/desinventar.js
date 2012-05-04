@@ -2979,16 +2979,20 @@ function doDatacardInitialize()
 	jQuery('div.Datacard table.EffectListPeople select.value').jec({
 		maxLength: 15,
 	}).blur(function() {
-		var value = parseInt(jQuery(this).jecValue());
-		if ((isNaN(value)) || (value<0))
+		var value = parseInt(jQuery(this).val());
+		var jecValue = parseInt(jQuery(this).jecValue());
+		if (value > 0)
 		{
-			value = 0;
-		}
-		jQuery(this).jecValue(value);
-		jQuery(this).val(value);
-		if (jQuery(this).val() == '')
-		{
-			jQuery(this).val(0);
+			if ((isNaN(jecValue)) || (jecValue<0))
+			{
+				jecValue = 0;
+			}
+			jQuery(this).jecValue(jecValue);
+			jQuery(this).val(jecValue);
+			if (jQuery(this).val() == '')
+			{
+				jQuery(this).val(0);
+			}
 		}
 	});
 
