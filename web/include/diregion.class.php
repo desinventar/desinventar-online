@@ -654,8 +654,9 @@ class DIRegion extends DIObject
 			{
 				$GeoLevelId = $row['GeoLevelId'];
 				$answer[$GeoLevelId] = $row;
+				$answer[$GeoLevelId]['HasMap'] = 0;
 			}
-			$sQuery = 'SELECT GeoLevelId,GeoLevelLayerFile,GeoLevelLayerCode,GeoLevelLayerName FROM Geocarto ORDER BY GeoLevelId';
+			$sQuery = 'SELECT GeoLevelId,GeoLevelLayerFile,GeoLevelLayerCode,GeoLevelLayerName FROM Geocarto WHERE GeoLevelLayerFile<>"" ORDER BY GeoLevelId';
 			foreach($this->session->q->dreg->query($sQuery, PDO::FETCH_ASSOC) as $row)
 			{
 				$GeoLevelId = $row['GeoLevelId'];
