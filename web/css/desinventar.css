@@ -271,6 +271,7 @@ a.info:visited	{ color: #333333;  }
 .dwin {
 	overflow: auto; padding:0px; margin: 0px; border-style:solid;
 	border-width:1px; border-color:#bbbbbb;
+	word-wrap: break-word;
 }
 b.required {
 	color: darkred;	
