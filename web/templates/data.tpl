@@ -102,8 +102,7 @@
 										</td>
 									{-elseif $field_id=="DisasterSource" || $field_id=="DisasterSiteNotes"-}
 										<td class="{-$cellClass-}">
-											<div class="dwin" style="width:150px; height: 40px;">
-												{-$row[$field_id]-}
+											<div class="dwin" style="width:150px; height: 40px;">{-$row[$field_id]-}
 											</div>
 										</td>
 									{-elseif $row[$field_id]==-1-}
