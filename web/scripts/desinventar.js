@@ -1525,7 +1525,6 @@ var geolevels_uploader = [];
 function onReadyGeolevels()
 {
 	jQuery('div.Geolevels').on('cmdInitialize', function(event) {
-		console.log('div.Geolevels cmdInitalize');
 		doGeolevelsUploaderCreate();
 	});
 
@@ -1770,7 +1769,6 @@ function doGeolevelsPopulateFieldList(prmSelector, prmValues)
 
 function doGeolevelsUploaderCreate()
 {
-	console.log('doGeolevelsUploaderCreate()');
 	jQuery.each(geolevels_uploader, function(key, value) {
 		delete geolevels_uploader[key];
 	});
@@ -5265,7 +5263,6 @@ function onReadyInit()
 
 function doDatabaseLoadData()
 {
-	console.log('doDatabaseLoadData()');
 	if (jQuery('#desinventarRegionId').val() != '')
 	{
 		jQuery.post(
@@ -5310,15 +5307,11 @@ function doDatabaseLoadData()
 				// Trigger ViewportShow
 				jQuery('body').trigger('cmdViewportShow');
 				/*
-				console.log('loadData');
-				console.log(data.query_design);
 				var query_design = jQuery.parseXML(data.query_design);
 				jQuery(query_design).find('geography_id').each(function() {
 					var geography_id = jQuery(this).text();
 					jQuery('div.QueryDesign div.GeographyList li.item input:checkbox[value="' + geography_id + '"]').trigger('click');
-					console.log(geography_id);
 				});
-				console.log('endLoadData');
 				*/
 			},
 			'json'
@@ -6267,7 +6260,7 @@ function onReadyMain()
 		var me = jQuery(jQuery(this).attr('href'));
 		showtip(me.find('.helptext').text());
 		var cmd = jQuery(this).data('cmd');
-		if (cmd == '')
+		if ((cmd == undefined) || (cmd == '') )
 		{
 			jQuery(me).trigger('show');
 		}
