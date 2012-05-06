@@ -98,7 +98,7 @@ function onReadyMain()
 		var me = jQuery(jQuery(this).attr('href'));
 		showtip(me.find('.helptext').text());
 		var cmd = jQuery(this).data('cmd');
-		if (cmd == '')
+		if ((cmd == undefined) || (cmd == '') )
 		{
 			jQuery(me).trigger('show');
 		}
