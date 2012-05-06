@@ -8,6 +8,7 @@ var geolevels_uploader = [];
 function onReadyGeolevels()
 {
 	jQuery('div.Geolevels').on('cmdInitialize', function(event) {
+		console.log('div.Geolevels cmdInitalize');
 		doGeolevelsUploaderCreate();
 	});
 
@@ -252,6 +253,7 @@ function doGeolevelsPopulateFieldList(prmSelector, prmValues)
 
 function doGeolevelsUploaderCreate()
 {
+	console.log('doGeolevelsUploaderCreate()');
 	jQuery.each(geolevels_uploader, function(key, value) {
 		delete geolevels_uploader[key];
 	});

@@ -38,5 +38,6 @@
 <script type="text/javascript" src="{-$desinventarURL-}/js/common.js?version={-$jsversion-}"></script>
 <script type="text/javascript" src="{-$desinventarURL-}/js/dboperations.js?version={-$jsversion-}"></script>
 <script type="text/javascript" src="{-$desinventarURL-}/js/diadmin.js?version={-$jsversion-}"></script>
+<script type="text/javascript" src="{-$desinventarURL-}/js/init.js?version={-$jsversion-}"></script>
 <script type="text/javascript" src="{-$desinventarURL-}/js/main.js?version={-$jsversion-}"></script>
 <script type="text/javascript" src="{-$desinventarURL-}/js/main_ext.js?version={-$jsversion-}"></script>
