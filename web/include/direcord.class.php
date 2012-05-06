@@ -87,6 +87,7 @@ class DIRecord extends DIObject
 			}
 			$sQuery .= $sFieldName . '=';
 			if (($sFieldType == 'STRING'  ) || 
+			    ($sFieldType == 'VARCHAR' ) ||
 			    ($sFieldType == 'TEXT'    ) ||
 			    ($sFieldType == 'DATETIME') )
 			{
@@ -145,6 +146,7 @@ class DIRecord extends DIObject
 			}
 			$sQueryFields .= $sFieldName;
 			if (($sFieldType == 'STRING'  ) || 
+			    ($sFieldType == 'VARCHAR' ) ||
 			    ($sFieldType == 'TEXT'    ) ||
 			    ($sFieldType == 'DATETIME') )
 			{
@@ -198,6 +200,7 @@ class DIRecord extends DIObject
 				}
 				$sQueryItem = $sFieldName . '=';
 				if (($sFieldType == 'STRING'  ) || 
+				    ($sFieldType == 'VARCHAR' ) ||
 					($sFieldType == 'TEXT'    ) ||
 					($sFieldType == 'DATETIME') ||
 					($sFieldType == 'DATE'    ) )

@@ -22,7 +22,7 @@ class DIGeoLevel extends DIRecord
 		$this->sTableName   = "GeoLevel";
 		$this->sPermPrefix  = "GEOLEVEL";
 		parent::__construct($prmSession);
-		$this->set("GeoLevelActive", 1);
+		$this->set('GeoLevelActive', 1);
 
 		$num_args = func_num_args();
 		if ($num_args >= 2)
