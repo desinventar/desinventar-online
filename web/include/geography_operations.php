@@ -32,7 +32,6 @@ function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 				);
 			}
 		}
-		fb($geo_list);
 
 		# Set default value GeographyActive=1 for elements in this level
 		$query = 'UPDATE Geography SET GeographyActive=1 WHERE GeographyActive>0 AND GeographyLevel=' . $prmGeoLevelId;
@@ -71,7 +70,6 @@ function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 						$parent_cache[$parent_code] = $parent_id;
 					}
 				}
-				fb($geography_code . ' ' . $geography_name . ' ' . $geography_id);
 				$o = new DIGeography($prmSession, $geography_id);
 				$o->set('GeographyName', $geography_name);
 				$o->set('GeographyCode', $geography_code);
@@ -113,7 +111,6 @@ function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 				$prmSession->q->dreg->query($query);
 			}
 		}
-		fb($geo_list);
 	}
 	return $iReturn;
 } #import_geography_from_dbf
