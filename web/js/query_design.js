@@ -170,7 +170,7 @@ function onReadyQueryDesign()
 		jQuery.each(jQuery('body').data('EventList'), function(key, value) {
 			if (parseInt(value.EventPredefined) > 0)
 			{
-				var option = jQuery('<option>', { value : value.EventId }).text(value.EventName);
+				var option = jQuery('<option>', { value : key }).text(value.EventName);
 				option.data('help', value.EventDesc);
 				option.addClass('withHelpOver');
 				jQuery('div.QueryDesign select.Event').append(option);
@@ -205,7 +205,7 @@ function onReadyQueryDesign()
 		jQuery.each(jQuery('body').data('CauseList'), function(key, value) {
 			if (parseInt(value.CausePredefined) < 1)
 			{
-				var option = jQuery('<option>', { value : value.CauseId }).text(value.CauseName);
+				var option = jQuery('<option>', { value : key }).text(value.CauseName);
 				option.data('help', value.CauseDesc);
 				option.addClass('withHelpOver');
 				jQuery('div.QueryDesign select.Cause').append(option);
