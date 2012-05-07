@@ -21,15 +21,19 @@ function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 	if ($iReturn > 0)
 	{
 		$geo_list = array();
-		$query = 'SELECT GeographyId,GeographyCode FROM Geography WHERE GeographyLevel=' . $prmGeoLevelId . ' ORDER BY GeographyId';
+		$query = 'SELECT GeographyId,GeographyCode,GeographyName FROM Geography ' .
+			' WHERE GeographyLevel=' . $prmGeoLevelId;
+		$query .= ' ORDER BY GeographyId';
 		foreach($prmSession->q->dreg->query($query,PDO::FETCH_ASSOC) as $row)
 		{
 			if ($row['GeographyId'] != '')
 			{
 				$geo_list[$row['GeographyCode']] = array(
 					'id' => $row['GeographyId'],
+					'name' => $row['GeographyName'],
 					'updated' => 0
 				);
+				$geo_name_count[$row['GeographyName']] = 1;
 			}
 		}
 
@@ -40,15 +44,16 @@ function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 		$item_count = 0;
 		$parent_cache = array();
 		$dbf = dbase_open($prmFilename, 'r');
-		for($i = 1; $i <= dbase_numrecords($dbf); $i++)
+		$dbf_count = dbase_numrecords($dbf);
+		for($i = 1; $i <= $dbf_count; $i++)
 		{
 			$row = dbase_get_record_with_names($dbf, $i);
 			if ($row['deleted'] == 0)
 			{
-				$geography_code = $row[$prmCode];
-				$geography_name = utf8_encode($row[$prmName]);
+				$geography_code = trim($row[$prmCode]);
+				$geography_name = trim(utf8_encode($row[$prmName]));
 				$geography_id = '';
-				if (isset($geo_list[$geography_code]['id']))
+				if (isset($geo_list[$geography_code]))
 				{
 					$geography_id = $geo_list[$geography_code]['id'];
 					$geo_list[$geography_code]['updated'] = 1;
@@ -56,9 +61,10 @@ function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 				else
 				{
 					$parent_code = '';
+					$geography_id = '';
 					if ($prmParentCode != '')
 					{
-						$parent_code = $row[$prmParentCode];
+						$parent_code = trim($row[$prmParentCode]);
 					}
 					if (isset($parent_cache[$parent_code]))
 					{
@@ -78,14 +84,18 @@ function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 				{
 					$o->setGeographyId($parent_id);
 					$geography_id = $o->get('GeographyId');
+					if (isset($geo_name_count[$geography_name]))
+					{
+						$geography_name .= ' ' . $geo_name_count[$geography_name] + 1;
+						$o->set('GeographyName', $geography_name);
+					}
 					$o->setGeographyFQName();
+					$geography_active = 1;
+					# Bug #43 : If is new cartography then mark elements as Active
+					# instead of showing all of them as New
 					if (count($geo_list) > 0)
 					{
 						$geography_active = 2;
-					}
-					else
-					{
-						$geography_active = 1;
 					}
 					$o->set('GeographyActive', $geography_active);
 					$r = $o->insert();
@@ -101,12 +111,15 @@ function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
 			}
 		} #for
 		dbase_close($dbf);
+		#print_r($geo_list);
 		# Search the elements that are not found in the new shape file and
 		# mark them for revision
+		$item_count = 0;
 		foreach($geo_list as $key => $value)
 		{
 			if ($value['updated'] < 1)
 			{
+				$item_count++;
 				$query = 'UPDATE Geography SET GeographyActive=3 WHERE GeographyId LIKE "' . $value['id'] . '%"';
 				$prmSession->q->dreg->query($query);
 			}
@@ -153,7 +166,7 @@ function geography_update_dbf_record($prmDBFFile, $prmFieldCode, $prmFieldName, 
 			$row = dbase_get_record($dbf, $i);
 			if (trim($row[$field_code]) == $prmGeographyCode)
 			{
-				$row[$field_name] = utf8_decode($prmGeographyName);
+				$row[$field_name] = trim(utf8_decode($prmGeographyName));
 				if ($prmNewGeographyCode != '')
 				{
 					$row[$field_code] = trim($prmNewGeographyCode);
