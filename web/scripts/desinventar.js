@@ -6485,7 +6485,7 @@ function onReadyQueryDesign()
 		jQuery.each(jQuery('body').data('EventList'), function(key, value) {
 			if (parseInt(value.EventPredefined) > 0)
 			{
-				var option = jQuery('<option>', { value : value.EventId }).text(value.EventName);
+				var option = jQuery('<option>', { value : key }).text(value.EventName);
 				option.data('help', value.EventDesc);
 				option.addClass('withHelpOver');
 				jQuery('div.QueryDesign select.Event').append(option);
