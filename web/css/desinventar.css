@@ -1,30 +1,37 @@
 .bnew {
+	background-color: white;
 	background-image: url(../images/newicon.png) !important;
-	background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
+	background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
 }
 .bupd {
+	background-color: white;
 	background-image: url(../images/updateicon.png) !important;
-	background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
+	background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
 }
 .bcancel {
+	background-color: white;
 	background-image: url(../images/cancelicon.png) !important; 
-	background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
+	background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
 }
 .bclear {
+	background-color: white;
 	background-image: url(../images/cleanicon.png) !important; 
-	background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
+	background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
 }
 .bfind {
+	background-color: white;
 	background-image: url(../images/findicon.png) !important;
-	background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
+	background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
 }
 .bsave {
+	background-color: white;
 	background-image: url(../images/saveicon.png) !important;
-	background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
+	background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
 }
 .bprint {
+	background-color: white;
 	background-image: url(../images/printicon.png) !important;
-	background-repeat: no-repeat; background-position: top center; width: 22px; height: 22px;
+	background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
 }
 #loading-mask {
   position: absolute;
