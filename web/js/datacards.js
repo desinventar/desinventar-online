@@ -397,7 +397,7 @@ function doDatacardInitialize()
 {
 	// Load EffectPeople List (ef1)
 	jQuery('div.Datacard table.EffectListPeople select.value').jec({
-		maxLength: 15,
+		maxLength: 15
 	}).blur(function() {
 		var value = parseInt(jQuery(this).val());
 		var jecValue = parseInt(jQuery(this).jecValue());
