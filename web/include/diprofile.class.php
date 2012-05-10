@@ -7,23 +7,25 @@
 class DIProfile
 {
 	protected $xml = '';
-	public function __construct($prmSession, $prmXML)
+	public function __construct($prmSession, $xml_profile)
 	{
-		$this->xml = $prmXML;
+		$this->session = $prmSession;
+		$this->xml = $xml_profile;
 	} #__construct()
 	
-	public function execute()
+	public function execute($xml = '')
 	{
+		if ($xml == '') { $xml = $this->xml; }
 		$html = '';
-		$xml_doc = new SimpleXMLElement($this->xml);
-		$xml_query = reset($xml_doc->xpath('profile/item'));
-		foreach($xml_query->xpath('title') as $node)
+		foreach($xml->xpath('title') as $node)
 		{
-			$html .= query_trim($node) . '<br />';
+			$title = query_trim($node);
+			$html .= $title . '<br />';
 		}
-		foreach($xml_query->xpath('graph') as $node)
+		$xml_query = reset($xml->xpath('query'));
+		foreach($xml->xpath('graph') as $xml_graph)
 		{
-			$graph = new DIGraphXML($us, query_trim($node));
+			$graph = new DIGraphXML($this->session, $xml_graph, $xml_query);
 			$graph->execute();
 			$html .= '<img src="' . $graph->output['ImageURL'] . '" /><br />';
 		}
