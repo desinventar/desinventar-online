@@ -48,11 +48,9 @@ function query_read_v1($xml_string)
 	return $query;
 }
 
-function query_convert_v2_to_v1($xml_string)
+function query_convert_v2_to_v1($xml_query)
 {
 	$query = array();
-	$xml_doc = new SimpleXMLElement($xml_string);
-	$xml_query = reset($xml_doc->xpath('query'));
 	$period_start = query_trim(reset($xml_query->xpath('period/start')));
 	$period_end   = query_trim(reset($xml_query->xpath('period/end')));
 	if ($period_start != '')

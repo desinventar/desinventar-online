@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<desinventar>
+	<profile>
+		<item>
+			<title langisocode="eng">Anual Histogram</title>
+			<title langisocode="spa">Histograma Anual</title>
+			<query>
+				<period>
+					<start>
+						2005
+					</start>
+					<end>
+						2010
+					</end>
+				</period>
+				<status>
+					<value>
+						PUBLISHED
+					</value>
+				</status>
+			</query>
+			<graph>
+				<type>
+					HISTOGRAM
+				</type>
+				<subtype>
+					2
+				</subtype>
+			</graph>
+		</item>
+	</profile>
+</desinventar>
+
+

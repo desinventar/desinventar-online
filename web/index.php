@@ -1369,14 +1369,23 @@ switch ($cmd)
 		require_once('include/diresult.class.php');
 		require_once('include/digraph.class.php');
 		require_once('include/digraphxml.class.php');
+		require_once('include/diprofile.class.php');
 		$post = $_POST;
 		fixPost($post);
 		$post['General']['LangIsoCode'] = $lg;
 
-		$xml_string = file_get_contents('../samples/query.xml');
-		$graph = new DIGraphXML($us, $xml_string);
+		#$xml_string = file_get_contents('../samples/profile.xml');
+		#$p = new DIProfile($us, $xml_string);
+		#$html = $p->execute();
+		#echo $html;
+
+		$xml_string = file_get_contents('../samples/profile.xml');
+		$xml_doc = new SimpleXMLElement($xml_string);
+		$xml_query = reset($xml_doc->xpath('profile/item'));
+		$graph = new DIGraphXML($us, reset($xml_query->xpath('graph')), reset($xml_query->xpath('query')));
 		$graph->execute();
 		echo '<img src="' . $graph->output['ImageURL'] . '" />';
+		
 		#$answer = array();
 		#echo json_encode($answer);
 	break;

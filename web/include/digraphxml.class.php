@@ -6,10 +6,10 @@
 
 class DIGraphXML extends DIGraph
 {
-	public function __construct($prmSession, $prmXML)
+	public function __construct($prmSession, $xml_graph, $xml_query)
 	{
-		$options = query_convert_v2_to_v1($prmXML);
-		$graph_options = $this->convert_v2_to_v1($prmXML);
+		$options = query_convert_v2_to_v1($xml_query);
+		$graph_options = $this->convert_v2_to_v1($xml_graph);
 		if (count($graph_options) > 0)
 		{
 			$options['Graph'] = $graph_options;
@@ -17,13 +17,11 @@ class DIGraphXML extends DIGraph
 		parent::__construct($prmSession, $options);
 	} #__construct()
 	
-	public function convert_v2_to_v1($xml_string)
+	public function convert_v2_to_v1($xml)
 	{
 		$answer = array();
-		$xml_doc = new SimpleXMLElement($xml_string);
-		$xml_query = reset($xml_doc->xpath('graph'));
-		$answer['Type']    = query_trim(reset($xml_query->xpath('type')));
-		$answer['SubType'] = query_trim(reset($xml_query->xpath('subtype')));
+		$answer['Type']    = query_trim(reset($xml->xpath('type')));
+		$answer['SubType'] = query_trim(reset($xml->xpath('subtype')));
 		return $answer;		
 	}
 } #class
