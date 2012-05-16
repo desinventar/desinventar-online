@@ -1364,6 +1364,10 @@ switch ($cmd)
 			$RegionId = $get['r'];
 		}
 	break;
+	case 'cmdReports':
+		print_r($_GET); print "<br />\n";
+		print_r($_POST);
+	break;
 	case 'cmdProfiles':
 		require_once('include/graphic.class.php');
 		require_once('include/diresult.class.php');
