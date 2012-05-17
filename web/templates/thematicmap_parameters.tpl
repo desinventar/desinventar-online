@@ -10,7 +10,7 @@
 		<form id="CM" method="post" action="#">
 			<table class="conf">
 				<tr class="top">
-					<td>
+					<td class="top">
 						<table>
 							<tr>
 								<td>
@@ -110,7 +110,7 @@
 							</tr>
 						</table>
 					</td>
-					<td>
+					<td class="top">
 						<b>{-#mrepreselev#-}</b><br />
 						<select  class="Geolevel fixw line" id="_M+Type" name="_M+Type" size="3">
 							<option></option>
