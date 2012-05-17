@@ -1354,7 +1354,7 @@ switch ($cmd)
 			$RegionId = $get['r'];
 		}
 	break;
-	default:
+	case 'main':
 		# Direct access returns a list of public regions on this server
 		$t->assign('LanguageList', $us->q->loadLanguages(1));
 		$t->assign('CountryList', $us->q->getCountryList());
@@ -1501,6 +1501,9 @@ switch ($cmd)
 		$t->assign('configfile', $lg . '.conf');
 		$template = 'index-' . $lg . '.tpl';
 		$t->display($template);
+	break;
+	default:
+		echo '';
 	break;
 } #switch($cmd)
 
