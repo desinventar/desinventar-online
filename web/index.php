@@ -11,6 +11,8 @@ require_once('include/geography_operations.php');
 require_once('include/database_operations.php');
 require_once('include/query_operations.php');
 
+fb($_GET);
+
 $post = $_POST;
 $get  = $_GET;
 
@@ -1371,6 +1373,8 @@ switch ($cmd)
 		print_r($_GET); print "<br />\n";
 		print_r($_POST);
 	break;
+	case 'profiles':
+	case 'reports':
 	case 'cmdProfiles':
 		require_once('include/graphic.class.php');
 		require_once('include/diresult.class.php');
@@ -1381,6 +1385,15 @@ switch ($cmd)
 		fixPost($post);
 		$post['General']['LangIsoCode'] = $lg;
 
+		$options = explode('/', $_GET['params']);
+		foreach($options as $key => $value)
+		{
+			fb($key . ' => ' . $value);
+		}
+		$profile_id   = isset($options[0]) ? $options[0] : '';
+		$profile_item = isset($options[1]) ? $options[1] : '';
+
+		fb($profile_id . ' ' . $profile_item);
 		$xml_string = file_get_contents('../samples/profile.xml');
 		$xml_doc = new SimpleXMLElement($xml_string);
 		$xml_profile = reset($xml_doc->xpath('profile/item'));
