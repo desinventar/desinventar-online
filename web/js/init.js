@@ -39,46 +39,46 @@ function doDatabaseLoadData()
 			},
 			function(data)
 			{
-				// Initialize data-* components for body
-				jQuery('body').data('RegionId', data.RegionId);
-				jQuery('body').data('params', data.params);
-				jQuery('body').data('GeolevelsList', data.GeolevelsList);
-				jQuery('body').data('EventList', data.EventList);
-				jQuery('body').data('CauseList', data.CauseList);
-				jQuery('body').data('EEFieldList', data.EEFieldList);
-				jQuery('body').data('RecordCount', data.RecordCount);
+				if (parseInt(data.Status) > 0)
+				{
+					// Initialize data-* components for body
+					jQuery('body').data('RegionId', data.RegionId);
+					jQuery('body').data('params', data.params);
+					jQuery('body').data('GeolevelsList', data.GeolevelsList);
+					jQuery('body').data('EventList', data.EventList);
+					jQuery('body').data('CauseList', data.CauseList);
+					jQuery('body').data('EEFieldList', data.EEFieldList);
+					jQuery('body').data('RecordCount', data.RecordCount);
 
-				//Compatibility with old methods
-				jQuery('#desinventarUserId').val(data.params.UserId);
-				jQuery('#desinventarUserFullName').val(data.params.UserFullName);
-				jQuery('#desinventarUserRole').val(data.params.UserRole);
-				jQuery('#desinventarUserRoleValue').val(data.params.UserRoleValue);
-				
-				var dataItems = jQuery('body').data();
-				jQuery.each(dataItems, function(index, value) {
-					if (index.substr(0,13) === 'GeographyList')
-					{
-						jQuery('body').removeData(index);
-					}
-				});
-				jQuery('body').data('GeographyList', data.GeographyList);
-				// Info
-				jQuery('#desinventarLang').val(data.params.LangIsoCode);
-				jQuery('#desinventarRegionId').val(data.params.RegionId);
-				jQuery('#desinventarRegionLabel').val(data.params.RegionLabel);
-				jQuery('#desinventarNumberOfRecords').val(data.RecordCount);
-				
-				// Trigger event on mainblock components to update them
-				jQuery('.mainblock').trigger('cmdInitialize');
+					//Compatibility with old methods
+					jQuery('#desinventarUserId').val(data.params.UserId);
+					jQuery('#desinventarUserFullName').val(data.params.UserFullName);
+					jQuery('#desinventarUserRole').val(data.params.UserRole);
+					jQuery('#desinventarUserRoleValue').val(data.params.UserRoleValue);
+					
+					var dataItems = jQuery('body').data();
+					jQuery.each(dataItems, function(index, value) {
+						if (index.substr(0,13) === 'GeographyList')
+						{
+							jQuery('body').removeData(index);
+						}
+					});
+					jQuery('body').data('GeographyList', data.GeographyList);
+					// Info
+					jQuery('#desinventarLang').val(data.params.LangIsoCode);
+					jQuery('#desinventarRegionId').val(data.params.RegionId);
+					jQuery('#desinventarRegionLabel').val(data.params.RegionLabel);
+					jQuery('#desinventarNumberOfRecords').val(data.RecordCount);
+					// Trigger event on mainblock components to update them
+					jQuery('.mainblock').trigger('cmdInitialize');
+				}
+				else
+				{
+					jQuery('#desinventarRegionId').val('');
+					window.location.hash = '';
+				}
 				// Trigger ViewportShow
 				jQuery('body').trigger('cmdViewportShow');
-				/*
-				var query_design = jQuery.parseXML(data.query_design);
-				jQuery(query_design).find('geography_id').each(function() {
-					var geography_id = jQuery(this).text();
-					jQuery('div.QueryDesign div.GeographyList li.item input:checkbox[value="' + geography_id + '"]').trigger('click');
-				});
-				*/
 			},
 			'json'
 		);
