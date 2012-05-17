@@ -525,6 +525,10 @@ switch ($cmd)
 		}
 		if ($iReturn > 0)
 		{
+			$iReturn = DIRegion::existRegion($us, $RegionId);
+		}
+		if ($iReturn > 0)
+		{
 			$r = new DIRegion($us, $RegionId);
 			$answer['RegionId'] = $RegionId;
 
@@ -564,7 +568,6 @@ switch ($cmd)
 		}
 		$answer['Status'] = $iReturn;
 		echo json_encode($answer);
-		#echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
 	case 'cmdGeography':
 		$t->display('main_database_geography.tpl');
