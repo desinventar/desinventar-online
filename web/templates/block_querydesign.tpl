@@ -162,6 +162,30 @@
 						</td>
 					</tr>
 				</table>
+				<table class="EffectListLosses1 EffectList">
+					<tr style="display:none;">
+						<td class="top">
+							<div class="EffectLosses1" data-field="">
+								<input class="checkbox" type="checkbox" value="" />
+								<span class="label"></span>
+								<span class="options hidden">
+									<select class="operator small line" name="value[0]">
+										<option class="small" value=">=">{-#teffmajor#-}</option>
+										<option class="small" value="<=">{-#teffminor#-}</option>
+										<option class="small" value="=" >{-#teffequal#-}</option>
+										<option class="small" value="-3">{-#teffbetween#-}</option>
+									</select>
+									<span class="firstvalue">
+										<input class="line" type="text" name="value[1]" size="5" value="" />
+									</span>
+									<span class="lastvalue">{-#tand#-}
+										<input class="line" type="text" name="value[2]" size="5" value="" />
+									</span>
+								</span>
+							</div>
+						</td>
+					</tr>
+				</table>
 			<br />
 			<span class="fieldLabel withHelpOver"  data-help="{-#msgDatacard_EffectOtherLosses_Helptext#-}" title="{-#msgDatacard_EffectOtherLosses_Tooltip#-}">{-#msgDatacard_EffectOtherLosses#-}</span>
 			<br />

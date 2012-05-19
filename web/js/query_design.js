@@ -269,6 +269,21 @@ function onReadyQueryDesign()
 			jQuery('div.EffectLosses2',clone).data('field', jQuery(this).data('field'));
 			effect_list.append(clone);
 		});
+
+		// Load EffectLosses1 List (ef2)
+		var effect_list = jQuery('div.QueryDesign table.EffectListLosses1');
+		effect_list.find('tr:gt(0)').remove();
+		jQuery('div.desinventarInfo div.EffectList div.EffectLosses1').each(function() {
+			var field = jQuery('span.field', this).text();
+			var clone = jQuery('tr:last', effect_list).clone().show();
+			jQuery('select.operator', clone).attr('name', 'D_' + field + '[0]').disable();
+			jQuery('span.firstvalue input', clone).attr('name', 'D_' + field + '[1]');
+			jQuery('span.lastvalue input', clone).attr('name', 'D_' + field + '[2]').disable();
+			jQuery('span.label', clone).text(jQuery('span.label',this).text());
+			jQuery('div.EffectLosses2',clone).data('field', jQuery(this).data('field'));
+			effect_list.append(clone);
+		});
+
 		// Load EffectAdditional List (EEFieldList)
 		var effect_list = jQuery('div.QueryDesign table.EffectAdditionalList');
 		effect_list.find('tr:gt(0)').remove();
