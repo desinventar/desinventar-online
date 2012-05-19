@@ -160,8 +160,28 @@ class DIGraph extends DIResult
 		$opc['Field'] = $prmGraph['Field'];
 		$sql = $us->q->genSQLProcess($qd, $opc);
 		$dislist = $us->q->getassoc($sql);
+
 		if (!empty($dislist))
 		{
+			# Bug #126 - Remove elements with no value from comparatives
+			if ($prmGraph['Type'] == 'COMPARATIVE')
+			{
+				$field_id = reset(explode('|', $prmGraph['Field'][0]));
+				if (substr($field_id,0,2) == 'D.')
+				{
+					$field_id = substr($field_id, 2);
+				}
+				if ($field_id != 'DisasterId')
+				{
+					foreach($dislist as $key => $row)
+					{
+						if ($row[$field_id] < 1)
+						{
+							unset($dislist[$key]);
+						}
+					}
+				}
+			}
 			# Process results data
 			$dl = $us->q->prepareList($dislist, 'GRAPH');
 			$gl = array();
