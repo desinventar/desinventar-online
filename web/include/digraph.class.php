@@ -70,12 +70,7 @@ class DIGraph extends DIResult
 		$dic = array_merge($dic, $us->q->getEEFieldList('True'));
 		$prmGraph = $options['Graph'];
 
-		# Process QueryDesign Fields and count results
-		$qd  = $us->q->genSQLWhereDesconsultar($options);
-		$sqc = $us->q->genSQLSelectCount($qd);	
-		$c   = $us->q->getresult($sqc);
-		$NumRecords = $c['counter'];
-
+		$query_graph = '';
 		$prmGraph['SubType'] = (int)$prmGraph['SubType'];
 		if ($prmGraph['SubType'] == GRAPH_HISTOGRAM_TEMPORAL)
 		{
@@ -106,11 +101,25 @@ class DIGraph extends DIResult
 		{
 			$k = $prmGraph['SubType'] - 200;
 			$prmGraph['VarList'] = 'D.GeographyId_' . $k;
+			# Bug 127 - Limit data in graph results
+			$query_graph = 'G.GeographyLevel>=' . $k;
 		}
 		else
 		{
 			$prmGraph['VarList'] = $prmGraph['SubType'];
 		}
+
+		# Process QueryDesign Fields and count results
+		$qd  = $us->q->genSQLWhereDesconsultar($options);
+		# Add specific query parameters
+		if ($query_graph != '')
+		{
+			$qd .= ' AND (' . $query_graph . ')';
+		}
+		$sqc = $us->q->genSQLSelectCount($qd);	
+		$c   = $us->q->getresult($sqc);
+		$NumRecords = $c['counter'];
+
 		$options['Graph'] = $prmGraph;
 
 		$sImageURL  = WWWDATA . '/graphs/graph_'. session_id() . '_' . time() . '.png';

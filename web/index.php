@@ -11,8 +11,6 @@ require_once('include/geography_operations.php');
 require_once('include/database_operations.php');
 require_once('include/query_operations.php');
 
-fb($_GET);
-
 $post = $_POST;
 $get  = $_GET;
 
