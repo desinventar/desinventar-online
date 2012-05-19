@@ -1377,15 +1377,6 @@ switch ($cmd)
 		$ef3 = $us->q->queryLabelsFromGroup('Effect|Economic', $lg);
 		$ef4 = $us->q->queryLabelsFromGroup('Effect|More', $lg);
 		$sec = $us->q->queryLabelsFromGroup('Sector', $lg);
-		fb($ef2);
-		fb($ef3);
-		fb($ef4);
-		# Add some fields to customize lists ??
-		#$ef1['EffectFarmingAndForest'] = $ef2['EffectFarmingAndForest'];
-		#$ef1['EffectLiveStock'] = $ef2['EffectLiveStock'];
-		#$ef1['EffectRoads'] = $ef2['EffectRoads'];
-		#$ef1['EffectEducationCenters'] = $ef2['EffectEducationCenters'];
-		#$ef1['EffectMedicalCenters'] = $ef2['EffectMedicalCenters'];
 
 		$sec['SectorTransport'][3] 		= null; #array('EffectRoads' => $ef2['EffectRoads'][0]);
 		$sec['SectorCommunications'][3] = null;
