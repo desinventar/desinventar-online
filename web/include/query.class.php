@@ -1318,6 +1318,11 @@ class Query //extends PDO
 			{
 				if (is_array($v))
 				{
+					$value_min = isset($v[1]) ? $v[1] : 0;
+					if ($value_min == '') { $value_min = 0; }
+					$value_max = isset($v[2]) ? $v[2] : 0;
+					if ($value_max == '') { $value_max = 0; }
+					
 					$op = $dat['QueryEffect']['OP'];
 					if (! $bFirst)
 					{
@@ -1325,7 +1330,7 @@ class Query //extends PDO
 					}
 					if ($v[0] == '>=' || $v[0] == '<=' || $v[0] == '=')
 					{
-						$Query .= '(' . $k . ' ' . $v[0] . $v[1] . ')';
+						$Query .= '(' . $k . ' ' . $v[0] . $value_min . ')';
 					}
 					elseif ($v[0] == '-1')
 					{
@@ -1337,7 +1342,7 @@ class Query //extends PDO
 					}
 					elseif ($v[0] == '-3')
 					{
-						$Query .= '(' . $k . ' BETWEEN ' . $v[1] . ' AND ' . $v[2] . ')';
+						$Query .= '(' . $k . ' BETWEEN ' . $value_min . ' AND ' . $value_max . ')';
 					}
 					$bFirst = false;
 					unset($dat[$k]);
