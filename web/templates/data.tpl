@@ -21,6 +21,7 @@
 		<tr>
 			<td>
 				{-#tpage#-}
+				<input type="hidden" id="DataCurPagePrev" value="1" />
 				<input type="text" id="DataCurPage" size="2" value="1" class="line"  />
 				&nbsp; {-#msgData_PageOf#-} &nbsp; {-$NumberOfPages-}
 				&nbsp;&nbsp;|&nbsp;&nbsp;

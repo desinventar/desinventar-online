@@ -4043,9 +4043,17 @@ function onReadyData() {
 	// Page Number Fields
 	jQuery('body').on('keydown', '#DataCurPage', function(event) {
 		if(event.keyCode == 13) {
-			doDataDisplayPage(jQuery(this).val());
+			var page = parseInt(jQuery(this).val());
+			if (isNaN(page))
+			{
+				jQuery(this).val(jQuery('#DataCurPagePrev').val());
+			}
+			else
+			{
+				doDataDisplayPage(page);
+			}
 		} else {
-			return blockChars(event, jQuery(this).val(), 'integer:');
+			//return blockChars(event, jQuery(this).val(), 'integer:');
 		}
 	});
 	
@@ -4128,6 +4136,7 @@ function doDataDisplayPage(page)
 		else
 		{
 			jQuery('#DataCurPage').val(mypag);
+			jQuery('#DataCurPagePrev').val(mypag);
 			var RegionId = jQuery('#desinventarRegionId').val();
 			var RecordsPerPage = jQuery('#prmDataPageSize').val();
 			var QueryDef = jQuery('#prmDataQueryDef').val();
