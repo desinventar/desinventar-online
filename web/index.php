@@ -609,7 +609,7 @@ switch ($cmd)
 		}
 		if ($iReturn > 0)
 		{
-			$geography_id = $Geography['GeographyId'];
+			$geography_id = isset($Geography['GeographyId']) ? $Geography['GeographyId'] : '';
 			$o = new DIGeography($us, $geography_id);
 			$geography_name_old = $o->get('GeographyName');
 			$o->setFromArray($Geography);
