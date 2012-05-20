@@ -139,6 +139,13 @@ function onReadyGraphic() {
 			disab($('prmGraphModeCummulative0'));
 			jQuery('#prmGraphScale0').disable();
 		}
+		jQuery('#prmGraphFeel option.3D').enable();
+		jQuery('#prmGraphFeel').val('3D');
+		if (kind == 'LINE')
+		{
+			jQuery('#prmGraphFeel').val('2D');
+			jQuery('#prmGraphFeel option.3D').disable();
+		}
 	});
 
 	jQuery('div.ViewGraphParams').on('mouseover','select', function() {
