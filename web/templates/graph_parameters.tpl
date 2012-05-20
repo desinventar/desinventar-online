@@ -83,8 +83,8 @@
 							</select>
 							<br /><br />
 							<select id="prmGraphFeel" name="prmGraph[Feel]" size="2" data-helptext="{-$dic.GraphFeel[2]-}" class="line">
-								<option value="2D">{-#gfee2d#-}</option>
-								<option value="3D" selected>{-#gfee3d#-}</option>
+								<option class="2D" value="2D">{-#gfee2d#-}</option>
+								<option class="3D" value="3D" selected>{-#gfee3d#-}</option>
 							</select>
 						</td>
 					</tr>
