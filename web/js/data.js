@@ -19,7 +19,8 @@ function onReadyData() {
 	
 	// Page Number Fields
 	jQuery('body').on('keydown', '#DataCurPage', function(event) {
-		if(event.keyCode == 13) {
+		if(event.keyCode == 13)
+		{
 			var page = parseInt(jQuery(this).val());
 			if (isNaN(page))
 			{
@@ -29,9 +30,7 @@ function onReadyData() {
 			{
 				doDataDisplayPage(page);
 			}
-		} else {
-			//return blockChars(event, jQuery(this).val(), 'integer:');
-		}
+		} 
 	});
 	
 	// Navigation Buttons

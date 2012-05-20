@@ -29,10 +29,17 @@ function onReadyStatistic()
 	jQuery('#tblStatRows tr:even').addClass('under');
 	
 	jQuery('#StatCurPage').keydown(function(event) {
-		if(event.keyCode == 13) {
-			doStatDisplayPage(jQuery(this).val());
-		} else {
-			return blockChars(event, jQuery(this).val(), 'integer:');
+		if(event.keyCode == 13)
+		{
+			var page = parseInt(jQuery(this).val());
+			if (isNaN(page))
+			{
+				jQuery(this).val(jQuery('#StatCurPagePrev').val());
+			}
+			else
+			{
+				doStatDisplayPage(page);
+			}
 		}
 	});
 } //onReadyStatistic()
@@ -55,6 +62,7 @@ function doStatDisplayPage(page)
 		return false;
 	}
 	jQuery('#StatCurPage').val(mypag);
+	jQuery('#StatCurPagePrev').val(mypag);
 	var RecordsPerPage = jQuery('#prmStatRecordsPerPage').val();
 
 	jQuery('#tblStatRows').html('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />');

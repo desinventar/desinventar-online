@@ -21,6 +21,7 @@
 		<tr>
 			<td>
 				{-#tpage#-}
+				<input type="hidden" id="StatCurPagePrev" value="1" />
 				<input type="text" id="StatCurPage" size="2" value="1" class="line" />
 				&nbsp; {-#msgStatistic_PageOf#-} &nbsp;{-$last-}
 				&nbsp;&nbsp;|&nbsp;&nbsp;
