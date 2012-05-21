@@ -1801,7 +1801,13 @@
 			<Text LangIsoCode="por">Valor do campo Serial já existe; o registro não pode ser salva</Text>
 			<Text LangIsoCode="fre">Valeur du champ de série existe déjà; record ne peut être sauvé</Text>
 		</Message>
-		<Message id="msgDatacardInvalidNumber">
+		<Message id="msgDatacardInvalidIntegerNumber">
+			<Text LangIsoCode="eng">Invalid number format</Text>
+			<Text LangIsoCode="spa">Formato de número inválido</Text>
+			<Text LangIsoCode="por">Inválido formato do número</Text>
+			<Text LangIsoCode="fre">Blancs format de nombre</Text>
+		</Message>
+		<Message id="msgDatacardInvalidFloatNumber">
 			<Text LangIsoCode="eng">Invalid number format use dot as decimal separator</Text>
 			<Text LangIsoCode="spa">Formato de número inválido use el punto como separador decimal</Text>
 			<Text LangIsoCode="por">Inválido formato do número utilize ponto como separador decimal</Text>

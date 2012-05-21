@@ -28,7 +28,8 @@
 					<span class="datacardStatusMsg" id="msgDatacardFieldsError">{-#errmsgfrm#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardFound">{-#msgDatacardFound#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardNotFound">{-#msgDatacardNotFound#-}</span>
-					<span class="datacardStatusMsg" id="msgDatacardInvalidNumber">{-#msgDatacardInvalidNumber#-}</span>
+					<span class="datacardStatusMsg" id="msgDatacardInvalidIntegerNumber">{-#msgDatacardInvalidIntegerNumber#-}</span>
+					<span class="datacardStatusMsg" id="msgDatacardInvalidFloatNumber">{-#msgDatacardInvalidFloatNumber#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardWithoutStatus">{-#msgDatacardWithoutStatus#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardInvalidStatus">{-#msgDatacardInvalidStatus#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardWithoutSource">{-#msgDatacardWithoutSource#-}</span>
