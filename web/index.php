@@ -178,6 +178,7 @@ switch ($cmd)
 		echo json_encode($answer);
 	break;
 	case 'cmdDatacards':
+	case 'datacards':
 		$ef1 = $us->q->queryLabelsFromGroup('Effect|People', $lg);
 		$ef2 = $us->q->queryLabelsFromGroup('Effect|Affected', $lg);
 		$ef3 = $us->q->queryLabelsFromGroup('Effect|Economic', $lg);

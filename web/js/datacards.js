@@ -993,6 +993,21 @@ function doDatacardSave()
 	{
 		var error_count = 0;
 		var answer = 1;
+		// Bug #136 : Add validation for Numeric Effect fields
+		jQuery('#DICard .clsEffectNumeric').each(function() {
+			answer = validateInputDouble(jQuery(this).val());
+			if (answer > 0)
+			{
+				if (jQuery(this).attr('old-bg-color') != '') {
+					jQuery(this).unhighlight();
+				}
+			}
+			else
+			{
+				jQuery(this).highlight();
+				error_count++;
+			}
+		});
 		jQuery('#DICard .inputDouble').each(function() {
 			answer = validateInputDouble(jQuery(this).val());
 			if (answer > 0)
