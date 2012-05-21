@@ -1008,24 +1008,32 @@ function doDatacardSave()
 				error_count++;
 			}
 		});
-		jQuery('#DICard .inputDouble').each(function() {
-			answer = validateInputDouble(jQuery(this).val());
-			if (answer > 0)
-			{
-				if (jQuery(this).attr('old-bg-color') != '') {
-					jQuery(this).unhighlight();
-				}
-			}
-			else
-			{
-				jQuery(this).highlight();
-				error_count++;
-			}
-		});
 		if (error_count > 0)
 		{
 			bContinue = 0;
-			displayDatacardStatusMsg('msgDatacardInvalidNumber');
+			displayDatacardStatusMsg('msgDatacardInvalidIntegerNumber');
+		}
+		if (error_count < 1)
+		{
+			jQuery('#DICard .inputDouble').each(function() {
+				answer = validateInputDouble(jQuery(this).val());
+				if (answer > 0)
+				{
+					if (jQuery(this).attr('old-bg-color') != '') {
+						jQuery(this).unhighlight();
+					}
+				}
+				else
+				{
+					jQuery(this).highlight();
+					error_count++;
+				}
+			});
+			if (error_count > 0)
+			{
+				bContinue = 0;
+				displayDatacardStatusMsg('msgDatacardInvalidFloatNumber');
+			}
 		}
 	}	
 
