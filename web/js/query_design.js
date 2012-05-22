@@ -132,8 +132,11 @@ function onReadyQueryDesign()
 		jQuery('span.lastvalue input', this).enable();
 	});
 
-	jQuery('div.QueryDesign').on('click', 'table.QueryCustom div.field', function(event) {
+	jQuery('div.QueryDesign table.QueryCustom').on('click', 'div.field', function(event) {
 		setAdvQuery(jQuery(this).data('field'), jQuery(this).data('type'));
+	}).on('click','div.field input', function(event) {
+		// Bug #140: Enable click on this field and propagate event
+		return true;
 	});
 
 	jQuery('body').on('cmdMainQueryUpdate', function() {
@@ -317,7 +320,7 @@ function onReadyQueryDesign()
 		});
 		// Load QueryCustom field list
 		var field_list = jQuery('div.QueryDesign table.QueryCustom div.list');
-		field_list.find('div:gt(0)').remove();
+		field_list.find('div.field:gt(0)').remove();
 		jQuery('div.QueryDesign table.QueryCustom div.defaultlist span').each(function() {
 			var field = jQuery(this).data('field');
 			var clone = jQuery('div:last', field_list).clone().show();
