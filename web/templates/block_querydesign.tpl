@@ -217,7 +217,7 @@
 									<input class="checkbox" type="checkbox" />
 									<span class="label"></span>
 									<span class="options hidden">
-										<select class="operator small line" name="value[0]">
+										<select class="operator small line" name="value[Operator]">
 											<option class="small" value=""></option>
 											<option class="small" value=">=">{-#teffmajor#-}</option>
 											<option class="small" value="<=">{-#teffminor#-}</option>
@@ -226,10 +226,10 @@
 										</select>
 										<input type="hidden" name="value[Type]" value="" />
 										<span class="firstvalue">
-											<input class="line" type="text" name="value[1]" size="3" value="1" />
+											<input class="line" type="text" name="value[Value1]" size="3" value="1" />
 										</span>
 										<span class="lastvalue">{-#tand#-}
-											<input class="line" type="text" name="value[2]" size="3" value="10" />
+											<input class="line" type="text" name="value[Value2]" size="3" value="10" />
 										</span>
 									</span>
 								</div>
