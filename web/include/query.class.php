@@ -1168,60 +1168,65 @@ class Query //extends PDO
 		$EEQuery = '';
 		foreach($dat['EEFieldQuery'] as $EEField => $QueryParams)
 		{
-			if ( (array_key_exists('Operator', $QueryParams)) && 
-			     (array_key_exists('Type', $QueryParams)) )
+			if (array_key_exists('Type', $QueryParams))
 			{
 				$QueryTmp = '';
 				switch($QueryParams['Type'])
 				{
 					case 'INTEGER':
-						switch($QueryParams['Operator'])
+					case 'CURRENCY':
+						if (isset($QueryParams['Operator']))
 						{
-							case '>=':
-								if (is_numeric($QueryParams['Value1']))
-								{
-									$QueryTmp = 'E.' . $EEField . $QueryParams['Operator'] . $QueryParams['Value1'];
-								}
-							break;
-							case '<=':
-								if (is_numeric($QueryParams['Value1']))
-								{
-									$QueryTmp = 'E.' . $EEField . $QueryParams['Operator'] . $QueryParams['Value1'];
-								}
-							break;
-							case '=':
-								if (is_numeric($QueryParams['Value1']))
-								{
-									$QueryTmp = 'E.' . $EEField . $QueryParams['Operator'] . $QueryParams['Value1'];
-								}
-							break;
-							case '-3':
-								if (is_numeric($QueryParams['Value1']) && is_numeric($QueryParams['Value2']))
-								{
-									$QueryTmp = '(' . 'E.' . $EEField . '>=' . $QueryParams['Value1'] . ' AND ' . 'E.' . $EEField . '<=' . $QueryParams['Value2'] . ')';
-								}
-							break;
-							default:
-								$QueryTmp = '(' . '(E.' . $EEField . '>0) OR (E.' . $EEField . '=-1)' . ')';
-							break;
+							switch($QueryParams['Operator'])
+							{
+								case '>=':
+									if (is_numeric($QueryParams['Value1']))
+									{
+										$QueryTmp = 'E.' . $EEField . $QueryParams['Operator'] . $QueryParams['Value1'];
+									}
+								break;
+								case '<=':
+									if (is_numeric($QueryParams['Value1']))
+									{
+										$QueryTmp = 'E.' . $EEField . $QueryParams['Operator'] . $QueryParams['Value1'] . ' AND E.' . $EEField . '>=0';
+									}
+								break;
+								case '=':
+									if (is_numeric($QueryParams['Value1']))
+									{
+										$QueryTmp = 'E.' . $EEField . $QueryParams['Operator'] . $QueryParams['Value1'];
+									}
+								break;
+								case '-3':
+									if (is_numeric($QueryParams['Value1']) && is_numeric($QueryParams['Value2']))
+									{
+										$QueryTmp = '(' . 'E.' . $EEField . '>=' . $QueryParams['Value1'] . ' AND ' . 'E.' . $EEField . '<=' . $QueryParams['Value2'] . ')';
+									}
+								break;
+								default:
+									$QueryTmp = '(' . '(E.' . $EEField . '>0) OR (E.' . $EEField . '=-1)' . ')';
+								break;
+							}
 						}
 					break;
+					case 'STRING':
+					case 'DATE':
 					case 'TEXT':
-						if ($QueryParams['Value'] != '')
+						if ($QueryParams['Text'] != '')
 						{
-							$QueryTmp = 'E.' . $EEField . " LIKE '" . $QueryParams['Value'] . "'";
+							$QueryTmp = 'E.' . $EEField . " LIKE '" . $QueryParams['Text'] . "'";
 						}
 					break;
 				} //switch
 				if ($QueryTmp != '')
-				{
+				{	
 					if (! $First)
 					{
 						$EEQuery .= ' ' . $dat['QueryEEField']['OP'] . ' ';
 					}
 					$First = false;
 					$EEQuery .= $QueryTmp;
-				} //if
+				} #if
 			} //if
 		} //foreach
 		$QueryItem['EEField'] = $EEQuery;
