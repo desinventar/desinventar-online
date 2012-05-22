@@ -30,6 +30,8 @@ function onReadyGraphic() {
 			enab($('prmGraphScale1'));
 			enab($('prmGraphData1'));
 			enab($('prmGraphMode1'));
+			// Bug #112 - BAR Graphs with two variables are 2D by default
+			doUpdateGraphParameters();
 		}
 		else
 		{
@@ -146,6 +148,11 @@ function onReadyGraphic() {
 			jQuery('#prmGraphFeel').val('2D');
 			jQuery('#prmGraphFeel option.3D').disable();
 		}
+		// Bug #112: BAR graphs with two variables are 2D by default
+		if (kind == 'BAR')
+		{
+			doUpdateGraphParameters();
+		}
 	});
 
 	jQuery('div.ViewGraphParams').on('mouseover','select', function() {
@@ -166,6 +173,21 @@ function onReadyGraphic() {
 		doViewGraphParamsInitialize();
 	});
 } // onReadyGraphic()
+
+function doUpdateGraphParameters()
+{
+	kind = jQuery('#prmGraphKind').val();
+	field0 = jQuery('#prmGraphField0').val();
+	field1 = jQuery('#prmGraphField1').val();
+	if (kind == 'BAR') 
+	{
+		if ( (field0 != '') && (field1 != '') )
+		{
+			jQuery('#prmGraphFeel option.3D').enable();
+			jQuery('#prmGraphFeel').val('2D');
+		}
+	}
+}
 
 function doViewGraphParamsInitialize()
 {
