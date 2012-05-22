@@ -6634,9 +6634,9 @@ function onReadyQueryDesign()
 				case 'INTEGER':
 				case 'DOUBLE':
 				case 'CURRENCY':
-					jQuery('select.operator'      , clone).attr('name', 'EEFieldQuery[' + field + '][0]').disable();
-					jQuery('span.firstvalue input', clone).attr('name', 'EEFieldQuery[' + field + '][1]');
-					jQuery('span.lastvalue input' , clone).attr('name', 'EEFieldQuery[' + field + '][2]').disable();
+					jQuery('select.operator'      , clone).attr('name', 'EEFieldQuery[' + field + '][Operator]').disable();
+					jQuery('span.firstvalue input', clone).attr('name', 'EEFieldQuery[' + field + '][Value1]');
+					jQuery('span.lastvalue input' , clone).attr('name', 'EEFieldQuery[' + field + '][Value2]').disable();
 					jQuery('div.EffectNumeric', clone).show();
 				break;
 				case 'STRING':
