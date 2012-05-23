@@ -10,6 +10,7 @@ RewriteRule ^.*\.inc$ - [F]
 RewriteRule ^.*\.txt$ - [F]
 RewriteRule ^.*\.tpl$ - [F]
 RewriteRule ^.*\.xml$ - [F]
+RewriteRule ^guide/$                          metguide.php
 RewriteRule ^kml/([a-zA-Z0-9\-\._]+)/$        thematicmap.php?cmd=getkml&MAPID=$1
 RewriteRule ^wms[/]*$                         mapserver.php
 RewriteRule ^wms/worldmap/$                   mapserver.php
