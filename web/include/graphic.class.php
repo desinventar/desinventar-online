@@ -278,14 +278,16 @@ class Graphic
 				$this->g->xaxis->title->SetFont(FF_ARIAL, FS_NORMAL);
 				$this->g->xaxis->SetTickLabels($XAxisLabels);
 				$this->g->xaxis->SetFont(FF_ARIAL,FS_NORMAL, 8);
-				$this->g->xaxis->SetLabelAngle(90);
-				$XAxisLabelMargin = $this->getTextArrayMaxWidth($XAxisLabels, 8);
-				if ($XAxisLabelMargin < 25)
-				{
-					$XAxisLabelMargin += 4;
-				}
+				#$this->g->xaxis->SetLabelAngle(90);
+				#$XAxisLabelMargin = $this->getTextArrayMaxWidth($XAxisLabels, 8);
+				#if ($XAxisLabelMargin < 25)
+				#{
+				#	$XAxisLabelMargin += 4;
+				#}
+				$this->g->xaxis->SetLabelAngle(-90);
+				$XAxisLabelMargin = 5;
 				$this->g->xaxis->SetLabelMargin($XAxisLabelMargin);
-				$this->g->xaxis->SetLabelAlign('center','bottom');
+				$this->g->xaxis->SetLabelAlign('center','top');
 				// 2009-02-03 (jhcaiced) Try to avoid overlapping labels in XAxis
 				// by calculating the interval of the labels
 				$iNumPoints = count($val);		
