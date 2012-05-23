@@ -246,6 +246,7 @@ switch ($cmd)
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
+	case 'events':
 	case 'cmdDatabaseEvents':
 		$t->assign('dic', $us->q->queryLabelsFromGroup('DB', $lg));
 		$t->display('main_database_events.tpl');
@@ -311,6 +312,7 @@ switch ($cmd)
 		$answer['Status'] = $iReturn;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');		
 	break;
+	case 'causes':
 	case 'cmdDatabaseCauses':
 		$t->assign('dic', $us->q->queryLabelsFromGroup('DB', $lg));
 		$t->display('main_database_causes.tpl');

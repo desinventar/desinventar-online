@@ -63,7 +63,8 @@ function onReadyDatabaseCauses()
 		jQuery('#fldDatabaseCauses_CauseActive').val(v);
 	});
 
-	jQuery('#frmDatabaseCauses_Edit').submit(function() {
+	jQuery('#frmDatabaseCauses_Edit').on('submit', function(event) {
+		console.log('Cause submit');
 		var bContinue = true;
 		if (bContinue && jQuery.trim(jQuery('#fldDatabaseCauses_CauseName').val()) == '')
 		{
@@ -71,6 +72,17 @@ function onReadyDatabaseCauses()
 			jQuery('#msgDatabaseCauses_ErrorEmtpyFields').show();
 			setTimeout(function () {
 				jQuery('#fldDatabaseCauses_CauseName').unhighlight();
+				jQuery('div.DatabaseCauses span.status').hide();
+			}, 2500);
+			bContinue = false;
+		}
+
+		if (bContinue && jQuery.trim(jQuery('#fldDatabaseCauses_CauseDesc').val()) == '')
+		{
+			jQuery('#fldDatabaseCauses_CauseDesc').highlight();
+			jQuery('#msgDatabaseCauses_ErrorEmtpyFields').show();
+			setTimeout(function () {
+				jQuery('#fldDatabaseCauses_CauseDesc').unhighlight();
 				jQuery('div.DatabaseCauses span.status').hide();
 			}, 2500);
 			bContinue = false;

@@ -677,7 +677,8 @@ function onReadyDatabaseCauses()
 		jQuery('#fldDatabaseCauses_CauseActive').val(v);
 	});
 
-	jQuery('#frmDatabaseCauses_Edit').submit(function() {
+	jQuery('#frmDatabaseCauses_Edit').on('submit', function(event) {
+		console.log('Cause submit');
 		var bContinue = true;
 		if (bContinue && jQuery.trim(jQuery('#fldDatabaseCauses_CauseName').val()) == '')
 		{
@@ -685,6 +686,17 @@ function onReadyDatabaseCauses()
 			jQuery('#msgDatabaseCauses_ErrorEmtpyFields').show();
 			setTimeout(function () {
 				jQuery('#fldDatabaseCauses_CauseName').unhighlight();
+				jQuery('div.DatabaseCauses span.status').hide();
+			}, 2500);
+			bContinue = false;
+		}
+
+		if (bContinue && jQuery.trim(jQuery('#fldDatabaseCauses_CauseDesc').val()) == '')
+		{
+			jQuery('#fldDatabaseCauses_CauseDesc').highlight();
+			jQuery('#msgDatabaseCauses_ErrorEmtpyFields').show();
+			setTimeout(function () {
+				jQuery('#fldDatabaseCauses_CauseDesc').unhighlight();
 				jQuery('div.DatabaseCauses span.status').hide();
 			}, 2500);
 			bContinue = false;
@@ -1060,7 +1072,7 @@ function onReadyDatabaseEvents()
 		jQuery('#fldDatabaseEvents_EventActive').val(v);
 	});
 
-	jQuery('#frmDatabaseEvents_Edit').submit(function() {
+	jQuery('#frmDatabaseEvents_Edit').on('submit', function(event) {
 		var bContinue = true;
 		if (bContinue && jQuery.trim(jQuery('#fldDatabaseEvents_EventName').val()) == '')
 		{
@@ -1068,6 +1080,17 @@ function onReadyDatabaseEvents()
 			jQuery('#msgDatabaseEvents_ErrorEmtpyFields').show();
 			setTimeout(function () {
 				jQuery('#fldDatabaseEvents_EventName').unhighlight();
+				jQuery('div.DatabaseEvents span.status').hide();
+			}, 2500);
+			bContinue = false;
+		}
+
+		if (bContinue && jQuery.trim(jQuery('#fldDatabaseEvents_EventDesc').val()) == '')
+		{
+			jQuery('#fldDatabaseEvents_EventDesc').highlight();
+			jQuery('#msgDatabaseEvents_ErrorEmtpyFields').show();
+			setTimeout(function () {
+				jQuery('#fldDatabaseEvents_EventDesc').unhighlight();
 				jQuery('div.DatabaseEvents span.status').hide();
 			}, 2500);
 			bContinue = false;

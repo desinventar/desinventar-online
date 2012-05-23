@@ -62,7 +62,7 @@ function onReadyDatabaseEvents()
 		jQuery('#fldDatabaseEvents_EventActive').val(v);
 	});
 
-	jQuery('#frmDatabaseEvents_Edit').submit(function() {
+	jQuery('#frmDatabaseEvents_Edit').on('submit', function(event) {
 		var bContinue = true;
 		if (bContinue && jQuery.trim(jQuery('#fldDatabaseEvents_EventName').val()) == '')
 		{
@@ -70,6 +70,17 @@ function onReadyDatabaseEvents()
 			jQuery('#msgDatabaseEvents_ErrorEmtpyFields').show();
 			setTimeout(function () {
 				jQuery('#fldDatabaseEvents_EventName').unhighlight();
+				jQuery('div.DatabaseEvents span.status').hide();
+			}, 2500);
+			bContinue = false;
+		}
+
+		if (bContinue && jQuery.trim(jQuery('#fldDatabaseEvents_EventDesc').val()) == '')
+		{
+			jQuery('#fldDatabaseEvents_EventDesc').highlight();
+			jQuery('#msgDatabaseEvents_ErrorEmtpyFields').show();
+			setTimeout(function () {
+				jQuery('#fldDatabaseEvents_EventDesc').unhighlight();
 				jQuery('div.DatabaseEvents span.status').hide();
 			}, 2500);
 			bContinue = false;

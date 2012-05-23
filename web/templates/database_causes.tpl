@@ -92,7 +92,9 @@
 						<input id="fldDatabaseCauses_CauseName" name="CauseName" type="text" class="line" maxlength="40" style="width:500px;" tabindex="1"
 							title="{-$dic.DBCauPersonName[2]-}" />
 						<br /><br />
-						{-$dic.DBCauPersonDef[0]-}<br />
+						{-$dic.DBCauPersonDef[0]-}
+						<b style="color:darkred;">*</b>
+						<br />
 						<textarea id="fldDatabaseCauses_CauseDesc" name="CauseDesc" class="line" rows="4" style="width:500px;" tabindex="2" 
 							title="{-$dic.DBCauPersonDef[2]-}"></textarea>
 						<br /><br />
