@@ -130,5 +130,9 @@ function onReadyMain()
 		return false;
 	});
 	jQuery(window).trigger('hashchange');
+	jQuery('a.MetGuide').on('click', function(event) {
+		window.open(jQuery('#desinventarURL').val() + '/guide/',jQuery(this).html(),'');
+		//onClick="window.open('doc.php?m=metguide', 'doc', winopt);"
+	});
 } //onReadyMain()
 
