@@ -6649,7 +6649,7 @@ function onReadyQueryDesign()
 		jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
 			var field = key;
 			var type = value[2];
-			var clone = jQuery('tr:last', effect_list).clone().show();
+			var clone = jQuery('tr:first', effect_list).clone().show();
 			jQuery('div.Effect', clone).hide();
 			switch(type)
 			{
@@ -6659,12 +6659,14 @@ function onReadyQueryDesign()
 					jQuery('select.operator'      , clone).attr('name', 'EEFieldQuery[' + field + '][Operator]').disable();
 					jQuery('span.firstvalue input', clone).attr('name', 'EEFieldQuery[' + field + '][Value1]');
 					jQuery('span.lastvalue input' , clone).attr('name', 'EEFieldQuery[' + field + '][Value2]').disable();
+					jQuery('div.EffectText', clone).remove();
 					jQuery('div.EffectNumeric', clone).show();
 				break;
 				case 'STRING':
 				case 'TEXT':
 				case 'DATE':
 					jQuery('input.text', clone).attr('name', 'EEFieldQuery[' + field + '][Text]');
+					jQuery('div.Effectnumeric', clone).remove();
 					jQuery('div.EffectText', clone).show();
 				break;
 			}
