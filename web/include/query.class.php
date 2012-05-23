@@ -1230,7 +1230,6 @@ class Query //extends PDO
 			} //if
 		} //foreach
 		$QueryItem['EEField'] = $EEQuery;
-
 		// Geography Section Query (GeographyId + DisasterSiteNotes)
 		$Query = '';
 		$bFirst = true;
