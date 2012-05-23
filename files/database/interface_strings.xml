@@ -3146,10 +3146,10 @@
 	</Group>
 	<Group name="dc_thematicmap">
 		<Message id="ttitle">
-			<Text LangIsoCode="eng">Methodological guide summarize</Text>
-			<Text LangIsoCode="spa">Mapa temático</Text>
-			<Text LangIsoCode="por">Resumo Guia metodológico</Text>
-			<Text LangIsoCode="fre">Résumé Guide méthodologique</Text>
+			<Text LangIsoCode="eng">Methodological guide</Text>
+			<Text LangIsoCode="spa">Guía Metodológica</Text>
+			<Text LangIsoCode="por">Guia metodológico</Text>
+			<Text LangIsoCode="fre">Guide méthodologique</Text>
 		</Message>
 		<Message id="tmapof">
 			<Text LangIsoCode="eng">Map of</Text>
@@ -3271,11 +3271,11 @@
 		</Message>
 	</Group>
 	<Group name="di_doc">
-		<Message id="ttitle">
-			<Text LangIsoCode="eng">Methodological guide summarize</Text>
-			<Text LangIsoCode="spa">Resumen Guía metodológica</Text>
-			<Text LangIsoCode="por">Resumo Guia metodológico</Text>
-			<Text LangIsoCode="fre">Résumé Guide méthodologique</Text>
+		<Message id="metguide_Title">
+			<Text LangIsoCode="eng">Methodological Guide</Text>
+			<Text LangIsoCode="spa">Guía metodológica</Text>
+			<Text LangIsoCode="por">Guia metodológico</Text>
+			<Text LangIsoCode="fre">Guide méthodologique</Text>
 		</Message>
 		<Message id="tintro">
 			<Text LangIsoCode="eng">Introduction</Text>
