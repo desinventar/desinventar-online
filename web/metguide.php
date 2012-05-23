@@ -5,52 +5,16 @@
 */
 	require_once('include/loader.php');
 	$mod = 'metguide';
-
-	if (isset($_GET['p']))
+	$pages = array(
+		'intro','whatis','aboutdesinv','regioninfo','geography',
+		'events','causes','extraeffects','datacards','references'
+	);
+	$metguide = array();
+	foreach($pages as $pagekey)
 	{
-		$pag = $_GET['p'];
-		if ($pag == 'datacards')
-		{
-			$t->assign('eff', $us->q->queryLabelsFromGroup('Effect', $lg));
-			$t->assign('sec', $us->q->queryLabelsFromGroup('Sector', $lg));
-		}
-		if ($pag == 'events')
-		{
-			$t->assign('eve', $us->q->loadEvents('BASE', null, $lg, $us->RegionLangIsoCode));
-		}
-		if ($pag == 'causes')
-		{
-			$t->assign('cau', $us->q->loadCauses('BASE', null, $lg, $us->RegionLangIsoCode));
-		}
+		$metguide[$pagekey]  = $us->q->queryLabel($mod, $pagekey , $lg);
 	}
-	else
-	{
-		$pag = 'main';
-	}
-	$t->assign('ctl_page', $pag);
-	$t->assign('ctl_module', $mod);
-	if ($mod == 'DesInventarInfo' && $pag == 'intro')
-	{
-		$show = $us->q->queryLabel('MainPage', 'DesInventar', $lg);
-	}
-	else
-	{
-		$show = $us->q->queryLabel($mod, $pag, $lg);
-	}
-	if (isset($_GET['title']) && $_GET['title'] == 'no')
-	{
-		$t->assign('title', false);
-	}
-	else
-	{
-		$t->assign('title', true);
-	}
-	if (is_array($show))
-	{
-		$t->assign('pagetitle', $show['DictTranslation']);
-		$t->assign('pagedesc', $show['DictBasDesc']);
-		$t->assign('pagefull', $show['DictFullDesc']);
-		$t->assign('urlinfo', $show['DictTechHelp']);
-	}
+	$t->assign('metguide', $metguide);
+	$t->force_compile   = true; # Force this template to always compile
 	$t->display('metguide.tpl');
 </script>
