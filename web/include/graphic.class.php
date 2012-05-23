@@ -285,7 +285,7 @@ class Graphic
 					$XAxisLabelMargin += 4;
 				}
 				$this->g->xaxis->SetLabelMargin($XAxisLabelMargin);
-				$this->g->xaxis->SetLabelAlign('center','top');
+				$this->g->xaxis->SetLabelAlign('center','bottom');
 				// 2009-02-03 (jhcaiced) Try to avoid overlapping labels in XAxis
 				// by calculating the interval of the labels
 				$iNumPoints = count($val);		
