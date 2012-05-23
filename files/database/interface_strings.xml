@@ -2845,6 +2845,12 @@
 			<Text LangIsoCode="por">Definição</Text>
 			<Text LangIsoCode="fre">Définition</Text>
 		</Message>
+		<Message id="hmoreinfo">
+			<Text LangIsoCode="eng">Methodological guide</Text>
+			<Text LangIsoCode="spa">Guía metodológica</Text>
+			<Text LangIsoCode="por">Ver Guia metodológico</Text>
+			<Text LangIsoCode="fre">Guide méthodologique</Text>
+		</Message>
 		<Message id="tdescinfo">
 			<Text LangIsoCode="eng">Click on the field to see a description of the element</Text>
 			<Text LangIsoCode="spa">De click en el campo deseado para ver la descripción de dicho elemento</Text>
