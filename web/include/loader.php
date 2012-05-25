@@ -206,12 +206,15 @@ if (MODE != 'command')
 	if ($lg == '')
 	{
 		$lg = getBrowserClientLanguage();
+		$us->setLangIsoCode($lg);
+		$us->update();
 	}
 	if ($lg == '')
 	{
 		$lg = 'eng';
+		$us->setLangIsoCode($lg);
+		$us->update();
 	}
-	$us->setLangIsoCode($lg);
 	
 	// 2009-02-21 (jhcaiced) Fix some languages from two to three character code
 	if ($lg == 'es') { $lg = 'spa'; }

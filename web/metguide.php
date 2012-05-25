@@ -35,5 +35,5 @@
 	{
 		$t->force_compile   = true; # Force this template to always compile
 	}
-	$t->display('metguide.tpl');
+	$t->display('metguide-' . $lg . '.tpl');
 </script>
