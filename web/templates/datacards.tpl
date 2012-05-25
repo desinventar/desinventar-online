@@ -158,7 +158,7 @@
 							</td>
 							<td title="{-$LabelsDisaster.DisasterSiteNotes[1]-}">
 								{-#msgDatacard_DisasterSiteNotes#-}<br />
-								<textarea id="DisasterSiteNotes" name="DisasterSiteNotes" style="height: 40px;" cols="25" maxlength="512"
+								<textarea id="DisasterSiteNotes" name="DisasterSiteNotes" style="height: 40px;" cols="25" maxlength="4096"
 									class="inputText" tabindex="{-$MyTabIndex-}" 
 									onFocus="showtip('{-$LabelsDisaster.DisasterSiteNotes[2]-}', '#d4baf6')"></textarea>
 								{-counter-}
@@ -294,7 +294,7 @@
 											<td>
 												<span class="label" title=""></span>
 												<br />
-												<textarea class="value inputText"  maxlength="2048" cols="25" style="height:30px;"
+												<textarea class="value inputText"  maxlength="4096" cols="25" style="height:30px;"
 													id="EffectOtherLosses" name="EffectOtherLosses"></textarea>
 											</td>
 										</tr>
@@ -302,7 +302,7 @@
 											<td>
 												<span class="label" title=""></span>
 												<br />
-												<textarea class="value inputText"  maxlength="2048" cols="25" style="height:70px;"
+												<textarea class="value inputText"  maxlength="4096" cols="25" style="height:70px;"
 													id="EffectNotes" name="EffectNotes"></textarea>
 											</td>
 										</tr>
