@@ -131,7 +131,7 @@ function onReadyMain()
 	});
 	jQuery(window).trigger('hashchange');
 	jQuery('a.MetGuide').on('click', function(event) {
-		var winopt = 'width=1020,height=700,left=0,top=0,screenX=0,screenY=0';
+		var winopt = 'width=1020,height=700,left=0,top=0,screenX=0,screenY=0,scrollbars=yes';
 		window.open(jQuery('#desinventarURL').val() + '/guide/',jQuery(this).html(),winopt);
 		//onClick="window.open('doc.php?m=metguide', 'doc', winopt);"
 	});
