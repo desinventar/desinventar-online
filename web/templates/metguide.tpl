@@ -19,11 +19,22 @@
 	<body>
 		<table width="100%">
 			<tr>
+				<td class="top" colspan="2">
+					<h3 class="center">{-#metguide_Title#-}</h3>
+				</td>
+			</tr>
+			<tr>
 				<td valign="top" style="width:180px;">
-					<h3>{-#metguide_Title#-}</h3>
-					{-foreach $metguide as $key => $page-}
-						<li><a class="page" href="#" id="{-$key-}">{-$page.DictTranslation-}</a></li>
-					{-/foreach-}
+					<li><a class="page" href="#" id="intro">{-#tintro#-}</a></li>
+					<li><a class="page" href="#" id="whatis">{-#twhatis#-}</a></li>
+					<li><a class="page" href="#" id="aboutdesinv">{-#tgenpres#-}</a></li>
+					<li><a class="page" href="#" id="regioninfo">{-#tregion#-}</a></li>
+					<li><a class="page" href="#" id="geography">{-#tgeography#-}</a></li>
+					<li><a class="page" href="#" id="events">{-#tevents#-}</a></li>
+					<li><a class="page" href="#" id="causes">{-#tcauses#-}</a></li>
+					<li><a class="page" href="#" id="extraeffects">{-#textraeff#-}</a></li>
+					<li><a class="page" href="#" id="datacards">{-#tdatacards#-}</a></li>
+					<li><a class="page" href="#" id="references">{-#treferences#-}</a></li>
 				</td>
 				<td valign="top">
 					{-foreach $metguide as $key => $page-}

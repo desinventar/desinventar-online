@@ -30,7 +30,10 @@
 	$sec = $us->q->queryLabelsFromGroup('Sector', $lg);
 	$EffectList = array_merge($ef1,$ef2,$ef3,$ef4,$sec);
 	$t->assign('EffectList', $EffectList);
-	
-	$t->force_compile   = true; # Force this template to always compile
+
+	if ($desinventarMode == 'devel')
+	{
+		$t->force_compile   = true; # Force this template to always compile
+	}
 	$t->display('metguide.tpl');
 </script>
