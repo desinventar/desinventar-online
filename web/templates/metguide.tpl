@@ -12,6 +12,7 @@
 					jQuery('div.page[id="' + jQuery(this).attr('id') + '"]').show();
 					event.stopPropagation();
 				});
+				jQuery('a.page#intro').trigger('click');
 			});
 		</script>
 	</head>
@@ -28,8 +29,32 @@
 					{-foreach $metguide as $key => $page-}
 						<div class="page" id="{-$key-}" style="display:none;">
 							<h4>{-$page.DictTranslation-}</h4>
-							<p class="justify"><i>{-$page.DictBastDesc-}</i></p>
+							<p class="justify"><i>{-$page.DictBasDesc-}</i></p>
 							<p class="justify">{-$page.DictFullDesc-}</p>
+							{-if $key=='events'-}
+								<hr />
+								{-foreach $EventListDefault as $EventId => $Event-}
+									<b>{-$Event.EventName-}</b><br />
+									<span>{-$Event.EventDesc-}</span><br />
+									<br />
+								{-/foreach-}
+							{-/if-}
+							{-if $key=='causes'-}
+								<hr />
+								{-foreach $CauseListDefault as $CauseId => $Cause-}
+									<b>{-$Cause.CauseName-}</b><br />
+									<span>{-$Cause.CauseDesc-}</span><br />
+									<br />
+								{-/foreach-}
+							{-/if-}
+							{-if $key=='datacards'-}
+								<hr />
+								{-foreach $EffectList as $EffectId => $Effect-}
+									<b>{-$Effect.0-}</b><br />
+									<span>{-$Effect.2-}</span><br />
+									<br />
+								{-/foreach-}
+							{-/if-}
 						</div>
 					{-/foreach-}
 				</td>
