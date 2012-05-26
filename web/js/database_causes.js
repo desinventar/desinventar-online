@@ -64,7 +64,6 @@ function onReadyDatabaseCauses()
 	});
 
 	jQuery('#frmDatabaseCauses_Edit').on('submit', function(event) {
-		console.log('Cause submit');
 		var bContinue = true;
 		if (bContinue && jQuery.trim(jQuery('#fldDatabaseCauses_CauseName').val()) == '')
 		{
