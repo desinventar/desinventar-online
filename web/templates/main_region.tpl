@@ -27,7 +27,6 @@
 				jQuery(window).bind('hashchange', function(e) {
 					var url = jQuery.param.fragment();
 					//var url = e.fragment;
-					console.log(url);
 				});
 				jQuery(window).trigger('hashchange');
 			});
