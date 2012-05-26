@@ -12,13 +12,14 @@ if (! isset($_SERVER['DESINVENTAR_WEB']))
 
 // This is the version of the software
 define('MAJORVERSION', '2012');
-define('MINORVERSION', '05.1021');
-define('RELEASEDATE' , '2012-05-25');
+define('MINORVERSION', '05.1022');
+define('RELEASEDATE' , '2012-05-26');
 define('VERSION'     , MAJORVERSION . '.' . MINORVERSION);
 define('JSVERSION'   , VERSION);
 
 $appOptions = array();
 $appOptions['UseRemoteMaps'] = 1;
+$appOptions['IsOnline'] = 0;
 
 // 2009-07-22 (jhcaiced) Adapted Configuration and Startup for 
 // using with PHP Command Line 
@@ -92,6 +93,10 @@ if (isset($_SERVER['HTTP_HOST']))
 			$_SERVER['DESINVENTAR_DATADIR']  = '/var/lib/desinventar';
 		}
 		$_SERVER['DESINVENTAR_MAPDIR'] = '/usr/share/desinventar/worldmap';
+		if (preg_match('/desinventar.org$/', $_SERVER['HTTP_HOST']))
+		{
+			$appOptions['IsOnline'] = 1;
+		}
 	}
 }
 else
