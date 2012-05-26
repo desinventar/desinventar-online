@@ -37,6 +37,9 @@
 				onReadyMain();
 			});
 		</script>
+		{-if $appOptions.IsOnline > 0-}
+			{-include file="ga.tpl"-}
+		{-/if-}		
 	</head>
 	<body>
 		<div id="loading-mask"></div>
