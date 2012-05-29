@@ -35,8 +35,6 @@ if (!empty($RegionId))
 	$us->open($RegionId);
 	$r = new DIRegion($us, $RegionId);
 	$RegionLabel = $r->getRegionInfoValue('RegionLabel');
-	$t->assign('desinventarCountryIso' , $r->get('CountryIso'));
-	$t->assign('desinventarCountryName', $us->q->getCountryName($r->get('CountryIso')));
 }
 $t->assign('desinventarRegionLabel', $RegionLabel);
 
@@ -522,53 +520,44 @@ switch ($cmd)
 	case 'cmdDatabaseLoadData':
 		$answer = array();
 		$iReturn = ERR_NO_ERROR;
-		if ($RegionId == '')
-		{
-			$iReturn = ERR_UNKNOWN_ERROR;
-		}
-		if ($iReturn > 0)
-		{
-			$iReturn = DIRegion::existRegion($us, $RegionId);
-		}
-		if ($iReturn > 0)
-		{
-			$r = new DIRegion($us, $RegionId);
-			$answer['RegionId'] = $RegionId;
 
-			$GeolevelsList = $r->getGeolevelList();
-			$answer['GeolevelsList'] = $GeolevelsList;
-			$EventList     = $us->q->loadEvents('ALL', 'active', $lg, $us->RegionLangIsoCode);
-			$answer['EventList'] = $EventList;
-			$CauseList     = $us->q->loadCauses('ALL', 'active', $lg, $us->RegionLangIsoCode);
-			$answer['CauseList'] = $CauseList;
-			$RecordCount = $us->getDisasterCount();
-			$answer['RecordCount'] = $RecordCount;
-			$GeographyList = $us->getGeographyItemsByLevel(0, '');
-			$answer['GeographyList'] = $GeographyList;
+		// Session Parameters
+		$params = array();			
+		$params['LangIsoCode']   = $lg;
+		$params['RegionId']      = $RegionId;
+		$params['RegionLabel']   = $RegionLabel;
+		$params['UserId']        = $us->UserId;
+		$params['UserFullName']  = $us->getUserFullName();
+		$params['UserRole']      = $desinventarUserRole;
+		$params['UserRoleValue'] = $desinventarUserRoleValue;
+		$answer['RegionId'] = $RegionId;		
+		if ($RegionId != '')
+		{
+			if (DIRegion::existRegion($us, $RegionId))
+			{
+				$r = new DIRegion($us, $RegionId);
 
-			$EEFieldList = $us->q->getEEFieldList('True');
-			$answer['EEFieldList'] = $EEFieldList;
-			
-			$params = array();			
-			# Get range of dates for Query Design
-			$ydb = $us->getDateRange();
-			$params['MinYear']       = substr($ydb[0], 0, 4);
-			$params['MaxYear']       = substr($ydb[1], 0, 4);
-			$params['LangIsoCode']   = $lg;
-			$params['RegionId']      = $RegionId;
-			$params['RegionLabel']   = $RegionLabel;
-			$params['UserId']        = $us->UserId;
-			$params['UserFullName']  = $us->getUserFullName();
-			$params['UserRole']      = $desinventarUserRole;
-			$params['UserRoleValue'] = $desinventarUserRoleValue;
-			$answer['params'] = $params;
+				$GeolevelsList = $r->getGeolevelList();
+				$answer['GeolevelsList'] = $GeolevelsList;
+				$EventList     = $us->q->loadEvents('ALL', 'active', $lg, $us->RegionLangIsoCode);
+				$answer['EventList'] = $EventList;
+				$CauseList     = $us->q->loadCauses('ALL', 'active', $lg, $us->RegionLangIsoCode);
+				$answer['CauseList'] = $CauseList;
+				$RecordCount = $us->getDisasterCount();
+				$answer['RecordCount'] = $RecordCount;
+				$GeographyList = $us->getGeographyItemsByLevel(0, '');
+				$answer['GeographyList'] = $GeographyList;
 
-			# Demo Query Open
-			#$query_design = file_get_contents('/tmp/query_2.0_geography.xml');
-			#$query_design = preg_replace('/\n/','', $query_design);
-			#$query_design = preg_replace('/\t/','', $query_design);
-			#$answer['query_design'] = $query_design;
+				$EEFieldList = $us->q->getEEFieldList('True');
+				$answer['EEFieldList'] = $EEFieldList;
+				
+				# Get range of dates for Query Design
+				$ydb = $us->getDateRange();
+				$params['MinYear']       = substr($ydb[0], 0, 4);
+				$params['MaxYear']       = substr($ydb[1], 0, 4);
+			}
 		}
+		$answer['params'] = $params;
 		$answer['Status'] = $iReturn;
 		echo json_encode($answer);
 	break;
