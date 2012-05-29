@@ -11,16 +11,13 @@ function onReadyInit()
 	jQuery(window).bind('hashchange', function(e) {
 		var url = jQuery.param.fragment();
 		var options = url.split('/');
+		console.log('hashchange : ' + options[0]);
 		switch(options[0])
 		{
-			case '':
-				//Nothing to do
-				jQuery('#desinventarRegionId').val('');
-				jQuery('body').trigger('cmdViewportShow');
-			break;
 			default:
 				var RegionId = options[0];
 				jQuery('#desinventarRegionId').val(RegionId);
+				console.log('cmdDatabaseLoadData');
 				jQuery('body').trigger('cmdDatabaseLoadData');
 			break;
 		}
@@ -29,32 +26,33 @@ function onReadyInit()
 
 function doDatabaseLoadData()
 {
-	if (jQuery('#desinventarRegionId').val() != '')
-	{
-		jQuery.post(
-			jQuery('#desinventarURL').val() + '/',
+	jQuery.post(
+		jQuery('#desinventarURL').val() + '/',
+		{
+			cmd      : 'cmdDatabaseLoadData',
+			RegionId : jQuery('#desinventarRegionId').val()
+		},
+		function(data)
+		{
+			if (parseInt(data.Status) > 0)
 			{
-				cmd      : 'cmdDatabaseLoadData',
-				RegionId : jQuery('#desinventarRegionId').val()
-			},
-			function(data)
-			{
-				if (parseInt(data.Status) > 0)
+				jQuery('body').data('params', data.params);
+				//Compatibility with old methods desinventarinfo.tpl
+				jQuery('#desinventarUserId').val(data.params.UserId);
+				jQuery('#desinventarUserFullName').val(data.params.UserFullName);
+				jQuery('#desinventarUserRole').val(data.params.UserRole);
+				jQuery('#desinventarUserRoleValue').val(data.params.UserRoleValue);
+				console.log(data.RegionId);
+				if (data.RegionId != '')
 				{
 					// Initialize data-* components for body
 					jQuery('body').data('RegionId', data.RegionId);
-					jQuery('body').data('params', data.params);
 					jQuery('body').data('GeolevelsList', data.GeolevelsList);
 					jQuery('body').data('EventList', data.EventList);
 					jQuery('body').data('CauseList', data.CauseList);
 					jQuery('body').data('EEFieldList', data.EEFieldList);
 					jQuery('body').data('RecordCount', data.RecordCount);
 
-					//Compatibility with old methods
-					jQuery('#desinventarUserId').val(data.params.UserId);
-					jQuery('#desinventarUserFullName').val(data.params.UserFullName);
-					jQuery('#desinventarUserRole').val(data.params.UserRole);
-					jQuery('#desinventarUserRoleValue').val(data.params.UserRoleValue);
 					
 					var dataItems = jQuery('body').data();
 					jQuery.each(dataItems, function(index, value) {
@@ -64,23 +62,25 @@ function doDatabaseLoadData()
 						}
 					});
 					jQuery('body').data('GeographyList', data.GeographyList);
-					// Info
+					
 					jQuery('#desinventarLang').val(data.params.LangIsoCode);
 					jQuery('#desinventarRegionId').val(data.params.RegionId);
 					jQuery('#desinventarRegionLabel').val(data.params.RegionLabel);
 					jQuery('#desinventarNumberOfRecords').val(data.RecordCount);
 					// Trigger event on mainblock components to update them
+					console.log('before initialize');
 					jQuery('.mainblock').trigger('cmdInitialize');
+					console.log('after initialize');
 				}
-				else
-				{
-					jQuery('#desinventarRegionId').val('');
-					window.location.hash = '';
-				}
-				// Trigger ViewportShow
-				jQuery('body').trigger('cmdViewportShow');
-			},
-			'json'
-		);
-	}
+			}
+			else
+			{
+				jQuery('#desinventarRegionId').val('');
+				window.location.hash = '';
+			}
+			// Trigger ViewportShow
+			jQuery('body').trigger('cmdViewportShow');
+		},
+		'json'
+	);
 } //doDatabaseLoadData()
