@@ -5086,13 +5086,15 @@ function onReadyGraphic() {
 		$('prmGraphPeriod').value = 'YEAR';
 		enab($('prmGraphStat'));
 		jQuery('#prmGraphScale0').enable();
+		console.log(grp);
 		if (grp > 0)
 		{
 			disabAxis2();
 			jQuery('#prmGraphMode0').val('NORMAL');
 			disab($('prmGraphModeCummulative0'));
-			enab($('prmGraphModeStacked0'));
-			enab($('prmGraphModeStacked1'));
+			// Bug #148 : Disable Stacked Mode
+			disab($('prmGraphModeStacked0'));
+			disab($('prmGraphModeStacked1'));
 		}
 		else
 		{
