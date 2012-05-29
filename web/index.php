@@ -619,6 +619,7 @@ switch ($cmd)
 			if ($geography_id == '')
 			{
 				$o->setGeographyId($parent_id);
+				$o->setGeographyFQName();
 				$iReturn = $o->insert();
 			}
 			else
