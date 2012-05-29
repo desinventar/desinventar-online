@@ -5086,7 +5086,6 @@ function onReadyGraphic() {
 		$('prmGraphPeriod').value = 'YEAR';
 		enab($('prmGraphStat'));
 		jQuery('#prmGraphScale0').enable();
-		console.log(grp);
 		if (grp > 0)
 		{
 			disabAxis2();

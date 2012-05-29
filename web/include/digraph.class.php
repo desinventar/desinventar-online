@@ -160,7 +160,6 @@ class DIGraph extends DIResult
 		$opc['Field'] = $prmGraph['Field'];
 		$sql = $us->q->genSQLProcess($qd, $opc);
 		$dislist = $us->q->getassoc($sql);
-
 		if (!empty($dislist))
 		{
 			# Bug #126 - Remove elements with no value from comparatives
@@ -175,9 +174,12 @@ class DIGraph extends DIResult
 				{
 					foreach($dislist as $key => $row)
 					{
-						if ($row[$field_id] < 1)
+						if (isset($row[$field_id]))
 						{
-							unset($dislist[$key]);
+							if ($row[$field_id] < 1)
+							{
+								unset($dislist[$key]);
+							}
 						}
 					}
 				}
