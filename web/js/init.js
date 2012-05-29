@@ -11,13 +11,11 @@ function onReadyInit()
 	jQuery(window).bind('hashchange', function(e) {
 		var url = jQuery.param.fragment();
 		var options = url.split('/');
-		console.log('hashchange : ' + options[0]);
 		switch(options[0])
 		{
 			default:
 				var RegionId = options[0];
 				jQuery('#desinventarRegionId').val(RegionId);
-				console.log('cmdDatabaseLoadData');
 				jQuery('body').trigger('cmdDatabaseLoadData');
 			break;
 		}
@@ -42,7 +40,6 @@ function doDatabaseLoadData()
 				jQuery('#desinventarUserFullName').val(data.params.UserFullName);
 				jQuery('#desinventarUserRole').val(data.params.UserRole);
 				jQuery('#desinventarUserRoleValue').val(data.params.UserRoleValue);
-				console.log(data.RegionId);
 				if (data.RegionId != '')
 				{
 					// Initialize data-* components for body
@@ -68,9 +65,7 @@ function doDatabaseLoadData()
 					jQuery('#desinventarRegionLabel').val(data.params.RegionLabel);
 					jQuery('#desinventarNumberOfRecords').val(data.RecordCount);
 					// Trigger event on mainblock components to update them
-					console.log('before initialize');
 					jQuery('.mainblock').trigger('cmdInitialize');
-					console.log('after initialize');
 				}
 			}
 			else
