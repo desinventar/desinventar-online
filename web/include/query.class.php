@@ -1640,7 +1640,7 @@ class Query //extends PDO
 		$sel = array();
 		$whr = array();
 		$grp = array();
-		
+		$where_extra = array();
 		// Vars to be agrupated (BeginTime, Geography, Event, Cause)
 		$j = 1;
 		// Group has this struct: FUNC|VAR
@@ -1656,13 +1656,34 @@ class Query //extends PDO
 						// Error with strftime when date contain '00' like '1997-06-00'
 						switch ($gp[0])
 						{
-							case "YEAR":   $func = "SUBSTR(". $gp[1] .", 1, 4) ";       break; // %Y
-							case "YMONTH": $func = "SUBSTR(". $gp[1] .", 1, 7) ";		break; //%Y-%m
-							case "MONTH":  $func = "SUBSTR(". $gp[1] .", 6, 2) ";		break; //%m
-							case "YWEEK":  $func = "STRFTIME('%Y-%W', ". $gp[1] .") "; break; //%Y-%W
-							case "WEEK":   $func = "STRFTIME('%W', ". $gp[1] .") ";	break; //%W
-							case "YDAY":   $func = "SUBSTR(". $gp[1] .", 1, 10) ";		break; //%Y-%m-%d
-							case "DAY":    $func = "STRFTIME('%j', ". $gp[1] .") ";	break; //%j
+							case "YEAR":
+								$func = "SUBSTR(". $gp[1] .", 1, 4) "; #%Y
+								$where_extra[] = 'LENGTH(' . $gp[1] . ')>=4';
+							break;
+							case "YMONTH":
+								$func = "SUBSTR(". $gp[1] .", 1, 7) "; #%Y-%m
+								$where_extra[] = 'LENGTH(' . $gp[1] . ')>=7';
+							break;
+							case "MONTH":
+								$func = "SUBSTR(". $gp[1] .", 6, 2) "; #%m
+								$where_extra[] = 'LENGTH(' . $gp[1] . ')>=7';
+							break;
+							case "YWEEK":
+								$func = "STRFTIME('%Y-%W', ". $gp[1] .") "; #%Y-%W
+								$where_extra[] = 'LENGTH(' . $gp[1] . ')>=10';
+							break;
+							case "WEEK":
+								$func = "STRFTIME('%W', ". $gp[1] .") "; #%W
+								$where_extra[] = 'LENGTH(' . $gp[1] . ')>=10';
+							break;
+							case "YDAY":
+								$func = "SUBSTR(". $gp[1] .", 1, 10) "; #%Y-%m-%d
+								$where_extra[] = 'LENGTH(' . $gp[1] . ')>=10';
+							break;
+							case "DAY":
+								$func = "STRFTIME('%j', ". $gp[1] .") "; #%j
+								$where_extra[] = 'LENGTH(' . $gp[1] . ')>=10';
+							break;
 						} //switch
 						$sel[$j] = $func . ' AS '. substr($gp[1],2) ."_". $gp[0] ; // delete last ,'_',
 						$grp[$j] = $func;
@@ -1691,7 +1712,7 @@ class Query //extends PDO
 				break;
 			} //switch
 			$j++;
-		} //foreach
+		} #foreach
 		
 		// Process Field in select and group
 		if (!is_array($opc['Field']))
@@ -1751,11 +1772,15 @@ class Query //extends PDO
 			$where = implode(" ", $whr);
 			if (!empty($whr))
 			{
-				$where = "AND (1!=1 $where)";
+				#$where = "AND (1!=1 AND $where)";
+				$where = 'AND (' . $where . ')';
 			}
-			$group = implode(", ", $grp);
-			$sql = $this->genSQLSelectData ($dat, $selec, "");
-			$sql .= "$where GROUP BY $group";
+			$group = implode(', ', $grp);
+			$where2 = implode(' AND ', $where_extra);
+			$sql = $this->genSQLSelectData ($dat, $selec, '');
+			$sql .= $where;
+			$sql .= ' AND (' . $where2 . ')';
+			$sql .= ' GROUP BY ' . $group;
 		}
 		return $sql;
 	} //function
