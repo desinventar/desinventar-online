@@ -57,8 +57,8 @@ function onReadyGraphic() {
 			jQuery('#prmGraphMode0').val('NORMAL');
 			disab($('prmGraphModeCummulative0'));
 			// Bug #148 : Disable Stacked Mode
-			disab($('prmGraphModeStacked0'));
-			disab($('prmGraphModeStacked1'));
+			enab($('prmGraphModeStacked0'));
+			enab($('prmGraphModeStacked1'));
 		}
 		else
 		{

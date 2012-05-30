@@ -280,7 +280,7 @@ class Graphic
 				$this->g->xaxis->SetFont(FF_ARIAL,FS_NORMAL, 8);
 				$this->g->xaxis->SetLabelAngle(90);
 				$XAxisLabelMargin = $this->getTextArrayMaxWidth($XAxisLabels, 8);
-				if ($XAxisLabelMargin < 25)
+				if ($XAxisLabelMargin < 40)
 				{
 					$XAxisLabelMargin += 4;
 				}
