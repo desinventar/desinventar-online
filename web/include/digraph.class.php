@@ -37,7 +37,6 @@ class DIGraph extends DIResult
 			unset($prmOptions['Graph']['Period']);
 			unset($prmOptions['Graph']['MonthNames']);
 		}
-		fb($prmOptions['Graph']);
 		parent::__construct($prmSession, $prmOptions);
 		$this->options['Graph']   = array_merge($this->options_default_graph, $prmOptions['Graph']);
 	} #__construct()
