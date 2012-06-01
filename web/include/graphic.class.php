@@ -156,7 +156,32 @@ class Graphic
 			//$XAxisLabels = array('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
 			$XAxisLabels = explode(',', $opc['prmGraph']['MonthNames']);
 		}
-		// Cummulative Graph : Add Values in Graph
+
+		# Bug #148: 2012-06-01 (jhcaiced) Make sure all series have the 
+		# same number of values
+		$serie_keys = array();
+		foreach($val as $serie_key => $serie_values)
+		{
+			foreach(array_keys($serie_values) as $value_key)
+			{
+				if (!isset($serie_keys[$value_key]))
+				{
+					$serie_keys[$value_key] = $value_key;
+				}
+			}
+		}
+		foreach($val as $serie_key => $serie_values)
+		{
+			foreach(array_keys($serie_keys) as $value_key)
+			{
+				if (!isset($val[$serie_key][$value_key]))
+				{
+					$val[$serie_key][$value_key] = 0;
+				}
+			}
+		}
+		
+		# Cummulative Graph : Add Values in Graph
 		if ($gType == 'TEMPO')
 		{
 			if ($opc['prmGraph']['Mode'][0] == 'CUMMULATIVE')

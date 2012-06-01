@@ -185,7 +185,6 @@ class DIGraph extends DIResult
 						{
 							if ($row[$field_id] < 1)
 							{
-								fb('unset : ' . $key . ' ' . $field_id);
 								unset($dislist[$key]);
 							}
 						}
