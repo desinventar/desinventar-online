@@ -30,6 +30,13 @@ class DIGraph extends DIResult
 			$prmOptions['Graph'] = $prmOptions['prmGraph'];
 			unset($prmOptions['prmGraph']);
 		}
+		if ($prmOptions['Graph']['Type'] == 'COMPARATIVE')
+		{
+			# Bug 149 Disable HISTOGRAM options which can interfere with COMPARATIVE
+			unset($prmOptions['Graph']['Stat']);
+			unset($prmOptions['Graph']['Period']);
+			unset($prmOptions['Graph']['MonthNames']);
+		}
 		parent::__construct($prmSession, $prmOptions);
 		$this->options['Graph']   = array_merge($this->options_default_graph, $prmOptions['Graph']);
 	} #__construct()
