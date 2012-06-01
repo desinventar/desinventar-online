@@ -123,7 +123,7 @@ class DIGraph extends DIResult
 		{
 			$qd .= ' AND (' . $query_graph . ')';
 		}
-		$sqc = $us->q->genSQLSelectCount($qd);	
+		$sqc = $us->q->genSQLSelectCount($qd);
 		$c   = $us->q->getresult($sqc);
 		$NumRecords = $c['counter'];
 
