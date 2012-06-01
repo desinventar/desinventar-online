@@ -1561,7 +1561,7 @@ class Query //extends PDO
 			$WhereQuery .= ')';
 		}
     	return $WhereQuery;
-	} //function
+	} #genSQLWhereDesconsultar()
 
 	// Count number of records in result
 	public function genSQLSelectCount($whr)
@@ -1776,10 +1776,14 @@ class Query //extends PDO
 				$where = 'AND (' . $where . ')';
 			}
 			$group = implode(', ', $grp);
-			$where2 = implode(' AND ', $where_extra);
 			$sql = $this->genSQLSelectData ($dat, $selec, '');
 			$sql .= $where;
-			$sql .= ' AND (' . $where2 . ')';
+
+			$where2 = implode(' AND ', $where_extra);
+			if ($where2 != '')
+			{
+				$sql .= ' AND (' . $where2 . ')';
+			}
 			$sql .= ' GROUP BY ' . $group;
 		}
 		return $sql;

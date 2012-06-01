@@ -23,6 +23,7 @@ class Graphic
 	public function Graphic($prmSession, $opc, $prmData)
 	{
 		$this->data = $prmData;
+		$this->options = $opc['Graph'];
 		$opc['prmGraph'] = $opc['Graph'];
 		$kind = $opc['prmGraph']['Kind'];
 		// Get Label Information
@@ -159,26 +160,31 @@ class Graphic
 
 		# Bug #148: 2012-06-01 (jhcaiced) Make sure all series have the 
 		# same number of values
-		$serie_keys = array();
-		foreach($val as $serie_key => $serie_values)
+		if ( ($this->options['Type'] == 'HISTOGRAM') &&
+		     ($this->options['SubType'] > 0) )
 		{
-			foreach(array_keys($serie_values) as $value_key)
+			$serie_keys = array();
+			foreach($val as $serie_key => $serie_values)
 			{
-				if (!isset($serie_keys[$value_key]))
+				foreach(array_keys($serie_values) as $value_key)
 				{
-					$serie_keys[$value_key] = $value_key;
+					if (!isset($serie_keys[$value_key]))
+					{
+						$serie_keys[$value_key] = $value_key;
+					}
 				}
 			}
-		}
-		foreach($val as $serie_key => $serie_values)
-		{
-			foreach(array_keys($serie_keys) as $value_key)
+			foreach($val as $serie_key => $serie_values)
 			{
-				if (!isset($val[$serie_key][$value_key]))
+				foreach(array_keys($serie_keys) as $value_key)
 				{
-					$val[$serie_key][$value_key] = 0;
+					if (!isset($val[$serie_key][$value_key]))
+					{
+						$val[$serie_key][$value_key] = 0;
+					}
 				}
 			}
+			$XAxisLabels = array_keys($serie_keys);
 		}
 		
 		# Cummulative Graph : Add Values in Graph
