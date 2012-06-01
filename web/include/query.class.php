@@ -1919,7 +1919,9 @@ class Query //extends PDO
 		} //if !empty
 		if (!empty($exp))
 		{
-			return $txt;
+			# Bug #012: Convert encoding of file to make it easier to open in Excel
+			return mb_convert_encoding($txt, 'iso-8859-1', 'utf-8');
+			#return $txt;
 		}
 		else
 		{

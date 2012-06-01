@@ -29,12 +29,22 @@ class Graphic
 		$oLabels     = array_keys($this->data);
 		$sXAxisLabel = current($oLabels);
 		$sY1AxisLabel = end($oLabels);
+		if (isset($opc['prmGraph']['FieldLabel'][0]))
+		{
+			$sY1AxisLabel = $opc['prmGraph']['FieldLabel'][0];
+		}
+		$sY1AxisIndex = end($oLabels);
 		$q = $prmSession->q; //new Query($opc['_REG']);
 		// Determine graphic type
 		if (substr($opc['prmGraph']['VarList'],2,18) == 'DisasterBeginTime|')
 		{
 			$gType = 'XTEMPO';				// One var x Event/Temporal..
 			$sY2AxisLabel = $oLabels[1];
+			if (isset($opc['prmGraph']['FieldLabel'][1]))
+			{
+				$sY2AxisLabel = $opc['prmGraph']['FieldLabel'][1];
+			}
+			$sY2AxisIndex = $oLabels[1];
 		}
 		elseif (substr($opc['prmGraph']['VarList'],2,17) == 'DisasterBeginTime')
 		{
@@ -60,6 +70,8 @@ class Graphic
 		{
 			$sY1AxisLabel = $oLabels[1];
 			$sY2AxisLabel = $oLabels[2];
+			$sY1AxisIndex = $oLabels[1];
+			$sY2AxisIndex = $oLabels[2];
 		}
 		$val = array();
 		// get Period and Stationality of the Graph (YEAR, YMONTH, YWEEK, YDAY)
@@ -83,13 +95,13 @@ class Graphic
 				$kind = 'MULTILINE';
 			}
 			// Convert data in matrix [EVENT][YEAR]=>VALUE
-			foreach ($this->data[$sY2AxisLabel] as $k=>$i)
+			foreach ($this->data[$sY2AxisIndex] as $k=>$i)
 			{
 				foreach ($this->data[$sXAxisLabel] as $l=>$j)
 				{
 					if ($k == $l)
 					{
-						$tvl[$i][$j] = $this->data[$sY1AxisLabel][$k];
+						$tvl[$i][$j] = $this->data[$sY1AxisIndex][$k];
 					}
 				} //foreach
 			} //foreach
@@ -102,7 +114,7 @@ class Graphic
 				}
 			} #foreach
 			$XAxisLabels = array_keys($val[$kk]);
-			$acol = count(array_unique($this->data[$sY2AxisLabel]));
+			$acol = count(array_unique($this->data[$sY2AxisIndex]));
 		}
 		else
 		{
@@ -110,13 +122,13 @@ class Graphic
 			$n = 0;
 			$acol = 1;
 			// Set Array to [YEAR]=> { VALUE1, VALUE2 }  OR Set Array to [YEAR]=>VALUE
-			foreach ($this->data[$sY1AxisLabel] as $Key=>$Value)
+			foreach ($this->data[$sY1AxisIndex] as $Key=>$Value)
 			{
 				if ($this->data[$sXAxisLabel][$n] != '00')
 				{
 					if ($gType == '2TEMPO' || $gType == '2COMPAR')
 					{
-						$val[$this->data[$sXAxisLabel][$Key]] = array($Value, $this->data[$sY2AxisLabel][$Key]);
+						$val[$this->data[$sXAxisLabel][$Key]] = array($Value, $this->data[$sY2AxisIndex][$Key]);
 					}
 					else
 					{
@@ -192,7 +204,7 @@ class Graphic
 		// 1D Graphic - PIE
 		if ($gType == 'PIE')
 		{
-			$h = (24 * count($this->data[$sY1AxisLabel]));
+			$h = (24 * count($this->data[$sY1AxisIndex]));
 			if ($h > $hx)
 			{
 				$hx = $h;
@@ -215,7 +227,7 @@ class Graphic
 			$ImgMarginBottom = $XAxisTitleMargin + 16 + 16; // XAxisTitle + http://www... line
 
 			//Left Axis (Y1)
-			$Y1AxisLabelLen = $this->getSeriesMaxLen($sY1AxisLabel);
+			$Y1AxisLabelLen = $this->getSeriesMaxLen($sY1AxisIndex);
 			if ($opc['prmGraph']['Scale'][0] == 'textlog')
 			{
 				$Y1AxisLabelLen++;
@@ -229,7 +241,7 @@ class Graphic
 				if ($gType != 'XTEMPO')
 				{
 					// Return the width in pixels of the max value in series
-					$Y2AxisLabelLen = $this->getSeriesMaxLen($sY2AxisLabel) + 10;
+					$Y2AxisLabelLen = $this->getSeriesMaxLen($sY2AxisIndex) + 10;
 					$Y2AxisTitleMargin = $Y2AxisLabelLen + 15;
 					$ImgMarginRight = 0;
 					$ImgMarginRight += $Y2AxisTitleMargin;
@@ -297,10 +309,6 @@ class Graphic
 				}
 				$this->g->xaxis->SetTextLabelInterval($iInterval);
 				
-				if (isset($opc['prmGraph']['FieldLabel'][0]))
-				{
-					$sY1AxisLabel = $opc['prmGraph']['FieldLabel'][0];
-				}
 
 				$this->g->ygrid->Show(true,true);
 				$this->g->yaxis->SetTitle($sY1AxisLabel, 'middle');
@@ -314,10 +322,6 @@ class Graphic
 				}
 		        if (isset($opc['prmGraph']['Scale'][1]) && ($gType == '2TEMPO' || $gType == '2COMPAR'))
 		        {
-					if (isset($opc['prmGraph']['FieldLabel'][1]))
-					{
-						$sY2AxisLabel = $opc['prmGraph']['FieldLabel'][1];
-					}
 					$this->g->SetY2Scale($opc['prmGraph']['Scale'][1]);	// int, log
 					$this->g->y2grid->Show(true,true);
 					$this->g->y2axis->SetTitle($sY2AxisLabel, 'middle');
