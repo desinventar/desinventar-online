@@ -174,6 +174,7 @@ class Graphic
 					}
 				}
 			}
+			ksort($serie_keys);
 			foreach($val as $serie_key => $serie_values)
 			{
 				foreach(array_keys($serie_keys) as $value_key)
@@ -183,6 +184,7 @@ class Graphic
 						$val[$serie_key][$value_key] = 0;
 					}
 				}
+				ksort($val[$serie_key]);
 			}
 			$XAxisLabels = array_keys($serie_keys);
 		}
