@@ -510,6 +510,7 @@ function doMainMenuCreate()
 		jQuery('#divLoading').show();
 		setTimeout(function()
 		{
+			jQuery('body').trigger('cmdDatabaseLoadData');
 			jQuery('body').trigger('cmdMainMenuUpdate');
 			if (jQuery('#desinventarRegionId').val() != '')
 			{
