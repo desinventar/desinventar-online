@@ -273,22 +273,9 @@ class DIRegion extends DIObject
 
 		if ($a['NumberOfRecords'] > 0)
 		{
-			$Query = "SELECT MIN(DisasterBeginTime) AS MinDate, MAX(DisasterBeginTime) AS MaxDate FROM Disaster ".
-				"WHERE RecordStatus='PUBLISHED'";
-			foreach($this->session->q->dreg->query($Query) as $row)
-			{
-				$DataMinDate = $row['MinDate'];
-				$DataMaxDate = $row['MaxDate'];
-			}
-			// 2010-01-21 (jhcaiced) Fix some weird cases in MinDate/MaxDate
-			if (substr($DataMinDate, 5, 2) == '00')
-			{
-				$DataMinDate = substr($DataMinDate, 0, 4) . '-01-01';
-			}
-			if (substr($DataMaxDate, 5, 2) > '12')
-			{
-				$DataMaxDate = substr($DataMaxDate, 0, 4) . '-12-31';
-			}
+			$date_range = $this->session->getDateRange();
+			$DataMinDate = $date_range[0];
+			$DataMaxDate = $date_range[1];
 		
 			// 2010-07-06 (jhcaiced) Manually Calculate RegionLastUpdate
 			$sQuery = "SELECT MAX(RecordUpdate) AS MAX FROM Disaster;";
