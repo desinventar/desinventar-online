@@ -1409,6 +1409,15 @@ class UserSession
 				if ($datemin == '' ) { $datemin = $row['datemin']; }
 				if ($datemax == '' ) { $datemax = $row['datemax']; }
 			}
+			// 2010-01-21 (jhcaiced) Fix some weird cases in MinDate/MaxDate
+			if (substr($datemin, 5, 2) == '00')
+			{
+				$datemin = substr($datemin, 0, 4) . '-01-01';
+			}
+			if (substr($datemax, 5, 2) > '12')
+			{
+				$datemax = substr($datemax, 0, 4) . '-12-31';
+			}
 		}
 		if ($datemin == '') { $datemin = date('Y-m-d'); }
 		if ($datemax == '') { $datemax = date('Y-m-d'); }
@@ -1416,8 +1425,8 @@ class UserSession
 		$res[0] = substr($datemin, 0, 10);
 		$res[1] = substr($datemax, 0, 10);
 		return $res;
-	} //function
-} //class
+	} #function
+} #class UserSession
 
 
 </script>
