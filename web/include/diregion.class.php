@@ -261,7 +261,12 @@ class DIRegion extends DIObject
 		$this->session->open($this->get('RegionId'));
 
 		// Number of Datacards
-		$a['NumberOfRecords'] = $this->session->q->getNumDisasterByStatus('');
+		$record_status = 'PUBLISHED';
+		if ($this->session->UserRoleValue > 1)
+		{
+			$record_status .= ' ' . 'READY';
+		}
+		$a['NumberOfRecords'] = $this->session->getNumDisasterByStatus($record_status);
 
 		$DataMinDate = '';
 		$DataMaxDate = '';

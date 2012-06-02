@@ -1254,6 +1254,25 @@ class UserSession
 		             'RecordNumber' => $RecordNumber, 'RecordCount' => $RecordCount);
 	}
 
+	// Get number of datacards by status: PUBLISHED, DRAFT, ..
+	public function getNumDisasterByStatus($prm_record_status)
+	{
+		$query = 'SELECT COUNT(DisasterId) AS counter FROM Disaster';
+		if ($prm_record_status != '')
+		{
+			$query_status = '';
+			foreach(explode(' ', $prm_record_status) as $status)
+			{
+				if ($query_status != '') { $query_status .= ','; }
+				$query_status .= '"' . $status . '"';
+			}
+			$query_status = 'RecordStatus IN (' . $query_status . ')';
+			$query .= ' WHERE ' . $query_status;
+		}
+		$dat = $this->q->getresult($query);
+		return $dat['counter'];
+	}
+
 	public function getDisasterCount()
 	{
 		$iCount = 0;
