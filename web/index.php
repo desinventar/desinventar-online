@@ -1162,6 +1162,19 @@ switch ($cmd)
 		$template = 'index-' . $lg . '.tpl';
 		$t->display($template);
 	break;
+	case 'cmdGetVersion':
+		$answer = array();
+		$answer['Status'] = ERR_NO_ERROR;
+		$answer['Version'] = VERSION;
+		$answer['ReleaseDate'] = RELEASEDATE;
+		$answerstr = htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
+		if (isset($_GET['callback']))
+		{
+			# Enable support for JSONP requests...
+			$answerstr = $_GET['callback'] . '(' . $answerstr . ')';
+		}
+		echo $answerstr;
+	break;
 	case 'cmdSearchCountryList':
 		$answer = array();
 		$CountryList = $us->searchCountryList();
