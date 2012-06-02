@@ -147,8 +147,8 @@ else
 			{
 				$answer['DisasterId']      = $o->get('DisasterId');
 				$answer['DisasterSerial']  = $o->get('DisasterSerial');
-				$answer['RecordPublished'] = $us->q->getNumDisasterByStatus('PUBLISHED');
-				$answer['RecordReady']     = $us->q->getNumDisasterByStatus('READY');
+				$answer['RecordPublished'] = $us->getNumDisasterByStatus('PUBLISHED');
+				$answer['RecordReady']     = $us->getNumDisasterByStatus('READY');
 			}
 
 			if ($cmd == 'insertDICard')

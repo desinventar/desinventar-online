@@ -927,18 +927,6 @@ class Query //extends PDO
 		return $res;
 	}
 
-	// Get number of datacards by status: PUBLISHED, DRAFT, ..
-	public function getNumDisasterByStatus($status)
-	{
-		$sql = 'SELECT COUNT(DisasterId) AS counter FROM Disaster';
-		if ($status != '')
-		{
-			$sql .= ' WHERE RecordStatus="' . $status . '"';
-		}
-		$dat = $this->getresult($sql);
-		return $dat['counter'];
-	}
-
 	public function getLastUpdate()
 	{
 		$sql = "SELECT MAX(RecordUpdate) AS lastupdate FROM Disaster";
