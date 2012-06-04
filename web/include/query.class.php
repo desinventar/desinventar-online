@@ -1757,11 +1757,10 @@ class Query //extends PDO
 		if ($this->chkSQLWhere($dat))
 		{
 			$selec = implode(", ", $sel);
-			$where = implode(" ", $whr);
+			$where = implode(" ", $whr);			
 			if (!empty($whr))
 			{
-				#$where = "AND (1!=1 AND $where)";
-				$where = 'AND (' . $where . ')';
+				$where = "AND (1!=1 $where)";
 			}
 			$group = implode(', ', $grp);
 			$sql = $this->genSQLSelectData ($dat, $selec, '');
