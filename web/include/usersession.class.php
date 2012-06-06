@@ -1338,7 +1338,7 @@ class UserSession
 	function getGeographyItemsByLevel($prmGeographyLevel, $prmGeographyParentId)
 	{
 		$gItems = array();
-		$sQuery = 'SELECT GeographyId,GeographyName FROM Geography WHERE GeographyActive=1 AND GeographyLevel=' . $prmGeographyLevel;
+		$sQuery = 'SELECT GeographyId,GeographyName FROM Geography WHERE GeographyActive>0 AND GeographyLevel=' . $prmGeographyLevel;
 		if ($prmGeographyLevel > 0)
 		{
 			$sQuery .= ' AND SUBSTR(GeographyId,1,' . ($prmGeographyLevel*5) . ')="' . $prmGeographyParentId . '"';
