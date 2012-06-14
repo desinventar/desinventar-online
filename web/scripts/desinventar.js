@@ -1629,10 +1629,6 @@ function onReadyGeolevels()
 			jQuery(this).val(jQuery.trim(jQuery(this).val()));
 		});
 
-		jQuery('#frmGeolevel .GeoLevelLayerCode').val(jQuery('#frmGeolevel .GeoLevelLayerCode').val().toUpperCase());
-		jQuery('#frmGeolevel .GeoLevelLayerParentCode').val(jQuery('#frmGeolevel .GeoLevelLayerParentCode').val().toUpperCase());
-		jQuery('#frmGeolevel .GeoLevelLayerName').val(jQuery('#frmGeolevel .GeoLevelLayerName').val().toUpperCase());
-
 		if (bContinue && jQuery.trim(jQuery('#frmGeolevel .GeoLevelName').val()) == '')
 		{
 			jQuery('#frmGeolevel .GeoLevelName').highlight();
