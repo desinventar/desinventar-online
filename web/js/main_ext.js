@@ -569,6 +569,7 @@ function doMainMenuUpdate()
 		Ext.getCmp(jQuery(this).attr('id').replace('msg','mnu')).enable();
 	});
 	Ext.getCmp('mnuUser').setText(jQuery('span#msgUser').text());
+	jQuery('#divDatacardWindow span.UserInfo').text('');
 
 	// Enable menu items when a User is logged in
 	if (jQuery('#desinventarUserId').val() == '')
@@ -587,6 +588,7 @@ function doMainMenuUpdate()
 		Ext.getCmp('mnuUserLogin').hide();
 		Ext.getCmp('mnuUserChangeLogin').show();
 		Ext.getCmp('mnuUser').setText(jQuery('span#msgUser').text() + ' : ' + jQuery('#desinventarUserId').val());
+		jQuery('#divDatacardWindow span.UserInfo').text(jQuery('#desinventarUserId').val() + ' - ' + jQuery('#desinventarUserRole').val());
 	}
 
 	// Configure which options are visible using RoleValue
