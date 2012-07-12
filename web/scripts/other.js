@@ -1118,7 +1118,8 @@ var js2form = (function()
 
 	return js2form;
 
-})();/**
+})();
+/**
  * Copyright (c) 2010 Maxim Vasiliev
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -1183,7 +1184,8 @@ var js2form = (function()
 		}
 	}
 
-})(jQuery);/**
+})(jQuery);
+/**
  * jQuery jEC (jQuery Editable Combobox) 1.3.3
  * http://code.google.com/p/jquery-jec
  *
@@ -2063,6 +2065,7 @@ valueIsEditable, which*/
     });
 
 }(jQuery));
+
 // mredkj.com
 // created: 2001-07-11
 // last updated: 2001-09-07
