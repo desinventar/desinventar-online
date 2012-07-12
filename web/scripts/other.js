@@ -2333,7 +2333,7 @@ function viceversa(obj, onlyselected) { /*updated from version 1.3*/
 	}
 }
 
-function top(obj) { /*updated from version 1.2*/
+function list_top(obj) { /*updated from version 1.2*/
 	obj = (typeof obj == "string") ? document.getElementById(obj) : obj;
 	if (obj.tagName.toLowerCase() != "select" && obj.length < 2)
 		return false;
