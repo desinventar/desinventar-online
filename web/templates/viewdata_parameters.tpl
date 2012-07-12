@@ -40,7 +40,7 @@
 					</td>
 					<td style="width:20px;" class="center">
 						<div class="center">
-							<a class="button" onclick="top('_D+Field[]');"    ><span>&uarr;&uarr;</span></a><br/>
+							<a class="button" onclick="list_top('_D+Field[]');"    ><span>&uarr;&uarr;</span></a><br/>
 							<a class="button" onclick="upone('_D+Field[]');"  ><span>&uarr;</span></a><br/>
 							<a class="button" onclick="downone('_D+Field[]');"><span>&darr;</span></a><br/>
 							<a class="button" onclick="bottom('_D+Field[]');" ><span>&darr;&darr;</span></a><br/>
