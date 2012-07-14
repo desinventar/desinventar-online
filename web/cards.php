@@ -171,6 +171,7 @@ function form2disaster($form, $icmd)
 	$geogid = '';
 	foreach ($form as $k=>$i)
 	{
+		$i = str2js($i);
 		if (($icmd == CMD_NEW) || ($icmd == CMD_UPDATE))
 		{
 			if ((substr($k, 0, 1)  != '_') &&
