@@ -197,6 +197,13 @@ function onReadyDatacards()
 		return blockChars(event, jQuery(this).val(), 'integer:' + jQuery(this).attr('MaxLength'));
 	});
 
+	jQuery('div.Datacard').on('blur', '.inputLatLon', function (event) {
+		if (jQuery.trim(jQuery(this).val()) == '')
+		{
+			jQuery(this).val(0);
+		}
+	});
+
 	jQuery('.inputDouble').keydown(function(event) {
 		return blockChars(event, jQuery(this).val(), 'double:' + jQuery(this).attr('MaxLength'));
 	}).blur(function() {
@@ -1016,6 +1023,20 @@ function doDatacardSave()
 		if (error_count < 1)
 		{
 			jQuery('#DICard .inputDouble').each(function() {
+				answer = validateInputDouble(jQuery(this).val());
+				if (answer > 0)
+				{
+					if (jQuery(this).attr('old-bg-color') != '') {
+						jQuery(this).unhighlight();
+					}
+				}
+				else
+				{
+					jQuery(this).highlight();
+					error_count++;
+				}
+			});
+			jQuery('div.Datacard .inputLatLon').each(function() {
 				answer = validateInputDouble(jQuery(this).val());
 				if (answer > 0)
 				{

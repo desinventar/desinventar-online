@@ -167,7 +167,7 @@
 								<span title="{-#msgDatacard_InputDoubleTooltip#-}">
 									{-#msgDatacard_DisasterLatitude#-}<br />
 									<input id="DisasterLatitude" name="DisasterLatitude" type="text" size="10" maxlength="10" value="0.0"
-										class="line inputDouble" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsDisaster.DisasterLatitude[2]-}', '#d4baf6')" />
+										class="line inputLatLon" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsDisaster.DisasterLatitude[2]-}', '#d4baf6')" />
 								</span>
 								{-counter-}
 								<br />
@@ -175,7 +175,7 @@
 									{-#msgDatacard_DisasterLongitude#-}
 									<br />
 									<input id="DisasterLongitude" name="DisasterLongitude" type="text" size="10" maxlength="10" value="0.0"
-										class="line inputDouble" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsDisaster.DisasterLongitude[2]-}', '#d4baf6')" />
+										class="line inputLatLon" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsDisaster.DisasterLongitude[2]-}', '#d4baf6')" />
 								</span>
 								{-counter-}
 								<br />
