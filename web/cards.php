@@ -140,17 +140,20 @@ else
 			{
 				$i = ERR_DEFAULT_ERROR;
 			}
-			if ($i < 0)
+			fb($i);
+			if ($i > 0)
+			{
+				$us->releaseDatacard($_POST['DisasterId']);
+			}
+			else
 			{
 				$answer['Status']     = 'ERROR';
 				$answer['StatusCode'] = 'ERROR';
 				$answer['StatusMsg']  = showerror($i) . '(' . $i . ')';
 				$answer['ErrorCode']  = $i;				
 			}
-
 			if ($answer['Status'] == 'OK')
 			{
-				$us->releaseDatacard($_POST['DisasterId']);
 				$answer['DisasterId']      = $o->get('DisasterId');
 				$answer['DisasterSerial']  = $o->get('DisasterSerial');
 				$answer['RecordPublished'] = $us->getNumDisasterByStatus('PUBLISHED');

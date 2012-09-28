@@ -969,8 +969,6 @@ class UserSession
 	
 	public function isDatacardLocked($prmDisasterId)
 	{
-		// First delete old datacard locks...
-		$this->clearOldLocks();
 		$sReturn = '';
 		$sQuery = "SELECT * FROM UserLockList WHERE RecordId='" . $prmDisasterId . "'";
 		$sth = $this->q->core->prepare($sQuery);
