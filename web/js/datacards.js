@@ -59,6 +59,7 @@ function onReadyDatacards()
 						jQuery('#RecordCount').text(jQuery('#cardsRecordCount').val());
 						jQuery('#divRecordNavigationInfo').show();
 					}
+					jQuery('#DICard #Status').val('VIEW');
 				}
 				else
 				{
@@ -78,10 +79,10 @@ function onReadyDatacards()
 							displayDatacardStatusMsg('msgDatacardOutsideOfPeriod');
 						break;
 						default:
-							jQuery('#msgDatacardCustom').text(data.StatusMsg);
-							displayDatacardStatusMsg('msgDatacardCustom');
+							displayDatacardStatusMsg('msgDatacard_ErrorSaving');
 						break;
 					}
+					jQuery('#DICard #Status').val('EDIT');
 				}
 				showtip('','#ffffff');
 			},
@@ -1036,7 +1037,6 @@ function doDatacardSave()
 					error_count++;
 				}
 			});
-			/*
 			jQuery('div.Datacard .inputLatLon').each(function() {
 				answer = validateInputDouble(jQuery(this).val());
 				if (answer > 0)
@@ -1051,7 +1051,6 @@ function doDatacardSave()
 					error_count++;
 				}
 			});
-			*/
 			if (error_count > 0)
 			{
 				bContinue = 0;
@@ -1178,7 +1177,6 @@ function doDatacardSave()
 						{
 							displayDatacardStatusMsg('msgDatacardFieldsError');
 						}
-						jQuery('#DICard #Status').val('VIEW');
 					}
 				},
 				'json'

@@ -1855,6 +1855,12 @@
 			<Text LangIsoCode="por">Erro de rede; por favor tente novamente</Text>
 			<Text LangIsoCode="fre">Erreur de réseau; s'il vous plaît essayer à nouveau.</Text>
 		</Message>
+		<Message id="msgDatacard_ErrorSaving">
+			<Text LangIsoCode="eng">Error while saving data card, please check input data</Text>
+			<Text LangIsoCode="spa">Error al guardar ficha, por favor revise los datos ingresados</Text>
+			<Text LangIsoCode="por">Erro ao salvar dados do cartão, verifique os dados de entrada</Text>
+			<Text LangIsoCode="fre">Erreur lors de l'enregistrement de données de carte, s'il vous plaît vérifier les données d'entrée</Text>
+		</Message>
 		<Message id="msgDatacardNotFound">
 			<Text LangIsoCode="eng">Datacard request not exists</Text>
 			<Text LangIsoCode="spa">La ficha deseada no existe</Text>

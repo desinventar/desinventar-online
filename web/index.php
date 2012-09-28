@@ -219,7 +219,7 @@ switch ($cmd)
 		$disaster_id = getParameter('DisasterId','');
 		if ($disaster_id != '')
 		{
-			$us->releaseDatacard($_GET['DisasterId']);
+			$us->releaseDatacard($disaster_id);
 		}
 	break;
 	case 'cmdGeographyGetItemsById':
@@ -561,6 +561,7 @@ switch ($cmd)
 				$params['MaxYear']       = substr($ydb[1], 0, 4);
 			}
 		}
+		$us->clearLocks();
 		$answer['params'] = $params;
 		$answer['Status'] = $iReturn;
 		echo json_encode($answer);

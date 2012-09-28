@@ -36,6 +36,7 @@
 					<span class="datacardStatusMsg" id="msgDatacardInvalidGeography">{-#msgDatacardInvalidGeography#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardWithoutEffects">{-#msgDatacardWithoutEffects#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardOutsideOfPeriod">{-#msgDatacardOutsideOfPeriod#-}</span>
+					<span class="datacardStatusMsg" id="msgDatacard_ErrorSaving">{-#msgDatacard_ErrorSaving#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardNetworkError">{-#msgDatacardNetworkError#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardInsertOk">{-#tdccreated#-}</span>
 					<span class="datacardStatusMsg" id="msgDatacardUpdateOk">{-#tdcupdated#-}</span>
