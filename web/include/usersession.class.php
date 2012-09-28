@@ -308,8 +308,6 @@ class UserSession
 	public function open($prmRegionId, $prmDBFile = '')
 	{
 		$iReturn = ERR_NO_ERROR;
-		$this->clearLocks();
-		
 		$this->RegionId = '';
 		$this->UserRole = '';
 		$this->UserRoleValue = ROLE_NONE;

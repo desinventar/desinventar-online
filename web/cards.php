@@ -140,7 +140,6 @@ else
 			{
 				$i = ERR_DEFAULT_ERROR;
 			}
-			fb($i);
 			if ($i > 0)
 			{
 				$us->releaseDatacard($_POST['DisasterId']);
