@@ -216,7 +216,11 @@ switch ($cmd)
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
 	case 'cmdDatacardRelease':
-		$us->releaseDatacard($_GET['DisasterId']);
+		$disaster_id = getParameter('DisasterId','');
+		if ($disaster_id != '')
+		{
+			$us->releaseDatacard($_GET['DisasterId']);
+		}
 	break;
 	case 'cmdGeographyGetItemsById':
 		$answer = array();

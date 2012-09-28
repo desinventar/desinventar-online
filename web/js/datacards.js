@@ -1036,6 +1036,7 @@ function doDatacardSave()
 					error_count++;
 				}
 			});
+			/*
 			jQuery('div.Datacard .inputLatLon').each(function() {
 				answer = validateInputDouble(jQuery(this).val());
 				if (answer > 0)
@@ -1050,6 +1051,7 @@ function doDatacardSave()
 					error_count++;
 				}
 			});
+			*/
 			if (error_count > 0)
 			{
 				bContinue = 0;
@@ -1189,7 +1191,7 @@ function doDatacardCancel()
 {
 	if (jQuery('#DICard #Status').val() == 'EDIT')
 	{
-		jQuery.post(jQuery('#desinventarURL').val() + '/cards.php',
+		jQuery.post(jQuery('#desinventarURL').val() + '/',
 			{
 				'cmd'        : 'cmdDatacardRelease',
 				'RegionId'   : jQuery('#desinventarRegionId').val(),
