@@ -192,8 +192,8 @@ switch ($cmd)
 	case 'cmdDatacardLock':
 		$DisasterId = getParameter('DisasterId','');
 		$answer = array();
-		$iReturn = ERR_NO_ERROR; if ($desinventarUserRoleValue <
-		ROLE_USER) {
+		$iReturn = ERR_NO_ERROR;
+		if ($desinventarUserRoleValue < ROLE_USER) {
 			$iReturn = ERR_DEFAULT_ERROR;
 		}
 		if ($iReturn > 0)
