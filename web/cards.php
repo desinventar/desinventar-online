@@ -110,7 +110,6 @@ else
 			}
 			$answer['StatusMsg']  = '';
 			$answer['ErrorCode']  = ERR_NO_ERROR;
-			$us->releaseDatacard($_POST['DisasterId']);
 			if ($cmd == 'insertDICard')
 			{
 				$data = form2disaster($_POST, CMD_NEW);
@@ -126,15 +125,21 @@ else
 				$o->set('RecordCreation', gmdate('c'));
 			}
 			$o->set('RecordUpdate', gmdate('c'));
-			if ($cmd == 'insertDICard')
+			try
 			{
-				$i = $o->insert();
+				if ($cmd == 'insertDICard')
+				{
+					$i = $o->insert();
+				}
+				else
+				{
+					$i = $o->update();
+				}
 			}
-			else
+			catch (Exception $e)
 			{
-				$i = $o->update();
+				$i = ERR_DEFAULT_ERROR;
 			}
-
 			if ($i < 0)
 			{
 				$answer['Status']     = 'ERROR';
@@ -145,6 +150,7 @@ else
 
 			if ($answer['Status'] == 'OK')
 			{
+				$us->releaseDatacard($_POST['DisasterId']);
 				$answer['DisasterId']      = $o->get('DisasterId');
 				$answer['DisasterSerial']  = $o->get('DisasterSerial');
 				$answer['RecordPublished'] = $us->getNumDisasterByStatus('PUBLISHED');
