@@ -200,7 +200,6 @@ function form2disaster($form, $icmd)
 	} //foreach
 	// On Update
 	$data['DisasterId'] = $form['DisasterId'];
-	$data['RecordCreation'] = $form['RecordCreation'];
 	if ($icmd == CMD_NEW)
 	{
 		// New Disaster
