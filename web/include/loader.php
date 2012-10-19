@@ -9,6 +9,10 @@ if (! isset($_SERVER['DESINVENTAR_WEB']))
 {
 	$_SERVER['DESINVENTAR_WEB'] = dirname(dirname(__FILE__));
 }
+if (! isset($_SERVER['DESINVENTAR_SRC']))
+{
+	$_SERVER['DESINVENTAR_SRC'] = dirname(dirname(dirname(__FILE__)));
+}
 
 // This is the version of the software
 define('MAJORVERSION', '2012');
@@ -133,6 +137,7 @@ if (isset($_SERVER['DESINVENTAR_MODE']))
 }
 
 define('BASE'    , $_SERVER['DESINVENTAR_WEB']);
+define('SRCDIR'  , $_SERVER['DESINVENTAR_SRC']);
 define('WWWDIR'  , $_SERVER['DESINVENTAR_WWWDIR']);
 define('WWWDATA' , '/desinventar-data');
 define('WWWURL'  , '/');
@@ -160,11 +165,12 @@ require_once(BASE . '/include/digeography.class.php');
 require_once(BASE . '/include/digeolevel.class.php');
 require_once(BASE . '/include/digeocarto.class.php');
 require_once(BASE . '/include/didisaster.class.php');
+require_once(SRCDIR . '/external/lib.uuid.php');
 
 // SETTINGS
 date_default_timezone_set('UTC');
 $time_start = microtime_float();
-$SessionId = uuid();
+$SessionId = (string)UUID::mint(4);
 if (MODE != 'command')
 {
 	// Session Management

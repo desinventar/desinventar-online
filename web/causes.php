@@ -71,7 +71,7 @@ switch($cmd)
 			}
 			$o = new DICause($us);
 			$o->setFromArray($info);
-			$o->set('CauseId', uuid());
+			$o->set('CauseId', (string)UUID::mint(4));
 			$o->set('CausePredefined', 0);
 			$i = $o->insert();
 			showResult($i, $t);

@@ -79,7 +79,7 @@ class DIDisaster extends DIRecord
 		}
 		$this->set('EventPredefined', 0);
 		$this->set('EventActive', 1);
-		$this->set('DisasterId', uuid());
+		$this->set('DisasterId', (string)UUID::mint(4));
 		$this->set('RecordStatus', 'PUBLISHED');
 
 		$num_args = func_num_args();
