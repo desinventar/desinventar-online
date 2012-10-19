@@ -110,7 +110,6 @@ else
 			}
 			$answer['StatusMsg']  = '';
 			$answer['ErrorCode']  = ERR_NO_ERROR;
-			fb($_POST);
 			if ($cmd == 'insertDICard')
 			{
 				$data = form2disaster($_POST, CMD_NEW);
@@ -120,7 +119,6 @@ else
 				$data = form2disaster($_POST, CMD_UPDATE);
 			}
 			$data['RecordAuthor'] = $us->UserId;
-			fb($data);
 			$o = new DIDisaster($us, $data['DisasterId']);
 			$o->setFromArray($data);
 			if ($cmd == 'insertDICard')
