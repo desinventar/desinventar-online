@@ -8,6 +8,7 @@ require_once('include/loader.php');
 require_once('include/query.class.php');
 require_once('include/diregion.class.php');
 require_once('include/didisaster.class.php');
+
 $RegionId = getParameter('RegionId', getParameter('r',''));
 if ($RegionId == '')
 {
@@ -192,7 +193,7 @@ function form2disaster($form, $icmd)
 		// New Disaster
 		if ($data['DisasterId'] == '')
 		{
-			$data['DisasterId'] = uuid();
+			$data['DisasterId'] = (string)UUID::mint(4);
 		}
 		$data['RecordCreation'] = $data['RecordUpdate'];
 	}

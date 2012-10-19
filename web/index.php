@@ -299,7 +299,7 @@ switch ($cmd)
 			$o->setFromArray($info);
 			if ($o->get('EventId') == '')
 			{
-				$o->set('EventId', uuid());
+				$o->set('EventId', (string)UUID::mint(4));
 				$iReturn = $o->insert();
 			}
 			$iReturn = $o->update();
@@ -365,7 +365,7 @@ switch ($cmd)
 			$o->setFromArray($info);
 			if ($o->get('CauseId') == '')
 			{
-				$o->set('CauseId', uuid());
+				$o->set('CauseId', (string)UUID::mint(4));
 				$iReturn = $o->insert();
 			}
 			$iReturn = $o->update();

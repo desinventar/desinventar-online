@@ -18,7 +18,7 @@ class DISync extends DIRecord
 		                      "SyncURL/STRING," .
 		                      "SyncSpec/STRING";
 		parent::__construct($prmSession);
-		$this->set('SyncId', uuid());
+		$this->set('SyncId', (string)UUID::mint(4));
 		$num_args = func_num_args();
 		if ($num_args >= 2)
 		{

@@ -27,7 +27,7 @@ class DIEvent extends DIRecord
 		parent::__construct($prmSession);
 		$this->set("EventPredefined", 0);
 		$this->set("EventActive", 1);
-		$this->set("EventId", uuid());
+		$this->set("EventId", (string)UUID::mint(4));
 		$num_args = func_num_args();
 		if ($num_args >= 2)
 		{

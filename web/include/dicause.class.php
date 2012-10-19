@@ -27,7 +27,7 @@ class DICause extends DIRecord
 		parent::__construct($prmSession);
 		$this->set("CausePredefined", 0);
 		$this->set("CauseActive", 1);
-		$this->set("CauseId", uuid());
+		$this->set("CauseId", (string)UUID::mint(4));
 
 		$num_args = func_num_args();
 		if ($num_args >= 2)
