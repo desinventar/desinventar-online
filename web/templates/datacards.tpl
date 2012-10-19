@@ -64,7 +64,6 @@
 	</table>
 	<form id="DICard" action="cards.php" method="post" target="dic">
 		<input type="hidden" id="DisasterId"         name="DisasterId" value="" />
-		<input type="hidden" id="RecordAuthor"       name="RecordAuthor" value="" />
 		<input type="hidden" id="PrevDisasterSerial" name="PrevDisasterSerial" value="" />
 		<input type="hidden" id="DatacardCommand"    name="DatacardCommand" value="" />
 		<input type="hidden" id="Status"             name="Status" value="" />
