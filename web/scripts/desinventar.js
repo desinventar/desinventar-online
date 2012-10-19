@@ -2839,7 +2839,7 @@ function onReadyDatacards()
 		doDatacardNew();
 		jQuery('#txtDatacardFind').val('');
 		jQuery('#GeographyId').val('');
-		jQuery('#DisasterId').val(Math.uuid());
+		jQuery('#DisasterId').val('');
 		return false;
 	});
 	
@@ -3502,7 +3502,7 @@ function doDatacardFind()
 
 function doDatacardClear()
 {
-	jQuery('#DisasterId').val();
+	jQuery('#DisasterId').val('');
 	$('DICard').reset();
 	jQuery('#DatacardCommand').val('insertDICard');
 	jQuery('#cardsRecordNumber').val(0);

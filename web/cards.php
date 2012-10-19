@@ -110,6 +110,7 @@ else
 			}
 			$answer['StatusMsg']  = '';
 			$answer['ErrorCode']  = ERR_NO_ERROR;
+			fb($_POST);
 			if ($cmd == 'insertDICard')
 			{
 				$data = form2disaster($_POST, CMD_NEW);
@@ -118,6 +119,8 @@ else
 			{
 				$data = form2disaster($_POST, CMD_UPDATE);
 			}
+			$data['RecordAuthor'] = $us->UserId;
+			fb($data);
 			$o = new DIDisaster($us, $data['DisasterId']);
 			$o->setFromArray($data);
 			if ($cmd == 'insertDICard')
@@ -180,26 +183,12 @@ function form2disaster($form, $icmd)
 	foreach ($form as $k=>$i)
 	{
 		$i = str2js($i);
-		if (($icmd == CMD_NEW) || ($icmd == CMD_UPDATE))
-		{
-			if ((substr($k, 0, 1)  != '_') &&
-			    (substr($k, 0, 12) != 'RecordAuthor') &&
-			    (substr($k, 0, 19) != 'GeographyId')
-			   )
-			{
-			    $data[$k] = $i;
-			}
-			else
-			{
-				if (substr($k, 0, 19) == 'GeographyId')
-				{
-					$geogid = $i;
-				}
-			}
-		} //if
+		$data[$k] = $i;
 	} //foreach
+
 	// On Update
 	$data['DisasterId'] = $form['DisasterId'];
+	$data['RecordUpdate'] = gmdate('c');
 	if ($icmd == CMD_NEW)
 	{
 		// New Disaster
@@ -207,25 +196,20 @@ function form2disaster($form, $icmd)
 		{
 			$data['DisasterId'] = uuid();
 		}
-		$data['RecordCreation'] = date('Y-m-d H:i:s');
+		$data['RecordCreation'] = $data['RecordUpdate'];
 	}
-	$data['RecordAuthor'] = $form['RecordAuthor'];
-	$data['RecordUpdate'] = gmdate('c');
-	$c = '';
 
 	// Disaster date
 	$str = sprintf('%04d', $form['DisasterBeginTime'][0]);
-	if (!empty($form[$c .'DisasterBeginTime'][1]))
+	if (!empty($form['DisasterBeginTime'][1]))
 	{
 		$str .= '-' . sprintf('%02d', $form['DisasterBeginTime'][1]);
-		if (!empty($form[$c .'DisasterBeginTime'][2]))
+		if (!empty($form['DisasterBeginTime'][2]))
 		{
 			$str .= '-' . sprintf('%02d', $form['DisasterBeginTime'][2]);
 		}
 	}
 	$data['DisasterBeginTime'] = $str;
-	// Disaster Geography
-	$data['GeographyId'] = $geogid;
 	return $data;
 } // function
 
