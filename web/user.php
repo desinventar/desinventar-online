@@ -82,15 +82,18 @@ switch ($cmd)
 		{
 			if ($us->sendPasswdReminder($_GET['UserEMail']) != '')
 			{
+				$t->force_compile   = true; # Force this template to always compile
 				$t->display('user_msgsend.tpl');
 			}
 			else
 			{
+				$t->force_compile   = true; # Force this template to always compile
 				$t->display('user_errsend.tpl');
 			}
 		}
 		else
 		{
+			$t->force_compile   = true; # Force this template to always compile
 			$t->display('user_passwdreminder.tpl');
 		}
 	break;
@@ -115,6 +118,7 @@ switch ($cmd)
 	break;
 	case 'changepasswd':
 		$t->assign('UserId', $us->UserId);
+		$t->force_compile   = true; # Force this template to always compile
 		$t->display('user_changepasswd.tpl');
 	break;
 	case 'updatepasswd':
@@ -184,11 +188,13 @@ switch ($cmd)
 		// View login window
 		if (checkAnonSess() || $us->UserId == '')
 		{
+			$t->force_compile   = true; # Force this template to always compile
 			$t->display('user_login.tpl');
 		}
 		else
 		{
 			$t->assign('user', $us->UserId);
+			$t->force_compile   = true; # Force this template to always compile
 			$t->display('user_mainpage.tpl');
 		}
 	break;

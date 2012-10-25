@@ -41,6 +41,7 @@ if (isset($_GET['u']))
 		$status = 'red';
 	}
 	$t->assign('stat', $status);
+	$t->force_compile   = true; # Force this template to always compile
 	$t->display('cards_updater.tpl');
 }
 else

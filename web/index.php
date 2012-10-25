@@ -1165,6 +1165,7 @@ switch ($cmd)
 		$t->assign('CountryList' , $CountryList);
 		$t->assign('regionlist'  , $RegionList);
 		$template = 'index-' . $lg . '.tpl';
+		$t->force_compile   = true; # Force this template to always compile
 		$t->display($template);
 	break;
 	case 'cmdGetVersion':
@@ -1289,6 +1290,7 @@ switch ($cmd)
 		echo json_encode(array('Status' => 'OK', 'RecordCount' => $RecordCount));
 	break;
 	case 'getGraphParameters':
+		$t->force_compile   = true; # Force this template to always compile
 		$t->display('graphparameters.tpl');
 	break;
 	case 'cmdDatabaseExport':

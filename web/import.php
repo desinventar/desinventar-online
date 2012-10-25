@@ -166,6 +166,7 @@ else
 }
 
 $t->assign('RegionId', $RegionId);
+$t->force_compile   = true; # Force this template to always compile
 $t->display('import.tpl');
 
 </script>
