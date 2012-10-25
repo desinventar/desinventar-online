@@ -135,6 +135,7 @@ switch ($cmd)
 } //switch
 $t->assign('reg', $RegionId);
 $t->assign('dic', $us->q->queryLabelsFromGroup('DB', $lg));
+$t->force_compile   = true; # Force this template to always compile
 $t->display('geolevel.tpl');
 
 </script>

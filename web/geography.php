@@ -90,6 +90,7 @@ switch ($cmd)
 } // switch
 $t->assign('reg', $reg);
 $t->assign('dic', $us->q->queryLabelsFromGroup('DB', $lg));
+$t->force_compile   = true; # Force this template to always compile
 $t->display('geography.tpl');
 
 </script>

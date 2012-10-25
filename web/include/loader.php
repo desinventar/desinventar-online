@@ -72,18 +72,11 @@ if (isset($_SERVER['HTTP_HOST']))
 		}
 		$_SERVER['DISTRO'] = $distro;
 
-		switch($distro)
+		if (! isset($_SERVER['DESINVENTAR_CACHEDIR']))
 		{
-			case 'debian':
-				//smarty3 package location
-				define('SMARTYDIR', '/usr/share/php/smarty3');
-				$_SERVER['DESINVENTAR_CACHEDIR'] = '/var/cache/smarty3/desinventar';
-			break;
-			default:
-				define('SMARTYDIR', '/usr/share/php/Smarty');
-				$_SERVER['DESINVENTAR_CACHEDIR'] = '/var/cache/Smarty/desinventar';
-			break;
+			$_SERVER['DESINVENTAR_CACHEDIR'] = '/var/cache/Smarty/desinventar';
 		}
+		define('SMARTYDIR', '/usr/share/php/Smarty');
 		define('JPGRAPHDIR', '/usr/share/php/jpgraph');
 		define('FONTSET' , '/usr/share/fonts/liberation/fonts.txt');
 		define('TEMP', '/var/tmp/desinventar');
