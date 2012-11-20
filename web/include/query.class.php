@@ -678,7 +678,7 @@ class Query //extends PDO
 		{
 			$sqlev .= ' WHERE GeoLevelId=' . $lev . ' ';
 		}
-		$sqlev .= 'ORDER BY GeoLevelId';
+		$sqlev .= ' ORDER BY GeoLevelId';
 
 		$sqcar  = 'SELECT GeographyId, GeoLevelId, GeoLevelLayerFile, GeoLevelLayerCode, GeoLevelLayerName FROM GeoCarto ';
 		$WhereSQL = '';
@@ -710,7 +710,16 @@ class Query //extends PDO
 
 		$data = array();
 		$rcar = $this->getassoc($sqcar);
-		$rlev = $this->dreg->query($sqlev);
+		$rlev = array();
+		try 
+		{
+			$rlev = $this->dreg->query($sqlev);
+		}
+		catch (Exception $e)
+		{
+			showErrorMsg($sqlev, $e);
+		}
+		
 		foreach($rlev as $row)
 		{
 			$lay = array();
