@@ -15,9 +15,9 @@ if (! isset($_SERVER['DESINVENTAR_SRC']))
 }
 
 // This is the version of the software
-define('MAJORVERSION', '2012');
-define('MINORVERSION', '05.1103');
-define('RELEASEDATE' , '2012-10-19');
+define('MAJORVERSION', '2013');
+define('MINORVERSION', '01.1186');
+define('RELEASEDATE' , '2013-01-01');
 define('VERSION'     , MAJORVERSION . '.' . MINORVERSION);
 define('JSVERSION'   , VERSION);
 
