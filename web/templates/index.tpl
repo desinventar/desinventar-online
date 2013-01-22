@@ -72,5 +72,8 @@
 		<!-- General App Information -->
 		{-include file="desinventarinfo.tpl"-}
 		{-include file="desinventarmenu.tpl"-}
+		{-if $appOptions.IsOnline > 0-}
+			{-include file="statcounter.tpl"-}
+		{-/if-}		
 	</body>
 </html>
