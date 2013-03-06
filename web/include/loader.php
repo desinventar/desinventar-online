@@ -288,6 +288,6 @@ if (MODE != 'command')
 	$t->assign('desinventarUserId'      , $us->UserId);
 	$t->assign('desinventarUserFullName', $us->getUserFullName());
 	// OpenLayers Location
-	$t->assign('desinventarOpenLayersURL', '/openlayers');
+	$t->assign('desinventarOpenLayersURL', '/openlayers/2.11');
 }
 </script>
