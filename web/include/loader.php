@@ -77,7 +77,7 @@ if (isset($_SERVER['HTTP_HOST']))
 			$_SERVER['DESINVENTAR_CACHEDIR'] = '/var/cache/Smarty/desinventar';
 		}
 		define('SMARTYDIR', '/usr/share/php/Smarty');
-		define('JPGRAPHDIR', '/usr/share/php/jpgraph');
+		define('JPGRAPHDIR', '/usr/share/php/jpgraph/3.0.7');
 		define('FONTSET' , '/usr/share/fonts/liberation/fonts.txt');
 		define('TEMP', '/var/tmp/desinventar');
 		if (! isset($_SERVER['DESINVENTAR_WEB']))
