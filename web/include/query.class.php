@@ -272,9 +272,9 @@ class Query //extends PDO
 		       ' WHERE LangIsoCode="' . $lg . '" ORDER BY EventName';
 		$data = array();
 		$sth = $this->base->prepare($sql);
-		$this->base->beginTransaction();
 		try
 		{
+    		$this->base->beginTransaction();
 			$sth->execute();
 			$this->base->commit();
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
@@ -283,6 +283,7 @@ class Query //extends PDO
 				                               1 => $row['EventDesc']));
 				$data[$row['EventId']] = $row;
 			}
+			$sth->closeCursor();
 		}
 		catch (Exception $e)
 		{

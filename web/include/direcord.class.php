@@ -232,15 +232,16 @@ class DIRecord extends DIObject
 		$iReturn = ERR_DEFAULT_ERROR;
 		$query = $this->getSelectQuery();
 		$sth = $this->conn->prepare($query);
-		$this->conn->beginTransaction();
 		try
 		{
+    		$this->conn->beginTransaction();
 			$sth->execute();
 			$this->conn->commit();
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
 				$iReturn = ERR_NO_ERROR;
 			} //while
+			$sth->closeCursor();
 		}
 		catch (Exception $e)
 		{
@@ -256,9 +257,9 @@ class DIRecord extends DIObject
 		$iReturn = ERR_OBJECT_NOT_FOUND;
 		$sQuery = $this->getSelectQuery($prmTableName);
 		$sth = $this->conn->prepare($sQuery);
-		$this->conn->beginTransaction();
 		try
 		{
+    		$this->conn->beginTransaction();
 			$sth->execute();
 			$this->conn->commit();
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
@@ -280,6 +281,7 @@ class DIRecord extends DIObject
 				}
 				$iReturn = ERR_NO_ERROR;
 			} //while
+			$sth->closeCursor();
 		}
 		catch (PDOException $e)
 		{
@@ -326,9 +328,9 @@ class DIRecord extends DIObject
 		$iReturn = ERR_NO_ERROR;
 		$sQuery = $this->getInsertQuery($sTableName);
 		$sth = $this->conn->prepare($sQuery);
-		$this->conn->beginTransaction();
 		try
 		{
+    		$this->conn->beginTransaction();
 			$sth->execute();
 			$this->conn->commit();
 			$iReturn = ERR_NO_ERROR;
@@ -361,9 +363,9 @@ class DIRecord extends DIObject
 		$iReturn = ERR_NO_ERROR;
 		$sQuery = $this->getUpdateQuery($prmTableName, $prmFieldList);
 		$sth = $this->conn->prepare($sQuery);
-		$this->conn->beginTransaction();
 		try
 		{
+    		$this->conn->beginTransaction();
 			$sth->execute();
 			$this->conn->commit();
 			$iReturn = ERR_NO_ERROR;
@@ -421,9 +423,9 @@ class DIRecord extends DIObject
 		{
 			$sQuery = $this->getDeleteQuery();
 			$sth = $this->conn->prepare($sQuery);
-			$this->conn->beginTransaction();
 			try
 			{	
+    			$this->conn->beginTransaction();
 				$sth->execute();
 				$this->conn->commit();
 				$iReturn = ERR_NO_ERROR;
@@ -535,15 +537,16 @@ class DIRecord extends DIObject
 		$quote1 = '"';
 		$sQuery = 'SELECT * FROM ' . $this->getTableName() . ' WHERE ' . $this->getIdWhereQuery();
 		$sth = $this->conn->prepare($sQuery);
-		$this->conn->beginTransaction();
 		try
 		{
+    		$this->conn->beginTransaction();
 			$sth->execute();
 			$this->conn->commit();
 			while($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
 				$iReturn = $ErrCode;
 			} //while
+			$sth->closeCursor();
 		}
 		catch (Exception $e)
 		{
@@ -574,9 +577,9 @@ class DIRecord extends DIObject
 			$sQuery .= ' AND LangIsoCode="' . $this->get('LangIsoCode') . '"';
 		}
 		$sth = $this->conn->prepare($sQuery);
-		$this->conn->beginTransaction();
 		try
 		{
+    		$this->conn->beginTransaction();
 			$sth->execute();
 			$this->conn->commit();
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
@@ -605,6 +608,7 @@ class DIRecord extends DIObject
 					$iReturn = $ErrCode;
 				}
 			} //while
+			$sth->closeCursor();
 		}
 		catch (Exception $e)
 		{
@@ -629,15 +633,16 @@ class DIRecord extends DIObject
 		$sQuery = 'SELECT ' . $FieldDst . ' FROM ' . $TableName . ' WHERE ' . $FieldDst . '=' . $quote . $Value .  $quote;
 		$iReturn = $ErrCode;
 		$sth = $this->conn->prepare($sQuery);
-		$this->conn->beginTransaction();
 		try
 		{
+    		$this->conn->beginTransaction();
 			$sth->execute();
 			$this->conn->commit();
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
 				$iReturn = ERR_NO_ERROR;
 			}
+			$sth->closeCursor();
 		}
 		catch (Exception $e)
 		{
