@@ -162,9 +162,9 @@ class DIRegionDB extends DIRegion
 			
 			// Copy DisasterId from EEData, Other Fields are Ignored...
 			$sth = $this->conn->prepare("INSERT INTO EEData (DisasterId) SELECT DisasterId FROM Disaster WHERE GeographyId LIKE '" . $RegionItemGeographyId . "%'");
-			$this->conn->beginTransaction();
 			try
 			{
+    			$this->conn->beginTransaction();
 				$sth->execute();
 				$this->conn->commit();
 			}
@@ -355,9 +355,9 @@ class DIRegionDB extends DIRegion
 		// Delete Existing Elements
 		$query = 'DELETE FROM Geography WHERE GeographyCode=:GeographyCode';
 		$sth = $this->conn->prepare($query);
-		$this->conn->beginTransaction();
 		try
 		{
+    		$this->conn->beginTransaction();
 			$sth->bindParam(':GeographyCode', $prmRegionItemId, PDO::PARAM_STR);
 			$sth->execute();
 			$this->conn->commit();
@@ -709,9 +709,9 @@ class DIRegionDB extends DIRegion
 			{
 				$Query = 'UPDATE Geography SET GeographyName=:GeographyName WHERE GeographyLevel=0 AND GeographyCode=:GeographyCode';
 				$sth = $this->conn->prepare($Query);
-				$this->conn->beginTransaction();
 				try
 				{
+    				$this->conn->beginTransaction();
 					$sth->bindParam(':GeographyName', $prmRegionItemGeographyName, PDO::PARAM_STR);
 					$sth->bindParam(':GeographyCode', $prmRegionItemId, PDO::PARAM_STR);
 					$sth->execute();

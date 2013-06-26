@@ -45,9 +45,9 @@ class UserSession
 		$iReturn = ERR_UNKNOWN_ERROR;
 		$sQuery = 'SELECT * FROM UserSession WHERE SessionId=:SessionId';
 		$sth = $this->q->core->prepare($sQuery);
-		$this->q->core->beginTransaction();
 		try
 		{
+    		$this->q->core->beginTransaction();
 			$sth->bindParam(':SessionId', $prmSessionId, PDO::PARAM_STR);
 			$sth->execute();
 			$this->q->core->commit();
@@ -60,6 +60,7 @@ class UserSession
 				$this->dLastUpdate = $row['LastUpdate'];
 				$iReturn = ERR_NO_ERROR;
 			} //while
+			$sth->closeCursor();
 		}
 		catch (Exception $e)
 		{
@@ -95,9 +96,9 @@ class UserSession
 		$sth1 = $this->q->core->prepare($sQuery1);
 		$sQuery2 = 'UPDATE UserLockList SET LastUpdate=:LastUpdate WHERE SessionId=:SessionId';
 		$sth2 = $this->q->core->prepare($sQuery2);
-		$this->q->core->beginTransaction();
 		try
 		{
+    		$this->q->core->beginTransaction();
 			$sth1->bindParam(':SessionId', $this->sSessionId, PDO::PARAM_STR);
 			$sth1->bindParam(':LastUpdate', $this->dLastUpdate, PDO::PARAM_STR);
 			$sth1->execute();
@@ -136,9 +137,9 @@ class UserSession
 		$sQuery = 'UPDATE UserSession SET UserId=:UserId ' . 
 		          'WHERE SessionId=:SessionId';
 		$sth = $this->q->core->prepare($sQuery);
-		$this->q->core->beginTransaction();
 		try
 		{
+    		$this->q->core->beginTransaction();
 			if ($sth->execute(array(':UserId'    => $prmUserId,
 			                    ':SessionId' => $this->sSessionId)))
 			{
@@ -208,9 +209,9 @@ class UserSession
 		$sQuery = 'INSERT INTO UserSession (SessionId,RegionId,UserId,Valid,LangIsoCode,Start,LastUpdate) ' .
 		          ' VALUES (:SessionId,:RegionId,:UserId,:Valid,:LangIsoCode,:Start,:LastUpdate)';
 		$sth = $this->q->core->prepare($sQuery);
-		$this->q->core->beginTransaction();
 		try
 		{
+    		$this->q->core->beginTransaction();
 			$sth->bindParam(':SessionId'  , $this->sSessionId, PDO::PARAM_STR);
 			$sth->bindValue(':RegionId'   , '', PDO::PARAM_STR);
 			$sth->bindParam(':UserId'     , $this->UserId, PDO::PARAM_STR);
@@ -250,9 +251,9 @@ class UserSession
 		$sth1 = $this->q->core->prepare($sQuery);
 		$sQuery = "UPDATE UserLockList SET LastUpdate='" . $this->dLastUpdate . "' WHERE SessionId='" . $this->sSessionId . "'";
 		$sth2 = $this->q->core->prepare($sQuery);
-		$this->q->core->beginTransaction();
 		try
 		{
+    		$this->q->core->beginTransaction();
 			$sth->bindParam(':SessionId'  , $this->sSessionId , PDO::PARAM_STR);
 			$sth->bindValue(':RegionId'   , ''                , PDO::PARAM_STR);
 			$sth->bindParam(':UserId'     , $this->UserId     , PDO::PARAM_STR);
@@ -281,9 +282,9 @@ class UserSession
 		$iReturn = ERR_DEFAULT_ERROR;
 		$sQuery = 'DELETE FROM UserSession WHERE SessionId=:SessionId';
 		$sth = $this->q->core->prepare($sQuery);
-		$this->q->core->beginTransaction();
 		try
 		{
+    		$this->q->core->beginTransaction();
 			$sth->bindParam(':SessionId'  , $this->sSessionId, PDO::PARAM_STR);
 			$sth->execute();
 			$this->q->core->commit();
@@ -353,9 +354,9 @@ class UserSession
 		}
 		$sQuery = 'SELECT * FROM User WHERE (UserId=:UserId OR UserNotes LIKE :UserNotes) AND UserPasswd=:UserPasswd';
 		$sth = $this->q->core->prepare($sQuery);
-		$this->q->core->beginTransaction();
 		try
 		{
+    		$this->q->core->beginTransaction();
 			$sth->bindParam(':UserId', $prmUserId, PDO::PARAM_STR);
 			$sth->bindValue(':UserNotes', '%(UserName=' . $prmUserId. ')%', PDO::PARAM_STR);
 			$sth->bindParam(':UserPasswd', $prmUserPasswd, PDO::PARAM_STR);
@@ -365,6 +366,7 @@ class UserSession
 			{
 				$UserId = $row['UserId'];
 			}
+			$sth->closeCursor();
 		}
 		catch (Exception $e)
 		{
@@ -376,18 +378,19 @@ class UserSession
 	
 	public function getUserFullName()
 	{
-		$sUserFullName = "";
+		$sUserFullName = '';
 		$sQuery = "SELECT * FROM User WHERE UserId='" . $this->UserId . "'";
 		$sth = $this->q->core->prepare($sQuery);
-		$this->q->core->beginTransaction();
 		try
 		{
+    		$this->q->core->beginTransaction();
 			$sth->execute();
 			$this->q->core->commit();
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
 				$sUserFullName = $row['UserFullName'];
-			} // while
+			} #while
+			$sth->closeCursor();
 		}
 		catch (Exception $e)
 		{
@@ -413,9 +416,9 @@ class UserSession
 		}
 		$sQuery = $sQuery + " ORDER BY AuthKey,AuthValue";
 		$sth = $this->q->core->prepare($sQuery);
-		$this->q->core->beginTransaction();
 		try
 		{
+    		$this->q->core->beginTransaction();
 			$sth->execute();
 			$this->q->core->commit();
 			$i = 0;
@@ -425,6 +428,7 @@ class UserSession
 				$sAuthValue = $row['AuthValue'] . "/" . $row['AuthAuxValue'];
 				$myPerms[$sAuthkey] = $sAuthValue;
 			} // while
+			$sth->closeCursor();
 		}
 		catch (Exception $e)
 		{
@@ -444,9 +448,9 @@ class UserSession
 			" AND AuthKey='ROLE'" . 
 			" ORDER BY RegionAuth.RegionId";
 		$sth = $this->q->core->prepare($sQuery);
-		$this->q->core->beginTransaction();
 		try
 		{
+    		$this->q->core->beginTransaction();
 			$sth->execute();
 			$this->q->core->commit();
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
@@ -456,6 +460,7 @@ class UserSession
 				$myData[$sKey]['Role']        = $row['AuthAuxValue'];
 				$myData[$sKey]['RegionLabel'] = $row['RegionLabel'];
 			} // while
+			$sth->closeCursor();
 		}
 		catch (Exception $e)
 		{
@@ -488,9 +493,9 @@ class UserSession
 		}
 		$sQuery .= ' ORDER BY RegionAuth.RegionId, User.UserFullName';
 		$sth = $this->q->core->prepare($sQuery);
-		$this->q->core->beginTransaction();
 		try
 		{
+            $this->q->core->beginTransaction();
 			$sth->execute();
 			$this->q->core->commit();
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
@@ -503,6 +508,7 @@ class UserSession
 				);
 				$myData[$sKey] = $sValue;
 			} // while
+			$sth->closeCursor();
 		}
 		catch (Exception $e)
 		{
@@ -584,9 +590,9 @@ class UserSession
 		$myAnswer = '';
 		$sQuery = "SELECT * FROM User WHERE (UserEMail='" . $prmEMail . "') ";
 		$sth = $this->q->core->prepare($sQuery);
-		$this->q->core->beginTransaction();
 		try
 		{
+    		$this->q->core->beginTransaction();
 			$sth->execute();
 			$this->q->core->commit();
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
@@ -605,7 +611,8 @@ class UserSession
 				     "   The DesInventar Team",
 				     "From: support@desinventar.org"
 				);
-			} //while
+			} # while
+			$sth->closeCursor();
 		}
 		catch (Exception $e)
 		{
@@ -643,15 +650,16 @@ class UserSession
 					   " AND AuthKey='ROLE'" . 
 					   " ORDER BY UserId,RegionId";
 			$sth = $this->q->core->prepare($sQuery);
-			$this->q->core->beginTransaction();
 			try
 			{
+    			$this->q->core->beginTransaction();
 				$sth->execute();
 				$this->q->core->commit();
 				while ($row = $sth->fetch(PDO::FETCH_OBJ))
 				{
 					$UserRole = $row->AuthAuxValue;
 				} // while
+				$sth->closeCursor();
 			}
 			catch (Exception $e)
 			{
@@ -707,9 +715,9 @@ class UserSession
 			// Remove All Permissions for This User on This Database
 			$sQuery = "DELETE FROM RegionAuth WHERE UserId='" . $prmUserId . "' AND RegionId='" . $prmRegionId . "'";
 			$sth = $this->q->core->prepare($sQuery);
-			$this->q->core->beginTransaction();
 			try
 			{
+    			$this->q->core->beginTransaction();
 				$sth->execute();
 				$this->q->core->commit();
 			}
@@ -789,9 +797,9 @@ class UserSession
 			"'" . $prmUserId . "','" . $prmRegionId  . "'," .
 			"'" . $prmAuthKey . "','" . $prmValue . "','" . $prmAuxValue . "')";
 		$sth = $this->q->core->prepare($sQuery);
-		$this->q->core->beginTransaction();
 		try
 		{
+    		$this->q->core->beginTransaction();
 			$sth->execute();
 			$this->q->core->commit();
 		}
@@ -820,9 +828,9 @@ class UserSession
 		          " WHERE $opt ORDER BY RegionLabel";
 		$myData = array();
 		$sth = $this->q->core->prepare($sQuery);
-		$this->q->core->beginTransaction();
 		try
 		{
+    		$this->q->core->beginTransaction();
 			$sth->execute();
 			$this->q->core->commit();
 			while ($row = $sth->fetch(PDO::FETCH_OBJ))
@@ -831,6 +839,7 @@ class UserSession
 				$sValue = $row->RegionLabel;
 				$myData[$sKey] = $sValue;
 			} // while
+			$sth->closeCursor();
 		}
 		catch (Exception $e)
 		{
@@ -845,15 +854,16 @@ class UserSession
 		$Answer = ERR_UNKNOWN_ERROR;
 		$Query = "SELECT UserId FROM User WHERE UserId='" . $prmUserId . "'";
 		$sth = $this->q->core->prepare($Query);
-		$this->q->core->beginTransaction();
 		try
 		{
+    		$this->q->core->beginTransaction();
 			$sth->execute();
 			$this->q->core->commit();
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
 				$Answer = ERR_NO_ERROR;
 			}
+			$sth->closeCursor();
 		}
 		catch (Exception $e)
 		{
@@ -879,9 +889,9 @@ class UserSession
 				  "''," .
 				  $UserActive . ")";
 		$sth = $this->q->core->prepare($sQuery);
-		$this->q->core->beginTransaction();
 		try
 		{
+    		$this->q->core->beginTransaction();
 			$sth->execute();
 			$this->q->core->commit();
 			$iReturn = ERR_NO_ERROR;
@@ -912,9 +922,9 @@ class UserSession
 		}
 		$sQuery .=  " WHERE UserId='" . $UserId . "'";
 		$sth = $this->q->core->prepare($sQuery);
-		$this->q->core->beginTransaction();
 		try
 		{
+    		$this->q->core->beginTransaction();
 			$sth->execute();
 			$this->q->core->commit();
 			$iReturn = ERR_NO_ERROR;
@@ -932,9 +942,9 @@ class UserSession
 		$iReturn = ERR_DEFAULT_ERROR;
 		$Query = 'UPDATE User SET UserPasswd="' . $UserPasswd . '" WHERE UserId="' . $UserId . '"';
 		$sth = $this->q->core->prepare($Query);
-		$this->q->core->beginTransaction();
 		try
 		{
+    		$this->q->core->beginTransaction();
 			$sth->execute();
 			$this->q->core->commit();
 			$iReturn = ERR_NO_ERROR;
@@ -952,9 +962,9 @@ class UserSession
 		$deltime = gmdate('c', time() - 600);
 		$sQuery = "DELETE FROM UserLockList WHERE LastUpdate<='" . $deltime . "'";
 		$sth = $this->q->core->prepare($sQuery);
-		$this->q->core->beginTransaction();
 		try
 		{
+    		$this->q->core->beginTransaction();
 			$sth->execute();
 			$this->q->core->commit();
 		}
@@ -970,15 +980,16 @@ class UserSession
 		$sReturn = '';
 		$sQuery = "SELECT * FROM UserLockList WHERE RecordId='" . $prmDisasterId . "'";
 		$sth = $this->q->core->prepare($sQuery);
-		$this->q->core->beginTransaction();
 		try
 		{
+    		$this->q->core->beginTransaction();
 			$sth->execute();
 			$this->q->core->commit();
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
 				$sReturn = $row['SessionId'];
 			}
+			$sth->closeCursor();
 		}
 		catch (Exception $e)
 		{
@@ -995,9 +1006,9 @@ class UserSession
 		$now = gmdate('c');
 		$sQuery = "INSERT INTO UserLockList VALUES ('" . $this->sSessionId . "','DISASTER','" . $prmDisasterId . "','" . $now . "')";
 		$sth = $this->q->core->prepare($sQuery);
-		$this->q->core->beginTransaction();
 		try
 		{
+    		$this->q->core->beginTransaction();
 			$sth->execute();
 			$this->q->core->commit();
 		}
@@ -1012,9 +1023,9 @@ class UserSession
 	{
 		$sQuery = "DELETE FROM UserLockList WHERE SessionId='" . $this->sSessionId . "' AND RecordId='" . $prmDisasterId . "'";
 		$sth = $this->q->core->prepare($sQuery);
-		$this->q->core->beginTransaction();
 		try
 		{
+    		$this->q->core->beginTransaction();
 			$sth->execute();
 			$this->q->core->commit();
 		}
@@ -1029,9 +1040,9 @@ class UserSession
 	{
 		$sQuery = "DELETE FROM UserLockList WHERE SessionId='" . $this->sSessionId . "'";
 		$sth = $this->q->core->prepare($sQuery);
-		$this->q->core->beginTransaction();
 		try
 		{
+    		$this->q->core->beginTransaction();
 			$sth->execute();
 			$this->q->core->commit();
 		}
@@ -1052,15 +1063,16 @@ class UserSession
 		}
 		$sQuery .= " ORDER BY UserFullName";
 		$sth = $this->q->core->prepare($sQuery);
-		$this->q->core->beginTransaction();
 		try
 		{
+    		$this->q->core->beginTransaction();
 			$sth->execute();
 			$this->q->core->commit();
 			while($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
 				$list[$row['UserId']]=$row['UserFullName'];
 			}
+			$sth->closeCursor();
 		}
 		catch (Exception $e)
 		{
@@ -1221,12 +1233,13 @@ class UserSession
 		$DisasterId = '';
 		$sQuery = 'SELECT DisasterId,DisasterSerial FROM Disaster ORDER BY DisasterSerial';
 		$sth = $this->q->dreg->prepare($sQuery);
-		$this->q->dreg->beginTransaction();
 		try
 		{
+    		$this->q->dreg->beginTransaction();
 			$sth->execute();
 			$this->q->dreg->commit();
 			$reclist = $sth->fetchAll(PDO::FETCH_ASSOC);
+			$sth->closeCursor();
 		}
 		catch (Exception $e)
 		{

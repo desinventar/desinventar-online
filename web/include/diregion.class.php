@@ -151,9 +151,9 @@ class DIRegion extends DIObject
 	{
 		$sQuery = 'INSERT INTO Region(RegionId) VALUES ("' . $this->get('RegionId') . '")';
 		$sth = $this->session->q->core->prepare($sQuery);
-		$this->session->q->core->beginTransaction();
 		try
 		{
+    		$this->session->q->core->beginTransaction();
 			$sth->execute();
 			$this->session->q->core->commit();
 		}
@@ -180,9 +180,9 @@ class DIRegion extends DIObject
 		 ' WHERE RegionId="'   . $this->get('RegionId') . '"';
 		$iReturn = ERR_NO_ERROR;
 		$sth = $this->session->q->core->prepare($sQuery);
-		$this->session->q->core->beginTransaction();
 		try
 		{
+    		$this->session->q->core->beginTransaction();
 			$sth->execute();
 			$this->session->q->core->commit();
 		}
@@ -654,9 +654,9 @@ class DIRegion extends DIObject
 		$iReturn = STATUS_NO;
 		$sQuery = 'DELETE FROM Region WHERE RegionId=:RegionId';
 		$sth = $us->q->core->prepare($sQuery);
-		$us->q->core->beginTransaction();
 		try
 		{
+    		$us->q->core->beginTransaction();
 			$sth->bindParam(':RegionId', $prmRegionId, PDO::PARAM_STR);
 			$sth->execute();
 			$us->q->core->commit();
@@ -676,9 +676,9 @@ class DIRegion extends DIObject
 		$iReturn = ERR_NO_ERROR;
 		$sQuery = 'SELECT * FROM RegionAuth WHERE RegionId=:RegionId AND AuthKey=:AuthKey AND AuthAuxValue=:AuthAuxValue';
 		$sth = $this->session->q->core->prepare($sQuery);
-		$this->session->q->core->beginTransaction();
 		try
 		{
+    		$this->session->q->core->beginTransaction();
 			$sth->bindValue(':RegionId'    , $this->get('RegionId'), PDO::PARAM_STR);
 			$sth->bindValue(':AuthKey'     , 'ROLE'       , PDO::PARAM_STR);
 			$sth->bindValue(':AuthAuxValue', 'ADMINREGION', PDO::PARAM_STR);
