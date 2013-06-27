@@ -335,14 +335,18 @@ class Query //extends PDO
 		}
 		$sql = "SELECT EventId,EventName,EventDesc,EventActive,EventPredefined,RecordUpdate FROM Event WHERE ". $sqls ." AND ". $sqlt ." ORDER BY EventName";
 		$data = array();
-		foreach($this->dreg->query($sql, PDO::FETCH_ASSOC) as $row)
-		{
-			$row = array_merge($row, array(0 => $row['EventName'],
-			                               1 => str2js($row['EventDesc']),
-			                               2 => $row['EventActive']
-			                              ));
-			$data[$row['EventId']] = $row;
-		}
+		try {
+            foreach($this->dreg->query($sql, PDO::FETCH_ASSOC) as $row)
+            {
+                $row = array_merge($row, array(0 => $row['EventName'],
+                                               1 => str2js($row['EventDesc']),
+                                               2 => $row['EventActive']
+                                              ));
+                $data[$row['EventId']] = $row;
+            }
+        } catch (Exception $e) {
+			showErrorMsg('getRegionEventList Error : ' . $e->getMessage());
+        }
 		return $data;
 	}
 
