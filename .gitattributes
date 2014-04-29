@@ -1,0 +1,17 @@
+# Text files
+* text=auto
+*.php text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.twig text eol=lf
+*.tpl text eol=lf
+*.xml text eol=lf
+*.sh text eol=lf
+*.bat text eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.gif binary
+#
