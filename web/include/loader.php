@@ -1,4 +1,4 @@
-<script language="php">
+<?php
 /*
  DesInventar - http://www.desinventar.org
  (c) 1998-2012 Corporacion OSSO
@@ -72,11 +72,23 @@ if (isset($_SERVER['HTTP_HOST']))
 		}
 		$_SERVER['DISTRO'] = $distro;
 
+		if (isset($_SERVER['DESINVENTAR_LIBS_PHP'])) {
+			define('DESINV_LIBS_PHP', $_SERVER['DESINVENTAR_LIBS_PHP']);
+		}
+		if (! isset($_SERVER['DESINVENTAR_LIBS_URL'])) {
+			$_SERVER['DESINVENTAR_LIBS_URL'] = '';
+		}
+		define('DESINV_LIBS_URL', $_SERVER['DESINVENTAR_LIBS_URL']);
+
 		if (! isset($_SERVER['DESINVENTAR_CACHEDIR']))
 		{
 			$_SERVER['DESINVENTAR_CACHEDIR'] = '/var/cache/Smarty/desinventar';
 		}
-		define('SMARTYDIR', '/usr/share/php/Smarty');
+		if (defined('DESINVENTAR_LIBS_PHP')) {
+			define('SMARTYDIR', DESINV_LIBS_PHP . '/smarty/libs');
+		} else {
+			define('SMARTYDIR', '/usr/share/php/Smarty');
+		}
 		define('JPGRAPHDIR', '/usr/share/php/jpgraph/3.0.7');
 		define('FONTSET' , '/usr/share/fonts/liberation/fonts.txt');
 		define('TEMP', '/var/tmp/desinventar');
@@ -196,11 +208,13 @@ if (MODE != 'command')
 	$t->left_delimiter  = '{-';
 	$t->right_delimiter = '-}';
 	$t->force_compile   = false;
+	if ($desinventarMode == 'devel') {
+		$t->force_compile = true;
+	}
 	$t->cache_dir = SMTY_DIR;
 	$t->setCaching(Smarty::CACHING_LIFETIME_CURRENT);
 	$t->cache_lifetime  = 3600;
 	$t->compile_check   = true;
-
 	// Choose Language (First from Parameter, next from UserSession table, then autodetect from browser)
 	$lg = getParameter('lang');
 	if ($lg == '') 
@@ -282,12 +296,17 @@ if (MODE != 'command')
 	// General Information (common to portal/app)
 	$t->assign('desinventarMode'        , $desinventarMode);
 	$t->assign('desinventarURL'         , $desinventarURL);
+	$t->assign('desinventarLibs'        , DESINV_LIBS_URL);
+	if (DESINV_LIBS_URL != '') {
+		$t->assign('desinventar_extjs_url', DESINV_LIBS_URL . '/extjs');
+	} else {
+		$t->assign('desinventar_extjs_url', '/extJS');
+	}
 	$t->assign('desinventarURLPortal'   , $desinventarURLPortal);
 	$t->assign('desinventarVersion'     , VERSION);
 	$t->assign('desinventarLang'        , $lg);
 	$t->assign('desinventarUserId'      , $us->UserId);
 	$t->assign('desinventarUserFullName', $us->getUserFullName());
 	// OpenLayers Location
-	$t->assign('desinventarOpenLayersURL', '/openlayers/2.11');
+	$t->assign('desinventarOpenLayersURL', DESINV_LIBS_URL . '/openlayers');
 }
-</script>

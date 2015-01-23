@@ -17,7 +17,7 @@
 		<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/desinventar-{-$jsversion-}.css" />
 
 		<script type="text/javascript" src="{-$desinventarURL-}/external/jquery.jec-1.3.3.js"></script>
-		<script type="text/javascript" src="/fileuploader/fileuploader.js"></script>
+		<script type="text/javascript" src="{-$desinventarLibs-}/fileuploader/fileuploader.js"></script>
 		{-if $desinventarMode=='normal'-}
 			<script type="text/javascript" src="{-$desinventarURL-}/scripts/other-{-$jsversion-}.js"></script>
 			<script type="text/javascript" src="{-$desinventarURL-}/scripts/desinventar-{-$jsversion-}.js"></script>

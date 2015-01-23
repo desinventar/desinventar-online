@@ -1,4 +1,4 @@
-<script language="php">
+<?php
 if (isset($_SERVER["HTTP_HOST"]))
 {
 	if (isset($_SERVER["WINDIR"]))
@@ -11,15 +11,10 @@ if (isset($_SERVER["HTTP_HOST"]))
 	else
 	{
 		// Running on a Linux Server
-		$FBCore = '/usr/share/pear/FirePHPCore/fb.php';
-		if (isset($_SERVER['DISTRO']))
-		{
-			switch($_SERVER['DISTRO'])
-			{
-				case 'debian':
-					$FBCore = '/usr/share/php/PEAR/FirePHPCore/fb.php';
-				break;
-			}
+		if (defined('DESINV_LIBS_PHP')) {
+			$FBCore = DESINV_LIBS_PHP . '/firephpcore/lib/FirePHPCore/fb.php';
+		} else {
+			$FBCore = '/usr/share/pear/FirePHPCore/fb.php';
 		}
 	}
 
@@ -57,5 +52,3 @@ function showErrorMsg($sMsg, Exception $e = null)
 	}
 	fb($sMsg);
 }
-
-</script>
