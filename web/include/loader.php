@@ -299,8 +299,10 @@ if (MODE != 'command')
 	$t->assign('desinventarLibs'        , DESINV_LIBS_URL);
 	if (DESINV_LIBS_URL != '') {
 		$t->assign('desinventar_extjs_url', DESINV_LIBS_URL . '/extjs');
+		$t->assign('desinventarOpenLayersURL', DESINV_LIBS_URL . '/openlayers');
 	} else {
 		$t->assign('desinventar_extjs_url', '/extJS');
+		$t->assign('desinventarOpenLayersURL', '/openlayers/2.11');
 	}
 	$t->assign('desinventarURLPortal'   , $desinventarURLPortal);
 	$t->assign('desinventarVersion'     , VERSION);
@@ -308,5 +310,4 @@ if (MODE != 'command')
 	$t->assign('desinventarUserId'      , $us->UserId);
 	$t->assign('desinventarUserFullName', $us->getUserFullName());
 	// OpenLayers Location
-	$t->assign('desinventarOpenLayersURL', DESINV_LIBS_URL . '/openlayers');
 }
