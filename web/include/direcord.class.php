@@ -1,4 +1,4 @@
-<script language="php">
+<?php
 /*
  DesInventar - http://www.desinventar.org
  (c) 1998-2012 Corporacion OSSO
@@ -194,6 +194,9 @@ class DIRecord extends DIObject
 				$oItem = preg_split('#/#', $sValue);
 				$sFieldName = $oItem[0];
 				$sFieldType = $oItem[1];
+				if ($sFieldType == '') {
+					continue;
+				}
 				if ($i > 0)
 				{
 					$sQuery .= ',';
@@ -658,4 +661,3 @@ class DIRecord extends DIObject
 
 	
 } //class
-</script>
