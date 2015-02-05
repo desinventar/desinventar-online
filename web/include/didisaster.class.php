@@ -1,4 +1,4 @@
-<script language="php">
+<?php
 /*
  DesInventar - http://www.desinventar.org
  (c) 1998-2012 Corporacion OSSO
@@ -431,5 +431,3 @@ class DIDisaster extends DIRecord
 		return $list;
 	}
 } //class
-
-</script>
