@@ -412,7 +412,6 @@ class DIDisaster extends DIRecord
 	public static function existId($prmSession, $prmDisasterId)
 	{
 		$iReturn = ERR_UNKNOWN_ERROR;
-		$bFound = 0;
 		$Query= 'SELECT * FROM Disaster WHERE DisasterId="' . $prmDisasterId . '"';
 		foreach($prmSession->q->dreg->query($Query) as $row)
 		{
@@ -420,6 +419,18 @@ class DIDisaster extends DIRecord
 		}
 		return $iReturn;
 	}
+
+	public static function findIdBySerial($prmSession, $prmDisasterSerial)
+	{
+		$answer = '';
+		$Query= 'SELECT * FROM Disaster WHERE DisasterSerial="' . $prmDisasterSerial . '"';
+		foreach($prmSession->q->dreg->query($Query) as $row)
+		{
+			$answer = $row['DisasterId'];
+		}
+		return $answer;
+	}
+
 	public static function getEffectSectorFields()
 	{
 		$list = array();
