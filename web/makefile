@@ -12,7 +12,7 @@ JS_SCRIPTS=\
 	checktree/checktree.js \
 	Math.uuid.js
 
-all : desinventar.js jquery.desinventar.js other.js
+all : desinventar.js other.js
 
 desinventar.js : js/*.js
 	cd js && (cat *.js > ../scripts/desinventar.js)
