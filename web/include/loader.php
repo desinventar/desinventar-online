@@ -20,6 +20,7 @@ define('MINORVERSION', '01.1186.01');
 define('RELEASEDATE' , '2013-01-01');
 define('VERSION'     , MAJORVERSION . '.' . MINORVERSION);
 define('JSVERSION'   , VERSION);
+define('SRCDIR'  , $_SERVER['DESINVENTAR_SRC']);
 
 $appOptions = array();
 $appOptions['UseRemoteMaps'] = 1;
@@ -84,11 +85,7 @@ if (isset($_SERVER['HTTP_HOST']))
 		{
 			$_SERVER['DESINVENTAR_CACHEDIR'] = '/var/cache/Smarty/desinventar';
 		}
-		if (defined('DESINVENTAR_LIBS_PHP')) {
-			define('SMARTYDIR', DESINV_LIBS_PHP . '/smarty/libs');
-		} else {
-			define('SMARTYDIR', '/usr/share/php/Smarty');
-		}
+		define('SMARTYDIR', SRCDIR  . '/vendors/php/smarty/3.1.21/libs');
 		define('JPGRAPHDIR', '/usr/share/php/jpgraph/3.0.7');
 		define('FONTSET' , '/usr/share/fonts/liberation/fonts.txt');
 		define('TEMP', '/var/tmp/desinventar');
@@ -142,7 +139,6 @@ if (isset($_SERVER['DESINVENTAR_MODE']))
 }
 
 define('BASE'    , $_SERVER['DESINVENTAR_WEB']);
-define('SRCDIR'  , $_SERVER['DESINVENTAR_SRC']);
 define('WWWDIR'  , $_SERVER['DESINVENTAR_WWWDIR']);
 define('WWWDATA' , '/desinventar-data');
 define('WWWURL'  , '/');
@@ -170,8 +166,7 @@ require_once(BASE . '/include/digeography.class.php');
 require_once(BASE . '/include/digeolevel.class.php');
 require_once(BASE . '/include/digeocarto.class.php');
 require_once(BASE . '/include/didisaster.class.php');
-require_once(SRCDIR . '/external/lib.uuid.php');
-
+require_once(SRCDIR . '/vendors/php/lib.uuid/20110320/lib.uuid.php');
 // SETTINGS
 date_default_timezone_set('UTC');
 $time_start = microtime_float();
@@ -263,19 +258,6 @@ if (MODE != 'command')
 	else
 	{		
 		$desinventarURL = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'],'/'));
-		/*
-		if ($desinventarURL == '')
-		{
-			//$desinventarURL = $_SERVER['HTTP_HOST'];
-		}
-		else
-		{
-			if (substr($desinventarURL, strlen($desinventarURL) - 1, 1) != '/')
-			{
-				$desinventarURL .= '/';
-			}
-		}
-		*/
 	}
 	// Configure DESINVENTAR (portal) application location
 	$desinventarURLPortal = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'],'/'));
@@ -292,7 +274,7 @@ if (MODE != 'command')
 	{
 		$desinventarURLPortal = substr($desinventarURLPortal, 0, strlen($desinventarURLPortal) - 1);
 	}
-	
+
 	// General Information (common to portal/app)
 	$t->assign('desinventarMode'        , $desinventarMode);
 	$t->assign('desinventarURL'         , $desinventarURL);

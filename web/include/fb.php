@@ -11,11 +11,7 @@ if (isset($_SERVER["HTTP_HOST"]))
 	else
 	{
 		// Running on a Linux Server
-		if (defined('DESINV_LIBS_PHP')) {
-			$FBCore = DESINV_LIBS_PHP . '/firephpcore/lib/FirePHPCore/fb.php';
-		} else {
-			$FBCore = '/usr/share/pear/FirePHPCore/fb.php';
-		}
+		$FBCore = SRCDIR . '/vendors/php/firephpcore/0.3.2/lib/FirePHPCore/fb.php';
 	}
 
 	if (file_exists($FBCore))
