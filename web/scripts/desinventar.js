@@ -3,117 +3,6 @@
  (c) 1998-2012 Corporacion OSSO
 */
 
-function onReadyAdminDatabaseEdit()
-{
-	// Populate CountryList/LanguageList in frmRegionEdit form
-	jQuery('#desinventarCountryList option').clone().appendTo('#frmRegionEdit_CountryIso');
-	jQuery('#desinventarLanguageList option').clone().appendTo('#frmRegionEdit_LangIsoCode');
-
-	jQuery('#frmRegionEdit_CountryIso').change(function() {
-		if (jQuery('#frmRegionEdit_Cmd').val() == 'cmdDatabaseCreate')
-		{
-			jQuery.post(jQuery('#desinventarURL').val() + '/',
-				{cmd        : 'cmdRegionBuildRegionId',
-				 CountryIso : jQuery(this).val()
-				},
-				function(data) {
-					if (parseInt(data.Status) > 0) {
-						jQuery('#frmRegionEdit_RegionId').val(data.RegionId);
-					}
-				},
-				'json'
-			);
-		}
-	});
-	
-	jQuery('#frmRegionEdit #lblRegionId').dblclick(function() {
-		if (jQuery('#frmRegionEdit_Cmd').val() == 'cmdDatabaseCreate')
-		{
-			jQuery('#frmRegionEdit_RegionId').removeAttr('disabled').focus();
-		}
-		return false;
-	});
-	
-	jQuery('#frmRegionEdit').submit(function() {
-		// Validate Fields
-		var bContinue = true;
-		/*
-		var a=new Array('CountryIso','RegionLabel','LangIsoCode','RegionUserAdmin');
-		var bContinue = checkForm('frmRegionEdit',a, '{-#errmsgfrm#-}');
-		*/
-		var RegionStatus = jQuery('#frmRegionEdit_RegionStatus');
-		RegionStatus.val(0);
-		if (jQuery('#frmRegionEdit_RegionActive').attr('checked')) {
-			RegionStatus.val(parseInt(RegionStatus.val()) | 1);
-		}
-		if (jQuery('#frmRegionEdit_RegionPublic').attr('checked')) {
-			RegionStatus.val(parseInt(RegionStatus.val()) | 2);
-		}
-		jQuery('#frmRegionEdit_RegionId').removeAttr('disabled');
-		var params = jQuery(this).serializeObject();
-		jQuery('#frmRegionEdit_RegionId').attr('disabled','disabled');
-		if (bContinue) {
-			jQuery('#frmRegionEdit :input').unhighlight();
-			jQuery.post(
-				jQuery('#desinventarURL').val() + '/',
-				params, 
-				function(data) {
-					if (parseInt(data.Status) > 0) {
-						jQuery('#divDatabaseEditResult').html(data.Status + ' ' + data.RegionId);
-						// (jhcaiced) Change this for a method to update only the 
-						// affected row intead of loading all list again
-						updateList('dbl', jQuery('#desinventarURL').val() + '/region.php', 'cmd=adminreg');
-					}
-				},
-				'json'
-			);
-		}
-		return false;
-	});
-
-	jQuery('#frmRegionEdit_Cancel').click(function() {
-		jQuery(this).trigger('evAdminDatabaseCancel');
-		return false;
-	});
-} //onReadyAdminDatabaseEdit()
-
-function doAdminDatabaseGetInfo(RegionId)
-{
-	// Load Information about database...
-	jQuery.post(
-		jQuery('#desinventarURL').val() + '/',
-		{cmd      : 'cmdAdminDatabaseGetInfo',
-		 RegionId : RegionId
-		},
-		function(data)
-		{
-			jQuery('#frmRegionEdit_Cmd').val('cmdDatabaseUpdate');
-			jQuery('#frmRegionEdit_CountryIso').val(data.Region.CountryIso);
-			jQuery('#frmRegionEdit_RegionId').val(data.Region.RegionId);
-			jQuery('#frmRegionEdit_RegionLabel').val(data.Region.RegionLabel);
-			jQuery('#frmRegionEdit_LangIsoCode').val(data.Region.LangIsoCode);
-			jQuery('#frmRegionEdit_RegionStatus').val(data.Region.RegionStatus);
-			
-			// RegionActive/RegionPublic are set based on RegionStatus value
-			jQuery('#frmRegionEdit_RegionActive').removeAttr('checked');
-			if (parseInt(data.Region.RegionStatus) & 1)
-			{
-				jQuery('#frmRegionEdit_RegionActive').attr('checked','checked');
-			}
-			jQuery('#frmRegionEdit_RegionPublic').removeAttr('checked');
-			if (parseInt(data.Region.RegionStatus) & 2)
-			{
-				jQuery('#frmRegionEdit_RegionPublic').attr('checked','checked');
-			}
-		},
-		'json'
-	);
-} //doAdminDatabaseGetInfo()
-/*
- DesInventar - http://www.desinventar.org
- (c) 1998-2012 Corporacion OSSO
-*/
-
 function onReadyAdminDatabase()
 {
 	onReadyAdminDatabaseEdit();
@@ -224,6 +113,117 @@ function setRegionPA(prmRegionId, prmCountryIso, prmRegionLabel,
 	// RegionId is readonly by default
 	jQuery('#frmRegionEdit #RegionId').attr('disabled','disabled');
 }
+/*
+ DesInventar - http://www.desinventar.org
+ (c) 1998-2012 Corporacion OSSO
+*/
+
+function onReadyAdminDatabaseEdit()
+{
+	// Populate CountryList/LanguageList in frmRegionEdit form
+	jQuery('#desinventarCountryList option').clone().appendTo('#frmRegionEdit_CountryIso');
+	jQuery('#desinventarLanguageList option').clone().appendTo('#frmRegionEdit_LangIsoCode');
+
+	jQuery('#frmRegionEdit_CountryIso').change(function() {
+		if (jQuery('#frmRegionEdit_Cmd').val() == 'cmdDatabaseCreate')
+		{
+			jQuery.post(jQuery('#desinventarURL').val() + '/',
+				{cmd        : 'cmdRegionBuildRegionId',
+				 CountryIso : jQuery(this).val()
+				},
+				function(data) {
+					if (parseInt(data.Status) > 0) {
+						jQuery('#frmRegionEdit_RegionId').val(data.RegionId);
+					}
+				},
+				'json'
+			);
+		}
+	});
+	
+	jQuery('#frmRegionEdit #lblRegionId').dblclick(function() {
+		if (jQuery('#frmRegionEdit_Cmd').val() == 'cmdDatabaseCreate')
+		{
+			jQuery('#frmRegionEdit_RegionId').removeAttr('disabled').focus();
+		}
+		return false;
+	});
+	
+	jQuery('#frmRegionEdit').submit(function() {
+		// Validate Fields
+		var bContinue = true;
+		/*
+		var a=new Array('CountryIso','RegionLabel','LangIsoCode','RegionUserAdmin');
+		var bContinue = checkForm('frmRegionEdit',a, '{-#errmsgfrm#-}');
+		*/
+		var RegionStatus = jQuery('#frmRegionEdit_RegionStatus');
+		RegionStatus.val(0);
+		if (jQuery('#frmRegionEdit_RegionActive').attr('checked')) {
+			RegionStatus.val(parseInt(RegionStatus.val()) | 1);
+		}
+		if (jQuery('#frmRegionEdit_RegionPublic').attr('checked')) {
+			RegionStatus.val(parseInt(RegionStatus.val()) | 2);
+		}
+		jQuery('#frmRegionEdit_RegionId').removeAttr('disabled');
+		var params = jQuery(this).serializeObject();
+		jQuery('#frmRegionEdit_RegionId').attr('disabled','disabled');
+		if (bContinue) {
+			jQuery('#frmRegionEdit :input').unhighlight();
+			jQuery.post(
+				jQuery('#desinventarURL').val() + '/',
+				params, 
+				function(data) {
+					if (parseInt(data.Status) > 0) {
+						jQuery('#divDatabaseEditResult').html(data.Status + ' ' + data.RegionId);
+						// (jhcaiced) Change this for a method to update only the 
+						// affected row intead of loading all list again
+						updateList('dbl', jQuery('#desinventarURL').val() + '/region.php', 'cmd=adminreg');
+					}
+				},
+				'json'
+			);
+		}
+		return false;
+	});
+
+	jQuery('#frmRegionEdit_Cancel').click(function() {
+		jQuery(this).trigger('evAdminDatabaseCancel');
+		return false;
+	});
+} //onReadyAdminDatabaseEdit()
+
+function doAdminDatabaseGetInfo(RegionId)
+{
+	// Load Information about database...
+	jQuery.post(
+		jQuery('#desinventarURL').val() + '/',
+		{cmd      : 'cmdAdminDatabaseGetInfo',
+		 RegionId : RegionId
+		},
+		function(data)
+		{
+			jQuery('#frmRegionEdit_Cmd').val('cmdDatabaseUpdate');
+			jQuery('#frmRegionEdit_CountryIso').val(data.Region.CountryIso);
+			jQuery('#frmRegionEdit_RegionId').val(data.Region.RegionId);
+			jQuery('#frmRegionEdit_RegionLabel').val(data.Region.RegionLabel);
+			jQuery('#frmRegionEdit_LangIsoCode').val(data.Region.LangIsoCode);
+			jQuery('#frmRegionEdit_RegionStatus').val(data.Region.RegionStatus);
+			
+			// RegionActive/RegionPublic are set based on RegionStatus value
+			jQuery('#frmRegionEdit_RegionActive').removeAttr('checked');
+			if (parseInt(data.Region.RegionStatus) & 1)
+			{
+				jQuery('#frmRegionEdit_RegionActive').attr('checked','checked');
+			}
+			jQuery('#frmRegionEdit_RegionPublic').removeAttr('checked');
+			if (parseInt(data.Region.RegionStatus) & 2)
+			{
+				jQuery('#frmRegionEdit_RegionPublic').attr('checked','checked');
+			}
+		},
+		'json'
+	);
+} //doAdminDatabaseGetInfo()
 function onReadyAdminUsers()
 {
 	jQuery('div.AdminUsers table.UserList tbody').on('mouseover', 'tr', function() {
@@ -612,6 +612,149 @@ function onlyNumber(e)
 		return false;
 	return true;
 }
+/*
+ DesInventar - http://www.desinventar.org
+ (c) 1998-2012 Corporacion OSSO
+*/
+
+function onReadyData() {
+	jQuery('body').on('click', '.ViewData', function() {
+		jQuery(this).toggleClass('highlight');
+	});
+
+	jQuery('body').on('click', '.linkGridGotoCard', function() {
+		jQuery('body').trigger('cmdDatacardShow');
+		var DisasterId = jQuery(this).attr('DisasterId');
+		var RecordNumber = jQuery(this).attr('rowindex');
+		var RecordCount = jQuery('#prmDataPageRecords').val();
+		jQuery('body').trigger('cmdDatacardGoto', [DisasterId, RecordNumber, RecordCount]);
+		return false;
+	});
+	
+	// Page Number Fields
+	jQuery('body').on('keydown', '#DataCurPage', function(event) {
+		if(event.keyCode == 13)
+		{
+			var page = parseInt(jQuery(this).val());
+			if (isNaN(page))
+			{
+				jQuery(this).val(jQuery('#DataCurPagePrev').val());
+			}
+			else
+			{
+				doDataDisplayPage(page);
+			}
+		} 
+	});
+	
+	// Navigation Buttons
+	jQuery('body').on('click', '#btnGridGotoFirstPage', function() {
+		doDataDisplayPage(1);
+	});
+	jQuery('body').on('click', '#btnGridGotoPrevPage', function() {
+		doDataDisplayPage('prev');
+	});
+	jQuery('body').on('click', '#btnGridGotoNextPage', function() {
+		doDataDisplayPage('next');
+	});
+	jQuery('body').on('click', '#btnGridGotoLastPage', function() {
+		doDataDisplayPage(jQuery('#prmDataPageCount').val());
+	});
+
+	jQuery('body').on('cmdViewDataParams', function() {
+		Ext.getCmp('wndViewDataParams').show();
+	});
+	jQuery('body').on('cmdViewDataUpdate', function() {
+		doDataUpdate();
+	});
+	jQuery('body').trigger('cmdViewDataUpdate');
+
+	// Initialize
+	jQuery('div.ViewDataParams').on('cmdInitialize', function() {
+		doDataInitialize();
+	});
+} //onReadyData()
+
+function doDataInitialize()
+{
+	var field_list = jQuery('div.ViewDataParams select.FieldsAvailable');
+	field_list.find('option').remove();
+	jQuery('div.ViewParamFields div.ViewParamFieldAvailable').each(function() {
+		field_list.append(jQuery('<option>', { value : 'D.' + jQuery('span.field',this).text() }).text(jQuery('span.label',this).text()));
+	});
+	jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
+		field_list.append(jQuery('<option>', { value : 'E.' + key }).text(value[0]));
+	});
+
+	var field_list = jQuery('div.ViewDataParams select.FieldsShow');
+	field_list.find('option').remove();
+	jQuery('div.ViewParamFields div.ViewParamFieldShow').each(function() {
+		field_list.append(jQuery('<option>', { value : 'D.' + jQuery('span.field',this).text() }).text(jQuery('span.label',this).text()));
+	});
+}
+
+function doDataUpdate()
+{
+	jQuery('#tblDataRows tr:even').addClass('under');
+	jQuery('.GridCellNumber').each(function() {
+		jQuery(this).html(jQuery(this).html().replace(/\s/g,'&nbsp;'));
+	});
+	// Set Number of Records in Current Displayed Page
+	jQuery('#prmDataPageRecords').val(jQuery('#tblDataRows tr').size());
+} //doDataUpdate();
+
+function doDataDisplayPage(page)
+{
+	if (parseInt(jQuery('#prmDataPageUpdate').val()) < 1)
+	{
+		jQuery('#prmDataPageUpdate').val(1);
+		var mypag = page;
+		var now = parseInt(jQuery('#DataCurPage').val());
+		if (page == 'prev')
+		{
+			mypag = now - 1;
+		}
+		else if (page == 'next')
+		{
+			mypag = now + 1;
+		}
+		var NumberOfPages = jQuery('#prmDataPageCount').val();
+		if ((mypag < 1) || (mypag > NumberOfPages))
+		{
+			// Out of Range Page, do nothing
+		}
+		else
+		{
+			jQuery('#DataCurPage').val(mypag);
+			jQuery('#DataCurPagePrev').val(mypag);
+			var RegionId = jQuery('#desinventarRegionId').val();
+			var RecordsPerPage = jQuery('#prmDataPageSize').val();
+			var QueryDef = jQuery('#prmDataQueryDef').val();
+			var FieldList = jQuery('#prmDataFieldList').val();
+			
+			jQuery('#tblDataRows').html('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />');
+			jQuery.post(jQuery('#desinventarURL').val() + '/data.php',
+				{'r' : RegionId,
+				 'page': mypag,
+				 'RecordsPerPage' : RecordsPerPage,
+				 'sql'            : QueryDef,
+				 'fld'            : FieldList
+				},
+				function(data)
+				{
+					jQuery('#tblDataRows').html(data);
+					// Reload the jQuery functions on the new DOM elements...
+					doDataUpdate();
+					jQuery('#prmDataPageNumber').val(mypag);
+					// Set Number of Records in Current Displayed Page
+					jQuery('#prmDataPageRecords').val(jQuery('#tblDataRows tr').size());
+					jQuery('#prmDataPageUpdate').val(0);
+				}
+			);
+		}
+	}
+} //doDataDisplayPage()
+
 /*
  DesInventar - http://www.desinventar.org
  (c) 1998-2012 Corporacion OSSO
@@ -4083,149 +4226,6 @@ function occurrences(string, substring)
 	}
 	return(n);
 }
-/*
- DesInventar - http://www.desinventar.org
- (c) 1998-2012 Corporacion OSSO
-*/
-
-function onReadyData() {
-	jQuery('body').on('click', '.ViewData', function() {
-		jQuery(this).toggleClass('highlight');
-	});
-
-	jQuery('body').on('click', '.linkGridGotoCard', function() {
-		jQuery('body').trigger('cmdDatacardShow');
-		var DisasterId = jQuery(this).attr('DisasterId');
-		var RecordNumber = jQuery(this).attr('rowindex');
-		var RecordCount = jQuery('#prmDataPageRecords').val();
-		jQuery('body').trigger('cmdDatacardGoto', [DisasterId, RecordNumber, RecordCount]);
-		return false;
-	});
-	
-	// Page Number Fields
-	jQuery('body').on('keydown', '#DataCurPage', function(event) {
-		if(event.keyCode == 13)
-		{
-			var page = parseInt(jQuery(this).val());
-			if (isNaN(page))
-			{
-				jQuery(this).val(jQuery('#DataCurPagePrev').val());
-			}
-			else
-			{
-				doDataDisplayPage(page);
-			}
-		} 
-	});
-	
-	// Navigation Buttons
-	jQuery('body').on('click', '#btnGridGotoFirstPage', function() {
-		doDataDisplayPage(1);
-	});
-	jQuery('body').on('click', '#btnGridGotoPrevPage', function() {
-		doDataDisplayPage('prev');
-	});
-	jQuery('body').on('click', '#btnGridGotoNextPage', function() {
-		doDataDisplayPage('next');
-	});
-	jQuery('body').on('click', '#btnGridGotoLastPage', function() {
-		doDataDisplayPage(jQuery('#prmDataPageCount').val());
-	});
-
-	jQuery('body').on('cmdViewDataParams', function() {
-		Ext.getCmp('wndViewDataParams').show();
-	});
-	jQuery('body').on('cmdViewDataUpdate', function() {
-		doDataUpdate();
-	});
-	jQuery('body').trigger('cmdViewDataUpdate');
-
-	// Initialize
-	jQuery('div.ViewDataParams').on('cmdInitialize', function() {
-		doDataInitialize();
-	});
-} //onReadyData()
-
-function doDataInitialize()
-{
-	var field_list = jQuery('div.ViewDataParams select.FieldsAvailable');
-	field_list.find('option').remove();
-	jQuery('div.ViewParamFields div.ViewParamFieldAvailable').each(function() {
-		field_list.append(jQuery('<option>', { value : 'D.' + jQuery('span.field',this).text() }).text(jQuery('span.label',this).text()));
-	});
-	jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
-		field_list.append(jQuery('<option>', { value : 'E.' + key }).text(value[0]));
-	});
-
-	var field_list = jQuery('div.ViewDataParams select.FieldsShow');
-	field_list.find('option').remove();
-	jQuery('div.ViewParamFields div.ViewParamFieldShow').each(function() {
-		field_list.append(jQuery('<option>', { value : 'D.' + jQuery('span.field',this).text() }).text(jQuery('span.label',this).text()));
-	});
-}
-
-function doDataUpdate()
-{
-	jQuery('#tblDataRows tr:even').addClass('under');
-	jQuery('.GridCellNumber').each(function() {
-		jQuery(this).html(jQuery(this).html().replace(/\s/g,'&nbsp;'));
-	});
-	// Set Number of Records in Current Displayed Page
-	jQuery('#prmDataPageRecords').val(jQuery('#tblDataRows tr').size());
-} //doDataUpdate();
-
-function doDataDisplayPage(page)
-{
-	if (parseInt(jQuery('#prmDataPageUpdate').val()) < 1)
-	{
-		jQuery('#prmDataPageUpdate').val(1);
-		var mypag = page;
-		var now = parseInt(jQuery('#DataCurPage').val());
-		if (page == 'prev')
-		{
-			mypag = now - 1;
-		}
-		else if (page == 'next')
-		{
-			mypag = now + 1;
-		}
-		var NumberOfPages = jQuery('#prmDataPageCount').val();
-		if ((mypag < 1) || (mypag > NumberOfPages))
-		{
-			// Out of Range Page, do nothing
-		}
-		else
-		{
-			jQuery('#DataCurPage').val(mypag);
-			jQuery('#DataCurPagePrev').val(mypag);
-			var RegionId = jQuery('#desinventarRegionId').val();
-			var RecordsPerPage = jQuery('#prmDataPageSize').val();
-			var QueryDef = jQuery('#prmDataQueryDef').val();
-			var FieldList = jQuery('#prmDataFieldList').val();
-			
-			jQuery('#tblDataRows').html('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />');
-			jQuery.post(jQuery('#desinventarURL').val() + '/data.php',
-				{'r' : RegionId,
-				 'page': mypag,
-				 'RecordsPerPage' : RecordsPerPage,
-				 'sql'            : QueryDef,
-				 'fld'            : FieldList
-				},
-				function(data)
-				{
-					jQuery('#tblDataRows').html(data);
-					// Reload the jQuery functions on the new DOM elements...
-					doDataUpdate();
-					jQuery('#prmDataPageNumber').val(mypag);
-					// Set Number of Records in Current Displayed Page
-					jQuery('#prmDataPageRecords').val(jQuery('#tblDataRows tr').size());
-					jQuery('#prmDataPageUpdate').val(0);
-				}
-			);
-		}
-	}
-} //doDataDisplayPage()
-
 function doUpdateDatabaseListByUser()
 {
 	jQuery(".contentBlock").hide();
@@ -5420,6 +5420,140 @@ function doDatabaseLoadData()
 /*
  DesInventar - http://www.desinventar.org
  (c) 1998-2012 Corporacion OSSO
+*/
+function onReadyMain()
+{
+	onReadyDatabaseList();
+	onReadyDatabaseUpload();
+	onReadyDatabaseCreate();
+	onReadyDatabaseUsers();
+	onReadyQueryDesign();
+	onReadyGeography();
+	onReadyGeolevels();
+	onReadyDatabaseEvents();
+	onReadyDatabaseCauses();
+	onReadyAdminUsers();
+	onReadyUserPermAdmin();
+	onReadyCommon();
+	onReadyPrototype();
+	onReadyUserLogin();
+	onReadyUserAccount();
+	onReadyDatacards();
+	onReadyAdminDatabase();
+	onReadyExtraEffects();
+	onReadyQueryResults();
+	onReadyData();
+	onReadyGraphic();
+	onReadyThematicMap();	
+	onReadyStatParams();
+
+	jQuery('#frmMainQuery').submit(function() {
+		var myURL = jQuery(this).attr('action');
+		var myCmd = jQuery('#prmQueryCommand').val();
+		if ( (myCmd == 'cmdGridSave') ||
+		     (myCmd == 'cmdGraphSave') ||
+		     (myCmd == 'cmdMapSave') || 
+		     (myCmd == 'cmdStatSave') ||
+		     (myCmd == 'cmdQuerySave'))
+		{
+			return true;
+		}
+		else
+		{
+			//jQuery('body').trigger('cmdMainWaitingShow');
+			jQuery('#divRegionInfo').hide();
+			jQuery('#dcr').show();
+			jQuery('#dcr').html('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />');
+			jQuery.post(myURL,
+				jQuery(this).serialize(),
+				function(data)
+				{
+					//jQuery('body').trigger('cmdMainWaitingHide');
+					jQuery('#dcr').html(data);
+					switch(myCmd)
+					{
+						case 'cmdGridShow':
+							jQuery('body').trigger('cmdViewDataUpdate');
+						break;
+						case 'cmdMapShow':
+							createThematicMap();
+						break;
+						case 'cmdGraphShow':
+						break;
+						case 'cmdStatShow':
+							onReadyStatistic();
+						break;
+						default:
+						break;
+					} //switch
+				}
+			);
+			return false;
+		}
+	});
+
+	jQuery('#DBConfig_Geolevels').on('show', function() {
+		jQuery('body').trigger('cmdGeolevelsShow');
+	});
+	jQuery('#DBConfig_Geography').on('show', function() {
+		jQuery('body').trigger('cmdGeographyShow');
+	});
+
+	jQuery('#DBConfig_Events').on('show', function() {
+		jQuery('body').trigger('cmdDatabaseEventsShow');
+	});
+
+	jQuery('#DBConfig_Causes').on('show', function() {
+		jQuery('body').trigger('cmdDatabaseCausesShow');
+	});
+
+	jQuery('#DBConfig_Users').on('show', function() {
+		jQuery('body').trigger('cmdDatabaseUsersShow');
+	});
+	
+	// Tabs for Database Configuration
+	jQuery('#DBConfig_tabs').tabs();
+	jQuery('.classDBConfig_tabs').click(function() {
+		var me = jQuery(jQuery(this).attr('href'));
+		showtip(me.find('.helptext').text());
+		var cmd = jQuery(this).data('cmd');
+		if ((cmd == undefined) || (cmd == '') )
+		{
+			jQuery(me).trigger('show');
+		}
+		else
+		{
+			me.find('.content').html('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />');
+			jQuery.post(
+				jQuery(this).data('url'),
+				{
+					cmd      : cmd,
+					RegionId : jQuery('#desinventarRegionId').val(),
+					lang     : jQuery('#desinventarLang').val()
+				},
+				function(data)
+				{
+					me.find('.content').html(data);
+					switch(cmd)
+					{
+						case 'cmdDBInfoCause':
+							onReadyDBConfigCauses();
+						break;
+						default:
+							onReadyExtraEffects();
+						break;
+					}
+				}
+			);
+		}
+		return false;
+	});
+	jQuery(window).trigger('hashchange');
+} //onReadyMain()
+
+/*
+ DesInventar - http://www.desinventar.org
+ (c) 1998-2012 Corporacion OSSO
  - General ExtJS functions
 */
 function onReadyExtJS()
@@ -6262,140 +6396,6 @@ function doDialogsCreate()
  DesInventar - http://www.desinventar.org
  (c) 1998-2012 Corporacion OSSO
 */
-function onReadyMain()
-{
-	onReadyDatabaseList();
-	onReadyDatabaseUpload();
-	onReadyDatabaseCreate();
-	onReadyDatabaseUsers();
-	onReadyQueryDesign();
-	onReadyGeography();
-	onReadyGeolevels();
-	onReadyDatabaseEvents();
-	onReadyDatabaseCauses();
-	onReadyAdminUsers();
-	onReadyUserPermAdmin();
-	onReadyCommon();
-	onReadyPrototype();
-	onReadyUserLogin();
-	onReadyUserAccount();
-	onReadyDatacards();
-	onReadyAdminDatabase();
-	onReadyExtraEffects();
-	onReadyQueryResults();
-	onReadyData();
-	onReadyGraphic();
-	onReadyThematicMap();	
-	onReadyStatParams();
-
-	jQuery('#frmMainQuery').submit(function() {
-		var myURL = jQuery(this).attr('action');
-		var myCmd = jQuery('#prmQueryCommand').val();
-		if ( (myCmd == 'cmdGridSave') ||
-		     (myCmd == 'cmdGraphSave') ||
-		     (myCmd == 'cmdMapSave') || 
-		     (myCmd == 'cmdStatSave') ||
-		     (myCmd == 'cmdQuerySave'))
-		{
-			return true;
-		}
-		else
-		{
-			//jQuery('body').trigger('cmdMainWaitingShow');
-			jQuery('#divRegionInfo').hide();
-			jQuery('#dcr').show();
-			jQuery('#dcr').html('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />');
-			jQuery.post(myURL,
-				jQuery(this).serialize(),
-				function(data)
-				{
-					//jQuery('body').trigger('cmdMainWaitingHide');
-					jQuery('#dcr').html(data);
-					switch(myCmd)
-					{
-						case 'cmdGridShow':
-							jQuery('body').trigger('cmdViewDataUpdate');
-						break;
-						case 'cmdMapShow':
-							createThematicMap();
-						break;
-						case 'cmdGraphShow':
-						break;
-						case 'cmdStatShow':
-							onReadyStatistic();
-						break;
-						default:
-						break;
-					} //switch
-				}
-			);
-			return false;
-		}
-	});
-
-	jQuery('#DBConfig_Geolevels').on('show', function() {
-		jQuery('body').trigger('cmdGeolevelsShow');
-	});
-	jQuery('#DBConfig_Geography').on('show', function() {
-		jQuery('body').trigger('cmdGeographyShow');
-	});
-
-	jQuery('#DBConfig_Events').on('show', function() {
-		jQuery('body').trigger('cmdDatabaseEventsShow');
-	});
-
-	jQuery('#DBConfig_Causes').on('show', function() {
-		jQuery('body').trigger('cmdDatabaseCausesShow');
-	});
-
-	jQuery('#DBConfig_Users').on('show', function() {
-		jQuery('body').trigger('cmdDatabaseUsersShow');
-	});
-	
-	// Tabs for Database Configuration
-	jQuery('#DBConfig_tabs').tabs();
-	jQuery('.classDBConfig_tabs').click(function() {
-		var me = jQuery(jQuery(this).attr('href'));
-		showtip(me.find('.helptext').text());
-		var cmd = jQuery(this).data('cmd');
-		if ((cmd == undefined) || (cmd == '') )
-		{
-			jQuery(me).trigger('show');
-		}
-		else
-		{
-			me.find('.content').html('<img src="' + jQuery('#desinventarURL').val() + '/images/loading.gif" alt="" />');
-			jQuery.post(
-				jQuery(this).data('url'),
-				{
-					cmd      : cmd,
-					RegionId : jQuery('#desinventarRegionId').val(),
-					lang     : jQuery('#desinventarLang').val()
-				},
-				function(data)
-				{
-					me.find('.content').html(data);
-					switch(cmd)
-					{
-						case 'cmdDBInfoCause':
-							onReadyDBConfigCauses();
-						break;
-						default:
-							onReadyExtraEffects();
-						break;
-					}
-				}
-			);
-		}
-		return false;
-	});
-	jQuery(window).trigger('hashchange');
-} //onReadyMain()
-
-/*
- DesInventar - http://www.desinventar.org
- (c) 1998-2012 Corporacion OSSO
-*/
 
 function onReadyQueryDesign()
 {
@@ -6885,6 +6885,93 @@ function validateEndYear()
  DesInventar - http://www.desinventar.org
  (c) 1998-2012 Corporacion OSSO
 */
+function onReadyStatParams()
+{
+	jQuery('#fldStatParam_FirstLev').change(function() {
+		setTotalize('fldStatParam_FirstLev', 'fldStatParam_SecondLev');
+		jQuery('#fldStatParam_ThirdLev').empty();
+	});
+	
+	jQuery('#fldStatParam_SecondLev').change(function() {
+		setTotalize('fldStatParam_SecondLev', 'fldStatParam_ThirdLev');
+	});
+
+	jQuery('body').on('cmdViewStdParams', function() {
+		Ext.getCmp('wndViewStdParams').show();
+		jQuery('#fldStatParam_FirstLev').trigger('change');
+	});
+
+	jQuery('div.ViewStatParams').on('cmdInitialize', function(event) {
+		doViewStatParamsInitialize();
+	});
+} //onReadyStatParams()
+
+function doViewStatParamsInitialize()
+{
+	var statlevel_list = jQuery('div.ViewStatParams select.StatlevelFirst');
+	statlevel_list.find('option').remove();
+	jQuery.each(jQuery('body').data('GeolevelsList'), function(key, value) {
+		statlevel_list.append(jQuery('<option>', { value: value.GeoLevelId + '|D.GeographyId' }).text(value.GeoLevelName));
+	});
+	statlevel_list.append(jQuery('<option>', { value : '|D.EventId'}).text(jQuery('#ViewStatParamsLabelEvent').text()));
+	statlevel_list.append(jQuery('<option>', { value : 'YEAR|D.DisasterBeginTime'}).text(jQuery('#ViewStatParamsLabelYear').text()));
+	statlevel_list.append(jQuery('<option>', { value : 'MONTH|D.DisasterBeginTime'}).text(jQuery('#ViewStatParamsLabelMonth').text()));
+	statlevel_list.append(jQuery('<option>', { value : '|D.CauseId'}).text(jQuery('#ViewStatParamsLabelCause').text()));
+	statlevel_list.val(jQuery('option:first', statlevel_list).val());
+
+	var field_list = jQuery('div.ViewStatParams select.FieldsAvailable');
+	field_list.find('option').remove();
+	// EffectPeople (ef1)
+	jQuery('div.desinventarInfo div.EffectList div.EffectPeople').each(function() {
+		var field = jQuery('span.field', this).text();
+		var label = jQuery('span.label',this).text();
+		field_list.append(jQuery('<option>', { value: 'D.' + field + '|S|-1' }).text(jQuery('#StatLabelAuxHave').text() + ' ' + label));
+	});	
+	// EffectLosses1 List (ef2)
+	jQuery('div.desinventarInfo div.EffectList div.EffectLosses1').each(function() {
+		var field = jQuery('span.field', this).text();
+		var label = jQuery('span.label',this).text();
+		field_list.append(jQuery('<option>', { value: 'D.' + field + '|>|-1' }).text(label));
+	});
+	// EffectLosses2 List (ef3)
+	jQuery('div.desinventarInfo div.EffectList div.EffectLosses2').each(function() {
+		var field = jQuery('span.field', this).text();
+		var label = jQuery('span.label',this).text();
+		field_list.append(jQuery('<option>', { value: 'D.' + field + '|>|-1' }).text(label));
+	});	
+	// EffectSector (sec)
+	jQuery('div.desinventarInfo div.EffectList div.EffectSector').each(function() {
+		var field = jQuery('span.field', this).text();
+		var label = jQuery('span.label',this).text();
+		field_list.append(jQuery('<option>', { value: 'D.' + field + '|S|-1' }).text(jQuery('#StatLabelAuxAffect').text() + ' ' + label));
+	});
+	field_list.append(jQuery('<option>', { value: '', disabled:'disabled'}).text('---'));
+	// EEFieldList
+	jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
+		var field = key;
+		var label = value[0];
+		var type  = value[2];
+		if ( (type == 'INTEGER') || (type == 'DOUBLE'))
+		{
+			field_list.append(jQuery('<option>', { value: 'E.' + field + '|>|-1' }).text(label));
+		}
+	});
+	field_list.append(jQuery('<option>', { value : 'D.EventDuration|S|-1'}).text(jQuery('#StatLabelEventDuration').text()));
+
+	var field_list = jQuery('div.ViewStatParams select.FieldsShow');
+	field_list.find('option').remove();
+	// EffectPeople (ef1)
+	jQuery('div.desinventarInfo div.EffectList div.EffectPeople').each(function() {
+		var field = jQuery('span.field', this).text();
+		var label = jQuery('span.label',this).text();
+		field_list.append(jQuery('<option>', { value: 'D.' + field + 'Q|>|-1' }).text(label));
+	});	
+	
+} //doViewStatParamsInitialize()
+/*
+ DesInventar - http://www.desinventar.org
+ (c) 1998-2012 Corporacion OSSO
+*/
 function onReadyStatistic()
 {
 	jQuery('#btnStatGotoFirstPage').click(function() {
@@ -7020,93 +7107,6 @@ function setTotalize(lnow, lnext)
  DesInventar - http://www.desinventar.org
  (c) 1998-2012 Corporacion OSSO
 */
-function onReadyStatParams()
-{
-	jQuery('#fldStatParam_FirstLev').change(function() {
-		setTotalize('fldStatParam_FirstLev', 'fldStatParam_SecondLev');
-		jQuery('#fldStatParam_ThirdLev').empty();
-	});
-	
-	jQuery('#fldStatParam_SecondLev').change(function() {
-		setTotalize('fldStatParam_SecondLev', 'fldStatParam_ThirdLev');
-	});
-
-	jQuery('body').on('cmdViewStdParams', function() {
-		Ext.getCmp('wndViewStdParams').show();
-		jQuery('#fldStatParam_FirstLev').trigger('change');
-	});
-
-	jQuery('div.ViewStatParams').on('cmdInitialize', function(event) {
-		doViewStatParamsInitialize();
-	});
-} //onReadyStatParams()
-
-function doViewStatParamsInitialize()
-{
-	var statlevel_list = jQuery('div.ViewStatParams select.StatlevelFirst');
-	statlevel_list.find('option').remove();
-	jQuery.each(jQuery('body').data('GeolevelsList'), function(key, value) {
-		statlevel_list.append(jQuery('<option>', { value: value.GeoLevelId + '|D.GeographyId' }).text(value.GeoLevelName));
-	});
-	statlevel_list.append(jQuery('<option>', { value : '|D.EventId'}).text(jQuery('#ViewStatParamsLabelEvent').text()));
-	statlevel_list.append(jQuery('<option>', { value : 'YEAR|D.DisasterBeginTime'}).text(jQuery('#ViewStatParamsLabelYear').text()));
-	statlevel_list.append(jQuery('<option>', { value : 'MONTH|D.DisasterBeginTime'}).text(jQuery('#ViewStatParamsLabelMonth').text()));
-	statlevel_list.append(jQuery('<option>', { value : '|D.CauseId'}).text(jQuery('#ViewStatParamsLabelCause').text()));
-	statlevel_list.val(jQuery('option:first', statlevel_list).val());
-
-	var field_list = jQuery('div.ViewStatParams select.FieldsAvailable');
-	field_list.find('option').remove();
-	// EffectPeople (ef1)
-	jQuery('div.desinventarInfo div.EffectList div.EffectPeople').each(function() {
-		var field = jQuery('span.field', this).text();
-		var label = jQuery('span.label',this).text();
-		field_list.append(jQuery('<option>', { value: 'D.' + field + '|S|-1' }).text(jQuery('#StatLabelAuxHave').text() + ' ' + label));
-	});	
-	// EffectLosses1 List (ef2)
-	jQuery('div.desinventarInfo div.EffectList div.EffectLosses1').each(function() {
-		var field = jQuery('span.field', this).text();
-		var label = jQuery('span.label',this).text();
-		field_list.append(jQuery('<option>', { value: 'D.' + field + '|>|-1' }).text(label));
-	});
-	// EffectLosses2 List (ef3)
-	jQuery('div.desinventarInfo div.EffectList div.EffectLosses2').each(function() {
-		var field = jQuery('span.field', this).text();
-		var label = jQuery('span.label',this).text();
-		field_list.append(jQuery('<option>', { value: 'D.' + field + '|>|-1' }).text(label));
-	});	
-	// EffectSector (sec)
-	jQuery('div.desinventarInfo div.EffectList div.EffectSector').each(function() {
-		var field = jQuery('span.field', this).text();
-		var label = jQuery('span.label',this).text();
-		field_list.append(jQuery('<option>', { value: 'D.' + field + '|S|-1' }).text(jQuery('#StatLabelAuxAffect').text() + ' ' + label));
-	});
-	field_list.append(jQuery('<option>', { value: '', disabled:'disabled'}).text('---'));
-	// EEFieldList
-	jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
-		var field = key;
-		var label = value[0];
-		var type  = value[2];
-		if ( (type == 'INTEGER') || (type == 'DOUBLE'))
-		{
-			field_list.append(jQuery('<option>', { value: 'E.' + field + '|>|-1' }).text(label));
-		}
-	});
-	field_list.append(jQuery('<option>', { value : 'D.EventDuration|S|-1'}).text(jQuery('#StatLabelEventDuration').text()));
-
-	var field_list = jQuery('div.ViewStatParams select.FieldsShow');
-	field_list.find('option').remove();
-	// EffectPeople (ef1)
-	jQuery('div.desinventarInfo div.EffectList div.EffectPeople').each(function() {
-		var field = jQuery('span.field', this).text();
-		var label = jQuery('span.label',this).text();
-		field_list.append(jQuery('<option>', { value: 'D.' + field + 'Q|>|-1' }).text(label));
-	});	
-	
-} //doViewStatParamsInitialize()
-/*
- DesInventar - http://www.desinventar.org
- (c) 1998-2012 Corporacion OSSO
-*/
 //2011-02-19 (jhcaiced) Do not remove this line, initialize map=null 
 // to avoid an error with IE and the maps
 var map = null;
@@ -7220,9 +7220,6 @@ function createThematicMap()
 	// Add Remote Layers	
 	if (parseInt(jQuery('#optionUseRemoteMaps').val()) > 0)
 	{
-		// Yahoo Maps Base Layer
-		var yahoo = new OpenLayers.Layer.Yahoo( "Yahoo Maps", { 'sphericalMercator': true });
-		map.addLayer(yahoo);
 		// Google Layers
 		var gphy = new OpenLayers.Layer.Google("Google Physical" , {type: google.maps.MapTypeId.TERRAIN});
 		map.addLayer(gphy);
@@ -7444,6 +7441,10 @@ function genColors() {
  DesInventar - http://www.desinventar.org
  (c) 1998-2012 Corporacion OSSO
 */
+/*
+ DesInventar - http://www.desinventar.org
+ (c) 1998-2012 Corporacion OSSO
+*/
 
 function onReadyUserAccount()
 {
@@ -7560,10 +7561,6 @@ function doUserAccountCreate()
 		});
 	});
 }
-/*
- DesInventar - http://www.desinventar.org
- (c) 1998-2012 Corporacion OSSO
-*/
 /*
  DesInventar - http://www.desinventar.org
  (c) 1998-2012 Corporacion OSSO
