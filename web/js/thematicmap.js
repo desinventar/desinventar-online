@@ -115,9 +115,6 @@ function createThematicMap()
 	// Add Remote Layers	
 	if (parseInt(jQuery('#optionUseRemoteMaps').val()) > 0)
 	{
-		// Yahoo Maps Base Layer
-		var yahoo = new OpenLayers.Layer.Yahoo( "Yahoo Maps", { 'sphericalMercator': true });
-		map.addLayer(yahoo);
 		// Google Layers
 		var gphy = new OpenLayers.Layer.Google("Google Physical" , {type: google.maps.MapTypeId.TERRAIN});
 		map.addLayer(gphy);

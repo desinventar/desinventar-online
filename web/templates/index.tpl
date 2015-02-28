@@ -27,7 +27,6 @@
 
 		{-include file="maps_include.tpl"-}
 		{-if $appOptions.UseRemoteMaps > 0-}
-			<script type="text/javascript" src="http://api.maps.yahoo.com/ajaxymap?v=3.0&amp;appid=euzuro-openlayers"></script>
 			<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 		{-/if-}
 		<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/external/checktree/checktree.css"/>
