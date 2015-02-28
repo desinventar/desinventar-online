@@ -298,8 +298,8 @@ if (MODE != 'command')
 	$t->assign('desinventarURL'         , $desinventarURL);
 	$t->assign('desinventarLibs'        , DESINV_LIBS_URL);
 	if (DESINV_LIBS_URL != '') {
-		$t->assign('desinventar_extjs_url', DESINV_LIBS_URL . '/extjs');
-		$t->assign('desinventarOpenLayersURL', DESINV_LIBS_URL . '/openlayers');
+		$t->assign('desinventar_extjs_url', DESINV_LIBS_URL . '/extjs/3.4.0');
+		$t->assign('desinventarOpenLayersURL', DESINV_LIBS_URL . '/openlayers/2.11');
 	} else {
 		$t->assign('desinventar_extjs_url', '/extJS');
 		$t->assign('desinventarOpenLayersURL', '/openlayers/2.11');

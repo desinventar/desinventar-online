@@ -7,7 +7,7 @@
 		{-include file="extjs.tpl"-}
 		<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/css/desinventar.css?version={-$jsversion-}" />
 
-		<script type="text/javascript" src="/fileuploader/fileuploader.js"></script>
+		<script type="text/javascript" src="{-$desinventarLibs-}/valums-fileuploader/valums-fileuploader-b3b20b1-patched/fileuploader.js"></script>
 
 		<script type="text/javascript" src="{-$desinventarURL-}/external/json2.js"></script>
 		<script type="text/javascript" src="{-$desinventarURL-}/external/form2js.js"></script>
