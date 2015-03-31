@@ -710,6 +710,8 @@ function DisableEnableForm(xForm, disab)
 				objElems[i].style.backgroundColor = col;
 			}
 		}
+		jQuery('#txtDatacardFind', xForm).prop('readonly', disab).prop('disabled', disab);
+		jQuery('#btnDatacardFind', xForm).prop('readonly', disab).prop('disabled', disab);
 	}
 }
 
@@ -896,6 +898,10 @@ function requestDatacard(myCmd, myValue)
 
 function doDatacardFind()
 {
+	// We can only search datacards when in VIEW mode
+	if (jQuery('#DICard #Status').val() !== 'VIEW') {
+		return false;
+	}
 	if(jQuery('#txtDatacardFind').val() !='')
 	{
 		requestDatacard('getDisasterIdFromSerial', jQuery('#txtDatacardFind').val());
