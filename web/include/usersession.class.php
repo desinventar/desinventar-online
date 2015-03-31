@@ -1,4 +1,4 @@
-<script language="php">
+<?php
 /*
   DesInventar - http://www.desinventar.org
  (c) 1998-2012 Corporacion OSSO
@@ -389,7 +389,7 @@ class UserSession
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
 				$sUserFullName = $row['UserFullName'];
-			} #while
+			} //while
 			$sth->closeCursor();
 		}
 		catch (Exception $e)
@@ -611,7 +611,7 @@ class UserSession
 				     "   The DesInventar Team",
 				     "From: support@desinventar.org"
 				);
-			} # while
+			} // while
 			$sth->closeCursor();
 		}
 		catch (Exception $e)
@@ -978,12 +978,12 @@ class UserSession
 	public function isDatacardLocked($prmDisasterId)
 	{
 		$sReturn = '';
-		$sQuery = "SELECT * FROM UserLockList WHERE RecordId='" . $prmDisasterId . "'";
+		$sQuery = 'SELECT * FROM UserLockList WHERE RecordId=:RecordId';
 		$sth = $this->q->core->prepare($sQuery);
 		try
 		{
     		$this->q->core->beginTransaction();
-			$sth->execute();
+			$sth->execute(array(':RecordId' => $prmDisasterId));
 			$this->q->core->commit();
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
@@ -1004,12 +1004,17 @@ class UserSession
 		// First delete old datacard locks...
 		$this->clearOldLocks();
 		$now = gmdate('c');
-		$sQuery = "INSERT INTO UserLockList VALUES ('" . $this->sSessionId . "','DISASTER','" . $prmDisasterId . "','" . $now . "')";
+		$sQuery = 'INSERT INTO UserLockList VALUES (:SessionId, :LockType, :RecordId, :LockTime)';
 		$sth = $this->q->core->prepare($sQuery);
 		try
 		{
     		$this->q->core->beginTransaction();
-			$sth->execute();
+			$sth->execute(array(
+				'SessionId' => $this->sSessionId,
+				'LockType' => 'DISASTER',
+				'RecordId' => $prmDisasterId,
+				'LockTime' => $now
+			));
 			$this->q->core->commit();
 		}
 		catch (Exception $e)
@@ -1021,12 +1026,15 @@ class UserSession
 	
 	public function releaseDatacard($prmDisasterId)
 	{
-		$sQuery = "DELETE FROM UserLockList WHERE SessionId='" . $this->sSessionId . "' AND RecordId='" . $prmDisasterId . "'";
+		$sQuery = 'DELETE FROM UserLockList WHERE SessionId=:SessionId AND RecordId=:RecordId';
 		$sth = $this->q->core->prepare($sQuery);
 		try
 		{
     		$this->q->core->beginTransaction();
-			$sth->execute();
+			$sth->execute(array(
+				'SessionId' => $this->sSessionId,
+				'RecordId' => $prmDisasterId
+			));
 			$this->q->core->commit();
 		}
 		catch (Exception $e)
@@ -1434,8 +1442,5 @@ class UserSession
 		$res[0] = substr($datemin, 0, 10);
 		$res[1] = substr($datemax, 0, 10);
 		return $res;
-	} #function
-} #class UserSession
-
-
-</script>
+	} //function
+} //class UserSession
