@@ -684,8 +684,12 @@ function doDialogsCreate()
 		items: new Ext.Panel({ contentEl: 'divDatacardContent', autoScroll: true })
 	});
 	w.on('hide',function() {
+		// If we were editing a datacard, this sould cancel the edit and release
+		// the lock in the datacard
+		jQuery('#btnDatacardCancel').trigger('click');
+		// Hide the datacard dialog
 		jQuery('#divDatacardWindow').hide();
-		showtip('');					
+		showtip('');
 	});
 
 	w = new Ext.Window({id:'wndViewDataParams', 
