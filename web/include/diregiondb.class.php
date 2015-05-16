@@ -1,7 +1,7 @@
-<script language="php">
+<?php
 /*
  DesInventar - http://www.desinventar.org
- (c) 1998-2012 Corporacion OSSO
+ (c) 1998-2015 Corporacion OSSO
 */
 class DIRegionDB extends DIRegion
 {
@@ -897,5 +897,4 @@ class DIRegionDB extends DIRegion
 		$iAnswer = $g->getMaxGeoLevel();
 		return $iAnswer;
 	}
-} #class
-</script>
+} //class

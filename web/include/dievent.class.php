@@ -1,7 +1,7 @@
-<script language="php">
+<?php
 /*
  DesInventar - http://www.desinventar.org
- (c) 1998-2012 Corporacion OSSO
+ (c) 1998-2015 Corporacion OSSO
 */
 
 class DIEvent extends DIRecord
@@ -41,7 +41,19 @@ class DIEvent extends DIRecord
 			}
 		}
 	} // __construct
-	
+
+	public static function existByName($session, $prmEventName) {
+		$answer = false;
+		$sQuery = 'SELECT * FROM Event WHERE UPPER(EventName)=UPPER(:event_name) OR UPPER(EventId)=UPPER(:event_name)';
+		$sth = $session->q->dreg->prepare($sQuery);
+		$sth->bindParam(':event_name', $prmEventName, PDO::PARAM_STR);
+		$sth->execute();
+		while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
+			$answer = $row['EventId'];
+		}
+		return $answer;
+	}
+
 	public static function getIdByName($session, $prmEventName)
 	{
 		$EventId = '';
@@ -61,7 +73,7 @@ class DIEvent extends DIRecord
 		$EventId = self::getIdByName($session, $prmEventName);
 		$e = new self($session, $prmEventName);
 		return $e;
-	} #function
+	}
 	
 	public function getDeleteQuery()
 	{
@@ -149,7 +161,5 @@ class DIEvent extends DIRecord
 			$this->status->status = $iReturn;
 		}
 		return $iReturn;
-	} #function
-} #class
-
-</script>
+	}
+} //class

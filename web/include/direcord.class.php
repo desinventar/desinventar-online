@@ -1,7 +1,7 @@
 <?php
 /*
  DesInventar - http://www.desinventar.org
- (c) 1998-2012 Corporacion OSSO
+ (c) 1998-2015 Corporacion OSSO
 */
 class DIRecord extends DIObject
 {
@@ -69,7 +69,7 @@ class DIRecord extends DIObject
 		}
 		$query .= ')';
 		return $query;
-	} #getCreateTable
+	} //getCreateTable
 
 	
 	public function getWhereSubQuery()
@@ -272,7 +272,6 @@ class DIRecord extends DIObject
 				{
 					$oItem = preg_split('#/#', $sValue);
 					$sFieldName = $oItem[0];
-					#$sFieldType = $oItem[1];
 					if (array_key_exists($sFieldName, $row))
 					{
 						$this->set($sFieldName, $row[$sFieldName]);
@@ -658,6 +657,4 @@ class DIRecord extends DIObject
 		}
 		return $iReturn;
 	}
-
-	
 } //class

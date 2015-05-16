@@ -1,7 +1,7 @@
-<script language="php">
+<?php
 /*
  DesInventar - http://www.desinventar.org
- (c) 1998-2012 Corporacion OSSO
+ (c) 1998-2015 Corporacion OSSO
 */
 class DIRegion extends DIObject
 {
@@ -92,7 +92,23 @@ class DIRegion extends DIObject
 			$this->set('OptionLanguageList', $this->get('LangIsoCode'));
 		}
 	} // __construct
-	
+
+	public static function regionGetOrCreate(UserSession $us, $region_id, $region_label, $lang_iso_code, $country_iso, $admin_user_id) {
+		$r = new self($us, $region_id);
+		$r->set('RegionLabel', $region_label);
+		$r->set('LangIsoCode', $lang_iso_code);
+		$r->set('CountryIso', $country_iso);
+		$r->set('RegionStatus', 1);
+		if (self::existRegion($us, $region_id) < 0) {
+			$r->insert();
+		} else {
+			$r->update();
+		}
+		$r->removeRegionUserAdmin();
+		$us->setUserRole($admin_user_id, $region_id, 'ADMINREGION');
+		return $region_id;
+	}
+
 	public function addLanguageInfo($LangIsoCode)
 	{
 		$this->createFields($this->sInfoTrans, $LangIsoCode);
@@ -724,7 +740,7 @@ class DIRegion extends DIObject
 					$answer[$GeoLevelId]['HasMap'] = 1;
 				}
 			}
-			# Validate each level to see if maps can be done
+			// Validate each level to see if maps can be done
 			$sQuery = 'SELECT DISTINCT GeographyId FROM Geocarto WHERE GeographyId<>""';
 			$geography_list = array();
 			foreach($this->session->q->dreg->query($sQuery) as $row)
@@ -756,4 +772,3 @@ class DIRegion extends DIObject
 		return $answer;
 	} //loadGeoLevels()
 } //class
-</script>
