@@ -11,7 +11,7 @@ if (isset($_SERVER["HTTP_HOST"]))
 	else
 	{
 		// Running on a Linux Server
-		$FBCore = SRCDIR . '/vendors/php/firephpcore/0.3.2/lib/FirePHPCore/fb.php';
+		$FBCore = SRCDIR . '/vendor/firephp/firephp-core/lib/FirePHPCore/fb.php';
 	}
 
 	if (file_exists($FBCore))
