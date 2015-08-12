@@ -8,4 +8,4 @@ thumbs.db
 nbproject
 *.komodoproject
 .idea
-
+vendor/*
