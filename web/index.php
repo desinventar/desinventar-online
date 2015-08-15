@@ -67,7 +67,7 @@ switch ($cmd)
 		$answer = array();
 		$UserId = getParameter('UserId');
 		$UserPasswd = getParameter('UserPasswd');
-		if ($us->login($UserId, $UserPasswd) > 0)
+		if ($us->login($UserId, $UserPasswd, \UserSession::PASSWORD_IS_HASHED) > 0)
 		{
 			$iReturn = ERR_NO_ERROR;	# Login success
 			$user = array();
@@ -123,7 +123,7 @@ switch ($cmd)
 		{
 			$UserPasswd = getParameter('UserPasswd', '');
 			$UserPasswd2 = getParameter('UserPasswd2', '');
-			if ($us->validateUser($us->UserId, $_POST['UserPasswd'],true) != '')
+			if ($us->validateUser($us->UserId, $_POST['UserPasswd'], \UserSession::PASSWORD_IS_HASHED) != '')
 			{
 				$us->updateUserPasswd($us->UserId, $_POST['UserPasswd2']);
 			}

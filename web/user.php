@@ -1,4 +1,4 @@
-<script language="php">
+<?php
 /*
  DesInventar - http://www.desinventar.org
  (c) 1998-2012 Corporacion OSSO
@@ -62,7 +62,7 @@ switch ($cmd)
 		$Answer = array('Status' => 'ERROR');
 		$UserId = getParameter('UserId');
 		$UserPasswd = getParameter('UserPasswd');
-		if ($us->login($UserId, $UserPasswd) > 0)
+		if ($us->login($UserId, $UserPasswd, \UserSession::PASSWORD_IS_HASHED) > 0)
 		{
 			$Answer['Status'] = ERR_NO_ERROR;	// Login success
 			$Answer['UserId'] = $us->UserId;
@@ -123,7 +123,7 @@ switch ($cmd)
 	break;
 	case 'updatepasswd':
 		// Check if password is correct (ask to dicore). if is OK show dialog to change it.
-		if ($us->validateUser($us->UserId, $_POST['UserPasswd'],true) == '')
+		if ($us->validateUser($us->UserId, $_POST['UserPasswd'], \UserSession::PASSWORD_IS_HASHED) == '')
 		{
 			echo 'ERRORPASSWD';
 		}
@@ -199,5 +199,3 @@ switch ($cmd)
 		}
 	break;
 } //switch
-
-</script>
