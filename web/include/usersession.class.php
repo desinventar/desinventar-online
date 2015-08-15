@@ -13,6 +13,8 @@ define('ROLE_ADMINPORTAL', 5);
 
 class UserSession
 {
+	const PASSWORD_IS_HASHED = true;
+	const PASSWORD_IS_CLEAR = false;
 
 	public function __construct()
 	{
@@ -115,10 +117,10 @@ class UserSession
 		return $iReturn;
 	}
 
-	public function login($prmUserId, $prmUserPasswd)
+	public function login($prmUserId, $prmUserPasswd, $withCrypt)
 	{
 		$iReturn = ERR_DEFAULT_ERROR;
-		$UserId = $this->validateUser($prmUserId, $prmUserPasswd);
+		$UserId = $this->validateUser($prmUserId, $prmUserPasswd, $withCrypt);
 		if ($UserId != '')
 		{
 			$iReturn = $this->setUser($UserId);
@@ -345,7 +347,7 @@ class UserSession
 	} // close()
 
 	// Validate a user/passwd pair against database
-	public function validateUser($prmUserId, $prmUserPasswd, $withCrypt=true)
+	public function validateUser($prmUserId, $prmUserPasswd, $withCrypt)
 	{
 		$UserId = '';
 		if (! $withCrypt)
