@@ -34,9 +34,9 @@ class DIUser extends DIRecord
 		}
 	} // __construct
 	
-	public function getSelectQuery()
+	public function getSelectQuery($prmTableName = '')
 	{
-		$query = parent::getSelectQuery();
+		$query = parent::getSelectQuery($prmTableName);
 		$query .= " OR (UserNotes LIKE '%(UserName=" . $this->get('UserId') . ")%')";
 		return $query;
 	}

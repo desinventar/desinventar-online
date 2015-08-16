@@ -255,7 +255,7 @@ class DIGeography extends DIRecord
 		return $iReturn;
 	}
 	
-	public function validateDelete()
+	public function validateDelete($bStrict)
 	{
 		$iReturn = ERR_NO_ERROR;
 		$iReturn = $this->validateNoDatacards(-48);
