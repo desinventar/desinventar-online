@@ -1,18 +1,8 @@
 <?php
 if (isset($_SERVER["HTTP_HOST"]))
 {
-	if (isset($_SERVER["WINDIR"]))
-	{
-		// Running on a Windows Server
-		// 2011-02-25 (jhcaiced) Use DOCUMENT_ROOT to get installation path	
-		$Install_Dir = dirname(dirname($_SERVER['DOCUMENT_ROOT']));		
-		$FBCore = $Install_Dir . '/apps/FirePHPCore-0.3.2/lib/FirePHPCore/fb.php';
-	}
-	else
-	{
-		// Running on a Linux Server
-		$FBCore = SRCDIR . '/vendor/firephp/firephp-core/lib/FirePHPCore/fb.php';
-	}
+	// Location of FirePHP - loaded via composer
+	$FBCore = SRCDIR . '/vendor/firephp/firephp-core/lib/FirePHPCore/fb.php';
 
 	if (file_exists($FBCore))
 	{
