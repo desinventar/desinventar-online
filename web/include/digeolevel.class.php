@@ -54,7 +54,7 @@ class DIGeoLevel extends DIRecord
 		return $iMaxVal;
 	} // function
 
-	public function validateCreate()
+	public function validateCreate($bStrict)
 	{
 		$iReturn = 1;
 		$iReturn = $this->validateNotNull(-31, 'GeoLevelId');
