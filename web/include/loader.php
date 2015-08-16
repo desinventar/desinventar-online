@@ -41,7 +41,6 @@ if (isset($_SERVER['HTTP_HOST']))
 		define('MAPSERV', 'mapserv.exe');
 		// 2011-02-25 (jhcaiced) Use DOCUMENT_ROOT to get installation path	
 		$Install_Dir = dirname(dirname($_SERVER['DOCUMENT_ROOT']));
-		define('JPGRAPHDIR', $Install_Dir . '/apps/jpgraph');
 		define('TEMP', $Install_Dir . '/tmp');
 		define('FONTSET' , $Install_Dir . '/fontswin.txt');	
 		// MS4W doesn't load the gd extension by default, so we do here now...
@@ -54,7 +53,9 @@ if (isset($_SERVER['HTTP_HOST']))
 			$_SERVER['DESINVENTAR_WEB'] = $Install_Dir . '/Apache/htdocs';
 		}
 		$Install_Dir = dirname($Install_Dir);
-		$_SERVER['DESINVENTAR_WWWDIR'] = $Install_Dir . '/www';
+		if (empty($_SERVER['DESINVENTAR_WWWDIR'])) {
+			$_SERVER['DESINVENTAR_WWWDIR'] = $Install_Dir . '/www';
+		}
 		if (empty($_SERVER['DESINVENTAR_DATADIR'])) {
 			$_SERVER['DESINVENTAR_DATADIR'] = $Install_Dir . '/data';
 		}
@@ -86,14 +87,15 @@ if (isset($_SERVER['HTTP_HOST']))
 		{
 			$_SERVER['DESINVENTAR_CACHEDIR'] = '/var/cache/Smarty/desinventar';
 		}
-		define('JPGRAPHDIR', '/usr/share/php/jpgraph/3.0.7');
 		define('FONTSET' , '/usr/share/fonts/liberation/fonts.txt');
 		define('TEMP', '/var/tmp/desinventar');
 		if (! isset($_SERVER['DESINVENTAR_WEB']))
 		{
 			$_SERVER['DESINVENTAR_WEB']      = '/usr/share/desinventar/web';
 		}
-		$_SERVER['DESINVENTAR_WWWDIR']   = '/var/www/desinventar';
+		if (empty($_SERVER['DESINVENTAR_WWWDIR'])) {
+			$_SERVER['DESINVENTAR_WWWDIR'] = '/var/www/desinventar';
+		}
 		if (empty($_SERVER['DESINVENTAR_DATADIR'])) {
 			$_SERVER['DESINVENTAR_DATADIR']  = '/var/lib/desinventar';
 		}
@@ -109,6 +111,7 @@ if (isset($_SERVER['HTTP_HOST']))
 	define('DESINV_LIBS_URL', $_SERVER['DESINVENTAR_LIBS_URL']);
 	// Define the Smarty library directory (installed by composer)
 	define('SMARTYDIR', SRCDIR  . '/vendor/smarty/smarty/libs');
+	define('JPGRAPHDIR', SRCDIR . '/lib/jpgraph/3.0.7');
 }
 else
 {
@@ -116,7 +119,7 @@ else
 	define('MODE', 'command');
 	if (! isset($_SERVER['DESINVENTAR_WWWDIR']))
 	{
-		$_SERVER['DESINVENTAR_WWWDIR']   = '/var/www/desinventar';
+		$_SERVER['DESINVENTAR_WWWDIR'] = '/var/www/desinventar';
 	}
 	if (! isset($_SERVER['DESINVENTAR_DATADIR']))
 	{
