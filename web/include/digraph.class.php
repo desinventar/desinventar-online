@@ -226,7 +226,13 @@ class DIGraph extends DIResult
 			# Construct Graphic Object and Show Page
 			$g = new Graphic($us, $options, $gl);
 			# Wrote graphic to file
-			$g->Stroke($sImageFile);
+			try {
+				$g->Stroke($sImageFile);
+			} catch (Exception $e) {
+				// The graph image cannot be created, so we use a default blank image instead here
+				$sImageURL = 'images/blank.gif';
+				$sImageFile = SRCDIR . '/web/images/blank.gif';
+			}
 
 			$this->output = array();
 			$this->output['NumRecords']  = $NumRecords;
