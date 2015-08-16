@@ -82,7 +82,7 @@ class DIEvent extends DIRecord
 		return $sQuery;
 	}
 
-	public function validateCreate()
+	public function validateCreate($bStrict)
 	{
 		$iReturn = 1;
 		$iReturn = $this->validateNotNull(-11, 'EventId');
@@ -93,7 +93,7 @@ class DIEvent extends DIRecord
 		return $iReturn;
 	}
 
-	public function validateUpdate()
+	public function validateUpdate($bStrict)
 	{
 		$iReturn = ERR_NO_ERROR;
 		$iReturn = $this->validateNotNull(-13, 'EventName');
@@ -127,7 +127,7 @@ class DIEvent extends DIRecord
 		return $iReturn;
 	}
 
-	public function validateDelete()
+	public function validateDelete($bStrict)
 	{
 		$iReturn = ERR_NO_ERROR;
 		$iReturn = $this->validateNoDatacards(-15);
