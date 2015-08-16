@@ -41,7 +41,6 @@ if (isset($_SERVER['HTTP_HOST']))
 		define('MAPSERV', 'mapserv.exe');
 		// 2011-02-25 (jhcaiced) Use DOCUMENT_ROOT to get installation path	
 		$Install_Dir = dirname(dirname($_SERVER['DOCUMENT_ROOT']));
-		define('SMARTYDIR', $Install_Dir . '/apps/Smarty');
 		define('JPGRAPHDIR', $Install_Dir . '/apps/jpgraph');
 		define('TEMP', $Install_Dir . '/tmp');
 		define('FONTSET' , $Install_Dir . '/fontswin.txt');	
@@ -82,16 +81,11 @@ if (isset($_SERVER['HTTP_HOST']))
 		if (isset($_SERVER['DESINVENTAR_LIBS_PHP'])) {
 			define('DESINV_LIBS_PHP', $_SERVER['DESINVENTAR_LIBS_PHP']);
 		}
-		if (! isset($_SERVER['DESINVENTAR_LIBS_URL'])) {
-			$_SERVER['DESINVENTAR_LIBS_URL'] = '';
-		}
-		define('DESINV_LIBS_URL', $_SERVER['DESINVENTAR_LIBS_URL']);
 
 		if (! isset($_SERVER['DESINVENTAR_CACHEDIR']))
 		{
 			$_SERVER['DESINVENTAR_CACHEDIR'] = '/var/cache/Smarty/desinventar';
 		}
-		define('SMARTYDIR', SRCDIR  . '/vendor/smarty/smarty/libs');
 		define('JPGRAPHDIR', '/usr/share/php/jpgraph/3.0.7');
 		define('FONTSET' , '/usr/share/fonts/liberation/fonts.txt');
 		define('TEMP', '/var/tmp/desinventar');
@@ -109,6 +103,12 @@ if (isset($_SERVER['HTTP_HOST']))
 			$appOptions['IsOnline'] = 1;
 		}
 	}
+	if (empty($_SERVER['DESINVENTAR_LIBS_URL'])) {
+		$_SERVER['DESINVENTAR_LIBS_URL'] = '//cdn-desinventar.inticol.com/js';
+	}
+	define('DESINV_LIBS_URL', $_SERVER['DESINVENTAR_LIBS_URL']);
+	// Define the Smarty library directory (installed by composer)
+	define('SMARTYDIR', SRCDIR  . '/vendor/smarty/smarty/libs');
 }
 else
 {
@@ -174,7 +174,9 @@ require_once(BASE . '/include/didisaster.class.php');
 require_once(SRCDIR . '/lib/lib.uuid/20110320/lib.uuid.php');
 
 // Set a default exception handler to avoid ugly messages in screen
-set_exception_handler('global_exception_handler');
+if ($desinventarMode != 'devel') {
+	set_exception_handler('global_exception_handler');
+}
 
 // Validate that out main database exists (core.db)
 if (!file_exists(CONST_DBCORE)) {
@@ -192,7 +194,6 @@ if (MODE != 'command')
 	session_start();
 	$SessionId = session_id();
 }
-
 // 2009-01-15 (jhcaiced) Start by create/recover the session 
 // information, even for anonymous users
 $us = new UserSession($SessionId);
@@ -216,14 +217,15 @@ if (MODE != 'command')
 	$t->compile_dir     = SMTY_DIR;
 	$t->left_delimiter  = '{-';
 	$t->right_delimiter = '-}';
-	$t->force_compile   = false;
-	if ($desinventarMode == 'devel') {
-		$t->force_compile = true;
-	}
 	$t->cache_dir = SMTY_DIR;
-	$t->setCaching(Smarty::CACHING_LIFETIME_CURRENT);
 	$t->cache_lifetime  = 3600;
-	$t->compile_check   = true;
+	$t->force_compile   = false;
+	$t->compile_check = false;
+	if ($desinventarMode == 'devel') {
+		//$t->setCaching(Smarty::CACHING_LIFETIME_CURRENT);
+		//$t->force_compile = true;
+		//$t->compile_check   = true;
+	}
 	// Choose Language (First from Parameter, next from UserSession table, then autodetect from browser)
 	$lg = getParameter('lang');
 	if ($lg == '') 
@@ -293,7 +295,7 @@ if (MODE != 'command')
 	$t->assign('desinventarMode'        , $desinventarMode);
 	$t->assign('desinventarURL'         , $desinventarURL);
 	$t->assign('desinventarLibs'        , DESINV_LIBS_URL);
-	if (DESINV_LIBS_URL != '') {
+	if (!empty(DESINV_LIBS_URL)) {
 		$t->assign('desinventar_extjs_url', DESINV_LIBS_URL . '/extjs/3.4.0');
 		$t->assign('desinventarOpenLayersURL', DESINV_LIBS_URL . '/openlayers/2.11');
 	} else {
