@@ -22,6 +22,8 @@ define('VERSION'     , MAJORVERSION . '.' . MINORVERSION);
 define('JSVERSION'   , VERSION);
 define('SRCDIR'  , $_SERVER['DESINVENTAR_SRC']);
 
+require_once __DIR__ . '/fb.php';
+
 $appOptions = array();
 $appOptions['UseRemoteMaps'] = 1;
 $appOptions['IsOnline'] = 0;
@@ -54,9 +56,13 @@ if (isset($_SERVER['HTTP_HOST']))
 		}
 		$Install_Dir = dirname($Install_Dir);
 		$_SERVER['DESINVENTAR_WWWDIR'] = $Install_Dir . '/www';
-		$_SERVER['DESINVENTAR_DATADIR'] = $Install_Dir . '/data';
+		if (empty($_SERVER['DESINVENTAR_DATADIR'])) {
+			$_SERVER['DESINVENTAR_DATADIR'] = $Install_Dir . '/data';
+		}
 		$_SERVER['DESINVENTAR_MAPDIR'] = $Install_Dir . '/files/worldmap';
-		$_SERVER['DESINVENTAR_CACHEDIR'] = $Install_Dir . '/tmp';		
+		if (empty($_SERVER['DESINVENTAR_CACHEDIR'])) {
+			$_SERVER['DESINVENTAR_CACHEDIR'] = $Install_Dir . '/tmp';
+		}
 		// Disable Remote Maps by Default
 		$appOptions['UseRemoteMaps'] = 0;
 	}
@@ -94,8 +100,7 @@ if (isset($_SERVER['HTTP_HOST']))
 			$_SERVER['DESINVENTAR_WEB']      = '/usr/share/desinventar/web';
 		}
 		$_SERVER['DESINVENTAR_WWWDIR']   = '/var/www/desinventar';
-		if (! isset($_SERVER['DESINVENTAR_DATADIR']))
-		{
+		if (empty($_SERVER['DESINVENTAR_DATADIR'])) {
 			$_SERVER['DESINVENTAR_DATADIR']  = '/var/lib/desinventar';
 		}
 		$_SERVER['DESINVENTAR_MAPDIR'] = '/usr/share/desinventar/worldmap';
@@ -149,7 +154,6 @@ define('CACHEDIR', $_SERVER['DESINVENTAR_CACHEDIR']);
 define('VAR_DIR' , DATADIR);
 define('TMP_DIR' , TEMP);
 define('SMTY_DIR', CACHEDIR); // Smarty temp dir
-require_once(BASE . '/include/fb.php');
 require_once(BASE . '/include/usersession.class.php');
 require_once(BASE . '/include/date.class.php');
 require_once(BASE . '/include/diobject.class.php');
@@ -158,6 +162,7 @@ require_once(BASE . '/include/direcord.class.php');
 require_once(BASE . '/include/diuser.class.php');
 require_once(BASE . '/include/query.class.php');
 require_once(BASE . '/include/constants.php');
+require_once(BASE . '/include/exception.php');
 require_once(BASE . '/include/common.php');
 require_once(BASE . '/include/xml2array.php');
 require_once(BASE . '/include/dievent.class.php');
@@ -167,6 +172,15 @@ require_once(BASE . '/include/digeolevel.class.php');
 require_once(BASE . '/include/digeocarto.class.php');
 require_once(BASE . '/include/didisaster.class.php');
 require_once(SRCDIR . '/lib/lib.uuid/20110320/lib.uuid.php');
+
+// Set a default exception handler to avoid ugly messages in screen
+set_exception_handler('global_exception_handler');
+
+// Validate that out main database exists (core.db)
+if (!file_exists(CONST_DBCORE)) {
+	throw new Exception('Cannot find the database directory');
+}
+
 // SETTINGS
 date_default_timezone_set('UTC');
 $time_start = microtime_float();
