@@ -1,4 +1,4 @@
-<script language="php">
+<?php
 /*
   DesInventar - http://www.desinventar.org
   (c) 1998-2012 Corporacion OSSO
@@ -99,6 +99,8 @@ class Maps
 			  WMS_TIMEEXTENT	"'. $inf['BEG'] ."/". $inf['END'] .'/P5M"
 			  WMS_ONLINERESOURCE	"'. $this->url .'/"
 			  WMS_SRS	"EPSG:4326 EPSG:900913"
+			  # Mapserver 7.0 compatibility
+			  WMS_ENABLE_REQUEST "*"
 			END
 		END
 		QUERYMAP
@@ -235,6 +237,8 @@ class Maps
 			WMS_ABSTRACT	"Level: '. $inf['LEVEL'] .'"
 			WMS_EXTENT	"'. $inf['EXTENT'] .'"
 			WMS_SRS	"EPSG:4326 EPSG:900913"
+			# Mapserver 7.0 compatibility
+			WMS_ENABLE_REQUEST "*"
 		END';
 					// classify elements by ranges
 					$vl = $this->classify($ly[0], $dl, $range);
@@ -455,4 +459,3 @@ class Maps
 		return $this->kml;
 	} //function
 } //class
-</script>
