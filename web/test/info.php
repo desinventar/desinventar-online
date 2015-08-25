@@ -1,4 +1,4 @@
-<script language="php">
+<?php
 	require_once('../include/loader.php');
 	//phpInfo();
 	$zip = new ZipArchive();
@@ -6,8 +6,6 @@
 	if ($zip->open($filename) !== TRUE) {
 		exit('Cannot open ' . $filename . "\n");
 	}
-	//print_r($zip);
-	fb(TEMP);
 	$zip->extractTo(TEMP, 'info.xml');
 	
 	// Stream reader example, open directly the xml files and parses it
@@ -28,4 +26,3 @@
 		}
 	}
 	print_r($odt_meta);
-</script>
