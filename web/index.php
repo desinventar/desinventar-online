@@ -1397,14 +1397,9 @@ switch ($cmd)
 		$post['General']['LangIsoCode'] = $lg;
 
 		$options = explode('/', $_GET['params']);
-		foreach($options as $key => $value)
-		{
-			fb($key . ' => ' . $value);
-		}
 		$profile_id   = isset($options[0]) ? $options[0] : '';
 		$profile_item = isset($options[1]) ? $options[1] : '';
 
-		fb($profile_id . ' ' . $profile_item);
 		$xml_string = file_get_contents('../samples/profile.xml');
 		$xml_doc = new SimpleXMLElement($xml_string);
 		$xml_profile = reset($xml_doc->xpath('profile/item'));
