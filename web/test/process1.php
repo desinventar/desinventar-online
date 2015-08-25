@@ -1,4 +1,4 @@
-<script language="php">
+<?php
 	require_once('../include/fb.php');
 	
 	class LongProcess {
@@ -54,5 +54,3 @@ $p = new LongProcess('A');
 print $p->getPid() . "<br />\n";
 $p->setMax(300);
 $p->set(297);
-fb($p->getPercent());
-</script>
