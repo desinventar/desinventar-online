@@ -22,7 +22,12 @@ define('VERSION'     , MAJORVERSION . '.' . MINORVERSION);
 define('JSVERSION'   , VERSION);
 define('SRCDIR'  , $_SERVER['DESINVENTAR_SRC']);
 
-require_once __DIR__ . '/fb.php';
+$loader = require_once __DIR__ . '/../../vendor/autoload.php';
+$loader->add('DesInventar', __DIR__. '/../../src');
+
+$config = DesInventar\Common\ConfigLoader::getInstance(__DIR__ . '/../../config/config.php', 'php');
+
+//require_once __DIR__ . '/fb.php';
 
 $appOptions = array();
 $appOptions['UseRemoteMaps'] = 1;
@@ -63,6 +68,9 @@ if (isset($_SERVER['HTTP_HOST']))
 		if (empty($_SERVER['DESINVENTAR_CACHEDIR'])) {
 			$_SERVER['DESINVENTAR_CACHEDIR'] = $Install_Dir . '/tmp';
 		}
+		if (!empty($_SERVER['REDIRECT_DESINVENTAR_MODE'])) {
+			$_SERVER['DESINVENTAR_MODE'] = $_SERVER['REDIRECT_DESINVENTAR_MODE'];
+		}
 		// Disable Remote Maps by Default
 		$appOptions['UseRemoteMaps'] = 0;
 	}
@@ -83,10 +91,6 @@ if (isset($_SERVER['HTTP_HOST']))
 			define('DESINV_LIBS_PHP', $_SERVER['DESINVENTAR_LIBS_PHP']);
 		}
 
-		if (! isset($_SERVER['DESINVENTAR_CACHEDIR']))
-		{
-			$_SERVER['DESINVENTAR_CACHEDIR'] = '/var/cache/Smarty/desinventar';
-		}
 		define('FONTSET' , '/usr/share/fonts/liberation/fonts.txt');
 		define('TEMP', '/var/tmp/desinventar');
 		if (! isset($_SERVER['DESINVENTAR_WEB']))
@@ -96,19 +100,12 @@ if (isset($_SERVER['HTTP_HOST']))
 		if (empty($_SERVER['DESINVENTAR_WWWDIR'])) {
 			$_SERVER['DESINVENTAR_WWWDIR'] = '/var/www/desinventar';
 		}
-		if (empty($_SERVER['DESINVENTAR_DATADIR'])) {
-			$_SERVER['DESINVENTAR_DATADIR']  = '/var/lib/desinventar';
-		}
 		$_SERVER['DESINVENTAR_MAPDIR'] = '/usr/share/desinventar/worldmap';
 		if (preg_match('/desinventar.org$/', $_SERVER['HTTP_HOST']))
 		{
 			$appOptions['IsOnline'] = 1;
 		}
 	}
-	if (empty($_SERVER['DESINVENTAR_LIBS_URL'])) {
-		$_SERVER['DESINVENTAR_LIBS_URL'] = '//cdn-desinventar.inticol.com/js';
-	}
-	define('DESINV_LIBS_URL', $_SERVER['DESINVENTAR_LIBS_URL']);
 	// Define the Smarty library directory (installed by composer)
 	define('SMARTYDIR', SRCDIR  . '/vendor/smarty/smarty/libs');
 	define('JPGRAPHDIR', SRCDIR . '/lib/jpgraph/3.0.7');
@@ -121,42 +118,33 @@ else
 	{
 		$_SERVER['DESINVENTAR_WWWDIR'] = '/var/www/desinventar';
 	}
-	if (! isset($_SERVER['DESINVENTAR_DATADIR']))
-	{
-		$_SERVER['DESINVENTAR_DATADIR']  = '/var/lib/desinventar';
-	}
 	$_SERVER['DESINVENTAR_MAPDIR'] = '/usr/share/desinventar/worldmap';
-	if (! isset($_SERVER['DESINVENTAR_CACHEDIR']))
-	{
-		$_SERVER['DESINVENTAR_CACHEDIR'] = '/var/cache/Smarty/desinventar';
-	}
 	define('TEMP', '/var/tmp/desinventar');
 }
 
-// DesInventar Mode
-// normal (production, cache enabled etc.)
-// devel  (development, no cache, etc.)
-$desinventarMode = 'normal';
-if (isset($_SERVER['REDIRECT_DESINVENTAR_MODE']))
-{
-	$_SERVER['DESINVENTAR_MODE'] = $_SERVER['REDIRECT_DESINVENTAR_MODE'];
+// Override configuration values if set as Apache variables
+if (!empty($_SERVER['DESINVENTAR_CACHEDIR'])) {
+	$config->smarty['cachedir'] = $_SERVER['DESINVENTAR_CACHEDIR'];
 }
-if (isset($_SERVER['DESINVENTAR_MODE']))
+if (!empty($_SERVER['DESINVENTAR_DATADIR'])) {
+	$config->paths['datadir'] = $_SERVER['DESINVENTAR_DATADIR'];
+}
+if (!empty($_SERVER['DESINVENTAR_MODE']))
 {
-	$desinventarMode = $_SERVER['DESINVENTAR_MODE'];
+	$config->flags['mode'] = $_SERVER['DESINVENTAR_MODE'];
+}
+if (!empty($_SERVER['DESINVENTAR_LIBS_URL'])) {
+	$config->paths['libs_url'] = $_SERVER['DESINVENTAR_LIBS_URL'];
 }
 
 define('BASE'    , $_SERVER['DESINVENTAR_WEB']);
 define('WWWDIR'  , $_SERVER['DESINVENTAR_WWWDIR']);
 define('WWWDATA' , '/desinventar-data');
 define('WWWURL'  , '/');
-define('DATADIR' , $_SERVER['DESINVENTAR_DATADIR']);
-define('DBDIR'   , DATADIR . '/database');
+define('DBDIR'   , $config->paths['datadir'] . '/database');
 define('MAPDIR'  , $_SERVER['DESINVENTAR_MAPDIR']);
-define('CACHEDIR', $_SERVER['DESINVENTAR_CACHEDIR']);
-define('VAR_DIR' , DATADIR);
+define('VAR_DIR' , $config->paths['datadir']);
 define('TMP_DIR' , TEMP);
-define('SMTY_DIR', CACHEDIR); // Smarty temp dir
 require_once(BASE . '/include/usersession.class.php');
 require_once(BASE . '/include/date.class.php');
 require_once(BASE . '/include/diobject.class.php');
@@ -177,7 +165,7 @@ require_once(BASE . '/include/didisaster.class.php');
 require_once(SRCDIR . '/lib/lib.uuid/20110320/lib.uuid.php');
 
 // Set a default exception handler to avoid ugly messages in screen
-if ($desinventarMode != 'devel') {
+if ($config->flags['mode'] != 'devel') {
 	set_exception_handler('global_exception_handler');
 }
 
@@ -217,14 +205,14 @@ if (MODE != 'command')
 	$t->debugging       = false;
 	$t->config_dir      = $confdir;
 	$t->template_dir    = $templatedir;
-	$t->compile_dir     = SMTY_DIR;
+	$t->compile_dir     = $config->smarty['cachedir'];
 	$t->left_delimiter  = '{-';
 	$t->right_delimiter = '-}';
-	$t->cache_dir = SMTY_DIR;
+	$t->cache_dir = $config->smarty['cachedir'];
 	$t->cache_lifetime  = 3600;
 	$t->force_compile   = false;
 	$t->compile_check = false;
-	if ($desinventarMode == 'devel') {
+	if ($config->flags['mode'] == 'devel') {
 		//$t->setCaching(Smarty::CACHING_LIFETIME_CURRENT);
 		//$t->force_compile = true;
 		//$t->compile_check   = true;
@@ -295,17 +283,14 @@ if (MODE != 'command')
 	}
 
 	// General Information (common to portal/app)
-	$t->assign('desinventarMode'        , $desinventarMode);
+	$t->assign('desinventarMode'        , $config->flags['mode']);
 	$t->assign('desinventarURL'         , $desinventarURL);
-	$t->assign('desinventarLibs'        , DESINV_LIBS_URL);
-	if (DESINV_LIBS_URL != '') {
-		$t->assign('desinventar_extjs_url', DESINV_LIBS_URL . '/extjs/3.4.0');
-		$t->assign('desinventarOpenLayersURL', DESINV_LIBS_URL . '/openlayers/2.11');
-	}
+	$t->assign('desinventarLibs'        , $config->paths['libs_url']);
+	$t->assign('desinventar_extjs_url', $config->paths['libs_url'] . '/extjs/3.4.0');
+	$t->assign('desinventarOpenLayersURL', $config->paths['libs_url'] . '/openlayers/2.11');
 	$t->assign('desinventarURLPortal'   , $desinventarURLPortal);
 	$t->assign('desinventarVersion'     , VERSION);
 	$t->assign('desinventarLang'        , $lg);
 	$t->assign('desinventarUserId'      , $us->UserId);
 	$t->assign('desinventarUserFullName', $us->getUserFullName());
-	// OpenLayers Location
 }

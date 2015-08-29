@@ -1,7 +1,7 @@
-<script language="php">
+<?php
 /*
  DesInventar - http://www.desinventar.org
- (c) 1998-2012 Corporacion OSSO
+ (c) 1998-2015 Corporacion OSSO
 */
 	require_once('include/loader.php');
 	$mod = 'metguide';
@@ -31,9 +31,8 @@
 	$EffectList = array_merge($ef1,$ef2,$ef3,$ef4,$sec);
 	$t->assign('EffectList', $EffectList);
 
-	if ($desinventarMode == 'devel')
+	if ($config->flags['mode'] == 'devel')
 	{
 		$t->force_compile   = true; # Force this template to always compile
 	}
 	$t->display('metguide-' . $lg . '.tpl');
-</script>
