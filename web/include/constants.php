@@ -13,9 +13,6 @@ define('TRUE' , 1);
 define('ERROR'  , 0);
 define('WARNING', 1);
 
-// Database File Locations
-// core.db - Users, Regions, Auths.. 
-define('CONST_DBCORE', VAR_DIR .'/main/core.db');
 // base.db - DI's Basic database, predefined events etc.
 define('CONST_DBBASE', VAR_DIR .'/main/base.db');
 // region.db - Emtpy database skeleton for Regions
