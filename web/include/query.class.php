@@ -14,6 +14,11 @@ class Query //extends PDO
 	public function __construct($region_id = null, $config)
 	{
 		$this->config = $config;
+		// Open core.db - Users, Regions, Auths.. 
+		$this->core = $this->openSqliteDatabase($this->config['db_dir'] . '/main/core.db');
+		// Open base.db - DI's Basic database
+		$this->base = $this->openSqliteDatabase($this->config['db_dir'] . '/main/base.db');
+
 		switch ($this->config['driver']) {
 			case 'sqlite':
 				$this->initSqliteDatabaseConnections($region_id);
@@ -23,21 +28,6 @@ class Query //extends PDO
 
 	public function initSqliteDatabaseConnections($region_id) {
 		try {
-				// Open core.db - Users, Regions, Auths.. 
-			$dbc = $this->config['db_dir'] . '/main/core.db';
-			if (file_exists($dbc)) {
-				$this->core = new PDO('sqlite:' . $dbc);
-			} else {
-				$this->rebuildCore($dbc); // Rebuild data from directory..
-			}
-
-			// Open base.db - DI's Basic database
-			$dbb = CONST_DBBASE;
-			if (file_exists($dbb))
-			{
-				$this->base = new PDO('sqlite:' . $dbb);
-			}
-
 			if (!empty($region_id)) {
 				$this->RegionId	= $region_id;
 				$this->setDBConnection($this->RegionId);
