@@ -169,11 +169,6 @@ if ($config->flags['mode'] != 'devel') {
 	set_exception_handler('global_exception_handler');
 }
 
-// Validate that out main database exists (core.db)
-if (!file_exists(CONST_DBCORE)) {
-	throw new Exception('Cannot find the database directory');
-}
-
 // SETTINGS
 date_default_timezone_set('UTC');
 $time_start = microtime_float();
@@ -187,7 +182,13 @@ if (MODE != 'command')
 }
 // 2009-01-15 (jhcaiced) Start by create/recover the session 
 // information, even for anonymous users
-$us = new UserSession($SessionId);
+$us = new UserSession($SessionId, $config);
+
+// Validate that out main database exists (core.db)
+if (empty($us->q->core)) {
+	throw new Exception('Cannot initialize the database connection');
+}
+
 $us->awake();
 if (MODE != 'command')
 {

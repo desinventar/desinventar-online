@@ -9,47 +9,32 @@ class Query //extends PDO
 	public $dreg = null;
 	public $core = null;
 	public $DBFile = '';
+	public $config = null;
 
-	public function __construct()
+	public function __construct($region_id = null, $config)
 	{
-		try
-		{
-			$num_args = func_num_args();
+		$this->config = $config;
+		// Open core.db - Users, Regions, Auths.. 
+		$this->core = $this->openSqliteDatabase($this->config['db_dir'] . '/main/core.db');
+		// Open base.db - DI's Basic database
+		$this->base = $this->openSqliteDatabase($this->config['db_dir'] . '/main/base.db');
 
-			// Open core.db - Users, Regions, Auths.. 
-			$dbc = CONST_DBCORE;
-			if (file_exists($dbc))
-			{
-				$this->core = new PDO('sqlite:' . $dbc);
-			}
-			else
-			{
-				$this->rebuildCore($dbc); // Rebuild data from directory..
-			}
+		switch ($this->config['driver']) {
+			case 'sqlite':
+				$this->initSqliteDatabaseConnections($region_id);
+				break;
+		}
+	}
 
-			// Open base.db - DI's Basic database
-			$dbb = CONST_DBBASE;
-			if (file_exists($dbb))
-			{
-				$this->base = new PDO('sqlite:' . $dbb);
-			}
-
-			if ($num_args > 0)
-			{
-				$this->RegionId = func_get_arg(0);
-			}
-			
-			if ($this->RegionId != '')
-			{
+	public function initSqliteDatabaseConnections($region_id) {
+		try {
+			if (!empty($region_id)) {
+				$this->RegionId	= $region_id;
 				$this->setDBConnection($this->RegionId);
-			}
-			else
-			{
+			} else {
 				$this->setDBConnection('core');
 			} //if
-		}
-		catch (Exception $e)
-		{
+		} catch (Exception $e) {
 			showErrorMsg('Error !: ' . $e->getMessage());
 			die();
 		}
@@ -72,57 +57,55 @@ class Query //extends PDO
 		return $DBFile;
 	}
 	
-	public function setDBConnection($prmRegionId, $prmDBFile='')
-	{
-		$iReturn = ERR_NO_ERROR;
-		$DBFile = VAR_DIR;
-		if ($prmRegionId != '')
-		{
-			if ($prmRegionId == 'core')
-			{
-				$DBFile .= '/main/core.db';
-			}
-			else
-			{
-				if ($prmDBFile == '')
-				{
-					$DBFile .= '/database/' . $prmRegionId .'/desinventar.db';
-				}
-				else
-				{
-					$DBFile = $prmDBFile;
-				}
-			}
-			if (file_exists($DBFile))
-			{
-				try
-				{
-					$this->dreg = new PDO('sqlite:' . $DBFile);
-					// set the error reporting attribute
-					$this->dreg->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-					$this->dreg->setAttribute(PDO::ATTR_TIMEOUT, 15.0);
-					$this->RegionId = $prmRegionId;
-					$this->DBFile = $DBFile;
-				}
-				catch (PDOException $e)
-				{
-					showErrorMsg($e->getMessage());
-				}
-			}
-			else
-			{
-				$iReturn = ERR_NO_DATABASE;			
-			} //if
+	public function setDBConnection($prmRegionId, $prmDBFile='') {
+		$this->dreg = null;
+		$this->RegionId = '';
+		$this->DBFile = '';
+		if ($this->config['driver'] != 'sqlite') {
+			return ERR_NO_ERROR;
 		}
-		else
-		{
-			$iReturn = ERR_NO_DATABASE;
-			$this->dreg = null;
-			$this->RegionId = '';
+		if ($prmRegionId == '') {
+			return ERR_NO_DATABASE;
 		}
-		return $iReturn;
+
+		if ($prmRegionId == 'core') {
+			$this->dreg = $this->core;
+		} else {
+			if ($prmDBFile == '') {
+				$DBFile .= $this->config['db_dir'] . '/database/' . $prmRegionId .'/desinventar.db';
+			} else {
+				$DBFile = $prmDBFile;
+			}
+			if (! file_exists($DBFile)) {
+				return ERR_NO_DATABASE;
+			}
+			try {
+				$this->dreg = $this->openSqliteDatabase($DBFile);
+				$this->RegionId = $prmRegionId;
+				$this->DBFile = $DBFile;
+			} catch (PDOException $e) {
+				showErrorMsg($e->getMessage());
+			}
+		}
+		return ERR_NO_ERROR;
 	}
-  
+
+	public function openSqliteDatabase($file_name) {
+		if (!file_exists($file_name)) {
+			return false;
+		}
+		try {
+			$pdo = new PDO('sqlite:' . $file_name);
+			// set the error reporting attribute
+			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$pdo->setAttribute(PDO::ATTR_TIMEOUT, 15.0);
+		} catch (Exception $e) {
+			showErrorMsg($e->getMessage());
+			return false;
+		}
+		return $pdo;
+	}
+
 	public function getassoc($sQuery)
 	{
 		$data = false;
