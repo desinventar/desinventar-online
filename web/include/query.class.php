@@ -10,14 +10,12 @@ class Query //extends PDO
 	public $core = null;
 	public $DBFile = '';
 
-	public function __construct()
+	public function __construct($region_id = null, $config)
 	{
 		try
 		{
-			$num_args = func_num_args();
-
 			// Open core.db - Users, Regions, Auths.. 
-			$dbc = CONST_DBCORE;
+			$dbc = $config['db_dir'] . '/main/core.db';
 			if (file_exists($dbc))
 			{
 				$this->core = new PDO('sqlite:' . $dbc);
@@ -34,17 +32,10 @@ class Query //extends PDO
 				$this->base = new PDO('sqlite:' . $dbb);
 			}
 
-			if ($num_args > 0)
-			{
-				$this->RegionId = func_get_arg(0);
-			}
-			
-			if ($this->RegionId != '')
-			{
+			if (!empty($region_id)) {
+				$this->RegionId	= $region_id;
 				$this->setDBConnection($this->RegionId);
-			}
-			else
-			{
+			} else {
 				$this->setDBConnection('core');
 			} //if
 		}
