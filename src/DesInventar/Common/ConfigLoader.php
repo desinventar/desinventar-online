@@ -109,7 +109,7 @@ class ConfigLoader {
 	 * Retrieve value with constants being a higher priority
 	 * @param $key Array Key to get
 	 */
-	public function __get($key)
+	public function &__get($key)
 	{
 		if (isset($this->options[$key])) {
 			return $this->options[$key];
