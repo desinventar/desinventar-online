@@ -27,8 +27,6 @@ $loader->add('DesInventar', __DIR__. '/../../src');
 
 $config = DesInventar\Common\ConfigLoader::getInstance(__DIR__ . '/../../config/config.php', 'php');
 
-//require_once __DIR__ . '/fb.php';
-
 $appOptions = array();
 $appOptions['UseRemoteMaps'] = 1;
 $appOptions['IsOnline'] = 0;
