@@ -4800,8 +4800,8 @@ function doGetRegionInfo(RegionId)
 			var field      = 'D.DisasterId||';
 			var fieldlabel = jQuery('#txtStatRecords').text();
 			jQuery('#fldStatFieldSelect option').each(function() {
-				field      += ',' + jQuery(this).val();
-				fieldlabel += ',' + jQuery(this).text();
+				field      += ',' + jQuery(this).val().replace(/,/,'');
+				fieldlabel += ',' + jQuery(this).text().replace(/,/,'');
 			});
 			jQuery('#fldStatField').val(field);
 			jQuery('#fldStatFieldLabel').val(fieldlabel);
@@ -4819,7 +4819,6 @@ function doGetRegionInfo(RegionId)
 				jQuery('#frmMainQuery').attr('target', 'iframeDownload');
 			}
 			jQuery('#frmMainQuery').submit();
-			//hideMap();
 			return true;
 		}
 		else
