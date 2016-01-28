@@ -213,7 +213,7 @@ if (MODE != 'command')
 	$t->compile_check = false;
 	if ($config->flags['mode'] == 'devel') {
 		//$t->setCaching(Smarty::CACHING_LIFETIME_CURRENT);
-		//$t->force_compile = true;
+		$t->force_compile = true;
 		//$t->compile_check   = true;
 	}
 	// Choose Language (First from Parameter, next from UserSession table, then autodetect from browser)
