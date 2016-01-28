@@ -12,6 +12,7 @@
 
 		<input type="hidden" id="desinventarHasInternet"   value="{-$desinventarHasInternet-}" />
 		<input type="hidden" id="desinventarOpenLayersURL" value="{-$desinventarOpenLayersURL-}" />
+		<input type="hidden" id="desinventarLibs"          value="{-$desinventarLibs-}" />
 
 		<input type="hidden" id="desinventarUserId"          value=""     /> 
 		<input type="hidden" id="desinventarUserFullName"    value=""     />
