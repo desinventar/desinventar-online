@@ -1171,8 +1171,8 @@ switch ($cmd)
 	case 'cmdGetVersion':
 		$answer = array();
 		$answer['Status'] = ERR_NO_ERROR;
-		$answer['Version'] = VERSION;
-		$answer['ReleaseDate'] = RELEASEDATE;
+		$answer['Version'] = $config->version['version'];
+		$answer['ReleaseDate'] = $config->version['release_date'];
 		$answerstr = htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
 		if (isset($_GET['callback']))
 		{
