@@ -8,4 +8,5 @@ thumbs.db
 nbproject
 *.komodoproject
 .idea
-
+vendor/*
+config/*_local.*
