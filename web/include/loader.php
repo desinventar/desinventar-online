@@ -14,18 +14,13 @@ if (! isset($_SERVER['DESINVENTAR_SRC']))
 	$_SERVER['DESINVENTAR_SRC'] = dirname(dirname(dirname(__FILE__)));
 }
 
-// This is the version of the software
-define('MAJORVERSION', '2015');
-define('MINORVERSION', '033101');
-define('RELEASEDATE' , '2015-03-31');
-define('VERSION'     , MAJORVERSION . '.' . MINORVERSION);
-define('JSVERSION'   , VERSION);
 define('SRCDIR'  , $_SERVER['DESINVENTAR_SRC']);
 
 $loader = require_once __DIR__ . '/../../vendor/autoload.php';
 $loader->add('DesInventar', __DIR__. '/../../src');
 
 $config = DesInventar\Common\ConfigLoader::getInstance(__DIR__ . '/../../config/config.php', 'php');
+$config->version = require_once __DIR__ . '/../../config/version.php';
 
 $appOptions = array();
 $appOptions['UseRemoteMaps'] = 1;
@@ -248,9 +243,9 @@ if (MODE != 'command')
 
 	// 2010-05-25 (jhcaiced) Handle the versioning of js files, used to force refresh of
 	// these files when doing changes.
-	$t->assign('majorversion', MAJORVERSION);
-	$t->assign('version'     , VERSION);
-	$t->assign('jsversion'   , JSVERSION);
+	$t->assign('majorversion', $config->version['major_version']);
+	$t->assign('version'     , $config->version['version']);
+	$t->assign('jsversion'   , $config->version['version']);
 
 	// Configure DESINVENTAR (web) application location	
 	if (isset($_SERVER['REDIRECT_DESINVENTAR_URL']))
@@ -288,7 +283,7 @@ if (MODE != 'command')
 	$t->assign('desinventar_extjs_url', $config->paths['libs_url'] . '/extjs/3.4.0');
 	$t->assign('desinventarOpenLayersURL', $config->paths['libs_url'] . '/openlayers/2.11');
 	$t->assign('desinventarURLPortal'   , $desinventarURLPortal);
-	$t->assign('desinventarVersion'     , VERSION);
+	$t->assign('desinventarVersion'     , $config->version['version']);
 	$t->assign('desinventarLang'        , $lg);
 	$t->assign('desinventarUserId'      , $us->UserId);
 	$t->assign('desinventarUserFullName', $us->getUserFullName());
