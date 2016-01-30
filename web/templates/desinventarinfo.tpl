@@ -1,6 +1,6 @@
 <div id="desinventarInfo" class="desinventarInfo" style="display:none;">
 	<div class="hidden">
-		<span class="title">DesInventar {-$majorversion-}</span>
+		<span class="title">DesInventar</span>
 		<span class="region_list">{-#msgDatabaseFind_Title#-}</span>
 	</div>
 	<div class="desinventarParams" style="display:none;">
