@@ -11,6 +11,12 @@ require_once('include/diregion.class.php');
 $post = $_POST;
 $get = $_GET;
 $options = array();
+// Always use http for KML files, Google earth doesn't load layers via https 
+$options['protocol_for_maps'] = 'http';
+$options['protocol'] = 'http';
+if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
+	$options['protocol'] = 'https';
+}
 $url = '//' . $_SERVER['HTTP_HOST'];
 $url .= $desinventarURL;
 $options['url'] = $url;
