@@ -416,7 +416,7 @@ class Maps
 		<name>DesInventar '. $regn .'</name>
 		<open>1</open>
 		<Icon>
-			<href>'. $this->url . '/effects/?SRS=EPSG%3A4326&amp;HEIGHT=600&amp;STYLES=default,default&amp;WIDTH=800&amp;VERSION=1.1.1&amp;TRANSPARENT=true&amp;LEGEND=true&amp;FORMAT=image/png</href>
+			<href>'. $this->options['protocol_for_maps'] . ':' . $this->url . '/effects/?SRS=EPSG%3A4326&amp;HEIGHT=600&amp;STYLES=default,default&amp;WIDTH=800&amp;VERSION=1.1.1&amp;TRANSPARENT=true&amp;LEGEND=true&amp;FORMAT=image/png</href>
 			<viewRefreshMode>onStop</viewRefreshMode>
 			<viewRefreshTime>1</viewRefreshTime>
 			<viewBoundScale>1</viewBoundScale>
@@ -432,7 +432,7 @@ class Maps
 	<ScreenOverlay id="NWILEGEND">
 		<name>Leyenda</name>
 		<Icon>
-			<href>'. $this->url .'/legend/</href>
+			<href>'. $this->options['protocol_for_maps'] . ':' . $this->url .'/legend/</href>
 		</Icon>
 		<overlayXY x="0" y="0" xunits="fraction" yunits="fraction"/>
 		<screenXY x="0.005" y="0.02" xunits="fraction" yunits="fraction"/>
@@ -442,7 +442,7 @@ class Maps
 	<ScreenOverlay id="DesInventarLogo">
 		<name>DesInventar Project</name>
 		<Icon>
-			<href>' . $this->options['url'] .'/images/desinventar_logo.png</href>
+			<href>' . $this->options['protocol_for_maps'] . ':' . $this->options['url'] .'/images/desinventar_logo.png</href>
 		</Icon>
 		<overlayXY x="0" y="1" xunits="fraction" yunits="fraction"/>
 		<screenXY x="0.005" y="0.995" xunits="fraction" yunits="fraction"/>
