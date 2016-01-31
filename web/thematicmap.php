@@ -11,7 +11,7 @@ require_once('include/diregion.class.php');
 $post = $_POST;
 $get = $_GET;
 $options = array();
-$url = 'http://' . $_SERVER['HTTP_HOST'];
+$url = '//' . $_SERVER['HTTP_HOST'];
 $url .= $desinventarURL;
 $options['url'] = $url;
 
