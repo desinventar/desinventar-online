@@ -8,6 +8,10 @@ return array(
 		'datadir' => '/var/lib/desinventar',
 		'libs_url' => '//cdn-desinventar.inticol.com/js',
 	),
+	'maps' => array(
+		'mapserver_uri' => '/cgi-bin/mapserv',
+		'proj_lib' => '/usr/share/proj'
+	),
 	'flags' => array(
 		'mode' => 'normal',
 		'auto_login' => 0
