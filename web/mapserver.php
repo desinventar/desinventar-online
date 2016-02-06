@@ -36,7 +36,7 @@
 	
 	if ($options['MAPID'] == 'worldmap')
 	{
-		$options['MAP']         = MAPDIR . '/world_adm0.map';
+		$options['MAP']         = $config->maps['worldmap_dir'] . '/world_adm0.map';
 		$options['LAYERS']      = 'base';
 		$options['TRANSPARENT'] = 'false';
 	}
