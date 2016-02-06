@@ -20,7 +20,7 @@ if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
 $url = '//' . $_SERVER['HTTP_HOST'];
 $url .= $desinventarURL;
 $options['url'] = $url;
-
+$options = array_merge($options, $config->maps);
 $cmd = getParameter('_M+cmd', getParameter('cmd', ''));
 if ($cmd == '')
 {

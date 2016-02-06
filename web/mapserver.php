@@ -20,7 +20,7 @@
 	}
 	if (! isset($options['STYLES']))
 	{
-		$optios['STYLES'] = 'default,default';
+		$options['STYLES'] = 'default,default';
 	}
 	
 	if (isset($options['MAPID']))

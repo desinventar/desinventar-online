@@ -63,7 +63,8 @@ class Maps
 		$y = 550;
 		$map = 
 '	MAP
-    IMAGETYPE		PNG
+	IMAGETYPE		PNG
+		CONFIG      "PROJ_LIB"  "' . $this->options['proj_lib'] . '"
 		EXTENT			-180 -90 180 90
 		SIZE				'. $x .' '. $y .'
 		SHAPEPATH		"' . str_replace('\\','/', VAR_DIR . '/database/' . $reg) . '/"
