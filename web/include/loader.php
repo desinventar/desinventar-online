@@ -57,7 +57,6 @@ if (isset($_SERVER['HTTP_HOST']))
 		if (empty($_SERVER['DESINVENTAR_DATADIR'])) {
 			$_SERVER['DESINVENTAR_DATADIR'] = $Install_Dir . '/data';
 		}
-		$_SERVER['DESINVENTAR_MAPDIR'] = $Install_Dir . '/files/worldmap';
 		if (empty($_SERVER['DESINVENTAR_CACHEDIR'])) {
 			$_SERVER['DESINVENTAR_CACHEDIR'] = $Install_Dir . '/tmp';
 		}
@@ -93,7 +92,6 @@ if (isset($_SERVER['HTTP_HOST']))
 		if (empty($_SERVER['DESINVENTAR_WWWDIR'])) {
 			$_SERVER['DESINVENTAR_WWWDIR'] = '/var/www/desinventar';
 		}
-		$_SERVER['DESINVENTAR_MAPDIR'] = '/usr/share/desinventar/worldmap';
 		if (preg_match('/desinventar.org$/', $_SERVER['HTTP_HOST']))
 		{
 			$appOptions['IsOnline'] = 1;
@@ -111,7 +109,6 @@ else
 	{
 		$_SERVER['DESINVENTAR_WWWDIR'] = '/var/www/desinventar';
 	}
-	$_SERVER['DESINVENTAR_MAPDIR'] = '/usr/share/desinventar/worldmap';
 	define('TEMP', '/var/tmp/desinventar');
 }
 
@@ -135,7 +132,6 @@ define('WWWDIR'  , $_SERVER['DESINVENTAR_WWWDIR']);
 define('WWWDATA' , '/desinventar-data');
 define('WWWURL'  , '/');
 define('DBDIR'   , $config->paths['datadir'] . '/database');
-define('MAPDIR'  , $_SERVER['DESINVENTAR_MAPDIR']);
 define('VAR_DIR' , $config->paths['datadir']);
 define('TMP_DIR' , TEMP);
 require_once(BASE . '/include/usersession.class.php');

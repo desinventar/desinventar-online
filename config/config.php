@@ -10,7 +10,8 @@ return array(
 	),
 	'maps' => array(
 		'mapserver_uri' => '/cgi-bin/mapserv',
-		'proj_lib' => '/usr/share/proj'
+		'proj_lib' => '/usr/share/proj',
+		'worldmap_dir' => '/usr/share/desinventar/worldmap'
 	),
 	'flags' => array(
 		'mode' => 'normal',
