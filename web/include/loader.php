@@ -207,31 +207,34 @@ if (MODE != 'command')
 		$t->force_compile = true;
 		//$t->compile_check   = true;
 	}
-	// Choose Language (First from Parameter, next from UserSession table, then autodetect from browser)
-	$lg = getParameter('lang');
-	if ($lg == '') 
-	{
+
+	// Choose Language (First from Configuration, next from Url Parameter, next from UserSession table, then autodetect from browser)
+	$lg = '';
+	if ($lg == '') {
+		$lg = getParameter('lang');	
+	}
+	if (! empty($config->general['lang'])) {
+		$lg = $config->general['lang'];
+	}
+	if ($lg == '') {
 		$lg = $us->LangIsoCode;
 	}
-	if ($lg == '')
-	{
+	if ($lg == '') {
 		$lg = getBrowserClientLanguage();
-		$us->setLangIsoCode($lg);
-		$us->update();
 	}
-	if ($lg == '')
-	{
+	if ($lg == '') {
 		$lg = 'eng';
-		$us->setLangIsoCode($lg);
-		$us->update();
 	}
-	
 	// 2009-02-21 (jhcaiced) Fix some languages from two to three character code
 	if ($lg == 'es') { $lg = 'spa'; }
 	if ($lg == 'en') { $lg = 'eng'; }
 	if ($lg == 'fr') { $lg = 'fre'; }
 	if ($lg == 'pr') { $lg = 'por'; }
 	if ($lg == 'pt') { $lg = 'por'; }
+
+	$config->general['lang'] = $lg;
+	$us->setLangIsoCode($lg);
+	$us->update();
 
 	$_SESSION['lang'] = $lg;
 	$t->assign('lg'  , $lg);
