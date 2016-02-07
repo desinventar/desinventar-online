@@ -34,30 +34,15 @@ class ConfigLoader {
 		if (! file_exists($filepath)) {
 			return false;
 		}
-		switch($type) {
-			case 'php':
-				$this->options = include $filepath;
-				break;
+		// Load default configuration values
+		$this->options = $this->readConfigFile($filepath, $type);
 
-			case 'ini';
-				$this->options = parse_ini_file($filepath, true);
-				break;
-
-			case 'json':
-				$this->options = json_decode(file_get_contents($filepath), true);
-				break;
-
-			//TO-DO add Database option for settings. Table = id, property, value
-			case 'database':
-				$this->options = json_decode(file_get_contents($filepath), true);
-				break;
-		}
 		// Attempt to load a local configuration file which overrides
 		// some of the default settings
 		$local_config_name = $this->getLocalConfigName($filepath);
 		if (file_exists($local_config_name)) {
 			$local_config = $this->readConfigFile($local_config_name, $type);
-			$this->options = array_merge($this->options, $local_config);
+			$this->options = array_replace_recursive($this->options, $local_config);
 		}
 		return true;
 	}
