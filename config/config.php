@@ -1,5 +1,8 @@
 <?php
 return array(
+	// Default settings
+	'general' => array(
+	),
 	// Default paths
 	'smarty' => array(
 		'cachedir' => '/var/cache/smarty/desinventar',
