@@ -22,7 +22,7 @@
 
 		{-include file="maps_include.tpl"-}
 		{-if $appOptions.UseRemoteMaps > 0-}
-			<script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false"></script>
+			<script type="text/javascript" src="//maps.google.com/maps/api/js"></script>
 		{-/if-}
 		<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/external/checktree/checktree.css"/>
 		<script type="text/javascript">
