@@ -71,7 +71,7 @@ class DICause extends DIRecord
 		return $sQuery;
 	}
 
-	public function validateCreate()
+	public function validateCreate($bStrict)
 	{
 		$iReturn = ERR_NO_ERROR;
 		$iReturn = $this->validateNotNull(-21, 'CauseId');
@@ -116,7 +116,7 @@ class DICause extends DIRecord
 		return $iReturn;
 	}
 	
-	public function validateDelete()
+	public function validateDelete($bStrict)
 	{
 		$iReturn = ERR_NO_ERROR;
 		$iReturn = $this->validateNoDatacards(-25);
