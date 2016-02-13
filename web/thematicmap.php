@@ -20,7 +20,7 @@ if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
 $url = '//' . $_SERVER['HTTP_HOST'];
 $url .= $desinventarURL;
 $options['url'] = $url;
-
+$options = array_merge($options, $config->maps);
 $cmd = getParameter('_M+cmd', getParameter('cmd', ''));
 if ($cmd == '')
 {
@@ -149,7 +149,7 @@ switch($cmd)
 			
 
 			$mapfile = str_replace('\\', '/', $m->filename());
-			$worldmap = str_replace('\\','/', MAPDIR . '/world_adm0.map');
+			$worldmap = str_replace('\\','/', $config->maps['worldmap_dir'] . '/world_adm0.map');
 			$timestamp = microtime(true);
 
 			$sLegendURL = $options['url'] . '/wms/' . $options['id'] . '/legend/?' . $sLegendLayer;

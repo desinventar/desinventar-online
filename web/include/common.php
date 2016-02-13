@@ -284,4 +284,13 @@ function getFont($prmFontName)
 	return $font;
 } #getFont()
 
-</script>
+
+function showErrorMsg($sMsg, Exception $e = null)
+{
+	if ($e != null)
+	{
+		$sMsg = 'ERROR ' . $sMsg . $e->getMessage();
+	}
+	fb($sMsg);
+}
+

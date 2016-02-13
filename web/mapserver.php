@@ -20,7 +20,7 @@
 	}
 	if (! isset($options['STYLES']))
 	{
-		$optios['STYLES'] = 'default,default';
+		$options['STYLES'] = 'default,default';
 	}
 	
 	if (isset($options['MAPID']))
@@ -36,7 +36,7 @@
 	
 	if ($options['MAPID'] == 'worldmap')
 	{
-		$options['MAP']         = MAPDIR . '/world_adm0.map';
+		$options['MAP']         = $config->maps['worldmap_dir'] . '/world_adm0.map';
 		$options['LAYERS']      = 'base';
 		$options['TRANSPARENT'] = 'false';
 	}
@@ -50,13 +50,11 @@
 		}
 		$queryString .= $key . '=' . urlencode($value);
 	}
-	$url = 'http://' . $_SERVER['HTTP_HOST'];
-	if ($_SERVER['HTTP_PORT'] != 80)
-	{
-		$url .= ':' . $_SERVER['HTTP_PORT'];
+	$url = 'http://' . $_SERVER['SERVER_ADDR'];
+	if (isset($_SERVER['SERVER_PORT']) && ($_SERVER['SERVER_PORT'] != 80)) {
+		$url .= ':' . $_SERVER['SERVER_PORT'];
 	}
 	$url .= '/cgi-bin/' . MAPSERV . '?' . $queryString;
-	//$url = 'http://127.0.0.1/cgi-bin/' . MAPSERV . '?' . $queryString;
 	header('Content-type: ' . $options['FORMAT']);
 	echo file_get_contents($url);
 </script>

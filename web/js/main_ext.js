@@ -5,7 +5,7 @@
 */
 function onReadyExtJS()
 {
-	Ext.BLANK_IMAGE_URL = '/extJS/resources/images/default/s.gif';
+	Ext.BLANK_IMAGE_URL = jQuery('#desinventarLibs').val().trim() + '/extjs/3.4.0/resources/images/default/s.gif';
 	Ext.ns('DesInventar');
 
 	// Hide Loading div...

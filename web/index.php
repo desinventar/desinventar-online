@@ -67,7 +67,7 @@ switch ($cmd)
 		$answer = array();
 		$UserId = getParameter('UserId');
 		$UserPasswd = getParameter('UserPasswd');
-		if ($us->login($UserId, $UserPasswd) > 0)
+		if ($us->login($UserId, $UserPasswd, \UserSession::PASSWORD_IS_HASHED) > 0)
 		{
 			$iReturn = ERR_NO_ERROR;	# Login success
 			$user = array();
@@ -123,7 +123,7 @@ switch ($cmd)
 		{
 			$UserPasswd = getParameter('UserPasswd', '');
 			$UserPasswd2 = getParameter('UserPasswd2', '');
-			if ($us->validateUser($us->UserId, $_POST['UserPasswd'],true) != '')
+			if ($us->validateUser($us->UserId, $_POST['UserPasswd'], \UserSession::PASSWORD_IS_HASHED) != '')
 			{
 				$us->updateUserPasswd($us->UserId, $_POST['UserPasswd2']);
 			}
@@ -1171,8 +1171,8 @@ switch ($cmd)
 	case 'cmdGetVersion':
 		$answer = array();
 		$answer['Status'] = ERR_NO_ERROR;
-		$answer['Version'] = VERSION;
-		$answer['ReleaseDate'] = RELEASEDATE;
+		$answer['Version'] = $config->version['version'];
+		$answer['ReleaseDate'] = $config->version['release_date'];
 		$answerstr = htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
 		if (isset($_GET['callback']))
 		{
@@ -1397,14 +1397,9 @@ switch ($cmd)
 		$post['General']['LangIsoCode'] = $lg;
 
 		$options = explode('/', $_GET['params']);
-		foreach($options as $key => $value)
-		{
-			fb($key . ' => ' . $value);
-		}
 		$profile_id   = isset($options[0]) ? $options[0] : '';
 		$profile_item = isset($options[1]) ? $options[1] : '';
 
-		fb($profile_id . ' ' . $profile_item);
 		$xml_string = file_get_contents('../samples/profile.xml');
 		$xml_doc = new SimpleXMLElement($xml_string);
 		$xml_profile = reset($xml_doc->xpath('profile/item'));

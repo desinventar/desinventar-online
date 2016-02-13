@@ -13,10 +13,16 @@ define('ROLE_ADMINPORTAL', 5);
 
 class UserSession
 {
+	const PASSWORD_IS_HASHED = true;
+	const PASSWORD_IS_CLEAR = false;
 
-	public function __construct()
+	public function __construct($sSessionId = null, $config = array())
 	{
+		if (!empty($sSessionId)) {
+			$this->sSessionId = $sSessionId;
+		} else {
 		$this->sSessionId = session_id();
+		}
 		$this->UserId            = '';
 		$this->LangIsoCode       = '';
 		$this->RegionId          = 'core';
@@ -25,29 +31,25 @@ class UserSession
 		$this->dLastUpdate       = $this->dStart;
 		$this->UserRole          = '';
 		$this->UserRoleValue     = ROLE_NONE;
-		$this->q = new Query();
-		$this->config = array();
-		$this->config['AutoLogin'] = 0;
-		$num_args = func_num_args();
-		if ($num_args > 0)
-		{
-			if (func_get_arg(0) != '')
-			{  
-				$this->sSessionId = func_get_arg(0);
-			}
+		$this->config = $config;
+		$this->q = new Query(null, $config->database);
+		if (!empty($this->q->core)) {
+			$this->load($this->sSessionId);
 		}
-		$this->load($this->sSessionId);
 	} //constructor
 	
 	// Read Session Information from Database
 	public function load($prmSessionId)
 	{
 		$iReturn = ERR_UNKNOWN_ERROR;
+		if (empty($this->q->core)) {
+			return ERR_UNKNOWN_ERROR;
+		}
 		$sQuery = 'SELECT * FROM UserSession WHERE SessionId=:SessionId';
 		$sth = $this->q->core->prepare($sQuery);
 		try
 		{
-    		$this->q->core->beginTransaction();
+			$this->q->core->beginTransaction();
 			$sth->bindParam(':SessionId', $prmSessionId, PDO::PARAM_STR);
 			$sth->execute();
 			$this->q->core->commit();
@@ -115,10 +117,10 @@ class UserSession
 		return $iReturn;
 	}
 
-	public function login($prmUserId, $prmUserPasswd)
+	public function login($prmUserId, $prmUserPasswd, $withCrypt)
 	{
 		$iReturn = ERR_DEFAULT_ERROR;
-		$UserId = $this->validateUser($prmUserId, $prmUserPasswd);
+		$UserId = $this->validateUser($prmUserId, $prmUserPasswd, $withCrypt);
 		if ($UserId != '')
 		{
 			$iReturn = $this->setUser($UserId);
@@ -192,7 +194,7 @@ class UserSession
 		$iReturn = ERR_NO_ERROR;
 		$UserId = 'root';
 		$this->setUser($UserId);
-		$this->config['AutoLogin'] = 1;
+		$this->config->flags['auto_login'] = 1;
 		return $iReturn;
 	} //doUserAutoLogin()
 	
@@ -345,7 +347,7 @@ class UserSession
 	} // close()
 
 	// Validate a user/passwd pair against database
-	public function validateUser($prmUserId, $prmUserPasswd, $withCrypt=true)
+	public function validateUser($prmUserId, $prmUserPasswd, $withCrypt)
 	{
 		$UserId = '';
 		if (! $withCrypt)

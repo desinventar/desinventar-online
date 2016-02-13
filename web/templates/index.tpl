@@ -18,16 +18,11 @@
 
 		<script type="text/javascript" src="{-$desinventarURL-}/external/jquery.jec-1.3.3.js"></script>
 		<script type="text/javascript" src="{-$desinventarLibs-}/valums-fileuploader/valums-fileuploader-b3b20b1-patched/fileuploader.js"></script>
-		{-if $desinventarMode=='normal'-}
-			<script type="text/javascript" src="{-$desinventarURL-}/scripts/other-{-$jsversion-}.js"></script>
-			<script type="text/javascript" src="{-$desinventarURL-}/scripts/desinventar-{-$jsversion-}.js"></script>
-		{-else-}
-			{-include file="js.tpl"-}
-		{-/if-}
+		{-include file="js.tpl"-}
 
 		{-include file="maps_include.tpl"-}
 		{-if $appOptions.UseRemoteMaps > 0-}
-			<script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=false"></script>
+			<script type="text/javascript" src="//maps.google.com/maps/api/js"></script>
 		{-/if-}
 		<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/external/checktree/checktree.css"/>
 		<script type="text/javascript">
