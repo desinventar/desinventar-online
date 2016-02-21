@@ -99,7 +99,7 @@ if (isset($_SERVER['HTTP_HOST']))
 	}
 	// Define the Smarty library directory (installed by composer)
 	define('SMARTYDIR', SRCDIR  . '/vendor/smarty/smarty/libs');
-	define('JPGRAPHDIR', SRCDIR . '/lib/jpgraph/3.0.7');
+	define('JPGRAPHDIR', $config->paths['jpgraph_dir']);
 }
 else
 {
