@@ -10,6 +10,7 @@ return array(
 	'paths' => array(
 		'datadir' => '/var/lib/desinventar',
 		'libs_url' => '//cdn-desinventar.inticol.com/js',
+		'jpgraph_dir' => '/usr/share/php/jpgraph-3.0.7/src'
 	),
 	'maps' => array(
 		'mapserver_uri' => '/cgi-bin/mapserv',

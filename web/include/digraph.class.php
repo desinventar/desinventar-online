@@ -229,6 +229,7 @@ class DIGraph extends DIResult
 			try {
 				$g->Stroke($sImageFile);
 			} catch (Exception $e) {
+				error_log('[DESINVENTAR_GRAPHS] ' . $e->getMessage());
 				// The graph image cannot be created, so we use a default blank image instead here
 				$sImageURL = 'images/blank.gif';
 				$sImageFile = SRCDIR . '/web/images/blank.gif';
