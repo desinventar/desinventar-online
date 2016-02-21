@@ -151,7 +151,7 @@ require_once(BASE . '/include/digeography.class.php');
 require_once(BASE . '/include/digeolevel.class.php');
 require_once(BASE . '/include/digeocarto.class.php');
 require_once(BASE . '/include/didisaster.class.php');
-require_once(SRCDIR . '/lib/lib.uuid/20110320/lib.uuid.php');
+require_once($config->paths['druuid_dir'] . '/lib.uuid.php');
 
 // Set a default exception handler to avoid ugly messages in screen
 if ($config->flags['mode'] != 'devel') {
