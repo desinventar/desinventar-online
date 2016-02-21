@@ -10,16 +10,17 @@ return array(
 	'paths' => array(
 		'datadir' => '/var/lib/desinventar',
 		'libs_url' => '//cdn-desinventar.inticol.com/js',
-		'jpgraph_dir' => '/usr/share/php/jpgraph-3.0.7/src'
+		'jpgraph_dir' => '/usr/share/php/jpgraph-3.0.7/src',
+		'druuid_dir' => '/usr/share/php/DrUUID',
 	),
 	'maps' => array(
 		'mapserver_uri' => '/cgi-bin/mapserv',
 		'proj_lib' => '/usr/share/proj',
-		'worldmap_dir' => '/usr/share/desinventar/worldmap'
+		'worldmap_dir' => '/usr/share/desinventar/worldmap',
 	),
 	'flags' => array(
 		'mode' => 'normal',
-		'auto_login' => 0
+		'auto_login' => 0,
 	),
 	// Database connection definition (default is sqlite)
 	'database' => array(
@@ -28,6 +29,6 @@ return array(
 		'db_port' => '',
 		'db_user' => '',
 		'db_passwd' => '',
-		'db_dir' => '/var/lib/desinventar'
+		'db_dir' => '/var/lib/desinventar',
 	)
 );
