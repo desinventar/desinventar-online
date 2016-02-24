@@ -305,6 +305,6 @@ function showErrorMsg($sMsg, Exception $e = null)
 	{
 		$sMsg = 'ERROR ' . $sMsg . $e->getMessage();
 	}
-	fb($sMsg);
+	error_log('[DESINVENTAR_ERROR] ' . $sMsg);
 }
 
