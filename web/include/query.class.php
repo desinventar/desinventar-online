@@ -35,7 +35,7 @@ class Query //extends PDO
 				$this->setDBConnection('core');
 			} //if
 		} catch (Exception $e) {
-			showErrorMsg('Error !: ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 			die();
 		}
 	}
@@ -84,7 +84,7 @@ class Query //extends PDO
 				$this->RegionId = $prmRegionId;
 				$this->DBFile = $DBFile;
 			} catch (PDOException $e) {
-				showErrorMsg($e->getMessage());
+				showErrorMsg(debug_backtrace(), $e, '');
 			}
 		}
 		return ERR_NO_ERROR;
@@ -100,7 +100,7 @@ class Query //extends PDO
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$pdo->setAttribute(PDO::ATTR_TIMEOUT, 15.0);
 		} catch (Exception $e) {
-			showErrorMsg($e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 			return false;
 		}
 		return $pdo;
@@ -124,7 +124,7 @@ class Query //extends PDO
 			}
 			catch (Exception $e)
 			{
-				showErrorMsg($e->getMessage());
+				showErrorMsg(debug_backtrace(), $e, '');
 			}
 		}
 		else
@@ -148,7 +148,7 @@ class Query //extends PDO
 		}
 		catch (Exception $e)
 		{
-			showErrorMsg($e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		return $row;
 	}
@@ -271,7 +271,7 @@ class Query //extends PDO
 		catch (Exception $e)
 		{
 			$this->base->rollBack();
-			showErrorMsg('ERROR getBasicEventList : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}			
 		return $data;
 	}
@@ -328,7 +328,7 @@ class Query //extends PDO
                 $data[$row['EventId']] = $row;
             }
         } catch (Exception $e) {
-			showErrorMsg('getRegionEventList Error : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
         }
 		return $data;
 	}
@@ -705,7 +705,7 @@ class Query //extends PDO
 		}
 		catch (Exception $e)
 		{
-			showErrorMsg($sqlev, $e);
+			showErrorMsg(debug_backtrace(), $e, $sqlev);
 		}
 		
 		foreach($rlev as $row)
@@ -783,7 +783,7 @@ class Query //extends PDO
 		}
 		catch (Exception $e)
 		{
-			showErrorMsg("Error !: " . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		foreach($res as $row)
 		{
@@ -856,7 +856,7 @@ class Query //extends PDO
 			}
 			catch (Exception $e)
 			{
-				showErrorMsg("Error !: " . $e->getMessage());
+				showErrorMsg(debug_backtrace(), $e, '');
 			}
 		} //if
 		return $sReturn;
@@ -2136,7 +2136,7 @@ class Query //extends PDO
 		}
 		catch (Exception $e)
 		{
-			showErrorMsg($e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		return $dictio;
 	}

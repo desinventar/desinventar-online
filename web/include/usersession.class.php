@@ -67,7 +67,7 @@ class UserSession
 		catch (Exception $e)
 		{
 			$this->q->core->rollBack();
-			showErrorMsg($e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		// If session doesn't exist in database, insert record
 		if ($iReturn < 0)
@@ -112,7 +112,7 @@ class UserSession
 		catch (Exception $e)
 		{
 			$this->q->core->rollBack();
-			showErrorMsg($e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		return $iReturn;
 	}
@@ -153,7 +153,7 @@ class UserSession
 		catch (Exception $e)
 		{
 			$this->q->core->rollBack();
-			showErrorMsg($e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		return $iReturn;
 	} //setUser()
@@ -230,7 +230,7 @@ class UserSession
 		catch (Exception $e)
 		{
 			$this->q->core->rollBack();
-			showErrorMsg($e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		return $iReturn;
 	} // insert()
@@ -255,7 +255,7 @@ class UserSession
 		$sth2 = $this->q->core->prepare($sQuery);
 		try
 		{
-    		$this->q->core->beginTransaction();
+			$this->q->core->beginTransaction();
 			$sth->bindParam(':SessionId'  , $this->sSessionId , PDO::PARAM_STR);
 			$sth->bindValue(':RegionId'   , ''                , PDO::PARAM_STR);
 			$sth->bindParam(':UserId'     , $this->UserId     , PDO::PARAM_STR);
@@ -272,7 +272,7 @@ class UserSession
 		catch (Exception $e)
 		{
 			$this->q->core->rollBack();
-			showErrorMsg($e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		return $iReturn;
 	} // update()
@@ -296,7 +296,7 @@ class UserSession
 		catch (Exception $e)
 		{
 			$this->q->core->rollBack();
-			showErrorMsg($e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		return $iReturn;
 	} // delete()
@@ -373,7 +373,7 @@ class UserSession
 		catch (Exception $e)
 		{
 			$this->q->core->rollBack();
-			showErrorMsg($e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		} // catch
 		return $UserId;
 	} // valiteUser
@@ -397,7 +397,7 @@ class UserSession
 		catch (Exception $e)
 		{
 			$this->q->core->rollBack();
-			showErrorMsg('getUserFullName Error : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		return $sUserFullName;
 	}
@@ -435,7 +435,7 @@ class UserSession
 		catch (Exception $e)
 		{
 			$this->q->core->rollBack();
-			showErrorMsg('getAllPermsGeneric Error : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		return $myPerms;
 	}
@@ -467,7 +467,7 @@ class UserSession
 		catch (Exception $e)
 		{
 			$this->q->core->rollBack();
-			showErrorMsg('getUserRoleList Error : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		return $myData;
 	} // function
@@ -515,7 +515,7 @@ class UserSession
 		catch (Exception $e)
 		{
 			$this->q->core->rollBack();
-			showErrorMsg('getRegionRoleList Error : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		/*
 		if ($prmRoleId != 'ADMINREGION')
@@ -581,7 +581,7 @@ class UserSession
 		}
 		catch (Exception $e)
 		{
-			showErrorMsg('ERROR getUserInfo : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		return $myData;
 	}
@@ -666,7 +666,7 @@ class UserSession
 			catch (Exception $e)
 			{
 				$this->q->core->rollBack();
-				showErrorMsg('ERROR getUserRole : ' . $e->getMessage());
+				showErrorMsg(debug_backtrace(), $e, '');
 			}
 			if ($UserRole == 'NONE')
 			{
@@ -726,7 +726,7 @@ class UserSession
 			catch (Exception $e)
 			{
 				$this->q->core->rollBack();
-				showErrorMsg('ERROR setUserRole : '. $e->getMessage());
+				showErrorMsg(debug_backtrace(), $e, '');
 			}
 		}
 
@@ -808,7 +808,7 @@ class UserSession
 		catch (Exception $e)
 		{
 			$this->q->core->rollBack();
-			showErrorMsg('ERROR setPerm : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 	}
 
@@ -846,7 +846,7 @@ class UserSession
 		catch (Exception $e)
 		{
 			$this->q->core->rollBack();
-			showErrorMsg('ERROR getRegionList : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		return $myData;
 	} // function
@@ -870,7 +870,7 @@ class UserSession
 		catch (Exception $e)
 		{
 			$this->q->core->rollBack();
-			showErrorMsg('ERROR doUserExist : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		return $Answer;
 	}
@@ -901,7 +901,7 @@ class UserSession
 		catch (Exception $e)
 		{
 			$this->q->core->rollBack();
-			showErrorMsg('ERROR insertUser : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		return $iReturn;
 	}
@@ -934,7 +934,7 @@ class UserSession
 		catch (Exception $e)
 		{
 			$this->q->core->rollBack();
-			showErrorMsg('ERROR updateUser : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		return $iReturn;
 	}
@@ -954,7 +954,7 @@ class UserSession
 		catch (Exception $e)
 		{
 			$this->q->core->rollBack();
-			showErrorMsg('ERROR updateUserPasswd : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		return $iReturn;
 	}
@@ -973,7 +973,7 @@ class UserSession
 		catch (Exception $e)
 		{
 			$this->q->core->rollBack();
-			showErrorMsg('ERROR clearOldLocks : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 	}
 	
@@ -996,7 +996,7 @@ class UserSession
 		catch (Exception $e)
 		{
 			$this->q->core->rollBack();
-			showErrorMsg('ERROR isDatacardLocked : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		return $sReturn;
 	}
@@ -1022,7 +1022,7 @@ class UserSession
 		catch (Exception $e)
 		{
 			$this->q->core->rollBack();
-			showErrorMsg('ERROR lockDatacard : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 	}
 	
@@ -1042,7 +1042,7 @@ class UserSession
 		catch (Exception $e)
 		{
 			$this->q->core->rollBack();
-			showErrorMsg('ERROR releaseDatacard : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 	}
 
@@ -1059,7 +1059,7 @@ class UserSession
 		catch (Exception $e)
 		{
 			$this->q->core->rollBack();
-			showErrorMsg('ERROR clearLocks : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 	}
 	
@@ -1087,7 +1087,7 @@ class UserSession
 		catch (Exception $e)
 		{
 			$this->q->core->rollBack();
-			showErrorMsg('ERROR getUserList : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		return $list;
 	}
@@ -1254,7 +1254,7 @@ class UserSession
 		catch (Exception $e)
 		{
 			$this->q->dreg->rollBack();
-			showErrorMsg($e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		$bFound = 0;
 		$RecordNumber = 0;
