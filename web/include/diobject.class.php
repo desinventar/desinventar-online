@@ -120,7 +120,7 @@ class DIObject
 		}
 		catch (Exception $e)
 		{
-			showErrorMsg('Error ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		return $Value;
 	}
@@ -133,7 +133,7 @@ class DIObject
 		}
 		catch (Exception $e)
 		{
-			showErrorMsg('Error ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}		
 	}
 	

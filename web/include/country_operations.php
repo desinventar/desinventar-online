@@ -17,7 +17,7 @@ function countryGetName($prm_base_conn, $prm_lang_iso_code, $prm_country_iso)
         }
         $sth = null;
     } catch (Exception $e) {
-        showErrorMsg(__FUNCTION__, $e);
+        showErrorMsg(debug_backtrace(), $e, '');
     }
 
     return $country_name;
@@ -33,7 +33,7 @@ function countryGetList($prm_conn, $prm_lang_iso_code)
             $data[$row['CountryIso']] = $row['CountryName'];
         }
     } catch (Exception $e) {
-        showErrorMsg(__FUNCTION__, $e);
+        showErrorMsg(debug_backtrace(), $e, '');
     }
 
     return $data;

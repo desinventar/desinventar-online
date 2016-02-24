@@ -176,7 +176,7 @@ class DIRegion extends DIObject
 		catch (Exception $e)
 		{
 			$this->session->q->core->rollBack();
-			showErrorMsg('insertCore', $e);
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		$this->updateCore();
 	} //insertCore()
@@ -205,7 +205,7 @@ class DIRegion extends DIObject
 		catch (Exception $e)
 		{
 			$this->session->q->core->rollBack();
-			showErrorMsg('updateCore', $e);
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		return $iReturn;
 	}
@@ -604,7 +604,7 @@ class DIRegion extends DIObject
 			}
 			catch (Exception $e)
 			{
-				showErrorMsg($e->getCode() . ' ' . $e->getMessage());
+				showErrorMsg(debug_backtrace(), $e, '');
 			}
 			foreach($doc->getElementsByTagName('General') as $tree)
 			{
@@ -681,7 +681,7 @@ class DIRegion extends DIObject
 		catch (Exception $e)
 		{
 			$us->q->core->rollBack();
-			showErrorMsg('deleteRegion', $e);
+			showErrorMsg(debug_backtrace(), $e, '');
 			$iReturn = ERR_UNKNOWN_ERROR;
 		}
 		return $iReturn;
@@ -767,7 +767,7 @@ class DIRegion extends DIObject
 		}
 		catch (Exception $e)
 		{
-			showErrorMsg('getGeolevelList : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		return $answer;
 	} //loadGeoLevels()

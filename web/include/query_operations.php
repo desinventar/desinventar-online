@@ -34,7 +34,7 @@ function query_is_v2($xml_string)
 	catch (Exception $e)
 	{
 		$iReturn = -1;
-		showErrorMsg('XML cannot be parsed');
+		showErrorMsg(debug_backtrace(), $e, 'XML Cannot be parsed');
 	}
 	return $iReturn;
 }

@@ -345,7 +345,7 @@ class DIRegionRecord extends DIRegion
 		catch (Exception $e)
 		{
 			$us->q->core->rollBack();
-			showErrorMsg('ERROR deleteRegion : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 			$iReturn = ERR_UNKNOWN_ERROR;
 		}
 		return $iReturn;
@@ -377,7 +377,7 @@ class DIRegionRecord extends DIRegion
 		catch (Exception $e)
 		{
 			$this->session->q->core->rollBack();
-			showErrorMsg($e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 			$iReturn = ERR_UNKNOWN_ERROR;
 		}
 		return $iReturn;
