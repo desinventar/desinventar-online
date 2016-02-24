@@ -16,7 +16,7 @@ return array(
 	'maps' => array(
 		'mapserver_uri' => '/cgi-bin/mapserv',
 		'proj_lib' => '/usr/share/proj',
-		'worldmap_dir' => '/usr/share/desinventar/worldmap',
+		'worldmap_dir' => '/var/lib/desinventar/worldmap',
 	),
 	'flags' => array(
 		'mode' => 'normal',
