@@ -299,12 +299,21 @@ function getFont($prmFontName)
 } #getFont()
 
 
-function showErrorMsg($sMsg, Exception $e = null)
+function showErrorMsg($prm_debug, Exception $e, $prm_error_message)
 {
-	if ($e != null)
-	{
-		$sMsg = 'ERROR ' . $sMsg . $e->getMessage();
+	$debug = array_merge(array('class' => '', 'type' => '', 'function' => '', 'line' => ''), $prm_debug[0]);
+	$error_locator = $debug['class'] . $debug['type'] . $debug['function'] . ':' . $debug['line'];
+	$error_message = '[DESINVENTAR_ERROR] ' . $error_locator;
+	$error_pieces = array();
+	if (!empty($prm_error_message)) {
+		$error_pieces[] = $prm_error_message;
 	}
-	error_log('[DESINVENTAR_ERROR] ' . $sMsg);
+	if ($e != null) {
+		$error_pieces[] = $e->getMessage();
+	}
+	if (count($error_pieces) > 0) {
+		$error_message .= ' => ' . implode(':', $error_pieces);
+	}
+	error_log($error_message);
 }
 

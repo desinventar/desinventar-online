@@ -41,7 +41,7 @@ class DIRegionDB extends DIRegion
 			}
 			catch (PDOException $e)
 			{
-				showErrorMsg('doOpenDatabase : ' . $e->getMessage());
+				showErrorMsg(debug_backtrace(), $e, '');
 				$conn = NULL;
 			}
 		}
@@ -171,7 +171,7 @@ class DIRegionDB extends DIRegion
 			catch (Exception $e)
 			{
 				$this->conn->rollBack();
-				showErrorMsg('rebuildDisasterData', $e);
+				showErrorMsg(debug_backtrace(), $e, '');
 			}
 			$this->conn->query($this->detachQuery('RegItem'));
 		} //foreach
@@ -334,7 +334,7 @@ class DIRegionDB extends DIRegion
 			}
 			catch (Exception $e)
 			{
-				showErrorMsg($e->getMessage());
+				showErrorMsg(debug_backtrace(), $e, '');
 			}
 		}
 	}
@@ -366,7 +366,7 @@ class DIRegionDB extends DIRegion
 		catch (Exception $e)
 		{
 			$this->conn->rollBack();
-			showErrorMsg($e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 			$iReturn = ERR_UNKNOWN_ERROR;
 		}
 		if ($iReturn > 0)
@@ -603,7 +603,7 @@ class DIRegionDB extends DIRegion
 		}
 		catch (Exception $e)
 		{
-			showErrorMsg('createRegionDB Error : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 
 		$this->conn = $this->doOpenDatabase($this->get('RegionId'));
@@ -720,7 +720,7 @@ class DIRegionDB extends DIRegion
 				catch (Exception $e)
 				{
 					$this->conn->rollBack();
-					showErrorMsg($e->getMessage());
+					showErrorMsg(debug_backtrace(), $e, '');
 				}
 			}
 		}

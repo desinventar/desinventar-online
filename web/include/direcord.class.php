@@ -237,7 +237,7 @@ class DIRecord extends DIObject
 		$sth = $this->conn->prepare($query);
 		try
 		{
-    		$this->conn->beginTransaction();
+			$this->conn->beginTransaction();
 			$sth->execute();
 			$this->conn->commit();
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
@@ -249,7 +249,7 @@ class DIRecord extends DIObject
 		catch (Exception $e)
 		{
 			$this->conn->rollBack();
-			showErrorMsg('exist : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 			$iReturn = ERR_TABLE_LOCKED;
 		}
 		return $iReturn;
@@ -262,7 +262,7 @@ class DIRecord extends DIObject
 		$sth = $this->conn->prepare($sQuery);
 		try
 		{
-    		$this->conn->beginTransaction();
+			$this->conn->beginTransaction();
 			$sth->execute();
 			$this->conn->commit();
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
@@ -288,7 +288,7 @@ class DIRecord extends DIObject
 		catch (PDOException $e)
 		{
 			$this->conn->rollBack();
-			showErrorMsg('load : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		return $iReturn;
 	}
@@ -332,7 +332,7 @@ class DIRecord extends DIObject
 		$sth = $this->conn->prepare($sQuery);
 		try
 		{
-    		$this->conn->beginTransaction();
+			$this->conn->beginTransaction();
 			$sth->execute();
 			$this->conn->commit();
 			$iReturn = ERR_NO_ERROR;
@@ -340,7 +340,7 @@ class DIRecord extends DIObject
 		catch (PDOException $e)
 		{
 			$this->conn->rollBack();
-			showErrorMsg('createRecord : ' . $sTableName, $e);
+			showErrorMsg(debug_backtrace(), $e, '');
 			$iReturn = ERR_TABLE_LOCKED;
 		}
 		return $iReturn;
@@ -367,7 +367,7 @@ class DIRecord extends DIObject
 		$sth = $this->conn->prepare($sQuery);
 		try
 		{
-    		$this->conn->beginTransaction();
+			$this->conn->beginTransaction();
 			$sth->execute();
 			$this->conn->commit();
 			$iReturn = ERR_NO_ERROR;
@@ -375,7 +375,7 @@ class DIRecord extends DIObject
 		catch (PDOException $e)
 		{
 			$this->conn->rollBack();
-			showErrorMsg('updateRecord ' . $prmTableName, $e);
+			showErrorMsg(debug_backtrace(), $e, '');
 			$iReturn = ERR_TABLE_LOCKED;
 		}
 		return $iReturn;
@@ -435,7 +435,7 @@ class DIRecord extends DIObject
 			catch (PDOException $e)
 			{
 				$this->conn->rollBack();
-				showErrorMsg('delete : ' . $e->getMessage());
+				showErrorMsg(debug_backtrace(), $e, '');
 				$iReturn = ERR_TABLE_LOCKED;
 			}
 		}
@@ -553,7 +553,7 @@ class DIRecord extends DIObject
 		catch (Exception $e)
 		{
 			$this->conn->rollBack();
-			showErrorMsg('validatePrimaryKey : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		
 		if ($iReturn < 0)
@@ -615,7 +615,7 @@ class DIRecord extends DIObject
 		catch (Exception $e)
 		{
 			$this->conn->rollBack();
-			showErrorMsg('validateUnique : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		if ($iReturn < 0)
 		{
@@ -649,7 +649,7 @@ class DIRecord extends DIObject
 		catch (Exception $e)
 		{
 			$this->conn->rollBack();
-			showErrorMsg('validateRef : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		if ($iReturn < 0)
 		{
