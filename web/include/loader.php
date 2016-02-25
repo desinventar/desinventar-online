@@ -274,7 +274,14 @@ if (MODE != 'command')
 	{
 		$desinventarURLPortal = substr($desinventarURLPortal, 0, strlen($desinventarURLPortal) - 1);
 	}
-
+	$url_port = '';
+	if (! is_ssl() && isset($_SERVER['SERVER_PORT']) && ($_SERVER['SERVER_PORT'] != 80)) {
+		$url_port = ':' . $_SERVER['SERVER_PORT'];
+	}
+	$url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $url_port . $_SERVER['REQUEST_URI'];
+	$config->params = array(
+		'url' => $url
+	);
 	// General Information (common to portal/app)
 	$t->assign('desinventarMode'        , $config->flags['mode']);
 	$t->assign('desinventarURL'         , $desinventarURL);
@@ -286,5 +293,5 @@ if (MODE != 'command')
 	$t->assign('desinventarLang'        , $lg);
 	$t->assign('desinventarUserId'      , $us->UserId);
 	$t->assign('desinventarUserFullName', $us->getUserFullName());
-	$t->assign('config', json_encode(array('flags' => $config->flags, 'version' => $config->version)));
+	$t->assign('config', json_encode(array('flags' => $config->flags, 'params' => $config->params, 'version' => $config->version)));
 }
