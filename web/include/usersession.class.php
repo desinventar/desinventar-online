@@ -245,6 +245,7 @@ class UserSession
 				  'UserId=:UserId,' . 
 				  'Valid=:Valid,' .
 				  'LangIsoCode=:LangIsoCode,' . 
+				  'RegionId=:RegionId,' .
 				  'Start=:Start,' .
 				  'LastUpdate=:LastUpdate ' . 
 				  'WHERE SessionId=:SessionId';
