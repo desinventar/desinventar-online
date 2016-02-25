@@ -8,8 +8,12 @@ desinventar.user_login = (function () {
         jQuery('#frmUserLogin').on('submit', function () {
             var UserId     = jQuery('#fldUserId').val(),
                 UserPasswd = jQuery("#fldUserPasswd").val(),
-                url = jQuery('#desinventarURL').val() + '/';
+                url = desinventar.config.params.url;
 
+            if (desinventar.config.flags.general_secure_login) {
+                // Force use of https/ssl for user operations
+                url = url.replace(/^http:/g,"https:");
+            }
             doUserLoginUpdateMsg('');
 
             if (UserId === '' || UserPasswd === '') {

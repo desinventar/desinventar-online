@@ -21,6 +21,7 @@ return array(
 	'flags' => array(
 		'mode' => 'normal',
 		'auto_login' => 0,
+		'general_secure_login' => 0,
 	),
 	// Database connection definition (default is sqlite)
 	'database' => array(
