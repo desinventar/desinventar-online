@@ -183,6 +183,8 @@ if (MODE != 'command')
 {
 	error_reporting(E_ALL && ~E_NOTICE);
 	header('Content-Type: text/html; charset=UTF-8');
+	// This header allows connections from non secure clients, we keep it for compatibility
+	header('Access-Control-Allow-Origin: *');
 	define('DEFAULT_CHARSET', 'UTF-8');
 
 	$confdir = dirname($_SERVER['SCRIPT_FILENAME']) . '/conf';
