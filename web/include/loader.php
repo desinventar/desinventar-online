@@ -286,4 +286,5 @@ if (MODE != 'command')
 	$t->assign('desinventarLang'        , $lg);
 	$t->assign('desinventarUserId'      , $us->UserId);
 	$t->assign('desinventarUserFullName', $us->getUserFullName());
+	$t->assign('config', json_encode(array('flags' => $config->flags, 'version' => $config->version)));
 }
