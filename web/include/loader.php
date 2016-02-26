@@ -166,18 +166,20 @@ if (MODE != 'command')
 {
 	$cmd = getCmd();
 	// Session Management
+	session_name('DESINVENTAR_SSID');
 	$SessionId = '';
 	if ($cmd == 'cmdUserLogin') {
 		// When we are doing the user authentication, we want to make
 		// sure we have the same sessionId, even when we are 
 		// making a CORS call. (i.e. http makes an https call for auth)
-		$SessionId = getParameter('SessionId');
+		$SessionId = getParameter('SessionId', '');
+		if (! empty($SessionId)) {
+			// When setting a session_id value, it must be called before session_start()
+			session_id($SessionId);
+		}
 	}
-	if (empty($SessionId)) {
-		session_name('DESINVENTAR_SSID');
-		session_start();
-		$SessionId = session_id();
-	}
+	session_start();
+	$SessionId = session_id();
 }
 // 2009-01-15 (jhcaiced) Start by create/recover the session 
 // information, even for anonymous users
