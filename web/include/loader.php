@@ -164,10 +164,20 @@ $time_start = microtime_float();
 $SessionId = (string)UUID::mint(4);
 if (MODE != 'command')
 {
+	$cmd = getCmd();
 	// Session Management
-	session_name('DESINVENTAR_SSID');
-	session_start();
-	$SessionId = session_id();
+	$SessionId = '';
+	if ($cmd == 'cmdUserLogin') {
+		// When we are doing the user authentication, we want to make
+		// sure we have the same sessionId, even when we are 
+		// making a CORS call. (i.e. http makes an https call for auth)
+		$SessionId = getParameter('SessionId');
+	}
+	if (empty($SessionId)) {
+		session_name('DESINVENTAR_SSID');
+		session_start();
+		$SessionId = session_id();
+	}
 }
 // 2009-01-15 (jhcaiced) Start by create/recover the session 
 // information, even for anonymous users
@@ -183,6 +193,8 @@ if (MODE != 'command')
 {
 	error_reporting(E_ALL && ~E_NOTICE);
 	header('Content-Type: text/html; charset=UTF-8');
+	// This header allows connections from non secure clients, we keep it for compatibility
+	header('Access-Control-Allow-Origin: *');
 	define('DEFAULT_CHARSET', 'UTF-8');
 
 	$confdir = dirname($_SERVER['SCRIPT_FILENAME']) . '/conf';
@@ -274,7 +286,14 @@ if (MODE != 'command')
 	{
 		$desinventarURLPortal = substr($desinventarURLPortal, 0, strlen($desinventarURLPortal) - 1);
 	}
-
+	$url_port = '';
+	if (! is_ssl() && isset($_SERVER['SERVER_PORT']) && ($_SERVER['SERVER_PORT'] != 80)) {
+		$url_port = ':' . $_SERVER['SERVER_PORT'];
+	}
+	$url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $url_port . $_SERVER['REQUEST_URI'];
+	$config->params = array(
+		'url' => $url
+	);
 	// General Information (common to portal/app)
 	$t->assign('desinventarMode'        , $config->flags['mode']);
 	$t->assign('desinventarURL'         , $desinventarURL);
@@ -286,5 +305,5 @@ if (MODE != 'command')
 	$t->assign('desinventarLang'        , $lg);
 	$t->assign('desinventarUserId'      , $us->UserId);
 	$t->assign('desinventarUserFullName', $us->getUserFullName());
-	$t->assign('config', json_encode(array('flags' => $config->flags, 'version' => $config->version)));
+	$t->assign('config', json_encode(array('flags' => $config->flags, 'params' => $config->params, 'version' => $config->version)));
 }
