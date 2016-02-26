@@ -164,10 +164,17 @@ $time_start = microtime_float();
 $SessionId = (string)UUID::mint(4);
 if (MODE != 'command')
 {
-	// Session Management
-	session_name('DESINVENTAR_SSID');
-	session_start();
-	$SessionId = session_id();
+	$cmd = getCmd();
+	$SessionId = '';
+	if ($cmd == 'cmdUserLogin') {
+		// Session Management
+		$SessionId = getParameter('SessionId');
+	}
+	if (empty($SessionId)) {
+		session_name('DESINVENTAR_SSID');
+		session_start();
+		$SessionId = session_id();
+	}
 }
 // 2009-01-15 (jhcaiced) Start by create/recover the session 
 // information, even for anonymous users

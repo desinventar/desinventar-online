@@ -8,7 +8,8 @@ desinventar.user_login = (function () {
         jQuery('#frmUserLogin').on('submit', function () {
             var UserId     = jQuery('#fldUserId').val(),
                 UserPasswd = jQuery("#fldUserPasswd").val(),
-                url = desinventar.config.params.url;
+                url = desinventar.config.params.url,
+                sessionId = document.cookie.split('=',2)[1];
 
             if (desinventar.config.flags.general_secure_login) {
                 // Force use of https/ssl for user operations
@@ -25,7 +26,8 @@ desinventar.user_login = (function () {
                     'cmd'        : 'cmdUserLogin',
                     'RegionId'   : jQuery('#desinventarRegionId').val(),
                     'UserId'     : UserId,
-                    'UserPasswd' : hex_md5(UserPasswd)
+                    'UserPasswd' : hex_md5(UserPasswd),
+                    'SessionId'  : sessionId
                 },
                 function (data) {
                     if (parseInt(data.Status, 10) < 0) {
