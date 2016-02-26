@@ -286,14 +286,22 @@ if (MODE != 'command')
 	{
 		$desinventarURLPortal = substr($desinventarURLPortal, 0, strlen($desinventarURLPortal) - 1);
 	}
+
+	// Build a complete URL for the application
+	$url_proto = 'http';
+	if (is_ssl()) {
+		$url_proto = 'https';
+	}
 	$url_port = '';
 	if (! is_ssl() && isset($_SERVER['SERVER_PORT']) && ($_SERVER['SERVER_PORT'] != 80)) {
 		$url_port = ':' . $_SERVER['SERVER_PORT'];
 	}
-	$url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $url_port . $_SERVER['REQUEST_URI'];
+	$url = $url_proto . '://' . $_SERVER['HTTP_HOST'] . $url_port . $_SERVER['REQUEST_URI'];
+
 	$config->params = array(
 		'url' => $url
 	);
+
 	// General Information (common to portal/app)
 	$t->assign('desinventarMode'        , $config->flags['mode']);
 	$t->assign('desinventarURL'         , $desinventarURL);
