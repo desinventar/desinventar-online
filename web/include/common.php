@@ -78,6 +78,10 @@ function getParameter($prmName, $prmDefault='')
 	return $prmValue;
 }
 
+function getCmd() {
+	return getParameter('cmd', getParameter('prmQueryCommand', getParameter('_CMD','')));
+}
+
 function showDebugMsg($sMsg)
 {
 	echo $sMsg . "<br />\n";
