@@ -9,7 +9,7 @@ desinventar.user_login = (function () {
             var UserId     = jQuery('#fldUserId').val(),
                 UserPasswd = jQuery("#fldUserPasswd").val(),
                 url = desinventar.config.params.url,
-                sessionId = document.cookie.split('=',2)[1];
+                sessionId = desinventar.util.getSessionId();
 
             if (desinventar.config.flags.general_secure_login) {
                 // Force use of https/ssl for user operations

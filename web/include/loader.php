@@ -165,9 +165,12 @@ $SessionId = (string)UUID::mint(4);
 if (MODE != 'command')
 {
 	$cmd = getCmd();
+	// Session Management
 	$SessionId = '';
 	if ($cmd == 'cmdUserLogin') {
-		// Session Management
+		// When we are doing the user authentication, we want to make
+		// sure we have the same sessionId, even when we are 
+		// making a CORS call. (i.e. http makes an https call for auth)
 		$SessionId = getParameter('SessionId');
 	}
 	if (empty($SessionId)) {
