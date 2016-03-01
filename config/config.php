@@ -8,7 +8,6 @@ return array(
 		'cachedir' => '/var/cache/smarty/desinventar',
 	),
 	'paths' => array(
-		'datadir' => '/var/lib/desinventar',
 		'libs_url' => '//cdn-desinventar.inticol.com/js',
 		'jpgraph_dir' => '/usr/share/php/jpgraph-3.0.7/src',
 		'druuid_dir' => '/usr/share/php/DrUUID',
