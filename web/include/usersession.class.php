@@ -37,7 +37,11 @@ class UserSession
 			$this->load($this->sSessionId);
 		}
 	} //constructor
-	
+
+	public function isConnected() {
+		return (! empty($this->q->core));
+	}
+
 	// Read Session Information from Database
 	public function load($prmSessionId)
 	{
@@ -80,6 +84,10 @@ class UserSession
 	// Set LastUpdate field of Session so it will not expire...
 	public function awake()
 	{
+		if (! $this->isConnected) {
+			return false;
+		}
+
 		$iReturn = ERR_NO_ERROR;
 		$PrevTime = $this->dLastUpdate;
 		$CurTime  = gmdate('c');
@@ -238,6 +246,9 @@ class UserSession
 	// Update information about this session in database
 	public function update()
 	{
+		if (! $this->isConnected()) {
+			return false;
+		}
 		$iReturn = ERR_DEFAULT_ERROR;
 		// Always update this field...
 		$this->dLastUpdate = gmdate('c');
@@ -381,6 +392,9 @@ class UserSession
 	
 	public function getUserFullName()
 	{
+		if (! $this->isConnected()) {
+			return false;
+		}
 		$sUserFullName = '';
 		$sQuery = "SELECT * FROM User WHERE UserId='" . $this->UserId . "'";
 		$sth = $this->q->core->prepare($sQuery);

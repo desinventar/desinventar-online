@@ -303,7 +303,7 @@ function getFont($prmFontName)
 } #getFont()
 
 
-function showErrorMsg($prm_debug, Exception $e, $prm_error_message)
+function showErrorMsg($prm_debug, $e, $prm_error_message)
 {
 	$debug = array_merge(array('class' => '', 'type' => '', 'function' => '', 'line' => ''), $prm_debug[0]);
 	$error_locator = $debug['class'] . $debug['type'] . $debug['function'] . ':' . $debug['line'];
