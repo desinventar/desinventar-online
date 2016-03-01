@@ -117,7 +117,7 @@ if (!empty($_SERVER['DESINVENTAR_CACHEDIR'])) {
 	$config->smarty['cachedir'] = $_SERVER['DESINVENTAR_CACHEDIR'];
 }
 if (!empty($_SERVER['DESINVENTAR_DATADIR'])) {
-	$config->paths['datadir'] = $_SERVER['DESINVENTAR_DATADIR'];
+	$config->database['db_dir'] = $_SERVER['DESINVENTAR_DATADIR'];
 }
 if (!empty($_SERVER['DESINVENTAR_MODE']))
 {
@@ -131,8 +131,8 @@ define('BASE'    , $_SERVER['DESINVENTAR_WEB']);
 define('WWWDIR'  , $_SERVER['DESINVENTAR_WWWDIR']);
 define('WWWDATA' , '/desinventar-data');
 define('WWWURL'  , '/');
-define('DBDIR'   , $config->paths['datadir'] . '/database');
-define('VAR_DIR' , $config->paths['datadir']);
+define('DBDIR'   , $config->database['db_dir'] . '/database');
+define('VAR_DIR' , $config->database['db_dir']);
 define('TMP_DIR' , TEMP);
 require_once(BASE . '/include/usersession.class.php');
 require_once(BASE . '/include/date.class.php');
@@ -184,10 +184,10 @@ if (MODE != 'command')
 // 2009-01-15 (jhcaiced) Start by create/recover the session 
 // information, even for anonymous users
 $us = new UserSession($SessionId, $config);
-
-// Validate that out main database exists (core.db)
-if (empty($us->q->core)) {
-	throw new Exception('Cannot initialize the database connection');
+if (!$us->isConnected()) {
+	// Validate that main database exists (core.db)
+	showErrorMsg(debug_backtrace(), null, 'Cannot initialize database connection');
+	exit(0);
 }
 
 $us->awake();
