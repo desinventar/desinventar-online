@@ -84,7 +84,7 @@ class UserSession
 	// Set LastUpdate field of Session so it will not expire...
 	public function awake()
 	{
-		if (! $this->isConnected) {
+		if (! $this->isConnected()) {
 			return false;
 		}
 
