@@ -10,3 +10,5 @@ nbproject
 .idea
 vendor/*
 config/*_local.*
+node_modules
+npm-debug.log
