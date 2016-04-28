@@ -525,20 +525,22 @@ class DIRegion extends DIObject
 		$occ = $root->appendChild($occ);
 		try
 		{
-			foreach($this->session->q->dreg->query($sQuery) as $row)
-			{
-				$level = $doc->createElement('GeoCartoItem');
-				$level = $occ->appendChild($level);
-				$level->setAttribute('GeoLevelId', $row['GeoLevelId']);
-				$level->setAttribute('LangIsoCode', $row['LangIsoCode']);
-				foreach(array('GeoLevelLayerFile','GeoLevelLayerName','GeoLevelLayerCode') as $field)
+			if ($this->session->q->dreg) {
+				foreach($this->session->q->dreg->query($sQuery) as $row)
 				{
-					$child = $doc->createElement($field);
-					$child = $level->appendChild($child);
-					$value = $doc->createTextNode($row[$field]);
-					$value = $child->appendChild($value);
+					$level = $doc->createElement('GeoCartoItem');
+					$level = $occ->appendChild($level);
+					$level->setAttribute('GeoLevelId', $row['GeoLevelId']);
+					$level->setAttribute('LangIsoCode', $row['LangIsoCode']);
+					foreach(array('GeoLevelLayerFile','GeoLevelLayerName','GeoLevelLayerCode') as $field)
+					{
+						$child = $doc->createElement($field);
+						$child = $level->appendChild($child);
+						$value = $doc->createTextNode($row[$field]);
+						$value = $child->appendChild($value);
+					} //foreach
 				} //foreach
-			} //foreach
+			}
 		}
 		catch (Exception $e)
 		{
