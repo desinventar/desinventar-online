@@ -1,6 +1,7 @@
 <?php
 
-function fb($value) {
-	$fb = FirePHP::getInstance(true);
-	$fb->fb($value);
+function fb($value)
+{
+    $fb = FirePHP::getInstance(true);
+    $fb->fb($value);
 }
