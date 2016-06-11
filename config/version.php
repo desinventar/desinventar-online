@@ -2,5 +2,5 @@
 return array(
     'major_version' => '10',
     'version' => '10.01.003',
-    'release_date' => '2016-05-15'
+    'release_date' => '2016-06-10'
 );
