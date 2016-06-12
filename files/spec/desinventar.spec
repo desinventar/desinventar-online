@@ -1,11 +1,11 @@
 # DesInventar RPM Spec File
 # CentOS-6
 # Jhon H. Caicedo <jhcaiced@desinventar.org>
-# 2016-02-22
+# 2016-06-10
 
 Summary: DesInventar - Disaster Inventory System
 Name: desinventar
-Version: 10.01.002
+Version: 10.01.003
 Release: 1%{dist}
 License: GPLv3
 Group: Applications/Disaster
@@ -16,17 +16,15 @@ Url: http://www.desinventar.org
 BuildArch: noarch
 BuildRoot: %{_tmppath}/%{name}-buildroot
 
-Requires: gd giflib
+Requires: httpd gd giflib
 Requires: sqlite >= 3.6.14
 Requires: php >= 5.3
 Requires: php php-common php-cli php-gd php-xml php-pdo php-mbstring
-Requires: mapserver
 Requires: liberation-fonts-common liberation-sans-fonts
 Requires: liberation-mono-fonts liberation-serif-fonts
 Requires: liberation-fonts-extras
-Requires: php-dbase
-Requires: php-jpgraph3
-Requires: php-DrUUID
+Requires: php-dbase php-jpgraph3 php-DrUUID
+Requires: mapserver proj proj-epsg proj-nad
 
 %define BASE_DIR  %{_prefix}/share/desinventar
 %define WEB_DIR   %{BASE_DIR}/web
@@ -41,9 +39,8 @@ DesInventar is a conceptual and methodological tool for the
 construction of databases of loss, damage, or effects caused by emergencies
 or disasters. It includes: methodology (definitions and help in the
 management of data) database with flexible structure; software for input
-into the database; software for consultation of data (not limited to a
-predefined number of consultations) – with selection options for search
-criteria.
+data into the database; software for querying the database in a flexible manner
+with multiple selection options and search criteria.
 
 %prep
 rm -rf *
@@ -64,12 +61,6 @@ install -m 755 -d $RPM_BUILD_ROOT/%{WEB_DIR}
 cp -r * $RPM_BUILD_ROOT/%{BASE_DIR}
 
 install -m 755 -d $RPM_BUILD_ROOT/%{DATA_DIR}
-
-# HTTPD Conf File
-#pushd .
-#install -m 755 -d $RPM_BUILD_ROOT/etc/httpd/conf.d
-#install -m 644 files/conf/desinventar.conf $RPM_BUILD_ROOT/etc/httpd/conf.d
-#popd
 
 # WorldMap Install
 install -m 755 -d $RPM_BUILD_ROOT/%{DATA_DIR}/worldmap
@@ -94,6 +85,7 @@ chown -R apache:apache %{DATA_DIR}
 cd %{BASE_DIR}
 php -r "readfile('https://getcomposer.org/installer');" | php
 ./composer.phar install
+rm -rf composer.phar
 
 %postun
 cd %{BASE_DIR}
@@ -104,10 +96,12 @@ rm -rf %{WWW_DIR}
 
 %files 
 %defattr(-,root,root)
-#%{_prefix}/bin/*
 %{_prefix}/share/desinventar/*
-#%attr(-, root, root) /etc/httpd/conf.d/desinventar.conf
+/var/lib/desinventar/worldmap/*
 
 %changelog
+* Sun Jun 12 2016 Jhon H. Caicedo <jhcaiced@desinventar.org> 10.01.003
+- Updated for new release
+
 * Mon Feb 22 2016 Jhon H. Caicedo <jhcaiced@desinventar.org> 10.01.002
 - Updated build structure for CentOS-6
