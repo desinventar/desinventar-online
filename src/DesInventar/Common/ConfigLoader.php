@@ -30,33 +30,27 @@ class ConfigLoader
      * @param string $filepath Full path to where the file is located
      * @param string $type is the type of file.  can be "ARRAY" "JSON" "INI"
      */
-    private function __construct($filepath, $type = 'php')
+    private function __construct($customConfigFileList, $defaultConfigFile, $type = 'php')
     {
-        if (! file_exists($filepath)) {
-            return false;
+        if (!file_exists($defaultConfigFile)) {
+            throw new \Exception('Cannot find default configuration file: ' . $defaultConfigFile);
         }
         // Load default configuration values
-        $this->options = $this->readConfigFile($filepath, $type);
+        $this->options = $this->readConfigFile($defaultConfigFile, $type);
 
-        // Attempt to load a local configuration file which overrides
-        // some of the default settings
-        $local_config_name = $this->getLocalConfigName($filepath);
-        if (file_exists($local_config_name)) {
-            $local_config = $this->readConfigFile($local_config_name, $type);
-            $this->options = array_replace_recursive($this->options, $local_config);
+        // Find the first available custom config file and merge
+        foreach ($customConfigFileList as $customConfigFile) {
+            if (! file_exists($customConfigFile)) {
+                continue;
+            }
+
+            // Attempt to load a local configuration file which overrides
+            // some of the default settings
+            $customConfig = $this->readConfigFile($customConfigFile, $type);
+            $this->options = array_replace_recursive($this->options, $customConfig);
+            break;
         }
         return true;
-    }
-
-    private function getLocalConfigName($filepath)
-    {
-        $rindex = strrpos($filepath, ".");
-        if ($rindex === false) {
-            // Not found
-            return false;
-        }
-        $ext = substr($filepath, $rindex);
-        return substr($filepath, 0, $rindex) . '_local' . $ext;
     }
 
     private function readConfigFile($filepath, $type)
