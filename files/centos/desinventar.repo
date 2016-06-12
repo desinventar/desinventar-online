@@ -1,0 +1,15 @@
+[desinventar]
+name=DesInventar Stable Packages
+baseurl=http://yum.inticol.com/desinventar/stable/centos/$releasever/$basearch
+enabled=0
+gpgcheck=0
+keepcache=0
+metadata_expire=0
+
+[desinventar-testing]
+name=DesInventar Testing Packages
+baseurl=http://yum.inticol.com/desinventar/testing/centos/$releasever/$basearch
+enabled=0
+gpgcheck=0
+keepcache=0
+metadata_expire=0

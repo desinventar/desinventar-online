@@ -14,7 +14,7 @@ require_once('include/query_operations.php');
 $post = $_POST;
 $get  = $_GET;
 
-$cmd = getParameter('cmd', getParameter('prmQueryCommand', getParameter('_CMD','')));
+$cmd = getCmd();
 if ($cmd == '')
 {
 	if (isset($_POST['prmQuery']['Command']))
