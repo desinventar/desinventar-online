@@ -21,7 +21,14 @@ $loader->add('DesInventar', __DIR__. '/../../src');
 
 require_once __DIR__. '/../../src/common/fb_wrapper.php';
 
-$config = DesInventar\Common\ConfigLoader::getInstance(__DIR__ . '/../../config/config.php', 'php');
+$config = DesInventar\Common\ConfigLoader::getInstance(
+	array(
+		'/etc/desinventar/config.php',
+		__DIR__ . '/../../config/config_local.php',
+	),
+	__DIR__ . '/../../config/config.php',
+	'php'
+);
 $config->version = require_once __DIR__ . '/../../config/version.php';
 
 $appOptions = array();
