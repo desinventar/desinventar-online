@@ -50,8 +50,9 @@
 		}
 		$queryString .= $key . '=' . urlencode($value);
 	}
+	$queryString .= '&mde=map';
 	$url = 'http://' . $_SERVER['SERVER_ADDR'];
-	if (isset($_SERVER['SERVER_PORT']) && ($_SERVER['SERVER_PORT'] != 80)) {
+	if (! is_ssl() && isset($_SERVER['SERVER_PORT']) && ($_SERVER['SERVER_PORT'] != 80)) {
 		$url .= ':' . $_SERVER['SERVER_PORT'];
 	}
 	$url .= '/cgi-bin/' . MAPSERV . '?' . $queryString;

@@ -49,6 +49,20 @@ function getBrowserClientLanguage()
 	return $IsoLang;
 } // function
 
+function is_ssl() {
+	if ( isset($_SERVER['HTTPS']) ) {
+		if ( 'on' == strtolower($_SERVER['HTTPS']) ) {
+			return true;
+		}
+		if ( '1' == $_SERVER['HTTPS'] ) {
+			return true;
+		}
+	} elseif ( isset($_SERVER['SERVER_PORT']) && ( '443' == $_SERVER['SERVER_PORT'] ) ) {
+		return true;
+	}
+	return false;
+}
+
 function getParameter($prmName, $prmDefault='')
 {
 	$prmValue = $prmDefault;
@@ -62,6 +76,10 @@ function getParameter($prmName, $prmDefault='')
 	}
 	$prmValue = trim($prmValue);
 	return $prmValue;
+}
+
+function getCmd() {
+	return getParameter('cmd', getParameter('prmQueryCommand', getParameter('_CMD','')));
 }
 
 function showDebugMsg($sMsg)
@@ -285,12 +303,21 @@ function getFont($prmFontName)
 } #getFont()
 
 
-function showErrorMsg($sMsg, Exception $e = null)
+function showErrorMsg($prm_debug, $e, $prm_error_message)
 {
-	if ($e != null)
-	{
-		$sMsg = 'ERROR ' . $sMsg . $e->getMessage();
+	$debug = array_merge(array('class' => '', 'type' => '', 'function' => '', 'line' => ''), $prm_debug[0]);
+	$error_locator = $debug['class'] . $debug['type'] . $debug['function'] . ':' . $debug['line'];
+	$error_message = '[DESINVENTAR_ERROR] ' . $error_locator;
+	$error_pieces = array();
+	if (!empty($prm_error_message)) {
+		$error_pieces[] = $prm_error_message;
 	}
-	fb($sMsg);
+	if ($e != null) {
+		$error_pieces[] = $e->getMessage();
+	}
+	if (count($error_pieces) > 0) {
+		$error_message .= ' => ' . implode(':', $error_pieces);
+	}
+	error_log($error_message);
 }
 

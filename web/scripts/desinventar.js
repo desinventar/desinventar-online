@@ -7616,50 +7616,6 @@ function onReadyUserLogin()
 		}
 	});
 
-	jQuery('#frmUserLogin').submit(function() {
-		var UserId     = jQuery('#fldUserId').val();
-		var UserPasswd = jQuery("#fldUserPasswd").val();
-
-		doUserLoginUpdateMsg('');
-
-		if (UserId == '' || UserPasswd == '')
-		{
-			doUserLoginUpdateMsg('msgEmptyFields');
-		}
-		else
-		{
-			jQuery.post(jQuery('#desinventarURL').val() + '/',
-				{
-					'cmd'        : 'cmdUserLogin',
-					'RegionId'   : jQuery('#desinventarRegionId').val(),
-					'UserId'     : UserId,
-					'UserPasswd' : hex_md5(UserPasswd)
-			    },
-				function(data)
-				{
-					if (parseInt(data.Status) > 0)
-					{
-						doUserLoginUpdateMsg('msgUserLoggedIn');
-						jQuery('#fldUserId').val('');
-						jQuery("#fldUserPasswd").val('');
-
-						// Update UserInfo Fields...
-						doUserUpdateInfo(data.User);
-
-						Ext.getCmp('wndUserLogin').hide();
-						// Trigger Event and Update User Menu etc.
-						jQuery('body').trigger('cmdMainWindowUpdate');
-					}
-					else
-					{
-						doUserLoginUpdateMsg('msgInvalidPasswd');
-					}
-				},
-				'json'
-			);
-		}
-		return false;
-	});
 	//Initialization code
 	doUserLoginCreate();
 } //onReadyUserLogin()

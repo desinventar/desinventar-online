@@ -19,7 +19,16 @@ define('SRCDIR'  , $_SERVER['DESINVENTAR_SRC']);
 $loader = require_once __DIR__ . '/../../vendor/autoload.php';
 $loader->add('DesInventar', __DIR__. '/../../src');
 
-$config = DesInventar\Common\ConfigLoader::getInstance(__DIR__ . '/../../config/config.php', 'php');
+require_once __DIR__. '/../../src/common/fb_wrapper.php';
+
+$config = DesInventar\Common\ConfigLoader::getInstance(
+	array(
+		'/etc/desinventar/config.php',
+		__DIR__ . '/../../config/config_local.php',
+	),
+	__DIR__ . '/../../config/config.php',
+	'php'
+);
 $config->version = require_once __DIR__ . '/../../config/version.php';
 
 $appOptions = array();
@@ -99,7 +108,7 @@ if (isset($_SERVER['HTTP_HOST']))
 	}
 	// Define the Smarty library directory (installed by composer)
 	define('SMARTYDIR', SRCDIR  . '/vendor/smarty/smarty/libs');
-	define('JPGRAPHDIR', SRCDIR . '/lib/jpgraph/3.0.7');
+	define('JPGRAPHDIR', $config->paths['jpgraph_dir']);
 }
 else
 {
@@ -117,7 +126,7 @@ if (!empty($_SERVER['DESINVENTAR_CACHEDIR'])) {
 	$config->smarty['cachedir'] = $_SERVER['DESINVENTAR_CACHEDIR'];
 }
 if (!empty($_SERVER['DESINVENTAR_DATADIR'])) {
-	$config->paths['datadir'] = $_SERVER['DESINVENTAR_DATADIR'];
+	$config->database['db_dir'] = $_SERVER['DESINVENTAR_DATADIR'];
 }
 if (!empty($_SERVER['DESINVENTAR_MODE']))
 {
@@ -131,8 +140,8 @@ define('BASE'    , $_SERVER['DESINVENTAR_WEB']);
 define('WWWDIR'  , $_SERVER['DESINVENTAR_WWWDIR']);
 define('WWWDATA' , '/desinventar-data');
 define('WWWURL'  , '/');
-define('DBDIR'   , $config->paths['datadir'] . '/database');
-define('VAR_DIR' , $config->paths['datadir']);
+define('DBDIR'   , $config->database['db_dir'] . '/database');
+define('VAR_DIR' , $config->database['db_dir']);
 define('TMP_DIR' , TEMP);
 require_once(BASE . '/include/usersession.class.php');
 require_once(BASE . '/include/date.class.php');
@@ -151,7 +160,7 @@ require_once(BASE . '/include/digeography.class.php');
 require_once(BASE . '/include/digeolevel.class.php');
 require_once(BASE . '/include/digeocarto.class.php');
 require_once(BASE . '/include/didisaster.class.php');
-require_once(SRCDIR . '/lib/lib.uuid/20110320/lib.uuid.php');
+require_once($config->paths['druuid_dir'] . '/lib.uuid.php');
 
 // Set a default exception handler to avoid ugly messages in screen
 if ($config->flags['mode'] != 'devel') {
@@ -164,18 +173,30 @@ $time_start = microtime_float();
 $SessionId = (string)UUID::mint(4);
 if (MODE != 'command')
 {
+	$cmd = getCmd();
 	// Session Management
 	session_name('DESINVENTAR_SSID');
+	$SessionId = '';
+	if ($cmd == 'cmdUserLogin') {
+		// When we are doing the user authentication, we want to make
+		// sure we have the same sessionId, even when we are 
+		// making a CORS call. (i.e. http makes an https call for auth)
+		$SessionId = getParameter('SessionId', '');
+		if (! empty($SessionId)) {
+			// When setting a session_id value, it must be called before session_start()
+			session_id($SessionId);
+		}
+	}
 	session_start();
 	$SessionId = session_id();
 }
 // 2009-01-15 (jhcaiced) Start by create/recover the session 
 // information, even for anonymous users
 $us = new UserSession($SessionId, $config);
-
-// Validate that out main database exists (core.db)
-if (empty($us->q->core)) {
-	throw new Exception('Cannot initialize the database connection');
+if (!$us->isConnected()) {
+	// Validate that main database exists (core.db)
+	showErrorMsg(debug_backtrace(), null, 'Cannot initialize database connection');
+	exit(0);
 }
 
 $us->awake();
@@ -183,6 +204,8 @@ if (MODE != 'command')
 {
 	error_reporting(E_ALL && ~E_NOTICE);
 	header('Content-Type: text/html; charset=UTF-8');
+	// This header allows connections from non secure clients, we keep it for compatibility
+	header('Access-Control-Allow-Origin: *');
 	define('DEFAULT_CHARSET', 'UTF-8');
 
 	$confdir = dirname($_SERVER['SCRIPT_FILENAME']) . '/conf';
@@ -275,6 +298,21 @@ if (MODE != 'command')
 		$desinventarURLPortal = substr($desinventarURLPortal, 0, strlen($desinventarURLPortal) - 1);
 	}
 
+	// Build a complete URL for the application
+	$url_proto = 'http';
+	if (is_ssl()) {
+		$url_proto = 'https';
+	}
+	$url_port = '';
+	if (! is_ssl() && isset($_SERVER['SERVER_PORT']) && ($_SERVER['SERVER_PORT'] != 80)) {
+		$url_port = ':' . $_SERVER['SERVER_PORT'];
+	}
+	$url = $url_proto . '://' . $_SERVER['HTTP_HOST'] . $url_port . $_SERVER['REQUEST_URI'];
+
+	$config->params = array(
+		'url' => $url
+	);
+
 	// General Information (common to portal/app)
 	$t->assign('desinventarMode'        , $config->flags['mode']);
 	$t->assign('desinventarURL'         , $desinventarURL);
@@ -286,4 +324,5 @@ if (MODE != 'command')
 	$t->assign('desinventarLang'        , $lg);
 	$t->assign('desinventarUserId'      , $us->UserId);
 	$t->assign('desinventarUserFullName', $us->getUserFullName());
+	$t->assign('config', json_encode(array('flags' => $config->flags, 'params' => $config->params, 'version' => $config->version)));
 }

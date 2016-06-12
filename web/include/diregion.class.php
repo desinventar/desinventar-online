@@ -176,7 +176,7 @@ class DIRegion extends DIObject
 		catch (Exception $e)
 		{
 			$this->session->q->core->rollBack();
-			showErrorMsg('insertCore', $e);
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		$this->updateCore();
 	} //insertCore()
@@ -205,7 +205,7 @@ class DIRegion extends DIObject
 		catch (Exception $e)
 		{
 			$this->session->q->core->rollBack();
-			showErrorMsg('updateCore', $e);
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		return $iReturn;
 	}
@@ -525,20 +525,22 @@ class DIRegion extends DIObject
 		$occ = $root->appendChild($occ);
 		try
 		{
-			foreach($this->session->q->dreg->query($sQuery) as $row)
-			{
-				$level = $doc->createElement('GeoCartoItem');
-				$level = $occ->appendChild($level);
-				$level->setAttribute('GeoLevelId', $row['GeoLevelId']);
-				$level->setAttribute('LangIsoCode', $row['LangIsoCode']);
-				foreach(array('GeoLevelLayerFile','GeoLevelLayerName','GeoLevelLayerCode') as $field)
+			if ($this->session->q->dreg) {
+				foreach($this->session->q->dreg->query($sQuery) as $row)
 				{
-					$child = $doc->createElement($field);
-					$child = $level->appendChild($child);
-					$value = $doc->createTextNode($row[$field]);
-					$value = $child->appendChild($value);
+					$level = $doc->createElement('GeoCartoItem');
+					$level = $occ->appendChild($level);
+					$level->setAttribute('GeoLevelId', $row['GeoLevelId']);
+					$level->setAttribute('LangIsoCode', $row['LangIsoCode']);
+					foreach(array('GeoLevelLayerFile','GeoLevelLayerName','GeoLevelLayerCode') as $field)
+					{
+						$child = $doc->createElement($field);
+						$child = $level->appendChild($child);
+						$value = $doc->createTextNode($row[$field]);
+						$value = $child->appendChild($value);
+					} //foreach
 				} //foreach
-			} //foreach
+			}
 		}
 		catch (Exception $e)
 		{
@@ -604,7 +606,7 @@ class DIRegion extends DIObject
 			}
 			catch (Exception $e)
 			{
-				showErrorMsg($e->getCode() . ' ' . $e->getMessage());
+				showErrorMsg(debug_backtrace(), $e, '');
 			}
 			foreach($doc->getElementsByTagName('General') as $tree)
 			{
@@ -681,7 +683,7 @@ class DIRegion extends DIObject
 		catch (Exception $e)
 		{
 			$us->q->core->rollBack();
-			showErrorMsg('deleteRegion', $e);
+			showErrorMsg(debug_backtrace(), $e, '');
 			$iReturn = ERR_UNKNOWN_ERROR;
 		}
 		return $iReturn;
@@ -767,7 +769,7 @@ class DIRegion extends DIObject
 		}
 		catch (Exception $e)
 		{
-			showErrorMsg('getGeolevelList : ' . $e->getMessage());
+			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		return $answer;
 	} //loadGeoLevels()

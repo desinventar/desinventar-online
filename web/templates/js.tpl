@@ -41,3 +41,9 @@
 <script type="text/javascript" src="{-$desinventarURL-}/js/init.js?version={-$jsversion-}"></script>
 <script type="text/javascript" src="{-$desinventarURL-}/js/main.js?version={-$jsversion-}"></script>
 <script type="text/javascript" src="{-$desinventarURL-}/js/main_ext.js?version={-$jsversion-}"></script>
+<script type="text/javascript">
+		// Global hook for all functions
+		var desinventar = {};
+		// Passing configuration parameters to JS
+		desinventar.config = {-$config-}
+</script>
