@@ -33,6 +33,7 @@ Requires: mapserver proj proj-epsg proj-nad
 %define DATA_DIR  /var/lib/desinventar
 %define TMP_DIR   /var/tmp/desinventar
 %define CACHE_DIR /var/cache/smarty/desinventar
+%define CONFIG_DIR /etc/desinventar
 
 %description
 DesInventar is a conceptual and methodological tool for the
@@ -67,6 +68,9 @@ install -m 755 -d $RPM_BUILD_ROOT/%{DATA_DIR}/worldmap
 cd $RPM_BUILD_ROOT/%{DATA_DIR}/worldmap
 unzip %{SOURCE1}
 
+install -m 755 -d $RPM_BUILD_ROOT/%{CONFIG_DIR}
+cp $RPM_BUILD_ROOT/%{BASE_DIR}/config/config.php $RPM_BUILD_ROOT/%{CONFIG_DIR}/config.php
+
 %post
 install -m 755 -o apache -g apache -d %{WWW_DIR}/graphs
 install -m 755 -o apache -g apache -d %{CACHE_DIR}
@@ -98,6 +102,7 @@ rm -rf %{WWW_DIR}
 %defattr(-,root,root)
 %{_prefix}/share/desinventar/*
 /var/lib/desinventar/worldmap/*
+%config %{CONFIG_DIR}/config.php
 
 %changelog
 * Sun Jun 12 2016 Jhon H. Caicedo <jhcaiced@desinventar.org> 10.01.003
