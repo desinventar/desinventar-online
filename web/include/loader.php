@@ -20,7 +20,6 @@ $loader = require_once __DIR__ . '/../../vendor/autoload.php';
 $loader->add('DesInventar', __DIR__. '/../../src');
 
 require_once __DIR__. '/../../src/common/fb_wrapper.php';
-
 $config = DesInventar\Common\ConfigLoader::getInstance(
 	array(
 		'/etc/desinventar/config.php',
@@ -299,18 +298,8 @@ if (MODE != 'command')
 	}
 
 	// Build a complete URL for the application
-	$url_proto = 'http';
-	if (is_ssl()) {
-		$url_proto = 'https';
-	}
-	$url_port = '';
-	if (! is_ssl() && isset($_SERVER['SERVER_PORT']) && ($_SERVER['SERVER_PORT'] != 80)) {
-		$url_port = ':' . $_SERVER['SERVER_PORT'];
-	}
-	$url = $url_proto . '://' . $_SERVER['HTTP_HOST'] . $url_port . $_SERVER['REQUEST_URI'];
-
 	$config->params = array(
-		'url' => $url
+		'url' => DesInventar\Common\Util::getUrl()
 	);
 
 	// General Information (common to portal/app)
