@@ -1,11 +1,11 @@
 # DesInventar RPM Spec File
 # CentOS-6
 # Jhon H. Caicedo <jhcaiced@desinventar.org>
-# 2016-06-10
+# 2016-06-21
 
 Summary: DesInventar - Disaster Inventory System
 Name: desinventar
-Version: 10.01.003
+Version: 10.01.004
 Release: 1%{dist}
 License: GPLv3
 Group: Applications/Disaster
@@ -71,7 +71,7 @@ unzip %{SOURCE1}
 install -m 755 -d $RPM_BUILD_ROOT/%{CONFIG_DIR}
 cp $RPM_BUILD_ROOT/%{BASE_DIR}/config/config.php $RPM_BUILD_ROOT/%{CONFIG_DIR}/config.php
 
-%post
+%posttrans
 install -m 755 -o apache -g apache -d %{WWW_DIR}/graphs
 install -m 755 -o apache -g apache -d %{CACHE_DIR}
 install -m 755 -o apache -g apache -d %{TMP_DIR}
@@ -91,13 +91,6 @@ php -r "readfile('https://getcomposer.org/installer');" | php
 ./composer.phar install
 rm -rf composer.phar
 
-%postun
-cd %{BASE_DIR}
-rm -rf composer.phar vendor
-rm -rf %{CACHE_DIR}
-rm -rf %{TMP_DIR}
-rm -rf %{WWW_DIR}
-
 %files 
 %defattr(-,root,root)
 %{_prefix}/share/desinventar/*
@@ -105,6 +98,9 @@ rm -rf %{WWW_DIR}
 %config %{CONFIG_DIR}/config.php
 
 %changelog
+* Sun Jun 21 2016 Jhon H. Caicedo <jhcaiced@desinventar.org> 10.01.004
+- Updated for new release
+
 * Sun Jun 12 2016 Jhon H. Caicedo <jhcaiced@desinventar.org> 10.01.003
 - Updated for new release
 
