@@ -17,7 +17,7 @@ $options['protocol'] = 'http';
 if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
 	$options['protocol'] = 'https';
 }
-$url = '//' . $_SERVER['HTTP_HOST'];
+$url = $options['protocol_for_maps'] . '://' . $_SERVER['HTTP_HOST'];
 $url .= $desinventarURL;
 $options['url'] = $url;
 $options = array_merge($options, $config->maps);
