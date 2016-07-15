@@ -1,4 +1,4 @@
-<script language="php">
+<?php
 /*
  DesInventar - http://www.desinventar.org
  (c) 1998-2012 Corporacion OSSO
@@ -14,10 +14,10 @@ $options = array();
 // Always use http for KML files, Google earth doesn't load layers via https 
 $options['protocol_for_maps'] = 'http';
 $options['protocol'] = 'http';
-if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
+if (is_ssl()) {
 	$options['protocol'] = 'https';
 }
-$url = '//' . $_SERVER['HTTP_HOST'];
+$url = $options['protocol'] . '://' . $_SERVER['HTTP_HOST'];
 $url .= $desinventarURL;
 $options['url'] = $url;
 $options = array_merge($options, $config->maps);
@@ -184,6 +184,8 @@ switch($cmd)
 			$options[$key] = $value;
 		}
 
+		$mapserver = new DesInventar\Common\MapServer($config);
+
 		$iAllWidth = 1000;
 		$iAllHeight = 760;
 
@@ -231,8 +233,12 @@ switch($cmd)
 		$iBaseTop    = 0 + $iTitleHeight;
 		$iBaseWidth  = $iAllWidth;
 		$iBaseHeight = $iAllHeight - $iTitleHeight - $iInfoHeight;
-		$sBaseUrl = $options['url'] . '/wms/worldmap/' . '?SRS=EPSG:900913' .
-			'&BBOX='. $options['extent'] . '&WIDTH='. $iBaseWidth .'&HEIGHT='. $iBaseHeight;
+		$sBaseUrl = $mapserver->getMapServerUrl($mapserver->getQueryString(array(
+			'MAPID' => 'worldmap',
+			'BBOX' => $options['extent'],
+			'WIDTH' => $iBaseWidth,
+			'HEIGHT' => $iBaseHeight
+		)));
 		$imgBase = imagecreatefromstring(file_get_contents($sBaseUrl));
 		imagecopy($imgAll, $imgBase , $iBaseLeft , $iBaseTop , 0, 0, $iBaseWidth, $iBaseHeight);
 
@@ -242,15 +248,23 @@ switch($cmd)
 		$iMapHeight  = $iBaseHeight;
 		if ($options['layers'] != '')
 		{
-			$sMapUrl = $options['url'] . '/wms/' . $options['id'] . '/?SRS=EPSG:900913' . 
-				'&BBOX='. $options['extent'] .'&WIDTH='. $iMapWidth .'&HEIGHT='. $iMapHeight .
-				'&LAYERS=' . $options['layers'];
+			$sMapUrl = $mapserver->getMapServerUrl($mapserver->getQueryString(array(
+				'MAPID' => $options['id'],
+				'BBOX' => $options['extent'],
+				'WIDTH' => $iMapWidth,
+				'HEIGHT' => $iMapHeight,
+				'LAYERS' => $options['layers']
+			)));
 			$imgMap = imagecreatefromstring(file_get_contents($sMapUrl));
 			imagecopy($imgAll, $imgMap  , $iMapLeft  , $iMapTop  , 0, 0, $iMapWidth , $iMapHeight );
 		}
 		
 		// Download and include legend
-		$sLegendURL = $options['url'] . '/wms/' . $options['id'] . '/legend/';
+		$sLegendURL = $mapserver->getMapServerUrl($mapserver->getQueryString(array(
+			'MAPID' => $options['id'],
+			'LAYER' => 'effects',
+			'REQUEST' => 'getlegendgraphic',
+		)));
 		$imgTmp = imagecreatefromstring(file_get_contents($sLegendURL));
 		$fontsize = 11;
 		$iLegendWidth = imagesx($imgTmp);
@@ -329,4 +343,3 @@ function setRanges($opc)
 	}
 	return $range;
 }
-</script>

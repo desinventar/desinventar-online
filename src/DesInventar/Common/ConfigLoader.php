@@ -79,7 +79,7 @@ class ConfigLoader
 
     private function __clone()
     {
-
+        //@TODO: Implement this function
     }
 
     public static function getInstance($filepath, $type = 'php')
