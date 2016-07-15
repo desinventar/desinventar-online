@@ -5,8 +5,8 @@
 
 Summary: DesInventar - Disaster Inventory System
 Name: desinventar
-Version: 10.01.004
-Release: 1%{dist}
+Version: 10.01.005
+Release: 1.el6
 License: GPLv3
 Group: Applications/Disaster
 Source0: desinventar-online.tar.gz
@@ -73,7 +73,9 @@ cp $RPM_BUILD_ROOT/%{BASE_DIR}/config/config.php $RPM_BUILD_ROOT/%{CONFIG_DIR}/c
 
 %posttrans
 install -m 755 -o apache -g apache -d %{WWW_DIR}/graphs
+rm -rf %{CACHE_DIR}/*
 install -m 755 -o apache -g apache -d %{CACHE_DIR}
+rm -rf %{TMP_DIR}/*
 install -m 755 -o apache -g apache -d %{TMP_DIR}
 
 install -m 755 -o apache -g apache -d %{DATA_DIR}/database
@@ -98,7 +100,10 @@ rm -rf composer.phar
 %config %{CONFIG_DIR}/config.php
 
 %changelog
-* Sun Jun 21 2016 Jhon H. Caicedo <jhcaiced@desinventar.org> 10.01.004
+* Thu Jul 14 2016 Jhon H. Caicedo <jhcaiced@inticol.com> 10.01.005
+- Updated for new release
+
+* Sun Jun 19 2016 Jhon H. Caicedo <jhcaiced@desinventar.org> 10.01.004
 - Updated for new release
 
 * Sun Jun 12 2016 Jhon H. Caicedo <jhcaiced@desinventar.org> 10.01.003
