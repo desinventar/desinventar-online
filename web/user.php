@@ -1,7 +1,7 @@
 <?php
 /*
  DesInventar - http://www.desinventar.org
- (c) 1998-2012 Corporacion OSSO
+ (c) 1998-2016 Corporación OSSO
 */
 
 require_once('include/loader.php');
@@ -142,7 +142,6 @@ switch ($cmd)
 		{
 			$bReturn = ERR_UNKNOWN_ERROR;
 		}
-		
 		if ($bReturn > 0)
 		{
 			$data = $_POST['User'];
@@ -160,17 +159,13 @@ switch ($cmd)
 				$bReturn = ERR_USER_DUPLICATE_ID;
 			}
 		}		
-		
 		if ($bReturn > 0)
 		{
 			$u = new DIUser($us, $UserId);
-			if ($cmd == 'insert')
-			{
+			if ($cmd == 'insert') {
 				// set a Default passwd for new users...
 				$data['UserPasswd'] = md5('desinventar');
-			}
-			else
-			{
+			} else {
 				// Do not change passwd here !!
 				unset($data['UserPasswd']);
 			}
@@ -180,6 +175,11 @@ switch ($cmd)
 				$bReturn = $u->insert();
 			}
 			$bReturn = $u->update();
+		}
+		if ($bReturn > 0) {
+			if (!empty($data['new_passwd'])) {
+				$u->updatePasswd($UserId, $data['new_passwd']);
+			}
 		}
 		$Answer = array('Status' => $bReturn);
 		echo json_encode($Answer);

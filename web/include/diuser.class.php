@@ -1,8 +1,10 @@
-<script language="php">
+<?php
 /*
  DesInventar - http://www.desinventar.org
  (c) 1998-2012 Corporacion OSSO
 */
+
+use Aura\SqlQuery\QueryFactory;
 
 class DIUser extends DIRecord
 {
@@ -41,6 +43,20 @@ class DIUser extends DIRecord
 		return $query;
 	}
 
-} #class
+	public function updatePasswd($id, $passwd) {
+		$queryFactory = new QueryFactory('sqlite');
+		$update = $queryFactory->newUpdate();
+		$update
+			->table($this->sTableName)
+			->cols(array('UserPasswd'))
+			->where('UserId = :UserId')
+			->bindValues(array(
+				'UserPasswd' => $passwd,
+				'UserId' => $id
+			));
+		$sth = $this->conn->prepare($update->getStatement());
+		$sth->execute($update->getBindValues());
+		return true;
+	}
+}
 
-</script>
