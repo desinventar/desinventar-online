@@ -92,9 +92,27 @@
 						<input id="chkUserActive" name="User[UserActive]" type="checkbox" />
 					</td>
 				</tr>
+				<tr><td colspan="2"><hr></td></tr>
+				<tr>
+					<td>
+						{-#tnewpassword#-}
+					</td>
+					<td>
+						<input type="text" id="txtUserPasswd1" name="" size="40" maxlength="50" class="line new_passwd" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						{-#tnewpassword2#-}
+					</td>
+					<td>
+						<input type="text" id="txtUserPasswd2" name="" size="40" maxlength="50" class="line new_passwd" />
+					</td>
+				</tr>
 				<tr>
 					<td colspan="2">
 							<input type="hidden" id="txtUserEditCmd" name="cmd" />
+							<input type="hidden" id="fldNewUserPasswd" name="User[new_passwd]" value="" />
 						<div class="center">
 							<a class="button" id="btnUserEditSubmit"><span>{-#bsave#-}</span></a>
 							<a class="button" id="btnUserEditCancel"><span>{-#bcancel#-}</span></a>
