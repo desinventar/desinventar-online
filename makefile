@@ -2,7 +2,10 @@
 
 .PHONY : all .FORCE
 
-all : standard-php standard-js
+all : lint-php standard-php standard-js
+
+lint-php : .FORCE
+	bash ./scripts/lint.sh
 
 standard-php : .FORCE
 	./vendor/bin/phpcs --standard=PSR2 src/* api/* config/config.php config/version.php
