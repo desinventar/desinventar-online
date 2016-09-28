@@ -17,8 +17,7 @@ $options['protocol'] = 'http';
 if (is_ssl()) {
 	$options['protocol'] = 'https';
 }
-$url = $options['protocol'] . '://' . $_SERVER['HTTP_HOST'];
-$url .= $desinventarURL;
+$url = $_SERVER['HTTP_HOST'] . $desinventarURL;
 $options['url'] = $url;
 $options = array_merge($options, $config->maps);
 $cmd = getParameter('_M+cmd', getParameter('cmd', ''));
@@ -152,7 +151,7 @@ switch($cmd)
 			$worldmap = str_replace('\\','/', $config->maps['worldmap_dir'] . '/world_adm0.map');
 			$timestamp = microtime(true);
 
-			$sLegendURL = $options['url'] . '/wms/' . $options['id'] . '/legend/?' . $sLegendLayer;
+			$sLegendURL = $m->getMapUrl($options['protocol']) . '/legend/?' . $sLegendLayer;
 			$t->assign('legend', $sLegendURL);	
 			$t->assign('ctl_showres', true);
 			$t->assign('reg', $RegionId);
