@@ -25,7 +25,6 @@ class Maps
 		$this->options = array('Id' => time());
 		$this->options = array_merge($this->options, $prmOptions);
 
-		$this->url = $this->options['url'] . '/wms/' . $this->options['id'];
 		$this->reg = $reg;
 
 		// Always generate the KML file along with the MAP file for later use
@@ -56,7 +55,25 @@ class Maps
 	{
 		return $this->fpath;
 	}
-	
+
+	public function getBaseUrl($protocol)
+	{
+		$url = $protocol . '://' . $this->options['url'];
+		return $url;
+	}
+
+	public function getMapUrl($protocol)
+	{
+		$url = $this->getBaseUrl($protocol) . '/wms/' . $this->options['id'];
+		return $url;
+	}
+
+	function getLogoUrl()
+	{
+		$url = $this->getBaseUrl($this->options['protocol_for_maps']) . '/images/desinventar_logo.png';
+		return $url;
+	}
+
 	function setHeader($us, $reg, $inf, $typ)
 	{
 		$x = 400;
@@ -98,7 +115,7 @@ class Maps
 			  WMS_ABSTRACT	"Level: '. $inf['LEVEL'] .'"
 			  WMS_EXTENT	"'. $inf['EXTENT'] .'"
 			  WMS_TIMEEXTENT	"'. $inf['BEG'] ."/". $inf['END'] .'/P5M"
-			  WMS_ONLINERESOURCE	"'. $this->url .'/"
+			  WMS_ONLINERESOURCE	"'. $this->getMapUrl($this->options['protocol']) .'/"
 			  WMS_SRS	"EPSG:4326 EPSG:900913"
 			  # Mapserver 7.0 compatibility
 			  WMS_ENABLE_REQUEST "*"
@@ -362,6 +379,7 @@ class Maps
 
 	function generateKML($us, $reg, $info)
 	{
+		$url = $this->getMapUrl($this->options['protocol_for_maps']);
 		$dinf = $us->q->getDBInfo($lg);
 		$regn = $dinf['RegionLabel|'];
 		$desc = $dinf['RegionDesc'];
@@ -417,7 +435,7 @@ class Maps
 		<name>DesInventar '. $regn .'</name>
 		<open>1</open>
 		<Icon>
-			<href>'. $this->options['protocol_for_maps'] . ':' . $this->url . '/effects/?SRS=EPSG%3A4326&amp;HEIGHT=600&amp;STYLES=default,default&amp;WIDTH=800&amp;VERSION=1.1.1&amp;TRANSPARENT=true&amp;LEGEND=true&amp;FORMAT=image/png</href>
+			<href>'. $url . '/effects/?SRS=EPSG%3A4326&amp;HEIGHT=600&amp;STYLES=default,default&amp;WIDTH=800&amp;VERSION=1.1.1&amp;TRANSPARENT=true&amp;LEGEND=true&amp;FORMAT=image/png</href>
 			<viewRefreshMode>onStop</viewRefreshMode>
 			<viewRefreshTime>1</viewRefreshTime>
 			<viewBoundScale>1</viewBoundScale>
@@ -433,7 +451,7 @@ class Maps
 	<ScreenOverlay id="NWILEGEND">
 		<name>Leyenda</name>
 		<Icon>
-			<href>'. $this->options['protocol_for_maps'] . ':' . $this->url .'/legend/</href>
+			<href>'. $url .'/legend/</href>
 		</Icon>
 		<overlayXY x="0" y="0" xunits="fraction" yunits="fraction"/>
 		<screenXY x="0.005" y="0.02" xunits="fraction" yunits="fraction"/>
@@ -443,7 +461,7 @@ class Maps
 	<ScreenOverlay id="DesInventarLogo">
 		<name>DesInventar Project</name>
 		<Icon>
-			<href>' . $this->options['protocol_for_maps'] . ':' . $this->options['url'] .'/images/desinventar_logo.png</href>
+			<href>' . $this->getLogoUrl() . '</href>
 		</Icon>
 		<overlayXY x="0" y="1" xunits="fraction" yunits="fraction"/>
 		<screenXY x="0.005" y="0.995" xunits="fraction" yunits="fraction"/>
