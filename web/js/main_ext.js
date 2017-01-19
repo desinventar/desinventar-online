@@ -667,7 +667,7 @@ function doDialogsCreate()
 
 	// Database List - Database Search Window
 	w = new Ext.Window({id:'wndAdminUsers',
-		el:'divAdminUsersWin', layout:'fit', x:200, y:100, width:600, height:450, 
+		el:'divAdminUsersWin', layout:'fit', x:200, y:100, width:600, height:480, 
 		closeAction:'hide', plain: true, animCollapse: false, constrainHeader: true,
 		items: new Ext.Panel({ contentEl: 'divAdminUsersContent', autoScroll: true })
 	});

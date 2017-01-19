@@ -304,7 +304,7 @@
 			<Text LangIsoCode="fre">Nouveau mot de passe</Text>
 		</Message>
 		<Message id="tnewpassword2">
-			<Text LangIsoCode="eng">Re-type your password</Text>
+			<Text LangIsoCode="eng">Re-type password</Text>
 			<Text LangIsoCode="spa">Re-ingrese</Text>
 			<Text LangIsoCode="por">Digite-a novamente</Text>
 			<Text LangIsoCode="fre">Réintroduisez</Text>
