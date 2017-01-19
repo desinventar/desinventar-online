@@ -10,9 +10,10 @@ function onReadyAdminUsers()
 			jQuery('#divAdminUsers #txtUserId').attr('readonly','true');
 			jQuery('#divAdminUsers #txtUserId').val(data.UserId);
 			jQuery('#divAdminUsers #selCountryIso').val(data.CountryIso);
-			jQuery('#divAdminUsers #txtUserEMail').val(data.UserEMail);
-			jQuery('#divAdminUsers #txtUserFullName').val(data.UserFullName);
+			jQuery('#divAdminUsers #txtUserEMail').unhighlight().val(data.UserEMail);
+			jQuery('#divAdminUsers #txtUserFullName').unhighlight().val(data.UserFullName);
 			jQuery('#divAdminUsers #txtUserCity').val(data.UserCity);
+			jQuery('#divAdminUsers input.new_passwd').unhighlight().val('');
 			jQuery('#divAdminUsers #chkUserActive').attr('checked', data.UserActive);
 			jQuery('#divAdminUsers #txtUserEditCmd').val('update');
 		});
@@ -34,7 +35,7 @@ function onReadyAdminUsers()
 		jQuery('#divAdminUsers #divUserEdit').hide();
 	});
 
-	// Cancel Edit, hide form
+	// Submit and hide form
 	jQuery('body').on('click', '#divAdminUsers #btnUserEditSubmit', function() {
 		jQuery('#divAdminUsers #frmUserEdit').trigger('submit');
 	});
@@ -47,6 +48,13 @@ function onReadyAdminUsers()
 		if (bReturn > 0) {
 			// Remove the readonly attribute, this way the data is sent to processing
 			jQuery('#divAdminUsers #txtUserId').removeAttr('readonly');
+
+			var newPasswd = jQuery('#txtUserPasswd1').val().trim();
+			if (newPasswd !== '') {
+				newPasswd = hex_md5(newPasswd);
+			}
+			jQuery('#fldNewUserPasswd').val(newPasswd);
+
 			// Create an object with the information to send
 			var user = jQuery('#divAdminUsers #frmUserEdit').serializeObject();
 			// Checkboxes not selected are not passed by default to server, so we need
@@ -155,6 +163,13 @@ function validateUserEditForm()
 		bReturn = -101;
 		jQuery('#divAdminUsers #txtUserEMail').highlight();
 	}
+	jQuery('#divAdminUsers input.new_passwd').unhighlight();
+	if ((jQuery('#txtUserPasswd1').val().trim() != '') && 
+		(jQuery('#txtUserPasswd1').val().trim() != jQuery('#txtUserPasswd2').val().trim())) {
+		bReturn = -101;
+		jQuery('#divAdminUsers input.new_passwd').highlight();
+	}
+
 	UserEditFormUpdateStatus(bReturn);
 	return bReturn;		
 }
@@ -166,4 +181,5 @@ function clearUserEditForm() {
 	jQuery('#divAdminUsers #txtUserFullName').val('');
 	jQuery('#divAdminUsers #txtUserCity').val('');
 	jQuery('#divAdminUsers #chkUserActive').attr('checked', '');
+	jQuery('#divAdminUsers input.new_passwd').unhighlight().val('');
 }
