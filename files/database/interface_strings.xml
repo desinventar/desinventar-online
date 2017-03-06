@@ -1312,7 +1312,7 @@
 			<Text LangIsoCode="fre">Numérique</Text>
 		</Message>
 		<Message id="typefloat">
-			<Text LangIsoCode="eng">Float</Text>
+			<Text LangIsoCode="eng">Currency</Text>
 			<Text LangIsoCode="spa">Moneda</Text>
 			<Text LangIsoCode="por">Moeda</Text>
 			<Text LangIsoCode="fre">Monnaie</Text>
