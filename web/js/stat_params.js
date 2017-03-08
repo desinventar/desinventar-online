@@ -68,7 +68,7 @@ function doViewStatParamsInitialize()
 		var field = key;
 		var label = value[0];
 		var type  = value[2];
-		if ( (type == 'INTEGER') || (type == 'DOUBLE'))
+		if ( (type == 'INTEGER') || (type == 'DOUBLE') || (type === 'CURRENCY'))
 		{
 			field_list.append(jQuery('<option>', { value: 'E.' + field + '|>|-1' }).text(label));
 		}
