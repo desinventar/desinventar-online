@@ -95,6 +95,7 @@ class DIRecord extends DIObject
 			}
 			if (($sFieldType == 'INTEGER') ||
 			    ($sFieldType == 'DOUBLE' ) ||
+				($sFieldType == 'CURRENCY') ||
 			    ($sFieldType == 'BOOLEAN' ) )
 			{
 			    $sQuery .= $this->get($sFieldName);
