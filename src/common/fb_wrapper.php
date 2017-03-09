@@ -2,6 +2,7 @@
 
 function fb($value)
 {
-    $fb = FirePHP::getInstance(true);
-    $fb->fb($value);
+    if (class_exists('ChromePhp')) {
+        ChromePhp::log($value);
+    }
 }
