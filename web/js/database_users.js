@@ -178,29 +178,25 @@ function onReadyDatabaseUsers()
 	})
 	.on('click', 'tr', function(e) {
 		var UserId = jQuery.trim(jQuery('.UserId', this).text());
-		jQuery('#frmUsers .UserId').val(UserId);
-		jQuery('#frmUsers .UserRole').val(jQuery('.UserRole', this).text());
-		jQuery('#frmUsers .UserRolePrev').val(jQuery('.UserRole', this).text());
-		jQuery('#frmUsers .UserId').prop('disabled', false);
-		jQuery('#frmUsers .UserRole').prop('disabled', false);
+		var UserRole = jQuery('.UserRole', this).text();
+		jQuery('#frmUsers .UserId').val(UserId).trigger('change').prop('disabled', false);
+		jQuery('#frmUsers .UserRole').val(UserRole).trigger('change').prop('disabled', false);
+		jQuery('#frmUsers .UserRolePrev').val(UserRole);
 		
 		jQuery('#txtDatabaseUsers_RoleListCannotRemoveAdminRole').hide();
 		jQuery('#divDatabaseUsers_Edit').show();
+		e.stopPropagation();
+		e.preventDefault();
 	}).on('mouseover', 'tr', function(event) {
 			jQuery(this).addClass('highlight');
+			e.preventDefault();
 	}).on('mouseout', 'tr', function(event) {
 		jQuery(this).removeClass('highlight');
+		e.preventDefault();
 	});
 
 	jQuery('#frmUsers .UserId').change(function() {
-		var UserId = jQuery(this).val();
-		jQuery('#frmUsers .UserRole').val('');
-		jQuery('#tbodyDatabaseUsers_List tr').each(function(index, Element) {
-			if (jQuery('.UserId', this).text() == UserId)
-			{
-				jQuery(this).trigger('click');
-			}
-		});
+		jQuery('#frmUsers .UserRole').val('NONE').trigger('change');
 	});
 	
 	jQuery('body').on('cmdDatabaseUsersShow', function() {
@@ -278,11 +274,19 @@ function doDatabaseUsersPopulateLists()
 			if (parseInt(data.Status) > 0)
 			{
 				doDatabaseUsersUpdateOptions(data.RegionInfo);
+				doDatabaseUsersPopulateUserRoleList(data.UserRoleList);
 				jQuery('#frmUsers .UserId').empty();
+				var list = [];
 				jQuery.each(data.UserList, function(key, value) {
-					jQuery('#frmUsers .UserId').append(jQuery('<option>', { value : key }).text(value));
+					list.push({id: key, text: value});
 				});
-				doDatabaseUsersPopulateUserRoleList(data.UserRoleList);				
+				jQuery('#frmUsers .UserId').select2({
+					data: list,
+					placeHolder: 'Select a user'
+				});
+				jQuery('#frmUsers .UserRole').select2({
+					placeHolder: 'Select a role'
+				});
 			}
 			jQuery('body').trigger('cmdMainWaitingHide');
 		},
