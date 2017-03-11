@@ -399,7 +399,7 @@ switch ($cmd)
 			$r = new DIRegion($us, $RegionId);
 			$info = array('RegionStatus' => $r->get('RegionStatus'));
 			$UserList     = $us->getUserList();
-			$UserRoleList = $us->getRegionRoleList();
+			$UserRoleList = $us->getRegionRoleList($RegionId);
 			$answer['UserList']     = $UserList;
 			$answer['UserRoleList'] = $UserRoleList;
 			$answer['RegionInfo']   = $info;
@@ -430,7 +430,7 @@ switch ($cmd)
 			$iReturn = $us->setUserRole($UserId, $us->RegionId, $UserRole);
 			if ($iReturn > 0)
 			{
-				$UserRoleList = $us->getRegionRoleList();
+				$UserRoleList = $us->getRegionRoleList($us->RegionId);
 				$answer['UserRoleList'] = $UserRoleList;
 			}
 		}		

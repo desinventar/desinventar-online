@@ -488,71 +488,51 @@ class UserSession
 	} // function
 
 	// Return hash with all users of a Region with a role
-	function getRegionRoleList($prmRegionId='', $prmRoleId='')
+	function getRegionRoleList($prmRegionId)
 	{
-		if ($prmRegionId == '')
-		{
-			$prmRegionId = $this->RegionId;
-		}
 		$myData = array();
-		$sQuery = 'SELECT RegionAuth.*,Region.RegionLabel,User.UserFullName AS UserFullName FROM RegionAuth,Region,User WHERE'  .
-			' (RegionAuth.RegionId = Region.RegionId)' .
-			' AND (RegionAuth.UserId = User.UserId)' .
-			' AND (Region.RegionId="' . $prmRegionId . '")' .
-			' AND RegionAuth.AuthKey="ROLE"';
-		if ($prmRoleId == '')
-		{
-			$sQuery .= ' AND RegionAuth.AuthAuxValue != "NONE"';
-		}
-		else
-		{
-			$sQuery .= ' AND RegionAuth.AuthAuxValue == "' . $prmRoleId . '"';
-		}
-		$sQuery .= ' ORDER BY RegionAuth.RegionId, User.UserFullName';
+		$sQuery = '
+			SELECT
+				RegionAuth.UserId,
+				RegionAuth.AuthAuxValue AS UserRole,
+				User.UserFullName AS UserName,
+				User.UserEMail
+			FROM RegionAuth
+			INNER JOIN User ON RegionAuth.UserId=User.UserId AND User.UserActive>0
+			WHERE
+				RegionAuth.AuthKey="ROLE" AND
+				RegionAuth.AuthAuxValue != "NONE" AND
+				RegionAuth.RegionId=:RegionId
+			ORDER BY User.UserFullName
+		';
 		$sth = $this->q->core->prepare($sQuery);
+		$sth->bindParam(':RegionId', $prmRegionId, PDO::PARAM_STR);
 		try
 		{
-            $this->q->core->beginTransaction();
 			$sth->execute();
-			$this->q->core->commit();
 			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
 			{
 				$sKey = $row['UserId'];
-				$sValue = array(
-					'UserId'   => $row['UserId'],
-					'UserRole' => $row['AuthAuxValue'],
-					'UserName' => $row['UserFullName']
-				);
-				$myData[$sKey] = $sValue;
-			} // while
+				$myData[$sKey] = $row;
+			}
 			$sth->closeCursor();
 		}
 		catch (Exception $e)
 		{
-			$this->q->core->rollBack();
 			showErrorMsg(debug_backtrace(), $e, '');
 		}
-		/*
-		if ($prmRoleId != 'ADMINREGION')
-		{
-			foreach($myData as $UserId => $RoleInfo)
-			{
-				if ($RoleInfo['UserRole'] == 'ADMINREGION')
-				{
-					unset($myData[$UserId]);
-				}
-			}
-		}
-		*/
 		return $myData;
-	} // getRegionRoleList()
+	}
 
 	function getRegionUserAdminInfo($prmRegionId)
 	{
 		$UserInfo = array();
-		$RoleList = $this->getRegionRoleList($prmRegionId, 'ADMINREGION');
+		$RoleList = $this->getRegionRoleList($prmRegionId);
 		foreach($RoleList as $UserId => $UserRole)
 		{
+			if ($UserRole['UserRole'] != 'ADMINREGION') {
+				continue;
+			}
 			$UserFullInfo = $this->getUserInfo($UserId);
 			foreach(array('UserId','UserFullName','UserEMail') as $key)
 			{
@@ -560,7 +540,7 @@ class UserSession
 			}
 		}
 		return $UserInfo;
-	} // getRegionUserAdminInfo()
+	}
 	
 	// Get basic user info: user=>[email,pass,name,org,country,city,creadate,iplist,notes,active]
 	function getUserInfo($prmUserId)
