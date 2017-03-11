@@ -381,6 +381,12 @@
 			<Text LangIsoCode="por">Inválido ou senha</Text>
 			<Text LangIsoCode="fre">Nom d'utilisateur ou mot de passe</Text>
 		</Message>
+		<Message id="msgConnectionError">
+			<Text LangIsoCode="eng">Connection failed</Text>
+			<Text LangIsoCode="spa">Error en conexión al servidor</Text>
+			<Text LangIsoCode="por">Falha na conexão</Text>
+			<Text LangIsoCode="fre">La connexion a échoué</Text>
+		</Message>
 		<Message id="toptions">
 			<Text LangIsoCode="eng">Options</Text>
 			<Text LangIsoCode="spa">Opciones</Text>
