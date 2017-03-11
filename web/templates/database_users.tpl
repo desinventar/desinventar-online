@@ -55,6 +55,8 @@
 					<td class="header UserRoleLabel">
 						<b>{-#msgDatabaseUsers_UserRole#-}</b>
 					</td>
+					<td class="header">
+					</td>
 				</tr>
 			</thead>
 			<tbody id="tbodyDatabaseUsers_List">
@@ -66,6 +68,9 @@
 					<td class="UserRole">
 					</td>
 					<td class="UserRoleLabel">
+					</td>
+					<td>
+						<a class="delete" href=""> &#x2718;</a>
 					</td>
 				</tr>
 			</tbody>
