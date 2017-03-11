@@ -1,6 +1,6 @@
 /*
  DesInventar - http://www.desinventar.org
- (c) 1998-2012 Corporacion OSSO
+ (c) 1998-2017 Corporacion OSSO
 */
 
 function onReadyDatabaseUsers()
@@ -161,42 +161,22 @@ function onReadyDatabaseUsers()
 	});
 
 	jQuery('#frmUsers').submit(function() {
-		jQuery.post(
-			jQuery('#desinventarURL').val() + '/',
-			{
-				cmd      : 'cmdDatabaseUsersSetRole',
-				RegionId : jQuery('#desinventarRegionId').val(),
-				UserId   : jQuery('#frmUsers .UserId').val(),
-				UserRole : jQuery('#frmUsers .UserRole').val()
-			},
-			function(data)
-			{
-				jQuery('.clsDatabaseUsersStatus').hide();
-				if (parseInt(data.Status) > 0)
-				{
-					doDatabaseUsersPopulateUserRoleList(data.UserRoleList);
-					jQuery('#divDatabaseUsers_Edit').hide();
-					jQuery('#txtDatabaseUsers_RoleListStatusOk').show();
-				}
-				else
-				{
-					jQuery('#txtDatabaseUsers_RoleListStatusError').show();
-				}
-				setTimeout(function() {
-					jQuery('.clsDatabaseUsersStatus').hide();
-				}, 3000);
-				var ReloadPageAfter = jQuery('#frmUsers').data('ReloadPageAfter');
-				if (ReloadPageAfter)
-				{
-					window.location.reload(false);
-				}				
-			},
-			'json'
+		doDatabaseUsersUpdateRole(
+			jQuery('#frmUsers .UserId').val(),
+			jQuery('#frmUsers .UserRole').val()
 		);
 		return false;
 	});
 
-	jQuery('#tbodyDatabaseUsers_List').on('click', 'tr', function(e) {
+	jQuery('#tbodyDatabaseUsers_List')
+	.on('click', 'a.delete', function(e) {
+		e.stopPropagation();
+		e.preventDefault();
+		var row = jQuery(this).closest('tr');
+		var userId = row.find('td.UserId').text();
+		doDatabaseUsersUpdateRole(userId, 'NONE');
+	})
+	.on('click', 'tr', function(e) {
 		var UserId = jQuery.trim(jQuery('.UserId', this).text());
 		jQuery('#frmUsers .UserId').val(UserId);
 		jQuery('#frmUsers .UserRole').val(jQuery('.UserRole', this).text());
@@ -309,3 +289,34 @@ function doDatabaseUsersPopulateLists()
 		'json'
 	);
 } //doDatabaseUsersPopulateLists()
+
+function doDatabaseUsersUpdateRole(userId, userRole) {
+	jQuery.post(
+		jQuery('#desinventarURL').val() + '/',
+		{
+			cmd      : 'cmdDatabaseUsersSetRole',
+			RegionId : jQuery('#desinventarRegionId').val(),
+			UserId   : userId,
+			UserRole : userRole
+		},
+		function(data)
+		{
+			jQuery('.clsDatabaseUsersStatus').hide();
+			if (parseInt(data.Status) > 0) {
+				doDatabaseUsersPopulateUserRoleList(data.UserRoleList);
+				jQuery('#divDatabaseUsers_Edit').hide();
+				jQuery('#txtDatabaseUsers_RoleListStatusOk').show();
+			} else {
+				jQuery('#txtDatabaseUsers_RoleListStatusError').show();
+			}
+			setTimeout(function() {
+				jQuery('.clsDatabaseUsersStatus').hide();
+			}, 3000);
+			var ReloadPageAfter = jQuery('#frmUsers').data('ReloadPageAfter');
+			if (ReloadPageAfter) {
+				window.location.reload(false);
+			}
+		},
+		'json'
+	);
+}
