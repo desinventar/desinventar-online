@@ -460,6 +460,9 @@ td a.RegionLink {
 	max-width:400px;
 	height:100%;
 }
+.clsDatabaseUsers a.delete {
+	text-decoration: none;
+}
 .clsGeolevels {
 	max-width:600px;
 	width:100%;
