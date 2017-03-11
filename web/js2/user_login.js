@@ -44,7 +44,10 @@ desinventar.userLogin = (function() {
         jQuery('body').trigger('cmdMainWindowUpdate');
       },
       'json'
-      );
+      ).fail(function() {
+        doUserLoginUpdateMsg('msgConnectionError');
+        return false;
+      });
       return false;
     });
   }

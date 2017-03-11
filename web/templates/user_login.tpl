@@ -38,9 +38,10 @@
 		</table>
 	</form>
 	<div class="center">
-		<span class="status msgEmptyFields">{-#msgEmptyFields#-}</span>
-		<span class="status msgUserLoggedIn">{-#msgUserLoggedIn#-}</span>
-		<span class="status msgInvalidPasswd">{-#msgInvalidPasswd#-}</span>
+		<span class="status hidden msgEmptyFields">{-#msgEmptyFields#-}</span>
+		<span class="status hidden msgUserLoggedIn">{-#msgUserLoggedIn#-}</span>
+		<span class="status hidden msgInvalidPasswd">{-#msgInvalidPasswd#-}</span>
+		<span class="status hidden msgConnectionError">{-#msgConnectionError#-}</span>
 	</div>
 	<form id="uf" action="#">
 		<!-- method="get" 
