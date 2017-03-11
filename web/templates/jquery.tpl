@@ -9,6 +9,9 @@
 <script type="text/javascript" src="{-$desinventarLibs-}/jquery-pluginsblog/20090512/jquery.dataSelector.js"></script>
 <script type="text/javascript" src="{-$desinventarLibs-}/jquery-ba-bbq/1.2.1/jquery.ba-bbq.min.js"></script>
 
+<link rel="stylesheet" href="{-$desinventarLibs-}/select2/4.0.3/css/select2.min.css" type="text/css" media="all" />
+<script type="text/javascript" src="{-$desinventarLibs-}/select2/4.0.3/js/select2.min.js"></script>
+
 <script type="text/javascript">
 	jQuery.noConflict();
 </script>
