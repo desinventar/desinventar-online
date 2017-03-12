@@ -266,7 +266,11 @@ if (MODE != 'command')
 	// these files when doing changes.
 	$t->assign('majorversion', $config->version['major_version']);
 	$t->assign('version'     , $config->version['version']);
-	$t->assign('jsversion'   , $config->version['version']);
+	$jsversion = $config->version['version'];
+	if ($config->flags['mode']) {
+		$jsversion = $jsversion  . '-' . time();
+	}
+	$t->assign('jsversion'   , $jsversion);
 
 	// Configure DESINVENTAR (web) application location	
 	if (isset($_SERVER['REDIRECT_DESINVENTAR_URL']))
