@@ -267,7 +267,7 @@ if (MODE != 'command')
 	$t->assign('majorversion', $config->version['major_version']);
 	$t->assign('version'     , $config->version['version']);
 	$jsversion = $config->version['version'];
-	if ($config->flags['mode']) {
+	if ($config->flags['mode'] == 'devel') {
 		$jsversion = $jsversion  . '-' . time();
 	}
 	$t->assign('jsversion'   , $jsversion);
