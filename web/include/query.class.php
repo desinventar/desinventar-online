@@ -2252,8 +2252,19 @@ class Query //extends PDO
 		return true;
 	}
   
-	public function getCountryName($prmCountryIso)
+	public function getCountryName($prmCountryIso, $LangIsoCode)
 	{
+		$query = "SELECT * FROM CountryName WHERE CountryIso='" . $prmCountryIso . "' AND LangIsoCode='" . $LangIsoCode . "'";
+		foreach($this->base->query($query) as $row)
+		{
+			$CountryName = $row['CountryName'];
+		}
+		if (!empty($CountryName))
+		{
+			return $CountryName;
+		}
+
+		// Fallback to using default country table with official ISO names (mostly in English)
 		$query = "SELECT * FROM Country WHERE CountryIso='" . $prmCountryIso . "'";
 		foreach($this->base->query($query) as $row)
 		{
