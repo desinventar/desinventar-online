@@ -22,7 +22,6 @@ if ($cmd == '')
 		$cmd = $_POST['prmQuery']['Command'];
 	}
 }
-
 $RegionId = getParameter('r', getParameter('RegionId', getParameter('_REG'),''));
 $RegionLabel = '';
 if ($cmd == '' && $RegionId == '')
@@ -1067,6 +1066,7 @@ switch ($cmd)
 		echo json_encode($answer);		
 	break;
 	case 'cmdDatabaseUpload':
+		$LangIsoCode = getParameter('LangIsoCode', $lg);
 		$answer = array();
 		$answer['success'] = false;
 		$iReturn = ERR_NO_ERROR;
@@ -1126,7 +1126,7 @@ switch ($cmd)
 						$info['RegionId']         = $RegionId;
 						$info['RegionLabel']      = $r->get('RegionLabel');
 						$info['CountryIso']       = $r->get('CountryIso');
-						$info['CountryName']      = $us->q->getCountryName($info['CountryIso']);
+						$info['CountryName']      = $us->q->getCountryName($info['CountryIso'], $LangIsoCode);
 						$info['RegionLastUpdate'] = substr($r->get('RegionLastUpdate'), 0,10);
 						$info['NumberOfRecords']  = $r->get('NumberOfRecords');
 						$answer['RegionInfo'] = $info;
@@ -1231,8 +1231,9 @@ switch ($cmd)
 		echo $answerstr;
 	break;
 	case 'getCountryName':
+			$LangIsoCode = getParameter('LangIsoCode', $lg);
 			$CountryIso = getParameter('CountryIso','');
-			$CountryName = $us->q->getCountryName($CountryIso);
+			$CountryName = $us->q->getCountryName($CountryIso, $LangIsoCode);
 			$answer = array('Status' => 1,
 			                'CountryName' => $CountryName);
 			if (isset($_GET['callback']))
@@ -1271,7 +1272,7 @@ switch ($cmd)
 			$r = new DIRegion($us, $RegionId);
 			$a = $r->getDBInfo($LangIsoCode);
 			$a['CountryIso']  = $r->get('CountryIso');
-			$a['CountryName'] = $us->q->getCountryName($r->get('CountryIso'));
+			$a['CountryName'] = $us->q->getCountryName($r->get('CountryIso'), $LangIsoCode);
 			$answer['RegionInfo'] = $a;
 		}
 		$answer['Status'] = $iReturn;
