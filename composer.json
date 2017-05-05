@@ -20,5 +20,11 @@
         "url": "https://github.com/desinventar/jpgraph",
         "type": "git"
     }
-    ]
+    ],
+    "autoload": {
+        "psr-0": {
+            "DesInventar\\": ["src"],
+            "Api\\": ["api/src"]
+        }
+    }
 }
