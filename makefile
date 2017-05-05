@@ -2,7 +2,9 @@
 
 .PHONY : all .FORCE
 
-all : build lint-php standard-php standard-js
+all : build devel
+
+devel : php js
 
 build : npm-build composer lang
 
@@ -18,8 +20,10 @@ lint-php : .FORCE
 	bash ./scripts/lint.sh
 
 standard-php : .FORCE
-	./vendor/bin/phpcs --standard=PSR2 src/* api/app/* api/web/* \
+	./vendor/bin/phpcs --standard=PSR2 src/* api/app/* api/web/* api/src/* \
 	config/config.php config/version.php
+
+js : standard-js
 
 standard-js : .FORCE
 	./node_modules/.bin/eslint web/js2/*
