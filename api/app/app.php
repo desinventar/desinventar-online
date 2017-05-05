@@ -1,5 +1,4 @@
 <?php
-// /app/app.php
 require_once __DIR__.'/bootstrap.php';
 
 use Symfony\Component\HttpFoundation\Response;
@@ -14,10 +13,6 @@ $app->get('/', function () {
     return new Response('DesInventar Api Server (c) Corporación OSSO - 2016');
 });
 
-$app->get('/version', function () use ($app) {
-    return $app->json(array('version' => time()));
-});
-
-$app->mount('/common', new DesInventar\Api\CommonControllerProvider());
+$app->mount('/common', new Api\CommonControllerProvider());
 
 return $app;

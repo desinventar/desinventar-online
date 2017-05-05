@@ -1,5 +1,5 @@
 <?php
-namespace DesInventar\Api;
+namespace Api;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,6 +10,10 @@ class CommonControllerProvider implements ControllerProviderInterface
     public function connect(Application $app)
     {
         $controllers = $app['controllers_factory'];
+
+        $controllers->get('/version', function () use ($app) {
+            return $app->json(array('version' => $app['config']->version));
+        });
 
         $controllers->post('/login', function (Request $request) use ($app) {
             $status = $app['user_session']->login(
