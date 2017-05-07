@@ -184,14 +184,13 @@ function doDatabaseCreatePopulateLists()
 		{
 			if (parseInt(data.Status) > 0)
 			{
-				jQuery('#fldDatabaseEdit_LangIsoCode').empty();
-				jQuery.each(data.LanguageList, function(key, value) {
-					jQuery('#fldDatabaseEdit_LangIsoCode').append(jQuery('<option>', { value : key }).text(value));
+				jQuery('#fldDatabaseEdit_LangIsoCode').empty().select2({
+					data: data.LanguageList,
+					minimumResultsForSearch: Infinity
 				});
 				jQuery('#fldDatabaseEdit_LangIsoCode').val(jQuery('#desinventarLang').val());
-				jQuery('#fldDatabaseEdit_CountryIso').empty();
-				jQuery.each(data.CountryList, function(key, value) {
-					jQuery('#fldDatabaseEdit_CountryIso').append(jQuery('<option>', { value: key }).text(value));
+				jQuery('#fldDatabaseEdit_CountryIso').empty().select2({
+					data: data.CountryList
 				});
 				jQuery('#btnDatabaseCreateSend').show();
 				jQuery('#fldDatabaseEdit_CountryIso').focus();
@@ -199,6 +198,6 @@ function doDatabaseCreatePopulateLists()
 		},
 		'json'
 	);
-} //doDatabaseCreatePopulateLists()
+}
 
 
