@@ -1,0 +1,36 @@
+	MAP
+    IMAGETYPE		PNG
+    	CONFIG PROJ_LIB /usr/share/proj
+		EXTENT			-180 -90 180 90
+		SIZE				400 550
+		#SHAPEPATH		"."
+		#FONTSET			"/usr/share/fonts/liberation/fonts.txt"
+		IMAGECOLOR	115 145 173
+		PROJECTION	"proj=latlong" "ellps=WGS84" "datum=WGS84" END
+		WEB
+			#IMAGEPATH		"../tmp/tempmap/"
+			METADATA
+			  WMS_TITLE	"DesInventar BASEMAP"
+			  WMS_ABSTRACT	""
+        WMS_EXTENT	"-180 -90 180 90"
+        WMS_TIMEEXTENT	"//P5M"
+        WMS_SRS	"EPSG:4326 EPSG:900913"
+        WMS_ENABLE_REQUEST "*"
+		  END
+		END
+		QUERYMAP
+		  STYLE	HILITE
+		END
+    LAYER
+      NAME		base
+      DATA		"world_adm0"
+			STATUS	ON
+			TYPE		POLYGON
+			#PROJECTION	"init=epsg:4326" END
+			CLASSITEM		"Name"
+      CLASS
+        COLOR	255 255 255 
+				OUTLINECOLOR 50 50 50
+			END
+		END
+	END # MAP
