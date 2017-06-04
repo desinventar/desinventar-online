@@ -461,7 +461,7 @@ switch ($cmd)
 		}
 		$countryList = array();
 		foreach ($us->q->getCountryList() as $isoCode => $name) {
-			if (empty(trim($isoCode))) {
+			if (empty($isoCode)) {
 				continue;
 			}
 			$countryList[] = array(

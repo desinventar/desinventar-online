@@ -29,4 +29,4 @@ standard-js : .FORCE
 	./node_modules/.bin/eslint web/js2/*
 
 npm-build : .FORCE
-	npm prune & npm install
+	npm install

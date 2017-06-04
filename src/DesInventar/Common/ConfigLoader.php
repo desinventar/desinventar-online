@@ -82,10 +82,10 @@ class ConfigLoader
         //@TODO: Implement this function
     }
 
-    public static function getInstance($filepath, $type = 'php')
+    public static function getInstance($customConfigFileList, $defaultConfigFile, $type = 'php')
     {
         if (!isset(self::$instance)) {
-            self::$instance = new self($filepath, $type);
+            self::$instance = new self($customConfigFileList, $defaultConfigFile, $type);
         }
         return self::$instance;
     }
