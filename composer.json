@@ -5,7 +5,8 @@
         "firephp/firephp-core": "^0.4.0",
         "aura/sqlquery": "2.6.0",
         "DrUUID": "20140906",
-        "jpgraph": "3.0.7"
+        "jpgraph": "3.0.7",
+        "aura/sql": "^2.5"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "2.*",
