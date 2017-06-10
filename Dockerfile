@@ -1,5 +1,5 @@
 # CentOS 6 + Updates + DesInventar Prerequisites
-FROM desinventar/centos6:v20170604-01
+FROM desinventar/centos6:v20170609-01
 MAINTAINER Jhon H. Caicedo <jhcaiced@inticol.com>
 
 WORKDIR /usr/share/desinventar
