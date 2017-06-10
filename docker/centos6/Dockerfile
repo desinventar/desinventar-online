@@ -4,6 +4,8 @@ MAINTAINER Jhon H. Caicedo <jhcaiced@inticol.com>
 
 ADD desinventar.repo /etc/yum.repos.d/desinventar.repo
 RUN yum -y install epel-release
+RUN yum -y update
+
 RUN yum -y install git wget unzip tar
 
 RUN yum -y install yum install httpd gd giflib sqlite
@@ -15,8 +17,6 @@ RUN yum -y install liberation-mono-fonts liberation-serif-fonts
 RUN yum -y install https://mirror.webtatic.com/yum/el6/latest.rpm
 RUN yum -y install yum-plugin-replace
 RUN yum -y replace php-common --replace-with=php56w-common
-
-RUN yum -y update
 
 RUN yum -y --enablerepo=desinventar install  php56w-dbase
 RUN yum -y --enablerepo=desinventar install liberation-fonts-extras php-jpgraph3 php-DrUUID
