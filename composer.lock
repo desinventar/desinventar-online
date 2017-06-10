@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3b8d3ca53fe727dcd56410fa244d493d",
-    "content-hash": "1f1205b32dc6b1417417482acc7c8efd",
+    "content-hash": "48620d6a8cef7dabce8b8012a6ecb310",
     "packages": [
         {
             "name": "DrUUID",
@@ -20,7 +19,60 @@
                 "MIT"
             ],
             "description": "DrUUID is an implementation for PHP5 of---and associated API for---the data format described in RFC 4122",
-            "time": "2017-01-24 03:08:13"
+            "time": "2017-01-24T03:08:13+00:00"
+        },
+        {
+            "name": "aura/sql",
+            "version": "2.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/auraphp/Aura.Sql.git",
+                "reference": "ffc692d2037c1e8d17103ad0a128189ba6f59b96"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/auraphp/Aura.Sql/zipball/ffc692d2037c1e8d17103ad0a128189ba6f59b96",
+                "reference": "ffc692d2037c1e8d17103ad0a128189ba6f59b96",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "aura": {
+                    "type": "library"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Aura\\Sql\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Aura.Sql Contributors",
+                    "homepage": "https://github.com/auraphp/Aura.Sql/contributors"
+                }
+            ],
+            "description": "A PDO extension that provides lazy connections, array quoting, identifier quoting, query profiling, value binding, and convenience methods for common fetch styles. Because it extends PDO, existing code that uses PDO can use this without any changes to the existing code.",
+            "homepage": "https://github.com/auraphp/Aura.Sql",
+            "keywords": [
+                "mysql",
+                "pdo",
+                "pgsql",
+                "postgres",
+                "postgresql",
+                "sql server",
+                "sqlite",
+                "sqlserver",
+                "sqlsrv"
+            ],
+            "time": "2016-10-03T20:31:07+00:00"
         },
         {
             "name": "aura/sqlquery",
@@ -84,7 +136,7 @@
                 "sqlserver",
                 "update"
             ],
-            "time": "2015-11-09 15:38:26"
+            "time": "2015-11-09T15:38:26+00:00"
         },
         {
             "name": "firephp/firephp-core",
@@ -120,7 +172,7 @@
             ],
             "description": "Traditional FirePHPCore library for sending PHP variables to the browser.",
             "homepage": "https://github.com/firephp/firephp-core",
-            "time": "2013-04-23 15:28:20"
+            "time": "2013-04-23T15:28:20+00:00"
         },
         {
             "name": "jpgraph",
@@ -135,7 +187,7 @@
                 "QPL 1.0"
             ],
             "description": "JpGraph, an Object Oriented PHP5 Graph Plotting library",
-            "time": "2017-01-24 21:26:50"
+            "time": "2017-01-24T21:26:50+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -181,7 +233,7 @@
                 "container",
                 "dependency injection"
             ],
-            "time": "2013-11-22 08:30:29"
+            "time": "2013-11-22T08:30:29+00:00"
         },
         {
             "name": "psr/log",
@@ -228,7 +280,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-10-10 12:19:37"
+            "time": "2016-10-10T12:19:37+00:00"
         },
         {
             "name": "silex/silex",
@@ -310,7 +362,7 @@
             "keywords": [
                 "microframework"
             ],
-            "time": "2015-06-04 21:24:58"
+            "time": "2015-06-04T21:24:58+00:00"
         },
         {
             "name": "smarty/smarty",
@@ -365,7 +417,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2015-06-18 00:55:59"
+            "time": "2015-06-18T00:55:59+00:00"
         },
         {
             "name": "symfony/debug",
@@ -426,7 +478,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2015-07-08 05:59:48"
+            "time": "2015-07-08T05:59:48+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -485,7 +537,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2015-05-02 15:18:45"
+            "time": "2015-05-02T15:18:45+00:00"
         },
         {
             "name": "symfony/http-foundation",
@@ -539,7 +591,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2015-07-22 10:08:40"
+            "time": "2015-07-22T10:08:40+00:00"
         },
         {
             "name": "symfony/http-kernel",
@@ -617,7 +669,7 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "https://symfony.com",
-            "time": "2016-01-14 10:11:16"
+            "time": "2016-01-14T10:11:16+00:00"
         },
         {
             "name": "symfony/routing",
@@ -686,7 +738,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2015-07-09 16:02:48"
+            "time": "2015-07-09T16:02:48+00:00"
         }
     ],
     "packages-dev": [
@@ -731,20 +783,20 @@
                 "log",
                 "logging"
             ],
-            "time": "2013-06-26 03:44:33"
+            "time": "2013-06-26T03:44:33+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "2.8.1",
+            "version": "2.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "d7cf0d894e8aa4c73712ee4a331cc1eaa37cdc7d"
+                "reference": "dcbed1074f8244661eecddfc2a675430d8d33f62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/d7cf0d894e8aa4c73712ee4a331cc1eaa37cdc7d",
-                "reference": "d7cf0d894e8aa4c73712ee4a331cc1eaa37cdc7d",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/dcbed1074f8244661eecddfc2a675430d8d33f62",
+                "reference": "dcbed1074f8244661eecddfc2a675430d8d33f62",
                 "shasum": ""
             },
             "require": {
@@ -809,7 +861,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2017-03-01 22:17:45"
+            "time": "2017-05-22T02:43:20+00:00"
         }
     ],
     "aliases": [],
