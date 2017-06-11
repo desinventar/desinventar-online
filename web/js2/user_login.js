@@ -11,7 +11,8 @@ desinventar.userLogin = (function() {
       var url = desinventar.config.params.url;
       var sessionId = desinventar.util.getSessionId();
 
-      if (desinventar.config.flags.general_secure_login) {
+      if ((desinventar.config.flags.mode !== 'devel') &&
+          (desinventar.config.flags.general_secure_login)) {
         // Force use of https/ssl for user operations
         url = url.replace(/^http:/g, 'https:');
       }
