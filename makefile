@@ -8,19 +8,28 @@ devel : php js
 
 build : npm-build composer lang
 
+composer : .FORCE
+	composer install
+
 lang : .FORCE
 	cd files/database && make lang
 
 php : standard-php lint-php
 
-composer : .FORCE
-	composer install
+test : test-unit
+
+test-unit: .FORCE
+	cd tests && ../vendor/bin/phpunit --testsuite unit
+
+test-web: .FORCE
+	cd tests && ../vendor/bin/phpunit --testsuite web
 
 lint-php : .FORCE
-	bash ./scripts/lint.sh
+	find src api config web tests -name "*.php" -exec php -l {} > /dev/null \;
 
 standard-php : .FORCE
-	./vendor/bin/phpcs --standard=PSR2 src/* api/app/* api/web/* api/src/* \
+	./vendor/bin/phpcs --standard=PSR2 src/* api/app/* api/web/* \
+	tests/bootstrap.php tests/Unit/* tests/WebTest/* \
 	config/config.php config/version.php
 
 js : standard-js
