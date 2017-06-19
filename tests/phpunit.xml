@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpunit bootstrap="bootstrap.php">
+    <php>
+        <var name="DESINVENTAR_URL" value="http://127.0.0.1:8080/" />
+    </php>
+    <testsuites>
+        <testsuite name="unit">
+            <directory>Unit</directory>
+        </testsuite>
+        <testsuite name="web">
+            <directory>WebTest</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

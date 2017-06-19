@@ -11,6 +11,7 @@ nbproject
 vendor/*
 config/*_local.*
 node_modules
+.vscode
 npm-debug.log
 bower_components
 web/scripts/bundle.js

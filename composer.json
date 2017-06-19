@@ -2,7 +2,6 @@
     "require": {
         "smarty/smarty": "3.1.27",
         "silex/silex": "^1.1.0",
-        "firephp/firephp-core": "^0.4.0",
         "aura/sqlquery": "2.6.0",
         "DrUUID": "20140906",
         "jpgraph": "3.0.7",
@@ -10,7 +9,14 @@
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "2.*",
-        "ccampbell/chromephp": "^4.1"
+        "ccampbell/chromephp": "^4.1",
+        "phpunit/phpunit": "^4.8",
+        "phpunit/dbunit": "^1.4",
+        "behat/mink": "^1.7",
+        "behat/mink-zombie-driver": "^1.4",
+        "behat/mink-selenium2-driver": "^1.3",
+        "behat/mink-goutte-driver": "^1.2",
+        "dmore/chrome-mink-driver": "^2.2"
     },
      "repositories": [
     {
@@ -22,10 +28,24 @@
         "type": "git"
     }
     ],
+    "authors": [
+        {
+            "email": "jhcaiced@inticol.com",
+            "homepage": "http://www.desinventar.org",
+            "name": "Jhon H. Caicedo",
+            "role": "Project lead / Developer"
+        }
+    ],
     "autoload": {
         "psr-0": {
             "DesInventar\\": ["src"],
-            "Api\\": ["api/src"]
+            "Api\\": ["api/src"],
+            "WebTest\\": "tests"
         }
-    }
+    },
+    "keywords": [
+        "disasters",
+        "inventories",
+        "risk"
+    ]
 }
