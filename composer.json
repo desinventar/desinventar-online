@@ -40,7 +40,7 @@
         "psr-0": {
             "DesInventar\\": ["src"],
             "Api\\": ["api/src"],
-            "WebTest\\": "tests"
+            "WebTest\\": ["tests"]
         }
     },
     "keywords": [
