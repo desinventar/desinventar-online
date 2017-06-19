@@ -22,7 +22,7 @@ test-unit: .FORCE
 	cd tests && ../vendor/bin/phpunit --testsuite unit
 
 test-web: .FORCE
-	cd tests && ../vendor/bin/phpunit --testsuite web
+	composer dump-autoload && cd tests && ../vendor/bin/phpunit --testsuite web
 
 lint-php : .FORCE
 	find src api config web tests -name "*.php" -exec php -l {} > /dev/null \;
