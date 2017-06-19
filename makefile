@@ -11,6 +11,9 @@ build : npm-build composer lang
 composer : .FORCE
 	composer install
 
+composer-autoload : .FORCE
+	composer dump-autoload --optimize
+
 lang : .FORCE
 	cd files/database && make lang
 
@@ -22,7 +25,7 @@ test-unit: .FORCE
 	cd tests && ../vendor/bin/phpunit --testsuite unit
 
 test-web: .FORCE
-	composer dump-autoload && cd tests && ../vendor/bin/phpunit --testsuite web
+	cd tests && ../vendor/bin/phpunit --testsuite web
 
 lint-php : .FORCE
 	find src api config web tests -name "*.php" -exec php -l {} > /dev/null \;

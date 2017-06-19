@@ -30,7 +30,7 @@ services:
       - web
     volumes_from:
       - web
-    entrypoint: make test-web
+    entrypoint: make composer-autoload test-web
     environment:
     - DESINVENTAR_URL=http://desinventaronline_web_1/
     - DESINVENTAR_WDHOST=http://desinventaronline_hub_1:4444/wd/hub
