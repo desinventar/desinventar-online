@@ -1,4 +1,5 @@
-# CentOS 6 + Update + DesInventar Prerequisites
+# CentOS 6 + Updates + DesInventar Prerequisites
+# Pushed to dockerhub as desinventar/centos6:vYYYYMMDD-NN
 FROM library/centos:centos6
 MAINTAINER Jhon H. Caicedo <jhcaiced@inticol.com>
 
@@ -47,7 +48,7 @@ RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | b
     && nvm alias default $NODE_VERSION \
     && nvm use default
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
-ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 EXPOSE 80
 
