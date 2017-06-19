@@ -1,0 +1,34 @@
+version: '3'
+services:
+  devel:
+    image: "desinventar/online:latest"
+    build: .
+    ports:
+     - "8080:80"
+    volumes:
+     - .:/usr/share/desinventar
+     - /usr/share/desinventar/vendor
+     - /var/lib/desinventar:/var/lib/desinventar
+  app:
+    image: "desinventar/online:latest"
+    build: .
+    ports:
+     - "8081:80"
+    volumes:
+     - .:/usr/share/desinventar
+     - /usr/share/desinventar/vendor
+  test-unit:
+    image: desinventar/online:latest
+    volumes:
+     - .:/usr/share/desinventar
+    entrypoint: make test-unit
+  test-web:
+    image: desinventar/online:latest
+    volumes:
+     - .:/usr/share/desinventar
+    entrypoint: make test-web
+    environment:
+    - DESINVENTAR_URL=http://desinventaronline_app_1/
+    - DESINVENTAR_WDHOST=http://desinventaronline_hub_1:4444/wd/hub
+  hub:
+    image: selenium/standalone-chrome:3.4.0-dysprosium
