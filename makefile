@@ -17,7 +17,7 @@ composer-autoload : .FORCE
 lang : .FORCE
 	cd files/database && make lang
 
-php : standard-php lint-php
+php : standard-php phpmd lint-php
 
 test : test-unit
 
@@ -34,6 +34,12 @@ standard-php : .FORCE
 	./vendor/bin/phpcs --standard=PSR2 src/* api/app/* api/web/* \
 	tests/bootstrap.php tests/Unit/* tests/WebTest/* \
 	config/config.php config/version.php
+
+phpmd: .FORCE
+	find api config files portal src tests -name \*.php -exec ./vendor/bin/phpmd {} text cleancode,design,naming,unusedcode \;
+
+phpmd-old: .FORCE
+	find web -name \*.php -exec ./vendor/bin/phpmd {} text cleancode,design,naming,unusedcode \;
 
 js : standard-js
 

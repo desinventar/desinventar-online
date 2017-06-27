@@ -18,7 +18,6 @@ define('SRCDIR'  , $_SERVER['DESINVENTAR_SRC']);
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-require_once __DIR__. '/../../src/common/fb_wrapper.php';
 $config = DesInventar\Common\ConfigLoader::getInstance(
 	array(
 		'/etc/desinventar/config.php',
