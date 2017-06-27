@@ -98,9 +98,8 @@ class ConfigLoader
     {
         if (isset($this->options[$key])) {
             return $this->options[$key];
-        } else {
-            trigger_error("Key $val does not exist", E_USER_NOTICE);
         }
+        trigger_error("Key $key does not exist", E_USER_NOTICE);
         return false;
     }
 

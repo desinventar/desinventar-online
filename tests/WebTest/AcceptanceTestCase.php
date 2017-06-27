@@ -9,19 +9,22 @@ class AcceptanceTestCase extends \PHPUnit_Framework_TestCase
     {
         $browser = $this->getVar('DESINVENTAR_BROWSER', 'chrome');
         $this->url = $this->getVar('DESINVENTAR_URL', '');
+        $this->session = new \Behat\Mink\Session($this->getDriver($browser));
+        $this->session->start();
+    }
+
+    public function getDriver($browser)
+    {
         if ($browser == 'chromedriver') {
             $wdHost = $this->getVar('DESINVENTAR_WDHOST', 'http://127.0.0.1:9222');
-            $driver = new \DMore\ChromeDriver\ChromeDriver(
+            return new \DMore\ChromeDriver\ChromeDriver(
                 $wdHost,
                 new \DMore\ChromeDriver\HttpClient(),
                 ''
             );
-        } else {
-            $wdHost = $this->getVar('DESINVENTAR_WDHOST', 'http://127.0.0.1:4444/wd/hub');
-            $driver = new \Behat\Mink\Driver\Selenium2Driver($browser, null, $wdHost);
         }
-        $this->session = new \Behat\Mink\Session($driver);
-        $this->session->start();
+        $wdHost = $this->getVar('DESINVENTAR_WDHOST', 'http://127.0.0.1:4444/wd/hub');
+        return new \Behat\Mink\Driver\Selenium2Driver($browser, null, $wdHost);
     }
 
     public function tearDown()
