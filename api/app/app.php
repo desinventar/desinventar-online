@@ -10,7 +10,7 @@ $app['user_session'] = $us;
 $app['config'] = $config;
 
 $app->get('/', function () {
-    return new Response('DesInventar Api Server (c) Corporación OSSO - 2016');
+    return new Response('DesInventar Api Server (c) Corporación OSSO - 2017');
 });
 
 $app->mount('/common', new Api\CommonControllerProvider());
