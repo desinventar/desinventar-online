@@ -1,7 +1,7 @@
-<script language="php">
+<?php
 /*
  DesInventar - http://www.desinventar.org
- (c) 1998-2012 Corporacion OSSO
+ (c) 1998-2017 Corporacion OSSO
 */
 
 use Aura\Sql\ExtendedPdo;
@@ -2255,5 +2255,4 @@ class Query //extends PDO
 	{
 		return true;
 	}
-} // end class
-</script>
+}

@@ -1,7 +1,7 @@
 <?php
 /*
   DesInventar - http://www.desinventar.org
- (c) 1998-2012 Corporacion OSSO
+ (c) 1998-2017 Corporacion OSSO
 */
 
 define('ROLE_NONE'       , 0);
@@ -16,6 +16,8 @@ class UserSession
 	const PASSWORD_IS_HASHED = true;
 	const PASSWORD_IS_CLEAR = false;
 
+	private $session = null;
+	
 	public function __construct($sSessionId = null, $config = array())
 	{
 		if (!empty($sSessionId)) {
@@ -33,6 +35,7 @@ class UserSession
 		$this->UserRoleValue     = ROLE_NONE;
 		$this->config = $config;
 		$this->q = new Query(null, $config->database);
+		$this->session = new \DesInventar\Database\Session($this->q->core);
 		if (!empty($this->q->core)) {
 			$this->load($this->sSessionId);
 		}
@@ -50,41 +53,29 @@ class UserSession
 	// Read Session Information from Database
 	public function load($prmSessionId)
 	{
-		$iReturn = ERR_UNKNOWN_ERROR;
 		if (empty($this->q->core)) {
 			return ERR_UNKNOWN_ERROR;
 		}
-		$sQuery = 'SELECT * FROM UserSession WHERE SessionId=:SessionId';
-		$sth = $this->q->core->prepare($sQuery);
-		try
-		{
-			$this->q->core->beginTransaction();
-			$sth->bindParam(':SessionId', $prmSessionId, PDO::PARAM_STR);
-			$sth->execute();
-			$this->q->core->commit();
-			while($row = $sth->fetch(PDO::FETCH_ASSOC))
-			{
+		$row = null;
+		try {
+			$row = $this->session->read($prmSessionId);
+			if (empty($row)) {
+			} else {
 				$this->sSessionId  = $row['SessionId'];
 				$this->UserId      = $row['UserId'];
 				$this->LangIsoCode = $row['LangIsoCode'];
 				$this->dStart      = $row['Start'];
 				$this->dLastUpdate = $row['LastUpdate'];
-				$iReturn = ERR_NO_ERROR;
-			} //while
-			$sth->closeCursor();
-		}
-		catch (Exception $e)
-		{
-			$this->q->core->rollBack();
+			}
+		} catch (Exception $e) {
 			showErrorMsg(debug_backtrace(), $e, '');
+			return ERR_UNKNOWN_ERROR;
 		}
-		// If session doesn't exist in database, insert record
-		if ($iReturn < 0)
-		{
+		if (empty($row)) {
 			$this->insert();
 		}
-		return $iReturn;	
-	} // function
+		return ERR_NO_ERROR;
+	}
 
 	// Set LastUpdate field of Session so it will not expire...
 	public function awake()
@@ -107,24 +98,9 @@ class UserSession
 			$this->close();
 			$this->logout();
 		}
-		$sQuery1 = 'UPDATE UserSession SET LastUpdate=:LastUpdate WHERE SessionId=:SessionId';
-		$sth1 = $this->q->core->prepare($sQuery1);
-		$sQuery2 = 'UPDATE UserLockList SET LastUpdate=:LastUpdate WHERE SessionId=:SessionId';
-		$sth2 = $this->q->core->prepare($sQuery2);
-		try
-		{
-    		$this->q->core->beginTransaction();
-			$sth1->bindParam(':SessionId', $this->sSessionId, PDO::PARAM_STR);
-			$sth1->bindParam(':LastUpdate', $this->dLastUpdate, PDO::PARAM_STR);
-			$sth1->execute();
-			$sth2->bindParam(':SessionId', $this->sSessionId, PDO::PARAM_STR);
-			$sth2->bindParam(':LastUpdate', $this->dLastUpdate, PDO::PARAM_STR);
-			$sth2->execute();
-			$this->q->core->commit();
-		}
-		catch (Exception $e)
-		{
-			$this->q->core->rollBack();
+		try {
+			$this->session->awake($this->sSessionId, $this->dLastUpdate);
+		} catch (Exception $e) {
 			showErrorMsg(debug_backtrace(), $e, '');
 		}
 		return $iReturn;
@@ -132,13 +108,11 @@ class UserSession
 
 	public function login($prmUserId, $prmUserPasswd, $withCrypt)
 	{
-		$iReturn = ERR_DEFAULT_ERROR;
-		$UserId = $this->validateUser($prmUserId, $prmUserPasswd, $withCrypt);
-		if ($UserId != '')
-		{
-			$iReturn = $this->setUser($UserId);
+		$userId = $this->validateUser($prmUserId, $prmUserPasswd, $withCrypt);
+		if (empty($userId)) {
+			return ERR_UNKNOWN_ERROR;
 		}
-		return $iReturn;
+		return $this->setUser($userId);
 	}
 
 	public function logout()
@@ -148,28 +122,15 @@ class UserSession
 
 	public function setUser($prmUserId)
 	{
-		$iReturn = ERR_DEFAULT_ERROR;
-		$sQuery = 'UPDATE UserSession SET UserId=:UserId ' . 
-		          'WHERE SessionId=:SessionId';
-		$sth = $this->q->core->prepare($sQuery);
 		try
 		{
-    		$this->q->core->beginTransaction();
-			if ($sth->execute(array(':UserId'    => $prmUserId,
-			                    ':SessionId' => $this->sSessionId)))
-			{
-				$iReturn = ERR_NO_ERROR;
-				$this->UserId = $prmUserId;
-			}
-			$this->q->core->commit();
+			return $this->session->setUser($this->sSessionId, $prmUserId);
 		}
 		catch (Exception $e)
 		{
-			$this->q->core->rollBack();
 			showErrorMsg(debug_backtrace(), $e, '');
 		}
-		return $iReturn;
-	} //setUser()
+	}
 
 	public function doUserAutoLoginCheck()
 	{
@@ -216,37 +177,34 @@ class UserSession
 		$this->LangIsoCode = $prmLangIsoCode;
 	}
 
+	protected function getSessionValues()
+	{
+		$this->dLastUpdate = gmdate('c');
+		return array(
+			'SessionId' => $this->sSessionId,
+			'RegionId' => '',
+			'UserId' => $this->UserId,
+			'Valid' => 1,
+			'LangIsoCode' => $this->LangIsoCode,
+			'Start' => $this->dStart,
+			'LastUpdate' => $this->dLastUpdate
+		);
+	}
+
 	// Start a Session by creating a record in the database
 	// this could be an anonymous or authenticated session
 	public function insert()
 	{
-		$iReturn = ERR_DEFAULT_ERROR;
-		$sQuery = 'INSERT INTO UserSession (SessionId,RegionId,UserId,Valid,LangIsoCode,Start,LastUpdate) ' .
-		          ' VALUES (:SessionId,:RegionId,:UserId,:Valid,:LangIsoCode,:Start,:LastUpdate)';
-		$sth = $this->q->core->prepare($sQuery);
-		try
-		{
-    		$this->q->core->beginTransaction();
-			$sth->bindParam(':SessionId'  , $this->sSessionId, PDO::PARAM_STR);
-			$sth->bindValue(':RegionId'   , '', PDO::PARAM_STR);
-			$sth->bindParam(':UserId'     , $this->UserId, PDO::PARAM_STR);
-			$sth->bindValue(':Valid'      , 1, PDO::PARAM_INT);
-			$sth->bindParam(':LangIsoCode', $this->LangIsoCode, PDO::PARAM_STR);
-			$sth->bindParam(':Start'      , $this->dStart, PDO::PARAM_STR);
-			$sth->bindParam(':LastUpdate' , $this->dLastUpdate, PDO::PARAM_STR);
-			if ($result = $sth->execute())
-			{
-				$iReturn = ERR_NO_ERROR;
-			}
-			$this->q->core->commit();
+		try {
+			$this->session->create($this->getSessionValues());
 		}
 		catch (Exception $e)
 		{
-			$this->q->core->rollBack();
 			showErrorMsg(debug_backtrace(), $e, '');
+			return ERR_DEFAULT_ERROR;
 		}
-		return $iReturn;
-	} // insert()
+		return ERR_NO_ERROR;
+	}
 
 	// Update information about this session in database
 	public function update()
@@ -254,69 +212,32 @@ class UserSession
 		if (! $this->isConnected()) {
 			return false;
 		}
-		$iReturn = ERR_DEFAULT_ERROR;
-		// Always update this field...
-		$this->dLastUpdate = gmdate('c');
-		$sQuery = 'UPDATE UserSession SET ' . 
-				  'UserId=:UserId,' . 
-				  'Valid=:Valid,' .
-				  'LangIsoCode=:LangIsoCode,' . 
-				  'RegionId=:RegionId,' .
-				  'Start=:Start,' .
-				  'LastUpdate=:LastUpdate ' . 
-				  'WHERE SessionId=:SessionId';
-		$sth = $this->q->core->prepare($sQuery);
-		$sQuery = 'UPDATE UserSession SET LangIsoCode="' . $this->LangIsoCode . '" WHERE SessionId="' . $this->sSessionId . '"';
-		$sth1 = $this->q->core->prepare($sQuery);
-		$sQuery = "UPDATE UserLockList SET LastUpdate='" . $this->dLastUpdate . "' WHERE SessionId='" . $this->sSessionId . "'";
-		$sth2 = $this->q->core->prepare($sQuery);
 		try
 		{
-			$this->q->core->beginTransaction();
-			$sth->bindParam(':SessionId'  , $this->sSessionId , PDO::PARAM_STR);
-			$sth->bindValue(':RegionId'   , ''                , PDO::PARAM_STR);
-			$sth->bindParam(':UserId'     , $this->UserId     , PDO::PARAM_STR);
-			$sth->bindValue(':Valid'      , 1                 , PDO::PARAM_INT);
-			$sth->bindParam(':LangIsoCode', $this->LangIsoCode, PDO::PARAM_STR);
-			$sth->bindParam(':Start'      , $this->dStart     , PDO::PARAM_STR);
-			$sth->bindParam(':LastUpdate' , $this->dLastUpdate, PDO::PARAM_STR);
-			$sth->execute();
-			$sth1->execute();
-			$sth2->execute();
-			$this->q->core->commit();
-			$iReturn = ERR_NO_ERROR;
+			$this->session->update($this->sSessionId, $this->getSessionValues());
+			$this->awake();
 		}
 		catch (Exception $e)
 		{
-			$this->q->core->rollBack();
 			showErrorMsg(debug_backtrace(), $e, '');
+			return ERR_UNKNOWN_ERROR;
 		}
-		return $iReturn;
-	} // update()
+		return ERR_NO_ERROR;
+	}
 
-	// Close a session, removing the session information from the
-	// database.
 	public function delete()
 	{
-		$iReturn = ERR_DEFAULT_ERROR;
-		$sQuery = 'DELETE FROM UserSession WHERE SessionId=:SessionId';
-		$sth = $this->q->core->prepare($sQuery);
 		try
 		{
-    		$this->q->core->beginTransaction();
-			$sth->bindParam(':SessionId'  , $this->sSessionId, PDO::PARAM_STR);
-			$sth->execute();
-			$this->q->core->commit();
-			$this->UserId = '';
-			$iReturn = ERR_NO_ERROR;
+			$this->session->delete($this->sSessionId);
 		}
 		catch (Exception $e)
 		{
-			$this->q->core->rollBack();
 			showErrorMsg(debug_backtrace(), $e, '');
+			return ERR_UNKNOWN_ERROR;
 		}
-		return $iReturn;
-	} // delete()
+		return ERR_NO_ERROR;
+	}
 
 	public function getRegionDir($prmRegionId)
 	{
@@ -366,34 +287,20 @@ class UserSession
 	// Validate a user/passwd pair against database
 	public function validateUser($prmUserId, $prmUserPasswd, $withCrypt)
 	{
-		$UserId = '';
 		if (! $withCrypt)
 		{
 			$prmUserPasswd = md5($prmUserPasswd);
 		}
-		$sQuery = 'SELECT * FROM User WHERE (UserId=:UserId OR UserNotes LIKE :UserNotes) AND UserPasswd=:UserPasswd';
-		$sth = $this->q->core->prepare($sQuery);
-		try
-		{
-    		$this->q->core->beginTransaction();
-			$sth->bindParam(':UserId', $prmUserId, PDO::PARAM_STR);
-			$sth->bindValue(':UserNotes', '%(UserName=' . $prmUserId. ')%', PDO::PARAM_STR);
-			$sth->bindParam(':UserPasswd', $prmUserPasswd, PDO::PARAM_STR);
-			$sth->execute();
-			$this->q->core->commit();
-			while ($row = $sth->fetch(PDO::FETCH_ASSOC))
-			{
-				$UserId = $row['UserId'];
-			}
-			$sth->closeCursor();
+		try {
+			$row = $this->session->login($prmUserId, $prmUserPasswd);
 		}
 		catch (Exception $e)
 		{
-			$this->q->core->rollBack();
 			showErrorMsg(debug_backtrace(), $e, '');
-		} // catch
-		return $UserId;
-	} // valiteUser
+			return false;
+		}
+		return $row['UserId'];
+	}
 	
 	public function getUserFullName()
 	{
@@ -1445,4 +1352,4 @@ class UserSession
 		$res[1] = substr($datemax, 0, 10);
 		return $res;
 	} //function
-} //class UserSession
+}
