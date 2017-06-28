@@ -36,10 +36,10 @@ standard-php : .FORCE
 	config/config.php config/version.php
 
 phpmd: .FORCE
-	find api config files portal src tests -name \*.php -exec ./vendor/bin/phpmd {} text cleancode,design,naming,unusedcode \;
+	find api config files portal src tests -name \*.php -exec ./vendor/bin/phpmd {} text ./files/phpmd/ruleset.xml \;
 
 phpmd-old: .FORCE
-	find web -name \*.php -exec ./vendor/bin/phpmd {} text cleancode,design,naming,unusedcode \;
+	find web -name \*.php -exec ./vendor/bin/phpmd {} text ./files/phpmd/ruleset.xml \;
 
 js : standard-js
 
