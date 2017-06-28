@@ -9,13 +9,22 @@ class Session extends Record
 {
     protected $pdo = null;
     protected $tableName = 'UserSession';
+    protected $fieldMap = [
+        'id' => ['sqlite' => 'SessionId'],
+        'region_id' => ['sqlite' => 'RegionId'],
+        'user_id' => ['sqlite' => 'UserId'],
+        'valid' => ['sqlite' => 'Valid'],
+        'created' => ['sqlite' => 'Start'],
+        'modified' => ['sqlite' => 'LastUpdate'],
+        'iso_code' => ['sqlite' => 'LangIsoCode'],
+    ];
 
     public function read($id)
     {
         $query = $this->factory->newSelect();
         $query->from($this->tableName)
-            ->cols(['*'])
-            ->where('SessionId=:id')
+            ->cols($this->getAliasedFields(['*']))
+            ->where($this->getField('id') . '=:id')
             ->bindValue('id', $id);
         return $this->readFirst($query);
     }

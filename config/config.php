@@ -12,11 +12,13 @@ return array(
     ),
     'maps' => array(
         'mapserver_uri' => '/cgi-bin/mapserv',
+        'mapserver' => 'mapserv',
         'proj_lib' => '/usr/share/proj',
         'worldmap_dir' => '/var/lib/desinventar/worldmap',
     ),
     'flags' => array(
         'mode' => 'normal',
+        'env' => 'online',
         'debug' => false,
         'auto_login' => 0,
         'general_secure_login' => 0,
