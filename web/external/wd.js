@@ -3,7 +3,8 @@ function error_handler(a,b,c)
  window.status = (a +"\n" + b + "\n\n" + c + "\n\n" + error_handler.caller);
  return true;
 }
-window.onerror = error_handler;
+// 2017-07-01 Disable this custom error handler, use the default
+//window.onerror = error_handler;
 String.prototype.trim=function(){return this.replace(/(^\s+)|\s+$/g,"");}
 
 
