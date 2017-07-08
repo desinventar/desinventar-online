@@ -5,6 +5,7 @@ module.exports = {
     },
     "extends": "google",
     "rules": {
-        "require-jsdoc": "off"
+        "require-jsdoc": "off",
+        "wrap-iife": "off"
     }
 };

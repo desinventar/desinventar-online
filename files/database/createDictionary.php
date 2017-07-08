@@ -1,5 +1,5 @@
 #!/usr/bin/php
-<script language="php">
+<?php
 	$h = fopen('./doc-db.csv','r');
 	$i = 0;
 	print "DELETE FROM Dictionary;" . "\n";
@@ -39,4 +39,3 @@
 		$prmValue = str_replace('"','',$prmValue);
 		return $prmValue;
 	}
-</script>

@@ -1,13 +1,24 @@
-/* global desinventar,jQuery,doUserLoginUpdateMsg,Ext,doUserUpdateInfo,hex_md5
+/* global define,desinventar,jQuery,doUserLoginUpdateMsg,Ext,doUserUpdateInfo,hex_md5
  */
-desinventar.userLogin = (function() {
+(function(root, factory) {
+  'use strict';
+  if (typeof define === "function" && define.amd) {
+    define(['jquery'], factory);
+  } else if (typeof exports === 'object') {
+    module.exports = factory(require('jquery'));
+  } else {
+    jQuery.extend(true, desinventar, {
+      userLogin: factory(root.jQuery)
+    });
+  }
+}(this, function($) {
   'use strict';
   var me = {};
 
   function setupBindings() {
-    jQuery('#frmUserLogin').on('submit', function() {
-      var UserId = jQuery('#fldUserId').val();
-      var UserPasswd = jQuery('#fldUserPasswd').val();
+    $('#frmUserLogin').on('submit', function() {
+      var UserId = $('#fldUserId').val();
+      var UserPasswd = $('#fldUserPasswd').val();
       var url = desinventar.config.params.url;
       var sessionId = desinventar.util.getSessionId();
 
@@ -22,9 +33,9 @@ desinventar.userLogin = (function() {
         doUserLoginUpdateMsg('msgEmptyFields');
         return false;
       }
-      jQuery.post(url, {
+      $.post(url, {
         cmd: 'cmdUserLogin',
-        RegionId: jQuery('#desinventarRegionId').val(),
+        RegionId: $('#desinventarRegionId').val(),
         UserId: UserId,
         UserPasswd: hex_md5(UserPasswd),
         SessionId: sessionId
@@ -34,15 +45,15 @@ desinventar.userLogin = (function() {
           return false;
         }
         doUserLoginUpdateMsg('msgUserLoggedIn');
-        jQuery('#fldUserId').val('');
-        jQuery('fldUserPasswd').val('');
+        $('#fldUserId').val('');
+        $('fldUserPasswd').val('');
 
         // Update UserInfo Fields...
         doUserUpdateInfo(data.User);
 
         Ext.getCmp('wndUserLogin').hide();
         // Trigger Event and Update User Menu etc.
-        jQuery('body').trigger('cmdMainWindowUpdate');
+        $('body').trigger('cmdMainWindowUpdate');
       },
       'json'
       ).fail(function() {
@@ -57,4 +68,4 @@ desinventar.userLogin = (function() {
     setupBindings();
   };
   return me;
-})();
+}));
