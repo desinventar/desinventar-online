@@ -43,4 +43,15 @@ class AcceptanceTestCase extends \PHPUnit_Framework_TestCase
         }
         return $defaultValue;
     }
+
+    protected function waitForAjax($time = 10000)
+    {
+        $this->session->wait(
+            $time,
+            '('
+            . '(typeof(jQuery)=="undefined" || (0 === jQuery.active && 0 === jQuery(\':animated\').length))'
+            . '|| (document.readyState === "complete")'
+            . ')'
+        );
+    }
 }

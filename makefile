@@ -22,10 +22,10 @@ php : standard-php phpmd lint-php
 test : test-unit
 
 test-unit: .FORCE
-	cd tests && ../vendor/bin/phpunit --testsuite unit
+	cd tests && ../vendor/bin/phpunit --testsuite unit $(TEST)
 
 test-web: .FORCE
-	cd tests && ../vendor/bin/phpunit --testsuite web
+	cd tests && ../vendor/bin/phpunit --testsuite web $(TEST)
 
 lint-php : .FORCE
 	find src api config web tests -name "*.php" -exec php -l {} > /dev/null \;
