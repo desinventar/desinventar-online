@@ -1,4 +1,4 @@
-<script language="php">
+<?php
 	//#!/usr/bin/php -d session.save_path='/tmp'
 	require_once('../../web/include/loader.php');
 	require_once(BASE . '/include/dievent.class.php');
@@ -57,4 +57,3 @@
 	}
 	fclose($fh);
 	exit(0);k
-</script>
