@@ -56,4 +56,4 @@
 		}
 	}
 	fclose($fh);
-	exit(0);k
+	exit(0);
