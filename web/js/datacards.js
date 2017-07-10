@@ -52,7 +52,7 @@ function onReadyDatacards()
 						break;
 					} //switch
 					desinventar.datacards.toggleFormEdit($('DICard'), true);
-					desinventar.datacards.navigation.update('btnDatacardSave');
+					desinventar.datacards.navigation.setViewMode();
 					if (parseInt(jQuery('#cardsRecordNumber').val()) > 0)
 					{
 						jQuery('#RecordNumber').text(jQuery('#cardsRecordNumber').val());
@@ -651,7 +651,7 @@ function doDatacardUpdateDisplay()
 	jQuery('#divRecordNavigationInfo').hide();
 	
 	desinventar.datacards.toggleFormEdit($('DICard'), true);
-	desinventar.datacards.navigation.update();
+	desinventar.datacards.navigation.setViewMode();
 
 	// Start with Basic Effects show
 	jQuery('#linkDatacardShowEffectsBasic').trigger('click');
@@ -703,10 +703,7 @@ function requestDatacard(myCmd, myValue)
 				{
 					jQuery('#cardsRecordSource').val('');
 					valid = setDICardFromId(RegionId, data.DisasterId, data.RecordNumber, data.RecordCount);
-					if (jQuery('#desinventarUserRoleValue').val() >= 2)
-					{
-						desinventar.datacards.navigation.toggleButton($('btnDatacardEdit'), false);
-					}
+					desinventar.datacards.navigation.updateByUserRole();
 					if (myCmd == 'getDisasterIdFromSerial')
 					{
 						desinventar.datacards.showStatus('msgDatacardFound');
@@ -761,7 +758,7 @@ function doDatacardEdit()
 				jQuery('#DisasterBeginTime0').focus();
 				jQuery('#DatacardCommand').val('updateDICard');
 				desinventar.datacards.showStatus('msgDatacardFill');
-				desinventar.datacards.navigation.update('btnDatacardEdit');
+				desinventar.datacards.navigation.setEditMode();
 
 				// Clear values of following sublevels
 				var GeoLevelCount = jQuery('.GeoLevelSelect').size() - 1;
@@ -991,15 +988,12 @@ function doDatacardCancel()
 			function(data)
 			{
 				desinventar.datacards.toggleFormEdit($('DICard'), true);
-				desinventar.datacards.navigation.update('btnDatacardCancel');
+				desinventar.datacards.navigation.setViewMode();
 				// clear Help text area
 				showtip('','#ffffff');
 
 				valid = setDICardFromId(jQuery('#desinventarRegionId').val(), jQuery('#DisasterId').val(), jQuery('#cardsRecordNumber').val(), jQuery('#cardsRecordCount').val());
-				if (jQuery('#desinventarUserRoleValue').val() >= 2)
-				{
-					desinventar.datacards.navigation.toggleButton($('btnDatacardEdit'), false);
-				}
+				desinventar.datacards.navigation.updateByUserRole();
 				desinventar.datacards.showStatus('');
 				desinventar.datacards.navigation.enable();
 				jQuery('#DICard #Status').val('VIEW');
@@ -1011,7 +1005,7 @@ function doDatacardCancel()
 	{
 		$('DICard').reset();
 		desinventar.datacards.toggleFormEdit($('DICard'), true);
-		desinventar.datacards.navigation.update('btnDatacardCancel');
+		desinventar.datacards.navigation.setViewMode();
 		// clear Help text area
 		showtip('','#ffffff');
 		desinventar.datacards.showStatus('msgDatacardStartNew');
@@ -1030,10 +1024,7 @@ function doDatacardGotoFirst()
 {
 	desinventar.datacards.showStatus('');
 	bFound = requestDatacard('getDisasterIdFirst', jQuery('#DisasterId').val());
-	if (jQuery('#desinventarUserRoleValue').val() >= 2)
-	{
-		desinventar.datacards.navigation.toggleButton($('btnDatacardEdit'), false);
-	}
+	desinventar.datacards.navigation.updateByUserRole();
 } //doDatacardGotoFirst()
 
 function doDatacardGotoLast()
@@ -1049,10 +1040,7 @@ function doDatacardGotoLast()
 	{
 		bFound = requestDatacard('getDisasterIdLast', jQuery('#DisasterId').val());
 	}
-	if (jQuery('#desinventarUserRoleValue').val() >= 2)
-	{
-		desinventar.datacards.navigation.toggleButton($('btnDatacardEdit'), false);
-	}
+	desinventar.datacards.navigation.updateByUserRole();
 } //doDatacardGotoLast()
 
 function doDatacardGotoPrev()
@@ -1076,10 +1064,7 @@ function doDatacardGotoPrev()
 			desinventar.datacards.showStatus('msgDatacardNotFound');
 		}
 	}
-	if (jQuery('#desinventarUserRoleValue').val() >= 2)
-	{
-		desinventar.datacards.navigation.toggleButton($('btnDatacardEdit'), false);
-	}
+	desinventar.datacards.navigation.updateByUserRole();
 } //doDatacardGotoPrev()
 
 function doDatacardGotoNext()
@@ -1103,10 +1088,7 @@ function doDatacardGotoNext()
 			desinventar.datacards.showStatus('msgDatacardNotFound');
 		}
 	}
-	if (jQuery('#desinventarUserRoleValue').val() >= 2)
-	{
-		desinventar.datacards.navigation.toggleButton($('btnDatacardEdit'), false);
-	}
+	desinventar.datacards.navigation.updateByUserRole();
 } //doDatacardGotoNext()
 
 function doDatacardSuggestSerial()
@@ -1214,11 +1196,7 @@ function setDICard(prmRegionId, arr)
 		}
 	});
 	
-	// Enable Edit Button according to Role
-	if (jQuery('#desinventarUserRoleValue').val() >= 2)
-	{
-		desinventar.datacards.navigation.toggleButton($('btnDatacardEdit'), false);
-	}
+	desinventar.datacards.navigation.updateByUserRole();
 } //setDICard
 
 function validateInputDouble(prmValue)
