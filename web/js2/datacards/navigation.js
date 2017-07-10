@@ -13,108 +13,87 @@
       }
     });
   }
-}(this, function(jQuery) {
+}(this, function($) {
   'use strict';
   var me = {};
 
+  me.disableButton = function(buttonId) {
+    $('#' + buttonId)
+      .prop('disabled', true)
+      .removeClass('bb')
+      .addClass('disabled');
+  };
+
+  me.enableButton = function(buttonId) {
+    $('#' + buttonId)
+      .prop('disabled', false)
+      .addClass('bb')
+      .removeClass('disabled');
+  };
+
   me.toggleButton = function(butid, disab) {
     if (disab) {
-      if (!butid) {
-        butid.disable();
-      }
-      Element.removeClassName(butid, 'bb');
-      Element.addClassName(butid, 'disabled');
+      me.disableButton(Element.identify(butid));
     } else {
-      if (!butid) {
-        butid.enable();
-      }
-      Element.addClassName(butid, 'bb');
-      Element.removeClassName(butid, 'disabled');
+      me.enableButton(Element.identify(butid));
     }
   };
 
   me.enable = function() {
-    var RecordNumber = parseInt(jQuery('#cardsRecordNumber').val(), 10);
-    var RecordCount = parseInt(jQuery('#cardsRecordCount').val(), 10);
-    if (RecordNumber > 0) {
-      if (RecordNumber > 1) {
-        me.toggleButton($('btnDatacardGotoFirst'), false);
-        me.toggleButton($('btnDatacardGotoPrev'), false);
-      } else {
-        me.toggleButton($('btnDatacardGotoFirst'), true);
-        me.toggleButton($('btnDatacardGotoPrev'), true);
-      }
-      if (RecordNumber < RecordCount) {
-        me.toggleButton($('btnDatacardGotoLast'), false);
-        me.toggleButton($('btnDatacardGotoNext'), false);
-      } else {
-        me.toggleButton($('btnDatacardGotoLast'), true);
-        me.toggleButton($('btnDatacardGotoNext'), true);
-      }
-    } else {
-      me.toggleButton($('btnDatacardGotoPrev'), true);
-      me.toggleButton($('btnDatacardGotoNext'), true);
-      if (RecordCount > 0) {
-        me.toggleButton($('btnDatacardGotoFirst'), false);
-        me.toggleButton($('btnDatacardGotoLast'), false);
-      } else {
-        me.toggleButton($('btnDatacardGotoFirst'), true);
-        me.toggleButton($('btnDatacardGotoLast'), true);
-      }
+    var RecordNumber = parseInt($('#cardsRecordNumber').val(), 10);
+    var RecordCount = parseInt($('#cardsRecordCount').val(), 10);
+
+    me.disable();
+    if (RecordCount < 1) {
+      return true;
+    }
+    if (RecordNumber < 1) {
+      me.enableButton('btnDatacardGotoFirst');
+      me.enableButton('btnDatacardGotoLast');
+      return true;
+    }
+
+    if (RecordNumber > 1) {
+      me.enableButton('btnDatacardGotoFirst');
+      me.enableButton('btnDatacardGotoPrev');
+    }
+
+    if (RecordNumber < RecordCount) {
+      me.enableButton('btnDatacardGotoLast');
+      me.enableButton('btnDatacardGotoNext');
     }
   };
 
   me.disable = function() {
-    me.toggleButton($('btnDatacardGotoFirst'), true);
-    me.toggleButton($('btnDatacardGotoPrev'), true);
-    me.toggleButton($('btnDatacardGotoNext'), true);
-    me.toggleButton($('btnDatacardGotoLast'), true);
+    $('input.DatacardNavButton').each(function() {
+      me.disableButton($(this).attr('id'));
+    });
   };
 
-  me.update = function(but) {
-    switch (but) {
-      case "btnDatacardNew":
-        me.toggleButton($('btnDatacardNew'), true);
-        me.toggleButton($('btnDatacardSave'), false);
-        me.toggleButton($('btnDatacardEdit'), true);
-        me.toggleButton($('btnDatacardCancel'), false);
-        me.disable();
-        me.toggleButton($('btnDatacardFind'), true);
-        break;
-      case "btnDatacardEdit":
-        me.toggleButton($('btnDatacardNew'), true);
-        me.toggleButton($('btnDatacardSave'), false);
-        me.toggleButton($('btnDatacardEdit'), true);
-        me.toggleButton($('btnDatacardCancel'), false);
-        me.disable();
-        me.toggleButton($('btnDatacardFind'), true);
-        break;
-      case "btnDatacardSave":
-        me.toggleButton($('btnDatacardNew'), false);
-        me.toggleButton($('btnDatacardSave'), true);
-        me.toggleButton($('btnDatacardEdit'), false);
-        me.toggleButton($('btnDatacardCancel'), true);
-        me.enable();
-        me.toggleButton($('btnDatacardFind'), false);
-        break;
-      case "btnDatacardCancel":
-        if ($('DisasterId').value === '') {
-          me.toggleButton($('btnDatacardEdit'), true);
-        } else {
-          me.toggleButton($('btnDatacardEdit'), false);
-        }
-        me.toggleButton($('btnDatacardSave'), true);
-        me.toggleButton($('btnDatacardCancel'), true);
-        me.toggleButton($('btnDatacardNew'), false);
-        me.enable();
-        me.toggleButton($('btnDatacardFind'), false);
-        break;
-      default:
-        me.toggleButton($('btnDatacardNew'), false);
-        me.toggleButton($('btnDatacardSave'), true);
-        me.toggleButton($('btnDatacardEdit'), true);
-        me.toggleButton($('btnDatacardCancel'), true);
-        break;
+  me.updateByUserRole = function() {
+    if ($('#desinventarUserRoleValue').val() >= 2) {
+      me.enableButton('btnDatacardEdit');
+    }
+  };
+
+  me.setEditMode = function() {
+    me.disableButton('btnDatacardNew');
+    me.disableButton('btnDatacardEdit');
+    me.disableButton('btnDatacardFind');
+    me.enableButton('btnDatacardSave');
+    me.enableButton('btnDatacardCancel');
+    me.disable();
+  };
+
+  me.setViewMode = function() {
+    me.enableButton('btnDatacardNew');
+    me.enableButton('btnDatacardEdit');
+    me.enableButton('btnDatacardFind');
+    me.disableButton('btnDatacardSave');
+    me.disableButton('btnDatacardCancel');
+    me.enable();
+    if ($('#DisasterId').val() === '') {
+      me.disableButton('btnDatacardEdit');
     }
   };
 

@@ -54,7 +54,7 @@
     me.toggleFormEdit($('DICard'), false);
     jQuery('#DisasterBeginTime0').focus();
     me.showStatus('msgDatacardFill');
-    navigation.update('btnDatacardNew');
+    navigation.setEditMode();
     jQuery('#divRecordNavigationInfo').hide();
     jQuery('#DICard #Status').val('NEW');
 
