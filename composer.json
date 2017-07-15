@@ -5,7 +5,8 @@
         "aura/sqlquery": "^2.7",
         "DrUUID": "20140906",
         "jpgraph": "3.0.7",
-        "aura/sql": "^2"
+        "aura/sql": "^2",
+        "monolog/monolog": "^1.23"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "2.*",
