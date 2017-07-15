@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f15c6a4cc582d2faf46970ae24438824",
+    "content-hash": "c384a82a7f1dad28d9272a06356cfb48",
     "packages": [
         {
             "name": "DrUUID",

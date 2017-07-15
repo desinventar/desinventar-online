@@ -4,8 +4,10 @@ namespace Api\Service;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class JsonApi {
-    public function data($values) {
+class JsonApi
+{
+    public function data($values)
+    {
         $data = [
             'data' => $values,
         ];
@@ -14,7 +16,8 @@ class JsonApi {
         return new JsonResponse($data, $status, $headers);
     }
 
-    public function error($values, $status = 200, $headers = []) {
+    public function error($values, $status = 200, $headers = [])
+    {
         $data = ['errors' => [$values]];
         return new JsonResponse($data, $status, $headers);
     }
