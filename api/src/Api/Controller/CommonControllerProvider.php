@@ -1,5 +1,5 @@
 <?php
-namespace Api;
+namespace Api\Controller;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +12,7 @@ class CommonControllerProvider implements ControllerProviderInterface
         $controllers = $app['controllers_factory'];
 
         $controllers->get('/version', function () use ($app) {
-            return $app->json(array('version' => $app['config']->version));
+            return $app['jsonapi']->data($app['config']->version);
         });
 
         $controllers->post('/login', function (Request $request) use ($app) {
@@ -21,11 +21,12 @@ class CommonControllerProvider implements ControllerProviderInterface
                 $request->get('password'),
                 \UserSession::PASSWORD_IS_CLEAR
             );
-            return $app->json(array('status' => $status));
+            return $app['jsonapi']->data(['status' => $status]);
         });
+
         $controllers->post('/logout', function (Application $app) {
             $app['user_session']->logout();
-            return $app->json(true);
+            return $app['jsonapi']->data(true);
         });
         return $controllers;
     }
