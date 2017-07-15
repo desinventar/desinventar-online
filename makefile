@@ -19,10 +19,13 @@ lang : .FORCE
 
 php : standard-php phpmd lint-php
 
-test : test-unit
+test : test-unit test-api
 
 test-unit: .FORCE
 	cd tests && ../vendor/bin/phpunit --testsuite unit $(TEST)
+
+test-api: .FORCE
+	cd tests && ../vendor/bin/phpunit --testsuite api $(TEST)
 
 test-web: .FORCE
 	cd tests && ../vendor/bin/phpunit --testsuite web $(TEST)
@@ -31,8 +34,8 @@ lint-php : .FORCE
 	find src api config web tests -name "*.php" -exec php -l {} > /dev/null \;
 
 standard-php : .FORCE
-	./vendor/bin/phpcs --standard=PSR2 src/* api/app/* api/web/* \
-	tests/bootstrap.php tests/Unit/* tests/WebTest/* \
+	./vendor/bin/phpcs --standard=PSR2 src/* api/app/* api/src/* api/web/* \
+	tests/bootstrap.php tests/UnitTest/* tests/ApiTest/* tests/WebTest/* \
 	config/config.php config/version.php
 
 phpmd: .FORCE
