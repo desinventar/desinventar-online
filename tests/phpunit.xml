@@ -2,13 +2,17 @@
 <phpunit bootstrap="bootstrap.php">
     <php>
         <var name="DESINVENTAR_URL" value="http://127.0.0.1:8081/" />
+        <var name="DESINVENTAR_API_URL" value="http://127.0.0.1:8081/api/" />
     </php>
     <testsuites>
         <testsuite name="unit">
-            <directory>Unit</directory>
+            <directory>UnitTest</directory>
         </testsuite>
         <testsuite name="web">
             <directory>WebTest</directory>
+        </testsuite>
+        <testsuite name="api">
+            <directory>ApiTest</directory>
         </testsuite>
     </testsuites>
 </phpunit>

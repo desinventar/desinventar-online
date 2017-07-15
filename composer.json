@@ -18,7 +18,8 @@
         "behat/mink-selenium2-driver": "^1.3",
         "behat/mink-goutte-driver": "^1.2",
         "dmore/chrome-mink-driver": "^2.2",
-        "phpmd/phpmd": "^2.6"
+        "phpmd/phpmd": "^2.6",
+        "guzzlehttp/guzzle": "^6.3"
     },
      "repositories": [
     {
@@ -42,6 +43,8 @@
         "psr-0": {
             "DesInventar\\": ["src"],
             "Api\\": ["api/src"],
+            "UnitTest\\": ["tests"],
+            "ApiTest\\": ["tests"],
             "WebTest\\": ["tests"]
         }
     },
