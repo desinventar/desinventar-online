@@ -6,6 +6,7 @@ module.exports = {
     "extends": "google",
     "rules": {
         "require-jsdoc": "off",
-        "wrap-iife": "off"
+        "wrap-iife": "off",
+        "max-len": [2, {"code": 100, "tabWidth": 4, "ignoreUrls": true}]
     }
 };
