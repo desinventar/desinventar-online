@@ -142,9 +142,9 @@ function blockChars(e, value, type)
 	var keychar = String.fromCharCode(key);
 	if (key == 190 || key == 110 || key == 188) { keychar = '.'; }
 	var opt = type.split(":"); // 0=type; 1=minlength; 2=minval-maxval
-		// Accept keys: backspace, tab, shift, ctrl, insert, delete
-		//        pagedown, pageup, rows
-	var spckey = (key==8 || key==9 || key==17 || key==20 ||
+	// Accept keys: backspace, tab, shift, ctrl, insert, delete
+	//        pagedown, pageup, rows, hyphen
+	var spckey = (key==8 || key==9 || key==17 || key==20 || key==189 ||
 				  key==45 || key==46 || (key>=33 && key<=40) || key==0);
 	var chk = true;
 	var val = true; // validate characters
