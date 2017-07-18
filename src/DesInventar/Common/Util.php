@@ -16,4 +16,13 @@ class Util
         $url = $url_proto . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         return $url;
     }
+
+    public static function getUrlSuffix()
+    {
+        $output = exec('/usr/bin/git rev-parse --short HEAD');
+        if (empty($output)) {
+            $output = time();
+        }
+        return $output;
+    }
 }
