@@ -266,8 +266,10 @@ if (MODE != 'command')
 	$t->assign('version'     , $config->version['version']);
 	$jsversion = $config->version['version'];
 	if ($config->flags['mode'] == 'devel') {
-		$jsversion = $jsversion  . '-' . time();
+		$jsversion = $jsversion  . '-' . \DesInventar\Common\Util::getUrlSuffix();
+		$config->version['version'] = $jsversion;
 	}
+
 	$t->assign('jsversion'   , $jsversion);
 
 	// Configure DESINVENTAR (web) application location	
