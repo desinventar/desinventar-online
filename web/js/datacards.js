@@ -29,8 +29,9 @@ function onReadyDatacards()
 		var params = jQuery(this).serializeObject();
 		jQuery.post(jQuery('#desinventarURL').val() + '/cards.php',
 			jQuery.extend(params, { RegionId : jQuery('#desinventarRegionId').val() }),
-			function(data)
-			{
+			null,
+			'json'
+		).then(function(data) {
 				if (data.Status == 'OK')
 				{
 					jQuery('#DisasterId').val(data.DisasterId);
@@ -51,6 +52,7 @@ function onReadyDatacards()
 							jQuery('#divRecordStat').show();
 						break;
 					} //switch
+					desinventar.datacards.navigation.setStatus('VIEW');
 					desinventar.datacards.toggleFormEdit($('DICard'), true);
 					desinventar.datacards.navigation.setViewMode();
 					if (parseInt(jQuery('#cardsRecordNumber').val()) > 0)
@@ -59,7 +61,6 @@ function onReadyDatacards()
 						jQuery('#RecordCount').text(jQuery('#cardsRecordCount').val());
 						jQuery('#divRecordNavigationInfo').show();
 					}
-					jQuery('#DICard #Status').val('VIEW');
 				}
 				else
 				{
@@ -82,7 +83,7 @@ function onReadyDatacards()
 							desinventar.datacards.showStatus('msgDatacard_ErrorSaving');
 						break;
 					}
-					jQuery('#DICard #Status').val('EDIT');
+					desinventar.datacards.navigation.setStatus('EDIT');
 				}
 				showtip('','#ffffff');
 			},
@@ -153,15 +154,6 @@ function onReadyDatacards()
 		jQuery(this).focus();
 	});	
 
-	// Validation of DisasterBeginTime and Suggest Serial for New Datacards
-	jQuery('#DisasterBeginTime0').blur(function() {
-		cmd = jQuery('#DatacardCommand').val();
-		if (cmd == 'insertDICard')
-		{
-			doDatacardSuggestSerial();
-		}
-	});
-
 	jQuery('#DisasterBeginTime1').blur(function() {
 		if (jQuery(this).val() == '' ||
 		    parseInt(jQuery(this).val(),10) < 1 || 
@@ -178,19 +170,6 @@ function onReadyDatacards()
 		{
 			jQuery(this).val('');
 		}
-	});
-
-	// Button for suggesting serial of datacard or restoring initial Serial when editing...
-	jQuery('div.Datacard #linkDatacardSuggestSerial').on('click', function(event) {
-		if (jQuery('#DICard #Status').val() == 'NEW')
-		{
-			doDatacardSuggestSerial();
-		}
-		if (jQuery('#DICard #Status').val() == 'EDIT')
-		{
-			jQuery('#DisasterSerial').val(jQuery('#PrevDisasterSerial').val());
-		}
-		return false;
 	});
 
 	// Apply some validation for several types of input fields
@@ -531,10 +510,8 @@ function doUpdateGeoLevelSelect(prmGeographyLevel, prmGeographyList)
 	jQuery.each(prmGeographyList, function(index, value) {
 		mySelect.append(jQuery('<option>', { value : value.GeographyId }).text(value.GeographyName));
 	});
-	mySelect.val(myPrevValue);
-	if (myPrevValue != '')
-	{
-		myGeographyId = myPrevValue;
+	if (myPrevValue != '') {
+		mySelect.val(myPrevValue);
 	}
 	mySelect.enable();
 } //doUpdateGeoLevelSelect()
@@ -689,14 +666,7 @@ function requestDatacard(myCmd, myValue)
 		function(data)
 		{
 			jQuery('#dostat').html('');
-			if (myCmd == 'getNextSerial')
-			{
-				if (data.DisasterSerial.length >= 5)
-				{
-					jQuery('#DisasterSerial').val(myValue + '-' + data.DisasterSerial);
-				}
-			}
-			else if (data.Status == 'OK')
+			if (data.Status == 'OK')
 			{
 				desinventar.datacards.showStatus('');
 				if (data.DisasterId != '')
@@ -730,7 +700,7 @@ function requestDatacard(myCmd, myValue)
 function doDatacardFind()
 {
 	// We can only search datacards when in VIEW mode
-	if (jQuery('#DICard #Status').val() !== 'VIEW') {
+	if (desinventar.datacards.navigation.getStatus() !== 'VIEW') {
 		return false;
 	}
 	if(jQuery('#txtDatacardFind').val() !='')
@@ -768,7 +738,7 @@ function doDatacardEdit()
 					mySelect.disable();
 				}
 				updateGeoLevelSelect(jQuery('#DICard #GeographyId').val(), true);
-				jQuery('#DICard #Status').val('EDIT');
+				desinventar.datacards.navigation.setStatus('EDIT');
 			}
 			else
 			{
@@ -785,8 +755,7 @@ function doDatacardSave()
 	var cmd = jQuery('#DatacardCommand').val();
 	var DisasterSerial = jQuery('#DisasterSerial').val();
 	var PrevDisasterSerial = jQuery('#PrevDisasterSerial').val();
-	var Status = jQuery('#DICard #Status').val();
-
+	var Status = desinventar.datacards.navigation.getStatus();
 	if (bContinue > 0)
 	{
 		var error_count = 0;
@@ -918,13 +887,13 @@ function doDatacardSave()
 	// Use AJAX to save datacard
 	if (bContinue > 0)
 	{
-		if (jQuery('#DICard #Status').val() == 'SAVING')
+		if (desinventar.datacards.navigation.getStatus() == 'SAVING')
 		{
 			// Do Nothing.. already saving datacard...
 		}
 		else
 		{
-			jQuery('#DICard #Status').val('SAVING');
+			desinventar.datacards.navigation.setStatus('SAVING');
 			jQuery.post(jQuery('#desinventarURL').val() + '/cards.php',
 				{
 					'cmd'            : 'existDisasterSerial',
@@ -950,7 +919,7 @@ function doDatacardSave()
 					if (bContinue < 1)
 					{
 						desinventar.datacards.showStatus('msgDatacardDuplicatedSerial');
-						jQuery('#DICard #Status').val(Status);
+						desinventar.datacards.navigation.setStatus(Status);
 						jQuery('#DICard #DisasterSerial').highlight().focus();
 					}
 					if (bContinue > 0)
@@ -977,7 +946,7 @@ function doDatacardSave()
 
 function doDatacardCancel()
 {
-	if (jQuery('#DICard #Status').val() == 'EDIT')
+	if (desinventar.datacards.navigation.getStatus() == 'EDIT')
 	{
 		jQuery.post(jQuery('#desinventarURL').val() + '/',
 			{
@@ -993,10 +962,10 @@ function doDatacardCancel()
 				showtip('','#ffffff');
 
 				valid = setDICardFromId(jQuery('#desinventarRegionId').val(), jQuery('#DisasterId').val(), jQuery('#cardsRecordNumber').val(), jQuery('#cardsRecordCount').val());
+				desinventar.datacards.navigation.setStatus('VIEW');
 				desinventar.datacards.navigation.updateByUserRole();
 				desinventar.datacards.showStatus('');
 				desinventar.datacards.navigation.enable();
-				jQuery('#DICard #Status').val('VIEW');
 			},
 			'json'
 		);
@@ -1010,7 +979,7 @@ function doDatacardCancel()
 		showtip('','#ffffff');
 		desinventar.datacards.showStatus('msgDatacardStartNew');
 		desinventar.datacards.navigation.enable();
-		jQuery('#DICard #Status').val('');
+		desinventar.datacards.navigation.setStatus('');
 	}
 	if (jQuery('div.Datacard #DisasterId').val() == '')
 	{
@@ -1091,14 +1060,6 @@ function doDatacardGotoNext()
 	desinventar.datacards.navigation.updateByUserRole();
 } //doDatacardGotoNext()
 
-function doDatacardSuggestSerial()
-{
-	if (jQuery('#DisasterBeginTime0').val() != '')
-	{
-		requestDatacard('getNextSerial', jQuery('#DisasterBeginTime0').val());
-	}
-} //doDatacardSuggestSerial()
-
 // SET DATACARD FORM
 function setElementValue(formElement, value)
 {
@@ -1148,8 +1109,8 @@ function setDICardFromId(prmRegionId, prmDisasterId, prmRecordNumber, prmRecordC
 			jQuery('#RecordNumber').text(RecordNumber);
 			jQuery('#RecordCount').text(RecordCount);
 		}
+		desinventar.datacards.navigation.setStatus('VIEW');
 		desinventar.datacards.navigation.enable();
-		jQuery('#DICard #Status').val('VIEW');
 		return true;
 	});
 	return false;

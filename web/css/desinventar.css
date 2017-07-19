@@ -28,6 +28,11 @@
 	background-image: url(../images/saveicon.png) !important;
 	background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
 }
+.bclone {
+	background-color: white;
+	background-image: url(../images/cloneicon.png) !important;
+	background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
+}
 .bprint {
 	background-color: white;
 	background-image: url(../images/printicon.png) !important;
