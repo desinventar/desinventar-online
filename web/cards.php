@@ -52,8 +52,13 @@ else
 	switch ($cmd)
 	{
 		case 'getNextSerial':
-			$ser = $us->q->getNextDisasterSerial($value);
-			echo json_encode(array('Status' => 'OK', 'DisasterSerial' => $ser));
+			$service = new \DesInventar\Service\Datacard($us->q->dreg);
+			$nextSerial = $service->nextSerial(
+				$value,
+				getParameter('length', 5),
+				getParameter('separator', ':')
+			);
+			echo json_encode(array('Status' => 'OK', 'DisasterSerial' => $nextSerial));
 		break;
 		case 'getDisasterIdPrev':
 			$answer = $us->getDisasterIdPrev($value);
