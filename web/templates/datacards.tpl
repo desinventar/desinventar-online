@@ -9,6 +9,7 @@
 				<input type="button" id="btnDatacardCancel" class="DatacardCmdButton bb bcancel" title="{-#tcantitle#-}: {-#tcandesc#-}" value=" " />
 				<span  class="DatacardCmdButton"> &nbsp;&nbsp;|&nbsp;&nbsp;</span>
 				<input type="button" id="btnDatacardPrint"  class="DatacardCmdButton bb bprint"  title="{-#mprint#-}" value=" " />
+				<input type="button" id="btnDatacardClone"  class="DatacardCmdButton bb bclone"  title="{-#datacardCloneTitle#-}: {-#datacardCloneTooltip#-}" value=" "   />
 				&nbsp;&nbsp;|&nbsp;&nbsp;
 				<input type="button" id="btnDatacardGotoFirst" class="DatacardNavButton bb line" value="<<" title="{-#bfirst#-}" />
 				<input type="button" id="btnDatacardGotoPrev"  class="DatacardNavButton bb line" value="<"  title="{-#bprev#-}"  />
@@ -65,6 +66,7 @@
 	<form id="DICard" action="cards.php" method="post" target="dic">
 		<input type="hidden" id="DisasterId"         name="DisasterId" value="" />
 		<input type="hidden" id="PrevDisasterSerial" name="PrevDisasterSerial" value="" />
+		<input type="hidden" id="DatacardPrefix"     name="DatacardPrefix" value="" />
 		<input type="hidden" id="DatacardCommand"    name="DatacardCommand" value="" />
 		<input type="hidden" id="Status"             name="Status" value="" />
 		{-counter assign="MyTabIndex" start="1"-}
@@ -110,7 +112,7 @@
 							</td>
 							<td title="{-$LabelsDisaster.DisasterSerial[1]-}">
 								{-#msgDatacard_DisasterSerial#-}<b class="required">*</b><br />
-								<input id="DisasterSerial" name="DisasterSerial" type="text" size="15" 
+								<input id="DisasterSerial" name="DisasterSerial" type="text" size="24" 
 									class="line inputAlphaNumber" tabindex="{-$MyTabIndex-}" maxlength="50" onFocus="showtip('{-$LabelsDisaster.DisasterSerial[2]-}', '#d4baf6')" />
 								{-counter-}
 								<a href="#" id="linkDatacardSuggestSerial"><img src="{-$desinventarURL-}/images/reload.jpg" alt="" />

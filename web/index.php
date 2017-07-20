@@ -456,16 +456,29 @@ switch ($cmd)
 	break;
 	case 'cmdGetLocaleList':
 		$answer = array();		
-		$iReturn = ERR_UNKNOWN_ERROR;
-		if ($us->UserId != '')
-		{
-			$LanguageList = $us->q->loadLanguages(1);
-			$CountryList  = $us->q->getCountryList();
-			$iReturn = ERR_NO_ERROR;
-			$answer['LanguageList'] = $LanguageList;
-			$answer['CountryList'] = $CountryList;
+		if (empty($us->UserId)) {
+			return json_encode(array('Status' => ERR_UNKNOWN_ERROR));
 		}
-		$answer['Status'] = $iReturn;
+		$countryList = array();
+		foreach ($us->q->getCountryList() as $isoCode => $name) {
+			if (empty($isoCode)) {
+				continue;
+			}
+			$countryList[] = array(
+				'id' => trim($isoCode),
+				'text' => trim($name)
+			);
+		}
+		$languageList = array();
+		foreach ($us->q->loadLanguages(1) as $code => $name) {
+			$languageList[] = array(
+				'id' => $code,
+				'text' => $name
+			);
+		}
+		$answer['LanguageList'] = $languageList;
+		$answer['CountryList'] = $countryList;
+		$answer['Status'] = ERR_NO_ERROR;
 		echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES,'UTF-8');
 	break;
 	case 'cmdGetUserPermList':

@@ -3,6 +3,9 @@ namespace DesInventar\Common;
 
 class MapServer
 {
+    const SERVER_PORT = 'SERVER_PORT';
+    const MAPID = 'MAPID';
+
     protected $defaultOptions = array(
         'SERVICE' => 'WMS',
         'VERSION' => '1.1.1',
@@ -26,16 +29,18 @@ class MapServer
     public function formatOptions($mapOptions)
     {
         $options = array_merge($this->defaultOptions, $mapOptions);
-        if (empty($options['MAPID']) || $options['MAPID'] == 'worldmap') {
-            $options['MAP']         = $this->config->maps['worldmap_dir'] . '/world_adm0.map';
-            $options['LAYERS']      = 'base';
-            $options['TRANSPARENT'] = 'false';
-        } else {
-            $options['MAP'] = TMP_DIR .'/map_' . $options['MAPID'] . '.map';
-            $options['TRANSPARENT'] = 'true';
-            unset($options['MAPID']);
+        if (empty($options[self::MAPID]) || $options[self::MAPID] == 'worldmap') {
+            return array_merge($options, array(
+                'MAP' => $this->config->maps['worldmap_dir'] . '/world_adm0.map',
+                'LAYERS' => 'base',
+                'TRANSPARENT' => 'false',
+            ));
         }
-        
+        $options = array_merge($options, array(
+            'MAP' => TMP_DIR .'/map_' . $options[self::MAPID] . '.map',
+            'TRANSPARENT' => 'true',
+        ));
+        unset($options[self::MAPID]);
         return $options;
     }
 
@@ -49,17 +54,23 @@ class MapServer
             }
             $queryString .= $key . '=' . urlencode($value);
         }
-        $queryString .= '&mde=map';
-        return $queryString;
+        return $queryString . '&mde=map';
     }
 
     public function getMapServerUrl($queryString)
     {
-        $url = 'http://' . $_SERVER['SERVER_ADDR'];
-        if (! is_ssl() && isset($_SERVER['SERVER_PORT']) && ($_SERVER['SERVER_PORT'] != 80)) {
-            $url .= ':' . $_SERVER['SERVER_PORT'];
+        // This is a call to mapserver through cgi-bin from inside the host
+        $url = 'http://127.0.0.1';
+        $suffix = '/cgi-bin/' . MAPSERV . '?' . $queryString;
+        if (file_exists('/.dockerenv')) {
+            // We are running inside a docker container, we have to assume the
+            // local port is 80
+            return $url . ':80' . $suffix;
         }
-        $url .= '/cgi-bin/' . MAPSERV . '?' . $queryString;
-        return $url;
+        // We check to see if apache if using a different port
+        if (! is_ssl() && (isset($_SERVER[self::SERVER_PORT]) && ($_SERVER[self::SERVER_PORT] != 80))) {
+            return $url . ':' . $_SERVER[self::SERVER_PORT] . $suffix;
+        }
+        return $url . '/cgi-bin/' . MAPSERV . '?' . $queryString;
     }
 }

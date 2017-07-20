@@ -19,6 +19,7 @@ return array(
     ),
     'flags' => array(
         'mode' => 'normal',
+        'debug' => false,
         'auto_login' => 0,
         'general_secure_login' => 0,
     ),

@@ -25,12 +25,13 @@ function onReadyDatacards()
 
 	jQuery('#DICard').unbind('submit').submit(function() {
 		jQuery('#RecordAuthor').val(jQuery('#desinventarUserId').val());
-		displayDatacardStatusMsg('');
+		desinventar.datacards.showStatus('');
 		var params = jQuery(this).serializeObject();
 		jQuery.post(jQuery('#desinventarURL').val() + '/cards.php',
 			jQuery.extend(params, { RegionId : jQuery('#desinventarRegionId').val() }),
-			function(data)
-			{
+			null,
+			'json'
+		).then(function(data) {
 				if (data.Status == 'OK')
 				{
 					jQuery('#DisasterId').val(data.DisasterId);
@@ -40,26 +41,26 @@ function onReadyDatacards()
 					switch (data.StatusCode)
 					{
 						case 'INSERTOK':
-							displayDatacardStatusMsg('msgDatacardInsertOk');
+							desinventar.datacards.showStatus('msgDatacardInsertOk');
 							jQuery('#cardsRecordSource').val('');
 							jQuery('#cardsRecordCount').val(data.RecordCount);
 							jQuery('#cardsRecordNumber').val(data.RecordCount);
 							jQuery('#divRecordStat').show();
 						break;
 						case 'UPDATEOK':
-							displayDatacardStatusMsg('msgDatacardUpdateOk');
+							desinventar.datacards.showStatus('msgDatacardUpdateOk');
 							jQuery('#divRecordStat').show();
 						break;
 					} //switch
-					DisableEnableForm($('DICard'), true);
-					changeOptions('btnDatacardSave');
+					desinventar.datacards.navigation.setStatus('VIEW');
+					desinventar.datacards.toggleFormEdit($('DICard'), true);
+					desinventar.datacards.navigation.setViewMode();
 					if (parseInt(jQuery('#cardsRecordNumber').val()) > 0)
 					{
 						jQuery('#RecordNumber').text(jQuery('#cardsRecordNumber').val());
 						jQuery('#RecordCount').text(jQuery('#cardsRecordCount').val());
 						jQuery('#divRecordNavigationInfo').show();
 					}
-					jQuery('#DICard #Status').val('VIEW');
 				}
 				else
 				{
@@ -67,22 +68,22 @@ function onReadyDatacards()
 					{
 						case -10:
 						case -52:
-							displayDatacardStatusMsg('msgDatacardNetworkError');
+							desinventar.datacards.showStatus('msgDatacardNetworkError');
 						break;
 						case -54:
-							displayDatacardStatusMsg('msgDatacardDuplicatedSerial');
+							desinventar.datacards.showStatus('msgDatacardDuplicatedSerial');
 						break;
 						case -61:
-							displayDatacardStatusMsg('msgDatacardWithoutEffects');
+							desinventar.datacards.showStatus('msgDatacardWithoutEffects');
 						break;
 						case -62:
-							displayDatacardStatusMsg('msgDatacardOutsideOfPeriod');
+							desinventar.datacards.showStatus('msgDatacardOutsideOfPeriod');
 						break;
 						default:
-							displayDatacardStatusMsg('msgDatacard_ErrorSaving');
+							desinventar.datacards.showStatus('msgDatacard_ErrorSaving');
 						break;
 					}
-					jQuery('#DICard #Status').val('EDIT');
+					desinventar.datacards.navigation.setStatus('EDIT');
 				}
 				showtip('','#ffffff');
 			},
@@ -153,15 +154,6 @@ function onReadyDatacards()
 		jQuery(this).focus();
 	});	
 
-	// Validation of DisasterBeginTime and Suggest Serial for New Datacards
-	jQuery('#DisasterBeginTime0').blur(function() {
-		cmd = jQuery('#DatacardCommand').val();
-		if (cmd == 'insertDICard')
-		{
-			doDatacardSuggestSerial();
-		}
-	});
-
 	jQuery('#DisasterBeginTime1').blur(function() {
 		if (jQuery(this).val() == '' ||
 		    parseInt(jQuery(this).val(),10) < 1 || 
@@ -178,19 +170,6 @@ function onReadyDatacards()
 		{
 			jQuery(this).val('');
 		}
-	});
-
-	// Button for suggesting serial of datacard or restoring initial Serial when editing...
-	jQuery('div.Datacard #linkDatacardSuggestSerial').on('click', function(event) {
-		if (jQuery('#DICard #Status').val() == 'NEW')
-		{
-			doDatacardSuggestSerial();
-		}
-		if (jQuery('#DICard #Status').val() == 'EDIT')
-		{
-			jQuery('#DisasterSerial').val(jQuery('#PrevDisasterSerial').val());
-		}
-		return false;
 	});
 
 	// Apply some validation for several types of input fields
@@ -237,8 +216,8 @@ function onReadyDatacards()
 	
 	// Datacard New/Edit/Save Commands
 	jQuery('#btnDatacardNew').click(function() {
-		doDatacardClear();
-		doDatacardNew();
+		desinventar.datacards.clear();
+		desinventar.datacards.create();
 		jQuery('#txtDatacardFind').val('');
 		jQuery('#GeographyId').val('');
 		jQuery('#DisasterId').val('');
@@ -531,10 +510,8 @@ function doUpdateGeoLevelSelect(prmGeographyLevel, prmGeographyList)
 	jQuery.each(prmGeographyList, function(index, value) {
 		mySelect.append(jQuery('<option>', { value : value.GeographyId }).text(value.GeographyName));
 	});
-	mySelect.val(myPrevValue);
-	if (myPrevValue != '')
-	{
-		myGeographyId = myPrevValue;
+	if (myPrevValue != '') {
+		mySelect.val(myPrevValue);
 	}
 	mySelect.enable();
 } //doUpdateGeoLevelSelect()
@@ -642,16 +619,16 @@ function doDatacardUpdateDisplay()
 
 	// Initialize controls in form when it is displayed
 	// Reset buttons
-	doDatacardClear();
+	desinventar.datacards.clear();
 	// Hide StatusMessages
-	displayDatacardStatusMsg('');
+	desinventar.datacards.showStatus('');
 	jQuery('#divDatacardStatusMsg').show();
 	// Hide window's parameters
 	jQuery('#divDatacardParameter').hide();
 	jQuery('#divRecordNavigationInfo').hide();
 	
-	DisableEnableForm($('DICard'), true);
-	changeOptions();
+	desinventar.datacards.toggleFormEdit($('DICard'), true);
+	desinventar.datacards.navigation.setViewMode();
 
 	// Start with Basic Effects show
 	jQuery('#linkDatacardShowEffectsBasic').trigger('click');
@@ -662,9 +639,9 @@ function doDatacardUpdateDisplay()
 	if (parseInt(jQuery('#desinventarUserRoleValue').val()) >= 2)
 	{
 		jQuery('.DatacardCmdButton').show();
-		displayDatacardStatusMsg('msgDatacardStartNew');
+		desinventar.datacards.showStatus('msgDatacardStartNew');
 	}
-	doDatacardNavButtonsEnable();
+	desinventar.datacards.navigation.enable();
 
 	var w = Ext.getCmp('wndDatacard');
 	if (w != undefined)
@@ -673,173 +650,7 @@ function doDatacardUpdateDisplay()
 	}
 } //doDatacardUpdateDisplay();
 
-function displayDatacardStatusMsg(msgId)
-{
-	// First hide all items
-	jQuery('.datacardStatusMsg').hide();
-	// Show a specific message
-	if (msgId != '')
-	{
-		jQuery('#' + msgId).show();
-	}
-}
-
 var mod = "di";
-
-function DisableEnableForm(xForm, disab)
-{
-	if (xForm != null)
-	{
-		objElems = xForm.elements;
-		var myname = '';
-		var mysty = '';
-		if (disab)
-		{
-			col = '#eee';
-		}
-		else
-		{
-			col = '#fff';
-		}
-		for (i=0; i < objElems.length; i++)
-		{
-			myname = objElems[i].name + "";
-			if (myname.substring(0,1) != "_")
-			{
-				objElems[i].disabled = disab;
-				objElems[i].style.backgroundColor = col;
-			}
-		}
-		jQuery('#txtDatacardFind', xForm).prop('readonly', disab).prop('disabled', disab);
-		jQuery('#btnDatacardFind', xForm).prop('readonly', disab).prop('disabled', disab);
-	}
-}
-
-function disenabutton(butid, disab)
-{
-	if (disab)
-	{
-		if (butid != null)
-		{
-			butid.disable();
-		}
-		Element.removeClassName(butid, 'bb');
-		Element.addClassName(butid, 'disabled');
-	}
-	else
-	{
-		if (butid != null)
-		{
-			butid.enable();
-		}
-		Element.addClassName(butid, 'bb');
-		Element.removeClassName(butid, 'disabled');
-	}
-}
-
-function doDatacardNavButtonsDisable()
-{
-	disenabutton($('btnDatacardGotoFirst'), true);
-	disenabutton($('btnDatacardGotoPrev'), true);
-	disenabutton($('btnDatacardGotoNext'), true);
-	disenabutton($('btnDatacardGotoLast'), true);
-}
-
-function doDatacardNavButtonsEnable()
-{
-	var RecordNumber = parseInt(jQuery('#cardsRecordNumber').val());
-	var RecordCount  = parseInt(jQuery('#cardsRecordCount').val());
-	if (RecordNumber > 0)
-	{
-		if (RecordNumber > 1)
-		{
-			disenabutton($('btnDatacardGotoFirst'), false);
-			disenabutton($('btnDatacardGotoPrev'), false);
-		}
-		else
-		{
-			disenabutton($('btnDatacardGotoFirst'), true);
-			disenabutton($('btnDatacardGotoPrev'), true);
-		}
-		if (RecordNumber < RecordCount)
-		{
-			disenabutton($('btnDatacardGotoLast'), false);
-			disenabutton($('btnDatacardGotoNext'), false);
-		}
-		else
-		{
-			disenabutton($('btnDatacardGotoLast'), true);
-			disenabutton($('btnDatacardGotoNext'), true);
-		}
-	}
-	else
-	{
-		disenabutton($('btnDatacardGotoPrev'), true);
-		disenabutton($('btnDatacardGotoNext'), true);
-		if (RecordCount > 0)
-		{
-			disenabutton($('btnDatacardGotoFirst'), false);
-			disenabutton($('btnDatacardGotoLast'), false);
-		}
-		else
-		{
-			disenabutton($('btnDatacardGotoFirst'), true);
-			disenabutton($('btnDatacardGotoLast'), true);
-		}
-	}
-}
-
-function changeOptions(but)
-{
-	switch (but)
-	{
-		case "btnDatacardNew":
-			disenabutton($('btnDatacardNew'), true);
-			disenabutton($('btnDatacardSave'), false);
-			disenabutton($('btnDatacardEdit'), true);
-			disenabutton($('btnDatacardCancel'), false);
-			doDatacardNavButtonsDisable();
-			disenabutton($('btnDatacardFind'), true);
-		break;
-		case "btnDatacardEdit":
-			disenabutton($('btnDatacardNew'), true);
-			disenabutton($('btnDatacardSave'), false);
-			disenabutton($('btnDatacardEdit'), true);
-			disenabutton($('btnDatacardCancel'), false);
-			doDatacardNavButtonsDisable();
-			disenabutton($('btnDatacardFind'), true);
-		break;
-		case "btnDatacardSave":
-			disenabutton($('btnDatacardNew'), false);
-			disenabutton($('btnDatacardSave'), true);
-			disenabutton($('btnDatacardEdit'), false);
-			disenabutton($('btnDatacardCancel'), true);
-			doDatacardNavButtonsEnable();
-			disenabutton($('btnDatacardFind'), false);
-		break;
-		case "btnDatacardCancel":
-			if ($('DisasterId').value == '')
-			{
-				disenabutton($('btnDatacardEdit'), true);
-			}
-			else
-			{
-				disenabutton($('btnDatacardEdit'), false);
-			}
-			disenabutton($('btnDatacardSave'), true);
-			disenabutton($('btnDatacardCancel'), true);
-			disenabutton($('btnDatacardNew'), false);
-			doDatacardNavButtonsEnable();
-			disenabutton($('btnDatacardFind'), false);
-		break;
-		default:
-			disenabutton($('btnDatacardNew'), false);
-			disenabutton($('btnDatacardSave'), true);
-			disenabutton($('btnDatacardEdit'), true);
-			disenabutton($('btnDatacardCancel'), true);
-		break;
-	}
-}
 
 function requestDatacard(myCmd, myValue)
 {
@@ -855,32 +666,22 @@ function requestDatacard(myCmd, myValue)
 		function(data)
 		{
 			jQuery('#dostat').html('');
-			if (myCmd == 'getNextSerial')
+			if (data.Status == 'OK')
 			{
-				if (data.DisasterSerial.length >= 5)
-				{
-					jQuery('#DisasterSerial').val(myValue + '-' + data.DisasterSerial);
-				}
-			}
-			else if (data.Status == 'OK')
-			{
-				displayDatacardStatusMsg('');
+				desinventar.datacards.showStatus('');
 				if (data.DisasterId != '')
 				{
 					jQuery('#cardsRecordSource').val('');
 					valid = setDICardFromId(RegionId, data.DisasterId, data.RecordNumber, data.RecordCount);
-					if (jQuery('#desinventarUserRoleValue').val() >= 2)
-					{
-						disenabutton($('btnDatacardEdit'), false);
-					}
+					desinventar.datacards.navigation.updateByUserRole();
 					if (myCmd == 'getDisasterIdFromSerial')
 					{
-						displayDatacardStatusMsg('msgDatacardFound');
+						desinventar.datacards.showStatus('msgDatacardFound');
 					}
 				}
 				else
 				{
-					displayDatacardStatusMsg('msgDatacardNotFound');
+					desinventar.datacards.showStatus('msgDatacardNotFound');
 					bReturn = false;
 				}
 			}
@@ -899,7 +700,7 @@ function requestDatacard(myCmd, myValue)
 function doDatacardFind()
 {
 	// We can only search datacards when in VIEW mode
-	if (jQuery('#DICard #Status').val() !== 'VIEW') {
+	if (desinventar.datacards.navigation.getStatus() !== 'VIEW') {
 		return false;
 	}
 	if(jQuery('#txtDatacardFind').val() !='')
@@ -908,56 +709,9 @@ function doDatacardFind()
 	}
 }
 
-function doDatacardClear()
-{
-	jQuery('#DisasterId').val('');
-	$('DICard').reset();
-	jQuery('#DatacardCommand').val('insertDICard');
-	jQuery('#cardsRecordNumber').val(0);
-	jQuery('div.Datacard table.EffectListPeople .clsEffectNumeric').each(function() {
-		jQuery(this).val(0);
-		jQuery(this).jecValue('',false);
-	});
-	jQuery('div.Datacard select.clsEffectSector').each(function() {
-		jQuery(this).val(0); // There weren't by default
-	});
-
-	jQuery('#DICard .inputDouble').each(function() {
-		jQuery(this).val(0);
-	});
-	jQuery('#DICard .inputInteger').each(function() {
-		jQuery(this).val(0);
-	});
-	jQuery('#DICard #DisasterBeginTime0').val('');
-	jQuery('#DICard #DisasterBeginTime1').val('');
-	jQuery('#DICard #DisasterBeginTime2').val('');
-	jQuery('#DICard #EventDuration').val(0);
-}
-
-function doDatacardNew()
-{
-
-	DisableEnableForm($('DICard'), false);
-	jQuery('#DisasterBeginTime0').focus();
-	displayDatacardStatusMsg('msgDatacardFill');
-	changeOptions('btnDatacardNew');
-	jQuery('#divRecordNavigationInfo').hide();
-	jQuery('#DICard #Status').val('NEW');
-
-	// Clear values of following sublevels
-	var GeoLevelCount = jQuery('.GeoLevelSelect').size() - 1;
-	for(var i = 1; i < GeoLevelCount; i++)
-	{
-		var mySelect = jQuery('#divDatacard .tblGeography #GeoLevel' + i);
-		mySelect.empty();
-		mySelect.append(jQuery('<option>', { value : '' }).text(''));
-		mySelect.disable();
-	}
-}
-
 function doDatacardEdit()
 {
-	displayDatacardStatusMsg('');
+	desinventar.datacards.showStatus('');
 	var RegionId = jQuery('#desinventarRegionId').val();
 	jQuery.post(jQuery('#desinventarURL').val() + '/',
 		{
@@ -969,12 +723,12 @@ function doDatacardEdit()
 		{
 			if (data.DatacardStatus == 'RESERVED')
 			{
-				DisableEnableForm($('DICard'), false);
+				desinventar.datacards.toggleFormEdit($('DICard'), false);
 				jQuery('#PrevDisasterSerial').val(jQuery('#DisasterSerial').val());
 				jQuery('#DisasterBeginTime0').focus();
 				jQuery('#DatacardCommand').val('updateDICard');
-				displayDatacardStatusMsg('msgDatacardFill');
-				changeOptions('btnDatacardEdit');
+				desinventar.datacards.showStatus('msgDatacardFill');
+				desinventar.datacards.navigation.setEditMode();
 
 				// Clear values of following sublevels
 				var GeoLevelCount = jQuery('.GeoLevelSelect').size() - 1;
@@ -984,11 +738,11 @@ function doDatacardEdit()
 					mySelect.disable();
 				}
 				updateGeoLevelSelect(jQuery('#DICard #GeographyId').val(), true);
-				jQuery('#DICard #Status').val('EDIT');
+				desinventar.datacards.navigation.setStatus('EDIT');
 			}
 			else
 			{
-				displayDatacardStatusMsg('msgDatacardIsLocked');
+				desinventar.datacards.showStatus('msgDatacardIsLocked');
 			}
 		},
 		'json'
@@ -1001,8 +755,7 @@ function doDatacardSave()
 	var cmd = jQuery('#DatacardCommand').val();
 	var DisasterSerial = jQuery('#DisasterSerial').val();
 	var PrevDisasterSerial = jQuery('#PrevDisasterSerial').val();
-	var Status = jQuery('#DICard #Status').val();
-
+	var Status = desinventar.datacards.navigation.getStatus();
 	if (bContinue > 0)
 	{
 		var error_count = 0;
@@ -1025,7 +778,7 @@ function doDatacardSave()
 		if (error_count > 0)
 		{
 			bContinue = 0;
-			displayDatacardStatusMsg('msgDatacardInvalidIntegerNumber');
+			desinventar.datacards.showStatus('msgDatacardInvalidIntegerNumber');
 		}
 		if (error_count < 1)
 		{
@@ -1060,7 +813,7 @@ function doDatacardSave()
 			if (error_count > 0)
 			{
 				bContinue = 0;
-				displayDatacardStatusMsg('msgDatacardInvalidFloatNumber');
+				desinventar.datacards.showStatus('msgDatacardInvalidFloatNumber');
 			}
 		}
 	}	
@@ -1070,7 +823,7 @@ function doDatacardSave()
 		// Validate Record Status
 		if (jQuery('#DICard #RecordStatus').val() == '')
 		{
-			displayDatacardStatusMsg('msgDatacardWithoutStatus');
+			desinventar.datacards.showStatus('msgDatacardWithoutStatus');
 			jQuery('#DICard #RecordStatus').highlight().focus();
 			bContinue = 0;
 		}
@@ -1086,7 +839,7 @@ function doDatacardSave()
 			DisasterSource = jQuery.trim(DisasterSource);
 			if (DisasterSource == '')
 			{
-				displayDatacardStatusMsg('msgDatacardWithoutSource');
+				desinventar.datacards.showStatus('msgDatacardWithoutSource');
 				jQuery('#DICard #DisasterSource').highlight().focus();
 				jQuery('#DICard #RecordStatus').highlight();
 				bContinue = 0;
@@ -1102,7 +855,7 @@ function doDatacardSave()
 		{
 			if (jQuery('#desinventarUserRoleValue').val() <= 2)
 			{
-				displayDatacardStatusMsg('msgDatacardInvalidStatus');
+				desinventar.datacards.showStatus('msgDatacardInvalidStatus');
 				jQuery('#DICard #RecordStatus').highlight().focus();
 				bContinue = 0;
 			}
@@ -1111,7 +864,7 @@ function doDatacardSave()
 	
 	if ( (bContinue > 0) && (jQuery('#GeographyId').val() == '') )
 	{
-		displayDatacardStatusMsg('msgDatacardInvalidGeography');
+		desinventar.datacards.showStatus('msgDatacardInvalidGeography');
 		jQuery('.GeoLevelSelect').highlight();
 		jQuery('#GeoLevel0').focus();
 		bContinue = 0;
@@ -1134,13 +887,13 @@ function doDatacardSave()
 	// Use AJAX to save datacard
 	if (bContinue > 0)
 	{
-		if (jQuery('#DICard #Status').val() == 'SAVING')
+		if (desinventar.datacards.navigation.getStatus() == 'SAVING')
 		{
 			// Do Nothing.. already saving datacard...
 		}
 		else
 		{
-			jQuery('#DICard #Status').val('SAVING');
+			desinventar.datacards.navigation.setStatus('SAVING');
 			jQuery.post(jQuery('#desinventarURL').val() + '/cards.php',
 				{
 					'cmd'            : 'existDisasterSerial',
@@ -1165,8 +918,8 @@ function doDatacardSave()
 					}
 					if (bContinue < 1)
 					{
-						displayDatacardStatusMsg('msgDatacardDuplicatedSerial');
-						jQuery('#DICard #Status').val(Status);
+						desinventar.datacards.showStatus('msgDatacardDuplicatedSerial');
+						desinventar.datacards.navigation.setStatus(Status);
 						jQuery('#DICard #DisasterSerial').highlight().focus();
 					}
 					if (bContinue > 0)
@@ -1181,7 +934,7 @@ function doDatacardSave()
 						}
 						else
 						{
-							displayDatacardStatusMsg('msgDatacardFieldsError');
+							desinventar.datacards.showStatus('msgDatacardFieldsError');
 						}
 					}
 				},
@@ -1193,7 +946,7 @@ function doDatacardSave()
 
 function doDatacardCancel()
 {
-	if (jQuery('#DICard #Status').val() == 'EDIT')
+	if (desinventar.datacards.navigation.getStatus() == 'EDIT')
 	{
 		jQuery.post(jQuery('#desinventarURL').val() + '/',
 			{
@@ -1203,19 +956,16 @@ function doDatacardCancel()
 			},
 			function(data)
 			{
-				DisableEnableForm($('DICard'), true);
-				changeOptions('btnDatacardCancel');
+				desinventar.datacards.toggleFormEdit($('DICard'), true);
+				desinventar.datacards.navigation.setViewMode();
 				// clear Help text area
 				showtip('','#ffffff');
 
 				valid = setDICardFromId(jQuery('#desinventarRegionId').val(), jQuery('#DisasterId').val(), jQuery('#cardsRecordNumber').val(), jQuery('#cardsRecordCount').val());
-				if (jQuery('#desinventarUserRoleValue').val() >= 2)
-				{
-					disenabutton($('btnDatacardEdit'), false);
-				}
-				displayDatacardStatusMsg('');
-				doDatacardNavButtonsEnable();
-				jQuery('#DICard #Status').val('VIEW');
+				desinventar.datacards.navigation.setStatus('VIEW');
+				desinventar.datacards.navigation.updateByUserRole();
+				desinventar.datacards.showStatus('');
+				desinventar.datacards.navigation.enable();
 			},
 			'json'
 		);
@@ -1223,13 +973,13 @@ function doDatacardCancel()
 	else
 	{
 		$('DICard').reset();
-		DisableEnableForm($('DICard'), true);
-		changeOptions('btnDatacardCancel');
+		desinventar.datacards.toggleFormEdit($('DICard'), true);
+		desinventar.datacards.navigation.setViewMode();
 		// clear Help text area
 		showtip('','#ffffff');
-		displayDatacardStatusMsg('msgDatacardStartNew');
-		doDatacardNavButtonsEnable();
-		jQuery('#DICard #Status').val('');
+		desinventar.datacards.showStatus('msgDatacardStartNew');
+		desinventar.datacards.navigation.enable();
+		desinventar.datacards.navigation.setStatus('');
 	}
 	if (jQuery('div.Datacard #DisasterId').val() == '')
 	{
@@ -1241,17 +991,14 @@ function doDatacardCancel()
 
 function doDatacardGotoFirst()
 {
-	displayDatacardStatusMsg('');
+	desinventar.datacards.showStatus('');
 	bFound = requestDatacard('getDisasterIdFirst', jQuery('#DisasterId').val());
-	if (jQuery('#desinventarUserRoleValue').val() >= 2)
-	{
-		disenabutton($('btnDatacardEdit'), false);
-	}
+	desinventar.datacards.navigation.updateByUserRole();
 } //doDatacardGotoFirst()
 
 function doDatacardGotoLast()
 {
-	displayDatacardStatusMsg('');
+	desinventar.datacards.showStatus('');
 	if (jQuery('#cardsRecordSource').val() == 'data')
 	{
 		var RecordCount = parseInt(jQuery('#cardsRecordCount').val());
@@ -1262,15 +1009,12 @@ function doDatacardGotoLast()
 	{
 		bFound = requestDatacard('getDisasterIdLast', jQuery('#DisasterId').val());
 	}
-	if (jQuery('#desinventarUserRoleValue').val() >= 2)
-	{
-		disenabutton($('btnDatacardEdit'), false);
-	}
+	desinventar.datacards.navigation.updateByUserRole();
 } //doDatacardGotoLast()
 
 function doDatacardGotoPrev()
 {
-	displayDatacardStatusMsg('');
+	desinventar.datacards.showStatus('');
 	if (jQuery('#cardsRecordSource').val() == 'data')
 	{
 		var RecordNumber = parseInt(jQuery('#cardsRecordNumber').val());
@@ -1286,18 +1030,15 @@ function doDatacardGotoPrev()
 		bFound = requestDatacard('getDisasterIdPrev', jQuery('#cardsRecordNumber').val());
 		if (bFound == false)
 		{
-			displayDatacardStatusMsg('msgDatacardNotFound');
+			desinventar.datacards.showStatus('msgDatacardNotFound');
 		}
 	}
-	if (jQuery('#desinventarUserRoleValue').val() >= 2)
-	{
-		disenabutton($('btnDatacardEdit'), false);
-	}
+	desinventar.datacards.navigation.updateByUserRole();
 } //doDatacardGotoPrev()
 
 function doDatacardGotoNext()
 {
-	displayDatacardStatusMsg('');
+	desinventar.datacards.showStatus('');
 	if (jQuery('#cardsRecordSource').val() == 'data')
 	{
 		var RecordNumber = parseInt(jQuery('#cardsRecordNumber').val());
@@ -1313,22 +1054,11 @@ function doDatacardGotoNext()
 		bFound = requestDatacard('getDisasterIdNext', jQuery('#cardsRecordNumber').val());
 		if (bFound == false)
 		{
-			displayDatacardStatusMsg('msgDatacardNotFound');
+			desinventar.datacards.showStatus('msgDatacardNotFound');
 		}
 	}
-	if (jQuery('#desinventarUserRoleValue').val() >= 2)
-	{
-		disenabutton($('btnDatacardEdit'), false);
-	}
+	desinventar.datacards.navigation.updateByUserRole();
 } //doDatacardGotoNext()
-
-function doDatacardSuggestSerial()
-{
-	if (jQuery('#DisasterBeginTime0').val() != '')
-	{
-		requestDatacard('getNextSerial', jQuery('#DisasterBeginTime0').val());
-	}
-} //doDatacardSuggestSerial()
 
 // SET DATACARD FORM
 function setElementValue(formElement, value)
@@ -1365,35 +1095,26 @@ function setDICardFromId(prmRegionId, prmDisasterId, prmRecordNumber, prmRecordC
 {
 	jQuery('#cardsRecordNumber').val(prmRecordNumber);
 	jQuery('#cardsRecordCount').val(prmRecordCount);
-	jQuery.post(jQuery('#desinventarURL').val() + '/cards.php',
+	desinventar.datacards.read(prmRegionId, prmDisasterId).then(function(data) {
+		jQuery('#DICard .clsEffectNumeric').each(function() {
+			jQuery(this).jecValue(data[jQuery(this).attr('id')], true);
+		});
+		setDICard(prmRegionId, data);
+		jQuery('#divRecordNavigationInfo').hide();
+		var RecordNumber = parseInt(jQuery('#cardsRecordNumber').val());
+		var RecordCount  = parseInt(jQuery('#cardsRecordCount').val());
+		if (RecordNumber > 0)
 		{
-			'cmd'       : 'getDatacard',
-			'RegionId'  : prmRegionId,
-			'DisasterId': prmDisasterId
-		},
-		function(data)
-		{
-			jQuery('#DICard .clsEffectNumeric').each(function() {
-				jQuery(this).jecValue(data[jQuery(this).attr('id')], true);
-			});
-			setDICard(prmRegionId, data);
-			jQuery('#divRecordNavigationInfo').hide();
-			var RecordNumber = parseInt(jQuery('#cardsRecordNumber').val());
-			var RecordCount  = parseInt(jQuery('#cardsRecordCount').val());
-			if (RecordNumber > 0)
-			{
-				jQuery('#divRecordNavigationInfo').show();
-				jQuery('#RecordNumber').text(RecordNumber);
-				jQuery('#RecordCount').text(RecordCount);
-			}
-			doDatacardNavButtonsEnable();
-			jQuery('#DICard #Status').val('VIEW');
-			return true;
-		},
-		'json'
-	);
+			jQuery('#divRecordNavigationInfo').show();
+			jQuery('#RecordNumber').text(RecordNumber);
+			jQuery('#RecordCount').text(RecordCount);
+		}
+		desinventar.datacards.navigation.setStatus('VIEW');
+		desinventar.datacards.navigation.enable();
+		return true;
+	});
 	return false;
-} //setDICardFromId()
+}
 
 function setDICard(prmRegionId, arr)
 {
@@ -1436,11 +1157,7 @@ function setDICard(prmRegionId, arr)
 		}
 	});
 	
-	// Enable Edit Button according to Role
-	if (jQuery('#desinventarUserRoleValue').val() >= 2)
-	{
-		disenabutton($('btnDatacardEdit'), false);
-	}
+	desinventar.datacards.navigation.updateByUserRole();
 } //setDICard
 
 function validateInputDouble(prmValue)

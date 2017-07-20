@@ -16,10 +16,8 @@ if (! isset($_SERVER['DESINVENTAR_SRC']))
 
 define('SRCDIR'  , $_SERVER['DESINVENTAR_SRC']);
 
-$loader = require_once __DIR__ . '/../../vendor/autoload.php';
-$loader->add('DesInventar', __DIR__. '/../../src');
+require_once __DIR__ . '/../../vendor/autoload.php';
 
-require_once __DIR__. '/../../src/common/fb_wrapper.php';
 $config = DesInventar\Common\ConfigLoader::getInstance(
 	array(
 		'/etc/desinventar/config.php',
@@ -268,8 +266,10 @@ if (MODE != 'command')
 	$t->assign('version'     , $config->version['version']);
 	$jsversion = $config->version['version'];
 	if ($config->flags['mode'] == 'devel') {
-		$jsversion = $jsversion  . '-' . time();
+		$jsversion = $jsversion  . '-' . \DesInventar\Common\Util::getUrlSuffix();
+		$config->version['version'] = $jsversion;
 	}
+
 	$t->assign('jsversion'   , $jsversion);
 
 	// Configure DESINVENTAR (web) application location	
