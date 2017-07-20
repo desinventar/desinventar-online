@@ -17,6 +17,13 @@
   'use strict';
   var me = {};
 
+  function updateCloneButton() {
+    me.disableButton('btnDatacardClone');
+    if (me.getStatus() === 'VIEW') {
+      me.enableButton('btnDatacardClone');
+    }
+  }
+
   me.disableButton = function(buttonId) {
     $('#' + buttonId)
       .prop('disabled', true)
@@ -37,6 +44,14 @@
     } else {
       me.enableButton(Element.identify(butid));
     }
+  };
+
+  me.getStatus = function() {
+    return $('#DICard #Status').val();
+  };
+
+  me.setStatus = function(status) {
+    return $('#DICard #Status').val(status);
   };
 
   me.enable = function() {
@@ -62,6 +77,7 @@
       me.enableButton('btnDatacardGotoLast');
       me.enableButton('btnDatacardGotoNext');
     }
+    updateCloneButton();
   };
 
   me.disable = function() {
@@ -74,11 +90,13 @@
     if ($('#desinventarUserRoleValue').val() >= 2) {
       me.enableButton('btnDatacardEdit');
     }
+    updateCloneButton();
   };
 
   me.setEditMode = function() {
     me.disableButton('btnDatacardNew');
     me.disableButton('btnDatacardEdit');
+    me.disableButton('btnDatacardClone');
     me.disableButton('btnDatacardFind');
     me.enableButton('btnDatacardSave');
     me.enableButton('btnDatacardCancel');
@@ -91,6 +109,7 @@
     me.enableButton('btnDatacardFind');
     me.disableButton('btnDatacardSave');
     me.disableButton('btnDatacardCancel');
+    me.disableButton('btnDatacardClone');
     me.enable();
     if ($('#DisasterId').val() === '') {
       me.disableButton('btnDatacardEdit');
