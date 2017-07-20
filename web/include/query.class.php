@@ -3,6 +3,9 @@
  DesInventar - http://www.desinventar.org
  (c) 1998-2012 Corporacion OSSO
 */
+
+use Aura\Sql\ExtendedPdo;
+
 class Query //extends PDO
 {
 	public $RegionId = '';
@@ -95,7 +98,8 @@ class Query //extends PDO
 			return false;
 		}
 		try {
-			$pdo = new PDO('sqlite:' . $file_name);
+			$pdo = new ExtendedPdo('sqlite:' . $file_name);
+			$pdo->connect();
 			// set the error reporting attribute
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$pdo->setAttribute(PDO::ATTR_TIMEOUT, 15.0);
@@ -874,40 +878,6 @@ class Query //extends PDO
 		}
 		// (jhcaiced) SyncRecord should not appear in data grid
 		return $fld;
-	}
-	
-	public function getNextDisasterSerial($prmYear)
-	{
-		$NextSerial = '';
-		if ($prmYear != '')
-		{
-			//$sQuery = "SELECT COUNT(DisasterId) AS num FROM Disaster WHERE DisasterBeginTime LIKE '". $prmYear ."-%'";
-			//$res = $this->getresult($sQuery);
-			//$NextSerial = sprintf("%05d", $res['num'] + 1);
-			$sQuery = "SELECT DisasterSerial FROM Disaster WHERE DisasterSerial LIKE '" . $prmYear . "-%' ORDER BY DisasterSerial DESC LIMIT 1";
-			$res = $this->getresult($sQuery);
-			$MaxNumber = substr($res['DisasterSerial'], strlen($prmYear) + 1);
-			$MaxNumber = $MaxNumber + 1;
-			// Try incrementing the MaxNumber value until we find a disaster not used...
-			$bFound = 0;
-			while (! $bFound)
-			{
-				$NextSerial = sprintf("%05d", $MaxNumber);
-				$sQuery = "SELECT COUNT(DisasterId) AS NUM FROM Disaster WHERE DisasterSerial='" . $prmYear . '-' . $NextSerial . "'";
-				$iCount = 0;
-				$res = $this->getresult($sQuery);
-				$iCount = $res['NUM'];
-				if ($iCount > 0)
-				{
-					$MaxNumber++;
-				}
-				else
-				{
-					$bFound = true;
-				}
-			} //while
-		}
-		return $NextSerial;
 	}
 
 	public function getDisasterBySerial($diser)

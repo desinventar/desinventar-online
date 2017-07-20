@@ -3,6 +3,8 @@
  DesInventar - http://www.desinventar.org
  (c) 1998-2015 Corporacion OSSO
 */
+use Aura\Sql\ExtendedPdo;
+
 class DIRegionDB extends DIRegion
 {
 	public function __construct($prmSession, $prmRegionId)
@@ -34,7 +36,7 @@ class DIRegionDB extends DIRegion
 		{
 			try
 			{
-				$conn = new PDO('sqlite:' . $DBFile);
+				$conn = new ExtendedPdo('sqlite:' . $DBFile);
 				// set the error reporting attribute
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				$conn->setAttribute(PDO::ATTR_TIMEOUT, 5.0);
