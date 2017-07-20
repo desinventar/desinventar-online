@@ -105,7 +105,7 @@ if (isset($_SERVER['HTTP_HOST']))
 	}
 	// Define the Smarty library directory (installed by composer)
 	define('SMARTYDIR', SRCDIR  . '/vendor/smarty/smarty/libs');
-	define('JPGRAPHDIR', $config->paths['jpgraph_dir']);
+	define('JPGRAPHDIR', SRCDIR . '/vendor/jpgraph/src');
 }
 else
 {
@@ -157,7 +157,7 @@ require_once(BASE . '/include/digeography.class.php');
 require_once(BASE . '/include/digeolevel.class.php');
 require_once(BASE . '/include/digeocarto.class.php');
 require_once(BASE . '/include/didisaster.class.php');
-require_once($config->paths['druuid_dir'] . '/lib.uuid.php');
+require_once(SRCDIR . '/vendor/DrUUID/lib.uuid.php');
 
 // Set a default exception handler to avoid ugly messages in screen
 if ($config->flags['mode'] != 'devel') {
