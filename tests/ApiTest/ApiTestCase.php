@@ -7,11 +7,12 @@ use \GuzzleHttp\Client;
 class ApiTestCase extends \PHPUnit_Framework_TestCase
 {
     protected $http;
+    protected $baseUrl;
 
     public function setUp()
     {
-        $apiUrl = $this->url = $this->getVar('DESINVENTAR_API_URL', '');
-        $this->http = new Client(['base_uri' => $apiUrl]);
+        $this->baseUrl = $this->getVar('DESINVENTAR_API_URL', '');
+        $this->http = new Client(['base_uri' => $this->baseUrl]);
     }
 
     public function tearDown()
