@@ -28,6 +28,11 @@
 	background-image: url(../images/saveicon.png) !important;
 	background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
 }
+.bclone {
+	background-color: white;
+	background-image: url(../images/cloneicon.png) !important;
+	background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
+}
 .bprint {
 	background-color: white;
 	background-image: url(../images/printicon.png) !important;
@@ -251,6 +256,12 @@ select.small  {
 	font-family:arial,tahoma,helvetica,cursive; font-size:10px; 
 	color:#000000; background-color:#ffffff; border-style:solid; 
 	border-width:1px; }
+span.select2-dropdown {
+	z-index: 15000;
+}
+#divDatabaseCreateWin .line {
+	line-height: 20px;
+}
 option  {
 	font-family:arial,tahoma,helvetica,cursive; font-size:11px; 
 	color:#000000; background-color:#ffffff; border-style:none; 

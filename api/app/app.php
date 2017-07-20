@@ -1,23 +1,62 @@
 <?php
-// /app/app.php
 require_once __DIR__.'/bootstrap.php';
 
-use Symfony\Component\HttpFoundation\Response;
+use \Psr\Http\Message\ServerRequestInterface as Request;
+use \Psr\Http\Message\ResponseInterface as Response;
 
-$app = new Silex\Application();
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Handler\ErrorLogHandler;
 
-// Initialize some variables from the legacy code
-$app['user_session'] = $us;
-$app['config'] = $config;
+use Api\Service\JsonApi;
 
-$app->get('/', function () {
-    return new Response('DesInventar Api Server (c) Corporación OSSO - 2016');
+$slimSettings = [
+    'displayErrorDetails' => true,
+    'addContentLengthHeader' => false,
+];
+
+$app = new \Slim\App(['settings' => $slimSettings]);
+$container = $app->getContainer();
+
+// Configure logger, and then replace it with a logger to the httpd server
+$container['logger'] = function () {
+    $logger = new Logger('logger');
+    $logger->pushHandler(new StreamHandler('php://stderr'));
+    $logger->pushHandler(new ErrorLogHandler(ErrorLogHandler::OPERATING_SYSTEM, Logger::WARNING));
+    return $logger;
+};
+
+// @TODO: Use a class for this instead of a global from loader.php
+$container['config'] = $config;
+
+// @TODO: Use a class for this instead of a global from laoder.php
+$container['user_session'] = $us;
+
+$container['jsonapi'] = function ($c) {
+    return new JsonApi($c->response);
+};
+
+$container['notFoundHandler'] = function ($container) {
+    return function ($request, $response) use ($container) {
+        throw new \Exception('Page not found');
+    };
+};
+
+$container['errorHandler'] = function ($container) {
+    return function ($request, $response, \Exception $exception) use ($container) {
+        return $container['jsonapi']->error([
+            'code' => $exception->getCode(),
+            'message' => $exception->getMessage()
+        ], 404);
+    };
+};
+
+$app->get('/', function (Request $request, Response $response) {
+    $answer = [
+        'text' => 'DesInventar Api Server',
+        'copyright' => '(c) Corporación OSSO - 1998 - 2017'
+    ];
+    return $this['jsonapi']->data($answer);
 });
-
-$app->get('/version', function () use ($app) {
-    return $app->json(array('version' => time()));
-});
-
-$app->mount('/common', new DesInventar\Api\CommonControllerProvider());
 
 return $app;

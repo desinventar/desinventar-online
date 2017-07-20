@@ -1,5 +1,5 @@
 #!/usr/bin/php -d session.save_path='/tmp'
-<script language="php">
+<?php
 	//require_once('../../web/include/loader.php');
 	$FileName    = $argv[1];
 	$LangIsoCode = $argv[2];
@@ -30,4 +30,3 @@
 		}
 	}
 	exit(0);
-</script>

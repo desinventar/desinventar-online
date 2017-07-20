@@ -1453,6 +1453,18 @@
 			<Text LangIsoCode="por">Salvar registro no banco de dados lembre-se de incluir todos os campos obrigatórios</Text>
 			<Text LangIsoCode="fre">Enregistrer enregistrer sur base de données n'oubliez pas d'inclure tous les champs obligatoires</Text>
 		</Message>
+		<Message id="datacardCloneTitle">
+			<Text LangIsoCode="eng">Copy datacard</Text>
+			<Text LangIsoCode="spa">Copiar ficha</Text>
+			<Text LangIsoCode="por">Copiar um formulário</Text>
+			<Text LangIsoCode="fre">Copier le datacard</Text>
+		</Message>
+		<Message id="datacardCloneTooltip">
+			<Text LangIsoCode="eng">Create a new datacard using the information from this datacard</Text>
+			<Text LangIsoCode="spa">Crear una nueva ficha a partir de los datos de la ficha actual</Text>
+			<Text LangIsoCode="por">Crie um novo datacard usando as informações gerais desse datacard</Text>
+			<Text LangIsoCode="fre">Créez un nouveau datacard en utilisant les informations générales de ce datacard</Text>
+		</Message>
 		<Message id="bcancel">
 			<Text LangIsoCode="eng">Cancel</Text>
 			<Text LangIsoCode="spa">Cancelar</Text>
@@ -1466,10 +1478,10 @@
 			<Text LangIsoCode="fre">Abandonner la carte de données</Text>
 		</Message>
 		<Message id="tcandesc">
-			<Text LangIsoCode="eng">no se guardará ni modificará la información.</Text>
-			<Text LangIsoCode="spa">Abandone la actual ficha</Text>
-			<Text LangIsoCode="por">Discard current record. Information will not be saved or modified.</Text>
-			<Text LangIsoCode="fre">no se guardará ni modificará la información.</Text>
+			<Text LangIsoCode="eng">Changes will not be saved.</Text>
+			<Text LangIsoCode="spa">no se guardará ni modificará la información.</Text>
+			<Text LangIsoCode="por">As informações não serão salvas ou modificadas.</Text>
+			<Text LangIsoCode="fre">Les informations ne seront ni sauvegardées ni modifiées</Text>
 		</Message>
 		<Message id="bclean">
 			<Text LangIsoCode="eng">Clear</Text>

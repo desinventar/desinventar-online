@@ -7,10 +7,12 @@ Thumbs.db
 thumbs.db
 nbproject
 *.komodoproject
+*.sublime-*
 .idea
 vendor/*
 config/*_local.*
 node_modules
+.vscode
 npm-debug.log
 bower_components
 web/scripts/bundle.js

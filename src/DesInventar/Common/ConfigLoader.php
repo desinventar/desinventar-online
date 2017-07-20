@@ -82,10 +82,10 @@ class ConfigLoader
         //@TODO: Implement this function
     }
 
-    public static function getInstance($filepath, $type = 'php')
+    public static function getInstance($customConfigFileList, $defaultConfigFile, $type = 'php')
     {
         if (!isset(self::$instance)) {
-            self::$instance = new self($filepath, $type);
+            self::$instance = new self($customConfigFileList, $defaultConfigFile, $type);
         }
         return self::$instance;
     }
@@ -98,9 +98,8 @@ class ConfigLoader
     {
         if (isset($this->options[$key])) {
             return $this->options[$key];
-        } else {
-            trigger_error("Key $val does not exist", E_USER_NOTICE);
         }
+        trigger_error("Key $key does not exist", E_USER_NOTICE);
         return false;
     }
 
