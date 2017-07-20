@@ -1,65 +1,62 @@
 <?php
 require_once __DIR__.'/bootstrap.php';
 
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Debug\ErrorHandler;
+use \Psr\Http\Message\ServerRequestInterface as Request;
+use \Psr\Http\Message\ResponseInterface as Response;
 
-use Monolog\Handler\ErrorLogHandler;
 use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+use Monolog\Handler\ErrorLogHandler;
 
 use Api\Service\JsonApi;
 
-$app = new Silex\Application();
+$slimSettings = [
+    'displayErrorDetails' => true,
+    'addContentLengthHeader' => false,
+];
 
-// Initialize some variables from the legacy code
-$app['user_session'] = $us;
-$app['config'] = $config;
-
-if ($app['config']->flags['debug']) {
-    $app['debug'] = true;
-}
+$app = new \Slim\App(['settings' => $slimSettings]);
+$container = $app->getContainer();
 
 // Configure logger, and then replace it with a logger to the httpd server
-$app->register(new Silex\Provider\MonologServiceProvider(), array(
-    'monolog.logfile' => 'php://stderr',
-    'monolog.level' => Logger::WARNING,
-));
-$app['monolog'] = $app->share($app->extend('monolog', function ($monolog, $app) {
-    $monolog->setHandlers([new ErrorLogHandler(ErrorLogHandler::OPERATING_SYSTEM, Logger::WARNING)]);
-    return $monolog;
-}));
+$container['logger'] = function () {
+    $logger = new Logger('logger');
+    $logger->pushHandler(new StreamHandler('php://stderr'));
+    $logger->pushHandler(new ErrorLogHandler(ErrorLogHandler::OPERATING_SYSTEM, Logger::WARNING));
+    return $logger;
+};
 
-$app['jsonapi'] = $app->share(function () {
-    return new JsonApi();
-});
+// @TODO: Use a class for this instead of a global from loader.php
+$container['config'] = $config;
 
-// Convert errors in to Exceptions
-ErrorHandler::register();
+// @TODO: Use a class for this instead of a global from laoder.php
+$container['user_session'] = $us;
 
-$app->error(function (\Exception $e, $code) use ($app) {
-    $response = [
-        'code' => $code,
-        'message' => 'Something went wrong with this request',
+$container['jsonapi'] = function ($c) {
+    return new JsonApi($c->response);
+};
+
+$container['notFoundHandler'] = function ($container) {
+    return function ($request, $response) use ($container) {
+        throw new \Exception('Page not found');
+    };
+};
+
+$container['errorHandler'] = function ($container) {
+    return function ($request, $response, \Exception $exception) use ($container) {
+        return $container['jsonapi']->error([
+            'code' => $exception->getCode(),
+            'message' => $exception->getMessage()
+        ], 404);
+    };
+};
+
+$app->get('/', function (Request $request, Response $response) {
+    $answer = [
+        'text' => 'DesInventar Api Server',
+        'copyright' => '(c) Corporación OSSO - 1998 - 2017'
     ];
-    if ($app['debug']) {
-        $response['message'] = $e->getMessage();
-    }
-    return $app['jsonapi']->error($response);
+    return $this['jsonapi']->data($answer);
 });
-
-$app->before(function (Request $request) {
-    if ((0 === strpos($request->headers->get('Content-Type'), 'application/json')) ||
-        (0 === strpos($request->headers->get('Content-Type'), 'application/vnd.api+json'))) {
-        $data = json_decode($request->getContent(), true);
-        $request->request->replace(is_array($data) ? $data : array());
-    }
-});
-
-$app->get('/', function () {
-    return new Response('DesInventar Api Server (c) Corporación OSSO - 2017');
-});
-
-$app->mount('/common', new Api\Controller\CommonControllerProvider());
 
 return $app;
