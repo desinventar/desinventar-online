@@ -7,7 +7,6 @@ services:
      - "8081:80"
     volumes:
      - .:/usr/share/desinventar
-     - /usr/share/desinventar/vendor
   devel:
     image: "desinventar/online:latest"
     depends_on:
