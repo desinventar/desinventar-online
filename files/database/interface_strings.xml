@@ -1462,7 +1462,7 @@
 		<Message id="datacardCloneTooltip">
 			<Text LangIsoCode="eng">Create a new datacard using the information from this datacard</Text>
 			<Text LangIsoCode="spa">Crear una nueva ficha a partir de los datos de la ficha actual</Text>
-			<Text LangIsoCode="por">Crie um novo datacard usando as informações gerais desse datacard</Text>
+			<Text LangIsoCode="por">Crie um novo formulário usando as informações gerais desse formulário</Text>
 			<Text LangIsoCode="fre">Créez un nouveau datacard en utilisant les informations générales de ce datacard</Text>
 		</Message>
 		<Message id="bcancel">
@@ -1834,7 +1834,7 @@
 		<Message id="msgDatacard_WithoutStatus">
 			<Text LangIsoCode="eng">Cannot save datacard without state.</Text>
 			<Text LangIsoCode="spa">No puede guardar ficha sin estado.</Text>
-			<Text LangIsoCode="por">Não é possível salvar datacard sem estado</Text>
+			<Text LangIsoCode="por">Não é possível salvar formulário sem estado</Text>
 			<Text LangIsoCode="fre">Impossible d'enregistrer la carte de données sans état</Text>
 		</Message>
 		<Message id="msgDatacardInvalidStatus">
