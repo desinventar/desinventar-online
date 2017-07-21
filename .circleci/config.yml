@@ -1,0 +1,51 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: desinventar/centos6:v20170720-01
+    working_directory: /usr/share/desinventar
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - composer-v1-{{ checksum "composer.json" }}
+      - run:
+          name: Install composer dependencies
+          command: |
+            composer install --no-scripts --no-autoloader --prefer-source --no-interaction
+            composer dump-autoload --optimize
+      - save_cache:
+          key: composer-v1-{{ checksum "composer.json" }}
+          paths:
+          - vendor
+      - restore_cache:
+          keys:
+            - node-v1-{{ checksum "package.json" }}
+      - run:
+          name: Install Node dependencies
+          command: npm install
+      - save_cache:
+          key: node-v1-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: Application Setup
+          command: |
+            /bin/cp files/apache/desinventar-centos-default.* /etc/httpd/conf.d/
+            sed -i 's#logs/access_log#/dev/stderr#; s#logs/error_log#/dev/stderr#; s#^Listen 80$#Listen 8081#' /etc/httpd/conf/httpd.conf
+            /bin/cp files/apache/desinventar-centos-default.conf /etc/httpd/conf.d/web.conf
+            sed -i 's#:80#:8081#' /etc/httpd/conf.d/web.conf
+            mkdir -p /var/lib/desinventar/main/
+            /bin/cp files/database/*.db /var/lib/desinventar/main/
+            chown -R apache:apache /var/lib/desinventar
+            mkdir -p /var/lib/desinventar/worldmap
+            unzip files/worldmap/world_adm0.zip -d /var/lib/desinventar/worldmap
+            /bin/cp files/worldmap/world_adm0.map /var/lib/desinventar/worldmap/
+            chown -R apache:apache /var/lib/desinventar/worldmap
+            /etc/init.d/httpd restart
+      - run:
+          name: Validate code
+          command: make
+      - run:
+          name: Running Tests
+          command: make test

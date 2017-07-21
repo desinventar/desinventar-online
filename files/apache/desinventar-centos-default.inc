@@ -29,5 +29,3 @@ Alias /api /usr/share/desinventar/api/web
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [QSA,L]
 </Directory>
-
-
