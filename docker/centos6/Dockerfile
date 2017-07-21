@@ -7,7 +7,10 @@ ADD desinventar.repo /etc/yum.repos.d/desinventar.repo
 RUN yum -y install epel-release
 RUN yum -y update
 
-RUN yum -y install git wget unzip tar
+RUN yum install -y http://opensource.wandisco.com/centos/6/git/x86_64/wandisco-git-release-6-1.noarch.rpm && \
+    yum install -y git
+
+RUN yum -y install wget unzip tar
 
 RUN yum -y install yum install httpd gd giflib sqlite
 RUN yum -y install php php-common php-cli php-gd php-xml php-pdo php-mbstring
@@ -20,7 +23,7 @@ RUN yum -y install yum-plugin-replace
 RUN yum -y replace php-common --replace-with=php56w-common
 
 RUN yum -y --enablerepo=desinventar install  php56w-dbase
-RUN yum -y --enablerepo=desinventar install liberation-fonts-extras php-jpgraph3 php-DrUUID
+RUN yum -y --enablerepo=desinventar install liberation-fonts-extras
 RUN yum -y --enablerepo=epel install mapserver proj proj-epsg proj-nad
 RUN cp /usr/libexec/mapserver /var/www/cgi-bin/mapserv
 
