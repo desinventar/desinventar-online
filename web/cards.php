@@ -120,12 +120,12 @@ else
 			if ($cmd == 'insertDICard')
 			{
 				$data = form2disaster($_POST, CMD_NEW);
+				$data['RecordAuthor'] = $us->UserId;
 			}
 			else
 			{
 				$data = form2disaster($_POST, CMD_UPDATE);
 			}
-			$data['RecordAuthor'] = $us->UserId;
 			$o = new DIDisaster($us, $data['DisasterId']);
 			$o->setFromArray($data);
 			if ($cmd == 'insertDICard')
