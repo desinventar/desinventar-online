@@ -93,21 +93,28 @@ class Query //extends PDO
 		return ERR_NO_ERROR;
 	}
 
+	public static function sqliteRegexp($pattern, $string) {
+		if(preg_match($pattern, $string)) {
+			return true;
+		}
+		return false;
+	}
+
 	public function openSqliteDatabase($file_name) {
 		if (!file_exists($file_name)) {
 			return false;
 		}
 		try {
-			$pdo = new ExtendedPdo('sqlite:' . $file_name);
-			$pdo->connect();
+			$pdo = new \Pdo('sqlite:' . $file_name);
 			// set the error reporting attribute
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$pdo->setAttribute(PDO::ATTR_TIMEOUT, 15.0);
+			$pdo->sqliteCreateFunction('regexp', [__CLASS__, 'sqliteRegexp'], 2);
+			return new ExtendedPdo($pdo);
 		} catch (Exception $e) {
 			showErrorMsg(debug_backtrace(), $e, '');
 			return false;
 		}
-		return $pdo;
 	}
 
 	public function getassoc($sQuery)

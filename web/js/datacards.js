@@ -700,7 +700,8 @@ function requestDatacard(myCmd, myValue)
 function doDatacardFind()
 {
 	// We can only search datacards when in VIEW mode
-	if (desinventar.datacards.navigation.getStatus() !== 'VIEW') {
+	var status = desinventar.datacards.navigation.getStatus();
+	if (! (status === '' || status === 'VIEW')) {
 		return false;
 	}
 	if(jQuery('#txtDatacardFind').val() !='')

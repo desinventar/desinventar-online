@@ -4,8 +4,8 @@
 */
 function onReadyInit()
 {
-	jQuery('body').on('cmdDatabaseLoadData', function() {
-		doDatabaseLoadData();
+	jQuery('body').on('cmdDatabaseLoadData', function(e, params) {
+		doDatabaseLoadData(params);
 	});
 
 	jQuery(window).bind('hashchange', function(e) {
@@ -22,7 +22,7 @@ function onReadyInit()
 	});
 } //onReadyInit()
 
-function doDatabaseLoadData()
+function doDatabaseLoadData(params)
 {
 	jQuery.post(
 		jQuery('#desinventarURL').val() + '/',
@@ -35,6 +35,7 @@ function doDatabaseLoadData()
 			if (parseInt(data.Status) > 0)
 			{
 				jQuery('body').data('params', data.params);
+				desinventar.info = data.info;
 				//Compatibility with old methods desinventarinfo.tpl
 				jQuery('#desinventarUserId').val(data.params.UserId);
 				jQuery('#desinventarUserFullName').val(data.params.UserFullName);
@@ -73,9 +74,16 @@ function doDatabaseLoadData()
 				jQuery('#desinventarRegionId').val('');
 				window.location.hash = '';
 			}
-			// Trigger ViewportShow
-			jQuery('body').trigger('cmdViewportShow');
+			var updateViewport = true;
+			if ((typeof params !== 'undefined') && (typeof params.updateViewport !== 'undefined')) {
+				updateViewport = params.updateViewport;
+			}
+			if (updateViewport) {
+				// Trigger ViewportShow
+				jQuery('body').trigger('cmdViewportShow');
+			}
 		},
 		'json'
 	);
-} //doDatabaseLoadData()
+}
+
