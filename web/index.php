@@ -546,7 +546,7 @@ switch ($cmd)
 		$params['UserFullName']  = $us->getUserFullName();
 		$params['UserRole']      = $desinventarUserRole;
 		$params['UserRoleValue'] = $desinventarUserRoleValue;
-		$answer['RegionId'] = $RegionId;		
+		$answer['RegionId'] = $RegionId;
 		if ($RegionId != '')
 		{
 			if (DIRegion::existRegion($us, $RegionId))
@@ -571,6 +571,7 @@ switch ($cmd)
 				$ydb = $us->getDateRange();
 				$params['MinYear']       = substr($ydb[0], 0, 4);
 				$params['MaxYear']       = substr($ydb[1], 0, 4);
+				$answer['info'] = $r->getAllInfo($us->q->dreg);
 			}
 		}
 		$us->clearLocks();

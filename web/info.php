@@ -1,4 +1,4 @@
-<script language="php">
+<?php
 /*
   DesInventar - http://www.desinventar.org  
   (c) 1998-2012 Corporacion OSSO
@@ -114,6 +114,8 @@ switch($cmd)
 		$sett['GeoLimitMaxY']	= array($r->get('GeoLimitMaxY'), 'NUMBER');
 		$sett['PeriodBeginDate']= array($r->get('PeriodBeginDate'), 'DATE');
 		$sett['PeriodEndDate']	= array($r->get('PeriodEndDate'), 'DATE');
+		$sett['SerialSuffixSize'] = array($r->get('SerialSuffixSize'), 'NUMBER');
+		$sett['SerialCloneSuffixSize'] = array($r->get('SerialCloneSuffixSize'), 'NUMBER');
 		$t->assign('sett', $sett);
 		$UserList = $us->getUserList('');
 		$UserRoleList = $us->getRegionRoleList($RegionId);
@@ -181,4 +183,3 @@ $t->assign('dic', $us->q->queryLabelsFromGroup('DB', $lg));
 $t->assign('usern', $us->UserId);
 $t->force_compile   = true; # Force this template to always compile
 $t->display('info.tpl');
-</script>

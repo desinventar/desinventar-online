@@ -38,6 +38,11 @@ class UserSession
 		}
 	} //constructor
 
+	public function getConfig()
+	{
+		return $this->config;
+	}
+
 	public function isConnected() {
 		return (! empty($this->q->core));
 	}
