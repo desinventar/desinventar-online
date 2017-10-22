@@ -22,7 +22,7 @@ module.exports = {
   },
   resolve: {
     modules: [__dirname + "/node_modules"],
-    descriptionFiles: ["bower.json", "package.json"],
+    descriptionFiles: ["package.json"],
     mainFields: ["main", "browser"],
     mainFiles: ["index"]
   }
