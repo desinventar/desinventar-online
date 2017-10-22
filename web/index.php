@@ -11,6 +11,8 @@ require_once('include/geography_operations.php');
 require_once('include/database_operations.php');
 require_once('include/query_operations.php');
 
+use \DesInventar\Legacy\UserSession;
+
 $post = $_POST;
 $get  = $_GET;
 
@@ -61,7 +63,7 @@ switch ($cmd) {
         $answer = array();
         $UserId = getParameter('UserId');
         $UserPasswd = getParameter('UserPasswd');
-        if ($us->login($UserId, $UserPasswd, \UserSession::PASSWORD_IS_HASHED) > 0) {
+        if ($us->login($UserId, $UserPasswd, UserSession::PASSWORD_IS_HASHED) > 0) {
             $iReturn = ERR_NO_ERROR;    # Login success
             $user = array();
             $user['Id']        = $us->UserId;
@@ -113,7 +115,7 @@ switch ($cmd) {
         if ($iReturn > 0) {
             $UserPasswd = getParameter('UserPasswd', '');
             $UserPasswd2 = getParameter('UserPasswd2', '');
-            if ($us->validateUser($us->UserId, $_POST['UserPasswd'], \UserSession::PASSWORD_IS_HASHED) != '') {
+            if ($us->validateUser($us->UserId, $_POST['UserPasswd'], UserSession::PASSWORD_IS_HASHED) != '') {
                 $us->updateUserPasswd($us->UserId, $_POST['UserPasswd2']);
             } else {
                 $iReturn = ERR_DEFAULT_ERROR;
