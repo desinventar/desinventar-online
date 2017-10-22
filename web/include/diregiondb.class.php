@@ -1,7 +1,7 @@
 <?php
 /*
  DesInventar - http://www.desinventar.org
- (c) 1998-2015 Corporacion OSSO
+ (c) 1998-2017 Corporacion OSSO
 */
 use Aura\Sql\ExtendedPdo;
 
