@@ -32,7 +32,8 @@
  (c) Corporacion OSSO
 */
 
-const jQuery = require("jquery");
+var jQuery = require("jquery");
+require("jquery-ui/ui/widgets/tabs");
 
 module.exports = {
   init: onReadyMain

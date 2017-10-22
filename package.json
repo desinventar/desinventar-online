@@ -43,6 +43,7 @@
     "webpack": "^3.8.1"
   },
   "dependencies": {
-    "jquery": "1.11"
+    "jquery": "1.11",
+    "jquery-ui": "^1.12.1"
   }
 }
