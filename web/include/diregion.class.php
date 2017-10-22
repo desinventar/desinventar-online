@@ -23,6 +23,8 @@ class DIRegion extends DIObject
 		                      'GeoLimitMinY/DOUBLE,' . 
 		                      'GeoLimitMaxX/DOUBLE,' . 
 		                      'GeoLimitMaxY/DOUBLE,' .
+		                      'SerialSuffixSize/INTEGER,' .
+		                      'SerialCloneSuffixSize/INTEGER,' .
 		                      'OptionOutOfRange/INTEGER,' .
 		                      'OptionLanguageList/STRING,' .
 		                      'OptionOldName/STRING,' . 
@@ -36,7 +38,7 @@ class DIRegion extends DIObject
 		                      'InfoCartography/STRING,' .
 		                      'InfoAdminURL/STRING';
 		parent::__construct($prmSession);
-		$this->createFields($this->sInfoDef);		
+		$this->createFields($this->sInfoDef);
 		$this->addLanguageInfo('eng');
 		$this->set('PeriodBeginDate', '');
 		$this->set('PeriodEndDate', '');
@@ -160,6 +162,11 @@ class DIRegion extends DIObject
 	{
 		$iReturn = $this->saveToXML();
 		$this->updateCore();
+		$regionId = $this->get('RegionId');
+		if (!empty($regionId)) {
+			$this->session->open($regionId);
+			$this->updateInfo($this->session->q->dreg);
+		}
 		return $iReturn;
 	}
 	
@@ -209,7 +216,31 @@ class DIRegion extends DIObject
 		}
 		return $iReturn;
 	}
-	
+
+	protected function updateInfo($conn)
+	{
+		if (empty($conn)) {
+			return false;
+		}
+		if (empty($this->oField['info'])) {
+			return false;
+		}
+		$infoService = new \DesInventar\Service\RegionInfo($conn);
+		$infoService->deleteAll(array_keys($this->oField['info']));
+		$infoService->update($this->oField['info']);
+	}
+
+	public function getAllInfo($conn)
+	{
+		$fields = $this->fieldDefToArray($this->sInfoDef);
+		$keys = [];
+		foreach ($fields as $field) {
+			$keys[] = $field['name'];
+		}
+		$service = new \DesInventar\Service\RegionInfo($conn);
+		return $service->getAll($keys);
+	}
+
 	public function getLanguageList()
 	{
 		$LangIsoCode = $this->get('LangIsoCode');

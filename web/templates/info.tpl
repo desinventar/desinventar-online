@@ -13,7 +13,6 @@
 				<fieldset style="padding:5px 5px 5px 5px;">
 					<!-- GENERAL REGION INFO SECTION -->
 					<form id="frmDatabaseInfo" name="infofrm" method="post" action="{-$desinventarURL-}/info.php" target="ifinfo">
-					
 						<table>
 							<tr>
 								<td colspan="2">
@@ -76,7 +75,7 @@
 									<input type="submit" value="{-#bsave#-}"  class="line"/>
 									<input type="reset" value="{-#bcancel#-}"  onclick="mod='info'; uploadMsg('');" class="line" />
 									<br />
-									<iframe name="ifinfo" id="ifinfo" frameborder="0" src="about:blank" style="height:30px; width:350px;"></iframe>
+									<div id="ifinfo" style="height:30px; width:350px;"></div>
 								</td>
 							</tr>
 						</table>

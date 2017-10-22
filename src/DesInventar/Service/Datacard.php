@@ -2,38 +2,29 @@
 
 namespace DesInventar\Service;
 
-use Aura\Sql\ExtendedPdo;
-use Aura\SqlQuery\QueryFactory;
-
-class Datacard
+class Datacard extends Service
 {
-    protected $pdo = null;
-
-    public function __construct(ExtendedPdo $pdo)
-    {
-        $this->pdo = $pdo;
-        $this->factory = new QueryFactory('sqlite');
-    }
-
-    public function nextSerialSuffix($prefix, $separator)
+    protected function nextSerialSuffix($year, $prefix, $separator, $length)
     {
         $query = $this->factory->newSelect();
         $query->from('Disaster')
             ->cols(['DisasterSerial'])
-            ->where('(DisasterSerial LIKE :prefix)')
+            ->where('(DisasterBeginTime LIKE :year)')
+            ->where('(DisasterSerial REGEXP :prefix)')
             ->orderBy(['DisasterSerial DESC'])
-            ->limit(1)
+            ->limit(100)
             ->bindValues([
-                'prefix' => $prefix . $separator . '%',
+                'year' => $year . '%',
+                'prefix' => '/^' . $prefix . addSlashes($separator) . '[0-9]{' . $length . '}.*$/',
             ]);
         $serial = '';
         $sth = $this->pdo->perform($query->getStatement(), $query->getBindValues());
         while ($row = $sth->fetch(\PDO::FETCH_ASSOC)) {
-            $serial = $row['DisasterSerial'];
-            break;
+            $serial = (int) substr($row['DisasterSerial'], strlen($prefix) + strlen($separator));
+            if (! empty($serial)) {
+                break;
+            }
         }
-        $serial = substr($serial, strlen($prefix) + 1);
-        $serial = (int) $serial;
         if (empty($serial)) {
             $serial = 0;
         }
@@ -41,9 +32,9 @@ class Datacard
         return $serial;
     }
 
-    public function nextSerial($prefix, $length, $separator)
+    public function nextSerial($year, $prefix, $length, $separator)
     {
-        $serial = sprintf('%0' . (int)$length . 'd', $this->nextSerialSuffix($prefix, $separator));
+        $serial = sprintf('%0' . (int)$length . 'd', $this->nextSerialSuffix($year, $prefix, $separator, $length));
         return $prefix . $separator . $serial;
     }
 }
