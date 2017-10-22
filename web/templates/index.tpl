@@ -30,12 +30,11 @@
 			jQuery(document).ready(function() {
 				onReadyExtJS();
 				onReadyInit();
-				onReadyMain();
 			});
 		</script>
 		{-if $appOptions.IsOnline > 0-}
 			{-include file="ga.tpl"-}
-		{-/if-}		
+		{-/if-}
 	</head>
 	<body>
 		<div id="loading-mask"></div>
@@ -51,7 +50,7 @@
 			<div id="divWestPanel">
 				{-include file="block_querydesign.tpl"-}
 			</div>
-			
+
 			<!-- Central Content Area -->
 			<div id="container" style="heigth:100%;">
 				{-include file="database_delete_ext.tpl"-}
@@ -63,12 +62,12 @@
 				{-include file="block_help.tpl"-}
 			</div>
 		</div>
-		
+
 		<!-- General App Information -->
 		{-include file="desinventarinfo.tpl"-}
 		{-include file="desinventarmenu.tpl"-}
 		{-if $appOptions.IsOnline > 0-}
 			{-include file="statcounter.tpl"-}
-		{-/if-}		
+		{-/if-}
 	</body>
 </html>
