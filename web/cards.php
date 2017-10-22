@@ -54,6 +54,7 @@ else
 		case 'getNextSerial':
 			$service = new \DesInventar\Service\Datacard($us->q->dreg);
 			$nextSerial = $service->nextSerial(
+				$year,
 				$value,
 				getParameter('length', 5),
 				getParameter('separator', ':')

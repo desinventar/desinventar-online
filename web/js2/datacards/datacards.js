@@ -153,13 +153,14 @@
     var payload = {
       cmd: 'getNextSerial',
       r: regionId,
+      year: jQuery('#DisasterBeginTime0').val(),
       value: jQuery('#DisasterBeginTime0').val(),
-      length: 5,
+      length: desinventar.info.SerialSuffixSize,
       separator: '-'
     };
     if (jQuery('#DatacardPrefix').val() !== '') {
       payload.value = jQuery('#DatacardPrefix').val();
-      payload.length = 3;
+      payload.length = desinventar.info.SerialCloneSuffixSize;
       payload.separator = ':';
     }
     if (payload.value === '') {

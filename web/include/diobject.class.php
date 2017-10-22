@@ -103,7 +103,17 @@ class DIObject
 			if ($sFieldType == 'BOOLEAN')  { $obj[$sFieldName] = 1;   }
 		}
 	} // function
-	
+
+	public function fieldDefToArray($fieldDef)
+	{
+		$fields = [];
+		foreach (explode(',', $fieldDef) as $field) {
+			list($name, $type) = explode('/', $field);
+			$fields[] = ['name' => $name, 'type' => $type];
+		}
+		return $fields;
+	}
+
 	public function get($prmKey, $LangIsoCode='')
 	{
 		$Value = '';
