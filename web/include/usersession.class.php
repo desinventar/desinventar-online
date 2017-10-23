@@ -7,6 +7,7 @@ namespace DesInventar\Legacy;
 
 use DesInventar\Legacy\Query;
 use DesInventar\Database\Session;
+use DesInventar\Legacy\DIRegion;
 use \PDO;
 
 define('ROLE_NONE', 0);

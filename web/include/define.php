@@ -2,7 +2,7 @@
 
 define('MODE', $config->flags['env']);
 define('ARCH', $config->flags['arch']);
-define('MAPSERVER', $config->maps['mapserver']);
+define('MAPSERV', $config->maps['mapserver']);
 define('TEMP', $config->paths['tmp']);
 define('FONTSET', $config->paths['fonts']);
 define('JPGRAPHDIR', $config->paths['jpgraph']);
