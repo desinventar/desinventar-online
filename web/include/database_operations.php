@@ -5,6 +5,9 @@
 */
 namespace DesInventar\Legacy;
 
+use DesInventar\Legacy\DIRegionDB;
+use DesInventar\Legacy\DIRegionRecord;
+
 class DatabaseOperations
 {
     public static function delete($core, $prmRegionId)

@@ -37,4 +37,38 @@ class Datacard extends Service
         $serial = sprintf('%0' . (int)$length . 'd', $this->nextSerialSuffix($year, $prefix, $separator, $length));
         return $prefix . $separator . $serial;
     }
+
+    // Convert Post Form to DesInventar Disaster Table struct
+    // Insert  (1) create DisasterId.
+    // Update  (2) keep RecordCreation and RecordAuthor
+    public function form2disaster($form, $icmd)
+    {
+        $data = array();
+        foreach ($form as $k => $i) {
+            $i = str2js($i);
+            $data[$k] = $i;
+        }
+
+        // On Update
+        $data['DisasterId'] = $form['DisasterId'];
+        $data['RecordUpdate'] = gmdate('c');
+        if ($icmd == CMD_NEW) {
+            // New Disaster
+            if ($data['DisasterId'] == '') {
+                $data['DisasterId'] = (string)UUID::mint(4);
+            }
+            $data['RecordCreation'] = $data['RecordUpdate'];
+        }
+
+        // Disaster date
+        $str = sprintf('%04d', $form['DisasterBeginTime'][0]);
+        if (!empty($form['DisasterBeginTime'][1])) {
+            $str .= '-' . sprintf('%02d', $form['DisasterBeginTime'][1]);
+            if (!empty($form['DisasterBeginTime'][2])) {
+                $str .= '-' . sprintf('%02d', $form['DisasterBeginTime'][2]);
+            }
+        }
+        $data['DisasterBeginTime'] = $str;
+        return $data;
+    }
 }
