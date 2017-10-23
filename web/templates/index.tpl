@@ -25,13 +25,15 @@
 		{-if $appOptions.UseRemoteMaps > 0-}
 			<script type="text/javascript" src="//maps.google.com/maps/api/js"></script>
 		{-/if-}
-		<link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/external/checktree/checktree.css"/>
+    <link rel="stylesheet" type="text/css" href="{-$desinventarURL-}/external/checktree/checktree.css"/>
+
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
 				onReadyExtJS();
 				onReadyInit();
 			});
 		</script>
+    <script type="text/javascript" src="{-$desinventarURL-}/scripts/bundle.js?version={-$jsversion-}"></script>
 		{-if $appOptions.IsOnline > 0-}
 			{-include file="ga.tpl"-}
 		{-/if-}

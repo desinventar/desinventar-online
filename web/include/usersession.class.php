@@ -5,7 +5,8 @@
 */
 namespace DesInventar\Legacy;
 
-use \Query;
+use DesInventar\Legacy\Query;
+use DesInventar\Database\Session;
 use \PDO;
 
 define('ROLE_NONE', 0);
@@ -14,6 +15,7 @@ define('ROLE_USER', 2);
 define('ROLE_SUPERVISOR', 3);
 define('ROLE_ADMINREGION', 4);
 define('ROLE_ADMINPORTAL', 5);
+
 
 class UserSession
 {
@@ -39,7 +41,7 @@ class UserSession
         $this->UserRoleValue     = ROLE_NONE;
         $this->config = $config;
         $this->q = new Query(null, $config->database);
-        $this->session = new \DesInventar\Database\Session($this->q->core);
+        $this->session = new Session($this->q->core);
         if (!empty($this->q->core)) {
             $this->load($this->sSessionId);
         }

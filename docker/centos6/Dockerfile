@@ -1,7 +1,8 @@
 # CentOS 6 + Updates + DesInventar Prerequisites
 # Pushed to dockerhub as desinventar/centos6:vYYYYMMDD-NN
 FROM library/centos:centos6
-MAINTAINER Jhon H. Caicedo <jhcaiced@inticol.com>
+LABEL maintainer="Jhon H. Caicedo"
+LABEL e-mail="jhcaiced@inticol.com"
 
 ADD desinventar.repo /etc/yum.repos.d/desinventar.repo
 RUN yum -y install epel-release
@@ -39,13 +40,13 @@ RUN install -m 755 -o apache -g apache -d /var/tmp/desinventar
 RUN install -m 755 -o apache -g apache -d /var/cache/smarty/desinventar
 RUN install -m 755 -o apache -g apache -d /etc/desinventar
 
-# composer
-RUN curl https://getcomposer.org/composer.phar > /usr/local/bin/composer \
-    && chmod +x /usr/local/bin/composer
+# Install composer to handle dependencies
+RUN curl --silent --show-error https://getcomposer.org/installer > /tmp/composer-setup.php && \
+  php /tmp/composer-setup.php --no-ansi --install-dir=/usr/local/bin --filename=composer --snapshot
 
 ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 4.7.3
-RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash \
+ENV NODE_VERSION 8.6.0
+RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.4/install.sh | bash \
     && source $NVM_DIR/nvm.sh \
     && nvm install $NODE_VERSION \
     && nvm alias default $NODE_VERSION \
