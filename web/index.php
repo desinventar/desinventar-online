@@ -12,6 +12,10 @@ require_once('include/database_operations.php');
 require_once('include/query_operations.php');
 
 use \DesInventar\Legacy\UserSession;
+use \DesInventar\Legacy\DIRegion;
+use \DesInventar\Legacy\DIRegionDB;
+use DesInventar\Legacy\DIRegionRecord;
+use \DesInventar\Legacy\DIGraph;
 
 $post = $_POST;
 $get  = $_GET;
@@ -1269,7 +1273,7 @@ switch ($cmd) {
         $post = $_POST;
         fixPost($post);
         $post['General']['LangIsoCode'] = $lg;
-        $graph = new \DesInventar\Legacy\DIGraph($us, $post);
+        $graph = new DIGraph($us, $post);
         $graph->execute();
 
         if ($cmd == 'cmdGraphShow') {

@@ -5,7 +5,9 @@
 */
 namespace DesInventar\Legacy;
 
-class DIGraph extends DIResult
+use \Graphic;
+
+class DIGraph extends \DIResult
 {
     private $options_default_graph = array(
         'Type'          => 'HISTOGRAM',

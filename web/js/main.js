@@ -32,7 +32,7 @@
  (c) Corporacion OSSO
 */
 
-var jQuery = require("jquery");
+//var jQuery = require("jquery");
 require("jquery-ui/ui/widgets/tabs");
 
 module.exports = {
