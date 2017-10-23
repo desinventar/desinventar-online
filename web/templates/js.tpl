@@ -40,7 +40,6 @@
 <script type="text/javascript" src="{-$desinventarURL-}/js/diadmin.js?version={-$jsversion-}"></script>
 <script type="text/javascript" src="{-$desinventarURL-}/js/init.js?version={-$jsversion-}"></script>
 <script type="text/javascript" src="{-$desinventarURL-}/js/main_ext.js?version={-$jsversion-}"></script>
-<script type="text/javascript" src="{-$desinventarURL-}/scripts/bundle.js?version={-$jsversion-}"></script>
 <script type="text/javascript">
 		// Global hook for all functions
 		var desinventar = {};

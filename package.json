@@ -16,7 +16,7 @@
     ],
     "*.php": [
       "php -l",
-      "phpcs",
+      "./vendor/bin/phpcs",
       "git add"
     ]
   },

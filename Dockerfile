@@ -1,12 +1,14 @@
 # CentOS 6 + Updates + DesInventar Prerequisites
-FROM desinventar/centos6:v20170720-01
-MAINTAINER Jhon H. Caicedo <jhcaiced@inticol.com>
+FROM desinventar/centos6:v20171022-01
+LABEL maintainer="Jhon H. Caicedo"
+LABEL e-mail="jhcaiced@inticol.com"
 
 WORKDIR /usr/share/desinventar
 
 COPY composer.json composer.lock package.json /usr/share/desinventar/
 RUN composer install --no-scripts --no-autoloader --prefer-source --no-interaction
-RUN npm install
+RUN npm install -g yarn
+RUN yarn install
 
 COPY files/apache/desinventar-centos-default.* /etc/httpd/conf.d/
 RUN sed -i 's#logs/access_log#/dev/stderr#; s#logs/error_log#/dev/stderr#' /etc/httpd/conf/httpd.conf
@@ -22,10 +24,11 @@ RUN mkdir -p /var/lib/desinventar/worldmap && \
     unzip files/worldmap/world_adm0.zip -d /var/lib/desinventar/worldmap && \
     cp files/worldmap/world_adm0.map /var/lib/desinventar/worldmap/ && \
     chown -R apache:apache /var/lib/desinventar/worldmap
-    
+
 RUN composer dump-autoload --optimize
-RUN npm install
+RUN yarn install
 RUN make
+RUN ./node_modules/.bin/webpack -p
 
 ENV PATH="~/.composer/vendor/bin:./vendor/bin:/usr/share/desinventar/vendor/bin:${PATH}"
 
