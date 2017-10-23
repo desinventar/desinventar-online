@@ -6,7 +6,7 @@ all : build devel
 
 devel : php js
 
-build : npm-build composer lang
+build : node-build composer lang
 
 composer : .FORCE
 	composer install
@@ -39,7 +39,7 @@ standard-php : .FORCE
 	config/config.php config/version.php
 
 phpmd: .FORCE
-	find api config files portal src tests -name \*.php -exec ./vendor/bin/phpmd {} text ./files/phpmd/ruleset.xml \;
+	find api config files src tests -name \*.php -exec ./vendor/bin/phpmd {} text ./files/phpmd/ruleset.xml \;
 
 phpmd-old: .FORCE
 	find web -name \*.php -exec ./vendor/bin/phpmd {} text ./files/phpmd/ruleset.xml \;
@@ -49,5 +49,5 @@ js : standard-js
 standard-js : .FORCE
 	./node_modules/.bin/eslint web/js2/*
 
-npm-build : .FORCE
-	npm install
+node-build : .FORCE
+	yarn install
