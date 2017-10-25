@@ -5,8 +5,11 @@
 */
 namespace DesInventar\Legacy;
 
+use \DesInventar\Service\RegionInfo;
+
 use \DomDocument;
 use \Pdo;
+use \ZipArchive;
 
 class DIRegion extends \DIObject
 {
@@ -185,7 +188,6 @@ class DIRegion extends \DIObject
 
     public function updateCore()
     {
-        // Update core.Region table using new data...
         $sQuery = 'UPDATE Region SET ' .
          ' RegionLabel="'      . $this->get('RegionLabel') . '",' .
          ' LangIsoCode="'      . $this->get('LangIsoCode') . '",' .
@@ -217,7 +219,7 @@ class DIRegion extends \DIObject
         if (empty($this->oField['info'])) {
             return false;
         }
-        $infoService = new \DesInventar\Service\RegionInfo($conn);
+        $infoService = new RegionInfo($conn);
         $infoService->deleteAll(array_keys($this->oField['info']));
         $infoService->update($this->oField['info']);
     }
@@ -229,7 +231,7 @@ class DIRegion extends \DIObject
         foreach ($fields as $field) {
             $keys[] = $field['name'];
         }
-        $service = new \DesInventar\Service\RegionInfo($conn);
+        $service = new RegionInfo($conn);
         return $service->getAll($keys);
     }
 
@@ -338,7 +340,7 @@ class DIRegion extends \DIObject
             $Query = "SELECT * FROM RegionItem WHERE RegionId='" . $this->get('RegionId') . "'";
             foreach ($this->q->core->query($Query) as $row) {
                 $RegionItemId = $row['RegionItem'];
-                $r = new DIRegion($this->session, $RegionItemId);
+                $r = new self($this->session, $RegionItemId);
                 $ItemMinX = $r->getRegionInfoValue('GeoLimitMinX');
                 if ($ItemMinX < $MinX) {
                     $MinX = $ItemMinX;
@@ -430,7 +432,7 @@ class DIRegion extends \DIObject
                 if (!empty($reglabel)) {
                     $data['RegionLabel'] = $reglabel;
                 }
-                $r = new DIRegion($us, $data['RegionId']);
+                $r = new self($us, $data['RegionId']);
                 $r->setFromArray($data);
                 $iReturn = $r->insert();
                 if (!iserror($iReturn)) {
@@ -447,48 +449,40 @@ class DIRegion extends \DIObject
 
     public function createRegionBackup($OutFile)
     {
-        $iReturn = ERR_NO_ERROR;
         $RegionId = $this->session->RegionId;
         if ($RegionId == '') {
-            $iReturn = ERR_UNKNOWN_ERROR;
+            return ERR_UNKNOWN_ERROR;
         }
+        $this->set('NumberOfRecords', $this->session->getDisasterCount());
+        $this->update();
 
-        if ($iReturn > 0) {
-            $this->set('NumberOfRecords', $this->session->getDisasterCount());
-            $this->update();
-
-            $DirName = dirname($OutFile);
-            if (! file_exists($DirName)) {
-                if (! mkdir($DirName, 0777, true)) {
-                    $iReturn = ERR_UNKNOWN_ERROR;
-                }
+        $DirName = dirname($OutFile);
+        if (! file_exists($DirName)) {
+            if (! mkdir($DirName, 0777, true)) {
+                return ERR_UNKNOWN_ERROR;
             }
         }
-        if ($iReturn > 0) {
-            unlink($OutFile);
-            $zip = new ZipArchive();
-            if ($zip->open($OutFile, ZIPARCHIVE::CREATE) != true) {
-                $iReturn = ERR_UNKNOWN_ERROR;
-            } else {
-                $DBDir = $this->session->getDBDir();
-                // Build a list of files that goes into the zip file
-                $filelist = array('desinventar.db','info.xml');
-                $sQuery = "SELECT * FROM GeoCarto ORDER BY GeoLevelId";
-                foreach ($this->session->q->dreg->query($sQuery) as $row) {
-                    foreach (array('dbf','shp','shx') as $ext) {
-                        array_push($filelist, $row['GeoLevelLayerFile'] . '.' . $ext);
-                    }
-                }
-                // Add each file to the zip file
-                foreach ($filelist as $file) {
-                    if (file_exists($DBDir . '/' . $file)) {
-                        $zip->addFile($DBDir . '/' . $file, $file);
-                    }
-                }
-            }
-            $zip->close();
+        unlink($OutFile);
+        $zip = new ZipArchive();
+        if ($zip->open($OutFile, ZIPARCHIVE::CREATE) != true) {
+            return ERR_UNKNOWN_ERROR;
         }
-        return $iReturn;
+        $DBDir = $this->session->getDBDir();
+        // Build a list of files that goes into the zip file
+        $filelist = array('desinventar.db','info.xml');
+        $sQuery = "SELECT * FROM GeoCarto ORDER BY GeoLevelId";
+        foreach ($this->session->q->dreg->query($sQuery) as $row) {
+            foreach (array('dbf','shp','shx') as $ext) {
+                array_push($filelist, $row['GeoLevelLayerFile'] . '.' . $ext);
+            }
+        }
+        foreach ($filelist as $file) {
+            if (file_exists($DBDir . '/' . $file)) {
+                $zip->addFile($DBDir . '/' . $file, $file);
+            }
+        }
+        $zip->close();
+        return ERR_NO_ERROR;
     }
 
     public function toXML()
