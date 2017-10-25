@@ -24,6 +24,8 @@ RUN mkdir -p /var/lib/desinventar/worldmap && \
     unzip files/worldmap/world_adm0.zip -d /var/lib/desinventar/worldmap && \
     cp files/worldmap/world_adm0.map /var/lib/desinventar/worldmap/ && \
     chown -R apache:apache /var/lib/desinventar/worldmap
+RUN mkdir -p /var/www/desinventar/data && \
+    chown -R apache:apache /var/www/desinventar/data
 
 RUN composer dump-autoload --optimize
 RUN yarn install
