@@ -7,6 +7,8 @@
 namespace DesInventar\Legacy;
 
 use \DesInventar\Legacy\DIRegion;
+use \DIDate;
+use \Pdo;
 
 class DIRegionRecord extends DIRegion
 {
@@ -333,7 +335,7 @@ class DIRegionRecord extends DIRegion
     {
         $iReturn = ERR_NO_ERROR;
         $sQuery = '
-        SELECT * 
+        SELECT *
         FROM RegionAuth
         WHERE
             RegionId=:RegionId AND
