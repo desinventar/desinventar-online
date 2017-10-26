@@ -5,7 +5,6 @@
   onReadyDBConfigCauses,
 	onReadyDatabaseList,
 	onReadyDatabaseUpload,
-	onReadyDatabaseCreate,
 	onReadyDatabaseUsers,
 	onReadyQueryDesign,
 	onReadyGeography,
@@ -32,7 +31,6 @@
  (c) Corporacion OSSO
 */
 
-//var jQuery = require("jquery");
 require("jquery-ui/ui/widgets/tabs");
 
 module.exports = {
@@ -40,9 +38,10 @@ module.exports = {
 };
 
 function onReadyMain() {
+  require("./main_ext.js").init();
   onReadyDatabaseList();
   onReadyDatabaseUpload();
-  onReadyDatabaseCreate();
+  require("./database_create.js").init();
   onReadyDatabaseUsers();
   onReadyQueryDesign();
   onReadyGeography();
