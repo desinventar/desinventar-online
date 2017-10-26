@@ -29,7 +29,6 @@
 
 		<script type="text/javascript">
 			jQuery(document).ready(function() {
-				onReadyExtJS();
 				onReadyInit();
 			});
 		</script>
