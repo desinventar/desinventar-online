@@ -11,11 +11,16 @@ services:
     image: "desinventar/online:latest"
     depends_on:
     - web
+    - redis
     ports:
      - "8080:80"
     volumes:
      - .:/usr/share/desinventar
      - /var/lib/desinventar:/var/lib/desinventar
+  redis:
+    build: docker/redis
+    ports:
+    - "8090:6379"
   test-unit:
     image: desinventar/online:latest
     depends_on:
