@@ -132,7 +132,7 @@ function doViewportCreate() {
   Ext.getCmp("westm").on("expand", function() {
     jQuery("#divRegionInfo").hide();
   });
-} // doViewportCreate()
+}
 
 function doViewportShow() {
   jQuery("body").trigger("cmdMainMenuUpdate");
@@ -166,7 +166,7 @@ function doViewportShow() {
     doUpdateDatabaseListByUser();
   }
   jQuery(document).attr("title", title);
-} //doViewportShow()
+}
 
 function doMainChangeLanguage(LangIsoCode) {
   jQuery.post(
@@ -189,7 +189,7 @@ function doMainChangeLanguage(LangIsoCode) {
     },
     "json"
   );
-} //doMainChangeLanguage()
+}
 
 function doMainMenuHandler(item) {
   var menuCmd = "";
@@ -350,13 +350,13 @@ function doMainMenuHandler(item) {
     case "mnuHelpDocumentation":
       window.open("http://www.desinventar.org/", "", "");
       break;
-  } //switch
-} //doMainMenuHandler()
+  }
+}
 
 function hideQueryDesign() {
   // Hide Query Design Panel
   Ext.getCmp("westm").collapse();
-} //hideQueryDesign()
+}
 
 function doMainMenuCreate() {
   DesInventar.Toolbar = Ext.extend(Ext.Toolbar, {
@@ -701,7 +701,7 @@ function doMainMenuCreate() {
       doViewportShow();
     }, 2000);
   });
-} //doCreateMainMenu()
+}
 
 function doMainMenuToggle(bEnable) {
   jQuery("#divMainMenu span.menu").each(function() {
@@ -740,7 +740,7 @@ function doMainMenuDisable() {
       w.disable();
     }
   });
-} //doMainMenuDisable()
+}
 
 function doMainMenuUpdate() {
   doMainMenuDisable();
@@ -838,7 +838,7 @@ function doMainMenuUpdate() {
     }
   }
   jQuery("body").trigger("cmdMainMenuResultButtonsDisable");
-} //doMainMenuUpdate()
+}
 
 function doDialogsCreate() {
   var w;
@@ -937,7 +937,7 @@ function doDialogsCreate() {
         text: jQuery("#msgViewDataButtonClear").text(),
         handler: function() {
           $("CD").reset();
-        } //handler
+        }
       },
       {
         text: jQuery("#msgViewDataButtonSend").text(),
@@ -949,13 +949,13 @@ function doDialogsCreate() {
           } else {
             throw new Error("Error while executing function ViewData");
           }
-        } //handler
+        }
       },
       {
         text: jQuery("#msgViewDataButtonClose").text(),
         handler: function() {
           Ext.getCmp("wndViewDataParams").hide();
-        } //handler
+        }
       }
     ] //button
   });
@@ -1064,7 +1064,7 @@ function doDialogsCreate() {
           } else {
             throw new Error("Error while executing ViewStd function");
           }
-        } //handler
+        }
       },
       {
         text: jQuery("#msgViewStdButtonClose").text(),
@@ -1074,4 +1074,4 @@ function doDialogsCreate() {
       }
     ]
   });
-} //doDialogsCreate()
+}
