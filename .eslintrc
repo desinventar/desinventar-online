@@ -1,0 +1,26 @@
+{
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true,
+    "jquery": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "module"
+  },
+  "extends": [
+    "eslint:recommended",
+    "prettier",
+    "plugin:testcafe/recommended"
+  ],
+  "plugins": ["prettier", "testcafe"],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      { "singleQuote": true,
+        "semi": false
+      }
+    ]
+  }
+}

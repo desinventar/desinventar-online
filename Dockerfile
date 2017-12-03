@@ -6,6 +6,7 @@ LABEL e-mail="jhcaiced@inticol.com"
 WORKDIR /usr/share/desinventar
 
 COPY composer.json composer.lock package.json /usr/share/desinventar/
+RUN composer self-update
 RUN composer install --no-scripts --no-autoloader --prefer-source --no-interaction
 RUN npm install -g yarn
 RUN yarn install

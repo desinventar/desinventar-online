@@ -6,7 +6,7 @@ all : build devel
 
 devel : php js
 
-build : node-build composer lang
+build : node-build web-build composer lang
 
 composer : .FORCE
 	composer install
@@ -22,20 +22,20 @@ php : standard-php phpmd lint-php
 test : test-unit test-api
 
 test-unit: .FORCE
-	cd tests && ../vendor/bin/phpunit --testsuite unit $(TEST)
+	cd tests/unit && ../../vendor/bin/phpunit --testsuite unit $(TEST)
 
 test-api: .FORCE
-	cd tests && ../vendor/bin/phpunit --testsuite api $(TEST)
+	cd tests/unit && ../../vendor/bin/phpunit --testsuite api $(TEST)
 
 test-web: .FORCE
-	cd tests && ../vendor/bin/phpunit --testsuite web $(TEST)
+	./node_modules/.bin/testcafe firefox:headless tests/e2e
 
 lint-php : .FORCE
 	find src api config web tests -name "*.php" -exec php -l {} > /dev/null \;
 
 standard-php : .FORCE
 	./vendor/bin/phpcs --standard=PSR2 src/* api/app/* api/src/* api/web/* \
-	tests/bootstrap.php tests/UnitTest/* tests/ApiTest/* tests/WebTest/* \
+	tests/unit/bootstrap.php tests/unit/UnitTest/* tests/unit/ApiTest/* \
 	config/config.php config/version.php
 
 phpmd: .FORCE
@@ -50,4 +50,7 @@ standard-js : .FORCE
 	./node_modules/.bin/eslint web/js2/*
 
 node-build : .FORCE
-	yarn install
+	yarn
+
+web-build: .FORCE
+	./node_modules/.bin/webpack -p
