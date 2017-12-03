@@ -2,9 +2,15 @@ version: 2
 jobs:
   build:
     docker:
-      - image: desinventar/centos6:v20170720-01
+      - image: desinventar/centos6:v20171022-01
     working_directory: /usr/share/desinventar
     steps:
+      - run:
+          name: Install firefox for tests
+          command: yum -y -q install firefox
+      - run:
+          name: Install yarn to handle dependencies
+          command: npm install -g yarn
       - checkout
       - restore_cache:
           keys:
@@ -12,6 +18,7 @@ jobs:
       - run:
           name: Install composer dependencies
           command: |
+            composer self-update
             composer install --no-scripts --no-autoloader --prefer-source --no-interaction
             composer dump-autoload --optimize
       - save_cache:
@@ -23,7 +30,7 @@ jobs:
             - node-v1-{{ checksum "package.json" }}
       - run:
           name: Install Node dependencies
-          command: npm install
+          command: yarn
       - save_cache:
           key: node-v1-{{ checksum "package.json" }}
           paths:
