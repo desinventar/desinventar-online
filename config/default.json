@@ -1,0 +1,7 @@
+{
+  "test": {
+    "url": "http://localhost:8081",
+    "username": "root",
+    "passwd": "desinventar"
+  }
+}

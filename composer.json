@@ -44,9 +44,8 @@
         "psr-0": {
             "DesInventar\\": ["src"],
             "Api\\": ["api/src"],
-            "UnitTest\\": ["tests"],
-            "ApiTest\\": ["tests"],
-            "WebTest\\": ["tests"]
+            "UnitTest\\": ["tests/unit"],
+            "ApiTest\\": ["tests/unit"]
         }
     },
     "keywords": [
