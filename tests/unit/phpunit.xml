@@ -8,9 +8,6 @@
         <testsuite name="unit">
             <directory>UnitTest</directory>
         </testsuite>
-        <testsuite name="web">
-            <directory>WebTest</directory>
-        </testsuite>
         <testsuite name="api">
             <directory>ApiTest</directory>
         </testsuite>
