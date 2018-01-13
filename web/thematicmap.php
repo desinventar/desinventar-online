@@ -50,7 +50,8 @@ switch ($cmd) {
         $t->assign('ctl_showres', false);
         if ($NumberOfRecords > 0) {
             // Assign ranges
-            $range = MapServer::setRanges($post);
+            $mapserver = new MapServer($config);
+            $range = $mapserver ->setRanges($post['_M+limit'], $post['_M+legend'], $post['_M+color']);
             // Data Options Interface
             $opc['Group'] = array($post['_M+Type']);
             $lev = explode('|', $post['_M+Type']);

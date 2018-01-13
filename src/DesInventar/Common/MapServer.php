@@ -74,32 +74,33 @@ class MapServer
         return $url . '/cgi-bin/' . MAPSERV . '?' . $queryString;
     }
 
-    public static function hex2dec($prmColor)
+    public function hex2dec($prmColor)
     {
         $oHex = str_split(substr($prmColor, -6), 2);
         return hexdec($oHex[0]) . ' ' . hexdec($oHex[1]) . ' ' . hexdec($oHex[2]);
     }
 
     // set hash with limits, legends and colors
-    public static function setRanges($opc)
+    public function setRanges($lim, $leg, $col)
     {
-        $lim = $opc['_M+limit'];
-        $leg = $opc['_M+legend'];
-        $col = $opc['_M+color'];
+        if (count($lim) < 1) {
+            return [];
+        }
         $lmx = '10000000';
         $maxr = false;
         // First range is No data
-        $range[0] = array(0, '= 0', '255 255 255');
+        $range[0] = [0, '= 0', '255 255 255'];
         // generate range hash with limit, legend and color
         for ($j = 0; $j < count($lim); $j++) {
-            if (isset($lim[$j])) {
-                if ($lim[$j] != '') {
-                    $range[$j+1] = array($lim[$j], $leg[$j], self::hex2dec($col[$j]));
-                } else {
-                    $range[$j+1] = array($lmx, $leg[$j], self::hex2dec($col[$j]));
-                    $maxr = true;
-                }
+            if (! isset($lim[$j])) {
+                continue;
             }
+            $limitValue = $lim[$j];
+            if (empty($lim[$j])) {
+                $limitValue = $lmx;
+                $maxr = true;
+            }
+            $range[$j+1] = array($limitValue, $leg[$j], $this->hex2dec($col[$j]));
         }
         // if not assigned, set last range between last number and infinit
         if (!$maxr) {

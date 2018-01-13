@@ -9,6 +9,9 @@ class Util
 {
     public static function getUrl()
     {
+        if (!isset($_SERVER['HTTP_HOST']) || !isset($_SERVER['REQUEST_URI'])) {
+            return '';
+        }
         $url_proto = 'http';
         if (is_ssl()) {
             $url_proto = 'https';
