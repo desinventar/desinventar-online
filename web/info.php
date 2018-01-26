@@ -1,7 +1,8 @@
 <?php
+// phpcs:ignoreFile
 /*
-  DesInventar - http://www.desinventar.org  
-  (c) 1998-2012 Corporacion OSSO
+  DesInventar - http://www.desinventar.org
+  (c) Corporacion OSSO
 */
 
 require_once('include/loader.php');
@@ -64,7 +65,7 @@ switch($cmd)
 		$data = $_POST['RegionInfo'];
 
 		// Load Current info.xml data
-		$r = new DIRegion($us, $RegionId);
+		$r = new DesInventar\Legacy\DIRegion($us, $RegionId);
 		$LangIsoCode = $r->get('LangIsoCode');
 		$r->setFromArray($_POST);
 		// Set Translated Info
@@ -91,7 +92,7 @@ switch($cmd)
 	break;
 	case 'cmdDBInfoEdit':
 		$UserRole = $us->getUserRole($RegionId);
-		$r = new DIRegion($us, $RegionId);
+		$r = new DesInventar\Legacy\DIRegion($us, $RegionId);
 		$lang = array();
 		$lang[0] = $r->get('LangIsoCode');
 		$lang[1] = 'eng';
@@ -177,7 +178,7 @@ switch($cmd)
 			$t->assign('updstatlog', showerror($stat));
 		}
 	break;
-} //select
+}
 $t->assign('reg', $RegionId);
 $t->assign('dic', $us->q->queryLabelsFromGroup('DB', $lg));
 $t->assign('usern', $us->UserId);
