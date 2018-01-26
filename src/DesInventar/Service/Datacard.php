@@ -2,6 +2,8 @@
 
 namespace DesInventar\Service;
 
+use Ramsey\Uuid\UuidFactory;
+
 class Datacard extends Service
 {
     protected function nextSerialSuffix($year, $prefix, $separator, $length)
@@ -55,7 +57,8 @@ class Datacard extends Service
         if ($icmd == CMD_NEW) {
             // New Disaster
             if ($data['DisasterId'] == '') {
-                $data['DisasterId'] = (string)UUID::mint(4);
+                $uuid = new UuidFactory();
+                $data['DisasterId'] = $uuid->uuid4();
             }
             $data['RecordCreation'] = $data['RecordUpdate'];
         }
