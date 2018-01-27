@@ -84,12 +84,12 @@ class DIRegion extends \DIObject
                 }
             } else {
                 $this->set('RegionLabel', $prmRegionId);
-            } //if
+            }
         }
         if ($this->get('OptionLanguageList') == '') {
             $this->set('OptionLanguageList', $this->get('LangIsoCode'));
         }
-    } // __construct
+    }
 
     public static function regionGetOrCreate(
         UserSession $us,
@@ -128,7 +128,7 @@ class DIRegion extends \DIObject
             $sFieldName = $oItem[0];
             $sFieldType = $oItem[1];
             $Translatable[$sFieldName] = $sFieldType;
-        } //foreach
+        }
         return $Translatable;
     }
 
@@ -184,7 +184,7 @@ class DIRegion extends \DIObject
             showErrorMsg(debug_backtrace(), $e, '');
         }
         $this->updateCore();
-    } //insertCore()
+    }
 
     public function updateCore()
     {
@@ -254,7 +254,7 @@ class DIRegion extends \DIObject
             $sReturn = $this->get($prmInfoKey, $LangIsoCode);
         }
         return $sReturn;
-    } //function
+    }
 
     public function getRegionInfoCore()
     {
@@ -358,7 +358,7 @@ class DIRegion extends \DIObject
                     $MaxY = $ItemMaxY;
                 }
                 $r = null;
-            } //foreach
+            }
             $this->q->setDBConnection($this->get('RegionId'));
             if ($iReturn > 0) {
                 $this->set('GeoLimitMinX', $MinX);
@@ -367,8 +367,8 @@ class DIRegion extends \DIObject
                 $this->set('GeoLimitMaxY', $MaxY);
                 $this->update();
             }
-        } //if
-    } //updateMapArea
+        }
+    }
 
     public static function buildRegionId($prmCountryIso)
     {
@@ -379,7 +379,7 @@ class DIRegion extends \DIObject
         $prmTimestamp = date('YmdHis', time());
         $RegionId = $prmCountryIso . '-' . $prmTimestamp;
         return $RegionId;
-    } //buildRegionId
+    }
 
     public function setActive($prmValue)
     {
@@ -527,8 +527,8 @@ class DIRegion extends \DIObject
                         $child = $level->appendChild($child);
                         $value = $doc->createTextNode($row[$field]);
                         $value = $child->appendChild($value);
-                    } //foreach
-                } //foreach
+                    }
+                }
             }
         } catch (Exception $e) {
             $iReturn = ERR_NO_ERROR;
@@ -611,10 +611,10 @@ class DIRegion extends \DIObject
                         $this->set($key, $value, $section);
                     }
                 }
-            } //foreach
-        } //if
+            }
+        }
         return $iReturn;
-    } //function
+    }
 
     public static function existRegion($us, $prmRegionId)
     {
@@ -628,7 +628,7 @@ class DIRegion extends \DIObject
             $iReturn = ERR_NO_DATABASE;
         }
         return $iReturn;
-    } //existRegion()
+    }
 
     public static function deleteRegion($us, $prmRegionId)
     {
@@ -680,7 +680,7 @@ class DIRegion extends \DIObject
             $iReturn = ERR_UNKNOWN_ERROR;
         }
         return $iReturn;
-    } //removeRegionUserAdmin()
+    }
 
     public function getGeolevelList()
     {
@@ -737,5 +737,5 @@ class DIRegion extends \DIObject
             showErrorMsg(debug_backtrace(), $e, '');
         }
         return $answer;
-    } //loadGeoLevels()
-} //class
+    }
+}
