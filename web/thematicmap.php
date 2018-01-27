@@ -9,7 +9,7 @@ require_once('include/diregion.class.php');
 
 use DesInventar\Legacy\DIRegion;
 use DesInventar\Common\MapServer;
-use \Maps as Maps;
+use DesInventar\Legacy\Maps;
 
 $post = $_POST;
 $get = $_GET;

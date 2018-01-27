@@ -51,18 +51,6 @@ $t->assign('desinventarUserRole', $desinventarUserRole);
 $t->assign('desinventarUserRoleValue', $desinventarUserRoleValue);
 $t->assign('appOptions', $appOptions);
 
-/*
-	# Write a debug log of parameters passed
-	ob_start();
-	var_dump($_FILES);
-	var_dump($_POST);
-	var_dump($_GET);
-	$fh = fopen(TEMP . '/php.log', 'a');
-	fputs($fh, ob_get_contents());
-	fputs($fh, '--------------------------------------------' . "\n");
-	fclose($fh);
-	ob_end_clean();
-*/
 switch ($cmd) {
     case 'test':
         $ydb = $us->getDateRange();
@@ -74,7 +62,7 @@ switch ($cmd) {
         $UserId = getParameter('UserId');
         $UserPasswd = getParameter('UserPasswd');
         if ($us->login($UserId, $UserPasswd, UserSession::PASSWORD_IS_HASHED) > 0) {
-            $iReturn = ERR_NO_ERROR;    # Login success
+            $iReturn = ERR_NO_ERROR;    // Login success
             $user = array();
             $user['Id']        = $us->UserId;
             $user['FullName']  = $us->getUserFullName();
@@ -90,7 +78,7 @@ switch ($cmd) {
         $answer = array();
         $UserId = $us->UserId;
         if ($UserId != '') {
-            $iReturn = ERR_NO_ERROR;    # Login success
+            $iReturn = ERR_NO_ERROR;    // Login success
             $user = array();
             $user['Id']        = $us->UserId;
             $user['FullName']  = $us->getUserFullName();
@@ -518,7 +506,6 @@ switch ($cmd) {
                 $EEFieldList = $us->q->getEEFieldList('True');
                 $answer['EEFieldList'] = $EEFieldList;
 
-                # Get range of dates for Query Design
                 $ydb = $us->getDateRange();
                 $params['MinYear']       = substr($ydb[0], 0, 4);
                 $params['MaxYear']       = substr($ydb[1], 0, 4);
@@ -776,8 +763,8 @@ switch ($cmd) {
                 if (strtolower($path_info['extension']) == 'dbf') {
                     $answer['DBFFields'] = geography_get_fields_from_dbffile($OutDir . '/' . $filename);
                 }
-            } #if
-        } #if
+            }
+        }
         if ($answer['success'] == false) {
             $iReturn = ERR_UNKNOWN_ERROR;
         }
@@ -944,7 +931,6 @@ switch ($cmd) {
         }
         if ($iReturn > 0) {
             $RegionId = $_POST['RegionInfo']['RegionId'];
-            # Use the parameters to create a new database from zip file...
             $Filename = TMP_DIR . '/DesInventarFile_' . $us->sSessionId . '_' . $_POST['RegionInfo']['Filename'];
             $iReturn = DIRegionDB::createRegionDBFromZip(
                 $us,
@@ -991,11 +977,9 @@ switch ($cmd) {
             if ($answer['success'] == true) {
                 $iReturn = ERR_NO_ERROR;
                 $Filename = $answer['filename'];
-                # Open ZIP File, extract info.xml and return values...
                 $zip = new ZipArchive();
                 $res = $zip->open($OutDir . '/' . $Filename);
                 if ($res == true) {
-                    # Delete existing info.xml file just in case...
                     if (file_exists($OutDir . '/info.xml')) {
                         unlink($OutDir . '/info.xml');
                     }
@@ -1005,7 +989,6 @@ switch ($cmd) {
                         $r = new DIRegion($us, '', $OutDir . '/info.xml');
                         $info = array();
                         $UploadMode = getParameter('UploadMode', '');
-                        # If no database is open, try to calculate RegionId
                         if ($UploadMode == 'Copy') {
                             if (DIRegion::existRegion($us, $r->get('RegionId')) > 0) {
                                 $RegionId = DIRegion::buildRegionId($r->get('CountryIso'));
@@ -1024,15 +1007,14 @@ switch ($cmd) {
                     } else {
                         $iReturn = ERR_INVALID_ZIPFILE; //-130
                     }
-                    # Delete existing info.xml file just in case...
                     if (file_exists($OutDir . '/info.xml')) {
                         unlink($OutDir . '/info.xml');
                     }
                 } else {
                     $iReturn = ERR_UNKNOWN_ERROR;
                 }
-            } #if
-        } #if
+            }
+        }
         if ($answer['success'] == false) {
             $iReturn = ERR_UNKNOWN_ERROR;
         }
@@ -1040,7 +1022,6 @@ switch ($cmd) {
         echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
         break;
     case 'main2':
-        # Direct access returns a list of public regions on this server
         $t->assign('lg', $lg);
         $LanguageList = $us->q->loadLanguages(1);
         $CountryList = $us->q->getCountryList();
@@ -1049,7 +1030,7 @@ switch ($cmd) {
         $t->assign('CountryList', $CountryList);
         $t->assign('regionlist', $RegionList);
         $template = 'index-' . $lg . '.tpl';
-        $t->force_compile   = true; # Force this template to always compile
+        $t->force_compile   = true; // Force this template to always compile
         $t->display($template);
         break;
     case 'cmdGetVersion':
@@ -1059,7 +1040,6 @@ switch ($cmd) {
         $answer['ReleaseDate'] = $config->version['release_date'];
         $answerstr = htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
         if (isset($_GET['callback'])) {
-            # Enable support for JSONP requests...
             $answerstr = $_GET['callback'] . '(' . $answerstr . ')';
         }
         echo $answerstr;
@@ -1071,7 +1051,6 @@ switch ($cmd) {
         $answer['CountryList'] = $CountryList;
         $answerstr = htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
         if (isset($_GET['callback'])) {
-            # Enable support for JSONP requests...
             $answerstr = $_GET['callback'] . '(' . $answerstr . ')';
         }
         echo $answerstr;
@@ -1102,7 +1081,6 @@ switch ($cmd) {
         );
         $answerstr = htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
         if (isset($_GET['callback'])) {
-            # Enable support for JSONP requests...
             $answerstr = $_GET['callback'] . '(' . $answerstr . ')';
         }
         echo $answerstr;
@@ -1114,7 +1092,6 @@ switch ($cmd) {
             $answer = array('Status' => 1,
                             'CountryName' => $CountryName);
         if (isset($_GET['callback'])) {
-            # Enable support for JSONP requests...
             echo $_GET['callback'] . '(' . json_encode($answer) . ')';
         } else {
             echo json_encode($answer);
@@ -1148,7 +1125,6 @@ switch ($cmd) {
         }
         $answer['Status'] = $iReturn;
         if (isset($_GET['callback'])) {
-            # Enable support for JSONP requests...
             echo $_GET['callback'] . '(' . json_encode($answer) . ')';
         } else {
             echo json_encode($answer);
@@ -1159,7 +1135,7 @@ switch ($cmd) {
         echo json_encode(array('Status' => 'OK', 'RecordCount' => $RecordCount));
         break;
     case 'getGraphParameters':
-        $t->force_compile   = true; # Force this template to always compile
+        $t->force_compile   = true; // Force this template to always compile
         $t->display('graphparameters.tpl');
         break;
     case 'cmdDatabaseExport':
@@ -1181,9 +1157,7 @@ switch ($cmd) {
         break;
     case 'savequery':
     case 'cmdQuerySave':
-        # Save XML file query
         fixPost($post);
-        # Do not save _CMD...
         unset($post['_CMD']);
         header('Content-type: text/xml');
         header('Content-Disposition: attachment; filename=Query_' . str_replace(' ', '', $RegionId) . '.xml');
@@ -1198,7 +1172,7 @@ switch ($cmd) {
         $xml_filename = BASE . '/test/query_2.0_geography.xml';
         $xml_string = file_get_contents($xml_filename);
 
-        # Attempt to read as 1.0 query version (malformed XML)
+        // Attempt to read as 1.0 query version (malformed XML)
         $iReturn = query_is_v1($xml_string);
         if ($iReturn > 0) {
             $diquery = query_read_v1($xml_string);
@@ -1214,9 +1188,7 @@ switch ($cmd) {
         }
         break;
     case 'cmdQueryOpen2':
-        # Open XML file query
         if (isset($_FILES['qry'])) {
-            # Open file, decode and assign saved query..
             $myfile = $_FILES['qry']['tmp_name'];
             $handle = fopen($myfile, 'r');
             $cq = fread($handle, filesize($myfile));
@@ -1315,37 +1287,32 @@ switch ($cmd) {
         }
         break;
     case 'main':
-        # Direct access returns a list of public regions on this server
         $t->assign('LanguageList', $us->q->loadLanguages(1));
         $t->assign('CountryList', $us->q->getCountryList());
 
-        # Datacards
         $t->assign('LabelsDisaster', $us->q->queryLabelsFromGroup('Disaster', $lg));
         $t->assign('LabelsRecord1', $us->q->queryLabelsFromGroup('Record|1', $lg));
         $t->assign('LabelsEvent', $us->q->queryLabelsFromGroup('Event', $lg));
         $t->assign('LabelsCause', $us->q->queryLabelsFromGroup('Cause', $lg));
 
-        # Query Design
         $t->assign('rc2', $us->q->queryLabelsFromGroup('Record|2', $lg));
 
-        # Query words and phrases in dictionary..
         $ef1 = $us->q->queryLabelsFromGroup('Effect|People', $lg);
         $ef2 = $us->q->queryLabelsFromGroup('Effect|Affected', $lg);
         $ef3 = $us->q->queryLabelsFromGroup('Effect|Economic', $lg);
         $ef4 = $us->q->queryLabelsFromGroup('Effect|More', $lg);
         $sec = $us->q->queryLabelsFromGroup('Sector', $lg);
 
-        $sec['SectorTransport'][3]      = null; #array('EffectRoads' => $ef2['EffectRoads'][0]);
+        $sec['SectorTransport'][3]      = null;
         $sec['SectorCommunications'][3] = null;
         $sec['SectorRelief'][3]         = null;
-        $sec['SectorAgricultural'][3]   = null; #array('EffectFarmingAndForest' => $ef2['EffectFarmingAndForest'][0],
-                                                #'EffectLiveStock' => $ef2['EffectLiveStock'][0]);
+        $sec['SectorAgricultural'][3]   = null;
         $sec['SectorWaterSupply'][3]    = null;
         $sec['SectorSewerage'][3]       = null;
-        $sec['SectorEducation'][3]      = null; #array('EffectEducationCenters' => $ef2['EffectEducationCenters'][0]);
+        $sec['SectorEducation'][3]      = null;
         $sec['SectorPower'][3]          = null;
         $sec['SectorIndustry'][3]       = null;
-        $sec['SectorHealth'][3]         = null; #array('EffectMedicalCenters' => $ef2['EffectMedicalCenters'][0]);
+        $sec['SectorHealth'][3]         = null;
         $sec['SectorOther'][3]          = null;
         $dic = array();
         $dic = array_merge($dic, $us->q->queryLabelsFromGroup('MapOpt', $lg));
@@ -1361,7 +1328,6 @@ switch ($cmd) {
         $t->assign('ef3', $ef3);
         $t->assign('ef4', $ef4);
         $t->assign('sec', $sec);
-        # DATA
         $dc2 = array();
         $dc2 = array_merge($dc2, $us->q->queryLabelsFromGroup('Disaster', $lg));
         $dc2 = array_merge($dc2, $us->q->queryLabelsFromGroup('Record|2', $lg));
@@ -1385,9 +1351,9 @@ switch ($cmd) {
             ',',
             'GeographyCode,DisasterLatitude,DisasterLongitude,RecordAuthor,RecordCreation,RecordUpdate,EventNotes'
         );
-        $t->assign('sda1', $sda1);  # array_diff_key($dc2, array_flip($sda))
+        $t->assign('sda1', $sda1);
 
-        # MAPS
+        // Map parameters
         $range[] = array(     10, '1 - 10'          , 'ffff99');
         $range[] = array(    100, '11 - 100'        , 'ffff00');
         $range[] = array(   1000, '101 - 1000'      , 'ffcc00');
@@ -1396,14 +1362,14 @@ switch ($cmd) {
         $range[] = array(1000000, '100001 - 1000000', '660000');
         $range[] = array(''     , '1000001 ->'      , '000000');
         $t->assign('range', $range);
-        # STATISTIC
+        // Statistics
         $st = array();
         $std = array();
         $std = array_merge($std, $us->q->queryLabelsFromGroup('Statistic', $lg));
         $std = array_merge($std, $st);
         $t->assign('std', $std);
 
-        # DATACARDS
+        // Datacards
         $t->assign('usr', $us->UserId);
         $dic = $us->q->queryLabelsFromGroup('DB', $lg);
         switch ($desinventarUserRole) {
@@ -1438,17 +1404,10 @@ switch ($cmd) {
         $t->assign('sc3', $sc3);
         $t->assign('dmg', $us->q->queryLabelsFromGroup('MetGuide', $lg));
 
-        # BEGIN THEMATIC MAP
-        # 2010-01-18 (jhcaiced) Windows machines doesn't use remote servers
         if (isset($_SERVER['WINDIR'])) {
             $desinventarHasInternet = 0;
         } else {
-            # Linux machines are assumed to be connected to internet
             $desinventarHasInternet = 1;
-            #if (!fsockopen('www.google.com',80))
-            #{
-            #	$desinventarHasInternet = 0;
-            #}
         }
         $t->assign('desinventarHasInternet', $desinventarHasInternet);
         $t->assign('configfile', $lg . '.conf');

@@ -6,7 +6,19 @@
 
 namespace DesInventar\Legacy;
 
-use \DesInventar\Legacy\DIDate;
+use DIDate;
+use Math;
+
+use \Graph;
+use \PieGraph;
+use \Text;
+use \PiePlot;
+use \PiePlot3d;
+use \BarPlot;
+use \AccBarPlot;
+use \GroupBarPlot;
+use \LinePlot;
+use \AccLinePlot;
 
 class Graphic
 {
@@ -185,9 +197,9 @@ class Graphic
             if ($h > $hx) {
                 $hx = $h;
             }
-            $this->g = new \PieGraph($wx, $hx, 'auto');
+            $this->g = new PieGraph($wx, $hx, 'auto');
             // Set label with variable displayed
-            $t1 = new \Text($sY1AxisLabel);
+            $t1 = new Text($sY1AxisLabel);
             $t1->SetPos(0.30, 0.8);
             $t1->SetOrientation('h');
             $t1->SetFont(FF_ARIAL, FS_NORMAL);
@@ -243,7 +255,7 @@ class Graphic
             if ($wx > 980) {
                 $wx = 980;
             }
-            $this->g = new \Graph($wx, $hx, 'auto');
+            $this->g = new Graph($wx, $hx, 'auto');
             if (isset($opc['prmGraph']['Scale'][0])) {
                 $this->g->SetScale($opc['prmGraph']['Scale'][0]); // textint, textlog
                 $this->g->xgrid->Show(true, true);
@@ -371,8 +383,8 @@ class Graphic
                     }
                     $y1->SetLegend($sY1AxisLabel);
                     $y2->SetLegend($sY2AxisLabel);
-                    $y1p = new \GroupBarPlot(array($y1, $zp));
-                    $y2p = new \GroupBarPlot(array($zp, $y2));
+                    $y1p = new GroupBarPlot(array($y1, $zp));
+                    $y2p = new GroupBarPlot(array($zp, $y2));
                     $this->g->Add($y1p);
                     $this->g->AddY2($y2p);
                 }
@@ -392,7 +404,7 @@ class Graphic
                     // Add Tendence Line : Linear regression , others
                     if ($opc['prmGraph']['Tendency'][0] == 'LINREG') {
                         // Add linear regression (Test)
-                        $std = new \Math();
+                        $std = new Math();
                         $xx = array_fill(0, count($val), 0);
                         $rl = $std->linearRegression(array_keys($xx), array_values($val));
                         $n = 0;
@@ -633,12 +645,12 @@ class Graphic
     public function pie($opc, $axi, $pal)
     {
         if ($opc['prmGraph']['Feel'] == '3D') {
-            $p = new \PiePlot3d(array_values($axi));
+            $p = new PiePlot3d(array_values($axi));
             $p->SetEdge('navy');
             $p->SetStartAngle(45);
             $p->SetAngle(55);
         } else {
-            $p = new \PiePlot(array_values($axi));
+            $p = new PiePlot(array_values($axi));
         }
         $p->SetSliceColors($pal);
         $p->SetCenter(0.32, 0.3);
@@ -655,7 +667,7 @@ class Graphic
     // Setting a Bar Graphic
     public function bar($opc, $axi, $color)
     {
-        $b = new \BarPlot(array_values($axi));
+        $b = new BarPlot(array_values($axi));
         // normal histogram..
         if (is_array($color)) {
             $b->SetFillColor($color);
@@ -686,9 +698,9 @@ class Graphic
             $i++;
         }
         if ($opc['prmGraph']['Mode'][0] == 'STACKED') {
-            $gb = new \AccBarPlot($b);
+            $gb = new AccBarPlot($b);
         } else {
-            $gb = new \GroupBarPlot($b);
+            $gb = new GroupBarPlot($b);
         }
         $gb->SetWidth(0.98);
         return $gb;
@@ -697,7 +709,7 @@ class Graphic
     // Setting a Line graphic
     public function line($opc, $val, $col)
     {
-        $l = new \LinePlot(array_values($val));
+        $l = new LinePlot(array_values($val));
         if ($col == 'dashed') {
             $l->SetColor('darkred');
             $l->SetStyle('dashed');
@@ -719,7 +731,7 @@ class Graphic
             $i++;
         }
         if ($opc['prmGraph']['Mode'][0] == 'STACKED') {
-            $gl = new \AccLinePlot($l);
+            $gl = new AccLinePlot($l);
         } else {
             $gl = $l;
         }

@@ -170,33 +170,33 @@ if (isset($post['page']) || isset($post['_S+cmd'])) {
                     $iCount++;
                 }
                 /*
-				// This is the old method for getting the columns translated
-				foreach ($sel as $kk=>$ii)
-				{
-					$i2 = substr($ii, 2);
-					$i3 = substr($ii, 0, -1);
-					if (isset($dic['Statistic'. $ii][0]))
-					{
-						$dk[$ii] = $dic['Statistic'. $ii][0];
-					}
-					elseif (isset($dic['Statistic'. $i2][0]))
-					{
-						$dk[$ii] = $dic['Statistic'. $i2][0];
-					}
-					elseif (isset($dic[$i3][0]))
-					{
-						$dk[$ii] = $dic[$i3][0];
-					}
-					elseif (isset($dic[$ii][0]))
-					{
-						$dk[$ii] = $dic[$ii][0];
-					}
-					else
-					{
-						$dk[$ii] = $ii;		// no traduction..
-					}
-				}
-				*/
+                // This is the old method for getting the columns translated
+                foreach ($sel as $kk=>$ii)
+                {
+                    $i2 = substr($ii, 2);
+                    $i3 = substr($ii, 0, -1);
+                    if (isset($dic['Statistic'. $ii][0]))
+                    {
+                        $dk[$ii] = $dic['Statistic'. $ii][0];
+                    }
+                    elseif (isset($dic['Statistic'. $i2][0]))
+                    {
+                        $dk[$ii] = $dic['Statistic'. $i2][0];
+                    }
+                    elseif (isset($dic[$i3][0]))
+                    {
+                        $dk[$ii] = $dic[$i3][0];
+                    }
+                    elseif (isset($dic[$ii][0]))
+                    {
+                        $dk[$ii] = $dic[$ii][0];
+                    }
+                    else
+                    {
+                        $dk[$ii] = $ii;     // no traduction..
+                    }
+                }
+                */
                 if (!empty($export)) {
                     $ColumnSeparator = "\t";
                     if ($export == 'csv') {
@@ -227,5 +227,5 @@ if (isset($post['page']) || isset($post['_S+cmd'])) {
         }
     }
 }
-$t->force_compile   = true; # Force this template to always compile
+$t->force_compile   = true; // Force this template to always compile
 $t->display('statistic.tpl');
