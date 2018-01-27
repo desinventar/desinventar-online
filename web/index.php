@@ -18,6 +18,7 @@ use \DesInventar\Legacy\DIRegionRecord;
 use \DesInventar\Legacy\DIGraph;
 use \DesInventar\Legacy\DICause;
 use \DesInventar\Legacy\DIEvent;
+use \DesInventar\Legacy\DIGeoCarto;
 
 $post = $_POST;
 $get  = $_GET;
