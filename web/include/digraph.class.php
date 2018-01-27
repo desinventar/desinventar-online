@@ -5,9 +5,10 @@
 */
 namespace DesInventar\Legacy;
 
-use \DesInventar\Legacy\Graphic;
+use \DIResult;
+use Graphic;
 
-class DIGraph extends \DIResult
+class DIGraph extends DIResult
 {
     private $options_default_graph = array(
         'Type'          => 'HISTOGRAM',

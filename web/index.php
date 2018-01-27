@@ -21,6 +21,7 @@ use \DesInventar\Legacy\DIEvent;
 use \DesInventar\Legacy\DIGeoCarto;
 use \DesInventar\Legacy\DIGeography;
 use \DesInventar\Legacy\DIGeoLevel;
+use \DesInventar\Legacy\DIProfile;
 
 $post = $_POST;
 $get  = $_GET;
@@ -1267,17 +1268,6 @@ switch ($cmd) {
         $p = new DIProfile($us, $xml_profile);
         $html = $p->execute();
         echo $html;
-        /*
-		$graph = new DIGraphXML(
-			$us,
-			reset($xml_profile->xpath('graph')),
-			reset($xml_profile->xpath('query'))
-		);
-		$graph->execute();
-		echo '<img src="' . $graph->output['ImageURL'] . '" />';
-		*/
-        #$answer = array();
-        #echo json_encode($answer);
         break;
     case 'cmdGraphShow':
     case 'cmdGraphSave':
@@ -1296,7 +1286,7 @@ switch ($cmd) {
         $post = $_POST;
         fixPost($post);
         $post['General']['LangIsoCode'] = $lg;
-        $graph = new \DesInventar\Legacy\DIGraph($us, $post);
+        $graph = new DIGraph($us, $post);
         $graph->execute();
 
         if ($cmd == 'cmdGraphShow') {
