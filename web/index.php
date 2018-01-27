@@ -17,6 +17,7 @@ use \DesInventar\Legacy\DIRegionDB;
 use \DesInventar\Legacy\DIRegionRecord;
 use \DesInventar\Legacy\DIGraph;
 use \DesInventar\Legacy\DICause;
+use \DesInventar\Legacy\DIEvent;
 
 $post = $_POST;
 $get  = $_GET;
