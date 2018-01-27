@@ -740,9 +740,7 @@ switch ($cmd) {
             $iReturn = ERR_UNKNOWN_ERROR;
         }
         if ($iReturn > 0) {
-            require_once('include/fileuploader_xhr.php');
-            require_once('include/fileuploader_form.php');
-            require_once('include/fileuploader.php');
+            require_once '../external/valums-fileuploader/fileuploader.php';
             $allowedExtensions = array('dbf','shp','shx');
             $sizeLimit = 100 * 1024 * 1024;
             $OutDir = TMP_DIR . '/' . $us->sSessionId;
@@ -960,16 +958,14 @@ switch ($cmd) {
             $iReturn = ERR_ACCESS_DENIED;
         }
         if ($iReturn > 0) {
-            require_once('include/fileuploader_xhr.php');
-            require_once('include/fileuploader_form.php');
-            require_once('include/fileuploader.php');
+            require_once '../external/valums-fileuploader/fileuploader.php';
             $allowedExtensions = array('zip');
             $sizeLimit = 100 * 1024 * 1024;
             $OutDir = TMP_DIR . '/' . $us->sSessionId;
             if (!is_dir($OutDir)) {
                 mkdir($OutDir);
             }
-            $uploader = new QqFileUploader($allowedExtensions, $sizeLimit);
+            $uploader = new qqFileUploader($allowedExtensions, $sizeLimit);
             $answer = $uploader->handleUpload($OutDir . '/');
             if (isset($answer['error'])) {
                 $answer['success'] = false;

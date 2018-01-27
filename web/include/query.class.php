@@ -1962,16 +1962,19 @@ class Query
 
     public function getCountryName($prmCountryIso, $LangIsoCode)
     {
-        $query = "
-        SELECT * FROM CountryName
-        WHERE CountryIso='" . $prmCountryIso . "' AND LangIsoCode='" . $LangIsoCode . "'";
-        foreach ($this->base->query($query) as $row) {
-            $CountryName = $row['CountryName'];
+        $query = trim("
+            SELECT * FROM CountryName
+            WHERE CountryIso='" . $prmCountryIso . "' AND LangIsoCode='" . $LangIsoCode . "'
+        ");
+        try {
+            foreach ($this->base->query($query) as $row) {
+                $CountryName = $row['CountryName'];
+            }
+        } catch (Exception $e) {
         }
         if (!empty($CountryName)) {
             return $CountryName;
         }
-
         // Fallback to using default country table with official ISO names (mostly in English)
         $query = "SELECT * FROM Country WHERE CountryIso='" . $prmCountryIso . "'";
         foreach ($this->base->query($query) as $row) {

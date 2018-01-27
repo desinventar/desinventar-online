@@ -15,6 +15,8 @@ COPY files/apache/desinventar-centos-default.* /etc/httpd/conf.d/
 RUN sed -i 's#logs/access_log#/dev/stderr#; s#logs/error_log#/dev/stderr#' /etc/httpd/conf/httpd.conf
 COPY files/apache/desinventar-centos-default.conf /etc/httpd/conf.d/web.conf
 RUN sed -i 's#localhost#desinventaronline_web_1#' /etc/httpd/conf.d/web.conf
+RUN sed -i 's#^post_max_size = 8M$#post_max_size = 100M#' /etc/php.ini
+RUN sed -i 's#^upload_max_filesize = 2M$#upload_max_filesize = 100M#' /etc/php.ini
 
 COPY . /usr/share/desinventar
 
