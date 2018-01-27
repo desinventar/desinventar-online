@@ -8,7 +8,7 @@ namespace DesInventar\Legacy;
 use Aura\Sql\ExtendedPdo;
 use \DesInventar\Legacy\DIRegion;
 use \Pdo as Pdo;
-use \DIGeoCarto;
+use \DesInventar\Legacy\DIGeoCarto;
 use \DIGeography;
 use \DISync;
 use \DIGeoLevel;
