@@ -8,6 +8,8 @@ require_once('include/loader.php');
 require_once('include/query.class.php');
 require_once('include/dieefield.class.php');
 
+use \DesInventar\Legacy\DIEEField;
+
 $get = $_POST;
 $RegionId = getParameter('RegionId', getParameter('r', ''));
 if ($RegionId == '') {
