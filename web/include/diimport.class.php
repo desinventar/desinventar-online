@@ -9,6 +9,7 @@ use DIDisaster;
 use DICause;
 use DIEvent;
 use DIGeography;
+use DIGeoLevel;
 
 class DIImport
 {

@@ -14,6 +14,7 @@ require_once('include/digeocarto.class.php');
 require_once 'include/geolevel_operations.php';
 
 use \DesInventar\Legacy\DIGeoCarto;
+use \DesInventar\Legacy\DIGeoLevel;
 
 $post = $_POST;
 $get = $_GET;
