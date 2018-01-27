@@ -5,7 +5,7 @@
 */
 namespace DesInventar\Legacy;
 
-use \Graphic;
+use \DesInventar\Legacy\Graphic;
 
 class DIGraph extends \DIResult
 {
@@ -33,14 +33,13 @@ class DIGraph extends \DIResult
             unset($prmOptions['prmGraph']);
         }
         if ($prmOptions['Graph']['Type'] == 'COMPARATIVE') {
-            # Bug 149 Disable HISTOGRAM options which can interfere with COMPARATIVE
             unset($prmOptions['Graph']['Stat']);
             unset($prmOptions['Graph']['Period']);
             unset($prmOptions['Graph']['MonthNames']);
         }
         parent::__construct($prmSession, $prmOptions);
         $this->options['Graph']   = array_merge($this->options_default_graph, $prmOptions['Graph']);
-    } #__construct()
+    }
 
     public function preProcessData()
     {
@@ -53,7 +52,7 @@ class DIGraph extends \DIResult
                 unset($this->options['Graph']['Tendency'][$key]);
             }
         }
-    } #preProcessData()
+    }
 
     public function execute()
     {
@@ -62,7 +61,6 @@ class DIGraph extends \DIResult
         $us = $this->session;
         $options = $this->options;
 
-        # load levels to display in totalizations
         foreach ($us->q->loadGeoLevels('', -1, false) as $k => $i) {
             $st['GraphGeographyId_'. $k] = array($i[0], $i[1]);
         }
@@ -93,15 +91,14 @@ class DIGraph extends \DIResult
         } elseif ($prmGraph['SubType'] >= 200) {
             $k = $prmGraph['SubType'] - 200;
             $prmGraph['VarList'] = 'D.GeographyId_' . $k;
-            # Bug 127 - Limit data in graph results
             $query_graph = 'G.GeographyLevel>=' . $k;
         } else {
             $prmGraph['VarList'] = $prmGraph['SubType'];
         }
 
-        # Process QueryDesign Fields and count results
+        // Process QueryDesign Fields and count results
         $qd  = $us->q->genSQLWhereDesconsultar($options);
-        # Add specific query parameters
+        // Add specific query parameters
         if ($query_graph != '') {
             $qd .= ' AND (' . $query_graph . ')';
         }
@@ -114,11 +111,11 @@ class DIGraph extends \DIResult
         $sImageURL  = WWWDATA . '/graphs/graph_'. session_id() . '_' . time() . '.png';
         $sImageFile = WWWDIR  . '/graphs/graph_'. session_id() . '_' . time() . '.png';
 
-        # Process Configuration options to Graphic
+        // Process Configuration options to Graphic
         $ele = array();
         foreach (explode('|', $prmGraph['VarList']) as $itm) {
             if ($itm == 'D.DisasterBeginTime') {
-                # Histogram
+                // Histogram
                 if (isset($prmGraph['Stat']) && strlen($prmGraph['Stat'])>0) {
                     $ele[] = $prmGraph['Stat'] .'|'. $itm;
                 } else {
@@ -130,7 +127,7 @@ class DIGraph extends \DIResult
             } else {
                 $ele[] = '|'. $itm;
             }
-        } # foreach
+        }
 
         $options['NumberOfVerticalAxis'] = 1;
         $options['FieldList'] = $prmGraph['Field'];
@@ -141,7 +138,6 @@ class DIGraph extends \DIResult
         $sql = $us->q->genSQLProcess($qd, $opc);
         $dislist = $us->q->getassoc($sql);
         if (!empty($dislist)) {
-            # Bug #126 - Remove elements with no value from comparatives
             if ($prmGraph['Type'] == 'COMPARATIVE') {
                 $field_id = reset(explode('|', $prmGraph['Field'][0]));
                 if (substr($field_id, 0, 2) == 'D.') {
@@ -157,12 +153,12 @@ class DIGraph extends \DIResult
                     }
                 }
             }
-            # Process results data
+            // Process results data
             $dl = $us->q->prepareList($dislist, 'GRAPH');
             $gl = array();
-            # Translate Labels to Selected Language
+            // Translate Labels to Selected Language
             foreach ($dl as $k => $i) {
-                $kk = substr($k, 0, -1); # Select Hay marked like EffectsXX_
+                $kk = substr($k, 0, -1); // Select Hay marked like EffectsXX_
                 $k2 = substr($k, 2);
                 if (isset($dic['Graph'. $k][0])) {
                     $dk = $dic['Graph'. $k][0];
@@ -179,11 +175,14 @@ class DIGraph extends \DIResult
             }
 
             $options['DateRange'] = $us->getDateRange($options['D_RecordStatus']);
-            # Construct Graphic Object and Show Page
-            $g = new Graphic($us, $options, $gl);
-            # Wrote graphic to file
+            // Construct Graphic Object and Show Page
             try {
-                $g->Stroke($sImageFile);
+                $g = new \DesInventar\Legacy\Graphic($us, $options, $gl);
+            } catch (Exception $e) {
+            }
+            // Wrote graphic to file
+            try {
+                $g->stroke($sImageFile);
             } catch (Exception $e) {
                 error_log('[DESINVENTAR_GRAPHS] ' . $e->getMessage());
                 // The graph image cannot be created, so we use a default blank image instead here
@@ -196,6 +195,6 @@ class DIGraph extends \DIResult
             $this->output['QueryDetail'] = $us->q->getQueryDetails($dic, $options);
             $this->output['ImageURL']    = $sImageURL . '?'. rand(1, 3000);
             $this->output['ImageFile']   = $sImageFile;
-        } #if
-    } #execute()
-} #class
+        }
+    }
+}

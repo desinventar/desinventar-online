@@ -1233,6 +1233,15 @@ switch ($cmd) {
     case 'profiles':
     case 'reports':
     case 'cmdProfiles':
+        require_once(JPGRAPHDIR . '/jpgraph.php');
+        require_once(JPGRAPHDIR . '/jpgraph_line.php');
+        require_once(JPGRAPHDIR . '/jpgraph_log.php');
+        require_once(JPGRAPHDIR . '/jpgraph_date.php');
+        require_once(JPGRAPHDIR . '/jpgraph_bar.php');
+        require_once(JPGRAPHDIR . '/jpgraph_pie.php');
+        require_once(JPGRAPHDIR . '/jpgraph_pie3d.php');
+        require_once('include/math.class.php');
+        require_once('include/date.class.php');
         require_once('include/graphic.class.php');
         require_once('include/diresult.class.php');
         require_once('include/digraph.class.php');
@@ -1267,13 +1276,22 @@ switch ($cmd) {
         break;
     case 'cmdGraphShow':
     case 'cmdGraphSave':
+        require_once(JPGRAPHDIR . '/jpgraph.php');
+        require_once(JPGRAPHDIR . '/jpgraph_line.php');
+        require_once(JPGRAPHDIR . '/jpgraph_log.php');
+        require_once(JPGRAPHDIR . '/jpgraph_date.php');
+        require_once(JPGRAPHDIR . '/jpgraph_bar.php');
+        require_once(JPGRAPHDIR . '/jpgraph_pie.php');
+        require_once(JPGRAPHDIR . '/jpgraph_pie3d.php');
+        require_once('include/math.class.php');
+        require_once('include/date.class.php');
         require_once('include/graphic.class.php');
         require_once('include/diresult.class.php');
         require_once('include/digraph.class.php');
         $post = $_POST;
         fixPost($post);
         $post['General']['LangIsoCode'] = $lg;
-        $graph = new DIGraph($us, $post);
+        $graph = new \DesInventar\Legacy\DIGraph($us, $post);
         $graph->execute();
 
         if ($cmd == 'cmdGraphShow') {
@@ -1282,10 +1300,10 @@ switch ($cmd) {
             $t->assign('qdet', $graph->output['QueryDetails']);
             $t->assign('image', $graph->output['ImageURL']);
             $t->assign('ctl_showres', true);
-            $t->force_compile   = true; # Force this template to always compile
+            $t->force_compile   = true; // Force this template to always compile
             $t->display('graphic.tpl');
         } else {
-            # Save Graph as Image
+            // Save Graph as Image
             $filename = 'DesInventar_'. str_replace(' ', '', $RegionLabel) .'_Graphic.png';
             header('Content-type: Image/png');
             header('Content-Disposition: attachment; filename=' . $filename);

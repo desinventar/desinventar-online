@@ -7,7 +7,7 @@
 namespace DesInventar\Legacy;
 
 use \DesInventar\Legacy\DIRegion;
-use \DIDate;
+use \DesInventar\Legacy\DIDate;
 use \Pdo;
 
 class DIRegionRecord extends DIRegion

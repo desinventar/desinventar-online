@@ -8,7 +8,7 @@ namespace DesInventar\Legacy;
 use DesInventar\Legacy\DIRegion;
 use \DIRecord;
 use \UUID;
-use \DIDate;
+use \DesInventar\Legacy\DIDate;
 use \DICause;
 use \DIEvent;
 use \DIGeography;
@@ -32,18 +32,18 @@ class DIDisaster extends DIRecord
                               'DisasterLatitude/DOUBLE,' .
                               'DisasterLongitude/DOUBLE,' .
                               'DisasterSource/STRING,' .
-                              
+
                               'RecordStatus/STRING,' .
                               'RecordAuthor/STRING,' .
                               'RecordCreation/DATETIME,' .
                               'RecordSync/DATETIME,' .
                               'RecordUpdate/DATETIME,' .
-                              
+
                               'EventId/STRING,' .
                               'EventNotes/STRING,' .
                               'EventDuration/INTEGER,' .
                               'EventMagnitude/STRING,' .
-                              
+
                               'CauseId/STRING,' .
                               'CauseNotes/STRING';
         $this->sEffectDef1   ='EffectPeopleDead/INTEGER,' .
@@ -114,7 +114,7 @@ class DIDisaster extends DIRecord
         }
         return $sFieldDef;
     }
-    
+
     public function load()
     {
         $iReturn = parent::load();
@@ -150,7 +150,7 @@ class DIDisaster extends DIRecord
         $iReturn = parent::validateCreate($bStrict);
         return $iReturn;
     }
-    
+
     public function validateUpdate($bStrict)
     {
         $iReturn = parent::validateUpdate($bStrict);
@@ -211,7 +211,7 @@ class DIDisaster extends DIRecord
         }
         return $iReturn;
     }
-        
+
     public function validateEffects($ErrCode, $isError)
     {
         $iReturn = ERR_NO_ERROR;
@@ -258,7 +258,7 @@ class DIDisaster extends DIRecord
         }
         return $iReturn;
     }
-    
+
     public function update($withValidate = 1, $bStrict = 1)
     {
         $iReturn = ERR_NO_ERROR;
@@ -344,34 +344,34 @@ class DIDisaster extends DIRecord
         foreach ($DisasterImport as $Index => $Field) {
             $this->set($Field, $values[$Index]);
         }
-        
+
         // Validation Settings
         $this->set('RecordStatus', 'PUBLISHED');
         if ($this->get('DisasterSource') == '') {
             $this->set('RecordStatus', 'DRAFT');
         }
-        
+
         $DI6GeographyCode = $this->get('GeographyId');
         $GeographyId = DIGeography::getIdByCode($this->session, $DI6GeographyCode);
         if ($GeographyId == '') {
             $GeographyId = $DI6GeographyCode;
         }
         $this->set('GeographyId', $GeographyId);
-        
+
         $DI6EventId = $this->get('EventId');
         $EventId = DIEvent::getIdByName($this->session, $DI6EventId);
         if ($EventId == '') {
             $EventId = $DI6EventId;
         }
         $this->set('EventId', $EventId);
-        
+
         $DI6CauseId = $this->get('CauseId');
         $CauseId = DICause::getIdByName($this->session, $DI6CauseId);
         if ($CauseId == '') {
             $CauseId = $DI6CauseId;
         }
         $this->set('CauseId', $CauseId);
-        
+
         //2009-07-25 Save fechapor/fechafec in EffectNotes
         $this->set(
             'EffectNotes',
@@ -381,7 +381,7 @@ class DIDisaster extends DIRecord
         );
         $this->set('RecordAuthor', $this->session->UserId);
         $this->set('RecordCreation', gmdate('c'));
-        
+
         return $iReturn;
     }
 
