@@ -5,7 +5,7 @@
 */
 namespace DesInventar\Legacy;
 
-use \DIStatus;
+use DIStatus;
 
 class DIObject
 {
