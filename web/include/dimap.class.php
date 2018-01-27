@@ -5,8 +5,6 @@
 */
 namespace DesInventar\Legacy;
 
-use DIResult;
-
 class DIMap extends DIResult
 {
     private $options_default_map = array(

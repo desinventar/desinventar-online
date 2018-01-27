@@ -6,8 +6,6 @@
 
 namespace DesInventar\Legacy;
 
-use DIRecord;
-
 class DIGeoCarto extends DIRecord
 {
     protected static $def = array(

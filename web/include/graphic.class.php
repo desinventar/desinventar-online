@@ -6,9 +6,6 @@
 
 namespace DesInventar\Legacy;
 
-use DIDate;
-use Math;
-
 use \Graph;
 use \PieGraph;
 use \Text;

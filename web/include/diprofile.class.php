@@ -6,8 +6,6 @@
 
 namespace DesInventar\Legacy;
 
-use DIGraphXML;
-
 class DIProfile
 {
     protected $xml = '';

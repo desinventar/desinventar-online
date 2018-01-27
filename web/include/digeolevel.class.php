@@ -5,8 +5,6 @@
 */
 namespace DesInventar\Legacy;
 
-use DIRecord;
-
 use \Pdo;
 
 class DIGeoLevel extends DIRecord

@@ -5,8 +5,6 @@
 */
 namespace DesInventar\Legacy;
 
-use DIRecord;
-
 class DIRegionAuth extends DIRecord
 {
     public function __construct($prmSession)

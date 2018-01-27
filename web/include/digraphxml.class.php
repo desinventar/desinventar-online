@@ -5,8 +5,6 @@
 */
 namespace DesInventar\Legacy;
 
-use DIGraph;
-
 class DIGraphXML extends DIGraph
 {
     public function __construct($prmSession, $xml_graph, $xml_query)

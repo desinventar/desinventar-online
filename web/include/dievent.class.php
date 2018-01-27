@@ -7,7 +7,6 @@
 namespace DesInventar\Legacy;
 
 use Ramsey\Uuid\UuidFactory;
-use DIRecord;
 
 use \PDO;
 

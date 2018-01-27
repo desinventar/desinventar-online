@@ -5,8 +5,6 @@
 */
 namespace DesInventar\Legacy;
 
-use DIRecord;
-
 class DIGeography extends DIRecord
 {
     protected static $def = array(

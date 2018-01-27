@@ -5,8 +5,6 @@
 */
 namespace DesInventar\Legacy;
 
-use DIObject;
-
 class DIRecord extends DIObject
 {
     // Dynamic Objects Variables

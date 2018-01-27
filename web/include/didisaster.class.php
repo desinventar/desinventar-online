@@ -5,13 +5,7 @@
 */
 namespace DesInventar\Legacy;
 
-use DesInventar\Legacy\DIRegion;
-use DIRecord;
 use \UUID;
-use DIDate;
-use DICause;
-use DIEvent;
-use DIGeography;
 
 class DIDisaster extends DIRecord
 {

@@ -5,8 +5,6 @@
 */
 namespace DesInventar\Legacy;
 
-use DIResult;
-
 class DIMapXML extends DIResult
 {
     public function __construct($prmSession, $prmOptions)
