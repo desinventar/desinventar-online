@@ -1,17 +1,18 @@
 <?php
-    //#!/usr/bin/php -d session.save_path='/tmp'
-    require_once('../../web/include/loader.php');
-    require_once(BASE . '/include/dievent.class.php');
-    require_once(BASE . '/include/dicause.class.php');
+//#!/usr/bin/php -d session.save_path='/tmp'
+require_once('../../web/include/loader.php');
+require_once(BASE . '/include/dievent.class.php');
+require_once(BASE . '/include/dicause.class.php');
 
-    use \DesInventar\Legacy\DICause;
+use \DesInventar\Legacy\DICause;
+use \DesInventar\Legacy\DIEvent;
 
-    $FileName = $argv[1];
-    $LangIsoCode = $argv[2];
-    $TableName   = $argv[3];
-    $fh = fopen($FileName, 'r');
-    // First line are headers
-    $values = fgetcsv($fh, 1000, ',');
+$FileName = $argv[1];
+$LangIsoCode = $argv[2];
+$TableName   = $argv[3];
+$fh = fopen($FileName, 'r');
+// First line are headers
+$values = fgetcsv($fh, 1000, ',');
 while (! feof($fh)) {
     $values = fgetcsv($fh, 1000, ',');
     if (count($values) > 1) {
@@ -68,5 +69,5 @@ while (! feof($fh)) {
         }
     }
 }
-    fclose($fh);
-    exit(0);
+fclose($fh);
+exit(0);

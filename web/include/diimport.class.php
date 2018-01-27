@@ -7,6 +7,7 @@ namespace DesInventar\Legacy;
 
 use DesInventar\Legacy\DIDisaster;
 use DesInventar\Legacy\DICause;
+use DesInventar\Legacy\DIEvent;
 
 class DIImport
 {

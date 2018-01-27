@@ -13,7 +13,7 @@ use \DIGeography;
 use \DISync;
 use \DIGeoLevel;
 use \DesInventar\Legacy\DICause;
-use \DIEvent;
+use \DesInventar\LegacyDIEvent;
 use \DIRegionItem;
 
 use \ZipArchive;

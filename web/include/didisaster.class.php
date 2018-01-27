@@ -10,7 +10,7 @@ use \DIRecord;
 use \UUID;
 use \DesInventar\Legacy\DIDate;
 use \DesInventar\Legacy\DICause;
-use \DIEvent;
+use \DesInventar\LegacyDIEvent;
 use \DIGeography;
 
 class DIDisaster extends DIRecord
