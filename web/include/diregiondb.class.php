@@ -13,9 +13,9 @@ use DIGeoCarto;
 use DIGeography;
 use DICause;
 use DIEvent;
+use DIGeoLevel;
 
 use \DISync;
-use \DIGeoLevel;
 use \DIRegionItem;
 
 use \ZipArchive;
