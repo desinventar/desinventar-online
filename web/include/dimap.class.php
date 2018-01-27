@@ -5,7 +5,7 @@
 */
 namespace DesInventar\Legacy;
 
-use \DIResult;
+use DIResult;
 
 class DIMap extends DIResult
 {
