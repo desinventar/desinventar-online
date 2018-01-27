@@ -172,7 +172,7 @@ function str2js($str)
     $str2 = ereg_replace("'", "", $str2);
     return $str2;
     //return preg_replace('/([^ :!#$%@()*+,-.\x30-\x5b\x5d-\x7e])/e',
-    //	"'\\x'.(ord('\\1')<16? '0': '').dechex(ord('\\1'))",$s);
+    //  "'\\x'.(ord('\\1')<16? '0': '').dechex(ord('\\1'))",$s);
 }
 
 // Pseudo-random UUID according to RFC 4122

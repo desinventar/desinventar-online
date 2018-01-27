@@ -444,7 +444,7 @@ class Query
                 $table = "Geography";
                 $fld   = "GeographyId";
                 break;
-            // case "GEONAME":		$name = "GeographyName";	$table = "Geography"; 	$fld = "GeographyId";	break;
+            // case "GEONAME":      $name = "GeographyName";    $table = "Geography";   $fld = "GeographyId";   break;
             case "GEOCODE":
                 $name  = "GeographyId";
                 $table = "Geography";
@@ -529,8 +529,8 @@ class Query
             $data .= $row['GeographyName'];
             $i++;
         }
-        //	$sql = "SELECT GeographyFQName FROM Geography WHERE GeographyId='". $geoid ."'";
-        //	$data = $this->dreg->query($sql);
+        //  $sql = "SELECT GeographyFQName FROM Geography WHERE GeographyId='". $geoid ."'";
+        //  $data = $this->dreg->query($sql);
         return $data;
     }
 
