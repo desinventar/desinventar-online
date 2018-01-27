@@ -7,7 +7,9 @@ namespace DesInventar\Legacy;
 
 use Ramsey\Uuid\UuidFactory;
 
-class DICause extends \DIRecord
+use DIRecord;
+
+class DICause extends DIRecord
 {
     protected static $def = array(
         'CauseId' => array('type' => 'VARCHAR', 'size' => 50, 'pk' => 1),

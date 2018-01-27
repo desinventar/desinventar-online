@@ -14,9 +14,8 @@ use DIGeography;
 use DICause;
 use DIEvent;
 use DIGeoLevel;
-
-use \DISync;
-use \DIRegionItem;
+use DIRegionItem;
+use DISync;
 
 use \ZipArchive;
 

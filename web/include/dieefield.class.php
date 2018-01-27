@@ -5,7 +5,9 @@
 */
 namespace DesInventar\Legacy;
 
-class DIEEField extends \DIRecord
+use DIRecord;
+
+class DIEEField extends DIRecord
 {
     protected static $def = array(
         'EEFieldId' => array('type' => 'VARCHAR', 'size' => 30, 'pk' => 1),

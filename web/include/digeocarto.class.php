@@ -6,7 +6,9 @@
 
 namespace DesInventar\Legacy;
 
-class DIGeoCarto extends \DIRecord
+use DIRecord;
+
+class DIGeoCarto extends DIRecord
 {
     protected static $def = array(
         'GeographyId' => array('type' => 'VARCHAR', 'size' => 100, 'pk' => 1),

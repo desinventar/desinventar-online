@@ -5,6 +5,7 @@
 */
 
 require_once('include/loader.php');
+require_once('include/distatus.class.php');
 require_once('include/diobject.class.php');
 require_once('include/diregion.class.php');
 
