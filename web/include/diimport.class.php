@@ -6,6 +6,7 @@
 namespace DesInventar\Legacy;
 
 use DesInventar\Legacy\DIDisaster;
+use DesInventar\Legacy\DICause;
 
 class DIImport
 {
@@ -14,12 +15,12 @@ class DIImport
         $this->us = $prmSessionId;
         $this->q = new Query($this->us->RegionId);
     }
-    
+
     public function validateFromCSV($FileName, $ObjectType)
     {
         return $this->importFromCSV($FileName, $ObjectType, false);
     }
-        
+
     public function importFromCSV($FileName, $ObjectType, $doImport = true, $prmMaxLines = 10000, $prmHeaderLines = 2)
     {
         $maxLines = 1000000;

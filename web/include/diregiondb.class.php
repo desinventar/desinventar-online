@@ -12,7 +12,7 @@ use \DIGeoCarto;
 use \DIGeography;
 use \DISync;
 use \DIGeoLevel;
-use \DICause;
+use \DesInventar\Legacy\DICause;
 use \DIEvent;
 use \DIRegionItem;
 
