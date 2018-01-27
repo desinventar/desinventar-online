@@ -5,8 +5,9 @@
 */
 namespace DesInventar\Legacy;
 
+use DIRecord;
+
 use Aura\SqlQuery\QueryFactory;
-use \DIRecord;
 
 class DIUser extends DIRecord
 {

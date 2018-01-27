@@ -5,7 +5,7 @@
 */
 namespace DesInventar\Legacy;
 
-use \DIRecord;
+use DIRecord;
 
 class DIGeography extends DIRecord
 {

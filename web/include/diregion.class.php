@@ -6,13 +6,13 @@
 namespace DesInventar\Legacy;
 
 use \DesInventar\Service\RegionInfo;
-use \DesInventar\Legacy\UserSession;
+use UserSession;
 
 use \DomDocument;
 use \Pdo;
 use \ZipArchive;
 
-class DIRegion extends \DIObject
+class DIRegion extends DIObject
 {
     public function __construct($prmSession)
     {

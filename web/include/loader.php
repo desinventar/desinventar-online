@@ -118,6 +118,7 @@ $config->paths['www_data'] = '/desinventar-data';
 require_once 'define.php';
 require_once(BASE . '/include/usersession.class.php');
 require_once(BASE . '/include/date.class.php');
+require_once(BASE . '/include/distatus.class.php');
 require_once(BASE . '/include/diobject.class.php');
 require_once(BASE . '/include/diregion.class.php');
 require_once(BASE . '/include/direcord.class.php');

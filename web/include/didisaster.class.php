@@ -6,7 +6,7 @@
 namespace DesInventar\Legacy;
 
 use DesInventar\Legacy\DIRegion;
-use \DIRecord;
+use DIRecord;
 use \UUID;
 use DIDate;
 use DICause;
