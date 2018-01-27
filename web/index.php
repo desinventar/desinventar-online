@@ -14,8 +14,9 @@ require_once('include/query_operations.php');
 use \DesInventar\Legacy\UserSession;
 use \DesInventar\Legacy\DIRegion;
 use \DesInventar\Legacy\DIRegionDB;
-use DesInventar\Legacy\DIRegionRecord;
+use \DesInventar\Legacy\DIRegionRecord;
 use \DesInventar\Legacy\DIGraph;
+use \DesInventar\Legacy\DICause;
 
 $post = $_POST;
 $get  = $_GET;

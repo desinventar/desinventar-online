@@ -9,7 +9,7 @@ use DesInventar\Legacy\DIRegion;
 use \DIRecord;
 use \UUID;
 use \DesInventar\Legacy\DIDate;
-use \DICause;
+use \DesInventar\Legacy\DICause;
 use \DIEvent;
 use \DIGeography;
 

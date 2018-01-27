@@ -8,6 +8,8 @@ require_once('include/loader.php');
 require_once('include/query.class.php');
 require_once('include/dicause.class.php');
 
+use \DesInventar\Legacy\DICause;
+
 function form2cause ($form)
 {
 	$data = array ();
