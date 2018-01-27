@@ -8,10 +8,10 @@ namespace DesInventar\Legacy;
 use DesInventar\Legacy\DIRegion;
 use \DIRecord;
 use \UUID;
-use \DesInventar\Legacy\DIDate;
-use \DesInventar\Legacy\DICause;
-use \DesInventar\LegacyDIEvent;
-use \DIGeography;
+use DIDate;
+use DICause;
+use DIEvent;
+use DIGeography;
 
 class DIDisaster extends DIRecord
 {
