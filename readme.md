@@ -1,6 +1,5 @@
 
-DesInventar Online - http://www.desinventar.org
-(c) 1999-2017 Corporacion OSSO
+DesInventar Online - https://www.desinventar.org
+(c) 1998-2018 Corporacion OSSO
 
-http://online.desinventar.org
-
+https://online.desinventar.org
