@@ -8,6 +8,8 @@ require_once('include/loader.php');
 require_once('include/query.class.php');
 require_once('include/digeography.class.php');
 
+use \DesInventar\Legacy\DIGeography;
+
 $get = $_GET;
 
 $RegionId = getParameter('RegionId', getParameter('r', ''));

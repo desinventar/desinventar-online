@@ -19,6 +19,7 @@ use \DesInventar\Legacy\DIGraph;
 use \DesInventar\Legacy\DICause;
 use \DesInventar\Legacy\DIEvent;
 use \DesInventar\Legacy\DIGeoCarto;
+use \DesInventar\Legacy\DIGeography;
 
 $post = $_POST;
 $get  = $_GET;
