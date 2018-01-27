@@ -5,6 +5,8 @@
 */
 namespace DesInventar\Legacy;
 
+use \Pdo as Pdo;
+
 class DIRecord extends DIObject
 {
     // Dynamic Objects Variables
