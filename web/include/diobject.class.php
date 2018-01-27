@@ -5,8 +5,6 @@
 */
 namespace DesInventar\Legacy;
 
-use DIStatus;
-
 class DIObject
 {
     protected static $def = array();

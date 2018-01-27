@@ -6,7 +6,6 @@
 namespace DesInventar\Legacy;
 
 use \DesInventar\Service\RegionInfo;
-use UserSession;
 
 use \DomDocument;
 use \Pdo;

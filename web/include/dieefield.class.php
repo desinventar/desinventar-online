@@ -5,8 +5,6 @@
 */
 namespace DesInventar\Legacy;
 
-use DIRecord;
-
 class DIEEField extends DIRecord
 {
     protected static $def = array(

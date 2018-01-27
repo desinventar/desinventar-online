@@ -5,8 +5,6 @@
 */
 namespace DesInventar\Legacy;
 
-use DIRecord;
-
 class DISync extends DIRecord
 {
     public function __construct($prmSession)

@@ -8,15 +8,6 @@ namespace DesInventar\Legacy;
 use Aura\Sql\ExtendedPdo;
 use \Pdo as Pdo;
 
-use DIRegion;
-use DIGeoCarto;
-use DIGeography;
-use DICause;
-use DIEvent;
-use DIGeoLevel;
-use DIRegionItem;
-use DISync;
-
 use \ZipArchive;
 
 class DIRegionDB extends DIRegion

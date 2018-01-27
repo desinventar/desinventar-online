@@ -5,12 +5,6 @@
 */
 namespace DesInventar\Legacy;
 
-use DIDisaster;
-use DICause;
-use DIEvent;
-use DIGeography;
-use DIGeoLevel;
-
 class DIImport
 {
     public function __construct($prmSessionId)

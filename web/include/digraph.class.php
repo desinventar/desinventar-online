@@ -5,9 +5,6 @@
 */
 namespace DesInventar\Legacy;
 
-use DIResult;
-use Graphic;
-
 class DIGraph extends DIResult
 {
     private $options_default_graph = array(
