@@ -23,6 +23,12 @@ return array(
         'auto_login' => 0,
         'general_secure_login' => 0,
     ),
+    'logger' => [
+        'file' => 'php://stdout',
+        // Monolog levels: DEBUG=100, INFO=200, NOTICE=250, WARNING=300,
+        // ERROR=400, CRITICAL=500, ALERT=550, EMERGENCY=600
+        'level' => 100,
+    ],
     // Database connection definition (default is sqlite)
     'database' => array(
         'driver' => 'sqlite',

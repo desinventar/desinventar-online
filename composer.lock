@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d059154bb8582e787c7e597e1a00441a",
+    "content-hash": "584c22e349ec5ad5ce76aba8cdb4ab82",
     "packages": [
         {
             "name": "DrUUID",
@@ -355,16 +355,16 @@
         },
         {
             "name": "pimple/pimple",
-            "version": "v3.2.0",
+            "version": "v3.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silexphp/Pimple.git",
-                "reference": "729436408ef52f9845f9b60d60b2563f314bf1a9"
+                "reference": "9e403941ef9d65d20cba7d54e29fe906db42cf32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/729436408ef52f9845f9b60d60b2563f314bf1a9",
-                "reference": "729436408ef52f9845f9b60d60b2563f314bf1a9",
+                "url": "https://api.github.com/repos/silexphp/Pimple/zipball/9e403941ef9d65d20cba7d54e29fe906db42cf32",
+                "reference": "9e403941ef9d65d20cba7d54e29fe906db42cf32",
                 "shasum": ""
             },
             "require": {
@@ -401,7 +401,7 @@
                 "container",
                 "dependency injection"
             ],
-            "time": "2017-07-17T17:05:21+00:00"
+            "time": "2018-01-21T07:42:36+00:00"
         },
         {
             "name": "psr/container",
