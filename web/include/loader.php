@@ -284,6 +284,14 @@ if ($config->flags['env'] != 'command') {
         'url' => DesInventar\Common\Util::getUrl()
     );
 
+    $container = new Pimple\Container();
+    $container['config'] = $config;
+    $container['log'] = function ($c) {
+        $log = new Monolog\Logger('desinventar');
+        $log->pushHandler(new Monolog\Handler\StreamHandler('php://stdout', Monolog\Logger::DEBUG));
+        return $log;
+    };
+
     // General Information (common to portal/app)
     $t->assign('desinventarMode', $config->flags['mode']);
     $t->assign('desinventarURL', $desinventarURL);
