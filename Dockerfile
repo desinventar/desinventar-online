@@ -39,6 +39,11 @@ RUN mkdir -p /var/lib/desinventar/database && \
 RUN mkdir -p /var/www/desinventar/data && \
     chown -R apache:apache /var/www/desinventar/data
 
+COPY files/seed/seed.tar.gz /tmp
+RUN cd /var/lib/desinventar && \
+    tar -zxf /tmp/seed.tar.gz && \
+    chown -R apache:apache /var/lib/desinventar
+
 RUN composer dump-autoload --optimize
 RUN yarn install
 RUN make
