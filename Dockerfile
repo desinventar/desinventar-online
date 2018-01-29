@@ -5,11 +5,18 @@ LABEL e-mail="jhcaiced@inticol.com"
 
 WORKDIR /usr/share/desinventar
 
-COPY composer.json composer.lock package.json /usr/share/desinventar/
 RUN composer self-update
-RUN composer install --no-scripts --no-autoloader --prefer-source --no-interaction
 RUN npm install -g yarn
-RUN yarn install
+
+ADD composer.json /tmp/composer.json
+ADD composer.lock /tmp/composer.lock
+RUN cd /tmp && composer install --no-scripts --no-autoloader --prefer-source --no-interaction
+RUN mkdir -p /usr/share/desinventar && cp -a /tmp/vendor /usr/share/desinventar
+
+ADD package.json /tmp/package.json
+ADD yarn.lock /tmp/yarn.lock
+RUN cd /tmp && yarn install
+RUN mkdir -p /usr/share/desinventar && cp -a /tmp/node_modules /usr/share/desinventar
 
 COPY files/apache/desinventar-centos-default.* /etc/httpd/conf.d/
 RUN sed -i 's#logs/access_log#/dev/stderr#; s#logs/error_log#/dev/stderr#' /etc/httpd/conf/httpd.conf
