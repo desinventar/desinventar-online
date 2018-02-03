@@ -27,7 +27,8 @@ RUN sed -i 's#^upload_max_filesize = 2M$#upload_max_filesize = 100M#' /etc/php.i
 
 COPY . /usr/share/desinventar
 
-RUN make database
+RUN make
+
 RUN mkdir -p /var/lib/desinventar/main/ && \
     cp files/database/{core.db,base.db,desinventar.db} /var/lib/desinventar/main/ && \
     chown -R apache:apache /var/lib/desinventar
@@ -44,11 +45,6 @@ COPY files/seed/seed.tar.gz /tmp
 RUN cd /var/lib/desinventar && \
     tar -zxf /tmp/seed.tar.gz && \
     chown -R apache:apache /var/lib/desinventar
-
-RUN composer dump-autoload --optimize
-RUN yarn install
-RUN make
-RUN ./node_modules/.bin/webpack -p
 
 ENV PATH="~/.composer/vendor/bin:./vendor/bin:/usr/share/desinventar/vendor/bin:${PATH}"
 
