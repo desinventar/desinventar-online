@@ -31,7 +31,7 @@ test-api: .FORCE
 	cd tests/unit && ../../vendor/bin/phpunit --testsuite api $(TEST)
 
 test-web: .FORCE
-	./node_modules/.bin/testcafe firefox:headless tests/e2e
+	xvfb-run '--server-args=-screen 0 1024x768x24' node_modules/.bin/testcafe firefox tests/e2e
 
 lint-php : .FORCE
 	find src api config web tests -name "*.php" -exec php -l {} > /dev/null \;
