@@ -27,6 +27,7 @@ RUN sed -i 's#^upload_max_filesize = 2M$#upload_max_filesize = 100M#' /etc/php.i
 
 COPY . /usr/share/desinventar
 
+RUN make database
 RUN mkdir -p /var/lib/desinventar/main/ && \
     cp files/database/{core.db,base.db,desinventar.db} /var/lib/desinventar/main/ && \
     chown -R apache:apache /var/lib/desinventar
