@@ -8,6 +8,7 @@ return array(
         'cachedir' => '/var/cache/smarty/desinventar',
     ),
     'paths' => array(
+        'fonts' => '/usr/share/fonts/liberation/fonts.txt',
         'libs_url' => '//cdn-desinventar.inticol.com/js',
     ),
     'maps' => array(
@@ -19,6 +20,7 @@ return array(
     'flags' => array(
         'mode' => 'normal',
         'env' => 'online',
+        'arch' => 'LINUX',
         'debug' => false,
         'auto_login' => 0,
         'general_secure_login' => 0,

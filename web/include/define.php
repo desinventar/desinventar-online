@@ -5,7 +5,7 @@ define('ARCH', $config->flags['arch']);
 define('MAPSERV', $config->maps['mapserver']);
 define('TEMP', $config->paths['tmp']);
 define('FONTSET', $config->paths['fonts']);
-define('JPGRAPHDIR', $config->paths['jpgraph']);
+define('JPGRAPHDIR', $config->paths['src_dir'] . '/vendor/jpgraph/src');
 define('BASE', $config->paths['web_dir']);
 define('WWWDIR', $config->paths['www_dir']);
 define('WWWDATA', $config->paths['www_data']);

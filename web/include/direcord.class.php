@@ -18,8 +18,10 @@ class DIRecord extends DIObject
     public function __construct($prmSession)
     {
         parent::__construct($prmSession);
-        $this->q = $prmSession->q;
-        $this->setConnection($prmSession->RegionId);
+        if ($prmSession) {
+            $this->q = $prmSession->q;
+            $this->setConnection($prmSession->RegionId);
+        }
     }
 
     public function setConnection($prmDB)
