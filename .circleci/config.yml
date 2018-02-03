@@ -6,8 +6,8 @@ jobs:
     working_directory: /usr/share/desinventar
     steps:
       - run:
-          name: Install firefox for tests
-          command: yum -y -q install firefox
+          name: Install applications for tests
+          command: yum -y -q install firefox xorg-x11-server-Xvfb
       - run:
           name: Install yarn to handle dependencies
           command: npm install -g yarn
@@ -56,4 +56,6 @@ jobs:
           command: make
       - run:
           name: Running Tests
-          command: make test
+          command: |
+            make test
+            if [ $CIRCLE_BRANCH = 'develop' ]; then make test-web; fi
