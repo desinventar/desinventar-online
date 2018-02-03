@@ -1,0 +1,7 @@
+{
+  "test": {
+    "url": "TEST_WEB_URL",
+    "username": "TEST_WEB_USERNAME",
+    "passwd": "TEST_WEB_PASSWD"
+  }
+}
