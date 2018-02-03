@@ -1,8 +1,11 @@
 <?php
-//#!/usr/bin/php -d session.save_path='/tmp'
-require_once('../../web/include/loader.php');
-require_once(BASE . '/include/dievent.class.php');
-require_once(BASE . '/include/dicause.class.php');
+require_once '../../vendor/autoload.php';
+
+require_once '../../web/include/distatus.class.php';
+require_once '../../web/include/diobject.class.php';
+require_once '../../web/include/direcord.class.php';
+require_once '../../web/include/dievent.class.php';
+require_once '../../web/include/dicause.class.php';
 
 use \DesInventar\Legacy\DICause;
 use \DesInventar\Legacy\DIEvent;
@@ -32,9 +35,9 @@ while (! feof($fh)) {
             default:
                     $i = 6;
                 break;
-        } //switch
+        }
         if ($TableName == 'EVENT') {
-            $e = new DIEvent($us);
+            $e = new DIEvent(null);
             $e->set('LangIsoCode', $LangIsoCode);
             $e->set('RegionId', '');
             $e->set('EventPredefined', 1);
@@ -51,7 +54,7 @@ while (! feof($fh)) {
             fwrite(STDOUT, $e->getUpdateQuery() . ";\n");
         }
         if ($TableName == 'CAUSE') {
-            $e = new DICause($us);
+            $e = new DICause(null);
             $e->set('LangIsoCode', $LangIsoCode);
             $e->set('RegionId', '');
             $e->set('CausePredefined', 1);

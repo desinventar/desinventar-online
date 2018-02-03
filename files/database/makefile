@@ -1,11 +1,14 @@
+# Makefile (must be TAB indented)
+#
 SQLITE=sqlite3
+STRINGS=interface_strings.xml
 
 all : base.db core.db desinventar.db lang
 
 # Rebuild base.db database
 base.db : base.sql doc-db.csv event.csv cause.csv
 	/bin/rm -f base.db
-	sqlite3 base.db < base.sql
+	$(SQLITE) base.db < base.sql
 	php insertEveCau.php event.csv spa EVENT | sqlite3 base.db
 	php insertEveCau.php event.csv eng EVENT | sqlite3 base.db
 	php insertEveCau.php event.csv fre EVENT | sqlite3 base.db
@@ -14,7 +17,7 @@ base.db : base.sql doc-db.csv event.csv cause.csv
 	php insertEveCau.php cause.csv eng CAUSE | sqlite3 base.db
 	php insertEveCau.php cause.csv fre CAUSE | sqlite3 base.db
 	php insertEveCau.php cause.csv por CAUSE | sqlite3 base.db
-	./createDictionary.php | sqlite3 base.db
+	php createDictionary.php | sqlite3 base.db
 	./iso3166tosql.pl | sqlite3 base.db
 	./square2sql.pl | sqlite3 base.db
 
@@ -26,16 +29,19 @@ desinventar.db : region.sql
 	/bin/rm -f desinventar.db; \
 	sqlite3 desinventar.db < region.sql
 
-lang : lang_spa lang_eng lang_por lang_fre
+lang : spa.conf eng.conf por.conf fre.conf
 
-lang_spa : interface_strings.xml
-	./xml2conf.php interface_strings.xml spa > ../../web/conf/spa.conf
-lang_eng : interface_strings.xml
-	./xml2conf.php interface_strings.xml eng > ../../web/conf/eng.conf
-lang_por : interface_strings.xml
-	./xml2conf.php interface_strings.xml por > ../../web/conf/por.conf
-lang_fre : interface_strings.xml
-	./xml2conf.php interface_strings.xml fre > ../../web/conf/fre.conf
+spa.conf : interface_strings.xml
+	php xml2conf.php interface_strings.xml spa > spa.conf && cp spa.conf ../../web/conf/spa.conf
+
+eng.conf : interface_strings.xml
+	php xml2conf.php interface_strings.xml eng > eng.conf && cp eng.conf ../../web/conf/eng.conf
+
+por.conf : interface_strings.xml
+	php xml2conf.php interface_strings.xml por > por.conf && cp por.conf ../../web/conf/por.conf
+
+fre.conf : interface_strings.xml
+	php xml2conf.php interface_strings.xml fre > fre.conf && cp fre.conf ../../web/conf/fre.conf
 
 clean :
 	/bin/rm -f *.db
