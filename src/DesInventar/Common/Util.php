@@ -28,4 +28,10 @@ class Util
         }
         return $output;
     }
+
+    public function escapeQuotes($prmValue)
+    {
+        $prmValue = str_replace('"', '', $prmValue);
+        return $prmValue;
+    }
 }

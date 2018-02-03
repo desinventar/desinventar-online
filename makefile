@@ -6,13 +6,16 @@ all : build devel
 
 devel : php js
 
-build : node-build web-build composer lang
+build : node-build web-build composer lang database
 
 composer : .FORCE
 	composer install
 
 composer-autoload : .FORCE
 	composer dump-autoload --optimize
+
+database: .FORCE
+	cd files/database && make all
 
 lang : .FORCE
 	cd files/database && make lang
@@ -34,9 +37,11 @@ lint-php : .FORCE
 	find src api config web tests -name "*.php" -exec php -l {} > /dev/null \;
 
 standard-php : .FORCE
-	./vendor/bin/phpcs --standard=PSR2 web/*.php web/include/* src/* api/app/* api/src/* api/web/* \
-	tests/unit/bootstrap.php tests/unit/UnitTest/* tests/unit/ApiTest/* \
-	config/config.php config/version.php
+	./vendor/bin/phpcs --standard=PSR2 \
+		web/*.php web/include/* files/database/*.php \
+		src/* api/app/* api/src/* api/web/* \
+		tests/unit/bootstrap.php tests/unit/UnitTest/* tests/unit/ApiTest/* \
+		config/config.php config/version.php
 
 phpmd: .FORCE
 	find api config files src tests -name \*.php -exec ./vendor/bin/phpmd {} text ./files/phpmd/ruleset.xml \;
