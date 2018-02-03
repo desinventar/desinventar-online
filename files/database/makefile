@@ -44,5 +44,5 @@ fre.conf : interface_strings.xml
 	php xml2conf.php interface_strings.xml fre > fre.conf && cp fre.conf ../../web/conf/fre.conf
 
 clean :
-	/bin/rm -f *.db
+	/bin/rm -f *.db *.conf
 #

@@ -59,3 +59,6 @@ node-build : .FORCE
 
 web-build: .FORCE
 	./node_modules/.bin/webpack -p
+
+clean: .FORCE
+	cd files/database && make clean

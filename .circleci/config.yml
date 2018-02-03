@@ -42,6 +42,7 @@ jobs:
             sed -i 's#logs/access_log#/dev/stderr#; s#logs/error_log#/dev/stderr#; s#^Listen 80$#Listen 8081#' /etc/httpd/conf/httpd.conf
             /bin/cp files/apache/desinventar-centos-default.conf /etc/httpd/conf.d/web.conf
             sed -i 's#:80#:8081#' /etc/httpd/conf.d/web.conf
+            make database
             mkdir -p /var/lib/desinventar/main/
             /bin/cp files/database/*.db /var/lib/desinventar/main/
             chown -R apache:apache /var/lib/desinventar
