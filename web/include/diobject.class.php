@@ -7,6 +7,9 @@ namespace DesInventar\Legacy;
 
 class DIObject
 {
+    const ERR_NO_ERROR = 1;
+    const ERR_DEFAULT_ERROR = -1;
+
     protected static $def = array();
     public $sFieldKeyDef = '';
     public $sFieldDef = '';
@@ -16,10 +19,14 @@ class DIObject
     public $oField;
     public $oFieldType;
 
+    protected $RegionId = '';
+
     public function __construct($prmSession)
     {
         $this->session  = $prmSession;
-        $this->RegionId = $this->session->RegionId;
+        if ($this->session) {
+            $this->RegionId = $this->session->RegionId;
+        }
         $num_args = func_num_args();
         if ($num_args >= 1) {
             $this->session = func_get_arg(0);
@@ -34,9 +41,9 @@ class DIObject
         $this->initializeFields();
         $this->createFields($this->sFieldKeyDef);
         $this->createFields($this->sFieldDef);
-        $this->set('RegionId', $this->session->RegionId);
+        $this->set('RegionId', $this->RegionId);
         $LangIsoCode = 'eng';
-        if ($this->session->q->RegionId != 'core') {
+        if ($this->session && $this->session->q->RegionId != 'core') {
             $LangIsoCode = $this->session->RegionLangIsoCode; //getDBInfoValue('LangIsoCode');
         }
         $this->set('LangIsoCode', $LangIsoCode);
@@ -158,7 +165,7 @@ class DIObject
         } else {
             $obj = &$this->oField[$LangIsoCode];
         }
-        $iReturn = ERR_DEFAULT_ERROR;
+        $iReturn = self::ERR_DEFAULT_ERROR;
         if (isset($obj[$prmKey])) {
             $sValue = $prmValue;
 
@@ -201,14 +208,14 @@ class DIObject
                 }
             }
             $obj[$prmKey] = $sValue;
-            $iReturn = ERR_NO_ERROR;
+            $iReturn = self::ERR_NO_ERROR;
         }
         return $iReturn;
     }
 
     public function setFromArray($prmArray)
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         foreach ($prmArray as $sKey => $sValue) {
             $this->set($sKey, $sValue);
         }

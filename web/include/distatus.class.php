@@ -7,9 +7,11 @@ namespace DesInventar\Legacy;
 
 class DIStatus
 {
+    const ERR_NO_ERROR = 1;
+
     public function __construct()
     {
-        $this->status  = ERR_NO_ERROR;
+        $this->status  = self::ERR_NO_ERROR;
         $this->clear();
     }
 
