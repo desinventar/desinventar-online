@@ -23,7 +23,7 @@
 				{-#tpage#-}
 				<input type="hidden" id="StatCurPagePrev" value="1" />
 				<input type="text" id="StatCurPage" size="2" value="1" class="line" />
-				&nbsp; {-#msgStatistic_PageOf#-} &nbsp;{-$last-}
+				&nbsp; {-#msgStatistic_PageOf#-} &nbsp;<span id="StatCurPageCount">{-$last-}</span>
 				&nbsp;&nbsp;|&nbsp;&nbsp;
 				<a class="button" id="btnStatGotoFirstPage"><span>&lt;&lt;</span></a>
 				<a class="button" id="btnStatGotoPrevPage"><span>&lt;</span></a>
@@ -34,7 +34,7 @@
 				<span id="stdstatusmsg" class="dlgmsg"></span>
 			</td>
 			<td class="right">
-				{-#tsumnum#-}: {-$cou-} | {-#trepnum#-}: {-$tot-}
+				{-#tsumnum#-}: <span id="viewConsolidatedGroupCount">{-$cou-}</span> | {-#trepnum#-}: <span id="viewConsolidatedRecordCount">{-$tot-}</span>
 			</td>
 		</tr>
 	</table>
@@ -85,7 +85,7 @@
 					{-strip-}
 						{-foreach name=sel key=k item=i from=$sel-}
 							{-if $i != "DisasterId"-}
-								<td {-if $i=="GeographyId_0" || $i=="GeographyId_1" || $i=="GeographyId_2" || 
+								<td {-if $i=="GeographyId_0" || $i=="GeographyId_1" || $i=="GeographyId_2" ||
 								         $i=="EventName" || $i=="CauseName"-}
 										class="GridCellText"
 									{-else-}
