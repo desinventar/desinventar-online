@@ -23,7 +23,7 @@
 				{-#tpage#-}
 				<input type="hidden" id="DataCurPagePrev" value="1" />
 				<input type="text" id="DataCurPage" size="2" value="1" class="line"  />
-				&nbsp; {-#msgData_PageOf#-} &nbsp; {-$NumberOfPages-}
+				&nbsp; {-#msgData_PageOf#-} &nbsp; <span id="DataCurPageCount">{-$NumberOfPages-}</span>
 				&nbsp;&nbsp;|&nbsp;&nbsp;
 				<a class="button" id="btnGridGotoFirstPage"><span>&lt;&lt;</span></a>
 				<a class="button" id="btnGridGotoPrevPage"><span>&lt;</span></a>
@@ -34,7 +34,7 @@
 				<span id="datstatusmsg" class="dlgmsg"></span>
 			</td>
 			<td class="right">
-				{-#trepnum#-}: {-$tot-}
+				{-#trepnum#-}: <span id="viewDataRecordCount">{-$tot-}</span>
 			</td>
 		</tr>
 	</table>
@@ -58,7 +58,7 @@
 			{-foreach $dislist as $row-}
 				<tr class="ViewData">
 					<td>
-						<a href="#" class="linkGridGotoCard" 
+						<a href="#" class="linkGridGotoCard"
 							disasterid="{-$row.DisasterId-}"
 							rowindex="{-$row@iteration-}">{-$offset+$row@iteration-}</a>
 					</td>
@@ -80,10 +80,10 @@
 								{-$cellClass=""-}
 								{-if $field_id=="DisasterSerial" || $field_id=="DisasterBeginTime"-}
 									{-$cellClass="GridCellText nowrap"-}
-								{-elseif $field_id=="EventName" || 
+								{-elseif $field_id=="EventName" ||
 								         $field_id=="EventNotes" ||
-								         $field_id=="GeographyFQName" || 
-								         $field_id=="DisasterSiteNotes" || 
+								         $field_id=="GeographyFQName" ||
+								         $field_id=="DisasterSiteNotes" ||
 								         $field_id=="DisasterSource" ||
 								         $field_id=="EffectNotes" ||
 								         $field_id=="EffectOtherLosses" ||
@@ -93,7 +93,7 @@
 								{-else-}
 									{-$cellClass="GridCellNumber"-}
 								{-/if-}
-									{-if $field_id=="EffectNotes" || 
+									{-if $field_id=="EffectNotes" ||
 									     $field_id=="EffectOtherLosses" ||
 									     $field_id=="EventNotes" ||
 									     $field_id=="CauseNotes"-}
