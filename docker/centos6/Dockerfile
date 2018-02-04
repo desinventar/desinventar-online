@@ -11,7 +11,7 @@ RUN yum -y update
 RUN yum install -y http://opensource.wandisco.com/centos/6/git/x86_64/wandisco-git-release-6-1.noarch.rpm && \
     yum install -y git
 
-RUN yum -y install wget unzip tar
+RUN yum -y install wget unzip tar curl firefox xorg-x11-server-Xvfb
 
 RUN yum -y install yum install httpd gd giflib sqlite
 RUN yum -y install php php-common php-cli php-gd php-xml php-pdo php-mbstring
@@ -45,8 +45,8 @@ RUN curl --silent --show-error https://getcomposer.org/installer > /tmp/composer
   php /tmp/composer-setup.php --no-ansi --install-dir=/usr/local/bin --filename=composer --snapshot
 
 ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 8.6.0
-RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.4/install.sh | bash \
+ENV NODE_VERSION 8.9.4
+RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash \
     && source $NVM_DIR/nvm.sh \
     && nvm install $NODE_VERSION \
     && nvm alias default $NODE_VERSION \

@@ -2,12 +2,9 @@ version: 2
 jobs:
   build:
     docker:
-      - image: desinventar/centos6:v20171022-01
+      - image: desinventar/centos6:v20180204-01
     working_directory: /usr/share/desinventar
     steps:
-      - run:
-          name: Install applications for tests
-          command: yum -y -q install firefox xorg-x11-server-Xvfb
       - run:
           name: Install yarn to handle dependencies
           command: npm install -g yarn
