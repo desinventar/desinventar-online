@@ -17,10 +17,10 @@
 		<tr>
 			<td class="top">
 				<div class="dwin" style="width:250px;">
-					<p class="right">{-#trepnum#-}: {-$MapNumberOfRecords-}</p>
+					<p class="right">{-#trepnum#-}: <span id="viewMapRecordCount">{-$MapNumberOfRecords-}</span></p>
 					<hr />
 					<h4 id="defaultMapTitle">{-#tmapof#-} {-$rgl[0].info.TITLE-}</h4>
-					<div class="justify" class="QueryInfo dwin" style="height:250px;overflow-y:auto;">{-#msgViewMap_Level#-}: {-$rgl[0].info.LEVEL-}; 
+					<div class="justify" class="QueryInfo dwin" style="height:250px;overflow-y:auto;">{-#msgViewMap_Level#-}: {-$rgl[0].info.LEVEL-};
 						{-foreach key=k item=i from=$rgl[0].info-}
 							{-if $k == "GEO"-}<i>{-#geo#-}:</i> {-$i-}; {-/if-}
 							{-if $k == "EVE"-}<i>{-#eve#-}:</i> {-$i-}; {-/if-}
@@ -32,7 +32,7 @@
 							{-if $k == "SER"-}<i>{-#ser#-}:</i> {-$i-}; {-/if-}
 						{-/foreach-}
 						{-$rgl[0].regname-}
-					</div>					
+					</div>
 					<div class="GoogleEarth">
 						<hr />
 						<image src="{-$desinventarURL-}/images/ge_icon.png" /><a href="{-$desinventarURL-}/kml/{-$prmMapId-}/">{-#tgetgearth#-}</a>
