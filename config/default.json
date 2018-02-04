@@ -2,6 +2,7 @@
   "test": {
     "url": "http://localhost:8081",
     "username": "root",
-    "passwd": "desinventar"
+    "passwd": "desinventar",
+    "database": "BOL-1250695036-bolivia_gran_chaco"
   }
 }
