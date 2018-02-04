@@ -34,4 +34,28 @@ class Util
         $prmValue = str_replace('"', '', $prmValue);
         return $prmValue;
     }
+
+    public function jsonSafeEncode($var)
+    {
+        return json_encode($this->jsonFixCyr($var));
+    }
+
+    public function jsonFixCyr($var)
+    {
+        if (is_array($var)) {
+            $new = array();
+            foreach ($var as $k => $v) {
+                $new[$this->jsonFixCyr($k)] = $this->jsonFixCyr($v);
+            }
+            $var = $new;
+        } elseif (is_object($var)) {
+            $vars = get_class_vars(get_class($var));
+            foreach ($vars as $m => $v) {
+                $var->$m = $this->jsonFixCyr($v);
+            }
+        } elseif (is_string($var)) {
+            $var = iconv(DEFAULT_CHARSET, 'utf-8', $var);
+        }
+        return $var;
+    }
 }

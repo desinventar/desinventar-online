@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <ruleset name="Custom Standard">
+  <arg name="extensions" value="php"/>
   <exclude-pattern>vendor/*</exclude-pattern>
   <exclude-pattern>external/valums-fileuploader/fileuploader.php</exclude-pattern>
+  <exclude-pattern>node_modules/*</exclude-pattern>
   <rule ref="PSR2"/>
 </ruleset>

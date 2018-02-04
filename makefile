@@ -37,11 +37,7 @@ lint-php : .FORCE
 	find src api config web tests -name "*.php" -exec php -l {} > /dev/null \;
 
 standard-php : .FORCE
-	./vendor/bin/phpcs --standard=PSR2 \
-		web/*.php web/include/* files/database/*.php \
-		src/* api/app/* api/src/* api/web/* \
-		tests/unit/bootstrap.php tests/unit/UnitTest/* tests/unit/ApiTest/* \
-		config/config.php config/version.php
+	./vendor/bin/phpcs .
 
 phpmd: .FORCE
 	find api config files src tests -name \*.php -exec ./vendor/bin/phpmd {} text ./files/phpmd/ruleset.xml \;
