@@ -50,6 +50,8 @@ jobs:
             unzip files/worldmap/world_adm0.zip -d /var/lib/desinventar/worldmap
             /bin/cp files/worldmap/world_adm0.map /var/lib/desinventar/worldmap/
             chown -R apache:apache /var/lib/desinventar/worldmap
+            tar -xf files/seed/seed.tar.gz -C /var/lib/desinventar
+            chown -R apache:apache /var/lib/desinventar
             /etc/init.d/httpd restart
       - run:
           name: Validate code
