@@ -5,6 +5,8 @@
 */
 namespace DesInventar\Legacy;
 
+use Ramsey\Uuid\UuidFactory;
+
 class DISync extends DIRecord
 {
     public function __construct($prmSession)
@@ -19,7 +21,8 @@ class DISync extends DIRecord
                               "SyncURL/STRING," .
                               "SyncSpec/STRING";
         parent::__construct($prmSession);
-        $this->set('SyncId', (string)UUID::mint(4));
+        $uuid = new UuidFactory();
+        $this->set('SyncId', $uuid->uuid4());
         $num_args = func_num_args();
         if ($num_args >= 2) {
             $prmSyncId = func_get_arg(1);

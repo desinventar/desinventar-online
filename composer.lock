@@ -4,23 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "da41749d2b13132f182bdd3baec4d2cd",
+    "content-hash": "31f09a550b021545972d1fb23c467b12",
     "packages": [
-        {
-            "name": "DrUUID",
-            "version": "20140906",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/desinventar/lib.uuid",
-                "reference": "a7df7b3d6fbbd2842b7099aa7b0073b0b76d994e"
-            },
-            "type": "library",
-            "license": [
-                "MIT"
-            ],
-            "description": "DrUUID is an implementation for PHP5 of---and associated API for---the data format described in RFC 4122",
-            "time": "2017-01-24T03:08:13+00:00"
-        },
         {
             "name": "aura/sql",
             "version": "2.5.1",
