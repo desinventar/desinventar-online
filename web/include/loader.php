@@ -134,7 +134,6 @@ require_once(BASE . '/include/digeography.class.php');
 require_once(BASE . '/include/digeolevel.class.php');
 require_once(BASE . '/include/digeocarto.class.php');
 require_once(BASE . '/include/didisaster.class.php');
-require_once($config->paths['src_dir'] . '/vendor/DrUUID/lib.uuid.php');
 
 // Set a default exception handler to avoid ugly messages in screen
 if ($config->flags['mode'] != 'devel') {
@@ -144,7 +143,8 @@ if ($config->flags['mode'] != 'devel') {
 // SETTINGS
 date_default_timezone_set('UTC');
 $time_start = microtime_float();
-$SessionId = (string)UUID::mint(4);
+$uuid = new \Ramsey\Uuid\UuidFactory();
+$SessionId = $uuid->uuid4();
 if ($config->flags['env'] != 'command') {
     $cmd = getCmd();
     // Session Management

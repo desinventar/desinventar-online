@@ -5,7 +5,7 @@
 */
 namespace DesInventar\Legacy;
 
-use \UUID;
+use Ramsey\Uuid\UuidFactory;
 
 class DIDisaster extends DIRecord
 {
@@ -81,9 +81,10 @@ class DIDisaster extends DIRecord
                 $this->EEFieldCount++;
             }
         }
+        $uuid = new UuidFactory();
         $this->set('EventPredefined', 0);
         $this->set('EventActive', 1);
-        $this->set('DisasterId', (string)UUID::mint(4));
+        $this->set('DisasterId', $uuid->uuid4());
         $this->set('RecordStatus', 'PUBLISHED');
 
         $num_args = func_num_args();

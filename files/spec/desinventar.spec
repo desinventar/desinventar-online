@@ -23,7 +23,7 @@ Requires: php php-common php-cli php-gd php-xml php-pdo php-mbstring
 Requires: liberation-fonts-common liberation-sans-fonts
 Requires: liberation-mono-fonts liberation-serif-fonts
 Requires: liberation-fonts-extras
-Requires: php-dbase php-jpgraph3 php-DrUUID
+Requires: php-dbase php-jpgraph3
 Requires: mapserver proj proj-epsg proj-nad
 
 %define BASE_DIR  %{_prefix}/share/desinventar
@@ -49,7 +49,7 @@ tar -zxf %{SOURCE0}
 
 %build
 
-%clean 
+%clean
 rm -rf $RPM_BUILD_ROOT
 
 %install
@@ -93,7 +93,7 @@ php -r "readfile('https://getcomposer.org/installer');" | php
 ./composer.phar install
 rm -rf composer.phar
 
-%files 
+%files
 %defattr(-,root,root)
 %{_prefix}/share/desinventar/*
 /var/lib/desinventar/worldmap/*

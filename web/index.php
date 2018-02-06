@@ -11,6 +11,8 @@ require_once('include/geography_operations.php');
 require_once('include/database_operations.php');
 require_once('include/query_operations.php');
 
+use Ramsey\Uuid\UuidFactory;
+
 use \DesInventar\Legacy\UserSession;
 use \DesInventar\Legacy\DIRegion;
 use \DesInventar\Legacy\DIRegionDB;
@@ -50,6 +52,8 @@ $desinventarUserRoleValue = $us->getUserRoleValue($RegionId);
 $t->assign('desinventarUserRole', $desinventarUserRole);
 $t->assign('desinventarUserRoleValue', $desinventarUserRoleValue);
 $t->assign('appOptions', $appOptions);
+
+$uuid = new UuidFactory();
 
 switch ($cmd) {
     case 'test':
@@ -265,7 +269,7 @@ switch ($cmd) {
             }
             $o->setFromArray($info);
             if ($o->get('EventId') == '') {
-                $o->set('EventId', (string)UUID::mint(4));
+                $o->set('EventId', $uuid->uuid4());
                 $iReturn = $o->insert();
             }
             $iReturn = $o->update();
@@ -321,7 +325,7 @@ switch ($cmd) {
             }
             $o->setFromArray($info);
             if ($o->get('CauseId') == '') {
-                $o->set('CauseId', (string)UUID::mint(4));
+                $o->set('CauseId', $uuid->uuid4());
                 $iReturn = $o->insert();
             }
             $iReturn = $o->update();
