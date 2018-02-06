@@ -1,57 +1,62 @@
 {
-    "require": {
-        "smarty/smarty": "^3.1",
-        "aura/sqlquery": "^2.7",
-        "DrUUID": "20140906",
-        "jpgraph": "3.0.7",
-        "aura/sql": "^2",
-        "monolog/monolog": "^1.23",
-        "slim/slim": "^3.8",
-        "pimple/pimple": "~3.0",
-        "ramsey/uuid": "^3.7"
-    },
-    "require-dev": {
-        "ccampbell/chromephp": "^4.1",
-        "phpunit/phpunit": "^4.8",
-        "phpunit/dbunit": "^1.4",
-        "behat/mink": "^1.7",
-        "behat/mink-zombie-driver": "^1.4",
-        "behat/mink-selenium2-driver": "^1.3",
-        "behat/mink-goutte-driver": "^1.2",
-        "dmore/chrome-mink-driver": "^2.2",
-        "phpmd/phpmd": "^2.6",
-        "guzzlehttp/guzzle": "^6.3",
-        "squizlabs/php_codesniffer": "*"
-    },
-     "repositories": [
+  "name": "DesInventar Online",
+  "description": "Inventory system of the effects of disasters",
+  "require": {
+    "smarty/smarty": "^3.1",
+    "aura/sqlquery": "^2.7",
+    "DrUUID": "20140906",
+    "jpgraph": "3.0.7",
+    "aura/sql": "^2",
+    "monolog/monolog": "^1.23",
+    "slim/slim": "^3.0",
+    "pimple/pimple": "~3.0",
+    "ramsey/uuid": "^3.7"
+  },
+  "require-dev": {
+    "ccampbell/chromephp": "^4.1",
+    "phpunit/phpunit": "^4.8",
+    "phpunit/dbunit": "^1.4",
+    "phpmd/phpmd": "^2.6",
+    "guzzlehttp/guzzle": "^6.3",
+    "squizlabs/php_codesniffer": "*"
+  },
+  "repositories": [
     {
-        "url": "https://github.com/desinventar/lib.uuid",
-        "type": "git"
+      "url": "https://github.com/desinventar/lib.uuid",
+      "type": "git"
     },
     {
-        "url": "https://github.com/desinventar/jpgraph",
-        "type": "git"
+      "url": "https://github.com/desinventar/jpgraph",
+      "type": "git"
     }
-    ],
-    "authors": [
-        {
-            "email": "jhcaiced@inticol.com",
-            "homepage": "http://www.desinventar.org",
-            "name": "Jhon H. Caicedo",
-            "role": "Project lead / Developer"
-        }
-    ],
-    "autoload": {
-        "psr-0": {
-            "DesInventar\\": ["src"],
-            "Api\\": ["api/src"],
-            "UnitTest\\": ["tests/unit"],
-            "ApiTest\\": ["tests/unit"]
-        }
-    },
-    "keywords": [
-        "disasters",
-        "inventories",
-        "risk"
-    ]
+  ],
+  "authors": [
+    {
+      "email": "jhcaiced@inticol.com",
+      "homepage": "http://www.desinventar.org",
+      "name": "Jhon H. Caicedo",
+      "role": "Project lead / Developer"
+    }
+  ],
+  "autoload": {
+    "psr-0": {
+      "DesInventar\\": [
+        "src"
+      ],
+      "Api\\": [
+        "api/src"
+      ],
+      "UnitTest\\": [
+        "tests/unit"
+      ],
+      "ApiTest\\": [
+        "tests/unit"
+      ]
+    }
+  },
+  "keywords": [
+    "disasters",
+    "inventories",
+    "risk"
+  ]
 }
