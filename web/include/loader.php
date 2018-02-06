@@ -13,14 +13,7 @@ if (! isset($_SERVER['DESINVENTAR_SRC'])) {
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-$config = DesInventar\Common\ConfigLoader::getInstance(
-    array(
-        '/etc/desinventar/config.php',
-        __DIR__ . '/../../config/config_local.php',
-    ),
-    __DIR__ . '/../../config/config.php',
-    'php'
-);
+$config = DesInventar\Common\ConfigLoader::getInstance($_SERVER['DESINVENTAR_SRC'] . '/config');
 $config->version = require_once __DIR__ . '/../../config/version.php';
 $config->paths['src_dir'] = $_SERVER['DESINVENTAR_SRC'];
 

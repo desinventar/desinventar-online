@@ -17,7 +17,6 @@
  *     'ip' => '123456',
  * )
  */
-
 namespace DesInventar\Common;
 
 class ConfigLoader
@@ -30,51 +29,96 @@ class ConfigLoader
      * @param string $filepath Full path to where the file is located
      * @param string $type is the type of file.  can be "ARRAY" "JSON" "INI"
      */
-    private function __construct($customConfigFileList, $defaultConfigFile, $type = 'php')
+    private function __construct($configDir)
     {
+        if (empty($configDir)) {
+            $configDir = $this->getConfigDirFromEnv();
+        }
+        if (empty($configDir) || !file_exists($configDir)) {
+            throw new \Exception('Configuration directory doesn\'t exist: ' . $configDir);
+        }
+        $defaultConfigFile = $configDir . '/default.json';
         if (!file_exists($defaultConfigFile)) {
             throw new \Exception('Cannot find default configuration file: ' . $defaultConfigFile);
         }
         // Load default configuration values
-        $this->options = $this->readConfigFile($defaultConfigFile, $type);
+        $this->options = $this->readConfigFile($defaultConfigFile);
 
-        // Find the first available custom config file and merge
-        foreach ($customConfigFileList as $customConfigFile) {
-            if (! file_exists($customConfigFile)) {
-                continue;
+        $localName = $this->getConfigFile();
+        if (!empty($localName)) {
+            $localFile = $configDir . '/' . $localName;
+            if (file_exists($localFile)) {
+                $localOptions = $this->readConfigFile($localFile);
+                $this->options = array_replace_recursive($this->options, $localOptions);
             }
+        }
 
-            // Attempt to load a local configuration file which overrides
-            // some of the default settings
-            $customConfig = $this->readConfigFile($customConfigFile, $type);
+        $envFile = $configDir . '/custom-environment-variables.json';
+        if (file_exists($envFile)) {
+            $customConfig = $this->applyEnvVarsToArray($this->readConfigFile($envFile));
             $this->options = array_replace_recursive($this->options, $customConfig);
-            break;
         }
         return true;
     }
 
-    private function readConfigFile($filepath, $type)
+    public function getConfigDirFromEnv()
     {
-        $result = array();
-        switch ($type) {
-            case 'php':
-                $result = include $filepath;
-                break;
-
-            case 'ini':
-                $result = parse_ini_file($filepath, true);
-                break;
-
-            case 'json':
-                $result = json_decode(file_get_contents($filepath), true);
-                break;
-
-            //TO-DO add Database option for settings. Table = id, property, value
-            case 'database':
-                $result = json_decode(file_get_contents($filepath), true);
-                break;
+        if (!empty(getenv('NODE_CONFIG_DIR'))) {
+            return getenv('NODE_CONFIG_DIR');
         }
-        return $result;
+        return getcwd() . '/config';
+    }
+
+    public function getConfigFile()
+    {
+        if (!empty(getenv('NODE_ENV'))) {
+            return strtolower(getenv('NODE_ENV')) . '.json';
+        }
+        if (!empty(getenv('APP_ENV'))) {
+            return strtolower(getenv('APP_ENV')) . '.json';
+        }
+        return '';
+    }
+
+    private function readConfigFile($filepath)
+    {
+        return json_decode(file_get_contents($filepath), true);
+    }
+
+    private function extractValuesFromArray($parentKey, $data)
+    {
+        $values = [];
+        foreach ($data as $key => $item) {
+            $totalKey = empty($parentKey) ? $key : $parentKey . '/' . $key;
+            if (is_array($item)) {
+                $values = array_merge($values, $this->extractValuesFromArray($totalKey, $item));
+                continue;
+            }
+            $values[$totalKey] = getenv($item);
+        }
+        return $values;
+    }
+
+    private function setArrayValue(&$data, $key, $value)
+    {
+        $parts = explode('/', $key);
+        if (count($parts) > 1) {
+            return $this->setArrayValue($data[$parts[0]], implode('/', array_slice($parts, 1)), $value);
+        }
+        if (empty($value)) {
+            unset($data[$parts[0]]);
+            return false;
+        }
+        return $data[$parts[0]] = $value;
+    }
+
+    private function applyEnvVarsToArray($data)
+    {
+        $values = $this->extractValuesFromArray('', $data);
+        foreach ($values as $key => $value) {
+            $this->setArrayValue($data, $key, $value);
+        }
+        return $data;
     }
 
     private function __clone()
@@ -82,10 +126,10 @@ class ConfigLoader
         //@TODO: Implement this function
     }
 
-    public static function getInstance($customConfigFileList, $defaultConfigFile, $type = 'php')
+    public static function getInstance($configDir)
     {
         if (!isset(self::$instance)) {
-            self::$instance = new self($customConfigFileList, $defaultConfigFile, $type);
+            self::$instance = new self($configDir);
         }
         return self::$instance;
     }
