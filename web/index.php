@@ -24,6 +24,7 @@ use \DesInventar\Legacy\DIGeoCarto;
 use \DesInventar\Legacy\DIGeography;
 use \DesInventar\Legacy\DIGeoLevel;
 use \DesInventar\Legacy\DIProfile;
+use DesInventar\Common\Version;
 
 $post = $_POST;
 $get  = $_GET;
@@ -1034,10 +1035,11 @@ switch ($cmd) {
         $t->display($template);
         break;
     case 'cmdGetVersion':
+        $version = new Version($config->flags['mode']);
         $answer = array();
         $answer['Status'] = ERR_NO_ERROR;
-        $answer['Version'] = $config->version['version'];
-        $answer['ReleaseDate'] = $config->version['release_date'];
+        $answer['Version'] = $version->getVersion();
+        $answer['ReleaseDate'] = $version->getReleaseDate();
         $answerstr = htmlspecialchars(json_encode($answer), ENT_NOQUOTES);
         if (isset($_GET['callback'])) {
             $answerstr = $_GET['callback'] . '(' . $answerstr . ')';

@@ -3,19 +3,6 @@
  * ConfigLoader Class
  * Based on: http://codereview.stackexchange.com/questions/4162/php-config-file-loader-class
  *
- * example usage
- * $config = Config::getInstance(PATH TO FILE, FILE TYPE);
- * echo $config->ip;
- * echo $config->db['host'];
- * example array file
- * <?php
- * return array(
- *    'db' => array(
- *     'host' => 'localhost',
- *     'user' => 'user1',
- *     'pass' => 'mypassword'),
- *     'ip' => '123456',
- * )
  */
 namespace DesInventar\Common;
 
@@ -29,7 +16,7 @@ class ConfigLoader
      * @param string $filepath Full path to where the file is located
      * @param string $type is the type of file.  can be "ARRAY" "JSON" "INI"
      */
-    private function __construct($configDir)
+    public function __construct($configDir)
     {
         if (empty($configDir)) {
             $configDir = $this->getConfigDirFromEnv();
@@ -124,14 +111,6 @@ class ConfigLoader
     private function __clone()
     {
         //@TODO: Implement this function
-    }
-
-    public static function getInstance($configDir)
-    {
-        if (!isset(self::$instance)) {
-            self::$instance = new self($configDir);
-        }
-        return self::$instance;
     }
 
     /**

@@ -1,8 +1,13 @@
 <?php
 
+use DesInventar\Common\Version;
+use DesInventar\Common\ConfigLoader;
+
 $app->group('/common', function () use ($app, $container) {
     $app->get('/version', function () use ($app) {
-        return $this['jsonapi']->data($this->config->version);
+        $config = new ConfigLoader(dirname(dirname(getcwd())) . '/config');
+        $version = new Version($config->flags['mode']);
+        return $this['jsonapi']->data($version->getVersionArray());
     });
 
     $app->post('/login', function (Request $request) {
