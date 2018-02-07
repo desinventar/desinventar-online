@@ -4,6 +4,8 @@
  (c) Corporacion OSSO
 */
 
+use \DesInventar\Common\ConfigLoader;
+
 if (! isset($_SERVER['DESINVENTAR_WEB'])) {
     $_SERVER['DESINVENTAR_WEB'] = dirname(dirname(__FILE__));
 }
@@ -13,7 +15,7 @@ if (! isset($_SERVER['DESINVENTAR_SRC'])) {
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-$config = new \DesInventar\Common\ConfigLoader($_SERVER['DESINVENTAR_SRC'] . '/config');
+$config = new ConfigLoader($_SERVER['DESINVENTAR_SRC'] . '/config');
 $config->paths['src_dir'] = $_SERVER['DESINVENTAR_SRC'];
 
 $appOptions = array();
@@ -268,14 +270,6 @@ if ($config->flags['env'] != 'command') {
     $config->params = array(
         'url' => DesInventar\Common\Util::getUrl()
     );
-
-    $container = new Pimple\Container();
-    $container['config'] = $config;
-    $container['log'] = function ($c) {
-        $log = new Monolog\Logger('desinventar');
-        $log->pushHandler(new Monolog\Handler\StreamHandler('php://stdout', Monolog\Logger::DEBUG));
-        return $log;
-    };
 
     // General Information (common to portal/app)
     $t->assign('desinventarMode', $config->flags['mode']);

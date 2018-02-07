@@ -1,7 +1,4 @@
 <?php
-/**
- * Util Class
- */
 
 namespace DesInventar\Common;
 

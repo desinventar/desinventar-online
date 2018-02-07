@@ -1,4 +1,5 @@
 <?php
+
 $routeDir = __DIR__ . '/routes';
 $routeFiles = array_filter(scandir($routeDir), function ($x) {
     return pathinfo($x, PATHINFO_EXTENSION) == 'php';
