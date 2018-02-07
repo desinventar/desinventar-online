@@ -13,8 +13,7 @@ if (! isset($_SERVER['DESINVENTAR_SRC'])) {
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-$config = DesInventar\Common\ConfigLoader::getInstance($_SERVER['DESINVENTAR_SRC'] . '/config');
-$config->version = require_once __DIR__ . '/../../config/version.php';
+$config = new \DesInventar\Common\ConfigLoader($_SERVER['DESINVENTAR_SRC'] . '/config');
 $config->paths['src_dir'] = $_SERVER['DESINVENTAR_SRC'];
 
 $appOptions = array();
@@ -238,17 +237,10 @@ if ($config->flags['env'] != 'command') {
     $t->assign('lg', $lg);
     $t->assign('lang', $lg);
 
-    // 2010-05-25 (jhcaiced) Handle the versioning of js files, used to force refresh of
-    // these files when doing changes.
-    $t->assign('majorversion', $config->version['major_version']);
-    $t->assign('version', $config->version['version']);
-    $jsversion = $config->version['version'];
-    if ($config->flags['mode'] == 'devel') {
-        $jsversion = $jsversion  . '-' . \DesInventar\Common\Util::getUrlSuffix();
-        $config->version['version'] = $jsversion;
-    }
-
-    $t->assign('jsversion', $jsversion);
+    $version = new \DesInventar\Common\Version($config->flags['mode']);
+    $t->assign('majorversion', $version->getMajorVersion());
+    $t->assign('version', $version->getVersion());
+    $t->assign('jsversion', $version->getVersion());
 
     // Configure DESINVENTAR (web) application location
     if (isset($_SERVER['REDIRECT_DESINVENTAR_URL'])) {
@@ -292,15 +284,14 @@ if ($config->flags['env'] != 'command') {
     $t->assign('desinventar_extjs_url', $config->paths['libs_url'] . '/extjs/3.4.0');
     $t->assign('desinventarOpenLayersURL', $config->paths['libs_url'] . '/openlayers/2.11');
     $t->assign('desinventarURLPortal', $desinventarURLPortal);
-    $t->assign('desinventarVersion', $config->version['version']);
+    $t->assign('desinventarVersion', $version->getVersion());
     $t->assign('desinventarLang', $lg);
     $t->assign('desinventarUserId', $us->UserId);
     $t->assign('desinventarUserFullName', $us->getUserFullName());
     $t->assign('config', json_encode(
         [
             'flags' => $config->flags,
-            'params' => $config->params,
-            'version' => $config->version
+            'params' => $config->params
         ]
     ));
 }

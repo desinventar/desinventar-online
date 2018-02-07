@@ -20,15 +20,6 @@ class Util
         return $url;
     }
 
-    public static function getUrlSuffix()
-    {
-        $output = exec('/usr/bin/git rev-parse --short HEAD');
-        if (empty($output)) {
-            $output = time();
-        }
-        return $output;
-    }
-
     public function escapeQuotes($prmValue)
     {
         $prmValue = str_replace('"', '', $prmValue);

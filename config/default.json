@@ -13,7 +13,7 @@
     "worldmap_dir": "/var/lib/desinventar/worldmap"
   },
   "flags": {
-    "mode": "normal",
+    "mode": "devel",
     "env": "online",
     "arch": "LINUX",
     "debug": false,

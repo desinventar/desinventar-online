@@ -11,7 +11,7 @@ final class ConfigLoaderTest extends TestCase
     {
         $configDir = __DIR__  . '/seed';
         putenv('TEST_WEB_DATABASE=SAMPLE');
-        $config = ConfigLoader::getInstance($configDir);
+        $config = new ConfigLoader($configDir);
         $this->assertTrue(!empty($config));
         $this->assertEquals($config->test['database'], 'SAMPLE');
     }
