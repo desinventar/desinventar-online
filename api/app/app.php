@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__.'/bootstrap.php';
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
@@ -7,6 +8,8 @@ use \Psr\Http\Message\ResponseInterface as Response;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\ErrorLogHandler;
+
+use DesInventar\Common\ConfigLoader;
 
 use Api\Service\JsonApi;
 
@@ -26,11 +29,9 @@ $container['logger'] = function () {
     return $logger;
 };
 
-// @TODO: Use a class for this instead of a global from loader.php
-$container['config'] = $config;
-
-// @TODO: Use a class for this instead of a global from laoder.php
-$container['user_session'] = $us;
+$container['config'] = function ($c) {
+    return new ConfigLoader('');
+};
 
 $container['jsonapi'] = function ($c) {
     return new JsonApi($c->response);
@@ -54,7 +55,7 @@ $container['errorHandler'] = function ($container) {
 $app->get('/', function (Request $request, Response $response) {
     $answer = [
         'text' => 'DesInventar Api Server',
-        'copyright' => '(c) Corporación OSSO - 1998 - 2017'
+        'copyright' => '(c) Corporación OSSO - 1998 - 2018'
     ];
     return $this['jsonapi']->data($answer);
 });

@@ -1,4 +1,5 @@
 <?php
+
 namespace DesInventar\Common;
 
 class MapServer

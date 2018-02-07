@@ -48,7 +48,7 @@ phpmd-old: .FORCE
 js : standard-js
 
 standard-js : .FORCE
-	./node_modules/.bin/eslint web/js2/*
+	./node_modules/.bin/eslint web/js2/**/*.js tests/e2e/**/*.js
 
 node-build : .FORCE
 	yarn

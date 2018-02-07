@@ -1,4 +1,5 @@
 <?php
+
 namespace ApiTest\General;
 
 use \ApiTest\ApiTestCase;

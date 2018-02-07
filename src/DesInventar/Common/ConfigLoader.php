@@ -1,21 +1,11 @@
 <?php
-/**
- * ConfigLoader Class
- * Based on: http://codereview.stackexchange.com/questions/4162/php-config-file-loader-class
- *
- */
+
 namespace DesInventar\Common;
 
 class ConfigLoader
 {
-    private static $instance = null;
     public $options = array();
 
-    /**
-     * Retrieves php array file, json file, or ini file and builds array
-     * @param string $filepath Full path to where the file is located
-     * @param string $type is the type of file.  can be "ARRAY" "JSON" "INI"
-     */
     public function __construct($configDir)
     {
         if (empty($configDir)) {
@@ -28,7 +18,7 @@ class ConfigLoader
         if (!file_exists($defaultConfigFile)) {
             throw new \Exception('Cannot find default configuration file: ' . $defaultConfigFile);
         }
-        // Load default configuration values
+
         $this->options = $this->readConfigFile($defaultConfigFile);
 
         $localName = $this->getConfigFile();
@@ -53,7 +43,15 @@ class ConfigLoader
         if (!empty(getenv('NODE_CONFIG_DIR'))) {
             return getenv('NODE_CONFIG_DIR');
         }
-        return getcwd() . '/config';
+        $path = getcwd();
+        do {
+            $testPath = $path . '/config';
+            if (file_exists($testPath)) {
+                return $testPath;
+            }
+            $path = dirname($path);
+        } while ($path);
+        return '';
     }
 
     public function getConfigFile()
@@ -113,10 +111,6 @@ class ConfigLoader
         //@TODO: Implement this function
     }
 
-    /**
-     * Retrieve value with constants being a higher priority
-     * @param $key Array Key to get
-     */
     public function &__get($key)
     {
         if (isset($this->options[$key])) {
@@ -126,11 +120,6 @@ class ConfigLoader
         return false;
     }
 
-    /**
-     * Set a new or update a key / value pair
-     * @param $key Key to set
-     * @param $value Value to set
-     */
     public function __set($key, $value)
     {
         $this->options[$key] = $value;
