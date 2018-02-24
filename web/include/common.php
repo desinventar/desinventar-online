@@ -167,9 +167,9 @@ function showerror($val)
 // To prevent display errors with strings containing cr,lf,quotes etc. remove them
 function str2js($str)
 {
-    $str2 = ereg_replace("[\r\n]", " \\n\\\n", $str);
-    $str2 = ereg_replace('"', '', $str2);
-    $str2 = ereg_replace("'", "", $str2);
+    $str2 = preg_replace("[\r\n]", " \\n\\\n", $str);
+    $str2 = preg_replace('"', '', $str2);
+    $str2 = preg_replace("'", "", $str2);
     return $str2;
 }
 
