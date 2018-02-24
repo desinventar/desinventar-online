@@ -1836,7 +1836,7 @@ class Query
 
     public function queryLabelsFromGroup($labgrp, $langID, $withLabelGroupPrefix = true)
     {
-        $dictio = '';
+        $dictio = [];
         $sql = "SELECT g.LGName as lgn, g.LabelName as lbn, DictTranslation, ".
             "DictTechHelp, DictBasDesc, DictFullDesc from Dictionary d,".
             " LabelGroup g where (g.LGName like '". $labgrp ."%') and ".
