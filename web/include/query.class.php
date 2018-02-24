@@ -1757,10 +1757,10 @@ class Query
             $k = substr($k, 2);
             // 2009-12-30 (jhcaiced) Remove CR LF from some items which causes some javascript issues later...
             if (array_key_exists(0, $v)) {
-                $v[0] = trim(ereg_replace("[\r\n]", '', $v[0]));
+                $v[0] = trim(preg_replace("[\r\n]", '', $v[0]));
             }
             if (array_key_exists(1, $v)) {
-                $v[1] = trim(ereg_replace("[\r\n]", '', $v[1]));
+                $v[1] = trim(preg_replace("[\r\n]", '', $v[1]));
             }
             if ($k == "GeographyId") {
                 foreach ($v as $itm) {
