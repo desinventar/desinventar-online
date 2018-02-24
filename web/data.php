@@ -104,7 +104,7 @@ if (isset($post['page']) || isset($post['_D+cmd'])) {
     if ($us->q->chkSQL($sql)) {
         if (!empty($export)) {
             // Save results in CSVfile
-            $datpth = TEMP .'/data_'. session_id() .'.$export';
+            $datpth = $config->paths['tmp_dir'] .'/data_'. session_id() .'.' . $export;
             $fp = fopen($datpth, 'w');
             $pin = 0;
             $pgt = $iNumberOfPages;

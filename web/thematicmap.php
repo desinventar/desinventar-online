@@ -86,7 +86,8 @@ switch ($cmd) {
                 $post['_M+Label'],
                 $post['_M+Transparency'],
                 'THEMATIC',
-                $options
+                $options,
+                $config
             );
             $rinf = new DIRegion($us);
             $info['RECORDS'] = showStandardNumber($NumberOfRecords);
@@ -167,7 +168,7 @@ switch ($cmd) {
     case 'getkml':
         $MapId = getParameter('MAPID', '');
         if ($MapId != '') {
-            $sFilename = TMP_DIR . '/map_' . $MapId . '.kml';
+            $sFilename = $config-paths['tmp_dir'] . '/map_' . $MapId . '.kml';
             if (file_exists($sFilename)) {
                 $sOutFilename = 'DesInventar_ThematicMap_' . $MapId . '.kml';
                 header('Content-type: text/kml');

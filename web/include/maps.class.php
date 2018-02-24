@@ -31,16 +31,18 @@ class Maps
         $lbl,
         $prmTransparency,
         $type,
-        $prmOptions = array()
+        $prmOptions,
+        $config
     ) {
         $this->options = array('Id' => time());
+        $this->config = $config;
         $this->options = array_merge($this->options, $prmOptions);
 
         $this->reg = $reg;
 
         // Always generate the KML file along with the MAP file for later use
         $this->kml = $this->generateKML($us, $reg, $info);
-        $sFilename = TMP_DIR . '/map_' . $this->options['id'] . '.kml';
+        $sFilename = $config->paths['tmp_dir'] . '/map_' . $this->options['id'] . '.kml';
         $fh = fopen($sFilename, 'w+');
         fputs($fh, $this->kml);
         fclose($fh);
@@ -53,7 +55,7 @@ class Maps
             $map .= $this->setLayerEff($us, $reg, $lev, $dl, $range, $info, $lbl, $prmTransparency);
             $map .= $this->setFooter();
 
-            $sFilename = TMP_DIR . '/map_' . $this->options['id'] .  '.map';
+            $sFilename = $config->paths['tmp_dir'] . '/map_' . $this->options['id'] .  '.map';
             $this->fpath = $sFilename;
             $fh = fopen($sFilename, 'w');
             fwrite($fh, $map);
@@ -104,7 +106,7 @@ class Maps
 				HEADER "templates/imagemap_header.html"
 				FOOTER "templates/imagemap_footer.html"';
         }
-        $fm = TMP_DIR . '/map_';
+        $fm = $this->config->paths['tmp_dir'] . '/map_';
         if ($typ == 'THEMATIC') {
             $fm .= $reg . '-'. session_id() . '.map';
         } elseif (strlen($typ) > 0) {
@@ -113,7 +115,6 @@ class Maps
             exit();
         }
         $map .= '
-			#IMAGEPATH		"'. str_replace('\\', '/', TMP_DIR) .'"
 			METADATA
 			  WMS_TITLE	"DesInventar Map of -'. $inf['TITLE'] .'-"
 			  WMS_ABSTRACT	"Level: '. $inf['LEVEL'] .'"

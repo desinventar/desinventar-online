@@ -40,15 +40,15 @@ jobs:
             /bin/cp files/apache/desinventar-centos-default.conf /etc/httpd/conf.d/web.conf
             sed -i 's#:80#:8081#' /etc/httpd/conf.d/web.conf
             make database
-            mkdir -p /var/lib/desinventar/main/
-            /bin/cp files/database/*.db /var/lib/desinventar/main/
-            chown -R apache:apache /var/lib/desinventar
-            mkdir -p /var/lib/desinventar/worldmap
-            unzip files/worldmap/world_adm0.zip -d /var/lib/desinventar/worldmap
-            /bin/cp files/worldmap/world_adm0.map /var/lib/desinventar/worldmap/
-            chown -R apache:apache /var/lib/desinventar/worldmap
-            tar -xf files/seed/seed.tar.gz -C /var/lib/desinventar
-            chown -R apache:apache /var/lib/desinventar
+            mkdir -p /var/local/desinventar/db/main/
+            /bin/cp files/database/*.db /var/local/desinventar/db/main/
+            chown -R apache:apache /var/local/desinventar
+            mkdir -p /var/local/desinventar/worldmap
+            unzip files/worldmap/world_adm0.zip -d /var/local/desinventar/worldmap
+            /bin/cp files/worldmap/world_adm0.map /var/local/desinventar/worldmap/
+            chown -R apache:apache /var/local/desinventar/worldmap
+            tar -xf files/seed/seed.tar.gz -C /var/local/desinventar/db
+            chown -R apache:apache /var/local/desinventar
             /etc/init.d/httpd restart
       - run:
           name: Validate code

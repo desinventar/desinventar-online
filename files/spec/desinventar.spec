@@ -29,10 +29,11 @@ Requires: mapserver proj proj-epsg proj-nad
 %define BASE_DIR  %{_prefix}/share/desinventar
 %define WEB_DIR   %{BASE_DIR}/web
 %define FILES_DIR %{BASE_DIR}/files
-%define WWW_DIR   /var/www/desinventar
-%define DATA_DIR  /var/lib/desinventar
-%define TMP_DIR   /var/tmp/desinventar
-%define CACHE_DIR /var/cache/smarty/desinventar
+%define WWW_DIR   /var/local/desinventar/tmp/data
+%define DATA_DIR  /var/local/desinventar/db
+%define WORLDMAP_DIR  /var/local/desinventar/worldmap
+%define TMP_DIR   /var/local/desinventar/tmp/data
+%define CACHE_DIR /tmp
 %define CONFIG_DIR /etc/desinventar
 
 %description
@@ -64,8 +65,8 @@ cp -r * $RPM_BUILD_ROOT/%{BASE_DIR}
 install -m 755 -d $RPM_BUILD_ROOT/%{DATA_DIR}
 
 # WorldMap Install
-install -m 755 -d $RPM_BUILD_ROOT/%{DATA_DIR}/worldmap
-cd $RPM_BUILD_ROOT/%{DATA_DIR}/worldmap
+install -m 755 -d $RPM_BUILD_ROOT/%{WORLDMAP_DIR}
+cd $RPM_BUILD_ROOT/%{WORLDMAP_DIR}
 unzip %{SOURCE1}
 
 install -m 755 -d $RPM_BUILD_ROOT/%{CONFIG_DIR}
@@ -96,7 +97,7 @@ rm -rf composer.phar
 %files
 %defattr(-,root,root)
 %{_prefix}/share/desinventar/*
-/var/lib/desinventar/worldmap/*
+%{WORLDMAP_DIR}/*
 %config %{CONFIG_DIR}/config.php
 
 %changelog

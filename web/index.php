@@ -667,7 +667,7 @@ switch ($cmd) {
                 }
                 if (isset($GeoLevel['filename'])) {
                     $GeoLevelLayerFile = 'geocarto' . sprintf('%02d', $GeoLevelId);
-                    $SrcDir = TMP_DIR . '/' . $us->sSessionId;
+                    $SrcDir = $config->paths['tmp_dir'] . '/' . $us->sSessionId;
                     $OutDir = $us->getRegionDir($RegionId);
                     foreach ($GeoLevel['filename'] as $ext => $filename) {
                         $srcFile = $SrcDir . '/' . $filename;
@@ -748,7 +748,7 @@ switch ($cmd) {
             require_once '../external/valums-fileuploader/fileuploader.php';
             $allowedExtensions = array('dbf','shp','shx');
             $sizeLimit = 100 * 1024 * 1024;
-            $OutDir = TMP_DIR . '/' . $us->sSessionId;
+            $OutDir = $config->paths['tmp_dir'] . '/' . $us->sSessionId;
             if (!is_dir($OutDir)) {
                 mkdir($OutDir);
             }
@@ -874,7 +874,8 @@ switch ($cmd) {
                 $us,
                 $RegionId,
                 '',
-                getParameter('Filename', '')
+                getParameter('Filename', ''),
+                $config->paths['tmp']
             );
         }
         $answer['Status'] = $iReturn;
@@ -887,7 +888,7 @@ switch ($cmd) {
             $iReturn = ERR_ACCESS_DENIED;
         }
         if ($iReturn > 0) {
-            $OutDir = TMP_DIR . '/' . $us->sSessionId;
+            $OutDir = $config->paths['tmp_dir'] . '/' . $us->sSessionId;
             $Filename = getParameter('Filename', '');
             if (file_exists($OutDir . '/' . $Filename)) {
                 unlink($OutDir . '/' . $Filename);
@@ -934,7 +935,8 @@ switch ($cmd) {
         }
         if ($iReturn > 0) {
             $RegionId = $_POST['RegionInfo']['RegionId'];
-            $Filename = TMP_DIR . '/DesInventarFile_' . $us->sSessionId . '_' . $_POST['RegionInfo']['Filename'];
+            $Filename = $config->paths['tmp_dir']
+              . '/DesInventarFile_' . $us->sSessionId . '_' . $_POST['RegionInfo']['Filename'];
             $iReturn = DIRegionDB::createRegionDBFromZip(
                 $us,
                 $_POST['RegionInfo']['Mode'],
@@ -966,7 +968,7 @@ switch ($cmd) {
             require_once '../external/valums-fileuploader/fileuploader.php';
             $allowedExtensions = array('zip');
             $sizeLimit = 100 * 1024 * 1024;
-            $OutDir = TMP_DIR . '/' . $us->sSessionId;
+            $OutDir = $config->paths['tmp_dir'] . '/' . $us->sSessionId;
             if (!is_dir($OutDir)) {
                 mkdir($OutDir);
             }
@@ -1144,8 +1146,8 @@ switch ($cmd) {
         $answer = array('Status'   => ERR_UNKNOWN_ERROR);
         if ($desinventarUserRoleValue > ROLE_NONE) {
             $ShortName = 'DesInventar_' . date('Y-m-d') . '_' . $RegionId . '.zip';
-            $FileName = WWWDIR  . '/data/' . $SessionId . '/' . $ShortName;
-            $URL      = WWWDATA . '/data/' . $SessionId . '/' . $ShortName;
+            $FileName = $config->paths['www_dir'] . '/' . $SessionId . '/' . $ShortName;
+            $URL      = $config->paths['www_uri'] . '/' . $SessionId . '/' . $ShortName;
             $r = new DIRegion($us);
             $iReturn = $r->createRegionBackup($FileName);
             if ($iReturn > 0) {
@@ -1264,7 +1266,7 @@ switch ($cmd) {
         $post = $_POST;
         fixPost($post);
         $post['General']['LangIsoCode'] = $lg;
-        $graph = new DIGraph($us, $post);
+        $graph = new DIGraph($us, $post, $config->graphs);
         $graph->execute();
 
         if ($cmd == 'cmdGraphShow') {
