@@ -52,12 +52,12 @@ class DatabaseOperations
         return $iReturn;
     }
 
-    public static function replace($session, $prmRegionId, $prmRegionLabel, $prmFilename)
+    public static function replace($session, $prmRegionId, $prmRegionLabel, $prmFilename, $tmpDir)
     {
         $iReturn = ERR_NO_ERROR;
         $RegionId = $prmRegionId;
         $RegionLabel = $prmRegionLabel;
-        $OutDir = TMP_DIR . '/' . $session->sSessionId;
+        $OutDir = $tmpDir . '/' . $session->sSessionId;
         $filename = $OutDir . '/' . $prmFilename;
         if (! file_exists($filename)) {
             $iReturn = ERR_DEFAULT_ERROR;

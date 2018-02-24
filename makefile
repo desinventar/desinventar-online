@@ -51,7 +51,7 @@ standard-js : .FORCE
 	./node_modules/.bin/eslint web/js2/**/*.js tests/e2e/**/*.js
 
 node-build : .FORCE
-	yarn
+	npm install
 
 web-build: .FORCE
 	./node_modules/.bin/webpack -p

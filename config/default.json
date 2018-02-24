@@ -4,13 +4,20 @@
   },
   "paths": {
     "fonts": "/usr/share/fonts/liberation/fonts.txt",
-    "libs_url": "//cdn-desinventar.inticol.com/js"
+    "libs_url": "//cdn-desinventar.inticol.com/js",
+    "tmp_dir": "/tmp",
+    "www_dir": "/var/local/desinventar/tmp/data",
+    "www_uri": "/desinventar-data"
+  },
+  "graphs": {
+    "url":"/graphs",
+    "tmp_dir": "/var/local/desinventar/tmp/graphs"
   },
   "maps": {
     "mapserver_uri": "/cgi-bin/mapserv",
     "mapserver": "mapserv",
     "proj_lib": "/usr/share/proj",
-    "worldmap_dir": "/var/lib/desinventar/worldmap"
+    "worldmap_dir": "/var/local/desinventar/worldmap"
   },
   "flags": {
     "mode": "devel",
@@ -30,7 +37,7 @@
     "db_port": "",
     "db_user": "",
     "db_passwd": "",
-    "db_dir": "/var/lib/desinventar"
+    "db_dir": "/var/local/desinventar/db"
   },
   "test": {
     "url": "http://localhost:8081",

@@ -24,7 +24,12 @@ class DIGraph extends DIResult
         'Mode'          => array('NORMAL')
     );
 
-    public function __construct($prmSession, $prmOptions)
+    protected $config = [
+        'tmp_dir' => '',
+        'url' => ''
+    ];
+
+    public function __construct($prmSession, $prmOptions, $config)
     {
         if (isset($prmOptions['prmGraph'])) {
             $prmOptions['Graph'] = $prmOptions['prmGraph'];
@@ -37,6 +42,7 @@ class DIGraph extends DIResult
         }
         parent::__construct($prmSession, $prmOptions);
         $this->options['Graph']   = array_merge($this->options_default_graph, $prmOptions['Graph']);
+        $this->config = array_merge($this->config, $config);
     }
 
     public function preProcessData()
@@ -106,8 +112,9 @@ class DIGraph extends DIResult
 
         $options['Graph'] = $prmGraph;
 
-        $sImageURL  = WWWDATA . '/graphs/graph_'. session_id() . '_' . time() . '.png';
-        $sImageFile = WWWDIR  . '/graphs/graph_'. session_id() . '_' . time() . '.png';
+        $fileName = 'graph_'. session_id() . '_' . time() . '.png';
+        $sImageURL  = $this->config['url'] . '/' . $fileName;
+        $sImageFile = $this->config['tmp_dir'] . '/' . $fileName;
 
         // Process Configuration options to Graphic
         $ele = array();

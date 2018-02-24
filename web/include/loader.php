@@ -43,9 +43,6 @@ if (isset($_SERVER['HTTP_HOST'])) {
             $_SERVER['DESINVENTAR_WEB'] = $Install_Dir . '/Apache/htdocs';
         }
         $Install_Dir = dirname($Install_Dir);
-        if (empty($_SERVER['DESINVENTAR_WWWDIR'])) {
-            $_SERVER['DESINVENTAR_WWWDIR'] = $Install_Dir . '/www';
-        }
         if (empty($_SERVER['DESINVENTAR_DATADIR'])) {
             $_SERVER['DESINVENTAR_DATADIR'] = $Install_Dir . '/data';
         }
@@ -73,9 +70,6 @@ if (isset($_SERVER['HTTP_HOST'])) {
         if (! isset($_SERVER['DESINVENTAR_WEB'])) {
             $_SERVER['DESINVENTAR_WEB']      = '/usr/share/desinventar/web';
         }
-        if (empty($_SERVER['DESINVENTAR_WWWDIR'])) {
-            $_SERVER['DESINVENTAR_WWWDIR'] = '/var/www/desinventar';
-        }
         if (preg_match('/desinventar.org$/', $_SERVER['HTTP_HOST'])) {
             $appOptions['IsOnline'] = 1;
         }
@@ -86,9 +80,6 @@ if (isset($_SERVER['HTTP_HOST'])) {
 } else {
     // Running a Command Line Script
     $config->flags['env'] = 'command';
-    if (! isset($_SERVER['DESINVENTAR_WWWDIR'])) {
-        $_SERVER['DESINVENTAR_WWWDIR'] = '/var/www/desinventar';
-    }
     $config->paths['tmp'] = '/var/tmp/desinventar';
 }
 
@@ -107,8 +98,6 @@ if (!empty($_SERVER['DESINVENTAR_LIBS_URL'])) {
 }
 
 $config->paths['web_dir'] = $_SERVER['DESINVENTAR_WEB'];
-$config->paths['www_dir'] = $_SERVER['DESINVENTAR_WWWDIR'];
-$config->paths['www_data'] = '/desinventar-data';
 require_once 'define.php';
 require_once(BASE . '/include/usersession.class.php');
 require_once(BASE . '/include/date.class.php');

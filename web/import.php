@@ -33,13 +33,14 @@ if (isset($_FILES['desinv']) && isset($post['diobj'])) {
             $name = $_FILES['desinv']['name'];
             if (ARCH == 'LINUX') {
                 // This step executes iconv to convert the uploaded file to UTF-8
-                $Cmd = '/usr/bin/iconv --from-code=ISO-8859-1 --to-code=UTF-8 ' . $tmp_name . '> ' . TEMP . '/' . $name;
+                $Cmd = '/usr/bin/iconv --from-code=ISO-8859-1 --to-code=UTF-8 '
+                  . $tmp_name . '> ' . $config->paths['tmp_dir'] . '/' . $name;
                 system($Cmd);
             } else {
-                move_uploaded_file($tmp_name, TEMP .'/' . $name);
+                move_uploaded_file($tmp_name, $config->paths['tmp_dir'] .'/' . $name);
             }
             $iserror = false;
-            $FileName = TEMP . '/' . $name;
+            $FileName = $config->paths['tmp_dir'] . '/' . $name;
             // load basic field of dictionary
             $dic = array();
             $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Disaster', $lg));

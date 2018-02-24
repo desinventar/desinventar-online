@@ -16,7 +16,7 @@ services:
      - "8080:80"
     volumes:
      - .:/usr/share/desinventar
-     - /var/lib/desinventar:/var/lib/desinventar
+     - /var/local/desinventar:/var/local/desinventar
   redis:
     build: docker/redis
     ports:

@@ -131,7 +131,7 @@ if (isset($post['page']) || isset($post['_S+cmd'])) {
     if ($us->q->chkSQL($sql)) {
         if (!empty($export)) {
             // Save results in CSVfile
-            $stdpth = TEMP .'/statistic_'. session_id() . '.' . $export;
+            $stdpth = $config->paths['tmp_dir'] .'/statistic_'. session_id() . '.' . $export;
             $fp = fopen($stdpth, 'w');
             $pin = 0;
             $pgt = $last;

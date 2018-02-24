@@ -38,7 +38,7 @@ class MapServer
             ));
         }
         $options = array_merge($options, array(
-            'MAP' => TMP_DIR .'/map_' . $options[self::MAPID] . '.map',
+            'MAP' => $this->config->paths['tmp_dir'] .'/map_' . $options[self::MAPID] . '.map',
             'TRANSPARENT' => 'true',
         ));
         unset($options[self::MAPID]);
