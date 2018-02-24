@@ -43,9 +43,15 @@ class Version
 
     public function getUrlSuffix()
     {
-        $output = exec('/usr/bin/git rev-parse --short HEAD');
+        $cmd = '/usr/bin/git';
+        $output = shell_exec(sprintf("which %s", escapeshellarg($cmd)));
         if (empty($output)) {
-            $output = time();
+            return time();
+        }
+
+        $output = exec($cmd . ' rev-parse --short HEAD');
+        if (empty($output)) {
+            return time();
         }
         return $output;
     }
