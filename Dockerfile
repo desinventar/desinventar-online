@@ -1,5 +1,5 @@
 # CentOS 6 + Updates + DesInventar Prerequisites
-FROM desinventar/centos6:v20180204-01
+FROM desinventar/centos6:v20180224-01
 LABEL maintainer="Jhon H. Caicedo"
 LABEL e-mail="jhcaiced@inticol.com"
 
@@ -12,7 +12,7 @@ RUN mkdir -p /usr/share/desinventar && cp -a /tmp/vendor /usr/share/desinventar
 
 ADD package.json /tmp/package.json
 ADD yarn.lock /tmp/yarn.lock
-RUN cd /tmp && npm install
+RUN cd /tmp && yarn install
 RUN mkdir -p /usr/share/desinventar && cp -a /tmp/node_modules /usr/share/desinventar
 
 RUN composer self-update
