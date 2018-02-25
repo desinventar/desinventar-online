@@ -16,7 +16,6 @@ RUN cd /tmp && npm install
 RUN mkdir -p /usr/share/desinventar && cp -a /tmp/node_modules /usr/share/desinventar
 
 RUN composer self-update
-RUN npm install -g yarn
 
 COPY files/apache/desinventar-centos-default.* /etc/httpd/conf.d/
 RUN sed -i 's#logs/access_log#/dev/stderr#; s#logs/error_log#/dev/stderr#' /etc/httpd/conf/httpd.conf
