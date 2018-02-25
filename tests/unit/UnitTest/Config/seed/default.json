@@ -10,7 +10,7 @@
     "mapserver_uri": "/cgi-bin/mapserv",
     "mapserver": "mapserv",
     "proj_lib": "/usr/share/proj",
-    "worldmap_dir": "/var/lib/desinventar/worldmap"
+    "worldmap_dir": "/var/local/desinventar/worldmap"
   },
   "flags": {
     "mode": "normal",
@@ -30,7 +30,7 @@
     "db_port": "",
     "db_user": "",
     "db_passwd": "",
-    "db_dir": "/var/lib/desinventar"
+    "db_dir": "/var/local/desinventar/db"
   },
   "test": {
     "url": "http://localhost:8081",

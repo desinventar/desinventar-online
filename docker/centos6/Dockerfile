@@ -34,11 +34,8 @@ RUN cat /tmp/epsg_fix.txt >> /usr/share/proj/epsg
 RUN mkdir -p /var/www/html
 RUN echo "<html><head><title>DesInventar</title></head><body><h3>DesInventar</h3></body></html>" > /var/www/html/index.html
 
-RUN install -m 755 -o apache -g apache -d /var/www/desinventar/graphs
-RUN install -m 755 -o apache -g apache -d /var/lib/desinventar
-RUN install -m 755 -o apache -g apache -d /var/tmp/desinventar
-RUN install -m 755 -o apache -g apache -d /var/cache/smarty/desinventar
-RUN install -m 755 -o apache -g apache -d /etc/desinventar
+RUN install -m 755 -o apache -g apache -d /var/local/desinventar/tmp
+RUN install -m 755 -o apache -g apache -d /var/local/desinventar/db
 
 # Install composer to handle dependencies
 RUN curl --silent --show-error https://getcomposer.org/installer > /tmp/composer-setup.php && \
@@ -53,6 +50,8 @@ RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | b
     && nvm use default
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+
+RUN npm install -g yarn
 
 EXPOSE 80
 
