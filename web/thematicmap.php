@@ -160,7 +160,7 @@ switch ($cmd) {
             $t->assign('ctl_showres', true);
             $t->assign('reg', $RegionId);
             $t->assign('basemap', $worldmap);
-            $t->assign('mps', MAPSERV);
+            $t->assign('mps', $config->maps['mapserver']);
         }
         $t->force_compile   = true; # Force this template to always compile
         $t->display('thematicmap.tpl');

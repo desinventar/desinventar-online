@@ -33,7 +33,6 @@ if (isset($_SERVER['HTTP_HOST'])) {
         $config->maps['mapserver'] = 'mapserv.exe';
         // 2011-02-25 (jhcaiced) Use DOCUMENT_ROOT to get installation path
         $Install_Dir = dirname(dirname($_SERVER['DOCUMENT_ROOT']));
-        $config->paths['tmp'] = $Install_Dir . '/tmp';
         $config->paths['fonts'] = $Install_Dir . '/fontswin.txt';
         // MS4W doesn't load the gd extension by default, so we do here now...
         if (!extension_loaded('gd')) {
@@ -66,7 +65,6 @@ if (isset($_SERVER['HTTP_HOST'])) {
         $_SERVER['DISTRO'] = $distro;
 
         $config->paths['fonts'] = '/usr/share/fonts/liberation/fonts.txt';
-        $config->paths['tmp'] = '/var/tmp/desinventar';
         if (! isset($_SERVER['DESINVENTAR_WEB'])) {
             $_SERVER['DESINVENTAR_WEB']      = '/usr/share/desinventar/web';
         }
@@ -74,27 +72,17 @@ if (isset($_SERVER['HTTP_HOST'])) {
             $appOptions['IsOnline'] = 1;
         }
     }
-    // Define the Smarty library directory (installed by composer)
-    $config->paths['smarty'] = $config->paths['src_dir']  . '/vendor/smarty/smarty/libs';
-    $config->paths['jpgraph'] = $config->paths['src_dir'] . '/vendor/jpgraph/src';
+    $config->paths['jpgraph_dir'] = $config->paths['src_dir'] . '/vendor/jpgraph/src';
 } else {
     // Running a Command Line Script
     $config->flags['env'] = 'command';
-    $config->paths['tmp'] = '/var/tmp/desinventar';
 }
 
-// Override configuration values if set as Apache variables
-if (!empty($_SERVER['DESINVENTAR_CACHEDIR'])) {
-    $config->smarty['cachedir'] = $_SERVER['DESINVENTAR_CACHEDIR'];
-}
 if (!empty($_SERVER['DESINVENTAR_DATADIR'])) {
     $config->database['db_dir'] = $_SERVER['DESINVENTAR_DATADIR'];
 }
 if (!empty($_SERVER['DESINVENTAR_MODE'])) {
     $config->flags['mode'] = $_SERVER['DESINVENTAR_MODE'];
-}
-if (!empty($_SERVER['DESINVENTAR_LIBS_URL'])) {
-    $config->paths['libs_url'] = $_SERVER['DESINVENTAR_LIBS_URL'];
 }
 
 $config->paths['web_dir'] = $_SERVER['DESINVENTAR_WEB'];
@@ -167,15 +155,14 @@ if ($config->flags['env'] != 'command') {
     $templatedir = dirname($_SERVER['SCRIPT_FILENAME']) . '/templates';
 
     // Smarty configuration
-    require_once($config->paths['smarty'] . '/Smarty.class.php');
     $t = new Smarty();
     $t->debugging       = false;
     $t->config_dir      = $confdir;
     $t->template_dir    = $templatedir;
-    $t->compile_dir     = $config->smarty['cachedir'];
+    $t->compile_dir     = $config->paths['cache_dir'];
     $t->left_delimiter  = '{-';
     $t->right_delimiter = '-}';
-    $t->cache_dir = $config->smarty['cachedir'];
+    $t->cache_dir = $config->paths['cache_dir'];
     $t->cache_lifetime  = 3600;
     $t->force_compile   = false;
     $t->compile_check = false;

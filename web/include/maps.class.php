@@ -42,7 +42,7 @@ class Maps
 
         // Always generate the KML file along with the MAP file for later use
         $this->kml = $this->generateKML($us, $reg, $info);
-        $sFilename = $config->paths['tmp_dir'] . '/map_' . $this->options['id'] . '.kml';
+        $sFilename = $this->config->maps['tmp_dir'] . '/map_' . $this->options['id'] . '.kml';
         $fh = fopen($sFilename, 'w+');
         fputs($fh, $this->kml);
         fclose($fh);
@@ -55,7 +55,7 @@ class Maps
             $map .= $this->setLayerEff($us, $reg, $lev, $dl, $range, $info, $lbl, $prmTransparency);
             $map .= $this->setFooter();
 
-            $sFilename = $config->paths['tmp_dir'] . '/map_' . $this->options['id'] .  '.map';
+            $sFilename = $this->config->maps['tmp_dir'] . '/map_' . $this->options['id'] .  '.map';
             $this->fpath = $sFilename;
             $fh = fopen($sFilename, 'w');
             fwrite($fh, $map);
@@ -97,7 +97,7 @@ class Maps
 		EXTENT			-180 -90 180 90
 		SIZE				'. $x .' '. $y .'
 		SHAPEPATH		"' . str_replace('\\', '/', VAR_DIR . '/database/' . $reg) . '/"
-		FONTSET			"' . str_replace('\\', '/', FONTSET) . '"
+		FONTSET			"' . str_replace('\\', '/', $this->config->maps['fonts_dir']) . '"
 		IMAGECOLOR	255 255 255
 		PROJECTION	"proj=latlong" "ellps=WGS84" "datum=WGS84" END
 		WEB';
@@ -106,7 +106,7 @@ class Maps
 				HEADER "templates/imagemap_header.html"
 				FOOTER "templates/imagemap_footer.html"';
         }
-        $fm = $this->config->paths['tmp_dir'] . '/map_';
+        $fm = $this->config->maps['tmp_dir'] . '/map_';
         if ($typ == 'THEMATIC') {
             $fm .= $reg . '-'. session_id() . '.map';
         } elseif (strlen($typ) > 0) {

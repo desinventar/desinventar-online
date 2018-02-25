@@ -192,7 +192,7 @@ class DIGraph extends DIResult
                 error_log('[DESINVENTAR_GRAPHS] ' . $e->getMessage());
                 // The graph image cannot be created, so we use a default blank image instead here
                 $sImageURL = 'images/blank.gif';
-                $sImageFile = $config->paths['src_dir'] . '/web/images/blank.gif';
+                $sImageFile = $this->config->paths['src_dir'] . '/web/images/blank.gif';
             }
 
             $this->output = array();

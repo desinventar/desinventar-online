@@ -38,7 +38,7 @@ class MapServer
             ));
         }
         $options = array_merge($options, array(
-            'MAP' => $this->config->paths['tmp_dir'] .'/map_' . $options[self::MAPID] . '.map',
+            'MAP' => $this->config->maps['tmp_dir'] .'/map_' . $options[self::MAPID] . '.map',
             'TRANSPARENT' => 'true',
         ));
         unset($options[self::MAPID]);
@@ -62,7 +62,7 @@ class MapServer
     {
         // This is a call to mapserver through cgi-bin from inside the host
         $url = 'http://127.0.0.1';
-        $suffix = '/cgi-bin/' . MAPSERV . '?' . $queryString;
+        $suffix = '/cgi-bin/' . $this->config->maps['mapserver'] . '?' . $queryString;
         if (file_exists('/.dockerenv')) {
             // We are running inside a docker container, we have to assume the
             // local port is 80
@@ -72,7 +72,7 @@ class MapServer
         if (! is_ssl() && (isset($_SERVER[self::SERVER_PORT]) && ($_SERVER[self::SERVER_PORT] != 80))) {
             return $url . ':' . $_SERVER[self::SERVER_PORT] . $suffix;
         }
-        return $url . '/cgi-bin/' . MAPSERV . '?' . $queryString;
+        return $url . '/cgi-bin/' . $this->config->maps['mapserver'] . '?' . $queryString;
     }
 
     public function hex2dec($prmColor)
