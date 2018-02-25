@@ -875,7 +875,7 @@ switch ($cmd) {
                 $RegionId,
                 '',
                 getParameter('Filename', ''),
-                $config->paths['tmp']
+                $config->paths['tmp_dir']
             );
         }
         $answer['Status'] = $iReturn;
@@ -1219,13 +1219,13 @@ switch ($cmd) {
     case 'profiles':
     case 'reports':
     case 'cmdProfiles':
-        require_once(JPGRAPHDIR . '/jpgraph.php');
-        require_once(JPGRAPHDIR . '/jpgraph_line.php');
-        require_once(JPGRAPHDIR . '/jpgraph_log.php');
-        require_once(JPGRAPHDIR . '/jpgraph_date.php');
-        require_once(JPGRAPHDIR . '/jpgraph_bar.php');
-        require_once(JPGRAPHDIR . '/jpgraph_pie.php');
-        require_once(JPGRAPHDIR . '/jpgraph_pie3d.php');
+        require_once($config->paths['jpgraph_dir'] . '/jpgraph.php');
+        require_once($config->paths['jpgraph_dir'] . '/jpgraph_line.php');
+        require_once($config->paths['jpgraph_dir'] . '/jpgraph_log.php');
+        require_once($config->paths['jpgraph_dir'] . '/jpgraph_date.php');
+        require_once($config->paths['jpgraph_dir'] . '/jpgraph_bar.php');
+        require_once($config->paths['jpgraph_dir'] . '/jpgraph_pie.php');
+        require_once($config->paths['jpgraph_dir'] . '/jpgraph_pie3d.php');
         require_once('include/math.class.php');
         require_once('include/date.class.php');
         require_once('include/graphic.class.php');
@@ -1251,13 +1251,13 @@ switch ($cmd) {
         break;
     case 'cmdGraphShow':
     case 'cmdGraphSave':
-        require_once(JPGRAPHDIR . '/jpgraph.php');
-        require_once(JPGRAPHDIR . '/jpgraph_line.php');
-        require_once(JPGRAPHDIR . '/jpgraph_log.php');
-        require_once(JPGRAPHDIR . '/jpgraph_date.php');
-        require_once(JPGRAPHDIR . '/jpgraph_bar.php');
-        require_once(JPGRAPHDIR . '/jpgraph_pie.php');
-        require_once(JPGRAPHDIR . '/jpgraph_pie3d.php');
+        require_once($config->paths['jpgraph_dir'] . '/jpgraph.php');
+        require_once($config->paths['jpgraph_dir'] . '/jpgraph_line.php');
+        require_once($config->paths['jpgraph_dir'] . '/jpgraph_log.php');
+        require_once($config->paths['jpgraph_dir'] . '/jpgraph_date.php');
+        require_once($config->paths['jpgraph_dir'] . '/jpgraph_bar.php');
+        require_once($config->paths['jpgraph_dir'] . '/jpgraph_pie.php');
+        require_once($config->paths['jpgraph_dir'] . '/jpgraph_pie3d.php');
         require_once('include/math.class.php');
         require_once('include/date.class.php');
         require_once('include/graphic.class.php');

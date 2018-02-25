@@ -1,6 +1,6 @@
 {
   "smarty": {
-    "cachedir": "/var/cache/smarty/desinventar"
+    "cachedir": "/tmp"
   },
   "paths": {
     "fonts": "/usr/share/fonts/liberation/fonts.txt",

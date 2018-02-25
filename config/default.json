@@ -1,11 +1,9 @@
 {
-  "smarty": {
-    "cachedir": "/var/cache/smarty/desinventar"
-  },
   "paths": {
     "fonts": "/usr/share/fonts/liberation/fonts.txt",
     "libs_url": "//cdn-desinventar.inticol.com/js",
     "tmp_dir": "/tmp",
+    "cache_dir": "/tmp",
     "www_dir": "/var/local/desinventar/tmp/data",
     "www_uri": "/desinventar-data"
   },
@@ -17,7 +15,9 @@
     "mapserver_uri": "/cgi-bin/mapserv",
     "mapserver": "mapserv",
     "proj_lib": "/usr/share/proj",
-    "worldmap_dir": "/var/local/desinventar/worldmap"
+    "worldmap_dir": "/var/local/desinventar/worldmap",
+    "fonts_dir": "/usr/share/fonts/liberation/fonts.txt",
+    "tmp_dir": "/tmp"
   },
   "flags": {
     "mode": "devel",

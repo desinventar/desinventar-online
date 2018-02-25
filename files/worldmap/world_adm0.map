@@ -4,7 +4,6 @@
 		EXTENT			-180 -90 180 90
 		SIZE				400 550
 		#SHAPEPATH		"."
-		#FONTSET			"/usr/share/fonts/liberation/fonts.txt"
 		IMAGECOLOR	115 145 173
 		PROJECTION	"proj=latlong" "ellps=WGS84" "datum=WGS84" END
 		WEB
@@ -29,7 +28,7 @@
 			#PROJECTION	"init=epsg:4326" END
 			CLASSITEM		"Name"
       CLASS
-        COLOR	255 255 255 
+        COLOR	255 255 255
 				OUTLINECOLOR 50 50 50
 			END
 		END
