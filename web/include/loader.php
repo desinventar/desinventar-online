@@ -33,7 +33,6 @@ if (isset($_SERVER['HTTP_HOST'])) {
         $config->maps['mapserver'] = 'mapserv.exe';
         // 2011-02-25 (jhcaiced) Use DOCUMENT_ROOT to get installation path
         $Install_Dir = dirname(dirname($_SERVER['DOCUMENT_ROOT']));
-        $config->paths['fonts'] = $Install_Dir . '/fontswin.txt';
         // MS4W doesn't load the gd extension by default, so we do here now...
         if (!extension_loaded('gd')) {
             //dl( 'php_gd2.'.PHP_SHLIB_SUFFIX);
@@ -64,7 +63,6 @@ if (isset($_SERVER['HTTP_HOST'])) {
         }
         $_SERVER['DISTRO'] = $distro;
 
-        $config->paths['fonts'] = '/usr/share/fonts/liberation/fonts.txt';
         if (! isset($_SERVER['DESINVENTAR_WEB'])) {
             $_SERVER['DESINVENTAR_WEB']      = '/usr/share/desinventar/web';
         }
