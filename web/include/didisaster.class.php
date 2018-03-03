@@ -175,7 +175,8 @@ class DIDisaster extends DIRecord
             }
         }
         if (count($this->status->error)) {
-            $iReturn = reset(array_keys($this->status->error));
+            $keys = array_keys($this->status->error);
+            $iReturn = reset($keys);
         }
         return $iReturn;
     }
