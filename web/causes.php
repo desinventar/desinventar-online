@@ -10,7 +10,7 @@ require_once('include/dicause.class.php');
 
 require_once 'include/cause_operations.php';
 
-use Ramsey\Uuid\UuidFactory;
+use DesInventar\Common\Util;
 
 use \DesInventar\Legacy\DICause;
 
@@ -32,8 +32,8 @@ switch ($cmd) {
             }
             $o = new DICause($us);
             $o->setFromArray($info);
-            $uuid = new UuidFactory();
-            $o->set('CauseId', $uuid->uuid4());
+            $util = new Util();
+            $o->set('CauseId', $util->uuid4());
             $o->set('CausePredefined', 0);
             $i = $o->insert();
             showResult($i, $t);

@@ -11,8 +11,6 @@ require_once('include/geography_operations.php');
 require_once('include/database_operations.php');
 require_once('include/query_operations.php');
 
-use Ramsey\Uuid\UuidFactory;
-
 use \DesInventar\Legacy\UserSession;
 use \DesInventar\Legacy\DIRegion;
 use \DesInventar\Legacy\DIRegionDB;
@@ -25,6 +23,7 @@ use \DesInventar\Legacy\DIGeography;
 use \DesInventar\Legacy\DIGeoLevel;
 use \DesInventar\Legacy\DIProfile;
 use DesInventar\Common\Version;
+use DesInventar\Common\Util;
 
 $post = $_POST;
 $get  = $_GET;
@@ -54,7 +53,7 @@ $t->assign('desinventarUserRole', $desinventarUserRole);
 $t->assign('desinventarUserRoleValue', $desinventarUserRoleValue);
 $t->assign('appOptions', $appOptions);
 
-$uuid = new UuidFactory();
+$util = new Util();
 
 switch ($cmd) {
     case 'test':
@@ -270,7 +269,7 @@ switch ($cmd) {
             }
             $o->setFromArray($info);
             if ($o->get('EventId') == '') {
-                $o->set('EventId', $uuid->uuid4());
+                $o->set('EventId', $util->uuid4());
                 $iReturn = $o->insert();
             }
             $iReturn = $o->update();
@@ -326,7 +325,7 @@ switch ($cmd) {
             }
             $o->setFromArray($info);
             if ($o->get('CauseId') == '') {
-                $o->set('CauseId', $uuid->uuid4());
+                $o->set('CauseId', $util->uuid4());
                 $iReturn = $o->insert();
             }
             $iReturn = $o->update();

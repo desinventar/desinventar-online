@@ -2,7 +2,7 @@
 
 namespace DesInventar\Service;
 
-use Ramsey\Uuid\UuidFactory;
+use DesInventar\Common\Util;
 
 class Datacard extends Service
 {
@@ -57,8 +57,8 @@ class Datacard extends Service
         if ($icmd == CMD_NEW) {
             // New Disaster
             if ($data['DisasterId'] == '') {
-                $uuid = new UuidFactory();
-                $data['DisasterId'] = $uuid->uuid4();
+                $util = new Util();
+                $data['DisasterId'] = $util->uuid4();
             }
             $data['RecordCreation'] = $data['RecordUpdate'];
         }

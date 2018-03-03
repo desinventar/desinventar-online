@@ -112,8 +112,8 @@ if ($config->flags['mode'] != 'devel') {
 // SETTINGS
 date_default_timezone_set('UTC');
 $time_start = microtime_float();
-$uuid = new \Ramsey\Uuid\UuidFactory();
-$SessionId = $uuid->uuid4();
+$util = new \DesInventar\Common\Util();
+$SessionId = $util->uuid4();
 if ($config->flags['env'] != 'command') {
     $cmd = getCmd();
     // Session Management

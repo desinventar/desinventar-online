@@ -2,6 +2,8 @@
 
 namespace DesInventar\Common;
 
+use Ramsey\Uuid\UuidFactory;
+
 class Util
 {
     public static function getUrl()
@@ -15,6 +17,12 @@ class Util
         }
         $url = $url_proto . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         return $url;
+    }
+
+    public function uuid4()
+    {
+        $uuid = new UuidFactory();
+        return $uuid->uuid4()->toString();
     }
 
     public function escapeQuotes($prmValue)

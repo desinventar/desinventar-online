@@ -6,7 +6,7 @@
 
 namespace DesInventar\Legacy;
 
-use Ramsey\Uuid\UuidFactory;
+use DesInventar\Common\Util;
 
 use \PDO;
 
@@ -33,8 +33,8 @@ class DIEvent extends DIRecord
         parent::__construct($prmSession);
         $this->set("EventPredefined", 0);
         $this->set("EventActive", 1);
-        $uuid = new UuidFactory();
-        $this->set("EventId", $uuid->uuid4());
+        $util = new Util();
+        $this->set("EventId", $util->uuid4());
         $num_args = func_num_args();
         if ($num_args >= 2) {
             $prmEventId = func_get_arg(1);
