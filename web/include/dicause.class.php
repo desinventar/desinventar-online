@@ -5,7 +5,7 @@
 */
 namespace DesInventar\Legacy;
 
-use Ramsey\Uuid\UuidFactory;
+use DesInventar\Common\Util;
 
 class DICause extends DIRecord
 {
@@ -30,8 +30,8 @@ class DICause extends DIRecord
         parent::__construct($prmSession);
         $this->set("CausePredefined", 0);
         $this->set("CauseActive", 1);
-        $uuid = new UuidFactory();
-        $this->set("CauseId", $uuid->uuid4());
+        $util = new Util();
+        $this->set("CauseId", $util->uuid4());
 
         $num_args = func_num_args();
         if ($num_args >= 2) {
