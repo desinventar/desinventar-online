@@ -220,6 +220,7 @@ class DIRecord extends DIObject
     {
         $iReturn = ERR_DEFAULT_ERROR;
         $query = $this->getSelectQuery();
+        echo $query . "\n";
         $sth = $this->conn->prepare($query);
         try {
             $this->conn->beginTransaction();

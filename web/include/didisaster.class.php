@@ -391,11 +391,11 @@ class DIDisaster extends DIRecord
         return $iReturn;
     }
 
-    public static function findIdBySerial($prmSession, $prmDisasterSerial)
+    public function findBySerial($prmDisasterSerial)
     {
         $answer = '';
         $Query= 'SELECT * FROM Disaster WHERE DisasterSerial="' . $prmDisasterSerial . '"';
-        foreach ($prmSession->q->dreg->query($Query) as $row) {
+        foreach ($this->session->q->dreg->query($Query) as $row) {
             $answer = $row['DisasterId'];
         }
         return $answer;
