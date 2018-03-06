@@ -40,7 +40,7 @@
     "db_dir": "/var/local/desinventar/db"
   },
   "test": {
-    "url": "http://localhost:8080",
+    "url": "http://web:80",
     "username": "root",
     "passwd": "desinventar",
     "database": "BOL-1250695036-bolivia_gran_chaco"
