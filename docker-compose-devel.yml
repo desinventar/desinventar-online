@@ -1,0 +1,14 @@
+version: '2'
+services:
+  web:
+    volumes:
+     - .:/usr/share/desinventar
+  devel:
+    image: "desinventar/online:latest"
+    depends_on:
+    - web
+    ports:
+     - "8081:80"
+    volumes:
+     - .:/usr/share/desinventar
+     - /var/local/desinventar:/var/local/desinventar

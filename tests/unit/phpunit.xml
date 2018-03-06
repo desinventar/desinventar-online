@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <phpunit bootstrap="bootstrap.php">
     <php>
-        <var name="DESINVENTAR_URL" value="http://127.0.0.1:8081/" />
-        <var name="DESINVENTAR_API_URL" value="http://127.0.0.1:8081/api/" />
+        <var name="DESINVENTAR_TEST_URL" value="http://web:80/" />
+        <var name="DESINVENTAR_TEST_API_URL" value="http://web:80/api/" />
     </php>
     <testsuites>
         <testsuite name="unit">

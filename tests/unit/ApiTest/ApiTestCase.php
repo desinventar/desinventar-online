@@ -11,7 +11,7 @@ class ApiTestCase extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->baseUrl = $this->getVar('DESINVENTAR_API_URL', '');
+        $this->baseUrl = $this->getVar('DESINVENTAR_TEST_API_URL', '');
         $this->http = new Client(['base_uri' => $this->baseUrl]);
     }
 

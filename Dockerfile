@@ -25,6 +25,8 @@ RUN sed -i 's#^post_max_size = 8M$#post_max_size = 100M#' /etc/php.ini
 RUN sed -i 's#^upload_max_filesize = 2M$#upload_max_filesize = 100M#' /etc/php.ini
 
 COPY . /usr/share/desinventar
+RUN mkdir -p /usr/share/desinventar && cp -a /tmp/vendor /usr/share/desinventar
+RUN mkdir -p /usr/share/desinventar && cp -a /tmp/node_modules /usr/share/desinventar
 
 RUN make
 

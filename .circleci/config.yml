@@ -1,60 +1,26 @@
 version: 2
 jobs:
   build:
-    docker:
-      - image: desinventar/centos6:v20180204-01
-    working_directory: /usr/share/desinventar
+    machine: true
     steps:
-      - run:
-          name: Install yarn to handle dependencies
-          command: npm install -g yarn
       - checkout
-      - restore_cache:
-          keys:
-            - composer-v1-{{ checksum "composer.json" }}
       - run:
-          name: Install composer dependencies
+          name: Start container and verify it's working
           command: |
-            composer self-update
-            composer install --no-scripts --no-autoloader --prefer-source --no-interaction
-            composer dump-autoload --optimize
-      - save_cache:
-          key: composer-v1-{{ checksum "composer.json" }}
-          paths:
-          - vendor
-      - restore_cache:
-          keys:
-            - node-v1-{{ checksum "package.json" }}
-      - run:
-          name: Install Node dependencies
-          command: yarn
-      - save_cache:
-          key: node-v1-{{ checksum "package.json" }}
-          paths:
-            - node_modules
-      - run:
-          name: Application Setup
-          command: |
-            /bin/cp files/apache/desinventar-centos-default.* /etc/httpd/conf.d/
-            sed -i 's#logs/access_log#/dev/stderr#; s#logs/error_log#/dev/stderr#; s#^Listen 80$#Listen 8081#' /etc/httpd/conf/httpd.conf
-            /bin/cp files/apache/desinventar-centos-default.conf /etc/httpd/conf.d/web.conf
-            sed -i 's#:80#:8081#' /etc/httpd/conf.d/web.conf
-            make database
-            mkdir -p /var/local/desinventar/db/main/
-            /bin/cp files/database/*.db /var/local/desinventar/db/main/
-            chown -R apache:apache /var/local/desinventar
-            mkdir -p /var/local/desinventar/worldmap
-            unzip files/worldmap/world_adm0.zip -d /var/local/desinventar/worldmap
-            /bin/cp files/worldmap/world_adm0.map /var/local/desinventar/worldmap/
-            chown -R apache:apache /var/local/desinventar/worldmap
-            tar -xf files/seed/seed.tar.gz -C /var/local/desinventar/db
-            chown -R apache:apache /var/local/desinventar
-            /etc/init.d/httpd restart
-      - run:
-          name: Validate code
-          command: make
+            set -x
+            docker-compose up -d
+            docker run --network desinventar_default \
+              appropriate/curl --retry 30 --retry-delay 2 --retry-connrefused http://web:80/api
       - run:
           name: Running Tests
           command: |
-            make test
-            if [ $CIRCLE_BRANCH = 'develop' ]; then make test-web; fi
+            docker-compose exec web sh -c 'make test'
+      - run:
+          name: Running e2e Tests
+          command: |
+            set -x
+            if [ $CIRCLE_BRANCH = 'develop' ]; then \
+              docker build -t desinventar/e2e-test -f docker/e2e-test/Dockerfile . ; \
+              docker run --network desinventar_default \
+                desinventar/e2e-test:latest sh -c 'TEST_WEB_URL=http://web:80 make test-web'; \
+            fi
