@@ -17,6 +17,14 @@ RUN mkdir -p /usr/share/desinventar && cp -a /tmp/node_modules /usr/share/desinv
 
 RUN composer self-update
 
+RUN yum -y install java
+RUN mkdir -p /usr/local/liquibase && cd /usr/local/liquibase && \
+    wget -q https://github.com/liquibase/liquibase/releases/download/liquibase-parent-3.5.5/liquibase-3.5.5-bin.tar.gz -O - | tar -zxf - && \
+    ln -s /usr/local/liquibase/liquibase /usr/local/bin/liquibase
+RUN cd /usr/local/liquibase && wget -q https://bitbucket.org/xerial/sqlite-jdbc/downloads/sqlite-jdbc-3.21.0.jar
+RUN cd /usr/local/liquibase && wget -q https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.46.tar.gz -O - | tar -zxf - mysql-connector-java-5.1.46/mysql-connector-java-5.1.46.jar && \
+    mv mysql-connector-java-5.1.46/mysql-connector-java-5.1.46.jar .
+
 COPY files/apache/desinventar-centos-default.* /etc/httpd/conf.d/
 RUN sed -i 's#logs/access_log#/dev/stderr#; s#logs/error_log#/dev/stderr#' /etc/httpd/conf/httpd.conf
 COPY files/apache/desinventar-centos-default.conf /etc/httpd/conf.d/web.conf
