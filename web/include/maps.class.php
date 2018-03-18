@@ -70,8 +70,10 @@ class Maps
 
     public function getBaseUrl($protocol)
     {
-        $url = $protocol . '://' . $this->options['url'];
-        return $url;
+        if (strpos($this->options['url'], '://') !== false) {
+            return $this->options['url'];
+        }
+        return $protocol . '://' . $this->options['url'];
     }
 
     public function getMapUrl($protocol)
