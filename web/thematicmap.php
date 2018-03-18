@@ -20,7 +20,7 @@ $options['protocol'] = 'http';
 if (is_ssl()) {
     $options['protocol'] = 'https';
 }
-$url = $_SERVER['HTTP_HOST'] . $desinventarURL;
+$url = $desinventarURL;
 $options['url'] = $url;
 $options = array_merge($options, $config->maps);
 $cmd = getParameter('_M+cmd', getParameter('cmd', ''));
