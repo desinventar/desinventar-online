@@ -8,13 +8,13 @@ jobs:
           name: Start container and verify it's working
           command: |
             set -x
-            docker-compose up -d
+            docker-compose -f docker-compose-circleci.yml up -d
             docker run --network desinventar_default \
               appropriate/curl --retry 30 --retry-delay 2 --retry-connrefused http://web:80/api
       - run:
           name: Running Tests
           command: |
-            docker-compose exec web sh -c 'make test'
+            docker-compose -f docker-compose-circleci.yml exec web sh -c 'make test'
       - run:
           name: Running e2e Tests
           command: |
