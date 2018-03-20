@@ -19,3 +19,12 @@ trim_trailing_whitespace = false
 [makefile]
 indent_style = tab
 indent_size = 4
+
+# Compatibility with old code
+[web/js/**.js]
+indent_style = tab
+indent_size = 2
+
+[web/css/**.css]
+indent_style = tab
+indent_size = 2
