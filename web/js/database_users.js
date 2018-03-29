@@ -1,6 +1,6 @@
 /*
- DesInventar - http://www.desinventar.org
- (c) 1998-2017 Corporacion OSSO
+ DesInventar - https://www.desinventar.org
+ (c) Corporacion OSSO
 */
 
 function onReadyDatabaseUsers()
@@ -38,7 +38,8 @@ function onReadyDatabaseUsers()
 			{
 				cmd          : 'cmdDatabaseUsersUpdateOptions',
 				RegionId     : jQuery('#desinventarRegionId').val(),
-				RegionStatus : jQuery('#frmDiffusion .RegionStatus').val()
+				RegionStatus : jQuery('#frmDiffusion .RegionStatus').val(),
+				RegionOrder: jQuery('#frmDiffusion .RegionOrder').val()
 			},
 			function(data)
 			{
@@ -60,7 +61,7 @@ function onReadyDatabaseUsers()
 		);
 		return false;
 	});
-		
+
 	jQuery('#btnDatabaseUsers_Add').click(function() {
 		doDatabaseUsersReset();
 		jQuery('#divDatabaseUsers_Edit').show();
@@ -97,7 +98,7 @@ function onReadyDatabaseUsers()
 				{
 					bContinue = false;
 					jQuery('#frmUsers .UserRole').val('ADMINREGION');
-					jQuery('#txtDatabaseUsers_RoleListCannotRemoveAdminRole').show();	
+					jQuery('#txtDatabaseUsers_RoleListCannotRemoveAdminRole').show();
 					setTimeout(function() {
 						jQuery('#txtDatabaseUsers_RoleListCannotRemoveAdminRole').hide();
 					}, 2500);
@@ -105,7 +106,7 @@ function onReadyDatabaseUsers()
 			} //if
 
 			// If trying to assign a new AdminRegion confirm the change
-			if ( (jQuery('#desinventarUserId').val() != 'root') && 
+			if ( (jQuery('#desinventarUserId').val() != 'root') &&
 			     (jQuery('#desinventarUserId').val() != jQuery('#frmUsers .UserId').val()) )
 			{
 				if (jQuery('#frmUsers .UserRole').val() == 'ADMINREGION')
@@ -121,9 +122,9 @@ function onReadyDatabaseUsers()
 						}
 					});
 
-					sConfirmMsg = jQuery('#msgDatabaseUsers_ConfirmManagerPrompt1').text() + ' ' + 
-					              sAdminCurrent + ' ' + 
-					              jQuery('#msgDatabaseUsers_ConfirmManagerPrompt2').text() + ' ' + 
+					sConfirmMsg = jQuery('#msgDatabaseUsers_ConfirmManagerPrompt1').text() + ' ' +
+					              sAdminCurrent + ' ' +
+					              jQuery('#msgDatabaseUsers_ConfirmManagerPrompt2').text() + ' ' +
 					              sAdminNew + ' ?';
 					              //jQuery('#msgDatabaseUsers_ConfirmManagerPrompt3').text();
 					Ext.Msg.show({
@@ -182,23 +183,23 @@ function onReadyDatabaseUsers()
 		jQuery('#frmUsers .UserId').val(UserId).trigger('change').prop('disabled', false);
 		jQuery('#frmUsers .UserRole').val(UserRole).trigger('change').prop('disabled', false);
 		jQuery('#frmUsers .UserRolePrev').val(UserRole);
-		
+
 		jQuery('#txtDatabaseUsers_RoleListCannotRemoveAdminRole').hide();
 		jQuery('#divDatabaseUsers_Edit').show();
 		e.stopPropagation();
 		e.preventDefault();
 	}).on('mouseover', 'tr', function(event) {
 			jQuery(this).addClass('highlight');
-			e.preventDefault();
+			event.preventDefault();
 	}).on('mouseout', 'tr', function(event) {
 		jQuery(this).removeClass('highlight');
-		e.preventDefault();
+		event.preventDefault();
 	});
 
 	jQuery('#frmUsers .UserId').change(function() {
 		jQuery('#frmUsers .UserRole').val('NONE').trigger('change');
 	});
-	
+
 	jQuery('body').on('cmdDatabaseUsersShow', function() {
 		doDatabaseUsersPopulateLists();
 	});
@@ -207,7 +208,7 @@ function onReadyDatabaseUsers()
 function doDatabaseUsersReset()
 {
 	jQuery('#frmDiffusion .RegionActive').prop('checked', true);
-	jQuery('#frmDiffusion .RegionPublic').prop('checked', true);	
+	jQuery('#frmDiffusion .RegionPublic').prop('checked', true);
 	jQuery('#frmUsers .UserId').val('');
 	jQuery('#frmUsers .UserRole').val('');
 	jQuery('#frmUsers .UserId').prop('disabled', false);
@@ -221,7 +222,7 @@ function doDatabaseUsersPopulateUserRoleList(UserRoleList)
 {
 	jQuery('#tbodyDatabaseUsers_List').find('tr:gt(0)').remove();
 	jQuery('#tbodyDatabaseUsers_List').find('tr').hide();
-	
+
 	jQuery.each(UserRoleList, function(index, value) {
 		var clonedRow = jQuery('#tbodyDatabaseUsers_List tr:last').clone().show();
 		jQuery('.UserId', clonedRow).html(index);
@@ -257,7 +258,8 @@ function doDatabaseUsersUpdateOptions(RegionInfo)
 	{
 		jQuery('#frmDiffusion .RegionPublic').prop('checked', true);
 	}
-} //doDatabaseUsersUpdateOptions()
+	jQuery('#frmDiffusion .RegionOrder').val(RegionInfo.RegionOrder)
+}
 
 function doDatabaseUsersPopulateLists()
 {

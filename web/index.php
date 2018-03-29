@@ -353,12 +353,15 @@ switch ($cmd) {
         }
         if ($iReturn > 0) {
             $r = new DIRegion($us, $RegionId);
-            $info = array('RegionStatus' => $r->get('RegionStatus'));
+            $info = [
+                'RegionStatus' => $r->get('RegionStatus'),
+                'RegionOrder' => $r->get('RegionOrder')
+            ];
             $UserList     = $us->getUserList();
             $UserRoleList = $us->getRegionRoleList($RegionId);
+            $answer['RegionInfo']   = $info;
             $answer['UserList']     = $UserList;
             $answer['UserRoleList'] = $UserRoleList;
-            $answer['RegionInfo']   = $info;
         }
         $answer['Status'] = $iReturn;
         echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES, 'UTF-8');
@@ -397,8 +400,12 @@ switch ($cmd) {
         if ($iReturn > 0) {
             $r = new DIRegion($us, $RegionId);
             $r->set('RegionStatus', $_POST['RegionStatus']);
+            $r->set('RegionOrder', $_POST['RegionOrder']);
             $iReturn = $r->update();
-            $info = array('RegionStatus' => $r->get('RegionStatus'));
+            $info = [
+                'RegionStatus' => $r->get('RegionStatus'),
+                'RegionOrder' => $r->get('RegionOrder')
+            ];
             $answer['RegionInfo'] = $info;
         }
         $answer['Status'] = $iReturn;

@@ -3609,6 +3609,24 @@
       <Text LangIsoCode="por">Pública</Text>
       <Text LangIsoCode="fre">Publique</Text>
     </Message>
+    <Message id="msgDatabaseUsers_RegionOrder">
+      <Text LangIsoCode="eng">Category</Text>
+      <Text LangIsoCode="spa">Categoría</Text>
+      <Text LangIsoCode="por">Categoria</Text>
+      <Text LangIsoCode="fre">Catégorie</Text>
+    </Message>
+    <Message id="msgDatabaseUsers_CategoryNormal">
+      <Text LangIsoCode="eng">Normal</Text>
+      <Text LangIsoCode="spa">Normal</Text>
+      <Text LangIsoCode="por">Normal</Text>
+      <Text LangIsoCode="fre">Ordinaire</Text>
+    </Message>
+    <Message id="msgDatabaseUsers_CategoryOfficial">
+      <Text LangIsoCode="eng">Official</Text>
+      <Text LangIsoCode="spa">Oficial</Text>
+      <Text LangIsoCode="por">Oficial</Text>
+      <Text LangIsoCode="fre">Officiel</Text>
+    </Message>
     <Message id="msgDatabaseUsers_RegionActiveTooltip">
       <Text LangIsoCode="eng">The database will be available in your database list</Text>
       <Text LangIsoCode="spa">La base quedará disponible en su listado de bases</Text>
