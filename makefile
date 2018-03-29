@@ -36,16 +36,13 @@ test-web: .FORCE
 	node_modules/.bin/testcafe firefox:headless tests/e2e
 
 lint-php : .FORCE
-	find src api config web tests -name "*.php" -exec php -l {} > /dev/null \;
+	find src api config portal web tests -name "*.php" -exec php -l {} > /dev/null \;
 
 standard-php : .FORCE
 	./vendor/bin/phpcs .
 
 phpmd: .FORCE
-	find api config files src tests -name \*.php -exec ./vendor/bin/phpmd {} text ./files/phpmd/ruleset.xml \;
-
-phpmd-old: .FORCE
-	find web -name \*.php -exec ./vendor/bin/phpmd {} text ./files/phpmd/ruleset.xml \;
+	find api config files portal/web portal/include src tests -name \*.php -exec ./vendor/bin/phpmd {} text ./files/phpmd/ruleset.xml \;
 
 js : standard-js
 
