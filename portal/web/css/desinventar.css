@@ -1,0 +1,243 @@
+body {
+	/* direction: rtl; */
+	font-family:arial,tahoma,helvetica,cursive;
+	font-size:11px;
+	margin:0;
+	padding:0;   
+	border:0 none;
+	height:100%;
+}
+h2 {
+	font-family:arial,tahoma,helvetica,cursive;
+	font-size:14px;
+}
+p  {
+	font-family:arial,tahoma,helvetica,cursive;
+	font-size:11px;
+	margin:5px;
+}
+b {
+	font-family:arial,tahoma,helvetica,cursive;
+	font-size:11px;
+	margin:5px;
+}
+li  {
+	font-family:arial,tahoma,helvetica,cursive; 
+	font-size:11px; }
+.line {
+	font-family:arial,tahoma,helvetica,cursive; 
+	font-size:11px; color:#000000; background-color:#FFFFFF; 
+	border-style:solid;
+	border-width:1px;
+	border-color:#BBBBBB;
+}
+.CustomQueryListItem {
+	font-family:arial,tahoma,helvetica,cursive; 
+	font-size:11px; color:#000000; background-color:#FFFFFF; 
+	border-style:none; border-width:1px; border-color:#BBBBBB;
+}
+input.btn {
+	font-family:arial,tahoma,helvetica,cursive; 
+	font-size:14px; color:#000000; background-color:#BBBBBB; }
+input.bb:hover { 
+	border-color: #900; background: #fff; color: #600; border-right:2px solid #900; border-bottom:2px solid #900}
+input.bb:active { 
+	border-color: red; background: #fff; color: red; }
+input.medium {
+	font-family:arial,tahoma,helvetica,cursive; font-size:12px; 
+	color:#000000; background-color:#FFFFFF; border-style:solid; 
+	border-width:1px; border-color:#BBBBBB; }
+select   {
+	font-family:arial,tahoma,helvetica,cursive; font-size:11px; 
+	color:#000000; background-color:#FFFFFF; border-style:solid; 
+	border-width:1px; }
+select.small  {
+	font-family:arial,tahoma,helvetica,cursive; font-size:10px; 
+	color:#000000; background-color:#FFFFFF; border-style:solid; 
+	border-width:1px; }
+option  {
+	font-family:arial,tahoma,helvetica,cursive; font-size:11px; 
+	color:#000000; background-color:#FFFFFF; border-style:none; 
+	border-width:1px; border-color:#BBBBBB; }
+option.small {
+	font-family:arial,tahoma,helvetica,cursive; font-size:10px; 
+	color:#000000; background-color:#FFFFFF; border-style:none; 
+	border-width:1px; border-color:#BBBBBB; }
+textarea {
+	font-family:arial,tahoma,helvetica,cursive; font-size:11px; 
+	color:#000000; background-color:#FFFFFF; border-style:solid; 
+	border-width:1px; border-color:#BBBBBB; }
+a.info        { position:relative; z-index:24; text-decoration:none; }
+a.info:hover  { z-index:25; }
+a.info span   { display: none; }
+a.info:hover span { 
+	display:block; position:absolute; top:2em; left:2em; width:15em;
+	border:1px solid #333; background-color:#ff0; color:#000; 
+	text-align: center; }
+a.info:link 		{ color: #333333;  }
+a.info:visited	{ color: #333333;  }
+.dlgmsg     { color:#42929d; text-align:right; font-size:8pt; }
+.datacardStatusMsg { text-align:left; color:#dbab28; }
+.disabled 	{ background-color: #cccccc; }
+
+.dwin {
+	overflow: auto; padding:0px; margin: 0px; border-style:solid;
+	border-width:1px; border-color:#BBBBBB;
+}
+a.RegionListItem { text-decoration: none; }
+table.grid {
+	font-family:Lucida Grande, Verdana;
+	font-size:11px; width:100%; border: 0px solid #ccc;
+}
+
+table.col {
+	font-family:Lucida Grande, Verdana;
+	overflow: auto; font-size:11px; border: thin solid;
+}
+
+.GridCellNumber {
+	border-right: thin solid #ccc; text-align: right;
+	font-size:11px;
+}
+
+.GridCellText {
+	border-right: thin solid #ccc; text-align: left;
+	font-size:11px;
+}
+
+.RegionInfoTitle {
+	font-family:arial,tahoma,helvetica,cursive;
+	font-weight:bold;
+	font-size:12px;
+}
+.RegionInfoText {
+	font-family:arial,tahoma,helvetica,cursive;
+	font-size:11px;
+}
+
+.header     { 
+ color: #FFFFFF; 
+ background-color: #AAAAAA;
+}
+
+.normal     { 
+ background-color: #FFFFFF; 
+}
+
+.under      {
+ background-color: #EEEEEE; 
+}
+
+.highlight  { 
+ background-color: #FFCC00; 
+}
+
+.remark     { 
+ background-color: #f1c7c7;
+}
+
+p.grid {
+ font-family:Lucida Grande, Verdana;
+ font-size:11px;; width:100%;
+}
+
+textarea.hlp {
+	background-color: #ffffff; padding: 5px; font-size: 12px;
+	font-family: Lucida Grande, Geneva, Verdana, Helvetica, Arial, sans-serif;
+	/*-moz-border-radius: 0px 10px 0px 10px; border-radius: 0px 10px 0px 10px;*/
+}
+
+/* Configuration internal window in Desconsultar */
+table.conf { border: 15px solid #fff; width: 100%; height: 100%; }
+.fixw { width:250px; }
+#qsearch, #qresults {
+	position:absolute; padding:5px; background-color: #fff; visibility:hidden; 
+	z-index:100; overflow: auto; margin: 1px; border: 3px outset gray;
+}
+input.sub {
+	font-family:arial,tahoma,helvetica,cursive; font-size:11px; 
+	font-weight:bolder; color:#000000; background-color:#FFFFFF; 
+	border-style:solid; border-width:1px; border-color:#FFFFFF; width: 120px; 
+}
+disabled {
+	background-color: #eee;
+}
+enabled {
+	background-color: #fff;
+}
+.submenu { 
+	position:absolute; visibility: hidden; border:1px solid #777; 
+	border-bottom-width:0; font:11px Trebuchet MS, sans-serif; 
+	line-height: 18px; z-index: 728; background-color: #fff; width: 95px; 
+}
+.submenu a {
+	display:block; border-bottom:1px solid #777; 
+	padding: 1px 0; text-decoration:none; 
+}
+.submenu a:hover { 
+	background-color: #d3d3d3; color: #000;
+}
+a	{	color:#1e90ff; }
+a:hover	{	color:#00008b; }
+.rememberpasswordlink {
+	font-family:arial,tahoma,helvetica,cursive;
+	font-size:9px;
+}
+#divDatabaseBackup h2 {
+	font-family:arial,tahoma,helvetica,cursive;
+	font-size:18px;
+	padding: 5px;
+}
+#divDatabaseBackup table {
+	padding: 11px;
+}
+#divDatabaseBackup {
+	margin: 40px;
+	border: 1px solid black;
+}
+#divDatabaseImport h2 {
+	font-family:arial,tahoma,helvetica,cursive;
+	font-size:18px;
+	padding: 0px;
+}
+#divDatabaseImport table {
+	padding: 1px;
+}
+#divDatabaseImport {
+	margin: 40px;
+	border: 1px solid black;
+}
+#divDBEdit {
+	margin: 40px;
+	border: 1px solid black;
+}
+#tdGraphParamAxis1 {
+	width:180px;
+}
+#tdGraphParamCenter {
+	width:180px;
+}
+#tdGraphParamAxis2 {
+	width:180px;
+}
+#divDatacardStatusMsg {
+}
+.MapMousePosition {
+	position: absolute;
+	left: 45px;
+	top: 2px;
+}
+.databaseListTitle {
+	font:bold 20px Trebuchet MS, sans-serif; 
+	color:#202020; letter-spacing:-1px; 
+}
+.databaseTitle {
+	font:bold 15px Trebuchet MS, sans-serif; 
+	color:#202020; letter-spacing:-1px; 
+	padding:0px 10px; 
+}
+.databaseLink {
+	text-decoration:none; 
+	font:bold 11px Trebuchet MS, sans-serif; 
+	padding:0px 20px; 
+}

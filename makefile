@@ -2,11 +2,13 @@
 
 .PHONY : all .FORCE
 
-all : build devel
+all : build devel portal
 
 devel : php js
 
 build : node-build web-build composer lang database
+
+portal: portal-strings
 
 composer : .FORCE
 	composer install
@@ -55,6 +57,9 @@ node-build : .FORCE
 
 web-build: .FORCE
 	./node_modules/.bin/webpack -p
+
+portal-strings: .FORCE
+	cd portal/files/strings && make all
 
 clean: .FORCE
 	cd files/database && make clean

@@ -4,5 +4,6 @@
   <exclude-pattern>vendor/*</exclude-pattern>
   <exclude-pattern>external/valums-fileuploader/fileuploader.php</exclude-pattern>
   <exclude-pattern>node_modules/*</exclude-pattern>
+  <exclude-pattern>portal/*</exclude-pattern>
   <rule ref="PSR2"/>
 </ruleset>
