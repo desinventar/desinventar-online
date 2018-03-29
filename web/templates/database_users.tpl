@@ -4,30 +4,27 @@
 	<br />
 	<div class="line" style="padding:5px;">
 		<form id="frmDiffusion">
-			<table>
-				<tr>
-					<td>
-						<span>
-							<input class="RegionActive" type="checkbox" />
-							<span class="RegionActiveText">&nbsp;{-#msgDatabaseUsers_RegionActiveTooltip#-}</span>
-							</span>
-							<br />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<span>
-							<input class="RegionPublic" type="checkbox" />
-							<span class="RegionPublicText">&nbsp;{-#msgDatabaseUsers_RegionPublicTooltip#-}</span>
-						</span>
-						<br />
-					</td>
-				</tr>
-			</table>
-			<div class="fixw center">
-				<input class="RegionStatus" type="hidden" value="0" />
-				<a class="button btnSave"><span>{-#msgDatabaseUsers_Save#-}</span></a>
-				<a class="button btnCancel"><span>{-#msgDatabaseUsers_Cancel#-}</span></a>
+			<div class="database-users-options">
+				<div class="database-users-options-row">
+					<input class="RegionActive" type="checkbox" />
+					<span class="RegionActiveText">&nbsp;{-#msgDatabaseUsers_RegionActiveTooltip#-}</span>
+				</div>
+				<div class="database-users-options-row">
+					<input class="RegionPublic" type="checkbox" />
+					<span class="RegionPublicText">&nbsp;{-#msgDatabaseUsers_RegionPublicTooltip#-}</span>
+				</div>
+				<div class="database-users-options-row">
+					<span>{-#msgDatabaseUsers_RegionOrder#-}</span>
+					<select class="RegionOrder" name="RegionOrder">
+							<option value="0" class="category-normal" selected="selected">{-#msgDatabaseUsers_CategoryNormal#-}</option>
+							<option value="1000" class="category-official">{-#msgDatabaseUsers_CategoryOfficial#-}</option>
+					</select>
+				</div>
+				<div class="fixw center" class="database-users-options-row">
+					<input class="RegionStatus" type="hidden" value="0" />
+					<a class="button btnSave"><span>{-#msgDatabaseUsers_Save#-}</span></a>
+					<a class="button btnCancel"><span>{-#msgDatabaseUsers_Cancel#-}</span></a>
+				</div>
 			</div>
 		</form>
 		<div class="center">

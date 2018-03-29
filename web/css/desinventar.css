@@ -10,12 +10,12 @@
 }
 .bcancel {
 	background-color: white;
-	background-image: url(../images/cancelicon.png) !important; 
+	background-image: url(../images/cancelicon.png) !important;
 	background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
 }
 .bclear {
 	background-color: white;
-	background-image: url(../images/cleanicon.png) !important; 
+	background-image: url(../images/cleanicon.png) !important;
 	background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
 }
 .bfind {
@@ -79,7 +79,7 @@
 button {
 	border: 0 none;
 	cursor: pointer;
-	font-family:arial,tahoma,helvetica,cursive; font-size:12px; 
+	font-family:arial,tahoma,helvetica,cursive; font-size:12px;
 	padding: 0 15px 0 0;
 	text-align: center;
 	height: 24px;
@@ -171,7 +171,7 @@ a.button span {
 	display: block;
 	line-height: 14px;
 	padding: 5px 0 5px 18px;
-} 
+}
 
 a.button:active {
 	background-position: bottom right;
@@ -198,7 +198,7 @@ body {
 	font-family:arial,tahoma,helvetica,cursive;
 	font-size:11px;
 	margin:0;
-	padding:0;   
+	padding:0;
 	border:0 none;
 	height:100%;
 }
@@ -217,13 +217,13 @@ b {
 	margin:5px;
 }
 li {
-	font-family:arial,tahoma,helvetica,cursive; 
+	font-family:arial,tahoma,helvetica,cursive;
 	font-size:11px;
 }
 .line, .qq-upload-button-text {
-	font-family:arial,tahoma,helvetica,cursive; 
+	font-family:arial,tahoma,helvetica,cursive;
 	font-size:11px; color:#000000;
-	background-color:#ffffff; 
+	background-color:#ffffff;
 	border-style:solid;
 	border-width:1px;
 	border-color:#bbbbbb;
@@ -238,23 +238,23 @@ a.line {
 	float: left;
 }
 input.btn {
-	font-family:arial,tahoma,helvetica,cursive; 
+	font-family:arial,tahoma,helvetica,cursive;
 	font-size:14px; color:#000000; background-color:#bbbbbb; }
-input.bb:hover { 
+input.bb:hover {
 	border-color: #900; background: #fff; color: #600; border-right:2px solid #900; border-bottom:2px solid #900}
-input.bb:active { 
+input.bb:active {
 	border-color: red; background: #fff; color: red; }
 input.medium {
-	font-family:arial,tahoma,helvetica,cursive; font-size:12px; 
-	color:#000000; background-color:#ffffff; border-style:solid; 
+	font-family:arial,tahoma,helvetica,cursive; font-size:12px;
+	color:#000000; background-color:#ffffff; border-style:solid;
 	border-width:1px; border-color:#bbbbbb; }
 select   {
-	font-family:arial,tahoma,helvetica,cursive; font-size:11px; 
-	color:#000000; background-color:#ffffff; border-style:solid; 
+	font-family:arial,tahoma,helvetica,cursive; font-size:11px;
+	color:#000000; background-color:#ffffff; border-style:solid;
 	border-width:1px; }
 select.small  {
-	font-family:arial,tahoma,helvetica,cursive; font-size:10px; 
-	color:#000000; background-color:#ffffff; border-style:solid; 
+	font-family:arial,tahoma,helvetica,cursive; font-size:10px;
+	color:#000000; background-color:#ffffff; border-style:solid;
 	border-width:1px; }
 span.select2-dropdown {
 	z-index: 15000;
@@ -263,23 +263,23 @@ span.select2-dropdown {
 	line-height: 20px;
 }
 option  {
-	font-family:arial,tahoma,helvetica,cursive; font-size:11px; 
-	color:#000000; background-color:#ffffff; border-style:none; 
+	font-family:arial,tahoma,helvetica,cursive; font-size:11px;
+	color:#000000; background-color:#ffffff; border-style:none;
 	border-width:1px; border-color:#bbbbbb; }
 option.small {
-	font-family:arial,tahoma,helvetica,cursive; font-size:10px; 
-	color:#000000; background-color:#ffffff; border-style:none; 
+	font-family:arial,tahoma,helvetica,cursive; font-size:10px;
+	color:#000000; background-color:#ffffff; border-style:none;
 	border-width:1px; border-color:#bbbbbb; }
 textarea {
-	font-family:arial,tahoma,helvetica,cursive; font-size:11px; 
-	color:#000000; background-color:#ffffff; border-style:solid; 
+	font-family:arial,tahoma,helvetica,cursive; font-size:11px;
+	color:#000000; background-color:#ffffff; border-style:solid;
 	border-width:1px; border-color:#bbbbbb; }
 a.info        { position:relative; z-index:24; text-decoration:none; }
 a.info:hover  { z-index:25; }
 a.info span   { display: none; }
-a.info:hover span { 
+a.info:hover span {
 	display:block; position:absolute; top:2em; left:2em; width:15em;
-	border:1px solid #333; background-color:#ff0; color:#000; 
+	border:1px solid #333; background-color:#ff0; color:#000;
 	text-align: center; }
 a.info:link 		{ color: #333333;  }
 a.info:visited	{ color: #333333;  }
@@ -292,7 +292,7 @@ a.info:visited	{ color: #333333;  }
 	word-wrap: break-word;
 }
 b.required {
-	color: darkred;	
+	color: darkred;
 }
 a.RegionListItem { text-decoration: none; }
 table.grid {
@@ -307,8 +307,8 @@ table.width100 {
 	width:100%;
 }
 table.QueryCustom .ListItem {
-	font-family:arial,tahoma,helvetica,cursive; 
-	font-size:11px; color:#000000; background-color:#ffffff; 
+	font-family:arial,tahoma,helvetica,cursive;
+	font-size:11px; color:#000000; background-color:#ffffff;
 	border-style:none; border-width:1px; border-color:#bbbbbb;
 }
 
@@ -341,24 +341,24 @@ div.RegionInfo .text {
 	font-size:11px;
 }
 
-.header     { 
- color: #ffffff; 
+.header     {
+ color: #ffffff;
  background-color: #AAAAAA;
 }
 
-.normal     { 
- background-color: #ffffff; 
+.normal     {
+ background-color: #ffffff;
 }
 
 .under      {
- background-color: #EEEEEE; 
+ background-color: #EEEEEE;
 }
 
-.highlight  { 
- background-color: #FFCC00; 
+.highlight  {
+ background-color: #FFCC00;
 }
 
-.remark     { 
+.remark     {
  background-color: #f1c7c7;
 }
 
@@ -377,13 +377,13 @@ textarea.hlp {
 table.conf { border: 15px solid #fff; width: 100%; height: 100%; }
 .fixw { width:250px; }
 #qsearch, #qresults {
-	position:absolute; padding:5px; background-color: #fff; visibility:hidden; 
+	position:absolute; padding:5px; background-color: #fff; visibility:hidden;
 	z-index:100; overflow: auto; margin: 1px; border: 3px outset gray;
 }
 input.sub {
-	font-family:arial,tahoma,helvetica,cursive; font-size:11px; 
-	font-weight:bolder; color:#000000; background-color:#ffffff; 
-	border-style:solid; border-width:1px; border-color:#ffffff; width: 120px; 
+	font-family:arial,tahoma,helvetica,cursive; font-size:11px;
+	font-weight:bolder; color:#000000; background-color:#ffffff;
+	border-style:solid; border-width:1px; border-color:#ffffff; width: 120px;
 }
 disabled, .disabled {
 	background-color: #ddd;
@@ -391,16 +391,16 @@ disabled, .disabled {
 enabled {
 	background-color: #fff;
 }
-.submenu { 
-	position:absolute; visibility: hidden; border:1px solid #777; 
-	border-bottom-width:0; font:11px Trebuchet MS, sans-serif; 
-	line-height: 18px; z-index: 728; background-color: #fff; width: 95px; 
+.submenu {
+	position:absolute; visibility: hidden; border:1px solid #777;
+	border-bottom-width:0; font:11px Trebuchet MS, sans-serif;
+	line-height: 18px; z-index: 728; background-color: #fff; width: 95px;
 }
 .submenu a {
-	display:block; border-bottom:1px solid #777; 
-	padding: 1px 0; text-decoration:none; 
+	display:block; border-bottom:1px solid #777;
+	padding: 1px 0; text-decoration:none;
 }
-.submenu a:hover { 
+.submenu a:hover {
 	background-color: #d3d3d3; color: #000;
 }
 a	{	color:#1e90ff; }
@@ -454,21 +454,21 @@ a:hover	{	color:#00008b; }
 	top: 2px;
 }
 .databaseListTitle {
-	font:bold 20px Trebuchet MS, sans-serif; 
-	color:#202020; letter-spacing:-1px; 
+	font:bold 20px Trebuchet MS, sans-serif;
+	color:#202020; letter-spacing:-1px;
 }
 .databaseTitle {
-	font:bold 15px Trebuchet MS, sans-serif; 
-	color:#202020; letter-spacing:-1px; 
-	padding:0px 10px; 
+	font:bold 15px Trebuchet MS, sans-serif;
+	color:#202020; letter-spacing:-1px;
+	padding:0px 10px;
 }
 td a.RegionLink {
-	text-decoration:none; 
-	font:bold 11px Trebuchet MS, sans-serif; 
-	padding:0px 20px; 
+	text-decoration:none;
+	font:bold 11px Trebuchet MS, sans-serif;
+	padding:0px 20px;
 }
 .clsDatabaseUsers {
-	max-width:400px;
+	max-width:600px;
 	height:100%;
 }
 .clsDatabaseUsers a.delete {
@@ -519,7 +519,7 @@ td a.RegionLink {
 	position:absolute;
 }
 div.UserChangePasswd {
-	max-width:400px;	
+	max-width:400px;
 }
 div.Geography div.ListHeader {
 	margin-top: 10px;
@@ -536,7 +536,7 @@ div.Geography table.List thead td {
 	color:#42929d;
 }
 div.QueryDesign .fieldLabel {
-	font-weight:bold;	
+	font-weight:bold;
 }
 div.QueryDesign select.Event {
 	max-width:400px;
@@ -545,7 +545,7 @@ div.QueryDesign select.Event {
 	white-space: nowrap;
 }
 .bold {
-	font-weight:bold;	
+	font-weight:bold;
 }
 div.DatabaseDelete {
 	margin:10px;

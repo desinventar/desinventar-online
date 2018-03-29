@@ -934,7 +934,7 @@ class UserSession
         } else {
             $query .= " AND R.RegionStatus = 3 GROUP BY R.RegionId";
         }
-        $query .= " ORDER BY R.CountryIso, R.RegionLabel, R.RegionOrder";
+        $query .= " ORDER BY R.RegionOrder DESC, R.CountryIso, R.RegionLabel";
         $result = $this->q->core->query($query);
         while ($row = $result->fetch(PDO::FETCH_OBJ)) {
             $RegionList[$row->RegionId] = array($row->RegionLabel, $row->CountryIso, $row->RegionStatus, $row->Role);
@@ -986,7 +986,7 @@ class UserSession
                 $query .= "(RegionId LIKE '%" . $prmQuery . "%' OR RegionLabel LIKE '%" . $prmQuery . "%')";
             }
         }
-        $query .= ' ORDER BY CountryIso,RegionLabel,RegionOrder';
+        $query .= ' ORDER BY RegionOrder DESC, CountryIso ASC,RegionLabel ASC';
         foreach ($this->q->core->query($query) as $row) {
             $regionlist[$row['RegionId']] = array('RegionLabel' => $row['RegionLabel'],
                                                   'CountryIso'  => $row['CountryIso'],
@@ -1002,7 +1002,7 @@ class UserSession
                 RA.AuthAuxValue
             FROM Region R,RegionAuth RA
             WHERE R.RegionId=RA.RegionId AND RA.AuthKey='ROLE' AND RA.UserId='" . $this->UserId . "'
-            ORDER BY R.CountryIso,R.RegionLabel;
+            ORDER BY R.RegionOrder, R.CountryIso, R.RegionLabel;
             ";
             foreach ($this->q->core->query($query) as $row) {
                 $regionlist[$row['RegionId']] = array(

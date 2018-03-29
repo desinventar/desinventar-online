@@ -24,7 +24,11 @@ indent_size = 4
 [web/js/**.js]
 indent_style = tab
 indent_size = 2
+trim_trailing_whitespace = false
+insert_final_newline = false
 
 [web/css/**.css]
 indent_style = tab
 indent_size = 2
+trim_trailing_whitespace = false
+insert_final_newline = false
