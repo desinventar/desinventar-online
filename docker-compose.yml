@@ -1,7 +1,6 @@
-version: '2'
+version: '3'
 services:
   web:
-    image: "desinventar/online:latest"
     build: .
     ports:
      - "8080:80"
@@ -17,3 +16,14 @@ services:
     volumes:
      - .:/usr/share/desinventar
      - /var/local/desinventar:/var/local/desinventar
+  portal:
+    build:
+      context: ./portal
+      dockerfile: Dockerfile
+    ports:
+      - "8090:80"
+    volumes:
+      - ./portal:/opt/web
+      - /opt/web/vendor
+    environment:
+      - DESINVENTAR_URL
