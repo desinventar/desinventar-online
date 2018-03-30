@@ -3,22 +3,26 @@
  (c) Corporacion OSSO
 */
 
-function onReadyUserLogin() {
+import md5 from 'md5'
+
+const me = {}
+
+me.onReadyUserLogin = () => {
   // hide all status messages on start
   updateUserLoginMsg('')
 
   // submit form validation and process..
   jQuery('#frmUserLogin').submit(function() {
-    doUserLogin()
+    this.doUserLogin()
     return false
   })
 
   jQuery('body').on('cmdUserGetInfo', function() {
-    doUserGetInfo()
+    this.doUserGetInfo()
   })
 }
 
-function doUserGetInfo() {
+me.doUserGetInfo = () => {
   jQuery.post(
     jQuery('#desinventarURL').val() + '/',
     {
@@ -43,7 +47,7 @@ function doUserGetInfo() {
   )
 }
 
-function doUserLogin() {
+me.doUserLogin = () => {
   var UserId = jQuery('#fldUserId').val()
   var UserPasswd = jQuery('#fldUserPasswd').val()
   if (UserId == '' || UserPasswd == '') {
@@ -54,7 +58,7 @@ function doUserLogin() {
       {
         cmd: 'cmdUserLogin',
         UserId: UserId,
-        UserPasswd: hex_md5(UserPasswd)
+        UserPasswd: md5(UserPasswd)
       },
       function(data) {
         if (parseInt(data.Status) > 0) {
@@ -78,7 +82,7 @@ function doUserLogin() {
   }
 }
 
-function doUserLogout() {
+me.doUserLogout = () => {
   var Answer = 0
   jQuery.post(
     jQuery('#desinventarURL').val() + '/',
@@ -108,6 +112,7 @@ function doUserLogout() {
   )
   return Answer
 }
+
 function updateUserLoginMsg(msgId) {
   // Hide all status Msgs (class="status")
   jQuery('.status').hide()
@@ -117,3 +122,5 @@ function updateUserLoginMsg(msgId) {
   }
   return true
 }
+
+export default me

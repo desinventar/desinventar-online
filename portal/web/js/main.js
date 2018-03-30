@@ -2,7 +2,12 @@
  DesInventar - http://www.desinventar.org
  (c) Corporacion OSSO
 */
-function onReadyPortal() {
+
+import common from './common'
+import user from './user_login'
+
+const me = {}
+me.init = () => {
   var desinventarLang = jQuery('#desinventarLang').val()
 
   jQuery('#btnMainWindow').attr('href', jQuery('#desinventarURL').val() + '/')
@@ -23,7 +28,7 @@ function onReadyPortal() {
   jQuery('area').click(function() {
     var country = jQuery(this).attr('alt')
     if (country != '') {
-      updateDatabaseList(country, 1)
+      common.updateDatabaseList(country, 1)
     }
     // Prevent default action
     return false
@@ -53,7 +58,7 @@ function onReadyPortal() {
   jQuery('.RegionList').click(function() {
     var country = jQuery(this).attr('alt')
     if (country != '') {
-      updateDatabaseList(country, 1)
+      common.updateDatabaseList(country, 1)
     }
     // Prevent default action
     return false
@@ -70,8 +75,8 @@ function onReadyPortal() {
   })
 
   jQuery('body').bind('UserUpdateInfo', function() {
-    UserName = jQuery('#desinventarUserFullName').val()
-    UserId = jQuery('#desinventarUserId').val()
+    const UserName = jQuery('#desinventarUserFullName').val()
+    const UserId = jQuery('#desinventarUserId').val()
     if (UserId != '') {
       jQuery('#txtUserInfo').text(UserId + ' ' + UserName)
       jQuery('#txtUserFullName').text(UserName)
@@ -88,7 +93,7 @@ function onReadyPortal() {
     jQuery('#lstUserLogin').hide()
     jQuery('#divUserIsLoggedIn').show()
     jQuery('#divUserIsLoggedOut').hide()
-    updateDatabaseListByUser()
+    common.updateDatabaseListByUser()
     jQuery('body').trigger('UserUpdateInfo')
   })
 
@@ -120,12 +125,12 @@ function onReadyPortal() {
   })
 
   jQuery('#linkUserRegionList').click(function() {
-    updateDatabaseListByUser()
+    common.updateDatabaseListByUser()
     return false
   })
 
   jQuery('#linkUserLogout').click(function() {
-    doUserLogout()
+    user.doUserLogout()
     return false
   })
 
@@ -147,9 +152,8 @@ function onReadyPortal() {
     jQuery('body').trigger('UserLoggedOut')
   }
 
-  jQuery('.regionlink').on('click', function(event) {
+  jQuery('.regionlink').on('click', function() {
     var RegionId = jQuery('#desinventarRegionId').val()
-    var LangIsoCode = jQuery('#desinventarLang').val()
     window.open(jQuery('#desinventarURL').val() + '/#' + RegionId)
     return false
   })
@@ -168,7 +172,7 @@ function onReadyPortal() {
   )
   //Initialization code
   jQuery('body').trigger('cmdUserGetInfo')
-} //onReadyPortal()
+}
 
 function displayPortal(myPortal) {
   // Select which portal to display : main, gar2009, gar2011
@@ -194,16 +198,7 @@ function displayPortal(myPortal) {
 function showRegionInfo(RegionId) {
   jQuery('.contentBlock').hide()
   jQuery('.contentRegionBlock').hide()
-  displayRegionInfo(RegionId)
-}
-
-function displayRegionInfo(RegionId) {
-  jQuery('.contentBlock').hide()
-  jQuery('#pageinfo').hide()
-  doGetRegionInfo(RegionId)
-  jQuery('#desinventarRegionId').val(RegionId)
-  jQuery('#regionBlock').show()
-  jQuery('#pageinfo').show()
+  common.displayRegionInfo(RegionId)
 }
 
 function showMap() {
@@ -212,10 +207,12 @@ function showMap() {
 }
 
 // personalization List menu..
-function displayList(elem) {
-  lst = 7
-  for (i = 1; i <= lst; i++) {
+me.displayList = elem => {
+  let lst = 7
+  for (var i = 1; i <= lst; i++) {
     if (i == elem) jQuery('#sect' + i).show()
     else jQuery('#sect' + i).hide()
   }
-} //function
+}
+
+export default me
