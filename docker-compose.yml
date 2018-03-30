@@ -23,7 +23,7 @@ services:
     ports:
       - "8090:80"
     volumes:
-      - ./portal:/opt/web
-      - /opt/web/vendor
+      - ./portal:/opt/portal
+      - /opt/portal/vendor
     environment:
       - DESINVENTAR_URL
