@@ -14,16 +14,7 @@
 	<script type="text/javascript" src="{-$desinventarURLPortal-}/external/md5.js"></script>
 	<link type="text/css" rel="stylesheet" href="{-$desinventarURLPortal-}/external/clickmenu/clickmenu.css" />
 	<script type="text/javascript" src="{-$desinventarURLPortal-}/external/clickmenu/jquery.clickmenu.js"></script>
-	<script type="text/javascript" src="{-$desinventarURLPortal-}/js/common.js?version={-$jsversion-}"></script>
-	<script type="text/javascript" src="{-$desinventarURLPortal-}/js/user_login.js?version={-$jsversion-}"></script>
-	<script type="text/javascript" src="{-$desinventarURLPortal-}/js/main.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURLPortal-}/scripts/bundle.js?version={-$jsversion-}"></script>
-	<script type="text/javascript" language="javascript">
-		jQuery(document).ready(function() {
-			onReadyUserLogin();
-			onReadyPortal();
-		});
-	</script>
 </head>
 <body>
 	<table width="839" border="0" cellpadding="0" cellspacing="0" align="center" style="margin-top:4px">

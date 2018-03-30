@@ -4,7 +4,7 @@
  (c) Corporacion OSSO
 */
 
-require_once './constants.php';
+require_once 'constants.php';
 
 $cacheDir = getenv('DESINVENTAR_CACHEDIR');
 if (empty($cacheDir) && isset($_SERVER['DESINVENTAR_CACHEDIR'])) {
