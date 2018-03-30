@@ -6,5 +6,4 @@ import user from './user_login'
 ready().then(function() {
   main.init()
   user.onReadyUserLogin()
-  // user.onReadyPortal()
 })

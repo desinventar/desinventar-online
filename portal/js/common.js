@@ -114,7 +114,7 @@ me.updateDatabaseList = CountryIsoCode => {
         })
         if (iCount == 1) {
           // If only one region is in list, show directly info instead of list
-          this.displayRegionInfo(myRegionId)
+          displayRegionInfo(myRegionId)
         } else {
           jQuery('#title_COUNTRY').show()
           jQuery('#list_COUNTRY').show()
@@ -123,7 +123,7 @@ me.updateDatabaseList = CountryIsoCode => {
             .unbind('click')
             .click(function() {
               RegionId = jQuery(this).attr('id')
-              this.displayRegionInfo(RegionId)
+              displayRegionInfo(RegionId)
               return false
             })
           jQuery('#regionBlock').show()
@@ -179,7 +179,7 @@ me.updateDatabaseListByUser = () => {
           .click(function() {
             const RegionId = jQuery(this).attr('id')
             if (jQuery('#desinventarPortalType').val() != '') {
-              this.displayRegionInfo(RegionId)
+              displayRegionInfo(RegionId)
             } else {
               window.location = jQuery('#desinventarURL').val() + '/' + RegionId
             }
@@ -194,7 +194,7 @@ me.updateDatabaseListByUser = () => {
   )
 }
 
-me.displayRegionInfo = RegionId => {
+function displayRegionInfo(RegionId) {
   jQuery('.contentBlock').hide()
   jQuery('#pageinfo').hide()
   doGetRegionInfo(RegionId)
@@ -202,5 +202,7 @@ me.displayRegionInfo = RegionId => {
   jQuery('#regionBlock').show()
   jQuery('#pageinfo').show()
 }
+
+me.displayRegionInfo = displayRegionInfo
 
 export default me

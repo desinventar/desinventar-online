@@ -11,7 +11,6 @@
 
 	{-include file="jquery.tpl"-}
 
-	<script type="text/javascript" src="{-$desinventarURLPortal-}/external/md5.js"></script>
 	<link type="text/css" rel="stylesheet" href="{-$desinventarURLPortal-}/external/clickmenu/clickmenu.css" />
 	<script type="text/javascript" src="{-$desinventarURLPortal-}/external/clickmenu/jquery.clickmenu.js"></script>
 	<script type="text/javascript" src="{-$desinventarURLPortal-}/scripts/bundle.js?version={-$jsversion-}"></script>
@@ -200,6 +199,5 @@
 			<input type="hidden" id="desinventarPortalType" value="{-$desinventarPortalType-}" />
 		</div>
 	</div>
-	{-include file="statcounter.tpl"-}
 </body>
 </html>
