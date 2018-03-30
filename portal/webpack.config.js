@@ -1,5 +1,5 @@
 module.exports = {
-  entry: __dirname + '/web/js/entry.js',
+  entry: __dirname + '/js/entry.js',
   output: {
     path: __dirname + '/web/scripts',
     filename: 'bundle.js'
@@ -8,7 +8,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        include: __dirname + '/web/js',
+        include: __dirname + '/js',
         use: [
           {
             loader: 'babel-loader',
