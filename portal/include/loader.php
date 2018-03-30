@@ -44,7 +44,7 @@ $t->right_delimiter = '-}';
 $t->force_compile   = true;
 $t->caching         = 0;
 $t->cache_lifetime  = 3600;
-$t->compile_check   = true;
+$t->compile_check   = false;
 
 // Choose Language (First from Parameter, next from UserSession table, then autodetect from browser)
 $lg = getParameter('lang');
