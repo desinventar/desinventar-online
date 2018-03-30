@@ -16,6 +16,7 @@ node_modules
 npm-debug.log
 bower_components
 web/scripts/bundle.js
+portal/web/scripts/bundle.js
 files/database/*.db
 files/database/*.conf
 portal/vendor/*

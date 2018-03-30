@@ -21,7 +21,7 @@ module.exports = {
     ]
   },
   resolve: {
-    modules: [__dirname + '/node_modules'],
+    modules: [__dirname + '/../node_modules'],
     descriptionFiles: ['package.json'],
     mainFields: ['main', 'browser'],
     mainFiles: ['index']

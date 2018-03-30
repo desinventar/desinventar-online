@@ -17,6 +17,7 @@
 	<script type="text/javascript" src="{-$desinventarURLPortal-}/js/common.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURLPortal-}/js/user_login.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" src="{-$desinventarURLPortal-}/js/main.js?version={-$jsversion-}"></script>
+	<script type="text/javascript" src="{-$desinventarURLPortal-}/scripts/bundle.js?version={-$jsversion-}"></script>
 	<script type="text/javascript" language="javascript">
 		jQuery(document).ready(function() {
 			onReadyUserLogin();
