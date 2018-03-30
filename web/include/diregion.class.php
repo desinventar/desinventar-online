@@ -288,7 +288,6 @@ class DIRegion extends DIObject
                 $value = $this->get($Field, $this->get('LangIsoCode'));
             }
             $a[$Field] = strip_tags($value);
-            $a[$Field] = preg_replace('/\n/', '<br />', $a[$Field]);
         }
 
         $this->session->open($this->get('RegionId'));
