@@ -23,12 +23,30 @@ RUN yum install -y http://opensource.wandisco.com/centos/6/git/x86_64/wandisco-g
 RUN curl https://getcomposer.org/composer.phar > /usr/local/bin/composer \
     && chmod +x /usr/local/bin/composer
 
+# Install nvm + node + npm + yarn
+ENV NVM_DIR /usr/local/nvm
+ENV NODE_VERSION 8.10.0
+RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash \
+    && source $NVM_DIR/nvm.sh \
+    && nvm install $NODE_VERSION \
+    && nvm alias default $NODE_VERSION \
+    && nvm use default
+ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
+ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+
+RUN npm install -g yarn
+
 WORKDIR /opt/portal
 
 ADD composer.json /tmp/composer.json
 ADD composer.lock /tmp/composer.lock
 RUN cd /tmp && composer install --no-scripts --no-autoloader --prefer-source --no-interaction
-RUN mkdir -p /opt/portal && cp -a /tmp/vendor /opt/portal
+RUN cp -a /tmp/vendor /opt/portal
+
+ADD package.json /tmp/package.json
+ADD yarn.lock /tmp/yarn.lock
+RUN cd /tmp && yarn install
+RUN cp -a /tmp/node_modules /opt/portal
 
 ARG DESINVENTAR_CACHEDIR=/var/cache/smarty/desinventar/portal
 ARG DESINVENTAR_URL=https://online.desinventar.org/desinventar/
@@ -44,8 +62,8 @@ RUN sed -i 's#var/www/html#/opt/portal/web#; s#logs/access_log#/dev/stderr#; s#l
 COPY . /opt/portal/
 
 RUN composer dump-autoload --optimize
+RUN ./node_modules/.bin/webpack -p
 
 EXPOSE 80
 
-ENTRYPOINT [ "/usr/sbin/httpd" ]
-CMD [ "-D", "FOREGROUND" ]
+CMD [ "/usr/sbin/httpd", "-D", "FOREGROUND" ]

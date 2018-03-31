@@ -1,4 +1,5 @@
 module.exports = {
+  mode: 'development',
   entry: __dirname + '/js/entry.js',
   output: {
     path: __dirname + '/web/scripts',
@@ -21,7 +22,7 @@ module.exports = {
     ]
   },
   resolve: {
-    modules: [__dirname + '/../node_modules'],
+    modules: [__dirname + '/node_modules'],
     descriptionFiles: ['package.json'],
     mainFields: ['main', 'browser'],
     mainFiles: ['index']

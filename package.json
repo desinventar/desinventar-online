@@ -32,7 +32,6 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-es2015": "^6.24.1",
-    "document-ready-promise": "^3.0.1",
     "editorconfig": "^0.15.0",
     "eslint": "^4.12.1",
     "eslint-config-prettier": "^2.6.0",
@@ -48,9 +47,9 @@
   },
   "dependencies": {
     "config": "^1.28.1",
+    "document-ready-promise": "^3.0.1",
     "jquery": "1.11",
     "jquery-ui": "^1.12.1",
-    "md5": "^2.2.1",
     "moment": "^2.19.2"
   }
 }

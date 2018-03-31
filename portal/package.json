@@ -1,0 +1,21 @@
+{
+  "name": "desinventar-portal",
+  "version": "10.0.0",
+  "description": "DesInventar Portal",
+  "license": "GPL-3.0",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "start": "yarn run local:start",
+    "local:start": "yarn run webpack-start && yarn run apache:start",
+    "apache:start": "/usr/sbin/httpd -D FOREGROUND",
+    "webpack-start": "webpack --display-error-details --watch &",
+    "webpack-build": "webpack -p"
+  },
+  "dependencies": {
+    "babel-loader": "^7.1.4",
+    "document-ready-promise": "^3.0.1",
+    "md5": "^2.2.1",
+    "webpack": "^4.4.1",
+    "webpack-cli": "^2.0.13"
+  }
+}

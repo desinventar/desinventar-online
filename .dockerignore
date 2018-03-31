@@ -3,4 +3,6 @@
 vendor/
 node_modules/
 bower_components/
+portal/vendor/
+portal/node_modules/
 
