@@ -120,9 +120,10 @@ me.updateDatabaseList = CountryIsoCode => {
           jQuery('#list_COUNTRY').show()
           jQuery('.databaseLink')
             .addClass('alt')
-            .unbind('click')
-            .click(function() {
+            .off('click')
+            .on('click', function() {
               RegionId = jQuery(this).attr('id')
+              jQuery('#list_COUNTRY').hide()
               displayRegionInfo(RegionId)
               return false
             })
