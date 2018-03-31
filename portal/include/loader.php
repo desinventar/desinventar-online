@@ -74,10 +74,12 @@ if ($lg == 'pt') {
 
 $_SESSION['lang'] = $lg;
 
-// 2010-05-25 (jhcaiced) Handle the versioning of js files, used to force refresh of
-// these files when doing changes.
 $t->assign('majorversion', MAJORVERSION);
-$t->assign('jsversion', JSVERSION);
+$jsVersion = JSVERSION;
+if (getenv('DESINVENTAR_MODE') !== 'production') {
+    $jsVersion = JSVERSION . '-' . getUrlSuffix();
+}
+$t->assign('jsversion', $jsVersion);
 $t->assign('lg', $lg);
 $t->assign('lang', $lg);
 

@@ -26,4 +26,5 @@ services:
       - ./portal:/opt/portal
       - /opt/portal/vendor
     environment:
+      - DESINVENTAR_MODE
       - DESINVENTAR_URL

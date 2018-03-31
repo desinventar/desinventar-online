@@ -54,3 +54,18 @@ function getParameter($prmName, $prmDefault = '')
     $prmValue = trim($prmValue);
     return $prmValue;
 }
+
+function getUrlSuffix()
+{
+    $cmd = '/usr/bin/git';
+    $output = shell_exec(sprintf("which %s", escapeshellarg($cmd)));
+    if (empty($output)) {
+        return time();
+    }
+
+    $output = exec($cmd . ' rev-parse --short HEAD');
+    if (empty($output)) {
+        return time();
+    }
+    return $output;
+}
