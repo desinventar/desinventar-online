@@ -127,7 +127,7 @@ function onReadyMain() {
 
   // Tabs for Database Configuration
   jQuery("#DBConfig_tabs").tabs();
-  jQuery(".classDBConfig_tabs").click(function() {
+  jQuery(".classDBConfig_tabs").on('click', function() {
     var me = jQuery(jQuery(this).attr("href"));
     showtip(me.find(".helptext").text());
     var cmd = jQuery(this).data("cmd");
