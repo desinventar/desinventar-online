@@ -62,7 +62,7 @@ RUN sed -i 's#var/www/html#/opt/portal/web#; s#logs/access_log#/dev/stderr#; s#l
 COPY . /opt/portal/
 
 RUN composer dump-autoload --optimize
-RUN ./node_modules/.bin/webpack -p
+RUN make
 
 EXPOSE 80
 
