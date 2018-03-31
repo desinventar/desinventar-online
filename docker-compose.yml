@@ -20,11 +20,13 @@ services:
     build:
       context: ./portal
       dockerfile: Dockerfile
+    command: yarn start
     ports:
       - "8090:80"
     volumes:
       - ./portal:/opt/portal
       - /opt/portal/vendor
+      - /opt/portal/node_modules
     environment:
       - DESINVENTAR_MODE
       - DESINVENTAR_URL
