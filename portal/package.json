@@ -4,12 +4,13 @@
   "description": "DesInventar Portal",
   "license": "GPL-3.0",
   "main": ".eslintrc.js",
-  "scripts": {
-  },
+  "scripts": {},
   "dependencies": {
     "babel-loader": "^7.1.4",
     "document-ready-promise": "^3.0.1",
-    "md5": "^2.2.1",
+    "md5": "^2.2.1"
+  },
+  "devDependencies": {
     "webpack": "^4.4.1",
     "webpack-cli": "^2.0.13"
   }
