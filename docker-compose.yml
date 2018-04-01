@@ -5,22 +5,21 @@ services:
     ports:
      - "8080:80"
     volumes:
-     - .:/usr/share/desinventar
-     - /usr/share/desinventar/vendor
+     - .:/opt/app
+     - /opt/app/vendor
   devel:
-    image: "desinventar/online:latest"
-    depends_on:
-    - web
+    build: .
+    command: bash -c '(/opt/app/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
     ports:
      - "8081:80"
     volumes:
-     - .:/usr/share/desinventar
+     - .:/opt/app
      - /var/local/desinventar:/var/local/desinventar
   portal:
     build:
       context: ./portal
       dockerfile: Dockerfile
-    command: yarn start
+    command: bash -c '(/opt/portal/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
     ports:
       - "8090:80"
     volumes:

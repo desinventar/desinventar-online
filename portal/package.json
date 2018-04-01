@@ -5,11 +5,6 @@
   "license": "GPL-3.0",
   "main": ".eslintrc.js",
   "scripts": {
-    "start": "yarn run local:start",
-    "local:start": "make && yarn run webpack-start && yarn run apache:start",
-    "apache:start": "/usr/sbin/httpd -D FOREGROUND",
-    "webpack-start": "webpack --display-error-details --watch &",
-    "webpack-build": "webpack -p"
   },
   "dependencies": {
     "babel-loader": "^7.1.4",

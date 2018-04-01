@@ -56,4 +56,5 @@ RUN npm install -g yarn
 
 EXPOSE 80
 
+ENTRYPOINT []
 CMD [ "/usr/sbin/httpd", "-D", "FOREGROUND" ]

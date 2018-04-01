@@ -63,9 +63,6 @@ if (isset($_SERVER['HTTP_HOST'])) {
         }
         $_SERVER['DISTRO'] = $distro;
 
-        if (! isset($_SERVER['DESINVENTAR_WEB'])) {
-            $_SERVER['DESINVENTAR_WEB']      = '/usr/share/desinventar/web';
-        }
         if (preg_match('/desinventar.org$/', $_SERVER['HTTP_HOST'])) {
             $appOptions['IsOnline'] = 1;
         }
