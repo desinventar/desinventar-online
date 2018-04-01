@@ -5,16 +5,23 @@ services:
     ports:
      - "8080:80"
     volumes:
-     - .:/opt/app
-     - /opt/app/vendor
+      - .:/opt/app
+      - /opt/app/vendor
+      - /opt/app/node_modules
+      - /opt/app/portal/vendor
+      - /opt/app/portal/node_modules
   devel:
     build: .
     command: bash -c '(/opt/app/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
     ports:
-     - "8081:80"
+      - "8081:80"
     volumes:
-     - .:/opt/app
-     - /var/local/desinventar:/var/local/desinventar
+      - .:/opt/app
+      - /var/local/desinventar:/var/local/desinventar
+      - /opt/app/vendor
+      - /opt/app/node_modules
+      - /opt/app/portal/vendor
+      - /opt/app/portal/node_modules
   portal:
     build:
       context: ./portal
@@ -24,8 +31,10 @@ services:
       - "8090:80"
     volumes:
       - ./portal:/opt/portal
-      - /opt/portal/vendor
-      - /opt/portal/node_modules
+      - /opt/app/vendor
+      - /opt/app/node_modules
+      - /opt/app/portal/vendor
+      - /opt/app/portal/node_modules
     environment:
       - DESINVENTAR_MODE
       - DESINVENTAR_URL
