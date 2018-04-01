@@ -8,7 +8,8 @@
   "dependencies": {
     "babel-loader": "^7.1.4",
     "document-ready-promise": "^3.0.1",
-    "md5": "^2.2.1"
+    "md5": "^2.2.1",
+    "showdown": "^1.8.6"
   },
   "devDependencies": {
     "webpack": "^4.4.1",
