@@ -10,6 +10,7 @@ require_once('include/diregion.class.php');
 use DesInventar\Legacy\DIRegion;
 use DesInventar\Common\MapServer;
 use DesInventar\Legacy\Maps;
+use DesInventar\Common\Util;
 
 $post = $_POST;
 $get = $_GET;
@@ -20,8 +21,7 @@ $options['protocol'] = 'http';
 if (is_ssl()) {
     $options['protocol'] = 'https';
 }
-$url = $desinventarURL;
-$options['url'] = $url;
+$options['url'] = Util::getBaseUrl();
 $options = array_merge($options, $config->maps);
 $cmd = getParameter('_M+cmd', getParameter('cmd', ''));
 if ($cmd == '') {

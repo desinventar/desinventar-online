@@ -38,7 +38,7 @@
 						<image src="{-$desinventarURL-}/images/ge_icon.png" /><a href="{-$desinventarURL-}/kml/{-$prmMapId-}/">{-#tgetgearth#-}</a>
 					</div>
 					<hr />
-					<img src="{-$legend-}" /><br />
+					<img class="view-map-legend" src="{-$legend-}" /><br />
 				</div>
 			</td>
 			<td class="top">

@@ -19,6 +19,13 @@ class Util
         return $url;
     }
 
+    public static function getBaseUrl()
+    {
+        $url = self::getUrl();
+        $url = substr($url, 0, strrpos($url, '/'));
+        return $url;
+    }
+
     public function uuid4()
     {
         $uuid = new UuidFactory();
