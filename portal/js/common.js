@@ -123,7 +123,6 @@ me.updateDatabaseList = CountryIsoCode => {
             .off('click')
             .on('click', function() {
               RegionId = jQuery(this).attr('id')
-              jQuery('#list_COUNTRY').hide()
               displayRegionInfo(RegionId)
               return false
             })
