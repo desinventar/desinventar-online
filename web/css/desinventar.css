@@ -648,12 +648,23 @@ div.UserLogin table {
 .region-info-edit, .region-info-edit-info {
 	width: 100%;
 }
-.region-info-edit-field-expanded {
-	height: 80hw;
+.region-info-edit-label b {
+	color: darkred;
+}
+.region-info-edit-row {
+	width: 90vw;
+	padding: 5px;
+}
+.region-info-edit-field {
+	width: 100%;
+	height: 60px;
+}
+.region-info-edit-field.expanded {
+	height: 60vh;
 }
 .region-info-edit-text {
-	width: 70vw;
-	height: 60px;
+	width: 90%;
+	height: 100%;
 }
 .region-info-edit-input {
 	width: 100%;

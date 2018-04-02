@@ -27,18 +27,21 @@
 												{-foreach name=iitt key=key item=item from=$RegionFields-}
 													{-assign var="inf" value="DB$key"-}
 													{-assign var="tabind" value="`$tabind+1`"-}
-													<div>
-															<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.$inf[2]-}')">
-															<b style="color:darkred;">{-$dic.$inf[0]-}</b><span class="region-info-edit-label">{-$dic.$inf[1]-}</span></a>
-													</div>
-													<div style="width:100%;">
-														{-if $item[1] == "TEXT"-}
-															<textarea class="region-info-edit-field region-info-edit-text" id="RegionInfo[{-$LangIsoCode-}][{-$key-}]" name="RegionInfo[{-$LangIsoCode-}][{-$key-}]" tabindex="{-$tabind-}"
-																onFocus="showtip('{-$dic.$inf[2]-}')">{-$item[0]-}</textarea>
-														{-elseif $item[1] == "VARCHAR"-}
-															<input class="region-info-edit-field region-info-edit-input" id="RegionInfo[{-$LangIsoCode-}][{-$key-}]" name="RegionInfo[{-$LangIsoCode-}][{-$key-}]" type="text" class="line"
-															value="{-$item[0]-}" tabindex="{-$tabind-}"/>
-														{-/if-}
+													<div class="region-info-edit-row">
+														<div>
+															<div class="region-info-edit-label info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.$inf[2]-}')">
+																<b>{-$dic.$inf[0]-}</b><span>{-$dic.$inf[1]-}</span>
+															</div>
+														</div>
+														<div class="region-info-edit-field">
+															{-if $item[1] == "TEXT"-}
+																<textarea class="region-info-edit-text" id="RegionInfo[{-$LangIsoCode-}][{-$key-}]" name="RegionInfo[{-$LangIsoCode-}][{-$key-}]" tabindex="{-$tabind-}"
+																	onFocus="showtip('{-$dic.$inf[2]-}')">{-$item[0]-}</textarea>
+															{-elseif $item[1] == "VARCHAR"-}
+																<input class="region-info-edit-input" id="RegionInfo[{-$LangIsoCode-}][{-$key-}]" name="RegionInfo[{-$LangIsoCode-}][{-$key-}]" type="text" class="line"
+																value="{-$item[0]-}" tabindex="{-$tabind-}"/>
+															{-/if-}
+														</div>
 													</div>
 												{-/foreach-}
 										</fieldset>
