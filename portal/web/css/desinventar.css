@@ -107,12 +107,30 @@ table.col {
 
 .RegionInfoTitle {
 	font-family:arial,tahoma,helvetica,cursive;
+	color: #5890bf;
 	font-weight:bold;
-	font-size:12px;
+	font-size:16px;
 }
+
 .RegionInfoText {
 	font-family:arial,tahoma,helvetica,cursive;
+}
+.RegionInfoText p {
 	font-size:11px;
+	text-align: justify;
+	margin-bottom: 12px;
+}
+
+.RegionInfoText h1 {
+  font-size: 14px;
+}
+
+.RegionInfoText h2 {
+  font-size: 13px;
+}
+
+.RegionInfoText h3 {
+  font-size: 12px;
 }
 
 .header {
