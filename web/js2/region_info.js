@@ -33,6 +33,19 @@
       })
       return false
     })
+
+    $('body').on(
+      'click',
+      '#frmDatabaseInfo .region-info-edit-label',
+      function() {
+        const field = $(this)
+          .parents('.region-info-edit-row')
+          .find('.region-info-edit-field')
+        field.hasClass('expanded')
+          ? field.removeClass('expanded')
+          : field.addClass('expanded')
+      }
+    )
   }
 
   me.init = function() {
