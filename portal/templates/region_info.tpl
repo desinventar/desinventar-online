@@ -44,23 +44,23 @@
 					<tr>
 						<td>
 							<div id="divInfoGeneral">
-								<span class="RegionInfoTitle" id="Title">{-#msgInfoGeneral#-}</span><br />
-								<span class="RegionInfoText"  id="Text"></span><br />
+								<div class="RegionInfoTitle" id="Title">{-#msgInfoGeneral#-}</div><br />
+								<div class="RegionInfoText"  id="Text"></div><br />
 								<br />
 							</div>
 							<div id="divInfoCredits">
-								<span class="RegionInfoTitle" id="Title">{-#msgInfoCredits#-}</span><br />
-								<span class="RegionInfoText"  id="Text"></span><br />
+								<div class="RegionInfoTitle" id="Title">{-#msgInfoCredits#-}</div><br />
+								<div class="RegionInfoText"  id="Text"></div><br />
 								<br />
 							</div>
 							<div id="divInfoSources">
-								<span class="RegionInfoTitle" id="Title">{-#msgInfoSources#-}</span><br />
-								<span class="RegionInfoText"  id="Text"></span><br />
+								<div class="RegionInfoTitle" id="Title">{-#msgInfoSources#-}</div><br />
+								<div class="RegionInfoText"  id="Text"></div><br />
 								<br />
 							</div>
 							<div id="divInfoSynopsis">
-								<span class="RegionInfoTitle" id="Title">{-#msgInfoSynopsis#-}</span><br />
-								<span class="RegionInfoText"  id="Text"></span><br />
+								<div class="RegionInfoTitle" id="Title">{-#msgInfoSynopsis#-}</div><br />
+								<div class="RegionInfoText"  id="Text"></div><br />
 							</div>
 						</td>
 					</tr>

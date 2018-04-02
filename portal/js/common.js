@@ -2,6 +2,8 @@
  DesInventar - http://www.desinventar.org
  (c) Corporacion OSSO
 */
+const showdown = require('showdown')
+const markdown = new showdown.Converter()
 
 const me = {}
 
@@ -38,22 +40,30 @@ function doGetRegionInfo(RegionId) {
 
         jQuery('#divRegionInfo #divInfoGeneral').hide()
         if (i.InfoGeneral != '') {
-          jQuery('#divRegionInfo #divInfoGeneral #Text').html(i.InfoGeneral)
+          jQuery('#divRegionInfo #divInfoGeneral #Text').html(
+            markdown.makeHtml(i.InfoGeneral)
+          )
           jQuery('#divRegionInfo #divInfoGeneral').show()
         }
         jQuery('#divRegionInfo #divInfoCredits').hide()
         if (i.InfoCredits != '') {
-          jQuery('#divRegionInfo #divInfoCredits #Text').html(i.InfoCredits)
+          jQuery('#divRegionInfo #divInfoCredits #Text').html(
+            markdown.makeHtml(i.InfoCredits)
+          )
           jQuery('#divRegionInfo #divInfoCredits').show()
         }
         jQuery('#divRegionInfo #divInfoSources').hide()
         if (i.InfoSources != '') {
-          jQuery('#divRegionInfo #divInfoSources #Text').html(i.InfoSources)
+          jQuery('#divRegionInfo #divInfoSources #Text').html(
+            markdown.makeHtml(i.InfoSources)
+          )
           jQuery('#divRegionInfo #divInfoSources').show()
         }
         jQuery('#divRegionInfo #divInfoSynopsis').hide()
         if (i.InfoSynopsis != '') {
-          jQuery('#divRegionInfo #divInfoSynopsis #Text').html(i.InfoSynopsis)
+          jQuery('#divRegionInfo #divInfoSynopsis #Text').html(
+            markdown.makeHtml(i.InfoSynopsis)
+          )
           jQuery('#divRegionInfo #divInfoSynopsis').show()
         }
       }

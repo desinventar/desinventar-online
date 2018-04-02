@@ -21,7 +21,12 @@
         $('#ifinfo')
           .html(data)
           .show()
-        $('body').trigger('cmdDatabaseLoadData', { updateViewport: false })
+        $('body').trigger('cmdDatabaseLoadData', {
+          updateViewport: false,
+          callback: function() {
+            jQuery('.classDBConfig_tabs:first').trigger('click')
+          }
+        })
         setTimeout(function() {
           $('#ifinfo').html('')
         }, 2000)

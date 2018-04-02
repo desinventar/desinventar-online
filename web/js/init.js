@@ -51,7 +51,7 @@ function doDatabaseLoadData(params)
 					jQuery('body').data('EEFieldList', data.EEFieldList);
 					jQuery('body').data('RecordCount', data.RecordCount);
 
-					
+
 					var dataItems = jQuery('body').data();
 					jQuery.each(dataItems, function(index, value) {
 						if (index.substr(0,13) === 'GeographyList')
@@ -60,7 +60,7 @@ function doDatabaseLoadData(params)
 						}
 					});
 					jQuery('body').data('GeographyList', data.GeographyList);
-					
+
 					jQuery('#desinventarLang').val(data.params.LangIsoCode);
 					jQuery('#desinventarRegionId').val(data.params.RegionId);
 					jQuery('#desinventarRegionLabel').val(data.params.RegionLabel);
@@ -81,6 +81,9 @@ function doDatabaseLoadData(params)
 			if (updateViewport) {
 				// Trigger ViewportShow
 				jQuery('body').trigger('cmdViewportShow');
+			}
+			if (params && typeof params.callback === 'function') {
+				params.callback()
 			}
 		},
 		'json'
