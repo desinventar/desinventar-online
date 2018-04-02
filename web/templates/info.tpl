@@ -7,43 +7,40 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8; no-cache" />
 </head>
 <body>
-	<table>
+	<table class="region-info">
 		<tr class="top">
 			<td>
 				<fieldset style="padding:5px 5px 5px 5px;">
 					<!-- GENERAL REGION INFO SECTION -->
 					<form id="frmDatabaseInfo" name="infofrm" method="post" action="{-$desinventarURL-}/info.php" target="ifinfo">
-						<table>
+						<table class="region-info-edit">
 							<tr>
 								<td colspan="2">
 									{-foreach name=info key=LangIsoCode item=RegionFields from=$info-}
 										<fieldset>
 											<legend>
-											<a id="Legend_{-$LangIsoCode-}" href="javascript:void(null)" onClick="if($('inf{-$LangIsoCode-}').style.display=='block') 
+											<a id="Legend_{-$LangIsoCode-}" href="javascript:void(null)" onClick="if($('inf{-$LangIsoCode-}').style.display=='block')
 												$('inf{-$LangIsoCode-}').style.display='none'; else $('inf{-$LangIsoCode-}').style.display='block';">
 												<b onMouseOver="showtip('{-$dic.DBRegion[2]-}');">{-$dic.DBRegion[0]-} {-$LangIsoCode-}</b></a>
 											</legend>
-											<table id="inf{-$LangIsoCode-}" style="display:{-if ($smarty.foreach.info.iteration) == 1-}block{-else-}none{-/if-};">
+											<div class="region-info-edit-info" id="inf{-$LangIsoCode-}" style="display:{-if ($smarty.foreach.info.iteration) == 1-}block{-else-}none{-/if-};">
 												{-foreach name=iitt key=key item=item from=$RegionFields-}
 													{-assign var="inf" value="DB$key"-}
 													{-assign var="tabind" value="`$tabind+1`"-}
-													<tr>
-														<td class="right">
+													<div>
 															<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.$inf[2]-}')">
-															<b style="color:darkred;">{-$dic.$inf[0]-}</b><span>{-$dic.$inf[1]-}</span></a>
-														</td>
-														<td>
-															{-if $item[1] == "TEXT"-}
-																<textarea id="RegionInfo[{-$LangIsoCode-}][{-$key-}]" name="RegionInfo[{-$LangIsoCode-}][{-$key-}]"  style="width:350px; height:30px;" tabindex="{-$tabind-}"
-																	onFocus="showtip('{-$dic.$inf[2]-}')">{-$item[0]-}</textarea>
-															{-elseif $item[1] == "VARCHAR"-}
-																<input id="RegionInfo[{-$LangIsoCode-}][{-$key-}]" name="RegionInfo[{-$LangIsoCode-}][{-$key-}]" type="text" class="line" style="width:350px;" 
-																value="{-$item[0]-}" tabindex="{-$tabind-}"/>
-															{-/if-}
-														</td>
-													</tr>
+															<b style="color:darkred;">{-$dic.$inf[0]-}</b><span class="region-info-edit-label">{-$dic.$inf[1]-}</span></a>
+													</div>
+													<div style="width:100%;">
+														{-if $item[1] == "TEXT"-}
+															<textarea class="region-info-edit-field region-info-edit-text" id="RegionInfo[{-$LangIsoCode-}][{-$key-}]" name="RegionInfo[{-$LangIsoCode-}][{-$key-}]" tabindex="{-$tabind-}"
+																onFocus="showtip('{-$dic.$inf[2]-}')">{-$item[0]-}</textarea>
+														{-elseif $item[1] == "VARCHAR"-}
+															<input class="region-info-edit-field region-info-edit-input" id="RegionInfo[{-$LangIsoCode-}][{-$key-}]" name="RegionInfo[{-$LangIsoCode-}][{-$key-}]" type="text" class="line"
+															value="{-$item[0]-}" tabindex="{-$tabind-}"/>
+														{-/if-}
+													</div>
 												{-/foreach-}
-											</table>
 										</fieldset>
 									{-/foreach-}
 								</td>
@@ -133,7 +130,7 @@
 					<span id="logstatusmsg" class="dlgmsg"></span>
 					<br />
 					<div id="logaddsect" style="display:none; width:280px;">
-						<form name="logfrm" id="logfrm" method="GET" 
+						<form name="logfrm" id="logfrm" method="GET"
 							action="javascript: var s=$('logfrm').serialize(); sendData('{-$reg-}', jQuery('$desinventarURL').val() + '/info.php', s, '');"
 							onSubmit="javascript: var a=new Array('DBLogType','DBLogNotes'); return(checkForm('logfrm',a, '{-#errmsgfrmlog#-}'));">
 							<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLogType[2]-}');">
@@ -151,7 +148,7 @@
 							<br />
 							<a class="info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.DBLogNote[2]-}');">
 							{-$dic.DBLogNote[0]-}<b style="color:darkred;">*</b><span>{-$dic.DBLogNote[1]-}</span></a><br />
-							<textarea id="DBLogNotes" name="DBLogNotes" cols="22"  class="fixw" tabindex="2" 
+							<textarea id="DBLogNotes" name="DBLogNotes" cols="22"  class="fixw" tabindex="2"
 								onFocus="showtip('{-$dic.DBLogNote[2]-}');"></textarea>
 							<br /><br />
 							<p class="center fixw">
@@ -180,7 +177,7 @@
 {-/if-}
 {-** ROLE INFO AND ERRORS MESSAGES **-}
 {-if $ctl_msgupdrole-}
- {-#msgupdrole#-} 
+ {-#msgupdrole#-}
 {-elseif $ctl_errupdrole-}
  {-#terror#-}[{-$updstatrole-}]: {-#errupdrole#-}
 {-/if-}

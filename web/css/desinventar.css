@@ -641,3 +641,20 @@ div.UserLogin table {
 	margin-right:auto;
 	text-align:center;
 }
+.region-info {
+	width: 100%;
+	max-width: 1024px;
+}
+.region-info-edit, .region-info-edit-info {
+	width: 100%;
+}
+.region-info-edit-field-expanded {
+	height: 80hw;
+}
+.region-info-edit-text {
+	width: 70vw;
+	height: 60px;
+}
+.region-info-edit-input {
+	width: 100%;
+}
