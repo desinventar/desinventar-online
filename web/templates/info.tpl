@@ -29,8 +29,11 @@
 													{-assign var="tabind" value="`$tabind+1`"-}
 													<div class="region-info-edit-row">
 														<div>
-															<div class="region-info-edit-label info" href="javascript:void(null)" onMouseOver="showtip('{-$dic.$inf[2]-}')">
-																<b>{-$dic.$inf[0]-}</b><span>{-$dic.$inf[1]-}</span>
+															<div class="info region-info-edit-label" onMouseOver="showtip('{-$dic.$inf[2]-}')">
+																<b class="{-$item['className']-}">{-$dic.$inf[0]-}</b>
+																{-if $item[1] == "TEXT"-}
+																	<span class="region-info-edit-label-expand">&#x2195;</span>
+																{-/if-}
 															</div>
 														</div>
 														<div class="region-info-edit-field">

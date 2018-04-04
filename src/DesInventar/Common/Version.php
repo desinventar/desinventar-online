@@ -6,7 +6,7 @@ class Version
 {
     protected $majorVersion = '10';
     protected $version = '10.01.011';
-    protected $releaseDate = '2017-07-24';
+    protected $releaseDate = '2018-04-03';
     protected $mode = 'devel';
 
     public function __construct($mode)
