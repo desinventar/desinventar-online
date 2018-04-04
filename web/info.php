@@ -60,6 +60,12 @@ switch ($cmd) {
             $info[$lng]['InfoCartography']  = array($r->get('InfoCartography', $lng), 'TEXT');
             $info[$lng]['InfoAdminURL']     = array($r->get('InfoAdminURL', $lng), 'VARCHAR');
         }
+        foreach ($info as $langIsoCode => $translated) {
+            foreach ($translated as $fieldName => $values) {
+                $className = $values[1] === 'TEXT' ? 'region-info-edit-label-link': '';
+                $info[$langIsoCode][$fieldName]['className'] = $className;
+            }
+        }
         $t->assign('info', $info);
         $sett['RegionLabel']    = array($r->get('RegionLabel'), 'TEXT');
         $sett['GeoLimitMinX']   = array($r->get('GeoLimitMinX'), 'NUMBER');

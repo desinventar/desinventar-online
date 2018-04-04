@@ -651,6 +651,9 @@ div.UserLogin table {
 .region-info-edit-label b {
 	color: darkred;
 }
+.region-info-edit-label-expand {
+	font-size: 18px;
+}
 .region-info-edit-row {
 	width: 90vw;
 	padding: 5px;
