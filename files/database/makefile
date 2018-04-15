@@ -3,12 +3,14 @@
 SQLITE=sqlite3
 STRINGS=interface_strings.xml
 
+.PHONY : all .FORCE
+
 all : base.db core.db desinventar.db lang
 
 # Rebuild base.db database
-base.db : base.sql doc-db.csv event.csv cause.csv
-	/bin/rm -f base.db
-	$(SQLITE) base.db < base.sql
+base.db : base.yaml doc-db.csv event.csv cause.csv
+	/bin/rm -f base.db && touch base.db
+	sh liquibase.sh -l base.yaml -d sqlite -f base.db -c update
 	php insertEveCau.php event.csv spa EVENT | sqlite3 base.db
 	php insertEveCau.php event.csv eng EVENT | sqlite3 base.db
 	php insertEveCau.php event.csv fre EVENT | sqlite3 base.db
@@ -21,13 +23,13 @@ base.db : base.sql doc-db.csv event.csv cause.csv
 	./iso3166tosql.pl | sqlite3 base.db
 	./square2sql.pl | sqlite3 base.db
 
-core.db : core.sql
-	/bin/rm -f core.db; \
-	sqlite3 core.db < core.sql
+core.db : core.yaml
+	/bin/rm -f core.db && touch core.db
+	sh liquibase.sh -l core.yaml -d sqlite -f core.db -c update
 
-desinventar.db : region.sql
-	/bin/rm -f desinventar.db; \
-	sqlite3 desinventar.db < region.sql
+desinventar.db : desinventar.yaml
+	/bin/rm -f desinventar.db && touch desinventar.db
+	sh liquibase.sh -l desinventar.yaml -d sqlite -f desinventar.db -c update
 
 lang : spa.conf eng.conf por.conf fre.conf
 
