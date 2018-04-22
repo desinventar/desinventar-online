@@ -10,6 +10,7 @@ final class ErrorResponseTest extends ApiTestCase
 {
     public function testVersion()
     {
+        $response = null;
         try {
             $response = $this->http->get('non_existent_endpoint');
         } catch (ClientException $e) {

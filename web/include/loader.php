@@ -239,7 +239,7 @@ if ($config->flags['env'] != 'command') {
 
     // Build a complete URL for the application
     $config->params = array(
-        'url' => DesInventar\Common\Util::getUrl()
+        'url' => $util->getUrl()
     );
 
     // General Information (common to portal/app)
