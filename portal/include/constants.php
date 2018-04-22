@@ -10,5 +10,3 @@ define('JSVERSION', VERSION . '-' . CACHEVERSION);
 define('BASE', dirname(dirname(__FILE__)));
 define('SMARTYDIR', BASE . '/vendor/smarty/smarty/libs');
 define('FONTSET', '/usr/share/fonts/liberation/fonts.txt');
-
-define('DEFAULT_CHARSET', 'UTF-8');

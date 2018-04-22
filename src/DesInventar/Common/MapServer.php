@@ -2,6 +2,8 @@
 
 namespace DesInventar\Common;
 
+use DesInventar\Common\Util;
+
 class MapServer
 {
     const SERVER_PORT = 'SERVER_PORT';
@@ -68,8 +70,9 @@ class MapServer
             // local port is 80
             return $url . ':80' . $suffix;
         }
+        $util = new Util();
         // We check to see if apache if using a different port
-        if (! is_ssl() && (isset($_SERVER[self::SERVER_PORT]) && ($_SERVER[self::SERVER_PORT] != 80))) {
+        if (! $util->isSslConnection() && (isset($_SERVER[self::SERVER_PORT]) && ($_SERVER[self::SERVER_PORT] != 80))) {
             return $url . ':' . $_SERVER[self::SERVER_PORT] . $suffix;
         }
         return $url . '/cgi-bin/' . $this->config->maps['mapserver'] . '?' . $queryString;

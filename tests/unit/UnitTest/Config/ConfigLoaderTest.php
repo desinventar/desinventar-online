@@ -1,6 +1,6 @@
 <?php
 
-namespace UnitTest\General;
+namespace UnitTest\Config;
 
 use PHPUnit\Framework\TestCase;
 
@@ -14,6 +14,6 @@ final class ConfigLoaderTest extends TestCase
         putenv('TEST_WEB_DATABASE=SAMPLE');
         $config = new ConfigLoader($configDir);
         $this->assertTrue(!empty($config));
-        $this->assertEquals($config->test['database'], 'SAMPLE');
+        $this->assertEquals($config->get('test')['database'], 'SAMPLE');
     }
 }
