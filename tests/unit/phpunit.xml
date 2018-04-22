@@ -8,8 +8,5 @@
         <testsuite name="unit">
             <directory>UnitTest</directory>
         </testsuite>
-        <testsuite name="api">
-            <directory>ApiTest</directory>
-        </testsuite>
     </testsuites>
 </phpunit>

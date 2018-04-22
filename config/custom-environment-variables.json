@@ -1,9 +1,17 @@
 {
   "test": {
-    "url": "TEST_WEB_URL",
-    "username": "TEST_WEB_USERNAME",
-    "passwd": "TEST_WEB_PASSWD",
-    "database": "TEST_WEB_DATABASE"
+    "web": {
+      "url": "TEST_WEB_URL",
+      "username": "TEST_WEB_USERNAME",
+      "passwd": "TEST_WEB_PASSWD",
+      "database": "TEST_WEB_DATABASE"
+    },
+    "api": {
+      "url": "TEST_API_URL",
+      "username": "TEST_API_USERNAME",
+      "passwd": "TEST_API_PASSWD",
+      "database": "TEST_API_DATABASE"
+    }
   },
   "paths": {
     "tmp_dir": "DESINVENTAR_PATHS_TMP_DIR"

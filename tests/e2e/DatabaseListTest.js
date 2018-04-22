@@ -1,7 +1,7 @@
-const config = require('config')
 import { Selector } from 'testcafe'
+import { url } from './helpers/config'
 
-fixture('Database List').page(config.test.url)
+fixture('Database List').page(url)
 
 test('Database List', async t => {
   await t

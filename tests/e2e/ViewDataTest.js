@@ -1,9 +1,7 @@
-const config = require('config')
-
 import { Selector } from 'testcafe'
+import { urlWithDatabase } from './helpers/config'
 
-const url = config.test.url + '/#' + config.test.database + '/'
-fixture('View Data').page(url)
+fixture('View Data').page(urlWithDatabase)
 
 test('View Data', async t => {
   const paramsWindow = Selector('#divViewDataParamsWindow', {

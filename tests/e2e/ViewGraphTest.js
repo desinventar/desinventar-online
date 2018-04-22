@@ -1,9 +1,7 @@
-const config = require('config')
-
 import { Selector } from 'testcafe'
+import { urlWithDatabase } from './helpers/config'
 
-const url = config.test.url + '/#' + config.test.database + '/'
-fixture('View Graph').page(url)
+fixture('View Graph').page(urlWithDatabase)
 
 test('View Graph', async t => {
   const paramsWindow = Selector('#divGraphParameters', {

@@ -22,16 +22,16 @@ lang : .FORCE
 
 php : standard-php phpmd lint-php
 
-test : test-unit test-api
+test : test-unit
 
 test-unit: .FORCE
 	cd tests/unit && ../../vendor/bin/phpunit --testsuite unit $(TEST)
 
 test-api: .FORCE
-	cd tests/unit && ../../vendor/bin/phpunit --testsuite api $(TEST)
+	./node_modules/.bin/jest tests/api
 
-test-web: .FORCE
-	node_modules/.bin/testcafe firefox:headless tests/e2e
+test-e2e: .FORCE
+	./node_modules/.bin/testcafe firefox:headless tests/e2e
 
 lint-php : .FORCE
 	find src api config portal web tests -name "*.php" -exec php -l {} > /dev/null \;

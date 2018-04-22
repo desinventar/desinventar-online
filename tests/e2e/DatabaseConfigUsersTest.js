@@ -1,10 +1,8 @@
-const config = require('config')
-
 import { Selector } from 'testcafe'
 import user from './helpers/user'
+import { urlWithDatabase } from './helpers/config'
 
-const url = config.test.url + '/#' + config.test.database + '/'
-fixture('Database Config Users').page(url)
+fixture('Database Config Users').page(urlWithDatabase)
 
 test('Database Open', async t => {
   await user.login(t)
