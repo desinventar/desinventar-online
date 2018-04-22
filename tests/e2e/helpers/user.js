@@ -6,12 +6,16 @@ const userHelper = {
     await t
       .click('#mnuUser')
       .click('#mnuUserLogin')
-      .typeText('form#frmUserLogin input#fldUserId', config.test.username, {
+      .typeText('form#frmUserLogin input#fldUserId', config.test.web.username, {
         replace: true
       })
-      .typeText('form#frmUserLogin input#fldUserPasswd', config.test.passwd, {
-        replace: true
-      })
+      .typeText(
+        'form#frmUserLogin input#fldUserPasswd',
+        config.test.web.passwd,
+        {
+          replace: true
+        }
+      )
       .click('form#frmUserLogin a.button.Send')
       .expect(Selector('table#mnuUser button[type="button"]').textContent)
   }

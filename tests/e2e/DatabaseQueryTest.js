@@ -1,9 +1,7 @@
-const config = require('config')
-
 import { Selector } from 'testcafe'
+import { urlWithDatabase } from './helpers/config'
 
-const url = config.test.url + '/#' + config.test.database + '/'
-fixture('Database Query').page(url)
+fixture('Database Query').page(urlWithDatabase)
 
 test('Database Open', async t => {
   await t

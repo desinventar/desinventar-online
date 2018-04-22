@@ -1,9 +1,7 @@
-const config = require('config')
-
 import { Selector, ClientFunction } from 'testcafe'
+import { urlWithDatabase } from './helpers/config'
 
-const url = config.test.url + '/#' + config.test.database + '/'
-fixture('View Map').page(url)
+fixture('View Map').page(urlWithDatabase)
 
 test('View Map', async t => {
   const paramsWindow = Selector('#map-win', {

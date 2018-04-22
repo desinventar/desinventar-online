@@ -37,8 +37,10 @@
     "eslint-plugin-prettier": "^2.3.1",
     "eslint-plugin-testcafe": "^0.2.1",
     "husky": "^0.14.3",
+    "jest": "^22.4.3",
     "lint-staged": "^4.3.0",
     "prettier": "^1.8.2",
+    "supertest": "^3.0.0",
     "testcafe": "^0.18.4",
     "testcafe-browser-provider-nightmare": "^0.0.5",
     "webpack": "^3.8.1"

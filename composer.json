@@ -43,9 +43,6 @@
       ],
       "UnitTest\\": [
         "tests/unit"
-      ],
-      "ApiTest\\": [
-        "tests/unit"
       ]
     }
   },

@@ -1,7 +1,8 @@
-const config = require('config')
 import { Selector } from 'testcafe'
+import config from 'config'
+import { url } from './helpers/config'
 
-fixture('User Login Page').page(config.test.url)
+fixture('User Login Page').page(url)
 
 test('User Login', async t => {
   await t
@@ -21,7 +22,7 @@ test('User Login', async t => {
         .visible
     )
     .ok()
-    .typeText('form#frmUserLogin input#fldUserId', config.test.username)
+    .typeText('form#frmUserLogin input#fldUserId', config.test.web.username)
     .typeText('form#frmUserLogin input#fldUserPasswd', 'wrongpasswd')
     .click('form#frmUserLogin a.button.Send')
     .expect(
@@ -29,10 +30,10 @@ test('User Login', async t => {
         .visible
     )
     .ok()
-    .typeText('form#frmUserLogin input#fldUserId', config.test.username, {
+    .typeText('form#frmUserLogin input#fldUserId', config.test.web.username, {
       replace: true
     })
-    .typeText('form#frmUserLogin input#fldUserPasswd', config.test.passwd, {
+    .typeText('form#frmUserLogin input#fldUserPasswd', config.test.web.passwd, {
       replace: true
     })
     .click('form#frmUserLogin a.button.Send')
