@@ -35,7 +35,6 @@ class ConfigLoader
             $customConfig = $this->applyEnvVarsToArray($this->readConfigFile($envFile));
             $this->options = array_replace_recursive($this->options, $customConfig);
         }
-        return true;
     }
 
     public function getConfigDirFromEnv()
@@ -44,6 +43,9 @@ class ConfigLoader
             return getenv('NODE_CONFIG_DIR');
         }
         $path = getcwd();
+        if (!$path) {
+            return false;
+        }
         do {
             $testPath = $path . '/config';
             if (file_exists($testPath)) {
@@ -56,18 +58,29 @@ class ConfigLoader
 
     public function getConfigFile()
     {
-        if (!empty(getenv('NODE_ENV'))) {
-            return strtolower(getenv('NODE_ENV')) . '.json';
+        $envValue = getenv('NODE_ENV');
+        if (!empty($envValue)) {
+            return strtolower($envValue) . '.json';
         }
-        if (!empty(getenv('APP_ENV'))) {
-            return strtolower(getenv('APP_ENV')) . '.json';
+        $envValue = getenv('APP_ENV');
+        if (!empty($envValue)) {
+            return strtolower($envValue) . '.json';
         }
         return '';
     }
 
+    public function get($key)
+    {
+        return $this->__get($key);
+    }
+
     private function readConfigFile($filepath)
     {
-        return json_decode(file_get_contents($filepath), true);
+        $content = file_get_contents($filepath);
+        if (!$content) {
+            return false;
+        }
+        return json_decode($content, true);
     }
 
     private function extractValuesFromArray($parentKey, $data)

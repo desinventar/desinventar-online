@@ -18,10 +18,11 @@ $options = array();
 // Always use http for KML files, Google earth doesn't load layers via https
 $options['protocol_for_maps'] = 'http';
 $options['protocol'] = 'http';
-if (is_ssl()) {
+$util = new Util();
+if ($util->isSslConnection()) {
     $options['protocol'] = 'https';
 }
-$options['url'] = Util::getBaseUrl();
+$options['url'] = $util->getBaseUrl();
 $options = array_merge($options, $config->maps);
 $cmd = getParameter('_M+cmd', getParameter('cmd', ''));
 if ($cmd == '') {
