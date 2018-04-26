@@ -43,24 +43,23 @@
 				<table border=0 style="width:100%; font-family:Lucida Grande, Verdana; font-size:10px;">
 					<tr>
 						<td>
-							<div id="divInfoGeneral">
-								<div class="RegionInfoTitle" id="Title">{-#msgInfoGeneral#-}</div><br />
-								<div class="RegionInfoText"  id="Text"></div><br />
+							<div id="divInfoGeneral" class="RegionInfo">
+								<div class="RegionInfoTitle" id="Title">{-#msgInfoGeneral#-}</div>
+								<div class="RegionInfoText"  id="Text"></div>
+							</div>
+							<div id="divInfoCredits" class="RegionInfo">
+								<div class="RegionInfoTitle" id="Title">{-#msgInfoCredits#-}</div>
+								<div class="RegionInfoText"  id="Text"></div>
 								<br />
 							</div>
-							<div id="divInfoCredits">
-								<div class="RegionInfoTitle" id="Title">{-#msgInfoCredits#-}</div><br />
-								<div class="RegionInfoText"  id="Text"></div><br />
+							<div id="divInfoSources" class="RegionInfo">
+								<div class="RegionInfoTitle" id="Title">{-#msgInfoSources#-}</div>
+								<div class="RegionInfoText"  id="Text"></div>
 								<br />
 							</div>
-							<div id="divInfoSources">
-								<div class="RegionInfoTitle" id="Title">{-#msgInfoSources#-}</div><br />
-								<div class="RegionInfoText"  id="Text"></div><br />
-								<br />
-							</div>
-							<div id="divInfoSynopsis">
-								<div class="RegionInfoTitle" id="Title">{-#msgInfoSynopsis#-}</div><br />
-								<div class="RegionInfoText"  id="Text"></div><br />
+							<div id="divInfoSynopsis" class="RegionInfo">
+								<div class="RegionInfoTitle" id="Title">{-#msgInfoSynopsis#-}</div>
+								<div class="RegionInfoText"  id="Text"></div>
 							</div>
 						</td>
 					</tr>
