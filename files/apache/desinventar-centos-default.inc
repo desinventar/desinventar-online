@@ -1,7 +1,9 @@
 <Location />
 	Order allow,deny
 	Allow from all
+	Header set Access-Control-Allow-Origin "*"
 </Location>
+
 <Directory /var/www/html/web>
 	RewriteEngine on
 	RewriteBase /
