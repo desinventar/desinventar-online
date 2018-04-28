@@ -7,15 +7,20 @@ services:
     volumes:
      - .:/usr/share/desinventar
      - /usr/share/desinventar/vendor
+    environment:
+    - DESINVENTAR_FLAGS_MODE
   devel:
-    image: "desinventar/online:latest"
+    build: .
     depends_on:
     - web
     ports:
      - "8081:80"
     volumes:
      - .:/usr/share/desinventar
+     - /usr/share/desinventar/vendor
      - /var/local/desinventar:/var/local/desinventar
+    environment:
+    - DESINVENTAR_FLAGS_MODE
   portal:
     build:
       context: ./portal

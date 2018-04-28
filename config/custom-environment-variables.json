@@ -1,4 +1,7 @@
 {
+  "flags": {
+    "mode": "DESINVENTAR_FLAGS_MODE"
+  },
   "test": {
     "url": "TEST_WEB_URL",
     "username": "TEST_WEB_USERNAME",
