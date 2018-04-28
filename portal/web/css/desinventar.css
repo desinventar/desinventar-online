@@ -23,7 +23,7 @@ b {
 }
 li {
 	font-family:arial,tahoma,helvetica,cursive;
-	font-size:11px; }
+	font-size:12px; }
 .line {
 	font-family:arial,tahoma,helvetica,cursive;
 	font-size:11px; color:#000000; background-color:#FFFFFF;
@@ -105,8 +105,12 @@ table.col {
 	font-size:11px;
 }
 
+.region-info-text {
+  font-size: 12px;
+}
+
 .RegionInfo {
-	margin-bottom: 8px;
+	margin-bottom: 14px;
 }
 
 .RegionInfoTitle {

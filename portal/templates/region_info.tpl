@@ -13,26 +13,26 @@
 				<table>
 					<tr>
 						<td>
-							{-#RegionDatabasePeriod#-}:
+							<span class="region-info-text">{-#RegionDatabasePeriod#-}:</span>
 						</td>
 						<td>
-							<span id="txtRegionPeriod"></span><br />
-						</td>
-					</tr>
-					<tr>
-						<td>
-							{-#trepnum#-}:
-						</td>
-						<td>
-							<span id="txtRegionNumDatacards"></span><br />
+							<span id="txtRegionPeriod" class="region-info-text"></span><br />
 						</td>
 					</tr>
 					<tr>
 						<td>
-							{-#tlastupd#-}:
+							<span class="region-info-text">{-#trepnum#-}:</span>
 						</td>
 						<td>
-							<span id="txtRegionLastUpdate"></span><br />
+							<span id="txtRegionNumDatacards" class="region-info-text"></span><br />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span class="region-info-text">{-#tlastupd#-}:</span>
+						</td>
+						<td>
+							<span id="txtRegionLastUpdate" class="region-info-text"></span><br />
 						</td>
 					</tr>
 				</table>
@@ -50,12 +50,10 @@
 							<div id="divInfoCredits" class="RegionInfo">
 								<div class="RegionInfoTitle" id="Title">{-#msgInfoCredits#-}</div>
 								<div class="RegionInfoText"  id="Text"></div>
-								<br />
 							</div>
 							<div id="divInfoSources" class="RegionInfo">
 								<div class="RegionInfoTitle" id="Title">{-#msgInfoSources#-}</div>
 								<div class="RegionInfoText"  id="Text"></div>
-								<br />
 							</div>
 							<div id="divInfoSynopsis" class="RegionInfo">
 								<div class="RegionInfoTitle" id="Title">{-#msgInfoSynopsis#-}</div>
