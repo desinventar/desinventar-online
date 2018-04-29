@@ -5,7 +5,7 @@ namespace DesInventar\Common;
 class Version
 {
     protected $majorVersion = '10';
-    protected $version = '10.02.002';
+    protected $version = '10.02.003';
     protected $releaseDate = '2018-04-29';
     protected $mode = 'devel';
 
