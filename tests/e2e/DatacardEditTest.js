@@ -2,7 +2,7 @@ import { Selector } from 'testcafe'
 import user from './helpers/user.js'
 import { urlWithDatabase } from './helpers/config'
 
-fixture('Datcard Edit Page').page(urlWithDatabase)
+fixture('Datacard Edit Page').page(urlWithDatabase)
 
 test('User Login', async t => {
   await user.login(t)
