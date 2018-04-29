@@ -3,9 +3,9 @@
 use DesInventar\Common\Version;
 
 $app->group('/common', function () use ($app, $container) {
-    $app->get('/version', function () use ($app) {
+    $app->get('/version', function () use ($container) {
         $version = new Version($container['config']->flags['mode']);
-        return $this['jsonapi']->data($version->getVersionArray());
+        return $container['jsonapi']->data($version->getVersionArray());
     });
 
     $app->post('/login', function (Request $request) {
