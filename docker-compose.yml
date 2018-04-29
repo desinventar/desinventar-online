@@ -10,18 +10,24 @@ services:
       - /opt/app/node_modules
       - /opt/app/portal/vendor
       - /opt/app/portal/node_modules
+    environment:
+    - DESINVENTAR_FLAGS_MODE
   devel:
     build: .
     command: bash -c '(/opt/app/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
+    depends_on:
+    - web
     ports:
       - "8081:80"
     volumes:
       - .:/opt/app
-      - /var/local/desinventar:/var/local/desinventar
       - /opt/app/vendor
       - /opt/app/node_modules
       - /opt/app/portal/vendor
       - /opt/app/portal/node_modules
+      - /var/local/desinventar:/var/local/desinventar
+    environment:
+    - DESINVENTAR_FLAGS_MODE
   portal:
     build:
       context: ./portal

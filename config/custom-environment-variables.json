@@ -1,4 +1,7 @@
 {
+  "flags": {
+    "mode": "DESINVENTAR_FLAGS_MODE"
+  },
   "test": {
     "web": {
       "url": "TEST_WEB_URL",
