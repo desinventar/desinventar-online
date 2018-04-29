@@ -21,4 +21,4 @@ jobs:
             set -x
             docker build -t desinventar/e2e-test -f docker/e2e-test/Dockerfile . ; \
             docker run --network desinventar_default \
-              desinventar/e2e-test:latest sh -c 'TEST_WEB_URL=http://web:80 make test-e2e'; \
+              desinventar/e2e-test:latest sh -c 'TEST_WEB_URL=http://web:80 make test-e2e'
