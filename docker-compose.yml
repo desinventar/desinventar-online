@@ -10,11 +10,11 @@ services:
       - /opt/app/node_modules
       - /opt/app/portal/vendor
       - /opt/app/portal/node_modules
+    environment:
+    - DESINVENTAR_FLAGS_MODE
   devel:
     build: .
     command: bash -c '(/opt/app/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
-     - .:/usr/share/desinventar
-     - /usr/share/desinventar/vendor
     depends_on:
     - web
     ports:
