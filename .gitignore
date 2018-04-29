@@ -11,6 +11,7 @@ nbproject
 .idea
 vendor/*
 config/*_local.*
+config/*.json
 node_modules
 .vscode
 npm-debug.log
