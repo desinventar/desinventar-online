@@ -33,7 +33,6 @@ define('DI_EEFIELD', 10);
 define('DI_EEDATA', 11);
 
 // dicore command
-define('CMD_NEW', 1);
 define('CMD_UPDATE', 2);
 define('CMD_DELETE', 3);
 

@@ -6,24 +6,49 @@ use Ramsey\Uuid\UuidFactory;
 
 class Util
 {
-    public static function getUrl()
+    public function getUrl()
     {
         if (!isset($_SERVER['HTTP_HOST']) || !isset($_SERVER['REQUEST_URI'])) {
             return '';
         }
         $url_proto = 'http';
-        if (is_ssl()) {
+        if ($this->isSslConnection()) {
             $url_proto = 'https';
         }
         $url = $url_proto . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         return $url;
     }
 
-    public static function getBaseUrl()
+    public function getBaseUrl()
     {
-        $url = self::getUrl();
-        $url = substr($url, 0, strrpos($url, '/'));
+        $url = $this->getUrl();
+        $lastSlashIndex = strrpos($url, '/');
+        if ($lastSlashIndex) {
+            $url = substr($url, 0, $lastSlashIndex);
+        }
         return $url;
+    }
+
+    public function isSslConnection()
+    {
+        if (isset($_SERVER['HTTPS'])) {
+            if ('on' == strtolower($_SERVER['HTTPS'])) {
+                return true;
+            }
+            if ('1' == $_SERVER['HTTPS']) {
+                return true;
+            }
+        } elseif (isset($_SERVER['SERVER_PORT']) && ( '443' == $_SERVER['SERVER_PORT'] )) {
+            return true;
+        }
+        return false;
+    }
+
+    public function removeSpecialChars($value)
+    {
+        $response = str_replace(['"', "'"], '', $value);
+        $response = str_replace(["\r","\n"], " ", $response);
+        return $response;
     }
 
     public function uuid4()
@@ -57,7 +82,7 @@ class Util
                 $var->$m = $this->jsonFixCyr($v);
             }
         } elseif (is_string($var)) {
-            $var = iconv(DEFAULT_CHARSET, 'utf-8', $var);
+            $var = iconv('UTF-8', 'utf-8', $var);
         }
         return $var;
     }

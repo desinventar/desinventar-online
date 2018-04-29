@@ -7,6 +7,8 @@ use Aura\SqlQuery\QueryFactory;
 
 class Session extends Record
 {
+    const ERR_NO_ERROR = 1;
+
     protected $pdo = null;
     protected $tableName = 'UserSession';
     protected $fieldMap = [
@@ -64,7 +66,7 @@ class Session extends Record
             ->where('SessionId=:id')
             ->bindValues(['id' => $id, 'UserId' => $userId]);
         $this->pdo->perform($query->getStatement(), $query->getBindValues());
-        return ERR_NO_ERROR;
+        return self::ERR_NO_ERROR;
     }
 
     public function create($params)

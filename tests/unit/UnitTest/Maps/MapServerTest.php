@@ -1,6 +1,6 @@
 <?php
 
-namespace UnitTest\General;
+namespace UnitTest\Maps;
 
 use PHPUnit\Framework\TestCase;
 

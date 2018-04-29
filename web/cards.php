@@ -111,7 +111,7 @@ if (isset($_GET['u'])) {
             $answer['ErrorCode']  = ERR_NO_ERROR;
             $service = new Datacard($us->q->dreg);
             if ($cmd == 'insertDICard') {
-                $data = $service->form2disaster($_POST, CMD_NEW);
+                $data = $service->form2disaster($_POST, Datacard::CMD_NEW);
                 $data['RecordAuthor'] = $us->UserId;
             } else {
                 $data = $service->form2disaster($_POST, CMD_UPDATE);

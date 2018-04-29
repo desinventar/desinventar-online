@@ -42,6 +42,9 @@ standard-php : .FORCE
 phpmd: .FORCE
 	find api config files portal/web portal/include src tests -name \*.php -exec ./vendor/bin/phpmd {} text ./files/phpmd/ruleset.xml \;
 
+phpstan: .FORCE
+	docker run --rm -v $(PWD):/app phpstan/phpstan analyse --level 7 /app/src /app/tests
+
 js : standard-js
 
 standard-js : .FORCE
