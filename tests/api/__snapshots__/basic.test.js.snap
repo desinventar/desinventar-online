@@ -2,4 +2,4 @@
 
 exports[`Basic API Tests should open root 1`] = `"{\\"data\\":{\\"text\\":\\"DesInventar Api Server\\",\\"copyright\\":\\"(c) Corporaci\\\\u00f3n OSSO - 1998 - 2018\\"}}"`;
 
-exports[`Basic API Tests should return api version 1`] = `"{\\"data\\":{\\"major_version\\":\\"10\\",\\"version\\":\\"10.01.011\\",\\"release_date\\":\\"2018-04-03\\"}}"`;
+exports[`Basic API Tests should return api version 1`] = `"{\\"data\\":{\\"major_version\\":\\"10\\",\\"version\\":\\"10.02.003-c2d5161d\\",\\"release_date\\":\\"2018-04-29\\"}}"`;
