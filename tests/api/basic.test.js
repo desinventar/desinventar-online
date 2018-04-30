@@ -1,4 +1,3 @@
-/* eslint-env jest */
 const config = require('config')
 const request = require('supertest')(config.test.api.url)
 

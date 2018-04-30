@@ -12,9 +12,10 @@
   "extends": [
     "eslint:recommended",
     "prettier",
-    "plugin:testcafe/recommended"
+    "plugin:testcafe/recommended",
+    "plugin:jest/recommended"
   ],
-  "plugins": ["prettier", "testcafe"],
+  "plugins": ["prettier", "testcafe", "jest"],
   "rules": {
     "prettier/prettier": [
       "error",
