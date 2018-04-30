@@ -12,8 +12,11 @@ describe('Basic API Tests', () => {
   })
 
   it('should return api version', async () => {
-    const response = await request.get('/common/version').expect(200)
-    expect(response.text).toMatchSnapshot()
+    const response = await request
+      .get('/common/version')
+      .expect(200)
+      .expect('Content-Type', 'application/json;charset=utf-8')
+    expect(response.body.data.major_version).toBe('10')
   })
 
   it('should check error response', async () => {
