@@ -108,7 +108,15 @@ class Session extends Record
 
     public function changeLanguage($id, $langIsoCode)
     {
-        return $this->update($id, ['LangIsoCode' => $langIsoCode]);
+        $query = $this->factory->newUpdate();
+        $query->table($this->tableName)
+            ->cols([
+                'LangIsoCode'
+            ])
+            ->where('SessionId=:SessionId')
+            ->bindValue('SessionId', $id)
+            ->bindValue('LangIsoCode', $langIsoCode);
+        return $this->pdo->perform($query->getStatement(), $query->getBindValues());
     }
 
     public function delete($id)

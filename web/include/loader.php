@@ -203,8 +203,7 @@ if ($config->flags['env'] != 'command') {
     }
 
     $config->general['lang'] = $lg;
-    $us->setLangIsoCode($lg);
-    $us->update();
+    $us->changeLanguage($lg);
 
     $_SESSION['lang'] = $lg;
     $t->assign('lg', $lg);

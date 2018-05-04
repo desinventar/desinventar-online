@@ -134,8 +134,7 @@ switch ($cmd) {
         $iReturn = ERR_NO_ERROR;
         if ($LangIsoCode !== '' && $lg != $LangIsoCode) {
             if (array_key_exists($LangIsoCode, $LangList)) {
-                $us->setLangIsoCode($LangIsoCode);
-                $us->update();
+                $us->changeLanguage($LangIsoCode);
                 $iReturn = ERR_NO_ERROR;
                 $answer['LangIsoCode'] = $LangIsoCode;
             } else {
