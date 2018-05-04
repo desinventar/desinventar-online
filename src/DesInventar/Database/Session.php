@@ -106,6 +106,11 @@ class Session extends Record
         return true;
     }
 
+    public function changeLanguage($id, $langIsoCode)
+    {
+        return $this->update($id, ['LangIsoCode' => $langIsoCode]);
+    }
+
     public function delete($id)
     {
         $query = $this->factory->newDelete();

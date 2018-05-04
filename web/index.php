@@ -127,11 +127,12 @@ switch ($cmd) {
         echo htmlspecialchars(json_encode($answer), ENT_NOQUOTES, 'UTF-8');
         break;
     case 'cmdUserLanguageChange':
-        $LangList = $us->q->loadLanguages(1);
+        $base = new DesInventar\Service\Base($us->q->base);
+        $LangList = $base->getLanguagesList();
         $LangIsoCode = getParameter('LangIsoCode');
         $answer = array();
         $iReturn = ERR_NO_ERROR;
-        if ($lg != $LangIsoCode) {
+        if ($LangIsoCode !== '' && $lg != $LangIsoCode) {
             if (array_key_exists($LangIsoCode, $LangList)) {
                 $us->setLangIsoCode($LangIsoCode);
                 $us->update();
