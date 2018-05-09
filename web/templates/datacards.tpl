@@ -84,7 +84,7 @@
 								<input id="DisasterBeginTime0" name="DisasterBeginTime[0]" style="width:36px;" type="text"
 									class="line inputInteger" tabindex="{-$MyTabIndex-}" maxlength="4" onFocus="showtip('{-$LabelsDisaster.DisasterBeginTime[2]-}', '#d4baf6')" />
 								{-counter-}
-								<input id="DisasterBeginTime1" name="DisasterBeginTime[1]" style="width:18px;" type="text" 
+								<input id="DisasterBeginTime1" name="DisasterBeginTime[1]" style="width:18px;" type="text"
 									class="line inputInteger" tabindex="{-$MyTabIndex-}" maxlength="2" onFocus="showtip('{-$LabelsDisaster.DisasterBeginTime[2]-}', '#d4baf6')" />
 								{-counter-}
 								<input id="DisasterBeginTime2" name="DisasterBeginTime[2]" style="width:18px;" type="text"
@@ -112,7 +112,7 @@
 							</td>
 							<td title="{-$LabelsDisaster.DisasterSerial[1]-}">
 								{-#msgDatacard_DisasterSerial#-}<b class="required">*</b><br />
-								<input id="DisasterSerial" name="DisasterSerial" type="text" size="24" 
+								<input id="DisasterSerial" name="DisasterSerial" type="text" size="24"
 									class="line inputAlphaNumber" tabindex="{-$MyTabIndex-}" maxlength="50" onFocus="showtip('{-$LabelsDisaster.DisasterSerial[2]-}', '#d4baf6')" />
 								{-counter-}
 								<a href="#" id="linkDatacardSuggestSerial"><img src="{-$desinventarURL-}/images/reload.jpg" alt="" />
@@ -160,7 +160,7 @@
 							<td title="{-$LabelsDisaster.DisasterSiteNotes[1]-}">
 								{-#msgDatacard_DisasterSiteNotes#-}<br />
 								<textarea id="DisasterSiteNotes" name="DisasterSiteNotes" style="height: 40px;" cols="25" maxlength="4096"
-									class="inputText" tabindex="{-$MyTabIndex-}" 
+									class="inputText" tabindex="{-$MyTabIndex-}"
 									onFocus="showtip('{-$LabelsDisaster.DisasterSiteNotes[2]-}', '#d4baf6')"></textarea>
 								{-counter-}
 							</td>
@@ -185,7 +185,7 @@
 					</table>
 				</td>
 			</tr>
-			<!-- EFFECTS SECTION--> 
+			<!-- EFFECTS SECTION-->
 			<tr>
 				<td class="top columnLeft">
 					<a href="#" id="linkDatacardShowEffectsBasic">
@@ -223,7 +223,7 @@
 												</td>
 											</tr>
 										{-/foreach-}
-									</table> 
+									</table>
 								</td>
 								<td>
 									<table>
@@ -316,8 +316,8 @@
 						<div class="divDatacardEffects dwin" id="divDatacardEffectsAdditional" style="display:none;">
 							<table class="EffectListAdditional grid">
 								<tr>
-									<td>
-										<div class="EffectAdditional" style="display:none;">
+									<td class="datacard-eefield-column">
+										<div class="datacard-eefield-group EffectAdditional" style="display:none;">
 											<span class="label"></span>
 											<br />
 											<input class="value line inputText"    type="text" size="30" value="" />
@@ -325,9 +325,9 @@
 											<input class="value line inputDouble"  type="text" size="30" value="0" />
 										</div>
 									</td>
-									<td>
+									<td class="datacard-eefield-column">
 									</td>
-									<td>
+									<td class="datacard-eefield-column">
 									</td>
 								</tr>
 							</table>
@@ -355,7 +355,7 @@
 							</td>
 							<td title="{-$LabelsEvent.EventMagnitude[1]-}">
 								{-#msgDatacard_EventMagnitude#-}<br />
-								<input id="EventMagnitude" name="EventMagnitude" type="text" size="5" 
+								<input id="EventMagnitude" name="EventMagnitude" type="text" size="5"
 									class="line inputText" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsEvent.EventMagnitude[2]-}', 'lightblue')" />
 								{-counter-}
 							</td>
@@ -367,7 +367,7 @@
 							</td>
 							<td title="{-$LabelsEvent.EventNotes[1]-}">
 								{-#msgDatacard_EventNotes#-}<br />
-								<input type="text" id="EventNotes" name="EventNotes" style="width: 350px;" 
+								<input type="text" id="EventNotes" name="EventNotes" style="width: 350px;"
 									class="line inputText" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsEvent.EventNotes[2]-}', 'lightblue')" />
 								{-counter-}
 							</td>
@@ -394,7 +394,7 @@
 							</td>
 							<td title="{-$LabelsCause.CauseNotes[1]-}">
 								{-#msgDatacard_CauseNotes#-}<br />
-								<input type="text" id="CauseNotes" name="CauseNotes" style="width: 450px;" 
+								<input type="text" id="CauseNotes" name="CauseNotes" style="width: 450px;"
 									class="line inputText" tabindex="{-$MyTabIndex-}" onFocus="showtip('{-$LabelsCause.CauseNotes[2]-}', '#ffffc0')" />
 								{-counter-}
 							</td>

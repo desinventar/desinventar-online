@@ -672,3 +672,25 @@ div.UserLogin table {
 .region-info-edit-input {
 	width: 100%;
 }
+
+.datacard-eefield-column {
+	vertical-align: top;
+	text-align: left;
+}
+.datacard-eefield-group {
+	margin-right: 20px;
+	margin-bottom: 8px;
+	text-align: left;
+}
+
+.datacard-eefield-group > span {
+	font-size: 11px;
+	font-family: sans-serif,serif;
+	margin-left: 0px;
+	width: 100%;
+}
+.datacard-eefield-group > input {
+	font-size: 11px;
+	margin-left: 0px;
+	width: 100%;
+}
