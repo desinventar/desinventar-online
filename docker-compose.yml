@@ -36,11 +36,9 @@ services:
     ports:
       - "8090:80"
     volumes:
-      - ./portal:/opt/portal
+      - ./portal:/opt/app
       - /opt/app/vendor
       - /opt/app/node_modules
-      - /opt/app/portal/vendor
-      - /opt/app/portal/node_modules
     environment:
       - DESINVENTAR_MODE
       - DESINVENTAR_URL

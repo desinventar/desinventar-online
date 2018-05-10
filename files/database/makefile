@@ -5,7 +5,9 @@ STRINGS=interface_strings.xml
 
 .PHONY : all .FORCE
 
-all : base.db core.db desinventar.db lang
+all : databases lang
+
+databases: base.db core.db desinventar.db
 
 # Rebuild base.db database
 base.db : base.yaml doc-db.csv event.csv cause.csv
