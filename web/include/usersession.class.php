@@ -171,9 +171,9 @@ class UserSession
         return $iReturn;
     }
 
-    public function setLangIsoCode($prmLangIsoCode)
+    public function changeLanguage($langIsoCode)
     {
-        $this->LangIsoCode = $prmLangIsoCode;
+        return $this->session->changeLanguage($this->sSessionId, $langIsoCode);
     }
 
     protected function getSessionValues()
