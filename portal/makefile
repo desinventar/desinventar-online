@@ -2,9 +2,13 @@
 
 .PHONY : all .FORCE
 
-all : build
+all : composer node webpack strings
 
-build : webpack strings
+composer: .FORCE
+	composer install
+
+node: .FORCE
+	yarn
 
 webpack: .FORCE
 	./node_modules/.bin/webpack -p

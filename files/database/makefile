@@ -3,9 +3,10 @@
 SQLITE=sqlite3
 STRINGS=interface_strings.xml
 
-all : base.db core.db desinventar.db lang
+all : databases lang
 
-# Rebuild base.db database
+databases: base.db core.db desinventar.db
+
 base.db : base.sql doc-db.csv event.csv cause.csv
 	/bin/rm -f base.db
 	$(SQLITE) base.db < base.sql

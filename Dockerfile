@@ -41,7 +41,7 @@ COPY . /opt/app
 RUN mkdir -p /opt/app && cp -a /tmp/vendor /opt/app
 RUN mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app
 
-RUN make
+RUN make devel
 
 RUN mkdir -p /var/local/desinventar/db/main/ && \
     cp files/database/{core.db,base.db,desinventar.db} /var/local/desinventar/db/main/ && \
