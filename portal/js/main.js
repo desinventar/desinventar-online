@@ -8,16 +8,11 @@ import user from './user_login'
 
 const me = {}
 me.init = () => {
-  var desinventarLang = jQuery('#desinventarLang').val()
-
   jQuery('#btnMainWindow').attr('href', jQuery('#desinventarURL').val() + '/')
 
   // Main button to open a default desinventar
   jQuery('#btnMainWindow').click(function() {
-    jQuery(this).attr(
-      'href',
-      jQuery('#desinventarURL').val() + '/' + '?lang=' + desinventarLang
-    )
+    jQuery(this).attr('href', jQuery('#desinventarURL').val() + '/')
     return true
   })
 
