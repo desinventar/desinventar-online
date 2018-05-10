@@ -12,6 +12,8 @@ services:
       - /opt/app/portal/node_modules
     environment:
     - DESINVENTAR_FLAGS_MODE
+    - DESINVENTAR_MODE
+    - DESINVENTAR_CACHEDIR
   devel:
     build: .
     command: bash -c '(/opt/app/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
@@ -28,6 +30,8 @@ services:
       - /var/local/desinventar:/var/local/desinventar
     environment:
     - DESINVENTAR_FLAGS_MODE
+    - DESINVENTAR_MODE
+    - DESINVENTAR_CACHEDIR
   portal:
     build:
       context: ./portal
@@ -42,3 +46,4 @@ services:
     environment:
       - DESINVENTAR_MODE
       - DESINVENTAR_URL
+      - DESINVENTAR_PORTAL_CACHEDIR
