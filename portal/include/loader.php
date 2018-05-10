@@ -6,12 +6,9 @@
 
 require_once 'constants.php';
 
-$cacheDir = getenv('DESINVENTAR_CACHEDIR');
-if (empty($cacheDir) && isset($_SERVER['DESINVENTAR_CACHEDIR'])) {
-    $cacheDir = $_SERVER['DESINVENTAR_CACHEDIR'];
-}
-if (empty($cacheDir) && isset($_SERVER['CACHEDIR'])) {
-    $cacheDir = $_SERVER['CACHEDIR'];
+$cacheDir = getenv('DESINVENTAR_PORTAL_CACHEDIR');
+if (empty($cacheDir) && isset($_SERVER['DESINVENTAR_PORTAL_CACHEDIR'])) {
+    $cacheDir = $_SERVER['DESINVENTAR_PORTAL_CACHEDIR'];
 }
 if (empty($cacheDir)) {
     $cacheDir =  '/var/cache/smarty/desinventar/portal';
