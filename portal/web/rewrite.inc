@@ -6,7 +6,5 @@ RewriteRule ^.*\.tpl$ - [F]
 RewriteRule ^.*\.xml$ - [F]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(gar-isdr-[0-9]+)/?$  index.php?portaltype=$1
-#RewriteCond %{REQUEST_FILENAME} !-f
-#RewriteCond %{REQUEST_FILENAME} !-d
-#RewriteRule ^gar-isdr-([0-9]+)/(.*)$ $2 [L,QSA]
+#RewriteRule ^(gar-isdr-[0-9]+)/?$  index.php?portaltype=$1 [L]
+RewriteRule . index.php [L]

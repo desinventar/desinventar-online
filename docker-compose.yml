@@ -36,13 +36,15 @@ services:
     build:
       context: ./portal
       dockerfile: Dockerfile
-    command: bash -c '(/opt/portal/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
+    command: bash -c '(/opt/app/portal/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
     ports:
       - "8090:80"
     volumes:
-      - ./portal:/opt/app
+      - .:/opt/app
       - /opt/app/vendor
       - /opt/app/node_modules
+      - /opt/app/portal/vendor
+      - /opt/app/portal/node_modules
     environment:
       - DESINVENTAR_MODE
       - DESINVENTAR_URL
