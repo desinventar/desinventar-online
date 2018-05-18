@@ -70,10 +70,10 @@
 														</li>
 														<li>{-#tlang#-}
 															<ul>
-																<li><a href="?lang=eng">English</a></li>
-																<li><a href="?lang=spa">Español</a></li>
-																<li><a href="?lang=por">Português</a></li>
-																<li><a href="?lang=fre">Français</a></li>
+																<li><span class="change-language" data-language="eng">English</span></li>
+																<li><span class="change-language" data-language="spa">Español</span></li>
+																<li><span class="change-language" data-language="por">Português</span></li>
+																<li><span class="change-language" data-language="fre">Français</span></li>
 															</ul>
 														</li>
 													</ul>

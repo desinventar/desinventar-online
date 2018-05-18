@@ -114,6 +114,20 @@ me.init = () => {
     return false
   })
 
+  jQuery('span.change-language').on('click', event => {
+    jQuery.post(
+      '/change-language',
+      {
+        language: jQuery(event.target).data('language')
+      },
+      function() {
+        window.location.reload(false)
+      },
+      'json'
+    )
+    return false
+  })
+
   jQuery('#linkShowUserLogin').click(function() {
     jQuery('#frmUserLogin').toggle()
     return false

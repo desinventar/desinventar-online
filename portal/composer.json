@@ -1,6 +1,17 @@
 {
-	"require": {
-		"smarty/smarty": "3.1.27",
-		"ccampbell/chromephp": "^4.1"
-	}
+  "require": {
+    "smarty/smarty": "3.1.27",
+    "ccampbell/chromephp": "^4.1",
+    "slim/slim": "^3.10",
+    "aura/session": "^2.1",
+    "koenster/php-language-detection": "^1.0",
+    "monolog/monolog": "^1.23"
+  },
+  "autoload": {
+    "psr-4": {
+      "DesInventar\\": [
+        "src"
+      ]
+    }
+  }
 }
