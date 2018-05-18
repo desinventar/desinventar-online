@@ -45,7 +45,7 @@ RUN cp -a /tmp/vendor /opt/app/portal
 
 ADD package.json /tmp/package.json
 ADD yarn.lock /tmp/yarn.lock
-RUN cd /tmp && yarn install
+RUN cd /tmp && yarn
 RUN cp -a /tmp/node_modules /opt/app/portal
 
 ARG DESINVENTAR_PORTAL_CACHEDIR=/var/cache/smarty/desinventar/portal
@@ -63,8 +63,8 @@ RUN cat /tmp/rewrite.conf >> /etc/httpd/conf/httpd.conf
 
 COPY . /opt/app/portal
 
-RUN composer dump-autoload --optimize
-#RUN make
+RUN make composer
+RUN make node
 
 EXPOSE 80
 

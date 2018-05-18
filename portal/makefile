@@ -7,6 +7,9 @@ all : composer node webpack strings
 composer: .FORCE
 	composer install
 
+autoload: .FORCE
+	 composer dump-autoload --optimize
+
 node: .FORCE
 	yarn
 

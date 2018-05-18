@@ -1,4 +1,5 @@
 module.exports = {
+  mode: 'development',
   entry: __dirname + '/web/js/entry.js',
   output: {
     path: __dirname + '/web/scripts',
@@ -25,5 +26,8 @@ module.exports = {
     descriptionFiles: ['package.json'],
     mainFields: ['main', 'browser'],
     mainFiles: ['index']
+  },
+  performance: {
+    hints: false
   }
 }
