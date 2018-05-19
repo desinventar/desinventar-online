@@ -641,25 +641,56 @@ div.UserLogin table {
 	margin-right:auto;
 	text-align:center;
 }
-.region-info {
+.region-info-edit {
 	width: 100%;
 	max-width: 1024px;
+	display: flex;
+	flex: 1;
+	flex-direction: column;
 }
-.region-info-edit, .region-info-edit-info {
+.region-info-edit-top {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+.region-info-edit-top .label {
+	flex-basis: 15%;
+	flex-grow: 0
+}
+.region-info-edit-top .field {
+	flex-basis: 85%;
+	flex-grow: 1
+}
+.region-info-edit-top .buttons {
+	align-self: center;
+	flex-grow: 2;
+	display: flex;
+	justify-content: center;
+}
+.region-info-edit-top .buttons .line {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.region-info-edit-bottom {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+.region-info-edit-info {
 	width: 100%;
 }
 .region-info-edit-label b {
 	color: darkred;
+	margin: 0px;
 }
 .region-info-edit-label-expand {
 	font-size: 18px;
 }
 .region-info-edit-row {
-	width: 90vw;
 	padding: 5px;
 }
 .region-info-edit-field {
-	width: 100%;
 	height: 60px;
 }
 .region-info-edit-field.expanded {
@@ -670,7 +701,7 @@ div.UserLogin table {
 	height: 100%;
 }
 .region-info-edit-input {
-	width: 100%;
+	width: 90%;
 }
 
 .datacard-eefield-column {

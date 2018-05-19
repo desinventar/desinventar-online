@@ -47,6 +47,11 @@ switch ($cmd) {
     case 'cmdDBInfoEdit':
         $UserRole = $us->getUserRole($RegionId);
         $r = new DesInventar\Legacy\DIRegion($us, $RegionId);
+        $base = new DesInventar\Service\Base($us->q->base);
+        $languageLabels = array_map(function ($language) {
+            return $language['local'] . '/' . $language['iso'];
+        }, $base->getLanguagesList());
+        $t->assign('languageLabels', $languageLabels);
         $lang = array();
         $lang[0] = $r->get('LangIsoCode');
         $lang[1] = 'eng';
