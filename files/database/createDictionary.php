@@ -11,41 +11,39 @@ print "DELETE FROM LabelGroup;" . "\n";
 while (!feof($h)) {
     $a = fgetcsv($h);
     $util = new Util();
-    if (count($a) > 1) {
-        // Ignore First Line (Headers...)
-        if ($i == 0) {
-            continue;
-        }
-        $now = gmdate('c');
+    if ((count($a) <= 1) || ($i === 0)) {
+        $i++;
+        continue;
+    }
+    $now = gmdate('c');
+    $query = sprintf(
+        'INSERT INTO LabelGroup VALUES ("%s","%s","%s","%s","%s","%s","%s");',
+        $i,
+        $a[0],
+        $a[1],
+        $a[2],
+        $now,
+        $now,
+        $now
+    );
+    print $query . "\n";
+    $langlist = array('eng','spa','por','fre');
+    $Index = 3; // First column with language information
+    foreach ($langlist as $Lang) {
         $query = sprintf(
-            'INSERT INTO LabelGroup VALUES ("%s","%s","%s","%s","%s","%s","%s");',
+            'INSERT INTO Dictionary VALUES ("%s","%s","%s","%s","%s","%s","%s","%s","%s");',
             $i,
-            $a[0],
-            $a[1],
-            $a[2],
+            $Lang,
+            $a[$Index],
+            $util->escapeQuotes($a[$Index+4]),
+            $util->escapeQuotes($a[$Index+8]),
+            $util->escapeQuotes($a[$Index+12]),
             $now,
             $now,
             $now
         );
         print $query . "\n";
-        $langlist = array('eng','spa','por','fre');
-        $Index = 3; // First column with language information
-        foreach ($langlist as $Lang) {
-            $query = sprintf(
-                'INSERT INTO Dictionary VALUES ("%s","%s","%s","%s","%s","%s","%s","%s","%s");',
-                $i,
-                $Lang,
-                $a[$Index],
-                $util->escapeQuotes($a[$Index+4]),
-                $util->escapeQuotes($a[$Index+8]),
-                $util->escapeQuotes($a[$Index+12]),
-                $now,
-                $now,
-                $now
-            );
-            print $query . "\n";
-            $Index++;
-        }
+        $Index++;
     }
     $i++;
 }
