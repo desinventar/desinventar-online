@@ -3,14 +3,14 @@
 			<li>
 				<a
 					class="classDBConfig_tabs"
-					href="#DBConfig_tabs-1"
+					href="#DBConfig_Info"
 					data-cmd="cmdDBInfoEdit"
 					data-url="{-$desinventarURL-}/info.php"
 					data-id="DBConfig_Info"
 				>{-#mreginfo#-}</a>
 			</li>
 			<li title="{-#msgGeolevels_Tooltip#-}">
-				<a class="classDBConfig_tabs" href="#DBConfig_Geolevels">{-#msgDBConfig_Geolevels#-}</a>
+				<a class="classDBConfig_tabs" href="#DBConfig_Geolevels" data-id="DBConfig_GeoLevels">{-#msgDBConfig_Geolevels#-}</a>
 			</li>
 			<li title="{-#msgGeography_Tooltip#-}">
 				<a class="classDBConfig_tabs" href="#DBConfig_Geography">{-#mgeography#-}</a>
@@ -32,7 +32,7 @@
 				>{-#msgDBConfig_RolesAndDiffusion#-}</a>
 			</li>
 		</ul>
-		<div id="DBConfig_tabs-1">
+		<div id="DBConfig_Info">
 			<div class="helptext hidden">
 			</div>
 			<div class="content">
