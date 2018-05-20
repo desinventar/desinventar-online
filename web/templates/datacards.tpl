@@ -320,9 +320,7 @@
 										<div class="datacard-eefield-group EffectAdditional" style="display:none;">
 											<span class="label"></span>
 											<br />
-											<input class="value line inputText"    type="text" size="30" value="" />
-											<input class="value line inputInteger" type="text" size="30" value="0" />
-											<input class="value line inputDouble"  type="text" size="30" value="0" />
+											<input class="value line" type="text" size="30" value="" />
 										</div>
 									</td>
 									<td class="datacard-eefield-column">

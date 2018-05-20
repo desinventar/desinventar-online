@@ -173,7 +173,7 @@ function onReadyDatacards()
 	});
 
 	// Apply some validation for several types of input fields
-	jQuery('.inputInteger').keydown(function(event) {
+	jQuery('div.Datacard').on('keydown', '.inputInteger', function(event) {
 		return blockChars(event, jQuery(this).val(), 'integer:' + jQuery(this).attr('MaxLength'));
 	});
 
@@ -184,33 +184,20 @@ function onReadyDatacards()
 		}
 	});
 
-	jQuery('.inputDouble').keydown(function(event) {
+	jQuery('div.Datacard').on('keydown', '.inputDouble', function(event) {
 		return blockChars(event, jQuery(this).val(), 'double:' + jQuery(this).attr('MaxLength'));
-	}).blur(function() {
-		if (jQuery.trim(jQuery(this).val()) == '')
-		{
+	}).on('blur', function() {
+		if (jQuery.trim(jQuery(this).val()) == '') {
 			jQuery(this).val(0);
 		}
-		/*
-		var answer = validateInputDouble(jQuery(this).val());
-		if (answer > 0)
-		{
-			jQuery(this).unhighlight();
-		}
-		else
-		{
-			jQuery(this).highlight();
-			jQuery(this).focus();
-		}
-		*/
 		return false;
 	});
 
-	jQuery('.inputText').keydown(function(event) {
+	jQuery('div.Datacard').on('keydown', '.inputText', function(event) {
 		return blockChars(event, jQuery(this).val(), 'text:');
 	});
 
-	jQuery('.inputAlphaNumber').keydown(function(event) {
+	jQuery('div.Datacard').on('keydown', '.inputAlphaNumber', function(event) {
 		return blockChars(event, jQuery(this).val(), 'alphanumber:');
 	});
 
@@ -435,25 +422,31 @@ function doDatacardInitialize()
 		jQuery('span.label' , clone).text(label);
 		jQuery('span.label' , clone).attr('title', tooltip);
 		jQuery('input.value',clone).hide();
-		var className='inputText';
-		switch(type)
-		{
+		var className=''
+		var value = 0
+		switch(type) {
 			case 'INTEGER':
-				className='inputInteger';
+				className='inputInteger'
+				value=0
 			break;
 			case 'CURRENCY':
 			case 'DOUBLE':
-				className='inputDouble';
+				className='inputDouble'
+				value=0
 			break;
 			default:
-				className='inputText';
+				className='inputText'
+				value=''
 			break;
 		}
-		jQuery('input', clone).attr('id', '').attr('name','');
-		jQuery('input.' + className, clone).show();
-		jQuery('input.' + className, clone).attr('id', field);
-		jQuery('input.' + className, clone).attr('name', field).attr('tabindex', 1000 + fieldCount);
-		jQuery('input.' + className, clone).data('helptext', tooltip);
+		jQuery('input', clone)
+			.attr('class', 'value line').addClass(className)
+			.val(value)
+			.attr('id', field)
+			.attr('name', field)
+			.attr('tabindex', 1000 + fieldCount)
+			.data('helptext', tooltip)
+			.show()
 		const column = fieldCount % max_column;
 		jQuery('tr:last td:eq(' + column + ')',effect_list).append(clone);
 		fieldCount++
