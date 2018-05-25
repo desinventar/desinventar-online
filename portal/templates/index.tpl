@@ -111,13 +111,10 @@
 							</table>
 							<!-- References -->
 							<table bgcolor="#CF9D15" border="0" cellpadding="0" cellspacing="0" align="center">
-								<tr><td bgcolor="white">
-									<center>
-										{-include file="logo_isdr.tpl"-}
-										{-include file="logo_siapad.tpl"-}
-										{-include file="logo_gar.tpl"-}
-									</center>
-								</td></tr>
+								<tr>
+									<td bgcolor="white">
+									</td>
+								</tr>
 							</table>
 						</td>
 						<td class="centro">
@@ -179,11 +176,7 @@
 					</tr>
 					<tr>
 						<td colspan="3">
-							<div align="right" style="margin-right:30px;">
-								{-include file="logo_predecan.tpl"-}
-								<br />
-								{-include file="logo_osso.tpl"-}
-							</div>
+							{-include file="portal_footer.tpl"-}
 						</td>
 					</tr>
 				</table>
