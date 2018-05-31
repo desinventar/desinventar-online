@@ -6,7 +6,7 @@ in Latin America, nor in the Andean Sub-region.  From 1994, the creation of
 a common conceptual and methodological framework was begun by groups of
 researchers, academicians, and institutional actors linked to the Network of
 Social Studies in the Prevention of Disasters in Latin America (Red de
-Estudios Sociales en Prevención de Desastres en América Latina - LA RED). 
+Estudios Sociales en Prevención de Desastres en América Latina - LA RED).
 These groups conceptualised a system of acquisition, consultation and
 display of information about disasters of small, medium and greater impact,
 based on pre-existing data, newspaper sources and institutional reports in
@@ -14,7 +14,7 @@ nine countries in Latin America.  The developed conceptualisation,
 methodology and software tool is called Disaster Inventory System -
 DesInventar (Sistema de Inventario de Desastres DesInventar).</p>
 
- 
+
 <p align="justify">The development of DesInventar, with its conception that
 makes visible disasters from a local scale (town or equivalent), facilitates
 dialogue for risk management between actors, institutions, sectors,
@@ -29,4 +29,4 @@ predefined number of consultations) with selection options for search
 criteria.</p>
 
 <p>For more information:</p>
-<a href="http://www.desinventar.org/" target="_blank">DesInventar Website - www.desinventar.org</a>
+<a href="http://www.desinventar.org/" target="_blank" rel="noopener">DesInventar Website - www.desinventar.org</a>

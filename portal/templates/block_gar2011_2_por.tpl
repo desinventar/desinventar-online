@@ -23,6 +23,6 @@ Colômbia, Costa Rica, Equador, México, Peru e Venezuela) e cinco de Ásia
 <p>
 Este relatório
 pode-se consultar no site: <a href="http://www.preventionweb.net"
-target="_blank">http://www.preventionweb.net</a>
+target="_blank" rel="noopener">http://www.preventionweb.net</a>
 </p>
 

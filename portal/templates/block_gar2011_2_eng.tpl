@@ -7,9 +7,9 @@ Salvador, Guatemala, México, Panamá, Perú y Venezuela), seven from Asia
 Lanka) and one from Africa (Mozambique) that were built both by
 governamental and non governamental institutions.</p>
 
-<p>The very first results of this project wered published in 2009 (ISDR,2009), an 
+<p>The very first results of this project wered published in 2009 (ISDR,2009), an
 approach to extensive risk analysis in countries of Latin America (Argentina, Bolivia,
-Colombia, Costa Rica, Ecuador, M&acute;xico, Per&uacute; y Venezuela) and five of Asia 
+Colombia, Costa Rica, Ecuador, M&acute;xico, Per&uacute; y Venezuela) and five of Asia
 (Iran, Nepal, Orissa-India, Tamil Nadu-India y Sri Lanka)</p>
 
-<p>This report can be consulted at <a href="http://www.preventionweb.net" target="_blank">http://www.preventionweb.net</a></p>
+<p>This report can be consulted at <a href="http://www.preventionweb.net" target="_blank" rel="noopener">http://www.preventionweb.net</a></p>

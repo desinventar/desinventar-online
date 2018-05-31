@@ -133,10 +133,10 @@
 										<tr>
 											<td colspan="2" align="right">
 												<div style="float:right;">
-													<a class="regionlink" href="#" target="_blank"><img id="regionbutton" src="{-$desinventarURLPortal-}/images/b_desinventar3.jpg" border="0" alt="" /></a>
+													<a class="regionlink" href="#" target="_blank" rel="noopener"><img id="regionbutton" src="{-$desinventarURLPortal-}/images/b_desinventar3.jpg" border="0" alt="" /></a>
 													<br />
 													<center>
-														<a class="regionlink" href="#" target="_blank">{-#msgRegionOpenDB#-}</a>
+														<a class="regionlink" href="#" target="_blank" rel="noopener">{-#msgRegionOpenDB#-}</a>
 													</center>
 												</div>
 											</td>

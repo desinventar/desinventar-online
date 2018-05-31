@@ -29,15 +29,14 @@ ocasionados por emergencias o desastres.  Incluye:
 	<li>Metodolog&iacute;a (definiciones y ayudas para el manejo de datos)</li>
 	<li>Estructura de base de datos flexible</li>
 	<li>Software para alimentaci&oacute;n de la base de datos</li>
-	<li>Software para consulta de los datos (no limitado a un n&uacute;mero predefinido 
-	de consultas), con opciones de selecci&oacute;n de los criterios de b&uacute;squeda y 
-	presentaci&oacute;n de resultados en diversos consolidados: Mapas, Gr&aacute;ficos, 
+	<li>Software para consulta de los datos (no limitado a un n&uacute;mero predefinido
+	de consultas), con opciones de selecci&oacute;n de los criterios de b&uacute;squeda y
+	presentaci&oacute;n de resultados en diversos consolidados: Mapas, Gr&aacute;ficos,
 	datos</li>
 <ul>
 
-Para m&aacute;s informaci&oacute;n visite: 
-<a href="http://www.desinventar.org/" target="_blank">DesInventar Website - www.desinventar.org</a>
+Para m&aacute;s informaci&oacute;n visite:
+<a href="http://www.desinventar.org/" target="_blank" rel="noopener">DesInventar Website - www.desinventar.org</a>
 
-                
-                
-                
+
+
