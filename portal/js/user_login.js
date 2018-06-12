@@ -13,16 +13,16 @@ me.onReadyUserLogin = () => {
 
   // submit form validation and process..
   jQuery('#frmUserLogin').submit(function() {
-    this.doUserLogin()
+    doUserLogin()
     return false
   })
 
   jQuery('body').on('cmdUserGetInfo', function() {
-    this.doUserGetInfo()
+    doUserGetInfo()
   })
 }
 
-me.doUserGetInfo = () => {
+function doUserGetInfo() {
   jQuery.post(
     jQuery('#desinventarURL').val() + '/',
     {
@@ -47,14 +47,15 @@ me.doUserGetInfo = () => {
   )
 }
 
-me.doUserLogin = () => {
+function doUserLogin() {
   var UserId = jQuery('#fldUserId').val()
   var UserPasswd = jQuery('#fldUserPasswd').val()
   if (UserId == '' || UserPasswd == '') {
     updateUserLoginMsg('#msgEmptyFields')
   } else {
+    const url = jQuery('#desinventarURL').val() + '/'
     jQuery.post(
-      jQuery('#desinventarURL').val() + '/',
+      url,
       {
         cmd: 'cmdUserLogin',
         UserId: UserId,
