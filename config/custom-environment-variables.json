@@ -14,6 +14,11 @@
       "passwd": "TEST_WEB_PASSWD",
       "database": "TEST_WEB_DATABASE"
     },
+    "portal": {
+      "url": "TEST_PORTAL_URL",
+      "username": "TEST_PORTAL_USERNAME",
+      "passwd": "TEST_PORTAL_PASSWD"
+    },
     "api": {
       "url": "TEST_API_URL",
       "username": "TEST_API_USERNAME",

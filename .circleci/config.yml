@@ -9,7 +9,7 @@ jobs:
           command: |
             set -x
             docker-compose -f docker-compose-circleci.yml up -d
-            docker run --network desinventar_default \
+            docker run --network project_default \
               appropriate/curl --retry 30 --retry-delay 2 --retry-connrefused http://web:80/api
       - run:
           name: Running Tests
@@ -20,5 +20,8 @@ jobs:
           command: |
             set -x
             docker build -t desinventar/e2e-test -f docker/e2e-test/Dockerfile . ; \
-            docker run --network desinventar_default \
+            docker run --network project_default \
               desinventar/e2e-test:latest sh -c 'TEST_WEB_URL=http://web:80 make test-e2e'
+            #docker run --network project_default \
+            #--env TEST_PORTAL_URL=http://portal:80 --env TEST_PORTAL_USERNAME=root --env TEST_PORTAL_PASSWD=desinventar \
+            #desinventar/e2e-test:latest sh -c 'make test-portal'

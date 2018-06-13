@@ -42,7 +42,7 @@
     "lint-staged": "^4.3.0",
     "prettier": "^1.8.2",
     "supertest": "^3.0.0",
-    "testcafe": "^0.18.4",
+    "testcafe": "^0.20.3",
     "testcafe-browser-provider-nightmare": "^0.0.5",
     "webpack": "^4.8.3",
     "webpack-cli": "^2.1.3"

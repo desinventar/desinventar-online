@@ -7,3 +7,15 @@ services:
      - "8080:80"
     environment:
       - NODE_ENV=default
+  portal:
+    build:
+      context: ./portal
+      dockerfile: Dockerfile
+    command: bash -c '(/opt/app/portal/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
+    ports:
+      - "8090:80"
+    environment:
+      - DESINVENTAR_MODE
+      - DESINVENTAR_URL
+      - DESINVENTAR_PORTAL_CACHEDIR
+      - TEST_PORTAL_URL

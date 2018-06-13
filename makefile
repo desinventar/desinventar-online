@@ -33,6 +33,9 @@ test-api: .FORCE
 test-e2e: .FORCE
 	./node_modules/.bin/testcafe firefox:headless tests/e2e
 
+test-portal: .FORCE
+	./node_modules/.bin/testcafe firefox:headless tests/portal
+
 lint-php : .FORCE
 	find src api config web tests portal -name "*.php" -exec php -l {} > /dev/null \;
 
