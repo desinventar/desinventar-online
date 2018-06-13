@@ -2,6 +2,11 @@
   "flags": {
     "mode": "DESINVENTAR_FLAGS_MODE"
   },
+  "portal": {
+    "mode": "DESINVENTAR_MODE",
+    "app_url": "DESINVENTAR_URL",
+    "cache_dir": "DESINVENTAR_PORTAL_CACHEDIR"
+  },
   "test": {
     "web": {
       "url": "TEST_WEB_URL",

@@ -39,6 +39,11 @@
     "db_passwd": "",
     "db_dir": "/var/local/desinventar/db"
   },
+  "portal": {
+    "mode": "development",
+    "app_url": "http://web:80",
+    "cache_dir": "/tmp"
+  },
   "test": {
     "web": {
       "url": "http://web:80",

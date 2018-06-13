@@ -38,7 +38,7 @@ $container['logger'] = function () {
 };
 
 
-$app->get('/', function (Request $request, Response $response, array $args) use ($container, $t) {
+$app->get('/', function (Request $request, Response $response, array $args) use ($container, $t, $config) {
     $session = $container['session']->getSegment('');
     $browser = new BrowserLocalization();
     $language = $session->get('language', $container['util']->getLangIsoCode($browser->detect()));

@@ -3,19 +3,13 @@
  DesInventar - http://www.desinventar.org
  (c) Corporacion OSSO
 */
+use \DesInventar\Common\ConfigLoader;
 
 require_once 'constants.php';
-
-$cacheDir = getenv('DESINVENTAR_PORTAL_CACHEDIR');
-if (empty($cacheDir) && isset($_SERVER['DESINVENTAR_PORTAL_CACHEDIR'])) {
-    $cacheDir = $_SERVER['DESINVENTAR_PORTAL_CACHEDIR'];
-}
-if (empty($cacheDir)) {
-    $cacheDir =  '/var/cache/smarty/desinventar/portal';
-}
-
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once BASE . '/include/common.php';
+
+$config = new ConfigLoader(__DIR__ . '/../../config');
 
 // SETTINGS
 date_default_timezone_set('UTC');
@@ -35,7 +29,7 @@ $t = new Smarty();
 $t->debugging       = false;
 $t->config_dir      = $confdir;
 $t->template_dir    = $templatedir;
-$t->compile_dir     = $cacheDir;
+$t->compile_dir     = $config->portal['cache_dir'];
 $t->left_delimiter  = '{-';
 $t->right_delimiter = '-}';
 $t->force_compile   = true;
@@ -73,7 +67,7 @@ $_SESSION['lang'] = $lg;
 
 $t->assign('majorversion', MAJORVERSION);
 $jsVersion = JSVERSION;
-if (getenv('DESINVENTAR_MODE') !== 'production') {
+if ($config->portal['mode'] !== 'production') {
     $jsVersion = JSVERSION . '-' . getUrlSuffix();
 }
 $t->assign('jsversion', $jsVersion);
@@ -81,20 +75,13 @@ $t->assign('lg', $lg);
 $t->assign('lang', $lg);
 
 // Configure DesInventar application location
-$desinventarURL = getenv('DESINVENTAR_URL');
-if (empty($desinventarURL)) {
-    $desinventarURL = substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'], '/'));
-}
-if (isset($_SERVER['REDIRECT_DESINVENTAR_URL'])) {
-    $_SERVER['DESINVENTAR_URL'] = $_SERVER['REDIRECT_DESINVENTAR_URL'];
-}
+$desinventarURL = $config->portal['app_url'];
 if (empty($desinventarURL) && isset($_SERVER['DESINVENTAR_URL'])) {
     $desinventarURL = $_SERVER['DESINVENTAR_URL'];
 }
 if (substr($desinventarURL, strlen($desinventarURL) - 1, 1) == '/') {
     $desinventarURL = substr($desinventarURL, 0, strlen($desinventarURL) - 1);
 }
-
 // Configure (portal) application location
 $desinventarURLPortal = substr($_SERVER['SCRIPT_NAME'], 0, strrpos($_SERVER['SCRIPT_NAME'], '/'));
 // Remove trailing slash in URL
