@@ -5,14 +5,18 @@ STRINGS=interface_strings.xml
 
 .PHONY : all .FORCE
 
-all : databases lang
+all : database lang
 
-databases: base.db core.db desinventar.db
+database: base.db core.db desinventar.db
 
 # Rebuild base.db database
-base.db : base.yaml doc-db.csv event.csv cause.csv
+base.db : create-base update-base
+
+create-base: base.yaml
 	/bin/rm -f base.db && touch base.db
 	sh liquibase.sh -l base.yaml -d sqlite -f base.db -c update
+
+update-base: doc-db.csv event.csv cause.csv
 	php insertEveCau.php event.csv spa EVENT | sqlite3 base.db
 	php insertEveCau.php event.csv eng EVENT | sqlite3 base.db
 	php insertEveCau.php event.csv fre EVENT | sqlite3 base.db

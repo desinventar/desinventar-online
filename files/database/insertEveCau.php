@@ -14,11 +14,18 @@ $FileName = $argv[1];
 $LangIsoCode = $argv[2];
 $TableName   = $argv[3];
 $fh = fopen($FileName, 'r');
+
+// Delete existing records
+$query = 'DELETE FROM ' . $TableName . ' WHERE LangIsoCode="' . $LangIsoCode . '"';
+fwrite(STDOUT, $query . ";\n");
+
 // First line are headers
 $values = fgetcsv($fh, 1000, ',');
+
+// Process lines
 while (! feof($fh)) {
     $values = fgetcsv($fh, 1000, ',');
-    if (count($values) > 1) {
+    if (!empty($values) && count($values) > 1) {
         switch ($LangIsoCode) {
             case 'spa':
                     $i = 5;

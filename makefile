@@ -6,7 +6,7 @@ all : build
 
 devel : build php js
 
-build : composer node-build web-build portal database
+build : composer node-build web-build portal lang
 
 portal: .FORCE
 	if [ -d portal ]; then cd portal && make; fi
@@ -18,7 +18,10 @@ composer-autoload : .FORCE
 	composer dump-autoload --optimize
 
 database: .FORCE
-	cd files/database && make all
+	cd files/database && make database && make update-base
+
+lang: .FORCE
+	cd files/database && make lang
 
 php : standard-php phpmd lint-php
 

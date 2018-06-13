@@ -11,7 +11,7 @@ print "DELETE FROM LabelGroup;" . "\n";
 while (!feof($h)) {
     $a = fgetcsv($h);
     $util = new Util();
-    if ((count($a) <= 1) || ($i === 0)) {
+    if (($i === 0) || (!empty($a) && (count($a) <= 1))) {
         $i++;
         continue;
     }
