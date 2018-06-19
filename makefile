@@ -50,7 +50,7 @@ phpmd: .FORCE
 		-name \*.php -exec ./vendor/bin/phpmd {} text ./files/phpmd/ruleset.xml \;
 
 phpstan: .FORCE
-	docker run --rm -v $(PWD):/app phpstan/phpstan analyse --level 7 /app/src /app/tests
+	docker run --rm -v `pwd`:/app phpstan/phpstan analyse --level 7 /app/src /app/tests /app/api
 
 js : standard-js
 
