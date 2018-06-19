@@ -5,6 +5,7 @@
 */
 use DesInventar\Legacy\DIRegion;
 use DesInventar\Legacy\DIDisaster;
+use DesInventar\Common\Util;
 
 require_once('include/loader.php');
 require_once('include/diregion.class.php');
@@ -112,9 +113,18 @@ if (isset($post['page']) || isset($post['_D+cmd'])) {
             $pin = $pag-1;
             $pgt = $pag;
         }
+        $util = new Util();
         for ($i = $pin; $i < $pgt; $i++) {
             $slim = $sql .' LIMIT ' . $i * $iRecordsPerPage .', '. $iRecordsPerPage;
             $dislist = $us->q->getassoc($slim);
+            foreach ($dislist as $key => $row) {
+                $fieldList = ['EffectNotes', 'DisasterSiteNotes', 'EffectOtherLosses', 'CauseNotes', 'EventNotes'];
+                foreach ($fieldList as $field) {
+                    if (isset($row[$field])) {
+                        $dislist[$key][$field] = $util->removeSpecialChars($row[$field]);
+                    }
+                }
+            }
             $dl = $us->q->printResults($dislist, $export, 'NAME');
             if ($i == $pin && !empty($dl)) {
                 // Translate headers to current interface language

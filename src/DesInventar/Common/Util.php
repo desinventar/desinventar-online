@@ -57,6 +57,8 @@ class Util
     {
         $response = str_replace(['"', "'"], '', $value);
         $response = str_replace(["\r","\n"], " ", $response);
+        $response = str_replace(["\\n\\"], "", $response);
+        $response = preg_replace('/ +/', ' ', $response);
         return $response;
     }
 
