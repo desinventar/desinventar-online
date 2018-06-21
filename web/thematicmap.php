@@ -166,18 +166,6 @@ switch ($cmd) {
         $t->force_compile   = true; # Force this template to always compile
         $t->display('thematicmap.tpl');
         break;
-    case 'getkml':
-        $MapId = getParameter('MAPID', '');
-        if ($MapId != '') {
-            $sFilename = $config-paths['tmp_dir'] . '/map_' . $MapId . '.kml';
-            if (file_exists($sFilename)) {
-                $sOutFilename = 'DesInventar_ThematicMap_' . $MapId . '.kml';
-                header('Content-type: text/kml');
-                header('Content-Disposition: attachment; filename=' . $sOutFilename);
-                echo file_get_contents($sFilename);
-            }
-        }
-        break;
     case 'export':
         // Save image of an already created map
         $options = array_merge($options, $_POST['options']);

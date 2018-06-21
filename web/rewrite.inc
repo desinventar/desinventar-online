@@ -15,7 +15,6 @@ RewriteCond %{REQUEST_URI} ==/mapserver.php
 RewriteRule . - [L]
 
 RewriteRule ^guide/$                          metguide.php [L]
-RewriteRule ^kml/([a-zA-Z0-9\-\._]+)/$        thematicmap.php?cmd=getkml&MAPID=$1 [L]
 RewriteRule ^wms[/]*$                         mapserver.php [L]
 RewriteRule ^wms/worldmap/$                   mapserver.php [L]
 RewriteRule ^wms/([a-zA-Z0-9\-\._]+)/$        mapserver.php?MAPID=$1&LAYERS=effects [QSA,L]

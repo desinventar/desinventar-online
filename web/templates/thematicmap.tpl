@@ -35,7 +35,7 @@
 					</div>
 					<div class="GoogleEarth">
 						<hr />
-						<image src="{-$desinventarURL-}/images/ge_icon.png" /><a href="{-$desinventarURL-}/kml/{-$prmMapId-}/">{-#tgetgearth#-}</a>
+						<image src="{-$desinventarURL-}/images/ge_icon.png" /><a id="kmlLink" href="{-$desinventarURL-}/maps/kml/{-$prmMapId-}/">{-#tgetgearth#-}</a>
 					</div>
 					<hr />
 					<img class="view-map-legend" src="{-$legend-}" /><br />

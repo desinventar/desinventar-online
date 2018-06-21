@@ -89,10 +89,24 @@ $app->map(['GET', 'POST'], '/', function ($request, $response, $args) use ($cont
     return $oldIndex->getResponse('');
 });
 
-$app->group('/common', function () use ($app, $container) {
-    $app->get('/version', function () use ($container) {
-        $version = new Version($container->get('config')->flags['mode']);
-        return $container->get('jsonapi')->data($version->getVersionArray());
+$app->group('/common', function () use ($app) {
+    $app->get('/version', function ($request, $response, $args) {
+        $version = new Version($this->get('config')->flags['mode']);
+        return $this->get('jsonapi')->data($version->getVersionArray());
+    });
+});
+
+$app->group('/maps', function () use ($app) {
+    $app->get('/kml/{mapId}/', function ($request, $response, $args) {
+        $kmlFile = $this->get('config')->paths['tmp_dir'] . '/map_' . $args['mapId'] . '.kml';
+        if (empty($args['mapId']) || !file_exists($kmlFile)) {
+            throw new Exception('Map error', 404);
+        }
+        $sOutFilename = 'DesInventar_ThematicMap_' . $args['mapId'] . '.kml';
+        return $response
+            ->withHeader('Content-type: text/kml')
+            ->withHeader('Content-Disposition: attachment;filename=' . urlencode($sOutFilename))
+            ->write(file_get_contents($kmlFile));
     });
 });
 

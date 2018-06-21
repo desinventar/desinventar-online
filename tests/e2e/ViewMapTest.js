@@ -33,6 +33,7 @@ test('View Map', async t => {
     .expect(Selector('#defaultMapTitle').visible)
     .eql(true)
 
+  // Validate if legend image url loads correctly
   await t
     .expect(Selector('img.view-map-legend').visible)
     .eql(true)
@@ -41,5 +42,13 @@ test('View Map', async t => {
         await Selector('img.view-map-legend').getAttribute('src')
       )
     )
+    .eql(200)
+
+  // Validate KML link
+  const kmlLink = Selector('#kmlLink')
+  await t
+    .expect(kmlLink.visible)
+    .eql(true)
+    .expect(httpStatusForUrl(await kmlLink.getAttribute('href')))
     .eql(200)
 })
