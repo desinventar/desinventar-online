@@ -3,6 +3,7 @@ const request = require('supertest')(config.test.api.url)
 
 describe('Basic API Tests', () => {
   it('should open root', async () => {
+    jest.setTimeout(10000)
     const response = await request.get('/').expect(200)
     expect(response.header['content-type']).toBe('text/html; charset=UTF-8')
   })

@@ -21,6 +21,8 @@ jobs:
             set -x
             docker build -t desinventar/e2e-test -f docker/e2e-test/Dockerfile . ; \
             docker run --network project_default \
+              desinventar/e2e-test:latest sh -c 'TEST_API_URL=http://web:80 make test-api'; \
+            docker run --network project_default \
               desinventar/e2e-test:latest sh -c 'TEST_WEB_URL=http://web:80 make test-e2e'
             #docker run --network project_default \
             #--env TEST_PORTAL_URL=http://portal:80 --env TEST_PORTAL_USERNAME=root --env TEST_PORTAL_PASSWD=desinventar \
