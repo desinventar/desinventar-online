@@ -7,6 +7,8 @@ WORKDIR /opt/app
 
 ADD composer.json /tmp/composer.json
 ADD composer.lock /tmp/composer.lock
+
+RUN composer self-update
 RUN cd /tmp && composer install --no-scripts --no-autoloader --prefer-source --no-interaction
 RUN mkdir -p /opt/app && cp -a /tmp/vendor /opt/app
 

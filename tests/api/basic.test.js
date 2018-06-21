@@ -4,10 +4,7 @@ const request = require('supertest')(config.test.api.url)
 describe('Basic API Tests', () => {
   it('should open root', async () => {
     const response = await request.get('/').expect(200)
-    expect(response.header['content-type']).toBe(
-      'application/json;charset=utf-8'
-    )
-    expect(response.text).toMatchSnapshot()
+    expect(response.header['content-type']).toBe('text/html; charset=UTF-8')
   })
 
   it('should return api version', async () => {
@@ -19,6 +16,6 @@ describe('Basic API Tests', () => {
   })
 
   it('should check error response', async () => {
-    await request.get('non-existent-endpoint').expect(302)
+    await request.get('non-existent-endpoint').expect(404)
   })
 })

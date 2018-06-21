@@ -1,6 +1,6 @@
 <?php
 
-namespace Api\Service;
+namespace DesInventar\Service;
 
 use \Psr\Http\Message\ResponseInterface as Response;
 

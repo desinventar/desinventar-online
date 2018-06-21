@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Basic API Tests should open root 1`] = `"{\\"data\\":{\\"text\\":\\"DesInventar Api Server\\",\\"copyright\\":\\"(c) Corporaci\\\\u00f3n OSSO - 1998 - 2018\\"}}"`;

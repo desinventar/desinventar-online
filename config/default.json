@@ -57,7 +57,7 @@
       "passwd": "desinventar"
     },
     "api": {
-      "url": "http://web:80/api",
+      "url": "http://web:80",
       "username": "root",
       "passwd": "desinventar",
       "database": "BOL-1250695036-bolivia_gran_chaco"

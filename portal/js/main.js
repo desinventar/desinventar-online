@@ -16,9 +16,6 @@ me.init = () => {
     return true
   })
 
-  // Update version number on screen
-  jQuery('#txtVersion').text(jQuery('#desinventarVersion').val())
-
   // Handle clicks on mainpage map
   jQuery('area').click(function() {
     var country = jQuery(this).attr('alt')
@@ -167,17 +164,12 @@ me.init = () => {
     return false
   })
 
-  jQuery.post(
-    jQuery('#desinventarURL').val() + '/',
-    {
-      cmd: 'cmdGetVersion'
-    },
+  jQuery.getJSON(
+    jQuery('#desinventarURL').val() + '/common/version',
+    null,
     function(data) {
-      if (parseInt(data.Status) > 0) {
-        jQuery('#txtVersion').text(data.Version)
-      }
-    },
-    'json'
+      jQuery('#txtVersion').text(data.data.version)
+    }
   )
   //Initialization code
   jQuery('body').trigger('cmdUserGetInfo')

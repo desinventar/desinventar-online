@@ -40,6 +40,8 @@ WORKDIR /opt/app/portal
 
 ADD composer.json /tmp/composer.json
 ADD composer.lock /tmp/composer.lock
+
+RUN composer self-update
 RUN cd /tmp && composer install --no-scripts --no-autoloader --prefer-source --no-interaction
 RUN cp -a /tmp/vendor /opt/app/portal
 

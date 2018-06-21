@@ -10,17 +10,22 @@ RewriteRule ^.*\.inc$ - [F]
 RewriteRule ^.*\.txt$ - [F]
 RewriteRule ^.*\.tpl$ - [F]
 RewriteRule ^.*\.xml$ - [F]
-RewriteRule ^guide/$                          metguide.php
-RewriteRule ^kml/([a-zA-Z0-9\-\._]+)/$        thematicmap.php?cmd=getkml&MAPID=$1
-RewriteRule ^wms[/]*$                         mapserver.php
-RewriteRule ^wms/worldmap/$                   mapserver.php
-RewriteRule ^wms/([a-zA-Z0-9\-\._]+)/$        mapserver.php?MAPID=$1&LAYERS=effects [QSA]
-RewriteRule ^wms/([a-zA-Z0-9\-\._]+)/legend/$ mapserver.php?MAPID=$1&LAYER=effects&REQUEST=getlegendgraphic [QSA]
-RewriteRule ^wms/([a-zA-Z0-9\-\._]+)/(.+)/$   mapserver.php?MAPID=$1&LAYERS=$2 [QSA]
+
+RewriteCond %{REQUEST_URI} ==/mapserver.php
+RewriteRule . - [L]
+
+RewriteRule ^guide/$                          metguide.php [L]
+RewriteRule ^kml/([a-zA-Z0-9\-\._]+)/$        thematicmap.php?cmd=getkml&MAPID=$1 [L]
+RewriteRule ^wms[/]*$                         mapserver.php [L]
+RewriteRule ^wms/worldmap/$                   mapserver.php [L]
+RewriteRule ^wms/([a-zA-Z0-9\-\._]+)/$        mapserver.php?MAPID=$1&LAYERS=effects [QSA,L]
+RewriteRule ^wms/([a-zA-Z0-9\-\._]+)/legend/$ mapserver.php?MAPID=$1&LAYER=effects&REQUEST=getlegendgraphic [QSA,L]
+RewriteRule ^wms/([a-zA-Z0-9\-\._]+)/(.+)/$   mapserver.php?MAPID=$1&LAYERS=$2 [QSA,L]
 RewriteRule ^scripts/(.*)-(.*).js  scripts/$1.js [L]
 RewriteRule ^css/(.*)-(.*).css  css/$1.css [L]
 #
-RewriteRule ^datacards/?$                           index.php?cmd=datacards [QSA]
+RewriteRule ^datacards/?$                           index.php?cmd=datacards [QSA,L]
 RewriteRule ^([a-zA-Z0-9\-_]+)/?$                    #$1 [NC,NE,R=302]
-RewriteRule ^([a-zA-Z0-9\-_]+)/([a-zA-Z0-9\-_]+)/(.*)/?$            index.php?RegionId=$1&cmd=$2&params=$3 [QSA]
+RewriteRule ^([a-zA-Z0-9\-_]+)/([a-zA-Z0-9\-_]+)/(.*)/?$            index.php?RegionId=$1&cmd=$2&params=$3 [QSA,L]
+RewriteRule . index.php [L]
 #

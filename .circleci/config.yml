@@ -10,7 +10,7 @@ jobs:
             set -x
             docker-compose -f docker-compose-circleci.yml up -d
             docker run --network project_default \
-              appropriate/curl --retry 30 --retry-delay 2 --retry-connrefused http://web:80/api
+              appropriate/curl --retry 30 --retry-delay 2 --retry-connrefused http://web:80/common/version
       - run:
           name: Running Tests
           command: |

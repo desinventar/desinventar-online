@@ -40,17 +40,17 @@ test-portal: .FORCE
 	./node_modules/.bin/testcafe firefox:headless tests/portal
 
 lint-php : .FORCE
-	find src api config web tests portal -name "*.php" -exec php -l {} > /dev/null \;
+	find src config web tests portal -name "*.php" -exec php -l {} > /dev/null \;
 
 standard-php : .FORCE
 	./vendor/bin/phpcs .
 
 phpmd: .FORCE
-	find api config files src tests portal/web portal/include \
+	find config files src tests portal/web portal/include \
 		-name \*.php -exec ./vendor/bin/phpmd {} text ./files/phpmd/ruleset.xml \;
 
 phpstan: .FORCE
-	docker run --rm -v `pwd`:/app phpstan/phpstan analyse --level 7 /app/src /app/tests /app/api
+	docker run --rm -v `pwd`:/app phpstan/phpstan analyse --level 7 /app/src /app/tests
 
 js : standard-js
 
