@@ -1,12 +1,13 @@
 import { Selector } from 'testcafe'
 import config, { url } from './helpers/config'
+
 fixture('Portal Page').page(url)
 
 test('Main Page', async t => {
   await t
     .expect(Selector('div#pagemap').exists)
     .ok()
-    .expect(Selector('div#pagemap', { visibilityCheck: true }).visible)
+    .expect(Selector('div#pagemap').visible)
     .ok()
 })
 
@@ -21,9 +22,9 @@ test('User Login/Logout', async t => {
   // Login
   await t
     .click('#linkShowUserLogin')
-    .expect(Selector('#fldUserId', { visibilityCheck: true }).visible)
+    .expect(Selector('#fldUserId').visible)
     .ok()
-    .expect(Selector('#fldUserPasswd', { visibilityCheck: true }).visible)
+    .expect(Selector('#fldUserPasswd').visible)
     .ok()
     .typeText('#fldUserId', config.username, {
       replace: true

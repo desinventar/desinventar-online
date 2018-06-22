@@ -34,8 +34,8 @@ services:
     - DESINVENTAR_CACHEDIR
   portal:
     build:
-      context: ./portal
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./portal/Dockerfile
     command: bash -c '(/opt/app/portal/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
     ports:
       - "8090:80"
