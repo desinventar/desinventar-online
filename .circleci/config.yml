@@ -14,16 +14,22 @@ jobs:
       - run:
           name: Running unit tests
           command: |
-            docker-compose -f docker-compose-circleci.yml exec web sh -c 'make test-unit test-api'
+            docker-compose -f docker-compose-circleci.yml exec web sh -c 'cd tests/unit && ../../vendor/bin/phpunit --testsuite unit --log-junit /tmp/result.xml'
+            mkdir -p /tmp/test-results/unit && docker cp project_web_1:/tmp/result.xml /tmp/test-results/unit/
       - run:
           name: Running portal tests
           command: |
-            docker-compose -f docker-compose-circleci.yml exec test sh -c 'TEST_PORTAL_URL=http://portal:80 TEST_PORTAL_USERNAME=root TEST_PORTAL_PASSWD=desinventar make test-portal'
+            docker-compose -f docker-compose-circleci.yml exec test sh -c 'TEST_PORTAL_URL=http://portal:80 TEST_PORTAL_USERNAME=root TEST_PORTAL_PASSWD=desinventar ./node_modules/.bin/testcafe firefox:headless tests/portal -r xunit:/tmp/result.xml'
+            mkdir -p /tmp/test-results/portal && docker cp project_test_1:/tmp/result.xml /tmp/test-results/portal/
       - run:
           name: Running api tests
           command: |
-            docker-compose -f docker-compose-circleci.yml exec test sh -c 'TEST_API_URL=http://web:80 make test-api'
+            docker-compose -f docker-compose-circleci.yml exec test sh -c 'TEST_API_URL=http://web:80 JEST_JUNIT_OUTPUT=/tmp/result.xml ./node_modules/.bin/jest tests/api --ci --testResultsProcessor="jest-junit"'
+            mkdir -p /tmp/test-results/api && docker cp project_test_1:/tmp/result.xml /tmp/test-results/api/
       - run:
           name: Running e2e tests
           command: |
-            docker-compose -f docker-compose-circleci.yml exec test sh -c 'TEST_WEB_URL=http://web:80 make test-e2e'
+            docker-compose -f docker-compose-circleci.yml exec test sh -c 'TEST_WEB_URL=http://web:80 ./node_modules/.bin/testcafe firefox:headless tests/e2e -r xunit:/tmp/result.xml'
+            mkdir -p /tmp/test-results/e2e && docker cp project_test_1:/tmp/result.xml /tmp/test-results/e2e/
+      - store_test_results:
+          path: /tmp/test-results
