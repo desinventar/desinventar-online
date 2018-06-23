@@ -50,4 +50,13 @@ services:
       - DESINVENTAR_URL
       - DESINVENTAR_PORTAL_CACHEDIR
       - TEST_PORTAL_URL
-
+  test:
+    build:
+      context: .
+      dockerfile: docker/e2e-test/Dockerfile
+    volumes:
+      - .:/opt/app
+      - /opt/app/vendor
+      - /opt/app/node_modules
+      - /opt/app/portal/vendor
+      - /opt/app/portal/node_modules
