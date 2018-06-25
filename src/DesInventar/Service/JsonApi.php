@@ -2,7 +2,7 @@
 
 namespace DesInventar\Service;
 
-use \Psr\Http\Message\ResponseInterface as Response;
+use \Slim\Http\Response as Response;
 
 class JsonApi
 {
