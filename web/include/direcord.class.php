@@ -97,6 +97,7 @@ class DIRecord extends DIObject
                 $sQuery .= '"' . $this->get($sFieldName) . '"';
             }
             if (($sFieldType == 'INTEGER') ||
+                ($sFieldType == 'SECTOR') ||
                 ($sFieldType == 'DOUBLE' ) ||
                 ($sFieldType == 'CURRENCY') ||
                 ($sFieldType == 'BOOLEAN' ) ) {
@@ -151,6 +152,7 @@ class DIRecord extends DIObject
                 $sQueryValues .= '"' . $this->get($sFieldName) . '"';
             }
             if (($sFieldType == 'INTEGER')  ||
+                ($sFieldType == 'SECTOR') ||
                 ($sFieldType == 'FLOAT'   ) ||
                 ($sFieldType == 'DOUBLE'  ) ||
                 ($sFieldType == 'CURRENCY') ||
@@ -200,13 +202,14 @@ class DIRecord extends DIObject
                     ($sFieldType == 'DATE'    ) ) {
                     $sQueryItem .= '"' . $this->get($sFieldName) . '"';
                 } elseif (($sFieldType == 'INTEGER' ) ||
+                        ($sFieldType == 'SECTOR') ||
                         ($sFieldType == 'FLOAT'   ) ||
                         ($sFieldType == 'DOUBLE'  ) ||
                         ($sFieldType == 'BOOLEAN' ) ||
                         ($sFieldType == 'CURRENCY') ) {
                     $sQueryItem .= $this->get($sFieldName);
                 } else {
-                    echo 'Unknown Type : $sFieldType ($sFieldName)<br>';
+                    throw new \Exception('Unknown Type : ' . $sFieldType . '/' . $sFieldName);
                 }
                 $sQuery .= $sQueryItem;
                 $i++;
@@ -220,7 +223,6 @@ class DIRecord extends DIObject
     {
         $iReturn = ERR_DEFAULT_ERROR;
         $query = $this->getSelectQuery();
-        echo $query . "\n";
         $sth = $this->conn->prepare($query);
         try {
             $this->conn->beginTransaction();
@@ -405,7 +407,7 @@ class DIRecord extends DIObject
             $sFieldName = $oItem[0];
             $sFieldType = $oItem[1];
             $quote2 = '"';
-            if ($sFieldType == 'INTEGER') {
+            if (in_array($sFieldType, ['INTEGER', 'SECTOR'])) {
                 $quote2 = '';
             }
             if ($i > 0) {
@@ -420,30 +422,34 @@ class DIRecord extends DIObject
 
     public function validateCreate($bStrict)
     {
-        $iReturn = ERR_NO_ERROR;
         if ($this->status->hasError()) {
-            $iReturn = reset(array_keys($this->status->error));
-        } elseif ($this->status->hasWarning()) {
-            $iReturn = ERR_NO_ERROR;
-            if ($bStrict > 0) {
-                $iReturn = reset(array_keys($this->status->warning));
-            }
+            $errorCodes = array_keys($this->status->error);
+            return reset($errorCodes);
         }
-        return $iReturn;
+        if ($this->status->hasWarning()) {
+            if ($bStrict > 0) {
+                $warningCodes = array_keys($this->status->warning);
+                $iReturn = reset($warningCodes);
+            }
+            return $iReturn;
+        }
+        return ERR_NO_ERROR;
     }
 
     public function validateUpdate($bStrict)
     {
-        $iReturn = ERR_NO_ERROR;
         if ($this->status->hasError()) {
-            $iReturn = reset(array_keys($this->status->error));
-        } elseif ($this->status->hasWarning()) {
-            $iReturn = ERR_NO_ERROR;
+            $errorCodes = array_keys($this->status->error);
+            return reset($errorCodes);
+        }
+
+        if ($this->status->hasWarning()) {
             if ($bStrict > 0) {
-                $iReturn = reset(array_keys($this->status->warning));
+                $warningCodes = array_keys($this->status->warning);
+                $iReturn = reset($warningCodes);
             }
         }
-        return $iReturn;
+        return ERR_NO_ERROR;
     }
 
     public function validateDelete($bStrict)
@@ -456,7 +462,7 @@ class DIRecord extends DIObject
         $iReturn = ERR_NO_ERROR;
         $Value = $this->get($FieldName);
         $FieldType = $this->getType($FieldName);
-        if ($FieldType == 'INTEGER') {
+        if (in_array($FieldType, ['INTEGER', 'SECTOR'])) {
             $Value = (int)$Value;
         } else {
             if ($Value == '') {
@@ -498,7 +504,7 @@ class DIRecord extends DIObject
     {
         $iReturn = ERR_NO_ERROR;
         $quote1 = '"';
-        if ($this->getType($prmFieldName) == 'INTEGER') {
+        if (in_array($this->getType($prmFieldName), ['INTEGER', 'SECTOR'])) {
             $quote1 = '';
         }
         $sQuery = 'SELECT * FROM ' . $this->getTableName() . ' WHERE ' .
@@ -545,7 +551,7 @@ class DIRecord extends DIObject
 
     public function validateRef($ErrCode, $prmFieldName, $TableName, $FieldDst)
     {
-        $quote = $this->getType($prmFieldName) == 'INTEGER' ? '' : '"';
+        $quote = in_array($this->getType($prmFieldName), ['INTEGER', 'SECTOR']) ? '' : '"';
         $Value = $this->get($prmFieldName);
         $sQuery = trim('
             SELECT ' . $FieldDst . '

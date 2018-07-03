@@ -9,11 +9,11 @@ use DesInventar\Common\Util;
 
 class DIDisaster extends DIRecord
 {
-    const EFFECT_SECTOR = 'SectorTransport/INTEGER,SectorCommunications/INTEGER,' .
-        'SectorRelief/INTEGER,SectorAgricultural/INTEGER,SectorWaterSupply/INTEGER,' .
-        'SectorSewerage/INTEGER,SectorEducation/INTEGER,SectorPower/INTEGER,' .
-        'SectorIndustry/INTEGER,SectorHealth/INTEGER,SectorOther/INTEGER';
-    public function __construct($prmSession)
+    const EFFECT_SECTOR = 'SectorTransport/SECTOR,SectorCommunications/SECTOR,' .
+        'SectorRelief/SECTOR,SectorAgricultural/SECTOR,SectorWaterSupply/SECTOR,' .
+        'SectorSewerage/SECTOR,SectorEducation/SECTOR,SectorPower/SECTOR,' .
+        'SectorIndustry/SECTOR,SectorHealth/SECTOR,SectorOther/SECTOR';
+    public function __construct($prmSession, $prmDisasterId)
     {
         $this->sTableName   = 'Disaster';
         $this->sPermPrefix  = 'DISASTER';
@@ -87,9 +87,7 @@ class DIDisaster extends DIRecord
         $this->set('DisasterId', $util->uuid4());
         $this->set('RecordStatus', 'PUBLISHED');
 
-        $num_args = func_num_args();
-        if ($num_args >= 2) {
-            $prmDisasterId = func_get_arg(1);
+        if (!empty($prmDisasterId)) {
             $this->set('DisasterId', $prmDisasterId);
             $this->load();
         }
@@ -230,6 +228,7 @@ class DIDisaster extends DIRecord
                             }
                             break;
                         case 'INTEGER':
+                        case 'SECTOR':
                             if (($this->get($sFieldName) > 0) || ($this->get($sFieldName) == -1)) {
                                 $bFound = 1;
                             }
@@ -391,14 +390,15 @@ class DIDisaster extends DIRecord
         return $iReturn;
     }
 
-    public function findBySerial($prmDisasterSerial)
+    public function findIdBySerial($prmDisasterSerial)
     {
-        $answer = '';
+        $id = '';
         $Query= 'SELECT * FROM Disaster WHERE DisasterSerial="' . $prmDisasterSerial . '"';
         foreach ($this->session->q->dreg->query($Query) as $row) {
-            $answer = $row['DisasterId'];
+            $id = $row['DisasterId'];
+            break;
         }
-        return $answer;
+        return $id;
     }
 
     public static function getEffectSectorFields()
