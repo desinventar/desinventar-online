@@ -28,6 +28,6 @@
   },
   "paths": {
     "tmp_dir": "DESINVENTAR_PATHS_TMP_DIR",
-    "cache_dir": "DESINVENTAR_CACHEDIR"
+    "cache_dir": "DESINVENTAR_PATHS_CACHEDIR"
   }
 }

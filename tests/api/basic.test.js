@@ -17,6 +17,6 @@ describe('Basic API Tests', () => {
   })
 
   it('should check error response', async () => {
-    await request.get('non-existent-endpoint').expect(404)
+    await request.get('/non-existent-endpoint').expect(404)
   })
 })
