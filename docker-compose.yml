@@ -60,3 +60,9 @@ services:
       - /opt/app/node_modules
       - /opt/app/portal/vendor
       - /opt/app/portal/node_modules
+  liquibase:
+    build:
+      context: .
+      dockerfile: docker/liquibase/Dockerfile
+    volumes:
+      - .:/opt/app
