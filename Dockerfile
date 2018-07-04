@@ -51,20 +51,20 @@ RUN make database
 
 RUN mkdir -p /var/local/desinventar/db/main/ && \
     cp files/database/{core.db,base.db,desinventar.db} /var/local/desinventar/db/main/ && \
-    chown -R apache:apache /var/local/desinventar/db
+    chown -R www-data:apache /var/local/desinventar/db
 RUN mkdir -p /var/local/desinventar/worldmap && \
     unzip -o files/worldmap/world_adm0.zip -d /var/local/desinventar/worldmap && \
     cp files/worldmap/world_adm0.map /var/local/desinventar/worldmap/ && \
-    chown -R apache:apache /var/local/desinventar/worldmap
+    chown -R www-data:apache /var/local/desinventar/worldmap
 RUN mkdir -p /var/local/desinventar/db/database && \
-    chown -R apache:apache /var/local/desinventar/db/database
+    chown -R www-data:apache /var/local/desinventar/db/database
 RUN mkdir -p /var/local/desinventar/tmp/{data,graphs,maps} && \
-    chown -R apache:apache /var/local/desinventar/tmp
+    chown -R www-data:apache /var/local/desinventar/tmp
 
 COPY files/seed/seed.tar.gz /tmp
 RUN cd /var/local/desinventar/db && \
     tar -zxf /tmp/seed.tar.gz && \
-    chown -R apache:apache /var/local/desinventar/db
+    chown -R www-data:apache /var/local/desinventar/db
 
 ENV PATH="~/.composer/vendor/bin:./vendor/bin:/opt/app/vendor/bin:${PATH}"
 
