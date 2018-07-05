@@ -1,4 +1,8 @@
 {
+  "maps": {
+    "tmp_dir": "DESINVENTAR_MAPS_TMP_DIR",
+    "fonts_dir": "DESINVENTAR_MAPS_FONTS_DIR"
+  },
   "flags": {
     "mode": "DESINVENTAR_FLAGS_MODE"
   },

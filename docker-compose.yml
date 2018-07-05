@@ -11,9 +11,9 @@ services:
       - /opt/app/portal/vendor
       - /opt/app/portal/node_modules
     environment:
-    - DESINVENTAR_FLAGS_MODE
-    - DESINVENTAR_MODE
-    - DESINVENTAR_PATHS_CACHEDIR
+      - DESINVENTAR_FLAGS_MODE
+      - DESINVENTAR_MODE
+      - DESINVENTAR_PATHS_CACHEDIR
   devel:
     build: .
     command: bash -c '(/opt/app/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
@@ -29,9 +29,9 @@ services:
       - /opt/app/portal/node_modules
       - /var/local/desinventar:/var/local/desinventar
     environment:
-    - DESINVENTAR_FLAGS_MODE
-    - DESINVENTAR_MODE
-    - DESINVENTAR_PATHS_CACHEDIR
+      - DESINVENTAR_FLAGS_MODE
+      - DESINVENTAR_MODE
+      - DESINVENTAR_PATHS_CACHEDIR
   portal:
     build:
       context: .
@@ -92,3 +92,13 @@ services:
       - /var/local/desinventar:/var/local/desinventar
     environment:
       - DESINVENTAR_PATHS_CACHEDIR
+      - DESINVENTAR_MAPS_FONTS_DIR=/usr/share/fonts/truetype/liberation/fonts.txt
+  mapserver:
+    build:
+      context: .
+      dockerfile: docker/mapserver/Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - /var/local/desinventar:/var/local/desinventar
+
