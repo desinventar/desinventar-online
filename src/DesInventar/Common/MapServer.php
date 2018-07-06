@@ -75,6 +75,7 @@ class MapServer
         if (! $util->isSslConnection() && (isset($_SERVER[self::SERVER_PORT]) && ($_SERVER[self::SERVER_PORT] != 80))) {
             return $url . ':' . $_SERVER[self::SERVER_PORT] . $suffix;
         }
+        return $url . ':80' . $suffix;
     }
 
     public function getMapServerUrl($queryString)
