@@ -47,9 +47,14 @@ $container['util'] = function ($container) {
     return new Util();
 };
 
-$container['logger'] = function () {
+$container['config'] = function ($c) use ($config) {
+    return $config;
+};
+
+$container['logger'] = function ($c) {
+    $loggerConfig = $c['config']->logger;
     $logger = new Logger('logger');
-    $logger->pushHandler(new StreamHandler('php://stderr'));
+    $logger->pushHandler(new StreamHandler($loggerConfig['file'], $loggerConfig['level']));
     $logger->pushHandler(new ErrorLogHandler(ErrorLogHandler::OPERATING_SYSTEM, Logger::WARNING));
     return $logger;
 };
@@ -62,10 +67,6 @@ $container['oldindex'] = function () use ($settings) {
         $settings['config']
     );
     return $oldIndex;
-};
-
-$container['config'] = function ($c) use ($config) {
-    return $config;
 };
 
 $container['jsonapi'] = function ($c) {

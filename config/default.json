@@ -29,7 +29,7 @@
   },
   "logger": {
     "file": "php://stdout",
-    "level": 100
+    "level": 200
   },
   "database": {
     "driver": "sqlite",
