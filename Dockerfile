@@ -43,10 +43,10 @@ RUN cd /usr/local/liquibase && wget -q https://dev.mysql.com/get/Downloads/Conne
     mv mysql-connector-java-5.1.46/mysql-connector-java-5.1.46.jar ./liquibase-mysql-connector-java-5.1.46.jar
 
 COPY . /opt/app
-RUN mkdir -p /opt/app && cp -a /tmp/vendor /opt/app
-RUN mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app
+RUN mkdir -p /opt/app && cp -a /tmp/vendor /opt/app && composer install
+RUN mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app && yarn
 
-RUN make devel
+RUN make devel-app
 RUN make database
 
 RUN mkdir -p /var/local/desinventar/db/main/ && \
@@ -65,6 +65,8 @@ COPY files/seed/seed.tar.gz /tmp
 RUN cd /var/local/desinventar/db && \
     tar -zxf /tmp/seed.tar.gz && \
     chown -R www-data:apache /var/local/desinventar/db
+
+RUN chown -R www-data:apache /var/local/desinventar
 
 ENV PATH="~/.composer/vendor/bin:./vendor/bin:/opt/app/vendor/bin:${PATH}"
 

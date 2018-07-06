@@ -28,5 +28,4 @@ RUN composer self-update
 RUN cd /tmp && composer install --no-scripts --no-autoloader --prefer-source --no-interaction
 
 COPY . /opt/app
-RUN mkdir -p /opt/app && cp -a /tmp/vendor /opt/app
-RUN composer install
+RUN mkdir -p /opt/app && cp -a /tmp/vendor /opt/app && composer install

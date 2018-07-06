@@ -4,9 +4,13 @@
 
 all : build
 
+devel-app: build-app php js
+
 devel : build php js
 
-build : composer node-build web-build portal lang
+build-app: composer node-build web-build lang
+
+build : build-app portal
 
 portal: .FORCE
 	if [ -d portal ]; then cd portal && make; fi
@@ -25,16 +29,18 @@ lang: .FORCE
 
 php : standard-php phpmd lint-php
 
-test : test-unit
+test : test-unit test-api
 
 test-unit: .FORCE
 	cd tests/unit && ../../vendor/bin/phpunit --testsuite unit $(TEST)
 
 test-api: .FORCE
-	./node_modules/.bin/jest tests/api
+	TEST_API_URL=http://localhost:8080 ./node_modules/.bin/jest tests/api
+	TEST_API_URL=http://localhost:8081 ./node_modules/.bin/jest tests/api
+	TEST_API_URL=http://localhost:8082 ./node_modules/.bin/jest tests/api
 
 test-e2e: .FORCE
-	./node_modules/.bin/testcafe firefox:headless tests/e2e
+	TEST_WEB_URL=http://localhost:8080 ./node_modules/.bin/testcafe firefox:headless tests/e2e
 
 test-portal: .FORCE
 	./node_modules/.bin/testcafe firefox:headless tests/portal

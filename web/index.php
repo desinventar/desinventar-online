@@ -16,6 +16,9 @@ use DesInventar\Common\Util;
 use DesInventar\Common\Version;
 use DesInventar\Common\ConfigLoader;
 
+use Api\Controllers\CommonController;
+use Api\Controllers\MapsController;
+
 require_once('include/loader.php');
 require_once('include/diregion.class.php');
 require_once('include/diregiondb.class.php');
@@ -84,30 +87,25 @@ $container['errorHandler'] = function ($container) {
     };
 };
 
+$container['CommonController'] = function ($c) {
+    return new CommonController($c);
+};
+
+$container['MapsController'] = function ($c) {
+    return new MapsController($c);
+};
+
 $app->map(['GET', 'POST'], '/', function ($request, $response, $args) use ($container) {
     $oldIndex = $container['oldindex'];
     return $oldIndex->getResponse('');
 });
 
 $app->group('/common', function () use ($app) {
-    $app->get('/version', function ($request, $response, $args) {
-        $version = new Version($this->get('config')->flags['mode']);
-        return $this->get('jsonapi')->data($version->getVersionArray());
-    });
+    $app->get('/version', 'CommonController:version');
 });
 
 $app->group('/maps', function () use ($app) {
-    $app->get('/kml/{mapId}/', function ($request, $response, $args) {
-        $kmlFile = $this->get('config')->paths['tmp_dir'] . '/map_' . $args['mapId'] . '.kml';
-        if (empty($args['mapId']) || !file_exists($kmlFile)) {
-            throw new Exception('Map error', 404);
-        }
-        $sOutFilename = 'DesInventar_ThematicMap_' . $args['mapId'] . '.kml';
-        return $response
-            ->withHeader('Content-type: text/kml')
-            ->withHeader('Content-Disposition: attachment;filename=' . urlencode($sOutFilename))
-            ->write(file_get_contents($kmlFile));
-    });
+    $app->get('/kml/{mapId}/', 'MapsController:getKml');
 });
 
 $app->run();
