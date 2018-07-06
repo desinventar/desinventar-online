@@ -44,6 +44,9 @@ class Version
     public function getUrlSuffix()
     {
         $cmd = '/usr/bin/git';
+        if (!file_exists($cmd)) {
+            return time();
+        }
         $output = shell_exec(sprintf("which %s", escapeshellarg($cmd)));
         if (empty($output)) {
             return time();

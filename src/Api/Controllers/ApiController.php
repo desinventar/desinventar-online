@@ -20,7 +20,7 @@ class ApiController
 
     protected function logResponse($response)
     {
-        $this->logger->debug($response->getStatus());
+        $this->logger->debug($response->getStatusCode());
     }
 
     protected function logArgs($args)
