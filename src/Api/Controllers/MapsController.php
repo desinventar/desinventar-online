@@ -13,8 +13,8 @@ class MapsController extends ApiController
         }
         $sOutFilename = 'DesInventar_ThematicMap_' . $args['mapId'] . '.kml';
         return $response
-            ->withHeader('Content-type: text/kml')
-            ->withHeader('Content-Disposition: attachment;filename=' . urlencode($sOutFilename))
+            ->withHeader('Content-type', 'application/vnd.google-earth.kml+xml')
+            ->withHeader('Content-Disposition', 'attachment;filename=' . basename($sOutFilename))
             ->write(file_get_contents($kmlFile));
     }
 }
