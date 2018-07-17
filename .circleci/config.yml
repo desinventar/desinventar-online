@@ -14,7 +14,7 @@ jobs:
       - run:
           name: Running unit tests
           command: |
-            docker-compose exec web sh -c 'cd tests/unit && ../../vendor/bin/phpunit --testsuite unit --log-junit /tmp/result.xml'
+            docker-compose exec web sh -c './vendor/bin/phpunit --log-junit /tmp/result.xml'
             mkdir -p /tmp/test-results/unit && docker cp project_web_1:/tmp/result.xml /tmp/test-results/unit/
       - run:
           name: Running portal tests
