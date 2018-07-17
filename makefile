@@ -32,7 +32,7 @@ php : standard-php phpmd lint-php
 test : test-unit test-api
 
 test-unit: .FORCE
-	cd tests/unit && ../../vendor/bin/phpunit --testsuite unit $(TEST)
+	./vendor/bin/phpunit
 
 test-api: .FORCE
 	TEST_API_URL=http://localhost:8080 ./node_modules/.bin/jest tests/api

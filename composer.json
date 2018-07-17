@@ -36,12 +36,12 @@
     }
   ],
   "autoload": {
-    "psr-0": {
+    "psr-4": {
       "DesInventar\\": [
-        "src"
+        "src/DesInventar"
       ],
       "Api\\": [
-        "src"
+        "src/Api"
       ],
       "UnitTest\\": [
         "tests/unit"
