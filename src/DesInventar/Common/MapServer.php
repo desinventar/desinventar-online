@@ -86,8 +86,10 @@ class MapServer
 
     public function hex2dec($prmColor)
     {
-        $oHex = str_split(substr($prmColor, -6), 2);
-        return hexdec($oHex[0]) . ' ' . hexdec($oHex[1]) . ' ' . hexdec($oHex[2]);
+        $prmColor = substr($prmColor, -6);
+        return hexdec(substr($prmColor, 0, 2)) . ' ' .
+            hexdec(substr($prmColor, 2, 2)) . ' ' .
+            hexdec(substr($prmColor, 4, 2));
     }
 
     // set hash with limits, legends and colors
