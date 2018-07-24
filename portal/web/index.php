@@ -4,8 +4,9 @@
  * (c) Corporación OSSO
  */
 
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
+// use Psr\Http\Message\ServerRequestInterface as Request;
+use \Slim\Http\Request as Request;
+use \Slim\Http\Response as Response;
 use Aura\Session\SessionFactory;
 use koenster\PHPLanguageDetection\BrowserLocalization;
 use Monolog\Logger;
@@ -15,8 +16,6 @@ use Monolog\Handler\ErrorLogHandler;
 use DesInventar\Common\Util;
 
 require_once('../include/loader.php');
-$portaltype = getParameter('portaltype', 'desinventar');
-$t->assign('desinventarPortalType', $portaltype);
 
 $app = new \Slim\App;
 
@@ -37,21 +36,23 @@ $container['logger'] = function () {
     return $logger;
 };
 
+$app->get('/', function (Request $request, Response $response, array $args) use ($container, $t) {
+    $portaltype = $request->getParam('portaltype', 'desinventar');
+    $t->assign('desinventarPortalType', $portaltype);
 
-$app->get('/', function (Request $request, Response $response, array $args) use ($container, $t, $config) {
-    $session = $container['session']->getSegment('');
+    $session = $container->get('session')->getSegment('');
     $browser = new BrowserLocalization();
-    $language = $session->get('language', $container['util']->getLangIsoCode($browser->detect()));
+    $language = $session->get('language', $container->get('util')->getLangIsoCode($browser->detect()));
     $t->assign('lang', $language);
     $response->getBody()->write($t->fetch('index.tpl'));
     return $response;
 });
 
 $app->post('/change-language', function (Request $request, Response $response) use ($container) {
-    $logger = $container['logger'];
+    $logger = $container->get('logger');
     $body = $request->getParsedBody();
     $language = $body['language'];
-    $session = $container['session']->getSegment('');
+    $session = $container->get('session')->getSegment('');
     $session->set('language', $language);
     return $response->withJson([]);
 });
