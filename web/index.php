@@ -25,7 +25,6 @@ require_once('include/diregiondb.class.php');
 require_once('include/diregionrecord.class.php');
 require_once('include/geography_operations.php');
 require_once('include/database_operations.php');
-require_once('include/query_operations.php');
 
 require_once('LegacyIndex.php');
 

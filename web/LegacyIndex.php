@@ -15,6 +15,7 @@ use \DesInventar\Legacy\DIGeoLevel;
 use \DesInventar\Legacy\DIProfile;
 use DesInventar\Common\Version;
 use DesInventar\Common\Util;
+use DesInventar\Common\QueryOperations;
 
 use \qqFileUploader;
 use \ZipArchive;
@@ -1194,14 +1195,15 @@ class LegacyIndex
                 $xml_string = file_get_contents($xml_filename);
 
                 // Attempt to read as 1.0 query version (malformed XML)
-                $iReturn = query_is_v1($xml_string);
+                $query = new QueryOperations();
+                $iReturn = $query->isV1($xml_string);
                 if ($iReturn > 0) {
-                    $diquery = query_read_v1($xml_string);
+                    $diquery = $query->readV1($xml_string);
                 } else {
-                    $iReturn = query_is_v2($xml_string);
+                    $iReturn = $query->isV2($xml_string);
                     if ($iReturn > 0) {
-                        $query = query_convert_v2_to_v1($xml_string);
-                        $qd  = $us->q->genSQLWhereDesconsultar($query);
+                        $queryObj = $query->convertV2toV1($xml_string);
+                        $qd  = $us->q->genSQLWhereDesconsultar($queryObj);
                         $sqc = $us->q->genSQLSelectCount($qd);
                         $c   = $us->q->getresult($sqc);
                         $iNumberOfRecords = $c['counter'];
