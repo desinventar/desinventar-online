@@ -16,6 +16,9 @@ use \DesInventar\Legacy\DIProfile;
 use DesInventar\Common\Version;
 use DesInventar\Common\Util;
 
+use \qqFileUploader;
+use \ZipArchive;
+
 class LegacyIndex
 {
     public function __construct($template, $session, $language, $config)
@@ -869,7 +872,8 @@ class LegacyIndex
                         $us,
                         $RegionId,
                         $RegionLabel,
-                        getParameter('Filename', '')
+                        getParameter('Filename', ''),
+                        $config->paths['tmp_dir']
                     );
                 }
                 if ($iReturn > 0) {
