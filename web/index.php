@@ -860,7 +860,8 @@ switch ($cmd) {
                 $us,
                 $RegionId,
                 $RegionLabel,
-                getParameter('Filename', '')
+                getParameter('Filename', ''),
+                $config->paths['tmp_dir']
             );
         }
         if ($iReturn > 0) {
