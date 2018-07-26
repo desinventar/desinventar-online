@@ -975,7 +975,7 @@ class UserSession
             $query .= 'RegionStatus=3';
             $Role = 'NONE';
         } else {
-            $query .= 'RegionStatus>0';
+            $query .= 'RegionStatus>=0';
             $Role = 'ADMINREGION';
         }
 

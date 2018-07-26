@@ -366,6 +366,7 @@ class LegacyIndex
                 }
                 if ($iReturn > 0) {
                     $r = new DIRegion($us, $RegionId);
+                    $r->update();
                     $info = [
                         'RegionStatus' => $r->get('RegionStatus'),
                         'RegionOrder' => $r->get('RegionOrder')
