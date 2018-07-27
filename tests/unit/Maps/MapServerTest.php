@@ -24,4 +24,10 @@ final class MapServerTest extends TestCase
             $this->assertEquals($ranges[$index + 1][1], $label);
         }
     }
+
+    public function testHex2dec()
+    {
+        $mapserver = new MapServer([]);
+        $this->assertEquals('0 17 34', $mapserver->hex2dec('001122'));
+    }
 }

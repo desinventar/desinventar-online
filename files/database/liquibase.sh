@@ -22,5 +22,4 @@ OPTS="--logLevel=warning --changeLogFile=${CHANGELOG} --url=jdbc:${DATABASE}:${F
 
 #EXEC="docker run -it -v `pwd`:/opt/app desinventar/liquibase bash -c \"liquibase ${OPTS}\""
 EXEC="liquibase ${OPTS}"
-echo ${EXEC}
 bash -c "${EXEC}"

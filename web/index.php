@@ -16,13 +16,15 @@ use DesInventar\Common\Util;
 use DesInventar\Common\Version;
 use DesInventar\Common\ConfigLoader;
 
+use Api\Controllers\CommonController;
+use Api\Controllers\MapsController;
+
 require_once('include/loader.php');
 require_once('include/diregion.class.php');
 require_once('include/diregiondb.class.php');
 require_once('include/diregionrecord.class.php');
 require_once('include/geography_operations.php');
 require_once('include/database_operations.php');
-require_once('include/query_operations.php');
 
 require_once('LegacyIndex.php');
 
@@ -44,9 +46,14 @@ $container['util'] = function ($container) {
     return new Util();
 };
 
-$container['logger'] = function () {
+$container['config'] = function ($c) use ($config) {
+    return $config;
+};
+
+$container['logger'] = function ($c) {
+    $loggerConfig = $c['config']->logger;
     $logger = new Logger('logger');
-    $logger->pushHandler(new StreamHandler('php://stderr'));
+    $logger->pushHandler(new StreamHandler($loggerConfig['file'], $loggerConfig['level']));
     $logger->pushHandler(new ErrorLogHandler(ErrorLogHandler::OPERATING_SYSTEM, Logger::WARNING));
     return $logger;
 };
@@ -59,10 +66,6 @@ $container['oldindex'] = function () use ($settings) {
         $settings['config']
     );
     return $oldIndex;
-};
-
-$container['config'] = function ($c) use ($config) {
-    return $config;
 };
 
 $container['jsonapi'] = function ($c) {
@@ -84,30 +87,25 @@ $container['errorHandler'] = function ($container) {
     };
 };
 
+$container['CommonController'] = function ($c) {
+    return new CommonController($c);
+};
+
+$container['MapsController'] = function ($c) {
+    return new MapsController($c);
+};
+
 $app->map(['GET', 'POST'], '/', function ($request, $response, $args) use ($container) {
     $oldIndex = $container['oldindex'];
     return $oldIndex->getResponse('');
 });
 
 $app->group('/common', function () use ($app) {
-    $app->get('/version', function ($request, $response, $args) {
-        $version = new Version($this->get('config')->flags['mode']);
-        return $this->get('jsonapi')->data($version->getVersionArray());
-    });
+    $app->get('/version', 'CommonController:version');
 });
 
 $app->group('/maps', function () use ($app) {
-    $app->get('/kml/{mapId}/', function ($request, $response, $args) {
-        $kmlFile = $this->get('config')->paths['tmp_dir'] . '/map_' . $args['mapId'] . '.kml';
-        if (empty($args['mapId']) || !file_exists($kmlFile)) {
-            throw new Exception('Map error', 404);
-        }
-        $sOutFilename = 'DesInventar_ThematicMap_' . $args['mapId'] . '.kml';
-        return $response
-            ->withHeader('Content-type: text/kml')
-            ->withHeader('Content-Disposition: attachment;filename=' . urlencode($sOutFilename))
-            ->write(file_get_contents($kmlFile));
-    });
+    $app->get('/kml/{mapId}/', 'MapsController:getKml');
 });
 
 $app->run();

@@ -8,22 +8,28 @@ jobs:
           name: Start container and verify it's working
           command: |
             set -x
-            docker-compose -f docker-compose-circleci.yml up -d
+            docker-compose up -d
             docker run --network project_default \
               appropriate/curl --retry 30 --retry-delay 2 --retry-connrefused http://web:80/common/version
       - run:
-          name: Running Tests
+          name: Running unit tests
           command: |
-            docker-compose -f docker-compose-circleci.yml exec web sh -c 'make test-unit test-api'
+            docker-compose exec web sh -c './vendor/bin/phpunit --log-junit /tmp/result.xml'
+            mkdir -p /tmp/test-results/unit && docker cp project_web_1:/tmp/result.xml /tmp/test-results/unit/
       - run:
-          name: Running e2e Tests
+          name: Running portal tests
           command: |
-            set -x
-            docker build -t desinventar/e2e-test -f docker/e2e-test/Dockerfile . ; \
-            docker run --network project_default \
-              desinventar/e2e-test:latest sh -c 'TEST_API_URL=http://web:80 make test-api'; \
-            docker run --network project_default \
-              desinventar/e2e-test:latest sh -c 'TEST_WEB_URL=http://web:80 make test-e2e'
-            #docker run --network project_default \
-            #--env TEST_PORTAL_URL=http://portal:80 --env TEST_PORTAL_USERNAME=root --env TEST_PORTAL_PASSWD=desinventar \
-            #desinventar/e2e-test:latest sh -c 'make test-portal'
+            docker-compose exec test sh -c 'TEST_PORTAL_URL=http://portal:80 TEST_PORTAL_USERNAME=root TEST_PORTAL_PASSWD=desinventar ./node_modules/.bin/testcafe firefox:headless tests/portal -r xunit:/tmp/result.xml'
+            mkdir -p /tmp/test-results/portal && docker cp project_test_1:/tmp/result.xml /tmp/test-results/portal/
+      - run:
+          name: Running api tests
+          command: |
+            docker-compose exec test sh -c 'TEST_API_URL=http://web:80 JEST_JUNIT_OUTPUT=/tmp/result.xml ./node_modules/.bin/jest tests/api --ci --testResultsProcessor="jest-junit"'
+            mkdir -p /tmp/test-results/api && docker cp project_test_1:/tmp/result.xml /tmp/test-results/api/
+      - run:
+          name: Running e2e tests
+          command: |
+            docker-compose exec test sh -c 'TEST_WEB_URL=http://web:80 ./node_modules/.bin/testcafe firefox:headless tests/e2e -r xunit:/tmp/result.xml'
+            mkdir -p /tmp/test-results/e2e && docker cp project_test_1:/tmp/result.xml /tmp/test-results/e2e/
+      - store_test_results:
+          path: /tmp/test-results

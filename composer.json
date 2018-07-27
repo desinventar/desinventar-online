@@ -10,7 +10,8 @@
     "slim/slim": "^3.0",
     "pimple/pimple": "~3.0",
     "ramsey/uuid": "^3.7",
-    "aura/session": "^2.1"
+    "aura/session": "^2.1",
+    "fostam/getopts": "^1.1"
   },
   "require-dev": {
     "ccampbell/chromephp": "^4.1",
@@ -35,12 +36,12 @@
     }
   ],
   "autoload": {
-    "psr-0": {
+    "psr-4": {
       "DesInventar\\": [
-        "src"
+        "src/DesInventar"
       ],
       "Api\\": [
-        "api/src"
+        "src/Api"
       ],
       "UnitTest\\": [
         "tests/unit"

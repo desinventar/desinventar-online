@@ -44,8 +44,8 @@ if (isset($_SERVER['HTTP_HOST'])) {
         if (empty($_SERVER['DESINVENTAR_DATADIR'])) {
             $_SERVER['DESINVENTAR_DATADIR'] = $Install_Dir . '/data';
         }
-        if (empty($_SERVER['DESINVENTAR_CACHEDIR'])) {
-            $_SERVER['DESINVENTAR_CACHEDIR'] = $Install_Dir . '/tmp';
+        if (empty($_SERVER['DESINVENTAR_PATHS_CACHEDIR'])) {
+            $_SERVER['DESINVENTAR_PATHS_CACHEDIR'] = $Install_Dir . '/tmp';
         }
         if (!empty($_SERVER['REDIRECT_DESINVENTAR_MODE'])) {
             $_SERVER['DESINVENTAR_MODE'] = $_SERVER['REDIRECT_DESINVENTAR_MODE'];

@@ -1,0 +1,12 @@
+arial                           LiberationSans-Regular.ttf
+arial-bold						LiberationSans-Bold.ttf
+arial-italic					LiberationSans-Italic.ttf
+arial-bolditalic				LiberationSans-BoldItalic.ttf
+courier                         LiberationMono-Regular.ttf
+courier-bold                    LiberationMono-Bold.ttf
+courier-italic                  LiberationMono-Italic.ttf
+courier-bolditalic              LiberationMono-BoldItalic.ttf
+times                           LiberationSerif-Regular.ttf
+times-bold                      LiberationSerif-Bold.ttf
+times-italic                    LiberationSerif-Italic.ttf
+times-bolditalic                LiberationSerif-BoldItalic.ttf

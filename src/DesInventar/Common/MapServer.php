@@ -60,11 +60,11 @@ class MapServer
         return $queryString . '&mde=map';
     }
 
-    public function getMapServerUrl($queryString)
+    public function getBaseMapServerUrl()
     {
         // This is a call to mapserver through cgi-bin from inside the host
         $url = 'http://127.0.0.1';
-        $suffix = '/cgi-bin/' . $this->config->maps['mapserver'] . '?' . $queryString;
+        $suffix = '/cgi-bin/' . $this->config->maps['mapserver'];
         if (file_exists('/.dockerenv')) {
             // We are running inside a docker container, we have to assume the
             // local port is 80
@@ -75,13 +75,21 @@ class MapServer
         if (! $util->isSslConnection() && (isset($_SERVER[self::SERVER_PORT]) && ($_SERVER[self::SERVER_PORT] != 80))) {
             return $url . ':' . $_SERVER[self::SERVER_PORT] . $suffix;
         }
-        return $url . '/cgi-bin/' . $this->config->maps['mapserver'] . '?' . $queryString;
+        return $url . ':80' . $suffix;
+    }
+
+    public function getMapServerUrl($queryString)
+    {
+        $url = $this->getBaseMapServerUrl();
+        return $url . '?' . $queryString;
     }
 
     public function hex2dec($prmColor)
     {
-        $oHex = str_split(substr($prmColor, -6), 2);
-        return hexdec($oHex[0]) . ' ' . hexdec($oHex[1]) . ' ' . hexdec($oHex[2]);
+        $prmColor = substr($prmColor, -6);
+        return hexdec(substr($prmColor, 0, 2)) . ' ' .
+            hexdec(substr($prmColor, 2, 2)) . ' ' .
+            hexdec(substr($prmColor, 4, 2));
     }
 
     // set hash with limits, legends and colors
@@ -93,7 +101,7 @@ class MapServer
         $lmx = '10000000';
         $maxr = false;
         // First range is No data
-        $range[0] = [0, '= 0', '255 255 255'];
+        $range = [0 => [0, '= 0', '255 255 255']];
         // generate range hash with limit, legend and color
         for ($j = 0; $j < count($lim); $j++) {
             if (! isset($lim[$j])) {

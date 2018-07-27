@@ -4681,12 +4681,6 @@
       <Text LangIsoCode="por">Vanuatu</Text>
       <Text LangIsoCode="fre">Vanuatu</Text>
     </Message>
-    <Message id="msgRegionUSAFL">
-      <Text LangIsoCode="eng">Florida; USA</Text>
-      <Text LangIsoCode="spa">Florida; EE.UU.</Text>
-      <Text LangIsoCode="por">Flórida; EUA</Text>
-      <Text LangIsoCode="fre">Floride; USA</Text>
-    </Message>
     <Message id="txtVersion">
       <Text LangIsoCode="eng">Version</Text>
       <Text LangIsoCode="spa">Versión</Text>

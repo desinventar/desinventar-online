@@ -7,10 +7,77 @@ namespace DesInventar\Legacy;
 
 class DIImport
 {
-    public function __construct($prmSessionId)
+    protected $fields = [];
+    protected $event = [];
+    protected $cause = [];
+    protected $geography = [];
+    protected $values = [];
+    protected $defaultParams = [
+        'headerCount' => 3,
+        'offset' => 0,
+        'lineCount' => 1000000,
+        'geography' => [],
+        'event' => [],
+        'cause' => [],
+        'values' => [],
+        'fields' => []
+    ];
+
+    public function __construct($prmSessionId, $fileName)
     {
-        $this->us = $prmSessionId;
-        $this->q = new Query($this->us->RegionId);
+        $this->session = $prmSessionId;
+        if (!empty($fileName) && file_exists($fileName)) {
+            $this->loadParamsFromFile($fileName);
+        }
+    }
+
+    public function loadParamsFromFile($fileName)
+    {
+        if (!file_exists($fileName)) {
+            throw new \Exception('Import Error: Cannot find field definition file');
+        }
+        $json = file_get_contents($fileName);
+        $params = json_decode($json, true);
+        if (empty($params)) {
+            throw new \Exception('Import Error: Cannot import field definitions from file');
+        }
+        $this->params = array_merge($this->defaultParams, $params);
+        $this->fields = $this->getFieldDef($params['fields']);
+        $this->geography = $params['geography'];
+        $this->event = $params['event'];
+        $this->cause = $params['cause'];
+        $this->fixedValues = $params['values'];
+        return true;
+    }
+
+    public function getFieldDef($fields)
+    {
+        $def = [];
+        $lastIndex = 0;
+        foreach ($fields as $field) {
+            $fieldName = $field[0];
+            $comment = isset($field[1]) ?  $field[1] : '';
+            $index = [ $lastIndex ];
+            if (count($field) > 2) {
+                $index = array_slice($field, 2);
+            }
+            $lastIndex = end($index) + 1;
+            $def[$fieldName] = [
+                'comment' => $comment,
+                'index' => array_merge(
+                    isset($def[$fieldName]['index']) ? $def[$fieldName]['index'] : [],
+                    $index
+                )
+            ];
+        }
+        foreach ($def as $fieldName => $values) {
+            $list[] = [
+                'name'=> $fieldName,
+                'comment' => $values['comment'],
+                'index' => $values['index']
+            ];
+        }
+        return $list;
     }
 
     public function validateFromCSV($FileName, $ObjectType)
@@ -18,106 +85,154 @@ class DIImport
         return $this->importFromCSV($FileName, $ObjectType, false);
     }
 
-    public function importFromCSV($FileName, $ObjectType, $doImport = true, $prmMaxLines = 10000, $prmHeaderLines = 2)
+    public function getGeographyCode($values)
     {
-        $maxLines = 1000000;
-        if ($prmMaxLines > 0) {
-            $maxLines = $prmMaxLines;
+        return $values[$this->geography['code']];
+    }
+
+    public function getGeographyId($code)
+    {
+        return DIGeography::getIdByCode($this->session, $code, '');
+    }
+
+    public function getEventId($values)
+    {
+        $name = $this->getName($values, $this->event);
+        $id = DIEvent::getIdByName($this->session, $name);
+        if (empty($id)) {
+            throw new \Exception('Event Error: ' . $name);
         }
-        $FLogName = '/tmp/import_' . $this->us->sSessionId . '.csv';
-        $FLogName = '/tmp/import.csv';
-        $cols = array();
-        $flog = fopen($FLogName, 'w');
-        $fh = fopen($FileName, 'r');
-        $rowCount = 0;
-        while ($rowCount < $prmHeaderLines) {
-            $values = fgetcsv($fh, 0, ',');
-            $rowCount++;
+        return $id;
+    }
+
+    public function getCauseId($values)
+    {
+        $name = $this->getName($values, $this->cause);
+        $id = $name == '' ? 'UNKNOWN' : DICause::getIdByName($this->session, $name);
+        if (empty($id)) {
+            throw new \Exception('Cause Error: ' . $name);
         }
-        while ((! feof($fh) ) && ($rowCount < $maxLines)) {
-            $values = fgetcsv($fh, 0, ',');
-            $rowCount++;
-            if (count($values) > 1) {
-                switch ($ObjectType) {
-                    case DI_EVENT:
-                        $o = new DIEvent($this->us);
-                        $r = $o->importFromCSV($cols, $values);
-                        if (($r > 0) && ($o->get('EventPredefined')==0)) {
-                            $o->insert();
-                        }
-                        break;
-                    case DI_CAUSE:
-                        $o = new DICause($this->us);
-                        $r = $o->importFromCSV($cols, $values);
-                        if (($r > 0) && ($o->get('CausePredefined')==0)) {
-                            $o->insert();
-                        }
-                        break;
-                    case DI_GEOLEVEL:
-                        $o = new DIGeoLevel($this->us);
-                        $r = $o->importFromCSV($cols, $values);
-                        if ($r > 0) {
-                            $o->insert();
-                        }
-                        break;
-                    case DI_GEOGRAPHY:
-                        $o = new DIGeography($this->us);
-                        $r = $o->importFromCSV($cols, $values);
-                        if ($r > 0) {
-                            $answer = $o->insert();
-                            if ($answer < 0) {
-                                if ($o->status->hasError()) {
-                                    echo $o->get('GeographyCode') . ' ' .
-                                          reset($o->status->error) . "\n";
-                                }
-                            }
-                        }
-                        break;
-                    case DI_DISASTER:
-                        $o = new DIDisaster($this->us);
-                        if (($rowCount % 100) == 0) {
-                            echo $rowCount . "\n";
-                        }
-                        $iReturn = $o->importFromCSV($cols, $values);
-                        if ($iReturn > 0) {
-                            $bExistId = DIDisaster::existId($this->us, $o->get('DisasterId'));
-                            if ($bExistId < 0) {
-                                // Id doesn't exist, insert record
-                                $iReturn = $o->validateCreate(false);
-                            }
-                            $iReturn = $o->validateUpdate(false);
-                            if ($iReturn <= 0) {
-                                $o->status->getMsgList($rowCount, $o->get('DisasterSerial'), ERROR);
-                                $o->status->getMsgList($rowCount, $o->get('DisasterSerial'), WARNING);
-                            }
-                            // DisasterSerial is duplicated but we insert/update anyway
-                            if ($iReturn == 0) {
-                                if (($o->status->hasWarning(-54)) ||
-                                     ($o->status->hasWarning(-56)) ||
-                                     ($o->status->hasWarning(-61)) ) {
-                                    // With warnings, insert/update as DRAFT
-                                    $o->set('RecordStatus', 'DRAFT');
-                                }
-                            }
-                            if ($iReturn >= 0) {
-                                // insert/update datacard
-                                if ($doImport) {
-                                    if ($bExistId > 0) {
-                                        $o->update(false);
-                                    } else {
-                                        $o->insert(false);
-                                    }
-                                }
-                            }
-                        }
-                        break;
+        return $id;
+    }
+
+    public function getName($values, $data)
+    {
+        $name = trim($values[$data['name']]);
+        if (array_key_exists($name, $data['fixes'])) {
+            $name = $data['fixes'][$name];
+        }
+        return $name;
+    }
+
+    public function importFromCSV($prmFileCSV, $prmImport)
+    {
+        $last_line = $this->params['lineCount'];
+        $skipLines = $this->params['headerCount'] + $this->params['offset'];
+
+        $last_line = $last_line + $skipLines + 1;
+        $fh = fopen($prmFileCSV, 'r');
+        $line = 1;
+        while ($line <= $skipLines) {
+            $a = fgetcsv($fh, 0, ',');
+            $line++;
+        }
+        while ((! feof($fh)) && ($line < $last_line)) {
+            $a = fgetcsv($fh, 0, ',');
+
+            if (!is_array($a) || count($a) < 2) {
+                continue;
+            }
+            for ($i = 0; $i<count($a); $i++) {
+                $a[$i] = trim($a[$i]);
+            }
+            $d = new DIDisasterImport($this->session, '', $this->fields);
+            $d->importFromArray($a);
+
+            $DisasterSerial = $d->get('DisasterSerial');
+            // Validate mandatory fields
+            if (empty($DisasterSerial)) {
+                printf('DisasterSerial is empty. Line: %4d' . "\n", $line);
+                continue;
+            }
+
+            if (empty($d->get('DisasterBeginTime'))) {
+                printf('DisasterBeginTime is empty. Line: %4ds %-10s' ."\n", $line, $DisasterSerial);
+                continue;
+            }
+
+            // printf("%4d %s\n", $line, $DisasterSerial);
+            $disasterId = $d->findIdBySerial($DisasterSerial);
+            if (!empty($disasterId)) {
+                $d->set('DisasterId', $disasterId);
+                $d->load();
+                $d->importFromArray($a);
+            }
+
+            foreach ($this->fixedValues as $fieldName => $value) {
+                $d->set($fieldName, $value);
+            }
+
+            $geographyCode = $this->getGeographyCode($a);
+            $geographyId = $this->getGeographyId($geographyCode);
+            $d->set('GeographyId', $geographyId);
+            if ($geographyId == '') {
+                printf('GEOGRAPHY ERROR : %4d %-10s %-20s' . "\n", $line, $DisasterSerial, $geographyCode);
+            }
+
+            try {
+                $d->set('EventId', $this->getEventId($a));
+            } catch (Exception $e) {
+                printf('EVENT ERROR : %4d %-10s %s' . "\n", $line, $DisasterSerial, $e->getMessage());
+            }
+
+            try {
+                $d->set('CauseId', $this->getCauseId($a));
+            } catch (Exception $e) {
+                printf('CAUSE ERROR : %4d %-10s %-20s' . "\n", $line, $DisasterSerial, $e->getMessage());
+            }
+            $line++;
+
+            // Validate Effects and Save as DRAFT if needed
+            if ($d->validateEffects(-61, 0) < 0) {
+                $d->set('RecordStatus', 'DRAFT');
+            }
+
+            $bExist = $d->exist();
+            if ($bExist < 0) {
+                // Verificar solamente los datos, no importa nada...
+                $r = $d->validateCreate(1);
+            } else {
+                $r = $d->validateUpdate(1);
+            }
+            if ($r < 0) {
+                printf('Error en validación serial: %s Error: ' . "\n", $DisasterSerial, $r);
+            }
+
+            if (($line > 0) && (($line % 100) == 0)) {
+                printf('%04d' . "\n", $line);
+            }
+
+            if (!$prmImport) {
+                continue;
+            }
+
+            $Cmd = '';
+            $i = 0;
+            if ($bExist < 0) {
+                $i = $d->insert(true, false);
+                if ($i < 0) {
+                    printf('%5d %-10s %3d' . "\n", $line, $DisasterSerial, $i);
                 }
+                $Cmd = 'INSERT';
+                continue;
+            }
+            $i = $d->update(true, false);
+            $Cmd = 'UPDATE';
+
+            if ($i < 0) {
+                printf('%5d %-10s %3d' . "\n", $line, $DisasterSerial, $i);
             }
         }
-        fclose($fh);
-        fclose($flog);
-        return array('Status' => 1,
-                     'FileName' => $FLogName);
     }
 
 

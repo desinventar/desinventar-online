@@ -38,35 +38,35 @@ RUN npm install -g yarn
 
 WORKDIR /opt/app/portal
 
-ADD composer.json /tmp/composer.json
-ADD composer.lock /tmp/composer.lock
+ADD portal/composer.json /tmp/composer.json
+ADD portal/composer.lock /tmp/composer.lock
 
 RUN composer self-update
 RUN cd /tmp && composer install --no-scripts --no-autoloader --prefer-source --no-interaction
 RUN cp -a /tmp/vendor /opt/app/portal
 
-ADD package.json /tmp/package.json
-ADD yarn.lock /tmp/yarn.lock
+ADD portal/package.json /tmp/package.json
+ADD portal/yarn.lock /tmp/yarn.lock
 RUN cd /tmp && yarn
 RUN cp -a /tmp/node_modules /opt/app/portal
 
 ARG DESINVENTAR_PORTAL_CACHEDIR=/var/cache/smarty/desinventar/portal
 ARG DESINVENTAR_URL=https://online.desinventar.org/desinventar/
-ENV DESINVENTAR_CACHEDIR=$DESINVENTAR_PORTAL_CACHEDIR
+ENV DESINVENTAR_PORTAL_CACHEDIR=$DESINVENTAR_PORTAL_CACHEDIR
 ENV DESINVENTAR_URL=$DESINVENTAR_URL
 
 RUN mkdir -p /var/www/html
 RUN echo "<html><head><title>DesInventar</title></head><body><h3>DesInventar</h3></body></html>" > /var/www/html/index.html
-RUN install -m 755 -o apache -g apache -d $DESINVENTAR_CACHEDIR
+RUN install -m 755 -o apache -g apache -d $DESINVENTAR_PORTAL_CACHEDIR
 
 RUN sed -i 's#var/www/html#/opt/app/portal/web#; s#logs/access_log#/dev/stderr#; s#logs/error_log#/dev/stderr#' /etc/httpd/conf/httpd.conf
-ADD files/apache/rewrite.conf /tmp/rewrite.conf
+ADD portal/files/apache/rewrite.conf /tmp/rewrite.conf
 RUN cat /tmp/rewrite.conf >> /etc/httpd/conf/httpd.conf
 
-COPY . /opt/app/portal
-
-RUN make composer
-RUN make node
+COPY . /opt/app
+RUN cp -a /tmp/vendor /opt/app/portal
+RUN cp -a /tmp/node_modules /opt/app/portal
+RUN make
 
 EXPOSE 80
 

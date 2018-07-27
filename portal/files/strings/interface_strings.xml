@@ -411,6 +411,12 @@
 			<Text LangIsoCode="por">Uruguai</Text>
 			<Text LangIsoCode="fre">Uruguay</Text>
 		</Message>
+		<Message id="tcountryUSA">
+			<Text LangIsoCode="eng">U.S.A</Text>
+			<Text LangIsoCode="spa">EE.UU</Text>
+			<Text LangIsoCode="por">EE.UU</Text>
+			<Text LangIsoCode="fre">EE.UU</Text>
+		</Message>
 		<Message id="tcountryVEN">
 			<Text LangIsoCode="eng">Venezuela</Text>
 			<Text LangIsoCode="spa">Venezuela</Text>
@@ -422,12 +428,6 @@
 			<Text LangIsoCode="spa">Vanuatu</Text>
 			<Text LangIsoCode="por">Vanuatu</Text>
 			<Text LangIsoCode="fre">Vanuatu</Text>
-		</Message>
-		<Message id="msgRegionUSAFL">
-			<Text LangIsoCode="eng">EEUU - Florida</Text>
-			<Text LangIsoCode="spa">EEUU - Florida</Text>
-			<Text LangIsoCode="por">EEUU - Florida</Text>
-			<Text LangIsoCode="fre">EEUU - Florida</Text>
 		</Message>
 		<Message id="txtVersion">
 			<Text LangIsoCode="eng">Version</Text>

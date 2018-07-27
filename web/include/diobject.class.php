@@ -105,7 +105,7 @@ class DIObject
             if ($sFieldType == 'DATE') {
                 $obj[$sFieldName] = '';
             }
-            if ($sFieldType == 'INTEGER') {
+            if (in_array($sFieldType, ['INTEGER', 'SECTOR'])) {
                 $obj[$sFieldName] = 0;
             }
             if ($sFieldType == 'FLOAT') {
@@ -151,11 +151,10 @@ class DIObject
 
     public function getType($prmKey)
     {
-        try {
+        if (isset($this->oFieldType[$prmKey])) {
             return $this->oFieldType[$prmKey];
-        } catch (Exception $e) {
-            showErrorMsg(debug_backtrace(), $e, '');
         }
+        return null;
     }
 
     public function set($prmKey, $prmValue, $LangIsoCode = '')
@@ -199,10 +198,7 @@ class DIObject
                     $sValue = 0;
                 }
             }
-            if (($sFieldType == 'INTEGER') ||
-                ($sFieldType == 'DOUBLE' ) ||
-                ($sFieldType == 'FLOAT'  ) ||
-                ($sFieldType == 'CURRENCY')) {
+            if (in_array($sFieldType, ['INTEGER', 'SECTOR', 'DOUBLE', 'FLOAT', 'CURRENCY'])) {
                 if ($sValue == '') {
                     $sValue = 0;
                 }

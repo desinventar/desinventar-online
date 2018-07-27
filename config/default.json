@@ -17,7 +17,7 @@
     "proj_lib": "/usr/share/proj",
     "worldmap_dir": "/var/local/desinventar/worldmap",
     "fonts_dir": "/usr/share/fonts/liberation/fonts.txt",
-    "tmp_dir": "/tmp"
+    "tmp_dir": "/var/local/desinventar/tmp/maps"
   },
   "flags": {
     "mode": "devel",
@@ -29,7 +29,7 @@
   },
   "logger": {
     "file": "php://stdout",
-    "level": 100
+    "level": 200
   },
   "database": {
     "driver": "sqlite",
