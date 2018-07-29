@@ -67,7 +67,7 @@ COPY . /opt/app
 RUN cp -a /tmp/vendor /opt/app
 RUN cp -a /tmp/node_modules /opt/app/portal
 RUN make
-RUN composer install
+RUN cd /opt/app && composer install
 
 EXPOSE 80
 
