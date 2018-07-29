@@ -2,13 +2,7 @@
 
 .PHONY : all .FORCE
 
-all : composer node webpack strings
-
-composer: .FORCE
-	composer install
-
-autoload: .FORCE
-	 composer dump-autoload --optimize
+all : node webpack strings
 
 node: .FORCE
 	yarn
