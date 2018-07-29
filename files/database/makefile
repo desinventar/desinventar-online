@@ -40,16 +40,16 @@ desinventar.db : desinventar.yaml
 lang : spa.conf eng.conf por.conf fre.conf
 
 spa.conf : interface_strings.xml
-	php xml2conf.php interface_strings.xml spa > spa.conf && cp spa.conf ../../web/conf/spa.conf
+	php ../../scripts/xml2conf.php interface_strings.xml spa > spa.conf && cp spa.conf ../../web/conf/spa.conf
 
 eng.conf : interface_strings.xml
-	php xml2conf.php interface_strings.xml eng > eng.conf && cp eng.conf ../../web/conf/eng.conf
+	php ../../scripts/xml2conf.php interface_strings.xml eng > eng.conf && cp eng.conf ../../web/conf/eng.conf
 
 por.conf : interface_strings.xml
-	php xml2conf.php interface_strings.xml por > por.conf && cp por.conf ../../web/conf/por.conf
+	php ../../scripts/xml2conf.php interface_strings.xml por > por.conf && cp por.conf ../../web/conf/por.conf
 
 fre.conf : interface_strings.xml
-	php xml2conf.php interface_strings.xml fre > fre.conf && cp fre.conf ../../web/conf/fre.conf
+	php ../../scripts/xml2conf.php interface_strings.xml fre > fre.conf && cp fre.conf ../../web/conf/fre.conf
 
 clean :
 	/bin/rm -f *.db *.conf

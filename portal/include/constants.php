@@ -1,7 +1,0 @@
-<?php
-
-define('MAJORVERSION', '10');
-define('MINORVERSION', '01.008');
-define('CACHEVERSION', '002');
-define('VERSION', MAJORVERSION . '.' . MINORVERSION);
-define('JSVERSION', VERSION . '-' . CACHEVERSION);
