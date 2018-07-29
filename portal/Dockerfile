@@ -38,12 +38,12 @@ RUN npm install -g yarn
 
 WORKDIR /opt/app/portal
 
-ADD portal/composer.json /tmp/composer.json
-ADD portal/composer.lock /tmp/composer.lock
+ADD composer.json /tmp/composer.json
+ADD composer.lock /tmp/composer.lock
 
 RUN composer self-update
 RUN cd /tmp && composer install --no-scripts --no-autoloader --prefer-source --no-interaction
-RUN cp -a /tmp/vendor /opt/app/portal
+RUN cp -a /tmp/vendor /opt/app
 
 ADD portal/package.json /tmp/package.json
 ADD portal/yarn.lock /tmp/yarn.lock
@@ -64,9 +64,10 @@ ADD portal/files/apache/rewrite.conf /tmp/rewrite.conf
 RUN cat /tmp/rewrite.conf >> /etc/httpd/conf/httpd.conf
 
 COPY . /opt/app
-RUN cp -a /tmp/vendor /opt/app/portal
+RUN cp -a /tmp/vendor /opt/app
 RUN cp -a /tmp/node_modules /opt/app/portal
 RUN make
+RUN composer install
 
 EXPOSE 80
 

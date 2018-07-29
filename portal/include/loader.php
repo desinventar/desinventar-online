@@ -3,11 +3,10 @@
  DesInventar - http://www.desinventar.org
  (c) Corporacion OSSO
 */
-use \DesInventar\Common\ConfigLoader;
+use DesInventar\Common\ConfigLoader;
 
-require_once 'constants.php';
-require_once __DIR__ . '/../vendor/autoload.php';
-require_once BASE . '/include/common.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
+require_once 'common.php';
 
 $config = new ConfigLoader(__DIR__ . '/../../config');
 
@@ -23,8 +22,7 @@ header('Content-Type: text/html; charset=UTF-8');
 $confdir = dirname($_SERVER['SCRIPT_FILENAME']) . '/../conf';
 $confdir = dirname(dirname(__FILE__)) . '/conf';
 $templatedir = dirname($_SERVER['SCRIPT_FILENAME']) . '/../templates';
-// Smarty configuration
-require_once SMARTYDIR . '/Smarty.class.php';
+
 $t = new Smarty();
 $t->debugging       = false;
 $t->config_dir      = $confdir;
@@ -64,15 +62,6 @@ if ($lg == 'pt') {
 }
 
 $_SESSION['lang'] = $lg;
-
-$t->assign('majorversion', MAJORVERSION);
-$jsVersion = JSVERSION;
-if ($config->portal['mode'] !== 'production') {
-    $jsVersion = JSVERSION . '-' . getUrlSuffix();
-}
-$t->assign('jsversion', $jsVersion);
-$t->assign('lg', $lg);
-$t->assign('lang', $lg);
 
 // Configure DesInventar application location
 $desinventarURL = $config->portal['app_url'];

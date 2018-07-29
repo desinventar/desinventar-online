@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "11f7af0c6bd5cbc46ae44685323bcdf9",
+    "content-hash": "80b00d3ba37a4776dc78557ece324034",
     "packages": [
         {
             "name": "aura/session",
@@ -279,6 +279,46 @@
             ],
             "description": "JpGraph, an Object Oriented PHP5 Graph Plotting library",
             "time": "2018-02-24T13:12:39+00:00"
+        },
+        {
+            "name": "koenster/php-language-detection",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Koenster/php-language-detection.git",
+                "reference": "43b78d7fe55219a137d44820e059fec9eb899d73"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Koenster/php-language-detection/zipball/43b78d7fe55219a137d44820e059fec9eb899d73",
+                "reference": "43b78d7fe55219a137d44820e059fec9eb899d73",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "project",
+            "autoload": {
+                "classmap": [],
+                "psr-4": {
+                    "koenster\\PHPLanguageDetection\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Detects the preferred language from the browser and compares this with the available languages/locales to return the best language/locale to redirect.",
+            "keywords": [
+                "browser localisation",
+                "browser localization detection",
+                "php language detection"
+            ],
+            "time": "2016-11-08T14:20:55+00:00"
         },
         {
             "name": "monolog/monolog",

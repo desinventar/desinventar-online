@@ -35,7 +35,7 @@
 								{-#di_slogan#-}
 							</div>
 							<div id="divVersion">
-								{-#txtVersion#-} : <span id="txtVersion"></span>
+								{-#txtVersion#-} : <span id="txtVersion">{-$jsversion-}</span>
 							</div>
 						</td>
 						<td>

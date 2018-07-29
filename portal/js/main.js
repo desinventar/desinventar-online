@@ -164,13 +164,6 @@ me.init = () => {
     return false
   })
 
-  jQuery.getJSON(
-    jQuery('#desinventarURL').val() + '/common/version',
-    null,
-    function(data) {
-      jQuery('#txtVersion').text(data.data.version)
-    }
-  )
   //Initialization code
   jQuery('body').trigger('cmdUserGetInfo')
 }
