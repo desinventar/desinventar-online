@@ -40,7 +40,7 @@ class DatabaseOperations
             $iReturn = DIRegion::existRegion($session, $RegionId) > 0 ? ERR_UNKNOWN_ERROR : $region->insert();
         }
         if ($iReturn > 0) {
-            # Set Role ADMINREGION in RegionAuth: master for this region
+            // Set Role ADMINREGION in RegionAuth: master for this region
             $region->removeRegionUserAdmin();
             $RegionUserAdmin = $session->UserId;
             $iReturn = $session->setUserRole($RegionUserAdmin, $region->get('RegionId'), 'ADMINREGION');
@@ -64,7 +64,7 @@ class DatabaseOperations
         }
 
         if ($iReturn > 0) {
-            # Open ZIP File, extract all files and return values...
+            // Open ZIP File, extract all files and return values...
             $zip = new ZipArchive();
             $res = $zip->open($filename);
             if ($res == false) {

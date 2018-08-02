@@ -1675,7 +1675,7 @@ class Query
             } //foreach
         } //if !empty
         if (!empty($exp)) {
-            # Bug #012: Convert encoding of file to make it easier to open in Excel
+            // Convert encoding of file to iso-8859-1, makes it easier to open in Excel
             return mb_convert_encoding($txt, 'iso-8859-1', 'utf-8');
             #return $txt;
         } else {

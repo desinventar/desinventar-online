@@ -129,5 +129,5 @@ if (isset($_FILES['desinv']) && isset($post['diobj'])) {
 }
 
 $t->assign('RegionId', $RegionId);
-$t->force_compile   = true; # Force this template to always compile
+$t->force_compile   = true;
 $t->display('import.tpl');

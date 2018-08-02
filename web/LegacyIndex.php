@@ -1053,7 +1053,7 @@ class LegacyIndex
                 $t->assign('CountryList', $CountryList);
                 $t->assign('regionlist', $RegionList);
                 $template = 'index-' . $lg . '.tpl';
-                $t->force_compile   = true; // Force this template to always compile
+                $t->force_compile   = true;
                 return $t->fetch($template);
                 break;
             case 'cmdGetVersion':
@@ -1154,7 +1154,7 @@ class LegacyIndex
                 return json_encode(array('Status' => 'OK', 'RecordCount' => $RecordCount));
                 break;
             case 'getGraphParameters':
-                $t->force_compile   = true; // Force this template to always compile
+                $t->force_compile   = true;
                 return $t->fetch('graphparameters.tpl');
                 break;
             case 'cmdDatabaseExport':
@@ -1294,7 +1294,7 @@ class LegacyIndex
                     $t->assign('qdet', $graph->output['QueryDetails']);
                     $t->assign('image', $graph->output['ImageURL']);
                     $t->assign('ctl_showres', true);
-                    $t->force_compile   = true; // Force this template to always compile
+                    $t->force_compile   = true;
                     return $t->fetch('graphic.tpl');
                 } else {
                     // Save Graph as Image

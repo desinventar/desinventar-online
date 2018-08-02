@@ -98,5 +98,5 @@ switch ($cmd) {
         break;
 } //switch
 $t->assign('reg', $RegionId);
-$t->force_compile   = true; # Force this template to always compile
+$t->force_compile   = true;
 $t->display('causes.tpl');

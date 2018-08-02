@@ -97,8 +97,7 @@ class UserSession
         $CurTime  = gmdate('c');
         $this->dLastUpdate = $CurTime;
 
-        // 2009-10-23 (jhcaiced) Logout users when too much time has passed
-        // without using this session (Bug # 277)
+        // Logout users when too much time has passed without using this session
         $Interval = strtotime($CurTime) - strtotime($PrevTime);
         // 60 * 30 = 1800 (30 minutes)
         if ($Interval > 1800) {

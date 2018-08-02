@@ -15,7 +15,6 @@ foreach ($pages as $pagekey) {
 }
 $t->assign('metguide', $metguide);
 
-# EventList
 $EventListDefault = $us->q->loadEvents('BASE', null, $lg, $us->RegionLangIsoCode, false);
 $t->assign('EventListDefault', $EventListDefault);
 
@@ -31,6 +30,6 @@ $EffectList = array_merge($ef1, $ef2, $ef3, $ef4, $sec);
 $t->assign('EffectList', $EffectList);
 
 if ($config->flags['mode'] == 'devel') {
-    $t->force_compile   = true; # Force this template to always compile
+    $t->force_compile   = true;
 }
 $t->display('metguide-' . $lg . '.tpl');

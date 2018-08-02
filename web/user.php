@@ -34,14 +34,14 @@ switch ($cmd) {
         // an e-mail with the login information
         if (isset($_GET['opt']) && ($_GET['opt']) == 'sendnewpass') {
             if ($us->sendPasswdReminder($_GET['UserEMail']) != '') {
-                $t->force_compile   = true; # Force this template to always compile
+                $t->force_compile   = true;
                 $t->display('user_msgsend.tpl');
             } else {
-                $t->force_compile   = true; # Force this template to always compile
+                $t->force_compile   = true;
                 $t->display('user_errsend.tpl');
             }
         } else {
-            $t->force_compile   = true; # Force this template to always compile
+            $t->force_compile   = true;
             $t->display('user_passwdreminder.tpl');
         }
         break;
@@ -64,7 +64,7 @@ switch ($cmd) {
         break;
     case 'changepasswd':
         $t->assign('UserId', $us->UserId);
-        $t->force_compile   = true; # Force this template to always compile
+        $t->force_compile   = true;
         $t->display('user_changepasswd.tpl');
         break;
     case 'updatepasswd':
@@ -123,11 +123,11 @@ switch ($cmd) {
     default:
         // View login window
         if (checkAnonSess() || $us->UserId == '') {
-            $t->force_compile   = true; # Force this template to always compile
+            $t->force_compile   = true;
             $t->display('user_login.tpl');
         } else {
             $t->assign('user', $us->UserId);
-            $t->force_compile   = true; # Force this template to always compile
+            $t->force_compile   = true;
             $t->display('user_mainpage.tpl');
         }
         break;

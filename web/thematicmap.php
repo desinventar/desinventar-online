@@ -163,7 +163,7 @@ switch ($cmd) {
             $t->assign('basemap', $worldmap);
             $t->assign('mps', $config->maps['mapserver']);
         }
-        $t->force_compile   = true; # Force this template to always compile
+        $t->force_compile   = true;
         $t->display('thematicmap.tpl');
         break;
     case 'export':

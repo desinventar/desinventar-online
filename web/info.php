@@ -131,5 +131,5 @@ switch ($cmd) {
 $t->assign('reg', $RegionId);
 $t->assign('dic', $us->q->queryLabelsFromGroup('DB', $lg));
 $t->assign('usern', $us->UserId);
-$t->force_compile   = true; // Force this template to always compile
+$t->force_compile   = true;
 $t->display('info.tpl');
