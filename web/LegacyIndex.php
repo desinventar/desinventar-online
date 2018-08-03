@@ -1057,14 +1057,6 @@ class LegacyIndex
                 $t->force_compile   = true;
                 return $t->fetch($template);
                 break;
-            case 'cmdGetVersion':
-                $version = new Version($config->flags['mode']);
-                return [
-                    'Status' => ERR_NO_ERROR,
-                    'Version' => $version->getVersion(),
-                    'ReleaseDate' => $version->getReleaseDate()
-                ];
-                break;
             case 'cmdSearchCountryList':
                 $answer = array();
                 $CountryList = $us->searchCountryList();
