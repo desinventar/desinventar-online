@@ -12,7 +12,8 @@
     "ramsey/uuid": "^3.7",
     "aura/session": "^2.1",
     "fostam/getopts": "^1.1",
-    "koenster/php-language-detection": "^1.0"
+    "koenster/php-language-detection": "^1.0",
+    "cweagans/composer-patches": "~1.0"
   },
   "require-dev": {
     "ccampbell/chromephp": "^4.1",
@@ -53,5 +54,12 @@
     "disasters",
     "inventories",
     "risk"
-  ]
+  ],
+  "extra": {
+    "patches": {
+      "jpgraph": {
+        "jpgraph patches for PHP7": "files/patches/jpgraph_php7_compatibility.diff"
+      }
+    }
+  }
 }

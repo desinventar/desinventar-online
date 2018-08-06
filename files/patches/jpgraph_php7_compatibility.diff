@@ -1,0 +1,30 @@
+diff -u -r jpgraph-3.0.7/jpgraph.php src/jpgraph.php
+--- jpgraph-3.0.7/jpgraph.php	2018-08-06 14:38:01.787244670 -0500
++++ src/jpgraph.php	2018-08-06 14:53:56.363141463 -0500
+@@ -226,17 +226,7 @@
+ // Check minimum PHP version
+ //
+ function CheckPHPVersion($aMinVersion) {
+-    list($majorC, $minorC, $editC) = preg_split('/[\/.-]/', PHP_VERSION);
+-    list($majorR, $minorR, $editR) = preg_split('/[\/.-]/', $aMinVersion);
+-
+-    if ($majorC != $majorR) return false;
+-    if ($majorC < $majorR) return false;
+-    // same major - check minor
+-    if ($minorC > $minorR) return true;
+-    if ($minorC < $minorR) return false;
+-    // and same minor
+-    if ($editC  >= $editR)  return true;
+-    return true;
++    return version_compare(PHP_VERSION, $aMinVersion, 'ge');
+ }
+ 
+ //
+@@ -4343,6 +4333,7 @@
+             }
+         }
+         else {
++            $precision = abs($precision);
+             $l = sprintf('%01.'.$precision.'f',round($aVal,$precision));
+         }
+ 
