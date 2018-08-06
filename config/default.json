@@ -1,6 +1,5 @@
 {
   "paths": {
-    "fonts": "/usr/share/fonts/liberation/fonts.txt",
     "libs_url": "//cdn-desinventar.inticol.com/js",
     "tmp_dir": "/tmp",
     "cache_dir": "/tmp",
@@ -9,6 +8,7 @@
   },
   "graphs": {
     "url":"/graphs",
+    "font_dir": "/usr/share/fonts/truetype",
     "tmp_dir": "/var/local/desinventar/tmp/graphs"
   },
   "maps": {

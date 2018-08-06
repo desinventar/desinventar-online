@@ -182,7 +182,7 @@ class DIGraph extends DIResult
             $options['DateRange'] = $us->getDateRange($options['D_RecordStatus']);
             // Construct Graphic Object and Show Page
             try {
-                $g = new \DesInventar\Legacy\Graphic($us, $options, $gl);
+                $g = new \DesInventar\Legacy\Graphic($us, $options, $gl, $this->config);
             } catch (Exception $e) {
             }
             // Wrote graphic to file

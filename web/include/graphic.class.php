@@ -23,12 +23,16 @@ class Graphic
     public $sPeriod;
     public $sStat;
     public $data;
+    protected $config = [
+        'font_dir' => ''
+    ];
     /* opc [kind:BAR,LINE,PIE Opc:Title,etc] data:Matrix
        data[0] == X, data[1] = Y1,  .. */
-    public function __construct($prmSession, $opc, $prmData)
+    public function __construct($prmSession, $opc, $prmData, $config)
     {
         $this->data = $prmData;
         $this->options = $opc['Graph'];
+        $this->config = array_merge($this->config, $config);
         $opc['prmGraph'] = $opc['Graph'];
         $kind = $opc['prmGraph']['Kind'];
         // Get Label Information
@@ -257,7 +261,7 @@ class Graphic
                 $this->g->SetScale($opc['prmGraph']['Scale'][0]); // textint, textlog
                 $this->g->xgrid->Show(true, true);
 
-                // Horizontal XAxis Setup
+                // Horizontal Axis Setup
                 $this->g->xaxis->SetTitle($sXAxisLabel, 'middle');
                 $this->g->xaxis->SetTitlemargin($XAxisTitleMargin);
                 $this->g->xaxis->title->SetFont(FF_ARIAL, FS_NORMAL);
@@ -270,8 +274,7 @@ class Graphic
                 }
                 $this->g->xaxis->SetLabelMargin($XAxisLabelMargin);
                 $this->g->xaxis->SetLabelAlign('center', 'bottom');
-                // 2009-02-03 (jhcaiced) Try to avoid overlapping labels in XAxis
-                // by calculating the interval of the labels
+
                 $iNumPoints = count($val);
                 $iInterval = ($iNumPoints * 12) / $wx;
                 $iInterval = ceil($iInterval);
@@ -280,7 +283,7 @@ class Graphic
                 }
                 $this->g->xaxis->SetTextLabelInterval($iInterval);
 
-
+                // Vertical Axis Setup
                 $this->g->ygrid->Show(true, true);
                 $this->g->yaxis->SetTitle($sY1AxisLabel, 'middle');
                 $this->g->yaxis->SetTitlemargin($Y1AxisTitleMargin);
@@ -774,19 +777,20 @@ class Graphic
     {
         $MaxWidth = 0;
         foreach ($prmTextArray as $Text) {
-            $Width = self::getTextWidth($Text, $prmFontSize);
+            $Width = $this->getTextWidth($Text, $prmFontSize);
             if ($Width > $MaxWidth) {
                 $MaxWidth = $Width;
             }
-        } //foreach
+        }
         return $MaxWidth;
     }
 
-    public static function getTextWidth($prmText, $prmFontSize)
+    public function getTextWidth($prmText, $prmFontSize)
     {
-        $font = getFont('arial.ttf');
+        $fontDir = isset($this->config['font_dir']) ? $this->config['font_dir'] . '/' : '';
+        $font = getFont($fontDir . 'arial.ttf');
         $bbox = imagettfbbox($prmFontSize, 0, $font, $prmText);
         $Width = $bbox[2] - $bbox[0];
         return $Width;
     }
-} // end class
+}
