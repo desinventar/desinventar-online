@@ -10,7 +10,7 @@ function getBrowserClientLanguage()
     // for the user based on the information sent by the browser...
     $LangStr = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
     $IsoLang = '';
-    foreach (split(',', $LangStr) as $LangItem) {
+    foreach (preg_split('#,#', $LangStr) as $LangItem) {
         if ($IsoLang == '') {
             $Index = strpos($LangItem, ';');
             if ($Index == '') {
