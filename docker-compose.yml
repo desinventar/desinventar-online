@@ -2,6 +2,7 @@ version: '3'
 services:
   web:
     build: .
+    image: desinventar/online:latest
     ports:
      - "8080:80"
     volumes:
@@ -15,7 +16,7 @@ services:
       - DESINVENTAR_MODE
       - DESINVENTAR_PATHS_CACHEDIR
   devel:
-    build: .
+    image: desinventar/online:latest
     command: bash -c '(/opt/app/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
     depends_on:
     - web

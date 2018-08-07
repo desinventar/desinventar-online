@@ -14,16 +14,16 @@ RUN yum install -y http://opensource.wandisco.com/centos/6/git/x86_64/wandisco-g
 RUN yum -y install wget unzip tar curl firefox xorg-x11-server-Xvfb
 
 RUN yum -y install yum install httpd gd giflib sqlite
-RUN yum -y install php php-common php-cli php-gd php-xml php-pdo php-mbstring
 RUN yum -y install liberation-fonts-common liberation-sans-fonts
 RUN yum -y install liberation-mono-fonts liberation-serif-fonts
 
-# Update to PHP 5.6
-RUN yum -y install https://mirror.webtatic.com/yum/el6/latest.rpm
-RUN yum -y install yum-plugin-replace
-RUN yum -y replace php-common --replace-with=php56w-common
+# Update to PHP 7.2
+RUN yum install -y http://rpms.remirepo.net/enterprise/remi-release-6.rpm
+RUN yum -y install yum-plugin-replace yum-utils
+RUN yum-config-manager --enable remi-php72
+RUN yum -y install php php-common php-cli php-gd php-xml php-pdo php-mbstring
 
-RUN yum -y --enablerepo=desinventar install  php56w-dbase
+#RUN yum -y --enablerepo=desinventar install  php56w-dbase
 RUN yum -y --enablerepo=desinventar install liberation-fonts-extras
 RUN yum -y --enablerepo=epel install mapserver proj proj-epsg proj-nad
 RUN cp /usr/libexec/mapserver /var/www/cgi-bin/mapserv
