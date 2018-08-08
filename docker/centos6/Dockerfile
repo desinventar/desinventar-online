@@ -23,7 +23,6 @@ RUN yum -y install yum-plugin-replace yum-utils
 RUN yum-config-manager --enable remi-php72
 RUN yum -y install php php-common php-cli php-gd php-xml php-pdo php-mbstring
 
-#RUN yum -y --enablerepo=desinventar install  php56w-dbase
 RUN yum -y --enablerepo=desinventar install liberation-fonts-extras
 RUN yum -y --enablerepo=epel install mapserver proj proj-epsg proj-nad
 RUN cp /usr/libexec/mapserver /var/www/cgi-bin/mapserv

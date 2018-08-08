@@ -5,8 +5,6 @@ LABEL e-mail="jhcaiced@inticol.com"
 
 RUN sed -i 's/^mirrorlist/#mirrorlist/; s|#baseurl=http://mirror.centos.org|baseurl=http://mirrors.kernel.org|' /etc/yum.repos.d/CentOS-Base.repo
 
-RUN yum -y install epel-release
-
 WORKDIR /opt/app/portal
 
 ADD composer.json /tmp/composer.json

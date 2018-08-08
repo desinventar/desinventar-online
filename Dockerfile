@@ -7,8 +7,6 @@ WORKDIR /opt/app
 
 ADD composer.json /tmp/composer.json
 ADD composer.lock /tmp/composer.lock
-
-RUN composer self-update
 RUN cd /tmp && composer install --no-scripts --no-autoloader --prefer-source --no-interaction
 RUN mkdir -p /opt/app && cp -a /tmp/vendor /opt/app
 
@@ -16,6 +14,17 @@ ADD package.json /tmp/package.json
 ADD yarn.lock /tmp/yarn.lock
 RUN cd /tmp && yarn install
 RUN mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app
+
+RUN yum -y install php-pecl-dbase php-pecl-zip
+
+RUN yum -y install java
+RUN mkdir -p /usr/local/liquibase && cd /usr/local/liquibase && \
+    wget -q https://github.com/liquibase/liquibase/releases/download/liquibase-parent-3.5.5/liquibase-3.5.5-bin.tar.gz -O - | tar -zxf - && \
+    /bin/rm -f /usr/local/bin/liquibase && ln -s /usr/local/liquibase/liquibase /usr/local/bin/liquibase
+RUN cd /usr/local/liquibase && wget -q https://bitbucket.org/xerial/sqlite-jdbc/downloads/sqlite-jdbc-3.21.0.jar -O liquibase-sqlite-jdbc-3.21.0.jar
+RUN cd /usr/local/liquibase && wget -q https://jdbc.postgresql.org/download/postgresql-42.2.2.jar -O liquibase-postgresql-42.2.2.jar
+RUN cd /usr/local/liquibase && wget -q https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.46.tar.gz -O - | tar -zxf - mysql-connector-java-5.1.46/mysql-connector-java-5.1.46.jar && \
+    mv mysql-connector-java-5.1.46/mysql-connector-java-5.1.46.jar ./liquibase-mysql-connector-java-5.1.46.jar
 
 RUN composer self-update
 
@@ -32,15 +41,6 @@ RUN sed -i 's#/var/www/html#/opt/app#' /etc/httpd/conf.d/web.conf
 RUN sed -i 's#localhost#desinventaronline_web_1#' /etc/httpd/conf.d/web.conf
 RUN sed -i 's#^post_max_size = 8M$#post_max_size = 100M#' /etc/php.ini
 RUN sed -i 's#^upload_max_filesize = 2M$#upload_max_filesize = 100M#' /etc/php.ini
-
-RUN yum -y install java
-RUN mkdir -p /usr/local/liquibase && cd /usr/local/liquibase && \
-    wget -q https://github.com/liquibase/liquibase/releases/download/liquibase-parent-3.5.5/liquibase-3.5.5-bin.tar.gz -O - | tar -zxf - && \
-    /bin/rm -f /usr/local/bin/liquibase && ln -s /usr/local/liquibase/liquibase /usr/local/bin/liquibase
-RUN cd /usr/local/liquibase && wget -q https://bitbucket.org/xerial/sqlite-jdbc/downloads/sqlite-jdbc-3.21.0.jar -O liquibase-sqlite-jdbc-3.21.0.jar
-RUN cd /usr/local/liquibase && wget -q https://jdbc.postgresql.org/download/postgresql-42.2.2.jar -O liquibase-postgresql-42.2.2.jar
-RUN cd /usr/local/liquibase && wget -q https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.46.tar.gz -O - | tar -zxf - mysql-connector-java-5.1.46/mysql-connector-java-5.1.46.jar && \
-    mv mysql-connector-java-5.1.46/mysql-connector-java-5.1.46.jar ./liquibase-mysql-connector-java-5.1.46.jar
 
 COPY . /opt/app
 RUN mkdir -p /opt/app && cp -a /tmp/vendor /opt/app && composer install
