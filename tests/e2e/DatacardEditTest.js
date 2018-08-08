@@ -4,7 +4,7 @@ import { urlWithDatabase } from './helpers/config'
 
 fixture('Datacard Edit Page').page(urlWithDatabase)
 
-test('User Login', async t => {
+test('Datacard Edit Dialog', async t => {
   await user.login(t)
 
   // Open Datacard Edit window
