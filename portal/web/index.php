@@ -4,7 +4,6 @@
  * (c) Corporación OSSO
  */
 
-// use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
 use Slim\Http\Request as Request;
 use Slim\Http\Response as Response;
@@ -53,6 +52,7 @@ $app->get('/', function (Request $request, Response $response, array $args) use 
     $session = $container->get('session')->getSegment('');
     $browser = new BrowserLocalization();
     $language = $session->get('language', $container->get('util')->getLangIsoCode($browser->detect()));
+    $session->set('language', $language);
     $t->assign('lang', $language);
     $t->assign('lg', $language);
 

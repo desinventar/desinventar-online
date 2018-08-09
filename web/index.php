@@ -4,20 +4,23 @@
   (c) Corporacion OSSO
 */
 
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
+use Slim\App;
+use Slim\Http\Request as Request;
+use Slim\Http\Response as Response;
+
 use Aura\Session\SessionFactory;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\ErrorLogHandler;
 
-use DesInventar\Service\JsonApi;
 use DesInventar\Common\Util;
-use DesInventar\Common\Version;
-use DesInventar\Common\ConfigLoader;
+
+use Api\Helpers\JsonApiResponse;
+use Api\Helpers\SessionMiddleware;
 
 use Api\Controllers\CommonController;
 use Api\Controllers\MapsController;
+use Api\Controllers\SessionController;
 
 require_once('include/loader.php');
 require_once('include/diregion.class.php');
@@ -69,17 +72,17 @@ $container['oldindex'] = function () use ($settings) {
 };
 
 $container['jsonapi'] = function ($c) {
-    return new JsonApi($c->response);
+    return new JsonApiResponse($c->response);
 };
 
 $container['notFoundHandler'] = function ($c) {
-    return function ($request, $response) use ($c) {
+    return function (Request $request, Response $response) use ($c) {
         throw new Exception('Page not found');
     };
 };
 
 $container['errorHandler'] = function ($container) {
-    return function ($request, $response, \Exception $exception) use ($container) {
+    return function (Request $request, Response $response, \Exception $exception) use ($container) {
         return $response->withJson([
             'code' => $exception->getCode(),
             'message' => $exception->getMessage()
@@ -95,9 +98,14 @@ $container['MapsController'] = function ($c) {
     return new MapsController($c);
 };
 
-$app->map(['GET', 'POST'], '/', function ($request, $response, $args) use ($container) {
-    $oldIndex = $container['oldindex'];
-    return $oldIndex->getResponse('');
+$container['SessionController'] = function ($c) {
+    return new SessionController($c);
+};
+
+$app->add(new SessionMiddleware($container));
+
+$app->map(['GET', 'POST'], '/', function (Request $request, Response $response, $args) use ($container) {
+    return $container->get('oldindex')->getResponse('');
 });
 
 $app->group('/common', function () use ($app) {
@@ -106,6 +114,10 @@ $app->group('/common', function () use ($app) {
 
 $app->group('/maps', function () use ($app) {
     $app->get('/kml/{mapId}/', 'MapsController:getKml');
+});
+
+$app->group('/session', function () use ($app) {
+    $app->get('/info', 'SessionController:getSessionInfo');
 });
 
 $app->run();

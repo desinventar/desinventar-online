@@ -321,6 +321,11 @@
                 "reference": "66ff27c895fdc32833dd6f5332d522327ddbe4f2"
             },
             "type": "library",
+            "extra": {
+                "patches_applied": {
+                    "jpgraph patches for PHP7": "files/patches/jpgraph_php7_compatibility.diff"
+                }
+            },
             "license": [
                 "QPL 1.0"
             ],

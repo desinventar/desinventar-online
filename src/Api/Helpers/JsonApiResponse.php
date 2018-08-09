@@ -1,10 +1,10 @@
 <?php
 
-namespace DesInventar\Service;
+namespace Api\Helpers;
 
 use \Slim\Http\Response as Response;
 
-class JsonApi
+class JsonApiResponse
 {
     protected $response;
 

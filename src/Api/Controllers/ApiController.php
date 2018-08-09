@@ -13,6 +13,13 @@ class ApiController
         $this->logger = $container['logger'];
     }
 
+    protected function logAll($request, $response, $args)
+    {
+        $this->logger->debug($request->getMethod());
+        $this->logger->debug($response->getStatusCode());
+        $this->logger->debug(print_r($args, true));
+    }
+
     protected function logRequest($request)
     {
         $this->logger->debug($request->getMethod());
