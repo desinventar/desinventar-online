@@ -28,6 +28,9 @@ class LegacyIndex
         $this->session = $session;
         $this->language = $language;
         $this->config = $config;
+        $this->template->assign('lang', $language);
+        $this->template->assign('lg', $language);
+        $this->template->assign('desinventarLang', $language);
     }
 
     public function getResponse($cmd)
@@ -139,26 +142,6 @@ class LegacyIndex
                 }
                 $answer['Status'] = $iReturn;
                 return htmlspecialchars(json_encode($answer), ENT_NOQUOTES, 'UTF-8');
-                break;
-            case 'cmdUserLanguageChange':
-                $base = new DesInventar\Service\Base($us->q->base);
-                $LangList = $base->getLanguagesList();
-                $LangIsoCode = getParameter('LangIsoCode');
-                $answer = array();
-                $iReturn = ERR_NO_ERROR;
-                if ($LangIsoCode !== '' && $lg != $LangIsoCode) {
-                    if (array_key_exists($LangIsoCode, $LangList)) {
-                        $us->changeLanguage($LangIsoCode);
-                        $iReturn = ERR_NO_ERROR;
-                        $answer['LangIsoCode'] = $LangIsoCode;
-                    } else {
-                        $iReturn = ERR_LANGUAGE_INVALID;
-                    }
-                } else {
-                    $iReturn = ERR_LANGUAGE_NO_CHANGE;
-                }
-                $answer['Status'] = $iReturn;
-                return json_encode($answer);
                 break;
             case 'cmdAdminDatabaseGetList':
                 $answer = array();

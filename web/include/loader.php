@@ -167,48 +167,6 @@ if ($config->flags['env'] != 'command') {
         //$t->compile_check   = true;
     }
 
-    // Choose Language (First from Configuration, next from Url Parameter,
-    // next from UserSession table, then autodetect from browser)
-    $lg = '';
-    if ($lg == '') {
-        $lg = getParameter('lang');
-    }
-    if (! empty($config->general['lang'])) {
-        $lg = $config->general['lang'];
-    }
-    if ($lg == '') {
-        $lg = $us->LangIsoCode;
-    }
-    if ($lg == '') {
-        $lg = getBrowserClientLanguage();
-    }
-    if ($lg == '') {
-        $lg = 'eng';
-    }
-    // 2009-02-21 (jhcaiced) Fix some languages from two to three character code
-    if ($lg == 'es') {
-        $lg = 'spa';
-    }
-    if ($lg == 'en') {
-        $lg = 'eng';
-    }
-    if ($lg == 'fr') {
-        $lg = 'fre';
-    }
-    if ($lg == 'pr') {
-        $lg = 'por';
-    }
-    if ($lg == 'pt') {
-        $lg = 'por';
-    }
-
-    $config->general['lang'] = $lg;
-    $us->changeLanguage($lg);
-
-    $_SESSION['lang'] = $lg;
-    $t->assign('lg', $lg);
-    $t->assign('lang', $lg);
-
     $version = new \DesInventar\Common\Version($config->flags['mode']);
     $t->assign('majorversion', $version->getMajorVersion());
     $t->assign('version', $version->getVersion());
@@ -249,7 +207,6 @@ if ($config->flags['env'] != 'command') {
     $t->assign('desinventarOpenLayersURL', $config->paths['libs_url'] . '/openlayers/2.11');
     $t->assign('desinventarURLPortal', $desinventarURLPortal);
     $t->assign('desinventarVersion', $version->getVersion());
-    $t->assign('desinventarLang', $lg);
     $t->assign('desinventarUserId', $us->UserId);
     $t->assign('desinventarUserFullName', $us->getUserFullName());
     $t->assign('config', json_encode(

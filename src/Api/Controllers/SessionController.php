@@ -12,4 +12,14 @@ class SessionController extends ApiController
             'language' => $session->get('language')
         ]);
     }
+
+    public function changeLanguage($request, $response, $args)
+    {
+        $this->logAll($request, $response, $args);
+        $body = $request->getParsedBody();
+        $language = $body['language'];
+        $session = $this->container->get('session')->getSegment('');
+        $session->set('language', $language);
+        return $this->container->get('jsonapi')->data(['language' => $language]);
+    }
 }

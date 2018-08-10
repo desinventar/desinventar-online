@@ -34,7 +34,6 @@ require_once('LegacyIndex.php');
 $settings = [
     'template' => $t,
     'session' => $us,
-    'language' => $lg,
     'config' => $config
 ];
 
@@ -61,11 +60,12 @@ $container['logger'] = function ($c) {
     return $logger;
 };
 
-$container['oldindex'] = function () use ($settings) {
+$container['oldindex'] = function ($c) use ($settings) {
+    $session = $c->get('session')->getSegment('');
     $oldIndex = new \DesInventar\LegacyIndex(
         $settings['template'],
         $settings['session'],
-        $settings['language'],
+        $c->get('util')->getLanguageIsoCode($session->get('language'), Util::ISO_639_2),
         $settings['config']
     );
     return $oldIndex;
@@ -118,6 +118,7 @@ $app->group('/maps', function () use ($app) {
 
 $app->group('/session', function () use ($app) {
     $app->get('/info', 'SessionController:getSessionInfo');
+    $app->post('/change-language', 'SessionController:changeLanguage');
 });
 
 $app->run();

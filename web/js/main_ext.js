@@ -170,24 +170,14 @@ function doViewportShow() {
 
 function doMainChangeLanguage(LangIsoCode) {
   jQuery.post(
-    jQuery("#desinventarURL").val() + "/",
+    jQuery('#desinventarURL').val() + '/session/change-language',
     {
-      cmd: "cmdUserLanguageChange",
-      LangIsoCode: LangIsoCode
+      language: LangIsoCode
     },
     function(data) {
-      if (parseInt(data.Status) > 0) {
-        jQuery("body").trigger("cmdWindowReload");
-      } else {
-        throw new Error(
-          "cmdUserLanguageChange error : " +
-            data.Status +
-            " " +
-            data.langisocode
-        );
-      }
+      jQuery('body').trigger('cmdWindowReload');
     },
-    "json"
+    'json'
   );
 }
 
@@ -212,16 +202,16 @@ function doMainMenuHandler(item) {
       jQuery("body").trigger("cmdUserAccountShow");
       break;
     case "mnuFileLanguageEnglish":
-      doMainChangeLanguage("eng");
+      doMainChangeLanguage('en');
       break;
     case "mnuFileLanguageSpanish":
-      doMainChangeLanguage("spa");
+      doMainChangeLanguage('es');
       break;
     case "mnuFileLanguagePortuguese":
-      doMainChangeLanguage("por");
+      doMainChangeLanguage('pt');
       break;
     case "mnuFileLanguageFrench":
-      doMainChangeLanguage("fre");
+      doMainChangeLanguage('fr');
       break;
     // DesConsultar Menu Options
     case "mnuQueryViewDesign":

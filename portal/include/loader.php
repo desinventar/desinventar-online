@@ -35,34 +35,6 @@ $t->caching         = 0;
 $t->cache_lifetime  = 3600;
 $t->compile_check   = false;
 
-// Choose Language (First from Parameter, next from UserSession table, then autodetect from browser)
-$lg = getParameter('lang');
-if ($lg == '') {
-    $lg = getBrowserClientLanguage();
-}
-if ($lg == '') {
-    $lg = 'eng';
-}
-
-// 2009-02-21 (jhcaiced) Fix some languages from two to three character code
-if ($lg == 'es') {
-    $lg = 'spa';
-}
-if ($lg == 'en') {
-    $lg = 'eng';
-}
-if ($lg == 'fr') {
-    $lg = 'fre';
-}
-if ($lg == 'pr') {
-    $lg = 'por';
-}
-if ($lg == 'pt') {
-    $lg = 'por';
-}
-
-$_SESSION['lang'] = $lg;
-
 // Configure DesInventar application location
 $desinventarURL = $config->portal['app_url'];
 if (empty($desinventarURL) && isset($_SERVER['DESINVENTAR_URL'])) {
@@ -80,7 +52,5 @@ if (substr($desinventarURLPortal, strlen($desinventarURLPortal) - 1, 1) == '/') 
 // General Information (common to portal/app)
 $t->assign('desinventarURL', $desinventarURL);
 $t->assign('desinventarURLPortal', $desinventarURLPortal);
-$t->assign('desinventarVersion', VERSION);
-$t->assign('desinventarLang', $lg);
 $t->assign('desinventarUserId', '');
 $t->assign('desinventarUserFullName', '');

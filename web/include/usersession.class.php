@@ -170,11 +170,6 @@ class UserSession
         return $iReturn;
     }
 
-    public function changeLanguage($langIsoCode)
-    {
-        return $this->session->changeLanguage($this->sSessionId, $langIsoCode);
-    }
-
     protected function getSessionValues()
     {
         $this->dLastUpdate = gmdate('c');

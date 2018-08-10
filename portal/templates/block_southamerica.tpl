@@ -9,7 +9,7 @@
 		</tr>
 		<tr>
 			<td>
-				{-assign var="imgCANMap" value="subreg_can_$lg.png"-}
+				{-assign var="imgCANMap" value="subreg_can_$lang.png"-}
 				<img id="imgCAN" src="{-$desinventarURLPortal-}/images/{-$imgCANMap-}" alt="" usemap="#srcan" style="border-style:none" />
 				<map id="srcan" name="srcan">
 					<area shape="poly" coords="173,39,175,41,155,62,155,69,193,105,216,105,215,142,221,152,219,153,214,145,189,145,189,152,193,152,197,156,186,157,186,162,190,167,190,200,180,200,186,192,186,184,161,184,138,161,113,161,98,145,114,129,114,97,105,86,116,74,121,78,137,62,137,55,144,55,145,51,130,36,75,37,75,24,127,25,145,47,162,48"
@@ -31,8 +31,8 @@
 	<hr size="1" />
 	<a href="#" id="linkPortalGAR2011">GAR 2011</a>
 	<br />
-	{-assign var="myLang" value="$lg"-}
-	{-if $lg == 'fre'-}
+	{-assign var="myLang" value="$lang"-}
+	{-if $lang == 'fre'-}
 		{-assign var="myLang" value="eng"-}
 	{-/if-}
 	{-assign var="myFile" value="block_gar2011_1_$myLang.tpl"-}

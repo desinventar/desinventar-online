@@ -7,15 +7,16 @@
 use Slim\App;
 use Slim\Http\Request as Request;
 use Slim\Http\Response as Response;
+
 use Aura\Session\SessionFactory;
-use koenster\PHPLanguageDetection\BrowserLocalization;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\ErrorLogHandler;
 
-use DesInventar\Common\ConfigLoader;
 use DesInventar\Common\Util;
+use DesInventar\Common\ConfigLoader;
 use DesInventar\Common\Version;
+use koenster\PHPLanguageDetection\BrowserLocalization;
 
 require_once('../include/loader.php');
 
@@ -50,21 +51,24 @@ $app->get('/', function (Request $request, Response $response, array $args) use 
     $t->assign('jsversion', $version->getVersion());
 
     $session = $container->get('session')->getSegment('');
-    $browser = new BrowserLocalization();
-    $language = $session->get('language', $container->get('util')->getLangIsoCode($browser->detect()));
-    $session->set('language', $language);
-    $t->assign('lang', $language);
-    $t->assign('lg', $language);
+    $language = $session->get('language');
+    if (empty($language)) {
+        $browser = new BrowserLocalization();
+        $language = $session->get('language', $browser->detect());
+        $session->set('language', $language);
+    }
+    $langCode = $container->get('util')->getLanguageIsoCode($language, Util::ISO_639_2);
+    $t->assign('lang', $langCode);
 
     $response->getBody()->write($t->fetch('index.tpl'));
     return $response;
 });
 
 $app->post('/change-language', function (Request $request, Response $response) use ($container) {
-    $logger = $container->get('logger');
     $body = $request->getParsedBody();
-    $language = $body['language'];
+    $langCode = $body['language'];
     $session = $container->get('session')->getSegment('');
+    $language = $container->get('util')->getLanguageIsoCode($langCode, Util::ISO_639_1);
     $session->set('language', $language);
     return $response->withJson([]);
 });

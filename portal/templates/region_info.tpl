@@ -1,4 +1,4 @@
-{-config_load file="$lg.conf" section="region_info"-}
+{-config_load file="$lang.conf" section="region_info"-}
 {-** REGIONINFO: Show Full Region Information **-}
 <div id="divRegionInfo">
 	<table border="0">
