@@ -18,8 +18,6 @@ ADD portal/yarn.lock /tmp/yarn.lock
 RUN cd /tmp && yarn
 RUN cp -a /tmp/node_modules /opt/app/portal
 
-RUN composer self-update
-
 ARG DESINVENTAR_PORTAL_CACHEDIR=/var/cache/smarty/desinventar/portal
 ARG DESINVENTAR_URL=https://online.desinventar.org/desinventar/
 ENV DESINVENTAR_PORTAL_CACHEDIR=$DESINVENTAR_PORTAL_CACHEDIR

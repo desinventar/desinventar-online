@@ -26,8 +26,6 @@ RUN cd /usr/local/liquibase && wget -q https://jdbc.postgresql.org/download/post
 RUN cd /usr/local/liquibase && wget -q https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.46.tar.gz -O - | tar -zxf - mysql-connector-java-5.1.46/mysql-connector-java-5.1.46.jar && \
     mv mysql-connector-java-5.1.46/mysql-connector-java-5.1.46.jar ./liquibase-mysql-connector-java-5.1.46.jar
 
-RUN composer self-update
-
 RUN useradd -g 33 -u 33 www-data
 # Apache Configuration
 RUN sed -i 's#logs/access_log#/dev/stderr#; s#logs/error_log#/dev/stderr#' /etc/httpd/conf/httpd.conf
@@ -46,7 +44,7 @@ RUN sed -i 's#"files"#"redis"#' /etc/httpd/conf.d/php.conf
 RUN sed -i 's#"/var/lib/php/session"#"tcp://redis:6379"#' /etc/httpd/conf.d/php.conf
 
 COPY . /opt/app
-RUN mkdir -p /opt/app && cp -a /tmp/vendor /opt/app && composer install
+RUN mkdir -p /opt/app && cp -a /tmp/vendor /opt/app && /bin/rm -rf /opt/app/vendor/jpgraph && composer install
 RUN mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app && yarn
 
 RUN make devel-app

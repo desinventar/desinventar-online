@@ -13,7 +13,7 @@
     "aura/session": "^2.1",
     "fostam/getopts": "^1.1",
     "koenster/php-language-detection": "^1.0",
-    "cweagans/composer-patches": "~1.0"
+    "cweagans/composer-patches": "^1.6"
   },
   "require-dev": {
     "ccampbell/chromephp": "^4.1",
