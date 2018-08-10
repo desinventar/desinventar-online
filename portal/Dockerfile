@@ -10,7 +10,6 @@ WORKDIR /opt/app/portal
 ADD composer.json /tmp/composer.json
 ADD composer.lock /tmp/composer.lock
 
-RUN composer self-update
 RUN cd /tmp && composer install --no-scripts --no-autoloader --prefer-source --no-interaction
 RUN cp -a /tmp/vendor /opt/app
 
@@ -19,10 +18,16 @@ ADD portal/yarn.lock /tmp/yarn.lock
 RUN cd /tmp && yarn
 RUN cp -a /tmp/node_modules /opt/app/portal
 
+RUN composer self-update
+
 ARG DESINVENTAR_PORTAL_CACHEDIR=/var/cache/smarty/desinventar/portal
 ARG DESINVENTAR_URL=https://online.desinventar.org/desinventar/
 ENV DESINVENTAR_PORTAL_CACHEDIR=$DESINVENTAR_PORTAL_CACHEDIR
 ENV DESINVENTAR_URL=$DESINVENTAR_URL
+
+RUN yum -y install php-redis
+RUN sed -i 's#"files"#"redis"#' /etc/httpd/conf.d/php.conf
+RUN sed -i 's#"/var/lib/php/session"#"tcp://redis:6379"#' /etc/httpd/conf.d/php.conf
 
 RUN mkdir -p /var/www/html
 RUN echo "<html><head><title>DesInventar</title></head><body><h3>DesInventar</h3></body></html>" > /var/www/html/index.html

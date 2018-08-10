@@ -15,7 +15,7 @@ ADD yarn.lock /tmp/yarn.lock
 RUN cd /tmp && yarn install
 RUN mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app
 
-RUN yum -y install php-pecl-dbase php-pecl-zip
+RUN yum -y install php-pecl-dbase php-pecl-zip php-redis
 
 RUN yum -y install java
 RUN mkdir -p /usr/local/liquibase && cd /usr/local/liquibase && \
@@ -41,6 +41,9 @@ RUN sed -i 's#/var/www/html#/opt/app#' /etc/httpd/conf.d/web.conf
 RUN sed -i 's#localhost#desinventaronline_web_1#' /etc/httpd/conf.d/web.conf
 RUN sed -i 's#^post_max_size = 8M$#post_max_size = 100M#' /etc/php.ini
 RUN sed -i 's#^upload_max_filesize = 2M$#upload_max_filesize = 100M#' /etc/php.ini
+
+RUN sed -i 's#"files"#"redis"#' /etc/httpd/conf.d/php.conf
+RUN sed -i 's#"/var/lib/php/session"#"tcp://redis:6379"#' /etc/httpd/conf.d/php.conf
 
 COPY . /opt/app
 RUN mkdir -p /opt/app && cp -a /tmp/vendor /opt/app && composer install

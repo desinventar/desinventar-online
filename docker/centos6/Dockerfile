@@ -21,7 +21,7 @@ RUN yum -y install liberation-mono-fonts liberation-serif-fonts
 RUN yum install -y http://rpms.remirepo.net/enterprise/remi-release-6.rpm
 RUN yum -y install yum-plugin-replace yum-utils
 RUN yum-config-manager --enable remi-php72
-RUN yum -y install php php-common php-cli php-gd php-xml php-pdo php-mbstring
+RUN yum -y install php php-common php-cli php-gd php-xml php-pdo php-mbstring php-redis
 
 RUN yum -y --enablerepo=desinventar install liberation-fonts-extras
 RUN yum -y --enablerepo=epel install mapserver proj proj-epsg proj-nad

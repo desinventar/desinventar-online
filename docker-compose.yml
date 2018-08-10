@@ -102,4 +102,10 @@ services:
       - "5000:5000"
     volumes:
       - /var/local/desinventar:/var/local/desinventar
+  redis:
+    build:
+      context: .
+      dockerfile: docker/redis/Dockerfile
+    ports:
+      - "6379:6379"
 
