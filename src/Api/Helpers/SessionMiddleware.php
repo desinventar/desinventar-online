@@ -18,7 +18,6 @@ class SessionMiddleware
     {
         $session = $this->container->get('session')->getSegment('');
         $language = $session->get('language');
-        \ChromePhp::log('from session: ' . $language);
         if (empty($language)) {
             $browser = new BrowserLocalization();
             $language = $browser->detect();

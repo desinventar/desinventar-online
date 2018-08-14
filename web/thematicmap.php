@@ -7,10 +7,19 @@ require_once('include/loader.php');
 require_once('include/maps.class.php');
 require_once('include/diregion.class.php');
 
+use Aura\Session\SessionFactory;
+
 use DesInventar\Legacy\DIRegion;
 use DesInventar\Common\MapServer;
 use DesInventar\Legacy\Maps;
 use DesInventar\Common\Util;
+
+$util = new Util();
+$sessionFactory = new SessionFactory();
+$session = $sessionFactory->newInstance($_COOKIE);
+$segment = $session->getSegment('');
+$lg = $util->getLanguageIsoCode($segment->get('language'), Util::ISO_639_2);
+$t->assign('lg', $lg);
 
 $post = $_POST;
 $get = $_GET;

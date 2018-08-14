@@ -4,6 +4,9 @@
   (c) Corporacion OSSO
 */
 
+use Aura\Session\SessionFactory;
+use DesInventar\Common\Util;
+
 require_once('include/loader.php');
 require_once('include/distatus.class.php');
 require_once('include/diobject.class.php');
@@ -16,6 +19,14 @@ $cmd  = getParameter('_infocmd', getParameter('cmd', ''));
 if ($RegionId == '') {
     exit();
 }
+
+$util = new Util();
+$sessionFactory = new SessionFactory();
+$session = $sessionFactory->newInstance($_COOKIE);
+$segment = $session->getSegment('');
+$lg = $util->getLanguageIsoCode($segment->get('language'), Util::ISO_639_2);
+$t->assign('lg', $lg);
+
 $us->open($RegionId);
 switch ($cmd) {
     case 'cmdDBInfoUpdate':

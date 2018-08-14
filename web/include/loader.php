@@ -4,7 +4,7 @@
  (c) Corporacion OSSO
 */
 
-use \DesInventar\Common\ConfigLoader;
+use DesInventar\Common\ConfigLoader;
 
 if (! isset($_SERVER['DESINVENTAR_WEB'])) {
     $_SERVER['DESINVENTAR_WEB'] = dirname(dirname(__FILE__));

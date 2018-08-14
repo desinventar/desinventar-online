@@ -3,7 +3,11 @@
  DesInventar - http://www.desinventar.org
  (c) 1998-2012 Corporacion OSSO
 */
+
+use Aura\Session\SessionFactory;
+
 use DesInventar\Legacy\DIRegion;
+use DesInventar\Common\Util;
 
 require_once('include/loader.php');
 require_once('include/diregion.class.php');
@@ -15,6 +19,13 @@ $RegionId = getParameter('_REG', getParameter('r', ''));
 if ($RegionId == '') {
     exit();
 }
+
+$util = new Util();
+$sessionFactory = new SessionFactory();
+$session = $sessionFactory->newInstance($_COOKIE);
+$segment = $session->getSegment('');
+$lg = $util->getLanguageIsoCode($segment->get('language'), Util::ISO_639_2);
+$t->assign('lg', $lg);
 
 $us->open($RegionId);
 $r = new DIRegion($us, $RegionId);

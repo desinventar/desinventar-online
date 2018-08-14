@@ -3,7 +3,18 @@
  DesInventar - http://www.desinventar.org
  (c) Corporacion OSSO
 */
+use Aura\Session\SessionFactory;
+use DesInventar\Common\Util;
+
 require_once('include/loader.php');
+
+$util = new Util();
+$sessionFactory = new SessionFactory();
+$session = $sessionFactory->newInstance($_COOKIE);
+$segment = $session->getSegment('');
+$lg = $util->getLanguageIsoCode($segment->get('language'), Util::ISO_639_2);
+$t->assign('lg', $lg);
+
 $mod = 'metguide';
 $pages = array(
     'intro','whatis','aboutdesinv','regioninfo','geography',

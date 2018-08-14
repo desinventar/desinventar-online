@@ -25,7 +25,7 @@ class QueryOperations
         $iReturn = 1;
         try {
             $xml_doc = new SimpleXMLElement($xml_string);
-            $values = $xml_doc->xpath('query');
+            $values = (array)$xml_doc->xpath('query');
             $xml_query = reset($values);
             if ($xml_query == '') {
                 // Valid XML but no query_design element
@@ -42,7 +42,7 @@ class QueryOperations
         // Attempt to read as 1.0 query version (malformed XML)
         $pos = $this->isV1($xml_string);
         $value = substr($xml_string, $pos);
-        $query = unserialize(base64_decode($value));
+        $query = unserialize(base64_decode($value) . '');
         return $query;
     }
 

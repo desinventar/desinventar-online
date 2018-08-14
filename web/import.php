@@ -3,10 +3,13 @@
  DesInventar - http://www.desinventar.org
  (c) Corporacion OSSO
 */
+
+use Aura\Session\SessionFactory;
+use DesInventar\Common\Util;
+use DesInventar\Legacy\DIImport;
+
 require_once('include/loader.php');
 require_once('include/diimport.class.php');
-
-use DesInventar\Legacy\DIImport;
 
 $post = $_POST;
 $get = $_GET;
@@ -16,6 +19,14 @@ $RegionId = getParameter('_REG', getParameter('r'), '');
 if ($RegionId == '') {
     exit();
 }
+
+$util = new Util();
+$sessionFactory = new SessionFactory();
+$session = $sessionFactory->newInstance($_COOKIE);
+$segment = $session->getSegment('');
+$lg = $util->getLanguageIsoCode($segment->get('language'), Util::ISO_639_2);
+$t->assign('lg', $lg);
+
 $us->open($RegionId);
 
 $ImportType = $post['diobj'];

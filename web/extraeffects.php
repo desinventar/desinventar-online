@@ -4,17 +4,27 @@
  (c) Corporacion OSSO
 */
 
+use Aura\Session\SessionFactory;
+use DesInventar\Common\Util;
+use DesInventar\Legacy\DIEEField;
+
 require_once('include/loader.php');
 require_once('include/query.class.php');
 require_once('include/dieefield.class.php');
-
-use \DesInventar\Legacy\DIEEField;
 
 $get = $_POST;
 $RegionId = getParameter('RegionId', getParameter('r', ''));
 if ($RegionId == '') {
     exit();
 }
+
+$util = new Util();
+$sessionFactory = new SessionFactory();
+$session = $sessionFactory->newInstance($_COOKIE);
+$segment = $session->getSegment('');
+$lg = $util->getLanguageIsoCode($segment->get('language'), Util::ISO_639_2);
+$t->assign('lg', $lg);
+
 $cmd = getParameter('cmd', '');
 $us->open($RegionId);
 switch ($cmd) {

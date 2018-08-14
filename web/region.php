@@ -4,6 +4,10 @@
  (c) Corporacion OSSO
 */
 
+use Aura\Session\SessionFactory;
+use DesInventar\Common\Util;
+use DesInventar\Legacy\DIRegion;
+
 require_once('include/loader.php');
 require_once('include/diregion.class.php');
 require_once('include/dievent.class.php');
@@ -14,7 +18,12 @@ require_once('include/digeography.class.php');
 
 require_once 'include/region_operations.php';
 
-use \DesInventar\Legacy\DIRegion;
+$util = new Util();
+$sessionFactory = new SessionFactory();
+$session = $sessionFactory->newInstance($_COOKIE);
+$segment = $session->getSegment('');
+$lg = $util->getLanguageIsoCode($segment->get('language'), Util::ISO_639_2);
+$t->assign('lg', $lg);
 
 if (isset($_POST['cmd']) && !empty($_POST['cmd'])) {
     $cmd = $_POST['cmd'];
