@@ -5,10 +5,10 @@ LABEL e-mail="jhcaiced@inticol.com"
 
 WORKDIR /opt/app
 
+RUN sed -i 's/^mirrorlist/#mirrorlist/; s|#baseurl=http://mirror.centos.org|baseurl=http://mirrors.kernel.org|' /etc/yum.repos.d/CentOS-Base.repo
+
 ADD composer.json /tmp/composer.json
 ADD composer.lock /tmp/composer.lock
-
-RUN composer self-update
 RUN cd /tmp && composer install --no-scripts --no-autoloader --prefer-source --no-interaction
 RUN mkdir -p /opt/app && cp -a /tmp/vendor /opt/app
 
@@ -16,8 +16,6 @@ ADD package.json /tmp/package.json
 ADD yarn.lock /tmp/yarn.lock
 RUN cd /tmp && yarn install
 RUN mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app
-
-RUN composer self-update
 
 RUN useradd -g 33 -u 33 www-data
 # Apache Configuration
@@ -43,7 +41,7 @@ RUN cd /usr/local/liquibase && wget -q https://dev.mysql.com/get/Downloads/Conne
     mv mysql-connector-java-5.1.46/mysql-connector-java-5.1.46.jar ./liquibase-mysql-connector-java-5.1.46.jar
 
 COPY . /opt/app
-RUN mkdir -p /opt/app && cp -a /tmp/vendor /opt/app && composer install
+RUN mkdir -p /opt/app && cp -a /tmp/vendor /opt/app && /bin/rm -rf /opt/app/vendor/jpgraph && composer install
 RUN mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app && yarn
 
 RUN make devel-app
