@@ -141,7 +141,7 @@ class LegacyIndex
                 return htmlspecialchars(json_encode($answer), ENT_NOQUOTES, 'UTF-8');
                 break;
             case 'cmdUserLanguageChange':
-                $base = new DesInventar\Service\Base($us->q->base);
+                $base = new \DesInventar\Service\Base($us->q->base);
                 $LangList = $base->getLanguagesList();
                 $LangIsoCode = getParameter('LangIsoCode');
                 $answer = array();
