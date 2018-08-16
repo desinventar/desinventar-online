@@ -5,6 +5,8 @@ LABEL e-mail="jhcaiced@inticol.com"
 
 WORKDIR /opt/app
 
+RUN sed -i 's/^mirrorlist/#mirrorlist/; s|#baseurl=http://mirror.centos.org|baseurl=http://mirrors.kernel.org|' /etc/yum.repos.d/CentOS-Base.repo
+
 ADD composer.json /tmp/composer.json
 ADD composer.lock /tmp/composer.lock
 RUN cd /tmp && composer install --no-scripts --no-autoloader --prefer-source --no-interaction
