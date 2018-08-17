@@ -170,8 +170,8 @@ if ($config->flags['env'] != 'command') {
     // Choose Language (First from Configuration, next from Url Parameter,
     // next from UserSession table, then autodetect from browser)
     $lg = '';
-    if ($lg == '') {
-        $lg = getParameter('lang');
+    if ($lg == '' && !empty($_SESSION['lang'])) {
+        $lg = $_SESSION['lang'];
     }
     if (! empty($config->general['lang'])) {
         $lg = $config->general['lang'];
@@ -205,6 +205,7 @@ if ($config->flags['env'] != 'command') {
     $config->general['lang'] = $lg;
     $us->changeLanguage($lg);
 
+    // @TODO:Remove use of $_SESSION
     $_SESSION['lang'] = $lg;
     $t->assign('lg', $lg);
     $t->assign('lang', $lg);

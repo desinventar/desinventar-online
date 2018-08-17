@@ -2,6 +2,8 @@
 
 namespace DesInventar;
 
+use Aura\Session\SessionFactory;
+
 use \DesInventar\Legacy\UserSession;
 use \DesInventar\Legacy\DIRegion;
 use \DesInventar\Legacy\DIRegionDB;
@@ -149,8 +151,14 @@ class LegacyIndex
                 if ($LangIsoCode !== '' && $lg != $LangIsoCode) {
                     if (array_key_exists($LangIsoCode, $LangList)) {
                         $us->changeLanguage($LangIsoCode);
+                        // @TODO:Remove use of $_SESSION
+                        $_SESSION['lang'] = $LangIsoCode;
                         $iReturn = ERR_NO_ERROR;
                         $answer['LangIsoCode'] = $LangIsoCode;
+
+                        $sessionFactory = (new SessionFactory())->newInstance($_COOKIE);
+                        $session = $sessionFactory->getSegment('');
+                        $session->set('language', $LangIsoCode);
                     } else {
                         $iReturn = ERR_LANGUAGE_INVALID;
                     }

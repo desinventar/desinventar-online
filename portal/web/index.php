@@ -43,7 +43,11 @@ $app->get('/', function (Request $request, Response $response, array $args) use 
     $session = $container->get('session')->getSegment('');
     $browser = new BrowserLocalization();
     $language = $session->get('language', $container->get('util')->getLangIsoCode($browser->detect()));
+    // @TODO: Remove direct usage of $_SESSION
+    $_SESSION['lang'] = $language;
     $t->assign('lang', $language);
+    $t->assign('lg', $language);
+    $t->assign('desinventarLang', $language);
     $response->getBody()->write($t->fetch('index.tpl'));
     return $response;
 });
