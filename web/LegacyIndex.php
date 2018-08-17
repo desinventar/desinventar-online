@@ -2,6 +2,8 @@
 
 namespace DesInventar;
 
+use Aura\Session\SessionFactory;
+
 use \DesInventar\Legacy\UserSession;
 use \DesInventar\Legacy\DIRegion;
 use \DesInventar\Legacy\DIRegionDB;
