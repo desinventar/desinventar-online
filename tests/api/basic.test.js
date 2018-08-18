@@ -19,4 +19,17 @@ describe('Basic API Tests', () => {
   it('should check error response', async () => {
     await request.get('/non-existent-endpoint').expect(404)
   })
+
+  it('can change the session language', async () => {
+    let response = await request.get('/session/info').expect(200)
+    expect(response.body.data.language.startsWith('en')).toBe(true)
+    let cookies = response.headers['set-cookie']
+    let call = request.post('/session/change-language')
+    response = await call.set('Cookie', cookies).send({
+      language: 'es'
+    })
+    call = request.get('/session/info')
+    response = await call.set('Cookie', cookies)
+    expect(response.body.data.language.startsWith('es')).toBe(true)
+  })
 })
