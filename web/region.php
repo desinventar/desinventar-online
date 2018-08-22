@@ -5,7 +5,7 @@
 */
 
 use Aura\Session\SessionFactory;
-use DesInventar\Common\Util;
+use DesInventar\Common\Language;
 use DesInventar\Legacy\DIRegion;
 
 require_once('include/loader.php');
@@ -18,11 +18,10 @@ require_once('include/digeography.class.php');
 
 require_once 'include/region_operations.php';
 
-$util = new Util();
 $sessionFactory = new SessionFactory();
 $session = $sessionFactory->newInstance($_COOKIE);
 $segment = $session->getSegment('');
-$lg = $util->getLanguageIsoCode($segment->get('language'), Util::ISO_639_2);
+$lg = (new Language())->getLanguageIsoCode($segment->get('language'), Language::ISO_639_2);
 $t->assign('lg', $lg);
 
 if (isset($_POST['cmd']) && !empty($_POST['cmd'])) {

@@ -8,6 +8,7 @@ use Aura\Session\SessionFactory;
 
 use DesInventar\Legacy\DIRegion;
 use DesInventar\Legacy\DIDisaster;
+use DesInventar\Common\Language;
 use DesInventar\Common\Util;
 
 require_once('include/loader.php');
@@ -18,11 +19,10 @@ if ($RegionId == '') {
     exit();
 }
 
-$util = new Util();
 $sessionFactory = new SessionFactory();
 $session = $sessionFactory->newInstance($_COOKIE);
 $segment = $session->getSegment('');
-$lg = $util->getLanguageIsoCode($segment->get('language'), Util::ISO_639_2);
+$lg = (new Language())->getLanguageIsoCode($segment->get('language'), Language::ISO_639_2);
 $t->assign('lg', $lg);
 
 $us->open($RegionId);
@@ -123,6 +123,7 @@ if (isset($post['page']) || isset($post['_D+cmd'])) {
             $pin = $pag-1;
             $pgt = $pag;
         }
+        $util = new Util();
         for ($i = $pin; $i < $pgt; $i++) {
             $slim = $sql .' LIMIT ' . $i * $iRecordsPerPage .', '. $iRecordsPerPage;
             $dislist = $us->q->getassoc($slim);

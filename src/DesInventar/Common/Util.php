@@ -6,9 +6,6 @@ use Ramsey\Uuid\UuidFactory;
 
 class Util
 {
-    const ISO_639_1 = 1;
-    const ISO_639_2 = 2;
-
     public function getUrl()
     {
         if (!isset($_SERVER['HTTP_HOST']) || !isset($_SERVER['REQUEST_URI'])) {
@@ -45,25 +42,6 @@ class Util
             return true;
         }
         return false;
-    }
-
-    public function getLanguageIsoCode($lang, $type)
-    {
-        switch ($type) {
-            case self::ISO_639_1:
-                $map = ['eng' => 'en', 'spa' => 'es', 'por' => 'pt', 'fre' => 'fr'];
-                $key = substr($lang, 0, 3);
-                break;
-            case self::ISO_639_2:
-            default:
-                $map = ['en' => 'eng', 'es' => 'spa', 'pt' => 'por', 'fr' => 'fre'];
-                $key = substr($lang, 0, 2);
-                break;
-        }
-        if (empty($map[$key])) {
-            return reset($map);
-        }
-        return $map[$key];
     }
 
     public function removeSpecialChars($value)

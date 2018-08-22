@@ -24,12 +24,25 @@ describe('Basic API Tests', () => {
     let response = await request.get('/session/info').expect(200)
     expect(response.body.data.language.startsWith('en')).toBe(true)
     let cookies = response.headers['set-cookie']
-    let call = request.post('/session/change-language')
-    response = await call.set('Cookie', cookies).send({
-      language: 'es'
-    })
-    call = request.get('/session/info')
-    response = await call.set('Cookie', cookies)
+
+    response = await request
+      .post('/session/change-language')
+      .set('Cookie', cookies)
+      .send({
+        language: 'es'
+      })
+
+    response = await request.get('/session/info').set('Cookie', cookies)
+    expect(response.body.data.language.startsWith('es')).toBe(true)
+
+    response = await request
+      .post('/session/change-language')
+      .set('Cookie', cookies)
+      .send({
+        language: 'non-existent'
+      })
+    expect(response.body.errors[0].message).toBe('Invalid Language Code')
+    response = await request.get('/session/info').set('Cookie', cookies)
     expect(response.body.data.language.startsWith('es')).toBe(true)
   })
 })

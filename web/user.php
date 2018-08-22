@@ -8,15 +8,14 @@ require_once('include/loader.php');
 require_once 'include/user_operations.php';
 
 use Aura\Session\SessionFactory;
-use DesInventar\Common\Util;
+use DesInventar\Common\Language;
 use DesInventar\Legacy\UserSession;
 use DesInventar\Legacy\DIUser;
 
-$util = new Util();
 $sessionFactory = new SessionFactory();
 $session = $sessionFactory->newInstance($_COOKIE);
 $segment = $session->getSegment('');
-$lg = $util->getLanguageIsoCode($segment->get('language'), Util::ISO_639_2);
+$lg = (new Language())->getLanguageIsoCode($segment->get('language'), Language::ISO_639_2);
 $t->assign('lg', $lg);
 
 $cmd = getParameter('cmd', '');

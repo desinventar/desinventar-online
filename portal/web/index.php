@@ -13,6 +13,7 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\ErrorLogHandler;
 
+use DesInventar\Common\Language;
 use DesInventar\Common\Util;
 use DesInventar\Common\ConfigLoader;
 use DesInventar\Common\Version;
@@ -57,7 +58,7 @@ $app->get('/', function (Request $request, Response $response, array $args) use 
         $language = $session->get('language', $browser->detect());
         $session->set('language', $language);
     }
-    $langCode = $container->get('util')->getLanguageIsoCode($language, Util::ISO_639_2);
+    $langCode = (new Language())->getLanguageIsoCode($language, Language::ISO_639_2);
     $t->assign('lang', $langCode);
 
     $response->getBody()->write($t->fetch('index.tpl'));
@@ -68,7 +69,7 @@ $app->post('/change-language', function (Request $request, Response $response) u
     $body = $request->getParsedBody();
     $langCode = $body['language'];
     $session = $container->get('session')->getSegment('');
-    $language = $container->get('util')->getLanguageIsoCode($langCode, Util::ISO_639_1);
+    $language = (new Language())->getLanguageIsoCode($langCode, Language::ISO_639_1);
     $session->set('language', $language);
     return $response->withJson([]);
 });

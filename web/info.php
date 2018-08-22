@@ -5,7 +5,7 @@
 */
 
 use Aura\Session\SessionFactory;
-use DesInventar\Common\Util;
+use DesInventar\Common\Language;
 
 require_once('include/loader.php');
 require_once('include/distatus.class.php');
@@ -20,11 +20,10 @@ if ($RegionId == '') {
     exit();
 }
 
-$util = new Util();
 $sessionFactory = new SessionFactory();
 $session = $sessionFactory->newInstance($_COOKIE);
 $segment = $session->getSegment('');
-$lg = $util->getLanguageIsoCode($segment->get('language'), Util::ISO_639_2);
+$lg = (new Language())->getLanguageIsoCode($segment->get('language'), Language::ISO_639_2);
 $t->assign('lg', $lg);
 
 $us->open($RegionId);

@@ -13,6 +13,7 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\ErrorLogHandler;
 
+use DesInventar\Common\Language;
 use DesInventar\Common\Util;
 
 use Api\Helpers\JsonApiResponse;
@@ -65,7 +66,7 @@ $container['oldindex'] = function ($c) use ($settings) {
     $oldIndex = new \DesInventar\LegacyIndex(
         $settings['template'],
         $settings['session'],
-        $c->get('util')->getLanguageIsoCode($session->get('language'), Util::ISO_639_2),
+        (new Language())->getLanguageIsoCode($session->get('language'), Language::ISO_639_2),
         $settings['config']
     );
     return $oldIndex;
