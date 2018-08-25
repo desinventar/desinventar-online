@@ -7,9 +7,12 @@ namespace DesInventar\Legacy;
 
 class DIResult
 {
+    protected $options;
+    protected $session;
     private $options_default_common = array(
         'LangIsoCode' => 'eng'
     );
+
     public function __construct($prmSession, $prmOptions)
     {
         $this->session = $prmSession;

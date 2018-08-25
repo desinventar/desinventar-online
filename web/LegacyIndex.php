@@ -1232,7 +1232,7 @@ class LegacyIndex
                 require_once('include/diprofile.class.php');
                 $post = $_POST;
                 fixPost($post);
-                $post['General']['LangIsoCode'] = $lg;
+                $post['Common']['LangIsoCode'] = $lg;
 
                 $options = explode('/', $_GET['params']);
                 $profile_id   = isset($options[0]) ? $options[0] : '';
@@ -1262,7 +1262,7 @@ class LegacyIndex
                 require_once('include/digraph.class.php');
                 $post = $_POST;
                 fixPost($post);
-                $post['General']['LangIsoCode'] = $lg;
+                $post['Common']['LangIsoCode'] = $lg;
                 $graph = new DIGraph($us, $post, $config->graphs);
                 $graph->execute();
 

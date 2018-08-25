@@ -28,6 +28,7 @@ class DIGraph extends DIResult
         'tmp_dir' => '',
         'url' => ''
     ];
+    protected $dictionary;
 
     public function __construct($prmSession, $prmOptions, $config)
     {
@@ -43,6 +44,7 @@ class DIGraph extends DIResult
         parent::__construct($prmSession, $prmOptions);
         $this->options['Graph']   = array_merge($this->options_default_graph, $prmOptions['Graph']);
         $this->config = array_merge($this->config, $config);
+        $this->dictionary = $this->loadDictionary($this->options['Common']['LangIsoCode']);
     }
 
     public function preProcessData()
@@ -58,6 +60,19 @@ class DIGraph extends DIResult
         }
     }
 
+    public function loadDictionary($language)
+    {
+        $dic = [];
+        foreach ($this->session->q->loadGeoLevels('', -1, false) as $k => $i) {
+            $dic['GraphGeographyId_'. $k] = array($i[0], $i[1]);
+        }
+        $dic = array_merge($dic, $this->session->q->queryLabelsFromGroup('Graph', $language));
+        $dic = array_merge($dic, $this->session->q->queryLabelsFromGroup('Effect', $language));
+        $dic = array_merge($dic, $this->session->q->queryLabelsFromGroup('Sector', $language));
+        $dic = array_merge($dic, $this->session->q->getEEFieldList('True'));
+        return $dic;
+    }
+
     public function execute()
     {
         $this->preProcessData();
@@ -65,16 +80,7 @@ class DIGraph extends DIResult
         $us = $this->session;
         $options = $this->options;
 
-        foreach ($us->q->loadGeoLevels('', -1, false) as $k => $i) {
-            $st['GraphGeographyId_'. $k] = array($i[0], $i[1]);
-        }
-
-        $lg = $options['Common']['LangIsoCode'];
-        $dic = array_merge(array(), $st);
-        $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Graph', $lg));
-        $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Effect', $lg));
-        $dic = array_merge($dic, $us->q->queryLabelsFromGroup('Sector', $lg));
-        $dic = array_merge($dic, $us->q->getEEFieldList('True'));
+        $dic = $this->dictionary;
         $prmGraph = $options['Graph'];
 
         $query_graph = '';
