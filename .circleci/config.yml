@@ -12,6 +12,10 @@ jobs:
             docker run --network project_default \
               appropriate/curl --retry 30 --retry-delay 2 --retry-connrefused http://web:80/common/version
       - run:
+          name: Validate Code
+          command: |
+            docker-compose exec php sh -c 'make php'
+      - run:
           name: Running unit tests
           command: |
             docker-compose exec web sh -c './vendor/bin/phpunit'

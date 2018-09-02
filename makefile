@@ -27,7 +27,7 @@ database: .FORCE
 lang: .FORCE
 	cd files/database && make lang
 
-php : standard-php phpmd lint-php
+php : standard-php phpmd lint-php phpstan
 
 test : test-unit test-api
 
@@ -56,7 +56,7 @@ phpmd: .FORCE
 		-name \*.php -exec ./vendor/bin/phpmd {} text ./files/phpmd/ruleset.xml \;
 
 phpstan: .FORCE
-	docker run --rm -v `pwd`:/app phpstan/phpstan analyse --level 7 /app/src /app/tests
+	./vendor/bin/phpstan analyse --level 7 src tests
 
 js : standard-js
 
