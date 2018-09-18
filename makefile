@@ -36,8 +36,6 @@ test-unit: .FORCE
 
 test-api: .FORCE
 	TEST_API_URL=http://localhost:8080 ./node_modules/.bin/jest tests/api
-	TEST_API_URL=http://localhost:8081 ./node_modules/.bin/jest tests/api
-	TEST_API_URL=http://localhost:8082 ./node_modules/.bin/jest tests/api
 
 test-e2e: .FORCE
 	TEST_WEB_URL=http://localhost:8080 ./node_modules/.bin/testcafe firefox:headless tests/e2e
