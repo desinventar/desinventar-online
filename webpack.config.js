@@ -1,3 +1,5 @@
+var webpack = require('webpack')
+
 module.exports = {
   mode: 'development',
   entry: __dirname + '/web/js/entry.js',
@@ -9,7 +11,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        include: __dirname + '/web/js',
+        include: [__dirname + '/web/js', __dirname + '/web/js2'],
         use: [
           {
             loader: 'babel-loader',
@@ -27,6 +29,7 @@ module.exports = {
     mainFields: ['main', 'browser'],
     mainFiles: ['index']
   },
+  plugins: [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)],
   performance: {
     hints: false
   }

@@ -17,11 +17,11 @@
  DesInventar - http://www.desinventar.org
  (c) Corporacion OSSO
 */
-const databaseCreate = require("./database_create.js");
+import databaseCreate from './database_create.js'
 
-module.exports = {
+export default {
   init: onReadyExtJS
-};
+}
 
 function onReadyExtJS() {
   Ext.BLANK_IMAGE_URL =

@@ -31,17 +31,19 @@
  (c) Corporacion OSSO
 */
 
-require("jquery-ui/ui/widgets/tabs");
+import 'jquery-ui/ui/widgets/tabs'
+import mainExt from './main_ext'
+import databaseCreate from './database_create'
 
-module.exports = {
+export default {
   init: onReadyMain
-};
+}
 
 function onReadyMain() {
-  require("./main_ext.js").init();
+  mainExt.init();
   onReadyDatabaseList();
   onReadyDatabaseUpload();
-  require("./database_create.js").init();
+  databaseCreate.init();
   onReadyDatabaseUsers();
   onReadyQueryDesign();
   onReadyGeography();

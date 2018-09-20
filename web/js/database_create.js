@@ -4,12 +4,12 @@
  (c) Corporacion OSSO
 */
 
-const moment = require("moment");
+import moment from 'moment'
 
-module.exports = {
+export default {
   init: onReadyDatabaseCreate,
   show: doDatabaseCreateShow
-};
+}
 
 function onReadyDatabaseCreate() {
   doDatabaseCreateSetup();
