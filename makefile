@@ -38,10 +38,10 @@ test-api: .FORCE
 	TEST_API_URL=http://localhost:8080 ./node_modules/.bin/jest tests/api
 
 test-e2e: .FORCE
-	TEST_WEB_URL=http://localhost:8080 ./node_modules/.bin/testcafe firefox:headless tests/e2e
+	TEST_WEB_URL=http://localhost:8080 ./node_modules/.bin/testcafe firefox tests/e2e
 
 test-portal: .FORCE
-	./node_modules/.bin/testcafe firefox:headless tests/portal
+	./node_modules/.bin/testcafe firefox tests/portal
 
 lint-php : .FORCE
 	find src config web tests portal -name "*.php" -exec php -l {} > /dev/null \;

@@ -14,7 +14,6 @@
 	onReadyAdminUsers,
 	onReadyUserPermAdmin,
 	onReadyCommon,
-	onReadyPrototype,
 	onReadyUserLogin,
 	onReadyUserAccount,
 	onReadyDatacards,
@@ -53,7 +52,6 @@ function onReadyMain() {
   onReadyAdminUsers();
   onReadyUserPermAdmin();
   onReadyCommon();
-  onReadyPrototype();
   onReadyUserLogin();
   onReadyUserAccount();
   onReadyDatacards();

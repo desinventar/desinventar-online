@@ -8,10 +8,10 @@
     module.exports = factory(require('jquery'), require('prototype'))
   } else {
     jQuery.extend(true, desinventar, {
-      datacards: factory(root.jQuery, root.$)
+      datacards: factory(root.jQuery)
     })
   }
-})(this, function(jQuery, $) {
+})(this, function(jQuery) {
   'use strict'
   var me = {}
   var navigation = desinventar.datacards.navigation
@@ -51,7 +51,8 @@
     })
   }
 
-  function toggleFormEdit(xForm, disab) {
+  function toggleFormEdit(id, disab) {
+    var xForm = document.getElementById(id)
     if (xForm === null) {
       return false
     }
@@ -85,7 +86,7 @@
   }
 
   function create() {
-    me.toggleFormEdit($('DICard'), false)
+    me.toggleFormEdit('DICard', false)
     jQuery('#DisasterBeginTime0').focus()
     me.showStatus('msgDatacardFill')
     navigation.setEditMode()
@@ -214,7 +215,8 @@
   me.clear = function() {
     jQuery('#DisasterId').val('')
     jQuery('#DatacardPrefix').val('')
-    $('DICard').reset()
+    var form = document.getElementById('DICard')
+    form.reset()
     jQuery('#DatacardCommand').val('insertDICard')
     jQuery('#cardsRecordNumber').val(0)
     clearEffects()

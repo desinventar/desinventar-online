@@ -8,7 +8,6 @@
 	<head>
 		<meta charset="UTF-8" />
 		<title>DesInventar</title>
-		<script type="text/javascript" src="{-$desinventarURL-}/scripts/prototype.js"></script>
 		<!-- jQuery -->
 		{-include file="jquery.tpl"-}
 		<!-- ExtJS -->
