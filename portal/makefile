@@ -2,13 +2,10 @@
 
 .PHONY : all .FORCE
 
-all : node webpack lang
-
-node: .FORCE
-	yarn
+all : webpack lang
 
 webpack: .FORCE
-	./node_modules/.bin/webpack -p
+	../node_modules/.bin/webpack -p
 
 lang: lang_spa lang_eng lang_por lang_fre
 

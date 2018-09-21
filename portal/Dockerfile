@@ -5,7 +5,7 @@ LABEL e-mail="jhcaiced@inticol.com"
 
 RUN sed -i 's/^mirrorlist/#mirrorlist/; s|#baseurl=http://mirror.centos.org|baseurl=http://mirrors.kernel.org|' /etc/yum.repos.d/CentOS-Base.repo
 
-WORKDIR /opt/app/portal
+WORKDIR /opt/app
 
 ADD composer.json /tmp/composer.json
 ADD composer.lock /tmp/composer.lock
@@ -13,10 +13,10 @@ ADD composer.lock /tmp/composer.lock
 RUN cd /tmp && composer install --no-scripts --no-autoloader --prefer-source --no-interaction
 RUN cp -a /tmp/vendor /opt/app
 
-ADD portal/package.json /tmp/package.json
-ADD portal/yarn.lock /tmp/yarn.lock
+ADD package.json /tmp/package.json
+ADD yarn.lock /tmp/yarn.lock
 RUN cd /tmp && yarn
-RUN cp -a /tmp/node_modules /opt/app/portal
+RUN cp -a /tmp/node_modules /opt/app
 
 ARG DESINVENTAR_PORTAL_CACHEDIR=/var/cache/smarty/desinventar/portal
 ARG DESINVENTAR_URL=https://online.desinventar.org/desinventar/
@@ -37,9 +37,11 @@ RUN cat /tmp/rewrite.conf >> /etc/httpd/conf/httpd.conf
 
 COPY . /opt/app
 RUN cp -a /tmp/vendor /opt/app
-RUN cp -a /tmp/node_modules /opt/app/portal
-RUN make
+RUN cp -a /tmp/node_modules /opt/app
+
 RUN cd /opt/app && composer install
+
+RUN make portal
 
 EXPOSE 80
 

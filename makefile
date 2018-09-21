@@ -41,7 +41,7 @@ test-e2e: .FORCE
 	TEST_WEB_URL=http://localhost:8080 ./node_modules/.bin/testcafe firefox tests/e2e
 
 test-portal: .FORCE
-	./node_modules/.bin/testcafe firefox tests/portal
+	TEST_PORTAL_URL=http://localhost:8090 TEST_PORTAL_USERNAME=root TEST_PORTAL_PASSWD=desinventar ./node_modules/.bin/testcafe firefox tests/portal
 
 lint-php : .FORCE
 	find src config web tests portal -name "*.php" -exec php -l {} > /dev/null \;
