@@ -5,7 +5,7 @@
 all : webpack lang
 
 webpack: .FORCE
-	../node_modules/.bin/webpack -p
+	mkdir -p web/scripts && ../node_modules/.bin/webpack -p
 
 lang: lang_spa lang_eng lang_por lang_fre
 

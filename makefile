@@ -34,8 +34,13 @@ test : test-unit test-api
 test-unit: .FORCE
 	./vendor/bin/phpunit
 
-test-api: .FORCE
-	TEST_API_URL=http://localhost:8080 ./node_modules/.bin/jest tests/api
+test-api: test-api-app test-api-portal
+
+test-api-app: .FORCE
+	TEST_API_URL=http://localhost:8080 ./node_modules/.bin/jest tests/api-app
+
+test-api-portal: .FORCE
+	TEST_PORTAL_URL=http://localhost:8090 ./node_modules/.bin/jest tests/api-portal
 
 test-e2e: .FORCE
 	TEST_WEB_URL=http://localhost:8080 ./node_modules/.bin/testcafe firefox tests/e2e
@@ -59,7 +64,7 @@ phpstan: .FORCE
 js : standard-js
 
 standard-js : .FORCE
-	./node_modules/.bin/eslint web/js2/**/*.js tests/e2e/**/*.js
+	./node_modules/.bin/eslint web/js2/**/*.js tests/**/*.js
 
 node-build : .FORCE
 	yarn install

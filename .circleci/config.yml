@@ -10,7 +10,10 @@ jobs:
             set -x
             docker-compose up -d
             docker run --network project_default \
-              appropriate/curl --retry 30 --retry-delay 2 --retry-connrefused http://web:80/common/version
+              appropriate/curl --retry 60 --retry-delay 4 --retry-connrefused --verbose http://web:80/common/version
+          environment:
+            - DOCKER_CLIENT_TIMEOUT: 120
+            - COMPOSE_HTTP_TIMEOUT: 120
       - run:
           name: Validate Code
           command: |
@@ -19,25 +22,21 @@ jobs:
           name: Running unit tests
           command: |
             docker-compose exec web sh -c './vendor/bin/phpunit'
-            #docker-compose exec web sh -c './vendor/bin/phpunit --log-junit /tmp/result.xml'
-            #mkdir -p /tmp/test-results/unit && docker cp project_web_1:/tmp/result.xml /tmp/test-results/unit/
+      - run:
+          name: Running portal api tests
+          command: |
+            docker-compose exec test sh -c 'TEST_API_URL=http://web:80 ./node_modules/.bin/jest tests/api-portal'
       - run:
           name: Running portal tests
           command: |
             docker-compose exec test sh -c 'TEST_PORTAL_URL=http://portal:80 TEST_PORTAL_USERNAME=root TEST_PORTAL_PASSWD=desinventar ./node_modules/.bin/testcafe firefox:headless tests/portal'
-            #docker-compose exec test sh -c 'TEST_PORTAL_URL=http://portal:80 TEST_PORTAL_USERNAME=root TEST_PORTAL_PASSWD=desinventar ./node_modules/.bin/testcafe firefox:headless tests/portal -r xunit:/tmp/result.xml'
-            #mkdir -p /tmp/test-results/portal && docker cp project_test_1:/tmp/result.xml /tmp/test-results/portal/
       - run:
           name: Running api tests
           command: |
-            docker-compose exec test sh -c 'TEST_API_URL=http://web:80 ./node_modules/.bin/jest tests/api'
-            #docker-compose exec test sh -c 'TEST_API_URL=http://web:80 JEST_JUNIT_OUTPUT=/tmp/result.xml ./node_modules/.bin/jest tests/api --ci --testResultsProcessor="jest-junit"'
-            #mkdir -p /tmp/test-results/api && docker cp project_test_1:/tmp/result.xml /tmp/test-results/api/
+            docker-compose exec test sh -c 'TEST_API_URL=http://web:80 ./node_modules/.bin/jest tests/api-app'
       - run:
           name: Running e2e tests
           command: |
             docker-compose exec test sh -c 'TEST_WEB_URL=http://web:80 ./node_modules/.bin/testcafe firefox:headless tests/e2e'
-            #docker-compose exec test sh -c 'TEST_WEB_URL=http://web:80 ./node_modules/.bin/testcafe firefox:headless tests/e2e -r xunit:/tmp/result.xml'
-            #mkdir -p /tmp/test-results/e2e && docker cp project_test_1:/tmp/result.xml /tmp/test-results/e2e/
       - store_test_results:
           path: /tmp/test-results

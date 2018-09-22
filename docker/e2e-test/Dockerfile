@@ -3,7 +3,7 @@ LABEL maintainer="Jhon H. Caicedo"
 LABEL e-mail="jhcaiced@inticol.com"
 
 WORKDIR /opt/app
-RUN apt update && apt install -y php
+RUN apt-get update && apt-get install -y php
 
 ADD package.json /tmp/package.json
 ADD yarn.lock /tmp/yarn.lock
