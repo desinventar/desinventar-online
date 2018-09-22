@@ -40,7 +40,6 @@ RUN cp -a /tmp/vendor /opt/app
 RUN cp -a /tmp/node_modules /opt/app
 
 RUN cd /opt/app && composer install
-RUN mkdir /opt/app/portal/web/scripts
 
 RUN make portal
 

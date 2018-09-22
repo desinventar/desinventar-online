@@ -1,25 +1,13 @@
 version: '3'
 services:
   web:
-    build: .
-    image: desinventar/online:latest
-    ports:
-     - "8080:80"
-    volumes:
-      - .:/opt/app
-      - /opt/app/vendor
-      - /opt/app/node_modules
-    environment:
-      - DESINVENTAR_FLAGS_MODE
-      - DESINVENTAR_MODE
-      - DESINVENTAR_PATHS_CACHEDIR
-  devel:
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: desinventar/online:latest
     command: bash -c '(/opt/app/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
-    depends_on:
-    - web
     ports:
-      - "8081:80"
+      - "8080:80"
     volumes:
       - .:/opt/app
       - /opt/app/vendor
@@ -36,23 +24,15 @@ services:
     command: bash -c '(/opt/app/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
     ports:
       - "8090:80"
-    #volumes:
-      #- .:/opt/app
-      #- /opt/app/vendor
-      #- /opt/app/node_modules
+    volumes:
+      - .:/opt/app
+      - /opt/app/vendor
+      - /opt/app/node_modules
     environment:
       - DESINVENTAR_MODE
       - DESINVENTAR_URL
       - DESINVENTAR_PORTAL_CACHEDIR
       - TEST_PORTAL_URL
-  test:
-    build:
-      context: .
-      dockerfile: docker/e2e-test/Dockerfile
-    volumes:
-      - .:/opt/app
-      - /opt/app/vendor
-      - /opt/app/node_modules
   liquibase:
     build:
       context: .
@@ -98,4 +78,3 @@ services:
       dockerfile: docker/redis/Dockerfile
     ports:
       - "6379:6379"
-
