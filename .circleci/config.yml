@@ -27,13 +27,13 @@ jobs:
           command: |
             docker-compose -f docker-compose-production.yml exec test sh -c 'TEST_API_URL=http://web:80 ./node_modules/.bin/jest tests/api-portal'
       - run:
-          name: Running portal tests
-          command: |
-            docker-compose -f docker-compose-production.yml exec test sh -c 'TEST_PORTAL_URL=http://portal:80 TEST_PORTAL_USERNAME=root TEST_PORTAL_PASSWD=desinventar ./node_modules/.bin/testcafe firefox:headless tests/portal'
-      - run:
           name: Running api tests
           command: |
             docker-compose -f docker-compose-production.yml exec test sh -c 'TEST_API_URL=http://web:80 ./node_modules/.bin/jest tests/api-app'
+      - run:
+          name: Running portal tests
+          command: |
+            docker-compose -f docker-compose-production.yml exec test sh -c 'TEST_PORTAL_URL=http://portal:80 TEST_PORTAL_USERNAME=root TEST_PORTAL_PASSWD=desinventar ./node_modules/.bin/testcafe firefox:headless tests/portal'
       - run:
           name: Running e2e tests
           command: |
