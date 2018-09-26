@@ -10,15 +10,8 @@
 	Include /var/www/html/web/rewrite.inc
 </Directory>
 
-Alias /desinventar-data /var/local/desinventar/tmp/data
-<Location /desinventar-data>
-	Order deny,allow
-	Allow from all
-	Allow from 127.0.0.1
-</Location>
-
-Alias /graphs /var/local/desinventar/tmp/graphs
-<Location /graphs>
+Alias /download /var/tmp/desinventar
+<Location /download>
 	Order deny,allow
 	Allow from all
 	Allow from 127.0.0.1

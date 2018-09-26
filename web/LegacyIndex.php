@@ -1136,21 +1136,21 @@ class LegacyIndex
                 return $t->fetch('graphparameters.tpl');
                 break;
             case 'cmdDatabaseExport':
-                $answer = array('Status'   => ERR_UNKNOWN_ERROR);
-                if ($desinventarUserRoleValue > ROLE_NONE) {
-                    $ShortName = 'DesInventar_' . date('Y-m-d') . '_' . $RegionId . '.zip';
-                    $FileName = $config->paths['www_dir'] . '/' . $SessionId . '/' . $ShortName;
-                    $URL      = $config->paths['www_uri'] . '/' . $SessionId . '/' . $ShortName;
-                    $r = new DIRegion($us);
-                    $iReturn = $r->createRegionBackup($FileName);
-                    if ($iReturn > 0) {
-                        $answer['Status'] = ERR_NO_ERROR;
-                        $answer['URL'     ] = $URL;
-                    } else {
-                        $answer['Status'] = ERR_UNKNOWN_ERROR;
-                    }
+                if ($desinventarUserRoleValue <= ROLE_NONE) {
+                    return json_encode(['Status' => ERR_UNKNOWN_ERROR]);
                 }
-                return json_encode($answer);
+                $ShortName = 'DesInventar_' . date('Y-m-d') . '_' . $RegionId . '.zip';
+                $FileName = $config->paths['www_dir'] . '/' . $us->sSessionId . '/' . $ShortName;
+                $URL      = $config->paths['www_uri'] . '/' . $us->sSessionId . '/' . $ShortName;
+                $r = new DIRegion($us);
+                $iReturn = $r->createRegionBackup($FileName);
+                if ($iReturn < 0) {
+                    return json_encode(['Status' => ERR_UNKNOWN_ERROR]);
+                }
+                return json_encode([
+                    'Status' => ERR_NO_ERROR,
+                    'URL' => $URL
+                ]);
                 break;
             case 'savequery':
             case 'cmdQuerySave':
@@ -1263,7 +1263,7 @@ class LegacyIndex
                 $post = $_POST;
                 fixPost($post);
                 $post['Common']['LangIsoCode'] = $lg;
-                $graph = new DIGraph($us, $post, $config->graphs);
+                $graph = new DIGraph($us, $post, $config);
                 $graph->execute();
 
                 if ($cmd == 'cmdGraphShow') {

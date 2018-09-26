@@ -61,8 +61,7 @@ RUN mkdir -p /var/local/desinventar/worldmap && \
     chown -R www-data:apache /var/local/desinventar/worldmap
 RUN mkdir -p /var/local/desinventar/db/database && \
     chown -R www-data:apache /var/local/desinventar/db/database
-RUN mkdir -p /var/local/desinventar/tmp/{data,graphs,maps} && \
-    chown -R www-data:apache /var/local/desinventar/tmp
+RUN mkdir -p /var/tmp/desinventar && chown -R www-data:apache /var/tmp/desinventar
 
 COPY files/seed/seed.tar.gz /tmp
 RUN cd /var/local/desinventar/db && \

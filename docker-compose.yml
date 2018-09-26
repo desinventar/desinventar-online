@@ -14,6 +14,8 @@ services:
       - /opt/app/node_modules
       - /var/local/desinventar:/var/local/desinventar
     environment:
+      - NODE_ENV
+      - APP_ENV
       - DESINVENTAR_FLAGS_MODE
       - DESINVENTAR_MODE
       - DESINVENTAR_PATHS_CACHEDIR
@@ -29,6 +31,8 @@ services:
       - /opt/app/vendor
       - /opt/app/node_modules
     environment:
+      - NODE_ENV
+      - APP_ENV
       - DESINVENTAR_MODE
       - DESINVENTAR_URL
       - DESINVENTAR_PORTAL_CACHEDIR

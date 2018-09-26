@@ -29,10 +29,10 @@ Requires: mapserver proj proj-epsg proj-nad
 %define BASE_DIR  %{_prefix}/share/desinventar
 %define WEB_DIR   %{BASE_DIR}/web
 %define FILES_DIR %{BASE_DIR}/files
-%define WWW_DIR   /var/local/desinventar/tmp/data
+%define WWW_DIR   /var/tmp/desinventar
 %define DATA_DIR  /var/local/desinventar/db
 %define WORLDMAP_DIR  /var/local/desinventar/worldmap
-%define TMP_DIR   /var/local/desinventar/tmp/data
+%define TMP_DIR   /var/tmp/desinventar
 %define CACHE_DIR /tmp
 %define CONFIG_DIR /etc/desinventar
 

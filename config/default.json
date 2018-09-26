@@ -1,23 +1,18 @@
 {
   "paths": {
     "libs_url": "//cdn-desinventar.inticol.com/js",
+    "font_dir": "/usr/share/fonts/truetype",
     "tmp_dir": "/tmp",
     "cache_dir": "/tmp",
-    "www_dir": "/var/local/desinventar/tmp/data",
-    "www_uri": "/desinventar-data"
-  },
-  "graphs": {
-    "url":"/graphs",
-    "font_dir": "/usr/share/fonts/truetype",
-    "tmp_dir": "/var/local/desinventar/tmp/graphs"
+    "www_dir": "/var/tmp/desinventar",
+    "www_uri": "/download"
   },
   "maps": {
     "mapserver_uri": "/cgi-bin/mapserv",
     "mapserver": "mapserv",
     "proj_lib": "/usr/share/proj",
     "worldmap_dir": "/var/local/desinventar/worldmap",
-    "fonts_dir": "/usr/share/fonts/liberation/fonts.txt",
-    "tmp_dir": "/var/local/desinventar/tmp/maps"
+    "fonts_dir": "/usr/share/fonts/liberation/fonts.txt"
   },
   "flags": {
     "mode": "devel",

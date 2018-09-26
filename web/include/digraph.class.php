@@ -26,7 +26,8 @@ class DIGraph extends DIResult
 
     protected $config = [
         'tmp_dir' => '',
-        'url' => ''
+        'url' => '',
+        'font_dir' => ''
     ];
     protected $dictionary;
 
@@ -43,7 +44,11 @@ class DIGraph extends DIResult
         }
         parent::__construct($prmSession, $prmOptions);
         $this->options['Graph']   = array_merge($this->options_default_graph, $prmOptions['Graph']);
-        $this->config = array_merge($this->config, $config);
+        $this->config = array_merge($this->config, [
+            'tmp_dir' => $config->paths['www_dir'],
+            'url' => $config->paths['www_uri'],
+            'font_dir' => $config->paths['font_dir']
+        ]);
         $this->dictionary = $this->loadDictionary($this->options['Common']['LangIsoCode']);
     }
 
@@ -188,12 +193,12 @@ class DIGraph extends DIResult
             $options['DateRange'] = $us->getDateRange($options['D_RecordStatus']);
             // Construct Graphic Object and Show Page
             try {
-                $g = new \DesInventar\Legacy\Graphic($us, $options, $gl, $this->config);
+                $myGraph = new \DesInventar\Legacy\Graphic($us, $options, $gl, $this->config);
             } catch (Exception $e) {
             }
             // Wrote graphic to file
             try {
-                $g->stroke($sImageFile);
+                $myGraph->stroke($sImageFile);
             } catch (Exception $e) {
                 error_log('[DESINVENTAR_GRAPHS] ' . $e->getMessage());
                 // The graph image cannot be created, so we use a default blank image instead here

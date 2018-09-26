@@ -51,7 +51,7 @@ class Maps
             $map .= $this->setLayerEff($session, $reg, $lev, $data, $range, $info, $lbl, $prmTransparency);
             $map .= $this->setFooter();
 
-            $sFilename = $this->config->maps['tmp_dir'] . '/map_' . $this->options['id'] .  '.map';
+            $sFilename = $this->config->paths['tmp_dir'] . '/map_' . $this->options['id'] .  '.map';
             $this->fpath = $sFilename;
             file_put_contents($sFilename, $map);
         }
@@ -60,7 +60,7 @@ class Maps
     public function saveKml($reg, $info)
     {
         $kml = $this->generateKML($this->session, $reg, $info);
-        $filename = $this->config->maps['tmp_dir'] . '/map_' . $this->options['id'] . '.kml';
+        $filename = $this->config->paths['tmp_dir'] . '/map_' . $this->options['id'] . '.kml';
         file_put_contents($filename, $kml);
     }
 
