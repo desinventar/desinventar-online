@@ -9,6 +9,10 @@ services:
       - DESINVENTAR_FLAGS_MODE
       - DESINVENTAR_MODE
       - DESINVENTAR_PATHS_CACHEDIR
+    volumes:
+      - .:/opt/app
+      - /opt/app/vendor
+      - /opt/app/node_modules
   portal:
     build:
       context: .
@@ -20,6 +24,10 @@ services:
       - DESINVENTAR_URL
       - DESINVENTAR_PORTAL_CACHEDIR
       - TEST_PORTAL_URL
+    volumes:
+      - .:/opt/app
+      - /opt/app/vendor
+      - /opt/app/node_modules
   test:
     build:
       context: .
