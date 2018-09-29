@@ -12,6 +12,24 @@ services:
       - .:/opt/app
       - /opt/app/vendor
       - /opt/app/node_modules
+    environment:
+      - NODE_ENV
+      - APP_ENV
+      - DESINVENTAR_FLAGS_MODE
+      - DESINVENTAR_MODE
+      - DESINVENTAR_PATHS_CACHEDIR
+  devel:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: desinventar/online:latest
+    command: bash -c '(/opt/app/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
+    ports:
+      - "8081:80"
+    volumes:
+      - .:/opt/app
+      - /opt/app/vendor
+      - /opt/app/node_modules
       - /var/local/desinventar:/var/local/desinventar
     environment:
       - NODE_ENV

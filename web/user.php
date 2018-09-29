@@ -58,7 +58,7 @@ switch ($cmd) {
         $UserId = getParameter('UserId', '');
         if ($UserId != '') {
             $user = new DIUser($us, $UserId);
-            echo json_encode($user->oField['info']);
+            echo json_encode($user->getInfo());
         }
         break;
     case 'chklogin':
