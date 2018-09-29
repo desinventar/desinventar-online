@@ -16,7 +16,7 @@
 				<tbody id="lst_userpa">
 						<tr style="display:none;">
 							<td>
-								<span class="UserId" id="UserId"></span>
+								<span class="UserId" data-id=""></span>
 							</td>
 							<td>
 								<span class="UserFullName"></span>

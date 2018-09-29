@@ -460,18 +460,6 @@ class LegacyIndex
                 $t->assign('ctl_admregmess', true);
                 return $t->fetch('main_region.tpl');
                 break;
-            case 'cmdAdminUsers':
-                $iReturn = ERR_NO_ERROR;
-                if ($desinventarUserRoleValue < ROLE_ADMINPORTAL) {
-                    $iReturn = ERR_UNKNOWN_ERROR;
-                }
-                if ($iReturn > 0) {
-                    $CountryList = $us->q->getCountryList();
-                    $t->assign('CountryList', $CountryList);
-                    $t->assign('usrpa', $us->getUserInfo(''));
-                }
-                return $t->fetch('main_admin_users.tpl');
-                break;
             case 'cmdAdminUsersGetList':
                 $answer = array();
                 $iReturn = ERR_NO_ERROR;

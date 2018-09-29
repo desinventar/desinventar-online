@@ -725,3 +725,7 @@ div.UserLogin table {
 	margin-left: 0px;
 	width: 100%;
 }
+table.UserList {
+	table-layout: auto;
+	width: 100%;
+}

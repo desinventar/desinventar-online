@@ -14,15 +14,16 @@ class DIUser extends DIRecord
         $this->sTableName   = "User";
         $this->sPermPrefix  = "ADMIN";
         $this->sFieldKeyDef = "UserId/STRING";
-        $this->sFieldDef    = "UserEMail/STRING," .
-                              "UserPasswd/STRING," .
-                              "UserFullName/STRING," .
-                              "Organization/STRING," .
-                              "CountryIso/STRING," .
-                              "UserCity/STRING," .
-                              "UserCreationDate/DATETIME," .
-                              "UserNotes/STRING," .
-                              "UserActive/BOOLEAN";
+        $this->sFieldDef    =
+            "UserEMail/STRING," .
+            "UserPasswd/STRING," .
+            "UserFullName/STRING," .
+            "Organization/STRING," .
+            "CountryIso/STRING," .
+            "UserCity/STRING," .
+            "UserCreationDate/DATETIME," .
+            "UserNotes/STRING," .
+            "UserActive/BOOLEAN";
         parent::__construct($prmSession);
         $num_args = func_num_args();
         $this->setConnection("core");
@@ -57,5 +58,12 @@ class DIUser extends DIRecord
         $sth = $this->conn->prepare($update->getStatement());
         $sth->execute($update->getBindValues());
         return true;
+    }
+
+    public function getInfo()
+    {
+        $info = $this->oField['info'];
+        unset($info['UserPasswd']);
+        return $info;
     }
 }

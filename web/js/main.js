@@ -11,7 +11,6 @@
 	onReadyGeolevels,
 	onReadyDatabaseEvents,
 	onReadyDatabaseCauses,
-	onReadyAdminUsers,
 	onReadyUserPermAdmin,
 	onReadyCommon,
 	onReadyUserLogin,
@@ -33,6 +32,7 @@
 import 'jquery-ui/ui/widgets/tabs'
 import mainExt from './main_ext'
 import databaseCreate from './database_create'
+import adminUsers from './admin_users'
 
 export default {
   init: onReadyMain
@@ -49,7 +49,7 @@ function onReadyMain() {
   onReadyGeolevels();
   onReadyDatabaseEvents();
   onReadyDatabaseCauses();
-  onReadyAdminUsers();
+  adminUsers.init();
   onReadyUserPermAdmin();
   onReadyCommon();
   onReadyUserLogin();
