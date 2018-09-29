@@ -4,6 +4,8 @@ FROM library/centos:centos6
 LABEL maintainer="Jhon H. Caicedo"
 LABEL e-mail="jhcaiced@inticol.com"
 
+RUN sed -i 's/^mirrorlist/#mirrorlist/; s|#baseurl=http://mirror.centos.org|baseurl=http://mirrors.kernel.org|' /etc/yum.repos.d/CentOS-Base.repo
+
 ADD desinventar.repo /etc/yum.repos.d/desinventar.repo
 RUN yum -y install epel-release
 RUN yum -y update
@@ -42,7 +44,7 @@ RUN curl --silent --show-error https://getcomposer.org/installer > /tmp/composer
 
 # Install nvm + node + npm + yarn
 ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 8.9.4
+ENV NODE_VERSION 8.12.0
 RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash \
     && source $NVM_DIR/nvm.sh \
     && nvm install $NODE_VERSION \
@@ -52,6 +54,7 @@ ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 RUN npm install -g yarn
+RUN npm install -g npm
 
 EXPOSE 80
 
