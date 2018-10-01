@@ -1,13 +1,13 @@
 <?php
 /*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
-namespace DesInventar\Legacy;
+ * DesInventar - http://www.desinventar.org
+ * (c) Corporacion OSSO
+ */
+namespace DesInventar\Legacy\Model;
 
-use \Pdo;
+use \PDO;
 
-class DIGeoLevel extends DIRecord
+class GeographyLevel extends Record
 {
     protected static $def = array(
         'GeoLevelId' => array('type' => 'INTEGER', 'pk' => 1),
@@ -20,6 +20,7 @@ class DIGeoLevel extends DIRecord
         'RecordSync' => array('type' => 'DATETIME'),
         'RecordUpdate' => array('type' => 'DATETIME')
     );
+
     public function __construct($prmSession)
     {
         $this->sTableName   = "GeoLevel";

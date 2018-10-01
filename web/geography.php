@@ -6,11 +6,10 @@
 
 use Aura\Session\SessionFactory;
 use DesInventar\Common\Language;
-use DesInventar\Legacy\DIGeography;
+use DesInventar\Legacy\Model\GeographyItem;
 
 require_once('include/loader.php');
 require_once('include/query.class.php');
-require_once('include/digeography.class.php');
 
 $get = $_GET;
 
@@ -46,7 +45,7 @@ switch ($cmd) {
     case 'cmdGeographyUpdate':
         $answer = array();
         $GeographyId = $_POST['data']['GeographyId'];
-        $o = new DIGeography($us, $GeographyId);
+        $o = new GeographyItem($us, $GeographyId);
         $o->setFromArray($_POST['data']);
         if ($cmd == 'cmdGeographyInsert') {
             $o->setGeographyId($_POST['data']['GeoParentId']);

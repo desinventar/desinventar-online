@@ -7,7 +7,7 @@ namespace DesInventar\Legacy;
 
 use DesInventar\Legacy\Query;
 use DesInventar\Database\Session;
-use DesInventar\Legacy\DIRegion;
+use DesInventar\Legacy\Model\Region;
 use \PDO;
 
 define('ROLE_NONE', 0);
@@ -1207,7 +1207,7 @@ class UserSession
     {
         $sReturn = '';
         if ($this->RegionId != 'core') {
-            $r = new DIRegion($this, $this->RegionId);
+            $r = new Region($this, $this->RegionId);
             $sReturn = $r->getRegionInfoValue($prmInfoKey);
         }
         return $sReturn;

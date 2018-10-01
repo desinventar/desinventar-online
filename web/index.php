@@ -24,9 +24,6 @@ use Api\Controllers\MapsController;
 use Api\Controllers\SessionController;
 
 require_once('include/loader.php');
-require_once('include/diregion.class.php');
-require_once('include/diregiondb.class.php');
-require_once('include/diregionrecord.class.php');
 require_once('include/geography_operations.php');
 require_once('include/database_operations.php');
 

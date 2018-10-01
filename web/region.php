@@ -6,15 +6,9 @@
 
 use Aura\Session\SessionFactory;
 use DesInventar\Common\Language;
-use DesInventar\Legacy\DIRegion;
+use DesInventar\Legacy\Model\Region;
 
 require_once('include/loader.php');
-require_once('include/diregion.class.php');
-require_once('include/dievent.class.php');
-require_once('include/dicause.class.php');
-require_once('include/digeolevel.class.php');
-require_once('include/digeocarto.class.php');
-require_once('include/digeography.class.php');
 
 require_once 'include/region_operations.php';
 
@@ -45,7 +39,7 @@ switch ($cmd) {
         $t->assign('ctl_reglist', true);
         break;
     case 'createRegionsFromDBDir':
-        DIRegion::rebuildRegionListFromDirectory($us);
+        Region::rebuildRegionListFromDirectory($us);
         $t->assign('RegionList', $us->q->getRegionAdminList());
         $t->assign('ctl_reglist', true);
         break;
@@ -53,7 +47,7 @@ switch ($cmd) {
         // ADMINREG: insert or update region
         if (($cmd == 'insert') || ($cmd == 'update')) {
             $data = form2region($_GET);
-            $r = new DIRegion($us, $data['RegionId']);
+            $r = new Region($us, $data['RegionId']);
             $r->setFromArray($data);
             $stat = ERR_NO_DATABASE;
             $t->assign('ctl_admregmess', true);

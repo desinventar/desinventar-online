@@ -1,19 +1,20 @@
 <?php
 /*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
+ * DesInventar - http://www.desinventar.org
+ * (c) Corporacion OSSO
+ */
 
-namespace DesInventar\Legacy;
+namespace DesInventar\Legacy\Model;
 
-use \Pdo;
+use DesInventar\Common\Date;
 
-class DIRegionRecord extends DIRegion
+use \PDO;
+use \Exception;
+
+class RegionRecord extends Region
 {
     public function __construct($prmSession)
     {
-        $this->sTableName   = 'Region';
-        $this->sPermPrefix  = 'INFO';
         $this->sFieldKeyDef = 'RegionId/STRING';
         $this->sFieldDef    = 'RegionLabel/STRING,' .
                               'LangIsoCode/STRING,' .
@@ -47,7 +48,7 @@ class DIRegionRecord extends DIRegion
         $this->set('PeriodBeginDate', '');
         $this->set('PeriodEndDate', '');
         $this->set('RegionOrder', 0);
-        $this->set('RegionLastUpdate', DIDate::now());
+        $this->set('RegionLastUpdate', Date::now());
 
         $prmRegionId = '';
         $XMLFile = '';
@@ -66,7 +67,7 @@ class DIRegionRecord extends DIRegion
                 $prmRegionId = $prmSession->RegionId;
             }
         }
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         if ($prmRegionId != '') {
             $this->set('RegionId', $prmRegionId);
             $iReturn = $this->session->q->setDBConnection($prmRegionId);
@@ -105,10 +106,9 @@ class DIRegionRecord extends DIRegion
 
     public function getTranslatableFields()
     {
-        // 2009-07-28 (jhcaiced) Build an array with translatable fields
         $Translatable = array();
-        foreach (preg_split('#,#', $this->sInfoTrans) as $sItem) {
-            $oItem = preg_split('#/#', $sItem);
+        foreach ($this->explodeFieldList($this->sInfoTrans) as $sItem) {
+            $oItem = $this->explodeFieldDef($sItem);
             $sFieldName = $oItem[0];
             $sFieldType = $oItem[1];
             $Translatable[$sFieldName] = $sFieldType;
@@ -124,23 +124,16 @@ class DIRegionRecord extends DIRegion
 
     public function getLanguageList()
     {
-        $LangIsoCode = $this->get('LangIsoCode');
-        $ll = array('eng'=>'eng');
-        if ($LangIsoCode != 'eng') {
-            $ll[$LangIsoCode] = $LangIsoCode;
-        }
-        return $ll;
+        return ['eng'=>'eng'];
     }
 
     public function getDBInfo($prmLang = 'eng')
     {
         $a = array();
-        foreach (array('RegionId','RegionLabel', 'PeriodBeginDate','PeriodEndDate',
-                      'RegionLastUpdate') as $Field) {
+        foreach (array('RegionId','RegionLabel', 'PeriodBeginDate','PeriodEndDate','RegionLastUpdate') as $Field) {
             $a[$Field] = $this->get($Field);
         }
-        $ll = $this->getLanguageList();
-        if (!array_key_exists($prmLang, $ll)) {
+        if (!array_key_exists($prmLang, $this->getLanguageList())) {
             $prmLang = 'eng';
         }
         foreach (array('InfoGeneral','InfoCredits','InfoSources','InfoSynopsis') as $Field) {
@@ -148,6 +141,8 @@ class DIRegionRecord extends DIRegion
         }
         $a['RegionLastUpdate'] = substr($a['RegionLastUpdate'], 0, 10);
 
+        $MinDate = '';
+        $MaxDate = '';
         $Query = "SELECT MIN(DisasterBeginTime) AS MinDate, MAX(DisasterBeginTime) AS MaxDate FROM Disaster ".
             "WHERE RecordStatus='PUBLISHED'";
         foreach ($this->session->q->dreg->query($Query) as $row) {
@@ -175,10 +170,10 @@ class DIRegionRecord extends DIRegion
 
     public function updateMapArea()
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         $IsCRegion = $this->get('IsCRegion');
         if ($IsCRegion > 0) {
-            $iReturn = ERR_NO_ERROR;
+            $iReturn = self::ERR_NO_ERROR;
             $MinX = 180;
             $MaxX = -180;
             $MinY =  90;
@@ -187,7 +182,7 @@ class DIRegionRecord extends DIRegion
             $Query = "SELECT * FROM RegionItem WHERE RegionId='" . $this->get('RegionId') . "'";
             foreach ($this->session->q->core->query($Query) as $row) {
                 $RegionItemId = $row['RegionItem'];
-                $r = new DIRegion($this->session, $RegionItemId);
+                $r = new Region($this->session, $RegionItemId);
                 $ItemMinX = $r->getRegionInfoValue('GeoLimitMinX');
                 if ($ItemMinX < $MinX) {
                     $MinX = $ItemMinX;
@@ -219,12 +214,12 @@ class DIRegionRecord extends DIRegion
 
     public function setActive($prmValue)
     {
-        return $this->setBit($prmValue, CONST_REGIONACTIVE);
+        return $this->setBit($prmValue, self::CONST_REGIONACTIVE);
     }
 
     public function setPublic($prmValue)
     {
-        return $this->setBit($prmValue, CONST_REGIONPUBLIC);
+        return $this->setBit($prmValue, self::CONST_REGIONPUBLIC);
     }
 
     public function setBit($prmValue, $prmBit)
@@ -241,13 +236,16 @@ class DIRegionRecord extends DIRegion
     public static function rebuildRegionListFromDirectory($us, $prmDir = '')
     {
         if ($prmDir == '') {
-            $prmDir = CONST_DBREGIONDIR;
+            $prmDir = $us->config->database['db_dir'] .'/database/';
         }
         // ADMINREG: Create database list from directory
         $dbb = dir($prmDir);
+        if (!$dbb) {
+            return false;
+        }
         while (false !== ($Dir = $dbb->read())) {
             if (($Dir != '.') && ($Dir != '..')) {
-                DIRegion::createRegionEntryFromDir($us, $Dir);
+                Region::createRegionEntryFromDir($us, $Dir, '');
             }
         }
         $dbb->close();
@@ -255,11 +253,9 @@ class DIRegionRecord extends DIRegion
 
     public static function createRegionEntryFromDir($us, $dir, $reglabel)
     {
-        $iReturn = ERR_NO_ERROR;
-        $regexist = $us->q->checkExistsRegion($dir);
-        $regexist = 0;
-        $difile = CONST_DBREGIONDIR . '/' . $dir ."/desinventar.db";
-        if (strlen($dir) >= 4 && file_exists($difile) && !$regexist) {
+        $iReturn = self::ERR_NO_ERROR;
+        $difile = $us->config->database['db_dir'] .'/database/' . $dir ."/desinventar.db";
+        if (strlen($dir) >= 4 && file_exists($difile)) {
             if ($us->q->setDBConnection($dir)) {
                 $data['RegionUserAdmin'] = "root";
                 foreach ($us->q->dreg->query("SELECT InfoKey, InfoValue FROM Info", PDO::FETCH_ASSOC) as $row) {
@@ -279,10 +275,10 @@ class DIRegionRecord extends DIRegion
                 if (!empty($reglabel)) {
                     $data['RegionLabel'] = $reglabel;
                 }
-                $r = new DIRegion($us, $data['RegionId']);
+                $r = new Region($us, $data['RegionId']);
                 $r->setFromArray($data);
                 $iReturn = $r->insert();
-                if (!iserror($iReturn)) {
+                if ($iReturn > 0) {
                     $rol = $us->setUserRole(
                         $_POST['RegionInfo']['RegionUserAdmin'],
                         $_POST['RegionInfo']['RegionId'],
@@ -296,21 +292,21 @@ class DIRegionRecord extends DIRegion
 
     public static function existRegion($us, $prmRegionId)
     {
-        $iReturn = STATUS_NO;
+        $iReturn = self::STATUS_NO;
         $sQuery = 'SELECT RegionId FROM Region WHERE RegionId="' . $prmRegionId . '"';
         try {
             foreach ($us->q->core->query($sQuery) as $row) {
-                $iReturn = STATUS_YES;
+                $iReturn = self::STATUS_YES;
             }
         } catch (Exception $e) {
-            $iReturn = ERR_NO_DATABASE;
+            $iReturn = self::ERR_NO_DATABASE;
         }
         return $iReturn;
     }
 
     public static function deleteRegion($us, $prmRegionId)
     {
-        $iReturn = STATUS_NO;
+        $iReturn = self::STATUS_NO;
         $sQuery = 'DELETE FROM Region WHERE RegionId=:RegionId';
         $sth = $us->q->core->prepare($sQuery);
         try {
@@ -318,18 +314,17 @@ class DIRegionRecord extends DIRegion
             $sth->bindParam(':RegionId', $prmRegionId, PDO::PARAM_STR);
             $sth->execute();
             $us->q->core->commit();
-            $iReturn = STATUS_YES;
+            $iReturn = self::STATUS_YES;
         } catch (Exception $e) {
             $us->q->core->rollBack();
-            showErrorMsg(debug_backtrace(), $e, '');
-            $iReturn = ERR_UNKNOWN_ERROR;
+            $iReturn = self::ERR_UNKNOWN_ERROR;
         }
         return $iReturn;
     }
 
     public function removeRegionUserAdmin()
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         $sQuery = '
         SELECT *
         FROM RegionAuth
@@ -354,8 +349,7 @@ class DIRegionRecord extends DIRegion
             }
         } catch (Exception $e) {
             $this->session->q->core->rollBack();
-            showErrorMsg(debug_backtrace(), $e, '');
-            $iReturn = ERR_UNKNOWN_ERROR;
+            $iReturn = self::ERR_UNKNOWN_ERROR;
         }
         return $iReturn;
     }

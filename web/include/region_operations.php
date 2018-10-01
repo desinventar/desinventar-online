@@ -11,7 +11,7 @@ function form2region($val)
     $dat['LangIsoCode']     = $val['LangIsoCode'];
     $dat['CountryIso']      = $val['CountryIso'];
     if (empty($val['RegionId'])) {
-        $dat['RegionId']    = DIRegion::buildRegionId($dat['CountryIso'], $dat['RegionLabel']);
+        $dat['RegionId']    = Region::buildRegionId($dat['CountryIso'], $dat['RegionLabel']);
     } else {
         $dat['RegionId']    = $val['RegionId'];
     }

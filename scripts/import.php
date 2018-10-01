@@ -1,17 +1,11 @@
 <?php
 require_once __DIR__ . '/../web/include/loader.php';
-require_once $config->paths['web_dir'] . '/include/diregion.class.php';
-require_once $config->paths['web_dir'] . '/include/didisaster.class.php';
 require_once $config->paths['web_dir'] . '/include/didisasterimport.class.php';
 require_once $config->paths['web_dir'] . '/include/diimport.class.php';
 
 use DesInventar\Common\Util;
-use \DesInventar\Legacy\DIRegion;
-use \DesInventar\Legacy\DIDisasterImport;
-use \DesInventar\Legacy\DIGeography;
-use \DesInventar\Legacy\DIEvent;
-use \DesInventar\Legacy\DICause;
-use \DesInventar\Legacy\DIImport;
+use DesInventar\Legacy\DIImport;
+
 use Fostam\GetOpts\Handler;
 
 $getopts = new Handler();

@@ -1,19 +1,26 @@
 <?php
 /*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
-namespace DesInventar\Legacy;
+ * DesInventar - http://www.desinventar.org
+ * (c) Corporacion OSSO
+ */
+namespace DesInventar\Legacy\Model;
 
-use \Pdo as Pdo;
+use \PDO;
+use \Exception;
+use \PDOException;
 
-class DIRecord extends DIObject
+class Record extends Model
 {
+    const ERR_NO_ERROR = 1;
+    const ERR_DEFAULT_ERROR = -1;
+    const ERR_OBJECT_NOT_FOUND = -7;
+    const ERR_TABLE_LOCKED = -10;
+
     // Dynamic Objects Variables
-    public $sTableName = 'MyTable';
-    public $sPermPrefix = 'OBJECT';
-    public $conn = null;
-    public $q = null;
+    protected $sTableName = 'MyTable';
+    protected $sPermPrefix = 'OBJECT';
+    protected $conn = null;
+    protected $q = null;
 
     public function __construct($prmSession)
     {
@@ -36,6 +43,11 @@ class DIRecord extends DIObject
     public function getTableName()
     {
         return $this->sTableName;
+    }
+
+    public function getQuery()
+    {
+        return $this->q;
     }
 
     public function getCreateTable()
@@ -82,8 +94,8 @@ class DIRecord extends DIObject
     {
         $i = 0;
         $sQuery = '(';
-        foreach (preg_split('#,#', $this->sFieldKeyDef) as $sKey => $sValue) {
-            $oItem = preg_split('#/#', $sValue);
+        foreach ($this->explodeFieldList($this->sFieldKeyDef) as $sValue) {
+            $oItem = $this->explodeFieldDef($sValue);
             $sFieldName = $oItem[0];
             $sFieldType = $oItem[1];
             if ($i > 0) {
@@ -136,8 +148,8 @@ class DIRecord extends DIObject
         $i = 0;
         $sQueryFields = '';
         $sQueryValues = '';
-        foreach (preg_split('#,#', $this->sFieldKeyDef) as $sKey => $sValue) {
-            $oItem = preg_split('#/#', $sValue);
+        foreach ($this->explodeFieldList($this->sFieldKeyDef) as $sValue) {
+            $oItem = $this->explodeFieldDef($sValue);
             $sFieldName = $oItem[0];
             $sFieldType = $oItem[1];
             if ($i > 0) {
@@ -184,8 +196,8 @@ class DIRecord extends DIObject
         $sQueryValues = '';
         $sQuery = 'UPDATE ' . $sTableName . ' SET ';
         if ($sFieldList != '') {
-            foreach (preg_split('#,#', $sFieldList) as $sKey => $sValue) {
-                $oItem = preg_split('#/#', $sValue);
+            foreach ($this->explodeFieldList($sFieldList) as $sValue) {
+                $oItem = $this->explodeFieldDef($sValue);
                 $sFieldName = $oItem[0];
                 $sFieldType = $oItem[1];
                 if ($sFieldType == '') {
@@ -209,7 +221,7 @@ class DIRecord extends DIObject
                         ($sFieldType == 'CURRENCY') ) {
                     $sQueryItem .= $this->get($sFieldName);
                 } else {
-                    throw new \Exception('Unknown Type : ' . $sFieldType . '/' . $sFieldName);
+                    throw new Exception('Unknown Type : ' . $sFieldType . '/' . $sFieldName);
                 }
                 $sQuery .= $sQueryItem;
                 $i++;
@@ -221,7 +233,7 @@ class DIRecord extends DIObject
 
     public function exist()
     {
-        $iReturn = ERR_DEFAULT_ERROR;
+        $iReturn = self::ERR_DEFAULT_ERROR;
         $query = $this->getSelectQuery();
         $sth = $this->conn->prepare($query);
         try {
@@ -229,20 +241,19 @@ class DIRecord extends DIObject
             $sth->execute();
             $this->conn->commit();
             while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
-                $iReturn = ERR_NO_ERROR;
+                $iReturn = self::ERR_NO_ERROR;
             }
             $sth->closeCursor();
         } catch (Exception $e) {
             $this->conn->rollBack();
-            showErrorMsg(debug_backtrace(), $e, '');
-            $iReturn = ERR_TABLE_LOCKED;
+            $iReturn = self::ERR_TABLE_LOCKED;
         }
         return $iReturn;
     }
 
     public function loadRecord($prmTableName, $prmFieldList)
     {
-        $iReturn = ERR_OBJECT_NOT_FOUND;
+        $iReturn = self::ERR_OBJECT_NOT_FOUND;
         $sQuery = $this->getSelectQuery($prmTableName);
         $sth = $this->conn->prepare($sQuery);
         try {
@@ -250,9 +261,8 @@ class DIRecord extends DIObject
             $sth->execute();
             $this->conn->commit();
             while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
-                $sFields = preg_split('#,#', $prmFieldList);
-                foreach ($sFields as $sKey => $sValue) {
-                    $oItem = preg_split('#/#', $sValue);
+                foreach ($this->explodeFieldList($prmFieldList) as $sValue) {
+                    $oItem = $this->explodeFieldDef($sValue);
                     $sFieldName = $oItem[0];
                     if (array_key_exists($sFieldName, $row)) {
                         $this->set($sFieldName, $row[$sFieldName]);
@@ -260,12 +270,11 @@ class DIRecord extends DIObject
                         $this->set($sFieldName, '');
                     }
                 }
-                $iReturn = ERR_NO_ERROR;
+                $iReturn = self::ERR_NO_ERROR;
             }
             $sth->closeCursor();
         } catch (PDOException $e) {
             $this->conn->rollBack();
-            showErrorMsg(debug_backtrace(), $e, '');
         }
         return $iReturn;
     }
@@ -279,7 +288,7 @@ class DIRecord extends DIObject
 
     public function insert($withValidate = 1, $bStrict = 1)
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         $this->status->clear();
         $bValidate = $withValidate;
         if ($withValidate > 0) {
@@ -300,25 +309,24 @@ class DIRecord extends DIObject
 
     public function createRecord($sTableName)
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         $sQuery = $this->getInsertQuery($sTableName);
         $sth = $this->conn->prepare($sQuery);
         try {
             $this->conn->beginTransaction();
             $sth->execute();
             $this->conn->commit();
-            $iReturn = ERR_NO_ERROR;
+            $iReturn = self::ERR_NO_ERROR;
         } catch (PDOException $e) {
             $this->conn->rollBack();
-            showErrorMsg(debug_backtrace(), $e, '');
-            $iReturn = ERR_TABLE_LOCKED;
+            $iReturn = self::ERR_TABLE_LOCKED;
         }
         return $iReturn;
     }
 
     public function create($withValidate = 1, $bStrict = 1)
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         if ($withValidate > 0) {
             $iReturn = $this->validateCreate($bStrict);
         }
@@ -330,25 +338,24 @@ class DIRecord extends DIObject
 
     public function updateRecord($prmTableName, $prmFieldList)
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         $sQuery = $this->getUpdateQuery($prmTableName, $prmFieldList);
         $sth = $this->conn->prepare($sQuery);
         try {
             $this->conn->beginTransaction();
             $sth->execute();
             $this->conn->commit();
-            $iReturn = ERR_NO_ERROR;
+            $iReturn = self::ERR_NO_ERROR;
         } catch (PDOException $e) {
             $this->conn->rollBack();
-            showErrorMsg(debug_backtrace(), $e, '');
-            $iReturn = ERR_TABLE_LOCKED;
+            $iReturn = self::ERR_TABLE_LOCKED;
         }
         return $iReturn;
     }
 
     public function update($withValidate = 1, $bStrict = 1)
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         $this->status->clear();
         if ($withValidate > 0) {
             $iReturn = $this->validateUpdate($bStrict);
@@ -364,7 +371,7 @@ class DIRecord extends DIObject
 
     public function save()
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         if ($this->exist() > 0) {
             $iReturn = $this->update();
         } else {
@@ -375,9 +382,9 @@ class DIRecord extends DIObject
 
     public function delete($withValidate = true, $bStrict = true)
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         if ($withValidate) {
-            $iReturn = validateDelete($bStrict);
+            $iReturn = $this->validateDelete($bStrict);
         }
         if ($iReturn > 0) {
             $sQuery = $this->getDeleteQuery();
@@ -386,11 +393,10 @@ class DIRecord extends DIObject
                 $this->conn->beginTransaction();
                 $sth->execute();
                 $this->conn->commit();
-                $iReturn = ERR_NO_ERROR;
+                $iReturn = self::ERR_NO_ERROR;
             } catch (PDOException $e) {
                 $this->conn->rollBack();
-                showErrorMsg(debug_backtrace(), $e, '');
-                $iReturn = ERR_TABLE_LOCKED;
+                $iReturn = self::ERR_TABLE_LOCKED;
             }
         }
         return $iReturn;
@@ -401,9 +407,8 @@ class DIRecord extends DIObject
     {
         $sQuery = '(';
         $i = 0;
-        $sFields = preg_split('#,#', $this->sFieldKeyDef);
-        foreach ($sFields as $sKey => $sValue) {
-            $oItem = preg_split('#/#', $sValue);
+        foreach ($this->explodeFieldList($this->sFieldKeyDef) as $sValue) {
+            $oItem = $this->explodeFieldDef($sValue);
             $sFieldName = $oItem[0];
             $sFieldType = $oItem[1];
             $quote2 = '"';
@@ -426,14 +431,11 @@ class DIRecord extends DIObject
             $errorCodes = array_keys($this->status->error);
             return reset($errorCodes);
         }
-        if ($this->status->hasWarning()) {
-            if ($bStrict > 0) {
-                $warningCodes = array_keys($this->status->warning);
-                $iReturn = reset($warningCodes);
-            }
-            return $iReturn;
+        if ($this->status->hasWarning() && ($bStrict > 0)) {
+            $warningCodes = array_keys($this->status->warning);
+            return reset($warningCodes);
         }
-        return ERR_NO_ERROR;
+        return self::ERR_NO_ERROR;
     }
 
     public function validateUpdate($bStrict)
@@ -449,17 +451,17 @@ class DIRecord extends DIObject
                 $iReturn = reset($warningCodes);
             }
         }
-        return ERR_NO_ERROR;
+        return self::ERR_NO_ERROR;
     }
 
     public function validateDelete($bStrict)
     {
-        return 1;
+        return $bStrict > 0;
     }
 
     public function validateNotNull($ErrCode, $FieldName, $isWarning = false)
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         $Value = $this->get($FieldName);
         $FieldType = $this->getType($FieldName);
         if (in_array($FieldType, ['INTEGER', 'SECTOR'])) {
@@ -477,7 +479,7 @@ class DIRecord extends DIObject
 
     public function validatePrimaryKey($ErrCode)
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         $quote1 = '"';
         $sQuery = 'SELECT * FROM ' . $this->getTableName() . ' WHERE ' . $this->getIdWhereQuery();
         $sth = $this->conn->prepare($sQuery);
@@ -491,7 +493,6 @@ class DIRecord extends DIObject
             $sth->closeCursor();
         } catch (Exception $e) {
             $this->conn->rollBack();
-            showErrorMsg(debug_backtrace(), $e, '');
         }
 
         if ($iReturn < 0) {
@@ -502,7 +503,7 @@ class DIRecord extends DIObject
 
     public function validateUnique($ErrCode, $prmFieldName, $isWarning = false)
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         $quote1 = '"';
         if (in_array($this->getType($prmFieldName), ['INTEGER', 'SECTOR'])) {
             $quote1 = '';
@@ -522,10 +523,9 @@ class DIRecord extends DIObject
                 // Check if it's me !!
                 $bFound = true;
                 $i = 0;
-                $sFields = preg_split('#,#', $this->sFieldKeyDef);
-                foreach ($sFields as $sKey => $sValue) {
+                foreach ($this->explodeFieldList($this->sFieldKeyDef) as $sValue) {
                     if ($bFound) {
-                        $oItem = preg_split('#/#', $sValue);
+                        $oItem = $this->explodeFieldDef($sValue);
                         $sFieldName = $oItem[0];
                         $sFieldType = $oItem[1];
                         $bFound = $row[$sFieldName] == $this->get($sFieldName);
@@ -533,7 +533,7 @@ class DIRecord extends DIObject
                     }
                 }
                 if ($bFound) {
-                    $iReturn = ERR_NO_ERROR;
+                    $iReturn = self::ERR_NO_ERROR;
                 } else {
                     $iReturn = $ErrCode;
                 }
@@ -541,7 +541,6 @@ class DIRecord extends DIObject
             $sth->closeCursor();
         } catch (Exception $e) {
             $this->conn->rollBack();
-            showErrorMsg(debug_backtrace(), $e, '');
         }
         if ($iReturn < 0) {
             $this->status->addMsg($ErrCode, $prmFieldName . ' value is not unique.', $isWarning);
@@ -565,12 +564,11 @@ class DIRecord extends DIObject
             $sth->execute();
             $this->conn->commit();
             while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
-                $iReturn = ERR_NO_ERROR;
+                $iReturn = self::ERR_NO_ERROR;
             }
             $sth->closeCursor();
         } catch (Exception $e) {
             $this->conn->rollBack();
-            showErrorMsg(debug_backtrace(), $e, '');
         }
         if ($iReturn < 0) {
             $this->status->addMsg(

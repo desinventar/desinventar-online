@@ -7,15 +7,11 @@
 require_once('include/loader.php');
 require_once('include/query.class.php');
 require_once('include/maps.class.php');
-require_once('include/distatus.class.php');
-require_once('include/diobject.class.php');
-require_once('include/digeolevel.class.php');
-require_once('include/digeocarto.class.php');
 
 require_once 'include/geolevel_operations.php';
 
-use \DesInventar\Legacy\DIGeoCarto;
-use \DesInventar\Legacy\DIGeoLevel;
+use DesInventar\Legacy\Model\GeographyCarto;
+use DesInventar\Legacy\Model\GeographyLevel;
 
 $post = $_POST;
 $get = $_GET;
@@ -32,14 +28,14 @@ $us->open($RegionId);
 switch ($cmd) {
     case 'insert':
         // Create new GeoLevel and GeoCarto Objects
-        $o = new DIGeoLevel($us);
+        $o = new GeographyLevel($us);
         $o->setFromArray($data);
         $levid = $o->getMaxGeoLevel();
         if ($levid >= 0) {
             $levid ++;
         }
         $o->set('GeoLevelId', $levid);
-        $c = new DIGeoCarto($us);
+        $c = new GeographyCarto($us);
         $c->setFromArray($data);
         $c->set('GeoLevelId', $o->get('GeoLevelId'));
         // Save to database
@@ -57,8 +53,8 @@ switch ($cmd) {
         } //else
         break;
     case 'update':
-        $o = new DIGeoLevel($us);
-        $c = new DIGeoCarto($us);
+        $o = new GeographyLevel($us);
+        $c = new GeographyCarto($us);
         // Set primary key values
         $o->set('GeoLevelId', $data['GeoLevelId']);
         $o->load();

@@ -1,14 +1,17 @@
 <?php
 /*
-  DesInventar - http://www.desinventar.org
-  (c) Corporacion OSSO
-*/
-namespace DesInventar\Legacy;
+ * DesInventar - http://www.desinventar.org
+ * (c) Corporacion OSSO
+ */
+namespace DesInventar\Legacy\Model;
 
-class DIObject
+use \Exception;
+
+class Model
 {
-    const ERR_NO_ERROR = 1;
-    const ERR_DEFAULT_ERROR = -1;
+    protected const ERR_NO_ERROR = 1;
+    protected const ERR_DEFAULT_ERROR = -1;
+    protected const ERR_UNKNOWN_ERROR = -1;
 
     protected static $def = array();
     public $sFieldKeyDef = '';
@@ -20,6 +23,7 @@ class DIObject
     public $oFieldType;
 
     protected $RegionId = '';
+    protected $session = null;
 
     public function __construct($prmSession)
     {
@@ -50,7 +54,7 @@ class DIObject
         $this->set('RecordCreation', gmdate('c'));
         $this->set('RecordUpdate', gmdate('c'));
 
-        $this->status = new DIStatus();
+        $this->status = new Status();
     }
 
     public function initializeFields($LangIsoCode = '')
@@ -77,6 +81,32 @@ class DIObject
         }
     }
 
+    protected function explodeField($fieldDef, $separator)
+    {
+        $fields = preg_split('#' . $separator . '#', $fieldDef);
+        if ($fields === false) {
+            $fields = [];
+        }
+        return $fields;
+    }
+
+    protected function explodeFieldList($fieldList)
+    {
+        return $this->explodeField($fieldList, ',');
+    }
+
+    protected function explodeFieldDef($fieldDef)
+    {
+        $values = $this->explodeField($fieldDef, '/');
+        if (empty($values)) {
+            return [
+                0 => '',
+                1 => ''
+            ];
+        }
+        return $values;
+    }
+
     public function createFields($prmFieldDef, $LangIsoCode = '')
     {
         if ($LangIsoCode == '') {
@@ -84,9 +114,8 @@ class DIObject
         } else {
             $obj = &$this->oField[$LangIsoCode];
         }
-        $sFields = preg_split('#,#', $prmFieldDef);
-        foreach ($sFields as $sKey => $sValue) {
-            $oItem = preg_split('#/#', $sValue);
+        foreach ($this->explodeFieldList($prmFieldDef) as $sValue) {
+            $oItem = $this->explodeFieldDef($sValue);
             $sFieldName = $oItem[0];
             $sFieldType = $oItem[1];
             $this->oFieldType[$sFieldName] = $sFieldType;
@@ -135,18 +164,13 @@ class DIObject
 
     public function get($prmKey, $LangIsoCode = '')
     {
-        $Value = '';
-        try {
-            if ($LangIsoCode == '') {
-                $LangIsoCode = 'info';
-            }
-            if (array_key_exists($prmKey, $this->oField[$LangIsoCode])) {
-                $Value = $this->oField[$LangIsoCode][$prmKey];
-            }
-        } catch (Exception $e) {
-            showErrorMsg(debug_backtrace(), $e, '');
+        if ($LangIsoCode == '') {
+            $LangIsoCode = 'info';
         }
-        return $Value;
+        if (array_key_exists($prmKey, $this->oField[$LangIsoCode])) {
+            return $this->oField[$LangIsoCode][$prmKey];
+        }
+        return false;
     }
 
     public function getType($prmKey)
@@ -248,6 +272,6 @@ class DIObject
 
     public function importFromCSV($cols, $values)
     {
-        return ERR_NO_ERROR;
+        return self::ERR_NO_ERROR;
     }
 }

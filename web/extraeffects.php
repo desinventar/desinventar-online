@@ -6,7 +6,7 @@
 
 use Aura\Session\SessionFactory;
 use DesInventar\Common\Language;
-use DesInventar\Legacy\DIEEField;
+use DesInventar\Legacy\Model\EEField;
 
 require_once('include/loader.php');
 require_once('include/query.class.php');
@@ -41,7 +41,7 @@ switch ($cmd) {
             $status &= ~CONST_REGIONPUBLIC;
         }
         $get['EEField']['EEFieldStatus'] = $status;
-        $o = new DIEEField($us, $get['EEField']['EEFieldId']);
+        $o = new EEField($us, $get['EEField']['EEFieldId']);
         $EEFieldId = $o->get('EEFieldId');
         $o->setFromArray($get['EEField']);
         $o->set('EEFieldId', $EEFieldId);

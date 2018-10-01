@@ -5,6 +5,10 @@
 */
 namespace DesInventar\Legacy;
 
+use DesInventar\Legacy\Model\DisasterImport;
+use DesInventar\Legacy\Model\Event;
+use DesInventar\Legacy\Model\GeographyItem;
+
 class DIImport
 {
     protected $fields = [];
@@ -92,13 +96,13 @@ class DIImport
 
     public function getGeographyId($code)
     {
-        return DIGeography::getIdByCode($this->session, $code, '');
+        return GeographyItem::getIdByCode($this->session, $code, '');
     }
 
     public function getEventId($values)
     {
         $name = $this->getName($values, $this->event);
-        $id = DIEvent::getIdByName($this->session, $name);
+        $id = Event::getIdByName($this->session, $name);
         if (empty($id)) {
             throw new \Exception('Event Error: ' . $name);
         }
@@ -108,7 +112,7 @@ class DIImport
     public function getCauseId($values)
     {
         $name = $this->getName($values, $this->cause);
-        $id = $name == '' ? 'UNKNOWN' : DICause::getIdByName($this->session, $name);
+        $id = $name == '' ? 'UNKNOWN' : Cause::getIdByName($this->session, $name);
         if (empty($id)) {
             throw new \Exception('Cause Error: ' . $name);
         }
@@ -145,7 +149,7 @@ class DIImport
             for ($i = 0; $i<count($a); $i++) {
                 $a[$i] = trim($a[$i]);
             }
-            $d = new DIDisasterImport($this->session, '', $this->fields);
+            $d = new DisasterImport($this->session, '', $this->fields);
             $d->importFromArray($a);
 
             $DisasterSerial = $d->get('DisasterSerial');

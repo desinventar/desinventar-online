@@ -6,11 +6,9 @@
 
 require_once('include/loader.php');
 require_once('include/query.class.php');
-require_once('include/diregion.class.php');
-require_once('include/didisaster.class.php');
 
 use DesInventar\Service\Datacard;
-use DesInventar\Legacy\DIDisaster;
+use DesInventar\Legacy\Model\Disaster;
 
 $RegionId = getParameter('RegionId', getParameter('r', ''));
 if ($RegionId == '') {
@@ -83,7 +81,7 @@ if (isset($_GET['u'])) {
         case 'getDatacard':
             // Read Datacard Info and return in JSON
             $DisasterId = getParameter('DisasterId', '');
-            $d = new DIDisaster($us, $DisasterId);
+            $d = new Disaster($us, $DisasterId);
             $dcard = $d->oField['info'];
             $dcard['DisasterBeginTime[0]'] = substr($dcard['DisasterBeginTime'], 0, 4);
             $dcard['DisasterBeginTime[1]'] = '';
@@ -116,7 +114,7 @@ if (isset($_GET['u'])) {
             } else {
                 $data = $service->form2disaster($_POST, CMD_UPDATE);
             }
-            $o = new DIDisaster($us, $data['DisasterId']);
+            $o = new Disaster($us, $data['DisasterId']);
             $o->setFromArray($data);
             if ($cmd == 'insertDICard') {
                 $o->set('RecordCreation', gmdate('c'));

@@ -6,11 +6,10 @@
 
 use Aura\Session\SessionFactory;
 
-use DesInventar\Legacy\DIRegion;
+use DesInventar\Legacy\Model\Region;
 use DesInventar\Common\Language;
 
 require_once('include/loader.php');
-require_once('include/diregion.class.php');
 
 $post = $_POST;
 
@@ -27,7 +26,7 @@ $lg = (new Language())->getLanguageIsoCode($segment->get('language'), Language::
 $t->assign('lg', $lg);
 
 $us->open($RegionId);
-$r = new DIRegion($us, $RegionId);
+$r = new Region($us, $RegionId);
 $RegionLabel = $r->getRegionInfoValue('RegionLabel');
 fixPost($post);
 

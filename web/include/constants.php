@@ -11,11 +11,6 @@ define('TRUE', 1);
 define('ERROR', 0);
 define('WARNING', 1);
 
-// base.db - DI's Basic database, predefined events etc.
-define('CONST_DBBASE', VAR_DIR .'/main/base.db');
-// region.db - Emtpy database skeleton for Regions
-define('CONST_DBNEWREGION', VAR_DIR . '/main/desinventar.db');
-
 // database directory
 define('CONST_DBREGIONDIR', VAR_DIR . '/database');
 

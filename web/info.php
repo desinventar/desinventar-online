@@ -6,11 +6,9 @@
 
 use Aura\Session\SessionFactory;
 use DesInventar\Common\Language;
+use DesInventar\Legacy\Model\Region;
 
 require_once('include/loader.php');
-require_once('include/distatus.class.php');
-require_once('include/diobject.class.php');
-require_once('include/diregion.class.php');
 
 $post = $_POST;
 $get = $_GET;
@@ -34,7 +32,7 @@ switch ($cmd) {
         $data = $_POST['RegionInfo'];
 
         // Load Current info.xml data
-        $r = new DesInventar\Legacy\DIRegion($us, $RegionId);
+        $r = new Region($us, $RegionId);
         $LangIsoCode = $r->get('LangIsoCode');
         $r->setFromArray($_POST);
         // Set Translated Info
@@ -56,7 +54,7 @@ switch ($cmd) {
         break;
     case 'cmdDBInfoEdit':
         $UserRole = $us->getUserRole($RegionId);
-        $r = new DesInventar\Legacy\DIRegion($us, $RegionId);
+        $r = new Region($us, $RegionId);
         $base = new DesInventar\Service\Base($us->q->base);
         $languageLabels = array_map(function ($language) {
             return $language['local'] . '/' . $language['iso'];

@@ -1,24 +1,24 @@
 # Makefile (must be TAB indented)
 
-.PHONY : all .FORCE
+.PHONY: all .FORCE
 
-all : build
+all: build
 
 devel-app: build-app php js
 
-devel : build php js
+devel: build php js
 
 build-app: composer node-build web-build lang
 
-build : build-app portal
+build: build-app portal
 
 portal: .FORCE
 	if [ -d portal ]; then cd portal && make; fi
 
-composer : .FORCE
+composer: .FORCE
 	composer install
 
-composer-autoload : .FORCE
+composer-autoload: .FORCE
 	composer dump-autoload --optimize
 
 database: .FORCE
@@ -27,9 +27,9 @@ database: .FORCE
 lang: .FORCE
 	cd files/database && make lang
 
-php : standard-php phpmd lint-php phpstan
+php: php-lint phpcs phpmd phpstan
 
-test : test-unit test-api
+test: test-unit test-api
 
 test-unit: .FORCE
 	./vendor/bin/phpunit
@@ -48,10 +48,10 @@ test-e2e: .FORCE
 test-portal: .FORCE
 	TEST_PORTAL_URL=http://localhost:8090 TEST_PORTAL_USERNAME=root TEST_PORTAL_PASSWD=desinventar ./node_modules/.bin/testcafe firefox tests/portal
 
-lint-php : .FORCE
+php-lint: .FORCE
 	find src config web tests portal -name "*.php" -exec php -l {} > /dev/null \;
 
-standard-php : .FORCE
+phpcs: .FORCE
 	./vendor/bin/phpcs .
 
 phpmd: .FORCE
@@ -61,12 +61,12 @@ phpmd: .FORCE
 phpstan: .FORCE
 	./vendor/bin/phpstan analyse --level 7 src tests
 
-js : standard-js
+js: standard-js
 
-standard-js : .FORCE
+standard-js: .FORCE
 	./node_modules/.bin/eslint web/js2/**/*.js tests/**/*.js
 
-node-build : .FORCE
+node-build: .FORCE
 	yarn install
 
 web-build: .FORCE

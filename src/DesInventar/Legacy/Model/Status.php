@@ -3,11 +3,15 @@
   DesInventar - http://www.desinventar.org
   (c) Corporacion OSSO
 */
-namespace DesInventar\Legacy;
+namespace DesInventar\Legacy\Model;
 
-class DIStatus
+class Status
 {
     const ERR_NO_ERROR = 1;
+
+    protected $status = 0;
+    protected $error = [];
+    protected $warning = [];
 
     public function __construct()
     {

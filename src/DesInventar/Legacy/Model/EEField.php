@@ -1,11 +1,11 @@
 <?php
 /*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
-namespace DesInventar\Legacy;
+ * DesInventar - http://www.desinventar.org
+ * (c) Corporacion OSSO
+ */
+namespace DesInventar\Legacy\Model;
 
-class DIEEField extends DIRecord
+class EEField extends Record
 {
     protected static $def = array(
         'EEFieldId' => array('type' => 'VARCHAR', 'size' => 30, 'pk' => 1),
@@ -26,17 +26,18 @@ class DIEEField extends DIRecord
         $this->sTableName   = "EEField";
         $this->sPermPrefix  = "EEFIELD";
         $this->sFieldKeyDef = "EEFieldId/STRING";
-        $this->sFieldDef    = "RegionId/STRING," .
-                              "EEGroupId/STRING," .
-                              "EEFieldLabel/STRING," .
-                              "EEFieldDesc/STRING," .
-                              "EEFieldType/STRING," .
-                              "EEFieldSize/INTEGER," .
-                              "EEFieldOrder/INTEGER," .
-                              "EEFieldStatus/INTEGER," .
-                              "RecordCreation/DATETIME," .
-                              "RecordSync/DATETIME," .
-                              "RecordUpdate/DATETIME";
+        $this->sFieldDef    =
+            "RegionId/STRING," .
+            "EEGroupId/STRING," .
+            "EEFieldLabel/STRING," .
+            "EEFieldDesc/STRING," .
+            "EEFieldType/STRING," .
+            "EEFieldSize/INTEGER," .
+            "EEFieldOrder/INTEGER," .
+            "EEFieldStatus/INTEGER," .
+            "RecordCreation/DATETIME," .
+            "RecordSync/DATETIME," .
+            "RecordUpdate/DATETIME";
         parent::__construct($prmSession);
         $num_args = func_num_args();
         $this->set('EEFieldId', $this->getNextEEFieldId());
@@ -73,7 +74,7 @@ class DIEEField extends DIRecord
 
     public function insert($withValidate = 1, $bStrict = 1)
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         if ($iReturn > 0) {
             // Insert Record in EField table
             $iReturn = parent::insert($withValidate, $bStrict);
@@ -124,7 +125,7 @@ class DIEEField extends DIRecord
     public function validateUpdate($bStrict)
     {
         $oReturn = parent::validateUpdate($bStrict);
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         if ($iReturn > 0) {
             $iReturn = $this->validateUnique(-83, 'EEFieldLabel', true);
         }

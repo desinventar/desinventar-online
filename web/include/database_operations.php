@@ -5,8 +5,9 @@
 */
 namespace DesInventar\Legacy;
 
-use DesInventar\Legacy\DIRegionDB;
-use DesInventar\Legacy\DIRegionRecord;
+use DesInventar\Legacy\Model\Region;
+use DesInventar\Legacy\Model\RegionDatabase;
+use DesInventar\Legacy\Model\RegionRecord;
 
 use \ZipArchive;
 
@@ -29,7 +30,7 @@ class DatabaseOperations
         $iReturn = ERR_NO_ERROR;
         if ($iReturn > 0) {
             $RegionId = $prmRegionId;
-            $region = new DIRegionRecord($session, $RegionId);
+            $region = new RegionRecord($session, $RegionId);
             $iReturn = $region->setFromArray($prmRegionInfo);
             if ($region->get('RegionId') == '') {
                 $iReturn = ERR_UNKNOWN_ERROR;
@@ -37,7 +38,7 @@ class DatabaseOperations
         }
         if ($iReturn > 0) {
             $RegionId = $region->get('RegionId');
-            $iReturn = DIRegion::existRegion($session, $RegionId) > 0 ? ERR_UNKNOWN_ERROR : $region->insert();
+            $iReturn = Region::existRegion($session, $RegionId) > 0 ? ERR_UNKNOWN_ERROR : $region->insert();
         }
         if ($iReturn > 0) {
             // Set Role ADMINREGION in RegionAuth: master for this region
@@ -46,7 +47,7 @@ class DatabaseOperations
             $iReturn = $session->setUserRole($RegionUserAdmin, $region->get('RegionId'), 'ADMINREGION');
         }
         if ($iReturn > 0) {
-            $region2 = new DIRegionDB($session, $RegionId);
+            $region2 = new RegionDatabase($session, $RegionId);
             $iReturn = $region2->createRegionDB();
         }
         return $iReturn;
@@ -75,7 +76,7 @@ class DatabaseOperations
                 $zip->extractTo($DBDir);
                 $zip->close();
 
-                $region = new DIRegion($session, $RegionId);
+                $region = new Region($session, $RegionId);
                 $region->set('RegionId', $RegionId);
                 if ($RegionLabel != '') {
                     $region->set('RegionLabel', $RegionLabel);

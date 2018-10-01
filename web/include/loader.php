@@ -83,23 +83,11 @@ if (!empty($_SERVER['DESINVENTAR_MODE'])) {
 $config->paths['web_dir'] = $_SERVER['DESINVENTAR_WEB'];
 require_once 'define.php';
 require_once(BASE . '/include/usersession.class.php');
-require_once(BASE . '/include/date.class.php');
-require_once(BASE . '/include/distatus.class.php');
-require_once(BASE . '/include/diobject.class.php');
-require_once(BASE . '/include/diregion.class.php');
-require_once(BASE . '/include/direcord.class.php');
-require_once(BASE . '/include/diuser.class.php');
 require_once(BASE . '/include/query.class.php');
 require_once(BASE . '/include/constants.php');
 require_once(BASE . '/include/exception.php');
 require_once(BASE . '/include/common.php');
 require_once(BASE . '/include/xml2array.php');
-require_once(BASE . '/include/dievent.class.php');
-require_once(BASE . '/include/dicause.class.php');
-require_once(BASE . '/include/digeography.class.php');
-require_once(BASE . '/include/digeolevel.class.php');
-require_once(BASE . '/include/digeocarto.class.php');
-require_once(BASE . '/include/didisaster.class.php');
 
 // Set a default exception handler to avoid ugly messages in screen
 if ($config->flags['mode'] != 'devel') {

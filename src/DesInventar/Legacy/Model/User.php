@@ -1,13 +1,13 @@
 <?php
 /*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
-namespace DesInventar\Legacy;
+ * DesInventar - http://www.desinventar.org
+ * (c) Corporacion OSSO
+ */
+namespace DesInventar\Legacy\Model;
 
 use Aura\SqlQuery\QueryFactory;
 
-class DIUser extends DIRecord
+class User extends Record
 {
     public function __construct($prmSession)
     {

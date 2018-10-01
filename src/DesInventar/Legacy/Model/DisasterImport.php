@@ -1,12 +1,14 @@
 <?php
 /*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
-namespace DesInventar\Legacy;
+ * DesInventar - http://www.desinventar.org
+ * (c) Corporacion OSSO
+ */
+namespace DesInventar\Legacy\Model;
 
-class DIDisasterImport extends DIDisaster
+class DisasterImport extends Disaster
 {
+    protected $importFieldDef = '';
+
     public function __construct($session, $disasterId, $importFieldDef)
     {
         parent::__construct($session, $disasterId);
@@ -59,9 +61,9 @@ class DIDisasterImport extends DIDisaster
 
     public function stringToDIField($prmValue)
     {
-        $prmValue = preg_replace('/\"/', '', $prmValue);
-        $prmValue = preg_replace('/\$/', '', $prmValue);
-        $prmValue = preg_replace('/,/', '.', $prmValue);
+        $prmValue = preg_replace('/\"/', '', $prmValue) . '';
+        $prmValue = preg_replace('/\$/', '', $prmValue) . '';
+        $prmValue = preg_replace('/,/', '.', $prmValue) . '';
         $prmValue = trim($prmValue);
 
         if ($prmValue === '0') {
@@ -82,10 +84,10 @@ class DIDisasterImport extends DIDisaster
     public function valueToDIField($prmValue)
     {
         $value = '';
-        $prmValue = preg_replace('/\"/', '', $prmValue);
-        $prmValue = preg_replace('/\$/', '', $prmValue);
-        $prmValue = preg_replace('/,/', '.', $prmValue);
-        $prmValue = preg_replace('/;/', '.', $prmValue);
+        $prmValue = preg_replace('/\"/', '', $prmValue) . '';
+        $prmValue = preg_replace('/\$/', '', $prmValue) . '';
+        $prmValue = preg_replace('/,/', '.', $prmValue) . '';
+        $prmValue = preg_replace('/;/', '.', $prmValue) . '';
         $prmValue = trim($prmValue);
         if (is_numeric($prmValue)) {
             return $prmValue;
@@ -132,8 +134,8 @@ class DIDisasterImport extends DIDisaster
 
     public function filterValue($prmValue)
     {
-        $prmValue = preg_replace('/\$/', '', $prmValue);
-        $prmValue = preg_replace('/,/', '.', $prmValue);
+        $prmValue = preg_replace('/\$/', '', $prmValue) . '';
+        $prmValue = preg_replace('/,/', '.', $prmValue) . '';
         $prmValue = trim($prmValue);
         return $prmValue;
     }

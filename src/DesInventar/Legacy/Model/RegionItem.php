@@ -1,18 +1,19 @@
 <?php
 /*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
-namespace DesInventar\Legacy;
+ * DesInventar - http://www.desinventar.org
+ * (c) Corporacion OSSO
+ */
+namespace DesInventar\Legacy\Model;
 
-class DIRegionItem extends DIRecord
+class RegionItem extends Record
 {
     public function __construct($prmSession)
     {
         $this->sTableName   = "RegionItem";
         $this->sPermPrefix  = "INFO";
-        $this->sFieldKeyDef = "RegionId/STRING," .
-                              "RegionItem/STRING";
+        $this->sFieldKeyDef =
+            "RegionId/STRING," .
+            "RegionItem/STRING";
         $this->sFieldDef    = "RegionQuery/STRING";
 
         parent::__construct($prmSession);

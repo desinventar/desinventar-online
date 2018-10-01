@@ -1,21 +1,23 @@
 <?php
 /*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
-namespace DesInventar\Legacy;
+ * DesInventar - http://www.desinventar.org
+ * (c) Corporacion OSSO
+ */
+namespace DesInventar\Legacy\Model;
 
-class DIRegionAuth extends DIRecord
+class RegionAuth extends Record
 {
     public function __construct($prmSession)
     {
         $this->sTableName   = "RegionAuth";
         $this->sPermPrefix  = "ADMIN";
-        $this->sFieldKeyDef = "UserId/STRING," .
-                              "RegionId/STRING," .
-                              "AuthKey/STRING";
-        $this->sFieldDef    = "AuthValue/STRING," .
-                              "AuthAuxValue/STRING";
+        $this->sFieldKeyDef =
+            "UserId/STRING," .
+            "RegionId/STRING," .
+            "AuthKey/STRING";
+        $this->sFieldDef    =
+            "AuthValue/STRING," .
+            "AuthAuxValue/STRING";
         parent::__construct($prmSession);
         $num_args = func_num_args();
         $this->setConnection("core");

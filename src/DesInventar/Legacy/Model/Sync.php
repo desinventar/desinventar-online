@@ -1,13 +1,13 @@
 <?php
 /*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
-namespace DesInventar\Legacy;
+ * DesInventar - http://www.desinventar.org
+ * (c) Corporacion OSSO
+ */
+namespace DesInventar\Legacy\Model;
 
 use DesInventar\Common\Util;
 
-class DISync extends DIRecord
+class Sync extends Record
 {
     public function __construct($prmSession)
     {

@@ -5,11 +5,10 @@
 */
 require_once('include/loader.php');
 require_once('include/maps.class.php');
-require_once('include/diregion.class.php');
 
 use Aura\Session\SessionFactory;
 
-use DesInventar\Legacy\DIRegion;
+use DesInventar\Legacy\Model\Region;
 use DesInventar\Common\MapServer;
 use DesInventar\Legacy\Maps;
 use DesInventar\Common\Util;
@@ -100,7 +99,7 @@ switch ($cmd) {
                 $options,
                 $config
             );
-            $rinf = new DIRegion($us);
+            $rinf = new Region($us);
             $info['RECORDS'] = showStandardNumber($NumberOfRecords);
             $rgl[0]['regname'] = $rinf->get('RegionLabel');
             $rgl[0]['info'] = $info;

@@ -10,7 +10,7 @@ require_once 'include/user_operations.php';
 use Aura\Session\SessionFactory;
 use DesInventar\Common\Language;
 use DesInventar\Legacy\UserSession;
-use DesInventar\Legacy\DIUser;
+use DesInventar\Legacy\Model\User;
 
 $sessionFactory = new SessionFactory();
 $session = $sessionFactory->newInstance($_COOKIE);
@@ -57,7 +57,7 @@ switch ($cmd) {
         $user = null;
         $UserId = getParameter('UserId', '');
         if ($UserId != '') {
-            $user = new DIUser($us, $UserId);
+            $user = new User($us, $UserId);
             echo json_encode($user->getInfo());
         }
         break;
@@ -106,7 +106,7 @@ switch ($cmd) {
             }
         }
         if ($bReturn > 0) {
-            $u = new DIUser($us, $UserId);
+            $u = new User($us, $UserId);
             if ($cmd == 'insert') {
                 // set a Default passwd for new users...
                 $data['UserPasswd'] = md5('desinventar');

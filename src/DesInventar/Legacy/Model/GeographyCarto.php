@@ -4,9 +4,9 @@
  (c) Corporacion OSSO
 */
 
-namespace DesInventar\Legacy;
+namespace DesInventar\Legacy\Model;
 
-class DIGeoCarto extends DIRecord
+class GeographyCarto extends Record
 {
     protected static $def = array(
         'GeographyId' => array('type' => 'VARCHAR', 'size' => 100, 'pk' => 1),
@@ -40,7 +40,8 @@ class DIGeoCarto extends DIRecord
 
     public function getDBFFilename()
     {
-        $filename = VAR_DIR . '/database/' . $this->RegionId . '/' . $this->get('GeoLevelLayerFile') . '.dbf';
+        $filename = $this->session->config->database['db_dir'] . '/database/' .
+            $this->RegionId . '/' . $this->get('GeoLevelLayerFile') . '.dbf';
         return $filename;
     }
 }

@@ -1,14 +1,8 @@
 <?php
 require_once '../../vendor/autoload.php';
 
-require_once '../../web/include/distatus.class.php';
-require_once '../../web/include/diobject.class.php';
-require_once '../../web/include/direcord.class.php';
-require_once '../../web/include/dievent.class.php';
-require_once '../../web/include/dicause.class.php';
-
-use \DesInventar\Legacy\DICause;
-use \DesInventar\Legacy\DIEvent;
+use DesInventar\Legacy\Model\Cause;
+use DesInventar\Legacy\Model\Event;
 
 $FileName = $argv[1];
 $LangIsoCode = $argv[2];
@@ -44,7 +38,7 @@ while (! feof($fh)) {
                 break;
         }
         if ($TableName == 'EVENT') {
-            $e = new DIEvent(null);
+            $e = new Event(null);
             $e->set('LangIsoCode', $LangIsoCode);
             $e->set('RegionId', '');
             $e->set('EventPredefined', 1);
@@ -61,7 +55,7 @@ while (! feof($fh)) {
             fwrite(STDOUT, $e->getUpdateQuery() . ";\n");
         }
         if ($TableName == 'CAUSE') {
-            $e = new DICause(null);
+            $e = new Cause(null);
             $e->set('LangIsoCode', $LangIsoCode);
             $e->set('RegionId', '');
             $e->set('CausePredefined', 1);

@@ -1,17 +1,20 @@
 <?php
 /*
- DesInventar - http://www.desinventar.org
- (c) 1998-2015 Corporacion OSSO
-*/
+ * DesInventar - http://www.desinventar.org
+ * (c) 1998-2015 Corporacion OSSO
+ */
 
-namespace DesInventar\Legacy;
+namespace DesInventar\Legacy\Model;
 
 use DesInventar\Common\Util;
 
 use \PDO;
 
-class DIEvent extends DIRecord
+class Event extends Record
 {
+    const ERR_NO_ERROR = 1;
+    const ERR_UNKNOWN_ERROR = -1;
+
     protected static $def = array(
         'EventId' => array('type' => 'VARCHAR', 'size' => 50, 'pk' => 1),
         'LangIsoCode' => array('type' => 'VARCHAR', 'size' => 3, 'pk' => 1),
@@ -99,7 +102,7 @@ class DIEvent extends DIRecord
 
     public function validateUpdate($bStrict)
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         $iReturn = $this->validateNotNull(-13, 'EventName');
         if ($iReturn > 0) {
             $iReturn = $this->validateUnique(-14, 'EventName', true);
@@ -114,7 +117,7 @@ class DIEvent extends DIRecord
 
     public function validateNoDatacards($ErrCode)
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         $Count = 0;
         $Query = "SELECT COUNT(DisasterId) AS COUNT FROM Disaster WHERE EventId='" . $this->get('EventId') . "'";
         foreach ($this->q->dreg->query($Query) as $row) {
@@ -128,7 +131,7 @@ class DIEvent extends DIRecord
 
     public function validateDelete($bStrict)
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         $iReturn = $this->validateNoDatacards(-15);
         return $iReturn;
     }
@@ -149,7 +152,7 @@ class DIEvent extends DIRecord
                 $this->load();
             }
             if ($this->status->hasError() || $this->status->hasWarning()) {
-                $iReturn = ERR_UNKNOWN_ERROR;
+                $iReturn = self::ERR_UNKNOWN_ERROR;
             }
             $this->status->status = $iReturn;
         }

@@ -6,13 +6,12 @@
 
 require_once('include/loader.php');
 require_once('include/query.class.php');
-require_once('include/dicause.class.php');
 
 require_once 'include/cause_operations.php';
 
 use DesInventar\Common\Util;
 
-use \DesInventar\Legacy\DICause;
+use DesInventar\Legacy\Model\Cause;
 
 $get = $_POST;
 $RegionId = getParameter('r', getParameter('RegionId'));
@@ -30,7 +29,7 @@ switch ($cmd) {
             if (! isset($info['CauseActive'])) {
                 $info['CauseActive'] = 'off';
             }
-            $o = new DICause($us);
+            $o = new Cause($us);
             $o->setFromArray($info);
             $util = new Util();
             $o->set('CauseId', $util->uuid4());
@@ -41,7 +40,7 @@ switch ($cmd) {
         break;
     case 'cmdCauseUpdate':
         if ($us->UserRoleValue >= ROLE_ADMINREGION) {
-            $o = new DICause($us, $info['CauseId']);
+            $o = new Cause($us, $info['CauseId']);
             $info = $_POST['Info'];
             if (! isset($info['CauseActive'])) {
                 $info['CauseActive'] = 'off';

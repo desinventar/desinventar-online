@@ -4,6 +4,8 @@
  (c) Corporacion OSSO
 */
 
+use DesInventar\Legacy\Model\GeographyItem;
+
 function geography_delete_items($prmConn, $prmGeoLevelId)
 {
     $answer = ERR_NO_ERROR;
@@ -60,11 +62,11 @@ function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
                     if (isset($parent_cache[$parent_code])) {
                         $parent_id = $parent_cache[$parent_code];
                     } else {
-                        $parent_id = DIGeography::getIdByCode($prmSession, $parent_code);
+                        $parent_id = GeographyItem::getIdByCode($prmSession, $parent_code);
                         $parent_cache[$parent_code] = $parent_id;
                     }
                 }
-                $o = new DIGeography($prmSession, $geography_id);
+                $o = new GeographyItem($prmSession, $geography_id);
                 $o->set('GeographyName', $geography_name);
                 $o->set('GeographyCode', $geography_code);
                 $o->set('GeographyLevel', $prmGeoLevelId);

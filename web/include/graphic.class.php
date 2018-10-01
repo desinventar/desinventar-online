@@ -6,6 +6,8 @@
 
 namespace DesInventar\Legacy;
 
+use DesInventar\Common\Date;
+
 use \Graph;
 use \PieGraph;
 use \Text;
@@ -515,7 +517,7 @@ class Graphic
                 $qend[1] = '12';
             }
             if ($qend[2] == '') {
-                $qend[2] = DIDate::getDaysOfMonth($qend[0], $qend[1]);
+                $qend[2] = Date::getDaysOfMonth($qend[0], $qend[1]);
             }
             $dateend = sprintf('%04d-%02d-%02d', $qend[0], $qend[1], $qend[2]);
         } else {

@@ -4,17 +4,17 @@ namespace DesInventar;
 
 use Aura\Session\SessionFactory;
 
-use \DesInventar\Legacy\UserSession;
-use \DesInventar\Legacy\DIRegion;
-use \DesInventar\Legacy\DIRegionDB;
-use \DesInventar\Legacy\DIRegionRecord;
-use \DesInventar\Legacy\DIGraph;
-use \DesInventar\Legacy\DICause;
-use \DesInventar\Legacy\DIEvent;
-use \DesInventar\Legacy\DIGeoCarto;
-use \DesInventar\Legacy\DIGeography;
-use \DesInventar\Legacy\DIGeoLevel;
-use \DesInventar\Legacy\DIProfile;
+use DesInventar\Legacy\UserSession;
+use DesInventar\Legacy\Model\Region;
+use DesInventar\Legacy\Model\GeographyLevel;
+use DesInventar\Legacy\Model\RegionDatabase;
+use DesInventar\Legacy\Model\RegionRecord;
+use DesInventar\Legacy\DIGraph;
+use DesInventar\Legacy\Model\Cause;
+use DesInventar\Legacy\Model\Event;
+use DesInventar\Legacy\Model\GeographyCarto;
+use DesInventar\Legacy\Model\GeographyItem;
+use DesInventar\Legacy\DIProfile;
 use DesInventar\Common\Version;
 use DesInventar\Common\Util;
 use DesInventar\Common\QueryOperations;
@@ -61,7 +61,7 @@ class LegacyIndex
         $t->assign('desinventarRegionId', $RegionId);
         if (!empty($RegionId)) {
             $us->open($RegionId);
-            $r = new DIRegion($us, $RegionId);
+            $r = new Region($us, $RegionId);
             $RegionLabel = $r->getRegionInfoValue('RegionLabel');
         }
         $t->assign('desinventarRegionLabel', $RegionLabel);
@@ -154,7 +154,7 @@ class LegacyIndex
             case 'cmdAdminDatabaseGetInfo':
                 $answer = array();
                 $RegionId = getParameter('RegionId', '');
-                $r = new DIRegion($us, $RegionId);
+                $r = new Region($us, $RegionId);
                 $answer['Status'] = ERR_NO_ERROR;
                 $answer['Region'] = $r->getRegionInfoCore();
                 return json_encode($answer);
@@ -260,7 +260,7 @@ class LegacyIndex
                 }
                 if ($iReturn > 0) {
                     $info = $_POST['Event'];
-                    $o = new DIEvent($us, $info['EventId']);
+                    $o = new Event($us, $info['EventId']);
                     if ($info['EventPredefined'] > 0) {
                         if ($o->get('EventName') != $info['EventName']) {
                             $info['EventPredefined'] = 2;
@@ -316,7 +316,7 @@ class LegacyIndex
                 }
                 if ($iReturn > 0) {
                     $info = $_POST['Cause'];
-                    $o = new DICause($us, $info['CauseId']);
+                    $o = new Cause($us, $info['CauseId']);
                     if ($info['CausePredefined'] > 0) {
                         if ($o->get('CauseName') != $info['CauseName']) {
                             $info['CausePredefined'] = 2;
@@ -351,7 +351,7 @@ class LegacyIndex
                     $iReturn = ERR_UNKNOWN_ERROR;
                 }
                 if ($iReturn > 0) {
-                    $r = new DIRegion($us, $RegionId);
+                    $r = new Region($us, $RegionId);
                     $r->update();
                     $info = [
                         'RegionStatus' => $r->get('RegionStatus'),
@@ -376,7 +376,7 @@ class LegacyIndex
                     $iReturn = ERR_UNKNOWN_ERROR;
                 }
                 if ($iReturn > 0) {
-                    $r = new DIRegion($us, $RegionId);
+                    $r = new Region($us, $RegionId);
                     $UserId = getParameter('UserId', '');
                     $UserRole = getParameter('UserRole', '');
                     if ($UserRole == 'ADMINREGION') {
@@ -398,7 +398,7 @@ class LegacyIndex
                     $iReturn = ERR_ACCESS_DENIED;
                 }
                 if ($iReturn > 0) {
-                    $r = new DIRegion($us, $RegionId);
+                    $r = new Region($us, $RegionId);
                     $r->set('RegionStatus', $_POST['RegionStatus']);
                     $r->set('RegionOrder', $_POST['RegionOrder']);
                     $iReturn = $r->update();
@@ -488,8 +488,8 @@ class LegacyIndex
                 $params['UserRoleValue'] = $desinventarUserRoleValue;
                 $answer['RegionId'] = $RegionId;
                 if ($RegionId != '') {
-                    if (DIRegion::existRegion($us, $RegionId)) {
-                        $r = new DIRegion($us, $RegionId);
+                    if (Region::existRegion($us, $RegionId)) {
+                        $r = new Region($us, $RegionId);
 
                         $GeolevelsList = $r->getGeolevelList();
                         $answer['GeolevelsList'] = $GeolevelsList;
@@ -551,7 +551,7 @@ class LegacyIndex
                 }
                 if ($iReturn > 0) {
                     $geography_id = isset($Geography['GeographyId']) ? $Geography['GeographyId'] : '';
-                    $o = new DIGeography($us, $geography_id);
+                    $o = new GeographyItem($us, $geography_id);
                     $geography_name_old = $o->get('GeographyName');
                     $o->setFromArray($Geography);
                     if ($geography_id == '') {
@@ -617,7 +617,7 @@ class LegacyIndex
                     $iReturn = ERR_UNKNOWN_ERROR;
                 }
                 if ($iReturn > 0) {
-                    $r = new DIRegion($us, $RegionId);
+                    $r = new Region($us, $RegionId);
                     $GeolevelsList = $r->getGeolevelList();
                     $answer['GeolevelsList'] = $GeolevelsList;
                 }
@@ -636,7 +636,7 @@ class LegacyIndex
                     $iReturn = ERR_UNKNOWN_ERROR;
                 }
                 if ($iReturn > 0) {
-                    $o = new DIGeoLevel($us, $GeoLevelId);
+                    $o = new GeographyLevel($us, $GeoLevelId);
                     $o->setFromArray($GeoLevel);
                     if ($o->exist() > 0) {
                         $iReturn = $o->update();
@@ -651,7 +651,7 @@ class LegacyIndex
                         $iReturn = $o->insert();
                     }
                     if ($iReturn > 0) {
-                        $o = new DIGeoCarto($us, $GeoLevelId);
+                        $o = new GeographyCarto($us, $GeoLevelId);
                         if (isset($GeoLevel['GeoLevelLayerCode'])) {
                             $o->set('GeoLevelLayerCode', $GeoLevel['GeoLevelLayerCode']);
                         }
@@ -686,7 +686,7 @@ class LegacyIndex
                 if ($iReturn > 0) {
                     $geography_items_count = geography_get_items_count($us->q->dreg, $GeoLevelId);
                     $answer['GeographyItemsCount'] = $geography_items_count;
-                    $r = new DIRegion($us, $RegionId);
+                    $r = new Region($us, $RegionId);
                     $GeolevelsList = $r->getGeolevelList();
                     $answer['GeolevelsList'] = $GeolevelsList;
                 }
@@ -780,7 +780,7 @@ class LegacyIndex
                 $answer = array();
                 $answer['Status']     = ERR_NO_ERROR;
                 $answer['CountryIso'] = getParameter('CountryIso');
-                $answer['RegionId']   = DIRegion::buildRegionId($answer['CountryIso']);
+                $answer['RegionId']   = Region::buildRegionId($answer['CountryIso']);
                 return json_encode($answer);
                 break;
             case 'cmdDatabaseCreate':
@@ -809,7 +809,7 @@ class LegacyIndex
                     if ($RegionId == '') {
                         $RegionId = $_POST['Database']['RegionId'];
                     }
-                    $r = new DIRegionRecord($us, $RegionId);
+                    $r = new RegionRecord($us, $RegionId);
                     $iReturn = $r->setFromArray($_POST['Database']);
                     if ($r->get('RegionId') == '') {
                         $iReturn = ERR_UNKNOWN_ERROR;
@@ -831,7 +831,7 @@ class LegacyIndex
                 if ($iReturn > 0) {
                     $RegionId = $_POST['RegionId'];
                     $RegionLabel = $_POST['RegionLabel'];
-                    if (DIRegion::existRegion($us, $RegionId) < 0) {
+                    if (Region::existRegion($us, $RegionId) < 0) {
                         $iReturn = \DesInventar\Legacy\DatabaseOperations::create($us, $RegionId, '');
                         $us->open($RegionId);
                     }
@@ -909,7 +909,7 @@ class LegacyIndex
                 if ($desinventarUserRoleValue >= ROLE_ADMINPORTAL) {
                     $UserId = getParameter('UserId', '');
                     if ($UserId != '') {
-                        $r = new DIRegion($us, $RegionId);
+                        $r = new Region($us, $RegionId);
                         $r->removeRegionUserAdmin();
                         $iReturn = $us->setUserRole($UserId, $us->RegionId, 'ADMINREGION');
                         if ($iReturn > 0) {
@@ -931,7 +931,7 @@ class LegacyIndex
                     $RegionId = $_POST['RegionInfo']['RegionId'];
                     $Filename = $config->paths['tmp_dir']
                       . '/DesInventarFile_' . $us->sSessionId . '_' . $_POST['RegionInfo']['Filename'];
-                    $iReturn = DIRegionDB::createRegionDBFromZip(
+                    $iReturn = RegionDatabase::createRegionDBFromZip(
                         $us,
                         $_POST['RegionInfo']['Mode'],
                         $RegionId,
@@ -939,8 +939,8 @@ class LegacyIndex
                         $Filename
                     );
                     if ($iReturn > 0) {
-                        $r = new DIRegion($us, $RegionId);
-                        if (DIRegion::existRegion($us, $RegionId) < 0) {
+                        $r = new Region($us, $RegionId);
+                        if (Region::existRegion($us, $RegionId) < 0) {
                             $r->insert();
                         } else {
                             $r->update();
@@ -983,12 +983,12 @@ class LegacyIndex
                             $zip->extractTo($OutDir, 'info.xml');
                             $zip->close();
                             if (file_exists($OutDir . '/info.xml')) {
-                                $r = new DIRegion($us, '', $OutDir . '/info.xml');
+                                $r = new Region($us, '', $OutDir . '/info.xml');
                                 $info = array();
                                 $UploadMode = getParameter('UploadMode', '');
                                 if ($UploadMode == 'Copy') {
-                                    if (DIRegion::existRegion($us, $r->get('RegionId')) > 0) {
-                                        $RegionId = DIRegion::buildRegionId($r->get('CountryIso'));
+                                    if (Region::existRegion($us, $r->get('RegionId')) > 0) {
+                                        $RegionId = Region::buildRegionId($r->get('CountryIso'));
                                     } else {
                                         $RegionId = $r->get('RegionId');
                                     }
@@ -1000,7 +1000,7 @@ class LegacyIndex
                                 $info['RegionLastUpdate'] = substr($r->get('RegionLastUpdate'), 0, 10);
                                 $info['NumberOfRecords']  = $r->get('NumberOfRecords');
                                 $answer['RegionInfo'] = $info;
-                                $answer['DBExist'] = DIRegion::existRegion($us, $info['RegionId']);
+                                $answer['DBExist'] = Region::existRegion($us, $info['RegionId']);
                             } else {
                                 $iReturn = ERR_INVALID_ZIPFILE; //-130
                             }
@@ -1050,7 +1050,7 @@ class LegacyIndex
                 $reglst = $us->searchDB($searchDBQuery, $searchDBCountry);
                 if ($searchDBType == 'FULLINFO') {
                     foreach ($reglst as $RegionId => $RegionInfo) {
-                        $r = new DIRegion($us, $RegionId);
+                        $r = new Region($us, $RegionId);
                         $a = $r->getDBInfo($LangIsoCode);
                         unset($r);
                         $RegionList[$RegionId] = array_merge($RegionInfo, $a);
@@ -1102,7 +1102,7 @@ class LegacyIndex
                 }
 
                 if ($iReturn > 0) {
-                    $r = new DIRegion($us, $RegionId);
+                    $r = new Region($us, $RegionId);
                     $a = $r->getDBInfo($LangIsoCode);
                     $a['CountryIso']  = $r->get('CountryIso');
                     $a['CountryName'] = $us->q->getCountryName($r->get('CountryIso'), $LangIsoCode);
@@ -1130,7 +1130,7 @@ class LegacyIndex
                 $ShortName = 'DesInventar_' . date('Y-m-d') . '_' . $RegionId . '.zip';
                 $FileName = $config->paths['www_dir'] . '/' . $us->sSessionId . '/' . $ShortName;
                 $URL      = $config->paths['www_uri'] . '/' . $us->sSessionId . '/' . $ShortName;
-                $r = new DIRegion($us);
+                $r = new Region($us);
                 $iReturn = $r->createRegionBackup($FileName);
                 if ($iReturn < 0) {
                     return json_encode(['Status' => ERR_UNKNOWN_ERROR]);
@@ -1212,7 +1212,6 @@ class LegacyIndex
                 require_once($config->paths['jpgraph_dir'] . '/jpgraph_pie.php');
                 require_once($config->paths['jpgraph_dir'] . '/jpgraph_pie3d.php');
                 require_once('include/math.class.php');
-                require_once('include/date.class.php');
                 require_once('include/graphic.class.php');
                 require_once('include/diresult.class.php');
                 require_once('include/digraph.class.php');
@@ -1244,7 +1243,6 @@ class LegacyIndex
                 require_once($config->paths['jpgraph_dir'] . '/jpgraph_pie.php');
                 require_once($config->paths['jpgraph_dir'] . '/jpgraph_pie3d.php');
                 require_once('include/math.class.php');
-                require_once('include/date.class.php');
                 require_once('include/graphic.class.php');
                 require_once('include/diresult.class.php');
                 require_once('include/digraph.class.php');

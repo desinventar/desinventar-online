@@ -1,12 +1,16 @@
 <?php
 /*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
-namespace DesInventar\Legacy;
+ * DesInventar - http://www.desinventar.org
+ * (c) Corporacion OSSO
+ */
+namespace DesInventar\Legacy\Model;
 
-class DIGeography extends DIRecord
+class GeographyItem extends Record
 {
+    const ERR_NO_ERROR = 1;
+    const ERR_DEFAULT_ERROR = -1;
+    const ERR_UNKNOWN_ERROR = -1;
+
     protected static $def = array(
         'GeographyId' => array('type' => 'VARCHAR', 'size' => 100, 'pk' =>1),
         'LangIsoCode' => array('type' => 'VARCHAR', 'size' => 3, 'pk' => 1),
@@ -111,7 +115,7 @@ class DIGeography extends DIRecord
 
     public function buildGeographyId($prmMyParentId)
     {
-        $iGeographyLevel = strlen($prmMyParentId)/5;
+        $iGeographyLevel = intval(strlen($prmMyParentId)/5);
         $sQuery = trim("
             SELECT * FROM Geography
             WHERE GeographyId LIKE '" . $prmMyParentId . "%'
@@ -128,10 +132,10 @@ class DIGeography extends DIRecord
 
     public function setGeographyId($prmMyParentId)
     {
-        $answer = ERR_NO_ERROR;
+        $answer = self::ERR_NO_ERROR;
         $geography_id = $this->buildGeographyId($prmMyParentId);
         if ($geography_id == '') {
-            $answer = ERR_DEFAULT_ERROR;
+            $answer = self::ERR_DEFAULT_ERROR;
         }
         if ($answer > 0) {
             $this->set('GeographyId', $geography_id);
@@ -188,7 +192,7 @@ class DIGeography extends DIRecord
 
     public function update($withValidate = 1, $bStrict = 1)
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         if ($iReturn > 0) {
             // Update goegraphy children data if needed...
             if ($this->oOldField['info']['GeographyName'] != $this->oField['info']['GeographyName']) {
@@ -211,7 +215,7 @@ class DIGeography extends DIRecord
 
     public function validateNoDatacards($ErrCode)
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         $Count = 0;
         $Query = trim("
             SELECT COUNT(DisasterId) AS COUNT
@@ -253,7 +257,7 @@ class DIGeography extends DIRecord
 
     public function validateDelete($bStrict)
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         $iReturn = $this->validateNoDatacards(-48);
         return $iReturn;
     }
@@ -303,7 +307,7 @@ class DIGeography extends DIRecord
         /* Move geography to a different parent node, updates
            GeographyId and associated Disaster records
         */
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         if ($iReturn > 0) {
             if ($withChildren) {
                 $Query = "SELECT * FROM Geography WHERE GeographyId LIKE '" . $prmGeographyIdPrefix . "%'";
@@ -320,7 +324,7 @@ class DIGeography extends DIRecord
                     // New Id must not exist in database...
                     $bExist = self::existId($prmSession, $newGeographyId);
                     if ($bExist) {
-                        $iReturn = ERR_UNKNOWN_ERROR;
+                        $iReturn = self::ERR_UNKNOWN_ERROR;
                     }
                 }
                 if ($iReturn > 0) {

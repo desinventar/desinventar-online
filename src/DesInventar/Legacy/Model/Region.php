@@ -3,16 +3,48 @@
  DesInventar - http://www.desinventar.org
  (c) Corporacion OSSO
 */
-namespace DesInventar\Legacy;
+namespace DesInventar\Legacy\Model;
 
-use \DesInventar\Service\RegionInfo;
+use DesInventar\Service\RegionInfo;
 
-use \DomDocument;
-use \Pdo;
+use \DOMDocument;
+use \PDO;
 use \ZipArchive;
+use \Exception;
 
-class DIRegion extends DIObject
+class Region extends Model
 {
+    const ERR_NO_DATABASE = -4;
+    const STATUS_NO = 0;
+    const STATUS_YES = 1;
+    const CONST_REGIONACTIVE = 1;
+    const CONST_REGIONPUBLIC = 2;
+
+    protected $sInfoDef =
+        'DBVersion/STRING,' .
+        'PeriodBeginDate/DATE,' .
+        'PeriodEndDate/DATE,' .
+        'GeoLimitMinX/DOUBLE,' .
+        'GeoLimitMinY/DOUBLE,' .
+        'GeoLimitMaxX/DOUBLE,' .
+        'GeoLimitMaxY/DOUBLE,' .
+        'SerialSuffixSize/INTEGER,' .
+        'SerialCloneSuffixSize/INTEGER,' .
+        'OptionOutOfRange/INTEGER,' .
+        'OptionLanguageList/STRING,' .
+        'OptionOldName/STRING,' .
+        'NumberOfRecords/INTEGER';
+
+    protected $sInfoTrans =
+        'InfoCredits/STRING,' .
+        'InfoGeneral/STRING,' .
+        'InfoSources/STRING,' .
+        'InfoSynopsis/STRING,' .
+        'InfoObservation/STRING,' .
+        'InfoGeography/STRING,' .
+        'InfoCartography/STRING,' .
+        'InfoAdminURL/STRING';
+
     public function __construct($prmSession)
     {
         $this->sFieldKeyDef = 'RegionId/STRING';
@@ -24,27 +56,6 @@ class DIRegion extends DIObject
                               'RegionLastUpdate/DATETIME,' .
                               'IsCRegion/INTEGER,' .
                               'IsVRegion/INTEGER';
-        $this->sInfoDef     = 'DBVersion/STRING,' .
-                              'PeriodBeginDate/DATE,' .
-                              'PeriodEndDate/DATE,' .
-                              'GeoLimitMinX/DOUBLE,' .
-                              'GeoLimitMinY/DOUBLE,' .
-                              'GeoLimitMaxX/DOUBLE,' .
-                              'GeoLimitMaxY/DOUBLE,' .
-                              'SerialSuffixSize/INTEGER,' .
-                              'SerialCloneSuffixSize/INTEGER,' .
-                              'OptionOutOfRange/INTEGER,' .
-                              'OptionLanguageList/STRING,' .
-                              'OptionOldName/STRING,' .
-                              'NumberOfRecords/INTEGER';
-        $this->sInfoTrans   = 'InfoCredits/STRING,' .
-                              'InfoGeneral/STRING,' .
-                              'InfoSources/STRING,' .
-                              'InfoSynopsis/STRING,' .
-                              'InfoObservation/STRING,' .
-                              'InfoGeography/STRING,' .
-                              'InfoCartography/STRING,' .
-                              'InfoAdminURL/STRING';
         parent::__construct($prmSession);
         $this->createFields($this->sInfoDef);
         $this->addLanguageInfo('eng');
@@ -68,7 +79,7 @@ class DIRegion extends DIObject
                 $prmRegionId = $prmSession->RegionId;
             }
         }
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         if ($prmRegionId != '') {
             $this->set('RegionId', $prmRegionId);
             $XMLFile = $this->getXMLFileName();
@@ -92,25 +103,25 @@ class DIRegion extends DIObject
     }
 
     public static function regionGetOrCreate(
-        UserSession $us,
+        $session,
         $region_id,
         $region_label,
         $lang_iso_code,
         $country_iso,
         $admin_user_id
     ) {
-        $r = new self($us, $region_id);
-        $r->set('RegionLabel', $region_label);
-        $r->set('LangIsoCode', $lang_iso_code);
-        $r->set('CountryIso', $country_iso);
-        $r->set('RegionStatus', 1);
-        if (self::existRegion($us, $region_id) < 0) {
-            $r->insert();
+        $region = new self($session, $region_id);
+        $region->set('RegionLabel', $region_label);
+        $region->set('LangIsoCode', $lang_iso_code);
+        $region->set('CountryIso', $country_iso);
+        $region->set('RegionStatus', 1);
+        if (self::existRegion($session, $region_id) < 0) {
+            $region->insert();
         } else {
-            $r->update();
+            $region->update();
         }
-        $r->removeRegionUserAdmin();
-        $us->setUserRole($admin_user_id, $region_id, 'ADMINREGION');
+        $region->removeRegionUserAdmin();
+        $session->setUserRole($admin_user_id, $region_id, 'ADMINREGION');
         return $region_id;
     }
 
@@ -123,8 +134,8 @@ class DIRegion extends DIObject
     {
         // 2009-07-28 (jhcaiced) Build an array with translatable fields
         $Translatable = array();
-        foreach (preg_split('#,#', $this->sInfoTrans) as $sItem) {
-            $oItem = preg_split('#/#', $sItem);
+        foreach ($this->explodeFieldList($this->sInfoTrans) as $sItem) {
+            $oItem = $this->explodeFieldDef($sItem);
             $sFieldName = $oItem[0];
             $sFieldType = $oItem[1];
             $Translatable[$sFieldName] = $sFieldType;
@@ -134,8 +145,13 @@ class DIRegion extends DIObject
 
     public function load()
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         return $iReturn;
+    }
+
+    protected function getRegionDatabaseDir($regionId)
+    {
+        return $this->session->config->database['db_dir'] . '/database/' . $regionId;
     }
 
     public function createRegionDBDir()
@@ -143,7 +159,7 @@ class DIRegion extends DIObject
         $answer = true;
         $RegionId = $this->get('RegionId');
         // Create Directory for New Region
-        $DBDir = DBDIR . '/' . $RegionId;
+        $DBDir = $this->getRegionDatabaseDir($RegionId);
         if (!file_exists($DBDir)) {
             $answer = mkdir($DBDir);
         }
@@ -152,7 +168,7 @@ class DIRegion extends DIObject
 
     public function insert()
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         $this->createRegionDBDir();
         $this->saveToXML();
         $this->insertCore();
@@ -181,7 +197,6 @@ class DIRegion extends DIObject
             $this->session->q->core->commit();
         } catch (Exception $e) {
             $this->session->q->core->rollBack();
-            showErrorMsg(debug_backtrace(), $e, '');
         }
         $this->updateCore();
     }
@@ -198,7 +213,7 @@ class DIRegion extends DIObject
          ' IsCRegion='         . $this->get('IsCRegion') . ',' .
          ' IsVRegion='         . $this->get('IsVRegion') .
          ' WHERE RegionId="'   . $this->get('RegionId') . '"';
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         $sth = $this->session->q->core->prepare($sQuery);
         try {
             $this->session->q->core->beginTransaction();
@@ -206,7 +221,6 @@ class DIRegion extends DIObject
             $this->session->q->core->commit();
         } catch (Exception $e) {
             $this->session->q->core->rollBack();
-            showErrorMsg(debug_backtrace(), $e, '');
         }
         return $iReturn;
     }
@@ -327,17 +341,17 @@ class DIRegion extends DIObject
 
     public function updateMapArea()
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         $IsCRegion = $this->get('IsCRegion');
         if ($IsCRegion > 0) {
-            $iReturn = ERR_NO_ERROR;
+            $iReturn = self::ERR_NO_ERROR;
             $MinX = 180;
             $MaxX = -180;
             $MinY =  90;
             $MaxY = -90;
             // Use information about each RegionItem to Calcule the Map Area
             $Query = "SELECT * FROM RegionItem WHERE RegionId='" . $this->get('RegionId') . "'";
-            foreach ($this->q->core->query($Query) as $row) {
+            foreach ($this->session->q->core->query($Query) as $row) {
                 $RegionItemId = $row['RegionItem'];
                 $r = new self($this->session, $RegionItemId);
                 $ItemMinX = $r->getRegionInfoValue('GeoLimitMinX');
@@ -358,7 +372,7 @@ class DIRegion extends DIObject
                 }
                 $r = null;
             }
-            $this->q->setDBConnection($this->get('RegionId'));
+            $this->session->q->setDBConnection($this->get('RegionId'));
             if ($iReturn > 0) {
                 $this->set('GeoLimitMinX', $MinX);
                 $this->set('GeoLimitMaxX', $MaxX);
@@ -382,12 +396,12 @@ class DIRegion extends DIObject
 
     public function setActive($prmValue)
     {
-        return $this->setBit($prmValue, CONST_REGIONACTIVE);
+        return $this->setBit($prmValue, self::CONST_REGIONACTIVE);
     }
 
     public function setPublic($prmValue)
     {
-        return $this->setBit($prmValue, CONST_REGIONPUBLIC);
+        return $this->setBit($prmValue, self::CONST_REGIONPUBLIC);
     }
 
     public function setBit($prmValue, $prmBit)
@@ -407,11 +421,13 @@ class DIRegion extends DIObject
 
     public static function createRegionEntryFromDir($us, $dir, $reglabel)
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         $regexist = $us->q->checkExistsRegion($dir);
-        $regexist = 0;
-        $difile = CONST_DBREGIONDIR . '/' . $dir ."/desinventar.db";
-        if (strlen($dir) >= 4 && file_exists($difile) && !$regexist) {
+        if (!$regexist) {
+            return false;
+        }
+        $difile = $us->config->database['db_url'] . '/database/' . $dir . '/desinventar.db';
+        if (strlen($dir) >= 4 && file_exists($difile)) {
             if ($us->q->setDBConnection($dir)) {
                 $data['RegionUserAdmin'] = "root";
                 foreach ($us->q->dreg->query("SELECT InfoKey, InfoValue FROM Info", PDO::FETCH_ASSOC) as $row) {
@@ -434,7 +450,7 @@ class DIRegion extends DIObject
                 $r = new self($us, $data['RegionId']);
                 $r->setFromArray($data);
                 $iReturn = $r->insert();
-                if (!iserror($iReturn)) {
+                if ($iReturn > 0) {
                     $rol = $us->setUserRole(
                         $_POST['RegionInfo']['RegionUserAdmin'],
                         $_POST['RegionInfo']['RegionId'],
@@ -450,7 +466,7 @@ class DIRegion extends DIObject
     {
         $RegionId = $this->session->RegionId;
         if ($RegionId == '') {
-            return ERR_UNKNOWN_ERROR;
+            return self::ERR_UNKNOWN_ERROR;
         }
         $this->set('NumberOfRecords', $this->session->getDisasterCount());
         $this->update();
@@ -458,13 +474,13 @@ class DIRegion extends DIObject
         $DirName = dirname($OutFile);
         if (! file_exists($DirName)) {
             if (! mkdir($DirName, 0777, true)) {
-                return ERR_UNKNOWN_ERROR;
+                return self::ERR_UNKNOWN_ERROR;
             }
         }
         unlink($OutFile);
         $zip = new ZipArchive();
         if ($zip->open($OutFile, ZIPARCHIVE::CREATE) != true) {
-            return ERR_UNKNOWN_ERROR;
+            return self::ERR_UNKNOWN_ERROR;
         }
         $DBDir = $this->session->getDBDir();
         // Build a list of files that goes into the zip file
@@ -481,16 +497,16 @@ class DIRegion extends DIObject
             }
         }
         $zip->close();
-        return ERR_NO_ERROR;
+        return self::ERR_NO_ERROR;
     }
 
     public function toXML()
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         $doc = new DomDocument('1.0', 'UTF-8');
         $root = $doc->createElement('RegionInfo');
-        $root = $doc->appendChild($root);
         $root->setAttribute('Version', '1.0');
+        $root = $doc->appendChild($root);
 
         // General Info and Translations of Descriptions
         foreach (array_keys($this->oField) as $section) {
@@ -499,8 +515,8 @@ class DIRegion extends DIObject
                 $occ = $root->appendChild($occ);
             } else {
                 $occ = $doc->createElement('Description');
+                $occ->setAttribute('LangIsoCode', $section . '');
                 $occ = $root->appendChild($occ);
-                $occ->setAttribute('LangIsoCode', $section);
             }
             foreach ($this->oField[$section] as $key => $value) {
                 $child = $doc->createElement($key);
@@ -518,9 +534,9 @@ class DIRegion extends DIObject
             if ($this->session->q->dreg) {
                 foreach ($this->session->q->dreg->query($sQuery) as $row) {
                     $level = $doc->createElement('GeoCartoItem');
-                    $level = $occ->appendChild($level);
                     $level->setAttribute('GeoLevelId', $row['GeoLevelId']);
                     $level->setAttribute('LangIsoCode', $row['LangIsoCode']);
+                    $level = $occ->appendChild($level);
                     foreach (array('GeoLevelLayerFile','GeoLevelLayerName','GeoLevelLayerCode') as $field) {
                         $child = $doc->createElement($field);
                         $child = $level->appendChild($child);
@@ -530,7 +546,7 @@ class DIRegion extends DIObject
                 }
             }
         } catch (Exception $e) {
-            $iReturn = ERR_NO_ERROR;
+            $iReturn = self::ERR_NO_ERROR;
         }
         if ($iReturn > 0) {
             // Save to String...
@@ -543,44 +559,39 @@ class DIRegion extends DIObject
 
     public function getXMLFileName()
     {
-        $filename = DBDIR . '/' . $this->get('RegionId') . '/info.xml';
+        $filename = $this->getRegionDatabaseDir($this->get('RegionId')) . '/info.xml';
         return $filename;
     }
 
     public function saveToXML($XMLFile = '')
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         if ($XMLFile == '') {
             $XMLFile = $this->getXMLFileName();
         }
         $xml = $this->toXML();
         if ($xml != '') {
-            $fh = fopen($XMLFile, 'w');
-            fwrite($fh, $this->toXML());
-            fclose($fh);
+            file_put_contents($XMLFile, $this->toXML());
         } else {
-            $iReturn = ERR_UNKNOWN_ERROR;
+            $iReturn = self::ERR_UNKNOWN_ERROR;
         }
         return $iReturn;
     }
 
     public function loadFromXML($XMLFile = '')
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         if ($XMLFile == '') {
             $XMLFile = $this->getXMLFileName();
         }
         if (! file_exists($XMLFile)) {
-            $iReturn = ERR_UNKNOWN_ERROR;
+            $iReturn = self::ERR_UNKNOWN_ERROR;
         }
 
         if ($iReturn > 0) {
             $doc = new DomDocument('1.0', 'UTF-8');
-            try {
-                $doc->load($XMLFile);
-            } catch (Exception $e) {
-                showErrorMsg(debug_backtrace(), $e, '');
-            }
+            $doc->load($XMLFile);
+
             foreach ($doc->getElementsByTagName('General') as $tree) {
                 $section = 'info';
                 foreach ($tree->childNodes as $node) {
@@ -617,21 +628,21 @@ class DIRegion extends DIObject
 
     public static function existRegion($us, $prmRegionId)
     {
-        $iReturn = ERR_NO_DATABASE;
+        $iReturn = self::ERR_NO_DATABASE;
         $sQuery = 'SELECT RegionId FROM Region WHERE RegionId="' . $prmRegionId . '"';
         try {
             foreach ($us->q->core->query($sQuery) as $row) {
-                $iReturn = ERR_NO_ERROR;
+                $iReturn = self::ERR_NO_ERROR;
             }
         } catch (Exception $e) {
-            $iReturn = ERR_NO_DATABASE;
+            $iReturn = self::ERR_NO_DATABASE;
         }
         return $iReturn;
     }
 
     public static function deleteRegion($us, $prmRegionId)
     {
-        $iReturn = STATUS_NO;
+        $iReturn = self::STATUS_NO;
         $sQuery = 'DELETE FROM Region WHERE RegionId=:RegionId';
         $sth = $us->q->core->prepare($sQuery);
         try {
@@ -639,18 +650,17 @@ class DIRegion extends DIObject
             $sth->bindParam(':RegionId', $prmRegionId, PDO::PARAM_STR);
             $sth->execute();
             $us->q->core->commit();
-            $iReturn = STATUS_YES;
+            $iReturn = self::STATUS_YES;
         } catch (Exception $e) {
             $us->q->core->rollBack();
-            showErrorMsg(debug_backtrace(), $e, '');
-            $iReturn = ERR_UNKNOWN_ERROR;
+            $iReturn = self::ERR_UNKNOWN_ERROR;
         }
         return $iReturn;
     }
 
     public function removeRegionUserAdmin()
     {
-        $iReturn = ERR_NO_ERROR;
+        $iReturn = self::ERR_NO_ERROR;
         $sQuery = '
         SELECT *
         FROM RegionAuth
@@ -676,7 +686,7 @@ class DIRegion extends DIObject
             }
         } catch (Exception $e) {
             $this->session->q->core->rollBack();
-            $iReturn = ERR_UNKNOWN_ERROR;
+            $iReturn = self::ERR_UNKNOWN_ERROR;
         }
         return $iReturn;
     }
@@ -684,56 +694,52 @@ class DIRegion extends DIObject
     public function getGeolevelList()
     {
         $answer = array();
-        try {
-            $sQuery = 'SELECT GeoLevelId,GeoLevelName,GeoLevelDesc,GeoLevelActive FROM GeoLevel ORDER BY GeoLevelId';
-            foreach ($this->session->q->dreg->query($sQuery, PDO::FETCH_ASSOC) as $row) {
-                $GeoLevelId = $row['GeoLevelId'];
-                $answer[$GeoLevelId] = $row;
-                $answer[$GeoLevelId]['HasMap'] = 0;
+        $sQuery = 'SELECT GeoLevelId,GeoLevelName,GeoLevelDesc,GeoLevelActive FROM GeoLevel ORDER BY GeoLevelId';
+        foreach ($this->session->q->dreg->query($sQuery, PDO::FETCH_ASSOC) as $row) {
+            $GeoLevelId = $row['GeoLevelId'];
+            $answer[$GeoLevelId] = $row;
+            $answer[$GeoLevelId]['HasMap'] = 0;
+        }
+        $sQuery = '
+        SELECT
+            GeoLevelId,
+            GeoLevelLayerFile,
+            GeoLevelLayerCode,
+            GeoLevelLayerName
+        FROM Geocarto
+        WHERE GeoLevelLayerFile<>"" ORDER BY GeoLevelId
+        ';
+        foreach ($this->session->q->dreg->query($sQuery, PDO::FETCH_ASSOC) as $row) {
+            $GeoLevelId = $row['GeoLevelId'];
+            if (isset($answer[$GeoLevelId])) {
+                $answer[$GeoLevelId] = array_merge($answer[$GeoLevelId], $row);
+                $answer[$GeoLevelId]['HasMap'] = 1;
             }
-            $sQuery = '
-            SELECT
-                GeoLevelId,
-                GeoLevelLayerFile,
-                GeoLevelLayerCode,
-                GeoLevelLayerName
-            FROM Geocarto
-            WHERE GeoLevelLayerFile<>"" ORDER BY GeoLevelId
-            ';
-            foreach ($this->session->q->dreg->query($sQuery, PDO::FETCH_ASSOC) as $row) {
-                $GeoLevelId = $row['GeoLevelId'];
-                if (isset($answer[$GeoLevelId])) {
-                    $answer[$GeoLevelId] = array_merge($answer[$GeoLevelId], $row);
-                    $answer[$GeoLevelId]['HasMap'] = 1;
+        }
+        // Validate each level to see if maps can be done
+        $sQuery = 'SELECT DISTINCT GeographyId FROM Geocarto WHERE GeographyId<>""';
+        $geography_list = array();
+        foreach ($this->session->q->dreg->query($sQuery) as $row) {
+            $geography_list[] = $row['GeographyId'];
+        }
+        $iSize = count($geography_list);
+        if ($iSize > 0) {
+            foreach ($answer as $GeoLevelId => $GeoLevel) {
+                $sQuery = '
+                SELECT COUNT(*) AS C
+                FROM Geocarto
+                WHERE
+                    GeoLevelId=' . $GeoLevelId . ' AND ' . '
+                    GeoLevelLayerFile<>""
+                ';
+                $iCount = 0;
+                foreach ($this->session->q->dreg->query($sQuery) as $row) {
+                    $iCount = $row['C'];
+                }
+                if ($iCount < $iSize) {
+                    $answer[$GeoLevelId]['HasMap'] = 0;
                 }
             }
-            // Validate each level to see if maps can be done
-            $sQuery = 'SELECT DISTINCT GeographyId FROM Geocarto WHERE GeographyId<>""';
-            $geography_list = array();
-            foreach ($this->session->q->dreg->query($sQuery) as $row) {
-                $geography_list[] = $row['GeographyId'];
-            }
-            $iSize = count($geography_list);
-            if ($iSize > 0) {
-                foreach ($answer as $GeoLevelId => $GeoLevel) {
-                    $sQuery = '
-                    SELECT COUNT(*) AS C
-                    FROM Geocarto
-                    WHERE
-                        GeoLevelId=' . $GeoLevelId . ' AND ' . '
-                        GeoLevelLayerFile<>""
-                    ';
-                    $iCount = 0;
-                    foreach ($this->session->q->dreg->query($sQuery) as $row) {
-                        $iCount = $row['C'];
-                    }
-                    if ($iCount < $iSize) {
-                        $answer[$GeoLevelId]['HasMap'] = 0;
-                    }
-                }
-            }
-        } catch (Exception $e) {
-            showErrorMsg(debug_backtrace(), $e, '');
         }
         return $answer;
     }

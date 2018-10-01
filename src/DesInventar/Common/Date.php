@@ -1,34 +1,31 @@
 <?php
 /*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
+ * DesInventar - http://www.desinventar.org
+ * (c) Corporacion OSSO
+ */
 
-namespace DesInventar\Legacy;
+namespace DesInventar\Common;
 
-class DIDate
+class Date
 {
-    // Return 1 if its a Leap Year, 0 if it's not and -1 if an error occurs
+    const IS_LEAP_YEAR = 1;
+    const IS_NOT_LEAP_YEAR = -1;
+
     public static function isLeapYear($prmYear)
     {
-        $bReturn = -1; // Error
-        if (is_int($prmYear) && $prmYear > 0) {
-            // In the Gregorian calendar there is a leap year every year divisible by four
-            // except for years which are both divisible by 100 and not divisible by 400.
-            if ($prmYear % 4 != 0) {
-                $iReturn = 0; // Not Leap Year
-            } else {
-                $iReturn = 1; // Leap Year
-                if ($prmYear % 100 == 0) {
-                    $iReturn = 1; // Leap Year
-                }
-                if ($prmYear % 400 == 0) {
-                    $iReturn = 0; // Not Leap Year
-                }
-            }
+        if (!is_int($prmYear) || $prmYear < 0) {
+            return self::IS_NOT_LEAP_YEAR;
         }
-        return $iReturn;
-    } //isLeapYear()
+        // In the Gregorian calendar there is a leap year every year divisible by four
+        // except for years which are both divisible by 100 and not divisible by 400.
+        if ($prmYear % 4 != 0) {
+            return self::IS_NOT_LEAP_YEAR;
+        }
+        if ($prmYear % 100 === 0 || $prmYear % 400 === 0) {
+            return self::IS_NOT_LEAP_YEAR;
+        }
+        return self::IS_LEAP_YEAR;
+    }
 
     public static function getDaysOfMonth($Year, $Month)
     {
@@ -39,27 +36,27 @@ class DIDate
             if (self::isLeapYear($Year)) {
                 $Day++;
             }
-        } //if
+        }
         return $Day;
-    } //getDaysOfMonth()
+    }
 
     public static function getYear($prmDate)
     {
         $Year = trim(substr($prmDate, 0, 4));
         return $Year;
-    } //getYear()
+    }
 
     public static function getMonth($prmDate)
     {
         $Month = trim(substr($prmDate, 5, 2));
         return $Month;
-    } //getMonth()
+    }
 
     public static function getDay($prmDate)
     {
         $Day = trim(substr($prmDate, 8, 2));
         return $Day;
-    } //getDay()
+    }
 
     public static function getWeekOfYear($prmDate)
     {
@@ -72,7 +69,7 @@ class DIDate
             self::getyear($prmDate)
         ));
         return $iWeek;
-    } //getWeekOfYear()
+    }
 
     public static function getWeeksOfYear($Year)
     {
@@ -81,7 +78,7 @@ class DIDate
             $iWeeks = 52;
         }
         return $iWeeks;
-    } //getWeeksOfYear()
+    }
 
     public static function padNumber($prmValue, $prmLength)
     {
@@ -90,7 +87,7 @@ class DIDate
             $value = '0' . $value;
         }
         return $value;
-    } //padNumber()
+    }
 
     public static function doCeil($prmValue)
     {
@@ -115,7 +112,7 @@ class DIDate
 
     public static function now()
     {
-         $now = gmdate('c');
-         return $now;
-    } //now()
-} //class
+        $now = gmdate('c');
+        return $now;
+    }
+}
