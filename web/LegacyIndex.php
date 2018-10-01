@@ -1211,7 +1211,6 @@ class LegacyIndex
                 require_once($config->paths['jpgraph_dir'] . '/jpgraph_bar.php');
                 require_once($config->paths['jpgraph_dir'] . '/jpgraph_pie.php');
                 require_once($config->paths['jpgraph_dir'] . '/jpgraph_pie3d.php');
-                require_once('include/math.class.php');
                 require_once('include/graphic.class.php');
                 require_once('include/diresult.class.php');
                 require_once('include/digraph.class.php');
@@ -1242,7 +1241,6 @@ class LegacyIndex
                 require_once($config->paths['jpgraph_dir'] . '/jpgraph_bar.php');
                 require_once($config->paths['jpgraph_dir'] . '/jpgraph_pie.php');
                 require_once($config->paths['jpgraph_dir'] . '/jpgraph_pie3d.php');
-                require_once('include/math.class.php');
                 require_once('include/graphic.class.php');
                 require_once('include/diresult.class.php');
                 require_once('include/digraph.class.php');

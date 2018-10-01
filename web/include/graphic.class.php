@@ -405,10 +405,9 @@ class Graphic
                     $m[] = $y1p;
                     // Add Tendence Line : Linear regression , others
                     if ($opc['prmGraph']['Tendency'][0] == 'LINREG') {
-                        // Add linear regression (Test)
-                        $std = new Math();
+                        // Add linear regression
                         $xx = array_fill(0, count($val), 0);
-                        $rl = $std->linearRegression(array_keys($xx), array_values($val));
+                        $rl = $this->linearRegression(array_keys($xx), array_values($val));
                         $n = 0;
                         foreach ($val as $kk => $ii) {
                             $x = ($rl['m'] * $n) + $rl['b'];
@@ -794,5 +793,29 @@ class Graphic
         $bbox = imagettfbbox($prmFontSize, 0, $font, $prmText);
         $Width = $bbox[2] - $bbox[0];
         return $Width;
+    }
+
+    public function linearRegression($xValues, $yValues)
+    {
+        // calculate number points
+        $pointCount = count($xValues);
+        // ensure both arrays of points are the same size
+        if ($pointCount != count($yValues)) {
+            trigger_error("linear_regression(): Number of elements in coordinate arrays do not match.", E_USER_ERROR);
+        }
+        // calculate sums
+        $x_sum = array_sum($xValues);
+        $y_sum = array_sum($yValues);
+        $xx_sum = 0;
+        $xy_sum = 0;
+        for ($i = 0; $i < $pointCount; $i++) {
+            $xy_sum+=($xValues[$i]*$yValues[$i]);
+            $xx_sum+=($xValues[$i]*$xValues[$i]);
+        }
+        // calculate slope
+        $slope = (($pointCount * $xy_sum) - ($x_sum * $y_sum)) / (($pointCount * $xx_sum) - ($x_sum * $x_sum));
+        // calculate intercept
+        $intercept = ($y_sum - ($slope * $x_sum)) / $pointCount;
+        return ['m' => $slope, 'b' => $intercept];
     }
 }
