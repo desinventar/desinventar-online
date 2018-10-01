@@ -85,7 +85,6 @@ require_once 'define.php';
 require_once(BASE . '/include/usersession.class.php');
 require_once(BASE . '/include/query.class.php');
 require_once(BASE . '/include/constants.php');
-require_once(BASE . '/include/exception.php');
 require_once(BASE . '/include/common.php');
 
 // Set a default exception handler to avoid ugly messages in screen
