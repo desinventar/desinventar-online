@@ -25,3 +25,4 @@ files/database/*.db
 files/database/*.conf
 portal/vendor/*
 .env
+yarn-error.log
