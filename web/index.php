@@ -1,8 +1,8 @@
 <?php
 /*
-  DesInventar - http://www.desinventar.org
-  (c) Corporacion OSSO
-*/
+ *  DesInventar - http://www.desinventar.org
+ * (c) Corporacion OSSO
+ */
 
 use Slim\App;
 use Slim\Http\Request as Request;
