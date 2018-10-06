@@ -55,7 +55,7 @@ phpcs: .FORCE
 	./vendor/bin/phpcs .
 
 phpmd: .FORCE
-	find config files src tests portal/web portal/include \
+	find config files src/DesInventar/Common src/DesInventar/Database src/DesInventar/Service tests portal \
 		-name \*.php -exec ./vendor/bin/phpmd {} text ./files/phpmd/ruleset.xml \;
 
 phpstan: .FORCE

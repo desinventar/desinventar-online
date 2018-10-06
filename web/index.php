@@ -18,6 +18,7 @@ use DesInventar\Common\Util;
 
 use Api\Helpers\JsonApiResponse;
 use Api\Helpers\SessionMiddleware;
+use Api\Helpers\LoggerMiddleware;
 
 use Api\Controllers\CommonController;
 use Api\Controllers\MapsController;
@@ -35,7 +36,12 @@ $settings = [
     'config' => $config
 ];
 
-$app = new \Slim\App;
+$app = new \Slim\App([
+    'settings' => [
+        // Only set this if you need access to route within middleware
+        'determineRouteBeforeAppMiddleware' => true
+    ]
+]);
 $container = $app->getContainer();
 $container['session'] = function ($container) {
     $sessionFactory = new SessionFactory();
@@ -100,7 +106,10 @@ $container['SessionController'] = function ($c) {
     return new SessionController($c);
 };
 
-$app->add(new SessionMiddleware($container));
+if ($config->debug['request']) {
+    $app->add(new SessionMiddleware($container));
+}
+$app->add(new LoggerMiddleware($container));
 
 $app->map(['GET', 'POST'], '/', function (Request $request, Response $response, $args) use ($container) {
     return $container->get('oldindex')->getResponse('');

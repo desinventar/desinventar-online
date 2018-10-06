@@ -18,13 +18,17 @@
     "mode": "devel",
     "env": "online",
     "arch": "LINUX",
-    "debug": false,
+    "debug": 0,
     "auto_login": 0,
     "general_secure_login": 0
   },
   "logger": {
     "file": "php://stdout",
     "level": 200
+  },
+  "debug": {
+      "request": 0,
+      "response": 0
   },
   "database": {
     "driver": "sqlite",
