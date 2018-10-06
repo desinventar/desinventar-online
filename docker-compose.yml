@@ -18,6 +18,8 @@ services:
       - DESINVENTAR_FLAGS_MODE
       - DESINVENTAR_MODE
       - DESINVENTAR_PATHS_CACHEDIR
+      - DESINVENTAR_DEBUG_REQUEST
+      - DESINVENTAR_DEBUG_RESPONSE
   devel:
     build:
       context: .
@@ -37,6 +39,8 @@ services:
       - DESINVENTAR_FLAGS_MODE
       - DESINVENTAR_MODE
       - DESINVENTAR_PATHS_CACHEDIR
+      - DESINVENTAR_DEBUG_REQUEST
+      - DESINVENTAR_DEBUG_RESPONSE
   portal:
     build:
       context: .

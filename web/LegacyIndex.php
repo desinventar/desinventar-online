@@ -357,7 +357,7 @@ class LegacyIndex
                         'RegionStatus' => $r->get('RegionStatus'),
                         'RegionOrder' => $r->get('RegionOrder')
                     ];
-                    $UserList     = $us->getUserList();
+                    $UserList     = $us->getUserList('');
                     $UserRoleList = $us->getRegionRoleList($RegionId);
                     $answer['RegionInfo']   = $info;
                     $answer['UserList']     = $UserList;
@@ -442,7 +442,7 @@ class LegacyIndex
                 $answer = array();
                 $iReturn = ERR_UNKNOWN_ERROR;
                 if ($desinventarUserRoleValue >= ROLE_ADMINPORTAL) {
-                    $UserList  = $us->getUserList();
+                    $UserList  = $us->getUserList('');
                     $UserAdmin = $us->getRegionUserAdminInfo();
                     $iReturn = ERR_NO_ERROR;
                     $answer['UserList'] = $UserList;

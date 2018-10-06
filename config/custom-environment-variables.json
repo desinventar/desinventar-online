@@ -9,6 +9,14 @@
   "flags": {
     "mode": "DESINVENTAR_FLAGS_MODE"
   },
+  "logger": {
+    "file": "DESINVENTAR_LOGGER_FILE",
+    "level": "DESINVENTAR_LOGGER_LEVEL"
+  },
+  "debug": {
+    "request": "DESINVENTAR_DEBUG_REQUEST",
+    "response": "DESINVENTAR_DEBUG_RESPONSE"
+  },
   "portal": {
     "mode": "DESINVENTAR_MODE",
     "app_url": "DESINVENTAR_URL",
