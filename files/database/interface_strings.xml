@@ -2140,10 +2140,10 @@
       <Text LangIsoCode="fre">Accueil</Text>
     </Message>
     <Message id="tcopyright">
-      <Text LangIsoCode="eng">(c) 1998-2016 Corporación OSSO - Colombia</Text>
-      <Text LangIsoCode="spa">(c) 1998-2016 Corporación OSSO - Colombia</Text>
-      <Text LangIsoCode="por">(c) 1998-2016 Corporación OSSO - Colombia</Text>
-      <Text LangIsoCode="fre">(c) 1998-2016 Corporación OSSO - Colombie</Text>
+      <Text LangIsoCode="eng">(c) 1998-2018 Corporación OSSO - Colombia</Text>
+      <Text LangIsoCode="spa">(c) 1998-2018 Corporación OSSO - Colombia</Text>
+      <Text LangIsoCode="por">(c) 1998-2018 Corporación OSSO - Colombia</Text>
+      <Text LangIsoCode="fre">(c) 1998-2018 Corporación OSSO - Colombie</Text>
     </Message>
     <Message id="labelsoftwareversion">
       <Text LangIsoCode="eng">Software Version</Text>
