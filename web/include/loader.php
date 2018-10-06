@@ -87,11 +87,6 @@ require_once(BASE . '/include/query.class.php');
 require_once(BASE . '/include/constants.php');
 require_once(BASE . '/include/common.php');
 
-// Set a default exception handler to avoid ugly messages in screen
-if ($config->flags['mode'] != 'devel') {
-    set_exception_handler('global_exception_handler');
-}
-
 // SETTINGS
 date_default_timezone_set('UTC');
 $time_start = microtime_float();
