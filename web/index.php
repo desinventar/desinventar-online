@@ -106,10 +106,10 @@ $container['SessionController'] = function ($c) {
     return new SessionController($c);
 };
 
+$app->add(new SessionMiddleware($container));
 if ($config->debug['request']) {
-    $app->add(new SessionMiddleware($container));
+    $app->add(new LoggerMiddleware($container));
 }
-$app->add(new LoggerMiddleware($container));
 
 $app->map(['GET', 'POST'], '/', function (Request $request, Response $response, $args) use ($container) {
     return $container->get('oldindex')->getResponse('');
