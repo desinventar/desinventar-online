@@ -104,3 +104,14 @@ services:
       dockerfile: docker/redis/Dockerfile
     ports:
       - "6379:6379"
+  test:
+    build:
+      context: .
+      dockerfile: docker/e2e-test/Dockerfile
+    volumes:
+      - .:/opt/app
+      - /opt/app/vendor
+      - /opt/app/node_modules
+    environment:
+      - NODE_ENV
+      - APP_ENV
