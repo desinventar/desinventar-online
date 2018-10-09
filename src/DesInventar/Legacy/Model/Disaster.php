@@ -178,8 +178,8 @@ class Disaster extends Record
                 $iReturn = $this->validateDisasterBeginTime(-62);
             }
         }
-        if (count($this->status->error)) {
-            $keys = array_keys($this->status->error);
+        if ($this->status->hasError()) {
+            $keys = array_keys($this->status->getError());
             $iReturn = reset($keys);
         }
         return $iReturn;

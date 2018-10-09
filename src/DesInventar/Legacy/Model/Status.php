@@ -25,6 +25,11 @@ class Status
         $this->warning = array();
     }
 
+    public function getError()
+    {
+        return $this->error;
+    }
+
     public function addMsg($errCode, $errMsg, $isWarning = false)
     {
         if (! $isWarning) {

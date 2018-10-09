@@ -179,6 +179,9 @@ class Record extends Model
 
     public function getUpdateQuery($prmTableName = '', $prmFieldList = '')
     {
+        if ($prmFieldList === '') {
+            return '';
+        }
         $i = 0;
         if ($this->existField('RecordUpdate')) {
             $this->set('RecordUpdate', gmdate('c'));
@@ -340,6 +343,9 @@ class Record extends Model
     {
         $iReturn = self::ERR_NO_ERROR;
         $sQuery = $this->getUpdateQuery($prmTableName, $prmFieldList);
+        if ($sQuery === '') {
+            return self::ERR_NO_ERROR;
+        }
         $sth = $this->conn->prepare($sQuery);
         try {
             $this->conn->beginTransaction();
@@ -428,7 +434,7 @@ class Record extends Model
     public function validateCreate($bStrict)
     {
         if ($this->status->hasError()) {
-            $errorCodes = array_keys($this->status->error);
+            $errorCodes = array_keys($this->status->getError());
             return reset($errorCodes);
         }
         if ($this->status->hasWarning() && ($bStrict > 0)) {
@@ -441,7 +447,7 @@ class Record extends Model
     public function validateUpdate($bStrict)
     {
         if ($this->status->hasError()) {
-            $errorCodes = array_keys($this->status->error);
+            $errorCodes = array_keys($this->status->getError());
             return reset($errorCodes);
         }
 

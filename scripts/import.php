@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../web/include/loader.php';
-require_once $config->paths['web_dir'] . '/include/didisasterimport.class.php';
 require_once $config->paths['web_dir'] . '/include/diimport.class.php';
 
 use DesInventar\Common\Util;
