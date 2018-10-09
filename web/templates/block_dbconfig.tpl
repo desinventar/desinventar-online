@@ -22,7 +22,13 @@
 				<a class="classDBConfig_tabs" href="#DBConfig_Causes">{-#mcauses#-}</a>
 			</li>
 			<li>
-				<a class="classDBConfig_tabs" href="#DBConfig_tabs-6" data-cmd="cmdDBInfoEEField" data-url="{-$desinventarURL-}/extraeffects.php">{-#meeffects#-}</a>
+				<a
+					class="classDBConfig_tabs"
+					href="#DBConfig_tabs-6"
+					data-cmd="cmdDBInfoEEField"
+					data-url="{-$desinventarURL-}/extraeffects.php"
+					data-id="DBConfig_AdditionalEffects"
+				>{-#meeffects#-}</a>
 			</li>
 			<li>
 				<a

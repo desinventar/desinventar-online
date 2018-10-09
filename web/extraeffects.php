@@ -1,8 +1,8 @@
 <?php
 /*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
+ * DesInventar - http://www.desinventar.org
+ * (c) Corporacion OSSO
+ */
 
 use Aura\Session\SessionFactory;
 use DesInventar\Common\Language;
@@ -10,14 +10,12 @@ use DesInventar\Legacy\Model\EEField;
 
 require_once('include/loader.php');
 require_once('include/query.class.php');
-require_once('include/dieefield.class.php');
 
 $get = $_POST;
 $RegionId = getParameter('RegionId', getParameter('r', ''));
 if ($RegionId == '') {
     exit();
 }
-
 $sessionFactory = new SessionFactory();
 $session = $sessionFactory->newInstance($_COOKIE);
 $segment = $session->getSegment('');
