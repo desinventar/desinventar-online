@@ -135,27 +135,4 @@ class Event extends Record
         $iReturn = $this->validateNoDatacards(-15);
         return $iReturn;
     }
-
-    public function importFromCSV($cols, $values)
-    {
-        $iReturn = parent::importFromCSV($cols, $values);
-        if ($iReturn > 0) {
-            $this->set('EventName', $values[1]);
-            $this->set('EventDesc', $values[2]);
-            if (isset($values[3])) {
-                $EventId = $values[3];
-            } else {
-                $EventId = self::getIdByName($this->session, $this->get('EventName'));
-            }
-            if ($EventId != '') {
-                $this->set('EventId', $EventId);
-                $this->load();
-            }
-            if ($this->status->hasError() || $this->status->hasWarning()) {
-                $iReturn = self::ERR_UNKNOWN_ERROR;
-            }
-            $this->status->status = $iReturn;
-        }
-        return $iReturn;
-    }
-} //class
+}

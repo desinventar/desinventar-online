@@ -269,9 +269,4 @@ class Model
         }
         return $Value;
     }
-
-    public function importFromCSV($cols, $values)
-    {
-        return self::ERR_NO_ERROR;
-    }
 }

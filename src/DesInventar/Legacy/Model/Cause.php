@@ -119,25 +119,4 @@ class Cause extends Record
         $iReturn = $this->validateNoDatacards(-25);
         return $iReturn;
     }
-
-    public function importFromCSV($cols, $values)
-    {
-        $iReturn = parent::importFromCSV($cols, $values);
-        if ($iReturn > 0) {
-            $this->set('CauseName', $values[1]);
-            if (isset($values[3])) {
-                $CauseId = $values[3];
-            } else {
-                $CauseId = self::getIdByName($this->session, $this->get('CauseName'));
-            }
-            if ($CauseId != '') {
-                $this->set('CauseId', $CauseId);
-                $this->load();
-            }
-            if ($this->status->hasError() || $this->status->hasWarning()) {
-                $iReturn = self::ERR_UNKNOWN_ERROR;
-            }
-        }
-        return $iReturn;
-    }
 }

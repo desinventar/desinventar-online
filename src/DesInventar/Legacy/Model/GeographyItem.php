@@ -262,40 +262,6 @@ class GeographyItem extends Record
         return $iReturn;
     }
 
-    public function importFromCSV($cols, $values)
-    {
-        $iReturn = parent::importFromCSV($cols, $values);
-        $this->set('GeographyLevel', $values[0]);
-        $this->set('GeographyCode', $values[1]);
-        $this->set('GeographyName', $values[2]);
-        if (array_key_exists(4, $values)) {
-            if ($values[4] != '') {
-                $this->set('GeographyId', $values[4]);
-            }
-        } else {
-            $ParentCode = $values[3];
-            $GeographyId = '';
-            $p = self::loadByCode($this->session, $this->get('GeographyCode'));
-            if (! is_null($p)) {
-                $GeographyId = $p->get('GeographyId');
-            }
-            if ($GeographyId != '') {
-                // This Geography Code Already Exists, return error
-                $oReturn['Error'][] = -1;
-            } else {
-                // Try to locate a parent for this item
-                $ParentGeographyId = '';
-                $p = self::loadByCode($this->session, $ParentCode);
-                if (! is_null($p)) {
-                    $ParentGeographyId = $p->get('GeographyId');
-                }
-                $this->setGeographyId($ParentGeographyId);
-            }
-        }
-        $this->set('GeographyFQName', $this->buildGeographyFQName());
-        return $iReturn;
-    }
-
     public static function moveNodeTo(
         $prmSession,
         $prmGeographyIdPrefix,

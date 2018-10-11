@@ -79,15 +79,4 @@ class GeographyLevel extends Record
         $this->status->status = $iReturn;
         return $iReturn;
     }
-
-    public function importFromCSV($cols, $values)
-    {
-        $iReturn = parent::importFromCSV($cols, $values);
-        $this->set('GeoLevelId', $values[0]);
-        $this->set('GeoLevelName', $values[1]);
-        if ($iReturn > 0) {
-            $this->status->status = $iReturn;
-        }
-        return $iReturn;
-    }
 }

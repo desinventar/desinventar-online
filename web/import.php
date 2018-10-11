@@ -109,13 +109,13 @@ if (isset($_FILES['desinv']) && isset($post['diobj'])) {
         }
     } elseif (isset($post['cmd']) && $post['cmd'] == 'import') {
         // first validate file to continue with importation
-        $i = new DIImport($us);
+        $import = new DIImport($us);
         //$valm = $i->validateFromCSV($post['FileName']);
         $valm = 0;
         if (is_array($valm)) {
             $stat = (int) $valm['Status'];
             if (!iserror($stat)) {
-                $valm = $i->importFromCSV($post['FileName'], DI_DISASTER);
+                $valm = $import->importFromCSV($post['FileName'], DI_DISASTER);
             }
             $t->assign('msg', $valm);
             $t->assign('res', $i->loadCSV($valm['FileName']));
