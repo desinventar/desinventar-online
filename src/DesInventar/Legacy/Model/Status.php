@@ -1,8 +1,8 @@
 <?php
 /*
-  DesInventar - http://www.desinventar.org
-  (c) Corporacion OSSO
-*/
+ * DesInventar - http://www.desinventar.org
+ * (c) Corporacion OSSO
+ */
 namespace DesInventar\Legacy\Model;
 
 class Status
@@ -21,8 +21,8 @@ class Status
 
     public function clear()
     {
-        $this->error = array();
-        $this->warning = array();
+        $this->error = [];
+        $this->warning = [];
     }
 
     public function getError()
@@ -32,11 +32,10 @@ class Status
 
     public function addMsg($errCode, $errMsg, $isWarning = false)
     {
-        if (! $isWarning) {
-            $this->addError($errCode, $errMsg);
-        } else {
-            $this->addWarning($errCode, $errMsg);
+        if ($isWarning) {
+            return $this->addWarning($errCode, $errMsg);
         }
+        return $this->addError($errCode, $errMsg);
     }
 
     public function addError($errCode, $errMsg)
@@ -73,20 +72,5 @@ class Status
             $bAnswer = array_key_exists($errCode, $this->warning);
         }
         return $bAnswer;
-    }
-
-    public function getMsgList($line, $Id, $isWarning = false)
-    {
-        if (! $isWarning) {
-            $a = $this->error;
-            $label = 'ERROR';
-        } else {
-            $a = $this->warning;
-            $label = 'WARNING';
-        }
-        foreach ($a as $k => $v) {
-            $line = sprintf('"%s","%s","%s","%s","%s"', $label, $line, $Id, $k, $v);
-            echo $line . "\n";
-        }
     }
 }
