@@ -1,8 +1,7 @@
 <?php
 
-namespace UnitTest\General;
+namespace DesInventar\Common;
 
-use DesInventar\Common\Language;
 use PHPUnit\Framework\TestCase;
 
 final class LanguageTest extends TestCase

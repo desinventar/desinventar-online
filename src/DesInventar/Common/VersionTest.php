@@ -1,8 +1,7 @@
 <?php
 
-namespace UnitTest\General;
+namespace DesInventar\Common;
 
-use DesInventar\Common\Version;
 use PHPUnit\Framework\TestCase;
 
 final class VersionTest extends TestCase

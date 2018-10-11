@@ -1,8 +1,7 @@
 <?php
 
-namespace UnitTest\General;
+namespace DesInventar\Common;
 
-use DesInventar\Common\Util;
 use PHPUnit\Framework\TestCase;
 
 final class UtilTest extends TestCase

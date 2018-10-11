@@ -1,8 +1,7 @@
 <?php
 
-namespace UnitTest\General;
+namespace DesInventar\Common;
 
-use DesInventar\Common\Date;
 use PHPUnit\Framework\TestCase;
 
 final class DateTest extends TestCase

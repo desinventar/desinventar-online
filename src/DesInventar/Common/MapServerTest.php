@@ -1,10 +1,8 @@
 <?php
 
-namespace UnitTest\Maps;
+namespace DesInventar\Common;
 
 use PHPUnit\Framework\TestCase;
-
-use DesInventar\Common\MapServer;
 
 final class MapServerTest extends TestCase
 {
