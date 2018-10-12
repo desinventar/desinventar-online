@@ -70,7 +70,11 @@ class LegacyIndex
         $desinventarUserRoleValue = $us->getUserRoleValue($RegionId);
         $t->assign('desinventarUserRole', $desinventarUserRole);
         $t->assign('desinventarUserRoleValue', $desinventarUserRoleValue);
-        $t->assign('appOptions', $appOptions);
+        $t->assign('appOptions', [
+            'UseRemoteMaps' => (int)$config->maps['use_remote_layers'],
+            'IsOnline' => $config->flags['env'] === 'online' ? 1 : 0,
+            'google_api_key' => $config->maps['google_api_key']
+        ]);
 
         $util = new Util();
 
