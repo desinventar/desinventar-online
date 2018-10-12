@@ -2,7 +2,7 @@
  DesInventar - http://www.desinventar.org
  (c) 1998-2012 Corporacion OSSO
 */
-//2011-02-19 (jhcaiced) Do not remove this line, initialize map=null 
+//2011-02-19 (jhcaiced) Do not remove this line, initialize map=null
 // to avoid an error with IE and the maps
 var map = null;
 
@@ -40,7 +40,7 @@ function doViewMapParamsInitialize()
 		var label = jQuery('span.label',this).text();
 		field_list.append(jQuery('<option>', { value: 'D.' + field + 'Q|>|-1' }).text(label));
 		field_list.append(jQuery('<option>', { value: 'D.' + field + '|=|-1' }).text(jQuery('#AuxHaveLabel').text() + ' ' + label));
-	});	
+	});
 	// EffectLosses1 List (ef2)
 	jQuery('div.desinventarInfo div.EffectList div.EffectLosses1').each(function() {
 		var field = jQuery('span.field', this).text();
@@ -52,7 +52,7 @@ function doViewMapParamsInitialize()
 		var field = jQuery('span.field', this).text();
 		var label = jQuery('span.label',this).text();
 		field_list.append(jQuery('<option>', { value: 'D.' + field + '|>|-1' }).text(label));
-	});	
+	});
 	// EffectSector (sec)
 	jQuery('div.desinventarInfo div.EffectList div.EffectSector').each(function() {
 		var field = jQuery('span.field', this).text();
@@ -84,7 +84,7 @@ function createThematicMap()
 	OpenLayers.Util.onImageLoadErrorColor = "transparent";
 	var prj1 = new OpenLayers.Projection("EPSG:4326");
 	var prj2 = new OpenLayers.Projection("EPSG:900913");
-	var options = 
+	var options =
 	{
 		projection        : prj2,
 		displayProjection : prj1,
@@ -101,7 +101,7 @@ function createThematicMap()
 	map.addControl(new OpenLayers.Control.LayerSwitcher({ascending:false}));
 	map.addControl(new OpenLayers.Control.MousePosition({displayClass:'MapMousePosition'}));
 	map.addControl(new OpenLayers.Control.NavToolbar());
-	
+
 	// WMS Local Base Map
 	mapServer = jQuery('#prmMapServer').val();
 	var base = new OpenLayers.Layer.WMS(
@@ -112,7 +112,7 @@ function createThematicMap()
 	);
 	map.addLayer(base);
 
-	// Add Remote Layers	
+	// Add Remote Layers
 	if (parseInt(jQuery('#optionUseRemoteMaps').val()) > 0)
 	{
 		// Google Layers
@@ -130,7 +130,7 @@ function createThematicMap()
 		//met1.setVisibility(false);
 		//map.addLayer(met1);
 	} //if
-	
+
 	// Effects and Admin layer(s)
 	jQuery('#MapEffectLayers div').each(function() {
 		var MapFile = jQuery(this).find(':eq(1)').text();
@@ -178,7 +178,7 @@ function createThematicMap()
 	if (lon == 0 && lat == 0) {
 		map.zoomToMaxExtent();
 	}
-	
+
 	jQuery('#MapTitle').val(jQuery('#defaultMapTitle').text());
 	jQuery('#linkRestoreMapTitle').click(function() {
 		jQuery('#MapTitle').val(jQuery('#defaultMapTitle').text());
@@ -294,14 +294,14 @@ function genColors() {
 	// 2009-07-11 (jhcaiced) This layer doesn't work with Spherical Mercator projection (????)
 	var bk2 = new OpenLayers.Layer.WMS("GRDP - Population 2007",
 		"http://metafunctions.grid.unep.ch/cgi-bin/mapserv",
-		{ map:'/www/preview/previewims/etc/preview_ims.map', 'transparent':true, 'format':'png', 
+		{ map:'/www/preview/previewims/etc/preview_ims.map', 'transparent':true, 'format':'png',
 			 'sphericalMercator': true, layers:'popdens'},
 		{'isBaseLayer':true});
 	bk2.setVisibility(false);
 	map.addLayer(bk2);
 	*/
-	
-	/* Metacarta Base Layers			
+
+	/* Metacarta Base Layers
 	// 2009-02-06 (jhcaiced) Metacarta Satellite doesn't work with Spherical Mercator, this needs to be fixed !!
 	var met2 = new OpenLayers.Layer.WMS("** Metacarta Satellite",
 			"http://labs.metacarta.com/wms-c/Basic.py", {layers:'satellite', 'transparent':true, 'format':'png' },
@@ -309,15 +309,15 @@ function genColors() {
 	met2.setVisibility(false);
 	map.addLayer(met2);
 	*/
-	
-	/* 
+
+	/*
 	// Layers from georiesgo/geosemantica
 	// Change map
 	vlayer = new OpenLayers.Layer.Vector("{-#tdrawpoint#-}");
 	map.addLayer(vlayer);
 	map.addControl(new OpenLayers.Control.EditingToolbar(vlayer));
 	var pegeo = new OpenLayers.Layer.WMS("** Geología Perú",
-			"http://per.geosemantica.net/services/mapserv.exe?MAP=2c1bc078-13e6-4734-863a-5636442a2e30_wms.map", 
+			"http://per.geosemantica.net/services/mapserv.exe?MAP=2c1bc078-13e6-4734-863a-5636442a2e30_wms.map",
 			{'layers':'geoutm_shp', 'transparent':true, 'format':'png' }, {'isBaseLayer':false});
 	pegeo.setVisibility(false);
 	map.addLayer(pegeo);
@@ -330,5 +330,5 @@ function genColors() {
 	WMSToolbar = new OpenLayers.Control.WMSToolbar({queryTarget: queryTarget});
 	map.addControl(WMSToolbar);
 	//parent.document.getElementById('frmwait').innerHTML='';
-	
+
 	*/

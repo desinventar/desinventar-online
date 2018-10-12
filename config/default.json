@@ -12,11 +12,13 @@
     "mapserver": "mapserv",
     "proj_lib": "/usr/share/proj",
     "worldmap_dir": "/var/local/desinventar/worldmap",
-    "fonts_dir": "/usr/share/fonts/liberation/fonts.txt"
+    "fonts_dir": "/usr/share/fonts/liberation/fonts.txt",
+    "use_remote_layers": 0,
+    "google_api_key": ""
   },
   "flags": {
     "mode": "devel",
-    "env": "online",
+    "env": "devel",
     "arch": "LINUX",
     "debug": 0,
     "auto_login": 0,

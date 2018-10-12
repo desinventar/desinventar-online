@@ -18,12 +18,6 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 $config = new ConfigLoader($_SERVER['DESINVENTAR_SRC'] . '/config');
 $config->paths['src_dir'] = $_SERVER['DESINVENTAR_SRC'];
 
-$appOptions = array();
-$appOptions['UseRemoteMaps'] = 1;
-$appOptions['IsOnline'] = 0;
-
-// 2009-07-22 (jhcaiced) Adapted Configuration and Startup for
-// using with PHP Command Line
 if (isset($_SERVER['HTTP_HOST'])) {
     // Online Modes (HTTP)
     if (isset($_SERVER['WINDIR'])) {
@@ -50,8 +44,6 @@ if (isset($_SERVER['HTTP_HOST'])) {
         if (!empty($_SERVER['REDIRECT_DESINVENTAR_MODE'])) {
             $_SERVER['DESINVENTAR_MODE'] = $_SERVER['REDIRECT_DESINVENTAR_MODE'];
         }
-        // Disable Remote Maps by Default
-        $appOptions['UseRemoteMaps'] = 0;
     } else {
         // Running on a Linux Server
         $config->flags['env'] = 'online';
@@ -62,10 +54,6 @@ if (isset($_SERVER['HTTP_HOST'])) {
             $distro = strtolower(exec('/usr/bin/lsb_release -s -i'));
         }
         $_SERVER['DISTRO'] = $distro;
-
-        if (preg_match('/desinventar.org$/', $_SERVER['HTTP_HOST'])) {
-            $appOptions['IsOnline'] = 1;
-        }
     }
     $config->paths['jpgraph_dir'] = $config->paths['src_dir'] . '/vendor/jpgraph/src';
 } else {

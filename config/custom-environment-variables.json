@@ -4,10 +4,13 @@
     "cache_dir": "DESINVENTAR_PATHS_CACHEDIR"
   },
   "maps": {
-    "fonts_dir": "DESINVENTAR_MAPS_FONTS_DIR"
+    "fonts_dir": "DESINVENTAR_MAPS_FONTS_DIR",
+    "use_remote_layers": "DESINVENTAR_MAPS_USE_REMOTE_LAYERS",
+    "google_api_key": "DESINVENTAR_MAPS_GOOGLE_API_KEY"
   },
   "flags": {
-    "mode": "DESINVENTAR_FLAGS_MODE"
+    "mode": "DESINVENTAR_FLAGS_MODE",
+    "env": "DESINVENTAR_FLAGS_ENV"
   },
   "logger": {
     "file": "DESINVENTAR_LOGGER_FILE",
