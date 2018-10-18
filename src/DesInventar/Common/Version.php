@@ -5,8 +5,8 @@ namespace DesInventar\Common;
 class Version
 {
     protected $majorVersion = '10';
-    protected $version = '10.02.021';
-    protected $releaseDate = '2018-10-12';
+    protected $version = '10.03.001';
+    protected $releaseDate = '2018-10-17';
     protected $mode = 'devel';
 
     public function __construct($mode)
