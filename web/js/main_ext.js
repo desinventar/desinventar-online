@@ -235,7 +235,7 @@ function doMainMenuHandler(item) {
       break
     case 'mnuQueryOptionNew':
       // Just reload the current region window...(need a better solution!!)
-      window.location = jQuery('#desinventarURL').val() + '/' + RegionId
+      window.location.reload()
       break
     case 'mnuQueryOptionSave':
       saveQuery()
