@@ -1,8 +1,9 @@
 <?php
 
-namespace DesInventar\Common;
+namespace Test\Common;
 
 use PHPUnit\Framework\TestCase;
+use DesInventar\Common\ConfigLoader;
 
 final class ConfigLoaderTest extends TestCase
 {

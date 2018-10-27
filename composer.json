@@ -46,7 +46,7 @@
       "Api\\": [
         "src/Api"
       ],
-      "UnitTest\\": [
+      "Test\\": [
         "tests/unit"
       ]
     }
