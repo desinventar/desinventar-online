@@ -76,7 +76,7 @@ class GeographyLevel extends Record
         if ($iReturn > 0) {
             $iReturn = $this->validateUnique(-34, 'GeoLevelName', true);
         }
-        $this->status->status = $iReturn;
+        $this->status->setStatus($iReturn);
         return $iReturn;
     }
 }

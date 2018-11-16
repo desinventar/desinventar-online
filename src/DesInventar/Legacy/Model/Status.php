@@ -25,6 +25,11 @@ class Status
         $this->warning = [];
     }
 
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
     public function getError()
     {
         return $this->error;
