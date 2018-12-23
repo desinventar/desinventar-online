@@ -26,3 +26,4 @@ files/database/*.conf
 portal/vendor/*
 .env
 yarn-error.log
+.scannerwork
