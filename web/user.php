@@ -1,9 +1,4 @@
 <?php
-/*
- DesInventar - http://www.desinventar.org
- (c) Corporación OSSO
-*/
-
 require_once('include/loader.php');
 require_once 'include/user_operations.php';
 
@@ -139,4 +134,4 @@ switch ($cmd) {
             $t->display('user_mainpage.tpl');
         }
         break;
-} //switch
+}

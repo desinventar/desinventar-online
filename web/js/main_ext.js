@@ -1,21 +1,17 @@
 /* global
-   Ext,
-   DesInventar,
-   showtip,
-   sendGraphic,
-   sendStatistic,
-   doUpdateDatabaseListByUser,
-   saveQuery,
-   sendMap,
-   sendList,
-   doGetRegionInfo,
-   updateList,
-   doDatabaseUploadShow,
-   doAdminDatabaseUpdateList,
- */
-/*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
+  Ext,
+  DesInventar,
+  showtip,
+  sendGraphic,
+  sendStatistic,
+  doUpdateDatabaseListByUser,
+  saveQuery,
+  sendMap,
+  sendList,
+  doGetRegionInfo,
+  updateList,
+  doDatabaseUploadShow,
+  doAdminDatabaseUpdateList,
 */
 import databaseCreate from './database_create.js'
 

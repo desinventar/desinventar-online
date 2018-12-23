@@ -1,9 +1,4 @@
 <?php
-/*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
-
 use DesInventar\Common\ConfigLoader;
 
 if (! isset($_SERVER['DESINVENTAR_WEB'])) {

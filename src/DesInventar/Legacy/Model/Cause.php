@@ -1,8 +1,4 @@
 <?php
-/*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
 namespace DesInventar\Legacy\Model;
 
 use DesInventar\Common\Util;
@@ -57,15 +53,15 @@ class Cause extends Record
           "        CauseKeyWords LIKE '%" . $prmCauseName . ";%')";
         foreach ($session->q->dreg->query($sQuery) as $row) {
             $CauseId = $row['CauseId'];
-        } //foreach
+        }
         return $CauseId;
-    } // function
+    }
 
     public static function loadByName($session, $prmCauseName)
     {
         $c = new self($session, $prmCauseName);
         return $c;
-    } //function
+    }
 
     public function getDeleteQuery()
     {

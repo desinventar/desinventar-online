@@ -1,9 +1,4 @@
 <?php
-/*
- DesInventar - http://www.desinventar.org
- (c) 1998-2012 Corporacion OSSO
-*/
-
 use Aura\Session\SessionFactory;
 
 use DesInventar\Legacy\Model\Region;
@@ -93,14 +88,14 @@ if (isset($post['page']) || isset($post['_S+cmd'])) {
             }
             $gp[] = $val;
             $fld .= ',' . $val;
-        } //foreach
+        }
 
         foreach ($field as $i) {
             $v = explode('|', $i);
             if ($v[0] != 'DisasterId') {
                 $fld .= ','. $v[0];
             }
-        } //foreach
+        }
         // Show results..
         if ($post['_S+cmd'] == 'result') {
             $export = '';

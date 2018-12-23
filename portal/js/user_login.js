@@ -1,8 +1,3 @@
-/*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
-
 import md5 from 'md5'
 
 const me = {}

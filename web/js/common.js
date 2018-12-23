@@ -1,8 +1,3 @@
-/*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
-
 function onReadyCommon() {
   // Initialize tooltip for elements with title attribute
   jQuery('[title]').tooltip()

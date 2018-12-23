@@ -1,9 +1,4 @@
 <?php
-/*
- DesInventar - http://www.desinventar.org
- (c) Corporación OSSO
-*/
-
 namespace DesInventar\Legacy;
 
 use DesInventar\Common\Date;
@@ -94,8 +89,8 @@ class Graphic
                     if ($k == $l) {
                         $tvl[$i][$j] = $this->data[$sY1AxisIndex][$k];
                     }
-                } //foreach
-            } //foreach
+                }
+            }
             foreach ($tvl as $kk => $ii) {
                 $val[$kk] = $this->completeTimeSeries($opc, $ii);
                 if ($this->sStat == 'MONTH') {
@@ -119,7 +114,7 @@ class Graphic
                     $acol++;
                 }
                 $n++;
-            } //foreach
+            }
             // Complete the data series for XAxis (year,month,day)
             if ($gType == 'TEMPO' || $gType == '2TEMPO') {
                 $val = $this->completeTimeSeries($opc, $val);
@@ -164,9 +159,9 @@ class Graphic
                 foreach ($val as $key => $value) {
                     $SumValue += $value;
                     $val[$key] = $SumValue;
-                } //foreach
-            } //if
-        } //if
+                }
+            }
+        }
 
         // Cummulative Graph for MultiSeries
         if (($gType == '2TEMPO') || ($gType == '2COMPAR')) {
@@ -184,8 +179,8 @@ class Graphic
                     $SumValue += $value[1];
                     $val[$key][1] = $SumValue;
                 }
-            } //if
-        } //if
+            }
+        }
         // Choose presentation options, borders, intervals
         $ImgMarginLeft   = 50;
         $ImgMarginTop    =  8;
@@ -449,7 +444,7 @@ class Graphic
             default:
                 $m = null;
                 break;
-        } //switch
+        }
         // Extra presentation options
         if (!empty($m)) {
             $this->g->footer->left->Set('DesInventar - http://www.desinventar.org');
@@ -541,7 +536,7 @@ class Graphic
                 } else {
                     $this->completeMonthSeries($dateini, $dateend, $iYear, $val);
                 }
-            } //for
+            }
         } else {
             // MultiPeriod Graphs
             if ($this->sStat == 'DAY') {
@@ -583,7 +578,7 @@ class Graphic
             if (!isset($val[$sDate])) {
                 $val[$sDate] = 0;
             }
-        } //for
+        }
         return;
     }
 
@@ -610,7 +605,7 @@ class Graphic
                     $val[$sDate] = 0;
                 }
             }
-        } //for
+        }
         return;
     }
 
@@ -638,7 +633,7 @@ class Graphic
             if (!isset($val[$sDate])) {
                 $val[$sDate] = 0;
             }
-        } //for
+        }
         return;
     }
 
@@ -751,7 +746,7 @@ class Graphic
                     $col = dechex(rand(0, 255)) . dechex(rand(0, 255)) . dechex(rand(0, 255));
                 }
                 $pal[] = '#'. $col;
-            } //foreach
+            }
         } else {
             $col = array('#0000ff','#00ff00', '#ff0000', '#ff00ff', '#00ffff', '#ffff00',
                          '#c7c7ff','#c782c7', '#ff7f7f', '#ffc7ff', '#c7ffff', '#ffffc7',
@@ -763,7 +758,7 @@ class Graphic
                 }
                 $pal[] = $col[$j];
                 $j++;
-            } //for
+            }
         }
         return $pal;
     }

@@ -1,8 +1,3 @@
-/*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
-
 import common from './common'
 import user from './user_login'
 

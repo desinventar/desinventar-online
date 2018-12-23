@@ -1,8 +1,3 @@
-/*
- DesInventar - http://www.desinventar.org
- (c) 1998-2012 Corporacion OSSO
-*/
-
 function onReadyDatacards() {
   jQuery('#divDatacardWindow').hide()
 
@@ -55,7 +50,7 @@ function onReadyDatacards() {
                 desinventar.datacards.showStatus('msgDatacardUpdateOk')
                 jQuery('#divRecordStat').show()
                 break
-            } //switch
+            }
             desinventar.datacards.navigation.setStatus('VIEW')
             desinventar.datacards.toggleFormEdit('DICard', true)
             desinventar.datacards.navigation.setViewMode()
@@ -380,7 +375,7 @@ function onReadyDatacards() {
     .on('focus', 'input.value', function(event) {
       showtip(jQuery(this).data('helptext'), '#f1bd41')
     })
-} //onReadyDatacards()
+}
 
 function doDatacardInitialize() {
   // Load EffectPeople List (ef1)
@@ -537,41 +532,38 @@ function doUpdateGeoLevelSelect(prmGeographyLevel, prmGeographyList) {
     mySelect.val(myPrevValue)
   }
   mySelect.enable()
-} //doUpdateGeoLevelSelect()
+}
 
 function doDatacardShow() {
-  //if (jQuery('#divDatacard').is(':hidden'))
-  {
-    //GeoLevel
-    jQuery('#divDatacard .tblGeography tr:gt(0)').remove()
-    jQuery('#divDatacard .tblGeography tr:first').hide()
-    var GeolevelsList = jQuery('body').data('GeolevelsList')
-    if (GeolevelsList == undefined) {
-      jQuery.post(
-        jQuery('#desinventarURL').val() + '/',
-        {
-          cmd: 'cmdDatabaseLoadData',
-          RegionId: jQuery('#desinventarRegionId').val()
-        },
-        function(data) {
-          jQuery('body').data('GeolevelsList', data.GeolevelsList)
-          jQuery('body').data('EventList', data.EventList)
-          jQuery('body').data('CauseList', data.CauseList)
-          jQuery('body').data('RecordCount', data.RecordCount)
-          var dataItems = jQuery('body').data()
-          jQuery.each(dataItems, function(index, value) {
-            if (index.substr(0, 13) === 'GeographyList') {
-              jQuery('body').removeData(index)
-            }
-          })
-          jQuery('body').data('GeographyList', data.GeographyList)
-          doDatacardUpdateDisplay()
-        },
-        'json'
-      )
-    } else {
-      doDatacardUpdateDisplay()
-    }
+  //GeoLevel
+  jQuery('#divDatacard .tblGeography tr:gt(0)').remove()
+  jQuery('#divDatacard .tblGeography tr:first').hide()
+  var GeolevelsList = jQuery('body').data('GeolevelsList')
+  if (GeolevelsList == undefined) {
+    jQuery.post(
+      jQuery('#desinventarURL').val() + '/',
+      {
+        cmd: 'cmdDatabaseLoadData',
+        RegionId: jQuery('#desinventarRegionId').val()
+      },
+      function(data) {
+        jQuery('body').data('GeolevelsList', data.GeolevelsList)
+        jQuery('body').data('EventList', data.EventList)
+        jQuery('body').data('CauseList', data.CauseList)
+        jQuery('body').data('RecordCount', data.RecordCount)
+        var dataItems = jQuery('body').data()
+        jQuery.each(dataItems, function(index, value) {
+          if (index.substr(0, 13) === 'GeographyList') {
+            jQuery('body').removeData(index)
+          }
+        })
+        jQuery('body').data('GeographyList', data.GeographyList)
+        doDatacardUpdateDisplay()
+      },
+      'json'
+    )
+  } else {
+    doDatacardUpdateDisplay()
   }
   var UserRoleValue = jQuery('#desinventarUserRoleValue').val()
   if (UserRoleValue <= 2) {
@@ -581,7 +573,7 @@ function doDatacardShow() {
     jQuery('#DICard select.RecordStatus option[value="PUBLISHED"]').enable()
     jQuery('#DICard select.RecordStatus option[value="DELETED"]').enable()
   }
-} //doDatacardShow()
+}
 
 function doDatacardUpdateDisplay() {
   var GeolevelsList = jQuery('body').data('GeolevelsList')
@@ -678,7 +670,7 @@ function doDatacardUpdateDisplay() {
   if (w != undefined) {
     w.show()
   }
-} //doDatacardUpdateDisplay();
+}
 
 var mod = 'di'
 
@@ -772,7 +764,7 @@ function doDatacardEdit() {
     },
     'json'
   )
-} //doDatacardEdit()
+}
 
 function doDatacardSave() {
   var bContinue = 1
@@ -954,7 +946,7 @@ function doDatacardSave() {
       )
     }
   }
-} //doDatacardSave()
+}
 
 function doDatacardCancel() {
   if (desinventar.datacards.navigation.getStatus() == 'EDIT') {
@@ -1000,13 +992,13 @@ function doDatacardCancel() {
       jQuery(this).val(0)
     })
   }
-} //doDatacardCancel()
+}
 
 function doDatacardGotoFirst() {
   desinventar.datacards.showStatus('')
   bFound = requestDatacard('getDisasterIdFirst', jQuery('#DisasterId').val())
   desinventar.datacards.navigation.updateByUserRole()
-} //doDatacardGotoFirst()
+}
 
 function doDatacardGotoLast() {
   desinventar.datacards.showStatus('')
@@ -1025,7 +1017,7 @@ function doDatacardGotoLast() {
     bFound = requestDatacard('getDisasterIdLast', jQuery('#DisasterId').val())
   }
   desinventar.datacards.navigation.updateByUserRole()
-} //doDatacardGotoLast()
+}
 
 function doDatacardGotoPrev() {
   desinventar.datacards.showStatus('')
@@ -1053,7 +1045,7 @@ function doDatacardGotoPrev() {
     }
   }
   desinventar.datacards.navigation.updateByUserRole()
-} //doDatacardGotoPrev()
+}
 
 function doDatacardGotoNext() {
   desinventar.datacards.showStatus('')
@@ -1081,7 +1073,7 @@ function doDatacardGotoNext() {
     }
   }
   desinventar.datacards.navigation.updateByUserRole()
-} //doDatacardGotoNext()
+}
 
 // SET DATACARD FORM
 function setElementValue(formElement, value) {
@@ -1112,7 +1104,7 @@ function setElementValue(formElement, value) {
       formElement.value = value
       break
   }
-} //setElementValue()
+}
 
 function setDICardFromId(
   prmRegionId,
@@ -1187,7 +1179,7 @@ function setDICard(prmRegionId, arr) {
   })
 
   desinventar.datacards.navigation.updateByUserRole()
-} //setDICard
+}
 
 function validateInputDouble(prmValue) {
   var answer = 1

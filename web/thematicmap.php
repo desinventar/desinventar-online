@@ -1,8 +1,4 @@
 <?php
-/*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
 require_once('include/loader.php');
 require_once('include/maps.class.php');
 
@@ -324,4 +320,4 @@ switch ($cmd) {
         imagedestroy($imgLegend);
         imagedestroy($imgInfo);
         break;
-} //switch
+}

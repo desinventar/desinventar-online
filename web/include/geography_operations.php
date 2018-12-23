@@ -1,9 +1,4 @@
 <?php
-/*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
-
 use DesInventar\Legacy\Model\GeographyItem;
 
 function geography_delete_items($prmConn, $prmGeoLevelId)

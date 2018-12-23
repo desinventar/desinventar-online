@@ -1,7 +1,3 @@
-/*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
 const showdown = require('showdown')
 const markdown = new showdown.Converter()
 

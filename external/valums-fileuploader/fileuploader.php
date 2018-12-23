@@ -44,7 +44,7 @@
 				throw new Exception('Getting content length is not supported.');
 			}
 		}
-	} //class
+	}
 
 	/**
 	 * Handle file uploads via regular form post (uses the $_FILES array)
@@ -73,7 +73,7 @@
 		{
 			return $_FILES['qqfile']['size'];
 		}
-	} //class
+	}
 
 	class qqFileUploader
 	{
@@ -182,16 +182,13 @@
 				}
 			}
 
-			if ($this->file->save($uploadDirectory . $filename . '.' . $ext))
-			{
+			if ($this->file->save($uploadDirectory . $filename . '.' . $ext)) {
 				$answer['filename'] = $filename . '.' . $ext;
 				$answer['success'] = true;
-			}
-			else
-			{
+			} else {
 				$answer['error'] = 'Could not save uploaded file.' .
 					'The upload was cancelled, or server error encountered';
 			}
 			return $answer;
-		} //function handleUpload
-	} //class
+		}
+	}

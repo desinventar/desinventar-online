@@ -1,9 +1,4 @@
 <?php
-/*
- DesInventar - http://www.desinventar.org
- (c) 1998-2012 Corporacion OSSO
-*/
-
 require_once('include/loader.php');
 require_once('include/query.class.php');
 
@@ -95,7 +90,7 @@ switch ($cmd) {
         break;
     default:
         break;
-} //switch
+}
 $t->assign('reg', $RegionId);
 $t->force_compile   = true;
 $t->display('causes.tpl');

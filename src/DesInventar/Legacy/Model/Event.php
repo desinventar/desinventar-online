@@ -1,9 +1,4 @@
 <?php
-/*
- * DesInventar - http://www.desinventar.org
- * (c) 1998-2015 Corporacion OSSO
- */
-
 namespace DesInventar\Legacy\Model;
 
 use DesInventar\Common\Util;
@@ -48,7 +43,7 @@ class Event extends Record
                 $this->set('EventName', $prmEventName);
             }
         }
-    } // __construct
+    }
 
     public static function existByName($session, $prmEventName)
     {
@@ -72,9 +67,9 @@ class Event extends Record
           "        EventKeyWords LIKE '%" . $prmEventName . ";%')";
         foreach ($session->q->dreg->query($sQuery) as $row) {
             $EventId = $row['EventId'];
-        } // foreach
+        }
         return $EventId;
-    } // function
+    }
 
     public static function loadByName($session, $prmEventName)
     {

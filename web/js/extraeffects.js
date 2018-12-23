@@ -1,8 +1,3 @@
-/*
- DesInventar - http://www.desinventar.org
- (c) 1998-2012 Corporacion OSSO
-*/
-
 function onReadyExtraEffects() {
 	jQuery('.msgEEFieldStatus').hide();
 
@@ -10,14 +5,14 @@ function onReadyExtraEffects() {
 		setExtraEff('','','','','','','');
 		jQuery('#EEFieldCmd').val('cmdEEFieldInsert');
 		return false;
-	});	
+	});
 
 	jQuery('#btnEEFieldReset').unbind('click').click(function() {
 		jQuery('#extraeffaddsect').hide();
 		uploadMsg('');
 		return false;
 	});
-	
+
 	jQuery('#frmEEFieldEdit').unbind('submit').submit(function() {
 		var params = jQuery(this).serialize();
 		var bContinue = true;
@@ -57,7 +52,7 @@ function onReadyExtraEffects() {
 		}
 		return false;
 	});
-} //function
+}
 
 function setExtraEff (id, label, def, type, size, active, public) {
 	// clear highlighted fields...
@@ -71,7 +66,7 @@ function setExtraEff (id, label, def, type, size, active, public) {
 
 	// Show form
 	jQuery('#extraeffaddsect').hide();
-	
+
 	mod = "extraeff";
 	$(mod + 'addsect').style.display = 'block';
 	$('EEFieldId').value = id;
@@ -87,4 +82,4 @@ function setExtraEff (id, label, def, type, size, active, public) {
 		$('EEFieldPublic').checked = true;
 	else
 		$('EEFieldPublic').checked = false;
-} //function
+}

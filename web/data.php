@@ -1,9 +1,4 @@
 <?php
-/*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
-
 use Aura\Session\SessionFactory;
 
 use \DesInventar\Legacy\Model\Region;
@@ -160,18 +155,18 @@ if (isset($post['page']) || isset($post['_D+cmd'])) {
                     //Assign Headers..
                     $lb .= '"'. $dk[$ii] .'"';
                     $bFirst = false;
-                } //foreach
+                }
                 if (!empty($export)) {
                     fwrite($fp, $lb ."\n");
                 } else {
                     $t->assign('dk', $dk);
                     $t->assign('sel', $sel);
                 }
-            } //if
+            }
             if (!empty($export)) {
                 fwrite($fp, $dl);
             }
-        } //for
+        }
         $t->assign('sqt', $slim);
         if (!empty($export)) {
             fclose($fp);
@@ -183,7 +178,7 @@ if (isset($post['page']) || isset($post['_D+cmd'])) {
             $t->assign('offset', ($pag - 1) * $iRecordsPerPage);
             $t->assign('dislist', $dl);
             $t->assign('ctl_dislist', true);
-        } //else
+        }
         $sectorFields = Disaster::getEffectSectorFields();
         $data_header = array();
         foreach ($sel as $key => $field_id) {
@@ -206,8 +201,8 @@ if (isset($post['page']) || isset($post['_D+cmd'])) {
             );
         }
         $t->assign('data_header', $data_header);
-    } //if
-} //if
+    }
+}
 $time_end = microtime_float();
 $t->assign('time', $time_end - $time_start);
 $t->force_compile   = true;

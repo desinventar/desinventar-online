@@ -1,9 +1,4 @@
 <?php
-/*
- DesInventar - http://www.desinventar.org
- (c) Corporación OSSO
-*/
-
 function form2user($val)
 {
     $dat = array();

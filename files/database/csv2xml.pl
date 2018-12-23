@@ -1,8 +1,4 @@
 #!/usr/bin/perl
-#  DesInventar - http://www.desinventar.org
-#  (c) 1998-2011 Corporacion OSSO
-#  
-#  Jhon H. Caicedo <jhcaiced@desinventar.org>
 #
 #  Convert a csv file to xml
 #
@@ -20,7 +16,7 @@ if (!GetOptions('help|h'    => \$bHelp,
                 'portal|p'  => \$bPortal
    )) {
 	die "Error : Incorrect parameter list, please use --help\n";
-}                
+}
 
 if ($bPortal) {
 	$file = 'portal_strings.csv';

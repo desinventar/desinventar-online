@@ -13,7 +13,9 @@ function onReadyAdminUsers() {
       jQuery(this).removeClass('highlight')
     })
     .on('click', 'tr', function() {
-      var UserId = jQuery('.UserId', this).text().trim()
+      var UserId = jQuery('.UserId', this)
+        .text()
+        .trim()
       jQuery.post(
         jQuery('#desinventarURL').val() + '/user.php',
         {
@@ -129,7 +131,9 @@ function onReadyAdminUsers() {
             var clone = jQuery('tr:first', user_list)
               .clone()
               .show()
-            jQuery('.UserId', clone).text(value.UserId).attr('data-id', value.UserId)
+            jQuery('.UserId', clone)
+              .text(value.UserId)
+              .attr('data-id', value.UserId)
             jQuery('.UserFullName', clone).text(value.UserFullName)
             jQuery('.UserEMail', clone).text(value.UserEMail)
             jQuery('.UserActive', clone).text(value.UserActive)

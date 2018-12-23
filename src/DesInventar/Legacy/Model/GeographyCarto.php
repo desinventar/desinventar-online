@@ -1,9 +1,4 @@
 <?php
-/*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
-
 namespace DesInventar\Legacy\Model;
 
 class GeographyCarto extends Record

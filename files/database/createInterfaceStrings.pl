@@ -1,10 +1,6 @@
 #!/usr/bin/perl
-#  DesInventar - http://www.desinventar.org
-#  (c) 1998-2011 Corporacion OSSO
-#  
-#  Jhon H. Caicedo <jhcaiced@desinventar.org>
 #
-#  Create the spa.conf,eng.conf,por.conf,fre.conf files 
+#  Create the spa.conf,eng.conf,por.conf,fre.conf files
 #  with the interface strings using the csv file
 #
 use encoding "utf8";
@@ -23,7 +19,7 @@ if (!GetOptions('help|h'    => \$bHelp,
                 'portal|p'  => \$bPortal
    )) {
 	die "Error : Incorrect parameter list, please use --help\n";
-}                
+}
 
 if ($bPortal) {
 	$file = 'portal_strings.csv';

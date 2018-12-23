@@ -1,8 +1,4 @@
 <?php
-/*
-  DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
 namespace DesInventar\Legacy;
 
 use DesInventar\Legacy\Query;
@@ -152,7 +148,7 @@ class UserSession
                 if ($addr == '') {
                     unset($addrList[$key]);
                 }
-            }//foreach
+            }
             $bAutoLogin = in_array($clientAddr, $addrList);
             if ($bAutoLogin) {
                 $iReturn = ERR_NO_ERROR;

@@ -1,8 +1,4 @@
 <?php
-/*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
 use Aura\Session\SessionFactory;
 use DesInventar\Common\Language;
 

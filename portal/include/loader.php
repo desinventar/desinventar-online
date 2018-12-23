@@ -1,8 +1,4 @@
 <?php
-/*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
 use DesInventar\Common\ConfigLoader;
 
 require_once __DIR__ . '/../../vendor/autoload.php';

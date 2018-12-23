@@ -1,8 +1,4 @@
 #!/usr/bin/perl
-#  DesInventar - http://www.desinventar.org
-#  (c) 1998-2011 Corporacion OSSO
-#  
-#  Jhon H. Caicedo <jhcaiced@desinventar.org>
 #
 #  Process *.tpl and .conf files in order to test if all labels are defined.
 #
@@ -17,7 +13,7 @@ if (!GetOptions('help|h'    => \$bHelp,
                 'lang|l=s'  => \$lang,
    )) {
 	die "Error : Incorrect parameter list, please use --help\n";
-}                
+}
 $conffile = '../../web/conf/' . $lang . '.conf';
 $i = 0;
 my %confstr = ();

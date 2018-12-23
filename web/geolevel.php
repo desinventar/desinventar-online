@@ -1,9 +1,4 @@
 <?php
-/*
- DesInventar - http://www.desinventar.org
- (c) 1998-2012 Corporacion OSSO
-*/
-
 require_once('include/loader.php');
 require_once('include/query.class.php');
 require_once('include/maps.class.php');
@@ -49,8 +44,8 @@ switch ($cmd) {
             if ($gl == ERR_OBJECT_EXISTS) {
                 $t->assign('ctl_chkname', true);
                 $t->assign('chkname', true);
-            } //if
-        } //else
+            }
+        }
         break;
     case 'update':
         $o = new GeographyLevel($us);
@@ -94,7 +89,7 @@ switch ($cmd) {
         break;
     default:
         break;
-} //switch
+}
 $t->assign('reg', $RegionId);
 $t->assign('dic', $us->q->queryLabelsFromGroup('DB', $lg));
 $t->force_compile   = true;

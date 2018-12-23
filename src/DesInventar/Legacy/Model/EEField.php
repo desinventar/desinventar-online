@@ -1,8 +1,4 @@
 <?php
-/*
- * DesInventar - http://www.desinventar.org
- * (c) Corporacion OSSO
- */
 namespace DesInventar\Legacy\Model;
 
 class EEField extends Record
@@ -51,7 +47,7 @@ class EEField extends Record
             }
             $this->load();
         }
-    } // __construct
+    }
 
     public function getMaxEEFieldId()
     {
@@ -63,7 +59,7 @@ class EEField extends Record
         }
         $iMaxVal = (int)substr($EEFieldId, 3);
         return $iMaxVal;
-    } // function
+    }
 
     public function getNextEEFieldId()
     {

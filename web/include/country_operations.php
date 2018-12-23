@@ -1,8 +1,4 @@
 <?php
-/*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
 function countryGetName($prm_base_conn, $prm_lang_iso_code, $prm_country_iso)
 {
     $country_name = '';

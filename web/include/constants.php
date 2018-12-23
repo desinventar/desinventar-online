@@ -1,8 +1,4 @@
 <?php
-/*
- DesInventar - http://www.desinventar.org
- (c) Corporación OSSO
-*/
 define('CONST_REGIONACTIVE', 1);
 define('CONST_REGIONPUBLIC', 2);
 define('FALSE', 0);

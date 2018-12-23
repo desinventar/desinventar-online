@@ -1,8 +1,4 @@
 <?php
-/*
- DesInventar - http://www.desinventar.org
- (c) Corporación OSSO
-*/
 namespace DesInventar\Legacy;
 
 class DIGraph extends DIResult

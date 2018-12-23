@@ -1,9 +1,4 @@
 <?php
-/*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
-
 require_once('include/loader.php');
 require_once('include/query.class.php');
 

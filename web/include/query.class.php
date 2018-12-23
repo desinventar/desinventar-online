@@ -1,9 +1,4 @@
 <?php
-/*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
-
 namespace DesInventar\Legacy;
 
 use Aura\Sql\ExtendedPdo;
@@ -36,28 +31,26 @@ class Query
     public function initSqliteDatabaseConnections($region_id)
     {
         try {
-            if (!empty($region_id)) {
-                $this->RegionId = $region_id;
-                $this->setDBConnection($this->RegionId);
-            } else {
-                $this->setDBConnection('core');
-            } //if
+            if (empty($region_id)) {
+                return $this->setDBConnection('core');
+            }
+            $this->RegionId = $region_id;
+            return $this->setDBConnection($this->RegionId);
         } catch (Exception $e) {
             showErrorMsg(debug_backtrace(), $e, '');
-            die();
         }
     }
 
     public function getDBFile($prmRegionId)
     {
         $DBFile = VAR_DIR;
-        if ($prmRegionId != '') {
-            if ($prmRegionId == 'core') {
-                $DBFile .= '/main/core.db';
-            } else {
-                $DBFile .= '/database/' . $prmRegionId .'/desinventar.db';
-            }
+        if (empty($prmRegionId)) {
+            return '';
         }
+        if ($prmRegionId == 'core') {
+            return $DBFile .= '/main/core.db';
+        }
+        return $DBFile .= '/database/' . $prmRegionId .'/desinventar.db';
         return $DBFile;
     }
 
@@ -226,8 +219,8 @@ class Query
                                 $data[$CauseId]['CauseDesc'] = $data1[$CauseId]['CauseDesc']; // Desc
                             }
                         }
-                    } //foreach
-                } //if
+                    }
+                }
             }
         }
         return $data;
@@ -342,9 +335,9 @@ class Query
                                            'CauseActive' => $row['CauseActive'],
                                            'CausePredefined' => $row['CausePredefined'],
                                            'RecordUpdate' => $row['RecordUpdate']);
-        } //foreach
+        }
         return $data;
-    } //function
+    }
 
     // READ OBJECTS :: EVENT, CAUSE, GEOGRAPHY, GEOLEVEL READ
     public function isvalidObjectToInactivate($id, $obj)
@@ -409,7 +402,7 @@ class Query
             default:
                 return null;
             break;
-        } //switch
+        }
         if ($sugname == "") {
             return false;
         }
@@ -534,7 +527,7 @@ class Query
         return $data;
     }
 
-    // function to build geography tree. Using child = '' built full tree.
+    // Build geography tree. Use child = '' to built the full tree.
     protected function buildGeoTree($child, $mylev, $maxlev, $selgeolist)
     {
         $gtree = array();
@@ -770,7 +763,7 @@ class Query
             foreach ($this->dreg->query($sql) as $row) {
                 $data[$row['InfoKey'] .'|'. $row['LangIsoCode']] = $row['InfoValue'];
             }
-        } //if
+        }
         return $data;
     }
 
@@ -790,7 +783,7 @@ class Query
             } catch (Exception $e) {
                 showErrorMsg(debug_backtrace(), $e, '');
             }
-        } //if
+        }
         return $sReturn;
     }
 
@@ -912,7 +905,7 @@ class Query
             }
             $row['RegionAdminUserId'] = '';
             $data[$RegionId] = $row;
-        } //foreach
+        }
 
         foreach ($data as $RegionId => &$info) {
             $sQuery = 'SELECT RA.*,U.UserFullName FROM RegionAuth RA,User U WHERE ' .
@@ -922,8 +915,8 @@ class Query
             foreach ($this->core->query($sQuery) as $row) {
                 $info['RegionAdminUserId']       = $row['UserId'];
                 $info['RegionAdminUserFullName'] = $row['UserFullName'];
-            } //foreach
-        } //foreach
+            }
+        }
         return $data;
     }
 
@@ -1071,16 +1064,16 @@ class Query
                             $QueryTmp = 'E.' . $EEField . " LIKE '" . $QueryParams['Text'] . "'";
                         }
                         break;
-                } //switch
+                }
                 if ($QueryTmp != '') {
                     if (! $First) {
                         $EEQuery .= ' ' . $dat['QueryEEField']['OP'] . ' ';
                     }
                     $First = false;
                     $EEQuery .= $QueryTmp;
-                } #if
-            } //if
-        } //foreach
+                }
+            }
+        }
         $QueryItem['EEField'] = $EEQuery;
         // Geography Section Query (GeographyId + DisasterSiteNotes)
         $Query = '';
@@ -1103,7 +1096,7 @@ class Query
                 $Query .= $Field . ' LIKE "' . $i . '%"';
                 $bFirst = false;
             }
-        } //foreach
+        }
         if ($Query != '') {
             $Query = '(' . $Query . ')';
         }
@@ -1200,7 +1193,7 @@ class Query
                     unset($dat[$k]);
                 }
             }
-        } //foreach
+        }
         $Query = $this->querySQLAddMemoField(
             $Query,
             'D.EffectNotes',
@@ -1304,14 +1297,14 @@ class Query
                     }
                 }
             }
-        } //foreach
+        }
 
         if (isset($begt) || isset($endt)) {
             if (!isset($begt)) {
-                $begt = "0000-00-00"; // $datedb[0];
+                $begt = "0000-00-00";
             }
             if (!isset($endt)) {
-                $endt = "9999-12-31"; //$datedb[1];
+                $endt = "9999-12-31";
             }
             $QueryItem['Period'] = "D.DisasterBeginTime BETWEEN '$begt' AND '$endt'";
         }
@@ -1341,7 +1334,7 @@ class Query
                     $bFirst = false;
                     $WhereQuery1 .= '(' . $v . ') ';
                 }
-            } //foreach
+            }
         }
         $QueryItem['Other'] = $WhereQuery1;
 
@@ -1375,7 +1368,7 @@ class Query
             $WhereQuery .= ')';
         }
         return $WhereQuery;
-    } #genSQLWhereDesconsultar()
+    }
 
     // Count number of records in result
     public function genSQLSelectCount($whr)
@@ -1422,7 +1415,7 @@ class Query
                     $GroupFieldName = substr($gp[1], 2) ."_". $gp[0] ; // delete last ,'_',
                 } else {
                     $GroupFieldName = $gp[1];
-                } //if
+                }
                 break;
             case "D.GeographyId":
                 // Lev is 0, 1, .. N
@@ -1435,9 +1428,9 @@ class Query
                     $GroupFieldName = $gp[1];
                 }
                 break;
-        } //switch
+        }
         return $GroupFieldName;
-    } //function
+    }
 
     // Generate Special SQL with grouped fields
     public function genSQLProcess($dat, $opc)
@@ -1486,13 +1479,13 @@ class Query
                                 $func = "STRFTIME('%j', ". $gp[1] .") "; #%j
                                 $where_extra[] = 'LENGTH(' . $gp[1] . ')>=10';
                                 break;
-                        } //switch
+                        }
                         $sel[$j] = $func . ' AS '. substr($gp[1], 2) ."_". $gp[0] ; // delete last ,'_',
                         $grp[$j] = $func;
                     } else {
                         $sel[$j] = $gp[1];
                         $grp[$j] = $gp[1];
-                    } //if
+                    }
                     // 100, 10, 5, 1 years, month
                     // $sta = explode("|", $opc['Stat']);
                     break;
@@ -1509,9 +1502,9 @@ class Query
                         $grp[$j] = $gp[1];
                     }
                     break;
-            } //switch
+            }
             $j++;
-        } #foreach
+        }
 
         // Process Field in select and group
         if (!is_array($opc['Field'])) {
@@ -1551,7 +1544,7 @@ class Query
                 }
             }
             $j++;
-        } //foreach
+        }
 
         // Code Select
         if ($this->chkSQLWhere($dat)) {
@@ -1571,7 +1564,7 @@ class Query
             $sql .= ' GROUP BY ' . $group;
         }
         return $sql;
-    } //function
+    }
 
     // Reformat array setting to arr[X1] = array {a, b, c, d..}
     public function prepareList($dl, $mode)
@@ -1645,11 +1638,11 @@ class Query
                             default:
                                 $dl[$j][$idx] = "";
                                 break;
-                        } //switch
+                        }
                     } elseif (is_numeric($dl[$j][$idx]) && empty($exp)) {
                         $dl[$j][$idx] = number_format($dl[$j][$idx], 0, ',', ' ');
                     }
-                } //foreach
+                }
                 if (!empty($exp)) {
                     //$txt = '';
                     foreach (array_values($dl[$j]) as $vals) {
@@ -1668,12 +1661,12 @@ class Query
                         } else {
                             $txt .= '"'. $myv .'"'. $sep;
                         }
-                    } //foreach
+                    }
                     $txt .= "\n";
-                } //if exp
+                }
                 $j++;
-            } //foreach
-        } //if !empty
+            }
+        }
         if (!empty($exp)) {
             // Convert encoding of file to iso-8859-1, makes it easier to open in Excel
             return mb_convert_encoding($txt, 'iso-8859-1', 'utf-8');
@@ -1709,12 +1702,12 @@ class Query
                 } else {
                     $js[$ky] .= "'$k': '$v', ";
                 }
-            } //foreach
+            }
             $js[$ky] .= "'_REG': '". $this->RegionId . "'";
             $js[$ky] .= "}";
         }
         return $js;
-    } //function
+    }
 
     // SET SQL TO TOTALIZATION RESULTS
     public function totalize($sql)
@@ -1794,7 +1787,7 @@ class Query
                 }
                 $lsf[] = $dic[$k][0] . $opt;
             }
-        } //foreach
+        }
         if (!empty($lsf)) {
             $info['EFF'] = implode(", ", $lsf);
         }
@@ -1811,7 +1804,7 @@ class Query
                 if (count($row) > 0) {
                     $answer = true;
                 }
-            } //foreach
+            }
         }
         return $answer;
     }
@@ -1857,7 +1850,7 @@ class Query
                     $row['DictBasDesc'],
                     $row['DictFullDesc']
                 );
-            } // foreach
+            }
         } catch (Exception $e) {
             showErrorMsg(debug_backtrace(), $e, '');
         }

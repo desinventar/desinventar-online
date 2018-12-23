@@ -1,9 +1,4 @@
 <?php
-/*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
-
 function getBrowserClientLanguage()
 {
     // 2009-08-13 (jhcaiced) Try to detect the interface language

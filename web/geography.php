@@ -1,9 +1,4 @@
 <?php
-/*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
-
 use Aura\Session\SessionFactory;
 use DesInventar\Common\Language;
 use DesInventar\Legacy\Model\GeographyItem;
@@ -91,7 +86,7 @@ switch ($cmd) {
         break;
     default:
         break;
-} // switch
+}
 $t->assign('reg', $reg);
 $t->assign('dic', $us->q->queryLabelsFromGroup('DB', $lg));
 $t->force_compile   = true;

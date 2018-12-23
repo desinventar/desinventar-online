@@ -1,9 +1,4 @@
 <?php
-/*
- DesInventar - http://www.desinventar.org
- (c) 1998-2012 Corporacion OSSO
-*/
-
 function getBrowserClientLanguage()
 {
     // 2009-08-13 (jhcaiced) Try to detect the interface language
@@ -32,16 +27,16 @@ function getBrowserClientLanguage()
                 case 'pt':
                     $IsoLang = 'por';
                     break;
-            } //switch
-        } //if
-    } //foreach
+            }
+        }
+    }
 
     // Default Case
     if ($IsoLang == '') {
         $IsoLang = 'eng';
     }
     return $IsoLang;
-} // function
+}
 
 function getParameter($prmName, $prmDefault = '')
 {
@@ -187,10 +182,10 @@ function generatePasswd($length = 6, $level = 2)
         if (!strstr($password, $actChar)) {
             $password .= $actChar;
             $counter++;
-        } //if
-    } //while
+        }
+    }
     return $password;
-} //function
+}
 
 // Process a number, adding a space to separate each triplet
 // according to standard scientific representation.
@@ -228,8 +223,8 @@ function rrmdir($dir)
         }
         reset($objects);
         rmdir($dir);
-    } #if
-}  #rrmdir()
+    }
+}
 
 function padNumber($prmValue, $prmLength)
 {
@@ -247,8 +242,7 @@ function getFont($prmFontName)
         $font = $_SERVER['WINDIR'] . '/fonts/' . $prmFontName;
     }
     return $font;
-} #getFont()
-
+}
 
 function showErrorMsg($prm_debug, $e, $prm_error_message)
 {

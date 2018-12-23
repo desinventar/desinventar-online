@@ -1,8 +1,4 @@
 <?php
-/*
- DesInventar - http://www.desinventar.org
- (c) Corporacion OSSO
-*/
 namespace DesInventar\Legacy\Model;
 
 use DesInventar\Service\RegionInfo;
@@ -602,7 +598,7 @@ class Region extends Model
                         $this->set($key, $value, $section);
                     }
                 }
-            } //foreach
+            }
 
             $LangIsoCode = $this->get('LangIsoCode');
             if ($LangIsoCode != 'eng') {
@@ -680,7 +676,7 @@ class Region extends Model
             $a = array();
             while ($row = $sth->fetch(PDO::FETCH_ASSOC)) {
                 $a[] = $row['UserId'];
-            } //foreach
+            }
             foreach ($a as $UserId) {
                 $this->session->setUserRole($UserId, $this->get('RegionId'), 'NONE');
             }
