@@ -1,5 +1,5 @@
 import { Selector } from 'testcafe'
-import user from './helpers/user.js'
+import user from './helpers/userHelper'
 import { urlWithDatabase } from './helpers/config'
 
 fixture('Database Upload Page').page(urlWithDatabase)

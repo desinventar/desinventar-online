@@ -30,10 +30,17 @@ class RegionInfo extends Service
         $query = $this->factory->newSelect();
         $query->from('info')->cols(['InfoKey','InfoValue'])->where('InfoKey IN (:keys)');
         $response = $this->defaults;
-        $response = array_merge(array_reduce($keys, function ($result, $item) {
-            $result[$item] = null;
-            return $result;
-        }, array()), $this->defaults);
+        $response = array_merge(
+            array_reduce(
+                $keys,
+                function ($result, $item) {
+                    $result[$item] = null;
+                    return $result;
+                },
+                array()
+            ),
+            $this->defaults
+        );
         foreach ($this->pdo->fetchAssoc($query->getStatement(), ['keys' => $keys]) as $key => $row) {
             if (!empty($row['InfoValue'])) {
                 $response[$key] = $row['InfoValue'];

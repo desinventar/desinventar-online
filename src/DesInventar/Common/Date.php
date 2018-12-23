@@ -55,14 +55,17 @@ class Date
 
     public static function getWeekOfYear($prmDate)
     {
-        $iWeek = date("W", mktime(
-            5,
-            0,
-            0,
-            self::getMonth($prmDate),
-            self::getDay($prmDate),
-            self::getyear($prmDate)
-        ));
+        $iWeek = date(
+            "W",
+            mktime(
+                5,
+                0,
+                0,
+                self::getMonth($prmDate),
+                self::getDay($prmDate),
+                self::getyear($prmDate)
+            )
+        );
         return $iWeek;
     }
 

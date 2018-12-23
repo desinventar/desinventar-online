@@ -98,17 +98,19 @@ class Record extends Model
                 $sQuery .= ' AND ';
             }
             $sQuery .= $sFieldName . '=';
-            if (($sFieldType == 'STRING'  ) ||
-                ($sFieldType == 'VARCHAR' ) ||
-                ($sFieldType == 'TEXT'    ) ||
-                ($sFieldType == 'DATETIME') ) {
+            if (($sFieldType == 'STRING') ||
+                ($sFieldType == 'VARCHAR') ||
+                ($sFieldType == 'TEXT') ||
+                ($sFieldType == 'DATETIME')
+            ) {
                 $sQuery .= '"' . $this->get($sFieldName) . '"';
             }
             if (($sFieldType == 'INTEGER') ||
                 ($sFieldType == 'SECTOR') ||
-                ($sFieldType == 'DOUBLE' ) ||
+                ($sFieldType == 'DOUBLE') ||
                 ($sFieldType == 'CURRENCY') ||
-                ($sFieldType == 'BOOLEAN' ) ) {
+                ($sFieldType == 'BOOLEAN')
+            ) {
                 $sQuery .= $this->get($sFieldName);
             }
             $i++;
@@ -153,18 +155,20 @@ class Record extends Model
                 $sQueryValues .= ',';
             }
             $sQueryFields .= $sFieldName;
-            if (($sFieldType == 'STRING'  ) ||
-                ($sFieldType == 'VARCHAR' ) ||
-                ($sFieldType == 'TEXT'    ) ||
-                ($sFieldType == 'DATETIME') ) {
+            if (($sFieldType == 'STRING') ||
+                ($sFieldType == 'VARCHAR') ||
+                ($sFieldType == 'TEXT') ||
+                ($sFieldType == 'DATETIME')
+            ) {
                 $sQueryValues .= '"' . $this->get($sFieldName) . '"';
             }
             if (($sFieldType == 'INTEGER')  ||
                 ($sFieldType == 'SECTOR') ||
-                ($sFieldType == 'FLOAT'   ) ||
-                ($sFieldType == 'DOUBLE'  ) ||
+                ($sFieldType == 'FLOAT') ||
+                ($sFieldType == 'DOUBLE') ||
                 ($sFieldType == 'CURRENCY') ||
-                ($sFieldType == 'BOOLEAN' ) ) {
+                ($sFieldType == 'BOOLEAN')
+            ) {
                 $sQueryValues .= $this->get($sFieldName);
             }
             $i++;
@@ -206,18 +210,20 @@ class Record extends Model
                     $sQuery .= ',';
                 }
                 $sQueryItem = $sFieldName . '=';
-                if (($sFieldType == 'STRING'  ) ||
-                    ($sFieldType == 'VARCHAR' ) ||
-                    ($sFieldType == 'TEXT'    ) ||
+                if (($sFieldType == 'STRING') ||
+                    ($sFieldType == 'VARCHAR') ||
+                    ($sFieldType == 'TEXT') ||
                     ($sFieldType == 'DATETIME') ||
-                    ($sFieldType == 'DATE'    ) ) {
+                    ($sFieldType == 'DATE')
+                ) {
                     $sQueryItem .= '"' . $this->get($sFieldName) . '"';
-                } elseif (($sFieldType == 'INTEGER' ) ||
+                } elseif (($sFieldType == 'INTEGER') ||
                         ($sFieldType == 'SECTOR') ||
-                        ($sFieldType == 'FLOAT'   ) ||
-                        ($sFieldType == 'DOUBLE'  ) ||
-                        ($sFieldType == 'BOOLEAN' ) ||
-                        ($sFieldType == 'CURRENCY') ) {
+                        ($sFieldType == 'FLOAT') ||
+                        ($sFieldType == 'DOUBLE') ||
+                        ($sFieldType == 'BOOLEAN') ||
+                        ($sFieldType == 'CURRENCY')
+                    ) {
                     $sQueryItem .= $this->get($sFieldName);
                 } else {
                     throw new Exception('Unknown Type : ' . $sFieldType . '/' . $sFieldName);

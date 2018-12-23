@@ -1,5 +1,5 @@
 import { Selector } from 'testcafe'
-import user from './helpers/user'
+import user from './helpers/userHelper'
 import { url } from './helpers/config'
 
 fixture('Admin Users Test').page(url)

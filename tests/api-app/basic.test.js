@@ -25,7 +25,7 @@ describe('Basic API Tests', () => {
     expect(response.body.data.language.startsWith('en')).toBe(true)
     let cookies = response.headers['set-cookie']
 
-    response = await request
+    await request
       .post('/session/change-language')
       .set('Cookie', cookies)
       .send({
