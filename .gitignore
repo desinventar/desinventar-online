@@ -15,6 +15,7 @@ config/production.json
 config/staging.json
 config/develop.json
 config/*.json
+!config/test.json
 node_modules
 .vscode
 npm-debug.log

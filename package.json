@@ -1,7 +1,17 @@
 {
   "name": "desinventar",
-  "version": "10.0.0",
+  "version": "10.03.002",
   "description": "DesInventar Online",
+  "keywords": ["desinventar", "disasters", "inventory", "risk"],
+  "homepage": "https://online.desinventar.org",
+  "license": "GPL-3.0",
+  "author": {
+    "name": "Jhon H. Caicedo",
+    "email": "jhcaiced@desinventar.org"
+  },
+  "desinventar": {
+    "releaseDate": "2018-11-16"
+  },
   "main": ".eslintrc.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -25,11 +35,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/desinventar/desinventar-online.git"
+    "url": "https://github.com/desinventar/desinventar-online"
   },
-  "author": "",
-  "license": "GPL-3.0",
-  "homepage": "https://bitbucket.org/desinventar/desinventar-online#readme",
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
