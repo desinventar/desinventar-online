@@ -3,6 +3,7 @@ namespace DesInventar\Legacy;
 
 use DesInventar\Legacy\Model\DisasterImport;
 use DesInventar\Legacy\Model\Event;
+use DesInventar\Legacy\Model\Cause;
 use DesInventar\Legacy\Model\GeographyItem;
 
 class DIImport
@@ -145,8 +146,8 @@ class DIImport
             for ($i = 0; $i<count($a); $i++) {
                 $a[$i] = trim($a[$i]);
             }
-            $d = new DisasterImport($this->session, '', $this->fields);
-            $d->importFromArray($a);
+
+            $d = $this->getImportObjectFromArray($a);
 
             $DisasterSerial = $d->get('DisasterSerial');
             // Validate mandatory fields
@@ -160,35 +161,17 @@ class DIImport
                 continue;
             }
 
-            // printf("%4d %s\n", $line, $DisasterSerial);
-            $disasterId = $d->findIdBySerial($DisasterSerial);
-            if (!empty($disasterId)) {
-                $d->set('DisasterId', $disasterId);
-                $d->load();
-                $d->importFromArray($a);
-            }
-
-            foreach ($this->fixedValues as $fieldName => $value) {
-                $d->set($fieldName, $value);
-            }
-
-            $geographyCode = $this->getGeographyCode($a);
-            $geographyId = $this->getGeographyId($geographyCode);
-            $d->set('GeographyId', $geographyId);
-            if ($geographyId == '') {
+            if (empty($d->get('GeographyId'))) {
                 printf('GEOGRAPHY ERROR : %4d %-10s %-20s' . "\n", $line, $DisasterSerial, $geographyCode);
+                continue;
             }
 
-            try {
-                $d->set('EventId', $this->getEventId($a));
-            } catch (Exception $e) {
-                printf('EVENT ERROR : %4d %-10s %s' . "\n", $line, $DisasterSerial, $e->getMessage());
+            if (empty($d->get('EventId'))) {
+                printf('EVENT ERROR : %4d %-10s %s' . "\n", $line, $DisasterSerial, '');
             }
 
-            try {
-                $d->set('CauseId', $this->getCauseId($a));
-            } catch (Exception $e) {
-                printf('CAUSE ERROR : %4d %-10s %-20s' . "\n", $line, $DisasterSerial, $e->getMessage());
+            if (empty($d->get('CauseId'))) {
+                printf('CAUSE ERROR : %4d %-10s %-20s' . "\n", $line, $DisasterSerial, '');
             }
             $line++;
 
@@ -235,6 +218,30 @@ class DIImport
         }
     }
 
+    public function getImportObjectFromArray($values)
+    {
+        $d = new DisasterImport($this->session, '', $this->fields);
+        $d->importFromArray($values);
+
+        $disasterId = $d->findIdBySerial($d->get('DisasterSerial'));
+        if (!empty($disasterId)) {
+            $d->set('DisasterId', $disasterId);
+            $d->load();
+            $d->importFromArray($values);
+        }
+
+        foreach ($this->fixedValues as $fieldName => $value) {
+            $d->set($fieldName, $value);
+        }
+
+        $geographyCode = $this->getGeographyCode($values);
+        $geographyId = $this->getGeographyId($geographyCode);
+        $d->set('GeographyId', $geographyId);
+
+        $d->set('EventId', $this->getEventId($values));
+        $d->set('CauseId', $this->getCauseId($values));
+        return $d;
+    }
 
     public function loadCSV($ocsv)
     {
