@@ -52,6 +52,12 @@ function doDatabaseCreateSetup() {
     )
   })
 
+	jQuery('#lnkDatabaseCreateOpenDB').on('click', function(event) {
+		window.location = this.href
+		window.location.reload(false)
+		event.preventDefault()
+	})
+
   // Send Button - Validate data and send command to backend
   jQuery('#btnDatabaseCreateSend').click(function() {
     var regionId =
@@ -90,13 +96,13 @@ function doDatabaseCreateSetup() {
             jQuery('#lnkDatabaseCreateDBURL').attr(
               'href',
               jQuery('#desinventarURL').val() +
-                '/' +
+                '/#' +
                 jQuery('#txtDatabaseCreate_RegionId').text()
             )
             jQuery('#lnkDatabaseCreateOpenDB').attr(
               'href',
               jQuery('#desinventarURL').val() +
-                '/' +
+                '/#' +
                 jQuery('#txtDatabaseCreate_RegionId').text()
             )
             jQuery('#divDatabaseCreateParams').hide()
