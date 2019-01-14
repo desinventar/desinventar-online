@@ -24,15 +24,18 @@ class DIImport
         'fields' => []
     ];
 
-    public function __construct($prmSessionId, $fileName)
+    public function __construct($prmSessionId, $params)
     {
         $this->session = $prmSessionId;
-        if (!empty($fileName) && file_exists($fileName)) {
-            $this->loadParamsFromFile($fileName);
-        }
+        $this->params = array_merge($this->defaultParams, $params);
+        $this->fields = $this->getFieldDef($this->params['fields']);
+        $this->geography = $this->params['geography'];
+        $this->event = $this->params['event'];
+        $this->cause = $this->params['cause'];
+        $this->fixedValues = $this->params['values'];
     }
 
-    public function loadParamsFromFile($fileName)
+    public static function loadParamsFromFile($fileName)
     {
         if (!file_exists($fileName)) {
             throw new \Exception('Import Error: Cannot find field definition file');
@@ -42,13 +45,7 @@ class DIImport
         if (empty($params)) {
             throw new \Exception('Import Error: Cannot import field definitions from file');
         }
-        $this->params = array_merge($this->defaultParams, $params);
-        $this->fields = $this->getFieldDef($params['fields']);
-        $this->geography = $params['geography'];
-        $this->event = $params['event'];
-        $this->cause = $params['cause'];
-        $this->fixedValues = $params['values'];
-        return true;
+        return $params;
     }
 
     public function getFieldDef($fields)
@@ -86,14 +83,36 @@ class DIImport
         return $this->importFromCSV($FileName, $ObjectType, false);
     }
 
-    public function getGeographyCode($values)
+    public function findGeographyIdByName($fullName, $separator)
     {
-        return $values[$this->geography['code']];
+        $id = '';
+        $names = explode($separator, $fullName);
+        foreach ($names as $name) {
+            $id = GeographyItem::getIdByName($this->session, $name, $id);
+        }
+        return $id;
     }
 
-    public function getGeographyId($code)
+    public function getGeographyId($values)
     {
-        return GeographyItem::getIdByCode($this->session, $code, '');
+        $type = !empty($this->geography['type']) ? $this->geography['type'] : 'code';
+        switch ($type) {
+            case 'fullname':
+                $name = $values[$this->geography['index']];
+                $id = $this->findGeographyIdByName($name, $this->geography['separator']);
+                if (empty($id)) {
+                    throw new \Exception('Error trying to match geography name: ' . $name);
+                }
+                return $id;
+            case 'code':
+            default:
+                $code = $values[$this->geography['code']];
+                $id = GeographyItem::getIdByCode($this->session, $code, '');
+                if (empty($id)) {
+                    throw new \Exception('Error trying to match geography code: ' . $code);
+                }
+                return $id;
+        }
     }
 
     public function getEventId($values)
@@ -101,7 +120,7 @@ class DIImport
         $name = $this->getName($values, $this->event);
         $id = Event::getIdByName($this->session, $name);
         if (empty($id)) {
-            throw new \Exception('Event Error: ' . $name);
+            throw new \Exception('Error trying to match event: ' . $name);
         }
         return $id;
     }
@@ -111,7 +130,7 @@ class DIImport
         $name = $this->getName($values, $this->cause);
         $id = $name == '' ? 'UNKNOWN' : Cause::getIdByName($this->session, $name);
         if (empty($id)) {
-            throw new \Exception('Cause Error: ' . $name);
+            throw new \Exception('Error trying to match cause: ' . $name);
         }
         return $id;
     }
@@ -147,32 +166,15 @@ class DIImport
                 $a[$i] = trim($a[$i]);
             }
 
-            $d = $this->getImportObjectFromArray($a);
+            try {
+                $d = $this->getImportObjectFromArray($a);
+            } catch (\Exception $e) {
+                fprintf(STDERR, '%4d,%s,%s' . "\n", $line, $d->get('DisasterSerial'), $e->getMessage());
+                $line++;
+                continue;
+            }
 
             $DisasterSerial = $d->get('DisasterSerial');
-            // Validate mandatory fields
-            if (empty($DisasterSerial)) {
-                printf('DisasterSerial is empty. Line: %4d' . "\n", $line);
-                continue;
-            }
-
-            if (empty($d->get('DisasterBeginTime'))) {
-                printf('DisasterBeginTime is empty. Line: %4ds %-10s' ."\n", $line, $DisasterSerial);
-                continue;
-            }
-
-            if (empty($d->get('GeographyId'))) {
-                printf('GEOGRAPHY ERROR : %4d %-10s %-20s' . "\n", $line, $DisasterSerial, $geographyCode);
-                continue;
-            }
-
-            if (empty($d->get('EventId'))) {
-                printf('EVENT ERROR : %4d %-10s %s' . "\n", $line, $DisasterSerial, '');
-            }
-
-            if (empty($d->get('CauseId'))) {
-                printf('CAUSE ERROR : %4d %-10s %-20s' . "\n", $line, $DisasterSerial, '');
-            }
             $line++;
 
             // Validate Effects and Save as DRAFT if needed
@@ -188,11 +190,11 @@ class DIImport
                 $r = $d->validateUpdate(1);
             }
             if ($r < 0) {
-                printf('Error en validación serial: %s Error: ' . "\n", $DisasterSerial, $r);
+                fprintf(STDERR, 'Error en validación serial: %s Error: ' . "\n", $DisasterSerial, $r);
             }
 
             if (($line > 0) && (($line % 100) == 0)) {
-                printf('%04d' . "\n", $line);
+                fprintf(STDOUT, '%04d' . "\n", $line);
             }
 
             if (!$prmImport) {
@@ -204,7 +206,7 @@ class DIImport
             if ($bExist < 0) {
                 $i = $d->insert(true, false);
                 if ($i < 0) {
-                    printf('%5d %-10s %3d' . "\n", $line, $DisasterSerial, $i);
+                    fprintf(STDERR, '%5d %-10s %3d' . "\n", $line, $DisasterSerial, $i);
                 }
                 $Cmd = 'INSERT';
                 continue;
@@ -213,7 +215,7 @@ class DIImport
             $Cmd = 'UPDATE';
 
             if ($i < 0) {
-                printf('%5d %-10s %3d' . "\n", $line, $DisasterSerial, $i);
+                fprintf(STDERR, '%5d %-10s %3d' . "\n", $line, $DisasterSerial, $i);
             }
         }
     }
@@ -234,8 +236,7 @@ class DIImport
             $d->set($fieldName, $value);
         }
 
-        $geographyCode = $this->getGeographyCode($values);
-        $geographyId = $this->getGeographyId($geographyCode);
+        $geographyId = $this->getGeographyId($values);
         $d->set('GeographyId', $geographyId);
 
         $d->set('EventId', $this->getEventId($values));
