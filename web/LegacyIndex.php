@@ -1131,7 +1131,7 @@ class LegacyIndex
                 if ($desinventarUserRoleValue <= ROLE_NONE) {
                     return json_encode(['Status' => ERR_UNKNOWN_ERROR]);
                 }
-                $ShortName = 'DesInventar_' . date('Y-m-d') . '_' . $RegionId . '.zip';
+                $ShortName = date('Y-m-d') . '_DesInventar_' . $RegionId . '.zip';
                 $FileName = $config->paths['www_dir'] . '/' . $us->sSessionId . '/' . $ShortName;
                 $URL      = $config->paths['www_uri'] . '/' . $us->sSessionId . '/' . $ShortName;
                 $r = new Region($us);
