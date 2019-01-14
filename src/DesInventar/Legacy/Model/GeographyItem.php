@@ -20,6 +20,7 @@ class GeographyItem extends Record
         'RecordSync' => array('type' => 'DATETIME'),
         'RecordUpdate' => array('type' => 'DATETIME')
     );
+
     public function __construct($prmSession)
     {
         $this->sTableName   = "Geography";
