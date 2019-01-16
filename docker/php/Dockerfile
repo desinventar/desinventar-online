@@ -5,6 +5,7 @@ RUN apt-get update -y && \
     libjpeg-dev \
     zlib1g-dev \
     libpng-dev \
+    libzip-dev \
     fonts-liberation
 RUN docker-php-ext-configure gd \
   --with-jpeg-dir=/usr/include \
