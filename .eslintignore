@@ -3,3 +3,4 @@ portal/web/scripts
 web/external/clickmenu
 web/js/
 web/scripts/
+**/node_modules
