@@ -63,6 +63,20 @@ services:
       - DESINVENTAR_URL
       - DESINVENTAR_PORTAL_CACHEDIR
       - TEST_PORTAL_URL
+  api:
+    build:
+      context: .
+      dockerfile: ./docker/express/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/src
+      - /src/node_modules
+      - /src/backend/express/node_modules
+    env_file:
+      - backend/.env
+    environment:
+      - NODE_ENV
   liquibase:
     build:
       context: .
