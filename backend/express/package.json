@@ -1,0 +1,18 @@
+{
+  "name": "desinventar-api",
+  "version": "1.0.0",
+  "description": "DesInventar API",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "desinventar",
+    "api"
+  ],
+  "author": "Jhon H. Caicedo <jhcaiced@inticol.com>",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
