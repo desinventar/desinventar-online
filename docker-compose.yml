@@ -77,6 +77,8 @@ services:
       - backend/.env
     environment:
       - NODE_ENV
+    depends_on:
+      - mysql
   liquibase:
     build:
       context: .
@@ -116,6 +118,17 @@ services:
       - "5000:5000"
     volumes:
       - /var/local/desinventar:/var/local/desinventar
+  mysql:
+    build:
+      context: ./
+      dockerfile: docker/mysql/Dockerfile
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: always
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - "3306:3306"
   redis:
     build:
       context: .
@@ -133,3 +146,5 @@ services:
     environment:
       - NODE_ENV
       - APP_ENV
+volumes:
+  mysql_data:
