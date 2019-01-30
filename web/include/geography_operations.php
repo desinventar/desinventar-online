@@ -9,8 +9,15 @@ function geography_delete_items($prmConn, $prmGeoLevelId)
     return $answer;
 }
 
-function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $prmCode, $prmName, $prmParentCode)
-{
+function geography_import_from_dbf(
+    $prmSession,
+    $prmGeoLevelId,
+    $prmFilename,
+    $prmCode,
+    $prmName,
+    $prmParentCode,
+    $prmCharset
+) {
     $iReturn = ERR_NO_ERROR;
     if (! file_exists($prmFilename)) {
         $iReturn = ERR_DEFAULT_ERROR;
@@ -43,7 +50,10 @@ function geography_import_from_dbf($prmSession, $prmGeoLevelId, $prmFilename, $p
             $row = dbase_get_record_with_names($dbf, $i);
             if ($row['deleted'] == 0) {
                 $geography_code = trim($row[$prmCode]);
-                $geography_name = trim(utf8_encode($row[$prmName]));
+                $geography_name = trim($row[$prmName]);
+                if ($prmCharset !== 'UTF-8') {
+                    $geography_name = utf8_encode($geography_name);
+                }
                 $geography_id = '';
                 if (isset($geo_list[$geography_code])) {
                     $geography_id = $geo_list[$geography_code]['id'];
