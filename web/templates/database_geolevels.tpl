@@ -40,10 +40,10 @@
 					<td class="GeoLevelDesc">
 					</td>
 					<td class="GeoLevelActive">
-						<input type="checkbox" disabled="disabled" />						
+						<input type="checkbox" disabled="disabled" />
 					</td>
 					<td class="HasMap">
-						<input type="checkbox" disabled="disabled" />						
+						<input type="checkbox" disabled="disabled" />
 					</td>
 					<td class="GeoLevelLayerFile hidden">
 					</td>
@@ -177,6 +177,17 @@
 									<td>
 										<select class="GeoLevelLayerParentCode" name="GeoLevelLayerParentCode">
 											<option value="">---</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<span title="{-#msgGeocarto_CharsetTooltip#-}">{-#msgGeocarto_Charset#-}</span>
+									</td>
+									<td>
+										<select class="GeoLevelLayerCharset" name="GeoLevelLayerCharset">
+                      <option value="ISO-8859-1">ISO-8859-1</option>
+											<option value="UTF-8">UTF-8</option>
 										</select>
 									</td>
 								</tr>
