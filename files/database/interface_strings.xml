@@ -3499,6 +3499,18 @@
       <Text LangIsoCode="por"></Text>
       <Text LangIsoCode="fre"></Text>
     </Message>
+    <Message id="msgGeocarto_Charset">
+      <Text LangIsoCode="eng">Character Encoding</Text>
+      <Text LangIsoCode="spa">Codificación de Caracteres</Text>
+      <Text LangIsoCode="por">Codificação de caracteres</Text>
+      <Text LangIsoCode="fre">Encodage de caractères</Text>
+    </Message>
+    <Message id="msgGeocarto_CharsetTooltip">
+      <Text LangIsoCode="eng">Choose the character encoding used for geography names in the DBF file</Text>
+      <Text LangIsoCode="spa">Seleccione la codificación de caracteres usada para los nombres de geografía en el archivo DBF</Text>
+      <Text LangIsoCode="por">Sélectionner le codage des caractères utilisé pour les noms géographiques dans le fichier DBF</Text>
+      <Text LangIsoCode="fre">Selecione a codificação de caracteres usada para os nomes de geografia no arquivo DBF</Text>
+    </Message>
     <Message id="msgGeocarto_Name">
       <Text LangIsoCode="eng">Column of name</Text>
       <Text LangIsoCode="spa">Columna de nombre</Text>
