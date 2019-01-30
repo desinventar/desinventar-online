@@ -724,7 +724,8 @@ class LegacyIndex
                             $DBDir . '/' . $File,
                             $GeoLevel['GeoLevelLayerCode'],
                             $GeoLevel['GeoLevelLayerName'],
-                            $GeoLevel['GeoLevelLayerParentCode']
+                            $GeoLevel['GeoLevelLayerParentCode'],
+                            $GeoLevel['GeoLevelLayerCharset']
                         );
                     }
                 }
