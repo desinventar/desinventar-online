@@ -28,3 +28,4 @@ portal/vendor/*
 .env
 yarn-error.log
 .scannerwork
+.phpunit.result.cache
