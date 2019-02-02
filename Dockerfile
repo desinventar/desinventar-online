@@ -46,7 +46,7 @@ RUN sed -i 's#"files"#"redis"#' /etc/httpd/conf.d/php.conf
 RUN sed -i 's#"/var/lib/php/session"#"tcp://redis:6379"#' /etc/httpd/conf.d/php.conf
 
 COPY . /opt/app
-RUN mkdir -p /opt/app && cp -a /tmp/vendor /opt/app && /bin/rm -rf /opt/app/vendor/jpgraph && composer install
+RUN mkdir -p /opt/app && cp -a /tmp/vendor /opt/app && /bin/rm -rf /opt/app/vendor/desinventar/jpgraph && composer install
 RUN mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app && yarn
 
 RUN make devel-app
