@@ -2,6 +2,8 @@
 
 namespace DesInventar\Common;
 
+use \DesInventar\Common\Util;
+
 use \SimpleXMLElement;
 use \Exception;
 
@@ -105,9 +107,9 @@ class QueryOperations
 
     public function trim($value)
     {
-        $value = (string) $value;
-        $value = preg_replace('/\n/', '', $value);
-        $value = preg_replace('/\t/', '', $value);
+        $util = new Util();
+        $value = $util->replaceChars('/\n/', '', $value);
+        $value = $util->replaceChars('/\t/', '', $value);
         $value = trim($value);
         return $value;
     }

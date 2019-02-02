@@ -53,6 +53,11 @@ class Util
         return $response;
     }
 
+    public function replaceChars($regex, $replacmentValue, $value)
+    {
+        return preg_replace($regex, $replacmentValue, $value);
+    }
+
     public function uuid4()
     {
         $uuid = new UuidFactory();

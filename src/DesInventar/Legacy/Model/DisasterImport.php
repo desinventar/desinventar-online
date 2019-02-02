@@ -1,6 +1,8 @@
 <?php
 namespace DesInventar\Legacy\Model;
 
+use DesInventar\Common\Util;
+
 class DisasterImport extends Disaster
 {
     protected $importFieldDef = '';
@@ -57,9 +59,10 @@ class DisasterImport extends Disaster
 
     public function stringToDIField($prmValue)
     {
-        $prmValue = preg_replace('/\"/', '', $prmValue) . '';
-        $prmValue = preg_replace('/\$/', '', $prmValue) . '';
-        $prmValue = preg_replace('/,/', '.', $prmValue) . '';
+        $util = new Util();
+        $prmValue = $util->replaceChars('/\"/', '', $prmValue);
+        $prmValue = $util->replaceChars('/\$/', '', $prmValue);
+        $prmValue = $util->replaceChars('/,/', '.', $prmValue);
         $prmValue = trim($prmValue);
 
         if ($prmValue === '0') {
@@ -79,11 +82,12 @@ class DisasterImport extends Disaster
 
     public function valueToDIField($prmValue)
     {
+        $util = new Util();
         $value = '';
-        $prmValue = preg_replace('/\"/', '', $prmValue) . '';
-        $prmValue = preg_replace('/\$/', '', $prmValue) . '';
-        $prmValue = preg_replace('/,/', '.', $prmValue) . '';
-        $prmValue = preg_replace('/;/', '.', $prmValue) . '';
+        $prmValue = $util->replaceChars('/\"/', '', $prmValue);
+        $prmValue = $util->replaceChars('/\$/', '', $prmValue);
+        $prmValue = $util->replaceChars('/,/', '.', $prmValue);
+        $prmValue = $util->replaceChars('/;/', '.', $prmValue);
         $prmValue = trim($prmValue);
         if (is_numeric($prmValue)) {
             return $prmValue;
@@ -130,8 +134,9 @@ class DisasterImport extends Disaster
 
     public function filterValue($prmValue)
     {
-        $prmValue = preg_replace('/\$/', '', $prmValue) . '';
-        $prmValue = preg_replace('/,/', '.', $prmValue) . '';
+        $util = new Util();
+        $prmValue = $util->replaceChars('/\$/', '', $prmValue);
+        $prmValue = $util->replaceChars('/,/', '.', $prmValue);
         $prmValue = trim($prmValue);
         return $prmValue;
     }
