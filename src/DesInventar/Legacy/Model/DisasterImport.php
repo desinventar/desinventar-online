@@ -60,9 +60,7 @@ class DisasterImport extends Disaster
     public function stringToDIField($prmValue)
     {
         $util = new Util();
-        $prmValue = $util->replaceChars('/\"/', '', $prmValue);
-        $prmValue = $util->replaceChars('/\$/', '', $prmValue);
-        $prmValue = $util->replaceChars('/,/', '.', $prmValue);
+        $prmValue = $this->filterValue($prmValue);
         $prmValue = trim($prmValue);
 
         if ($prmValue === '0') {
@@ -84,9 +82,7 @@ class DisasterImport extends Disaster
     {
         $util = new Util();
         $value = '';
-        $prmValue = $util->replaceChars('/\"/', '', $prmValue);
-        $prmValue = $util->replaceChars('/\$/', '', $prmValue);
-        $prmValue = $util->replaceChars('/,/', '.', $prmValue);
+        $prmValue = $this->filterValue($prmValue);
         $prmValue = $util->replaceChars('/;/', '.', $prmValue);
         $prmValue = trim($prmValue);
         if (is_numeric($prmValue)) {
@@ -135,6 +131,7 @@ class DisasterImport extends Disaster
     public function filterValue($prmValue)
     {
         $util = new Util();
+        $prmValue = $util->replaceChars('/\"/', '', $prmValue);
         $prmValue = $util->replaceChars('/\$/', '', $prmValue);
         $prmValue = $util->replaceChars('/,/', '.', $prmValue);
         $prmValue = trim($prmValue);

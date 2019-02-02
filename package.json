@@ -30,6 +30,7 @@
     "*.php": [
       "php -l",
       "./vendor/bin/phpcs",
+      "./vendor/bin/phpstan analyse --level 7",
       "git add"
     ]
   },

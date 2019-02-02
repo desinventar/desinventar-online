@@ -98,6 +98,9 @@ class Disaster extends Record
     public function buildEEFieldDef()
     {
         $sFieldDef = '';
+        if (!$this->q) {
+            return '';
+        }
         $sQuery = 'SELECT * FROM EEField ORDER BY EEFieldOrder';
         $i = 0;
         foreach ($result = $this->q->dreg->query($sQuery) as $row) {
