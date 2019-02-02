@@ -50,7 +50,7 @@ if (isset($_SERVER['HTTP_HOST'])) {
         }
         $_SERVER['DISTRO'] = $distro;
     }
-    $config->paths['jpgraph_dir'] = $config->paths['src_dir'] . '/vendor/jpgraph/src';
+    $config->paths['jpgraph_dir'] = $config->paths['src_dir'] . '/vendor/desinventar/jpgraph/src';
 } else {
     // Running a Command Line Script
     $config->flags['env'] = 'command';
