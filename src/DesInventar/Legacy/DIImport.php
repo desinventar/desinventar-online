@@ -181,13 +181,12 @@ class DIImport
             try {
                 $d = $this->getImportObjectFromArray($a);
                 $DisasterSerial = $d->get('DisasterSerial');
-                $this->logger->info(sprintf('%d %s', $line, $DisasterSerial));
+                $this->logger->debug(sprintf('%d %s', $line, $DisasterSerial));
             } catch (\Exception $e) {
                 fprintf(STDERR, '%4d,%s,%s' . "\n", $line, $DisasterSerial, $e->getMessage());
                 $line++;
                 continue;
             }
-
             $line++;
 
             // Validate Effects and Save as DRAFT if needed

@@ -78,12 +78,32 @@ class DisasterImport extends Disaster
         return $value;
     }
 
+    public function currencyToDIField($prmValue)
+    {
+        $util = new Util();
+        $isCurrency = $prmValue[0] === '$';
+        $prmValue = $this->filterValue($prmValue);
+        $lastDotIndex = strrpos($prmValue, '.');
+        if ($lastDotIndex === strlen($prmValue) - 3) {
+            $prmValue = substr($prmValue, 0, $lastDotIndex) . ';' . substr($prmValue, $lastDotIndex + 1);
+        }
+        if ($isCurrency) {
+            $prmValue = $util->replaceChars('/\./', '', $prmValue);
+        }
+        $prmValue = $util->replaceChars('/;/', '.', $prmValue);
+        $prmValue = trim($prmValue);
+        if (is_numeric($prmValue)) {
+            return $prmValue;
+        }
+        return 0;
+    }
+
     public function valueToDIField($prmValue)
     {
         $util = new Util();
         $value = '';
         $prmValue = $this->filterValue($prmValue);
-        $prmValue = $util->replaceChars('/;/', '.', $prmValue);
+        $prmValue = $util->replaceChars('/;/', '', $prmValue);
         $prmValue = trim($prmValue);
         if (is_numeric($prmValue)) {
             return $prmValue;
