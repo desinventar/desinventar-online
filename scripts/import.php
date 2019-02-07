@@ -1,11 +1,13 @@
 <?php
 require_once __DIR__ . '/../web/include/loader.php';
-require_once $config->paths['web_dir'] . '/include/diimport.class.php';
 
 use DesInventar\Common\Util;
 use DesInventar\Legacy\DIImport;
 
 use Fostam\GetOpts\Handler;
+
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 $getopts = new Handler();
 $getopts->addOption('csvFile')->long('csv')->required()->argument('csv-file');
@@ -35,7 +37,10 @@ $us->open($getopts->get('databaseId'));
 
 $doImport = $getopts->get('dry') ? false : true;
 
-$import = new DIImport($us, $params);
+$logger = new Logger('import');
+$logger->pushHandler(new StreamHandler('php://stdout', Logger::DEBUG));
+
+$import = new DIImport($us, $logger, $params);
 $import->importFromCSV($getopts->get('csvFile'), $doImport);
 
 $us->close();

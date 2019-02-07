@@ -4,7 +4,6 @@ use DesInventar\Common\Language;
 use DesInventar\Legacy\DIImport;
 
 require_once('include/loader.php');
-require_once('include/diimport.class.php');
 
 $post = $_POST;
 $get = $_GET;

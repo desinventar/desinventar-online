@@ -8,11 +8,15 @@ use DesInventar\Legacy\Model\GeographyItem;
 
 class DIImport
 {
+    protected $session = null;
+    protected $logger = null;
+    protected $params = null;
     protected $fields = [];
+    protected $geography = [];
     protected $event = [];
     protected $cause = [];
-    protected $geography = [];
     protected $values = [];
+    protected $fixedValues = [];
     protected $defaultParams = [
         'headerCount' => 3,
         'offset' => 0,
@@ -24,9 +28,10 @@ class DIImport
         'fields' => []
     ];
 
-    public function __construct($prmSessionId, $params)
+    public function __construct($prmSessionId, $logger, $params)
     {
         $this->session = $prmSessionId;
+        $this->logger = $logger;
         $this->params = array_merge($this->defaultParams, $params);
         $this->fields = $this->getFieldDef($this->params['fields']);
         $this->geography = $this->params['geography'];
@@ -40,7 +45,7 @@ class DIImport
         if (!file_exists($fileName)) {
             throw new \Exception('Import Error: Cannot find field definition file');
         }
-        $json = file_get_contents($fileName);
+        $json = (string) file_get_contents($fileName);
         $params = json_decode($json, true);
         if (empty($params)) {
             throw new \Exception('Import Error: Cannot import field definitions from file');
@@ -80,13 +85,16 @@ class DIImport
 
     public function validateFromCSV($FileName, $ObjectType)
     {
-        return $this->importFromCSV($FileName, $ObjectType, false);
+        return $this->importFromCSV($FileName, $ObjectType);
     }
 
     public function findGeographyIdByName($fullName, $separator)
     {
         $id = '';
         $names = explode($separator, $fullName);
+        if (!$names) {
+            $names= [];
+        }
         foreach ($names as $name) {
             $id = GeographyItem::getIdByName($this->session, $name, $id);
         }
@@ -107,7 +115,7 @@ class DIImport
             case 'code':
             default:
                 $code = $values[$this->geography['code']];
-                $id = GeographyItem::getIdByCode($this->session, $code, '');
+                $id = GeographyItem::getIdByCode($this->session, $code);
                 if (empty($id)) {
                     throw new \Exception('Error trying to match geography code: ' . $code);
                 }
@@ -151,6 +159,9 @@ class DIImport
 
         $last_line = $last_line + $skipLines + 1;
         $fh = fopen($prmFileCSV, 'r');
+        if (!$fh) {
+            throw new \Exception('Cannot open CSV file');
+        }
         $line = 1;
         while ($line <= $skipLines) {
             $a = fgetcsv($fh, 0, ',');
@@ -166,15 +177,17 @@ class DIImport
                 $a[$i] = trim($a[$i]);
             }
 
+            $DisasterSerial = '';
             try {
                 $d = $this->getImportObjectFromArray($a);
+                $DisasterSerial = $d->get('DisasterSerial');
+                $this->logger->info(sprintf('%d %s', $line, $DisasterSerial));
             } catch (\Exception $e) {
-                fprintf(STDERR, '%4d,%s,%s' . "\n", $line, $d->get('DisasterSerial'), $e->getMessage());
+                fprintf(STDERR, '%4d,%s,%s' . "\n", $line, $DisasterSerial, $e->getMessage());
                 $line++;
                 continue;
             }
 
-            $DisasterSerial = $d->get('DisasterSerial');
             $line++;
 
             // Validate Effects and Save as DRAFT if needed
@@ -247,7 +260,10 @@ class DIImport
     public function loadCSV($ocsv)
     {
         $handle = fopen($ocsv, 'r');
-        $res = array();
+        if (!$handle) {
+            return [];
+        }
+        $res = [];
         while (($data = fgetcsv($handle, 100, ',')) !== false) {
             $res[] = array($data[0], $data[1], $data[2], $data[3], $data[4]);
         }
