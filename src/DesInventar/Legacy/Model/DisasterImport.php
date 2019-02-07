@@ -23,12 +23,12 @@ class DisasterImport extends Disaster
     public function importValueFromArray($fieldName, $values, $indexes)
     {
         $type = $this->getType($fieldName);
-        $value = null;
         if (!is_array($indexes)) {
             $indexes = [ $indexes ];
         }
+        $value = null;
         foreach ($indexes as $index) {
-            if (isset($values[$index])) {
+            if (isset($values[$index]) && strlen((string)$values[$index])> 0) {
                 $value = $this->filterValue($values[$index]);
                 break;
             }

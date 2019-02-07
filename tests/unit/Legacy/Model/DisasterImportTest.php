@@ -16,4 +16,11 @@ final class DisasterImportTest extends TestCase
         $this->assertEquals(0, $import->sectorToDIField('no hubo'));
         $this->assertEquals(10.4, $import->valueToDIField('$10,4'));
     }
+
+    public function testImportValues()
+    {
+        $import = new DisasterImport(null, '', '');
+        $this->assertEquals(-1, $import->importValueFromArray('EffectPeopleAffected', ['Hubo', ''], [0, 1]));
+        $this->assertEquals(-1, $import->importValueFromArray('EffectPeopleAffected', ['', 'hubo'], [0, 1]));
+    }
 }
