@@ -82,6 +82,7 @@ $container['notFoundHandler'] = function ($c) {
 
 $container['errorHandler'] = function ($container) {
     return function (Request $request, Response $response, \Exception $exception) use ($container) {
+        error_log($exception->getMessage());
         return $response->withJson([
             'code' => $exception->getCode(),
             'message' => $exception->getMessage()

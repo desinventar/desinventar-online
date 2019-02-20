@@ -51,10 +51,16 @@ class RegionInfo extends Service
 
     public function deleteAll($keys)
     {
-        $query = $this->factory->newDelete();
-        $query->from('info')
-            ->where('InfoKey IN (:keys)');
-        $sth = $this->pdo->perform($query->getStatement(), ['keys' => $keys]);
-        $sth->execute($query->getBindValues());
+        try {
+            $query = $this->factory->newDelete();
+            $query->from('info')
+                ->where('InfoKey IN (:keys)');
+            $sth = $this->pdo->perform($query->getStatement(), ['keys' => $keys]);
+            $sth->execute($query->getBindValues());
+            return true;
+        } catch (\Exception $e) {
+            error_log('RegionInfo::deleteAll: ' . $e->getMessage());
+            return false;
+        }
     }
 }

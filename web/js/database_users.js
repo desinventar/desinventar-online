@@ -273,6 +273,7 @@ function doDatabaseUsersUpdateOptions(RegionInfo) {
 function doDatabaseUsersPopulateLists() {
   jQuery('body').trigger('cmdMainWaitingShow')
   doDatabaseUsersReset()
+  jQuery('#frmUsers .UserId').empty()
   jQuery.post(
     jQuery('#desinventarURL').val() + '/',
     {
@@ -283,7 +284,6 @@ function doDatabaseUsersPopulateLists() {
       if (parseInt(data.Status) > 0) {
         doDatabaseUsersUpdateOptions(data.RegionInfo)
         doDatabaseUsersPopulateUserRoleList(data.UserRoleList)
-        jQuery('#frmUsers .UserId').empty()
         var list = []
         jQuery.each(data.UserList, function(key, value) {
           list.push({ id: key, text: value })

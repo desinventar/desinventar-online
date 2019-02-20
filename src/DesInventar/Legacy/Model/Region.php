@@ -173,14 +173,20 @@ class Region extends Model
 
     public function update()
     {
-        $iReturn = $this->saveToXML();
-        $this->updateCore();
         $regionId = $this->get('RegionId');
-        if (!empty($regionId)) {
-            $this->session->open($regionId);
-            $this->updateInfo($this->session->q->dreg);
+        if ($regionId === '') {
+            return false;
         }
-        return $iReturn;
+        if (!$this->saveToXML()) {
+            return false;
+        }
+        $this->updateCore();
+        $this->session->open($regionId);
+        if (!$this->updateInfo($this->session->q->dreg)) {
+            error_log('Region::update: Failed to update region info: ' . $regionId);
+            return false;
+        }
+        return true;
     }
 
     public function insertCore()
@@ -230,8 +236,11 @@ class Region extends Model
             return false;
         }
         $infoService = new RegionInfo($conn);
-        $infoService->deleteAll(array_keys($this->oField['info']));
+        if (!$infoService->deleteAll(array_keys($this->oField['info']))) {
+            return false;
+        }
         $infoService->update($this->oField['info']);
+        return true;
     }
 
     public function getAllInfo($conn)
