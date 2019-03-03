@@ -2,16 +2,16 @@
 <div class="contentBlock" id="divLoading">
 </div>
 <div class="contentBlock" id="divDatabasePrivate" style="display:none;">
-	{-include file="database_private.tpl"-}
+  {-include file="database_private.tpl"-}
 </div>
 
 <div class="contentBlock" id="divDatabaseConfiguration" style="display:none;">
-	{-include file="block_dbconfig.tpl"-}
+  {-include file="block_dbconfig.tpl"-}
 </div>
 
 <!-- divQueryResults - Results of queries -->
 <div class="contentBlock" id="divQueryResults" style="display:none;">
-	{-include file="block_queryresults.tpl"-}
+  {-include file="block_queryresults.tpl"-}
 </div> <!-- end div id=divQueryResults -->
 
 <!-- "divRegionList" -->
@@ -29,5 +29,5 @@
 </div>
 
 <div class="contentBlock" id="divAdminDatabase" style="display:none;">
-	{-include file="region.tpl"-}
+  {-include file="region.tpl"-}
 </div>

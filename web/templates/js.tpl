@@ -38,8 +38,8 @@
 <script type="text/javascript" src="{-$desinventarURL-}/js/diadmin.js?version={-$jsversion-}"></script>
 <script type="text/javascript" src="{-$desinventarURL-}/js/init.js?version={-$jsversion-}"></script>
 <script type="text/javascript">
-		// Global hook for all functions
-		var desinventar = {};
-		// Passing configuration parameters to JS
-		desinventar.config = {-$config-}
+    // Global hook for all functions
+    var desinventar = {};
+    // Passing configuration parameters to JS
+    desinventar.config = {-$config-}
 </script>

@@ -8,12 +8,12 @@ document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+ "statcounte
 </script>
 <noscript>
 <div class="statcounter">
-	<a title="free hit counters"
-		href="http://statcounter.com/"
-		target="_blank" rel="noopener"><img class="statcounter"
-		src="http://c.statcounter.com/8536700/0/7a133824/1/"
-		alt="free hit counters">
-	</a>
+  <a title="free hit counters"
+    href="http://statcounter.com/"
+    target="_blank" rel="noopener"><img class="statcounter"
+    src="http://c.statcounter.com/8536700/0/7a133824/1/"
+    alt="free hit counters">
+  </a>
 </div>
 </noscript>
 <!-- End of StatCounter Code for Default Guide -->
