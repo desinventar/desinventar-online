@@ -24,23 +24,23 @@ function doDatabaseExportCreate() {
     }),
     buttons: [
       /*{
-				id: 'btnDatabaseExportSend',
-				text: jQuery('#msgDatabaseExportButtonSend').text(),
-				handler: function()
-				{
-					doDatabaseExportAction();
-				}
-			},
-			{
-				text: jQuery('#msgDatabaseExportButtonClose').text(),
-				handler: function()
-				{
-					jQuery('#fldDatabaseExportSave').val(0);
-					jQuery('#imgDatabaseExportWait').attr('src','');
-					Ext.getCmp('wndDatabaseExport').hide();
-				}
-			}
-			*/
+        id: 'btnDatabaseExportSend',
+        text: jQuery('#msgDatabaseExportButtonSend').text(),
+        handler: function()
+        {
+          doDatabaseExportAction();
+        }
+      },
+      {
+        text: jQuery('#msgDatabaseExportButtonClose').text(),
+        handler: function()
+        {
+          jQuery('#fldDatabaseExportSave').val(0);
+          jQuery('#imgDatabaseExportWait').attr('src','');
+          Ext.getCmp('wndDatabaseExport').hide();
+        }
+      }
+      */
     ] //button
   })
   jQuery('#fldDatabaseExportSave').val(1)

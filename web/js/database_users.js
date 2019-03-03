@@ -139,11 +139,11 @@ function onReadyDatabaseUsers() {
                 jQuery('#frmUsers').trigger('submit')
               }
               /*
-							else
-							{
-								jQuery('#frmUsers .UserRole').val(jQuery('#frmUsers .UserRolePrev').val());
-							}
-							*/
+              else
+              {
+                jQuery('#frmUsers .UserRole').val(jQuery('#frmUsers .UserRolePrev').val());
+              }
+              */
             }
           })
         }

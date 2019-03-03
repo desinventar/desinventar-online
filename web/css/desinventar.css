@@ -1,42 +1,42 @@
 .bnew {
-	background-color: white;
-	background-image: url(../images/newicon.png) !important;
-	background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
+  background-color: white;
+  background-image: url(../images/newicon.png) !important;
+  background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
 }
 .bupd {
-	background-color: white;
-	background-image: url(../images/updateicon.png) !important;
-	background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
+  background-color: white;
+  background-image: url(../images/updateicon.png) !important;
+  background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
 }
 .bcancel {
-	background-color: white;
-	background-image: url(../images/cancelicon.png) !important;
-	background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
+  background-color: white;
+  background-image: url(../images/cancelicon.png) !important;
+  background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
 }
 .bclear {
-	background-color: white;
-	background-image: url(../images/cleanicon.png) !important;
-	background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
+  background-color: white;
+  background-image: url(../images/cleanicon.png) !important;
+  background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
 }
 .bfind {
-	background-color: white;
-	background-image: url(../images/findicon.png) !important;
-	background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
+  background-color: white;
+  background-image: url(../images/findicon.png) !important;
+  background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
 }
 .bsave {
-	background-color: white;
-	background-image: url(../images/saveicon.png) !important;
-	background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
+  background-color: white;
+  background-image: url(../images/saveicon.png) !important;
+  background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
 }
 .bclone {
-	background-color: white;
-	background-image: url(../images/cloneicon.png) !important;
-	background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
+  background-color: white;
+  background-image: url(../images/cloneicon.png) !important;
+  background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
 }
 .bprint {
-	background-color: white;
-	background-image: url(../images/printicon.png) !important;
-	background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
+  background-color: white;
+  background-image: url(../images/printicon.png) !important;
+  background-repeat: no-repeat; background-position: center; width: 22px; height: 22px;
 }
 #loading-mask {
   position: absolute;
@@ -67,278 +67,278 @@
 }
 
 #divLoading {
-	position:absolute;
-	left:0;
-	top:0;
-	width:100%;
-	height:100%;
-	background-color:white;
-	background: url(../images/loading.gif) center center no-repeat;
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  background-color:white;
+  background: url(../images/loading.gif) center center no-repeat;
 }
 
 button {
-	border: 0 none;
-	cursor: pointer;
-	font-family:arial,tahoma,helvetica,cursive; font-size:12px;
-	padding: 0 15px 0 0;
-	text-align: center;
-	height: 24px;
-	line-height: 24px;
-	width: auto;
-	overflow:visible;
+  border: 0 none;
+  cursor: pointer;
+  font-family:arial,tahoma,helvetica,cursive; font-size:12px;
+  padding: 0 15px 0 0;
+  text-align: center;
+  height: 24px;
+  line-height: 24px;
+  width: auto;
+  overflow:visible;
 }
 button.rounded {
-	background: transparent url(../images/bright_off.png ) no-repeat scroll right top;
-	clear: left;
+  background: transparent url(../images/bright_off.png ) no-repeat scroll right top;
+  clear: left;
 }
 button span {
-	display: block;
-	padding: 0 0 0 10px;
-	position: relative;
-	white-space: nowrap;
-	height: 24px;
-	line-height: 24px;
+  display: block;
+  padding: 0 0 0 10px;
+  position: relative;
+  white-space: nowrap;
+  height: 24px;
+  line-height: 24px;
 }
 button.rounded span {
-	background: transparent url(../images/bleft_off.png ) no-repeat scroll left top;
+  background: transparent url(../images/bleft_off.png ) no-repeat scroll left top;
 }
 button.rounded:hover {
-	background: transparent url(../images/bright_on.png ) no-repeat scroll right top;
+  background: transparent url(../images/bright_on.png ) no-repeat scroll right top;
 }
 button.rounded:hover span {
-	background: transparent url(../images/bleft_on.png ) no-repeat scroll left top;
+  background: transparent url(../images/bleft_on.png ) no-repeat scroll left top;
 }
 button::-moz-focus-inner {
-	border: none;
+  border: none;
 }
 
 /* Stylish CSS Buttons */
 //.clear { /* generic container (i.e. div) for floating buttons */
-//	overflow: hidden;
-//	width: 100%;
+//  overflow: hidden;
+//  width: 100%;
 //}
 td.left {
-	text-align:left;
+  text-align:left;
 }
 td.center {
-	text-align:center;
+  text-align:center;
 }
 td.right {
-	text-align:right;
+  text-align:right;
 }
 td.top {
-	vertical-align: top;
+  vertical-align: top;
 }
 td.middle {
-	vertical-align: middle;
+  vertical-align: middle;
 }
 div.center {
-	width:auto;
-	margin-left:auto;
-	margin-right:auto;
-	display:table;
-	text-align:center;
+  width:auto;
+  margin-left:auto;
+  margin-right:auto;
+  display:table;
+  text-align:center;
 }
 div.right {
-	width:auto;
-	margin-left:auto;
-	margin-right:5px;
-	display:table;
-	text-align:right;
+  width:auto;
+  margin-left:auto;
+  margin-right:5px;
+  display:table;
+  text-align:right;
 }
 div.hidden {
-	display:none;
+  display:none;
 }
 
 .hidden {
-	display:none;
+  display:none;
 }
 
 a.button {
-	background: transparent url('../images/bg_button_a.gif') no-repeat scroll top right;
-	color: #444;
-	display: block;
-	float: left;
-	font: normal 11px arial, sans-serif;
-	height: 24px;
-	margin-right: 6px;
-	padding-right: 18px; /* sliding doors padding */
-	text-decoration: none;
+  background: transparent url('../images/bg_button_a.gif') no-repeat scroll top right;
+  color: #444;
+  display: block;
+  float: left;
+  font: normal 11px arial, sans-serif;
+  height: 24px;
+  margin-right: 6px;
+  padding-right: 18px; /* sliding doors padding */
+  text-decoration: none;
 }
 
 a.button span {
-	background: transparent url('../images/bg_button_span.gif') no-repeat;
-	display: block;
-	line-height: 14px;
-	padding: 5px 0 5px 18px;
+  background: transparent url('../images/bg_button_span.gif') no-repeat;
+  display: block;
+  line-height: 14px;
+  padding: 5px 0 5px 18px;
 }
 
 a.button:active {
-	background-position: bottom right;
-	color: #000;
-	outline: none; /* hide dotted outline in Firefox */
+  background-position: bottom right;
+  color: #000;
+  outline: none; /* hide dotted outline in Firefox */
 }
 
 a.button:active span {
-	background-position: bottom left;
-	padding: 6px 0 4px 18px; /* push text down 1px */
+  background-position: bottom left;
+  padding: 6px 0 4px 18px; /* push text down 1px */
 }
 #tooltip {
-	z-index: 15000;
-	background-color: #e9f2ff;
-	border: 1px solid #8eaace;
-	border-radius: 3px;
-	color: #444;
-	box-shadow: 3px 3px 3px #aaa;
-	padding: 3px;
-	max-width: 250px;
+  z-index: 15000;
+  background-color: #e9f2ff;
+  border: 1px solid #8eaace;
+  border-radius: 3px;
+  color: #444;
+  box-shadow: 3px 3px 3px #aaa;
+  padding: 3px;
+  max-width: 250px;
 }
 body {
-	/* direction: rtl; */
-	font-family:arial,tahoma,helvetica,cursive;
-	font-size:11px;
-	margin:0;
-	padding:0;
-	border:0 none;
-	height:100%;
+  /* direction: rtl; */
+  font-family:arial,tahoma,helvetica,cursive;
+  font-size:11px;
+  margin:0;
+  padding:0;
+  border:0 none;
+  height:100%;
 }
 h2 {
-	font-family:arial,tahoma,helvetica,cursive;
-	font-size:14px;
+  font-family:arial,tahoma,helvetica,cursive;
+  font-size:14px;
 }
 p  {
-	font-family:arial,tahoma,helvetica,cursive;
-	font-size:11px;
-	margin:5px;
+  font-family:arial,tahoma,helvetica,cursive;
+  font-size:11px;
+  margin:5px;
 }
 b {
-	font-family:arial,tahoma,helvetica,cursive;
-	font-size:11px;
-	margin:5px;
+  font-family:arial,tahoma,helvetica,cursive;
+  font-size:11px;
+  margin:5px;
 }
 li {
-	font-family:arial,tahoma,helvetica,cursive;
-	font-size:11px;
+  font-family:arial,tahoma,helvetica,cursive;
+  font-size:11px;
 }
 .line, .qq-upload-button-text {
-	font-family:arial,tahoma,helvetica,cursive;
-	font-size:11px; color:#000000;
-	background-color:#ffffff;
-	border-style:solid;
-	border-width:1px;
-	border-color:#bbbbbb;
+  font-family:arial,tahoma,helvetica,cursive;
+  font-size:11px; color:#000000;
+  background-color:#ffffff;
+  border-style:solid;
+  border-width:1px;
+  border-color:#bbbbbb;
 }
 
 a.line {
-	text-decoration:none;
-	padding:3px;
+  text-decoration:none;
+  padding:3px;
 }
 
 .qq-upload-button-text {
-	float: left;
+  float: left;
 }
 input.btn {
-	font-family:arial,tahoma,helvetica,cursive;
-	font-size:14px; color:#000000; background-color:#bbbbbb; }
+  font-family:arial,tahoma,helvetica,cursive;
+  font-size:14px; color:#000000; background-color:#bbbbbb; }
 input.bb:hover {
-	border-color: #900; background: #fff; color: #600; border-right:2px solid #900; border-bottom:2px solid #900}
+  border-color: #900; background: #fff; color: #600; border-right:2px solid #900; border-bottom:2px solid #900}
 input.bb:active {
-	border-color: red; background: #fff; color: red; }
+  border-color: red; background: #fff; color: red; }
 input.medium {
-	font-family:arial,tahoma,helvetica,cursive; font-size:12px;
-	color:#000000; background-color:#ffffff; border-style:solid;
-	border-width:1px; border-color:#bbbbbb; }
+  font-family:arial,tahoma,helvetica,cursive; font-size:12px;
+  color:#000000; background-color:#ffffff; border-style:solid;
+  border-width:1px; border-color:#bbbbbb; }
 select   {
-	font-family:arial,tahoma,helvetica,cursive; font-size:11px;
-	color:#000000; background-color:#ffffff; border-style:solid;
-	border-width:1px; }
+  font-family:arial,tahoma,helvetica,cursive; font-size:11px;
+  color:#000000; background-color:#ffffff; border-style:solid;
+  border-width:1px; }
 select.small  {
-	font-family:arial,tahoma,helvetica,cursive; font-size:10px;
-	color:#000000; background-color:#ffffff; border-style:solid;
-	border-width:1px; }
+  font-family:arial,tahoma,helvetica,cursive; font-size:10px;
+  color:#000000; background-color:#ffffff; border-style:solid;
+  border-width:1px; }
 span.select2-dropdown {
-	z-index: 15000;
+  z-index: 15000;
 }
 #divDatabaseCreateWin .line {
-	line-height: 20px;
+  line-height: 20px;
 }
 option  {
-	font-family:arial,tahoma,helvetica,cursive; font-size:11px;
-	color:#000000; background-color:#ffffff; border-style:none;
-	border-width:1px; border-color:#bbbbbb; }
+  font-family:arial,tahoma,helvetica,cursive; font-size:11px;
+  color:#000000; background-color:#ffffff; border-style:none;
+  border-width:1px; border-color:#bbbbbb; }
 option.small {
-	font-family:arial,tahoma,helvetica,cursive; font-size:10px;
-	color:#000000; background-color:#ffffff; border-style:none;
-	border-width:1px; border-color:#bbbbbb; }
+  font-family:arial,tahoma,helvetica,cursive; font-size:10px;
+  color:#000000; background-color:#ffffff; border-style:none;
+  border-width:1px; border-color:#bbbbbb; }
 textarea {
-	font-family:arial,tahoma,helvetica,cursive; font-size:11px;
-	color:#000000; background-color:#ffffff; border-style:solid;
-	border-width:1px; border-color:#bbbbbb; }
+  font-family:arial,tahoma,helvetica,cursive; font-size:11px;
+  color:#000000; background-color:#ffffff; border-style:solid;
+  border-width:1px; border-color:#bbbbbb; }
 a.info        { position:relative; z-index:24; text-decoration:none; }
 a.info:hover  { z-index:25; }
 a.info span.tooltip { display: none; }
 a.info:hover span {
-	display:block; position:absolute; top:2em; left:2em; width:15em;
-	border:1px solid #333; background-color:#ff0; color:#000;
-	text-align: center; }
-a.info:link 		{ color: #333333;  }
-a.info:visited	{ color: #333333;  }
+  display:block; position:absolute; top:2em; left:2em; width:15em;
+  border:1px solid #333; background-color:#ff0; color:#000;
+  text-align: center; }
+a.info:link     { color: #333333;  }
+a.info:visited  { color: #333333;  }
 .dlgmsg     { color:#42929d; text-align:right; font-size:8pt; }
 .datacardStatusMsg { text-align:left; color:#dbab28; }
-.disabled 	{ background-color: #cccccc; }
+.disabled   { background-color: #cccccc; }
 .dwin {
-	overflow: auto; padding:0px; margin: 0px; border-style:solid;
-	border-width:1px; border-color:#bbbbbb;
-	word-wrap: break-word;
+  overflow: auto; padding:0px; margin: 0px; border-style:solid;
+  border-width:1px; border-color:#bbbbbb;
+  word-wrap: break-word;
 }
 b.required {
-	color: darkred;
+  color: darkred;
 }
 a.RegionListItem { text-decoration: none; }
 table.grid {
-	font-family:Lucida Grande, Verdana;
-	font-size:11px; width:100%; border: 0px solid #ccc;
+  font-family:Lucida Grande, Verdana;
+  font-size:11px; width:100%; border: 0px solid #ccc;
 }
 table.col {
-	font-family:Lucida Grande, Verdana;
-	overflow: auto; font-size:11px; border: thin solid;
+  font-family:Lucida Grande, Verdana;
+  overflow: auto; font-size:11px; border: thin solid;
 }
 table.width100 {
-	width:100%;
+  width:100%;
 }
 table.QueryCustom .ListItem {
-	font-family:arial,tahoma,helvetica,cursive;
-	font-size:11px; color:#000000; background-color:#ffffff;
-	border-style:none; border-width:1px; border-color:#bbbbbb;
+  font-family:arial,tahoma,helvetica,cursive;
+  font-size:11px; color:#000000; background-color:#ffffff;
+  border-style:none; border-width:1px; border-color:#bbbbbb;
 }
 
 .GridCellNumber {
-	border-right: thin solid #ccc; text-align: right;
-	font-size:11px;
-	width:auto;
-	min-width:10px;
-	max-width:120px;
-	margin-left:2px;
-	margin-right:2px;
+  border-right: thin solid #ccc; text-align: right;
+  font-size:11px;
+  width:auto;
+  min-width:10px;
+  max-width:120px;
+  margin-left:2px;
+  margin-right:2px;
 }
 
 .GridCellText {
-	border-right: thin solid #ccc;
-	text-align: left;
-	font-size:11px;
-	max-width:200px;
-	overflow-x:hidden;
-	overflow-y:auto;
+  border-right: thin solid #ccc;
+  text-align: left;
+  font-size:11px;
+  max-width:200px;
+  overflow-x:hidden;
+  overflow-y:auto;
 }
 
 div.RegionInfo .title {
-	font-family:arial,tahoma,helvetica,cursive;
-	font-weight:bold;
-	font-size:12px;
+  font-family:arial,tahoma,helvetica,cursive;
+  font-weight:bold;
+  font-size:12px;
 }
 div.RegionInfo .text {
-	font-family:arial,tahoma,helvetica,cursive;
-	font-size:11px;
+  font-family:arial,tahoma,helvetica,cursive;
+  font-size:11px;
 }
 
 .header     {
@@ -368,364 +368,364 @@ p.grid {
 }
 
 textarea.hlp {
-	background-color: #ffffff; padding: 5px; font-size: 12px;
-	font-family: Lucida Grande, Geneva, Verdana, Helvetica, Arial, sans-serif;
-	/*-moz-border-radius: 0px 10px 0px 10px; border-radius: 0px 10px 0px 10px;*/
+  background-color: #ffffff; padding: 5px; font-size: 12px;
+  font-family: Lucida Grande, Geneva, Verdana, Helvetica, Arial, sans-serif;
+  /*-moz-border-radius: 0px 10px 0px 10px; border-radius: 0px 10px 0px 10px;*/
 }
 
 /* Configuration internal window in Desconsultar */
 table.conf { border: 15px solid #fff; width: 100%; height: 100%; }
 .fixw { width:250px; }
 #qsearch, #qresults {
-	position:absolute; padding:5px; background-color: #fff; visibility:hidden;
-	z-index:100; overflow: auto; margin: 1px; border: 3px outset gray;
+  position:absolute; padding:5px; background-color: #fff; visibility:hidden;
+  z-index:100; overflow: auto; margin: 1px; border: 3px outset gray;
 }
 input.sub {
-	font-family:arial,tahoma,helvetica,cursive; font-size:11px;
-	font-weight:bolder; color:#000000; background-color:#ffffff;
-	border-style:solid; border-width:1px; border-color:#ffffff; width: 120px;
+  font-family:arial,tahoma,helvetica,cursive; font-size:11px;
+  font-weight:bolder; color:#000000; background-color:#ffffff;
+  border-style:solid; border-width:1px; border-color:#ffffff; width: 120px;
 }
 disabled, .disabled {
-	background-color: #ddd;
+  background-color: #ddd;
 }
 enabled {
-	background-color: #fff;
+  background-color: #fff;
 }
 .submenu {
-	position:absolute; visibility: hidden; border:1px solid #777;
-	border-bottom-width:0; font:11px Trebuchet MS, sans-serif;
-	line-height: 18px; z-index: 728; background-color: #fff; width: 95px;
+  position:absolute; visibility: hidden; border:1px solid #777;
+  border-bottom-width:0; font:11px Trebuchet MS, sans-serif;
+  line-height: 18px; z-index: 728; background-color: #fff; width: 95px;
 }
 .submenu a {
-	display:block; border-bottom:1px solid #777;
-	padding: 1px 0; text-decoration:none;
+  display:block; border-bottom:1px solid #777;
+  padding: 1px 0; text-decoration:none;
 }
 .submenu a:hover {
-	background-color: #d3d3d3; color: #000;
+  background-color: #d3d3d3; color: #000;
 }
-a	{	color:#1e90ff; }
-a:hover	{	color:#00008b; }
+a  {  color:#1e90ff; }
+a:hover  {  color:#00008b; }
 .rememberpasswordlink {
-	font-family:arial,tahoma,helvetica,cursive;
-	font-size:9px;
+  font-family:arial,tahoma,helvetica,cursive;
+  font-size:9px;
 }
 #divDatabaseBackup h2 {
-	font-family:arial,tahoma,helvetica,cursive;
-	font-size:18px;
-	padding: 5px;
+  font-family:arial,tahoma,helvetica,cursive;
+  font-size:18px;
+  padding: 5px;
 }
 #divDatabaseBackup table {
-	padding: 11px;
+  padding: 11px;
 }
 #divDatabaseBackup {
-	margin: 40px;
-	border: 1px solid black;
+  margin: 40px;
+  border: 1px solid black;
 }
 #divDatabaseImport h2 {
-	font-family:arial,tahoma,helvetica,cursive;
-	font-size:18px;
-	padding: 0px;
+  font-family:arial,tahoma,helvetica,cursive;
+  font-size:18px;
+  padding: 0px;
 }
 #divDatabaseImport table {
-	padding: 1px;
+  padding: 1px;
 }
 #divDatabaseImport {
-	margin: 40px;
-	border: 1px solid black;
+  margin: 40px;
+  border: 1px solid black;
 }
 #divDBEdit {
-	margin: 40px;
-	border: 1px solid black;
+  margin: 40px;
+  border: 1px solid black;
 }
 #tdGraphParamAxis1 {
-	width:180px;
+  width:180px;
 }
 #tdGraphParamCenter {
-	width:180px;
+  width:180px;
 }
 #tdGraphParamAxis2 {
-	width:180px;
+  width:180px;
 }
 #divDatacardStatusMsg {
 }
 .MapMousePosition {
-	position: absolute;
-	left: 45px;
-	top: 2px;
+  position: absolute;
+  left: 45px;
+  top: 2px;
 }
 .databaseListTitle {
-	font:bold 20px Trebuchet MS, sans-serif;
-	color:#202020; letter-spacing:-1px;
+  font:bold 20px Trebuchet MS, sans-serif;
+  color:#202020; letter-spacing:-1px;
 }
 .databaseTitle {
-	font:bold 15px Trebuchet MS, sans-serif;
-	color:#202020; letter-spacing:-1px;
-	padding:0px 10px;
+  font:bold 15px Trebuchet MS, sans-serif;
+  color:#202020; letter-spacing:-1px;
+  padding:0px 10px;
 }
 td a.RegionLink {
-	text-decoration:none;
-	font:bold 11px Trebuchet MS, sans-serif;
-	padding:0px 20px;
+  text-decoration:none;
+  font:bold 11px Trebuchet MS, sans-serif;
+  padding:0px 20px;
 }
 .clsDatabaseUsers {
-	max-width:600px;
-	height:100%;
+  max-width:600px;
+  height:100%;
 }
 .clsDatabaseUsers a.delete {
-	text-decoration: none;
+  text-decoration: none;
 }
 .clsGeolevels {
-	max-width:600px;
-	width:100%;
-	height:100%;
+  max-width:600px;
+  width:100%;
+  height:100%;
 }
 #divGeolevels_List {
-	max-width:600px;
-	heigh:100px;
+  max-width:600px;
+  heigh:100px;
 }
 #tblGeolevels_List td.GeoLevelDesc {
-	width:40%;
+  width:40%;
 }
 #tblGeolevels_List td.GeoLevelActive,td.HasMap {
-	text-align     :center;
-	vertical-align : text-top;
+  text-align     :center;
+  vertical-align : text-top;
 }
 #divGeolevels_Status {
-	max-width:600px;
+  max-width:600px;
 }
 #divGeolevels_Edit {
-	width:auto;
-	max-width:600px;
-	height:100%;
+  width:auto;
+  max-width:600px;
+  height:100%;
 }
 #frmGeolevel .GeoLevelName,.GeoLevelDesc {
-	width:400px;
-	margin:3px;
+  width:400px;
+  margin:3px;
 }
 #divDatacard .GeoLevelSelect {
-	width:180px;
-	background-color:#eee;
+  width:180px;
+  background-color:#eee;
 }
 #divDatacard .EventId {
-	width:180px;
+  width:180px;
 }
 #divDatacard .CauseId {
-	width:180px;
+  width:180px;
 }
 .ext-el-mask {
-	background-color: #eeeeee;
+  background-color: #eeeeee;
 }
 #btnResultSaveOptions {
-	position:absolute;
+  position:absolute;
 }
 div.UserChangePasswd {
-	max-width:400px;
+  max-width:400px;
 }
 div.Geography div.ListHeader {
-	margin-top: 10px;
-	margin-bottom:10px;
+  margin-top: 10px;
+  margin-bottom:10px;
 }
 div.Geography table.List {
-	width:100%;
-	max-width:600px;
+  width:100%;
+  max-width:600px;
 }
 div.Geography table.List thead td {
-	border: solid 1px;
+  border: solid 1px;
 }
 .helptext {
-	color:#42929d;
+  color:#42929d;
 }
 div.QueryDesign .fieldLabel {
-	font-weight:bold;
+  font-weight:bold;
 }
 div.QueryDesign select.Event {
-	max-width:400px;
+  max-width:400px;
 }
 .nowrap {
-	white-space: nowrap;
+  white-space: nowrap;
 }
 .bold {
-	font-weight:bold;
+  font-weight:bold;
 }
 div.DatabaseDelete {
-	margin:10px;
+  margin:10px;
 }
 div.DatabaseDelete div.status {
-	margin-top:10px;
-	margin-bottom:10px;
+  margin-top:10px;
+  margin-bottom:10px;
 }
 div.DatabaseDelete div.buttons {
-	margin-top:10px;
-	margin-bottom:10px;
+  margin-top:10px;
+  margin-bottom:10px;
 }
 dl.accordion{margin:0;padding:0;overflow:hidden;}
 dl.accordion dt
 {
-	-moz-border-radius-topLeft:6px;
-	_width:100%;/*hack for IE*/
-	cursor:pointer;display:block;cursor:hand;margin:0;padding:0;padding:3px 6px;background:#999480;color:white;
-	border-left:solid 1px #cccccc;
-	border-top:solid 1px #f0f0f0;
-	border-right:solid 1px #222222;
-	border-bottom:solid 1px #222222;
-	filter:progid:DXImageTransform.Microsoft.Gradient(  GradientType=1,StartColorStr=#999480, EndColorStr=#DBDBDB);
+  -moz-border-radius-topLeft:6px;
+  _width:100%;/*hack for IE*/
+  cursor:pointer;display:block;cursor:hand;margin:0;padding:0;padding:3px 6px;background:#999480;color:white;
+  border-left:solid 1px #cccccc;
+  border-top:solid 1px #f0f0f0;
+  border-right:solid 1px #222222;
+  border-bottom:solid 1px #222222;
+  filter:progid:DXImageTransform.Microsoft.Gradient(  GradientType=1,StartColorStr=#999480, EndColorStr=#DBDBDB);
 }
 
 dl.accordion dt.hover
 {
-	filter:progid:DXImageTransform.Microsoft.Gradient(  GradientType=1,StartColorStr=#555555, EndColorStr=#DBDBDB);
-	background:#555555;
+  filter:progid:DXImageTransform.Microsoft.Gradient(  GradientType=1,StartColorStr=#555555, EndColorStr=#DBDBDB);
+  background:#555555;
 }
 
 dl.accordion dt.collapsing
 {
-	filter:progid:DXImageTransform.Microsoft.Gradient(  GradientType=1,StartColorStr=#31324A, EndColorStr=#DBDBDB);
-	background:#31324A;
+  filter:progid:DXImageTransform.Microsoft.Gradient(  GradientType=1,StartColorStr=#31324A, EndColorStr=#DBDBDB);
+  background:#31324A;
 }
 dl.accordion dt.expanding
 {
-	filter:progid:DXImageTransform.Microsoft.Gradient(  GradientType=1,StartColorStr=#333366, EndColorStr=#DBDBDB);
-	background:#333366;
+  filter:progid:DXImageTransform.Microsoft.Gradient(  GradientType=1,StartColorStr=#333366, EndColorStr=#DBDBDB);
+  background:#333366;
 }
 
 dl.accordion dd{margin:0;padding:0;border:solid 1px #aaaaaa;border-bottom:inset 3px #aaaaaa;padding:6px;line-height:1.4;overflow:auto;}
 dl.accordion dd.default{height:auto;display:block;}
 dl.accordion dd.default_close{display:none;}
 p.right {
-	text-align: right;
+  text-align: right;
 }
 table.QueryCustom {
-	width:100%;
+  width:100%;
 }
 div.DatabaseEvents {
-	max-width:600px;
-	height:100%;
+  max-width:600px;
+  height:100%;
 }
 div.DatabaseEvents table.Edit {
-	width:80%;
+  width:80%;
 }
 div.DatabaseCauses {
-	max-width:600px;
-	height:100%;
+  max-width:600px;
+  height:100%;
 }
 div.DatabaseCauses table.Edit {
-	width:80%;
+  width:80%;
 }
 div.DatabaseUpload td.label {
-	width:25%;
+  width:25%;
 }
 div.DatabaseUpload td.value {
-	width:50%;
+  width:50%;
 }
 div.Datacard .headerLeft {
-	width:45%;
+  width:45%;
 }
 div.Datacard .headerRight {
-	width:55%;
+  width:55%;
 }
 div.Datacard .columnLeft {
-	width:30px;
-	border:0px;
-	margin-right:10px;
+  width:30px;
+  border:0px;
+  margin-right:10px;
 }
 div.Datacard table.Datacard {
-	border: 1px solid #bbbbbb;
-	border-radius:3px;
-	width:100%;
+  border: 1px solid #bbbbbb;
+  border-radius:3px;
+  width:100%;
 }
 div.Results .header {
-	background:#bbbbbb;
+  background:#bbbbbb;
 }
 div.UserLogin table {
-	margin-left:auto;
-	margin-right:auto;
-	text-align:center;
+  margin-left:auto;
+  margin-right:auto;
+  text-align:center;
 }
 .region-info-edit {
-	width: 100%;
-	max-width: 1024px;
-	display: flex;
-	flex: 1;
-	flex-direction: column;
+  width: 100%;
+  max-width: 1024px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
 .region-info-edit-top {
-	width: 100%;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 .region-info-edit-top .label {
-	flex-basis: 15%;
-	flex-grow: 0
+  flex-basis: 15%;
+  flex-grow: 0
 }
 .region-info-edit-top .field {
-	flex-basis: 85%;
-	flex-grow: 1
+  flex-basis: 85%;
+  flex-grow: 1
 }
 .region-info-edit-top .buttons {
-	align-self: center;
-	flex-grow: 2;
-	display: flex;
-	justify-content: center;
+  align-self: center;
+  flex-grow: 2;
+  display: flex;
+  justify-content: center;
 }
 .region-info-edit-top .buttons .line {
-	padding-left: 15px;
-	padding-right: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 .region-info-edit-bottom {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .region-info-edit-info {
-	width: 100%;
+  width: 100%;
 }
 .region-info-edit-label {
-	color: darkred;
-	margin: 0px;
+  color: darkred;
+  margin: 0px;
 }
 .region-info-edit-label-expand {
-	font-size: 18px;
+  font-size: 18px;
 }
 .region-info-edit-row {
-	padding: 5px;
+  padding: 5px;
 }
 .region-info-edit-field {
-	height: 60px;
+  height: 60px;
 }
 .region-info-edit-field.expanded {
-	height: 60vh;
+  height: 60vh;
 }
 .region-info-edit-text {
-	width: 90%;
-	height: 100%;
+  width: 90%;
+  height: 100%;
 }
 .region-info-edit-input {
-	width: 90%;
+  width: 90%;
 }
 
 .datacard-eefield-column {
-	vertical-align: top;
-	text-align: left;
+  vertical-align: top;
+  text-align: left;
 }
 .datacard-eefield-group {
-	margin-right: 20px;
-	margin-bottom: 8px;
-	text-align: left;
+  margin-right: 20px;
+  margin-bottom: 8px;
+  text-align: left;
 }
 
 .datacard-eefield-group > span {
-	font-size: 11px;
-	font-family: sans-serif,serif;
-	margin-left: 0px;
-	width: 100%;
+  font-size: 11px;
+  font-family: sans-serif,serif;
+  margin-left: 0px;
+  width: 100%;
 }
 .datacard-eefield-group > input {
-	font-size: 11px;
-	margin-left: 0px;
-	width: 100%;
+  font-size: 11px;
+  margin-left: 0px;
+  width: 100%;
 }
 table.UserList {
-	table-layout: auto;
-	width: 100%;
+  table-layout: auto;
+  width: 100%;
 }

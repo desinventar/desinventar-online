@@ -10,9 +10,9 @@ DSTFILE1=${DSTDIR}/desinventar-online.tar.gz
 EXCLUDE=${BINDIR}/exclude.txt
 cd ${SRCDIR}
 tar -zcf ${DSTFILE1} api composer.* config files src web \
-	--exclude-from=${EXCLUDE} \
-	--exclude lib \
-	--exclude vendor \
-	--exclude portal \
-	--exclude config/config_local.php \
-	--exclude ./scripts
+  --exclude-from=${EXCLUDE} \
+  --exclude lib \
+  --exclude vendor \
+  --exclude portal \
+  --exclude config/config_local.php \
+  --exclude ./scripts

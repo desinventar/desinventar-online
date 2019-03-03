@@ -38,9 +38,9 @@ function onReadyAdminDatabaseEdit() {
     // Validate Fields
     var bContinue = true
     /*
-		var a=new Array('CountryIso','RegionLabel','LangIsoCode','RegionUserAdmin');
-		var bContinue = checkForm('frmRegionEdit',a, '{-#errmsgfrm#-}');
-		*/
+    var a=new Array('CountryIso','RegionLabel','LangIsoCode','RegionUserAdmin');
+    var bContinue = checkForm('frmRegionEdit',a, '{-#errmsgfrm#-}');
+    */
     var RegionStatus = jQuery('#frmRegionEdit_RegionStatus')
     RegionStatus.val(0)
     if (jQuery('#frmRegionEdit_RegionActive').attr('checked')) {

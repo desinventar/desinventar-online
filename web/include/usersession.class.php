@@ -364,19 +364,19 @@ class UserSession
     {
         $myData = array();
         $sQuery = '
-			SELECT
-				RegionAuth.UserId,
-				RegionAuth.AuthAuxValue AS UserRole,
-				User.UserFullName AS UserName,
-				User.UserEMail
-			FROM RegionAuth
-			INNER JOIN User ON RegionAuth.UserId=User.UserId AND User.UserActive>0
-			WHERE
-				RegionAuth.AuthKey="ROLE" AND
-				RegionAuth.AuthAuxValue != "NONE" AND
-				RegionAuth.RegionId=:RegionId
-			ORDER BY User.UserFullName
-		';
+            SELECT
+                RegionAuth.UserId,
+                RegionAuth.AuthAuxValue AS UserRole,
+                User.UserFullName AS UserName,
+                User.UserEMail
+            FROM RegionAuth
+            INNER JOIN User ON RegionAuth.UserId=User.UserId AND User.UserActive>0
+            WHERE
+                RegionAuth.AuthKey="ROLE" AND
+                RegionAuth.AuthAuxValue != "NONE" AND
+                RegionAuth.RegionId=:RegionId
+            ORDER BY User.UserFullName
+    ';
         $sth = $this->q->core->prepare($sQuery);
         $sth->bindParam(':RegionId', $prmRegionId, PDO::PARAM_STR);
         try {
@@ -461,11 +461,11 @@ class UserSession
                     $myAnswer,
                     "DesInventar - Password Reminder",
                     "Dear User\nYour login information for DesInventar is:\n" .
-                     "  UserId : " . $row['UserId'] . "\n" .
-                     "  Passwd : " . $myPasswd . "\n" .
-                     "\n\n" .
-                     "Sincerely,\n" .
-                     "   The DesInventar Team",
+                    "  UserId : " . $row['UserId'] . "\n" .
+                    "  Passwd : " . $myPasswd . "\n" .
+                    "\n\n" .
+                    "Sincerely,\n" .
+                    "   The DesInventar Team",
                     "From: support@desinventar.org"
                 );
             }
@@ -495,8 +495,8 @@ class UserSession
                 $sQuery .= "(RegionId='')";
             }
             $sQuery .= " AND (UserId='" . $this->UserId . "') " .
-                       " AND AuthKey='ROLE'" .
-                       " ORDER BY UserId,RegionId";
+                    " AND AuthKey='ROLE'" .
+                    " ORDER BY UserId,RegionId";
             $sth = $this->q->core->prepare($sQuery);
             try {
                 $this->q->core->beginTransaction();

@@ -8,9 +8,9 @@ function onReadyGeography() {
   jQuery('div.Geography table.List tbody')
     .on('dblclick', 'tr', function() {
       /*
-		var geography_id = jQuery('.GeographyId', this).text();
-		jQuery('div.Geography select.ListHeader:data("GeoLevelId=' + jQuery('.GeographyLevel', this).text() + '")').val(geography_id).change();
-		*/
+    var geography_id = jQuery('.GeographyId', this).text();
+    jQuery('div.Geography select.ListHeader:data("GeoLevelId=' + jQuery('.GeographyLevel', this).text() + '")').val(geography_id).change();
+    */
     })
     .on('mouseover', 'tr', function(event) {
       jQuery(this).addClass('highlight')

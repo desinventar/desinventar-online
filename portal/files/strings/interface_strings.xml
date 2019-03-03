@@ -1,527 +1,527 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <StringList>
-	<Group name="user">
-		<Message id="msgUser_Username">
-			<Text LangIsoCode="eng">User</Text>
-			<Text LangIsoCode="spa">Usuario</Text>
-			<Text LangIsoCode="por">Usuário</Text>
-			<Text LangIsoCode="fre">Utilisateur</Text>
-		</Message>
-		<Message id="msgUser_Password">
-			<Text LangIsoCode="eng">Password</Text>
-			<Text LangIsoCode="spa">Clave</Text>
-			<Text LangIsoCode="por">Senha</Text>
-			<Text LangIsoCode="fre">Mot de passe</Text>
-		</Message>
-		<Message id="msgUser_Login">
-			<Text LangIsoCode="eng">Login</Text>
-			<Text LangIsoCode="spa">Entrar</Text>
-			<Text LangIsoCode="por">Entrar</Text>
-			<Text LangIsoCode="fre">Se connecter</Text>
-		</Message>
-		<Message id="msgUser_EmptyFields">
-			<Text LangIsoCode="eng">Fields cannot be empty</Text>
-			<Text LangIsoCode="spa">Los campos no pueden estar vacios</Text>
-			<Text LangIsoCode="por">Campos não pode ser vazio</Text>
-			<Text LangIsoCode="fre">Les champs ne peuvent pas être vide</Text>
-		</Message>
-		<Message id="msgUser_LoggedIn">
-			<Text LangIsoCode="eng">Login successfull.</Text>
-			<Text LangIsoCode="spa">Ingreso exitoso.</Text>
-			<Text LangIsoCode="por">Succesfull login</Text>
-			<Text LangIsoCode="fre">Succesfull connexion</Text>
-		</Message>
-		<Message id="msgUser_InvalidPasswd">
-			<Text LangIsoCode="eng">Invalid user name or password</Text>
-			<Text LangIsoCode="spa">Usuario o clave incorrecta</Text>
-			<Text LangIsoCode="por">Inválido ou senha</Text>
-			<Text LangIsoCode="fre">Nom d&quot;utilisateur ou mot de passe</Text>
-		</Message>
-	</Group>
-	<Group name="portal">
-		<Message id="di_slogan">
-			<Text LangIsoCode="eng">Inventory system of the effects of disasters</Text>
-			<Text LangIsoCode="spa">Sistema de inventario de efectos de desastres</Text>
-			<Text LangIsoCode="por">Sistema de inventário de efeitos de desastres</Text>
-			<Text LangIsoCode="fre">Système d&quot;inventaire des effets des catastrophes</Text>
-		</Message>
-		<Message id="tdititle">
-			<Text LangIsoCode="eng">Inventory system of the effects of disasters</Text>
-			<Text LangIsoCode="spa">Sistema de inventario de efectos de desastres</Text>
-			<Text LangIsoCode="por">Sistema de inventário de efeitos de desastres</Text>
-			<Text LangIsoCode="fre">Système d&quot;inventaire des effets des catastrophes</Text>
-		</Message>
-		<Message id="tcountries">
-			<Text LangIsoCode="eng">Regions</Text>
-			<Text LangIsoCode="spa">Regiones</Text>
-			<Text LangIsoCode="por">Regiões</Text>
-			<Text LangIsoCode="fre">Régions</Text>
-		</Message>
-		<Message id="tvirtualreg">
-			<Text LangIsoCode="eng">Virtual regions</Text>
-			<Text LangIsoCode="spa">Regiones Virtuales</Text>
-			<Text LangIsoCode="por">Regiões Virtuais</Text>
-			<Text LangIsoCode="fre">Régions Virtuelles</Text>
-		</Message>
-		<Message id="hlostconn">
-			<Text LangIsoCode="eng">Failed communication. Check your internet connection.</Text>
-			<Text LangIsoCode="spa">Comunicación fallida: Verifique su conexión a Internet</Text>
-			<Text LangIsoCode="por">Comunicação falida: Verifique sua conexão à Internet</Text>
-			<Text LangIsoCode="fre">Échec de la communication. Vérifiez votre connexion Internet</Text>
-		</Message>
-		<Message id="tdbavail">
-			<Text LangIsoCode="eng">Available effect's databases</Text>
-			<Text LangIsoCode="spa">Bases de efectos disponibles</Text>
-			<Text LangIsoCode="por">Bancos de efeitos disponíveis</Text>
-			<Text LangIsoCode="fre">Inventaires de Désastres disponibles</Text>
-		</Message>
-		<Message id="tdbnotavail">
-			<Text LangIsoCode="eng">There are no databases available at the moment.</Text>
-			<Text LangIsoCode="spa">No hay bases de datos disponibles por el momento</Text>
-			<Text LangIsoCode="por">Não há bancos de dados disponíveis no momento</Text>
-			<Text LangIsoCode="fre">Il n&quot;existe pas de bases de données disponibles</Text>
-		</Message>
-		<Message id="tmoreinfo">
-			<Text LangIsoCode="eng">More information</Text>
-			<Text LangIsoCode="spa">Mas información</Text>
-			<Text LangIsoCode="por">Mais informação</Text>
-			<Text LangIsoCode="fre">Plus d&quot;informations</Text>
-		</Message>
-		<Message id="talerdiwin">
-			<Text LangIsoCode="eng">DesInventar is being used. Are you sure do you want to quit?</Text>
-			<Text LangIsoCode="spa">DesInventar está en uso. ¿Está seguro que desea salir?</Text>
-			<Text LangIsoCode="por">DesInventar está sendo usado. Tem certeza que deseja sair?</Text>
-			<Text LangIsoCode="fre">Êtes-vous sûr de vouloir arrêter de fumer?</Text>
-		</Message>
-		<Message id="tstartpage">
-			<Text LangIsoCode="eng">Home</Text>
-			<Text LangIsoCode="spa">Inicio</Text>
-			<Text LangIsoCode="por">Início</Text>
-			<Text LangIsoCode="fre">Accueil</Text>
-		</Message>
-		<Message id="tlang">
-			<Text LangIsoCode="eng">Language</Text>
-			<Text LangIsoCode="spa">Idioma</Text>
-			<Text LangIsoCode="por">Idioma</Text>
-			<Text LangIsoCode="fre">Langue</Text>
-		</Message>
-		<Message id="tusers">
-			<Text LangIsoCode="eng">Users</Text>
-			<Text LangIsoCode="spa">Usuarios</Text>
-			<Text LangIsoCode="por">Usuários</Text>
-			<Text LangIsoCode="fre">Utilisateur</Text>
-		</Message>
-		<Message id="msgUserAccess">
-			<Text LangIsoCode="eng">Users&quot;s Access</Text>
-			<Text LangIsoCode="spa">Acceso a Usuarios</Text>
-			<Text LangIsoCode="por">Acessos de usuários</Text>
-			<Text LangIsoCode="fre">L&quot;accès des utilisateurs</Text>
-		</Message>
-		<Message id="msgUserLogin">
-			<Text LangIsoCode="eng">Login</Text>
-			<Text LangIsoCode="spa">Ingresar</Text>
-			<Text LangIsoCode="por">Entrada</Text>
-			<Text LangIsoCode="fre">Connexion</Text>
-		</Message>
-		<Message id="msgUserLogout">
-			<Text LangIsoCode="eng">Logout</Text>
-			<Text LangIsoCode="spa">Salir</Text>
-			<Text LangIsoCode="por">Logout</Text>
-			<Text LangIsoCode="fre">Déconnexion</Text>
-		</Message>
-		<Message id="msgRegionList">
-			<Text LangIsoCode="eng">Region List</Text>
-			<Text LangIsoCode="spa">Listado Regiones</Text>
-			<Text LangIsoCode="por">Lista de banco de dados</Text>
-			<Text LangIsoCode="fre">La liste de base de données</Text>
-		</Message>
-		<Message id="msgRegionOpenDB">
-			<Text LangIsoCode="eng">Open database</Text>
-			<Text LangIsoCode="spa">Abrir la base de datos</Text>
-			<Text LangIsoCode="por">Abrir banco de dados</Text>
-			<Text LangIsoCode="fre">Ouvrir base de données</Text>
-		</Message>
-		<Message id="tcredits">
-			<Text LangIsoCode="eng">In strategic alliance with</Text>
-			<Text LangIsoCode="spa">En alianza estratégica con</Text>
-			<Text LangIsoCode="por">Em convenio estratégico com</Text>
-			<Text LangIsoCode="fre">En alliance stratégique avec</Text>
-		</Message>
-		<Message id="msgRegionAfrica">
-			<Text LangIsoCode="eng">Africa</Text>
-			<Text LangIsoCode="spa">África</Text>
-			<Text LangIsoCode="por">África</Text>
-			<Text LangIsoCode="fre">Afrique</Text>
-		</Message>
-		<Message id="msgRegionAsia">
-			<Text LangIsoCode="eng">Asia</Text>
-			<Text LangIsoCode="spa">Asia</Text>
-			<Text LangIsoCode="por">Ásia</Text>
-			<Text LangIsoCode="fre">Asie</Text>
-		</Message>
-		<Message id="msgRegionSouthAmerica">
-			<Text LangIsoCode="eng">South America</Text>
-			<Text LangIsoCode="spa">América del Sur</Text>
-			<Text LangIsoCode="por">América do Sul</Text>
-			<Text LangIsoCode="fre">Amérique du Sud</Text>
-		</Message>
-		<Message id="msgRegionCentralAmerica">
-			<Text LangIsoCode="eng">Central America</Text>
-			<Text LangIsoCode="spa">Centro América</Text>
-			<Text LangIsoCode="por">América Central</Text>
-			<Text LangIsoCode="fre">Amérique centrale</Text>
-		</Message>
-		<Message id="msgRegionNorthAmerica">
-			<Text LangIsoCode="eng">North America</Text>
-			<Text LangIsoCode="spa">Norte América</Text>
-			<Text LangIsoCode="por">América do Norte</Text>
-			<Text LangIsoCode="fre">Amérique du Nord</Text>
-		</Message>
-		<Message id="msgRegionSouthernCone">
-			<Text LangIsoCode="eng">Southern Cone</Text>
-			<Text LangIsoCode="spa">Cono Sur</Text>
-			<Text LangIsoCode="por">Cone Sul</Text>
-			<Text LangIsoCode="fre">Cône Sud</Text>
-		</Message>
-		<Message id="msgregionGranChaco">
-			<Text LangIsoCode="eng">Gran Chaco</Text>
-			<Text LangIsoCode="spa">Gran Chaco</Text>
-			<Text LangIsoCode="por">Grande Chaco</Text>
-			<Text LangIsoCode="fre">Gran Chaco</Text>
-		</Message>
-		<Message id="msgRegionAndean">
-			<Text LangIsoCode="eng">Andean Subregion</Text>
-			<Text LangIsoCode="spa">SubRegión Andina</Text>
-			<Text LangIsoCode="por"></Text>
-			<Text LangIsoCode="fre">Sous-région andine</Text>
-		</Message>
-		<Message id="msgRegionCities">
-			<Text LangIsoCode="eng">Cities</Text>
-			<Text LangIsoCode="spa">Ciudades</Text>
-			<Text LangIsoCode="por">Cidades</Text>
-			<Text LangIsoCode="fre">Villes</Text>
-		</Message>
-		<Message id="msgRegionGreatAmericanChaco">
-			<Text LangIsoCode="eng">Great American Chaco</Text>
-			<Text LangIsoCode="spa">Gran Chaco Americano</Text>
-			<Text LangIsoCode="por">Grande Chaco Americano</Text>
-			<Text LangIsoCode="fre">Gran Chaco Americano</Text>
-		</Message>
-		<Message id="msgRegionLatinAmerica">
-			<Text LangIsoCode="eng">Latin America</Text>
-			<Text LangIsoCode="spa">América Latina</Text>
-			<Text LangIsoCode="por">América Latina</Text>
-			<Text LangIsoCode="fre">Amérique latine</Text>
-		</Message>
-		<Message id="msgRegionCaribbean">
-			<Text LangIsoCode="eng">Caribbean Region</Text>
-			<Text LangIsoCode="spa">Región Caribe</Text>
-			<Text LangIsoCode="por">Região do Caribe</Text>
-			<Text LangIsoCode="fre">La région des Caraïbes</Text>
-		</Message>
-		<Message id="msgRegionPacific">
-			<Text LangIsoCode="eng">South Pacific</Text>
-			<Text LangIsoCode="spa">Pacífico Sur</Text>
-			<Text LangIsoCode="por">Pacífico Sul</Text>
-			<Text LangIsoCode="fre">Pacifique Sud</Text>
-		</Message>
-		<Message id="tcopyright">
-			<Text LangIsoCode="eng">(c) 1998-2018 Corporación OSSO - Colombia</Text>
-			<Text LangIsoCode="spa">(c) 1998-2018 Corporación OSSO - Colombia</Text>
-			<Text LangIsoCode="por">(c) 1998-2018 Corporação OSSO - Colômbia</Text>
-			<Text LangIsoCode="fre">(c) 1998-2018 Corporación OSSO - Colombia</Text>
-		</Message>
-		<Message id="tcountryARG">
-			<Text LangIsoCode="eng">Argentina</Text>
-			<Text LangIsoCode="spa">Argentina</Text>
-			<Text LangIsoCode="por">Argentina</Text>
-			<Text LangIsoCode="fre">Argentine</Text>
-		</Message>
-		<Message id="tcountryBLZ">
-			<Text LangIsoCode="eng">Belize</Text>
-			<Text LangIsoCode="spa">Belice</Text>
-			<Text LangIsoCode="por">Belize</Text>
-			<Text LangIsoCode="fre">Belize</Text>
-		</Message>
-		<Message id="tcountryBOL">
-			<Text LangIsoCode="eng">Bolivia</Text>
-			<Text LangIsoCode="spa">Bolivia</Text>
-			<Text LangIsoCode="por">Bolívia</Text>
-			<Text LangIsoCode="fre">Bolivie</Text>
-		</Message>
-		<Message id="tcountryBRB">
-			<Text LangIsoCode="eng">Barbados</Text>
-			<Text LangIsoCode="spa">Barbados</Text>
-			<Text LangIsoCode="por">Barbados</Text>
-			<Text LangIsoCode="fre">Barbade</Text>
-		</Message>
-		<Message id="tcountryCHL">
-			<Text LangIsoCode="eng">Chile</Text>
-			<Text LangIsoCode="spa">Chile</Text>
-			<Text LangIsoCode="por">Chile</Text>
-			<Text LangIsoCode="fre">Chile</Text>
-		</Message>
-		<Message id="tcountryCOL">
-			<Text LangIsoCode="eng">Colombia</Text>
-			<Text LangIsoCode="spa">Colombia</Text>
-			<Text LangIsoCode="por">Colômbia</Text>
-			<Text LangIsoCode="fre">Colombie</Text>
-		</Message>
-		<Message id="tcountryCRI">
-			<Text LangIsoCode="eng">Costa Rica</Text>
-			<Text LangIsoCode="spa">Costa Rica</Text>
-			<Text LangIsoCode="por">Costa Rica</Text>
-			<Text LangIsoCode="fre">Costa Rica</Text>
-		</Message>
-		<Message id="tcountryDOM">
-			<Text LangIsoCode="eng">Dominican Rep.</Text>
-			<Text LangIsoCode="spa">Rep. Dominicana</Text>
-			<Text LangIsoCode="por">Rep. Dominicana</Text>
-			<Text LangIsoCode="fre">Rép Dominicaine</Text>
-		</Message>
-		<Message id="tcountryECU">
-			<Text LangIsoCode="eng">Ecuador</Text>
-			<Text LangIsoCode="spa">Ecuador</Text>
-			<Text LangIsoCode="por">Equador</Text>
-			<Text LangIsoCode="fre">Équateur</Text>
-		</Message>
-		<Message id="tcountryGTM">
-			<Text LangIsoCode="eng">Guatemala</Text>
-			<Text LangIsoCode="spa">Guatemala</Text>
-			<Text LangIsoCode="por">Guatemala</Text>
-			<Text LangIsoCode="fre">Guatemala</Text>
-		</Message>
-		<Message id="tcountryGUY">
-			<Text LangIsoCode="eng">Guyana</Text>
-			<Text LangIsoCode="spa">Guyana</Text>
-			<Text LangIsoCode="por">Guiana</Text>
-			<Text LangIsoCode="fre">Guyana</Text>
-		</Message>
-		<Message id="tcountryHND">
-			<Text LangIsoCode="eng">Honduras</Text>
-			<Text LangIsoCode="spa">Honduras</Text>
-			<Text LangIsoCode="por">Honduras</Text>
-			<Text LangIsoCode="fre">Honduras</Text>
-		</Message>
-		<Message id="tcountryHTI">
-			<Text LangIsoCode="eng">Haiti</Text>
-			<Text LangIsoCode="spa">Haití</Text>
-			<Text LangIsoCode="por">Haiti</Text>
-			<Text LangIsoCode="fre">Haïti</Text>
-		</Message>
-		<Message id="tcountryIDN">
-			<Text LangIsoCode="eng">Indonesia</Text>
-			<Text LangIsoCode="spa">Indonesia</Text>
-			<Text LangIsoCode="por">Indonésia</Text>
-			<Text LangIsoCode="fre">Indonésie</Text>
-		</Message>
-		<Message id="tcountryIND">
-			<Text LangIsoCode="eng">India</Text>
-			<Text LangIsoCode="spa">India</Text>
-			<Text LangIsoCode="por">India</Text>
-			<Text LangIsoCode="fre">Inde</Text>
-		</Message>
-		<Message id="tcountryIRN">
-			<Text LangIsoCode="eng">Iran</Text>
-			<Text LangIsoCode="spa">Irán</Text>
-			<Text LangIsoCode="por">Iran</Text>
-			<Text LangIsoCode="fre">Iran</Text>
-		</Message>
-		<Message id="tcountryJAM">
-			<Text LangIsoCode="eng">Jamaica</Text>
-			<Text LangIsoCode="spa">Jamaica</Text>
-			<Text LangIsoCode="por">Jamaica</Text>
-			<Text LangIsoCode="fre">Jamaïque</Text>
-		</Message>
-		<Message id="tcountryJOR">
-			<Text LangIsoCode="eng">Jordan</Text>
-			<Text LangIsoCode="spa">Jordania</Text>
-			<Text LangIsoCode="por">Jordan</Text>
-			<Text LangIsoCode="fre">Jordan</Text>
-		</Message>
-		<Message id="tcountryLKA">
-			<Text LangIsoCode="eng">Sri Lanka</Text>
-			<Text LangIsoCode="spa">Sri Lanka</Text>
-			<Text LangIsoCode="por">Sri Lanka</Text>
-			<Text LangIsoCode="fre">Sri Lanka</Text>
-		</Message>
-		<Message id="tcountryMLI">
-			<Text LangIsoCode="eng">Mali</Text>
-			<Text LangIsoCode="spa">Mali</Text>
-			<Text LangIsoCode="por">Mali</Text>
-			<Text LangIsoCode="fre">Mali</Text>
-		</Message>
-		<Message id="tcountryMEX">
-			<Text LangIsoCode="eng">Mexico</Text>
-			<Text LangIsoCode="spa">México</Text>
-			<Text LangIsoCode="por">México</Text>
-			<Text LangIsoCode="fre">Mexique</Text>
-		</Message>
-		<Message id="tcountryMOZ">
-			<Text LangIsoCode="eng">Mozambique</Text>
-			<Text LangIsoCode="spa">Mozambique</Text>
-			<Text LangIsoCode="por">Moçambique</Text>
-			<Text LangIsoCode="fre">Mozambique</Text>
-		</Message>
-		<Message id="tcountryNPL">
-			<Text LangIsoCode="eng">Nepal</Text>
-			<Text LangIsoCode="spa">Nepal</Text>
-			<Text LangIsoCode="por">Nepal</Text>
-			<Text LangIsoCode="fre">Népal</Text>
-		</Message>
-		<Message id="tcountryNIC">
-			<Text LangIsoCode="eng">Nicaragua</Text>
-			<Text LangIsoCode="spa">Nicaragua</Text>
-			<Text LangIsoCode="por">Nicarágua</Text>
-			<Text LangIsoCode="fre">Nicaragua</Text>
-		</Message>
-		<Message id="tcountryPAN">
-			<Text LangIsoCode="eng">Panama</Text>
-			<Text LangIsoCode="spa">Panamá</Text>
-			<Text LangIsoCode="por">Panamá</Text>
-			<Text LangIsoCode="fre">Panama</Text>
-		</Message>
-		<Message id="tcountryPER">
-			<Text LangIsoCode="eng">Peru</Text>
-			<Text LangIsoCode="spa">Perú</Text>
-			<Text LangIsoCode="por">Perú</Text>
-			<Text LangIsoCode="fre">Pérou</Text>
-		</Message>
-		<Message id="tcountryPRY">
-			<Text LangIsoCode="eng">Paraguay</Text>
-			<Text LangIsoCode="spa">Paraguay</Text>
-			<Text LangIsoCode="por">Paraguai</Text>
-			<Text LangIsoCode="fre">Paraguay</Text>
-		</Message>
-		<Message id="tcountrySLV">
-			<Text LangIsoCode="eng">El Salvador</Text>
-			<Text LangIsoCode="spa">El Salvador</Text>
-			<Text LangIsoCode="por">El Salvador</Text>
-			<Text LangIsoCode="fre">El Salvador</Text>
-		</Message>
-		<Message id="tcountryTTO">
-			<Text LangIsoCode="eng">Trinidad and Tobago</Text>
-			<Text LangIsoCode="spa">Trinidad y Tobago</Text>
-			<Text LangIsoCode="por">Trinidad e Tobago</Text>
-			<Text LangIsoCode="fre">Trinité-et-Tobago</Text>
-		</Message>
-		<Message id="tcountryURY">
-			<Text LangIsoCode="eng">Uruguay</Text>
-			<Text LangIsoCode="spa">Uruguay</Text>
-			<Text LangIsoCode="por">Uruguai</Text>
-			<Text LangIsoCode="fre">Uruguay</Text>
-		</Message>
-		<Message id="tcountryUSA">
-			<Text LangIsoCode="eng">U.S.A</Text>
-			<Text LangIsoCode="spa">EE.UU</Text>
-			<Text LangIsoCode="por">EE.UU</Text>
-			<Text LangIsoCode="fre">EE.UU</Text>
-		</Message>
-		<Message id="tcountryVEN">
-			<Text LangIsoCode="eng">Venezuela</Text>
-			<Text LangIsoCode="spa">Venezuela</Text>
-			<Text LangIsoCode="por">Venezuela</Text>
-			<Text LangIsoCode="fre">Venezuela</Text>
-		</Message>
-		<Message id="tcountryVUT">
-			<Text LangIsoCode="eng">Vanuatu</Text>
-			<Text LangIsoCode="spa">Vanuatu</Text>
-			<Text LangIsoCode="por">Vanuatu</Text>
-			<Text LangIsoCode="fre">Vanuatu</Text>
-		</Message>
-		<Message id="txtVersion">
-			<Text LangIsoCode="eng">Version</Text>
-			<Text LangIsoCode="spa">Versión</Text>
-			<Text LangIsoCode="por">Versão</Text>
-			<Text LangIsoCode="fre">Version</Text>
-		</Message>
-	</Group>
-	<Group name="region_list">
-		<Message id="txtRoleADMINREGION">
-			<Text LangIsoCode="eng">Manager</Text>
-			<Text LangIsoCode="spa">Administrador</Text>
-			<Text LangIsoCode="por">Administrador</Text>
-			<Text LangIsoCode="fre">Administrateur</Text>
-		</Message>
-		<Message id="txtRoleSUPERVISOR">
-			<Text LangIsoCode="eng">Supervisor</Text>
-			<Text LangIsoCode="spa">Supervisor</Text>
-			<Text LangIsoCode="por">Supervisor</Text>
-			<Text LangIsoCode="fre">Superviseur</Text>
-		</Message>
-		<Message id="txtRoleUSER">
-			<Text LangIsoCode="eng">Feeder</Text>
-			<Text LangIsoCode="spa">Alimentador</Text>
-			<Text LangIsoCode="por">Alimentador</Text>
-			<Text LangIsoCode="fre">Alimentation</Text>
-		</Message>
-		<Message id="txtRoleOBSERVER">
-			<Text LangIsoCode="eng">Observer</Text>
-			<Text LangIsoCode="spa">Observador</Text>
-			<Text LangIsoCode="por">Observador</Text>
-			<Text LangIsoCode="fre">Observateur</Text>
-		</Message>
-		<Message id="txtRoleNONE">
-			<Text LangIsoCode="eng">Public Databases</Text>
-			<Text LangIsoCode="spa">Bases Públicas</Text>
-			<Text LangIsoCode="por">Bases de datos públicas</Text>
-			<Text LangIsoCode="fre">Bases de données publiques</Text>
-		</Message>
-		<Message id="txtAvailableDB">
-			<Text LangIsoCode="eng">Available disaster inventories</Text>
-			<Text LangIsoCode="spa">Inventarios de desastres disponibles</Text>
-			<Text LangIsoCode="por">Desastres inventários disponíveis</Text>
-			<Text LangIsoCode="fre">Inventaires de désastres disponibles</Text>
-		</Message>
-	</Group>
-	<Group name="region_info">
-		<Message id="RegionDatabasePeriod">
-			<Text LangIsoCode="eng">Period</Text>
-			<Text LangIsoCode="spa">Periodo</Text>
-			<Text LangIsoCode="por">Período</Text>
-			<Text LangIsoCode="fre">Période</Text>
-		</Message>
-		<Message id="trepnum">
-			<Text LangIsoCode="eng">Records</Text>
-			<Text LangIsoCode="spa">Número de fichas</Text>
-			<Text LangIsoCode="por">Formulários</Text>
-			<Text LangIsoCode="fre">Cartes de données</Text>
-		</Message>
-		<Message id="tlastupd">
-			<Text LangIsoCode="eng">Last update</Text>
-			<Text LangIsoCode="spa">Última actualización</Text>
-			<Text LangIsoCode="por">Última atualização</Text>
-			<Text LangIsoCode="fre">Dernière mise á jour</Text>
-		</Message>
-		<Message id="RegionDatacardPeriod">
-			<Text LangIsoCode="eng">Datacard Period</Text>
-			<Text LangIsoCode="spa">Periodo Fichas</Text>
-			<Text LangIsoCode="por">Período de datos</Text>
-			<Text LangIsoCode="fre">Période de cartes de données</Text>
-		</Message>
-		<Message id="msgInfoGeneral">
-			<Text LangIsoCode="eng">General Information</Text>
-			<Text LangIsoCode="spa">Información General</Text>
-			<Text LangIsoCode="por">Informações Gerais</Text>
-			<Text LangIsoCode="fre">Informations générales</Text>
-		</Message>
-		<Message id="msgInfoCredits">
-			<Text LangIsoCode="eng">Credits</Text>
-			<Text LangIsoCode="spa">Créditos</Text>
-			<Text LangIsoCode="por">Créditos</Text>
-			<Text LangIsoCode="fre">Crédits</Text>
-		</Message>
-		<Message id="msgInfoSources">
-			<Text LangIsoCode="eng">Sources</Text>
-			<Text LangIsoCode="spa">Fuentes</Text>
-			<Text LangIsoCode="por">Fontes</Text>
-			<Text LangIsoCode="fre">Sources</Text>
-		</Message>
-		<Message id="msgInfoSynopsis">
-			<Text LangIsoCode="eng">Synopsis</Text>
-			<Text LangIsoCode="spa">Sinopsis</Text>
-			<Text LangIsoCode="por">Sinopse</Text>
-			<Text LangIsoCode="fre">Synopsis</Text>
-		</Message>
-	</Group>
+  <Group name="user">
+    <Message id="msgUser_Username">
+      <Text LangIsoCode="eng">User</Text>
+      <Text LangIsoCode="spa">Usuario</Text>
+      <Text LangIsoCode="por">Usuário</Text>
+      <Text LangIsoCode="fre">Utilisateur</Text>
+    </Message>
+    <Message id="msgUser_Password">
+      <Text LangIsoCode="eng">Password</Text>
+      <Text LangIsoCode="spa">Clave</Text>
+      <Text LangIsoCode="por">Senha</Text>
+      <Text LangIsoCode="fre">Mot de passe</Text>
+    </Message>
+    <Message id="msgUser_Login">
+      <Text LangIsoCode="eng">Login</Text>
+      <Text LangIsoCode="spa">Entrar</Text>
+      <Text LangIsoCode="por">Entrar</Text>
+      <Text LangIsoCode="fre">Se connecter</Text>
+    </Message>
+    <Message id="msgUser_EmptyFields">
+      <Text LangIsoCode="eng">Fields cannot be empty</Text>
+      <Text LangIsoCode="spa">Los campos no pueden estar vacios</Text>
+      <Text LangIsoCode="por">Campos não pode ser vazio</Text>
+      <Text LangIsoCode="fre">Les champs ne peuvent pas être vide</Text>
+    </Message>
+    <Message id="msgUser_LoggedIn">
+      <Text LangIsoCode="eng">Login successfull.</Text>
+      <Text LangIsoCode="spa">Ingreso exitoso.</Text>
+      <Text LangIsoCode="por">Succesfull login</Text>
+      <Text LangIsoCode="fre">Succesfull connexion</Text>
+    </Message>
+    <Message id="msgUser_InvalidPasswd">
+      <Text LangIsoCode="eng">Invalid user name or password</Text>
+      <Text LangIsoCode="spa">Usuario o clave incorrecta</Text>
+      <Text LangIsoCode="por">Inválido ou senha</Text>
+      <Text LangIsoCode="fre">Nom d&quot;utilisateur ou mot de passe</Text>
+    </Message>
+  </Group>
+  <Group name="portal">
+    <Message id="di_slogan">
+      <Text LangIsoCode="eng">Inventory system of the effects of disasters</Text>
+      <Text LangIsoCode="spa">Sistema de inventario de efectos de desastres</Text>
+      <Text LangIsoCode="por">Sistema de inventário de efeitos de desastres</Text>
+      <Text LangIsoCode="fre">Système d&quot;inventaire des effets des catastrophes</Text>
+    </Message>
+    <Message id="tdititle">
+      <Text LangIsoCode="eng">Inventory system of the effects of disasters</Text>
+      <Text LangIsoCode="spa">Sistema de inventario de efectos de desastres</Text>
+      <Text LangIsoCode="por">Sistema de inventário de efeitos de desastres</Text>
+      <Text LangIsoCode="fre">Système d&quot;inventaire des effets des catastrophes</Text>
+    </Message>
+    <Message id="tcountries">
+      <Text LangIsoCode="eng">Regions</Text>
+      <Text LangIsoCode="spa">Regiones</Text>
+      <Text LangIsoCode="por">Regiões</Text>
+      <Text LangIsoCode="fre">Régions</Text>
+    </Message>
+    <Message id="tvirtualreg">
+      <Text LangIsoCode="eng">Virtual regions</Text>
+      <Text LangIsoCode="spa">Regiones Virtuales</Text>
+      <Text LangIsoCode="por">Regiões Virtuais</Text>
+      <Text LangIsoCode="fre">Régions Virtuelles</Text>
+    </Message>
+    <Message id="hlostconn">
+      <Text LangIsoCode="eng">Failed communication. Check your internet connection.</Text>
+      <Text LangIsoCode="spa">Comunicación fallida: Verifique su conexión a Internet</Text>
+      <Text LangIsoCode="por">Comunicação falida: Verifique sua conexão à Internet</Text>
+      <Text LangIsoCode="fre">Échec de la communication. Vérifiez votre connexion Internet</Text>
+    </Message>
+    <Message id="tdbavail">
+      <Text LangIsoCode="eng">Available effect's databases</Text>
+      <Text LangIsoCode="spa">Bases de efectos disponibles</Text>
+      <Text LangIsoCode="por">Bancos de efeitos disponíveis</Text>
+      <Text LangIsoCode="fre">Inventaires de Désastres disponibles</Text>
+    </Message>
+    <Message id="tdbnotavail">
+      <Text LangIsoCode="eng">There are no databases available at the moment.</Text>
+      <Text LangIsoCode="spa">No hay bases de datos disponibles por el momento</Text>
+      <Text LangIsoCode="por">Não há bancos de dados disponíveis no momento</Text>
+      <Text LangIsoCode="fre">Il n&quot;existe pas de bases de données disponibles</Text>
+    </Message>
+    <Message id="tmoreinfo">
+      <Text LangIsoCode="eng">More information</Text>
+      <Text LangIsoCode="spa">Mas información</Text>
+      <Text LangIsoCode="por">Mais informação</Text>
+      <Text LangIsoCode="fre">Plus d&quot;informations</Text>
+    </Message>
+    <Message id="talerdiwin">
+      <Text LangIsoCode="eng">DesInventar is being used. Are you sure do you want to quit?</Text>
+      <Text LangIsoCode="spa">DesInventar está en uso. ¿Está seguro que desea salir?</Text>
+      <Text LangIsoCode="por">DesInventar está sendo usado. Tem certeza que deseja sair?</Text>
+      <Text LangIsoCode="fre">Êtes-vous sûr de vouloir arrêter de fumer?</Text>
+    </Message>
+    <Message id="tstartpage">
+      <Text LangIsoCode="eng">Home</Text>
+      <Text LangIsoCode="spa">Inicio</Text>
+      <Text LangIsoCode="por">Início</Text>
+      <Text LangIsoCode="fre">Accueil</Text>
+    </Message>
+    <Message id="tlang">
+      <Text LangIsoCode="eng">Language</Text>
+      <Text LangIsoCode="spa">Idioma</Text>
+      <Text LangIsoCode="por">Idioma</Text>
+      <Text LangIsoCode="fre">Langue</Text>
+    </Message>
+    <Message id="tusers">
+      <Text LangIsoCode="eng">Users</Text>
+      <Text LangIsoCode="spa">Usuarios</Text>
+      <Text LangIsoCode="por">Usuários</Text>
+      <Text LangIsoCode="fre">Utilisateur</Text>
+    </Message>
+    <Message id="msgUserAccess">
+      <Text LangIsoCode="eng">Users&quot;s Access</Text>
+      <Text LangIsoCode="spa">Acceso a Usuarios</Text>
+      <Text LangIsoCode="por">Acessos de usuários</Text>
+      <Text LangIsoCode="fre">L&quot;accès des utilisateurs</Text>
+    </Message>
+    <Message id="msgUserLogin">
+      <Text LangIsoCode="eng">Login</Text>
+      <Text LangIsoCode="spa">Ingresar</Text>
+      <Text LangIsoCode="por">Entrada</Text>
+      <Text LangIsoCode="fre">Connexion</Text>
+    </Message>
+    <Message id="msgUserLogout">
+      <Text LangIsoCode="eng">Logout</Text>
+      <Text LangIsoCode="spa">Salir</Text>
+      <Text LangIsoCode="por">Logout</Text>
+      <Text LangIsoCode="fre">Déconnexion</Text>
+    </Message>
+    <Message id="msgRegionList">
+      <Text LangIsoCode="eng">Region List</Text>
+      <Text LangIsoCode="spa">Listado Regiones</Text>
+      <Text LangIsoCode="por">Lista de banco de dados</Text>
+      <Text LangIsoCode="fre">La liste de base de données</Text>
+    </Message>
+    <Message id="msgRegionOpenDB">
+      <Text LangIsoCode="eng">Open database</Text>
+      <Text LangIsoCode="spa">Abrir la base de datos</Text>
+      <Text LangIsoCode="por">Abrir banco de dados</Text>
+      <Text LangIsoCode="fre">Ouvrir base de données</Text>
+    </Message>
+    <Message id="tcredits">
+      <Text LangIsoCode="eng">In strategic alliance with</Text>
+      <Text LangIsoCode="spa">En alianza estratégica con</Text>
+      <Text LangIsoCode="por">Em convenio estratégico com</Text>
+      <Text LangIsoCode="fre">En alliance stratégique avec</Text>
+    </Message>
+    <Message id="msgRegionAfrica">
+      <Text LangIsoCode="eng">Africa</Text>
+      <Text LangIsoCode="spa">África</Text>
+      <Text LangIsoCode="por">África</Text>
+      <Text LangIsoCode="fre">Afrique</Text>
+    </Message>
+    <Message id="msgRegionAsia">
+      <Text LangIsoCode="eng">Asia</Text>
+      <Text LangIsoCode="spa">Asia</Text>
+      <Text LangIsoCode="por">Ásia</Text>
+      <Text LangIsoCode="fre">Asie</Text>
+    </Message>
+    <Message id="msgRegionSouthAmerica">
+      <Text LangIsoCode="eng">South America</Text>
+      <Text LangIsoCode="spa">América del Sur</Text>
+      <Text LangIsoCode="por">América do Sul</Text>
+      <Text LangIsoCode="fre">Amérique du Sud</Text>
+    </Message>
+    <Message id="msgRegionCentralAmerica">
+      <Text LangIsoCode="eng">Central America</Text>
+      <Text LangIsoCode="spa">Centro América</Text>
+      <Text LangIsoCode="por">América Central</Text>
+      <Text LangIsoCode="fre">Amérique centrale</Text>
+    </Message>
+    <Message id="msgRegionNorthAmerica">
+      <Text LangIsoCode="eng">North America</Text>
+      <Text LangIsoCode="spa">Norte América</Text>
+      <Text LangIsoCode="por">América do Norte</Text>
+      <Text LangIsoCode="fre">Amérique du Nord</Text>
+    </Message>
+    <Message id="msgRegionSouthernCone">
+      <Text LangIsoCode="eng">Southern Cone</Text>
+      <Text LangIsoCode="spa">Cono Sur</Text>
+      <Text LangIsoCode="por">Cone Sul</Text>
+      <Text LangIsoCode="fre">Cône Sud</Text>
+    </Message>
+    <Message id="msgregionGranChaco">
+      <Text LangIsoCode="eng">Gran Chaco</Text>
+      <Text LangIsoCode="spa">Gran Chaco</Text>
+      <Text LangIsoCode="por">Grande Chaco</Text>
+      <Text LangIsoCode="fre">Gran Chaco</Text>
+    </Message>
+    <Message id="msgRegionAndean">
+      <Text LangIsoCode="eng">Andean Subregion</Text>
+      <Text LangIsoCode="spa">SubRegión Andina</Text>
+      <Text LangIsoCode="por"></Text>
+      <Text LangIsoCode="fre">Sous-région andine</Text>
+    </Message>
+    <Message id="msgRegionCities">
+      <Text LangIsoCode="eng">Cities</Text>
+      <Text LangIsoCode="spa">Ciudades</Text>
+      <Text LangIsoCode="por">Cidades</Text>
+      <Text LangIsoCode="fre">Villes</Text>
+    </Message>
+    <Message id="msgRegionGreatAmericanChaco">
+      <Text LangIsoCode="eng">Great American Chaco</Text>
+      <Text LangIsoCode="spa">Gran Chaco Americano</Text>
+      <Text LangIsoCode="por">Grande Chaco Americano</Text>
+      <Text LangIsoCode="fre">Gran Chaco Americano</Text>
+    </Message>
+    <Message id="msgRegionLatinAmerica">
+      <Text LangIsoCode="eng">Latin America</Text>
+      <Text LangIsoCode="spa">América Latina</Text>
+      <Text LangIsoCode="por">América Latina</Text>
+      <Text LangIsoCode="fre">Amérique latine</Text>
+    </Message>
+    <Message id="msgRegionCaribbean">
+      <Text LangIsoCode="eng">Caribbean Region</Text>
+      <Text LangIsoCode="spa">Región Caribe</Text>
+      <Text LangIsoCode="por">Região do Caribe</Text>
+      <Text LangIsoCode="fre">La région des Caraïbes</Text>
+    </Message>
+    <Message id="msgRegionPacific">
+      <Text LangIsoCode="eng">South Pacific</Text>
+      <Text LangIsoCode="spa">Pacífico Sur</Text>
+      <Text LangIsoCode="por">Pacífico Sul</Text>
+      <Text LangIsoCode="fre">Pacifique Sud</Text>
+    </Message>
+    <Message id="tcopyright">
+      <Text LangIsoCode="eng">(c) 1998-2018 Corporación OSSO - Colombia</Text>
+      <Text LangIsoCode="spa">(c) 1998-2018 Corporación OSSO - Colombia</Text>
+      <Text LangIsoCode="por">(c) 1998-2018 Corporação OSSO - Colômbia</Text>
+      <Text LangIsoCode="fre">(c) 1998-2018 Corporación OSSO - Colombia</Text>
+    </Message>
+    <Message id="tcountryARG">
+      <Text LangIsoCode="eng">Argentina</Text>
+      <Text LangIsoCode="spa">Argentina</Text>
+      <Text LangIsoCode="por">Argentina</Text>
+      <Text LangIsoCode="fre">Argentine</Text>
+    </Message>
+    <Message id="tcountryBLZ">
+      <Text LangIsoCode="eng">Belize</Text>
+      <Text LangIsoCode="spa">Belice</Text>
+      <Text LangIsoCode="por">Belize</Text>
+      <Text LangIsoCode="fre">Belize</Text>
+    </Message>
+    <Message id="tcountryBOL">
+      <Text LangIsoCode="eng">Bolivia</Text>
+      <Text LangIsoCode="spa">Bolivia</Text>
+      <Text LangIsoCode="por">Bolívia</Text>
+      <Text LangIsoCode="fre">Bolivie</Text>
+    </Message>
+    <Message id="tcountryBRB">
+      <Text LangIsoCode="eng">Barbados</Text>
+      <Text LangIsoCode="spa">Barbados</Text>
+      <Text LangIsoCode="por">Barbados</Text>
+      <Text LangIsoCode="fre">Barbade</Text>
+    </Message>
+    <Message id="tcountryCHL">
+      <Text LangIsoCode="eng">Chile</Text>
+      <Text LangIsoCode="spa">Chile</Text>
+      <Text LangIsoCode="por">Chile</Text>
+      <Text LangIsoCode="fre">Chile</Text>
+    </Message>
+    <Message id="tcountryCOL">
+      <Text LangIsoCode="eng">Colombia</Text>
+      <Text LangIsoCode="spa">Colombia</Text>
+      <Text LangIsoCode="por">Colômbia</Text>
+      <Text LangIsoCode="fre">Colombie</Text>
+    </Message>
+    <Message id="tcountryCRI">
+      <Text LangIsoCode="eng">Costa Rica</Text>
+      <Text LangIsoCode="spa">Costa Rica</Text>
+      <Text LangIsoCode="por">Costa Rica</Text>
+      <Text LangIsoCode="fre">Costa Rica</Text>
+    </Message>
+    <Message id="tcountryDOM">
+      <Text LangIsoCode="eng">Dominican Rep.</Text>
+      <Text LangIsoCode="spa">Rep. Dominicana</Text>
+      <Text LangIsoCode="por">Rep. Dominicana</Text>
+      <Text LangIsoCode="fre">Rép Dominicaine</Text>
+    </Message>
+    <Message id="tcountryECU">
+      <Text LangIsoCode="eng">Ecuador</Text>
+      <Text LangIsoCode="spa">Ecuador</Text>
+      <Text LangIsoCode="por">Equador</Text>
+      <Text LangIsoCode="fre">Équateur</Text>
+    </Message>
+    <Message id="tcountryGTM">
+      <Text LangIsoCode="eng">Guatemala</Text>
+      <Text LangIsoCode="spa">Guatemala</Text>
+      <Text LangIsoCode="por">Guatemala</Text>
+      <Text LangIsoCode="fre">Guatemala</Text>
+    </Message>
+    <Message id="tcountryGUY">
+      <Text LangIsoCode="eng">Guyana</Text>
+      <Text LangIsoCode="spa">Guyana</Text>
+      <Text LangIsoCode="por">Guiana</Text>
+      <Text LangIsoCode="fre">Guyana</Text>
+    </Message>
+    <Message id="tcountryHND">
+      <Text LangIsoCode="eng">Honduras</Text>
+      <Text LangIsoCode="spa">Honduras</Text>
+      <Text LangIsoCode="por">Honduras</Text>
+      <Text LangIsoCode="fre">Honduras</Text>
+    </Message>
+    <Message id="tcountryHTI">
+      <Text LangIsoCode="eng">Haiti</Text>
+      <Text LangIsoCode="spa">Haití</Text>
+      <Text LangIsoCode="por">Haiti</Text>
+      <Text LangIsoCode="fre">Haïti</Text>
+    </Message>
+    <Message id="tcountryIDN">
+      <Text LangIsoCode="eng">Indonesia</Text>
+      <Text LangIsoCode="spa">Indonesia</Text>
+      <Text LangIsoCode="por">Indonésia</Text>
+      <Text LangIsoCode="fre">Indonésie</Text>
+    </Message>
+    <Message id="tcountryIND">
+      <Text LangIsoCode="eng">India</Text>
+      <Text LangIsoCode="spa">India</Text>
+      <Text LangIsoCode="por">India</Text>
+      <Text LangIsoCode="fre">Inde</Text>
+    </Message>
+    <Message id="tcountryIRN">
+      <Text LangIsoCode="eng">Iran</Text>
+      <Text LangIsoCode="spa">Irán</Text>
+      <Text LangIsoCode="por">Iran</Text>
+      <Text LangIsoCode="fre">Iran</Text>
+    </Message>
+    <Message id="tcountryJAM">
+      <Text LangIsoCode="eng">Jamaica</Text>
+      <Text LangIsoCode="spa">Jamaica</Text>
+      <Text LangIsoCode="por">Jamaica</Text>
+      <Text LangIsoCode="fre">Jamaïque</Text>
+    </Message>
+    <Message id="tcountryJOR">
+      <Text LangIsoCode="eng">Jordan</Text>
+      <Text LangIsoCode="spa">Jordania</Text>
+      <Text LangIsoCode="por">Jordan</Text>
+      <Text LangIsoCode="fre">Jordan</Text>
+    </Message>
+    <Message id="tcountryLKA">
+      <Text LangIsoCode="eng">Sri Lanka</Text>
+      <Text LangIsoCode="spa">Sri Lanka</Text>
+      <Text LangIsoCode="por">Sri Lanka</Text>
+      <Text LangIsoCode="fre">Sri Lanka</Text>
+    </Message>
+    <Message id="tcountryMLI">
+      <Text LangIsoCode="eng">Mali</Text>
+      <Text LangIsoCode="spa">Mali</Text>
+      <Text LangIsoCode="por">Mali</Text>
+      <Text LangIsoCode="fre">Mali</Text>
+    </Message>
+    <Message id="tcountryMEX">
+      <Text LangIsoCode="eng">Mexico</Text>
+      <Text LangIsoCode="spa">México</Text>
+      <Text LangIsoCode="por">México</Text>
+      <Text LangIsoCode="fre">Mexique</Text>
+    </Message>
+    <Message id="tcountryMOZ">
+      <Text LangIsoCode="eng">Mozambique</Text>
+      <Text LangIsoCode="spa">Mozambique</Text>
+      <Text LangIsoCode="por">Moçambique</Text>
+      <Text LangIsoCode="fre">Mozambique</Text>
+    </Message>
+    <Message id="tcountryNPL">
+      <Text LangIsoCode="eng">Nepal</Text>
+      <Text LangIsoCode="spa">Nepal</Text>
+      <Text LangIsoCode="por">Nepal</Text>
+      <Text LangIsoCode="fre">Népal</Text>
+    </Message>
+    <Message id="tcountryNIC">
+      <Text LangIsoCode="eng">Nicaragua</Text>
+      <Text LangIsoCode="spa">Nicaragua</Text>
+      <Text LangIsoCode="por">Nicarágua</Text>
+      <Text LangIsoCode="fre">Nicaragua</Text>
+    </Message>
+    <Message id="tcountryPAN">
+      <Text LangIsoCode="eng">Panama</Text>
+      <Text LangIsoCode="spa">Panamá</Text>
+      <Text LangIsoCode="por">Panamá</Text>
+      <Text LangIsoCode="fre">Panama</Text>
+    </Message>
+    <Message id="tcountryPER">
+      <Text LangIsoCode="eng">Peru</Text>
+      <Text LangIsoCode="spa">Perú</Text>
+      <Text LangIsoCode="por">Perú</Text>
+      <Text LangIsoCode="fre">Pérou</Text>
+    </Message>
+    <Message id="tcountryPRY">
+      <Text LangIsoCode="eng">Paraguay</Text>
+      <Text LangIsoCode="spa">Paraguay</Text>
+      <Text LangIsoCode="por">Paraguai</Text>
+      <Text LangIsoCode="fre">Paraguay</Text>
+    </Message>
+    <Message id="tcountrySLV">
+      <Text LangIsoCode="eng">El Salvador</Text>
+      <Text LangIsoCode="spa">El Salvador</Text>
+      <Text LangIsoCode="por">El Salvador</Text>
+      <Text LangIsoCode="fre">El Salvador</Text>
+    </Message>
+    <Message id="tcountryTTO">
+      <Text LangIsoCode="eng">Trinidad and Tobago</Text>
+      <Text LangIsoCode="spa">Trinidad y Tobago</Text>
+      <Text LangIsoCode="por">Trinidad e Tobago</Text>
+      <Text LangIsoCode="fre">Trinité-et-Tobago</Text>
+    </Message>
+    <Message id="tcountryURY">
+      <Text LangIsoCode="eng">Uruguay</Text>
+      <Text LangIsoCode="spa">Uruguay</Text>
+      <Text LangIsoCode="por">Uruguai</Text>
+      <Text LangIsoCode="fre">Uruguay</Text>
+    </Message>
+    <Message id="tcountryUSA">
+      <Text LangIsoCode="eng">U.S.A</Text>
+      <Text LangIsoCode="spa">EE.UU</Text>
+      <Text LangIsoCode="por">EE.UU</Text>
+      <Text LangIsoCode="fre">EE.UU</Text>
+    </Message>
+    <Message id="tcountryVEN">
+      <Text LangIsoCode="eng">Venezuela</Text>
+      <Text LangIsoCode="spa">Venezuela</Text>
+      <Text LangIsoCode="por">Venezuela</Text>
+      <Text LangIsoCode="fre">Venezuela</Text>
+    </Message>
+    <Message id="tcountryVUT">
+      <Text LangIsoCode="eng">Vanuatu</Text>
+      <Text LangIsoCode="spa">Vanuatu</Text>
+      <Text LangIsoCode="por">Vanuatu</Text>
+      <Text LangIsoCode="fre">Vanuatu</Text>
+    </Message>
+    <Message id="txtVersion">
+      <Text LangIsoCode="eng">Version</Text>
+      <Text LangIsoCode="spa">Versión</Text>
+      <Text LangIsoCode="por">Versão</Text>
+      <Text LangIsoCode="fre">Version</Text>
+    </Message>
+  </Group>
+  <Group name="region_list">
+    <Message id="txtRoleADMINREGION">
+      <Text LangIsoCode="eng">Manager</Text>
+      <Text LangIsoCode="spa">Administrador</Text>
+      <Text LangIsoCode="por">Administrador</Text>
+      <Text LangIsoCode="fre">Administrateur</Text>
+    </Message>
+    <Message id="txtRoleSUPERVISOR">
+      <Text LangIsoCode="eng">Supervisor</Text>
+      <Text LangIsoCode="spa">Supervisor</Text>
+      <Text LangIsoCode="por">Supervisor</Text>
+      <Text LangIsoCode="fre">Superviseur</Text>
+    </Message>
+    <Message id="txtRoleUSER">
+      <Text LangIsoCode="eng">Feeder</Text>
+      <Text LangIsoCode="spa">Alimentador</Text>
+      <Text LangIsoCode="por">Alimentador</Text>
+      <Text LangIsoCode="fre">Alimentation</Text>
+    </Message>
+    <Message id="txtRoleOBSERVER">
+      <Text LangIsoCode="eng">Observer</Text>
+      <Text LangIsoCode="spa">Observador</Text>
+      <Text LangIsoCode="por">Observador</Text>
+      <Text LangIsoCode="fre">Observateur</Text>
+    </Message>
+    <Message id="txtRoleNONE">
+      <Text LangIsoCode="eng">Public Databases</Text>
+      <Text LangIsoCode="spa">Bases Públicas</Text>
+      <Text LangIsoCode="por">Bases de datos públicas</Text>
+      <Text LangIsoCode="fre">Bases de données publiques</Text>
+    </Message>
+    <Message id="txtAvailableDB">
+      <Text LangIsoCode="eng">Available disaster inventories</Text>
+      <Text LangIsoCode="spa">Inventarios de desastres disponibles</Text>
+      <Text LangIsoCode="por">Desastres inventários disponíveis</Text>
+      <Text LangIsoCode="fre">Inventaires de désastres disponibles</Text>
+    </Message>
+  </Group>
+  <Group name="region_info">
+    <Message id="RegionDatabasePeriod">
+      <Text LangIsoCode="eng">Period</Text>
+      <Text LangIsoCode="spa">Periodo</Text>
+      <Text LangIsoCode="por">Período</Text>
+      <Text LangIsoCode="fre">Période</Text>
+    </Message>
+    <Message id="trepnum">
+      <Text LangIsoCode="eng">Records</Text>
+      <Text LangIsoCode="spa">Número de fichas</Text>
+      <Text LangIsoCode="por">Formulários</Text>
+      <Text LangIsoCode="fre">Cartes de données</Text>
+    </Message>
+    <Message id="tlastupd">
+      <Text LangIsoCode="eng">Last update</Text>
+      <Text LangIsoCode="spa">Última actualización</Text>
+      <Text LangIsoCode="por">Última atualização</Text>
+      <Text LangIsoCode="fre">Dernière mise á jour</Text>
+    </Message>
+    <Message id="RegionDatacardPeriod">
+      <Text LangIsoCode="eng">Datacard Period</Text>
+      <Text LangIsoCode="spa">Periodo Fichas</Text>
+      <Text LangIsoCode="por">Período de datos</Text>
+      <Text LangIsoCode="fre">Période de cartes de données</Text>
+    </Message>
+    <Message id="msgInfoGeneral">
+      <Text LangIsoCode="eng">General Information</Text>
+      <Text LangIsoCode="spa">Información General</Text>
+      <Text LangIsoCode="por">Informações Gerais</Text>
+      <Text LangIsoCode="fre">Informations générales</Text>
+    </Message>
+    <Message id="msgInfoCredits">
+      <Text LangIsoCode="eng">Credits</Text>
+      <Text LangIsoCode="spa">Créditos</Text>
+      <Text LangIsoCode="por">Créditos</Text>
+      <Text LangIsoCode="fre">Crédits</Text>
+    </Message>
+    <Message id="msgInfoSources">
+      <Text LangIsoCode="eng">Sources</Text>
+      <Text LangIsoCode="spa">Fuentes</Text>
+      <Text LangIsoCode="por">Fontes</Text>
+      <Text LangIsoCode="fre">Sources</Text>
+    </Message>
+    <Message id="msgInfoSynopsis">
+      <Text LangIsoCode="eng">Synopsis</Text>
+      <Text LangIsoCode="spa">Sinopsis</Text>
+      <Text LangIsoCode="por">Sinopse</Text>
+      <Text LangIsoCode="fre">Synopsis</Text>
+    </Message>
+  </Group>
 </StringList>

@@ -1153,7 +1153,7 @@ class LegacyIndex
                 header('Content-Disposition: attachment; filename=Query_' . str_replace(' ', '', $RegionId) . '.xml');
                 return '<?xml version="1.0" encoding="UTF-8"?>'. "\n" .
                     '<desinventar version="' . VERSION . '">' . "\n" .
-                    '	<diquery>' .
+                    '  <diquery>' .
                             '<version>1.1</version>' .
                             '<value>' . base64_encode(serialize($post)) . '</value>' .
                         '</diquery>' . "\n" .

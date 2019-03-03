@@ -353,60 +353,60 @@ function genColors() {
 }
 
 /*
-	// Microsoft Virtual Earth Base Layer
-	var virtualearth = new OpenLayers.Layer.VirtualEarth("Microsoft Virtual Earth", { 'sphericalMercator': true });
-	map.addLayer(virtualearth);
-	*/
+  // Microsoft Virtual Earth Base Layer
+  var virtualearth = new OpenLayers.Layer.VirtualEarth("Microsoft Virtual Earth", { 'sphericalMercator': true });
+  map.addLayer(virtualearth);
+  */
 
 /*
-	// Use a Global Risk Data Platform (http://preview.grid.unep.ch/) WMS..
-	var bk1 = new OpenLayers.Layer.WMS("Flood Risk..",
-		"http://preview.grid.unep.ch:8080/geoserver/wms",
-		{'layers': 'preview:fl_risk', 'transparent': true},
-		{'isBaseLayer':true});
-	bk1.setVisibility(false);
-	map.addLayer(bk1);
-	*/
+  // Use a Global Risk Data Platform (http://preview.grid.unep.ch/) WMS..
+  var bk1 = new OpenLayers.Layer.WMS("Flood Risk..",
+    "http://preview.grid.unep.ch:8080/geoserver/wms",
+    {'layers': 'preview:fl_risk', 'transparent': true},
+    {'isBaseLayer':true});
+  bk1.setVisibility(false);
+  map.addLayer(bk1);
+  */
 
 /*
-	// 2009-07-11 (jhcaiced) This layer doesn't work with Spherical Mercator projection (????)
-	var bk2 = new OpenLayers.Layer.WMS("GRDP - Population 2007",
-		"http://metafunctions.grid.unep.ch/cgi-bin/mapserv",
-		{ map:'/www/preview/previewims/etc/preview_ims.map', 'transparent':true, 'format':'png',
-			 'sphericalMercator': true, layers:'popdens'},
-		{'isBaseLayer':true});
-	bk2.setVisibility(false);
-	map.addLayer(bk2);
-	*/
+  // 2009-07-11 (jhcaiced) This layer doesn't work with Spherical Mercator projection (????)
+  var bk2 = new OpenLayers.Layer.WMS("GRDP - Population 2007",
+    "http://metafunctions.grid.unep.ch/cgi-bin/mapserv",
+    { map:'/www/preview/previewims/etc/preview_ims.map', 'transparent':true, 'format':'png',
+       'sphericalMercator': true, layers:'popdens'},
+    {'isBaseLayer':true});
+  bk2.setVisibility(false);
+  map.addLayer(bk2);
+  */
 
 /* Metacarta Base Layers
-	// 2009-02-06 (jhcaiced) Metacarta Satellite doesn't work with Spherical Mercator, this needs to be fixed !!
-	var met2 = new OpenLayers.Layer.WMS("** Metacarta Satellite",
-			"http://labs.metacarta.com/wms-c/Basic.py", {layers:'satellite', 'transparent':true, 'format':'png' },
-			{'isBaseLayer':true });
-	met2.setVisibility(false);
-	map.addLayer(met2);
-	*/
+  // 2009-02-06 (jhcaiced) Metacarta Satellite doesn't work with Spherical Mercator, this needs to be fixed !!
+  var met2 = new OpenLayers.Layer.WMS("** Metacarta Satellite",
+      "http://labs.metacarta.com/wms-c/Basic.py", {layers:'satellite', 'transparent':true, 'format':'png' },
+      {'isBaseLayer':true });
+  met2.setVisibility(false);
+  map.addLayer(met2);
+  */
 
 /*
-	// Layers from georiesgo/geosemantica
-	// Change map
-	vlayer = new OpenLayers.Layer.Vector("{-#tdrawpoint#-}");
-	map.addLayer(vlayer);
-	map.addControl(new OpenLayers.Control.EditingToolbar(vlayer));
-	var pegeo = new OpenLayers.Layer.WMS("** Geología Perú",
-			"http://per.geosemantica.net/services/mapserv.exe?MAP=2c1bc078-13e6-4734-863a-5636442a2e30_wms.map",
-			{'layers':'geoutm_shp', 'transparent':true, 'format':'png' }, {'isBaseLayer':false});
-	pegeo.setVisibility(false);
-	map.addLayer(pegeo);
-	var cosis = new OpenLayers.Layer.WMS("** Amenaza Sísmica Colombia",
-			"http://col.geosemantica.net/services/mapserv.exe?map=8ec9a29a-f170-4023-9fe0-bf3d38c5ee2e.map",
-			{'layers':'aisacel_1_shp', 'transparent':true, 'format':'png' }, {'isBaseLayer':false});
-	cosis.setVisibility(false);
-	map.addLayer(cosis);
-	var queryTarget = $('queryOut');
-	WMSToolbar = new OpenLayers.Control.WMSToolbar({queryTarget: queryTarget});
-	map.addControl(WMSToolbar);
-	//parent.document.getElementById('frmwait').innerHTML='';
+  // Layers from georiesgo/geosemantica
+  // Change map
+  vlayer = new OpenLayers.Layer.Vector("{-#tdrawpoint#-}");
+  map.addLayer(vlayer);
+  map.addControl(new OpenLayers.Control.EditingToolbar(vlayer));
+  var pegeo = new OpenLayers.Layer.WMS("** Geología Perú",
+      "http://per.geosemantica.net/services/mapserv.exe?MAP=2c1bc078-13e6-4734-863a-5636442a2e30_wms.map",
+      {'layers':'geoutm_shp', 'transparent':true, 'format':'png' }, {'isBaseLayer':false});
+  pegeo.setVisibility(false);
+  map.addLayer(pegeo);
+  var cosis = new OpenLayers.Layer.WMS("** Amenaza Sísmica Colombia",
+      "http://col.geosemantica.net/services/mapserv.exe?map=8ec9a29a-f170-4023-9fe0-bf3d38c5ee2e.map",
+      {'layers':'aisacel_1_shp', 'transparent':true, 'format':'png' }, {'isBaseLayer':false});
+  cosis.setVisibility(false);
+  map.addLayer(cosis);
+  var queryTarget = $('queryOut');
+  WMSToolbar = new OpenLayers.Control.WMSToolbar({queryTarget: queryTarget});
+  map.addControl(WMSToolbar);
+  //parent.document.getElementById('frmwait').innerHTML='';
 
-	*/
+  */

@@ -10,14 +10,14 @@ binmode(STDOUT, ':utf8');
 my $File = 'country_square.txt';
 open(F, '<', $File) || die "Can't open Country List\n";
 while(<F>) {
-	chomp $_;
-	s/\"//g;
-	$line = $_;
-	($CountryIsoCode,$Xmin,$Xmax,$Ymin,$Ymax) = ($line =~ m/^([A-Z][A-Z][A-Z]):.*=(.*);.*=(.*);.*=(.*);.*=(.*);.*/);
-	$Xmin =~ s/ //g;
-	$Xmax =~ s/ //g;
-	$Ymin =~ s/ //g;
-	$Ymax =~ s/ //g;
-	printf("UPDATE Country SET CountryMinX=%s,CountryMaxX=%s,CountryMinY=%s,CountryMaxY=%s WHERE CountryIso='%s';\n", $Xmin, $Xmax, $Ymin, $Ymax, $CountryIsoCode);
+  chomp $_;
+  s/\"//g;
+  $line = $_;
+  ($CountryIsoCode,$Xmin,$Xmax,$Ymin,$Ymax) = ($line =~ m/^([A-Z][A-Z][A-Z]):.*=(.*);.*=(.*);.*=(.*);.*=(.*);.*/);
+  $Xmin =~ s/ //g;
+  $Xmax =~ s/ //g;
+  $Ymin =~ s/ //g;
+  $Ymax =~ s/ //g;
+  printf("UPDATE Country SET CountryMinX=%s,CountryMaxX=%s,CountryMinY=%s,CountryMaxY=%s WHERE CountryIso='%s';\n", $Xmin, $Xmax, $Ymin, $Ymax, $CountryIsoCode);
 }
 close(F);

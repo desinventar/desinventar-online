@@ -52,11 +52,11 @@ function doDatabaseCreateSetup() {
     )
   })
 
-	jQuery('#lnkDatabaseCreateOpenDB').on('click', function(event) {
-		window.location = this.href
-		window.location.reload(false)
-		event.preventDefault()
-	})
+  jQuery('#lnkDatabaseCreateOpenDB').on('click', function(event) {
+    window.location = this.href
+    window.location.reload(false)
+    event.preventDefault()
+  })
 
   // Send Button - Validate data and send command to backend
   jQuery('#btnDatabaseCreateSend').click(function() {
