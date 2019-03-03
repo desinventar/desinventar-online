@@ -10,12 +10,10 @@ RUN sed -i 's/^mirrorlist/#mirrorlist/; s|#baseurl=http://mirror.centos.org|base
 ADD composer.json /tmp/composer.json
 ADD composer.lock /tmp/composer.lock
 RUN cd /tmp && composer install --no-scripts --no-autoloader --prefer-source --no-interaction
-RUN mkdir -p /opt/app && cp -a /tmp/vendor /opt/app
 
 ADD package.json /tmp/package.json
 ADD yarn.lock /tmp/yarn.lock
 RUN cd /tmp && yarn install
-RUN mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app
 
 RUN yum -y install php-pecl-dbase php-pecl-zip php-redis
 
@@ -46,8 +44,8 @@ RUN sed -i 's#"files"#"redis"#' /etc/httpd/conf.d/php.conf
 RUN sed -i 's#"/var/lib/php/session"#"tcp://redis:6379"#' /etc/httpd/conf.d/php.conf
 
 COPY . /opt/app
-RUN mkdir -p /opt/app && cp -a /tmp/vendor /opt/app && /bin/rm -rf /opt/app/vendor/desinventar/jpgraph && composer install
-RUN mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app && yarn
+RUN cp -a /tmp/vendor /opt/app && /bin/rm -rf /opt/app/vendor/desinventar/jpgraph && composer install
+RUN cp -a /tmp/node_modules /opt/app && yarn
 
 RUN make devel-app
 RUN make database

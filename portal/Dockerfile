@@ -11,12 +11,10 @@ ADD composer.json /tmp/composer.json
 ADD composer.lock /tmp/composer.lock
 
 RUN cd /tmp && composer install --no-scripts --no-autoloader --prefer-source --no-interaction
-RUN cp -a /tmp/vendor /opt/app
 
 ADD package.json /tmp/package.json
 ADD yarn.lock /tmp/yarn.lock
 RUN cd /tmp && yarn
-RUN cp -a /tmp/node_modules /opt/app
 
 ARG DESINVENTAR_PORTAL_CACHEDIR=/var/cache/smarty/desinventar/portal
 ARG DESINVENTAR_URL=https://online.desinventar.org/desinventar/
@@ -36,10 +34,8 @@ ADD portal/files/apache/rewrite.conf /tmp/rewrite.conf
 RUN cat /tmp/rewrite.conf >> /etc/httpd/conf/httpd.conf
 
 COPY . /opt/app
-RUN cp -a /tmp/vendor /opt/app
-RUN cp -a /tmp/node_modules /opt/app
-
-RUN cd /opt/app && composer install
+RUN cp -a /tmp/vendor /opt/app && composer install
+RUN cp -a /tmp/node_modules /opt/app && yarn
 
 RUN make portal
 

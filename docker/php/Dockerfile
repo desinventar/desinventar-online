@@ -28,4 +28,4 @@ ADD composer.lock /tmp/composer.lock
 RUN cd /tmp && composer install --no-scripts --no-autoloader --prefer-source --no-interaction
 
 COPY . /opt/app
-RUN mkdir -p /opt/app && cp -a /tmp/vendor /opt/app && composer install
+RUN cp -a /tmp/vendor /opt/app && composer install

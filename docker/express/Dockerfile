@@ -20,7 +20,6 @@ RUN cd /tmp && yarn install
 COPY backend/ /src/backend/
 COPY config/ /src/config/
 COPY package.json /src/
-RUN ls /src
 RUN cp -a /tmp/node_modules /src/backend/express/
 
 # Expose the listening port of your app

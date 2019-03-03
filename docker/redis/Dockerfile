@@ -1,4 +1,4 @@
-FROM redis:3.0.5
+FROM redis:5.0.3
 
 ENV TZ=America/Bogota
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone

@@ -86,49 +86,6 @@ services:
     depends_on:
       - mysql
       - redis
-  liquibase:
-    build:
-      context: .
-      dockerfile: docker/liquibase/Dockerfile
-    volumes:
-      - .:/opt/app
-  http:
-    build:
-      context: .
-      dockerfile: docker/http/Dockerfile
-    ports:
-      - "8082:80"
-    volumes:
-      - .:/opt/app
-      - ./files/nginx/site.conf:/etc/nginx/conf.d/default.conf
-      - /var/local/desinventar:/var/local/desinventar
-    depends_on:
-      - php
-  php:
-    build:
-      context: .
-      dockerfile: docker/php/Dockerfile
-    ports:
-      - "9000:9000"
-    volumes:
-      - .:/opt/app
-      - ./files/php-fpm/php.ini:/usr/local/etc/php/php.ini
-      - /opt/app/vendor
-      - /opt/app/node_modules
-      - /var/local/desinventar:/var/local/desinventar
-    environment:
-      - DESINVENTAR_PATHS_CACHEDIR
-      - DESINVENTAR_MAPS_FONTS_DIR=/usr/share/fonts/truetype/liberation/fonts.txt
-    depends_on:
-      - redis
-  mapserver:
-    build:
-      context: .
-      dockerfile: docker/mapserver/Dockerfile
-    ports:
-      - "5000:5000"
-    volumes:
-      - /var/local/desinventar:/var/local/desinventar
   mysql:
     build:
       context: ./
@@ -146,16 +103,5 @@ services:
       dockerfile: docker/redis/Dockerfile
     ports:
       - "6379:6379"
-  test:
-    build:
-      context: .
-      dockerfile: docker/e2e-test/Dockerfile
-    volumes:
-      - .:/opt/app
-      - /opt/app/vendor
-      - /opt/app/node_modules
-    environment:
-      - NODE_ENV
-      - APP_ENV
 volumes:
   mysql_data:
