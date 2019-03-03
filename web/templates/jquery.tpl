@@ -13,5 +13,5 @@
 <script type="text/javascript" src="{-$desinventarLibs-}/select2/4.0.3/js/select2.min.js"></script>
 
 <script type="text/javascript">
-	jQuery.noConflict();
+    jQuery.noConflict();
 </script>

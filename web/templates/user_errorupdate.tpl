@@ -1,9 +1,9 @@
 {-if $errnomatch-}
-	{-#errnomatch#-}
+    {-#errnomatch#-}
 {-elseif $errbadpass-}
-	{-#errbadpasswd#-}
+    {-#errbadpasswd#-}
 {-elseif $errupduser-}
-	{-#terror#-}[{-$updstat-}] {-#errupdate#-} {-$desinventarUserId-}
+    {-#terror#-}[{-$updstat-}] {-#errupdate#-} {-$desinventarUserId-}
 {-elseif $noerrorupd-}
-	{-#msgupdatesucc#-} {-$desinventarUserId-}
+    {-#msgupdatesucc#-} {-$desinventarUserId-}
 {-/if-}
