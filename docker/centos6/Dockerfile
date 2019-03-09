@@ -42,7 +42,7 @@ RUN install -m 755 -o apache -g apache -d /var/local/desinventar/db
 RUN curl --silent --show-error https://getcomposer.org/installer > /tmp/composer-setup.php && \
   php /tmp/composer-setup.php --no-ansi --install-dir=/usr/local/bin --filename=composer --snapshot
 
-# Install nvm + node + npm + yarn
+# Install nvm + node + npm
 ENV NVM_DIR /usr/local/nvm
 ENV NODE_VERSION 8.12.0
 RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash \
@@ -53,7 +53,6 @@ RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | b
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
-RUN npm install -g yarn
 RUN npm install -g npm
 
 EXPOSE 80

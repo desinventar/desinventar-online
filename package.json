@@ -2,7 +2,12 @@
   "name": "desinventar",
   "version": "10.03.002",
   "description": "DesInventar Online",
-  "keywords": ["desinventar", "disasters", "inventory", "risk"],
+  "keywords": [
+    "desinventar",
+    "disasters",
+    "inventory",
+    "risk"
+  ],
   "homepage": "https://online.desinventar.org",
   "license": "GPL-3.0",
   "author": {
@@ -63,7 +68,6 @@
     "style-loader": "^0.23.0",
     "supertest": "^3.0.0",
     "testcafe": "^0.22.0",
-    "testcafe-browser-provider-nightmare": "^0.0.5",
     "testcafe-reporter-xunit": "^2.1.0",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2",

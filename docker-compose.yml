@@ -12,6 +12,7 @@ services:
       - .:/opt/app
       - /opt/app/vendor
       - /opt/app/node_modules
+      - /opt/app/backend/express/node_modules
     environment:
       - NODE_ENV
       - APP_ENV
@@ -36,6 +37,7 @@ services:
       - .:/opt/app
       - /opt/app/vendor
       - /opt/app/node_modules
+      - /opt/app/backend/express/node_modules
       - /var/local/desinventar:/var/local/desinventar
     environment:
       - NODE_ENV

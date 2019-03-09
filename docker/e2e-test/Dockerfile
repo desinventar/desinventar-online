@@ -6,8 +6,8 @@ WORKDIR /opt/app
 RUN apt-get update && apt-get install -y php
 
 ADD package.json /tmp/package.json
-ADD yarn.lock /tmp/yarn.lock
-RUN cd /tmp && yarn
+ADD package-lock.json /tmp/package-lock.json
+RUN cd /tmp && npm install
 
 COPY . /opt/app
 RUN cp -a /tmp/node_modules /opt/app

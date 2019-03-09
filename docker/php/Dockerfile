@@ -25,7 +25,7 @@ RUN curl --silent --show-error https://getcomposer.org/installer > /tmp/composer
 ADD composer.json /tmp/composer.json
 ADD composer.lock /tmp/composer.lock
 
-RUN cd /tmp && composer install --no-scripts --no-autoloader --prefer-source --no-interaction
+RUN cd /tmp && composer install --no-scripts --no-autoloader --no-interaction
 
 COPY . /opt/app
 RUN cp -a /tmp/vendor /opt/app && composer install

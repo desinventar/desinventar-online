@@ -7,14 +7,20 @@ RUN sed -i 's/^mirrorlist/#mirrorlist/; s|#baseurl=http://mirror.centos.org|base
 
 WORKDIR /opt/app
 
+RUN composer self-update
+RUN composer config --global repo.packagist composer https://packagist.org
+RUN composer global require hirak/prestissimo
+
+RUN npm remove -g yarn
+
 ADD composer.json /tmp/composer.json
 ADD composer.lock /tmp/composer.lock
 
-RUN cd /tmp && composer install --no-scripts --no-autoloader --prefer-source --no-interaction
+RUN cd /tmp && composer install --no-scripts --no-autoloader --no-interaction
 
 ADD package.json /tmp/package.json
-ADD yarn.lock /tmp/yarn.lock
-RUN cd /tmp && yarn
+ADD package-lock.json /tmp/package-lock.json
+RUN cd /tmp && npm install
 
 ARG DESINVENTAR_PORTAL_CACHEDIR=/var/cache/smarty/desinventar/portal
 ARG DESINVENTAR_URL=https://online.desinventar.org/desinventar/
@@ -35,7 +41,7 @@ RUN cat /tmp/rewrite.conf >> /etc/httpd/conf/httpd.conf
 
 COPY . /opt/app
 RUN cp -a /tmp/vendor /opt/app && composer install
-RUN cp -a /tmp/node_modules /opt/app && yarn
+RUN cp -a /tmp/node_modules /opt/app && npm install
 
 RUN make portal
 
