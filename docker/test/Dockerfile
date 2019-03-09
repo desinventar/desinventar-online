@@ -1,8 +1,10 @@
 # Ubuntu + Update + Testing Tools
 # Pushed to dockerhub as desinventar/test:vYYYYMMDD-NN
-FROM ubuntu:xenial
+FROM ubuntu:bionic
 LABEL maintainer="Jhon H. Caicedo"
 LABEL e-mail="jhcaiced@inticol.com"
+
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get -y update
 RUN apt-get -y install git wget tar curl firefox php-cli
@@ -20,12 +22,12 @@ RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - \
   && apt-get install -q -y docker-ce
 
 # Docker Compose
-RUN curl -s -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose \
+RUN curl -s -L https://github.com/docker/compose/releases/download/1.23.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose \
   && chmod +x /usr/local/bin/docker-compose
 
 # Install nvm + node + npm
 ENV NVM_DIR /usr/bin
-ENV NODE_VERSION 8.12.0
+ENV NODE_VERSION 8.15.1
 RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash \
   && . $NVM_DIR/nvm.sh \
   && nvm install $NODE_VERSION \

@@ -1,5 +1,5 @@
 # CentOS 6 + Updates + DesInventar Prerequisites
-FROM desinventar/centos6:v20180929-01
+FROM desinventar/centos6:v20190309-01
 LABEL maintainer="Jhon H. Caicedo"
 LABEL e-mail="jhcaiced@inticol.com"
 
@@ -10,8 +10,6 @@ RUN sed -i 's/^mirrorlist/#mirrorlist/; s|#baseurl=http://mirror.centos.org|base
 RUN composer self-update
 RUN composer config --global repo.packagist composer https://packagist.org
 RUN composer global require hirak/prestissimo
-
-RUN npm remove -g yarn
 
 ADD composer.json /tmp/composer.json
 ADD composer.lock /tmp/composer.lock

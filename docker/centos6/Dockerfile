@@ -44,7 +44,7 @@ RUN curl --silent --show-error https://getcomposer.org/installer > /tmp/composer
 
 # Install nvm + node + npm
 ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 8.12.0
+ENV NODE_VERSION 8.15.1
 RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash \
     && source $NVM_DIR/nvm.sh \
     && nvm install $NODE_VERSION \
