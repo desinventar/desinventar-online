@@ -7,13 +7,16 @@ WORKDIR /opt/app
 
 RUN sed -i 's/^mirrorlist/#mirrorlist/; s|#baseurl=http://mirror.centos.org|baseurl=http://mirrors.kernel.org|' /etc/yum.repos.d/CentOS-Base.repo
 
+RUN composer config --global repo.packagist composer https://packagist.org
+RUN composer global require hirak/prestissimo
+
 ADD composer.json /tmp/composer.json
 ADD composer.lock /tmp/composer.lock
-RUN cd /tmp && composer install --no-scripts --no-autoloader --prefer-source --no-interaction
+RUN cd /tmp && composer install --no-scripts --no-autoloader --no-interaction
 
 ADD package.json /tmp/package.json
 ADD yarn.lock /tmp/yarn.lock
-RUN cd /tmp && yarn install
+RUN cd /tmp && npm install
 
 RUN yum -y install php-pecl-dbase php-pecl-zip php-redis
 
