@@ -26,9 +26,6 @@ services:
     depends_on:
       - redis
   devel:
-    build:
-      context: .
-      dockerfile: Dockerfile
     image: desinventar/online:latest
     command: bash -c '(/opt/app/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
     ports:
@@ -50,11 +47,10 @@ services:
       - DESINVENTAR_MAPS_USE_REMOTE_LAYERS
       - DESINVENTAR_MAPS_GOOGLE_API_KEY
     depends_on:
+      - web
       - redis
   portal:
-    build:
-      context: .
-      dockerfile: ./portal/Dockerfile
+    image: desinventar/online:latest
     command: bash -c '(/opt/app/node_modules/.bin/webpack --display-error-details --watch &) && (/usr/sbin/httpd -D FOREGROUND)'
     ports:
       - "8090:80"
@@ -70,7 +66,7 @@ services:
       - DESINVENTAR_PORTAL_CACHEDIR
       - TEST_PORTAL_URL
     depends_on:
-      - redis
+      - devel
   api:
     build:
       context: .
