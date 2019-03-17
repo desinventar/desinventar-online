@@ -20,7 +20,6 @@
     "prettier/prettier": [
       "error",
       { "singleQuote": true,
-        "printWidth": 100,
         "semi": false
       }
     ]

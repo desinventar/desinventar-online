@@ -64,7 +64,7 @@ phpstan: .FORCE
 js: standard-js
 
 standard-js: .FORCE
-	./node_modules/.bin/eslint web/js2/**/*.js tests/**/*.js
+	./node_modules/.bin/eslint .
 
 node-build: .FORCE
 	npm install

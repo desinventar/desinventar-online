@@ -1,6 +1,9 @@
 portal/web/external
 portal/web/scripts
+web/admin2/ajax.js
 web/external/clickmenu
-web/js/
+web/js
+web/external
 web/scripts/
+**/vendor
 **/node_modules
