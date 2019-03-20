@@ -29,3 +29,4 @@ portal/vendor/*
 yarn-error.log
 .scannerwork
 .phpunit.result.cache
+*.sqlite3

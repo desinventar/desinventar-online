@@ -20,7 +20,11 @@
   "main": ".eslintrc.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "db:core": "npx knex-migrate --knexfile migrations/knexfile-core.js up",
+    "db:base": "npx knex-migrate --knexfile migrations/knexfile-base.js up",
+    "db:region": "npx knex-migrate --knexfile migrations/knexfile-region.js up",
+    "db": "npm run db:core && npm run db:base && npm run db:region"
   },
   "husky": {
     "hooks": {
@@ -78,8 +82,12 @@
     "document-ready-promise": "^3.0.1",
     "jquery": "1.11",
     "jquery-ui": "^1.12.1",
+    "knex": "^0.16.3",
+    "knex-migrate": "^1.7.1",
     "md5": "^2.2.1",
+    "mysql": "^2.16.0",
     "moment": "2.19.3",
-    "showdown": "^1.9.0"
+    "showdown": "^1.9.0",
+    "sqlite3": "^4.0.6"
   }
 }

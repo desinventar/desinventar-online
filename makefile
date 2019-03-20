@@ -22,6 +22,7 @@ composer-autoload: .FORCE
 	composer dump-autoload --optimize
 
 database: .FORCE
+	npm run db
 	cd files/database && make database && make update-base
 
 lang: .FORCE

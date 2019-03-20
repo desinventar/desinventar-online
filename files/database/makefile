@@ -13,8 +13,7 @@ database: base.db core.db desinventar.db
 base.db: create-base update-base
 
 create-base: base.yaml
-	/bin/rm -f base.db && touch base.db
-	sh liquibase.sh -l base.yaml -d sqlite -f base.db -c update
+	/bin/rm -f base.db && cp ../../migrations/base.sqlite3 base.db
 
 update-base: doc-db.csv event.csv cause.csv
 	php insertEveCau.php event.csv spa EVENT | sqlite3 base.db
@@ -30,12 +29,10 @@ update-base: doc-db.csv event.csv cause.csv
 	./square2sql.pl | sqlite3 base.db
 
 core.db: core.yaml
-	/bin/rm -f core.db && touch core.db
-	sh liquibase.sh -l core.yaml -d sqlite -f core.db -c update
+	/bin/rm -f core.db && cp ../../migrations/core.sqlite3 core.db
 
 desinventar.db: desinventar.yaml
-	/bin/rm -f desinventar.db && touch desinventar.db
-	sh liquibase.sh -l desinventar.yaml -d sqlite -f desinventar.db -c update
+	/bin/rm -f desinventar.db && cp ../../migrations/region.sqlite3 desinventar.db
 
 lang: lang_spa lang_eng lang_por lang_fre
 

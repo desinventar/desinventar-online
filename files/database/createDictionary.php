@@ -7,7 +7,10 @@ $h = fopen('./doc-db.csv', 'r');
 $i = 0;
 print "DELETE FROM Dictionary;" . "\n";
 print "DELETE FROM LabelGroup;" . "\n";
-
+if (!$h) {
+    fprintf(STDERR, 'Cannot open strings file' . "\n");
+    exit(0);
+}
 while (!feof($h)) {
     $a = fgetcsv($h);
     $util = new Util();
@@ -17,11 +20,12 @@ while (!feof($h)) {
     }
     $now = gmdate('c');
     $query = sprintf(
-        'INSERT INTO LabelGroup VALUES ("%s","%s","%s","%s","%s","%s","%s");',
+        'INSERT INTO LabelGroup VALUES ("%s","%s","%s","%s",%d,"%s","%s","%s");',
         $i,
         $a[0],
         $a[1],
         $a[2],
+        null,
         $now,
         $now,
         $now
