@@ -7,7 +7,6 @@ WORKDIR /opt/app
 
 RUN sed -i 's/^mirrorlist/#mirrorlist/; s|#baseurl=http://mirror.centos.org|baseurl=http://mirrors.kernel.org|' /etc/yum.repos.d/CentOS-Base.repo
 
-RUN composer self-update
 RUN composer config --global repo.packagist composer https://packagist.org
 RUN composer global require hirak/prestissimo
 

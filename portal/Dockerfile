@@ -7,7 +7,6 @@ RUN sed -i 's/^mirrorlist/#mirrorlist/; s|#baseurl=http://mirror.centos.org|base
 
 WORKDIR /opt/app
 
-RUN composer self-update
 RUN composer config --global repo.packagist composer https://packagist.org
 RUN composer global require hirak/prestissimo
 
