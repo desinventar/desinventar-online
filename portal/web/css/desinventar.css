@@ -86,12 +86,12 @@ a.info:visited  { color: #333333;  }
 }
 a.RegionListItem { text-decoration: none; }
 table.grid {
-  font-family:Lucida Grande, Verdana;
+  font-family:arial,tahoma,helvetica,cursive;
   font-size:11px; width:100%; border: 0px solid #ccc;
 }
 
 table.col {
-  font-family:Lucida Grande, Verdana;
+  font-family:arial,tahoma,helvetica,cursive;
   overflow: auto; font-size:11px; border: thin solid;
 }
 
@@ -163,13 +163,13 @@ table.col {
 }
 
 p.grid {
- font-family:Lucida Grande, Verdana;
- font-size:11px;; width:100%;
+  font-family:arial,tahoma,helvetica,cursive;
+  font-size:11px; width:100%;
 }
 
 textarea.hlp {
   background-color: #ffffff; padding: 5px; font-size: 12px;
-  font-family: Lucida Grande, Geneva, Verdana, Helvetica, Arial, sans-serif;
+  font-family:arial,tahoma,helvetica,cursive;
   /*-moz-border-radius: 0px 10px 0px 10px; border-radius: 0px 10px 0px 10px;*/
 }
 
@@ -184,12 +184,6 @@ input.sub {
   font-family:arial,tahoma,helvetica,cursive; font-size:11px;
   font-weight:bolder; color:#000000; background-color:#FFFFFF;
   border-style:solid; border-width:1px; border-color:#FFFFFF; width: 120px;
-}
-disabled {
-  background-color: #eee;
-}
-enabled {
-  background-color: #fff;
 }
 .submenu {
   position:absolute; visibility: hidden; border:1px solid #777;

@@ -8,7 +8,6 @@ dl.accordion dt {
   _width:100%;/*hack for IE*/
   cursor:pointer;
   display:block;
-  cursor:hand;
   margin:0;  padding:0;padding:3px 6px;background:#999480;color:white;
   border-left:solid 1px #fff;
   border-top:solid 1px #fff;
@@ -32,7 +31,7 @@ dl.accordion dt.expanding {
 }
 
 dl.accordion dd {
-  margin:0;padding:0;
+  margin:0;
   border:solid 1px #fff;
   border-bottom:inset 3px #fff;
   padding:6px;line-height:1.4;
@@ -78,11 +77,11 @@ body {
   background:url(../images/bgizq.gif) #ffffff;
   width:182px; }
 .mizq  {
-  font:9px Trebuchet MS, sans-serif; padding:0px; color:#606060;
+  font:9px Trebuchet MS, sans-serif; color:#606060;
   background:url(../images/ct.gif) #DDDDDC repeat-x top left;
   padding:1px 4px; }
 .mizq2  {
-  font:11px Trebuchet MS, sans-serif; padding:0px;
+  font:11px Trebuchet MS, sans-serif;
   color:#606060; background:url(../images/ct.gif) #DDDDDC repeat-x top left;
   padding:1px 6px; }
 .f {
@@ -132,11 +131,13 @@ body {
 a  {  color:#1e90ff; }
 a:hover  {  color:#00008b; }
 .usr_inp {
-  width:34px; height:18px; bgcolor:white;
+  width:34px; height:18px;
+  background-color:white;
   border-width:0px; vertical-align:top;
 }
 .usr_out {
-  width:78px; height:18px; bgcolor:white;
+  width:78px; height:18px;
+  background-color:white;
   border-width:0px; vertical-align:top;
 }
 .submenu {

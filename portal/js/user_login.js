@@ -1,8 +1,8 @@
 import md5 from 'md5'
 
-const me = {}
+const userLogin = {}
 
-me.onReadyUserLogin = () => {
+userLogin.onReadyUserLogin = () => {
   // hide all status messages on start
   updateUserLoginMsg('')
 
@@ -78,7 +78,7 @@ function doUserLogin() {
   }
 }
 
-me.doUserLogout = () => {
+userLogin.doUserLogout = () => {
   var Answer = 0
   jQuery.post(
     jQuery('#desinventarURL').val() + '/',
@@ -119,4 +119,4 @@ function updateUserLoginMsg(msgId) {
   return true
 }
 
-export default me
+export default userLogin

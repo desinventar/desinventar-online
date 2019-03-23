@@ -1,8 +1,8 @@
 import common from './common'
 import user from './user_login'
 
-const me = {}
-me.init = () => {
+const main = {}
+main.init = () => {
   jQuery('#btnMainWindow').attr('href', jQuery('#desinventarURL').val() + '/')
 
   // Main button to open a default desinventar
@@ -196,7 +196,7 @@ function showMap() {
 }
 
 // personalization List menu..
-me.displayList = elem => {
+main.displayList = elem => {
   let lst = 7
   for (var i = 1; i <= lst; i++) {
     if (i == elem) jQuery('#sect' + i).show()
@@ -204,4 +204,4 @@ me.displayList = elem => {
   }
 }
 
-export default me
+export default main

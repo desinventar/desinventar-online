@@ -1,7 +1,7 @@
 const showdown = require('showdown')
 const markdown = new showdown.Converter()
 
-const me = {}
+const common = {}
 
 function doGetRegionInfo(RegionId) {
   jQuery('#divRegionInfo #divRegionLogo').html(
@@ -68,7 +68,7 @@ function doGetRegionInfo(RegionId) {
   )
 }
 
-me.updateDatabaseList = CountryIsoCode => {
+common.updateDatabaseList = CountryIsoCode => {
   jQuery('.contentBlock').hide()
   // Hide everything at start...
   jQuery('.databaseTitle').hide()
@@ -141,7 +141,7 @@ me.updateDatabaseList = CountryIsoCode => {
   )
 }
 
-me.updateDatabaseListByUser = () => {
+common.updateDatabaseListByUser = () => {
   jQuery('.contentBlock').hide()
   jQuery('#divRegionList').show()
   // Hide everything at start...
@@ -158,13 +158,6 @@ me.updateDatabaseListByUser = () => {
     },
     function(data) {
       if (parseInt(data.Status) > 0) {
-        let RegionByRole = new Array(5)
-        RegionByRole['ADMINREGION'] = new Array()
-        RegionByRole['SUPERVISOR'] = new Array()
-        RegionByRole['USER'] = new Array()
-        RegionByRole['OBSERVER'] = new Array()
-        RegionByRole['NONE'] = new Array()
-
         jQuery('.databaseList').empty()
         jQuery.each(data.RegionList, function(RegionId, value) {
           jQuery('#divRegionList #title_' + value.Role).show()
@@ -209,6 +202,6 @@ function displayRegionInfo(RegionId) {
   jQuery('#pageinfo').show()
 }
 
-me.displayRegionInfo = displayRegionInfo
+common.displayRegionInfo = displayRegionInfo
 
-export default me
+export default common
