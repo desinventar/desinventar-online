@@ -4,6 +4,7 @@ module.exports = {
     connection: {
       filename: `${__dirname}/region.sqlite3`
     },
+    useNullAsDefault: true,
     migrations: {
       directory: `${__dirname}/region`
     }

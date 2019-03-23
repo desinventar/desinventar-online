@@ -4,6 +4,7 @@ module.exports = {
     connection: {
       filename: `${__dirname}/core.sqlite3`
     },
+    useNullAsDefault: true,
     migrations: {
       directory: `${__dirname}/core`
     }
