@@ -212,7 +212,7 @@ switch ($cmd) {
         imagefill($imgTitle, 0, 0, $white);
         $item = $options['title'];
         $bbox = imagettfbbox(11, 0, $font, $item);
-        $iTitleMarginX = (imagesx($imgTitle) - ($bbox[2] - $bbox[0]) )/2;
+        $iTitleMarginX = (imagesx($imgTitle) - ($bbox[2] - $bbox[0]))/2;
         imagettftext($imgTitle, 11, 0, $iTitleMarginX, 13, $black, $font, $item);
         imagecopy($imgAll, $imgTitle, $iTitleLeft, $iTitleTop, 0, 0, $iTitleWidth, $iTitleHeight);
 

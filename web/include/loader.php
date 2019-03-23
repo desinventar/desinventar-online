@@ -72,7 +72,7 @@ require_once(BASE . '/include/common.php');
 
 // SETTINGS
 date_default_timezone_set('UTC');
-$time_start = microtime_float();
+$time_start = microtimeFloat();
 $util = new \DesInventar\Common\Util();
 $SessionId = $util->uuid4();
 if ($config->flags['env'] != 'command') {
@@ -173,10 +173,5 @@ if ($config->flags['env'] != 'command') {
     $t->assign('desinventarVersion', $version->getVersion());
     $t->assign('desinventarUserId', $us->UserId);
     $t->assign('desinventarUserFullName', $us->getUserFullName());
-    $t->assign('config', json_encode(
-        [
-            'flags' => $config->flags,
-            'params' => $config->params
-        ]
-    ));
+    $t->assign('config', json_encode(['flags' => $config->flags, 'params' => $config->params]));
 }

@@ -1,7 +1,7 @@
 <?php
 use DesInventar\Legacy\Model\GeographyItem;
 
-function geography_delete_items($prmConn, $prmGeoLevelId)
+function geographyDeleteItems($prmConn, $prmGeoLevelId)
 {
     $answer = ERR_NO_ERROR;
     $query = 'DELETE FROM Geography WHERE GeographyLevel>=' . $prmGeoLevelId;
@@ -9,7 +9,7 @@ function geography_delete_items($prmConn, $prmGeoLevelId)
     return $answer;
 }
 
-function geography_import_from_dbf(
+function geographyImportFromDbf(
     $prmSession,
     $prmGeoLevelId,
     $prmFilename,
@@ -112,7 +112,7 @@ function geography_import_from_dbf(
     return $iReturn;
 }
 
-function geography_update_dbf_record(
+function geographyUpdateDbfRecord(
     $prmDBFFile,
     $prmFieldCode,
     $prmFieldName,
@@ -128,7 +128,7 @@ function geography_update_dbf_record(
     if ($answer > 0) {
         $dbf = dbase_open($prmDBFFile, 2);
 
-        $field_list = geography_get_fields_from_dbf($dbf);
+        $field_list = geographyGetFieldsFromDbf($dbf);
         $field_code = array_search($prmFieldCode, $field_list);
         if (false === $field_code) {
             $answer = 0;
@@ -169,7 +169,7 @@ function geography_update_dbf_record(
     return $answer;
 }
 
-function geography_get_fields_from_dbf($dbf)
+function geographyGetFieldsFromDbf($dbf)
 {
     $header = dbase_get_header_info($dbf);
     $field_list = array();
@@ -179,15 +179,15 @@ function geography_get_fields_from_dbf($dbf)
     return $field_list;
 }
 
-function geography_get_fields_from_dbffile($prmFilename)
+function geographyGetFieldsFromDbfFile($prmFilename)
 {
     $dbf = dbase_open($prmFilename, 'r');
-    $field_list = geography_get_fields_from_dbf($dbf);
+    $field_list = geographyGetFieldsFromDbf($dbf);
     dbase_close($dbf);
     return $field_list;
 }
 
-function geography_get_items_count($conn, $prmGeoLevelId)
+function geographyGetItemsCount($conn, $prmGeoLevelId)
 {
     $query = 'SELECT COUNT(*) AS C FROM Geography WHERE GeographyLevel=' . $prmGeoLevelId;
     $count = 0;
@@ -197,7 +197,7 @@ function geography_get_items_count($conn, $prmGeoLevelId)
     return $count;
 }
 
-function geography_export_to_csv($conn)
+function geographyExportToCsv($conn)
 {
     $query = 'SELECT * FROM Geography ORDER BY GeographyId';
     $csv = '';

@@ -203,7 +203,7 @@ if (isset($post['page']) || isset($post['_D+cmd'])) {
         $t->assign('data_header', $data_header);
     }
 }
-$time_end = microtime_float();
+$time_end = microtimeFloat();
 $t->assign('time', $time_end - $time_start);
 $t->force_compile   = true;
 $t->display('data.tpl');

@@ -568,7 +568,7 @@ class LegacyIndex
                     if ($iReturn > 0) {
                         if ($geography_name_old != $o->get('GeographyName')) {
                             $g = new DIGeocarto($us, $o->get('GeographyLevel'));
-                            geography_update_dbf_record(
+                            geographyUpdateDbfRecord(
                                 $g->getDBFFilename(),
                                 $g->get('GeoLevelLayerCode'),
                                 $g->get('GeoLevelLayerName'),
@@ -602,7 +602,7 @@ class LegacyIndex
                     if (isset($_POST['Labels'])) {
                         $labels = $_POST['Labels'];
                     }
-                    return $labels . "\n" . geography_export_to_csv($us->q->dreg);
+                    return $labels . "\n" . geographyExportToCsv($us->q->dreg);
                 } else {
                     $answer['Status'] = $iReturn;
                     return htmlspecialchars(json_encode($answer), ENT_NOQUOTES, 'UTF-8');
@@ -688,7 +688,7 @@ class LegacyIndex
                 }
                 $answer['GeoLevelId'] = $GeoLevelId;
                 if ($iReturn > 0) {
-                    $geography_items_count = geography_get_items_count($us->q->dreg, $GeoLevelId);
+                    $geography_items_count = geographyGetItemsCount($us->q->dreg, $GeoLevelId);
                     $answer['GeographyItemsCount'] = $geography_items_count;
                     $r = new Region($us, $RegionId);
                     $GeolevelsList = $r->getGeolevelList();
@@ -709,7 +709,7 @@ class LegacyIndex
                 if ($iReturn > 0) {
                     $GeoLevel = $_POST['GeoLevel'];
                     $GeoLevelId = $GeoLevel['GeoLevelId'];
-                    $geography_items_count = geography_get_items_count($us->q->dreg, $GeoLevelId);
+                    $geography_items_count = geographyGetItemsCount($us->q->dreg, $GeoLevelId);
                     if ($GeoLevel['option']['ImportGeography'] < 1) {
                         if ($geography_items_count < 1) {
                             $GeoLevel['option']['ImportGeography'] = 1;
@@ -718,7 +718,7 @@ class LegacyIndex
                     if ($GeoLevel['option']['ImportGeography'] > 0) {
                         $File  = 'geocarto' . sprintf('%02d', $GeoLevelId) . '.dbf';
                         $DBDir = $us->getRegionDir($RegionId);
-                        geography_import_from_dbf(
+                        geographyImportFromDbf(
                             $us,
                             $GeoLevelId,
                             $DBDir . '/' . $File,
@@ -762,7 +762,7 @@ class LegacyIndex
 
                         $path_info = pathinfo($filename);
                         if (strtolower($path_info['extension']) == 'dbf') {
-                            $answer['DBFFields'] = geography_get_fields_from_dbffile($OutDir . '/' . $filename);
+                            $answer['DBFFields'] = geographyGetFieldsFromDbfFile($OutDir . '/' . $filename);
                         }
                     }
                 }
@@ -1345,13 +1345,13 @@ class LegacyIndex
                 $t->assign('sda1', $sda1);
 
                 // Map parameters
-                $range[] = array(     10, '1 - 10'          , 'ffff99');
-                $range[] = array(    100, '11 - 100'        , 'ffff00');
-                $range[] = array(   1000, '101 - 1000'      , 'ffcc00');
-                $range[] = array(  10000, '1001 - 10000'    , 'ff6600');
-                $range[] = array( 100000, '10001 - 100000'  , 'cc0000');
+                $range[] = array(10, '1 - 10', 'ffff99');
+                $range[] = array(100, '11 - 100' , 'ffff00');
+                $range[] = array(1000, '101 - 1000', 'ffcc00');
+                $range[] = array(10000, '1001 - 10000', 'ff6600');
+                $range[] = array(100000, '10001 - 100000', 'cc0000');
                 $range[] = array(1000000, '100001 - 1000000', '660000');
-                $range[] = array(''     , '1000001 ->'      , '000000');
+                $range[] = array('', '1000001 ->', '000000');
                 $t->assign('range', $range);
                 // Statistics
                 $st = array();

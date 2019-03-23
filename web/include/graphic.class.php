@@ -131,7 +131,7 @@ class Graphic
         }
 
         if (($this->options['Type'] == 'HISTOGRAM') &&
-             ($this->options['SubType'] > 0) ) {
+             ($this->options['SubType'] > 0)) {
             $serie_keys = array();
             foreach ($val as $serie_key => $serie_values) {
                 foreach (array_keys($serie_values) as $value_key) {

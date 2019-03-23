@@ -85,7 +85,7 @@ function checkUserSess()
     // NOTE: need a function checkSession in dicore
     if ((isset($us->UserId)) &&
          (isset($us->sSessionId)) &&
-         (strlen($us->sSessionId) > 0) ) {
+         (strlen($us->sSessionId) > 0)) {
         if (strlen($us->UserId) > 0) {
             $iReturn = true;
         }
@@ -99,7 +99,7 @@ function checkAnonSess()
     $iReturn = false;
     if ((isset($us->UserId)) &&
          (isset($us->sSessionId)) &&
-         (strlen($us->sSessionId) > 0) ) {
+         (strlen($us->sSessionId) > 0)) {
         if (strlen($us->UserId) == 0) {
             $iReturn = true;
         }
@@ -160,7 +160,7 @@ function fixPost($post)
     }
 }
 
-function microtime_float()
+function microtimeFloat()
 {
     list($usec, $sec) = explode(" ", microtime());
     return ((float)$usec + (float)$sec);
