@@ -23,7 +23,7 @@ composer-autoload: .FORCE
 
 database: .FORCE
 	npm run db
-	cd files/database && make database && make update-base
+	cd files/database && make database
 
 lang: .FORCE
 	cd files/database && make lang

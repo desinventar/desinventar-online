@@ -12,7 +12,7 @@ database: base.db core.db desinventar.db
 # Rebuild base.db database
 base.db: create-base update-base
 
-create-base: base.yaml
+create-base: .FORCE
 	/bin/rm -f base.db && cp ../../migrations/base.sqlite3 base.db
 
 update-base: doc-db.csv event.csv cause.csv
@@ -28,10 +28,10 @@ update-base: doc-db.csv event.csv cause.csv
 	./iso3166tosql.pl | sqlite3 base.db
 	./square2sql.pl | sqlite3 base.db
 
-core.db: core.yaml
+core.db: .FORCE
 	/bin/rm -f core.db && cp ../../migrations/core.sqlite3 core.db
 
-desinventar.db: desinventar.yaml
+desinventar.db: .FORCE
 	/bin/rm -f desinventar.db && cp ../../migrations/region.sqlite3 desinventar.db
 
 lang: lang_spa lang_eng lang_por lang_fre
