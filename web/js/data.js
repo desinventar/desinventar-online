@@ -70,10 +70,10 @@ function doDataInitialize() {
     field_list.append(jQuery('<option>', { value: 'E.' + key }).text(value[0]))
   })
 
-  var field_list = jQuery('div.ViewDataParams select.FieldsShow')
-  field_list.find('option').remove()
+  var selectFieldShow = jQuery('div.ViewDataParams select.FieldsShow')
+  selectFieldShow.find('option').remove()
   jQuery('div.ViewParamFields div.ViewParamFieldShow').each(function() {
-    field_list.append(
+    selectFieldShow.append(
       jQuery('<option>', {
         value: 'D.' + jQuery('span.field', this).text()
       }).text(jQuery('span.label', this).text())

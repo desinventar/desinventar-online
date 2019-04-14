@@ -1141,14 +1141,13 @@ function setDICard(prmRegionId, arr) {
   myForm = jQuery('div.Datacard')
 
   var objElems = diform.elements // DICard is DesInventar form..
-  for (i = 0; i < objElems.length; i++) {
+  for (var i = 0; i < objElems.length; i++) {
     if (
-      objElems[i].id == 'GeoLevel0' ||
-      objElems[i].id == 'GeoLevel1' ||
-      objElems[i].id == 'GeoLevel2'
+      objElems[i].id !== 'GeoLevel0' &&
+      objElems[i].id !== 'GeoLevel1' &&
+      objElems[i].id !== 'GeoLevel2'
     ) {
-    } else {
-      if (objElems[i].id != '') {
+      if (objElems[i].id !== '') {
         varName = jQuery(myForm)
           .find('#' + objElems[i].id)
           .attr('name')

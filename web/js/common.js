@@ -135,10 +135,9 @@ function blockChars(e, value, type) {
   var chk = true
   var val = true // validate characters
   // Check max length
+  var len = true
   if (value.length >= parseInt(opt[1])) {
-    var len = false
-  } else {
-    var len = true
+    len = false
   }
   // Check datatype
   switch (opt[0]) {

@@ -79,11 +79,10 @@ function doUserPermAdminShow() {
 }
 
 function doUserPermAdminValidate() {
-  var iReturn = 1
-  if (iReturn > 0 && jQuery('#fldUserPermAdmin_UserId').val() == '') {
+  if (jQuery('#fldUserPermAdmin_UserId').val() === '') {
     iReturn = -1
   }
-  return iReturn
+  return 1
 }
 
 function doUserPermAdminUpdateUserAdmin(UserAdmin) {

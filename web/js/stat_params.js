@@ -116,14 +116,15 @@ function doViewStatParamsInitialize() {
     )
   )
 
-  var field_list = jQuery('div.ViewStatParams select.FieldsShow')
-  field_list.find('option').remove()
+  var selectFieldShow = jQuery('div.ViewStatParams select.FieldsShow')
+  selectFieldShow.find('option').remove()
+
   // EffectPeople (ef1)
   jQuery('div.desinventarInfo div.EffectList div.EffectPeople').each(
     function() {
       var field = jQuery('span.field', this).text()
       var label = jQuery('span.label', this).text()
-      field_list.append(
+      selectFieldShow.append(
         jQuery('<option>', { value: 'D.' + field + 'Q|>|-1' }).text(label)
       )
     }

@@ -240,7 +240,8 @@ function onReadyQueryDesign() {
         jQuery('div.QueryDesign select.Cause').append(option)
       }
     })
-    var option = jQuery('<option>', { value: '' }).text('---')
+
+    option = jQuery('<option>', { value: '' }).text('---')
     option.attr('disabled', 'disabled')
     jQuery('div.QueryDesign select.Cause').append(option)
     jQuery.each(jQuery('body').data('CauseList'), function(key, value) {
@@ -280,12 +281,12 @@ function onReadyQueryDesign() {
     )
 
     // Load EffectSector List (sec)
-    var effect_list = jQuery('div.QueryDesign table.EffectSectorList')
-    effect_list.find('tr:gt(0)').remove()
+    var effectSectorList = jQuery('div.QueryDesign table.EffectSectorList')
+    effectSectorList.find('tr:gt(0)').remove()
     jQuery('div.desinventarInfo div.EffectList div.EffectSector').each(
       function() {
         var field = jQuery('span.field', this).text()
-        var clone = jQuery('tr:last', effect_list)
+        var clone = jQuery('tr:last', effectSectorList)
           .clone()
           .show()
         jQuery('select.operator', clone)
@@ -296,17 +297,17 @@ function onReadyQueryDesign() {
           'field',
           jQuery(this).data('field')
         )
-        effect_list.append(clone)
+        effectSectorList.append(clone)
       }
     )
 
     // Load EffectLosses2 List (ef3)
-    var effect_list = jQuery('div.QueryDesign table.EffectListLosses2')
-    effect_list.find('tr:gt(0)').remove()
+    var effectListLosses2 = jQuery('div.QueryDesign table.EffectListLosses2')
+    effectListLosses2.find('tr:gt(0)').remove()
     jQuery('div.desinventarInfo div.EffectList div.EffectLosses2').each(
       function() {
         var field = jQuery('span.field', this).text()
-        var clone = jQuery('tr:last', effect_list)
+        var clone = jQuery('tr:last', effectListLosses2)
           .clone()
           .show()
         jQuery('select.operator', clone)
@@ -324,7 +325,7 @@ function onReadyQueryDesign() {
           'field',
           jQuery(this).data('field')
         )
-        effect_list.append(clone)
+        effectListLosses2.append(clone)
       }
     )
 

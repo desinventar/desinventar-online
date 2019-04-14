@@ -70,73 +70,64 @@ function onReadyDatabaseEvents() {
   })
 
   jQuery('#frmDatabaseEvents_Edit').on('submit', function(event) {
-    var bContinue = true
-    if (
-      bContinue &&
-      jQuery.trim(jQuery('#fldDatabaseEvents_EventName').val()) == ''
-    ) {
+    if (jQuery.trim(jQuery('#fldDatabaseEvents_EventName').val()) === '') {
       jQuery('#fldDatabaseEvents_EventName').highlight()
       jQuery('#msgDatabaseEvents_ErrorEmtpyFields').show()
       setTimeout(function() {
         jQuery('#fldDatabaseEvents_EventName').unhighlight()
         jQuery('div.DatabaseEvents span.status').hide()
       }, 2500)
-      bContinue = false
+      return false
     }
 
-    if (
-      bContinue &&
-      jQuery.trim(jQuery('#fldDatabaseEvents_EventDesc').val()) == ''
-    ) {
+    if (jQuery.trim(jQuery('#fldDatabaseEvents_EventDesc').val()) === '') {
       jQuery('#fldDatabaseEvents_EventDesc').highlight()
       jQuery('#msgDatabaseEvents_ErrorEmtpyFields').show()
       setTimeout(function() {
         jQuery('#fldDatabaseEvents_EventDesc').unhighlight()
         jQuery('div.DatabaseEvents span.status').hide()
       }, 2500)
-      bContinue = false
+      return false
     }
 
-    if (bContinue) {
-      jQuery('body').trigger('cmdMainWaitingShow')
-      jQuery.post(
-        jQuery('#desinventarURL').val() + '/',
-        {
-          cmd: 'cmdDatabaseEventsUpdate',
-          RegionId: jQuery('#desinventarRegionId').val(),
-          Event: jQuery('#frmDatabaseEvents_Edit').serializeObject()
-        },
-        function(data) {
-          jQuery('body').trigger('cmdMainWaitingHide')
-          if (parseInt(data.Status) > 0) {
-            jQuery('#divDatabaseEvents_Edit').hide()
-            jQuery('#btnDatabaseEvents_Add').show()
-            jQuery('#msgDatabaseEvents_UpdateOk').show()
-            doDatabaseEventsPopulateList(
-              'tbodyDatabaseEvents_EventListCustom',
-              data.EventListCustom
-            )
-            doDatabaseEventsPopulateList(
-              'tbodyDatabaseEvents_EventListDefault',
-              data.EventListDefault
-            )
-          } else {
-            switch (data.Status) {
-              case -15:
-                jQuery('#msgDatabaseEvents_ErrorCannotDelete').show()
-                break
-              default:
-                jQuery('#msgDatabaseEvents_UpdateError').show()
-                break
-            }
+    jQuery('body').trigger('cmdMainWaitingShow')
+    jQuery.post(
+      jQuery('#desinventarURL').val() + '/',
+      {
+        cmd: 'cmdDatabaseEventsUpdate',
+        RegionId: jQuery('#desinventarRegionId').val(),
+        Event: jQuery('#frmDatabaseEvents_Edit').serializeObject()
+      },
+      function(data) {
+        jQuery('body').trigger('cmdMainWaitingHide')
+        if (parseInt(data.Status) > 0) {
+          jQuery('#divDatabaseEvents_Edit').hide()
+          jQuery('#btnDatabaseEvents_Add').show()
+          jQuery('#msgDatabaseEvents_UpdateOk').show()
+          doDatabaseEventsPopulateList(
+            'tbodyDatabaseEvents_EventListCustom',
+            data.EventListCustom
+          )
+          doDatabaseEventsPopulateList(
+            'tbodyDatabaseEvents_EventListDefault',
+            data.EventListDefault
+          )
+        } else {
+          switch (data.Status) {
+            case -15:
+              jQuery('#msgDatabaseEvents_ErrorCannotDelete').show()
+              break
+            default:
+              jQuery('#msgDatabaseEvents_UpdateError').show()
+              break
           }
-          setTimeout(function() {
-            jQuery('div.DatabaseEvents span.status').hide()
-          }, 2500)
-        },
-        'json'
-      )
-    }
+        }
+        setTimeout(function() {
+          jQuery('div.DatabaseEvents span.status').hide()
+        }, 2500)
+      },
+      'json'
+    )
     return false
   })
 }

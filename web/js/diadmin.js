@@ -266,7 +266,7 @@ function sendList(cmd) {
     selectall('_D+Field[]')
     var ob = $('_D+Field[]')
     var mystr = ''
-    for (i = 0; i < ob.length; i++) {
+    for (var i = 0; i < ob.length; i++) {
       mystr += ob[i].value + ','
     }
     mystr += 'D.DisasterId'
@@ -301,7 +301,7 @@ function sendMap(cmd) {
       var extent = mm.getExtent()
       var layers = mm.layers
       var activelayers = []
-      for (i in layers) {
+      for (var i in layers) {
         if (
           layers[i].visibility &&
           layers[i].calculateInRange() &&
@@ -487,7 +487,7 @@ function combineForms(dcf, ref) {
   var dc = $(dcf)
   var rf = $(ref).elements
   var ih = null
-  for (i = 0; i < rf.length; i++) {
+  for (var i = 0; i < rf.length; i++) {
     if (rf[i].disabled == false) {
       ih = document.createElement('input')
       ih.type = 'hidden'

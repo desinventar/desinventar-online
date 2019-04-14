@@ -16,41 +16,33 @@ function onReadyExtraEffects() {
   jQuery('#frmEEFieldEdit').unbind('submit').submit(function() {
     var params = jQuery(this).serialize();
     var bContinue = true;
-    if (bContinue) {
-      if (jQuery('#EEFieldLabel').val() == '') {
-        jQuery('#EEFieldLabel').highlight().focus();
-        bContinue = false;
-      }
+    if (jQuery('#EEFieldLabel').val() == '') {
+      jQuery('#EEFieldLabel').highlight().focus();
+      return false;
     }
-    if (bContinue) {
-      if (jQuery('#EEFieldDesc').val() == '') {
-        jQuery('#EEFieldDesc').highlight().focus();
-        bContinue = false;
-      }
+    if (jQuery('#EEFieldDesc').val() == '') {
+      jQuery('#EEFieldDesc').highlight().focus();
+      return false;
     }
-    if (bContinue) {
-      if (jQuery('#EEFieldType').val() == '') {
-        jQuery('#EEFieldType').highlight().focus();
-        bContinue = false;
-      }
+    if (jQuery('#EEFieldType').val() == '') {
+      jQuery('#EEFieldType').highlight().focus();
+      return false
     }
-    if (bContinue) {
-      jQuery.post(jQuery('#desinventarURL').val() + '/extraeffects.php',
-        params,
-        function(data) {
-          jQuery('.msgEEFieldStatus').hide();
-          if (data.Status == 'OK') {
-            jQuery('#msgEEFieldStatusOk').show();
-            updateList('lst_eef', jQuery('#desinventarURL').val() + '/extraeffects.php', 'cmd=cmdEEFieldList+&RegionId='+ jQuery('#desinventarRegionId').val());
-            jQuery('#extraeffaddsect').hide();
-          } else {
-            jQuery('#msgEEFieldStatusError').show();
-          }
-        },
-        'json'
-      );
-    }
-    return false;
+    jQuery.post(jQuery('#desinventarURL').val() + '/extraeffects.php',
+      params,
+      function(data) {
+        jQuery('.msgEEFieldStatus').hide();
+        if (data.Status == 'OK') {
+          jQuery('#msgEEFieldStatusOk').show();
+          updateList('lst_eef', jQuery('#desinventarURL').val() + '/extraeffects.php', 'cmd=cmdEEFieldList+&RegionId='+ jQuery('#desinventarRegionId').val());
+          jQuery('#extraeffaddsect').hide();
+        } else {
+          jQuery('#msgEEFieldStatusError').show();
+        }
+      },
+      'json'
+    );
+    return false
   });
 }
 

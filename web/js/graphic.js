@@ -188,12 +188,12 @@ function doViewGraphParamsInitialize() {
   })
 
   // GraphTypeComparative - By Geolevels
-  var geolevel_list = jQuery('body').data('GeolevelsList')
-  var select = jQuery('div.ViewGraphParams select.TypeComparative')
-  jQuery(select)
+  var geolevelList = jQuery('body').data('GeolevelsList')
+  var selectTypeComparative = jQuery('div.ViewGraphParams select.TypeComparative')
+  jQuery(selectTypeComparative)
     .find('option.Geolevel')
     .remove()
-  jQuery.each(geolevel_list, function(key, value) {
+  jQuery.each(geolevelList, function(key, value) {
     var clone = jQuery('<option>', {
       value: 200 + parseInt(value.GeoLevelId)
     }).text(
@@ -202,7 +202,7 @@ function doViewGraphParamsInitialize() {
         value.GeoLevelName
     )
     jQuery(clone).addClass('Geolevel')
-    jQuery(select).append(clone)
+    jQuery(selectTypeComparative).append(clone)
   })
 }
 

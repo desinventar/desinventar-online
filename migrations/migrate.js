@@ -13,16 +13,16 @@ const parsedOptions = getopt
   .bindHelp()
   .parseSystem()
 const { options } = parsedOptions
-if (options.dir && options.dir !== '') {
+if (options.dir && options.dir.length > 0) {
   processDirectory(options.dir).then(() => {
     process.exit(0)
   })
 } else {
-  if (!options.file || typeof options.file === 'undefined') {
+  if (!options.file) {
     process.stderr.write(`file is a required parameter\n`)
     process.exit(1)
   }
-  if (!options.mode || typeof options.mode === 'undefined') {
+  if (!options.mode) {
     process.stderr.write(`mode is a required parameter\n`)
     process.exit(1)
   }
