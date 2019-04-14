@@ -99,7 +99,6 @@ function doViewMapParamsInitialize() {
 function createThematicMap() {
   var lon = parseFloat(jQuery('#prmMapLat').val())
   var lat = parseFloat(jQuery('#prmMapLon').val())
-  var zoom = parseInt(jQuery('#prmMapZoom').val())
   var minx = parseFloat(jQuery('#prmMapMinX').val())
   var maxx = parseFloat(jQuery('#prmMapMaxX').val())
   var miny = parseFloat(jQuery('#prmMapMinY').val())
@@ -179,9 +178,6 @@ function createThematicMap() {
 
   // Effects and Admin layer(s)
   jQuery('#MapEffectLayers div').each(function() {
-    var MapFile = jQuery(this)
-      .find(':eq(1)')
-      .text()
     var LayerName = jQuery(this)
       .find(':eq(2)')
       .text()

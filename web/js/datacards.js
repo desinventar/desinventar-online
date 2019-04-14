@@ -111,7 +111,6 @@ function onReadyDatacards() {
       var GeographyLevel = parseInt(jQuery(this).data('GeographyLevel'))
       var NextGeographyLevel = GeographyLevel + 1
       var myGeographyId = jQuery(this).val()
-      var GeographyParentId = myGeographyId.substr(0, myGeographyId.length - 5)
       var GeoLevelCount = jQuery('.GeoLevelSelect').size() - 1
 
       // Clear values of following sublevels
@@ -733,7 +732,6 @@ function doDatacardFind() {
 
 function doDatacardEdit() {
   desinventar.datacards.showStatus('')
-  var RegionId = jQuery('#desinventarRegionId').val()
   jQuery.post(
     jQuery('#desinventarURL').val() + '/',
     {

@@ -197,7 +197,7 @@ function getGeoItems(reg, geoid, l, lev, src) {
     if (ele.options[w].value == geo) ele.selectedIndex = w
   }
   if (l < lev) {
-    var lsAjax = new Ajax.Updater(
+    new Ajax.Updater(
       div,
       jQuery('#desinventarURL').val() + '/cards.php',
       {
@@ -295,7 +295,6 @@ function sendMap(cmd) {
       jQuery('#prmQueryCommand').val('cmdMapSave')
 
       // to export image save layers and extend..
-      var dcr = document.getElementById('dcr')
       var mm = map
       //var mm = dcr.map;
       var extent = mm.getExtent()

@@ -330,12 +330,12 @@ function onReadyQueryDesign() {
     )
 
     // Load EffectLosses1 List (ef2)
-    var effect_list = jQuery('div.QueryDesign table.EffectListLosses1')
-    effect_list.find('tr:gt(0)').remove()
+    var effectListLosses1 = jQuery('div.QueryDesign table.EffectListLosses1')
+    effectListLosses1.find('tr:gt(0)').remove()
     jQuery('div.desinventarInfo div.EffectList div.EffectLosses1').each(
       function() {
         var field = jQuery('span.field', this).text()
-        var clone = jQuery('tr:last', effect_list)
+        var clone = jQuery('tr:last', effectListLosses1)
           .clone()
           .show()
         jQuery('select.operator', clone)
@@ -353,17 +353,17 @@ function onReadyQueryDesign() {
           'field',
           jQuery(this).data('field')
         )
-        effect_list.append(clone)
+        effectListLosses1.append(clone)
       }
     )
 
     // Load EffectAdditional List (EEFieldList)
-    var effect_list = jQuery('div.QueryDesign table.EffectAdditionalList')
-    effect_list.find('tr:gt(0)').remove()
+    var effectAdditionalList = jQuery('div.QueryDesign table.EffectAdditionalList')
+    effectAdditionalList.find('tr:gt(0)').remove()
     jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
       var field = key
       var type = value[2]
-      var clone = jQuery('tr:first', effect_list)
+      var clone = jQuery('tr:first', effectAdditionalList)
         .clone()
         .show()
       jQuery('div.Effect', clone).hide()
@@ -402,7 +402,7 @@ function onReadyQueryDesign() {
       jQuery('input.type', clone).attr('value', type)
       jQuery('span.label', clone).text(value[0])
       jQuery('div.EffectAdditional', clone).data('field', field)
-      effect_list.append(clone)
+      effectAdditionalList.append(clone)
     })
     // Load QueryCustom field list
     var field_list = jQuery('div.QueryDesign table.QueryCustom div.list')
@@ -421,7 +421,6 @@ function onReadyQueryDesign() {
     )
     jQuery('div.desinventarInfo div.EffectList div.EffectPeople').each(
       function() {
-        var field = jQuery('span.field', this).text()
         var clone = jQuery('div:last', field_list)
           .clone()
           .show()
@@ -433,7 +432,6 @@ function onReadyQueryDesign() {
     )
     jQuery('div.desinventarInfo div.EffectList div.EffectSector').each(
       function() {
-        var field = jQuery('span.field', this).text()
         var clone = jQuery('div:last', field_list)
           .clone()
           .show()
@@ -445,7 +443,6 @@ function onReadyQueryDesign() {
     )
     jQuery('div.desinventarInfo div.EffectList div.EffectLosses2').each(
       function() {
-        var field = jQuery('span.field', this).text()
         var clone = jQuery('div:last', field_list)
           .clone()
           .show()
@@ -457,7 +454,6 @@ function onReadyQueryDesign() {
     )
     jQuery('div.desinventarInfo div.EffectList div.EffectOther').each(
       function() {
-        var field = jQuery('span.field', this).text()
         var clone = jQuery('div:last', field_list)
           .clone()
           .show()
@@ -469,7 +465,6 @@ function onReadyQueryDesign() {
     )
     jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
       var field = key
-      var type = value[2]
       var clone = jQuery('div:last', field_list)
         .clone()
         .show()

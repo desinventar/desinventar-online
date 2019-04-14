@@ -247,12 +247,6 @@ function doDatabaseUsersPopulateUserRoleList(UserRoleList) {
   jQuery('#tblDatabaseUsers_List .UserId').hide()
   jQuery('#tblDatabaseUsers_List .UserRole').hide()
 
-  var sAdminCurrent = ''
-  jQuery('#tbodyDatabaseUsers_List tr:gt(0)').each(function() {
-    if (jQuery('.UserRole', this).text() == 'ADMINREGION') {
-      sAdminCurrent = jQuery('.UserName', this).text()
-    }
-  })
   jQuery('#tbodyDatabaseUsers_List tr:even').addClass('under')
 }
 

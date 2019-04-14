@@ -91,7 +91,7 @@ function doUserAccountReset() {
 
 function doUserAccountCreate() {
   jQuery('#divUserAccountWindow').each(function() {
-    var w = new Ext.Window({
+    new Ext.Window({
       id: 'wndUserAccount',
       el: 'divUserAccountWindow',
       layout: 'fit',

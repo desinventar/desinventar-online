@@ -181,15 +181,6 @@ function onlyText(e) {
 }
 
 function onlyNumber(e) {
-  var keynum
-  var keychar
-  if (window.event) {
-    // IE
-    keynum = e.keyCode
-  } else if (e.which) {
-    // Netscape/Firefox/Opera
-    keynum = e.which
-  }
   if (e.keyCode < 48 || e.keyCode > 57) {
     return false
   }

@@ -827,9 +827,8 @@ function doMainMenuUpdate() {
 }
 
 function doDialogsCreate() {
-  var w
   // Query Open Window
-  w = new Ext.Window({
+  new Ext.Window({
     id: 'wndQueryOpen',
     el: 'qry-win',
     layout: 'fit',
@@ -851,7 +850,7 @@ function doDialogsCreate() {
   })
 
   // Database List - Database Search Window
-  w = new Ext.Window({
+  new Ext.Window({
     id: 'wndAdminUsers',
     el: 'divAdminUsersWin',
     layout: 'fit',
@@ -868,7 +867,8 @@ function doDialogsCreate() {
       autoScroll: true
     })
   })
-  w = new Ext.Window({
+
+  new Ext.Window({
     id: 'wndDialog',
     el: 'dlg-win',
     layout: 'fit',
@@ -882,8 +882,9 @@ function doDialogsCreate() {
     constrainHeader: true,
     items: new Ext.Panel({ contentEl: 'dlg', autoScroll: true })
   })
+
   // Datacard View/Edit Window
-  w = new Ext.Window({
+  new Ext.Window({
     id: 'wndDatacard',
     el: 'divDatacardWindow',
     layout: 'fit',
@@ -904,7 +905,7 @@ function doDialogsCreate() {
     showtip('')
   })
 
-  w = new Ext.Window({
+  new Ext.Window({
     id: 'wndViewDataParams',
     el: 'divViewDataParamsWindow',
     layout: 'fit',
@@ -946,7 +947,7 @@ function doDialogsCreate() {
     ] //button
   })
 
-  w = new Ext.Window({
+  new Ext.Window({
     id: 'wndViewMapParams',
     el: 'map-win',
     layout: 'fit',
@@ -985,7 +986,7 @@ function doDialogsCreate() {
     ]
   })
 
-  w = new Ext.Window({
+  new Ext.Window({
     id: 'wndViewGraphParams',
     el: 'divGraphParameters',
     layout: 'fit',
@@ -1022,7 +1023,7 @@ function doDialogsCreate() {
     ]
   })
 
-  w = new Ext.Window({
+  new Ext.Window({
     id: 'wndViewStdParams',
     el: 'std-win',
     layout: 'fit',

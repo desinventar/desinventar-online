@@ -45,7 +45,7 @@ function onReadyUserLogin() {
 function doUserLoginCreate() {
   // User Login Window
   jQuery('#divUserLoginWindow').each(function() {
-    var w = new Ext.Window({
+    new Ext.Window({
       id: 'wndUserLogin',
       el: 'divUserLoginWindow',
       layout: 'fit',

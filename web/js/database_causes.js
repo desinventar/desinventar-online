@@ -70,75 +70,64 @@ function onReadyDatabaseCauses() {
   })
 
   jQuery('#frmDatabaseCauses_Edit').on('submit', function(event) {
-    var bContinue = true
-    if (
-      bContinue &&
-      jQuery.trim(jQuery('#fldDatabaseCauses_CauseName').val()) == ''
-    ) {
-      jQuery('#fldDatabaseCauses_CauseName').highlight()
-      jQuery('#msgDatabaseCauses_ErrorEmtpyFields').show()
-      setTimeout(function() {
-        jQuery('#fldDatabaseCauses_CauseName').unhighlight()
-        jQuery('div.DatabaseCauses span.status').hide()
-      }, 2500)
-      bContinue = false
+    if (jQuery.trim(jQuery('#fldDatabaseCauses_CauseName').val()) === '') {
+      return highligthCauseError()
     }
 
-    if (
-      bContinue &&
-      jQuery.trim(jQuery('#fldDatabaseCauses_CauseDesc').val()) == ''
-    ) {
-      jQuery('#fldDatabaseCauses_CauseDesc').highlight()
-      jQuery('#msgDatabaseCauses_ErrorEmtpyFields').show()
-      setTimeout(function() {
-        jQuery('#fldDatabaseCauses_CauseDesc').unhighlight()
-        jQuery('div.DatabaseCauses span.status').hide()
-      }, 2500)
-      bContinue = false
+    if (jQuery.trim(jQuery('#fldDatabaseCauses_CauseDesc').val()) === '') {
+      return highligthCauseError()
     }
 
-    if (bContinue) {
-      jQuery('body').trigger('cmdMainWaitingShow')
-      jQuery.post(
-        jQuery('#desinventarURL').val() + '/',
-        {
-          cmd: 'cmdDatabaseCausesUpdate',
-          RegionId: jQuery('#desinventarRegionId').val(),
-          Cause: jQuery('#frmDatabaseCauses_Edit').serializeObject()
-        },
-        function(data) {
-          jQuery('body').trigger('cmdMainWaitingHide')
-          if (parseInt(data.Status) > 0) {
-            jQuery('#divDatabaseCauses_Edit').hide()
-            jQuery('#btnDatabaseCauses_Add').show()
-            jQuery('#msgDatabaseCauses_UpdateOk').show()
-            doDatabaseCausesPopulateList(
-              'tbodyDatabaseCauses_CauseListCustom',
-              data.CauseListCustom
-            )
-            doDatabaseCausesPopulateList(
-              'tbodyDatabaseCauses_CauseListDefault',
-              data.CauseListDefault
-            )
-          } else {
-            switch (data.Status) {
-              case -15:
-                jQuery('#msgDatabaseCauses_ErrorCannotDelete').show()
-                break
-              default:
-                jQuery('#msgDatabaseCauses_UpdateError').show()
-                break
-            }
+    jQuery('body').trigger('cmdMainWaitingShow')
+    jQuery.post(
+      jQuery('#desinventarURL').val() + '/',
+      {
+        cmd: 'cmdDatabaseCausesUpdate',
+        RegionId: jQuery('#desinventarRegionId').val(),
+        Cause: jQuery('#frmDatabaseCauses_Edit').serializeObject()
+      },
+      function(data) {
+        jQuery('body').trigger('cmdMainWaitingHide')
+        if (parseInt(data.Status) > 0) {
+          jQuery('#divDatabaseCauses_Edit').hide()
+          jQuery('#btnDatabaseCauses_Add').show()
+          jQuery('#msgDatabaseCauses_UpdateOk').show()
+          doDatabaseCausesPopulateList(
+            'tbodyDatabaseCauses_CauseListCustom',
+            data.CauseListCustom
+          )
+          doDatabaseCausesPopulateList(
+            'tbodyDatabaseCauses_CauseListDefault',
+            data.CauseListDefault
+          )
+        } else {
+          switch (data.Status) {
+            case -15:
+              jQuery('#msgDatabaseCauses_ErrorCannotDelete').show()
+              break
+            default:
+              jQuery('#msgDatabaseCauses_UpdateError').show()
+              break
           }
-          setTimeout(function() {
-            jQuery('div.DatabaseCauses span.status').hide()
-          }, 2500)
-        },
-        'json'
-      )
-    }
+        }
+        setTimeout(function() {
+          jQuery('div.DatabaseCauses span.status').hide()
+        }, 2500)
+      },
+      'json'
+    )
     return false
   })
+}
+
+function highligthCauseError() {
+  jQuery('#fldDatabaseCauses_CauseName').highlight()
+  jQuery('#msgDatabaseCauses_ErrorEmtpyFields').show()
+  setTimeout(function() {
+    jQuery('#fldDatabaseCauses_CauseName').unhighlight()
+    jQuery('div.DatabaseCauses span.status').hide()
+  }, 2500)
+  return false
 }
 
 function doCausesFormSetup() {

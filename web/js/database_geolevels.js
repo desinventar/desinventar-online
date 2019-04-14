@@ -99,105 +99,82 @@ function onReadyGeolevels() {
   })
 
   jQuery('#frmGeolevel').submit(function() {
-    var bContinue = true
     jQuery(':input', this).each(function() {
       jQuery(this).val(jQuery.trim(jQuery(this).val()))
     })
 
-    if (
-      bContinue &&
-      jQuery.trim(jQuery('#frmGeolevel .GeoLevelName').val()) == ''
-    ) {
+    if (jQuery.trim(jQuery('#frmGeolevel .GeoLevelName').val()) === '') {
       jQuery('#frmGeolevel .GeoLevelName').highlight()
       jQuery('div.status .statusRequiredFields').show()
-      bContinue = false
+      return unhighlightGeoLevelFields()
     }
-    if (bContinue) {
-      var iSize = jQuery('#frmGeolevel .filename').size()
-      var iCount = 0
-      var bUpdateCarto = false
-      jQuery('#frmGeolevel .filename').each(function() {
-        if (jQuery(this).val() != '') {
-          iCount++
+
+    var iSize = jQuery('#frmGeolevel .filename').size()
+    var iCount = 0
+    jQuery('#frmGeolevel .filename').each(function() {
+      if (jQuery(this).val() != '') {
+        iCount++
+      }
+    })
+    if (iCount > 0 && iCount < iSize) {
+      jQuery('div.status .statusMissingFiles').show()
+      return unhighlightGeoLevelFields()
+    }
+
+    if (jQuery('#frmGeolevel .GeoLevelLayerCode').val() === '') {
+      jQuery('#frmGeolevel .GeoLevelLayerCode').highlight()
+      jQuery('div.status .statusRequiredFields').show()
+      return unhighlightGeoLevelFields()
+    }
+
+    if (jQuery('#frmGeolevel .GeoLevelLayerName').val() == '') {
+      jQuery('#frmGeolevel .GeoLevelLayerName').highlight()
+      jQuery('div.status .statusRequiredFields').show()
+      return unhighlightGeoLevelFields()
+    }
+
+    jQuery('body').trigger('cmdMainWaitingShow')
+    jQuery.post(
+      jQuery('#desinventarURL').val() + '/',
+      {
+        cmd: 'cmdGeolevelsUpdate',
+        RegionId: jQuery('#desinventarRegionId').val(),
+        GeoLevel: jQuery('#frmGeolevel').toObject()
+      },
+      function(data) {
+        jQuery('body').trigger('cmdMainWaitingHide')
+        if (parseInt(data.Status) > 0) {
+          jQuery('#frmGeolevel .GeoLevelId').val(data.GeoLevelId)
+          jQuery('#divGeolevels_Edit').hide()
+          jQuery('#btnGeolevels_Add').show()
+          jQuery('div.status .statusUpdateOk').show()
+          doGeolevelsPopulateList(data.GeolevelsList)
+
+          jQuery('div.status span.status').hide()
+          jQuery('div.status span.statusCreatingGeography').show()
+          jQuery.post(
+            jQuery('#desinventarURL').val() + '/',
+            {
+              cmd: 'cmdGeolevelsImportGeography',
+              RegionId: jQuery('#desinventarRegionId').val(),
+              GeoLevel: jQuery('#frmGeolevel').toObject()
+            },
+            function(data) {
+              jQuery('div.status span.statusCreatingGeography').hide()
+              jQuery('div.status .statusUpdateOk').show()
+              setTimeout(function() {
+                jQuery('div.status span.status').hide()
+              }, 3000)
+            },
+            'json'
+          )
+        } else {
+          jQuery('div.status .statusUpdateError').show()
         }
-      })
-      bUpdateCarto = iCount > 0
-      if (bUpdateCarto && bContinue && iCount < iSize) {
-        bContinue = false
-        jQuery('div.status .statusMissingFiles').show()
-      }
-      if (
-        bUpdateCarto &&
-        bContinue &&
-        jQuery('#frmGeolevel .GeoLevelLayerCode').val() == ''
-      ) {
-        jQuery('#frmGeolevel .GeoLevelLayerCode').highlight()
-        jQuery('div.status .statusRequiredFields').show()
-        bContinue = false
-      }
-
-      if (
-        bUpdateCarto &&
-        bContinue &&
-        jQuery('#frmGeolevel .GeoLevelLayerName').val() == ''
-      ) {
-        jQuery('#frmGeolevel .GeoLevelLayerName').highlight()
-        jQuery('div.status .statusRequiredFields').show()
-        bContinue = false
-      }
-    }
-
-    if (bContinue) {
-      jQuery('body').trigger('cmdMainWaitingShow')
-      jQuery.post(
-        jQuery('#desinventarURL').val() + '/',
-        {
-          cmd: 'cmdGeolevelsUpdate',
-          RegionId: jQuery('#desinventarRegionId').val(),
-          GeoLevel: jQuery('#frmGeolevel').toObject()
-        },
-        function(data) {
-          jQuery('body').trigger('cmdMainWaitingHide')
-          if (parseInt(data.Status) > 0) {
-            jQuery('#frmGeolevel .GeoLevelId').val(data.GeoLevelId)
-            jQuery('#divGeolevels_Edit').hide()
-            jQuery('#btnGeolevels_Add').show()
-            jQuery('div.status .statusUpdateOk').show()
-            doGeolevelsPopulateList(data.GeolevelsList)
-
-            jQuery('div.status span.status').hide()
-            jQuery('div.status span.statusCreatingGeography').show()
-            jQuery.post(
-              jQuery('#desinventarURL').val() + '/',
-              {
-                cmd: 'cmdGeolevelsImportGeography',
-                RegionId: jQuery('#desinventarRegionId').val(),
-                GeoLevel: jQuery('#frmGeolevel').toObject()
-              },
-              function(data) {
-                jQuery('div.status span.statusCreatingGeography').hide()
-                jQuery('div.status .statusUpdateOk').show()
-                setTimeout(function() {
-                  jQuery('div.status span.status').hide()
-                }, 3000)
-              },
-              'json'
-            )
-          } else {
-            jQuery('div.status .statusUpdateError').show()
-          }
-        },
-        'json'
-      )
-    } else {
-      setTimeout(function() {
-        jQuery('div.status .status').hide()
-        jQuery('#frmGeolevel .GeoLevelName').unhighlight()
-        jQuery('#frmGeolevel .GeoLevelLayerCode').unhighlight()
-        jQuery('#frmGeolevel .GeoLevelLayerName').unhighlight()
-      }, 2500)
-    }
-    return false
+      },
+      'json'
+    )
+    return unhighlightGeoLevelFields()
   })
   // Attach events to main page
   jQuery('body').on('cmdGeolevelsShow', function() {
@@ -220,6 +197,16 @@ function onReadyGeolevels() {
       'json'
     )
   })
+}
+
+function unhighlightGeoLevelFields() {
+  setTimeout(function() {
+    jQuery('div.status .status').hide()
+    jQuery('#frmGeolevel .GeoLevelName').unhighlight()
+    jQuery('#frmGeolevel .GeoLevelLayerCode').unhighlight()
+    jQuery('#frmGeolevel .GeoLevelLayerName').unhighlight()
+  }, 2500)
+  return false
 }
 
 function doGeolevelsPopulateList(GeolevelsList) {

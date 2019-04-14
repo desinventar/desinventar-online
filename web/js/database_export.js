@@ -7,7 +7,7 @@ function onReadyDatabaseExport() {
 
 function doDatabaseExportCreate() {
   // Database Export
-  var w = new Ext.Window({
+  new Ext.Window({
     id: 'wndDatabaseExport',
     el: 'divDatabaseExportWin',
     layout: 'fit',
@@ -22,26 +22,7 @@ function doDatabaseExportCreate() {
       contentEl: 'divDatabaseExportContent',
       autoScroll: true
     }),
-    buttons: [
-      /*{
-        id: 'btnDatabaseExportSend',
-        text: jQuery('#msgDatabaseExportButtonSend').text(),
-        handler: function()
-        {
-          doDatabaseExportAction();
-        }
-      },
-      {
-        text: jQuery('#msgDatabaseExportButtonClose').text(),
-        handler: function()
-        {
-          jQuery('#fldDatabaseExportSave').val(0);
-          jQuery('#imgDatabaseExportWait').attr('src','');
-          Ext.getCmp('wndDatabaseExport').hide();
-        }
-      }
-      */
-    ] //button
+    buttons: []
   })
   jQuery('#fldDatabaseExportSave').val(1)
 }

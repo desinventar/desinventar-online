@@ -4,7 +4,7 @@ function onReadyUserPermAdmin() {
 
 function doUserPermAdminSetup() {
   // Database Create
-  var w = new Ext.Window({
+  new Ext.Window({
     id: 'wndUserPermAdmin',
     el: 'divUserPermAdminWin',
     layout: 'fit',
@@ -80,7 +80,7 @@ function doUserPermAdminShow() {
 
 function doUserPermAdminValidate() {
   if (jQuery('#fldUserPermAdmin_UserId').val() === '') {
-    iReturn = -1
+    return -1
   }
   return 1
 }
