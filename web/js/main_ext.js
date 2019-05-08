@@ -884,7 +884,7 @@ function doDialogsCreate() {
   })
 
   // Datacard View/Edit Window
-  new Ext.Window({
+  var wndDatacard = new Ext.Window({
     id: 'wndDatacard',
     el: 'divDatacardWindow',
     layout: 'fit',
@@ -896,7 +896,7 @@ function doDialogsCreate() {
     constrainHeader: true,
     items: new Ext.Panel({ contentEl: 'divDatacardContent', autoScroll: true })
   })
-  w.on('hide', function() {
+  wndDatacard.on('hide', function() {
     // If we were editing a datacard, this sould cancel the edit and release
     // the lock in the datacard
     jQuery('#btnDatacardCancel').trigger('click')
