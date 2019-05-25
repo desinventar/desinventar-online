@@ -24,8 +24,9 @@ use \ZipArchive;
 
 class LegacyIndex
 {
-    public function __construct($template, $session, $language, $config)
+    public function __construct($container, $template, $session, $language, $config)
     {
+        $this->logger = $container['logger'];
         $this->template = $template;
         $this->session = $session;
         $this->language = $language;
@@ -719,6 +720,7 @@ class LegacyIndex
                         $File  = 'geocarto' . sprintf('%02d', $GeoLevelId) . '.dbf';
                         $DBDir = $us->getRegionDir($RegionId);
                         geographyImportFromDbf(
+                            $this->logger,
                             $us,
                             $GeoLevelId,
                             $DBDir . '/' . $File,
@@ -762,7 +764,10 @@ class LegacyIndex
 
                         $path_info = pathinfo($filename);
                         if (strtolower($path_info['extension']) == 'dbf') {
-                            $answer['DBFFields'] = geographyGetFieldsFromDbfFile($OutDir . '/' . $filename);
+                            $answer['DBFFields'] = geographyGetFieldsFromDbfFile(
+                                $this->logger,
+                                $OutDir . '/' . $filename
+                            );
                         }
                     }
                 }

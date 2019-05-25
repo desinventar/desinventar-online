@@ -59,9 +59,10 @@ $container['logger'] = function ($c) {
     return $logger;
 };
 
-$container['oldindex'] = function ($c) use ($settings) {
+$container['oldindex'] = function ($c) use ($settings, $container) {
     $session = $c->get('session')->getSegment('');
     $oldIndex = new \DesInventar\LegacyIndex(
+        $container,
         $settings['template'],
         $settings['session'],
         (new Language())->getLanguageIsoCode($session->get('language'), Language::ISO_639_2),

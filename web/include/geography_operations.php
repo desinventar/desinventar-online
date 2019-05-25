@@ -1,5 +1,6 @@
 <?php
 use DesInventar\Legacy\Model\GeographyItem;
+use DesInventar\Helpers\Dbf;
 
 function geographyDeleteItems($prmConn, $prmGeoLevelId)
 {
@@ -10,6 +11,7 @@ function geographyDeleteItems($prmConn, $prmGeoLevelId)
 }
 
 function geographyImportFromDbf(
+    $logger,
     $prmSession,
     $prmGeoLevelId,
     $prmFilename,
@@ -20,6 +22,7 @@ function geographyImportFromDbf(
 ) {
     $iReturn = ERR_NO_ERROR;
     if (! file_exists($prmFilename)) {
+        $logger->error('geographyImportFromDbf: File not found:' . $prmFilename);
         $iReturn = ERR_DEFAULT_ERROR;
     }
     if ($iReturn > 0) {
@@ -27,6 +30,7 @@ function geographyImportFromDbf(
         $query = 'SELECT GeographyId,GeographyCode,GeographyName FROM Geography ' .
             ' WHERE GeographyLevel=' . $prmGeoLevelId;
         $query .= ' ORDER BY GeographyId';
+        $logger->debug('geographyImportFromDbf: ' . $query);
         foreach ($prmSession->q->dreg->query($query, PDO::FETCH_ASSOC) as $row) {
             if ($row['GeographyId'] != '') {
                 $geo_list[$row['GeographyCode']] = array(
@@ -44,10 +48,10 @@ function geographyImportFromDbf(
 
         $item_count = 0;
         $parent_cache = array();
-        $dbf = dbase_open($prmFilename, 'r');
-        $dbf_count = dbase_numrecords($dbf);
-        for ($i = 1; $i <= $dbf_count; $i++) {
-            $row = dbase_get_record_with_names($dbf, $i);
+        $dbf_count = Dbf::getRecordCount($prmFilename);
+        $dbfRecords = Dbf::getRecords($prmFilename, $dbf_count);
+        $logger->debug('geographyImportFromDbf: recordCount: ' . $dbf_count . ' records read: ' . count($dbfRecords));
+        foreach ($dbfRecords as $row) {
             if ($row['deleted'] == 0) {
                 $geography_code = trim($row[$prmCode]);
                 $geography_name = trim($row[$prmName]);
@@ -97,7 +101,6 @@ function geographyImportFromDbf(
                 }
             }
         }
-        dbase_close($dbf);
         // Search the elements that are not found in the new shape file and
         // mark them for revision
         $item_count = 0;
@@ -179,11 +182,13 @@ function geographyGetFieldsFromDbf($dbf)
     return $field_list;
 }
 
-function geographyGetFieldsFromDbfFile($prmFilename)
+function geographyGetFieldsFromDbfFile($logger, $prmFilename)
 {
-    $dbf = dbase_open($prmFilename, 'r');
+    $logger->debug('geography:get columns from dbf file: ' . $prmFilename);
+    $dbf = dbase_open($prmFilename, 0);
     $field_list = geographyGetFieldsFromDbf($dbf);
     dbase_close($dbf);
+    $logger->debug('geography:getcolumns from dbf file: ' . json_encode($field_list));
     return $field_list;
 }
 
