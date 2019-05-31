@@ -90,7 +90,6 @@ services:
       dockerfile: docker/mysql/Dockerfile
     volumes:
       - mysql_data:/var/lib/mysql
-    restart: always
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
     ports:
