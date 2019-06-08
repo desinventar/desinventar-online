@@ -4,14 +4,14 @@ use Slim\Http\Request as Request;
 use Slim\Http\Response as Response;
 
 use Aura\Session\SessionFactory;
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
-use Monolog\Handler\ErrorLogHandler;
 
 use DesInventar\Common\Language;
 use DesInventar\Common\Util;
 use DesInventar\Common\ConfigLoader;
 use DesInventar\Common\Version;
+
+use DesInventar\Helpers\LoggerHelper;
+
 use koenster\PHPLanguageDetection\BrowserLocalization;
 
 require_once('../include/loader.php');
@@ -33,10 +33,7 @@ $container['config'] = function ($c) use ($config) {
 };
 
 $container['logger'] = function () {
-    $logger = new Logger('logger');
-    $logger->pushHandler(new StreamHandler('php://stderr'));
-    $logger->pushHandler(new ErrorLogHandler(ErrorLogHandler::OPERATING_SYSTEM, Logger::WARNING));
-    return $logger;
+    return LoggerHelper::logger([]);
 };
 
 $app->get('/', function (Request $request, Response $response, array $args) use ($container, $t) {

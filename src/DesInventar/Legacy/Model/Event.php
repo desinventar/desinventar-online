@@ -3,7 +3,7 @@ namespace DesInventar\Legacy\Model;
 
 use DesInventar\Common\Util;
 
-use \PDO;
+use PDO;
 
 class Event extends Record
 {

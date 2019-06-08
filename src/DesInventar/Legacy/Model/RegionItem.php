@@ -14,7 +14,7 @@ class RegionItem extends Record
 
         parent::__construct($prmSession);
         $num_args = func_num_args();
-        $this->setConnection("core");
+        $this->setRegion("core");
         if ($num_args >= 2) {
             $prmRegionId = func_get_arg(1);
             if ($prmRegionId != '') {

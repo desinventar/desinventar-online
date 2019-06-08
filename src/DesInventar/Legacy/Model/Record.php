@@ -1,9 +1,11 @@
 <?php
 namespace DesInventar\Legacy\Model;
 
-use \PDO;
-use \Exception;
-use \PDOException;
+use PDO;
+use Exception;
+use PDOException;
+use UserSession;
+use DesInventar\Helpers\LoggerHelper;
 
 class Record extends Model
 {
@@ -22,18 +24,31 @@ class Record extends Model
     {
         parent::__construct($prmSession);
         if ($prmSession) {
-            $this->q = $prmSession->q;
-            $this->setConnection($prmSession->RegionId);
+            $this->setSession($prmSession);
         }
     }
 
-    public function setConnection($prmDB)
+    public function setSession($prmSession)
+    {
+        if (isset($prmSession->q)) {
+            $this->q = $prmSession->q;
+            return $this->setRegion($prmSession->getRegionId());
+        }
+        return $this->setConnection($prmSession);
+    }
+
+    public function setConnection($conn)
+    {
+        $this->conn = $conn;
+        return $this->conn;
+    }
+
+    public function setRegion($prmDB)
     {
         if ($prmDB == 'core') {
-            $this->conn = $this->q->core;
-        } else {
-            $this->conn = $this->q->dreg;
+            return $this->setConnection($this->q->core);
         }
+        return $this->setConnection($this->q->dreg);
     }
 
     public function getTableName()

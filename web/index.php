@@ -4,12 +4,10 @@ use Slim\Http\Request as Request;
 use Slim\Http\Response as Response;
 
 use Aura\Session\SessionFactory;
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
-use Monolog\Handler\ErrorLogHandler;
 
 use DesInventar\Common\Language;
 use DesInventar\Common\Util;
+use DesInventar\Helpers\LoggerHelper;
 
 use Api\Helpers\JsonApiResponse;
 use Api\Helpers\SessionMiddleware;
@@ -52,11 +50,7 @@ $container['config'] = function ($c) use ($config) {
 };
 
 $container['logger'] = function ($c) {
-    $loggerConfig = $c['config']->logger;
-    $logger = new Logger('logger');
-    $logger->pushHandler(new StreamHandler($loggerConfig['file'], $loggerConfig['level']));
-    $logger->pushHandler(new ErrorLogHandler(ErrorLogHandler::OPERATING_SYSTEM, Logger::WARNING));
-    return $logger;
+    return LoggerHelper::logger($c['config']->logger);
 };
 
 $container['oldindex'] = function ($c) use ($settings, $container) {

@@ -1189,6 +1189,11 @@ class UserSession
         return $gItems;
     }
 
+    public function getRegionId()
+    {
+        return $this->RegionId;
+    }
+
     public function getDBDir()
     {
         $DBDir = '';
