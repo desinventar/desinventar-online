@@ -20,6 +20,8 @@ class UserSession
     const PASSWORD_IS_CLEAR = false;
 
     private $session = null;
+    public $RegionId = '';
+    public $RegionLangIsoCode = 'eng';
 
     public function __construct($sSessionId = null, $config = array())
     {

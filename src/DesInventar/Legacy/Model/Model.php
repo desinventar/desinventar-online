@@ -24,7 +24,7 @@ class Model
     public function __construct($prmSession)
     {
         $this->session  = $prmSession;
-        if ($this->session) {
+        if ($this->session && isset($this->session->q)) {
             $this->RegionId = $this->session->RegionId;
         }
         $num_args = func_num_args();
@@ -43,7 +43,7 @@ class Model
         $this->createFields($this->sFieldDef);
         $this->set('RegionId', $this->RegionId);
         $LangIsoCode = 'eng';
-        if ($this->session && $this->session->q->RegionId != 'core') {
+        if ($this->session && isset($this->session->q) && $this->session->q->RegionId != 'core') {
             $LangIsoCode = $this->session->RegionLangIsoCode; //getDBInfoValue('LangIsoCode');
         }
         $this->set('LangIsoCode', $LangIsoCode);

@@ -1,5 +1,6 @@
 <?php
 use DesInventar\Legacy\Model\GeographyItem;
+use DesInventar\Legacy\GeographyOperations;
 use DesInventar\Helpers\Dbf;
 
 function geographyDeleteItems($prmConn, $prmGeoLevelId)
@@ -20,99 +21,17 @@ function geographyImportFromDbf(
     $prmParentCode,
     $prmCharset
 ) {
-    $iReturn = ERR_NO_ERROR;
-    if (! file_exists($prmFilename)) {
-        $logger->error('geographyImportFromDbf: File not found:' . $prmFilename);
-        $iReturn = ERR_DEFAULT_ERROR;
-    }
-    if ($iReturn > 0) {
-        $geo_list = array();
-        $query = 'SELECT GeographyId,GeographyCode,GeographyName FROM Geography ' .
-            ' WHERE GeographyLevel=' . $prmGeoLevelId;
-        $query .= ' ORDER BY GeographyId';
-        $logger->debug('geographyImportFromDbf: ' . $query);
-        foreach ($prmSession->q->dreg->query($query, PDO::FETCH_ASSOC) as $row) {
-            if ($row['GeographyId'] != '') {
-                $geo_list[$row['GeographyCode']] = array(
-                    'id' => $row['GeographyId'],
-                    'name' => $row['GeographyName'],
-                    'updated' => 0
-                );
-                $geo_name_count[$row['GeographyName']] = 1;
-            }
-        }
-
-        // Set default value GeographyActive=1 for elements in this level
-        $query = 'UPDATE Geography SET GeographyActive=1 WHERE GeographyActive>0 AND GeographyLevel=' . $prmGeoLevelId;
-        $prmSession->q->dreg->query($query);
-
-        $item_count = 0;
-        $parent_cache = array();
-        $dbf_count = Dbf::getRecordCount($prmFilename);
-        $dbfRecords = Dbf::getRecords($prmFilename, $dbf_count);
-        $logger->debug('geographyImportFromDbf: recordCount: ' . $dbf_count . ' records read: ' . count($dbfRecords));
-        foreach ($dbfRecords as $row) {
-            if ($row['deleted'] == 0) {
-                $geography_code = trim($row[$prmCode]);
-                $geography_name = trim($row[$prmName]);
-                if ($prmCharset !== 'UTF-8') {
-                    $geography_name = utf8_encode($geography_name);
-                }
-                $geography_id = '';
-                if (isset($geo_list[$geography_code])) {
-                    $geography_id = $geo_list[$geography_code]['id'];
-                    $geo_list[$geography_code]['updated'] = 1;
-                } else {
-                    $parent_code = '';
-                    $geography_id = '';
-                    if ($prmParentCode != '') {
-                        $parent_code = trim($row[$prmParentCode]);
-                    }
-                    if (isset($parent_cache[$parent_code])) {
-                        $parent_id = $parent_cache[$parent_code];
-                    } else {
-                        $parent_id = GeographyItem::getIdByCode($prmSession, $parent_code);
-                        $parent_cache[$parent_code] = $parent_id;
-                    }
-                }
-                $o = new GeographyItem($prmSession, $geography_id);
-                $o->set('GeographyName', $geography_name);
-                $o->set('GeographyCode', $geography_code);
-                $o->set('GeographyLevel', $prmGeoLevelId);
-                if ($geography_id == '') {
-                    $o->setGeographyId($parent_id);
-                    $geography_id = $o->get('GeographyId');
-                    if (isset($geo_name_count[$geography_name])) {
-                        $geography_name .= ' ' . $geo_name_count[$geography_name] + 1;
-                        $o->set('GeographyName', $geography_name);
-                    }
-                    $o->setGeographyFQName();
-                    $geography_active = 1;
-                    if (count($geo_list) > 0) {
-                        $geography_active = 2;
-                    }
-                    $o->set('GeographyActive', $geography_active);
-                    $r = $o->insert();
-                } else {
-                    $r = $o->update();
-                }
-                if ($r > 0) {
-                    $item_count++;
-                }
-            }
-        }
-        // Search the elements that are not found in the new shape file and
-        // mark them for revision
-        $item_count = 0;
-        foreach ($geo_list as $key => $value) {
-            if ($value['updated'] < 1) {
-                $item_count++;
-                $query = 'UPDATE Geography SET GeographyActive=3 WHERE GeographyId LIKE "' . $value['id'] . '%"';
-                $prmSession->q->dreg->query($query);
-            }
-        }
-    }
-    return $iReturn;
+    return GeographyOperations::importFromDbf(
+        $prmSession->q->dreg,
+        $prmGeoLevelId,
+        $prmFilename,
+        [
+            'code' => $prmCode,
+            'name' => $prmName,
+            'parentCode' => $prmParentCode,
+            'charset' => $prmCharset
+        ]
+    );
 }
 
 function geographyUpdateDbfRecord(

@@ -65,11 +65,13 @@ class GeographyItem extends Record
 
     public static function getIdByCode($prmSession, $prmGeographyCode)
     {
+        $conn = $prmSession;
+        if (isset($prmSession->q)) {
+            $conn = $prmSession->q->dreg;
+        }
         $GeographyId = '';
-        $LangIsoCode = $prmSession->getDBInfoValue('LangIsoCode');
-        $sQuery= "SELECT * FROM Geography WHERE GeographyCode='" . $prmGeographyCode . "' " .
-                 " AND LangIsoCode='" . $LangIsoCode . "'";
-        foreach ($prmSession->q->dreg->query($sQuery) as $row) {
+        $sQuery= "SELECT * FROM Geography WHERE GeographyCode='" . $prmGeographyCode . "'";
+        foreach ($conn->query($sQuery) as $row) {
             $GeographyId = $row['GeographyId'];
         }
         return $GeographyId;
@@ -119,7 +121,7 @@ class GeographyItem extends Record
               AND LENGTH(GeographyId)=" . ($iGeographyLevel + 1) * 5 . "
         ");
         $TmpStr = '';
-        foreach ($this->q->dreg->query($sQuery) as $row) {
+        foreach ($this->conn->query($sQuery) as $row) {
             $TmpStr = substr($row['GeographyId'], $iGeographyLevel * 5, 5);
         }
         $TmpStr = $this->padNumber((int)$TmpStr + 1, 5);
@@ -173,7 +175,7 @@ class GeographyItem extends Record
             SET GeographyFQName=" . '"' . $this->get('GeographyFQName') . '"' . "
             WHERE GeographyId='" . $this->get('GeographyId') . "'
         ");
-        $this->q->dreg->query($query);
+        $this->conn->query($query);
         $query = trim("
             SELECT *
             FROM Geography
@@ -181,7 +183,7 @@ class GeographyItem extends Record
               AND GeographyLevel =" . ((int)$this->get('GeographyLevel') + 1) . "
             ORDER BY GeographyLevel,GeographyId;
         ");
-        foreach ($this->q->dreg->query($query) as $row) {
+        foreach ($this->conn->query($query) as $row) {
             $g = new self($this->session, $row['GeographyId']);
             $g->saveGeographyFQName();
         }
@@ -219,7 +221,7 @@ class GeographyItem extends Record
             FROM Disaster
             WHERE GeographyId LIKE '" . $this->get('GeographyId') . "%'
         ");
-        foreach ($this->q->dreg->query($Query) as $row) {
+        foreach ($this->conn->query($Query) as $row) {
             $Count = $row['COUNT'];
         }
         if ($Count > 0) {
