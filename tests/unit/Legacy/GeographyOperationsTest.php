@@ -61,6 +61,20 @@ final class GeographyOperationsTest extends TestCase
         $this->assertEquals(2, count($records));
     }
 
+    public function testImportGeographyFromCsv()
+    {
+        $conn = Database::getConnection();
+        GeographyOperations::deleteByLevelId($conn, 0);
+        $this->assertEquals(0, GeographyOperations::countByLevelId($conn, 0));
+        GeographyOperations::importFromCsv(
+            $conn,
+            0,
+            __DIR__ . '/../Helpers/level0.csv',
+            ['code' => 'Codigo', 'name' => 'Nombre']
+        );
+        $this->assertEquals(8, GeographyOperations::countByLevelId($conn, 0));
+    }
+
     public function testImportGeographyFromDbf()
     {
         $conn = Database::getConnection();
@@ -97,7 +111,6 @@ final class GeographyOperationsTest extends TestCase
     {
         $conn = Database::getConnection();
         GeographyOperations::deleteByLevelId($conn, 0);
-        GeographyOperations::deleteByLevelId($conn, 1);
 
         $this->assertEquals(0, GeographyOperations::countByLevelId($conn, 0));
         GeographyOperations::importFromArray($conn, 0, [
@@ -110,6 +123,7 @@ final class GeographyOperationsTest extends TestCase
         ]);
         $this->assertEquals(2, GeographyOperations::countByLevelId($conn, 0));
 
+        GeographyOperations::deleteByLevelId($conn, 1);
         $this->assertEquals(0, GeographyOperations::countByLevelId($conn, 1));
         GeographyOperations::importFromArray($conn, 1, [
             ['code' => '2011', 'name' => 'Colonia 2011A', 'parentCode' => '20'],
@@ -122,5 +136,29 @@ final class GeographyOperationsTest extends TestCase
             ['code' => '2012', 'name' => 'Colonia 2012', 'parentCode' => '20']
         ]);
         $this->assertEquals(2, GeographyOperations::countByLevelId($conn, 1));
+    }
+
+    public function testImportWithDuplicateName()
+    {
+        $conn = Database::getConnection();
+        GeographyOperations::deleteByLevelId($conn, 0);
+        $this->assertEquals(0, GeographyOperations::countByLevelId($conn, 0));
+        GeographyOperations::importFromArray($conn, 0, [
+            ['code' => '10', 'name' => 'Trantor 10'],
+            ['code' => '20', 'name' => 'Trantor 20']
+        ]);
+        $this->assertEquals(2, GeographyOperations::countByLevelId($conn, 0));
+
+        GeographyOperations::deleteByLevelId($conn, 1);
+        $this->assertEquals(0, GeographyOperations::countByLevelId($conn, 1));
+        GeographyOperations::importFromArray($conn, 0, [
+            ['code' => '1010', 'name' => 'Dahl', 'parentCode' => '10' ],
+            ['code' => '1020', 'name' => 'Dahl', 'parentCode' => '10' ],
+            ['code' => '1030', 'name' => 'Ery', 'parentCode' => '10' ],
+            ['code' => '2010', 'name' => 'Dahl', 'parentCode' => '20' ],
+            ['code' => '2020', 'name' => 'Ery', 'parentCode' => '20' ],
+            ['code' => '2030', 'name' => 'Ery', 'parentCode' => '20' ]
+        ]);
+        $this->assertEquals(6, GeographyOperations::countByLevelId($conn, 1));
     }
 }

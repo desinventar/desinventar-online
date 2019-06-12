@@ -3,6 +3,7 @@
 namespace Test\Helpers;
 
 use PDO;
+use Exception;
 
 class Database
 {
@@ -12,7 +13,10 @@ class Database
         if (self::$filename) {
             self::removeDatabase();
         }
-        $filename= tempnam(sys_get_temp_dir(), 'database_') . '.db';
+        $filename = tempnam(sys_get_temp_dir(), 'database_');
+        if (!$filename) {
+            return false;
+        }
         copy(__DIR__ . '/../../../files/database/desinventar.db', $filename);
         self::$filename = $filename;
         return $filename;

@@ -9,7 +9,7 @@ class GeographyItem extends Record
 
     protected static $def = array(
         'GeographyId' => array('type' => 'VARCHAR', 'size' => 100, 'pk' =>1),
-        'LangIsoCode' => array('type' => 'VARCHAR', 'size' => 3, 'pk' => 1),
+        'LangIsoCode' => array('type' => 'VARCHAR', 'size' => 3),
         'RegionId' => array('type' => 'VARCHAR', 'size' => 50),
         'GeographyCode' => array('type' => 'VARCHAR', 'size' => 100, 'default' => '---'),
         'GeographyName' => array('type' => 'VARCHAR', 'size' => 200, 'default' => '---'),
@@ -155,7 +155,7 @@ class GeographyItem extends Record
         $GeographyLevel = $this->get('GeographyLevel');
         if ($GeographyLevel > 0) {
             $ParentId = substr($this->get('GeographyId'), 0, $GeographyLevel*5);
-            $g = new self($this->session, $ParentId);
+            $g = new self($this->conn, $ParentId);
             $FQName = $g->get('GeographyFQName') . '/' . $FQName;
         }
         return $FQName;

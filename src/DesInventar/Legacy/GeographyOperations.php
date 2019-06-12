@@ -9,10 +9,10 @@ use DesInventar\Legacy\Model\GeographyItem;
 
 class GeographyOperations
 {
-    public static function getValueFromDbfRecord($record, $column)
+    public static function getValueFromArray($record, $column)
     {
         if (!isset($record[$column])) {
-            throw new Exception('DBF record does not have column: ' . $column);
+            throw new Exception(__CLASS__ . '::' . __FUNCTION__ .  ':DBF record does not have column: ' . $column);
         }
         return trim($record[$column]);
     }
@@ -24,15 +24,15 @@ class GeographyOperations
         $items = [];
         foreach ($records as $row) {
             $newItem = [
-                'code' => self::getValueFromDbfRecord($row, $options['code']),
-                'name' => self::getValueFromDbfRecord($row, $options['name']),
-                'deleted' => self::getValueFromDbfRecord($row, 'deleted')
+                'code' => self::getValueFromArray($row, $options['code']),
+                'name' => self::getValueFromArray($row, $options['name']),
+                'deleted' => self::getValueFromArray($row, 'deleted')
             ];
             if (isset($options['charset']) && $options['charset'] !== 'UTF-8') {
                 $newItem['name'] = utf8_encode($newItem['name']);
             }
             if (isset($options['parentCode']) && $options['parentCode'] !== '') {
-                $newItem['parentCode'] = self::getValueFromDbfRecord($row, $options['parentCode']);
+                $newItem['parentCode'] = self::getValueFromArray($row, $options['parentCode']);
             }
             $items[] = $newItem;
         }
@@ -92,7 +92,7 @@ class GeographyOperations
     {
         $fh = fopen($filename, 'w');
         if (!$fh) {
-            throw new Exception('saveArrayToCSV: Cannot create file : ' . $filename);
+            throw new Exception(__CLASS__ . '::' . __FUNCTION__ . ': Cannot create file : ' . $filename);
         }
         fputcsv($fh, array_keys(current($records)));
         foreach ($records as $row) {
@@ -101,17 +101,55 @@ class GeographyOperations
         fclose($fh);
     }
 
-    public static function importFromDbf(
-        $conn,
-        $prmGeoLevelId,
-        $prmFilename,
-        $prmOptions
-    ) {
-        if (! file_exists($prmFilename)) {
-            throw new Exception('geographyImportFromDbf: File not found:' . $prmFilename);
+    public static function getRecordsFromCsv($filename, $options)
+    {
+        $lines = file($filename, FILE_SKIP_EMPTY_LINES);
+        if (!$lines) {
+            return [];
         }
-        $dbfRecords = GeographyOperations::filterDeletedRecords(
-            GeographyOperations::getRecordsFromDbf($prmFilename, $prmOptions)
+        $csv = array_map("str_getcsv", $lines);
+        $keys = array_shift($csv);
+        if (!$keys) {
+            return [];
+        }
+        foreach ($csv as $i => $row) {
+            if ($row) {
+                $csv[$i] = array_combine($keys, $row);
+            }
+        }
+        $items = [];
+        foreach ($csv as $row) {
+            $newItem = [
+                'code' => self::getValueFromArray($row, $options['code']),
+                'name' => self::getValueFromArray($row, $options['name'])
+            ];
+            if (isset($options['charset']) && $options['charset'] !== 'UTF-8') {
+                $newItem['name'] = utf8_encode($newItem['name']);
+            }
+            if (isset($options['parentCode']) && $options['parentCode'] !== '') {
+                $newItem['parentCode'] = self::getValueFromArray($row, $options['parentCode']);
+            }
+            $items[] = $newItem;
+        }
+        return $items;
+    }
+
+    public static function importFromCsv($conn, $prmGeoLevelId, $prmFilename, $options)
+    {
+        if (! file_exists($prmFilename)) {
+            throw new Exception(__CLASS__ . '::' . __FUNCTION__ . ': File not found:' . $prmFilename);
+        }
+        $records = self::getRecordsFromCsv($prmFilename, $options);
+        return self::importFromArray($conn, $prmGeoLevelId, $records);
+    }
+
+    public static function importFromDbf($conn, $prmGeoLevelId, $prmFilename, $prmOptions)
+    {
+        if (! file_exists($prmFilename)) {
+            throw new Exception(__CLASS__ . '::' . __FUNCTION__ . ': File not found:' . $prmFilename);
+        }
+        $dbfRecords = self::filterDeletedRecords(
+            self::getRecordsFromDbf($prmFilename, $prmOptions)
         );
         return self::importFromArray($conn, $prmGeoLevelId, $dbfRecords);
     }
@@ -124,7 +162,9 @@ class GeographyOperations
         // Keep track of the geography names to avoid having duplicates
         $geo_name_count = [];
         foreach ($geo_list as $item) {
-            $geo_name_count[$item['name']] = 1;
+            $parentId = substr($item['id'], 0, intval((strlen($item['id'])/5) - 1));
+            $parentId = ($parentId === '') ? 'root': $parentId;
+            $geo_name_count[$parentId][$item['name']] = 1;
         }
 
         // Set default value GeographyActive=1 for elements in this level
@@ -160,10 +200,14 @@ class GeographyOperations
             if ($geography_id === '') {
                 $o->setGeographyId($parent_id);
                 $geography_id = $o->get('GeographyId');
-                if (isset($geo_name_count[$geography_name])) {
-                    $geography_name .= ' ' . $geo_name_count[$geography_name] + 1;
-                    $o->set('GeographyName', $geography_name);
+                $parentId = ($parent_id === '') ? 'root': $parent_id;
+                if (isset($geo_name_count[$parentId][$geography_name])) {
+                    $o->set('GeographyName', $geography_name . ' - ' . $geo_name_count[$parentId][$geography_name]);
                 }
+                $geo_name_count[$parentId][$geography_name] =
+                    isset($geo_name_count[$parentId][$geography_name])
+                    ? $geo_name_count[$parentId][$geography_name]  + 1
+                    : 1;
                 $o->setGeographyFQName();
                 $geography_active = 1;
                 if (count($geo_list) > 0) {
