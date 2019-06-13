@@ -1,13 +1,14 @@
-const config = require('config')
-const request = require('supertest')(config.test.api.url)
+const request = require('./helpers/httpClient').requestWithCookies
 
 describe('Maps API Tests', () => {
   it('Attempt to download a non-existent KML file', async () => {
-    const response = await request
-      .get('/maps/kml/non-existent-map-id')
-      .expect(404)
-    expect(response.header['content-type']).toBe(
-      'application/json;charset=utf-8'
-    )
+    try {
+      await request.get('/maps/kml/non-existent-map-id')
+    } catch (err) {
+      expect(err.status).toEqual(404)
+      expect(err.response.headers['content-type']).toBe(
+        'application/json;charset=utf-8'
+      )
+    }
   })
 })
