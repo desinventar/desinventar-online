@@ -183,7 +183,7 @@ function doDatabaseCausesPopulateList(tbodyId, CauseList) {
     jQuery('.CauseId', clonedRow).html(index)
     jQuery('.CausePredefined', clonedRow).html(value.CausePredefined)
     jQuery('.CauseName', clonedRow).html(value.CauseName)
-    jQuery('.CauseDesc', clonedRow).html(value.CauseDesc.substring(0, 150))
+    jQuery('.CauseDesc', clonedRow).html(value.CauseDesc ? value.CauseDesc.substring(0, 150) : '')
     jQuery('.CauseDesc', clonedRow).prop('title', value.CauseDesc)
     jQuery('.CauseActive :input', clonedRow).prop(
       'checked',

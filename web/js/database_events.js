@@ -185,7 +185,7 @@ function doDatabaseEventsPopulateList(tbodyId, EventList) {
     jQuery('.EventId', clonedRow).html(index)
     jQuery('.EventPredefined', clonedRow).html(value.EventPredefined)
     jQuery('.EventName', clonedRow).html(value.EventName)
-    jQuery('.EventDesc', clonedRow).html(value.EventDesc.substring(0, 150))
+    jQuery('.EventDesc', clonedRow).html(value.EventDesc ? value.EventDesc.substring(0, 150) : '')
     jQuery('.EventDesc', clonedRow).prop('title', value.EventDesc)
     jQuery('.EventActive :input', clonedRow).prop(
       'checked',
