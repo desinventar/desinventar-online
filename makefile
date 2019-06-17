@@ -4,7 +4,7 @@
 
 all: build
 
-devel-app: build-app php js
+devel-app: build-app php-basic js
 
 devel: build php js
 
@@ -28,7 +28,9 @@ database: .FORCE
 lang: .FORCE
 	cd files/database && make lang
 
-php: php-lint phpcs phpmd phpstan
+php-basic: php-lint phpcs phpmd
+
+php: php-basic phpstan
 
 test: test-unit test-api
 
