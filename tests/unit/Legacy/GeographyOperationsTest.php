@@ -12,7 +12,7 @@ final class GeographyOperationsTest extends TestCase
 {
     public static function setUpBeforeClass(): void
     {
-        Database::copyDatabase();
+        Database::copyDatabase('/tmp/database.db');
     }
 
     public static function tearDownAfterClass(): void
@@ -160,5 +160,26 @@ final class GeographyOperationsTest extends TestCase
             ['code' => '2030', 'name' => 'Ery', 'parentCode' => '20' ]
         ]);
         $this->assertEquals(6, GeographyOperations::countByLevelId($conn, 1));
+    }
+
+    public function testImportWithParentNotFound()
+    {
+        $conn = Database::getConnection();
+        GeographyOperations::deleteByLevelId($conn, 0);
+        $this->assertEquals(0, GeographyOperations::countByLevelId($conn, 0));
+        GeographyOperations::importFromArray($conn, 0, [
+            ['code' => '10', 'name' => 'Trantor 10'],
+            ['code' => '20', 'name' => 'Trantor 20']
+        ]);
+        $this->assertEquals(2, GeographyOperations::countByLevelId($conn, 0));
+
+        GeographyOperations::deleteByLevelId($conn, 1);
+        $this->assertEquals(0, GeographyOperations::countByLevelId($conn, 1));
+        GeographyOperations::importFromArray($conn, 0, [
+            ['code' => '1010', 'name' => 'Dahl', 'parentCode' => '15' ],
+            ['code' => '2020', 'name' => 'Ery', 'parentCode' => '20' ],
+        ]);
+        $this->assertEquals(2, GeographyOperations::countByLevelId($conn, 0));
+        $this->assertEquals(1, GeographyOperations::countByLevelId($conn, 1));
     }
 }

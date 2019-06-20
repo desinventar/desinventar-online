@@ -1,4 +1,5 @@
 <?php
+
 namespace DesInventar\Legacy;
 
 use Exception;
@@ -180,44 +181,61 @@ class GeographyOperations
             if (isset($geo_list[$geography_code])) {
                 $geography_id = $geo_list[$geography_code]['id'];
                 $geo_list[$geography_code]['updated'] = 1;
-            } else {
-                $parent_code = '';
-                $geography_id = '';
-                if (isset($row['parentCode']) && $row['parentCode'] != '') {
-                    $parent_code = trim($row['parentCode']);
-                    if (isset($parent_cache[$parent_code])) {
-                        $parent_id = $parent_cache[$parent_code];
-                    } else {
-                        $parent_id = GeographyItem::getIdByCode($conn, $parent_code);
+                $o = new GeographyItem($conn, $geography_id);
+                $o->setFromArray([
+                    'GeographyName' => $geography_name,
+                    'GeographyCode' => $geography_code,
+                    'GeographyLevel' => $prmGeoLevelId
+                ]);
+                $o->update();
+                continue;
+            }
+
+            // Insert new record
+            $parent_code = '';
+            $geography_id = '';
+            $canInsert = false;
+            if (isset($row['parentCode']) && $row['parentCode'] != '') {
+                $parent_code = trim($row['parentCode']);
+                if (isset($parent_cache[$parent_code])) {
+                    $parent_id = $parent_cache[$parent_code];
+                    $canInsert = true;
+                } else {
+                    $parent_id = GeographyItem::getIdByCode($conn, $parent_code);
+                    if ($parent_id !== '') {
+                        $canInsert = true;
                         $parent_cache[$parent_code] = $parent_id;
                     }
                 }
+            } else {
+                $canInsert = true;
+            }
+            if (!$canInsert) {
+                 // skip this record
+                continue;
             }
             $o = new GeographyItem($conn, $geography_id);
             $o->set('GeographyName', $geography_name);
             $o->set('GeographyCode', $geography_code);
             $o->set('GeographyLevel', $prmGeoLevelId);
-            if ($geography_id === '') {
-                $o->setGeographyId($parent_id);
-                $geography_id = $o->get('GeographyId');
-                $parentId = ($parent_id === '') ? 'root': $parent_id;
-                if (isset($geo_name_count[$parentId][$geography_name])) {
-                    $o->set('GeographyName', $geography_name . ' - ' . $geo_name_count[$parentId][$geography_name]);
-                }
-                $geo_name_count[$parentId][$geography_name] =
-                    isset($geo_name_count[$parentId][$geography_name])
-                    ? $geo_name_count[$parentId][$geography_name]  + 1
-                    : 1;
-                $o->setGeographyFQName();
-                $geography_active = 1;
-                if (count($geo_list) > 0) {
-                    $geography_active = 2;
-                }
-                $o->set('GeographyActive', $geography_active);
-                $r = $o->insert();
-            } else {
-                $r = $o->update();
+            $o->setGeographyId($parent_id);
+            $geography_id = $o->get('GeographyId');
+            $parentId = ($parent_id === '') ? 'root': $parent_id;
+            if (isset($geo_name_count[$parentId][$geography_name])) {
+                $o->set('GeographyName', $geography_name . ' - ' . $geo_name_count[$parentId][$geography_name]);
             }
+            $geo_name_count[$parentId][$geography_name] =
+                isset($geo_name_count[$parentId][$geography_name])
+                ? $geo_name_count[$parentId][$geography_name]  + 1
+                : 1;
+            $o->setGeographyFQName();
+            $geography_active = 1;
+            if (count($geo_list) > 0) {
+                $geography_active = 2;
+            }
+            $o->set('GeographyActive', $geography_active);
+            $r = $o->insert();
+
             if ($r > 0) {
                 $item_count++;
             }
