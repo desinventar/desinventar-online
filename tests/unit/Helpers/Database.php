@@ -8,12 +8,16 @@ use Exception;
 class Database
 {
     protected static $filename = null;
-    public static function copyDatabase()
+    protected static $removeWhenDone = true;
+    public static function copyDatabase($filename = null)
     {
         if (self::$filename) {
             self::removeDatabase();
         }
-        $filename = tempnam(sys_get_temp_dir(), 'database_');
+        self::$removeWhenDone = !($filename !== '');
+        if (!$filename) {
+            $filename = tempnam(sys_get_temp_dir(), 'database_');
+        }
         if (!$filename) {
             return false;
         }
@@ -24,8 +28,11 @@ class Database
 
     public static function removeDatabase()
     {
-        unlink(self::$filename);
+        if (self::$removeWhenDone && file_exists(self::$filename)) {
+            unlink(self::$filename);
+        }
         self::$filename = null;
+        self::$removeWhenDone = true;
     }
 
     public static function getConnection()
