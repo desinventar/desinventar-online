@@ -12,7 +12,7 @@ final class GeographyOperationsTest extends TestCase
 {
     public static function setUpBeforeClass(): void
     {
-        Database::copyDatabase('/tmp/database.db');
+        Database::copyDatabase();
     }
 
     public static function tearDownAfterClass(): void
