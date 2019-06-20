@@ -2,4 +2,7 @@ parameters:
   autoload_files:
     - vendor/autoload.php
   excludes_analyse:
+    - %rootDir%/../../../web/*.php
     - %rootDir%/../../../web/include/*
+    - %rootDir%/../../../src/DesInventar/Legacy/Model/Model.php
+    - %rootDir%/../../../src/DesInventar/Legacy/Model/Record.php
