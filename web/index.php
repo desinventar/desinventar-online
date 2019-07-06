@@ -85,18 +85,6 @@ $container['errorHandler'] = function ($container) {
     };
 };
 
-$container['CommonController'] = function ($c) {
-    return new CommonController($c);
-};
-
-$container['MapsController'] = function ($c) {
-    return new MapsController($c);
-};
-
-$container['SessionController'] = function ($c) {
-    return new SessionController($c);
-};
-
 $app->add(new SessionMiddleware($container));
 if ($config->debug['request']) {
     $app->add(new LoggerMiddleware($container));
@@ -107,16 +95,16 @@ $app->map(['GET', 'POST'], '/', function (Request $request, Response $response, 
 });
 
 $app->group('/common', function () use ($app) {
-    $app->get('/version', 'CommonController:version');
+    $app->get('/version', CommonController::class . ':version');
 });
 
 $app->group('/maps', function () use ($app) {
-    $app->get('/kml/{mapId}/', 'MapsController:getKml');
+    $app->get('/kml/{mapId}/', MapsController::class . ':getKml');
 });
 
 $app->group('/session', function () use ($app) {
-    $app->get('/info', 'SessionController:getSessionInfo');
-    $app->post('/change-language', 'SessionController:changeLanguage');
+    $app->get('/info', SessionController::class . ':getSessionInfo');
+    $app->post('/change-language', SessionController::class . ':changeLanguage');
 });
 
 $app->run();
