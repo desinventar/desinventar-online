@@ -20,14 +20,7 @@ use Api\Controllers\SessionController;
 require_once('include/loader.php');
 require_once('include/geography_operations.php');
 require_once('include/database_operations.php');
-
 require_once('LegacyIndex.php');
-
-$settings = [
-    'template' => $t,
-    'session' => $us,
-    'config' => $config
-];
 
 $app = new \Slim\App([
     'settings' => [
@@ -35,7 +28,9 @@ $app = new \Slim\App([
         'determineRouteBeforeAppMiddleware' => true
     ]
 ]);
+
 $container = $app->getContainer();
+
 $container['session'] = function ($container) {
     $sessionFactory = new SessionFactory();
     return $sessionFactory->newInstance($_COOKIE);
@@ -53,6 +48,11 @@ $container['logger'] = function ($c) {
     return LoggerHelper::logger($c['config']->logger);
 };
 
+$settings = [
+    'template' => $t,
+    'session' => $us,
+    'config' => $config
+];
 $container['oldindex'] = function ($c) use ($settings, $container) {
     $session = $c->get('session')->getSegment('');
     $oldIndex = new \DesInventar\LegacyIndex(
@@ -91,7 +91,7 @@ if ($config->debug['request']) {
 }
 
 $app->map(['GET', 'POST'], '/', function (Request $request, Response $response, $args) use ($container) {
-    return $container->get('oldindex')->getResponse('');
+    return $container->get('oldindex')->getResponse();
 });
 
 $app->group('/common', function () use ($app) {

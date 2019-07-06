@@ -25,6 +25,5 @@ RewriteRule ^css/(.*)-(.*).css  css/$1.css [L]
 #
 RewriteRule ^datacards/?$                           index.php?cmd=datacards [QSA,L]
 RewriteRule ^([a-zA-Z0-9\-_]+)/?$                    #$1 [NC,NE,R=302]
-RewriteRule ^([a-zA-Z0-9\-_]+)/([a-zA-Z0-9\-_]+)/(.*)/?$            index.php?RegionId=$1&cmd=$2&params=$3 [QSA,L]
 RewriteRule . index.php [L]
 #

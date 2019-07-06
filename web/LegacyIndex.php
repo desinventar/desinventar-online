@@ -24,21 +24,28 @@ use \ZipArchive;
 
 class LegacyIndex
 {
-    public function __construct($container, $template, $session, $language, $config)
+    protected $userSession = null;
+    protected $regionId = '';
+
+    public function __construct($container, $template, $userSession, $language, $config)
     {
         $this->logger = $container['logger'];
         $this->template = $template;
-        $this->session = $session;
+        $this->userSession = $userSession;
         $this->language = $language;
         $this->config = $config;
         $this->template->assign('lang', $language);
         $this->template->assign('lg', $language);
         $this->template->assign('desinventarLang', $language);
+        $this->session = $container->get('session')->getSegment('');
     }
 
-    public function getResponse($cmd)
+    public function getResponse(array $params = [])
     {
-        if (empty($cmd)) {
+        if (isset($params['regionId'])) {
+            $this->regionId = $params['regionId'];
+        }
+        if (!isset($params) || empty($params['cmd'])) {
             $cmd = getCmd();
         }
         if ($cmd == '') {
@@ -46,7 +53,15 @@ class LegacyIndex
                 $cmd = $_POST['prmQuery']['Command'];
             }
         }
-        return $this->getIndexResponse($cmd, $this->template, $this->session, $this->language, $this->config);
+        return $this->getIndexResponse($cmd, $this->template, $this->userSession, $this->language, $this->config);
+    }
+
+    public function getRegionId()
+    {
+        if (isset($this->regionId) && $this->regionId !== '') {
+            return $this->regionId;
+        }
+        return getParameter('r', getParameter('RegionId', getParameter('_REG'), ''));
     }
 
     public function getIndexResponse($cmd, $t, $us, $lg, $config)
@@ -54,7 +69,7 @@ class LegacyIndex
         $post = $_POST;
         $get  = $_GET;
 
-        $RegionId = getParameter('r', getParameter('RegionId', getParameter('_REG'), ''));
+        $RegionId = $this->getRegionId();
         $RegionLabel = '';
         if ($cmd == '' && $RegionId == '') {
             $cmd = 'main';
