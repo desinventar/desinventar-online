@@ -20,8 +20,9 @@ class GeographyOperations
 
     public static function getRecordsFromDbf($filename, $options)
     {
-        $count = Dbf::getRecordCount($filename);
-        $records = Dbf::getRecords($filename, $count);
+        $dbf = new Dbf($filename);
+        $count = $dbf->getRecordCount();
+        $records = $dbf->getRecords($count);
         $items = [];
         foreach ($records as $row) {
             $newItem = [

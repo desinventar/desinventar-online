@@ -7,19 +7,33 @@ use DesInventar\Helpers\Dbf;
 
 final class DbfTest extends TestCase
 {
+    public function testFieldsCount()
+    {
+        $count = (new Dbf(__DIR__ . '/level0.dbf'))->getFieldsCount();
+        $this->assertEquals(2, $count);
+    }
+
+    public function testHeaders()
+    {
+        $headers = (new Dbf(__DIR__ . '/level0.dbf'))->getHeaders();
+        $this->assertEquals(2, count($headers));
+        $this->assertEquals('SECTOR', $headers[0]['name']);
+        $this->assertEquals('CODIGO', $headers[1]['name']);
+    }
+
     public function testRecordCount()
     {
-        $count = Dbf::getRecordCount(__DIR__ . '/level0.dbf');
+        $count = (new Dbf(__DIR__ . '/level0.dbf'))->getRecordCount();
         $this->assertEquals(59, $count);
-        $count = Dbf::getRecordCount(__DIR__ . '/level1.dbf');
+        $count = (new Dbf(__DIR__ . '/level1.dbf'))->getRecordCount();
         $this->assertEquals(1055, $count);
     }
 
     public function testGetRecords()
     {
-        $records = Dbf::getRecords(__DIR__ . '/level0.dbf', 59);
+        $records = (new Dbf(__DIR__ . '/level0.dbf'))->getRecords(59);
         $this->assertEquals(59, count($records));
-        $records = Dbf::getRecords(__DIR__ . '/level1.dbf', 1055);
+        $records = (new Dbf(__DIR__ . '/level1.dbf'))->getRecords(1055);
         $this->assertEquals(1055, count($records));
     }
 }
