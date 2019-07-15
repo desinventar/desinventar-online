@@ -21,8 +21,7 @@ function geographyImportFromDbf(
     $prmParentCode,
     $prmCharset
 ) {
-    return GeographyOperations::importFromDbf(
-        $prmSession->q->dreg,
+    return (new GeographyOperations($prmSession->q->dreg, $logger))->importFromDbf(
         $prmGeoLevelId,
         $prmFilename,
         [

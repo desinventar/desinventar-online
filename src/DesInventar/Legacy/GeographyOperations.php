@@ -10,6 +10,14 @@ use DesInventar\Legacy\Model\GeographyItem;
 
 class GeographyOperations
 {
+    protected $conn = null;
+    protected $logger = null;
+    public function __construct($conn, $logger)
+    {
+        $this->conn = $conn;
+        $this->logger = $logger;
+    }
+
     public static function getValueFromArray($record, $column)
     {
         if (!isset($record[$column])) {
@@ -48,13 +56,13 @@ class GeographyOperations
         });
     }
 
-    public static function getGeograhyItemsByLevel($conn, $prmGeoLevelId)
+    public function getGeograhyItemsByLevel($prmGeoLevelId)
     {
         $list = [];
         $query = 'SELECT GeographyId,GeographyCode,GeographyName FROM Geography ' .
             ' WHERE GeographyLevel=' . $prmGeoLevelId;
         $query .= ' ORDER BY GeographyId';
-        foreach ($conn->query($query, PDO::FETCH_ASSOC) as $row) {
+        foreach ($this->conn->query($query, PDO::FETCH_ASSOC) as $row) {
             if (empty($row['GeographyId'])) {
                 continue;
             }
@@ -136,16 +144,16 @@ class GeographyOperations
         return $items;
     }
 
-    public static function importFromCsv($conn, $prmGeoLevelId, $prmFilename, $options)
+    public function importFromCsv($prmGeoLevelId, $prmFilename, $options)
     {
         if (! file_exists($prmFilename)) {
             throw new Exception(__CLASS__ . '::' . __FUNCTION__ . ': File not found:' . $prmFilename);
         }
         $records = self::getRecordsFromCsv($prmFilename, $options);
-        return self::importFromArray($conn, $prmGeoLevelId, $records);
+        return $this->importFromArray($prmGeoLevelId, $records);
     }
 
-    public static function importFromDbf($conn, $prmGeoLevelId, $prmFilename, $prmOptions)
+    public function importFromDbf($prmGeoLevelId, $prmFilename, $prmOptions)
     {
         if (! file_exists($prmFilename)) {
             throw new Exception(__CLASS__ . '::' . __FUNCTION__ . ': File not found:' . $prmFilename);
@@ -153,13 +161,13 @@ class GeographyOperations
         $dbfRecords = self::filterDeletedRecords(
             self::getRecordsFromDbf($prmFilename, $prmOptions)
         );
-        return self::importFromArray($conn, $prmGeoLevelId, $dbfRecords);
+        return $this->importFromArray($prmGeoLevelId, $dbfRecords);
     }
 
-    public static function importFromArray($conn, $prmGeoLevelId, $records)
+    public function importFromArray($prmGeoLevelId, $records)
     {
         // Get current geography items in this level (use this for cache)
-        $geo_list = self::getGeograhyItemsByLevel($conn, $prmGeoLevelId);
+        $geo_list = $this->getGeograhyItemsByLevel($prmGeoLevelId);
 
         // Keep track of the geography names to avoid having duplicates
         $geo_name_count = [];
@@ -170,7 +178,7 @@ class GeographyOperations
         }
 
         // Set default value GeographyActive=1 for elements in this level
-        self::setActiveByLevelId($conn, $prmGeoLevelId);
+        self::setActiveByLevelId($this->conn, $prmGeoLevelId);
 
         $item_count = 0;
         $parent_cache = array();
@@ -182,7 +190,7 @@ class GeographyOperations
             if (isset($geo_list[$geography_code])) {
                 $geography_id = $geo_list[$geography_code]['id'];
                 $geo_list[$geography_code]['updated'] = 1;
-                $o = new GeographyItem($conn, $geography_id);
+                $o = new GeographyItem($this->conn, $geography_id);
                 $o->setFromArray([
                     'GeographyName' => $geography_name,
                     'GeographyCode' => $geography_code,
@@ -202,7 +210,7 @@ class GeographyOperations
                     $parent_id = $parent_cache[$parent_code];
                     $canInsert = true;
                 } else {
-                    $parent_id = GeographyItem::getIdByCode($conn, $parent_code);
+                    $parent_id = GeographyItem::getIdByCode($this->conn, $parent_code);
                     if ($parent_id !== '') {
                         $canInsert = true;
                         $parent_cache[$parent_code] = $parent_id;
@@ -215,7 +223,7 @@ class GeographyOperations
                  // skip this record
                 continue;
             }
-            $o = new GeographyItem($conn, $geography_id);
+            $o = new GeographyItem($this->conn, $geography_id);
             $o->set('GeographyName', $geography_name);
             $o->set('GeographyCode', $geography_code);
             $o->set('GeographyLevel', $prmGeoLevelId);
@@ -246,7 +254,7 @@ class GeographyOperations
         foreach ($geo_list as $value) {
             if ($value['updated'] < 1) {
                 $query = 'UPDATE Geography SET GeographyActive=3 WHERE GeographyId LIKE "' . $value['id'] . '%"';
-                $conn->query($query);
+                $this->conn->query($query);
             }
         }
         return $item_count;

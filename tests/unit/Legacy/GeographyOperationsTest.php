@@ -6,6 +6,7 @@ use Exception;
 use PHPUnit\Framework\TestCase;
 
 use Test\Helpers\Database;
+use Test\Helpers\Logger;
 use DesInventar\Legacy\GeographyOperations;
 
 final class GeographyOperationsTest extends TestCase
@@ -64,10 +65,12 @@ final class GeographyOperationsTest extends TestCase
     public function testImportGeographyFromCsv()
     {
         $conn = Database::getConnection();
+        $logger = Logger::logger();
         GeographyOperations::deleteByLevelId($conn, 0);
         $this->assertEquals(0, GeographyOperations::countByLevelId($conn, 0));
-        GeographyOperations::importFromCsv(
-            $conn,
+
+        $service = new GeographyOperations($conn, $logger);
+        $service->importFromCsv(
             0,
             __DIR__ . '/../Helpers/level0.csv',
             ['code' => 'Codigo', 'name' => 'Nombre']
@@ -78,10 +81,13 @@ final class GeographyOperationsTest extends TestCase
     public function testImportGeographyFromDbf()
     {
         $conn = Database::getConnection();
+        $logger = Logger::logger();
+
         GeographyOperations::deleteByLevelId($conn, 0);
         $this->assertEquals(0, GeographyOperations::countByLevelId($conn, 0));
-        GeographyOperations::importFromDbf(
-            $conn,
+
+        $service = new GeographyOperations($conn, $logger);
+        $service->importFromDbf(
             0,
             __DIR__ . '/../Helpers/level0.dbf',
             ['code' => 'CODIGO', 'name' => 'SECTOR']
@@ -99,8 +105,7 @@ final class GeographyOperationsTest extends TestCase
             )
         );
         $records = array_slice($records, 0, 10);
-        GeographyOperations::importFromArray(
-            $conn,
+        $service->importFromArray(
             1,
             $records
         );
@@ -110,28 +115,29 @@ final class GeographyOperationsTest extends TestCase
     public function testImportFromArray()
     {
         $conn = Database::getConnection();
+        $service = new GeographyOperations($conn, Logger::logger());
         GeographyOperations::deleteByLevelId($conn, 0);
 
         $this->assertEquals(0, GeographyOperations::countByLevelId($conn, 0));
-        GeographyOperations::importFromArray($conn, 0, [
+        $service->importFromArray(0, [
             ['code' => '10', 'name' => 'Sector 10'],
             ['code' => '20', 'name' => 'Sector 20A']
         ]);
         $this->assertEquals(2, GeographyOperations::countByLevelId($conn, 0));
-        GeographyOperations::importFromArray($conn, 0, [
+        $service->importFromArray(0, [
             ['code' => '20', 'name' => 'Sector 20']
         ]);
         $this->assertEquals(2, GeographyOperations::countByLevelId($conn, 0));
 
         GeographyOperations::deleteByLevelId($conn, 1);
         $this->assertEquals(0, GeographyOperations::countByLevelId($conn, 1));
-        GeographyOperations::importFromArray($conn, 1, [
+        $service->importFromArray(1, [
             ['code' => '2011', 'name' => 'Colonia 2011A', 'parentCode' => '20'],
             ['code' => '2012', 'name' => 'Colonia 2012A', 'parentCode' => '20']
         ]);
         $this->assertEquals(2, GeographyOperations::countByLevelId($conn, 1));
 
-        GeographyOperations::importFromArray($conn, 1, [
+        $service->importFromArray(1, [
             ['code' => '2011', 'name' => 'Colonia 2011', 'parentCode' => '20'],
             ['code' => '2012', 'name' => 'Colonia 2012', 'parentCode' => '20']
         ]);
@@ -141,9 +147,10 @@ final class GeographyOperationsTest extends TestCase
     public function testImportWithDuplicateName()
     {
         $conn = Database::getConnection();
+        $service = new GeographyOperations($conn, Logger::logger());
         GeographyOperations::deleteByLevelId($conn, 0);
         $this->assertEquals(0, GeographyOperations::countByLevelId($conn, 0));
-        GeographyOperations::importFromArray($conn, 0, [
+        $service->importFromArray(0, [
             ['code' => '10', 'name' => 'Trantor 10'],
             ['code' => '20', 'name' => 'Trantor 20']
         ]);
@@ -151,7 +158,7 @@ final class GeographyOperationsTest extends TestCase
 
         GeographyOperations::deleteByLevelId($conn, 1);
         $this->assertEquals(0, GeographyOperations::countByLevelId($conn, 1));
-        GeographyOperations::importFromArray($conn, 0, [
+        $service->importFromArray(0, [
             ['code' => '1010', 'name' => 'Dahl', 'parentCode' => '10' ],
             ['code' => '1020', 'name' => 'Dahl', 'parentCode' => '10' ],
             ['code' => '1030', 'name' => 'Ery', 'parentCode' => '10' ],
@@ -165,9 +172,10 @@ final class GeographyOperationsTest extends TestCase
     public function testImportWithParentNotFound()
     {
         $conn = Database::getConnection();
+        $service = new GeographyOperations($conn, Logger::logger());
         GeographyOperations::deleteByLevelId($conn, 0);
         $this->assertEquals(0, GeographyOperations::countByLevelId($conn, 0));
-        GeographyOperations::importFromArray($conn, 0, [
+        $service->importFromArray(0, [
             ['code' => '10', 'name' => 'Trantor 10'],
             ['code' => '20', 'name' => 'Trantor 20']
         ]);
@@ -175,7 +183,7 @@ final class GeographyOperationsTest extends TestCase
 
         GeographyOperations::deleteByLevelId($conn, 1);
         $this->assertEquals(0, GeographyOperations::countByLevelId($conn, 1));
-        GeographyOperations::importFromArray($conn, 0, [
+        $service->importFromArray(0, [
             ['code' => '1010', 'name' => 'Dahl', 'parentCode' => '15' ],
             ['code' => '2020', 'name' => 'Ery', 'parentCode' => '20' ],
         ]);
