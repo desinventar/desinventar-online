@@ -196,6 +196,7 @@ class GeographyOperations
                     'GeographyCode' => $geography_code,
                     'GeographyLevel' => $prmGeoLevelId
                 ]);
+                $this->logger->debug($geography_code . ' ' . $geography_name . ' UPDATE');
                 $o->update();
                 continue;
             }
@@ -220,6 +221,7 @@ class GeographyOperations
                 $canInsert = true;
             }
             if (!$canInsert) {
+                $this->logger->warning($geography_code . ' ' . $geography_name . ' SKIP');
                  // skip this record
                 continue;
             }
@@ -244,6 +246,7 @@ class GeographyOperations
             }
             $o->set('GeographyActive', $geography_active);
             $r = $o->insert();
+            $this->logger->debug($geography_code . ' ' . $geography_name . ' INSERT');
 
             if ($r > 0) {
                 $item_count++;
