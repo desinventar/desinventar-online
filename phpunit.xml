@@ -9,4 +9,7 @@
             <directory>tests/unit</directory>
         </testsuite>
     </testsuites>
+    <php>
+      <env name="DESINVENTAR_FLAGS_ENV" value="test" force="true" />
+    </php>
 </phpunit>

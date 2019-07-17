@@ -18,7 +18,9 @@ class LoggerHelper
         if (isset($config['file']) && $config['file'] !== '') {
             $logger->pushHandler(new StreamHandler($config['file'], $config['level']));
         }
-        $logger->pushHandler(new ErrorLogHandler(ErrorLogHandler::OPERATING_SYSTEM, Logger::WARNING));
+        if (getenv('DESINVENTAR_FLAGS_ENV') !== 'test') {
+            $logger->pushHandler(new ErrorLogHandler(ErrorLogHandler::OPERATING_SYSTEM, Logger::WARNING));
+        }
         return $logger;
     }
 }
