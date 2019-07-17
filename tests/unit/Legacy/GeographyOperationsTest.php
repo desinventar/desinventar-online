@@ -21,14 +21,14 @@ final class GeographyOperationsTest extends TestCase
         Database::removeDatabase();
     }
 
-    public function testRecordsFromDbf()
+    public function testRecordsFromDbfWithCorrectColumns()
     {
         $records = GeographyOperations::getRecordsFromDbf(
             __DIR__ . '/../Helpers/level0.dbf',
             ['code' => 'CODIGO', 'name' => 'SECTOR']
         );
         $this->assertEquals(59, count($records));
-        $this->assertEquals(['name' => 'SECTOR 29', 'code' => '29', 'deleted' => 0], $records[58]);
+        $this->assertEquals(['name' => 'SECTOR 29', 'code' => '29', 'deleted' => 0], $records['29']);
     }
 
     public function testRecordsFromDbfWithWrongColumns()
@@ -46,10 +46,10 @@ final class GeographyOperationsTest extends TestCase
             __DIR__ . '/../Helpers/level1.dbf',
             ['code' => 'COD_COL_1', 'name' => 'NOM_COL', 'parentCode' => 'SECTOR']
         );
-        $this->assertEquals(1055, count($records));
+        $this->assertEquals(944, count($records));
         $this->assertEquals(
             ['name' => 'RESIDENCIAL PINO VERDE', 'code' => '3643', 'parentCode' => '36', 'deleted' => 0],
-            $records[1054]
+            $records['3643']
         );
     }
 

@@ -44,7 +44,7 @@ class GeographyOperations
             if (isset($options['parentCode']) && $options['parentCode'] !== '') {
                 $newItem['parentCode'] = self::getValueFromArray($row, $options['parentCode']);
             }
-            $items[] = $newItem;
+            $items[$newItem['code']] = $newItem;
         }
         return $items;
     }
