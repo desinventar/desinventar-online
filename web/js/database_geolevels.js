@@ -109,28 +109,30 @@ function onReadyGeolevels() {
       return unhighlightGeoLevelFields()
     }
 
-    var iSize = jQuery('#frmGeolevel .filename').size()
-    var iCount = 0
+    var numberOfFileUploadControls = jQuery('#frmGeolevel .filename').size()
+    var numberOfFilesUploaded = 0
     jQuery('#frmGeolevel .filename').each(function() {
       if (jQuery(this).val() != '') {
-        iCount++
+        numberOfFilesUploaded++
       }
     })
-    if (iCount > 0 && iCount < iSize) {
-      jQuery('div.status .statusMissingFiles').show()
-      return unhighlightGeoLevelFields()
-    }
+    if (numberOfFilesUploaded > 0) {
+      if (numberOfFilesUploaded < numberOfFileUploadControls) {
+        jQuery('div.status .statusMissingFiles').show()
+        return unhighlightGeoLevelFields()
+      }
 
-    if (jQuery('#frmGeolevel .GeoLevelLayerCode').val() === '') {
-      jQuery('#frmGeolevel .GeoLevelLayerCode').highlight()
-      jQuery('div.status .statusRequiredFields').show()
-      return unhighlightGeoLevelFields()
-    }
+      if (jQuery('#frmGeolevel .GeoLevelLayerCode').val() === '') {
+        jQuery('#frmGeolevel .GeoLevelLayerCode').highlight()
+        jQuery('div.status .statusRequiredFields').show()
+        return unhighlightGeoLevelFields()
+      }
 
-    if (jQuery('#frmGeolevel .GeoLevelLayerName').val() == '') {
-      jQuery('#frmGeolevel .GeoLevelLayerName').highlight()
-      jQuery('div.status .statusRequiredFields').show()
-      return unhighlightGeoLevelFields()
+      if (jQuery('#frmGeolevel .GeoLevelLayerName').val() == '') {
+        jQuery('#frmGeolevel .GeoLevelLayerName').highlight()
+        jQuery('div.status .statusRequiredFields').show()
+        return unhighlightGeoLevelFields()
+      }
     }
 
     jQuery('body').trigger('cmdMainWaitingShow')

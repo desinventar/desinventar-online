@@ -1,6 +1,6 @@
 {-config_load file="$lg.conf" section="grpAdminGeography"-}
 {-config_load file="$lg.conf" section="grpGeolevels"-}
-<div class="Geolevels mainblock">
+<div class="Geolevels mainblock region-geolevels-edit">
     <b>{-#msgGeolevels_Title#-}</b><br />
     <div id="divGeolevels_List" class="dwin">
         <table id="tblGeolevels_List" class="grid">

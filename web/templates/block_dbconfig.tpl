@@ -10,7 +10,11 @@
                 >{-#mreginfo#-}</a>
             </li>
             <li title="{-#msgGeolevels_Tooltip#-}">
-                <a class="classDBConfig_tabs" href="#DBConfig_Geolevels" data-id="DBConfig_GeoLevels">{-#msgDBConfig_Geolevels#-}</a>
+                <a
+                  class="classDBConfig_tabs"
+                  href="#DBConfig_Geolevels"
+                  data-id="DBConfig_GeoLevels"
+                >{-#msgDBConfig_Geolevels#-}</a>
             </li>
             <li title="{-#msgGeography_Tooltip#-}">
                 <a class="classDBConfig_tabs" href="#DBConfig_Geography">{-#mgeography#-}</a>
