@@ -275,6 +275,13 @@ class Region extends Model
         return $sReturn;
     }
 
+    public function isPublic()
+    {
+        $status = $this->getRegionInfoValue('RegionStatus');
+        $publicStatus = $status & 2;
+        return $publicStatus > 0;
+    }
+
     public function getRegionInfoCore()
     {
         $answer = array();

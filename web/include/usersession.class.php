@@ -3,10 +3,11 @@ namespace DesInventar\Legacy;
 
 use DesInventar\Legacy\Query;
 use DesInventar\Database\Session;
+use DesInventar\Database\Role;
+use DesInventar\Helpers\Session as AuraSession;
 use DesInventar\Legacy\Model\Region;
 use \PDO;
 
-define('ROLE_NONE', 0);
 define('ROLE_OBSERVER', 1);
 define('ROLE_USER', 2);
 define('ROLE_SUPERVISOR', 3);
@@ -37,7 +38,7 @@ class UserSession
         $this->dStart            = gmdate('c');
         $this->dLastUpdate       = $this->dStart;
         $this->UserRole          = '';
-        $this->UserRoleValue     = ROLE_NONE;
+        $this->UserRoleValue     = Role::ROLE_NONE;
         $this->config = $config;
         $this->q = new Query(null, $config->database);
         $this->session = new Session($this->q->core);
@@ -127,6 +128,7 @@ class UserSession
     public function setUser($prmUserId)
     {
         try {
+            (new AuraSession())->setUser($prmUserId);
             return $this->session->setUser($this->sSessionId, $prmUserId);
         } catch (Exception $e) {
             showErrorMsg(debug_backtrace(), $e, '');
@@ -234,7 +236,7 @@ class UserSession
         $iReturn = ERR_NO_ERROR;
         $this->RegionId = '';
         $this->UserRole = '';
-        $this->UserRoleValue = ROLE_NONE;
+        $this->UserRoleValue = Role::ROLE_NONE;
 
         $DBDir = VAR_DIR . '/database/' . $prmRegionId;
         if ($prmDBFile == '') {
@@ -399,7 +401,7 @@ class UserSession
         $UserInfo = array();
         $RoleList = $this->getRegionRoleList($prmRegionId);
         foreach ($RoleList as $UserId => $UserRole) {
-            if ($UserRole['UserRole'] != 'ADMINREGION') {
+            if ($UserRole['UserRole'] != Role::ADMINREGION) {
                 continue;
             }
             $UserFullInfo = $this->getUserInfo($UserId);
@@ -482,66 +484,35 @@ class UserSession
     // Return Role for a Region
     public function getUserRole($prmRegionId = '')
     {
-        $UserRole = 'NONE';
         if ($prmRegionId == '') {
             $prmRegionId = $this->RegionId;
         }
-        if ($this->UserId == 'root') {
-            $UserRole = 'ADMINPORTAL';
-        } else {
-            $UserRole = 'NONE';
-            $sQuery = "SELECT * FROM RegionAuth WHERE ";
-            if ($prmRegionId != '') {
-                $sQuery .= "((RegionId='') OR (RegionId='" . $prmRegionId . "'))";
-            } else {
-                $sQuery .= "(RegionId='')";
-            }
-            $sQuery .= " AND (UserId='" . $this->UserId . "') " .
-                    " AND AuthKey='ROLE'" .
-                    " ORDER BY UserId,RegionId";
-            $sth = $this->q->core->prepare($sQuery);
-            try {
-                $this->q->core->beginTransaction();
-                $sth->execute();
-                $this->q->core->commit();
-                while ($row = $sth->fetch(PDO::FETCH_OBJ)) {
-                    $UserRole = $row->AuthAuxValue;
-                }
-                $sth->closeCursor();
-            } catch (Exception $e) {
-                $this->q->core->rollBack();
-                showErrorMsg(debug_backtrace(), $e, '');
-            }
-            if ($UserRole == 'NONE') {
-                $RegionStatus = $this->getDBInfoValue('RegionStatus');
-                $RegionPublic = $RegionStatus & 2;
-                if ($RegionPublic > 0) {
-                    $UserRole = 'OBSERVER';
-                }
-            }
+        $UserRole = (new Role($this->q->core))->getUserRole($this->UserId, $prmRegionId);
+        if ($UserRole === Role::NONE && (new Region($this, $this->RegionId))->isPublic()) {
+            $UserRole = Role::OBSERVER;
         }
         return $UserRole;
     }
 
     protected function convertRoleToRoleValue($prmRole)
     {
-        $NumRole = ROLE_NONE;
-        if ($prmRole == 'NONE') {
-            $NumRole = ROLE_NONE;
+        $NumRole = Role::ROLE_NONE;
+        if ($prmRole == Role::NONE) {
+            $NumRole = Role::ROLE_NONE;
         }
-        if ($prmRole == 'OBSERVER') {
+        if ($prmRole == Role::OBSERVER) {
             $NumRole = ROLE_OBSERVER;
         }
-        if ($prmRole == 'USER') {
+        if ($prmRole == Role::USER) {
             $NumRole = ROLE_USER;
         }
-        if ($prmRole == 'SUPERVISOR') {
+        if ($prmRole == Role::SUPERVISOR) {
             $NumRole = ROLE_SUPERVISOR;
         }
-        if ($prmRole == 'ADMINREGION') {
+        if ($prmRole == Role::ADMINREGION) {
             $NumRole = ROLE_ADMINREGION;
         }
-        if ($prmRole == 'ADMINPORTAL') {
+        if ($prmRole == Role::ADMINPORTAL) {
             $NumRole = ROLE_ADMINPORTAL;
         }
         return $NumRole;
@@ -580,11 +551,11 @@ class UserSession
 
         if ($iReturn > 0) {
             // Insert ROLE Permission First
-            if ($prmRole <> 'NONE') {
+            if ($prmRole <> Role::NONE) {
                 $this->setPerm($prmUserId, $prmRegionId, 'ROLE', 0, $prmRole);
             }
             switch ($prmRole) {
-                case 'ADMINREGION':
+                case Role::ADMINREGION:
                     $this->setPerm($prmUserId, $prmRegionId, "DISASTER", 5, "");
                     $this->setPerm($prmUserId, $prmRegionId, "EVENT", 5, "");
                     $this->setPerm($prmUserId, $prmRegionId, "CAUSE", 5, "");
@@ -597,7 +568,7 @@ class UserSession
                     $this->setPerm($prmUserId, $prmRegionId, "DBACTIVE", 2, "");
                     $this->setPerm($prmUserId, $prmRegionId, "DBLOG", 5, "");
                     break;
-                case 'SUPERVISOR':
+                case Role::SUPERVISOR:
                     $this->setPerm($prmUserId, $prmRegionId, "DISASTER", 4, "STATUS=DRAFT,STATUS=READY");
                     $this->setPerm($prmUserId, $prmRegionId, "EVENT", 1, "STATUS=ACTIVE");
                     $this->setPerm($prmUserId, $prmRegionId, "CAUSE", 1, "STATUS=ACTIVE");
@@ -607,7 +578,7 @@ class UserSession
                     $this->setPerm($prmUserId, $prmRegionId, "DBINFO", 1, "");
                     $this->setPerm($prmUserId, $prmRegionId, "DBLOG", 3, "");
                     break;
-                case 'USER':
+                case Role::USER:
                     $this->setPerm($prmUserId, $prmRegionId, "DISASTER", 3, "STATUS=DRAFT,STATUS=READY");
                     $this->setPerm($prmUserId, $prmRegionId, "EVENT", 1, "STATUS=ACTIVE");
                     $this->setPerm($prmUserId, $prmRegionId, "CAUSE", 1, "STATUS=ACTIVE");
@@ -617,7 +588,7 @@ class UserSession
                     $this->setPerm($prmUserId, $prmRegionId, "DBINFO", 1, "");
                     $this->setPerm($prmUserId, $prmRegionId, "DBLOG", 3, "");
                     break;
-                case 'OBSERVER':
+                case Role::OBSERVER:
                     $this->setPerm($prmUserId, $prmRegionId, "DISASTER", 1, "STATUS=ACTIVE");
                     $this->setPerm($prmUserId, $prmRegionId, "EVENT", 1, "STATUS=ACTIVE");
                     $this->setPerm($prmUserId, $prmRegionId, "CAUSE", 1, "STATUS=ACTIVE");
@@ -630,7 +601,7 @@ class UserSession
                 case 'MINIMAL':
                     $this->setPerm($prmUserId, $prmRegionId, "USER", 2, "");
                     break;
-                case 'NONE':
+                case Role::NONE:
                     // Do not set any permission
                     break;
             }
@@ -965,10 +936,10 @@ class UserSession
         $query = 'SELECT RegionId,CountryIso,RegionLabel FROM Region WHERE ';
         if ($this->UserId != 'root') {
             $query .= 'RegionStatus=3';
-            $Role = 'NONE';
+            $Role = Role::NONE;
         } else {
             $query .= 'RegionStatus>=0';
-            $Role = 'ADMINREGION';
+            $Role = Role::ADMINREGION;
         }
 
         if ($prmQuery != '') {
