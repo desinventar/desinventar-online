@@ -9,11 +9,14 @@ use DesInventar\Common\Language;
 use DesInventar\Common\Util;
 use DesInventar\Common\DatabaseConnection;
 
+use DesInventar\Database\Role;
 use DesInventar\Helpers\LoggerHelper;
 
 use Api\Helpers\JsonApiResponse;
 use Api\Helpers\SessionMiddleware;
 use Api\Helpers\LoggerMiddleware;
+
+use Api\Middleware\AuthMiddleware;
 
 use Api\Controllers\CommonController;
 use Api\Controllers\MapsController;
@@ -99,6 +102,23 @@ if ($config->debug['request']) {
 $app->map(['GET', 'POST'], '/', function (Request $request, Response $response, $args) use ($container) {
     return $container->get('oldindex')->getResponse();
 });
+
+$app->group('/admin/{regionId}', function () use ($app) {
+    $app->get('/', function (Request $request, Response $response, $args) use ($app) {
+        $container = $app->getContainer();
+        return $container->get('jsonapi')->data([
+            'args' => $args,
+            'userId' => $container->get('session')->getSegment('')->get('userId'),
+            'attr' => $request->getAttributes()
+        ]);
+    });
+})->add(
+    new AuthMiddleware(
+        $container->get('session')->getSegment(''),
+        $container->get('db')->getCoreConnection(),
+        Role::ROLE_ADMINREGION
+    )
+);
 
 $app->group('/common', function () use ($app) {
     $app->get('/version', CommonController::class . ':version');

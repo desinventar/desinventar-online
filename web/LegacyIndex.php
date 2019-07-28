@@ -19,6 +19,8 @@ use DesInventar\Common\Version;
 use DesInventar\Common\Util;
 use DesInventar\Common\QueryOperations;
 
+use DesInventar\Database\Role;
+
 use \qqFileUploader;
 use \ZipArchive;
 
@@ -1149,7 +1151,7 @@ class LegacyIndex
                 return $t->fetch('graphparameters.tpl');
                 break;
             case 'cmdDatabaseExport':
-                if ($desinventarUserRoleValue <= ROLE_NONE) {
+                if ($desinventarUserRoleValue <= Role::ROLE_NONE) {
                     return json_encode(['Status' => ERR_UNKNOWN_ERROR]);
                 }
                 $ShortName = date('Y-m-d') . '_DesInventar_' . $RegionId . '.zip';
