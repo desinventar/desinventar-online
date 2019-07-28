@@ -7,6 +7,8 @@ use Aura\Session\SessionFactory;
 
 use DesInventar\Common\Language;
 use DesInventar\Common\Util;
+use DesInventar\Common\DatabaseConnection;
+
 use DesInventar\Helpers\LoggerHelper;
 
 use Api\Helpers\JsonApiResponse;
@@ -42,6 +44,10 @@ $container['util'] = function ($container) {
 
 $container['config'] = function ($c) use ($config) {
     return $config;
+};
+
+$container['db'] = function ($c) {
+    return DatabaseConnection::getInstance($c['config']->database);
 };
 
 $container['logger'] = function ($c) {

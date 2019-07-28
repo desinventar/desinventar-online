@@ -1,6 +1,10 @@
 parameters:
   autoload_files:
     - vendor/autoload.php
+  level:
+    7
+  ignoreErrors:
+    - '#Call to an undefined method PDO::sqliteCreateFunction()#'
   excludes_analyse:
     - %rootDir%/../../../web/*.php
     - %rootDir%/../../../web/include/*
