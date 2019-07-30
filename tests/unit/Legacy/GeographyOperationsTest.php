@@ -11,14 +11,17 @@ use DesInventar\Legacy\GeographyOperations;
 
 final class GeographyOperationsTest extends TestCase
 {
-    public static function setUpBeforeClass(): void
+    protected $db = null;
+
+    protected function setUp(): void
     {
-        Database::copyDatabase();
+        $this->db = new Database(Database::REGION);
+        $this->db->copyDatabase();
     }
 
-    public static function tearDownAfterClass(): void
+    protected function tearDown(): void
     {
-        Database::removeDatabase();
+        $this->db->removeDatabase();
     }
 
     public function testRecordsFromDbfWithCorrectColumns()
@@ -64,7 +67,7 @@ final class GeographyOperationsTest extends TestCase
 
     public function testImportGeographyFromCsv()
     {
-        $conn = Database::getConnection();
+        $conn = $this->db->getConnection();
         $logger = Logger::logger();
         GeographyOperations::deleteByLevelId($conn, 0);
         $this->assertEquals(0, GeographyOperations::countByLevelId($conn, 0));
@@ -80,7 +83,7 @@ final class GeographyOperationsTest extends TestCase
 
     public function testImportGeographyFromDbf()
     {
-        $conn = Database::getConnection();
+        $conn = $this->db->getConnection();
         $logger = Logger::logger();
 
         GeographyOperations::deleteByLevelId($conn, 0);
@@ -114,7 +117,7 @@ final class GeographyOperationsTest extends TestCase
 
     public function testImportFromArray()
     {
-        $conn = Database::getConnection();
+        $conn = $this->db->getConnection();
         $service = new GeographyOperations($conn, Logger::logger());
         GeographyOperations::deleteByLevelId($conn, 0);
 
@@ -146,7 +149,7 @@ final class GeographyOperationsTest extends TestCase
 
     public function testImportWithDuplicateName()
     {
-        $conn = Database::getConnection();
+        $conn = $this->db->getConnection();
         $service = new GeographyOperations($conn, Logger::logger());
         GeographyOperations::deleteByLevelId($conn, 0);
         $this->assertEquals(0, GeographyOperations::countByLevelId($conn, 0));
@@ -171,7 +174,7 @@ final class GeographyOperationsTest extends TestCase
 
     public function testImportWithParentNotFound()
     {
-        $conn = Database::getConnection();
+        $conn = $this->db->getConnection();
         $service = new GeographyOperations($conn, Logger::logger());
         GeographyOperations::deleteByLevelId($conn, 0);
         $this->assertEquals(0, GeographyOperations::countByLevelId($conn, 0));

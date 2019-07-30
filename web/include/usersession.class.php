@@ -113,11 +113,10 @@ class UserSession
 
     public function login($prmUserId, $prmUserPasswd, $withCrypt)
     {
-        $userId = $this->validateUser($prmUserId, $prmUserPasswd, $withCrypt);
-        if (empty($userId)) {
+        if (!$this->validateUser($prmUserId, $prmUserPasswd, $withCrypt)) {
             return ERR_UNKNOWN_ERROR;
         }
-        return $this->setUser($userId);
+        return $this->setUser($prmUserId);
     }
 
     public function logout()
@@ -267,16 +266,10 @@ class UserSession
     // Validate a user/passwd pair against database
     public function validateUser($prmUserId, $prmUserPasswd, $withCrypt)
     {
-        if (! $withCrypt) {
+        if (!$withCrypt) {
             $prmUserPasswd = md5($prmUserPasswd);
         }
-        try {
-            $row = $this->session->login($prmUserId, $prmUserPasswd);
-        } catch (Exception $e) {
-            showErrorMsg(debug_backtrace(), $e, '');
-            return false;
-        }
-        return $row['UserId'];
+        return  $this->session->login($prmUserId, $prmUserPasswd);
     }
 
     public function getUserFullName()

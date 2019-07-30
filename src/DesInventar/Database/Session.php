@@ -36,14 +36,14 @@ class Session extends Record
         $query = $this->factory->newSelect();
         $query->from('User')
             ->cols(['*'])
-            ->where('UserPasswd=:UserPasswd')
             ->where('(UserId=:UserId OR UserNotes LIKE :UserNotes)')
-            ->bindValues(array(
-                'UserPasswd' => $passwd,
+            ->where('UserPasswd=:UserPasswd')
+            ->bindValues([
                 'UserId' => $userId,
-                'UserNotes' => '%(UserName=' . $userId. ')%'
-            ));
-        return $this->readFirst($query);
+                'UserNotes' => '%(UserName=' . $userId. ')%',
+                'UserPasswd'=> $passwd
+            ]);
+        return !is_null($this->readFirst($query));
     }
 
     public function awake($id, $lastUpdate)

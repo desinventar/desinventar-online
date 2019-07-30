@@ -158,7 +158,7 @@ class LegacyIndex
                 if ($iReturn > 0) {
                     $UserPasswd = getParameter('UserPasswd', '');
                     $UserPasswd2 = getParameter('UserPasswd2', '');
-                    if ($us->validateUser($us->UserId, $_POST['UserPasswd'], UserSession::PASSWORD_IS_HASHED) != '') {
+                    if ($us->validateUser($us->UserId, $_POST['UserPasswd'], UserSession::PASSWORD_IS_HASHED)) {
                         $us->updateUserPasswd($us->UserId, $_POST['UserPasswd2']);
                     } else {
                         $iReturn = ERR_DEFAULT_ERROR;
