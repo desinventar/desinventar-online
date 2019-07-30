@@ -72,7 +72,7 @@ switch ($cmd) {
         break;
     case 'updatepasswd':
         // Check if password is correct (ask to dicore). if is OK show dialog to change it.
-        if ($us->validateUser($us->UserId, $_POST['UserPasswd'], UserSession::PASSWORD_IS_HASHED) == '') {
+        if (!$us->validateUser($us->UserId, $_POST['UserPasswd'], UserSession::PASSWORD_IS_HASHED)) {
             echo 'ERRORPASSWD';
         } else {
             $us->updateUserPasswd($us->UserId, $_POST['UserPasswd2']);
