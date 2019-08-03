@@ -10,9 +10,11 @@ class SessionController extends ApiController
     {
         $this->logAll($request, $response, $args);
         $session = $this->container->get('session')->getSegment('');
-        return $this->container->get('jsonapi')->data([
-            'language' => $session->get('language')
-        ]);
+        $info = [
+            'language' => $session->get('language'),
+            'isUserLoggedIn' => $session->get('isUserLoggedIn') ? true : false
+        ];
+        return $this->container->get('jsonapi')->data($info);
     }
 
     public function changeLanguage($request, $response, $args)
