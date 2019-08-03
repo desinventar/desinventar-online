@@ -1,6 +1,6 @@
 <?php
 
-namespace DesInventar\Service;
+namespace DesInventar\Services;
 
 class RegionInfo extends Service
 {

@@ -2,7 +2,7 @@
 require_once('include/loader.php');
 require_once('include/query.class.php');
 
-use DesInventar\Service\Datacard;
+use DesInventar\Services\Datacard;
 use DesInventar\Legacy\Model\Disaster;
 
 $RegionId = getParameter('RegionId', getParameter('r', ''));

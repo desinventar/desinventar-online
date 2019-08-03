@@ -1,7 +1,7 @@
 <?php
 namespace DesInventar\Legacy\Model;
 
-use DesInventar\Service\RegionInfo;
+use DesInventar\Services\RegionInfo;
 
 use \DOMDocument;
 use \PDO;

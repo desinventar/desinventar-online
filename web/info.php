@@ -50,7 +50,7 @@ switch ($cmd) {
     case 'cmdDBInfoEdit':
         $UserRole = $us->getUserRole($RegionId);
         $r = new Region($us, $RegionId);
-        $base = new DesInventar\Service\Base($us->q->base);
+        $base = new DesInventar\Services\Base($us->q->base);
         $languageLabels = array_map(function ($language) {
             return $language['local'] . '/' . $language['iso'];
         }, $base->getLanguagesList());
