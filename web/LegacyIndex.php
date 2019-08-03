@@ -19,7 +19,7 @@ use DesInventar\Common\Version;
 use DesInventar\Common\Util;
 use DesInventar\Common\QueryOperations;
 
-use DesInventar\Database\Role;
+use DesInventar\Models\Role;
 
 use \qqFileUploader;
 use \ZipArchive;

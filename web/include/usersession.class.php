@@ -2,8 +2,8 @@
 namespace DesInventar\Legacy;
 
 use DesInventar\Legacy\Query;
-use DesInventar\Database\Session;
-use DesInventar\Database\Role;
+use DesInventar\Models\Session;
+use DesInventar\Models\Role;
 use DesInventar\Helpers\Session as AuraSession;
 use DesInventar\Legacy\Model\Region;
 use \PDO;

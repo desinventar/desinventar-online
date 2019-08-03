@@ -1,6 +1,6 @@
 <?php
 
-namespace DesInventar\Database;
+namespace DesInventar\Models;
 
 class Role extends Record
 {

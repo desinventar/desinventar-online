@@ -9,7 +9,7 @@ use DesInventar\Common\Language;
 use DesInventar\Common\Util;
 use DesInventar\Common\DatabaseConnection;
 
-use DesInventar\Database\Role;
+use DesInventar\Models\Role;
 use DesInventar\Helpers\LoggerHelper;
 
 use Api\Helpers\JsonApiResponse;

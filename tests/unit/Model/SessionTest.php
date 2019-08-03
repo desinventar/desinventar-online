@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 use Test\Helpers\Database;
 
-use DesInventar\Database\Session;
+use DesInventar\Models\Session;
 
 final class SessionTest extends TestCase
 {

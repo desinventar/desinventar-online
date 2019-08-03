@@ -2,7 +2,7 @@
 
 namespace  DesInventar\Actions;
 
-use DesInventar\Database\Session;
+use DesInventar\Models\Session;
 use Aura\Session\Segment;
 
 class UserLoginAction

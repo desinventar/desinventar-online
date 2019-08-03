@@ -4,7 +4,7 @@ namespace Api\Middleware;
 
 use Exception;
 use Aura\Session\Segment;
-use DesInventar\Database\Role;
+use DesInventar\Models\Role;
 
 class AuthMiddleware
 {

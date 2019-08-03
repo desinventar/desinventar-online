@@ -1,6 +1,6 @@
 <?php
 
-namespace DesInventar\Database;
+namespace DesInventar\Models;
 
 use Aura\Sql\ExtendedPdo;
 use Aura\SqlQuery\QueryFactory;
