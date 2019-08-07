@@ -129,34 +129,10 @@ $app->group('/maps', function () use ($app) {
 });
 
 $app->group('/session', function () use ($app) {
-    $app->get('/info', SessionController::class . ':getSessionInfo');
-
-    $app->post('/change-language', SessionController::class . ':changeLanguage');
-
-    $app->post('/login', function (Request $request) use ($app) {
-        $body = $request->getParsedBody();
-        $container = $app->getContainer();
-        return $app->getContainer()->get('jsonapi')->data(
-            (new DesInventar\Actions\UserLoginAction(
-                $container->get('db')->getCoreConnection(),
-                $container->get('session')->getSegment(''),
-                $container->get('logger')
-            ))->execute(
-                $body['username'],
-                $body['password']
-            )
-        );
-    });
-
-    $app->post('/logout', function (Request $request) use ($app) {
-        $container = $app->getContainer();
-        return $app->getContainer()->get('jsonapi')->data(
-            (new DesInventar\Actions\UserLogoutAction(
-                $container->get('db')->getCoreConnection(),
-                $container->get('session')
-            ))->execute()
-        );
-    });
+    $app->get('/info', (new Api\Routes\Session($app))->getSessionInfo());
+    $app->post('/change-language', (new Api\Routes\Session($app))->changeLanguage());
+    $app->post('/login', (new Api\Routes\Session($app))->login($request));
+    $app->post('/logout', (new Api\Routes\Session($app))->logout());
 });
 
 $app->run();
