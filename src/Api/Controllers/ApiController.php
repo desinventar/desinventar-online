@@ -2,15 +2,23 @@
 
 namespace Api\Controllers;
 
+use Slim\Http\Request;
+
 class ApiController
 {
     protected $container;
     protected $logger;
 
-    public function __construct($container)
+    public function __construct($container, $logger)
     {
         $this->container = $container;
-        $this->logger = $container['logger'];
+        $this->logger = $logger;
+    }
+
+    public function parseBody(Request $request)
+    {
+        $json = json_encode($request->getParsedBody());
+        return json_decode($json ? $json : '', true);
     }
 
     protected function logAll($request, $response, $args)

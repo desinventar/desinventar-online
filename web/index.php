@@ -94,6 +94,18 @@ $container['errorHandler'] = function ($container) {
     };
 };
 
+$container['CommonController'] = function ($c) {
+    return new CommonController($c, $c->get('logger'));
+};
+
+$container['MapsController'] = function ($c) {
+    return new MapsController($c, $c->get('logger'));
+};
+
+$container['SessionController'] = function ($c) {
+    return new SessionController($c, $c->get('logger'));
+};
+
 $app->add(new SessionMiddleware($container));
 if ($config->debug['request']) {
     $app->add(new LoggerMiddleware($container));
@@ -121,18 +133,18 @@ $app->group('/admin/{regionId}', function () use ($app) {
 );
 
 $app->group('/common', function () use ($app) {
-    $app->get('/version', CommonController::class . ':version');
+    $app->get('/version', 'CommonController:version');
 });
 
 $app->group('/maps', function () use ($app) {
-    $app->get('/kml/{mapId}/', MapsController::class . ':getKml');
+    $app->get('/kml/{mapId}/', 'MapsController:getKml');
 });
 
 $app->group('/session', function () use ($app) {
-    $app->get('/info', (new Api\Routes\Session($app))->getSessionInfo());
-    $app->post('/change-language', (new Api\Routes\Session($app))->changeLanguage());
-    $app->post('/login', (new Api\Routes\Session($app))->login($request));
-    $app->post('/logout', (new Api\Routes\Session($app))->logout());
+    $app->get('/info', 'SessionController:getSessionInfo');
+    $app->post('/change-language', 'SessionController:changeLanguage');
+    $app->post('/login', 'SessionController:login');
+    $app->post('/logout', 'SessionController:logout');
 });
 
 $app->run();

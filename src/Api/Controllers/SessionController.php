@@ -1,20 +1,23 @@
 <?php
 
-namespace Api\Routes;
+namespace Api\Controllers;
 
 use Exception;
 
-use Slim\Http\Request as Request;
+use Slim\Http\Request;
+use Slim\Http\Response;
 
-use Api\Routes\Base;
+use Api\Controllers\ApiController;
 use DesInventar\Actions\UserLoginAction;
 use DesInventar\Actions\UserLogoutAction;
 use DesInventar\Common\Language;
 
-class Session extends Base
+class SessionController extends ApiController
 {
-    public function getSessionInfo()
+    public function getSessionInfo(Request $request, Response $response, $args)
     {
+        $this->logAll($request, $response, $args);
+
         $session = $this->container->get('session')->getSegment('');
         $info = [
             'language' => $session->get('language'),
@@ -23,8 +26,10 @@ class Session extends Base
         return $this->container->get('jsonapi')->data($info);
     }
 
-    public function changeLanguage($request)
+    public function changeLanguage(Request $request, Response $response, $args)
     {
+        $this->logAll($request, $response, $args);
+
         $body = $this->parseBody($request);
         $language = $body['language'];
         if (! (new Language())->isValidLanguage($language)) {
@@ -35,8 +40,11 @@ class Session extends Base
         return $this->container->get('jsonapi')->data(['language' => $language]);
     }
 
-    public function login(Request $request)
+    public function login(Request $request, Response $response, $args)
     {
+        $this->logAll($request, $response, $args);
+
+        $request = $this->container->get('request');
         $body = $this->parseBody($request);
         return $this->container->get('jsonapi')->data(
             (new UserLoginAction(
@@ -50,8 +58,9 @@ class Session extends Base
         );
     }
 
-    public function logout()
+    public function logout(Request $request, Response $response, $args)
     {
+        $this->logAll($request, $response, $args);
         return $this->container->get('jsonapi')->data(
             (new UserLogoutAction(
                 $this->container->get('db')->getCoreConnection(),
