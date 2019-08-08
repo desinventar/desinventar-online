@@ -1,5 +1,6 @@
 const md5 = require('md5')
 const request = require('./helpers/httpClient').requestWithCookies
+const config = require('./helpers/config')
 
 describe('Admin API Tests', () => {
   test('attempt user login with wrong credentials', async () => {
@@ -24,9 +25,10 @@ describe('Admin API Tests', () => {
     res = await request.get('/session/info')
     expect(res.body.data.isUserLoggedIn).toEqual(false)
 
-    res = await request
-      .post('/session/login')
-      .send({ username: 'root', password: md5('desinventar') })
+    res = await request.post('/session/login').send({
+      username: config.ADMIN_USERNAME,
+      password: md5(config.ADMIN_PASSWORD)
+    })
     expect(res.status).toEqual(200)
     expect(res.body.data).toEqual(true)
 

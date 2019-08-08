@@ -21,6 +21,7 @@ use Api\Middleware\AuthMiddleware;
 use Api\Controllers\CommonController;
 use Api\Controllers\MapsController;
 use Api\Controllers\SessionController;
+use Api\Controllers\AdminGeographyController;
 
 require_once('include/loader.php');
 require_once('include/geography_operations.php');
@@ -106,6 +107,10 @@ $container['SessionController'] = function ($c) {
     return new SessionController($c, $c->get('logger'));
 };
 
+$container['AdminGeographyController'] = function ($c) {
+    return new AdminGeographyController($c, $c->get('logger'));
+};
+
 $app->add(new SessionMiddleware($container));
 if ($config->debug['request']) {
     $app->add(new LoggerMiddleware($container));
@@ -116,14 +121,7 @@ $app->map(['GET', 'POST'], '/', function (Request $request, Response $response, 
 });
 
 $app->group('/admin/{regionId}', function () use ($app) {
-    $app->get('/', function (Request $request, Response $response, $args) use ($app) {
-        $container = $app->getContainer();
-        return $container->get('jsonapi')->data([
-            'args' => $args,
-            'userId' => $container->get('session')->getSegment('')->get('userId'),
-            'attr' => $request->getAttributes()
-        ]);
-    });
+    $app->get('/', 'AdminGeographyController:info');
 })->add(
     new AuthMiddleware(
         $container->get('session')->getSegment(''),
