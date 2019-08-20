@@ -18,10 +18,10 @@ use Api\Helpers\LoggerMiddleware;
 
 use Api\Middleware\AuthMiddleware;
 
+use Api\Controllers\AdminController;
 use Api\Controllers\CommonController;
 use Api\Controllers\MapsController;
 use Api\Controllers\SessionController;
-use Api\Controllers\AdminGeographyController;
 
 require_once('include/loader.php');
 require_once('include/geography_operations.php');
@@ -95,22 +95,6 @@ $container['errorHandler'] = function ($container) {
     };
 };
 
-$container['CommonController'] = function ($c) {
-    return new CommonController($c, $c->get('logger'));
-};
-
-$container['MapsController'] = function ($c) {
-    return new MapsController($c, $c->get('logger'));
-};
-
-$container['SessionController'] = function ($c) {
-    return new SessionController($c, $c->get('logger'));
-};
-
-$container['AdminGeographyController'] = function ($c) {
-    return new AdminGeographyController($c, $c->get('logger'));
-};
-
 $app->add(new SessionMiddleware($container));
 if ($config->debug['request']) {
     $app->add(new LoggerMiddleware($container));
@@ -121,7 +105,8 @@ $app->map(['GET', 'POST'], '/', function (Request $request, Response $response, 
 });
 
 $app->group('/admin/{regionId}', function () use ($app) {
-    $app->get('/', 'AdminGeographyController:info');
+    $container = $app->getContainer();
+    return (new AdminController($container, $container->get('logger')))->routes($app);
 })->add(
     new AuthMiddleware(
         $container->get('session')->getSegment(''),
@@ -131,18 +116,18 @@ $app->group('/admin/{regionId}', function () use ($app) {
 );
 
 $app->group('/common', function () use ($app) {
-    $app->get('/version', 'CommonController:version');
+    $container = $app->getContainer();
+    return (new CommonController($container, $container->get('logger')))->routes($app);
 });
 
 $app->group('/maps', function () use ($app) {
-    $app->get('/kml/{mapId}/', 'MapsController:getKml');
+    $container = $app->getContainer();
+    return (new MapsController($container, $container->get('logger')))->routes($app);
 });
 
 $app->group('/session', function () use ($app) {
-    $app->get('/info', 'SessionController:getSessionInfo');
-    $app->post('/change-language', 'SessionController:changeLanguage');
-    $app->post('/login', 'SessionController:login');
-    $app->post('/logout', 'SessionController:logout');
+    $container = $app->getContainer();
+    return (new SessionController($container, $container->get('logger')))->routes($app);
 });
 
 $app->run();

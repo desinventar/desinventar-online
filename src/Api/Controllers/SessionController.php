@@ -8,64 +8,59 @@ use Slim\Http\Request;
 use Slim\Http\Response;
 
 use Api\Controllers\ApiController;
+use Api\Helpers\JsonApiResponse;
+
 use DesInventar\Actions\UserLoginAction;
 use DesInventar\Actions\UserLogoutAction;
 use DesInventar\Common\Language;
 
 class SessionController extends ApiController
 {
-    public function getSessionInfo(Request $request, Response $response, $args)
+    public function routes($app)
     {
-        $this->logAll($request, $response, $args);
+        $container = $this->container;
+        $self = $this;
+        $app->get('/info', function (Request $request, Response $response, $args) use ($container) {
+            $session = $container->get('session')->getSegment('');
+            $info = [
+                'language' => $session->get('language'),
+                'isUserLoggedIn' => $session->get('isUserLoggedIn') ? true : false
+            ];
+            return (new JsonApiResponse($response))->data($info);
+        });
 
-        $session = $this->container->get('session')->getSegment('');
-        $info = [
-            'language' => $session->get('language'),
-            'isUserLoggedIn' => $session->get('isUserLoggedIn') ? true : false
-        ];
-        return $this->container->get('jsonapi')->data($info);
-    }
+        $app->post('/change-language', function (Request $request, Response $response, $args) use ($container, $self) {
+            $body = $self->parseBody($request);
+            $language = $body['language'];
+            if (! (new Language())->isValidLanguage($language)) {
+                return (new JsonApiResponse($response))->error(['message' => 'Invalid Language Code']);
+            }
+            $session = $container->get('session')->getSegment('');
+            $session->set('language', $language);
+            return (new JsonApiResponse($response))->data(['language' => $language]);
+        });
 
-    public function changeLanguage(Request $request, Response $response, $args)
-    {
-        $this->logAll($request, $response, $args);
+        $app->post('/login', function (Request $request, Response $response, $args) use ($container, $self) {
+            $body = $self->parseBody($request);
+            return (new JsonApiResponse($response))->data(
+                (new UserLoginAction(
+                    $container->get('db')->getCoreConnection(),
+                    $container->get('session')->getSegment(''),
+                    $container->get('logger')
+                ))->execute(
+                    $body['username'],
+                    $body['password']
+                )
+            );
+        });
 
-        $body = $this->parseBody($request);
-        $language = $body['language'];
-        if (! (new Language())->isValidLanguage($language)) {
-            return $this->container->get('jsonapi')->error(['message' => 'Invalid Language Code']);
-        }
-        $session = $this->container->get('session')->getSegment('');
-        $session->set('language', $language);
-        return $this->container->get('jsonapi')->data(['language' => $language]);
-    }
-
-    public function login(Request $request, Response $response, $args)
-    {
-        $this->logAll($request, $response, $args);
-
-        $request = $this->container->get('request');
-        $body = $this->parseBody($request);
-        return $this->container->get('jsonapi')->data(
-            (new UserLoginAction(
-                $this->container->get('db')->getCoreConnection(),
-                $this->container->get('session')->getSegment(''),
-                $this->container->get('logger')
-            ))->execute(
-                $body['username'],
-                $body['password']
-            )
-        );
-    }
-
-    public function logout(Request $request, Response $response, $args)
-    {
-        $this->logAll($request, $response, $args);
-        return $this->container->get('jsonapi')->data(
-            (new UserLogoutAction(
-                $this->container->get('db')->getCoreConnection(),
-                $this->container->get('session')
-            ))->execute()
-        );
+        $app->post('/logout', function (Request $request, Response $response, $args) use ($container) {
+            return (new JsonApiResponse($response))->data(
+                (new UserLogoutAction(
+                    $container->get('db')->getCoreConnection(),
+                    $container->get('session')
+                ))->execute()
+            );
+        });
     }
 }
