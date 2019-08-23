@@ -105,8 +105,6 @@ function setExtraEff(id, label, def, type, size, active, isPublic) {
   $('EEFieldDesc').value = def
   $('EEFieldType').value = type
   $('EEFieldSize').value = size
-  if (parseInt(active) > 0) $('EEFieldActive').checked = true
-  else $('EEFieldActive').checked = false
-  if (parseInt(isPublic) > 0) $('EEFieldPublic').checked = true
-  else $('EEFieldPublic').checked = false
+  $('EEFieldActive').checked = parseInt(active, 10) > 0
+  $('EEFieldPublic').checked = parseInt(isPublic, 10) > 0
 }
