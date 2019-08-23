@@ -17,12 +17,17 @@
 {-/if-}
 {-if $ctl_eeflist-}
  {-foreach name=eef key=key item=item from=$eef-}
-                <tr class="{-if ($smarty.foreach.eef.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}"
-                        onMouseOver="Element.addClassName(this, 'highlight');" onMouseOut="Element.removeClassName(this, 'highlight');"
-                        onClick="setExtraEff('{-$key-}','{-$item[0]-}', '{-$item[1]-}', '{-$item[2]-}', '{-$item[3]-}',
-                                               '{-$item[4]-}', '{-$item[5]-}'); $('EEFieldCmd').value='cmdEEFieldUpdate';">
-                    <td>{-$item[0]-}</td>
-                    <td>{-$item[1]-}</td>
+                <tr class="extra-effect {-if ($smarty.foreach.eef.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}"
+                  data-id="{-$key-}"
+                  data-name="{-$item[0]-}"
+                  data-description="{-$item[1]-}"
+                  data-type="{-$item[3]-}"
+                  data-size="{-$item[4]-}"
+                  data-active="{-$item[5]-}"
+                  data-public="{-$item[6]-}"
+                >
+                  <td>{-$item[0]-}</td>
+                  <td>{-$item[1]-}</td>
                 </tr>
  {-/foreach-}
 {-/if-}
