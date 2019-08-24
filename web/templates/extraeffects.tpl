@@ -18,16 +18,16 @@
 {-if $ctl_eeflist-}
  {-foreach name=eef key=key item=item from=$eef-}
                 <tr class="extra-effect {-if ($smarty.foreach.eef.iteration - 1) % 2 == 0-}normal{-else-}under{-/if-}"
-                  data-id="{-$key-}"
-                  data-name="{-$item[0]-}"
-                  data-description="{-$item[1]-}"
-                  data-type="{-$item[3]-}"
-                  data-size="{-$item[4]-}"
-                  data-active="{-$item[5]-}"
-                  data-public="{-$item[6]-}"
+                  data-id="{-$item['id']-}"
+                  data-name="{-$item['name']-}"
+                  data-description="{-$item['description']-}"
+                  data-type="{-$item['type']-}"
+                  data-size="{-$item['size']-}"
+                  data-active="{-$item['isActive']-}"
+                  data-public="{-$item['isPublic']-}"
                 >
-                  <td>{-$item[0]-}</td>
-                  <td>{-$item[1]-}</td>
+                  <td>{-$item['name']-}</td>
+                  <td>{-$item['description']-}</td>
                 </tr>
  {-/foreach-}
 {-/if-}
@@ -77,8 +77,8 @@
                 <input id="EEFieldSize" name="EEField[EEFieldSize]" value="100" type="hidden" />
                 <input id="EEFieldId" name="EEField[EEFieldId]" type="hidden" />
                 <input id="EEFieldCmd" name="cmd" type="hidden" />
-                <input type="submit" value="{-#bsave#-}"   class="line" tabindex="6" />
-                <input type="reset"  value="{-#bcancel#-}" class="line" tabindex="7" id="btnEEFieldReset" />
+                <input type="submit" value="{-#bsave#-}"   class="line" id="btnSave" tabindex="6" />
+                <input type="reset"  value="{-#bcancel#-}" class="line" id="btnCancel" tabindex="7" id="btnEEFieldReset" />
             </p>
         </form>
     </div>

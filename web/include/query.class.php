@@ -1,6 +1,7 @@
 <?php
 namespace DesInventar\Legacy;
 
+use Aura\SqlQuery\QueryFactory;
 use Aura\Sql\ExtendedPdo;
 use \Pdo;
 use \Exception;
@@ -12,6 +13,7 @@ class Query
     public $core = null;
     public $DBFile = '';
     public $config = null;
+    protected $queryFactory = null;
 
     public function __construct($region_id, $config)
     {
@@ -21,6 +23,7 @@ class Query
         // Open base.db - DI's Basic database
         $this->base = $this->openSqliteDatabase($this->config['db_dir'] . '/main/base.db');
 
+        $this->queryFactory = new QueryFactory($config['driver']);
         switch ($this->config['driver']) {
             case 'sqlite':
                 $this->initSqliteDatabaseConnections($region_id);
@@ -710,36 +713,31 @@ class Query
         return $data;
     }
 
-    public function getEEFieldList($act)
+    public function getEEFieldList($activeOnly)
     {
-        $sql = "SELECT * FROM EEField";
-        if ($act != "") {
-            $sql .= " WHERE EEFieldStatus=1 OR EEFieldStatus=3";
+        $query = $this->queryFactory->newSelect();
+        $query->from('EEField')->cols([
+            'EEFieldId AS id',
+            'EEFieldLabel as name',
+            'EEFieldDesc as description',
+            'EEFieldType as type',
+            'EEFieldSize as size',
+            'EEFieldStatus as status'
+        ]);
+        if ($activeOnly !== '') {
+            $query->where('EEFieldStatus=1 OR EEFieldStatus=3');
         }
-        $data = array();
+        $data = [];
         try {
-            $res = $this->dreg->query($sql);
+            $res = $this->dreg->query($query->getStatement(), PDO::FETCH_ASSOC);
         } catch (Exception $e) {
             showErrorMsg(debug_backtrace(), $e, '');
         }
         foreach ($res as $row) {
             // Split EEFieldStatus in Fields Active/Public ?
-            $row['EEFieldActive'] = 0;
-            if ($row['EEFieldStatus'] & CONST_REGIONACTIVE) {
-                $row['EEFieldActive'] = 1;
-            }
-            $row['EEFieldPublic'] = 0;
-            if ($row['EEFieldStatus'] & CONST_REGIONPUBLIC) {
-                $row['EEFieldPublic'] = 1;
-            }
-            $data[$row['EEFieldId']] = array(
-                $row['EEFieldLabel'],
-                str2js($row['EEFieldDesc']),
-                $row['EEFieldType'],
-                $row['EEFieldSize'],
-                $row['EEFieldActive'],
-                $row['EEFieldPublic']
-            );
+            $row['isActive'] = $row['status'] & CONST_REGIONACTIVE ? 1 : 0;
+            $row['isPublic'] = $row['status'] & CONST_REGIONPUBLIC ? 1 : 0;
+            $data[] = $row;
         }
         return $data;
     }

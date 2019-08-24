@@ -21,4 +21,35 @@ test('Edit Database Additional Fields', async t => {
         .visible
     )
     .ok()
+
+  // Add a new additional effect record
+  const name = `Test-${Date.now()}`
+  const description = `Description for ${name}`
+  const typeSelect = Selector('#EEFieldType')
+  const typeOption = typeSelect.find('option')
+  await t
+    .click('#btnEEFieldAdd')
+    .expect(Selector('#extraeffaddsect', { visibilityCheck: true }).visible)
+    .ok()
+    .typeText('#EEFieldLabel', name, { replace: true })
+    .typeText('#EEFieldDesc', description, { replace: true })
+    .click(typeSelect)
+    .click(typeOption.filter('[value="INTEGER"]'))
+    .click('#EEFieldActive')
+    .click('#btnSave')
+    .expect(Selector('#msgEEFieldStatusOk', { visibilityCheck: true }).visible)
+    .ok()
+
+  // Load the new record from the list
+  await t
+    .click(Selector('tr').filter(`[data-name="${name}"]`))
+    .expect(Selector('#extraeffaddsect', { visibilityCheck: true }).visible)
+    .ok()
+    .expect(Selector('#EEFieldLabel').value)
+    .eql(name)
+    .expect(Selector('#EEFieldActive').checked)
+    .eql(true)
+    .expect(Selector('#EEFieldPublic').checked)
+    .eql(false)
+  // Update the newly added record
 })
