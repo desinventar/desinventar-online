@@ -63,6 +63,10 @@ function onReadyExtraEffects() {
       )
       return false
     })
+    .on('click', '#btnCancel', function(event) {
+      jQuery('#extraeffaddsect').hide()
+      event.preventDefault()
+    })
 
   jQuery('table.database-admin-eefield-list')
     .on('mouseover', 'tr.extra-effect', function() {
@@ -72,7 +76,7 @@ function onReadyExtraEffects() {
       jQuery(this).removeClass('highlight')
     })
     .on('click', 'tr.extra-effect', function(e) {
-      $('EEFieldCmd').value = 'cmdEEFieldUpdate'
+      jQuery('#EEFieldCmd').val('cmdEEFieldUpdate')
       setExtraEff(
         jQuery(this).data('id'),
         jQuery(this).data('name'),
@@ -86,7 +90,7 @@ function onReadyExtraEffects() {
     })
 }
 
-function setExtraEff(id, label, def, type, size, active, isPublic) {
+function setExtraEff(id, name, description, type, size, isActive, isPublic) {
   // clear highlighted fields...
   jQuery.each(jQuery('.clsValidateField'), function() {
     jQuery(this).unhighlight()
@@ -96,15 +100,16 @@ function setExtraEff(id, label, def, type, size, active, isPublic) {
   jQuery('.msgEEFieldStatus').hide()
 
   // Show form
-  jQuery('#extraeffaddsect').hide()
+  jQuery('#extraeffaddsect').show()
 
-  var mod = 'extraeff'
-  $(mod + 'addsect').style.display = 'block'
-  $('EEFieldId').value = id
-  $('EEFieldLabel').value = label
-  $('EEFieldDesc').value = def
-  $('EEFieldType').value = type
-  $('EEFieldSize').value = size
-  $('EEFieldActive').checked = parseInt(active, 10) > 0
-  $('EEFieldPublic').checked = parseInt(isPublic, 10) > 0
+  jQuery('#EEFieldId').val(id)
+  jQuery('#EEFieldLabel').val(name)
+  jQuery('#EEFieldDesc').val(description)
+  jQuery('#EEFieldType')
+    .val(type)
+    .prop('disabled', type && type !== '')
+    .toggleClass('disabled', type && type !== '')
+  jQuery('#EEFieldSize').val(size)
+  jQuery('#EEFieldActive').prop('checked', parseInt(isActive, 10) > 0)
+  jQuery('#EEFieldPublic').prop('checked', parseInt(isPublic, 10) > 0)
 }

@@ -256,6 +256,9 @@ select.small  {
   font-family:arial,tahoma,helvetica,cursive; font-size:10px;
   color:#000000; background-color:#ffffff; border-style:solid;
   border-width:1px; }
+select.disabled {
+  background-color: #bbbbbb;
+}
 span.select2-dropdown {
   z-index: 15000;
 }
