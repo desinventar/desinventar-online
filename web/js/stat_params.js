@@ -101,9 +101,9 @@ function doViewStatParamsInitialize() {
   )
   // EEFieldList
   jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
-    var field = key
-    var label = value[0]
-    var type = value[2]
+    var field = value['id']
+    var label = value['name']
+    var type = value['type']
     if (type == 'INTEGER' || type == 'DOUBLE' || type === 'CURRENCY') {
       field_list.append(
         jQuery('<option>', { value: 'E.' + field + '|>|-1' }).text(label)
