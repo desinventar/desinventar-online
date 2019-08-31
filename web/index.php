@@ -17,9 +17,11 @@ use Api\Helpers\SessionMiddleware;
 use Api\Helpers\LoggerMiddleware;
 
 use Api\Middleware\AuthMiddleware;
+use Api\Middleware\DevelMiddleware;
 
 use Api\Controllers\AdminController;
 use Api\Controllers\CommonController;
+use Api\Controllers\DevelController;
 use Api\Controllers\MapsController;
 use Api\Controllers\SessionController;
 
@@ -113,6 +115,13 @@ $app->group('/admin/{regionId}', function () use ($app) {
         $container->get('db')->getCoreConnection(),
         Role::ROLE_ADMINREGION
     )
+);
+
+$app->group('/devel', function () use ($app) {
+    $container = $app->getContainer();
+    (new DevelController($container, $container->get('logger')))->routes($app);
+})->add(
+    new DevelMiddleware($container->get('logger'))
 );
 
 $app->group('/common', function () use ($app) {
