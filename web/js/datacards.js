@@ -431,10 +431,11 @@ function doDatacardInitialize() {
   var fieldCount = 0
   var max_column = 3
   jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
-    var field = key
-    var label = value[0]
-    var tooltip = value[1]
-    var type = value[2]
+    console.log(`key: ${key} value: ${JSON.stringify(value)}`)
+    var field = value['id']
+    var label = value['name']
+    var tooltip = value['description']
+    var type = value['type']
 
     var clone = jQuery('div.EffectAdditional:last', effect_list)
       .clone()

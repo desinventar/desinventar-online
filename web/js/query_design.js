@@ -361,8 +361,8 @@ function onReadyQueryDesign() {
     var effectAdditionalList = jQuery('div.QueryDesign table.EffectAdditionalList')
     effectAdditionalList.find('tr:gt(0)').remove()
     jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
-      var field = key
-      var type = value[2]
+      var field = value['id']
+      var type = value['type']
       var clone = jQuery('tr:first', effectAdditionalList)
         .clone()
         .show()
@@ -400,7 +400,7 @@ function onReadyQueryDesign() {
         'EEFieldQuery[' + field + '][Type]'
       )
       jQuery('input.type', clone).attr('value', type)
-      jQuery('span.label', clone).text(value[0])
+      jQuery('span.label', clone).text(value['name'])
       jQuery('div.EffectAdditional', clone).data('field', field)
       effectAdditionalList.append(clone)
     })
@@ -464,13 +464,13 @@ function onReadyQueryDesign() {
       }
     )
     jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
-      var field = key
+      var field = value['id']
       var clone = jQuery('div:last', field_list)
         .clone()
         .show()
       jQuery(clone).data('field', field)
       jQuery(clone).data('type', 'text')
-      jQuery('input', clone).attr('value', value[0])
+      jQuery('input', clone).attr('value', value['name'])
       field_list.append(clone)
     })
     jQuery('body').trigger('cmdMainQueryUpdate')

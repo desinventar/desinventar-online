@@ -67,7 +67,7 @@ function doDataInitialize() {
     )
   })
   jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
-    field_list.append(jQuery('<option>', { value: 'E.' + key }).text(value[0]))
+    field_list.append(jQuery('<option>', { value: 'E.' + key }).text(value['name']))
   })
 
   var selectFieldShow = jQuery('div.ViewDataParams select.FieldsShow')

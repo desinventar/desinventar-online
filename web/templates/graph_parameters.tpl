@@ -37,9 +37,9 @@
             <option value="D.{-$k-}|=|-1">{-#tauxaffect#-} {-$i[0]-}</option>
           {-/foreach-}
             <option disabled>___</option>
-          {-foreach name=eef key=k item=i from=$EEFieldList-}
-            {-if $i[2] == "INTEGER" || $i[2] == "DOUBLE"-}
-            <option value="E.{-$k-}|>|-1">{-$i[0]-}</option>
+          {-foreach name=eef item=i from=$EEFieldList-}
+            {-if $i['type'] == "INTEGER" || $i['type'] == "DOUBLE"-}
+            <option value="E.{-$i['id']-}|>|-1">{-$i['name']-}</option>
             {-/if-}
           {-/foreach-}
           </select>
@@ -114,8 +114,8 @@
               {-/foreach-}
               <option disabled>___</option>
               {-foreach name=eef key=k item=i from=$EEFieldList-}
-                {-if $i[2] == "INTEGER" || $i[2] == "DOUBLE"-}
-                  <option value="E.{-$k-}|>|-1">{-$i[0]-}</option>
+                {-if $i['type'] == "INTEGER" || $i['type'] == "DOUBLE"-}
+                  <option value="E.{-$i['id']-}|>|-1">{-$i['name']-}</option>
                 {-/if-}
               {-/foreach-}
             </select>

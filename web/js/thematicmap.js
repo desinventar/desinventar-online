@@ -87,8 +87,8 @@ function doViewMapParamsInitialize() {
   )
   // EEFieldList
   jQuery.each(jQuery('body').data('EEFieldList'), function(key, value) {
-    var field = key
-    var label = value[0]
+    var field = value['id']
+    var label = value['name']
     field_list.append(
       jQuery('<option>', { value: 'E.' + field + '|>|-1' }).text(label)
     )
