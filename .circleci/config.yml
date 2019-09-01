@@ -1,4 +1,6 @@
-version: 2
+version: 2.1
+orbs:
+  zulip: ponylang/zulip@1.0.2
 jobs:
   build:
     machine:
@@ -41,3 +43,8 @@ jobs:
             docker-compose -f docker-compose-production.yml exec test sh -c 'TEST_WEB_URL=http://web:80 ./node_modules/.bin/testcafe firefox:headless tests/e2e'
       - store_test_results:
           path: /tmp/test-results
+      - zulip/status:
+          webhook: https://${DESINVENTAR_ZULIP_HOST}.zulipchat.com/api/v1/messages
+          user: ${DESINVENTAR_ZULIP_USERNAME}:${DESINVENTAR_ZULIP_API_KEY}
+          stream: ${DESINVENTAR_ZULIP_STREAM}
+          topic: "CircleCI Activity - ${CIRCLE_BRANCH}"
